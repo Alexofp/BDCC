@@ -37,7 +37,7 @@ _global_script_classes=[ {
 "base": "Sprite",
 "class": "GameRoom",
 "language": "GDScript",
-"path": "res://Game/World/Room.gd"
+"path": "res://Game/World/GameRoom.gd"
 }, {
 "base": "Control",
 "class": "GameUI",

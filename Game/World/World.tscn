@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://Game/World/Room.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Game/World/GameRoom.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Game/World/World.gd" type="Script" id=2]
 [ext_resource path="res://Game/World/TestFloor.tscn" type="PackedScene" id=3]
 

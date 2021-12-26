@@ -1,4 +1,4 @@
-extends "res://Game/World/Room.gd"
+extends "res://Game/World/GameRoom.gd"
 
 signal onEnter(room)
 signal onReact(room, key)
