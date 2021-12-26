@@ -1,9 +1,6 @@
 extends SceneBase
 
-func _scene(_args):
-	travelMenu([])
-	
-func travelMenu(_args):
+func _run():
 	var roomID = GM.pc.location
 	var _roomInfo = GM.world.getRoomByID(roomID)
 	
@@ -36,31 +33,28 @@ func travelMenu(_args):
 	
 	_roomInfo._onEnter()
 
-func gonorth(_args):
-	GM.pc.setLocation(GM.world.applyDirectionID(GM.pc.location, GameWorld.Direction.NORTH))
-	travelMenu([])
+func _react(_action: String, _args):
+	print(_action)
 	
-func gowest(_args):
-	GM.pc.setLocation(GM.world.applyDirectionID(GM.pc.location, GameWorld.Direction.WEST))
-	travelMenu([])
+	# RoomAction support
+	if(_action == "actionCallback"):
+		var scenetorun = _args[0]
+		runScene(scenetorun)
+		
+	# Scripted Room support
+	if(_action == "roomCallback"):
+		var roomid = _args[0]
+		var keyid = _args[1]
+		var _room = GM.world.getRoomByID(roomid)
+		return _room._onButton(keyid)
 	
-func gosouth(_args):
-	GM.pc.setLocation(GM.world.applyDirectionID(GM.pc.location, GameWorld.Direction.SOUTH))
-	travelMenu([])
-	
-func goeast(_args):
-	GM.pc.setLocation(GM.world.applyDirectionID(GM.pc.location, GameWorld.Direction.EAST))
-	travelMenu([])
+	if(_action == "gonorth"):
+		GM.pc.setLocation(GM.world.applyDirectionID(GM.pc.location, GameWorld.Direction.NORTH))
+	if(_action == "gowest"):
+		GM.pc.setLocation(GM.world.applyDirectionID(GM.pc.location, GameWorld.Direction.WEST))
+	if(_action == "gosouth"):
+		GM.pc.setLocation(GM.world.applyDirectionID(GM.pc.location, GameWorld.Direction.SOUTH))
+	if(_action == "goeast"):
+		GM.pc.setLocation(GM.world.applyDirectionID(GM.pc.location, GameWorld.Direction.EAST))
 
-func roomCallback(_args):
-	var roomid = _args[0]
-	var keyid = _args[1]
-	var _room = GM.world.getRoomByID(roomid)
-	_room._onButton(keyid)
 
-func actionCallback(_args):
-	var scenetorun = _args[0]
-	runScene(scenetorun, "_resume")
-
-func _resume(_args=[]):
-	travelMenu([])

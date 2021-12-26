@@ -9,4 +9,7 @@ func _onEnter():
 	emit_signal("onEnter", self)
 
 func _onButton(key):
+	GM.ui.clearText()
+	GM.ui.clearButtons()
 	emit_signal("onReact", self, key)
+	return true

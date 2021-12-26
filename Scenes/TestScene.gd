@@ -1,67 +1,41 @@
 extends "res://Scenes/SceneBase.gd"
 
-func _scene(_args):
-	say("Hello world!\n")
-	say("nya [b]bold nya[/b], also [i]\"MEOW\"[/i]")
-	addButton("meow meow", "1", "option1")
-	addButton("mew!", "2", "option2")
-	addDisabledButton("bark", "no awo")
+func _run():
+	if(state == ""):
+		say("Hello world!\n")
+		say("nya [b]bold nya[/b], also [i]\"MEOW\"[/i]")
+		addButton("meow meow", "1", "option1")
+		addButton("mew!", "2", "option2")
+		addDisabledButton("bark", "no awo")
+		
+	if(state == "option1"):
+		say("You selected 1")
+		addNextButton("endstuff")
+		
+	if(state == "option2"):
+		say("You selected TWOOO")
+		addNextButton("addscenetest")
+		
+	if(state == "endstuff"):
+		say("Yes this is dog")
+		addNextButton("endthescene")
+		
+	if(state == "meowmeow"):
+		say("WELCOME BACK, WANNA START AGAIN?")
+		addNextButton("endthescene")
+		addButton("sure", "you agree to everything", "_scene")
+
+
+func _react(_action: String, _args):
+	if(_action == "addscenetest"):
+		runScene("TestScene", "meowmeow")
+		return
+	if(_action == "endthescene"):
+		endScene("test arg")
+		return
 	
-#	var ans = yield(wait(), "completed")
-#
-#	if(ans == "1"):
-#		say("You selected 1")
-#		addNextButton()
-#		yield(wait(), "completed")
-#	if(ans == "2"):
-#		say("You selected TWOOO")
-#		addNextButton()
-#		yield(wait(), "completed")
-#
-#	say("Yes this is dog")
-#	addNextButton()
-#	print(yield(wait(), "completed"))
-#
-#	say("fuck")
+	setState(_action)
 
-func option1(_args):
-	say("You selected 1")
-	addNextButton("endstuff")
-	
-func option2(_args):
-	say("You selected TWOOO")
-	addNextButton("addscenetest")
-
-func endstuff(_args):
-	say("Yes this is dog")
-	addNextButton("endthescene")
-	
-func addscenetest(_args):
-	runScene("TestScene", "meowmeow")
-	
-func meowmeow(_args):
-	#print(_args)
-	say("WELCOME BACK, WANNA START AGAIN?")
-	addNextButton("endthescene")
-	addButton("sure", "you agree to everything", "_scene")
-	
-func endthescene(_args):
-	endScene()
-
-
-#func whatever():
-#	say lala
-#   addbutton fuck fuck()
-#   addbutton no no()
-
-#func fuck
-#	runScene('Fuck', 'callback')
-
-#func callback(result: Array):
-#	if(result[0] == 'good'):
-#		say good job
-
-#func no
-#	endScene(['good'])
-
-
+func _react_scene_end(_result):
+	print("I got result: "+str(_result))
+	setState("")

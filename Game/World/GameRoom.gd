@@ -75,28 +75,8 @@ func clearScreen():
 	GM.ui.clearText()
 	GM.ui.clearButtons()
 	
-func runScene(id: String, callback: String = ""):
-	runSceneArgs(id, [], callback)
-
-func runSceneArgs(id: String, args = [], callback: String = ""):
-	var newscene = GM.main.prepareScene(id)
-	if(callback != ""):
-		var _a = newscene.connect("sceneEnded", self, "on_child_scene_ended", [callback]) #, [callback]
-		#newscene.emit_signal("sceneEnded", [])
-		print("yep2")
-		
-	GM.main.runScene(newscene, args)
-	#newscene.run(args)
-
-func runSceneAndResume(id: String, args = []):
-	runSceneArgs(id, args, "resumescene")
-
-func resumescene(_args):
-	GM.main.resume()
-
-func on_child_scene_ended(_result, _callback):#, _callback):
-	if(has_method(_callback)):
-		callv(_callback, [_result])
+func runScene(id: String, args = []):
+	GM.main.runScene(id, args)
 
 func addActions():
 	for action in get_children():

@@ -2,9 +2,11 @@ extends SubGameWorld
 
 func _on_ScriptedRoom_onEnter(room: GameRoom):
 	#room.clearScreen()
+	
 	room.say("Meow")
 	room.addButton("Do mew", "Talk to mew", "wut")
-	#room.runSceneAndResume("TestScene")
+	
+	#room.runScene("TestScene")
 
 
 func _on_ScriptedRoom_onReact(room, key):
@@ -16,6 +18,6 @@ func _on_ScriptedRoom_onReact(room, key):
 	if(key == "wut2"):
 		#GM.pc.breasts.size = BodypartBreasts.BreastsSize.A
 		#GM.pc.updateAppearance()
-		GM.main.resume()
+		GM.main.reRun()
 	if(key == "wut3"):
-		room.runSceneAndResume("TestScene")
+		room.runScene("TestScene")

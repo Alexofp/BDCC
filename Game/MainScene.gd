@@ -6,7 +6,6 @@ extends Node
 # var b = "text"
 #onready var theScene = $SceneBase
 onready var gameUI = $GameUI
-var theScene
 var sceneStack: Array = []
 
 # Called when the node enters the scene tree for the first time.
@@ -27,36 +26,52 @@ func _ready():
 	
 	#theScene.run()
 	
-	runScene(prepareScene("WorldScene"))#"TestScene"))
+	runScene("WorldScene")#"TestScene")) #WorldScene
 
-func prepareScene(id: String):
+func runScene(id, _args = []):
 	var scene = GlobalRegistry.getScene(id)
-	scene.initScene()
 	add_child(scene)
 	sceneStack.append(scene)
+	print("Starting scene "+id)
+	
+	scene.initScene(_args)
+	scene.run()
 	return scene
-
-func runScene(scene, args = []):
-	theScene = scene
-	theScene.run(args)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass
 
-func removeScene(scene):
+func removeScene(scene, args = []):
 	if(sceneStack.has(scene)):
-		sceneStack.erase(scene)
-	if(theScene == scene):
-		if(sceneStack.size() > 0):
-			theScene = sceneStack.back()
+		if(scene == sceneStack.back()):
+			sceneStack.erase(scene)
+			if(sceneStack.size() > 0):
+				sceneStack.back().react_scene_end(args)
+			if(sceneStack.size() > 0):
+				sceneStack.back().run()
 		else:
-			print("Error: no more scenes in the scenestack")
-			theScene = null
+			sceneStack.erase(scene)
+	
+	if(sceneStack.size() == 0):
+		print("Error: no more scenes in the scenestack")
+		gameUI.clearText()
+		gameUI.clearButtons()
+		gameUI.say("Error: no more scenes in the scenestack. Please let the developer know")
+		return
 
 func _on_GameUI_on_option_button(method, args):
-	theScene.react(method, args)
+	if(sceneStack.size() > 0):
+		var scene = sceneStack.back()
+		
+		if(sceneStack.back().react(method, args)):
+			return
+		if(scene.is_queued_for_deletion()):
+			return
 
-func resume():
-	if(theScene):
-		theScene._resume()
+	if(sceneStack.size() > 0):
+		sceneStack.back().run()
+
+func reRun():
+	if(sceneStack.size() > 0):
+		sceneStack.back().run()
