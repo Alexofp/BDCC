@@ -1,0 +1,133 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=4
+
+_global_script_classes=[ {
+"base": "Resource",
+"class": "Bodypart",
+"language": "GDScript",
+"path": "res://Player/Bodyparts/Bodypart.gd"
+}, {
+"base": "Bodypart",
+"class": "BodypartBreasts",
+"language": "GDScript",
+"path": "res://Player/Bodyparts/BodypartBreasts.gd"
+}, {
+"base": "Bodypart",
+"class": "BodypartLeg",
+"language": "GDScript",
+"path": "res://Player/Bodyparts/BodypartLeg.gd"
+}, {
+"base": "Node2D",
+"class": "Doll",
+"language": "GDScript",
+"path": "res://Player/Doll.gd"
+}, {
+"base": "Container",
+"class": "FlexGridContainer",
+"language": "GDScript",
+"path": "res://UI/FlexGridContainer.gd"
+}, {
+"base": "Sprite",
+"class": "GameRoom",
+"language": "GDScript",
+"path": "res://Game/World/Room.gd"
+}, {
+"base": "Control",
+"class": "GameUI",
+"language": "GDScript",
+"path": "res://Game/GameUI.gd"
+}, {
+"base": "Node2D",
+"class": "GameWorld",
+"language": "GDScript",
+"path": "res://Game/World/World.gd"
+}, {
+"base": "Node2D",
+"class": "Limb",
+"language": "GDScript",
+"path": "res://Player/Limbs/Limb.gd"
+}, {
+"base": "Node",
+"class": "Player",
+"language": "GDScript",
+"path": "res://Player/Player.gd"
+}, {
+"base": "Node",
+"class": "RoomAction",
+"language": "GDScript",
+"path": "res://Game/World/RoomAction.gd"
+}, {
+"base": "Node",
+"class": "SceneBase",
+"language": "GDScript",
+"path": "res://Scenes/SceneBase.gd"
+}, {
+"base": "Node2D",
+"class": "SubGameWorld",
+"language": "GDScript",
+"path": "res://Game/World/SubWorld.gd"
+}, {
+"base": "Node",
+"class": "Util",
+"language": "GDScript",
+"path": "res://Game/Util.gd"
+} ]
+_global_script_class_icons={
+"Bodypart": "",
+"BodypartBreasts": "",
+"BodypartLeg": "",
+"Doll": "",
+"FlexGridContainer": "",
+"GameRoom": "",
+"GameUI": "",
+"GameWorld": "",
+"Limb": "",
+"Player": "",
+"RoomAction": "",
+"SceneBase": "",
+"SubGameWorld": "",
+"Util": ""
+}
+
+[application]
+
+config/name="LewdGame"
+run/main_scene="res://Game/MainScene.tscn"
+config/icon="res://icon.png"
+
+[autoload]
+
+GlobalRegistry="*res://GlobalRegistry.gd"
+GM="*res://Game/GM.gd"
+
+[debug]
+
+gdscript/warnings/treat_warnings_as_errors=true
+gdscript/warnings/unsafe_cast=true
+
+[display]
+
+window/size/width=1280
+window/size/height=720
+window/stretch/aspect="expand"
+
+[gui]
+
+timers/tooltip_delay_sec=0.0
+
+[physics]
+
+common/enable_pause_aware_picking=true
+
+[rendering]
+
+quality/driver/fallback_to_gles2=true
+environment/default_clear_color=Color( 0.247059, 0.243137, 0.490196, 1 )
+environment/default_environment="res://default_env.tres"

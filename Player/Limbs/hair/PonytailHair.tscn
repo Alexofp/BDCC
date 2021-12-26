@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Player/Limbs/hair/HairBase.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Player/Limbs/hair/ponytail.png" type="Texture" id=2]
+
+[node name="PonytailHair" instance=ExtResource( 1 )]
+addOutline = false
+
+[node name="Ponytail" type="Polygon2D" parent="." index="0"]
+position = Vector2( -101.776, -463.57 )
+texture = ExtResource( 2 )
+skeleton = NodePath("../..")
+polygon = PoolVector2Array( 45.0381, 204.58, 21.374, 64.8855, 112.214, 32.0611, 240.458, 80.1527, 225.954, 228.244 )
+uv = PoolVector2Array( 45.0381, 204.58, 21.374, 64.8855, 112.214, 32.0611, 240.458, 80.1527, 225.954, 228.244 )
+bones = [ NodePath("Hip"), PoolRealArray( 0, 0, 0, 0, 0 ), NodePath("Hip/Chest"), PoolRealArray( 0, 0, 0, 0, 0 ), NodePath("Hip/Chest/Neck"), PoolRealArray( 0, 0, 0, 0, 0 ), NodePath("Hip/Chest/Neck/Head"), PoolRealArray( 1, 1, 1, 1, 1 ), NodePath("Hip/Chest/LArm"), PoolRealArray( 0, 0, 0, 0, 0 ), NodePath("Hip/Chest/LArm/LForeArm"), PoolRealArray( 0, 0, 0, 0, 0 ), NodePath("Hip/Chest/LArm/LForeArm/LHand"), PoolRealArray( 0, 0, 0, 0, 0 ), NodePath("Hip/LLeg"), PoolRealArray( 0, 0, 0, 0, 0 ), NodePath("Hip/LLeg/LLLeg"), PoolRealArray( 0, 0, 0, 0, 0 ), NodePath("Hip/LLeg/LLLeg/LFoot"), PoolRealArray( 0, 0, 0, 0, 0 ) ]

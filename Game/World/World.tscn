@@ -1,0 +1,77 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Game/World/Room.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Game/World/World.gd" type="Script" id=2]
+[ext_resource path="res://Game/World/TestFloor.tscn" type="PackedScene" id=3]
+
+[node name="World" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="Room" parent="." instance=ExtResource( 1 )]
+roomID = "r1"
+roomSprite = 3
+
+[node name="Room2" parent="." instance=ExtResource( 1 )]
+position = Vector2( 64, 0 )
+roomID = "r2"
+
+[node name="Room3" parent="." instance=ExtResource( 1 )]
+position = Vector2( 64, 64 )
+roomName = "Test room"
+roomID = "r3"
+roomDescription = "You see a bdsm dungeon"
+
+[node name="Room4" parent="." instance=ExtResource( 1 )]
+position = Vector2( 64, 128 )
+roomID = "r4"
+canEast = false
+roomSprite = 2
+
+[node name="Room5" parent="." instance=ExtResource( 1 )]
+position = Vector2( 128, 64 )
+roomID = "r5"
+
+[node name="Room6" parent="." instance=ExtResource( 1 )]
+position = Vector2( 128, 128 )
+roomID = "r6"
+roomSprite = 1
+
+[node name="Room7" parent="." instance=ExtResource( 1 )]
+position = Vector2( 192, 128 )
+roomID = "r8"
+
+[node name="Room8" parent="." instance=ExtResource( 1 )]
+position = Vector2( 192, 64 )
+roomID = "r7"
+
+[node name="Room9" parent="." instance=ExtResource( 1 )]
+position = Vector2( 256, 128 )
+roomID = "r9"
+
+[node name="Room10" parent="." instance=ExtResource( 1 )]
+position = Vector2( 320, 192 )
+
+[node name="Room11" parent="." instance=ExtResource( 1 )]
+position = Vector2( 256, 192 )
+roomID = "r10"
+
+[node name="Room12" parent="." instance=ExtResource( 1 )]
+position = Vector2( 384, 192 )
+
+[node name="Room13" parent="." instance=ExtResource( 1 )]
+position = Vector2( 384, 256 )
+
+[node name="Room14" parent="." instance=ExtResource( 1 )]
+position = Vector2( 384, 128 )
+
+[node name="Room15" parent="." instance=ExtResource( 1 )]
+position = Vector2( 448, 192 )
+
+[node name="Connections" type="Node2D" parent="."]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+smoothing_enabled = true
+
+[node name="TestFloor" parent="." instance=ExtResource( 3 )]
+position = Vector2( -128, 0 )

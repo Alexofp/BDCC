@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Game/GameUI.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Game/MainScene.gd" type="Script" id=3]
+
+[node name="MainScene" type="Node"]
+script = ExtResource( 3 )
+
+[node name="GameUI" parent="." instance=ExtResource( 1 )]
+margin_top = 0.0
+margin_bottom = 0.0
+
+[connection signal="on_option_button" from="GameUI" to="." method="_on_GameUI_on_option_button"]

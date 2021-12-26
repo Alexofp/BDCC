@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Player/Limbs/breasts/breastscurvy.png" type="Texture" id=1]
+[ext_resource path="res://Player/Limbs/Limb.tscn" type="PackedScene" id=2]
+
+[node name="BreastsCurvy" instance=ExtResource( 2 )]
+
+[node name="BreastsCurvy" type="Polygon2D" parent="." index="0"]
+position = Vector2( -109.33, -260.006 )
+texture = ExtResource( 1 )
+skeleton = NodePath("../../Skeleton2D")
+polygon = PoolVector2Array( -0.478455, 133.971, 16.2679, 31.5789, 91.866, -31.5789, 143.062, -0.95694, 131.1, 155.502 )
+uv = PoolVector2Array( -0.478455, 133.971, 16.2679, 31.5789, 91.866, -31.5789, 143.062, -0.95694, 131.1, 155.502 )
+bones = [ NodePath("Hip"), PoolRealArray( 0, 0, 0, 0, 0 ), NodePath("Hip/Chest"), PoolRealArray( 1, 1, 1, 1, 1 ), NodePath("Hip/Chest/Neck"), PoolRealArray( 0, 0, 0, 0, 0 ), NodePath("Hip/Chest/Neck/Head"), PoolRealArray( 0, 0, 0, 0, 0 ), NodePath("Hip/Chest/LArm"), PoolRealArray( 0, 0, 0, 0, 0 ), NodePath("Hip/Chest/LArm/LForeArm"), PoolRealArray( 0, 0, 0, 0, 0 ), NodePath("Hip/Chest/LArm/LForeArm/LHand"), PoolRealArray( 0, 0, 0, 0, 0 ), NodePath("Hip/LLeg"), PoolRealArray( 0, 0, 0, 0, 0 ), NodePath("Hip/LLeg/LLLeg"), PoolRealArray( 0, 0, 0, 0, 0 ), NodePath("Hip/LLeg/LLLeg/LFoot"), PoolRealArray( 0, 0, 0, 0, 0 ) ]
