@@ -15,6 +15,7 @@ onready var prevPageButton = $HBoxContainer/Panel2/MarginContainer/VBoxContainer
 onready var optionTooltip = $CanvasLayer/TooltipDisplay
 onready var textOutput = $HBoxContainer/VBoxContainer2/ScrollContainer/VBoxContainer/RichTextLabel
 onready var locationLabel = $HBoxContainer/Panel2/MarginContainer/VBoxContainer/VBoxContainer2/LocationLabel
+onready var characterPanel = $HBoxContainer/Panel2/MarginContainer/VBoxContainer/CharacterPanel
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -123,9 +124,7 @@ func _on_option_button_tooltip(index):
 func _on_option_button_tooltip_end():
 	optionTooltip.set_is_active(false)
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+
 func checkPageButtons():
 	if(currentPage > 0):
 		prevPageButton.disabled = false
@@ -152,18 +151,15 @@ func _on_PrevPageButton_pressed():
 func setLocationName(locname: String):
 	locationLabel.text = locname
 
-#func _on_SceneBase_sayText(text):
-#	say(text)
-#
-#
-#func _on_SceneBase_clearText():
-#	clearText()
-#
-#func _on_SceneBase_clearButtons():
-#	clearButtons()
-#
-#func _on_SceneBase_addButton(text, method, tooltip):
-#	addButton(text, method, tooltip)
-#
-#func _on_SceneBase_addDisabledButton(text, tooltip):
-#	addDisabledButton(text, tooltip)
+func setCharacterPanelVisible(vis: bool):
+	characterPanel.visible = vis
+
+func setCharacterData(character: Character):
+	if(character == null):
+		characterPanel.visible = false
+		return
+	
+	characterPanel.visible = true
+	characterPanel.setName(character._getName())
+	characterPanel.setPain(character.pain)
+	characterPanel.setLust(character.lust)

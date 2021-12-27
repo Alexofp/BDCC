@@ -11,6 +11,7 @@ signal sceneEnded(result)
 var state: String = ""
 var sceneArgs = []
 var sceneID: String = "UNREGISTERED_SCENE"
+var currentCharacter: String = ""
 
 func _run():
 	pass
@@ -32,6 +33,7 @@ func _react_scene_end(_result):
 # Utility
 func initScene(args = []):
 	sceneArgs = args
+	clearCharacter()
 
 func run():
 	GM.ui.clearText()
@@ -49,6 +51,24 @@ func say(_text: String):
 		GM.ui.say(_text)
 	#emit_signal("sayText", _text)
 
+func setCharacter(id: String):
+	if(id == ""):
+		clearCharacter()
+		return
+	
+	var character = GlobalRegistry.getCharacter(id)
+	if(!character):
+		return
+	GM.ui.setCharacterData(character)
+	currentCharacter = id
+
+func updateCharacter():
+	setCharacter(currentCharacter)
+
+func clearCharacter():
+	currentCharacter = ""
+	GM.ui.setCharacterData(null)
+
 func endScene(result = []):
 	GM.main.removeScene(self, result)
 	emit_signal("sceneEnded", result)
@@ -61,6 +81,7 @@ func runScene(id: String, args = []):
 
 func react_scene_end(_result):
 	print(name+": The scene before me has ended")
+	updateCharacter()
 	_react_scene_end(_result)
 
 func addNextButton(method: String, args = []):
