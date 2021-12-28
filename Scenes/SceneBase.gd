@@ -30,10 +30,14 @@ func _react(_action: String, _args):
 func _react_scene_end(_result):
 	pass
 
+func _initScene(_args = []):
+	pass
+
 # Utility
 func initScene(args = []):
 	sceneArgs = args
 	clearCharacter()
+	_initScene(args)
 
 func run():
 	GM.ui.clearText()

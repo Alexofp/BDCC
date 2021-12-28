@@ -15,9 +15,12 @@ func _on_ScriptedRoom_onReact(room, key):
 		room.addButton("Do more mew", "Talk to mew", "wut")
 		room.addButton("Return", "Talk to mew", "wut2")
 		room.addButton("start a scene", "Talk to mew", "wut3")
+		room.addButton("start a fight", "Fight", "wut4")
 	if(key == "wut2"):
 		#GM.pc.breasts.size = BodypartBreasts.BreastsSize.A
 		#GM.pc.updateAppearance()
 		GM.main.reRun()
 	if(key == "wut3"):
 		room.runScene("TestScene")
+	if(key == "wut4"):
+		room.runScene("FightScene", ["testchar"])

@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Node",
+"class": "Attack",
+"language": "GDScript",
+"path": "res://Attacks/BaseAttack.gd"
+}, {
 "base": "Resource",
 "class": "Bodypart",
 "language": "GDScript",
@@ -27,7 +32,7 @@ _global_script_classes=[ {
 "base": "Node",
 "class": "Character",
 "language": "GDScript",
-"path": "res://Game/Character.gd"
+"path": "res://Characters/Character.gd"
 }, {
 "base": "Node2D",
 "class": "Doll",
@@ -64,6 +69,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Player/Player.gd"
 }, {
+"base": "Object",
+"class": "RNGTools",
+"language": "GDScript",
+"path": "res://addons/rngtools/RNGTools.gd"
+}, {
 "base": "Node",
 "class": "RoomAction",
 "language": "GDScript",
@@ -85,6 +95,7 @@ _global_script_classes=[ {
 "path": "res://Game/Util.gd"
 } ]
 _global_script_class_icons={
+"Attack": "",
 "Bodypart": "",
 "BodypartBreasts": "",
 "BodypartLeg": "",
@@ -96,6 +107,7 @@ _global_script_class_icons={
 "GameWorld": "",
 "Limb": "",
 "Player": "",
+"RNGTools": "",
 "RoomAction": "",
 "SceneBase": "",
 "SubGameWorld": "",

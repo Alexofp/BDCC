@@ -48,6 +48,9 @@ func setLocation(newRoomID:String):
 
 func addPain(_p: int):
 	pain += _p
+	if(pain > painThreshold()):
+		pain = painThreshold()
+		
 	emit_signal("stat_changed")
 
 func addLust(_l: int):
@@ -73,3 +76,14 @@ func getCredits() -> int:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass
+
+# This func should do all the armor checks, etc
+func recievePain(addpain: int):	
+	var oldpain = pain
+
+	addPain(addpain)
+	var actualAddpain = pain - oldpain
+	return actualAddpain
+
+func painThreshold():
+	return 100

@@ -3,6 +3,7 @@ extends Node
 var scenes: Dictionary = {}
 var bodyparts: Dictionary = {}
 var characters: Dictionary = {}
+var attacks: Dictionary = {}
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -13,8 +14,11 @@ func _ready():
 	
 	registerScene("TestScene", "res://Scenes/TestScene.tscn")
 	registerScene("WorldScene", "res://Scenes/WorldScene.tscn")
+	registerScene("FightScene", "res://Scenes/FightScene.tscn")
 	
 	registerCharacterFolder("res://Characters/")
+	
+	registerAttackFolder("res://Attacks/")
 	
 
 func registerScene(id: String, path: String):
@@ -89,3 +93,33 @@ func getCharacter(id: String):
 		print("ERROR: character with the id "+id+" wasn't found")
 		return null
 	return characters[id]
+
+
+func registerAttack(path: String):
+	var attack = load(path)
+	var attackObject = attack.new()
+	attacks[attackObject.id] = attackObject
+	
+func registerAttackFolder(folder: String):
+	var dir = Directory.new()
+	if dir.open(folder) == OK:
+		dir.list_dir_begin()
+		var file_name = dir.get_next()
+		while file_name != "":
+			if dir.current_is_dir():
+				pass
+				#print("Found directory: " + file_name)
+			else:
+				if(file_name.get_extension() == "gd"):
+					var full_path = folder.plus_file(file_name)
+					print("Registered attack: " + full_path)
+					registerAttack(full_path)
+			file_name = dir.get_next()
+	else:
+		print("An error occurred when trying to access the path "+folder)
+
+func getAttack(id: String):
+	if(!attacks.has(id)):
+		print("ERROR: attack with the id "+id+" wasn't found")
+		return null
+	return attacks[id]

@@ -5,3 +5,6 @@ func _init():
 	
 func _getName():
 	return "Bob"
+
+func _getAttacks():
+	return ["baseattack", "simplekickattack"]

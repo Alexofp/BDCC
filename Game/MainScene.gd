@@ -27,6 +27,7 @@ func _ready():
 	#theScene.run()
 	
 	runScene("WorldScene")#"TestScene")) #WorldScene
+	#runScene("FightScene", ["testchar"])
 
 func runScene(id, _args = []):
 	var scene = GlobalRegistry.getScene(id)
