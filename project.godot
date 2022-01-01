@@ -84,6 +84,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scenes/SceneBase.gd"
 }, {
+"base": "Control",
+"class": "StatusEffectsPanel",
+"language": "GDScript",
+"path": "res://UI/StatusEffectsPanel/StatusEffectsPanel.gd"
+}, {
 "base": "Node2D",
 "class": "SubGameWorld",
 "language": "GDScript",
@@ -110,6 +115,7 @@ _global_script_class_icons={
 "RNGTools": "",
 "RoomAction": "",
 "SceneBase": "",
+"StatusEffectsPanel": "",
 "SubGameWorld": "",
 "Util": ""
 }

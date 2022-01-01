@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://UI/FlexGridContainer.gd" type="Script" id=1]
+[ext_resource path="res://Game/TooltipDisplay.tscn" type="PackedScene" id=3]
+[ext_resource path="res://UI/StatusEffectsPanel/StatusEffectsPanel.gd" type="Script" id=4]
+
+[node name="StatusEffectsPanel" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="FlexGridContainer" type="Container" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="TooltipDisplay" parent="CanvasLayer" instance=ExtResource( 3 )]
+margin_left = 30.2906
+margin_top = -128.289
+margin_right = 280.291
+margin_bottom = -96.289
