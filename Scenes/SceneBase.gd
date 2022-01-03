@@ -43,6 +43,11 @@ func run():
 	GM.ui.clearText()
 	GM.ui.clearButtons()
 	_run()
+	GM.pc.updateEffectPanel(GM.ui.getPlayerStatusEffectsPanel())
+	if(currentCharacter):
+		var character = GlobalRegistry.getCharacter(currentCharacter)
+		character.updateEffectPanel(GM.ui.getNPCStatusEffectsPanel())
+		
 	
 func react(_action: String, _args):
 	return _react(_action, _args)

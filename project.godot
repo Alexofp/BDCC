@@ -14,6 +14,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Attacks/BaseAttack.gd"
 }, {
+"base": "Node",
+"class": "BaseCharacter",
+"language": "GDScript",
+"path": "res://Game/BaseCharacter.gd"
+}, {
 "base": "Resource",
 "class": "Bodypart",
 "language": "GDScript",
@@ -29,7 +34,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Player/Bodyparts/BodypartLeg.gd"
 }, {
-"base": "Node",
+"base": "BaseCharacter",
 "class": "Character",
 "language": "GDScript",
 "path": "res://Characters/Character.gd"
@@ -64,7 +69,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Player/Limbs/Limb.gd"
 }, {
-"base": "Node",
+"base": "BaseCharacter",
 "class": "Player",
 "language": "GDScript",
 "path": "res://Player/Player.gd"
@@ -84,7 +89,12 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scenes/SceneBase.gd"
 }, {
-"base": "Control",
+"base": "Node",
+"class": "StatusEffect",
+"language": "GDScript",
+"path": "res://StatusEffect/StatusEffect.gd"
+}, {
+"base": "PanelContainer",
 "class": "StatusEffectsPanel",
 "language": "GDScript",
 "path": "res://UI/StatusEffectsPanel/StatusEffectsPanel.gd"
@@ -101,6 +111,7 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "Attack": "",
+"BaseCharacter": "",
 "Bodypart": "",
 "BodypartBreasts": "",
 "BodypartLeg": "",
@@ -115,6 +126,7 @@ _global_script_class_icons={
 "RNGTools": "",
 "RoomAction": "",
 "SceneBase": "",
+"StatusEffect": "",
 "StatusEffectsPanel": "",
 "SubGameWorld": "",
 "Util": ""

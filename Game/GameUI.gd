@@ -16,6 +16,7 @@ onready var optionTooltip = $CanvasLayer/TooltipDisplay
 onready var textOutput = $HBoxContainer/VBoxContainer2/ScrollContainer/VBoxContainer/RichTextLabel
 onready var locationLabel = $HBoxContainer/Panel2/MarginContainer/VBoxContainer/VBoxContainer2/LocationLabel
 onready var characterPanel = $HBoxContainer/Panel2/MarginContainer/VBoxContainer/CharacterPanel
+onready var playerPanel = $HBoxContainer/Panel/MarginContainer/PlayerPanel
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -163,3 +164,9 @@ func setCharacterData(character: Character):
 	characterPanel.setName(character._getName())
 	characterPanel.setPain(character.pain)
 	characterPanel.setLust(character.lust)
+
+func getPlayerStatusEffectsPanel():
+	return playerPanel.getStatusEffectsPanel()
+
+func getNPCStatusEffectsPanel():
+	return characterPanel.getStatusEffectsPanel()

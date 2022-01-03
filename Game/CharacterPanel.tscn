@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Fonts/Titillium-Regular.otf" type="DynamicFontData" id=1]
 [ext_resource path="res://Game/CharacterPanel.gd" type="Script" id=2]
+[ext_resource path="res://UI/StatusEffectsPanel/StatusEffectsPanel.tscn" type="PackedScene" id=3]
 
 [sub_resource type="DynamicFont" id=7]
 size = 28
@@ -35,3 +36,11 @@ margin_top = 50.0
 margin_right = 1280.0
 margin_bottom = 64.0
 text = "Lust"
+
+[node name="StatusEffectsPanel" parent="." instance=ExtResource( 3 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 68.0
+margin_right = 1280.0
+margin_bottom = 68.0
+rect_min_size = Vector2( 0, 0 )

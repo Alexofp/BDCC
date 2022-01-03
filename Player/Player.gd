@@ -1,13 +1,10 @@
-extends Node
+extends BaseCharacter
 class_name Player
 
-signal stat_changed
 signal bodypart_changed
 signal location_changed(newloc)
 
 var gamename = "Rahi"
-var pain:int = 0
-var lust:int = 0
 var credits:int = 0
 var location:String = "r1"
 var legs: BodypartLeg
@@ -25,7 +22,7 @@ func _ready():
 	var mybreasts: BodypartBreasts = GlobalRegistry.getBodypart("humanbreasts")
 	mybreasts.size = BodypartBreasts.BreastsSize.C
 	setBreasts(mybreasts)
-	pass
+
 
 func updateAppearance():
 	emit_signal("bodypart_changed")
@@ -45,23 +42,6 @@ func setLocation(newRoomID:String):
 	#	var roomName = roomInfo.getName()
 	#	GM.ui.setLocationName(roomName)
 	emit_signal("location_changed", newRoomID)
-
-func addPain(_p: int):
-	pain += _p
-	if(pain > painThreshold()):
-		pain = painThreshold()
-		
-	emit_signal("stat_changed")
-
-func addLust(_l: int):
-	lust += _l
-	emit_signal("stat_changed")
-
-func getPain() -> int:
-	return pain
-
-func getLust() -> int:
-	return lust
 	
 func getName() -> String:
 	return gamename
@@ -72,10 +52,6 @@ func addCredits(_c: int):
 
 func getCredits() -> int:
 	return credits
-	
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
 
 # This func should do all the armor checks, etc
 func recievePain(addpain: int):	
@@ -87,3 +63,4 @@ func recievePain(addpain: int):
 
 func painThreshold():
 	return 100
+

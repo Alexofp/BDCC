@@ -70,3 +70,6 @@ func _on_ViewportContainer_mouse_exited():
 
 func _on_ViewportContainer_mouse_entered():
 	mouseInsideViewport = true
+
+func getStatusEffectsPanel():
+	return grid

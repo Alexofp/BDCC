@@ -48,6 +48,9 @@ func _run():
 		addButton("Continue", "the battle has ended", "endbattle")
 
 func _react(_action: String, _args):
+	if(state == "" || state == "fighting"):
+		beforeTurnChecks()
+	
 	if(_action == "attack"):
 		whatPlayerDid = "It's your turn to attack\n"
 		
@@ -71,6 +74,7 @@ func _react(_action: String, _args):
 	
 	if(_action == "endbattle"):
 		enemyCharacter.afterFightEnded()
+		GM.pc.afterFightEnded()
 		endScene(battleState)
 		return
 
@@ -101,7 +105,13 @@ func aiTurn():
 	
 	return enemyText
 
+func beforeTurnChecks():
+	GM.pc.processBattleTurn()
+	enemyCharacter.processBattleTurn()
+
 func afterTurnChecks():
+	#GM.pc.processBattleTurn()
+	#enemyCharacter.processBattleTurn()
 	
 	var won = checkEnd()
 	if(won == "lost"):

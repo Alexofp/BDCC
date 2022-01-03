@@ -3,7 +3,7 @@ extends VBoxContainer
 onready var painLabel = $PainLabel
 onready var lustLabel = $LustLabel
 onready var nameLabel = $NameLabel
-
+onready var statusEffectsPanel = $StatusEffectsPanel
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -18,3 +18,6 @@ func setLust(newlust: int):
 	
 func setPain(newpain: int):
 	painLabel.text = "Pain: "+str(newpain)
+
+func getStatusEffectsPanel():
+	return statusEffectsPanel

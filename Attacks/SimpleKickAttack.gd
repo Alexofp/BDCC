@@ -8,6 +8,7 @@ func _doAttack(_attacker, _reciever):
 	var recieverName = _reciever.getName()
 	
 	var damage = _reciever.recievePain(10)
+	_reciever.addEffect(StatusEffect.Bleeding)
 	
 	var text = attackerName + " kicks " + recieverName + " and does "+str(damage)+" damage!"
 	
