@@ -42,22 +42,28 @@ margin_right = 279.0
 margin_bottom = 76.0
 text = "Lust"
 
-[node name="CreditsLabel" type="Label" parent="."]
+[node name="StaminaLabel" type="Label" parent="."]
 margin_top = 80.0
 margin_right = 279.0
 margin_bottom = 100.0
+text = "Stamina"
+
+[node name="CreditsLabel" type="Label" parent="."]
+margin_top = 104.0
+margin_right = 279.0
+margin_bottom = 124.0
 text = "Credits"
 
 [node name="ViewportContainer" type="ViewportContainer" parent="."]
-margin_top = 104.0
+margin_top = 128.0
 margin_right = 279.0
-margin_bottom = 572.0
+margin_bottom = 632.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 stretch = true
 
 [node name="Viewport" type="Viewport" parent="ViewportContainer"]
-size = Vector2( 279, 468 )
+size = Vector2( 279, 504 )
 handle_input_locally = false
 render_target_update_mode = 3
 
@@ -67,18 +73,18 @@ current = true
 [node name="Doll" parent="ViewportContainer/Viewport" instance=ExtResource( 1 )]
 
 [node name="StatusEffectsLabel" type="Label" parent="."]
-margin_top = 576.0
+margin_top = 636.0
 margin_right = 279.0
-margin_bottom = 596.0
+margin_bottom = 656.0
 text = "Status Effects"
 
 [node name="FlexGridContainer" parent="." instance=ExtResource( 3 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 600.0
+margin_top = 660.0
 margin_right = 279.0
 margin_bottom = 720.0
-rect_min_size = Vector2( 0, 120 )
+rect_min_size = Vector2( 0, 60 )
 
 [connection signal="mouse_entered" from="ViewportContainer" to="." method="_on_ViewportContainer_mouse_entered"]
 [connection signal="mouse_exited" from="ViewportContainer" to="." method="_on_ViewportContainer_mouse_exited"]

@@ -37,10 +37,16 @@ margin_right = 1280.0
 margin_bottom = 64.0
 text = "Lust"
 
+[node name="StaminaLabel" type="Label" parent="."]
+margin_top = 68.0
+margin_right = 1280.0
+margin_bottom = 82.0
+text = "Lust"
+
 [node name="StatusEffectsPanel" parent="." instance=ExtResource( 3 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 68.0
+margin_top = 86.0
 margin_right = 1280.0
-margin_bottom = 68.0
+margin_bottom = 86.0
 rect_min_size = Vector2( 0, 0 )

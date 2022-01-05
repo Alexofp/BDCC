@@ -17,39 +17,100 @@ func _run():
 	updateCharacter()
 	if(state == ""):
 		say("Well, hi")
-		
-	if(state == "fighting"):
+		setState("fighting")
+	elif(state == "fighting"):
 		say("And so the fight continues")
 		
 	if(state == "lost" || state == "win"):		
 		say("The fight has ended")
 		
-	if(whatPlayerDid != ""):
-		say("\n\n")
-		say(whatPlayerDid)
-		whatPlayerDid = ""
+	if(state == "inspecting"):
+		say("It's an enemy, wow")
+		addButton("Return", "Back to fighting", "return")
+	
+	if(state == "physattacks"):
+		say("Pick the attack to use")
 		
-	if(whatEnemyDid != ""):
-		say("\n\n")
-		say(whatEnemyDid)
-		whatEnemyDid = ""
+		addAttackButtons(Attack.Category.Physical)
 		
-	if(whatHappened != ""):
-		say("\n\n")
-		say(whatHappened)
-		whatHappened = ""
+		addButton("Return", "Back to fighting", "return")
+	
+	if(state == "lustattacks"):
+		say("Pick the attack to use")
+		
+		addAttackButtons(Attack.Category.Lust)
+		
+		addButton("Return", "Back to fighting", "return")
+	
+	if(state == "specialattacks"):
+		say("Pick the attack to use")
+		
+		addAttackButtons(Attack.Category.Special)
+		
+		addButton("Return", "Back to fighting", "return")
+	
+	if(state == "" || state == "fighting" || state == "lost" || state == "win"):	
+		if(whatPlayerDid != ""):
+			say("\n\n")
+			say(whatPlayerDid)
+			
+		if(whatEnemyDid != ""):
+			say("\n\n")
+			say(whatEnemyDid)
+			
+		if(whatHappened != ""):
+			say("\n\n")
+			say(whatHappened)
 		
 	if(state == "" || state == "fighting"):		
-		addButton("Attack!", "Kick em", "attack")
+		addButton("Physical Attack", "Kick em", "physattacks")
+		addButton("Lust Attack", "Lewd em", "lustattacks")
+		addButton("Special", "Kick em but in a special way", "specialattacks")
+		addButton("Inspect", "Look closer", "inspect")
 		addButton("Wait", "Do nothing", "wait")
-		addDisabledButton("bark", "no awo")
+		addDisabledButton("Inventory", "no awo yet")
+		
+		if(GM.pc.hasEffect(StatusEffect.Collapsed)):
+			addButton("Get up", "spends the whole turn", "getup")
+		else:
+			addDisabledButton("Get up", "You're already standing")
+		
+		addButton("Submit", "Give up", "submit")
 		
 	if(state == "lost" || state == "win"):		
 		addButton("Continue", "the battle has ended", "endbattle")
 
 func _react(_action: String, _args):
-	if(state == "" || state == "fighting"):
+	if(_action == "inspect"):
+		setState("inspecting")
+		
+	if(_action == "physattacks" || _action == "lustattacks" || _action == "specialattacks"):
+		setState(_action)
+		
+	if(_action == "return"):
+		setState("fighting")
+	
+	if(_action == "attack" || _action == "wait" || _action == "getup"):
 		beforeTurnChecks()
+	
+	if(_action == "doattack"):
+		setState("fighting")
+		beforeTurnChecks()
+		
+		var attackID = _args[0]
+		whatPlayerDid += doPlayerAttack(attackID)
+		whatEnemyDid = aiTurn()
+
+		afterTurnChecks()
+		return
+	
+	if(_action == "getup"):
+		whatPlayerDid += doPlayerAttack("trygetupattack")
+		
+		whatEnemyDid = aiTurn()
+
+		afterTurnChecks()
+		return
 	
 	if(_action == "attack"):
 		whatPlayerDid = "It's your turn to attack\n"
@@ -60,7 +121,6 @@ func _react(_action: String, _args):
 		
 		whatEnemyDid = aiTurn()
 
-		setState("fighting")
 		afterTurnChecks()
 		return
 	if(_action == "wait"):
@@ -68,8 +128,13 @@ func _react(_action: String, _args):
 		
 		whatEnemyDid = aiTurn()
 		
-		setState("fighting")
 		afterTurnChecks()
+		return
+	
+	if(_action == "submit"):
+		setState("lost")
+		whatHappened = "You give up the fight willingly and submit to your enemy\n"
+		battleState = "lost"
 		return
 	
 	if(_action == "endbattle"):
@@ -106,6 +171,10 @@ func aiTurn():
 	return enemyText
 
 func beforeTurnChecks():
+	whatPlayerDid = ""
+	whatEnemyDid = ""
+	whatHappened = ""
+	
 	GM.pc.processBattleTurn()
 	enemyCharacter.processBattleTurn()
 
@@ -128,5 +197,32 @@ func checkEnd():
 		whatHappened += "Enemy is in too much pain to continue\n"
 		battleState = "win"
 		return "win"
+	if(GM.pc.getLust() >= GM.pc.lustThreshold()):
+		whatHappened += "You're too aroused to continue\n"
+		battleState = "lost"
+		return "lost"
+	if(enemyCharacter.getLust() >= enemyCharacter.lustThreshold()):
+		whatHappened += "Enemy is too aroused to continue\n"
+		battleState = "win"
+		return "win"
 	
 	return ""
+
+func addAttackButtons(category):
+	var playerAttacks = GM.pc.getAttacks()
+	for attackID in playerAttacks:
+		var attack: Attack = GlobalRegistry.getAttack(attackID)
+		if(attack == null):
+			assert("Bad attack: "+attackID)
+		if(attack.category != category):
+			continue
+			
+		var desc = attack.getRequirementsColorText(GM.pc, enemyCharacter)
+		if(desc != ""):
+			desc += "\n"
+		desc += attack.getVisibleDesc()
+			
+		if(attack.canUse(GM.pc, enemyCharacter) && attack.meetsRequirements(GM.pc, enemyCharacter)):
+			addButton(attack.getVisibleName(),  desc, "doattack", [attack.id])
+		else:
+			addDisabledButton(attack.getVisibleName(),  desc)

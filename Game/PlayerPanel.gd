@@ -5,6 +5,7 @@ onready var painLabel = $PainLabel
 onready var lustLabel = $LustLabel
 onready var nameLabel = $NameLabel
 onready var creditsLabel = $CreditsLabel
+onready var staminaLabel = $StaminaLabel
 onready var camera = $ViewportContainer/Viewport/Camera2D
 onready var doll = $ViewportContainer/Viewport/Doll
 # Declare member variables here. Examples:
@@ -36,6 +37,7 @@ func updateUI():
 	painLabel.text = "Pain: "+str(GM.pc.getPain())
 	lustLabel.text = "Lust: "+str(GM.pc.getLust())
 	creditsLabel.text = "Work Credits: " + str(GM.pc.getCredits())
+	staminaLabel.text = "Stamina: " + str(GM.pc.getStamina())
 
 func _input(event: InputEvent):
 	if event is InputEventMouseButton && event.button_index == BUTTON_MIDDLE && mouseInsideViewport:

@@ -12,12 +12,6 @@ func _init():
 func _getName():
 	return "Error"
 	
-func _getAttacks():
-	return ["baseattack"]
-	
-func getAttacks():
-	return _getAttacks()
-	
 func getName():
 	return _getName()
 

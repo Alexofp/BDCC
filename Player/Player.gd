@@ -6,7 +6,7 @@ signal location_changed(newloc)
 
 var gamename = "Rahi"
 var credits:int = 0
-var location:String = "r1"
+var location:String = "ScriptedRoom"
 var legs: BodypartLeg
 var arms
 var head
@@ -64,3 +64,8 @@ func recievePain(addpain: int):
 func painThreshold():
 	return 100
 
+func isPlayer():
+	return true
+
+func _getAttacks():
+	return ["baseattack", "simplekickattack", "strongkickattack", "simplelustattack"]

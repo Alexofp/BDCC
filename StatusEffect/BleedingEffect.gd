@@ -33,7 +33,6 @@ func getEffectVisibleType():
 	return StatusEffectsPanel.EffectType.Red
 
 func combine(_args = []):
-	print("I was combined")
 	if(_args.size() > 0):
 		turns = max(_args[0], turns)
 	else:

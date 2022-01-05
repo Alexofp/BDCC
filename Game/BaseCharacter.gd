@@ -5,6 +5,7 @@ class_name BaseCharacter
 signal stat_changed
 var pain:int = 0
 var lust:int = 0
+var stamina:int = 100
 var statusEffects:Dictionary = {}
 
 func _init():
@@ -23,6 +24,20 @@ func addPain(_p: int):
 # Skips armor checks
 func addLust(_l: int):
 	lust += _l
+	if(lust > lustThreshold()):
+		lust = lustThreshold()
+	if(lust < 0):
+		lust = 0
+	
+	emit_signal("stat_changed")
+
+func addStamina(_s: int):
+	stamina += _s
+	if(stamina > getMaxStamina()):
+		stamina = getMaxStamina()
+	if(stamina < 0):
+		stamina = 0
+	
 	emit_signal("stat_changed")
 
 func getPain() -> int:
@@ -30,6 +45,12 @@ func getPain() -> int:
 
 func getLust() -> int:
 	return lust
+	
+func getStamina() -> int:
+	return stamina
+	
+func getMaxStamina() -> int:
+	return 100
 	
 func getName() -> String:
 	return name
@@ -45,6 +66,18 @@ func recievePain(addpain: int):
 
 func painThreshold():
 	return 100
+
+func lustThreshold():
+	return 100
+
+# Should include armor checks and return amount of lust actually added
+func recieveLust(addlust: int):	
+	var oldlust = lust
+
+	addLust(addlust)
+	
+	var actualAddlust = lust - oldlust
+	return actualAddlust
 
 func addEffect(effectID: String, args = []):
 	if(statusEffects.has(effectID)):
@@ -84,3 +117,11 @@ func afterFightEnded():
 		if(effect.isBattleOnly):
 			removeEffect(effectID)
 	
+func isPlayer():
+	return false
+
+func _getAttacks():
+	return ["baseattack"]
+	
+func getAttacks():
+	return _getAttacks()

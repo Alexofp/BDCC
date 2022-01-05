@@ -164,6 +164,7 @@ func setCharacterData(character: Character):
 	characterPanel.setName(character._getName())
 	characterPanel.setPain(character.pain)
 	characterPanel.setLust(character.lust)
+	characterPanel.setStamina(character.stamina)
 
 func getPlayerStatusEffectsPanel():
 	return playerPanel.getStatusEffectsPanel()
