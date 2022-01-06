@@ -155,7 +155,7 @@ func doPlayerAttack(attackID):
 	return text
 
 func doAIBestAttack(_attacks, _smartness = 1.0):
-	var attackID = RNGTools.pick(_attacks)
+	var attackID = RNG.pick(_attacks)
 	var attack: Attack = GlobalRegistry.getAttack(attackID)
 	if(attack == null):
 		assert("Bad attack: "+attackID)

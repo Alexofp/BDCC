@@ -16,7 +16,7 @@ func _doAttack(_attacker, _reciever):
 	
 	var damage = _reciever.recieveDamage(DamageType.Blunt, 10)
 	_reciever.addEffect(StatusEffect.Bleeding)
-	if(randf() > 0.5):
+	if(RNG.chance(50)):
 		_reciever.addEffect(StatusEffect.Collapsed)
 	
 	var text = attackerName + " kicks " + recieverName + " and does "+str(damage)+" damage!"

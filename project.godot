@@ -80,9 +80,9 @@ _global_script_classes=[ {
 "path": "res://Player/Player.gd"
 }, {
 "base": "Object",
-"class": "RNGTools",
+"class": "RNG",
 "language": "GDScript",
-"path": "res://addons/rngtools/RNGTools.gd"
+"path": "res://Util/RNG.gd"
 }, {
 "base": "Node",
 "class": "RoomAction",
@@ -134,7 +134,7 @@ _global_script_class_icons={
 "GameWorld": "",
 "Limb": "",
 "Player": "",
-"RNGTools": "",
+"RNG": "",
 "RoomAction": "",
 "SceneBase": "",
 "StatusEffect": "",

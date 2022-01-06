@@ -15,7 +15,7 @@ func _doAttack(_attacker, _reciever):
 	#var recieverName = _reciever.getName()
 	
 	var success = false
-	if(randf() > 0.5):
+	if(RNG.chance(50)):
 		_attacker.removeEffect(StatusEffect.Collapsed)
 		success = true
 	
