@@ -54,30 +54,12 @@ func getMaxStamina() -> int:
 	
 func getName() -> String:
 	return name
-	
-# Should include armor checks and return amount of pain actually added
-func recievePain(addpain: int):	
-	var oldpain = pain
-
-	addPain(addpain)
-	
-	var actualAddpain = pain - oldpain
-	return actualAddpain
 
 func painThreshold():
 	return 100
 
 func lustThreshold():
 	return 100
-
-# Should include armor checks and return amount of lust actually added
-func recieveLust(addlust: int):	
-	var oldlust = lust
-
-	addLust(addlust)
-	
-	var actualAddlust = lust - oldlust
-	return actualAddlust
 
 func addEffect(effectID: String, args = []):
 	if(statusEffects.has(effectID)):
@@ -125,3 +107,42 @@ func _getAttacks():
 	
 func getAttacks():
 	return _getAttacks()
+	
+func getDamageMultiplier(_damageType):
+	return 1
+	
+func onDamage(_damageType, _amount):
+	pass
+	
+func recieveDamage(damageType, amount):
+	var mult = getDamageMultiplier(damageType)
+	var newdamage = amount * mult
+	
+	if(damageType == DamageType.Blunt || damageType == DamageType.Sharp):
+		var oldpain = pain
+
+		addPain(newdamage)
+		
+		var actualAddpain = pain - oldpain
+		onDamage(damageType, actualAddpain)
+		return actualAddpain
+		
+	if(damageType == DamageType.Lust):
+		var oldlust = lust
+
+		addLust(newdamage)
+		
+		var actualAddlust = lust - oldlust
+		onDamage(damageType, actualAddlust)
+		return actualAddlust
+		
+	if(damageType == DamageType.Stamina):
+		var oldstamina = stamina
+
+		addStamina(newdamage)
+		
+		var actualAddstamina = stamina - oldstamina
+		onDamage(damageType, actualAddstamina)
+		return actualAddstamina
+		
+	return 0

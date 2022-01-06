@@ -39,6 +39,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Characters/Character.gd"
 }, {
+"base": "Node",
+"class": "DamageType",
+"language": "GDScript",
+"path": "res://Game/DamageType.gd"
+}, {
 "base": "Node2D",
 "class": "Doll",
 "language": "GDScript",
@@ -92,7 +97,12 @@ _global_script_classes=[ {
 "base": "Node",
 "class": "StatusEffect",
 "language": "GDScript",
-"path": "res://StatusEffect/StatusEffect.gd"
+"path": "res://Game/StatusEffect.gd"
+}, {
+"base": "Node",
+"class": "StatusEffectBase",
+"language": "GDScript",
+"path": "res://StatusEffect/StatusEffectBase.gd"
 }, {
 "base": "PanelContainer",
 "class": "StatusEffectsPanel",
@@ -116,6 +126,7 @@ _global_script_class_icons={
 "BodypartBreasts": "",
 "BodypartLeg": "",
 "Character": "",
+"DamageType": "",
 "Doll": "",
 "FlexGridContainer": "",
 "GameRoom": "",
@@ -127,6 +138,7 @@ _global_script_class_icons={
 "RoomAction": "",
 "SceneBase": "",
 "StatusEffect": "",
+"StatusEffectBase": "",
 "StatusEffectsPanel": "",
 "SubGameWorld": "",
 "Util": ""

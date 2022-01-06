@@ -53,14 +53,6 @@ func addCredits(_c: int):
 func getCredits() -> int:
 	return credits
 
-# This func should do all the armor checks, etc
-func recievePain(addpain: int):	
-	var oldpain = pain
-
-	addPain(addpain)
-	var actualAddpain = pain - oldpain
-	return actualAddpain
-
 func painThreshold():
 	return 100
 

@@ -1,4 +1,4 @@
-extends StatusEffect
+extends StatusEffectBase
 
 func _init():
 	id = StatusEffect.Bleeding

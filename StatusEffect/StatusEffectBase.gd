@@ -1,8 +1,5 @@
 extends Node
-class_name StatusEffect
-
-const Bleeding = "Bleeding"
-const Collapsed = "Collapsed"
+class_name StatusEffectBase
 
 var id = "badstatuseffect"
 var isBattleOnly = false
