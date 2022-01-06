@@ -45,6 +45,9 @@ func checkRequirement(_attacker, _reciever, req):
 	if(reqtype == "stamina"):
 		if(_attacker.getStamina() < req[1]):
 			return false
+	if(reqtype == "freearms"):
+		if(_attacker.hasEffect(StatusEffect.ArmsBound)):
+			return false
 			
 	return true
 
@@ -62,6 +65,8 @@ func getRequirementText(req):
 	var reqtype = req[0]
 	if(reqtype == "stamina"):
 		return "Uses " + str(req[1]) + " stamina"
+	if(reqtype == "freearms"):
+		return "Arms must be free"
 			
 	return "Error: bad requirement:" + reqtype
 	

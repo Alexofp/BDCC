@@ -50,11 +50,15 @@ func _react(_action: String, _args):
 	
 	if(_action == "gonorth"):
 		GM.pc.setLocation(GM.world.applyDirectionID(GM.pc.location, GameWorld.Direction.NORTH))
+		GM.pc.processTime(0)
 	if(_action == "gowest"):
 		GM.pc.setLocation(GM.world.applyDirectionID(GM.pc.location, GameWorld.Direction.WEST))
+		GM.pc.processTime(0)
 	if(_action == "gosouth"):
 		GM.pc.setLocation(GM.world.applyDirectionID(GM.pc.location, GameWorld.Direction.SOUTH))
+		GM.pc.processTime(0)
 	if(_action == "goeast"):
 		GM.pc.setLocation(GM.world.applyDirectionID(GM.pc.location, GameWorld.Direction.EAST))
+		GM.pc.processTime(0)
 
 

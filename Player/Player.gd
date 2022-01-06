@@ -22,6 +22,7 @@ func _ready():
 	var mybreasts: BodypartBreasts = GlobalRegistry.getBodypart("humanbreasts")
 	mybreasts.size = BodypartBreasts.BreastsSize.C
 	setBreasts(mybreasts)
+	updateNonBattleEffects()
 
 
 func updateAppearance():
@@ -60,4 +61,23 @@ func isPlayer():
 	return true
 
 func _getAttacks():
-	return ["baseattack", "simplekickattack", "strongkickattack", "simplelustattack"]
+	return ["simplepunchattack", "simplekickattack", "strongkickattack", "simplelustattack"]
+
+func hasBoundArms():
+	return false
+
+# They may have effect on your damage in battles but they're not a 'battle' effects
+func updateNonBattleEffects():
+	if(hasBoundArms()):
+		if(!hasEffect(StatusEffect.ArmsBound)):
+			addEffect(StatusEffect.ArmsBound)
+	else:
+		if(hasEffect(StatusEffect.ArmsBound)):
+			removeEffect(StatusEffect.ArmsBound)
+
+func processBattleTurn():
+	.processBattleTurn()
+	updateNonBattleEffects()
+
+func processTime(_minutesPassed):
+	updateNonBattleEffects()
