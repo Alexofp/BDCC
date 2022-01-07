@@ -1,6 +1,11 @@
 extends Object
 class_name RNG
 
+# generates an [from,to] int, both are inclusive
+static func randi_range(from: int, to: int) -> int:
+	assert(to >= from)
+	return from + (randi() % (to - from + 1))
+
 # chance(100) will always be true
 # chance(3) will be true 3% of the time
 static func chance(ch: float) -> bool:

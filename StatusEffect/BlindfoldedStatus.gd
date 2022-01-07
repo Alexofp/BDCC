@@ -1,7 +1,7 @@
 extends StatusEffectBase
 
 func _init():
-	id = StatusEffect.ArmsBound
+	id = StatusEffect.Blindfolded
 	isBattleOnly = false
 	
 func initArgs(_args = []):
@@ -14,10 +14,10 @@ func processTime(_minutesPassed: int):
 	pass
 
 func getEffectName():
-	return "Bound arms"
+	return "Blindfolded"
 
 func getEffectDesc():
-	return "Your arms are bound, you can't punch"
+	return "You can't see. Hitting anything will\nbe very hard"
 
 func getEffectImage():
 	return null
@@ -27,3 +27,8 @@ func getEffectVisibleType():
 
 func combine(_args = []):
 	pass
+
+func getAccuracyMod(_damageType):
+	if(_damageType == DamageType.Blunt || _damageType == DamageType.Sharp):
+		return 0.5
+	return 1

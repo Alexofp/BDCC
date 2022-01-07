@@ -5,17 +5,27 @@ func _init():
 	category = Category.Physical
 	
 func getVisibleName():
-	return "Simple punch"
+	return "Punch"
 	
 func getVisibleDesc():
-	return "Punch them"
+	return "You do a combo of 2 punches in a row, each one 5-10 damage"
 	
 func _doAttack(_attacker, _reciever):
 	var attackerName = _attacker.getName()
 	var recieverName = _reciever.getName()
 	
-	var damage = _reciever.recieveDamage(DamageType.Blunt, 6)
-	damage += _reciever.recieveDamage(DamageType.Blunt, 6)
+	var chanceToHit = _attacker.getAttackAccuracy(DamageType.Blunt)
+	var dodgeChance = _reciever.getDodgeChance(DamageType.Blunt)
+	
+	if(!RNG.chance(100.0 * chanceToHit)):
+		return attackerName + " tries to punch " + recieverName + " but misses and fails completely"
+	
+	if(RNG.chance(100.0 * dodgeChance)):
+		return attackerName + " tries to punch " + recieverName + " but " + recieverName + " dodges the attack masterfully"
+	
+	var damage = 0
+	damage = _reciever.recieveDamage(DamageType.Blunt, RNG.randi_range(5,10))
+	damage += _reciever.recieveDamage(DamageType.Blunt, RNG.randi_range(5,10))
 	
 	var text = attackerName + " punches " + recieverName + " a few times and does "+str(damage)+" damage!"
 	

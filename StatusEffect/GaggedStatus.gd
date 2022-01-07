@@ -1,7 +1,7 @@
 extends StatusEffectBase
 
 func _init():
-	id = StatusEffect.ArmsBound
+	id = StatusEffect.Gagged
 	isBattleOnly = false
 	
 func initArgs(_args = []):
@@ -14,10 +14,10 @@ func processTime(_minutesPassed: int):
 	pass
 
 func getEffectName():
-	return "Bound arms"
+	return "Gagged"
 
 func getEffectDesc():
-	return "Your arms are bound, you can't punch"
+	return "Something in your mouth prevents you from talking\nnormally and biting"
 
 func getEffectImage():
 	return null
@@ -27,3 +27,4 @@ func getEffectVisibleType():
 
 func combine(_args = []):
 	pass
+

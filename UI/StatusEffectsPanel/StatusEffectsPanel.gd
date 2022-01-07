@@ -6,7 +6,7 @@ var uiblockScene = preload("res://UI/StatusEffectsPanel/EffectUIBlock.tscn")
 var battleEffects = []
 var statusEffects = []
 
-enum EffectType {Normal, Green, Red}
+enum EffectType {Normal, Green, Red, Purple}
 
 onready var optionTooltip = $CanvasLayer/TooltipDisplay
 onready var flexContainer = $FlexGridContainer
@@ -27,6 +27,8 @@ func addEffect(type, text, desc, texture = null):
 		block.makeGreen()
 	if(type == EffectType.Red):
 		block.makeRed()
+	if(type == EffectType.Purple):
+		block.makePurple()
 	if(texture):
 		block.setTexture(texture)
 	block.setNameAndDesc(text, desc)

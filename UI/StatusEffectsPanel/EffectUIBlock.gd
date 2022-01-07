@@ -14,6 +14,9 @@ func makeRed():
 func makeGreen():
 	self_modulate = Color(0.1, 0.7, 0.1)
 
+func makePurple():
+	self_modulate = Color("#421C52")
+
 func setTexture(texture: String):
 	$TextureRect.texture = load(texture)
 

@@ -42,3 +42,12 @@ func stop():
 		return
 	
 	character.removeEffect(id)
+
+func getAccuracyMod(_damageType):
+	return 1
+
+func getDodgeMod(_damageType):
+	return 1
+	
+func getRecievedDamageMod(_damageType):
+	return 1

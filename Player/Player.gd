@@ -15,6 +15,9 @@ var tail
 var breasts: BodypartBreasts
 var hair
 
+func _init():
+	initialDodgeChance = 0.05 # Player has a small chance to dodge anything
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	#legs = GlobalRegistry.getBodypart("humanleg")
@@ -61,9 +64,18 @@ func isPlayer():
 	return true
 
 func _getAttacks():
-	return ["simplepunchattack", "simplekickattack", "strongkickattack", "simplelustattack"]
+	return ["simplepunchattack", "scratchattack", "biteattack", "simplekickattack", "shoveattack", "strongkickattack", "simplelustattack"]
 
 func hasBoundArms():
+	return false
+
+func hasBoundLegs():
+	return false
+
+func isBlindfolded():
+	return false
+
+func isGagged():
 	return false
 
 # They may have effect on your damage in battles but they're not a 'battle' effects
@@ -74,6 +86,27 @@ func updateNonBattleEffects():
 	else:
 		if(hasEffect(StatusEffect.ArmsBound)):
 			removeEffect(StatusEffect.ArmsBound)
+			
+	if(hasBoundLegs()):
+		if(!hasEffect(StatusEffect.LegsBound)):
+			addEffect(StatusEffect.LegsBound)
+	else:
+		if(hasEffect(StatusEffect.LegsBound)):
+			removeEffect(StatusEffect.LegsBound)
+			
+	if(isBlindfolded()):
+		if(!hasEffect(StatusEffect.Blindfolded)):
+			addEffect(StatusEffect.Blindfolded)
+	else:
+		if(hasEffect(StatusEffect.Blindfolded)):
+			removeEffect(StatusEffect.Blindfolded)
+			
+	if(isGagged()):
+		if(!hasEffect(StatusEffect.Gagged)):
+			addEffect(StatusEffect.Gagged)
+	else:
+		if(hasEffect(StatusEffect.Gagged)):
+			removeEffect(StatusEffect.Gagged)
 
 func processBattleTurn():
 	.processBattleTurn()

@@ -25,4 +25,4 @@ func _canUse(_attacker, _reciever):
 	return true
 
 func getRequirements():
-	return [["stamina", 40]]
+	return [["stamina", 40], ["freelegs"]]

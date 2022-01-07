@@ -3,21 +3,12 @@ extends StatusEffectBase
 func _init():
 	id = StatusEffect.Collapsed
 	isBattleOnly = true
-	
-func initArgs(_args = []):
-	pass
-	
-func processBattleTurn():
-	pass
-	
-func processTime(_minutesPassed: int):
-	pass
 
 func getEffectName():
 	return "Collapsed"
 
 func getEffectDesc():
-	return "You're on the ground. Can still fight\nbut it's impossible to dodge attacks"
+	return "You're on the ground. Can still fight\nbut it's almost impossible to dodge physical attacks"
 
 func getEffectImage():
 	return null
@@ -25,5 +16,7 @@ func getEffectImage():
 func getEffectVisibleType():
 	return StatusEffectsPanel.EffectType.Normal
 
-func combine(_args = []):
-	pass
+func getDodgeMod(_damageType):
+	if(_damageType == DamageType.Blunt || _damageType == DamageType.Sharp):
+		return 0.1
+	return 1

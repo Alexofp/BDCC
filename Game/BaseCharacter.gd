@@ -8,6 +8,9 @@ var lust:int = 0
 var stamina:int = 100
 var statusEffects:Dictionary = {}
 
+# Combat stats
+var initialDodgeChance = 0
+
 func _init():
 	pass
 
@@ -108,15 +111,41 @@ func _getAttacks():
 func getAttacks():
 	return _getAttacks()
 	
-func getDamageMultiplier(_damageType):
-	return 1
+func getArmor(_damageType):
+	return 0
 	
 func onDamage(_damageType, _amount):
 	pass
+
+func getRecieveDamageMultiplier(_damageType):
+	var mult = 1
+	for effectID in statusEffects.keys():
+		var effect = statusEffects[effectID]
+		mult *= effect.getRecievedDamageMod(_damageType)
+	
+	return mult
+
+func getDodgeChance(_damageType):
+	var mult = initialDodgeChance
+	for effectID in statusEffects.keys():
+		var effect = statusEffects[effectID]
+		mult *= effect.getDodgeMod(_damageType)
+
+	return mult
+	
+func getAttackAccuracy(_damageType):
+	var mult = 1
+	for effectID in statusEffects.keys():
+		var effect = statusEffects[effectID]
+		mult *= effect.getAccuracyMod(_damageType)
+	
+	return mult
 	
 func recieveDamage(damageType, amount):
-	var mult = getDamageMultiplier(damageType)
+	var mult = getRecieveDamageMultiplier(damageType)
 	var newdamage = amount * mult
+	newdamage -= getArmor(damageType)
+	newdamage = max(newdamage, 1)
 	
 	if(damageType == DamageType.Blunt || damageType == DamageType.Sharp):
 		var oldpain = pain

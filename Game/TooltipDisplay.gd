@@ -38,6 +38,7 @@ func set_text(title: String, body: String):
 	#_body.set_size(Vector2(_body.get_size().x, _body.get_v_scroll().get_max()))
 	yield(get_tree(), "idle_frame")
 	rect_size.y = 0
+	rect_size.x = 0
 	#_body.set_size(Vector2(_body.get_size().x, _body.get_v_scroll().get_max()))
 	#yield(get_tree(), "idle_frame")
 	

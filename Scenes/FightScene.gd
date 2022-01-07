@@ -165,6 +165,9 @@ func doAIBestAttack(_attacks, _smartness = 1.0):
 	return text
 	
 func aiTurn():
+	if(enemyCharacter.getPain() >= enemyCharacter.painThreshold() || enemyCharacter.getLust() >= enemyCharacter.lustThreshold()):
+		return ""
+	
 	var enemyText = "It's enemy's turn\n"
 	enemyText += doAIBestAttack(enemyCharacter.getAttacks())
 	
@@ -218,8 +221,8 @@ func addAttackButtons(category):
 			continue
 			
 		var desc = attack.getRequirementsColorText(GM.pc, enemyCharacter)
-		if(desc != ""):
-			desc += "\n"
+		#if(desc != ""):
+		#	desc += "\n"
 		desc += attack.getVisibleDesc()
 			
 		if(attack.canUse(GM.pc, enemyCharacter) && attack.meetsRequirements(GM.pc, enemyCharacter)):
