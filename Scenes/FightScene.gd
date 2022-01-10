@@ -11,10 +11,10 @@ var battleState = ""
 func _initScene(_args = []):
 	enemyID = _args[0]
 	enemyCharacter = GlobalRegistry.getCharacter(enemyID)
-	setCharacter(enemyID)
+	setFightCharacter(enemyID)
 
 func _run():
-	updateCharacter()
+	updateFightCharacter()
 	if(state == ""):
 		say("Well, hi")
 		setState("fighting")

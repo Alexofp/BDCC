@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://UI/CharacterPanelSmall.gd" type="Script" id=1]
+
+[sub_resource type="StyleBoxEmpty" id=8]
+
+[node name="CharacterPanelSmall" type="PanelContainer"]
+margin_right = 1280.0
+margin_bottom = 20.0
+custom_styles/panel = SubResource( 8 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CharacterName" type="Label" parent="."]
+margin_top = 3.0
+margin_right = 1280.0
+margin_bottom = 17.0
+text = "Test character"

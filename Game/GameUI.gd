@@ -17,6 +17,7 @@ onready var textOutput = $HBoxContainer/VBoxContainer2/ScrollContainer/VBoxConta
 onready var locationLabel = $HBoxContainer/Panel2/MarginContainer/VBoxContainer/VBoxContainer2/LocationLabel
 onready var characterPanel = $HBoxContainer/Panel2/MarginContainer/VBoxContainer/CharacterPanel
 onready var playerPanel = $HBoxContainer/Panel/MarginContainer/PlayerPanel
+onready var charactersPanel = $HBoxContainer/Panel2/MarginContainer/VBoxContainer/CharactersPanel
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -171,3 +172,9 @@ func getPlayerStatusEffectsPanel():
 
 func getNPCStatusEffectsPanel():
 	return characterPanel.getStatusEffectsPanel()
+
+func getCharactersPanel():
+	return charactersPanel
+
+func setCharactersPanelVisible(vis):
+	charactersPanel.visible = vis

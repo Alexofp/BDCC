@@ -1,6 +1,7 @@
 extends MarginContainer
 
 var is_active := false setget set_is_active
+export var showBelow = false
 
 onready var _tween := $Tween
 onready var _title := $VBoxContainer/Title
@@ -13,8 +14,14 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
-	rect_global_position = get_global_mouse_position() - Vector2(rect_size.x/2.0, rect_size.y) - rect_pivot_offset
-	rect_global_position.x = max(0, rect_global_position.x)
+	if(showBelow):
+		rect_global_position = get_global_mouse_position() - Vector2(rect_size.x/2.0, 0) + rect_pivot_offset
+	else:
+		rect_global_position = get_global_mouse_position() - Vector2(rect_size.x/2.0, rect_size.y) - rect_pivot_offset
+	rect_global_position.x = max(10, rect_global_position.x)
+	rect_global_position.x = min(get_viewport_rect().size.x - 10 - rect_size.x, rect_global_position.x)
+	rect_global_position.y = max(10, rect_global_position.y)
+	rect_global_position.y = min(get_viewport_rect().size.y - 10 - rect_size.y, rect_global_position.y)
 	#rect_global_position.x = clamp(rect_global_position.x, 0, ProjectSettings.get("display/window/size/width") - rect_size.x)
 	#rect_global_position.y = clamp(rect_global_position.y, 0, ProjectSettings.get("display/window/size/height") - rect_size.y)
 

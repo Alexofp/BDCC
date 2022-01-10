@@ -57,6 +57,9 @@ func getMaxStamina() -> int:
 	
 func getName() -> String:
 	return name
+	
+func getSmallDescription() -> String:
+	return "Test test test"
 
 func painThreshold():
 	return 100

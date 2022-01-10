@@ -11,7 +11,9 @@ signal sceneEnded(result)
 var state: String = ""
 var sceneArgs = []
 var sceneID: String = "UNREGISTERED_SCENE"
-var currentCharacter: String = ""
+var currentCharacters: Array = []
+var fightCharacter: String = ""
+#var currentCharacter: String = ""
 
 func _run():
 	pass
@@ -37,6 +39,7 @@ func _initScene(_args = []):
 func initScene(args = []):
 	sceneArgs = args
 	clearCharacter()
+	clearFightCharacter()
 	_initScene(args)
 
 func run():
@@ -44,8 +47,8 @@ func run():
 	GM.ui.clearButtons()
 	_run()
 	GM.pc.updateEffectPanel(GM.ui.getPlayerStatusEffectsPanel())
-	if(currentCharacter):
-		var character = GlobalRegistry.getCharacter(currentCharacter)
+	if(fightCharacter):
+		var character = GlobalRegistry.getCharacter(fightCharacter)
 		character.updateEffectPanel(GM.ui.getNPCStatusEffectsPanel())
 		
 	
@@ -60,6 +63,29 @@ func say(_text: String):
 		GM.ui.say(_text)
 	#emit_signal("sayText", _text)
 
+func setFightCharacter(id: String):
+	if(id == ""):
+		clearFightCharacter()
+		return
+	
+	var character = GlobalRegistry.getCharacter(id)
+	if(!character):
+		return
+	GM.ui.setCharacterData(character)
+	fightCharacter = id
+
+func clearFightCharacter():
+	GM.ui.setCharacterData(null)
+
+func updateFightCharacter():
+	setFightCharacter(fightCharacter)
+
+func updateCharactersPanelVisibility():
+	if(currentCharacters.size() > 0):
+		GM.ui.setCharactersPanelVisible(true)
+	else:
+		GM.ui.setCharactersPanelVisible(false)
+
 func setCharacter(id: String):
 	if(id == ""):
 		clearCharacter()
@@ -68,15 +94,37 @@ func setCharacter(id: String):
 	var character = GlobalRegistry.getCharacter(id)
 	if(!character):
 		return
-	GM.ui.setCharacterData(character)
-	currentCharacter = id
+	currentCharacters = [id]
+	GM.ui.getCharactersPanel().clear()
+	GM.ui.getCharactersPanel().addCharacter(id)
+	updateCharactersPanelVisibility()
+
+func addCharacter(id: String):
+	if(id == ""):
+		return
+	currentCharacters.append(id)
+	GM.ui.getCharactersPanel().addCharacter(id)
+	updateCharactersPanelVisibility()
+
+func removeCharacter(id: String):
+	if(currentCharacters.has(id)):
+		currentCharacters.erase(id)
+		GM.ui.getCharactersPanel().removeCharacter(id)
+		updateCharactersPanelVisibility()
 
 func updateCharacter():
-	setCharacter(currentCharacter)
+	GM.ui.getCharactersPanel().clear()
+	for id in currentCharacters:
+		var character = GlobalRegistry.getCharacter(id)
+		if(!character):
+			continue
+		GM.ui.getCharactersPanel().addCharacter(id)
+	updateCharactersPanelVisibility()
 
 func clearCharacter():
-	currentCharacter = ""
-	GM.ui.setCharacterData(null)
+	currentCharacters = []
+	GM.ui.getCharactersPanel().clear()
+	updateCharactersPanelVisibility()
 
 func endScene(result = []):
 	GM.main.removeScene(self, result)
@@ -91,6 +139,7 @@ func runScene(id: String, args = []):
 func react_scene_end(_result):
 	print(name+": The scene before me has ended")
 	updateCharacter()
+	updateFightCharacter()
 	_react_scene_end(_result)
 
 func addNextButton(method: String, args = []):

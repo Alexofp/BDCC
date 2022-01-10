@@ -1,4 +1,4 @@
-extends Node
+extends Object
 class_name Util
 
 static func delete_children(node):

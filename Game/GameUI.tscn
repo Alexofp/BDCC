@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://GlobalTheme.tres" type="Theme" id=1]
 [ext_resource path="res://Game/TooltipDisplay.tscn" type="PackedScene" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://Game/PlayerPanel.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Game/World/World.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Game/CharacterPanel.tscn" type="PackedScene" id=10]
+[ext_resource path="res://UI/CharactersPanel.tscn" type="PackedScene" id=11]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.207843, 0.133333, 0.364706, 1 )
@@ -91,8 +92,15 @@ anchor_bottom = 0.0
 margin_right = 236.0
 margin_bottom = 104.0
 
-[node name="VBoxContainer3" type="VBoxContainer" parent="HBoxContainer/Panel2/MarginContainer/VBoxContainer"]
+[node name="CharactersPanel" parent="HBoxContainer/Panel2/MarginContainer/VBoxContainer" instance=ExtResource( 11 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_top = 108.0
+margin_right = 236.0
+margin_bottom = 160.0
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="HBoxContainer/Panel2/MarginContainer/VBoxContainer"]
+margin_top = 164.0
 margin_right = 236.0
 margin_bottom = 372.0
 size_flags_horizontal = 3
