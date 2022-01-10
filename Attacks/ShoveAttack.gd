@@ -8,13 +8,13 @@ func getVisibleName():
 	return "Shove"
 	
 func getVisibleDesc():
-	return "An attempt to shove the enemy away for 5 damage\n50% to miss"
+	return "An attempt to shove the enemy away for 5 damage\n30% to miss"
 	
 func _doAttack(_attacker, _reciever):
 	var attackerName = _attacker.getName()
 	var recieverName = _reciever.getName()
 	
-	var chanceToHit = _attacker.getAttackAccuracy(DamageType.Physical) * 0.5
+	var chanceToHit = _attacker.getAttackAccuracy(DamageType.Physical) * 0.7
 	chanceToHit = max(chanceToHit, 0.5)
 	var dodgeChance = _reciever.getDodgeChance(DamageType.Physical)
 	

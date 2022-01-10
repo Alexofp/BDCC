@@ -18,3 +18,4 @@ func getName():
 func afterFightEnded():
 	.afterFightEnded()
 	pain = 0
+	lust = 0

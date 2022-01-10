@@ -99,3 +99,9 @@ func doDamage(_attacker, _reciever, _damageType, _damage: int):
 	
 	var damage = _reciever.recieveDamage(_damageType, _damage * damageMult)
 	return damage
+
+func canBeDodgedByPlayer(_attacker, _reciever):
+	return true
+
+func getAnticipationText(_attacker, _reciever):
+	return "You're about to be bonked by "+getVisibleName()

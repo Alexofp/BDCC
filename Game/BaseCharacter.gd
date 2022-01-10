@@ -11,6 +11,8 @@ var statusEffects:Dictionary = {}
 # Combat stats
 var initialDodgeChance = 0
 
+var fightingState = "" # dodge, block, defocus
+
 func _init():
 	pass
 
@@ -115,6 +117,13 @@ func getAttacks():
 	return _getAttacks()
 	
 func getArmor(_damageType):
+	if(isBlocking()):
+		if(_damageType == DamageType.Physical):
+			return 10
+	if(isDefocusing()):
+		if(_damageType == DamageType.Lust):
+			return 10
+	
 	return 0
 	
 func onDamage(_damageType, _amount):
@@ -137,6 +146,9 @@ func getRecieveDamageMultiplier(_damageType):
 	return mult
 
 func getDodgeChance(_damageType):
+	if(isDodging()):
+		return 1
+	
 	var mult = initialDodgeChance
 	for effectID in statusEffects.keys():
 		var effect = statusEffects[effectID]
@@ -186,3 +198,24 @@ func recieveDamage(damageType, amount: int):
 		return actualAddstamina
 		
 	return 0
+
+func isDodging():
+	return fightingState == "dodge"
+	
+func isBlocking():
+	return fightingState == "block"
+	
+func isDefocusing():
+	return fightingState == "defocus"
+
+func setFightingStateNormal():
+	fightingState = ""
+	
+func setFightingStateDodging():
+	fightingState = "dodge"
+	
+func setFightingStateBlocking():
+	fightingState = "block"
+	
+func setFightingStateDefocusing():
+	fightingState = "defocus"

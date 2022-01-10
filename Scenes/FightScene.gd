@@ -7,6 +7,7 @@ var whatPlayerDid: String = ""
 var whatEnemyDid: String = ""
 var whatHappened: String = ""
 var battleState = ""
+var savedAIAttackID = ""
 
 func _initScene(_args = []):
 	enemyID = _args[0]
@@ -49,6 +50,14 @@ func _run():
 		
 		addButton("Return", "Back to fighting", "return")
 	
+	if(state == "playerMustDodge"):
+		if(whatPlayerDid != ""):
+			say(whatPlayerDid)
+			
+		if(whatHappened != ""):
+			say("\n\n")
+			say(whatHappened)
+	
 	if(state == "" || state == "fighting" || state == "lost" || state == "win"):	
 		if(whatPlayerDid != ""):
 			say("\n\n")
@@ -61,6 +70,25 @@ func _run():
 		if(whatHappened != ""):
 			say("\n\n")
 			say(whatHappened)
+			
+	if(state == "playerMustDodge"):
+		say("\n\n")
+		var attack: Attack = GlobalRegistry.getAttack(savedAIAttackID)
+		
+		say(attack.getAnticipationText(enemyCharacter, GM.pc))
+		addButton("Do nothing", "You don't counter the attack\nin any way", "dodge_donothing")
+		if(GM.pc.getStamina() > 0 && !GM.pc.hasEffect(StatusEffect.Collapsed)):
+			addButton("Dodge", "You dodge a physical attack completely\nspending 30 stamina in the process", "dodge_dodge")
+		else:
+			addDisabledButton("Dodge", "You dodge a physical attack completely\nspending 30 stamina in the process")
+		if(GM.pc.getStamina() > 0):
+			addButton("Block", "You block 10 physical damage\nwhile spending 10 stamina", "dodge_block")
+		else:
+			addDisabledButton("Block", "You block 10 physical damage\nwhile spending 10 stamina")
+		if(GM.pc.getStamina() > 0):
+			addButton("Defocus", "You try to distract yourself from the fight\nblocking 10 lust damage and spending 10 stamina", "dodge_defocus")
+		else:
+			addDisabledButton("Defocus", "You try to distract yourself from the fight\nblocking 10 lust damage and spending 10 stamina")
 		
 	if(state == "" || state == "fighting"):		
 		addButton("Physical Attack", "Kick em", "physattacks")
@@ -130,6 +158,35 @@ func _react(_action: String, _args):
 		
 		afterTurnChecks()
 		return
+		
+	if(_action == "dodge_donothing" || _action == "dodge_dodge" || _action == "dodge_block" || _action == "dodge_defocus"):
+		setState("fighting")
+		if(_action == "dodge_donothing"):
+			whatPlayerDid = "You decide to let the attack happen"
+		if(_action == "dodge_dodge"):
+			whatPlayerDid = "You focus on enemy's next attack and try to dodge it"
+			GM.pc.setFightingStateDodging()
+			GM.pc.addStamina(-30)
+		if(_action == "dodge_block"):
+			whatPlayerDid = "You try to block the next attack"
+			GM.pc.setFightingStateBlocking()
+			GM.pc.addStamina(-10)
+		if(_action == "dodge_defocus"):
+			whatPlayerDid = "You try to get distracted"
+			GM.pc.setFightingStateDefocusing()
+			GM.pc.addStamina(-10)
+		
+		var attack: Attack = GlobalRegistry.getAttack(savedAIAttackID)
+		if(attack == null):
+			assert("Bad attack: "+savedAIAttackID)
+			
+		whatEnemyDid = attack.doAttack(enemyCharacter, GM.pc)
+		savedAIAttackID = ""
+		
+		GM.pc.setFightingStateNormal()
+		
+		afterTurnChecks()
+		return
 	
 	if(_action == "submit"):
 		setState("lost")
@@ -154,22 +211,31 @@ func doPlayerAttack(attackID):
 	var text = attack.doAttack(GM.pc, enemyCharacter)
 	return text
 
-func doAIBestAttack(_attacks, _smartness = 1.0):
-	var attackID = RNG.pick(_attacks)
+func getBestAIAttack():
+	var attacks = enemyCharacter.getAttacks()
+	var attackID = RNG.pick(attacks)
 	var attack: Attack = GlobalRegistry.getAttack(attackID)
 	if(attack == null):
 		assert("Bad attack: "+attackID)
 	
-	var text = attack.doAttack(enemyCharacter, GM.pc)
-	
-	return text
+	return attackID
 	
 func aiTurn():
 	if(enemyCharacter.getPain() >= enemyCharacter.painThreshold() || enemyCharacter.getLust() >= enemyCharacter.lustThreshold()):
 		return ""
 	
 	var enemyText = "It's enemy's turn\n"
-	enemyText += doAIBestAttack(enemyCharacter.getAttacks())
+	var attackID = getBestAIAttack()
+	
+	var attack: Attack = GlobalRegistry.getAttack(attackID)
+	if(attack == null):
+		assert("Bad attack: "+attackID)
+		
+	if(!attack.canBeDodgedByPlayer(enemyCharacter, GM.pc)):	
+		enemyText += attack.doAttack(enemyCharacter, GM.pc)
+	else:
+		savedAIAttackID = attackID
+		setState("playerMustDodge")
 	
 	return enemyText
 
