@@ -14,8 +14,8 @@ func _doAttack(_attacker, _reciever):
 	var attackerName = _attacker.getName()
 	var recieverName = _reciever.getName()
 	
-	var chanceToHit = _attacker.getAttackAccuracy(DamageType.Blunt)
-	var dodgeChance = _reciever.getDodgeChance(DamageType.Blunt)
+	var chanceToHit = _attacker.getAttackAccuracy(DamageType.Physical)
+	var dodgeChance = _reciever.getDodgeChance(DamageType.Physical)
 	
 	if(!RNG.chance(100.0 * chanceToHit)):
 		return attackerName + " tries to punch " + recieverName + " but misses and fails completely"
@@ -24,8 +24,8 @@ func _doAttack(_attacker, _reciever):
 		return attackerName + " tries to punch " + recieverName + " but " + recieverName + " dodges the attack masterfully"
 	
 	var damage = 0
-	damage = _reciever.recieveDamage(DamageType.Blunt, RNG.randi_range(5,10))
-	damage += _reciever.recieveDamage(DamageType.Blunt, RNG.randi_range(5,10))
+	damage = doDamage(_attacker, _reciever, DamageType.Physical, RNG.randi_range(5,10))
+	damage += doDamage(_attacker, _reciever, DamageType.Physical, RNG.randi_range(5,10))
 	
 	var text = attackerName + " punches " + recieverName + " a few times and does "+str(damage)+" damage!"
 	

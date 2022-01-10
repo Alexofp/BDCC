@@ -17,6 +17,6 @@ func getEffectVisibleType():
 	return StatusEffectsPanel.EffectType.Normal
 
 func getDodgeMod(_damageType):
-	if(_damageType == DamageType.Blunt || _damageType == DamageType.Sharp):
+	if(_damageType == DamageType.Physical):
 		return 0.1
 	return 1

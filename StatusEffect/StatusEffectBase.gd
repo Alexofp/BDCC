@@ -51,3 +51,6 @@ func getDodgeMod(_damageType):
 	
 func getRecievedDamageMod(_damageType):
 	return 1
+
+func getDamageMultiplierMod(_damageType):
+	return 1

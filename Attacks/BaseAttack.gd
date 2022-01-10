@@ -93,3 +93,9 @@ func getRequirementsColorText(_attacker, _reciever):
 		text += "\n"
 	
 	return text
+
+func doDamage(_attacker, _reciever, _damageType, _damage: int):
+	var damageMult = _attacker.getDamageMultiplier(_damageType)
+	
+	var damage = _reciever.recieveDamage(_damageType, _damage * damageMult)
+	return damage

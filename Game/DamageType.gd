@@ -2,17 +2,14 @@ extends Node
 class_name DamageType
 
 enum {
-	Blunt,
-	Sharp,
+	Physical,
 	Lust,
 	Stamina
 }
 
 static func getName(type) -> String:
-	if(type == Blunt):
-		return "Blunt"
-	if(type == Sharp):
-		return "Sharp"
+	if(type == Physical):
+		return "Physical"
 	if(type == Lust):
 		return "Lust"
 	if(type == Stamina):

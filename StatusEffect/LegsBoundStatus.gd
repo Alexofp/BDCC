@@ -29,6 +29,6 @@ func combine(_args = []):
 	pass
 
 func getDodgeMod(_damageType):
-	if(_damageType == DamageType.Blunt || _damageType == DamageType.Sharp):
+	if(_damageType == DamageType.Physical):
 		return 0.5
 	return 1

@@ -14,9 +14,9 @@ func _doAttack(_attacker, _reciever):
 	var attackerName = _attacker.getName()
 	var recieverName = _reciever.getName()
 	
-	var chanceToHit = _attacker.getAttackAccuracy(DamageType.Blunt) * 0.5
+	var chanceToHit = _attacker.getAttackAccuracy(DamageType.Physical) * 0.5
 	chanceToHit = max(chanceToHit, 0.5)
-	var dodgeChance = _reciever.getDodgeChance(DamageType.Blunt)
+	var dodgeChance = _reciever.getDodgeChance(DamageType.Physical)
 	
 	if(!RNG.chance(100.0 * chanceToHit)):
 		return attackerName + " tries to shove " + recieverName + " but misses and fails completely"
@@ -24,7 +24,7 @@ func _doAttack(_attacker, _reciever):
 	if(RNG.chance(100.0 * dodgeChance)):
 		return attackerName + " tries to shove " + recieverName + " but " + recieverName + " dodges the attack masterfully"
 	
-	var damage = _reciever.recieveDamage(DamageType.Blunt, RNG.randi_range(5,5))
+	var damage = doDamage(_attacker, _reciever, DamageType.Physical, 5)
 	#_reciever.addEffect(StatusEffect.Bleeding)
 	_reciever.addEffect(StatusEffect.Collapsed)
 	

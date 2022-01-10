@@ -120,6 +120,14 @@ func getArmor(_damageType):
 func onDamage(_damageType, _amount):
 	pass
 
+func getDamageMultiplier(_damageType):
+	var mult = 1
+	for effectID in statusEffects.keys():
+		var effect = statusEffects[effectID]
+		mult *= effect.getDamageMultiplierMod(_damageType)
+	
+	return mult
+
 func getRecieveDamageMultiplier(_damageType):
 	var mult = 1
 	for effectID in statusEffects.keys():
@@ -144,13 +152,13 @@ func getAttackAccuracy(_damageType):
 	
 	return mult
 	
-func recieveDamage(damageType, amount):
+func recieveDamage(damageType, amount: int):
 	var mult = getRecieveDamageMultiplier(damageType)
 	var newdamage = amount * mult
 	newdamage -= getArmor(damageType)
 	newdamage = max(newdamage, 1)
 	
-	if(damageType == DamageType.Blunt || damageType == DamageType.Sharp):
+	if(damageType == DamageType.Physical):
 		var oldpain = pain
 
 		addPain(newdamage)
