@@ -141,9 +141,9 @@ func aimCamera(roomID):
 	camera.global_position = room.global_position
 	
 	if(highlightedRoom):
-		highlightedRoom.self_modulate = Color.white
+		highlightedRoom.setHighlighted(false)
 	highlightedRoom = room
-	highlightedRoom.self_modulate = Color.purple
+	highlightedRoom.setHighlighted(true)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):

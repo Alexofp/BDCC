@@ -12,6 +12,13 @@ export(bool) var canSouth = true
 
 enum RoomSprite { NONE, PERSON, CANTEEN, STAIRS }
 export(RoomSprite) var roomSprite = RoomSprite.NONE
+enum RoomColor { White, Green, Red }
+export(RoomColor) var roomColor = RoomColor.White
+const RoomColorToColor = {
+	RoomColor.White : Color.white,
+	RoomColor.Green : Color(0.7, 1.0, 0.7),
+	RoomColor.Red : Color(1.0, 0.7, 0.7),
+}
 
 var world: GameWorld
 var gridsize = 64
@@ -40,6 +47,7 @@ func _ready():
 	
 	global_position.x = round(global_position.x / gridsize) * gridsize
 	global_position.y = round(global_position.y / gridsize) * gridsize
+	self_modulate = RoomColorToColor[roomColor]
 	
 	if(world):
 		world.registerRoom(self)
@@ -94,7 +102,9 @@ func _onEnter():
 func _onButton(key):
 	print("Error: non-scripted room got button callback with key " + key)
 
+func setHighlighted(high):
+	if(high):
+		self_modulate = Color.purple
+	else:
+		self_modulate = RoomColorToColor[roomColor]
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass

@@ -15,6 +15,7 @@ script = ExtResource( 4 )
 position = Vector2( 64, 0 )
 roomDescription = "You go here and meow
 [b]nya[/b] mew"
+roomColor = 1
 
 [node name="RoomAction" parent="Cell209" index="0" instance=ExtResource( 5 )]
 ActionName = "Do the nya"
@@ -32,6 +33,7 @@ position = Vector2( 64, 64 )
 [node name="ScriptedRoom" parent="." index="3" instance=ExtResource( 3 )]
 position = Vector2( -64, 0 )
 roomSprite = 1
+roomColor = 1
 
 [connection signal="onEnter" from="ScriptedRoom" to="." method="_on_ScriptedRoom_onEnter"]
 [connection signal="onReact" from="ScriptedRoom" to="." method="_on_ScriptedRoom_onReact"]
