@@ -13,6 +13,9 @@ var initialDodgeChance = 0
 
 var fightingState = "" # dodge, block, defocus
 
+# used to fix the spamming of the same lust attack
+var lustMemory:Dictionary = {}
+
 func _init():
 	pass
 
@@ -98,6 +101,12 @@ func processBattleTurn():
 	for effectID in statusEffects.keys():
 		var effect = statusEffects[effectID]
 		effect.processBattleTurn()
+		
+	for topic in lustMemory.keys():
+		lustMemory[topic] -= 1
+		if(lustMemory[topic] <= 0):
+			var _x = lustMemory.erase(topic)
+		
 
 func afterFightEnded():
 	print(getName()+" my fight has ended")
@@ -167,8 +176,10 @@ func getAttackAccuracy(_damageType):
 func recieveDamage(damageType, amount: int):
 	var mult = getRecieveDamageMultiplier(damageType)
 	var newdamage = amount * mult
-	newdamage -= getArmor(damageType)
-	newdamage = max(newdamage, 1)
+	
+	if(amount > 0):
+		newdamage -= getArmor(damageType)
+		newdamage = max(newdamage, 1)
 	
 	if(damageType == DamageType.Physical):
 		var oldpain = pain
@@ -191,7 +202,7 @@ func recieveDamage(damageType, amount: int):
 	if(damageType == DamageType.Stamina):
 		var oldstamina = stamina
 
-		addStamina(newdamage)
+		addStamina(-newdamage)
 		
 		var actualAddstamina = stamina - oldstamina
 		onDamage(damageType, actualAddstamina)
@@ -219,3 +230,38 @@ func setFightingStateBlocking():
 	
 func setFightingStateDefocusing():
 	fightingState = "defocus"
+
+func doRememberTopic(topicName, howLong = 1):
+	lustMemory[topicName] = howLong + 1
+
+func remembersTopic(topicName):
+	return lustMemory.has(topicName)
+
+func reactTease():
+	return [getName()+" smiles", 5]
+
+func reactGrope():
+	if(lust < 50):
+		return [getName()+" is not mused", 0]
+	
+	return [getName()+" is groped", 10]
+
+func reactSelfHumiliation(_topic):
+	if(remembersTopic(_topic)):
+		return [getName()+" frowns", -5]
+	
+	if(_topic == Attack.LustTopic.selfUseMe):
+		doRememberTopic(_topic)
+		return [getName()+" eagerly nods and says 'I happily will'", 10]
+	
+	return ["They don't seem to care much", 0]
+
+func reactHumiliation(_topic):
+	if(remembersTopic(_topic)):
+		return [getName()+" frowns", -5]
+	
+	if(_topic == Attack.LustTopic.humYouSlut):
+		doRememberTopic(_topic)
+		return [getName()+" blushes", 10]
+	
+	return ["They don't seem to care much", 0]

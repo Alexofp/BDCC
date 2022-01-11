@@ -27,28 +27,44 @@ func _run():
 		
 	if(state == "inspecting"):
 		say("It's an enemy, wow")
-		addButton("Return", "Back to fighting", "return")
+		addButton("Back", "Back to fighting", "return")
 	
 	if(state == "physattacks"):
 		say("Pick the attack to use")
 		
 		addAttackButtons(Attack.Category.Physical)
 		
-		addButton("Return", "Back to fighting", "return")
+		addButton("Back", "Back to fighting", "return")
 	
 	if(state == "lustattacks"):
 		say("Pick the attack to use")
 		
 		addAttackButtons(Attack.Category.Lust)
+		addButton("Self-humiliation..", "Opens a submenu", "selfhumattacks")
+		addButton("Humiliate..", "Opens a submenu", "humattacks")
 		
-		addButton("Return", "Back to fighting", "return")
+		addButton("Back", "Back to fighting", "return")
+	
+	if(state == "selfhumattacks"):
+		say("Pick the attack to use")
+		
+		addAttackButtons(Attack.Category.SelfHumiliation)
+		
+		addButton("Back", "Back to fighting", "lustattacks")
+		
+	if(state == "humattacks"):
+		say("Pick the attack to use")
+		
+		addAttackButtons(Attack.Category.Humiliation)
+		
+		addButton("Back", "Back to fighting", "lustattacks")
 	
 	if(state == "specialattacks"):
 		say("Pick the attack to use")
 		
 		addAttackButtons(Attack.Category.Special)
 		
-		addButton("Return", "Back to fighting", "return")
+		addButton("Back", "Back to fighting", "return")
 	
 	if(state == "playerMustDodge"):
 		if(whatPlayerDid != ""):
@@ -112,7 +128,7 @@ func _react(_action: String, _args):
 	if(_action == "inspect"):
 		setState("inspecting")
 		
-	if(_action == "physattacks" || _action == "lustattacks" || _action == "specialattacks"):
+	if(_action == "physattacks" || _action == "lustattacks" || _action == "specialattacks" || _action == "selfhumattacks" || _action == "humattacks"):
 		setState(_action)
 		
 	if(_action == "return"):

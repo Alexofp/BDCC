@@ -1,22 +1,22 @@
 extends Attack
 
 func _init():
-	id = "simplelustattack"
-	category = Category.Lust
+	id = "begattack"
+	category = Category.SelfHumiliation
 	
 func getVisibleName():
-	return "Tease"
+	return "Beg to be used"
 	
 func getVisibleDesc():
-	return "You tease the enemy I dunno"
+	return "You beg the enemy"
 	
 func _doAttack(_attacker, _reciever):
 	var attackerName = _attacker.getName()
 	var recieverName = _reciever.getName()
 	
-	var text = attackerName + " teases " + recieverName
+	var text = attackerName + " gets on their knees and begs 'please use me'"
 	
-	var result = _reciever.reactTease()
+	var result = _reciever.reactSelfHumiliation(Attack.LustTopic.selfUseMe)
 	
 	text += "\n\n"
 	

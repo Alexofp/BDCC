@@ -1,14 +1,14 @@
 extends Attack
 
 func _init():
-	id = "simplelustattack"
+	id = "gropeattack"
 	category = Category.Lust
 	
 func getVisibleName():
-	return "Tease"
+	return "Grope"
 	
 func getVisibleDesc():
-	return "You tease the enemy I dunno"
+	return "You grope the enemy I dunno"
 	
 func _doAttack(_attacker, _reciever):
 	var attackerName = _attacker.getName()
@@ -16,7 +16,7 @@ func _doAttack(_attacker, _reciever):
 	
 	var text = attackerName + " teases " + recieverName
 	
-	var result = _reciever.reactTease()
+	var result = _reciever.reactGrope()
 	
 	text += "\n\n"
 	

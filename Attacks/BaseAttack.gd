@@ -1,7 +1,8 @@
 extends Node
 class_name Attack
 
-enum Category {Physical, Lust, Special}
+enum Category {Physical, Lust, Special, Humiliation, SelfHumiliation}
+enum LustTopic {selfUseMe, humYouSlut}
 
 var id = "baseattack"
 var category = Category.Physical

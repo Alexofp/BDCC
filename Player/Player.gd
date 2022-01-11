@@ -64,7 +64,7 @@ func isPlayer():
 	return true
 
 func _getAttacks():
-	return ["simplepunchattack", "scratchattack", "biteattack", "simplekickattack", "shoveattack", "strongkickattack", "simplelustattack"]
+	return ["simplepunchattack", "scratchattack", "biteattack", "simplekickattack", "shoveattack", "strongkickattack", "simplelustattack", "begattack", "youslutattack", "gropeattack"]
 
 func hasBoundArms():
 	return false
