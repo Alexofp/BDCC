@@ -194,7 +194,7 @@ func _react(_action: String, _args):
 		
 		var attack: Attack = GlobalRegistry.getAttack(savedAIAttackID)
 		if(attack == null):
-			assert("Bad attack: "+savedAIAttackID)
+			assert(false, "Bad attack: "+savedAIAttackID)
 			
 		whatEnemyDid = attack.doAttack(enemyCharacter, GM.pc)
 		savedAIAttackID = ""
@@ -222,7 +222,7 @@ func _react_scene_end(_result):
 func doPlayerAttack(attackID):
 	var attack: Attack = GlobalRegistry.getAttack(attackID)
 	if(attack == null):
-		assert("Bad attack: "+attackID)
+		assert(false, "Bad attack: "+attackID)
 	
 	var text = attack.doAttack(GM.pc, enemyCharacter)
 	return text
@@ -236,7 +236,7 @@ func getBestAIAttack():
 	for attackID in attacks:
 		var attack: Attack = GlobalRegistry.getAttack(attackID)
 		if(attack == null):
-			assert("Bad attack: "+attackID)
+			assert(false, "Bad attack: "+attackID)
 		if(attack.canUse(enemyCharacter, GM.pc)):
 			savedAttacks.append(attackID)
 			savedAttacksWeights.append(attack.getAIScore(enemyCharacter, GM.pc))
@@ -256,7 +256,7 @@ func aiTurn():
 	
 	var attack: Attack = GlobalRegistry.getAttack(attackID)
 	if(attack == null):
-		assert("Bad attack: "+attackID)
+		assert(false, "Bad attack: "+attackID)
 		
 	if(!attack.canBeDodgedByPlayer(enemyCharacter, GM.pc)):	
 		enemyText += attack.doAttack(enemyCharacter, GM.pc)
@@ -309,7 +309,7 @@ func addAttackButtons(category):
 	for attackID in playerAttacks:
 		var attack: Attack = GlobalRegistry.getAttack(attackID)
 		if(attack == null):
-			assert("Bad attack: "+attackID)
+			assert(false, "Bad attack: "+attackID)
 		if(attack.category != category):
 			continue
 			
