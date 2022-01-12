@@ -3,6 +3,7 @@ extends Attack
 func _init():
 	id = "youslutattack"
 	category = Category.Humiliation
+	aiCategory = AICategory.Lust
 	
 func getVisibleName():
 	return "You're a slut"
@@ -16,13 +17,13 @@ func _doAttack(_attacker, _reciever):
 	
 	var text = attackerName + " giggles and says 'You're a slut'"
 	
-	var result = _reciever.reactHumiliation(Attack.LustTopic.humYouSlut)
+	var damageMult = _reciever.reactHumiliation(Attack.LustTopic.humYouSlut)
 	
 	text += "\n\n"
 	
-	text += result[0]
+	var _damage = doDamage(_attacker, _reciever, DamageType.Lust, damageMult * 10)
 	
-	var _damage = doDamage(_attacker, _reciever, DamageType.Lust, result[1])
+	text += _reciever.lustDamageReaction(_damage, _attacker)
 	
 	text += "\n"+recieverName+" got " + str(_damage) + " lust damage"
 	

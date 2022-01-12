@@ -3,6 +3,7 @@ extends Attack
 func _init():
 	id = "simplelustattack"
 	category = Category.Lust
+	aiCategory = AICategory.Lust
 	
 func getVisibleName():
 	return "Tease"
@@ -16,13 +17,13 @@ func _doAttack(_attacker, _reciever):
 	
 	var text = attackerName + " teases " + recieverName
 	
-	var result = _reciever.reactTease()
+	var damageMult = _reciever.reactTease()
 	
 	text += "\n\n"
 	
-	text += result[0]
+	var _damage = doDamage(_attacker, _reciever, DamageType.Lust, damageMult * 10)
 	
-	var _damage = doDamage(_attacker, _reciever, DamageType.Lust, result[1])
+	text += _reciever.lustDamageReaction(_damage, _attacker)
 	
 	text += "\n"+recieverName+" got " + str(_damage) + " lust damage"
 	

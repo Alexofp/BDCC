@@ -7,4 +7,4 @@ func _getName():
 	return "Bob"
 
 func _getAttacks():
-	return ["simplepunchattack", "scratchattack", "biteattack", "simplekickattack", "shoveattack"]
+	return ["simplepunchattack", "scratchattack", "biteattack", "simplekickattack", "shoveattack", "simplelustattack", "trygetupattack"]

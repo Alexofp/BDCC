@@ -3,6 +3,7 @@ extends Attack
 func _init():
 	id = "simplekickattack"
 	category = Category.Physical
+	aiCategory = AICategory.Offensive
 	
 func getVisibleName():
 	return "Kick"
@@ -14,13 +15,10 @@ func _doAttack(_attacker, _reciever):
 	var attackerName = _attacker.getName()
 	var recieverName = _reciever.getName()
 	
-	var chanceToHit = _attacker.getAttackAccuracy(DamageType.Physical)
-	var dodgeChance = _reciever.getDodgeChance(DamageType.Physical)
-	
-	if(!RNG.chance(100.0 * chanceToHit)):
+	if(checkMissed(_attacker, _reciever, DamageType.Physical)):
 		return attackerName + " tries to kick " + recieverName + " but misses and fails completely"
 	
-	if(RNG.chance(100.0 * dodgeChance)):
+	if(checkDodged(_attacker, _reciever, DamageType.Physical)):
 		return attackerName + " tries to kick " + recieverName + " but " + recieverName + " dodges the attack masterfully"
 	
 	var damage = doDamage(_attacker, _reciever, DamageType.Physical, RNG.randi_range(10, 15))

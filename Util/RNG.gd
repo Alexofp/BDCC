@@ -38,7 +38,7 @@ static func pickWeighted(ar, weights: Array):
 	for w in weights:
 		sum += w
 	
-	var r = rand_range(1.0, sum) # Should it be from 1.0 or 0.0?
+	var r = rand_range(0.0, sum) # Should it be from 1.0 or 0.0?
 	for i in range(weights.size()):
 		r -= weights[i]
 		if r <= 0.0:

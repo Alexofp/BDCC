@@ -228,13 +228,24 @@ func doPlayerAttack(attackID):
 	return text
 
 func getBestAIAttack():
-	var attacks = enemyCharacter.getAttacks()
-	var attackID = RNG.pick(attacks)
-	var attack: Attack = GlobalRegistry.getAttack(attackID)
-	if(attack == null):
-		assert("Bad attack: "+attackID)
+	var savedAttacks = []
+	var savedAttacksWeights = []
 	
-	return attackID
+	var attacks = enemyCharacter.getAttacks()
+	
+	for attackID in attacks:
+		var attack: Attack = GlobalRegistry.getAttack(attackID)
+		if(attack == null):
+			assert("Bad attack: "+attackID)
+		if(attack.canUse(enemyCharacter, GM.pc)):
+			savedAttacks.append(attackID)
+			savedAttacksWeights.append(attack.getAIScore(enemyCharacter, GM.pc))
+	
+	if(savedAttacks.size() == 0):
+		print("Error: Couldn't find any possible attacks for the enemy")
+		return "baseattack"
+	
+	return RNG.pickWeighted(savedAttacks, savedAttacksWeights)
 	
 func aiTurn():
 	if(enemyCharacter.getPain() >= enemyCharacter.painThreshold() || enemyCharacter.getLust() >= enemyCharacter.lustThreshold()):

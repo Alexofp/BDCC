@@ -15,7 +15,7 @@ func _doAttack(_attacker, _reciever):
 	#var recieverName = _reciever.getName()
 	
 	var success = false
-	if(RNG.chance(50)):
+	if(RNG.chance(70)):
 		_attacker.removeEffect(StatusEffect.Collapsed)
 		success = true
 	
@@ -29,3 +29,11 @@ func _doAttack(_attacker, _reciever):
 	
 func _canUse(_attacker, _reciever):
 	return _attacker.hasEffect(StatusEffect.Collapsed)
+
+func canBeDodgedByPlayer(_attacker, _reciever):
+	return false
+
+func getAIScore(_attacker, _reciever):
+	if(_attacker.hasEffect(StatusEffect.Collapsed)):
+		return 5.0
+	return 0.0

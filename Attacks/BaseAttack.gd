@@ -2,10 +2,13 @@ extends Node
 class_name Attack
 
 enum Category {Physical, Lust, Special, Humiliation, SelfHumiliation}
+enum AICategory {Unspecified, Offensive, Defensive, Lust, DefensiveLust, DefensivePain}
 enum LustTopic {selfUseMe, humYouSlut}
 
 var id = "baseattack"
 var category = Category.Physical
+var aiCategory = AICategory.Unspecified
+var aiScoreMultiplier = 1
 
 func _init():
 	pass
@@ -106,3 +109,76 @@ func canBeDodgedByPlayer(_attacker, _reciever):
 
 func getAnticipationText(_attacker, _reciever):
 	return "You're about to be bonked by "+getVisibleName()
+
+func getAIScore(_attacker, _reciever):
+	if(aiCategory == AICategory.Unspecified):
+		return 1.0 * aiScoreMultiplier
+		
+	# we want the enemy to have high pain
+	if(aiCategory == AICategory.Offensive):
+		var enemyHealthFraction = _reciever.getPain() / _reciever.painThreshold()
+		enemyHealthFraction = clamp(enemyHealthFraction, 0.0, 1.0)
+		
+		var score = 1.0 + pow(enemyHealthFraction, 3) * 2
+		return score * aiScoreMultiplier
+		
+	# we want us to have low health
+	if(aiCategory == AICategory.DefensivePain):
+		var healthFraction = _attacker.getPain() / _attacker.painThreshold()
+		healthFraction = clamp(healthFraction, 0.0, 1.0)
+		
+		var score = 0.0 + pow(1.0 - healthFraction, 3) * 4
+		return score * aiScoreMultiplier
+		
+	# we want us to have low lust
+	if(aiCategory == AICategory.DefensiveLust):
+		var lustFraction = _attacker.getLust() / _attacker.lustThreshold()
+		lustFraction = clamp(lustFraction, 0.0, 1.0)
+		
+		var score = 0.0 + pow(1.0 - lustFraction, 3) * 4
+		return score * aiScoreMultiplier
+		
+	# we want us to have low pain and lust
+	if(aiCategory == AICategory.Defensive):
+		var lustFraction = _attacker.getLust() / _attacker.lustThreshold()
+		lustFraction = clamp(lustFraction, 0.0, 1.0)
+		var healthFraction = _attacker.getPain() / _attacker.painThreshold()
+		healthFraction = clamp(healthFraction, 0.0, 1.0)
+		
+		var dangerFraction = min(lustFraction, healthFraction)
+		
+		var score = 0.0 + pow(1.0 - dangerFraction, 3) * 4
+		return score * aiScoreMultiplier
+		
+	# we want the enemy to have high lust
+	if(aiCategory == AICategory.Lust):
+		var enemyLustFraction = _reciever.getLust() / _reciever.lustThreshold()
+		enemyLustFraction = clamp(enemyLustFraction, 0.0, 1.0)
+		
+		var score = 1.0 + pow(enemyLustFraction, 3) * 2
+		
+		# if we're lusty we will prioritise lust attacks
+		var lustFraction = _attacker.getLust() / _attacker.lustThreshold()
+		lustFraction = clamp(lustFraction, 0.0, 1.0)
+		if(lustFraction > 0.6):
+			score += 0.5
+		
+		return score * aiScoreMultiplier
+		
+	return 0.0
+
+func checkMissed(_attacker, _reciever, _damageType, customAccuracyMult = 1):
+	if(_reciever.hasEffect(StatusEffect.Collapsed)):
+		return false
+	
+	var chanceToHit = _attacker.getAttackAccuracy(_damageType) * customAccuracyMult
+	if(!RNG.chance(100.0 * chanceToHit)):
+		return true
+	return false
+
+func checkDodged(_attacker, _reciever, _damageType, customDodgeMult = 1):
+	var dodgeChance = _reciever.getDodgeChance(_damageType) * customDodgeMult
+	if(RNG.chance(100.0 * dodgeChance)):
+		return true
+	return false
+	

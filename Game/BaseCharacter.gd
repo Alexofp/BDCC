@@ -238,30 +238,50 @@ func remembersTopic(topicName):
 	return lustMemory.has(topicName)
 
 func reactTease():
-	return [getName()+" smiles", 5]
+	return 1
 
 func reactGrope():
 	if(lust < 50):
-		return [getName()+" is not mused", 0]
+		return 0
 	
-	return [getName()+" is groped", 10]
+	return 1
 
 func reactSelfHumiliation(_topic):
 	if(remembersTopic(_topic)):
-		return [getName()+" frowns", -5]
+		return 0.1
 	
 	if(_topic == Attack.LustTopic.selfUseMe):
 		doRememberTopic(_topic)
-		return [getName()+" eagerly nods and says 'I happily will'", 10]
+		return 2
 	
-	return ["They don't seem to care much", 0]
+	return 0
 
 func reactHumiliation(_topic):
 	if(remembersTopic(_topic)):
-		return [getName()+" frowns", -5]
+		return -2
 	
 	if(_topic == Attack.LustTopic.humYouSlut):
 		doRememberTopic(_topic)
-		return [getName()+" blushes", 10]
+		return -1
 	
-	return ["They don't seem to care much", 0]
+	return 0
+
+func lustDamageReaction(lustDamage, _enemy):
+	if(lustDamage <= -20):
+		return getName() + " got very turned off by the sight"
+	if(lustDamage <= -10):
+		return getName() + " didn't like that at all"
+	if(lustDamage <= -5):
+		return getName() + " sighs and shakes their head"
+	if(lustDamage == 0):
+		return getName() + " didn't seem to care at all"
+	if(lustDamage <= 5):
+		return getName() + " seems intrigued and hides their slight blush"
+	if(lustDamage <= 10):
+		return getName() + " smiles eagerly and watches the show"
+	if(lustDamage <= 10):
+		return getName() + " smiles eagerly and carefully watches " + _enemy.getName()
+	if(lustDamage <= 15):
+		return getName() + " exhalled deeply while rubbing their legs together"
+	if(lustDamage > 15):
+		return getName() + " moans audibly, their eyes burn with desire"

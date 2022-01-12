@@ -3,6 +3,7 @@ extends Attack
 func _init():
 	id = "strongkickattack"
 	category = Category.Special
+	aiCategory = AICategory.Offensive
 	
 func getVisibleName():
 	return "Strong kick"

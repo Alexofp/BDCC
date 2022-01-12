@@ -3,6 +3,7 @@ extends Attack
 func _init():
 	id = "begattack"
 	category = Category.SelfHumiliation
+	aiCategory = AICategory.Lust
 	
 func getVisibleName():
 	return "Beg to be used"
@@ -16,13 +17,13 @@ func _doAttack(_attacker, _reciever):
 	
 	var text = attackerName + " gets on their knees and begs 'please use me'"
 	
-	var result = _reciever.reactSelfHumiliation(Attack.LustTopic.selfUseMe)
+	var damageMult = _reciever.reactSelfHumiliation(Attack.LustTopic.selfUseMe)
 	
 	text += "\n\n"
 	
-	text += result[0]
+	var _damage = doDamage(_attacker, _reciever, DamageType.Lust, damageMult * 10)
 	
-	var _damage = doDamage(_attacker, _reciever, DamageType.Lust, result[1])
+	text += _reciever.lustDamageReaction(_damage, _attacker)
 	
 	text += "\n"+recieverName+" got " + str(_damage) + " lust damage"
 	
