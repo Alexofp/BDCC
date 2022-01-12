@@ -114,3 +114,33 @@ func processBattleTurn():
 
 func processTime(_minutesPassed):
 	updateNonBattleEffects()
+
+func saveData():
+	var data = {
+		"gamename": gamename,
+		"credits": credits,
+		"pain": pain,
+		"lust": lust,
+		"stamina": stamina,
+		"location": location,
+	}
+	
+	data["legs"] = legs.id
+	data["legsData"] = legs.saveData()
+	data["breasts"] = breasts.id
+	data["breastsData"] = breasts.saveData()
+	
+	return data
+
+func loadData(data):
+	gamename = data["gamename"]
+	credits = data["credits"]
+	pain = data["pain"]
+	lust = data["lust"]
+	stamina = data["stamina"]
+	location = data["location"]
+
+	setLegs(GlobalRegistry.getBodypart(data["legs"]))
+	legs.loadData(data["legsData"])
+	setBreasts(GlobalRegistry.getBodypart(data["breasts"]))
+	breasts.loadData(data["breastsData"])

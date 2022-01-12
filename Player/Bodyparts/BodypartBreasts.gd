@@ -7,3 +7,11 @@ var size = 0
 
 func _init():
 	pass
+	
+func saveData():
+	return {
+		"size": size
+	}
+
+func loadData(_data):
+	size = _data["size"]

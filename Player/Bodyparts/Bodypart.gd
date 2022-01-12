@@ -10,3 +10,9 @@ func _init():
 
 func _getDollType():
 	return dollType
+
+func saveData():
+	return {}
+
+func loadData(_data):
+	pass

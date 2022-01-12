@@ -145,36 +145,51 @@ margin_right = 236.0
 margin_bottom = 260.0
 text = "Shower time"
 
-[node name="Button" type="Button" parent="HBoxContainer/Panel2/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="HBoxContainer/Panel2/MarginContainer/VBoxContainer"]
 margin_top = 640.0
 margin_right = 236.0
 margin_bottom = 666.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SaveButton" type="Button" parent="HBoxContainer/Panel2/MarginContainer/VBoxContainer/HBoxContainer2"]
+margin_right = 116.0
+margin_bottom = 26.0
 hint_tooltip = "test"
 size_flags_horizontal = 3
-text = "Hello Im a button"
+text = "Quick save"
+
+[node name="LoadButton" type="Button" parent="HBoxContainer/Panel2/MarginContainer/VBoxContainer/HBoxContainer2"]
+margin_left = 120.0
+margin_right = 236.0
+margin_bottom = 26.0
+hint_tooltip = "test"
+size_flags_horizontal = 3
+text = "Quick load"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/Panel2/MarginContainer/VBoxContainer"]
 margin_top = 670.0
 margin_right = 236.0
 margin_bottom = 696.0
 
-[node name="NextPageButton" type="Button" parent="HBoxContainer/Panel2/MarginContainer/VBoxContainer/HBoxContainer"]
-margin_right = 100.0
+[node name="PrevPageButton" type="Button" parent="HBoxContainer/Panel2/MarginContainer/VBoxContainer/HBoxContainer"]
+margin_right = 116.0
 margin_bottom = 26.0
 hint_tooltip = "test"
 size_flags_horizontal = 3
-text = "Next Page"
+text = "<- Page"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="PrevPageButton" type="Button" parent="HBoxContainer/Panel2/MarginContainer/VBoxContainer/HBoxContainer"]
-margin_left = 104.0
+[node name="NextPageButton" type="Button" parent="HBoxContainer/Panel2/MarginContainer/VBoxContainer/HBoxContainer"]
+margin_left = 120.0
 margin_right = 236.0
 margin_bottom = 26.0
 hint_tooltip = "test"
 size_flags_horizontal = 3
-text = "Previous Page"
+text = "Page ->"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -268,5 +283,7 @@ margin_top = -128.289
 margin_right = 280.291
 margin_bottom = -96.289
 
-[connection signal="pressed" from="HBoxContainer/Panel2/MarginContainer/VBoxContainer/HBoxContainer/NextPageButton" to="." method="_on_NextPageButton_pressed"]
+[connection signal="pressed" from="HBoxContainer/Panel2/MarginContainer/VBoxContainer/HBoxContainer2/SaveButton" to="." method="_on_SaveButton_pressed"]
+[connection signal="pressed" from="HBoxContainer/Panel2/MarginContainer/VBoxContainer/HBoxContainer2/LoadButton" to="." method="_on_LoadButton_pressed"]
 [connection signal="pressed" from="HBoxContainer/Panel2/MarginContainer/VBoxContainer/HBoxContainer/PrevPageButton" to="." method="_on_PrevPageButton_pressed"]
+[connection signal="pressed" from="HBoxContainer/Panel2/MarginContainer/VBoxContainer/HBoxContainer/NextPageButton" to="." method="_on_NextPageButton_pressed"]

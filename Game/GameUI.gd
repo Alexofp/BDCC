@@ -178,3 +178,13 @@ func getCharactersPanel():
 
 func setCharactersPanelVisible(vis):
 	charactersPanel.visible = vis
+
+func loadingSavefileFinished():
+	playerPanel.loadingSavefileFinished()
+
+func _on_SaveButton_pressed():
+	GM.saveGame("user://savegame.save")
+
+
+func _on_LoadButton_pressed():
+	GM.loadGame("user://savegame.save")

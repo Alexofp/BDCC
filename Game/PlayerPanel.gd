@@ -29,6 +29,10 @@ func _ready():
 func on_player_bodypartchange():
 	doll.loadFromPlayer(GM.pc)
 
+func loadingSavefileFinished():
+	doll.loadFromPlayer(GM.pc)
+	updateUI()
+
 func on_player_statchange():
 	updateUI()
 

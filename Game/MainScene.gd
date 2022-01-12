@@ -76,3 +76,6 @@ func _on_GameUI_on_option_button(method, args):
 func reRun():
 	if(sceneStack.size() > 0):
 		sceneStack.back().run()
+
+func loadingSavefileFinished():
+	reRun()
