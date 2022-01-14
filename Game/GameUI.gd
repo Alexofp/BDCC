@@ -183,8 +183,8 @@ func loadingSavefileFinished():
 	playerPanel.loadingSavefileFinished()
 
 func _on_SaveButton_pressed():
-	GM.saveGame("user://savegame.save")
+	SAVE.saveGame("user://savegame.save")
 
 
 func _on_LoadButton_pressed():
-	GM.loadGame("user://savegame.save")
+	SAVE.loadGame("user://savegame.save")

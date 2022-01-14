@@ -37,3 +37,11 @@ func combine(_args = []):
 		turns = max(_args[0], turns)
 	else:
 		turns = max(3, turns)
+
+func saveData():
+	return {
+		"turns": turns,
+	}
+	
+func loadData(_data):
+	turns = SAVE.loadVar(_data, "turns", 3)

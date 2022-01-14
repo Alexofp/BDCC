@@ -54,3 +54,9 @@ func getRecievedDamageMod(_damageType):
 
 func getDamageMultiplierMod(_damageType):
 	return 1
+
+func saveData():
+	return {}
+	
+func loadData(_data):
+	pass

@@ -91,6 +91,20 @@ func removeEffect(effectID: String):
 		statusEffects[effectID].queue_free()
 		var _wasremoved = statusEffects.erase(effectID)
 	
+func saveStatusEffectsData():
+	var data = {}
+	for effectID in statusEffects:
+		data[effectID] = statusEffects[effectID].saveData()
+	return data
+	
+func loadStatusEffectsData(data):
+	for effectID in data:
+		var effect = GlobalRegistry.getStatusEffect(effectID)
+		effect.setCharacter(self)
+		statusEffects[effectID] = effect
+		
+		effect.loadData(data[effectID])
+	
 func updateEffectPanel(panel: StatusEffectsPanel):
 	panel.clearBattleEffects()
 	for effectID in statusEffects.keys():

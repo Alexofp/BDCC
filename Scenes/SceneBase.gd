@@ -160,3 +160,21 @@ func addButtonAt(index:int, text: String, tooltip: String = "", method: String =
 	
 func addDisabledButtonAt(index:int, text: String, tooltip: String = ""):
 	GM.ui.addDisabledButtonAt(index, text, tooltip)
+
+func canSave():
+	return true
+
+func saveData():
+	var data = {}
+	data["state"] = state
+	data["sceneArgs"] = sceneArgs
+	data["currentCharacters"] = currentCharacters
+	data["fightCharacter"] = fightCharacter
+	
+	return data
+
+func loadData(data):
+	state = SAVE.loadVar(data, "state", "")
+	sceneArgs = SAVE.loadVar(data, "sceneArgs")
+	currentCharacters = SAVE.loadVar(data, "currentCharacters", [])
+	fightCharacter = SAVE.loadVar(data, "fightCharacter", "")

@@ -14,4 +14,4 @@ func saveData():
 	}
 
 func loadData(_data):
-	size = _data["size"]
+	size = SAVE.loadVar(_data, "size", 0)

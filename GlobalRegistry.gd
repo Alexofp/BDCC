@@ -97,6 +97,8 @@ func getCharacter(id: String):
 		return null
 	return characters[id]
 
+func getCharacters():
+	return characters
 
 func registerAttack(path: String):
 	var attack = load(path)

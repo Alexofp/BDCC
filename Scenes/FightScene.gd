@@ -322,3 +322,27 @@ func addAttackButtons(category):
 			addButton(attack.getVisibleName(),  desc, "doattack", [attack.id])
 		else:
 			addDisabledButton(attack.getVisibleName(),  desc)
+
+func saveData():
+	var data = .saveData()
+	
+	data["enemyID"] = enemyID
+	data["whatPlayerDid"] = whatPlayerDid
+	data["whatEnemyDid"] = whatEnemyDid
+	data["whatHappened"] = whatHappened
+	data["battleState"] = battleState
+	data["savedAIAttackID"] = savedAIAttackID
+	
+	return data
+	
+func loadData(data):
+	.loadData(data)
+	
+	enemyID = SAVE.loadVar(data, "enemyID", "")
+	whatPlayerDid = SAVE.loadVar(data, "whatPlayerDid", "")
+	whatEnemyDid = SAVE.loadVar(data, "whatEnemyDid", "")
+	whatHappened = SAVE.loadVar(data, "whatHappened", "")
+	battleState = SAVE.loadVar(data, "battleState", "")
+	savedAIAttackID = SAVE.loadVar(data, "savedAIAttackID", "")
+	enemyCharacter = GlobalRegistry.getCharacter(enemyID)
+	setFightCharacter(enemyID)

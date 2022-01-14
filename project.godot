@@ -154,6 +154,7 @@ config/icon="res://icon.png"
 
 GlobalRegistry="*res://GlobalRegistry.gd"
 GM="*res://Game/GM.gd"
+SAVE="*res://Game/SaveManager.gd"
 
 [debug]
 

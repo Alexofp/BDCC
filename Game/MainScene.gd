@@ -11,20 +11,6 @@ var sceneStack: Array = []
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	GM.main = self
-#	theScene = GlobalRegistry.getScene("TestScene")
-#	theScene.initScene(gameUI, self)
-#	self.add_child(theScene)
-
-
-	#theScene = prepareScene("TestScene")
-	
-	#theScene.connect("addButton", gameUI, "_on_SceneBase_addButton")
-	#theScene.connect("addDisabledButton", gameUI, "_on_SceneBase_addDisabledButton")
-	#theScene.connect("clearButtons", gameUI, "_on_SceneBase_clearButtons")
-	#theScene.connect("clearText", gameUI, "_on_SceneBase_clearText")
-	#theScene.connect("sayText", gameUI, "_on_SceneBase_sayText")
-	
-	#theScene.run()
 	
 	runScene("WorldScene")#"TestScene")) #WorldScene
 	#runScene("FightScene", ["testchar"])
@@ -38,10 +24,6 @@ func runScene(id, _args = []):
 	scene.initScene(_args)
 	scene.run()
 	return scene
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
 
 func removeScene(scene, args = []):
 	if(sceneStack.has(scene)):
@@ -79,3 +61,41 @@ func reRun():
 
 func loadingSavefileFinished():
 	reRun()
+
+func canSave():
+	for scene in sceneStack:
+		if(!scene.canSave()):
+			return false
+	
+	return true
+
+func saveData():
+	var data = {}
+	data["scenes"] = []
+	for scene in sceneStack:
+		var sceneData = {}
+		sceneData["id"] = scene.sceneID
+		sceneData["sceneData"] = scene.saveData()
+		data["scenes"].append(sceneData)
+	
+	return data
+
+func loadData(data):
+	var scenes = SAVE.loadVar(data, "scenes", [])
+	
+	for scene in sceneStack:
+		scene.queue_free()
+	sceneStack = []
+	
+	GM.ui.setCharacterData(null)
+	GM.ui.setCharactersPanelVisible(false)
+	for sceneData in scenes:
+		var id = SAVE.loadVar(sceneData, "id", "error")
+		
+		var scene = GlobalRegistry.getScene(id)
+		add_child(scene)
+		sceneStack.append(scene)
+		print("Starting scene "+id)
+		
+		#scene.initScene(_args)
+		scene.loadData(SAVE.loadVar(sceneData, "sceneData", {}))

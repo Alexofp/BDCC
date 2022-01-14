@@ -129,18 +129,21 @@ func saveData():
 	data["legsData"] = legs.saveData()
 	data["breasts"] = breasts.id
 	data["breastsData"] = breasts.saveData()
+	data["statusEffects"] = saveStatusEffectsData()
 	
 	return data
 
 func loadData(data):
-	gamename = data["gamename"]
-	credits = data["credits"]
-	pain = data["pain"]
-	lust = data["lust"]
-	stamina = data["stamina"]
-	location = data["location"]
+	gamename = SAVE.loadVar(data, "gamename", "Player")
+	credits = SAVE.loadVar(data, "credits", 0)
+	pain = SAVE.loadVar(data, "pain", 0)
+	lust = SAVE.loadVar(data, "lust", 0)
+	stamina = SAVE.loadVar(data, "stamina", 100)
+	location = SAVE.loadVar(data, "location", "ScriptedRoom")
 
-	setLegs(GlobalRegistry.getBodypart(data["legs"]))
-	legs.loadData(data["legsData"])
-	setBreasts(GlobalRegistry.getBodypart(data["breasts"]))
-	breasts.loadData(data["breastsData"])
+	setLegs(GlobalRegistry.getBodypart(SAVE.loadVar(data, "legs", "humanleg")))
+	legs.loadData(SAVE.loadVar(data, "legsData", {}))
+	setBreasts(GlobalRegistry.getBodypart(SAVE.loadVar(data, "breasts", "humanbreasts")))
+	breasts.loadData(SAVE.loadVar(data, "breastsData", {}))
+	
+	loadStatusEffectsData(SAVE.loadVar(data, "statusEffects", {}))
