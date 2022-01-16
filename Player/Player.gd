@@ -115,6 +115,31 @@ func processBattleTurn():
 func processTime(_minutesPassed):
 	updateNonBattleEffects()
 
+func getGender():
+	return Gender.Female
+
+func getChatColor():
+	var gender = getGender()
+	
+	if(gender == Gender.Male):
+		return "#92B3DD"
+	if(gender == Gender.Female):
+		return "#FFB7B2"
+	if(gender == Gender.Androgynous):
+		return "#DABFFF"
+	if(gender == Gender.Other):
+		return "#C3E8BE"
+	
+	return "red"
+
+func formatSay(text):
+	var color = getChatColor()
+	
+	if(isGagged()):
+		text = Util.muffledSpeech(text)
+	
+	return "[color="+color+"]\""+text+"\"[/color]"
+
 func saveData():
 	var data = {
 		"gamename": gamename,

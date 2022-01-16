@@ -1,6 +1,14 @@
 extends Node
 class_name BaseCharacter
 
+# used for player/npc chat color and pronouns (can be overriden)
+enum Gender {
+	Male,
+	Female,
+	Androgynous,
+	Other,
+}
+
 #Base class that has all the functions
 signal stat_changed
 var pain:int = 0
@@ -299,3 +307,115 @@ func lustDamageReaction(lustDamage, _enemy):
 		return getName() + " exhalled deeply while rubbing their legs together"
 	if(lustDamage > 15):
 		return getName() + " moans audibly, their eyes burn with desire"
+
+func getGender():
+	return Gender.Other
+
+func getPronounGender():
+	return getGender()
+
+func getChatColor():
+	var gender = getGender()
+	
+	if(gender == Gender.Male):
+		return "#3E84E0"
+	if(gender == Gender.Female):
+		return "#FF837A"
+	if(gender == Gender.Androgynous):
+		return "#BA82FF"
+	if(gender == Gender.Other):
+		return "#77D86C"
+	
+	return "red"
+
+func formatSay(text):
+	var color = getChatColor()
+	
+	return "[color="+color+"]\""+text+"\"[/color]"
+
+func heShe():
+	var gender = getPronounGender()
+	
+	if(gender == Gender.Male):
+		return "he"
+	if(gender == Gender.Female):
+		return "she"
+	if(gender == Gender.Androgynous):
+		return "they"
+	if(gender == Gender.Other):
+		return "it"
+		
+func hisHer():
+	var gender = getPronounGender()
+	
+	if(gender == Gender.Male):
+		return "his"
+	if(gender == Gender.Female):
+		return "her"
+	if(gender == Gender.Androgynous):
+		return "their"
+	if(gender == Gender.Other):
+		return "its"
+		
+func himHer():
+	var gender = getPronounGender()
+	
+	if(gender == Gender.Male):
+		return "him"
+	if(gender == Gender.Female):
+		return "her"
+	if(gender == Gender.Androgynous):
+		return "them"
+	if(gender == Gender.Other):
+		return "it"
+
+func isAre():
+	var gender = getPronounGender()
+	
+	if(gender == Gender.Male):
+		return "is"
+	if(gender == Gender.Female):
+		return "is"
+	if(gender == Gender.Androgynous):
+		return "are"
+	if(gender == Gender.Other):
+		return "is"
+
+func hasHave():
+	var gender = getPronounGender()
+	
+	if(gender == Gender.Male):
+		return "has"
+	if(gender == Gender.Female):
+		return "has"
+	if(gender == Gender.Androgynous):
+		return "have"
+	if(gender == Gender.Other):
+		return "has"
+
+func himselfHerself():
+	var gender = getPronounGender()
+	
+	if(gender == Gender.Male):
+		return "himself"
+	if(gender == Gender.Female):
+		return "herself"
+	if(gender == Gender.Androgynous):
+		return "themself"
+	if(gender == Gender.Other):
+		return "itself"
+
+func verbS(verbWithNoS, verbWithS = null):
+	var gender = getPronounGender()
+	
+	if(verbWithS == null):
+		verbWithS = verbWithNoS + "s"
+	
+	if(gender == Gender.Male):
+		return verbWithS
+	if(gender == Gender.Female):
+		return verbWithS
+	if(gender == Gender.Androgynous):
+		return verbWithNoS
+	if(gender == Gender.Other):
+		return verbWithS

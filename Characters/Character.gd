@@ -1,6 +1,8 @@
 extends BaseCharacter
 class_name Character
 
+const Bob = "testchar"
+
 var id = "errorerror"
 
 func _ready():

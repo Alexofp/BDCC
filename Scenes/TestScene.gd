@@ -7,6 +7,7 @@ func _run():
 		addButton("meow meow", "1", "option1")
 		addButton("mew!", "2", "option2")
 		addDisabledButton("bark", "no awo")
+		addButton("replace scene!", "2", "startfight")
 		
 	if(state == "option1"):
 		say("You selected 1")
@@ -33,6 +34,10 @@ func _react(_action: String, _args):
 		runScene("TestScene", "meowmeow")
 		return
 	if(_action == "endthescene"):
+		endScene("test arg")
+		return
+	if(_action == "startfight"):
+		runScene("FightScene", ["testchar"])
 		endScene("test arg")
 		return
 	
