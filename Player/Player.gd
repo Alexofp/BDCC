@@ -14,6 +14,8 @@ var ears
 var tail
 var breasts: BodypartBreasts
 var hair
+var pickedGender = Gender.Female
+var pronounsGender = null
 
 func _init():
 	initialDodgeChance = 0.05 # Player has a small chance to dodge anything
@@ -116,7 +118,18 @@ func processTime(_minutesPassed):
 	updateNonBattleEffects()
 
 func getGender():
-	return Gender.Female
+	return pickedGender
+
+func getPronounGender():
+	if(pronounsGender == null):
+		return getGender()
+	return pronounsGender
+
+func setGender(newgender):
+	pickedGender = newgender
+
+func setPronounGender(newgender):
+	pronounsGender = newgender
 
 func getChatColor():
 	var gender = getGender()
@@ -148,6 +161,8 @@ func saveData():
 		"lust": lust,
 		"stamina": stamina,
 		"location": location,
+		"pickedGender": pickedGender,
+		"pronounsGender": pronounsGender,
 	}
 	
 	data["legs"] = legs.id
@@ -165,6 +180,8 @@ func loadData(data):
 	lust = SAVE.loadVar(data, "lust", 0)
 	stamina = SAVE.loadVar(data, "stamina", 100)
 	location = SAVE.loadVar(data, "location", "ScriptedRoom")
+	pickedGender = SAVE.loadVar(data, "pickedGender", Gender.Female)
+	pronounsGender = SAVE.loadVar(data, "pronounsGender", null)
 
 	setLegs(GlobalRegistry.getBodypart(SAVE.loadVar(data, "legs", "humanleg")))
 	legs.loadData(SAVE.loadVar(data, "legsData", {}))
