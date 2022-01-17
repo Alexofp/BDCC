@@ -52,6 +52,10 @@ func setLocation(newRoomID:String):
 func getName() -> String:
 	return gamename
 	
+func setName(newname: String):
+	gamename = newname
+	emit_signal("stat_changed")
+	
 func addCredits(_c: int):
 	credits += _c
 	emit_signal("stat_changed")

@@ -18,6 +18,9 @@ onready var locationLabel = $HBoxContainer/Panel2/MarginContainer/VBoxContainer/
 onready var characterPanel = $HBoxContainer/Panel2/MarginContainer/VBoxContainer/CharacterPanel
 onready var playerPanel = $HBoxContainer/Panel/MarginContainer/PlayerPanel
 onready var charactersPanel = $HBoxContainer/Panel2/MarginContainer/VBoxContainer/CharactersPanel
+var uiTextboxScene = preload("res://UI/UITextbox.tscn")
+onready var textcontainer = $HBoxContainer/VBoxContainer2/ScrollContainer/VBoxContainer
+var textboxes: Dictionary = {}
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -179,12 +182,30 @@ func getCharactersPanel():
 func setCharactersPanelVisible(vis):
 	charactersPanel.visible = vis
 
+func addUITextbox(id):
+	assert(!textboxes.has(id), "Trying to add a textbox with the same id. Id is "+id)
+	
+	var uitextbox = uiTextboxScene.instance()
+	uitextbox.id = id
+	textcontainer.add_child(uitextbox)
+	textboxes[id] = uitextbox
+
+func getUIdata(id):
+	assert(textboxes.has(id), "Trying to get info from bad id. Id is "+id)
+	return textboxes[id].getData()
+
+func clearUItextboxes():
+	for id in textboxes.keys():
+		var textbox = textboxes[id]
+		textcontainer.remove_child(textbox)
+		textbox.queue_free()
+	textboxes = {}
+
 func loadingSavefileFinished():
 	playerPanel.loadingSavefileFinished()
 
 func _on_SaveButton_pressed():
 	SAVE.saveGame("user://savegame.save")
-
 
 func _on_LoadButton_pressed():
 	SAVE.loadGame("user://savegame.save")

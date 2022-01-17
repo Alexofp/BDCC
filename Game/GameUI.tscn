@@ -227,14 +227,14 @@ size_flags_vertical = 3
 
 [node name="RichTextLabel" type="RichTextLabel" parent="HBoxContainer/VBoxContainer2/ScrollContainer/VBoxContainer"]
 margin_right = 710.0
-margin_bottom = 582.0
+margin_bottom = 25.0
 size_flags_horizontal = 3
-size_flags_vertical = 3
 custom_fonts/bold_italics_font = SubResource( 2 )
 custom_fonts/italics_font = SubResource( 3 )
 custom_fonts/bold_font = SubResource( 4 )
 custom_fonts/normal_font = SubResource( 5 )
 bbcode_enabled = true
+fit_content_height = true
 
 [node name="GridContainer" type="GridContainer" parent="HBoxContainer/VBoxContainer2"]
 margin_top = 620.0

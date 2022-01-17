@@ -11,6 +11,7 @@ func _run():
 		addButton("replace scene!", "2", "startfight")
 		addButton("pick gender", "2", "pickgender")
 		addButton("pick pronouns", "2", "pickpronouns")
+		addButton("change name", "2", "pickname")
 		
 	if(state == "pickgender"):
 		say("Pick")
@@ -27,6 +28,12 @@ func _run():
 		addButton("Androgynous", "2", "setpronouns", [BaseCharacter.Gender.Androgynous])
 		addButton("Other", "2", "setpronouns", [BaseCharacter.Gender.Other])
 		addButton("Same as gender", "2", "setpronouns", [null])
+		addButton("back", "2", "")
+		
+	if(state == "pickname"):
+		say("Type in your name here:")
+		addTextbox("player_name")
+		addButton("Confirm", "2", "setname")
 		addButton("back", "2", "")
 		
 	if(state == "option1"):
@@ -66,6 +73,10 @@ func _react(_action: String, _args):
 		return
 	if(_action == "setpronouns"):
 		GM.pc.setPronounGender(_args[0])
+		setState("")
+		return
+	if(_action == "setname"):
+		GM.pc.setName(getTextboxData("player_name"))
 		setState("")
 		return
 	

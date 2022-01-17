@@ -45,6 +45,7 @@ func initScene(args = []):
 func run():
 	GM.ui.clearText()
 	GM.ui.clearButtons()
+	GM.ui.clearUItextboxes()
 	_run()
 	GM.pc.updateEffectPanel(GM.ui.getPlayerStatusEffectsPanel())
 	if(fightCharacter):
@@ -160,6 +161,12 @@ func addButtonAt(index:int, text: String, tooltip: String = "", method: String =
 	
 func addDisabledButtonAt(index:int, text: String, tooltip: String = ""):
 	GM.ui.addDisabledButtonAt(index, text, tooltip)
+
+func addTextbox(id):
+	GM.ui.addUITextbox(id)
+
+func getTextboxData(id):
+	return GM.ui.getUIdata(id)
 
 func canSave():
 	return true
