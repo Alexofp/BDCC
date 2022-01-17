@@ -13,9 +13,8 @@ func _ready():
 	registerBodypartFolder("res://Player/Bodyparts/Legs/")
 	registerBodypartFolder("res://Player/Bodyparts/Breasts/")
 	
-	registerScene("TestScene", "res://Scenes/TestScene.tscn")
-	registerScene("WorldScene", "res://Scenes/WorldScene.tscn")
-	registerScene("FightScene", "res://Scenes/FightScene.tscn")
+	registerSceneFolder("res://Scenes/")
+	registerSceneFolder("res://Scenes/Intro/")
 	
 	registerCharacterFolder("res://Characters/")
 	
@@ -24,20 +23,39 @@ func _ready():
 	registerStatusEffectFolder("res://StatusEffect/")
 	
 
-func registerScene(id: String, path: String):
+func registerScene(path: String):
 	var scene = load(path)
 	if(!scene):
-		print("ERROR: couldn't load scene "+id+" from path "+path)
+		print("ERROR: couldn't load scene from path "+path)
 		return
-	scenes[id] = scene
+	var sceneObject = scene.new()
+	scenes[sceneObject.sceneID] = sceneObject
 
 func getScene(id: String):
 	if(!scenes.has(id)):
 		print("ERROR: scene with the id "+id+" wasn't found")
 		return null
-	var scene = scenes[id].instance()
-	scene.sceneID = id
+	var scene = scenes[id].duplicate()
+	scene.name = scene.sceneID
 	return scene
+
+func registerSceneFolder(folder: String):
+	var dir = Directory.new()
+	if dir.open(folder) == OK:
+		dir.list_dir_begin()
+		var file_name = dir.get_next()
+		while file_name != "":
+			if dir.current_is_dir():
+				pass
+				#print("Found directory: " + file_name)
+			else:
+				if(file_name.get_extension() == "gd"):
+					var full_path = folder.plus_file(file_name)
+					print("Registered scene: " + full_path)
+					registerScene(full_path)
+			file_name = dir.get_next()
+	else:
+		print("An error occurred when trying to access the path "+folder)
 
 func registerBodypart(path: String):
 	var bodypart = load(path)

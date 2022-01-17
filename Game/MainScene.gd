@@ -28,9 +28,10 @@ func runScene(id, _args = []):
 func removeScene(scene, args = []):
 	if(sceneStack.has(scene)):
 		if(scene == sceneStack.back()):
+			var savedTag = scene.sceneTag
 			sceneStack.erase(scene)
 			if(sceneStack.size() > 0):
-				sceneStack.back().react_scene_end(args)
+				sceneStack.back().react_scene_end(savedTag, args)
 			if(sceneStack.size() > 0):
 				sceneStack.back().run()
 		else:

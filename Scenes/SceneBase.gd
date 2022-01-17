@@ -13,6 +13,7 @@ var sceneArgs = []
 var sceneID: String = "UNREGISTERED_SCENE"
 var currentCharacters: Array = []
 var fightCharacter: String = ""
+var sceneTag = ""
 #var currentCharacter: String = ""
 
 func _run():
@@ -29,7 +30,7 @@ func _react(_action: String, _args):
 	#else:
 	#	print("Error: method with the name '"+method+"' is not found in "+name + " ("+sceneID+")")
 
-func _react_scene_end(_result):
+func _react_scene_end(_tag, _result):
 	pass
 
 func _initScene(_args = []):
@@ -134,14 +135,15 @@ func endScene(result = []):
 	
 	queue_free()
 
-func runScene(id: String, args = []):
-	GM.main.runScene(id, args)
+func runScene(id: String, args = [], tag = ""):
+	var scene = GM.main.runScene(id, args)
+	scene.sceneTag = tag
 
-func react_scene_end(_result):
+func react_scene_end(_tag, _result):
 	print(name+": The scene before me has ended")
 	updateCharacter()
 	updateFightCharacter()
-	_react_scene_end(_result)
+	_react_scene_end(_tag, _result)
 
 func addNextButton(method: String, args = []):
 	if(GM.ui):
@@ -177,6 +179,7 @@ func saveData():
 	data["sceneArgs"] = sceneArgs
 	data["currentCharacters"] = currentCharacters
 	data["fightCharacter"] = fightCharacter
+	data["sceneTag"] = sceneTag
 	
 	return data
 
@@ -185,3 +188,4 @@ func loadData(data):
 	sceneArgs = SAVE.loadVar(data, "sceneArgs")
 	currentCharacters = SAVE.loadVar(data, "currentCharacters", [])
 	fightCharacter = SAVE.loadVar(data, "fightCharacter", "")
+	sceneTag = SAVE.loadVar(data, "sceneTag", "")

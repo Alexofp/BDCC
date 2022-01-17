@@ -1,12 +1,15 @@
 extends "res://Scenes/SceneBase.gd"
 
+func _init():
+	sceneID = "TestScene"
+
 func _run():
 	if(state == ""):
 		say("Hello world!\n")
 		say("nya [b]bold nya[/b], also [i]\"MEOW\"[/i]\n")
 		say(GM.pc.getName() + " grabbed " + GM.pc.hisHer() + " something and headpatted "+ GM.pc.himselfHerself() + " before saying "+Util.sayPlayer("Hello world"))
-		addButton("meow meow", "1", "option1")
-		addButton("mew!", "2", "option2")
+		addButton("stop", "1", "option1")
+		addButton("run same scene", "2", "option2")
 		addDisabledButton("bark", "no awo")
 		addButton("replace scene!", "2", "startfight")
 		addButton("pick gender", "2", "pickgender")
@@ -58,7 +61,7 @@ func _run():
 
 func _react(_action: String, _args):
 	if(_action == "addscenetest"):
-		runScene("TestScene", "meowmeow")
+		runScene("TestScene", "meowmeow", "mytag")
 		return
 	if(_action == "endthescene"):
 		endScene("test arg")
@@ -82,6 +85,6 @@ func _react(_action: String, _args):
 	
 	setState(_action)
 
-func _react_scene_end(_result):
-	print("I got result: "+str(_result))
+func _react_scene_end(_tag, _result):
+	print("I got result: "+str(_result)+" and tag '"+_tag+"'")
 	setState("")

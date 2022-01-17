@@ -9,6 +9,9 @@ var whatHappened: String = ""
 var battleState = ""
 var savedAIAttackID = ""
 
+func _init():
+	sceneID = "FightScene"
+
 func _initScene(_args = []):
 	enemyID = _args[0]
 	enemyCharacter = GlobalRegistry.getCharacter(enemyID)
@@ -216,7 +219,7 @@ func _react(_action: String, _args):
 		endScene(battleState)
 		return
 
-func _react_scene_end(_result):
+func _react_scene_end(_tag, _result):
 	pass
 
 func doPlayerAttack(attackID):

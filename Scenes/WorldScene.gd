@@ -1,5 +1,8 @@
 extends SceneBase
 
+func _init():
+	sceneID = "WorldScene"
+
 func _run():
 	var roomID = GM.pc.location
 	var _roomInfo = GM.world.getRoomByID(roomID)
