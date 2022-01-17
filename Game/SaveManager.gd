@@ -1,6 +1,7 @@
 extends Node
 
 var currentSavefileVersion = 1
+const useJson = true # Json is easier to read, str2var supports more types? Json will probably be dropped at some point
 
 func saveData():
 	var data = {
@@ -55,7 +56,11 @@ func saveGame(_path):
 	save_game.open(_path, File.WRITE)
 	var saveData = saveData()
 	
-	save_game.store_line(JSON.print(saveData, "\t", true))
+	if(useJson):
+		save_game.store_line(JSON.print(saveData, "\t", true))
+	else:
+		save_game.store_line(var2str(saveData))
+	
 	save_game.close()
 	
 	
@@ -66,7 +71,11 @@ func loadGame(_path):
 		return # Error! We don't have a save to load.
 	
 	save_game.open(_path, File.READ)
-	var saveData = parse_json(save_game.get_as_text())
+	var saveData
+	if(useJson):
+		saveData = parse_json(save_game.get_as_text())
+	else:
+		saveData = str2var(save_game.get_as_text())
 	loadData(saveData)
 	save_game.close()
 
@@ -79,6 +88,6 @@ func loadVar(data: Dictionary, key, nullvalue = null):
 		printerr("Warning: value mismatch when loading a save. Key '"+key+"' has type "+Util.variantTypeToString(typeof(data[key]))+" and default value has type "+Util.variantTypeToString(typeof(nullvalue))+". Is that an error? File: "+get_stack()[1]["source"]+" Line: "+str(get_stack()[1]["line"]))
 		
 	if(data[key] == null && nullvalue != null):
-		printerr("Warning: loaded value is null while the default value isn't. Is that correct?")
+		printerr("Warning: loaded value is null while the default value isn't. Is that correct? File: "+get_stack()[1]["source"]+" Line: "+str(get_stack()[1]["line"]))
 		
 	return data[key]
