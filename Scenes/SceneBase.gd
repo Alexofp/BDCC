@@ -189,3 +189,4 @@ func loadData(data):
 	currentCharacters = SAVE.loadVar(data, "currentCharacters", [])
 	fightCharacter = SAVE.loadVar(data, "fightCharacter", "")
 	sceneTag = SAVE.loadVar(data, "sceneTag", "")
+	updateCharacter()

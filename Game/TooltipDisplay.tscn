@@ -66,5 +66,6 @@ margin_top = 32.0
 margin_right = 250.0
 margin_bottom = 52.0
 size_flags_horizontal = 3
+autowrap = true
 
 [node name="Tween" type="Tween" parent="."]

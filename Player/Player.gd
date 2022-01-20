@@ -53,6 +53,11 @@ func getName() -> String:
 	return gamename
 	
 func setName(newname: String):
+	newname = newname.replace("{", "")
+	newname = newname.replace("}", "")
+	if(newname == ""):
+		newname = "Player"
+	
 	gamename = newname
 	emit_signal("stat_changed")
 	

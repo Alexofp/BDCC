@@ -54,6 +54,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://UI/FlexGridContainer.gd"
 }, {
+"base": "Object",
+"class": "GameParser",
+"language": "GDScript",
+"path": "res://Util/GameParser.gd"
+}, {
 "base": "Sprite",
 "class": "GameRoom",
 "language": "GDScript",
@@ -94,6 +99,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scenes/SceneBase.gd"
 }, {
+"base": "Object",
+"class": "SimpleParser",
+"language": "GDScript",
+"path": "res://Util/SimpleParser.gd"
+}, {
 "base": "Node",
 "class": "StatusEffect",
 "language": "GDScript",
@@ -129,6 +139,7 @@ _global_script_class_icons={
 "DamageType": "",
 "Doll": "",
 "FlexGridContainer": "",
+"GameParser": "",
 "GameRoom": "",
 "GameUI": "",
 "GameWorld": "",
@@ -137,6 +148,7 @@ _global_script_class_icons={
 "RNG": "",
 "RoomAction": "",
 "SceneBase": "",
+"SimpleParser": "",
 "StatusEffect": "",
 "StatusEffectBase": "",
 "StatusEffectsPanel": "",

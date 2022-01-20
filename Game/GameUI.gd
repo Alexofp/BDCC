@@ -21,10 +21,13 @@ onready var charactersPanel = $HBoxContainer/Panel2/MarginContainer/VBoxContaine
 var uiTextboxScene = preload("res://UI/UITextbox.tscn")
 onready var textcontainer = $HBoxContainer/VBoxContainer2/ScrollContainer/VBoxContainer
 var textboxes: Dictionary = {}
+var gameParser: GameParser
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	GM.ui = self
+	
+	gameParser = GameParser.new()
 	
 	for n in buttonsCountPerPage:
 		var newbutton = optionButtonScene.instance()
@@ -42,7 +45,7 @@ func _ready():
 	#	addDisabledButton("mew", "fuck"+str(i))
 		
 func say(text: String):
-	textOutput.bbcode_text += text
+	textOutput.bbcode_text += gameParser.executeString(text)
 
 func clearText():
 	textOutput.bbcode_text = ""
