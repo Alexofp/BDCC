@@ -67,6 +67,34 @@ position = Vector2( 384, 128 )
 [node name="Room15" parent="." instance=ExtResource( 1 )]
 position = Vector2( 448, 192 )
 
+[node name="Corridor" parent="." instance=ExtResource( 1 )]
+position = Vector2( 0, -192 )
+
+[node name="Corridor2" parent="." instance=ExtResource( 1 )]
+position = Vector2( 0, -256 )
+roomID = "intro_corridor"
+
+[node name="Corridor3" parent="." instance=ExtResource( 1 )]
+position = Vector2( 0, -320 )
+
+[node name="Corridor4" parent="." instance=ExtResource( 1 )]
+position = Vector2( 0, -384 )
+
+[node name="Corridor5" parent="." instance=ExtResource( 1 )]
+position = Vector2( 64, -192 )
+
+[node name="Corridor6" parent="." instance=ExtResource( 1 )]
+position = Vector2( -64, -256 )
+roomName = "IBS \"Integrity\""
+roomID = "intro_integoration"
+
+[node name="Corridor7" parent="." instance=ExtResource( 1 )]
+position = Vector2( -64, -320 )
+canSouth = false
+
+[node name="Corridor8" parent="." instance=ExtResource( 1 )]
+position = Vector2( 64, -320 )
+
 [node name="Connections" type="Node2D" parent="."]
 
 [node name="Camera2D" type="Camera2D" parent="."]

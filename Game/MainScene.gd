@@ -12,7 +12,7 @@ var sceneStack: Array = []
 func _ready():
 	GM.main = self
 	
-	runScene("WorldScene")#"TestScene")) #WorldScene
+	runScene("IntroScene")#"WorldScene")#"TestScene")) #WorldScene
 	#runScene("FightScene", ["testchar"])
 
 func runScene(id, _args = []):
