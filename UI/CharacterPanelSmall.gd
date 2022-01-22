@@ -7,6 +7,7 @@ func setCharacterID(charID: String):
 	var character = GlobalRegistry.getCharacter(charID)
 	
 	characterNameLabel.text = character.getName()
+	characterNameLabel.self_modulate = character.getChatColor()
 	characterID = charID
 
 func getCharacterID():

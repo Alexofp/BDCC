@@ -25,3 +25,6 @@ func getStatusEffectsPanel():
 
 func setStamina(newstamina: int):
 	staminaLabel.text = "Stamina: "+str(newstamina)
+
+func setColor(newcolor):
+	nameLabel.self_modulate = newcolor
