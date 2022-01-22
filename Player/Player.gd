@@ -55,6 +55,8 @@ func getName() -> String:
 func setName(newname: String):
 	newname = newname.replace("{", "")
 	newname = newname.replace("}", "")
+	newname = newname.replace("[", "")
+	newname = newname.replace("]", "")
 	if(newname == ""):
 		newname = "Player"
 	

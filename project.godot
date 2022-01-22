@@ -94,6 +94,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Game/World/RoomAction.gd"
 }, {
+"base": "Object",
+"class": "SayParser",
+"language": "GDScript",
+"path": "res://Util/SayParser.gd"
+}, {
 "base": "Node",
 "class": "SceneBase",
 "language": "GDScript",
@@ -147,6 +152,7 @@ _global_script_class_icons={
 "Player": "",
 "RNG": "",
 "RoomAction": "",
+"SayParser": "",
 "SceneBase": "",
 "SimpleParser": "",
 "StatusEffect": "",
