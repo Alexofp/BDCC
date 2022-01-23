@@ -13,7 +13,7 @@ var head
 var ears
 var tail
 var breasts: BodypartBreasts
-var hair
+var hair: BodypartHair
 var pickedGender = Gender.Female
 var pronounsGender = null
 
@@ -27,6 +27,7 @@ func _ready():
 	var mybreasts: BodypartBreasts = GlobalRegistry.getBodypart("humanbreasts")
 	mybreasts.size = BodypartBreasts.BreastsSize.C
 	setBreasts(mybreasts)
+	setHair(GlobalRegistry.getBodypart("baldhair"))
 	updateNonBattleEffects()
 
 
@@ -39,6 +40,10 @@ func setLegs(bodypart: BodypartLeg):
 
 func setBreasts(bodypart: BodypartBreasts):
 	breasts = bodypart
+	emit_signal("bodypart_changed")
+
+func setHair(bodypart: BodypartHair):
+	hair = bodypart
 	emit_signal("bodypart_changed")
 
 func setLocation(newRoomID:String):
@@ -180,6 +185,9 @@ func saveData():
 	data["legsData"] = legs.saveData()
 	data["breasts"] = breasts.id
 	data["breastsData"] = breasts.saveData()
+	data["hair"] = hair.id
+	data["hairData"] = hair.saveData()
+	
 	data["statusEffects"] = saveStatusEffectsData()
 	
 	return data
@@ -196,7 +204,11 @@ func loadData(data):
 
 	setLegs(GlobalRegistry.getBodypart(SAVE.loadVar(data, "legs", "humanleg")))
 	legs.loadData(SAVE.loadVar(data, "legsData", {}))
+	
 	setBreasts(GlobalRegistry.getBodypart(SAVE.loadVar(data, "breasts", "humanbreasts")))
 	breasts.loadData(SAVE.loadVar(data, "breastsData", {}))
+	
+	setHair(GlobalRegistry.getBodypart(SAVE.loadVar(data, "hair", "baldhair")))
+	hair.loadData(SAVE.loadVar(data, "hairData", {}))
 	
 	loadStatusEffectsData(SAVE.loadVar(data, "statusEffects", {}))

@@ -15,3 +15,6 @@ func saveData():
 
 func loadData(_data):
 	size = SAVE.loadVar(_data, "size", 0)
+
+func getCategory():
+	return Category.Breasts

@@ -10,31 +10,31 @@ export(String, "Bald", "Ponytail", "Ferri") var hairType = "Bald"
 export(String, "Nothing", "Cat", "Dragon") var tailType = "Nothing"
 #onready var breastsNode = $BreastsNode
 
-var breastsList = {
+const breastsList = {
 	"Flat": "res://Player/Limbs/breasts/BreastsFlat.tscn",
 	"Curvy": "res://Player/Limbs/breasts/BreastsCurvy.tscn"
 }
-var legsList = {
+const legsList = {
 	"Human": "res://Player/Limbs/leg/HumanLeg.tscn",
 	"Digi": "res://Player/Limbs/leg/DigiLeg.tscn"
 }
-var armsList = {
+const armsList = {
 	"Human": "res://Player/Limbs/arm/HumanArms.tscn"
 }
-var headList = {
+const headList = {
 	"Human": "res://Player/Limbs/head/HumanHead.tscn",
 	"Cat": "res://Player/Limbs/head/CatHead.tscn"
 }
-var earsList = {
+const earsList = {
 	"Human": "res://Player/Limbs/ear/HumanEars.tscn",
 	"Cat": "res://Player/Limbs/ear/CatEars.tscn" 
 }
-var hairList = {
+const hairList = {
 	"Bald": "res://Player/Limbs/hair/HairBase.tscn",
 	"Ponytail": "res://Player/Limbs/hair/PonytailHair.tscn",
 	"Ferri": "res://Player/Limbs/hair/FerriHair.tscn"
 }
-var tailList = {
+const tailList = {
 	"Nothing": "res://Player/Limbs/tail/TailBase.tscn",
 	"Cat": "res://Player/Limbs/tail/CatTail.tscn",
 	"Dragon": "res://Player/Limbs/tail/DragonTail.tscn"
@@ -111,3 +111,9 @@ func loadFromPlayer(player: Player):
 		set_limb("BreastsNode", breastsType, breastsList)
 	else:
 		print("Error: player has no breasts? (even flat ones?)")
+
+	if(player.hair):
+		hairType = player.hair._getDollType()
+		set_limb("HairNode", hairType, hairList)
+	else:
+		print("Error: player has no hair?")

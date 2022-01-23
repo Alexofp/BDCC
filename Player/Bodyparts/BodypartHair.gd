@@ -1,8 +1,8 @@
 extends Bodypart
-class_name BodypartLeg
+class_name BodypartHair
 
 func _init():
 	pass
 
 func getCategory():
-	return Category.Legs
+	return Category.Hair

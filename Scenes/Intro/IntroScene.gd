@@ -67,6 +67,15 @@ func _run():
 		addButton("D", "D sized breasts", "setbreasts", [BodypartBreasts.BreastsSize.D])
 		addButton("back", "Back to picking pronouns", "pickpronouns")
 
+	if(state == "pickhair"):
+		say("Pick your haircut")
+		
+		var allHairIds = GlobalRegistry.getBodypartsIdsByCategory(Bodypart.Category.Hair)
+		for hairID in allHairIds:
+			var hair = GlobalRegistry.getBodypart(hairID)
+			addButton(hair.getName(), "Pick this", "sethair", [hairID])
+		addButton("back", "Back to picking breasts size", "pickbreastsize")
+
 	if(state == "donecreating"):
 		say("The wolf nods. [say=intro_detective]Alright. You look slightly lost there. Long story short is that you failed a mindtest procedure. Information that was gathered is enough to link you to the crime that we've been trying to solve. I will be blunt. It’s enough to put you in jail for a while.[/say] He takes a short pause and watches your reaction. [say=intro_detective]And my job here is to figure out why you did it[/say]\n\n")
 		
@@ -195,6 +204,13 @@ func _react(_action: String, _args):
 	if(_action == "setbreasts"):
 		GM.pc.breasts.size = _args[0]
 		GM.pc.updateAppearance()
+		setState("pickhair")
+		return
+		
+	if(_action == "sethair"):
+		var hairID = _args[0]
+		var hair = GlobalRegistry.getBodypart(hairID)
+		GM.pc.setHair(hair)
 		setState("donecreating")
 		return
 	

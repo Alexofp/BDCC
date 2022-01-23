@@ -12,6 +12,7 @@ func _ready():
 	#registerBodypart("res://Player/Bodyparts/HumanLeg.gd")
 	registerBodypartFolder("res://Player/Bodyparts/Legs/")
 	registerBodypartFolder("res://Player/Bodyparts/Breasts/")
+	registerBodypartFolder("res://Player/Bodyparts/Hair/")
 	
 	registerSceneFolder("res://Scenes/")
 	registerSceneFolder("res://Scenes/Intro/")
@@ -60,13 +61,21 @@ func registerSceneFolder(folder: String):
 func registerBodypart(path: String):
 	var bodypart = load(path)
 	var bodypartObject = bodypart.new()
-	bodyparts[bodypartObject.id] = bodypart
+	bodyparts[bodypartObject.id] = bodypartObject
 
 func getBodypart(id: String):
 	if(!bodyparts.has(id)):
 		print("ERROR: bodypart with the id "+id+" wasn't found")
 		return null
-	return bodyparts[id].new()
+	return bodyparts[id].duplicate()
+
+func getBodypartsIdsByCategory(_category):
+	var result = []
+	for bodypartID in bodyparts:
+		var bodypart = bodyparts[bodypartID]
+		if(bodypart.getCategory() == _category):
+			result.append(bodypartID)
+	return result
 
 func registerBodypartFolder(folder: String):
 	var dir = Directory.new()
