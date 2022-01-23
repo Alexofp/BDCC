@@ -8,8 +8,9 @@ addOutline = false
 
 [node name="CatEars" type="Polygon2D" parent="." index="0"]
 position = Vector2( -24.4628, -437.845 )
+z_index = 1
 texture = ExtResource( 2 )
 skeleton = NodePath("../..")
 polygon = PoolVector2Array( -8.13397, 61.7225, 7.65552, -14.8325, 59.3301, -4.30622, 72.7273, 65.0718 )
 uv = PoolVector2Array( -8.13397, 61.7225, 7.65552, -14.8325, 59.3301, -4.30622, 72.7273, 65.0718 )
-bones = [ NodePath("Hip"), PoolRealArray( 0, 0, 0, 0 ), NodePath("Hip/Chest"), PoolRealArray( 0, 0, 0, 0 ), NodePath("Hip/Chest/Neck"), PoolRealArray( 0, 0, 0, 0 ), NodePath("Hip/Chest/Neck/Head"), PoolRealArray( 1, 1, 1, 1 ), NodePath("Hip/Chest/LArm"), PoolRealArray( 0, 0, 0, 0 ), NodePath("Hip/Chest/LArm/LForeArm"), PoolRealArray( 0, 0, 0, 0 ), NodePath("Hip/Chest/LArm/LForeArm/LHand"), PoolRealArray( 0, 0, 0, 0 ), NodePath("Hip/LLeg"), PoolRealArray( 0, 0, 0, 0 ), NodePath("Hip/LLeg/LLLeg"), PoolRealArray( 0, 0, 0, 0 ), NodePath("Hip/LLeg/LLLeg/LFoot"), PoolRealArray( 0, 0, 0, 0 ) ]
+bones = [ "Hip", PoolRealArray( 0, 0, 0, 0 ), "Hip/Chest", PoolRealArray( 0, 0, 0, 0 ), "Hip/Chest/Neck", PoolRealArray( 0, 0, 0, 0 ), "Hip/Chest/Neck/Head", PoolRealArray( 1, 1, 1, 1 ), "Hip/Chest/LArm", PoolRealArray( 0, 0, 0, 0 ), "Hip/Chest/LArm/LForeArm", PoolRealArray( 0, 0, 0, 0 ), "Hip/Chest/LArm/LForeArm/LHand", PoolRealArray( 0, 0, 0, 0 ), "Hip/LLeg", PoolRealArray( 0, 0, 0, 0 ), "Hip/LLeg/LLLeg", PoolRealArray( 0, 0, 0, 0 ), "Hip/LLeg/LLLeg/LFoot", PoolRealArray( 0, 0, 0, 0 ) ]

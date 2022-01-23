@@ -14,7 +14,7 @@ texture = ExtResource( 2 )
 skeleton = NodePath("../../Skeleton2D")
 polygon = PoolVector2Array( -4.31035, 224.138, -13.7931, 28.4483, 70.2586, 27.1552, 74.569, 223.707 )
 uv = PoolVector2Array( -4.31035, 224.138, -13.7931, 28.4483, 70.2586, 27.1552, 74.569, 223.707 )
-bones = [ NodePath("Hip"), PoolRealArray( 0, 0, 0, 0 ), NodePath("Hip/Chest"), PoolRealArray( 0, 0, 0, 0 ), NodePath("Hip/Chest/Neck"), PoolRealArray( 0, 0, 0, 0 ), NodePath("Hip/Chest/Neck/Head"), PoolRealArray( 0, 0, 0, 0 ), NodePath("Hip/Chest/LArm"), PoolRealArray( 1, 1, 1, 1 ), NodePath("Hip/Chest/LArm/LForeArm"), PoolRealArray( 0, 0, 0, 0 ), NodePath("Hip/Chest/LArm/LForeArm/LHand"), PoolRealArray( 0, 0, 0, 0 ), NodePath("Hip/Leg"), PoolRealArray( 0, 0, 0, 0 ), NodePath("Hip/Leg/LLeg"), PoolRealArray( 0, 0, 0, 0 ), NodePath("Hip/Leg/LLeg/LFoot"), PoolRealArray( 0, 0, 0, 0 ) ]
+bones = [ "Hip", PoolRealArray( 0, 0, 0, 0 ), "Hip/Chest", PoolRealArray( 0, 0, 0, 0 ), "Hip/Chest/Neck", PoolRealArray( 0, 0, 0, 0 ), "Hip/Chest/Neck/Head", PoolRealArray( 0, 0, 0, 0 ), "Hip/Chest/LArm", PoolRealArray( 1, 1, 1, 1 ), "Hip/Chest/LArm/LForeArm", PoolRealArray( 0, 0, 0, 0 ), "Hip/Chest/LArm/LForeArm/LHand", PoolRealArray( 0, 0, 0, 0 ), "Hip/Leg", PoolRealArray( 0, 0, 0, 0 ), "Hip/Leg/LLeg", PoolRealArray( 0, 0, 0, 0 ), "Hip/Leg/LLeg/LFoot", PoolRealArray( 0, 0, 0, 0 ) ]
 
 [node name="ForeArm" type="Polygon2D" parent="." index="1"]
 position = Vector2( -55.5777, -178.691 )
@@ -23,7 +23,7 @@ texture = ExtResource( 3 )
 skeleton = NodePath("../../Skeleton2D")
 polygon = PoolVector2Array( 8.18965, 200.431, 53.0172, 29.7414, 125.862, 53.8793, 66.8103, 221.983 )
 uv = PoolVector2Array( 8.18965, 200.431, 53.0172, 29.7414, 125.862, 53.8793, 66.8103, 221.983 )
-bones = [ NodePath("Hip"), PoolRealArray( 0, 0, 0, 0 ), NodePath("Hip/Chest"), PoolRealArray( 0, 0, 0, 0 ), NodePath("Hip/Chest/Neck"), PoolRealArray( 0, 0, 0, 0 ), NodePath("Hip/Chest/Neck/Head"), PoolRealArray( 0, 0, 0, 0 ), NodePath("Hip/Chest/LArm"), PoolRealArray( 0, 0, 0, 0 ), NodePath("Hip/Chest/LArm/LForeArm"), PoolRealArray( 1, 1, 1, 1 ), NodePath("Hip/Chest/LArm/LForeArm/LHand"), PoolRealArray( 0, 0, 0, 0 ), NodePath("Hip/LLeg"), PoolRealArray( 0, 0, 0, 0 ), NodePath("Hip/LLeg/LLLeg"), PoolRealArray( 0, 0, 0, 0 ), NodePath("Hip/LLeg/LLLeg/LFoot"), PoolRealArray( 0, 0, 0, 0 ) ]
+bones = [ "Hip", PoolRealArray( 0, 0, 0, 0 ), "Hip/Chest", PoolRealArray( 0, 0, 0, 0 ), "Hip/Chest/Neck", PoolRealArray( 0, 0, 0, 0 ), "Hip/Chest/Neck/Head", PoolRealArray( 0, 0, 0, 0 ), "Hip/Chest/LArm", PoolRealArray( 0, 0, 0, 0 ), "Hip/Chest/LArm/LForeArm", PoolRealArray( 1, 1, 1, 1 ), "Hip/Chest/LArm/LForeArm/LHand", PoolRealArray( 0, 0, 0, 0 ), "Hip/LLeg", PoolRealArray( 0, 0, 0, 0 ), "Hip/LLeg/LLLeg", PoolRealArray( 0, 0, 0, 0 ), "Hip/LLeg/LLLeg/LFoot", PoolRealArray( 0, 0, 0, 0 ) ]
 
 [node name="Hand" type="Polygon2D" parent="." index="2"]
 position = Vector2( -44.619, -24.4987 )
@@ -32,4 +32,4 @@ texture = ExtResource( 4 )
 skeleton = NodePath("../../Skeleton2D")
 polygon = PoolVector2Array( 2.82486, 109.605, 3.9548, 5.36723, 69.4915, 10.452, 72.5989, 114.972 )
 uv = PoolVector2Array( 2.82486, 109.605, 3.9548, 5.36723, 69.4915, 10.452, 72.5989, 114.972 )
-bones = [ NodePath("Hip"), PoolRealArray( 0, 0, 0, 0 ), NodePath("Hip/Chest"), PoolRealArray( 0, 0, 0, 0 ), NodePath("Hip/Chest/Neck"), PoolRealArray( 0, 0, 0, 0 ), NodePath("Hip/Chest/Neck/Head"), PoolRealArray( 0, 0, 0, 0 ), NodePath("Hip/Chest/LArm"), PoolRealArray( 0, 0, 0, 0 ), NodePath("Hip/Chest/LArm/LForeArm"), PoolRealArray( 0, 0, 0, 0 ), NodePath("Hip/Chest/LArm/LForeArm/LHand"), PoolRealArray( 1, 1, 1, 1 ), NodePath("Hip/LLeg"), PoolRealArray( 0, 0, 0, 0 ), NodePath("Hip/LLeg/LLLeg"), PoolRealArray( 0, 0, 0, 0 ), NodePath("Hip/LLeg/LLLeg/LFoot"), PoolRealArray( 0, 0, 0, 0 ) ]
+bones = [ "Hip", PoolRealArray( 0, 0, 0, 0 ), "Hip/Chest", PoolRealArray( 0, 0, 0, 0 ), "Hip/Chest/Neck", PoolRealArray( 0, 0, 0, 0 ), "Hip/Chest/Neck/Head", PoolRealArray( 0, 0, 0, 0 ), "Hip/Chest/LArm", PoolRealArray( 0, 0, 0, 0 ), "Hip/Chest/LArm/LForeArm", PoolRealArray( 0, 0, 0, 0 ), "Hip/Chest/LArm/LForeArm/LHand", PoolRealArray( 1, 1, 1, 1 ), "Hip/LLeg", PoolRealArray( 0, 0, 0, 0 ), "Hip/LLeg/LLLeg", PoolRealArray( 0, 0, 0, 0 ), "Hip/LLeg/LLLeg/LFoot", PoolRealArray( 0, 0, 0, 0 ) ]

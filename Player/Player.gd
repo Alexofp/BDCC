@@ -24,6 +24,11 @@ func _ready():
 	mybreasts.size = BodypartBreasts.BreastsSize.C
 	giveBodypart(mybreasts)
 	giveBodypart(GlobalRegistry.getBodypart("baldhair"))
+	giveBodypart(GlobalRegistry.getBodypart("felinetail"))
+	giveBodypart(GlobalRegistry.getBodypart("felinehead"))
+	giveBodypart(GlobalRegistry.getBodypart("humanbody"))
+	giveBodypart(GlobalRegistry.getBodypart("humanarms"))
+	giveBodypart(GlobalRegistry.getBodypart("felineears"))
 	updateNonBattleEffects()
 
 
@@ -49,6 +54,10 @@ func getBodypart(slot):
 
 func getBodyparts():
 	return bodyparts
+	
+func removeBodypart(slot):
+	bodyparts[slot] = null
+	emit_signal("bodypart_changed")
 
 func setLocation(newRoomID:String):
 	location = newRoomID

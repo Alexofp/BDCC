@@ -18,3 +18,33 @@ func loadData(_data):
 
 func getSlot():
 	return BodypartSlot.Breasts
+
+func getExtraInfoCreation():
+	return "size: " + breastSizeToString(size)
+	
+static func breastSizeToString(bsize):
+	if(bsize == BreastsSize.FLAT):
+		return "Flat"
+	if(bsize == BreastsSize.A):
+		return "A"
+	if(bsize == BreastsSize.B):
+		return "B"
+	if(bsize == BreastsSize.C):
+		return "C"
+	if(bsize == BreastsSize.D):
+		return "D"
+	if(bsize == BreastsSize.DD):
+		return "DD"
+	if(bsize == BreastsSize.E):
+		return "E"
+	if(bsize == BreastsSize.EE):
+		return "EE"
+	if(bsize == BreastsSize.F):
+		return "F"
+	if(bsize == BreastsSize.FF):
+		return "FF"
+	if(bsize == BreastsSize.G):
+		return "G"
+	if(bsize == BreastsSize.GG):
+		return "GG"
+	return "Error?"

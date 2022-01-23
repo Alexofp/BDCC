@@ -12,7 +12,15 @@ const Tail = "tail"
 const Legs = "legs"
 
 static func getAll():
-	return [Hair, Breasts, Legs, Tail]
+	return [Head, Hair, Ears, Horns, Body, Arms, Breasts, Tail, Legs]
 
 static func getVisibleName(slot: String):
 	return slot.capitalize()
+
+static func isEssential(slot):
+	if(slot == Horns):
+		return false
+	if(slot == Tail):
+		return false
+	
+	return true

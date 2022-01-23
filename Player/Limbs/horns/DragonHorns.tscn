@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Player/Limbs/horns/HornsBase.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Player/Limbs/dragonhorns.png" type="Texture" id=2]
+
+[node name="DragonHorns" instance=ExtResource( 1 )]
+addOutline = false
+
+[node name="Horns" type="Polygon2D" parent="." index="0"]
+position = Vector2( -48.8933, -481.622 )
+texture = ExtResource( 2 )
+skeleton = NodePath("../../../Skeleton2D")
+polygon = PoolVector2Array( -4.65117, 108.14, -1.93799, 9.30232, 137.209, 10.4651, 133.721, 107.364 )
+uv = PoolVector2Array( -2.71318, 105.039, -1.93799, 9.30232, 137.209, 10.4651, 133.721, 107.364 )
+bones = [ "Hip", PoolRealArray( 0, 0, 0, 0 ), "Hip/Chest", PoolRealArray( 0, 0, 0, 0 ), "Hip/Chest/Neck", PoolRealArray( 0, 0, 0, 0 ), "Hip/Chest/Neck/Head", PoolRealArray( 1, 1, 1, 1 ), "Hip/Chest/LArm", PoolRealArray( 0, 0, 0, 0 ), "Hip/Chest/LArm/LForeArm", PoolRealArray( 0, 0, 0, 0 ), "Hip/Chest/LArm/LForeArm/LHand", PoolRealArray( 0, 0, 0, 0 ), "Hip/LLeg", PoolRealArray( 0, 0, 0, 0 ), "Hip/LLeg/LLLeg", PoolRealArray( 0, 0, 0, 0 ), "Hip/LLeg/LLLeg/LFoot", PoolRealArray( 0, 0, 0, 0 ), "Hip/Tail1", PoolRealArray( 0, 0, 0, 0 ), "Hip/Tail1/Tail2", PoolRealArray( 0, 0, 0, 0 ), "Hip/Tail1/Tail2/Tail3", PoolRealArray( 0, 0, 0, 0 ), "Hip/Tail1/Tail2/Tail3/Tail4", PoolRealArray( 0, 0, 0, 0 ), "Hip/Tail1/Tail2/Tail3/Tail4/Tail5", PoolRealArray( 0, 0, 0, 0 ) ]

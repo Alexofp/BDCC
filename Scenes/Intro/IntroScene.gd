@@ -105,13 +105,20 @@ func _run():
 				continue
 			
 			var bodypart = bodyparts[slot]
-			say(slotName+": "+bodypart.getName()+"\n")
+			say(slotName+": "+bodypart.getName().capitalize())
+			var extra = bodypart.getExtraInfoCreation()
+			if(extra!=""):
+				say(" (" + extra + ")")
+			say("\n")
 		
-		addButton("Confirm", "I like it", "pickbreastsize")
+		addButton("Confirm", "I like it", "donecreating")
 		
 		for slot in allSlots:
 			var slotName = BodypartSlot.getVisibleName(slot)
 			addButton(slotName, "Change this", "pickbodypart", [slot])
+			
+		addButton("Breast size", "Change breast size", "pickbreastsize")
+			
 		addButton("back", "Back to picking species", "pickspecies")
 
 	if(state == "pickbodypart"):
@@ -119,6 +126,9 @@ func _run():
 		
 		addButton("Back", "go back", "pickedspecies")
 		var playerSpecies: Array = GM.pc.getSpecies()
+			
+		if(!BodypartSlot.isEssential(pickingBodypartType)):
+			addButton("Nothing", "remove it", "removebodypart", [pickingBodypartType])
 			
 		var allbodypartsIDs = GlobalRegistry.getBodypartsIdsBySlot(pickingBodypartType)
 		for bodypartID in allbodypartsIDs:
@@ -130,7 +140,6 @@ func _run():
 					addButton(bodypart.getName(), "change to this", "setbodypart", [bodypart.id])
 					break
 
-
 	if(state == "pickbreastsize"):
 		say("Pick your character's breast size")
 		addButton("Flat", "Flat breasts will never produce milk", "setbreasts", [BodypartBreasts.BreastsSize.FLAT])
@@ -138,7 +147,7 @@ func _run():
 		addButton("B", "B sized breasts", "setbreasts", [BodypartBreasts.BreastsSize.B])
 		addButton("C", "C sized breasts", "setbreasts", [BodypartBreasts.BreastsSize.C])
 		addButton("D", "D sized breasts", "setbreasts", [BodypartBreasts.BreastsSize.D])
-		addButton("back", "Back to picking pronouns", "pickpronouns")
+		addButton("back", "Back", "pickedspecies")
 
 	if(state == "donecreating"):
 		say("The wolf nods. [say=intro_detective]Alright. You look slightly lost there. Long story short is that you failed a mindtest procedure. Information that was gathered is enough to link you to the crime that we've been trying to solve. I will be blunt. It’s enough to put you in jail for a while.[/say] He takes a short pause and watches your reaction. [say=intro_detective]And my job here is to figure out why you did it[/say]\n\n")
@@ -272,13 +281,24 @@ func _react(_action: String, _args):
 		return
 		
 	if(_action == "setbreasts"):
-		GM.pc.breasts.size = _args[0]
-		GM.pc.updateAppearance()
-		setState("donecreating")
+		if(GM.pc.hasBodypart(BodypartSlot.Breasts)):
+			var breasts = GM.pc.getBodypart(BodypartSlot.Breasts)
+			breasts.size = _args[0]
+			GM.pc.updateAppearance()		
+		
+		setState("pickedspecies")
 		return
 	
 	if(_action == "pickbodypart"):
 		pickingBodypartType = _args[0]
+	
+	if(_action == "removebodypart"):
+		var bodypartSlot = _args[0]
+
+		GM.pc.removeBodypart(bodypartSlot)
+		
+		setState("pickedspecies")
+		return
 	
 	if(_action == "setbodypart"):
 		var bodypartID = _args[0]

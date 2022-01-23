@@ -17,3 +17,6 @@ func isPlayable():
 
 func getVisibleDescription():
 	return "Your ordinary human"
+
+func getDefaultEars():
+	return "humanears"

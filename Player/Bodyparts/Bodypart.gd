@@ -1,8 +1,6 @@
 extends Resource
 class_name Bodypart
 
-enum Category {None, Breasts, Legs, Hair}
-
 var name
 var id
 var dollType
@@ -31,3 +29,6 @@ func getCompatibleSpecies():
 # Used to make sure we don't get hybrids with human ears unless player really wants that
 func getHybridPriority():
 	return 0
+
+func getExtraInfoCreation():
+	return ""
