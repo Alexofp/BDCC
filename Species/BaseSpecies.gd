@@ -14,9 +14,25 @@ func _init():
 	
 func getVisibleName():
 	return "Error"
+	
+func getVisibleDescription():
+	return "Not implemented, Let the developer know"
 
 func getDefaultLegs():
 	return "felineleg"
 
 func getDefaultBreasts():
 	return "humanbreasts"
+
+func getDefaultForSlot(slot):
+	if(slot == BodypartSlot.Legs):
+		return getDefaultLegs()
+	if(slot == BodypartSlot.Breasts):
+		return getDefaultBreasts()
+	if(slot == BodypartSlot.Hair):
+		return "baldhair"
+	
+	return null
+
+func isPlayable():
+	return false

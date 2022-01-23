@@ -5,3 +5,9 @@ func _init():
 	
 func getVisibleName():
 	return "Dragon"
+
+func isPlayable():
+	return true
+
+func getVisibleDescription():
+	return "They roar and stuff"

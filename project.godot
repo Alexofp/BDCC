@@ -39,6 +39,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Player/Bodyparts/BodypartLeg.gd"
 }, {
+"base": "Object",
+"class": "BodypartSlot",
+"language": "GDScript",
+"path": "res://Player/Bodyparts/BodypartSlot.gd"
+}, {
 "base": "BaseCharacter",
 "class": "Character",
 "language": "GDScript",
@@ -151,6 +156,7 @@ _global_script_class_icons={
 "BodypartBreasts": "",
 "BodypartHair": "",
 "BodypartLeg": "",
+"BodypartSlot": "",
 "Character": "",
 "DamageType": "",
 "Doll": "",

@@ -100,20 +100,20 @@ func _process(_delta):
 	#$Skeleton2D/Hip/LLeg/LLLeg.rotation_degrees = 90
 
 func loadFromPlayer(player: Player):
-	if(player.legs):
-		legsType = player.legs._getDollType()
+	if(player.hasBodypart(BodypartSlot.Legs)):
+		legsType = player.getBodypart(BodypartSlot.Legs)._getDollType()
 		set_limb("LegsNode", legsType, legsList)
 	else:
-		print("Error: player has no legs?")
+		printerr("Error: player has no legs?")
 		
-	if(player.breasts):
-		breastsType = player.breasts._getDollType()
+	if(player.hasBodypart(BodypartSlot.Breasts)):
+		breastsType = player.getBodypart(BodypartSlot.Breasts)._getDollType()
 		set_limb("BreastsNode", breastsType, breastsList)
 	else:
-		print("Error: player has no breasts? (even flat ones?)")
+		printerr("Error: player has no breasts? (even flat ones?)")
 
-	if(player.hair):
-		hairType = player.hair._getDollType()
+	if(player.hasBodypart(BodypartSlot.Hair)):
+		hairType = player.getBodypart(BodypartSlot.Hair)._getDollType()
 		set_limb("HairNode", hairType, hairList)
 	else:
-		print("Error: player has no hair?")
+		printerr("Error: player has no hair?")

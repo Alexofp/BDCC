@@ -52,9 +52,9 @@ func saveGame(_path):
 		print("Can't save because one of the scenes doesn't support saving")
 		return
 	
+	var saveData = saveData()
 	var save_game = File.new()
 	save_game.open(_path, File.WRITE)
-	var saveData = saveData()
 	
 	if(useJson):
 		save_game.store_line(JSON.print(saveData, "\t", true))

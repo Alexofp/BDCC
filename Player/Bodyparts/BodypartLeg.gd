@@ -4,5 +4,5 @@ class_name BodypartLeg
 func _init():
 	pass
 
-func getCategory():
-	return Category.Legs
+func getSlot():
+	return BodypartSlot.Legs

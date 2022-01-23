@@ -19,8 +19,8 @@ func saveData():
 func loadData(_data):
 	pass
 
-func getCategory():
-	return Category.None
+func getSlot():
+	return BodypartSlot.Body
 
 func getName():
 	return name

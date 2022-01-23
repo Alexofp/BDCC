@@ -104,6 +104,8 @@ func setCharacter(id: String):
 func addCharacter(id: String):
 	if(id == ""):
 		return
+	if(currentCharacters.has(id)):
+		return
 	currentCharacters.append(id)
 	GM.ui.getCharactersPanel().addCharacter(id)
 	updateCharactersPanelVisibility()

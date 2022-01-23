@@ -1,6 +1,6 @@
 extends "res://Scenes/SceneBase.gd"
 
-var pickingBodypartType = Bodypart.Category.None
+var pickingBodypartType = BodypartSlot.Legs
 var pickedFirstSpeciesHybrid = ""
 # Heavy work in progress, the text is just to get a feel for how the game is gonna start
 
@@ -62,35 +62,56 @@ func _run():
 
 	if(state == "pickspecies"):
 		say("Pick your character's species")
-		addButton("Human", "I wanna be human", "setspecies", [[Species.Human]])
-		addButton("Feline", "I wanna be a cat", "setspecies", [[Species.Feline]])
-		addButton("Neko", "I wanna be a cat human", "setspecies", [[Species.Human, Species.Feline]])
+		var allSpecies = GlobalRegistry.getAllPlayableSpecies()
+		for speciesID in allSpecies:
+			var speciesInfo = GlobalRegistry.getSpecies(speciesID)
+			addButton(speciesInfo.getVisibleName(), speciesInfo.getVisibleDescription(), "setspecies", [[speciesID]])
 		addButton("Make Hybrid", "Make a custom hybrid", "pickhybrid1")
 		addButton("back", "Back to picking pronouns", "pickpronouns")
 
 	if(state == "pickhybrid1"):
 		say("Pick your first species")
-		addButton("Human", "I wanna be human", "pick2species", [Species.Human])
-		addButton("Feline", "I wanna be a cat", "pick2species", [Species.Feline])
+		
+		var allSpecies = GlobalRegistry.getAllPlayableSpecies()
+		for speciesID in allSpecies:
+			var speciesInfo = GlobalRegistry.getSpecies(speciesID)
+			addButton(speciesInfo.getVisibleName(), speciesInfo.getVisibleDescription(), "pick2species", [speciesID])
+			
 		addButton("back", "Back", "pickspecies")
 
 	if(state == "pick2species"):
 		say("Pick your second species")
-		addButton("Human", "I wanna be human", "setspecies", [[pickedFirstSpeciesHybrid, Species.Human]])
-		addButton("Feline", "I wanna be a cat", "setspecies", [[pickedFirstSpeciesHybrid, Species.Feline]])
+		
+		var allSpecies = GlobalRegistry.getAllPlayableSpecies()
+		for speciesID in allSpecies:
+			if(pickedFirstSpeciesHybrid == speciesID):
+				continue
+			
+			var speciesInfo = GlobalRegistry.getSpecies(speciesID)
+			addButton(speciesInfo.getVisibleName(), speciesInfo.getVisibleDescription(), "setspecies", [[pickedFirstSpeciesHybrid, speciesID]])
+		
 		addButton("back", "Back", "pickhybrid1")
 
 	if(state == "pickedspecies"):
 		say("You are a "+GM.pc.getSpeciesFullName())
 		say("\n----\n")
-		if(GM.pc.breasts):
-			say("Breasts: "+GM.pc.breasts.getName() + "\n")
-		if(GM.pc.legs):
-			say("Legs: "+GM.pc.legs.getName() + "\n")
+		
+		var bodyparts = GM.pc.getBodyparts()
+		var allSlots = BodypartSlot.getAll()
+		for slot in allSlots:
+			var slotName = BodypartSlot.getVisibleName(slot)
+			if(!bodyparts.has(slot) || bodyparts[slot] == null):
+				say(slotName+": None\n")
+				continue
+			
+			var bodypart = bodyparts[slot]
+			say(slotName+": "+bodypart.getName()+"\n")
 		
 		addButton("Confirm", "I like it", "pickbreastsize")
-		addButton("Breasts", "Change breasts", "pickbodypart", [Bodypart.Category.Breasts])
-		addButton("Legs", "Change legs", "pickbodypart", [Bodypart.Category.Legs])
+		
+		for slot in allSlots:
+			var slotName = BodypartSlot.getVisibleName(slot)
+			addButton(slotName, "Change this", "pickbodypart", [slot])
 		addButton("back", "Back to picking species", "pickspecies")
 
 	if(state == "pickbodypart"):
@@ -99,7 +120,7 @@ func _run():
 		addButton("Back", "go back", "pickedspecies")
 		var playerSpecies: Array = GM.pc.getSpecies()
 			
-		var allbodypartsIDs = GlobalRegistry.getBodypartsIdsByCategory(pickingBodypartType)
+		var allbodypartsIDs = GlobalRegistry.getBodypartsIdsBySlot(pickingBodypartType)
 		for bodypartID in allbodypartsIDs:
 			var bodypart = GlobalRegistry.getBodypart(bodypartID)
 			var supportedSpecies = bodypart.getCompatibleSpecies()
@@ -109,7 +130,6 @@ func _run():
 					addButton(bodypart.getName(), "change to this", "setbodypart", [bodypart.id])
 					break
 
-		
 
 	if(state == "pickbreastsize"):
 		say("Pick your character's breast size")
@@ -119,15 +139,6 @@ func _run():
 		addButton("C", "C sized breasts", "setbreasts", [BodypartBreasts.BreastsSize.C])
 		addButton("D", "D sized breasts", "setbreasts", [BodypartBreasts.BreastsSize.D])
 		addButton("back", "Back to picking pronouns", "pickpronouns")
-
-	if(state == "pickhair"):
-		say("Pick your haircut")
-		
-		var allHairIds = GlobalRegistry.getBodypartsIdsByCategory(Bodypart.Category.Hair)
-		for hairID in allHairIds:
-			var hair = GlobalRegistry.getBodypart(hairID)
-			addButton(hair.getName(), "Pick this", "sethair", [hairID])
-		addButton("back", "Back to picking breasts size", "pickbreastsize")
 
 	if(state == "donecreating"):
 		say("The wolf nods. [say=intro_detective]Alright. You look slightly lost there. Long story short is that you failed a mindtest procedure. Information that was gathered is enough to link you to the crime that we've been trying to solve. I will be blunt. It’s enough to put you in jail for a while.[/say] He takes a short pause and watches your reaction. [say=intro_detective]And my job here is to figure out why you did it[/say]\n\n")
@@ -263,13 +274,6 @@ func _react(_action: String, _args):
 	if(_action == "setbreasts"):
 		GM.pc.breasts.size = _args[0]
 		GM.pc.updateAppearance()
-		setState("pickhair")
-		return
-		
-	if(_action == "sethair"):
-		var hairID = _args[0]
-		var hair = GlobalRegistry.getBodypart(hairID)
-		GM.pc.setHair(hair)
 		setState("donecreating")
 		return
 	
@@ -279,10 +283,8 @@ func _react(_action: String, _args):
 	if(_action == "setbodypart"):
 		var bodypartID = _args[0]
 		var bodypart = GlobalRegistry.getBodypart(bodypartID)
-		if(pickingBodypartType == Bodypart.Category.Breasts):
-			GM.pc.setBreasts(bodypart)
-		if(pickingBodypartType == Bodypart.Category.Legs):
-			GM.pc.setLegs(bodypart)
+		
+		GM.pc.giveBodypart(bodypart)
 		
 		setState("pickedspecies")
 		return
@@ -306,5 +308,5 @@ func saveData():
 func loadData(data):
 	.loadData(data)
 	
-	pickingBodypartType = SAVE.loadVar(data, "pickingBodypartType", Bodypart.Category.Legs)
+	pickingBodypartType = SAVE.loadVar(data, "pickingBodypartType", BodypartSlot.Legs)
 	pickedFirstSpeciesHybrid = SAVE.loadVar(data, "pickedFirstSpeciesHybrid", "")

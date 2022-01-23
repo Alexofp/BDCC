@@ -11,3 +11,9 @@ func getDefaultLegs():
 
 func getDefaultBreasts():
 	return "humanbreasts"
+
+func isPlayable():
+	return true
+
+func getVisibleDescription():
+	return "Cute fluffballs"

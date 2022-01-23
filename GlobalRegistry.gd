@@ -72,11 +72,11 @@ func getBodypart(id: String):
 		return null
 	return bodyparts[id].duplicate()
 
-func getBodypartsIdsByCategory(_category):
+func getBodypartsIdsBySlot(_slot):
 	var result = []
 	for bodypartID in bodyparts:
 		var bodypart = bodyparts[bodypartID]
-		if(bodypart.getCategory() == _category):
+		if(bodypart.getSlot() == _slot):
 			result.append(bodypartID)
 	return result
 
@@ -218,3 +218,10 @@ func getSpecies(id: String):
 		printerr("ERROR: species with the id "+id+" wasn't found")
 		return null
 	return allSpecies[id]
+
+func getAllPlayableSpecies():
+	var result = {}
+	for speciesID in allSpecies:
+		if(allSpecies[speciesID].isPlayable()):
+			result[speciesID] = allSpecies[speciesID]
+	return result

@@ -7,13 +7,7 @@ signal location_changed(newloc)
 var gamename = "Rahi"
 var credits:int = 0
 var location:String = "ScriptedRoom"
-var legs: BodypartLeg
-var arms
-var head
-var ears
-var tail
-var breasts: BodypartBreasts
-var hair: BodypartHair
+var bodyparts: Dictionary
 var pickedGender = Gender.Female
 var pronounsGender = null
 var pickedSpecies = ["human"]
@@ -23,29 +17,38 @@ func _init():
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	resetSlots()
 	#legs = GlobalRegistry.getBodypart("humanleg")
-	setLegs(GlobalRegistry.getBodypart("felineleg"))
+	giveBodypart(GlobalRegistry.getBodypart("felineleg"))
 	var mybreasts: BodypartBreasts = GlobalRegistry.getBodypart("humanbreasts")
 	mybreasts.size = BodypartBreasts.BreastsSize.C
-	setBreasts(mybreasts)
-	setHair(GlobalRegistry.getBodypart("baldhair"))
+	giveBodypart(mybreasts)
+	giveBodypart(GlobalRegistry.getBodypart("baldhair"))
 	updateNonBattleEffects()
 
 
 func updateAppearance():
 	emit_signal("bodypart_changed")
 
-func setLegs(bodypart: BodypartLeg):
-	legs = bodypart
+func resetSlots():
+	for slot in BodypartSlot.getAll():
+		bodyparts[slot] = null
+
+func giveBodypart(bodypart: Bodypart):
+	var slot = bodypart.getSlot()
+	bodyparts[slot] = bodypart
 	emit_signal("bodypart_changed")
 
-func setBreasts(bodypart: BodypartBreasts):
-	breasts = bodypart
-	emit_signal("bodypart_changed")
+func hasBodypart(slot):
+	if(bodyparts.has(slot) && bodyparts[slot] != null):
+		return true
+	return false
+	
+func getBodypart(slot):
+	return bodyparts[slot]
 
-func setHair(bodypart: BodypartHair):
-	hair = bodypart
-	emit_signal("bodypart_changed")
+func getBodyparts():
+	return bodyparts
 
 func setLocation(newRoomID:String):
 	location = newRoomID
@@ -178,29 +181,34 @@ func setSpecies(species: Array):
 	emit_signal("stat_changed")
 
 func resetBodypartsToDefault():
-	var species = getSpecies()
-	if(species.size() == 0):
+	var speciesIds = getSpecies()
+	var myspecies = []
+	for specieID in speciesIds:
+		myspecies.append(GlobalRegistry.getSpecies(specieID))
+	if(myspecies.size() == 0):
 		return
+	resetSlots()
+	var allslots = BodypartSlot.getAll()
 	
-	var breastsChoices = []
-	var legsChoices = []
-	for specieID in species:
-		var specie = GlobalRegistry.getSpecies(specieID)
-		var defaultbreasts = GlobalRegistry.getBodypart(specie.getDefaultBreasts())
-		breastsChoices.append(defaultbreasts)
-		var defaultlegs = GlobalRegistry.getBodypart(specie.getDefaultLegs())
-		legsChoices.append(defaultlegs)
+	for slot in allslots:
+		var choices = []
 		
-	var maxpriorityBreasts = breastsChoices[0]
-	for choosingBreasts in breastsChoices:
-		if(choosingBreasts.getHybridPriority() > maxpriorityBreasts.getHybridPriority()):
-			maxpriorityBreasts = choosingBreasts
-	setBreasts(maxpriorityBreasts)
-	var maxpriorityLegs = legsChoices[0]
-	for choosingLegs in legsChoices:
-		if(choosingLegs.getHybridPriority() > maxpriorityLegs.getHybridPriority()):
-			maxpriorityLegs = choosingLegs
-	setLegs(maxpriorityLegs)
+		for specie in myspecies:
+			var bodypartID = specie.getDefaultForSlot(slot)
+			if(bodypartID == null):
+				continue
+			var bodypart = GlobalRegistry.getBodypart(bodypartID)
+			choices.append(bodypart)
+			
+		if(choices.size() == 0):
+			continue
+		
+		var bestBodypart = choices[0]
+		for bodypart in choices:
+			if(bodypart.getHybridPriority() > bestBodypart.getHybridPriority()):
+				bestBodypart = bodypart
+		bodyparts[slot] = bestBodypart
+	emit_signal("bodypart_changed")
 
 func saveData():
 	var data = {
@@ -215,12 +223,22 @@ func saveData():
 		"pickedSpecies": pickedSpecies,
 	}
 	
-	data["legs"] = legs.id
-	data["legsData"] = legs.saveData()
-	data["breasts"] = breasts.id
-	data["breastsData"] = breasts.saveData()
-	data["hair"] = hair.id
-	data["hairData"] = hair.saveData()
+#	data["legs"] = legs.id
+#	data["legsData"] = legs.saveData()
+#	data["breasts"] = breasts.id
+#	data["breastsData"] = breasts.saveData()
+#	data["hair"] = hair.id
+#	data["hairData"] = hair.saveData()
+	data["bodyparts"] = {}
+	for slot in bodyparts:
+		if(bodyparts[slot] == null):
+			data["bodyparts"][slot] = null
+			continue
+		
+		data["bodyparts"][slot] = {
+			"id": bodyparts[slot].id,
+			"data": bodyparts[slot].saveData(),
+		}
 	
 	data["statusEffects"] = saveStatusEffectsData()
 	
@@ -236,14 +254,17 @@ func loadData(data):
 	pickedGender = SAVE.loadVar(data, "pickedGender", Gender.Female)
 	pronounsGender = SAVE.loadVar(data, "pronounsGender", null)
 	pickedSpecies = SAVE.loadVar(data, "pickedSpecies", ["human"])
-
-	setLegs(GlobalRegistry.getBodypart(SAVE.loadVar(data, "legs", "humanleg")))
-	legs.loadData(SAVE.loadVar(data, "legsData", {}))
 	
-	setBreasts(GlobalRegistry.getBodypart(SAVE.loadVar(data, "breasts", "humanbreasts")))
-	breasts.loadData(SAVE.loadVar(data, "breastsData", {}))
+	resetSlots()
+	var loadedBodyparts = SAVE.loadVar(data, "bodyparts", {})
+	for slot in loadedBodyparts:
+		if(loadedBodyparts[slot] == null):
+			bodyparts[slot] = null
+			continue
+		var id = SAVE.loadVar(loadedBodyparts[slot], "id", "humanleg")
+		var bodypart = GlobalRegistry.getBodypart(id)
+		bodyparts[slot] = bodypart
+		bodypart.loadData(SAVE.loadVar(loadedBodyparts[slot], "data", {}))
 	
-	setHair(GlobalRegistry.getBodypart(SAVE.loadVar(data, "hair", "baldhair")))
-	hair.loadData(SAVE.loadVar(data, "hairData", {}))
-	
+	emit_signal("bodypart_changed")
 	loadStatusEffectsData(SAVE.loadVar(data, "statusEffects", {}))
