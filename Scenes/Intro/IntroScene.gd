@@ -1,5 +1,7 @@
 extends "res://Scenes/SceneBase.gd"
 
+var pickingBodypartType = Bodypart.Category.None
+var pickedFirstSpeciesHybrid = ""
 # Heavy work in progress, the text is just to get a feel for how the game is gonna start
 
 func _init():
@@ -57,6 +59,57 @@ func _run():
 		addButton("Androgynous", "They/their", "setpronouns", [BaseCharacter.Gender.Androgynous])
 		addButton("Other", "It/its", "setpronouns", [BaseCharacter.Gender.Other])
 		addButton("back", "Back to picking gender", "pickgender")
+
+	if(state == "pickspecies"):
+		say("Pick your character's species")
+		addButton("Human", "I wanna be human", "setspecies", [[Species.Human]])
+		addButton("Feline", "I wanna be a cat", "setspecies", [[Species.Feline]])
+		addButton("Neko", "I wanna be a cat human", "setspecies", [[Species.Human, Species.Feline]])
+		addButton("Make Hybrid", "Make a custom hybrid", "pickhybrid1")
+		addButton("back", "Back to picking pronouns", "pickpronouns")
+
+	if(state == "pickhybrid1"):
+		say("Pick your first species")
+		addButton("Human", "I wanna be human", "pick2species", [Species.Human])
+		addButton("Feline", "I wanna be a cat", "pick2species", [Species.Feline])
+		addButton("back", "Back", "pickspecies")
+
+	if(state == "pick2species"):
+		say("Pick your second species")
+		addButton("Human", "I wanna be human", "setspecies", [[pickedFirstSpeciesHybrid, Species.Human]])
+		addButton("Feline", "I wanna be a cat", "setspecies", [[pickedFirstSpeciesHybrid, Species.Feline]])
+		addButton("back", "Back", "pickhybrid1")
+
+	if(state == "pickedspecies"):
+		say("You are a "+GM.pc.getSpeciesFullName())
+		say("\n----\n")
+		if(GM.pc.breasts):
+			say("Breasts: "+GM.pc.breasts.getName() + "\n")
+		if(GM.pc.legs):
+			say("Legs: "+GM.pc.legs.getName() + "\n")
+		
+		addButton("Confirm", "I like it", "pickbreastsize")
+		addButton("Breasts", "Change breasts", "pickbodypart", [Bodypart.Category.Breasts])
+		addButton("Legs", "Change legs", "pickbodypart", [Bodypart.Category.Legs])
+		addButton("back", "Back to picking species", "pickspecies")
+
+	if(state == "pickbodypart"):
+		say("Choose")
+		
+		addButton("Back", "go back", "pickedspecies")
+		var playerSpecies: Array = GM.pc.getSpecies()
+			
+		var allbodypartsIDs = GlobalRegistry.getBodypartsIdsByCategory(pickingBodypartType)
+		for bodypartID in allbodypartsIDs:
+			var bodypart = GlobalRegistry.getBodypart(bodypartID)
+			var supportedSpecies = bodypart.getCompatibleSpecies()
+			
+			for supported in supportedSpecies:
+				if(supported in playerSpecies || supported == Species.Any):
+					addButton(bodypart.getName(), "change to this", "setbodypart", [bodypart.id])
+					break
+
+		
 
 	if(state == "pickbreastsize"):
 		say("Pick your character's breast size")
@@ -198,7 +251,13 @@ func _react(_action: String, _args):
 		
 	if(_action == "setpronouns"):
 		GM.pc.setPronounGender(_args[0])
-		setState("pickbreastsize")
+		setState("pickspecies")
+		return
+		
+	if(_action == "setspecies"):
+		GM.pc.setSpecies(_args[0])
+		GM.pc.resetBodypartsToDefault()
+		setState("pickedspecies")
 		return
 		
 	if(_action == "setbreasts"):
@@ -214,7 +273,38 @@ func _react(_action: String, _args):
 		setState("donecreating")
 		return
 	
+	if(_action == "pickbodypart"):
+		pickingBodypartType = _args[0]
+	
+	if(_action == "setbodypart"):
+		var bodypartID = _args[0]
+		var bodypart = GlobalRegistry.getBodypart(bodypartID)
+		if(pickingBodypartType == Bodypart.Category.Breasts):
+			GM.pc.setBreasts(bodypart)
+		if(pickingBodypartType == Bodypart.Category.Legs):
+			GM.pc.setLegs(bodypart)
+		
+		setState("pickedspecies")
+		return
+		
+	if(_action == "pick2species"):
+		pickedFirstSpeciesHybrid = _args[0]
+	
 	setState(_action)
 
 func _react_scene_end(_tag, _result):
 	pass
+
+func saveData():
+	var data = .saveData()
+	
+	data["pickingBodypartType"] = pickingBodypartType
+	data["pickedFirstSpeciesHybrid"] = pickedFirstSpeciesHybrid
+	
+	return data
+	
+func loadData(data):
+	.loadData(data)
+	
+	pickingBodypartType = SAVE.loadVar(data, "pickingBodypartType", Bodypart.Category.Legs)
+	pickedFirstSpeciesHybrid = SAVE.loadVar(data, "pickedFirstSpeciesHybrid", "")

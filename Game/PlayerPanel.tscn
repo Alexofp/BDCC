@@ -29,6 +29,7 @@ margin_right = 279.0
 margin_bottom = 28.0
 custom_fonts/font = SubResource( 1 )
 text = "Player name"
+clip_text = true
 
 [node name="PainLabel" type="Label" parent="."]
 margin_top = 32.0

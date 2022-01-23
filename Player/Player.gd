@@ -173,6 +173,35 @@ func formatSay(text):
 func getSpecies():
 	return pickedSpecies
 
+func setSpecies(species: Array):
+	pickedSpecies = species
+	emit_signal("stat_changed")
+
+func resetBodypartsToDefault():
+	var species = getSpecies()
+	if(species.size() == 0):
+		return
+	
+	var breastsChoices = []
+	var legsChoices = []
+	for specieID in species:
+		var specie = GlobalRegistry.getSpecies(specieID)
+		var defaultbreasts = GlobalRegistry.getBodypart(specie.getDefaultBreasts())
+		breastsChoices.append(defaultbreasts)
+		var defaultlegs = GlobalRegistry.getBodypart(specie.getDefaultLegs())
+		legsChoices.append(defaultlegs)
+		
+	var maxpriorityBreasts = breastsChoices[0]
+	for choosingBreasts in breastsChoices:
+		if(choosingBreasts.getHybridPriority() > maxpriorityBreasts.getHybridPriority()):
+			maxpriorityBreasts = choosingBreasts
+	setBreasts(maxpriorityBreasts)
+	var maxpriorityLegs = legsChoices[0]
+	for choosingLegs in legsChoices:
+		if(choosingLegs.getHybridPriority() > maxpriorityLegs.getHybridPriority()):
+			maxpriorityLegs = choosingLegs
+	setLegs(maxpriorityLegs)
+
 func saveData():
 	var data = {
 		"gamename": gamename,

@@ -27,3 +27,7 @@ func getName():
 
 func getCompatibleSpecies():
 	return []
+
+# Used to make sure we don't get hybrids with human ears unless player really wants that
+func getHybridPriority():
+	return 0

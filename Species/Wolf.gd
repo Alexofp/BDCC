@@ -1,8 +1,7 @@
 extends Species
 
 func _init():
-	id = "wolf"
-	category = Species.Canine
+	id = Species.Wolf
 	
 func getVisibleName():
 	return "Wolf"

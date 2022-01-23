@@ -27,7 +27,7 @@ static func getSpeciesName(species: Array):
 		var specie = GlobalRegistry.getSpecies(specieID)
 		names.append(specie.getVisibleName())
 	
-	return join(names, "") + " hybrid"
+	return join(names, "-") + " hybrid"
 
 static func sayMale(text):
 	return "[color=#3E84E0]\""+text+"\"[/color]"

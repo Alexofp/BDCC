@@ -1,8 +1,13 @@
 extends Species
 
 func _init():
-	id = "feline"
-	category = Species.Feline
+	id = Species.Feline
 	
 func getVisibleName():
 	return "Feline"
+
+func getDefaultLegs():
+	return "felineleg"
+
+func getDefaultBreasts():
+	return "humanbreasts"

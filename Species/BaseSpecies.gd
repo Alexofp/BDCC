@@ -1,15 +1,22 @@
 extends Object
 class_name Species
 
-enum {
-	Any, Human, Feline, Dragon, Canine
-}
+const Any = "any"
+const Human = "human"
+const Feline = "feline"
+const Dragon = "dragon"
+const Wolf = "wolf"
 
 var id = "error"
-var category = Any
 
 func _init():
 	pass
 	
 func getVisibleName():
 	return "Error"
+
+func getDefaultLegs():
+	return "felineleg"
+
+func getDefaultBreasts():
+	return "humanbreasts"
