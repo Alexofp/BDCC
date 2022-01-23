@@ -114,6 +114,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Util/SimpleParser.gd"
 }, {
+"base": "Object",
+"class": "Species",
+"language": "GDScript",
+"path": "res://Species/BaseSpecies.gd"
+}, {
 "base": "Node",
 "class": "StatusEffect",
 "language": "GDScript",
@@ -161,6 +166,7 @@ _global_script_class_icons={
 "SayParser": "",
 "SceneBase": "",
 "SimpleParser": "",
+"Species": "",
 "StatusEffect": "",
 "StatusEffectBase": "",
 "StatusEffectsPanel": "",

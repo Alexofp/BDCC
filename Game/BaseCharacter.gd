@@ -419,3 +419,10 @@ func verbS(verbWithNoS, verbWithS = null):
 		return verbWithNoS
 	if(gender == Gender.Other):
 		return verbWithS
+
+func getSpecies():
+	return []
+
+func getSpeciesFullName():
+	var species = getSpecies()
+	return Util.getSpeciesName(species)

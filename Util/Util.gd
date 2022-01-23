@@ -6,6 +6,29 @@ static func delete_children(node):
 		node.remove_child(n)
 		n.queue_free()
 
+# https://godotengine.org/qa/20058/elegant-way-to-create-string-from-array-items
+static func join(arr: Array, separator: String = "") -> String:
+	var output = ""
+	for s in arr:
+		output += str(s) + separator
+	output = output.left( output.length() - separator.length() )
+	return output
+
+static func getSpeciesName(species: Array):
+	if(species.size() == 0):
+		return "Unknown species"
+	
+	if(species.size() == 1):
+		var specie = GlobalRegistry.getSpecies(species[0])
+		return specie.getVisibleName()
+	
+	var names = []
+	for specieID in species:
+		var specie = GlobalRegistry.getSpecies(specieID)
+		names.append(specie.getVisibleName())
+	
+	return join(names, "") + " hybrid"
+
 static func sayMale(text):
 	return "[color=#3E84E0]\""+text+"\"[/color]"
 	

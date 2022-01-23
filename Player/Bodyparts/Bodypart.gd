@@ -24,3 +24,6 @@ func getCategory():
 
 func getName():
 	return name
+
+func getCompatibleSpecies():
+	return []

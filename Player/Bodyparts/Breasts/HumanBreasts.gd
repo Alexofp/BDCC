@@ -10,3 +10,6 @@ func _getDollType():
 		return "Flat"
 	else:
 		return "Curvy"
+
+func getCompatibleSpecies():
+	return [Species.Any]

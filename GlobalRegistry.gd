@@ -5,6 +5,7 @@ var bodyparts: Dictionary = {}
 var characters: Dictionary = {}
 var attacks: Dictionary = {}
 var statusEffects: Dictionary = {}
+var allSpecies: Dictionary = {}
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -23,18 +24,20 @@ func _ready():
 	
 	registerStatusEffectFolder("res://StatusEffect/")
 	
+	registerSpeciesFolder("res://Species/")
+	
 
 func registerScene(path: String):
 	var scene = load(path)
 	if(!scene):
-		print("ERROR: couldn't load scene from path "+path)
+		printerr("ERROR: couldn't load scene from path "+path)
 		return
 	var sceneObject = scene.new()
 	scenes[sceneObject.sceneID] = sceneObject
 
 func getScene(id: String):
 	if(!scenes.has(id)):
-		print("ERROR: scene with the id "+id+" wasn't found")
+		printerr("ERROR: scene with the id "+id+" wasn't found")
 		return null
 	var scene = scenes[id].duplicate()
 	scene.name = scene.sceneID
@@ -56,7 +59,7 @@ func registerSceneFolder(folder: String):
 					registerScene(full_path)
 			file_name = dir.get_next()
 	else:
-		print("An error occurred when trying to access the path "+folder)
+		printerr("An error occurred when trying to access the path "+folder)
 
 func registerBodypart(path: String):
 	var bodypart = load(path)
@@ -65,7 +68,7 @@ func registerBodypart(path: String):
 
 func getBodypart(id: String):
 	if(!bodyparts.has(id)):
-		print("ERROR: bodypart with the id "+id+" wasn't found")
+		printerr("ERROR: bodypart with the id "+id+" wasn't found")
 		return null
 	return bodyparts[id].duplicate()
 
@@ -89,11 +92,11 @@ func registerBodypartFolder(folder: String):
 			else:
 				if(file_name.get_extension() == "gd"):
 					var full_path = folder.plus_file(file_name)
-					print("Registered bodypart: " + full_path)
+					#print("Registered bodypart: " + full_path)
 					registerBodypart(full_path)
 			file_name = dir.get_next()
 	else:
-		print("An error occurred when trying to access the path "+folder)
+		printerr("An error occurred when trying to access the path "+folder)
 
 func registerCharacter(path: String):
 	var character = load(path)
@@ -116,11 +119,11 @@ func registerCharacterFolder(folder: String):
 					registerCharacter(full_path)
 			file_name = dir.get_next()
 	else:
-		print("An error occurred when trying to access the path "+folder)
+		printerr("An error occurred when trying to access the path "+folder)
 
 func getCharacter(id: String):
 	if(!characters.has(id)):
-		print("ERROR: character with the id "+id+" wasn't found")
+		printerr("ERROR: character with the id "+id+" wasn't found")
 		return null
 	return characters[id]
 
@@ -144,15 +147,15 @@ func registerAttackFolder(folder: String):
 			else:
 				if(file_name.get_extension() == "gd"):
 					var full_path = folder.plus_file(file_name)
-					print("Registered attack: " + full_path)
+					#print("Registered attack: " + full_path)
 					registerAttack(full_path)
 			file_name = dir.get_next()
 	else:
-		print("An error occurred when trying to access the path "+folder)
+		printerr("An error occurred when trying to access the path "+folder)
 
 func getAttack(id: String):
 	if(!attacks.has(id)):
-		print("ERROR: attack with the id "+id+" wasn't found")
+		printerr("ERROR: attack with the id "+id+" wasn't found")
 		return null
 	return attacks[id]
 
@@ -178,10 +181,40 @@ func registerStatusEffectFolder(folder: String):
 					registerStatusEffect(full_path)
 			file_name = dir.get_next()
 	else:
-		print("An error occurred when trying to access the path "+folder)
+		printerr("An error occurred when trying to access the path "+folder)
 		
 func getStatusEffect(id: String):
 	if(!statusEffects.has(id)):
-		print("ERROR: status effect with the id "+id+" wasn't found")
+		printerr("ERROR: status effect with the id "+id+" wasn't found")
 		return null
 	return statusEffects[id].duplicate()
+
+
+func registerSpecies(path: String):
+	var species = load(path)
+	var speciesObject = species.new()
+	allSpecies[speciesObject.id] = speciesObject
+
+func registerSpeciesFolder(folder: String):
+	var dir = Directory.new()
+	if dir.open(folder) == OK:
+		dir.list_dir_begin()
+		var file_name = dir.get_next()
+		while file_name != "":
+			if dir.current_is_dir():
+				pass
+				#print("Found directory: " + file_name)
+			else:
+				if(file_name.get_extension() == "gd"):
+					var full_path = folder.plus_file(file_name)
+					print("Registered species: " + full_path)
+					registerSpecies(full_path)
+			file_name = dir.get_next()
+	else:
+		printerr("An error occurred when trying to access the path "+folder)
+		
+func getSpecies(id: String):
+	if(!allSpecies.has(id)):
+		printerr("ERROR: species with the id "+id+" wasn't found")
+		return null
+	return allSpecies[id]

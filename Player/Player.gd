@@ -16,6 +16,7 @@ var breasts: BodypartBreasts
 var hair: BodypartHair
 var pickedGender = Gender.Female
 var pronounsGender = null
+var pickedSpecies = ["human"]
 
 func _init():
 	initialDodgeChance = 0.05 # Player has a small chance to dodge anything
@@ -169,6 +170,9 @@ func formatSay(text):
 	
 	return "[color="+color+"]\""+text+"\"[/color]"
 
+func getSpecies():
+	return pickedSpecies
+
 func saveData():
 	var data = {
 		"gamename": gamename,
@@ -179,6 +183,7 @@ func saveData():
 		"location": location,
 		"pickedGender": pickedGender,
 		"pronounsGender": pronounsGender,
+		"pickedSpecies": pickedSpecies,
 	}
 	
 	data["legs"] = legs.id
@@ -201,6 +206,7 @@ func loadData(data):
 	location = SAVE.loadVar(data, "location", "ScriptedRoom")
 	pickedGender = SAVE.loadVar(data, "pickedGender", Gender.Female)
 	pronounsGender = SAVE.loadVar(data, "pronounsGender", null)
+	pickedSpecies = SAVE.loadVar(data, "pickedSpecies", ["human"])
 
 	setLegs(GlobalRegistry.getBodypart(SAVE.loadVar(data, "legs", "humanleg")))
 	legs.loadData(SAVE.loadVar(data, "legsData", {}))

@@ -38,7 +38,7 @@ func onCharacterMouseEntered(panel):
 	var charID = panel.getCharacterID()
 	var character = GlobalRegistry.getCharacter(charID)
 	
-	optionTooltip.set_text(character.getName(), character.getSmallDescription())
+	optionTooltip.set_text(character.getName() + ", " + character.getSpeciesFullName(), character.getSmallDescription())
 
 func onCharacterMouseExited():
 	optionTooltip.set_is_active(false)

@@ -6,3 +6,6 @@ func _init():
 
 func getCategory():
 	return Category.Hair
+
+func getCompatibleSpecies():
+	return [Species.Any]

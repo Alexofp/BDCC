@@ -37,7 +37,7 @@ func on_player_statchange():
 	updateUI()
 
 func updateUI():
-	nameLabel.text = GM.pc.getName()
+	nameLabel.text = GM.pc.getName() + ", " + GM.pc.getSpeciesFullName()
 	painLabel.text = "Pain: "+str(GM.pc.getPain())
 	lustLabel.text = "Lust: "+str(GM.pc.getLust())
 	creditsLabel.text = "Work Credits: " + str(GM.pc.getCredits())
