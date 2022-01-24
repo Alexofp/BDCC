@@ -18,6 +18,7 @@ onready var locationLabel = $HBoxContainer/Panel2/MarginContainer/VBoxContainer/
 onready var characterPanel = $HBoxContainer/Panel2/MarginContainer/VBoxContainer/CharacterPanel
 onready var playerPanel = $HBoxContainer/Panel/MarginContainer/PlayerPanel
 onready var charactersPanel = $HBoxContainer/Panel2/MarginContainer/VBoxContainer/CharactersPanel
+onready var scrollPanel = $HBoxContainer/VBoxContainer2/ScrollContainer
 var uiTextboxScene = preload("res://UI/UITextbox.tscn")
 onready var textcontainer = $HBoxContainer/VBoxContainer2/ScrollContainer/VBoxContainer
 var textboxes: Dictionary = {}
@@ -50,6 +51,8 @@ func say(text: String):
 	textOutput.bbcode_text += gameParser.executeString(sayParser.processString(text))
 
 func clearText():
+	#textOutput.scroll_to_line(1)
+	scrollPanel.set_v_scroll(0)
 	textOutput.bbcode_text = ""
 		
 		

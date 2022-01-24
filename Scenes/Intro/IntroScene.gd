@@ -252,7 +252,7 @@ func _run():
 		
 		say("The guard says [sayMale]We’re here. Now get the fuck out, they’re waiting for you[/sayMale] as he opens the shuttle door and watches you. [sayMale]Oh and. The cuffs.[/sayMale] He stops you to quickly uncuff your hands before shoving you out. [sayMale]They will give you better ones, don’t worry sweetie[/sayMale]\n\n")
 		
-		addButton("Look around", "Take a good look around", "lookaround")
+		addButton("Look around", "Take a good look around", "endthisscene")
 
 func _react(_action: String, _args):
 	if(_action == "setname"):
@@ -311,6 +311,10 @@ func _react(_action: String, _args):
 		
 	if(_action == "pick2species"):
 		pickedFirstSpeciesHybrid = _args[0]
+	
+	if(_action == "endthisscene"):
+		runScene("IntroIntake")
+		endScene()
 	
 	setState(_action)
 

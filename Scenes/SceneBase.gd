@@ -65,6 +65,9 @@ func say(_text: String):
 		GM.ui.say(_text)
 	#emit_signal("sayText", _text)
 
+func saynn(_text: String):
+	say(_text+"\n\n")
+
 func setFightCharacter(id: String):
 	if(id == ""):
 		clearFightCharacter()
