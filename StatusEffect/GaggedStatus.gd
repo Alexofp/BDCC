@@ -17,7 +17,7 @@ func getEffectName():
 	return "Gagged"
 
 func getEffectDesc():
-	return "Something in your mouth prevents you from talking\nnormally and biting"
+	return "Something in your mouth prevents you from talking normally and biting"
 
 func getEffectImage():
 	return null

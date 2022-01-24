@@ -21,7 +21,7 @@ func _run():
 	updateFightCharacter()
 	if(state == ""):
 		say("Well, hi")
-		setState("fighting")
+		#setState("fighting")
 	elif(state == "fighting"):
 		say("And so the fight continues")
 		
@@ -95,19 +95,19 @@ func _run():
 		var attack: Attack = GlobalRegistry.getAttack(savedAIAttackID)
 		
 		say(attack.getAnticipationText(enemyCharacter, GM.pc))
-		addButton("Do nothing", "You don't counter the attack\nin any way", "dodge_donothing")
+		addButton("Do nothing", "You don't counter the attack in any way", "dodge_donothing")
 		if(GM.pc.getStamina() > 0 && !GM.pc.hasEffect(StatusEffect.Collapsed)):
-			addButton("Dodge", "You dodge a physical attack completely\nspending 30 stamina in the process", "dodge_dodge")
+			addButton("Dodge", "You dodge a physical attack completely spending 30 stamina in the process", "dodge_dodge")
 		else:
-			addDisabledButton("Dodge", "You dodge a physical attack completely\nspending 30 stamina in the process")
+			addDisabledButton("Dodge", "You dodge a physical attack completely spending 30 stamina in the process")
 		if(GM.pc.getStamina() > 0):
-			addButton("Block", "You block 10 physical damage\nwhile spending 10 stamina", "dodge_block")
+			addButton("Block", "You block 10 physical damage while spending 10 stamina", "dodge_block")
 		else:
-			addDisabledButton("Block", "You block 10 physical damage\nwhile spending 10 stamina")
+			addDisabledButton("Block", "You block 10 physical damage while spending 10 stamina")
 		if(GM.pc.getStamina() > 0):
-			addButton("Defocus", "You try to distract yourself from the fight\nblocking 10 lust damage and spending 10 stamina", "dodge_defocus")
+			addButton("Defocus", "You try to distract yourself from the fight blocking 10 lust damage and spending 10 stamina", "dodge_defocus")
 		else:
-			addDisabledButton("Defocus", "You try to distract yourself from the fight\nblocking 10 lust damage and spending 10 stamina")
+			addDisabledButton("Defocus", "You try to distract yourself from the fight blocking 10 lust damage and spending 10 stamina")
 		
 	if(state == "" || state == "fighting"):		
 		addButton("Physical Attack", "Kick em", "physattacks")
@@ -216,7 +216,7 @@ func _react(_action: String, _args):
 	if(_action == "endbattle"):
 		enemyCharacter.afterFightEnded()
 		GM.pc.afterFightEnded()
-		endScene(battleState)
+		endScene([battleState])
 		return
 
 func _react_scene_end(_tag, _result):
@@ -276,6 +276,9 @@ func beforeTurnChecks():
 	
 	GM.pc.processBattleTurn()
 	enemyCharacter.processBattleTurn()
+	
+	if(state == ""):
+		setState("fighting")
 
 func afterTurnChecks():
 	#GM.pc.processBattleTurn()

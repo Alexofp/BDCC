@@ -9,7 +9,7 @@ func getVisibleName():
 	return "Punch"
 	
 func getVisibleDesc():
-	return "You do a combo of 2 punches in a row, each one 5-10 damage"
+	return "You do a combo of 2 punches, each one dealing 5-10 damage"
 	
 func _doAttack(_attacker, _reciever):
 	var attackerName = _attacker.getName()

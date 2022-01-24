@@ -17,7 +17,7 @@ func getEffectName():
 	return "Blindfolded"
 
 func getEffectDesc():
-	return "You can't see. Hitting anything will\nbe very hard"
+	return "You can't see. Hitting anything will be very hard"
 
 func getEffectImage():
 	return null

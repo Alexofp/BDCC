@@ -8,7 +8,7 @@ func getEffectName():
 	return "Collapsed"
 
 func getEffectDesc():
-	return "You're on the ground. Can still fight\nbut it's almost impossible to dodge physical attacks"
+	return "You're on the ground. Can still fight but it's almost impossible to dodge physical attacks"
 
 func getEffectImage():
 	return null

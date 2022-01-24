@@ -9,7 +9,7 @@ func getVisibleName():
 	return "Shove"
 	
 func getVisibleDesc():
-	return "An attempt to shove the enemy away for 5 damage\n30% to miss"
+	return "An attempt to shove the enemy away for 5 damage. 30% miss chance"
 	
 func _doAttack(_attacker, _reciever):
 	var attackerName = _attacker.getName()
