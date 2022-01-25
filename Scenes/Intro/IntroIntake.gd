@@ -247,6 +247,10 @@ func _react(_action: String, _args):
 		GM.pc.addLust(-10)
 		GM.pc.addStamina(30)
 		
+	if(_action == "endthescene"):
+		runScene("IntroMedical")
+		endScene()
+		
 	setState(_action)
 
 func _react_scene_end(_tag, _result):
