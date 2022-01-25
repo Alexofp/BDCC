@@ -1,0 +1,57 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://GlobalTheme.tres" type="Theme" id=1]
+[ext_resource path="res://Util/SceneConverter.gd" type="Script" id=2]
+
+[node name="SceneConverter" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 1 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextEdit" type="TextEdit" parent="VBoxContainer"]
+margin_right = 1280.0
+margin_bottom = 343.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "test intro
+
+> Do something, You do something
+When you do something, something happens
+
+> Do something else, Try something else
+You try something else
+
+it didn't work"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextEdit2" type="TextEdit" parent="VBoxContainer"]
+margin_top = 347.0
+margin_right = 1280.0
+margin_bottom = 690.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Output will be here"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Button" parent="VBoxContainer"]
+margin_top = 694.0
+margin_right = 1280.0
+margin_bottom = 720.0
+text = "Convert"
+
+[connection signal="pressed" from="VBoxContainer/Button" to="." method="_on_Button_pressed"]
