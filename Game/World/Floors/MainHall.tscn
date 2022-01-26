@@ -1,0 +1,117 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Game/World/SubWorld.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Game/World/GameRoom.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Game/World/Floors/MainHall.gd" type="Script" id=3]
+
+[node name="MainHall" instance=ExtResource( 1 )]
+script = ExtResource( 3 )
+
+[node name="MainHallRoom" parent="." index="0" instance=ExtResource( 2 )]
+roomID = "hall_checkpoint"
+roomSprite = 1
+roomColor = 2
+
+[node name="MainHallRoom2" parent="." index="1" instance=ExtResource( 2 )]
+position = Vector2( 0, 64 )
+roomID = "hall_mainentrance"
+roomColor = 1
+
+[node name="MainHallRoom3" parent="." index="2" instance=ExtResource( 2 )]
+position = Vector2( -64, 64 )
+roomColor = 1
+
+[node name="MainHallRoom4" parent="." index="3" instance=ExtResource( 2 )]
+position = Vector2( 64, 64 )
+roomColor = 1
+
+[node name="MainHallRoom5" parent="." index="4" instance=ExtResource( 2 )]
+position = Vector2( 0, -64 )
+roomID = "hall_elevator"
+roomSprite = 3
+roomColor = 2
+
+[node name="MainStairs1" parent="." index="5" instance=ExtResource( 2 )]
+position = Vector2( -64, 128 )
+canSouth = false
+roomSprite = 3
+roomColor = 2
+
+[node name="MainHallRoom7" parent="." index="6" instance=ExtResource( 2 )]
+position = Vector2( 0, 128 )
+
+[node name="MainStairs2" parent="." index="7" instance=ExtResource( 2 )]
+position = Vector2( 64, 128 )
+canSouth = false
+roomSprite = 3
+roomColor = 2
+
+[node name="MainHallRoom9" parent="." index="8" instance=ExtResource( 2 )]
+position = Vector2( 0, 192 )
+
+[node name="MainHallRoom10" parent="." index="9" instance=ExtResource( 2 )]
+position = Vector2( -64, 192 )
+
+[node name="MainHallRoom11" parent="." index="10" instance=ExtResource( 2 )]
+position = Vector2( 64, 192 )
+
+[node name="MainHallRoom12" parent="." index="11" instance=ExtResource( 2 )]
+position = Vector2( 128, 64 )
+roomColor = 1
+
+[node name="MainHallRoom13" parent="." index="12" instance=ExtResource( 2 )]
+position = Vector2( 128, 128 )
+canWest = false
+roomColor = 1
+
+[node name="MainHallRoom14" parent="." index="13" instance=ExtResource( 2 )]
+position = Vector2( 128, 192 )
+canWest = false
+roomColor = 1
+
+[node name="MainHallRoom15" parent="." index="14" instance=ExtResource( 2 )]
+position = Vector2( -128, 192 )
+canEast = false
+roomColor = 1
+
+[node name="MainHallRoom16" parent="." index="15" instance=ExtResource( 2 )]
+position = Vector2( -128, 128 )
+canEast = false
+roomColor = 1
+
+[node name="MainHallRoom17" parent="." index="16" instance=ExtResource( 2 )]
+position = Vector2( -128, 64 )
+roomColor = 1
+
+[node name="MainHallRoom18" parent="." index="17" instance=ExtResource( 2 )]
+position = Vector2( -64, 256 )
+
+[node name="MainHallRoom19" parent="." index="18" instance=ExtResource( 2 )]
+position = Vector2( 0, 256 )
+
+[node name="MainHallRoom20" parent="." index="19" instance=ExtResource( 2 )]
+position = Vector2( 64, 256 )
+
+[node name="MainHallRoom21" parent="." index="20" instance=ExtResource( 2 )]
+position = Vector2( 192, 192 )
+
+[node name="MainHallRoom22" parent="." index="21" instance=ExtResource( 2 )]
+position = Vector2( -192, 128 )
+roomSprite = 2
+
+[node name="MainHallRoom23" parent="." index="22" instance=ExtResource( 2 )]
+position = Vector2( 128, 0 )
+
+[node name="MainHallRoom24" parent="." index="23" instance=ExtResource( 2 )]
+position = Vector2( 192, 64 )
+canWest = false
+roomColor = 2
+
+[node name="MainHallRoom25" parent="." index="24" instance=ExtResource( 2 )]
+position = Vector2( 256, 64 )
+roomColor = 2
+
+[connection signal="onEnter" from="MainStairs1" to="." method="_on_MainStairs1_onEnter"]
+[connection signal="onReact" from="MainStairs1" to="." method="_on_MainStairs1_onReact"]
+[connection signal="onEnter" from="MainStairs2" to="." method="_on_MainStairs2_onEnter"]
+[connection signal="onReact" from="MainStairs2" to="." method="_on_MainStairs2_onReact"]

@@ -1,8 +1,7 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Game/World/GameRoom.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Game/World/SubWorld.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Game/World/ScriptedRoom.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Game/World/TestFloor.gd" type="Script" id=4]
 [ext_resource path="res://Game/World/RoomAction.tscn" type="PackedScene" id=5]
 
@@ -30,7 +29,7 @@ ActionScene = "TestScene"
 [node name="Cell210" parent="." index="2" instance=ExtResource( 1 )]
 position = Vector2( 64, 64 )
 
-[node name="ScriptedRoom" parent="." index="3" instance=ExtResource( 3 )]
+[node name="ScriptedRoom" parent="." index="3" instance=ExtResource( 1 )]
 position = Vector2( -64, 0 )
 roomSprite = 1
 roomColor = 1

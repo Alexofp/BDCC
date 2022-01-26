@@ -1,8 +1,11 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Game/World/GameRoom.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Game/World/World.gd" type="Script" id=2]
 [ext_resource path="res://Game/World/TestFloor.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Game/World/Floors/IntakeFloor.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Game/World/Floors/MainHall.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Game/World/Floors/Cellblock.tscn" type="PackedScene" id=6]
 
 [node name="World" type="Node2D"]
 script = ExtResource( 2 )
@@ -86,7 +89,15 @@ position = Vector2( 64, -192 )
 [node name="Corridor6" parent="." instance=ExtResource( 1 )]
 position = Vector2( -64, -256 )
 roomName = "IBS \"Integrity\""
-roomID = "intro_integoration"
+roomID = "intro_interogation"
+
+[node name="Corridor9" parent="." instance=ExtResource( 1 )]
+position = Vector2( 384, -256 )
+roomID = "intro_ship"
+
+[node name="Corridor10" parent="." instance=ExtResource( 1 )]
+position = Vector2( 384, -320 )
+roomSprite = 1
 
 [node name="Corridor7" parent="." instance=ExtResource( 1 )]
 position = Vector2( -64, -320 )
@@ -103,3 +114,12 @@ smoothing_enabled = true
 
 [node name="TestFloor" parent="." instance=ExtResource( 3 )]
 position = Vector2( -128, 0 )
+
+[node name="IntakeFloor" parent="." instance=ExtResource( 4 )]
+position = Vector2( 768, -384 )
+
+[node name="MainHall" parent="." instance=ExtResource( 5 )]
+position = Vector2( 1728, -256 )
+
+[node name="Cellblock" parent="." instance=ExtResource( 6 )]
+position = Vector2( 2432, -64 )

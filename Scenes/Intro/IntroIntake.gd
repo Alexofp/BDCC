@@ -7,8 +7,8 @@ func _init():
 
 func _run():
 	if(state == ""):
-		#GM.world.aimCamera("intro_corridor")
-		GM.ui.setLocationName("BDCC")
+		GM.world.aimCamera("intro_arrive")
+		GM.ui.setLocationName("Spaceship hangar")
 		
 		addCharacter("captain")
 		addCharacter("risha")
@@ -34,6 +34,9 @@ func _run():
 		addButton("What now", "Ask what happens next", "whatnow")
 		
 	if(state == "whatnow"):
+		GM.world.aimCamera("intro_nearcaptain")
+		GM.ui.setLocationName("Spaceship hangar")
+		
 		saynn("[say=pc]So. You came to take me in?[/say]")
 		
 		saynn("The officer walks up closer to you and takes a good look, his hand grabs you by the chin and makes you look at him.")
@@ -72,6 +75,9 @@ func _run():
 		addButton("Follow", "Follow the officer and his guard", "follow")
 		
 	if(state == "follow"):
+		GM.world.aimCamera("intro_intakearea")
+		GM.ui.setLocationName("Intake area")
+		
 		saynn("You follow the officer through some corridor and enter an inmate processing area. You see a little showering area that's divided from the main room with glass and automatic doors. Then there are some kinds of vendomats and, lastly, a small medical area. The floor has useful lines that show the order in which to process the inmate.")
 		
 		saynn("The officer points at the first area and a bin before it.")
@@ -88,6 +94,8 @@ func _run():
 		addButton("Fuck no", "Say that you will never do it. This might not be the best idea", "notundress")
 	
 	if(state == "undress"):
+		GM.world.aimCamera("intro_nearshower")
+		
 		saynn("Initial confusion is switched with embarrassment, you immediately blush just from the thought.")
 		
 		saynn("[say=pc]Fine.. Can you not look at least?[/say]")
@@ -101,6 +109,8 @@ func _run():
 		addButton("Shower", "Take the refreshing shower", "shower")
 		
 	if(state == "notundress"):
+		GM.world.aimCamera("intro_nearshower")
+		
 		saynn("You grit your teeth and show a middle finger to the guy.")
 		
 		saynn("[say=pc]Fuck no and fuck off, I’m not doing that[/say]")
@@ -151,6 +161,9 @@ func _run():
 		addButton("Shower", "Take the refreshing shower", "shower")
 
 	if(state == "shower"):
+		GM.world.aimCamera("intro_shower")
+		GM.ui.setLocationName("Shower")
+		
 		saynn("You step into the shower area that's closed-off with glass. It’s a small room with many shower heads attached to the ceiling. You keep covering yourself as a normal person would while preparing for the worst. And yes, when the shower begins, you feel that the water is freezing cold. It's so cold that you groan audibly.")
 		
 		saynn("[say=pc]Why is it so cold![/say]")
@@ -180,6 +193,9 @@ func _run():
 		addButton("Step out", "Do the registration", "aftershower")
 		
 	if(state == "aftershower"):
+		GM.world.aimCamera("intro_aftershower")
+		GM.ui.setLocationName("Intake area")
+		
 		saynn("You step out back into the intake room and follow the lines on the floor to your next stop. You see a vendomat mounted onto a wall, it’s a machine capable of producing and dispensing different things. Near it on a wall is a console. It looks pretty dated, a screen that can only output green color, a bulky card reader and a mechanical keyboard, not even sensory. The officer begins to type some stuff into it while the guard watches you out.")
 		
 		saynn("[say=captain]Was a while since the last time I used this[/say]")
@@ -213,6 +229,8 @@ func _run():
 		addButton("Stand still", "Let him do it", "cuffs")
 		
 	if(state == "cuffs"):
+		GM.world.aimCamera("intro_beforemedical")
+		
 		saynn("You don’t look too happy about it but you comply, the stare of a guard makes that choice easier. You offer your wrists and ankles to the captain as he locks every cuff onto you one by one. They’re not chained together but there are eyelets for that.")
 		
 		saynn("[say=pc]Is that even legal?[/say]")

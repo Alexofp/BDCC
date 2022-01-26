@@ -31,6 +31,9 @@ var sprites = {
 }
 onready var roomSpriteObject = $Sprite
 
+signal onEnter(room)
+signal onReact(room, key)
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	if(!roomID):
@@ -98,9 +101,14 @@ func addActions():
 func _onEnter():
 	say(getDescription())
 	addActions()
+	
+	emit_signal("onEnter", self)
 
 func _onButton(key):
-	print("Error: non-scripted room got button callback with key " + key)
+	GM.ui.clearText()
+	GM.ui.clearButtons()
+	emit_signal("onReact", self, key)
+	return true
 
 func setHighlighted(high):
 	if(high):

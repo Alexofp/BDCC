@@ -7,8 +7,8 @@ func _init():
 
 func _run():
 	if(state == ""):
-		#GM.world.aimCamera("intro_corridor")
-		GM.ui.setLocationName("Medical")
+		GM.world.aimCamera("intro_beforeelevator")
+		GM.ui.setLocationName("Intake area")
 		
 		addCharacter("eliza")
 
@@ -20,6 +20,9 @@ func _run():
 		addButton("Sneak up", "", "sneak_up")
 
 	if(state == "sneak_up"):
+		GM.world.aimCamera("intro_medicalarea")
+		GM.ui.setLocationName("Medical area")
+		
 		saynn("You decide not to announce your presence and instead begin to slowly creep up to the lady, who seems to be too busy with reading something off of her tablet. You keep watching her as you make your steps as light as possible. You notice her feline ears twitching ever so slightly. As you approach the instrument table, you notice a variety of tools: syringes, clamps, retractors but most importantly, a few scalpels. Your hand hovers over one as you try to grab it. But as soon as you do, you hear a voice.")
 
 		saynn("[say=eliza]You will regret it, inmate. Put it down[/say]")
@@ -69,6 +72,9 @@ func _run():
 		addButton("Sit", "Take a sit", "sit")
 
 	if(state == "introduce_self"):
+		GM.world.aimCamera("intro_medicalarea")
+		GM.ui.setLocationName("Medical area")
+		
 		saynn("You cough slightly to try and get her attention. Her feline ears quickly pick up on the noise and direct themselves towards you, followed soon by her glance.")
 
 		saynn("[say=pc]Um. I’m {pc.name}.[/say]")
@@ -170,6 +176,9 @@ func _run():
 		addButton("Fuck no", "You’re not a dog", "fuck_no")
 
 	if(state == "fuck_no"):
+		GM.world.aimCamera("intro_beforeelevator")
+		GM.ui.setLocationName("Intake area")
+		
 		saynn("[say=pc]Yeah, that’s not happening. How about you go screw yourself instead[/say]")
 
 		saynn("Doctor raises her brows but tries to clip the leash to your collar anyways which is met with your resistance. You take a hold of her hand and try to wrench it which proves to be effective, considering the doctor is not that strong. She hisses from pain but then uses her free hand to punch you directly in the stomach. You grunt and let go, giving the doctor just enough time to press something on your wrist cuffs which made them connect to each other with a very strong magnetic force. She then grabs you by the collar and threatens to punch again with the second hand.")
@@ -185,6 +194,9 @@ func _run():
 		addButton("Lift", "Enter the lift", "lift")
 
 	if(state == "fine"):
+		GM.world.aimCamera("intro_beforeelevator")
+		GM.ui.setLocationName("Intake area")
+		
 		saynn("[say=pc]Fine[/say]")
 
 		saynn("You raise your chin and present the collar to the doctor, she doesn’t take much time to clip the leash to it.")
@@ -200,6 +212,9 @@ func _run():
 		addButton("Lift", "Enter the lift", "lift")
 
 	if(state == "lift"):
+		GM.world.aimCamera("intro_elevator")
+		GM.ui.setLocationName("Lift")
+		
 		addCharacter("tavi")
 		
 		saynn("You step into the spacious lift. It’s control panel shows that this prison has quite a few levels to it but their names are shortened to two letters so it's hard to figure out what is what.")
@@ -213,7 +228,12 @@ func _run():
 		say("EN\n\n")
 
 		saynn("Doctor Quinn presses the third button and the lift begins to descend, screeching a bit in the progress. You take a look around, there don’t seem to be anything interesting, not even cameras. Your collar is constantly reminding you that you’re on a tight leash.")
-
+		addButton("Wait", "Wait until the lift arrives", "liftarrives")
+		
+	if(state == "liftarrives"):
+		GM.world.aimCamera("hall_elevator")
+		GM.ui.setLocationName("Checkpoint")
+		
 		saynn("It takes a minute but the lift finally arrives. When the doors open, the first thing you see is a checkpoint with a few guards standing around.")
 
 		saynn("[say=eliza]That inmate is with me[/say]")
@@ -221,13 +241,25 @@ func _run():
 		saynn("One of them nods and lets you two pass freely. When you exit the checkpoint, you are presented to a huge open room, about 20x20 meters. The walls seem to be made out of dark concrete but there are massive metal pillars there and there which make the design not as dull. The middle is taken mostly by a huge raised platform with stairs connecting it to the lower level.")
 
 		saynn("[say=eliza]This is the main hall[/say]")
-
+		
+		addButton("Look around", "Look around the main hall", "lookaroundmainhall")
+	
+	if(state == "lookaroundmainhall"):
+		GM.world.aimCamera("hall_mainentrance")
+		GM.ui.setLocationName("Main hall")
+		
 		saynn("You spot a few inmates around. All sorts of inmates of different species. Some wear orange uniforms like you, some wear red or pink. Obviously they weren’t told that you’re arriving but you do begin to catch their stares. Almost every inmate is now watching you being led around on a leash, you can hear some voices talking about you but it’s all incomprehensible to you.")
 
 		saynn("One particular stare steals your attention. One of the reds. It’s clearly a female feline, a very tall one, about 2 meters. Her unusual fur is mostly purple with a toxic-green pattern added to it, cunning eyes are of different colors, green and red. She is standing by herself, away from everyone, arms crossed, eyes are staring at you, the lips form a very subtle smile. As the doctor leads you somewhere, that inmate stays silent, just watching you.")
 
-		saynn("The doctor leads you to some stairs to the lower floor where all the cells are. She finds the orange block and quickly checks her tablet. You follow.")
+		saynn("The doctor leads you to some stairs to the lower floor where all the cells are. She finds the orange block and quickly checks her tablet.")
+		
+		addButton("Follow", "Follow the leash", "followtocell")
 
+	if(state == "followtocell"):
+		GM.world.aimCamera("cellblock_orange_nearcell")
+		GM.ui.setLocationName("Cellblock")
+		
 		saynn("[say=eliza]Here, that’s your cell[/say]")
 
 		saynn("Doctor points at one of the cells. Each cell is a small room about 2x5 meters of space with some furniture inside: a bed that's built into the wall, a normal stool and a window outside. The door into the cell is always open but there seems to be a staff console nearby that might be able to control it.")
@@ -245,6 +277,8 @@ func _run():
 	if(state == "walk_inside"):
 		removeCharacter("tavi")
 		removeCharacter("eliza")
+		GM.world.aimCamera("cellblock_orange_playercell")
+		GM.ui.setLocationName("My new home")
 		
 		saynn("You step into your cell and take a look around.")
 

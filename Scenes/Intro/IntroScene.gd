@@ -24,7 +24,8 @@ func _run():
 		addButton("Step inside", "What can go wrong", "stepinside")
 
 	if(state == "stepinside"):
-		GM.world.aimCamera("intro_integoration")
+		GM.world.aimCamera("intro_interogation")
+		GM.ui.setLocationName("Interogation room")
 		
 		say("You step inside a room with white walls and ceiling tiles. There is only enough room for a long table, two chairs and a light. Both corners of the room seem to have cameras on them.\n\n")
 		
@@ -186,6 +187,8 @@ func _run():
 	
 	if(state == "admit"):
 		say("You look down at your hands, at your opened palms. They’re shaking. Millions of thoughts suddenly rush through your head. You don’t want to confess, it would be the end of your life. But what other choice is there? You look at the officer for approval, seeing his understanding eyes, before tilting your head down\n\n")
+
+		saynn("((More will be added later))")
 		
 		addButton("I killed", "Admit that you killed someone", "ikilled")
 		
@@ -235,6 +238,8 @@ func _run():
 		
 	if(state == "gocell"):
 		removeCharacter("intro_detective")
+		GM.world.aimCamera("intro_ship")
+		GM.ui.setLocationName("Transport shuttle")
 		
 		say("The next moment you know, you are in a small transport shuttle, in its cargo compartment. It looks like it could fit about 10 prisoners but right now there is only one officer that's guarding you and a pilot behind a metal wall. You can see space through all the transparent windows with all its distant stars and also asteroids, it seems the shuttle is flying through an asteroid belt. Its small size allows it to avoid everything. The guard smirks watching you.\n\n")
 		

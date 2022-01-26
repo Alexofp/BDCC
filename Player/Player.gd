@@ -6,7 +6,7 @@ signal location_changed(newloc)
 
 var gamename = "Rahi"
 var credits:int = 0
-var location:String = "ScriptedRoom"
+var location:String = "cellblock_orange_playercell"#"ScriptedRoom"
 var bodyparts: Dictionary
 var pickedGender = Gender.Female
 var pronounsGender = null
