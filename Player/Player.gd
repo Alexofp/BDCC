@@ -4,13 +4,13 @@ class_name Player
 signal bodypart_changed
 signal location_changed(newloc)
 
-var gamename = "Rahi"
+var gamename = "Player"
 var credits:int = 0
 var location:String = "cellblock_orange_playercell"#"ScriptedRoom"
 var bodyparts: Dictionary
 var pickedGender = Gender.Female
 var pronounsGender = null
-var pickedSpecies = ["human"]
+var pickedSpecies = ["feline"]
 
 func _init():
 	initialDodgeChance = 0.05 # Player has a small chance to dodge anything
