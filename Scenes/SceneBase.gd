@@ -48,6 +48,17 @@ func run():
 	GM.ui.clearButtons()
 	GM.ui.clearUItextboxes()
 	_run()
+	
+	var messages: Array = GM.main.getMessages()
+	if(messages.size() > 0):
+		GM.ui.trimLineEndings()
+		say("\n\n")
+		say("[center]")
+		for message in GM.main.getMessages():
+			say(message)
+			say("\n")
+		say("[/center]")
+	
 	GM.pc.updateEffectPanel(GM.ui.getPlayerStatusEffectsPanel())
 	if(fightCharacter):
 		var character = GlobalRegistry.getCharacter(fightCharacter)
@@ -55,6 +66,7 @@ func run():
 		
 	
 func react(_action: String, _args):
+	GM.main.clearMessages()
 	return _react(_action, _args)
 
 func setState(newState: String):
@@ -174,6 +186,9 @@ func addTextbox(id):
 
 func getTextboxData(id):
 	return GM.ui.getUIdata(id)
+
+func addMessage(text: String):
+	GM.main.addMessage(text)
 
 func canSave():
 	return true

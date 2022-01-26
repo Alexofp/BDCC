@@ -218,3 +218,6 @@ func _on_SaveButton_pressed():
 
 func _on_LoadButton_pressed():
 	SAVE.loadGame("user://savegame.save")
+	
+func trimLineEndings():
+	textOutput.bbcode_text = textOutput.bbcode_text.trim_suffix("\n")

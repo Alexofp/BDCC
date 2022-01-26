@@ -7,6 +7,7 @@ extends Node
 #onready var theScene = $SceneBase
 onready var gameUI = $GameUI
 var sceneStack: Array = []
+var messages: Array = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -72,6 +73,8 @@ func canSave():
 
 func saveData():
 	var data = {}
+	data["messages"] = messages
+	
 	data["scenes"] = []
 	for scene in sceneStack:
 		var sceneData = {}
@@ -82,6 +85,8 @@ func saveData():
 	return data
 
 func loadData(data):
+	messages = SAVE.loadVar(data, "messages", [])
+	
 	var scenes = SAVE.loadVar(data, "scenes", [])
 	
 	for scene in sceneStack:
@@ -100,3 +105,12 @@ func loadData(data):
 		
 		#scene.initScene(_args)
 		scene.loadData(SAVE.loadVar(sceneData, "sceneData", {}))
+
+func addMessage(text: String):
+	messages.append(text)
+
+func getMessages():
+	return messages
+
+func clearMessages():
+	messages = []
