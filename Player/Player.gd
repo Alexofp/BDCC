@@ -277,3 +277,25 @@ func loadData(data):
 	
 	emit_signal("bodypart_changed")
 	loadStatusEffectsData(SAVE.loadVar(data, "statusEffects", {}))
+
+func getFightState():
+	if(getPain() > getLust()):
+		var mypain = getPain()
+		
+		if(mypain >= 70):
+			return "Everything hurts, you are barely able to continue fighting."
+		if(mypain >= 50):
+			return "The pain begins to take over your body, it's hard to concentrate on fighting"
+		if(mypain >= 10):
+			return "You got bruised but doing fine otherwise"
+	else:
+		var mylust = getLust()
+		
+		if(mylust >= 70):
+			return "You feel so horny, you just can't stop thinking about your opponent, your hands sneak down to your privates and tease them"
+		if(mylust >= 50):
+			return "You feel very lusty, you find your opponent to be quite hot"
+		if(mylust >= 10):
+			return "You are slightly aroused but you manage to control it just fine"
+		
+	return "You seem to be doing just fine during this moment in a fight"

@@ -26,7 +26,16 @@ func _doAttack(_attacker, _reciever):
 	if(RNG.chance(50)):
 		_reciever.addEffect(StatusEffect.Bleeding)
 	
-	var text = attackerName + " scratches " + recieverName + " a few times and does "+str(damage)+" damage!"
+	var texts = [
+		attackerName + " sinks "+_attacker.hisHer()+" claws into " + recieverName +" and leaves a few good scratch marks",
+		attackerName + " scratches " + recieverName +" using "+_attacker.hisHer() +" claws",
+	]
+	var text = RNG.pick(texts)
+	if(RNG.chance(50) && !_reciever.hasEffect(StatusEffect.Bleeding)):
+		text += " causing "+_reciever.himHer() + " to start [color=red]bleeding[/color]"
+		_reciever.addEffect(StatusEffect.Bleeding)
+	
+	text += "\n"+recieverName+" recieved "+str(damage)+" damage!"
 	
 	return text
 	

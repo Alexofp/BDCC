@@ -156,7 +156,7 @@ __meta__ = {
 [node name="SaveButton" type="Button" parent="HBoxContainer/Panel2/MarginContainer/VBoxContainer/HBoxContainer2"]
 margin_right = 116.0
 margin_bottom = 26.0
-hint_tooltip = "test"
+hint_tooltip = "Save the game"
 size_flags_horizontal = 3
 text = "Quick save"
 
@@ -164,7 +164,7 @@ text = "Quick save"
 margin_left = 120.0
 margin_right = 236.0
 margin_bottom = 26.0
-hint_tooltip = "test"
+hint_tooltip = "Load the saved game"
 size_flags_horizontal = 3
 text = "Quick load"
 
@@ -176,7 +176,7 @@ margin_bottom = 696.0
 [node name="PrevPageButton" type="Button" parent="HBoxContainer/Panel2/MarginContainer/VBoxContainer/HBoxContainer"]
 margin_right = 116.0
 margin_bottom = 26.0
-hint_tooltip = "test"
+hint_tooltip = "Flip to the previous page of options"
 size_flags_horizontal = 3
 text = "<- Page"
 __meta__ = {
@@ -187,7 +187,7 @@ __meta__ = {
 margin_left = 120.0
 margin_right = 236.0
 margin_bottom = 26.0
-hint_tooltip = "test"
+hint_tooltip = "Flip to the next page of options"
 size_flags_horizontal = 3
 text = "Page ->"
 __meta__ = {

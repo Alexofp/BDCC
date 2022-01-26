@@ -289,24 +289,24 @@ func reactHumiliation(_topic):
 	return 0
 
 func lustDamageReaction(lustDamage, _enemy):
-	if(lustDamage <= -20):
-		return getName() + " got very turned off by the sight"
 	if(lustDamage <= -10):
+		return getName() + " got very turned off by the sight"
+	if(lustDamage <= -6):
 		return getName() + " didn't like that at all"
-	if(lustDamage <= -5):
-		return getName() + " sighs and shakes their head"
+	if(lustDamage <= -3):
+		return getName() + " sighs and shakes "+hisHer()+" head"
 	if(lustDamage == 0):
 		return getName() + " didn't seem to care at all"
 	if(lustDamage <= 5):
-		return getName() + " seems intrigued and hides their slight blush"
+		return getName() + " seems intrigued"
 	if(lustDamage <= 10):
 		return getName() + " smiles eagerly and watches the show"
 	if(lustDamage <= 10):
-		return getName() + " smiles eagerly and carefully watches " + _enemy.getName()
+		return getName() + " blushes watching " + _enemy.getName()
 	if(lustDamage <= 15):
-		return getName() + " exhalled deeply while rubbing their legs together"
+		return getName() + " exhalled deeply while rubbing "+hisHer()+" legs together"
 	if(lustDamage > 15):
-		return getName() + " moans audibly, their eyes burn with desire"
+		return getName() + " moans audibly, "+hisHer()+" eyes burn with desire"
 
 func getGender():
 	return Gender.Other
@@ -426,3 +426,28 @@ func getSpecies():
 func getSpeciesFullName():
 	var species = getSpecies()
 	return Util.getSpeciesName(species)
+	
+func getFightIntro():
+	return "Plase change the fight intro"
+
+func getFightState():
+	if(getPain() > getLust()):
+		var mypain = getPain()
+		
+		if(mypain >= 70):
+			return getName() + " constantly grunts from pain. "+heShe()+" can barely stand at this point, all "+hisHer()+" bruises are really wearing "+himHer()+" down"
+		if(mypain >= 50):
+			return getName() + " looks pretty beat up and "+hisHer()+" face shows it but "+heShe()+" is still standing strong"
+		if(mypain >= 25):
+			return getName() + " has a bruise there and there but "+heShe()+" clearly won't give up the fight any time soon"
+	else:
+		var mylust = getLust()
+		
+		if(mylust >= 70):
+			return getName() + " keeps moaning to "+himselfHerself()+" and can't hide the arousal anymore, "+heShe()+" blatantly gropes and rubs "+hisHer()+" body in front of you"
+		if(mylust >= 50):
+			return getName() + " breathes warmly, "+hisHer()+" blush starts to shine through, "+ heShe()+" is lusty and "+hisHer()+" eyes show it"
+		if(mylust >= 25):
+			return getName() + " looks alright but you notice some desire in "+hisHer()+" eyes"
+		
+	return getName() + " looks completely fine, no visible bruises or signs of lust"

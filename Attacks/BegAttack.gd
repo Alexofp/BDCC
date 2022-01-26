@@ -9,13 +9,17 @@ func getVisibleName():
 	return "Beg to be used"
 	
 func getVisibleDesc():
-	return "You beg the enemy"
+	return "You beg the enemy. This will be effective depending on if the enemy enjoys this"
 	
 func _doAttack(_attacker, _reciever):
 	var attackerName = _attacker.getName()
 	var recieverName = _reciever.getName()
 	
-	var text = attackerName + " gets on their knees and begs 'please use me'"
+	var texts = [
+		attackerName + " gets on "+_attacker.hisHer()+" knees and begs "+_attacker.formatSay("Please use me"),
+		attackerName + " bends over for "+ recieverName + " and spanks " +_attacker.hisHer()+" ass " +_attacker.formatSay("Please, I want you to fuck me")
+	]
+	var text = RNG.pick(texts)
 	
 	var damageMult = _reciever.reactSelfHumiliation(Attack.LustTopic.selfUseMe)
 	

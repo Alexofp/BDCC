@@ -20,27 +20,28 @@ func _initScene(_args = []):
 func _run():
 	updateFightCharacter()
 	if(state == ""):
-		say("Well, hi")
+		saynn(enemyCharacter.getFightIntro())
 		#setState("fighting")
 	elif(state == "fighting"):
-		say("And so the fight continues")
+		#say("And so the fight continues")
+		pass
 		
 	if(state == "lost" || state == "win"):		
-		say("The fight has ended")
+		saynn("The fight has ended")
 		
 	if(state == "inspecting"):
-		say("It's an enemy, wow")
+		saynn("It's an enemy, wow")
 		addButton("Back", "Back to fighting", "return")
 	
 	if(state == "physattacks"):
-		say("Pick the attack to use")
+		saynn("Pick the attack to use")
 		
 		addAttackButtons(Attack.Category.Physical)
 		
 		addButton("Back", "Back to fighting", "return")
 	
 	if(state == "lustattacks"):
-		say("Pick the attack to use")
+		saynn("Pick the attack to use")
 		
 		addAttackButtons(Attack.Category.Lust)
 		addButton("Self-humiliation..", "Opens a submenu", "selfhumattacks")
@@ -49,21 +50,21 @@ func _run():
 		addButton("Back", "Back to fighting", "return")
 	
 	if(state == "selfhumattacks"):
-		say("Pick the attack to use")
+		saynn("Pick the attack to use")
 		
 		addAttackButtons(Attack.Category.SelfHumiliation)
 		
 		addButton("Back", "Back to fighting", "lustattacks")
 		
 	if(state == "humattacks"):
-		say("Pick the attack to use")
+		saynn("Pick the attack to use")
 		
 		addAttackButtons(Attack.Category.Humiliation)
 		
 		addButton("Back", "Back to fighting", "lustattacks")
 	
 	if(state == "specialattacks"):
-		say("Pick the attack to use")
+		saynn("Pick the attack to use")
 		
 		addAttackButtons(Attack.Category.Special)
 		
@@ -71,30 +72,30 @@ func _run():
 	
 	if(state == "playerMustDodge"):
 		if(whatPlayerDid != ""):
-			say(whatPlayerDid)
+			saynn(whatPlayerDid)
 			
 		if(whatHappened != ""):
-			say("\n\n")
-			say(whatHappened)
+			saynn(whatHappened)
 	
 	if(state == "" || state == "fighting" || state == "lost" || state == "win"):	
 		if(whatPlayerDid != ""):
-			say("\n\n")
-			say(whatPlayerDid)
+			saynn(whatPlayerDid)
 			
 		if(whatEnemyDid != ""):
-			say("\n\n")
-			say(whatEnemyDid)
+			saynn(whatEnemyDid)
 			
 		if(whatHappened != ""):
-			say("\n\n")
-			say(whatHappened)
+			saynn(whatHappened)
+			
+	if(state == "fighting"):
+		saynn(enemyCharacter.getFightState())
+		
+		saynn(GM.pc.getFightState())
 			
 	if(state == "playerMustDodge"):
-		say("\n\n")
 		var attack: Attack = GlobalRegistry.getAttack(savedAIAttackID)
 		
-		say(attack.getAnticipationText(enemyCharacter, GM.pc))
+		saynn(attack.getAnticipationText(enemyCharacter, GM.pc))
 		addButton("Do nothing", "You don't counter the attack in any way", "dodge_donothing")
 		if(GM.pc.getStamina() > 0 && !GM.pc.hasEffect(StatusEffect.Collapsed)):
 			addButton("Dodge", "You dodge a physical attack completely spending 30 stamina in the process", "dodge_dodge")
@@ -254,7 +255,7 @@ func aiTurn():
 	if(enemyCharacter.getPain() >= enemyCharacter.painThreshold() || enemyCharacter.getLust() >= enemyCharacter.lustThreshold()):
 		return ""
 	
-	var enemyText = "It's enemy's turn\n"
+	var enemyText = "It's "+enemyCharacter.getName()+"'s turn\n"
 	var attackID = getBestAIAttack()
 	
 	var attack: Attack = GlobalRegistry.getAttack(attackID)

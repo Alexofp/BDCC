@@ -11,7 +11,7 @@ func initArgs(_args = []):
 		turns = 3
 	
 func processBattleTurn():
-	character.addPain(2)
+	character.addPain(3)
 	
 	turns -= 1
 	if(turns <= 0):
@@ -24,7 +24,7 @@ func getEffectName():
 	return "Bleeding"
 
 func getEffectDesc():
-	return "I'm loosing health. " + str(turns) + " more turns"
+	return "I'm losing 3 health a turn. " + str(turns) + " more turns"
 
 func getEffectImage():
 	return "res://UI/StatusEffectsPanel/images/bleeding.png"

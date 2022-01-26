@@ -19,13 +19,16 @@ func _doAttack(_attacker, _reciever):
 		return attackerName + " tries to punch " + recieverName + " but misses and fails completely"
 	
 	if(checkDodged(_attacker, _reciever, DamageType.Physical)):
-		return attackerName + " tries to punch " + recieverName + " but " + recieverName + " dodges the attack masterfully"
+		return attackerName + " tries to punch " + recieverName + " but " + recieverName + " dodges just in time"
 	
 	var damage = 0
 	damage = doDamage(_attacker, _reciever, DamageType.Physical, RNG.randi_range(5,10))
 	damage += doDamage(_attacker, _reciever, DamageType.Physical, RNG.randi_range(5,10))
 	
-	var text = attackerName + " punches " + recieverName + " a few times and does "+str(damage)+" damage!"
+	var texts = [
+		attackerName + " manages to land a few strong punches on " + recieverName + " doing "+str(damage)+" damage!",
+	]
+	var text = RNG.pick(texts)
 	
 	return text
 	

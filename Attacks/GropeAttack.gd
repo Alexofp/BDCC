@@ -9,13 +9,17 @@ func getVisibleName():
 	return "Grope"
 	
 func getVisibleDesc():
-	return "You grope the enemy I dunno"
+	return "You try to grope the enemy. Armor and their current lust level will heavily affect the outcome"
 	
 func _doAttack(_attacker, _reciever):
 	var attackerName = _attacker.getName()
 	var recieverName = _reciever.getName()
 	
-	var text = attackerName + " teases " + recieverName
+	var texts = [
+		attackerName + " gets close and personal to grope " + recieverName +"'s butt",
+		attackerName + " sneaks up to " + recieverName +" and gropes "+_reciever.herHis()+" body",
+	]
+	var text = RNG.pick(texts)
 	
 	var damageMult = _reciever.reactGrope()
 	
