@@ -1,7 +1,6 @@
-extends Resource
+extends Node
 class_name Bodypart
 
-var name
 var id
 var dollType
 

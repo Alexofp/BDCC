@@ -6,7 +6,7 @@ const Bob = "testchar"
 var id = "errorerror"
 
 func _ready():
-	pass # Replace with function body.
+	name = id
 
 func _init():
 	pass

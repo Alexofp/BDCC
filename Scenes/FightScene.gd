@@ -70,6 +70,17 @@ func _run():
 		
 		addButton("Back", "Back to fighting", "return")
 	
+	if(state == "inventory"):
+		saynn("Pick the item to use")
+	
+		var playerInventory = GM.pc.getInventory()
+		var usableItems = playerInventory.getAllCombatUsableItems()
+		
+		for item in usableItems:
+			addButton(item.getVisibleName(), item.getCombatDescription(), "useitem", [item])
+	
+		addButton("Back", "Back to fighting", "return")
+	
 	if(state == "playerMustDodge"):
 		if(whatPlayerDid != ""):
 			saynn(whatPlayerDid)
@@ -116,7 +127,7 @@ func _run():
 		addButton("Special", "Kick em but in a special way", "specialattacks")
 		addButton("Inspect", "Look closer", "inspect")
 		addButton("Wait", "Do nothing", "wait")
-		addDisabledButton("Inventory", "no awo yet")
+		addButton("Inventory", "Use an item fron your inventory", "inventory")
 		
 		if(GM.pc.hasEffect(StatusEffect.Collapsed)):
 			addButton("Get up", "spends the whole turn", "getup")
@@ -132,7 +143,7 @@ func _react(_action: String, _args):
 	if(_action == "inspect"):
 		setState("inspecting")
 		
-	if(_action == "physattacks" || _action == "lustattacks" || _action == "specialattacks" || _action == "selfhumattacks" || _action == "humattacks"):
+	if(_action == "physattacks" || _action == "lustattacks" || _action == "specialattacks" || _action == "selfhumattacks" || _action == "humattacks" || _action == "inventory"):
 		setState(_action)
 		
 	if(_action == "return"):
@@ -147,6 +158,16 @@ func _react(_action: String, _args):
 		
 		var attackID = _args[0]
 		whatPlayerDid += doPlayerAttack(attackID)
+		whatEnemyDid = aiTurn()
+
+		afterTurnChecks()
+		return
+		
+	if(_action == "useitem"):
+		beforeTurnChecks()
+		
+		var item = _args[0]
+		whatPlayerDid += item.useInCombat(GM.pc, enemyCharacter)
 		whatEnemyDid = aiTurn()
 
 		afterTurnChecks()

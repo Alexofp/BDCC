@@ -17,6 +17,7 @@ func _init():
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	name = "Player"
 	resetSlots()
 	#legs = GlobalRegistry.getBodypart("humanleg")
 	giveBodypart(GlobalRegistry.getBodypart("felineleg"))
@@ -30,6 +31,8 @@ func _ready():
 	giveBodypart(GlobalRegistry.getBodypart("humanarms"))
 	giveBodypart(GlobalRegistry.getBodypart("felineears"))
 	updateNonBattleEffects()
+	
+	inventory.addItem(GlobalRegistry.createItem("testitem"))
 
 
 func updateAppearance():
@@ -37,10 +40,14 @@ func updateAppearance():
 
 func resetSlots():
 	for slot in BodypartSlot.getAll():
+		if(bodyparts.has(slot) && bodyparts[slot] != null):
+			bodyparts[slot].queue_free()
 		bodyparts[slot] = null
 
 func giveBodypart(bodypart: Bodypart):
 	var slot = bodypart.getSlot()
+	if(bodyparts.has(slot) && bodyparts[slot] != null):
+		bodyparts[slot].queue_free()
 	bodyparts[slot] = bodypart
 	emit_signal("bodypart_changed")
 
@@ -56,6 +63,8 @@ func getBodyparts():
 	return bodyparts
 	
 func removeBodypart(slot):
+	if(bodyparts.has(slot) && bodyparts[slot] != null):
+		bodyparts[slot].queue_free()
 	bodyparts[slot] = null
 	emit_signal("bodypart_changed")
 

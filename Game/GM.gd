@@ -6,6 +6,6 @@ var pc: Player
 var world: GameWorld
 
 func _ready():
-	pc = preload("res://Player/Player.tscn").instance()
+	pc = load("res://Player/Player.gd").new()
 	add_child(pc)
 

@@ -1,4 +1,4 @@
-extends Object
+extends Node
 class_name Species
 
 const Any = "any"

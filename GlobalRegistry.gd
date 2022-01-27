@@ -6,6 +6,7 @@ var characters: Dictionary = {}
 var attacks: Dictionary = {}
 var statusEffects: Dictionary = {}
 var allSpecies: Dictionary = {}
+var items: Dictionary = {}
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -31,6 +32,8 @@ func _ready():
 	registerStatusEffectFolder("res://StatusEffect/")
 	
 	registerSpeciesFolder("res://Species/")
+	
+	registerItemFolder("res://Inventory/Items/")
 	
 
 func registerScene(path: String):
@@ -108,6 +111,7 @@ func registerCharacter(path: String):
 	var character = load(path)
 	var characterObject = character.new()
 	characters[characterObject.id] = characterObject
+	add_child(characterObject)
 
 func registerCharacterFolder(folder: String):
 	var dir = Directory.new()
@@ -231,3 +235,35 @@ func getAllPlayableSpecies():
 		if(allSpecies[speciesID].isPlayable()):
 			result[speciesID] = allSpecies[speciesID]
 	return result
+
+
+
+func registerItem(path: String):
+	var item = load(path)
+	var itemObject = item.new()
+	items[itemObject.id] = item
+	itemObject.queue_free()
+
+func registerItemFolder(folder: String):
+	var dir = Directory.new()
+	if dir.open(folder) == OK:
+		dir.list_dir_begin()
+		var file_name = dir.get_next()
+		while file_name != "":
+			if dir.current_is_dir():
+				pass
+				#print("Found directory: " + file_name)
+			else:
+				if(file_name.get_extension() == "gd"):
+					var full_path = folder.plus_file(file_name)
+					print("Registered item: " + full_path)
+					registerItem(full_path)
+			file_name = dir.get_next()
+	else:
+		printerr("An error occurred when trying to access the path "+folder)
+
+func createItem(id: String):
+	if(!items.has(id)):
+		printerr("ERROR: item with the id "+id+" wasn't found")
+		return null
+	return items[id].new()

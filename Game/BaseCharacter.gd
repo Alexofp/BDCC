@@ -15,6 +15,7 @@ var pain:int = 0
 var lust:int = 0
 var stamina:int = 100
 var statusEffects:Dictionary = {}
+onready var inventory: Inventory
 
 # Combat stats
 var initialDodgeChance = 0
@@ -25,7 +26,11 @@ var fightingState = "" # dodge, block, defocus
 var lustMemory:Dictionary = {}
 
 func _init():
-	pass
+	name = "BaseCharacter"
+
+func _ready():
+	inventory = Inventory.new()
+	add_child(inventory)
 
 # Skips armor checks etc
 func addPain(_p: int):
@@ -419,6 +424,9 @@ func verbS(verbWithNoS, verbWithS = null):
 		return verbWithNoS
 	if(gender == Gender.Other):
 		return verbWithS
+
+func getInventory() -> Inventory:
+	return inventory
 
 func getSpecies():
 	return []

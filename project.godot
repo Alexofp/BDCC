@@ -19,7 +19,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Game/BaseCharacter.gd"
 }, {
-"base": "Resource",
+"base": "Node",
 "class": "Bodypart",
 "language": "GDScript",
 "path": "res://Player/Bodyparts/Bodypart.gd"
@@ -114,6 +114,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Game/World/World.gd"
 }, {
+"base": "Node",
+"class": "Inventory",
+"language": "GDScript",
+"path": "res://Inventory/Inventory.gd"
+}, {
+"base": "Node",
+"class": "ItemBase",
+"language": "GDScript",
+"path": "res://Inventory/Items/ItemBase.gd"
+}, {
 "base": "Node2D",
 "class": "Limb",
 "language": "GDScript",
@@ -149,7 +159,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Util/SimpleParser.gd"
 }, {
-"base": "Object",
+"base": "Node",
 "class": "Species",
 "language": "GDScript",
 "path": "res://Species/BaseSpecies.gd"
@@ -201,6 +211,8 @@ _global_script_class_icons={
 "GameRoom": "",
 "GameUI": "",
 "GameWorld": "",
+"Inventory": "",
+"ItemBase": "",
 "Limb": "",
 "Player": "",
 "RNG": "",
