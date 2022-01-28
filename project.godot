@@ -119,6 +119,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Inventory/Inventory.gd"
 }, {
+"base": "Object",
+"class": "InventorySlot",
+"language": "GDScript",
+"path": "res://Inventory/InventorySlot.gd"
+}, {
 "base": "Node",
 "class": "ItemBase",
 "language": "GDScript",
@@ -212,6 +217,7 @@ _global_script_class_icons={
 "GameUI": "",
 "GameWorld": "",
 "Inventory": "",
+"InventorySlot": "",
 "ItemBase": "",
 "Limb": "",
 "Player": "",

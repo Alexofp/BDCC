@@ -34,6 +34,8 @@ func _run():
 		addDisabledButtonAt(12, "East", "Can't go east")
 	#addDisabledButton("bark", "no awo")
 	
+	addButtonAt(14, "Inventory", "Look at your inventory", "inventory")
+	
 	_roomInfo._onEnter()
 
 func _react(_action: String, _args):
@@ -63,5 +65,7 @@ func _react(_action: String, _args):
 	if(_action == "goeast"):
 		GM.pc.setLocation(GM.world.applyDirectionID(GM.pc.location, GameWorld.Direction.EAST))
 		GM.pc.processTime(0)
+	if(_action == "inventory"):
+		runScene("InventoryScene")
 
 

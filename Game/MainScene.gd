@@ -13,7 +13,8 @@ var messages: Array = []
 func _ready():
 	GM.main = self
 	
-	runScene("IntroScene")#"WorldScene")#"TestScene")) #WorldScene
+	#runScene("WorldScene")
+	runScene("IntroScene")
 	#runScene("FightScene", ["testchar"])
 
 func runScene(id, _args = []):

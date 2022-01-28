@@ -33,6 +33,10 @@ func _ready():
 	updateNonBattleEffects()
 	
 	inventory.addItem(GlobalRegistry.createItem("testitem"))
+	inventory.addItem(GlobalRegistry.createItem("testitem"))
+	inventory.addItem(GlobalRegistry.createItem("ballgag"))
+	
+	#inventory.equipItem(InventorySlot.Mouth, GlobalRegistry.createItem("ballgag"))
 
 
 func updateAppearance():
@@ -259,6 +263,7 @@ func saveData():
 		}
 	
 	data["statusEffects"] = saveStatusEffectsData()
+	data["inventory"] = inventory.saveData()
 	
 	return data
 
@@ -286,6 +291,7 @@ func loadData(data):
 	
 	emit_signal("bodypart_changed")
 	loadStatusEffectsData(SAVE.loadVar(data, "statusEffects", {}))
+	inventory.loadData(SAVE.loadVar(data, "inventory", {}))
 
 func getFightState():
 	if(getPain() > getLust()):

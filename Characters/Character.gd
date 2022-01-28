@@ -30,6 +30,7 @@ func saveData():
 	}
 	
 	data["statusEffects"] = saveStatusEffectsData()
+	data["inventory"] = inventory.saveData()
 	
 	return data
 
@@ -39,3 +40,4 @@ func loadData(data):
 	stamina = SAVE.loadVar(data, "stamina", 100)
 	
 	loadStatusEffectsData(SAVE.loadVar(data, "statusEffects", {}))
+	inventory.loadData(SAVE.loadVar(data, "inventory", {}))

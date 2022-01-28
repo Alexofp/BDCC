@@ -59,3 +59,5 @@ roomColor = 1
 [connection signal="onReact" from="CBStairs1" to="." method="_on_CBStairs1_onReact"]
 [connection signal="onEnter" from="CBStairs2" to="." method="_on_CBStairs2_onEnter"]
 [connection signal="onReact" from="CBStairs2" to="." method="_on_CBStairs2_onReact"]
+[connection signal="onEnter" from="CellblockRoom11" to="." method="_on_CellblockRoom11_onEnter"]
+[connection signal="onReact" from="CellblockRoom11" to="." method="_on_CellblockRoom11_onReact"]

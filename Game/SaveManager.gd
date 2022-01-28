@@ -6,6 +6,7 @@ const useJson = true # Json is easier to read, str2var supports more types? Json
 func saveData():
 	var data = {
 		"savefile_version": currentSavefileVersion,
+		"currentUniqueID_DONT_TOUCH": GlobalRegistry.currentUniqueID,
 	}
 	
 	data["player"] = GM.pc.saveData()
@@ -21,13 +22,13 @@ func saveData():
 	return data
 
 func loadData(data: Dictionary):
-	print(data)
 	if(!data.has("savefile_version")):
 		printerr("Error: Save file doesn't have a version in it. It might not be a savefile")
 		return
 	if(data["savefile_version"] != currentSavefileVersion):
 		printerr("Error: This savefile is not supported, sorry. Current supported version: "+str(currentSavefileVersion)+". Savefile version: "+data["savefile_version"])
 		return	
+	GlobalRegistry.currentUniqueID = SAVE.loadVar(data, "currentUniqueID_DONT_TOUCH", 0)
 	
 	GM.pc.loadData(data["player"])
 	

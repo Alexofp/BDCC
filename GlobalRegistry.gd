@@ -1,5 +1,7 @@
 extends Node
 
+var currentUniqueID = 0
+
 var scenes: Dictionary = {}
 var bodyparts: Dictionary = {}
 var characters: Dictionary = {}
@@ -24,6 +26,7 @@ func _ready():
 	
 	registerSceneFolder("res://Scenes/")
 	registerSceneFolder("res://Scenes/Intro/")
+	registerSceneFolder("res://Scenes/Item/")
 	
 	registerCharacterFolder("res://Characters/")
 	
@@ -35,6 +38,10 @@ func _ready():
 	
 	registerItemFolder("res://Inventory/Items/")
 	
+# The point is that it will still generate unique ids even after saving/loading
+func generateUniqueID():
+	currentUniqueID += 1
+	return currentUniqueID - 1
 
 func registerScene(path: String):
 	var scene = load(path)
