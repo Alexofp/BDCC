@@ -7,6 +7,9 @@ enum {
 	Stamina
 }
 
+static func getAll():
+	return [Physical, Lust, Stamina]
+
 static func getName(type) -> String:
 	if(type == Physical):
 		return "Physical"

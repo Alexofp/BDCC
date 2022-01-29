@@ -4,6 +4,8 @@ class_name Inventory
 var items = []
 var equippedItems = {}
 
+signal equipped_items_changed
+
 func _ready():
 	name = "Inventory"
 
@@ -82,6 +84,7 @@ func equipItem(slot, item):
 	
 	equippedItems[slot] = item
 	add_child(item)
+	emit_signal("equipped_items_changed")
 
 func hasSlotEquipped(slot):
 	return equippedItems.has(slot) && equippedItems[slot] != null
@@ -105,6 +108,7 @@ func removeItemFromSlot(slot):
 		var item = equippedItems[slot]
 		equippedItems.erase(slot)
 		remove_child(item)
+		emit_signal("equipped_items_changed")
 		return item
 	return null
 
@@ -115,6 +119,7 @@ func removeEquippedItem(item):
 		if(myitem == item):
 			equippedItems.erase(slot)
 			remove_child(item)
+			emit_signal("equipped_items_changed")
 			return item
 	return null
 
@@ -126,6 +131,7 @@ func clear():
 	for itemSlot in equippedItems.keys():
 		equippedItems[itemSlot].queue_free()
 	equippedItems.clear()
+	emit_signal("equipped_items_changed")
 
 func saveData():
 	var data = {}
@@ -170,7 +176,7 @@ func loadData(data):
 		
 	var loadedEquippedItems = SAVE.loadVar(data, "equipped_items", {})
 	for loadedSlot in loadedEquippedItems:
-		var loadedItem = loadedItems[loadedSlot]
+		var loadedItem = loadedEquippedItems[loadedSlot]
 		var id = SAVE.loadVar(loadedItem, "id", "")
 		var uniqueID = SAVE.loadVar(loadedItem, "uniqueID", "")
 		var itemLoadedData = SAVE.loadVar(loadedItem, "data", {})

@@ -74,6 +74,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Player/Bodyparts/BodypartTail.gd"
 }, {
+"base": "Reference",
+"class": "BuffBase",
+"language": "GDScript",
+"path": "res://Inventory/Buffs/BuffBase.gd"
+}, {
+"base": "Node",
+"class": "BuffsHolder",
+"language": "GDScript",
+"path": "res://Inventory/BuffsHolder.gd"
+}, {
 "base": "BaseCharacter",
 "class": "Character",
 "language": "GDScript",
@@ -208,6 +218,8 @@ _global_script_class_icons={
 "BodypartLeg": "",
 "BodypartSlot": "",
 "BodypartTail": "",
+"BuffBase": "",
+"BuffsHolder": "",
 "Character": "",
 "DamageType": "",
 "Doll": "",

@@ -6,7 +6,7 @@ func _init():
 func getVisibleName():
 	return "Ball Gag"
 	
-func getVisisbleDescription():
+func getDescription():
 	return "Can be used to gag those cheeky brats"
 
 
@@ -16,3 +16,9 @@ func getPossibleActions():
 
 func getClothingSlot():
 	return InventorySlot.Mouth
+
+func getBuffs():
+	return [
+		buff("gagBuff"),
+		buff("lustDamageBuff", [100])
+		]

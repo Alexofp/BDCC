@@ -9,6 +9,7 @@ var attacks: Dictionary = {}
 var statusEffects: Dictionary = {}
 var allSpecies: Dictionary = {}
 var items: Dictionary = {}
+var buffs: Dictionary = {}
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -37,6 +38,8 @@ func _ready():
 	registerSpeciesFolder("res://Species/")
 	
 	registerItemFolder("res://Inventory/Items/")
+	
+	registerBuffFolder("res://Inventory/Buffs/")
 	
 # The point is that it will still generate unique ids even after saving/loading
 func generateUniqueID():
@@ -71,7 +74,7 @@ func registerSceneFolder(folder: String):
 			else:
 				if(file_name.get_extension() == "gd"):
 					var full_path = folder.plus_file(file_name)
-					print("Registered scene: " + full_path)
+					#print("Registered scene: " + full_path)
 					registerScene(full_path)
 			file_name = dir.get_next()
 	else:
@@ -132,7 +135,7 @@ func registerCharacterFolder(folder: String):
 			else:
 				if(file_name.get_extension() == "gd"):
 					var full_path = folder.plus_file(file_name)
-					print("Registered character: " + full_path)
+					#print("Registered character: " + full_path)
 					registerCharacter(full_path)
 			file_name = dir.get_next()
 	else:
@@ -274,3 +277,34 @@ func createItem(id: String):
 		printerr("ERROR: item with the id "+id+" wasn't found")
 		return null
 	return items[id].new()
+
+
+
+func registerBuff(path: String):
+	var item = load(path)
+	var itemObject = item.new()
+	buffs[itemObject.id] = item
+
+func registerBuffFolder(folder: String):
+	var dir = Directory.new()
+	if dir.open(folder) == OK:
+		dir.list_dir_begin()
+		var file_name = dir.get_next()
+		while file_name != "":
+			if dir.current_is_dir():
+				pass
+				#print("Found directory: " + file_name)
+			else:
+				if(file_name.get_extension() == "gd"):
+					var full_path = folder.plus_file(file_name)
+					print("Registered buff: " + full_path)
+					registerBuff(full_path)
+			file_name = dir.get_next()
+	else:
+		printerr("An error occurred when trying to access the path "+folder)
+		
+func createBuff(id: String):
+	if(!buffs.has(id)):
+		printerr("ERROR: buff with the id "+id+" wasn't found")
+		return null
+	return buffs[id].new()

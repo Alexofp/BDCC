@@ -151,7 +151,10 @@ func _run():
 		saynn("[say=captain]If you’re gonna be a rebel, prepare to be punished like a rebel[/say]")
 		
 		saynn("He shoves his knee into your chest, causing a painful feeling, before suddenly shoving the ballgag into your mouth and tightening the straps around your head. (( Well, he will when the inventory stuff will be implemented. Pretend that you’re gagged ))")
-				
+		
+		addButton("Get gagged", "You're too weak to resist", "getgagged")
+	
+	if(state == "getgagged"):
 		saynn("He then stands up and gestures the guard")
 		
 		saynn("[say=captain]Looks like {pc.he} needs some help to get up[/say]")
@@ -259,6 +262,9 @@ func _react(_action: String, _args):
 	if(_action == "fightrisha"):
 		runScene("FightScene", ["risha"], "rishafight")
 		return
+	
+	if(_action == "getgagged"):
+		GM.pc.getInventory().equipItem(InventorySlot.Mouth, GlobalRegistry.createItem("ballgag"))
 		
 	if(_action == "shower"):
 		GM.pc.addPain(-10)

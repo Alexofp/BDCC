@@ -14,9 +14,17 @@ func _ready():
 
 func getVisibleName():
 	return "Bad item"
+
+func getDescription():
+	return "No description provided, please let the developer know"
 	
 func getVisisbleDescription():
-	return "No description provided, please let the developer know"
+	var text = getDescription()
+	var buffs = getBuffs()
+	if(buffs.size() > 0):
+		for buff in buffs:
+			text += "\n" + buff.getVisibleDescription()
+	return text
 
 func getCombatDescription():
 	return getVisisbleDescription()
@@ -66,3 +74,11 @@ func getTakeOffScene():
 
 func getPutOnScene():
 	return "PutOnAnyItemScene"
+
+func getBuffs():
+	return []
+
+func buff(buffid, args = []):
+	var buff: BuffBase = GlobalRegistry.createBuff(buffid)
+	buff.initBuff(args)
+	return buff

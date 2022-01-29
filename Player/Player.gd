@@ -32,12 +32,11 @@ func _ready():
 	giveBodypart(GlobalRegistry.getBodypart("felineears"))
 	updateNonBattleEffects()
 	
-	inventory.addItem(GlobalRegistry.createItem("testitem"))
-	inventory.addItem(GlobalRegistry.createItem("testitem"))
-	inventory.addItem(GlobalRegistry.createItem("ballgag"))
+	#inventory.addItem(GlobalRegistry.createItem("testitem"))
+	#inventory.addItem(GlobalRegistry.createItem("testitem"))
+	#inventory.addItem(GlobalRegistry.createItem("ballgag"))
 	
 	#inventory.equipItem(InventorySlot.Mouth, GlobalRegistry.createItem("ballgag"))
-
 
 func updateAppearance():
 	emit_signal("bodypart_changed")
@@ -120,7 +119,11 @@ func isBlindfolded():
 	return false
 
 func isGagged():
-	return false
+	return buffsHolder.isGagged()
+	
+func calculateBuffs():
+	buffsHolder.calculateBuffs()
+	updateNonBattleEffects()
 
 # They may have effect on your damage in battles but they're not a 'battle' effects
 func updateNonBattleEffects():
@@ -189,6 +192,10 @@ func getChatColor():
 
 func formatSay(text):
 	var color = getChatColor()
+	
+	if(isGagged() && false):
+		#text = Util.muffledSpeech(text)
+		return "[color="+color+"]\""+Util.muffledSpeech(text)+"\" ("+text+") [/color]"
 	
 	if(isGagged()):
 		text = Util.muffledSpeech(text)

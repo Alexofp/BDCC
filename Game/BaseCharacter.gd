@@ -15,7 +15,8 @@ var pain:int = 0
 var lust:int = 0
 var stamina:int = 100
 var statusEffects:Dictionary = {}
-onready var inventory: Inventory
+var inventory: Inventory
+var buffsHolder: BuffsHolder
 
 # Combat stats
 var initialDodgeChance = 0
@@ -31,6 +32,10 @@ func _init():
 func _ready():
 	inventory = Inventory.new()
 	add_child(inventory)
+	var _con = inventory.connect("equipped_items_changed", self, "onEquippedItemsChange")
+	buffsHolder = BuffsHolder.new()
+	buffsHolder.setCharacter(self)
+	add_child(buffsHolder)
 
 # Skips armor checks etc
 func addPain(_p: int):
@@ -104,6 +109,9 @@ func removeEffect(effectID: String):
 		statusEffects[effectID].queue_free()
 		var _wasremoved = statusEffects.erase(effectID)
 	
+func getStatusEffects():
+	return statusEffects
+	
 func saveStatusEffectsData():
 	var data = {}
 	for effectID in statusEffects:
@@ -153,14 +161,23 @@ func getAttacks():
 	return _getAttacks()
 	
 func getArmor(_damageType):
+	var armor = 0
 	if(isBlocking()):
 		if(_damageType == DamageType.Physical):
-			return 10
+			armor += 10
 	if(isDefocusing()):
 		if(_damageType == DamageType.Lust):
-			return 10
+			armor += 10
 	
-	return 0
+	armor += buffsHolder.getArmor(_damageType)
+	
+	return armor
+	
+func calculateBuffs():
+	buffsHolder.calculateBuffs()
+	
+func onEquippedItemsChange():
+	calculateBuffs()
 	
 func onDamage(_damageType, _amount):
 	pass
@@ -171,6 +188,8 @@ func getDamageMultiplier(_damageType):
 		var effect = statusEffects[effectID]
 		mult *= effect.getDamageMultiplierMod(_damageType)
 	
+	mult *= buffsHolder.getDealDamageMult(_damageType)
+	
 	return mult
 
 func getRecieveDamageMultiplier(_damageType):
@@ -178,6 +197,8 @@ func getRecieveDamageMultiplier(_damageType):
 	for effectID in statusEffects.keys():
 		var effect = statusEffects[effectID]
 		mult *= effect.getRecievedDamageMod(_damageType)
+		
+	mult *= buffsHolder.getRecieveDamageMult(_damageType)
 	
 	return mult
 
