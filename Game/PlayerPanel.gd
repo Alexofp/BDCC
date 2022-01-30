@@ -24,6 +24,7 @@ func _ready():
 	set_process_unhandled_input(true)
 	
 	var _s = GM.pc.connect("bodypart_changed", self, "on_player_bodypartchange")
+	var _s2 = GM.pc.connect("animation_changed", self, "on_player_animationchange")
 	doll.loadFromPlayer(GM.pc)
 
 func on_player_bodypartchange():
@@ -79,3 +80,6 @@ func _on_ViewportContainer_mouse_entered():
 
 func getStatusEffectsPanel():
 	return grid
+	
+func on_player_animationchange(newanim):
+	doll.playAnimation(newanim)

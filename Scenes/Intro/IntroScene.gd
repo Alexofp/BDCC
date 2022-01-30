@@ -11,6 +11,7 @@ func _run():
 	if(state == ""):
 		GM.world.aimCamera("intro_corridor")
 		GM.ui.setLocationName("IBS \"Integrity\"")
+		GM.pc.playAnimation(Doll.Stand)
 		
 		addCharacter("intro_detective")
 		say("[b]You are being escorted[/b] by someone through a number of half-empty corridors, divided with bulky metal doors and occasional little checkpoints. Unknown figure in front of you looks masculine and prefers to watch forward, making it hard to catch the glimpses of his face. But you do [b]notice his grey wolf tail[/b], swishing behind him, and a leather holster on his belt.\n\n")
@@ -26,6 +27,7 @@ func _run():
 	if(state == "stepinside"):
 		GM.world.aimCamera("intro_interogation")
 		GM.ui.setLocationName("Interogation room")
+		GM.pc.playAnimation(Doll.Kneel)
 		
 		say("You step inside a room with white walls and ceiling tiles. There is only enough room for a long table, two chairs and a light. Both corners of the room seem to have cameras on them.\n\n")
 		

@@ -3,14 +3,19 @@ class_name Doll
 
 onready var skeleton = $Skeleton2D
 onready var retargetedSkeleton = $RetargetedSkeleton
+onready var animationTree = $AnimationTree
 
 var skeletonNodes = {}
 var limbs = {}
+
+const Stand = "Stand"
+const Kneel = "kneel"
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$Catgirlexample.queue_free()
 	saveBones(skeleton)
+	animationTree.active = true
 
 func saveBones(node: Node2D):
 	if(node is Bone2D):
@@ -76,3 +81,6 @@ func loadFromPlayer(player: Player):
 		
 		set_limb(bodypart.getLimbSlot(), bodypart._getDollType())
 	
+func playAnimation(animation):
+	var state_machine = animationTree["parameters/playback"]
+	state_machine.travel(animation)

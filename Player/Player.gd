@@ -3,6 +3,7 @@ class_name Player
 
 signal bodypart_changed
 signal location_changed(newloc)
+signal animation_changed(newanim)
 
 var gamename = "Player"
 var credits:int = 0
@@ -40,6 +41,9 @@ func _ready():
 
 func updateAppearance():
 	emit_signal("bodypart_changed")
+
+func playAnimation(dollAnim):
+	emit_signal("animation_changed", dollAnim)
 
 func resetSlots():
 	for slot in BodypartSlot.getAll():
