@@ -54,3 +54,9 @@ func getArmor(damageType):
 		return 0
 	
 	return armor[damageType]
+
+func hasBuff(buffID):
+	for buff in buffs:
+		if(buff.id == buffID):
+			return true
+	return false

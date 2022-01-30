@@ -36,7 +36,7 @@ func _ready():
 	#inventory.addItem(GlobalRegistry.createItem("testitem"))
 	#inventory.addItem(GlobalRegistry.createItem("ballgag"))
 	
-	#inventory.equipItem(InventorySlot.Mouth, GlobalRegistry.createItem("ballgag"))
+	#inventory.equipItem(GlobalRegistry.createItem("ballgag"))
 
 func updateAppearance():
 	emit_signal("bodypart_changed")
@@ -110,7 +110,7 @@ func _getAttacks():
 	return ["simplepunchattack", "scratchattack", "biteattack", "simplekickattack", "shoveattack", "strongkickattack", "simplelustattack", "begattack", "youslutattack", "gropeattack"]
 
 func hasBoundArms():
-	return false
+	return buffsHolder.hasBuff(Buff.RestrainedArmsBuff)
 
 func hasBoundLegs():
 	return false
@@ -119,7 +119,7 @@ func isBlindfolded():
 	return false
 
 func isGagged():
-	return buffsHolder.isGagged()
+	return buffsHolder.hasBuff(Buff.GagBuff)
 	
 func calculateBuffs():
 	buffsHolder.calculateBuffs()

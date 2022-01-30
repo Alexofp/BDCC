@@ -93,7 +93,7 @@ func getRequirementsColorText(_attacker, _reciever):
 		if(reqCan):
 			text += reqText
 		else:
-			text += "-> " + reqText + ""
+			text += "[color=red]" + reqText + "[/color]"
 		text += "\n"
 	
 	return text

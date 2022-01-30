@@ -1,6 +1,5 @@
 extends "res://Scenes/SceneBase.gd"
 
-var savedText = ""
 
 func _init():
 	sceneID = "PutOnAnyItemScene"
@@ -18,7 +17,7 @@ func _react(_action: String, _args):
 	if(_action == "endthescene"):
 		var item: ItemBase = GM.pc.getInventory().getItemByUniqueID(sceneArgs[0])
 		GM.pc.getInventory().removeItem(item)
-		GM.pc.getInventory().equipItem(item.getClothingSlot(), item)
+		GM.pc.getInventory().equipItem(item)
 		
 		
 		endScene()

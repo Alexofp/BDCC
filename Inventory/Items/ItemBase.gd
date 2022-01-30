@@ -52,6 +52,7 @@ func destroyMe():
 	assert(get_parent() != null)
 	
 	get_parent().removeItem(self)
+	get_parent().removeEquippedItem(self)
 	queue_free()
 
 func getPossibleActions():

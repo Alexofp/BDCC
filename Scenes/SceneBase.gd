@@ -53,11 +53,11 @@ func run():
 	if(messages.size() > 0):
 		GM.ui.trimLineEndings()
 		say("\n\n")
-		say("[center]")
+		say("[center][i]")
 		for message in GM.main.getMessages():
 			say(message)
 			say("\n")
-		say("[/center]")
+		say("[/i][/center]")
 	
 	GM.pc.updateEffectPanel(GM.ui.getPlayerStatusEffectsPanel())
 	if(fightCharacter):

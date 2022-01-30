@@ -137,7 +137,12 @@ func _run():
 
 		saynn("Doctor shrugs and then goes to grab something else from the drawers.")
 
-		saynn("[say=eliza]Open your mouth for me[/say]")
+		if(GM.pc.getInventory().hasSlotEquipped(InventorySlot.Mouth)):
+			saynn("She then returns and unlocks your gag harness for now")
+			
+			saynn("[say=eliza]I do like how you keep drooling but I need your mouth[/say]")
+		else:
+			saynn("[say=eliza]Open your mouth for me[/say]")
 
 		addButton("Open mouth", "What will she do?", "open_mouth")
 
@@ -147,6 +152,9 @@ func _run():
 		saynn("[say=eliza]Fangs are sharp too, I will have to cap them[/say]")
 
 		saynn("You’d like to say something but she holds your mouth open so you decide to just obey and sit still. Doctor grab a few rubber caps and attach them directly to your fangs, rendering them dull.")
+
+		if(GM.pc.getInventory().hasSlotEquipped(InventorySlot.Mouth)):
+			saynn("After she is done, she puts the harness back and locks it tight")
 
 		saynn("[say=eliza]You will still be able to eat. That should be about it[/say]")
 

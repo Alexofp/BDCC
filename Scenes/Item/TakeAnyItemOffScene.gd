@@ -1,6 +1,5 @@
 extends "res://Scenes/SceneBase.gd"
 
-var savedText = ""
 
 func _init():
 	sceneID = "TakeAnyItemOffScene"

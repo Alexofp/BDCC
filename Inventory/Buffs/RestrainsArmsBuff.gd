@@ -1,13 +1,10 @@
 extends BuffBase
 
 func _init():
-	id = Buff.GagBuff
+	id = Buff.RestrainedArmsBuff
 
 func getVisibleDescription():
-	return "Gags the wearer"
-
-func apply(_buffHolder):
-	_buffHolder.gagged = true
+	return "Restrains arms"
 
 func getBuffColor():
 	return Color.purple

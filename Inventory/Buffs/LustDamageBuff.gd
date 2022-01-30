@@ -3,7 +3,7 @@ extends BuffBase
 var amount = 0
 
 func _init():
-	id = "lustDamageBuff"
+	id = Buff.LustDamageBuff
 
 func initBuff(_args):
 	amount = _args[0]

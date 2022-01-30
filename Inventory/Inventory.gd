@@ -75,9 +75,11 @@ func getAllCombatUsableItems():
 	
 	return result
 		
-func equipItem(slot, item):
+func equipItem(item):
 	if(hasItem(item)):
 		removeItem(item)
+	
+	var slot = item.getClothingSlot()
 	
 	if(equippedItems.has(slot)):
 		assert(false)
@@ -184,4 +186,4 @@ func loadData(data):
 		var newItem: ItemBase = GlobalRegistry.createItem(id)
 		newItem.uniqueID = uniqueID
 		newItem.loadData(itemLoadedData)
-		equipItem(loadedSlot, newItem)
+		equipItem(newItem)

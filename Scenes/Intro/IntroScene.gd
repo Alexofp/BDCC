@@ -203,15 +203,10 @@ func _run():
 	if(state == "reasonmoney"):
 		say("[say=pc]I had to, I had no credits left. Another week and I would be out on the streets. I got this offer. And I had to do it. I truly had no other choice..[/say]\n\n")
 		
-		say("You tell the officer the whole story, it took a while. But you do feel better.\n\n")
-		
-		say("Jake stands up and takes something from his belt. [say=intro_detective]Alright. I’m afraid I will have to cuff you. Just a safety thing[/say]. You recoil back slightly but seeing as there is no better choice, you reach your hands forward while he puts tight police cuffs around them. [say=intro_detective]I will be back in a few minutes and we will figure out what to do with you[/say]. Jake exits the room, leaving you alone.\n\n")
-		
-		addButton("Wait", "What else is there to do", "saidwhy")
-		
 	if(state == "reasonrevenge"):
 		say("You stress your fist. [say=pc]He had it coming, that fucker.. Betraying piece of shit[/say]\n\n")
 		
+	if(state == "reasonrevenge" || state == "reasonmoney"):
 		say("You tell the officer the whole story, it took a while. But you do feel better.\n\n")
 		
 		say("Jake stands up and takes something from his belt. [say=intro_detective]Alright. I’m afraid I will have to cuff you. Just a safety thing[/say]. You recoil back slightly but seeing as there is no better choice, you reach your hands forward while he puts tight police cuffs around them. [say=intro_detective]I will be back in a few minutes and we will figure out what to do with you[/say]. Jake exits the room, leaving you alone.\n\n")
@@ -320,6 +315,14 @@ func _react(_action: String, _args):
 	if(_action == "endthisscene"):
 		runScene("IntroIntake")
 		endScene()
+	
+	if(_action == "saidwhy"):
+		GM.pc.getInventory().equipItem(GlobalRegistry.createItem("policecuffs"))
+	
+	if(_action == "gocell"):
+		var item = GM.pc.getInventory().removeItemFromSlot(InventorySlot.Wrists)
+		if(item != null):
+			item.queue_free()
 	
 	setState(_action)
 

@@ -150,7 +150,7 @@ func _run():
 		
 		saynn("[say=captain]If you’re gonna be a rebel, prepare to be punished like a rebel[/say]")
 		
-		saynn("He shoves his knee into your chest, causing a painful feeling, before suddenly shoving the ballgag into your mouth and tightening the straps around your head. (( Well, he will when the inventory stuff will be implemented. Pretend that you’re gagged ))")
+		saynn("He shoves his knee into your chest, causing a painful feeling, before suddenly shoving the ballgag into your mouth and tightening the straps around your head.")
 		
 		addButton("Get gagged", "You're too weak to resist", "getgagged")
 	
@@ -264,7 +264,24 @@ func _react(_action: String, _args):
 		return
 	
 	if(_action == "getgagged"):
-		GM.pc.getInventory().equipItem(InventorySlot.Mouth, GlobalRegistry.createItem("ballgag"))
+		GM.pc.getInventory().equipItem(GlobalRegistry.createItem("ballgag"))
+		addMessage("A gag was forced on you!")
+		
+	if(_action == "cuffs"):
+		GM.pc.getInventory().equipItem(GlobalRegistry.createItem("inmatecollar"))
+		GM.pc.getInventory().equipItem(GlobalRegistry.createItem("inmateanklecuffs"))
+		GM.pc.getInventory().equipItem(GlobalRegistry.createItem("inmatewristcuffs"))
+		addMessage("A bulky collar gets locked around your neck with a satisfying click")
+		addMessage("Your wrists and ankles get cuffed")
+		
+	if(_action == "aftershower"):
+		var uniform = GlobalRegistry.createItem("inmateuniform_general")
+		
+		uniform.setPrisonerNumber("P-12054")
+		
+		GM.pc.getInventory().equipItem(uniform)
+		
+		addMessage("You're wearing an inmate uniform now")
 		
 	if(_action == "shower"):
 		GM.pc.addPain(-10)
