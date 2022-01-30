@@ -3,12 +3,16 @@ class_name Bodypart
 
 var id
 var dollType
+var limbSlot
 
 func _init():
 	pass
 
 func _getDollType():
 	return dollType
+
+func getLimbSlot():
+	return limbSlot
 
 func saveData():
 	return {}

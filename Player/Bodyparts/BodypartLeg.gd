@@ -2,7 +2,7 @@ extends Bodypart
 class_name BodypartLeg
 
 func _init():
-	pass
+	limbSlot = LimbTypes.Legs
 
 func getSlot():
 	return BodypartSlot.Legs

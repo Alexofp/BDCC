@@ -6,7 +6,7 @@ enum BreastsSize {FLAT = 0, A = 1, B = 2, C = 3, D = 4, DD = 5, E = 6, EE = 7, F
 var size = 0
 
 func _init():
-	pass
+	limbSlot = LimbTypes.Breasts
 	
 func saveData():
 	return {

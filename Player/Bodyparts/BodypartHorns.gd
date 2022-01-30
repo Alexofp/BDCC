@@ -2,7 +2,7 @@ extends Bodypart
 class_name BodypartHorns
 
 func _init():
-	pass
+	limbSlot = LimbTypes.Horns
 
 func getSlot():
 	return BodypartSlot.Horns

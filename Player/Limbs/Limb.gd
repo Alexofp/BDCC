@@ -6,14 +6,11 @@ export(bool) var addOutline = true
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass
-
-func _changeSkeleton(_skeleton: Skeleton2D):
-	pass
+	$RigSkeleton.queue_free()
+	$TestLimbs.queue_free()
+	$References.queue_free()
 
 func applySkeleton(_skeleton: Skeleton2D):
-	_changeSkeleton(_skeleton)
-	
 	var toadd = []
 	for N in get_children():
 		if(N is Polygon2D):

@@ -3,4 +3,4 @@ extends BodypartBody
 func _init():
 	name = "human body"
 	id = "humanbody"
-	dollType = "human"
+	dollType = "Human"

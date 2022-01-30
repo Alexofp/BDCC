@@ -5,3 +5,5 @@
 
 [node name="ArmsBase" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
+
+[editable path="RigSkeleton"]

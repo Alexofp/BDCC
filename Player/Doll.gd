@@ -1,158 +1,78 @@
 extends Node2D
 class_name Doll
-#var a= 0
-export(String, "Flat", "Curvy") var breastsType = "Flat"
-export(String, "Human", "Digi") var legsType = "Human"
-export(String, "Human") var armsType = "Human"
-export(String, "Human", "Cat") var headType = "Human"
-export(String, "Human", "Cat") var earsType = "Human"
-export(String, "Bald", "Ponytail", "Ferri") var hairType = "Bald"
-export(String, "Nothing", "Cat", "Dragon") var tailType = "Nothing"
-export(String, "Nothing", "Dragon") var hornsType = "Nothing"
-#onready var breastsNode = $BreastsNode
 
-const breastsList = {
-	"Flat": "res://Player/Limbs/breasts/BreastsFlat.tscn",
-	"Curvy": "res://Player/Limbs/breasts/BreastsCurvy.tscn"
-}
-const legsList = {
-	"Human": "res://Player/Limbs/leg/HumanLeg.tscn",
-	"Digi": "res://Player/Limbs/leg/DigiLeg.tscn"
-}
-const armsList = {
-	"Human": "res://Player/Limbs/arm/HumanArms.tscn"
-}
-const headList = {
-	"Human": "res://Player/Limbs/head/HumanHead.tscn",
-	"Cat": "res://Player/Limbs/head/CatHead.tscn"
-}
-const earsList = {
-	"Human": "res://Player/Limbs/ear/HumanEars.tscn",
-	"Cat": "res://Player/Limbs/ear/CatEars.tscn" 
-}
-const hairList = {
-	"Bald": "res://Player/Limbs/hair/HairBase.tscn",
-	"Ponytail": "res://Player/Limbs/hair/PonytailHair.tscn",
-	"Ferri": "res://Player/Limbs/hair/FerriHair.tscn"
-}
-const tailList = {
-	"Nothing": "res://Player/Limbs/tail/TailBase.tscn",
-	"Cat": "res://Player/Limbs/tail/CatTail.tscn",
-	"Dragon": "res://Player/Limbs/tail/DragonTail.tscn"
-}
-const hornsList = {
-	"Nothing": "res://Player/Limbs/horns/HornsBase.tscn",
-	"Dragon": "res://Player/Limbs/horns/DragonHorns.tscn",
-}
 onready var skeleton = $Skeleton2D
 onready var retargetedSkeleton = $RetargetedSkeleton
 
 var skeletonNodes = {}
+var limbs = {}
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	#set_breasts(breastsType)
-	saveOffsets(skeleton)
-	#$AnimationPlayer.play("Test")
-	set_limb("BreastsNode", breastsType, breastsList)
-	set_limb("LegsNode", legsType, legsList)
-	set_limb("ArmsNode", armsType, armsList)
-	set_limb("HeadNode", headType, headList)
-	set_limb("EarsNode", earsType, earsList)
-	set_limb("HairNode", hairType, hairList)
-	set_limb("TailNode", tailType, tailList)
-	set_limb("HornsNode", hornsType, hornsList)
+	$Catgirlexample.queue_free()
+	saveBones(skeleton)
 
-func saveOffsets(node: Node2D):
+func saveBones(node: Node2D):
 	if(node is Bone2D):
 		var bonename = node.name
 
 		skeletonNodes[bonename] = node
 	
 	for n in node.get_children():
-		saveOffsets(n)
+		saveBones(n)
 
-func applyOffset(node: Node2D):
+func applyOffsets(node: Node2D):
 	if(node is Bone2D):
 		var info = skeletonNodes[node.name]
 		
-		node.position = info.position - info.rest.get_origin() + node.rest.get_origin()#+ info[0]
-		node.rotation_degrees = info.rotation_degrees - info.rest.get_rotation() + node.rest.get_rotation()# info[1]
+		node.position = info.position - info.rest.get_origin() + node.rest.get_origin()
+		node.rotation_degrees = info.rotation_degrees - info.rest.get_rotation() + node.rest.get_rotation()
 		
 	for n in node.get_children():
-		applyOffset(n)
+		applyOffsets(n)
 
-func set_limb(_node, _type, _list):
-#func set_breasts(_type):
-	#print("Trying "+_type)
-	var limb
-	if(_list.has(_type)):
-		limb = load(_list[_type]).instance()
+func _process(_delta):
+	applyOffsets(retargetedSkeleton)
+
+func set_limb(slot, type):
+	if(limbs.has(slot)):
+		limbs[slot].queue_free()
+		limbs.erase(slot)
 	
-	if(!limb):
-		print("Error: Couldn't find limb with type "+_type)
+	if(!LimbTypes.Registry.has(slot)):
+		assert(false)
 		return
+	if(!LimbTypes.Registry[slot].has(type)):
+		assert(false)
+		return
+		
+	var limbScene: PackedScene = load(LimbTypes.Registry[slot][type])
+	var limb: Limb = limbScene.instance()
 	
-	Util.delete_children(get_node(_node))
-	get_node(_node).add_child(limb)
-	limb.set_owner(get_tree().edited_scene_root)
+	add_child(limb)
+	limbs[slot] = limb
 	limb.applySkeleton(retargetedSkeleton)
 
-func remove_limb(_node):
-	Util.delete_children(get_node(_node))
+func remove_limb(slot):
+	if(limbs.has(slot)):
+		limbs[slot].queue_free()
+		limbs.erase(slot)
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta):
-	applyOffset(retargetedSkeleton)
-#	a += delta
-	#$Skeleton2D/Hip/LLeg/LLLeg.rest.origin.x = sin(a)*50 - 200
-	#$Skeleton2D/Hip/LLeg/LLLeg.rotation_degrees = 90
+func clear():
+	for limbSlot in limbs.keys():
+		var limb = limbs[limbSlot]
+		limb.queue_free()
+	limbs.clear()
 
 func loadFromPlayer(player: Player):
-	if(player.hasBodypart(BodypartSlot.Legs)):
-		legsType = player.getBodypart(BodypartSlot.Legs)._getDollType()
-		set_limb("LegsNode", legsType, legsList)
-	else:
-		printerr("Error: player has no legs?")
+	clear()
+	
+	var bodyparts = player.getBodyparts()
+	for bodypartSlot in bodyparts:
+		var bodypart: Bodypart = bodyparts[bodypartSlot]
 		
-	if(player.hasBodypart(BodypartSlot.Breasts)):
-		breastsType = player.getBodypart(BodypartSlot.Breasts)._getDollType()
-		set_limb("BreastsNode", breastsType, breastsList)
-	else:
-		printerr("Error: player has no breasts? (even flat ones?)")
-
-	if(player.hasBodypart(BodypartSlot.Hair)):
-		hairType = player.getBodypart(BodypartSlot.Hair)._getDollType()
-		set_limb("HairNode", hairType, hairList)
-	else:
-		printerr("Error: player has no hair?")
+		if(bodypart == null || bodypart.getLimbSlot() == null || bodypart._getDollType() == null):
+			continue
 		
-	if(player.hasBodypart(BodypartSlot.Tail)):
-		tailType = player.getBodypart(BodypartSlot.Tail)._getDollType()
-		set_limb("TailNode", tailType, tailList)
-	else:
-		remove_limb("TailNode")
-
-	if(player.hasBodypart(BodypartSlot.Head)):
-		headType = player.getBodypart(BodypartSlot.Head)._getDollType()
-		set_limb("HeadNode", headType, headList)
-	else:
-		printerr("Error: player has no head?")
-		
-	if(player.hasBodypart(BodypartSlot.Arms)):
-		armsType = player.getBodypart(BodypartSlot.Arms)._getDollType()
-		set_limb("ArmsNode", armsType, armsList)
-	else:
-		printerr("Error: player has no arms?")
-
-	if(player.hasBodypart(BodypartSlot.Ears)):
-		earsType = player.getBodypart(BodypartSlot.Ears)._getDollType()
-		set_limb("EarsNode", earsType, earsList)
-	else:
-		printerr("Error: player has no ears?")
-
-	if(player.hasBodypart(BodypartSlot.Horns)):
-		hornsType = player.getBodypart(BodypartSlot.Horns)._getDollType()
-		set_limb("HornsNode", hornsType, hornsList)
-	else:
-		remove_limb("HornsNode")
+		set_limb(bodypart.getLimbSlot(), bodypart._getDollType())
+	
