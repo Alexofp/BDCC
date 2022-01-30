@@ -40,7 +40,7 @@ func set_is_active(value: bool):
 
 func set_text(title: String, body: String):
 	_title.text = title.capitalize()
-	_body.text = body
+	_body.bbcode_text = body
 	#yield(get_tree(), "idle_frame")
 	#_body.set_size(Vector2(_body.get_size().x, _body.get_v_scroll().get_max()))
 	yield(get_tree(), "idle_frame")

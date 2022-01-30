@@ -8,3 +8,6 @@ func getVisibleDescription():
 
 func apply(_buffHolder):
 	_buffHolder.gagged = true
+
+func getBuffColor():
+	return Color.purple

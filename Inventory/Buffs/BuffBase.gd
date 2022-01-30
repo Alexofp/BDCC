@@ -15,3 +15,5 @@ func getVisibleDescription():
 func apply(_buffHolder):
 	pass
 
+func getBuffColor():
+	return Color.white

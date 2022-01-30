@@ -39,7 +39,7 @@ __meta__ = {
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 margin_right = 250.0
-margin_bottom = 52.0
+margin_bottom = 53.0
 mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 2
@@ -61,11 +61,13 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Body" type="Label" parent="VBoxContainer"]
+[node name="Body" type="RichTextLabel" parent="VBoxContainer"]
 margin_top = 32.0
 margin_right = 250.0
-margin_bottom = 52.0
+margin_bottom = 53.0
 size_flags_horizontal = 3
-autowrap = true
+bbcode_enabled = true
+fit_content_height = true
+scroll_active = false
 
 [node name="Tween" type="Tween" parent="."]

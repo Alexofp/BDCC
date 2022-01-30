@@ -23,7 +23,7 @@ func getVisisbleDescription():
 	var buffs = getBuffs()
 	if(buffs.size() > 0):
 		for buff in buffs:
-			text += "\n" + buff.getVisibleDescription()
+			text += "\n" + "[color=#"+buff.getBuffColor().to_html(false)+"]" + buff.getVisibleDescription() + "[/color]"
 	return text
 
 func getCombatDescription():

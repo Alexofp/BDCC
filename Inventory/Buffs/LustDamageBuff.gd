@@ -16,3 +16,6 @@ func getVisibleDescription():
 
 func apply(_buffHolder):
 	_buffHolder.dealDamageMult[DamageType.Lust] *= (1.0 + amount/100.0)
+
+func getBuffColor():
+	return Color.pink
