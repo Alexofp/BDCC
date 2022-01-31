@@ -6,6 +6,7 @@ const Human = "human"
 const Feline = "feline"
 const Dragon = "dragon"
 const Wolf = "wolf"
+const Canine = "canine"
 
 var id = "error"
 

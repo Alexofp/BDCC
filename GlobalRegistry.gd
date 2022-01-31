@@ -24,6 +24,7 @@ func _ready():
 	registerBodypartFolder("res://Player/Bodyparts/Arms/")
 	registerBodypartFolder("res://Player/Bodyparts/Ears/")
 	registerBodypartFolder("res://Player/Bodyparts/Horns/")
+	registerBodypartFolder("res://Player/Bodyparts/Penis/")
 	
 	registerSceneFolder("res://Scenes/")
 	registerSceneFolder("res://Scenes/Intro/")

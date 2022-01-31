@@ -1,4 +1,6 @@
-[gd_scene format=2]
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Player/Limbs/catgirlexample.png" type="Texture" id=1]
 
 [node name="DollSkeleton" type="Skeleton2D"]
 
@@ -63,8 +65,8 @@ rest = Transform2D( 0.999561, -0.0296317, 0.0296317, 0.999561, -194.285, -31.000
 
 [node name="LFoot" type="Bone2D" parent="Hip/LLeg/LLLeg"]
 position = Vector2( -171.884, -33.6868 )
-rotation = -2.11032
-rest = Transform2D( -0.513727, -0.857953, 0.857953, -0.513727, -171.884, -33.6868 )
+rotation = -1.34955
+rest = Transform2D( 0.219445, -0.975625, 0.975625, 0.219445, -171.884, -33.6868 )
 
 [node name="RLeg" type="Bone2D" parent="Hip"]
 position = Vector2( 1.40252, -17.5049 )
@@ -77,8 +79,8 @@ rest = Transform2D( 0.999561, -0.0296317, 0.0296317, 0.999561, -194.285, -31.000
 
 [node name="RFoot" type="Bone2D" parent="Hip/RLeg/RLLeg"]
 position = Vector2( -171.884, -33.6868 )
-rotation = -2.11032
-rest = Transform2D( -0.513727, -0.857953, 0.857953, -0.513727, -171.884, -33.6868 )
+rotation = -1.32279
+rest = Transform2D( 0.245474, -0.969403, 0.969403, 0.245474, -171.884, -33.6868 )
 
 [node name="Tail1" type="Bone2D" parent="Hip"]
 position = Vector2( 14.3058, 43.3403 )
@@ -101,3 +103,14 @@ rest = Transform2D( 1, 0, 0, 1, 127.285, -17.519 )
 position = Vector2( 106.142, -13.4891 )
 rotation = -0.11791
 rest = Transform2D( 0.993057, -0.117637, 0.117637, 0.993057, 106.142, -13.4891 )
+
+[node name="Penis" type="Bone2D" parent="Hip"]
+position = Vector2( -19.6132, -45.6419 )
+rotation = -1.37137
+rest = Transform2D( 0.198112, -0.980179, 0.980179, 0.198112, -19.6132, -45.6419 )
+default_length = 50.0
+
+[node name="Catgirlexample" type="Sprite" parent="."]
+visible = false
+position = Vector2( 214.765, -20.7789 )
+texture = ExtResource( 1 )

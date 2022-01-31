@@ -34,7 +34,7 @@ bones = [ "Hip", PoolRealArray( 0, 0, 0, 0, 0 ), "Hip/Chest", PoolRealArray( 0, 
 
 [node name="Leg2" type="Polygon2D" parent="." index="3"]
 position = Vector2( -66.6359, -51.4174 )
-z_index = -1
+z_index = -2
 color = Color( 0.666667, 0.666667, 0.666667, 1 )
 texture = ExtResource( 4 )
 skeleton = NodePath("../RigSkeleton")
@@ -45,7 +45,7 @@ script = ExtResource( 5 )
 
 [node name="LLeg2" type="Polygon2D" parent="." index="4"]
 position = Vector2( -22.0701, 130.395 )
-z_index = -1
+z_index = -2
 color = Color( 0.666667, 0.666667, 0.666667, 1 )
 texture = ExtResource( 2 )
 skeleton = NodePath("../RigSkeleton")
@@ -56,7 +56,7 @@ script = ExtResource( 5 )
 
 [node name="Foot2" type="Polygon2D" parent="." index="5"]
 position = Vector2( -84.193, 335.523 )
-z_index = -1
+z_index = -2
 color = Color( 0.666667, 0.666667, 0.666667, 1 )
 texture = ExtResource( 3 )
 skeleton = NodePath("../RigSkeleton")
