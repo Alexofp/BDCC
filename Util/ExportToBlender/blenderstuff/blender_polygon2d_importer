@@ -1,0 +1,41 @@
+import bpy
+from pathlib import Path
+import json
+
+mydata = '{"verts":[[-5.17241,247.845001],[0,210.776001],[13.7931,197.845001],[33.189701,194.828003],[44.827599,183.621002],[59.051701,154.309998],[60.344799,132.759003],[42.241402,82.327599],[7.32759,13.3621],[70.689697,-12.5],[134.914001,41.379299],[133.190002,134.483002],[120.259003,162.5],[105.602997,200.862],[96.120697,237.5],[73.275902,253.016998],[37.931,252.585999],[20,230],[31.6667,225],[53.333302,224],[66,206.667007],[72,193],[83.666702,158.332993],[94.333298,133.667007],[86,82.666702],[70.666702,38.666698]],"faces":[[17,16,0],[17,1,0],[17,2,1],[17,18,2],[17,16,18],[15,16,19],[18,16,19],[18,3,19],[18,2,3],[14,20,19,15],[20,4,19],[3,19,4],[20,21,5,4],[20,14,13,21],[13,12,22,21],[22,6,5,21],[22,23,11,12],[23,24,10,11],[23,6,22],[23,24,7,6],[24,25,10],[25,9,10],[25,8,9],[25,7,8],[25,7,24]],"globalpos":[-47.2887,153.477997]}'
+textureW = 128.0
+textureH = 256.0
+
+j=json.loads(mydata) 
+
+print(j)
+
+verts = [
+         ]  # 4 verts made with XYZ coords
+edges = []
+faces = []
+
+posshift = j["globalpos"]
+posshift[0] = posshift[0] / 100.0
+posshift[1] = -posshift[1] / 100.0
+
+for vert in j["verts"]:
+    verts.append( (vert[0] / 100.0 + posshift[0], 0.0, -vert[1] / 100.0 + posshift[1]) )
+
+faces = j["faces"]
+
+mesh = bpy.data.meshes.new("myBeautifulMesh")  # add the new mesh
+obj = bpy.data.objects.new(mesh.name, mesh)
+col = bpy.data.collections.get("Collection")
+col.objects.link(obj)
+bpy.context.view_layer.objects.active = obj
+mesh.from_pydata(verts, edges, faces)
+
+me = obj.data
+uvlayer = me.uv_layers.new() # default naem and do_init
+
+me.uv_layers.active = uvlayer
+
+for face in me.polygons:
+    for vert_idx, loop_idx in zip(face.vertices, face.loop_indices):
+        uvlayer.data[loop_idx].uv = (j["verts"][vert_idx][0] / textureW, 1.0 - j["verts"][vert_idx][1] / textureH)

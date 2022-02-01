@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Player/Limbs/leg/LegsBase.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Player/Limbs/leg/digileg.png" type="Texture" id=2]
 [ext_resource path="res://Util/Polygon2dWeightsFlipper.gd" type="Script" id=3]
 [ext_resource path="res://Player/Limbs/leg/legup.png" type="Texture" id=4]
+[ext_resource path="res://Util/ExportToBlender/Polygon2DExporter.gd" type="Script" id=5]
 
 [node name="DigiLeg" instance=ExtResource( 1 )]
 
@@ -61,7 +62,22 @@ polygons = [ PoolIntArray( 17, 16, 0 ), PoolIntArray( 17, 1, 0 ), PoolIntArray( 
 bones = [ "Hip", PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), "Hip/Chest", PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), "Hip/Chest/Neck", PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), "Hip/Chest/Neck/Head", PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), "Hip/Chest/LArm", PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), "Hip/Chest/LArm/LForeArm", PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), "Hip/Chest/LArm/LForeArm/LHand", PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), "Hip/LLeg", PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), "Hip/LLeg/LLLeg", PoolRealArray( 0.44, 0.44, 0.44, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0.44, 0.44, 0.44, 0.61, 0.61, 0.61, 1, 1, 1, 1, 1, 1 ), "Hip/LLeg/LLLeg/LFoot", PoolRealArray( 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0 ) ]
 internal_vertex_count = 9
 
+[node name="Digi4" type="Polygon2D" parent="." index="5"]
+visible = false
+position = Vector2( -47.2887, 153.478 )
+texture = ExtResource( 2 )
+skeleton = NodePath("../RigSkeleton")
+polygon = PoolVector2Array( -5.17241, 247.845, 0, 210.776, 13.7931, 197.845, 33.1897, 194.828, 44.8276, 183.621, 59.0517, 154.31, 60.3448, 132.759, 42.2414, 82.3276, 7.32759, 13.3621, 70.6897, -12.5, 134.914, 41.3793, 133.19, 134.483, 120.259, 162.5, 105.603, 200.862, 96.1207, 237.5, 73.2759, 253.017, 37.931, 252.586, 20, 230, 31.6667, 225, 53.3333, 224, 66, 206.667, 72, 193, 83.6667, 158.333, 94.3333, 133.667, 86, 82.6667, 70.6667, 38.6667 )
+uv = PoolVector2Array( -5.17241, 247.845, 0, 210.776, 13.7931, 197.845, 33.1897, 194.828, 44.8276, 183.621, 59.0517, 154.31, 60.3448, 132.759, 42.2414, 82.3276, 7.32759, 13.3621, 70.6897, -12.5, 134.914, 41.3793, 133.19, 134.483, 120.259, 162.5, 105.603, 200.862, 96.1207, 237.5, 73.2759, 253.017, 37.931, 252.586, 20, 230, 31.6667, 225, 53.3333, 224, 66, 206.667, 72, 193, 83.6667, 158.333, 94.3333, 133.667, 86, 82.6667, 70.6667, 38.6667 )
+polygons = [ PoolIntArray( 17, 16, 0 ), PoolIntArray( 17, 1, 0 ), PoolIntArray( 17, 2, 1 ), PoolIntArray( 17, 18, 2 ), PoolIntArray( 17, 16, 18 ), PoolIntArray( 15, 16, 19 ), PoolIntArray( 18, 16, 19 ), PoolIntArray( 18, 3, 19 ), PoolIntArray( 18, 2, 3 ), PoolIntArray( 14, 20, 19, 15 ), PoolIntArray( 20, 4, 19 ), PoolIntArray( 3, 19, 4 ), PoolIntArray( 20, 21, 5, 4 ), PoolIntArray( 20, 14, 13, 21 ), PoolIntArray( 13, 12, 22, 21 ), PoolIntArray( 22, 6, 5, 21 ), PoolIntArray( 22, 23, 11, 12 ), PoolIntArray( 23, 24, 10, 11 ), PoolIntArray( 23, 6, 22 ), PoolIntArray( 23, 24, 7, 6 ), PoolIntArray( 24, 25, 10 ), PoolIntArray( 25, 9, 10 ), PoolIntArray( 25, 8, 9 ), PoolIntArray( 25, 7, 8 ), PoolIntArray( 25, 7, 24 ) ]
+bones = [ "Hip", PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), "Hip/Chest", PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), "Hip/Chest/Neck", PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), "Hip/Chest/Neck/Head", PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), "Hip/Chest/LArm", PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), "Hip/Chest/LArm/LForeArm", PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), "Hip/Chest/LArm/LForeArm/LHand", PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), "Hip/LLeg", PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), "Hip/LLeg/LLLeg", PoolRealArray( 0.44, 0.44, 0.44, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0.44, 0.44, 0.44, 0.61, 0.61, 0.61, 1, 1, 1, 1, 1, 1 ), "Hip/LLeg/LLLeg/LFoot", PoolRealArray( 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0 ) ]
+internal_vertex_count = 9
+script = ExtResource( 5 )
+
 [node name="LFoot" parent="RigSkeleton/Hip/LLeg/LLLeg" index="0"]
 scale = Vector2( 1, 1 )
+
+[node name="Catgirlexample" parent="RigSkeleton" index="1"]
+visible = true
 
 [editable path="RigSkeleton"]
