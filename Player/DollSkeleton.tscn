@@ -108,7 +108,7 @@ rest = Transform2D( 0.993057, -0.117637, 0.117637, 0.993057, 106.142, -13.4891 )
 
 [node name="Penis" type="Bone2D" parent="Hip"]
 position = Vector2( -19.6132, -45.6419 )
-rotation = -1.37137
+rotation = -1.37136
 rest = Transform2D( 0.198112, -0.980179, 0.980179, 0.198112, -19.6132, -45.6419 )
 default_length = 50.0
 

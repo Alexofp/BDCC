@@ -11,7 +11,7 @@ func _run():
 	if(state == ""):
 		GM.world.aimCamera("intro_corridor")
 		GM.ui.setLocationName("IBS \"Integrity\"")
-		GM.pc.playAnimation(Doll.Stand)
+		GM.pc.playAnimation(TheStage.Standing)
 		
 		addCharacter("intro_detective")
 		say("[b]You are being escorted[/b] by someone through a number of half-empty corridors, divided with bulky metal doors and occasional little checkpoints. Unknown figure in front of you looks masculine and prefers to watch forward, making it hard to catch the glimpses of his face. But you do [b]notice his grey wolf tail[/b], swishing behind him, and a leather holster on his belt.\n\n")
@@ -27,7 +27,7 @@ func _run():
 	if(state == "stepinside"):
 		GM.world.aimCamera("intro_interogation")
 		GM.ui.setLocationName("Interogation room")
-		GM.pc.playAnimation(Doll.Kneel)
+		GM.pc.playAnimation(TheStage.SittingOnChair)
 		
 		say("You step inside a room with white walls and ceiling tiles. There is only enough room for a long table, two chairs and a light. Both corners of the room seem to have cameras on them.\n\n")
 		
@@ -64,6 +64,7 @@ func _run():
 		addButton("back", "Back to picking gender", "pickgender")
 
 	if(state == "pickspecies"):
+		GM.pc.playAnimation(TheStage.Standing)
 		say("Pick your character's species")
 		var allSpecies = GlobalRegistry.getAllPlayableSpecies()
 		for speciesID in allSpecies:
@@ -153,6 +154,7 @@ func _run():
 		addButton("back", "Back", "pickedspecies")
 
 	if(state == "donecreating"):
+		GM.pc.playAnimation(TheStage.SittingOnChair)
 		say("The wolf nods. [say=intro_detective]Alright. You look slightly lost there. Long story short is that you failed a mindtest procedure. Information that was gathered is enough to link you to the crime that we've been trying to solve. I will be blunt. It’s enough to put you in jail for a while.[/say] He takes a short pause and watches your reaction. [say=intro_detective]And my job here is to figure out why you did it[/say]\n\n")
 		
 		addButton("I want a lawyer", "You know that it’s a very bad idea to talk to the police", "wantlawyer")

@@ -13,6 +13,8 @@ func _run():
 		addCharacter("captain")
 		addCharacter("risha")
 		
+		GM.pc.playAnimation(TheStage.Standing)
+		
 		saynn("You stand in a huge open hangar. Watching the colorful markings on the floor you can guess that it supports up to about 3 ships. Most of the corners are stuffed with metal crates or other types of cargo, all of it locked, behind you is a huge energy field that allows the spaceships to pass but keep the air in. The height of a hanger allows there to be many catwalks on the walls where all the guards stand, watching the fresh blood arrive. Your attention gets stolen by someone’s loud authoritative voice that gets echoed slightly.")
 
 		saynn("[say=captain]Welcome. Welcome to this little paradise.[/say]")
@@ -56,6 +58,8 @@ func _run():
 		addButton("Follow", "Follow the officer and his guard", "follow")
 		
 	if(state == "shoveaway"):
+		GM.pc.playAnimation(TheStage.Shove)
+		
 		saynn("You slap his arm away and shove him back. You growl and bare your fangs.")
 		
 		saynn("[say=pc]Don’t touch me. And I won’t tell you anything[/say]")

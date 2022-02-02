@@ -8,14 +8,18 @@ onready var animationTree = $AnimationTree
 var skeletonNodes = {}
 var limbs = {}
 
-const Stand = "Stand"
-const Kneel = "kneel"
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$Catgirlexample.queue_free()
 	saveBones(skeleton)
 	animationTree.active = true
+
+func setTargetSkeleton(newskeleton):
+	if(newskeleton == null):
+		saveBones(skeleton)
+		return
+	
+	saveBones(newskeleton)
 
 func saveBones(node: Node2D):
 	if(node is Bone2D):

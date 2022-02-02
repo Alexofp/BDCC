@@ -7,10 +7,9 @@ onready var nameLabel = $NameLabel
 onready var creditsLabel = $CreditsLabel
 onready var staminaLabel = $StaminaLabel
 onready var camera = $ViewportContainer/Viewport/Camera2D
-onready var doll = $ViewportContainer/Viewport/Doll
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
+onready var theStage = $ViewportContainer/Viewport/TheStage
+onready var doll = theStage.getPlayerDoll()
+
 
 var previousPosition: Vector2 = Vector2(0, 0)
 var draggingCamera: bool = false
@@ -82,4 +81,4 @@ func getStatusEffectsPanel():
 	return grid
 	
 func on_player_animationchange(newanim):
-	doll.playAnimation(newanim)
+	theStage.transitionTo(newanim)
