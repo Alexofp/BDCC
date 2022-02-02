@@ -85,7 +85,7 @@ func setTestThingie(newv):
 			newpolygons[polygonID].append(i)
 		
 		newPoses.append(_pos)
-		newuvs.append(_uvs * Vector2(128.0, 256.0))
+		newuvs.append(_uvs * Vector2(texture.get_width(), texture.get_height()))
 
 	var newnewpolygons = []
 	for p in newpolygons:

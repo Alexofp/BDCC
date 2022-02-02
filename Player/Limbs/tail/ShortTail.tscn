@@ -1,12 +1,14 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Player/Limbs/tail/TailBase.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Player/Limbs/tail/tailshort.png" type="Texture" id=2]
+[ext_resource path="res://Util/ExportToBlender/Polygon2DExporter.gd" type="Script" id=3]
 
 [node name="ShortTail" instance=ExtResource( 1 )]
 addOutline = false
 
 [node name="tail" type="Polygon2D" parent="." index="0"]
+visible = false
 position = Vector2( -25.9213, -137.034 )
 z_index = -2
 texture = ExtResource( 2 )
@@ -16,53 +18,21 @@ uv = PoolVector2Array( 49.7717, 41.5525, 61.1872, 49.7717, 74.8858, 57.5343, 87.
 polygons = [ PoolIntArray( 23, 24, 0 ), PoolIntArray( 23, 24, 22 ), PoolIntArray( 24, 1, 0 ), PoolIntArray( 2, 24, 1 ), PoolIntArray( 25, 2, 24 ), PoolIntArray( 25, 3, 2 ), PoolIntArray( 25, 4, 3 ), PoolIntArray( 25, 26, 4 ), PoolIntArray( 4, 26, 5 ), PoolIntArray( 26, 6, 5 ), PoolIntArray( 26, 6, 27 ), PoolIntArray( 27, 7, 6 ), PoolIntArray( 28, 7, 27 ), PoolIntArray( 28, 8, 7 ), PoolIntArray( 29, 8, 28 ), PoolIntArray( 29, 9, 8 ), PoolIntArray( 30, 9, 29 ), PoolIntArray( 31, 9, 30 ), PoolIntArray( 31, 10, 9 ), PoolIntArray( 31, 11, 10 ), PoolIntArray( 32, 11, 31 ), PoolIntArray( 33, 11, 32 ), PoolIntArray( 33, 12, 11 ), PoolIntArray( 34, 12, 33 ), PoolIntArray( 34, 13, 12 ), PoolIntArray( 34, 14, 13 ), PoolIntArray( 34, 15, 14 ), PoolIntArray( 34, 16, 15 ), PoolIntArray( 33, 16, 34 ), PoolIntArray( 32, 16, 33 ), PoolIntArray( 17, 32, 16 ), PoolIntArray( 17, 31, 32 ), PoolIntArray( 18, 31, 17 ), PoolIntArray( 18, 30, 31 ), PoolIntArray( 18, 30, 19 ), PoolIntArray( 19, 29, 30 ), PoolIntArray( 20, 29, 19 ), PoolIntArray( 20, 28, 29 ), PoolIntArray( 20, 27, 28 ), PoolIntArray( 21, 27, 20 ), PoolIntArray( 21, 26, 27 ), PoolIntArray( 22, 25, 24 ), PoolIntArray( 25, 21, 26 ), PoolIntArray( 25, 22, 21 ) ]
 bones = [ "Hip", PoolRealArray( 1, 1, 0.28, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.28, 0.28, 1, 1, 1, 0.28, 0.28, 0, 0, 0, 0, 0, 0, 0, 0 ), "Hip/Chest", PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), "Hip/Chest/Neck", PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), "Hip/Chest/Neck/Head", PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), "Hip/Chest/LArm", PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), "Hip/Chest/LArm/LForeArm", PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), "Hip/Chest/LArm/LForeArm/LHand", PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), "Hip/Chest/RArm", PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), "Hip/Chest/RArm/RForeArm", PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), "Hip/Chest/RArm/RForeArm/RHand", PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), "Hip/LLeg", PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), "Hip/LLeg/LLLeg", PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), "Hip/LLeg/LLLeg/LFoot", PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), "Hip/RLeg", PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), "Hip/RLeg/RLLeg", PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), "Hip/RLeg/RLLeg/RFoot", PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), "Hip/Tail1", PoolRealArray( 0, 0, 0.64, 1, 1, 1, 1, 1, 1, 1, 1, 0.49, 0.92, 0.36, 0.36, 0.36, 0.85, 1, 1, 1, 1, 0.36, 0, 0, 0, 0.64, 1, 1, 1, 1, 1, 1, 0.85, 1, 0.36 ), "Hip/Tail1/Tail2", PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.46, 0.82, 1, 1, 1, 1, 1, 0.54, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.46, 0.82, 1, 1 ), "Hip/Tail1/Tail2/Tail3", PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), "Hip/Tail1/Tail2/Tail3/Tail4", PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), "Hip/Tail1/Tail2/Tail3/Tail4/Tail5", PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ) ]
 internal_vertex_count = 11
+script = ExtResource( 3 )
 
-[node name="TestLimbs" parent="." index="1"]
+[node name="ShortTail" type="Polygon2D" parent="." index="1"]
+z_index = -2
+texture = ExtResource( 2 )
+skeleton = NodePath("../RigSkeleton")
+polygon = PoolVector2Array( 23.8504, -95.4815, 35.2659, -87.2623, 35.2659, -87.2623, 48.9645, -79.4997, 48.9645, -79.4997, 61.7499, -69.4541, 72.7088, -59.8651, 84.5807, -51.6459, 95.9967, -42.0568, 95.9967, -42.0568, 111.522, -32.468, 125.221, -22.422, 139.832, -10.093, 151.248, 1.77901, 164.947, 15.934, 176.819, 30.089, 189.604, 44.701, 166.773, 65.249, 141.202, 83.971, 121.568, 67.989, 121.568, 67.989, 108.782, 56.573, 96.4527, 45.158, 96.4527, 45.158, 84.5807, 33.286, 84.5807, 33.286, 72.2522, 20.957, 55.3572, 5.888, 55.3572, 5.888, 40.7454, -5.98399, 40.7454, -5.98399, 27.0467, -17.856, 27.0467, -17.856, 36.6358, -45.2532, 36.6358, -45.2532, 52.6175, -34.294, 69.9691, -22.879, 69.9691, -22.879, 83.2107, -10.55, 83.2107, -10.55, 97.8227, -0.960999, 97.8227, -0.960999, 107.869, 9.541, 107.869, 9.541, 118.371, 18.217, 118.371, 18.217, 127.96, 26.436, 127.96, 26.436, 141.202, 39.222, 141.202, 39.222, 151.248, 48.811, 157.641, 56.573, 25.6, -52.9905 )
+uv = PoolVector2Array( 49.75, 41.5313, 61.1563, 49.75, 61.1563, 49.75, 74.875, 57.5313, 74.875, 57.5313, 87.625, 67.5625, 98.625, 77.125, 110.5, 85.375, 121.875, 94.9375, 121.875, 94.9375, 137.375, 104.563, 151.125, 114.563, 165.75, 126.938, 177.125, 138.75, 190.75, 152.875, 202.625, 167, 215.5, 181.625, 192.625, 202.25, 167, 221, 147.375, 205, 147.375, 205, 134.625, 193.5, 122.313, 182.125, 122.313, 182.125, 110.5, 170.25, 110.5, 170.25, 98.125, 157.875, 81.25, 142.875, 81.25, 142.875, 66.625, 131, 66.625, 131, 52.9375, 119.125, 52.9375, 119.125, 62.5313, 91.75, 62.5313, 91.75, 78.5, 102.688, 95.875, 114.125, 95.875, 114.125, 109.125, 126.438, 109.125, 126.438, 123.688, 136, 123.688, 136, 133.75, 146.5, 133.75, 146.5, 144.25, 155.25, 144.25, 155.25, 153.875, 163.375, 153.875, 163.375, 167, 176.25, 167, 176.25, 177.125, 185.75, 183.5, 193.5, 51.5, 84 )
+polygons = [ PoolIntArray( 32, 34, 52 ), PoolIntArray( 29, 31, 33 ), PoolIntArray( 0, 2, 34 ), PoolIntArray( 1, 3, 33 ), PoolIntArray( 4, 34, 35 ), PoolIntArray( 4, 5, 35 ), PoolIntArray( 5, 6, 35 ), PoolIntArray( 6, 35, 37 ), PoolIntArray( 6, 7, 37 ), PoolIntArray( 7, 9, 37 ), PoolIntArray( 8, 36, 38 ), PoolIntArray( 9, 10, 39 ), PoolIntArray( 10, 39, 41 ), PoolIntArray( 10, 11, 41 ), PoolIntArray( 11, 41, 43 ), PoolIntArray( 11, 12, 43 ), PoolIntArray( 12, 43, 45 ), PoolIntArray( 12, 45, 47 ), PoolIntArray( 12, 13, 47 ), PoolIntArray( 13, 14, 47 ), PoolIntArray( 14, 47, 49 ), PoolIntArray( 14, 49, 50 ), PoolIntArray( 14, 15, 50 ), PoolIntArray( 15, 50, 51 ), PoolIntArray( 15, 16, 51 ), PoolIntArray( 16, 17, 51 ), PoolIntArray( 17, 18, 51 ), PoolIntArray( 18, 20, 51 ), PoolIntArray( 20, 50, 51 ), PoolIntArray( 20, 49, 50 ), PoolIntArray( 19, 21, 48 ), PoolIntArray( 21, 46, 48 ), PoolIntArray( 21, 22, 46 ), PoolIntArray( 22, 44, 46 ), PoolIntArray( 23, 25, 45 ), PoolIntArray( 24, 42, 44 ), PoolIntArray( 24, 26, 42 ), PoolIntArray( 26, 40, 42 ), PoolIntArray( 26, 38, 40 ), PoolIntArray( 26, 27, 38 ), PoolIntArray( 27, 36, 38 ), PoolIntArray( 30, 34, 35 ), PoolIntArray( 28, 35, 37 ), PoolIntArray( 28, 30, 35 ), PoolIntArray( 0, 34, 52 ) ]
+bones = [ "Hip", PoolRealArray( 0.826871, 0.760235, 0.760235, 0.647623, 0.647623, 0.556802, 0.505455, 0.446723, 0.405325, 0.405325, 0.346303, 0.281346, 0.21091, 0.120623, 0.0683604, 0.0253605, 0.00987259, 0.00810254, 0.0223087, 0.0511635, 0.0511635, 0.120165, 0.221134, 0.221134, 0.337606, 0.337606, 0.429541, 0.531106, 0.531106, 0.67628, 0.67628, 0.793545, 0.793545, 0.75082, 0.75082, 0.581811, 0.481621, 0.481621, 0.429038, 0.429038, 0.364294, 0.364294, 0.3149, 0.3149, 0.24683, 0.24683, 0.148928, 0.148928, 0.0755779, 0.0755779, 0.0347448, 0.0167391, 0.839826 ), "Hip/Chest", PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), "Hip/Chest/Neck", PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), "Hip/Chest/Neck/Head", PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), "Hip/Chest/LArm", PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), "Hip/Chest/LArm/LForeArm", PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), "Hip/Chest/LArm/LForeArm/LHand", PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), "Hip/Chest/RArm", PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), "Hip/Chest/RArm/RForeArm", PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), "Hip/Chest/RArm/RForeArm/RHand", PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), "Hip/LLeg", PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), "Hip/LLeg/LLLeg", PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), "Hip/LLeg/LLLeg/LFoot", PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), "Hip/RLeg", PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), "Hip/RLeg/RLLeg", PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), "Hip/RLeg/RLLeg/RFoot", PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), "Hip/Tail1", PoolRealArray( 0.173114, 0.23975, 0.23975, 0.34815, 0.34815, 0.436728, 0.483665, 0.534691, 0.556741, 0.556741, 0.569253, 0.546654, 0.461463, 0.37995, 0.281041, 0.189456, 0.149523, 0.141375, 0.157504, 0.212467, 0.212467, 0.309682, 0.391577, 0.391577, 0.436698, 0.436698, 0.465064, 0.434272, 0.434272, 0.322316, 0.322316, 0.206439, 0.206439, 0.249149, 0.249149, 0.407736, 0.496071, 0.496071, 0.514946, 0.514946, 0.525841, 0.525841, 0.489464, 0.489464, 0.437446, 0.437446, 0.364965, 0.364965, 0.271092, 0.271092, 0.213489, 0.163302, 0.160159 ), "Hip/Tail1/Tail2", PoolRealArray( 0, 0, 0, 0.00421149, 0.00421149, 0.00643931, 0.0108644, 0.018555, 0.0379187, 0.0379187, 0.0844282, 0.171969, 0.327596, 0.499397, 0.650584, 0.785153, 0.840589, 0.850507, 0.820157, 0.736339, 0.736339, 0.570138, 0.387274, 0.387274, 0.225681, 0.225681, 0.105364, 0.0346075, 0.0346075, 0.00137331, 0.00137331, 0, 0, 0, 0, 0.0104372, 0.0222782, 0.0222782, 0.0560006, 0.0560006, 0.10985, 0.10985, 0.195621, 0.195621, 0.315694, 0.315694, 0.486091, 0.486091, 0.653315, 0.653315, 0.751751, 0.819944, 0 ), "Hip/Tail1/Tail2/Tail3", PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), "Hip/Tail1/Tail2/Tail3/Tail4", PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), "Hip/Tail1/Tail2/Tail3/Tail4/Tail5", PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), "Hip/Penis", PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ) ]
+
+[node name="TestLimbs" parent="." index="2"]
 visible = true
-
-[node name="Hip" parent="RigSkeleton" index="0"]
-scale = Vector2( 1, 1 )
-
-[node name="Chest" parent="RigSkeleton/Hip" index="0"]
-scale = Vector2( 1, 1 )
-
-[node name="Neck" parent="RigSkeleton/Hip/Chest" index="0"]
-scale = Vector2( 1, 1 )
-
-[node name="LArm" parent="RigSkeleton/Hip/Chest" index="1"]
-scale = Vector2( 1, 1 )
-
-[node name="LForeArm" parent="RigSkeleton/Hip/Chest/LArm" index="0"]
-scale = Vector2( 1, 1 )
-
-[node name="LHand" parent="RigSkeleton/Hip/Chest/LArm/LForeArm" index="0"]
-scale = Vector2( 1, 1 )
-
-[node name="RArm" parent="RigSkeleton/Hip/Chest" index="2"]
-scale = Vector2( 1, 1 )
-
-[node name="RForeArm" parent="RigSkeleton/Hip/Chest/RArm" index="0"]
-scale = Vector2( 1, 1 )
-
-[node name="RHand" parent="RigSkeleton/Hip/Chest/RArm/RForeArm" index="0"]
-scale = Vector2( 1, 1 )
-
-[node name="LLLeg" parent="RigSkeleton/Hip/LLeg" index="0"]
-scale = Vector2( 1, 1 )
-
-[node name="LFoot" parent="RigSkeleton/Hip/LLeg/LLLeg" index="0"]
-scale = Vector2( 0.999999, 0.999999 )
-
-[node name="RLLeg" parent="RigSkeleton/Hip/RLeg" index="0"]
-scale = Vector2( 1, 1 )
 
 [node name="RFoot" parent="RigSkeleton/Hip/RLeg/RLLeg" index="0"]
 scale = Vector2( 0.999999, 0.999999 )
-
-[node name="Tail1" parent="RigSkeleton/Hip" index="3"]
-scale = Vector2( 1, 1 )
-
-[node name="Tail5" parent="RigSkeleton/Hip/Tail1/Tail2/Tail3/Tail4" index="0"]
-scale = Vector2( 1, 1 )
 
 [editable path="RigSkeleton"]

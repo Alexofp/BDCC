@@ -22,5 +22,7 @@ func setDoThing(newv):
 		data["faces"].append(newface)
 
 	data["globalpos"] = [global_position.x, global_position.y]
+	data["texturew"] = texture.get_width()
+	data["textureh"] = texture.get_height()
 
 	print(JSON.print(data))

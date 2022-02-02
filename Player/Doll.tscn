@@ -848,7 +848,7 @@ tracks/25/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ -69.4805 ]
+"values": [ -46.5312 ]
 }
 tracks/26/type = "value"
 tracks/26/path = NodePath("Skeleton2D/Hip/RLeg:position")
@@ -872,7 +872,7 @@ tracks/27/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ 13.0874 ]
+"values": [ 18.9032 ]
 }
 tracks/28/type = "value"
 tracks/28/path = NodePath("Skeleton2D/Hip/RLeg/RLLeg:position")
