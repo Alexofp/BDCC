@@ -9,7 +9,8 @@ onready var staminaLabel = $StaminaLabel
 onready var camera = $ViewportContainer/Viewport/Camera2D
 onready var theStage = $ViewportContainer/Viewport/TheStage
 onready var doll = theStage.getPlayerDoll()
-
+onready var tooltip = $CanvasLayer/TooltipDisplay
+onready var viewport = $ViewportContainer/Viewport
 
 var previousPosition: Vector2 = Vector2(0, 0)
 var draggingCamera: bool = false
@@ -72,13 +73,27 @@ func _input(event: InputEvent):
 
 func _on_ViewportContainer_mouse_exited():
 	mouseInsideViewport = false
+	theStage.setTooltipsActive(false)
 
 
 func _on_ViewportContainer_mouse_entered():
 	mouseInsideViewport = true
+	theStage.setTooltipsActive(true)
 
 func getStatusEffectsPanel():
 	return grid
 	
 func on_player_animationchange(newanim):
 	theStage.transitionTo(newanim)
+
+
+func _on_TheStage_onBodypartMouseEntered(_who, _what):
+	if(mouseInsideViewport):
+		if(_who == doll):
+		
+			tooltip.set_is_active(true)
+			tooltip.set_text(GM.pc.getBodypartTooltipName(_what), GM.pc.getBodypartTooltipInfo(_what))
+
+
+func _on_TheStage_onBodypartMouseExited(_who, _what):
+	tooltip.set_is_active(false)

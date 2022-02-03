@@ -480,3 +480,9 @@ func getFightState():
 			return getName() + " looks alright but you notice some desire in "+hisHer()+" eyes"
 		
 	return getName() + " looks completely fine, no visible bruises or signs of lust"
+
+func getBodypartTooltipName(_bodypartSlot):
+	return "error"
+
+func getBodypartTooltipInfo(_bodypartSlot):
+	return "error"

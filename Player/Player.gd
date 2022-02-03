@@ -325,3 +325,17 @@ func getFightState():
 			return "You are slightly aroused but you manage to control it just fine"
 		
 	return "You seem to be doing just fine during this moment in a fight"
+
+func getBodypartTooltipName(_bodypartSlot):
+	if(hasBodypart(_bodypartSlot)):
+		var bodypart: Bodypart = getBodypart(_bodypartSlot)
+		return bodypart.getName()
+	
+	return "error"
+
+func getBodypartTooltipInfo(_bodypartSlot):
+	if(hasBodypart(_bodypartSlot)):
+		var bodypart: Bodypart = getBodypart(_bodypartSlot)
+		return bodypart.getTooltipInfo()
+	
+	return "error"

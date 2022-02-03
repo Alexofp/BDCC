@@ -35,3 +35,6 @@ func getHybridPriority():
 
 func getExtraInfoCreation():
 	return ""
+
+func getTooltipInfo():
+	return "error, let the developer know"

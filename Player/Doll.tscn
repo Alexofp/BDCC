@@ -1,6 +1,7 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Player/Limbs/example.png" type="Texture" id=1]
+[ext_resource path="res://Player/BodypartHitbox.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Player/Doll.gd" type="Script" id=15]
 [ext_resource path="res://Player/DollSkeleton.tscn" type="PackedScene" id=21]
 [ext_resource path="res://Player/Limbs/catgirlexample.png" type="Texture" id=24]
@@ -2212,9 +2213,12 @@ start_node = "Stand"
 script = ExtResource( 15 )
 
 [node name="Skeleton2D" parent="." instance=ExtResource( 21 )]
+visible = false
 
 [node name="RetargetedSkeleton" parent="." instance=ExtResource( 21 )]
-visible = false
+
+[node name="BoobsHitbox" parent="RetargetedSkeleton/Hip/Chest" index="3" instance=ExtResource( 2 )]
+position = Vector2( 73.5161, -34.7534 )
 
 [node name="Catgirlexample" type="Sprite" parent="."]
 position = Vector2( 214.765, -20.7789 )
@@ -2237,6 +2241,9 @@ anims/mew = SubResource( 3 )
 tree_root = SubResource( 11 )
 anim_player = NodePath("../AnimationPlayer")
 parameters/playback = SubResource( 12 )
+
+[connection signal="mouse_entered" from="RetargetedSkeleton/Hip/Chest/BoobsHitbox" to="." method="_on_BoobsHitbox_mouse_entered"]
+[connection signal="mouse_exited" from="RetargetedSkeleton/Hip/Chest/BoobsHitbox" to="." method="_on_BoobsHitbox_mouse_exited"]
 
 [editable path="Skeleton2D"]
 [editable path="RetargetedSkeleton"]

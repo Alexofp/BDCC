@@ -3814,155 +3814,11 @@ anims/StandingToKneeling = SubResource( 10 )
 [node name="MainPuppet" parent="." instance=ExtResource( 1 )]
 position = Vector2( 0, -385 )
 
-[node name="Hip" parent="MainPuppet" index="0"]
-scale = Vector2( 1, 1 )
-
-[node name="Chest" parent="MainPuppet/Hip" index="0"]
-scale = Vector2( 1, 1 )
-
-[node name="Neck" parent="MainPuppet/Hip/Chest" index="0"]
-scale = Vector2( 1, 1 )
-
-[node name="LArm" parent="MainPuppet/Hip/Chest" index="1"]
-scale = Vector2( 1, 1 )
-
-[node name="LForeArm" parent="MainPuppet/Hip/Chest/LArm" index="0"]
-scale = Vector2( 1, 1 )
-
-[node name="LHand" parent="MainPuppet/Hip/Chest/LArm/LForeArm" index="0"]
-scale = Vector2( 1, 1 )
-
-[node name="RArm" parent="MainPuppet/Hip/Chest" index="2"]
-scale = Vector2( 1, 1 )
-
-[node name="RForeArm" parent="MainPuppet/Hip/Chest/RArm" index="0"]
-scale = Vector2( 1, 1 )
-
-[node name="RHand" parent="MainPuppet/Hip/Chest/RArm/RForeArm" index="0"]
-scale = Vector2( 1, 1 )
-
-[node name="LLLeg" parent="MainPuppet/Hip/LLeg" index="0"]
-scale = Vector2( 1, 1 )
-
-[node name="LFoot" parent="MainPuppet/Hip/LLeg/LLLeg" index="0"]
-scale = Vector2( 1, 1 )
-
-[node name="RLLeg" parent="MainPuppet/Hip/RLeg" index="0"]
-scale = Vector2( 1, 1 )
-
-[node name="RFoot" parent="MainPuppet/Hip/RLeg/RLLeg" index="0"]
-scale = Vector2( 1, 1 )
-
-[node name="Tail1" parent="MainPuppet/Hip" index="3"]
-scale = Vector2( 1, 1 )
-
-[node name="Tail5" parent="MainPuppet/Hip/Tail1/Tail2/Tail3/Tail4" index="0"]
-scale = Vector2( 1, 1 )
-
-[node name="Penis" parent="MainPuppet/Hip" index="4"]
-scale = Vector2( 1, 1 )
-
 [node name="Puppet2" parent="." instance=ExtResource( 1 )]
 position = Vector2( 1500, -385 )
 
-[node name="Hip" parent="Puppet2" index="0"]
-scale = Vector2( 1, 1 )
-
-[node name="Chest" parent="Puppet2/Hip" index="0"]
-scale = Vector2( 1, 1 )
-
-[node name="Neck" parent="Puppet2/Hip/Chest" index="0"]
-scale = Vector2( 1, 1 )
-
-[node name="LArm" parent="Puppet2/Hip/Chest" index="1"]
-scale = Vector2( 1, 1 )
-
-[node name="LForeArm" parent="Puppet2/Hip/Chest/LArm" index="0"]
-scale = Vector2( 1, 1 )
-
-[node name="LHand" parent="Puppet2/Hip/Chest/LArm/LForeArm" index="0"]
-scale = Vector2( 1, 1 )
-
-[node name="RArm" parent="Puppet2/Hip/Chest" index="2"]
-scale = Vector2( 1, 1 )
-
-[node name="RForeArm" parent="Puppet2/Hip/Chest/RArm" index="0"]
-scale = Vector2( 1, 1 )
-
-[node name="RHand" parent="Puppet2/Hip/Chest/RArm/RForeArm" index="0"]
-scale = Vector2( 1, 1 )
-
-[node name="LLLeg" parent="Puppet2/Hip/LLeg" index="0"]
-scale = Vector2( 1, 1 )
-
-[node name="LFoot" parent="Puppet2/Hip/LLeg/LLLeg" index="0"]
-scale = Vector2( 1, 1 )
-
-[node name="RLLeg" parent="Puppet2/Hip/RLeg" index="0"]
-scale = Vector2( 1, 1 )
-
-[node name="RFoot" parent="Puppet2/Hip/RLeg/RLLeg" index="0"]
-scale = Vector2( 1, 1 )
-
-[node name="Tail1" parent="Puppet2/Hip" index="3"]
-scale = Vector2( 1, 1 )
-
-[node name="Tail5" parent="Puppet2/Hip/Tail1/Tail2/Tail3/Tail4" index="0"]
-scale = Vector2( 1, 1 )
-
-[node name="Penis" parent="Puppet2/Hip" index="4"]
-scale = Vector2( 1, 1 )
-
 [node name="Puppet3" parent="." instance=ExtResource( 1 )]
 position = Vector2( 2000, -385 )
-
-[node name="Hip" parent="Puppet3" index="0"]
-scale = Vector2( 1, 1 )
-
-[node name="Chest" parent="Puppet3/Hip" index="0"]
-scale = Vector2( 1, 1 )
-
-[node name="Neck" parent="Puppet3/Hip/Chest" index="0"]
-scale = Vector2( 1, 1 )
-
-[node name="LArm" parent="Puppet3/Hip/Chest" index="1"]
-scale = Vector2( 1, 1 )
-
-[node name="LForeArm" parent="Puppet3/Hip/Chest/LArm" index="0"]
-scale = Vector2( 1, 1 )
-
-[node name="LHand" parent="Puppet3/Hip/Chest/LArm/LForeArm" index="0"]
-scale = Vector2( 1, 1 )
-
-[node name="RArm" parent="Puppet3/Hip/Chest" index="2"]
-scale = Vector2( 1, 1 )
-
-[node name="RForeArm" parent="Puppet3/Hip/Chest/RArm" index="0"]
-scale = Vector2( 1, 1 )
-
-[node name="RHand" parent="Puppet3/Hip/Chest/RArm/RForeArm" index="0"]
-scale = Vector2( 1, 1 )
-
-[node name="LLLeg" parent="Puppet3/Hip/LLeg" index="0"]
-scale = Vector2( 1, 1 )
-
-[node name="LFoot" parent="Puppet3/Hip/LLeg/LLLeg" index="0"]
-scale = Vector2( 1, 1 )
-
-[node name="RLLeg" parent="Puppet3/Hip/RLeg" index="0"]
-scale = Vector2( 1, 1 )
-
-[node name="RFoot" parent="Puppet3/Hip/RLeg/RLLeg" index="0"]
-scale = Vector2( 1, 1 )
-
-[node name="Tail1" parent="Puppet3/Hip" index="3"]
-scale = Vector2( 1, 1 )
-
-[node name="Tail5" parent="Puppet3/Hip/Tail1/Tail2/Tail3/Tail4" index="0"]
-scale = Vector2( 1, 1 )
-
-[node name="Penis" parent="Puppet3/Hip" index="4"]
-scale = Vector2( 1, 1 )
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource( 1 )
@@ -3987,6 +3843,8 @@ position = Vector2( 111.32, -182.884 )
 texture = ExtResource( 5 )
 
 [connection signal="animation_started" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_started"]
+[connection signal="onBodypartMouseEntered" from="PlayerDoll" to="." method="_on_PlayerDoll_onBodypartMouseEntered"]
+[connection signal="onBodypartMouseExited" from="PlayerDoll" to="." method="_on_PlayerDoll_onBodypartMouseExited"]
 
 [editable path="MainPuppet"]
 [editable path="Puppet2"]

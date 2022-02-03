@@ -8,6 +8,9 @@ onready var animationTree = $AnimationTree
 var skeletonNodes = {}
 var limbs = {}
 
+signal onBodypartMouseEntered(who, what)
+signal onBodypartMouseExited(who, what)
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$Catgirlexample.queue_free()
@@ -38,7 +41,8 @@ func applyOffsets(node: Node2D):
 		node.rotation_degrees = info.rotation_degrees - info.rest.get_rotation() + node.rest.get_rotation()
 		
 	for n in node.get_children():
-		applyOffsets(n)
+		if(n is Bone2D):
+			applyOffsets(n)
 
 func _process(_delta):
 	applyOffsets(retargetedSkeleton)
@@ -88,3 +92,19 @@ func loadFromPlayer(player: Player):
 func playAnimation(animation):
 	var state_machine = animationTree["parameters/playback"]
 	state_machine.travel(animation)
+
+
+func _on_BoobsHitbox_mouse_entered():
+	emit_signal("onBodypartMouseEntered", self, BodypartSlot.Breasts)
+
+
+func _on_BoobsHitbox_mouse_exited():
+	emit_signal("onBodypartMouseExited", self, BodypartSlot.Breasts)
+
+func setTooltipsActive(a):
+	if(a):
+		$RetargetedSkeleton/Hip/Chest/BoobsHitbox.setIgnoreInput(false)
+	else:
+		$RetargetedSkeleton/Hip/Chest/BoobsHitbox.setIgnoreInput(true)
+
+	

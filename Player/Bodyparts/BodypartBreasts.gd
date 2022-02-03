@@ -48,3 +48,6 @@ static func breastSizeToString(bsize):
 	if(bsize == BreastsSize.GG):
 		return "GG"
 	return "Error?"
+
+func getTooltipInfo():
+	return "size: " + breastSizeToString(size) + "\n" + "Gonna be more stuff here"

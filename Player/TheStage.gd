@@ -15,6 +15,9 @@ onready var puppets = [
 onready var animationTree = $AnimationTree
 onready var props = $Props
 
+signal onBodypartMouseEntered(who, what)
+signal onBodypartMouseExited(who, what)
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	for pup in puppets:
@@ -52,3 +55,14 @@ func hideAllProps():
 # https://github.com/godotengine/godot/issues/28311
 func _on_AnimationPlayer_animation_started(_anim_name):
 	pass
+
+func setTooltipsActive(a):
+	playerDoll.setTooltipsActive(a)
+
+
+func _on_PlayerDoll_onBodypartMouseEntered(who, what):
+	emit_signal("onBodypartMouseEntered", who, what)
+
+
+func _on_PlayerDoll_onBodypartMouseExited(who, what):
+	emit_signal("onBodypartMouseExited", who, what)
