@@ -42,3 +42,6 @@ func getRequirements():
 
 func getAnticipationText(_attacker, _reciever):
 	return _attacker.getName() + " lunges forward and tries to sparta-kick you"
+
+func getAttackAnimation():
+	return TheStage.Kick

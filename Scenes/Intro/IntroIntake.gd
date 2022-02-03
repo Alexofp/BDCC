@@ -39,6 +39,8 @@ func _run():
 		GM.world.aimCamera("intro_nearcaptain")
 		GM.ui.setLocationName("Spaceship hangar")
 		
+		GM.pc.playAnimation(TheStage.Walking)
+		
 		saynn("[say=pc]So. You came to take me in?[/say]")
 		
 		saynn("The officer walks up closer to you and takes a good look, his hand grabs you by the chin and makes you look at him.")
@@ -81,6 +83,8 @@ func _run():
 	if(state == "follow"):
 		GM.world.aimCamera("intro_intakearea")
 		GM.ui.setLocationName("Intake area")
+		
+		GM.pc.playAnimation(TheStage.Walking)
 		
 		saynn("You follow the officer through some corridor and enter an inmate processing area. You see a little showering area that's divided from the main room with glass and automatic doors. Then there are some kinds of vendomats and, lastly, a small medical area. The floor has useful lines that show the order in which to process the inmate.")
 		
@@ -133,6 +137,8 @@ func _run():
 		saynn("It wasn’t a fair fight at all, the guard had every single advantage. You can’t stand up anymore, the pain is too much. You can only grunt while the guard puts her baton away and cracks her knuckles. The officer crouches near you and forces you to look at him.")
 
 	if(state == "wonrisha"):
+		GM.pc.playAnimation(TheStage.GetDefeated)
+		
 		saynn("The guard kneels before you, defeated, her hand drops the baton as she grunts from pain. You quickly pick up the weapon and turn it on.")
 
 		saynn("[say=risha]Fucker, you will pay for that.. ghhh-h[/say]")
@@ -171,6 +177,8 @@ func _run():
 		GM.world.aimCamera("intro_shower")
 		GM.ui.setLocationName("Shower")
 		
+		GM.pc.playAnimation(TheStage.Walking)
+		
 		saynn("You step into the shower area that's closed-off with glass. It’s a small room with many shower heads attached to the ceiling. You keep covering yourself as a normal person would while preparing for the worst. And yes, when the shower begins, you feel that the water is freezing cold. It's so cold that you groan audibly.")
 		
 		saynn("[say=pc]Why is it so cold![/say]")
@@ -202,6 +210,8 @@ func _run():
 	if(state == "aftershower"):
 		GM.world.aimCamera("intro_aftershower")
 		GM.ui.setLocationName("Intake area")
+		
+		GM.pc.playAnimation(TheStage.Walking)
 		
 		saynn("You step out back into the intake room and follow the lines on the floor to your next stop. You see a vendomat mounted onto a wall, it’s a machine capable of producing and dispensing different things. Near it on a wall is a console. It looks pretty dated, a screen that can only output green color, a bulky card reader and a mechanical keyboard, not even sensory. The officer begins to type some stuff into it while the guard watches you out.")
 		

@@ -98,10 +98,18 @@ func getRequirementsColorText(_attacker, _reciever):
 	
 	return text
 
-func doDamage(_attacker, _reciever, _damageType, _damage: int):
+func doDamage(_attacker, _reciever, _damageType, _damage: int, playGetHitAnimation = true):
 	var damageMult = _attacker.getDamageMultiplier(_damageType)
 	
 	var damage = _reciever.recieveDamage(_damageType, _damage * damageMult)
+	
+	if(playGetHitAnimation):
+		if(_reciever == GM.pc):
+			if(GM.pc.isBlocking()):
+				GM.pc.playAnimation(TheStage.Block)
+			elif(_damageType == DamageType.Physical || _damageType == DamageType.Stamina):
+				GM.pc.playAnimation(TheStage.GetHit)
+	
 	return damage
 
 func canBeDodgedByPlayer(_attacker, _reciever):
@@ -178,7 +186,11 @@ func checkMissed(_attacker, _reciever, _damageType, customAccuracyMult = 1):
 
 func checkDodged(_attacker, _reciever, _damageType, customDodgeMult = 1):
 	var dodgeChance = _reciever.getDodgeChance(_damageType) * customDodgeMult
+		
 	if(RNG.chance(100.0 * dodgeChance)):
 		return true
+		
 	return false
 	
+func getAttackAnimation():
+	return ""

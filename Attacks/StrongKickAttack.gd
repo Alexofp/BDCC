@@ -29,3 +29,6 @@ func _canUse(_attacker, _reciever):
 
 func getRequirements():
 	return [["stamina", 25], ["freelegs"]]
+
+func getAttackAnimation():
+	return TheStage.Kick

@@ -208,6 +208,8 @@ func _react(_action: String, _args):
 			whatPlayerDid = "You focus on enemy's next attack and try to dodge it"
 			GM.pc.setFightingStateDodging()
 			GM.pc.addStamina(-30)
+			
+			GM.pc.playAnimation(TheStage.Dodge)
 		if(_action == "dodge_block"):
 			whatPlayerDid = "You try to block the next attack"
 			GM.pc.setFightingStateBlocking()
@@ -233,6 +235,7 @@ func _react(_action: String, _args):
 		setState("lost")
 		whatHappened = "You give up the fight willingly and submit to your enemy\n"
 		battleState = "lost"
+		GM.pc.playAnimation(TheStage.Kneeling)
 		return
 	
 	if(_action == "endbattle"):
@@ -250,6 +253,10 @@ func doPlayerAttack(attackID):
 		assert(false, "Bad attack: "+attackID)
 	
 	var text = attack.doAttack(GM.pc, enemyCharacter)
+	var attackAnim = attack.getAttackAnimation()
+	if(attackAnim != null && attackAnim != ""):
+		GM.pc.playAnimation(attackAnim)
+	
 	return text
 
 func getBestAIAttack():
@@ -316,6 +323,7 @@ func checkEnd():
 	if(GM.pc.getPain() >= GM.pc.painThreshold()):
 		whatHappened += "You succumb to pain\n"
 		battleState = "lost"
+		GM.pc.playAnimation(TheStage.GetDefeated)
 		return "lost"
 	if(enemyCharacter.getPain() >= enemyCharacter.painThreshold()):
 		whatHappened += "Enemy is in too much pain to continue\n"
@@ -324,6 +332,7 @@ func checkEnd():
 	if(GM.pc.getLust() >= GM.pc.lustThreshold()):
 		whatHappened += "You're too aroused to continue\n"
 		battleState = "lost"
+		GM.pc.playAnimation(TheStage.GetDefeated)
 		return "lost"
 	if(enemyCharacter.getLust() >= enemyCharacter.lustThreshold()):
 		whatHappened += "Enemy is too aroused to continue\n"

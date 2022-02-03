@@ -5,6 +5,14 @@ const Standing = "Standing"
 const Kneeling = "Kneeling"
 const SittingOnChair = "SittingOnChair"
 const Shove = "Shove"
+const Walking = "Walking"
+const Punch = "Punch"
+const Kick = "Kick"
+const Bite = "Bite"
+const GetHit = "GetHit"
+const Block = "Block"
+const Dodge = "Dodge"
+const GetDefeated = "GetDefeated"
 
 onready var playerDoll = $PlayerDoll
 onready var puppets = [

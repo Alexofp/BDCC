@@ -22,6 +22,7 @@ func _run():
 	if(state == "sneak_up"):
 		GM.world.aimCamera("intro_medicalarea")
 		GM.ui.setLocationName("Medical area")
+		GM.pc.playAnimation(TheStage.GetDefeated)
 		
 		saynn("You decide not to announce your presence and instead begin to slowly creep up to the lady, who seems to be too busy with reading something off of her tablet. You keep watching her as you make your steps as light as possible. You notice her feline ears twitching ever so slightly. As you approach the instrument table, you notice a variety of tools: syringes, clamps, retractors but most importantly, a few scalpels. Your hand hovers over one as you try to grab it. But as soon as you do, you hear a voice.")
 
@@ -88,6 +89,8 @@ func _run():
 		addButton("Sit", "Take a sit", "sit")
 
 	if(state == "sit"):
+		GM.pc.playAnimation(TheStage.SittingOnChair)
+		
 		saynn("You sit on the side of a bed, it’s not the most comfy one but what can you do.")
 
 		saynn("[say=eliza]You can call me doctor Quinn, inmate. Since this is your first time here I will need to do some procedures. Nothing too painful but still[/say]")
@@ -184,6 +187,8 @@ func _run():
 		addButton("Fuck no", "You’re not a dog", "fuck_no")
 
 	if(state == "fuck_no"):
+		GM.pc.playAnimation(TheStage.Shove)
+		
 		GM.world.aimCamera("intro_beforeelevator")
 		GM.ui.setLocationName("Intake area")
 		
@@ -202,6 +207,8 @@ func _run():
 		addButton("Lift", "Enter the lift", "lift")
 
 	if(state == "fine"):
+		GM.pc.playAnimation(TheStage.Standing)
+		
 		GM.world.aimCamera("intro_beforeelevator")
 		GM.ui.setLocationName("Intake area")
 		
@@ -242,6 +249,8 @@ func _run():
 		GM.world.aimCamera("hall_elevator")
 		GM.ui.setLocationName("Checkpoint")
 		
+		GM.pc.playAnimation(TheStage.Walking)
+		
 		saynn("It takes a minute but the lift finally arrives. When the doors open, the first thing you see is a checkpoint with a few guards standing around.")
 
 		saynn("[say=eliza]That inmate is with me[/say]")
@@ -265,6 +274,8 @@ func _run():
 		addButton("Follow", "Follow the leash", "followtocell")
 
 	if(state == "followtocell"):
+		GM.pc.playAnimation(TheStage.Walking)
+		
 		GM.world.aimCamera("cellblock_orange_nearcell")
 		GM.ui.setLocationName("Cellblock")
 		
