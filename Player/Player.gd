@@ -360,3 +360,11 @@ func hasTail():
 	
 func hasHorns():
 	return hasBodypart(BodypartSlot.Horns)
+
+func afterSleepingInBed():
+	addStamina(getMaxStamina())
+
+func afterRestingInBed(seconds):
+	var _hours = floor(seconds/3600.0)
+	
+	addStamina(_hours * 10)

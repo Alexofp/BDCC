@@ -25,7 +25,7 @@ func _on_CBStairs2_onReact(_room, key):
 func _on_CellblockRoom11_onEnter(room):
 	room.addButton("Stash", "You can hide something in your cell", "stash")
 	
-	room.addButton("Rest", "For debug", "rest")
+	room.addButton("Rest", "Lay down on the bed", "rest")
 
 
 func _on_CellblockRoom11_onReact(_room, key):
@@ -33,6 +33,7 @@ func _on_CellblockRoom11_onReact(_room, key):
 		_room.runScene("PlayerStashScene")
 		
 	if(key == "rest"):
-		GM.pc.addStamina(100)
-		GM.main.addMessage("You had a good rest")
-		GM.main.reRun()
+		_room.runScene("RestingInCellScene")
+		#GM.pc.addStamina(100)
+		#GM.main.addMessage("You had a good rest")
+		#GM.main.reRun()

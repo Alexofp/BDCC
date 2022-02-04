@@ -149,6 +149,16 @@ func doTimeProcess(_seconds):
 	
 	emit_signal("time_passed", _seconds)
 
+func processTimeUntil(newseconds):
+	if(timeOfDay >= newseconds):
+		return
+	
+	var timeDiff = newseconds - timeOfDay
+	
+	timeOfDay = newseconds
+	doTimeProcess(timeDiff)
+	return timeDiff
+	
 func startNewDay():
 	var newtime = 6 * 60 * 60
 	var timediff = 24 * 60 * 60 - timeOfDay + newtime
@@ -169,3 +179,9 @@ func getVisibleTime():
 	
 	text += ", day " + str(currentDay)
 	return text
+
+func getTime():
+	return timeOfDay
+
+func getDays():
+	return currentDay
