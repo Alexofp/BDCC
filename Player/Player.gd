@@ -31,6 +31,8 @@ func _ready():
 	giveBodypart(GlobalRegistry.getBodypart("humanbody"))
 	giveBodypart(GlobalRegistry.getBodypart("humanarms"))
 	giveBodypart(GlobalRegistry.getBodypart("felineears"))
+	giveBodypart(GlobalRegistry.getBodypart("vagina"))
+	giveBodypart(GlobalRegistry.getBodypart("anus"))
 	updateNonBattleEffects()
 	
 	#inventory.addItem(GlobalRegistry.createItem("testitem"))
@@ -227,7 +229,7 @@ func resetBodypartsToDefault():
 		var choices = []
 		
 		for specie in myspecies:
-			var bodypartID = specie.getDefaultForSlot(slot)
+			var bodypartID = specie.getDefaultForSlot(slot, getGender())
 			if(bodypartID == null):
 				continue
 			var bodypart = GlobalRegistry.getBodypart(bodypartID)
@@ -339,3 +341,9 @@ func getBodypartTooltipInfo(_bodypartSlot):
 		return bodypart.getTooltipInfo()
 	
 	return "error"
+
+func hasPenis():
+	return hasBodypart(BodypartSlot.Penis)
+
+func hasVagina():
+	return hasBodypart(BodypartSlot.Vagina)

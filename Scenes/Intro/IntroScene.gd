@@ -146,7 +146,8 @@ func _run():
 
 	if(state == "pickbreastsize"):
 		say("Pick your character's breast size")
-		addButton("Flat", "Flat breasts will never produce milk", "setbreasts", [BodypartBreasts.BreastsSize.FLAT])
+		addButton("Male", "Male breasts will never produce milk or increase in size", "setbreasts", [BodypartBreasts.BreastsSize.MALE])
+		addButton("Flat", "Flat breasts", "setbreasts", [BodypartBreasts.BreastsSize.FLAT])
 		addButton("A", "A sized breasts", "setbreasts", [BodypartBreasts.BreastsSize.A])
 		addButton("B", "B sized breasts", "setbreasts", [BodypartBreasts.BreastsSize.B])
 		addButton("C", "C sized breasts", "setbreasts", [BodypartBreasts.BreastsSize.C])

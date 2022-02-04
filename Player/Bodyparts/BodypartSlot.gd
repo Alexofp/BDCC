@@ -9,11 +9,13 @@ const Body = "body"
 const Arms = "arms"
 const Breasts = "breasts"
 const Penis = "penis"
+const Vagina = "vagina"
+const Anus = "anus"
 const Tail = "tail"
 const Legs = "legs"
 
 static func getAll():
-	return [Head, Hair, Ears, Horns, Body, Arms, Breasts, Penis, Tail, Legs]
+	return [Head, Hair, Ears, Horns, Body, Arms, Breasts, Penis, Vagina, Anus, Tail, Legs]
 
 static func getVisibleName(slot: String):
 	return slot.capitalize()
@@ -24,6 +26,8 @@ static func isEssential(slot):
 	if(slot == Tail):
 		return false
 	if(slot == Penis):
+		return false
+	if(slot == Vagina):
 		return false
 	
 	return true

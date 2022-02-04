@@ -2,8 +2,8 @@
 
 [ext_resource path="res://Player/BodypartHitbox.gd" type="Script" id=1]
 
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 30, 30 )
+[sub_resource type="CircleShape2D" id=1]
+radius = 30.0
 
 [node name="BoobsHitbox" type="Area2D"]
 collision_layer = 0

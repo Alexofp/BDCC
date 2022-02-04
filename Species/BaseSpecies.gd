@@ -19,52 +19,76 @@ func getVisibleName():
 func getVisibleDescription():
 	return "Not implemented, Let the developer know"
 
-func getDefaultLegs():
+func getDefaultLegs(_gender):
 	return "felineleg"
 
-func getDefaultBreasts():
+func getDefaultBreasts(_gender):
+	if(_gender in [BaseCharacter.Gender.Male]):
+		return "malebreasts"
+	
 	return "humanbreasts"
 
-func getDefaultHair():
+func getDefaultHair(_gender):
 	return "baldhair"
 	
-func getDefaultTail():
+func getDefaultTail(_gender):
 	return null
 
-func getDefaultBody():
+func getDefaultBody(_gender):
 	return "humanbody"
 
-func getDefaultHead():
+func getDefaultHead(_gender):
 	return "humanhead"
 	
-func getDefaultArms():
+func getDefaultArms(_gender):
 	return "humanarms"
 
-func getDefaultEars():
+func getDefaultEars(_gender):
 	return "felineears"
 
-func getDefaultHorns():
+func getDefaultHorns(_gender):
 	return null
 
-func getDefaultForSlot(slot):
+func getDefaultPenis(_gender):
+	if(_gender in [BaseCharacter.Gender.Male, BaseCharacter.Gender.Androgynous]):
+		return "humanpenis"
+	else:
+		return null
+
+func getDefaultVagina(_gender):
+	if(_gender in [BaseCharacter.Gender.Female, BaseCharacter.Gender.Androgynous]):
+		return "vagina"
+	else:
+		return null
+
+func getDefaultAnus(_gender):
+	return "anus"
+
+func getDefaultForSlot(slot, _gender):
 	if(slot == BodypartSlot.Legs):
-		return getDefaultLegs()
+		return getDefaultLegs(_gender)
 	if(slot == BodypartSlot.Breasts):
-		return getDefaultBreasts()
+		return getDefaultBreasts(_gender)
 	if(slot == BodypartSlot.Hair):
-		return getDefaultHair()
+		return getDefaultHair(_gender)
 	if(slot == BodypartSlot.Tail):
-		return getDefaultTail()
+		return getDefaultTail(_gender)
 	if(slot == BodypartSlot.Body):
-		return getDefaultBody()
+		return getDefaultBody(_gender)
 	if(slot == BodypartSlot.Head):
-		return getDefaultHead()
+		return getDefaultHead(_gender)
 	if(slot == BodypartSlot.Arms):
-		return getDefaultArms()
+		return getDefaultArms(_gender)
 	if(slot == BodypartSlot.Ears):
-		return getDefaultEars()
+		return getDefaultEars(_gender)
 	if(slot == BodypartSlot.Horns):
-		return getDefaultHorns()
+		return getDefaultHorns(_gender)
+	if(slot == BodypartSlot.Penis):
+		return getDefaultPenis(_gender)
+	if(slot == BodypartSlot.Vagina):
+		return getDefaultVagina(_gender)
+	if(slot == BodypartSlot.Anus):
+		return getDefaultAnus(_gender)
 	
 	return null
 

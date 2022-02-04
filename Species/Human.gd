@@ -6,11 +6,8 @@ func _init():
 func getVisibleName():
 	return "Human"
 
-func getDefaultLegs():
+func getDefaultLegs(_gender):
 	return "humanleg"
-
-func getDefaultBreasts():
-	return "humanbreasts"
 
 func isPlayable():
 	return true
@@ -18,5 +15,5 @@ func isPlayable():
 func getVisibleDescription():
 	return "Your ordinary human"
 
-func getDefaultEars():
+func getDefaultEars(_gender):
 	return "humanears"

@@ -104,7 +104,35 @@ func _on_BoobsHitbox_mouse_exited():
 func setTooltipsActive(a):
 	if(a):
 		$RetargetedSkeleton/Hip/Chest/BoobsHitbox.setIgnoreInput(false)
+		$RetargetedSkeleton/Hip/Penis/PenisHitbox.setIgnoreInput(false)
+		$RetargetedSkeleton/Hip/Chest/VaginaHitbox.setIgnoreInput(false)
+		$RetargetedSkeleton/Hip/Chest/AnusHitbox.setIgnoreInput(false)
 	else:
 		$RetargetedSkeleton/Hip/Chest/BoobsHitbox.setIgnoreInput(true)
+		$RetargetedSkeleton/Hip/Penis/PenisHitbox.setIgnoreInput(true)
+		$RetargetedSkeleton/Hip/Chest/VaginaHitbox.setIgnoreInput(true)
+		$RetargetedSkeleton/Hip/Chest/AnusHitbox.setIgnoreInput(true)
 
 	
+
+
+func _on_PenisHitbox_mouse_entered():
+	emit_signal("onBodypartMouseEntered", self, BodypartSlot.Penis)
+
+
+func _on_PenisHitbox_mouse_exited():
+	emit_signal("onBodypartMouseExited", self, BodypartSlot.Penis)
+
+
+func _on_VaginaHitbox_mouse_entered():
+	emit_signal("onBodypartMouseEntered", self, BodypartSlot.Vagina)
+
+func _on_VaginaHitbox_mouse_exited():
+	emit_signal("onBodypartMouseExited", self, BodypartSlot.Vagina)
+
+
+func _on_AnusHitbox_mouse_entered():
+	emit_signal("onBodypartMouseEntered", self, BodypartSlot.Anus)
+
+func _on_AnusHitbox_mouse_exited():
+	emit_signal("onBodypartMouseExited", self, BodypartSlot.Anus)

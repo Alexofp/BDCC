@@ -6,13 +6,10 @@ func _init():
 func getVisibleName():
 	return "Canine"
 
-func getDefaultLegs():
-	return "felineleg"
+func getDefaultLegs(_gender):
+	return "canineleg"
 
-func getDefaultBreasts():
-	return "humanbreasts"
-
-func getDefaultTail():
+func getDefaultTail(_gender):
 	return "caninetail"
 
 func isPlayable():
@@ -21,11 +18,17 @@ func isPlayable():
 func getVisibleDescription():
 	return "The good boys and girls"
 
-func getDefaultHead():
+func getDefaultHead(_gender):
 	return "caninehead"
 
-func getDefaultArms():
-	return "felinearms"
+func getDefaultArms(_gender):
+	return "caninearms"
 
-func getDefaultEars():
+func getDefaultEars(_gender):
 	return "canineears"
+
+func getDefaultPenis(_gender):
+	if(_gender in [BaseCharacter.Gender.Male, BaseCharacter.Gender.Androgynous]):
+		return "caninepenis"
+	else:
+		return null

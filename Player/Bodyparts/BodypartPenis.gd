@@ -6,3 +6,6 @@ func _init():
 
 func getSlot():
 	return BodypartSlot.Penis
+
+func getTooltipInfo():
+	return "Gonna be stuff here"

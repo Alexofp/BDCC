@@ -6,10 +6,10 @@ func _init():
 func getVisibleName():
 	return "Dragon"
 
-func getDefaultLegs():
+func getDefaultLegs(_gender):
 	return "dragonleg"
 
-func getDefaultTail():
+func getDefaultTail(_gender):
 	return "dragontail"
 
 func isPlayable():
@@ -18,11 +18,17 @@ func isPlayable():
 func getVisibleDescription():
 	return "They roar and stuff"
 
-func getDefaultArms():
+func getDefaultArms(_gender):
 	return "dragonarms"
 
-func getDefaultHorns():
+func getDefaultHorns(_gender):
 	return "dragonhorns"
 
-func getDefaultHead():
-	return "felinehead"
+func getDefaultHead(_gender):
+	return "dragonhead"
+
+func getDefaultPenis(_gender):
+	if(_gender in [BaseCharacter.Gender.Male, BaseCharacter.Gender.Androgynous]):
+		return "caninepenis"
+	else:
+		return null

@@ -15,6 +15,8 @@ onready var viewport = $ViewportContainer/Viewport
 var previousPosition: Vector2 = Vector2(0, 0)
 var draggingCamera: bool = false
 var mouseInsideViewport = false
+var savedTooltipDoll = null
+var savedTooltipBodypartSlot = null
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -90,10 +92,18 @@ func on_player_animationchange(newanim):
 func _on_TheStage_onBodypartMouseEntered(_who, _what):
 	if(mouseInsideViewport):
 		if(_who == doll):
-		
+			if(!GM.pc.hasBodypart(_what)):
+				return
+			
 			tooltip.set_is_active(true)
 			tooltip.set_text(GM.pc.getBodypartTooltipName(_what), GM.pc.getBodypartTooltipInfo(_what))
+			
+			savedTooltipDoll = _who
+			savedTooltipBodypartSlot = _what
 
 
 func _on_TheStage_onBodypartMouseExited(_who, _what):
-	tooltip.set_is_active(false)
+	if(savedTooltipDoll == null || savedTooltipBodypartSlot == null || (_who == savedTooltipDoll && _what == savedTooltipBodypartSlot)):
+		savedTooltipDoll = null
+		savedTooltipBodypartSlot = null
+		tooltip.set_is_active(false)

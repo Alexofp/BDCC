@@ -25,6 +25,11 @@ _global_script_classes=[ {
 "path": "res://Player/Bodyparts/Bodypart.gd"
 }, {
 "base": "Bodypart",
+"class": "BodypartAnus",
+"language": "GDScript",
+"path": "res://Player/Bodyparts/BodypartAnus.gd"
+}, {
+"base": "Bodypart",
 "class": "BodypartArms",
 "language": "GDScript",
 "path": "res://Player/Bodyparts/BodypartArms.gd"
@@ -78,6 +83,11 @@ _global_script_classes=[ {
 "class": "BodypartTail",
 "language": "GDScript",
 "path": "res://Player/Bodyparts/BodypartTail.gd"
+}, {
+"base": "Bodypart",
+"class": "BodypartVagina",
+"language": "GDScript",
+"path": "res://Player/Bodyparts/BodypartVagina.gd"
 }, {
 "base": "Object",
 "class": "Buff",
@@ -228,6 +238,7 @@ _global_script_class_icons={
 "Attack": "",
 "BaseCharacter": "",
 "Bodypart": "",
+"BodypartAnus": "",
 "BodypartArms": "",
 "BodypartBody": "",
 "BodypartBreasts": "",
@@ -239,6 +250,7 @@ _global_script_class_icons={
 "BodypartPenis": "",
 "BodypartSlot": "",
 "BodypartTail": "",
+"BodypartVagina": "",
 "Buff": "",
 "BuffBase": "",
 "BuffsHolder": "",
