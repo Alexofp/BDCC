@@ -278,10 +278,14 @@ func _react(_action: String, _args):
 		return
 	
 	if(_action == "getgagged"):
+		processTime(10 * 60)
+		
 		GM.pc.getInventory().equipItem(GlobalRegistry.createItem("ballgag"))
 		addMessage("A gag was forced on you!")
 		
 	if(_action == "cuffs"):
+		processTime(10 * 60)
+		
 		GM.pc.getInventory().equipItem(GlobalRegistry.createItem("inmatecollar"))
 		GM.pc.getInventory().equipItem(GlobalRegistry.createItem("inmateanklecuffs"))
 		GM.pc.getInventory().equipItem(GlobalRegistry.createItem("inmatewristcuffs"))
@@ -289,6 +293,8 @@ func _react(_action: String, _args):
 		addMessage("Your wrists and ankles get cuffed")
 		
 	if(_action == "aftershower"):
+		processTime(10 * 60)
+		
 		var uniform = GlobalRegistry.createItem("inmateuniform_general")
 		
 		uniform.setPrisonerNumber("P-12054")
@@ -298,11 +304,15 @@ func _react(_action: String, _args):
 		addMessage("You're wearing an inmate uniform now")
 		
 	if(_action == "shower"):
+		processTime(25 * 60)
+		
 		GM.pc.addPain(-10)
 		GM.pc.addLust(-10)
 		GM.pc.addStamina(30)
 		
 	if(_action == "endthescene"):
+		processTime(5 * 60)
+		
 		runScene("IntroMedical")
 		endScene()
 		
@@ -310,6 +320,7 @@ func _react(_action: String, _args):
 
 func _react_scene_end(_tag, _result):
 	if(_tag == "rishafight"):
+		processTime(30 * 60)
 		var battlestate = _result[0]
 		
 		if(battlestate == "win"):

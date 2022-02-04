@@ -323,8 +323,13 @@ func _react(_action: String, _args):
 	
 	if(_action == "saidwhy"):
 		GM.pc.getInventory().equipItem(GlobalRegistry.createItem("policecuffs"))
+		processTime(1 * 60 * 60 + 15 * 60)
+	
+	if(_action == "waitmore"):
+		processTime(5 * 60)
 	
 	if(_action == "gocell"):
+		processTime(6 * 60 * 60)
 		var item = GM.pc.getInventory().removeItemFromSlot(InventorySlot.Wrists)
 		if(item != null):
 			item.queue_free()

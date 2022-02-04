@@ -165,8 +165,12 @@ func processBattleTurn():
 	.processBattleTurn()
 	updateNonBattleEffects()
 
-func processTime(_minutesPassed):
+func processTime(_secondsPassed):
 	updateNonBattleEffects()
+	
+	for effectID in statusEffects:
+		var effect = statusEffects[effectID]
+		effect.processTime(_secondsPassed)
 
 func getGender():
 	return pickedGender
@@ -347,3 +351,12 @@ func hasPenis():
 
 func hasVagina():
 	return hasBodypart(BodypartSlot.Vagina)
+
+func hasHair():
+	return hasBodypart(BodypartSlot.Hair) && getBodypart(BodypartSlot.Hair).id != "baldhair"
+
+func hasTail():
+	return hasBodypart(BodypartSlot.Tail)
+	
+func hasHorns():
+	return hasBodypart(BodypartSlot.Horns)

@@ -190,6 +190,12 @@ func getTextboxData(id):
 func addMessage(text: String):
 	GM.main.addMessage(text)
 
+func processTime(seconds: int):
+	GM.main.processTime(seconds)
+
+func startNewDay():
+	return GM.main.startNewDay()
+
 func canSave():
 	return true
 

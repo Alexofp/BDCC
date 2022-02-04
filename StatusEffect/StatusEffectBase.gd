@@ -18,7 +18,7 @@ func setCharacter(c: BaseCharacter):
 func processBattleTurn():
 	pass
 	
-func processTime(_minutesPassed: int):
+func processTime(_secondsPassed: int):
 	pass
 
 func getEffectName():

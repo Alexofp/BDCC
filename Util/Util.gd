@@ -14,6 +14,28 @@ static func join(arr: Array, separator: String = "") -> String:
 	output = output.left( output.length() - separator.length() )
 	return output
 
+# input 12345
+# output "03:25:45"
+static func getTimeStringHHMMSS(t):
+	var _seconds = floor(fmod(t, 60.0))
+	var _minutes = floor(fmod(t/60.0, 60.0))
+	var _hours = floor(t/3600.0)
+	
+	var time = "%02d:%02d:%02d" % [_hours, _minutes, _seconds]
+	
+	return time
+	
+# input 12345
+# output "03:25"
+static func getTimeStringHHMM(t):
+	var _seconds = floor(fmod(t, 60.0))
+	var _minutes = floor(fmod(t/60.0, 60.0))
+	var _hours = floor(t/3600.0)
+	
+	var time = "%02d:%02d" % [_hours, _minutes]
+	
+	return time
+
 static func getSpeciesName(species: Array):
 	if(species.size() == 0):
 		return "Unknown species"

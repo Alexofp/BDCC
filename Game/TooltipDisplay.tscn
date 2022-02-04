@@ -65,6 +65,7 @@ __meta__ = {
 margin_top = 32.0
 margin_right = 250.0
 margin_bottom = 53.0
+mouse_filter = 2
 size_flags_horizontal = 3
 bbcode_enabled = true
 fit_content_height = true

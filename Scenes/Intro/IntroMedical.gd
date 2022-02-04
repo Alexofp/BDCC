@@ -308,7 +308,11 @@ func _run():
 		addButton("Wake up", "", "wake_up")
 
 func _react(_action: String, _args):
+	if(_action in ["walk_inside", "followtocell", "liftarrives", "open_mouth", "let_her_do_it"]):
+		processTime(5 * 60)
+	
 	if(_action == "wake_up"):
+		startNewDay()
 		runScene("WorldScene")
 		endScene()
 		

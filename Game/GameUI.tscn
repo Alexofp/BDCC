@@ -8,7 +8,7 @@
 [ext_resource path="res://Fonts/Titillium-RegularItalic.otf" type="DynamicFontData" id=6]
 [ext_resource path="res://Fonts/Titillium-BoldItalic.otf" type="DynamicFontData" id=7]
 [ext_resource path="res://Game/PlayerPanel.tscn" type="PackedScene" id=8]
-[ext_resource path="res://Game/World/World.tscn" type="PackedScene" id=9]
+[ext_resource path="res://UI/MapAndTimePanel.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Game/CharacterPanel.tscn" type="PackedScene" id=10]
 [ext_resource path="res://UI/CharactersPanel.tscn" type="PackedScene" id=11]
 
@@ -106,44 +106,12 @@ margin_bottom = 372.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="HBoxContainer/Panel2/MarginContainer/VBoxContainer"]
+[node name="MapAndTimePanel" parent="HBoxContainer/Panel2/MarginContainer/VBoxContainer" instance=ExtResource( 9 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_top = 376.0
 margin_right = 236.0
 margin_bottom = 636.0
-rect_min_size = Vector2( 0, 260 )
-size_flags_horizontal = 3
-
-[node name="ViewportContainer" type="ViewportContainer" parent="HBoxContainer/Panel2/MarginContainer/VBoxContainer/VBoxContainer2"]
-margin_right = 236.0
-margin_bottom = 188.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-stretch = true
-
-[node name="Viewport" type="Viewport" parent="HBoxContainer/Panel2/MarginContainer/VBoxContainer/VBoxContainer2/ViewportContainer"]
-size = Vector2( 236, 188 )
-handle_input_locally = false
-render_target_update_mode = 3
-
-[node name="World" parent="HBoxContainer/Panel2/MarginContainer/VBoxContainer/VBoxContainer2/ViewportContainer/Viewport" instance=ExtResource( 9 )]
-
-[node name="LocationLabel" type="Label" parent="HBoxContainer/Panel2/MarginContainer/VBoxContainer/VBoxContainer2"]
-margin_top = 192.0
-margin_right = 236.0
-margin_bottom = 212.0
-text = "RRDC"
-
-[node name="Label2" type="Label" parent="HBoxContainer/Panel2/MarginContainer/VBoxContainer/VBoxContainer2"]
-margin_top = 216.0
-margin_right = 236.0
-margin_bottom = 236.0
-text = "12:00, day 0"
-
-[node name="Label3" type="Label" parent="HBoxContainer/Panel2/MarginContainer/VBoxContainer/VBoxContainer2"]
-margin_top = 240.0
-margin_right = 236.0
-margin_bottom = 260.0
-text = "Shower time"
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="HBoxContainer/Panel2/MarginContainer/VBoxContainer"]
 margin_top = 640.0

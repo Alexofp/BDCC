@@ -14,7 +14,7 @@ onready var nextPageButton = $HBoxContainer/Panel2/MarginContainer/VBoxContainer
 onready var prevPageButton = $HBoxContainer/Panel2/MarginContainer/VBoxContainer/HBoxContainer/PrevPageButton
 onready var optionTooltip = $CanvasLayer/TooltipDisplay
 onready var textOutput = $HBoxContainer/VBoxContainer2/ScrollContainer/VBoxContainer/RichTextLabel
-onready var locationLabel = $HBoxContainer/Panel2/MarginContainer/VBoxContainer/VBoxContainer2/LocationLabel
+onready var mapAndTimePanel = $HBoxContainer/Panel2/MarginContainer/VBoxContainer/MapAndTimePanel
 onready var characterPanel = $HBoxContainer/Panel2/MarginContainer/VBoxContainer/CharacterPanel
 onready var playerPanel = $HBoxContainer/Panel/MarginContainer/PlayerPanel
 onready var charactersPanel = $HBoxContainer/Panel2/MarginContainer/VBoxContainer/CharactersPanel
@@ -162,7 +162,7 @@ func _on_PrevPageButton_pressed():
 	updateButtons()
 
 func setLocationName(locname: String):
-	locationLabel.text = locname
+	mapAndTimePanel.setLocationName(locname)
 
 func setCharacterPanelVisible(vis: bool):
 	characterPanel.visible = vis
@@ -221,3 +221,6 @@ func _on_LoadButton_pressed():
 	
 func trimLineEndings():
 	textOutput.bbcode_text = textOutput.bbcode_text.trim_suffix("\n")
+
+func onTimePassed(_secondsPassed):
+	mapAndTimePanel.onTimePassed(_secondsPassed)

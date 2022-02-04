@@ -56,19 +56,19 @@ func _react(_action: String, _args):
 	if(_action == "gonorth"):
 		GM.pc.playAnimation(TheStage.Walking)
 		GM.pc.setLocation(GM.world.applyDirectionID(GM.pc.location, GameWorld.Direction.NORTH))
-		GM.pc.processTime(0)
+		processTime(30)
 	if(_action == "gowest"):
 		GM.pc.playAnimation(TheStage.Walking)
 		GM.pc.setLocation(GM.world.applyDirectionID(GM.pc.location, GameWorld.Direction.WEST))
-		GM.pc.processTime(0)
+		processTime(30)
 	if(_action == "gosouth"):
 		GM.pc.playAnimation(TheStage.Walking)
 		GM.pc.setLocation(GM.world.applyDirectionID(GM.pc.location, GameWorld.Direction.SOUTH))
-		GM.pc.processTime(0)
+		processTime(30)
 	if(_action == "goeast"):
 		GM.pc.playAnimation(TheStage.Walking)
 		GM.pc.setLocation(GM.world.applyDirectionID(GM.pc.location, GameWorld.Direction.EAST))
-		GM.pc.processTime(0)
+		processTime(30)
 	if(_action == "inventory"):
 		runScene("InventoryScene")
 

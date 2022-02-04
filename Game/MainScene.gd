@@ -8,6 +8,10 @@ extends Node
 onready var gameUI = $GameUI
 var sceneStack: Array = []
 var messages: Array = []
+var currentDay = 0
+var timeOfDay = 6*60*60 # seconds since 00:00
+
+signal time_passed(_secondsPassed)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -17,6 +21,7 @@ func _ready():
 	#runScene("WorldScene")
 	runScene("IntroScene")
 	#runScene("FightScene", ["testchar"])
+	GM.ui.onTimePassed(0)
 
 func runScene(id, _args = []):
 	var scene = GlobalRegistry.getScene(id)
@@ -76,6 +81,8 @@ func canSave():
 func saveData():
 	var data = {}
 	data["messages"] = messages
+	data["timeOfDay"] = timeOfDay
+	data["currentDay"] = currentDay
 	
 	data["scenes"] = []
 	for scene in sceneStack:
@@ -88,6 +95,9 @@ func saveData():
 
 func loadData(data):
 	messages = SAVE.loadVar(data, "messages", [])
+	timeOfDay = SAVE.loadVar(data, "timeOfDay", 6*60*60)
+	currentDay = SAVE.loadVar(data, "currentDay", 0)
+	GM.ui.onTimePassed(0)
 	
 	var scenes = SAVE.loadVar(data, "scenes", [])
 	
@@ -116,3 +126,46 @@ func getMessages():
 
 func clearMessages():
 	messages = []
+
+func getTimeCap():
+	return 23 * 60 * 60
+
+func isVeryLate():
+	return timeOfDay >= getTimeCap()
+
+func processTime(_seconds):
+	_seconds = int(round(_seconds))
+	
+	timeOfDay += _seconds
+	
+	if(timeOfDay > getTimeCap()):
+		timeOfDay = getTimeCap()
+
+	doTimeProcess(_seconds)
+
+func doTimeProcess(_seconds):
+	GM.pc.processTime(_seconds)
+	GM.ui.onTimePassed(_seconds)
+	
+	emit_signal("time_passed", _seconds)
+
+func startNewDay():
+	var newtime = 6 * 60 * 60
+	var timediff = 24 * 60 * 60 - timeOfDay + newtime
+	
+	currentDay += 1
+	timeOfDay = newtime
+	
+	doTimeProcess(timediff)
+	
+	return timediff
+
+func getVisibleTime():
+	var text = ""
+	if(isVeryLate()):
+		text = "Night time"
+	else:
+		text = Util.getTimeStringHHMM(timeOfDay)
+	
+	text += ", day " + str(currentDay)
+	return text
