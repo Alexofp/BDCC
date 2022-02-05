@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Game/World/GameRoom.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Game/World/World.gd" type="Script" id=2]
@@ -6,120 +6,130 @@
 [ext_resource path="res://Game/World/Floors/IntakeFloor.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Game/World/Floors/MainHall.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Game/World/Floors/Cellblock.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Game/World/WorldFloor.tscn" type="PackedScene" id=7]
 
 [node name="World" type="Node2D"]
 script = ExtResource( 2 )
-
-[node name="Room" parent="." instance=ExtResource( 1 )]
-roomID = "r1"
-roomSprite = 3
-
-[node name="Room2" parent="." instance=ExtResource( 1 )]
-position = Vector2( 64, 0 )
-roomID = "r2"
-
-[node name="Room3" parent="." instance=ExtResource( 1 )]
-position = Vector2( 64, 64 )
-roomName = "Test room"
-roomID = "r3"
-roomDescription = "You see a bdsm dungeon"
-
-[node name="Room4" parent="." instance=ExtResource( 1 )]
-position = Vector2( 64, 128 )
-roomID = "r4"
-canEast = false
-roomSprite = 2
-
-[node name="Room5" parent="." instance=ExtResource( 1 )]
-position = Vector2( 128, 64 )
-roomID = "r5"
-
-[node name="Room6" parent="." instance=ExtResource( 1 )]
-position = Vector2( 128, 128 )
-roomID = "r6"
-roomSprite = 1
-
-[node name="Room7" parent="." instance=ExtResource( 1 )]
-position = Vector2( 192, 128 )
-roomID = "r8"
-
-[node name="Room8" parent="." instance=ExtResource( 1 )]
-position = Vector2( 192, 64 )
-roomID = "r7"
-
-[node name="Room9" parent="." instance=ExtResource( 1 )]
-position = Vector2( 256, 128 )
-roomID = "r9"
-
-[node name="Room10" parent="." instance=ExtResource( 1 )]
-position = Vector2( 320, 192 )
-
-[node name="Room11" parent="." instance=ExtResource( 1 )]
-position = Vector2( 256, 192 )
-roomID = "r10"
-
-[node name="Room12" parent="." instance=ExtResource( 1 )]
-position = Vector2( 384, 192 )
-
-[node name="Room13" parent="." instance=ExtResource( 1 )]
-position = Vector2( 384, 256 )
-
-[node name="Room14" parent="." instance=ExtResource( 1 )]
-position = Vector2( 384, 128 )
-
-[node name="Room15" parent="." instance=ExtResource( 1 )]
-position = Vector2( 448, 192 )
-
-[node name="Corridor" parent="." instance=ExtResource( 1 )]
-position = Vector2( 0, -192 )
-
-[node name="Corridor2" parent="." instance=ExtResource( 1 )]
-position = Vector2( 0, -256 )
-roomID = "intro_corridor"
-
-[node name="Corridor3" parent="." instance=ExtResource( 1 )]
-position = Vector2( 0, -320 )
-
-[node name="Corridor4" parent="." instance=ExtResource( 1 )]
-position = Vector2( 0, -384 )
-
-[node name="Corridor5" parent="." instance=ExtResource( 1 )]
-position = Vector2( 64, -192 )
-
-[node name="Corridor6" parent="." instance=ExtResource( 1 )]
-position = Vector2( -64, -256 )
-roomName = "IBS \"Integrity\""
-roomID = "intro_interogation"
-
-[node name="Corridor9" parent="." instance=ExtResource( 1 )]
-position = Vector2( 384, -256 )
-roomID = "intro_ship"
-
-[node name="Corridor10" parent="." instance=ExtResource( 1 )]
-position = Vector2( 384, -320 )
-roomSprite = 1
-
-[node name="Corridor7" parent="." instance=ExtResource( 1 )]
-position = Vector2( -64, -320 )
-canSouth = false
-
-[node name="Corridor8" parent="." instance=ExtResource( 1 )]
-position = Vector2( 64, -320 )
-
-[node name="Connections" type="Node2D" parent="."]
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
 smoothing_enabled = true
 
-[node name="TestFloor" parent="." instance=ExtResource( 3 )]
+[node name="CellblockFloor" parent="." instance=ExtResource( 7 )]
+visible = false
+id = "floor1"
+
+[node name="MainHall" parent="CellblockFloor" instance=ExtResource( 5 )]
+
+[node name="Cellblock" parent="CellblockFloor" instance=ExtResource( 6 )]
+position = Vector2( 704, 128 )
+
+[node name="TestFloor" parent="." instance=ExtResource( 7 )]
+visible = false
+id = "testFloor"
+
+[node name="Room" parent="TestFloor" instance=ExtResource( 1 )]
+roomID = "r1"
+roomSprite = 3
+
+[node name="Room2" parent="TestFloor" instance=ExtResource( 1 )]
+position = Vector2( 64, 0 )
+roomID = "r2"
+
+[node name="Room3" parent="TestFloor" instance=ExtResource( 1 )]
+position = Vector2( 64, 64 )
+roomName = "Test room"
+roomID = "r3"
+roomDescription = "You see a bdsm dungeon"
+
+[node name="Room4" parent="TestFloor" instance=ExtResource( 1 )]
+position = Vector2( 64, 128 )
+roomID = "r4"
+canEast = false
+roomSprite = 2
+
+[node name="Room5" parent="TestFloor" instance=ExtResource( 1 )]
+position = Vector2( 128, 64 )
+roomID = "r5"
+
+[node name="Room6" parent="TestFloor" instance=ExtResource( 1 )]
+position = Vector2( 128, 128 )
+roomID = "r6"
+roomSprite = 1
+
+[node name="Room7" parent="TestFloor" instance=ExtResource( 1 )]
+position = Vector2( 192, 128 )
+roomID = "r8"
+
+[node name="Room8" parent="TestFloor" instance=ExtResource( 1 )]
+position = Vector2( 192, 64 )
+roomID = "r7"
+
+[node name="Room9" parent="TestFloor" instance=ExtResource( 1 )]
+position = Vector2( 256, 128 )
+roomID = "r9"
+
+[node name="Room10" parent="TestFloor" instance=ExtResource( 1 )]
+position = Vector2( 320, 192 )
+
+[node name="Room11" parent="TestFloor" instance=ExtResource( 1 )]
+position = Vector2( 256, 192 )
+roomID = "r10"
+
+[node name="Room12" parent="TestFloor" instance=ExtResource( 1 )]
+position = Vector2( 384, 192 )
+
+[node name="Room13" parent="TestFloor" instance=ExtResource( 1 )]
+position = Vector2( 384, 256 )
+
+[node name="Room14" parent="TestFloor" instance=ExtResource( 1 )]
+position = Vector2( 384, 128 )
+
+[node name="Room15" parent="TestFloor" instance=ExtResource( 1 )]
+position = Vector2( 448, 192 )
+
+[node name="TestFloor" parent="TestFloor" instance=ExtResource( 3 )]
 position = Vector2( -128, 0 )
 
-[node name="IntakeFloor" parent="." instance=ExtResource( 4 )]
+[node name="IntroFloor" parent="." instance=ExtResource( 7 )]
+visible = false
+position = Vector2( 0, 256 )
+
+[node name="Corridor" parent="IntroFloor" instance=ExtResource( 1 )]
+position = Vector2( 0, -192 )
+
+[node name="Corridor2" parent="IntroFloor" instance=ExtResource( 1 )]
+position = Vector2( 0, -256 )
+roomID = "intro_corridor"
+
+[node name="Corridor3" parent="IntroFloor" instance=ExtResource( 1 )]
+position = Vector2( 0, -320 )
+
+[node name="Corridor4" parent="IntroFloor" instance=ExtResource( 1 )]
+position = Vector2( 0, -384 )
+
+[node name="Corridor5" parent="IntroFloor" instance=ExtResource( 1 )]
+position = Vector2( 64, -192 )
+
+[node name="Corridor6" parent="IntroFloor" instance=ExtResource( 1 )]
+position = Vector2( -64, -256 )
+roomName = "IBS \"Integrity\""
+roomID = "intro_interogation"
+
+[node name="Corridor9" parent="IntroFloor" instance=ExtResource( 1 )]
+position = Vector2( 384, -256 )
+roomID = "intro_ship"
+
+[node name="Corridor10" parent="IntroFloor" instance=ExtResource( 1 )]
+position = Vector2( 384, -320 )
+roomSprite = 1
+
+[node name="Corridor7" parent="IntroFloor" instance=ExtResource( 1 )]
+position = Vector2( -64, -320 )
+canSouth = false
+
+[node name="Corridor8" parent="IntroFloor" instance=ExtResource( 1 )]
+position = Vector2( 64, -320 )
+
+[node name="IntakeFloor" parent="IntroFloor" instance=ExtResource( 4 )]
 position = Vector2( 768, -384 )
-
-[node name="MainHall" parent="." instance=ExtResource( 5 )]
-position = Vector2( 1728, -256 )
-
-[node name="Cellblock" parent="." instance=ExtResource( 6 )]
-position = Vector2( 2432, -64 )

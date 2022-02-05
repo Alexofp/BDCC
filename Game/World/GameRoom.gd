@@ -20,9 +20,6 @@ const RoomColorToColor = {
 	RoomColor.Red : Color(1.0, 0.7, 0.7),
 }
 
-var world: GameWorld
-var gridsize = 64
-
 var sprites = {
 	#RoomSprite.NONE: ,
 	RoomSprite.PERSON: preload("res://Game/World/sprites/person.png"),
@@ -41,25 +38,29 @@ func _ready():
 	if(!roomName):
 		roomName = roomID
 	
-	if(get_parent() is GameWorld):
-		world = get_parent()
-		gridsize = world.gridsize
-	if(get_parent() is SubGameWorld):
-		world = get_parent().get_parent()
-		gridsize = world.gridsize
+	#if(get_parent() is GameWorld):
+	#	world = get_parent()
+	#	gridsize = world.gridsize
+	#if(get_parent() is SubGameWorld):
+	#	world = get_parent().get_parent()
+	#	gridsize = world.gridsize
 	
-	global_position.x = round(global_position.x / gridsize) * gridsize
-	global_position.y = round(global_position.y / gridsize) * gridsize
 	self_modulate = RoomColorToColor[roomColor]
 	
-	if(world):
-		world.registerRoom(self)
+	#if(world):
+	#	world.registerRoom(self)
 		
 	if(sprites.has(roomSprite)):
 		roomSpriteObject.texture = sprites[roomSprite]
 	
+func getFloorID():
+	var myParent = get_parent()
+	while(!myParent.has_method("getRooms")):
+		myParent = myParent.get_parent()
+	return myParent.id
+	
 func getCell():
-	return Vector2(round(global_position.x / gridsize), round(global_position.y / gridsize))
+	return Vector2(round(global_position.x / GameWorld.gridsize), round(global_position.y / GameWorld.gridsize))
 
 func getDescription() -> String:
 	return _getDescription()

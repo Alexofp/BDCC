@@ -5,8 +5,8 @@ enum Direction {WEST, NORTH, EAST, SOUTH}
 
 var cells: Dictionary = {}
 var roomDict: Dictionary = {}
-var gridsize = 64
-onready var connections = $Connections
+var floorDict: Dictionary = {}
+const gridsize = 64
 onready var camera = $Camera2D
 var highlightedRoom: Node2D
 
@@ -39,10 +39,11 @@ func applyDirectionID(roomid: String, dir) -> String:
 	var room = getRoomByID(roomid)
 	if(!room):
 		return ""
+	var currentFloor = room.getFloorID()
 	
 	var newpos = applyDirection(room.getCell(), dir)
-	if(cells.has(newpos)):
-		return cells[newpos].roomID
+	if(hasRoom(currentFloor, newpos)):
+		return cells[currentFloor][newpos].roomID
 	else:
 		return ""
 	
@@ -51,17 +52,17 @@ func canGoID(roomid: String, dir):
 	if(!room):
 		return false
 	
-	return canGo(room.getCell(), dir)
+	return canGo(room.getFloorID(), room.getCell(), dir)
 	
-func canGo(pos: Vector2, dir):
-	if(!cells.has(pos)):
+func canGo(floorid: String, pos: Vector2, dir):
+	if(!hasRoom(floorid, pos)):
 		return false
 	var pos2 = applyDirection(pos, dir)
-	if(!cells.has(pos2)):
+	if(!hasRoom(floorid, pos2)):
 		return false
 	
-	var room1 = cells[pos]
-	var room2 = cells[pos2]
+	var room1 = cells[floorid][pos]
+	var room2 = cells[floorid][pos2]
 	if(dir == Direction.WEST):
 		if(room1.canWest && room2.canEast):
 			return true
@@ -81,62 +82,99 @@ func canGo(pos: Vector2, dir):
 	return false
 
 func addTransitions():
-	Util.delete_children(connections)
+	#Util.delete_children(connections)
 	
-	for pos in cells:
-		var _room = cells[pos]
-		if(canGo(pos, Direction.EAST)):
-			#print("ADD TRANSITION FROM "+str(pos)+" TO EAST")
-			var transitionLine = roomConnectionScene.instance()
-			transitionLine.position = (pos + Vector2(0.5, 0))*gridsize
-			connections.add_child(transitionLine)
-		if(canGo(pos, Direction.SOUTH)):
-			#print("ADD TRANSITION FROM "+str(pos)+" TO SOUTH")
-			var transitionLine = roomConnectionScene.instance()
-			transitionLine.position = (pos + Vector2(0, 0.5))*gridsize
-			transitionLine.rotation_degrees = 90
-			connections.add_child(transitionLine)
+	for floorid in cells:
+		var floorcells = cells[floorid]
+		for pos in floorcells:
+			var _room = floorcells[pos]
+			if(canGo(floorid, pos, Direction.EAST)):
+				#print("ADD TRANSITION FROM "+str(pos)+" TO EAST")
+				var transitionLine = roomConnectionScene.instance()
+				_room.add_child(transitionLine)
+				transitionLine.global_position = (pos + Vector2(0.5, 0))*gridsize
+			if(canGo(floorid, pos, Direction.SOUTH)):
+				#print("ADD TRANSITION FROM "+str(pos)+" TO SOUTH")
+				var transitionLine = roomConnectionScene.instance()
+				transitionLine.rotation_degrees = 90
+				_room.add_child(transitionLine)
+				transitionLine.global_position = (pos + Vector2(0, 0.5))*gridsize
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	assert(GM.world == null)
 	GM.world = self
-	#print(cells)
+	
+	for f in get_children():
+		if(f.has_method("getRooms")):
+			if(floorDict.has(f.id)):
+				assert(false)
+			floorDict[f.id] = f
+			
+			var _cells = f.getRooms()
+			
+			for cell in _cells:
+				cell.global_position.x = round(cell.global_position.x / gridsize) * gridsize
+				cell.global_position.y = round(cell.global_position.y / gridsize) * gridsize
+				
+				registerRoom(f.id, cell)
+	
 	addTransitions()
 	#print(roomDict)
-	aimCamera("r3")
+	#aimCamera("ScriptedRoom")#"cellblock_orange_playercell")
 
-func hasRoom(pos: Vector2):
-	return cells.has(pos)
+func hasRoom(floorid: String, pos: Vector2):
+	if(!cells.has(floorid)):
+		return false
+	
+	if(!cells[floorid].has(pos)):
+		return false
+	
+	return true
 
 func getRoomByID(id:String):
 	if(!roomDict.has(id)):
 		return null
 	return roomDict[id]
 
-func registerRoom(room):
+func registerRoom(floorid, room):
 	var pos:Vector2 = room.getCell()
 	
-	if(hasRoom(pos)):
-		print("Map Error: there is already a room at cell "+str(pos))
+	if(hasRoom(floorid, pos)):
+		printerr("Map Error: there is already a room at cell "+str(pos))
 		room.queue_free()
 		return
 		
 	if(!room.roomID):
-		print("Map Error: room at "+str(pos)+" has no roomID")
+		printerr("Map Error: room at "+str(pos)+" has no roomID")
 	else:
 		if(roomDict.has(room.roomID)):
-			print("Map Error: room with id "+room.roomID+" is already registered")
+			printerr("Map Error: room with id "+room.roomID+" is already registered")
 			room.queue_free()
 			return
 		roomDict[room.roomID] = room
 	
-	cells[pos] = room
+	if(!cells.has(floorid)):
+		cells[floorid] = {}
+	
+	cells[floorid][pos] = room
+
+func switchToFloor(floorID):
+	for myfloorid in floorDict:
+		var floorObject = floorDict[myfloorid]
+		
+		if(myfloorid == floorID):
+			floorObject.visible = true
+		else:
+			floorObject.visible = false
 
 func aimCamera(roomID):
 	var room = getRoomByID(roomID)
 	
 	if(!room):
 		return
+		
+	switchToFloor(room.getFloorID())
 		
 	camera.global_position = room.global_position
 	
@@ -145,6 +183,3 @@ func aimCamera(roomID):
 	highlightedRoom = room
 	highlightedRoom.setHighlighted(true)
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass

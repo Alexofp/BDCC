@@ -233,6 +233,11 @@ _global_script_classes=[ {
 "class": "Util",
 "language": "GDScript",
 "path": "res://Util/Util.gd"
+}, {
+"base": "Node2D",
+"class": "WorldFloor",
+"language": "GDScript",
+"path": "res://Game/World/WorldFloor.gd"
 } ]
 _global_script_class_icons={
 "Attack": "",
@@ -279,7 +284,8 @@ _global_script_class_icons={
 "StatusEffectsPanel": "",
 "SubGameWorld": "",
 "TheStage": "",
-"Util": ""
+"Util": "",
+"WorldFloor": ""
 }
 
 [application]
