@@ -8,52 +8,78 @@
 script = ExtResource( 3 )
 
 [node name="CellblockRoom" parent="." index="0" instance=ExtResource( 2 )]
+roomName = "Corridor"
+roomDescription = "You see two set of a stairs and a corridor leading to the cellblocks"
 
 [node name="CBStairs1" parent="." index="1" instance=ExtResource( 2 )]
+self_modulate = Color( 0.5, 0.5, 0.5, 1 )
 position = Vector2( -64, 0 )
 roomName = "Stairs"
+roomDescription = "A staircase that will lead you to the main hall"
 roomSprite = 3
-roomColor = 2
+roomColor = 7
 
 [node name="CBStairs2" parent="." index="2" instance=ExtResource( 2 )]
+self_modulate = Color( 0.5, 0.5, 0.5, 1 )
 position = Vector2( 64, 0 )
 roomName = "Stairs"
+roomDescription = "A staircase that will lead you to the main hall"
 roomSprite = 3
-roomColor = 2
+roomColor = 7
 
 [node name="CellblockRoom4" parent="." index="3" instance=ExtResource( 2 )]
-position = Vector2( 0, -64 )
-roomColor = 1
+self_modulate = Color( 1, 0.6, 0.8, 1 )
+position = Vector2( 0, 192 )
+roomName = "Pink cellblock"
+roomDescription = "You enter a prisoner cellblock, it's a huge spacious room with many prisoner cells. All the walls are painted with white and pastel pink color, there are a bunch of comfy-looking sofas and chairs around. Each cell looks cozy and even has a soft carpet. This block is for inmates that are sexual deviants"
+roomColor = 4
 
 [node name="CellblockRoom5" parent="." index="4" instance=ExtResource( 2 )]
 position = Vector2( 0, 64 )
+roomName = "Corridor"
+roomDescription = "A wide corridor that connects all the cellblocks with the stairs"
 
 [node name="CellblockRoom6" parent="." index="5" instance=ExtResource( 2 )]
-position = Vector2( 0, -128 )
-roomColor = 1
+self_modulate = Color( 1, 0.6, 0.8, 1 )
+position = Vector2( 0, 256 )
+roomDescription = "((This will be your potential cell))"
+roomColor = 4
 
 [node name="CellblockRoom7" parent="." index="6" instance=ExtResource( 2 )]
 position = Vector2( 0, 128 )
+roomName = "Corridor"
+roomDescription = "From here you see three cellblocks, orange, pink and red"
 
-[node name="CellblockRoom8" parent="." index="7" instance=ExtResource( 2 )]
-position = Vector2( -64, 128 )
-roomColor = 1
-
-[node name="CellblockRoom9" parent="." index="8" instance=ExtResource( 2 )]
+[node name="CellblockRoom9" parent="." index="7" instance=ExtResource( 2 )]
+self_modulate = Color( 1, 0.6, 0.6, 1 )
 position = Vector2( 64, 128 )
+roomName = "High-security cellblock"
+roomDescription = "This block has very little lights and the ones that are here are dimmed down, creating a dark atmosphere. Red colors show that this is a cellblock for violent inmates"
+roomColor = 2
+
+[node name="CellblockRoom12" parent="." index="8" instance=ExtResource( 2 )]
+self_modulate = Color( 1, 0.6, 0.6, 1 )
+position = Vector2( 128, 128 )
+roomDescription = "((This will be your potential cell))"
 roomColor = 2
 
 [node name="CellblockRoom10" parent="." index="9" instance=ExtResource( 2 )]
-position = Vector2( -128, 128 )
+self_modulate = Color( 1, 0.8, 0.6, 1 )
+position = Vector2( -64, 128 )
+roomName = "General-security cellblock"
 roomID = "cellblock_orange_nearcell"
-roomColor = 1
+roomDescription = "You see a long open space with many inmate cells, each one has a transparent armored window and an automatic door. Everything has an orange trim to it, it's clearly a cellblock for general inmates"
+roomColor = 5
 
 [node name="CellblockRoom11" parent="." index="10" instance=ExtResource( 2 )]
-position = Vector2( -128, 192 )
+self_modulate = Color( 1, 0.8, 0.6, 1 )
+position = Vector2( -128, 128 )
 roomName = "My cell"
 roomID = "cellblock_orange_playercell"
-roomDescription = "There will be something here at some point"
-roomColor = 1
+roomDescription = "Your cell is nothing special. An automatic door that can be opened and closed remotely and an armored window that anyone can see through. Walls are made out of some metal, using a spoon on them would only leave a visible scratch. Everything is well lit at least.
+
+One stiff-looking bed in the corner and a chair is all you get. You can rest here or hide something so you don't lose it during the personal searches."
+roomColor = 5
 
 [connection signal="onEnter" from="CBStairs1" to="." method="_on_CBStairs1_onEnter"]
 [connection signal="onReact" from="CBStairs1" to="." method="_on_CBStairs1_onReact"]
