@@ -24,6 +24,9 @@ func hasItemID(itemID: String):
 			return true
 	return false
 
+func getItems():
+	return items
+
 func getAllItems():
 	return items
 

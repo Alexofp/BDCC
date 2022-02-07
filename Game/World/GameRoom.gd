@@ -86,6 +86,12 @@ func say(_text: String):
 	if(GM.ui):
 		GM.ui.say(_text)
 
+func sayn(_text: String):
+	say(_text+"\n")
+
+func saynn(_text: String):
+	say(_text+"\n\n")
+
 func addButton(text: String, tooltip: String = "", arg: String = ""):
 	GM.ui.addButton(text, tooltip, "roomCallback", [roomID, arg])
 	#emit_signal("addButton", text, method, tooltip)
@@ -111,7 +117,7 @@ func addActions():
 				else:
 					GM.ui.addDisabledButton(roomAction.ActionName, roomAction.ActionTooltip)
 func _onEnter():
-	say(getDescription())
+	saynn(getDescription())
 	addActions()
 	
 	emit_signal("onEnter", self)

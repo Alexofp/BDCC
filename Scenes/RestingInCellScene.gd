@@ -8,8 +8,6 @@ func _run():
 		saynn("You lay down on your stiff prisoner bed and let out a tired sigh")
 		
 		saynn("What do you wanna do?")
-		
-		saynn("[debug] Test flag is "+str(getFlag(Flag.TestFlag)))
 
 		addButton("Stand up", "No time for resting", "endthescene")
 
@@ -50,7 +48,6 @@ func _react(_action: String, _args):
 		GM.main.startNewDay()
 		GM.pc.afterSleepingInBed()
 		
-		increaseFlag(Flag.TestFlag)
 		setState("slept")
 		return
 

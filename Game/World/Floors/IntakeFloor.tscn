@@ -16,15 +16,18 @@ roomID = "intro_arrive"
 position = Vector2( 64, -64 )
 
 [node name="IntakeFloorRoom4" parent="." index="3" instance=ExtResource( 1 )]
+self_modulate = Color( 1, 0.6, 0.6, 1 )
 position = Vector2( 64, 0 )
 roomColor = 2
 
 [node name="IntakeFloorRoom5" parent="." index="4" instance=ExtResource( 1 )]
+self_modulate = Color( 1, 0.6, 0.6, 1 )
 roomID = "intro_nearcaptain"
 roomSprite = 1
 roomColor = 2
 
 [node name="IntakeFloorRoom6" parent="." index="5" instance=ExtResource( 1 )]
+self_modulate = Color( 1, 0.6, 0.6, 1 )
 position = Vector2( -64, 0 )
 roomColor = 2
 
@@ -42,16 +45,18 @@ position = Vector2( 128, 128 )
 roomID = "intro_intakearea"
 
 [node name="IntakeFloorRoom11" parent="." index="10" instance=ExtResource( 1 )]
+self_modulate = Color( 0.7, 0.7, 1, 1 )
 position = Vector2( 128, 192 )
 roomID = "intro_nearshower"
-roomColor = 1
+roomColor = 3
 
 [node name="IntakeFloorRoom12" parent="." index="11" instance=ExtResource( 1 )]
+self_modulate = Color( 0.7, 0.7, 1, 1 )
 position = Vector2( 192, 192 )
 roomID = "intro_shower"
 canNorth = false
 canSouth = false
-roomColor = 1
+roomColor = 3
 
 [node name="IntakeFloorRoom13" parent="." index="12" instance=ExtResource( 1 )]
 position = Vector2( 192, 128 )
@@ -60,9 +65,10 @@ position = Vector2( 192, 128 )
 position = Vector2( 256, 128 )
 
 [node name="IntakeFloorRoom15" parent="." index="14" instance=ExtResource( 1 )]
+self_modulate = Color( 0.7, 0.7, 1, 1 )
 position = Vector2( 256, 192 )
 roomID = "intro_aftershower"
-roomColor = 1
+roomColor = 3
 
 [node name="IntakeFloorRoom16" parent="." index="15" instance=ExtResource( 1 )]
 position = Vector2( 320, 128 )
@@ -73,11 +79,14 @@ position = Vector2( 384, 128 )
 roomID = "intro_beforeelevator"
 
 [node name="IntakeFloorRoom18" parent="." index="17" instance=ExtResource( 1 )]
+self_modulate = Color( 1, 0.6, 0.6, 1 )
 position = Vector2( 384, 64 )
 roomID = "intro_elevator"
 roomSprite = 3
+roomColor = 2
 
 [node name="IntakeFloorRoom19" parent="." index="18" instance=ExtResource( 1 )]
+self_modulate = Color( 0.7, 1, 0.7, 1 )
 position = Vector2( 384, 192 )
 roomID = "intro_medicalarea"
 roomColor = 1

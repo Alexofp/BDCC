@@ -52,7 +52,6 @@ func destroyMe():
 	assert(get_parent() != null)
 	
 	get_parent().removeItem(self)
-	get_parent().removeEquippedItem(self)
 	queue_free()
 
 func getPossibleActions():
@@ -83,3 +82,12 @@ func buff(buffid, args = []):
 	var buff: BuffBase = GlobalRegistry.createBuff(buffid)
 	buff.initBuff(args)
 	return buff
+
+func getPrice():
+	return 0
+
+func getSellPrice():
+	return int(getPrice() / 2.0)
+
+func canSell():
+	return false

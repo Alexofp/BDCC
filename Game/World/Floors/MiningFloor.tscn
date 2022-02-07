@@ -1,0 +1,33 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Game/World/SubWorld.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Game/World/GameRoom.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Game/World/Floors/MiningFloor.gd" type="Script" id=3]
+
+[node name="MiningFloor" instance=ExtResource( 1 )]
+script = ExtResource( 3 )
+
+[node name="MiningRoom" parent="." index="0" instance=ExtResource( 2 )]
+self_modulate = Color( 0.7, 0.7, 0.7, 1 )
+roomName = "Mineshafts"
+roomColor = 8
+
+[node name="MiningShafts" parent="." index="1" instance=ExtResource( 2 )]
+self_modulate = Color( 0.5, 0.5, 0.5, 1 )
+position = Vector2( 0, -64 )
+roomName = "Mineshafts"
+roomSprite = 1
+roomColor = 7
+
+[node name="MiningElevator" parent="." index="2" instance=ExtResource( 2 )]
+self_modulate = Color( 1, 0.6, 0.6, 1 )
+position = Vector2( 0, 64 )
+roomName = "Elevator"
+roomID = "mining_elevator"
+roomSprite = 3
+roomColor = 2
+
+[connection signal="onEnter" from="MiningShafts" to="." method="_on_MiningShafts_onEnter"]
+[connection signal="onReact" from="MiningShafts" to="." method="_on_MiningShafts_onReact"]
+[connection signal="onEnter" from="MiningElevator" to="." method="_on_MiningElevator_onEnter"]
+[connection signal="onReact" from="MiningElevator" to="." method="_on_MiningElevator_onReact"]

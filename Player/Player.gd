@@ -134,32 +134,34 @@ func calculateBuffs():
 # They may have effect on your damage in battles but they're not a 'battle' effects
 func updateNonBattleEffects():
 	if(hasBoundArms()):
-		if(!hasEffect(StatusEffect.ArmsBound)):
-			addEffect(StatusEffect.ArmsBound)
+		addEffect(StatusEffect.ArmsBound)
 	else:
-		if(hasEffect(StatusEffect.ArmsBound)):
-			removeEffect(StatusEffect.ArmsBound)
+		removeEffect(StatusEffect.ArmsBound)
 			
 	if(hasBoundLegs()):
-		if(!hasEffect(StatusEffect.LegsBound)):
-			addEffect(StatusEffect.LegsBound)
+		addEffect(StatusEffect.LegsBound)
 	else:
-		if(hasEffect(StatusEffect.LegsBound)):
-			removeEffect(StatusEffect.LegsBound)
+		removeEffect(StatusEffect.LegsBound)
 			
 	if(isBlindfolded()):
-		if(!hasEffect(StatusEffect.Blindfolded)):
-			addEffect(StatusEffect.Blindfolded)
+		addEffect(StatusEffect.Blindfolded)
 	else:
-		if(hasEffect(StatusEffect.Blindfolded)):
-			removeEffect(StatusEffect.Blindfolded)
+		removeEffect(StatusEffect.Blindfolded)
 			
 	if(isGagged()):
-		if(!hasEffect(StatusEffect.Gagged)):
-			addEffect(StatusEffect.Gagged)
+		addEffect(StatusEffect.Gagged)
 	else:
-		if(hasEffect(StatusEffect.Gagged)):
-			removeEffect(StatusEffect.Gagged)
+		removeEffect(StatusEffect.Gagged)
+		
+	if(isFullyNaked()):
+		addEffect(StatusEffect.Naked)
+	else:
+		removeEffect(StatusEffect.Naked)
+		
+	if(getStamina() <= 0):
+		addEffect(StatusEffect.Exhausted)
+	else:
+		removeEffect(StatusEffect.Exhausted)
 
 func processBattleTurn():
 	.processBattleTurn()
@@ -363,8 +365,22 @@ func hasHorns():
 
 func afterSleepingInBed():
 	addStamina(getMaxStamina())
+	addPain(-20)
 
 func afterRestingInBed(seconds):
 	var _hours = floor(seconds/3600.0)
 	
 	addStamina(_hours * 10)
+
+func isFullyNaked():
+	if(inventory.hasSlotEquipped(InventorySlot.Body)):
+		return false
+	
+	return true
+
+func afterEatingAtCanteen():
+	addStamina(100)
+	addPain(-20)
+
+func afterTakingAShower():
+	addStamina(30)

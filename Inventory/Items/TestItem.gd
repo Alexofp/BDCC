@@ -44,3 +44,9 @@ func loadData(data):
 	.loadData(data)
 	
 	something = SAVE.loadVar(data, "something", "")
+
+func getPrice():
+	return 20
+
+func canSell():
+	return true

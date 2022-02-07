@@ -77,6 +77,9 @@ func say(_text: String):
 		GM.ui.say(_text)
 	#emit_signal("sayText", _text)
 
+func sayn(_text: String):
+	say(_text+"\n")
+
 func saynn(_text: String):
 	say(_text+"\n\n")
 

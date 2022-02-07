@@ -36,7 +36,7 @@ roomName = "Main hall"
 roomDescription = "A very spacious hall with a huge raised platform in the middle"
 roomColor = 8
 
-[node name="MainHallRoom5" parent="." index="4" instance=ExtResource( 2 )]
+[node name="MainElevator" parent="." index="4" instance=ExtResource( 2 )]
 self_modulate = Color( 1, 0.6, 0.6, 1 )
 position = Vector2( 0, -64 )
 roomName = "Main elevator"
@@ -174,11 +174,12 @@ position = Vector2( 64, 192 )
 roomName = "Main platform"
 roomDescription = "Has some benches to relax and watch the inmates being punished"
 
-[node name="MainHallRoom12" parent="." index="22" instance=ExtResource( 2 )]
+[node name="MainVendomatRoom" parent="." index="22" instance=ExtResource( 2 )]
 self_modulate = Color( 0.7, 0.7, 0.7, 1 )
 position = Vector2( 128, 64 )
 roomName = "Main hall"
 roomDescription = "A very spacious hall with a huge raised platform in the middle"
+roomSprite = 1
 roomColor = 8
 
 [node name="MainHallRoom13" parent="." index="23" instance=ExtResource( 2 )]
@@ -249,17 +250,19 @@ roomName = "Bathroom"
 roomDescription = "A bunch of sinks in a row with a long mirror above. On the opposite side from them are the toilet stalls and a few urinals"
 roomColor = 3
 
-[node name="MainHallRoom26" parent="." index="33" instance=ExtResource( 2 )]
+[node name="MainDressingRoom" parent="." index="33" instance=ExtResource( 2 )]
 self_modulate = Color( 0.7, 0.7, 1, 1 )
 position = Vector2( 256, 192 )
 roomName = "Dressing room"
+roomID = "main_dressing1"
 roomDescription = "You enter the dressing room. There are many color-coded lockers around and a few bins with fresh towels"
 roomColor = 3
 
-[node name="MainHallRoom40" parent="." index="34" instance=ExtResource( 2 )]
+[node name="MainShowerRoom" parent="." index="34" instance=ExtResource( 2 )]
 self_modulate = Color( 0.7, 0.7, 1, 1 )
 position = Vector2( 320, 192 )
 roomName = "Shower"
+roomID = "main_shower1"
 roomDescription = "A room with that has a bunch of shower heads on the walls. Soap doesn't seem to be included"
 roomColor = 3
 
@@ -267,6 +270,7 @@ roomColor = 3
 self_modulate = Color( 0.7, 0.7, 1, 1 )
 position = Vector2( -576, 64 )
 roomName = "Shower"
+roomID = "main_shower2"
 roomDescription = "A room with that has a bunch of shower heads on the walls. Soap doesn't seem to be included"
 roomColor = 3
 
@@ -274,15 +278,17 @@ roomColor = 3
 self_modulate = Color( 0.7, 0.7, 1, 1 )
 position = Vector2( -512, 64 )
 roomName = "Dressing room"
+roomID = "main_dressing2"
 roomDescription = "You enter the dressing room. There are many color-coded lockers around and a few bins with fresh towels"
 roomColor = 3
 
-[node name="MainHallRoom22" parent="." index="37" instance=ExtResource( 2 )]
+[node name="MainCanteen" parent="." index="37" instance=ExtResource( 2 )]
 self_modulate = Color( 0.7, 0.7, 1, 1 )
 position = Vector2( -192, 128 )
 roomName = "Canteen"
-roomDescription = "Lots of tables around"
+roomDescription = "You see lots of tables around and a counter where inmates get their food"
 canWest = false
+canSouth = false
 roomSprite = 2
 roomColor = 3
 
@@ -290,6 +296,7 @@ roomColor = 3
 self_modulate = Color( 0.7, 0.7, 1, 1 )
 position = Vector2( 192, 256 )
 roomName = "Laundry"
+roomDescription = "Half of the room is taken by a row of bulky industrial-looking washing machines. Then your eye spots a few bins with inmate uniforms and a uniform vender, similliar to the one that you saw during the intake"
 roomColor = 3
 
 [node name="MainHallRoom24" parent="." index="39" instance=ExtResource( 2 )]
@@ -303,7 +310,21 @@ self_modulate = Color( 1, 1, 0.7, 1 )
 position = Vector2( 256, 64 )
 roomColor = 6
 
+[connection signal="onEnter" from="MainElevator" to="." method="_on_MainElevator_onEnter"]
+[connection signal="onReact" from="MainElevator" to="." method="_on_MainElevator_onReact"]
 [connection signal="onEnter" from="MainStairs1" to="." method="_on_MainStairs1_onEnter"]
 [connection signal="onReact" from="MainStairs1" to="." method="_on_MainStairs1_onReact"]
 [connection signal="onEnter" from="MainStairs2" to="." method="_on_MainStairs2_onEnter"]
 [connection signal="onReact" from="MainStairs2" to="." method="_on_MainStairs2_onReact"]
+[connection signal="onEnter" from="MainVendomatRoom" to="." method="_on_MainVendomatRoom_onEnter"]
+[connection signal="onReact" from="MainVendomatRoom" to="." method="_on_MainVendomatRoom_onReact"]
+[connection signal="onEnter" from="MainDressingRoom" to="." method="_on_MainDressingRoom_onEnter"]
+[connection signal="onReact" from="MainDressingRoom" to="." method="_on_MainDressingRoom_onReact"]
+[connection signal="onEnter" from="MainShowerRoom" to="." method="_on_MainShowerRoom_onEnter"]
+[connection signal="onReact" from="MainShowerRoom" to="." method="_on_MainShowerRoom_onReact"]
+[connection signal="onEnter" from="MainHallRoom41" to="." method="_on_MainShowerRoom_onEnter"]
+[connection signal="onReact" from="MainHallRoom41" to="." method="_on_MainShowerRoom_onReact"]
+[connection signal="onEnter" from="MainHallRoom39" to="." method="_on_MainDressingRoom_onEnter"]
+[connection signal="onReact" from="MainHallRoom39" to="." method="_on_MainDressingRoom_onReact"]
+[connection signal="onEnter" from="MainCanteen" to="." method="_on_MainCanteen_onEnter"]
+[connection signal="onReact" from="MainCanteen" to="." method="_on_MainCanteen_onReact"]

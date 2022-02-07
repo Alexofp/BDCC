@@ -28,9 +28,15 @@ func _ready():
 	registerBodypartFolder("res://Player/Bodyparts/Anus/")
 	registerBodypartFolder("res://Player/Bodyparts/Vagina/")
 	
+	registerItemFolder("res://Inventory/Items/")
+	
+	registerBuffFolder("res://Inventory/Buffs/")
+	
 	registerSceneFolder("res://Scenes/")
 	registerSceneFolder("res://Scenes/Intro/")
 	registerSceneFolder("res://Scenes/Item/")
+	registerSceneFolder("res://Scenes/Cellblock/")
+	registerSceneFolder("res://Scenes/Mineshaft/")
 	
 	registerCharacterFolder("res://Characters/")
 	
@@ -39,10 +45,6 @@ func _ready():
 	registerStatusEffectFolder("res://StatusEffect/")
 	
 	registerSpeciesFolder("res://Species/")
-	
-	registerItemFolder("res://Inventory/Items/")
-	
-	registerBuffFolder("res://Inventory/Buffs/")
 	
 # The point is that it will still generate unique ids even after saving/loading
 func generateUniqueID():

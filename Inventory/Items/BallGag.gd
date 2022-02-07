@@ -42,3 +42,9 @@ func loadData(data):
 	.loadData(data)
 	
 	locked = SAVE.loadVar(data, "locked", true)
+
+func getPrice():
+	return 10
+
+func canSell():
+	return true
