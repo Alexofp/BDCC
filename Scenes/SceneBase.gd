@@ -196,6 +196,15 @@ func processTime(seconds: int):
 func startNewDay():
 	return GM.main.startNewDay()
 
+func setFlag(flagID, value):
+	GM.main.setFlag(flagID, value)
+
+func getFlag(flagID, defaultValue = null):
+	return GM.main.getFlag(flagID, defaultValue)
+
+func increaseFlag(flagID, addvalue = 1):
+	GM.main.increaseFlag(flagID, addvalue)
+
 func canSave():
 	return true
 

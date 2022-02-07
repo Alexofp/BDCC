@@ -10,6 +10,7 @@ var sceneStack: Array = []
 var messages: Array = []
 var currentDay = 0
 var timeOfDay = 6*60*60 # seconds since 00:00
+var flags = {}
 
 signal time_passed(_secondsPassed)
 
@@ -83,6 +84,7 @@ func saveData():
 	data["messages"] = messages
 	data["timeOfDay"] = timeOfDay
 	data["currentDay"] = currentDay
+	data["flags"] = flags
 	
 	data["scenes"] = []
 	for scene in sceneStack:
@@ -98,6 +100,7 @@ func loadData(data):
 	timeOfDay = SAVE.loadVar(data, "timeOfDay", 6*60*60)
 	currentDay = SAVE.loadVar(data, "currentDay", 0)
 	GM.ui.onTimePassed(0)
+	flags = SAVE.loadVar(data, "flags", {})
 	
 	var scenes = SAVE.loadVar(data, "scenes", [])
 	
@@ -185,3 +188,17 @@ func getTime():
 
 func getDays():
 	return currentDay
+
+func setFlag(flagID, value):
+	flags[flagID] = value
+
+func increaseFlag(flagID, addvalue = 1):
+	if(!flags.has(flagID)):
+		flags[flagID] = 0
+	flags[flagID] += addvalue
+
+func getFlag(flagID, defaultValue = null):
+	if(!flags.has(flagID)):
+		return defaultValue
+	
+	return flags[flagID]
