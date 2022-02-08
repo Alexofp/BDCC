@@ -28,11 +28,16 @@ func _run():
 		addButton("Continue", "Leave", "endthescene")
 
 func _react(_action: String, _args):
-	if(_action == "doeat"):
+	if(_action == "doeat"):		
 		GM.pc.afterEatingAtCanteen()
 		processTime(60 * 5)
 		
 		setFlag(Flag.Canteen_PlayerAteDay, GM.main.getDays())
+		
+		if(GM.ES.trigger(Trigger.EatingInCanteen)):
+			endScene()
+			return
+		
 		addMessage("You got an energy boost and don't feel as hungry anymore")
 
 

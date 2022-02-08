@@ -55,6 +55,10 @@ func _react(_action: String, _args):
 		GM.pc.afterTakingAShower()
 		processTime(60 * 30)
 		
+		if(GM.ES.trigger(Trigger.TakingAShower)):
+			endScene()
+			return
+		
 		addMessage("You feel fresh and clean")
 
 

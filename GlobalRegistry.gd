@@ -10,6 +10,7 @@ var statusEffects: Dictionary = {}
 var allSpecies: Dictionary = {}
 var items: Dictionary = {}
 var buffs: Dictionary = {}
+var events: Dictionary = {}
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -31,6 +32,8 @@ func _ready():
 	registerItemFolder("res://Inventory/Items/")
 	
 	registerBuffFolder("res://Inventory/Buffs/")
+	
+	registerEventFolder("res://Events/Event/")
 	
 	registerSceneFolder("res://Scenes/")
 	registerSceneFolder("res://Scenes/Intro/")
@@ -313,3 +316,37 @@ func createBuff(id: String):
 		printerr("ERROR: buff with the id "+id+" wasn't found")
 		return null
 	return buffs[id].new()
+
+
+
+func registerEvent(path: String):
+	var item = load(path)
+	var itemObject = item.new()
+	events[itemObject.id] = itemObject
+
+func registerEventFolder(folder: String):
+	var dir = Directory.new()
+	if dir.open(folder) == OK:
+		dir.list_dir_begin()
+		var file_name = dir.get_next()
+		while file_name != "":
+			if dir.current_is_dir():
+				pass
+				#print("Found directory: " + file_name)
+			else:
+				if(file_name.get_extension() == "gd"):
+					var full_path = folder.plus_file(file_name)
+					print("Registered event: " + full_path)
+					registerEvent(full_path)
+			file_name = dir.get_next()
+	else:
+		printerr("An error occurred when trying to access the path "+folder)
+		
+func getEvent(id: String):
+	if(!events.has(id)):
+		printerr("ERROR: event with the id "+id+" wasn't found")
+		return null
+	return events[id]
+
+func getEvents():
+	return events

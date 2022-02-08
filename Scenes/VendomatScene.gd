@@ -6,6 +6,7 @@ var sellItemsData = {}
 func _init():
 	sceneID = "VendomatScene"
 	
+func _initScene(_args = []):
 	for itemID in sellingItems:
 		var itemObject = GlobalRegistry.createItem(itemID)
 		sellItemsData[itemID] = {

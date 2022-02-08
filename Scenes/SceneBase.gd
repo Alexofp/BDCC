@@ -57,7 +57,7 @@ func run():
 		for message in GM.main.getMessages():
 			say(message)
 			say("\n")
-		say("[/i][/center]")
+		say("[/i][/center]\n")
 	
 	GM.pc.updateEffectPanel(GM.ui.getPlayerStatusEffectsPanel())
 	if(fightCharacter):
@@ -66,7 +66,6 @@ func run():
 		
 	
 func react(_action: String, _args):
-	GM.main.clearMessages()
 	return _react(_action, _args)
 
 func setState(newState: String):

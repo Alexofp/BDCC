@@ -22,6 +22,9 @@ func _ready():
 	#runScene("WorldScene")
 	runScene("IntroScene")
 	#runScene("FightScene", ["testchar"])
+	
+	
+	runCurrentScene()
 	GM.ui.onTimePassed(0)
 
 func runScene(id, _args = []):
@@ -31,7 +34,7 @@ func runScene(id, _args = []):
 	print("Starting scene "+id)
 	
 	scene.initScene(_args)
-	scene.run()
+	#scene.run()
 	return scene
 
 func removeScene(scene, args = []):
@@ -41,8 +44,8 @@ func removeScene(scene, args = []):
 			sceneStack.erase(scene)
 			if(sceneStack.size() > 0):
 				sceneStack.back().react_scene_end(savedTag, args)
-			if(sceneStack.size() > 0):
-				sceneStack.back().run()
+			#if(sceneStack.size() > 0):
+			#	sceneStack.back().run()
 		else:
 			sceneStack.erase(scene)
 	
@@ -54,20 +57,27 @@ func removeScene(scene, args = []):
 		return
 
 func _on_GameUI_on_option_button(method, args):
-	if(sceneStack.size() > 0):
-		var scene = sceneStack.back()
+	GM.main.clearMessages()
+	GM.ES.clearDelayedEvents()
+	
+	if(GM.ES.checkButtonInput(method, args)):
+		pass
 		
-		if(sceneStack.back().react(method, args)):
-			return
-		if(scene.is_queued_for_deletion()):
-			return
+	elif(sceneStack.size() > 0):
+		sceneStack.back().react(method, args)
+		#if(sceneStack.back().react(method, args)):
+		#	return
 
+	runCurrentScene()
+
+func runCurrentScene():
 	if(sceneStack.size() > 0):
 		sceneStack.back().run()
+		
+		GM.ES.doDelayedEvents()
 
 func reRun():
-	if(sceneStack.size() > 0):
-		sceneStack.back().run()
+	runCurrentScene()
 
 func loadingSavefileFinished():
 	reRun()
@@ -85,6 +95,7 @@ func saveData():
 	data["timeOfDay"] = timeOfDay
 	data["currentDay"] = currentDay
 	data["flags"] = flags
+	data["EventSystem"] = GM.ES.saveData()
 	
 	data["scenes"] = []
 	for scene in sceneStack:
@@ -101,6 +112,7 @@ func loadData(data):
 	currentDay = SAVE.loadVar(data, "currentDay", 0)
 	GM.ui.onTimePassed(0)
 	flags = SAVE.loadVar(data, "flags", {})
+	GM.ES.loadData(SAVE.loadVar(data, "EventSystem", {}))
 	
 	var scenes = SAVE.loadVar(data, "scenes", [])
 	

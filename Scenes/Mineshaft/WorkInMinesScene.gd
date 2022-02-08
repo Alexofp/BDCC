@@ -24,6 +24,10 @@ func _react(_action: String, _args):
 		
 		processTime(2*60*60)
 		
+		if(GM.ES.trigger(Trigger.WorkingInMines)):
+			endScene()
+			return
+		
 		addMessage("You earned 10 work credits")
 
 	if(_action == "endthescene"):

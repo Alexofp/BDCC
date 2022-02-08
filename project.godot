@@ -119,6 +119,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Player/Doll.gd"
 }, {
+"base": "Reference",
+"class": "EventBase",
+"language": "GDScript",
+"path": "res://Events/EventBase.gd"
+}, {
+"base": "Node",
+"class": "EventSystem",
+"language": "GDScript",
+"path": "res://Events/EventSystem.gd"
+}, {
 "base": "Object",
 "class": "Flag",
 "language": "GDScript",
@@ -235,6 +245,11 @@ _global_script_classes=[ {
 "path": "res://Player/TheStage.gd"
 }, {
 "base": "Object",
+"class": "Trigger",
+"language": "GDScript",
+"path": "res://Events/Trigger.gd"
+}, {
+"base": "Object",
 "class": "Util",
 "language": "GDScript",
 "path": "res://Util/Util.gd"
@@ -267,6 +282,8 @@ _global_script_class_icons={
 "Character": "",
 "DamageType": "",
 "Doll": "",
+"EventBase": "",
+"EventSystem": "",
 "Flag": "",
 "FlexGridContainer": "",
 "GameParser": "",
@@ -290,6 +307,7 @@ _global_script_class_icons={
 "StatusEffectsPanel": "",
 "SubGameWorld": "",
 "TheStage": "",
+"Trigger": "",
 "Util": "",
 "WorldFloor": ""
 }
