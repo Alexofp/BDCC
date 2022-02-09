@@ -12,14 +12,20 @@ self_modulate = Color( 0.7, 0.7, 0.7, 1 )
 roomName = "Mineshafts"
 roomColor = 8
 
-[node name="MiningShafts" parent="." index="1" instance=ExtResource( 2 )]
+[node name="MiningTaviRoom" parent="." index="1" instance=ExtResource( 2 )]
+self_modulate = Color( 0.7, 0.7, 0.7, 1 )
+position = Vector2( 64, 0 )
+roomName = "Mineshafts"
+roomColor = 8
+
+[node name="MiningShafts" parent="." index="2" instance=ExtResource( 2 )]
 self_modulate = Color( 0.5, 0.5, 0.5, 1 )
 position = Vector2( 0, -64 )
 roomName = "Mineshafts"
 roomSprite = 1
 roomColor = 7
 
-[node name="MiningElevator" parent="." index="2" instance=ExtResource( 2 )]
+[node name="MiningElevator" parent="." index="3" instance=ExtResource( 2 )]
 self_modulate = Color( 1, 0.6, 0.6, 1 )
 position = Vector2( 0, 64 )
 roomName = "Elevator"
