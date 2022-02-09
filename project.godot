@@ -184,6 +184,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Player/LimbTypes.gd"
 }, {
+"base": "Reference",
+"class": "Module",
+"language": "GDScript",
+"path": "res://Modules/Module.gd"
+}, {
 "base": "BaseCharacter",
 "class": "Player",
 "language": "GDScript",
@@ -295,6 +300,7 @@ _global_script_class_icons={
 "ItemBase": "",
 "Limb": "",
 "LimbTypes": "",
+"Module": "",
 "Player": "",
 "RNG": "",
 "RoomAction": "",

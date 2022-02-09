@@ -11,6 +11,7 @@ var allSpecies: Dictionary = {}
 var items: Dictionary = {}
 var buffs: Dictionary = {}
 var events: Dictionary = {}
+var modules: Dictionary = {}
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -48,6 +49,8 @@ func _ready():
 	registerStatusEffectFolder("res://StatusEffect/")
 	
 	registerSpeciesFolder("res://Species/")
+	
+	registerModule("res://Modules/TaviModule/Tavi_module.gd")
 	
 # The point is that it will still generate unique ids even after saving/loading
 func generateUniqueID():
@@ -350,3 +353,11 @@ func getEvent(id: String):
 
 func getEvents():
 	return events
+
+func registerModule(path: String):
+	var module = load(path)
+	var moduleObject = module.new()
+	moduleObject.register()
+	modules[moduleObject.id] = moduleObject
+	
+	print("Module "+moduleObject.id+" by "+moduleObject.author+" was registered")
