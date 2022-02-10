@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://SoftPhysicsTest/CockScript.gd" type="Script" id=2]
+[ext_resource path="res://SoftPhysicsTest/Internals.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Player/Limbs/penis/penisCanine.png" type="Texture" id=4]
+
+[sub_resource type="PhysicsMaterial" id=2]
+friction = 0.0
+
+[node name="PhysicsTest" type="Node2D"]
+
+[node name="Cock" type="RigidBody2D" parent="."]
+position = Vector2( 209.518, 477.881 )
+z_index = 2
+mode = 2
+mass = 10.0
+physics_material_override = SubResource( 2 )
+gravity_scale = 0.0
+linear_damp = 10.0
+script = ExtResource( 2 )
+
+[node name="PenisCanine" type="Sprite" parent="Cock"]
+scale = Vector2( -4, 4 )
+texture = ExtResource( 4 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Cock"]
+rotation = -3.14159
+scale = Vector2( 4, -4 )
+polygon = PoolVector2Array( 66, -36.6, 68, -33.6, 68, 2, 71.3, 29, 69.7, 29, 68.6, 34, 66.7, 34, 58.7, 40, 43.2, 40, 32, 28.8, 32, 19.8, 33.6, 9, 32.6, 9, 31.7, 6.4, 26.5, 9, 19.7, 9, 9, 5.7, -33, 10.2, -33, 8.5, -68, -1.5, -68, -3.3, -72, -8.3, -72, -17, -69.1, -17, -63, -18.5, -54.8, -27, -47.3, -27, -43.3, -24, -14.9, -24, 0.100006, -23.1, 15.3, -35, 18.7, -35, 28, -36.3, 28, -34.4, 30, -33.8, 30, -34.5, 43, -38.5, 43, -40, 66, -40 )
+
+[node name="Internals" parent="." instance=ExtResource( 3 )]
+position = Vector2( 877.499, 403.039 )
