@@ -12,11 +12,9 @@ var items: Dictionary = {}
 var buffs: Dictionary = {}
 var events: Dictionary = {}
 var modules: Dictionary = {}
+var quests: Dictionary = {}
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	#registerBodypart("res://Player/Bodyparts/CatLeg.gd")
-	#registerBodypart("res://Player/Bodyparts/HumanLeg.gd")
 	registerBodypartFolder("res://Player/Bodyparts/Legs/")
 	registerBodypartFolder("res://Player/Bodyparts/Breasts/")
 	registerBodypartFolder("res://Player/Bodyparts/Hair/")
@@ -49,6 +47,8 @@ func _ready():
 	registerStatusEffectFolder("res://StatusEffect/")
 	
 	registerSpeciesFolder("res://Species/")
+	
+	registerQuestFolder("res://Quests/Quest/")
 	
 	registerModule("res://Modules/TaviModule/Tavi_module.gd")
 	
@@ -361,3 +361,36 @@ func registerModule(path: String):
 	modules[moduleObject.id] = moduleObject
 	
 	print("Module "+moduleObject.id+" by "+moduleObject.author+" was registered")
+
+
+func registerQuest(path: String):
+	var item = load(path)
+	var itemObject = item.new()
+	quests[itemObject.id] = itemObject
+
+func registerQuestFolder(folder: String):
+	var dir = Directory.new()
+	if dir.open(folder) == OK:
+		dir.list_dir_begin()
+		var file_name = dir.get_next()
+		while file_name != "":
+			if dir.current_is_dir():
+				pass
+				#print("Found directory: " + file_name)
+			else:
+				if(file_name.get_extension() == "gd"):
+					var full_path = folder.plus_file(file_name)
+					print("Registered quest: " + full_path)
+					registerQuest(full_path)
+			file_name = dir.get_next()
+	else:
+		printerr("An error occurred when trying to access the path "+folder)
+		
+func getQuest(id: String):
+	if(!quests.has(id)):
+		printerr("ERROR: quest with the id "+id+" wasn't found")
+		return null
+	return quests[id]
+
+func getQuests():
+	return quests

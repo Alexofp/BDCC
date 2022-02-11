@@ -5,6 +5,7 @@ var main
 var pc: Player
 var world: GameWorld
 var ES: EventSystem
+var QS: QuestSystem
 
 func _ready():
 	pc = load("res://Player/Player.gd").new()
@@ -12,3 +13,6 @@ func _ready():
 
 	ES = load("res://Events/EventSystem.gd").new()
 	add_child(ES)
+
+	QS = load("res://Quests/QuestSystem.gd").new()
+	add_child(QS)

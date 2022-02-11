@@ -5,6 +5,7 @@ var scenes = []
 var characters = []
 var items = []
 var events = []
+var quests = []
 var id = "badmodule"
 var author = "no author"
 
@@ -23,3 +24,6 @@ func register():
 	
 	for event in events:
 		GlobalRegistry.registerEvent(event)
+
+	for quest in quests:
+		GlobalRegistry.registerQuest(quest)

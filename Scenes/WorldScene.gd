@@ -34,6 +34,7 @@ func _run():
 		addDisabledButtonAt(12, "East", "Can't go east")
 	#addDisabledButton("bark", "no awo")
 	
+	addButtonAt(13, "Tasks", "Look at your tasks", "tasks")
 	addButtonAt(14, "Inventory", "Look at your inventory", "inventory")
 	
 	_roomInfo._onEnter()
@@ -79,5 +80,6 @@ func _react(_action: String, _args):
 		GM.ES.trigger(Trigger.EnteringRoom, GM.pc.location)
 	if(_action == "inventory"):
 		runScene("InventoryScene")
-
+	if(_action == "tasks"):
+		runScene("QuestLogScene")
 
