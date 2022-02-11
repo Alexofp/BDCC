@@ -313,7 +313,7 @@ func _react(_action: String, _args):
 	
 	if(_action == "wake_up"):
 		startNewDay()
-		runScene("WorldScene")
+		runScene("IntroWakeup")
 		endScene()
 		
 	setState(_action)

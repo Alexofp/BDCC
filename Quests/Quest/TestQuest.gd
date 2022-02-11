@@ -21,7 +21,7 @@ func isVisible():
 	return true
 
 func isCompleted():
-	return false
+	return true
 
 func isMainQuest():
-	return true
+	return false

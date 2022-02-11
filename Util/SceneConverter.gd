@@ -44,6 +44,11 @@ func _on_Button_pressed():
 			
 			result += "\t" + "if(state == \""+key+"\"):\n"
 		else:
-			result += "\t\t" + "saynn(\""+textline.trim_prefix(" ").trim_suffix(" ")+"\")\n\n"
+			var trimmedLine = textline.trim_prefix(" ").trim_suffix(" ")
+			
+			if(trimmedLine.length() > 0 && trimmedLine[0] == "("):
+				result += "\t\t" + "# "+trimmedLine+"\n\n"
+			else:
+				result += "\t\t" + "saynn(\""+trimmedLine+"\")\n\n"
 	
 	outputTextEdit.text = result

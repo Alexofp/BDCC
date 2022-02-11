@@ -35,36 +35,42 @@ func _run():
 		sideQuests.sort_custom(MyQuestSorter, "sort_descending")
 		completedQuests.sort_custom(MyQuestSorter, "sort_descending")
 		
-		saynn("Main tasks:")
+		saynn("[i]Main tasks:[/i]")
 		
 		if(mainQuests.size() == 0):
 			saynn("Nothing")
 		
 		for quest in mainQuests:
 			sayn("[b]"+quest.getVisibleName()+"[/b]")
-			for line in quest.getProgress():
+			var progress = quest.getProgress()
+			progress.invert()
+			for line in progress:
 				sayn("* "+line)
 			sayn("")
 			
-		saynn("Side tasks:")
+		saynn("[i]Side tasks:[/i]")
 		
 		if(sideQuests.size() == 0):
 			saynn("Nothing")
 		
 		for quest in sideQuests:
 			sayn("[b]"+quest.getVisibleName()+"[/b]")
-			for line in quest.getProgress():
+			var progress = quest.getProgress()
+			progress.invert()
+			for line in progress:
 				sayn("* "+line)
 			sayn("")
 			
-		saynn("Completed tasks:")
+		saynn("[i]Completed tasks:[/i]")
 		
 		if(completedQuests.size() == 0):
 			saynn("Nothing")
 		
 		for quest in completedQuests:
 			sayn("[b]"+quest.getVisibleName()+"[/b] (Completed)")
-			for line in quest.getProgress():
+			var progress = quest.getProgress()
+			progress.invert()
+			for line in progress:
 				sayn("* "+line)
 			sayn("")
 		
