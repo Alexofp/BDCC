@@ -19,12 +19,20 @@ Uses Godot 3.4.2 engine
 - Inventory system. You can put on items or interact with them. Things like gags can override the default behaviour so you can't just take them off. Items can have buffs/debuffs. Any character has an inventory 
 - A simple yet very powerful saving/loading system that allows to save the game state at any point in any scene
 - Intro scene where the player gets captured and put in jail
+- Basic prison activities like sleeping in cell, working in mines, eating in the canteen, showering, etc etc
+- Events system, decoupled from the world, allowing to avoid a lot of the messy code but also very flexiable. Flags are an easy way to remember things and they are also saved/loaded with no extra work
+- Quest system + Quest log. Doesn't provide much logic on it's own but each quest is a separate object which helps to avoid files with 3k+ lines. Works great together with events and flags
+- Modules. Module can add new scenes, characters, events and quests which allows for easy moddability and extendability
+
 
 ## Things that will be worked on in the following months:
-- More customization/animations for the player
-- Start writing the prison itself, adding basic activities like sleeping in cell, working in mines, eating in the canteen, showering, etc etc
-- Create an event system that can trigger special scenes half-randomly or after some requirements were met
-- Quest system with the main quest being 'escape the prison'
+- Story scenes, introduction to some prison characters, ability to talk/interact/fight with them.
+- Introduction of sex scenes. Things that come with that such as tracking of fluids/messyness
+- A few quests and events, just to see how well the current system works
+- RPG elements, skills and perks
+- Release of the first public build
 
-Check out my trello to see what the current tasks are:
+Check out my trello to see what my current tasks are:
 https://trello.com/b/l3DsQlz5
+
+I plan to keep this project open source, everyone is welcomed to propose additions. Though please don't expect them to be merged 100%. My writing skills aren't the best so feel free to edit the text of my scenes to make them more interesting.
