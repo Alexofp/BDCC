@@ -181,6 +181,8 @@ func startNewDay():
 	currentDay += 1
 	timeOfDay = newtime
 	
+	Flag.resetFlagsOnNewDay()
+	
 	doTimeProcess(timediff)
 	
 	return timediff

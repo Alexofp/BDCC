@@ -132,7 +132,7 @@ _global_script_classes=[ {
 "base": "Object",
 "class": "Flag",
 "language": "GDScript",
-"path": "res://Game/Flags.gd"
+"path": "res://Quests/Flags.gd"
 }, {
 "base": "Container",
 "class": "FlexGridContainer",

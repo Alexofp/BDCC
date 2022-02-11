@@ -32,7 +32,7 @@ func _react(_action: String, _args):
 		GM.pc.afterEatingAtCanteen()
 		processTime(60 * 5)
 		
-		setFlag(Flag.Canteen_PlayerAteDay, GM.main.getDays())
+		setFlag(Flag.Canteen_PlayerAteToday, true)
 		
 		if(GM.ES.trigger(Trigger.EatingInCanteen)):
 			endScene()

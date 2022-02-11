@@ -22,7 +22,7 @@ func _on_MainStairs2_onReact(_room, key):
 
 
 func _on_MainCanteen_onEnter(room):
-	if(GM.main.getDays() > GM.main.getFlag(Flag.Canteen_PlayerAteDay, -1)):
+	if(!GM.main.getFlag(Flag.Canteen_PlayerAteToday, false)):
 		room.addButton("Eat", "See what you can catch", "eat")
 	else:
 		room.addDisabledButton("Eat", "You already ate today")
