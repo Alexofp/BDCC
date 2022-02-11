@@ -13,4 +13,4 @@ func getSmallDescription() -> String:
 	return "Canine with black fur. Very formal clothing"
 
 func getSpecies():
-	return ["wolf"]
+	return ["canine"]

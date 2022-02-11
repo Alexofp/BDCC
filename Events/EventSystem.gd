@@ -3,6 +3,7 @@ class_name EventSystem
 
 var events = {}
 var delayedEvents = []
+var enteringRoomEvents = {}
 
 class MyCustomSorter:
 	static func sort_descending(a, b):
@@ -20,20 +21,35 @@ func registerEvents():
 	for eventID in loadedevents:
 		var event = loadedevents[eventID]
 		event.registerTriggers(self)
+		
+	for triggerType in events:
+		events[triggerType].sort_custom(MyCustomSorter, "sort_descending")
 
 func addTrigger(event, triggerType, args = null):
 	if(!events.has(triggerType)):
 		events[triggerType] = []
 	events[triggerType].append([event, args])
 	
-	events[triggerType].sort_custom(MyCustomSorter, "sort_descending")
+	if(triggerType == Trigger.EnteringRoom):
+		if(!enteringRoomEvents.has(args)):
+			enteringRoomEvents[args] = []
+		enteringRoomEvents[args].append([event, args])
 
 
 func trigger(_triggerType, _args = null):
 	if(!events.has(_triggerType)):
 		return false
 	
-	for eventData in events[_triggerType]:
+	var usefulEvents = events[_triggerType]
+	
+	# Little optimization so we don't go through the whole list of events each time we enter a new room
+	if(_triggerType == Trigger.EnteringRoom):
+		if(!enteringRoomEvents.has(_args)):
+			return false
+		
+		usefulEvents = enteringRoomEvents[_args]
+	
+	for eventData in usefulEvents:
 		var event = eventData[0]
 		var _eventArg = eventData[1]
 		
