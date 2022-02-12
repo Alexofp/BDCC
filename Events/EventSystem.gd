@@ -36,7 +36,7 @@ func addTrigger(event, triggerType, args = null):
 		enteringRoomEvents[args].append([event, args])
 
 
-func trigger(_triggerType, _args = null):
+func trigger(_triggerType, _args = null, onlyDelayed = false):
 	if(!events.has(_triggerType)):
 		return false
 	
@@ -60,11 +60,16 @@ func trigger(_triggerType, _args = null):
 		if(!event.shouldRun()):
 			continue
 		
-		event.run()
-		delayedEvents.append(event.id)
+		if(!onlyDelayed):
+			event.run()
+		if(!delayedEvents.has(event.id)):
+			delayedEvents.append(event.id)
 		if(event.shouldInterupt()):
 			return true
 	return false
+
+func triggerOnlyDelayed(_triggerType, _args = null):
+	return trigger(_triggerType, _args, true)
 
 func doDelayedEvents():
 	for eventID in delayedEvents:

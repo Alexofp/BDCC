@@ -83,3 +83,6 @@ func _react(_action: String, _args):
 	if(_action == "tasks"):
 		runScene("QuestLogScene")
 
+func _react_scene_end(_tag, _result):
+	GM.ES.triggerOnlyDelayed(Trigger.EnteringRoom, GM.pc.location)
+	setState("")
