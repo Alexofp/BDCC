@@ -66,6 +66,7 @@ func _run():
 
 func _react(_action: String, _args):
 	if(_action == "endTheScene"):
+		GM.main.setFlag(Flag.Game_CompletedPrologue, true)
 		runScene("WorldScene")
 		endScene()
 		

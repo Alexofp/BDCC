@@ -13,7 +13,7 @@ func getPronounGender():
 	return Character.Gender.Female
 	
 func getSmallDescription() -> String:
-	return "A very tall lynx with cyan fur"
+	return "A very tall lynx with cyan fur. Usually wears her bulky guard armor. Her feline face features a huge amount of piercings"
 
 func getSpecies():
 	return ["feline"]

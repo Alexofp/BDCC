@@ -22,6 +22,7 @@ roomColor = 8
 self_modulate = Color( 0.5, 0.5, 0.5, 1 )
 position = Vector2( 0, -64 )
 roomName = "Mineshafts"
+roomID = "mining_shafts_entering"
 roomSprite = 1
 roomColor = 7
 
@@ -33,7 +34,5 @@ roomID = "mining_elevator"
 roomSprite = 3
 roomColor = 2
 
-[connection signal="onEnter" from="MiningShafts" to="." method="_on_MiningShafts_onEnter"]
-[connection signal="onReact" from="MiningShafts" to="." method="_on_MiningShafts_onReact"]
 [connection signal="onEnter" from="MiningElevator" to="." method="_on_MiningElevator_onEnter"]
 [connection signal="onReact" from="MiningElevator" to="." method="_on_MiningElevator_onReact"]

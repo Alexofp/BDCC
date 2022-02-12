@@ -3,6 +3,8 @@ class_name Flag
 
 const TestFlag = "TestFlag"
 const Canteen_PlayerAteToday = "Canteen_PlayerAteToday"
+const Mining_IntroducedToMinning = "Mining_IntroducedToMinning"
+const Game_CompletedPrologue = "Game_CompletedPrologue"
 
 static func resetFlagsOnNewDay():
 	GM.main.setFlag(Canteen_PlayerAteToday, false)

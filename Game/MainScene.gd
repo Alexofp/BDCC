@@ -1,10 +1,6 @@
 extends Node
+class_name MainThing
 
-
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-#onready var theScene = $SceneBase
 onready var gameUI = $GameUI
 var sceneStack: Array = []
 var messages: Array = []

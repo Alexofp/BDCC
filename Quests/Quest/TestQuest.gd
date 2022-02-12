@@ -18,7 +18,7 @@ func getProgress():
 	return result
 
 func isVisible():
-	return true
+	return false
 
 func isCompleted():
 	return true
