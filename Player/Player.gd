@@ -384,3 +384,6 @@ func afterEatingAtCanteen():
 
 func afterTakingAShower():
 	addStamina(30)
+
+func orgasmFrom(_characterID: String):
+	lust = 0

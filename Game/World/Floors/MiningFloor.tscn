@@ -10,12 +10,18 @@ script = ExtResource( 3 )
 [node name="MiningRoom" parent="." index="0" instance=ExtResource( 2 )]
 self_modulate = Color( 0.7, 0.7, 0.7, 1 )
 roomName = "Mineshafts"
+roomID = "mining_nearentrance"
+roomDescription = "Scary mineshafts"
 roomColor = 8
 
 [node name="MiningTaviRoom" parent="." index="1" instance=ExtResource( 2 )]
 self_modulate = Color( 0.7, 0.7, 0.7, 1 )
 position = Vector2( 64, 0 )
 roomName = "Mineshafts"
+roomID = "mining_taviroom"
+roomDescription = "Scary mineshafts
+
+This will be the room where you can talk with Tavi"
 roomColor = 8
 
 [node name="MiningShafts" parent="." index="2" instance=ExtResource( 2 )]
@@ -23,6 +29,7 @@ self_modulate = Color( 0.5, 0.5, 0.5, 1 )
 position = Vector2( 0, -64 )
 roomName = "Mineshafts"
 roomID = "mining_shafts_entering"
+roomDescription = "Scary mineshafts"
 roomSprite = 1
 roomColor = 7
 
