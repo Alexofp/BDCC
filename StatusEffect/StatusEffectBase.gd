@@ -3,7 +3,7 @@ class_name StatusEffectBase
 
 var id = "badstatuseffect"
 var isBattleOnly = false
-var character: BaseCharacter
+var character
 var turns = -1
 
 func _init():
@@ -12,7 +12,7 @@ func _init():
 func initArgs(_args = []):
 	pass
 
-func setCharacter(c: BaseCharacter):
+func setCharacter(c):
 	character = c
 	
 func processBattleTurn():

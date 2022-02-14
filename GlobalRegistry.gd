@@ -153,6 +153,9 @@ func registerCharacterFolder(folder: String):
 		printerr("An error occurred when trying to access the path "+folder)
 
 func getCharacter(id: String):
+	if(id == "pc"):
+		return GM.pc
+	
 	if(!characters.has(id)):
 		printerr("ERROR: character with the id "+id+" wasn't found")
 		return null
@@ -208,7 +211,7 @@ func registerStatusEffectFolder(folder: String):
 			else:
 				if(file_name.get_extension() == "gd"):
 					var full_path = folder.plus_file(file_name)
-					print("Registered status effect: " + full_path)
+					#print("Registered status effect: " + full_path)
 					registerStatusEffect(full_path)
 			file_name = dir.get_next()
 	else:

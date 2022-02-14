@@ -404,7 +404,9 @@ func _react(_action: String, _args):
 	if(_action == "obey"):
 		processTime(30*60)
 		GM.pc.orgasmFrom("tavi")
-		addMessage("((You will be dirty but I didn't implement that yet))")
+		GM.pc.cummedOnBy("tavi", BodilyFluids.FluidSource.Vagina)
+		processTime(0)
+		addMessage("Tavi came on you, covering your body with her female juices")
 	
 	if(_action == "fight"):
 		runScene("FightScene", ["tavi"], "tavifight")

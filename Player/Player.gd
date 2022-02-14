@@ -13,6 +13,10 @@ var pickedGender = Gender.Female
 var pronounsGender = null
 var pickedSpecies = ["feline"]
 
+# Messy stuff
+var bodyFluids = []
+var bodyMessiness = 0
+
 func _init():
 	initialDodgeChance = 0.05 # Player has a small chance to dodge anything
 
@@ -162,6 +166,11 @@ func updateNonBattleEffects():
 		addEffect(StatusEffect.Exhausted)
 	else:
 		removeEffect(StatusEffect.Exhausted)
+		
+	if(getOutsideMessinessLevel() > 0):
+		addEffect(StatusEffect.CoveredInCum)
+	else:
+		removeEffect(StatusEffect.CoveredInCum)
 
 func processBattleTurn():
 	.processBattleTurn()
@@ -262,6 +271,8 @@ func saveData():
 		"pickedGender": pickedGender,
 		"pronounsGender": pronounsGender,
 		"pickedSpecies": pickedSpecies,
+		"bodyMessiness": bodyMessiness,
+		"bodyFluids": bodyFluids,
 	}
 	
 #	data["legs"] = legs.id
@@ -296,6 +307,8 @@ func loadData(data):
 	pickedGender = SAVE.loadVar(data, "pickedGender", Gender.Female)
 	pronounsGender = SAVE.loadVar(data, "pronounsGender", null)
 	pickedSpecies = SAVE.loadVar(data, "pickedSpecies", ["human"])
+	bodyMessiness = SAVE.loadVar(data, "bodyMessiness", 0)
+	bodyFluids = SAVE.loadVar(data, "bodyFluids", [])
 	
 	resetSlots()
 	var loadedBodyparts = SAVE.loadVar(data, "bodyparts", {})
@@ -384,6 +397,39 @@ func afterEatingAtCanteen():
 
 func afterTakingAShower():
 	addStamina(30)
+	clearBodyFluids()
 
 func orgasmFrom(_characterID: String):
 	lust = 0
+
+func cummedOnBy(characterID, sourceType = null, howMessy: int = 1):	
+	var ch = GlobalRegistry.getCharacter(characterID)
+	if(sourceType == null):
+		if(ch.getGender() == BaseCharacter.Gender.Female):
+			sourceType = BodilyFluids.FluidSource.Vagina
+		else:
+			sourceType = BodilyFluids.FluidSource.Penis
+	
+	coverBodyWithFluid(characterID, ch.getFluidType(sourceType), howMessy)
+
+func coverBodyWithFluid(characterID, fluidType, howMuchLevels: int = 1):
+	bodyFluids.append([characterID, fluidType, howMuchLevels])
+	bodyMessiness += howMuchLevels
+	if(bodyMessiness < 0):
+		bodyMessiness = 0
+	if(bodyMessiness > BodilyFluids.MaxMessinessLevel):
+		bodyMessiness = BodilyFluids.MaxMessinessLevel
+	
+func clearBodyFluids():
+	bodyFluids.clear()
+	bodyMessiness = 0
+
+func getOutsideMessinessLevel():
+	return bodyMessiness
+
+func getOutsideMessinessFluidList():
+	var myfluids = []
+	for bodyFluidData in bodyFluids:
+		if(!myfluids.has(bodyFluidData[1])):
+			myfluids.append(bodyFluidData[1])
+	return myfluids

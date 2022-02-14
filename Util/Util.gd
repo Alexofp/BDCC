@@ -6,6 +6,29 @@ static func delete_children(node):
 		node.remove_child(n)
 		n.queue_free()
 
+# input ["a", "b", "c"]
+# output "a, b and c"
+static func humanReadableList(arr: Array):
+	var arrSize = arr.size()
+	if(arrSize == 0):
+		return ""
+	if(arrSize == 1):
+		return arr[0]
+	if(arrSize == 2):
+		return arr[0] + " and " + arr[1]
+	
+	var res = ""
+	for i in range(arrSize):
+		if(i == (arrSize - 1)):
+			res += " and "
+		
+		res += arr[i]
+		
+		if(i <= (arrSize - 3)):
+			res += ", "
+	return res
+
+
 # https://godotengine.org/qa/20058/elegant-way-to-create-string-from-array-items
 static func join(arr: Array, separator: String = "") -> String:
 	var output = ""

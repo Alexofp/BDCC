@@ -486,3 +486,11 @@ func getBodypartTooltipName(_bodypartSlot):
 
 func getBodypartTooltipInfo(_bodypartSlot):
 	return "error"
+
+func getFluidType(fluidSource):
+	if(fluidSource == BodilyFluids.FluidSource.Penis):
+		return BodilyFluids.FluidType.Cum
+	if(fluidSource == BodilyFluids.FluidSource.Vagina):
+		return BodilyFluids.FluidType.GirlCum
+		
+	return null

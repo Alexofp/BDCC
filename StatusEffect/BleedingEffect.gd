@@ -17,7 +17,7 @@ func processBattleTurn():
 	if(turns <= 0):
 		stop()
 	
-func processTime(_minutesPassed: int):
+func processTime(_secondsPassed: int):
 	pass
 
 func getEffectName():
