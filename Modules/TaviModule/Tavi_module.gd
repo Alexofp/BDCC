@@ -9,10 +9,11 @@ func _init():
 	
 	scenes = [
 		"res://Modules/TaviModule/TaviFirstEncounterScene.gd",
+		"res://Modules/TaviModule/TaviTalkScene.gd",
 		]
 	characters = []
 	items = []
 	events = [
-		"res://Modules/TaviModule/TestEvent2.gd",
+		"res://Modules/TaviModule/TaviTalkEvent.gd",
 		"res://Modules/TaviModule/TaviFirstEncounterEvent.gd",
 	]

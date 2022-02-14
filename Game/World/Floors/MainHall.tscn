@@ -82,6 +82,7 @@ roomDescription = "You stand on the stairs that lead up to the main platform"
 [node name="MainHallRoom52" parent="." index="10" instance=ExtResource( 2 )]
 position = Vector2( -64, 256 )
 roomName = "Main platform"
+roomID = "main_bench3"
 roomDescription = "Has some benches to relax and watch the inmates being punished"
 canWest = false
 canSouth = false
@@ -94,6 +95,7 @@ roomDescription = "You stand on the stairs that lead up to the main platform"
 [node name="MainHallRoom54" parent="." index="12" instance=ExtResource( 2 )]
 position = Vector2( 64, 256 )
 roomName = "Main platform"
+roomID = "main_bench4"
 roomDescription = "Has some benches to relax and watch the inmates being punished"
 canEast = false
 canSouth = false
@@ -101,6 +103,7 @@ canSouth = false
 [node name="MainHallRoom12" parent="." index="13" instance=ExtResource( 2 )]
 position = Vector2( -64, 128 )
 roomName = "Main platform"
+roomID = "main_bench1"
 roomDescription = "Has some benches to relax and watch the inmates being punished"
 canWest = false
 canNorth = false
@@ -108,9 +111,11 @@ canNorth = false
 [node name="MainHallRoom49" parent="." index="14" instance=ExtResource( 2 )]
 position = Vector2( 64, 128 )
 roomName = "Main platform"
+roomID = "main_bench2"
 roomDescription = "Has some benches to relax and watch the inmates being punished"
 canNorth = false
 canEast = false
+roomSprite = 1
 
 [node name="MainHallRoom27" parent="." index="15" instance=ExtResource( 2 )]
 position = Vector2( 0, 384 )

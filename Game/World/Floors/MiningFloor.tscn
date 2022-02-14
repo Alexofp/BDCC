@@ -19,9 +19,7 @@ self_modulate = Color( 0.7, 0.7, 0.7, 1 )
 position = Vector2( 64, 0 )
 roomName = "Mineshafts"
 roomID = "mining_taviroom"
-roomDescription = "Scary mineshafts
-
-This will be the room where you can talk with Tavi"
+roomDescription = "Scary mineshafts"
 roomColor = 8
 
 [node name="MiningShafts" parent="." index="2" instance=ExtResource( 2 )]

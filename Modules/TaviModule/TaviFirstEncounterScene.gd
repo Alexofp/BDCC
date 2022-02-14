@@ -122,6 +122,8 @@ func _run():
 		addButton("Push away", "What she thinks she is doing", "push_away")
 
 	if(state == "kneel"):
+		GM.pc.playAnimation(TheStage.Kneeling)
+		
 		saynn("You feel her firm grasp and decide to comply. Without much resistance, you lower yourself and get on your knees before the tall cat. She can’t help but to smile and give you a few headpats.")
 
 		if(GM.pc.getGender() == BaseCharacter.Gender.Female):
@@ -157,6 +159,8 @@ func _run():
 		addButton("Push", "Fight the pain and try to overpower her. You will probably have to fight her.", "push")
 
 	if(state == "submit"):
+		GM.pc.playAnimation(TheStage.Kneeling)
+		
 		saynn("The pain is too much so you decide to comply. You raise your hands up and cease resisting.")
 
 		saynn("[say=pc]Alright, alright.. fuck..[/say]")
@@ -245,6 +249,8 @@ func _run():
 		addDisabledButton("Fuck Tavi", "Not done yet")
 
 	if(state == "submit2"):
+		GM.pc.playAnimation(TheStage.Kneeling)
+		
 		saynn("You crouch before Tavi and help her to get up. You swipe the dirt from her uniform and step away, tilting your head down, looking kinda sad after what you did.")
 
 		saynn("[say=tavi]What are you doing? You managed to beat me up, what else do you want?[/say]")

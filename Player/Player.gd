@@ -400,7 +400,7 @@ func afterTakingAShower():
 	clearBodyFluids()
 
 func orgasmFrom(_characterID: String):
-	lust = 0
+	addLust(-lust)
 
 func cummedOnBy(characterID, sourceType = null, howMessy: int = 1):	
 	var ch = GlobalRegistry.getCharacter(characterID)

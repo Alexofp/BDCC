@@ -51,6 +51,7 @@ func _ready():
 	registerQuestFolder("res://Quests/Quest/")
 	
 	registerModule("res://Modules/TaviModule/Tavi_module.gd")
+	registerModule("res://Modules/RahiModule/Rahi_module.gd")
 	
 # The point is that it will still generate unique ids even after saving/loading
 func generateUniqueID():
