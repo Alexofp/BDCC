@@ -29,8 +29,8 @@ func getEffectDesc():
 func getEffectImage():
 	return "res://UI/StatusEffectsPanel/images/bleeding.png"
 
-func getEffectVisibleType():
-	return StatusEffectsPanel.EffectType.Red
+func getIconColor():
+	return IconColorRed
 
 func combine(_args = []):
 	if(_args.size() > 0):

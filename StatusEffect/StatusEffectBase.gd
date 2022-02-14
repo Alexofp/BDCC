@@ -6,6 +6,13 @@ var isBattleOnly = false
 var character
 var turns = -1
 
+const IconColorRed = Color(0.7, 0.1, 0.1)
+const IconColorGreen = Color(0.1, 0.7, 0.1)
+const IconColorPurple = Color("#421C52")
+const IconColorBlue = Color(0.207843, 0.227451, 0.556863)
+const IconColorWhite = Color.white
+const IconColorGray = Color.gray
+
 func _init():
 	pass
 	
@@ -30,8 +37,8 @@ func getEffectDesc():
 func getEffectImage():
 	return null
 
-func getEffectVisibleType():
-	return StatusEffectsPanel.EffectType.Normal
+func getIconColor():
+	return IconColorBlue
 
 func combine(_newArgs = []):
 	pass

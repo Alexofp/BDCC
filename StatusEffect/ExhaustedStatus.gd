@@ -22,8 +22,8 @@ func getEffectDesc():
 func getEffectImage():
 	return null
 
-func getEffectVisibleType():
-	return StatusEffectsPanel.EffectType.Red
+func getIconColor():
+	return IconColorRed
 
 func combine(_args = []):
 	pass

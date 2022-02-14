@@ -13,8 +13,8 @@ func getEffectDesc():
 func getEffectImage():
 	return null
 
-func getEffectVisibleType():
-	return StatusEffectsPanel.EffectType.Normal
+func getIconColor():
+	return IconColorBlue
 
 func getDodgeMod(_damageType):
 	if(_damageType == DamageType.Physical):

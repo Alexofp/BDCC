@@ -9,11 +9,6 @@ func initArgs(_args = []):
 	
 func processBattleTurn():
 	pass
-#	character.addPain(3)
-	
-#	turns -= 1
-#	if(turns <= 0):
-#		stop()
 	
 func processTime(_secondsPassed: int):
 	pass
@@ -64,16 +59,8 @@ func getRecievedDamageMod(_damageType):
 func getEffectImage():
 	return "res://UI/StatusEffectsPanel/images/mess.png"
 
-func getEffectVisibleType():
-	return StatusEffectsPanel.EffectType.Purple
+func getIconColor():
+	return IconColorPurple
 
 func combine(_args = []):
 	pass
-
-#func saveData():
-#	return {
-#		"turns": turns,
-#	}
-#
-#func loadData(_data):
-#	turns = SAVE.loadVar(_data, "turns", 3)

@@ -130,7 +130,7 @@ func updateEffectPanel(panel: StatusEffectsPanel):
 	panel.clearBattleEffects()
 	for effectID in statusEffects.keys():
 		var effect = statusEffects[effectID]
-		panel.addBattleEffect(effect.getEffectVisibleType(), effect.getEffectName(), effect.getEffectDesc(), effect.getEffectImage())
+		panel.addBattleEffect(effect.getIconColor(), effect.getEffectName(), effect.getEffectDesc(), effect.getEffectImage())
 
 func processBattleTurn():
 	for effectID in statusEffects.keys():
