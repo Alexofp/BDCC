@@ -1,6 +1,9 @@
 extends Module
 class_name RahiModule
 
+const Rahi_Introduced = "Rahi_Introduced"
+const Rahi_AskedName = "Rahi_AskedName"
+
 func _init():
 	id = "RahiModule"
 	author = "Rahi"

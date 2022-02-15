@@ -295,11 +295,11 @@ func _react(_action: String, _args):
 	if(_action == "aftershower"):
 		processTime(10 * 60)
 		
-		var uniform = GlobalRegistry.createItem("inmateuniform_general")
+		#var uniform = GlobalRegistry.createItem("inmateuniform_general")
 		
-		uniform.setPrisonerNumber("P-12054")
+		#uniform.setPrisonerNumber("P-12054")
 		
-		GM.pc.getInventory().equipItem(uniform)
+		#GM.pc.getInventory().equipItem(uniform)
 		
 		addMessage("You're wearing an inmate uniform now")
 		

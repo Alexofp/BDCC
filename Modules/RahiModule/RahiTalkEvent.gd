@@ -13,8 +13,11 @@ func run():
 	pass
 	
 func delayedRun():
-	saynn("You see Rahi sitting on a bench")
-	addButton("Rahi", "Talk to Rahi", "talk")
+	if(!GM.main.getFlag(RahiModule.Rahi_Introduced)):
+		saynn("You see some unknown feline sitting on a bench")
+	else:
+		saynn("You see the Kitty sitting on a bench")
+	addButton("Rahi", "Talk to the feline", "talk")
 
 func shouldInterupt():
 	return false

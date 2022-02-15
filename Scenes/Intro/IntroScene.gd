@@ -7,6 +7,13 @@ var pickedFirstSpeciesHybrid = ""
 func _init():
 	sceneID = "IntroScene"
 
+func _initScene(_args = []):
+		var uniform = GlobalRegistry.createItem("inmateuniform_general")
+		
+		uniform.setPrisonerNumber("P-12054")
+		
+		GM.pc.getInventory().equipItem(uniform)
+
 func _run():
 	if(state == ""):
 		GM.world.aimCamera("intro_corridor")
