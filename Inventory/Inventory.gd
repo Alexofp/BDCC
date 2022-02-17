@@ -12,6 +12,14 @@ func _ready():
 func addItem(item: Node):
 	if(item.get_parent() != null):
 		assert(false)
+	
+	if(item.canCombine()):
+		for myitem in items:
+			if(myitem.id == item.id):
+				if(myitem.tryCombine(item)):
+					item.queue_free()
+					return
+		
 	items.append(item)
 	add_child(item)
 
@@ -68,6 +76,27 @@ func removeItem(item):
 		remove_child(item)
 		return item
 	return null
+
+func removeXFromItemOrDelete(item, amount):
+	assert(items.has(item))
+	
+	item.removeXOrDestroy(amount)
+
+func hasXOf(itemID, amount):
+	var item = getFirstOf(itemID)
+	if(item == null):
+		return false
+	if(item.amount >= amount):
+		return true
+	else:
+		return false
+
+func removeXOfOrDestroy(itemID, amount):
+	var item = getFirstOf(itemID)
+	if(item == null):
+		return
+	
+	item.removeXOrDestroy(amount)
 
 func getAllCombatUsableItems():
 	var result = []

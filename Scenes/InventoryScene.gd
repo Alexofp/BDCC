@@ -23,7 +23,7 @@ func _run():
 		var items = GM.pc.getInventory().getAllItems()
 		var itemNames = []
 		for item in items:
-			itemNames.append(item.getVisibleName())
+			itemNames.append(item.getStackName())
 		say("Your items:\n")
 		say(Util.join(itemNames, ", "))
 		
@@ -79,7 +79,7 @@ func _run():
 		
 		var items = GM.pc.getInventory().getAllItems()
 		for item in items:
-			addButton(item.getVisibleName(), item.getVisisbleDescription(), "lookat", [item.getUniqueID()])
+			addButton(item.getStackName(), item.getVisisbleDescription(), "lookat", [item.getUniqueID()])
 		
 		addButton("Back", "Go back", "")
 
@@ -88,7 +88,7 @@ func _run():
 		var item: ItemBase = GM.pc.getInventory().getItemByUniqueID(savedItemUniqueID)
 		assert(item != null)
 		
-		saynn("What do you wanna do with "+item.getVisibleName())
+		saynn("What do you wanna do with "+item.getStackName())
 		
 		for action in item.getPossibleActions():
 			addButton(action["name"], action["description"], "doitemaction", [action["scene"]])

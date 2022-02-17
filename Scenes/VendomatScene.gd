@@ -45,7 +45,7 @@ func _run():
 		
 		for item in GM.pc.getInventory().getItems():
 			if(item.canSell()):
-				addButton(item.getVisibleName(), str(item.getSellPrice()) + " credits\n" + item.getVisisbleDescription(), "sell", [item])
+				addButton(item.getStackName(), str(item.getSellPrice()) + " credits\n" + item.getVisisbleDescription(), "sell", [item])
 		
 		addButton("Back", "Don't sell anything", "")
 		
@@ -65,11 +65,9 @@ func _react(_action: String, _args):
 		var item = _args[0]
 		
 		GM.pc.addCredits(item.getSellPrice())
-		GM.pc.getInventory().removeItem(item)
+		GM.pc.getInventory().removeXFromItemOrDelete(item, 1)
 		
-		addMessage(""+item.getVisibleName()+" was sold for "+str(item.getSellPrice()) + " credits")
-		
-		item.queue_free()
+		addMessage("1x"+item.getVisibleName()+" was sold for "+str(item.getSellPrice()) + " credits")
 		
 		setState("")
 		return

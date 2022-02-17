@@ -3,6 +3,7 @@ class_name ItemBase
 
 var id = "baditem"
 var uniqueID = null
+var amount = 1
 
 func _init():
 	pass
@@ -14,6 +15,12 @@ func _ready():
 
 func getVisibleName():
 	return "Bad item"
+
+func getStackName():
+	if(amount > 1):
+		return ""+str(amount)+"x"+getVisibleName()
+	else:
+		return getVisibleName()
 
 func getDescription():
 	return "No description provided, please let the developer know"
@@ -37,8 +44,9 @@ func getUniqueID():
 func canCombine():
 	return false
 	
-func combine(_otherItem):
-	pass
+func tryCombine(_otherItem):
+	amount += _otherItem.amount
+	return true
 
 func canUseInCombat():
 	return false
@@ -54,17 +62,30 @@ func destroyMe():
 	get_parent().removeItem(self)
 	queue_free()
 
+func removeXOrDestroy(remamount):
+	amount -= remamount
+	
+	if(amount <= 0):
+		destroyMe()
+
+func setAmount(newamount):
+	if(newamount > 1):
+		assert(canCombine())
+	amount = newamount
+
 func getPossibleActions():
 	return [
 	]
 	
 func saveData():
 	var data = {}
+	
+	data["amount"] = amount
 
 	return data
 	
 func loadData(_data):
-	pass
+	amount = SAVE.loadVar(_data, "amount", 1)
 
 func getClothingSlot():
 	return null
@@ -88,6 +109,12 @@ func getPrice():
 
 func getSellPrice():
 	return int(getPrice() / 2.0)
+
+func getStackPrice():
+	return int(getPrice() * amount)
+
+func getStackSellPrice():
+	return int(getSellPrice() * amount)
 
 func canSell():
 	return false
