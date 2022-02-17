@@ -255,6 +255,7 @@ roomDescription = "You see some greenhouses. This is where all the apples, eggpl
 The greenhouses are marked as [color=red]off-limits[/color] for inmates"
 roomColor = 1
 gridColor = 2
+loctag_Greenhouses = true
 
 [node name="MainGreenhouses2" parent="." index="33" instance=ExtResource( 2 )]
 self_modulate = Color( 0.7, 1, 0.7, 1 )
@@ -265,6 +266,7 @@ roomDescription = "You see some greenhouses. This is where all the apples, eggpl
 The greenhouses are marked as [color=red]off-limits[/color] for inmates"
 roomColor = 1
 gridColor = 2
+loctag_Greenhouses = true
 
 [node name="MainGreenhouses3" parent="." index="34" instance=ExtResource( 2 )]
 self_modulate = Color( 0.7, 1, 0.7, 1 )
@@ -275,6 +277,7 @@ roomDescription = "You see some greenhouses. This is where all the apples, eggpl
 The greenhouses are marked as [color=red]off-limits[/color] for inmates"
 roomColor = 1
 gridColor = 2
+loctag_Greenhouses = true
 
 [node name="MainGreenhouses4" parent="." index="35" instance=ExtResource( 2 )]
 self_modulate = Color( 0.7, 1, 0.7, 1 )
@@ -285,6 +288,7 @@ roomDescription = "You see some greenhouses. This is where all the apples, eggpl
 The greenhouses are marked as [color=red]off-limits[/color] for inmates"
 roomColor = 1
 gridColor = 2
+loctag_Greenhouses = true
 
 [node name="MainGreenhouses5" parent="." index="36" instance=ExtResource( 2 )]
 self_modulate = Color( 0.7, 1, 0.7, 1 )
@@ -299,6 +303,7 @@ You see a few crates with fruits and vegetables here"
 roomSprite = 4
 roomColor = 1
 gridColor = 2
+loctag_Greenhouses = true
 
 [node name="MainGreenhouses6" parent="." index="37" instance=ExtResource( 2 )]
 self_modulate = Color( 0.7, 1, 0.7, 1 )
@@ -309,6 +314,7 @@ roomDescription = "You see some greenhouses. This is where all the apples, eggpl
 The greenhouses are marked as [color=red]off-limits[/color] for inmates"
 roomColor = 1
 gridColor = 2
+loctag_Greenhouses = true
 
 [node name="MainHallRoom32" parent="." index="38" instance=ExtResource( 2 )]
 self_modulate = Color( 0.7, 1, 0.7, 1 )

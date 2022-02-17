@@ -44,6 +44,9 @@ onready var gridSprite = $Grid
 signal onEnter(room)
 signal onReact(room, key)
 
+# Room tags
+export(bool) var loctag_Greenhouses = false
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	if(Engine.editor_hint):
@@ -153,3 +156,15 @@ func onGridChangeColor(newvalue):
 		$Grid.visible = true
 	
 	$Grid.self_modulate = RoomColorToColor[gridColor]
+
+# https://github.com/godotengine/godot/issues/43491
+# This function should just start working after the issue is fixed
+func _get_property_list():
+	var properties = []
+	properties.append({
+			name = "Location Tags",
+			type = TYPE_NIL,
+			hint_string = "loctag_",
+			usage = PROPERTY_USAGE_GROUP | PROPERTY_USAGE_SCRIPT_VARIABLE
+	})
+	return properties

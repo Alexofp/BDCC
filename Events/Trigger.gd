@@ -7,4 +7,5 @@ enum {
 	EatingInCanteen,
 	WorkingInMines,
 	WakeUpInCell,
+	CaughtOffLimits,
 }

@@ -4,17 +4,18 @@ func _init():
 	id = "testEvent"
 
 func registerTriggers(es):
-	es.addTrigger(self, Trigger.EnteringRoom, "hall_mainentrance")
-	es.addTrigger(self, Trigger.EatingInCanteen)
+	#es.addTrigger(self, Trigger.EnteringRoom, "hall_mainentrance")
+	es.addTrigger(self, Trigger.CaughtOffLimits)
 
 func shouldRun():
-	return false
+	return true
 
 func run():
 	GM.pc.addLust(-100)
 	GM.pc.addLust(69)
 	
-	#runScene("FightScene", ["risha"], "rishafight")
+	runScene("FightScene", ["risha"], "rishafight")
+	return true
 	
 func delayedRun():
 	saynn("HeckHECKHECK")

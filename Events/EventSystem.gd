@@ -4,6 +4,7 @@ class_name EventSystem
 var events = {}
 var delayedEvents = []
 var enteringRoomEvents = {}
+var enteringAnyRoomEvents = []
 
 class MyCustomSorter:
 	static func sort_descending(a, b):
@@ -31,9 +32,12 @@ func addTrigger(event, triggerType, args = null):
 	events[triggerType].append([event, args])
 	
 	if(triggerType == Trigger.EnteringRoom):
-		if(!enteringRoomEvents.has(args)):
-			enteringRoomEvents[args] = []
-		enteringRoomEvents[args].append([event, args])
+		if(args != null):
+			if(!enteringRoomEvents.has(args)):
+				enteringRoomEvents[args] = []
+			enteringRoomEvents[args].append([event, args])
+		else:
+			enteringAnyRoomEvents.append([event, args])
 
 
 func trigger(_triggerType, _args = null, onlyDelayed = false):
@@ -44,26 +48,30 @@ func trigger(_triggerType, _args = null, onlyDelayed = false):
 	
 	# Little optimization so we don't go through the whole list of events each time we enter a new room
 	if(_triggerType == Trigger.EnteringRoom):
-		if(!enteringRoomEvents.has(_args)):
-			return false
-		
-		usefulEvents = enteringRoomEvents[_args]
+		usefulEvents = enteringAnyRoomEvents.duplicate()
+		if(enteringRoomEvents.has(_args)):
+			usefulEvents.append_array(enteringRoomEvents[_args])
+		usefulEvents.sort_custom(MyCustomSorter, "sort_descending")
+	
+	if(_triggerType == Trigger.CaughtOffLimits):
+		usefulEvents.shuffle()
 	
 	for eventData in usefulEvents:
 		var event = eventData[0]
 		var _eventArg = eventData[1]
 		
 		if(_triggerType == Trigger.EnteringRoom):
-			if(_args != _eventArg):
+			if(_args != _eventArg && _eventArg != null):
 				continue
 		
 		if(!event.shouldRun()):
 			continue
-		
-		if(!onlyDelayed):
-			event.run()
+			
 		if(!delayedEvents.has(event.id)):
 			delayedEvents.append(event.id)
+		if(!onlyDelayed):
+			if(event.run()):
+				return true
 		if(event.shouldInterupt()):
 			return true
 	return false

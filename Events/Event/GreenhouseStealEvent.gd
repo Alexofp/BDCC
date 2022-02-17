@@ -11,7 +11,7 @@ func run():
 	#runScene("FightScene", ["risha"], "rishafight")
 	
 func delayedRun():
-	addButton("Steal an apple", "Steal an apple from the crates", "steal_apple")
+	addButton("Steal", "Try and steal something", "steal_apple")
 
 func shouldInterupt():
 	return false
@@ -21,9 +21,8 @@ func getPriority():
 
 func onButton(_method, _args):
 	if(_method == "steal_apple"):
-		GM.pc.getInventory().addItem(GlobalRegistry.createItem("appleitem"))
-		GM.main.addMessage("You stole an apple")
-		GM.main.reRun()
+#		GM.pc.getInventory().addItem(GlobalRegistry.createItem("appleitem"))
+#		GM.main.addMessage("You stole an apple")
+#		GM.main.reRun()
+		runScene("StealingFromGreenhouseScene")
 		
-	#if(_method == "not_first_time"):
-	#	runScene("WorkInMinesScene")

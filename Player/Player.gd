@@ -89,6 +89,9 @@ func setLocation(newRoomID:String):
 	#	GM.ui.setLocationName(roomName)
 	emit_signal("location_changed", newRoomID)
 	
+func getLocation():
+	return location
+	
 func getName() -> String:
 	return gamename
 	
@@ -433,3 +436,6 @@ func getOutsideMessinessFluidList():
 		if(!myfluids.has(bodyFluidData[1])):
 			myfluids.append(bodyFluidData[1])
 	return myfluids
+
+func getExposureFactor():
+	return 1.0
