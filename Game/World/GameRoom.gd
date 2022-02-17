@@ -11,10 +11,11 @@ export(bool) var canNorth = true
 export(bool) var canEast = true
 export(bool) var canSouth = true
 
-enum RoomSprite { NONE, PERSON, CANTEEN, STAIRS }
+enum RoomSprite { NONE, PERSON, CANTEEN, STAIRS, IMPORTANT, COMPUTER, VENDOMAT }
 export(RoomSprite) var roomSprite = RoomSprite.NONE
 enum RoomColor { White, Green, Red, Blue, Pink, Orange, Yellow, Grey, LightGrey }
 export(RoomColor) var roomColor = RoomColor.White setget onRoomChangeColor
+export(RoomColor) var gridColor = RoomColor.White setget onGridChangeColor
 const RoomColorToColor = {
 	RoomColor.White : Color.white,
 	RoomColor.Green : Color(0.7, 1.0, 0.7),
@@ -32,9 +33,13 @@ const sprites = {
 	RoomSprite.PERSON: preload("res://Game/World/sprites/person.png"),
 	RoomSprite.CANTEEN: preload("res://Game/World/sprites/canteen.png"),
 	RoomSprite.STAIRS: preload("res://Game/World/sprites/stairs.png"),
+	RoomSprite.IMPORTANT: preload("res://Game/World/sprites/important.png"),
+	RoomSprite.COMPUTER: preload("res://Game/World/sprites/computer.png"),
+	RoomSprite.VENDOMAT: preload("res://Game/World/sprites/vendomat.png"),
 }
 
 onready var roomSpriteObject = $Sprite
+onready var gridSprite = $Grid
 
 signal onEnter(room)
 signal onReact(room, key)
@@ -139,3 +144,12 @@ func onRoomChangeColor(newvalue):
 	
 	self_modulate = RoomColorToColor[roomColor]
 
+func onGridChangeColor(newvalue):
+	gridColor = newvalue
+	
+	if(newvalue == RoomColor.White):
+		$Grid.visible = false
+	else:
+		$Grid.visible = true
+	
+	$Grid.self_modulate = RoomColorToColor[gridColor]

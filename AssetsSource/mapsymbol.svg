@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="32"
+   height="32"
+   viewBox="0 0 8.4666665 8.4666669"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.1 (c68e22c387, 2021-05-23)"
+   sodipodi:docname="mapsymbol.svg"
+   inkscape:export-filename="E:\godot\projects\LewdGame\AssetsSource\important.png"
+   inkscape:export-xdpi="191.99998"
+   inkscape:export-ydpi="191.99998"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:document-units="mm"
+     showgrid="true"
+     units="px"
+     inkscape:zoom="2.8021494"
+     inkscape:cx="87.968186"
+     inkscape:cy="32.118202"
+     inkscape:window-width="1920"
+     inkscape:window-height="1018"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1">
+    <inkscape:grid
+       type="xygrid"
+       id="grid824"
+       empspacing="8" />
+  </sodipodi:namedview>
+  <defs
+     id="defs2">
+    <pattern
+       inkscape:collect="always"
+       xlink:href="#Strips1_1"
+       id="pattern2919"
+       patternTransform="matrix(0.39687496,0.39687496,-5.8208332,5.8208334,50.8,-5.3955033e-8)" />
+    <pattern
+       inkscape:collect="always"
+       patternUnits="userSpaceOnUse"
+       width="2"
+       height="1"
+       patternTransform="translate(0,0) scale(10,10)"
+       id="Strips1_1"
+       inkscape:stockid="Stripes 1:1"
+       inkscape:isstock="true">
+      <rect
+         style="fill:black;stroke:none"
+         x="0"
+         y="-0.5"
+         width="1"
+         height="2"
+         id="rect1842" />
+    </pattern>
+  </defs>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       style="fill:#dbe7fc;fill-opacity:1;stroke:#1a2550;stroke-width:0.529167;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect848"
+       width="7.9375"
+       height="7.9375"
+       x="34.131248"
+       y="0.2645832"
+       ry="1.0583334" />
+    <g
+       id="g8894"
+       inkscape:export-filename="E:\godot\myassets\world\person.png"
+       inkscape:export-xdpi="192"
+       inkscape:export-ydpi="192"
+       style="fill:#6995c7;fill-opacity:1"
+       transform="translate(33.866666)">
+      <circle
+         style="fill:#6995c7;fill-opacity:1;stroke:#1a2550;stroke-width:0.529167;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         id="path845"
+         cx="4.2333331"
+         cy="2.9104166"
+         r="1.8520833" />
+      <rect
+         style="fill:#6995c7;fill-opacity:1;stroke:#1a2550;stroke-width:0.529167;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         id="rect7552"
+         width="6.3499999"
+         height="1.8520833"
+         x="1.0583333"
+         y="5.5562501"
+         ry="0.52916658" />
+    </g>
+    <rect
+       style="fill:#dbe7fc;fill-opacity:1;stroke:#1a2550;stroke-width:0.529167;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect8890"
+       width="7.9375"
+       height="7.9375"
+       x="25.664583"
+       y="0.2645832"
+       ry="1.0583334"
+       inkscape:export-filename="E:\godot\myassets\world\room.png"
+       inkscape:export-xdpi="191.99998"
+       inkscape:export-ydpi="191.99998" />
+    <rect
+       style="fill:#dbe7fc;fill-opacity:1;stroke:#1a2550;stroke-width:0.529167;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect8890-5"
+       width="7.9375"
+       height="7.9375"
+       x="17.197916"
+       y="0.2645832"
+       ry="1.0583334"
+       inkscape:export-filename="E:\godot\myassets\world\room.png"
+       inkscape:export-xdpi="191.99998"
+       inkscape:export-ydpi="191.99998" />
+    <rect
+       style="fill:#dbe7fc;fill-opacity:1;stroke:#1a2550;stroke-width:0.529167;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect8890-5-4"
+       width="7.9375"
+       height="7.9375"
+       x="8.7312508"
+       y="0.2645832"
+       ry="1.0583334"
+       inkscape:export-filename="E:\godot\myassets\world\room.png"
+       inkscape:export-xdpi="191.99998"
+       inkscape:export-ydpi="191.99998" />
+    <rect
+       style="fill:#dbe7fc;fill-opacity:1;stroke:#1a2550;stroke-width:0.529167;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect8890-5-4-0"
+       width="7.9375"
+       height="7.9375"
+       x="0.26458144"
+       y="0.2645832"
+       ry="1.0583334"
+       inkscape:export-filename="E:\godot\myassets\world\room.png"
+       inkscape:export-xdpi="191.99998"
+       inkscape:export-ydpi="191.99998" />
+    <rect
+       style="fill:url(#pattern2919);fill-opacity:1;stroke:none;stroke-width:0.529167;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect8890-4"
+       width="7.4083333"
+       height="7.4083333"
+       x="34.395832"
+       y="0.52916658"
+       ry="0.79375005"
+       inkscape:export-filename="E:\godot\myassets\world\room.png"
+       inkscape:export-xdpi="191.99998"
+       inkscape:export-ydpi="191.99998" />
+    <rect
+       style="fill:#dbe7fc;fill-opacity:1;stroke:#1a2550;stroke-width:0.529167;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect8896"
+       width="7.9375"
+       height="7.9375"
+       x="42.597916"
+       y="0.2645832"
+       ry="1.0583333" />
+    <g
+       id="g18980"
+       inkscape:export-filename="E:\godot\myassets\world\stairs.png"
+       inkscape:export-xdpi="192"
+       inkscape:export-ydpi="192"
+       style="fill:#6995c7;fill-opacity:1"
+       transform="translate(33.866666)">
+      <path
+         style="fill:#6995c7;fill-opacity:1;stroke:none;stroke-width:0.529167;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         d="M 9.5249999,7.4083332 V 5.2916666 H 11.641667 V 3.175 h 2.116666 V 1.0583333 H 15.875 v 6.35 z"
+         id="path9046" />
+      <path
+         style="fill:#6995c7;fill-opacity:1;stroke:#1a2550;stroke-width:0.529167;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         d="M 9.5249999,7.4083332 V 5.2916666 H 11.641667 V 3.175 h 2.116666 V 1.0583333 H 15.875"
+         id="path8931" />
+    </g>
+    <rect
+       style="fill:#dbe7fc;fill-opacity:1;stroke:#1a2550;stroke-width:0.529167;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect10585"
+       width="7.9375"
+       height="7.9375"
+       x="51.064583"
+       y="0.2645832"
+       ry="1.0583334" />
+    <g
+       id="g18976"
+       inkscape:export-filename="E:\godot\myassets\world\canteen.png"
+       inkscape:export-xdpi="192"
+       inkscape:export-ydpi="192"
+       style="fill:#6995c7;fill-opacity:1"
+       transform="translate(33.866666)">
+      <path
+         style="fill:#6995c7;fill-opacity:1;stroke:#1a2550;stroke-width:0.79375;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         d="m 19.579167,3.7041666 -0.264583,2.9104167 c 0,0.79375 0.79375,0.79375 0.79375,0 L 19.84375,3.7041666 c 0.529167,10e-8 0.529167,-0.7937499 0.529167,-1.8520832 0,0 0,-0.5291667 -0.264583,-0.5291667 0,1.8520833 -0.264584,1.8520833 -0.264584,0 h -0.264583 c 0,1.8520833 -0.264583,1.8520833 -0.264583,0 -0.264584,0 -0.264584,0.5291667 -0.264584,0.5291667 0,1.0583333 0,1.8520833 0.529167,1.8520832 z"
+         id="path18914"
+         sodipodi:nodetypes="ccccccccccc" />
+      <path
+         style="fill:#6995c7;fill-opacity:1;stroke:none;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 19.579167,3.7041666 -0.264583,2.9104167 c 0,0.79375 0.79375,0.79375 0.79375,0 L 19.84375,3.7041666 c 0.529167,10e-8 0.529167,-0.7937499 0.529167,-1.8520832 0,0 0,-0.5291667 -0.264583,-0.5291667 0,1.8520833 -0.264584,1.8520833 -0.264584,0 h -0.264583 c 0,1.8520833 -0.264583,1.8520833 -0.264583,0 -0.264584,0 -0.264584,0.5291667 -0.264584,0.5291667 0,1.0583333 0,1.8520833 0.529167,1.8520832 z"
+         id="path10634"
+         sodipodi:nodetypes="ccccccccccc" />
+      <path
+         style="fill:#6995c7;fill-opacity:1;stroke:#1a2550;stroke-width:0.79375;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         d="m 23.01875,1.3229167 c 0,1.1362004 0,2.1791608 0,3.1750001 v 2.1166665 c 0,0.7937501 -0.79375,0.7937501 -0.79375,1e-7 l 0.264584,-2.1166666 c -0.65416,-0.1928572 -0.05764,-2.9203047 0.264582,-3.1750001 z"
+         id="path18916"
+         sodipodi:nodetypes="ccccccc" />
+      <path
+         style="fill:#6995c7;fill-opacity:1;stroke:none;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 23.01875,1.3229167 c 0,1.1362004 0,2.1791608 0,3.1750001 v 2.1166665 c 0,0.7937501 -0.79375,0.7937501 -0.79375,1e-7 l 0.264584,-2.1166666 c -0.65416,-0.1928572 -0.05764,-2.9203047 0.264582,-3.1750001 z"
+         id="path15077"
+         sodipodi:nodetypes="ccccccc" />
+    </g>
+    <rect
+       style="fill:#376686;fill-opacity:1;stroke:#1a2550;stroke-width:0.529167;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect19064"
+       width="6.3499999"
+       height="1.0583334"
+       x="26.458334"
+       y="3.7041664"
+       ry="0.26458332"
+       inkscape:export-filename="E:\godot\myassets\world\connection.png"
+       inkscape:export-xdpi="192"
+       inkscape:export-ydpi="192" />
+    <g
+       id="g24541"
+       transform="translate(16.933332)">
+      <path
+         style="fill:#6995c7;fill-opacity:1;stroke:#1a2550;stroke-width:0.529167;stroke-linecap:round;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         d="m 3.1750005,1.3229167 0.529166,3.96875 h 1.058334 l 0.529166,-3.96875 z"
+         id="path3230"
+         sodipodi:nodetypes="ccccc" />
+      <g
+         id="g24536">
+        <path
+           style="fill:#6995c7;fill-opacity:1;stroke:#1a2550;stroke-width:0.529167;stroke-linecap:butt;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           d="m 3.7041665,6.0854166 v 1.0583333 h 1.058334 V 6.0854166 Z"
+           id="path5032"
+           sodipodi:nodetypes="ccccc" />
+      </g>
+    </g>
+    <g
+       id="g24533">
+      <rect
+         style="fill:#6995c7;fill-opacity:1;stroke:#1a2550;stroke-width:0.529167;stroke-linecap:round;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         id="rect14121"
+         width="4.2333331"
+         height="5.5562501"
+         x="10.583336"
+         y="1.3229166"
+         ry="0.25255683" />
+      <rect
+         style="fill:#376686;fill-opacity:1;stroke:#1a2550;stroke-width:0.529167;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         id="rect14225"
+         width="0.26458395"
+         height="0.26458332"
+         x="11.377085"
+         y="6.8791666"
+         ry="0" />
+      <rect
+         style="fill:#376686;fill-opacity:1;stroke:#1a2550;stroke-width:0.529167;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         id="rect14569"
+         width="0.26458332"
+         height="0.26458332"
+         x="13.758335"
+         y="6.8791666"
+         ry="0" />
+      <rect
+         style="fill:#97bcd5;fill-opacity:1;stroke:#1a2550;stroke-width:0.529167;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         id="rect14593"
+         width="1.8520833"
+         height="3.175"
+         x="11.377085"
+         y="2.3812499"
+         ry="0.12211537" />
+      <path
+         style="fill:#1a2550;fill-opacity:1;stroke:#1a2550;stroke-width:0.529167;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         d="m 11.641668,3.4395833 h 0.529167"
+         id="path15032" />
+      <path
+         style="fill:#1a2550;fill-opacity:1;stroke:#1a2550;stroke-width:0.529167;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         d="m 11.641668,4.4979166 h 0.529167"
+         id="path15034" />
+      <rect
+         style="fill:#1a2550;fill-opacity:1;stroke:#1a2550;stroke-width:0.529167;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         id="rect19797"
+         width="0.26458278"
+         height="1.5875001"
+         x="14.022919"
+         y="3.175"
+         ry="0.072159082" />
+    </g>
+    <g
+       id="g24483">
+      <rect
+         style="fill:#6995c7;fill-opacity:1;stroke:#1a2550;stroke-width:0.529167;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         id="rect22065"
+         width="4.2333331"
+         height="3.175"
+         x="2.1166685"
+         y="2.1166668"
+         ry="0.13229166" />
+      <rect
+         style="fill:#6995c7;fill-opacity:1;stroke:#1a2550;stroke-width:0.529167;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         id="rect22067"
+         width="1.0583333"
+         height="0.79374999"
+         x="3.70417"
+         y="5.2916665"
+         ry="0.13229166" />
+      <rect
+         style="fill:#6995c7;fill-opacity:1;stroke:#1a2550;stroke-width:0.529167;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         id="rect22171"
+         width="2.6458333"
+         height="0.26458332"
+         x="2.9104173"
+         y="6.0854168"
+         ry="0.13229166" />
+    </g>
+  </g>
+</svg>

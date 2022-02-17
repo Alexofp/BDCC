@@ -20,6 +20,7 @@ position = Vector2( 64, 0 )
 roomName = "Mineshafts"
 roomID = "mining_taviroom"
 roomDescription = "Scary mineshafts"
+roomSprite = 1
 roomColor = 8
 
 [node name="MiningShafts" parent="." index="2" instance=ExtResource( 2 )]
@@ -28,7 +29,7 @@ position = Vector2( 0, -64 )
 roomName = "Mineshafts"
 roomID = "mining_shafts_entering"
 roomDescription = "Scary mineshafts"
-roomSprite = 1
+roomSprite = 4
 roomColor = 7
 
 [node name="MiningElevator" parent="." index="3" instance=ExtResource( 2 )]
