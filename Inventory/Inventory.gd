@@ -157,6 +157,16 @@ func removeEquippedItem(item):
 			return item
 	return null
 
+func destroyEquippedItemFromSlot(slot):
+	if(equippedItems.has(slot)):
+		var item = equippedItems[slot]
+		equippedItems.erase(slot)
+		remove_child(item)
+		item.queue_free()
+		emit_signal("equipped_items_changed")
+		return true
+	return false
+
 func clear():
 	for item in items:
 		item.queue_free()

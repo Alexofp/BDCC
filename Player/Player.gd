@@ -126,7 +126,7 @@ func hasBoundArms():
 	return buffsHolder.hasBuff(Buff.RestrainedArmsBuff)
 
 func hasBoundLegs():
-	return false
+	return buffsHolder.hasBuff(Buff.RestrainedLegsBuff)
 
 func isBlindfolded():
 	return false

@@ -248,7 +248,7 @@ func _run():
 	if(state == "cuffs"):
 		GM.world.aimCamera("intro_beforemedical")
 		
-		saynn("You don’t look too happy about it but you comply, the stare of a guard makes that choice easier. You offer your wrists and ankles to the captain as he locks every cuff onto you one by one. They’re not chained together but there are eyelets for that.")
+		saynn("You don’t look too happy about it but you comply, the stare of a guard makes that choice easier. You offer your wrists and ankles to the captain as he locks every cuff onto you one by one.")
 		
 		saynn("[say=pc]Is that even legal?[/say]")
 		
@@ -270,7 +270,7 @@ func _run():
 		
 		saynn("They guide you to the medical section before leaving you to it.")
 		
-		addButton("Go there", "How bad can it be really", "endthescene")
+		addButton("Waddle there", "How bad can it be really", "endthescene")
 
 func _react(_action: String, _args):
 	if(_action == "fightrisha"):

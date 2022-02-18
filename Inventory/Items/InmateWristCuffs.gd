@@ -14,6 +14,7 @@ func getClothingSlot():
 
 func getBuffs():
 	return [
+		buff(Buff.RestrainedArmsBuff),
 		]
 
 func getTakeOffScene():

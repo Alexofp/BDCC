@@ -285,7 +285,7 @@ func _run():
 
 		saynn("[say=pc]So.. what now?[/say]")
 
-		saynn("Doctor unleashes you and puts the chain away before looking at you.")
+		saynn("Doctor removes all the cuffs, unleashes you and puts the chain away before looking at you.")
 
 		saynn("[say=eliza]Well, settle down, I need to go get coffee for myself[/say]")
 
@@ -308,6 +308,10 @@ func _run():
 func _react(_action: String, _args):
 	if(_action in ["walk_inside", "followtocell", "liftarrives", "open_mouth", "let_her_do_it"]):
 		processTime(5 * 60)
+		
+	if(_action == "followtocell"):
+		GM.pc.getInventory().destroyEquippedItemFromSlot(InventorySlot.Wrists)
+		GM.pc.getInventory().destroyEquippedItemFromSlot(InventorySlot.Ankles)
 	
 	if(_action == "wake_up"):
 		startNewDay()

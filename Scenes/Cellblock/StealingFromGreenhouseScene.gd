@@ -27,9 +27,9 @@ func _react(_action: String, _args):
 		GM.pc.getInventory().addItem(GlobalRegistry.createItem("appleitem"))
 		if(RNG.chance(50)):
 			GM.pc.getInventory().addItem(GlobalRegistry.createItem("appleitem"))
-			addMessage("You managed to steal 2 apples")
+			addMessage("You stole 2 apples")
 		else:
-			addMessage("You managed to steal an apple")
+			addMessage("You stole an apple")
 	
 	if(_action == "caughtcheck"):		
 		processTime(10 * 5)

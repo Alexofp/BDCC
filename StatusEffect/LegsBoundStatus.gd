@@ -17,7 +17,7 @@ func getEffectName():
 	return "Bound legs"
 
 func getEffectDesc():
-	return "Your legs are bound, it's harder to dodge attacks"
+	return "Your legs are bound. You can still walk but it's harder to dodge attacks"
 
 func getEffectImage():
 	return null
