@@ -12,6 +12,7 @@ var bodyparts: Dictionary
 var pickedGender = Gender.Female
 var pronounsGender = null
 var pickedSpecies = ["feline"]
+var inmateNumber = "12859"
 
 # Messy stuff
 var bodyFluids = []
@@ -439,3 +440,9 @@ func getOutsideMessinessFluidList():
 
 func getExposureFactor():
 	return 1.0
+
+func getInmateNumber():
+	return inmateNumber
+
+func getFullInmateNumber():
+	return "P-"+inmateNumber

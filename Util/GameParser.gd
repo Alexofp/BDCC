@@ -26,6 +26,10 @@ func callObjectFunc(_obj: String, _command: String, _args: Array):
 		return "!RUNTIME ERROR NO CHARACTER FOUND "+_obj+"."+_command+" "+str(_args)+"!"
 	if(_command == "name" && _args.size() == 0):
 		return object.getName()		
+	if(_command == "inmateNumber" && _args.size() == 0 && object.has_method("getInmateNumber")):
+		return object.getInmateNumber()		
+	if(_command == "inmateNumberFull" && _args.size() == 0 && object.has_method("getFullInmateNumber")):
+		return object.getFullInmateNumber()		
 	if(_command == "say" && _args.size() == 1):
 		return object.formatSay(str(_args[0]))
 	if((_command == "she" || _command == "he" || _command == "heShe") && _args.size() == 0):

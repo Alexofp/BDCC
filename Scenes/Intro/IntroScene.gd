@@ -10,7 +10,7 @@ func _init():
 func _initScene(_args = []):
 		var uniform = GlobalRegistry.createItem("inmateuniform_general")
 		
-		uniform.setPrisonerNumber("P-12054")
+		uniform.setPrisonerNumber(GM.pc.getFullInmateNumber())
 		
 		GM.pc.getInventory().equipItem(uniform)
 
