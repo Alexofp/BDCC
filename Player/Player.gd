@@ -368,8 +368,14 @@ func getBodypartTooltipInfo(_bodypartSlot):
 func hasPenis():
 	return hasBodypart(BodypartSlot.Penis)
 
+func hasReachablePenis():
+	return hasPenis()
+
 func hasVagina():
 	return hasBodypart(BodypartSlot.Vagina)
+
+func hasReachableVagina():
+	return hasVagina()
 
 func hasHair():
 	return hasBodypart(BodypartSlot.Hair) && getBodypart(BodypartSlot.Hair).id != "baldhair"

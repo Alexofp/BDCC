@@ -337,22 +337,23 @@ func _run():
 
 		saynn("Tavi throws the wet shorts away and keeps an eye contact with you as she stands to lower herself onto your face. She crouches, then kneels down, now giving you a great view at her slit. It almost seems pure, no abuse or anything, just a wet slit and a tight-looking anus of the same green color. You feel her wet pussy petals touch your face and begin to eagerly try to lick them again.")
 
-		if(GM.pc.hasVagina()):
-			saynn("As she sits down on your face, you can’t help but to sneak one of your hands down to your crotch. Your digits find your sensitive button and begin to sneakily rub it. It just feels so good.")
 
-			saynn("[say=tavi]Don’t think I don’t see that~. But I will allow it[/say]")
-
-			saynn("You rub yourself harder, little moans begin to escape from your mouth. You’re wet. Very wet. And your digits quickly become too.")
-
-		if(GM.pc.hasPenis()):
+		if(GM.pc.hasReachablePenis()):
 			saynn("As she sits down on your face, you can’t help but to sneak one of your hands down to your hard cock. You’re so turned on that it leaks precum already. You begin to slowly stroke yourself.")
 
 			saynn("[say=tavi]Don’t think I don’t see that~. But I will allow it[/say]")
 
 			saynn("Little moans escape from your mouth.")
 
-			if(GM.pc.hasVagina()):
+			if(GM.pc.hasReachableVagina()):
 				saynn("And your pussy is wet. Very wet. Your second hand joins the first and starts rubbing your little sensitive button.")
+
+		elif(GM.pc.hasReachableVagina()):
+			saynn("As she sits down on your face, you can’t help but to sneak one of your hands down to your crotch. Your digits find your sensitive button and begin to sneakily rub it. It just feels so good.")
+
+			saynn("[say=tavi]Don’t think I don’t see that~. But I will allow it[/say]")
+
+			saynn("You rub yourself harder, little moans begin to escape from your mouth. You’re wet. Very wet. And your digits quickly become too.")
 
 		saynn("[say=tavi]So lustful.. so eager.. so.. slutty[/say]")
 
@@ -362,27 +363,29 @@ func _run():
 
 		saynn("You explore her soft depths, lapping at her green pussy walls and swallowing her girl fluids, enjoying seeing the tall cat quiver and hearing her moan. She then steals the initiative and pins you into the floor with her arms as she proceeds to grind her slit against your face and lips, moaning harder and harder, using you as a pleasure device.")
 
-		if(GM.pc.hasVagina()):
-			saynn("It’s so hot that you can’t help but to push two of your digits inside your wet slit. While Tavi uses your face for her pleasure, you begin to finger yourself at a fast pace, pushing your digits in and out and pushing yourself closer to your climax.")
 
-		if(GM.pc.hasPenis()):
+		if(GM.pc.hasReachablePenis()):
 			saynn("It’s so hot that you can’t help but to stroke your cock harder. Your shaft twitches and leaks a lot of precum and the balls beg for release.")
 
-			if(GM.pc.hasVagina()):
+			if(GM.pc.hasReachableVagina()):
 				saynn("Your other hand fingers your wet slit at a fast pace, causing it wet noises, it’s only a matter of time before you cum.")
+
+		elif(GM.pc.hasReachableVagina()):
+			saynn("It’s so hot that you can’t help but to push two of your digits inside your wet slit. While Tavi uses your face for her pleasure, you begin to finger yourself at a fast pace, pushing your digits in and out and pushing yourself closer to your climax.")
 
 		saynn("[say=tavi]Ah~.. Ready to swallow, my pet? Open your mouth for me.. mhm~[/say]")
 
 		saynn("You obediently do it, your face is all covered in Tavi’s wetness already but she is clearly not done. She grinds herself close to her climax, moaning and panting heavily before raising her body slightly, giving you more breathing room. She then pins your head to the floor with one hand while pleasuring herself with the other. Her digits are mostly focused on her clit, she quickly rubs it from side to side, causing her legs to begin shaking and her whole body shivering. Only a few seconds pass before the waves of pleasure hit her body. She cums hard, arching her back and letting out some very passionate moans while her pussy contracts in an uneven rhythm. She was stimulated so much, her slit suddenly squirts, covering your face with her transplant girlcum with some landing into your mouth.")
 
-		if(GM.pc.hasVagina()):
-			saynn("And you quickly join her. Your fingers quickly get you to your own orgasm. You feel a wave after wave of pure ecstasy begin to overtake your body. Your muscles don’t listen, causing you to moan and shiver, your mind begging for this moment to continue for as long as possible.")
 
-		if(GM.pc.hasPenis()):
+		if(GM.pc.hasReachablePenis()):
 			saynn("Not too long after Tavi begins to climax, you do too. You pull your own shorts down so you don’t make a mess as you cum. Spurt after spurt of your semen lands on the floor nearby, you didn’t cum inside anyone but it’s still a great feeling to be used like this.")
 
-			if(GM.pc.hasVagina()):
+			if(GM.pc.hasReachableVagina()):
 				saynn("And your pussy begins to spasm too from all the orgasmic waves hitting your body, your mind is begging for this moment to continue for as long as possible.")
+
+		elif(GM.pc.hasReachableVagina()):
+			saynn("And you quickly join her. Your fingers quickly get you to your own orgasm. You feel a wave after wave of pure ecstasy begin to overtake your body. Your muscles don’t listen, causing you to moan and shiver, your mind begging for this moment to continue for as long as possible.")
 
 		saynn("Eventually you both calm down though your hearts are still racing and Tavi is panting a lot. She slowly stands up and takes a look at the mess she left, smiling.")
 

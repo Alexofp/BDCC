@@ -29,10 +29,12 @@ func _run():
 		saynn("You begin washing yourself, starting with the hair and going down, cleaning your face, neck, shoulders, chest, arms and legs")
 		
 		if(GM.pc.hasVagina()):
-			saynn("Your hands slip down between your legs and give your slit a little rub to make sure it's all clean there as well")
+			if(GM.pc.hasReachableVagina()):
+				saynn("Your hands slip down between your legs and give your slit a little rub to make sure it's all clean there as well")
 		
 		if(GM.pc.hasPenis()):
-			saynn("Your cock gets some attention too, you take your time to wash the shaft and the ballsack")
+			if(GM.pc.hasReachableVagina()):
+				saynn("Your cock gets some attention too, you take your time to wash the shaft and the ballsack")
 		
 		saynn("Eventually, you finish cleaning yourself and just stand still under the running water for a bit, pondering")
 		
