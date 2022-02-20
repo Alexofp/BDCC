@@ -404,9 +404,11 @@ func _react(_action: String, _args):
 		addMessage("That was painful. You recieved 20 pain")
 		
 		setFlag(TaviModule.Tavi_IsAngryAtPlayer, true)
+		setFlag(TaviModule.Tavi_AngryUntilDay, GM.main.getDays() + 2)
 	
 	if(_action == "walk_away"):
 		setFlag(TaviModule.Tavi_IsAngryAtPlayer, true)
+		setFlag(TaviModule.Tavi_AngryUntilDay, GM.main.getDays() + 2)
 	
 	if(_action in ["kneel", "submit", "submit1", "submit2"]):
 		if(GM.pc.getInventory().hasSlotEquipped(InventorySlot.Mouth) && GM.pc.isGagged()):

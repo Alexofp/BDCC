@@ -25,7 +25,11 @@ func _run():
 		addButton("Appearance", "Take a closer look at Tavi", "appearance")
 		addButton("Attack", "This can only go one way", "attack")
 		if(getFlag(TaviModule.Tavi_IsAngryAtPlayer)):
-			addButton("Submit", "Try and patch things up", "submit")
+			var day = getFlag(TaviModule.Tavi_AngryUntilDay, -10)
+			if(GM.main.getDays() >= day):
+				addButton("Submit", "Try and patch things up", "submit")
+			else:
+				addDisabledButton("Submit", "Tavi is still angry at you, try again in a day or two")
 		else:
 			if(!getFlag(TaviModule.Tavi_ToldHowToEscape)):
 				addButton("Plot to escape", "Tavi mentioned she can help you to escape", "plot_to_escape")
@@ -69,6 +73,7 @@ func _run():
 	
 	if(state == "won_fight"):
 		setFlag(TaviModule.Tavi_IsAngryAtPlayer, true)
+		setFlag(TaviModule.Tavi_AngryUntilDay, GM.main.getDays() + 2)
 		
 		saynn("Defeated Tavi has collapsed onto the floor. She hisses and glares at you.")
 
@@ -82,16 +87,14 @@ func _run():
 	if(state == "lost_fight"):
 		saynn("You drop onto your knees, lacking any strength to continue.")
 
-		saynn("[say=tavi]Such a silly thing you are. Guess it’s time to punish you.[/say]")
+		saynn("[say=tavi]Such a silly thing you are, did you really think you could win?. Guess it’s time to punish you.[/say]")
 
-		saynn("((here will be random punishment scene))")
-		
-		addButton("Continue", "hmmm", "endthescene")
+		addButton("Continue", "Oh no", "startrandompunishment")
 	
-	if(state == "submit"):
-		saynn("((SUBMITTING SCENE GOES HERE))")
+	#if(state == "submit"):
+	#	saynn("((SUBMITTING SCENE GOES HERE))")
 		
-		addButton("Continue", "You are forgiven", "endthescene")
+	#	addButton("Continue", "You are forgiven", "endthescene")
 	
 	if(state == "talk"):
 		if(getFlag(TaviModule.Tavi_IsAngryAtPlayer)):
@@ -273,7 +276,15 @@ func _react(_action: String, _args):
 		runScene("FightScene", ["tavi"], "tavifight")
 	
 	if(_action == "submit"):
-		setFlag(TaviModule.Tavi_IsAngryAtPlayer, false)
+		#setFlag(TaviModule.Tavi_IsAngryAtPlayer, false)
+		runScene("TaviSubmitToScene")
+		endScene()
+		return
+	
+	if(_action == "startrandompunishment"):
+		runScene(RNG.pick(["TaviPunishment1Scene"]))
+		endScene()
+		return
 	
 	setState(_action)
 

@@ -6,6 +6,7 @@ const Tavi_IsAngryAtPlayer = "Tavi_IsAngryAtPlayer"
 const Tavi_ToldHowToEscape = "Tavi_ToldHowToEscape"
 const Tavi_NeedsApple = "Tavi_NeedsApple"
 const Tavi_GotApple = "Tavi_GotApple"
+const Tavi_AngryUntilDay = "Tavi_AngryUntilDay"
 
 func _init():
 	id = "TaviModule"
@@ -14,6 +15,8 @@ func _init():
 	scenes = [
 		"res://Modules/TaviModule/TaviFirstEncounterScene.gd",
 		"res://Modules/TaviModule/TaviTalkScene.gd",
+		"res://Modules/TaviModule/TaviPunishment1Scene.gd",
+		"res://Modules/TaviModule/TaviSubmitToScene.gd",
 		]
 	characters = []
 	items = []
