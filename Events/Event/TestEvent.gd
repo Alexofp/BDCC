@@ -8,7 +8,7 @@ func registerTriggers(es):
 	es.addTrigger(self, Trigger.CaughtOffLimits)
 
 func shouldRun():
-	return true
+	return false
 
 func run():
 	GM.pc.addLust(-100)

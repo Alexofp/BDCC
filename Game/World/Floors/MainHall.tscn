@@ -72,6 +72,7 @@ roomColor = 7
 [node name="MainHallRoom9" parent="." index="8" instance=ExtResource( 2 )]
 position = Vector2( 0, 192 )
 roomName = "Main platform"
+roomID = "main_punishment_spot"
 roomDescription = "This is clearly the public punishment area. You see a few pillories, one-bar prisons and chain posts"
 
 [node name="MainHallRoom10" parent="." index="9" instance=ExtResource( 2 )]

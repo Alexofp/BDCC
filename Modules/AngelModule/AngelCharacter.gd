@@ -1,7 +1,7 @@
 extends Character
 
 func _init():
-	id = "angel"
+	id = "nova"
 	
 func _getName():
 	return "Nova"
@@ -14,3 +14,6 @@ func getSmallDescription() -> String:
 
 func getSpecies():
 	return ["canine"]
+
+func _getAttacks():
+	return ["aitaunthumiliate", "stunbatonStrongAttack", "simplekickattack", "shoveattack", "trygetupattack"]

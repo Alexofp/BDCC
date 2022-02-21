@@ -214,6 +214,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Player/Player.gd"
 }, {
+"base": "Module",
+"class": "PunishmentsModule",
+"language": "GDScript",
+"path": "res://Modules/PunishmentsModule/Punishments_module.gd"
+}, {
 "base": "Object",
 "class": "Quest",
 "language": "GDScript",
@@ -356,6 +361,7 @@ _global_script_class_icons={
 "MainThing": "",
 "Module": "",
 "Player": "",
+"PunishmentsModule": "",
 "Quest": "",
 "QuestBase": "",
 "QuestSystem": "",
