@@ -7,6 +7,7 @@ const Tavi_ToldHowToEscape = "Tavi_ToldHowToEscape"
 const Tavi_NeedsApple = "Tavi_NeedsApple"
 const Tavi_GotApple = "Tavi_GotApple"
 const Tavi_AngryUntilDay = "Tavi_AngryUntilDay"
+const Tavi_Submissiveness = "Tavi_Submissiveness"
 
 func _init():
 	id = "TaviModule"
@@ -17,6 +18,7 @@ func _init():
 		"res://Modules/TaviModule/TaviTalkScene.gd",
 		"res://Modules/TaviModule/TaviPunishment1Scene.gd",
 		"res://Modules/TaviModule/TaviSubmitToScene.gd",
+		"res://Modules/TaviModule/DominateTaviScene.gd",
 		]
 	characters = []
 	items = []
@@ -27,3 +29,8 @@ func _init():
 	quests = [
 		"res://Modules/TaviModule/TaviAppleQuest.gd",
 	]
+
+static func makeTaviAngry():
+	GM.main.setFlag(Tavi_IsAngryAtPlayer, true)
+	GM.main.setFlag(Tavi_AngryUntilDay, GM.main.getDays() + 2)
+	

@@ -144,6 +144,7 @@ func _react(_action: String, _args):
 
 	if(_action == "get_on_your_knees"):
 		setFlag(TaviModule.Tavi_IsAngryAtPlayer, false)
+		setFlag(TaviModule.Tavi_Submissiveness, 0)
 		processTime(60*10)
 	
 	if(_action == "i_want_more"):

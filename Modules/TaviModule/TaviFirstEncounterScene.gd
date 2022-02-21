@@ -246,7 +246,8 @@ func _run():
 
 		addButton("Submit", "Maybe you went too far..", "submit2")
 		addButton("Walk away", "Leave Tavi", "walk_away")
-		addDisabledButton("Fuck Tavi", "Not done yet")
+		addButton("Dominate Tavi", "Make that bitch submit to you using violence", "dominateTavi")
+		addDisabledButton("Fuck Tavi", "Not done :(")
 
 	if(state == "submit2"):
 		GM.pc.playAnimation(TheStage.Kneeling)
@@ -403,12 +404,10 @@ func _react(_action: String, _args):
 		
 		addMessage("That was painful. You recieved 20 pain")
 		
-		setFlag(TaviModule.Tavi_IsAngryAtPlayer, true)
-		setFlag(TaviModule.Tavi_AngryUntilDay, GM.main.getDays() + 2)
+		TaviModule.makeTaviAngry()
 	
 	if(_action == "walk_away"):
-		setFlag(TaviModule.Tavi_IsAngryAtPlayer, true)
-		setFlag(TaviModule.Tavi_AngryUntilDay, GM.main.getDays() + 2)
+		TaviModule.makeTaviAngry()
 	
 	if(_action in ["kneel", "submit", "submit1", "submit2"]):
 		if(GM.pc.getInventory().hasSlotEquipped(InventorySlot.Mouth) && GM.pc.isGagged()):
@@ -430,6 +429,14 @@ func _react(_action: String, _args):
 	if(_action == "endthescene"):
 		endScene()
 		GM.main.setFlag(TaviModule.Tavi_IntroducedTo, true)
+		return
+		
+	if(_action == "dominateTavi"):
+		TaviModule.makeTaviAngry()
+		GM.main.setFlag(TaviModule.Tavi_IntroducedTo, true)
+		
+		runScene("DominateTaviScene")
+		endScene()
 		return
 	
 	setState(_action)

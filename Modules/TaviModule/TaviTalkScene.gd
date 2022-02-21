@@ -72,15 +72,14 @@ func _run():
 		addButton("Continue", "Fight!", "startfight")
 	
 	if(state == "won_fight"):
-		setFlag(TaviModule.Tavi_IsAngryAtPlayer, true)
-		setFlag(TaviModule.Tavi_AngryUntilDay, GM.main.getDays() + 2)
+		TaviModule.makeTaviAngry()
 		
 		saynn("Defeated Tavi has collapsed onto the floor. She hisses and glares at you.")
 
 		saynn("[say=tavi]What now, silly thing?[/say]")
 		
-		addDisabledButton("Dominate Tavi", "Not done :(")
-		addDisabledButton("Fuck Tavi", "Not done too")
+		addButton("Dominate Tavi", "Make that bitch submit to you using violence", "dominateTavi")
+		addDisabledButton("Fuck Tavi", "Not done :(")
 		
 		addButton("Continue", "Let her be", "endthescene")
 	
@@ -283,6 +282,11 @@ func _react(_action: String, _args):
 	
 	if(_action == "startrandompunishment"):
 		runScene(RNG.pick(["TaviPunishment1Scene"]))
+		endScene()
+		return
+		
+	if(_action == "dominateTavi"):
+		runScene("DominateTaviScene")
 		endScene()
 		return
 	
