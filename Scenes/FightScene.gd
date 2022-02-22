@@ -7,6 +7,7 @@ var whatPlayerDid: String = ""
 var whatEnemyDid: String = ""
 var whatHappened: String = ""
 var battleState = ""
+var battleEndedHow = ""
 var savedAIAttackID = ""
 
 func _init():
@@ -241,7 +242,9 @@ func _react(_action: String, _args):
 	if(_action == "endbattle"):
 		enemyCharacter.afterFightEnded()
 		GM.pc.afterFightEnded()
-		endScene([battleState])
+		if(battleEndedHow == ""):
+			battleEndedHow = "pain"
+		endScene([battleState, battleEndedHow])
 		return
 
 func _react_scene_end(_tag, _result):
@@ -323,20 +326,24 @@ func checkEnd():
 	if(GM.pc.getPain() >= GM.pc.painThreshold()):
 		whatHappened += "You succumb to pain\n"
 		battleState = "lost"
+		battleEndedHow = "pain"
 		GM.pc.playAnimation(TheStage.GetDefeated)
 		return "lost"
 	if(enemyCharacter.getPain() >= enemyCharacter.painThreshold()):
 		whatHappened += "Enemy is in too much pain to continue\n"
 		battleState = "win"
+		battleEndedHow = "pain"
 		return "win"
 	if(GM.pc.getLust() >= GM.pc.lustThreshold()):
 		whatHappened += "You're too aroused to continue\n"
 		battleState = "lost"
+		battleEndedHow = "lust"
 		GM.pc.playAnimation(TheStage.GetDefeated)
 		return "lost"
 	if(enemyCharacter.getLust() >= enemyCharacter.lustThreshold()):
 		whatHappened += "Enemy is too aroused to continue\n"
 		battleState = "win"
+		battleEndedHow = "lust"
 		return "win"
 	
 	return ""
@@ -368,6 +375,7 @@ func saveData():
 	data["whatEnemyDid"] = whatEnemyDid
 	data["whatHappened"] = whatHappened
 	data["battleState"] = battleState
+	data["battleEndedHow"] = battleEndedHow
 	data["savedAIAttackID"] = savedAIAttackID
 	
 	return data
@@ -380,6 +388,7 @@ func loadData(data):
 	whatEnemyDid = SAVE.loadVar(data, "whatEnemyDid", "")
 	whatHappened = SAVE.loadVar(data, "whatHappened", "")
 	battleState = SAVE.loadVar(data, "battleState", "")
+	battleEndedHow = SAVE.loadVar(data, "battleEndedHow", "")
 	savedAIAttackID = SAVE.loadVar(data, "savedAIAttackID", "")
 	enemyCharacter = GlobalRegistry.getCharacter(enemyID)
 	setFightCharacter(enemyID)

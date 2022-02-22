@@ -176,14 +176,6 @@ func _run():
 
 		saynn("[say=nova]You’re such a slut..[/say]")
 
-		addButton("Leave", "Don't do anything", "endthescene")
-		addButton("Humiliate Nova", "Use her stun baton to mess with her", "humiliateAngel")
-		if(GM.pc.hasReachableVagina()):
-			addButton("Ride Nova", "Use the herm’s cock for your pleasure", "rideSubbyAngel")
-		else:
-			addDisabledButton("Ride Nova", "Requires a vagina that you can reach")
-
-	# Gotta add this
 	if(state == "won_fight_lust"):
 		saynn("Nova got so turned on she drops onto her knees and touches herself in your clear view. You can see desire in her eyes.")
 
@@ -191,10 +183,14 @@ func _run():
 
 		# (Player is wanted by guards)
 
-		# (Humiliate Nova, Fuck Nova, Ride Nova, Leave)
+	# (Humiliate Nova, Fuck Nova, Ride Nova, Leave)
+	if(state == "won_fight" || state == "won_fight_lust"):
 		addButton("Leave", "Don't do anything", "endthescene")
-
-
+		addButton("Humiliate Nova", "Use her stun baton to mess with her", "humiliateAngel")
+		if(GM.pc.hasReachableVagina()):
+			addButton("Ride Nova", "Use the herm’s cock for your pleasure", "rideSubbyAngel")
+		else:
+			addDisabledButton("Ride Nova", "Requires a vagina that you can reach")
 
 	if(state == "punishment"):
 		saynn("Nova walks up to you and uses her armored boot to pin you in-place. She then crouches before you and clips a leash to your collar.")
@@ -317,8 +313,12 @@ func _react_scene_end(_tag, _result):
 	if(_tag == "novafight"):
 		processTime(20 * 60)
 		var battlestate = _result[0]
+		var wonHow = _result[1]
 		
 		if(battlestate == "win"):
-			setState("won_fight")
+			if(wonHow == "lust"):
+				setState("won_fight_lust")
+			else:
+				setState("won_fight")
 		else:
 			setState("lost_fight")

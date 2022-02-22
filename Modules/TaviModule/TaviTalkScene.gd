@@ -78,6 +78,14 @@ func _run():
 
 		saynn("[say=tavi]What now, silly thing?[/say]")
 		
+	if(state == "won_fight_lust"):
+		TaviModule.makeTaviAngry()
+		
+		saynn("Defeated Tavi has collapsed onto the floor, you see a slight green blush on her cheeks that she tries to hide.")
+
+		saynn("[say=tavi]What are you gonna do with me now, silly thing..[/say]")
+		
+	if(state == "won_fight" || state == "won_fight_lust"):
 		addButton("Dominate Tavi", "Make that bitch submit to you using violence", "dominateTavi")
 		addDisabledButton("Fuck Tavi", "Not done :(")
 		
@@ -296,8 +304,12 @@ func _react_scene_end(_tag, _result):
 	if(_tag == "tavifight"):
 		processTime(20 * 60)
 		var battlestate = _result[0]
+		var wonHow = _result[1]
 		
 		if(battlestate == "win"):
-			setState("won_fight")
+			if(wonHow == "lust"):
+				setState("won_fight_lust")
+			else:
+				setState("won_fight")
 		else:
 			setState("lost_fight")
