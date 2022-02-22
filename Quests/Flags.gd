@@ -8,3 +8,9 @@ const Game_CompletedPrologue = "Game_CompletedPrologue"
 
 static func resetFlagsOnNewDay():
 	GM.main.setFlag(Canteen_PlayerAteToday, false)
+	
+	var modules = GlobalRegistry.getModules()
+	for moduleID in modules:
+		var module = modules[moduleID]
+		
+		module.resetFlagsOnNewDay()

@@ -368,6 +368,8 @@ func registerModule(path: String):
 	
 	print("Module "+moduleObject.id+" by "+moduleObject.author+" was registered")
 
+func getModules():
+	return modules
 
 func registerQuest(path: String):
 	var item = load(path)

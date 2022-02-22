@@ -27,3 +27,6 @@ func register():
 
 	for quest in quests:
 		GlobalRegistry.registerQuest(quest)
+
+func resetFlagsOnNewDay():
+	pass
