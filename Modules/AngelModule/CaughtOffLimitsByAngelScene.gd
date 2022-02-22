@@ -90,7 +90,7 @@ func _run():
 			saynn("[say=nova]Very good~[/say]")
 
 		# (if has non-flat breasts):
-		if(true):
+		if(GM.pc.hasNonFlatBreasts()):
 			saynn("Her paws land on your breasts, digits slowly trace along and around them, getting a feel for your mounds. You think that this is part of the procedure but then Nova’s hands switch to straight-up groping, you can’t feel but to moan when you feel your breasts being squeezed and fondled. It feels like she is trying to milk you.")
 
 			saynn("[say=nova]Someone seems a little excited~[/say]")

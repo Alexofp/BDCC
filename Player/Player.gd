@@ -386,6 +386,26 @@ func hasTail():
 func hasHorns():
 	return hasBodypart(BodypartSlot.Horns)
 
+func hasNonFlatBreasts():
+	var breasts = getBodypart(BodypartSlot.Breasts)
+	
+	var size = breasts.size
+	
+	if(size > BodypartBreasts.BreastsSize.FLAT):
+		return true
+	else:
+		return false
+
+func hasBigBreasts():
+	var breasts = getBodypart(BodypartSlot.Breasts)
+	
+	var size = breasts.size
+	
+	if(size > BodypartBreasts.BreastsSize.B):
+		return true
+	else:
+		return false
+
 func afterSleepingInBed():
 	addStamina(getMaxStamina())
 	addPain(-20)
