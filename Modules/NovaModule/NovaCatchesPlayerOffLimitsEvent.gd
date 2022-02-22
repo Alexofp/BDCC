@@ -1,7 +1,7 @@
 extends EventBase
 
 func _init():
-	id = "AngelCatchesPlayerOffLimitsEvent"
+	id = "NovaCatchesPlayerOffLimitsEvent"
 
 func registerTriggers(es):
 	es.addTrigger(self, Trigger.CaughtOffLimits)
@@ -10,7 +10,7 @@ func shouldRun():
 	return true
 
 func run():
-	runScene("CaughtOffLimitsByAngelScene")
+	runScene("CaughtOffLimitsByNovaScene")
 	return true
 
 func shouldInterupt():

@@ -1,7 +1,7 @@
 extends "res://Scenes/SceneBase.gd"
 
 func _init():
-	sceneID = "CaughtOffLimitsByAngelScene"
+	sceneID = "CaughtOffLimitsByNovaScene"
 
 func _run():
 	if(state == ""):
@@ -285,17 +285,17 @@ func _react(_action: String, _args):
 		GM.pc.updateNonBattleEffects()
 
 	if(_action == "humiliateAngel"):
-		runScene("HumiliateAngelScene")
+		runScene("HumiliateNovaScene")
 		endScene()
 		return
 		
 	if(_action == "rideSubbyAngel"):
-		runScene("RideSubbyAngelScene")
+		runScene("RideSubbyNovaScene")
 		endScene()
 		return
 		
 	if(_action == "agree_to_suck"):
-		runScene("SuckAngelCockScene")
+		runScene("SuckNovaCockScene")
 		endScene()
 		return
 
@@ -304,7 +304,7 @@ func _react(_action: String, _args):
 		return
 		
 	if(_action == "fight"):
-		runScene("FightScene", ["nova"], "angelfight")
+		runScene("FightScene", ["nova"], "novafight")
 	
 	if(_action == "startstocks"):
 		runScene("StocksPunishmentScene", ["nova"])
@@ -314,7 +314,7 @@ func _react(_action: String, _args):
 	setState(_action)
 
 func _react_scene_end(_tag, _result):
-	if(_tag == "angelfight"):
+	if(_tag == "novafight"):
 		processTime(20 * 60)
 		var battlestate = _result[0]
 		

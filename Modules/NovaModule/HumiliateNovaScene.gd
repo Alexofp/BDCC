@@ -1,7 +1,7 @@
 extends "res://Scenes/SceneBase.gd"
 
 func _init():
-	sceneID = "HumiliateAngelScene"
+	sceneID = "HumiliateNovaScene"
 
 func _run():
 	if(state == ""):

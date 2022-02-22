@@ -52,7 +52,7 @@ func _ready():
 	
 	registerModule("res://Modules/TaviModule/Tavi_module.gd")
 	registerModule("res://Modules/RahiModule/Rahi_module.gd")
-	registerModule("res://Modules/AngelModule/Angel_module.gd")
+	registerModule("res://Modules/NovaModule/Nova_module.gd")
 	registerModule("res://Modules/PunishmentsModule/Punishments_module.gd")
 	
 # The point is that it will still generate unique ids even after saving/loading

@@ -9,11 +9,6 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "Module",
-"class": "AngelModule",
-"language": "GDScript",
-"path": "res://Modules/AngelModule/Angel_module.gd"
-}, {
 "base": "Node",
 "class": "Attack",
 "language": "GDScript",
@@ -209,6 +204,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Modules/Module.gd"
 }, {
+"base": "Module",
+"class": "NovaModule",
+"language": "GDScript",
+"path": "res://Modules/NovaModule/Nova_module.gd"
+}, {
 "base": "BaseCharacter",
 "class": "Player",
 "language": "GDScript",
@@ -320,7 +320,6 @@ _global_script_classes=[ {
 "path": "res://Game/World/WorldFloor.gd"
 } ]
 _global_script_class_icons={
-"AngelModule": "",
 "Attack": "",
 "BaseCharacter": "",
 "BodilyFluids": "",
@@ -360,6 +359,7 @@ _global_script_class_icons={
 "LimbTypes": "",
 "MainThing": "",
 "Module": "",
+"NovaModule": "",
 "Player": "",
 "PunishmentsModule": "",
 "Quest": "",
