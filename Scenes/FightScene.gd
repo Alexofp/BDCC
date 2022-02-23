@@ -9,6 +9,7 @@ var whatHappened: String = ""
 var battleState = ""
 var battleEndedHow = ""
 var savedAIAttackID = ""
+var battleName = ""
 
 func _init():
 	sceneID = "FightScene"
@@ -17,11 +18,14 @@ func _initScene(_args = []):
 	enemyID = _args[0]
 	enemyCharacter = GlobalRegistry.getCharacter(enemyID)
 	setFightCharacter(enemyID)
+	
+	if(_args.size() > 1):
+		battleName = _args[1]
 
 func _run():
 	updateFightCharacter()
 	if(state == ""):
-		saynn(enemyCharacter.getFightIntro())
+		saynn(enemyCharacter.getFightIntro(battleName))
 		#setState("fighting")
 	elif(state == "fighting"):
 		#say("And so the fight continues")
@@ -100,9 +104,9 @@ func _run():
 			saynn(whatHappened)
 			
 	if(state == "fighting"):
-		saynn(enemyCharacter.getFightState())
+		saynn(enemyCharacter.getFightState(battleName))
 		
-		saynn(GM.pc.getFightState())
+		saynn(GM.pc.getFightState(battleName))
 			
 	if(state == "playerMustDodge"):
 		var attack: Attack = GlobalRegistry.getAttack(savedAIAttackID)
@@ -377,6 +381,7 @@ func saveData():
 	data["battleState"] = battleState
 	data["battleEndedHow"] = battleEndedHow
 	data["savedAIAttackID"] = savedAIAttackID
+	data["battleName"] = battleName
 	
 	return data
 	
@@ -392,3 +397,4 @@ func loadData(data):
 	savedAIAttackID = SAVE.loadVar(data, "savedAIAttackID", "")
 	enemyCharacter = GlobalRegistry.getCharacter(enemyID)
 	setFightCharacter(enemyID)
+	battleName = SAVE.loadVar(data, "battleName", "")

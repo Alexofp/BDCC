@@ -456,10 +456,10 @@ func getSpeciesFullName():
 	var species = getSpecies()
 	return Util.getSpeciesName(species)
 	
-func getFightIntro():
+func getFightIntro(_battleName):
 	return "Plase change the fight intro"
 
-func getFightState():
+func getFightState(_battleName):
 	if(getPain() > getLust()):
 		var mypain = getPain()
 		

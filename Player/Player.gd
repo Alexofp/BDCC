@@ -329,7 +329,7 @@ func loadData(data):
 	loadStatusEffectsData(SAVE.loadVar(data, "statusEffects", {}))
 	inventory.loadData(SAVE.loadVar(data, "inventory", {}))
 
-func getFightState():
+func getFightState(_battleName):
 	if(getPain() > getLust()):
 		var mypain = getPain()
 		
