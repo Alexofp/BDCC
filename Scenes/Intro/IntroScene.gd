@@ -128,6 +128,18 @@ func _run():
 			var slotName = BodypartSlot.getVisibleName(slot)
 			addButton(slotName, "Change this", "pickbodypart", [slot])
 			
+		# DEBUG testing stuff, feel free to remove
+#		if(GM.pc.hasPenis()):
+#			sayn("YOUR {pc.penis} is amazing")
+#			sayn("YOUR COCK IS {pc.cockSize} and also {pc.cockDesc}")
+#			saynn("You have {pc.aPenis}")
+#		sayn("Your {pc.breasts} are pretty good too")
+#		saynn("Your breasts are {pc.breastsSize} and they are also {pc.breastsDesc}")
+#		if(GM.pc.hasVagina()):
+#			saynn("YOU HAVE {pc.aVagina}")
+#		if(GM.pc.hasTail()):
+#			saynn("YOU HAVE {pc.aTail}")
+			
 		addButton("Breast size", "Change breast size", "pickbreastsize")
 			
 		addButton("back", "Back to picking species", "pickspecies")
@@ -153,7 +165,7 @@ func _run():
 
 	if(state == "pickbreastsize"):
 		say("Pick your character's breast size")
-		addButton("Male", "Male breasts will never produce milk or increase in size", "setbreasts", [BodypartBreasts.BreastsSize.MALE])
+		addButton("Forever Flat", "Your breasts will never produce milk or increase in size", "setbreasts", [BodypartBreasts.BreastsSize.FOREVER_FLAT])
 		addButton("Flat", "Flat breasts", "setbreasts", [BodypartBreasts.BreastsSize.FLAT])
 		addButton("A", "A sized breasts", "setbreasts", [BodypartBreasts.BreastsSize.A])
 		addButton("B", "B sized breasts", "setbreasts", [BodypartBreasts.BreastsSize.B])

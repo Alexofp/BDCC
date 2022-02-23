@@ -7,3 +7,6 @@ func _init():
 
 func getCompatibleSpecies():
 	return [Species.Any]
+
+func getLewdAdjective():
+	return RNG.pick(["knotted", "canine-shaped", "canine"])

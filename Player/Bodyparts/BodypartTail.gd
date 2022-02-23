@@ -7,3 +7,11 @@ func _init():
 func getSlot():
 	return BodypartSlot.Tail
 
+func getLewdSizeAdjective():
+	return RNG.pick(["long"])
+
+func getLewdAdjective():
+	return RNG.pick(["fluffy"])
+	
+func getLewdName():
+	return RNG.pick(["tail"])

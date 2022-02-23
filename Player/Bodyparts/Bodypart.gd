@@ -38,3 +38,22 @@ func getExtraInfoCreation():
 
 func getTooltipInfo():
 	return "error, let the developer know"
+
+func getLewdSizeAdjective():
+	return "average-sized"
+
+func getLewdAdjective():
+	return "average-looking"
+	
+func getLewdName():
+	return getName()
+
+func getLewdDescriptionAndName():
+	var text = getLewdSizeAdjective() + " " + getLewdAdjective() + " " + getLewdName()
+	return text
+
+func getLewdDescriptionAndNameWithA():
+	var t = getLewdDescriptionAndName()
+	if(t[0].to_lower() in "eyuioa"):
+		return "an "+t
+	return "a "+t

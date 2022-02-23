@@ -7,3 +7,9 @@ func _init():
 
 func getCompatibleSpecies():
 	return [Species.Feline]
+
+func getLewdSizeAdjective():
+	return RNG.pick(["long"])
+
+func getLewdAdjective():
+	return RNG.pick(["feline", "fluffy"])

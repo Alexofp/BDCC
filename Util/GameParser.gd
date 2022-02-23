@@ -49,5 +49,35 @@ func callObjectFunc(_obj: String, _command: String, _args: Array):
 			return object.verbS(str(_args[0]))
 		if(_args.size() == 2):
 			return object.verbS(str(_args[0]), str(_args[1]))
+			
+	if(_command in ["penis", "cock"] && _args.size() == 0 && object.has_method("getBodypartLewdDescriptionAndName")):
+		return object.getBodypartLewdDescriptionAndName(BodypartSlot.Penis)
+	if(_command in ["aPenis", "aCock"] && _args.size() == 0 && object.has_method("getBodypartLewdDescriptionAndNameWithA")):
+		return object.getBodypartLewdDescriptionAndNameWithA(BodypartSlot.Penis)
+	if(_command in ["penisSize", "cockSize"] && _args.size() == 0 && object.has_method("getBodypartLewdSizeAdjective")):
+		return object.getBodypartLewdSizeAdjective(BodypartSlot.Penis)
+	if(_command in ["penisDesc", "cockDesc"] && _args.size() == 0 && object.has_method("getBodypartLewdAdjective")):
+		return object.getBodypartLewdAdjective(BodypartSlot.Penis)
+		
+	if(_command == "vagina" && _args.size() == 0 && object.has_method("getBodypartLewdDescriptionAndName")):
+		return object.getBodypartLewdDescriptionAndName(BodypartSlot.Vagina)
+	if(_command == "aVagina" && _args.size() == 0 && object.has_method("getBodypartLewdDescriptionAndNameWithA")):
+		return object.getBodypartLewdDescriptionAndNameWithA(BodypartSlot.Vagina)
+		
+	if(_command == "breasts" && _args.size() == 0 && object.has_method("getBodypartLewdDescriptionAndName")):
+		return object.getBodypartLewdDescriptionAndName(BodypartSlot.Breasts)
+	if(_command == "breastsSize" && _args.size() == 0 && object.has_method("getBodypartLewdSizeAdjective")):
+		return object.getBodypartLewdSizeAdjective(BodypartSlot.Breasts)
+	if(_command == "breastsDesc" && _args.size() == 0 && object.has_method("getBodypartLewdAdjective")):
+		return object.getBodypartLewdAdjective(BodypartSlot.Breasts)
+		
+	if(_command == "tail" && _args.size() == 0 && object.has_method("getBodypartLewdDescriptionAndName")):
+		return object.getBodypartLewdDescriptionAndName(BodypartSlot.Tail)
+	if(_command == "aTail" && _args.size() == 0 && object.has_method("getBodypartLewdDescriptionAndNameWithA")):
+		return object.getBodypartLewdDescriptionAndNameWithA(BodypartSlot.Tail)
+	if(_command == "tailSize" && _args.size() == 0 && object.has_method("getBodypartLewdSizeAdjective")):
+		return object.getBodypartLewdSizeAdjective(BodypartSlot.Tail)
+	if(_command == "tailDesc" && _args.size() == 0 && object.has_method("getBodypartLewdAdjective")):
+		return object.getBodypartLewdAdjective(BodypartSlot.Tail)
 	
 	return "!RUNTIME ERROR NO COMMAND FOUND "+_obj+"."+_command+" "+str(_args)+"!"
