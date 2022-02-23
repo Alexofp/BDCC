@@ -11,7 +11,7 @@ func run():
 	#runScene("FightScene", ["risha"], "rishafight")
 	
 func delayedRun():
-	addButton("Steal", "Try and steal something", "steal_apple")
+	addButtonUnlessLate("Steal", "Try and steal something", "steal_apple")
 
 func shouldInterupt():
 	return false

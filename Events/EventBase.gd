@@ -46,3 +46,10 @@ func addButton(text: String, tooltip: String = "", method: String = "", args = [
 
 func addDisabledButton(text: String, tooltip: String = ""):
 	GM.ui.addDisabledButton(text, tooltip)
+
+func addButtonUnlessLate(text: String, tooltip: String = "", method: String = "", args = [], latetext: String = "It's way too late for that"):
+	if(GM.main.isVeryLate()):
+		addDisabledButton(text, latetext)
+	else:
+		addButton(text, tooltip, method, args)
+	

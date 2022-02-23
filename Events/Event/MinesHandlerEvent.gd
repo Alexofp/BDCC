@@ -11,13 +11,11 @@ func run():
 	#runScene("FightScene", ["risha"], "rishafight")
 	
 func delayedRun():
-	if(GM.main.isVeryLate()):
-		addDisabledButton("Work", "It's way too late for that")
-	elif(GM.pc.getStamina() > 0):
+	if(GM.pc.getStamina() > 0):
 		if(!GM.main.getFlag(Flag.Mining_IntroducedToMinning, false)):
-			addButton("Work", "See what's it about", "first_time")
+			addButtonUnlessLate("Work", "See what's it about", "first_time")
 		else:
-			addButton("Work", "Go work in the mines", "not_first_time")
+			addButtonUnlessLate("Work", "Go work in the mines", "not_first_time")
 	else:
 		addDisabledButton("Work", "You are way too tired to work")
 	

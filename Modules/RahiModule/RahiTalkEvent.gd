@@ -17,7 +17,7 @@ func delayedRun():
 		saynn("You see some unknown feline sitting on a bench")
 	else:
 		saynn("You see the Kitty sitting on a bench")
-	addButton("Rahi", "Talk to the feline", "talk")
+	addButtonUnlessLate("Rahi", "Talk to the feline", "talk")
 
 func shouldInterupt():
 	return false

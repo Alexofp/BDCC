@@ -108,6 +108,13 @@ func addDisabledButton(text: String, tooltip: String = ""):
 	GM.ui.addDisabledButton(text, tooltip)
 	#emit_signal("addDisabledButton", text, tooltip)
 	
+func addButtonUnlessLate(text: String, tooltip: String = "", arg: String = "", latetext: String = "It's way too late for that"):
+	if(GM.main.isVeryLate()):
+		addDisabledButton(text, latetext)
+	else:
+		addButton(text, tooltip, arg)
+	
+	
 func clearScreen():
 	GM.ui.clearText()
 	GM.ui.clearButtons()
