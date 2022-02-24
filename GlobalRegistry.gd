@@ -105,6 +105,12 @@ func getBodypart(id: String):
 		return null
 	return bodyparts[id].duplicate()
 
+func getBodypartRef(id: String):
+	if(!bodyparts.has(id)):
+		printerr("ERROR: bodypart with the id "+id+" wasn't found")
+		return null
+	return bodyparts[id]
+
 func getBodypartsIdsBySlot(_slot):
 	var result = []
 	for bodypartID in bodyparts:

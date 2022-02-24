@@ -109,7 +109,7 @@ func _run():
 			
 		var allbodypartsIDs = GlobalRegistry.getBodypartsIdsBySlot(pickingBodypartType)
 		for bodypartID in allbodypartsIDs:
-			var bodypart = GlobalRegistry.getBodypart(bodypartID)
+			var bodypart = GlobalRegistry.getBodypartRef(bodypartID)
 			var supportedSpecies = bodypart.getCompatibleSpecies()
 			
 			for supported in supportedSpecies:
