@@ -2,6 +2,7 @@ extends "res://Scenes/SceneBase.gd"
 
 var pickingBodypartType = BodypartSlot.Legs
 var pickedFirstSpeciesHybrid = ""
+var pickedAttribID = ""
 
 func _init():
 	sceneID = "CharacterCreatorScene"
@@ -71,10 +72,14 @@ func _run():
 			
 			var bodypart = bodyparts[slot]
 			say(slotName+": "+bodypart.getName().capitalize())
-			var extra = bodypart.getExtraInfoCreation()
-			if(extra!=""):
-				say(" (" + extra + ")")
+			#var extra = bodypart.getExtraInfoCreation()
+			#if(extra!=""):
+			#	say(" (" + extra + ")")
 			say("\n")
+			for curAttrib in bodypart.getAttributesText():
+				sayn(" - "+curAttrib[0]+": "+str(curAttrib[1]))
+				
+			#say("\n")
 		
 		addButton("Confirm", "I like it", "donecreating")
 		
@@ -94,14 +99,27 @@ func _run():
 #		if(GM.pc.hasTail()):
 #			saynn("YOU HAVE {pc.aTail}")
 			
-		addButton("Breast size", "Change breast size", "pickbreastsize")
-			
+
 		addButton("back", "Back to picking species", "pickspecies")
 
 	if(state == "pickbodypart"):
-		say("Choose")
+		saynn("Choose the bodypart or change the attributes of the current one")
 		
 		addButton("Back", "go back", "pickedspecies")
+		
+		if(GM.pc.hasBodypart(pickingBodypartType)):
+			var bodypart = GM.pc.getBodypart(pickingBodypartType)
+			
+			sayn("Currently selected: "+bodypart.getName())
+			for curAttrib in bodypart.getAttributesText():
+				sayn(curAttrib[0]+": "+str(curAttrib[1]))
+			
+			var attribOptions = bodypart.getPickableAttributes()
+			if(attribOptions.size() > 0):
+				addButton("Change current", "Change the attributes of the current bodypart instead of creating a new one", "bodypartAttributes")
+			
+			
+		
 		var playerSpecies: Array = GM.pc.getSpecies()
 			
 		if(!BodypartSlot.isEssential(pickingBodypartType)):
@@ -114,18 +132,34 @@ func _run():
 			
 			for supported in supportedSpecies:
 				if(supported in playerSpecies || supported == Species.Any):
-					addButton(bodypart.getName(), "change to this", "setbodypart", [bodypart.id])
+					addButton(bodypart.getName().capitalize(), "Change to this", "setbodypart", [bodypart.id])
 					break
 
-	if(state == "pickbreastsize"):
-		say("Pick your character's breast size")
-		addButton("Forever Flat", "Your breasts will never produce milk or increase in size", "setbreasts", [BodypartBreasts.BreastsSize.FOREVER_FLAT])
-		addButton("Flat", "Flat breasts", "setbreasts", [BodypartBreasts.BreastsSize.FLAT])
-		addButton("A", "A sized breasts", "setbreasts", [BodypartBreasts.BreastsSize.A])
-		addButton("B", "B sized breasts", "setbreasts", [BodypartBreasts.BreastsSize.B])
-		addButton("C", "C sized breasts", "setbreasts", [BodypartBreasts.BreastsSize.C])
-		addButton("D", "D sized breasts", "setbreasts", [BodypartBreasts.BreastsSize.D])
-		addButton("back", "Back", "pickedspecies")
+	if(state == "bodypartAttributes"):
+		var bodypart = GM.pc.getBodypart(pickingBodypartType)
+		var attributes = bodypart.getPickableAttributes()
+		
+		saynn("Change the atributes of "+bodypart.getName())
+		for curAttrib in bodypart.getAttributesText():
+			sayn(curAttrib[0]+": "+str(curAttrib[1]))
+		
+		addButton("Done", "You're done changing attributes", "pickedspecies")
+		
+		for attributeID in attributes:
+			var attribute = attributes[attributeID]
+			addButton(attribute["textButton"], attribute["buttonDesc"], "attributeMenu", [attributeID])
+
+	if(state == "attributeMenu"):
+		var bodypart = GM.pc.getBodypart(pickingBodypartType)
+		var attributes = bodypart.getPickableAttributes()
+		var currentAttribute = attributes[pickedAttribID]
+		
+		saynn(currentAttribute["text"])
+		
+		for option in currentAttribute["options"]:
+			addButton(option[1], option[2], "setAttribute", [option[0]])
+		
+		addButton("Back", "Go back a menu", "bodypartAttributes")
 
 
 func _react(_action: String, _args):
@@ -145,17 +179,24 @@ func _react(_action: String, _args):
 		setState("pickedspecies")
 		return
 		
-	if(_action == "setbreasts"):
-		if(GM.pc.hasBodypart(BodypartSlot.Breasts)):
-			var breasts = GM.pc.getBodypart(BodypartSlot.Breasts)
-			breasts.size = _args[0]
-			GM.pc.updateAppearance()		
+	if(_action == "attributeMenu"):
+		if(_args.size() > 0):
+			pickedAttribID = _args[0]
+	
+	if(_action == "setAttribute"):
+		var pickedValue = _args[0]
+		var bodypart = GM.pc.getBodypart(pickingBodypartType)
+		#var attributes = bodypart.getPickableAttributes()
+		#var currentAttribute = attributes[pickedAttribID]
 		
-		setState("pickedspecies")
+		bodypart.applyAttribute(pickedAttribID, pickedValue)
+		GM.pc.updateAppearance()
+		setState("bodypartAttributes")
 		return
 	
 	if(_action == "pickbodypart"):
-		pickingBodypartType = _args[0]
+		if(_args.size() > 0):
+			pickingBodypartType = _args[0]
 	
 	if(_action == "removebodypart"):
 		var bodypartSlot = _args[0]
@@ -171,7 +212,13 @@ func _react(_action: String, _args):
 		
 		GM.pc.giveBodypart(bodypart)
 		
-		setState("pickedspecies")
+		var pickableOptions = bodypart.getPickableAttributes()
+		if(pickableOptions.size() == 0):
+			setState("pickedspecies")
+		else:
+			setState("bodypartAttributes")
+		
+		
 		return
 		
 	if(_action == "pick2species"):
@@ -189,6 +236,7 @@ func saveData():
 	
 	data["pickingBodypartType"] = pickingBodypartType
 	data["pickedFirstSpeciesHybrid"] = pickedFirstSpeciesHybrid
+	data["pickedAttribID"] = pickedAttribID
 	
 	return data
 	
@@ -197,3 +245,4 @@ func loadData(data):
 	
 	pickingBodypartType = SAVE.loadVar(data, "pickingBodypartType", BodypartSlot.Legs)
 	pickedFirstSpeciesHybrid = SAVE.loadVar(data, "pickedFirstSpeciesHybrid", "")
+	pickedAttribID = SAVE.loadVar(data, "pickedAttribID", "")

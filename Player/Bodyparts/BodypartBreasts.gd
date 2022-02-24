@@ -18,9 +18,6 @@ func loadData(_data):
 
 func getSlot():
 	return BodypartSlot.Breasts
-
-func getExtraInfoCreation():
-	return "size: " + breastSizeToString(size)
 	
 static func breastSizeToString(bsize):
 	if(bsize == BreastsSize.FOREVER_FLAT):
@@ -87,3 +84,29 @@ func getLewdName():
 func getLewdDescriptionAndName():
 	var text = getLewdAdjective() + " " + getLewdSizeAdjective() + " " + getLewdName()
 	return text
+
+func getPickableAttributes():
+	return {
+		"breastsize": {
+			"text": "Change the breast size",
+			"textButton": "Breast size",
+			"buttonDesc": "Pick the breast size",
+			"options": [
+				[BreastsSize.FOREVER_FLAT, "Forever Flat", "Your breasts will never produce milk or increase in size"],
+				[BreastsSize.FLAT, "Flat", "Flat breasts"],
+				[BreastsSize.A, "A", "A-cup breasts"],
+				[BreastsSize.B, "B", "B-cup breasts"],
+				[BreastsSize.C, "C", "C-cup breasts"],
+				[BreastsSize.D, "D", "D-cup breasts"],
+			]
+		}
+	}
+	
+func applyAttribute(_attrID: String, _attrValue):
+	if(_attrID == "breastsize"):
+		size = _attrValue
+
+func getAttributesText():
+	return [
+		["Breast size", breastSizeToString(size)],
+	]

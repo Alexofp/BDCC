@@ -12,9 +12,6 @@ func getSlot():
 func getTooltipInfo():
 	return "length: " + str(lengthCM) + " cm\n" + "Gonna be more stuff here"
 
-func getExtraInfoCreation():
-	return "length: " + str(lengthCM)+" cm"
-
 func saveData():
 	return {
 		"lengthCM": lengthCM,
@@ -44,3 +41,33 @@ func getLewdAdjective():
 	
 func getLewdName():
 	return RNG.pick(["cock", "cock", "dick", "dick", "member", "shaft"])
+
+func getPickableAttributes():
+	return {
+		"cocksize": {
+			"text": "Pick your cock's length",
+			"textButton": "Length",
+			"buttonDesc": "Pick the cock's length",
+			"options": [
+				[5, "5 cm", "Pick this length"],
+				[8, "8 cm", "Pick this length"],
+				[10, "10 cm", "Pick this length"],
+				[15, "15 cm", "Pick this length"],
+				[18, "18 cm", "Pick this length"],
+				[22, "22 cm", "Pick this length"],
+				[25, "25 cm", "Pick this length"],
+				[30, "30 cm", "Pick this length"],
+				[40, "40 cm", "Pick this length"],
+				[50, "50 cm", "Pick this length"],
+			]
+		}
+	}
+	
+func applyAttribute(_attrID: String, _attrValue):
+	if(_attrID == "cocksize"):
+		lengthCM = _attrValue
+
+func getAttributesText():
+	return [
+		["Penis length", str(lengthCM)+" cm"],
+	]

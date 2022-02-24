@@ -7,6 +7,7 @@ onready var animationTree = $AnimationTree
 
 var skeletonNodes = {}
 var limbs = {}
+var limbsTypes = {}
 
 signal onBodypartMouseEntered(who, what)
 signal onBodypartMouseExited(who, what)
@@ -49,8 +50,12 @@ func _process(_delta):
 
 func set_limb(slot, type):
 	if(limbs.has(slot)):
+		if(limbsTypes[slot] == type):
+			return
+		
 		limbs[slot].queue_free()
 		limbs.erase(slot)
+		limbsTypes.erase(slot)
 	
 	if(!LimbTypes.Registry.has(slot)):
 		assert(false)
@@ -64,18 +69,21 @@ func set_limb(slot, type):
 	
 	add_child(limb)
 	limbs[slot] = limb
+	limbsTypes[slot] = type
 	limb.applySkeleton(retargetedSkeleton)
 
 func remove_limb(slot):
 	if(limbs.has(slot)):
 		limbs[slot].queue_free()
 		limbs.erase(slot)
+		limbsTypes.erase(slot)
 
 func clear():
 	for limbSlot in limbs.keys():
 		var limb = limbs[limbSlot]
 		limb.queue_free()
 	limbs.clear()
+	limbsTypes.clear()
 
 func loadFromPlayer(player: Player):
 	clear()

@@ -33,9 +33,6 @@ func getCompatibleSpecies():
 func getHybridPriority():
 	return 0
 
-func getExtraInfoCreation():
-	return ""
-
 func getTooltipInfo():
 	return "error, let the developer know"
 
@@ -57,3 +54,12 @@ func getLewdDescriptionAndNameWithA():
 	if(t[0].to_lower() in "eyuioa"):
 		return "an "+t
 	return "a "+t
+
+func getPickableAttributes():
+	return {}
+	
+func applyAttribute(_attrID: String, _attrValue):
+	pass
+
+func getAttributesText():
+	return []
