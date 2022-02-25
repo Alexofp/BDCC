@@ -209,6 +209,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Modules/NovaModule/Nova_module.gd"
 }, {
+"base": "Reference",
+"class": "Orifice",
+"language": "GDScript",
+"path": "res://Player/Orifice/Orifice.gd"
+}, {
 "base": "BaseCharacter",
 "class": "Player",
 "language": "GDScript",
@@ -360,6 +365,7 @@ _global_script_class_icons={
 "MainThing": "",
 "Module": "",
 "NovaModule": "",
+"Orifice": "",
 "Player": "",
 "PunishmentsModule": "",
 "Quest": "",

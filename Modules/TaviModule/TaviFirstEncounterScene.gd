@@ -420,7 +420,8 @@ func _react(_action: String, _args):
 		processTime(30*60)
 		GM.pc.orgasmFrom("tavi")
 		GM.pc.cummedOnBy("tavi", BodilyFluids.FluidSource.Vagina)
-		processTime(0)
+		GM.pc.cummedInMouthBy("tavi", BodilyFluids.FluidSource.Vagina)
+		GM.pc.updateNonBattleEffects()
 		addMessage("Tavi came on you, covering your body with her female juices")
 	
 	if(_action == "fight"):

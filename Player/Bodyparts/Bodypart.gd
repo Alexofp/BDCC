@@ -63,3 +63,6 @@ func applyAttribute(_attrID: String, _attrValue):
 
 func getAttributesText():
 	return []
+
+func processTime(_seconds: int):
+	pass

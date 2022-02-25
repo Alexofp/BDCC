@@ -3,6 +3,10 @@ extends "res://Scenes/SceneBase.gd"
 func _init():
 	sceneID = "SuckNovaCockScene"
 
+func _initScene(_args = []):
+	GM.pc.cummedInMouthBy("nova")
+	GM.pc.updateNonBattleEffects()
+
 func _run():
 	if(state == ""):
 		addCharacter("nova")
@@ -68,8 +72,6 @@ func _run():
 		
 
 func _react(_action: String, _args):
-
-
 	if(_action == "endthescene"):
 		endScene()
 		return

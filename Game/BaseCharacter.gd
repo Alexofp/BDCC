@@ -495,6 +495,14 @@ func getFluidType(fluidSource):
 		
 	return null
 
+func getFluidAmount(fluidSource):
+	if(fluidSource == BodilyFluids.FluidSource.Penis):
+		return 100.0
+	if(fluidSource == BodilyFluids.FluidSource.Vagina):
+		return 200.0
+		
+	return 0.0
+
 func getFemininity() -> int:
 	return 50
 

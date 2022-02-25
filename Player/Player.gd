@@ -47,6 +47,7 @@ func _ready():
 	#inventory.addItem(GlobalRegistry.createItem("ballgag"))
 	
 	#inventory.equipItem(GlobalRegistry.createItem("ballgag"))
+	cummedInVaginaBy("pc")
 
 func updateAppearance():
 	emit_signal("bodypart_changed")
@@ -178,11 +179,32 @@ func updateNonBattleEffects():
 	else:
 		removeEffect(StatusEffect.CoveredInCum)
 
+	if(hasBodypart(BodypartSlot.Vagina) && !getBodypart(BodypartSlot.Vagina).isEmpty()):
+		addEffect(StatusEffect.HasCumInsideVagina)
+	else:
+		removeEffect(StatusEffect.HasCumInsideVagina)
+		
+	if(hasBodypart(BodypartSlot.Anus) && !getBodypart(BodypartSlot.Anus).isEmpty()):
+		addEffect(StatusEffect.HasCumInsideAnus)
+	else:
+		removeEffect(StatusEffect.HasCumInsideAnus)
+		
+	if(hasBodypart(BodypartSlot.Head) && !getBodypart(BodypartSlot.Head).isEmpty()):
+		addEffect(StatusEffect.HasCumInsideMouth)
+	else:
+		removeEffect(StatusEffect.HasCumInsideMouth)
+
 func processBattleTurn():
 	.processBattleTurn()
 	updateNonBattleEffects()
 
 func processTime(_secondsPassed):
+	for bodypartSlot in bodyparts:
+		var bodypart = bodyparts[bodypartSlot]
+		if(bodypart == null):
+			continue
+		bodypart.processTime(_secondsPassed)
+	
 	updateNonBattleEffects()
 	
 	for effectID in statusEffects:
@@ -462,6 +484,12 @@ func clearBodyFluids():
 	bodyFluids.clear()
 	bodyMessiness = 0
 
+func clearOrificeFluids():
+	if(hasBodypart(BodypartSlot.Vagina)):
+		getBodypart(BodypartSlot.Vagina).clearFluids()
+	getBodypart(BodypartSlot.Anus).clearFluids()
+	getBodypart(BodypartSlot.Head).clearFluids()
+
 func getOutsideMessinessLevel():
 	return bodyMessiness
 
@@ -471,6 +499,26 @@ func getOutsideMessinessFluidList():
 		if(!myfluids.has(bodyFluidData[1])):
 			myfluids.append(bodyFluidData[1])
 	return myfluids
+
+func cummedInBodypartBy(bodypartSlot, characterID, sourceType = null):
+	if(!hasBodypart(bodypartSlot)):
+		return
+	
+	var ch = GlobalRegistry.getCharacter(characterID)
+	if(sourceType == null):
+		sourceType = BodilyFluids.FluidSource.Penis
+	
+	var thebodypart = getBodypart(bodypartSlot)
+	thebodypart.addFluid(ch.getFluidType(sourceType), ch.getFluidAmount(sourceType), characterID)
+
+func cummedInVaginaBy(characterID, sourceType = null):
+	cummedInBodypartBy(BodypartSlot.Vagina, characterID, sourceType)
+
+func cummedInAnusBy(characterID, sourceType = null):
+	cummedInBodypartBy(BodypartSlot.Anus, characterID, sourceType)
+
+func cummedInMouthBy(characterID, sourceType = null):
+	cummedInBodypartBy(BodypartSlot.Head, characterID, sourceType)
 
 func getExposureFactor():
 	return 1.0

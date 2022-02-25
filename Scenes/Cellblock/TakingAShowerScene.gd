@@ -39,7 +39,13 @@ func _run():
 		saynn("Eventually, you finish cleaning yourself and just stand still under the running water for a bit, pondering")
 		
 		addButton("Done", "Finish showering", "finish")
-		addDisabledButton("Clean inside", "Not done")
+		addButton("Clean inside", "Wash out any bodily fluids from inside too", "clean_inside")
+		addDisabledButton("Masturbate", "Not done")
+			
+	if(state == "clean_inside"):
+		saynn("You use the shower to remove any fluids from your orifices")
+		
+		addButton("Done", "Finish showering", "finish")
 		addDisabledButton("Masturbate", "Not done")
 			
 	if(state == "finish"):
@@ -62,6 +68,10 @@ func _react(_action: String, _args):
 			return
 		
 		addMessage("You feel fresh and clean")
+
+	if(_action == "clean_inside"):
+		GM.pc.clearOrificeFluids()
+		processTime(60 * 10)
 
 
 	if(_action == "endthescene"):
