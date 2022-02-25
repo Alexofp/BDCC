@@ -13,6 +13,8 @@ var pickedGender = Gender.Female
 var pronounsGender = null
 var pickedSpecies = ["feline"]
 var inmateNumber = "12859"
+var pickedFemininity: int = 50
+var pickedThickness: int = 50
 
 # Messy stuff
 var bodyFluids = []
@@ -235,6 +237,14 @@ func setSpecies(species: Array):
 	emit_signal("stat_changed")
 
 func resetBodypartsToDefault():
+	var newgender = getGender()
+	if(newgender == BaseCharacter.Gender.Male):
+		pickedFemininity = 0
+	if(newgender == BaseCharacter.Gender.Female):
+		pickedFemininity = 100
+	if(newgender == BaseCharacter.Gender.Androgynous || newgender == BaseCharacter.Gender.Other):
+		pickedFemininity = 50
+	
 	var speciesIds = getSpecies()
 	var myspecies = []
 	for specieID in speciesIds:
@@ -277,14 +287,10 @@ func saveData():
 		"pickedSpecies": pickedSpecies,
 		"bodyMessiness": bodyMessiness,
 		"bodyFluids": bodyFluids,
+		"pickedFemininity": pickedFemininity,
+		"pickedThickness": pickedThickness,
 	}
 	
-#	data["legs"] = legs.id
-#	data["legsData"] = legs.saveData()
-#	data["breasts"] = breasts.id
-#	data["breastsData"] = breasts.saveData()
-#	data["hair"] = hair.id
-#	data["hairData"] = hair.saveData()
 	data["bodyparts"] = {}
 	for slot in bodyparts:
 		if(bodyparts[slot] == null):
@@ -313,6 +319,8 @@ func loadData(data):
 	pickedSpecies = SAVE.loadVar(data, "pickedSpecies", ["human"])
 	bodyMessiness = SAVE.loadVar(data, "bodyMessiness", 0)
 	bodyFluids = SAVE.loadVar(data, "bodyFluids", [])
+	pickedFemininity = SAVE.loadVar(data, "pickedFemininity", 50)
+	pickedThickness = SAVE.loadVar(data, "pickedThickness", 50)
 	
 	resetSlots()
 	var loadedBodyparts = SAVE.loadVar(data, "bodyparts", {})
@@ -497,3 +505,49 @@ func getBodypartLewdDescriptionAndNameWithA(bodypartSlot):
 	if(!hasBodypart(bodypartSlot)):
 		return "ERROR:NO BODYPART IN SLOT " + str(bodypartSlot)
 	return getBodypart(bodypartSlot).getLewdDescriptionAndNameWithA()
+
+func getFemininity() -> int:
+	return pickedFemininity
+
+func getThickness() -> int:
+	return pickedThickness
+
+func getPickableAttributes():
+	return {
+		"femininity": {
+			"text": "Pick how feminine or masculine you are",
+			"textButton": "Femininity",
+			"buttonDesc": "Pick how feminine or masculine you are",
+			"options": [
+				[0, "Very masculine", "Fully masculine"],
+				[25, "Masculine", "75% Masculine"],
+				[50, "Androgynous", "Half-way between feminine and masculine"],
+				[75, "Feminine", "75% Feminine"],
+				[100, "Very feminine", "Fully feminine"],
+			]
+		},
+		"thickness": {
+			"text": "Pick how thick you are",
+			"textButton": "Thickness",
+			"buttonDesc": "Pick how thick you are",
+			"options": [
+				[0, "Skinny", "0% thick"],
+				[25, "Slim", "25% thick"],
+				[50, "Average", "50% thick"],
+				[75, "Thick", "75% thick"],
+				[100, "Very thick", "100% thicc"],
+			]
+		},
+	}
+	
+func applyAttribute(_attrID: String, _attrValue):
+	if(_attrID == "femininity"):
+		pickedFemininity = _attrValue
+	if(_attrID == "thickness"):
+		pickedThickness = _attrValue
+
+func getAttributesText():
+	return [
+		["Femininity", str(pickedFemininity)+"%"],
+		["Thickness", str(pickedThickness)+"%"],
+	]

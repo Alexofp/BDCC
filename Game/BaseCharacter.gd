@@ -494,3 +494,32 @@ func getFluidType(fluidSource):
 		return BodilyFluids.FluidType.GirlCum
 		
 	return null
+
+func getFemininity() -> int:
+	return 50
+
+func getThickness() -> int:
+	return 50
+
+func getFeminityAdjective():
+	var fem = getFemininity()
+	
+	if(fem <= 33):
+		return RNG.pick(["manly", "masculine"])
+
+	if(fem >= 66):
+		return RNG.pick(["girly", "feminine"])
+
+	return RNG.pick(["androgynous"])
+	
+func getThicknessAdjective():
+	var thick = getThickness()
+	
+	if(thick <= 10):
+		return RNG.pick(["soft", "thin", "skinny", "athletic"])
+	if(thick <= 35):
+		return RNG.pick(["slim", "fit"])
+	if(thick <= 75):
+		return RNG.pick(["average", "round"])
+	else:
+		return RNG.pick(["soft", "plush", "thick", "wide"])

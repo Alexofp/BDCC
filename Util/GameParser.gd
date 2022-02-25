@@ -79,5 +79,10 @@ func callObjectFunc(_obj: String, _command: String, _args: Array):
 		return object.getBodypartLewdSizeAdjective(BodypartSlot.Tail)
 	if(_command == "tailDesc" && _args.size() == 0 && object.has_method("getBodypartLewdAdjective")):
 		return object.getBodypartLewdAdjective(BodypartSlot.Tail)
+		
+	if(_command in ["thick", "slim"] && _args.size() == 0 && object.has_method("getThicknessAdjective")):
+		return object.getThicknessAdjective()
+	if(_command in ["feminine", "masculine", "masc"] && _args.size() == 0 && object.has_method("getFeminityAdjective")):
+		return object.getFeminityAdjective()
 	
 	return "!RUNTIME ERROR NO COMMAND FOUND "+_obj+"."+_command+" "+str(_args)+"!"

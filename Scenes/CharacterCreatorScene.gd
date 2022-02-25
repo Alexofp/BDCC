@@ -3,6 +3,7 @@ extends "res://Scenes/SceneBase.gd"
 var pickingBodypartType = BodypartSlot.Legs
 var pickedFirstSpeciesHybrid = ""
 var pickedAttribID = ""
+var bodyPickedAttribID = ""
 
 func _init():
 	sceneID = "CharacterCreatorScene"
@@ -80,24 +81,33 @@ func _run():
 				sayn(" - "+curAttrib[0]+": "+str(curAttrib[1]))
 				
 			#say("\n")
-		
+		say("\n")
+		sayn("Body attributes:")
+		for curAttrib in GM.pc.getAttributesText():
+			sayn(curAttrib[0]+": "+str(curAttrib[1]))
+			
+
 		addButton("Confirm", "I like it", "donecreating")
 		
 		for slot in allSlots:
 			var slotName = BodypartSlot.getVisibleName(slot)
-			addButton(slotName, "Change this", "pickbodypart", [slot])
+			addButton(slotName, "Change this bodypart", "pickbodypart", [slot])
+			
+		addButton("Body attributes", "Change your femininity, thickness and so", "bodyAttributes")
 			
 		# DEBUG testing stuff, feel free to remove
-#		if(GM.pc.hasPenis()):
-#			sayn("YOUR {pc.penis} is amazing")
-#			sayn("YOUR COCK IS {pc.cockSize} and also {pc.cockDesc}")
-#			saynn("You have {pc.aPenis}")
-#		sayn("Your {pc.breasts} are pretty good too")
-#		saynn("Your breasts are {pc.breastsSize} and they are also {pc.breastsDesc}")
-#		if(GM.pc.hasVagina()):
-#			saynn("YOU HAVE {pc.aVagina}")
-#		if(GM.pc.hasTail()):
-#			saynn("YOU HAVE {pc.aTail}")
+		if(true):
+			sayn("\nEXAMPLE DESCRIPTION:")
+			if(GM.pc.hasPenis()):
+				sayn("your dick is {pc.cockSize} and also {pc.cockDesc}")
+				saynn("You have {pc.aPenis}")
+			sayn("You have {pc.breasts}")
+			saynn("Your breasts are {pc.breastsSize} and they are also {pc.breastsDesc}")
+			if(GM.pc.hasVagina()):
+				saynn("You have {pc.aVagina}")
+			if(GM.pc.hasTail()):
+				saynn("You have {pc.aTail}")
+			saynn("Your body shape is {pc.thick}, you look {pc.feminine}")
 			
 
 		addButton("back", "Back to picking species", "pickspecies")
@@ -160,7 +170,43 @@ func _run():
 			addButton(option[1], option[2], "setAttribute", [option[0]])
 		
 		addButton("Back", "Go back a menu", "bodypartAttributes")
+	
+	if(state == "bodyAttributes"):
+		var attributes = GM.pc.getPickableAttributes()
+		
+		saynn("Pick what do you wanna change about your body")
+		for curAttrib in GM.pc.getAttributesText():
+			sayn(curAttrib[0]+": "+str(curAttrib[1]))
+		
+		addButton("Done", "You're done changing attributes", "pickedspecies")
+		
+		for attributeID in attributes:
+			var attribute = attributes[attributeID]
+			addButton(attribute["textButton"], attribute["buttonDesc"], "bodyAttributeMenu", [attributeID])
 
+		var bodyparts = GM.pc.getBodyparts()
+		var allSlots = BodypartSlot.getAll()
+		for slot in allSlots:
+			var bodypart = bodyparts[slot]
+			if(bodypart == null):
+				continue
+			var bodypartAttributes = bodypart.getPickableAttributes()
+			if(bodypartAttributes.size() == 0):
+				continue
+			addButton(bodypart.getName().capitalize()+" attributes", "Change the attributes of this bodypart", "openBodypartAttributes", [slot])
+			
+
+	if(state == "bodyAttributeMenu"):
+		var attributes = GM.pc.getPickableAttributes()
+		var currentAttribute = attributes[bodyPickedAttribID]
+		
+		saynn(currentAttribute["text"])
+		
+		for option in currentAttribute["options"]:
+			addButton(option[1], option[2], "bodySetAttribute", [option[0]])
+		
+		
+		addButton("Back", "Go back a menu", "bodyAttributes")
 
 func _react(_action: String, _args):
 	if(_action == "setgender"):
@@ -191,6 +237,25 @@ func _react(_action: String, _args):
 		
 		bodypart.applyAttribute(pickedAttribID, pickedValue)
 		GM.pc.updateAppearance()
+		setState("bodypartAttributes")
+		return
+	
+	if(_action == "bodyAttributeMenu"):
+		if(_args.size() > 0):
+			bodyPickedAttribID = _args[0]
+	
+	if(_action == "bodySetAttribute"):
+		var pickedValue = _args[0]
+		
+		GM.pc.applyAttribute(bodyPickedAttribID, pickedValue)
+		GM.pc.updateAppearance()
+		setState("bodyAttributes")
+		return
+	
+	if(_action == "openBodypartAttributes"):
+		if(_args.size() > 0):
+			pickingBodypartType = _args[0]
+			
 		setState("bodypartAttributes")
 		return
 	
@@ -237,6 +302,7 @@ func saveData():
 	data["pickingBodypartType"] = pickingBodypartType
 	data["pickedFirstSpeciesHybrid"] = pickedFirstSpeciesHybrid
 	data["pickedAttribID"] = pickedAttribID
+	data["bodyPickedAttribID"] = bodyPickedAttribID
 	
 	return data
 	
@@ -246,3 +312,4 @@ func loadData(data):
 	pickingBodypartType = SAVE.loadVar(data, "pickingBodypartType", BodypartSlot.Legs)
 	pickedFirstSpeciesHybrid = SAVE.loadVar(data, "pickedFirstSpeciesHybrid", "")
 	pickedAttribID = SAVE.loadVar(data, "pickedAttribID", "")
+	bodyPickedAttribID = SAVE.loadVar(data, "bodyPickedAttribID", "")
