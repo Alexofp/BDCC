@@ -53,3 +53,9 @@ func addButtonUnlessLate(text: String, tooltip: String = "", method: String = ""
 	else:
 		addButton(text, tooltip, method, args)
 	
+func addButtonWithChecks(text: String, tooltip: String, method: String, args, checks: Array):
+	var badCheck = ButtonChecks.check(checks)
+	if(badCheck == null):
+		addButton(text, tooltip, method, args)
+	else:
+		addDisabledButton(text, ButtonChecks.getReasonText(badCheck))

@@ -109,6 +109,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Inventory/BuffsHolder.gd"
 }, {
+"base": "Object",
+"class": "ButtonChecks",
+"language": "GDScript",
+"path": "res://UI/ButtonChecks.gd"
+}, {
 "base": "BaseCharacter",
 "class": "Character",
 "language": "GDScript",
@@ -345,6 +350,7 @@ _global_script_class_icons={
 "Buff": "",
 "BuffBase": "",
 "BuffsHolder": "",
+"ButtonChecks": "",
 "Character": "",
 "DamageType": "",
 "Doll": "",

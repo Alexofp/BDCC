@@ -114,6 +114,12 @@ func addButtonUnlessLate(text: String, tooltip: String = "", arg: String = "", l
 	else:
 		addButton(text, tooltip, arg)
 	
+func addButtonWithChecks(text: String, tooltip: String, arg: String, checks: Array):
+	var badCheck = ButtonChecks.check(checks)
+	if(badCheck == null):
+		addButton(text, tooltip, arg)
+	else:
+		addDisabledButton(text, ButtonChecks.getReasonText(badCheck))
 	
 func clearScreen():
 	GM.ui.clearText()
