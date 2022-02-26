@@ -441,6 +441,7 @@ self_modulate = Color( 0.7, 0.7, 1, 1 )
 position = Vector2( -192, 256 )
 roomName = "Bathroom"
 roomDescription = "A bunch of sinks in a row with a long mirror above. On the opposite side from them are the toilet stalls and a few urinals"
+roomSprite = 8
 roomColor = 3
 
 [node name="MainHallRoom38" parent="." index="55" instance=ExtResource( 2 )]
@@ -448,6 +449,7 @@ self_modulate = Color( 0.7, 0.7, 1, 1 )
 position = Vector2( -256, 640 )
 roomName = "Bathroom"
 roomDescription = "A bunch of sinks in a row with a long mirror above. On the opposite side from them are the toilet stalls and a few urinals"
+roomSprite = 8
 roomColor = 3
 
 [node name="MainDressingRoom" parent="." index="56" instance=ExtResource( 2 )]
@@ -464,6 +466,7 @@ position = Vector2( -256, 320 )
 roomName = "Shower"
 roomID = "main_shower1"
 roomDescription = "A room with that has a bunch of shower heads on the walls. Soap doesn't seem to be included"
+roomSprite = 7
 roomColor = 3
 
 [node name="MainHallRoom41" parent="." index="58" instance=ExtResource( 2 )]
@@ -472,6 +475,7 @@ position = Vector2( -320, 704 )
 roomName = "Shower"
 roomID = "main_shower2"
 roomDescription = "A room with that has a bunch of shower heads on the walls. Soap doesn't seem to be included"
+roomSprite = 7
 roomColor = 3
 
 [node name="MainHallRoom39" parent="." index="59" instance=ExtResource( 2 )]
@@ -497,6 +501,7 @@ self_modulate = Color( 0.7, 0.7, 1, 1 )
 position = Vector2( 192, 256 )
 roomName = "Laundry"
 roomDescription = "Half of the room is taken by a row of bulky industrial-looking washing machines. Then your eye spots a few bins with inmate uniforms and a uniform vender, similliar to the one that you saw during the intake"
+roomSprite = 9
 roomColor = 3
 
 [connection signal="onEnter" from="MainElevator" to="." method="_on_MainElevator_onEnter"]

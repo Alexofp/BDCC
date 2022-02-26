@@ -11,7 +11,7 @@ func getEffectDesc():
 	return "You're on the ground. Can still fight but it's almost impossible to dodge physical attacks"
 
 func getEffectImage():
-	return null
+	return "res://UI/StatusEffectsPanel/images/down.png"
 
 func getIconColor():
 	return IconColorBlue

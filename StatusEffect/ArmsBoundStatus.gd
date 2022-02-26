@@ -20,10 +20,11 @@ func getEffectDesc():
 	return "Your arms are bound, you can't punch"
 
 func getEffectImage():
-	return null
+	return "res://UI/StatusEffectsPanel/images/cuffshands.png"
 
 func getIconColor():
 	return IconColorPurple
 
 func combine(_args = []):
 	pass
+

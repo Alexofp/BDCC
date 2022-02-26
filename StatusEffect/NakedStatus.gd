@@ -20,7 +20,7 @@ func getEffectDesc():
 	return "You're naked, be ready for some extra attention\n[color=green]Lust damage +10%[/color]"
 
 func getEffectImage():
-	return null
+	return "res://UI/StatusEffectsPanel/images/nudity.png"
 
 func getIconColor():
 	return IconColorPurple

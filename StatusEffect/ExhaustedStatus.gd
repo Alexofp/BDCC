@@ -20,7 +20,7 @@ func getEffectDesc():
 	return "You are completely out of energy\n[color=red]Physical damage -20%[/color]"
 
 func getEffectImage():
-	return null
+	return "res://UI/StatusEffectsPanel/images/noenergy.png"
 
 func getIconColor():
 	return IconColorRed

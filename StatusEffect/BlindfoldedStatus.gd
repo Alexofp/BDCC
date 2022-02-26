@@ -20,7 +20,7 @@ func getEffectDesc():
 	return "You can't see. Hitting anything will be very hard"
 
 func getEffectImage():
-	return null
+	return "res://UI/StatusEffectsPanel/images/blind.png"
 
 func getIconColor():
 	return IconColorPurple

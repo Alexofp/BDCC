@@ -11,7 +11,7 @@ export(bool) var canNorth = true
 export(bool) var canEast = true
 export(bool) var canSouth = true
 
-enum RoomSprite { NONE, PERSON, CANTEEN, STAIRS, IMPORTANT, COMPUTER, VENDOMAT }
+enum RoomSprite { NONE, PERSON, CANTEEN, STAIRS, IMPORTANT, COMPUTER, VENDOMAT, SHOWER, WC, LAUNDRY }
 export(RoomSprite) var roomSprite = RoomSprite.NONE
 enum RoomColor { White, Green, Red, Blue, Pink, Orange, Yellow, Grey, LightGrey }
 export(RoomColor) var roomColor = RoomColor.White setget onRoomChangeColor
@@ -36,6 +36,9 @@ const sprites = {
 	RoomSprite.IMPORTANT: preload("res://Game/World/sprites/important.png"),
 	RoomSprite.COMPUTER: preload("res://Game/World/sprites/computer.png"),
 	RoomSprite.VENDOMAT: preload("res://Game/World/sprites/vendomat.png"),
+	RoomSprite.SHOWER: preload("res://Game/World/sprites/shower.png"),
+	RoomSprite.WC: preload("res://Game/World/sprites/wc.png"),
+	RoomSprite.LAUNDRY: preload("res://Game/World/sprites/laundry.png"),
 }
 
 onready var roomSpriteObject = $Sprite

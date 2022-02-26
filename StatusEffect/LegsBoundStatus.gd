@@ -20,7 +20,7 @@ func getEffectDesc():
 	return "Your legs are bound. You can still walk but it's harder to dodge attacks"
 
 func getEffectImage():
-	return null
+	return "res://UI/StatusEffectsPanel/images/cuffs.png"
 
 func getIconColor():
 	return IconColorPurple

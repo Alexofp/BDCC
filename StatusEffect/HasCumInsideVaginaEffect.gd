@@ -38,7 +38,20 @@ func getEffectDesc():
 	return message
 
 func getEffectImage():
-	return "res://UI/StatusEffectsPanel/images/mess.png"
+	if(!character.isPlayer()):
+		return "res://UI/StatusEffectsPanel/images/womb2.png"
+	
+	if(!character.hasBodypart(BodypartSlot.Vagina)):
+		return null
+	var vagina = character.getBodypart(BodypartSlot.Vagina)
+	var womb: Orifice = vagina.getOrifice()
+	var stuffLevel = womb.getStuffedLevel()
+	
+	if(stuffLevel < 0.3):
+		return "res://UI/StatusEffectsPanel/images/womb1.png"
+	if(stuffLevel < 0.7):
+		return "res://UI/StatusEffectsPanel/images/womb2.png"
+	return "res://UI/StatusEffectsPanel/images/womb3.png"
 
 func getIconColor():
 	return IconColorPurple
