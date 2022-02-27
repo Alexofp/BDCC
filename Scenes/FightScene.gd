@@ -10,6 +10,8 @@ var battleState = ""
 var battleEndedHow = ""
 var savedAIAttackID = ""
 var battleName = ""
+var currentAttackerID = ""
+var currentReceiverID = ""
 
 func _init():
 	sceneID = "FightScene"
@@ -111,7 +113,8 @@ func _run():
 	if(state == "playerMustDodge"):
 		var attack: Attack = GlobalRegistry.getAttack(savedAIAttackID)
 		
-		saynn(attack.getAnticipationText(enemyCharacter, GM.pc))
+		setEnemyAsAttacker()
+		saynn(GM.ui.processString(attack.getAnticipationText(enemyCharacter, GM.pc)))
 		addButton("Do nothing", "You don't counter the attack in any way", "dodge_donothing")
 		if(GM.pc.getStamina() > 0 && !GM.pc.hasEffect(StatusEffect.Collapsed)):
 			addButton("Dodge", "You dodge a physical attack completely spending 30 stamina in the process", "dodge_dodge")
@@ -228,7 +231,8 @@ func _react(_action: String, _args):
 		if(attack == null):
 			assert(false, "Bad attack: "+savedAIAttackID)
 			
-		whatEnemyDid = attack.doAttack(enemyCharacter, GM.pc)
+		setEnemyAsAttacker()
+		whatEnemyDid = GM.ui.processString(attack.doAttack(enemyCharacter, GM.pc))
 		savedAIAttackID = ""
 		
 		GM.pc.setFightingStateNormal()
@@ -259,7 +263,8 @@ func doPlayerAttack(attackID):
 	if(attack == null):
 		assert(false, "Bad attack: "+attackID)
 	
-	var text = attack.doAttack(GM.pc, enemyCharacter)
+	setPlayerAsAttacker()
+	var text = GM.ui.processString(attack.doAttack(GM.pc, enemyCharacter))
 	var attackAnim = attack.getAttackAnimation()
 	if(attackAnim != null && attackAnim != ""):
 		GM.pc.playAnimation(attackAnim)
@@ -298,7 +303,8 @@ func aiTurn():
 		assert(false, "Bad attack: "+attackID)
 		
 	if(!attack.canBeDodgedByPlayer(enemyCharacter, GM.pc)):	
-		enemyText += attack.doAttack(enemyCharacter, GM.pc)
+		setEnemyAsAttacker()
+		enemyText += GM.ui.processString(attack.doAttack(enemyCharacter, GM.pc))
 	else:
 		savedAIAttackID = attackID
 		setState("playerMustDodge")
@@ -366,10 +372,26 @@ func addAttackButtons(category):
 		#	desc += "\n"
 		desc += attack.getVisibleDesc()
 			
-		if(attack.canUse(GM.pc, enemyCharacter) && attack.meetsRequirements(GM.pc, enemyCharacter)):
+		if(attack.canUse(GM.pc, enemyCharacter)):
 			addButton(attack.getVisibleName(),  desc, "doattack", [attack.id])
 		else:
 			addDisabledButton(attack.getVisibleName(),  desc)
+
+func setPlayerAsAttacker():
+	currentAttackerID = "pc"
+	currentReceiverID = enemyID
+
+func setEnemyAsAttacker():
+	currentAttackerID = enemyID
+	currentReceiverID = "pc"
+
+func resolveCustomCharacterName(_charID):
+	if(_charID == "attacker" && currentAttackerID != ""):
+		return currentAttackerID
+	if(_charID in ["receiver", "reciever"] && currentReceiverID != ""):
+		return currentReceiverID
+	
+	return null
 
 func saveData():
 	var data = .saveData()
@@ -382,6 +404,8 @@ func saveData():
 	data["battleEndedHow"] = battleEndedHow
 	data["savedAIAttackID"] = savedAIAttackID
 	data["battleName"] = battleName
+	data["currentAttackerID"] = currentAttackerID
+	data["currentReceiverID"] = currentReceiverID
 	
 	return data
 	
@@ -398,3 +422,5 @@ func loadData(data):
 	enemyCharacter = GlobalRegistry.getCharacter(enemyID)
 	setFightCharacter(enemyID)
 	battleName = SAVE.loadVar(data, "battleName", "")
+	currentAttackerID = SAVE.loadVar(data, "currentAttackerID", "")
+	currentReceiverID = SAVE.loadVar(data, "currentReceiverID", "")

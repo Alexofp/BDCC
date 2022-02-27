@@ -15,9 +15,9 @@ func _ready():
 	randomize()
 	GM.main = self
 	
-	#runScene("WorldScene")
 	runScene("IntroScene")
 	#runScene("FightScene", ["testchar"])
+	#runScene("FightScene", ["tavi"])
 	
 	
 	runCurrentScene()
@@ -212,3 +212,8 @@ func getFlag(flagID, defaultValue = null):
 		return defaultValue
 	
 	return flags[flagID]
+
+func resolveCustomCharacterName(charID):
+	if(sceneStack.size() > 0):
+		return sceneStack.back().resolveCustomCharacterName(charID)
+	return null

@@ -128,6 +128,10 @@ func processString(text: String):
 
 func processTag(tag, arg, text):
 	if(tag == "say"):
+		var resolvedName = GM.main.resolveCustomCharacterName(arg)
+		if(resolvedName != null):
+			arg = resolvedName
+		
 		var object = null
 		if(arg == "pc"):
 			object = GM.pc

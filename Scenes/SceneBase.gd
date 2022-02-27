@@ -220,6 +220,9 @@ func getFlag(flagID, defaultValue = null):
 func increaseFlag(flagID, addvalue = 1):
 	GM.main.increaseFlag(flagID, addvalue)
 
+func resolveCustomCharacterName(_charID):
+	return null
+
 func canSave():
 	return true
 

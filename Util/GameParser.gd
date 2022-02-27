@@ -16,6 +16,10 @@ func callFunc(_command: String, _args: Array):
 	return "!RUNTIME ERROR NO COMMAND FOUND "+_command+" "+str(_args)+"!"
 	
 func callObjectFunc(_obj: String, _command: String, _args: Array):
+	var resolvedName = GM.main.resolveCustomCharacterName(_obj)
+	if(resolvedName != null):
+		_obj = resolvedName
+	
 	var object = null
 	if(_obj == "pc"):
 		object = GM.pc

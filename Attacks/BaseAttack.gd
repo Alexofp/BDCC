@@ -31,7 +31,7 @@ func doAttack(_attacker, _reciever):
 	return _doAttack(_attacker, _reciever)
 	
 func canUse(_attacker, _reciever):
-	return _canUse(_attacker, _reciever)
+	return _canUse(_attacker, _reciever) && meetsRequirements(_attacker, _reciever)
 
 func getRequirements():
 	return []

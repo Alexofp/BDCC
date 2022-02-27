@@ -40,6 +40,7 @@ func _ready():
 	giveBodypart(GlobalRegistry.getBodypart("felineears"))
 	giveBodypart(GlobalRegistry.getBodypart("vagina"))
 	giveBodypart(GlobalRegistry.getBodypart("anus"))
+	giveBodypart(GlobalRegistry.getBodypart("caninepenis"))
 	updateNonBattleEffects()
 	
 	#inventory.addItem(GlobalRegistry.createItem("testitem"))
@@ -47,7 +48,6 @@ func _ready():
 	#inventory.addItem(GlobalRegistry.createItem("ballgag"))
 	
 	#inventory.equipItem(GlobalRegistry.createItem("ballgag"))
-	cummedInVaginaBy("pc")
 
 func updateAppearance():
 	emit_signal("bodypart_changed")

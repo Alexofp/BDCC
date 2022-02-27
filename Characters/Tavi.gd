@@ -16,7 +16,7 @@ func getSpecies():
 	return ["feline"]
 
 func _getAttacks():
-	return ["biteattack", "simplekickattack", "shoveattack", "trygetupattack"]
+	return ["biteattack", "kickToBallsAttack", "slapTitsAttack", "stretchingAttack", "lickWounds", "shoveattack", "trygetupattack"]
 
 func reactTease():
 	return 0.2

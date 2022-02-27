@@ -21,6 +21,7 @@ func afterFightEnded():
 	.afterFightEnded()
 	pain = 0
 	lust = 0
+	stamina = getMaxStamina()
 
 func saveData():
 	var data = {

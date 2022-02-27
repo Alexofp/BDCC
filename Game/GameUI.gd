@@ -224,3 +224,6 @@ func trimLineEndings():
 
 func onTimePassed(_secondsPassed):
 	mapAndTimePanel.onTimePassed(_secondsPassed)
+
+func processString(strText: String):
+	return gameParser.executeString(sayParser.processString(strText))
