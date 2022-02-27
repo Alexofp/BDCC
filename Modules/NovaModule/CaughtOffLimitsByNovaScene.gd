@@ -59,11 +59,11 @@ func _run():
 
 		# (options are Fine, Offer self, Attack)
 
-		addButton("Fine", "Submit to the search", "fine")
+		addButton("Fine", "Submit to the search", "submittosearch")
 		addButton("Offer self", "Nova seems to have a dick, maybe you can take advantage of that", "offer_self")
 		addButton("Attack", "Fight the husky", "attack")
 
-	if(state == "fine"):
+	if(state == "submittosearch"):
 		saynn("You do as she says, walking up to the nearest wall and leaning forwards, waiting to be frisked.")
 
 		# (if girl)
@@ -274,11 +274,8 @@ func _run():
 
 func _react(_action: String, _args):
 
-	if(_action == "agree_to_suck"):
-		#GM.pc.orgasmFrom("angel")
-		processTime(60*30)
-		GM.pc.cummedOnBy("nova", BodilyFluids.FluidSource.Penis)
-		GM.pc.updateNonBattleEffects()
+	if(_action == "submittosearch"):
+		GM.pc.addLust(20)
 
 	if(_action == "humiliateAngel"):
 		runScene("HumiliateNovaScene")

@@ -40,7 +40,13 @@ func _run():
 		
 		addButton("Done", "Finish showering", "finish")
 		addButton("Clean inside", "Wash out any bodily fluids from inside too", "clean_inside")
+		addButton("Cold shower", "Helps to calm down", "cold_shower")
 		addDisabledButton("Masturbate", "Not done")
+			
+	if(state == "cold_shower"):
+		saynn("You switch the water to the coldest it can be. It's refreshing and helps you to get away from the horny thoughts")
+			
+		addButton("Done", "Finish showering", "finish")
 			
 	if(state == "clean_inside"):
 		saynn("You use the shower to remove any fluids from your orifices")
@@ -68,6 +74,9 @@ func _react(_action: String, _args):
 			return
 		
 		addMessage("You feel fresh and clean")
+
+	if(_action == "cold_shower"):
+		GM.pc.addLust(-50)
 
 	if(_action == "clean_inside"):
 		GM.pc.clearOrificeFluids()

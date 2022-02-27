@@ -325,6 +325,7 @@ func beforeTurnChecks():
 func afterTurnChecks():
 	#GM.pc.processBattleTurn()
 	#enemyCharacter.processBattleTurn()
+	GM.pc.updateNonBattleEffects()
 	
 	var won = checkEnd()
 	if(won == "lost"):

@@ -19,6 +19,7 @@ func _init():
 		"res://Modules/TaviModule/TaviPunishment1Scene.gd",
 		"res://Modules/TaviModule/TaviSubmitToScene.gd",
 		"res://Modules/TaviModule/DominateTaviScene.gd",
+		"res://Modules/TaviModule/DegradeTaviScene.gd",
 		]
 	characters = []
 	items = []

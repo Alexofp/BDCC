@@ -40,7 +40,7 @@ func _ready():
 	giveBodypart(GlobalRegistry.getBodypart("felineears"))
 	giveBodypart(GlobalRegistry.getBodypart("vagina"))
 	giveBodypart(GlobalRegistry.getBodypart("anus"))
-	giveBodypart(GlobalRegistry.getBodypart("caninepenis"))
+	#giveBodypart(GlobalRegistry.getBodypart("caninepenis"))
 	updateNonBattleEffects()
 	
 	#inventory.addItem(GlobalRegistry.createItem("testitem"))
@@ -438,7 +438,7 @@ func hasBigBreasts():
 
 func afterSleepingInBed():
 	addStamina(getMaxStamina())
-	addPain(-20)
+	addPain(-100)
 
 func afterRestingInBed(seconds):
 	var _hours = floor(seconds/3600.0)

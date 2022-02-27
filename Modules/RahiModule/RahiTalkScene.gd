@@ -34,7 +34,7 @@ func _run():
 		addButton("Talk", "Show a list of topics to talk about", "talk")
 		addButton("Appearance", "Take a closer look at the catgirl", "appearance")
 		addDisabledButton("Sex", "Not implemeted yet")
-		addDisabledButton("Offer apple", "You don't have one")
+		addDisabledButton("Offer apple", "Not done :(")
 		addButton("Leave", "Do something else", "endthescene")
 		
 	if(state == "appearance"):

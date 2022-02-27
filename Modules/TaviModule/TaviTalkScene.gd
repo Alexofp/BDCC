@@ -87,6 +87,10 @@ func _run():
 		
 	if(state == "won_fight" || state == "won_fight_lust"):
 		addButton("Dominate Tavi", "Make that bitch submit to you using violence", "dominateTavi")
+		if(getFlag(TaviModule.Tavi_Submissiveness, 0) >= 1):
+			addButton("Degrade Tavi", "Force her to act like a puppy", "degradeTavi")
+		else:
+			addDisabledButton("Degrade Tavi", "Tavi needs to be at least a little bit obedient")
 		addDisabledButton("Fuck Tavi", "Not done :(")
 		
 		addButton("Continue", "Let her be", "endthescene")
@@ -295,6 +299,11 @@ func _react(_action: String, _args):
 		
 	if(_action == "dominateTavi"):
 		runScene("DominateTaviScene")
+		endScene()
+		return
+		
+	if(_action == "degradeTavi"):
+		runScene("DegradeTaviScene")
 		endScene()
 		return
 	
