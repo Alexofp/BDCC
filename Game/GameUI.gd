@@ -19,6 +19,8 @@ onready var characterPanel = $HBoxContainer/Panel2/MarginContainer/VBoxContainer
 onready var playerPanel = $HBoxContainer/Panel/MarginContainer/PlayerPanel
 onready var charactersPanel = $HBoxContainer/Panel2/MarginContainer/VBoxContainer/CharactersPanel
 onready var scrollPanel = $HBoxContainer/VBoxContainer2/ScrollContainer
+onready var mainGameScreen = $HBoxContainer/VBoxContainer2
+onready var ingameMenuScreen = $HBoxContainer/InGameMenu
 var uiTextboxScene = preload("res://UI/UITextbox.tscn")
 onready var textcontainer = $HBoxContainer/VBoxContainer2/ScrollContainer/VBoxContainer
 var textboxes: Dictionary = {}
@@ -214,10 +216,10 @@ func loadingSavefileFinished():
 	playerPanel.loadingSavefileFinished()
 
 func _on_SaveButton_pressed():
-	SAVE.saveGame("user://savegame.save")
+	SAVE.makeQuickSave()
 
 func _on_LoadButton_pressed():
-	SAVE.loadGame("user://savegame.save")
+	SAVE.loadQuickSave()
 	
 func trimLineEndings():
 	textOutput.bbcode_text = textOutput.bbcode_text.trim_suffix("\n")
@@ -227,3 +229,13 @@ func onTimePassed(_secondsPassed):
 
 func processString(strText: String):
 	return gameParser.executeString(sayParser.processString(strText))
+
+
+func _on_MenuButton_pressed():
+	mainGameScreen.visible = false
+	ingameMenuScreen.visible = true
+
+
+func _on_InGameMenu_onResumeButtonPressed():
+	mainGameScreen.visible = true
+	ingameMenuScreen.visible = false

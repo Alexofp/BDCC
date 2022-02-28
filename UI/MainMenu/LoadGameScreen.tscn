@@ -1,0 +1,46 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://GlobalTheme.tres" type="Theme" id=1]
+[ext_resource path="res://UI/MainMenu/SaveGameElement.tscn" type="PackedScene" id=2]
+[ext_resource path="res://UI/MainMenu/LoadGameScreen.gd" type="Script" id=3]
+
+[node name="LoadGameScreen" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 1 )
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer"]
+margin_right = 1280.0
+margin_bottom = 690.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/ScrollContainer"]
+margin_right = 1280.0
+margin_bottom = 26.0
+size_flags_horizontal = 3
+
+[node name="SaveGameElement" parent="VBoxContainer/ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
+
+[node name="CloseButton" type="Button" parent="VBoxContainer"]
+margin_top = 694.0
+margin_right = 58.0
+margin_bottom = 720.0
+size_flags_horizontal = 2
+text = "Close"
+
+[connection signal="visibility_changed" from="." to="." method="_on_LoadGameScreen_visibility_changed"]
+[connection signal="pressed" from="VBoxContainer/CloseButton" to="." method="_on_CloseButton_pressed"]

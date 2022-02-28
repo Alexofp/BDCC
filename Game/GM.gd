@@ -8,6 +8,9 @@ var ES: EventSystem
 var QS: QuestSystem
 
 func _ready():
+	var directory = Directory.new( )
+	directory.make_dir("user://saves")
+	
 	pc = load("res://Player/Player.gd").new()
 	add_child(pc)
 

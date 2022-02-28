@@ -25,29 +25,7 @@ func _init():
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	name = "Player"
-	resetSlots()
-	#legs = GlobalRegistry.getBodypart("humanleg")
-	giveBodypart(GlobalRegistry.getBodypart("felineleg"))
-	var mybreasts: BodypartBreasts = GlobalRegistry.getBodypart("humanbreasts")
-	mybreasts.size = BodypartBreasts.BreastsSize.C
-	giveBodypart(mybreasts)
-	giveBodypart(GlobalRegistry.getBodypart("baldhair"))
-	giveBodypart(GlobalRegistry.getBodypart("felinetail"))
-	giveBodypart(GlobalRegistry.getBodypart("felinehead"))
-	giveBodypart(GlobalRegistry.getBodypart("humanbody"))
-	giveBodypart(GlobalRegistry.getBodypart("humanarms"))
-	giveBodypart(GlobalRegistry.getBodypart("felineears"))
-	giveBodypart(GlobalRegistry.getBodypart("vagina"))
-	giveBodypart(GlobalRegistry.getBodypart("anus"))
-	#giveBodypart(GlobalRegistry.getBodypart("caninepenis"))
-	updateNonBattleEffects()
-	
-	#inventory.addItem(GlobalRegistry.createItem("testitem"))
-	#inventory.addItem(GlobalRegistry.createItem("testitem"))
-	#inventory.addItem(GlobalRegistry.createItem("ballgag"))
-	
-	#inventory.equipItem(GlobalRegistry.createItem("ballgag"))
+	resetPlayer()
 
 func updateAppearance():
 	emit_signal("bodypart_changed")
@@ -599,3 +577,40 @@ func getAttributesText():
 		["Femininity", str(pickedFemininity)+"%"],
 		["Thickness", str(pickedThickness)+"%"],
 	]
+
+func resetPlayer():
+	gamename = "Player"
+	credits = 0
+	location = "cellblock_orange_playercell"#"ScriptedRoom"
+	pickedGender = Gender.Female
+	pronounsGender = null
+	pickedSpecies = ["feline"]
+	inmateNumber = "12859"
+	pickedFemininity = 50
+	pickedThickness = 50
+	
+	name = "Player"
+	resetSlots()
+	getInventory().clear()
+	#legs = GlobalRegistry.getBodypart("humanleg")
+	giveBodypart(GlobalRegistry.getBodypart("felineleg"))
+	var mybreasts: BodypartBreasts = GlobalRegistry.getBodypart("humanbreasts")
+	mybreasts.size = BodypartBreasts.BreastsSize.C
+	giveBodypart(mybreasts)
+	giveBodypart(GlobalRegistry.getBodypart("baldhair"))
+	giveBodypart(GlobalRegistry.getBodypart("felinetail"))
+	giveBodypart(GlobalRegistry.getBodypart("felinehead"))
+	giveBodypart(GlobalRegistry.getBodypart("humanbody"))
+	giveBodypart(GlobalRegistry.getBodypart("humanarms"))
+	giveBodypart(GlobalRegistry.getBodypart("felineears"))
+	giveBodypart(GlobalRegistry.getBodypart("vagina"))
+	giveBodypart(GlobalRegistry.getBodypart("anus"))
+	#giveBodypart(GlobalRegistry.getBodypart("caninepenis"))
+	updateNonBattleEffects()
+	
+	#inventory.addItem(GlobalRegistry.createItem("testitem"))
+	#inventory.addItem(GlobalRegistry.createItem("testitem"))
+	#inventory.addItem(GlobalRegistry.createItem("ballgag"))
+	
+	#inventory.equipItem(GlobalRegistry.createItem("ballgag"))
+	emit_signal("stat_changed")

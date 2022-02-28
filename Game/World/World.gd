@@ -100,6 +100,10 @@ func addTransitions():
 				_room.add_child(transitionLine)
 				transitionLine.global_position = (pos + Vector2(0, 0.5))*gridsize
 
+func _exit_tree():
+	assert(GM.world == self)
+	GM.world = null
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	assert(GM.world == null)

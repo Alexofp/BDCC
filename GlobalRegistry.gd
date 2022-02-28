@@ -1,5 +1,9 @@
 extends Node
 
+var game_version_major = 0
+var game_version_minor = 0
+var game_version_revision = 8
+
 var currentUniqueID = 0
 
 var scenes: Dictionary = {}
@@ -59,6 +63,9 @@ func _ready():
 func generateUniqueID():
 	currentUniqueID += 1
 	return currentUniqueID - 1
+
+func getGameVersionString():
+	return str(game_version_major)+"."+str(game_version_minor)+"."+str(game_version_revision)
 
 func registerScene(path: String):
 	var scene = load(path)
@@ -250,7 +257,7 @@ func registerSpeciesFolder(folder: String):
 			else:
 				if(file_name.get_extension() == "gd"):
 					var full_path = folder.plus_file(file_name)
-					print("Registered species: " + full_path)
+					#print("Registered species: " + full_path)
 					registerSpecies(full_path)
 			file_name = dir.get_next()
 	else:
@@ -289,7 +296,7 @@ func registerItemFolder(folder: String):
 			else:
 				if(file_name.get_extension() == "gd"):
 					var full_path = folder.plus_file(file_name)
-					print("Registered item: " + full_path)
+					#print("Registered item: " + full_path)
 					registerItem(full_path)
 			file_name = dir.get_next()
 	else:
@@ -320,7 +327,7 @@ func registerBuffFolder(folder: String):
 			else:
 				if(file_name.get_extension() == "gd"):
 					var full_path = folder.plus_file(file_name)
-					print("Registered buff: " + full_path)
+					#print("Registered buff: " + full_path)
 					registerBuff(full_path)
 			file_name = dir.get_next()
 	else:
@@ -351,7 +358,7 @@ func registerEventFolder(folder: String):
 			else:
 				if(file_name.get_extension() == "gd"):
 					var full_path = folder.plus_file(file_name)
-					print("Registered event: " + full_path)
+					#print("Registered event: " + full_path)
 					registerEvent(full_path)
 			file_name = dir.get_next()
 	else:

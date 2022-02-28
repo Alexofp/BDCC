@@ -14,6 +14,7 @@ signal time_passed(_secondsPassed)
 func _ready():
 	randomize()
 	GM.main = self
+	GM.pc.resetPlayer()
 	
 	runScene("IntroScene")
 	#runScene("FightScene", ["testchar"])

@@ -80,6 +80,11 @@ func loadGame(_path):
 	loadData(saveData)
 	save_game.close()
 
+func switchToGameAndLoad(_path):
+	var _ok = get_tree().change_scene("res://Game/MainScene.tscn")
+	yield(get_tree(),"idle_frame")
+	loadGame(_path)
+
 func loadVar(data: Dictionary, key, nullvalue = null):
 	if(!data.has(key)):
 		printerr("Warning: Save doesn't have key "+key+". Using "+str(nullvalue)+" as default value. File: "+get_stack()[1]["source"]+" Line: "+str(get_stack()[1]["line"]))
@@ -92,3 +97,32 @@ func loadVar(data: Dictionary, key, nullvalue = null):
 		printerr("Warning: loaded value is null while the default value isn't. Is that correct? File: "+get_stack()[1]["source"]+" Line: "+str(get_stack()[1]["line"]))
 		
 	return data[key]
+
+func makeQuickSave():
+	saveGame("user://saves/quicksave.save")
+
+func loadQuickSave():
+	loadGame("user://saves/savegame.save")
+
+func getAllSavePaths():
+	var saves = []
+	var path = "user://saves/"
+	
+	var dir = Directory.new()
+	dir.open(path)
+	var hasHolder = dir.open(path)
+	if(hasHolder != OK):
+		return []
+	dir.list_dir_begin(true)
+	
+	var subpath = dir.get_next()
+	while(!subpath.empty()):
+		if dir.current_is_dir():
+			subpath = dir.get_next()
+			continue
+			
+		if(subpath.get_extension() == "save"):
+			saves.append(path.plus_file(subpath))
+		subpath = dir.get_next()
+	dir.list_dir_end()
+	return saves
