@@ -74,6 +74,21 @@ static func getSpeciesName(species: Array):
 	
 	return join(names, "-") + " hybrid"
 
+# https://godotengine.org/qa/19077/how-to-get-the-date-as-per-rfc-1123-date-format-in-game
+static func datetimeToRFC113(time):
+	var nameweekday= ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
+	var namemonth= ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+	var dayofweek = time["weekday"]   # from 0 to 6 --> Sunday to Saturday
+	var day = time["day"]                         #   1-31
+	var month= time["month"]               #   1-12
+	var year= time["year"]             
+	var hour= time["hour"]                     #   0-23
+	var minute= time["minute"]             #   0-59
+	var second= time["second"]             #   0-59
+
+	var dateRFC1123 = str(nameweekday[dayofweek]) + ", " + str("%02d" % [day]) + " " + str(namemonth[month-1]) + " " + str(year) + " " + str("%02d" % [hour]) + ":" + str("%02d" % [minute]) + ":" + str("%02d" % [second]) + " GMT"
+	return dateRFC1123
+
 static func sayMale(text):
 	return "[color=#3E84E0]\""+text+"\"[/color]"
 	

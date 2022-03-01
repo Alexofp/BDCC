@@ -1,22 +1,39 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://UI/MainMenu/SaveGameElement.gd" type="Script" id=1]
+[ext_resource path="res://Fonts/Titillium-Bold.otf" type="DynamicFontData" id=2]
+
+[sub_resource type="DynamicFont" id=1]
+size = 20
+font_data = ExtResource( 2 )
 
 [node name="SaveGameElement" type="HBoxContainer"]
 margin_right = 1280.0
 margin_bottom = 26.0
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="SaveNameLabel" type="Label" parent="."]
-margin_top = 6.0
-margin_right = 75.0
-margin_bottom = 20.0
-text = "Some game"
+[node name="SaveNameLabel" type="RichTextLabel" parent="."]
+margin_right = 1113.0
+margin_bottom = 26.0
+size_flags_horizontal = 3
+custom_fonts/bold_font = SubResource( 1 )
+bbcode_enabled = true
+fit_content_height = true
 
 [node name="LoadButton" type="Button" parent="."]
-margin_left = 79.0
-margin_right = 121.0
+margin_left = 1117.0
+margin_right = 1159.0
 margin_bottom = 26.0
 text = "Load"
 
+[node name="DeleteButton" type="Button" parent="."]
+margin_left = 1163.0
+margin_right = 1280.0
+margin_bottom = 26.0
+text = "DELETE FOREVER"
+
 [connection signal="pressed" from="LoadButton" to="." method="_on_LoadButton_pressed"]
+[connection signal="pressed" from="DeleteButton" to="." method="_on_DeleteButton_pressed"]

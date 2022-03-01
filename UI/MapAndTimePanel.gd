@@ -8,3 +8,6 @@ func setLocationName(newname: String):
 
 func onTimePassed(_secondsPassed):
 	timeLabel.text = GM.main.getVisibleTime()
+
+func getLocationName():
+	return locationLabel.text

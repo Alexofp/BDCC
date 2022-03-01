@@ -125,7 +125,7 @@ __meta__ = {
 [node name="SaveButton" type="Button" parent="HBoxContainer/Panel2/MarginContainer/VBoxContainer/HBoxContainer2"]
 margin_right = 76.0
 margin_bottom = 26.0
-hint_tooltip = "Save the game"
+hint_tooltip = "Quick save"
 size_flags_horizontal = 3
 text = "Q.save"
 
@@ -133,7 +133,7 @@ text = "Q.save"
 margin_left = 80.0
 margin_right = 156.0
 margin_bottom = 26.0
-hint_tooltip = "Load the saved game"
+hint_tooltip = "Quick load"
 size_flags_horizontal = 3
 text = "Q.load"
 
@@ -141,7 +141,7 @@ text = "Q.load"
 margin_left = 160.0
 margin_right = 236.0
 margin_bottom = 26.0
-hint_tooltip = "Load the saved game"
+hint_tooltip = "Open the menu"
 size_flags_horizontal = 3
 text = "Menu"
 

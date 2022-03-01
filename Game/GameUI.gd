@@ -27,6 +27,9 @@ var textboxes: Dictionary = {}
 var gameParser: GameParser
 var sayParser: SayParser
 
+func _exit_tree():
+	GM.ui = null
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	GM.ui = self
@@ -232,10 +235,17 @@ func processString(strText: String):
 
 
 func _on_MenuButton_pressed():
-	mainGameScreen.visible = false
-	ingameMenuScreen.visible = true
+	if(mainGameScreen.visible):
+		mainGameScreen.visible = false
+		ingameMenuScreen.visible = true
+	else:
+		mainGameScreen.visible = true
+		ingameMenuScreen.visible = false
 
 
 func _on_InGameMenu_onResumeButtonPressed():
 	mainGameScreen.visible = true
 	ingameMenuScreen.visible = false
+
+func getCurrentLocationName():
+	return mapAndTimePanel.getLocationName()

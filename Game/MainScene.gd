@@ -14,15 +14,28 @@ signal time_passed(_secondsPassed)
 func _ready():
 	randomize()
 	GM.main = self
-	GM.pc.resetPlayer()
+
+	startNewGame()
+	
+	runCurrentScene()
+	GM.ui.onTimePassed(0)
+
+func startNewGame():
+	for scene in sceneStack:
+		scene.queue_free()
+	sceneStack = []
+
+	GM.pc.resetToDefault()
+	var allCharacters = GlobalRegistry.getCharacters()
+	for charID in allCharacters:
+		var ch = allCharacters[charID]
+		ch.resetToDefault()
+	
+	GM.ES.clearDelayedEvents()
 	
 	runScene("IntroScene")
 	#runScene("FightScene", ["testchar"])
 	#runScene("FightScene", ["tavi"])
-	
-	
-	runCurrentScene()
-	GM.ui.onTimePassed(0)
 
 func runScene(id, _args = []):
 	var scene = GlobalRegistry.getScene(id)

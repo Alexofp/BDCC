@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://UI/MainMenu/LoadGameScreen.tscn" type="PackedScene" id=1]
 [ext_resource path="res://GlobalTheme.tres" type="Theme" id=2]
 [ext_resource path="res://UI/MainMenu/InGameMenu.gd" type="Script" id=3]
+[ext_resource path="res://UI/MainMenu/SaveGameScreen.tscn" type="PackedScene" id=4]
 
 [node name="InGameMenu" type="Control"]
 anchor_right = 1.0
@@ -16,6 +17,9 @@ __meta__ = {
 }
 
 [node name="LoadGameScreen" parent="." instance=ExtResource( 1 )]
+visible = false
+
+[node name="SaveGameScreen" parent="." instance=ExtResource( 4 )]
 visible = false
 
 [node name="MainMenu" type="Control" parent="."]
@@ -37,9 +41,9 @@ __meta__ = {
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MainMenu/MainMenuCenter"]
 margin_left = 620.0
-margin_top = 317.0
+margin_top = 294.0
 margin_right = 727.0
-margin_bottom = 435.0
+margin_bottom = 458.0
 size_flags_horizontal = 3
 custom_constants/separation = 20
 
@@ -48,19 +52,27 @@ margin_right = 107.0
 margin_bottom = 26.0
 text = "Resume"
 
-[node name="LoadGameButton" type="Button" parent="MainMenu/MainMenuCenter/VBoxContainer"]
+[node name="SaveGameButton2" type="Button" parent="MainMenu/MainMenuCenter/VBoxContainer"]
 margin_top = 46.0
 margin_right = 107.0
 margin_bottom = 72.0
-text = "Load Game"
+text = "Save Game"
 
-[node name="MainMenuButton" type="Button" parent="MainMenu/MainMenuCenter/VBoxContainer"]
+[node name="LoadGameButton" type="Button" parent="MainMenu/MainMenuCenter/VBoxContainer"]
 margin_top = 92.0
 margin_right = 107.0
 margin_bottom = 118.0
+text = "Load Game"
+
+[node name="MainMenuButton" type="Button" parent="MainMenu/MainMenuCenter/VBoxContainer"]
+margin_top = 138.0
+margin_right = 107.0
+margin_bottom = 164.0
 text = "Main Menu"
 
 [connection signal="onClosePressed" from="LoadGameScreen" to="." method="_on_LoadGameScreen_onClosePressed"]
+[connection signal="onClosePressed" from="SaveGameScreen" to="." method="_on_SaveGameScreen_onClosePressed"]
 [connection signal="pressed" from="MainMenu/MainMenuCenter/VBoxContainer/ResumeButton" to="." method="_on_ResumeButton_pressed"]
+[connection signal="pressed" from="MainMenu/MainMenuCenter/VBoxContainer/SaveGameButton2" to="." method="_on_SaveGameButton2_pressed"]
 [connection signal="pressed" from="MainMenu/MainMenuCenter/VBoxContainer/LoadGameButton" to="." method="_on_LoadGameButton_pressed"]
 [connection signal="pressed" from="MainMenu/MainMenuCenter/VBoxContainer/MainMenuButton" to="." method="_on_MainMenuButton_pressed"]

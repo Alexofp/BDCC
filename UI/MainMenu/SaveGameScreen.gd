@@ -1,6 +1,7 @@
 extends Control
 
 onready var savesContainer = $VBoxContainer/ScrollContainer/ScrollVBox/SavesContainer
+onready var saveFileNameInput = $VBoxContainer/ScrollContainer/ScrollVBox/HBoxContainer/SaveFileNameInput
 var saveGameElemenetScene = preload("res://UI/MainMenu/SaveGameElement.tscn")
 signal onClosePressed
 var inDeleteMode = false
@@ -20,6 +21,7 @@ func updateSaves():
 		saveGameElementObject.connect("onLoadButtonPressed", self, "onSaveLoadButtonClicked")
 		saveGameElementObject.connect("onDeleteButtonPressed", self, "onDeleteButtonClicked")
 		saveGameElementObject.setDeleteMode(inDeleteMode)
+		saveGameElementObject.setShowLoadButton(false)
 		
 func onSaveLoadButtonClicked(savePath):
 	SAVE.switchToGameAndLoad(savePath)
@@ -35,8 +37,19 @@ func _on_CloseButton_pressed():
 func _on_LoadGameScreen_visibility_changed():
 	if(visible):
 		updateSaves()
+		
+		if(GM.ui != null):
+			saveFileNameInput.text = GM.ui.getCurrentLocationName()
+		else:
+			saveFileNameInput.text = "Unknown location"
 
 
 func _on_DeleteButton_pressed():
 	inDeleteMode = !inDeleteMode
+	updateSaves()
+
+
+func _on_SaveButton_pressed():
+	var saveName = saveFileNameInput.text
+	SAVE.saveGameRelative(saveName)
 	updateSaves()

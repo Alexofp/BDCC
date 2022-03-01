@@ -2,9 +2,9 @@
 
 [ext_resource path="res://GlobalTheme.tres" type="Theme" id=1]
 [ext_resource path="res://UI/MainMenu/SaveGameElement.tscn" type="PackedScene" id=2]
-[ext_resource path="res://UI/MainMenu/LoadGameScreen.gd" type="Script" id=3]
+[ext_resource path="res://UI/MainMenu/SaveGameScreen.gd" type="Script" id=3]
 
-[node name="LoadGameScreen" type="Control"]
+[node name="SaveGameScreen" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 size_flags_horizontal = 3
@@ -44,21 +44,39 @@ margin_top = 24.0
 margin_right = 1280.0
 margin_bottom = 87.0
 bbcode_enabled = true
-bbcode_text = "Here you can load your previous game
+bbcode_text = "Here you can save your game
 Keep in mind that during the early development save structure might change a lot and so your previous saves might not work anymore, sorry. Your best bet would be saving inside your cell when you wanna switch versions"
-text = "Here you can load your previous game
+text = "Here you can save your game
 Keep in mind that during the early development save structure might change a lot and so your previous saves might not work anymore, sorry. Your best bet would be saving inside your cell when you wanna switch versions"
 fit_content_height = true
 
-[node name="HSeparator" type="HSeparator" parent="VBoxContainer/ScrollContainer/ScrollVBox"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/ScrollContainer/ScrollVBox"]
 margin_top = 91.0
 margin_right = 1280.0
-margin_bottom = 95.0
+margin_bottom = 121.0
+
+[node name="SaveFileNameInput" type="LineEdit" parent="VBoxContainer/ScrollContainer/ScrollVBox/HBoxContainer"]
+margin_right = 500.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 500, 0 )
+size_flags_horizontal = 13
+size_flags_vertical = 3
+
+[node name="SaveButton" type="Button" parent="VBoxContainer/ScrollContainer/ScrollVBox/HBoxContainer"]
+margin_left = 504.0
+margin_right = 557.0
+margin_bottom = 30.0
+text = "Save"
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer/ScrollContainer/ScrollVBox"]
+margin_top = 125.0
+margin_right = 1280.0
+margin_bottom = 129.0
 
 [node name="SavesContainer" type="VBoxContainer" parent="VBoxContainer/ScrollContainer/ScrollVBox"]
-margin_top = 99.0
+margin_top = 133.0
 margin_right = 1280.0
-margin_bottom = 161.0
+margin_bottom = 195.0
 size_flags_horizontal = 3
 custom_constants/separation = 10
 
@@ -89,5 +107,6 @@ size_flags_horizontal = 3
 text = "Delete Save"
 
 [connection signal="visibility_changed" from="." to="." method="_on_LoadGameScreen_visibility_changed"]
+[connection signal="pressed" from="VBoxContainer/ScrollContainer/ScrollVBox/HBoxContainer/SaveButton" to="." method="_on_SaveButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/GridContainer/CloseButton" to="." method="_on_CloseButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/GridContainer/DeleteButton" to="." method="_on_DeleteButton_pressed"]

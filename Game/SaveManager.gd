@@ -1,7 +1,7 @@
 extends Node
 
 var currentSavefileVersion = 1
-const useJson = true # Json is easier to read, str2var supports more types? Json will probably be dropped at some point
+var maxBackupQuicksaves = 3
 
 func saveData():
 	var data = {
@@ -57,13 +57,15 @@ func saveGame(_path):
 	var save_game = File.new()
 	save_game.open(_path, File.WRITE)
 	
-	if(useJson):
-		save_game.store_line(JSON.print(saveData, "\t", true))
-	else:
-		save_game.store_line(var2str(saveData))
+	save_game.store_line(JSON.print(saveData, "\t", true))
 	
 	save_game.close()
 	
+func loadGameRelative(_name):
+	loadGame("user://saves/"+_name+".save")
+	
+func saveGameRelative(_name):
+	saveGame("user://saves/"+_name+".save")
 	
 func loadGame(_path):
 	var save_game = File.new()
@@ -72,11 +74,13 @@ func loadGame(_path):
 		return # Error! We don't have a save to load.
 	
 	save_game.open(_path, File.READ)
-	var saveData
-	if(useJson):
-		saveData = parse_json(save_game.get_as_text())
-	else:
-		saveData = str2var(save_game.get_as_text())
+	#var saveData = parse_json(save_game.get_as_text())
+	var jsonResult = JSON.parse(save_game.get_as_text())
+	if(jsonResult.error != OK):
+		assert(false, "Trying to load a bad save file "+str(_path))
+		return
+	
+	var saveData = jsonResult.result
 	loadData(saveData)
 	save_game.close()
 
@@ -84,6 +88,14 @@ func switchToGameAndLoad(_path):
 	var _ok = get_tree().change_scene("res://Game/MainScene.tscn")
 	yield(get_tree(),"idle_frame")
 	loadGame(_path)
+
+func switchToGameAndResumeLatestSave():
+	var saves: Array = getSavesSortedByDate()
+	if(saves.size() == 0):
+		return
+	var _ok = get_tree().change_scene("res://Game/MainScene.tscn")
+	yield(get_tree(),"idle_frame")
+	loadGame(saves[0])
 
 func loadVar(data: Dictionary, key, nullvalue = null):
 	if(!data.has(key)):
@@ -98,11 +110,34 @@ func loadVar(data: Dictionary, key, nullvalue = null):
 		
 	return data[key]
 
+func recursiveQuickSaveMakeBackup(currentI = 1):
+	var quickSaveName = "quicksave"
+	if(currentI > 1):
+		quickSaveName += " backup" + str(currentI)
+	var quickSaveFullname = "user://saves/"+quickSaveName+".save"
+	
+	var d = Directory.new()
+	if(d.file_exists(quickSaveFullname)):
+		recursiveQuickSaveMakeBackup(currentI + 1)
+		
+		if(currentI >= maxBackupQuicksaves):
+			d.remove(quickSaveFullname)
+			#print("I REMOVED "+quickSaveFullname)
+			return
+		
+		var i = currentI + 1
+		var newQuickSaveName = "quicksave backup"+str(i)
+		var newQuickSaveFullname = "user://saves/"+newQuickSaveName+".save"
+		d.rename(quickSaveFullname, newQuickSaveFullname)
+		#print("RENAMING "+quickSaveFullname+" TO "+newQuickSaveFullname)
+
 func makeQuickSave():
+	recursiveQuickSaveMakeBackup()
+	
 	saveGame("user://saves/quicksave.save")
 
 func loadQuickSave():
-	loadGame("user://saves/savegame.save")
+	loadGame("user://saves/quicksave.save")
 
 func getAllSavePaths():
 	var saves = []
@@ -126,3 +161,66 @@ func getAllSavePaths():
 		subpath = dir.get_next()
 	dir.list_dir_end()
 	return saves
+
+func canResumeGame():
+	var saves = getAllSavePaths()
+	if(saves.size() > 0):
+		return true
+	return false
+
+func customSavePathComparison(a, b):
+	return a[1] > b[1]
+
+func getSavesSortedByDate():
+	var savesPaths = getAllSavePaths()
+	var sortedSavePaths = []
+	var file = File.new()
+	for path in savesPaths:
+		var fileModifTime = file.get_modified_time(path)
+		sortedSavePaths.append([path, fileModifTime])
+	sortedSavePaths.sort_custom(self, "customSavePathComparison")
+	
+	var result = []
+	for sortedSaveData in sortedSavePaths:
+		result.append(sortedSaveData[0])
+	return result
+
+func loadGameInformationFromSave(_path):
+	var save_game = File.new()
+	if not save_game.file_exists(_path):
+		assert(false, "Save file is not found in "+str(_path))
+		return null
+	
+	save_game.open(_path, File.READ)
+	var jsonResult = JSON.parse(save_game.get_as_text())
+	if(jsonResult.error != OK):
+		return null
+
+	var data = jsonResult.result
+	
+	if(!data.has("savefile_version")):
+		printerr("Error: Save file doesn't have a version in it. It might not be a savefile")
+		return null
+	if(data["savefile_version"] > currentSavefileVersion):
+		printerr("Error: This savefile is not supported, sorry. Current supported version: "+str(currentSavefileVersion)+". Savefile version: "+data["savefile_version"])
+		return	null
+	
+	var playerName = data["player"]["gamename"]
+	var playerCredits = data["player"]["credits"]
+	var playerLocation = data["player"]["location"]
+	var gameDays = data["main"]["currentDay"]
+	var gameTimeOfDay = data["main"]["timeOfDay"]
+	
+	save_game.close()
+	
+	return {
+		"gamename": playerName,
+		"credits": playerCredits,
+		"location": playerLocation,
+		"currentDay": gameDays,
+		"timeOfDay": gameTimeOfDay,
+	}
+
+func deleteSave(path):
+	var dir = Directory.new()
+	dir.remove(path)

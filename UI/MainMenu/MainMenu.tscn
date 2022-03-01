@@ -85,11 +85,12 @@ __meta__ = {
 
 [node name="VBoxContainer3" type="VBoxContainer" parent="HBoxContainer/Panel2/MarginContainer/VBoxContainer"]
 margin_right = 236.0
-margin_bottom = 636.0
+margin_bottom = 696.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="HBoxContainer/Panel2/MarginContainer/VBoxContainer"]
+visible = false
 margin_top = 640.0
 margin_right = 236.0
 margin_bottom = 666.0
@@ -113,6 +114,7 @@ size_flags_horizontal = 3
 text = "Quick load"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/Panel2/MarginContainer/VBoxContainer"]
+visible = false
 margin_top = 670.0
 margin_right = 236.0
 margin_bottom = 696.0
@@ -254,9 +256,10 @@ margin_bottom = 720.0
 rect_min_size = Vector2( 0, 100 )
 columns = 5
 
-[node name="Button" type="Button" parent="HBoxContainer/MainVBox/GridContainer"]
+[node name="ResumeButton" type="Button" parent="HBoxContainer/MainVBox/GridContainer"]
 margin_right = 147.0
 margin_bottom = 26.0
+hint_tooltip = "Load the latest save and continue playing"
 size_flags_horizontal = 3
 disabled = true
 text = "Resume"
@@ -327,6 +330,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[connection signal="pressed" from="HBoxContainer/MainVBox/GridContainer/ResumeButton" to="." method="_on_ResumeButton_pressed"]
 [connection signal="pressed" from="HBoxContainer/MainVBox/GridContainer/NewGameButton" to="." method="_on_NewGameButton_pressed"]
 [connection signal="pressed" from="HBoxContainer/MainVBox/GridContainer/LoadGameButton" to="." method="_on_LoadGameButton_pressed"]
 [connection signal="onClosePressed" from="HBoxContainer/LoadGameScreen" to="." method="_on_LoadGameScreen_onClosePressed"]

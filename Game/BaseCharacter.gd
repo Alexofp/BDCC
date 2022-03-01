@@ -29,6 +29,16 @@ var lustMemory:Dictionary = {}
 func _init():
 	name = "BaseCharacter"
 
+func resetToDefault():
+	pain = 0
+	lust = 0
+	stamina = getMaxStamina()
+	statusEffects.clear()
+	inventory.clear()
+	lustMemory.clear()
+	fightingState = ""
+	
+
 func _ready():
 	inventory = Inventory.new()
 	add_child(inventory)
@@ -36,6 +46,8 @@ func _ready():
 	buffsHolder = BuffsHolder.new()
 	buffsHolder.setCharacter(self)
 	add_child(buffsHolder)
+	
+	#resetToDefault()
 
 # Skips armor checks etc
 func addPain(_p: int):
