@@ -3,6 +3,7 @@ extends Control
 onready var versionLabel = $HBoxContainer/MainVBox/ScrollContainer/VBoxContainer/VersionLabel
 onready var MainVBox = $HBoxContainer/MainVBox
 onready var LoadGameTab = $HBoxContainer/LoadGameScreen
+onready var optionsGameTab = $HBoxContainer/OptionsScreen
 onready var resumeButton = $HBoxContainer/MainVBox/GridContainer/ResumeButton
 
 # Called when the node enters the scene tree for the first time.
@@ -15,18 +16,21 @@ func _ready():
 func _on_NewGameButton_pressed():
 	var _ok = get_tree().change_scene("res://Game/MainScene.tscn")
 
-
-func _on_LoadGameButton_pressed():
+func hideAllMenus():
 	MainVBox.visible = false
-	LoadGameTab.visible = true
-	
-
-
-func _on_LoadGameScreen_onClosePressed():
-	MainVBox.visible = true
 	LoadGameTab.visible = false
+	optionsGameTab.visible = false
+
+func switchToMainMenu():
+	hideAllMenus()
+	MainVBox.visible = true
 	
 	checkCanResume()
+
+func _on_LoadGameButton_pressed():
+	hideAllMenus()
+	LoadGameTab.visible = true
+	
 
 func checkCanResume():
 	if(SAVE.canResumeGame()):
@@ -36,3 +40,10 @@ func checkCanResume():
 
 func _on_ResumeButton_pressed():
 	SAVE.switchToGameAndResumeLatestSave()
+
+
+func _on_OptionsButton_pressed():
+	hideAllMenus()
+	optionsGameTab.visible = true
+
+

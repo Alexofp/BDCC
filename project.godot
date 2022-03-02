@@ -119,6 +119,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Characters/Character.gd"
 }, {
+"base": "Object",
+"class": "ContentType",
+"language": "GDScript",
+"path": "res://Game/Options/ContentType.gd"
+}, {
 "base": "Node",
 "class": "DamageType",
 "language": "GDScript",
@@ -352,6 +357,7 @@ _global_script_class_icons={
 "BuffsHolder": "",
 "ButtonChecks": "",
 "Character": "",
+"ContentType": "",
 "DamageType": "",
 "Doll": "",
 "EscapeQuest": "",
@@ -404,6 +410,7 @@ config/icon="res://icon.png"
 
 [autoload]
 
+OPTIONS="*res://Game/Options/GlobalOptions.gd"
 GlobalRegistry="*res://GlobalRegistry.gd"
 GM="*res://Game/GM.gd"
 SAVE="*res://Game/SaveManager.gd"

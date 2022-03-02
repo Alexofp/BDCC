@@ -1,0 +1,108 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://GlobalTheme.tres" type="Theme" id=1]
+[ext_resource path="res://UI/Options/OptionsCategory.tscn" type="PackedScene" id=2]
+[ext_resource path="res://UI/Options/OptionsScreen.gd" type="Script" id=3]
+[ext_resource path="res://UI/Options/OptionUnknownType.tscn" type="PackedScene" id=4]
+
+[node name="OptionsScreen" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 1 )
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer"]
+margin_right = 1280.0
+margin_bottom = 616.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ScrollVBox" type="VBoxContainer" parent="VBoxContainer/ScrollContainer"]
+margin_right = 1280.0
+margin_bottom = 616.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer/ScrollContainer/ScrollVBox"]
+margin_right = 1280.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 0, 20 )
+
+[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer/ScrollContainer/ScrollVBox"]
+margin_top = 24.0
+margin_right = 1280.0
+margin_bottom = 45.0
+bbcode_enabled = true
+bbcode_text = "Options screen"
+text = "Options screen"
+fit_content_height = true
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer/ScrollContainer/ScrollVBox"]
+margin_top = 49.0
+margin_right = 1280.0
+margin_bottom = 53.0
+
+[node name="OptionsContainer" type="VBoxContainer" parent="VBoxContainer/ScrollContainer/ScrollVBox"]
+margin_top = 57.0
+margin_right = 1280.0
+margin_bottom = 167.0
+size_flags_horizontal = 3
+custom_constants/separation = 10
+
+[node name="OptionsCategory" parent="VBoxContainer/ScrollContainer/ScrollVBox/OptionsContainer" instance=ExtResource( 2 )]
+
+[node name="OptionUnknownType" parent="VBoxContainer/ScrollContainer/ScrollVBox/OptionsContainer" instance=ExtResource( 4 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 30.0
+margin_right = 1280.0
+margin_bottom = 50.0
+
+[node name="OptionUnknownType2" parent="VBoxContainer/ScrollContainer/ScrollVBox/OptionsContainer" instance=ExtResource( 4 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 60.0
+margin_right = 1280.0
+margin_bottom = 80.0
+
+[node name="OptionUnknownType3" parent="VBoxContainer/ScrollContainer/ScrollVBox/OptionsContainer" instance=ExtResource( 4 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 90.0
+margin_right = 1280.0
+margin_bottom = 110.0
+
+[node name="GridContainer" type="GridContainer" parent="VBoxContainer"]
+margin_top = 620.0
+margin_right = 1280.0
+margin_bottom = 720.0
+rect_min_size = Vector2( 0, 100 )
+columns = 5
+
+[node name="CloseButton" type="Button" parent="VBoxContainer/GridContainer"]
+margin_right = 255.0
+margin_bottom = 26.0
+size_flags_horizontal = 3
+text = "Save and close"
+
+[node name="RevertButton" type="Button" parent="VBoxContainer/GridContainer"]
+margin_left = 259.0
+margin_right = 514.0
+margin_bottom = 26.0
+size_flags_horizontal = 3
+text = "Revert to defaults"
+
+[connection signal="pressed" from="VBoxContainer/GridContainer/CloseButton" to="." method="_on_CloseButton_pressed"]
+[connection signal="pressed" from="VBoxContainer/GridContainer/RevertButton" to="." method="_on_RevertButton_pressed"]
