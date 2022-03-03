@@ -10,6 +10,25 @@ var flags = {}
 
 signal time_passed(_secondsPassed)
 
+func _init():
+	GlobalRegistry.recreateCharacters()
+	
+	GM.pc = load("res://Player/Player.gd").new()
+	add_child(GM.pc)
+
+	GM.ES = load("res://Events/EventSystem.gd").new()
+	add_child(GM.ES)
+
+	GM.QS = load("res://Quests/QuestSystem.gd").new()
+	add_child(GM.QS)
+
+func _exit_tree():
+	GM.main = null
+	GM.pc = null
+	GM.ES = null
+	GM.QS = null
+	
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	randomize()
@@ -24,14 +43,6 @@ func startNewGame():
 	for scene in sceneStack:
 		scene.queue_free()
 	sceneStack = []
-
-	GM.pc.resetToDefault()
-	var allCharacters = GlobalRegistry.getCharacters()
-	for charID in allCharacters:
-		var ch = allCharacters[charID]
-		ch.resetToDefault()
-	
-	GM.ES.clearDelayedEvents()
 	
 	runScene("IntroScene")
 	#runScene("FightScene", ["testchar"])

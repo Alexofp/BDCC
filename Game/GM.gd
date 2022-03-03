@@ -11,11 +11,4 @@ func _ready():
 	var directory = Directory.new( )
 	directory.make_dir("user://saves")
 	
-	pc = load("res://Player/Player.gd").new()
-	add_child(pc)
 
-	ES = load("res://Events/EventSystem.gd").new()
-	add_child(ES)
-
-	QS = load("res://Quests/QuestSystem.gd").new()
-	add_child(QS)

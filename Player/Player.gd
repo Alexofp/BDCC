@@ -23,17 +23,8 @@ var bodyMessiness = 0
 func _init():
 	initialDodgeChance = 0.05 # Player has a small chance to dodge anything
 
-func resetToDefault():
-	gamename = "Player"
-	credits = 0
-	location = "cellblock_orange_playercell"#"ScriptedRoom"
-	pickedGender = Gender.Female
-	pronounsGender = null
-	pickedSpecies = ["feline"]
-	inmateNumber = "12859"
-	pickedFemininity = 50
-	pickedThickness = 50
-	
+
+func _ready():
 	name = "Player"
 	resetSlots()
 	getInventory().clear()
@@ -57,12 +48,6 @@ func resetToDefault():
 	#inventory.addItem(GlobalRegistry.createItem("ballgag"))
 	
 	#inventory.equipItem(GlobalRegistry.createItem("ballgag"))
-	emit_signal("stat_changed")
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass
-	#resetToDefault()
 
 func updateAppearance():
 	emit_signal("bodypart_changed")

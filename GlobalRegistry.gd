@@ -9,6 +9,7 @@ var currentUniqueID = 0
 var scenes: Dictionary = {}
 var bodyparts: Dictionary = {}
 var characters: Dictionary = {}
+var characterClasses: Dictionary = {}
 var attacks: Dictionary = {}
 var statusEffects: Dictionary = {}
 var allSpecies: Dictionary = {}
@@ -148,7 +149,20 @@ func registerCharacter(path: String):
 	var character = load(path)
 	var characterObject = character.new()
 	characters[characterObject.id] = characterObject
+	characterClasses[characterObject.id] = character
 	add_child(characterObject)
+
+func recreateCharacters():
+	for characterID in characters:
+		var ch = characters[characterID]
+		remove_child(ch)
+		ch.queue_free()
+	
+	for characterID in characterClasses:
+		var character = characterClasses[characterID]
+		var characterObject = character.new()
+		characters[characterObject.id] = characterObject
+		add_child(characterObject)
 
 func registerCharacterFolder(folder: String):
 	var dir = Directory.new()
