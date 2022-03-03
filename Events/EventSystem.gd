@@ -13,6 +13,7 @@ class MyCustomSorter:
 		return false
 
 func _ready():
+	GM.ES = self
 	name = "EventSystem"
 	
 	registerEvents()

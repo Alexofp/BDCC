@@ -25,6 +25,7 @@ func _init():
 
 
 func _ready():
+	GM.pc = self
 	name = "Player"
 	resetSlots()
 	getInventory().clear()

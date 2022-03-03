@@ -107,6 +107,7 @@ size_flags_horizontal = 3
 text = "Delete Save"
 
 [connection signal="visibility_changed" from="." to="." method="_on_LoadGameScreen_visibility_changed"]
+[connection signal="text_changed" from="VBoxContainer/ScrollContainer/ScrollVBox/HBoxContainer/SaveFileNameInput" to="." method="_on_SaveFileNameInput_text_changed"]
 [connection signal="pressed" from="VBoxContainer/ScrollContainer/ScrollVBox/HBoxContainer/SaveButton" to="." method="_on_SaveButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/GridContainer/CloseButton" to="." method="_on_CloseButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/GridContainer/DeleteButton" to="." method="_on_DeleteButton_pressed"]

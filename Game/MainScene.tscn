@@ -1,10 +1,21 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Game/GameUI.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Player/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Game/MainScene.gd" type="Script" id=3]
+[ext_resource path="res://Events/EventSystem.gd" type="Script" id=4]
+[ext_resource path="res://Quests/QuestSystem.gd" type="Script" id=5]
 
 [node name="MainScene" type="Node"]
 script = ExtResource( 3 )
+
+[node name="Player" parent="." instance=ExtResource( 2 )]
+
+[node name="EventSystem" type="Node" parent="."]
+script = ExtResource( 4 )
+
+[node name="QuestSystem" type="Node" parent="."]
+script = ExtResource( 5 )
 
 [node name="GameUI" parent="." instance=ExtResource( 1 )]
 margin_top = 0.0

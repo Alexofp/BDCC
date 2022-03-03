@@ -39,7 +39,7 @@ func _on_LoadGameScreen_visibility_changed():
 		updateSaves()
 		
 		if(GM.ui != null):
-			saveFileNameInput.text = GM.ui.getCurrentLocationName()
+			saveFileNameInput.text = Util.stripBadFilenameCharacters(GM.ui.getCurrentLocationName())
 		else:
 			saveFileNameInput.text = "Unknown location"
 
@@ -53,3 +53,9 @@ func _on_SaveButton_pressed():
 	var saveName = saveFileNameInput.text
 	SAVE.saveGameRelative(saveName)
 	updateSaves()
+
+
+func _on_SaveFileNameInput_text_changed(new_text):
+	var old_caret_position = saveFileNameInput.caret_position
+	saveFileNameInput.text = Util.stripBadFilenameCharacters(new_text)
+	saveFileNameInput.caret_position = old_caret_position

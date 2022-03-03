@@ -4,6 +4,7 @@ onready var versionLabel = $HBoxContainer/MainVBox/ScrollContainer/VBoxContainer
 onready var MainVBox = $HBoxContainer/MainVBox
 onready var LoadGameTab = $HBoxContainer/LoadGameScreen
 onready var optionsGameTab = $HBoxContainer/OptionsScreen
+onready var creditsGameTab = $HBoxContainer/CreditsScreen
 onready var resumeButton = $HBoxContainer/MainVBox/GridContainer/ResumeButton
 
 # Called when the node enters the scene tree for the first time.
@@ -20,6 +21,7 @@ func hideAllMenus():
 	MainVBox.visible = false
 	LoadGameTab.visible = false
 	optionsGameTab.visible = false
+	creditsGameTab.visible = false
 
 func switchToMainMenu():
 	hideAllMenus()
@@ -47,3 +49,10 @@ func _on_OptionsButton_pressed():
 	optionsGameTab.visible = true
 
 
+func _on_CreditsButton_pressed():
+	hideAllMenus()
+	creditsGameTab.visible = true
+
+
+func _on_GithubButton_pressed():
+	var _ok = OS.shell_open("https://github.com/Alexofp/LewdGame")

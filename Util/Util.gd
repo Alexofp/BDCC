@@ -89,6 +89,12 @@ static func datetimeToRFC113(time):
 	var dateRFC1123 = str(nameweekday[dayofweek]) + ", " + str("%02d" % [day]) + " " + str(namemonth[month-1]) + " " + str(year) + " " + str("%02d" % [hour]) + ":" + str("%02d" % [minute]) + ":" + str("%02d" % [second]) + " GMT"
 	return dateRFC1123
 
+static func stripBadFilenameCharacters(path: String) -> String:
+	var escapeCharacters = ':/\\?*"|%<>'
+	for ch in escapeCharacters:
+		path = path.replace(ch, "")
+	return path
+
 static func sayMale(text):
 	return "[color=#3E84E0]\""+text+"\"[/color]"
 	

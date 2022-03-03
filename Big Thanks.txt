@@ -1,2 +1,0 @@
-Huge thanks to these folks:
-Eza0o07 (responsive Grid Container https://www.reddit.com/r/godot/comments/gj0wxz/made_a_responsive_grid_container_changes_number/ )

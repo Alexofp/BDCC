@@ -12,23 +12,10 @@ signal time_passed(_secondsPassed)
 
 func _init():
 	GlobalRegistry.recreateCharacters()
-	
-	GM.pc = load("res://Player/Player.gd").new()
-	add_child(GM.pc)
-
-	GM.ES = load("res://Events/EventSystem.gd").new()
-	add_child(GM.ES)
-
-	GM.QS = load("res://Quests/QuestSystem.gd").new()
-	add_child(GM.QS)
 
 func _exit_tree():
 	GM.main = null
-	GM.pc = null
-	GM.ES = null
-	GM.QS = null
 	
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	randomize()

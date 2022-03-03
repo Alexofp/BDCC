@@ -1,10 +1,11 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://GlobalTheme.tres" type="Theme" id=1]
 [ext_resource path="res://Fonts/Titillium-Regular.otf" type="DynamicFontData" id=2]
 [ext_resource path="res://UI/MainMenu/MainMenu.gd" type="Script" id=3]
 [ext_resource path="res://UI/MainMenu/LoadGameScreen.tscn" type="PackedScene" id=4]
 [ext_resource path="res://UI/Options/OptionsScreen.tscn" type="PackedScene" id=5]
+[ext_resource path="res://UI/MainMenu/CreditsScreen.tscn" type="PackedScene" id=6]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.207843, 0.133333, 0.364706, 1 )
@@ -286,13 +287,30 @@ margin_bottom = 26.0
 size_flags_horizontal = 3
 text = "Options"
 
-[node name="Button4" type="Button" parent="HBoxContainer/MainVBox/GridContainer"]
+[node name="CreditsButton" type="Button" parent="HBoxContainer/MainVBox/GridContainer"]
 margin_left = 604.0
 margin_right = 751.0
 margin_bottom = 26.0
 size_flags_horizontal = 3
-disabled = true
 text = "Credits"
+
+[node name="DiscordButton" type="Button" parent="HBoxContainer/MainVBox/GridContainer"]
+margin_top = 30.0
+margin_right = 147.0
+margin_bottom = 56.0
+hint_tooltip = "Soon"
+size_flags_horizontal = 3
+disabled = true
+text = "Join Discord"
+
+[node name="GithubButton" type="Button" parent="HBoxContainer/MainVBox/GridContainer"]
+margin_left = 151.0
+margin_top = 30.0
+margin_right = 298.0
+margin_bottom = 56.0
+hint_tooltip = "Open the project's github page"
+size_flags_horizontal = 3
+text = "Github"
 
 [node name="LoadGameScreen" parent="HBoxContainer" instance=ExtResource( 4 )]
 visible = false
@@ -303,6 +321,14 @@ margin_right = 1027.0
 margin_bottom = 720.0
 
 [node name="OptionsScreen" parent="HBoxContainer" instance=ExtResource( 5 )]
+visible = false
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 730.0
+margin_right = 1027.0
+margin_bottom = 720.0
+
+[node name="CreditsScreen" parent="HBoxContainer" instance=ExtResource( 6 )]
 visible = false
 anchor_right = 0.0
 anchor_bottom = 0.0
@@ -342,5 +368,8 @@ __meta__ = {
 [connection signal="pressed" from="HBoxContainer/MainVBox/GridContainer/NewGameButton" to="." method="_on_NewGameButton_pressed"]
 [connection signal="pressed" from="HBoxContainer/MainVBox/GridContainer/LoadGameButton" to="." method="_on_LoadGameButton_pressed"]
 [connection signal="pressed" from="HBoxContainer/MainVBox/GridContainer/OptionsButton" to="." method="_on_OptionsButton_pressed"]
+[connection signal="pressed" from="HBoxContainer/MainVBox/GridContainer/CreditsButton" to="." method="_on_CreditsButton_pressed"]
+[connection signal="pressed" from="HBoxContainer/MainVBox/GridContainer/GithubButton" to="." method="_on_GithubButton_pressed"]
 [connection signal="onClosePressed" from="HBoxContainer/LoadGameScreen" to="." method="switchToMainMenu"]
 [connection signal="onClosePressed" from="HBoxContainer/OptionsScreen" to="." method="switchToMainMenu"]
+[connection signal="onClosePressed" from="HBoxContainer/CreditsScreen" to="." method="switchToMainMenu"]
