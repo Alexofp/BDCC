@@ -3,6 +3,10 @@ extends Character
 func _init():
 	id = "nova"
 	
+	npcStats = {
+		Stat.Slutness: 1,
+	}
+	
 func _getName():
 	return "Nova"
 

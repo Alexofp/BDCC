@@ -17,6 +17,7 @@ var stamina:int = 100
 var statusEffects:Dictionary = {}
 var inventory: Inventory
 var buffsHolder: BuffsHolder
+var skillsHolder: SkillsHolder
 
 # Combat stats
 var initialDodgeChance = 0
@@ -36,6 +37,9 @@ func _ready():
 	buffsHolder = BuffsHolder.new()
 	buffsHolder.setCharacter(self)
 	add_child(buffsHolder)
+	skillsHolder = SkillsHolder.new()
+	skillsHolder.setCharacter(self)
+	add_child(skillsHolder)
 	stamina = getMaxStamina()
 	#resetToDefault()
 
@@ -78,7 +82,7 @@ func getStamina() -> int:
 	return stamina
 	
 func getMaxStamina() -> int:
-	return 100
+	return 100 + skillsHolder.getStat(Stat.Endurance) * 5
 	
 func getName() -> String:
 	return name
@@ -87,10 +91,10 @@ func getSmallDescription() -> String:
 	return "Test test test"
 
 func painThreshold():
-	return 100
+	return 100 + skillsHolder.getStat(Stat.Vitality) * 5
 
 func lustThreshold():
-	return 100
+	return 100 + skillsHolder.getStat(Stat.Slutness) * 5
 
 func addEffect(effectID: String, args = []):
 	if(statusEffects.has(effectID)):
@@ -191,7 +195,11 @@ func getDamageMultiplier(_damageType):
 		mult *= effect.getDamageMultiplierMod(_damageType)
 	
 	mult *= buffsHolder.getDealDamageMult(_damageType)
-	
+	if(_damageType == DamageType.Physical):
+		mult *= (1.0 + skillsHolder.getStat(Stat.Strength)/100.0)
+	if(_damageType == DamageType.Lust):
+		mult *= (1.0 + skillsHolder.getStat(Stat.Slutness)/100.0)
+
 	return mult
 
 func getRecieveDamageMultiplier(_damageType):

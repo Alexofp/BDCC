@@ -49,6 +49,9 @@ func _ready():
 	#inventory.addItem(GlobalRegistry.createItem("ballgag"))
 	
 	#inventory.equipItem(GlobalRegistry.createItem("ballgag"))
+	skillsHolder.setStat(Stat.Slutness, 10)
+	skillsHolder.setStat(Stat.Endurance, 5)
+	skillsHolder.setStat(Stat.Vitality, 5)
 
 func updateAppearance():
 	emit_signal("bodypart_changed")
@@ -117,9 +120,6 @@ func addCredits(_c: int):
 
 func getCredits() -> int:
 	return credits
-
-func painThreshold():
-	return 100
 
 func isPlayer():
 	return true
@@ -327,6 +327,7 @@ func saveData():
 	
 	data["statusEffects"] = saveStatusEffectsData()
 	data["inventory"] = inventory.saveData()
+	data["skills"] = skillsHolder.saveData()
 	
 	return data
 
@@ -359,6 +360,7 @@ func loadData(data):
 	emit_signal("bodypart_changed")
 	loadStatusEffectsData(SAVE.loadVar(data, "statusEffects", {}))
 	inventory.loadData(SAVE.loadVar(data, "inventory", {}))
+	skillsHolder.loadData(SAVE.loadVar(data, "skills", {}))
 
 func getFightState(_battleName):
 	if(getPain() > getLust()):

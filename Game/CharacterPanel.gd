@@ -14,17 +14,17 @@ func _ready():
 func setName(newname: String):
 	nameLabel.text = newname
 
-func setLust(newlust: int):
-	lustLabel.text = "Lust: "+str(newlust)
+func setLust(newlust: int, maxlust: int = 100):
+	lustLabel.text = "Lust: "+str(newlust) + "/" + str(maxlust)
 	
-func setPain(newpain: int):
-	painLabel.text = "Pain: "+str(newpain)
+func setPain(newpain: int, maxpain: int = 100):
+	painLabel.text = "Pain: "+str(newpain) + "/" + str(maxpain)
 
 func getStatusEffectsPanel():
 	return statusEffectsPanel
 
-func setStamina(newstamina: int):
-	staminaLabel.text = "Stamina: "+str(newstamina)
+func setStamina(newstamina: int, maxstamina: int = 100):
+	staminaLabel.text = "Stamina: "+str(newstamina) + "/" + str(maxstamina)
 
 func setColor(newcolor):
 	nameLabel.self_modulate = newcolor

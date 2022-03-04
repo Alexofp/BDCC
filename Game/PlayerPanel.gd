@@ -41,10 +41,10 @@ func on_player_statchange():
 
 func updateUI():
 	nameLabel.text = GM.pc.getName() + ", " + GM.pc.getSpeciesFullName()
-	painLabel.text = "Pain: "+str(GM.pc.getPain())
-	lustLabel.text = "Lust: "+str(GM.pc.getLust())
+	painLabel.text = "Pain: "+str(GM.pc.getPain()) + "/" + str(GM.pc.painThreshold())
+	lustLabel.text = "Lust: "+str(GM.pc.getLust()) + "/" + str(GM.pc.lustThreshold())
 	creditsLabel.text = "Work Credits: " + str(GM.pc.getCredits())
-	staminaLabel.text = "Stamina: " + str(GM.pc.getStamina())
+	staminaLabel.text = "Stamina: " + str(GM.pc.getStamina()) + "/" + str(GM.pc.getMaxStamina())
 
 func _input(event: InputEvent):
 	if event is InputEventMouseButton && event.button_index == BUTTON_MIDDLE && mouseInsideViewport:

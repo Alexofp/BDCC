@@ -4,9 +4,12 @@ class_name Character
 const Bob = "testchar"
 
 var id = "errorerror"
+var npcStats = {}
 
 func _ready():
 	name = id
+	for statID in npcStats:
+		skillsHolder.setStat(statID, npcStats[statID])
 
 func _init():
 	pass

@@ -18,6 +18,7 @@ var buffs: Dictionary = {}
 var events: Dictionary = {}
 var modules: Dictionary = {}
 var quests: Dictionary = {}
+var stats: Dictionary = {}
 
 func _ready():
 	registerBodypartFolder("res://Player/Bodyparts/Legs/")
@@ -36,6 +37,11 @@ func _ready():
 	registerItemFolder("res://Inventory/Items/")
 	
 	registerBuffFolder("res://Inventory/Buffs/")
+	
+	registerStat("res://Skills/Stat/EnduranceStat.gd")
+	registerStat("res://Skills/Stat/StrengthStat.gd")
+	registerStat("res://Skills/Stat/VitalityStat.gd")
+	registerStat("res://Skills/Stat/SlutnessStat.gd")
 	
 	registerEventFolder("res://Events/Event/")
 	
@@ -429,3 +435,17 @@ func getQuest(id: String):
 
 func getQuests():
 	return quests
+
+func registerStat(path: String):
+	var item = load(path)
+	var itemObject = item.new()
+	stats[itemObject.id] = itemObject
+
+func getStat(id: String):
+	if(!stats.has(id)):
+		printerr("ERROR: quest with the id "+id+" wasn't found")
+		return null
+	return stats[id]
+
+func getStats():
+	return stats
