@@ -1,0 +1,79 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://UI/LabeledProgressBar.gd" type="Script" id=1]
+
+[sub_resource type="StyleBoxEmpty" id=3]
+
+[sub_resource type="StyleBoxFlat" id=4]
+resource_local_to_scene = true
+bg_color = Color( 0.172549, 0.345098, 0.545098, 1 )
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0, 0, 0, 0.235294 )
+
+[node name="LabeledProgressBar" type="PanelContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_styles/panel = SubResource( 3 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+margin_right = 1280.0
+margin_bottom = 720.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/fg = SubResource( 4 )
+custom_styles/bg = SubResource( 2 )
+max_value = 1.0
+step = 0.0
+value = 0.3
+percent_visible = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+margin_right = 1280.0
+margin_bottom = 720.0
+custom_constants/margin_right = 5
+custom_constants/margin_top = 1
+custom_constants/margin_left = 5
+custom_constants/margin_bottom = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+margin_left = 5.0
+margin_top = 1.0
+margin_right = 1275.0
+margin_bottom = 719.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer"]
+margin_top = 352.0
+margin_right = 54.0
+margin_bottom = 366.0
+text = "Property"
+
+[node name="Label3" type="Label" parent="MarginContainer/HBoxContainer"]
+margin_left = 58.0
+margin_top = 352.0
+margin_right = 1205.0
+margin_bottom = 366.0
+size_flags_horizontal = 3
+align = 1
+
+[node name="Label2" type="Label" parent="MarginContainer/HBoxContainer"]
+margin_left = 1209.0
+margin_top = 352.0
+margin_right = 1270.0
+margin_bottom = 366.0
+text = "100 / 100"
+
+[node name="Tween" type="Tween" parent="."]

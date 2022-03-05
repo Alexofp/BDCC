@@ -5,11 +5,13 @@ const Bob = "testchar"
 
 var id = "errorerror"
 var npcStats = {}
+var npcLevel = 0
 
 func _ready():
 	name = id
 	for statID in npcStats:
 		skillsHolder.setStat(statID, npcStats[statID])
+	skillsHolder.setLevel(npcLevel)
 
 func _init():
 	pass

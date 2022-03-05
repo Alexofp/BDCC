@@ -6,6 +6,7 @@ func _init():
 	npcStats = {
 		Stat.Slutness: 1,
 	}
+	npcLevel = 2
 	
 func _getName():
 	return "Nova"

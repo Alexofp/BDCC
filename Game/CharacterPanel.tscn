@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Fonts/Titillium-Regular.otf" type="DynamicFontData" id=1]
 [ext_resource path="res://Game/CharacterPanel.gd" type="Script" id=2]
 [ext_resource path="res://UI/StatusEffectsPanel/StatusEffectsPanel.tscn" type="PackedScene" id=3]
+[ext_resource path="res://UI/LabeledProgressBar.tscn" type="PackedScene" id=4]
 
 [sub_resource type="DynamicFont" id=7]
 size = 28
@@ -25,28 +26,46 @@ margin_bottom = 28.0
 custom_fonts/font = SubResource( 7 )
 text = "Character name"
 
-[node name="PainLabel" type="Label" parent="."]
+[node name="LevelBar" parent="." instance=ExtResource( 4 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_top = 32.0
 margin_right = 1280.0
-margin_bottom = 46.0
-text = "Pain"
+margin_bottom = 48.0
+propertyName = "Level"
 
-[node name="LustLabel" type="Label" parent="."]
-margin_top = 50.0
+[node name="PainBar" parent="." instance=ExtResource( 4 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 52.0
 margin_right = 1280.0
-margin_bottom = 64.0
-text = "Lust"
+margin_bottom = 68.0
+colorEmpty = Color( 0.545098, 0.172549, 0.313726, 1 )
+colorFull = Color( 0.352941, 0, 0.921569, 1 )
+propertyName = "Pain"
 
-[node name="StaminaLabel" type="Label" parent="."]
-margin_top = 68.0
+[node name="LustBar" parent="." instance=ExtResource( 4 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 72.0
 margin_right = 1280.0
-margin_bottom = 82.0
-text = "Lust"
+margin_bottom = 88.0
+colorEmpty = Color( 0.270588, 0.172549, 0.545098, 1 )
+colorFull = Color( 0.678431, 0, 0.870588, 1 )
+propertyName = "Lust"
+
+[node name="StaminaBar" parent="." instance=ExtResource( 4 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 92.0
+margin_right = 1280.0
+margin_bottom = 108.0
+propertyName = "Stamina"
 
 [node name="StatusEffectsPanel" parent="." instance=ExtResource( 3 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 86.0
+margin_top = 112.0
 margin_right = 1280.0
-margin_bottom = 86.0
+margin_bottom = 112.0
 rect_min_size = Vector2( 0, 0 )

@@ -178,11 +178,7 @@ func setCharacterData(character: Character):
 		return
 	
 	characterPanel.visible = true
-	characterPanel.setName(character.getName())
-	characterPanel.setPain(character.getPain(), character.painThreshold())
-	characterPanel.setLust(character.getLust(), character.lustThreshold())
-	characterPanel.setStamina(character.getStamina(), character.getMaxStamina())
-	characterPanel.setColor(character.getChatColor())
+	characterPanel.updateFromCharacter(character)
 
 func getPlayerStatusEffectsPanel():
 	return playerPanel.getStatusEffectsPanel()

@@ -459,6 +459,12 @@ func verbS(verbWithNoS, verbWithS = null):
 func getInventory() -> Inventory:
 	return inventory
 
+func getSkillsHolder() -> SkillsHolder:
+	return skillsHolder
+
+func addExperience(newexp: int):
+	skillsHolder.addExperience(newexp)
+
 func getSpecies():
 	return []
 

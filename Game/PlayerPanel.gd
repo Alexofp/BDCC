@@ -1,16 +1,17 @@
 extends VBoxContainer
 
 onready var grid = $FlexGridContainer
-onready var painLabel = $PainLabel
-onready var lustLabel = $LustLabel
 onready var nameLabel = $NameLabel
 onready var creditsLabel = $CreditsLabel
-onready var staminaLabel = $StaminaLabel
 onready var camera = $ViewportContainer/Viewport/Camera2D
 onready var theStage = $ViewportContainer/Viewport/TheStage
 onready var doll = theStage.getPlayerDoll()
 onready var tooltip = $CanvasLayer/TooltipDisplay
 onready var viewport = $ViewportContainer/Viewport
+onready var staminaBar = $StaminaBar
+onready var painBar = $PainBar
+onready var lustBar = $LustBar
+onready var levelBar = $LevelBar
 
 var previousPosition: Vector2 = Vector2(0, 0)
 var draggingCamera: bool = false
@@ -41,10 +42,19 @@ func on_player_statchange():
 
 func updateUI():
 	nameLabel.text = GM.pc.getName() + ", " + GM.pc.getSpeciesFullName()
-	painLabel.text = "Pain: "+str(GM.pc.getPain()) + "/" + str(GM.pc.painThreshold())
-	lustLabel.text = "Lust: "+str(GM.pc.getLust()) + "/" + str(GM.pc.lustThreshold())
 	creditsLabel.text = "Work Credits: " + str(GM.pc.getCredits())
-	staminaLabel.text = "Stamina: " + str(GM.pc.getStamina()) + "/" + str(GM.pc.getMaxStamina())
+
+	painBar.setProgressBarValueInt(GM.pc.getPain(), GM.pc.painThreshold())
+	painBar.setText( str(GM.pc.getPain()) + " / " + str(GM.pc.painThreshold()) )
+
+	lustBar.setProgressBarValueInt(GM.pc.getLust(), GM.pc.lustThreshold())
+	lustBar.setText( str(GM.pc.getLust()) + " / " + str(GM.pc.lustThreshold()) )
+
+	staminaBar.setProgressBarValueInt(GM.pc.getStamina(), GM.pc.getMaxStamina())
+	staminaBar.setText( str(GM.pc.getStamina()) + " / " + str(GM.pc.getMaxStamina()) )
+	
+	levelBar.setProgressBarValue(GM.pc.getSkillsHolder().getLevelProgress())
+	levelBar.setText(str(GM.pc.getSkillsHolder().getLevel()))
 
 func _input(event: InputEvent):
 	if event is InputEventMouseButton && event.button_index == BUTTON_MIDDLE && mouseInsideViewport:
