@@ -5,3 +5,6 @@ func _init():
 
 func getVisibleName():
 	return "Endurance"
+
+func getVisibleDescription():
+	return "Gives you more stamina"

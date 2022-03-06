@@ -1,0 +1,112 @@
+extends Control
+
+onready var nameLabel = $VBoxContainer/TabContainer/Stats/ScrollContainer/HBoxContainer/PanelContainer/VBoxContainer/NameLabel
+onready var levelBar = $VBoxContainer/TabContainer/Stats/ScrollContainer/HBoxContainer/PanelContainer/VBoxContainer/LevelBar
+onready var freeStatsLabel = $VBoxContainer/TabContainer/Stats/ScrollContainer/HBoxContainer/PanelContainer2/VBoxContainer/FreeStatsLabel
+onready var attribList = $VBoxContainer/TabContainer/Stats/ScrollContainer/HBoxContainer/PanelContainer2/VBoxContainer/AttribList
+signal onClosePressed
+onready var applyButton = $VBoxContainer/TabContainer/Stats/ScrollContainer/HBoxContainer/PanelContainer2/VBoxContainer/HBoxContainer/ApplyButton
+onready var cancelButton = $VBoxContainer/TabContainer/Stats/ScrollContainer/HBoxContainer/PanelContainer2/VBoxContainer/HBoxContainer/CancelButton
+
+var skillStatLineScene = preload("res://UI/SkillsUI/SkillStatLine.tscn")
+var statObjects = {}
+var addedPoints = {}
+
+func _ready():
+	pass
+
+func getAddedStat(statID):
+	if(!addedPoints.has(statID)):
+		return 0
+	return addedPoints[statID]
+
+func getAddedStatsAmount():
+	var res = 0
+	for statID in addedPoints:
+		res += addedPoints[statID]
+	return res
+
+func addPoint(statID):
+	if(!addedPoints.has(statID)):
+		addedPoints[statID] = 0
+	addedPoints[statID] += 1
+
+func _on_CloseButton_pressed():
+	emit_signal("onClosePressed")
+
+func updateData():
+	assert(GM.pc != null)
+	
+	nameLabel.text = GM.pc.getName()
+	
+	levelBar.setTextLeft("Level "+str(GM.pc.getSkillsHolder().getLevel()))
+	levelBar.setText(str(GM.pc.getSkillsHolder().getExperience())+" / "+str(GM.pc.getSkillsHolder().getRequiredExperienceNextLevel())+" exp")
+	levelBar.setProgressBarValue(GM.pc.getSkillsHolder().getLevelProgress())
+
+	createAttribList()
+	
+func createAttribList():
+	statObjects = {}
+	Util.delete_children(attribList)
+	
+	for statID in Stat.getAll():
+		var skillStatLine = skillStatLineScene.instance()
+		attribList.add_child(skillStatLine)
+		skillStatLine.statID = statID
+
+		skillStatLine.connect("onPlusButton", self, "onStatPlusButton")
+		statObjects[statID] = skillStatLine
+		
+	updateAttribList()
+
+func updateAttribList():
+	var myAddedPoints = getAddedStatsAmount()
+	var freeStatPoints = GM.pc.getSkillsHolder().getFreeStatPoints() - myAddedPoints
+	freeStatsLabel.text = "Free stat points: "+str(freeStatPoints)
+	var canAddPoints = true
+	if(freeStatPoints <= 0):
+		canAddPoints = false
+	
+	for statID in statObjects:
+		var baseStat = GM.pc.getSkillsHolder().getBaseStat(statID) + getAddedStat(statID)
+		var finalStat = GM.pc.getSkillsHolder().getStat(statID) + getAddedStat(statID)
+		var statObject:StatBase = GlobalRegistry.getStat(statID)
+		
+		var statNumberText = str(baseStat)
+		if(baseStat != finalStat):
+			statNumberText = str(baseStat) + " ("+str(finalStat)+")"
+		statObjects[statID].setStatName(statObject.getVisibleName()+": "+statNumberText)
+		statObjects[statID].setCanPressPlus(canAddPoints)
+	
+	if(myAddedPoints > 0):
+		applyButton.disabled = false
+		cancelButton.disabled = false
+	else:
+		applyButton.disabled = true
+		cancelButton.disabled = true
+
+func _on_SkillsUI_visibility_changed():
+	if(visible):
+		addedPoints.clear()
+		updateData()
+
+func onStatPlusButton(statID):
+	var freeStatPoints = GM.pc.getSkillsHolder().getFreeStatPoints() - getAddedStatsAmount()
+	if(freeStatPoints <= 0):
+		return
+	#GM.pc.getSkillsHolder().increaseStatIfCan(statID)
+	addPoint(statID)
+	updateAttribList()
+
+
+func _on_CancelButton_pressed():
+	addedPoints.clear()
+	updateAttribList()
+
+
+func _on_ApplyButton_pressed():
+	for statID in addedPoints:
+		GM.pc.getSkillsHolder().increaseStatIfCan(statID, addedPoints[statID])
+	
+	addedPoints.clear()
+	updateAttribList()

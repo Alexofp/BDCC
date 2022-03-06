@@ -1,7 +1,6 @@
 extends PanelContainer
 
-export var colorEmpty = Color("#2c588b")
-export var colorFull = Color("#2c588b")
+export(Gradient) var colorGradient
 export var propertyName = "Property"
 var currentValue = null
 var currentBarValue = 0.0
@@ -26,7 +25,8 @@ func setProgressBarValue(value):
 
 func updateBarValue(value):
 	$ProgressBar.value = value
-	$ProgressBar.get("custom_styles/fg").set_bg_color(colorEmpty.linear_interpolate(colorFull, value))
+	#$ProgressBar.get("custom_styles/fg").set_bg_color(colorEmpty.linear_interpolate(colorFull, value))
+	$ProgressBar.get("custom_styles/fg").set_bg_color(colorGradient.interpolate(value))
 	currentBarValue = value
 
 func setProgressBarValueInt(value, maxvalue):

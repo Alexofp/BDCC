@@ -1,0 +1,27 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://UI/SkillsUI/SkillStatLine.gd" type="Script" id=1]
+
+[node name="SkillStatLine" type="HBoxContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="."]
+margin_top = 353.0
+margin_right = 77.0
+margin_bottom = 367.0
+text = "Strength: 10"
+
+[node name="PlusButton" type="Button" parent="."]
+margin_left = 81.0
+margin_right = 101.0
+margin_bottom = 720.0
+text = "+"
+
+[connection signal="mouse_entered" from="." to="." method="_on_SkillStatLine_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_SkillStatLine_mouse_exited"]
+[connection signal="pressed" from="PlusButton" to="." method="_on_PlusButton_pressed"]

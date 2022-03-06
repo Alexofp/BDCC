@@ -243,8 +243,6 @@ func _run():
 
 
 	if(state == "give_apple"):
-		setFlag(TaviModule.Tavi_GotApple, true)
-		
 		saynn("You walk up to Tavi and offer her the shiny apple.")
 
 		saynn("[say=pc]Here, Miss, like you wanted[/say]")
@@ -286,6 +284,10 @@ func _react(_action: String, _args):
 	if(_action == "startfight"):
 		runScene("FightScene", ["tavi"], "tavifight")
 	
+	if(_action == "give_apple"):
+		addExperienceToPlayer(50)
+		setFlag(TaviModule.Tavi_GotApple, true)
+	
 	if(_action == "submit"):
 		#setFlag(TaviModule.Tavi_IsAngryAtPlayer, false)
 		runScene("TaviSubmitToScene")
@@ -320,5 +322,7 @@ func _react_scene_end(_tag, _result):
 				setState("won_fight_lust")
 			else:
 				setState("won_fight")
+			addExperienceToPlayer(20)
 		else:
 			setState("lost_fight")
+			addExperienceToPlayer(5)

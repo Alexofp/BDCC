@@ -41,7 +41,7 @@ func _ready():
 	registerStat("res://Skills/Stat/EnduranceStat.gd")
 	registerStat("res://Skills/Stat/StrengthStat.gd")
 	registerStat("res://Skills/Stat/VitalityStat.gd")
-	registerStat("res://Skills/Stat/SlutnessStat.gd")
+	registerStat("res://Skills/Stat/SexinessStat.gd")
 	
 	registerEventFolder("res://Events/Event/")
 	

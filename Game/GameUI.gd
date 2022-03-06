@@ -21,6 +21,7 @@ onready var charactersPanel = $HBoxContainer/Panel2/MarginContainer/VBoxContaine
 onready var scrollPanel = $HBoxContainer/VBoxContainer2/ScrollContainer
 onready var mainGameScreen = $HBoxContainer/VBoxContainer2
 onready var ingameMenuScreen = $HBoxContainer/InGameMenu
+onready var skillsScreen = $HBoxContainer/SkillsUI
 var uiTextboxScene = preload("res://UI/UITextbox.tscn")
 onready var textcontainer = $HBoxContainer/VBoxContainer2/ScrollContainer/VBoxContainer
 var textboxes: Dictionary = {}
@@ -229,19 +230,31 @@ func onTimePassed(_secondsPassed):
 func processString(strText: String):
 	return gameParser.executeString(sayParser.processString(strText))
 
+func hideAllScreens():
+	mainGameScreen.visible = false
+	ingameMenuScreen.visible = false
+	skillsScreen.visible = false
 
 func _on_MenuButton_pressed():
-	if(mainGameScreen.visible):
-		mainGameScreen.visible = false
+	if(!ingameMenuScreen.visible):
+		hideAllScreens()
 		ingameMenuScreen.visible = true
 	else:
+		hideAllScreens()
 		mainGameScreen.visible = true
-		ingameMenuScreen.visible = false
 
-
-func _on_InGameMenu_onResumeButtonPressed():
+func showGameScreen():
+	hideAllScreens()
 	mainGameScreen.visible = true
-	ingameMenuScreen.visible = false
 
 func getCurrentLocationName():
 	return mapAndTimePanel.getLocationName()
+
+
+func _on_SkillsButton_pressed():
+	if(!skillsScreen.visible):
+		hideAllScreens()
+		skillsScreen.visible = true
+	else:
+		hideAllScreens()
+		mainGameScreen.visible = true

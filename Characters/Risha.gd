@@ -2,6 +2,10 @@ extends Character
 
 func _init():
 	id = "risha"
+	npcLevel = 3
+	npcStats = {
+		Stat.Vitality: 9,
+	}
 	
 func _getName():
 	return "Risha"
@@ -19,7 +23,7 @@ func getSpecies():
 	return ["feline"]
 
 func _getAttacks():
-	return ["aitaunthumiliate", "stunbatonStrongAttack", "biteattack", "simplekickattack", "shoveattack", "trygetupattack"]
+	return ["aitaunthumiliate", "stunbatonAttack", "stunbatonStrongAttack", "biteattack", "simplekickattack", "shoveattack", "trygetupattack"]
 
 func reactTease():
 	return 0.4

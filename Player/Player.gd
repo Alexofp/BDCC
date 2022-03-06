@@ -49,9 +49,9 @@ func _ready():
 	#inventory.addItem(GlobalRegistry.createItem("ballgag"))
 	
 	#inventory.equipItem(GlobalRegistry.createItem("ballgag"))
-	skillsHolder.setStat(Stat.Slutness, 10)
-	skillsHolder.setStat(Stat.Endurance, 5)
-	skillsHolder.setStat(Stat.Vitality, 5)
+	#skillsHolder.setStat(Stat.Sexiness, 10)
+	#skillsHolder.setStat(Stat.Endurance, 5)
+	#skillsHolder.setStat(Stat.Vitality, 5)
 
 func updateAppearance():
 	emit_signal("bodypart_changed")

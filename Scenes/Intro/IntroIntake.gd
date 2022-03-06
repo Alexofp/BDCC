@@ -325,5 +325,7 @@ func _react_scene_end(_tag, _result):
 		
 		if(battlestate == "win"):
 			setState("wonrisha")
+			addExperienceToPlayer(50)
 		else:
 			setState("losttorisha")
+			addExperienceToPlayer(20)

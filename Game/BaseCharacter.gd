@@ -40,6 +40,8 @@ func _ready():
 	skillsHolder = SkillsHolder.new()
 	skillsHolder.setCharacter(self)
 	add_child(skillsHolder)
+	var _con2 = skillsHolder.connect("statChanged", self, "onStatChange")
+	var _con3 = skillsHolder.connect("experienceChanged", self, "onStatChange")
 	stamina = getMaxStamina()
 	#resetToDefault()
 
@@ -94,7 +96,7 @@ func painThreshold():
 	return 100 + skillsHolder.getStat(Stat.Vitality) * 5
 
 func lustThreshold():
-	return 100 + skillsHolder.getStat(Stat.Slutness) * 5
+	return 100 + skillsHolder.getStat(Stat.Sexiness) * 5
 
 func addEffect(effectID: String, args = []):
 	if(statusEffects.has(effectID)):
@@ -185,6 +187,9 @@ func calculateBuffs():
 func onEquippedItemsChange():
 	calculateBuffs()
 	
+func onStatChange():
+	emit_signal("stat_changed")
+	
 func onDamage(_damageType, _amount):
 	pass
 
@@ -198,7 +203,7 @@ func getDamageMultiplier(_damageType):
 	if(_damageType == DamageType.Physical):
 		mult *= (1.0 + skillsHolder.getStat(Stat.Strength)/100.0)
 	if(_damageType == DamageType.Lust):
-		mult *= (1.0 + skillsHolder.getStat(Stat.Slutness)/100.0)
+		mult *= (1.0 + skillsHolder.getStat(Stat.Sexiness)/100.0)
 
 	return mult
 

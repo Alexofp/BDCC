@@ -432,6 +432,7 @@ OPTIONS="*res://Game/Options/GlobalOptions.gd"
 GlobalRegistry="*res://GlobalRegistry.gd"
 GM="*res://Game/GM.gd"
 SAVE="*res://Game/SaveManager.gd"
+GlobalTooltip="*res://UI/GlobalTooltipSystem.gd"
 
 [debug]
 

@@ -51,7 +51,7 @@ func getAnticipationText(_attacker, _reciever):
 func getAIScore(_attacker, _reciever):
 	if(_reciever.hasEffect(StatusEffect.Collapsed)):
 		return 0
-	return .getAIScore(_attacker, _reciever) * 0.75
+	return .getAIScore(_attacker, _reciever) * 0.25
 
 func getAttackAnimation():
 	return TheStage.Shove

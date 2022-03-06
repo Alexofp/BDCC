@@ -317,5 +317,7 @@ func _react_scene_end(_tag, _result):
 				setState("won_fight_lust")
 			else:
 				setState("won_fight")
+			addExperienceToPlayer(30)
 		else:
 			setState("lost_fight")
+			addExperienceToPlayer(5)

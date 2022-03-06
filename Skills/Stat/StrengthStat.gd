@@ -5,3 +5,6 @@ func _init():
 
 func getVisibleName():
 	return "Strength"
+
+func getVisibleDescription():
+	return "Your physical attacks cause more pain"

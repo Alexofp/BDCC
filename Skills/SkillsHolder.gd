@@ -20,6 +20,12 @@ func setStat(statID: String, value: int):
 	stats[statID] = value
 	emit_signal("statChanged")
 
+func increaseStatIfCan(statID: String, amount = 1):
+	amount = min(amount, getFreeStatPoints())
+	if(amount <= 0):
+		return
+	setStat(statID, getBaseStat(statID) + amount)
+
 func getBaseStat(statID: String) -> int:
 	assert(GlobalRegistry.getStat(statID) != null)
 	if(!stats.has(statID)):
@@ -48,8 +54,14 @@ func setLevel(lvl: int):
 func getLevel() -> int:
 	return level
 
-func getAvailableStatPoints() -> int:
+func getTotalStatPoints() -> int:
 	return level * 3
+	
+func getFreeStatPoints() -> int:
+	var res = getTotalStatPoints()
+	for statID in stats:
+		res -= stats[statID]
+	return res
 	
 static func getRequiredExperience(_level) -> int:
 	return 100
@@ -65,6 +77,9 @@ func addExperience(addexp: int):
 
 func getExperience():
 	return experience
+
+func getRequiredExperienceNextLevel():
+	return getRequiredExperience(level)
 
 func getLevelProgress() -> float:
 	var fexperience = float(experience)

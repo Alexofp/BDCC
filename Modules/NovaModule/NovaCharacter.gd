@@ -4,7 +4,7 @@ func _init():
 	id = "nova"
 	
 	npcStats = {
-		Stat.Slutness: 1,
+		Stat.Sexiness: 1,
 	}
 	npcLevel = 2
 	

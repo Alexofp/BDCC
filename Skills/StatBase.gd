@@ -5,3 +5,6 @@ var id = "error"
 
 func getVisibleName():
 	return "Error"
+
+func getVisibleDescription():
+	return "Error"

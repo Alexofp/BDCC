@@ -5,3 +5,6 @@ func _init():
 
 func getVisibleName():
 	return "Vitality"
+
+func getVisibleDescription():
+	return "Raises your pain threshold"

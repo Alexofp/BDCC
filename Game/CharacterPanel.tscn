@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Fonts/Titillium-Regular.otf" type="DynamicFontData" id=1]
 [ext_resource path="res://Game/CharacterPanel.gd" type="Script" id=2]
@@ -10,6 +10,22 @@ size = 28
 outline_size = 2
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 1 )
+
+[sub_resource type="Gradient" id=10]
+resource_local_to_scene = true
+colors = PoolColorArray( 0.172549, 0.345098, 0.545098, 1, 0.172549, 0.345098, 0.545098, 1 )
+
+[sub_resource type="Gradient" id=8]
+resource_local_to_scene = true
+colors = PoolColorArray( 0.545098, 0.172549, 0.313726, 1, 0.352941, 0, 0.921569, 1 )
+
+[sub_resource type="Gradient" id=9]
+resource_local_to_scene = true
+colors = PoolColorArray( 0.270588, 0.172549, 0.545098, 1, 0.678431, 0, 0.870588, 1 )
+
+[sub_resource type="Gradient" id=11]
+resource_local_to_scene = true
+colors = PoolColorArray( 0.172549, 0.345098, 0.545098, 1, 0.172549, 0.345098, 0.545098, 1 )
 
 [node name="CharacterPanel" type="VBoxContainer"]
 anchor_right = 1.0
@@ -32,6 +48,7 @@ anchor_bottom = 0.0
 margin_top = 32.0
 margin_right = 1280.0
 margin_bottom = 48.0
+colorGradient = SubResource( 10 )
 propertyName = "Level"
 
 [node name="PainBar" parent="." instance=ExtResource( 4 )]
@@ -40,8 +57,7 @@ anchor_bottom = 0.0
 margin_top = 52.0
 margin_right = 1280.0
 margin_bottom = 68.0
-colorEmpty = Color( 0.545098, 0.172549, 0.313726, 1 )
-colorFull = Color( 0.352941, 0, 0.921569, 1 )
+colorGradient = SubResource( 8 )
 propertyName = "Pain"
 
 [node name="LustBar" parent="." instance=ExtResource( 4 )]
@@ -50,8 +66,7 @@ anchor_bottom = 0.0
 margin_top = 72.0
 margin_right = 1280.0
 margin_bottom = 88.0
-colorEmpty = Color( 0.270588, 0.172549, 0.545098, 1 )
-colorFull = Color( 0.678431, 0, 0.870588, 1 )
+colorGradient = SubResource( 9 )
 propertyName = "Lust"
 
 [node name="StaminaBar" parent="." instance=ExtResource( 4 )]
@@ -60,6 +75,7 @@ anchor_bottom = 0.0
 margin_top = 92.0
 margin_right = 1280.0
 margin_bottom = 108.0
+colorGradient = SubResource( 11 )
 propertyName = "Stamina"
 
 [node name="StatusEffectsPanel" parent="." instance=ExtResource( 3 )]
