@@ -279,6 +279,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Util/SimpleParser.gd"
 }, {
+"base": "Object",
+"class": "Skill",
+"language": "GDScript",
+"path": "res://Skills/Skill.gd"
+}, {
+"base": "Reference",
+"class": "SkillBase",
+"language": "GDScript",
+"path": "res://Skills/SkillBase.gd"
+}, {
 "base": "Node",
 "class": "SkillsHolder",
 "language": "GDScript",
@@ -404,6 +414,8 @@ _global_script_class_icons={
 "SayParser": "",
 "SceneBase": "",
 "SimpleParser": "",
+"Skill": "",
+"SkillBase": "",
 "SkillsHolder": "",
 "Species": "",
 "Stat": "",

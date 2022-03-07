@@ -42,7 +42,7 @@ margin_bottom = 616.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Stats" type="Tabs" parent="VBoxContainer/TabContainer"]
+[node name="Stats" type="Control" parent="VBoxContainer/TabContainer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -153,51 +153,6 @@ margin_left = 65.0
 margin_right = 133.0
 margin_bottom = 26.0
 text = "Cancel"
-
-[node name="Tabs2" type="Tabs" parent="VBoxContainer/TabContainer"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 4.0
-margin_top = 38.0
-margin_right = -4.0
-margin_bottom = -4.0
-
-[node name="Tabs3" type="Tabs" parent="VBoxContainer/TabContainer"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 4.0
-margin_top = 38.0
-margin_right = -4.0
-margin_bottom = -4.0
-
-[node name="Tabs4" type="Tabs" parent="VBoxContainer/TabContainer"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 4.0
-margin_top = 38.0
-margin_right = -4.0
-margin_bottom = -4.0
-
-[node name="Tabs5" type="Tabs" parent="VBoxContainer/TabContainer"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 4.0
-margin_top = 38.0
-margin_right = -4.0
-margin_bottom = -4.0
-
-[node name="Tabs6" type="Tabs" parent="VBoxContainer/TabContainer"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 4.0
-margin_top = 38.0
-margin_right = -4.0
-margin_bottom = -4.0
 
 [node name="GridContainer" type="GridContainer" parent="VBoxContainer"]
 margin_top = 620.0

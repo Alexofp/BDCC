@@ -5,6 +5,9 @@ var stats = {}
 var level: int = 0
 var experience: int = 0
 var npc = null
+
+var skills = {}
+
 signal statChanged
 signal levelChanged
 signal experienceChanged
@@ -36,16 +39,40 @@ func getStat(statID: String) -> int:
 	return getBaseStat(statID)
 
 func saveData():
-	return {
+	var data = {
 		"stats": stats,
 		"level": level,
 		"experience": experience,
 	}
+	data["skills"] = []
+	for skillID in skills:
+		var skillData = {
+			"id": skillID,
+			"skillData": skills[skillID].saveData(),
+		}
+		data["skills"].append(skillData)
+	
+	return data
 
 func loadData(data):
+	skills.clear()
 	stats = SAVE.loadVar(data, "stats", {})
 	level = SAVE.loadVar(data, "level", 0)
 	experience = SAVE.loadVar(data, "experience", 0)
+	
+	var loadedSkills = SAVE.loadVar(data, "skills", [])
+	for loadedSkill in loadedSkills:
+		var skillID = SAVE.loadVar(loadedSkill, "id", "")
+		var skillData = SAVE.loadVar(loadedSkill, "skillData", {})
+		
+		var newskill = GlobalRegistry.createSkill(skillID)
+		if(newskill == null):
+			printerr("Skill with id "+skillID+" couldn't be loaded because it wasn't found in the registry")
+			continue
+		
+		newskill.setCharacter(npc)
+		newskill.loadData(skillData)
+		skills[skillID] = newskill
 
 func setLevel(lvl: int):
 	level = lvl
@@ -88,11 +115,33 @@ func getLevelProgress() -> float:
 
 func checkNewLevel():
 	var addedAnyLevels = false
-	while(experience >= getRequiredExperience(level)):
-		experience -= getRequiredExperience(level)
+	while(experience >= getRequiredExperienceNextLevel()):
+		experience -= getRequiredExperienceNextLevel()
 		level += 1
 		addedAnyLevels = true
 	
 	if(addedAnyLevels):
 		emit_signal("levelChanged")
 		
+func addSkillExperience(skillID, amount, activityID = null):
+	if(!skills.has(skillID)):
+		var newskill = GlobalRegistry.createSkill(skillID)
+		if(newskill == null):
+			assert(false)
+			return
+		newskill.setCharacter(npc)
+		skills[skillID] = newskill
+	
+	skills[skillID].addExperience(amount, activityID)
+	
+func onNewDay():
+	for skillID in skills:
+		skills[skillID].onNewDay()
+	
+func getSkills():
+	return skills
+
+func getSkill(skillID):
+	if(!skills.has(skillID)):
+		return null
+	return skills[skillID]

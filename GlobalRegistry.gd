@@ -19,6 +19,7 @@ var events: Dictionary = {}
 var modules: Dictionary = {}
 var quests: Dictionary = {}
 var stats: Dictionary = {}
+var skills: Dictionary = {}
 
 func _ready():
 	registerBodypartFolder("res://Player/Bodyparts/Legs/")
@@ -42,6 +43,8 @@ func _ready():
 	registerStat("res://Skills/Stat/StrengthStat.gd")
 	registerStat("res://Skills/Stat/VitalityStat.gd")
 	registerStat("res://Skills/Stat/SexinessStat.gd")
+	
+	registerSkillFolder("res://Skills/Skill/")
 	
 	registerEventFolder("res://Events/Event/")
 	
@@ -449,3 +452,33 @@ func getStat(id: String):
 
 func getStats():
 	return stats
+
+
+func registerSkill(path: String):
+	var item = load(path)
+	var itemObject = item.new()
+	skills[itemObject.id] = item
+
+func registerSkillFolder(folder: String):
+	var dir = Directory.new()
+	if dir.open(folder) == OK:
+		dir.list_dir_begin()
+		var file_name = dir.get_next()
+		while file_name != "":
+			if dir.current_is_dir():
+				pass
+				#print("Found directory: " + file_name)
+			else:
+				if(file_name.get_extension() == "gd"):
+					var full_path = folder.plus_file(file_name)
+					#print("Registered skill: " + full_path)
+					registerSkill(full_path)
+			file_name = dir.get_next()
+	else:
+		printerr("An error occurred when trying to access the path "+folder)
+		
+func createSkill(id: String):
+	if(!skills.has(id)):
+		printerr("ERROR: skill with the id "+id+" wasn't found")
+		return null
+	return skills[id].new()

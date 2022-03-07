@@ -7,10 +7,13 @@ onready var attribList = $VBoxContainer/TabContainer/Stats/ScrollContainer/HBoxC
 signal onClosePressed
 onready var applyButton = $VBoxContainer/TabContainer/Stats/ScrollContainer/HBoxContainer/PanelContainer2/VBoxContainer/HBoxContainer/ApplyButton
 onready var cancelButton = $VBoxContainer/TabContainer/Stats/ScrollContainer/HBoxContainer/PanelContainer2/VBoxContainer/HBoxContainer/CancelButton
+onready var tabContainer = $VBoxContainer/TabContainer
 
 var skillStatLineScene = preload("res://UI/SkillsUI/SkillStatLine.tscn")
 var statObjects = {}
 var addedPoints = {}
+var skillTabScene = preload("res://UI/SkillsUI/SkillUITab.tscn")
+var skillTabs = []
 
 func _ready():
 	pass
@@ -44,6 +47,20 @@ func updateData():
 	levelBar.setProgressBarValue(GM.pc.getSkillsHolder().getLevelProgress())
 
 	createAttribList()
+	
+	for tab in skillTabs:
+		tab.queue_free()
+	skillTabs.clear()
+	
+	var skills = GM.pc.getSkillsHolder().getSkills()
+	for skillID in skills:
+		var tabID = tabContainer.get_child_count()
+		var skillTab = skillTabScene.instance()
+		tabContainer.add_child(skillTab)
+		skillTab.setSkillID(skillID)
+		skillTabs.append(skillTab)
+		tabContainer.set_tab_title(tabID, skillTab.getTabName())
+	
 	
 func createAttribList():
 	statObjects = {}
