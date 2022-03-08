@@ -87,3 +87,10 @@ func loadData(data):
 	level = SAVE.loadVar(data, "level", 0)
 	experience = SAVE.loadVar(data, "experience", 0)
 	activities = SAVE.loadVar(data, "activities", {})
+
+func getPerkTiers():
+	return [
+		[0],
+		[5],
+		[10],
+	]

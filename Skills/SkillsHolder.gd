@@ -7,6 +7,7 @@ var experience: int = 0
 var npc = null
 
 var skills = {}
+var perks = {}
 
 signal statChanged
 signal levelChanged
@@ -51,11 +52,21 @@ func saveData():
 			"skillData": skills[skillID].saveData(),
 		}
 		data["skills"].append(skillData)
+		
+	data["perks"] = []
+	for perkID in perks:
+		var perkData = {
+			"id": perkID,
+			"perkData": perks[perkID].saveData(),
+		}
+		data["perks"].append(perkData)
+	
 	
 	return data
 
 func loadData(data):
 	skills.clear()
+	perks.clear()
 	stats = SAVE.loadVar(data, "stats", {})
 	level = SAVE.loadVar(data, "level", 0)
 	experience = SAVE.loadVar(data, "experience", 0)
@@ -73,6 +84,20 @@ func loadData(data):
 		newskill.setCharacter(npc)
 		newskill.loadData(skillData)
 		skills[skillID] = newskill
+		
+	var loadedPerks = SAVE.loadVar(data, "perks", [])
+	for loadedPerk in loadedPerks:
+		var perkID = SAVE.loadVar(loadedPerk, "id", "")
+		var perkData = SAVE.loadVar(loadedPerk, "perkData", {})
+		
+		var newperk = GlobalRegistry.createPerk(perkID)
+		if(newperk == null):
+			printerr("Perk with id "+perkID+" couldn't be loaded because it wasn't found in the registry")
+			continue
+		
+		newperk.setCharacter(npc)
+		newperk.loadData(perkData)
+		perks[perkID] = newperk
 
 func setLevel(lvl: int):
 	level = lvl
@@ -145,3 +170,53 @@ func getSkill(skillID):
 	if(!skills.has(skillID)):
 		return null
 	return skills[skillID]
+	
+func hasPerk(perkID):
+	if(!perks.has(perkID)):
+		return false
+	return true
+	
+func addPerk(perkID):
+	if(hasPerk(perkID)):
+		return
+	
+	var newperk = GlobalRegistry.createPerk(perkID)
+	newperk.setCharacter(npc)
+	perks[perkID] = newperk
+
+func getPerkPoints(skillID):
+	if(!skills.has(skillID)):
+		return 0
+	return skills[skillID].getLevel()
+	
+func getFreePerkPoints(skillID):
+	if(!skills.has(skillID)):
+		return 0
+	
+	var result = getPerkPoints(skillID)
+	for perkID in perks:
+		var perk = perks[perkID]
+		if(perk.getSkillGroup() == skillID):
+			result -= 1
+	
+	return result
+
+func canUnlockPerk(perkID):
+	var perk: PerkBase = GlobalRegistry.getPerk(perkID)
+	var perkSkill = perk.getSkillGroup()
+	if(!skills.has(perkSkill)):
+		return false
+	
+	var skill: SkillBase = skills[perkSkill]
+	
+	var freePerkPoints = getFreePerkPoints(perk.getSkillGroup())
+	if(perk.getCost() > freePerkPoints):
+		return false
+	
+	var tierData = skill.getPerkTiers()[perk.getSkillTier()]
+	var requiredLevel = tierData[0]
+	
+	if(skill.getLevel() < requiredLevel):
+		return false
+	return true
+	

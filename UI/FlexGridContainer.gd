@@ -23,6 +23,8 @@ func _notification(p_what):
 			
 			if get_child_count() > 0:
 				min_columns = int(floor(rect_size.x / (get_child(0).get_combined_minimum_size().x + hsep)))
+			if(min_columns <= 0):
+				min_columns = 1
 			
 			self.columns = min_columns
 			

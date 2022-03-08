@@ -20,6 +20,9 @@ var modules: Dictionary = {}
 var quests: Dictionary = {}
 var stats: Dictionary = {}
 var skills: Dictionary = {}
+var perks: Dictionary = {}
+var perksBySkillGroups: Dictionary = {}
+var perksObjects: Dictionary = {}
 
 func _ready():
 	registerBodypartFolder("res://Player/Bodyparts/Legs/")
@@ -45,6 +48,8 @@ func _ready():
 	registerStat("res://Skills/Stat/SexinessStat.gd")
 	
 	registerSkillFolder("res://Skills/Skill/")
+	
+	registerPerkFolder("res://Skills/Perk/")
 	
 	registerEventFolder("res://Events/Event/")
 	
@@ -482,3 +487,51 @@ func createSkill(id: String):
 		printerr("ERROR: skill with the id "+id+" wasn't found")
 		return null
 	return skills[id].new()
+
+
+
+func registerPerk(path: String):
+	var item = load(path)
+	var itemObject = item.new()
+	perks[itemObject.id] = item
+	perksObjects[itemObject.id] = itemObject
+	var skillGroup = itemObject.getSkillGroup()
+	if(!perksBySkillGroups.has(skillGroup)):
+		perksBySkillGroups[skillGroup] = []
+		
+	perksBySkillGroups[skillGroup].append(itemObject.id)
+
+func registerPerkFolder(folder: String):
+	var dir = Directory.new()
+	if dir.open(folder) == OK:
+		dir.list_dir_begin()
+		var file_name = dir.get_next()
+		while file_name != "":
+			if dir.current_is_dir():
+				pass
+				#print("Found directory: " + file_name)
+			else:
+				if(file_name.get_extension() == "gd"):
+					var full_path = folder.plus_file(file_name)
+					#print("Registered perk: " + full_path)
+					registerPerk(full_path)
+			file_name = dir.get_next()
+	else:
+		printerr("An error occurred when trying to access the path "+folder)
+		
+func createPerk(id: String):
+	if(!perks.has(id)):
+		printerr("ERROR: perk with the id "+id+" wasn't found")
+		return null
+	return perks[id].new()
+
+func getPerk(id: String):
+	if(!perksObjects.has(id)):
+		printerr("ERROR: perk with the id "+id+" wasn't found")
+		return null
+	return perksObjects[id]
+
+func getPerksIDsBySkill(skillID: String):
+	if(!perksBySkillGroups.has(skillID)):
+		return []
+	return perksBySkillGroups[skillID]

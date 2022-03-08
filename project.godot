@@ -224,6 +224,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Player/Orifice/Orifice.gd"
 }, {
+"base": "Object",
+"class": "Perk",
+"language": "GDScript",
+"path": "res://Skills/Perk.gd"
+}, {
+"base": "Reference",
+"class": "PerkBase",
+"language": "GDScript",
+"path": "res://Skills/PerkBase.gd"
+}, {
 "base": "BaseCharacter",
 "class": "Player",
 "language": "GDScript",
@@ -403,6 +413,8 @@ _global_script_class_icons={
 "Module": "",
 "NovaModule": "",
 "Orifice": "",
+"Perk": "",
+"PerkBase": "",
 "Player": "",
 "PunishmentsModule": "",
 "Quest": "",
