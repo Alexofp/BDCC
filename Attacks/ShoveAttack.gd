@@ -15,7 +15,7 @@ func _doAttack(_attacker, _reciever):
 	var attackerName = _attacker.getName()
 	var recieverName = _reciever.getName()
 	
-	var chanceToHit = _attacker.getAttackAccuracy(DamageType.Physical) * 0.7
+	var chanceToHit = (1.0 + _attacker.getAttackAccuracy(DamageType.Physical)) * 0.7
 	chanceToHit = max(chanceToHit, 0.5)
 	#var dodgeChance = _reciever.getDodgeChance(DamageType.Physical)
 	

@@ -194,26 +194,32 @@ func onDamage(_damageType, _amount):
 	pass
 
 func getDamageMultiplier(_damageType):
-	var mult = 1
+	var mult = 0
 	for effectID in statusEffects.keys():
 		var effect = statusEffects[effectID]
-		mult *= effect.getDamageMultiplierMod(_damageType)
+		mult += effect.getDamageMultiplierMod(_damageType)
 	
-	mult *= buffsHolder.getDealDamageMult(_damageType)
+	mult += buffsHolder.getDealDamageMult(_damageType)
 	if(_damageType == DamageType.Physical):
-		mult *= (1.0 + skillsHolder.getStat(Stat.Strength)/100.0)
+		mult += skillsHolder.getStat(Stat.Strength)/100.0
 	if(_damageType == DamageType.Lust):
-		mult *= (1.0 + skillsHolder.getStat(Stat.Sexiness)/100.0)
+		mult += skillsHolder.getStat(Stat.Sexiness)/100.0
+
+	if(mult < -0.8):
+		mult = -0.8
 
 	return mult
 
 func getRecieveDamageMultiplier(_damageType):
-	var mult = 1
+	var mult = 0
 	for effectID in statusEffects.keys():
 		var effect = statusEffects[effectID]
-		mult *= effect.getRecievedDamageMod(_damageType)
+		mult += effect.getRecievedDamageMod(_damageType)
 		
-	mult *= buffsHolder.getRecieveDamageMult(_damageType)
+	mult += buffsHolder.getRecieveDamageMult(_damageType)
+	
+	if(mult < -0.8):
+		mult = -0.8
 	
 	return mult
 
@@ -224,21 +230,24 @@ func getDodgeChance(_damageType):
 	var mult = initialDodgeChance
 	for effectID in statusEffects.keys():
 		var effect = statusEffects[effectID]
-		mult *= effect.getDodgeMod(_damageType)
+		mult += effect.getDodgeMod(_damageType)
+
+	if(mult > 0.8):
+		mult = 0.8
 
 	return mult
 	
 func getAttackAccuracy(_damageType):
-	var mult = 1
+	var mult = 0
 	for effectID in statusEffects.keys():
 		var effect = statusEffects[effectID]
-		mult *= effect.getAccuracyMod(_damageType)
+		mult += effect.getAccuracyMod(_damageType)
 	
 	return mult
 	
 func recieveDamage(damageType, amount: int):
 	var mult = getRecieveDamageMultiplier(damageType)
-	var newdamage = amount * mult
+	var newdamage = amount * (1.0 + mult)
 	
 	if(amount > 0):
 		newdamage -= getArmor(damageType)

@@ -15,7 +15,9 @@ func getVisibleDescription():
 	return "Lust damage "+text+"%"
 
 func apply(_buffHolder):
-	_buffHolder.dealDamageMult[DamageType.Lust] *= (1.0 + amount/100.0)
+	_buffHolder.dealDamageMult[DamageType.Lust] += (amount/100.0)
 
 func getBuffColor():
+	if(amount < 0):
+		return Color.red
 	return Color.pink

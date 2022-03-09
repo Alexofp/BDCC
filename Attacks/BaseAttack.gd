@@ -101,7 +101,7 @@ func getRequirementsColorText(_attacker, _reciever):
 func doDamage(_attacker, _reciever, _damageType, _damage: int, playGetHitAnimation = true):
 	var damageMult = _attacker.getDamageMultiplier(_damageType)
 	
-	var damage = _reciever.recieveDamage(_damageType, _damage * damageMult)
+	var damage = _reciever.recieveDamage(_damageType, _damage * (1.0 + damageMult))
 	
 	if(playGetHitAnimation):
 		if(_reciever == GM.pc):
@@ -179,7 +179,7 @@ func checkMissed(_attacker, _reciever, _damageType, customAccuracyMult = 1):
 	if(_reciever.hasEffect(StatusEffect.Collapsed)):
 		return false
 	
-	var chanceToHit = _attacker.getAttackAccuracy(_damageType) * customAccuracyMult
+	var chanceToHit = (1.0 + _attacker.getAttackAccuracy(_damageType)) * customAccuracyMult
 	if(!RNG.chance(100.0 * chanceToHit)):
 		return true
 	return false

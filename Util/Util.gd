@@ -74,6 +74,13 @@ static func getSpeciesName(species: Array):
 	
 	return join(names, "-") + " hybrid"
 
+static func numberToPercentString(value: float):
+	if(value < 0):
+		return str(value*100)+"%"
+	if(value > 0):
+		return "+"+str(value*100)+"%"
+	return "0%"
+
 # https://godotengine.org/qa/19077/how-to-get-the-date-as-per-rfc-1123-date-format-in-game
 static func datetimeToRFC113(time):
 	var nameweekday= ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]

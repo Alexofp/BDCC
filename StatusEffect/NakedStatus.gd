@@ -30,5 +30,5 @@ func combine(_args = []):
 
 func getDamageMultiplierMod(_damageType):
 	if(_damageType == DamageType.Lust):
-		return 1.1
-	return 1
+		return 0.1
+	return 0.0

@@ -10,4 +10,4 @@ func getVisibleDescription():
 	return "I'm doing something alright"
 
 func apply(_buffHolder):
-	_buffHolder.recieveDamageMult[DamageType.Physical] *= 10
+	_buffHolder.recieveDamageMult[DamageType.Physical] += 10

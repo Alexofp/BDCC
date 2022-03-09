@@ -64,7 +64,7 @@ size_flags_horizontal = 3
 
 [node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/TabContainer/Stats/ScrollContainer/HBoxContainer"]
 margin_right = 634.0
-margin_bottom = 84.0
+margin_bottom = 117.0
 size_flags_horizontal = 3
 size_flags_vertical = 2
 
@@ -72,7 +72,7 @@ size_flags_vertical = 2
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 627.0
-margin_bottom = 77.0
+margin_bottom = 110.0
 size_flags_horizontal = 3
 size_flags_vertical = 0
 
@@ -95,6 +95,20 @@ margin_right = 620.0
 margin_bottom = 70.0
 colorGradient = SubResource( 1 )
 propertyName = "Level 1"
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer/TabContainer/Stats/ScrollContainer/HBoxContainer/PanelContainer/VBoxContainer"]
+margin_top = 74.0
+margin_right = 620.0
+margin_bottom = 78.0
+
+[node name="DamageStatsLabel" type="RichTextLabel" parent="VBoxContainer/TabContainer/Stats/ScrollContainer/HBoxContainer/PanelContainer/VBoxContainer"]
+margin_top = 82.0
+margin_right = 620.0
+margin_bottom = 103.0
+bbcode_enabled = true
+bbcode_text = "Test data"
+text = "Test data"
+fit_content_height = true
 
 [node name="PanelContainer2" type="PanelContainer" parent="VBoxContainer/TabContainer/Stats/ScrollContainer/HBoxContainer"]
 margin_left = 638.0

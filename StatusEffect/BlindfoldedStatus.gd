@@ -30,5 +30,5 @@ func combine(_args = []):
 
 func getAccuracyMod(_damageType):
 	if(_damageType == DamageType.Physical):
-		return 0.5
-	return 1
+		return -0.5
+	return 0

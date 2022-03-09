@@ -18,5 +18,5 @@ func getIconColor():
 
 func getDodgeMod(_damageType):
 	if(_damageType == DamageType.Physical):
-		return 0.1
-	return 1
+		return -0.9
+	return 0.0

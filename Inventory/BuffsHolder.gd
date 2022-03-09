@@ -22,8 +22,8 @@ func calculateBuffs():
 	armor.clear()
 	gagged = false
 	for damageType in DamageType.getAll():
-		dealDamageMult[damageType] = 1.0
-		recieveDamageMult[damageType] = 1.0
+		dealDamageMult[damageType] = 0.0
+		recieveDamageMult[damageType] = 0.0
 		armor[damageType] = 0
 	
 	var items = npc.getInventory().getAllEquippedItems()
@@ -39,13 +39,13 @@ func isGagged():
 
 func getDealDamageMult(damageType):
 	if(!dealDamageMult.has(damageType)):
-		return 1.0
+		return 0.0
 	
 	return dealDamageMult[damageType]
 
 func getRecieveDamageMult(damageType):
 	if(!recieveDamageMult.has(damageType)):
-		return 1.0
+		return 0.0
 	
 	return recieveDamageMult[damageType]
 

@@ -30,5 +30,5 @@ func combine(_args = []):
 
 func getDamageMultiplierMod(_damageType):
 	if(_damageType == DamageType.Physical):
-		return 0.8
-	return 1
+		return -0.2
+	return 0.0

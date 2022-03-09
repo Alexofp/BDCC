@@ -52,16 +52,16 @@ func stop():
 	character.removeEffect(id)
 
 func getAccuracyMod(_damageType):
-	return 1
+	return 0.0
 
 func getDodgeMod(_damageType):
-	return 1
+	return 0.0
 	
 func getRecievedDamageMod(_damageType):
-	return 1
+	return 0.0
 
 func getDamageMultiplierMod(_damageType):
-	return 1
+	return 0.0
 
 func saveData():
 	return {}

@@ -8,6 +8,7 @@ signal onClosePressed
 onready var applyButton = $VBoxContainer/TabContainer/Stats/ScrollContainer/HBoxContainer/PanelContainer2/VBoxContainer/HBoxContainer/ApplyButton
 onready var cancelButton = $VBoxContainer/TabContainer/Stats/ScrollContainer/HBoxContainer/PanelContainer2/VBoxContainer/HBoxContainer/CancelButton
 onready var tabContainer = $VBoxContainer/TabContainer
+onready var damageStatsLabel = $VBoxContainer/TabContainer/Stats/ScrollContainer/HBoxContainer/PanelContainer/VBoxContainer/DamageStatsLabel
 
 var skillStatLineScene = preload("res://UI/SkillsUI/SkillStatLine.tscn")
 var statObjects = {}
@@ -101,6 +102,8 @@ func updateAttribList():
 	else:
 		applyButton.disabled = true
 		cancelButton.disabled = true
+		
+	updateDamageStatsLabel()
 
 func _on_SkillsUI_visibility_changed():
 	if(visible):
@@ -127,3 +130,40 @@ func _on_ApplyButton_pressed():
 	
 	addedPoints.clear()
 	updateAttribList()
+
+func updateDamageStatsLabel():
+	var text = "Output damage multiplier:\n"
+	for damageType in DamageType.getAll():
+		var dam = GM.pc.getDamageMultiplier(damageType)
+		var damName = DamageType.getName(damageType)
+		text += damName +": " +Util.numberToPercentString(dam)+"\n"
+		
+	text += "\n"
+	text += "Recieved damage multiplier:\n"
+	for damageType in DamageType.getAll():
+		var dam = GM.pc.getRecieveDamageMultiplier(damageType)
+		var damName = DamageType.getName(damageType)
+		text += damName +": " +Util.numberToPercentString(dam)+"\n"
+		
+	text += "\n"
+	text += "Armor:\n"
+	for damageType in DamageType.getAll():
+		var dam = GM.pc.getArmor(damageType)
+		var damName = DamageType.getName(damageType)
+		text += damName +": " +str(dam)+"\n"
+		
+	text += "\n"
+	text += "Dodge chance:\n"
+	for damageType in DamageType.getAll():
+		var dam = GM.pc.getDodgeChance(damageType)
+		var damName = DamageType.getName(damageType)
+		text += damName +": " +str(dam*100)+"%"+"\n"
+		
+	text += "\n"
+	text += "Attack accuracy:\n"
+	for damageType in DamageType.getAll():
+		var dam = GM.pc.getAttackAccuracy(damageType)
+		var damName = DamageType.getName(damageType)
+		text += damName +": " +Util.numberToPercentString(dam)+"\n"
+		
+	damageStatsLabel.bbcode_text = text
