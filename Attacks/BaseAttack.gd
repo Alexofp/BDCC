@@ -101,7 +101,7 @@ func getRequirementsColorText(_attacker, _reciever):
 func doDamage(_attacker, _reciever, _damageType, _damage: int, playGetHitAnimation = true):
 	var damageMult = _attacker.getDamageMultiplier(_damageType)
 	
-	var damage = _reciever.recieveDamage(_damageType, _damage * (1.0 + damageMult))
+	var damage = _reciever.recieveDamage(_damageType, round(_damage * (1.0 + damageMult)))
 	
 	if(playGetHitAnimation):
 		if(_reciever == GM.pc):
@@ -175,22 +175,63 @@ func getAIScore(_attacker, _reciever):
 		
 	return 0.0
 
-func checkMissed(_attacker, _reciever, _damageType, customAccuracyMult = 1):
+func checkMissed(_attacker, _reciever, _damageType, customAccuracyMult = 1.0, minChangeToHit = 0.0):
 	if(_reciever.hasEffect(StatusEffect.Collapsed)):
 		return false
 	
 	var chanceToHit = (1.0 + _attacker.getAttackAccuracy(_damageType)) * customAccuracyMult
+	chanceToHit = max(chanceToHit, minChangeToHit)
 	if(!RNG.chance(100.0 * chanceToHit)):
 		return true
 	return false
 
-func checkDodged(_attacker, _reciever, _damageType, customDodgeMult = 1):
+func checkDodged(_attacker, _reciever, _damageType, customDodgeMult = 1, minChangeToDodge = 0.0, playDodgeAnimation = true):
 	var dodgeChance = _reciever.getDodgeChance(_damageType) * customDodgeMult
-		
+	
+	dodgeChance = max(dodgeChance, minChangeToDodge)
 	if(RNG.chance(100.0 * dodgeChance)):
+		if(playDodgeAnimation):
+			if(_reciever == GM.pc):
+				GM.pc.playAnimation(TheStage.Dodge)
+		
 		return true
 		
 	return false
 	
 func getAttackAnimation():
 	return ""
+
+func scaledDmgStr(_damageType, _damage: int):
+	var damageMult = GM.pc.getDamageMultiplier(_damageType)
+	
+	var damage = round(_damage * (1.0 + damageMult))
+	
+	return str(damage)
+
+func scaledDmgRangeStr(_damageType, min_damage: int, max_damage: int):
+	var damageMult = GM.pc.getDamageMultiplier(_damageType)
+	
+	var damage1 = round(min_damage * (1.0 + damageMult))
+	var damage2 = round(max_damage * (1.0 + damageMult))
+	
+	return str(damage1)+"-"+str(damage2)
+
+func recieverDamageMessage(damageType, howMuch):
+	var damageColor = DamageType.getColor(damageType)
+	var damageColorString = "#"+damageColor.to_html(false)
+	
+	return "{receiver.name} recieved [color="+damageColorString+"]"+str(howMuch)+" "+DamageType.getBattleName(damageType)+"[/color]"
+
+func recieverDamageMessageList(damages: Array):
+	var result = "{receiver.name} recieved "
+	
+	var resList = []
+	for damageData in damages:
+		var damageType = damageData[0]
+		var howMuch = damageData[1]
+		var damageColor = DamageType.getColor(damageType)
+		var damageColorString = "#"+damageColor.to_html(false)
+		
+		resList.append("[color="+damageColorString+"]"+str(howMuch)+" "+DamageType.getBattleName(damageType)+"[/color]")
+		
+	return result + Util.humanReadableList(resList)

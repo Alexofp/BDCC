@@ -25,9 +25,11 @@ func _doAttack(_attacker, _reciever):
 	#_reciever.addEffect(StatusEffect.Bleeding)
 
 	var texts = [
-		attackerName + " manages to land a strong swing on " + recieverName + " sending an incredibly painful shock through "+_reciever.hisHer() +" body and doing "+str(damage)+" damage!"
+		attackerName + " manages to land a strong swing on " + recieverName + " sending an incredibly painful shock through "+_reciever.hisHer() +" body. "
 	]
 	var text = RNG.pick(texts)
+	
+	text += recieverDamageMessage(DamageType.Physical, damage)
 	
 	return text
 	

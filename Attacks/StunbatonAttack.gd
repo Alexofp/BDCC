@@ -31,7 +31,7 @@ func _doAttack(_attacker, _reciever):
 	]
 	var text = RNG.pick(texts)
 	
-	text += " {receiver.name} received "+str(_damage)+" pain"
+	text += " " + recieverDamageMessage(DamageType.Physical, _damage)
 	
 	return text
 	

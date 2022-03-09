@@ -31,9 +31,10 @@ func _doAttack(_attacker, _reciever):
 	]
 	var text = RNG.pick(texts)
 	
-	text += " {receiver.name} received "+str(_damage)+" pain and "+str(_damageStamina)+" stamina damage!"
+	text += " " + recieverDamageMessageList([[DamageType.Physical, _damage], [DamageType.Stamina, _damageStamina]])
+
 	if(!_reciever.hasEffect(StatusEffect.Collapsed)):
-		text += "\n{receiver.name} couldn’t withstand the attack and dropped to the floor!"
+		text += "\n{receiver.name} couldn’t withstand the attack and [b]dropped to the floor[/b]!"
 		_reciever.addEffect(StatusEffect.Collapsed)
 	
 	

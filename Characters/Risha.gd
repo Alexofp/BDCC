@@ -64,8 +64,8 @@ func getFightIntro(_battleName):
 	return getName() + " eyes you out and licks her lips.\n\n"+formatSay("You're an easy prey for me. Why don't you just undress and we can have some fun instead~")+"\n\nRisha then gets into a combat stance and gestures you to come closer. Her heavy armor doesn't seem to inpact her mobility one bit, her hand holds the stun baton very tightly\n\nSeems the first move is yours"
 
 func getFightState(_battleName):
-	if(getPain() > getLust()):
-		var mypain = getPain()
+	if(getPainLevel() > getLustLevel()):
+		var mypain = getPainLevel() * 100
 		
 		if(mypain >= 70):
 			return getName() + " constantly grunts from pain. "+heShe()+" can barely stand at this point, all "+hisHer()+" bruises are really wearing "+himHer()+" down.\n" + formatSay("GHh.. Fuck it really hurts")
@@ -74,7 +74,7 @@ func getFightState(_battleName):
 		if(mypain >= 25):
 			return getName() + " has a bruise there and there but "+heShe()+" clearly won't give up the fight any time soon.\n" + formatSay("Is that the best you got? Weak")
 	else:
-		var mylust = getLust()
+		var mylust = getLustLevel() * 100
 		
 		if(mylust >= 70):
 			return getName() + " keeps moaning to "+himselfHerself()+" and can't hide the arousal anymore, "+heShe()+" blatantly gropes and rubs "+hisHer()+" body in front of you.\n" + formatSay("Fuck you're hot")

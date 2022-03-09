@@ -29,6 +29,6 @@ func _doAttack(_attacker, _reciever):
 	
 	text += _reciever.lustDamageReaction(_damage, _attacker)
 	
-	text += "\n"+recieverName+" got " + str(_damage) + " lust damage"
+	text += "\n"+recieverDamageMessage(DamageType.Lust, _damage)
 	
 	return text

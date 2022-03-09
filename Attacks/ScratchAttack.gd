@@ -9,7 +9,7 @@ func getVisibleName():
 	return "Scratch"
 	
 func getVisibleDesc():
-	return "You scratch the enemy for 5-15 damage. May cause bleeding with 50%"
+	return "You scratch the enemy for "+scaledDmgRangeStr(DamageType.Physical, 5, 15)+" damage. May cause bleeding with 50%"
 	
 func _doAttack(_attacker, _reciever):
 	var attackerName = _attacker.getName()
@@ -35,7 +35,7 @@ func _doAttack(_attacker, _reciever):
 		text += " causing "+_reciever.himHer() + " to start [color=red]bleeding[/color]"
 		_reciever.addEffect(StatusEffect.Bleeding)
 	
-	text += "\n"+recieverName+" recieved "+str(damage)+" damage!"
+	text += "\n"+recieverDamageMessage(DamageType.Physical, damage)
 	
 	return text
 	

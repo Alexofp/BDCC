@@ -9,7 +9,7 @@ func getVisibleName():
 	return "Kick"
 	
 func getVisibleDesc():
-	return "Kick them for 10-15 damage. May knock the opponent down with a low chance"
+	return "Kick them for "+scaledDmgRangeStr(DamageType.Physical, 10, 15)+" damage. May knock the opponent down with a low chance"
 	
 func _doAttack(_attacker, _reciever):
 	var attackerName = _attacker.getName()
@@ -25,11 +25,14 @@ func _doAttack(_attacker, _reciever):
 	#_reciever.addEffect(StatusEffect.Bleeding)
 
 	var texts = [
-		attackerName + " kicks " + recieverName + " and does "+str(damage)+" damage!"
+		attackerName + " kicks " + recieverName + ". "
 	]
 	var text = RNG.pick(texts)
+	
+	text += recieverDamageMessage(DamageType.Physical, damage)
+	
 	if(RNG.chance(20) && !_reciever.hasEffect(StatusEffect.Collapsed)):
-		text += "\n"+recieverName+" loses "+_reciever.hisHer()+" balance and collapses onto the floor"
+		text += "\n[b]"+recieverName+" loses "+_reciever.hisHer()+" balance and collapses onto the floor[/b]"
 		_reciever.addEffect(StatusEffect.Collapsed)
 	
 	return text
@@ -41,7 +44,7 @@ func getRequirements():
 	return [["freelegs"]]
 
 func getAnticipationText(_attacker, _reciever):
-	return _attacker.getName() + " lunges forward and tries to sparta-kick you"
+	return _attacker.getName() + " lunges forward and tries to kick you"
 
 func getAttackAnimation():
 	return TheStage.Kick

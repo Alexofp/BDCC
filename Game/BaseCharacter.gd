@@ -92,11 +92,20 @@ func getName() -> String:
 func getSmallDescription() -> String:
 	return "Test test test"
 
-func painThreshold():
+func painThreshold() -> int:
 	return 100 + skillsHolder.getStat(Stat.Vitality) * 5
 
-func lustThreshold():
+func lustThreshold() -> int:
 	return 100 + skillsHolder.getStat(Stat.Sexiness) * 5
+
+func getPainLevel():
+	return float(getPain()) / float(painThreshold())
+
+func getLustLevel():
+	return float(getLust()) / float(lustThreshold())
+
+func getStaminaLevel():
+	return float(getStamina()) / float(getMaxStamina())
 
 func addEffect(effectID: String, args = []):
 	if(statusEffects.has(effectID)):
@@ -247,7 +256,7 @@ func getAttackAccuracy(_damageType):
 	
 func recieveDamage(damageType, amount: int):
 	var mult = getRecieveDamageMultiplier(damageType)
-	var newdamage = amount * (1.0 + mult)
+	var newdamage = round(amount * (1.0 + mult))
 	
 	if(amount > 0):
 		newdamage -= getArmor(damageType)
@@ -278,7 +287,7 @@ func recieveDamage(damageType, amount: int):
 		
 		var actualAddstamina = stamina - oldstamina
 		onDamage(damageType, actualAddstamina)
-		return actualAddstamina
+		return -actualAddstamina
 		
 	return 0
 
@@ -490,8 +499,8 @@ func getFightIntro(_battleName):
 	return "Plase change the fight intro"
 
 func getFightState(_battleName):
-	if(getPain() > getLust()):
-		var mypain = getPain()
+	if(getPainLevel() > getLustLevel()):
+		var mypain = getPainLevel() * 100
 		
 		if(mypain >= 70):
 			return getName() + " constantly grunts from pain. "+heShe()+" can barely stand at this point, all "+hisHer()+" bruises are really wearing "+himHer()+" down"
@@ -500,7 +509,7 @@ func getFightState(_battleName):
 		if(mypain >= 25):
 			return getName() + " has a bruise there and there but "+heShe()+" clearly won't give up the fight any time soon"
 	else:
-		var mylust = getLust()
+		var mylust = getLustLevel() * 100
 		
 		if(mylust >= 70):
 			return getName() + " keeps moaning to "+himselfHerself()+" and can't hide the arousal anymore, "+heShe()+" blatantly gropes and rubs "+hisHer()+" body in front of you"

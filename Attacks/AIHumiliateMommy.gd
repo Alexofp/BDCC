@@ -15,9 +15,9 @@ func _doAttack(_attacker, _reciever):
 	var _damage = doDamage(_attacker, _reciever, DamageType.Lust, RNG.randi_range(20, 20))
 	#_reciever.addEffect(StatusEffect.Bleeding)
 
-	var text = "{attacker.name} teasing had an effect on {receiver.name}."
+	var text = "{attacker.name} teasing had an effect on {receiver.name}. "
 	
-	text += " {receiver.name} received "+str(_damage)+" lust!"
+	text += recieverDamageMessage(DamageType.Lust, _damage)
 	
 	return text
 	

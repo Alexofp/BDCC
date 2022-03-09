@@ -364,8 +364,8 @@ func loadData(data):
 	skillsHolder.loadData(SAVE.loadVar(data, "skills", {}))
 
 func getFightState(_battleName):
-	if(getPain() > getLust()):
-		var mypain = getPain()
+	if(getPainLevel() > getLustLevel()):
+		var mypain = getPainLevel() * 100
 		
 		if(mypain >= 70):
 			return "Everything hurts, you are barely able to continue fighting."
@@ -374,7 +374,7 @@ func getFightState(_battleName):
 		if(mypain >= 10):
 			return "You got bruised but doing fine otherwise"
 	else:
-		var mylust = getLust()
+		var mylust = getLustLevel() * 100
 		
 		if(mylust >= 70):
 			return "You feel so horny, you just can't stop thinking about your opponent, your hands sneak down to your privates and tease them"

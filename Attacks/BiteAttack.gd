@@ -9,7 +9,7 @@ func getVisibleName():
 	return "Bite"
 	
 func getVisibleDesc():
-	return "60% chance to do 15-20 damage and cause bleeding. Can't miss if the opponent is on the ground"
+	return "60% chance to do "+scaledDmgRangeStr(DamageType.Physical, 15, 20)+" damage and cause bleeding. Can't miss if the opponent is on the ground"
 	
 func _doAttack(_attacker, _reciever):
 	var attackerName = _attacker.getName()
@@ -36,7 +36,7 @@ func _doAttack(_attacker, _reciever):
 		text += " causing "+_reciever.himHer() + " to start [color=red]bleeding[/color]"
 		_reciever.addEffect(StatusEffect.Bleeding)
 	
-	text += "\n"+recieverName+" recieved "+str(damage)+" damage!"
+	text += "\n"+recieverDamageMessage(DamageType.Physical, damage)
 	
 	return text
 	

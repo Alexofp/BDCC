@@ -30,14 +30,14 @@ func _doAttack(_attacker, _reciever):
 		text += "{attacker.name} kicks {receiver.name} in the balls! It was incredibly painful.\n"
 		
 		if(!_reciever.hasEffect(StatusEffect.Collapsed)):
-			text += "{receiver.name} holds onto {receiver.his} crotch and hits the floor.\n"
+			text += "{receiver.name} holds onto {receiver.his} crotch and [b]hits the floor.[/b]\n"
 			_reciever.addEffect(StatusEffect.Collapsed)
 	else:
 		_damage = doDamage(_attacker, _reciever, DamageType.Physical, RNG.randi_range(10, 10))
 		text += "{attacker.name} manages to land a kick on {receiver.name} crotch but it wasn’t very painful.\n"
 		
 	
-	text += "{receiver.name} received "+str(_damage)+" pain"
+	text += recieverDamageMessage(DamageType.Physical, _damage)
 	
 	return text
 	

@@ -9,7 +9,7 @@ func getVisibleName():
 	return "Punch"
 	
 func getVisibleDesc():
-	return "You do a combo of 2 punches, each one dealing 5-10 damage"
+	return "You do a combo of 2 punches, each one dealing "+scaledDmgRangeStr(DamageType.Physical, 5, 10)+" damage"
 	
 func _doAttack(_attacker, _reciever):
 	var attackerName = _attacker.getName()
@@ -26,9 +26,11 @@ func _doAttack(_attacker, _reciever):
 	damage += doDamage(_attacker, _reciever, DamageType.Physical, RNG.randi_range(5,10))
 	
 	var texts = [
-		attackerName + " manages to land a few strong punches on " + recieverName + " doing "+str(damage)+" damage!",
+		attackerName + " manages to land a few strong punches on " + recieverName + ". ",
 	]
 	var text = RNG.pick(texts)
+	
+	text += recieverDamageMessage(DamageType.Physical, damage)
 	
 	return text
 	

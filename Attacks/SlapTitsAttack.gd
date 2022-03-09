@@ -34,7 +34,7 @@ func _doAttack(_attacker, _reciever):
 		text += "{receiver.name} didn’t even feel the smack but {attacker.name}’s hand did manage to hit the sensitive nips.\n"
 		
 	
-	text += "{receiver.name} received "+str(_damage)+" pain and "+str(_damageLust)+" lust"
+	text += recieverDamageMessageList([[DamageType.Physical, _damage], [DamageType.Lust, _damageLust]])
 	
 	return text
 	

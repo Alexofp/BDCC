@@ -21,9 +21,9 @@ func _doAttack(_attacker, _reciever):
 	
 	var text
 	if(success):
-		text = attackerName + " wastes "+_attacker.hisHer()+" turn but "+_attacker.heShe()+" manages to get up"
+		text = attackerName + " wastes "+_attacker.hisHer()+" turn but [b]"+_attacker.heShe()+" manages to get up[/b]"
 	else:
-		text = attackerName + " tries to get up but fails to do so in time"
+		text = attackerName + " tries to get up [b]but fails to do so[/b] in time"
 	
 	return text
 	

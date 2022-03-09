@@ -216,8 +216,6 @@ func _react(_action: String, _args):
 			whatPlayerDid = "You focus on enemy's next attack and try to dodge it"
 			GM.pc.setFightingStateDodging()
 			GM.pc.addStamina(-30)
-			
-			GM.pc.playAnimation(TheStage.Dodge)
 		if(_action == "dodge_block"):
 			whatPlayerDid = "You try to block the next attack"
 			GM.pc.setFightingStateBlocking()

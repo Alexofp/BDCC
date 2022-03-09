@@ -21,7 +21,9 @@ func _doAttack(_attacker, _reciever):
 	
 	_attacker.addPain(-30)
 	
-	text += " {receiver.name} received "+str(_damage)+" lust and {attacker.name} is feeling better!"
+	text += " {attacker.name} is feeling better! "
+	
+	text += recieverDamageMessage(DamageType.Lust, _damage)
 	
 	return text
 
