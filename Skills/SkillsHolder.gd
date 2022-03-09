@@ -149,6 +149,9 @@ func checkNewLevel():
 		emit_signal("levelChanged")
 		
 func addSkillExperience(skillID, amount, activityID = null):
+	if(npc == null || !npc.isPlayer()):
+		return
+	
 	if(!skills.has(skillID)):
 		var newskill = GlobalRegistry.createSkill(skillID)
 		if(newskill == null):

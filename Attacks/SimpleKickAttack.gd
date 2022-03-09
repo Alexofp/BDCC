@@ -48,3 +48,6 @@ func getAnticipationText(_attacker, _reciever):
 
 func getAttackAnimation():
 	return TheStage.Kick
+
+func getExperience():
+	return [[Skill.Fighting, 10]]

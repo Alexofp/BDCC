@@ -42,3 +42,6 @@ func getRequirements():
 
 func getAttackAnimation():
 	return TheStage.Punch
+
+func getExperience():
+	return [[Skill.Fighting, 10]]

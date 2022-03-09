@@ -267,6 +267,10 @@ func doPlayerAttack(attackID):
 	if(attackAnim != null && attackAnim != ""):
 		GM.pc.playAnimation(attackAnim)
 	
+	var expData = attack.getExperience()
+	for expAdd in expData:
+		GM.pc.addSkillExperience(expAdd[0], expAdd[1])
+	
 	return text
 
 func getBestAIAttack():

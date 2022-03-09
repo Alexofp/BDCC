@@ -235,3 +235,6 @@ func recieverDamageMessageList(damages: Array):
 		resList.append("[color="+damageColorString+"]"+str(howMuch)+" "+DamageType.getBattleName(damageType)+"[/color]")
 		
 	return result + Util.humanReadableList(resList)
+
+func getExperience():
+	return []
