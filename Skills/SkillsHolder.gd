@@ -200,7 +200,7 @@ func getFreePerkPoints(skillID):
 	for perkID in perks:
 		var perk = perks[perkID]
 		if(perk.getSkillGroup() == skillID):
-			result -= 1
+			result -= perk.getCost()
 	
 	return result
 
