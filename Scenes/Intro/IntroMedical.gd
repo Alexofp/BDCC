@@ -7,8 +7,8 @@ func _init():
 
 func _run():
 	if(state == ""):
-		GM.world.aimCamera("intro_beforeelevator")
-		GM.ui.setLocationName("Intake area")
+		aimCamera("intro_beforeelevator")
+		setLocationName("Intake area")
 		
 		addCharacter("eliza")
 
@@ -20,8 +20,8 @@ func _run():
 		addButton("Sneak up", "", "sneak_up")
 
 	if(state == "sneak_up"):
-		GM.world.aimCamera("intro_medicalarea")
-		GM.ui.setLocationName("Medical area")
+		aimCamera("intro_medicalarea")
+		setLocationName("Medical area")
 		GM.pc.playAnimation(TheStage.GetDefeated)
 		
 		saynn("You decide not to announce your presence and instead begin to slowly creep up to the lady, who seems to be too busy with reading something off of her tablet. You keep watching her as you make your steps as light as possible. You notice her feline ears twitching ever so slightly. As you approach the instrument table, you notice a variety of tools: syringes, clamps, retractors but most importantly, a few scalpels. Your hand hovers over one as you try to grab it. But as soon as you do, you hear a voice.")
@@ -73,8 +73,8 @@ func _run():
 		addButton("Sit", "Take a sit", "sit")
 
 	if(state == "introduce_self"):
-		GM.world.aimCamera("intro_medicalarea")
-		GM.ui.setLocationName("Medical area")
+		aimCamera("intro_medicalarea")
+		setLocationName("Medical area")
 		
 		saynn("You cough slightly to try and get her attention. Her feline ears quickly pick up on the noise and direct themselves towards you, followed soon by her glance.")
 
@@ -189,8 +189,8 @@ func _run():
 	if(state == "fuck_no"):
 		GM.pc.playAnimation(TheStage.Shove)
 		
-		GM.world.aimCamera("intro_beforeelevator")
-		GM.ui.setLocationName("Intake area")
+		aimCamera("intro_beforeelevator")
+		setLocationName("Intake area")
 		
 		saynn("[say=pc]Yeah, that’s not happening. How about you go screw yourself instead[/say]")
 
@@ -209,8 +209,8 @@ func _run():
 	if(state == "fine"):
 		GM.pc.playAnimation(TheStage.Standing)
 		
-		GM.world.aimCamera("intro_beforeelevator")
-		GM.ui.setLocationName("Intake area")
+		aimCamera("intro_beforeelevator")
+		setLocationName("Intake area")
 		
 		saynn("[say=pc]Fine[/say]")
 
@@ -227,8 +227,8 @@ func _run():
 		addButton("Lift", "Enter the lift", "lift")
 
 	if(state == "lift"):
-		GM.world.aimCamera("intro_elevator")
-		GM.ui.setLocationName("Lift")
+		aimCamera("intro_elevator")
+		setLocationName("Lift")
 		
 		addCharacter("tavi")
 		
@@ -246,8 +246,8 @@ func _run():
 		addButton("Wait", "Wait until the lift arrives", "liftarrives")
 		
 	if(state == "liftarrives"):
-		GM.world.aimCamera("hall_elevator")
-		GM.ui.setLocationName("Checkpoint")
+		aimCamera("hall_elevator")
+		setLocationName("Checkpoint")
 		
 		GM.pc.playAnimation(TheStage.Walking)
 		
@@ -262,8 +262,8 @@ func _run():
 		addButton("Look around", "Look around the main hall", "lookaroundmainhall")
 	
 	if(state == "lookaroundmainhall"):
-		GM.world.aimCamera("hall_mainentrance")
-		GM.ui.setLocationName("Main hall")
+		aimCamera("hall_mainentrance")
+		setLocationName("Main hall")
 		
 		saynn("You spot a few inmates around. All sorts of inmates of different species. Some wear orange uniforms like you, some wear red or pink. Obviously they weren’t told that you’re arriving but you do begin to catch their stares. Almost every inmate is now watching you being led around on a leash, you can hear some voices talking about you but it’s all incomprehensible to you.")
 
@@ -276,8 +276,8 @@ func _run():
 	if(state == "followtocell"):
 		GM.pc.playAnimation(TheStage.Walking)
 		
-		GM.world.aimCamera("cellblock_orange_nearcell")
-		GM.ui.setLocationName("Cellblock")
+		aimCamera("cellblock_orange_nearcell")
+		setLocationName("Cellblock")
 		
 		saynn("[say=eliza]Here, that’s your cell[/say]")
 
@@ -296,8 +296,8 @@ func _run():
 	if(state == "walk_inside"):
 		removeCharacter("tavi")
 		removeCharacter("eliza")
-		GM.world.aimCamera("cellblock_orange_playercell")
-		GM.ui.setLocationName("My new home")
+		aimCamera("cellblock_orange_playercell")
+		setLocationName("My new home")
 		
 		saynn("You step into your cell and take a look around.")
 

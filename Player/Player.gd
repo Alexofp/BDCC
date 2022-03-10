@@ -135,10 +135,13 @@ func hasBoundLegs():
 	return buffsHolder.hasBuff(Buff.RestrainedLegsBuff)
 
 func isBlindfolded():
-	return false
+	return buffsHolder.hasBuff(Buff.BlindfoldBuff)
 
 func isGagged():
 	return buffsHolder.hasBuff(Buff.GagBuff)
+
+func canHandleBlindness():
+	return skillsHolder.hasPerk(Perk.TestPerk) && false
 	
 func calculateBuffs():
 	buffsHolder.calculateBuffs()
@@ -613,6 +616,9 @@ func freeHandsDeleteAll():
 	
 func freeLegsDeleteAll():
 	return getInventory().deleteEquippedItemsWithBuff(Buff.RestrainedLegsBuff)
+	
+func freeEyesDeleteAll():
+	return getInventory().deleteEquippedItemsWithBuff(Buff.BlindfoldBuff)
 
 func getUndressMessage(withS):
 	var res = []

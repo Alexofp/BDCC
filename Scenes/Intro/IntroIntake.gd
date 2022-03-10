@@ -7,8 +7,8 @@ func _init():
 
 func _run():
 	if(state == ""):
-		GM.world.aimCamera("intro_arrive")
-		GM.ui.setLocationName("Spaceship hangar")
+		aimCamera("intro_arrive")
+		setLocationName("Spaceship hangar")
 		
 		addCharacter("captain")
 		addCharacter("risha")
@@ -36,8 +36,8 @@ func _run():
 		addButton("What now", "Ask what happens next", "whatnow")
 		
 	if(state == "whatnow"):
-		GM.world.aimCamera("intro_nearcaptain")
-		GM.ui.setLocationName("Spaceship hangar")
+		aimCamera("intro_nearcaptain")
+		setLocationName("Spaceship hangar")
 		
 		GM.pc.playAnimation(TheStage.Walking)
 		
@@ -81,8 +81,8 @@ func _run():
 		addButton("Follow", "Follow the officer and his guard", "follow")
 		
 	if(state == "follow"):
-		GM.world.aimCamera("intro_intakearea")
-		GM.ui.setLocationName("Intake area")
+		aimCamera("intro_intakearea")
+		setLocationName("Intake area")
 		
 		GM.pc.playAnimation(TheStage.Walking)
 		
@@ -102,7 +102,7 @@ func _run():
 		addButton("Fuck no", "Say that you will never do it. This might not be the best idea", "notundress")
 	
 	if(state == "undress"):
-		GM.world.aimCamera("intro_nearshower")
+		aimCamera("intro_nearshower")
 		
 		saynn("Initial confusion is switched with embarrassment, you immediately blush just from the thought.")
 		
@@ -117,7 +117,7 @@ func _run():
 		addButton("Shower", "Take the refreshing shower", "shower")
 		
 	if(state == "notundress"):
-		GM.world.aimCamera("intro_nearshower")
+		aimCamera("intro_nearshower")
 		
 		saynn("You grit your teeth and show a middle finger to the guy.")
 		
@@ -174,8 +174,8 @@ func _run():
 		addButton("Shower", "Take the refreshing shower", "shower")
 
 	if(state == "shower"):
-		GM.world.aimCamera("intro_shower")
-		GM.ui.setLocationName("Shower")
+		aimCamera("intro_shower")
+		setLocationName("Shower")
 		
 		GM.pc.playAnimation(TheStage.Walking)
 		
@@ -208,8 +208,8 @@ func _run():
 		addButton("Step out", "Do the registration", "aftershower")
 		
 	if(state == "aftershower"):
-		GM.world.aimCamera("intro_aftershower")
-		GM.ui.setLocationName("Intake area")
+		aimCamera("intro_aftershower")
+		setLocationName("Intake area")
 		
 		GM.pc.playAnimation(TheStage.Walking)
 		
@@ -246,7 +246,7 @@ func _run():
 		addButton("Stand still", "Let him do it", "cuffs")
 		
 	if(state == "cuffs"):
-		GM.world.aimCamera("intro_beforemedical")
+		aimCamera("intro_beforemedical")
 		
 		saynn("You don’t look too happy about it but you comply, the stare of a guard makes that choice easier. You offer your wrists and ankles to the captain as he locks every cuff onto you one by one.")
 		

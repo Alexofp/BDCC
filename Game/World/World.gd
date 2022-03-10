@@ -186,4 +186,19 @@ func aimCamera(roomID):
 		highlightedRoom.setHighlighted(false)
 	highlightedRoom = room
 	highlightedRoom.setHighlighted(true)
+	
+	setDarknessSize(16)
 
+func setDarknessVisible(vis):
+	$CanvasLayer/DarknessControl.visible = vis
+
+func setDarknessSize(darknessSize):
+	$CanvasLayer/DarknessControl/DCenter.margin_left = -darknessSize
+	$CanvasLayer/DarknessControl/DCenter.margin_top = -darknessSize
+	$CanvasLayer/DarknessControl/DCenter.margin_right = darknessSize
+	$CanvasLayer/DarknessControl/DCenter.margin_bottom = darknessSize
+
+	$CanvasLayer/DarknessControl/DTop.margin_bottom = -darknessSize
+	$CanvasLayer/DarknessControl/DBottom.margin_top = darknessSize
+	$CanvasLayer/DarknessControl/DLeft.margin_right = -darknessSize
+	$CanvasLayer/DarknessControl/DRight.margin_left = darknessSize

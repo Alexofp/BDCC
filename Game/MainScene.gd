@@ -83,6 +83,7 @@ func runCurrentScene():
 		sceneStack.back().run()
 		
 		GM.ES.doDelayedEvents()
+	updateStuff()
 
 func reRun():
 	runCurrentScene()
@@ -229,3 +230,15 @@ func resolveCustomCharacterName(charID):
 	if(sceneStack.size() > 0):
 		return sceneStack.back().resolveCustomCharacterName(charID)
 	return null
+
+func updateStuff():
+	if(GM.pc == null):
+		return
+	
+	var playerIsBlindfolded = GM.pc.isBlindfolded()
+	GM.world.setDarknessVisible(playerIsBlindfolded)
+	if(playerIsBlindfolded):
+		if(GM.pc.canHandleBlindness()):
+			GM.world.setDarknessSize(64)
+		else:
+			GM.world.setDarknessSize(16)

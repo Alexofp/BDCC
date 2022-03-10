@@ -18,9 +18,9 @@ func _run():
 		
 	if(state == "doShower"):
 		if(GM.pc.location == "main_dressing1"):
-			GM.world.aimCamera("main_shower1")
+			aimCamera("main_shower1")
 		if(GM.pc.location == "main_dressing2"):
-			GM.world.aimCamera("main_shower2")
+			aimCamera("main_shower2")
 		
 		saynn("You get under one of the shower heads and begin tinkering with the faucets.")
 		
@@ -55,7 +55,7 @@ func _run():
 		addDisabledButton("Masturbate", "Not done")
 			
 	if(state == "finish"):
-		GM.world.aimCamera(GM.pc.location)
+		aimCamera(GM.pc.location)
 		
 		saynn("You turn off the water and go grab a towel to rub yourself dry")
 		

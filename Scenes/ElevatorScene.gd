@@ -35,7 +35,7 @@ func _react(_action: String, _args):
 		
 		processTime(5*60)
 		GM.pc.setLocation(newloc)
-		GM.world.aimCamera(newloc)
+		aimCamera(newloc)
 
 	if(_action == "endthescene"):
 		endScene()

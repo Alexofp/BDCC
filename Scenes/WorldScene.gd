@@ -7,8 +7,8 @@ func _run():
 	var roomID = GM.pc.location
 	var _roomInfo = GM.world.getRoomByID(roomID)
 	
-	GM.world.aimCamera(roomID)
-	GM.ui.setLocationName(_roomInfo.getName())
+	aimCamera(roomID)
+	setLocationName(_roomInfo.getName())
 	
 	#say("Meow\n")
 	#say(_roomInfo.getDescription())
@@ -37,6 +37,10 @@ func _run():
 	addButtonAt(13, "Tasks", "Look at your tasks", "tasks")
 	addButtonAt(14, "Inventory", "Look at your inventory", "inventory")
 	
+	if(GM.pc.isBlindfolded() && !GM.pc.canHandleBlindness()):
+		saynn(_roomInfo.getBlindDescription())
+	else:
+		saynn(_roomInfo.getDescription())
 	_roomInfo._onEnter()
 
 func _react(_action: String, _args):
@@ -58,25 +62,25 @@ func _react(_action: String, _args):
 		GM.pc.playAnimation(TheStage.Walking)
 		GM.pc.setLocation(GM.world.applyDirectionID(GM.pc.location, GameWorld.Direction.NORTH))
 		processTime(30)
-		GM.world.aimCamera(GM.pc.location)
+		aimCamera(GM.pc.location)
 		GM.ES.trigger(Trigger.EnteringRoom, GM.pc.location)
 	if(_action == "gowest"):
 		GM.pc.playAnimation(TheStage.Walking)
 		GM.pc.setLocation(GM.world.applyDirectionID(GM.pc.location, GameWorld.Direction.WEST))
 		processTime(30)
-		GM.world.aimCamera(GM.pc.location)
+		aimCamera(GM.pc.location)
 		GM.ES.trigger(Trigger.EnteringRoom, GM.pc.location)
 	if(_action == "gosouth"):
 		GM.pc.playAnimation(TheStage.Walking)
 		GM.pc.setLocation(GM.world.applyDirectionID(GM.pc.location, GameWorld.Direction.SOUTH))
 		processTime(30)
-		GM.world.aimCamera(GM.pc.location)
+		aimCamera(GM.pc.location)
 		GM.ES.trigger(Trigger.EnteringRoom, GM.pc.location)
 	if(_action == "goeast"):
 		GM.pc.playAnimation(TheStage.Walking)
 		GM.pc.setLocation(GM.world.applyDirectionID(GM.pc.location, GameWorld.Direction.EAST))
 		processTime(30)
-		GM.world.aimCamera(GM.pc.location)
+		aimCamera(GM.pc.location)
 		GM.ES.trigger(Trigger.EnteringRoom, GM.pc.location)
 	if(_action == "inventory"):
 		runScene("InventoryScene")

@@ -231,6 +231,15 @@ func resolveCustomCharacterName(_charID):
 func canSave():
 	return true
 
+func setLocationName(locationName: String):
+	if(GM.pc.isBlindfolded()):
+		locationName = "???"
+	
+	GM.ui.setLocationName(locationName)
+
+func aimCamera(roomID: String):
+	GM.world.aimCamera(roomID)
+
 func saveData():
 	var data = {}
 	data["state"] = state

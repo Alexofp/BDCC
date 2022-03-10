@@ -5,6 +5,7 @@ class_name GameRoom
 export(String) var roomName = ""
 export(String) var roomID = ""
 export(String, MULTILINE) var roomDescription = ""
+export(String, MULTILINE) var blindRoomDescription = ""
 
 export(bool) var canWest = true
 export(bool) var canNorth = true
@@ -90,6 +91,12 @@ func getDescription() -> String:
 func _getDescription() -> String:
 	return roomDescription
 
+func getBlindDescription() -> String:
+	if(blindRoomDescription == ""):
+		return "You don't understand where you are"
+	else:
+		return blindRoomDescription
+
 func getName():
 	return roomName
 
@@ -141,7 +148,6 @@ func addActions():
 				else:
 					GM.ui.addDisabledButton(roomAction.ActionName, roomAction.ActionTooltip)
 func _onEnter():
-	saynn(getDescription())
 	addActions()
 	
 	emit_signal("onEnter", self)
