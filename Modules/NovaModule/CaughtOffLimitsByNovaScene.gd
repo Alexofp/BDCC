@@ -186,7 +186,7 @@ func _run():
 	# (Humiliate Nova, Fuck Nova, Ride Nova, Leave)
 	if(state == "won_fight" || state == "won_fight_lust"):
 		addButton("Leave", "Don't do anything", "endthescene")
-		addButton("Humiliate Nova", "Use her stun baton to mess with her", "humiliateAngel")
+		addButtonWithChecks("Humiliate Nova", "Use her stun baton to mess with her", "humiliateAngel", [], [ButtonChecks.NotArmsRestrained])
 		if(GM.pc.hasReachableVagina()):
 			addButton("Ride Nova", "Use the herm’s cock for your pleasure", "rideSubbyAngel")
 		else:
@@ -288,6 +288,8 @@ func _react(_action: String, _args):
 		return
 		
 	if(_action == "agree_to_suck"):
+		if(GM.pc.freeMouthDeleteAll()):
+			addMessage("Nova was nice enough to remove your gag before this")
 		runScene("SuckNovaCockScene")
 		endScene()
 		return

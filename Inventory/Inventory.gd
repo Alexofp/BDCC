@@ -167,6 +167,17 @@ func destroyEquippedItemFromSlot(slot):
 		return true
 	return false
 
+func destroyEquippedItem(itemToDelete):
+	for slot in equippedItems.keys():
+		var item = equippedItems[slot]
+		if(itemToDelete == item):
+			equippedItems.erase(slot)
+			remove_child(item)
+			item.queue_free()
+			emit_signal("equipped_items_changed")
+			return true
+	return false
+
 func clear():
 	for item in items:
 		item.queue_free()
@@ -176,6 +187,31 @@ func clear():
 		equippedItems[itemSlot].queue_free()
 	equippedItems.clear()
 	emit_signal("equipped_items_changed")
+
+func getEquippedItemsWithBuff(buffID):
+	var result = []
+	for itemSlot in equippedItems.keys():
+		var item = equippedItems[itemSlot]
+		
+		var buffs = item.getBuffs()
+		
+		for buff in buffs:
+			if(buff.id == buffID):
+				result.append(item)
+				continue
+	return result
+
+func destroyEquippedItemsList(itemsToDelete: Array):
+	for item in itemsToDelete:
+		destroyEquippedItem(item)
+
+func deleteEquippedItemsWithBuff(buffID):
+	var founditems = getEquippedItemsWithBuff(buffID)
+	var hasItem = false
+	if(founditems.size() > 0):
+		hasItem = true
+	destroyEquippedItemsList(founditems)
+	return hasItem
 
 func saveData():
 	var data = {}

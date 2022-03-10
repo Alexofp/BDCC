@@ -187,6 +187,13 @@ func _react(_action: String, _args):
 		if(item != null):
 			item.queue_free()
 	
+	if(_action == "ikilled"):
+		setFlag(Flag.Player_Crime_Type, Flag.Crime_Type.Murder)
+	if(_action == "reasonrevenge"):
+		setFlag(Flag.Player_Crime_Why, Flag.Crime_Reason.Revenge)
+	if(_action == "reasonmoney"):
+		setFlag(Flag.Player_Crime_Why, Flag.Crime_Reason.Money)
+	
 	setState(_action)
 
 func _react_scene_end(_tag, _result):

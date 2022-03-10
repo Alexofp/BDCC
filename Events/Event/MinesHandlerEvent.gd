@@ -13,9 +13,9 @@ func run():
 func delayedRun():
 	if(GM.pc.getStamina() > 0):
 		if(!GM.main.getFlag(Flag.Mining_IntroducedToMinning, false)):
-			addButtonUnlessLate("Work", "See what's it about", "first_time")
+			addButtonWithChecks("Work", "See what's it about", "first_time", [], [ButtonChecks.NotLate, ButtonChecks.NotArmsRestrained])
 		else:
-			addButtonUnlessLate("Work", "Go work in the mines", "not_first_time")
+			addButtonWithChecks("Work", "Go work in the mines", "not_first_time", [], [ButtonChecks.NotLate, ButtonChecks.NotArmsRestrained])
 	else:
 		addDisabledButton("Work", "You are way too tired to work")
 	

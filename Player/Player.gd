@@ -605,3 +605,11 @@ func getAttributesText():
 		["Thickness", str(pickedThickness)+"%"],
 	]
 
+func freeMouthDeleteAll():
+	return getInventory().deleteEquippedItemsWithBuff(Buff.GagBuff)
+	
+func freeHandsDeleteAll():
+	return getInventory().deleteEquippedItemsWithBuff(Buff.RestrainedArmsBuff)
+	
+func freeLegsDeleteAll():
+	return getInventory().deleteEquippedItemsWithBuff(Buff.RestrainedLegsBuff)

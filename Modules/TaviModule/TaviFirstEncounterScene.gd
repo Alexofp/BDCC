@@ -246,9 +246,9 @@ func _run():
 
 		addButton("Submit", "Maybe you went too far..", "submit2")
 		addButton("Walk away", "Leave Tavi", "walk_away")
-		addButton("Dominate Tavi", "Make that bitch submit to you using violence", "dominateTavi")
+		addButtonWithChecks("Dominate Tavi", "Make that bitch submit to you using violence", "dominateTavi", [], [ButtonChecks.NotArmsRestrained])
 		if(getFlag(TaviModule.Tavi_Submissiveness, 0) >= 1):
-			addButton("Degrade Tavi", "Force her to act like a puppy", "degradeTavi")
+			addButtonWithChecks("Degrade Tavi", "Force her to act like a puppy", "degradeTavi", [], [ButtonChecks.NotArmsRestrained])
 		else:
 			addDisabledButton("Degrade Tavi", "Tavi needs to be at least a little bit obedient")
 		addDisabledButton("Fuck Tavi", "Not done :(")
@@ -414,10 +414,7 @@ func _react(_action: String, _args):
 		TaviModule.makeTaviAngry()
 	
 	if(_action in ["kneel", "submit", "submit1", "submit2"]):
-		if(GM.pc.getInventory().hasSlotEquipped(InventorySlot.Mouth) && GM.pc.isGagged()):
-			var gag = GM.pc.getInventory().removeItemFromSlot(InventorySlot.Mouth)
-			gag.queue_free()
-			
+		if(GM.pc.freeMouthDeleteAll()):
 			addMessage("Tavi does something to your gag and the whole harness slips off of your head and falls onto the floor.")
 	
 	if(_action == "obey"):
