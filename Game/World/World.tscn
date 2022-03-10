@@ -139,3 +139,6 @@ position = Vector2( 768, -384 )
 visible = false
 
 [node name="MiningFloor" parent="MiningFloor" instance=ExtResource( 8 )]
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color( 0, 0, 0, 1 )

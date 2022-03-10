@@ -8,24 +8,24 @@ static func delete_children(node):
 
 # input ["a", "b", "c"]
 # output "a, b and c"
-static func humanReadableList(arr: Array):
+static func humanReadableList(arr: Array, andConnector: String = "and", commaConnector: String = ","):
 	var arrSize = arr.size()
 	if(arrSize == 0):
 		return ""
 	if(arrSize == 1):
 		return arr[0]
 	if(arrSize == 2):
-		return arr[0] + " and " + arr[1]
+		return arr[0] + " "+andConnector+" " + arr[1]
 	
 	var res = ""
 	for i in range(arrSize):
 		if(i == (arrSize - 1)):
-			res += " and "
+			res += " "+andConnector+" "
 		
 		res += arr[i]
 		
 		if(i <= (arrSize - 3)):
-			res += ", "
+			res += commaConnector + " "
 	return res
 
 

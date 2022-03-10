@@ -8,7 +8,7 @@ func _run():
 	if(state == ""):
 		var item: ItemBase = GM.pc.getInventory().getItemByUniqueID(sceneArgs[0])
 		
-		saynn("You take off "+item.getVisibleName())
+		saynn("You "+item.getTakingOffStringLong(false))
 
 		addButton("Continue", "You took off an item", "endthescene")
 

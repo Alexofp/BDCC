@@ -613,3 +613,14 @@ func freeHandsDeleteAll():
 	
 func freeLegsDeleteAll():
 	return getInventory().deleteEquippedItemsWithBuff(Buff.RestrainedLegsBuff)
+
+func getUndressMessage(withS):
+	var res = []
+	var slotsToCheck = [InventorySlot.Body]
+	
+	for slot in slotsToCheck:
+		if(getInventory().hasSlotEquipped(slot)):
+			var item = getInventory().getEquippedItem(slot)
+			res.append(item.getTakingOffStringLong(withS))
+	
+	return Util.humanReadableList(res, "and also")

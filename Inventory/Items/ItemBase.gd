@@ -118,3 +118,27 @@ func getStackSellPrice():
 
 func canSell():
 	return false
+
+func getTakingOffStringLong(withS):
+	if(withS):
+		return "takes off your "+getVisibleName().to_lower()
+	else:
+		return "take off your "+getVisibleName().to_lower()
+
+func getTakingOffVerb(withS):
+	if(withS):
+		return "takes off"
+	else:
+		return "take off"
+
+func getPuttingOnStringLong(withS):
+	if(withS):
+		return "puts on your "+getVisibleName().to_lower()
+	else:
+		return "put on your "+getVisibleName().to_lower()
+
+func getPuttingOnVerb(withS):
+	if(withS):
+		return "puts on"
+	else:
+		return "put on"
