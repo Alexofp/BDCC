@@ -16,3 +16,9 @@ func getBuffs():
 	return [
 		buff(Buff.RestrainedArmsBuff),
 		]
+
+func getPrice():
+	return 0
+
+func canSell():
+	return true

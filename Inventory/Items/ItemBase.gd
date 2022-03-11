@@ -7,9 +7,6 @@ var amount = 1
 var currentInventory = null
 
 func _init():
-	pass
-
-func _ready():
 	if(uniqueID == null):
 		uniqueID = "item"+str(GlobalRegistry.generateUniqueID())
 

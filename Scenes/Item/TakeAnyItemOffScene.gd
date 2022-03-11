@@ -6,19 +6,28 @@ func _init():
 
 func _run():
 	if(state == ""):
-		var item: ItemBase = GM.pc.getInventory().getItemByUniqueID(sceneArgs[0])
-		
-		saynn("You "+item.getTakingOffStringLong(false))
+		if(GM.pc.hasBoundArms()):
+			saynn("You really try to take anything off but your bound arms prevent you from doing so")
+			
+			addButton("Continue", "Aww", "endthescene")
+		else:
+			var item: ItemBase = GM.pc.getInventory().getItemByUniqueID(sceneArgs[0])
+			
+			saynn("You "+item.getTakingOffStringLong(false))
 
-		addButton("Continue", "You took off an item", "endthescene")
+			addButton("Continue", "You took off an item", "removeitemandendthescene")
 
 
 func _react(_action: String, _args):
-	if(_action == "endthescene"):
+	if(_action == "removeitemandendthescene"):
 		var item: ItemBase = GM.pc.getInventory().getItemByUniqueID(sceneArgs[0])
 		GM.pc.getInventory().removeEquippedItem(item)
 		GM.pc.getInventory().addItem(item)
 		
+		endScene()
+		return
+		
+	if(_action == "endthescene"):
 		endScene()
 		return
 	
