@@ -131,6 +131,13 @@ func removeEffect(effectID: String):
 		statusEffects[effectID].queue_free()
 		var _wasremoved = statusEffects.erase(effectID)
 	
+func canStandUpCombat():
+	if(!hasEffect(StatusEffect.Collapsed)):
+		return false
+	
+	var collapsedEffect = statusEffects[StatusEffect.Collapsed]
+	return collapsedEffect.canStandUp()
+	
 func getStatusEffects():
 	return statusEffects
 	

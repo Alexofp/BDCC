@@ -28,7 +28,7 @@ func _doAttack(_attacker, _reciever):
 	return text
 	
 func _canUse(_attacker, _reciever):
-	return _attacker.hasEffect(StatusEffect.Collapsed)
+	return _attacker.hasEffect(StatusEffect.Collapsed) && _attacker.canStandUpCombat()
 
 func canBeDodgedByPlayer(_attacker, _reciever):
 	return false

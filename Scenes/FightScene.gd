@@ -1,7 +1,7 @@
 extends SceneBase
 
 var enemyID: String = ""
-var enemyCharacter: Character
+var enemyCharacter: BaseCharacter
 
 var whatPlayerDid: String = ""
 var whatEnemyDid: String = ""
@@ -138,7 +138,10 @@ func _run():
 		addButton("Inventory", "Use an item fron your inventory", "inventory")
 		
 		if(GM.pc.hasEffect(StatusEffect.Collapsed)):
-			addButton("Get up", "spends the whole turn", "getup")
+			if(GM.pc.canStandUpCombat()):
+				addButton("Get up", "spends the whole turn", "getup")
+			else:
+				addDisabledButton("Get up", "You can't stand up now")
 		else:
 			addDisabledButton("Get up", "You're already standing")
 		
@@ -289,7 +292,7 @@ func getBestAIAttack():
 	
 	if(savedAttacks.size() == 0):
 		print("Error: Couldn't find any possible attacks for the enemy")
-		return "baseattack"
+		return "blunderAttack"
 	
 	return RNG.pickWeighted(savedAttacks, savedAttacksWeights)
 	
