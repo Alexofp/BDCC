@@ -20,28 +20,32 @@ var pickedThickness: int = 50
 var bodyFluids = []
 var bodyMessiness = 0
 
+var bodypartStorageNode
+
 func _init():
 	initialDodgeChance = 0.05 # Player has a small chance to dodge anything
-
 
 func _ready():
 	GM.pc = self
 	name = "Player"
+	bodypartStorageNode = Node.new()
+	add_child(bodypartStorageNode)
+	bodypartStorageNode.name = "Bodyparts"	
 	resetSlots()
 	getInventory().clear()
-	giveBodypart(GlobalRegistry.getBodypart("felineleg"))
-	var mybreasts: BodypartBreasts = GlobalRegistry.getBodypart("humanbreasts")
+	giveBodypart(GlobalRegistry.createBodypart("felineleg"))
+	var mybreasts: BodypartBreasts = GlobalRegistry.createBodypart("humanbreasts")
 	mybreasts.size = BodypartBreasts.BreastsSize.C
 	giveBodypart(mybreasts)
-	giveBodypart(GlobalRegistry.getBodypart("baldhair"))
-	giveBodypart(GlobalRegistry.getBodypart("felinetail"))
-	giveBodypart(GlobalRegistry.getBodypart("felinehead"))
-	giveBodypart(GlobalRegistry.getBodypart("humanbody"))
-	giveBodypart(GlobalRegistry.getBodypart("humanarms"))
-	giveBodypart(GlobalRegistry.getBodypart("felineears"))
-	giveBodypart(GlobalRegistry.getBodypart("vagina"))
-	giveBodypart(GlobalRegistry.getBodypart("anus"))
-	#giveBodypart(GlobalRegistry.getBodypart("caninepenis"))
+	giveBodypart(GlobalRegistry.createBodypart("baldhair"))
+	giveBodypart(GlobalRegistry.createBodypart("felinetail"))
+	giveBodypart(GlobalRegistry.createBodypart("felinehead"))
+	giveBodypart(GlobalRegistry.createBodypart("humanbody"))
+	giveBodypart(GlobalRegistry.createBodypart("humanarms"))
+	giveBodypart(GlobalRegistry.createBodypart("felineears"))
+	giveBodypart(GlobalRegistry.createBodypart("vagina"))
+	giveBodypart(GlobalRegistry.createBodypart("anus"))
+	#giveBodypart(GlobalRegistry.createBodypart("caninepenis"))
 	updateNonBattleEffects()
 	
 	#inventory.addItem(GlobalRegistry.createItem("testitem"))
@@ -71,6 +75,7 @@ func giveBodypart(bodypart: Bodypart):
 	if(bodyparts.has(slot) && bodyparts[slot] != null):
 		bodyparts[slot].queue_free()
 	bodyparts[slot] = bodypart
+	bodypartStorageNode.add_child(bodypart)
 	emit_signal("bodypart_changed")
 
 func hasBodypart(slot):
@@ -288,7 +293,7 @@ func resetBodypartsToDefault():
 			var bodypartID = specie.getDefaultForSlot(slot, getGender())
 			if(bodypartID == null):
 				continue
-			var bodypart = GlobalRegistry.getBodypart(bodypartID)
+			var bodypart = GlobalRegistry.createBodypart(bodypartID)
 			choices.append(bodypart)
 			
 		if(choices.size() == 0):
@@ -357,9 +362,10 @@ func loadData(data):
 			bodyparts[slot] = null
 			continue
 		var id = SAVE.loadVar(loadedBodyparts[slot], "id", "humanleg")
-		var bodypart = GlobalRegistry.getBodypart(id)
+		var bodypart = GlobalRegistry.createBodypart(id)
 		bodyparts[slot] = bodypart
 		bodypart.loadData(SAVE.loadVar(loadedBodyparts[slot], "data", {}))
+		bodypartStorageNode.add_child(bodypart)
 	
 	emit_signal("bodypart_changed")
 	loadStatusEffectsData(SAVE.loadVar(data, "statusEffects", {}))
@@ -609,16 +615,16 @@ func getAttributesText():
 	]
 
 func freeMouthDeleteAll():
-	return getInventory().deleteEquippedItemsWithBuff(Buff.GagBuff)
+	return getInventory().removeEquippedItemsWithBuff(Buff.GagBuff)
 	
 func freeHandsDeleteAll():
-	return getInventory().deleteEquippedItemsWithBuff(Buff.RestrainedArmsBuff)
+	return getInventory().removeEquippedItemsWithBuff(Buff.RestrainedArmsBuff)
 	
 func freeLegsDeleteAll():
-	return getInventory().deleteEquippedItemsWithBuff(Buff.RestrainedLegsBuff)
+	return getInventory().removeEquippedItemsWithBuff(Buff.RestrainedLegsBuff)
 	
 func freeEyesDeleteAll():
-	return getInventory().deleteEquippedItemsWithBuff(Buff.BlindfoldBuff)
+	return getInventory().removeEquippedItemsWithBuff(Buff.BlindfoldBuff)
 
 func getUndressMessage(withS):
 	var res = []

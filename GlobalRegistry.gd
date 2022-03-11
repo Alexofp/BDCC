@@ -24,6 +24,13 @@ var perks: Dictionary = {}
 var perksBySkillGroups: Dictionary = {}
 var perksObjects: Dictionary = {}
 
+var bodypartStorageNode
+
+func _init():
+	bodypartStorageNode = Node.new()
+	add_child(bodypartStorageNode)
+	bodypartStorageNode.name = "Bodyparts"	
+
 func _ready():
 	registerBodypartFolder("res://Player/Bodyparts/Legs/")
 	registerBodypartFolder("res://Player/Bodyparts/Breasts/")
@@ -88,13 +95,14 @@ func registerScene(path: String):
 		printerr("ERROR: couldn't load scene from path "+path)
 		return
 	var sceneObject = scene.new()
-	scenes[sceneObject.sceneID] = sceneObject
+	scenes[sceneObject.sceneID] = scene
+	sceneObject.queue_free()
 
-func getScene(id: String):
+func createScene(id: String):
 	if(!scenes.has(id)):
 		printerr("ERROR: scene with the id "+id+" wasn't found")
 		return null
-	var scene = scenes[id].duplicate()
+	var scene = scenes[id].new()
 	scene.name = scene.sceneID
 	return scene
 
@@ -120,8 +128,9 @@ func registerBodypart(path: String):
 	var bodypart = load(path)
 	var bodypartObject = bodypart.new()
 	bodyparts[bodypartObject.id] = bodypartObject
+	bodypartStorageNode.add_child(bodypartObject)
 
-func getBodypart(id: String):
+func createBodypart(id: String):
 	if(!bodyparts.has(id)):
 		printerr("ERROR: bodypart with the id "+id+" wasn't found")
 		return null
@@ -241,7 +250,8 @@ func getAttack(id: String):
 func registerStatusEffect(path: String):
 	var effect = load(path)
 	var effectObject = effect.new()
-	statusEffects[effectObject.id] = effectObject
+	statusEffects[effectObject.id] = effect
+	effectObject.queue_free()
 
 func registerStatusEffectFolder(folder: String):
 	var dir = Directory.new()
@@ -261,11 +271,11 @@ func registerStatusEffectFolder(folder: String):
 	else:
 		printerr("An error occurred when trying to access the path "+folder)
 		
-func getStatusEffect(id: String):
+func createStatusEffect(id: String):
 	if(!statusEffects.has(id)):
 		printerr("ERROR: status effect with the id "+id+" wasn't found")
 		return null
-	return statusEffects[id].duplicate()
+	return statusEffects[id].new()
 
 
 func registerSpecies(path: String):
@@ -310,7 +320,6 @@ func registerItem(path: String):
 	var item = load(path)
 	var itemObject = item.new()
 	items[itemObject.id] = item
-	itemObject.queue_free()
 
 func registerItemFolder(folder: String):
 	var dir = Directory.new()

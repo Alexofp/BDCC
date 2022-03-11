@@ -9,7 +9,7 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "Node",
+"base": "Reference",
 "class": "Attack",
 "language": "GDScript",
 "path": "res://Attacks/BaseAttack.gd"
@@ -189,7 +189,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Inventory/InventorySlot.gd"
 }, {
-"base": "Node",
+"base": "Reference",
 "class": "ItemBase",
 "language": "GDScript",
 "path": "res://Inventory/Items/ItemBase.gd"
@@ -274,7 +274,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Game/World/RoomAction.gd"
 }, {
-"base": "Object",
+"base": "Reference",
 "class": "SayParser",
 "language": "GDScript",
 "path": "res://Util/SayParser.gd"
@@ -284,7 +284,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scenes/SceneBase.gd"
 }, {
-"base": "Object",
+"base": "Reference",
 "class": "SimpleParser",
 "language": "GDScript",
 "path": "res://Util/SimpleParser.gd"
@@ -304,7 +304,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Skills/SkillsHolder.gd"
 }, {
-"base": "Node",
+"base": "Reference",
 "class": "Species",
 "language": "GDScript",
 "path": "res://Species/BaseSpecies.gd"

@@ -14,7 +14,6 @@ func _initScene(_args = []):
 			"desc": itemObject.getVisisbleDescription(),
 			"price": itemObject.getPrice(),
 		}
-		itemObject.queue_free()
 
 func _run():
 	if(state == ""):

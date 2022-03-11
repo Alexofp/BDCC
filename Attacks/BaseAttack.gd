@@ -1,4 +1,4 @@
-extends Node
+extends Reference
 class_name Attack
 
 enum Category {Physical, Lust, Special, Humiliation, SelfHumiliation}

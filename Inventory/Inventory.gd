@@ -9,19 +9,19 @@ signal equipped_items_changed
 func _ready():
 	name = "Inventory"
 
-func addItem(item: Node):
-	if(item.get_parent() != null):
+func addItem(item: Reference):
+	if(item.currentInventory != null):
 		assert(false)
 	
 	if(item.canCombine()):
 		for myitem in items:
 			if(myitem.id == item.id):
 				if(myitem.tryCombine(item)):
-					item.queue_free()
+					#item.queue_free()
 					return
 		
 	items.append(item)
-	add_child(item)
+	item.currentInventory = self
 
 func hasItem(item):
 	return items.has(item)
@@ -73,7 +73,7 @@ func getItemByUniqueID(uniqueID: String):
 func removeItem(item):
 	if(items.has(item)):
 		items.erase(item)
-		remove_child(item)
+		item.currentInventory = null
 		return item
 	return null
 
@@ -117,7 +117,8 @@ func equipItem(item):
 		assert(false)
 	
 	equippedItems[slot] = item
-	add_child(item)
+	item.currentInventory = self
+	#add_child(item)
 	emit_signal("equipped_items_changed")
 
 func hasSlotEquipped(slot):
@@ -141,7 +142,7 @@ func removeItemFromSlot(slot):
 	if(equippedItems.has(slot)):
 		var item = equippedItems[slot]
 		equippedItems.erase(slot)
-		remove_child(item)
+		item.currentInventory = null
 		emit_signal("equipped_items_changed")
 		return item
 	return null
@@ -152,39 +153,20 @@ func removeEquippedItem(item):
 		
 		if(myitem == item):
 			equippedItems.erase(slot)
-			remove_child(item)
+			item.currentInventory = null
 			emit_signal("equipped_items_changed")
 			return item
 	return null
 
-func destroyEquippedItemFromSlot(slot):
-	if(equippedItems.has(slot)):
-		var item = equippedItems[slot]
-		equippedItems.erase(slot)
-		remove_child(item)
-		item.queue_free()
-		emit_signal("equipped_items_changed")
-		return true
-	return false
-
-func destroyEquippedItem(itemToDelete):
-	for slot in equippedItems.keys():
-		var item = equippedItems[slot]
-		if(itemToDelete == item):
-			equippedItems.erase(slot)
-			remove_child(item)
-			item.queue_free()
-			emit_signal("equipped_items_changed")
-			return true
-	return false
-
 func clear():
 	for item in items:
-		item.queue_free()
+		item.currentInventory = null
+		#item.queue_free()
 	items.clear()
 	
 	for itemSlot in equippedItems.keys():
-		equippedItems[itemSlot].queue_free()
+		#equippedItems[itemSlot].queue_free()
+		equippedItems[itemSlot].currentInventory = null
 	equippedItems.clear()
 	emit_signal("equipped_items_changed")
 
@@ -201,16 +183,16 @@ func getEquippedItemsWithBuff(buffID):
 				continue
 	return result
 
-func destroyEquippedItemsList(itemsToDelete: Array):
+func removeEquippedItemsList(itemsToDelete: Array):
 	for item in itemsToDelete:
-		destroyEquippedItem(item)
+		removeEquippedItem(item)
 
-func deleteEquippedItemsWithBuff(buffID):
+func removeEquippedItemsWithBuff(buffID):
 	var founditems = getEquippedItemsWithBuff(buffID)
 	var hasItem = false
 	if(founditems.size() > 0):
 		hasItem = true
-	destroyEquippedItemsList(founditems)
+	removeEquippedItemsList(founditems)
 	return hasItem
 
 func saveData():

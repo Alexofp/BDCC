@@ -1,15 +1,15 @@
-extends Node
+extends Reference
 class_name ItemBase
 
 var id = "baditem"
 var uniqueID = null
 var amount = 1
+var currentInventory = null
 
 func _init():
 	pass
 
 func _ready():
-	name = id
 	if(uniqueID == null):
 		uniqueID = "item"+str(GlobalRegistry.generateUniqueID())
 
@@ -55,12 +55,8 @@ func useInCombat(_attacker, _reciever):
 	return ""
 
 func destroyMe():
-	if(is_queued_for_deletion()):
-		return
-	assert(get_parent() != null)
-	
-	get_parent().removeItem(self)
-	queue_free()
+	assert(currentInventory != null)
+	currentInventory.removeItem(self)
 
 func removeXOrDestroy(remamount):
 	amount -= remamount

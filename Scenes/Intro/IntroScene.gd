@@ -183,9 +183,7 @@ func _react(_action: String, _args):
 	
 	if(_action == "gocell"):
 		processTime(6 * 60 * 60)
-		var item = GM.pc.getInventory().removeItemFromSlot(InventorySlot.Wrists)
-		if(item != null):
-			item.queue_free()
+		GM.pc.getInventory().removeItemFromSlot(InventorySlot.Wrists)
 	
 	if(_action == "ikilled"):
 		setFlag(Flag.Player_Crime_Type, Flag.Crime_Type.Murder)

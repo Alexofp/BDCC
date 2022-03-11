@@ -310,8 +310,8 @@ func _react(_action: String, _args):
 		processTime(5 * 60)
 		
 	if(_action == "followtocell"):
-		GM.pc.getInventory().destroyEquippedItemFromSlot(InventorySlot.Wrists)
-		GM.pc.getInventory().destroyEquippedItemFromSlot(InventorySlot.Ankles)
+		GM.pc.getInventory().removeItemFromSlot(InventorySlot.Wrists)
+		GM.pc.getInventory().removeItemFromSlot(InventorySlot.Ankles)
 	
 	if(_action == "wake_up"):
 		startNewDay()

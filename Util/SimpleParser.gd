@@ -1,4 +1,4 @@
-extends Object
+extends Reference
 class_name SimpleParser
 # This is not a full blown scripting language, this is just a runtime substitute for godot's missing string interpolation
 

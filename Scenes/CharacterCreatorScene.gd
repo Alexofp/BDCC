@@ -273,7 +273,7 @@ func _react(_action: String, _args):
 	
 	if(_action == "setbodypart"):
 		var bodypartID = _args[0]
-		var bodypart = GlobalRegistry.getBodypart(bodypartID)
+		var bodypart = GlobalRegistry.createBodypart(bodypartID)
 		
 		GM.pc.giveBodypart(bodypart)
 		

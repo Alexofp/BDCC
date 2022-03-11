@@ -15,6 +15,7 @@ var pain:int = 0
 var lust:int = 0
 var stamina:int = 100
 var statusEffects:Dictionary = {}
+var statusEffectsStorageNode
 var inventory: Inventory
 var buffsHolder: BuffsHolder
 var skillsHolder: SkillsHolder
@@ -31,6 +32,9 @@ func _init():
 	name = "BaseCharacter"
 
 func _ready():
+	statusEffectsStorageNode = Node.new()
+	add_child(statusEffectsStorageNode)
+	statusEffectsStorageNode.name = "StatusEffects"	
 	inventory = Inventory.new()
 	add_child(inventory)
 	var _con = inventory.connect("equipped_items_changed", self, "onEquippedItemsChange")
@@ -112,9 +116,10 @@ func addEffect(effectID: String, args = []):
 		statusEffects[effectID].combine(args)
 		return
 	
-	var effect = GlobalRegistry.getStatusEffect(effectID)
+	var effect = GlobalRegistry.createStatusEffect(effectID)
 	effect.setCharacter(self)
 	effect.initArgs(args)
+	statusEffectsStorageNode.add_child(effect)
 	
 	statusEffects[effectID] = effect
 
@@ -137,9 +142,10 @@ func saveStatusEffectsData():
 	
 func loadStatusEffectsData(data):
 	for effectID in data:
-		var effect = GlobalRegistry.getStatusEffect(effectID)
+		var effect = GlobalRegistry.createStatusEffect(effectID)
 		effect.setCharacter(self)
 		statusEffects[effectID] = effect
+		statusEffectsStorageNode.add_child(effect)
 		
 		effect.loadData(data[effectID])
 	

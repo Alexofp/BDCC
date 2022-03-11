@@ -36,7 +36,7 @@ func startNewGame():
 	#runScene("FightScene", ["tavi"])
 
 func runScene(id, _args = []):
-	var scene = GlobalRegistry.getScene(id)
+	var scene = GlobalRegistry.createScene(id)
 	add_child(scene)
 	sceneStack.append(scene)
 	print("Starting scene "+id)
@@ -134,7 +134,7 @@ func loadData(data):
 	for sceneData in scenes:
 		var id = SAVE.loadVar(sceneData, "id", "error")
 		
-		var scene = GlobalRegistry.getScene(id)
+		var scene = GlobalRegistry.createScene(id)
 		add_child(scene)
 		sceneStack.append(scene)
 		print("Starting scene "+id)
