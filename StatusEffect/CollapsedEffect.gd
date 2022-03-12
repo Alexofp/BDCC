@@ -12,7 +12,7 @@ func getEffectName():
 func getEffectDesc():
 	var message = "You're on the ground. Can still fight but it's almost impossible to dodge physical attacks"
 	if(!canStandup):
-		message += "\nCan't stand up the same turn you collapsed"
+		message += "\n[color=red]Can't stand up right after you were knocked down[/color]"
 	return message
 
 func getEffectImage():

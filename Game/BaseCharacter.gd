@@ -19,6 +19,7 @@ var statusEffectsStorageNode
 var inventory: Inventory
 var buffsHolder: BuffsHolder
 var skillsHolder: SkillsHolder
+var lustInterests: LustInterests
 
 # Combat stats
 var initialDodgeChance = 0
@@ -48,6 +49,7 @@ func _ready():
 	var _con3 = skillsHolder.connect("experienceChanged", self, "onStatChange")
 	stamina = getMaxStamina()
 	#resetToDefault()
+	lustInterests = LustInterests.new()
 
 # Skips armor checks etc
 func addPain(_p: int):
@@ -494,6 +496,9 @@ func verbS(verbWithNoS, verbWithS = null):
 
 func getInventory() -> Inventory:
 	return inventory
+
+func getLustInterests() -> LustInterests:
+	return lustInterests
 
 func getSkillsHolder() -> SkillsHolder:
 	return skillsHolder

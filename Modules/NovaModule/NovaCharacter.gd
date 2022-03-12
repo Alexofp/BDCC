@@ -7,6 +7,11 @@ func _init():
 		Stat.Sexiness: 1,
 	}
 	npcLevel = 2
+	npcLustInterests = {
+		InterestTopic.FeminineBody: Interest.Loves,
+		InterestTopic.AndroBody: Interest.Hates,
+		InterestTopic.AverageMassBody: Interest.KindaLikes,
+	}
 	
 func _getName():
 	return "Nova"

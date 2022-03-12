@@ -131,7 +131,9 @@ func isPlayer():
 	return true
 
 func _getAttacks():
-	return ["simplepunchattack", "scratchattack", "biteattack", "simplekickattack", "shoveattack", "strongkickattack", "simplelustattack", "begattack", "youslutattack", "gropeattack"]
+	return ["simplepunchattack", "scratchattack", "biteattack", "simplekickattack", "shoveattack", "strongkickattack", "simplelustattack", "begattack", "youslutattack", "gropeattack",
+	"TeaseBodyPCAttack",
+	]
 
 func hasBoundArms():
 	return buffsHolder.hasBuff(Buff.RestrainedArmsBuff)

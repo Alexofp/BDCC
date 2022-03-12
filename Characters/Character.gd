@@ -6,12 +6,23 @@ const Bob = "testchar"
 var id = "errorerror"
 var npcStats = {}
 var npcLevel = 0
+var npcLustInterests = {}
 
 func _ready():
 	name = id
 	for statID in npcStats:
 		skillsHolder.setStat(statID, npcStats[statID])
 	skillsHolder.setLevel(npcLevel)
+	
+	for interestID in npcLustInterests:
+		var interestData = npcLustInterests[interestID]
+		if(interestData is Array):
+			if(interestData.size() > 1):
+				lustInterests.addInterest(interestID, interestData[0], interestData[1])
+			else:
+				lustInterests.addInterest(interestID, interestData[0])
+		else:
+			lustInterests.addInterest(interestID, interestData)
 
 func _init():
 	pass
@@ -37,6 +48,7 @@ func saveData():
 	
 	data["statusEffects"] = saveStatusEffectsData()
 	data["inventory"] = inventory.saveData()
+	data["lustInterests"] = lustInterests.saveData()
 	
 	return data
 
@@ -47,3 +59,4 @@ func loadData(data):
 	
 	loadStatusEffectsData(SAVE.loadVar(data, "statusEffects", {}))
 	inventory.loadData(SAVE.loadVar(data, "inventory", {}))
+	lustInterests.loadData(SAVE.loadVar(data, "lustInterests", {}))

@@ -8,7 +8,6 @@ func _init():
 	resetToDefaults()
 	
 	loadFromFile()
-	saveToFile()
 
 func isContentEnabled(contentType):
 	if(!enabledContent.has(contentType)):

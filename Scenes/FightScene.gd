@@ -48,7 +48,21 @@ func _run():
 		addButton("Back", "Back to fighting", "return")
 	
 	if(state == "lustattacks"):
-		saynn("Pick the attack to use")
+		saynn("Pick how you wanna tease the enemy")
+		
+		var enemyLustInterests = enemyCharacter.getLustInterests()
+		if(!enemyLustInterests.hasAnyInterests()):
+			sayn("You have a feeling that teasing won't have any effect on "+enemyCharacter.getName())
+		else:
+			var whatPlayerKnows = enemyLustInterests.getPlayerKnowledge()
+			
+			sayn("What you learned about "+enemyCharacter.getName()+" likes/dislikes:")
+			if(whatPlayerKnows.size() > 0):
+				for topicID in whatPlayerKnows:
+					var topic = GlobalRegistry.getLustTopic(topicID)
+					sayn("- "+enemyCharacter.getName() + " " + Interest.getVisibleName(whatPlayerKnows[topicID])+" "+str(topic.getVisibleName(topicID)))
+			else:
+				sayn("Nothing yet")
 		
 		addAttackButtons(Attack.Category.Lust)
 		addButton("Self-humiliation..", "Opens a submenu", "selfhumattacks")
