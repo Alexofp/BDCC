@@ -6,3 +6,6 @@ func _init():
 
 func getVisibleName():
 	return "Test perk"
+
+func addsAttacks():
+	return ["shoveattack"]

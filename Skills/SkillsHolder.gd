@@ -223,3 +223,14 @@ func canUnlockPerk(perkID):
 		return false
 	return true
 	
+func getPerkAttacks():
+	var extraAttacks = []
+	
+	for perkID in perks:
+		var perk = perks[perkID]
+		
+		var attacks = perk.addsAttacks()
+		extraAttacks.append_array(attacks)
+		
+	extraAttacks.sort()
+	return extraAttacks

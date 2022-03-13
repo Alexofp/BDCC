@@ -7,6 +7,7 @@ var id = "errorerror"
 var npcStats = {}
 var npcLevel = 0
 var npcLustInterests = {}
+var npcArmor = {}
 
 func _ready():
 	name = id
@@ -60,3 +61,11 @@ func loadData(data):
 	loadStatusEffectsData(SAVE.loadVar(data, "statusEffects", {}))
 	inventory.loadData(SAVE.loadVar(data, "inventory", {}))
 	lustInterests.loadData(SAVE.loadVar(data, "lustInterests", {}))
+
+func getArmor(_damageType):
+	var calculatedArmor = .getArmor(_damageType)
+	
+	if(npcArmor.has(_damageType)):
+		calculatedArmor += npcArmor[_damageType]
+	
+	return calculatedArmor

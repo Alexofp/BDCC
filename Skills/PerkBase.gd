@@ -26,6 +26,9 @@ func getCost():
 func setCharacter(newnpc):
 	npc = newnpc
 
+func addsAttacks():
+	return []
+
 func saveData():
 	return {
 	}

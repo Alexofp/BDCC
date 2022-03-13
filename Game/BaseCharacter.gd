@@ -261,12 +261,14 @@ func getAttackAccuracy(_damageType):
 	
 	return mult
 	
-func recieveDamage(damageType, amount: int):
+func recieveDamage(damageType, amount: int, armorScale: float = 1.0):
 	var mult = getRecieveDamageMultiplier(damageType)
 	var newdamage = round(amount * (1.0 + mult))
 	
 	if(amount > 0):
-		newdamage -= getArmor(damageType)
+		var finalArmor = floor(getArmor(damageType) * armorScale)
+		#newdamage -= finalArmor
+		newdamage = newdamage * (100.0/(100.0+finalArmor)) 
 		newdamage = max(newdamage, 1)
 	
 	if(damageType == DamageType.Physical):

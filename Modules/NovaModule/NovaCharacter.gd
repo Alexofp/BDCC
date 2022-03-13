@@ -3,6 +3,9 @@ extends Character
 func _init():
 	id = "nova"
 	
+	npcArmor = {
+		DamageType.Physical: 10,
+	}
 	npcStats = {
 		Stat.Sexiness: 1,
 	}

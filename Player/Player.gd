@@ -133,11 +133,15 @@ func isPlayer():
 	return true
 
 func _getAttacks():
-	return ["simplepunchattack", "scratchattack", "biteattack", "simplekickattack", "shoveattack", "strongkickattack",
+	var attacks = ["PunchPCAttack", "BitePCAttack", "KickPCAttack", "strongkickattack",
 	"TeaseBodyPCAttack",
 	"TeaseCrotchPCAttack",
 	"TeaseButtPCAttack",
 	]
+	
+	attacks.append_array(skillsHolder.getPerkAttacks())
+	
+	return attacks
 
 func hasBoundArms():
 	return buffsHolder.hasBuff(Buff.RestrainedArmsBuff)
