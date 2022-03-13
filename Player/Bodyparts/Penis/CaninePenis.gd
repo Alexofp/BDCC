@@ -1,7 +1,7 @@
 extends BodypartPenis
 
 func _init():
-	name = "knotted penis"
+	visibleName = "knotted penis"
 	id = "caninepenis"
 	dollType = "Canine"
 

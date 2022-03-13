@@ -53,3 +53,25 @@ static func getValue(interest):
 		return 1.0
 	
 	return 0.0
+
+static func getColorString(interest):
+	if(interest == Hates):
+		return "#FF554C"
+	if(interest == ReallyDislikes):
+		return "#FF837A"
+	if(interest == Dislikes):
+		return "#FFB0A0"
+	if(interest == SlightlyDislikes):
+		return "#FFCED2"
+	if(interest == Neutral):
+		return "#D5CEFF"
+	if(interest == KindaLikes):
+		return "#FFC9FE"
+	if(interest == Likes):
+		return "#FFBAF8"
+	if(interest == ReallyLikes):
+		return "#FF9EE3"
+	if(interest == Loves):
+		return "#FF63E7"
+	
+	return "#FFFFFF"

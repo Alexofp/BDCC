@@ -1,7 +1,7 @@
 extends BodypartHead
 
 func _init():
-	name = "wolf head"
+	visibleName = "wolf head"
 	id = "wolfhead"
 	dollType = "Wolf"
 

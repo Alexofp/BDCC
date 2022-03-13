@@ -1,6 +1,6 @@
 extends BodypartHair
 
 func _init():
-	name = "messy"
+	visibleName = "messy"
 	id = "messyhair"
 	dollType = "Messy"

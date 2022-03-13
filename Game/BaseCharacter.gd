@@ -26,9 +26,6 @@ var initialDodgeChance = 0
 
 var fightingState = "" # dodge, block, defocus
 
-# used to fix the spamming of the same lust attack
-var lustMemory:Dictionary = {}
-
 func _init():
 	name = "BaseCharacter"
 
@@ -168,11 +165,6 @@ func processBattleTurn():
 	for effectID in statusEffects.keys():
 		var effect = statusEffects[effectID]
 		effect.processBattleTurn()
-		
-	for topic in lustMemory.keys():
-		lustMemory[topic] -= 1
-		if(lustMemory[topic] <= 0):
-			var _x = lustMemory.erase(topic)
 		
 
 func afterFightEnded():
@@ -326,41 +318,6 @@ func setFightingStateBlocking():
 	
 func setFightingStateDefocusing():
 	fightingState = "defocus"
-
-func doRememberTopic(topicName, howLong = 1):
-	lustMemory[topicName] = howLong + 1
-
-func remembersTopic(topicName):
-	return lustMemory.has(topicName)
-
-func reactTease():
-	return 1
-
-func reactGrope():
-	if(lust < 50):
-		return 0
-	
-	return 1
-
-func reactSelfHumiliation(_topic):
-	if(remembersTopic(_topic)):
-		return 0.1
-	
-	if(_topic == Attack.LustTopic.selfUseMe):
-		doRememberTopic(_topic)
-		return 2
-	
-	return 0
-
-func reactHumiliation(_topic):
-	if(remembersTopic(_topic)):
-		return -2
-	
-	if(_topic == Attack.LustTopic.humYouSlut):
-		doRememberTopic(_topic)
-		return -1
-	
-	return 0
 
 func lustDamageReaction(lustDamage, _enemy):
 	if(lustDamage <= -10):

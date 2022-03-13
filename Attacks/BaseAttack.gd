@@ -100,6 +100,8 @@ func getRequirementsColorText(_attacker, _reciever):
 
 func doDamage(_attacker, _reciever, _damageType, _damage: int, playGetHitAnimation = true):
 	var damageMult = _attacker.getDamageMultiplier(_damageType)
+	if(_damage < 0):
+		damageMult = -damageMult
 	
 	var damage = _reciever.recieveDamage(_damageType, round(_damage * (1.0 + damageMult)))
 	

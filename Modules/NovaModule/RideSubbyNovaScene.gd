@@ -170,11 +170,14 @@ func _react(_action: String, _args):
 	if(_action == "do_random"):
 		_action = RNG.pick(["inside", "outside"])
 	
-	if(_action == "inside" || _action == "get_knotted"):
-		GM.pc.cummedInVaginaBy("nova")
+	if(_action == "outside"):
+		GM.pc.orgasmFrom("nova")
 		GM.pc.updateNonBattleEffects()
 	
-	
+	if(_action == "inside" || _action == "get_knotted"):
+		GM.pc.cummedInVaginaBy("nova")
+		GM.pc.orgasmFrom("nova")
+		GM.pc.updateNonBattleEffects()
 	
 	setState(_action)
 

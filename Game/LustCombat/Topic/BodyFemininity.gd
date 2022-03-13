@@ -1,8 +1,6 @@
 extends TopicBase
 
 func _init():
-	id = TopicGroup.BodyFemininity
-	
 	handles_ids = [
 		InterestTopic.FeminineBody,
 		InterestTopic.AndroBody,
@@ -25,11 +23,11 @@ func getTopicValue(_topicID, _pc):
 
 func getVisibleName(_topicID):
 	if(_topicID == InterestTopic.FeminineBody):
-		return "feminine body"
+		return "a feminine body"
 	if(_topicID == InterestTopic.AndroBody):
-		return "androgynous body"
+		return "an androgynous body"
 	if(_topicID == InterestTopic.MasculineBody):
-		return "masculine body"
+		return "a masculine body"
 	
 	return "error:"+str(_topicID)
 

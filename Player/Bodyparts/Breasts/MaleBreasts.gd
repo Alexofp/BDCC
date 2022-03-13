@@ -1,7 +1,7 @@
 extends "res://Player/Bodyparts/Breasts/HumanBreasts.gd"
 
 func _init():
-	name = "male breasts"
+	visibleName = "male breasts"
 	id = "malebreasts"
 	size = BreastsSize.FOREVER_FLAT
 

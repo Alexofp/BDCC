@@ -25,41 +25,6 @@ func getSpecies():
 func _getAttacks():
 	return ["aitaunthumiliate", "stunbatonAttack", "stunbatonStrongAttack", "biteattack", "simplekickattack", "shoveattack", "trygetupattack"]
 
-func reactTease():
-	return 0.4
-
-func reactGrope():
-	if(lust < 50):
-		return 0
-	
-	return 0.6
-
-func reactSelfHumiliation(_topic):
-	if(remembersTopic(_topic)):
-		return 0.3
-	
-	if(_topic == Attack.LustTopic.selfUseMe):
-		doRememberTopic(_topic)
-		
-		if(getLust() >= 20):
-			return 1.2
-		return 0.6
-	
-	return 0
-
-func reactHumiliation(_topic):
-	if(getLust() >= 50):
-		return 3
-	
-	if(remembersTopic(_topic)):
-		return 0
-	
-	if(_topic == Attack.LustTopic.humYouSlut):
-		doRememberTopic(_topic)
-		return -0.4
-	
-	return 0
-
 func getFightIntro(_battleName):
 	return getName() + " eyes you out and licks her lips.\n\n"+formatSay("You're an easy prey for me. Why don't you just undress and we can have some fun instead~")+"\n\nRisha then gets into a combat stance and gestures you to come closer. Her heavy armor doesn't seem to inpact her mobility one bit, her hand holds the stun baton very tightly\n\nSeems the first move is yours"
 

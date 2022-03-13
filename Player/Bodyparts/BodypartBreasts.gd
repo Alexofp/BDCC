@@ -1,7 +1,6 @@
 extends Bodypart
 class_name BodypartBreasts
 
-enum BreastsSize {FOREVER_FLAT = -1, FLAT = 0, A = 1, B = 2, C = 3, D = 4, DD = 5, E = 6, EE = 7, F = 8, FF = 9, G = 10, GG = 11}
 
 var size = 0
 
@@ -18,38 +17,9 @@ func loadData(_data):
 
 func getSlot():
 	return BodypartSlot.Breasts
-	
-static func breastSizeToString(bsize):
-	if(bsize == BreastsSize.FOREVER_FLAT):
-		return "Forever flat"
-	if(bsize == BreastsSize.FLAT):
-		return "Flat"
-	if(bsize == BreastsSize.A):
-		return "A"
-	if(bsize == BreastsSize.B):
-		return "B"
-	if(bsize == BreastsSize.C):
-		return "C"
-	if(bsize == BreastsSize.D):
-		return "D"
-	if(bsize == BreastsSize.DD):
-		return "DD"
-	if(bsize == BreastsSize.E):
-		return "E"
-	if(bsize == BreastsSize.EE):
-		return "EE"
-	if(bsize == BreastsSize.F):
-		return "F"
-	if(bsize == BreastsSize.FF):
-		return "FF"
-	if(bsize == BreastsSize.G):
-		return "G"
-	if(bsize == BreastsSize.GG):
-		return "GG"
-	return "Error?"
 
 func getTooltipInfo():
-	return "size: " + breastSizeToString(size) + "\n" + "Gonna be more stuff here"
+	return "size: " + BreastsSize.breastSizeToString(size) + "\n" + "Gonna be more stuff here"
 
 func getLewdSizeAdjective():
 	if(size <= BreastsSize.FLAT):
@@ -108,5 +78,8 @@ func applyAttribute(_attrID: String, _attrValue):
 
 func getAttributesText():
 	return [
-		["Breast size", breastSizeToString(size)],
+		["Breast size", BreastsSize.breastSizeToString(size)],
 	]
+
+func getSize():
+	return size

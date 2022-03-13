@@ -35,7 +35,7 @@ func _ready():
 	getInventory().clear()
 	giveBodypart(GlobalRegistry.createBodypart("felineleg"))
 	var mybreasts: BodypartBreasts = GlobalRegistry.createBodypart("humanbreasts")
-	mybreasts.size = BodypartBreasts.BreastsSize.C
+	mybreasts.size = BreastsSize.C
 	giveBodypart(mybreasts)
 	giveBodypart(GlobalRegistry.createBodypart("baldhair"))
 	giveBodypart(GlobalRegistry.createBodypart("felinetail"))
@@ -76,6 +76,7 @@ func giveBodypart(bodypart: Bodypart):
 		bodyparts[slot].queue_free()
 	bodyparts[slot] = bodypart
 	bodypartStorageNode.add_child(bodypart)
+	bodypart.name = bodypart.visibleName
 	emit_signal("bodypart_changed")
 
 func hasBodypart(slot):
@@ -114,6 +115,7 @@ func setName(newname: String):
 	newname = newname.replace("}", "")
 	newname = newname.replace("[", "")
 	newname = newname.replace("]", "")
+	newname = newname.replace("\"", "")
 	if(newname == ""):
 		newname = "Player"
 	
@@ -131,8 +133,10 @@ func isPlayer():
 	return true
 
 func _getAttacks():
-	return ["simplepunchattack", "scratchattack", "biteattack", "simplekickattack", "shoveattack", "strongkickattack", "simplelustattack", "begattack", "youslutattack", "gropeattack",
+	return ["simplepunchattack", "scratchattack", "biteattack", "simplekickattack", "shoveattack", "strongkickattack",
 	"TeaseBodyPCAttack",
+	"TeaseCrotchPCAttack",
+	"TeaseButtPCAttack",
 	]
 
 func hasBoundArms():
@@ -368,6 +372,7 @@ func loadData(data):
 		bodyparts[slot] = bodypart
 		bodypart.loadData(SAVE.loadVar(loadedBodyparts[slot], "data", {}))
 		bodypartStorageNode.add_child(bodypart)
+		bodypart.name = bodypart.visibleName
 	
 	emit_signal("bodypart_changed")
 	loadStatusEffectsData(SAVE.loadVar(data, "statusEffects", {}))
@@ -436,7 +441,7 @@ func hasNonFlatBreasts():
 	
 	var size = breasts.size
 	
-	if(size > BodypartBreasts.BreastsSize.FLAT):
+	if(size > BreastsSize.FLAT):
 		return true
 	else:
 		return false
@@ -446,7 +451,7 @@ func hasBigBreasts():
 	
 	var size = breasts.size
 	
-	if(size > BodypartBreasts.BreastsSize.B):
+	if(size > BreastsSize.B):
 		return true
 	else:
 		return false

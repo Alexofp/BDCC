@@ -1,7 +1,7 @@
 extends BodypartBreasts
 
 func _init():
-	name = "breasts"
+	visibleName = "breasts"
 	id = "humanbreasts"
 	dollType = ""
 	size = BreastsSize.C

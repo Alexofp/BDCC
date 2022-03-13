@@ -1,7 +1,7 @@
 extends BodypartTail
 
 func _init():
-	name = "feline tail"
+	visibleName = "feline tail"
 	id = "felinetail"
 	dollType = "Cat"
 

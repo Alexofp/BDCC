@@ -56,33 +56,17 @@ func _run():
 		else:
 			var whatPlayerKnows = enemyLustInterests.getPlayerKnowledge()
 			
-			sayn("What you learned about "+enemyCharacter.getName()+" likes/dislikes:")
+			sayn("What you learned about "+enemyCharacter.getName()+"'s likes/dislikes:")
 			if(whatPlayerKnows.size() > 0):
 				for topicID in whatPlayerKnows:
 					var topic = GlobalRegistry.getLustTopic(topicID)
-					sayn("- "+enemyCharacter.getName() + " " + Interest.getVisibleName(whatPlayerKnows[topicID])+" "+str(topic.getVisibleName(topicID)))
+					sayn("- "+enemyCharacter.getName() + " [color="+Interest.getColorString(whatPlayerKnows[topicID])+"]" + Interest.getVisibleName(whatPlayerKnows[topicID])+"[/color] seeing "+str(topic.getVisibleName(topicID)))
 			else:
 				sayn("Nothing yet")
 		
 		addAttackButtons(Attack.Category.Lust)
-		addButton("Self-humiliation..", "Opens a submenu", "selfhumattacks")
-		addButton("Humiliate..", "Opens a submenu", "humattacks")
 		
 		addButton("Back", "Back to fighting", "return")
-	
-	if(state == "selfhumattacks"):
-		saynn("Pick the attack to use")
-		
-		addAttackButtons(Attack.Category.SelfHumiliation)
-		
-		addButton("Back", "Back to fighting", "lustattacks")
-		
-	if(state == "humattacks"):
-		saynn("Pick the attack to use")
-		
-		addAttackButtons(Attack.Category.Humiliation)
-		
-		addButton("Back", "Back to fighting", "lustattacks")
 	
 	if(state == "specialattacks"):
 		saynn("Pick the attack to use")

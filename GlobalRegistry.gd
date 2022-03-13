@@ -24,7 +24,6 @@ var perks: Dictionary = {}
 var perksBySkillGroups: Dictionary = {}
 var perksObjects: Dictionary = {}
 var lustTopics: Dictionary = {}
-var lustTopicsGroups: Dictionary = {}
 
 var bodypartStorageNode
 
@@ -559,7 +558,6 @@ func registerLustTopic(path: String):
 	for id in ids:
 		assert(!lustTopics.has(id))
 		lustTopics[id] = itemObject
-	lustTopicsGroups[itemObject.id] = itemObject
 
 func registerLustTopicFolder(folder: String):
 	var dir = Directory.new()
@@ -584,9 +582,3 @@ func getLustTopic(id: String):
 		printerr("ERROR: lust topic with the id "+id+" wasn't found")
 		return null
 	return lustTopics[id]
-
-func getLustTopicGroup(id: String):
-	if(!lustTopicsGroups.has(id)):
-		printerr("ERROR: lust topic group with the id "+id+" wasn't found")
-		return null
-	return lustTopicsGroups[id]

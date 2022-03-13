@@ -4,6 +4,7 @@ class_name Bodypart
 var id
 var dollType
 var limbSlot
+var visibleName
 
 func _init():
 	pass
@@ -24,7 +25,7 @@ func getSlot():
 	return BodypartSlot.Body
 
 func getName():
-	return name
+	return visibleName
 
 func getCompatibleSpecies():
 	return []

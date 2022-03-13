@@ -71,3 +71,6 @@ func getAttributesText():
 	return [
 		["Penis length", str(lengthCM)+" cm"],
 	]
+
+func getLength():
+	return lengthCM

@@ -47,18 +47,23 @@ func receiveTease(_pc, _teaseType, _maxUnlocks = 1):
 	
 	var pcLearned = []
 	var i = 0
+	var alreadyKnownTopics = 0
 	for bestTopic in bestTopics:
 		if(!playerKnows.has(bestTopic[0]) || playerKnows[bestTopic[0]] != bestTopic[1]):
-			playerKnows[bestTopic[0]] = bestTopic[1]
-			#print("PLAYER LEARNED THAT THE NPC "+str(bestTopic[1])+" "+str(bestTopic[0]))
-			pcLearned.append([bestTopic[0], bestTopic[1]])
-			i += 1
-			if(i >= _maxUnlocks):
-				break
+			if(i < _maxUnlocks):
+				playerKnows[bestTopic[0]] = bestTopic[1]
+				pcLearned.append([bestTopic[0], bestTopic[1]])
+				i += 1
+				#print("PLAYER LEARNED THAT THE NPC "+str(bestTopic[1])+" "+str(bestTopic[0]))
+		else:
+			alreadyKnownTopics += 1
+			
+
 	
 	var result = {
 		"value": resultValue,
 		"learned": pcLearned,
+		"alreadyKnownTopics": alreadyKnownTopics,
 	}
 	
 	return result

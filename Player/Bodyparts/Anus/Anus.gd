@@ -1,7 +1,7 @@
 extends BodypartAnus
 
 func _init():
-	name = "anus"
+	visibleName = "anus"
 	id = "anus"
 	dollType = null
 

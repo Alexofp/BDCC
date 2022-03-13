@@ -1,6 +1,6 @@
 extends BodypartBody
 
 func _init():
-	name = "human body"
+	visibleName = "human body"
 	id = "humanbody"
 	dollType = "Human"

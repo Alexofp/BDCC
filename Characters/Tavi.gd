@@ -18,35 +18,5 @@ func getSpecies():
 func _getAttacks():
 	return ["biteattack", "kickToBallsAttack", "slapTitsAttack", "stretchingAttack", "lickWounds", "shoveattack", "trygetupattack"]
 
-func reactTease():
-	return 0.2
-
-func reactGrope():
-	if(lust < 50):
-		return 0
-	
-	return 1.0
-
-func reactSelfHumiliation(_topic):
-	if(remembersTopic(_topic)):
-		return -0.5
-	
-	if(_topic == Attack.LustTopic.selfUseMe):
-		doRememberTopic(_topic)
-
-		return 1.0
-	
-	return 0
-
-func reactHumiliation(_topic):
-	if(remembersTopic(_topic)):
-		return -0.5
-	
-	if(_topic == Attack.LustTopic.humYouSlut):
-		doRememberTopic(_topic)
-		return -0.2
-	
-	return 0
-
 func getFightIntro(_battleName):
 	return getName() + " gets into the combat stance and prepares for a fight. "+formatSay("Are you afraid of a little kitty cat~?")
