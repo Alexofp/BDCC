@@ -28,7 +28,7 @@ func getIconColor():
 func combine(_args = []):
 	pass
 
-func getAccuracyMod(_damageType):
-	if(_damageType == DamageType.Physical):
-		return -0.5
-	return 0
+func getBuffs():
+	return [
+		buff(Buff.AccuracyBuff, [-50])
+	]

@@ -159,11 +159,12 @@ func canHandleBlindness():
 	return skillsHolder.hasPerk(Perk.TestPerk) && false
 	
 func calculateBuffs():
-	buffsHolder.calculateBuffs()
 	updateNonBattleEffects()
 
 # They may have effect on your damage in battles but they're not a 'battle' effects
 func updateNonBattleEffects():
+	buffsHolder.calculateBuffs()
+	
 	if(hasBoundArms()):
 		addEffect(StatusEffect.ArmsBound)
 	else:

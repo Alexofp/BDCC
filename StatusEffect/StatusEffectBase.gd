@@ -35,6 +35,14 @@ func getEffectName():
 func getEffectDesc():
 	return "Let the developer know"
 
+func getVisisbleDescription():
+	var text = getEffectDesc()
+	var buffs = getBuffs()
+	if(buffs.size() > 0):
+		for buff in buffs:
+			text += "\n" + "[color=#"+buff.getBuffColor().to_html(false)+"]" + buff.getVisibleDescription() + "[/color]"
+	return text
+
 func getEffectImage():
 	return null
 
@@ -51,10 +59,10 @@ func stop():
 	
 	character.removeEffect(id)
 
-func getAccuracyMod(_damageType):
+func getAccuracyMod():
 	return 0.0
 
-func getDodgeMod(_damageType):
+func getDodgeMod():
 	return 0.0
 	
 func getRecievedDamageMod(_damageType):
@@ -68,3 +76,11 @@ func saveData():
 	
 func loadData(_data):
 	pass
+
+func getBuffs():
+	return []
+
+func buff(buffid, args = []):
+	var buff: BuffBase = GlobalRegistry.createBuff(buffid)
+	buff.initBuff(args)
+	return buff

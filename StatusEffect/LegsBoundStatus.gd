@@ -28,7 +28,7 @@ func getIconColor():
 func combine(_args = []):
 	pass
 
-func getDodgeMod(_damageType):
-	if(_damageType == DamageType.Physical):
-		return -0.5
-	return 0.0
+func getBuffs():
+	return [
+		buff(Buff.DodgeChanceBuff, [-20])
+	]

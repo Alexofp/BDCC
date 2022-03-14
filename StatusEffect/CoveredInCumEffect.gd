@@ -24,37 +24,25 @@ func getEffectDesc():
 	var messFluids = character.getOutsideMessinessFluidList()
 	
 	var message = BodilyFluids.getOutsideMessinessMessage(messLevel, messFluids)
-	
-	if(messLevel > 1):
-		messLevel = min(messLevel, BodilyFluids.MaxMessinessLevel)
-		var damageBonus = 5 * messLevel
-		var recievedDamageBonus = 10 * messLevel
-		message += "\n[color=green]Lust damage: +"+str(damageBonus)+"%[/color]"
-		message += "\n[color=red]Recieved lust damage: +"+str(recievedDamageBonus)+"%[/color]"
-	
+
 	return message
 
-func getDamageMultiplierMod(_damageType):
+func getBuffs():
 	if(!character.isPlayer()):
-		return 0
+		return [
+			buff(Buff.LustDamageBuff, [5]),
+			buff(Buff.ReceivedLustDamageBuff, [10]),
+		]
 	
-	if(_damageType == DamageType.Lust):
-		var messLevel = character.getOutsideMessinessLevel()
-		messLevel = min(messLevel, BodilyFluids.MaxMessinessLevel)
-		if(messLevel > 1):
-			return 0.05 * messLevel
-	return 0
+	var messLevel = character.getOutsideMessinessLevel()
+	messLevel = min(messLevel, BodilyFluids.MaxMessinessLevel)
 
-func getRecievedDamageMod(_damageType):
-	if(!character.isPlayer()):
-		return 0
-	
-	if(_damageType == DamageType.Lust):
-		var messLevel = character.getOutsideMessinessLevel()
-		messLevel = min(messLevel, BodilyFluids.MaxMessinessLevel)
-		if(messLevel > 1):
-			return 0.10 * messLevel
-	return 0
+	if(messLevel <= 1):
+		return []
+	return [
+		buff(Buff.LustDamageBuff, [5 * messLevel]),
+		buff(Buff.ReceivedLustDamageBuff, [10 * messLevel]),
+	]
 
 func getEffectImage():
 	return "res://UI/StatusEffectsPanel/images/mess.png"

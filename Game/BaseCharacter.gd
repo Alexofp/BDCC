@@ -121,6 +121,7 @@ func addEffect(effectID: String, args = []):
 	statusEffectsStorageNode.add_child(effect)
 	
 	statusEffects[effectID] = effect
+	buffsHolder.calculateBuffs()
 
 func hasEffect(effectID: String):
 	return statusEffects.has(effectID)
@@ -129,6 +130,7 @@ func removeEffect(effectID: String):
 	if(statusEffects.has(effectID)):
 		statusEffects[effectID].queue_free()
 		var _wasremoved = statusEffects.erase(effectID)
+		buffsHolder.calculateBuffs()
 	
 func canStandUpCombat():
 	if(!hasEffect(StatusEffect.Collapsed)):
@@ -159,12 +161,13 @@ func updateEffectPanel(panel: StatusEffectsPanel):
 	panel.clearBattleEffects()
 	for effectID in statusEffects.keys():
 		var effect = statusEffects[effectID]
-		panel.addBattleEffect(effect.getIconColor(), effect.getEffectName(), effect.getEffectDesc(), effect.getEffectImage())
+		panel.addBattleEffect(effect.getIconColor(), effect.getEffectName(), effect.getVisisbleDescription(), effect.getEffectImage())
 
 func processBattleTurn():
 	for effectID in statusEffects.keys():
 		var effect = statusEffects[effectID]
 		effect.processBattleTurn()
+	buffsHolder.calculateBuffs()
 		
 
 func afterFightEnded():
@@ -239,25 +242,32 @@ func getRecieveDamageMultiplier(_damageType):
 	
 	return mult
 
-func getDodgeChance(_damageType):
+func getDodgeChance():
 	if(isDodging()):
 		return 1
 	
 	var mult = initialDodgeChance
 	for effectID in statusEffects.keys():
 		var effect = statusEffects[effectID]
-		mult += effect.getDodgeMod(_damageType)
+		mult += effect.getDodgeMod()
+
+	mult += buffsHolder.getDodgeChance()
 
 	if(mult > 0.8):
 		mult = 0.8
 
 	return mult
 	
-func getAttackAccuracy(_damageType):
+func getAttackAccuracy():
 	var mult = 0
 	for effectID in statusEffects.keys():
 		var effect = statusEffects[effectID]
-		mult += effect.getAccuracyMod(_damageType)
+		mult += effect.getAccuracyMod()
+	
+	mult += buffsHolder.getAccuracy()
+	
+	if(mult < -0.9):
+		mult = -0.9
 	
 	return mult
 	

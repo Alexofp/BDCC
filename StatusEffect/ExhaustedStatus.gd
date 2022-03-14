@@ -17,7 +17,7 @@ func getEffectName():
 	return "Exhausted"
 
 func getEffectDesc():
-	return "You are completely out of energy\n[color=red]Physical damage -20%[/color]"
+	return "You are completely out of energy"
 
 func getEffectImage():
 	return "res://UI/StatusEffectsPanel/images/noenergy.png"
@@ -28,7 +28,7 @@ func getIconColor():
 func combine(_args = []):
 	pass
 
-func getDamageMultiplierMod(_damageType):
-	if(_damageType == DamageType.Physical):
-		return -0.2
-	return 0.0
+func getBuffs():
+	return [
+		buff(Buff.PhysicalDamageBuff, [-20])
+	]

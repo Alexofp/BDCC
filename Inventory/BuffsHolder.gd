@@ -7,6 +7,8 @@ var dealDamageMult = {}
 var recieveDamageMult = {}
 var armor = {}
 var gagged = false
+var dodgeChance = 0
+var accuracy = 0
 
 func _ready():
 	name = "Buffs"
@@ -21,6 +23,8 @@ func calculateBuffs():
 	recieveDamageMult.clear()
 	armor.clear()
 	gagged = false
+	dodgeChance = 0
+	accuracy = 0
 	for damageType in DamageType.getAll():
 		dealDamageMult[damageType] = 0.0
 		recieveDamageMult[damageType] = 0.0
@@ -30,6 +34,10 @@ func calculateBuffs():
 	for slot in items:
 		var item = items[slot]
 		buffs.append_array(item.getBuffs())
+	var statusEffects = npc.getStatusEffects()
+	for statusEffectID in statusEffects:
+		var statusEffect = statusEffects[statusEffectID]
+		buffs.append_array(statusEffect.getBuffs())
 
 	for buff in buffs:
 		buff.apply(self)
@@ -60,3 +68,9 @@ func hasBuff(buffID):
 		if(buff.id == buffID):
 			return true
 	return false
+
+func getDodgeChance():
+	return dodgeChance
+
+func getAccuracy():
+	return accuracy

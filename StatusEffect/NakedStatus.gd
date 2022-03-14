@@ -22,7 +22,7 @@ func getEffectDesc():
 	
 	
 	if(character.isFullyNaked()):
-		return "You're completely naked, be ready for some extra attention\n[color=green]Lust damage +10%[/color]"
+		return "You're completely naked, be ready for some extra attention"
 	
 	var exposedBodyparts = character.getExposedPrivates()
 	var visiblePartsNames = []
@@ -33,7 +33,7 @@ func getEffectDesc():
 		visiblePartsNames.append(bodypart.getName())
 		
 	if(visiblePartsNames.size() > 0):
-		return "Some of your privates are exposed and visible for everyone who glances at you. Be ready for some extra attention\n[color=red]Exposed: "+Util.humanReadableList(visiblePartsNames)+"[/color]\n[color=green]Lust damage +10%[/color]"
+		return "Some of your privates are exposed and visible for everyone who glances at you. Be ready for some extra attention\n[color=red]Exposed: "+Util.humanReadableList(visiblePartsNames)+"[/color]"
 	
 	return "You're not wearing anything"
 
@@ -46,7 +46,7 @@ func getIconColor():
 func combine(_args = []):
 	pass
 
-func getDamageMultiplierMod(_damageType):
-	if(_damageType == DamageType.Lust):
-		return 0.1
-	return 0.0
+func getBuffs():
+	return [
+		buff(Buff.LustDamageBuff, [10]),
+	]

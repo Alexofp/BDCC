@@ -184,14 +184,14 @@ func checkMissed(_attacker, _reciever, _damageType, customAccuracyMult = 1.0, mi
 	if(_reciever.hasEffect(StatusEffect.Collapsed)):
 		return false
 	
-	var chanceToHit = (1.0 + _attacker.getAttackAccuracy(_damageType)) * customAccuracyMult
+	var chanceToHit = (1.0 + _attacker.getAttackAccuracy()) * customAccuracyMult
 	chanceToHit = max(chanceToHit, minChangeToHit)
 	if(!RNG.chance(100.0 * chanceToHit)):
 		return true
 	return false
 
 func checkDodged(_attacker, _reciever, _damageType, customDodgeMult = 1, minChangeToDodge = 0.0, playDodgeAnimation = true):
-	var dodgeChance = _reciever.getDodgeChance(_damageType) * customDodgeMult
+	var dodgeChance = _reciever.getDodgeChance() * customDodgeMult
 	
 	dodgeChance = max(dodgeChance, minChangeToDodge)
 	if(RNG.chance(100.0 * dodgeChance)):

@@ -153,17 +153,13 @@ func updateDamageStatsLabel():
 		text += damName +": " +str(dam)+"\n"
 		
 	text += "\n"
-	text += "Dodge chance:\n"
-	for damageType in DamageType.getAll():
-		var dam = GM.pc.getDodgeChance(damageType)
-		var damName = DamageType.getName(damageType)
-		text += damName +": " +str(dam*100)+"%"+"\n"
+	text += "Dodge chance: "
+	var dodgeChance = GM.pc.getDodgeChance()
+	text += str(dodgeChance*100)+"%"+"\n"
 		
 	text += "\n"
-	text += "Attack accuracy:\n"
-	for damageType in DamageType.getAll():
-		var dam = GM.pc.getAttackAccuracy(damageType)
-		var damName = DamageType.getName(damageType)
-		text += damName +": " +Util.numberToPercentString(dam)+"\n"
+	text += "Attack accuracy: "
+	var accuracy = GM.pc.getAttackAccuracy() + 1.0
+	text += str(accuracy * 100.0)+"%\n"
 		
 	damageStatsLabel.bbcode_text = text

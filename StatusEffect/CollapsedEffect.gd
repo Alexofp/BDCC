@@ -21,10 +21,10 @@ func getEffectImage():
 func getIconColor():
 	return IconColorBlue
 
-func getDodgeMod(_damageType):
-	if(_damageType == DamageType.Physical):
-		return -0.9
-	return 0.0
+func getBuffs():
+	return [
+		buff(Buff.DodgeChanceBuff, [-90])
+	]
 
 func processBattleTurn():
 	canStandup = true

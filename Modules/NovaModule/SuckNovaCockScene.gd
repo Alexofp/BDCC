@@ -5,6 +5,7 @@ func _init():
 
 func _initScene(_args = []):
 	GM.pc.cummedInMouthBy("nova")
+	GM.pc.cummedOnBy("nova")
 	GM.pc.updateNonBattleEffects()
 
 func _run():
