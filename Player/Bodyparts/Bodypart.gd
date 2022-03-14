@@ -67,3 +67,6 @@ func getAttributesText():
 
 func processTime(_seconds: int):
 	pass
+
+func safeWhenExposed():
+	return true

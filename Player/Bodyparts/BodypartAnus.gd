@@ -44,3 +44,5 @@ func saveData():
 func loadData(_data):
 	orifice.loadData(SAVE.loadVar(_data, "orificeData", {}))
 	
+func safeWhenExposed():
+	return false

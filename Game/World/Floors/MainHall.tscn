@@ -496,10 +496,11 @@ canSouth = false
 roomSprite = 2
 roomColor = 3
 
-[node name="MainHallRoom23" parent="." index="61" instance=ExtResource( 2 )]
+[node name="MainLaundry" parent="." index="61" instance=ExtResource( 2 )]
 self_modulate = Color( 0.7, 0.7, 1, 1 )
 position = Vector2( 192, 256 )
 roomName = "Laundry"
+roomID = "main_laundry"
 roomDescription = "Half of the room is taken by a row of bulky industrial-looking washing machines. Then your eye spots a few bins with inmate uniforms and a uniform vender, similliar to the one that you saw during the intake"
 roomSprite = 9
 roomColor = 3
@@ -522,3 +523,5 @@ roomColor = 3
 [connection signal="onReact" from="MainHallRoom39" to="." method="_on_MainDressingRoom_onReact"]
 [connection signal="onEnter" from="MainCanteen" to="." method="_on_MainCanteen_onEnter"]
 [connection signal="onReact" from="MainCanteen" to="." method="_on_MainCanteen_onReact"]
+[connection signal="onEnter" from="MainLaundry" to="." method="_on_MainLaundry_onEnter"]
+[connection signal="onReact" from="MainLaundry" to="." method="_on_MainLaundry_onReact"]

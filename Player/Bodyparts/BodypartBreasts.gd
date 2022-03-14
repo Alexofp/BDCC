@@ -83,3 +83,6 @@ func getAttributesText():
 
 func getSize():
 	return size
+
+func safeWhenExposed():
+	return false

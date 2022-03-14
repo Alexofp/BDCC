@@ -13,3 +13,9 @@ func getLewdName():
 		return "pecs"
 
 	return RNG.pick(["manbreasts", "manboobs", "mantits", "jugs", "orbs"])
+
+func safeWhenExposed():
+	if(size <= BreastsSize.A):
+		return true
+	
+	return false

@@ -49,3 +49,6 @@ func getPuttingOnStringLong(withS):
 		return "puts on your inmate shirt and the shorts"
 	else:
 		return "put on your inmate shirt and the shorts"
+
+func coversBodyparts():
+	return [BodypartSlot.Body, BodypartSlot.Breasts, BodypartSlot.Vagina, BodypartSlot.Penis, BodypartSlot.Anus]

@@ -110,7 +110,7 @@ func getStackSellPrice():
 	return int(getSellPrice() * amount)
 
 func canSell():
-	return false
+	return true
 
 func getTakingOffStringLong(withS):
 	if(withS):
@@ -135,3 +135,6 @@ func getPuttingOnVerb(withS):
 		return "puts on"
 	else:
 		return "put on"
+
+func coversBodyparts():
+	return []

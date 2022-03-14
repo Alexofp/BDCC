@@ -184,7 +184,7 @@ func updateNonBattleEffects():
 	else:
 		removeEffect(StatusEffect.Gagged)
 		
-	if(isFullyNaked()):
+	if(isFullyNaked() || getExposedPrivates().size() > 0):
 		addEffect(StatusEffect.Naked)
 	else:
 		removeEffect(StatusEffect.Naked)
@@ -471,10 +471,38 @@ func afterRestingInBed(seconds):
 	addStamina(_hours * 10)
 
 func isFullyNaked():
-	if(inventory.hasSlotEquipped(InventorySlot.Body)):
-		return false
+	var slotsToBeFullyNaked = [InventorySlot.Body, InventorySlot.UnderwearBottom, InventorySlot.UnderwearTop]
+	
+	for slot in slotsToBeFullyNaked:
+		if(inventory.hasSlotEquipped(slot)):
+			return false
 	
 	return true
+
+func getExposedPrivates():
+	var possiblePrivates = [BodypartSlot.Breasts, BodypartSlot.Penis, BodypartSlot.Vagina, BodypartSlot.Anus]
+	var result = []
+	var coveredParts = {}
+	
+	var equippedItems = inventory.getAllEquippedItems()
+	for inventorySlot in equippedItems:
+		var item = equippedItems[inventorySlot]
+		var itemCovers = item.coversBodyparts()
+		for itemCover in itemCovers:
+			coveredParts[itemCover] = true
+	
+	for possiblePrivatePart in possiblePrivates:
+		if(!hasBodypart(possiblePrivatePart)):
+			continue
+		
+		var bodypart = getBodypart(possiblePrivatePart)
+		if(bodypart.safeWhenExposed()):
+			continue
+		
+		if(!coveredParts.has(possiblePrivatePart) || !coveredParts[possiblePrivatePart]):
+			result.append(possiblePrivatePart)
+		
+	return result
 
 func afterEatingAtCanteen():
 	addStamina(100)

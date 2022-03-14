@@ -74,3 +74,6 @@ func getAttributesText():
 
 func getLength():
 	return lengthCM
+
+func safeWhenExposed():
+	return false

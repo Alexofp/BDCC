@@ -47,6 +47,7 @@ func _ready():
 	registerBodypartFolder("res://Player/Bodyparts/Vagina/")
 	
 	registerItemFolder("res://Inventory/Items/")
+	registerItemFolder("res://Inventory/Items/Underwear/")
 	
 	registerBuffFolder("res://Inventory/Buffs/")
 	
