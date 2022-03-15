@@ -36,3 +36,6 @@ static func getColor(type) -> Color:
 	if(type == Stamina):
 		return Color.cornflower
 	return Color.floralwhite
+
+static func getColorString(type) -> String:
+	return "#"+getColor(type).to_html(false)

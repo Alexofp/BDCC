@@ -37,4 +37,4 @@ func getAttackAnimation():
 	return TheStage.Kick
 
 func getExperience():
-	return [[Skill.Fighting, 20]]
+	return [[Skill.Combat, 20]]

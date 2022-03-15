@@ -13,4 +13,4 @@ func hideTooltip():
 	tooltipS -= 1
 	if(tooltipS <= 0):
 		tooltipS = 0
-		tooltip.set_is_active(false)
+	tooltip.set_is_active(false)

@@ -22,6 +22,7 @@ onready var scrollPanel = $HBoxContainer/VBoxContainer2/ScrollContainer
 onready var mainGameScreen = $HBoxContainer/VBoxContainer2
 onready var ingameMenuScreen = $HBoxContainer/InGameMenu
 onready var skillsScreen = $HBoxContainer/SkillsUI
+onready var skillsButton = $HBoxContainer/Panel2/MarginContainer/VBoxContainer/HBoxContainer3/SkillsButton
 var uiTextboxScene = preload("res://UI/UITextbox.tscn")
 onready var textcontainer = $HBoxContainer/VBoxContainer2/ScrollContainer/VBoxContainer
 var textboxes: Dictionary = {}
@@ -252,9 +253,13 @@ func getCurrentLocationName():
 
 
 func _on_SkillsButton_pressed():
+	skillsButton.text = "Skills"
 	if(!skillsScreen.visible):
 		hideAllScreens()
 		skillsScreen.visible = true
 	else:
 		hideAllScreens()
 		mainGameScreen.visible = true
+
+func makeSkillsButtonFlash():
+	skillsButton.text = "[!]Skills"

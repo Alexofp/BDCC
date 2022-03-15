@@ -94,6 +94,15 @@ func getFluidList():
 			myfluids.append(fluidData[0])
 	return myfluids
 
+func getUniqueCharactersAmount():
+	var chars = {}
+	
+	for fluidData in contents:
+		if(fluidData[2] != null):
+			chars[fluidData[2]] = true
+	
+	return chars.keys().size()
+
 func saveData():
 	var data = {
 		"contents": contents,

@@ -34,10 +34,13 @@ func calculateBuffs():
 	for slot in items:
 		var item = items[slot]
 		buffs.append_array(item.getBuffs())
+		
 	var statusEffects = npc.getStatusEffects()
 	for statusEffectID in statusEffects:
 		var statusEffect = statusEffects[statusEffectID]
 		buffs.append_array(statusEffect.getBuffs())
+
+	buffs.append_array(npc.getSkillsHolder().getBuffs())
 
 	for buff in buffs:
 		buff.apply(self)

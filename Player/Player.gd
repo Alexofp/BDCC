@@ -56,7 +56,7 @@ func _ready():
 	#skillsHolder.setStat(Stat.Sexiness, 10)
 	#skillsHolder.setStat(Stat.Endurance, 5)
 	#skillsHolder.setStat(Stat.Vitality, 5)
-	skillsHolder.addSkillExperience(Skill.Fighting, 250)
+	skillsHolder.addSkillExperience(Skill.Combat, 250)
 
 func updateAppearance():
 	emit_signal("bodypart_changed")
@@ -133,7 +133,7 @@ func isPlayer():
 	return true
 
 func _getAttacks():
-	var attacks = ["PunchPCAttack", "BitePCAttack", "KickPCAttack", "strongkickattack",
+	var attacks = ["PunchPCAttack", "BitePCAttack", "KickPCAttack",
 	"TeaseBodyPCAttack",
 	"TeaseCrotchPCAttack",
 	"TeaseButtPCAttack",
@@ -676,3 +676,4 @@ func getUndressMessage(withS):
 			res.append(item.getTakingOffStringLong(withS))
 	
 	return Util.humanReadableList(res, "and also")
+

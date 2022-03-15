@@ -39,6 +39,12 @@ func getBuffs():
 
 	if(messLevel <= 1):
 		return []
+		
+	if(character.hasPerk(Perk.CumSlut)):
+		return [
+			buff(Buff.LustDamageBuff, [5 * messLevel]),
+		]
+		
 	return [
 		buff(Buff.LustDamageBuff, [5 * messLevel]),
 		buff(Buff.ReceivedLustDamageBuff, [10 * messLevel]),

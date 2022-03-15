@@ -33,7 +33,11 @@ func getEffectDesc():
 	
 	var message = "You got fucked and now your womb is stuffed with " + str(fluidAmountRounded) + " ml of "+humanReadableString
 	if(stuffLevel > 1.0):
-		message += ". Your womb is completely filled"
+		message += ". Your womb is filled to the brim"
+	
+	var uniqueUsers = womb.getUniqueCharactersAmount()
+	if(uniqueUsers > 1):
+		message += " from "+str(uniqueUsers)+" lovers"
 	
 	return message
 

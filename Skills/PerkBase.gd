@@ -3,13 +3,16 @@ class_name PerkBase
 
 var npc = null
 var id = "error"
-var skillGroup = Skill.Fighting
+var skillGroup = Skill.Combat
 
 func getVisibleName():
 	return "Error"
 
 func getVisibleDescription():
 	return "Error bad"
+
+func getMoreDescription():
+	return ""
 
 func getSkillGroup():
 	return skillGroup
@@ -28,6 +31,17 @@ func setCharacter(newnpc):
 
 func addsAttacks():
 	return []
+
+func processBattleTurn():
+	pass
+	
+func getBuffs():
+	return []
+
+func buff(buffid, args = []):
+	var buff: BuffBase = GlobalRegistry.createBuff(buffid)
+	buff.initBuff(args)
+	return buff
 
 func saveData():
 	return {

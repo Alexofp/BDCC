@@ -172,11 +172,14 @@ func _react(_action: String, _args):
 	
 	if(_action == "outside"):
 		GM.pc.orgasmFrom("nova")
+		GM.pc.addSkillExperience(Skill.SexSlave, 30, "nova_ridecock")
 		GM.pc.updateNonBattleEffects()
 	
 	if(_action == "inside" || _action == "get_knotted"):
 		GM.pc.cummedInVaginaBy("nova")
 		GM.pc.orgasmFrom("nova")
+		GM.pc.addSkillExperience(Skill.CumLover, 50, "nova_ridecock")
+		GM.pc.addSkillExperience(Skill.SexSlave, 30, "nova_ridecock")
 		GM.pc.updateNonBattleEffects()
 	
 	setState(_action)

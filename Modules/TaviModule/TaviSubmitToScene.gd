@@ -155,6 +155,7 @@ func _react(_action: String, _args):
 		elif(GM.pc.hasReachableVagina()):
 			GM.pc.orgasmFrom("tavi")
 			GM.pc.cummedOnBy("pc", BodilyFluids.FluidSource.Vagina)
+		GM.pc.addSkillExperience(Skill.CumLover, 10, "tavi_submit")
 		GM.pc.updateNonBattleEffects()
 	
 	setState(_action)

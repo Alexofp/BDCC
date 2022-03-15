@@ -24,6 +24,9 @@ func isEmpty():
 	assert(orifice != null)
 	return orifice.isEmpty()
 
+func isStuffed():
+	return !isEmpty()
+
 func getOrifice():
 	return orifice
 

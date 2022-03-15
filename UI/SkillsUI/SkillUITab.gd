@@ -32,7 +32,7 @@ func updateInfo():
 		return
 	
 	nameLabel.text = skill.getVisibleName()
-	tabName = skill.getVisibleName()
+	tabName = skill.getShortName()
 	descLabel.text = skill.getVisibleDescription()
 	
 	levelBar.setTextLeft("Level "+str(skill.getLevel()))
@@ -76,6 +76,10 @@ func updatePerkText():
 		perkNameLabel.text += " (Learned)"
 	
 	perkDescLabel.bbcode_text = perk.getVisibleDescription()
+	var extraText = perk.getMoreDescription()
+	if(extraText!=""):
+		perkDescLabel.bbcode_text += "\n\n"+extraText
+	
 	var reqText = "Requirements:\n"
 	var perkCost = perk.getCost()
 	if(perkCost == 1):

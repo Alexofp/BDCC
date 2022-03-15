@@ -206,9 +206,9 @@ func addMessage(text: String):
 	GM.main.addMessage(text)
 
 func addExperienceToPlayer(ex: int, showMessage: bool = true):
-	GM.pc.addExperience(ex)
 	if(showMessage):
 		addMessage("You received "+str(ex)+" experience")
+	GM.pc.addExperience(ex)
 
 func processTime(seconds: int):
 	GM.main.processTime(seconds)

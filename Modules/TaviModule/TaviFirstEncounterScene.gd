@@ -422,6 +422,8 @@ func _react(_action: String, _args):
 		GM.pc.orgasmFrom("tavi")
 		GM.pc.cummedOnBy("tavi", BodilyFluids.FluidSource.Vagina)
 		GM.pc.cummedInMouthBy("tavi", BodilyFluids.FluidSource.Vagina)
+		GM.pc.addSkillExperience(Skill.SexSlave, 50, "tavi_firstencounter")
+		GM.pc.addSkillExperience(Skill.CumLover, 50, "tavi_firstencounter")
 		GM.pc.updateNonBattleEffects()
 		addMessage("Tavi came on you, covering your body with her female juices")
 	

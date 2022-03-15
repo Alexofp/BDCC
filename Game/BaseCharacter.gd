@@ -11,6 +11,8 @@ enum Gender {
 
 #Base class that has all the functions
 signal stat_changed
+signal levelChanged
+signal skillLevelChanged(skillID)
 var pain:int = 0
 var lust:int = 0
 var stamina:int = 100
@@ -44,6 +46,8 @@ func _ready():
 	add_child(skillsHolder)
 	var _con2 = skillsHolder.connect("statChanged", self, "onStatChange")
 	var _con3 = skillsHolder.connect("experienceChanged", self, "onStatChange")
+	var _con4 = skillsHolder.connect("levelChanged", self, "onLevelChange")
+	var _con5 = skillsHolder.connect("skillLevelChanged", self, "onSkillLevelChange")
 	stamina = getMaxStamina()
 	#resetToDefault()
 	lustInterests = LustInterests.new()
@@ -126,6 +130,11 @@ func addEffect(effectID: String, args = []):
 func hasEffect(effectID: String):
 	return statusEffects.has(effectID)
 	
+func getEffect(effectID: String):
+	if(!statusEffects.has(effectID)):
+		return null
+	return statusEffects[effectID]
+	
 func removeEffect(effectID: String):
 	if(statusEffects.has(effectID)):
 		statusEffects[effectID].queue_free()
@@ -167,6 +176,9 @@ func processBattleTurn():
 	for effectID in statusEffects.keys():
 		var effect = statusEffects[effectID]
 		effect.processBattleTurn()
+		
+	skillsHolder.processBattleTurn()
+		
 	buffsHolder.calculateBuffs()
 		
 
@@ -478,6 +490,9 @@ func addExperience(newexp: int):
 func addSkillExperience(skillID, amount, activityID = null):
 	skillsHolder.addSkillExperience(skillID, amount, activityID)
 
+func hasPerk(perkID):
+	return skillsHolder.hasPerk(perkID)
+
 func getSpecies():
 	return []
 
@@ -560,3 +575,9 @@ func getThicknessAdjective():
 		return RNG.pick(["average", "round"])
 	else:
 		return RNG.pick(["soft", "plush", "thick", "wide"])
+
+func onLevelChange():
+	emit_signal("levelChanged")
+
+func onSkillLevelChange(skillID):
+	emit_signal("skillLevelChanged", skillID)

@@ -12,6 +12,7 @@ var perks = {}
 signal statChanged
 signal levelChanged
 signal experienceChanged
+signal skillLevelChanged(skillID)
 
 func _ready():
 	name = "Skills"
@@ -84,6 +85,7 @@ func loadData(data):
 		newskill.setCharacter(npc)
 		newskill.loadData(skillData)
 		skills[skillID] = newskill
+		var _ok = newskill.connect("levelChanged", self, "onSkillLevelChanged")
 		
 	var loadedPerks = SAVE.loadVar(data, "perks", [])
 	for loadedPerk in loadedPerks:
@@ -159,6 +161,7 @@ func addSkillExperience(skillID, amount, activityID = null):
 			return
 		newskill.setCharacter(npc)
 		skills[skillID] = newskill
+		var _ok = newskill.connect("levelChanged", self, "onSkillLevelChanged")
 	
 	skills[skillID].addExperience(amount, activityID)
 	
@@ -234,3 +237,23 @@ func getPerkAttacks():
 		
 	extraAttacks.sort()
 	return extraAttacks
+
+func getPerks():
+	return perks
+
+func processBattleTurn():
+	for perkID in perks:
+		var perk = perks[perkID]
+		perk.processBattleTurn()
+
+func onSkillLevelChanged(skillID, _skillLevel):
+	emit_signal("skillLevelChanged", skillID)
+
+func getBuffs():
+	var result = []
+	
+	for perkID in perks:
+		var perk = perks[perkID]
+		result.append_array(perk.getBuffs())
+	
+	return result

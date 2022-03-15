@@ -35,6 +35,10 @@ func getEffectDesc():
 	if(stuffLevel > 1.0):
 		message += ". Your belly is completely filled"
 	
+	var uniqueUsers = orifice.getUniqueCharactersAmount()
+	if(uniqueUsers > 1):
+		message += " from "+str(uniqueUsers)+" lovers"
+	
 	return message
 
 func getEffectImage():

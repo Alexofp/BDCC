@@ -21,4 +21,6 @@ script = ExtResource( 5 )
 margin_top = 0.0
 margin_bottom = 0.0
 
+[connection signal="levelChanged" from="Player" to="." method="_on_Player_levelChanged"]
+[connection signal="skillLevelChanged" from="Player" to="." method="_on_Player_skillLevelChanged"]
 [connection signal="on_option_button" from="GameUI" to="." method="_on_GameUI_on_option_button"]

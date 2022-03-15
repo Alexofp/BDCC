@@ -53,7 +53,7 @@ func getAttackAnimation():
 	return TheStage.Bite
 
 func getExperience():
-	return [[Skill.Fighting, 10]]
+	return [[Skill.Combat, 10]]
 
 func getRecieverArmorScaling(_damageType) -> float:
 	return 10.0

@@ -58,6 +58,12 @@ func checkRequirement(_attacker, _reciever, req):
 	if(reqtype == "freemouth"):
 		if(_attacker.hasEffect(StatusEffect.Gagged)):
 			return false
+	if(reqtype == "coveredincum"):
+		if(!_attacker.hasEffect(StatusEffect.CoveredInCum)):
+			return false
+	if(reqtype == "lustabove"):
+		if(_attacker.getLust() < req[1]):
+			return false
 			
 	return true
 
@@ -81,6 +87,10 @@ func getRequirementText(req):
 		return "Legs must be free"
 	if(reqtype == "freemouth"):
 		return "Mouth must be free"
+	if(reqtype == "coveredincum"):
+		return "Must be covered in cum/girlcum"
+	if(reqtype == "lustabove"):
+		return "Lust must be above "+str(req[1])
 			
 	return "Error: bad requirement:" + reqtype
 	

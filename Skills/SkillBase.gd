@@ -6,7 +6,7 @@ var id = "error"
 var level = 0
 var experience = 0
 var activities = {}
-signal levelChanged
+signal levelChanged(id, newlevel)
 signal experienceChanged
 
 func setCharacter(newnpc):
@@ -14,6 +14,9 @@ func setCharacter(newnpc):
 
 func getVisibleName():
 	return "Error"
+
+func getShortName():
+	return getVisibleName()
 
 func getVisibleDescription():
 	return "Error, bad description"
@@ -26,7 +29,7 @@ func setLevel(lvl: int):
 		lvl = getLevelCap()
 	
 	level = lvl
-	emit_signal("levelChanged")
+	emit_signal("levelChanged", id, level)
 
 func getLevel() -> int:
 	return level
@@ -68,7 +71,7 @@ func checkNewLevel():
 		addedAnyLevels = true
 	
 	if(addedAnyLevels):
-		emit_signal("levelChanged")
+		emit_signal("levelChanged", id, level)
 
 func getLevelCap():
 	return 10
@@ -92,5 +95,4 @@ func getPerkTiers():
 	return [
 		[0],
 		[5],
-		[10],
 	]

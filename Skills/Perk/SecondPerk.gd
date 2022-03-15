@@ -2,7 +2,7 @@ extends PerkBase
 
 func _init():
 	id = Perk.SecondPerk
-	skillGroup = Skill.Fighting
+	skillGroup = Skill.Combat
 
 func getVisibleName():
 	return "Second test perk"
