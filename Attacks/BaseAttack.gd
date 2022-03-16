@@ -64,6 +64,9 @@ func checkRequirement(_attacker, _reciever, req):
 	if(reqtype == "lustabove"):
 		if(_attacker.getLust() < req[1]):
 			return false
+	if(reqtype == "lustabovepercent"):
+		if(_attacker.getLustLevel() < req[1]):
+			return false
 			
 	return true
 
@@ -91,6 +94,9 @@ func getRequirementText(req):
 		return "Must be covered in cum/girlcum"
 	if(reqtype == "lustabove"):
 		return "Lust must be above "+str(req[1])
+	if(reqtype == "lustabovepercent"):
+		#return "Lust must be above "+str(int(req[1]*100))+"%"
+		return "Lust must be above "+str(int(req[1]*GM.pc.lustThreshold())) +" ("+str(int(req[1]*100))+"%)"
 			
 	return "Error: bad requirement:" + reqtype
 	

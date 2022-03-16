@@ -32,5 +32,5 @@ func canBeDodgedByPlayer(_attacker, _reciever):
 	return false
 
 func getRequirements():
-	return [["lustabove", 100], ["stamina", 30], ["freearms"]]
+	return [["lustabovepercent", 0.9], ["stamina", 30], ["freearms"]]
 

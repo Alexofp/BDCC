@@ -9,6 +9,9 @@ var armor = {}
 var gagged = false
 var dodgeChance = 0
 var accuracy = 0
+var extraPain = 0
+var extraLust = 0
+var extraStamina = 0
 
 func _ready():
 	name = "Buffs"
@@ -25,6 +28,10 @@ func calculateBuffs():
 	gagged = false
 	dodgeChance = 0
 	accuracy = 0
+	extraPain = 0
+	extraLust = 0
+	extraStamina = 0
+	
 	for damageType in DamageType.getAll():
 		dealDamageMult[damageType] = 0.0
 		recieveDamageMult[damageType] = 0.0
@@ -77,3 +84,12 @@ func getDodgeChance():
 
 func getAccuracy():
 	return accuracy
+
+func getExtraPainThreshold():
+	return extraPain
+
+func getExtraLustThreshold():
+	return extraLust
+
+func getExtraStamina():
+	return extraStamina

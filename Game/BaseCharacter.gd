@@ -91,7 +91,7 @@ func getStamina() -> int:
 	return stamina
 	
 func getMaxStamina() -> int:
-	return 100 + skillsHolder.getStat(Stat.Endurance) * 5
+	return int(max(0, 100 + skillsHolder.getExtraStamina() + buffsHolder.getExtraStamina()))
 	
 func getName() -> String:
 	return name
@@ -100,10 +100,10 @@ func getSmallDescription() -> String:
 	return "Test test test"
 
 func painThreshold() -> int:
-	return 100 + skillsHolder.getStat(Stat.Vitality) * 5
+	return int(max(10, 100 + skillsHolder.getExtraPainThreshold() + buffsHolder.getExtraPainThreshold()))
 
 func lustThreshold() -> int:
-	return 100 + skillsHolder.getStat(Stat.Sexiness) * 5
+	return int(max(10, 100 + skillsHolder.getExtraLustThreshold() + buffsHolder.getExtraLustThreshold()))
 
 func getPainLevel():
 	return float(getPain()) / float(painThreshold())
@@ -231,10 +231,7 @@ func getDamageMultiplier(_damageType):
 		mult += effect.getDamageMultiplierMod(_damageType)
 	
 	mult += buffsHolder.getDealDamageMult(_damageType)
-	if(_damageType == DamageType.Physical):
-		mult += skillsHolder.getStat(Stat.Strength)/100.0
-	if(_damageType == DamageType.Lust):
-		mult += skillsHolder.getStat(Stat.Sexiness)/100.0
+	mult += skillsHolder.getDamageMultiplier(_damageType)
 
 	if(mult < -0.8):
 		mult = -0.8

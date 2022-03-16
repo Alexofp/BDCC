@@ -257,3 +257,23 @@ func getBuffs():
 		result.append_array(perk.getBuffs())
 	
 	return result
+
+func getExtraPainThreshold():
+	return int(pow(getStat(Stat.Vitality), 0.8) * 5)
+
+func getExtraLustThreshold():
+	var sexiness = getStat(Stat.Sexiness)
+	#warning-ignore:integer_division
+	var step: int = int(int(sexiness) / int(10))
+	
+	return step * 5
+
+func getExtraStamina():
+	return int(pow(getStat(Stat.Endurance), 0.95) * 5)
+
+func getDamageMultiplier(_damageType):
+	if(_damageType == DamageType.Physical):
+		return getStat(Stat.Strength)/50.0
+	if(_damageType == DamageType.Lust):
+		return getStat(Stat.Sexiness)/50.0
+	return 0
