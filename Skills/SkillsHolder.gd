@@ -269,7 +269,7 @@ func getExtraLustThreshold():
 	return step * 5
 
 func getExtraStamina():
-	return int(pow(getStat(Stat.Endurance), 0.95) * 5)
+	return int(pow(getStat(Stat.Endurance), 0.95) * 4)
 
 func getDamageMultiplier(_damageType):
 	if(_damageType == DamageType.Physical):
@@ -277,3 +277,13 @@ func getDamageMultiplier(_damageType):
 	if(_damageType == DamageType.Lust):
 		return getStat(Stat.Sexiness)/50.0
 	return 0
+
+func giveSkillExperienceBattleTurn():
+	var pc = npc
+	
+	if(pc.hasEffect(StatusEffect.Naked)):
+		pc.addSkillExperience(Skill.Exhibitionism, 2)
+	
+	var bdsmItems = pc.getInventory().getEquippedItemsWithTag(ItemTag.BDSMRestraint)
+	if(bdsmItems.size() > 0):
+		pc.addSkillExperience(Skill.BDSM, 1)

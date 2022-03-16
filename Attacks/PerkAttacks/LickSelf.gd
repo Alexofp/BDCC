@@ -40,5 +40,5 @@ func canBeDodgedByPlayer(_attacker, _reciever):
 	return false
 
 func getRequirements():
-	return [["coveredincum"]]
+	return [["coveredincum"], ["freemouth"]]
 

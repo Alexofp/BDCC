@@ -17,8 +17,12 @@ func _doAttack(_attacker, _reciever):
 	
 	var text = getTeaseText(_attacker, _reciever)
 	
+	var maxUnlocks = 1
+	if(_attacker.hasPerk(Perk.SexBetterTease)):
+		maxUnlocks = 2
+	
 	var lustInterests: LustInterests = _reciever.getLustInterests()
-	var teaseData = lustInterests.receiveTease(_attacker, getTeaseType())
+	var teaseData = lustInterests.receiveTease(_attacker, getTeaseType(), maxUnlocks)
 	var damageMult = teaseData["value"]
 	var learned = teaseData["learned"]
 	var alreadyKnownTopics = teaseData["alreadyKnownTopics"]

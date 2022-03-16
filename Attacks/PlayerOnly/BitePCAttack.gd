@@ -34,7 +34,10 @@ func _doAttack(_attacker, _reciever):
 	
 	if(!_reciever.hasEffect(StatusEffect.Bleeding)):
 		text += " causing "+_reciever.himHer() + " to start [color=red]bleeding[/color]"
-		_reciever.addEffect(StatusEffect.Bleeding)
+		if(_attacker.hasPerk(Perk.SexBiter)):
+			_reciever.addEffect(StatusEffect.Bleeding, [5])
+		else:
+			_reciever.addEffect(StatusEffect.Bleeding)
 	
 	text += "\n"+recieverDamageMessage(DamageType.Physical, damage)
 	
@@ -56,4 +59,7 @@ func getExperience():
 	return [[Skill.Combat, 10]]
 
 func getRecieverArmorScaling(_damageType) -> float:
+	if(GM.pc.hasPerk(Perk.SexBiter)):
+		return 4.0
+	
 	return 10.0

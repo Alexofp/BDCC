@@ -17,6 +17,9 @@ func getEffectName():
 	return "Blindfolded"
 
 func getEffectDesc():
+	if(character.hasPerk(Perk.BDSMBlindfold)):
+		return "You're blind but not entirely helpless"
+	
 	return "You can't see. Hitting anything will be very hard"
 
 func getEffectImage():
@@ -29,6 +32,11 @@ func combine(_args = []):
 	pass
 
 func getBuffs():
+	if(character.hasPerk(Perk.BDSMBlindfold)):
+		return [
+			buff(Buff.AccuracyBuff, [-25])
+		]
+	
 	return [
 		buff(Buff.AccuracyBuff, [-50])
 	]

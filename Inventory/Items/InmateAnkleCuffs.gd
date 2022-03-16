@@ -19,3 +19,6 @@ func getBuffs():
 
 func getTakeOffScene():
 	return "CuffTuggingScene"
+
+func getTags():
+	return [ItemTag.BDSMRestraint]

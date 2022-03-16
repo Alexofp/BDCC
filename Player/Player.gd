@@ -156,7 +156,7 @@ func isGagged():
 	return buffsHolder.hasBuff(Buff.GagBuff)
 
 func canHandleBlindness():
-	return skillsHolder.hasPerk(Perk.TestPerk) && false
+	return skillsHolder.hasPerk(Perk.BDSMBlindfold)
 	
 func calculateBuffs():
 	updateNonBattleEffects()
@@ -218,6 +218,7 @@ func updateNonBattleEffects():
 func processBattleTurn():
 	.processBattleTurn()
 	updateNonBattleEffects()
+	skillsHolder.giveSkillExperienceBattleTurn()
 
 func processTime(_secondsPassed):
 	for bodypartSlot in bodyparts:
@@ -278,8 +279,7 @@ func getChatColor():
 func formatSay(text):
 	var color = getChatColor()
 	
-	if(isGagged() && false):
-		#text = Util.muffledSpeech(text)
+	if(isGagged() && hasPerk(Perk.BDSMGagTalk)):
 		return "[color="+color+"]\""+Util.muffledSpeech(text)+"\" ("+text+") [/color]"
 	
 	if(isGagged()):
@@ -530,6 +530,8 @@ func afterTakingAShower():
 
 func orgasmFrom(_characterID: String):
 	addLust(-lust)
+	if(hasPerk(Perk.SexLustPassion)):
+		addStamina(20)
 
 func cummedOnBy(characterID, sourceType = null, howMessy: int = 1):	
 	var ch = GlobalRegistry.getCharacter(characterID)

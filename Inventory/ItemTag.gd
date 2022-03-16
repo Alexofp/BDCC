@@ -3,12 +3,12 @@ class_name ItemTag
 
 enum {
 	Illegal,
-	Restraint,
+	BDSMRestraint,
 }
 
 static func getName(tag):
 	if(tag == Illegal):
 		return "Illegal"
-	if(tag == Restraint):
+	if(tag == BDSMRestraint):
 		return "Restraint"
 	return "error"

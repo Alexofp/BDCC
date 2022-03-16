@@ -1,8 +1,9 @@
 extends Object
 class_name Perk
 
-const TestPerk = "testPerk"
-const SecondPerk = "secondPerk"
+# Combat perks
+const CombatShove = "CombatShove"
+const CombatBetterBlock = "CombatBetterBlock"
 
 # Cum Lover perks
 const CumBreath = "CumBreath"
@@ -10,3 +11,18 @@ const CumSlut = "CumSlut"
 const CumSwallower = "CumSwallower"
 const CumSloppySeconds = "CumSloppySeconds"
 const CumCumOnOpponent = "CumCumOnOpponent"
+
+# Sex Slave perks
+const SexLustPassion = "SexLustPassion"
+const SexBetterDefocus = "SexBetterDefocus"
+const SexBiter = "SexBiter"
+const SexBetterTease = "SexBetterTease"
+
+# Exhibitionism perks
+const NakedNoShame = "NakedNoShame"
+const NakedDodging = "NakedDodging"
+
+# BDSM perks
+const BDSMGagTalk = "BDSMGagTalk"
+const BDSMBlindfold = "BDSMBlindfold"
+const BDSMBondageSlut = "BDSMBondageSlut"

@@ -22,7 +22,10 @@ func getEffectDesc():
 	
 	
 	if(character.isFullyNaked()):
-		return "You're completely naked, be ready for some extra attention"
+		if(character.hasPerk(Perk.NakedNoShame)):
+			return "You are completely naked and it feels good"
+		
+		return "You are completely naked, be ready for some extra attention"
 	
 	var exposedBodyparts = character.getExposedPrivates()
 	var visiblePartsNames = []
@@ -47,6 +50,12 @@ func combine(_args = []):
 	pass
 
 func getBuffs():
+	if(character.hasPerk(Perk.NakedNoShame)):
+		return [
+			buff(Buff.LustDamageBuff, [10]),
+			buff(Buff.ExposureBuff, [50]),
+		]
+	
 	return [
 		buff(Buff.LustDamageBuff, [10]),
 		buff(Buff.ReceivedLustDamageBuff, [10]),

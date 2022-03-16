@@ -118,15 +118,21 @@ func _run():
 		if(GM.pc.getStamina() > 0 && !GM.pc.hasEffect(StatusEffect.Collapsed)):
 			addButton("Dodge", "You dodge a physical attack completely spending 30 stamina in the process", "dodge_dodge")
 		else:
-			addDisabledButton("Dodge", "You dodge a physical attack completely spending 30 stamina in the process")
+			addDisabledButton("Dodge", "You need more stamina for this")
 		if(GM.pc.getStamina() > 0):
-			addButton("Block", "You block 10 physical damage while spending 10 stamina", "dodge_block")
+			if(GM.pc.hasPerk(Perk.CombatBetterBlock)):
+				addButton("Block", "You gain 50 additional physical armor against the attack while spending 15 stamina", "dodge_block")
+			else:
+				addButton("Block", "You gain 20 additional physical armor against the attack while spending 15 stamina", "dodge_block")
 		else:
-			addDisabledButton("Block", "You block 10 physical damage while spending 10 stamina")
+			addDisabledButton("Block", "You need more stamina for this")
 		if(GM.pc.getStamina() > 0):
-			addButton("Defocus", "You try to distract yourself from the fight blocking 10 lust damage and spending 10 stamina", "dodge_defocus")
+			if(GM.pc.hasPerk(Perk.SexBetterDefocus)):
+				addButton("Defocus", "You try to distract yourself from the fight, gaining 100 lust armor and spending 15 stamina", "dodge_defocus")
+			else:
+				addButton("Defocus", "You try to distract yourself from the fight, gaining 20 lust armor and spending 15 stamina", "dodge_defocus")
 		else:
-			addDisabledButton("Defocus", "You try to distract yourself from the fight blocking 10 lust damage and spending 10 stamina")
+			addDisabledButton("Defocus", "You need more stamina for this")
 		
 	if(state == "" || state == "fighting"):		
 		addButton("Physical Attack", "Kick em", "physattacks")
@@ -221,11 +227,11 @@ func _react(_action: String, _args):
 		if(_action == "dodge_block"):
 			whatPlayerDid = "You try to block the next attack"
 			GM.pc.setFightingStateBlocking()
-			GM.pc.addStamina(-10)
+			GM.pc.addStamina(-15)
 		if(_action == "dodge_defocus"):
 			whatPlayerDid = "You try to get distracted"
 			GM.pc.setFightingStateDefocusing()
-			GM.pc.addStamina(-10)
+			GM.pc.addStamina(-15)
 		
 		var attack: Attack = GlobalRegistry.getAttack(savedAIAttackID)
 		if(attack == null):

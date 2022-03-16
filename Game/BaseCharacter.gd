@@ -210,10 +210,16 @@ func getArmor(_damageType):
 	var armor = 0
 	if(isBlocking()):
 		if(_damageType == DamageType.Physical):
-			armor += 10
+			if(hasPerk(Perk.CombatBetterBlock)):
+				armor += 50
+			else:
+				armor += 20
 	if(isDefocusing()):
 		if(_damageType == DamageType.Lust):
-			armor += 10
+			if(hasPerk(Perk.SexBetterDefocus)):
+				armor += 50
+			else:
+				armor += 20
 	
 	armor += buffsHolder.getArmor(_damageType)
 	
@@ -294,7 +300,7 @@ func recieveDamage(damageType, amount: int, armorScale: float = 1.0):
 	if(amount > 0):
 		var finalArmor = floor(getArmor(damageType) * armorScale)
 		#newdamage -= finalArmor
-		newdamage = newdamage * (100.0/(100.0+finalArmor)) 
+		newdamage = newdamage * (50.0/(50.0+finalArmor)) 
 		newdamage = max(newdamage, 1)
 	
 	if(damageType == DamageType.Physical):
@@ -496,6 +502,9 @@ func addSkillExperience(skillID, amount, activityID = null):
 
 func hasPerk(perkID):
 	return skillsHolder.hasPerk(perkID)
+
+func getStat(statID):
+	return skillsHolder.getStat(statID)
 
 func getSpecies():
 	return []

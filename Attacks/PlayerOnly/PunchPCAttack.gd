@@ -6,7 +6,7 @@ func _init():
 	aiCategory = AICategory.Offensive
 	
 func getVisibleName():
-	if(GM.pc.getSkillsHolder().hasPerk(Perk.TestPerk)):
+	if(GM.pc.hasPerk(Perk.CombatShove)):
 		return "Scratch"
 	return "Punch"
 	
