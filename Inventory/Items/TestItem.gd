@@ -8,7 +8,7 @@ func _init():
 func getVisibleName():
 	return "Test item"
 	
-func getVisisbleDescription():
+func getDescription():
 	return "Heals you or something"
 
 func canUseInCombat():

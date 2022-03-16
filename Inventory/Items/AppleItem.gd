@@ -5,9 +5,9 @@ func _init():
 	id = "appleitem"
 
 func getVisibleName():
-	return "Apple"
+	return "Stolen Apple"
 	
-func getVisisbleDescription():
+func getDescription():
 	return "Tasty looking apple. Will remove 20 pain and add 20 stamina"
 
 func canUseInCombat():
@@ -36,3 +36,6 @@ func canSell():
 
 func canCombine():
 	return true
+
+func getTags():
+	return [ItemTag.Illegal]

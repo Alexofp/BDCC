@@ -209,6 +209,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Inventory/Items/ItemBase.gd"
 }, {
+"base": "Object",
+"class": "ItemTag",
+"language": "GDScript",
+"path": "res://Inventory/ItemTag.gd"
+}, {
 "base": "Node2D",
 "class": "Limb",
 "language": "GDScript",
@@ -440,6 +445,7 @@ _global_script_class_icons={
 "Inventory": "",
 "InventorySlot": "",
 "ItemBase": "",
+"ItemTag": "",
 "Limb": "",
 "LimbTypes": "",
 "LustInterests": "",

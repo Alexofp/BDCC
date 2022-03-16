@@ -692,3 +692,9 @@ func getUndressMessage(withS):
 	
 	return Util.humanReadableList(res, "and also")
 
+func hasIllegalItems():
+	if(inventory.getItemsWithTag(ItemTag.Illegal).size() > 0):
+		return true
+	if(inventory.getEquippedItemsWithTag(ItemTag.Illegal).size() > 0):
+		return true
+	return false

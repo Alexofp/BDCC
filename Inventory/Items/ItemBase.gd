@@ -24,6 +24,9 @@ func getDescription():
 	
 func getVisisbleDescription():
 	var text = getDescription()
+	if(hasTag(ItemTag.Illegal)):
+		text += "\n[color=red]This item is illegal![/color]"
+	
 	var buffs = getBuffs()
 	if(buffs.size() > 0):
 		for buff in buffs:
@@ -138,3 +141,11 @@ func getPuttingOnVerb(withS):
 
 func coversBodyparts():
 	return []
+
+func getTags():
+	return []
+
+func hasTag(tag):
+	if(getTags().has(tag)):
+		return true
+	return false

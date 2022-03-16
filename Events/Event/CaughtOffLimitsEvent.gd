@@ -15,7 +15,7 @@ func run():
 	#runScene("FightScene", ["risha"], "rishafight")
 	
 func delayedRun():
-	saynn("You got caught")
+	pass
 	
 func shouldInterupt():
 	return true

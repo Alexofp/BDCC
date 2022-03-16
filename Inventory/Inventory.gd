@@ -183,6 +183,10 @@ func getEquippedItemsWithBuff(buffID):
 				continue
 	return result
 
+func removeItemsList(itemsToDelete: Array):
+	for item in itemsToDelete:
+		removeItem(item)
+
 func removeEquippedItemsList(itemsToDelete: Array):
 	for item in itemsToDelete:
 		removeEquippedItem(item)
@@ -194,6 +198,23 @@ func removeEquippedItemsWithBuff(buffID):
 		hasItem = true
 	removeEquippedItemsList(founditems)
 	return hasItem
+
+func getItemsWithTag(tag):
+	var result = []
+	for item in items:
+		if(item.hasTag(tag)):
+			result.append(item)
+	return result
+		
+func getEquippedItemsWithTag(tag):
+	var result = []
+	for itemSlot in equippedItems.keys():
+		var item = equippedItems[itemSlot]
+
+		if(item.hasTag(tag)):
+			result.append(item)
+	return result
+	
 
 func saveData():
 	var data = {}

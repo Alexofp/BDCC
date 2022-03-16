@@ -81,7 +81,7 @@ func _run():
 			saynn("Even though you’re naked, she still runs her paws along the curves of your body, checking everywhere, under your armpits, your back and chest areas, your lower half. Nova crouches and does a visual check too.")
 
 		# (if has something)
-		if(false):
+		if(GM.pc.hasIllegalItems()):
 			saynn("[say=nova]Ohh~ I will be taking that. That is some contraband you have there, cutie~[/say]")
 		else:
 			# (if found nothing)
@@ -133,7 +133,7 @@ func _run():
 
 		saynn("[say=nova]Now go. Don’t let me catch you here again~[/say]")
 
-		addButton("Leave", "Probably not the worst thing that happened to you", "endthescene")
+		addButton("Leave", "Probably not the worst thing that happened to you", "endthesceneStealItems")
 
 	if(state == "offer_self"):
 		saynn("[say=pc]Does it matter much? How about you let me go if I offer you something in return[/say]")
@@ -276,6 +276,11 @@ func _react(_action: String, _args):
 
 	if(_action == "submittosearch"):
 		GM.pc.addLust(20)
+		
+		for item in GM.pc.getInventory().getItemsWithTag(ItemTag.Illegal):
+			addMessage(item.getStackName()+" was taken away")
+		for item in GM.pc.getInventory().getEquippedItemsWithTag(ItemTag.Illegal):
+			addMessage(item.getStackName()+" was taken away")
 
 	if(_action == "humiliateAngel"):
 		runScene("HumiliateNovaScene")
@@ -295,6 +300,13 @@ func _react(_action: String, _args):
 		return
 
 	if(_action == "endthescene"):
+		endScene()
+		return
+		
+	if(_action == "endthesceneStealItems"):
+		GM.pc.getInventory().removeItemsList(GM.pc.getInventory().getItemsWithTag(ItemTag.Illegal))
+		GM.pc.getInventory().removeEquippedItemsList(GM.pc.getInventory().getEquippedItemsWithTag(ItemTag.Illegal))
+		
 		endScene()
 		return
 		
