@@ -26,7 +26,7 @@ func getEffectName():
 	return "Covered with "+cumName
 
 func getEffectDesc():
-	return character.getName()+" is covered with "+cumName
+	return character.getName()+" is covered with "+cumName+" for " + str(turns) + " more turns"
 
 func getBuffs():
 	return [
@@ -41,3 +41,13 @@ func getIconColor():
 
 func combine(_args = []):
 	pass
+
+func saveData():
+	return {
+		"turns": turns,
+		"cumName": cumName,
+	}
+	
+func loadData(_data):
+	turns = SAVE.loadVar(_data, "turns", 3)
+	cumName = SAVE.loadVar(_data, "cumName", "cum")
