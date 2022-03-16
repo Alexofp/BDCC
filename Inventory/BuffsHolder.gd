@@ -12,6 +12,9 @@ var accuracy = 0
 var extraPain = 0
 var extraLust = 0
 var extraStamina = 0
+var ambientPain = 0
+var ambientLust = 0
+var exposure = 0
 
 func _ready():
 	name = "Buffs"
@@ -31,6 +34,9 @@ func calculateBuffs():
 	extraPain = 0
 	extraLust = 0
 	extraStamina = 0
+	ambientPain = 0
+	ambientLust = 0
+	exposure = 0
 	
 	for damageType in DamageType.getAll():
 		dealDamageMult[damageType] = 0.0
@@ -93,3 +99,12 @@ func getExtraLustThreshold():
 
 func getExtraStamina():
 	return extraStamina
+
+func getAmbientPain():
+	return ambientPain
+
+func getAmbientLust():
+	return ambientLust
+
+func getExposure():
+	return exposure

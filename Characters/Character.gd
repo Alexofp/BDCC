@@ -34,6 +34,11 @@ func _getName():
 func getName():
 	return _getName()
 
+func beforeFightStarted():
+	.beforeFightStarted()
+	addLust(getAmbientLust())
+	addPain(getAmbientPain())
+
 func afterFightEnded():
 	.afterFightEnded()
 	pain = 0

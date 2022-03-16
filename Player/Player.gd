@@ -232,6 +232,21 @@ func processTime(_secondsPassed):
 		var effect = statusEffects[effectID]
 		effect.processTime(_secondsPassed)
 
+func hoursPassed(_howmuch):
+	var currentLust = getLust()
+	var targetLust = getAmbientLust()
+	
+	if(currentLust < targetLust):
+		var addValue = min(_howmuch, (targetLust - currentLust))
+		addLust(addValue)
+
+	var currentPain = getPain()
+	var targetPain = getAmbientPain()
+	
+	if(currentPain < targetPain):
+		var addValue = min(_howmuch, (targetPain - currentPain))
+		addPain(addValue)
+
 func getGender():
 	return pickedGender
 
@@ -574,8 +589,8 @@ func cummedInAnusBy(characterID, sourceType = null):
 func cummedInMouthBy(characterID, sourceType = null):
 	cummedInBodypartBy(BodypartSlot.Head, characterID, sourceType)
 
-func getExposureFactor():
-	return 1.0
+func getExposure():
+	return buffsHolder.getExposure()
 
 func getInmateNumber():
 	return inmateNumber

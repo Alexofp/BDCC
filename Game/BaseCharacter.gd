@@ -62,7 +62,6 @@ func addPain(_p: int):
 		
 	emit_signal("stat_changed")
 
-# Skips armor checks
 func addLust(_l: int):
 	lust += _l
 	if(lust > lustThreshold()):
@@ -113,6 +112,12 @@ func getLustLevel():
 
 func getStaminaLevel():
 	return float(getStamina()) / float(getMaxStamina())
+
+func getAmbientPain():
+	return int(buffsHolder.getAmbientPain())
+
+func getAmbientLust():
+	return int(buffsHolder.getAmbientLust())
 
 func addEffect(effectID: String, args = []):
 	if(statusEffects.has(effectID)):
@@ -181,6 +186,8 @@ func processBattleTurn():
 		
 	buffsHolder.calculateBuffs()
 		
+func beforeFightStarted():
+	pass
 
 func afterFightEnded():
 	print(getName()+" my fight has ended")

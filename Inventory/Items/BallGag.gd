@@ -20,6 +20,7 @@ func getClothingSlot():
 func getBuffs():
 	return [
 		buff(Buff.GagBuff),
+		buff(Buff.AmbientLustBuff, [10]),
 		]
 
 func unlock():

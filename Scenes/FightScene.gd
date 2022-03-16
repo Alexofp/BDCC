@@ -19,6 +19,7 @@ func _init():
 func _initScene(_args = []):
 	enemyID = _args[0]
 	enemyCharacter = GlobalRegistry.getCharacter(enemyID)
+	enemyCharacter.beforeFightStarted()
 	setFightCharacter(enemyID)
 	
 	if(_args.size() > 1):

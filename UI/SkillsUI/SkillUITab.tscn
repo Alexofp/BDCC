@@ -25,7 +25,7 @@ __meta__ = {
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
 margin_right = 1280.0
-margin_bottom = 225.0
+margin_bottom = 212.0
 size_flags_horizontal = 3
 
 [node name="PanelContainer" type="PanelContainer" parent="ScrollContainer/VBoxContainer"]
@@ -77,32 +77,31 @@ text = "Skill perks:"
 [node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer/VBoxContainer"]
 margin_top = 102.0
 margin_right = 1280.0
-margin_bottom = 225.0
+margin_bottom = 212.0
 
 [node name="PanelContainer" type="PanelContainer" parent="ScrollContainer/VBoxContainer/HBoxContainer"]
 margin_right = 638.0
-margin_bottom = 123.0
+margin_bottom = 110.0
 size_flags_horizontal = 3
-size_flags_vertical = 3
+size_flags_vertical = 0
 
 [node name="TiersContainer" type="VBoxContainer" parent="ScrollContainer/VBoxContainer/HBoxContainer/PanelContainer"]
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 631.0
-margin_bottom = 116.0
+margin_bottom = 103.0
 size_flags_horizontal = 3
-size_flags_vertical = 3
 
 [node name="PerksTierContainer" parent="ScrollContainer/VBoxContainer/HBoxContainer/PanelContainer/TiersContainer" instance=ExtResource( 3 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_right = 624.0
-margin_bottom = 109.0
+margin_bottom = 96.0
 
 [node name="PanelContainer2" type="PanelContainer" parent="ScrollContainer/VBoxContainer/HBoxContainer"]
 margin_left = 642.0
 margin_right = 1280.0
-margin_bottom = 123.0
+margin_bottom = 110.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -110,7 +109,7 @@ size_flags_vertical = 3
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 631.0
-margin_bottom = 116.0
+margin_bottom = 103.0
 
 [node name="PerkNameLabel" type="Label" parent="ScrollContainer/VBoxContainer/HBoxContainer/PanelContainer2/VBoxContainer"]
 margin_right = 624.0
@@ -141,17 +140,16 @@ rect_min_size = Vector2( 0, 5 )
 [node name="PerkRequirementsLabel" type="RichTextLabel" parent="ScrollContainer/VBoxContainer/HBoxContainer/PanelContainer2/VBoxContainer"]
 margin_top = 55.0
 margin_right = 624.0
-margin_bottom = 85.0
+margin_bottom = 70.0
 bbcode_enabled = true
 bbcode_text = "Description of a selected perk"
-text = "Requirements:
-1 skill point"
+text = "Description of a selected perk"
 fit_content_height = true
 
 [node name="UnlockPerkButton" type="Button" parent="ScrollContainer/VBoxContainer/HBoxContainer/PanelContainer2/VBoxContainer"]
-margin_top = 89.0
+margin_top = 74.0
 margin_right = 624.0
-margin_bottom = 109.0
+margin_bottom = 94.0
 text = "Learn"
 
 [connection signal="pressed" from="ScrollContainer/VBoxContainer/HBoxContainer/PanelContainer2/VBoxContainer/UnlockPerkButton" to="." method="_on_UnlockPerkButton_pressed"]

@@ -2,4 +2,13 @@ extends "res://Scenes/VendomatScene.gd"
 
 func _init():
 	sceneID = "VendomatUnderwearScene"
-	sellingItems = ["plainPanties", "plainBra", "plainBriefs", "plainUndershirt"]
+	sellingItems = [
+		"plainPanties",
+		"plainBra",
+		"plainBriefs",
+		"plainUndershirt",
+		
+		"sportyBriefs",
+		"sportyTop",
+		"sportyTankTop",
+	]

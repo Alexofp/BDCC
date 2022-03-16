@@ -49,4 +49,6 @@ func combine(_args = []):
 func getBuffs():
 	return [
 		buff(Buff.LustDamageBuff, [10]),
+		buff(Buff.ReceivedLustDamageBuff, [10]),
+		buff(Buff.ExposureBuff, [50]),
 	]

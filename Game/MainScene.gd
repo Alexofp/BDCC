@@ -160,18 +160,33 @@ func isVeryLate():
 func processTime(_seconds):
 	_seconds = int(round(_seconds))
 	
+	var oldTime = timeOfDay
 	timeOfDay += _seconds
+	var timeChanged = true
 	
 	if(timeOfDay > getTimeCap()):
 		timeOfDay = getTimeCap()
+	
+	if(oldTime == timeOfDay):
+		timeChanged = false
+	
+	doTimeProcess(_seconds, timeChanged)
 
-	doTimeProcess(_seconds)
-
-func doTimeProcess(_seconds):
+func doTimeProcess(_seconds, timeChanged = true):
 	GM.pc.processTime(_seconds)
 	GM.ui.onTimePassed(_seconds)
 	
+	if(timeChanged):
+		var oldHours = int((timeOfDay - _seconds) / 60 / 60)
+		var newHours = int(timeOfDay / 60 / 60)
+		var hoursPassed = newHours - oldHours
+
+		hoursPassed(hoursPassed)
+	
 	emit_signal("time_passed", _seconds)
+
+func hoursPassed(howMuch):
+	GM.pc.hoursPassed(howMuch)
 
 func processTimeUntil(newseconds):
 	if(timeOfDay >= newseconds):

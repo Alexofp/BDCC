@@ -30,7 +30,7 @@ static func getBattleName(type) -> String:
 
 static func getColor(type) -> Color:
 	if(type == Physical):
-		return Color.orangered
+		return Color("#FF9A8E")
 	if(type == Lust):
 		return Color.violet
 	if(type == Stamina):

@@ -2,13 +2,14 @@ extends Control
 
 onready var nameLabel = $VBoxContainer/TabContainer/Stats/ScrollContainer/HBoxContainer/PanelContainer/VBoxContainer/NameLabel
 onready var levelBar = $VBoxContainer/TabContainer/Stats/ScrollContainer/HBoxContainer/PanelContainer/VBoxContainer/LevelBar
-onready var freeStatsLabel = $VBoxContainer/TabContainer/Stats/ScrollContainer/HBoxContainer/PanelContainer2/VBoxContainer/FreeStatsLabel
-onready var attribList = $VBoxContainer/TabContainer/Stats/ScrollContainer/HBoxContainer/PanelContainer2/VBoxContainer/AttribList
+onready var freeStatsLabel = $VBoxContainer/TabContainer/Stats/ScrollContainer/HBoxContainer/Vbox/PanelContainer2/VBoxContainer/FreeStatsLabel
+onready var attribList = $VBoxContainer/TabContainer/Stats/ScrollContainer/HBoxContainer/Vbox/PanelContainer2/VBoxContainer/AttribList
 signal onClosePressed
-onready var applyButton = $VBoxContainer/TabContainer/Stats/ScrollContainer/HBoxContainer/PanelContainer2/VBoxContainer/HBoxContainer/ApplyButton
-onready var cancelButton = $VBoxContainer/TabContainer/Stats/ScrollContainer/HBoxContainer/PanelContainer2/VBoxContainer/HBoxContainer/CancelButton
+onready var applyButton = $VBoxContainer/TabContainer/Stats/ScrollContainer/HBoxContainer/Vbox/PanelContainer2/VBoxContainer/HBoxContainer/ApplyButton
+onready var cancelButton = $VBoxContainer/TabContainer/Stats/ScrollContainer/HBoxContainer/Vbox/PanelContainer2/VBoxContainer/HBoxContainer/CancelButton
 onready var tabContainer = $VBoxContainer/TabContainer
 onready var damageStatsLabel = $VBoxContainer/TabContainer/Stats/ScrollContainer/HBoxContainer/PanelContainer/VBoxContainer/DamageStatsLabel
+onready var extraStatsLabel = $VBoxContainer/TabContainer/Stats/ScrollContainer/HBoxContainer/Vbox/SecondPanel/VBoxContainer/ExtraStatsLabel
 
 var skillStatLineScene = preload("res://UI/SkillsUI/SkillStatLine.tscn")
 var statObjects = {}
@@ -163,3 +164,10 @@ func updateDamageStatsLabel():
 	text += str(accuracy * 100.0)+"%\n"
 		
 	damageStatsLabel.bbcode_text = text
+
+
+	text = ""
+	text += "Ambient lust: "+str(GM.pc.getAmbientLust()) +"\n"
+	text += "Ambient pain: "+str(GM.pc.getAmbientPain()) + "\n"
+	text += "Exposure: "+str(int(GM.pc.getExposure()*100))+"%" + "\n"
+	extraStatsLabel.bbcode_text = text
