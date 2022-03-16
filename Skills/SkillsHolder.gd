@@ -118,7 +118,7 @@ func getFreeStatPoints() -> int:
 	return res
 	
 static func getRequiredExperience(_level) -> int:
-	return 100
+	return 100 + _level * 10 + int(sqrt(max(0,_level))) * 10
 
 func addExperience(addexp: int):
 	if(npc == null || !npc.isPlayer()):
