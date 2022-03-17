@@ -491,6 +491,7 @@ _global_script_class_icons={
 config/name="LewdGame"
 run/main_scene="res://UI/MainMenu/MainMenu.tscn"
 config/icon="res://icon.png"
+config/windows_native_icon="res://icon.ico"
 
 [autoload]
 

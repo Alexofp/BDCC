@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="128"
+   height="128"
+   viewBox="0 0 33.866666 33.866668"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.1.2 (b8e25be833, 2022-02-05)"
+   sodipodi:docname="logo.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:document-units="mm"
+     showgrid="false"
+     units="px"
+     inkscape:zoom="0.7513148"
+     inkscape:cx="252.2245"
+     inkscape:cy="5.9895"
+     inkscape:window-width="1920"
+     inkscape:window-height="1018"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1">
+    <inkscape:grid
+       type="xygrid"
+       id="grid824"
+       empspacing="8" />
+  </sodipodi:namedview>
+  <defs
+     id="defs2">
+    <filter
+       inkscape:collect="always"
+       style="color-interpolation-filters:sRGB"
+       id="filter123865"
+       x="-0.064085225"
+       y="-0.067071118"
+       width="1.1281705"
+       height="1.1341422">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="0.55011279"
+         id="feGaussianBlur123867" />
+    </filter>
+  </defs>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       style="fill:#768dd9;fill-opacity:1;stroke:#252580;stroke-width:2.11667;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect24507"
+       width="29.633333"
+       height="29.633333"
+       x="-14.828071"
+       y="-38.759293"
+       ry="14.816667"
+       transform="rotate(135)"
+       inkscape:export-filename="E:\godot\projects\LewdGame\AssetsSource\logo.png"
+       inkscape:export-xdpi="409.18417"
+       inkscape:export-ydpi="409.18417" />
+    <rect
+       style="fill:#252580;fill-opacity:1;stroke:none;stroke-width:0.529168;stroke-linejoin:bevel"
+       id="rect845"
+       width="21.166666"
+       height="4.2333322"
+       x="-10.594737"
+       y="-26.059294"
+       ry="2.1166661"
+       transform="rotate(135)"
+       inkscape:export-filename="E:\godot\projects\LewdGame\AssetsSource\logo.png"
+       inkscape:export-xdpi="409.18417"
+       inkscape:export-ydpi="409.18417" />
+    <path
+       style="fill:#252580;fill-opacity:1;stroke:none;stroke-width:0.529167;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 14.120321,24.59729 2.245064,2.245064 -3.554684,3.554684 3.741773,2.245064 4.30304,-4.303038 1e-6,-2.99342 -3.741774,-3.741774 z"
+       id="path899-1"
+       sodipodi:nodetypes="cccccccc"
+       inkscape:export-filename="E:\godot\projects\LewdGame\AssetsSource\logo.png"
+       inkscape:export-xdpi="409.18417"
+       inkscape:export-ydpi="409.18417" />
+    <path
+       style="fill:#252580;fill-opacity:1;stroke:none;stroke-width:0.529167;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 24.597287,14.120324 2.245064,2.245064 3.543296,-3.549943 2.256453,3.737031 -4.303023,4.303057 -2.993417,0 -3.741775,-3.741775 z"
+       id="path899-1-9"
+       sodipodi:nodetypes="cccccccc"
+       inkscape:export-filename="E:\godot\projects\LewdGame\AssetsSource\logo.png"
+       inkscape:export-xdpi="409.18417"
+       inkscape:export-ydpi="409.18417" />
+    <path
+       style="fill:#252580;fill-opacity:1;stroke:none;stroke-width:0.529167;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="M 9.2674204,19.728259 7.0223564,17.483195 3.456284,21.04262 1.2112197,17.300847 l 4.3144418,-4.307766 2.9934183,-10e-7 3.7417732,3.741773 z"
+       id="path899-1-93"
+       sodipodi:nodetypes="cccccccc"
+       inkscape:export-filename="E:\godot\projects\LewdGame\AssetsSource\logo.png"
+       inkscape:export-xdpi="409.18417"
+       inkscape:export-ydpi="409.18417" />
+    <path
+       style="fill:#252580;fill-opacity:1;stroke:none;stroke-width:0.529167;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 19.744386,9.2512933 -2.245064,-2.245064 3.543281,-3.54996 -3.741774,-2.2450641 -4.291637,4.2983119 0,2.9934184 3.741774,3.7417735 z"
+       id="path899-1-9-7"
+       sodipodi:nodetypes="cccccccc"
+       inkscape:export-filename="E:\godot\projects\LewdGame\AssetsSource\logo.png"
+       inkscape:export-xdpi="409.18417"
+       inkscape:export-ydpi="409.18417" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:13.6889px;line-height:0;font-family:Quantum;-inkscape-font-specification:Quantum;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.529166;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;filter:url(#filter123865)"
+       x="17.28569"
+       y="16.158901"
+       id="text123827"
+       transform="scale(0.97770969,1.0227985)"
+       inkscape:export-filename="E:\godot\projects\LewdGame\AssetsSource\logo.png"
+       inkscape:export-xdpi="409.18417"
+       inkscape:export-ydpi="409.18417"><tspan
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:50%;font-family:Quantum;-inkscape-font-specification:Quantum;text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.529167;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         sodipodi:role="line"
+         id="tspan123823"
+         x="27.586596"
+         y="16.158901">BD</tspan><tspan
+         sodipodi:role="line"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:100%;font-family:Quantum;-inkscape-font-specification:Quantum;text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.529167;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         x="27.586596"
+         y="26.425575"
+         id="tspan123825">CC</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:13.6889px;line-height:0;font-family:Quantum;-inkscape-font-specification:Quantum;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.529166;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       x="17.28569"
+       y="16.158901"
+       id="text33251"
+       transform="scale(0.97770969,1.0227985)"
+       inkscape:export-filename="E:\godot\projects\LewdGame\AssetsSource\logo.png"
+       inkscape:export-xdpi="409.18417"
+       inkscape:export-ydpi="409.18417"><tspan
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:50%;font-family:Quantum;-inkscape-font-specification:Quantum;text-align:center;text-anchor:middle;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.529167;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         sodipodi:role="line"
+         id="tspan118913"
+         x="27.586596"
+         y="16.158901">BD</tspan><tspan
+         sodipodi:role="line"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:100%;font-family:Quantum;-inkscape-font-specification:Quantum;text-align:center;text-anchor:middle;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.529167;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         x="27.586596"
+         y="26.425575"
+         id="tspan113705">CC</tspan></text>
+  </g>
+</svg>
