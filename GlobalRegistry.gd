@@ -2,7 +2,7 @@ extends Node
 
 var game_version_major = 0
 var game_version_minor = 0
-var game_version_revision = 8
+var game_version_revision = 10
 
 var currentUniqueID = 0
 

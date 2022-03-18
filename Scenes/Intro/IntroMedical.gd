@@ -16,8 +16,8 @@ func _run():
 
 		saynn("You tug on your tight collar, unsure what to do.")
 
-		addButton("Introduce self", "", "introduce_self")
-		addButton("Sneak up", "", "sneak_up")
+		addButton("Introduce self", "Don't test your luck", "introduce_self")
+		addButton("Sneak up", "This seems like an opportunity", "sneak_up")
 
 	if(state == "sneak_up"):
 		aimCamera("intro_medicalarea")
@@ -82,7 +82,7 @@ func _run():
 
 		saynn("She quickly scans the number that's printed on your uniform and then you as a whole from toes to ears.")
 
-		saynn("[say=eliza]Ah, yes. Inmate number.. 12054. Take a seat.[/say]")
+		saynn("[say=eliza]Ah, yes. Inmate number.. {pc.inmateNumber}. Take a seat.[/say]")
 
 		saynn("She puts away her tablet and gestures towards the bed.")
 
@@ -99,76 +99,30 @@ func _run():
 
 		saynn("The doctor rummages through some drawers and finds a small pill bottle that says “Spacecillin” on it. She grabs one pill and offers it to you as well as a glass of water.")
 
-		saynn("[say=eliza]Strong antibiotics with a long term effect. Will cure any STDs and diseases you have. If you have any[/say]")
+		saynn("[say=eliza]Strong antibiotics with a long term effect. Will protect you from most STDs.[/say]")
 
-		saynn("[say=pc]Is that really required?[/say]")
+		saynn("You take the offered pill and toss it into your mouth. You don’t really feel any different after it. The doc quickly gives you a visual checkup and puts some data into her tablet.")
 
-		saynn("[say=eliza]It is[/say]")
+		# (if red)
+		if(getFlag(Flag.Player_Crime_Type) in [Flag.Crime_Type.Murder]):
+			saynn("[say=eliza]So you’re joining reds, huh. Just remember that others will fear you only if you don't show any weaknesses. Pink inmates are basically sextoys but that doesn’t mean they won’t get into a fight with you.[/say]")
 
-		saynn("You take the offered pill and toss it into your mouth. You don’t really feel any different after it. The doc then grabs something that looks like a nail file but bigger.")
+			saynn("[say=pc]I don’t think that this is your problem.[/say]")
 
-		saynn("[say=eliza]Show me your hands, inmate.[/say]")
+			saynn("[say=eliza]Sewing you or any other inmate back together is my problem.[/say]")
 
-		saynn("You do as she says. Doctor grabs one of your arms and takes a look at the claws.")
+		# (if orange)
+		if(getFlag(Flag.Player_Crime_Type) in [Flag.Crime_Type.Innocent, Flag.Crime_Type.Theft]):
+			saynn("[say=eliza]Listen. If you want to get out of here as fast as possible, the pink block is your best bet. Even if you don’t get paroled, you will at least get access to a better cell and comfortable furniture[/say]")
 
-		saynn("[say=eliza]I will file them down, don’t move[/say]")
+			saynn("[say=pc]As a reward for letting others fuck me?[/say]")
 
-		saynn("You try to pull your arm away but she holds it tightly.")
+			saynn("[say=eliza]You know, some like it. Just avoid the reds, most of them are psychopaths.[/say]")
 
-		saynn("[say=pc]Hey! Why?[/say]")
-
-		saynn("[say=eliza]Cause they’re sharp. Anything sharp is not allowed. You would rather wear mittens instead?[/say]")
-
-		addButton("Let her do it", "Lose your claws", "let_her_do_it")
-
-	if(state == "let_her_do_it"):
-		saynn("You nod unwillingly and let the doctor do her thing. She quickly proceeds to work, grinding down your claws one by one until they all become useless and dull. Then she does the same to the other hand.")
-
-		saynn("[say=eliza]Otherwise any of the reds would happily cut you up with them[/say]")
-
-		saynn("[say=pc]Reds?[/say]")
-
-		saynn("Eliza pokes at your uniform, at it’s orange trim.")
-
-		saynn("[say=eliza]You’re a general block inmate. Reds are the ones who wear red uniforms. You wanna stay away from them, they’re all complete psychopaths. Run away if you see one.[/say]")
-
-		saynn("[say=pc]Great[/say]")
-
-		saynn("[say=eliza]There are also inmates who wear pink. Means their crimes are sex related. They’re basically used as sextoys.[/say]")
-
-		saynn("[say=pc]Sextoys? How is that legal?[/say]")
-
-		saynn("Doctor shrugs and then goes to grab something else from the drawers.")
-
-		if(GM.pc.getInventory().hasSlotEquipped(InventorySlot.Mouth)):
-			saynn("She then returns and unlocks your gag harness for now")
+		# (if pink)
+		if(getFlag(Flag.Player_Crime_Type) == Flag.Crime_Type.Prostitution):
+			saynn("[say=eliza]You’re lucky to be a pink inmate. Spacious cell, comfy furniture, all of that. Though the catch is that others will see a sextoy in you so be careful. Maybe you will like it, I don’t know. And avoid the reds, they’re all psychopaths.[/say]")
 			
-			saynn("[say=eliza]I do like how you keep drooling but I need your mouth[/say]")
-		else:
-			saynn("[say=eliza]Open your mouth for me[/say]")
-
-		addButton("Open mouth", "What will she do?", "open_mouth")
-
-	if(state == "open_mouth"):
-		saynn("Doctor puts on some latex gloves and grabs you by the chin before looking into your mouth.")
-
-		saynn("[say=eliza]Fangs are sharp too, I will have to cap them[/say]")
-
-		saynn("You’d like to say something but she holds your mouth open so you decide to just obey and sit still. Doctor grab a few rubber caps and attach them directly to your fangs, rendering them dull.")
-
-		if(GM.pc.getInventory().hasSlotEquipped(InventorySlot.Mouth)):
-			saynn("After she is done, she puts the harness back and locks it tight")
-
-		saynn("[say=eliza]You will still be able to eat. That should be about it[/say]")
-
-		saynn("You close your mouth and now can feel the rubber caps in your mouth, you will have to get used to them for sure, they sit very tight.")
-
-		saynn("[say=eliza]Listen. If you want to get out of here as fast as possible, the pink block is your best bet. Even if you don’t get paroled, you will at least get access to a better cell and comfortable furniture[/say]")
-
-		saynn("[say=pc]As a reward for letting others fuck me?[/say]")
-
-		saynn("[say=eliza]You know, some like it[/say]")
-
 		saynn("You watch the doctor put all her things away and then pull out a somewhat long chain.")
 
 		saynn("[say=eliza]I will escort you to the cellblock now[/say]")
@@ -317,6 +271,9 @@ func _react(_action: String, _args):
 		startNewDay()
 		runScene("IntroWakeup")
 		endScene()
+		
+	if(_action == "sneak_up"):
+		GM.pc.addPain(30)
 		
 	setState(_action)
 

@@ -383,7 +383,7 @@ func getChatColor():
 	var gender = getGender()
 	
 	if(gender == Gender.Male):
-		return "#3E84E0"
+		return "#5696EA"
 	if(gender == Gender.Female):
 		return "#FF837A"
 	if(gender == Gender.Androgynous):
