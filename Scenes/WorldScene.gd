@@ -65,25 +65,25 @@ func _react(_action: String, _args):
 		GM.pc.setLocation(GM.world.applyDirectionID(GM.pc.location, GameWorld.Direction.NORTH))
 		processTime(30)
 		aimCamera(GM.pc.location)
-		GM.ES.trigger(Trigger.EnteringRoom, GM.pc.location)
+		GM.ES.trigger(Trigger.EnteringRoom, GM.pc.location, [Direction.North])
 	if(_action == "gowest"):
 		GM.pc.playAnimation(TheStage.Walking)
 		GM.pc.setLocation(GM.world.applyDirectionID(GM.pc.location, GameWorld.Direction.WEST))
 		processTime(30)
 		aimCamera(GM.pc.location)
-		GM.ES.trigger(Trigger.EnteringRoom, GM.pc.location)
+		GM.ES.trigger(Trigger.EnteringRoom, GM.pc.location, [Direction.West])
 	if(_action == "gosouth"):
 		GM.pc.playAnimation(TheStage.Walking)
 		GM.pc.setLocation(GM.world.applyDirectionID(GM.pc.location, GameWorld.Direction.SOUTH))
 		processTime(30)
 		aimCamera(GM.pc.location)
-		GM.ES.trigger(Trigger.EnteringRoom, GM.pc.location)
+		GM.ES.trigger(Trigger.EnteringRoom, GM.pc.location, [Direction.South])
 	if(_action == "goeast"):
 		GM.pc.playAnimation(TheStage.Walking)
 		GM.pc.setLocation(GM.world.applyDirectionID(GM.pc.location, GameWorld.Direction.EAST))
 		processTime(30)
 		aimCamera(GM.pc.location)
-		GM.ES.trigger(Trigger.EnteringRoom, GM.pc.location)
+		GM.ES.trigger(Trigger.EnteringRoom, GM.pc.location, [Direction.East])
 	if(_action == "inventory"):
 		runScene("InventoryScene")
 	if(_action == "tasks"):

@@ -6,7 +6,7 @@ func _init():
 func _initScene(_args = []):
 	GM.pc.cummedInMouthBy("nova")
 	GM.pc.cummedOnBy("nova")
-	GM.pc.addSkillExperience(Skill.SexSlave, 10, "nova_ridecock")
+	GM.pc.addSkillExperience(Skill.SexSlave, 10, "nova_suckcock")
 	GM.pc.addSkillExperience(Skill.CumLover, 40, "nova_suckcock")
 	GM.pc.updateNonBattleEffects()
 

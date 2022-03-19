@@ -9,7 +9,7 @@ func registerTriggers(es):
 func shouldRun():
 	return RNG.chance(1) && GM.world.getRoomByID(GM.pc.getLocation()).loctag_Greenhouses
 
-func run():
+func run(_args):
 	GM.ES.trigger(Trigger.CaughtOffLimits)
 	pass
 	#runScene("FightScene", ["risha"], "rishafight")

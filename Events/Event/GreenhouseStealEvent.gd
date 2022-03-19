@@ -6,7 +6,7 @@ func _init():
 func registerTriggers(es):
 	es.addTrigger(self, Trigger.EnteringRoom, "main_greenhouses")
 
-func run():
+func run(_args):
 	pass
 	#runScene("FightScene", ["risha"], "rishafight")
 	

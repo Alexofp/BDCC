@@ -9,7 +9,7 @@ func registerTriggers(es):
 func shouldRun():
 	return GM.main.getFlag(TaviModule.Tavi_IntroducedTo)
 
-func run():
+func run(_args):
 	pass
 	
 func delayedRun():

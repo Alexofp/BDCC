@@ -9,7 +9,7 @@ func registerTriggers(es):
 func shouldRun():
 	return true
 
-func run():
+func run(_args):
 	pass
 	
 func delayedRun():

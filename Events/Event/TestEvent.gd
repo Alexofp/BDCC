@@ -10,7 +10,7 @@ func registerTriggers(es):
 func shouldRun():
 	return false
 
-func run():
+func run(_args):
 	GM.pc.addLust(-100)
 	GM.pc.addLust(69)
 	
