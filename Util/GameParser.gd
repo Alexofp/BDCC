@@ -94,4 +94,8 @@ func callObjectFunc(_obj: String, _command: String, _args: Array):
 	if(_command in ["undressMessageS"] && _args.size() == 0 && object.has_method("getUndressMessage")):
 		return object.getUndressMessage(true)
 	
+	if(_command == "inmateType" && _args.size() == 0 && object.has_method("getInmateType")):
+		var inmateType = object.getInmateType()
+		return InmateType.getOfficialName(inmateType)
+	
 	return "!RUNTIME ERROR NO COMMAND FOUND "+_obj+"."+_command+" "+str(_args)+"!"

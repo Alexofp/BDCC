@@ -20,10 +20,8 @@ func _on_CBStairs2_onReact(_room, key):
 		GM.main.reRun()
 
 
-func _on_CellblockRoom11_onEnter(room):
-	room.addButton("Stash", "You can hide something in your cell", "stash")
-	
-	room.addButton("Rest", "Lay down on the bed", "rest")
+func _on_CellblockRoom11_onEnter(_room):
+	pass
 
 
 func _on_CellblockRoom11_onReact(_room, key):
@@ -35,3 +33,19 @@ func _on_CellblockRoom11_onReact(_room, key):
 		#GM.pc.addStamina(100)
 		#GM.main.addMessage("You had a good rest")
 		#GM.main.reRun()
+
+
+func _on_CellblockRoom11_onPreEnter(room):
+	if(GM.pc.getLocation() == GM.pc.getCellLocation()):
+		room.roomDescription = "Your cell is nothing special. An automatic door that can be opened and closed remotely and an armored window that anyone can see through. Walls are made out of some metal, using a spoon on them would only leave a visible scratch. Everything is well lit at least."
+		room.roomDescription += "\n\n"
+		room.roomDescription += "One stiff-looking bed in the corner and a chair is all you get. You can rest here or hide something so you don't lose it during the personal searches."
+		
+		room.roomName = "My cell"
+		
+		room.addButton("Stash", "You can hide something in your cell", "stash")
+		
+		room.addButton("Rest", "Lay down on the bed", "rest")
+	else:
+		room.roomDescription = "This is not your cell"
+		room.roomName = "Cell"

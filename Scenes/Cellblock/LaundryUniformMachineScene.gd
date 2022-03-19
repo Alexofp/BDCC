@@ -7,7 +7,7 @@ func _run():
 	if(state == ""):
 		saynn("You walk up to the machine's terminal, it has a black-and-green screen and a few buttons. You press one of them and the machine beeps.")
 		
-		saynn("The screen displays:\n\nDetected inmate number {pc.inmateNumber}.\nInmate Uniform Replacement cost: 10 credits.\nInmate Uniform Repair cost: 5 credits.")
+		saynn("The screen displays:\n\nDetected inmate number {pc.inmateNumber}.\nInmate category: {pc.inmateType}\nInmate Uniform Replacement cost: 10 credits.\nInmate Uniform Repair cost: 5 credits.")
 
 		saynn("What do you wanna do?")
 
@@ -38,8 +38,9 @@ func _react(_action: String, _args):
 		else:
 			GM.pc.addCredits(-10)
 			
-			var uniform = GlobalRegistry.createItem("inmateuniform_general")
+			var uniform = GlobalRegistry.createItem("inmateuniform")
 			uniform.setPrisonerNumber(GM.pc.getFullInmateNumber())
+			uniform.setInmateType(GM.pc.getInmateType())
 			GM.pc.getInventory().addItem(uniform)
 			
 			addMessage("A fresh uniform was added to your inventory")

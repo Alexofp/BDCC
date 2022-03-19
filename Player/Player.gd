@@ -15,6 +15,7 @@ var pickedSpecies = ["feline"]
 var inmateNumber = "12859"
 var pickedFemininity: int = 50
 var pickedThickness: int = 50
+var inmateType = InmateType.General
 
 # Messy stuff
 var bodyFluids = []
@@ -347,6 +348,7 @@ func saveData():
 		"bodyFluids": bodyFluids,
 		"pickedFemininity": pickedFemininity,
 		"pickedThickness": pickedThickness,
+		"inmateType": inmateType,
 	}
 	
 	data["bodyparts"] = {}
@@ -380,6 +382,7 @@ func loadData(data):
 	bodyFluids = SAVE.loadVar(data, "bodyFluids", [])
 	pickedFemininity = SAVE.loadVar(data, "pickedFemininity", 50)
 	pickedThickness = SAVE.loadVar(data, "pickedThickness", 50)
+	inmateType = SAVE.loadVar(data, "inmateType", InmateType.General)
 	
 	resetSlots()
 	var loadedBodyparts = SAVE.loadVar(data, "bodyparts", {})
@@ -700,3 +703,19 @@ func hasIllegalItems():
 	if(inventory.getEquippedItemsWithTag(ItemTag.Illegal).size() > 0):
 		return true
 	return false
+
+func setInmateType(newtype):
+	inmateType = newtype
+
+func getInmateType():
+	return inmateType
+
+func getCellLocation():
+	if(inmateType == InmateType.General):
+		return "cellblock_orange_playercell"
+	if(inmateType == InmateType.HighSec):
+		return "cellblock_red_playercell"
+	if(inmateType == InmateType.SexDeviant):
+		return "cellblock_pink_playercell"
+	
+	return "cellblock_orange_playercell"

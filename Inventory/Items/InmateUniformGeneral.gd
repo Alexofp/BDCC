@@ -1,18 +1,22 @@
 extends ItemBase
 
 var prisonerNumber = ""
+var inmateType = InmateType.General
 
 func _init():
-	id = "inmateuniform_general"
+	id = "inmateuniform"
 
 func getVisibleName():
-	return "General inmate uniform"
+	return InmateType.getOfficialName(inmateType).capitalize() + " inmate uniform"
 	
 func setPrisonerNumber(newnumber):
 	prisonerNumber = newnumber
 	
+func setInmateType(newtype):
+	inmateType = newtype
+	
 func getDescription():
-	var text = "A short sleeved shirt and some shorts, both are made out of black cloth with an orange trim to it."
+	var text = "A short sleeved shirt and some shorts, both are made out of black cloth with "+InmateType.getColorName(inmateType)+" trim."
 
 	if(prisonerNumber != null && prisonerNumber != ""):
 		text += " The shirt has a prisoner number attached to it that says \""+prisonerNumber+"\""
@@ -30,6 +34,7 @@ func saveData():
 	var data = .saveData()
 	
 	data["prisonerNumber"] = prisonerNumber
+	data["inmateType"] = inmateType
 	
 	return data
 	
@@ -37,6 +42,7 @@ func loadData(data):
 	.loadData(data)
 	
 	prisonerNumber = SAVE.loadVar(data, "prisonerNumber", "")
+	inmateType = SAVE.loadVar(data, "inmateType", InmateType.General)
 
 func getTakingOffStringLong(withS):
 	if(withS):

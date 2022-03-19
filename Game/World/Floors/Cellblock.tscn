@@ -42,12 +42,15 @@ roomDescription = "A wide corridor that connects all the cellblocks with the sta
 [node name="CellblockRoom6" parent="." index="5" instance=ExtResource( 2 )]
 self_modulate = Color( 1, 0.6, 0.8, 1 )
 position = Vector2( 0, 256 )
+roomName = "My cell"
+roomID = "cellblock_pink_playercell"
 roomDescription = "((This will be your potential cell))"
 roomColor = 4
 
 [node name="CellblockRoom7" parent="." index="6" instance=ExtResource( 2 )]
 position = Vector2( 0, 128 )
 roomName = "Corridor"
+roomID = "cellblock_nearcells"
 roomDescription = "From here you see three cellblocks, orange, pink and red"
 
 [node name="CellblockRoom9" parent="." index="7" instance=ExtResource( 2 )]
@@ -60,6 +63,8 @@ roomColor = 2
 [node name="CellblockRoom12" parent="." index="8" instance=ExtResource( 2 )]
 self_modulate = Color( 1, 0.6, 0.6, 1 )
 position = Vector2( 128, 128 )
+roomName = "My cell"
+roomID = "cellblock_red_playercell"
 roomDescription = "((This will be your potential cell))"
 roomColor = 2
 
@@ -76,14 +81,18 @@ self_modulate = Color( 1, 0.8, 0.6, 1 )
 position = Vector2( -128, 128 )
 roomName = "My cell"
 roomID = "cellblock_orange_playercell"
-roomDescription = "Your cell is nothing special. An automatic door that can be opened and closed remotely and an armored window that anyone can see through. Walls are made out of some metal, using a spoon on them would only leave a visible scratch. Everything is well lit at least.
-
-One stiff-looking bed in the corner and a chair is all you get. You can rest here or hide something so you don't lose it during the personal searches."
 roomColor = 5
 
 [connection signal="onEnter" from="CBStairs1" to="." method="_on_CBStairs1_onEnter"]
 [connection signal="onReact" from="CBStairs1" to="." method="_on_CBStairs1_onReact"]
 [connection signal="onEnter" from="CBStairs2" to="." method="_on_CBStairs2_onEnter"]
 [connection signal="onReact" from="CBStairs2" to="." method="_on_CBStairs2_onReact"]
+[connection signal="onEnter" from="CellblockRoom6" to="." method="_on_CellblockRoom11_onEnter"]
+[connection signal="onPreEnter" from="CellblockRoom6" to="." method="_on_CellblockRoom11_onPreEnter"]
+[connection signal="onReact" from="CellblockRoom6" to="." method="_on_CellblockRoom11_onReact"]
+[connection signal="onEnter" from="CellblockRoom12" to="." method="_on_CellblockRoom11_onEnter"]
+[connection signal="onPreEnter" from="CellblockRoom12" to="." method="_on_CellblockRoom11_onPreEnter"]
+[connection signal="onReact" from="CellblockRoom12" to="." method="_on_CellblockRoom11_onReact"]
 [connection signal="onEnter" from="CellblockRoom11" to="." method="_on_CellblockRoom11_onEnter"]
+[connection signal="onPreEnter" from="CellblockRoom11" to="." method="_on_CellblockRoom11_onPreEnter"]
 [connection signal="onReact" from="CellblockRoom11" to="." method="_on_CellblockRoom11_onReact"]

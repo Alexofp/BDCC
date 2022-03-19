@@ -6,7 +6,7 @@ func _init():
 	sceneID = "IntroScene"
 
 func _initScene(_args = []):
-		var uniform = GlobalRegistry.createItem("inmateuniform_general")
+		var uniform = GlobalRegistry.createItem("inmateuniform")
 		
 		uniform.setPrisonerNumber(GM.pc.getFullInmateNumber())
 		
@@ -347,12 +347,16 @@ func _react(_action: String, _args):
 	
 	if(_action == "crime_innocent"):
 		setFlag(Flag.Player_Crime_Type, Flag.Crime_Type.Innocent)
+		GM.pc.setInmateType(InmateType.General)
 	if(_action == "crime_theft"):
 		setFlag(Flag.Player_Crime_Type, Flag.Crime_Type.Theft)
+		GM.pc.setInmateType(InmateType.General)
 	if(_action == "crime_murder"):
 		setFlag(Flag.Player_Crime_Type, Flag.Crime_Type.Murder)
+		GM.pc.setInmateType(InmateType.HighSec)
 	if(_action == "crime_prostitution"):
 		setFlag(Flag.Player_Crime_Type, Flag.Crime_Type.Prostitution)
+		GM.pc.setInmateType(InmateType.SexDeviant)
 	
 	setState(_action)
 

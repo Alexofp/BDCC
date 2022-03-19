@@ -104,7 +104,7 @@ func _run():
 		saynn("You take the offered pill and toss it into your mouth. You don’t really feel any different after it. The doc quickly gives you a visual checkup and puts some data into her tablet.")
 
 		# (if red)
-		if(getFlag(Flag.Player_Crime_Type) in [Flag.Crime_Type.Murder]):
+		if(GM.pc.getInmateType() == InmateType.HighSec):
 			saynn("[say=eliza]So you’re joining reds, huh. Just remember that others will fear you only if you don't show any weaknesses. Pink inmates are basically sextoys but that doesn’t mean they won’t get into a fight with you.[/say]")
 
 			saynn("[say=pc]I don’t think that this is your problem.[/say]")
@@ -112,7 +112,7 @@ func _run():
 			saynn("[say=eliza]Sewing you or any other inmate back together is my problem.[/say]")
 
 		# (if orange)
-		if(getFlag(Flag.Player_Crime_Type) in [Flag.Crime_Type.Innocent, Flag.Crime_Type.Theft]):
+		if(GM.pc.getInmateType() == InmateType.General):
 			saynn("[say=eliza]Listen. If you want to get out of here as fast as possible, the pink block is your best bet. Even if you don’t get paroled, you will at least get access to a better cell and comfortable furniture[/say]")
 
 			saynn("[say=pc]As a reward for letting others fuck me?[/say]")
@@ -120,7 +120,7 @@ func _run():
 			saynn("[say=eliza]You know, some like it. Just avoid the reds, most of them are psychopaths.[/say]")
 
 		# (if pink)
-		if(getFlag(Flag.Player_Crime_Type) == Flag.Crime_Type.Prostitution):
+		if(GM.pc.getInmateType() == InmateType.SexDeviant):
 			saynn("[say=eliza]You’re lucky to be a pink inmate. Spacious cell, comfy furniture, all of that. Though the catch is that others will see a sextoy in you so be careful. Maybe you will like it, I don’t know. And avoid the reds, they’re all psychopaths.[/say]")
 			
 		saynn("You watch the doctor put all her things away and then pull out a somewhat long chain.")
@@ -230,7 +230,7 @@ func _run():
 	if(state == "followtocell"):
 		GM.pc.playAnimation(TheStage.Walking)
 		
-		aimCamera("cellblock_orange_nearcell")
+		aimCamera("cellblock_nearcells")
 		setLocationName("Cellblock")
 		
 		saynn("[say=eliza]Here, that’s your cell[/say]")
@@ -250,7 +250,8 @@ func _run():
 	if(state == "walk_inside"):
 		removeCharacter("tavi")
 		removeCharacter("eliza")
-		aimCamera("cellblock_orange_playercell")
+		aimCamera(GM.pc.getCellLocation())
+		GM.pc.setLocation(GM.pc.getCellLocation())
 		setLocationName("My new home")
 		
 		saynn("You step into your cell and take a look around.")

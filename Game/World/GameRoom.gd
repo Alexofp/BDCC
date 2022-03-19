@@ -46,6 +46,7 @@ onready var roomSpriteObject = $Sprite
 onready var gridSprite = $Grid
 
 signal onEnter(room)
+signal onPreEnter(room)
 signal onReact(room, key)
 
 # Room tags
@@ -147,6 +148,10 @@ func addActions():
 					GM.ui.addButton(roomAction.ActionName, roomAction.ActionTooltip, "actionCallback", [roomAction.ActionScene])
 				else:
 					GM.ui.addDisabledButton(roomAction.ActionName, roomAction.ActionTooltip)
+
+func _onPreEnter():
+	emit_signal("onPreEnter", self)
+
 func _onEnter():
 	addActions()
 	

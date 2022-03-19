@@ -121,6 +121,23 @@ func equipItem(item):
 	#add_child(item)
 	emit_signal("equipped_items_changed")
 
+func forceEquipRemoveOther(item):
+	var slot = item.getClothingSlot()
+	
+	if(hasSlotEquipped(slot)):
+		removeItemFromSlot(slot)
+	
+	equipItem(item)
+
+func forceEquipStoreOther(item):
+	var slot = item.getClothingSlot()
+	
+	if(hasSlotEquipped(slot)):
+		var storedItem = removeItemFromSlot(slot)
+		addItem(storedItem)
+	
+	equipItem(item)
+
 func hasSlotEquipped(slot):
 	return equippedItems.has(slot) && equippedItems[slot] != null
 

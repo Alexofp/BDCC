@@ -231,7 +231,7 @@ func _run():
 		
 		saynn("The captain is done with typing in some info and the machine begins to work. Firstly, it produces something that looks like an inmate uniform. It consists of a shirt and shorts. Both are mostly made out of thick black cloth but there are some orange accent lines. It also has a number on it. “P-12054”")
 		
-		saynn("[say=captain]You’re not {pc.name} anymore. Now you’re an inmate number 12054, general block. Put it on.[/say]")
+		saynn("[say=captain]You’re not {pc.name} anymore. Now you’re an inmate number {pc.inmateNumber}, {pc.inmateType} block. Put it on.[/say]")
 		
 		saynn("[say=pc]Whatever you say[/say]")
 		
@@ -295,11 +295,12 @@ func _react(_action: String, _args):
 	if(_action == "aftershower"):
 		processTime(10 * 60)
 		
-		#var uniform = GlobalRegistry.createItem("inmateuniform_general")
+		var uniform = GlobalRegistry.createItem("inmateuniform")
 		
-		#uniform.setPrisonerNumber("P-12054")
+		uniform.setPrisonerNumber(GM.pc.getFullInmateNumber())
+		uniform.setInmateType(GM.pc.getInmateType())
 		
-		#GM.pc.getInventory().equipItem(uniform)
+		GM.pc.getInventory().forceEquipRemoveOther(uniform)
 		
 		addMessage("You're wearing an inmate uniform now")
 		
