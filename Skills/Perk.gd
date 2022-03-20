@@ -4,6 +4,7 @@ class_name Perk
 # Combat perks
 const CombatShove = "CombatShove"
 const CombatBetterBlock = "CombatBetterBlock"
+const CombatScratching = "CombatScratching"
 
 # Cum Lover perks
 const CumBreath = "CumBreath"

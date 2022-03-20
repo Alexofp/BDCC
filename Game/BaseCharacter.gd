@@ -547,6 +547,9 @@ func getFightState(_battleName):
 		
 	return getName() + " looks completely fine, no visible bruises or signs of lust"
 
+func getLoot(_battleName):
+	return {} #{"credits": 10, "items": []}
+
 func getBodypartTooltipName(_bodypartSlot):
 	return "error"
 

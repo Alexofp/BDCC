@@ -28,6 +28,14 @@ static func humanReadableList(arr: Array, andConnector: String = "and", commaCon
 			res += commaConnector + " "
 	return res
 
+# Util.multipleOrSingularEnding(1, "apple") = apple
+# Util.multipleOrSingularEnding(2, "apple") = apples
+static func multipleOrSingularEnding(value, word, wordMultiple = null):
+	if(value == 1):
+		return word
+	if(wordMultiple == null):
+		return word+"s"
+	return wordMultiple
 
 # https://godotengine.org/qa/20058/elegant-way-to-create-string-from-array-items
 static func join(arr: Array, separator: String = "") -> String:

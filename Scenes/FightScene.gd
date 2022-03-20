@@ -342,6 +342,15 @@ func afterTurnChecks():
 		setState("lost")
 	if(won == "win"):
 		setState("win")
+		
+		var loot:Dictionary = enemyCharacter.getLoot(battleName)
+		if(loot.has("credits")):
+			GM.pc.addCredits(loot["credits"])
+			addMessage("You looted a chip with "+str(loot["credits"])+" "+Util.multipleOrSingularEnding(loot["credits"], "credit"))
+		if(loot.has("items")):
+			for item in loot["items"]:
+				addMessage("You looted "+item.getAStackName())
+				GM.pc.getInventory().addItem(item)
 
 func checkEnd():
 	if(GM.pc.getPain() >= GM.pc.painThreshold()):

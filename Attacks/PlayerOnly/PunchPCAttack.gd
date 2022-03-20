@@ -6,7 +6,7 @@ func _init():
 	aiCategory = AICategory.Offensive
 	
 func getVisibleName():
-	if(GM.pc.hasPerk(Perk.CombatShove)):
+	if(GM.pc.hasPerk(Perk.CombatScratching)):
 		return "Scratch"
 	return "Punch"
 	
@@ -33,7 +33,7 @@ func _doAttack(_attacker, _reciever):
 	var text = RNG.pick(texts)
 	
 	if(RNG.chance(50)):
-		if(_attacker.getSkillsHolder().hasPerk(Perk.TestPerk)):
+		if(_attacker.getSkillsHolder().hasPerk(Perk.CombatScratching)):
 			_reciever.addEffect(StatusEffect.Bleeding)
 			text += "Sharp claws caused "+_reciever.himHer() + " to start [color=red]bleeding[/color]. "
 		

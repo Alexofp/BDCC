@@ -55,3 +55,6 @@ func getFightIntro(_battleName):
 	var mes = "Nova’s power armor lights up as she grabs her trusty stun baton and directs her attention to you."
 	mes += "\n\n"
 	return mes+formatSay("You have no right to remain silent, anything I say will be used against you. Come here, sweetie~")
+
+func getLoot(_battleName):
+	return {"credits": 1}

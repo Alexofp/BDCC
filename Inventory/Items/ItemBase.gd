@@ -19,6 +19,15 @@ func getStackName():
 	else:
 		return getVisibleName()
 
+func getA():
+	return "a"
+
+func getAStackName():
+	if(amount > 1):
+		return ""+str(amount)+"x"+getVisibleName()
+	else:
+		return (getA() + " " + getVisibleName()).trim_prefix(" ")
+
 func getDescription():
 	return "No description provided, please let the developer know"
 	

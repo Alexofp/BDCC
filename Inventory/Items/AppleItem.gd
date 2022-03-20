@@ -4,6 +4,7 @@ extends ItemBase
 func _init():
 	id = "appleitem"
 
+# apple is illegal only temporally as a test item
 func getVisibleName():
 	return "Stolen Apple"
 	
