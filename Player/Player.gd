@@ -686,9 +686,16 @@ func freeLegsDeleteAll():
 func freeEyesDeleteAll():
 	return getInventory().removeEquippedItemsWithBuff(Buff.BlindfoldBuff)
 
+func canUndress():
+	var slotsToCheck = [InventorySlot.Body, InventorySlot.UnderwearTop, InventorySlot.UnderwearBottom]
+	for slot in slotsToCheck:
+		if(getInventory().hasSlotEquipped(slot)):
+			return true
+	return false
+
 func getUndressMessage(withS):
 	var res = []
-	var slotsToCheck = [InventorySlot.Body]
+	var slotsToCheck = [InventorySlot.Body, InventorySlot.UnderwearTop, InventorySlot.UnderwearBottom]
 	
 	for slot in slotsToCheck:
 		if(getInventory().hasSlotEquipped(slot)):

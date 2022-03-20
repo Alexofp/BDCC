@@ -8,6 +8,9 @@ var npcStats = {}
 var npcLevel = 0
 var npcLustInterests = {}
 var npcArmor = {}
+var npcBasePain = null
+var npcBaseLust = null
+var npcBaseStamina = null
 
 func _ready():
 	name = id
@@ -74,3 +77,19 @@ func getArmor(_damageType):
 		calculatedArmor += npcArmor[_damageType]
 	
 	return calculatedArmor
+
+func getBaseMaxStamina() -> int:
+	if(npcBaseStamina != null):
+		return npcBaseStamina
+	return .getBaseMaxStamina()
+
+func getBasePainThreshold() -> int:
+	if(npcBasePain != null):
+		return npcBasePain
+	return .getBasePainThreshold()
+	
+func getBaseLustThreshold() -> int:
+	if(npcBaseLust != null):
+		return npcBaseLust
+	return .getBaseLustThreshold()
+	

@@ -192,9 +192,12 @@ func addButtonUnlessLate(text: String, tooltip: String = "", method: String = ""
 func addButtonWithChecks(text: String, tooltip: String, method: String, args, checks: Array):
 	var badCheck = ButtonChecks.check(checks)
 	if(badCheck == null):
-		addButton(text, tooltip, method, args)
+		addButton(text, ButtonChecks.getPrefix(checks) + tooltip, method, args)
 	else:
-		addDisabledButton(text, ButtonChecks.getReasonText(badCheck))
+		var reasonText = ButtonChecks.getReasonText(badCheck)
+		if(reasonText != ""):
+			reasonText = "["+reasonText+"] "
+		addDisabledButton(text, ButtonChecks.getPrefix(checks) + reasonText +tooltip)
 
 func addTextbox(id):
 	GM.ui.addUITextbox(id)

@@ -56,7 +56,12 @@ func _run():
 		saynn("What do you wanna do?")
 	if(state == ""):
 		addButtonUnlessLate("Get frisked", "Let him frisk you", "get_frisked")
-		addButtonWithChecks("Offer handjob", "Maybe he will let you through if you let his cock out (Needs free hands, Requires 10+ sexiness? Or sex slave level 2+?)", "offer_handjob", [], [ButtonChecks.NotArmsRestrained, ButtonChecks.NotLate])
+		addButtonWithChecks("Offer handjob", "Maybe he will let you through if you let his cock out", "offer_handjob", [], [
+			ButtonChecks.NotArmsRestrained,
+			ButtonChecks.NotLate,
+			[ButtonChecks.SkillCheck, Skill.SexSlave, 1],
+			])
+		addButton("Intimidate", "Try to scare him off. Might work if you have the right reputation", "intimidate")
 		addButton("Leave", "You don’t wanna get frisked", "leave")
 
 	if(state == "leave"):
@@ -128,7 +133,7 @@ func _run():
 
 		addButton("Outside", "Do the required minimum and avoid getting any mess on you", "outside")
 		addButton("Facial", "Let him cum on your face", "facial")
-		addButton("Mouth", "Why should you waste all that jizz, open your mouth and catch it", "mouth")
+		addButtonWithChecks("Mouth", "Why should you waste all that jizz, open your mouth and catch it", "mouth", [], [ButtonChecks.NotGagged])
 		
 	if(state == "outside"):
 		saynn("His cock throbs more, the knot is so fat you can’t wrap your digits around it. Only a few seconds pass before the guy starts grunting while his cock shoots spurts of cum, one after another. You sit slightly to the side and avoid all of the mess, watching the guy paint the opposite wall with thick jizz.")
@@ -163,7 +168,126 @@ func _run():
 		# (scene ends)
 		addButton("Continue", "That went well", "allowFullAndendthescene")
 
+		
+	if(state == "intimidate"):
+		saynn("[say=pc]How about you let me through peacefully.[/say]")
 
+		saynn("The guard straightens his posture and grabs his weapon.")
+
+		# (if red)
+		if(GM.pc.getInmateType() == InmateType.HighSec):
+			saynn("[say=cp_guard]Don’t think so, red. I’m not afraid of you.[/say]")
+
+		# (if general)
+		if(GM.pc.getInmateType() == InmateType.General):
+			saynn("[say=cp_guard]Disobeying inmate, huh. Time to teach you a lesson[/say]")
+
+		# (if pink)
+		if(GM.pc.getInmateType() == InmateType.SexDeviant):
+			saynn("[say=cp_guard]This slut has teeth? I will have so much fun with you[/say]")
+
+		saynn("Seems like it’s a fight.")
+		
+		addButton("Fight", "Start the fight", "fight")
+
+	if(state == "lost_fight"):
+		saynn("[say=cp_guard]You better start behaving now, inmate[/say]")
+
+		saynn("He pins you to the ground, you can’t really resist much.")
+
+		# (scene ends)
+		addButton("Continue", "Oh well", "leaveandendthescene")
+
+	if(state == "won_fight"):
+		saynn("The defeated guard sits on the floor, unable to continue fighting.")
+
+		saynn("[say=cp_guard]You got lucky today, inmate. But don’t think other guards won’t stop you.[/say]")
+
+		# (if pink)
+		if(GM.pc.getInmateType() == InmateType.SexDeviant):
+			saynn("[say=cp_guard]Defeated by some sextoy, fuck me[/say]")
+		
+		addButton("Walk away", "You got your pass, you can just go", "allowFullAndendthescene")
+		addButtonWithChecks("Catch anal", "Use the guy’s dick for your pleasure", "catch_anal", [], [ButtonChecks.NotArmsRestrained])
+
+	if(state == "catch_anal"):
+		saynn("You straddle the guy and unzip his pants, he seems more intrigued than scared, watching you. You of course made sure he can’t reach his weapons or the shock remote, rendering him helpless.")
+
+		saynn("[say=cp_guard]You could have asked, you know[/say]")
+
+		saynn("[say=pc]I like getting things the hard way[/say]")
+
+		saynn("[say=cp_guard]Oh yeah? I like the sound of that[/say]")
+
+		saynn("Your hand pulls out his cock and keeps stroking it until he becomes hard. His member has a pointy canine shape with a fat knot at the end and is pretty long, about 18cm. The guy smirks and tries to get a hold of your {pc.breasts} but you smack his hand away.")
+
+		# (if canUndress)
+		if(GM.pc.canUndress()):
+			saynn("You then {pc.undressMessage}. You leave your clothes nearby.")
+
+		saynn("You catch some of his precum with a few digits, then move them to your butt and rub it into your backdoor. Then you grab his cock and guide it towards your rear while slowly lowering yourself onto him. His cock slowly starts to prod and stretch your ring open. A few more attempts and you manage to do it, the tip of his cock is inside you.")
+
+		# (if has cock)
+		if(GM.pc.hasPenis()):
+			saynn("Your own {pc.cock} gets hard too without you even touching it, a lonely drop of pre can be seen shining on its end.")
+
+		# (if has vagina)
+		if(GM.pc.hasVagina()):
+			saynn("Your slit doesn’t get any attention but it becomes wet just from you feeling so aroused.")
+
+		saynn("[say=cp_guard]Don’t stop now, slut[/say]")
+
+		saynn("He puts his hands on your {pc.feminine} hips and pushes you down, helping his cock to slide deeper into you. You let out a cute noise and bite your lips as your ring gets stretched enough to fit about half of his length.")
+
+		# (if has cock)
+		if(GM.pc.hasPenis()):
+			saynn("You can feel how it rubs against something very sensitive inside you, any motion causes your cock to leak with some transparent fluid.")
+
+		# (if has vagina)
+		if(GM.pc.hasVagina()):
+			saynn("The cock is so filling that you feel it pushing on your g-spot through the wall that divides your pussy and anus.")
+
+		saynn("You don’t stop, you slowly start riding him, moving your {pc.thick} {pc.feminine} body up down his cock, each time trying to stretch yourself out more, his precum works as a lube and makes riding the guard easier. It feels very pleasurable, you open your mouth and start moaning, your hands land on your chest and start playing with your sensitive nips.")
+
+		# (if has cock)
+		if(GM.pc.hasPenis()):
+			saynn("Your own {pc.cockDesc} cock bobs up and down, your little prostate is being massaged so much, you can’t stop leaking.")
+
+		# (if has vagina)
+		if(GM.pc.hasVagina()):
+			saynn("Your pussy drips with female juices, it’s not being directly stimulated but it feels so good anyways.")
+
+		saynn("You push yourself further, getting almost his full size! Your ring got stretched enough and all the precum that he has been pumping into you allows you to start bouncing on his cock faster. You drool and pant, your digits pinch your sensitive nips while you ride him completely hands-free, it feels so great. The guy pants too, his hands pull you up and down, making your motions stronger.")
+
+		saynn("[say=pc]Fuck me, you’re a good fill[/say]")
+
+		saynn("[say=cp_guard]And you’re not getting off without me stuffing you[/say]")
+
+		# (if has cock)
+		if(GM.pc.hasPenis()):
+			saynn("Your {pc.cockSize} toy throbs and becomes rock-hard, the guard’s cock has been pounding on your prostate so much that you feel like you’re about to go over the edge at any moment.")
+
+		saynn("You’re close. And so is he. You feel his canine member becoming bigger inside your rectum, his knot inflates with blood and stretches you out even more but doesn’t quite fit. Your moans and pants don’t stop coming out, you press your hands into the guard’s chest and start bringing yourself down onto his cock with extra strength, your anal ring letting more and more of his knot in each time. With one last push you manage to finally squeeze it in, the full size of his fat orb slides inside you, locking you two together. That is what pushes you both over the edge, the guy grunts as his cock starts shooting hot sticky cum inside you, stuffing you. You moan and shiver, your legs shake, your hands hold tightly onto him.")
+
+		# (if has cock)
+		if(GM.pc.hasPenis()):
+			saynn("Your little p-spot is smashed, the pressure is enough to make your {pc.cockDesc} cock pulsate and shoot cum too. Not as much but it’s almost a constant stream. You’re riding your own hands-free orgasm and it feels great.")
+
+		# (if has vagina)
+		if(GM.pc.hasVagina()):
+			saynn("Your g-spot was rubbed so much through the flesh wall that your pussy starts squirting from over-stimulation. Wow, you managed to get a vaginal orgasm from anal.")
+
+		saynn("You both pant heavily as you come down from your peaks. You look down at your belly and see a bulge on your belly. You try to stand up but realize that you can’t.")
+
+		saynn("[say=cp_guard]Wow, you’re such a buttslut. And now you’re stuck on my cock. Works better than any handcuffs[/say]")
+
+		saynn("[say=pc]Oh yeah? I can keep going until you give up then.[/say]")
+
+		saynn("[say=cp_guard]You lucky slut[/say]")
+
+		saynn("You’re stuck together for about 30 minutes. In public. You do get many eyes from other inmates but for them it's almost a normal sight. Eventually the knot deflates enough to let you get up, your used butthole looks stretched and is leaking cum. Time to run before someone makes you clean the mess you made.")
+		
+		addButton("Walk away", "Yay", "allowFullAndendthescene")
 
 func _react(_action: String, _args):
 	if(_action == "get_frisked"):
@@ -208,6 +332,40 @@ func _react(_action: String, _args):
 		endScene()
 		return
 
+	if(_action == "fight"):
+		runScene("FightScene", ["cp_guard"], "cpguardfight")
+	
+	if(_action == "catch_anal"):
+		processTime(30 * 60)
+		
+		GM.pc.cummedInAnusBy("cp_guard")
+		GM.pc.orgasmFrom("cp_guard")
+		GM.pc.addSkillExperience(Skill.CumLover, 20, "cpguard_catchanal")
+		GM.pc.addSkillExperience(Skill.SexSlave, 30, "cpguard_catchanal")
+		GM.pc.updateNonBattleEffects()
 	
 	setState(_action)
 
+
+func _react_scene_end(_tag, _result):
+	if(_tag == "cpguardfight"):
+		processTime(20 * 60)
+		var battlestate = _result[0]
+		#var wonHow = _result[1]
+		
+		if(battlestate == "win"):
+			setState("won_fight")
+			addExperienceToPlayer(30)
+		else:
+			setState("lost_fight")
+			addExperienceToPlayer(5)
+			
+			if(!GM.pc.isGagged()):
+				GM.pc.getInventory().forceEquipStoreOther(GlobalRegistry.createItem("ballgag"))
+				addMessage("A gag was forced on you by a guard!")
+			elif(!GM.pc.hasBoundLegs()):
+				GM.pc.getInventory().forceEquipStoreOther(GlobalRegistry.createItem("inmateanklecuffs"))
+				addMessage("Your ankles got cuffed by a guard!")
+			elif(!GM.pc.isBlindfolded()):
+				GM.pc.getInventory().forceEquipStoreOther(GlobalRegistry.createItem("blindfold"))
+				addMessage("A blindfold was forced on you by a guard!")

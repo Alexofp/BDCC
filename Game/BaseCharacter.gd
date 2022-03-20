@@ -89,8 +89,11 @@ func getLust() -> int:
 func getStamina() -> int:
 	return stamina
 	
+func getBaseMaxStamina() -> int:
+	return 100
+	
 func getMaxStamina() -> int:
-	return int(max(0, 100 + skillsHolder.getExtraStamina() + buffsHolder.getExtraStamina()))
+	return int(max(0, getBaseMaxStamina() + skillsHolder.getExtraStamina() + buffsHolder.getExtraStamina()))
 	
 func getName() -> String:
 	return name
@@ -98,11 +101,17 @@ func getName() -> String:
 func getSmallDescription() -> String:
 	return "Test test test"
 
+func getBasePainThreshold() -> int:
+	return 100
+
 func painThreshold() -> int:
-	return int(max(10, 100 + skillsHolder.getExtraPainThreshold() + buffsHolder.getExtraPainThreshold()))
+	return int(max(10, getBasePainThreshold() + skillsHolder.getExtraPainThreshold() + buffsHolder.getExtraPainThreshold()))
+
+func getBaseLustThreshold() -> int:
+	return 100
 
 func lustThreshold() -> int:
-	return int(max(10, 100 + skillsHolder.getExtraLustThreshold() + buffsHolder.getExtraLustThreshold()))
+	return int(max(10, getBaseLustThreshold() + skillsHolder.getExtraLustThreshold() + buffsHolder.getExtraLustThreshold()))
 
 func getPainLevel():
 	return float(getPain()) / float(painThreshold())
