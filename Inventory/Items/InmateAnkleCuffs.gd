@@ -22,3 +22,6 @@ func getTakeOffScene():
 
 func getTags():
 	return [ItemTag.BDSMRestraint]
+
+func isRestraint():
+	return true

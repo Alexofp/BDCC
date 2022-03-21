@@ -5,10 +5,15 @@ var id = "baditem"
 var uniqueID = null
 var amount = 1
 var currentInventory = null
+var restraintData: RestraintData
 
 func _init():
 	if(uniqueID == null):
 		uniqueID = "item"+str(GlobalRegistry.generateUniqueID())
+	if(isRestraint()):
+		restraintData = RestraintData.new()
+		restraintData.item = self
+		generateRestraintData()
 
 func getVisibleName():
 	return "Bad item"
@@ -158,3 +163,20 @@ func hasTag(tag):
 	if(getTags().has(tag)):
 		return true
 	return false
+
+func isRestraint():
+	return false
+
+func generateRestraintData():
+	restraintData.setLevel(1)
+
+func getRestraintData() -> RestraintData:
+	return restraintData
+
+func getRestraintActions():
+	return [
+		#RestraintAction.Bite,
+		RestraintAction.ShakeOff,
+		#RestraintAction.WiggleOutOf,
+		
+	]

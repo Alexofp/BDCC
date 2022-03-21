@@ -33,6 +33,7 @@ func _run():
 		addDisabledButtonAt(12, "East", "Can't go east")
 	#addDisabledButton("bark", "no awo")
 	
+	addButtonAt(8, "Struggle", "Struggle against your restraints", "struggle")
 	addButtonAt(13, "Tasks", "Look at your tasks", "tasks")
 	addButtonAt(14, "Inventory", "Look at your inventory", "inventory")
 	
@@ -88,6 +89,8 @@ func _react(_action: String, _args):
 		runScene("InventoryScene")
 	if(_action == "tasks"):
 		runScene("QuestLogScene")
+	if(_action == "struggle"):
+		runScene("StrugglingScene")
 
 func _react_scene_end(_tag, _result):
 	GM.ES.triggerOnlyDelayed(Trigger.EnteringRoom, GM.pc.location)

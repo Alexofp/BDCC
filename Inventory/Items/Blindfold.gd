@@ -25,3 +25,12 @@ func canSell():
 
 func getTags():
 	return [ItemTag.BDSMRestraint]
+
+func isRestraint():
+	return true
+
+func generateRestraintData():
+	restraintData.setLevel(RNG.randi_range(1, 5))
+	restraintData.canAlwaysInspect = true
+	restraintData.setMaterial(RestraintMaterial.Cloth)
+	

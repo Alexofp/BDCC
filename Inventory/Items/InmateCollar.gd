@@ -18,3 +18,6 @@ func getBuffs():
 
 func getTakeOffScene():
 	return "CollarTuggingScene"
+
+func isRestraint():
+	return true

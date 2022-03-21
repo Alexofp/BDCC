@@ -52,3 +52,6 @@ func canSell():
 
 func getTags():
 	return [ItemTag.BDSMRestraint]
+
+func isRestraint():
+	return true

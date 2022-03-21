@@ -232,6 +232,14 @@ func getEquippedItemsWithTag(tag):
 			result.append(item)
 	return result
 	
+func getEquppedRestraints():
+	var result = []
+	
+	for itemSlot in equippedItems:
+		var item = equippedItems[itemSlot]
+		if(item.isRestraint()):
+			result.append(item)
+	return result
 
 func saveData():
 	var data = {}
