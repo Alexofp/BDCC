@@ -21,3 +21,6 @@ func getTakeOffScene():
 
 func isRestraint():
 	return true
+
+func generateRestraintData():
+	restraintData = RestraintUnremovable.new()

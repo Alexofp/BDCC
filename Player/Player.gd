@@ -483,6 +483,8 @@ func afterSleepingInBed():
 	addStamina(getMaxStamina())
 	addPain(-100)
 	skillsHolder.onNewDay()
+	for item in getInventory().getEquppedRestraints():
+		item.getRestraintData().resetOnNewDay()
 
 func afterRestingInBed(seconds):
 	var _hours = floor(seconds/3600.0)

@@ -55,3 +55,7 @@ func getTags():
 
 func isRestraint():
 	return true
+
+func generateRestraintData():
+	restraintData = RestraintBallGag.new()
+	restraintData.setLevel(RNG.randi_range(1, 5))

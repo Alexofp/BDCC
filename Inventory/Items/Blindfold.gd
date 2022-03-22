@@ -30,7 +30,6 @@ func isRestraint():
 	return true
 
 func generateRestraintData():
+	restraintData = RestraintBlindfold.new()
 	restraintData.setLevel(RNG.randi_range(1, 5))
-	restraintData.canAlwaysInspect = true
-	restraintData.setMaterial(RestraintMaterial.Cloth)
 	

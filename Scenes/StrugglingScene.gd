@@ -1,7 +1,7 @@
 extends "res://Scenes/SceneBase.gd"
 var inspectedRestraintID = ""
-var noiseLevel = 0
 var actionText = ""
+var struggleText = ""
 
 func _init():
 	sceneID = "StrugglingScene"
@@ -15,95 +15,82 @@ func _initScene(_args = []):
 
 func _run():
 	if(state == ""):
-		saynn("Noise level: "+str(noiseLevel))
+		var isBlind = GM.pc.isBlindfolded()
+		saynn("Pick the restraint you wanna focus on. Keep in mind that some restraints will be harder to remove depending on what you have on. Crying from pain or moaning loudly from an orgasm will probably attract someone")
+		
+		#addButtonAt(13, "Inspect", "Inspect one of the restraints", "inspect")
+		addButtonAt(14, "Give up", "Not worth it", "endthescene")
 		
 		for item in GM.pc.getInventory().getEquppedRestraints():
 			var restraintData: RestraintData = item.getRestraintData()
 			
-			sayn(item.getVisibleName()+", restraint level: "+restraintData.getVisibleLevel())
-			sayn("- Durability: "+restraintData.getVisibleDurability())
-			sayn("- Tightness: "+restraintData.getVisibleTightness())
-				
-		addButtonAt(13, "Inspect", "Inspect one of the restraints", "inspect")
-		addButtonAt(14, "Give up", "Not worth it", "endthescene")
-		
-		generateActions()
-		
-	if(state == "inspect"):
-		saynn("Which one do you wanna inspect")
-		
-		for item in GM.pc.getInventory().getEquppedRestraints():
-			addButton(item.getVisibleName(), item.getVisisbleDescription(), "doinspect", [item.getUniqueID()])
-		addButton("Back", "You don't wanna inspect anything", "")
-		
-	if(state == "inspectBlind"):
-		saynn("You try to take a closer look at the restraint but not being able to see makes it impossible to gather any information")
-		
-		addButton("Continue", "Oh no. I bet I can inspect the blindfold itself though", "")
+			sayn(item.getVisibleName()+", restraint level: "+restraintData.getVisibleLevel(isBlind))
+			#sayn("- Durability: "+restraintData.getVisibleDurability())
+			saynn("- Tightness: "+restraintData.getVisibleTightness()+" ("+restraintData.getTightnessPercentString()+")")
+			
+			if(!restraintData.canStruggle()):
+				continue
+			
+			if(GM.pc.getStamina() > 0):
+				addButton(item.getVisibleName(), "Focus on this restraint", "struggleAgainst", [item.getUniqueID()])
+			else:
+				addDisabledButton(item.getVisibleName(), "You are out of stamina")
 
-	if(state == "inspectGood"):
-		var item = GM.pc.getInventory().getItemByUniqueID(inspectedRestraintID)
-		var restraintData: RestraintData = item.getRestraintData()
 		
-		saynn("You managed to inspect the "+item.getVisibleName())
-		saynn("It's level is "+str(restraintData.getLevel()))
-		saynn("It's made out of "+restraintData.getMaterialName()+" material")
+		#generateActions()
 		
-		addButton("Continue", "Nice", "")
-	if(state == "doaction"):
-		saynn(actionText)
+#	if(state == "inspect"):
+#		saynn("Which one do you wanna inspect")
+#
+#		for item in GM.pc.getInventory().getEquppedRestraints():
+#			addButton(item.getVisibleName(), item.getVisisbleDescription(), "doinspect", [item.getUniqueID()])
+#		addButton("Back", "You don't wanna inspect anything", "")
+#
+
+	if(state == "struggleAgainst"):
+		saynn(struggleText)
+
 		
-		addButton("Continue", "Nice", "")
+		addButton("Continue", "Okay", "")
+		
+
 
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
 		endScene()
 		return
-	if(_action == "doinspect"):
-		inspectedRestraintID = _args[0]
-		var item = GM.pc.getInventory().getItemByUniqueID(inspectedRestraintID)
+
+	if(_action == "struggleAgainst"):
+		var item = GM.pc.getInventory().getItemByUniqueID(_args[0])
 		var restraintData: RestraintData = item.getRestraintData()
 		
-		if(GM.pc.isBlindfolded() && !restraintData.canInspectWhileBlindfolded()):
-			setState("inspectBlind")
-		else:
-			restraintData.inspect()
-			setState("inspectGood")
-		processStruggleTurn()
-		return
-	if(_action == "doaction"):
-		var action: RestraintActionBase = _args[0]
-		var item = _args[1]
+		var struggleData = restraintData.doStruggle(GM.pc)
+		if(struggleData.has("damage")):
+			restraintData.takeDamage(struggleData["damage"])
+		if(struggleData.has("lust") && struggleData["lust"] > 0):
+			GM.pc.addLust(struggleData["lust"])
+			addMessage("You recieved "+str(struggleData["lust"])+" lust")
+		if(struggleData.has("pain") && struggleData["pain"] > 0):
+			GM.pc.addPain(struggleData["pain"])
+			addMessage("You recieved "+str(struggleData["pain"])+" pain")
+		if(struggleData.has("stamina") && struggleData["stamina"] != 0):
+			var addStamina = -struggleData["stamina"]
+			GM.pc.addStamina(addStamina)
+			if(addStamina >= 0):
+				addMessage("You gained "+str(addStamina)+" stamina")
+			else:
+				addMessage("You used "+str(-addStamina)+" stamina")
 		
-		var result = action.doAction(item)
-		actionText = result["text"]
-		if(result.has("noise")):
-			noiseLevel += result["noise"]
-	
+		struggleText = struggleData["text"]
+		
+		if(restraintData.shouldBeRemoved()):
+			struggleText += "\n[b]"+restraintData.getRemoveMessage()+"[/b]"
+			GM.pc.getInventory().removeEquippedItem(item)
+			GM.pc.getInventory().addItem(item)
+		
+		processStruggleTurn()
 	setState(_action)
 
 func processStruggleTurn():
 	pass
-
-func generateActions():
-	
-	var allActions = []
-	for item in GM.pc.getInventory().getEquppedRestraints():
-		var restraintData: RestraintData = item.getRestraintData()
-		
-		var actions = restraintData.getPossibleActions()
-		for action in actions:
-			allActions.append([item, action])
-		
-	allActions.shuffle()
-	var maxItems = 3
-	var i = 0
-	for actionData in allActions:
-		var item = actionData[0]
-		var action: RestraintActionBase = GlobalRegistry.createRestraintAction(actionData[1])
-		
-		addButton(action.getVisibleName(item), action.getVisibleDescription(item), "doaction", [action, item])
-		i += 1
-		if(i >= maxItems):
-			break

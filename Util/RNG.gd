@@ -6,6 +6,9 @@ static func randi_range(from: int, to: int) -> int:
 	assert(to >= from)
 	return from + (randi() % (to - from + 1))
 
+static func randf_range(from: float, to: float) -> float:
+	return rand_range(from, to)
+
 # chance(100) will always be true
 # chance(3) will be true 3% of the time
 static func chance(ch: float) -> bool:

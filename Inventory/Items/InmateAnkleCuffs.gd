@@ -25,3 +25,7 @@ func getTags():
 
 func isRestraint():
 	return true
+
+func generateRestraintData():
+	restraintData = RestraintLegCuffs.new()
+	restraintData.setLevel(RNG.randi_range(1, 5))
