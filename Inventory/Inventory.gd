@@ -257,6 +257,15 @@ func getEquppedRestraints():
 			result.append(item)
 	return result
 
+func hasRemovableRestraints():
+	for itemSlot in equippedItems:
+		var item = equippedItems[itemSlot]
+		if(item.isRestraint()):
+			var restraintData = item.getRestraintData()
+			if(restraintData.canStruggle()):
+				return true
+	return false
+
 func saveData():
 	var data = {}
 	

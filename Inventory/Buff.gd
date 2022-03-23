@@ -19,6 +19,7 @@ const ExposureBuff = "exposureBuff"
 
 const GagBuff = "gagBuff"
 const RestrainedArmsBuff = "restrainsArmsBuff"
+const BlockedHandsBuff = "blockedHandsBuff"
 const RestrainedLegsBuff = "restrainsLegsBuff"
 const BlindfoldBuff = "blindfoldBuff"
 

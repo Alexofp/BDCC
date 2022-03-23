@@ -6,14 +6,17 @@ func _init():
 
 func _run():
 	if(state == ""):
-		if(GM.pc.hasBoundArms()):
-			saynn("You really try to put that on but your bound arms prevent you from doing so")
+		if(GM.pc.hasBlockedHands()):
+			saynn("You really try to put that on but your blocked hands prevent you from doing so")
 			
 			addButton("Continue", "Aww", "endthescene")
 		else:
 			var item: ItemBase = GM.pc.getInventory().getItemByUniqueID(sceneArgs[0])
 			
-			saynn("You "+item.getPuttingOnStringLong(false))
+			if(GM.pc.hasBoundArms()):
+				saynn("It's very awkward to do with bound arms but you just about managed. You "+item.getPuttingOnStringLong(false))
+			else:
+				saynn("You "+item.getPuttingOnStringLong(false))
 
 			addButton("Continue", "You put on an item", "putonandendthescene")
 

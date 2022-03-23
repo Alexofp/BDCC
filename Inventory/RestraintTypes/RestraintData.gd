@@ -12,6 +12,9 @@ func resetOnNewTry():
 	pass
 	#tightness = 1
 
+func onStruggleRemoval():
+	tightness = 1
+
 func setLevel(newlevel):
 	level = newlevel
 	
@@ -47,8 +50,12 @@ func getRemoveMessage():
 func canStruggle():
 	return true
 
+func failChance(chance):
+	return RNG.chance(chance)
+
 func doStruggle(_pc):
-	var _handsFree = !_pc.hasBoundArms()
+	var _handsFree = !_pc.hasBlockedHands()
+	var _armsFree = !_pc.hasBoundArms()
 	var _legsFree = !_pc.hasBoundLegs()
 	var _canSee = !_pc.isBlindfolded()
 	var _canBite = !_pc.isGagged()
@@ -66,6 +73,9 @@ func doStruggle(_pc):
 	#damage = calcDamage()
 	
 	return {"text": text, "damage": damage, "lust": lust, "pain": pain, "stamina": stamina}
+
+func processStruggleTurn():
+	return null#{"text": "TEST "+item.getVisibleName()}
 
 func getVisibleTightness():
 	if(tightness > 0.9):

@@ -57,7 +57,7 @@ func _run():
 	if(state == ""):
 		addButtonUnlessLate("Get frisked", "Let him frisk you", "get_frisked")
 		addButtonWithChecks("Offer handjob", "Maybe he will let you through if you let his cock out", "offer_handjob", [], [
-			ButtonChecks.NotArmsRestrained,
+			ButtonChecks.NotHandsBlocked,
 			ButtonChecks.NotLate,
 			[ButtonChecks.SkillCheck, Skill.SexSlave, 1],
 			])
@@ -208,7 +208,7 @@ func _run():
 			saynn("[say=cp_guard]Defeated by some sextoy, fuck me[/say]")
 		
 		addButton("Walk away", "You got your pass, you can just go", "allowFullAndendthescene")
-		addButtonWithChecks("Catch anal", "Use the guy’s dick for your pleasure", "catch_anal", [], [ButtonChecks.NotArmsRestrained])
+		addButtonWithChecks("Catch anal", "Use the guy’s dick for your pleasure", "catch_anal", [], [ButtonChecks.NotHandsBlocked])
 
 	if(state == "catch_anal"):
 		saynn("You straddle the guy and unzip his pants, he seems more intrigued than scared, watching you. You of course made sure he can’t reach his weapons or the shock remote, rendering him helpless.")

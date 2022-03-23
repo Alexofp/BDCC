@@ -147,6 +147,9 @@ func _getAttacks():
 func hasBoundArms():
 	return buffsHolder.hasBuff(Buff.RestrainedArmsBuff)
 
+func hasBlockedHands():
+	return buffsHolder.hasBuff(Buff.BlockedHandsBuff)
+
 func hasBoundLegs():
 	return buffsHolder.hasBuff(Buff.RestrainedLegsBuff)
 
@@ -170,6 +173,11 @@ func updateNonBattleEffects():
 		addEffect(StatusEffect.ArmsBound)
 	else:
 		removeEffect(StatusEffect.ArmsBound)
+		
+	if(hasBlockedHands()):
+		addEffect(StatusEffect.HandsBlocked)
+	else:
+		removeEffect(StatusEffect.HandsBlocked)
 			
 	if(hasBoundLegs()):
 		addEffect(StatusEffect.LegsBound)

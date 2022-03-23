@@ -246,9 +246,9 @@ func _run():
 
 		addButton("Submit", "Maybe you went too far..", "submit2")
 		addButton("Walk away", "Leave Tavi", "walk_away")
-		addButtonWithChecks("Dominate Tavi", "Make that bitch submit to you using violence", "dominateTavi", [], [ButtonChecks.NotArmsRestrained])
+		addButtonWithChecks("Dominate Tavi", "Make that bitch submit to you using violence", "dominateTavi", [], [ButtonChecks.NotHandsBlocked])
 		if(getFlag(TaviModule.Tavi_Submissiveness, 0) >= 1):
-			addButtonWithChecks("Degrade Tavi", "Force her to act like a puppy", "degradeTavi", [], [ButtonChecks.NotArmsRestrained])
+			addButtonWithChecks("Degrade Tavi", "Force her to act like a puppy", "degradeTavi", [], [ButtonChecks.NotHandsBlocked])
 		else:
 			addDisabledButton("Degrade Tavi", "Tavi needs to be at least a little bit obedient")
 		addDisabledButton("Fuck Tavi", "Not done :(")

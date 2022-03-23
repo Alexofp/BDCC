@@ -1,6 +1,16 @@
 extends "res://Scenes/SceneBase.gd"
 
-var sellingItems = ["ballgag", "appleitem", "blindfold", "policecuffs", "inmatewristcuffs", "inmateanklecuffs"]
+var sellingItems = [
+	"ballgag",
+	"appleitem",
+	"blindfold",
+	"policecuffs",
+	"inmatewristcuffs",
+	"inmateanklecuffs",
+	"buttplug",
+	"bondagemittens",
+	"vaginalplug",
+	]
 var sellItemsData = {}
 
 func _init():

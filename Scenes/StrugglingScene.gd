@@ -2,6 +2,7 @@ extends "res://Scenes/SceneBase.gd"
 var inspectedRestraintID = ""
 var actionText = ""
 var struggleText = ""
+var additionalStruggleText = ""
 
 func _init():
 	sceneID = "StrugglingScene"
@@ -49,16 +50,37 @@ func _run():
 
 	if(state == "struggleAgainst"):
 		saynn(struggleText)
-
 		
-		addButton("Continue", "Okay", "")
+		if(additionalStruggleText != ""):
+			saynn(additionalStruggleText)
+		
+		addButton("Continue", "Okay", "checkifokay")
 		
 
+	if(state == "orgasm"):
+		saynn("It's too much, you arch your back and moan loudly as you cum. You were so loud that someone might have heard that. (Temporary text)")
+		
+		addButton("Continue", "Oh no", "spottedcheck")
 
+	if(state == "notspotted"):
+		saynn("Seems like no one saw or heard you. Phew")
+		
+		if(GM.pc.getPain() >= GM.pc.painThreshold()):
+			saynn("But you can't continue, you're in too much pain")
+			
+			addButton("Continue", "Aw", "endthescene")
+		else:
+			addButton("Continue", "Good", "")
+		
+	if(state == "toopainful"):
+		saynn("It's too painful! You let out a desperate cry. You were so loud that someone might have heard that. (Temporary text)")
+
+		addButton("Continue", "Oh no", "spottedcheck")
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
 		endScene()
+		setFlag(Flag.Game_LastTimeStruggled, GM.main.getTime())
 		return
 
 	if(_action == "struggleAgainst"):
@@ -86,11 +108,49 @@ func _react(_action: String, _args):
 		
 		if(restraintData.shouldBeRemoved()):
 			struggleText += "\n[b]"+restraintData.getRemoveMessage()+"[/b]"
+			restraintData.onStruggleRemoval()
 			GM.pc.getInventory().removeEquippedItem(item)
 			GM.pc.getInventory().addItem(item)
 		
 		processStruggleTurn()
+		processTime(1*60)
+		
+	if(_action == "checkifokay"):
+		if(GM.pc.getLust() >= GM.pc.lustThreshold()):
+			setState("orgasm")
+			GM.pc.orgasmFrom("pc")
+			return
+		if(GM.pc.getPain() >= GM.pc.painThreshold()):
+			setState("toopainful")
+			return
+		setState("")
+		return
+		
+	if(_action == "spottedcheck"):
+		setState("notspotted")
+		return
+		
 	setState(_action)
 
 func processStruggleTurn():
-	pass
+	additionalStruggleText = ""
+	
+	for item in GM.pc.getInventory().getEquppedRestraints():
+		var restraintData: RestraintData = item.getRestraintData()
+		var struggleData = restraintData.processStruggleTurn()
+		
+		if(struggleData == null):
+			continue
+			
+		if(struggleData.has("damage")):
+			restraintData.takeDamage(struggleData["damage"])
+		if(struggleData.has("lust")):
+			GM.pc.addLust(struggleData["lust"])
+		if(struggleData.has("pain")):
+			GM.pc.addPain(struggleData["pain"])
+		if(struggleData.has("stamina")):
+			var addStamina = -struggleData["stamina"]
+			GM.pc.addStamina(addStamina)
+		if(struggleData.has("text")):
+			additionalStruggleText += struggleData["text"] + "\n\n"
+		

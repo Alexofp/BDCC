@@ -76,7 +76,7 @@ func _run():
 				addDisabledButton(item.getVisibleName(), "This item's slot is already occupied")
 				continue
 			if(!GM.pc.invCanEquipSlot(slot)):
-				addDisabledButton(item.getVisibleName(), "You can't put this item on")
+				addDisabledButton(item.getVisibleName(), "You can't equip this item")
 				continue
 			
 			addButton(item.getVisibleName(), item.getVisisbleDescription(), "puton", [item.getUniqueID()])

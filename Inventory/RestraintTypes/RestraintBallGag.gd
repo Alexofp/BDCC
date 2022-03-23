@@ -3,7 +3,8 @@ class_name RestraintBallGag
 
 
 func doStruggle(_pc):
-	var _handsFree = !_pc.hasBoundArms()
+	var _handsFree = !_pc.hasBlockedHands()
+	var _armsFree = !_pc.hasBoundArms()
 	var _legsFree = !_pc.hasBoundLegs()
 	var _canSee = !_pc.isBlindfolded()
 	var _canBite = !_pc.isGagged()

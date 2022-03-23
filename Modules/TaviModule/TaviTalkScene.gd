@@ -86,9 +86,9 @@ func _run():
 		saynn("[say=tavi]What are you gonna do with me now, silly thing..[/say]")
 		
 	if(state == "won_fight" || state == "won_fight_lust"):
-		addButtonWithChecks("Dominate Tavi", "Make that bitch submit to you using violence", "dominateTavi", [], [ButtonChecks.NotArmsRestrained])
+		addButtonWithChecks("Dominate Tavi", "Make that bitch submit to you using violence", "dominateTavi", [], [ButtonChecks.NotHandsBlocked])
 		if(getFlag(TaviModule.Tavi_Submissiveness, 0) >= 1):
-			addButtonWithChecks("Degrade Tavi", "Force her to act like a puppy", "degradeTavi", [], [ButtonChecks.NotArmsRestrained])
+			addButtonWithChecks("Degrade Tavi", "Force her to act like a puppy", "degradeTavi", [], [ButtonChecks.NotHandsBlocked])
 		else:
 			addDisabledButton("Degrade Tavi", "Tavi needs to be at least a little bit obedient")
 		addDisabledButton("Fuck Tavi", "Not done :(")

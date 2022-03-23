@@ -8,7 +8,7 @@ func getVisibleName():
 	return "True sight"
 
 func getVisibleDescription():
-	return "You got used to wearing tight blindfolds that you can't see through. But you don't need eyes to see anymore. By using your others senses you learned to orient yourself in almost any space"
+	return "You got used to being blindfolded, you learned to not rely on your eyes as much anymore. By using your others senses you can orient yourself in almost any space"
 
 func getCost():
 	return 1

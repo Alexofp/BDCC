@@ -48,6 +48,7 @@ func _ready():
 	
 	registerItemFolder("res://Inventory/Items/")
 	registerItemFolder("res://Inventory/Items/Underwear/")
+	registerItemFolder("res://Inventory/Items/BDSM/")
 	
 	registerBuffFolder("res://Inventory/Buffs/")
 	

@@ -1,7 +1,7 @@
 extends StatusEffectBase
 
 func _init():
-	id = StatusEffect.ArmsBound
+	id = StatusEffect.HandsBlocked
 	isBattleOnly = false
 	
 func initArgs(_args = []):
@@ -14,13 +14,13 @@ func processTime(_minutesPassed: int):
 	pass
 
 func getEffectName():
-	return "Bound arms"
+	return "Blocked hands"
 
 func getEffectDesc():
-	return "Your arms are bound together. You can't use them for combat but you can still do most tasks that require them"
+	return "You can't use your hands. You can still punch but most tasks that require you to use your fingers are impossible"
 
 func getEffectImage():
-	return "res://UI/StatusEffectsPanel/images/cuffshands.png"
+	return "res://UI/StatusEffectsPanel/images/mittens.png"
 
 func getIconColor():
 	return IconColorPurple
