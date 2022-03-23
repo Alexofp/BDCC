@@ -11,8 +11,10 @@ func _run():
 		
 		say("Your equipped items:\n")
 		for slot in InventorySlot.getAll():
-			if(!GM.pc.getInventory().hasSlotEquipped(slot)):
+			if(!GM.pc.getInventory().hasSlotEquipped(slot) && GM.pc.invCanEquipSlot(slot)):
 				say(InventorySlot.getVisibleName(slot)+": "+"Nothing"+"\n")
+				continue
+			if(!GM.pc.invCanEquipSlot(slot)):
 				continue
 			
 			var item = GM.pc.getInventory().getEquippedItem(slot)
@@ -37,8 +39,10 @@ func _run():
 		
 		say("Your equipped items:\n")
 		for slot in InventorySlot.getAll():
-			if(!GM.pc.getInventory().hasSlotEquipped(slot)):
+			if(!GM.pc.getInventory().hasSlotEquipped(slot) && GM.pc.invCanEquipSlot(slot)):
 				say(InventorySlot.getVisibleName(slot)+": "+"Nothing"+"\n")
+				continue
+			if(!GM.pc.invCanEquipSlot(slot)):
 				continue
 			
 			var item = GM.pc.getInventory().getEquippedItem(slot)
@@ -53,8 +57,10 @@ func _run():
 		
 		say("Your equipped items:\n")
 		for slot in InventorySlot.getAll():
-			if(!GM.pc.getInventory().hasSlotEquipped(slot)):
+			if(!GM.pc.getInventory().hasSlotEquipped(slot) && GM.pc.invCanEquipSlot(slot)):
 				say(InventorySlot.getVisibleName(slot)+": "+"Nothing"+"\n")
+				continue
+			if(!GM.pc.invCanEquipSlot(slot)):
 				continue
 			
 			var item = GM.pc.getInventory().getEquippedItem(slot)
@@ -68,6 +74,9 @@ func _run():
 				
 			if(GM.pc.getInventory().hasSlotEquipped(slot)):
 				addDisabledButton(item.getVisibleName(), "This item's slot is already occupied")
+				continue
+			if(!GM.pc.invCanEquipSlot(slot)):
+				addDisabledButton(item.getVisibleName(), "You can't put this item on")
 				continue
 			
 			addButton(item.getVisibleName(), item.getVisisbleDescription(), "puton", [item.getUniqueID()])

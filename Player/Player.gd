@@ -728,3 +728,11 @@ func getCellLocation():
 		return "cellblock_pink_playercell"
 	
 	return "cellblock_orange_playercell"
+
+func invCanEquipSlot(slot):
+	if(slot == InventorySlot.Penis && !hasPenis()):
+		return false
+	if(slot == InventorySlot.Vagina && !hasVagina()):
+		return false
+	
+	return true

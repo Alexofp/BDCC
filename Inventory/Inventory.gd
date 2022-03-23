@@ -107,6 +107,11 @@ func getAllCombatUsableItems():
 	
 	return result
 		
+func canEquipSlot(slot):
+	if(get_parent() != null && get_parent().has_method("invCanEquipSlot")):
+		return get_parent().invCanEquipSlot(slot)
+	return true
+		
 func equipItem(item):
 	if(hasItem(item)):
 		removeItem(item)
@@ -116,10 +121,21 @@ func equipItem(item):
 	if(equippedItems.has(slot)):
 		assert(false)
 	
+	if(!canEquipSlot(slot)):
+		return false
+	
 	equippedItems[slot] = item
 	item.currentInventory = self
 	#add_child(item)
 	emit_signal("equipped_items_changed")
+	return true
+
+func unequipItem(item):
+	var theitem = removeEquippedItem(item)
+	if(theitem != null):
+		addItem(theitem)
+		return true
+	return false
 
 func forceEquipRemoveOther(item):
 	var slot = item.getClothingSlot()
@@ -127,7 +143,7 @@ func forceEquipRemoveOther(item):
 	if(hasSlotEquipped(slot)):
 		removeItemFromSlot(slot)
 	
-	equipItem(item)
+	return equipItem(item)
 
 func forceEquipStoreOther(item):
 	var slot = item.getClothingSlot()
@@ -136,7 +152,7 @@ func forceEquipStoreOther(item):
 		var storedItem = removeItemFromSlot(slot)
 		addItem(storedItem)
 	
-	equipItem(item)
+	return equipItem(item)
 
 func hasSlotEquipped(slot):
 	return equippedItems.has(slot) && equippedItems[slot] != null
