@@ -70,3 +70,15 @@ func resetOnNewTry():
 func onStruggleRemoval():
 	.onStruggleRemoval()
 	turnedOn = false
+
+func saveData():
+	var data = .saveData()
+	
+	data["turnedOn"] = turnedOn
+
+	return data
+	
+func loadData(_data):
+	.loadData(_data)
+	
+	turnedOn = SAVE.loadVar(_data, "turnedOn", false)

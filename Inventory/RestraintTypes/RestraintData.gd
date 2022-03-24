@@ -1,19 +1,19 @@
 extends Reference
 class_name RestraintData
 
-var level = 0
-var tightness = 1
+var level: int = 0
+var tightness: float = 1.0
 var item
 
 func resetOnNewDay():
-	tightness = 1
+	tightness = 1.0
 
 func resetOnNewTry():
 	pass
-	#tightness = 1
+	#tightness = 1.0
 
 func onStruggleRemoval():
-	tightness = 1
+	tightness = 1.0
 
 func setLevel(newlevel):
 	level = newlevel
@@ -99,4 +99,16 @@ func getVisibleTightness():
 	return "extremely loose"
 
 func getTightnessPercentString():
-	return str(round(tightness*100))+"%"
+	return str(round(tightness*100.0))+"%"
+
+func saveData():
+	var data = {}
+	
+	data["level"] = level
+	data["tightness"] = tightness
+
+	return data
+	
+func loadData(_data):
+	level = SAVE.loadVar(_data, "level", 1)
+	tightness = SAVE.loadVar(_data, "tightness", 1.0)

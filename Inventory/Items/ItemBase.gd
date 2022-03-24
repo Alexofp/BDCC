@@ -91,11 +91,17 @@ func saveData():
 	var data = {}
 	
 	data["amount"] = amount
+	
+	if(restraintData != null):
+		data["restraintData"] = restraintData.saveData()
 
 	return data
 	
 func loadData(_data):
 	amount = SAVE.loadVar(_data, "amount", 1)
+	
+	if(restraintData != null):
+		restraintData.loadData(SAVE.loadVar(_data, "restraintData", {}))
 
 func getClothingSlot():
 	return null

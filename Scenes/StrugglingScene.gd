@@ -197,3 +197,25 @@ func processStruggleTurn():
 			additionalStruggleText += struggleData["text"] + "\n\n"
 		
 	return {"damage": damage, "lust": addLust, "pain": addPain, "stamina": addStamina}
+
+func saveData():
+	var data = .saveData()
+	
+	data["inspectedRestraintID"] = inspectedRestraintID
+	data["actionText"] = actionText
+	data["struggleText"] = struggleText
+	data["additionalStruggleText"] = additionalStruggleText
+	data["canKeepTheRestraint"] = canKeepTheRestraint
+	data["keptRestraintID"] = keptRestraintID
+	
+	return data
+	
+func loadData(data):
+	.loadData(data)
+	
+	inspectedRestraintID = SAVE.loadVar(data, "inspectedRestraintID", "")
+	actionText = SAVE.loadVar(data, "actionText", "")
+	struggleText = SAVE.loadVar(data, "struggleText", "")
+	additionalStruggleText = SAVE.loadVar(data, "additionalStruggleText", "")
+	canKeepTheRestraint = SAVE.loadVar(data, "canKeepTheRestraint", false)
+	keptRestraintID = SAVE.loadVar(data, "keptRestraintID", "")
