@@ -45,7 +45,7 @@ func isRestraint():
 
 func generateRestraintData():
 	restraintData = RestraintVaginalplug.new()
-	restraintData.setLevel(RNG.randi_range(1, 5))
+	restraintData.setLevel(calculateBestRestraintLevel())
 
 func getTakingOffStringLong(withS):
 	if(withS):

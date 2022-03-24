@@ -31,5 +31,5 @@ func isRestraint():
 
 func generateRestraintData():
 	restraintData = RestraintBlindfold.new()
-	restraintData.setLevel(RNG.randi_range(1, 5))
+	restraintData.setLevel(RNG.randi_range(1, 2))
 	

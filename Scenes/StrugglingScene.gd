@@ -3,6 +3,8 @@ var inspectedRestraintID = ""
 var actionText = ""
 var struggleText = ""
 var additionalStruggleText = ""
+var canKeepTheRestraint = false
+var keptRestraintID = ""
 
 func _init():
 	sceneID = "StrugglingScene"
@@ -54,7 +56,13 @@ func _run():
 		if(additionalStruggleText != ""):
 			saynn(additionalStruggleText)
 		
-		addButton("Continue", "Okay", "checkifokay")
+		if(canKeepTheRestraint):
+			saynn("Do you wanna keep it?")
+			
+			addButton("Keep it", "Keep the restraint in your inventory", "checkifokay")
+			addButton("No", "Throw it away", "getridandcheckifokay")
+		else:
+			addButton("Continue", "Okay", "checkifokay")
 		
 
 	if(state == "orgasm"):
@@ -106,16 +114,27 @@ func _react(_action: String, _args):
 		
 		struggleText = struggleData["text"]
 		
+		canKeepTheRestraint = false
 		if(restraintData.shouldBeRemoved()):
 			struggleText += "\n[b]"+restraintData.getRemoveMessage()+"[/b]"
 			restraintData.onStruggleRemoval()
 			GM.pc.getInventory().removeEquippedItem(item)
-			GM.pc.getInventory().addItem(item)
+			
+			if(GM.pc.hasPerk(Perk.BDSMCollector)):
+				canKeepTheRestraint = true
+			
+				GM.pc.getInventory().addItem(item)
+				keptRestraintID = item.getUniqueID()
 		
 		processStruggleTurn()
 		processTime(1*60)
 		
-	if(_action == "checkifokay"):
+	if(_action == "getridandcheckifokay"):
+		var item = GM.pc.getInventory().getItemByUniqueID(keptRestraintID)
+		if(item != null):
+			GM.pc.getInventory().removeItem(item)
+		
+	if(_action == "checkifokay" || _action == "getridandcheckifokay"):
 		if(GM.pc.getLust() >= GM.pc.lustThreshold()):
 			setState("orgasm")
 			GM.pc.orgasmFrom("pc")

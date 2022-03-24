@@ -174,3 +174,8 @@ func generateRestraintData():
 func getRestraintData() -> RestraintData:
 	return restraintData
 
+func calculateBestRestraintLevel():
+	if(GM.pc != null):
+		return GM.pc.calculateBestRestraintLevel()
+	else:
+		return RNG.randi_range(1, 5)

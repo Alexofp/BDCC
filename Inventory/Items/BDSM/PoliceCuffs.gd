@@ -31,4 +31,4 @@ func isRestraint():
 
 func generateRestraintData():
 	restraintData = RestraintHandCuffs.new()
-	restraintData.setLevel(RNG.randi_range(1, 5))
+	restraintData.setLevel(calculateBestRestraintLevel())
