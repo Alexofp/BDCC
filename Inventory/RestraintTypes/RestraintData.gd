@@ -3,7 +3,10 @@ class_name RestraintData
 
 var level: int = 0
 var tightness: float = 1.0
-var item
+var item: WeakRef
+
+func getItem():
+	return item.get_ref()
 
 func resetOnNewDay():
 	tightness = 1.0
@@ -45,7 +48,7 @@ func shouldBeRemoved():
 	return tightness <= 0
 
 func getRemoveMessage():
-	return item.getVisibleName()+" slips off!"
+	return getItem().getVisibleName()+" slips off!"
 
 func canStruggle():
 	return true
@@ -66,7 +69,7 @@ func doStruggle(_pc):
 	var damage = 0
 	var stamina = 0
 	
-	text = "You struggle, trying to make the "+item.getVisibleName()+" slip off"
+	text = "You struggle, trying to make the "+getItem().getVisibleName()+" slip off"
 	damage = calcDamage()
 	stamina = 10
 	
@@ -75,7 +78,7 @@ func doStruggle(_pc):
 	return {"text": text, "damage": damage, "lust": lust, "pain": pain, "stamina": stamina}
 
 func processStruggleTurn():
-	return null#{"text": "TEST "+item.getVisibleName()}
+	return null#{"text": "TEST "+getItem().getVisibleName()}
 
 func getVisibleTightness():
 	if(tightness > 0.9):

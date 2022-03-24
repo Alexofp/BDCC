@@ -6,6 +6,9 @@ func canInspectWhileBlindfolded():
 
 func canUnlockWithKey():
 	return false
+	
+func alwaysSavedWhenStruggledOutOf():
+	return true
 
 func doStruggle(_pc):
 	var _handsFree = !_pc.hasBlockedHands()

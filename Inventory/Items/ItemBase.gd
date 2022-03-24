@@ -13,7 +13,7 @@ func _init():
 	if(isRestraint()):
 		generateRestraintData()
 		if(restraintData != null):
-			restraintData.item = self
+			restraintData.item = weakref(self)
 
 func getVisibleName():
 	return "Bad item"
