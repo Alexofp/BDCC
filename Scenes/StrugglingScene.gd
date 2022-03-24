@@ -95,24 +95,44 @@ func _react(_action: String, _args):
 		var item = GM.pc.getInventory().getItemByUniqueID(_args[0])
 		var restraintData: RestraintData = item.getRestraintData()
 		
+		var damage = 0.0
+		var addLust = 0
+		var addPain = 0
+		var addStamina = 0
+		
 		var struggleData = restraintData.doStruggle(GM.pc)
 		if(struggleData.has("damage")):
-			restraintData.takeDamage(struggleData["damage"])
+			damage = struggleData["damage"]
 		if(struggleData.has("lust") && struggleData["lust"] > 0):
-			GM.pc.addLust(struggleData["lust"])
-			addMessage("You recieved "+str(struggleData["lust"])+" lust")
+			addLust = struggleData["lust"]
 		if(struggleData.has("pain") && struggleData["pain"] > 0):
-			GM.pc.addPain(struggleData["pain"])
-			addMessage("You recieved "+str(struggleData["pain"])+" pain")
+			addPain = struggleData["pain"]
 		if(struggleData.has("stamina") && struggleData["stamina"] != 0):
-			var addStamina = -struggleData["stamina"]
-			GM.pc.addStamina(addStamina)
-			if(addStamina >= 0):
-				addMessage("You gained "+str(addStamina)+" stamina")
-			else:
-				addMessage("You used "+str(-addStamina)+" stamina")
+			addStamina = struggleData["stamina"]
 		
 		struggleText = struggleData["text"]
+		
+		
+		var turnData = processStruggleTurn()
+		damage += turnData["damage"]
+		addLust += turnData["lust"]
+		addPain += turnData["pain"]
+		addStamina += turnData["stamina"]
+		
+		if(damage != 0.0):
+			restraintData.takeDamage(damage)
+		if(addLust != 0):
+			GM.pc.addLust(addLust)
+			addMessage("You recieved "+str(addLust)+" lust")
+		if(addPain != 0):
+			GM.pc.addPain(addPain)
+			addMessage("You recieved "+str(addPain)+" pain")
+		if(addStamina != 0):
+			GM.pc.addStamina(-addStamina)
+			if(addStamina < 0):
+				addMessage("You gained "+str(-addStamina)+" stamina")
+			else:
+				addMessage("You used "+str(addStamina)+" stamina")
 		
 		canKeepTheRestraint = false
 		if(restraintData.shouldBeRemoved()):
@@ -126,7 +146,7 @@ func _react(_action: String, _args):
 				GM.pc.getInventory().addItem(item)
 				keptRestraintID = item.getUniqueID()
 		
-		processStruggleTurn()
+		
 		processTime(1*60)
 		
 	if(_action == "getridandcheckifokay"):
@@ -153,6 +173,10 @@ func _react(_action: String, _args):
 
 func processStruggleTurn():
 	additionalStruggleText = ""
+	var damage = 0.0
+	var addLust = 0
+	var addPain = 0
+	var addStamina = 0
 	
 	for item in GM.pc.getInventory().getEquppedRestraints():
 		var restraintData: RestraintData = item.getRestraintData()
@@ -162,14 +186,14 @@ func processStruggleTurn():
 			continue
 			
 		if(struggleData.has("damage")):
-			restraintData.takeDamage(struggleData["damage"])
+			damage += struggleData["damage"]
 		if(struggleData.has("lust")):
-			GM.pc.addLust(struggleData["lust"])
+			addLust += struggleData["lust"]
 		if(struggleData.has("pain")):
-			GM.pc.addPain(struggleData["pain"])
+			addPain += struggleData["pain"]
 		if(struggleData.has("stamina")):
-			var addStamina = -struggleData["stamina"]
-			GM.pc.addStamina(addStamina)
+			addStamina += struggleData["stamina"]
 		if(struggleData.has("text")):
 			additionalStruggleText += struggleData["text"] + "\n\n"
 		
+	return {"damage": damage, "lust": addLust, "pain": addPain, "stamina": addStamina}
