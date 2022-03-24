@@ -1,10 +1,13 @@
 extends "res://Scenes/SceneBase.gd"
-var inspectedRestraintID = ""
+var unlockedRestraintID = ""
 var actionText = ""
 var struggleText = ""
 var additionalStruggleText = ""
 var canKeepTheRestraint = false
 var keptRestraintID = ""
+var keyGameTries: int = 5
+var keyGameValue: int = 50
+var keyText = ""
 
 func _init():
 	sceneID = "StrugglingScene"
@@ -21,7 +24,10 @@ func _run():
 		var isBlind = GM.pc.isBlindfolded()
 		saynn("Pick the restraint you wanna focus on. Keep in mind that some restraints will be harder to remove depending on what you have on. Crying from pain or moaning loudly from an orgasm will probably attract someone")
 		
-		#addButtonAt(13, "Inspect", "Inspect one of the restraints", "inspect")
+		if(GM.pc.getInventory().hasItemID("restraintkey")):
+			addButtonAt(13, "Use key", "Use one of your restraint keys to unlock something", "usekey")
+		else:
+			addDisabledButtonAt(13, "Use key", "You don't have any restraint keys")
 		addButtonAt(14, "Give up", "Not worth it", "endthescene")
 		
 		for item in GM.pc.getInventory().getEquppedRestraints():
@@ -42,13 +48,35 @@ func _run():
 		
 		#generateActions()
 		
-#	if(state == "inspect"):
-#		saynn("Which one do you wanna inspect")
-#
-#		for item in GM.pc.getInventory().getEquppedRestraints():
-#			addButton(item.getVisibleName(), item.getVisisbleDescription(), "doinspect", [item.getUniqueID()])
-#		addButton("Back", "You don't wanna inspect anything", "")
-#
+	if(state == "usekey"):
+		var keyAmount = GM.pc.getInventory().getAmountOf("restraintkey")
+		saynn("You have "+str(keyAmount)+" "+Util.multipleOrSingularEnding(keyAmount, "key")+". Each one can unlock one piece of gear.")
+		saynn("Which restraint do you wanna unlock.")
+
+		for item in GM.pc.getInventory().getEquppedRestraints():
+			var restraintData: RestraintData = item.getRestraintData()
+			if(!restraintData.canUnlockWithKey()):
+				addDisabledButton(item.getVisibleName(), "This restraint doesn't seem to have a keyhole")
+				continue
+			addButton(item.getVisibleName(), item.getVisisbleDescription(), "dounlock", [item.getUniqueID()])
+		addButton("Back", "You don't wanna unlock anything", "")
+
+	if(state == "keyminigame"):
+		saynn("Since you can't use your fingers you have to carefully balance the key between your palms and guide it towards the lock.")
+		
+		saynn("To succsessfully unlock the restraint you have to guess a number between 1 and 100. You have "+str(keyGameTries)+" "+Util.multipleOrSingularEnding(keyGameTries, "try", "tries")+" left")
+
+		if(keyText != ""):
+			saynn(keyText)
+
+		addTextbox("key_number")
+		
+		addButton("Guess", "Try and guess this number", "key_guess")
+
+	if(state == "keyminigameFailed"):
+		saynn("Oops, you dropped the key and it broke. There goes that.")
+		
+		addButton("Continue", "Heck", "")
 
 	if(state == "struggleAgainst"):
 		saynn(struggleText)
@@ -84,7 +112,11 @@ func _run():
 		saynn("It's too painful! You let out a desperate cry. You were so loud that someone might have heard that. (Temporary text)")
 
 		addButton("Continue", "Oh no", "spottedcheck")
-
+		
+	if(state == "unlockedGear"):
+		saynn("You successfully unlocked the restraint. The key snaps in half, rendering it useless")
+		
+		addButton("Continue", "Good", "")
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
 		endScene()
@@ -140,7 +172,7 @@ func _react(_action: String, _args):
 			restraintData.onStruggleRemoval()
 			GM.pc.getInventory().removeEquippedItem(item)
 			
-			if(GM.pc.hasPerk(Perk.BDSMCollector)):
+			if(GM.pc.hasPerk(Perk.BDSMCollector) || restraintData.alwaysSavedWhenStruggledOutOf()):
 				canKeepTheRestraint = true
 			
 				GM.pc.getInventory().addItem(item)
@@ -167,6 +199,69 @@ func _react(_action: String, _args):
 		
 	if(_action == "spottedcheck"):
 		setState("notspotted")
+		return
+		
+	if(_action == "dounlock"):
+		unlockedRestraintID = _args[0]
+		var item = GM.pc.getInventory().getItemByUniqueID(unlockedRestraintID)
+		#var restraintData: RestraintData = item.getRestraintData()
+		
+		GM.pc.getInventory().removeXOfOrDestroy("restraintkey", 1)
+		if(!GM.pc.hasBlockedHands() && !GM.pc.hasBoundArms()):
+			GM.pc.getInventory().unequipItem(item)
+			setState("unlockedGear")
+		else:
+			keyGameTries = 5
+			if(GM.pc.hasPerk(Perk.BDSMBetterKeys)):
+				keyGameTries += 3
+			keyGameValue = RNG.randi_range(1, 100)
+			keyText = ""
+			setState("keyminigame")
+		return
+		
+	if(_action == "key_guess"):
+		var textboxText = getTextboxData("key_number")
+		if(textboxText == "" || !textboxText.is_valid_integer()):
+			keyText = ""
+			setState("keyminigame")
+			return
+		
+		var number = int(textboxText)
+		if(number == keyGameValue):
+			var item = GM.pc.getInventory().getItemByUniqueID(unlockedRestraintID)
+			GM.pc.getInventory().unequipItem(item)
+			setState("unlockedGear")
+			return
+		
+		var diff = abs(number - keyGameValue)
+		if(number > keyGameValue):
+			if(diff >= 50):
+				keyText = str(number)+" is not even close. You almost dropped the key right there"
+			elif(diff >= 25):
+				keyText = str(number)+" is way too much"
+			elif(diff >= 10):
+				keyText = str(number)+" is too much"
+			elif(diff >= 5):
+				keyText = str(number)+" is too much but you feel that you're pretty close"
+			else:
+				keyText = str(number)+" is slightly too much. Very close."
+		if(number < keyGameValue):
+			if(diff >= 50):
+				keyText = str(number)+" is not even close. You almost dropped the key right there"
+			elif(diff >= 25):
+				keyText = str(number)+" is way too little"
+			elif(diff >= 10):
+				keyText = str(number)+" is too little"
+			elif(diff >= 5):
+				keyText = str(number)+" is too little but you feel that you're pretty close"
+			else:
+				keyText = str(number)+" is slightly too little. Very close."
+		
+		keyGameTries -= 1
+		if(keyGameTries <= 0):
+			setState("keyminigameFailed")
+		else:
+			setState("keyminigame")
 		return
 		
 	setState(_action)
@@ -201,21 +296,27 @@ func processStruggleTurn():
 func saveData():
 	var data = .saveData()
 	
-	data["inspectedRestraintID"] = inspectedRestraintID
+	data["unlockedRestraintID"] = unlockedRestraintID
 	data["actionText"] = actionText
 	data["struggleText"] = struggleText
 	data["additionalStruggleText"] = additionalStruggleText
 	data["canKeepTheRestraint"] = canKeepTheRestraint
 	data["keptRestraintID"] = keptRestraintID
+	data["keyGameTries"] = keyGameTries
+	data["keyGameValue"] = keyGameValue
+	data["keyText"] = keyText
 	
 	return data
 	
 func loadData(data):
 	.loadData(data)
 	
-	inspectedRestraintID = SAVE.loadVar(data, "inspectedRestraintID", "")
+	unlockedRestraintID = SAVE.loadVar(data, "unlockedRestraintID", "")
 	actionText = SAVE.loadVar(data, "actionText", "")
 	struggleText = SAVE.loadVar(data, "struggleText", "")
 	additionalStruggleText = SAVE.loadVar(data, "additionalStruggleText", "")
 	canKeepTheRestraint = SAVE.loadVar(data, "canKeepTheRestraint", false)
 	keptRestraintID = SAVE.loadVar(data, "keptRestraintID", "")
+	keyGameTries = SAVE.loadVar(data, "keyGameTries", 5)
+	keyGameValue = SAVE.loadVar(data, "keyGameValue", 50)
+	keyText = SAVE.loadVar(data, "keyText", "")

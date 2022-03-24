@@ -200,6 +200,7 @@ func addUITextbox(id):
 	var uitextbox = uiTextboxScene.instance()
 	uitextbox.id = id
 	textcontainer.add_child(uitextbox)
+	uitextbox.grab_focus()
 	textboxes[id] = uitextbox
 
 func getUIdata(id):

@@ -82,6 +82,12 @@ func removeXFromItemOrDelete(item, amount):
 	
 	item.removeXOrDestroy(amount)
 
+func getAmountOf(itemID):
+	var item = getFirstOf(itemID)
+	if(item == null):
+		return 0
+	return item.amount
+
 func hasXOf(itemID, amount):
 	var item = getFirstOf(itemID)
 	if(item == null):

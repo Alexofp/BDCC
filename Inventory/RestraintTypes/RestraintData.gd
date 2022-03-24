@@ -101,6 +101,12 @@ func getVisibleTightness():
 func getTightnessPercentString():
 	return str(round(tightness*100.0))+"%"
 
+func canUnlockWithKey():
+	return true
+	
+func alwaysSavedWhenStruggledOutOf():
+	return false
+
 func saveData():
 	var data = {}
 	

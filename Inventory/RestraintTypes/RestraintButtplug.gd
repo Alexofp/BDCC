@@ -1,6 +1,12 @@
 extends RestraintData
 class_name RestraintButtplug
 
+func canUnlockWithKey():
+	return false
+
+func alwaysSavedWhenStruggledOutOf():
+	return true
+
 func doStruggle(_pc):
 	var _handsFree = !_pc.hasBlockedHands()
 	var _armsFree = !_pc.hasBoundArms()

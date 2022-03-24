@@ -3,6 +3,12 @@ class_name RestraintVaginalplug
 
 var turnedOn = false
 
+func canUnlockWithKey():
+	return false
+
+func alwaysSavedWhenStruggledOutOf():
+	return true
+
 func doStruggle(_pc):
 	var _handsFree = !_pc.hasBlockedHands()
 	var _armsFree = !_pc.hasBoundArms()

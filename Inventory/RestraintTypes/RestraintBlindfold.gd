@@ -4,6 +4,9 @@ class_name RestraintBlindfold
 func canInspectWhileBlindfolded():
 	return true
 
+func canUnlockWithKey():
+	return false
+
 func doStruggle(_pc):
 	var _handsFree = !_pc.hasBlockedHands()
 	var _armsFree = !_pc.hasBoundArms()
