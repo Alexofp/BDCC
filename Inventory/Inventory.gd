@@ -136,6 +136,13 @@ func unequipItem(item):
 		addItem(theitem)
 		return true
 	return false
+	
+func unequipSlot(slot):
+	var theitem = removeItemFromSlot(slot)
+	if(theitem != null):
+		addItem(theitem)
+		return true
+	return false
 
 func forceEquipRemoveOther(item):
 	var slot = item.getClothingSlot()

@@ -156,6 +156,11 @@ func getPuttingOnVerb(withS):
 func coversBodyparts():
 	return []
 
+func coversBodypart(bodypartSlot):
+	if(bodypartSlot in coversBodyparts()):
+		return true
+	return false
+
 func getTags():
 	return []
 

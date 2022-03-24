@@ -29,7 +29,15 @@ func doStruggle(_pc):
 		stamina = 10
 		lust = 5
 	
-	#damage = calcDamage()
+	if(damage < 1.0):
+		if(failChance(40) && GM.pc.getInventory().hasSlotEquipped(InventorySlot.UnderwearBottom)):
+			if(GM.pc.getInventory().getEquippedItem(InventorySlot.UnderwearBottom).coversBodypart(BodypartSlot.Vagina)):
+				text += " The plug presses into your panties."
+				damage /= 2.0
+				
+				if(failChance(30)):
+					text += " [b]Your panties slipped down, oops.[/b]"
+					GM.pc.getInventory().unequipSlot(InventorySlot.UnderwearBottom)
 	
 	return {"text": text, "damage": damage, "lust": lust, "pain": pain, "stamina": stamina}
 

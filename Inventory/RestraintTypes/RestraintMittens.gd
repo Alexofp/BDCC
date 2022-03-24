@@ -19,13 +19,17 @@ func doStruggle(_pc):
 		text = "You step on the mittens and try to pull your arms out of them."
 		damage = calcDamage()
 		stamina = 10
+		
+		if(failChance(10)):
+			text += " Ow, you accidentally step on your finger."
+			pain = 5
 	elif(_canBite):
 		text = "You bite on one of the mittens and try to free your arm. Not very effective but better than nothing."
 		damage = calcDamage(0.6)
 		stamina = 10
 
 		if(failChance(10)):
-			text += " Ow, you accidentally step on your finger."
+			text += " Ow, you accidentally bit your hand."
 			pain = 5
 	else:
 		text = "You try to helplessly wiggle the mittens off."

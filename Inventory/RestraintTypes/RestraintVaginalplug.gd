@@ -17,11 +17,11 @@ func doStruggle(_pc):
 	var stamina = 0
 	
 	if(_handsFree):
-		text = "Because your hands are free you manage to just remove the buttplug."
+		text = "Because your hands are free you just remove the plug."
 		damage = 1.0
 		lust = 10
 	elif(_legsFree):
-		text = "You squirm and wiggle your rear, trying to push the buttplug out of your pussy."
+		text = "You squirm and wiggle your rear, trying to push the plug out of your pussy."
 		damage = calcDamage()
 		stamina = 5
 		lust = 5
@@ -31,12 +31,23 @@ func doStruggle(_pc):
 		stamina = 10
 		lust = 5
 	
+
+				
 	if(damage < 1.0):
+		if(failChance(40) && GM.pc.getInventory().hasSlotEquipped(InventorySlot.UnderwearBottom)):
+			if(GM.pc.getInventory().getEquippedItem(InventorySlot.UnderwearBottom).coversBodypart(BodypartSlot.Vagina)):
+				text += " The plug presses into your panties."
+				damage /= 2.0
+				
+				if(failChance(30)):
+					text += " [b]Your panties slipped down, oops.[/b]"
+					GM.pc.getInventory().unequipSlot(InventorySlot.UnderwearBottom)
+		
 		if(!turnedOn && failChance(40)):
-			text += "  You accidentally turn on the plug inside you and it starts vibrating!"
+			text += " You accidentally turn on the plug inside you and it starts vibrating!"
 			turnedOn = true
 		elif(turnedOn && failChance(20)):
-			text += "  You managed to randomly turn off the vibrating plug."
+			text += " You managed to randomly turn off the vibrating plug."
 			turnedOn = false
 	
 	#damage = calcDamage()
