@@ -181,7 +181,8 @@ func doTimeProcess(_seconds, timeChanged = true):
 		var newHours = int(timeOfDay / 60 / 60)
 		var hoursPassed = newHours - oldHours
 
-		hoursPassed(hoursPassed)
+		if(hoursPassed > 0):
+			hoursPassed(hoursPassed)
 	
 	emit_signal("time_passed", _seconds)
 

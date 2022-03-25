@@ -155,6 +155,14 @@ func _react(_action: String, _args):
 			addStamina += turnData["stamina"]
 			additionalStruggleText = turnData["text"]
 			
+		if(damage < 1.0):
+			var mult = 1
+			if(fightMode):
+				mult = 2
+			# 5 xp for struggling out of a level 5 restraint. 10 xp if you're doing it during combat
+			
+			GM.pc.addSkillExperience(Skill.BDSM, restraintData.getLevel() * mult)
+			
 		if(damage != 0.0):
 			restraintData.takeDamage(damage)
 		if(addLust != 0):
@@ -286,6 +294,7 @@ func saveData():
 	data["keyGameTries"] = keyGameTries
 	data["keyGameValue"] = keyGameValue
 	data["keyText"] = keyText
+	data["fightMode"] = fightMode
 	
 	return data
 	
@@ -301,3 +310,4 @@ func loadData(data):
 	keyGameTries = SAVE.loadVar(data, "keyGameTries", 5)
 	keyGameValue = SAVE.loadVar(data, "keyGameValue", 50)
 	keyText = SAVE.loadVar(data, "keyText", "")
+	fightMode = SAVE.loadVar(data, "fightMode", false)

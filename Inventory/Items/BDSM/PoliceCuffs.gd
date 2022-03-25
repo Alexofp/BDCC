@@ -17,6 +17,9 @@ func getBuffs():
 		buff(Buff.RestrainedArmsBuff),
 		]
 
+func getTakeOffScene():
+	return "CuffTuggingScene"
+
 func getPrice():
 	return 0
 

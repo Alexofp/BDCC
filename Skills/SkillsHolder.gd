@@ -284,6 +284,11 @@ func giveSkillExperienceBattleTurn():
 	if(pc.hasEffect(StatusEffect.Naked)):
 		pc.addSkillExperience(Skill.Exhibitionism, 2)
 	
-	var bdsmItems = pc.getInventory().getEquippedItemsWithTag(ItemTag.BDSMRestraint)
-	if(bdsmItems.size() > 0):
+	if(pc.getInventory().hasRemovableRestraints()):
+		pc.addSkillExperience(Skill.BDSM, 1)
+
+func hoursPassed(_howmuch):
+	var pc = npc
+	
+	if(pc.getInventory().hasRemovableRestraints()):
 		pc.addSkillExperience(Skill.BDSM, 1)

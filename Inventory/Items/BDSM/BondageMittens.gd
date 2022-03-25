@@ -17,6 +17,9 @@ func getBuffs():
 		buff(Buff.BlockedHandsBuff),
 		]
 
+func getTakeOffScene():
+	return "RestraintTakeOffNopeScene"
+
 func getPrice():
 	return 0
 

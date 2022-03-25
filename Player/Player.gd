@@ -256,6 +256,8 @@ func hoursPassed(_howmuch):
 	if(currentPain < targetPain):
 		var addValue = min(_howmuch, (targetPain - currentPain))
 		addPain(addValue)
+		
+	skillsHolder.hoursPassed(_howmuch)
 
 func processStruggleTurn():
 	var texts = []
