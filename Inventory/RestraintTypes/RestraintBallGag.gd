@@ -26,7 +26,7 @@ func doStruggle(_pc):
 	
 	if(RNG.chance(20)):
 		text += " The ball in your mouth makes you drool a lot."
-		lust = 5
+		lust = scaleDamage(5)
 	
 	#damage = calcDamage()
 	

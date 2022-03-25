@@ -56,6 +56,9 @@ func canStruggle():
 func failChance(chance):
 	return RNG.chance(chance)
 
+func scaleDamage(dam) -> int:
+	return int(round(getLevel() / 3.0 * dam))
+
 func doStruggle(_pc):
 	var _handsFree = !_pc.hasBlockedHands()
 	var _armsFree = !_pc.hasBoundArms()

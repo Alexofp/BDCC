@@ -26,7 +26,7 @@ func doStruggle(_pc):
 		
 		if(RNG.chance(10)):
 			text += " Ow! You accidently smashed them against "+RNG.pick(["the wall", "the ground", "something"])
-			pain = RNG.randi_range(5, 10)
+			pain = scaleDamage(RNG.randi_range(5, 10))
 	
 	#damage = calcDamage()
 	

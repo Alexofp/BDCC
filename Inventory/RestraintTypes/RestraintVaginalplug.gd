@@ -25,17 +25,17 @@ func doStruggle(_pc):
 	if(_handsFree):
 		text = "Because your hands are free you just remove the plug."
 		damage = 1.0
-		lust = 10
+		lust = scaleDamage(10)
 	elif(_legsFree):
 		text = "You squirm and wiggle your rear, trying to push the plug out of your pussy."
 		damage = calcDamage()
 		stamina = 5
-		lust = 5
+		lust = scaleDamage(5)
 	else:
 		text = "You desperatelly squirm, trying to push the vaginal plug out. Not being able to spread your legs makes it very hard."
 		damage = calcDamage(0.5)
 		stamina = 10
-		lust = 5
+		lust = scaleDamage(5)
 	
 
 				
@@ -62,7 +62,7 @@ func doStruggle(_pc):
 
 func processStruggleTurn():
 	if(turnedOn):
-		return {"text": "The vaginal plug strongly vibrates inside your pussy", "lust": 5}
+		return {"text": "The vaginal plug strongly vibrates inside your pussy", "lust": scaleDamage(5)}
 	
 	
 func resetOnNewDay():

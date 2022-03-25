@@ -21,12 +21,12 @@ func doStruggle(_pc):
 		text = "You try to blindly find the knot to tug on"
 		damage = calcDamage()
 		stamina = 10
-		lust = 5
+		lust = scaleDamage(5)
 	
 	return {"text": text, "damage": damage, "lust": lust, "pain": pain, "stamina": stamina}
 
 func processStruggleTurn():
 	if(failChance(10)):
-		return {"text": "Your rope harness rubs against one of your nips", "lust": 5}
+		return {"text": "Your rope harness rubs against one of your nips", "lust": scaleDamage(5)}
 	elif(failChance(10)):
-		return {"text": "Your rope harness digs into your crotch", "lust": 5}
+		return {"text": "Your rope harness digs into your crotch", "lust": scaleDamage(5)}

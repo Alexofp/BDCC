@@ -28,12 +28,12 @@ func doStruggle(_pc):
 		text = "You squirm and wiggle your rear, trying to push the buttplug out of your butt"
 		damage = calcDamage()
 		stamina = 5
-		lust = 5
+		lust = scaleDamage(5)
 	else:
 		text = "You desperatelly squirm, trying to make the buttplug fall out. Not being able to spread your legs makes it very hard"
 		damage = calcDamage(0.5)
 		stamina = 10
-		lust = 5
+		lust = scaleDamage(5)
 	
 	if(damage < 1.0):
 		if(failChance(40) && GM.pc.getInventory().hasSlotEquipped(InventorySlot.UnderwearBottom)):
@@ -49,6 +49,6 @@ func doStruggle(_pc):
 
 func processStruggleTurn():
 	if(failChance(10)):
-		return {"text": "The buttplug shifts inside you while you squirm", "lust": 5}
+		return {"text": "The buttplug shifts inside you while you squirm", "lust": scaleDamage(5)}
 	
 	

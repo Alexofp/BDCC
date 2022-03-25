@@ -22,7 +22,7 @@ func doStruggle(_pc):
 		
 		if(failChance(10)):
 			text += " Ow, you accidentally step on your finger."
-			pain = 5
+			pain = scaleDamage(5)
 	elif(_canBite):
 		text = "You bite on one of the mittens and try to free your arm. Not very effective but better than nothing."
 		damage = calcDamage(0.6)
@@ -30,7 +30,7 @@ func doStruggle(_pc):
 
 		if(failChance(10)):
 			text += " Ow, you accidentally bit your hand."
-			pain = 5
+			pain = scaleDamage(5)
 	else:
 		text = "You try to helplessly wiggle the mittens off."
 		damage = calcDamage(0.4)
@@ -38,7 +38,7 @@ func doStruggle(_pc):
 		
 		if(failChance(20)):
 			text += " Ow! You accidently smashed them against "+RNG.pick(["the wall", "the ground", "something"])
-			pain = RNG.randi_range(5, 10)
+			pain = scaleDamage(RNG.randi_range(5, 10))
 	
 	#damage = calcDamage()
 	
