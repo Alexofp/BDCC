@@ -14,6 +14,7 @@ var attacks: Dictionary = {}
 var statusEffects: Dictionary = {}
 var allSpecies: Dictionary = {}
 var items: Dictionary = {}
+var itemsRefs: Dictionary = {}
 var buffs: Dictionary = {}
 var events: Dictionary = {}
 var modules: Dictionary = {}
@@ -328,6 +329,7 @@ func registerItem(path: String):
 	var item = load(path)
 	var itemObject = item.new()
 	items[itemObject.id] = item
+	itemsRefs[itemObject.id] = itemObject
 
 func registerItemFolder(folder: String):
 	var dir = Directory.new()
@@ -353,6 +355,11 @@ func createItem(id: String):
 		return null
 	return items[id].new()
 
+func getItemRef(id: String):
+	if(!itemsRefs.has(id)):
+		printerr("ERROR: item with the id "+id+" wasn't found")
+		return null
+	return itemsRefs[id]
 
 
 func registerBuff(path: String):

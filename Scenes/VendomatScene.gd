@@ -11,6 +11,7 @@ var sellingItems = [
 	"bondagemittens",
 	"vaginalplug",
 	"restraintkey",
+	"ropeharness",
 	]
 var sellItemsData = {}
 
@@ -19,7 +20,7 @@ func _init():
 	
 func _initScene(_args = []):
 	for itemID in sellingItems:
-		var itemObject = GlobalRegistry.createItem(itemID)
+		var itemObject = GlobalRegistry.getItemRef(itemID)
 		sellItemsData[itemID] = {
 			"name": itemObject.getVisibleName(),
 			"desc": itemObject.getVisisbleDescription(),

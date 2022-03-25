@@ -172,6 +172,9 @@ func saveStatusEffectsData():
 	return data
 	
 func loadStatusEffectsData(data):
+	for effectID in statusEffects.keys():
+		removeEffect(effectID)
+	
 	for effectID in data:
 		var effect = GlobalRegistry.createStatusEffect(effectID)
 		effect.setCharacter(self)
