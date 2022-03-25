@@ -257,6 +257,34 @@ func hoursPassed(_howmuch):
 		var addValue = min(_howmuch, (targetPain - currentPain))
 		addPain(addValue)
 
+func processStruggleTurn():
+	var texts = []
+	var damage = 0.0
+	var addLust = 0
+	var addPain = 0
+	var addStamina = 0
+	
+	for item in getInventory().getEquppedRestraints():
+		var restraintData: RestraintData = item.getRestraintData()
+		var struggleData = restraintData.processStruggleTurn()
+		
+		if(struggleData == null):
+			continue
+			
+		if(struggleData.has("damage")):
+			damage += struggleData["damage"]
+		if(struggleData.has("lust")):
+			addLust += struggleData["lust"]
+		if(struggleData.has("pain")):
+			addPain += struggleData["pain"]
+		if(struggleData.has("stamina")):
+			addStamina += struggleData["stamina"]
+		if(struggleData.has("text")):
+			texts.append(struggleData["text"])
+			#additionalStruggleText += struggleData["text"] + "\n\n"
+		
+	return {"damage": damage, "lust": addLust, "pain": addPain, "stamina": addStamina, "text": Util.join(texts, "\n\n")}
+
 func getGender():
 	return pickedGender
 
@@ -493,11 +521,13 @@ func afterSleepingInBed():
 	skillsHolder.onNewDay()
 	for item in getInventory().getEquppedRestraints():
 		item.getRestraintData().resetOnNewDay()
+	updateNonBattleEffects()
 
 func afterRestingInBed(seconds):
 	var _hours = floor(seconds/3600.0)
 	
 	addStamina(_hours * 10)
+	updateNonBattleEffects()
 
 func isFullyNaked():
 	var slotsToBeFullyNaked = [InventorySlot.Body, InventorySlot.UnderwearBottom, InventorySlot.UnderwearTop]
@@ -536,15 +566,18 @@ func getExposedPrivates():
 func afterEatingAtCanteen():
 	addStamina(100)
 	addPain(-20)
+	updateNonBattleEffects()
 
 func afterTakingAShower():
 	addStamina(30)
 	clearBodyFluids()
+	updateNonBattleEffects()
 
 func orgasmFrom(_characterID: String):
 	addLust(-lust)
 	if(hasPerk(Perk.SexLustPassion)):
 		addStamina(20)
+	updateNonBattleEffects()
 
 func cummedOnBy(characterID, sourceType = null, howMessy: int = 1):	
 	var ch = GlobalRegistry.getCharacter(characterID)

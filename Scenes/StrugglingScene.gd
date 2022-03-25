@@ -8,11 +8,15 @@ var keptRestraintID = ""
 var keyGameTries: int = 5
 var keyGameValue: int = 50
 var keyText = ""
+var fightMode = false
 
 func _init():
 	sceneID = "StrugglingScene"
 
 func _initScene(_args = []):
+	if(_args.size() > 0):
+		fightMode = _args[0]
+	
 	var allItems = GM.pc.getInventory().getAllEquippedItems()
 	for itemSlot in allItems:
 		var item: ItemBase = allItems[itemSlot]
@@ -28,7 +32,7 @@ func _run():
 			addButtonAt(13, "Use key", "Use one of your restraint keys to unlock something", "usekey")
 		else:
 			addDisabledButtonAt(13, "Use key", "You don't have any restraint keys")
-		addButtonAt(14, "Give up", "Not worth it", "endthescene")
+		addButtonAt(14, "Give up", "Stop struggling", "endthescene")
 		
 		for item in GM.pc.getInventory().getEquppedRestraints():
 			var restraintData: RestraintData = item.getRestraintData()
@@ -76,7 +80,7 @@ func _run():
 	if(state == "keyminigameFailed"):
 		saynn("Oops, you dropped the key and it broke. There goes that.")
 		
-		addButton("Continue", "Heck", "")
+		addButton("Continue", "Heck", "checkifokay")
 
 	if(state == "struggleAgainst"):
 		saynn(struggleText)
@@ -116,11 +120,10 @@ func _run():
 	if(state == "unlockedGear"):
 		saynn("You successfully unlocked the restraint. The key snaps in half, rendering it useless")
 		
-		addButton("Continue", "Good", "")
+		addButton("Continue", "Good", "checkifokay")
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
 		endScene()
-		setFlag(Flag.Game_LastTimeStruggled, GM.main.getTime())
 		return
 
 	if(_action == "struggleAgainst"):
@@ -144,13 +147,14 @@ func _react(_action: String, _args):
 		
 		struggleText = struggleData["text"]
 		
-		
-		var turnData = processStruggleTurn()
-		damage += turnData["damage"]
-		addLust += turnData["lust"]
-		addPain += turnData["pain"]
-		addStamina += turnData["stamina"]
-		
+		if(!fightMode):
+			var turnData = GM.pc.processStruggleTurn()
+			damage += turnData["damage"]
+			addLust += turnData["lust"]
+			addPain += turnData["pain"]
+			addStamina += turnData["stamina"]
+			additionalStruggleText = turnData["text"]
+			
 		if(damage != 0.0):
 			restraintData.takeDamage(damage)
 		if(addLust != 0):
@@ -178,7 +182,6 @@ func _react(_action: String, _args):
 				GM.pc.getInventory().addItem(item)
 				keptRestraintID = item.getUniqueID()
 		
-		
 		processTime(1*60)
 		
 	if(_action == "getridandcheckifokay"):
@@ -187,6 +190,10 @@ func _react(_action: String, _args):
 			GM.pc.getInventory().removeItem(item)
 		
 	if(_action == "checkifokay" || _action == "getridandcheckifokay"):
+		if(fightMode):
+			endScene()
+			return
+		
 		if(GM.pc.getLust() >= GM.pc.lustThreshold()):
 			setState("orgasm")
 			GM.pc.orgasmFrom("pc")
@@ -266,32 +273,6 @@ func _react(_action: String, _args):
 		
 	setState(_action)
 
-func processStruggleTurn():
-	additionalStruggleText = ""
-	var damage = 0.0
-	var addLust = 0
-	var addPain = 0
-	var addStamina = 0
-	
-	for item in GM.pc.getInventory().getEquppedRestraints():
-		var restraintData: RestraintData = item.getRestraintData()
-		var struggleData = restraintData.processStruggleTurn()
-		
-		if(struggleData == null):
-			continue
-			
-		if(struggleData.has("damage")):
-			damage += struggleData["damage"]
-		if(struggleData.has("lust")):
-			addLust += struggleData["lust"]
-		if(struggleData.has("pain")):
-			addPain += struggleData["pain"]
-		if(struggleData.has("stamina")):
-			addStamina += struggleData["stamina"]
-		if(struggleData.has("text")):
-			additionalStruggleText += struggleData["text"] + "\n\n"
-		
-	return {"damage": damage, "lust": addLust, "pain": addPain, "stamina": addStamina}
 
 func saveData():
 	var data = .saveData()

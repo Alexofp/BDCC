@@ -36,10 +36,6 @@ func _run():
 		
 	if(state == "lost" || state == "win"):		
 		saynn("The fight has ended")
-		
-	if(state == "inspecting"):
-		saynn("It's an enemy, wow")
-		addButton("Back", "Back to fighting", "return")
 	
 	if(state == "physattacks"):
 		saynn("Pick the attack to use")
@@ -138,7 +134,11 @@ func _run():
 		addButton("Physical Attack", "Kick em", "physattacks")
 		addButton("Lust Attack", "Lewd em", "lustattacks")
 		addButton("Special", "Kick em but in a special way", "specialattacks")
-		addButton("Inspect", "Look closer", "inspect")
+		#addButton("Inspect", "Look closer", "inspect")
+		if(GM.pc.getInventory().hasRemovableRestraints()):
+			addButton("Struggle", "Struggle against your restraints", "struggle")
+		else:
+			addDisabledButton("Struggle", "You don't have any restraints that you can struggle out of")
 		addButton("Wait", "Do nothing", "wait")
 		addButton("Inventory", "Use an item fron your inventory", "inventory")
 		
@@ -156,17 +156,14 @@ func _run():
 		addButton("Continue", "the battle has ended", "endbattle")
 
 func _react(_action: String, _args):
-	if(_action == "inspect"):
-		setState("inspecting")
+	if(_action == "struggle"):
+		runScene("StrugglingScene", [true], "struggle_scene")
 		
 	if(_action == "physattacks" || _action == "lustattacks" || _action == "specialattacks" || _action == "selfhumattacks" || _action == "humattacks" || _action == "inventory"):
 		setState(_action)
 		
 	if(_action == "return"):
 		setState("fighting")
-	
-	if(_action == "attack" || _action == "wait" || _action == "getup"):
-		beforeTurnChecks()
 	
 	if(_action == "doattack"):
 		setState("fighting")
@@ -190,6 +187,8 @@ func _react(_action: String, _args):
 		return
 	
 	if(_action == "getup"):
+		beforeTurnChecks()
+		
 		whatPlayerDid += doPlayerAttack("trygetupattack")
 		
 		whatEnemyDid = aiTurn()
@@ -198,6 +197,8 @@ func _react(_action: String, _args):
 		return
 	
 	if(_action == "attack"):
+		beforeTurnChecks()
+		
 		whatPlayerDid = "It's your turn to attack\n"
 		
 		#enemyCharacter.recievePain(10)
@@ -209,6 +210,8 @@ func _react(_action: String, _args):
 		afterTurnChecks()
 		return
 	if(_action == "wait"):
+		beforeTurnChecks()
+		
 		whatPlayerDid = "You decide to wait for a good moment to attack"
 		
 		whatEnemyDid = aiTurn()
@@ -218,6 +221,7 @@ func _react(_action: String, _args):
 		
 	if(_action == "dodge_donothing" || _action == "dodge_dodge" || _action == "dodge_block" || _action == "dodge_defocus"):
 		setState("fighting")
+		whatHappened = ""
 		if(_action == "dodge_donothing"):
 			whatPlayerDid = "You decide to let the attack happen"
 		if(_action == "dodge_dodge"):
@@ -260,9 +264,6 @@ func _react(_action: String, _args):
 			battleEndedHow = "pain"
 		endScene([battleState, battleEndedHow])
 		return
-
-func _react_scene_end(_tag, _result):
-	pass
 
 func doPlayerAttack(attackID):
 	var attack: Attack = GlobalRegistry.getAttack(attackID)
@@ -328,6 +329,30 @@ func beforeTurnChecks():
 	
 	GM.pc.processBattleTurn()
 	enemyCharacter.processBattleTurn()
+	
+	var turnData = GM.pc.processStruggleTurn()
+	#var damage = turnData["damage"]
+	var addLust = turnData["lust"]
+	var addPain = turnData["pain"]
+	var addStamina = turnData["stamina"]
+	var additionalStruggleText = turnData["text"]
+	
+	#if(damage != 0.0):
+	#	restraintData.takeDamage(damage)
+	if(addLust != 0):
+		GM.pc.addLust(addLust)
+		addMessage("You recieved "+str(addLust)+" lust")
+	if(addPain != 0):
+		GM.pc.addPain(addPain)
+		addMessage("You recieved "+str(addPain)+" pain")
+	if(addStamina != 0):
+		GM.pc.addStamina(-addStamina)
+		if(addStamina < 0):
+			addMessage("You gained "+str(-addStamina)+" stamina")
+		else:
+			addMessage("You used "+str(addStamina)+" stamina")
+	
+	whatHappened += additionalStruggleText
 	
 	if(state == ""):
 		setState("fighting")
@@ -412,6 +437,16 @@ func resolveCustomCharacterName(_charID):
 		return currentReceiverID
 	
 	return null
+
+func _react_scene_end(_tag, _result):
+	if(_tag == "struggle_scene"):
+		setState("fighting")
+		beforeTurnChecks()
+		
+		whatEnemyDid = aiTurn()
+
+		afterTurnChecks()
+
 
 func saveData():
 	var data = .saveData()

@@ -34,11 +34,7 @@ func _run():
 	#addDisabledButton("bark", "no awo")
 	
 	if(GM.pc.getInventory().hasRemovableRestraints()):
-		var lastTime = getFlag(Flag.Game_LastTimeStruggled, -1)
-		if(true || lastTime < 0 || (GM.main.getTime() >= lastTime+60*60)):
-			addButtonAt(8, "Struggle", "Struggle against your restraints", "struggle")
-		else:
-			addDisabledButtonAt(8, "Struggle", "You're too frustrated after the last time, wait for a few hours before trying again")
+		addButtonAt(8, "Struggle", "Struggle against your restraints", "struggle")
 	addButtonAt(13, "Tasks", "Look at your tasks", "tasks")
 	addButtonAt(14, "Inventory", "Look at your inventory", "inventory")
 	
