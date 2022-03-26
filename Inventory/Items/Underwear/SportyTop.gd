@@ -17,7 +17,7 @@ func getClothingSlot():
 func getBuffs():
 	return [
 		buff(Buff.PhysicalArmorBuff, [5]),
-		buff(Buff.PhysicalDamageBuff, [5]),
+		buff(Buff.MaxStaminaBuff, [5]),
 		]
 
 func getTakingOffStringLong(withS):

@@ -291,4 +291,7 @@ func hoursPassed(_howmuch):
 	var pc = npc
 	
 	if(pc.getInventory().hasRemovableRestraints()):
-		pc.addSkillExperience(Skill.BDSM, 1)
+		pc.addSkillExperience(Skill.BDSM, 5)
+
+	if(pc.hasEffect(StatusEffect.Naked)):
+		pc.addSkillExperience(Skill.Exhibitionism, 5)
