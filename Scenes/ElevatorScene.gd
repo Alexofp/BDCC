@@ -12,6 +12,7 @@ func _run():
 		var floors = [
 			["Cellblock", "hall_elevator", "Main level where all the inmate cells are"],
 			["Mineshafts", "mining_elevator", "Lower level where the prison is attached to an asteroid"],
+			["Medical", "med_elevator", "Floor that has all the medical and science facilities"],
 		]
 		
 		for fl in floors:
