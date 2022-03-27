@@ -34,7 +34,11 @@ func _run():
 		addButton("Talk", "Show a list of topics to talk about", "talk")
 		addButton("Appearance", "Take a closer look at the catgirl", "appearance")
 		addDisabledButton("Sex", "Not implemeted yet")
-		addDisabledButton("Offer apple", "Not done :(")
+		if(!getFlag(RahiModule.Rahi_GaveApple)):
+			if(GM.pc.getInventory().hasItemID("appleitem")):
+				addButton("Offer apple", "Maybe she would like one", "giveapple")
+			else:
+				addDisabledButton("Offer apple", "You need an apple for this")
 		addButton("Leave", "Do something else", "endthescene")
 		
 	if(state == "appearance"):
@@ -141,7 +145,66 @@ func _run():
 
 		addButton("Continue", "Continue talking", "talk")
 
+	if(state == "giveapple"):
+		saynn("You pull out a fresh apple and offer it to the feline. Rahi gives you a confused look, her arms rest on her calm tail.")
+
+		saynn("[say=rahi]That’s a nice apple..[/say]")
+
+		saynn("[say=pc]Take it, it’s for you.[/say]")
+
+		saynn("The kitten mewls, surprised. She carefully grabs the apple from you and sniffs it.")
+
+		saynn("[say=pc]It’s not poisoned, don’t worry, silly.[/say]")
+
+		saynn("[say=rahi]Thank you! Kitty knows.. She usually just eats in the canteen.[/say]")
+
+		saynn("She takes a bite, her eyes show happiness.")
+
+		saynn("[say=pc]Well, at least this is something different. Something actually edible.[/say]")
+
+		saynn("[say=rahi]Yes, it’s very good! Thank you again![/say]")
+
+		saynn("[say=pc]Don’t mention it.[/say]")
+
+		saynn("She smiles and shifts closer to you, her tail playfully prods your leg. She keeps leaving fang-marks on the apple.")
+
+		saynn("[say=rahi]This reminds her of her past..[/say]")
+
+		saynn("[say=pc]Life before prison?[/say]")
+
+		saynn("[say=rahi]No.. That kind of past was so long ago it feels like another life.. Meow..[/say]")
+
+		saynn("[say=rahi]She had a few owners.. here..[/say]")
+
+		saynn("[say=pc]Is that allowed?[/say]")
+
+		saynn("[say=rahi]It’s not disallowed.. If you’re stronger than someone then you can do whatever you want with them.. That’s kinda how life works here..[/say]")
+
+		saynn("You put your hand on kitty’s far shoulder, she snugs up close to you. You can hear her faint purring as she crunches on the apple.")
+
+		saynn("[say=pc]Shouldn’t staff protect the weaker ones.[/say]")
+
+		saynn("[say=rahi]Staff are doing it too.. But kitty liked it.. Having someone you belong to makes life easier.. Less problems to solve, meow. Free food and bed.. as long as you do what they want..[/say]")
+
+		saynn("[say=pc]I see how it is.[/say]")
+
+		saynn("[say=rahi]Yeah..[/say]")
+
+		saynn("Kitty rests on your chest, her gaze is directed up at the very high ceiling. You both stay silent for a few minutes. Seems like this kitty has a long history of being owned.")
+
+		saynn("[say=pc]Thanks for sharing, kitty.[/say]")
+
+		saynn("The feline mewls and goes back to her normal sitting position, letting you stand up if you want.")
+
+		saynn("[say=rahi]No problem.. Thanks for the apple..[/say]")
+		
+		addButton("Continue", "Life is tough", "")
+
 func _react(_action: String, _args):
+	if(_action == "giveapple"):
+		GM.main.setFlag(RahiModule.Rahi_GaveApple, true)
+		GM.pc.getInventory().removeXOfOrDestroy("appleitem", 1)
+	
 	if(_action == "who_are_you"):
 		GM.main.setFlag(RahiModule.Rahi_AskedName, true)
 	
