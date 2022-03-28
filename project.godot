@@ -249,6 +249,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Game/MainScene.gd"
 }, {
+"base": "Module",
+"class": "MedicalModule",
+"language": "GDScript",
+"path": "res://Modules/MedicalModule/Medical_module.gd"
+}, {
 "base": "Reference",
 "class": "Module",
 "language": "GDScript",
@@ -518,6 +523,7 @@ _global_script_class_icons={
 "LimbTypes": "",
 "LustInterests": "",
 "MainThing": "",
+"MedicalModule": "",
 "Module": "",
 "NovaModule": "",
 "Orifice": "",
@@ -566,7 +572,7 @@ _global_script_class_icons={
 
 [application]
 
-config/name="LewdGame"
+config/name="BDCC"
 run/main_scene="res://UI/MainMenu/MainMenu.tscn"
 config/icon="res://icon.png"
 config/windows_native_icon="res://icon.ico"

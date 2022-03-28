@@ -18,6 +18,8 @@ position = Vector2( 64, 0 )
 
 [node name="MedRoom4" parent="." index="3" instance=ExtResource( 2 )]
 position = Vector2( 0, -64 )
+roomName = "Med lobby"
+roomID = "med_lobbymain"
 roomSprite = 1
 
 [node name="MedRoom5" parent="." index="4" instance=ExtResource( 2 )]

@@ -51,7 +51,7 @@ func getChangeableOptions():
 			"value": isContentEnabled(contentType),
 		})
 	settings.append({
-		"name": "Enabled Fetish Content",
+		"name": "Enabled Fetish Content (not implemented yet)",
 		"id": "enabledContent",
 		"options": contentSettings,
 	})

@@ -4,7 +4,7 @@ func _init():
 	id = "eliza"
 	
 func _getName():
-	return "Eliza"
+	return "Eliza Quinn"
 
 func getGender():
 	return Character.Gender.Female
