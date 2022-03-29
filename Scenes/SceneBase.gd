@@ -234,6 +234,9 @@ func resolveCustomCharacterName(_charID):
 func canSave():
 	return true
 
+func supportsBattleTurns():
+	return false
+
 func setLocationName(locationName: String):
 	if(GM.pc.isBlindfolded()):
 		locationName = "???"

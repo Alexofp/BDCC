@@ -79,7 +79,12 @@ func _run():
 		var usableItems = playerInventory.getAllCombatUsableItems()
 		
 		for item in usableItems:
-			addButton(item.getVisibleName(), item.getCombatDescription(), "useitem", [item])
+			var intoxic = item.addsIntoxication()
+			
+			if(intoxic <= 0 || GM.pc.canIntoxicateMore(intoxic)):
+				addButton(item.getVisibleName(), item.getCombatDescription(), "useitem", [item])
+			else:
+				addDisabledButton(item.getVisibleName(), "[color=red]Too intoxicated to use this[/color]\n"+item.getCombatDescription())
 	
 		addButton("Back", "Back to fighting", "return")
 	
@@ -180,7 +185,7 @@ func _react(_action: String, _args):
 		beforeTurnChecks()
 		
 		var item = _args[0]
-		whatPlayerDid += item.useInCombat(GM.pc, enemyCharacter)
+		whatPlayerDid += item.useInCombatWithBuffs(GM.pc, enemyCharacter)
 		whatEnemyDid = aiTurn()
 
 		afterTurnChecks()
@@ -447,6 +452,8 @@ func _react_scene_end(_tag, _result):
 
 		afterTurnChecks()
 
+func supportsBattleTurns():
+	return true
 
 func saveData():
 	var data = .saveData()

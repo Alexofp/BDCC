@@ -46,6 +46,22 @@ static func join(arr: Array, separator: String = "") -> String:
 	return output
 
 # input 12345
+# output "3h 25m 45s"
+static func getTimeStringHumanReadable(t):
+	var _seconds = floor(fmod(t, 60.0))
+	var _minutes = floor(fmod(t/60.0, 60.0))
+	var _hours = floor(t/3600.0)
+	
+	var result = ""
+	if(_hours > 0):
+		result += str(_hours)+"h "
+	if(_minutes > 0):
+		result += str(_minutes)+"m "
+	if(_seconds > 0):
+		result += str(_seconds)+"s "
+	return result.trim_suffix(" ")
+
+# input 12345
 # output "03:25:45"
 static func getTimeStringHHMMSS(t):
 	var _seconds = floor(fmod(t, 60.0))

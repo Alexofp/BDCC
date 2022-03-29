@@ -17,3 +17,14 @@ func apply(_buffHolder):
 
 func getBuffColor():
 	return Color.white
+
+func saveData():
+	var data = {}
+
+	return data
+	
+func loadData(_data):
+	pass
+
+func combine(_otherBuff):
+	pass

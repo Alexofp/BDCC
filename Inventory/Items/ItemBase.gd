@@ -40,6 +40,25 @@ func getVisisbleDescription():
 	var text = getDescription()
 	if(hasTag(ItemTag.Illegal)):
 		text += "\n[color=red]This item is illegal![/color]"
+	if(addsIntoxication() > 0.0):
+		text += "\n[color=red]Adds "+str(round(addsIntoxication()*100.0))+"% intoxication[/color]"
+	
+	var timedBuffs = getTimedBuffs()
+	if(timedBuffs.size() > 0):
+		var t = getBuffsDurationSeconds()
+		var tstring = Util.getTimeStringHumanReadable(t)
+		
+		text += "\n- For the next "+tstring+":"
+		for buff in timedBuffs:
+			text += "\n" + "[color=#"+buff.getBuffColor().to_html(false)+"]" + buff.getVisibleDescription() + "[/color]"
+	
+	var turnBuffs = getTimedBuffsTurns()
+	if(turnBuffs.size() > 0):
+		var duration = getBuffsDurationTurns()
+		
+		text += "\n- Next "+str(duration)+" turns (in-fight only):"
+		for buff in turnBuffs:
+			text += "\n" + "[color=#"+buff.getBuffColor().to_html(false)+"]" + buff.getVisibleDescription() + "[/color]"
 	
 	var buffs = getBuffs()
 	if(buffs.size() > 0):
@@ -65,8 +84,26 @@ func tryCombine(_otherItem):
 func canUseInCombat():
 	return false
 
+func useInCombatWithBuffs(_attacker, _reciever):
+	if(_attacker.isPlayer()):
+		var intoxic = addsIntoxication()
+		if(intoxic > 0.0):
+			_attacker.addIntoxication(addsIntoxication())
+			
+		var timedBuffs = getTimedBuffs()
+		if(timedBuffs.size() > 0):
+			_attacker.addTimedBuffs(timedBuffs, getBuffsDurationSeconds())
+		var turnBuffs = getTimedBuffsTurns()
+		if(turnBuffs.size() > 0):
+			_attacker.addTimedBuffsTurns(turnBuffs, getBuffsDurationTurns())
+	
+	return useInCombat(_attacker, _reciever)
+
 func useInCombat(_attacker, _reciever):
 	return ""
+
+func addsIntoxication() -> float:
+	return 0.0
 
 func destroyMe():
 	assert(currentInventory != null)
@@ -114,6 +151,18 @@ func getPutOnScene():
 
 func getBuffs():
 	return []
+
+func getTimedBuffs():
+	return []
+
+func getBuffsDurationSeconds():
+	return 0
+
+func getTimedBuffsTurns():
+	return []
+
+func getBuffsDurationTurns():
+	return 0
 
 func buff(buffid, args = []):
 	var buff: BuffBase = GlobalRegistry.createBuff(buffid)

@@ -21,6 +21,13 @@ var inmateType = InmateType.General
 var bodyFluids = []
 var bodyMessiness = 0
 
+# Intoxication stuff
+var intoxication: float = 0.0
+var timedBuffs: Array = []
+var timedBuffsDurationSeconds: int = 0
+var timedBuffsTurns: Array = []
+var timedBuffsDurationTurns: int = 0
+
 var bodypartStorageNode
 
 func _init():
@@ -169,6 +176,21 @@ func calculateBuffs():
 func updateNonBattleEffects():
 	buffsHolder.calculateBuffs()
 	
+	if(getIntoxicationLevel() >= 0.1):
+		addEffect(StatusEffect.Intoxicated)
+	else:
+		removeEffect(StatusEffect.Intoxicated)
+		
+	if(timedBuffs.size() > 0):
+		addEffect(StatusEffect.TimedEffects)
+	else:
+		removeEffect(StatusEffect.TimedEffects)
+		
+	if(timedBuffsTurns.size() > 0):
+		addEffect(StatusEffect.TimedEffectsTurns)
+	else:
+		removeEffect(StatusEffect.TimedEffectsTurns)
+	
 	if(hasBoundArms()):
 		addEffect(StatusEffect.ArmsBound)
 	else:
@@ -223,11 +245,18 @@ func updateNonBattleEffects():
 		addEffect(StatusEffect.HasCumInsideMouth)
 	else:
 		removeEffect(StatusEffect.HasCumInsideMouth)
+		
+	emit_signal("stat_changed")
 
 func processBattleTurn():
 	.processBattleTurn()
 	updateNonBattleEffects()
 	skillsHolder.giveSkillExperienceBattleTurn()
+	
+	if(timedBuffsDurationTurns > 0):
+		timedBuffsDurationTurns -= 1
+		if(timedBuffsDurationTurns <= 0):
+			timedBuffsTurns.clear()
 
 func processTime(_secondsPassed):
 	for bodypartSlot in bodyparts:
@@ -235,6 +264,14 @@ func processTime(_secondsPassed):
 		if(bodypart == null):
 			continue
 		bodypart.processTime(_secondsPassed)
+	
+	if(intoxication > 0.0):
+		intoxication -= _secondsPassed / 30000.0
+	
+	if(timedBuffsDurationSeconds > 0):
+		timedBuffsDurationSeconds -= _secondsPassed
+		if(timedBuffsDurationSeconds <= 0):
+			timedBuffs.clear()
 	
 	updateNonBattleEffects()
 	
@@ -404,6 +441,12 @@ func saveData():
 	data["inventory"] = inventory.saveData()
 	data["skills"] = skillsHolder.saveData()
 	
+	data["timedBuffs"] = saveBuffsData(timedBuffs)
+	data["timedBuffsDurationSeconds"] = timedBuffsDurationSeconds
+	data["timedBuffsTurns"] = saveBuffsData(timedBuffsTurns)
+	data["timedBuffsDurationTurns"] = timedBuffsDurationTurns
+	data["intoxication"] = intoxication
+	
 	return data
 
 func loadData(data):
@@ -439,6 +482,38 @@ func loadData(data):
 	loadStatusEffectsData(SAVE.loadVar(data, "statusEffects", {}))
 	inventory.loadData(SAVE.loadVar(data, "inventory", {}))
 	skillsHolder.loadData(SAVE.loadVar(data, "skills", {}))
+	
+	timedBuffs = loadBuffsData(SAVE.loadVar(data, "timedBuffs", []))
+	timedBuffsDurationSeconds = SAVE.loadVar(data, "timedBuffsDurationSeconds", 0)
+	timedBuffsTurns = loadBuffsData(SAVE.loadVar(data, "timedBuffsTurns", []))
+	timedBuffsDurationTurns = SAVE.loadVar(data, "timedBuffsDurationTurns", 0)
+	intoxication = SAVE.loadVar(data, "intoxication", 0.0)
+	
+	updateNonBattleEffects()
+
+func saveBuffsData(buffs):
+	var data = []
+	
+	for buff in buffs:
+		var buffData = {
+			"id": buff.id,
+			"buffdata": buff.saveData(),
+		}
+		data.append(buffData)
+	return data
+
+func loadBuffsData(data):
+	var result = []
+	
+	for buffFullData in data:
+		var id = SAVE.loadVar(buffFullData, "id", "error")
+		var buffdata = SAVE.loadVar(buffFullData, "buffdata", {})
+		
+		var buff: BuffBase = GlobalRegistry.createBuff(id)
+		buff.loadData(buffdata)
+		result.append(buff)
+	return result
+		
 
 func getFightState(_battleName):
 	if(getPainLevel() > getLustLevel()):
@@ -801,3 +876,53 @@ func calculateBestRestraintLevel():
 		return RNG.randi_range(1, 3)
 	else:
 		return RNG.randi_range(3, 5)
+
+func addIntoxication(howmuch: float):
+	intoxication += howmuch
+	intoxication = clamp(intoxication, 0.0, 1.0)
+	
+	updateNonBattleEffects()
+
+func getIntoxicationLevel() -> float:
+	return intoxication
+
+func canIntoxicateMore(howmuch: float):
+	var free = 1.0 - getIntoxicationLevel()
+	if(free >= howmuch):
+		return true
+	if(free >= 0.1):
+		return true
+	return false
+
+func addTimedBuffs(buffs: Array, seconds):
+	for newbuff in buffs:
+		var foundBuff = false
+		for oldbuff in timedBuffs:
+			if(newbuff.id == oldbuff.id):
+				oldbuff.combine(newbuff)
+				foundBuff = true
+				break
+		if(!foundBuff):
+			timedBuffs.append(newbuff)
+	
+	if(seconds > timedBuffsDurationSeconds):
+		timedBuffsDurationSeconds = seconds
+	updateNonBattleEffects()
+
+func addTimedBuffsTurns(buffs: Array, turns):
+	if(!GM.main.supportsBattleTurns()):
+		return
+	
+	for newbuff in buffs:
+		var foundBuff = false
+		for oldbuff in timedBuffsTurns:
+			if(newbuff.id == oldbuff.id):
+				oldbuff.combine(newbuff)
+				foundBuff = true
+				break
+		if(!foundBuff):
+			timedBuffsTurns.append(newbuff)
+	
+	if(turns > timedBuffsDurationTurns):
+		timedBuffsDurationTurns = turns
+	updateNonBattleEffects()

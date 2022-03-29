@@ -98,6 +98,13 @@ func canSave():
 	
 	return true
 
+func supportsBattleTurns():
+	for scene in sceneStack:
+		if(scene.supportsBattleTurns()):
+			return true
+	
+	return false
+
 func saveData():
 	var data = {}
 	data["messages"] = messages

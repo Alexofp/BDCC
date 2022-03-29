@@ -12,6 +12,7 @@ var sellingItems = [
 	"vaginalplug",
 	"restraintkey",
 	"ropeharness",
+	"painkillers",
 	]
 var sellItemsData = {}
 
