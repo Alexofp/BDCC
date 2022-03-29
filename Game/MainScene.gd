@@ -281,3 +281,6 @@ func _on_Player_skillLevelChanged(_skillID):
 		
 		addMessage("Your '"+skill.getVisibleName()+"' skill has increased to level "+str(skill.getLevel())+"!")
 		
+
+func _on_Player_orificeBecomeMoreLoose(orificeName, _newvalue, _oldvalue):
+	addMessage("Your "+orificeName+" is stretched and is now more used to the insertions")

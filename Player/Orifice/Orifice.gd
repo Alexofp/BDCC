@@ -7,8 +7,47 @@ var contents = []
 var dirtyFlag = true
 var cachedFluidsAmount = 0
 
+var looseness: float = 0.0
+
 func getCapacity() -> float:
-	return 2000.0
+	return round(1000.0 + 500.0 * looseness)
+
+func getElasticity() -> float:
+	return 1.0
+
+func getResistance() -> float:
+	return 1.0
+
+func getLooseness() -> float:
+	return looseness
+
+func getComfortableInsertion() -> float:
+	return 10.0 + pow(looseness, 2.0)
+
+func handleInsertion(size: float):
+	var comfortable = getComfortableInsertion()
+	
+	if(size <= comfortable):
+		return
+	
+	var diff = (size - comfortable)
+	var add = pow(diff, 0.1) / getResistance()
+	
+	looseness += add
+
+func hoursPassed(_howmuch):
+	if(looseness <= 0.0):
+		looseness = 0.0
+		return
+	
+	var elast = getElasticity()
+	for _i in range(_howmuch):
+		var rem = pow(looseness, 0.1) * elast / 10.0
+		if(rem < 0.05):
+			rem = 0.05
+		looseness -= rem
+	if(looseness < 0.0):
+		looseness = 0.0
 
 # How much fluids get naturally obsorbed every minute
 func getNaturalDrain() -> float:
@@ -106,10 +145,12 @@ func getUniqueCharactersAmount():
 func saveData():
 	var data = {
 		"contents": contents,
+		"looseness": looseness,
 	}
 	
 	return data
 
 func loadData(data):
 	contents = SAVE.loadVar(data, "contents", [])
+	looseness = SAVE.loadVar(data, "looseness", 0.0)
 	dirtyFlag = true

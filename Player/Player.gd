@@ -28,6 +28,9 @@ var timedBuffsDurationSeconds: int = 0
 var timedBuffsTurns: Array = []
 var timedBuffsDurationTurns: int = 0
 
+#
+signal orificeBecomeMoreLoose(orificeName, newvalue, oldvalue)
+
 var bodypartStorageNode
 
 func _init():
@@ -295,6 +298,10 @@ func hoursPassed(_howmuch):
 		addPain(addValue)
 		
 	skillsHolder.hoursPassed(_howmuch)
+	
+	for bodypartSlot in bodyparts:
+		if(bodyparts[bodypartSlot] != null):
+			bodyparts[bodypartSlot].hoursPassed(_howmuch)
 
 func processStruggleTurn():
 	var texts = []
@@ -693,6 +700,37 @@ func getOutsideMessinessFluidList():
 		if(!myfluids.has(bodyFluidData[1])):
 			myfluids.append(bodyFluidData[1])
 	return myfluids
+
+func getPenisSize():
+	if(!hasBodypart(BodypartSlot.Penis)):
+		return 0.0
+	
+	var bodypart = getBodypart(BodypartSlot.Penis)
+	return bodypart.getLength()
+
+func gotFuckedBy(bodypartSlot, characterID, showMessages = true):
+	if(!hasBodypart(bodypartSlot)):
+		return
+	
+	var ch = GlobalRegistry.getCharacter(characterID)
+	var thebodypart = getBodypart(bodypartSlot)
+	assert(ch != null)
+	
+	var orifice: Orifice = thebodypart.getOrifice()
+	var oldLooseness = orifice.getLooseness()
+	thebodypart.handleInsertion(ch.getPenisSize())
+	var newLooseness = orifice.getLooseness()
+	if(newLooseness > oldLooseness && showMessages):
+		emit_signal("orificeBecomeMoreLoose", thebodypart.getOrificeName(), newLooseness, oldLooseness)
+
+func gotVaginaFuckedBy(characterID, showMessages = true):
+	return gotFuckedBy(BodypartSlot.Vagina, characterID, showMessages)
+
+func gotAnusFuckedBy(characterID, showMessages = true):
+	return gotFuckedBy(BodypartSlot.Anus, characterID, showMessages)
+
+func gotThroatFuckedBy(characterID, showMessages = true):
+	return gotFuckedBy(BodypartSlot.Head, characterID, showMessages)
 
 func cummedInBodypartBy(bodypartSlot, characterID, sourceType = null):
 	if(!hasBodypart(bodypartSlot)):

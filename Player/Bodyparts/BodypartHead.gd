@@ -36,6 +36,19 @@ func processTime(_seconds: int):
 		return
 	orifice.processTime(_seconds)
 
+func hoursPassed(_howmuch):
+	if(orifice == null):
+		return
+	orifice.hoursPassed(_howmuch)
+
+func handleInsertion(size: float):
+	if(orifice == null):
+		return
+	orifice.handleInsertion(size)
+
+func getOrificeName():
+	return "throat"
+
 func saveData():
 	return {
 		"orificeData": orifice.saveData(),

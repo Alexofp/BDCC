@@ -559,6 +559,9 @@ func getBodypartTooltipName(_bodypartSlot):
 func getBodypartTooltipInfo(_bodypartSlot):
 	return "error"
 
+func getPenisSize():
+	return 20.0
+
 func getFluidType(fluidSource):
 	if(fluidSource == BodilyFluids.FluidSource.Penis):
 		return BodilyFluids.FluidType.Cum
