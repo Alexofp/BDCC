@@ -4,6 +4,7 @@ class_name ButtonChecks
 enum {
 	NotLate,
 	NotGagged,
+	NotOralBlocked,
 	NotHandsBlocked,
 	NotArmsRestrained,
 	NotLegsRestrained,
@@ -19,7 +20,7 @@ static func getReasonText(reason):
 	
 	if(reason == NotLate):
 		return "It's way too late to do this"
-	if(reason == NotGagged):
+	if(reason in [NotGagged, NotOralBlocked]):
 		return "You can't do this while gagged"
 	if(reason == NotHandsBlocked):
 		return "You can't do this with your hands blocked"
@@ -46,6 +47,9 @@ static func check(checks: Array):
 				return reason
 		if(reason == NotGagged):
 			if(GM.pc.isGagged()):
+				return reason
+		if(reason == NotOralBlocked):
+			if(GM.pc.isOralBlocked()):
 				return reason
 		if(reason == NotArmsRestrained):
 			if(GM.pc.hasBoundArms()):

@@ -168,6 +168,9 @@ func isBlindfolded():
 	return buffsHolder.hasBuff(Buff.BlindfoldBuff)
 
 func isGagged():
+	return buffsHolder.hasBuff(Buff.GagBuff) || buffsHolder.hasBuff(Buff.RingGagBuff)
+
+func isOralBlocked():
 	return buffsHolder.hasBuff(Buff.GagBuff)
 
 func canHandleBlindness():

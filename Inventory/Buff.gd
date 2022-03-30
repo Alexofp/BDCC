@@ -18,6 +18,7 @@ const AmbientPainBuff = "AmbientPainBuff"
 const ExposureBuff = "ExposureBuff"
 
 const GagBuff = "GagBuff"
+const RingGagBuff = "RingGagBuff"
 const RestrainedArmsBuff = "RestrainedArmsBuff"
 const BlockedHandsBuff = "BlockedHandsBuff"
 const RestrainedLegsBuff = "RestrainedLegsBuff"

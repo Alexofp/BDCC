@@ -2,6 +2,8 @@ extends "res://Scenes/SceneBase.gd"
 
 var sellingItems = [
 	"ballgag",
+	"ringgag",
+	"caninedildogag",
 	"appleitem",
 	"blindfold",
 	"policecuffs",

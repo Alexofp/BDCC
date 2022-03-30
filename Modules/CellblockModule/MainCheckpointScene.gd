@@ -133,7 +133,7 @@ func _run():
 
 		addButton("Outside", "Do the required minimum and avoid getting any mess on you", "outside")
 		addButton("Facial", "Let him cum on your face", "facial")
-		addButtonWithChecks("Mouth", "Why should you waste all that jizz, open your mouth and catch it", "mouth", [], [ButtonChecks.NotGagged])
+		addButtonWithChecks("Mouth", "Why should you waste all that jizz, open your mouth and catch it", "mouth", [], [ButtonChecks.NotOralBlocked])
 		
 	if(state == "outside"):
 		saynn("His cock throbs more, the knot is so fat you can’t wrap your digits around it. Only a few seconds pass before the guy starts grunting while his cock shoots spurts of cum, one after another. You sit slightly to the side and avoid all of the mess, watching the guy paint the opposite wall with thick jizz.")
