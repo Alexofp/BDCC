@@ -88,6 +88,7 @@ func giveBodypart(bodypart: Bodypart):
 	bodyparts[slot] = bodypart
 	bodypartStorageNode.add_child(bodypart)
 	bodypart.name = bodypart.visibleName
+	bodypart.character = weakref(self)
 	emit_signal("bodypart_changed")
 
 func hasBodypart(slot):
@@ -484,6 +485,7 @@ func loadData(data):
 		bodypart.loadData(SAVE.loadVar(loadedBodyparts[slot], "data", {}))
 		bodypartStorageNode.add_child(bodypart)
 		bodypart.name = bodypart.visibleName
+		bodypart.character = weakref(self)
 	
 	emit_signal("bodypart_changed")
 	loadStatusEffectsData(SAVE.loadVar(data, "statusEffects", {}))
@@ -964,3 +966,18 @@ func addTimedBuffsTurns(buffs: Array, turns):
 	if(turns > timedBuffsDurationTurns):
 		timedBuffsDurationTurns = turns
 	updateNonBattleEffects()
+
+func getGenitalElasticity():
+	var value = 0.0
+	value += buffsHolder.getGenitalElasticity()
+	return value
+	
+func getGenitalResistance():
+	var value = 0.0
+	value += buffsHolder.getGenitalResistance()
+	return value
+
+func getOrificeMinLooseness(orificeType):
+	var value = 0.0
+	value += buffsHolder.getOrificeMinLooseness(orificeType)
+	return value

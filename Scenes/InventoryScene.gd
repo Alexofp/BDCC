@@ -88,8 +88,12 @@ func _run():
 		
 		var items = GM.pc.getInventory().getAllItems()
 		for item in items:
-			addButton(item.getStackName(), item.getVisisbleDescription(), "lookat", [item.getUniqueID()])
-		
+			var actions = item.getPossibleActions()
+			if(actions.size() > 0):
+				addButton(item.getStackName(), item.getVisisbleDescription(), "lookat", [item.getUniqueID()])
+			else:
+				addDisabledButton(item.getStackName(), item.getVisisbleDescription())
+			
 		addButton("Back", "Go back", "")
 
 		

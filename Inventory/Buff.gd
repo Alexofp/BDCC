@@ -1,27 +1,33 @@
 extends Object
 class_name Buff
 
-const PhysicalDamageBuff = "physicalDamageBuff"
-const LustDamageBuff = "lustDamageBuff"
-const ReceivedLustDamageBuff = "receivedLustDamageBuff"
-const ReceivedPhysicalDamageBuff = "receivedPhysicalDamageBuff"
+const PhysicalDamageBuff = "PhysicalDamageBuff"
+const LustDamageBuff = "LustDamageBuff"
+const ReceivedLustDamageBuff = "ReceivedLustDamageBuff"
+const ReceivedPhysicalDamageBuff = "ReceivedPhysicalDamageBuff"
 
-const DodgeChanceBuff = "dodgeChanceBuff"
-const AccuracyBuff = "accuracyBuff"
+const DodgeChanceBuff = "DodgeChanceBuff"
+const AccuracyBuff = "AccuracyBuff"
 
-const MaxPainBuff = "maxPainBuff"
-const MaxLustBuff = "maxLustBuff"
-const MaxStaminaBuff = "maxStaminaBuff"
+const MaxPainBuff = "MaxPainBuff"
+const MaxLustBuff = "MaxLustBuff"
+const MaxStaminaBuff = "MaxStaminaBuff"
 
-const AmbientLustBuff = "ambientLustBuff"
-const AmbientPainBuff = "ambientPainBuff"
-const ExposureBuff = "exposureBuff"
+const AmbientLustBuff = "AmbientLustBuff"
+const AmbientPainBuff = "AmbientPainBuff"
+const ExposureBuff = "ExposureBuff"
 
-const GagBuff = "gagBuff"
-const RestrainedArmsBuff = "restrainsArmsBuff"
-const BlockedHandsBuff = "blockedHandsBuff"
-const RestrainedLegsBuff = "restrainsLegsBuff"
-const BlindfoldBuff = "blindfoldBuff"
+const GagBuff = "GagBuff"
+const RestrainedArmsBuff = "RestrainedArmsBuff"
+const BlockedHandsBuff = "BlockedHandsBuff"
+const RestrainedLegsBuff = "RestrainedLegsBuff"
+const BlindfoldBuff = "BlindfoldBuff"
 
-const LustArmorBuff = "lustArmorBuff"
-const PhysicalArmorBuff = "physicalArmorBuff"
+const LustArmorBuff = "LustArmorBuff"
+const PhysicalArmorBuff = "PhysicalArmorBuff"
+
+const GenitalElasticityBuff = "GenitalElasticityBuff"
+const GenitalResistanceBuff = "GenitalResistanceBuff"
+const MinLoosenessVaginaBuff = "MinLoosenessVaginaBuff"
+const MinLoosenessAnusBuff = "MinLoosenessAnusBuff"
+const MinLoosenessThroatBuff = "MinLoosenessThroatBuff"

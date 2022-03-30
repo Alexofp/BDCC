@@ -9,17 +9,74 @@ var cachedFluidsAmount = 0
 
 var looseness: float = 0.0
 
+var bodypart: WeakRef = null
+var isGenital = true
+var orificeType = OrificeType.Vagina
+
 func getCapacity() -> float:
 	return round(1000.0 + 500.0 * looseness)
 
-func getElasticity() -> float:
+func getBaseElasticity() -> float:
 	return 1.0
 
-func getResistance() -> float:
+func getBaseResistance() -> float:
 	return 1.0
+
+func getElasticity() -> float:
+	var value = getBaseElasticity()
+	if(isGenital && bodypart != null):
+		var bodypartObject = bodypart.get_ref()
+		var pc = bodypartObject.getCharacter()
+		value += pc.getGenitalElasticity()
+	
+	if(value < 0.01):
+		return 0.01
+	return value
+
+func getResistance() -> float:
+	var value = getBaseResistance()
+	
+	if(isGenital && bodypart != null):
+		var bodypartObject = bodypart.get_ref()
+		var pc = bodypartObject.getCharacter()
+		value += pc.getGenitalResistance()
+	
+	if(value < 0.01):
+		return 0.01
+	return value
 
 func getLooseness() -> float:
 	return looseness
+
+func getMinLooseness() -> float:
+	var value = 0.0
+	
+	if(bodypart != null):
+		var bodypartObject = bodypart.get_ref()
+		var pc = bodypartObject.getCharacter()
+		value += pc.getOrificeMinLooseness(orificeType)
+	
+	return value
+ 
+static func loosenessToString(value):
+	if(value <= 0.1):
+		return "very tight"
+	if(value <= 1.1):
+		return "tight"
+	if(value <= 2.5):
+		return "nice and pretty"
+	if(value <= 5.5):
+		return "slightly loose"
+	if(value <= 9.5):
+		return "loose"
+	if(value <= 20.5):
+		return "very used"
+	if(value <= 50.5):
+		return "stretched wide"
+	return "gaping wide"
+
+func getLoosenessString():
+	return loosenessToString(looseness)
 
 func getComfortableInsertion() -> float:
 	return 10.0 + pow(looseness, 2.0)
@@ -36,16 +93,24 @@ func handleInsertion(size: float):
 	looseness += add
 
 func hoursPassed(_howmuch):
-	if(looseness <= 0.0):
-		looseness = 0.0
+	var minLoose = getMinLooseness()
+	
+	if(abs(looseness - minLoose) <= 0.001):
+		looseness = minLoose
 		return
 	
 	var elast = getElasticity()
 	for _i in range(_howmuch):
-		var rem = pow(looseness, 0.1) * elast / 10.0
-		if(rem < 0.05):
-			rem = 0.05
-		looseness -= rem
+		var rem = pow(abs(looseness - minLoose), 0.1) / 50.0
+		if(rem < 0.005):
+			rem = 0.005
+		if(rem > abs(looseness - minLoose)):
+			rem = abs(looseness - minLoose)
+			
+		if(looseness > minLoose):
+			looseness -= rem * elast
+		elif(looseness < minLoose):
+			looseness += rem / elast
 	if(looseness < 0.0):
 		looseness = 0.0
 

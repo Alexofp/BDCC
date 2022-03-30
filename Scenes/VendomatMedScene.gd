@@ -4,4 +4,5 @@ func _init():
 	sceneID = "VendomatMedScene"
 	sellingItems = [
 		"painkillers",
+		"lube",
 	]

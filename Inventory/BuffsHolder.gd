@@ -15,6 +15,9 @@ var extraStamina = 0
 var ambientPain = 0
 var ambientLust = 0
 var exposure = 0
+var genitalElasticity = 0.0
+var genitalResistance = 0.0
+var orificeMinLooseness = {}
 
 func _ready():
 	name = "Buffs"
@@ -37,11 +40,17 @@ func calculateBuffs():
 	ambientPain = 0
 	ambientLust = 0
 	exposure = 0
+	genitalElasticity = 0.0
+	genitalResistance = 0.0
 	
 	for damageType in DamageType.getAll():
 		dealDamageMult[damageType] = 0.0
 		recieveDamageMult[damageType] = 0.0
 		armor[damageType] = 0
+		
+	orificeMinLooseness.clear()
+	for orificeType in OrificeType.getAll():
+		orificeMinLooseness[orificeType] = 0.0
 	
 	var items = npc.getInventory().getAllEquippedItems()
 	for slot in items:
@@ -108,3 +117,15 @@ func getAmbientLust():
 
 func getExposure():
 	return exposure
+
+func getGenitalElasticity():
+	return genitalElasticity
+
+func getGenitalResistance():
+	return genitalResistance
+
+func getOrificeMinLooseness(orificeType):
+	if(!orificeMinLooseness.has(orificeType)):
+		return 0.0
+	
+	return orificeMinLooseness[orificeType]

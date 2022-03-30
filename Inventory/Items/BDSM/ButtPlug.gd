@@ -1,7 +1,5 @@
 extends ItemBase
 
-var size = 10
-
 func _init():
 	id = "buttplug"
 
@@ -9,7 +7,7 @@ func getVisibleName():
 	return "Buttplug"
 	
 func getDescription():
-	return "A classic plug made out of black silicon, this one has a length of "+str(size)+"cm"
+	return "A classic plug made out of black silicon, this one is of a normal size"
 
 func getClothingSlot():
 	return InventorySlot.Anal
@@ -17,19 +15,8 @@ func getClothingSlot():
 func getBuffs():
 	return [
 		buff(Buff.AmbientLustBuff, [10]),
+		buff(Buff.MinLoosenessAnusBuff, [2.0]),
 		]
-
-func saveData():
-	var data = .saveData()
-	
-	data["size"] = size
-	
-	return data
-	
-func loadData(data):
-	.loadData(data)
-	
-	size = SAVE.loadVar(data, "size", 10)
 
 func getPrice():
 	return 0

@@ -1,0 +1,41 @@
+extends StatusEffectBase
+
+func _init():
+	id = StatusEffect.LubedUp
+	isBattleOnly = false
+	
+func initArgs(_args = []):
+	if(_args.size() > 0):
+		turns = _args[0]
+	else:
+		turns = 4*60*60
+	
+func processBattleTurn():
+	pass
+	
+func processTime(_secondsPassed: int):
+	turns -= _secondsPassed
+	if(turns <= 0):
+		stop()
+
+func getEffectName():
+	return "Lubed up"
+
+func getEffectDesc():
+	return "Your orifices stretch less from insertions and recover faster for "+Util.getTimeStringHumanReadable(turns)
+
+func getEffectImage():
+	return "res://UI/StatusEffectsPanel/images/butt.png"
+
+func getIconColor():
+	return IconColorGreen
+
+func combine(_args = []):
+	if(_args.size() > 0):
+		turns = max(_args[0], turns)
+
+func getBuffs():
+	return [
+		buff(Buff.GenitalElasticityBuff, [300.0]),
+		buff(Buff.GenitalResistanceBuff, [300.0]),
+	]

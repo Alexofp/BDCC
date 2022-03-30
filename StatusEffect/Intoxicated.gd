@@ -22,7 +22,14 @@ func getEffectDesc():
 	
 	var intoxication: float = character.getIntoxicationLevel()
 
-	return "You are "+str(round(intoxication*100.0))+"% intoxicated"
+	var text = "You are "+str(round(intoxication*100.0))+"% intoxicated."
+	
+	if(intoxication >= 0.4):
+		text += " You can barely stand on your feet."
+	elif(intoxication >= 0.4):
+		text += " You feel drunk."
+	
+	return text
 
 func getEffectImage():
 	return "res://UI/StatusEffectsPanel/images/mouth.png"
@@ -40,6 +47,8 @@ func getBuffs():
 		return [
 			buff(Buff.ExposureBuff, [100]),
 			buff(Buff.ReceivedLustDamageBuff, [40]),
+			buff(Buff.AccuracyBuff, [-5]),
+			buff(Buff.DodgeChanceBuff, [-5]),
 		]
 	
 	if(intoxication >= 0.4):

@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Orifice",
+"class": "AnusOrifice",
+"language": "GDScript",
+"path": "res://Player/Orifice/AnusOrifice.gd"
+}, {
 "base": "Reference",
 "class": "Attack",
 "language": "GDScript",
@@ -270,6 +275,11 @@ _global_script_classes=[ {
 "path": "res://Player/Orifice/Orifice.gd"
 }, {
 "base": "Object",
+"class": "OrificeType",
+"language": "GDScript",
+"path": "res://Player/Orifice/OrificeType.gd"
+}, {
+"base": "Object",
 "class": "Perk",
 "language": "GDScript",
 "path": "res://Skills/Perk.gd"
@@ -454,6 +464,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Player/TheStage.gd"
 }, {
+"base": "Orifice",
+"class": "ThroatOrifice",
+"language": "GDScript",
+"path": "res://Player/Orifice/ThroatOrifice.gd"
+}, {
 "base": "Reference",
 "class": "TopicBase",
 "language": "GDScript",
@@ -469,12 +484,18 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Util/Util.gd"
 }, {
+"base": "Orifice",
+"class": "VaginaOrifice",
+"language": "GDScript",
+"path": "res://Player/Orifice/VaginaOrifice.gd"
+}, {
 "base": "Node2D",
 "class": "WorldFloor",
 "language": "GDScript",
 "path": "res://Game/World/WorldFloor.gd"
 } ]
 _global_script_class_icons={
+"AnusOrifice": "",
 "Attack": "",
 "BaseCharacter": "",
 "BodilyFluids": "",
@@ -527,6 +548,7 @@ _global_script_class_icons={
 "Module": "",
 "NovaModule": "",
 "Orifice": "",
+"OrificeType": "",
 "Perk": "",
 "PerkBase": "",
 "Player": "",
@@ -564,9 +586,11 @@ _global_script_class_icons={
 "TeaseType": "",
 "TestQuest": "",
 "TheStage": "",
+"ThroatOrifice": "",
 "TopicBase": "",
 "Trigger": "",
 "Util": "",
+"VaginaOrifice": "",
 "WorldFloor": ""
 }
 
