@@ -35,6 +35,7 @@ func _run():
 	
 	if(GM.pc.getInventory().hasRemovableRestraints()):
 		addButtonAt(8, "Struggle", "Struggle against your restraints", "struggle")
+	addButtonAt(9, "Me", "Shows actions related to you and also your personal information", "me")
 	addButtonAt(13, "Tasks", "Look at your tasks", "tasks")
 	addButtonAt(14, "Inventory", "Look at your inventory", "inventory")
 	
@@ -92,6 +93,8 @@ func _react(_action: String, _args):
 		runScene("QuestLogScene")
 	if(_action == "struggle"):
 		runScene("StrugglingScene")
+	if(_action == "me"):
+		runScene("MeScene")
 
 func _react_scene_end(_tag, _result):
 	GM.ES.triggerOnlyDelayed(Trigger.EnteringRoom, GM.pc.location)

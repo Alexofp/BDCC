@@ -612,3 +612,25 @@ func onLevelChange():
 
 func onSkillLevelChange(skillID):
 	emit_signal("skillLevelChanged", skillID)
+
+static func genderToString(thegender):
+	if(thegender == Gender.Male):
+		return "male"
+	if(thegender == Gender.Female):
+		return "female"
+	if(thegender == Gender.Androgynous):
+		return "androgynous"
+	if(thegender == Gender.Other):
+		return "other"
+	return "error?"
+
+static func genderToPronouns(thegender):
+	if(thegender == Gender.Male):
+		return "He/his"
+	if(thegender == Gender.Female):
+		return "She/her"
+	if(thegender == Gender.Androgynous):
+		return "They/their"
+	if(thegender == Gender.Other):
+		return "It/its"
+	return "error?"

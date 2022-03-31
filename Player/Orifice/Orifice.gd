@@ -207,6 +207,15 @@ func getUniqueCharactersAmount():
 	
 	return chars.keys().size()
 
+func getAttributesText():
+	return [
+		["Capacity", str(round(getFluidAmount() * 10.0)/10.0)+"/"+ str(round(getCapacity() * 10.0)/10.0)+" ml"],		
+		["Looseness level", str(round(getLooseness() * 10.0)/10.0)+", "+getLoosenessString()],
+		["Looseness level minimal", str(round(getMinLooseness() * 10.0)/10.0)],
+		["Elasticity", str(round(getElasticity() * 1000.0)/10.0)+"%"],
+		["Tightness", str(round(getResistance() * 1000.0)/10.0)+"%"],
+	]
+
 func saveData():
 	var data = {
 		"contents": contents,
