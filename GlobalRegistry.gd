@@ -53,7 +53,7 @@ func _ready():
 	
 	registerBuffFolder("res://Inventory/Buffs/")
 	
-	registerStat("res://Skills/Stat/EnduranceStat.gd")
+	registerStat("res://Skills/Stat/AgilityStat.gd")
 	registerStat("res://Skills/Stat/StrengthStat.gd")
 	registerStat("res://Skills/Stat/VitalityStat.gd")
 	registerStat("res://Skills/Stat/SexinessStat.gd")

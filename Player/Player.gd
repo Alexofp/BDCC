@@ -65,7 +65,7 @@ func _ready():
 	
 	#inventory.equipItem(GlobalRegistry.createItem("ballgag"))
 	#skillsHolder.setStat(Stat.Sexiness, 10)
-	#skillsHolder.setStat(Stat.Endurance, 5)
+	#skillsHolder.setStat(Stat.Agility, 5)
 	#skillsHolder.setStat(Stat.Vitality, 5)
 	#skillsHolder.addSkillExperience(Skill.Combat, 250)
 

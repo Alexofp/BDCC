@@ -269,7 +269,7 @@ func getExtraLustThreshold():
 	return step * 5
 
 func getExtraStamina():
-	return int(pow(getStat(Stat.Endurance), 0.95) * 4)
+	return int(pow(getStat(Stat.Agility), 0.95) * 4)
 
 func getDamageMultiplier(_damageType):
 	if(_damageType == DamageType.Physical):

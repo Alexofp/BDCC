@@ -518,6 +518,12 @@ func hasPerk(perkID):
 func getStat(statID):
 	return skillsHolder.getStat(statID)
 
+func getSkillLevel(skillID):
+	var skill = skillsHolder.getSkill(skillID)
+	if(skill == null):
+		return 0
+	return skill.getLevel()
+
 func getSpecies():
 	return []
 

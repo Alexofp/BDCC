@@ -1,10 +1,10 @@
 extends StatBase
 
 func _init():
-	id = Stat.Endurance
+	id = Stat.Agility
 
 func getVisibleName():
-	return "Endurance"
+	return "Agility"
 
 func getVisibleDescription():
 	return "Gives you more stamina"
