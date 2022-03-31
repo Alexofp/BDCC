@@ -23,5 +23,5 @@ func processBattleTurn():
 		return
 	
 	var head: BodypartHead = npc.getBodypart(BodypartSlot.Head)
-	if(head.isStuffed()):
+	if(head.isOrificeStuffed()):
 		npc.addPain(-1)

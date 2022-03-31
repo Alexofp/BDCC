@@ -7,6 +7,7 @@ var limbSlot
 var visibleName
 
 var orifice: Orifice = null
+var fluidProduction: FluidProduction = null
 var character: WeakRef = null
 
 func _init():
@@ -62,28 +63,40 @@ func applyAttribute(_attrID: String, _attrValue):
 func getAttributesText():
 	return []
 
-func addFluid(fluidType, amount: float, charID = null):
+func addFluidOrifice(fluidType, amount: float, charID = null):
 	assert(orifice != null)
 	orifice.addFluid(fluidType, amount, charID)
 
-func isEmpty():
+func isOrificeEmpty():
 	assert(orifice != null)
 	return orifice.isEmpty()
 
-func isStuffed():
-	return !isEmpty()
+func isOrificeStuffed():
+	return !isOrificeEmpty()
 
 func getOrifice():
 	return orifice
 
-func clearFluids():
+func getFluidProduction():
+	return fluidProduction
+
+func isProducingFluid():
+	assert(fluidProduction != null)
+	return fluidProduction.shouldProduce()
+
+func drainProductionFluid():
+	assert(fluidProduction != null)
+	return fluidProduction.drain()
+
+func clearOrificeFluids():
 	assert(orifice != null)
 	orifice.clear()
 
 func processTime(_seconds: int):
-	if(orifice == null):
-		return
-	orifice.processTime(_seconds)
+	if(orifice != null):
+		orifice.processTime(_seconds)
+	if(fluidProduction != null):
+		fluidProduction.processTime(_seconds)
 
 func hoursPassed(_howmuch):
 	if(orifice == null):
@@ -99,16 +112,19 @@ func getOrificeName():
 	return "error"
 
 func saveData():
-	if(orifice == null):
-		return {}
-	return {
-		"orificeData": orifice.saveData(),
-	}
+	var result = {}
+	
+	if(orifice != null):
+		result["orificeData"] = orifice.saveData()
+	if(fluidProduction != null):
+		result["fluidProductionData"] = fluidProduction.saveData()
+	return result
 
 func loadData(_data):
-	if(orifice == null):
-		return
-	orifice.loadData(SAVE.loadVar(_data, "orificeData", {}))
+	if(orifice != null):
+		orifice.loadData(SAVE.loadVar(_data, "orificeData", {}))
+	if(fluidProduction != null):
+		fluidProduction.loadData(SAVE.loadVar(_data, "fluidProductionData", {}))
 
 func safeWhenExposed():
 	return true

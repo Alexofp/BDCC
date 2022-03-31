@@ -238,17 +238,17 @@ func updateNonBattleEffects():
 	else:
 		removeEffect(StatusEffect.CoveredInCum)
 
-	if(hasBodypart(BodypartSlot.Vagina) && !getBodypart(BodypartSlot.Vagina).isEmpty()):
+	if(hasBodypart(BodypartSlot.Vagina) && !getBodypart(BodypartSlot.Vagina).isOrificeEmpty()):
 		addEffect(StatusEffect.HasCumInsideVagina)
 	else:
 		removeEffect(StatusEffect.HasCumInsideVagina)
 		
-	if(hasBodypart(BodypartSlot.Anus) && !getBodypart(BodypartSlot.Anus).isEmpty()):
+	if(hasBodypart(BodypartSlot.Anus) && !getBodypart(BodypartSlot.Anus).isOrificeEmpty()):
 		addEffect(StatusEffect.HasCumInsideAnus)
 	else:
 		removeEffect(StatusEffect.HasCumInsideAnus)
 		
-	if(hasBodypart(BodypartSlot.Head) && !getBodypart(BodypartSlot.Head).isEmpty()):
+	if(hasBodypart(BodypartSlot.Head) && !getBodypart(BodypartSlot.Head).isOrificeEmpty()):
 		addEffect(StatusEffect.HasCumInsideMouth)
 	else:
 		removeEffect(StatusEffect.HasCumInsideMouth)
@@ -692,9 +692,9 @@ func clearBodyFluids():
 
 func clearOrificeFluids():
 	if(hasBodypart(BodypartSlot.Vagina)):
-		getBodypart(BodypartSlot.Vagina).clearFluids()
-	getBodypart(BodypartSlot.Anus).clearFluids()
-	getBodypart(BodypartSlot.Head).clearFluids()
+		getBodypart(BodypartSlot.Vagina).clearOrificeFluids()
+	getBodypart(BodypartSlot.Anus).clearOrificeFluids()
+	getBodypart(BodypartSlot.Head).clearOrificeFluids()
 
 func getOutsideMessinessLevel():
 	return bodyMessiness
@@ -746,7 +746,7 @@ func cummedInBodypartBy(bodypartSlot, characterID, sourceType = null):
 		sourceType = BodilyFluids.FluidSource.Penis
 	
 	var thebodypart = getBodypart(bodypartSlot)
-	thebodypart.addFluid(ch.getFluidType(sourceType), ch.getFluidAmount(sourceType), characterID)
+	thebodypart.addFluidOrifice(ch.getFluidType(sourceType), ch.getFluidAmount(sourceType), characterID)
 
 func cummedInVaginaBy(characterID, sourceType = null):
 	cummedInBodypartBy(BodypartSlot.Vagina, characterID, sourceType)

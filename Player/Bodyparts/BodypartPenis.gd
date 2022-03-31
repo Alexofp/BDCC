@@ -5,20 +5,27 @@ var lengthCM = 15
 
 func _init():
 	limbSlot = LimbTypes.Penis
+	fluidProduction = CumProduction.new()
+	fluidProduction.bodypart = weakref(self)
 
 func getSlot():
 	return BodypartSlot.Penis
 
 func getTooltipInfo():
-	return "length: " + str(lengthCM) + " cm\n" + "Gonna be more stuff here"
+	var text = "length: " + str(lengthCM) + " cm\n"
+	text += BodilyFluids.FluidType.getName(getFluidProduction().getFluidType())+": " + str(round(getFluidProduction().getFluidAmount() * 10.0)/10.0)+"/"+ str(round(getFluidProduction().getCapacity() * 10.0)/10.0)+" ml"
+	return text
 
 func saveData():
-	return {
-		"lengthCM": lengthCM,
-	}
+	var data = .saveData()
+	data["lengthCM"] = lengthCM
+	
+	return data
 
 func loadData(_data):
 	lengthCM = SAVE.loadVar(_data, "lengthCM", 15)
+	
+	.loadData(_data)
 
 func getLewdSizeAdjective():
 	if(lengthCM <= 5.0):

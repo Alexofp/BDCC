@@ -4,12 +4,15 @@ class_name BodilyFluids
 class FluidType:
 	const Cum = "cum"
 	const GirlCum = "girlcum"
+	const Milk = "milk"
 	
 	static func getName(fl):
 		if(fl == Cum):
 			return "cum"
 		if(fl == GirlCum):
 			return "girlcum"
+		if(fl == Milk):
+			return "milk"
 		return "Error"
 
 enum FluidSource {

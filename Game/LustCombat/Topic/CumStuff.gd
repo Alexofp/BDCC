@@ -12,11 +12,11 @@ func _init():
 
 func getTopicValue(_topicID, _pc):
 	var messiness = _pc.getOutsideMessinessLevel()
-	var isButtStuffed = !_pc.getBodypart(BodypartSlot.Anus).isEmpty()
+	var isButtStuffed = !_pc.getBodypart(BodypartSlot.Anus).isOrificeEmpty()
 	var isPussyStuffed = false
-	var isThroatStuffed = !_pc.getBodypart(BodypartSlot.Head).isEmpty()
+	var isThroatStuffed = !_pc.getBodypart(BodypartSlot.Head).isOrificeEmpty()
 	if(_pc.hasBodypart(BodypartSlot.Vagina)):
-		isPussyStuffed = !_pc.getBodypart(BodypartSlot.Vagina).isEmpty()
+		isPussyStuffed = !_pc.getBodypart(BodypartSlot.Vagina).isOrificeEmpty()
 	
 	if(_topicID == InterestTopic.CoveredInCum):
 		if(messiness >= 1.0):

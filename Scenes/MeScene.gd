@@ -33,6 +33,9 @@ func _run():
 				sayn("Orifice type: "+bodypart.getOrificeName())
 				for attribData in bodypart.getOrifice().getAttributesText():
 					sayn(attribData[0]+": "+str(attribData[1]))
+			if(bodypart.getFluidProduction() != null):
+				for attribData in bodypart.getFluidProduction().getAttributesText():
+					sayn(attribData[0]+": "+str(attribData[1]))
 		
 		sayn("")
 		

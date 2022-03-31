@@ -6,20 +6,29 @@ var size = 0
 
 func _init():
 	limbSlot = LimbTypes.Breasts
+	fluidProduction = Lactation.new()
+	fluidProduction.bodypart = weakref(self)
 	
 func saveData():
-	return {
-		"size": size
-	}
+	var data = .saveData()
+	data["size"] = size
+	
+	return data
 
 func loadData(_data):
 	size = SAVE.loadVar(_data, "size", 0)
+	
+	.loadData(_data)
 
 func getSlot():
 	return BodypartSlot.Breasts
 
 func getTooltipInfo():
-	return "size: " + BreastsSize.breastSizeToString(size) + "\n" + "Gonna be more stuff here"
+	var text = "size: " + BreastsSize.breastSizeToString(size)
+	if(size != BreastsSize.FOREVER_FLAT):
+		text += "\n"+BodilyFluids.FluidType.getName(getFluidProduction().getFluidType())+": " + str(round(getFluidProduction().getFluidAmount() * 10.0)/10.0)+"/"+ str(round(getFluidProduction().getCapacity() * 10.0)/10.0)+" ml"
+	
+	return text
 
 func getLewdSizeAdjective():
 	if(size <= BreastsSize.FLAT):
@@ -78,11 +87,23 @@ func applyAttribute(_attrID: String, _attrValue):
 
 func getAttributesText():
 	return [
-		["Breast size", BreastsSize.breastSizeToString(size)],
+		["Breast size", BreastsSize.breastSizeToString(getSize())],
 	]
 
-func getSize():
+func getBaseSize():
 	return size
+
+func getSize():
+	var resultSize = getBaseSize()
+	
+	# Change to isPregnant check when that's done
+	if(size != BreastsSize.FOREVER_FLAT && fluidProduction != null && fluidProduction.shouldProduce()):
+		resultSize += 1
+	return resultSize
 
 func safeWhenExposed():
 	return false
+
+func induceLactation():
+	if(fluidProduction != null && fluidProduction.has_method("induceLactation")):
+		fluidProduction.induceLactation()
