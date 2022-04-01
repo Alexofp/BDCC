@@ -35,8 +35,14 @@ func _run():
 
 		addButton("Talk", "Ask her some questions", "talk")
 		addButton("Appearance", "Take a closer look", "appearance")
-		addDisabledButton("Experiments", "Ask to be experimented on")
-		addDisabledButton("Milking", "Ask to be milked")
+		if(getFlag(MedicalModule.Med_pcKnowsAboutTests)):
+			addButton("Research", "You're curious about the experiments", "research")
+		else:
+			addDisabledButton("Research", "Talk about it with Eliza first")
+		if(getFlag(MedicalModule.Med_pcKnowsAboutMilking)):
+			addButton("Milking", "Ask to be milked", "milking")
+		else:
+			addDisabledButton("Milking", "Talk about it with Eliza first")
 		addButton("Leave", "Do something else", "endthescene")
 		
 	if(state == "appearance"):
@@ -61,12 +67,12 @@ func _run():
 		addButton("Work", "What kind of stuff happens here", "work")
 		if(getFlag(MedicalModule.Med_pcKnowsAboutWork)):
 			addButton("Pregnancies", "Ask about how the childbirth is handled", "pregnancies")
-			addButton("Research", "Ask about what are they researching here", "research")
+			addButton("Research", "Ask about what are they researching here", "talkresearch")
 		else:
 			addDisabledButton("Pregnancies", "You don't know about this yet")
 			addDisabledButton("Research", "You don't know about this yet")
 		if(getFlag(MedicalModule.Med_pcKnowsAboutBreeding)):
-			addButton("Milking", "What’s up with that", "milking")
+			addButton("Milking", "What’s up with that", "talkmilking")
 		else:
 			addDisabledButton("Milking", "You don't know about this yet")
 
@@ -118,7 +124,7 @@ func _run():
 
 		addButton("Continue", "Continue talking", "talk")
 
-	if(state == "research"):
+	if(state == "talkresearch"):
 		setFlag(MedicalModule.Med_pcKnowsAboutTests, true)
 		
 		saynn("[say=pc]What types of research are you doing here?[/say]")
@@ -139,7 +145,7 @@ func _run():
 
 		addButton("Continue", "Continue talking", "talk")
 
-	if(state == "milking"):
+	if(state == "talkmilking"):
 		setFlag(MedicalModule.Med_pcKnowsAboutMilking, true)
 		
 		saynn("[say=pc]If I’m lactating I can donate milk here?[/say]")
@@ -151,6 +157,143 @@ func _run():
 		saynn("[say=pc]Well, that’s nice, I guess.[/say]")
 
 		addButton("Continue", "Continue talking", "talk")
+		
+	if(state == "research"):
+		saynn("[say=pc]So how can I help?[/say]")
+
+		saynn("Eliza chuckles.")
+
+		saynn("[say=eliza]By offering yourself, of course. Because I do need some test subjects. Here is the list of what types of research we are doing.[/say]")
+
+		saynn("Eliza shows you a list with options.")
+		
+		addDisabledButton("Drug testing", "Test a random drug with random effect. The paper says that these shouldn't have any long-lasting effects.")
+		addButton("Induce lactation", "She will probably use some kind of drug on you. At least it’s free", "induce_lactation")
+		addDisabledButton("Prototype testing", "Test bleeding-edge hi-tech machines or devices")
+		addButton("Back", "You're not interested", "")
+
+
+	if(state == "milking"):
+		saynn("[say=pc]I’m interested. You were talking about the possibility of donating milk and cum?[/say]")
+
+		saynn("The feline puts the mug away and stands up from the chair.")
+
+		saynn("[say=eliza]Yes, we can always use more. How would you like to be milked.[/say]")
+
+		addButton("Milk", "You want your breasts to be milked", "milk")
+		if(GM.pc.hasPenis()):
+			addButton("Seed", "You want your cock to be milked", "seed")
+		else:
+			addDisabledButton("Seed", "You would need a dick for that")
+		addDisabledButton("Both", "Not done yet")
+		addButton("Back", "Go back", "")
+
+	if(state == "milk"):
+		# (First time scene)
+		if(!getFlag(MedicalModule.Med_milkingMilkFirstTime)):
+			setFlag(MedicalModule.Med_milkingMilkFirstTime, true)
+			saynn("[say=pc]I want my breasts to be milked..[/say]")
+
+			saynn("The doctor steps away from the counter and walks behind some wall just to appear a few seconds later from one of the airlocks. She walks up to you and starts observing you.")
+
+			# (if has forever flat breasts)
+			if(!GM.pc.hasNonFlatBreasts()):
+				saynn("[say=eliza]Sadly I can’t really milk you, your {pc.breasts} have too small milk production glands. You would need your breasts enlarged first.[/say]")
+
+				saynn("Aww.")
+
+				addButton("Continue", "Okay", "")
+				return
+			# (scene ends)
+
+			# (if has breasts)
+
+			saynn("[say=eliza]Hmm.. May I?[/say]")
+
+			saynn("You don’t quite understand what she means but you nod anyway. Eliza puts her hands under your {pc.breasts} and gets a feel for their weight. Then she starts to firmly squeeze them. You can’t help but to let out a little moan.")
+
+			var breasts:BodypartBreasts = GM.pc.getBodypart(BodypartSlot.Breasts)
+			# (if lactating and clothed)
+			
+			if(breasts.getProducedFluidAmount() > 0.1):
+				if(!GM.pc.isFullyNaked()):
+					saynn("Her efforts weren’t useless, after a bit of breast kneading, you notice two little damp spots appearing on your clothing roughly where your nips are.")
+
+					saynn("[say=eliza]Oh yes. These are some juicy milk jugs you got there. We can do it.[/say]")
+
+				# (if lactating and naked)
+				else:
+					saynn("Her efforts weren’t useless, after a bit of breast kneading, you notice your nipples starting to leak milk.")
+
+					saynn("[say=eliza]Oh yes. These are some juicy milk jugs you got there. We can do it.[/say]")
+			else:
+			# (if not lactating)
+
+				saynn("But no matter how hard she tried she couldn’t squeeze a single drop of milk. Though your nipples feel perky stiff now.")
+
+				saynn("[say=eliza]Well, you’re not lactating right now so it would be a waste of effort. But. You have options. Pregnancy is an obvious choice. While pregnant your breasts will increase in size and start to lactate on their own. If you don’t like that or can’t get pregnant - we can always induce it. With some meds. You know, even males can lactate.[/say]")
+				
+				addButton("Continue", "Okay", "")
+				return
+		else:
+			# (not first time)
+			var breasts:BodypartBreasts = GM.pc.getBodypart(BodypartSlot.Breasts)
+
+			saynn("[say=pc]I want my breasts to be milked..[/say]")
+
+			saynn("Eliza takes a quick look at you.")
+
+			# (if not lactating and empty breasts)
+			if(breasts.getProducedFluidAmount() < 0.1):
+				saynn("[say=eliza]Well, you gotta be lactating for that I’m afraid.[/say]")
+				addButton("Continue", "Okay", "")
+				return
+			# (scene end)
+
+			# (if has milk)
+
+			saynn("[say=eliza]Alright, inmate. Any preferences?[/say]")
+			
+		addDisabledButton("Hand milking", "not done")
+		addDisabledButton("Milking pumps", "not done")
+		addDisabledButton("Milking (Vaginal)", "not done")
+		addDisabledButton("Milking (Anal)", "not done")
+		addDisabledButton("Extreme milking", "not done")
+		addButton("Never mind", "You changed your mind", "")
+
+		
+
+	if(state == "seed"):
+		# (first time)
+		if(!getFlag(MedicalModule.Med_milkingSeedFirstTime)):
+			setFlag(MedicalModule.Med_milkingSeedFirstTime, true)
+			saynn("[say=pc]I wanna be cock-milked.[/say]")
+
+			saynn("The doctor steps away from the counter and walks behind some wall just to appear a few seconds later from one of the airlocks. She walks up to you and starts observing you, focusing mostly on your crotch.")
+
+			# (if has reachable cock)
+			if(GM.pc.hasReachablePenis()):
+				saynn("[say=eliza]Yes, that can be arranged, we always need more genetic material.[/say]")
+
+				saynn("She offers you a cheeky smile.")
+			else:
+				# (if has non-reachable cock)
+
+				saynn("[say=eliza]I see that you’re wearing chastity. That limits the options but we can still do it, the stimulation is just gonna be.. indirect.. if you know what I mean.[/say]")
+
+				saynn("She offers you a cheeky smile.")
+		else:
+			# (if not first time)
+
+			saynn("[say=pc]I wanna be cock-milked.[/say]")
+
+			saynn("Eliza gives you a quick look.")
+
+			saynn("[say=eliza]We can certainly do that~.[/say]")
+			
+		addDisabledButton("Hand milking", "not done")
+		addDisabledButton("Pump", "not done")
+		addButton("Never mind", "You changed your mind", "")
 
 
 func _react(_action: String, _args):

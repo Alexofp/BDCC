@@ -6,6 +6,8 @@ const Med_pcKnowsAboutWork = "Med_pcKnowsAboutWork"
 const Med_pcKnowsAboutBreeding = "Med_pcKnowsAboutBreeding"
 const Med_pcKnowsAboutTests = "Med_pcKnowsAboutTests"
 const Med_pcKnowsAboutMilking = "Med_pcKnowsAboutBreeding"
+const Med_milkingMilkFirstTime = "Med_milkingMilkFirstTime"
+const Med_milkingSeedFirstTime = "Med_milkingSeedFirstTime"
 
 func _init():
 	id = "MedicalModule"

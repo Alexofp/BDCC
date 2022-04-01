@@ -81,8 +81,14 @@ func getFluidProduction():
 	return fluidProduction
 
 func isProducingFluid():
-	assert(fluidProduction != null)
+	if(fluidProduction == null):
+		return false
 	return fluidProduction.shouldProduce()
+
+func getProducedFluidAmount():
+	if(fluidProduction == null):
+		return 0.0
+	return fluidProduction.getFluidAmount()
 
 func drainProductionFluid():
 	assert(fluidProduction != null)
