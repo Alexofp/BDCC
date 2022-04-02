@@ -98,4 +98,11 @@ func callObjectFunc(_obj: String, _command: String, _args: Array):
 		var inmateType = object.getInmateType()
 		return InmateType.getOfficialName(inmateType)
 	
+	if(_command == "milk" && _args.size() == 0):
+		var breasts = object.getBodypart(BodypartSlot.Breasts)
+		var milkType = breasts.getProducingFluidType()
+		if(milkType == null):
+			return "ERROR:NO_MILK"
+		return BodilyFluids.FluidType.getName(milkType)
+	
 	return "!RUNTIME ERROR NO COMMAND FOUND "+_obj+"."+_command+" "+str(_args)+"!"

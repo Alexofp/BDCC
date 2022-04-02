@@ -304,6 +304,11 @@ func _react(_action: String, _args):
 	if(_action == "who_are_you"):
 		GM.main.setFlag(RahiModule.Rahi_AskedName, true)
 	
+	if(_action == "induce_lactation"):
+		runScene("ElizaInducingLactation")
+		endScene()
+		return
+	
 	if(_action == "endthescene"):
 		endScene()
 		return
