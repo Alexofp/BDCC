@@ -6,6 +6,16 @@ static func delete_children(node):
 		node.remove_child(n)
 		n.queue_free()
 
+static func maxi(value1: int, value2: int) -> int:
+	if(value1 > value2):
+		return value1
+	return value2
+
+static func mini(value1: int, value2: int) -> int:
+	if(value2 > value1):
+		return value2
+	return value1
+
 # input ["a", "b", "c"]
 # output "a, b and c"
 static func humanReadableList(arr: Array, andConnector: String = "and", commaConnector: String = ","):

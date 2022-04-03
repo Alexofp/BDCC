@@ -2,6 +2,7 @@ extends Node
 class_name BuffsHolder
 
 var buffs: Array = []
+var buffsIds: Dictionary = {}
 var npc = null
 var dealDamageMult = {}
 var recieveDamageMult = {}
@@ -28,6 +29,7 @@ func setCharacter(newnpc):
 func calculateBuffs():
 	assert(npc != null)
 	buffs.clear()
+	buffsIds.clear()
 	dealDamageMult.clear()
 	recieveDamageMult.clear()
 	armor.clear()
@@ -65,6 +67,7 @@ func calculateBuffs():
 	buffs.append_array(npc.getSkillsHolder().getBuffs())
 
 	for buff in buffs:
+		buffsIds[buff.id] = true
 		buff.apply(self)
 
 func isGagged():
@@ -89,9 +92,9 @@ func getArmor(damageType):
 	return armor[damageType]
 
 func hasBuff(buffID):
-	for buff in buffs:
-		if(buff.id == buffID):
-			return true
+	if(buffsIds.has(buffID)):
+		return true
+
 	return false
 
 func getDodgeChance():
