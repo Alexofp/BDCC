@@ -15,6 +15,9 @@ func drain() -> float:
 	fluidAmount = 0
 	return result
 
+func afterMilked():
+	pass
+
 func getProductionSpeedPerHour() -> float:
 	return getCapacity() / 10.0
 	

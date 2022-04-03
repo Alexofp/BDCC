@@ -254,7 +254,10 @@ func _run():
 
 			saynn("[say=eliza]Alright, inmate. Any preferences?[/say]")
 			
-		addDisabledButton("Hand milking", "not done")
+		if(GM.pc.canBeMilked()):
+			addButton("Hand milking", "You’re not very picky, the old-fashioned way will do just fine", "milk_handmilk")
+		else:
+			addDisabledButton("Hand milking", "You can't be milked right now")
 		addDisabledButton("Milking pumps", "not done")
 		addDisabledButton("Milking (Vaginal)", "not done")
 		addDisabledButton("Milking (Anal)", "not done")
@@ -306,6 +309,11 @@ func _react(_action: String, _args):
 	
 	if(_action == "induce_lactation"):
 		runScene("ElizaInducingLactation")
+		endScene()
+		return
+	
+	if(_action == "milk_handmilk"):
+		runScene("ElizaHandMilking")
 		endScene()
 		return
 	

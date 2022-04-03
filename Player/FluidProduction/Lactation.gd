@@ -6,6 +6,9 @@ var lactationTimer = 0
 func induceLactation():
 	lactationTimer = Util.maxi(lactationTimer, 60*60*24*7)
 
+func afterMilked():
+	lactationTimer = Util.maxi(lactationTimer, 60*60*24*2)
+
 func shouldProduce():
 	return lactationTimer > 0 # or isPregnant()
 

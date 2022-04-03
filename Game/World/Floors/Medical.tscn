@@ -39,11 +39,11 @@ roomColor = 1
 
 [node name="MedRoom7" parent="." index="7" instance=ExtResource( 2 )]
 position = Vector2( -128, -64 )
-gridColor = 2
+gridColor = 3
 
 [node name="MedRoom8" parent="." index="8" instance=ExtResource( 2 )]
 position = Vector2( 128, -64 )
-gridColor = 2
+gridColor = 3
 
 [node name="MedRoom9" parent="." index="9" instance=ExtResource( 2 )]
 position = Vector2( 128, -128 )
@@ -53,27 +53,35 @@ position = Vector2( 128, -192 )
 
 [node name="MedRoom11" parent="." index="11" instance=ExtResource( 2 )]
 position = Vector2( 128, -256 )
+gridColor = 2
 
 [node name="MedRoom12" parent="." index="12" instance=ExtResource( 2 )]
 position = Vector2( 128, -320 )
+gridColor = 2
 
 [node name="MedRoom13" parent="." index="13" instance=ExtResource( 2 )]
 position = Vector2( 64, -320 )
+gridColor = 2
 
 [node name="MedRoom14" parent="." index="14" instance=ExtResource( 2 )]
 position = Vector2( 0, -320 )
+gridColor = 2
 
 [node name="MedRoom15" parent="." index="15" instance=ExtResource( 2 )]
 position = Vector2( -64, -320 )
+gridColor = 2
 
 [node name="MedRoom16" parent="." index="16" instance=ExtResource( 2 )]
 position = Vector2( -128, -320 )
+gridColor = 2
 
 [node name="MedRoom17" parent="." index="17" instance=ExtResource( 2 )]
 position = Vector2( -128, -256 )
+gridColor = 2
 
 [node name="MedRoom18" parent="." index="18" instance=ExtResource( 2 )]
 position = Vector2( -128, -192 )
+roomID = "med_nearmilking"
 
 [node name="MedRoom19" parent="." index="19" instance=ExtResource( 2 )]
 position = Vector2( -128, -128 )
@@ -86,7 +94,15 @@ roomName = "Research Lab"
 roomID = "med_researchlab"
 roomColor = 3
 
-[node name="MedElevator" parent="." index="21" instance=ExtResource( 2 )]
+[node name="MedMilkingRoom" parent="." index="21" instance=ExtResource( 2 )]
+self_modulate = Color( 0.7, 0.7, 1, 1 )
+position = Vector2( -64, -192 )
+roomName = "Milking room"
+roomID = "med_milkingroom"
+canSouth = false
+roomColor = 3
+
+[node name="MedElevator" parent="." index="22" instance=ExtResource( 2 )]
 self_modulate = Color( 1, 0.6, 0.6, 1 )
 position = Vector2( 0, 64 )
 roomName = "Elevator"

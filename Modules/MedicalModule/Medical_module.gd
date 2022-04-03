@@ -16,6 +16,7 @@ func _init():
 	scenes = [
 		"res://Modules/MedicalModule/ElizaTalkScene.gd",
 		"res://Modules/MedicalModule/ElizaInducingLactation.gd",
+		"res://Modules/MedicalModule/ElizaHandMilking.gd",
 		]
 	characters = [
 	]

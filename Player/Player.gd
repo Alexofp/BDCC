@@ -984,3 +984,15 @@ func getOrificeMinLooseness(orificeType):
 	var value = 0.0
 	value += buffsHolder.getOrificeMinLooseness(orificeType)
 	return value
+
+func canBeMilked():
+	var breasts: BodypartBreasts = getBodypart(BodypartSlot.Breasts)
+	var production: FluidProduction = breasts.getFluidProduction()
+	return production.getFluidAmount() > 0.0
+
+func milk():
+	var breasts: BodypartBreasts = getBodypart(BodypartSlot.Breasts)
+	var production: FluidProduction = breasts.getFluidProduction()
+	var howMuchMilk = production.drain()
+	production.afterMilked()
+	return howMuchMilk
