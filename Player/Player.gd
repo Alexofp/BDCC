@@ -996,3 +996,15 @@ func milk():
 	var howMuchMilk = production.drain()
 	production.afterMilked()
 	return howMuchMilk
+
+func canBeSeedMilked():
+	var penis: BodypartPenis = getBodypart(BodypartSlot.Penis)
+	var production: FluidProduction = penis.getFluidProduction()
+	return production.getFluidAmount() > 0.0
+
+func milkSeed():
+	var penis: BodypartPenis = getBodypart(BodypartSlot.Penis)
+	var production: FluidProduction = penis.getFluidProduction()
+	var howMuchSeed = production.drain()
+	production.afterMilked()
+	return howMuchSeed

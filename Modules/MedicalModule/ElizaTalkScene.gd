@@ -305,7 +305,15 @@ func _run():
 
 			saynn("[say=eliza]We can certainly do that~.[/say]")
 			
-		addDisabledButton("Hand milking", "not done")
+			sayn("Amount of seed donated: "+str(floor(getFlag(MedicalModule.Med_seedMilked, 0.0)))+" ml")
+			saynn("Amount of times seed milked: "+str(getFlag(MedicalModule.Med_milkedSeedTimes, 0)))
+			
+			
+		if(GM.pc.canBeSeedMilked()):
+			addButton("Hand milking", "Why deny the woman’s touch..", "milk_handseedmilk")
+		else:
+			addDisabledButton("Hand milking", "You can't be milked right now")
+		addDisabledButton("Prostate milking", "not done")
 		addDisabledButton("Pump", "not done")
 		addButton("Never mind", "You changed your mind", "")
 
@@ -325,6 +333,11 @@ func _react(_action: String, _args):
 	
 	if(_action == "milk_handmilk"):
 		runScene("ElizaHandMilking")
+		endScene()
+		return
+		
+	if(_action == "milk_handseedmilk"):
+		runScene("ElizaHandSeedMilking")
 		endScene()
 		return
 		

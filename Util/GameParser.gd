@@ -104,5 +104,12 @@ func callObjectFunc(_obj: String, _command: String, _args: Array):
 		if(milkType == null):
 			return "ERROR:NO_MILK"
 		return BodilyFluids.FluidType.getName(milkType)
+		
+	if(_command == "cum" && _args.size() == 0):
+		var penis = object.getBodypart(BodypartSlot.Penis)
+		var cumType = penis.getProducingFluidType()
+		if(cumType == null):
+			return "ERROR:NO_CUM"
+		return BodilyFluids.FluidType.getName(cumType)
 	
 	return "!RUNTIME ERROR NO COMMAND FOUND "+_obj+"."+_command+" "+str(_args)+"!"
