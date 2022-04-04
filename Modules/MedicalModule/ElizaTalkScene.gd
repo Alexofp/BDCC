@@ -40,7 +40,11 @@ func _run():
 		else:
 			addDisabledButton("Research", "Talk about it with Eliza first")
 		if(getFlag(MedicalModule.Med_pcKnowsAboutMilking)):
-			addButton("Milking", "Ask to be milked", "milking")
+			
+			if(!getFlag(MedicalModule.Med_wasMilkedToday, false)):
+				addButton("Milking", "Ask to be milked", "milking")
+			else:
+				addDisabledButton("Milking", "Give yourself some rest")
 		else:
 			addDisabledButton("Milking", "Talk about it with Eliza first")
 		addButton("Leave", "Do something else", "endthescene")
@@ -254,11 +258,18 @@ func _run():
 
 			saynn("[say=eliza]Alright, inmate. Any preferences?[/say]")
 			
+			sayn("Amount of milk donated: "+str(floor(getFlag(MedicalModule.Med_milkMilked, 0.0)))+" ml")
+			saynn("Amount of times milked: "+str(getFlag(MedicalModule.Med_milkedMilkTimes, 0)))
+			
 		if(GM.pc.canBeMilked()):
 			addButton("Hand milking", "You’re not very picky, the old-fashioned way will do just fine", "milk_handmilk")
 		else:
 			addDisabledButton("Hand milking", "You can't be milked right now")
-		addDisabledButton("Milking pumps", "not done")
+		if(getFlag(MedicalModule.Med_milkedMilkTimes, 0) >= 1 && getFlag(MedicalModule.Med_milkMilked, 0.0) > 0.0):
+			if(GM.pc.canBeMilked()):
+				addButton("Milking pumps", "An automated way of milking sounds nice", "milk_pumps")
+			else:
+				addDisabledButton("Milking pumps", "You can't be milked right now")
 		addDisabledButton("Milking (Vaginal)", "not done")
 		addDisabledButton("Milking (Anal)", "not done")
 		addDisabledButton("Extreme milking", "not done")
@@ -314,6 +325,11 @@ func _react(_action: String, _args):
 	
 	if(_action == "milk_handmilk"):
 		runScene("ElizaHandMilking")
+		endScene()
+		return
+		
+	if(_action == "milk_pumps"):
+		runScene("ElizaMilkingPumps")
 		endScene()
 		return
 	

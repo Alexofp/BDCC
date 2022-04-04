@@ -138,6 +138,7 @@ func _run():
 
 func _react(_action: String, _args):
 	if(_action == "sure"):
+		processTime(30*60)
 		var breasts:BodypartBreasts = GM.pc.getBodypart(BodypartSlot.Breasts)
 		breasts.induceLactation()
 		

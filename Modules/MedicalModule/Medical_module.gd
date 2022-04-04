@@ -9,6 +9,13 @@ const Med_pcKnowsAboutMilking = "Med_pcKnowsAboutBreeding"
 const Med_milkingMilkFirstTime = "Med_milkingMilkFirstTime"
 const Med_milkingSeedFirstTime = "Med_milkingSeedFirstTime"
 
+const Med_milkMilked = "Med_milkMilked"
+const Med_seedMilked = "Med_seedMilked"
+const Med_milkedMilkTimes = "Med_milkedMilkTimes"
+const Med_milkedSeedTimes = "Med_milkedSeedTimes"
+
+const Med_wasMilkedToday = "Med_wasMilkedToday"
+
 func _init():
 	id = "MedicalModule"
 	author = "Rahi"
@@ -17,6 +24,7 @@ func _init():
 		"res://Modules/MedicalModule/ElizaTalkScene.gd",
 		"res://Modules/MedicalModule/ElizaInducingLactation.gd",
 		"res://Modules/MedicalModule/ElizaHandMilking.gd",
+		"res://Modules/MedicalModule/ElizaMilkingPumps.gd",
 		]
 	characters = [
 	]
@@ -24,3 +32,6 @@ func _init():
 	events = [
 		"res://Modules/MedicalModule/ElizaTalkEvent.gd",
 	]
+
+func resetFlagsOnNewDay():
+	GM.main.setFlag(Med_wasMilkedToday, false)

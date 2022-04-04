@@ -113,19 +113,19 @@ func _run():
 		saynn("Eliza keeps milking you on the stall and you stand still for her, your {pc.breasts}")
 
 		# (if had > 4 liters)
-		if(howMuchMilked >= 3500.0):
+		if(howMuchMilked >= 2500.0):
 			saynn("At least an hour passes, and the milk container is practically full.")
 
 			saynn("[say=eliza]Great~. That’s gonna make my coffee way more tasty.[/say]")
 
 		# (if had > 2 liters)
-		elif(howMuchMilked >= 1500.0):
+		elif(howMuchMilked >= 900.0):
 			saynn("At least an hour passes, and the milk container is about half-full.")
 
 			saynn("[say=eliza]Not bad. We can always milk you more another time.[/say]")
 
 		# (if had > 1 liters)
-		elif(howMuchMilked >= 500.0):
+		elif(howMuchMilked >= 400.0):
 			saynn("At least an hour passes, and the milk container is less than half-full but it’s still something.")
 
 			saynn("[say=eliza]About 1 liter. Maybe we should give you bigger udders~[/say]")
@@ -168,15 +168,37 @@ func _run():
 
 func _react(_action: String, _args):
 	if(_action == "give_in_completely"):
+		setFlag(MedicalModule.Med_wasMilkedToday, true)
+		processTime(60*60)
 		howMuchMilked = GM.pc.milk()
 		GM.pc.addLust(40)
+		
+		increaseFlag(MedicalModule.Med_milkMilked, howMuchMilked)
+		increaseFlag(MedicalModule.Med_milkedMilkTimes)
 		
 		addMessage(str(round(howMuchMilked / 10.0)*10.0)+" ml of milk was milked from your breasts")
 
 		GM.pc.addSkillExperience(Skill.Milking, 60.0, "eliza_handmilking")
+		
+		if(howMuchMilked >= 400.0):
+			var credits = Util.maxi(1, int(floor(sqrt(howMuchMilked / 100.0) / 2.0)))
+			GM.pc.addCredits(credits)
+			addMessage("You recieved "+str(credits)+" work "+Util.multipleOrSingularEnding(credits, "credit")+"!")
 
 	if(_action == "endthescene"):
 		endScene()
 		return
 	
 	setState(_action)
+
+func saveData():
+	var data = .saveData()
+	
+	data["howMuchMilked"] = howMuchMilked
+	
+	return data
+	
+func loadData(data):
+	.loadData(data)
+	
+	howMuchMilked = SAVE.loadVar(data, "howMuchMilked", 0.0)
