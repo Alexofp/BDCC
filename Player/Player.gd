@@ -713,20 +713,23 @@ func getPenisSize():
 	var bodypart = getBodypart(BodypartSlot.Penis)
 	return bodypart.getLength()
 
+func gotOrificeStretchedWith(bodypartSlot, insertionSize, showMessages = true):
+	var thebodypart = getBodypart(bodypartSlot)
+	
+	var orifice: Orifice = thebodypart.getOrifice()
+	var oldLooseness = orifice.getLooseness()
+	thebodypart.handleInsertion(insertionSize)
+	var newLooseness = orifice.getLooseness()
+	if(newLooseness > oldLooseness && showMessages):
+		emit_signal("orificeBecomeMoreLoose", thebodypart.getOrificeName(), newLooseness, oldLooseness)
+
 func gotFuckedBy(bodypartSlot, characterID, showMessages = true):
 	if(!hasBodypart(bodypartSlot)):
 		return
 	
 	var ch = GlobalRegistry.getCharacter(characterID)
-	var thebodypart = getBodypart(bodypartSlot)
 	assert(ch != null)
-	
-	var orifice: Orifice = thebodypart.getOrifice()
-	var oldLooseness = orifice.getLooseness()
-	thebodypart.handleInsertion(ch.getPenisSize())
-	var newLooseness = orifice.getLooseness()
-	if(newLooseness > oldLooseness && showMessages):
-		emit_signal("orificeBecomeMoreLoose", thebodypart.getOrificeName(), newLooseness, oldLooseness)
+	gotOrificeStretchedWith(bodypartSlot, ch.getPenisSize(), showMessages)
 
 func gotVaginaFuckedBy(characterID, showMessages = true):
 	return gotFuckedBy(BodypartSlot.Vagina, characterID, showMessages)

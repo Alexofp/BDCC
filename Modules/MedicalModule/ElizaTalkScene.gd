@@ -310,10 +310,15 @@ func _run():
 			
 			
 		if(GM.pc.canBeSeedMilked()):
-			addButton("Hand milking", "Why deny the woman’s touch..", "milk_handseedmilk")
+			if(GM.pc.hasReachablePenis()):
+				addButton("Hand milking", "Why deny the woman’s touch..", "milk_handseedmilk")
+			else:
+				addDisabledButton("Hand milking", "You need your cock to be free for this..")
+			
+			addButton("Prostate milking", "Alternative method that doesn’t even require free access to your dick..", "milk_prostatemilking")
 		else:
 			addDisabledButton("Hand milking", "You can't be milked right now")
-		addDisabledButton("Prostate milking", "not done")
+			addDisabledButton("Prostate milking", "You can't be milked right now")
 		addDisabledButton("Pump", "not done")
 		addButton("Never mind", "You changed your mind", "")
 
@@ -343,6 +348,11 @@ func _react(_action: String, _args):
 		
 	if(_action == "milk_pumps"):
 		runScene("ElizaMilkingPumps")
+		endScene()
+		return
+		
+	if(_action == "milk_prostatemilking"):
+		runScene("ElizaProstateMilking")
 		endScene()
 		return
 	

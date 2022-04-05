@@ -26,6 +26,7 @@ func _init():
 		"res://Modules/MedicalModule/ElizaHandMilking.gd",
 		"res://Modules/MedicalModule/ElizaMilkingPumps.gd",
 		"res://Modules/MedicalModule/ElizaHandSeedMilking.gd",
+		"res://Modules/MedicalModule/ElizaProstateMilking.gd",
 		]
 	characters = [
 	]

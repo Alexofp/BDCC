@@ -112,4 +112,31 @@ func callObjectFunc(_obj: String, _command: String, _args: Array):
 			return "ERROR:NO_CUM"
 		return BodilyFluids.FluidType.getName(cumType)
 	
+	if(_command in ["analStretch"] && _args.size() == 0):
+		var bodypart:BodypartAnus = object.getBodypart(BodypartSlot.Anus)
+		if(bodypart == null):
+			return "ERROR:NOBODYPART"
+		var orifice:Orifice = bodypart.getOrifice()
+		if(orifice == null):
+			return "ERROR:NOANUS"
+		return orifice.getLoosenessString()
+		
+	if(_command in ["pussyStretch", "vaginaStretch"] && _args.size() == 0):
+		var bodypart:BodypartVagina = object.getBodypart(BodypartSlot.Vagina)
+		if(bodypart == null):
+			return "ERROR:NOBODYPART"
+		var orifice:Orifice = bodypart.getOrifice()
+		if(orifice == null):
+			return "ERROR:NOVAGINA"
+		return orifice.getLoosenessString()
+		
+	if(_command in ["throatStretch"] && _args.size() == 0):
+		var bodypart:BodypartHead = object.getBodypart(BodypartSlot.Head)
+		if(bodypart == null):
+			return "ERROR:NOBODYPART"
+		var orifice:Orifice = bodypart.getOrifice()
+		if(orifice == null):
+			return "ERROR:NOTHROAT"
+		return orifice.getLoosenessString()
+	
 	return "!RUNTIME ERROR NO COMMAND FOUND "+_obj+"."+_command+" "+str(_args)+"!"
