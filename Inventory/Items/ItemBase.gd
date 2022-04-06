@@ -41,7 +41,7 @@ func getVisisbleDescription():
 	if(hasTag(ItemTag.Illegal)):
 		text += "\n[color=red]This item is illegal![/color]"
 	if(addsIntoxication() > 0.0):
-		text += "\n[color=red]Adds "+str(round(addsIntoxication()*100.0))+"% intoxication[/color]"
+		text += "\n[color=red]Adds "+str(round(addsIntoxicationToPC()*100.0))+"% intoxication[/color]"
 	
 	var timedBuffs = getTimedBuffs()
 	if(timedBuffs.size() > 0):
@@ -104,6 +104,9 @@ func useInCombat(_attacker, _reciever):
 
 func addsIntoxication() -> float:
 	return 0.0
+	
+func addsIntoxicationToPC() -> float:
+	return addsIntoxication() * GM.pc.getIntoxicationMod()
 
 func destroyMe():
 	assert(currentInventory != null)

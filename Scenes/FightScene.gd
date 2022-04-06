@@ -79,7 +79,7 @@ func _run():
 		var usableItems = playerInventory.getAllCombatUsableItems()
 		
 		for item in usableItems:
-			var intoxic = item.addsIntoxication()
+			var intoxic = item.addsIntoxicationToPC()
 			
 			if(intoxic <= 0 || GM.pc.canIntoxicateMore(intoxic)):
 				addButton(item.getVisibleName(), item.getCombatDescription(), "useitem", [item])

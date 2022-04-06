@@ -16,6 +16,12 @@ func _run():
 		
 		sayn("")
 		
+		sayn("[b]Bio information:[/b]")
+		sayn("Intoxication: "+str(round(GM.pc.getIntoxicationLevel()*100.0))+"%")
+		sayn("Intoxication tolerance: "+str(round(GM.pc.getIntoxicationTolerance()*100.0))+"%")
+		
+		sayn("")
+		
 		var bodyparts = GM.pc.getBodyparts()
 		for bodypartSlot in bodyparts:
 			var slotName = BodypartSlot.getVisibleName(bodypartSlot)

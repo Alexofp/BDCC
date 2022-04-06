@@ -23,6 +23,7 @@ var bodyMessiness = 0
 
 # Intoxication stuff
 var intoxication: float = 0.0
+var intoxicationTolerance: float = 0.0
 var timedBuffs: Array = []
 var timedBuffsDurationSeconds: int = 0
 var timedBuffsTurns: Array = []
@@ -274,6 +275,8 @@ func processTime(_secondsPassed):
 	
 	if(intoxication > 0.0):
 		intoxication -= _secondsPassed / 30000.0
+		if(intoxication < 0.0):
+			intoxication = 0.0
 	
 	if(timedBuffsDurationSeconds > 0):
 		timedBuffsDurationSeconds -= _secondsPassed
@@ -306,6 +309,11 @@ func hoursPassed(_howmuch):
 	for bodypartSlot in bodyparts:
 		if(bodyparts[bodypartSlot] != null):
 			bodyparts[bodypartSlot].hoursPassed(_howmuch)
+		
+	if(intoxication <= 0.0 && intoxicationTolerance > 0.0):
+		intoxicationTolerance -= 0.005
+		if(intoxicationTolerance < 0.0):
+			intoxicationTolerance = 0.0
 
 func processStruggleTurn():
 	var texts = []
@@ -457,6 +465,7 @@ func saveData():
 	data["timedBuffsTurns"] = saveBuffsData(timedBuffsTurns)
 	data["timedBuffsDurationTurns"] = timedBuffsDurationTurns
 	data["intoxication"] = intoxication
+	data["intoxicationTolerance"] = intoxicationTolerance
 	
 	return data
 
@@ -500,6 +509,7 @@ func loadData(data):
 	timedBuffsTurns = loadBuffsData(SAVE.loadVar(data, "timedBuffsTurns", []))
 	timedBuffsDurationTurns = SAVE.loadVar(data, "timedBuffsDurationTurns", 0)
 	intoxication = SAVE.loadVar(data, "intoxication", 0.0)
+	intoxicationTolerance = SAVE.loadVar(data, "intoxicationTolerance", 0.0)
 	
 	updateNonBattleEffects()
 
@@ -927,10 +937,24 @@ func addIntoxication(howmuch: float):
 	intoxication += howmuch
 	intoxication = clamp(intoxication, 0.0, 1.0)
 	
+	if(intoxication >= 0.5):
+		intoxicationTolerance += howmuch / 20.0
+		if(intoxicationTolerance > 1.0):
+			intoxicationTolerance = 1.0
+	
 	updateNonBattleEffects()
 
 func getIntoxicationLevel() -> float:
 	return intoxication
+
+func getIntoxicationTolerance() -> float:
+	return intoxicationTolerance
+
+func getIntoxicationMod() -> float:
+	if(intoxicationTolerance < 0.2):
+		return 1.0
+	
+	return 1.0 - (intoxicationTolerance - 0.1) / 0.9 * 0.4
 
 func canIntoxicateMore(howmuch: float):
 	var free = 1.0 - getIntoxicationLevel()

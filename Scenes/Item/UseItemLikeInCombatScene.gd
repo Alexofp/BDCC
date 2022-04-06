@@ -9,8 +9,8 @@ func _run():
 	if(state == ""):
 		var item: ItemBase = GM.pc.getInventory().getItemByUniqueID(sceneArgs[0])
 		
-		var intoxic = item.addsIntoxication()
-		if(intoxic > 0 && !GM.pc.canIntoxicateMore(intoxic)):
+		var intoxic = item.addsIntoxicationToPC()
+		if(intoxic > 0.0 && !GM.pc.canIntoxicateMore(intoxic)):
 			saynn("You're too intoxicated to use this")
 			
 			addButton("Continue", "Aww", "endthescene")
