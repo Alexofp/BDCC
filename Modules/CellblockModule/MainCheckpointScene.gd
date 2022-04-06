@@ -338,6 +338,7 @@ func _react(_action: String, _args):
 	if(_action == "catch_anal"):
 		processTime(30 * 60)
 		
+		GM.pc.gotAnusFuckedBy("cp_guard")
 		GM.pc.cummedInAnusBy("cp_guard")
 		GM.pc.orgasmFrom("cp_guard")
 		GM.pc.addSkillExperience(Skill.CumLover, 20, "cpguard_catchanal")

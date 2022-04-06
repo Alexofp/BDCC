@@ -12,3 +12,6 @@ func getBaseElasticity() -> float:
 
 func getBaseResistance() -> float:
 	return 0.8
+
+func getComfortableInsertion() -> float:
+	return 15.0 + pow(looseness, 2.0)

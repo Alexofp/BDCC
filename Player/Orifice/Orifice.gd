@@ -84,11 +84,13 @@ func getComfortableInsertion() -> float:
 func handleInsertion(size: float):
 	var comfortable = getComfortableInsertion()
 	
-	if(size <= comfortable):
+	var diff = size - comfortable
+	if(diff <= -10.0):
 		return
 	
-	var diff = (size - comfortable)
-	var add = pow(diff, 0.1) / getResistance()
+	var add = pow(diff + 10.0, 0.5) / getResistance() / 8.0
+	if(diff > 0):
+		add += pow(diff, 0.5) / getResistance() / 4.0
 	
 	looseness += add
 
@@ -212,6 +214,7 @@ func getAttributesText():
 		["Capacity", str(round(getFluidAmount() * 10.0)/10.0)+"/"+ str(round(getCapacity() * 10.0)/10.0)+" ml"],		
 		["Looseness level", str(round(getLooseness() * 10.0)/10.0)+", "+getLoosenessString()],
 		["Looseness level minimal", str(round(getMinLooseness() * 10.0)/10.0)],
+		["Comfortable insertion", str(round(getComfortableInsertion() * 10.0)/10.0)+" cm"],
 		["Elasticity", str(round(getElasticity() * 1000.0)/10.0)+"%"],
 		["Tightness", str(round(getResistance() * 1000.0)/10.0)+"%"],
 	]

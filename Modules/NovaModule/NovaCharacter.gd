@@ -58,3 +58,6 @@ func getFightIntro(_battleName):
 
 func getLoot(_battleName):
 	return {"credits": 1}
+
+func getPenisSize():
+	return 18.0
