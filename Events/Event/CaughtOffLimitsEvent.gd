@@ -7,7 +7,7 @@ func registerTriggers(es):
 	es.addTrigger(self, Trigger.EnteringRoom)
 
 func shouldRun():
-	return RNG.chance(1) && GM.world.getRoomByID(GM.pc.getLocation()).loctag_Greenhouses
+	return RNG.chance(10) && GM.world.getRoomByID(GM.pc.getLocation()).loctag_Greenhouses
 
 func run(_args):
 	GM.ES.trigger(Trigger.CaughtOffLimits)

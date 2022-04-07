@@ -4,7 +4,7 @@ func _init():
 	id = "NovaCatchesPlayerOffLimitsEvent"
 
 func registerTriggers(es):
-	es.addTrigger(self, Trigger.CaughtOffLimits)
+	es.addTrigger(self, Trigger.CaughtStealingInGreenhouse)
 
 func shouldRun():
 	return true

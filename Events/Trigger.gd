@@ -8,4 +8,5 @@ enum {
 	WorkingInMines,
 	WakeUpInCell,
 	CaughtOffLimits,
+	CaughtStealingInGreenhouse,
 }

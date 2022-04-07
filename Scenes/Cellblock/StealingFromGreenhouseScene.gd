@@ -35,7 +35,7 @@ func _react(_action: String, _args):
 		processTime(10 * 5)
 		
 		if(RNG.chance(80)):
-			if(GM.ES.trigger(Trigger.CaughtOffLimits)):
+			if(GM.ES.trigger(Trigger.CaughtStealingInGreenhouse)):
 				endScene()
 				return
 		endScene()

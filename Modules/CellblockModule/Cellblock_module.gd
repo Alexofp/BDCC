@@ -10,13 +10,18 @@ func _init():
 	
 	scenes = [
 		"res://Modules/CellblockModule/MainCheckpointScene.gd",
+		"res://Modules/CellblockModule/MaleGuardCanineOffLimits.gd",
+		"res://Modules/CellblockModule/FemaleGuardFelineOffLimits.gd",
 		]
 	characters = [
 		"res://Modules/CellblockModule/CheckpointGuardCharacter.gd",
+		"res://Modules/CellblockModule/MaleGuardCanine.gd",
+		"res://Modules/CellblockModule/FemaleGuardFeline.gd",
 	]
 	items = []
 	events = [
 		"res://Modules/CellblockModule/MainCheckpointEvent.gd",
+		"res://Modules/CellblockModule/GuardCaughtOfflimitsEvent.gd",
 	]
 
 func resetFlagsOnNewDay():
