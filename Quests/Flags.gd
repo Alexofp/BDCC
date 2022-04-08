@@ -16,3 +16,5 @@ static func resetFlagsOnNewDay():
 		var module = modules[moduleID]
 		
 		module.resetFlagsOnNewDay()
+	
+	TriggerCondition.onNewDay()

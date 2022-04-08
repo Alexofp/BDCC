@@ -22,8 +22,16 @@ func _run():
 		
 		addButton("Continue", "Try to escape without being seen", "caughtcheck")
 
+	if(state == "canTryAgain"):
+		saynn("Seems you got away with it. But you think you can try and steal some more.")
+		
+		addButton("Steal more", "Try to escape without being seen", "caughtcheck2")
+		addButton("Don't steal", "Too dangerous", "endthescene")
+
 func _react(_action: String, _args):
 	if(_action == "apple"):
+		GM.main.setFlag(CellblockModule.Cellblock_GreenhouseLooted, true)
+		
 		GM.pc.getInventory().addItem(GlobalRegistry.createItem("appleitem"))
 		if(RNG.chance(50)):
 			GM.pc.getInventory().addItem(GlobalRegistry.createItem("appleitem"))
@@ -34,11 +42,27 @@ func _react(_action: String, _args):
 	if(_action == "caughtcheck"):		
 		processTime(10 * 5)
 		
-		if(RNG.chance(80)):
+		if(RNG.chance(50)):
+			if(GM.ES.trigger(Trigger.CaughtStealingInGreenhouse)):
+				endScene()
+				return
+		
+		setState("canTryAgain")
+		return
+		
+	if(_action == "caughtcheck2"):
+		processTime(10 * 5)
+		
+		if(RNG.chance(50)):
 			if(GM.ES.trigger(Trigger.CaughtStealingInGreenhouse)):
 				endScene()
 				return
 		endScene()
+		
+		GM.pc.getInventory().addItem(GlobalRegistry.createItem("appleitem"))
+		GM.pc.getInventory().addItem(GlobalRegistry.createItem("appleitem"))
+		addMessage("You stole 2 more apples")
+		
 		addMessage("Seems like you got away safely")
 		return
 

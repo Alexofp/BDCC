@@ -495,6 +495,11 @@ _global_script_classes=[ {
 "path": "res://Events/Trigger.gd"
 }, {
 "base": "Object",
+"class": "TriggerCondition",
+"language": "GDScript",
+"path": "res://Events/TriggerCondition.gd"
+}, {
+"base": "Object",
 "class": "Util",
 "language": "GDScript",
 "path": "res://Util/Util.gd"
@@ -607,6 +612,7 @@ _global_script_class_icons={
 "ThroatOrifice": "",
 "TopicBase": "",
 "Trigger": "",
+"TriggerCondition": "",
 "Util": "",
 "VaginaOrifice": "",
 "WorldFloor": ""

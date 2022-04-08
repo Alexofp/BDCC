@@ -44,6 +44,11 @@ func addTrigger(event, triggerType, args = null):
 func trigger(_triggerType, _args = null, _passArgs = null, onlyDelayed = false):
 	if(!events.has(_triggerType)):
 		return false
+		
+	if(!TriggerCondition.canTrigger(_triggerType)):
+		return false
+	if(!onlyDelayed):
+		TriggerCondition.onTrigger(_triggerType)
 	
 	var usefulEvents = events[_triggerType]
 	

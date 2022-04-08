@@ -11,13 +11,16 @@ func run(_args):
 	#runScene("FightScene", ["risha"], "rishafight")
 	
 func delayedRun():
-	addButtonUnlessLate("Steal", "Try and steal something", "steal_apple")
+	if(!GM.main.getFlag(CellblockModule.Cellblock_GreenhouseLooted, false)):
+		addButtonUnlessLate("Steal", "Try and steal something", "steal_apple")
+	else:
+		addDisabledButton("Steal", "Too dangerous to do this again today")
 
 func shouldInterupt():
 	return false
 
 func getPriority():
-	return 0
+	return 6
 
 func onButton(_method, _args):
 	if(_method == "steal_apple"):

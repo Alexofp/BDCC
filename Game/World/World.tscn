@@ -25,7 +25,7 @@ id = "floor1"
 [node name="MainHall" parent="CellblockFloor" instance=ExtResource( 5 )]
 
 [node name="Cellblock" parent="CellblockFloor" instance=ExtResource( 6 )]
-position = Vector2( 704, 128 )
+position = Vector2( 640, -192 )
 
 [node name="TestFloor" parent="." instance=ExtResource( 7 )]
 visible = false

@@ -7,18 +7,16 @@ func registerTriggers(es):
 	es.addTrigger(self, Trigger.EnteringRoom)
 
 func shouldRun():
-	return RNG.chance(10) && GM.world.getRoomByID(GM.pc.getLocation()).loctag_Greenhouses
+	return RNG.chance(30 + 10.0*GM.pc.getExposure()) && GM.world.getRoomByID(GM.pc.getLocation()).loctag_Greenhouses
 
 func run(_args):
-	GM.ES.trigger(Trigger.CaughtOffLimits)
-	pass
-	#runScene("FightScene", ["risha"], "rishafight")
+	return GM.ES.trigger(Trigger.CaughtOffLimits)
 	
 func delayedRun():
 	pass
 	
 func shouldInterupt():
-	return true
+	return false
 
 func getPriority():
 	return 5
