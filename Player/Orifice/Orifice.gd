@@ -118,10 +118,28 @@ func hoursPassed(_howmuch):
 
 # How much fluids get naturally obsorbed every minute
 func getNaturalDrain() -> float:
-	return 1.0
+	return 0.2
+
+# How much leaks out naturally
+func getNaturalSpill() -> float:
+	return 0.2
 
 func getOverstuffedSpill() -> float:
-	return 10.0
+	return 5.0
+
+func isClosedOff():
+	if(bodypart == null || bodypart.get_ref().character == null):
+		return false
+	var character = bodypart.get_ref().getCharacter()
+	if(character.getOrificeBlocked(orificeType)):
+		return true
+	return false
+
+func getCurrentNaturalSpill() -> float:
+	if(!isClosedOff()):
+		return getNaturalDrain() + getNaturalSpill()
+	
+	return getNaturalDrain()
 	
 func addFluid(fluidType, amount: float, charID = null):
 	contents.append([fluidType, amount, charID])
@@ -171,15 +189,17 @@ func processTime(seconds: int):
 	var fluidAmount = getFluidAmount()
 	var capacity = getCapacity()
 	
+	#var howMuchGotObsorbed = min(getNaturalDrain() * minutesPassed, fluidAmount)
+	
 	var overspill = fluidAmount - capacity
-	if(overspill <= 0):
-		howMuchToDrain = getNaturalDrain() * minutesPassed
+	if(overspill <= 0 || isClosedOff()):
+		howMuchToDrain = getCurrentNaturalSpill() * minutesPassed
 	else:
 		var howMuchMinutesToSpillAll = overspill / getOverstuffedSpill()
 		if(minutesPassed <= howMuchMinutesToSpillAll):
 			howMuchToDrain = getOverstuffedSpill() * minutesPassed
 		else:
-			howMuchToDrain = overspill + getNaturalDrain() * (minutesPassed - howMuchMinutesToSpillAll)
+			howMuchToDrain = overspill + getCurrentNaturalSpill() * (minutesPassed - howMuchMinutesToSpillAll)
 	
 	var newContents = []
 	for fluidData in contents:

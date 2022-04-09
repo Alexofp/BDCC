@@ -19,6 +19,7 @@ var exposure = 0
 var genitalElasticity = 0.0
 var genitalResistance = 0.0
 var orificeMinLooseness = {}
+var blockedOrifices = {}
 
 func _ready():
 	name = "Buffs"
@@ -53,6 +54,7 @@ func calculateBuffs():
 	orificeMinLooseness.clear()
 	for orificeType in OrificeType.getAll():
 		orificeMinLooseness[orificeType] = 0.0
+		blockedOrifices[orificeType] = false
 	
 	var items = npc.getInventory().getAllEquippedItems()
 	for slot in items:
@@ -132,3 +134,9 @@ func getOrificeMinLooseness(orificeType):
 		return 0.0
 	
 	return orificeMinLooseness[orificeType]
+
+func getOrificeBlocked(orificeType):
+	if(!blockedOrifices.has(orificeType)):
+		return false
+	
+	return blockedOrifices[orificeType]

@@ -1011,6 +1011,9 @@ func getOrificeMinLooseness(orificeType):
 	var value = 0.0
 	value += buffsHolder.getOrificeMinLooseness(orificeType)
 	return value
+	
+func getOrificeBlocked(orificeType):
+	return buffsHolder.getOrificeBlocked(orificeType)
 
 func canBeMilked():
 	var breasts: BodypartBreasts = getBodypart(BodypartSlot.Breasts)
