@@ -24,7 +24,7 @@ func canSell():
 	return true
 
 func getTags():
-	return [ItemTag.BDSMRestraint]
+	return [ItemTag.BDSMRestraint, ItemTag.CanBeForcedByGuards]
 
 func isRestraint():
 	return true
@@ -33,3 +33,5 @@ func generateRestraintData():
 	restraintData = RestraintBlindfold.new()
 	restraintData.setLevel(RNG.randi_range(1, 2))
 	
+func getForcedOnMessage():
+	return getAStackNameCapitalize()+" was forced over your eyes. You are blind!"

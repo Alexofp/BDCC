@@ -29,7 +29,7 @@ func canSell():
 	return true
 
 func getTags():
-	return [ItemTag.BDSMRestraint]
+	return [ItemTag.BDSMRestraint, ItemTag.CanBeForcedByGuards]
 
 func isRestraint():
 	return true
@@ -37,3 +37,6 @@ func isRestraint():
 func generateRestraintData():
 	restraintData = RestraintBallGag.new()
 	restraintData.setLevel(calculateBestRestraintLevel())
+
+func getForcedOnMessage():
+	return getAStackNameCapitalize()+" was locked around your head. The canine-shaped rubber cock is stretching your throat out!"

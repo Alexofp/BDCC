@@ -345,10 +345,10 @@ func beforeTurnChecks():
 	#if(damage != 0.0):
 	#	restraintData.takeDamage(damage)
 	if(addLust != 0):
-		GM.pc.addLust(addLust)
+		addLust = GM.pc.recieveDamage(DamageType.Lust, addLust)
 		addMessage("You recieved "+str(addLust)+" lust")
 	if(addPain != 0):
-		GM.pc.addPain(addPain)
+		addPain = GM.pc.recieveDamage(DamageType.Physical, addPain)
 		addMessage("You recieved "+str(addPain)+" pain")
 	if(addStamina != 0):
 		GM.pc.addStamina(-addStamina)

@@ -79,15 +79,8 @@ func _react(_action: String, _args):
 		runScene("FightScene", ["femaleguard_feline"], "guardfight")
 	
 	if(_action == "getrestrained"):
-		if(!GM.pc.isGagged()):
-			GM.pc.getInventory().forceEquipStoreOther(GlobalRegistry.createItem("ballgag"))
-			addMessage("A gag was forced on you by a guard!")
-		elif(!GM.pc.hasBoundLegs()):
-			GM.pc.getInventory().forceEquipStoreOther(GlobalRegistry.createItem("inmateanklecuffs"))
-			addMessage("Your ankles got cuffed by a guard!")
-		elif(!GM.pc.isBlindfolded()):
-			GM.pc.getInventory().forceEquipStoreOther(GlobalRegistry.createItem("blindfold"))
-			addMessage("A blindfold was forced on you by a guard!")
+		for item in GM.pc.getInventory().forceRestraintsWithTag(ItemTag.CanBeForcedByGuards, RNG.randi_range(1, 2)):
+			addMessage(item.getForcedOnMessage())
 	
 	setState(_action)
 

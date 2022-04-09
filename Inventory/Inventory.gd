@@ -279,6 +279,33 @@ func hasRemovableRestraints():
 				return true
 	return false
 
+func forceRestraintsWithTag(tag, amount = 1):
+	var itemIDs = GlobalRegistry.getItemIDsByTag(tag)
+	itemIDs.shuffle()
+	var added = 0
+	var result = []
+	
+	for itemID in itemIDs:
+		var potentialItem = GlobalRegistry.getItemRef(itemID)
+		
+		var slot = potentialItem.getClothingSlot()
+		if(slot == null || !canEquipSlot(slot)):
+			continue
+		
+		if(hasSlotEquipped(slot)):
+			var ourItem = getEquippedItem(slot)
+			if(ourItem.isRestraint()):
+				continue
+		
+		var newItem = GlobalRegistry.createItem(itemID)
+		if(forceEquipStoreOther(newItem)):
+			result.append(newItem)
+			added += 1
+			
+			if(added >= amount):
+				return result
+	return result
+
 func saveData():
 	var data = {}
 	

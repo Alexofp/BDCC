@@ -27,7 +27,7 @@ func canSell():
 	return true
 
 func getTags():
-	return [ItemTag.BDSMRestraint]
+	return [ItemTag.BDSMRestraint, ItemTag.CanBeForcedByGuards]
 
 func isRestraint():
 	return true
@@ -36,3 +36,8 @@ func generateRestraintData():
 	restraintData = RestraintMittens.new()
 	restraintData.setLevel(calculateBestRestraintLevel())
 
+func getA():
+	return ""
+
+func getForcedOnMessage():
+	return getAStackNameCapitalize()+" were locked onto your hands"

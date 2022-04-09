@@ -361,12 +361,6 @@ func _react_scene_end(_tag, _result):
 			setState("lost_fight")
 			addExperienceToPlayer(5)
 			
-			if(!GM.pc.isGagged()):
-				GM.pc.getInventory().forceEquipStoreOther(GlobalRegistry.createItem("ballgag"))
-				addMessage("A gag was forced on you by a guard!")
-			elif(!GM.pc.hasBoundLegs()):
-				GM.pc.getInventory().forceEquipStoreOther(GlobalRegistry.createItem("inmateanklecuffs"))
-				addMessage("Your ankles got cuffed by a guard!")
-			elif(!GM.pc.isBlindfolded()):
-				GM.pc.getInventory().forceEquipStoreOther(GlobalRegistry.createItem("blindfold"))
-				addMessage("A blindfold was forced on you by a guard!")
+			
+			for item in GM.pc.getInventory().forceRestraintsWithTag(ItemTag.CanBeForcedByGuards, RNG.randi_range(1, 2)):
+				addMessage(item.getForcedOnMessage())

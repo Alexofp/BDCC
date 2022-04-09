@@ -25,7 +25,7 @@ func canSell():
 	return true
 
 func getTags():
-	return []#[ItemTag.BDSMRestraint]
+	return [ItemTag.CanBeForcedByGuards]#[ItemTag.BDSMRestraint]
 
 func isRestraint():
 	return true
@@ -45,3 +45,6 @@ func getPuttingOnStringLong(withS):
 		return "inserts the vaginal plug into your pussy"
 	else:
 		return "insert the vaginal plug into your pussy"
+
+func getForcedOnMessage():
+	return getAStackNameCapitalize()+" was stuffed into your "+RNG.pick(["pussy", "pussy", "cunt", "slit"])+". It can accidentally start vibrating!"

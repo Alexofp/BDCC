@@ -63,6 +63,10 @@ func doStruggle(_pc):
 func processStruggleTurn():
 	if(turnedOn):
 		return {"text": "The vaginal plug strongly vibrates inside your pussy", "lust": scaleDamage(5)}
+	else:
+		if(failChance(5)):
+			turnedOn = true
+			return {"text": "[b]The plug inside your pussy accidentally turns on[/b]. It vibrates, bringing you pleasure!"}
 	
 	
 func resetOnNewDay():

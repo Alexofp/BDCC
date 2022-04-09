@@ -24,7 +24,7 @@ func canSell():
 	return true
 
 func getTags():
-	return [ItemTag.BDSMRestraint]
+	return [ItemTag.BDSMRestraint, ItemTag.CanBeForcedByGuards]
 
 func isRestraint():
 	return true
@@ -44,3 +44,6 @@ func getPuttingOnStringLong(withS):
 		return "ties your body up with ropes"
 	else:
 		return "tie your body up with ropes"
+
+func getForcedOnMessage():
+	return getAStackNameCapitalize()+" was forced onto you. The ropes keep rubbing against your sensetive spots"

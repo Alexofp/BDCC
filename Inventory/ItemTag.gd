@@ -4,6 +4,7 @@ class_name ItemTag
 enum {
 	Illegal,
 	BDSMRestraint,
+	CanBeForcedByGuards,
 }
 
 static func getName(tag):

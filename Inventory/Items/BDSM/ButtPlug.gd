@@ -25,7 +25,7 @@ func canSell():
 	return true
 
 func getTags():
-	return []#[ItemTag.BDSMRestraint]
+	return [ItemTag.CanBeForcedByGuards]#[ItemTag.BDSMRestraint]
 
 func isRestraint():
 	return true
@@ -45,3 +45,6 @@ func getPuttingOnStringLong(withS):
 		return "inserts the buttplug into your butt"
 	else:
 		return "insert the buttplug into your butt"
+
+func getForcedOnMessage():
+	return getAStackNameCapitalize()+" was stuffed into your "+RNG.pick(["anus", "rear hole", "rear", "butt", "tailhole"])+". It shifts around while you move!"

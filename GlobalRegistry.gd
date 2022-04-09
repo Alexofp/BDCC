@@ -15,6 +15,7 @@ var statusEffects: Dictionary = {}
 var allSpecies: Dictionary = {}
 var items: Dictionary = {}
 var itemsRefs: Dictionary = {}
+var itemsByTag: Dictionary = {}
 var buffs: Dictionary = {}
 var events: Dictionary = {}
 var modules: Dictionary = {}
@@ -331,6 +332,10 @@ func registerItem(path: String):
 	var itemObject = item.new()
 	items[itemObject.id] = item
 	itemsRefs[itemObject.id] = itemObject
+	for tag in itemObject.getTags():
+		if(!itemsByTag.has(tag)):
+			itemsByTag[tag] = []
+		itemsByTag[tag].append(itemObject.id)
 
 func registerItemFolder(folder: String):
 	var dir = Directory.new()
@@ -362,6 +367,10 @@ func getItemRef(id: String):
 		return null
 	return itemsRefs[id]
 
+func getItemIDsByTag(tag):
+	if(!itemsByTag.has(tag)):
+		return []
+	return itemsByTag[tag]
 
 func registerBuff(path: String):
 	var item = load(path)

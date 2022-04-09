@@ -33,6 +33,12 @@ func getAStackName():
 	else:
 		return (getA() + " " + getVisibleName()).trim_prefix(" ")
 
+func getAStackNameCapitalize():
+	if(amount > 1):
+		return ""+str(amount)+"x"+getVisibleName()
+	else:
+		return (getA().capitalize() + " " + getVisibleName()).trim_prefix(" ")
+
 func getDescription():
 	return "No description provided, please let the developer know"
 	
@@ -210,6 +216,9 @@ func getPuttingOnVerb(withS):
 		return "puts on"
 	else:
 		return "put on"
+
+func getForcedOnMessage():
+	return getAStackNameCapitalize()+" was forced on you!"
 
 func coversBodyparts():
 	return []

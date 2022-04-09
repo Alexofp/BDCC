@@ -21,7 +21,7 @@ func getTakeOffScene():
 	return "CuffTuggingScene"
 
 func getTags():
-	return [ItemTag.BDSMRestraint]
+	return [ItemTag.BDSMRestraint, ItemTag.CanBeForcedByGuards]
 
 func isRestraint():
 	return true
@@ -29,3 +29,6 @@ func isRestraint():
 func generateRestraintData():
 	restraintData = RestraintHandCuffs.new()
 	restraintData.setLevel(calculateBestRestraintLevel())
+
+func getForcedOnMessage():
+	return getAStackNameCapitalize()+" were locked onto your arms, just below your elbows, with a chain connecting them"
