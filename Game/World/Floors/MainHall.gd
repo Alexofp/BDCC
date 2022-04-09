@@ -83,3 +83,31 @@ func _on_MainLaundry_onReact(room, key):
 	
 	if(key == "vendomat"):
 		room.runScene("VendomatUnderwearScene")
+
+
+func _on_MainGreenhousesJumpable_onEnter(room):
+	room.saynn("You look over the railing and see that the drop is not that high.")
+	
+	room.addButton("Vault over", "Seems like you can jump down to the yard here", "vault")
+
+
+func _on_MainGreenhousesJumpable_onReact(_room, key):
+	if(key == "vault"):
+		GM.pc.setLocation("yard_vaulthere")
+		GM.main.reRun()
+		GM.main.addMessage("You successfully jumped over the railing")
+
+
+func _on_MainGreenhouses9_onEnter(room):
+	if(!GM.main.getFlag(CellblockModule.Cellblock_GreenhouseFoundChip, false)):
+		room.saynn("You notice a credit chip under one of the crates, huh.")
+		
+		room.addButton("Grab chip", "Ohh, whats this", "grabchip")
+
+
+func _on_MainGreenhouses9_onReact(_room, key):
+	if(key == "grabchip"):
+		GM.main.setFlag(CellblockModule.Cellblock_GreenhouseFoundChip, true)
+		GM.pc.addCredits(3)
+		GM.main.addMessage("You looted a chip with 3 work credits!")
+		GM.main.reRun()

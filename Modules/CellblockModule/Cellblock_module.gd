@@ -4,6 +4,7 @@ class_name CellblockModule
 const Cellblock_FreeToPassCheckpoint = "Cellblock_FreeToPassCheckpoint"
 const Cellblock_CheckpointVisited = "Cellblock_CheckpointVisited"
 const Cellblock_GreenhouseLooted = "Cellblock_GreenhouseLooted"
+const Cellblock_GreenhouseFoundChip = "Cellblock_GreenhouseFoundChip"
 
 func _init():
 	id = "CellblockModule"
