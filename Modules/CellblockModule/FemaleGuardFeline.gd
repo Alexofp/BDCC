@@ -4,30 +4,33 @@ func _init():
 	id = "femaleguard_feline"
 	
 	npcArmor = {
-		DamageType.Physical: 10,
+		DamageType.Physical: 5,
 	}
-	npcLevel = 2
+	npcLevel = 1
+	npcBasePain = 70
+	npcBaseStamina = 120
 	npcLustInterests = {
-		InterestTopic.FeminineBody: Interest.ReallyLikes,
-		InterestTopic.AndroBody: Interest.Hates,
-		InterestTopic.SlimBody: Interest.KindaLikes,
-		InterestTopic.BigBreasts: Interest.ReallyLikes,
-		InterestTopic.MediumBreasts: Interest.Loves,
+		InterestTopic.FeminineBody: Interest.KindaLikes,
+		InterestTopic.AndroBody: Interest.KindaLikes,
+		InterestTopic.MasculineBody: Interest.Loves,
+		InterestTopic.SlimBody: Interest.Dislikes,
+		InterestTopic.BigBreasts: Interest.Hates,
+		InterestTopic.MediumBreasts: Interest.ReallyDislikes,
 		InterestTopic.SmallBreasts: Interest.KindaLikes,
-		InterestTopic.NoBreasts: Interest.SlightlyDislikes,
-		InterestTopic.HasCockOnly: Interest.ReallyDislikes,
-		InterestTopic.HasVaginaOnly: Interest.ReallyLikes,
-		InterestTopic.HasVaginaAndCock: Interest.Loves,
+		InterestTopic.NoBreasts: Interest.KindaLikes,
+		InterestTopic.HasCockOnly: Interest.Loves,
+		InterestTopic.HasVaginaOnly: Interest.SlightlyDislikes,
+		InterestTopic.HasVaginaAndCock: Interest.Likes,
 		InterestTopic.SmallCock: Interest.KindaLikes,
-		InterestTopic.BigCock: Interest.Likes,
-		InterestTopic.StuffedPussyOrAss: Interest.Loves,
-		InterestTopic.StuffedPussy: Interest.Loves,
-		InterestTopic.CoveredInCum: Interest.Likes,
-		InterestTopic.CoveredInLotsOfCum: Interest.Loves,
-		InterestTopic.StuffedThroat: Interest.Likes,
-		InterestTopic.ThickButt: Interest.Loves,
-		InterestTopic.AverageButt: Interest.KindaLikes,
-		InterestTopic.SlimButt: Interest.SlightlyDislikes,
+		InterestTopic.BigCock: Interest.Loves,
+		InterestTopic.StuffedPussyOrAss: Interest.Dislikes,
+		InterestTopic.StuffedPussy: Interest.Hates,
+		InterestTopic.CoveredInCum: Interest.Hates,
+		InterestTopic.CoveredInLotsOfCum: Interest.Hates,
+		InterestTopic.StuffedThroat: Interest.Hates,
+		InterestTopic.ThickButt: Interest.KindaLikes,
+		InterestTopic.AverageButt: Interest.ReallyLikes,
+		InterestTopic.SlimButt: Interest.KindaLikes,
 	}
 	
 func _getName():
@@ -43,7 +46,7 @@ func getSpecies():
 	return ["feline"]
 
 func _getAttacks():
-	return ["stunbatonAttack", "stunbatonOverchargeAttack", "biteattack", "shoveattack", "trygetupattack"]
+	return ["HeatGrenade", "DoubleCuffPC", "CuffPCHands", "ForceGagPC", "stunbatonAttack", "stunbatonOverchargeAttack", "biteattack", "shoveattack", "trygetupattack"]
 
 func getFightIntro(_battleName):
 	return "The guard prepares to fight"

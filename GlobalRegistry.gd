@@ -76,6 +76,7 @@ func _ready():
 	registerAttackFolder("res://Attacks/")
 	registerAttackFolder("res://Attacks/PlayerOnly/")
 	registerAttackFolder("res://Attacks/PerkAttacks/")
+	registerAttackFolder("res://Attacks/NpcAttacks/")
 	
 	registerLustTopicFolder("res://Game/LustCombat/Topic/")
 	

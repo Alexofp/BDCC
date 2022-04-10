@@ -6,10 +6,12 @@ func _init():
 	npcArmor = {
 		DamageType.Physical: 10,
 	}
-	npcLevel = 2
+	npcLevel = 1
+	npcBaseLust = 70
 	npcLustInterests = {
 		InterestTopic.FeminineBody: Interest.ReallyLikes,
 		InterestTopic.AndroBody: Interest.Hates,
+		InterestTopic.MasculineBody: Interest.Hates,
 		InterestTopic.SlimBody: Interest.KindaLikes,
 		InterestTopic.BigBreasts: Interest.ReallyLikes,
 		InterestTopic.MediumBreasts: Interest.Loves,
@@ -43,7 +45,7 @@ func getSpecies():
 	return ["canine"]
 
 func _getAttacks():
-	return ["stunbatonAttack", "stunbatonOverchargeAttack", "simplekickattack", "shoveattack", "trygetupattack"]
+	return ["DoubleCuffPC", "CuffPCHands", "ForceGagPC", "stunbatonAttack", "stunbatonOverchargeAttack", "simplekickattack", "shoveattack", "trygetupattack"]
 
 func getFightIntro(_battleName):
 	return "The guard prepares to fight"

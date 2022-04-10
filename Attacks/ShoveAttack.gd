@@ -3,7 +3,8 @@ extends Attack
 func _init():
 	id = "shoveattack"
 	category = Category.Physical
-	aiCategory = AICategory.Defensive
+	aiCategory = AICategory.Offensive
+	aiScoreMultiplier = 0.5
 	
 func getVisibleName():
 	return "Shove"
@@ -49,7 +50,7 @@ func getAnticipationText(_attacker, _reciever):
 func getAIScore(_attacker, _reciever):
 	if(_reciever.hasEffect(StatusEffect.Collapsed)):
 		return 0
-	return .getAIScore(_attacker, _reciever) * 0.25
+	return .getAIScore(_attacker, _reciever)
 
 func getAttackAnimation():
 	return TheStage.Shove

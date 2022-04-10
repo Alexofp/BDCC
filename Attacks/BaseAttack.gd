@@ -145,7 +145,7 @@ func getAIScore(_attacker, _reciever):
 		
 	# we want the enemy to have high pain
 	if(aiCategory == AICategory.Offensive):
-		var enemyHealthFraction = _reciever.getPain() / _reciever.painThreshold()
+		var enemyHealthFraction = _reciever.getPainLevel()
 		enemyHealthFraction = clamp(enemyHealthFraction, 0.0, 1.0)
 		
 		var score = 1.0 + pow(enemyHealthFraction, 3) * 2
@@ -153,41 +153,41 @@ func getAIScore(_attacker, _reciever):
 		
 	# we want us to have low health
 	if(aiCategory == AICategory.DefensivePain):
-		var healthFraction = _attacker.getPain() / _attacker.painThreshold()
+		var healthFraction = _attacker.getPainLevel()
 		healthFraction = clamp(healthFraction, 0.0, 1.0)
 		
-		var score = 0.0 + pow(1.0 - healthFraction, 3) * 4
+		var score = 0.0 + pow(healthFraction, 3) * 4
 		return score * aiScoreMultiplier
 		
 	# we want us to have low lust
 	if(aiCategory == AICategory.DefensiveLust):
-		var lustFraction = _attacker.getLust() / _attacker.lustThreshold()
+		var lustFraction = _attacker.getLustLevel()
 		lustFraction = clamp(lustFraction, 0.0, 1.0)
 		
-		var score = 0.0 + pow(1.0 - lustFraction, 3) * 4
+		var score = 0.0 + pow(lustFraction, 3) * 4
 		return score * aiScoreMultiplier
 		
 	# we want us to have low pain and lust
 	if(aiCategory == AICategory.Defensive):
-		var lustFraction = _attacker.getLust() / _attacker.lustThreshold()
+		var lustFraction = _attacker.getLustLevel()
 		lustFraction = clamp(lustFraction, 0.0, 1.0)
-		var healthFraction = _attacker.getPain() / _attacker.painThreshold()
+		var healthFraction = _attacker.getPainLevel()
 		healthFraction = clamp(healthFraction, 0.0, 1.0)
 		
-		var dangerFraction = min(lustFraction, healthFraction)
+		var dangerFraction = max(lustFraction, healthFraction)
 		
-		var score = 0.0 + pow(1.0 - dangerFraction, 3) * 4
+		var score = 0.0 + pow(dangerFraction, 3) * 4
 		return score * aiScoreMultiplier
 		
 	# we want the enemy to have high lust
 	if(aiCategory == AICategory.Lust):
-		var enemyLustFraction = _reciever.getLust() / _reciever.lustThreshold()
+		var enemyLustFraction = _reciever.getLustLevel()
 		enemyLustFraction = clamp(enemyLustFraction, 0.0, 1.0)
 		
 		var score = 1.0 + pow(enemyLustFraction, 3) * 2
 		
 		# if we're lusty we will prioritise lust attacks
-		var lustFraction = _attacker.getLust() / _attacker.lustThreshold()
+		var lustFraction = _attacker.getLustLevel()
 		lustFraction = clamp(lustFraction, 0.0, 1.0)
 		if(lustFraction > 0.6):
 			score += 0.5
@@ -259,3 +259,17 @@ func recieverDamageMessageList(damages: Array):
 
 func getExperience():
 	return []
+
+func genericMissMessage(_attacker, _reciever):
+	return RNG.pick([
+		"{attacker.name} missed!",
+		"{attacker.name} missed {attacker.his} attack!",
+		])
+	
+func genericDodgeMessage(_attacker, _reciever):
+	return RNG.pick([
+		"{receiver.name} managed to dodge the attack.",
+		"{receiver.name} managed to dodge the attack at the last second.",
+		"{receiver.name} managed to avoid being hit.",
+		"{receiver.name} dodged masterfully.",
+	])
