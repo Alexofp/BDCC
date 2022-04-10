@@ -556,8 +556,26 @@ func getFightState(_battleName):
 		
 	return getName() + " looks completely fine, no visible bruises or signs of lust"
 
+func getLootTable(_battleName):
+	return LootTableBase.new()
+
 func getLoot(_battleName):
-	return {} #{"credits": 10, "items": []}
+	var lootTable = getLootTable(_battleName)
+	var generatedLoot = lootTable.generate()
+	
+	var resultCredits = 0
+	
+	var resultItems = []
+	if(generatedLoot.has("items")):
+		for generatedItemData in generatedLoot["items"]:
+			var generatedItem = GlobalRegistry.createItem(generatedItemData[0])
+			if(generatedItemData[1] > 1):
+				generatedItem.setAmount(generatedItemData[1])
+			resultItems.append(generatedItem)
+	if(generatedLoot.has("credits")):
+		resultCredits = generatedLoot["credits"]
+	
+	return {"credits": resultCredits, "items": resultItems}
 
 func getBodypartTooltipName(_bodypartSlot):
 	return "error"

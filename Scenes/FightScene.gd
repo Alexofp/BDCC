@@ -374,7 +374,7 @@ func afterTurnChecks():
 		setState("win")
 		
 		var loot:Dictionary = enemyCharacter.getLoot(battleName)
-		if(loot.has("credits")):
+		if(loot.has("credits") && loot["credits"] >= 1):
 			GM.pc.addCredits(loot["credits"])
 			addMessage("You looted a chip with "+str(loot["credits"])+" "+Util.multipleOrSingularEnding(loot["credits"], "credit"))
 		if(loot.has("items")):

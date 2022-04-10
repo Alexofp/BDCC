@@ -51,6 +51,6 @@ func _getAttacks():
 func getFightIntro(_battleName):
 	return "The guard prepares to fight"
 	
-func getLoot(_battleName):
-	return {"credits": 1}
+func getLootTable(_battleName):
+	return GuardLoot.new()
 

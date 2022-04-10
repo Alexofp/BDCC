@@ -209,6 +209,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Game/World/World.gd"
 }, {
+"base": "LootTableBase",
+"class": "GuardLoot",
+"language": "GDScript",
+"path": "res://Inventory/LootTable/GuardLoot.gd"
+}, {
 "base": "Object",
 "class": "InmateType",
 "language": "GDScript",
@@ -258,6 +263,11 @@ _global_script_classes=[ {
 "class": "LimbTypes",
 "language": "GDScript",
 "path": "res://Player/LimbTypes.gd"
+}, {
+"base": "Reference",
+"class": "LootTableBase",
+"language": "GDScript",
+"path": "res://Inventory/LootTable/LootTableBase.gd"
 }, {
 "base": "Reference",
 "class": "LustInterests",
@@ -555,6 +565,7 @@ _global_script_class_icons={
 "GameRoom": "",
 "GameUI": "",
 "GameWorld": "",
+"GuardLoot": "",
 "InmateType": "",
 "Interest": "",
 "InterestTopic": "",
@@ -565,6 +576,7 @@ _global_script_class_icons={
 "Lactation": "",
 "Limb": "",
 "LimbTypes": "",
+"LootTableBase": "",
 "LustInterests": "",
 "MainThing": "",
 "MedicalModule": "",

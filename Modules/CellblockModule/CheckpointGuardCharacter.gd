@@ -49,5 +49,5 @@ func _getAttacks():
 func getFightIntro(_battleName):
 	return "The guard grabs his stun baton and offers you to do the first move"
 
-func getLoot(_battleName):
-	return {"credits": 1}
+func getLootTable(_battleName):
+	return GuardLoot.new()
