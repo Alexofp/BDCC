@@ -185,7 +185,7 @@ func _react(_action: String, _args):
 			restraintData.onStruggleRemoval()
 			GM.pc.getInventory().removeEquippedItem(item)
 			
-			if(GM.pc.hasPerk(Perk.BDSMCollector) || restraintData.alwaysSavedWhenStruggledOutOf()):
+			if(!restraintData.alwaysBreaksWhenStruggledOutOf() && (GM.pc.hasPerk(Perk.BDSMCollector) || restraintData.alwaysSavedWhenStruggledOutOf())):
 				canKeepTheRestraint = true
 			
 				GM.pc.getInventory().addItem(item)

@@ -609,6 +609,8 @@ roomColor = 3
 [connection signal="onReact" from="MainStairs1" to="." method="_on_MainStairs1_onReact"]
 [connection signal="onEnter" from="MainStairs2" to="." method="_on_MainStairs2_onEnter"]
 [connection signal="onReact" from="MainStairs2" to="." method="_on_MainStairs2_onReact"]
+[connection signal="onEnter" from="MainHallRoom9" to="." method="_on_MainHallRoom9_onEnter"]
+[connection signal="onReact" from="MainHallRoom9" to="." method="_on_MainHallRoom9_onReact"]
 [connection signal="onEnter" from="MainGreenhouses9" to="." method="_on_MainGreenhouses9_onEnter"]
 [connection signal="onReact" from="MainGreenhouses9" to="." method="_on_MainGreenhouses9_onReact"]
 [connection signal="onEnter" from="MainGreenhousesJumpable" to="." method="_on_MainGreenhousesJumpable_onEnter"]

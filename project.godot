@@ -390,6 +390,11 @@ _global_script_classes=[ {
 "path": "res://Inventory/RestraintTypes/RestraintRopeHarness.gd"
 }, {
 "base": "RestraintData",
+"class": "RestraintStocks",
+"language": "GDScript",
+"path": "res://Inventory/RestraintTypes/RestraintStocks.gd"
+}, {
+"base": "RestraintData",
 "class": "RestraintUnremovable",
 "language": "GDScript",
 "path": "res://Inventory/RestraintTypes/RestraintUnremovable.gd"
@@ -601,6 +606,7 @@ _global_script_class_icons={
 "RestraintLegCuffs": "",
 "RestraintMittens": "",
 "RestraintRopeHarness": "",
+"RestraintStocks": "",
 "RestraintUnremovable": "",
 "RestraintVaginalplug": "",
 "RoomAction": "",

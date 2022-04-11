@@ -306,6 +306,16 @@ func forceRestraintsWithTag(tag, amount = 1):
 				return result
 	return result
 
+func clearStaticRestraints():
+	for slot in InventorySlot.getStatic():
+		removeItemFromSlot(slot)
+
+func hasLockedStaticRestraints():
+	for slot in InventorySlot.getStatic():
+		if(hasSlotEquipped(slot)):
+			return true
+	return false
+
 func saveData():
 	var data = {}
 	

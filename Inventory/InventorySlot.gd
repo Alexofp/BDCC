@@ -14,9 +14,16 @@ const UnderwearBottom = "underwearBottom"
 const Penis = "penis"
 const Vagina = "vagina"
 const Anal = "anal"
+# For things like stocks
+const Static1 = "static1"
+const Static2 = "static2"
+const Static3 = "static3"
 
 static func getAll():
 	return [Eyes, Mouth, Neck, Torso, Body, UnderwearTop, UnderwearBottom, Penis, Vagina, Anal, Wrists, Hands, Ankles]
+
+static func getStatic():
+	return [Static1, Static2, Static3]
 
 static func getVisibleName(slot: String):
 	if(slot == UnderwearTop):

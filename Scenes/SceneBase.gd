@@ -36,12 +36,16 @@ func _react_scene_end(_tag, _result):
 func _initScene(_args = []):
 	pass
 
+func _reactInit():
+	pass
+
 # Utility
 func initScene(args = []):
 	sceneArgs = args
 	clearCharacter()
 	clearFightCharacter()
 	_initScene(args)
+	_reactInit()
 
 func run():
 	GM.ui.clearText()
@@ -147,10 +151,14 @@ func clearCharacter():
 	GM.ui.getCharactersPanel().clear()
 	updateCharactersPanelVisibility()
 
+func _onSceneEnd():
+	pass
+
 func endScene(result = []):
+	_onSceneEnd()
 	GM.main.removeScene(self, result)
 	emit_signal("sceneEnded", result)
-	print("removing self")
+	print("removing scene "+name)
 	
 	queue_free()
 

@@ -33,7 +33,7 @@ func canInspectWhileBlindfolded():
 	return false
 
 func getLevelDamage():
-	return 0.5 / pow(max(1.0, level), 0.5)
+	return 0.5 / pow(max(1.0, level), 0.8)
 
 func getStatDamageMult():
 	return 1.0 + GM.pc.getStat(Stat.Strength) / 50.0
@@ -54,6 +54,9 @@ func canStruggle():
 	return true
 
 func failChance(chance):
+	return RNG.chance(chance)
+
+func luckChance(chance):
 	return RNG.chance(chance)
 
 func scaleDamage(dam) -> int:
@@ -111,6 +114,9 @@ func canUnlockWithKey():
 	return true
 	
 func alwaysSavedWhenStruggledOutOf():
+	return false
+
+func alwaysBreaksWhenStruggledOutOf():
 	return false
 
 func saveData():

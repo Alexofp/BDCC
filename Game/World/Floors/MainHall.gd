@@ -111,3 +111,11 @@ func _on_MainGreenhouses9_onReact(_room, key):
 		GM.pc.addCredits(3)
 		GM.main.addMessage("You looted a chip with 3 work credits!")
 		GM.main.reRun()
+
+func _on_MainHallRoom9_onEnter(room):
+	room.addButton("Try stocks", "Stick your head into them out of curiosity", "stocks")
+
+
+func _on_MainHallRoom9_onReact(room, key):
+	if(key == "stocks"):
+		room.runScene("TryStocksScene")

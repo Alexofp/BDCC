@@ -3,9 +3,10 @@ extends "res://Scenes/SceneBase.gd"
 func _init():
 	sceneID = "StocksPunishmentScene"
 
-func _run():
-	
+func _reactInit():
+	GM.pc.getInventory().forceEquipRemoveOther(GlobalRegistry.createItem("StocksStatic"))
 
+func _run():
 	if(state == ""):
 		GM.pc.setLocation("main_punishment_spot")
 		aimCamera("main_punishment_spot")
@@ -16,8 +17,40 @@ func _run():
 
 		saynn("((There are no sex scenes here yet so you will just be saved immediately))")
 
-		addButton("Wait", "See who is gonna use you..", "bringnext")
+		addButton("Wait", "Stay quiet and try to get some rest (You might get something done to you but you will never be fucked unwillingly)", "justwait")
+		addButton("Be loud", "Ask to be freed. You might not get the type of attention that you want. (Anything can happen)", "be_loud")
+		addButton("Struggle", "Maybe you can escape somehow", "struggle")
+		if(!GM.pc.getInventory().hasLockedStaticRestraints()):
+			addButton("Escape", "Sweet freedom!", "endthescene")
+		else:
+			addDisabledButton("Escape", "You can't escape while the stocks are locked")
 
+	if(state == "afterWait"):
+		saynn("You decide to stay quiet. You’re forced to stand in an uncomfortable pose, it’s humiliating but you get some rest.")
+		
+		addButton("Continue", "What now", "")
+
+
+	if(state == "be_loud"):
+		# (if not blindfolded)
+		if(!GM.pc.isBlindfolded()):
+			saynn("You look around to the best of your abilities and beg loudly.")
+
+		# (if blindfolded)
+		else:
+			saynn("You can’t really see if anyone is around but you beg anyway.")
+
+		saynn("[say=pc]"+RNG.pick([
+			"Can someone help me?",
+			"Someone, please, unlock me.",
+			"I’m stuck here, can someone help me?",
+			"I can’t move, I’m stuck here.",
+			"A little help?",
+		])+"[/say]")
+
+		# (forced random interaction)
+
+		addButton("Continue", "See what happens", "afterbeloud")
 
 	if(state == "rahi_saves_you"):
 		addCharacter("rahi")
@@ -70,23 +103,48 @@ func _run():
 
 		addButton("Leave", "You got saved!", "endthescene")
 
-
+func getPossibleScenes(escapeChance, _lewdChance, _willingSexChance, _unWillingSexChance):
+	var result = []
+	
+	if(RNG.chance(escapeChance)):
+		result.append(["rahi_saves_you"])
+		if(GM.main.getFlag(TaviModule.Tavi_IntroducedTo) && !GM.main.getFlag(TaviModule.Tavi_IsAngryAtPlayer)):
+			result.append("tavi_saves_you")
+	
+	return result
 
 func _react(_action: String, _args):
-	if(_action == "bringnext"):
-		# start some sex scene
-		# runScene(...)
-		
-		var escapeStates = ["rahi_saves_you"]
-		if(GM.main.getFlag(TaviModule.Tavi_IntroducedTo) && !GM.main.getFlag(TaviModule.Tavi_IsAngryAtPlayer)):
-			escapeStates.append("tavi_saves_you")
-		
-		setState(RNG.pick(escapeStates))
+	if(_action == "afterbeloud"):
+		processTime(60*1)
+		var possibleStates = getPossibleScenes(20, 100, 100, 100)
+		if(possibleStates.size() == 0):
+			setState("")
+		else:
+			setState(RNG.pick(possibleStates))
 		return
+	
+	if(_action == "justwait"):
+		var possibleStates = getPossibleScenes(10, 10, 10, 0)
 		
+		if(RNG.chance(80) || possibleStates.size() == 0):
+			processTime(60*30)
+			GM.pc.addStamina(50)
+			setState("afterWait")
+		else:
+			processTime(60*1)
+			setState(RNG.pick(possibleStates))
+		return
 	
 	if(_action == "endthescene"):
 		endScene()
 		return
+		
+	if(_action == "struggle"):
+		runScene("StrugglingScene")
+		setState("")
+		return
 	
 	setState(_action)
+
+func _onSceneEnd():
+	GM.pc.getInventory().clearStaticRestraints()
