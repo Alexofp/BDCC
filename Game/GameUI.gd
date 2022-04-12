@@ -45,14 +45,6 @@ func _ready():
 		optionButtonsContainer.add_child(newbutton)
 		
 	updateButtons()
-	#addButtonAt(1, "sup")
-	#addButton("Hallo")
-	#addButtonAt(14, "sup")
-	#addButton("Hallo")
-	#addButton("Hallo 2")
-	#for i in 5:
-	#	addButton("Hallo "+str(i), "some"+str(i), "Random \n\n\ntext lalala "+str(i))
-	#	addDisabledButton("mew", "fuck"+str(i))
 		
 func say(text: String):
 	textOutput.bbcode_text += gameParser.executeString(sayParser.processString(text))
@@ -264,3 +256,13 @@ func _on_SkillsButton_pressed():
 
 func makeSkillsButtonFlash():
 	skillsButton.text = "[!]Skills"
+
+
+func _on_Player_animation_changed(newanim):
+	playerPanel.on_player_animationchange(newanim)
+
+func _on_Player_bodypart_changed():
+	playerPanel.on_player_bodypartchange()
+
+func _on_Player_stat_changed():
+	playerPanel.on_player_statchange()

@@ -38,7 +38,7 @@ func _init():
 	initialDodgeChance = 0.05 # Player has a small chance to dodge anything
 
 func _ready():
-	GM.pc = self
+	#GM.pc = self
 	name = "Player"
 	bodypartStorageNode = Node.new()
 	add_child(bodypartStorageNode)

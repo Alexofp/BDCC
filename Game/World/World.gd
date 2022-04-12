@@ -145,7 +145,7 @@ func registerRoom(floorid, room):
 	var pos:Vector2 = room.getCell()
 	
 	if(hasRoom(floorid, pos)):
-		printerr("Map Error: there is already a room at cell "+str(pos))
+		printerr("Map Error: there is already a room at cell "+str(pos)+" floor: "+str(floorid)+" roomid: "+str(room.roomID))
 		room.queue_free()
 		return
 		

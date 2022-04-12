@@ -80,7 +80,7 @@ static func getPrefix(checks: Array):
 			reason = reason[0]
 		
 		if(reason == SkillCheck):
-			var skill: SkillBase = GM.pc.getSkillsHolder().getSkill(args[1])
+			var skill: SkillBase = GlobalRegistry.createSkill(args[1])
 			result += "["+skill.getVisibleName()+" "+str(args[2])+"+]"
 			
 		if(reason == StatCheck):

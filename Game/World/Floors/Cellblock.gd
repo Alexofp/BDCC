@@ -33,7 +33,21 @@ func _on_CellblockRoom11_onReact(_room, key):
 		#GM.pc.addStamina(100)
 		#GM.main.addMessage("You had a good rest")
 		#GM.main.reRun()
-
+		
+	if(key == "over"):
+		GM.main.overridePC()
+		GM.pc.updateAppearance()
+		GM.pc.updateNonBattleEffects()
+		GM.main.reRun()
+		
+	if(key == "clearover"):
+		GM.main.clearOverridePC()
+		GM.pc.updateAppearance()
+		GM.pc.updateNonBattleEffects()
+		GM.main.reRun()
+		
+	if(key == "flashback"):
+		_room.runScene("PCOverrideExample")
 
 func _on_CellblockRoom11_onPreEnter(room):
 	if(GM.pc.getLocation() == GM.pc.getCellLocation()):
@@ -46,6 +60,10 @@ func _on_CellblockRoom11_onPreEnter(room):
 		room.addButton("Stash", "You can hide something in your cell", "stash")
 		
 		room.addButton("Rest", "Lay down on the bed", "rest")
+		# Debug testing, free to remove
+		#room.addButton("Override", "Override pc", "over")
+		#room.addButton("Clear", "Clear pc", "clearover")
+		#room.addButton("Flashback test", "Test", "flashback")
 	else:
 		room.roomDescription = "This is not your cell"
 		room.roomName = "Cell"

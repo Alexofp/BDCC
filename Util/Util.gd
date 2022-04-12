@@ -5,6 +5,13 @@ static func delete_children(node):
 	for n in node.get_children():
 		node.remove_child(n)
 		n.queue_free()
+		
+static func remove_all_signals(node):
+	var signals = node.get_signal_list();
+	for cur_signal in signals:
+		var conns = node.get_signal_connection_list(cur_signal.name);
+		for cur_conn in conns:
+			node.disconnect(cur_conn.signal, cur_conn.target, cur_conn.method)
 
 static func maxi(value1: int, value2: int) -> int:
 	if(value1 > value2):

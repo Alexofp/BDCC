@@ -9,7 +9,9 @@ func saveData():
 		"currentUniqueID_DONT_TOUCH": GlobalRegistry.currentUniqueID,
 	}
 	
-	data["player"] = GM.pc.saveData()
+	data["player"] = GM.main.getOriginalPC().saveData()
+	if(GM.main.getOverriddenPC() != null):
+		data["player_override"] = GM.main.getOverriddenPC().saveData()
 	
 	var charactersData = {}
 	for characterID in GlobalRegistry.getCharacters():
@@ -30,7 +32,13 @@ func loadData(data: Dictionary):
 		return	
 	GlobalRegistry.currentUniqueID = SAVE.loadVar(data, "currentUniqueID_DONT_TOUCH", 0)
 	
-	GM.pc.loadData(data["player"])
+	GM.main.getOriginalPC().loadData(data["player"])
+	
+	if(GM.main.getOverriddenPC() != null):
+		GM.main.clearOverridePC()
+	if(data.has("player_override") && data["player_override"] != null):
+		GM.main.overridePC()
+		GM.main.getOverriddenPC().loadData(data["player_override"])
 	
 	var charactersData = SAVE.loadVar(data, "characters", {})
 	for characterID in charactersData:

@@ -21,14 +21,8 @@ var savedTooltipBodypartSlot = null
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	var _signal = GM.pc.connect("stat_changed", self, "on_player_statchange")
-	updateUI()
 	set_process_input(true)
 	set_process_unhandled_input(true)
-	
-	var _s = GM.pc.connect("bodypart_changed", self, "on_player_bodypartchange")
-	var _s2 = GM.pc.connect("animation_changed", self, "on_player_animationchange")
-	doll.loadFromPlayer(GM.pc)
 
 func on_player_bodypartchange():
 	doll.loadFromPlayer(GM.pc)

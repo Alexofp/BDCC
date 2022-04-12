@@ -7,17 +7,67 @@ var messages: Array = []
 var currentDay = 0
 var timeOfDay = 6*60*60 # seconds since 00:00
 var flags = {}
+var playerScene = preload("res://Player/Player.tscn")
+var overridenPC
+var originalPC
 
 signal time_passed(_secondsPassed)
 
 func _init():
 	GlobalRegistry.recreateCharacters()
 
+func overridePC():
+	if(overridenPC != null):
+		assert(false, "Trying to override player twice!")
+		return
+	
+	Util.remove_all_signals(originalPC)
+			
+	var newpc = playerScene.instance()
+	overridenPC = newpc
+	GM.pc = newpc
+	connectSignalsToPC(newpc)
+	add_child(newpc)
+	
+func clearOverridePC():
+	if(overridenPC == null):
+		assert(false, "Player wasn't overridden when we are trying to clear it")
+		return
+	overridenPC.queue_free()
+	overridenPC = null
+	GM.pc = originalPC
+	connectSignalsToPC(originalPC)
+	
+func getCurrentPC():
+	if(overridenPC != null):
+		return overridenPC
+	return originalPC
+
+func getOriginalPC():
+	return originalPC
+	
+func getOverriddenPC():
+	return overridenPC
+
+func connectSignalsToPC(who):
+	var _s = who.connect("animation_changed", $GameUI, "_on_Player_animation_changed")
+	_s = who.connect("bodypart_changed", $GameUI, "_on_Player_bodypart_changed")
+	_s = who.connect("levelChanged", self, "_on_Player_levelChanged")
+	_s = who.connect("orificeBecomeMoreLoose", self, "_on_Player_orificeBecomeMoreLoose")
+	_s = who.connect("skillLevelChanged", self, "_on_Player_skillLevelChanged")
+	_s = who.connect("stat_changed", $GameUI, "_on_Player_stat_changed")
+
 func _exit_tree():
 	GM.main = null
 	
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	var pc = playerScene.instance()
+	originalPC = pc
+	GM.pc = pc
+	connectSignalsToPC(pc)
+	add_child(pc)
+	
 	randomize()
 	GM.main = self
 

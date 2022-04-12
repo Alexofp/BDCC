@@ -192,16 +192,7 @@ roomDescription = "A huge open area with lots of bushes, trees and other types o
 The ground is covered with grass, there are visible pathways made out of stone"
 roomColor = 1
 
-[node name="MainHallRoom58" parent="." index="26" instance=ExtResource( 2 )]
-self_modulate = Color( 0.7, 1, 0.7, 1 )
-position = Vector2( 192, 640 )
-roomName = "Prison Yard"
-roomDescription = "A huge open area with lots of bushes, trees and other types of greenery. Ocasionally there is a bench to sit and relax.
-
-The ground is covered with grass, there are visible pathways made out of stone"
-roomColor = 1
-
-[node name="MainHallRoom45" parent="." index="27" instance=ExtResource( 2 )]
+[node name="MainHallRoom45" parent="." index="26" instance=ExtResource( 2 )]
 self_modulate = Color( 0.7, 1, 0.7, 1 )
 position = Vector2( -64, 640 )
 roomName = "Prison Yard"
@@ -211,7 +202,7 @@ The ground is covered with grass, there are visible pathways made out of stone"
 canWest = false
 roomColor = 1
 
-[node name="MainHallRoom46" parent="." index="28" instance=ExtResource( 2 )]
+[node name="MainHallRoom46" parent="." index="27" instance=ExtResource( 2 )]
 self_modulate = Color( 0.7, 1, 0.7, 1 )
 position = Vector2( 256, 576 )
 roomName = "Prison Yard"
@@ -221,7 +212,7 @@ roomDescription = "A huge open area with lots of bushes, trees and other types o
 The ground is covered with grass, there are visible pathways made out of stone"
 roomColor = 1
 
-[node name="MainHallRoom47" parent="." index="29" instance=ExtResource( 2 )]
+[node name="MainHallRoom47" parent="." index="28" instance=ExtResource( 2 )]
 self_modulate = Color( 0.7, 1, 0.7, 1 )
 position = Vector2( -128, 448 )
 roomName = "Prison Yard"
@@ -230,7 +221,7 @@ roomDescription = "A huge open area with lots of bushes, trees and other types o
 The ground is covered with grass, there are visible pathways made out of stone"
 roomColor = 1
 
-[node name="MainHallRoom29" parent="." index="30" instance=ExtResource( 2 )]
+[node name="MainHallRoom29" parent="." index="29" instance=ExtResource( 2 )]
 self_modulate = Color( 0.7, 1, 0.7, 1 )
 position = Vector2( 64, 512 )
 roomName = "Prison Yard"
@@ -239,7 +230,7 @@ roomDescription = "A huge open area with lots of bushes, trees and other types o
 The ground is covered with grass, there are visible pathways made out of stone"
 roomColor = 1
 
-[node name="MainHallRoom30" parent="." index="31" instance=ExtResource( 2 )]
+[node name="MainHallRoom30" parent="." index="30" instance=ExtResource( 2 )]
 self_modulate = Color( 0.7, 1, 0.7, 1 )
 position = Vector2( 64, 448 )
 roomName = "Prison Yard"
@@ -248,7 +239,7 @@ roomDescription = "A huge open area with lots of bushes, trees and other types o
 The ground is covered with grass, there are visible pathways made out of stone"
 roomColor = 1
 
-[node name="MainHallRoom31" parent="." index="32" instance=ExtResource( 2 )]
+[node name="MainHallRoom31" parent="." index="31" instance=ExtResource( 2 )]
 self_modulate = Color( 0.7, 1, 0.7, 1 )
 position = Vector2( 0, 448 )
 roomName = "Prison Yard"
@@ -257,7 +248,7 @@ roomDescription = "A huge open area with lots of bushes, trees and other types o
 The ground is covered with grass, there are visible pathways made out of stone"
 roomColor = 1
 
-[node name="MainGreenhouses" parent="." index="33" instance=ExtResource( 2 )]
+[node name="MainGreenhouses" parent="." index="32" instance=ExtResource( 2 )]
 self_modulate = Color( 0.7, 1, 0.7, 1 )
 position = Vector2( 192, 448 )
 roomName = "Greenhouses"
@@ -268,7 +259,7 @@ roomColor = 1
 gridColor = 2
 loctag_Greenhouses = true
 
-[node name="MainGreenhouses2" parent="." index="34" instance=ExtResource( 2 )]
+[node name="MainGreenhouses2" parent="." index="33" instance=ExtResource( 2 )]
 self_modulate = Color( 0.7, 1, 0.7, 1 )
 position = Vector2( 256, 448 )
 roomName = "Greenhouses"
@@ -279,7 +270,7 @@ roomColor = 1
 gridColor = 2
 loctag_Greenhouses = true
 
-[node name="MainGreenhouses3" parent="." index="35" instance=ExtResource( 2 )]
+[node name="MainGreenhouses3" parent="." index="34" instance=ExtResource( 2 )]
 self_modulate = Color( 0.7, 1, 0.7, 1 )
 position = Vector2( 192, 384 )
 roomName = "Greenhouses"
@@ -290,7 +281,7 @@ roomColor = 1
 gridColor = 2
 loctag_Greenhouses = true
 
-[node name="MainGreenhouses4" parent="." index="36" instance=ExtResource( 2 )]
+[node name="MainGreenhouses4" parent="." index="35" instance=ExtResource( 2 )]
 self_modulate = Color( 0.7, 1, 0.7, 1 )
 position = Vector2( 256, 384 )
 roomName = "Greenhouses"
@@ -301,7 +292,7 @@ roomColor = 1
 gridColor = 2
 loctag_Greenhouses = true
 
-[node name="MainGreenhouses7" parent="." index="37" instance=ExtResource( 2 )]
+[node name="MainGreenhouses7" parent="." index="36" instance=ExtResource( 2 )]
 self_modulate = Color( 0.7, 1, 0.7, 1 )
 position = Vector2( 320, 384 )
 roomName = "Greenhouses"
@@ -312,7 +303,7 @@ roomColor = 1
 gridColor = 2
 loctag_Greenhouses = true
 
-[node name="MainGreenhouses9" parent="." index="38" instance=ExtResource( 2 )]
+[node name="MainGreenhouses9" parent="." index="37" instance=ExtResource( 2 )]
 self_modulate = Color( 0.7, 1, 0.7, 1 )
 position = Vector2( 320, 320 )
 roomName = "Greenhouses"
@@ -323,7 +314,7 @@ roomColor = 1
 gridColor = 2
 loctag_Greenhouses = true
 
-[node name="MainGreenhouses8" parent="." index="39" instance=ExtResource( 2 )]
+[node name="MainGreenhouses8" parent="." index="38" instance=ExtResource( 2 )]
 self_modulate = Color( 0.7, 1, 0.7, 1 )
 position = Vector2( 320, 512 )
 roomName = "Greenhouses"
@@ -334,7 +325,7 @@ roomColor = 1
 gridColor = 2
 loctag_Greenhouses = true
 
-[node name="MainGreenhousesJumpable" parent="." index="40" instance=ExtResource( 2 )]
+[node name="MainGreenhousesJumpable" parent="." index="39" instance=ExtResource( 2 )]
 self_modulate = Color( 0.7, 1, 0.7, 1 )
 position = Vector2( 320, 576 )
 roomName = "Greenhouses"
@@ -346,7 +337,7 @@ roomColor = 1
 gridColor = 2
 loctag_Greenhouses = true
 
-[node name="MainGreenhouses10" parent="." index="41" instance=ExtResource( 2 )]
+[node name="MainGreenhouses10" parent="." index="40" instance=ExtResource( 2 )]
 self_modulate = Color( 0.7, 1, 0.7, 1 )
 position = Vector2( 320, 704 )
 roomName = "Greenhouses"
@@ -357,7 +348,7 @@ roomColor = 1
 gridColor = 2
 loctag_Greenhouses = true
 
-[node name="MainGreenhouses11" parent="." index="42" instance=ExtResource( 2 )]
+[node name="MainGreenhouses11" parent="." index="41" instance=ExtResource( 2 )]
 self_modulate = Color( 0.7, 1, 0.7, 1 )
 position = Vector2( 384, 640 )
 roomName = "Greenhouses"
@@ -368,7 +359,7 @@ roomColor = 1
 gridColor = 2
 loctag_Greenhouses = true
 
-[node name="MainGreenhouses12" parent="." index="43" instance=ExtResource( 2 )]
+[node name="MainGreenhouses12" parent="." index="42" instance=ExtResource( 2 )]
 self_modulate = Color( 0.7, 1, 0.7, 1 )
 position = Vector2( 384, 576 )
 roomName = "Greenhouses"
@@ -379,7 +370,7 @@ roomColor = 1
 gridColor = 2
 loctag_Greenhouses = true
 
-[node name="MainGreenhouses13" parent="." index="44" instance=ExtResource( 2 )]
+[node name="MainGreenhouses13" parent="." index="43" instance=ExtResource( 2 )]
 self_modulate = Color( 0.7, 1, 0.7, 1 )
 position = Vector2( 320, 640 )
 roomName = "Greenhouses"
@@ -390,7 +381,7 @@ roomColor = 1
 gridColor = 2
 loctag_Greenhouses = true
 
-[node name="MainGreenhouses5" parent="." index="45" instance=ExtResource( 2 )]
+[node name="MainGreenhouses5" parent="." index="44" instance=ExtResource( 2 )]
 self_modulate = Color( 0.7, 1, 0.7, 1 )
 position = Vector2( 384, 704 )
 roomName = "Greenhouses"
@@ -404,7 +395,7 @@ roomSprite = 4
 roomColor = 1
 gridColor = 2
 
-[node name="MainGreenhouses6" parent="." index="46" instance=ExtResource( 2 )]
+[node name="MainGreenhouses6" parent="." index="45" instance=ExtResource( 2 )]
 self_modulate = Color( 0.7, 1, 0.7, 1 )
 position = Vector2( 320, 448 )
 roomName = "Greenhouses"
@@ -415,7 +406,7 @@ roomColor = 1
 gridColor = 2
 loctag_Greenhouses = true
 
-[node name="MainHallRoom32" parent="." index="47" instance=ExtResource( 2 )]
+[node name="MainHallRoom32" parent="." index="46" instance=ExtResource( 2 )]
 self_modulate = Color( 0.7, 1, 0.7, 1 )
 position = Vector2( -64, 448 )
 roomName = "Prison Yard"
@@ -424,7 +415,7 @@ roomDescription = "A huge open area with lots of bushes, trees and other types o
 The ground is covered with grass, there are visible pathways made out of stone"
 roomColor = 1
 
-[node name="MainHallRoom33" parent="." index="48" instance=ExtResource( 2 )]
+[node name="MainHallRoom33" parent="." index="47" instance=ExtResource( 2 )]
 self_modulate = Color( 0.7, 1, 0.7, 1 )
 position = Vector2( -64, 512 )
 roomName = "Prison Yard"
@@ -433,7 +424,7 @@ roomDescription = "A huge open area with lots of bushes, trees and other types o
 The ground is covered with grass, there are visible pathways made out of stone"
 roomColor = 1
 
-[node name="MainHallRoom34" parent="." index="49" instance=ExtResource( 2 )]
+[node name="MainHallRoom34" parent="." index="48" instance=ExtResource( 2 )]
 self_modulate = Color( 0.7, 1, 0.7, 1 )
 position = Vector2( -64, 576 )
 roomName = "Prison Yard"
@@ -442,7 +433,7 @@ roomDescription = "A huge open area with lots of bushes, trees and other types o
 The ground is covered with grass, there are visible pathways made out of stone"
 roomColor = 1
 
-[node name="MainHallRoom35" parent="." index="50" instance=ExtResource( 2 )]
+[node name="MainHallRoom35" parent="." index="49" instance=ExtResource( 2 )]
 self_modulate = Color( 0.7, 1, 0.7, 1 )
 position = Vector2( 0, 576 )
 roomName = "Prison Yard"
@@ -451,12 +442,12 @@ roomDescription = "A huge open area with lots of bushes, trees and other types o
 The ground is covered with grass, there are visible pathways made out of stone"
 roomColor = 1
 
-[node name="MainHallRoom11" parent="." index="51" instance=ExtResource( 2 )]
+[node name="MainHallRoom11" parent="." index="50" instance=ExtResource( 2 )]
 position = Vector2( 64, 192 )
 roomName = "Main platform"
 roomDescription = "You stand on the stairs that lead up to the main platform"
 
-[node name="MainVendomatRoom" parent="." index="52" instance=ExtResource( 2 )]
+[node name="MainVendomatRoom" parent="." index="51" instance=ExtResource( 2 )]
 self_modulate = Color( 0.7, 0.7, 0.7, 1 )
 position = Vector2( -128, 64 )
 roomName = "Main hall"
@@ -464,77 +455,77 @@ roomDescription = "A very spacious hall with a huge raised platform in the middl
 roomSprite = 6
 roomColor = 8
 
-[node name="MainHallRoom13" parent="." index="53" instance=ExtResource( 2 )]
+[node name="MainHallRoom13" parent="." index="52" instance=ExtResource( 2 )]
 self_modulate = Color( 0.7, 0.7, 0.7, 1 )
 position = Vector2( 128, 128 )
 roomName = "Main hall"
 roomDescription = "A very spacious hall with a huge raised platform in the middle"
 roomColor = 8
 
-[node name="MainHallRoom14" parent="." index="54" instance=ExtResource( 2 )]
+[node name="MainHallRoom14" parent="." index="53" instance=ExtResource( 2 )]
 self_modulate = Color( 0.7, 0.7, 0.7, 1 )
 position = Vector2( 128, 192 )
 roomName = "Main hall"
 roomDescription = "A very spacious hall with a huge raised platform in the middle"
 roomColor = 8
 
-[node name="MainHallRoom15" parent="." index="55" instance=ExtResource( 2 )]
+[node name="MainHallRoom15" parent="." index="54" instance=ExtResource( 2 )]
 self_modulate = Color( 0.7, 0.7, 0.7, 1 )
 position = Vector2( -128, 192 )
 roomName = "Main hall"
 roomDescription = "A very spacious hall with a huge raised platform in the middle"
 roomColor = 8
 
-[node name="MainHallRoom25" parent="." index="56" instance=ExtResource( 2 )]
+[node name="MainHallRoom25" parent="." index="55" instance=ExtResource( 2 )]
 self_modulate = Color( 0.7, 0.7, 0.7, 1 )
 position = Vector2( -128, 256 )
 roomName = "Main hall"
 roomDescription = "A very spacious hall with a huge raised platform in the middle"
 roomColor = 8
 
-[node name="MainHallRoom50" parent="." index="57" instance=ExtResource( 2 )]
+[node name="MainHallRoom50" parent="." index="56" instance=ExtResource( 2 )]
 self_modulate = Color( 0.7, 0.7, 0.7, 1 )
 position = Vector2( -128, 320 )
 roomName = "Main hall"
 roomDescription = "A very spacious hall with a huge raised platform in the middle"
 roomColor = 8
 
-[node name="MainHallRoom51" parent="." index="58" instance=ExtResource( 2 )]
+[node name="MainHallRoom51" parent="." index="57" instance=ExtResource( 2 )]
 self_modulate = Color( 0.7, 0.7, 0.7, 1 )
 position = Vector2( 128, 320 )
 roomName = "Main hall"
 roomDescription = "A very spacious hall with a huge raised platform in the middle"
 roomColor = 8
 
-[node name="MainHallRoom26" parent="." index="59" instance=ExtResource( 2 )]
+[node name="MainHallRoom26" parent="." index="58" instance=ExtResource( 2 )]
 self_modulate = Color( 0.7, 0.7, 0.7, 1 )
 position = Vector2( 128, 256 )
 roomName = "Main hall"
 roomDescription = "A very spacious hall with a huge raised platform in the middle"
 roomColor = 8
 
-[node name="MainHallRoom16" parent="." index="60" instance=ExtResource( 2 )]
+[node name="MainHallRoom16" parent="." index="59" instance=ExtResource( 2 )]
 self_modulate = Color( 0.7, 0.7, 0.7, 1 )
 position = Vector2( -128, 128 )
 roomName = "Main hall"
 roomDescription = "A very spacious hall with a huge raised platform in the middle"
 roomColor = 8
 
-[node name="MainHallRoom17" parent="." index="61" instance=ExtResource( 2 )]
+[node name="MainHallRoom17" parent="." index="60" instance=ExtResource( 2 )]
 self_modulate = Color( 0.7, 0.7, 0.7, 1 )
 position = Vector2( 128, 64 )
 roomName = "Main hall"
 roomDescription = "A very spacious hall with a huge raised platform in the middle"
 roomColor = 8
 
-[node name="MainHallRoom19" parent="." index="62" instance=ExtResource( 2 )]
+[node name="MainHallRoom19" parent="." index="61" instance=ExtResource( 2 )]
 self_modulate = Color( 0.7, 0.7, 0.7, 1 )
 position = Vector2( 0, 320 )
 roomName = "Main platform"
 roomDescription = "Not much here"
 roomColor = 8
 
-[node name="MainHallRoom21" parent="." index="63" instance=ExtResource( 2 )]
+[node name="MainHallRoom21" parent="." index="62" instance=ExtResource( 2 )]
 self_modulate = Color( 0.7, 0.7, 1, 1 )
 position = Vector2( -192, 256 )
 roomName = "Bathroom"
@@ -542,7 +533,7 @@ roomDescription = "A bunch of sinks in a row with a long mirror above. On the op
 roomSprite = 8
 roomColor = 3
 
-[node name="MainHallRoom38" parent="." index="64" instance=ExtResource( 2 )]
+[node name="MainHallRoom38" parent="." index="63" instance=ExtResource( 2 )]
 self_modulate = Color( 0.7, 0.7, 1, 1 )
 position = Vector2( -256, 640 )
 roomName = "Bathroom"
@@ -550,7 +541,7 @@ roomDescription = "A bunch of sinks in a row with a long mirror above. On the op
 roomSprite = 8
 roomColor = 3
 
-[node name="MainDressingRoom" parent="." index="65" instance=ExtResource( 2 )]
+[node name="MainDressingRoom" parent="." index="64" instance=ExtResource( 2 )]
 self_modulate = Color( 0.7, 0.7, 1, 1 )
 position = Vector2( -256, 256 )
 roomName = "Dressing room"
@@ -558,7 +549,7 @@ roomID = "main_dressing1"
 roomDescription = "You enter the dressing room. There are many color-coded lockers around and a few bins with fresh towels"
 roomColor = 3
 
-[node name="MainShowerRoom" parent="." index="66" instance=ExtResource( 2 )]
+[node name="MainShowerRoom" parent="." index="65" instance=ExtResource( 2 )]
 self_modulate = Color( 0.7, 0.7, 1, 1 )
 position = Vector2( -256, 320 )
 roomName = "Shower"
@@ -567,7 +558,7 @@ roomDescription = "A room with that has a bunch of shower heads on the walls. So
 roomSprite = 7
 roomColor = 3
 
-[node name="MainHallRoom41" parent="." index="67" instance=ExtResource( 2 )]
+[node name="MainHallRoom41" parent="." index="66" instance=ExtResource( 2 )]
 self_modulate = Color( 0.7, 0.7, 1, 1 )
 position = Vector2( -320, 704 )
 roomName = "Shower"
@@ -576,7 +567,7 @@ roomDescription = "A room with that has a bunch of shower heads on the walls. So
 roomSprite = 7
 roomColor = 3
 
-[node name="MainHallRoom39" parent="." index="68" instance=ExtResource( 2 )]
+[node name="MainHallRoom39" parent="." index="67" instance=ExtResource( 2 )]
 self_modulate = Color( 0.7, 0.7, 1, 1 )
 position = Vector2( -256, 704 )
 roomName = "Dressing room"
@@ -584,7 +575,7 @@ roomID = "main_dressing2"
 roomDescription = "You enter the dressing room. There are many color-coded lockers around and a few bins with fresh towels"
 roomColor = 3
 
-[node name="MainCanteen" parent="." index="69" instance=ExtResource( 2 )]
+[node name="MainCanteen" parent="." index="68" instance=ExtResource( 2 )]
 self_modulate = Color( 0.7, 0.7, 1, 1 )
 position = Vector2( -192, 128 )
 roomName = "Canteen"
@@ -594,7 +585,7 @@ canSouth = false
 roomSprite = 2
 roomColor = 3
 
-[node name="MainLaundry" parent="." index="70" instance=ExtResource( 2 )]
+[node name="MainLaundry" parent="." index="69" instance=ExtResource( 2 )]
 self_modulate = Color( 0.7, 0.7, 1, 1 )
 position = Vector2( 192, 256 )
 roomName = "Laundry"
