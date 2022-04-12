@@ -9,4 +9,6 @@ enum {
 	WakeUpInCell,
 	CaughtOffLimits,
 	CaughtStealingInGreenhouse,
+	StocksEscape,
+	StocksEvent,
 }
