@@ -45,7 +45,7 @@ func getSpecies():
 	return ["canine"]
 
 func _getAttacks():
-	return ["DoubleCuffPC", "CuffPCHands", "ForceGagPC", "stunbatonAttack", "stunbatonOverchargeAttack", "simplekickattack", "shoveattack", "trygetupattack"]
+	return ["DoubleCuffPC", "CuffPCHands", "ForceGagPC", "ForceMuzzlePC", "stunbatonAttack", "stunbatonOverchargeAttack", "simplekickattack", "shoveattack", "trygetupattack"]
 
 func getFightIntro(_battleName):
 	return "The guard prepares to fight"

@@ -47,7 +47,7 @@ func _canUse(_attacker, _reciever):
 	return true
 
 func getRequirements():
-	return [["freemouth"]]
+	return [["canbite"]]
 
 func getAnticipationText(_attacker, _reciever):
 	return _attacker.getName() + " bares "+_attacker.hisHer()+" fangs and then suddenly ludges at you!"

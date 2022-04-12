@@ -19,6 +19,7 @@ const ExposureBuff = "ExposureBuff"
 
 const GagBuff = "GagBuff"
 const RingGagBuff = "RingGagBuff"
+const MuzzleBuff = "MuzzleBuff"
 const RestrainedArmsBuff = "RestrainedArmsBuff"
 const BlockedHandsBuff = "BlockedHandsBuff"
 const RestrainedLegsBuff = "RestrainedLegsBuff"

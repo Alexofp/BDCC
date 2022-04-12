@@ -168,11 +168,14 @@ func hasBoundLegs():
 func isBlindfolded():
 	return buffsHolder.hasBuff(Buff.BlindfoldBuff)
 
+func isBitingBlocked():
+	return buffsHolder.hasBuff(Buff.GagBuff) || buffsHolder.hasBuff(Buff.RingGagBuff) || buffsHolder.hasBuff(Buff.MuzzleBuff)
+
 func isGagged():
 	return buffsHolder.hasBuff(Buff.GagBuff) || buffsHolder.hasBuff(Buff.RingGagBuff)
 
 func isOralBlocked():
-	return buffsHolder.hasBuff(Buff.GagBuff)
+	return buffsHolder.hasBuff(Buff.GagBuff) || buffsHolder.hasBuff(Buff.MuzzleBuff)
 
 func canHandleBlindness():
 	return skillsHolder.hasPerk(Perk.BDSMBlindfold)
@@ -223,6 +226,11 @@ func updateNonBattleEffects():
 		addEffect(StatusEffect.Gagged)
 	else:
 		removeEffect(StatusEffect.Gagged)
+		
+	if(buffsHolder.hasBuff(Buff.MuzzleBuff)):
+		addEffect(StatusEffect.Muzzled)
+	else:
+		removeEffect(StatusEffect.Muzzled)
 		
 	if(isFullyNaked() || getExposedPrivates().size() > 0):
 		addEffect(StatusEffect.Naked)

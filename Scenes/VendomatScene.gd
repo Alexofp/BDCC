@@ -4,6 +4,7 @@ var sellingItems = [
 	"ballgag",
 	"ringgag",
 	"caninedildogag",
+	"basketmuzzle",
 	"appleitem",
 	"blindfold",
 	"policecuffs",

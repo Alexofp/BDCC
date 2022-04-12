@@ -58,6 +58,9 @@ func checkRequirement(_attacker, _reciever, req):
 	if(reqtype == "freemouth"):
 		if(_attacker.hasEffect(StatusEffect.Gagged)):
 			return false
+	if(reqtype == "canbite"):
+		if(_attacker.isPlayer() && _attacker.isBitingBlocked()):
+			return false
 	if(reqtype == "coveredincum"):
 		if(!_attacker.hasEffect(StatusEffect.CoveredInCum)):
 			return false
@@ -90,6 +93,8 @@ func getRequirementText(req):
 		return "Legs must be free"
 	if(reqtype == "freemouth"):
 		return "Mouth must be free"
+	if(reqtype == "canbite"):
+		return "Must be able to bite"
 	if(reqtype == "coveredincum"):
 		return "Must be covered in cum/girlcum"
 	if(reqtype == "lustabove"):
