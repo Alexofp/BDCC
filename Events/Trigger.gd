@@ -11,4 +11,5 @@ enum {
 	CaughtStealingInGreenhouse,
 	StocksEscape,
 	StocksEvent,
+	StocksWillingSex,
 }

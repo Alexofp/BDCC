@@ -61,18 +61,23 @@ func triggerRandomEvent(escapeChance, _lewdChance, _willingSexChance, _unWilling
 	if(RNG.chance(_lewdChance)):
 		if(GM.ES.trigger(Trigger.StocksEvent)):
 			return true
+			
+	if(RNG.chance(_willingSexChance)):
+		if(GM.ES.trigger(Trigger.StocksWillingSex)):
+			return true
 	
 	return false
 
 func _react(_action: String, _args):
 	if(_action == "afterbeloud"):
-		processTime(60*1)
-		triggerRandomEvent(20, 100, 100, 100)
+		processTime(60*5)
+		GM.pc.addStamina(10)
+		triggerRandomEvent(5, 50, 50, 30)
 		setState("")
 		return
 	
 	if(_action == "justwait"):
-		if(RNG.chance(80) || !triggerRandomEvent(10, 10, 10, 0)):
+		if(RNG.chance(80) || !triggerRandomEvent(2, 20, 20, 0)):
 			processTime(60*30)
 			GM.pc.addStamina(50)
 			setState("afterWait")
