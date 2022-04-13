@@ -1,38 +1,44 @@
-# LewdGame
+# Broken Dreams Correctional Center
 Text based game about being a prisoner in a space prison with a lot of adult themes. Working title is Broken Dreams Correctional Center or BDCC for short
 
 This game is influenced a lot by other erotic text rpg games like Trials in the Tainted Space and Lilith's Throne. The idea of a scifi space prison setting came from a place inside second life called RRDC
 
-![lewdgame](https://user-images.githubusercontent.com/14040378/152139569-070cfd47-f74c-4a32-bb51-93567e9b2778.PNG)
+<img src="https://user-images.githubusercontent.com/14040378/163157468-96aeb9dc-6605-4abe-863f-524510b9f940.png" width="48%"> <img src="https://user-images.githubusercontent.com/14040378/163156752-7863a466-c790-48b8-a04c-c7f470db0373.png" width="48%"> <img src="https://user-images.githubusercontent.com/14040378/163156860-c7da2265-c971-42d6-8e07-c96084a2c902.png" width="48%"> <img src="https://user-images.githubusercontent.com/14040378/163156669-1bb5ed09-90da-4c38-b2aa-c2d82346eb8d.png" width="48%">
 
 Heavy wip
 
 Uses Godot 3.4.2 engine
 
+## Kinks that this game will touch
+- Vanilla sex of course, vaginal/oral/anal/handjob/footjob. I plan every character to be pansexual
+- BDSM, D/s relationships, restraints, whips, leashes, pillories, all of that good stuff. BDSM sex.
+- (planned) Petplay, kittyplay, puppyplay. Maybe ponyplay
+- (planned) Breeding, impregnation, giving birth, realistic menstrual cycle
+- Lactation, milking, milking pumps, cum/prostate milking, (planned) being a human cow/bull
+- Unusual drugs, aphrodisiacs, testing of drugs that have mind-altering or transformation properties. Testing of prototype tech.
+- Con/dubcon/noncon
+- (fully optional, planned) Watersports
+- (planned) Bodywritings, tally marks
+- (planned) Cum inflation, bukkake
+- Much more
+
 ## So far these things are done:
-- Scene framework that supports any number of nested scenes, replacing scenes, scenes returning result. Basically everything is a scene
-- Player customization with ability to pick one specie or make a hybrid combining two. Little preview window that shows how player character looks. Some scenes will animate the player
-- World scene which allows to traverse the rooms and interact with them
-- Simple combat system that has some strategy to it
-- Status effects such as bleeding or being gagged/blindfolded/restrained which have their effect both in and outside the fights
-- Characters framework with ability to define how they fight and react
-- Inventory system. You can put on items or interact with them. Things like gags can override the default behaviour so you can't just take them off. Items can have buffs/debuffs. Any character has an inventory 
-- A simple yet very powerful saving/loading system that allows to save the game state at any point in any scene
-- Intro scene where the player gets captured and put in jail
-- Basic prison activities like sleeping in cell, working in mines, eating in the canteen, showering, etc etc
-- Events system, decoupled from the world, allowing to avoid a lot of the messy code but also very flexiable. Flags are an easy way to remember things and they are also saved/loaded with no extra work
-- Quest system + Quest log. Doesn't provide much logic on it's own but each quest is a separate object which helps to avoid files with 3k+ lines. Works great together with events and flags
-- Modules. Module can add new scenes, characters, events and quests which allows for easy moddability and extendability
+- Powerful scene framework. Scenes are building blocks that output text and provide choice to the player. Scenes can branch as much as they want, have their own state and can start other scenes. Trivial scenes can be saved/loaded without any additional code, additional state can be saved by writing a pair of simple saveData/loadData functions. Pretty much everything in this game is gonna be based on this framework. Combat, exploring, talking, lewding are all implemented as scenes.
+- Player customization. You can choose any gender, any pronouns, any species or make a hybrid combining two. You can choose what bodyparts you have, what hair, which genitals, etc. Bodyparts can have attributes that you can change, like the size of breasts. A little window will show how your character looks.
+- It's a game about a prison so you have basic prison activities, sleeping in your cell, working, eating, showering. It's all basic for now but can be easily expanded with random events.
+- Restraints and struggling system. BDSM is a huge part of this game, pretty much its main point. Gags, cuffs, blindfolds, harnesses, plugs. Many of them will have an actual effect on the player and their abilities. A gag will muffle your speech, a blindfold will blind you, cuffs will prevent you from punching, etc. You can struggle out of them using a lot of stamina or find keys.
+- Turn-based combat. It's simple to get into but I tried to give it as much depth. Some attacks are good against armored enemies, some are not. Some can make you bleed, knock you down or cause other status effects. Enemies can also force restraints on you during combat. You can struggle out of them (even during combat) or just endure their effects. Alternative approach is teasing the enemy until they surrender. Each npc will have a list of what they like, love, dislike or hate and the player learns more of it as they tease. You can also use some items in combat like painkillers. Intoxicity system prevents the player from abusing them.
+- RPG elements. As you level up you get an ability to up your strength, agility, vitality or sexiness. But there are also skills that level up from doing activities related to them. By leveling up those you get points that you can spend to unlock perks. Each skill has its own perks list. Perks can provide you with buffs, unlock new moves or give you advantages outside the fight. Scenes can change depending on what skills/perks/attributes you have and give you extra opportunities.
+- Events and quests. Events can run scenes depending on some requirements (entering a room/talking/doing some activity/..). Quests show the player what's their current objective.
+- Sex scenes. Each one is written from scratch. I will try to incorporate the player, their current restraints and species as much as possible but at this early stage I'm just trying to write at least some content. Old scenes eventually will be expanded upon.
+
 
 
 ## Things that will be worked on in the following months:
-- Story scenes, introduction to some prison characters, ability to talk/interact/fight with them.
-- Introduction of sex scenes. Things that come with that such as tracking of fluids/messyness
-- A few quests and events, just to see how well the current system works
-- RPG elements, skills and perks
-- Release of the first public build
+- More story, more random events
+- More sex scenes
+- More skills, perks
+- Release of the first public build, feel free to compile the current build yourself, you just need godot 3.4
 
-Check out my trello to see what my current tasks are:
-https://trello.com/b/l3DsQlz5
 
-I plan to keep this project open source, everyone is welcomed to propose additions. Though please don't expect them to be merged 100%. My writing skills aren't the best so feel free to edit the text of my scenes to make them more interesting.
+This game will stay open source, you can use this as a learning resource, help me expand it or use as a base for your own game.
