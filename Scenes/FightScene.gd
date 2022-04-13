@@ -114,7 +114,10 @@ func _run():
 		var attack: Attack = GlobalRegistry.getAttack(savedAIAttackID)
 		
 		setEnemyAsAttacker()
-		saynn(GM.ui.processString(attack.getAnticipationText(enemyCharacter, GM.pc)))
+		if(GM.pc.isBlindfolded() && !GM.pc.canHandleBlindness() && !attack.canSeeAnticipationTextWhenBlind()):
+			saynn(GM.ui.processString(attack.canBlindAnticipationText(enemyCharacter, GM.pc)))
+		else:
+			saynn(GM.ui.processString(attack.getAnticipationText(enemyCharacter, GM.pc)))
 		addButton("Do nothing", "You don't counter the attack in any way", "dodge_donothing")
 		if(GM.pc.getStamina() > 0 && !GM.pc.hasEffect(StatusEffect.Collapsed)):
 			addButton("Dodge", "You dodge a physical attack completely spending 30 stamina in the process", "dodge_dodge")

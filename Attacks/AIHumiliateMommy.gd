@@ -30,3 +30,6 @@ func getAnticipationText(_attacker, _reciever):
 	text += _attacker.formatSay("C’mon, quit fighting and let me nurture you with my breasts~. You can call me mommy~")
 	text += "\n"
 	return text
+
+func canSeeAnticipationTextWhenBlind():
+	return true

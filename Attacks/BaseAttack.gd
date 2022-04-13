@@ -144,6 +144,12 @@ func canBeDodgedByPlayer(_attacker, _reciever):
 func getAnticipationText(_attacker, _reciever):
 	return "You're about to be bonked by "+getVisibleName()
 
+func canSeeAnticipationTextWhenBlind():
+	return false
+
+func canBlindAnticipationText(_attacker, _reciever):
+	return "{attacker.name} is about to do something but you can't tell what"
+
 func getAIScore(_attacker, _reciever):
 	if(aiCategory == AICategory.Unspecified):
 		return 1.0 * aiScoreMultiplier

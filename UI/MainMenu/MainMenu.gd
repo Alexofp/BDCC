@@ -55,4 +55,4 @@ func _on_CreditsButton_pressed():
 
 
 func _on_GithubButton_pressed():
-	var _ok = OS.shell_open("https://github.com/Alexofp/LewdGame")
+	var _ok = OS.shell_open("https://github.com/Alexofp/BDCC")
