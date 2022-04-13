@@ -3,7 +3,7 @@ Text based game about being a prisoner in a space prison with a lot of adult the
 
 This game is influenced a lot by other erotic text rpg games like Trials in the Tainted Space and Lilith's Throne. The idea of a scifi space prison setting came from a place inside second life called RRDC
 
-![lewdgame](https://user-images.githubusercontent.com/14040378/152139569-070cfd47-f74c-4a32-bb51-93567e9b2778.PNG)
+<img src="https://user-images.githubusercontent.com/14040378/163157468-96aeb9dc-6605-4abe-863f-524510b9f940.png" width="48%"> <img src="https://user-images.githubusercontent.com/14040378/163156752-7863a466-c790-48b8-a04c-c7f470db0373.png" width="48%"> <img src="https://user-images.githubusercontent.com/14040378/163156860-c7da2265-c971-42d6-8e07-c96084a2c902.png" width="48%"> <img src="https://user-images.githubusercontent.com/14040378/163156669-1bb5ed09-90da-4c38-b2aa-c2d82346eb8d.png" width="48%">
 
 Heavy wip
 
