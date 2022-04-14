@@ -678,6 +678,8 @@ func afterEatingAtCanteen():
 func afterTakingAShower():
 	addStamina(30)
 	clearBodyFluids()
+	clearBodywritings()
+	clearTallymarks()
 	updateNonBattleEffects()
 
 func orgasmFrom(_characterID: String):
@@ -1046,3 +1048,21 @@ func milkSeed():
 	var howMuchSeed = production.drain()
 	production.afterMilked()
 	return howMuchSeed
+
+func addTallymark(zone):
+	addEffect(StatusEffect.HasTallyMarks, [zone])
+
+func hasTallymarks():
+	return hasEffect(StatusEffect.HasTallyMarks)
+
+func clearTallymarks():
+	removeEffect(StatusEffect.HasTallyMarks)
+
+func addBodywriting(zone, writingID):
+	addEffect(StatusEffect.HasBodyWritings, [zone, writingID])
+
+func hasBodywritings():
+	return hasEffect(StatusEffect.HasBodyWritings)
+
+func clearBodywritings():
+	removeEffect(StatusEffect.HasBodyWritings)

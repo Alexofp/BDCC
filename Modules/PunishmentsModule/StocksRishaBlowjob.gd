@@ -2,6 +2,7 @@ extends "res://Scenes/SceneBase.gd"
 
 var rishaRemovedGag = false
 var rishaPayed = false
+var hadTallymarks = false
 
 func _init():
 	sceneID = "StocksRishaBlowjob"
@@ -64,10 +65,10 @@ func _run():
 
 		saynn("And you soon understand why. As she gets closer to her peak, her barbs become stiffer, they begin to softly rake your throat. Risha switches to slow but powerful thrusts, ramming that cock nice and deep each time. You barely get any air and she is breathing deeply, her cock throbs inside your throat. A few deep thrusts and she rams it in for the last time, moaning and grunting as her cock erupts with her sticky hot jizz. The stiff barbs keep you both stuck together like a knot would but this way Risha can at any moment decide to destroy your throat if she wanted to. She forcefully keeps your lips shut around her shaft, as she shoots more of her load into you. Eventually the brabs soften a little and she pulls her cock out and gives your facial too with the last few waves of cum.")
 
-		saynn("She dries her shaft clean against your face and puts it away. Then she grabs a little black sharpie and draws a tally mark on your cheek.")
+		saynn("She dries her shaft clean against your face and puts it away. Then she grabs a little black sharpie and [b]draws a tally mark on your cheek[/b].")
 
 		# (if didn’t have any)
-		if(true):
+		if(!hadTallymarks):
 			saynn("[say=risha]I’m first huh. This is just to keep track~.[/say]")
 
 		# (else)
@@ -93,6 +94,9 @@ func _run():
 func _react(_action: String, _args):
 
 	if(_action == "nod"):
+		if(GM.pc.hasTallymarks()):
+			hadTallymarks = true
+		
 		if(rishaPayed):
 			GM.pc.addCredits(1)
 			addMessage("You received 1 credit")
@@ -101,6 +105,12 @@ func _react(_action: String, _args):
 			rishaRemovedGag = true
 			GM.pc.freeMouthDeleteAll()
 			
+		if(RNG.chance(20)):
+			var zone = BodyWritingsZone.getRandomZone()
+			GM.pc.addBodywriting(zone, BodyWritings.getRandomWritingIDForZone(zone))
+			addMessage("Risha also left a memento on your "+BodyWritingsZone.getZoneVisibleName(zone)+"..")
+			
+		GM.pc.addTallymark(RNG.pick([BodyWritingsZone.CheekLeft, BodyWritingsZone.CheekRight]))
 		GM.pc.cummedInMouthBy("risha")
 		GM.pc.cummedOnBy("risha")
 		GM.pc.addSkillExperience(Skill.SexSlave, 20, "risha_stocksblow")
@@ -119,6 +129,7 @@ func saveData():
 	
 	data["rishaRemovedGag"] = rishaRemovedGag
 	data["rishaPayed"] = rishaPayed
+	data["hadTallymarks"] = hadTallymarks
 	
 	return data
 	
@@ -127,3 +138,4 @@ func loadData(data):
 	
 	rishaRemovedGag = SAVE.loadVar(data, "rishaRemovedGag", false)
 	rishaPayed = SAVE.loadVar(data, "rishaPayed", false)
+	hadTallymarks = SAVE.loadVar(data, "hadTallymarks", false)
