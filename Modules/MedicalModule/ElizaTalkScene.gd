@@ -145,7 +145,7 @@ func _run():
 
 		saynn("[say=eliza]We have all the paperwork, everything is fully legal. AlphaCorp pays top coin for any breakthroughs. Safety and morality concerns are not your problems, inmate. For each successful test you will be paid with work credits, enough to cover the risks.[/say]")
 
-		saynn("Well at least it’s for free, you will be paid with currency that has no value literally anywhere else, wow!")
+		saynn("Well at least it’s not for free, you will be paid with currency that has no value literally anywhere else, wow!")
 
 		addButton("Continue", "Continue talking", "talk")
 
@@ -171,9 +171,10 @@ func _run():
 
 		saynn("Eliza shows you a list with options.")
 		
-		addDisabledButton("Drug testing", "Test a random drug with random effect. The paper says that these shouldn't have any long-lasting effects.")
+		#addDisabledButton("Drug testing", "Test a random drug with random effect. The paper says that these shouldn't have any long-lasting effects.")
 		addButton("Induce lactation", "She will probably use some kind of drug on you. At least it’s free", "induce_lactation")
-		addDisabledButton("Prototype testing", "Test bleeding-edge hi-tech machines or devices")
+		addButton("Experiments", "Ask to be experimented on. This will probably include being a test subject for medical drugs that have unknown properties and also testing new prototypes", "startexperiments")
+		#addDisabledButton("Prototype testing", "Test bleeding-edge hi-tech machines or devices")
 		addButton("Back", "You're not interested", "")
 
 
@@ -357,6 +358,11 @@ func _react(_action: String, _args):
 		return
 	
 	if(_action == "endthescene"):
+		endScene()
+		return
+		
+	if(_action == "startexperiments"):
+		runScene("ElizaGetIntoMentalWard")
 		endScene()
 		return
 	
