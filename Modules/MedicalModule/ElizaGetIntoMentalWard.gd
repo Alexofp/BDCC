@@ -108,7 +108,7 @@ func _run():
 
 		saynn("The noisy intercom shuts off, leaving you, again, in full silence. You sit against a padded wall and wait.")
 
-		addButton("Continue", "The only thing you can do is wait..", "endthescene")
+		addButton("Continue", "The only thing you can do is wait..", "startmental")
 		
 
 
@@ -120,8 +120,16 @@ func _react(_action: String, _args):
 		GM.pc.freeMouthDeleteAll()
 		
 		GM.pc.getInventory().forceEquipStoreOther(GlobalRegistry.createItem("LatexStraitjacket"))
+		
+		setFlag(MedicalModule.Mental_PCBehavior, 0.5)
+		setFlag(MedicalModule.Mental_PCSanity, 0.0)
 
 	if(_action == "endthescene"):
+		endScene()
+		return
+		
+	if(_action == "startmental"):
+		runScene("MentalWardScene")
 		endScene()
 		return
 	

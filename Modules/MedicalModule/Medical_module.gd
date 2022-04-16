@@ -16,6 +16,9 @@ const Med_milkedSeedTimes = "Med_milkedSeedTimes"
 
 const Med_wasMilkedToday = "Med_wasMilkedToday"
 
+const Mental_PCBehavior = "Mental_PCBehavior"
+const Mental_PCSanity = "Mental_PCSanity"
+
 func _init():
 	id = "MedicalModule"
 	author = "Rahi"
@@ -28,6 +31,8 @@ func _init():
 		"res://Modules/MedicalModule/ElizaHandSeedMilking.gd",
 		"res://Modules/MedicalModule/ElizaProstateMilking.gd",
 		"res://Modules/MedicalModule/ElizaGetIntoMentalWard.gd",
+		
+		"res://Modules/MedicalModule/MentalWard/MentalWardScene.gd",
 		]
 	characters = [
 	]
