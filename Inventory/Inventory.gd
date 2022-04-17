@@ -167,6 +167,13 @@ func forceEquipStoreOther(item):
 	
 	return equipItem(item)
 
+func hasItemIDEquipped(itemID: String):
+	for slot in equippedItems:
+		var item = equippedItems[slot]
+		if(item.id == itemID):
+			return true
+	return false
+
 func hasSlotEquipped(slot):
 	return equippedItems.has(slot) && equippedItems[slot] != null
 

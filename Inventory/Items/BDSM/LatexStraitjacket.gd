@@ -26,8 +26,8 @@ func isRestraint():
 	return true
 
 func coversBodyparts():
-	return [BodypartSlot.Body, BodypartSlot.Vagina, BodypartSlot.Penis, BodypartSlot.Anus]
+	return [BodypartSlot.Body, BodypartSlot.Vagina, BodypartSlot.Penis]
 
 func generateRestraintData():
-	restraintData = RestraintRopeHarness.new()
+	restraintData = RestraintMittens.new()
 	restraintData.setLevel(5)

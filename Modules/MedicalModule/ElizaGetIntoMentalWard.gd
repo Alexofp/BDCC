@@ -104,11 +104,22 @@ func _run():
 
 		saynn("[say=pc]Wait! How long am I stuck here?[/say]")
 
-		saynn("[say=eliza]A few days. Or. A few months. It depends on your behavior, inmate.[/say]")
+		saynn("[say=eliza]A few days. Or. A few months. It depends on your behavior, inmate. For now I just want you to get some sleep.[/say]")
 
-		saynn("The noisy intercom shuts off, leaving you, again, in full silence. You sit against a padded wall and wait.")
+		saynn("The noisy intercom shuts off, leaving you, again, in full silence. You sit against a padded wall, wondering what the doctor ment. Though you soon understand it, the vent that is located on the ceiling of your cell opened up and a thick pink mist began slowly filling the space.")
 
-		addButton("Continue", "The only thing you can do is wait..", "startmental")
+		saynn("[say=pc]Hey![/say]")
+		
+		saynn("No reaction. As you inevitably breathe some of it, you begin to feel more drowsy.. The padded floor suddenly feels quite.. comfy. Keeping your eyes open is so hard.. Your body gives up on you..")
+
+		addButton("Sleep", "This place seems comfy enough..", "sleep")
+		
+	if(state == "sleep"):
+		saynn("You get some good sleep. You open your eyes and realize that this wasn't a dream. You can't pinch your skin with that straitjacket on but everything is real, you're indeed stuck in a padded cell..")
+
+		saynn("Welcome to day "+str(GM.main.getDays())+" of your sentence")
+		
+		addButton("Continue", "What next..", "startmental")
 		
 
 
@@ -132,5 +143,9 @@ func _react(_action: String, _args):
 		runScene("MentalWardScene")
 		endScene()
 		return
+		
+	if(_action == "sleep"):
+		GM.main.startNewDay()
+		GM.pc.afterSleepingInBed()
 	
 	setState(_action)

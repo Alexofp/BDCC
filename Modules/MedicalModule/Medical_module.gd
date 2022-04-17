@@ -18,6 +18,7 @@ const Med_wasMilkedToday = "Med_wasMilkedToday"
 
 const Mental_PCBehavior = "Mental_PCBehavior"
 const Mental_PCSanity = "Mental_PCSanity"
+const Mental_CheckupHappened = "Mental_DidCheckup"
 
 func _init():
 	id = "MedicalModule"
@@ -33,6 +34,8 @@ func _init():
 		"res://Modules/MedicalModule/ElizaGetIntoMentalWard.gd",
 		
 		"res://Modules/MedicalModule/MentalWard/MentalWardScene.gd",
+		"res://Modules/MedicalModule/MentalWard/MentalCheckup1.gd",
+		"res://Modules/MedicalModule/MentalWard/MentalCheckupNoJacket.gd",
 		]
 	characters = [
 	]
@@ -43,3 +46,4 @@ func _init():
 
 func resetFlagsOnNewDay():
 	GM.main.setFlag(Med_wasMilkedToday, false)
+	GM.main.setFlag(Mental_CheckupHappened, false)

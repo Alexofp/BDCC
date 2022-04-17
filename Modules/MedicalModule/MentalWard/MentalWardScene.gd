@@ -5,8 +5,8 @@ func _init():
 	sceneID = "MentalWardScene"
 
 func _run():
-	if(state == ""):
-		addCharacter("eliza")
+	#if(state == ""):
+		#addCharacter("eliza")
 		
 	if(state == ""):
 		saynn("You’re stuck in a mental ward cell with nothing to do. Padded walls surround you, even the bulky door has a soft layer to it. The only thing connecting you to the outside world is a small reinforced window and an air vent that’s far above your reach.")
@@ -71,6 +71,16 @@ func _run():
 func _react(_action: String, _args):
 	if(_action == "afterrest"):
 		# Random scene checks
+		if(!getFlag(MedicalModule.Mental_CheckupHappened, false) && GM.main.getTime() >= 9*60*60):
+			setFlag(MedicalModule.Mental_CheckupHappened, true)
+			
+			if(isPCWearingAStraitjacket()):
+				runScene("MentalCheckup1")
+			else:
+				runScene("MentalCheckupNoJacket", [], "mentalnojacketfight")
+			
+			setState("")
+			return
 		
 		setState("")
 		return
@@ -99,3 +109,14 @@ func _react(_action: String, _args):
 	
 	setState(_action)
 
+func isPCWearingAStraitjacket():
+	if(GM.pc.getInventory().hasItemIDEquipped("LatexStraitjacket")):
+		return true
+	return false
+
+func _react_scene_end(_tag, _result):
+	if(_tag == "mentalnojacketfight"):
+		if(_result.size() > 0):
+			var shouldStop = _result[0]
+			if(shouldStop):
+				endScene()
