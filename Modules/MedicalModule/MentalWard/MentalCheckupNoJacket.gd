@@ -54,15 +54,12 @@ func _run():
 func _react(_action: String, _args):
 
 	if(_action == "surrender"):
-		setFlag(MedicalModule.Mental_PCBehavior, getFlag(MedicalModule.Mental_PCBehavior, 0.0) - 0.1)
-		if(getFlag(MedicalModule.Mental_PCBehavior, 0.0) < 0.0):
-			setFlag(MedicalModule.Mental_PCBehavior, 0.0)
+		MedicalModule.addPCBehavior(-0.1)
+
 		GM.pc.getInventory().forceEquipStoreOther(GlobalRegistry.createItem("LatexStraitjacket"))
 
 	if(_action == "attack"):
-		setFlag(MedicalModule.Mental_PCBehavior, getFlag(MedicalModule.Mental_PCBehavior, 0.0) - 0.9)
-		if(getFlag(MedicalModule.Mental_PCBehavior, 0.0) < 0.0):
-			setFlag(MedicalModule.Mental_PCBehavior, 0.0)
+		MedicalModule.addPCBehavior(-0.9)
 
 	if(_action == "startfight"):
 		runScene("FightScene", ["eliza"], "elizafight")

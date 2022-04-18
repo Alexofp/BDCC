@@ -9,6 +9,10 @@ func _run():
 		#addCharacter("eliza")
 		
 	if(state == ""):
+		aimCamera("medical_paddedcell_player")
+		GM.pc.setLocation("medical_paddedcell_player")
+		GM.pc.playAnimation(TheStage.Kneeling)
+		
 		saynn("You’re stuck in a mental ward cell with nothing to do. Padded walls surround you, even the bulky door has a soft layer to it. The only thing connecting you to the outside world is a small reinforced window and an air vent that’s far above your reach.")
 		
 		if(GM.pc.hasBlockedHands()):
@@ -78,6 +82,18 @@ func _react(_action: String, _args):
 				runScene("MentalCheckup1")
 			else:
 				runScene("MentalCheckupNoJacket", [], "mentalnojacketfight")
+			
+			setState("")
+			return
+		
+		if(!getFlag(MedicalModule.Mental_ExperimentHappened, false) && GM.main.getTime() >= 14*60*60):
+			setFlag(MedicalModule.Mental_ExperimentHappened, true)
+			
+			if(!isPCWearingAStraitjacket()):
+				runScene("MentalCheckupNoJacket", [], "mentalnojacketfight")
+			else:
+				# Run random experiment scene
+				runScene("MentalObedienceDrug1")
 			
 			setState("")
 			return

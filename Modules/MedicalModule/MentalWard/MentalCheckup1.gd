@@ -89,14 +89,10 @@ func _react(_action: String, _args):
 	if(_action == "refuse"):
 		savedBehavior = getFlag(MedicalModule.Mental_PCBehavior, 0.0)
 		
-		setFlag(MedicalModule.Mental_PCBehavior, getFlag(MedicalModule.Mental_PCBehavior, 0.0) - 0.1)
-		if(getFlag(MedicalModule.Mental_PCBehavior, 0.0) < 0.0):
-			setFlag(MedicalModule.Mental_PCBehavior, 0.0)
+		MedicalModule.addPCBehavior(-0.1)
 		
 	if(_action == "obey"):
-		setFlag(MedicalModule.Mental_PCBehavior, getFlag(MedicalModule.Mental_PCBehavior, 0.0) + 0.1)
-		if(getFlag(MedicalModule.Mental_PCBehavior, 0.0) > 1.0):
-			setFlag(MedicalModule.Mental_PCBehavior, 1.0)
+		MedicalModule.addPCBehavior(0.1)
 
 	if(_action == "endthescene"):
 		endScene()
