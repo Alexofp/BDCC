@@ -217,29 +217,26 @@ func isVeryLate():
 func processTime(_seconds):
 	_seconds = int(round(_seconds))
 	
-	var oldTime = timeOfDay
 	timeOfDay += _seconds
-	var timeChanged = true
 	
-	if(timeOfDay > getTimeCap()):
-		timeOfDay = getTimeCap()
-	
-	if(oldTime == timeOfDay):
-		timeChanged = false
-	
-	doTimeProcess(_seconds, timeChanged)
+	doTimeProcess(_seconds)
 
-func doTimeProcess(_seconds, timeChanged = true):
-	GM.pc.processTime(_seconds)
+func doTimeProcess(_seconds):
+	# This splits long sleeping times into 1 hour chunks
+	var copySeconds = _seconds
+	while(copySeconds > 0):
+		var clippedSeconds = min(60*60, copySeconds)
+		GM.pc.processTime(clippedSeconds)
+		copySeconds -= clippedSeconds
+	
 	GM.ui.onTimePassed(_seconds)
 	
-	if(timeChanged):
-		var oldHours = int((timeOfDay - _seconds) / 60 / 60)
-		var newHours = int(timeOfDay / 60 / 60)
-		var hoursPassed = newHours - oldHours
+	var oldHours = int((timeOfDay - _seconds) / 60 / 60)
+	var newHours = int(timeOfDay / 60 / 60)
+	var hoursPassed = newHours - oldHours
 
-		if(hoursPassed > 0):
-			hoursPassed(hoursPassed)
+	if(hoursPassed > 0):
+		hoursPassed(hoursPassed)
 	
 	emit_signal("time_passed", _seconds)
 
@@ -257,6 +254,10 @@ func processTimeUntil(newseconds):
 	return timeDiff
 	
 func startNewDay():
+	# We assume that you always go to sleep at 23:00
+	if(timeOfDay > getTimeCap()):
+		timeOfDay = getTimeCap()
+	
 	var newtime = 6 * 60 * 60
 	var timediff = 24 * 60 * 60 - timeOfDay + newtime
 	
