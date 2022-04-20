@@ -1,15 +1,22 @@
 extends "res://Scenes/SceneBase.gd"
 
 func getPossibleScenes():
-	var result = []
+	var newScenes = []
+	var reusedScenes = []
 	
 	var obeyDrug = getFlag(MedicalModule.Mental_ExpObeyDrug, 0)
-	if(obeyDrug >= 1):
-		result.append("MentalObedienceDrug2")
+	if(obeyDrug >= 2):
+		reusedScenes.append("MentalObedienceDrug2")
+		reusedScenes.append("MentalObedienceDrug1")
+	elif(obeyDrug == 1):
+		newScenes.append("MentalObedienceDrug2")
+		reusedScenes.append("MentalObedienceDrug1")
 	else:
-		result.append("MentalObedienceDrug1")
+		newScenes.append("MentalObedienceDrug1")
 		
-	return result
+	if(newScenes.size() > 0):
+		return newScenes
+	return reusedScenes
 
 func _init():
 	sceneID = "MentalWardScene"
