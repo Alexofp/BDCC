@@ -12,7 +12,7 @@ func getDescription():
 func canUseInCombat():
 	return true
 
-func useInCombat(_attacker, _reciever):
+func useInCombat(_attacker, _receiver):
 	_attacker.addPain(-80)
 	removeXOrDestroy(1)
 	return _attacker.getName() + " took painkillers"

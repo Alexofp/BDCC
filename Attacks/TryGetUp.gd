@@ -10,9 +10,9 @@ func getVisibleName():
 func getVisibleDesc():
 	return "You shouldn't see this"
 	
-func _doAttack(_attacker, _reciever):
+func _doAttack(_attacker, _receiver):
 	var attackerName = _attacker.getName()
-	#var recieverName = _reciever.getName()
+	#var receiverName = _receiver.getName()
 	
 	var success = false
 	if(RNG.chance(70)):
@@ -27,13 +27,13 @@ func _doAttack(_attacker, _reciever):
 	
 	return text
 	
-func _canUse(_attacker, _reciever):
+func _canUse(_attacker, _receiver):
 	return _attacker.hasEffect(StatusEffect.Collapsed) && _attacker.canStandUpCombat()
 
-func canBeDodgedByPlayer(_attacker, _reciever):
+func canBeDodgedByPlayer(_attacker, _receiver):
 	return false
 
-func getAIScore(_attacker, _reciever):
+func getAIScore(_attacker, _receiver):
 	if(_attacker.hasEffect(StatusEffect.Collapsed)):
 		return 5.0
 	return 0.0

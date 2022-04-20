@@ -11,40 +11,40 @@ func getVisibleName():
 func getVisibleDesc():
 	return "You shouldn't see this"
 	
-func _doAttack(_attacker, _reciever):
+func _doAttack(_attacker, _receiver):
 	var attackerName = _attacker.getName()
-	var recieverName = _reciever.getName()
+	var receiverName = _receiver.getName()
 	
-	if(checkMissed(_attacker, _reciever, DamageType.Physical)):
-		return attackerName + " tries to kick "+recieverName+" but misses"
+	if(checkMissed(_attacker, _receiver, DamageType.Physical)):
+		return attackerName + " tries to kick "+receiverName+" but misses"
 	
-	if(checkDodged(_attacker, _reciever, DamageType.Physical)):
-		return attackerName + " tries to kick "+recieverName+" but {receiver.he} dodges the attack at the last second"
+	if(checkDodged(_attacker, _receiver, DamageType.Physical)):
+		return attackerName + " tries to kick "+receiverName+" but {receiver.he} dodges the attack at the last second"
 	
 	var _damage
-	#_reciever.addEffect(StatusEffect.Bleeding)
+	#_receiver.addEffect(StatusEffect.Bleeding)
 
 	var text = ""
-	if((_reciever.isPlayer() && _reciever.hasPenis()) || (!_reciever.isPlayer() && _reciever.getGender() != BaseCharacter.Gender.Female)):
-		_damage = doDamage(_attacker, _reciever, DamageType.Physical, RNG.randi_range(30, 50))
+	if((_receiver.isPlayer() && _receiver.hasPenis()) || (!_receiver.isPlayer() && _receiver.getGender() != BaseCharacter.Gender.Female)):
+		_damage = doDamage(_attacker, _receiver, DamageType.Physical, RNG.randi_range(30, 50))
 		text += "{attacker.name} kicks {receiver.name} in the balls! It was incredibly painful.\n"
 		
-		if(!_reciever.hasEffect(StatusEffect.Collapsed)):
+		if(!_receiver.hasEffect(StatusEffect.Collapsed)):
 			text += "{receiver.name} holds onto {receiver.his} crotch and [b]hits the floor.[/b]\n"
-			_reciever.addEffect(StatusEffect.Collapsed)
+			_receiver.addEffect(StatusEffect.Collapsed)
 	else:
-		_damage = doDamage(_attacker, _reciever, DamageType.Physical, RNG.randi_range(10, 10))
+		_damage = doDamage(_attacker, _receiver, DamageType.Physical, RNG.randi_range(10, 10))
 		text += "{attacker.name} manages to land a kick on {receiver.name} crotch but it wasn’t very painful.\n"
 		
 	
-	text += recieverDamageMessage(DamageType.Physical, _damage)
+	text += receiverDamageMessage(DamageType.Physical, _damage)
 	
 	return text
 	
-func _canUse(_attacker, _reciever):
+func _canUse(_attacker, _receiver):
 	return true
 
-func getAnticipationText(_attacker, _reciever):
+func getAnticipationText(_attacker, _receiver):
 	return RNG.pick([
 		"{attacker.name} wants to play dirty, {attacker.he} lunges forward and tries to kick {receiver.name} in the balls! If {receiver.he} has any this will be very painful.",
 	])

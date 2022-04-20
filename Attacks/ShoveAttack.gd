@@ -12,45 +12,45 @@ func getVisibleName():
 func getVisibleDesc():
 	return "An attempt to shove the enemy away for "+scaledDmgStr(DamageType.Physical, 5)+" damage. 30% chance to miss. Will cause the opponent to collapse"
 	
-func _doAttack(_attacker, _reciever):
+func _doAttack(_attacker, _receiver):
 	var attackerName = _attacker.getName()
-	var recieverName = _reciever.getName()
+	var receiverName = _receiver.getName()
 	
-	if(checkMissed(_attacker, _reciever, DamageType.Physical, 0.7, 0.5)):
-		return attackerName + " tries to shove " + recieverName + " but fails"
+	if(checkMissed(_attacker, _receiver, DamageType.Physical, 0.7, 0.5)):
+		return attackerName + " tries to shove " + receiverName + " but fails"
 	
-	if(checkDodged(_attacker, _reciever, DamageType.Physical)):
-		return attackerName + " tries to shove " + recieverName + " away but " + recieverName + " dodges the weak attempt with ease"
+	if(checkDodged(_attacker, _receiver, DamageType.Physical)):
+		return attackerName + " tries to shove " + receiverName + " away but " + receiverName + " dodges the weak attempt with ease"
 	
-	var damage = doDamage(_attacker, _reciever, DamageType.Physical, 5)
-	#_reciever.addEffect(StatusEffect.Bleeding)
-	#_reciever.addEffect(StatusEffect.Collapsed)
+	var damage = doDamage(_attacker, _receiver, DamageType.Physical, 5)
+	#_receiver.addEffect(StatusEffect.Bleeding)
+	#_receiver.addEffect(StatusEffect.Collapsed)
 	
 	var texts = [
-		attackerName + " shoves " + recieverName + " away. "
+		attackerName + " shoves " + receiverName + " away. "
 	]
 	var text = RNG.pick(texts)
-	text += recieverDamageMessage(DamageType.Physical, damage)
+	text += receiverDamageMessage(DamageType.Physical, damage)
 	
-	if(!_reciever.hasEffect(StatusEffect.Collapsed)):
-		text += "\n[b]"+recieverName+" loses "+_reciever.hisHer()+" balance and collapses onto the floor[/b]"
-		_reciever.addEffect(StatusEffect.Collapsed)
+	if(!_receiver.hasEffect(StatusEffect.Collapsed)):
+		text += "\n[b]"+receiverName+" loses "+_receiver.hisHer()+" balance and collapses onto the floor[/b]"
+		_receiver.addEffect(StatusEffect.Collapsed)
 	
 	return text
 	
-func _canUse(_attacker, _reciever):
+func _canUse(_attacker, _receiver):
 	return true
 
 func getRequirements():
 	return []
 
-func getAnticipationText(_attacker, _reciever):
+func getAnticipationText(_attacker, _receiver):
 	return _attacker.getName() + " frees "+_attacker.hisHer()+" arms and tries to shove you"
 
-func getAIScore(_attacker, _reciever):
-	if(_reciever.hasEffect(StatusEffect.Collapsed)):
+func getAIScore(_attacker, _receiver):
+	if(_receiver.hasEffect(StatusEffect.Collapsed)):
 		return 0
-	return .getAIScore(_attacker, _reciever)
+	return .getAIScore(_attacker, _receiver)
 
 func getAttackAnimation():
 	return TheStage.Shove

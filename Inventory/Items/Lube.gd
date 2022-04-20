@@ -12,7 +12,7 @@ func getDescription():
 func canUseInCombat():
 	return true
 
-func useInCombat(_attacker, _reciever):
+func useInCombat(_attacker, _receiver):
 	_attacker.addEffect(StatusEffect.LubedUp, [8*60*60])
 	removeXOrDestroy(1)
 	return _attacker.getName() + " applied lube!"

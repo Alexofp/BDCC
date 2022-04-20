@@ -15,7 +15,7 @@ func getVisibleDescription():
 	return "Received physical damage "+text+"%"
 
 func apply(_buffHolder):
-	_buffHolder.recieveDamageMult[DamageType.Physical] += (amount/100.0)
+	_buffHolder.receiveDamageMult[DamageType.Physical] += (amount/100.0)
 
 func getBuffColor():
 	if(amount < 0):

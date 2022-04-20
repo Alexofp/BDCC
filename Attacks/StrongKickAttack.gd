@@ -11,23 +11,23 @@ func getVisibleName():
 func getVisibleDesc():
 	return "Sacrifice 25 stamina to do a very powerful kick doing "+scaledDmgStr(DamageType.Physical, 20)+" damage and knocking the opponent"
 	
-func _doAttack(_attacker, _reciever):
+func _doAttack(_attacker, _receiver):
 	var attackerName = _attacker.getName()
-	var recieverName = _reciever.getName()
+	var receiverName = _receiver.getName()
 	
-	var damage = doDamage(_attacker, _reciever, DamageType.Physical, RNG.randi_range(20, 20))
+	var damage = doDamage(_attacker, _receiver, DamageType.Physical, RNG.randi_range(20, 20))
 	
-	var text = attackerName + " uses "+_attacker.hisHer()+" full strength to kick " + recieverName + ". "
+	var text = attackerName + " uses "+_attacker.hisHer()+" full strength to kick " + receiverName + ". "
 	
-	text += recieverDamageMessage(DamageType.Physical, damage)
+	text += receiverDamageMessage(DamageType.Physical, damage)
 	
-	if(!_reciever.hasEffect(StatusEffect.Collapsed)):
-		text += "\n[b]"+recieverName+" loses "+_reciever.hisHer()+" balance and collapses onto the floor[/b]"
-		_reciever.addEffect(StatusEffect.Collapsed)
+	if(!_receiver.hasEffect(StatusEffect.Collapsed)):
+		text += "\n[b]"+receiverName+" loses "+_receiver.hisHer()+" balance and collapses onto the floor[/b]"
+		_receiver.addEffect(StatusEffect.Collapsed)
 	
 	return text
 	
-func _canUse(_attacker, _reciever):
+func _canUse(_attacker, _receiver):
 	return true
 
 func getRequirements():

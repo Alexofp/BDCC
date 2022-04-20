@@ -19,32 +19,32 @@ func getVisibleName():
 func getVisibleDesc():
 	return "Bad attack, let the developer know"
 	
-func _doAttack(_attacker, _reciever):
+func _doAttack(_attacker, _receiver):
 	return "Mew happened"
 	
-func _canUse(_attacker, _reciever):
+func _canUse(_attacker, _receiver):
 	return true
 	
 	
-func doAttack(_attacker, _reciever):
-	doRequirements(_attacker, _reciever)
-	return _doAttack(_attacker, _reciever)
+func doAttack(_attacker, _receiver):
+	doRequirements(_attacker, _receiver)
+	return _doAttack(_attacker, _receiver)
 	
-func canUse(_attacker, _reciever):
-	return _canUse(_attacker, _reciever) && meetsRequirements(_attacker, _reciever)
+func canUse(_attacker, _receiver):
+	return _canUse(_attacker, _receiver) && meetsRequirements(_attacker, _receiver)
 
 func getRequirements():
 	return []
 
-func meetsRequirements(_attacker, _reciever):
+func meetsRequirements(_attacker, _receiver):
 	var reqs = getRequirements()
 	for req in reqs:
-		if(!checkRequirement(_attacker, _reciever, req)):
+		if(!checkRequirement(_attacker, _receiver, req)):
 			return false
 	
 	return true
 
-func checkRequirement(_attacker, _reciever, req):
+func checkRequirement(_attacker, _receiver, req):
 	var reqtype = req[0]
 	if(reqtype == "stamina"):
 		if(_attacker.getStamina() < req[1]):
@@ -73,15 +73,15 @@ func checkRequirement(_attacker, _reciever, req):
 			
 	return true
 
-func doRequirement(_attacker, _reciever, req):
+func doRequirement(_attacker, _receiver, req):
 	var reqtype = req[0]
 	if(reqtype == "stamina"):
 		_attacker.addStamina(-req[1])
 
-func doRequirements(_attacker, _reciever):
+func doRequirements(_attacker, _receiver):
 	var reqs = getRequirements()
 	for req in reqs:
-		doRequirement(_attacker, _reciever, req)
+		doRequirement(_attacker, _receiver, req)
 
 func getRequirementText(req):
 	var reqtype = req[0]
@@ -105,12 +105,12 @@ func getRequirementText(req):
 			
 	return "Error: bad requirement:" + reqtype
 	
-func getRequirementsColorText(_attacker, _reciever):
+func getRequirementsColorText(_attacker, _receiver):
 	var reqs = getRequirements()
 	var text = ""
 	for req in reqs:
 		var reqText = getRequirementText(req)
-		var reqCan = checkRequirement(_attacker, _reciever, req)
+		var reqCan = checkRequirement(_attacker, _receiver, req)
 		if(reqCan):
 			text += reqText
 		else:
@@ -122,15 +122,15 @@ func getRequirementsColorText(_attacker, _reciever):
 func getRecieverArmorScaling(_damageType) -> float:
 	return 1.0
 
-func doDamage(_attacker, _reciever, _damageType, _damage: int, playGetHitAnimation = true):
+func doDamage(_attacker, _receiver, _damageType, _damage: int, playGetHitAnimation = true):
 	var damageMult = _attacker.getDamageMultiplier(_damageType)
 	if(_damage < 0):
 		damageMult = -damageMult
 	
-	var damage = _reciever.recieveDamage(_damageType, round(_damage * (1.0 + damageMult)), getRecieverArmorScaling(_damageType))
+	var damage = _receiver.receiveDamage(_damageType, round(_damage * (1.0 + damageMult)), getRecieverArmorScaling(_damageType))
 	
 	if(playGetHitAnimation):
-		if(_reciever == GM.pc):
+		if(_receiver == GM.pc):
 			if(GM.pc.isBlocking()):
 				GM.pc.playAnimation(TheStage.Block)
 			elif(_damageType == DamageType.Physical || _damageType == DamageType.Stamina):
@@ -138,25 +138,25 @@ func doDamage(_attacker, _reciever, _damageType, _damage: int, playGetHitAnimati
 	
 	return damage
 
-func canBeDodgedByPlayer(_attacker, _reciever):
+func canBeDodgedByPlayer(_attacker, _receiver):
 	return true
 
-func getAnticipationText(_attacker, _reciever):
+func getAnticipationText(_attacker, _receiver):
 	return "You're about to be bonked by "+getVisibleName()
 
 func canSeeAnticipationTextWhenBlind():
 	return false
 
-func canBlindAnticipationText(_attacker, _reciever):
+func canBlindAnticipationText(_attacker, _receiver):
 	return "{attacker.name} is about to do something but you can't tell what"
 
-func getAIScore(_attacker, _reciever):
+func getAIScore(_attacker, _receiver):
 	if(aiCategory == AICategory.Unspecified):
 		return 1.0 * aiScoreMultiplier
 		
 	# we want the enemy to have high pain
 	if(aiCategory == AICategory.Offensive):
-		var enemyHealthFraction = _reciever.getPainLevel()
+		var enemyHealthFraction = _receiver.getPainLevel()
 		enemyHealthFraction = clamp(enemyHealthFraction, 0.0, 1.0)
 		
 		var score = 1.0 + pow(enemyHealthFraction, 3) * 2
@@ -192,7 +192,7 @@ func getAIScore(_attacker, _reciever):
 		
 	# we want the enemy to have high lust
 	if(aiCategory == AICategory.Lust):
-		var enemyLustFraction = _reciever.getLustLevel()
+		var enemyLustFraction = _receiver.getLustLevel()
 		enemyLustFraction = clamp(enemyLustFraction, 0.0, 1.0)
 		
 		var score = 1.0 + pow(enemyLustFraction, 3) * 2
@@ -207,8 +207,8 @@ func getAIScore(_attacker, _reciever):
 		
 	return 0.0
 
-func checkMissed(_attacker, _reciever, _damageType, customAccuracyMult = 1.0, minChangeToHit = 0.0):
-	if(_reciever.hasEffect(StatusEffect.Collapsed)):
+func checkMissed(_attacker, _receiver, _damageType, customAccuracyMult = 1.0, minChangeToHit = 0.0):
+	if(_receiver.hasEffect(StatusEffect.Collapsed)):
 		return false
 	
 	var chanceToHit = (1.0 + _attacker.getAttackAccuracy()) * customAccuracyMult
@@ -217,13 +217,13 @@ func checkMissed(_attacker, _reciever, _damageType, customAccuracyMult = 1.0, mi
 		return true
 	return false
 
-func checkDodged(_attacker, _reciever, _damageType, customDodgeMult = 1, minChangeToDodge = 0.0, playDodgeAnimation = true):
-	var dodgeChance = _reciever.getDodgeChance() * customDodgeMult
+func checkDodged(_attacker, _receiver, _damageType, customDodgeMult = 1, minChangeToDodge = 0.0, playDodgeAnimation = true):
+	var dodgeChance = _receiver.getDodgeChance() * customDodgeMult
 	
 	dodgeChance = max(dodgeChance, minChangeToDodge)
 	if(RNG.chance(100.0 * dodgeChance)):
 		if(playDodgeAnimation):
-			if(_reciever == GM.pc):
+			if(_receiver == GM.pc):
 				GM.pc.playAnimation(TheStage.Dodge)
 		
 		return true
@@ -248,14 +248,14 @@ func scaledDmgRangeStr(_damageType, min_damage: int, max_damage: int):
 	
 	return str(damage1)+"-"+str(damage2)
 
-func recieverDamageMessage(damageType, howMuch):
+func receiverDamageMessage(damageType, howMuch):
 	var damageColor = DamageType.getColor(damageType)
 	var damageColorString = "#"+damageColor.to_html(false)
 	
-	return "{receiver.name} recieved [color="+damageColorString+"]"+str(howMuch)+" "+DamageType.getBattleName(damageType)+"[/color]"
+	return "{receiver.name} received [color="+damageColorString+"]"+str(howMuch)+" "+DamageType.getBattleName(damageType)+"[/color]"
 
-func recieverDamageMessageList(damages: Array):
-	var result = "{receiver.name} recieved "
+func receiverDamageMessageList(damages: Array):
+	var result = "{receiver.name} received "
 	
 	var resList = []
 	for damageData in damages:
@@ -271,13 +271,13 @@ func recieverDamageMessageList(damages: Array):
 func getExperience():
 	return []
 
-func genericMissMessage(_attacker, _reciever):
+func genericMissMessage(_attacker, _receiver):
 	return RNG.pick([
 		"{attacker.name} missed!",
 		"{attacker.name} missed {attacker.his} attack!",
 		])
 	
-func genericDodgeMessage(_attacker, _reciever):
+func genericDodgeMessage(_attacker, _receiver):
 	return RNG.pick([
 		"{receiver.name} managed to dodge the attack.",
 		"{receiver.name} managed to dodge the attack at the last second.",

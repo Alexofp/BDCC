@@ -14,10 +14,10 @@ func getVisibleDesc():
 func getTeaseType():
 	return TeaseType.Butt
 
-func getTeaseText(_attacker, _reciever):
+func getTeaseText(_attacker, _receiver):
 	var texts = [
 		"{attacker.name} wiggles {attacker.his} rear and gives it a good spank",
-		"{attacker.name} rubs {attacker.his} rear in front of {reciever.name} and sticks {attacker.his} tongue out",
+		"{attacker.name} rubs {attacker.his} rear in front of {receiver.name} and sticks {attacker.his} tongue out",
 		"{attacker.name} does a little sexy dance, shaking {attacker.his} ass",
 	]
 	var text = RNG.pick(texts)

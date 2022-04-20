@@ -11,18 +11,18 @@ func getVisibleName():
 func getVisibleDesc():
 	return "You shouldn't see this"
 	
-func _doAttack(_attacker, _reciever):
+func _doAttack(_attacker, _receiver):
 	var attackerName = _attacker.getName()
-	var recieverName = _reciever.getName()
+	var receiverName = _receiver.getName()
 	
-	if(checkMissed(_attacker, _reciever, DamageType.Physical)):
+	if(checkMissed(_attacker, _receiver, DamageType.Physical)):
 		return attackerName + " swings "+_attacker.hisHer()+" stunbaton but misses"
 	
-	if(checkDodged(_attacker, _reciever, DamageType.Physical)):
-		return attackerName + " swings "+_attacker.hisHer()+" stunbaton but " + recieverName + " dodges the attack at the last second"
+	if(checkDodged(_attacker, _receiver, DamageType.Physical)):
+		return attackerName + " swings "+_attacker.hisHer()+" stunbaton but " + receiverName + " dodges the attack at the last second"
 	
-	var _damage = doDamage(_attacker, _reciever, DamageType.Physical, RNG.randi_range(20, 40))
-	#_reciever.addEffect(StatusEffect.Bleeding)
+	var _damage = doDamage(_attacker, _receiver, DamageType.Physical, RNG.randi_range(20, 40))
+	#_receiver.addEffect(StatusEffect.Bleeding)
 
 	var texts = [
 		"{attacker.name} lands a strike on {receiver.name} with a stun baton, sending a painful shock through {receiver.his} body",
@@ -31,14 +31,14 @@ func _doAttack(_attacker, _reciever):
 	]
 	var text = RNG.pick(texts)
 	
-	text += " " + recieverDamageMessage(DamageType.Physical, _damage)
+	text += " " + receiverDamageMessage(DamageType.Physical, _damage)
 	
 	return text
 	
-func _canUse(_attacker, _reciever):
+func _canUse(_attacker, _receiver):
 	return true
 
-func getAnticipationText(_attacker, _reciever):
+func getAnticipationText(_attacker, _receiver):
 	return RNG.pick([
 		"{attacker.name} increases the grip on {attacker.his} stun baton and lunges forward, weapon first.",
 		"{attacker.name} swings {attacker.his} stun baton at {receiver.name}, aiming for {receiver.his} exposed areas where it would have the most effect.",

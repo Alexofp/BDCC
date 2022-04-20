@@ -406,7 +406,7 @@ func _react(_action: String, _args):
 	if(_action == "no1"):
 		GM.pc.addPain(20)
 		
-		addMessage("That was painful. You recieved 20 pain")
+		addMessage("That was painful. You received 20 pain")
 		
 		TaviModule.makeTaviAngry()
 	

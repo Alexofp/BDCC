@@ -11,11 +11,11 @@ func getVisibleName():
 func getVisibleDesc():
 	return "You clean all the cum off of yourself and gain 10 stamina for each layer that you swallowed"
 	
-func _doAttack(_attacker, _reciever):
+func _doAttack(_attacker, _receiver):
 	var staminaperlevel = 10
 
 	var texts = [
-		"{attacker.name} sticks {attacker.his} tongue out and starts cleaning {attacker.himself}. {reciever.name} raises {reciever.his} brow at the display"
+		"{attacker.name} sticks {attacker.his} tongue out and starts cleaning {attacker.himself}. {receiver.name} raises {receiver.his} brow at the display"
 	]
 	var text = RNG.pick(texts)
 	
@@ -36,7 +36,7 @@ func _doAttack(_attacker, _reciever):
 	
 	return text
 
-func canBeDodgedByPlayer(_attacker, _reciever):
+func canBeDodgedByPlayer(_attacker, _receiver):
 	return false
 
 func getRequirements():

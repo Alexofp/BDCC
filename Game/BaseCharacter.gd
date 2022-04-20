@@ -305,7 +305,7 @@ func getAttackAccuracy():
 	
 	return mult
 	
-func recieveDamage(damageType, amount: int, armorScale: float = 1.0):
+func receiveDamage(damageType, amount: int, armorScale: float = 1.0):
 	var mult = getRecieveDamageMultiplier(damageType)
 	var newdamage = round(amount * (1.0 + mult))
 	

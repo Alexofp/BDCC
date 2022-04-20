@@ -11,8 +11,8 @@ func getVisibleName():
 func getVisibleDesc():
 	return "You shouldn't see this"
 	
-func _doAttack(_attacker, _reciever):
-	var _damage = doDamage(_attacker, _reciever, DamageType.Lust, RNG.randi_range(20, 20))
+func _doAttack(_attacker, _receiver):
+	var _damage = doDamage(_attacker, _receiver, DamageType.Lust, RNG.randi_range(20, 20))
 	
 	var texts = [
 		"{attacker.name} licks {attacker.his} bruises, it helps to soothe the pain by quite a bit."
@@ -25,7 +25,7 @@ func _doAttack(_attacker, _reciever):
 	
 	return text
 
-func canBeDodgedByPlayer(_attacker, _reciever):
+func canBeDodgedByPlayer(_attacker, _receiver):
 	return false
 
 func getRequirements():

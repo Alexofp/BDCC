@@ -90,7 +90,7 @@ func tryCombine(_otherItem):
 func canUseInCombat():
 	return false
 
-func useInCombatWithBuffs(_attacker, _reciever):
+func useInCombatWithBuffs(_attacker, _receiver):
 	if(_attacker.isPlayer()):
 		var intoxic = addsIntoxication()
 		if(intoxic > 0.0):
@@ -103,9 +103,9 @@ func useInCombatWithBuffs(_attacker, _reciever):
 		if(turnBuffs.size() > 0):
 			_attacker.addTimedBuffsTurns(turnBuffs, getBuffsDurationTurns())
 	
-	return useInCombat(_attacker, _reciever)
+	return useInCombat(_attacker, _receiver)
 
-func useInCombat(_attacker, _reciever):
+func useInCombat(_attacker, _receiver):
 	return ""
 
 func addsIntoxication() -> float:

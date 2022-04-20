@@ -166,11 +166,11 @@ func _react(_action: String, _args):
 		if(damage != 0.0):
 			restraintData.takeDamage(damage)
 		if(addLust != 0):
-			addLust = GM.pc.recieveDamage(DamageType.Lust, addLust)
-			addMessage("You recieved "+str(addLust)+" lust")
+			addLust = GM.pc.receiveDamage(DamageType.Lust, addLust)
+			addMessage("You received "+str(addLust)+" lust")
 		if(addPain != 0):
-			addPain = GM.pc.recieveDamage(DamageType.Physical, addPain)
-			addMessage("You recieved "+str(addPain)+" pain")
+			addPain = GM.pc.receiveDamage(DamageType.Physical, addPain)
+			addMessage("You received "+str(addPain)+" pain")
 		if(addStamina != 0):
 			GM.pc.addStamina(-addStamina)
 			

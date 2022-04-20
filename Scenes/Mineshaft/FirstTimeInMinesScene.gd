@@ -19,7 +19,7 @@ func _run():
 
 		saynn("[say=alexrynard]You hit a rock until you see anything shiny or colorful. If you do, you put that in a minecart. Clear enough for you?[/say]")
 
-		addButton("Reward", "Ask what are you gonna recieve", "reward")
+		addButton("Reward", "Ask what are you gonna receive", "reward")
 		addButton("How", "Why is a rock", "how")
 		addButton("Go work", "Time to work", "go_work")
 
@@ -38,7 +38,7 @@ func _run():
 
 		saynn("Huh, the guy is not very talkative. He tilts his head and crosses arms, you can spot his exposed sharp fangs.")
 
-		addButton("Reward", "Ask what are you gonna recieve", "reward")
+		addButton("Reward", "Ask what are you gonna receive", "reward")
 		addButton("How", "Why is a rock", "how")
 		addButton("Go work", "Time to work", "go_work")
 
@@ -51,7 +51,7 @@ func _run():
 
 		saynn("[say=alexrynard]As long as the inmates don’t slack all day[/say]")
 
-		addButton("Reward", "Ask what are you gonna recieve", "reward")
+		addButton("Reward", "Ask what are you gonna receive", "reward")
 		addButton("How", "Why is a rock", "how")
 		addButton("Go work", "Time to work", "go_work")
 

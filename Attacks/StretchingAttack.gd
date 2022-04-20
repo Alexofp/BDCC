@@ -11,8 +11,8 @@ func getVisibleName():
 func getVisibleDesc():
 	return "You shouldn't see this"
 	
-func _doAttack(_attacker, _reciever):
-	var _damage = doDamage(_attacker, _reciever, DamageType.Lust, RNG.randi_range(20, 20))
+func _doAttack(_attacker, _receiver):
+	var _damage = doDamage(_attacker, _receiver, DamageType.Lust, RNG.randi_range(20, 20))
 	
 	var texts = [
 		"{attacker.name} takes {attacker.his} time arching {attacker.his} back and stretching. A few cute moans can be heard from {attacker.name} as {attacker.he} does that."
@@ -23,14 +23,14 @@ func _doAttack(_attacker, _reciever):
 	
 	text += " {attacker.name} is feeling better! "
 	
-	text += recieverDamageMessage(DamageType.Lust, _damage)
+	text += receiverDamageMessage(DamageType.Lust, _damage)
 	
 	return text
 
-func canBeDodgedByPlayer(_attacker, _reciever):
+func canBeDodgedByPlayer(_attacker, _receiver):
 	return true
 
-func getAnticipationText(_attacker, _reciever):
+func getAnticipationText(_attacker, _receiver):
 	return RNG.pick([
 		"Looks like {attacker.name} is about to stretch!",
 	])

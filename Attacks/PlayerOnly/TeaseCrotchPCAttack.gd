@@ -14,9 +14,9 @@ func getVisibleDesc():
 func getTeaseType():
 	return TeaseType.Crotch
 
-func getTeaseText(_attacker, _reciever):
+func getTeaseText(_attacker, _receiver):
 	var texts = [
-		"{attacker.name} rubs {attacker.his} crotch in front of {reciever.name}",
+		"{attacker.name} rubs {attacker.his} crotch in front of {receiver.name}",
 	]
 	var text = RNG.pick(texts)
 	return text

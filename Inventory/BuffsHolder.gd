@@ -5,7 +5,7 @@ var buffs: Array = []
 var buffsIds: Dictionary = {}
 var npc = null
 var dealDamageMult = {}
-var recieveDamageMult = {}
+var receiveDamageMult = {}
 var armor = {}
 var gagged = false
 var dodgeChance = 0
@@ -32,7 +32,7 @@ func calculateBuffs():
 	buffs.clear()
 	buffsIds.clear()
 	dealDamageMult.clear()
-	recieveDamageMult.clear()
+	receiveDamageMult.clear()
 	armor.clear()
 	gagged = false
 	dodgeChance = 0
@@ -48,7 +48,7 @@ func calculateBuffs():
 	
 	for damageType in DamageType.getAll():
 		dealDamageMult[damageType] = 0.0
-		recieveDamageMult[damageType] = 0.0
+		receiveDamageMult[damageType] = 0.0
 		armor[damageType] = 0
 		
 	orificeMinLooseness.clear()
@@ -82,10 +82,10 @@ func getDealDamageMult(damageType):
 	return dealDamageMult[damageType]
 
 func getRecieveDamageMult(damageType):
-	if(!recieveDamageMult.has(damageType)):
+	if(!receiveDamageMult.has(damageType)):
 		return 0.0
 	
-	return recieveDamageMult[damageType]
+	return receiveDamageMult[damageType]
 
 func getArmor(damageType):
 	if(!armor.has(damageType)):

@@ -14,7 +14,7 @@ func getDescription():
 func canUseInCombat():
 	return true
 
-func useInCombat(_attacker, _reciever):
+func useInCombat(_attacker, _receiver):
 	_attacker.addPain(-20)
 	_attacker.addStamina(20)
 	removeXOrDestroy(1)

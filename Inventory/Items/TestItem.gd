@@ -14,7 +14,7 @@ func getDescription():
 func canUseInCombat():
 	return true
 
-func useInCombat(_attacker, _reciever):
+func useInCombat(_attacker, _receiver):
 	_attacker.addPain(-100)
 	destroyMe()
 	return _attacker.getName() + " drank a potion"+something

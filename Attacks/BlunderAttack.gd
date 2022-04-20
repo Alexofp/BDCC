@@ -10,16 +10,16 @@ func getVisibleName():
 func getVisibleDesc():
 	return "You shouldn't see this"
 	
-func _doAttack(_attacker, _reciever):
+func _doAttack(_attacker, _receiver):
 	var attackerName = _attacker.getName()
 
 	return attackerName + " couldn't figure out what to do and skipped "+_attacker.hisHer()+" turn"
 	
-func _canUse(_attacker, _reciever):
+func _canUse(_attacker, _receiver):
 	return true
 
-func canBeDodgedByPlayer(_attacker, _reciever):
+func canBeDodgedByPlayer(_attacker, _receiver):
 	return false
 
-func getAIScore(_attacker, _reciever):
+func getAIScore(_attacker, _receiver):
 	return 0.0

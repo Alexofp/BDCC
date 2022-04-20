@@ -15,7 +15,7 @@ func getVisibleDescription():
 	return "Received Lust "+text+"%"
 
 func apply(_buffHolder):
-	_buffHolder.recieveDamageMult[DamageType.Lust] += (amount/100.0)
+	_buffHolder.receiveDamageMult[DamageType.Lust] += (amount/100.0)
 
 func getBuffColor():
 	if(amount < 0):

@@ -183,7 +183,7 @@ func _react(_action: String, _args):
 		if(howMuchMilked >= 400.0):
 			var credits = Util.maxi(1, int(floor(sqrt(howMuchMilked / 100.0) / 2.0)))
 			GM.pc.addCredits(credits)
-			addMessage("You recieved "+str(credits)+" work "+Util.multipleOrSingularEnding(credits, "credit")+"!")
+			addMessage("You received "+str(credits)+" work "+Util.multipleOrSingularEnding(credits, "credit")+"!")
 
 	if(_action == "endthescene"):
 		endScene()
