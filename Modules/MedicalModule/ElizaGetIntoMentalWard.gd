@@ -132,8 +132,9 @@ func _react(_action: String, _args):
 		
 		GM.pc.getInventory().forceEquipStoreOther(GlobalRegistry.createItem("LatexStraitjacket"))
 		
-		setFlag(MedicalModule.Mental_PCBehavior, 0.5)
-		setFlag(MedicalModule.Mental_PCSanity, 0.0)
+		#setFlag(MedicalModule.Mental_PCBehavior, 0.5)
+		#setFlag(MedicalModule.Mental_PCSanity, 0.0)
+		MedicalModule.resetFlagsOnGettingIntoMentalWard()
 
 	if(_action == "endthescene"):
 		endScene()

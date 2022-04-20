@@ -20,6 +20,7 @@ const Mental_PCBehavior = "Mental_PCBehavior"
 const Mental_PCSanity = "Mental_PCSanity"
 const Mental_CheckupHappened = "Mental_DidCheckup"
 const Mental_ExperimentHappened = "Mental_ExperimentHappened"
+const Mental_ExpObeyDrug = "Mental_ExpObeyDrug"
 
 func _init():
 	id = "MedicalModule"
@@ -38,6 +39,7 @@ func _init():
 		"res://Modules/MedicalModule/MentalWard/MentalCheckup1.gd",
 		"res://Modules/MedicalModule/MentalWard/MentalCheckupNoJacket.gd",
 		"res://Modules/MedicalModule/MentalWard/MentalObedienceDrug1.gd",
+		"res://Modules/MedicalModule/MentalWard/MentalObedienceDrug2.gd",
 		]
 	characters = [
 	]
@@ -50,6 +52,12 @@ func resetFlagsOnNewDay():
 	GM.main.setFlag(Med_wasMilkedToday, false)
 	GM.main.setFlag(Mental_CheckupHappened, false)
 	GM.main.setFlag(Mental_ExperimentHappened, false)
+
+static func resetFlagsOnGettingIntoMentalWard():
+	GM.main.setFlag(Mental_PCBehavior, 0.5)
+	GM.main.setFlag(Mental_PCSanity, 0.0)
+	
+	GM.main.setFlag(Mental_ExpObeyDrug, 0)
 
 static func addPCBehavior(value):
 	GM.main.setFlag(Mental_PCBehavior, GM.main.getFlag(Mental_PCBehavior, 0.0) + value)

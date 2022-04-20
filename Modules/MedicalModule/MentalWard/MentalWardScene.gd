@@ -1,5 +1,15 @@
 extends "res://Scenes/SceneBase.gd"
 
+func getPossibleScenes():
+	var result = []
+	
+	var obeyDrug = getFlag(MedicalModule.Mental_ExpObeyDrug, 0)
+	if(obeyDrug >= 1):
+		result.append("MentalObedienceDrug2")
+	else:
+		result.append("MentalObedienceDrug1")
+		
+	return result
 
 func _init():
 	sceneID = "MentalWardScene"
@@ -12,6 +22,7 @@ func _run():
 		aimCamera("medical_paddedcell_player")
 		GM.pc.setLocation("medical_paddedcell_player")
 		GM.pc.playAnimation(TheStage.Kneeling)
+		setLocationName("Padded cell")
 		
 		saynn("You’re stuck in a mental ward cell with nothing to do. Padded walls surround you, even the bulky door has a soft layer to it. The only thing connecting you to the outside world is a small reinforced window and an air vent that’s far above your reach.")
 		
@@ -93,7 +104,9 @@ func _react(_action: String, _args):
 				runScene("MentalCheckupNoJacket", [], "mentalnojacketfight")
 			else:
 				# Run random experiment scene
-				runScene("MentalObedienceDrug1")
+				var possibleScenes = getPossibleScenes()
+				assert(possibleScenes.size() > 0)
+				runScene(RNG.pick(possibleScenes))
 			
 			setState("")
 			return
