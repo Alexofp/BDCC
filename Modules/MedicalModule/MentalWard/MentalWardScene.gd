@@ -4,6 +4,13 @@ func getPossibleScenes():
 	var newScenes = []
 	var reusedScenes = []
 	
+	var tentacles = getFlag(MedicalModule.Mental_ExpTentacles, 0)
+	if(tentacles >= 1):
+		reusedScenes.append("MentalLatexParasite")
+	else:
+		newScenes.append("MentalLatexParasite")
+	
+	
 	var obeyDrug = getFlag(MedicalModule.Mental_ExpObeyDrug, 0)
 	if(obeyDrug >= 2):
 		reusedScenes.append("MentalObedienceDrug2")

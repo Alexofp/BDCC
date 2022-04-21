@@ -21,6 +21,7 @@ const Mental_PCSanity = "Mental_PCSanity"
 const Mental_CheckupHappened = "Mental_DidCheckup"
 const Mental_ExperimentHappened = "Mental_ExperimentHappened"
 const Mental_ExpObeyDrug = "Mental_ExpObeyDrug"
+const Mental_ExpTentacles = "Mental_ExpTentacles"
 
 func _init():
 	id = "MedicalModule"
@@ -40,8 +41,10 @@ func _init():
 		"res://Modules/MedicalModule/MentalWard/MentalCheckupNoJacket.gd",
 		"res://Modules/MedicalModule/MentalWard/MentalObedienceDrug1.gd",
 		"res://Modules/MedicalModule/MentalWard/MentalObedienceDrug2.gd",
+		"res://Modules/MedicalModule/MentalWard/MentalLatexParasite.gd",
 		]
 	characters = [
+		"res://Modules/MedicalModule/MentalWard/LatexParasite.gd",
 	]
 	items = []
 	events = [
@@ -58,6 +61,7 @@ static func resetFlagsOnGettingIntoMentalWard():
 	GM.main.setFlag(Mental_PCSanity, 0.0)
 	
 	GM.main.setFlag(Mental_ExpObeyDrug, 0)
+	GM.main.setFlag(Mental_ExpTentacles, 0)
 
 static func addPCBehavior(value):
 	GM.main.setFlag(Mental_PCBehavior, GM.main.getFlag(Mental_PCBehavior, 0.0) + value)

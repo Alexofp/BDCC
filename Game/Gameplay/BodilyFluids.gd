@@ -5,6 +5,7 @@ class FluidType:
 	const Cum = "cum"
 	const GirlCum = "girlcum"
 	const Milk = "milk"
+	const BlackGoo = "blackgoo"
 	
 	static func getName(fl):
 		if(fl == Cum):
@@ -13,6 +14,8 @@ class FluidType:
 			return "girlcum"
 		if(fl == Milk):
 			return "milk"
+		if(fl == BlackGoo):
+			return "black goo"
 		return "Error"
 
 enum FluidSource {
