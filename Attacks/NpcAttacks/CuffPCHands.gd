@@ -19,7 +19,7 @@ func _doAttack(_attacker, _receiver):
 	if(checkDodged(_attacker, _receiver, DamageType.Physical)):
 		return genericDodgeMessage(_attacker, _receiver)
 	
-	_receiver.getInventory().forceEquipStoreOther(GlobalRegistry.createItem("inmatewristcuffs"))
+	_receiver.getInventory().forceEquipStoreOtherUnlessRestraint(GlobalRegistry.createItem("inmatewristcuffs"))
 	
 	return "{attacker.name} pins you against a wall, then [b]wrenches your arms behind your back and cuffs them[/b]! You manage to break free.\n\n[say=attacker]"+RNG.pick([
 		"Cease resisting.",

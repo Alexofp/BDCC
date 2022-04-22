@@ -130,7 +130,7 @@ func _react(_action: String, _args):
 		GM.pc.freeLegsDeleteAll()
 		GM.pc.freeMouthDeleteAll()
 		
-		GM.pc.getInventory().forceEquipStoreOther(GlobalRegistry.createItem("LatexStraitjacket"))
+		GM.pc.getInventory().forceEquipStoreOtherUnlessRestraint(GlobalRegistry.createItem("LatexStraitjacket"))
 		
 		#setFlag(MedicalModule.Mental_PCBehavior, 0.5)
 		#setFlag(MedicalModule.Mental_PCSanity, 0.0)

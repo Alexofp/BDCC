@@ -19,7 +19,7 @@ func _doAttack(_attacker, _receiver):
 	if(checkDodged(_attacker, _receiver, DamageType.Physical)):
 		return genericDodgeMessage(_attacker, _receiver)
 	
-	_receiver.getInventory().forceEquipStoreOther(GlobalRegistry.createItem("ringgag"))
+	_receiver.getInventory().forceEquipStoreOtherUnlessRestraint(GlobalRegistry.createItem("ringgag"))
 	
 	return "{attacker.name} pounces at you and manages to [b]force a ring gag into your mouth[/b]! You manage to shove {attacker.him} back.\n\n[say=attacker]"+RNG.pick([
 		"Much better.",

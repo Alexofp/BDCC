@@ -56,7 +56,7 @@ func _react(_action: String, _args):
 	if(_action == "surrender"):
 		MedicalModule.addPCBehavior(-0.1)
 
-		GM.pc.getInventory().forceEquipStoreOther(GlobalRegistry.createItem("LatexStraitjacket"))
+		GM.pc.getInventory().forceEquipStoreOtherUnlessRestraint(GlobalRegistry.createItem("LatexStraitjacket"))
 
 	if(_action == "attack"):
 		MedicalModule.addPCBehavior(-0.9)
@@ -87,5 +87,5 @@ func _react_scene_end(_tag, _result):
 			addExperienceToPlayer(50)
 		else:
 			setState("surrender")
-			GM.pc.getInventory().forceEquipStoreOther(GlobalRegistry.createItem("LatexStraitjacket"))
+			GM.pc.getInventory().forceEquipStoreOtherUnlessRestraint(GlobalRegistry.createItem("LatexStraitjacket"))
 			addExperienceToPlayer(10)
