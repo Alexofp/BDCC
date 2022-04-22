@@ -7,6 +7,11 @@ func induceLactation():
 	lactationTimer = Util.maxi(lactationTimer, 60*60*24*7)
 
 func afterMilked():
+	# if we're not lactating milking will make us lactate with 10% chance
+	if(!shouldProduce()):
+		if(RNG.chance(90)):
+			return
+	
 	lactationTimer = Util.maxi(lactationTimer, 60*60*24*2)
 
 func shouldProduce():
@@ -27,6 +32,11 @@ func processTime(seconds: int):
 		lactationTimer -= seconds
 	if(lactationTimer < 0):
 		lactationTimer = 0
+		
+func getProductionSpeedPerHour() -> float:
+	if(!shouldProduce()):
+		return -5.0
+	return getCapacity() / 30.0
 
 func saveData():
 	var data = .saveData()

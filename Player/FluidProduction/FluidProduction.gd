@@ -19,6 +19,8 @@ func afterMilked():
 	pass
 
 func getProductionSpeedPerHour() -> float:
+	if(!shouldProduce()):
+		return 0.0
 	return getCapacity() / 10.0
 	
 func getFluidType():
@@ -28,9 +30,6 @@ func shouldProduce():
 	return true
 
 func processTime(seconds: int):
-	if(!shouldProduce()):
-		return
-	
 	var minutesPassed: float = seconds / 60.0
 	var hoursPassed: float = minutesPassed / 60.0
 
@@ -38,6 +37,8 @@ func processTime(seconds: int):
 	var maxCapacity = getCapacity()
 	if(fluidAmount > maxCapacity):
 		fluidAmount = maxCapacity
+	if(fluidAmount < 0.0):
+		fluidAmount = 0.0
 
 func getBodypart():
 	return bodypart.get_ref()
