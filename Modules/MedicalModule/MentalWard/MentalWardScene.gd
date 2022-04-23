@@ -125,8 +125,20 @@ func _react(_action: String, _args):
 			setState("")
 			return
 		
+		if(!getFlag(MedicalModule.Mental_ShowerHappened, false) && GM.main.getTime() >= 19*60*60):
+			setFlag(MedicalModule.Mental_ShowerHappened, true)
+			
+			if(isPCWearingAStraitjacket()):
+				runScene("MentalShower")
+			else:
+				runScene("MentalCheckupNoJacket", [], "mentalnojacketfight")
+			
+			setState("")
+			return
+		
 		setState("")
 		return
+		
 	
 	if(_action == "dosleep"):
 		GM.main.startNewDay()

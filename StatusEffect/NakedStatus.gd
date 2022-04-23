@@ -14,18 +14,19 @@ func processTime(_minutesPassed: int):
 	pass
 
 func getEffectName():
-	return "Naked"
+	if(!character.isPlayer()):
+		return "Naked"
+	
+	if(character.isFullyNaked()):
+		return "Naked"
+	return "Exposed"
 
 func getEffectDesc():
 	if(!character.isPlayer()):
 		return "Not wearing anything"
 	
 	
-	if(character.isFullyNaked()):
-		if(character.hasPerk(Perk.NakedNoShame)):
-			return "You are completely naked and it feels good"
-		
-		return "You are completely naked, be ready for some extra attention"
+
 	
 	var exposedBodyparts = character.getExposedPrivates()
 	var visiblePartsNames = []
@@ -36,9 +37,17 @@ func getEffectDesc():
 		visiblePartsNames.append(bodypart.getName())
 		
 	if(visiblePartsNames.size() > 0):
-		return "Some of your privates are exposed and visible for everyone who glances at you. Be ready for some extra attention\n[color=red]Exposed: "+Util.humanReadableList(visiblePartsNames)+"[/color]"
+		if(character.isFullyNaked()):
+			if(character.hasPerk(Perk.NakedNoShame)):
+				return "You are completely naked and it feels good\n[color=red]Exposed: "+Util.humanReadableList(visiblePartsNames)+"[/color]"
+			
+			return "You are completely naked, be ready for some extra attention\n[color=red]Exposed: "+Util.humanReadableList(visiblePartsNames)+"[/color]"
+		else:
+			return "Some of your privates are exposed and visible for everyone who glances at you. Be ready for some extra attention\n[color=red]Exposed: "+Util.humanReadableList(visiblePartsNames)+"[/color]"
 	
-	return "You're not wearing anything"
+	if(character.hasPerk(Perk.NakedNoShame)):
+		return "You are completely naked and it feels good"
+	return "You are completely naked, be ready for some extra attention"
 
 func getEffectImage():
 	return "res://UI/StatusEffectsPanel/images/nudity.png"

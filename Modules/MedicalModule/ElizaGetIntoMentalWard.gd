@@ -28,8 +28,8 @@ func _run():
 
 		saynn("Do you wanna sign it?")
 
-		addButton("No", "On second thought..", "no")
 		addButton("Sign it", "What’s the worst that can happen, right?", "sign_it")
+		addButton("No", "On second thought..", "no")
 
 	if(state == "no"):
 		saynn("[say=pc]It seems kinda dangerous. I think I will pass[/say]")
