@@ -28,5 +28,14 @@ func _on_MedRoom7_onEnter(room):
 
 func _on_MedRoom7_onReact(_room, key):
 	if(key == "leave"):
+		GM.pc.setLocation("med_lobbynw")
+		GM.main.reRun()
+
+
+func _on_MedRoom8_onEnter(room):
+	room.addButton("Leave", "This airlock can let you out but not in", "leave")
+
+func _on_MedRoom8_onReact(_room, key):
+	if(key == "leave"):
 		GM.pc.setLocation("med_lobbyne")
 		GM.main.reRun()

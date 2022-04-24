@@ -64,8 +64,9 @@ func _run():
 
 		saynn("Eliza turns away and waits for you to be done. You step under the shower head and proceed to wash yourself. Hair, face, shoulders, {pc.breasts}, your {pc.masc} body. You quickly wash your privates too. It’s very refreshing.")
 
-		addButton("Steal keycard", "Try and pickpocket Eliza, this will be easier the better your behavior is", "steal_keycard")
+		addButton("Steal keycard", "Try and pickpocket Eliza, this will be easier the better your behavior is. (Current chance: "+str(round(calculateStealChance()*10.0)/10.0)+"%)", "steal_keycard")
 		addButton("Clean inside", "Wash out anything you have inside your holes", "clean_inside")
+		addButton("Done", "You’re finished showering", "done")
 		
 	if(state == "steal_keycard_failed"):
 		# (if failed)
@@ -196,11 +197,13 @@ func _react(_action: String, _args):
 		MedicalModule.addPCBehavior(-0.1)
 
 	if(_action == "steal_keycard"):
-		if(RNG.chance(50)):
+		
+		if(!RNG.chance(calculateStealChance())):
 			setState("steal_keycard_failed")
 			MedicalModule.addPCBehavior(-0.7)
 		else:
 			setState("steal_keycard_succ")
+			setFlag(MedicalModule.Mental_HasKeycard, true)
 		return
 
 	if(_action == "endthescene"):
@@ -208,3 +211,8 @@ func _react(_action: String, _args):
 		return
 	
 	setState(_action)
+
+func calculateStealChance():
+	var result = -30.0 + getFlag(MedicalModule.Mental_PCBehavior, 0.0) * 130.0 + GM.pc.getStat(Stat.Agility) * 2.0
+	
+	return clamp(result, 0.0, 100.0)

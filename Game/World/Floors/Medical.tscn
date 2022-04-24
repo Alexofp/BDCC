@@ -24,11 +24,12 @@ roomSprite = 1
 
 [node name="MedRoom5" parent="." index="4" instance=ExtResource( 2 )]
 position = Vector2( 64, -64 )
+roomID = "med_lobbyne"
 canEast = false
 
 [node name="MedRoom6" parent="." index="5" instance=ExtResource( 2 )]
 position = Vector2( -64, -64 )
-roomID = "med_lobbyne"
+roomID = "med_lobbynw"
 canWest = false
 
 [node name="MedRoom20" parent="." index="6" instance=ExtResource( 2 )]
@@ -65,6 +66,7 @@ gridColor = 2
 
 [node name="MedRoom14" parent="." index="14" instance=ExtResource( 2 )]
 position = Vector2( 0, -320 )
+roomID = "medical_firstcorridorcross"
 gridColor = 2
 
 [node name="MedRoom21" parent="." index="15" instance=ExtResource( 2 )]
@@ -253,5 +255,7 @@ roomColor = 2
 [connection signal="onReact" from="MedRoom2" to="." method="_on_MedRoom2_onReact"]
 [connection signal="onEnter" from="MedRoom7" to="." method="_on_MedRoom7_onEnter"]
 [connection signal="onReact" from="MedRoom7" to="." method="_on_MedRoom7_onReact"]
+[connection signal="onEnter" from="MedRoom8" to="." method="_on_MedRoom8_onEnter"]
+[connection signal="onReact" from="MedRoom8" to="." method="_on_MedRoom8_onReact"]
 [connection signal="onEnter" from="MedElevator" to="." method="_on_MedElevator_onEnter"]
 [connection signal="onReact" from="MedElevator" to="." method="_on_MedElevator_onReact"]

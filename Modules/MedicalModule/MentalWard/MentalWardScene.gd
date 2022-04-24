@@ -79,6 +79,8 @@ func _run():
 			
 		addButton("Rest", "Spend some time idling", "rest")
 		addButton("Struggle", "Try to struggle out of your restraints", "struggle")
+		if(getFlag(MedicalModule.Mental_HasKeycard, false)):
+			addButton("Escape", "Use the keycard to escape", "doescape")
 	
 	if(state == "sleeping"):
 		saynn("The light in your cell has turned off, signaling that it’s late. You lay down on the padded floor and try to get some sleep.")
@@ -160,6 +162,12 @@ func _react(_action: String, _args):
 	if(_action == "struggle"):
 		runScene("StrugglingScene")
 		setState("")
+		return
+		
+	if(_action == "doescape"):
+		runScene("MentalKeycardEscape")
+		setState("")
+		endScene()
 		return
 	
 	setState(_action)

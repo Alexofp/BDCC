@@ -51,6 +51,40 @@ func _run():
 		
 		addButton("Continue", "See what happens next", "endthescene")
 
+	if(state == "won_fight"):
+		saynn("Unable to fight you any longer, Eliza drops to her knees. But she has not given up yet, she attempts to use her last ace, her hand reaches her belt and fetches a remote from it. You see that and pounce at her, pinning her hands to the floor.")
+
+		saynn("You straddle her, your hand prevents Eliza from pressing any buttons on the remote. She pants and glances at you with intrigued eyes.")
+
+		saynn("[say=eliza]Mmm-m.. This is quite kinky. You know.. I’m not mad at you, inmate.[/say]")
+
+		saynn("You hear loud footsteps coming from another room. Eliza chuckles softly in your grasp.")
+
+		saynn("[say=eliza]You better run before they find us like this~.[/say]")
+
+		addButton("Leave her", "Time to run", "leave_her")
+		addButton("Kiss her", "Goodbye gift", "kiss_her")
+
+	if(state == "kiss_her"):
+		saynn("You suddenly land a kiss on Eliza’s lips. A quite long one. She opens her eyes wide, clearly surprised. She blinks a few times in a row and slowly shuts them, a soft blush appears on her cheeks.")
+
+		saynn("But as quickly as you start the kiss, you also swiftly stop it and make your escape, leaving Eliza on the floor.")
+
+		# (scene ends)
+		addButton("Continue", "Time to run", "endthesceneEscape")
+		
+
+	if(state == "leave_her"):
+		saynn("You direct your attention to the source of footsteps and Eliza uses that opportunity to free one of her hands and scratch your cheek. Ow! She offers you a cheeky smile. You growl at her")
+
+		saynn("[say=eliza]You will never understand it. How important science is.[/say]")
+
+		saynn("Footsteps become even louder so you decide to make your escape, leaving Eliza on the floor.")
+
+		# (add a bit of pain)
+		addButton("Continue", "Time to run", "endthesceneEscape")
+		# (scene ends)
+
 func _react(_action: String, _args):
 
 	if(_action == "surrender"):
@@ -67,7 +101,13 @@ func _react(_action: String, _args):
 	if(_action == "endthescene"):
 		endScene()
 		return
-
+		
+	if(_action == "endthesceneEscape"):
+		endScene([true])
+		return
+	
+	if(_action == "leave_her"):
+		GM.pc.addPain(5)
 	
 	setState(_action)
 
@@ -79,11 +119,9 @@ func _react_scene_end(_tag, _result):
 		#var wonHow = _result[1]
 		
 		if(battlestate == "win"):
-			#if(wonHow == "lust"):
-			#	setState("won_fight_lust")
-			#else:
-			#	setState("won_fight")
-			endScene([true])
+			setState("won_fight")
+			setFlag(MedicalModule.Mental_PlayerEscaped, true)
+			#endScene([true])
 			addExperienceToPlayer(50)
 		else:
 			setState("surrender")
