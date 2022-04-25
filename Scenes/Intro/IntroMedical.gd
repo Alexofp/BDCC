@@ -189,12 +189,12 @@ func _run():
 		saynn("You step into the spacious lift. It’s control panel shows that this prison has quite a few levels to it but their names are shortened to two letters so it's hard to figure out what is what.")
 
 		say("Levels:\n")
-		say("CO\n")
-		say("HG\n")
-		say("CB\n")
-		say("MN\n")
-		say("MB\n")
-		say("EN\n\n")
+		say("CO\n") # Captain's office
+		say("HG\n") # Hangar
+		say("CB\n") # CellBlock
+		say("MN\n") # Mineshafts
+		say("MB\n") # Medical bay
+		say("EN\n\n") # Engineering
 
 		saynn("Doctor Quinn presses the third button and the lift begins to descend, screeching a bit in the progress. You take a look around, there don’t seem to be anything interesting, not even cameras. Your collar is constantly reminding you that you’re on a tight leash.")
 		addButton("Wait", "Wait until the lift arrives", "liftarrives")

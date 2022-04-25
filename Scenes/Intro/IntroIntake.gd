@@ -156,13 +156,13 @@ func _run():
 		
 		saynn("[say=pc]Ugh.. fuck you..[/say]")
 		
-		saynn("The captain shakes his head and pulls out something from his pouch. It’s a gag, red ballgag.")
+		saynn("The captain shakes his head and pulls out something from his pouch. It’s a muzzle.")
 		
 		saynn("[say=captain]If you’re gonna be a rebel, prepare to be punished like a rebel[/say]")
 		
-		saynn("He shoves his knee into your chest, causing a painful feeling, before suddenly shoving the ballgag into your mouth and tightening the straps around your head.")
+		saynn("He shoves his knee into your chest, causing a painful feeling, before putting the muzzle on your face and tightening the straps around your head.")
 		
-		addButton("Get gagged", "You're too weak to resist", "getgagged")
+		addButton("Get muzzled", "You're too weak to resist", "getgagged")
 	
 	if(state == "getgagged"):
 		saynn("He then stands up and gestures the guard")
@@ -280,8 +280,8 @@ func _react(_action: String, _args):
 	if(_action == "getgagged"):
 		processTime(10 * 60)
 		
-		GM.pc.getInventory().equipItem(GlobalRegistry.createItem("ballgag"))
-		addMessage("A gag was forced on you!")
+		GM.pc.getInventory().equipItem(GlobalRegistry.createItem("basketmuzzle"))
+		addMessage("A basket cage muzzle was forced on you!")
 		
 	if(_action == "cuffs"):
 		processTime(10 * 60)

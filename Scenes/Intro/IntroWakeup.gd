@@ -18,7 +18,7 @@ func _run():
 		saynn("[say=risha]Lazy time is over, inmate, I want you to go to the mineshafts level and do actual work[/say]")
 
 		if(GM.pc.getInventory().hasSlotEquipped(InventorySlot.Mouth)):
-			saynn("The guard also takes a note of your head harness and the rubber ball that forces you to drool onto the floor.")
+			saynn("The guard also takes a note of your head harness.")
 
 			saynn("[say=risha]Ha, it seems like no one has taken it off since yesterday. And so won’t I, that's what you get for being bitey, brat.[/say]")
 
