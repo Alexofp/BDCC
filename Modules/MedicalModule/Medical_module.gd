@@ -47,6 +47,7 @@ func _init():
 		"res://Modules/MedicalModule/MentalWard/MentalLatexParasite.gd",
 		"res://Modules/MedicalModule/MentalWard/MentalShower.gd",
 		"res://Modules/MedicalModule/MentalWard/MentalKeycardEscape.gd",
+		"res://Modules/MedicalModule/MentalWard/MentalCheckupFinal.gd",
 		]
 	characters = [
 		"res://Modules/MedicalModule/MentalWard/LatexParasite.gd",

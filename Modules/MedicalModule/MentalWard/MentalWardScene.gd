@@ -106,7 +106,11 @@ func _react(_action: String, _args):
 			setFlag(MedicalModule.Mental_CheckupHappened, true)
 			
 			if(isPCWearingAStraitjacket()):
-				runScene("MentalCheckup1")
+				if(getFlag(MedicalModule.Mental_PCSanity, 0.0) >= 1.0):
+					runScene("MentalCheckupFinal", [], "finalCheckup")
+				else:
+					# Random checkup scene
+					runScene("MentalCheckup1")
 			else:
 				runScene("MentalCheckupNoJacket", [], "mentalnojacketfight")
 			
@@ -153,6 +157,7 @@ func _react(_action: String, _args):
 			setState("resting")
 			GM.pc.addStamina(20)
 			processTime(60*60*2)
+		MedicalModule.addPCSanity(RNG.randf_range(0.03, 0.06))
 		return
 
 	if(_action == "endthescene"):
@@ -178,6 +183,16 @@ func isPCWearingAStraitjacket():
 	return false
 
 func _react_scene_end(_tag, _result):
+	if(_tag == "finalCheckup"):
+		if(_result.size() > 0):
+			var res = _result[0]
+			
+			if(res == "escape" || res == "good"):
+				endScene()
+				
+			if(res == "sleep"):
+				_react("dosleep", [])
+	
 	if(_tag == "mentalnojacketfight"):
 		if(_result.size() > 0):
 			var shouldStop = _result[0]
