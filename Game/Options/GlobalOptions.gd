@@ -2,6 +2,7 @@ extends Node
 
 var enabledContent = {}
 const optionsFilepath = "user://options.json"
+var fetchNewRelease = true
 
 func _init():
 
@@ -14,6 +15,9 @@ func isContentEnabled(contentType):
 		return !ContentType.isDisabledByDefault(contentType)
 	
 	return enabledContent[contentType]
+
+func shouldFetchGithubRelease():
+	return fetchNewRelease
 
 func getChangeableOptions():
 	var settings = [
@@ -39,6 +43,18 @@ func getChangeableOptions():
 					],
 				},
 			],
+		},
+		{
+			"name": "Other",
+			"id": "other",
+			"options": [
+				{
+					"name": "Fetch latest release",
+					"id": "fetchLatestRelease",
+					"type": "checkbox",
+					"value": fetchNewRelease,
+				},
+			],
 		}
 	]
 	
@@ -59,11 +75,17 @@ func getChangeableOptions():
 	return settings
 
 func applyOption(categoryID, optionID, value):
+	if(categoryID == "other"):
+		if(optionID == "fetchLatestRelease"):
+			fetchNewRelease = value
+	
 	if(categoryID == "enabledContent"):
 		enabledContent[optionID] = value
 	print("SETTING "+categoryID+":"+optionID+" TO "+str(value))
 
 func resetToDefaults():
+	fetchNewRelease = true
+	
 	enabledContent.clear()
 	for contentType in ContentType.getAll():
 		enabledContent[contentType] = !ContentType.isDisabledByDefault(contentType)
@@ -72,12 +94,14 @@ func saveData():
 	var data = {
 		"optionsVersion": 1,
 		"enabledContent": enabledContent,
+		"fetchNewRelease": fetchNewRelease,
 	}
 	
 	return data
 
 func loadData(data):
 	enabledContent = loadVar(data, "enabledContent", {})
+	fetchNewRelease = loadVar(data, "fetchNewRelease", true)
 
 func saveToFile():
 	var saveData = saveData()
@@ -107,11 +131,11 @@ func loadFromFile():
 
 func loadVar(data: Dictionary, key, nullvalue = null):
 	if(!data.has(key)):
-		printerr("Warning: Save doesn't have key "+key+". Using "+str(nullvalue)+" as default value. File: "+get_stack()[1]["source"]+" Line: "+str(get_stack()[1]["line"]))
+		printerr("Warning: Options file doesn't have key "+key+". Using "+str(nullvalue)+" as default value. File: "+get_stack()[1]["source"]+" Line: "+str(get_stack()[1]["line"]))
 		return nullvalue
 		
 	if(nullvalue != null && typeof(data[key]) != typeof(nullvalue) && !(typeof(data[key]) == TYPE_REAL && typeof(nullvalue) == TYPE_INT)):
-		printerr("Warning: value mismatch when loading a save. Key '"+key+"' has type "+Util.variantTypeToString(typeof(data[key]))+" and default value has type "+Util.variantTypeToString(typeof(nullvalue))+". Is that an error? File: "+get_stack()[1]["source"]+" Line: "+str(get_stack()[1]["line"]))
+		printerr("Warning: value mismatch when loading an options file. Key '"+key+"' has type "+Util.variantTypeToString(typeof(data[key]))+" and default value has type "+Util.variantTypeToString(typeof(nullvalue))+". Is that an error? File: "+get_stack()[1]["source"]+" Line: "+str(get_stack()[1]["line"]))
 		
 	if(data[key] == null && nullvalue != null):
 		printerr("Warning: loaded value is null while the default value isn't. Is that correct? File: "+get_stack()[1]["source"]+" Line: "+str(get_stack()[1]["line"]))

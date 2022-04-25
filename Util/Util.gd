@@ -100,6 +100,28 @@ static func getTimeStringHHMM(t):
 	
 	return time
 
+static func ISO8601DateToDatetime(t):
+	var tsplit = t.split("T")
+	if(tsplit.size() < 2):
+		return null
+	
+	var date = tsplit[0].split("-")
+	var time = tsplit[1].trim_suffix("Z").split(":")
+
+	if(date.size() < 3 || time.size() < 3):
+		return null
+
+	var dict = {
+		year = date[0],
+		month = date[1],
+		day = date[2],
+		hour = time[0],
+		minute = time[1],
+		second = time[2],
+	}
+	var timeUnix = OS.get_unix_time_from_datetime(dict)
+	return OS.get_datetime_from_unix_time(timeUnix)
+
 static func getSpeciesName(species: Array):
 	if(species.size() == 0):
 		return "Unknown species"
