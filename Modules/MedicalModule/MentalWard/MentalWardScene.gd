@@ -77,7 +77,7 @@ func _run():
 		else:
 			sayn("Clear mind")
 			
-		addButton("Rest", "Spend some time idling", "rest")
+		addButton("Wait", "Spend some time idling", "rest")
 		addButton("Struggle", "Try to struggle out of your restraints", "struggle")
 		if(getFlag(MedicalModule.Mental_HasKeycard, false)):
 			addButton("Escape", "Use the keycard to escape", "doescape")
@@ -155,9 +155,8 @@ func _react(_action: String, _args):
 			setState("sleeping")
 		else:
 			setState("resting")
-			GM.pc.addStamina(20)
 			processTime(60*60*2)
-		MedicalModule.addPCSanity(RNG.randf_range(0.03, 0.06))
+		MedicalModule.addPCSanity(RNG.randf_range(0.02, 0.05))
 		return
 
 	if(_action == "endthescene"):
@@ -165,7 +164,7 @@ func _react(_action: String, _args):
 		return
 		
 	if(_action == "struggle"):
-		runScene("StrugglingScene")
+		runScene("StrugglingScene", [], "struggle")
 		setState("")
 		return
 		
@@ -183,6 +182,9 @@ func isPCWearingAStraitjacket():
 	return false
 
 func _react_scene_end(_tag, _result):
+	if(_tag == "struggle"):
+		_react("rest", [])
+	
 	if(_tag == "finalCheckup"):
 		if(_result.size() > 0):
 			var res = _result[0]
