@@ -950,7 +950,7 @@ func calculateBestRestraintLevel():
 
 func addIntoxication(howmuch: float):
 	intoxication += howmuch
-	intoxication = clamp(intoxication, 0.0, 1.0)
+	intoxication = clamp(intoxication, 0.0, 2.0)
 	
 	if(intoxication >= 0.5):
 		intoxicationTolerance += howmuch / 20.0
@@ -971,13 +971,11 @@ func getIntoxicationMod() -> float:
 	
 	return 1.0 - (intoxicationTolerance - 0.1) / 0.9 * 0.4
 
-func canIntoxicateMore(howmuch: float):
-	var free = 1.0 - getIntoxicationLevel()
-	if(free >= howmuch):
-		return true
-	if(free >= 0.1):
-		return true
-	return false
+func canIntoxicateMore(_howmuch: float):
+	if(getIntoxicationLevel() >= 1.0):
+		return false
+
+	return true
 
 func addTimedBuffs(buffs: Array, seconds):
 	for newbuff in buffs:
