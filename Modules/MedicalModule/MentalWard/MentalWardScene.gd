@@ -110,7 +110,9 @@ func _react(_action: String, _args):
 					runScene("MentalCheckupFinal", [], "finalCheckup")
 				else:
 					# Random checkup scene
-					runScene("MentalCheckup1")
+					var possibleScenes = ["MentalCheckup1", "MentalCheckup2"]
+					
+					runScene(RNG.pick(possibleScenes))
 			else:
 				runScene("MentalCheckupNoJacket", [], "mentalnojacketfight")
 			
@@ -156,7 +158,7 @@ func _react(_action: String, _args):
 		else:
 			setState("resting")
 			processTime(60*60*2)
-		MedicalModule.addPCSanity(RNG.randf_range(0.02, 0.05))
+		MedicalModule.addPCSanity(RNG.randf_range(0.02, 0.04))
 		return
 
 	if(_action == "endthescene"):
@@ -190,6 +192,9 @@ func _react_scene_end(_tag, _result):
 			var res = _result[0]
 			
 			if(res == "escape" || res == "good"):
+				if(res == "good"):
+					GM.pc.getInventory().unequipSlotRemoveIfRestraint(InventorySlot.Body)
+				
 				endScene()
 				
 			if(res == "sleep"):

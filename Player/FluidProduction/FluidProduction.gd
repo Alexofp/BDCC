@@ -10,9 +10,11 @@ func getCapacity() -> float:
 func getFluidAmount() -> float:
 	return fluidAmount
 
-func drain() -> float:
-	var result = fluidAmount
-	fluidAmount = 0
+func drain(howmuch = 1.0) -> float:
+	var result = fluidAmount * howmuch
+	fluidAmount = fluidAmount * (1.0 - howmuch)
+	if(fluidAmount < 0.001):
+		fluidAmount= 0.0
 	return result
 
 func afterMilked():

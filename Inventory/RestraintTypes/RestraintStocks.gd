@@ -1,6 +1,9 @@
 extends RestraintData
 class_name RestraintStocks
 
+func resetOnNewDay():
+	pass
+
 func getVisibleTightness():
 	if(tightness > 0.9):
 		return "very sturdy"

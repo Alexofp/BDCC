@@ -92,7 +92,7 @@ func _react(_action: String, _args):
 		MedicalModule.addPCBehavior(-0.1)
 		
 	if(_action == "obey"):
-		MedicalModule.addPCBehavior(0.1)
+		MedicalModule.addPCBehavior(0.05)
 
 	if(_action == "endthescene"):
 		endScene()

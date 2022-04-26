@@ -410,6 +410,11 @@ _global_script_classes=[ {
 "path": "res://Inventory/RestraintTypes/RestraintStocks.gd"
 }, {
 "base": "RestraintData",
+"class": "RestraintStraitjacket",
+"language": "GDScript",
+"path": "res://Inventory/RestraintTypes/RestraintStraitjacket.gd"
+}, {
+"base": "RestraintData",
 "class": "RestraintUnremovable",
 "language": "GDScript",
 "path": "res://Inventory/RestraintTypes/RestraintUnremovable.gd"
@@ -625,6 +630,7 @@ _global_script_class_icons={
 "RestraintMittens": "",
 "RestraintRopeHarness": "",
 "RestraintStocks": "",
+"RestraintStraitjacket": "",
 "RestraintUnremovable": "",
 "RestraintVaginalplug": "",
 "RoomAction": "",

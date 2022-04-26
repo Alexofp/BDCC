@@ -36,7 +36,7 @@ func getLevelDamage():
 	return 0.5 / pow(max(1.0, level), 0.8)
 
 func getStatDamageMult():
-	return 1.0 + GM.pc.getStat(Stat.Strength) / 50.0
+	return 1.0 + GM.pc.getStat(Stat.Strength) / 20.0
 
 func calcDamage(mult = 1.0):
 	return mult * getLevelDamage() * getStatDamageMult() * RNG.randf_range(0.8, 1.0)

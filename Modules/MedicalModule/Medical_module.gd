@@ -41,6 +41,7 @@ func _init():
 		
 		"res://Modules/MedicalModule/MentalWard/MentalWardScene.gd",
 		"res://Modules/MedicalModule/MentalWard/MentalCheckup1.gd",
+		"res://Modules/MedicalModule/MentalWard/MentalCheckup2.gd",
 		"res://Modules/MedicalModule/MentalWard/MentalCheckupNoJacket.gd",
 		"res://Modules/MedicalModule/MentalWard/MentalObedienceDrug1.gd",
 		"res://Modules/MedicalModule/MentalWard/MentalObedienceDrug2.gd",

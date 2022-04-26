@@ -122,6 +122,13 @@ static func ISO8601DateToDatetime(t):
 	var timeUnix = OS.get_unix_time_from_datetime(dict)
 	return OS.get_datetime_from_unix_time(timeUnix)
 
+static func roundF(number: float, digitsAmount: int = 0):
+	var mult = 1.0
+	for _i in range(digitsAmount):
+		mult *= 10.0
+	
+	return round(number/mult)*mult
+
 static func getSpeciesName(species: Array):
 	if(species.size() == 0):
 		return "Unknown species"

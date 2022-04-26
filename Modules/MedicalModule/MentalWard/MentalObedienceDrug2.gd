@@ -345,6 +345,9 @@ func _run():
 		addButton("Continue", "See what happens next", "endthescene")
 
 func _react(_action: String, _args):
+	if(_action == "sayrealname"):
+		MedicalModule.addPCBehavior(0.05)
+	
 	if(_action == "open_mouth"):
 		MedicalModule.addPCBehavior(0.1)
 	

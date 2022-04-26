@@ -29,5 +29,5 @@ func coversBodyparts():
 	return [BodypartSlot.Body, BodypartSlot.Vagina, BodypartSlot.Penis]
 
 func generateRestraintData():
-	restraintData = RestraintMittens.new()
+	restraintData = RestraintStraitjacket.new()
 	restraintData.setLevel(5)
