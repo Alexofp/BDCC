@@ -2,6 +2,8 @@ extends Node
 class_name StatusEffect
 
 const Bleeding = "Bleeding"
+const ArtificialHeat = "ArtificialHeat"
+const Weakness = "Weakness"
 const Collapsed = "Collapsed"
 const ArmsBound = "ArmsBound"
 const HandsBlocked = "HandsBlocked"

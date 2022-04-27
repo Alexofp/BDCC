@@ -213,7 +213,7 @@ func isPlayer():
 	return false
 
 func _getAttacks():
-	return ["baseattack"]
+	return ["blunderAttack"]
 	
 func getAttacks():
 	return _getAttacks()
