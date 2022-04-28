@@ -55,95 +55,118 @@ position = Vector2( 128, -192 )
 [node name="MedRoom11" parent="." index="11" instance=ExtResource( 2 )]
 position = Vector2( 128, -256 )
 gridColor = 2
+loctag_MentalWard = true
 
 [node name="MedRoom12" parent="." index="12" instance=ExtResource( 2 )]
 position = Vector2( 128, -320 )
 gridColor = 2
+loctag_MentalWard = true
 
 [node name="MedRoom13" parent="." index="13" instance=ExtResource( 2 )]
 position = Vector2( 64, -320 )
 gridColor = 2
+loctag_MentalWard = true
 
 [node name="MedRoom14" parent="." index="14" instance=ExtResource( 2 )]
 position = Vector2( 0, -320 )
 roomID = "medical_firstcorridorcross"
 gridColor = 2
+loctag_MentalWard = true
 
 [node name="MedRoom21" parent="." index="15" instance=ExtResource( 2 )]
 position = Vector2( 0, -384 )
 gridColor = 2
+loctag_MentalWard = true
 
 [node name="MedRoom22" parent="." index="16" instance=ExtResource( 2 )]
 position = Vector2( 0, -448 )
 gridColor = 2
+loctag_MentalWard = true
 
 [node name="MedRoom23" parent="." index="17" instance=ExtResource( 2 )]
 position = Vector2( -64, -448 )
 gridColor = 2
+loctag_MentalWard = true
 
 [node name="MedRoom24" parent="." index="18" instance=ExtResource( 2 )]
 position = Vector2( 64, -448 )
 gridColor = 2
+loctag_MentalWard = true
 
 [node name="MedRoom25" parent="." index="19" instance=ExtResource( 2 )]
 position = Vector2( 128, -448 )
 gridColor = 2
+loctag_MentalWard = true
 
 [node name="MedRoom26" parent="." index="20" instance=ExtResource( 2 )]
 position = Vector2( 128, -512 )
 gridColor = 2
+loctag_MentalWard = true
 
 [node name="MedRoom27" parent="." index="21" instance=ExtResource( 2 )]
 position = Vector2( 128, -576 )
 gridColor = 2
+loctag_MentalWard = true
 
 [node name="MedRoom28" parent="." index="22" instance=ExtResource( 2 )]
 position = Vector2( -128, -448 )
 gridColor = 2
+loctag_MentalWard = true
 
 [node name="MedRoom29" parent="." index="23" instance=ExtResource( 2 )]
 position = Vector2( -128, -512 )
 gridColor = 2
+loctag_MentalWard = true
 
 [node name="MedRoom45" parent="." index="24" instance=ExtResource( 2 )]
 position = Vector2( -192, -512 )
 gridColor = 2
+loctag_MentalWard = true
 
 [node name="MedRoom30" parent="." index="25" instance=ExtResource( 2 )]
 position = Vector2( -128, -576 )
 gridColor = 2
+loctag_MentalWard = true
 
 [node name="MedRoom42" parent="." index="26" instance=ExtResource( 2 )]
 position = Vector2( -64, -576 )
 gridColor = 2
+loctag_MentalWard = true
 
 [node name="MedRoom43" parent="." index="27" instance=ExtResource( 2 )]
 position = Vector2( 0, -576 )
 gridColor = 2
+loctag_MentalWard = true
 
 [node name="MedRoom44" parent="." index="28" instance=ExtResource( 2 )]
 position = Vector2( 64, -576 )
 gridColor = 2
+loctag_MentalWard = true
 
 [node name="MedRoom31" parent="." index="29" instance=ExtResource( 2 )]
 position = Vector2( 192, -512 )
 gridColor = 2
+loctag_MentalWard = true
 
 [node name="MedRoom32" parent="." index="30" instance=ExtResource( 2 )]
 position = Vector2( 256, -512 )
 gridColor = 2
+loctag_MentalWard = true
 
 [node name="MedRoom33" parent="." index="31" instance=ExtResource( 2 )]
 position = Vector2( 320, -512 )
 gridColor = 2
+loctag_MentalWard = true
 
 [node name="MedRoom46" parent="." index="32" instance=ExtResource( 2 )]
 position = Vector2( -256, -256 )
 gridColor = 2
+loctag_MentalWard = true
 
 [node name="MedRoom47" parent="." index="33" instance=ExtResource( 2 )]
 position = Vector2( -256, -384 )
 gridColor = 2
+loctag_MentalWard = true
 
 [node name="MedRoom50" parent="." index="34" instance=ExtResource( 2 )]
 position = Vector2( -320, -384 )
@@ -161,10 +184,12 @@ roomSprite = 7
 [node name="MedRoom48" parent="." index="37" instance=ExtResource( 2 )]
 position = Vector2( -256, -320 )
 gridColor = 2
+loctag_MentalWard = true
 
 [node name="MedRoom49" parent="." index="38" instance=ExtResource( 2 )]
 position = Vector2( -192, -320 )
 gridColor = 2
+loctag_MentalWard = true
 
 [node name="MedRoom34" parent="." index="39" instance=ExtResource( 2 )]
 position = Vector2( 256, -384 )
@@ -176,22 +201,28 @@ canSouth = false
 [node name="MedRoom35" parent="." index="40" instance=ExtResource( 2 )]
 position = Vector2( 320, -384 )
 gridColor = 2
+loctag_MentalWard = true
 
 [node name="MedRoom40" parent="." index="41" instance=ExtResource( 2 )]
 position = Vector2( 256, -448 )
 gridColor = 2
+loctag_MentalWard = true
 
 [node name="MedRoom41" parent="." index="42" instance=ExtResource( 2 )]
 position = Vector2( 320, -448 )
 gridColor = 2
+loctag_MentalWard = true
 
 [node name="MedRoom36" parent="." index="43" instance=ExtResource( 2 )]
 position = Vector2( 320, -320 )
+roomID = "medical_near_pccell"
 gridColor = 2
+loctag_MentalWard = true
 
 [node name="MedRoom37" parent="." index="44" instance=ExtResource( 2 )]
 position = Vector2( 320, -256 )
 gridColor = 2
+loctag_MentalWard = true
 
 [node name="MedRoom38" parent="." index="45" instance=ExtResource( 2 )]
 position = Vector2( 256, -320 )
@@ -211,14 +242,17 @@ canSouth = false
 [node name="MedRoom15" parent="." index="47" instance=ExtResource( 2 )]
 position = Vector2( -64, -320 )
 gridColor = 2
+loctag_MentalWard = true
 
 [node name="MedRoom16" parent="." index="48" instance=ExtResource( 2 )]
 position = Vector2( -128, -320 )
 gridColor = 2
+loctag_MentalWard = true
 
 [node name="MedRoom17" parent="." index="49" instance=ExtResource( 2 )]
 position = Vector2( -128, -256 )
 gridColor = 2
+loctag_MentalWard = true
 
 [node name="MedRoom18" parent="." index="50" instance=ExtResource( 2 )]
 position = Vector2( -128, -192 )

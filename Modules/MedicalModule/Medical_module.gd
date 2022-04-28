@@ -38,6 +38,7 @@ func _init():
 		"res://Modules/MedicalModule/ElizaHandSeedMilking.gd",
 		"res://Modules/MedicalModule/ElizaProstateMilking.gd",
 		"res://Modules/MedicalModule/ElizaGetIntoMentalWard.gd",
+		"res://Modules/MedicalModule/ElizaCaughtEscapedPC.gd",
 		
 		"res://Modules/MedicalModule/MentalWard/MentalWardScene.gd",
 		"res://Modules/MedicalModule/MentalWard/MentalCheckup1.gd",
@@ -49,13 +50,17 @@ func _init():
 		"res://Modules/MedicalModule/MentalWard/MentalShower.gd",
 		"res://Modules/MedicalModule/MentalWard/MentalKeycardEscape.gd",
 		"res://Modules/MedicalModule/MentalWard/MentalCheckupFinal.gd",
+		
+		"res://Modules/MedicalModule/NurseFelineOffLimits.gd",
 		]
 	characters = [
 		"res://Modules/MedicalModule/MentalWard/LatexParasite.gd",
+		"res://Modules/MedicalModule/NurseFeline.gd",
 	]
 	items = []
 	events = [
 		"res://Modules/MedicalModule/ElizaTalkEvent.gd",
+		"res://Modules/MedicalModule/CaughtOffLimitsInMentalEvent.gd",
 	]
 
 func resetFlagsOnNewDay():
