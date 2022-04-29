@@ -11,6 +11,7 @@ script = ExtResource( 3 )
 self_modulate = Color( 1, 0.6, 0.6, 1 )
 roomName = "Security checkpoint"
 roomID = "hall_checkpoint"
+roomDescription = "A short corridor that connects the cellblock and the elevator. A guard checkpoint is placed here."
 roomSprite = 1
 roomColor = 2
 
@@ -41,6 +42,7 @@ self_modulate = Color( 1, 0.6, 0.6, 1 )
 position = Vector2( 0, -64 )
 roomName = "Main elevator"
 roomID = "hall_elevator"
+roomDescription = "Spacious elevator that can move people or a huge amount of cargo between floors. Walls are made out of black painted metal, you notice a control panel that has a few buttons."
 roomSprite = 3
 roomColor = 2
 

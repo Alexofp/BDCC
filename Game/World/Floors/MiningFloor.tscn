@@ -37,6 +37,7 @@ self_modulate = Color( 1, 0.6, 0.6, 1 )
 position = Vector2( 0, 64 )
 roomName = "Elevator"
 roomID = "mining_elevator"
+roomDescription = "Spacious elevator that can move people or a huge amount of cargo between floors. Walls are made out of black painted metal, you notice a control panel that has a few buttons."
 roomSprite = 3
 roomColor = 2
 
