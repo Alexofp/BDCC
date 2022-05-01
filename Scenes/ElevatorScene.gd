@@ -14,6 +14,10 @@ func _run():
 			["Mineshafts", "mining_elevator", "Lower level where the prison is attached to an asteroid"],
 			["Medical", "med_elevator", "Floor that has all the medical and science facilities"],
 		]
+		if(true):
+			floors.append([
+				"Command deck", "cd_elevator", "Where all the higher-ups live"
+			])
 		
 		for fl in floors:
 			if(fl[1] == GM.pc.location):
