@@ -254,6 +254,14 @@ func setLocationName(locationName: String):
 func aimCamera(roomID: String):
 	GM.world.aimCamera(roomID)
 
+func aimCameraAndSetLocName(roomID: String):
+	GM.world.aimCamera(roomID)
+	
+	var room = GM.world.getRoomByID(roomID)
+	if(!room):
+		return
+	setLocationName(room.getName())
+
 func saveData():
 	var data = {}
 	data["state"] = state

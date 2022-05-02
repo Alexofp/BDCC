@@ -9,6 +9,10 @@ const Tavi_GotApple = "Tavi_GotApple"
 const Tavi_AngryUntilDay = "Tavi_AngryUntilDay"
 const Tavi_Submissiveness = "Tavi_Submissiveness"
 
+const Tavi_Quest2Started = "Tavi_Quest2Started"
+const Tavi_Quest2Day = "Tavi_Quest2Day"
+const Tavi_Quest2MetHer = "Tavi_Quest2MetHer"
+
 func _init():
 	id = "TaviModule"
 	author = "Rahi"
@@ -20,16 +24,24 @@ func _init():
 		"res://Modules/TaviModule/TaviSubmitToScene.gd",
 		"res://Modules/TaviModule/DominateTaviScene.gd",
 		"res://Modules/TaviModule/DegradeTaviScene.gd",
+		
+		"res://Modules/TaviModule/Quest2/TaviQuest2Start.gd",
+		"res://Modules/TaviModule/Quest2/TaviQuest2Meet.gd",
 		]
 	characters = []
 	items = []
 	events = [
 		"res://Modules/TaviModule/TaviTalkEvent.gd",
 		"res://Modules/TaviModule/TaviFirstEncounterEvent.gd",
+		"res://Modules/TaviModule/Quest2/TaviQuest2TalkEvent.gd",
 	]
 	quests = [
 		"res://Modules/TaviModule/TaviAppleQuest.gd",
+		"res://Modules/TaviModule/Quest2/TaviQuest2.gd",
 	]
+
+func resetFlagsOnNewDay():
+	pass
 
 static func makeTaviAngry():
 	GM.main.setFlag(Tavi_IsAngryAtPlayer, true)

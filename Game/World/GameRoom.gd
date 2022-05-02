@@ -52,6 +52,7 @@ signal onReact(room, key)
 # Room tags
 export(bool) var loctag_Greenhouses = false
 export(bool) var loctag_MentalWard = false
+export(bool) var loctag_GuardsEncounter = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

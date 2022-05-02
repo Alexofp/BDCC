@@ -39,6 +39,9 @@ func _run():
 					addButton("Give apple", "Tavi wants an apple", "give_apple")
 				else:
 					addDisabledButton("Give apple", "You don't have one")
+					
+			if(GM.QS.isCompleted("TaviAppleQuest") && !getFlag(TaviModule.Tavi_Quest2Started, false)):
+				addButton("What now", "Ask Tavi what now", "quest2start")
 		
 		addButton("Leave", "Do something else", "endthescene")
 		
@@ -306,6 +309,11 @@ func _react(_action: String, _args):
 		
 	if(_action == "degradeTavi"):
 		runScene("DegradeTaviScene")
+		endScene()
+		return
+		
+	if(_action == "quest2start"):
+		runScene("TaviQuest2Start")
 		endScene()
 		return
 	
