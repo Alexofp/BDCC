@@ -11,7 +11,8 @@ func shouldRun():
 
 func run(_args):
 	if(_args == null || _args[0] == Direction.North):
-		runScene("MainCheckpointScene")
+		if(GM.pc.getInventory().getItemsWithTag(ItemTag.Illegal).size() > 0 || GM.pc.getInventory().getEquippedItemsWithTag(ItemTag.Illegal).size() > 0):
+			runScene("MainCheckpointScene")
 	
 func delayedRun():
 	pass
