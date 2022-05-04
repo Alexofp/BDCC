@@ -40,7 +40,7 @@ func addsIntoxication():
 
 func getTimedBuffs():
 	return [
-		buff(Buff.ExposureBuff, [100])
+		#buff(Buff.ExposureBuff, [100])
 	]
 
 func getBuffsDurationSeconds():
@@ -48,7 +48,7 @@ func getBuffsDurationSeconds():
 
 func getTimedBuffsTurns():
 	return [
-		buff(Buff.MaxLustBuff, [-20]),
+		#buff(Buff.MaxLustBuff, [-20]),
 		buff(Buff.MaxPainBuff, [20]),
 	]
 
