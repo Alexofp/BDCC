@@ -3,6 +3,43 @@ extends Character
 func _init():
 	id = "tavi"
 	
+	npcLevel = 5
+	npcBasePain = 90
+	npcBaseLust = 150
+	
+	npcLustInterests = {
+		InterestTopic.Gags: Interest.KindaLikes,
+		InterestTopic.Blindfolds: Interest.Hates,
+		InterestTopic.BDSMRestraints: Interest.ReallyLikes,
+		InterestTopic.FeminineBody: Interest.Likes,
+		InterestTopic.AndroBody: Interest.ReallyDislikes,
+		InterestTopic.MasculineBody: Interest.Likes,
+		InterestTopic.ThickBody: Interest.KindaLikes,
+		InterestTopic.AverageMassBody: Interest.Likes,
+		InterestTopic.SlimBody: Interest.KindaLikes,
+		InterestTopic.ThickButt: Interest.Dislikes,
+		InterestTopic.AverageButt: Interest.KindaLikes,
+		InterestTopic.SlimButt: Interest.Likes,
+		InterestTopic.BigBreasts: Interest.Hates,
+		InterestTopic.LactatingBreasts: Interest.Hates,
+		InterestTopic.StuffedPussy: Interest.Likes,
+		InterestTopic.StuffedAss: Interest.Likes,
+		InterestTopic.StuffedPussyOrAss: Interest.KindaLikes,
+		InterestTopic.StuffedThroat: Interest.Dislikes,
+		InterestTopic.CoveredInCum: Interest.ReallyLikes,
+		InterestTopic.CoveredInLotsOfCum: Interest.ReallyDislikes,
+		InterestTopic.FullyNaked: Interest.Likes,
+		InterestTopic.ExposedPanties: Interest.ReallyLikes,
+		InterestTopic.ExposedBra: Interest.ReallyLikes,
+		InterestTopic.LooseAnus: Interest.Hates,
+		InterestTopic.LoosePussy: Interest.Hates,
+		InterestTopic.TightAnus: Interest.Likes,
+		InterestTopic.TightPussy: Interest.Likes,
+		InterestTopic.HasVaginaAndCock: Interest.Dislikes,
+		InterestTopic.BigCock: Interest.ReallyDislikes,
+		InterestTopic.SmallCock: Interest.SlightlyDislikes,
+	}
+	
 func _getName():
 	return "Tavi"
 

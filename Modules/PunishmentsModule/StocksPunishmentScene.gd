@@ -15,8 +15,6 @@ func _run():
 
 		saynn("All you can do is wait while inmates and staff walk past you, minding their stuff. Though some look intrigued.")
 
-		saynn("((There are no sex scenes here yet so you will just be saved immediately))")
-
 		addButton("Wait", "Stay quiet and try to get some rest (You might get something done to you but you will never be fucked unwillingly)", "justwait")
 		addButton("Be loud", "Ask to be freed. You might not get the type of attention that you want. (Anything can happen)", "be_loud")
 		addButton("Struggle", "Maybe you can escape somehow", "struggle")
@@ -70,9 +68,9 @@ func triggerRandomEvent(escapeChance, _lewdChance, _willingSexChance, _unWilling
 
 func _react(_action: String, _args):
 	if(_action == "afterbeloud"):
-		processTime(60*5)
-		GM.pc.addStamina(10)
-		triggerRandomEvent(5, 50, 50, 30)
+		processTime(60*30)
+		GM.pc.addStamina(50)
+		triggerRandomEvent(3, 50, 50, 30)
 		setState("")
 		return
 	

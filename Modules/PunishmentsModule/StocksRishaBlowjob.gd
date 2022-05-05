@@ -110,7 +110,7 @@ func _react(_action: String, _args):
 			GM.pc.addBodywriting(zone, BodyWritings.getRandomWritingIDForZone(zone))
 			addMessage("Risha also left a memento on your "+BodyWritingsZone.getZoneVisibleName(zone)+"..")
 			
-		GM.pc.addTallymark(RNG.pick([BodyWritingsZone.CheekLeft, BodyWritingsZone.CheekRight]))
+		GM.pc.addTallymark(RNG.pick([BodyWritingsZone.CheekLeft])) #, BodyWritingsZone.CheekRight
 		GM.pc.cummedInMouthBy("risha")
 		GM.pc.cummedOnBy("risha")
 		GM.pc.addSkillExperience(Skill.SexSlave, 20, "risha_stocksblow")
