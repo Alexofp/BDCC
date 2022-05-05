@@ -9,6 +9,8 @@ onready var resumeButton = $HBoxContainer/MainVBox/GridContainer/ResumeButton
 onready var http_request = $HTTPRequest
 onready var gutHubReleaseLabel = $HBoxContainer/Panel/MarginContainer/VBoxContainer/GithubReleaseLabel
 onready var gitHubReleaseButton = $HBoxContainer/Panel/MarginContainer/VBoxContainer/GithubReleasesButton
+onready var devToolsScreen = $HBoxContainer/DevToolsScreen
+onready var devSubScreen = $HBoxContainer/DevToolsScreen/DevScreen
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -31,6 +33,7 @@ func hideAllMenus():
 	LoadGameTab.visible = false
 	optionsGameTab.visible = false
 	creditsGameTab.visible = false
+	devToolsScreen.visible = false
 
 func switchToMainMenu():
 	hideAllMenus()
@@ -109,3 +112,27 @@ func _on_HTTPRequest_request_completed(result, _response_code, _headers, body):
 
 func _on_GithubReleasesButton_pressed():
 	var _ok = OS.shell_open("https://github.com/Alexofp/BDCC/releases")
+
+
+func _on_DevClose_pressed():
+	hideAllMenus()
+	MainVBox.visible = true
+
+
+func _on_DevToolsButton_pressed():
+	hideAllMenus()
+	devToolsScreen.visible = true
+
+
+func _on_DevSceneConverter_pressed():
+	Util.delete_children(devSubScreen)
+	
+	var scene = load("res://Util/SceneConverter.tscn")
+	devSubScreen.add_child(scene.instance())
+
+
+func _on_DevLikesGenerator_pressed():
+	Util.delete_children(devSubScreen)
+	
+	var scene = load("res://UI/LikesGenerator/NpcLikesGenerator.tscn")
+	devSubScreen.add_child(scene.instance())

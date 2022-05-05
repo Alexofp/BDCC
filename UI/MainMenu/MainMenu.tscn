@@ -312,6 +312,59 @@ hint_tooltip = "Open the project's github page"
 size_flags_horizontal = 3
 text = "Github"
 
+[node name="DevToolsButton" type="Button" parent="HBoxContainer/MainVBox/GridContainer"]
+margin_left = 302.0
+margin_top = 30.0
+margin_right = 449.0
+margin_bottom = 56.0
+hint_tooltip = "Open the project's github page"
+size_flags_horizontal = 3
+text = "DevTools"
+
+[node name="DevToolsScreen" type="VBoxContainer" parent="HBoxContainer"]
+visible = false
+margin_left = 273.0
+margin_right = 1027.0
+margin_bottom = 720.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="DevScreen" type="Control" parent="HBoxContainer/DevToolsScreen"]
+margin_right = 754.0
+margin_bottom = 616.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="GridContainer" type="GridContainer" parent="HBoxContainer/DevToolsScreen"]
+margin_top = 620.0
+margin_right = 754.0
+margin_bottom = 720.0
+rect_min_size = Vector2( 0, 100 )
+columns = 5
+
+[node name="DevClose" type="Button" parent="HBoxContainer/DevToolsScreen/GridContainer"]
+margin_right = 149.0
+margin_bottom = 26.0
+hint_tooltip = "Open the project's github page"
+size_flags_horizontal = 3
+text = "Close"
+
+[node name="DevSceneConverter" type="Button" parent="HBoxContainer/DevToolsScreen/GridContainer"]
+margin_left = 153.0
+margin_right = 302.0
+margin_bottom = 26.0
+hint_tooltip = "Open the project's github page"
+size_flags_horizontal = 3
+text = "SceneConverter"
+
+[node name="DevLikesGenerator" type="Button" parent="HBoxContainer/DevToolsScreen/GridContainer"]
+margin_left = 306.0
+margin_right = 455.0
+margin_bottom = 26.0
+hint_tooltip = "Open the project's github page"
+size_flags_horizontal = 3
+text = "Npc Likes Gen."
+
 [node name="LoadGameScreen" parent="HBoxContainer" instance=ExtResource( 4 )]
 visible = false
 anchor_right = 0.0
@@ -324,7 +377,7 @@ margin_bottom = 720.0
 visible = false
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 730.0
+margin_left = 761.0
 margin_right = 1027.0
 margin_bottom = 720.0
 
@@ -388,6 +441,10 @@ text = "Github Releases"
 [connection signal="pressed" from="HBoxContainer/MainVBox/GridContainer/OptionsButton" to="." method="_on_OptionsButton_pressed"]
 [connection signal="pressed" from="HBoxContainer/MainVBox/GridContainer/CreditsButton" to="." method="_on_CreditsButton_pressed"]
 [connection signal="pressed" from="HBoxContainer/MainVBox/GridContainer/GithubButton" to="." method="_on_GithubButton_pressed"]
+[connection signal="pressed" from="HBoxContainer/MainVBox/GridContainer/DevToolsButton" to="." method="_on_DevToolsButton_pressed"]
+[connection signal="pressed" from="HBoxContainer/DevToolsScreen/GridContainer/DevClose" to="." method="_on_DevClose_pressed"]
+[connection signal="pressed" from="HBoxContainer/DevToolsScreen/GridContainer/DevSceneConverter" to="." method="_on_DevSceneConverter_pressed"]
+[connection signal="pressed" from="HBoxContainer/DevToolsScreen/GridContainer/DevLikesGenerator" to="." method="_on_DevLikesGenerator_pressed"]
 [connection signal="onClosePressed" from="HBoxContainer/LoadGameScreen" to="." method="switchToMainMenu"]
 [connection signal="onClosePressed" from="HBoxContainer/OptionsScreen" to="." method="switchToMainMenu"]
 [connection signal="onClosePressed" from="HBoxContainer/CreditsScreen" to="." method="switchToMainMenu"]
