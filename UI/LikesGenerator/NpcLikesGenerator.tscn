@@ -18,34 +18,34 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
-margin_right = 748.0
+margin_right = 638.0
 margin_bottom = 720.0
 size_flags_horizontal = 3
 
 [node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer/VBoxContainer"]
-margin_right = 748.0
+margin_right = 638.0
 margin_bottom = 720.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 scroll_horizontal_enabled = false
 
 [node name="Options" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/ScrollContainer"]
-margin_right = 748.0
+margin_right = 487.0
 margin_bottom = 26.0
 
 [node name="NpcLikesLineUI" parent="HBoxContainer/VBoxContainer/ScrollContainer/Options" instance=ExtResource( 1 )]
 anchor_right = 0.0
-margin_right = 748.0
+margin_right = 487.0
 margin_bottom = 26.0
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="HBoxContainer"]
-margin_left = 752.0
+margin_left = 642.0
 margin_right = 1280.0
 margin_bottom = 720.0
 size_flags_horizontal = 3
 
 [node name="TextEdit" type="TextEdit" parent="HBoxContainer/VBoxContainer2"]
-margin_right = 528.0
+margin_right = 638.0
 margin_bottom = 720.0
 size_flags_horizontal = 3
 size_flags_vertical = 3

@@ -16,6 +16,7 @@ const BigBreasts = "BigBreasts"
 const SmallBreasts = "SmallBreasts"
 const MediumBreasts = "MediumBreasts"
 const NoBreasts = "NoBreasts"
+const LactatingBreasts = "LactatingBreasts"
 
 const NoVagina = "NoVagina"
 const HasVaginaOnly = "HasVaginaOnly"
@@ -33,3 +34,25 @@ const StuffedThroat = "StuffedThroat"
 
 const CoveredInCum = "CoveredInCum"
 const CoveredInLotsOfCum = "CoveredInLotsOfCum"
+
+const FullyNaked = "FullyNaked"
+const ExposedPussy = "ExposedPussy"
+const ExposedAnus = "ExposedAnus"
+const ExposedBreasts = "ExposedBreasts"
+const ExposedCock = "ExposedCock"
+const ExposedPanties = "ExposedPanties"
+const ExposedBra = "ExposedBra"
+
+const LooseAnus = "LooseAnus"
+const LoosePussy = "LoosePussy"
+const TightAnus = "TightAnus"
+const TightPussy = "TightPussy"
+
+const TallyMarks = "TallyMarks"
+const Bodywritings = "Bodywritings"
+
+const Gags = "Gags"
+const Blindfolds = "Blindfolds"
+const BDSMRestraints = "BDSMRestraints"
+const ButtPlugs = "ButtPlugs"
+const VaginalPlugs = "VaginalPlugs"

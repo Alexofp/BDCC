@@ -6,6 +6,7 @@ func _init():
 		InterestTopic.SmallBreasts,
 		InterestTopic.MediumBreasts,
 		InterestTopic.BigBreasts,
+		InterestTopic.LactatingBreasts,
 	]
 
 func getTopicValue(_topicID, _pc):
@@ -24,6 +25,10 @@ func getTopicValue(_topicID, _pc):
 	if(_topicID == InterestTopic.BigBreasts):
 		return constantIfAbove(size, BreastsSize.E, 1.0, linearCloseness(size, BreastsSize.E, 3.5))
 	
+	if(_topicID == InterestTopic.LactatingBreasts):
+		if(breasts.isProducingFluid()):
+			return 1.0
+	
 	return 0
 
 func getVisibleName(_topicID):
@@ -35,6 +40,8 @@ func getVisibleName(_topicID):
 		return "perky tits"
 	if(_topicID == InterestTopic.BigBreasts):
 		return "huge milkers"
+	if(_topicID == InterestTopic.LactatingBreasts):
+		return "lactation"
 	
 	return "error:"+str(_topicID)
 

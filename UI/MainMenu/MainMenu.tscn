@@ -317,7 +317,7 @@ margin_left = 302.0
 margin_top = 30.0
 margin_right = 449.0
 margin_bottom = 56.0
-hint_tooltip = "Open the project's github page"
+hint_tooltip = "Open the panel with the tools that are useful for content developers"
 size_flags_horizontal = 3
 text = "DevTools"
 
@@ -345,7 +345,6 @@ columns = 5
 [node name="DevClose" type="Button" parent="HBoxContainer/DevToolsScreen/GridContainer"]
 margin_right = 149.0
 margin_bottom = 26.0
-hint_tooltip = "Open the project's github page"
 size_flags_horizontal = 3
 text = "Close"
 
@@ -353,7 +352,7 @@ text = "Close"
 margin_left = 153.0
 margin_right = 302.0
 margin_bottom = 26.0
-hint_tooltip = "Open the project's github page"
+hint_tooltip = "Converts scenes from plain-text format into what the game can use"
 size_flags_horizontal = 3
 text = "SceneConverter"
 
@@ -361,7 +360,7 @@ text = "SceneConverter"
 margin_left = 306.0
 margin_right = 455.0
 margin_bottom = 26.0
-hint_tooltip = "Open the project's github page"
+hint_tooltip = "Panel for easy creation of npc likes/dislikes tables. Used for lust combat"
 size_flags_horizontal = 3
 text = "Npc Likes Gen."
 

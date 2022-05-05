@@ -48,7 +48,7 @@ func updateButtons():
 			buttons[i].disabled = true
 		else:
 			buttons[i].disabled = false
-		buttons[i].hint_tooltip = str(interests[i]) +" "+ $Label.text
+		buttons[i].hint_tooltip = str(interests[i]) +" seeing "+ $Label.text
 		
 func setCurrentValue(val):
 	currentValue = val
