@@ -26,6 +26,7 @@ var perks: Dictionary = {}
 var perksBySkillGroups: Dictionary = {}
 var perksObjects: Dictionary = {}
 var lustTopics: Dictionary = {}
+var lustTopicsObjects: Array = []
 
 var bodypartStorageNode
 
@@ -581,6 +582,7 @@ func registerLustTopic(path: String):
 	for id in ids:
 		assert(!lustTopics.has(id))
 		lustTopics[id] = itemObject
+	lustTopicsObjects.append(itemObject)
 
 func registerLustTopicFolder(folder: String):
 	var dir = Directory.new()
@@ -606,4 +608,5 @@ func getLustTopic(id: String):
 		return null
 	return lustTopics[id]
 
-
+func getLustTopicObjects():
+	return lustTopicsObjects
