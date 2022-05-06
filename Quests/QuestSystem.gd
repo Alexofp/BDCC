@@ -21,5 +21,10 @@ func isCompleted(questID):
 	
 	return quests[questID].isCompleted()
 
+func isActive(questID):
+	assert(quests.has(questID))
+	
+	return quests[questID].isVisible() && !quests[questID].isCompleted()
+
 func getQuests():
 	return quests

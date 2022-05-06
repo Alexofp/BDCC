@@ -12,6 +12,7 @@ const Tavi_Submissiveness = "Tavi_Submissiveness"
 const Tavi_Quest2Started = "Tavi_Quest2Started"
 const Tavi_Quest2Day = "Tavi_Quest2Day"
 const Tavi_Quest2MetHer = "Tavi_Quest2MetHer"
+const Tavi_Quest2Completed = "Tavi_Quest2Completed"
 
 func _init():
 	id = "TaviModule"
@@ -27,13 +28,17 @@ func _init():
 		
 		"res://Modules/TaviModule/Quest2/TaviQuest2Start.gd",
 		"res://Modules/TaviModule/Quest2/TaviQuest2Meet.gd",
+		"res://Modules/TaviModule/Quest2/TaviQuest2Skar.gd",
+		"res://Modules/TaviModule/Quest2/TaviQuest2CaptainsOffice.gd",
 		]
 	characters = []
 	items = []
 	events = [
 		"res://Modules/TaviModule/TaviTalkEvent.gd",
 		"res://Modules/TaviModule/TaviFirstEncounterEvent.gd",
+		
 		"res://Modules/TaviModule/Quest2/TaviQuest2TalkEvent.gd",
+		"res://Modules/TaviModule/Quest2/TaviQuest2SkarEvent.gd",
 	]
 	quests = [
 		"res://Modules/TaviModule/TaviAppleQuest.gd",

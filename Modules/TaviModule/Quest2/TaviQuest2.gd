@@ -4,7 +4,7 @@ func _init():
 	id = "TaviQuest2"
 
 func getVisibleName():
-	return "Syndicate"
+	return "The Syndicate"
 
 func getProgress():
 	var result = []
@@ -17,7 +17,7 @@ func isVisible():
 	return GM.main.getFlag(TaviModule.Tavi_Quest2Started)
 
 func isCompleted():
-	return false && GM.main.getFlag(TaviModule.Tavi_GotApple)
+	return GM.main.getFlag(TaviModule.Tavi_Quest2Completed)
 
 func isMainQuest():
 	return true

@@ -293,7 +293,10 @@ static func muffledSpeech(text: String, strenght: int = 1):
 		if(oldch != ch && isCapital):
 			ch = ch.capitalize()
 
-		newtext += ch
+		if(RNG.chance(50)):
+			newtext += ch
+		else:
+			newtext += oldch
 		
 	return newtext
 

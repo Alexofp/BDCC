@@ -90,11 +90,15 @@ loctag_GuardsEncounter = true
 
 [node name="CDRoom16" parent="." index="16" instance=ExtResource( 2 )]
 position = Vector2( 0, -512 )
+roomID = "cd_near_captain_office"
 roomSprite = 4
 gridColor = 2
 
 [node name="CDRoom17" parent="." index="17" instance=ExtResource( 2 )]
+self_modulate = Color( 0.7, 0.7, 1, 1 )
 position = Vector2( 0, -576 )
+roomID = "cd_captain_office"
+roomColor = 3
 
 [node name="CDRoom18" parent="." index="18" instance=ExtResource( 2 )]
 position = Vector2( 64, -64 )

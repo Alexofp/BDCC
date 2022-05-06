@@ -65,7 +65,7 @@ func getSpecies():
 	return ["wolf"]
 
 func _getAttacks():
-	return ["aitaunthumiliate", "stunbatonAttack", "stunbatonStrongAttack", "biteattack", "simplekickattack", "shoveattack", "trygetupattack"]
+	return ["HeatGrenade", "ForceMuzzlePC", "stunbatonAttack", "stunbatonStrongAttack", "stunbatonOverchargeAttack", "simplekickattack", "trygetupattack"]
 
 func getFightIntro(_battleName):
 	return "The guard holds his weapon tightly and waits for you to do the first move.\n\n"+formatSay("You know it’s only gonna end one way for you.")
