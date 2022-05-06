@@ -46,8 +46,16 @@ size_flags_horizontal = 3
 
 [node name="TextEdit" type="TextEdit" parent="HBoxContainer/VBoxContainer2"]
 margin_right = 638.0
-margin_bottom = 720.0
+margin_bottom = 690.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
+[node name="ConvertBackButton" type="Button" parent="HBoxContainer/VBoxContainer2"]
+margin_top = 694.0
+margin_right = 638.0
+margin_bottom = 720.0
+hint_tooltip = "Read likes/dislikes from text"
+text = "Text->List"
+
 [connection signal="onCurrentValueChange" from="HBoxContainer/VBoxContainer/ScrollContainer/Options/NpcLikesLineUI" to="." method="_on_NpcLikesLineUI_onCurrentValueChange"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer2/ConvertBackButton" to="." method="_on_ConvertBackButton_pressed"]
