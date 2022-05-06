@@ -136,3 +136,8 @@ func _on_DevLikesGenerator_pressed():
 	
 	var scene = load("res://UI/LikesGenerator/NpcLikesGenerator.tscn")
 	devSubScreen.add_child(scene.instance())
+
+
+func _on_DiscordButton_pressed():
+	var _ok = OS.shell_open("https://discord.gg/7UGYBvQrc3")
+	

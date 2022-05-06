@@ -298,9 +298,8 @@ text = "Credits"
 margin_top = 30.0
 margin_right = 147.0
 margin_bottom = 56.0
-hint_tooltip = "Soon"
+hint_tooltip = "Join the game's community on discord"
 size_flags_horizontal = 3
-disabled = true
 text = "Join Discord"
 
 [node name="GithubButton" type="Button" parent="HBoxContainer/MainVBox/GridContainer"]
@@ -439,6 +438,7 @@ text = "Github Releases"
 [connection signal="pressed" from="HBoxContainer/MainVBox/GridContainer/LoadGameButton" to="." method="_on_LoadGameButton_pressed"]
 [connection signal="pressed" from="HBoxContainer/MainVBox/GridContainer/OptionsButton" to="." method="_on_OptionsButton_pressed"]
 [connection signal="pressed" from="HBoxContainer/MainVBox/GridContainer/CreditsButton" to="." method="_on_CreditsButton_pressed"]
+[connection signal="pressed" from="HBoxContainer/MainVBox/GridContainer/DiscordButton" to="." method="_on_DiscordButton_pressed"]
 [connection signal="pressed" from="HBoxContainer/MainVBox/GridContainer/GithubButton" to="." method="_on_GithubButton_pressed"]
 [connection signal="pressed" from="HBoxContainer/MainVBox/GridContainer/DevToolsButton" to="." method="_on_DevToolsButton_pressed"]
 [connection signal="pressed" from="HBoxContainer/DevToolsScreen/GridContainer/DevClose" to="." method="_on_DevClose_pressed"]
