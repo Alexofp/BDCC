@@ -31,6 +31,7 @@ func _doAttack(_attacker, _receiver):
 	
 	_attacker.addStamina(messiness * staminaperlevel)
 	_attacker.removeEffect(StatusEffect.CoveredInCum)
+	_attacker.removeEffect(StatusEffect.Bleeding)
 	
 	text += "\n\n{attacker.name} swallows everything and receives [color="+DamageType.getColorString(DamageType.Stamina)+"]"+str(messiness*staminaperlevel)+" stamina[/color]!"
 	
@@ -42,3 +43,5 @@ func canBeDodgedByPlayer(_attacker, _receiver):
 func getRequirements():
 	return [["coveredincum"], ["freemouth"]]
 
+func getExperience():
+	return [[Skill.CumLover, 10]]

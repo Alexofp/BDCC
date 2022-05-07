@@ -1,0 +1,19 @@
+extends PerkBase
+
+func _init():
+	id = Perk.CombatBetterGetUp
+	skillGroup = Skill.Combat
+
+func getVisibleName():
+	return "Leap up"
+
+func getVisibleDescription():
+	return "With all your combat practice you have learned how to fall properly. You will get up with a 100% chance and can even do it the same turn you were knocked down"
+
+func getCost():
+	return 1
+func getSkillTier():
+	return 0
+
+func getPicture():
+	return "res://UI/StatusEffectsPanel/images/down.png"

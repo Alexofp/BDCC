@@ -3,8 +3,9 @@ class_name GuardLoot
 
 func _init():
 	loot = [
-		[5, ["lube"]],
+		[2, ["lube"]],
 		[7, ["painkillers"]],
+		[20, ["EnergyDrink"]],
 		[10, [["restraintkey", 1, 2]]],
 		[0.2, ["sportyBriefs"]],
 	]

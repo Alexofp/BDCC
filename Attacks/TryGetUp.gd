@@ -15,7 +15,7 @@ func _doAttack(_attacker, _receiver):
 	#var receiverName = _receiver.getName()
 	
 	var success = false
-	if(RNG.chance(70)):
+	if(RNG.chance(70) || _attacker.hasPerk(Perk.CombatBetterGetUp)):
 		_attacker.removeEffect(StatusEffect.Collapsed)
 		success = true
 	

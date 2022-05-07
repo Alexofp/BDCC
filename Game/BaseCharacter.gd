@@ -160,7 +160,7 @@ func canStandUpCombat():
 		return false
 	
 	var collapsedEffect = statusEffects[StatusEffect.Collapsed]
-	return collapsedEffect.canStandUp()
+	return collapsedEffect.canStandUp() || hasPerk(Perk.CombatBetterGetUp)
 	
 func getStatusEffects():
 	return statusEffects

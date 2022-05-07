@@ -70,6 +70,9 @@ func checkRequirement(_attacker, _receiver, req):
 	if(reqtype == "lustabovepercent"):
 		if(_attacker.getLustLevel() < req[1]):
 			return false
+	if(reqtype == "hasmilk"):
+		if(_attacker.getBodypart(BodypartSlot.Breasts).getProducedFluidAmount() < req[1]):
+			return false
 			
 	return true
 
@@ -102,6 +105,8 @@ func getRequirementText(req):
 	if(reqtype == "lustabovepercent"):
 		#return "Lust must be above "+str(int(req[1]*100))+"%"
 		return "Lust must be above "+str(int(req[1]*GM.pc.lustThreshold())) +" ("+str(int(req[1]*100))+"%)"
+	if(reqtype == "hasmilk"):
+		return "Must have at least "+str(Util.roundF(req[1], 1))+"ml of milk stored in breasts"
 			
 	return "Error: bad requirement:" + reqtype
 	

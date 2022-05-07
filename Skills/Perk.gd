@@ -5,6 +5,7 @@ class_name Perk
 const CombatShove = "CombatShove"
 const CombatBetterBlock = "CombatBetterBlock"
 const CombatScratching = "CombatScratching"
+const CombatBetterGetUp = "CombatBetterGetUp"
 
 # Cum Lover perks
 const CumBreath = "CumBreath"
@@ -18,6 +19,7 @@ const SexLustPassion = "SexLustPassion"
 const SexBetterDefocus = "SexBetterDefocus"
 const SexBiter = "SexBiter"
 const SexBetterTease = "SexBetterTease"
+const SexEdging = "SexEdging"
 
 # Exhibitionism perks
 const NakedNoShame = "NakedNoShame"
@@ -29,3 +31,7 @@ const BDSMBlindfold = "BDSMBlindfold"
 const BDSMBondageSlut = "BDSMBondageSlut"
 const BDSMCollector = "BDSMCollector"
 const BDSMBetterKeys = "BDSMBetterKeys"
+const BDSMTallyMarks = "BDSMTallyMarks"
+
+# Milking perks
+const MilkSquirt = "MilkSquirt"

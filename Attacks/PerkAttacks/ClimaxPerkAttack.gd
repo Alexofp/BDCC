@@ -34,3 +34,5 @@ func canBeDodgedByPlayer(_attacker, _receiver):
 func getRequirements():
 	return [["lustabovepercent", 0.9], ["stamina", 30], ["freearms"]]
 
+func getExperience():
+	return [[Skill.SexSlave, 10]]
