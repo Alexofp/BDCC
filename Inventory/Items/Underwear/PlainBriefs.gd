@@ -32,3 +32,6 @@ func getPuttingOnStringLong(withS):
 
 func coversBodyparts():
 	return [BodypartSlot.Vagina, BodypartSlot.Penis, BodypartSlot.Anus]
+
+func getPrice():
+	return 1

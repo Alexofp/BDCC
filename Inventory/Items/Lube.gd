@@ -27,7 +27,7 @@ func getPossibleActions():
 	]
 
 func getPrice():
-	return 0
+	return 1
 
 func canSell():
 	return true

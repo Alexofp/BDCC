@@ -62,9 +62,14 @@ func _run():
 				
 		addButton("Close", "Continue on your way", "endthescene")
 		addButtonUnlessLate("Wait here", "Spend some time idling", "wait")
-		addDisabledButton("Masturbate", "Not done")
+		addButton("Masturbate", "Do the thing", "domasturbate")
 		addButton("Gender", "Pick your gender", "pickgender")
 		addButton("Pronouns", "Pick your pronouns", "pickpronouns")
+
+	if(state == "domasturbate"):
+		saynn("You remove some stress by masturbating (temporary text)")
+		
+		addButton("Continue", "Good", "")
 
 	if(state == "pickgender"):
 		say("Pick your character's gender. This will affect the color of your speech and how others treat you. This can be changed at any point")
@@ -109,6 +114,10 @@ func _react(_action: String, _args):
 		GM.pc.setPronounGender(_args[0])
 		setState("")
 		return
+	
+	if(_action == "domasturbate"):
+		processTime(5*60)
+		GM.pc.orgasmFrom("pc")
 	
 	if(_action == "dowait"):
 		var newt = _args[0]

@@ -9,7 +9,7 @@ func getVisibleName():
 	return "Stolen Apple"
 	
 func getDescription():
-	return "Tasty looking apple. Will remove 20 pain and add 20 stamina"
+	return "Tasty looking apple. Will remove 20 pain and give 20 stamina"
 
 func canUseInCombat():
 	return true
@@ -30,7 +30,7 @@ func getPossibleActions():
 	]
 
 func getPrice():
-	return 5
+	return 0
 
 func canSell():
 	return true

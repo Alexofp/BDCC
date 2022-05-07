@@ -1,13 +1,13 @@
 extends ItemBase
 
 func _init():
-	id = "plainPanties"
+	id = "LacePanties"
 
 func getVisibleName():
-	return "Panties"
+	return "Lace panties"
 	
 func getDescription():
-	var text = "The most plain type of panties you can get but they get the job done."
+	var text = "Sexy lace panties with a fancy pattern. These are sure to make anyone horny"
 
 	return text
 
@@ -16,22 +16,24 @@ func getClothingSlot():
 
 func getBuffs():
 	return [
+		buff(Buff.LustArmorBuff, [10]),
+		buff(Buff.LustDamageBuff, [15]),
 		]
 
 func getTakingOffStringLong(withS):
 	if(withS):
-		return "slips down your panties"
+		return "slips down your lace panties"
 	else:
-		return "slip down your panties"
+		return "slip down your lace panties"
 
 func getPuttingOnStringLong(withS):
 	if(withS):
-		return "puts on the panties"
+		return "puts on the lace panties"
 	else:
-		return "put on the panties"
+		return "put on the lace panties"
 
 func coversBodyparts():
 	return [BodypartSlot.Vagina, BodypartSlot.Penis, BodypartSlot.Anus]
 
 func getPrice():
-	return 1
+	return 8

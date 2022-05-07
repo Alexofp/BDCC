@@ -102,6 +102,8 @@ func useInCombatWithBuffs(_attacker, _receiver):
 		var turnBuffs = getTimedBuffsTurns()
 		if(turnBuffs.size() > 0):
 			_attacker.addTimedBuffsTurns(turnBuffs, getBuffsDurationTurns())
+			
+		_attacker.updateNonBattleEffects()
 	
 	return useInCombat(_attacker, _receiver)
 

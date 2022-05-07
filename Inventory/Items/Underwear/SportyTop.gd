@@ -34,3 +34,6 @@ func getPuttingOnStringLong(withS):
 
 func coversBodyparts():
 	return [BodypartSlot.Breasts]
+
+func getPrice():
+	return 5

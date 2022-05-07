@@ -11,4 +11,7 @@ func _init():
 		"sportyBriefs",
 		"sportyTop",
 		"sportyTankTop",
+		
+		"LacePanties",
+		"LaceBra",
 	]

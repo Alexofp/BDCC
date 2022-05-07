@@ -1,13 +1,13 @@
 extends ItemBase
 
 func _init():
-	id = "plainUndershirt"
+	id = "LaceBra"
 
 func getVisibleName():
-	return "Undershirt"
+	return "Lace bra"
 	
 func getDescription():
-	var text = "Sleeveless shirt that covers your chest."
+	var text = "Sexy-looking bra that will emphasize your breasts in just the right way"
 
 	return text
 
@@ -16,22 +16,24 @@ func getClothingSlot():
 
 func getBuffs():
 	return [
+		buff(Buff.LustArmorBuff, [10]),
+		buff(Buff.LustDamageBuff, [15]),
 		]
 
 func getTakingOffStringLong(withS):
 	if(withS):
-		return "takes off your undershirt"
+		return "takes off your lace bra"
 	else:
-		return "take off your undershirt"
+		return "take off your lace bra"
 
 func getPuttingOnStringLong(withS):
 	if(withS):
-		return "puts on the undershirt"
+		return "puts on the lace bra"
 	else:
-		return "put on the undershirt"
+		return "put on the lace bra"
 
 func coversBodyparts():
 	return [BodypartSlot.Breasts]
 
 func getPrice():
-	return 1
+	return 8
