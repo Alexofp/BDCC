@@ -52,3 +52,7 @@ static func makeTaviAngry():
 	GM.main.setFlag(Tavi_IsAngryAtPlayer, true)
 	GM.main.setFlag(Tavi_AngryUntilDay, GM.main.getDays() + 2)
 	
+static func getPunishmentScene():
+	return RNG.pick([
+		"TaviPunishment1Scene",
+		])

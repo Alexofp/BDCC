@@ -31,6 +31,10 @@ func _run():
 			else:
 				addDisabledButton("Submit", "Tavi is still angry at you, try again in a day or two")
 		else:
+			# Player is friendly towards Tavi
+			
+			addButton("Punish me", "Ask Tavi to punish you", "askForPunishment")
+			
 			if(!getFlag(TaviModule.Tavi_ToldHowToEscape)):
 				addButton("Plot to escape", "Tavi mentioned she can help you to escape", "plot_to_escape")
 			
@@ -278,6 +282,20 @@ func _run():
 		saynn("[say=pc]Thank you, Miss..[/say]")
 
 		addButton("Continue", "Continue on your way", "endthescene")
+		
+	if(state == "askForPunishment"):
+		saynn("You sit on your knees and nuzzle Tavi's legs")
+		
+		saynn("[say=pc]Can you punish me, Miss Tavi?[/say]")
+		
+		saynn("[say=tavi]Why would I punish my cutie[/say]")
+		
+		saynn("[say=pc]For all the bad things I did.[/say]")
+		
+		saynn("[say=tavi]Hmm[/say]")
+		
+		addButton("Continue", "See what happens", "startrandompunishment")
+		
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
@@ -298,7 +316,7 @@ func _react(_action: String, _args):
 		return
 	
 	if(_action == "startrandompunishment"):
-		runScene(RNG.pick(["TaviPunishment1Scene"]))
+		runScene(TaviModule.getPunishmentScene())
 		endScene()
 		return
 		

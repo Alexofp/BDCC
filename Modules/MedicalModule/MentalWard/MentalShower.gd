@@ -46,8 +46,8 @@ func _run():
 		saynn("She puts the straitjacket away for now and turns one of the showers for you, the water seems pleasingly warm.")
 
 		# (if bad behavior)
-		if(getFlag(MedicalModule.Mental_PCBehavior, 0.0) < 0.7):
-			if(getFlag(MedicalModule.Mental_PCBehavior, 0.0) < 0.4):
+		if(getFlag(MedicalModule.Mental_PCBehavior, 0.0) < 0.4):
+			if(getFlag(MedicalModule.Mental_PCBehavior, 0.0) < 0.2):
 				saynn("[say=eliza]Since you’re such a bratty test subject I will be looking at you to make sure you don’t cause any trouble.[/say]")
 			else:
 				saynn("[say=eliza]I don't trust you enough so I will be looking at you to make sure you don’t cause any trouble.[/say]")
