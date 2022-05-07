@@ -139,16 +139,25 @@ func _run():
 			addDisabledButton("Defocus", "You need more stamina for this")
 		
 	if(state == "" || state == "fighting"):		
-		addButton("Physical Attack", "Kick em", "physattacks")
-		addButton("Lust Attack", "Lewd em", "lustattacks")
-		addButton("Special", "Kick em but in a special way", "specialattacks")
+		addButton("Physical Attack", "Show a list of physical attacks that you can do", "physattacks")
+		addButton("Lust Attack", "Show a list of lewd actions that you can do", "lustattacks")
+		
+		if(pcHasAnyAttacksOfCategory(Attack.Category.Special)):
+			addButton("Special", "Show a list of your special moves", "specialattacks")
+		else:
+			addDisabledButton("Special", "You don't know any special moves")
+		
 		#addButton("Inspect", "Look closer", "inspect")
 		if(GM.pc.getInventory().hasRemovableRestraints()):
 			addButton("Struggle", "Struggle against your restraints", "struggle")
 		else:
 			addDisabledButton("Struggle", "You don't have any restraints that you can struggle out of")
 		addButton("Wait", "Do nothing", "wait")
-		addButton("Inventory", "Use an item fron your inventory", "inventory")
+		
+		if(GM.pc.getInventory().getAllCombatUsableItems().size() > 0):
+			addButton("Inventory", "Use an item fron your inventory", "inventory")
+		else:
+			addDisabledButton("Inventory", "You don't have anything you can use in combat")
 		
 		if(GM.pc.hasEffect(StatusEffect.Collapsed)):
 			if(GM.pc.canStandUpCombat()):
@@ -410,6 +419,17 @@ func checkEnd():
 		return "win"
 	
 	return ""
+
+func pcHasAnyAttacksOfCategory(category):
+	var playerAttacks = GM.pc.getAttacks()
+	for attackID in playerAttacks:
+		var attack: Attack = GlobalRegistry.getAttack(attackID)
+		if(attack == null):
+			assert(false, "Bad attack: "+attackID)
+		if(attack.category == category):
+			return true
+	return false
+	
 
 func addAttackButtons(category):
 	var playerAttacks = GM.pc.getAttacks()
