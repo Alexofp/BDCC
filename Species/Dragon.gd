@@ -27,8 +27,11 @@ func getDefaultHorns(_gender):
 func getDefaultHead(_gender):
 	return "dragonhead"
 
+func getDefaultEars(_gender):
+	return "dragonears"
+
 func getDefaultPenis(_gender):
 	if(_gender in [BaseCharacter.Gender.Male, BaseCharacter.Gender.Androgynous]):
-		return "caninepenis"
+		return "dragonpenis"
 	else:
 		return null

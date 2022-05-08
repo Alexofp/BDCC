@@ -21,17 +21,25 @@ const Registry = {
 		"Ponytail": "res://Player/Limbs/hair/PonytailHair.tscn",
 		"Ferri": "res://Player/Limbs/hair/FerriHair.tscn",
 		"Messy": "res://Player/Limbs/hair/MessyHair.tscn",
+		"Simple": "res://Player/Limbs/hair/SimpleHair.tscn",
+		"Long": "res://Player/Limbs/hair/LongHair.tscn",
+		"CombedBack": "res://Player/Limbs/hair/CombedBackHair.tscn",
+		"Mohawk": "res://Player/Limbs/hair/MohawkHair.tscn",
 	},
 	Horns: {
 		"Nothing": "res://Player/Limbs/horns/HornsBase.tscn",
 		"Dragon": "res://Player/Limbs/horns/DragonHorns.tscn",
+		"Dragon2": "res://Player/Limbs/horns/DragonHorns2.tscn",
 	},
 	Ears: {
 		"Human": "res://Player/Limbs/ear/HumanEars.tscn",
 		"Cat": "res://Player/Limbs/ear/CatEars.tscn",
 		"Lynx": "res://Player/Limbs/ear/LynxEars.tscn",
+		"Lynx2": "res://Player/Limbs/ear/LynxEars2.tscn",
 		"Canine": "res://Player/Limbs/ear/CanineEars.tscn",
 		"Wolf": "res://Player/Limbs/ear/WolfEars.tscn",
+		"Dragon": "res://Player/Limbs/ear/DragonEars.tscn",
+		"Dragon2": "res://Player/Limbs/ear/DragonEars2.tscn",
 	},
 	Head: {
 		"Human": "res://Player/Limbs/head/HumanHead.tscn",
@@ -39,6 +47,7 @@ const Registry = {
 		"Canine": "res://Player/Limbs/head/CanineHead.tscn",
 		"Fox": "res://Player/Limbs/head/FoxHead.tscn",
 		"Wolf": "res://Player/Limbs/head/WolfHead.tscn",
+		"Dragon": "res://Player/Limbs/head/DragonHead.tscn",
 	},
 	Body: {
 		"Human": "res://Player/Limbs/body/HumanBody.tscn",
@@ -57,6 +66,7 @@ const Registry = {
 		"Nothing": "res://Player/Limbs/penis/PenisBase.tscn",
 		"Human": "res://Player/Limbs/penis/HumanPenis.tscn",
 		"Canine": "res://Player/Limbs/penis/CaninePenis.tscn",
+		"Dragon": "res://Player/Limbs/penis/DragonPenis.tscn",
 	},
 	Tail: {
 		"Nothing": "res://Player/Limbs/tail/TailBase.tscn",

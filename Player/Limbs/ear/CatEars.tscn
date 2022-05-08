@@ -8,7 +8,7 @@ addOutline = false
 
 [node name="CatEars" type="Polygon2D" parent="." index="0"]
 position = Vector2( -24.4628, -437.845 )
-z_index = 1
+z_index = 15
 texture = ExtResource( 2 )
 skeleton = NodePath("../RigSkeleton")
 polygon = PoolVector2Array( -8.13397, 61.7225, 7.65552, -14.8325, 59.3301, -4.30622, 72.7273, 65.0718 )

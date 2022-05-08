@@ -395,6 +395,7 @@ func getSpecies():
 
 func setSpecies(species: Array):
 	pickedSpecies = species
+	pickedSpecies.sort()
 	emit_signal("stat_changed")
 
 func resetBodypartsToDefault():

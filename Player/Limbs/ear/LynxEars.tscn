@@ -19,7 +19,7 @@ bones = [ "Hip", PoolRealArray( 0, 0, 0, 0 ), "Hip/Chest", PoolRealArray( 0, 0, 
 
 [node name="Ears2" type="Polygon2D" parent="." index="1"]
 position = Vector2( -29.8175, -499.896 )
-z_index = 1
+z_index = 15
 texture = ExtResource( 2 )
 skeleton = NodePath("../RigSkeleton")
 polygon = PoolVector2Array( -7.1006, 129.586, 0.591708, 4.73373, 48.5207, 7.69231, 71.0059, 124.852 )

@@ -8,6 +8,7 @@ addOutline = false
 
 [node name="Ponytail" type="Polygon2D" parent="." index="0"]
 position = Vector2( -101.776, -463.57 )
+z_index = 5
 texture = ExtResource( 2 )
 skeleton = NodePath("../RigSkeleton")
 polygon = PoolVector2Array( 45.0381, 204.58, 21.374, 64.8855, 112.214, 32.0611, 240.458, 80.1527, 225.954, 228.244 )

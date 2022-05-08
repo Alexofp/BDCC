@@ -9,11 +9,12 @@ addOutline = false
 
 [node name="Ferri1" type="Polygon2D" parent="." index="0"]
 position = Vector2( -100.113, -482.405 )
+z_index = 5
 texture = ExtResource( 2 )
 skeleton = NodePath("../..")
 polygon = PoolVector2Array( 114.98, 207.692, 34.0081, 120.243, 89.4737, 37.6518, 216.599, 61.5385, 210.526, 212.146 )
 uv = PoolVector2Array( 114.98, 207.692, 34.0081, 120.243, 89.4737, 37.6518, 216.599, 61.5385, 210.526, 212.146 )
-bones = [ NodePath("Hip"), PoolRealArray( 0, 0, 0, 0, 0 ), NodePath("Hip/Chest"), PoolRealArray( 0, 0, 0, 0, 0 ), NodePath("Hip/Chest/Neck"), PoolRealArray( 0, 0, 0, 0, 0 ), NodePath("Hip/Chest/Neck/Head"), PoolRealArray( 1, 1, 1, 1, 1 ), NodePath("Hip/Chest/LArm"), PoolRealArray( 0, 0, 0, 0, 0 ), NodePath("Hip/Chest/LArm/LForeArm"), PoolRealArray( 0, 0, 0, 0, 0 ), NodePath("Hip/Chest/LArm/LForeArm/LHand"), PoolRealArray( 0, 0, 0, 0, 0 ), NodePath("Hip/LLeg"), PoolRealArray( 0, 0, 0, 0, 0 ), NodePath("Hip/LLeg/LLLeg"), PoolRealArray( 0, 0, 0, 0, 0 ), NodePath("Hip/LLeg/LLLeg/LFoot"), PoolRealArray( 0, 0, 0, 0, 0 ) ]
+bones = [ "Hip", PoolRealArray( 0, 0, 0, 0, 0 ), "Hip/Chest", PoolRealArray( 0, 0, 0, 0, 0 ), "Hip/Chest/Neck", PoolRealArray( 0, 0, 0, 0, 0 ), "Hip/Chest/Neck/Head", PoolRealArray( 1, 1, 1, 1, 1 ), "Hip/Chest/LArm", PoolRealArray( 0, 0, 0, 0, 0 ), "Hip/Chest/LArm/LForeArm", PoolRealArray( 0, 0, 0, 0, 0 ), "Hip/Chest/LArm/LForeArm/LHand", PoolRealArray( 0, 0, 0, 0, 0 ), "Hip/LLeg", PoolRealArray( 0, 0, 0, 0, 0 ), "Hip/LLeg/LLLeg", PoolRealArray( 0, 0, 0, 0, 0 ), "Hip/LLeg/LLLeg/LFoot", PoolRealArray( 0, 0, 0, 0, 0 ) ]
 
 [node name="Ferri2" type="Polygon2D" parent="." index="1"]
 position = Vector2( -181.143, -447.122 )
@@ -22,4 +23,6 @@ texture = ExtResource( 3 )
 skeleton = NodePath("../..")
 polygon = PoolVector2Array( 41.8919, 259.009, 131.532, 263.514, 220.27, 21.6216, 131.532, -24.7748, 46.3964, 76.5766 )
 uv = PoolVector2Array( 41.8919, 259.009, 131.532, 263.514, 220.27, 21.6216, 131.532, -24.7748, 46.3964, 76.5766 )
-bones = [ NodePath("Hip"), PoolRealArray( 0, 0, 0, 0, 0 ), NodePath("Hip/Chest"), PoolRealArray( 0, 0, 0, 0, 0 ), NodePath("Hip/Chest/Neck"), PoolRealArray( 0, 0, 0, 0, 0 ), NodePath("Hip/Chest/Neck/Head"), PoolRealArray( 1, 1, 1, 1, 1 ), NodePath("Hip/Chest/LArm"), PoolRealArray( 0, 0, 0, 0, 0 ), NodePath("Hip/Chest/LArm/LForeArm"), PoolRealArray( 0, 0, 0, 0, 0 ), NodePath("Hip/Chest/LArm/LForeArm/LHand"), PoolRealArray( 0, 0, 0, 0, 0 ), NodePath("Hip/LLeg"), PoolRealArray( 0, 0, 0, 0, 0 ), NodePath("Hip/LLeg/LLLeg"), PoolRealArray( 0, 0, 0, 0, 0 ), NodePath("Hip/LLeg/LLLeg/LFoot"), PoolRealArray( 0, 0, 0, 0, 0 ) ]
+bones = [ "Hip", PoolRealArray( 0, 0, 0, 0, 0 ), "Hip/Chest", PoolRealArray( 0, 0, 0, 0, 0 ), "Hip/Chest/Neck", PoolRealArray( 0, 0, 0, 0, 0 ), "Hip/Chest/Neck/Head", PoolRealArray( 1, 1, 1, 1, 1 ), "Hip/Chest/LArm", PoolRealArray( 0, 0, 0, 0, 0 ), "Hip/Chest/LArm/LForeArm", PoolRealArray( 0, 0, 0, 0, 0 ), "Hip/Chest/LArm/LForeArm/LHand", PoolRealArray( 0, 0, 0, 0, 0 ), "Hip/LLeg", PoolRealArray( 0, 0, 0, 0, 0 ), "Hip/LLeg/LLLeg", PoolRealArray( 0, 0, 0, 0, 0 ), "Hip/LLeg/LLLeg/LFoot", PoolRealArray( 0, 0, 0, 0, 0 ) ]
+
+[editable path="RigSkeleton"]

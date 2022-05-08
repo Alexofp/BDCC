@@ -1,8 +1,8 @@
-extends BodypartHead
+extends BodypartEars
 
 func _init():
-	visibleName = "dragon head"
-	id = "dragonhead"
+	visibleName = "dragon ears"
+	id = "dragonears"
 	dollType = "Dragon"
 
 func getCompatibleSpecies():
