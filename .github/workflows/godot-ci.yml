@@ -27,7 +27,7 @@ jobs:
       - name: Upload Artifact
         uses: actions/upload-artifact@v1
         with:
-          name: windows
+          name: bdcc-windows
           path: ./build/windows/
 
   export-linux:
@@ -51,7 +51,7 @@ jobs:
       - name: Upload Artifact
         uses: actions/upload-artifact@v1
         with:
-          name: linux
+          name: bdcc-linux
           path: ./build/linux/
 
   export-web:
@@ -75,7 +75,7 @@ jobs:
       - name: Upload Artifact
         uses: actions/upload-artifact@v1
         with:
-          name: web
+          name: bdcc-web
           path: build/web
       - name: Install rsync 📚
         run: |
@@ -107,5 +107,5 @@ jobs:
       - name: Upload Artifact
         uses: actions/upload-artifact@v1
         with:
-          name: mac
+          name: bdcc-mac
           path: ./build/mac/
