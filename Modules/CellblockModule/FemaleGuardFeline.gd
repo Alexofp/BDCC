@@ -7,7 +7,8 @@ func _init():
 		DamageType.Physical: 5,
 	}
 	npcLevel = 1
-	npcBasePain = 70
+	npcBasePain = 50
+	npcBaseLust = 70
 	npcBaseStamina = 120
 	npcLustInterests = {
 		InterestTopic.FeminineBody: Interest.KindaLikes,

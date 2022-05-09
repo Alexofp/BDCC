@@ -270,6 +270,7 @@ func _react(_action: String, _args):
 	
 	if(_action == "wake_up"):
 		startNewDay()
+		GM.pc.afterSleepingInBed()
 		runScene("IntroWakeup")
 		endScene()
 		

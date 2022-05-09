@@ -17,100 +17,144 @@ roomSprite = 3
 roomColor = 2
 
 [node name="CDRoom" parent="." index="1" instance=ExtResource( 2 )]
+roomName = "Main corridor"
+roomDescription = "Long corridor that looks very rich. There is a carpet on the floor, walls are decorated with many paintings. Sometimes you notice doors that lead to offices"
 
 [node name="CDRoom2" parent="." index="2" instance=ExtResource( 2 )]
 position = Vector2( 0, -64 )
+roomName = "Main corridor"
+roomDescription = "Long corridor that looks very rich. There is a carpet on the floor, walls are decorated with many paintings. Sometimes you notice doors that lead to some offices"
 gridColor = 2
 loctag_GuardsEncounter = true
 
 [node name="CDRoom3" parent="." index="3" instance=ExtResource( 2 )]
 position = Vector2( 0, -128 )
+roomName = "Main corridor"
+roomDescription = "Long corridor that looks very rich. There is a carpet on the floor, walls are decorated with many paintings. Sometimes you notice doors that lead to some offices"
 gridColor = 2
 loctag_GuardsEncounter = true
 
 [node name="CDRoom4" parent="." index="4" instance=ExtResource( 2 )]
 position = Vector2( 0, -192 )
+roomName = "Main corridor"
+roomDescription = "Here the corridor splits into two. "
 gridColor = 2
 loctag_GuardsEncounter = true
 
 [node name="CDRoom5" parent="." index="5" instance=ExtResource( 2 )]
 position = Vector2( -64, -192 )
+roomName = "Main corridor"
+roomDescription = "Long corridor that looks very rich. There is a carpet on the floor, walls are decorated with many paintings. Sometimes you notice doors that lead to some offices"
 gridColor = 2
 loctag_GuardsEncounter = true
 
 [node name="CDRoom6" parent="." index="6" instance=ExtResource( 2 )]
 position = Vector2( -64, -256 )
+roomName = "Main corridor"
+roomDescription = "Long corridor that looks very rich. There is a carpet on the floor, walls are decorated with many paintings. Sometimes you notice doors that lead to some offices"
 gridColor = 2
 loctag_GuardsEncounter = true
 
 [node name="CDRoom7" parent="." index="7" instance=ExtResource( 2 )]
 position = Vector2( 64, -192 )
+roomName = "Main corridor"
+roomDescription = "Long corridor that looks very rich. There is a carpet on the floor, walls are decorated with many paintings. Sometimes you notice doors that lead to some offices"
 gridColor = 2
 loctag_GuardsEncounter = true
 
 [node name="CDRoom8" parent="." index="8" instance=ExtResource( 2 )]
 position = Vector2( 64, -256 )
+roomName = "Main corridor"
+roomDescription = "Long corridor that looks very rich. There is a carpet on the floor, walls are decorated with many paintings. Sometimes you notice doors that lead to some offices"
 gridColor = 2
 loctag_GuardsEncounter = true
 
 [node name="CDRoom9" parent="." index="9" instance=ExtResource( 2 )]
 position = Vector2( 64, -320 )
+roomName = "Main corridor"
+roomDescription = "Long corridor that looks very rich. There is a carpet on the floor, walls are decorated with many paintings. Sometimes you notice doors that lead to some offices"
 gridColor = 2
 loctag_GuardsEncounter = true
 
 [node name="CDRoom10" parent="." index="10" instance=ExtResource( 2 )]
 position = Vector2( -64, -320 )
+roomName = "Main corridor"
+roomDescription = "Long corridor that looks very rich. There is a carpet on the floor, walls are decorated with many paintings. Sometimes you notice doors that lead to some offices"
 gridColor = 2
 loctag_GuardsEncounter = true
 
 [node name="CDRoom11" parent="." index="11" instance=ExtResource( 2 )]
 position = Vector2( -64, -384 )
+roomName = "Main corridor"
+roomDescription = "Long corridor that looks very rich. There is a carpet on the floor, walls are decorated with many paintings. Sometimes you notice doors that lead to some offices"
 gridColor = 2
 loctag_GuardsEncounter = true
 
 [node name="CDRoom12" parent="." index="12" instance=ExtResource( 2 )]
 position = Vector2( 64, -384 )
+roomName = "Main corridor"
+roomDescription = "Long corridor that looks very rich. There is a carpet on the floor, walls are decorated with many paintings. Sometimes you notice doors that lead to some offices"
 gridColor = 2
 loctag_GuardsEncounter = true
 
 [node name="CDRoom13" parent="." index="13" instance=ExtResource( 2 )]
 position = Vector2( 64, -448 )
+roomName = "Main corridor"
+roomDescription = "Long corridor that looks very rich. There is a carpet on the floor, walls are decorated with many paintings. Sometimes you notice doors that lead to some offices"
 gridColor = 2
 loctag_GuardsEncounter = true
 
 [node name="CDRoom14" parent="." index="14" instance=ExtResource( 2 )]
 position = Vector2( 0, -448 )
+roomName = "Main corridor"
+roomDescription = "Long corridor that looks very rich. There is a carpet on the floor, walls are decorated with many paintings. Sometimes you notice doors that lead to some offices"
 gridColor = 2
 loctag_GuardsEncounter = true
 
 [node name="CDRoom15" parent="." index="15" instance=ExtResource( 2 )]
 position = Vector2( -64, -448 )
+roomName = "Main corridor"
+roomDescription = "Long corridor that looks very rich. There is a carpet on the floor, walls are decorated with many paintings. Sometimes you notice doors that lead to some offices"
 gridColor = 2
 loctag_GuardsEncounter = true
 
 [node name="CDRoom16" parent="." index="16" instance=ExtResource( 2 )]
 position = Vector2( 0, -512 )
 roomID = "cd_near_captain_office"
+roomDescription = "Long corridor that looks very rich. There is a carpet on the floor, walls are decorated with many paintings. Sometimes you notice doors that lead to some offices"
 roomSprite = 4
 gridColor = 2
 
 [node name="CDRoom17" parent="." index="17" instance=ExtResource( 2 )]
 self_modulate = Color( 0.7, 0.7, 1, 1 )
 position = Vector2( 0, -576 )
+roomName = "Captain's office"
 roomID = "cd_captain_office"
+roomDescription = "You enter the captain's office. Walls here are made out of red wood with an added golden trim, many carpets are covering the floor. The tall ceiling features a grand chandelier in a gothic style. A lot of antique design is incorporated into the furniture, there is even a huge old school radio in the corner.
+
+The center of a room is taken by a big wooden desk and a rich chair made out of black leather. Then there are two more smaller chairs before it and a few little tables placed around the room, a bookshelf. The main desk features a golden name plate saying ‘Cpt. Wright’, some writing utensils and a lamp. Everything looks pretty clean."
+roomSprite = 1
 roomColor = 3
 
 [node name="CDRoom18" parent="." index="18" instance=ExtResource( 2 )]
 position = Vector2( 64, -64 )
+roomName = "Office"
+roomDescription = "A huge office that belongs to some higher-up"
 
 [node name="CDRoom19" parent="." index="19" instance=ExtResource( 2 )]
 position = Vector2( -128, -256 )
+roomName = "Office"
+roomDescription = "A huge office that belongs to some higher-up"
 
 [node name="CDRoom20" parent="." index="20" instance=ExtResource( 2 )]
 position = Vector2( 128, -384 )
+roomName = "Office"
+roomDescription = "A huge office that belongs to some higher-up"
 
 [node name="CDRoom21" parent="." index="21" instance=ExtResource( 2 )]
 position = Vector2( 128, -256 )
+roomName = "Office"
+roomDescription = "A huge office that belongs to some higher-up"
 
 [connection signal="onEnter" from="CDElevator" to="." method="_on_CDElevator_onEnter"]
 [connection signal="onReact" from="CDElevator" to="." method="_on_CDElevator_onReact"]
