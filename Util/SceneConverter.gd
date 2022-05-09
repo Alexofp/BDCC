@@ -5,6 +5,9 @@ extends Control
 onready var inputTextEdit = $VBoxContainer/TextEdit
 onready var outputTextEdit = $VBoxContainer/TextEdit2
 
+func _ready():
+	$VBoxContainer/TextEdit2.add_color_region('#', '', Color.cadetblue)
+
 func _on_Button_pressed():
 	var result = ""
 	var text = inputTextEdit.text

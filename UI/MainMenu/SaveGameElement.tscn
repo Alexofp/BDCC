@@ -11,12 +11,9 @@ font_data = ExtResource( 2 )
 margin_right = 1280.0
 margin_bottom = 26.0
 script = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="SaveNameLabel" type="RichTextLabel" parent="."]
-margin_right = 1113.0
+margin_right = 1057.0
 margin_bottom = 26.0
 size_flags_horizontal = 3
 custom_fonts/bold_font = SubResource( 1 )
@@ -24,10 +21,17 @@ bbcode_enabled = true
 fit_content_height = true
 
 [node name="LoadButton" type="Button" parent="."]
-margin_left = 1117.0
-margin_right = 1159.0
+margin_left = 1061.0
+margin_right = 1103.0
 margin_bottom = 26.0
 text = "Load"
+
+[node name="ExportButton" type="Button" parent="."]
+margin_left = 1107.0
+margin_right = 1159.0
+margin_bottom = 26.0
+hint_tooltip = "Export the savefile. Useful for transfering your savefile from the web version into the standalone one or just to backup your save"
+text = "Export"
 
 [node name="DeleteButton" type="Button" parent="."]
 margin_left = 1163.0
@@ -36,4 +40,5 @@ margin_bottom = 26.0
 text = "DELETE FOREVER"
 
 [connection signal="pressed" from="LoadButton" to="." method="_on_LoadButton_pressed"]
+[connection signal="pressed" from="ExportButton" to="." method="_on_ExportButton_pressed"]
 [connection signal="pressed" from="DeleteButton" to="." method="_on_DeleteButton_pressed"]

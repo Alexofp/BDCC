@@ -69,6 +69,12 @@ func saveGame(_path):
 	
 	save_game.close()
 	
+func saveGameFromText(filepath: String, savedatastring):
+	var save_game = File.new()
+	save_game.open("user://saves/"+filepath.get_file().get_basename()+".save", File.WRITE)
+	save_game.store_line(savedatastring)
+	save_game.close()
+
 func loadGameRelative(_name):
 	loadGame("user://saves/"+_name+".save")
 	

@@ -24,15 +24,31 @@ margin_right = 1280.0
 margin_bottom = 343.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-text = "test intro
+text = "The idea of this tool is to use Google docs to write scenes because it's easier there
 
-> Do something, You do something
-When you do something, something happens
+This is an example of how the input may look like
+Each line will be made into a separate saynn call
+You can use variables like {pc.name}, {pc.he} and many others
+To indicated that someone is talking use:
 
-> Do something else, Try something else
-You try something else
+[say=pc]Hello, I'm {pc.name}[/say]
 
-it didn't work"
+[say=rahi]Hello, and I'm speaking as Rahi[/say]
+
+( These are comments, they won't be outputted but will be visible in the code )
+
+To add actions add > before the action name. Everything after the first , will be the action's description
+
+> Say meow, Open your mouth and make a cat noise
+
+[say=pc]MEOW![/say]
+
+The converter doesn't support multiple actions so you will have to rearrange addButton calls yourself, just see how the other scenes do it. If someone has ideas how to fix that - feel free to do so ^^
+
+> Dance, Start dancing for no reason
+You dance like a happy cat
+
+Life is good"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -44,6 +60,7 @@ margin_bottom = 690.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "Output will be here"
+syntax_highlighting = true
 __meta__ = {
 "_edit_use_anchors_": false
 }

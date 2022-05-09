@@ -4,6 +4,7 @@ var saveFile = ""
 onready var saveNameLabel = $SaveNameLabel
 signal onLoadButtonPressed(saveFile)
 signal onDeleteButtonPressed(saveFile)
+signal onExportButtonPressed(saveFile)
 var showLoadButton = true
 var isInDeleteMode = false
 
@@ -43,13 +44,16 @@ func _on_DeleteButton_pressed():
 func updateButtons():
 	if(isInDeleteMode):
 		$LoadButton.visible = false
+		$ExportButton.visible = false
 		$DeleteButton.visible = true
 	else:
 		$DeleteButton.visible = false
 		if(showLoadButton):
 			$LoadButton.visible = true
+			$ExportButton.visible = true
 		else:
 			$LoadButton.visible = false
+			$ExportButton.visible = false
 
 func setDeleteMode(m):
 	isInDeleteMode = m
@@ -58,3 +62,7 @@ func setDeleteMode(m):
 func setShowLoadButton(m):
 	showLoadButton = m
 	updateButtons()
+
+
+func _on_ExportButton_pressed():
+	emit_signal("onExportButtonPressed", saveFile)

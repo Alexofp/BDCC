@@ -11,9 +11,6 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource( 1 )
 script = ExtResource( 3 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 anchor_right = 1.0
@@ -76,18 +73,61 @@ rect_min_size = Vector2( 0, 100 )
 columns = 5
 
 [node name="CloseButton" type="Button" parent="VBoxContainer/GridContainer"]
-margin_right = 255.0
+margin_right = 254.0
 margin_bottom = 26.0
 size_flags_horizontal = 3
 text = "Close"
 
 [node name="DeleteButton" type="Button" parent="VBoxContainer/GridContainer"]
-margin_left = 259.0
-margin_right = 514.0
+margin_left = 258.0
+margin_right = 512.0
 margin_bottom = 26.0
 size_flags_horizontal = 3
 text = "Delete Save"
 
+[node name="ImportButton" type="Button" parent="VBoxContainer/GridContainer"]
+margin_left = 516.0
+margin_right = 770.0
+margin_bottom = 26.0
+size_flags_horizontal = 3
+text = "Import Save"
+
+[node name="ExportSaveDialog" type="FileDialog" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -300.0
+margin_top = -200.0
+margin_right = 300.0
+margin_bottom = 200.0
+window_title = "Export Save"
+resizable = true
+access = 2
+filters = PoolStringArray( "*.save ; Save file" )
+current_dir = "/"
+current_path = "/"
+
+[node name="ImportSaveDialog" type="FileDialog" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -300.0
+margin_top = -200.0
+margin_right = 300.0
+margin_bottom = 200.0
+window_title = "Open a File"
+resizable = true
+mode = 0
+access = 2
+filters = PoolStringArray( "*.save ; Save file" )
+current_dir = "/"
+current_path = "/"
+
 [connection signal="visibility_changed" from="." to="." method="_on_LoadGameScreen_visibility_changed"]
 [connection signal="pressed" from="VBoxContainer/GridContainer/CloseButton" to="." method="_on_CloseButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/GridContainer/DeleteButton" to="." method="_on_DeleteButton_pressed"]
+[connection signal="pressed" from="VBoxContainer/GridContainer/ImportButton" to="." method="_on_ImportButton_pressed"]
+[connection signal="file_selected" from="ExportSaveDialog" to="." method="_on_ExportSaveDialog_file_selected"]
+[connection signal="file_selected" from="ImportSaveDialog" to="." method="_on_ImportSaveDialog_file_selected"]
