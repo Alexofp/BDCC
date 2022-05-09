@@ -232,8 +232,20 @@ static func verbS(charID, verbWithNoS, verbWithS = null):
 
 static func muffledSpeech(text: String, strenght: int = 1):
 	var newtext = ""
+	var ignore = false
 	
 	for ch in text:
+		if(ch == "{"):
+			ignore = true
+			newtext += ch
+			continue
+		if(ignore):
+			if(ch == "}"):
+				ignore = false
+			
+			newtext += ch
+			continue
+		
 		var isCapital = false
 		var oldch = ch
 		if(ch == ch.to_upper()):
