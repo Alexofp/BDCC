@@ -3,7 +3,7 @@ on: push
 
 env:
   GODOT_VERSION: 3.3.4
-  EXPORT_NAME: BDCC
+  EXPORT_NAME: test-project
 
 jobs:
   export-windows:
