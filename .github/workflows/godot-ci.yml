@@ -3,7 +3,7 @@ on: push
 
 env:
   GODOT_VERSION: 3.3.4
-  EXPORT_NAME: test-project
+  EXPORT_NAME: BDCC
 
 jobs:
   export-windows:
@@ -23,6 +23,7 @@ jobs:
       - name: Windows Build
         run: |
           mkdir -v -p build/windows
+          mkdir -v -p $EXPORT_NAME
           cd $EXPORT_NAME
           godot -v --export "Windows Desktop" ../build/windows/$EXPORT_NAME.exe
       - name: Upload Artifact
@@ -48,6 +49,7 @@ jobs:
       - name: Linux Build
         run: |
           mkdir -v -p build/linux
+          mkdir -v -p $EXPORT_NAME
           cd $EXPORT_NAME
           godot -v --export "Linux/X11" ../build/linux/$EXPORT_NAME.x86_64
       - name: Upload Artifact
@@ -73,6 +75,7 @@ jobs:
       - name: Web Build
         run: |
           mkdir -v -p build/web
+          mkdir -v -p $EXPORT_NAME
           cd $EXPORT_NAME
           godot -v --export "HTML5" ../build/web/index.html
       - name: Upload Artifact
@@ -106,6 +109,7 @@ jobs:
       - name: Mac Build
         run: |
           mkdir -v -p build/mac
+          mkdir -v -p $EXPORT_NAME
           cd $EXPORT_NAME
           godot -v --export "Mac OSX" ../build/mac/$EXPORT_NAME.zip
       - name: Upload Artifact
