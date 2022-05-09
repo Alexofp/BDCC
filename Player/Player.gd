@@ -1047,6 +1047,8 @@ func getOrificeBlocked(orificeType):
 	return buffsHolder.getOrificeBlocked(orificeType)
 
 func canBeMilked():
+	if(!hasBodypart(BodypartSlot.Breasts)):
+		return false
 	var breasts: BodypartBreasts = getBodypart(BodypartSlot.Breasts)
 	var production: FluidProduction = breasts.getFluidProduction()
 	return production.getFluidAmount() > 0.0
@@ -1059,6 +1061,8 @@ func milk(howmuch = 1.0):
 	return howMuchMilk
 
 func canBeSeedMilked():
+	if(!hasBodypart(BodypartSlot.Penis)):
+		return false
 	var penis: BodypartPenis = getBodypart(BodypartSlot.Penis)
 	var production: FluidProduction = penis.getFluidProduction()
 	return production.getFluidAmount() > 0.0

@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="630"
+   height="500"
+   viewBox="0 0 166.6875 132.29167"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.1.2 (b8e25be833, 2022-02-05)"
+   sodipodi:docname="splash.svg"
+   inkscape:export-filename="E:\godot\projects\LewdGame\AssetsSource\splash.png"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:document-units="mm"
+     showgrid="false"
+     units="px"
+     inkscape:zoom="0.7513148"
+     inkscape:cx="310.7885"
+     inkscape:cy="249.5625"
+     inkscape:window-width="1920"
+     inkscape:window-height="1018"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1">
+    <inkscape:grid
+       type="xygrid"
+       id="grid824"
+       empspacing="10" />
+  </sodipodi:namedview>
+  <defs
+     id="defs2">
+    <filter
+       inkscape:collect="always"
+       style="color-interpolation-filters:sRGB"
+       id="filter123865"
+       x="-0.0091663472"
+       y="-0.056901632"
+       width="1.0183327"
+       height="1.1138033">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="0.55011279"
+         id="feGaussianBlur123867" />
+    </filter>
+    <filter
+       inkscape:collect="always"
+       style="color-interpolation-filters:sRGB"
+       id="filter20167"
+       x="-0.20889729"
+       y="-0.20889719"
+       width="1.4178053"
+       height="1.4177917">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="2.5969073"
+         id="feGaussianBlur20169" />
+    </filter>
+  </defs>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       style="fill:#252580;stroke:none;stroke-width:1.05833;stroke-linejoin:bevel;fill-opacity:1"
+       id="rect3257"
+       width="166.6875"
+       height="132.29167"
+       x="0"
+       y="-1.5640168e-15"
+       ry="0" />
+    <g
+       id="g20265"
+       transform="translate(-3.1551192,26.665715)">
+      <g
+         id="g20039"
+         transform="matrix(2.1754735,0,0,2.1754735,178.21133,-39.776521)"
+         style="mix-blend-mode:normal;fill:#000000;fill-opacity:1;stroke:#000000;stroke-opacity:1;filter:url(#filter20167)">
+        <rect
+           style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:2.11667;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           id="rect20027"
+           width="29.633333"
+           height="29.633333"
+           x="40.74316"
+           y="-10.772707"
+           ry="14.816667"
+           transform="rotate(135)"
+           inkscape:export-filename="E:\godot\projects\LewdGame\AssetsSource\logo.png"
+           inkscape:export-xdpi="409.18417"
+           inkscape:export-ydpi="409.18417" />
+        <rect
+           style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.529168;stroke-linejoin:bevel;stroke-opacity:1"
+           id="rect20029"
+           width="21.166666"
+           height="4.2333322"
+           x="44.976494"
+           y="1.9272914"
+           ry="2.1166661"
+           transform="rotate(135)"
+           inkscape:export-filename="E:\godot\projects\LewdGame\AssetsSource\logo.png"
+           inkscape:export-xdpi="409.18417"
+           inkscape:export-ydpi="409.18417" />
+        <path
+           style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.529167;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           d="m -44.963978,44.102581 2.245064,2.245064 -3.554684,3.554684 3.741773,2.245064 4.30304,-4.303038 1e-6,-2.99342 -3.741774,-3.741774 z"
+           id="path20031"
+           sodipodi:nodetypes="cccccccc"
+           inkscape:export-filename="E:\godot\projects\LewdGame\AssetsSource\logo.png"
+           inkscape:export-xdpi="409.18417"
+           inkscape:export-ydpi="409.18417" />
+        <path
+           style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.529167;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           d="m -34.487012,33.625615 2.245064,2.245064 3.543296,-3.549943 2.256453,3.737031 -4.303023,4.303057 h -2.993417 l -3.741775,-3.741775 z"
+           id="path20033"
+           sodipodi:nodetypes="cccccccc"
+           inkscape:export-filename="E:\godot\projects\LewdGame\AssetsSource\logo.png"
+           inkscape:export-xdpi="409.18417"
+           inkscape:export-ydpi="409.18417" />
+        <path
+           style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.529167;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           d="m -49.816879,39.23355 -2.245064,-2.245064 -3.566072,3.559425 -2.245065,-3.741773 4.314442,-4.307766 2.993418,-1e-6 3.741774,3.741773 z"
+           id="path20035"
+           sodipodi:nodetypes="cccccccc"
+           inkscape:export-filename="E:\godot\projects\LewdGame\AssetsSource\logo.png"
+           inkscape:export-xdpi="409.18417"
+           inkscape:export-ydpi="409.18417" />
+        <path
+           style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.529167;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           d="m -39.339913,28.756584 -2.245064,-2.245064 3.543281,-3.54996 -3.741774,-2.245064 -4.291637,4.298312 v 2.993418 L -42.333333,31.75 Z"
+           id="path20037"
+           sodipodi:nodetypes="cccccccc"
+           inkscape:export-filename="E:\godot\projects\LewdGame\AssetsSource\logo.png"
+           inkscape:export-xdpi="409.18417"
+           inkscape:export-ydpi="409.18417" />
+      </g>
+      <g
+         id="g20025"
+         transform="matrix(2.1754735,0,0,2.1754735,178.21133,-39.776521)">
+        <rect
+           style="fill:#768dd9;fill-opacity:1;stroke:#252580;stroke-width:2.11667;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           id="rect24507"
+           width="29.633333"
+           height="29.633333"
+           x="40.74316"
+           y="-10.772707"
+           ry="14.816667"
+           transform="rotate(135)"
+           inkscape:export-filename="E:\godot\projects\LewdGame\AssetsSource\logo.png"
+           inkscape:export-xdpi="409.18417"
+           inkscape:export-ydpi="409.18417" />
+        <rect
+           style="fill:#252580;fill-opacity:1;stroke:none;stroke-width:0.529168;stroke-linejoin:bevel"
+           id="rect845"
+           width="21.166666"
+           height="4.2333322"
+           x="44.976494"
+           y="1.9272914"
+           ry="2.1166661"
+           transform="rotate(135)"
+           inkscape:export-filename="E:\godot\projects\LewdGame\AssetsSource\logo.png"
+           inkscape:export-xdpi="409.18417"
+           inkscape:export-ydpi="409.18417" />
+        <path
+           style="fill:#252580;fill-opacity:1;stroke:none;stroke-width:0.529167;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           d="m -44.963978,44.102581 2.245064,2.245064 -3.554684,3.554684 3.741773,2.245064 4.30304,-4.303038 1e-6,-2.99342 -3.741774,-3.741774 z"
+           id="path899-1"
+           sodipodi:nodetypes="cccccccc"
+           inkscape:export-filename="E:\godot\projects\LewdGame\AssetsSource\logo.png"
+           inkscape:export-xdpi="409.18417"
+           inkscape:export-ydpi="409.18417" />
+        <path
+           style="fill:#252580;fill-opacity:1;stroke:none;stroke-width:0.529167;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           d="m -34.487012,33.625615 2.245064,2.245064 3.543296,-3.549943 2.256453,3.737031 -4.303023,4.303057 h -2.993417 l -3.741775,-3.741775 z"
+           id="path899-1-9"
+           sodipodi:nodetypes="cccccccc"
+           inkscape:export-filename="E:\godot\projects\LewdGame\AssetsSource\logo.png"
+           inkscape:export-xdpi="409.18417"
+           inkscape:export-ydpi="409.18417" />
+        <path
+           style="fill:#252580;fill-opacity:1;stroke:none;stroke-width:0.529167;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           d="m -49.816879,39.23355 -2.245064,-2.245064 -3.566072,3.559425 -2.245065,-3.741773 4.314442,-4.307766 2.993418,-1e-6 3.741774,3.741773 z"
+           id="path899-1-93"
+           sodipodi:nodetypes="cccccccc"
+           inkscape:export-filename="E:\godot\projects\LewdGame\AssetsSource\logo.png"
+           inkscape:export-xdpi="409.18417"
+           inkscape:export-ydpi="409.18417" />
+        <path
+           style="fill:#252580;fill-opacity:1;stroke:none;stroke-width:0.529167;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           d="m -39.339913,28.756584 -2.245064,-2.245064 3.543281,-3.54996 -3.741774,-2.245064 -4.291637,4.298312 v 2.993418 L -42.333333,31.75 Z"
+           id="path899-1-9-7"
+           sodipodi:nodetypes="cccccccc"
+           inkscape:export-filename="E:\godot\projects\LewdGame\AssetsSource\logo.png"
+           inkscape:export-xdpi="409.18417"
+           inkscape:export-ydpi="409.18417" />
+      </g>
+    </g>
+    <g
+       id="g20273"
+       transform="matrix(1.1355612,0,0,1.1355612,-25.743294,-3.9878026)">
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:13.6889px;line-height:0;font-family:Quantum;-inkscape-font-specification:Quantum;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.529166;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;filter:url(#filter123865)"
+         x="17.28569"
+         y="16.158901"
+         id="text123827"
+         transform="matrix(0.97770969,0,0,1.0227985,79.137273,43.000753)"
+         inkscape:export-filename="E:\godot\projects\LewdGame\AssetsSource\logo.png"
+         inkscape:export-xdpi="409.18417"
+         inkscape:export-ydpi="409.18417"><tspan
+           sodipodi:role="line"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:100%;font-family:Quantum;-inkscape-font-specification:Quantum;text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.529167;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           x="17.285692"
+           y="16.158901"
+           id="tspan123825">Broken Dreams</tspan><tspan
+           sodipodi:role="line"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:100%;font-family:Quantum;-inkscape-font-specification:Quantum;text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.529167;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           x="17.285692"
+           y="29.847801"
+           id="tspan16931">Correctional Center</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:13.6889px;line-height:0;font-family:Quantum;-inkscape-font-specification:Quantum;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.529166;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         x="98.227173"
+         y="58.201157"
+         id="text33251"
+         transform="scale(0.97770969,1.0227985)"
+         inkscape:export-filename="E:\godot\projects\LewdGame\AssetsSource\logo.png"
+         inkscape:export-xdpi="409.18417"
+         inkscape:export-ydpi="409.18417"><tspan
+           sodipodi:role="line"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:100%;font-family:Quantum;-inkscape-font-specification:Quantum;text-align:center;text-anchor:middle;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.529167;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           x="98.227173"
+           y="58.201157"
+           id="tspan113705">Broken Dreams</tspan><tspan
+           sodipodi:role="line"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:100%;font-family:Quantum;-inkscape-font-specification:Quantum;text-align:center;text-anchor:middle;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.529167;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           x="98.227173"
+           y="71.89006"
+           id="tspan13109">Correctional Center</tspan></text>
+    </g>
+  </g>
+</svg>
