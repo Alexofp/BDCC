@@ -107,7 +107,7 @@ func _on_HTTPRequest_request_completed(result, _response_code, _headers, body):
 			gutHubReleaseLabel.text += "\n" + Util.datetimeToRFC113(time)
 		
 		gutHubReleaseLabel.text += "\n\nYour current version: "+GlobalRegistry.getGameVersionString()
-		break
+		return
 	gutHubReleaseLabel.text = "Latest github release: Nothing found"
 
 func _on_GithubReleasesButton_pressed():
