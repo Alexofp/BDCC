@@ -926,6 +926,9 @@ func setInmateType(newtype):
 func getInmateType():
 	return inmateType
 
+func getInmateColorString():
+	return InmateType.getColorName(getInmateType())
+
 func getCellLocation():
 	if(inmateType == InmateType.General):
 		return "cellblock_orange_playercell"

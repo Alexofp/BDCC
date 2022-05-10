@@ -229,7 +229,7 @@ func _run():
 		
 		saynn("[say=captain]I don’t know. I guess you’re lucky?[/say]")
 		
-		saynn("The captain is done with typing in some info and the machine begins to work. Firstly, it produces something that looks like an inmate uniform. It consists of a shirt and shorts. Both are mostly made out of thick black cloth but there are some orange accent lines. It also has a number on it. “P-12054”")
+		saynn("The captain is done with typing in some info and the machine begins to work. Firstly, it produces something that looks like an inmate uniform. It consists of a shirt and shorts. Both are mostly made out of thick black cloth but there are some {pc.inmateColor} accent lines. It also has a number on it. “P-{pc.inmateNumber}”")
 		
 		saynn("[say=captain]You’re not {pc.name} anymore. Now you’re an inmate number {pc.inmateNumber}, {pc.inmateType} block. Put it on.[/say]")
 		

@@ -34,6 +34,8 @@ func callObjectFunc(_obj: String, _command: String, _args: Array):
 		return object.getInmateNumber()		
 	if(_command == "inmateNumberFull" && _args.size() == 0 && object.has_method("getFullInmateNumber")):
 		return object.getFullInmateNumber()		
+	if(_command == "inmateColor" && _args.size() == 0 && object.has_method("getInmateColorString")):
+		return object.getInmateColorString()		
 	if(_command == "say" && _args.size() == 1):
 		return object.formatSay(str(_args[0]))
 	if((_command == "she" || _command == "he" || _command == "heShe") && _args.size() == 0):

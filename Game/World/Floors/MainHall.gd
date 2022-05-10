@@ -2,7 +2,7 @@ extends SubGameWorld
 
 
 func _on_MainStairs1_onEnter(room):
-	room.addButton("Go down", "Go down", "godown")
+	room.addButton("Go down", "Go down to the cells", "godown")
 
 
 func _on_MainStairs1_onReact(_room, key):
@@ -12,7 +12,7 @@ func _on_MainStairs1_onReact(_room, key):
 
 
 func _on_MainStairs2_onEnter(room):
-	room.addButton("Go down", "Go down", "godown")
+	room.addButton("Go down", "Go down to the cells", "godown")
 
 
 func _on_MainStairs2_onReact(_room, key):

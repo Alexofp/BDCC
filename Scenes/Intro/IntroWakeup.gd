@@ -52,7 +52,7 @@ func _run():
 		saynn("[say=risha]You want me to put a leash on you and personally drag you off to the mines myself? I can also just put you into stocks and let every inmate have a turn at using you, sex toys are very popular here, you lazy slut.[/say]")
 
 		if(GM.pc.getInventory().hasSlotEquipped(InventorySlot.Mouth)):
-			saynn("You wanna grit your teeth but the rubber ball in your mouth only makes you drool more and reminds of how the last fight ended.")
+			saynn("You grit your teeth but stay quiet, messing with the guard doesn’t seem like the best idea. And besides, being muzzled doesn't help with that either.")
 		else:
 			saynn("You grit your teeth but stay quiet, messing with the guard doesn’t seem like the best idea.")
 

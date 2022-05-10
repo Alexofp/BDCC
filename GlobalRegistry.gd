@@ -3,6 +3,7 @@ extends Node
 var game_version_major = 0
 var game_version_minor = 0
 var game_version_revision = 13
+var game_version_suffix = "bugfix3"
 
 var currentUniqueID = 0
 
@@ -101,7 +102,7 @@ func generateUniqueID():
 	return currentUniqueID - 1
 
 func getGameVersionString():
-	return str(game_version_major)+"."+str(game_version_minor)+"."+str(game_version_revision)
+	return str(game_version_major)+"."+str(game_version_minor)+"."+str(game_version_revision)+str(game_version_suffix)
 
 func registerScene(path: String):
 	var scene = load(path)

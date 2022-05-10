@@ -10,12 +10,12 @@ func _init():
 
 func _run():
 	if(state == "" || state == "pickgender"):
-		say("Pick your character's gender. This will affect the color of your speech. This can be changed at any point")
+		say("Pick your character's gender. This will affect the color of your speech and how others will treat you. This can be changed at any point")
 		
 		addButton("Male", "You're a guy", "setgender", [BaseCharacter.Gender.Male])
 		addButton("Female", "You're a girl", "setgender", [BaseCharacter.Gender.Female])
-		addButton("Androgynous", "You're something in between", "setgender", [BaseCharacter.Gender.Androgynous])
-		addButton("Other", "You're something else", "setgender", [BaseCharacter.Gender.Other])
+		addButton("Androgynous", "Somewhere in between", "setgender", [BaseCharacter.Gender.Androgynous])
+		addButton("Other", "Something else", "setgender", [BaseCharacter.Gender.Other])
 
 	if(state == "pickpronouns"):
 		say("Pick your character's pronouns. This can be changed at any point")

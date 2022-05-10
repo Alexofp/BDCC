@@ -219,7 +219,7 @@ func _run():
 		aimCamera("hall_mainentrance")
 		setLocationName("Main hall")
 		
-		saynn("You spot a few inmates around. All sorts of inmates of different species. Some wear orange uniforms like you, some wear red or pink. Obviously they weren’t told that you’re arriving but you do begin to catch their stares. Almost every inmate is now watching you being led around on a leash, you can hear some voices talking about you but it’s all incomprehensible to you.")
+		saynn("You spot a few inmates around. All sorts of inmates of different species. Some wear orange uniforms, others wear red or pink. Obviously they weren’t told that you’re arriving but you do begin to catch their stares. Almost every inmate is now watching you being led around on a leash, you can hear some voices talking about you but it’s all incomprehensible to you.")
 
 		saynn("One particular stare steals your attention. One of the reds. It’s clearly a female feline, a very tall one, about 2 meters. Her unusual fur is mostly purple with a toxic-green pattern added to it, cunning eyes are of different colors, green and red. She is standing by herself, away from everyone, arms crossed, eyes are staring at you, the lips form a very subtle smile. As the doctor leads you somewhere, that inmate stays silent, just watching you.")
 
