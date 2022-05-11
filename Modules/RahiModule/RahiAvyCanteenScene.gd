@@ -102,7 +102,7 @@ func _run():
 
 		# (if pink)
 		if(GM.pc.getInmateType() == InmateType.SexDeviant):
-			saynn("[say=avy]A pink toy is trying to tell me something? Shouldn’t your mouth be busy with staff cocks 24/7[/say]")
+			saynn("[say=avy]A lilac toy is trying to tell me something? Shouldn’t your mouth be busy with staff cocks 24/7[/say]")
 
 		saynn("[say=pc]I’m asking you.[/say]")
 

@@ -23,6 +23,6 @@ static func getColorName(type):
 	if(type == HighSec):
 		return "red"
 	if(type == SexDeviant):
-		return "pink"
+		return "lilac"
 	
 	return "Error"

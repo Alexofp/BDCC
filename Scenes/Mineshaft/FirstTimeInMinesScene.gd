@@ -56,7 +56,7 @@ func _run():
 		addButton("Go work", "Time to work", "go_work")
 
 	if(state == "go_work"):
-		saynn("You grab the heavy pickaxe and go down into one of the artificially created caves. It’s pretty much what you would expect, wooden supports, rails, minecarts. Main path gets quickly divided into a bunch of little veins with inmates doing the work, most of which spot either red or orange uniforms. You can’t see a single pink block inmate. It’s quite cold but a few inmates aren’t wearing their shirts, maybe to show off their muscles.")
+		saynn("You grab the heavy pickaxe and go down into one of the artificially created caves. It’s pretty much what you would expect, wooden supports, rails, minecarts. Main path gets quickly divided into a bunch of little veins with inmates doing the work, most of which spot either red or orange uniforms. You can’t see a single lilac. It’s quite cold but a few inmates aren’t wearing their shirts, maybe to show off their muscles.")
 
 		saynn("You find a spot with no one nearby and begin hitting the rock with your pickaxe.")
 

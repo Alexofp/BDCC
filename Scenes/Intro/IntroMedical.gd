@@ -105,7 +105,7 @@ func _run():
 
 		# (if red)
 		if(GM.pc.getInmateType() == InmateType.HighSec):
-			saynn("[say=eliza]So you’re joining reds, huh. Just remember that others will fear you only if you don't show any weaknesses. Pink inmates are basically sextoys but that doesn’t mean they won’t get into a fight with you.[/say]")
+			saynn("[say=eliza]So you’re joining reds, huh. Just remember that others will fear you only if you don't show any weaknesses. Lilacs are basically sextoys but that doesn’t mean they won’t get into a fight with you.[/say]")
 
 			saynn("[say=pc]I don’t think that this is your problem.[/say]")
 
@@ -113,7 +113,7 @@ func _run():
 
 		# (if orange)
 		if(GM.pc.getInmateType() == InmateType.General):
-			saynn("[say=eliza]Listen. If you want to get out of here as fast as possible, the pink block is your best bet. Even if you don’t get paroled, you will at least get access to a better cell and comfortable furniture[/say]")
+			saynn("[say=eliza]Listen. If you want to get out of here as fast as possible, the lilac block is your best bet. Even if you don’t get paroled, you will at least get access to a better cell and comfortable furniture[/say]")
 
 			saynn("[say=pc]As a reward for letting others fuck me?[/say]")
 
@@ -121,7 +121,7 @@ func _run():
 
 		# (if pink)
 		if(GM.pc.getInmateType() == InmateType.SexDeviant):
-			saynn("[say=eliza]You’re lucky to be a pink inmate. Spacious cell, comfy furniture, all of that. Though the catch is that others will see a sextoy in you so be careful. Maybe you will like it, I don’t know. And avoid the reds, they’re all psychopaths.[/say]")
+			saynn("[say=eliza]You’re lucky to be a lilac, inmate. Spacious cell, comfy furniture, all of that. Though the catch is that others will see a sextoy in you so be careful. Maybe you will like it, I don’t know. And avoid the reds, they’re all psychopaths.[/say]")
 			
 		saynn("You watch the doctor put all her things away and then pull out a somewhat long chain.")
 

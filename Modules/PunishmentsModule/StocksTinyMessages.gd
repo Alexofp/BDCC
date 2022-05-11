@@ -14,7 +14,7 @@ func _run():
 	if(state == "3"):
 		saynn("Some staff member with a yellow uniform walks past. Behind him are a few inmates carrying crates. They seem to be going towards the canteen.")
 	if(state == "4"):
-		saynn("Pink block inmate walks past and smirks at you.")
+		saynn("A lilac walks past and smirks at you.")
 		
 	addButton("Continue", "See what happens next", "endthescene")
 
