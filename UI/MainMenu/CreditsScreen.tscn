@@ -60,13 +60,13 @@ margin_bottom = 53.0
 [node name="ContentContainer" type="VBoxContainer" parent="VBoxContainer/ScrollContainer/ScrollVBox"]
 margin_top = 57.0
 margin_right = 1280.0
-margin_bottom = 288.0
+margin_bottom = 330.0
 size_flags_horizontal = 3
 custom_constants/separation = 10
 
 [node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer/ScrollContainer/ScrollVBox/ContentContainer"]
 margin_right = 1280.0
-margin_bottom = 231.0
+margin_bottom = 273.0
 custom_fonts/bold_font = SubResource( 1 )
 bbcode_enabled = true
 bbcode_text = "[center]This game is very early in its development. If you are reading this - thank you!
@@ -75,6 +75,8 @@ Project started by [color=#FF6A00]Rahi[/color] aka Alexofp on 01.08.2021
 Active development began on 28.12.2021
 
 Huge thanks to [color=#00B6FF]Ferri[/color] for playtesting the earliest versions and supporting me [color=red]<3[/color]
+
+Thanks to [color=#D375FF]Mekyro[/color] for creading [color=red]RRDC[/color], the inspiration of this game
 
 Thanks to [color=#0059FF]Godot team[/color] for creating the engine that this game is running on, it's a great achievement
 
@@ -86,6 +88,8 @@ Project started by Rahi aka Alexofp on 01.08.2021
 Active development began on 28.12.2021
 
 Huge thanks to Ferri for playtesting the earliest versions and supporting me <3
+
+Thanks to Mekyro for creading RRDC, the inspiration of this game
 
 Thanks to Godot team for creating the engine that this game is running on, it's a great achievement
 

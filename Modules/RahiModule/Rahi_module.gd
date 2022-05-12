@@ -6,6 +6,10 @@ const Rahi_AskedName = "Rahi_AskedName"
 const Rahi_GaveApple = "Rahi_GaveApple"
 const Rahi_CanteenSceneHappened = "Rahi_CanteenSceneHappened"
 const Avy_WonCanteenFight = "Avy_WonCanteenFight"
+const Rahi_ChillWillHappen = "Rahi_ChillWillHappen"
+const Rahi_ChillHappened = "Rahi_ChillHappened"
+const Rahi_ChillCooldown = "Rahi_ChillCooldown"
+const Rahi_Denied = "Rahi_Denied"
 
 func _init():
 	id = "RahiModule"
@@ -14,6 +18,7 @@ func _init():
 	scenes = [
 		"res://Modules/RahiModule/RahiTalkScene.gd",
 		"res://Modules/RahiModule/RahiAvyCanteenScene.gd",
+		"res://Modules/RahiModule/RahiChillScene.gd",
 		]
 	characters = [
 		"res://Modules/RahiModule/RahiCharacter.gd",
@@ -23,4 +28,18 @@ func _init():
 	events = [
 		"res://Modules/RahiModule/RahiTalkEvent.gd",
 		"res://Modules/RahiModule/RahiAvyCanteenEvent.gd",
+		"res://Modules/RahiModule/RahiChillEvent.gd",
 	]
+
+func resetFlagsOnNewDay():
+	
+	# Chill near waterfall event stuff
+	if(!getFlag(Rahi_ChillHappened, false) && !getFlag(Rahi_Denied, false)):
+		if(getFlag(Rahi_ChillCooldown, 0) > 0):
+			increaseFlag(Rahi_ChillCooldown, -1)
+
+		if(getFlag(Rahi_ChillCooldown, 0) == 0 && getFlag(Rahi_GaveApple, false)):
+			setFlag(Rahi_ChillWillHappen, true)
+			setFlag(Rahi_ChillCooldown, RNG.randi_range(1, 3))
+		else:
+			setFlag(Rahi_ChillWillHappen, false)

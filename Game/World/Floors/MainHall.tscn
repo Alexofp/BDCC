@@ -189,9 +189,12 @@ roomColor = 1
 self_modulate = Color( 0.7, 1, 0.7, 1 )
 position = Vector2( 192, 640 )
 roomName = "Prison Yard"
+roomID = "yard_waterfall"
 roomDescription = "A huge open area with lots of bushes, trees and other types of greenery. Ocasionally there is a bench to sit and relax.
 
-The ground is covered with grass, there are visible pathways made out of stone"
+The ground is covered with grass, there are visible pathways made out of stone.
+
+This spot is particularly nice. The path ends here with a fancy little pond. Above it is a small waterfall, perfect for meditating."
 roomColor = 1
 
 [node name="MainHallRoom45" parent="." index="26" instance=ExtResource( 2 )]
@@ -245,6 +248,7 @@ roomColor = 1
 self_modulate = Color( 0.7, 1, 0.7, 1 )
 position = Vector2( 0, 448 )
 roomName = "Prison Yard"
+roomID = "yard_firstroom"
 roomDescription = "A huge open area with lots of bushes, trees and other types of greenery. Ocasionally there is a bench to sit and relax.
 
 The ground is covered with grass, there are visible pathways made out of stone"

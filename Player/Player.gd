@@ -525,7 +525,15 @@ func loadData(data):
 	intoxication = SAVE.loadVar(data, "intoxication", 0.0)
 	intoxicationTolerance = SAVE.loadVar(data, "intoxicationTolerance", 0.0)
 	
+	checkLocation()
+	
 	updateNonBattleEffects()
+
+func checkLocation():
+	var _roomInfo = GM.world.getRoomByID(getLocation())
+	if(_roomInfo == null):
+		printerr("Player's location '"+str(location)+"' doesn't exists, reseting them to their cell")
+		location = getCellLocation()
 
 func saveBuffsData(buffs):
 	var data = []

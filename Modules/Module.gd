@@ -30,3 +30,12 @@ func register():
 
 func resetFlagsOnNewDay():
 	pass
+
+func setFlag(flagID, value):
+	GM.main.setFlag(flagID, value)
+
+func getFlag(flagID, defaultValue = null):
+	return GM.main.getFlag(flagID, defaultValue)
+
+func increaseFlag(flagID, addvalue = 1):
+	GM.main.increaseFlag(flagID, addvalue)

@@ -59,3 +59,12 @@ func addButtonWithChecks(text: String, tooltip: String, method: String, args, ch
 		addButton(text, ButtonChecks.getPrefix(checks) + tooltip, method, args)
 	else:
 		addDisabledButton(text, ButtonChecks.getReasonText(badCheck))
+
+func setFlag(flagID, value):
+	GM.main.setFlag(flagID, value)
+
+func getFlag(flagID, defaultValue = null):
+	return GM.main.getFlag(flagID, defaultValue)
+
+func increaseFlag(flagID, addvalue = 1):
+	GM.main.increaseFlag(flagID, addvalue)
