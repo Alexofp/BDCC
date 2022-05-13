@@ -5,6 +5,7 @@ enum {
 	Illegal,
 	BDSMRestraint,
 	CanBeForcedByGuards,
+	Condom,
 }
 
 static func getName(tag):
@@ -12,4 +13,6 @@ static func getName(tag):
 		return "Illegal"
 	if(tag == BDSMRestraint):
 		return "Restraint"
+	if(tag == Condom):
+		return "Condom"
 	return "error"

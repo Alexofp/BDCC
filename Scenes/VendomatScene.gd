@@ -19,6 +19,7 @@ var sellingItems = [
 #	"lube",
 	"restraintkey",
 	"EnergyDrink",
+	"Condom",
 	]
 var sellItemsData = {}
 
@@ -32,6 +33,7 @@ func _initScene(_args = []):
 			"name": itemObject.getVisibleName(),
 			"desc": itemObject.getVisisbleDescription(),
 			"price": itemObject.getPrice(),
+			"amount": itemObject.getBuyAmount(),
 		}
 
 func _run():
@@ -49,12 +51,16 @@ func _run():
 		
 		for itemID in sellItemsData:
 			var item = sellItemsData[itemID]
-			sayn(item["name"]+", "+str(item["price"])+" credits")
+			var itemName = item["name"]
+			if(item["amount"] > 1):
+				itemName = str(item["amount"])+"x"+itemName
+			
+			sayn(itemName+", "+str(item["price"])+" credits")
 			
 			if(GM.pc.getCredits() >= item["price"]):
-				addButton(item["name"], str(item["price"]) + " credits\n" + item["desc"], "buy", [itemID])
+				addButton(itemName, str(item["price"]) + " credits\n" + item["desc"], "buy", [itemID])
 			else:
-				addDisabledButton(item["name"], str(item["price"]) + " credits\n" + item["desc"])
+				addDisabledButton(itemName, str(item["price"]) + " credits\n" + item["desc"])
 		
 		addButton("Back", "Don't buy anything", "")
 
@@ -70,12 +76,19 @@ func _run():
 func _react(_action: String, _args):
 	if(_action == "buy"):
 		var itemID = _args[0]
+		var item = sellItemsData[itemID]
+		var itemName = item["name"]
+		if(item["amount"] > 1):
+			itemName = str(item["amount"])+"x"+itemName
 		
-		var item = GlobalRegistry.createItem(itemID)
-		GM.pc.getInventory().addItem(item)
+		var itemObject = GlobalRegistry.createItem(itemID)
+		if(item["amount"] > 1):
+			itemObject.setAmount(item["amount"])
+		GM.pc.getInventory().addItem(itemObject)
 		GM.pc.addCredits(-sellItemsData[itemID]["price"])
+
 		
-		addMessage(""+sellItemsData[itemID]["name"]+" was added to your inventory")
+		addMessage(""+itemName+" was added to your inventory")
 		
 		setState("")
 		return

@@ -1102,3 +1102,23 @@ func hasBodywritings():
 
 func clearBodywritings():
 	removeEffect(StatusEffect.HasBodyWritings)
+
+func hasCondoms():
+	return getInventory().getItemsWithTag(ItemTag.Condom).size() > 0
+
+func useBestCondom():
+	var condoms = getInventory().getItemsWithTag(ItemTag.Condom)
+	if(condoms.size() <= 0):
+		return null
+	
+	var bestObject = null
+	var bestChance = -99.0
+	for condom in condoms:
+		if(condom.getCondomBreakChance() > bestChance):
+			bestChance = condom.getCondomBreakChance()
+			bestObject = condom
+	
+	if(bestObject != null):
+		bestObject.removeXOrDestroy(1)
+	return bestChance
+	

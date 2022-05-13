@@ -117,7 +117,7 @@ func _run():
 
 		# (if general)
 		if(GM.pc.getInmateType() == InmateType.General):
-			saynn("[say=cp_guard]Such a slut, you should be in the pink block, I wouldn’t mind fucking you every once in a while.[/say]")
+			saynn("[say=cp_guard]Such a slut, you should be in the lilac block, I wouldn’t mind fucking you every once in a while.[/say]")
 
 		# (if pink)
 		if(GM.pc.getInmateType() == InmateType.SexDeviant):

@@ -5,4 +5,5 @@ func _init():
 	sellingItems = [
 		"painkillers",
 		"lube",
+		"QualityCondom",
 	]

@@ -11,6 +11,7 @@ enum {
 	SkillCheck,
 	StatCheck,
 	PerkCheck,
+	HasCondoms,
 }
 
 static func getReasonText(reason):
@@ -28,6 +29,8 @@ static func getReasonText(reason):
 		return "You can't do this while your arms are restrained"
 	if(reason == NotLegsRestrained):
 		return "You can't do this while your legs are restrained"
+	if(reason == HasCondoms):
+		return "You don't have any condoms"
 	if(reason == SkillCheck):
 		return ""
 	if(reason == StatCheck):
@@ -70,6 +73,9 @@ static func check(checks: Array):
 		if(reason == PerkCheck):
 			if(!GM.pc.hasPerk(args[1])):
 				return args
+		if(reason == HasCondoms):
+			if(!GM.pc.hasCondoms()):
+				return reason
 	return null
 
 static func getPrefix(checks: Array):

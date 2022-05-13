@@ -183,6 +183,9 @@ func buff(buffid, args = []):
 func getPrice():
 	return 0
 
+func getBuyAmount():
+	return 1
+
 func getSellPrice():
 	return int(getPrice() / 2.0)
 
