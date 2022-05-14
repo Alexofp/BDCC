@@ -19,3 +19,7 @@ func canSell():
 func canCombine():
 	return true
 
+func getTags():
+	return [
+		ItemTag.SoldByGeneralVendomat,
+		]

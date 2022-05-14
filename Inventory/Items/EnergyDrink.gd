@@ -53,3 +53,8 @@ func getTimedBuffsTurns():
 
 func getBuffsDurationTurns():
 	return 5
+
+func getTags():
+	return [
+		ItemTag.SoldByGeneralVendomat,
+		]

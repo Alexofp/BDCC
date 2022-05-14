@@ -23,7 +23,10 @@ func getBuyAmount():
 	return 10
 
 func getTags():
-	return [ItemTag.Condom]
+	return [
+		ItemTag.Condom,
+		ItemTag.SoldByGeneralVendomat,
+		]
 
 func getCondomBreakChance():
 	return 20.0

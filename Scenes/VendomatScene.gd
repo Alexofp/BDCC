@@ -1,33 +1,25 @@
 extends "res://Scenes/SceneBase.gd"
 
+var sellingItemsTags = [
+	ItemTag.SoldByGeneralVendomat,
+]
 var sellingItems = [
-#	"ballgag",
-#	"ringgag",
-#	"caninedildogag",
-#	"basketmuzzle",
-#	"appleitem",
-#	"blindfold",
-#	"policecuffs",
-#	"inmatewristcuffs",
-#	"inmateanklecuffs",
-#	"buttplug",
-#	"bondagemittens",
-#	"vaginalplug",
-#	"restraintkey",
-#	"ropeharness",
-#	"painkillers",
-#	"lube",
-	"restraintkey",
-	"EnergyDrink",
-	"Condom",
 	]
 var sellItemsData = {}
+var sortedItemsIds = []
 
 func _init():
 	sceneID = "VendomatScene"
 	
 func _initScene(_args = []):
+	for itemTag in sellingItemsTags:
+		var itemIDs = GlobalRegistry.getItemIDsByTag(itemTag)
+		sellingItems.append_array(itemIDs)
+	
 	for itemID in sellingItems:
+		if(sellItemsData.has(itemID)):
+			continue
+		
 		var itemObject = GlobalRegistry.getItemRef(itemID)
 		sellItemsData[itemID] = {
 			"name": itemObject.getVisibleName(),
@@ -35,6 +27,14 @@ func _initScene(_args = []):
 			"price": itemObject.getPrice(),
 			"amount": itemObject.getBuyAmount(),
 		}
+		sortedItemsIds.append(itemID)
+	sortedItemsIds.sort_custom(self, "sort_stock")	
+	
+func sort_stock(a, b):
+	if sellItemsData[a]["price"] < sellItemsData[b]["price"]:
+		return true
+	return false
+
 
 func _run():
 	if(state == ""):
@@ -49,7 +49,7 @@ func _run():
 	if(state == "buymenu"):
 		saynn("Machine displays a list of what it can sell you:")
 		
-		for itemID in sellItemsData:
+		for itemID in sortedItemsIds:
 			var item = sellItemsData[itemID]
 			var itemName = item["name"]
 			if(item["amount"] > 1):

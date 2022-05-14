@@ -6,6 +6,9 @@ enum {
 	BDSMRestraint,
 	CanBeForcedByGuards,
 	Condom,
+	SoldByGeneralVendomat,
+	SoldByMedicalVendomat,
+	SoldByUnderwearVendomat,
 }
 
 static func getName(tag):

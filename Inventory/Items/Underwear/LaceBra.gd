@@ -37,3 +37,8 @@ func coversBodyparts():
 
 func getPrice():
 	return 8
+
+func getTags():
+	return [
+		ItemTag.SoldByUnderwearVendomat,
+		]
