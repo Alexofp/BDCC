@@ -364,6 +364,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Modules/RahiModule/Rahi_module.gd"
 }, {
+"base": "Object",
+"class": "RandomSceneType",
+"language": "GDScript",
+"path": "res://Game/Gameplay/RandomSceneType.gd"
+}, {
 "base": "RestraintData",
 "class": "RestraintBallGag",
 "language": "GDScript",
@@ -621,6 +626,7 @@ _global_script_class_icons={
 "QuestSystem": "",
 "RNG": "",
 "RahiModule": "",
+"RandomSceneType": "",
 "RestraintBallGag": "",
 "RestraintBlindfold": "",
 "RestraintButtplug": "",

@@ -39,3 +39,6 @@ func getFlag(flagID, defaultValue = null):
 
 func increaseFlag(flagID, addvalue = 1):
 	GM.main.increaseFlag(flagID, addvalue)
+
+func getRandomSceneFor(_sceneType):
+	return []

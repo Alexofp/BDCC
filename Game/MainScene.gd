@@ -344,3 +344,20 @@ func _on_Player_skillLevelChanged(_skillID):
 
 func _on_Player_orificeBecomeMoreLoose(orificeName, _newvalue, _oldvalue):
 	addMessage("Your "+orificeName+" is stretched and is now more used to the insertions")
+
+func getRandomSceneFor(sceneType):
+	var resultScenes = []
+	
+	var modules = GlobalRegistry.getModules()
+	for moduleID in modules:
+		var module : Module = modules[moduleID]
+		
+		var moduleScenes = module.getRandomSceneFor(sceneType)
+		if(moduleScenes == null || !(moduleScenes is Array)):
+			continue
+		if(moduleScenes.size() > 0 && !(moduleScenes[0] is Array)):
+			printerr("Module "+str(moduleID)+" returns bad getRandomSceneFor() data")
+			continue
+		resultScenes.append_array(moduleScenes)
+	
+	return RNG.pickWeightedPairs(resultScenes)

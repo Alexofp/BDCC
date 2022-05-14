@@ -41,10 +41,28 @@ static func pickWeighted(ar, weights: Array):
 	for w in weights:
 		sum += w
 	
-	var r = rand_range(0.0, sum) # Should it be from 1.0 or 0.0?
+	var r = rand_range(0.0, sum)
 	for i in range(weights.size()):
 		r -= weights[i]
 		if r <= 0.0:
 			return ar[i]
 			
 	return ar[0]
+
+
+# RNG.pickWeightedPairs([["a", 10.0], ["b", 100.0], ["c", 10.0]]) # 'b' will show up 10 times more
+static func pickWeightedPairs(ar: Array):
+	if(ar.empty()):
+		return null
+		
+	var sum = 0.0
+	for pair in ar:
+		sum += pair[1]
+		
+	var r = rand_range(0.0, sum)
+	for i in range(ar.size()):
+		r -= ar[i][1]
+		if r <= 0.0:
+			return ar[i][0]
+			
+	return ar[0][0]

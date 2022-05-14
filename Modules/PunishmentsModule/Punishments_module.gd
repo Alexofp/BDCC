@@ -20,7 +20,14 @@ func _init():
 	]
 	items = []
 	events = [
-		"res://Modules/PunishmentsModule/StocksEscapeEvent.gd",
-		"res://Modules/PunishmentsModule/StocksRandomEvent.gd",
-		"res://Modules/PunishmentsModule/StocksWillingSexEvent.gd",
 	]
+
+func getRandomSceneFor(sceneType):
+	if(sceneType == RandomSceneType.StocksEscape):
+		return [["StocksEscape", 10.0]]
+	if(sceneType == RandomSceneType.StocksEvent):
+		return [["StocksSpankedByInmate", 10.0], ["StocksMeetEliza", 10.0], ["StocksTinyMessages", 10.0], ["StocksTinyMessages", 10.0]]
+	if(sceneType == RandomSceneType.StocksWillingSex):
+		return [["StocksRishaBlowjob", 10.0]]
+		
+	return []

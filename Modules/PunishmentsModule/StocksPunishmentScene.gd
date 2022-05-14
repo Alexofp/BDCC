@@ -15,7 +15,7 @@ func _run():
 
 		saynn("All you can do is wait while inmates and staff walk past you, minding their stuff. Though some look intrigued.")
 
-		addButton("Wait", "Stay quiet and try to get some rest (You might get something done to you but you will never be fucked unwillingly)", "justwait")
+		addButton("Wait", "Stay quiet and try to get some rest (You might get something done to you but you will never be fucked unwillingly)", "afterWait")
 		addButton("Be loud", "Ask to be freed. You might not get the type of attention that you want. (Anything can happen)", "be_loud")
 		addButton("Struggle", "Maybe you can escape somehow", "struggle")
 		if(!GM.pc.getInventory().hasLockedStaticRestraints()):
@@ -26,7 +26,7 @@ func _run():
 	if(state == "afterWait"):
 		saynn("You decide to stay quiet. You’re forced to stand in an uncomfortable pose, it’s humiliating but you get some rest.")
 		
-		addButton("Continue", "What now", "")
+		addButton("Continue", "What now", "afterjustwait")
 
 
 	if(state == "be_loud"):
@@ -50,18 +50,32 @@ func _run():
 
 		addButton("Continue", "See what happens", "afterbeloud")
 
-func triggerRandomEvent(escapeChance, _lewdChance, _willingSexChance, _unWillingSexChance):
-	if(RNG.chance(escapeChance)):
-		if(GM.ES.trigger(Trigger.StocksEscape)):
+func triggerRandomEvent(escapeChance, _lewdChance, _willingSexChance, _unWillingSexChance, _nothingChance):
+	var eventType = RNG.pickWeighted([RandomSceneType.StocksEscape, RandomSceneType.StocksEvent, RandomSceneType.StocksWillingSex, RandomSceneType.StocksUnWillingSex, ""], [escapeChance, _lewdChance, _willingSexChance, _unWillingSexChance, _nothingChance])
+	
+	if(eventType == RandomSceneType.StocksEscape):
+		var sceneID = GM.main.getRandomSceneFor(RandomSceneType.StocksEscape)
+		if(sceneID != null):
+			runScene(sceneID)
 			endScene()
 			return true
 	
-	if(RNG.chance(_lewdChance)):
-		if(GM.ES.trigger(Trigger.StocksEvent)):
+	if(eventType == RandomSceneType.StocksEvent):
+		var sceneID = GM.main.getRandomSceneFor(RandomSceneType.StocksEvent)
+		if(sceneID != null):
+			runScene(sceneID)
 			return true
 			
-	if(RNG.chance(_willingSexChance)):
-		if(GM.ES.trigger(Trigger.StocksWillingSex)):
+	if(eventType == RandomSceneType.StocksWillingSex):
+		var sceneID = GM.main.getRandomSceneFor(RandomSceneType.StocksWillingSex)
+		if(sceneID != null):
+			runScene(sceneID)
+			return true
+			
+	if(eventType == RandomSceneType.StocksUnWillingSex):
+		var sceneID = GM.main.getRandomSceneFor(RandomSceneType.StocksUnWillingSex)
+		if(sceneID != null):
+			runScene(sceneID)
 			return true
 	
 	return false
@@ -70,15 +84,15 @@ func _react(_action: String, _args):
 	if(_action == "afterbeloud"):
 		processTime(60*30)
 		GM.pc.addStamina(50)
-		triggerRandomEvent(3, 50, 50, 30)
+		triggerRandomEvent(3, 50, 50, 30, 20)
 		setState("")
 		return
 	
-	if(_action == "justwait"):
-		if(RNG.chance(80) || !triggerRandomEvent(2, 20, 20, 0)):
-			processTime(60*30)
-			GM.pc.addStamina(50)
-			setState("afterWait")
+	if(_action == "afterjustwait"):
+		processTime(60*30)
+		GM.pc.addStamina(50)
+		triggerRandomEvent(2, 20, 20, 0, 50)
+		setState("")
 		return
 	
 	if(_action == "endthescene"):
