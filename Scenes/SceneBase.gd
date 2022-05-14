@@ -53,16 +53,6 @@ func run():
 	GM.ui.clearUItextboxes()
 	_run()
 	
-	var messages: Array = GM.main.getMessages()
-	if(messages.size() > 0):
-		GM.ui.trimLineEndings()
-		say("\n\n")
-		say("[center][i]")
-		for message in GM.main.getMessages():
-			say(message)
-			say("\n")
-		say("[/i][/center]\n")
-	
 	GM.pc.updateEffectPanel(GM.ui.getPlayerStatusEffectsPanel())
 	if(fightCharacter):
 		var character = GlobalRegistry.getCharacter(fightCharacter)

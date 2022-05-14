@@ -10,6 +10,8 @@ const Rahi_ChillWillHappen = "Rahi_ChillWillHappen"
 const Rahi_ChillHappened = "Rahi_ChillHappened"
 const Rahi_ChillCooldown = "Rahi_ChillCooldown"
 const Rahi_Denied = "Rahi_Denied"
+const Rahi_ShowerHappened = "Rahi_ShowerHappened"
+const Rahi_NotThereToday = "Rahi_NotThereToday"
 
 func _init():
 	id = "RahiModule"
@@ -19,6 +21,8 @@ func _init():
 		"res://Modules/RahiModule/RahiTalkScene.gd",
 		"res://Modules/RahiModule/RahiAvyCanteenScene.gd",
 		"res://Modules/RahiModule/RahiChillScene.gd",
+		
+		"res://Modules/RahiModule/ShowerEvent/RahiShowerScene.gd",
 		]
 	characters = [
 		"res://Modules/RahiModule/RahiCharacter.gd",
@@ -29,9 +33,13 @@ func _init():
 		"res://Modules/RahiModule/RahiTalkEvent.gd",
 		"res://Modules/RahiModule/RahiAvyCanteenEvent.gd",
 		"res://Modules/RahiModule/RahiChillEvent.gd",
+		
+		"res://Modules/RahiModule/ShowerEvent/RahiShowerEvent.gd",
 	]
 
 func resetFlagsOnNewDay():
+	if(getFlag(Rahi_NotThereToday, false)):
+		setFlag(Rahi_NotThereToday, false)
 	
 	# Chill near waterfall event stuff
 	if(!getFlag(Rahi_ChillHappened, false) && !getFlag(Rahi_Denied, false)):

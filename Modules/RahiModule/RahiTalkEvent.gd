@@ -13,6 +13,12 @@ func run(_args):
 	pass
 	
 func delayedRun():
+	if(getFlag(RahiModule.Rahi_NotThereToday, false)):
+		saynn("Seems like the kitty is not here")
+		
+		addDisabledButton("Rahi", "She is not here today")
+		return
+	
 	if(!GM.main.getFlag(RahiModule.Rahi_Introduced)):
 		saynn("You see some unknown feline sitting on a bench")
 	else:

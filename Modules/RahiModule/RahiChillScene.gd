@@ -211,6 +211,8 @@ func _react(_action: String, _args):
 		if(GM.pc.getPain() > 0):
 			GM.pc.addPain(-40)
 			addMessage("That made you feel better")
+			
+		setFlag(RahiModule.Rahi_NotThereToday, true)
 
 	if(_action == "endthescene"):
 		endScene()

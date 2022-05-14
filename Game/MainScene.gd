@@ -133,6 +133,15 @@ func runCurrentScene():
 		sceneStack.back().run()
 		
 		GM.ES.doDelayedEvents()
+		
+		if(messages.size() > 0):
+			GM.ui.trimLineEndings()
+			GM.ui.say("\n\n")
+			GM.ui.say("[center][i]")
+			for message in messages:
+				GM.ui.say(message)
+				GM.ui.say("\n")
+			GM.ui.say("[/i][/center]\n")
 	updateStuff()
 
 func reRun():
