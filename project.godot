@@ -664,6 +664,9 @@ _global_script_class_icons={
 
 config/name="BDCC"
 run/main_scene="res://UI/MainMenu/MainMenu.tscn"
+boot_splash/image="res://AssetsSource/splash.png"
+boot_splash/fullsize=false
+boot_splash/bg_color=Color( 0.145098, 0.145098, 0.501961, 1 )
 config/icon="res://icon.png"
 config/windows_native_icon="res://icon.ico"
 
