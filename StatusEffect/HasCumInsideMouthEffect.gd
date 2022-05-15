@@ -17,9 +17,6 @@ func getEffectName():
 	return "Orally-filled"
 
 func getEffectDesc():
-	if(!character.isPlayer()):
-		return character.getName()+" has cum inside their belly"
-	
 	if(!character.hasBodypart(BodypartSlot.Head)):
 		return "Something is wrong"
 	var bodypart = character.getBodypart(BodypartSlot.Head)

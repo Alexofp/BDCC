@@ -57,6 +57,12 @@ func run():
 	if(fightCharacter):
 		var character = GlobalRegistry.getCharacter(fightCharacter)
 		character.updateEffectPanel(GM.ui.getNPCStatusEffectsPanel())
+	for id in currentCharacters:
+		var character = GlobalRegistry.getCharacter(id)
+		if(!character):
+			continue
+		character.updateNonBattleEffects()
+	GM.ui.getCharactersPanel().updateStatuses()
 		
 	
 func react(_action: String, _args):

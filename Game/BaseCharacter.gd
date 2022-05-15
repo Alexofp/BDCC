@@ -13,6 +13,8 @@ enum Gender {
 signal stat_changed
 signal levelChanged
 signal skillLevelChanged(skillID)
+signal bodypart_changed
+
 var pain:int = 0
 var lust:int = 0
 var stamina:int = 100
@@ -23,6 +25,10 @@ var buffsHolder: BuffsHolder
 var skillsHolder: SkillsHolder
 var lustInterests: LustInterests
 
+# Bodypart stuff
+var bodyparts: Dictionary
+var bodypartStorageNode
+
 # Combat stats
 var initialDodgeChance = 0
 
@@ -32,6 +38,10 @@ func _init():
 	name = "BaseCharacter"
 
 func _ready():
+	bodypartStorageNode = Node.new()
+	add_child(bodypartStorageNode)
+	bodypartStorageNode.name = "Bodyparts"
+	resetSlots()
 	statusEffectsStorageNode = Node.new()
 	add_child(statusEffectsStorageNode)
 	statusEffectsStorageNode.name = "StatusEffects"	
@@ -596,11 +606,22 @@ func getFluidType(fluidSource):
 
 func getFluidAmount(fluidSource):
 	if(fluidSource == BodilyFluids.FluidSource.Penis):
+		if(hasBodypart(BodypartSlot.Penis)):
+			var penis:BodypartPenis = getBodypart(BodypartSlot.Penis)
+			return penis.getFluidProduction().getFluidAmount()
 		return 100.0
 	if(fluidSource == BodilyFluids.FluidSource.Vagina):
-		return 200.0
+		return RNG.randf_range(50.0, 200.0)
 		
 	return 0.0
+
+func extractFluidAmount(fluidSource, howmuch = 1.0):
+	if(fluidSource == BodilyFluids.FluidSource.Penis):
+		if(hasBodypart(BodypartSlot.Penis)):
+			var penis:BodypartPenis = getBodypart(BodypartSlot.Penis)
+			return penis.getFluidProduction().drain(howmuch)
+
+	return getFluidAmount(fluidSource)
 
 func getFemininity() -> int:
 	return 50
@@ -658,3 +679,93 @@ static func genderToPronouns(thegender):
 	if(thegender == Gender.Other):
 		return "It/its"
 	return "error?"
+
+# Bodyparts stuff
+
+func updateAppearance():
+	emit_signal("bodypart_changed")
+
+func resetSlots():
+	for slot in BodypartSlot.getAll():
+		if(bodyparts.has(slot) && bodyparts[slot] != null):
+			bodyparts[slot].queue_free()
+		bodyparts[slot] = null
+
+func giveBodypart(bodypart: Bodypart):
+	var slot = bodypart.getSlot()
+	if(bodyparts.has(slot) && bodyparts[slot] != null):
+		bodyparts[slot].queue_free()
+	bodyparts[slot] = bodypart
+	bodypartStorageNode.add_child(bodypart)
+	bodypart.name = bodypart.visibleName
+	bodypart.character = weakref(self)
+	emit_signal("bodypart_changed")
+
+func giveBodypartUnlessSame(bodypart: Bodypart):
+	var slot = bodypart.getSlot()
+	if(bodyparts.has(slot) && bodyparts[slot] != null):
+		if(bodypart.id == bodyparts[slot].id):
+			bodypart.queue_free()
+			return
+	giveBodypart(bodypart)
+
+func hasBodypart(slot):
+	if(bodyparts.has(slot) && bodyparts[slot] != null):
+		return true
+	return false
+	
+func getBodypart(slot):
+	return bodyparts[slot]
+
+func getBodyparts():
+	return bodyparts
+	
+func removeBodypart(slot):
+	if(bodyparts.has(slot) && bodyparts[slot] != null):
+		bodyparts[slot].queue_free()
+	bodyparts[slot] = null
+	emit_signal("bodypart_changed")
+
+func clearOrificeFluids():
+	if(hasBodypart(BodypartSlot.Vagina)):
+		getBodypart(BodypartSlot.Vagina).clearOrificeFluids()
+	getBodypart(BodypartSlot.Anus).clearOrificeFluids()
+	getBodypart(BodypartSlot.Head).clearOrificeFluids()
+
+func cummedInBodypartBy(bodypartSlot, characterID, sourceType = null):
+	if(!hasBodypart(bodypartSlot)):
+		return
+	
+	var ch = GlobalRegistry.getCharacter(characterID)
+	if(sourceType == null):
+		sourceType = BodilyFluids.FluidSource.Penis
+	
+	var thebodypart = getBodypart(bodypartSlot)
+	thebodypart.addFluidOrifice(ch.getFluidType(sourceType), ch.extractFluidAmount(sourceType), characterID)
+
+func cummedInVaginaBy(characterID, sourceType = null):
+	cummedInBodypartBy(BodypartSlot.Vagina, characterID, sourceType)
+
+func cummedInAnusBy(characterID, sourceType = null):
+	cummedInBodypartBy(BodypartSlot.Anus, characterID, sourceType)
+
+func cummedInMouthBy(characterID, sourceType = null):
+	cummedInBodypartBy(BodypartSlot.Head, characterID, sourceType)
+
+func getGenitalElasticity():
+	var value = 0.0
+	value += buffsHolder.getGenitalElasticity()
+	return value
+	
+func getGenitalResistance():
+	var value = 0.0
+	value += buffsHolder.getGenitalResistance()
+	return value
+
+func getOrificeMinLooseness(orificeType):
+	var value = 0.0
+	value += buffsHolder.getOrificeMinLooseness(orificeType)
+	return value
+	
+func getOrificeBlocked(orificeType):
+	return buffsHolder.getOrificeBlocked(orificeType)

@@ -17,9 +17,6 @@ func getEffectName():
 	return "Anal Creampie"
 
 func getEffectDesc():
-	if(!character.isPlayer()):
-		return character.getName()+" has cum inside their anus"
-	
 	if(!character.hasBodypart(BodypartSlot.Anus)):
 		return "Something is wrong"
 	var bodypart = character.getBodypart(BodypartSlot.Anus)

@@ -52,3 +52,6 @@ func set_text(title: String, body: String):
 	#rect_size = Vector2(0,0)
 	#_body.rect_size = Vector2(0,0)
 	#$VBoxContainer.rect_size = Vector2(250,0)
+
+func setShowBelow(shbelow):
+	showBelow = shbelow

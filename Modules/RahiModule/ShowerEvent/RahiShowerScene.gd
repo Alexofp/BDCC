@@ -308,6 +308,8 @@ func _react(_action: String, _args):
 		if(chance != null && RNG.chance(chance)):
 			condomBroke = true
 		
+		if(!usedCondom || (usedCondom && condomBroke)):
+			GlobalRegistry.getCharacter("rahi").cummedInVaginaBy("pc")
 		GM.pc.orgasmFrom("rahi")
 
 	if(_action == "endthescene"):

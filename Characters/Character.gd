@@ -14,6 +14,7 @@ var npcBaseStamina = null
 
 func _ready():
 	name = id
+	createBodyparts()
 	for statID in npcStats:
 		skillsHolder.setStat(statID, npcStats[statID])
 	skillsHolder.setLevel(npcLevel)
@@ -55,6 +56,16 @@ func saveData():
 		"stamina": stamina,
 	}
 	
+	data["bodyparts"] = {}
+	for slot in bodyparts:
+		if(bodyparts[slot] == null):
+			continue
+		
+		data["bodyparts"][slot] = {
+			"id": bodyparts[slot].id,
+			"data": bodyparts[slot].saveData(),
+		}
+	
 	data["statusEffects"] = saveStatusEffectsData()
 	data["inventory"] = inventory.saveData()
 	data["lustInterests"] = lustInterests.saveData()
@@ -65,6 +76,21 @@ func loadData(data):
 	pain = SAVE.loadVar(data, "pain", 0)
 	lust = SAVE.loadVar(data, "lust", 0)
 	stamina = SAVE.loadVar(data, "stamina", 100)
+	
+	var loadedBodyparts = SAVE.loadVar(data, "bodyparts", {})
+	for slot in loadedBodyparts:
+		if(loadedBodyparts[slot] == null):
+			assert(false)
+		var bodypartStuff = loadedBodyparts[slot]
+		var bodypartid = SAVE.loadVar(bodypartStuff, "id", "")
+		var bodypartData = SAVE.loadVar(bodypartStuff, "data", {})
+		if(!hasBodypart(slot)):
+			continue
+		var bodypart = getBodypart(slot)
+		if(bodypartid != bodypart.id):
+			printerr("Bodypart changed for "+getName()+"'s "+str(slot)+", ignoring data (was "+bodypartid+", became "+bodypart.id+")")
+			continue
+		bodypart.loadData(bodypartData)
 	
 	loadStatusEffectsData(SAVE.loadVar(data, "statusEffects", {}))
 	inventory.loadData(SAVE.loadVar(data, "inventory", {}))
@@ -93,3 +119,33 @@ func getBaseLustThreshold() -> int:
 		return npcBaseLust
 	return .getBaseLustThreshold()
 	
+func createBodyparts():
+	pass
+
+func processTime(_secondsPassed):
+	for bodypartSlot in bodyparts:
+		var bodypart = bodyparts[bodypartSlot]
+		if(bodypart == null):
+			continue
+		bodypart.processTime(_secondsPassed)
+		
+func hoursPassed(_howmuch):
+	for bodypartSlot in bodyparts:
+		if(bodyparts[bodypartSlot] != null):
+			bodyparts[bodypartSlot].hoursPassed(_howmuch)
+
+func updateNonBattleEffects():
+	if(hasBodypart(BodypartSlot.Vagina) && !getBodypart(BodypartSlot.Vagina).isOrificeEmpty()):
+		addEffect(StatusEffect.HasCumInsideVagina)
+	else:
+		removeEffect(StatusEffect.HasCumInsideVagina)
+		
+	if(hasBodypart(BodypartSlot.Anus) && !getBodypart(BodypartSlot.Anus).isOrificeEmpty()):
+		addEffect(StatusEffect.HasCumInsideAnus)
+	else:
+		removeEffect(StatusEffect.HasCumInsideAnus)
+		
+	if(hasBodypart(BodypartSlot.Head) && !getBodypart(BodypartSlot.Head).isOrificeEmpty()):
+		addEffect(StatusEffect.HasCumInsideMouth)
+	else:
+		removeEffect(StatusEffect.HasCumInsideMouth)

@@ -5,7 +5,7 @@ class_name Orifice
 
 var contents = []
 var dirtyFlag = true
-var cachedFluidsAmount = 0
+var cachedFluidsAmount: float = 0.0
 
 var looseness: float = 0.0
 

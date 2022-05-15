@@ -14,3 +14,11 @@ func getSmallDescription() -> String:
 
 func getSpecies():
 	return ["feline"]
+
+func createBodyparts():
+	#var mybreasts: BodypartBreasts = GlobalRegistry.createBodypart("humanbreasts")
+	#mybreasts.size = BreastsSize.C
+	#giveBodypartUnlessSame(mybreasts)
+	giveBodypartUnlessSame(GlobalRegistry.createBodypart("felinehead"))
+	giveBodypartUnlessSame(GlobalRegistry.createBodypart("vagina"))
+	giveBodypartUnlessSame(GlobalRegistry.createBodypart("anus"))

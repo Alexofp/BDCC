@@ -42,3 +42,8 @@ func onCharacterMouseEntered(panel):
 
 func onCharacterMouseExited():
 	optionTooltip.set_is_active(false)
+
+func updateStatuses():
+	for charID in addedCharacters:
+		var panel = addedCharacters[charID]
+		panel.updateStatuses()

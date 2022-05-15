@@ -1,14 +1,14 @@
 extends BaseCharacter
 class_name Player
 
-signal bodypart_changed
+
 signal location_changed(newloc)
 signal animation_changed(newanim)
 
 var gamename = "Player"
 var credits:int = 0
 var location:String = "cellblock_orange_playercell"#"ScriptedRoom"
-var bodyparts: Dictionary
+
 var pickedGender = Gender.Female
 var pronounsGender = null
 var pickedSpecies = ["feline"]
@@ -32,7 +32,7 @@ var timedBuffsDurationTurns: int = 0
 #
 signal orificeBecomeMoreLoose(orificeName, newvalue, oldvalue)
 
-var bodypartStorageNode
+
 
 func _init():
 	initialDodgeChance = 0.05 # Player has a small chance to dodge anything
@@ -40,10 +40,8 @@ func _init():
 func _ready():
 	#GM.pc = self
 	name = "Player"
-	bodypartStorageNode = Node.new()
-	add_child(bodypartStorageNode)
-	bodypartStorageNode.name = "Bodyparts"	
-	resetSlots()
+
+	
 	getInventory().clear()
 	giveBodypart(GlobalRegistry.createBodypart("felineleg"))
 	var mybreasts: BodypartBreasts = GlobalRegistry.createBodypart("humanbreasts")
@@ -70,44 +68,12 @@ func _ready():
 	#skillsHolder.setStat(Stat.Vitality, 5)
 	#skillsHolder.addSkillExperience(Skill.Combat, 250)
 
-func updateAppearance():
-	emit_signal("bodypart_changed")
+
 
 func playAnimation(dollAnim):
 	emit_signal("animation_changed", dollAnim)
 
-func resetSlots():
-	for slot in BodypartSlot.getAll():
-		if(bodyparts.has(slot) && bodyparts[slot] != null):
-			bodyparts[slot].queue_free()
-		bodyparts[slot] = null
 
-func giveBodypart(bodypart: Bodypart):
-	var slot = bodypart.getSlot()
-	if(bodyparts.has(slot) && bodyparts[slot] != null):
-		bodyparts[slot].queue_free()
-	bodyparts[slot] = bodypart
-	bodypartStorageNode.add_child(bodypart)
-	bodypart.name = bodypart.visibleName
-	bodypart.character = weakref(self)
-	emit_signal("bodypart_changed")
-
-func hasBodypart(slot):
-	if(bodyparts.has(slot) && bodyparts[slot] != null):
-		return true
-	return false
-	
-func getBodypart(slot):
-	return bodyparts[slot]
-
-func getBodyparts():
-	return bodyparts
-	
-func removeBodypart(slot):
-	if(bodyparts.has(slot) && bodyparts[slot] != null):
-		bodyparts[slot].queue_free()
-	bodyparts[slot] = null
-	emit_signal("bodypart_changed")
 
 func setLocation(newRoomID:String):
 	location = newRoomID
@@ -714,10 +680,17 @@ func afterTakingAShower():
 	updateNonBattleEffects()
 
 func orgasmFrom(_characterID: String):
+	cumOnFloor()
+	
 	addLust(-lust)
 	if(hasPerk(Perk.SexLustPassion)):
 		addStamina(20)
 	updateNonBattleEffects()
+
+func cumOnFloor():
+	if(hasBodypart(BodypartSlot.Penis)):
+		var penis:BodypartPenis = getBodypart(BodypartSlot.Penis)
+		return penis.getFluidProduction().drain()
 
 func cummedOnBy(characterID, sourceType = null, howMessy: int = 1):	
 	var ch = GlobalRegistry.getCharacter(characterID)
@@ -740,12 +713,6 @@ func coverBodyWithFluid(characterID, fluidType, howMuchLevels: int = 1):
 func clearBodyFluids():
 	bodyFluids.clear()
 	bodyMessiness = 0
-
-func clearOrificeFluids():
-	if(hasBodypart(BodypartSlot.Vagina)):
-		getBodypart(BodypartSlot.Vagina).clearOrificeFluids()
-	getBodypart(BodypartSlot.Anus).clearOrificeFluids()
-	getBodypart(BodypartSlot.Head).clearOrificeFluids()
 
 func getOutsideMessinessLevel():
 	return bodyMessiness
@@ -790,26 +757,6 @@ func gotAnusFuckedBy(characterID, showMessages = true):
 
 func gotThroatFuckedBy(characterID, showMessages = true):
 	return gotFuckedBy(BodypartSlot.Head, characterID, showMessages)
-
-func cummedInBodypartBy(bodypartSlot, characterID, sourceType = null):
-	if(!hasBodypart(bodypartSlot)):
-		return
-	
-	var ch = GlobalRegistry.getCharacter(characterID)
-	if(sourceType == null):
-		sourceType = BodilyFluids.FluidSource.Penis
-	
-	var thebodypart = getBodypart(bodypartSlot)
-	thebodypart.addFluidOrifice(ch.getFluidType(sourceType), ch.getFluidAmount(sourceType), characterID)
-
-func cummedInVaginaBy(characterID, sourceType = null):
-	cummedInBodypartBy(BodypartSlot.Vagina, characterID, sourceType)
-
-func cummedInAnusBy(characterID, sourceType = null):
-	cummedInBodypartBy(BodypartSlot.Anus, characterID, sourceType)
-
-func cummedInMouthBy(characterID, sourceType = null):
-	cummedInBodypartBy(BodypartSlot.Head, characterID, sourceType)
 
 func getExposure():
 	return buffsHolder.getExposure()
@@ -1038,24 +985,6 @@ func addTimedBuffsTurns(buffs: Array, turns):
 	if(turns > timedBuffsDurationTurns):
 		timedBuffsDurationTurns = turns
 	updateNonBattleEffects()
-
-func getGenitalElasticity():
-	var value = 0.0
-	value += buffsHolder.getGenitalElasticity()
-	return value
-	
-func getGenitalResistance():
-	var value = 0.0
-	value += buffsHolder.getGenitalResistance()
-	return value
-
-func getOrificeMinLooseness(orificeType):
-	var value = 0.0
-	value += buffsHolder.getOrificeMinLooseness(orificeType)
-	return value
-	
-func getOrificeBlocked(orificeType):
-	return buffsHolder.getOrificeBlocked(orificeType)
 
 func canBeMilked():
 	if(!hasBodypart(BodypartSlot.Breasts)):

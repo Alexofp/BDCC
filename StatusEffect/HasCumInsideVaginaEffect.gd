@@ -17,9 +17,6 @@ func getEffectName():
 	return "Creampie"
 
 func getEffectDesc():
-	if(!character.isPlayer()):
-		return character.getName()+" has cum inside their womb"
-	
 	if(!character.hasBodypart(BodypartSlot.Vagina)):
 		return "Something is wrong"
 	var vagina = character.getBodypart(BodypartSlot.Vagina)

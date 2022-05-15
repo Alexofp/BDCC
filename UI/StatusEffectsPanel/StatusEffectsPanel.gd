@@ -6,8 +6,7 @@ var uiblockScene = preload("res://UI/StatusEffectsPanel/EffectUIBlock.tscn")
 var battleEffects = []
 var statusEffects = []
 
-
-onready var optionTooltip = $CanvasLayer/TooltipDisplay
+export(bool) var showTooltipBelow = false
 onready var flexContainer = $FlexGridContainer
 
 # Called when the node enters the scene tree for the first time.
@@ -44,11 +43,10 @@ func addStatusEffect(type, text, desc, texture = null):
 	statusEffects.append(block)
 
 func onBlockMouseEntered(block):
-	optionTooltip.set_is_active(true)
-	optionTooltip.set_text(block.effectName, block.effectDesc)
+	GlobalTooltip.showTooltip(block.effectName, block.effectDesc, showTooltipBelow)
 
 func onBlockMouseExited():
-	optionTooltip.set_is_active(false)
+	GlobalTooltip.hideTooltip()
 
 func clearBattleEffects():
 	for b in battleEffects:

@@ -236,6 +236,11 @@ func doTimeProcess(_seconds):
 	while(copySeconds > 0):
 		var clippedSeconds = min(60*60, copySeconds)
 		GM.pc.processTime(clippedSeconds)
+		var characters = GlobalRegistry.getCharacters()
+		for characterID in characters:
+			var character = characters[characterID]
+			character.processTime(clippedSeconds)
+		
 		copySeconds -= clippedSeconds
 	
 	GM.ui.onTimePassed(_seconds)
@@ -251,6 +256,10 @@ func doTimeProcess(_seconds):
 
 func hoursPassed(howMuch):
 	GM.pc.hoursPassed(howMuch)
+	var characters = GlobalRegistry.getCharacters()
+	for characterID in characters:
+		var character = characters[characterID]
+		character.hoursPassed(howMuch)
 
 func processTimeUntil(newseconds):
 	if(timeOfDay >= newseconds):
