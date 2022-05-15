@@ -50,12 +50,12 @@ func _run():
 		saynn("You feel that she is not as nervous as she was, she is even leaning into your touch as you keep rubbing her back, slowly shifting down and now focusing on the area around her calm tail. As you focus your attention on rubbing her tail, it wraps around your hand and you can hear quiet moaning coming from her, she keeps arching her back and rubbing against you.")
 
 		# (if has dick)
-
-		saynn("You can’t help but to be aroused by that, your {pc.cock} fills with blood and becomes more hard each second, its tip rubs against the feline’s fit buttocks but she doesn’t seem to mind it. She embraces it, gently squeezing your member between her legs.")
+		if(GM.pc.hasReachablePenis()):
+			saynn("You can’t help but to be aroused by that, your {pc.cock} fills with blood and becomes more hard each second, its tip rubs against the feline’s fit buttocks but she doesn’t seem to mind it. She embraces it, gently squeezing your member between her legs.")
 
 		# (if has non-flat breasts)
-
-		saynn("You feel your nips becoming stiffer as she rubs against your {pc.breasts}. You can’t help but to let out a little pleasure noise of your own.")
+		if(GM.pc.hasNonFlatBreasts()):
+			saynn("You feel your nips becoming stiffer as she rubs against your {pc.breasts}. You can’t help but to let out a little pleasure noise of your own.")
 
 		saynn("[say=pc]You like it?[/say]")
 
@@ -64,7 +64,7 @@ func _run():
 		saynn("You finish with her tail and move on to rubbing her thighs. Kitty doesn’t hold back her feelings, she leans back into you and nuzzles your face. Water runs down your wet and aroused bodies. You breathe warmly into the feline’s ear and feel her paws on your {pc.masc} legs.")
 
 		addButton("Just kiss", "Embrace the intimacy of the moment", "just_kiss")
-		addButton("Vaginal", "Ask if it’s okay first (It’s gonna be rough)", "vaginal")
+		addButtonWithChecks("Vaginal", "Ask if it’s okay first (It’s gonna be rough)", "vaginal", [], [ButtonChecks.HasReachablePenis])
 		addButton("Lick her out", "Taste the kitty (Gonna be somewhat rough for her)", "lick_her_out")
 
 	if(state == "just_kiss"):
