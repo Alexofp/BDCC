@@ -141,3 +141,5 @@ func _on_DevLikesGenerator_pressed():
 func _on_DiscordButton_pressed():
 	var _ok = OS.shell_open("https://discord.gg/7UGYBvQrc3")
 	
+func _on_ChangelogButton_pressed():
+	var _ok = OS.shell_open("https://github.com/Alexofp/BDCC/blob/main/CHANGELOG.md")

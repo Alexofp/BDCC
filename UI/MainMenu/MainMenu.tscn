@@ -314,6 +314,15 @@ hint_tooltip = "Open the panel with the tools that are useful for content develo
 size_flags_horizontal = 3
 text = "DevTools"
 
+[node name="ChangelogButton" type="Button" parent="HBoxContainer/MainVBox/GridContainer"]
+margin_left = 453.0
+margin_top = 30.0
+margin_right = 600.0
+margin_bottom = 56.0
+hint_tooltip = "View the project's changelog"
+size_flags_horizontal = 3
+text = "Changelog"
+
 [node name="DevToolsScreen" type="VBoxContainer" parent="HBoxContainer"]
 visible = false
 margin_left = 273.0
@@ -435,6 +444,7 @@ text = "Github Releases"
 [connection signal="pressed" from="HBoxContainer/MainVBox/GridContainer/DiscordButton" to="." method="_on_DiscordButton_pressed"]
 [connection signal="pressed" from="HBoxContainer/MainVBox/GridContainer/GithubButton" to="." method="_on_GithubButton_pressed"]
 [connection signal="pressed" from="HBoxContainer/MainVBox/GridContainer/DevToolsButton" to="." method="_on_DevToolsButton_pressed"]
+[connection signal="pressed" from="HBoxContainer/MainVBox/GridContainer/ChangelogButton" to="." method="_on_ChangelogButton_pressed"]
 [connection signal="pressed" from="HBoxContainer/DevToolsScreen/GridContainer/DevClose" to="." method="_on_DevClose_pressed"]
 [connection signal="pressed" from="HBoxContainer/DevToolsScreen/GridContainer/DevSceneConverter" to="." method="_on_DevSceneConverter_pressed"]
 [connection signal="pressed" from="HBoxContainer/DevToolsScreen/GridContainer/DevLikesGenerator" to="." method="_on_DevLikesGenerator_pressed"]
