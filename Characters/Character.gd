@@ -63,7 +63,7 @@ func saveData():
 		
 		data["bodyparts"][slot] = {
 			"id": bodyparts[slot].id,
-			"data": bodyparts[slot].saveData(),
+			"data": bodyparts[slot].saveDataNPC(),
 		}
 	
 	data["statusEffects"] = saveStatusEffectsData()
@@ -90,7 +90,7 @@ func loadData(data):
 		if(bodypartid != bodypart.id):
 			printerr("Bodypart changed for "+getName()+"'s "+str(slot)+", ignoring data (was "+bodypartid+", became "+bodypart.id+")")
 			continue
-		bodypart.loadData(bodypartData)
+		bodypart.loadDataNPC(bodypartData)
 	
 	loadStatusEffectsData(SAVE.loadVar(data, "statusEffects", {}))
 	inventory.loadData(SAVE.loadVar(data, "inventory", {}))

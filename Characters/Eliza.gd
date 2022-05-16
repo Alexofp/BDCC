@@ -73,3 +73,8 @@ func getFightIntro(_battleName):
 	
 func _getAttacks():
 	return ["biteattack", "stretchingAttack", "lickWounds", "trygetupattack", "ElizaHornyCloud", "ElizaHornyDrug", "ElizaTaunt", "ElizaWeaknessDrug", "NpcScratch", "ForceMuzzlePC"]
+
+func createBodyparts():
+	giveBodypartUnlessSame(GlobalRegistry.createBodypart("felinehead"))
+	giveBodypartUnlessSame(GlobalRegistry.createBodypart("vagina"))
+	giveBodypartUnlessSame(GlobalRegistry.createBodypart("anus"))

@@ -137,6 +137,21 @@ func loadData(_data):
 	if(fluidProduction != null):
 		fluidProduction.loadData(SAVE.loadVar(_data, "fluidProductionData", {}))
 
+func saveDataNPC():
+	var result = {}
+	
+	if(orifice != null):
+		result["orificeData"] = orifice.saveData()
+	if(fluidProduction != null):
+		result["fluidProductionData"] = fluidProduction.saveData()
+	return result
+
+func loadDataNPC(_data):
+	if(orifice != null):
+		orifice.loadData(SAVE.loadVar(_data, "orificeData", {}))
+	if(fluidProduction != null):
+		fluidProduction.loadData(SAVE.loadVar(_data, "fluidProductionData", {}))
+
 func safeWhenExposed():
 	return true
 

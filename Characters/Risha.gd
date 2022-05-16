@@ -95,3 +95,8 @@ func getFightState(_battleName):
 			return getName() + " looks alright but you notice some desire in "+hisHer()+" eyes.\n" + formatSay("What a slut you are")
 		
 	return getName() + " looks completely fine, no visible bruises or signs of lust."
+
+func createBodyparts():
+	giveBodypartUnlessSame(GlobalRegistry.createBodypart("felinehead"))
+	giveBodypartUnlessSame(GlobalRegistry.createBodypart("vagina"))
+	giveBodypartUnlessSame(GlobalRegistry.createBodypart("anus"))
