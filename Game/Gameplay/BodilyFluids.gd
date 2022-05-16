@@ -17,6 +17,12 @@ class FluidType:
 		if(fl == BlackGoo):
 			return "black goo"
 		return "Error"
+		
+	static func canMakeYouPregnant(fl):
+		if(fl == Cum):
+			return true
+		
+		return false
 
 enum FluidSource {
 	Penis,

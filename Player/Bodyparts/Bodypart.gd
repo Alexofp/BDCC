@@ -157,3 +157,6 @@ func safeWhenExposed():
 
 func getCharacter():
 	return character.get_ref()
+
+func hasWomb():
+	return false

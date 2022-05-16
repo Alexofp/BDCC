@@ -8,6 +8,8 @@ enum Gender {
 	Androgynous,
 	Other,
 }
+static func generateChildGender():
+	return RNG.pick([Gender.Male, Gender.Female])
 
 #Base class that has all the functions
 signal stat_changed
@@ -61,6 +63,9 @@ func _ready():
 	stamina = getMaxStamina()
 	#resetToDefault()
 	lustInterests = LustInterests.new()
+
+func getID():
+	assert(false, "Getting an ID of a baseCharacter class")
 
 # Skips armor checks etc
 func addPain(_p: int):

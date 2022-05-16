@@ -159,6 +159,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Player/FluidProduction/CumProduction.gd"
 }, {
+"base": "Object",
+"class": "CycleStage",
+"language": "GDScript",
+"path": "res://Game/Pregnancy/CycleStage.gd"
+}, {
 "base": "Node",
 "class": "DamageType",
 "language": "GDScript",
@@ -173,6 +178,11 @@ _global_script_classes=[ {
 "class": "Doll",
 "language": "GDScript",
 "path": "res://Player/Doll.gd"
+}, {
+"base": "Reference",
+"class": "EggCell",
+"language": "GDScript",
+"path": "res://Game/Pregnancy/EggCell.gd"
 }, {
 "base": "QuestBase",
 "class": "EscapeQuest",
@@ -298,6 +308,11 @@ _global_script_classes=[ {
 "class": "MedicalModule",
 "language": "GDScript",
 "path": "res://Modules/MedicalModule/Medical_module.gd"
+}, {
+"base": "Reference",
+"class": "MenstrualCycle",
+"language": "GDScript",
+"path": "res://Game/Pregnancy/MenstrualCycle.gd"
 }, {
 "base": "Reference",
 "class": "Module",
@@ -470,6 +485,11 @@ _global_script_classes=[ {
 "path": "res://Species/BaseSpecies.gd"
 }, {
 "base": "Object",
+"class": "SpeciesCompatibility",
+"language": "GDScript",
+"path": "res://Game/Pregnancy/SpeciesCompatibility.gd"
+}, {
+"base": "Object",
 "class": "Stat",
 "language": "GDScript",
 "path": "res://Skills/Stat.gd"
@@ -585,9 +605,11 @@ _global_script_class_icons={
 "Character": "",
 "ContentType": "",
 "CumProduction": "",
+"CycleStage": "",
 "DamageType": "",
 "Direction": "",
 "Doll": "",
+"EggCell": "",
 "EscapeQuest": "",
 "EventBase": "",
 "EventSystem": "",
@@ -613,6 +635,7 @@ _global_script_class_icons={
 "LustInterests": "",
 "MainThing": "",
 "MedicalModule": "",
+"MenstrualCycle": "",
 "Module": "",
 "NovaModule": "",
 "Orifice": "",
@@ -647,6 +670,7 @@ _global_script_class_icons={
 "SkillBase": "",
 "SkillsHolder": "",
 "Species": "",
+"SpeciesCompatibility": "",
 "Stat": "",
 "StatBase": "",
 "StatusEffect": "",

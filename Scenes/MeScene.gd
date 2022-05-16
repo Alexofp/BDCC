@@ -5,6 +5,8 @@ func _init():
 
 func _run():
 	if(state == ""):
+		#GM.pc.cummedInVaginaBy("nova")
+		
 		sayn("[b]Personal information:[/b]")
 		sayn("Name: "+GM.pc.getName())
 		sayn("Species: "+GM.pc.getSpeciesFullName())
@@ -19,7 +21,13 @@ func _run():
 		sayn("[b]Bio information:[/b]")
 		sayn("Intoxication: "+str(round(GM.pc.getIntoxicationLevel()*100.0))+"%")
 		sayn("Intoxication tolerance: "+str(round(GM.pc.getIntoxicationTolerance()*100.0))+"%")
-		
+		var menstrualCycle: MenstrualCycle = GM.pc.getMenstrualCycle()
+		if(menstrualCycle != null && menstrualCycle.hasAnyWomb()):
+			sayn("Menstruation cycle: "+str(CycleStage.getVisibleActionName(menstrualCycle.getCurrentStage())))
+			sayn("Cycle length: "+str(Util.roundF(menstrualCycle.getCycleLength()/60.0/60.0/24.0, 1))+" days")
+			sayn("Visible pregnant: "+str(menstrualCycle.isVisiblyPregnant()))
+			sayn("Is in heat: "+str(menstrualCycle.isInHeat()))
+					
 		sayn("")
 		
 		var bodyparts = GM.pc.getBodyparts()

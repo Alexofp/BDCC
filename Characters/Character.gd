@@ -32,6 +32,9 @@ func _ready():
 func _init():
 	pass
 	
+func getID():
+	return id
+	
 func _getName():
 	return "Error"
 	

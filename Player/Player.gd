@@ -32,6 +32,8 @@ var timedBuffsDurationTurns: int = 0
 #
 signal orificeBecomeMoreLoose(orificeName, newvalue, oldvalue)
 
+# pregnancy stuff
+var menstrualCycle: MenstrualCycle = null
 
 
 func _init():
@@ -40,6 +42,9 @@ func _init():
 func _ready():
 	#GM.pc = self
 	name = "Player"
+	menstrualCycle = MenstrualCycle.new()
+	menstrualCycle.setCharacter(self)
+	menstrualCycle.start()
 
 	
 	getInventory().clear()
@@ -68,12 +73,18 @@ func _ready():
 	#skillsHolder.setStat(Stat.Vitality, 5)
 	#skillsHolder.addSkillExperience(Skill.Combat, 250)
 
-
+func getID():
+	return "pc"
 
 func playAnimation(dollAnim):
 	emit_signal("animation_changed", dollAnim)
 
+func onFluidObsorb(orificeType, cumType, howMuch, who):
+	if(menstrualCycle != null):
+		menstrualCycle.obsorbCum(cumType, howMuch, who, orificeType)
 
+func getMenstrualCycle():
+	return menstrualCycle
 
 func setLocation(newRoomID:String):
 	location = newRoomID
@@ -228,6 +239,16 @@ func updateNonBattleEffects():
 	else:
 		removeEffect(StatusEffect.HasCumInsideMouth)
 		
+	if(menstrualCycle != null && menstrualCycle.isInHeat()):
+		addEffect(StatusEffect.InHeat)
+	else:
+		removeEffect(StatusEffect.InHeat)
+		
+	if(menstrualCycle != null && menstrualCycle.isVisiblyPregnant()):
+		addEffect(StatusEffect.Pregnant)
+	else:
+		removeEffect(StatusEffect.Pregnant)
+		
 	emit_signal("stat_changed")
 
 func processBattleTurn():
@@ -262,6 +283,9 @@ func processTime(_secondsPassed):
 	for effectID in statusEffects:
 		var effect = statusEffects[effectID]
 		effect.processTime(_secondsPassed)
+	
+	if(menstrualCycle != null):
+		menstrualCycle.processTime(_secondsPassed)
 
 func hoursPassed(_howmuch):
 	var currentLust = getLust()
@@ -492,7 +516,7 @@ func loadData(data):
 	intoxicationTolerance = SAVE.loadVar(data, "intoxicationTolerance", 0.0)
 	
 	checkLocation()
-	
+		
 	updateNonBattleEffects()
 
 func checkLocation():

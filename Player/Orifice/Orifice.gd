@@ -116,9 +116,9 @@ func hoursPassed(_howmuch):
 	if(looseness < 0.0):
 		looseness = 0.0
 
-# How much fluids get naturally obsorbed every minute
+# How much fluids get naturally obsorbed every hour
 func getNaturalDrain() -> float:
-	return 0.2
+	return 1.0
 
 # How much leaks out naturally
 func getNaturalSpill() -> float:
@@ -142,6 +142,12 @@ func getCurrentNaturalSpill() -> float:
 	return getNaturalDrain()
 	
 func addFluid(fluidType, amount: float, charID = null):
+	for contentData in contents:
+		if(fluidType == contentData[0] && charID == contentData[2]):
+			contentData[1] += amount
+			dirtyFlag = true
+			return
+	
 	contents.append([fluidType, amount, charID])
 	dirtyFlag = true
 
@@ -183,35 +189,50 @@ func processTime(seconds: int):
 	if(isEmpty()):
 		return
 	
-	var minutesPassed: float = seconds / 60.0
-	var howMuchToDrain = 0.0
+	var hoursPassed: float = seconds / 60.0 / 60.0
+	var howMuchToDrain: float = 0.0
 
-	var fluidAmount = getFluidAmount()
-	var capacity = getCapacity()
+	var fluidAmount = float(getFluidAmount())
+	var capacity = float(getCapacity())
 	
-	#var howMuchGotObsorbed = min(getNaturalDrain() * minutesPassed, fluidAmount)
+	var howMuchGotObsorbed = min(getNaturalDrain() * hoursPassed, fluidAmount)
 	
 	var overspill = fluidAmount - capacity
 	if(overspill <= 0 || isClosedOff()):
-		howMuchToDrain = getCurrentNaturalSpill() * minutesPassed
+		howMuchToDrain = getCurrentNaturalSpill() * hoursPassed
 	else:
-		var howMuchMinutesToSpillAll = overspill / getOverstuffedSpill()
-		if(minutesPassed <= howMuchMinutesToSpillAll):
-			howMuchToDrain = getOverstuffedSpill() * minutesPassed
+		var howMuchHoursToSpillAll = overspill / getOverstuffedSpill()
+		if(hoursPassed <= howMuchHoursToSpillAll):
+			howMuchToDrain = getOverstuffedSpill() * hoursPassed
 		else:
-			howMuchToDrain = overspill + getCurrentNaturalSpill() * (minutesPassed - howMuchMinutesToSpillAll)
+			howMuchToDrain = overspill + getCurrentNaturalSpill() * (hoursPassed - howMuchHoursToSpillAll)
 	
 	var newContents = []
 	for fluidData in contents:
-		var share = fluidData[1] / fluidAmount
+		var share: float = fluidData[1] / fluidAmount * RNG.randf_range(0.8, 1.1)
 		var toRemove = share * howMuchToDrain
+		var toObsorb = share * howMuchGotObsorbed
+		if(fluidData[1] < 0.1):
+			toRemove = fluidData[1]
+		toRemove = clamp(toRemove, 0.0, fluidData[1])
+		
+		if(toObsorb > 0.0):
+			onObsorb(fluidData[0], toObsorb, fluidData[2])
 		
 		fluidData[1] -= toRemove
+		
 		if(fluidData[1] > 0):
 			newContents.append(fluidData)
 
 	contents = newContents
 	dirtyFlag = true
+
+func onObsorb(cumType, howMuch, who):
+	if(bodypart != null):
+		var bodypartObject = bodypart.get_ref()
+		var pc = bodypartObject.getCharacter()
+		if(pc != null && pc.has_method("onFluidObsorb")):
+			pc.onFluidObsorb(orificeType, cumType, howMuch, who)
 
 func getFluidList():
 	var myfluids = []

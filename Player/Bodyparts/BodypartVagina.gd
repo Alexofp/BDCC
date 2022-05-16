@@ -20,3 +20,6 @@ func getOrificeName():
 
 func safeWhenExposed():
 	return false
+
+func hasWomb():
+	return true

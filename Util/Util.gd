@@ -23,6 +23,17 @@ static func mini(value1: int, value2: int) -> int:
 		return value2
 	return value1
 
+# input ["a", "a", "b", "c", "b", "a"]
+# output ["a", "b", "c"]
+static func uniqueElements(arr: Array):
+	var saw = {}
+	var result = []
+	for element in arr:
+		if(!saw.has(element)):
+			saw[element] = true
+			result.append(element)
+	return result
+
 # input ["a", "b", "c"]
 # output "a, b and c"
 static func humanReadableList(arr: Array, andConnector: String = "and", commaConnector: String = ","):
