@@ -138,7 +138,7 @@ static func roundF(number: float, digitsAmount: int = 0):
 	for _i in range(digitsAmount):
 		mult *= 10.0
 	
-	return round(number/mult)*mult
+	return round(number*mult)/mult
 
 static func getSpeciesName(species: Array):
 	if(species.size() == 0):

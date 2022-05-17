@@ -27,6 +27,7 @@ func _run():
 			sayn("Cycle length: "+str(Util.roundF(menstrualCycle.getCycleLength()/60.0/60.0/24.0, 1))+" days")
 			sayn("Visible pregnant: "+str(menstrualCycle.isVisiblyPregnant()))
 			sayn("Is in heat: "+str(menstrualCycle.isInHeat()))
+			sayn("Estimate chance of becoming pregnant after sex: "+str(Util.roundF(menstrualCycle.getRoughChanceOfBecomingPregnant(), 1))+"%")
 					
 		sayn("")
 		

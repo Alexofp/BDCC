@@ -24,7 +24,7 @@ static func getVisibleActionName(state):
 	if(state == Menstruation):
 		return "Menstruating"
 	if(state == FollicularPhase):
-		return "Follicular phase (safe days)"
+		return "Follicular phase"
 	if(state == Ovulation):
 		return "Ovulating"
 	if(state == LutealPhase):

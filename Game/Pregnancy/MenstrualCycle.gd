@@ -195,3 +195,11 @@ func loadData(data):
 			if(eggCells.has(orifice)):
 				eggCells[orifice].append(egg)
 			
+func getRoughChanceOfBecomingPregnant() -> float:
+	var roughChance = 0.0
+	if(cycleProgress <= 0.45):
+		roughChance = exp(-0.5 * pow(cycleProgress - 0.45, 2) * 40.0)
+	else:
+		roughChance = exp(-0.5 * pow(cycleProgress - 0.45, 2) * 60.0)
+	roughChance = clamp(roughChance, 0.02, 0.95)
+	return roughChance * 100.0
