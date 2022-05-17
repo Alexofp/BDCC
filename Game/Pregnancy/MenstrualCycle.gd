@@ -161,5 +161,37 @@ func isVisiblyPregnant():
 		return true
 	return false
 	
+func saveData():
+	var data = {
+		"cycleProgress": cycleProgress,
+		"ovulatedThisCycle": ovulatedThisCycle,
+		"willOvulateAt": willOvulateAt,
+	}
+	var eggData = []
+	for orificeType in eggCells:
+		for egg in eggCells[orificeType]:
+			eggData.append(egg.saveData())
+	for egg in impregnatedEggCells:
+		eggData.append(egg.saveData())
+	data["eggCells"] = eggData
+	
+	return data
 
+func loadData(data):
+	cycleProgress = SAVE.loadVar(data, "cycleProgress", 0.0)
+	ovulatedThisCycle = SAVE.loadVar(data, "ovulatedThisCycle", false)
+	willOvulateAt = SAVE.loadVar(data, "willOvulateAt", 0.5)
+
+	var eggData = SAVE.loadVar(data, "eggCells", [])
+	for eggD in eggData:
+		var egg = EggCell.new()
+		egg.cycle = weakref(self)
+		egg.loadData(eggD)
 		
+		if(egg.isImpregnated()):
+			impregnatedEggCells.append(egg)
+		else:
+			var orifice:int = egg.getOrifice()
+			if(eggCells.has(orifice)):
+				eggCells[orifice].append(egg)
+			

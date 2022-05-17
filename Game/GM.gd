@@ -6,6 +6,7 @@ var pc: Player
 var world: GameWorld
 var ES: EventSystem
 var QS: QuestSystem
+var CS: ChildSystem
 
 func _ready():
 	var directory = Directory.new( )

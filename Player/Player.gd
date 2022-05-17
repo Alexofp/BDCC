@@ -463,6 +463,7 @@ func saveData():
 	data["statusEffects"] = saveStatusEffectsData()
 	data["inventory"] = inventory.saveData()
 	data["skills"] = skillsHolder.saveData()
+	data["menstrualCycle"] = menstrualCycle.saveData()
 	
 	data["timedBuffs"] = saveBuffsData(timedBuffs)
 	data["timedBuffsDurationSeconds"] = timedBuffsDurationSeconds
@@ -507,6 +508,7 @@ func loadData(data):
 	loadStatusEffectsData(SAVE.loadVar(data, "statusEffects", {}))
 	inventory.loadData(SAVE.loadVar(data, "inventory", {}))
 	skillsHolder.loadData(SAVE.loadVar(data, "skills", {}))
+	menstrualCycle.loadData(SAVE.loadVar(data, "menstrualCycle", {}))
 	
 	timedBuffs = loadBuffsData(SAVE.loadVar(data, "timedBuffs", []))
 	timedBuffsDurationSeconds = SAVE.loadVar(data, "timedBuffsDurationSeconds", 0)

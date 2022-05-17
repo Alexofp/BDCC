@@ -171,6 +171,7 @@ func saveData():
 	data["currentDay"] = currentDay
 	data["flags"] = flags
 	data["EventSystem"] = GM.ES.saveData()
+	data["ChildSystem"] = GM.CS.saveData()
 	
 	data["scenes"] = []
 	for scene in sceneStack:
@@ -188,6 +189,7 @@ func loadData(data):
 	GM.ui.onTimePassed(0)
 	flags = SAVE.loadVar(data, "flags", {})
 	GM.ES.loadData(SAVE.loadVar(data, "EventSystem", {}))
+	GM.CS.loadData(SAVE.loadVar(data, "ChildSystem", {}))
 	
 	var scenes = SAVE.loadVar(data, "scenes", [])
 	
