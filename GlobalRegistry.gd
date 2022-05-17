@@ -359,11 +359,14 @@ func registerItemFolder(folder: String):
 	else:
 		printerr("An error occurred when trying to access the path "+folder)
 
-func createItem(id: String):
+func createItem(id: String, generateID = true):
 	if(!items.has(id)):
 		printerr("ERROR: item with the id "+id+" wasn't found")
 		return null
-	return items[id].new()
+	var newItem = items[id].new()
+	if(generateID):
+		newItem.uniqueID = "item"+str(generateUniqueID())
+	return newItem
 
 func getItemRef(id: String):
 	if(!itemsRefs.has(id)):

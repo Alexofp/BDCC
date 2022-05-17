@@ -379,7 +379,7 @@ func loadData(data):
 		var uniqueID = SAVE.loadVar(loadedItem, "uniqueID", "")
 		var itemLoadedData = SAVE.loadVar(loadedItem, "data", {})
 		
-		var newItem: ItemBase = GlobalRegistry.createItem(id)
+		var newItem: ItemBase = GlobalRegistry.createItem(id, false)
 		newItem.uniqueID = uniqueID
 		newItem.loadData(itemLoadedData)
 		addItem(newItem)
@@ -391,7 +391,7 @@ func loadData(data):
 		var uniqueID = SAVE.loadVar(loadedItem, "uniqueID", "")
 		var itemLoadedData = SAVE.loadVar(loadedItem, "data", {})
 		
-		var newItem: ItemBase = GlobalRegistry.createItem(id)
+		var newItem: ItemBase = GlobalRegistry.createItem(id, false)
 		newItem.uniqueID = uniqueID
 		newItem.loadData(itemLoadedData)
 		equipItem(newItem)

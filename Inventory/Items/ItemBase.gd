@@ -8,8 +8,8 @@ var currentInventory = null
 var restraintData: RestraintData = null
 
 func _init():
-	if(uniqueID == null):
-		uniqueID = "item"+str(GlobalRegistry.generateUniqueID())
+	#if(uniqueID == null):
+	#	uniqueID = "item"+str(GlobalRegistry.generateUniqueID())
 	if(isRestraint()):
 		generateRestraintData()
 		if(restraintData != null):
