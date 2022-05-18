@@ -653,6 +653,10 @@ func afterSleepingInBed():
 	skillsHolder.onNewDay()
 	for item in getInventory().getEquppedRestraints():
 		item.getRestraintData().resetOnNewDay()
+	
+	if(isPregnant() && !isVisiblyPregnant() && RNG.chance(20)):
+		GM.main.addLogMessage("Nausea", "You wake up and feel kinda nauseous.")
+		
 	updateNonBattleEffects()
 
 func afterRestingInBed(seconds):

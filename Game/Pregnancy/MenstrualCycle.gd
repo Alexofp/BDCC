@@ -142,10 +142,8 @@ func obsorbCum(cumType, amountML, whosCum, orificeType = OrificeType.Vagina):
 			impregnatedEggCells.append(egg)
 
 func isPregnant():
-	for orificeType in eggCells:
-		for egg in eggCells[orificeType]:
-			if(egg.isImpregnated()):
-				return true
+	if(impregnatedEggCells.size() > 0):
+		return true
 	return false
 
 func getPregnancyProgress() -> float:

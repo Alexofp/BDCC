@@ -86,6 +86,7 @@ func _react(_action: String, _args):
 		GM.pc.addStamina(50)
 		triggerRandomEvent(3, 50, 50, 30, 20)
 		setState("")
+		GM.main.showLog()
 		return
 	
 	if(_action == "afterjustwait"):
@@ -93,6 +94,7 @@ func _react(_action: String, _args):
 		GM.pc.addStamina(50)
 		triggerRandomEvent(2, 20, 20, 0, 50)
 		setState("")
+		GM.main.showLog()
 		return
 	
 	if(_action == "endthescene"):

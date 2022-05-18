@@ -57,6 +57,7 @@ func _react(_action: String, _args):
 
 	if(_action == "endthescene"):
 		endScene()
+		GM.main.showLog()
 		return
 	
 	setState(_action)

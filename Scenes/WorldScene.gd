@@ -13,22 +13,22 @@ func _run():
 	#say(_roomInfo.getDescription())
 
 	if(GM.world.canGoID(roomID, GameWorld.Direction.NORTH)):
-		addButtonAt(6, "North", "Go north", "gonorth")
+		addButtonAt(6, "North", "Go north", "go", [GameWorld.Direction.NORTH, Direction.North])
 	else:
 		addDisabledButtonAt(6, "North", "Can't go north")
 		
 	if(GM.world.canGoID(roomID, GameWorld.Direction.WEST)):
-		addButtonAt(10, "West", "Go west", "gowest")
+		addButtonAt(10, "West", "Go west", "go", [GameWorld.Direction.WEST, Direction.West])
 	else:
 		addDisabledButtonAt(10, "West", "Can't go west")
 		
 	if(GM.world.canGoID(roomID, GameWorld.Direction.SOUTH)):
-		addButtonAt(11, "South", "Go south", "gosouth")
+		addButtonAt(11, "South", "Go south", "go", [GameWorld.Direction.SOUTH, Direction.South])
 	else:
 		addDisabledButtonAt(11, "South", "Can't go south")
 	
 	if(GM.world.canGoID(roomID, GameWorld.Direction.EAST)):
-		addButtonAt(12, "East", "Go east", "goeast")
+		addButtonAt(12, "East", "Go east",  "go", [GameWorld.Direction.EAST, Direction.East])
 	else:
 		addDisabledButtonAt(12, "East", "Can't go east")
 	#addDisabledButton("bark", "no awo")
@@ -49,8 +49,6 @@ func _run():
 	_roomInfo._onEnter()
 
 func _react(_action: String, _args):
-	print(_action)
-	
 	# RoomAction support
 	if(_action == "actionCallback"):
 		var scenetorun = _args[0]
@@ -63,30 +61,15 @@ func _react(_action: String, _args):
 		var _room = GM.world.getRoomByID(roomid)
 		return _room._onButton(keyid)
 	
-	if(_action == "gonorth"):
+	if(_action == "go"):
 		GM.pc.playAnimation(TheStage.Walking)
-		GM.pc.setLocation(GM.world.applyDirectionID(GM.pc.location, GameWorld.Direction.NORTH))
+		GM.pc.setLocation(GM.world.applyDirectionID(GM.pc.location, _args[0]))
 		processTime(30)
 		aimCamera(GM.pc.location)
-		GM.ES.trigger(Trigger.EnteringRoom, GM.pc.location, [Direction.North])
-	if(_action == "gowest"):
-		GM.pc.playAnimation(TheStage.Walking)
-		GM.pc.setLocation(GM.world.applyDirectionID(GM.pc.location, GameWorld.Direction.WEST))
-		processTime(30)
-		aimCamera(GM.pc.location)
-		GM.ES.trigger(Trigger.EnteringRoom, GM.pc.location, [Direction.West])
-	if(_action == "gosouth"):
-		GM.pc.playAnimation(TheStage.Walking)
-		GM.pc.setLocation(GM.world.applyDirectionID(GM.pc.location, GameWorld.Direction.SOUTH))
-		processTime(30)
-		aimCamera(GM.pc.location)
-		GM.ES.trigger(Trigger.EnteringRoom, GM.pc.location, [Direction.South])
-	if(_action == "goeast"):
-		GM.pc.playAnimation(TheStage.Walking)
-		GM.pc.setLocation(GM.world.applyDirectionID(GM.pc.location, GameWorld.Direction.EAST))
-		processTime(30)
-		aimCamera(GM.pc.location)
-		GM.ES.trigger(Trigger.EnteringRoom, GM.pc.location, [Direction.East])
+		GM.ES.trigger(Trigger.EnteringRoom, GM.pc.location, [_args[1]])
+		
+		GM.main.showLog()
+
 	if(_action == "inventory"):
 		runScene("InventoryScene")
 	if(_action == "tasks"):

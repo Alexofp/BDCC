@@ -4,6 +4,7 @@ class_name MainThing
 onready var gameUI = $GameUI
 var sceneStack: Array = []
 var messages: Array = []
+var logMessages: Array = []
 var currentDay = 0
 var timeOfDay = 6*60*60 # seconds since 00:00
 var flags = {}
@@ -172,6 +173,7 @@ func saveData():
 	data["flags"] = flags
 	data["EventSystem"] = GM.ES.saveData()
 	data["ChildSystem"] = GM.CS.saveData()
+	data["logMessages"] = logMessages
 	
 	data["scenes"] = []
 	for scene in sceneStack:
@@ -190,6 +192,7 @@ func loadData(data):
 	flags = SAVE.loadVar(data, "flags", {})
 	GM.ES.loadData(SAVE.loadVar(data, "EventSystem", {}))
 	GM.CS.loadData(SAVE.loadVar(data, "ChildSystem", {}))
+	logMessages = SAVE.loadVar(data, "logMessages", [])
 	
 	var scenes = SAVE.loadVar(data, "scenes", [])
 	
@@ -372,3 +375,22 @@ func getRandomSceneFor(sceneType):
 		resultScenes.append_array(moduleScenes)
 	
 	return RNG.pickWeightedPairs(resultScenes)
+
+func addLogMessage(title: String, message: String):
+	logMessages.append({
+		"title": title,
+		"message": message,
+	})
+
+func showLog():
+	if(logMessages.size() > 0):
+		var scene = runScene("MessagesLogScene", [])
+		scene.sceneTag = "messageslog"
+		return true
+	return false
+
+func getLogMessages():
+	return logMessages
+
+func clearLog():
+	logMessages.clear()
