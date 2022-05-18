@@ -7,6 +7,7 @@ func saveData():
 	var data = {
 		"savefile_version": currentSavefileVersion,
 		"currentUniqueID_DONT_TOUCH": GlobalRegistry.currentUniqueID,
+		"currentChildUniqueID_DONT_TOUCH": GlobalRegistry.currentChildUniqueID,
 	}
 	
 	data["player"] = GM.main.getOriginalPC().saveData()
@@ -31,6 +32,7 @@ func loadData(data: Dictionary):
 		printerr("Error: This savefile is not supported, sorry. Current supported version: "+str(currentSavefileVersion)+". Savefile version: "+data["savefile_version"])
 		return	
 	GlobalRegistry.currentUniqueID = SAVE.loadVar(data, "currentUniqueID_DONT_TOUCH", 0)
+	GlobalRegistry.currentChildUniqueID = SAVE.loadVar(data, "currentChildUniqueID_DONT_TOUCH", 0)
 	
 	GM.main.getOriginalPC().loadData(data["player"])
 	

@@ -26,6 +26,10 @@ const Mental_ExpTentacles = "Mental_ExpTentacles"
 const Mental_HasKeycard = "Mental_HasKeycard"
 const Mental_PlayerEscaped = "Mental_PlayerEscaped"
 
+const Nursery_Introduced = "Nursery_Introduced"
+const Nursery_AskedHowWorks = "Nursery_AskedHowWorks"
+const Nursery_AskedDatabase = "Nursery_AskedDatabase"
+
 func _init():
 	id = "MedicalModule"
 	author = "Rahi"
@@ -52,6 +56,8 @@ func _init():
 		"res://Modules/MedicalModule/MentalWard/MentalCheckupFinal.gd",
 		
 		"res://Modules/MedicalModule/NurseFelineOffLimits.gd",
+		
+		"res://Modules/MedicalModule/Nursery/NurseryTalkScene.gd",
 		]
 	characters = [
 		"res://Modules/MedicalModule/MentalWard/LatexParasite.gd",
@@ -61,6 +67,8 @@ func _init():
 	events = [
 		"res://Modules/MedicalModule/ElizaTalkEvent.gd",
 		"res://Modules/MedicalModule/CaughtOffLimitsInMentalEvent.gd",
+		
+		"res://Modules/MedicalModule/Nursery/NurseryTalkEvent.gd",
 	]
 
 func resetFlagsOnNewDay():

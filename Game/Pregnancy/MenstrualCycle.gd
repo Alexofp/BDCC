@@ -7,6 +7,7 @@ var eggCells = {}
 var impregnatedEggCells = []
 var ovulatedThisCycle = false
 var willOvulateAt: float = 0.5
+signal readyToGiveBirth
 
 func _init():
 	initCycle()
@@ -110,8 +111,7 @@ func ovulate():
 			continue
 		
 		for _i in range(amountOfEggs):
-			var egg = EggCell.new()
-			egg.cycle = weakref(self)
+			var egg = createEggCell()
 			egg.setOrifice(orifice)
 			egg.setMother(getCharacter().getID(), motherSpecies)
 			eggCells[orifice].append(egg)
@@ -134,8 +134,10 @@ func obsorbCum(cumType, amountML, whosCum, orificeType = OrificeType.Vagina):
 		return
 	
 	if(eggCells.has(orificeType) && eggCells[orificeType].size() > 0):
+		var eggAmountMult = sqrt(float(eggCells[orificeType].size()))
+		
 		var egg = RNG.pick(eggCells[orificeType])
-		if(egg.tryImpregnate(whosCum, amountML)):
+		if(egg.tryImpregnate(whosCum, amountML, eggAmountMult)):
 			eggCells[orificeType].erase(egg)
 			impregnatedEggCells.append(egg)
 
@@ -156,10 +158,19 @@ func getPregnancyProgress() -> float:
 		print("PREGNANCY: "+str(maxProgress))
 	return maxProgress
 
+func isReadyToGiveBirth():
+	return getPregnancyProgress() >= 1.0
+
 func isVisiblyPregnant():
 	if(getPregnancyProgress() >= 0.4):
 		return true
 	return false
+	
+func createEggCell():
+	var egg = EggCell.new()
+	egg.cycle = weakref(self)
+	egg.connect("readyForBirth", self, "onEggCellReadyForBirth")
+	return egg
 	
 func saveData():
 	var data = {
@@ -184,8 +195,7 @@ func loadData(data):
 
 	var eggData = SAVE.loadVar(data, "eggCells", [])
 	for eggD in eggData:
-		var egg = EggCell.new()
-		egg.cycle = weakref(self)
+		var egg = createEggCell()
 		egg.loadData(eggD)
 		
 		if(egg.isImpregnated()):
@@ -196,6 +206,9 @@ func loadData(data):
 				eggCells[orifice].append(egg)
 			
 func getRoughChanceOfBecomingPregnant() -> float:
+	if(isVisiblyPregnant()):
+		return 0.0
+	
 	var roughChance = 0.0
 	if(cycleProgress <= 0.45):
 		roughChance = exp(-0.5 * pow(cycleProgress - 0.45, 2) * 40.0)
@@ -203,3 +216,35 @@ func getRoughChanceOfBecomingPregnant() -> float:
 		roughChance = exp(-0.5 * pow(cycleProgress - 0.45, 2) * 60.0)
 	roughChance = clamp(roughChance, 0.02, 0.95)
 	return roughChance * 100.0
+
+func onEggCellReadyForBirth(_egg):
+	print("EGG READY TO BIRTH")
+	emit_signal("readyToGiveBirth")
+
+func speedUpPregnancy():
+	for egg in impregnatedEggCells:
+		var eggCell: EggCell = egg
+		#eggCell.progress = 0.99
+		#eggCell.processTime(60*60*24)
+		eggCell.progress = 1.0
+
+func giveBirth():
+	if(impregnatedEggCells.size() <= 0):
+		return []
+	
+	var result = []
+	
+	for egg in impregnatedEggCells:
+		var eggCell: EggCell = egg
+		
+		var newChild: Child = Child.new()
+		newChild.generateUniqueID()
+		newChild.loadFromEggCell(eggCell)
+		newChild.setBirthday(GM.main.getDays())
+		
+		result.append(newChild)
+	
+	impregnatedEggCells.clear()
+	cycleProgress = 1.0
+	
+	return result

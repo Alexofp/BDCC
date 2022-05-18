@@ -33,7 +33,7 @@ var timedBuffsDurationTurns: int = 0
 signal orificeBecomeMoreLoose(orificeName, newvalue, oldvalue)
 
 # pregnancy stuff
-var menstrualCycle: MenstrualCycle = null
+var menstrualCycle: MenstrualCycle
 
 
 func _init():
@@ -79,12 +79,31 @@ func getID():
 func playAnimation(dollAnim):
 	emit_signal("animation_changed", dollAnim)
 
+# PREGNANCY STUFF (move to BaseCharacter when done)
+
 func onFluidObsorb(orificeType, cumType, howMuch, who):
 	if(menstrualCycle != null):
 		menstrualCycle.obsorbCum(cumType, howMuch, who, orificeType)
 
 func getMenstrualCycle():
 	return menstrualCycle
+
+func isPregnant():
+	if(menstrualCycle != null):
+		return menstrualCycle.isPregnant()
+	return false
+
+func isVisiblyPregnant():
+	if(menstrualCycle != null):
+		return menstrualCycle.isVisiblyPregnant()
+	return false
+
+func isReadyToGiveBirth():
+	if(menstrualCycle != null):
+		return menstrualCycle.isReadyToGiveBirth()
+	return false
+
+# END
 
 func setLocation(newRoomID:String):
 	location = newRoomID

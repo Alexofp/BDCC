@@ -11,6 +11,8 @@ var motherSpecies = []
 var resultSpecies = []
 var resultGender = ChildGender.Male
 
+signal readyForBirth(egg)
+
 func _init():
 	lifeSpan = 60*60*24*2 + RNG.randi_range(-60*60*12, 60*60*12)
 
@@ -50,9 +52,16 @@ func processTime(seconds):
 	if(isimpregnated):
 		var newProgress: float = float(seconds) / getGestationTime()
 		
+		var justReady = false
+		if(progress < 1.0 && (progress + newProgress) >= 1.0):
+			justReady = true
+		
 		progress += newProgress
 		if(progress > 1.0):
 			progress = 1.0
+		
+		if(justReady):
+			emit_signal("readyForBirth", self)
 
 func getProgress():
 	return progress
@@ -77,7 +86,7 @@ func impregnatedBy(newfatherID):
 
 	print("EGGCELL IMPREGNATED BY "+str(newfatherID)+", species: "+str(resultSpecies)+", gender: "+ChildGender.getVisibleName(resultGender))
 
-func tryImpregnate(whosCum, amountML):
+func tryImpregnate(whosCum, amountML, eggMultiplier = 1.0):
 	if(!canImpregnate()):
 		return false
 	
@@ -85,7 +94,7 @@ func tryImpregnate(whosCum, amountML):
 	
 	var crossSpeciesMod = SpeciesCompatibility.pregnancyChanceMod(motherSpecies, father.getSpecies())
 	
-	var finalChance = amountML * crossSpeciesMod * 10.0
+	var finalChance = amountML * crossSpeciesMod * 20.0 * eggMultiplier
 	print(finalChance)
 	
 	if(RNG.chance(finalChance)):

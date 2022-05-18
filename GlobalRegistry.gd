@@ -6,6 +6,7 @@ var game_version_revision = 14
 var game_version_suffix = ""
 
 var currentUniqueID = 0
+var currentChildUniqueID = 0
 
 var scenes: Dictionary = {}
 var bodyparts: Dictionary = {}
@@ -100,6 +101,10 @@ func _ready():
 func generateUniqueID():
 	currentUniqueID += 1
 	return currentUniqueID - 1
+
+func generateChildUniqueID():
+	currentChildUniqueID += 1
+	return currentChildUniqueID - 1
 
 func getGameVersionString():
 	return str(game_version_major)+"."+str(game_version_minor)+"."+str(game_version_revision)+str(game_version_suffix)
