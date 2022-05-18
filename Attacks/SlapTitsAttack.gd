@@ -26,7 +26,7 @@ func _doAttack(_attacker, _receiver):
 	#_receiver.addEffect(StatusEffect.Bleeding)
 
 	var text = ""
-	if((_receiver.isPlayer() && _receiver.hasBigBreasts()) || (!_receiver.isPlayer() && _receiver.getGender() != BaseCharacter.Gender.Male)):
+	if((_receiver.isPlayer() && _receiver.hasBigBreasts()) || (!_receiver.isPlayer() && _receiver.getGender() != Gender.Male)):
 		_damage = doDamage(_attacker, _receiver, DamageType.Physical, RNG.randi_range(20, 20))
 		text += "{receiver.name}’s big tits received a painful smack! {attacker.name} also managed to hit the sensitive nips.\n"
 	else:

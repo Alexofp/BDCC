@@ -67,7 +67,7 @@ func _run():
 		saynn("You do as she says, walking up to the nearest wall and leaning forwards, waiting to be frisked.")
 
 		# (if girl)
-		if(GM.pc.getGender() != BaseCharacter.Gender.Male):
+		if(GM.pc.getGender() != Gender.Male):
 			saynn("[say=nova]Good girl~ Now stand still while I work on you.[/say]")
 		else:
 			# (if boy)

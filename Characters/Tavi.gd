@@ -44,7 +44,7 @@ func _getName():
 	return "Tavi"
 
 func getGender():
-	return Character.Gender.Female
+	return Gender.Female
 	
 func getSmallDescription() -> String:
 	return "Red block inmate. A very tall feline with a unique purple and green fur pattern and red/green eyes"

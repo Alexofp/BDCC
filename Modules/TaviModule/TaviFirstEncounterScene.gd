@@ -126,9 +126,9 @@ func _run():
 		
 		saynn("You feel her firm grasp and decide to comply. Without much resistance, you lower yourself and get on your knees before the tall cat. She can’t help but to smile and give you a few headpats.")
 
-		if(GM.pc.getGender() == BaseCharacter.Gender.Female):
+		if(GM.pc.getGender() == Gender.Female):
 			saynn("[say=tavi]Good girl~[/say]")
-		elif(GM.pc.getGender() == BaseCharacter.Gender.Male):
+		elif(GM.pc.getGender() == Gender.Male):
 			saynn("[say=tavi]Good boy~[/say]")
 		else:
 			saynn("[say=tavi]Good little cutie~[/say]")

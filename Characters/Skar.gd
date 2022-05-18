@@ -56,7 +56,7 @@ func _getName():
 	return "Skar"
 
 func getGender():
-	return Character.Gender.Male
+	return Gender.Male
 	
 func getSmallDescription() -> String:
 	return "A male guard with wolf features and a scarred face. His arms, eyes and lower jaw are replaced with prosthetics."

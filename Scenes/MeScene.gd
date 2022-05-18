@@ -10,8 +10,8 @@ func _run():
 		sayn("[b]Personal information:[/b]")
 		sayn("Name: "+GM.pc.getName())
 		sayn("Species: "+GM.pc.getSpeciesFullName())
-		sayn("Gender: "+BaseCharacter.genderToString(GM.pc.getGender()).capitalize())
-		sayn("Pronouns: "+BaseCharacter.genderToPronouns(GM.pc.getPronounGender()))
+		sayn("Gender: "+Gender.genderToString(GM.pc.getGender()).capitalize())
+		sayn("Pronouns: "+Gender.genderToPronouns(GM.pc.getPronounGender()))
 		
 		sayn("Femininity: "+str(GM.pc.getFemininity())+"%")
 		sayn("Thickness: "+str(GM.pc.getThickness())+"%")
@@ -83,19 +83,19 @@ func _run():
 	if(state == "pickgender"):
 		say("Pick your character's gender. This will affect the color of your speech and how others treat you. This can be changed at any point")
 		
-		addButton("Male", "You're a guy", "setgender", [BaseCharacter.Gender.Male])
-		addButton("Female", "You're a girl", "setgender", [BaseCharacter.Gender.Female])
-		addButton("Androgynous", "Somewhere in between", "setgender", [BaseCharacter.Gender.Androgynous])
-		addButton("Other", "Something else", "setgender", [BaseCharacter.Gender.Other])
+		addButton("Male", "You're a guy", "setgender", [Gender.Male])
+		addButton("Female", "You're a girl", "setgender", [Gender.Female])
+		addButton("Androgynous", "Somewhere in between", "setgender", [Gender.Androgynous])
+		addButton("Other", "Something else", "setgender", [Gender.Other])
 		addButton("back", "Keep your current gender", "")
 
 	if(state == "pickpronouns"):
 		say("Pick your character's pronouns. This can be changed at any point")
 		addButton("Same as gender", "Use your gender's pronouns", "setpronouns", [null])
-		addButton("Male", "He/his", "setpronouns", [BaseCharacter.Gender.Male])
-		addButton("Female", "She/her", "setpronouns", [BaseCharacter.Gender.Female])
-		addButton("Androgynous", "They/their", "setpronouns", [BaseCharacter.Gender.Androgynous])
-		addButton("Other", "It/its", "setpronouns", [BaseCharacter.Gender.Other])
+		addButton("Male", "He/his", "setpronouns", [Gender.Male])
+		addButton("Female", "She/her", "setpronouns", [Gender.Female])
+		addButton("Androgynous", "They/their", "setpronouns", [Gender.Androgynous])
+		addButton("Other", "It/its", "setpronouns", [Gender.Other])
 		addButton("back", "Keep your pronouns", "")
 	
 	if(state == "wait"):

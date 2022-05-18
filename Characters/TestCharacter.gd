@@ -10,4 +10,4 @@ func _getAttacks():
 	return ["simplepunchattack", "scratchattack", "biteattack", "simplekickattack", "shoveattack", "simplelustattack", "trygetupattack"]
 
 func getGender():
-	return Character.Gender.Male
+	return Gender.Male

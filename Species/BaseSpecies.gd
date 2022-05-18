@@ -23,7 +23,7 @@ func getDefaultLegs(_gender):
 	return "felineleg"
 
 func getDefaultBreasts(_gender):
-	if(_gender in [BaseCharacter.Gender.Male]):
+	if(_gender in [Gender.Male]):
 		return "malebreasts"
 	
 	return "humanbreasts"
@@ -50,13 +50,13 @@ func getDefaultHorns(_gender):
 	return null
 
 func getDefaultPenis(_gender):
-	if(_gender in [BaseCharacter.Gender.Male, BaseCharacter.Gender.Androgynous]):
+	if(_gender in [Gender.Male, Gender.Androgynous]):
 		return "humanpenis"
 	else:
 		return null
 
 func getDefaultVagina(_gender):
-	if(_gender in [BaseCharacter.Gender.Female, BaseCharacter.Gender.Androgynous]):
+	if(_gender in [Gender.Female, Gender.Androgynous]):
 		return "vagina"
 	else:
 		return null

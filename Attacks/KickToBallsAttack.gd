@@ -25,7 +25,7 @@ func _doAttack(_attacker, _receiver):
 	#_receiver.addEffect(StatusEffect.Bleeding)
 
 	var text = ""
-	if((_receiver.isPlayer() && _receiver.hasPenis()) || (!_receiver.isPlayer() && _receiver.getGender() != BaseCharacter.Gender.Female)):
+	if((_receiver.isPlayer() && _receiver.hasPenis()) || (!_receiver.isPlayer() && _receiver.getGender() != Gender.Female)):
 		_damage = doDamage(_attacker, _receiver, DamageType.Physical, RNG.randi_range(30, 50))
 		text += "{attacker.name} kicks {receiver.name} in the balls! It was incredibly painful.\n"
 		

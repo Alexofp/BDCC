@@ -6,7 +6,7 @@ func _init():
 func _reactInit():
 	GM.main.overridePC()
 	GM.pc.setName("Tavi")
-	GM.pc.setGender(BaseCharacter.Gender.Female)
+	GM.pc.setGender(Gender.Female)
 	
 	GM.pc.updateAppearance()
 	GM.pc.updateNonBattleEffects()

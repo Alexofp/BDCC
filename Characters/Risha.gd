@@ -57,10 +57,10 @@ func _getName():
 	return "Risha"
 
 func getGender():
-	return Character.Gender.Androgynous
+	return Gender.Androgynous
 	
 func getPronounGender():
-	return Character.Gender.Female
+	return Gender.Female
 	
 func getSmallDescription() -> String:
 	return "A very tall lynx with cyan fur. Usually wears her bulky guard armor. Her feline face features a huge amount of piercings"

@@ -54,10 +54,10 @@ func _getName():
 	return "Nova"
 
 func getGender():
-	return Character.Gender.Androgynous
+	return Gender.Androgynous
 	
 func getPronounGender():
-	return Character.Gender.Female
+	return Gender.Female
 	
 func getSmallDescription() -> String:
 	return "Gray husky that wears hi-tech guard armor. Medium height, fit body"

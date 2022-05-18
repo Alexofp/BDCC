@@ -31,10 +31,10 @@ func _getName():
 	return "Avy"
 
 func getGender():
-	return Character.Gender.Androgynous
+	return Gender.Androgynous
 	
 func getPronounGender():
-	return Character.Gender.Female
+	return Gender.Female
 	
 func getSmallDescription() -> String:
 	return "Red inmate, medium-height fox with a black fur and a feminine look."

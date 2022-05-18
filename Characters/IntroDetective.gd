@@ -7,7 +7,7 @@ func _getName():
 	return "Jake"
 
 func getGender():
-	return Character.Gender.Male
+	return Gender.Male
 	
 func getSmallDescription() -> String:
 	return "Elegant-looking canine with gray fur. Black pants, white shirt and old-school reading glasses"

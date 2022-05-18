@@ -249,6 +249,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Game/World/World.gd"
 }, {
+"base": "Object",
+"class": "Gender",
+"language": "GDScript",
+"path": "res://Game/Gameplay/Gender.gd"
+}, {
 "base": "LootTableBase",
 "class": "GuardLoot",
 "language": "GDScript",
@@ -638,6 +643,7 @@ _global_script_class_icons={
 "GameRoom": "",
 "GameUI": "",
 "GameWorld": "",
+"Gender": "",
 "GuardLoot": "",
 "InmateType": "",
 "Interest": "",

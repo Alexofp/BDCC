@@ -7,7 +7,7 @@ func _getName():
 	return "Latex Parasite"
 
 func getGender():
-	return Character.Gender.Other
+	return Gender.Other
 	
 func getSmallDescription() -> String:
 	return "A shiny pile of black goo"

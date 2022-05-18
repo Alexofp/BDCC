@@ -18,18 +18,18 @@ func _run():
 		
 	if(state == "pickgender"):
 		say("Pick")
-		addButton("Male", "2", "setgender", [BaseCharacter.Gender.Male])
-		addButton("Female", "2", "setgender", [BaseCharacter.Gender.Female])
-		addButton("Androgynous", "2", "setgender", [BaseCharacter.Gender.Androgynous])
-		addButton("Other", "2", "setgender", [BaseCharacter.Gender.Other])
+		addButton("Male", "2", "setgender", [Gender.Male])
+		addButton("Female", "2", "setgender", [Gender.Female])
+		addButton("Androgynous", "2", "setgender", [Gender.Androgynous])
+		addButton("Other", "2", "setgender", [Gender.Other])
 		addButton("back", "2", "")
 		
 	if(state == "pickpronouns"):
 		say("Pick")
-		addButton("Male", "2", "setpronouns", [BaseCharacter.Gender.Male])
-		addButton("Female", "2", "setpronouns", [BaseCharacter.Gender.Female])
-		addButton("Androgynous", "2", "setpronouns", [BaseCharacter.Gender.Androgynous])
-		addButton("Other", "2", "setpronouns", [BaseCharacter.Gender.Other])
+		addButton("Male", "2", "setpronouns", [Gender.Male])
+		addButton("Female", "2", "setpronouns", [Gender.Female])
+		addButton("Androgynous", "2", "setpronouns", [Gender.Androgynous])
+		addButton("Other", "2", "setpronouns", [Gender.Other])
 		addButton("Same as gender", "2", "setpronouns", [null])
 		addButton("back", "2", "")
 		

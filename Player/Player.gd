@@ -390,11 +390,11 @@ func setSpecies(species: Array):
 
 func resetBodypartsToDefault():
 	var newgender = getGender()
-	if(newgender == BaseCharacter.Gender.Male):
+	if(newgender == Gender.Male):
 		pickedFemininity = 0
-	if(newgender == BaseCharacter.Gender.Female):
+	if(newgender == Gender.Female):
 		pickedFemininity = 100
-	if(newgender == BaseCharacter.Gender.Androgynous || newgender == BaseCharacter.Gender.Other):
+	if(newgender == Gender.Androgynous || newgender == Gender.Other):
 		pickedFemininity = 50
 	
 	var speciesIds = getSpecies()
@@ -721,7 +721,7 @@ func cumOnFloor():
 func cummedOnBy(characterID, sourceType = null, howMessy: int = 1):	
 	var ch = GlobalRegistry.getCharacter(characterID)
 	if(sourceType == null):
-		if(ch.getGender() == BaseCharacter.Gender.Female):
+		if(ch.getGender() == Gender.Female):
 			sourceType = BodilyFluids.FluidSource.Vagina
 		else:
 			sourceType = BodilyFluids.FluidSource.Penis

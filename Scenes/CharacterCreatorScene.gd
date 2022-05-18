@@ -12,18 +12,18 @@ func _run():
 	if(state == "" || state == "pickgender"):
 		say("Pick your character's gender. This will affect the color of your speech and how others will treat you. This can be changed at any point")
 		
-		addButton("Male", "You're a guy", "setgender", [BaseCharacter.Gender.Male])
-		addButton("Female", "You're a girl", "setgender", [BaseCharacter.Gender.Female])
-		addButton("Androgynous", "Somewhere in between", "setgender", [BaseCharacter.Gender.Androgynous])
-		addButton("Other", "Something else", "setgender", [BaseCharacter.Gender.Other])
+		addButton("Male", "You're a guy", "setgender", [Gender.Male])
+		addButton("Female", "You're a girl", "setgender", [Gender.Female])
+		addButton("Androgynous", "Somewhere in between", "setgender", [Gender.Androgynous])
+		addButton("Other", "Something else", "setgender", [Gender.Other])
 
 	if(state == "pickpronouns"):
 		say("Pick your character's pronouns. This can be changed at any point")
 		addButton("Same as gender", "Use your gender's pronouns", "setpronouns", [null])
-		addButton("Male", "He/his", "setpronouns", [BaseCharacter.Gender.Male])
-		addButton("Female", "She/her", "setpronouns", [BaseCharacter.Gender.Female])
-		addButton("Androgynous", "They/their", "setpronouns", [BaseCharacter.Gender.Androgynous])
-		addButton("Other", "It/its", "setpronouns", [BaseCharacter.Gender.Other])
+		addButton("Male", "He/his", "setpronouns", [Gender.Male])
+		addButton("Female", "She/her", "setpronouns", [Gender.Female])
+		addButton("Androgynous", "They/their", "setpronouns", [Gender.Androgynous])
+		addButton("Other", "It/its", "setpronouns", [Gender.Other])
 		addButton("back", "Back to picking gender", "pickgender")
 
 	if(state == "pickspecies"):
