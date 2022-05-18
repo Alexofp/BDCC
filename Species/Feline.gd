@@ -32,3 +32,14 @@ func getDefaultPenis(_gender):
 		return "caninepenis"
 	else:
 		return null
+
+func getEggCellOvulationAmount():
+	return [
+		[1, 2.0],
+		[2, 8.0],
+		[3, 6.0],
+		[4, 4.0],
+		[5, 2.0],
+		[6, 1.0],
+		[7, 0.5],
+	]

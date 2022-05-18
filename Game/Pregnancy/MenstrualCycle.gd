@@ -101,14 +101,22 @@ func processTime(seconds):
 func ovulate():
 	ovulatedThisCycle = true
 	
-	var amountOfEggs = 2
 	print("OVULATED")
 	
 	var motherSpecies = getCharacter().getSpecies()
+	var possibleEggAmounts = []
+	for specie in motherSpecies:
+		var speciesObject = GlobalRegistry.getSpecies(specie)
+		possibleEggAmounts.append_array(speciesObject.getEggCellOvulationAmount())
 	
 	for orifice in OrificeType.getAll():
 		if(!hasWombIn(orifice)):
 			continue
+			
+		var amountOfEggs = RNG.pickWeightedPairs(possibleEggAmounts)
+		if(amountOfEggs == null):
+			amountOfEggs = 1
+		print("AMOUNT OF EGGS: "+str(amountOfEggs))
 		
 		for _i in range(amountOfEggs):
 			var egg = createEggCell()
@@ -191,6 +199,11 @@ func loadData(data):
 	ovulatedThisCycle = SAVE.loadVar(data, "ovulatedThisCycle", false)
 	willOvulateAt = SAVE.loadVar(data, "willOvulateAt", 0.5)
 
+	impregnatedEggCells.clear()
+	eggCells.clear()
+	for orificeType in OrificeType.getAll():
+		eggCells[orificeType] = []
+		
 	var eggData = SAVE.loadVar(data, "eggCells", [])
 	for eggD in eggData:
 		var egg = createEggCell()

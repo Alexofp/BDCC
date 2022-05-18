@@ -94,3 +94,10 @@ func getDefaultForSlot(slot, _gender):
 
 func isPlayable():
 	return false
+
+# [[amount, weight], [amount, weight]]
+func getEggCellOvulationAmount():
+	return [
+		[1, 10.0],
+		[2, 1.0],
+	]

@@ -14,7 +14,7 @@ var resultGender = ChildGender.Male
 signal readyForBirth(egg)
 
 func _init():
-	lifeSpan = 60*60*24*2 + RNG.randi_range(-60*60*12, 60*60*12)
+	lifeSpan = 60*60*24*2 + RNG.randi_range(-60*60*12, 60*60*24)
 
 var cycle = null
 
