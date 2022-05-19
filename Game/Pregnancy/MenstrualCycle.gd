@@ -174,8 +174,18 @@ func getPregnancyProgress() -> float:
 func isReadyToGiveBirth():
 	return getPregnancyProgress() >= 1.0
 
+func getTimeUntilReadyForBirth() -> int:
+	if(impregnatedEggCells.size() == 0):
+		return 0
+	var minTime = impregnatedEggCells[0].getTimeUntilReadyForBirth()
+	for egg in impregnatedEggCells:
+		var newMinTime = egg.getTimeUntilReadyForBirth()
+		if(newMinTime < minTime):
+			newMinTime = minTime
+	return minTime
+
 func isVisiblyPregnant():
-	if(getPregnancyProgress() >= 0.4):
+	if(getPregnancyProgress() >= 0.15):
 		return true
 	return false
 	

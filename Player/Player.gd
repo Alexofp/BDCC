@@ -107,6 +107,11 @@ func forceIntoHeat():
 	if(menstrualCycle != null):
 		menstrualCycle.forceIntoHeat()
 
+func getPregnancyProgress():
+	if(menstrualCycle != null):
+		return menstrualCycle.getPregnancyProgress()
+	return 0.0
+
 # END
 
 func setLocation(newRoomID:String):

@@ -42,6 +42,10 @@ func removeMe():
 func getGestationTime() -> int:
 	return 60*60*24*7
 
+func getTimeUntilReadyForBirth() -> int:
+	var gestationTime = getGestationTime()
+	return int(gestationTime * (1.0 - getProgress()))
+
 func processTime(seconds):
 	
 	if(!isimpregnated):

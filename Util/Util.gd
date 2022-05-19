@@ -78,9 +78,12 @@ static func join(arr: Array, separator: String = "") -> String:
 static func getTimeStringHumanReadable(t):
 	var _seconds = floor(fmod(t, 60.0))
 	var _minutes = floor(fmod(t/60.0, 60.0))
-	var _hours = floor(t/3600.0)
+	var _hours = floor(fmod(t/3600.0, 24.0))
+	var _days = floor(t/(3600.0*24.0))
 	
 	var result = ""
+	if(_days > 0):
+		result += str(_days)+" days "
 	if(_hours > 0):
 		result += str(_hours)+"h "
 	if(_minutes > 0):
