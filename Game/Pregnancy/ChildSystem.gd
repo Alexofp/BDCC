@@ -25,6 +25,7 @@ func saveData():
 	return data
 
 func loadData(data):
+	children.clear()
 	var childData = SAVE.loadVar(data, "children", [])
 	
 	for child in childData:

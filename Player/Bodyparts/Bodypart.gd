@@ -156,7 +156,13 @@ func safeWhenExposed():
 	return true
 
 func getCharacter():
+	if(character == null):
+		return null
 	return character.get_ref()
 
 func hasWomb():
 	return false
+
+func updateAppearance():
+	if(character != null && getCharacter() != null):
+		getCharacter().updateAppearance()

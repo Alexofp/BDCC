@@ -28,6 +28,11 @@ func getCapacity() -> float:
 func processTime(seconds: int):
 	.processTime(seconds)
 	
+	var pc = getCharacter()
+	if(pc != null):
+		if(pc.getPregnancyProgress() >= 0.33):
+			lactationTimer += seconds * 3
+	
 	if(lactationTimer > 0):
 		lactationTimer -= seconds
 	if(lactationTimer < 0):

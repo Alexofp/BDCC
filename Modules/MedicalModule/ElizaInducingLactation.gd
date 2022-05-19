@@ -138,12 +138,13 @@ func _run():
 
 func _react(_action: String, _args):
 	if(_action == "sure"):
-		processTime(30*60)
+		processTime(29*60)
 		var breasts:BodypartBreasts = GM.pc.getBodypart(BodypartSlot.Breasts)
 		breasts.induceLactation()
 		
 		GM.pc.addIntoxication(0.5)
 		GM.pc.addLust(50)
+		processTime(60)
 		addMessage("You're lactating! The drug has intoxicated you")
 
 	if(_action == "endthescene"):

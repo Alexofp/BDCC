@@ -3,6 +3,7 @@ class_name BodypartBreasts
 
 
 var size = 0
+var cached_size = 0
 
 func _init():
 	limbSlot = LimbTypes.Breasts
@@ -19,6 +20,7 @@ func loadData(_data):
 	size = SAVE.loadVar(_data, "size", 0)
 	
 	.loadData(_data)
+	cached_size = getSize()
 
 func getSlot():
 	return BodypartSlot.Breasts
@@ -107,3 +109,11 @@ func safeWhenExposed():
 func induceLactation():
 	if(fluidProduction != null && fluidProduction.has_method("induceLactation")):
 		fluidProduction.induceLactation()
+
+func processTime(_seconds: int):
+	.processTime(_seconds)
+	
+	var newSize = getSize()
+	if(cached_size != newSize):
+		cached_size = newSize
+		updateAppearance()

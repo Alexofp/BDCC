@@ -48,6 +48,12 @@ func processTime(seconds: int):
 func getBodypart():
 	return bodypart.get_ref()
 
+func getCharacter():
+	if(bodypart == null):
+		return null
+	var bodypartObject = getBodypart()
+	return bodypartObject.getCharacter()
+
 func saveData():
 	var data = {
 		"fluidAmount": fluidAmount,
