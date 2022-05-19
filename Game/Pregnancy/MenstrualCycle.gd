@@ -51,6 +51,10 @@ func getCurrentStage():
 func isInHeat():
 	return getCurrentStage() == CycleStage.Ovulation && !isPregnant()
 
+func forceIntoHeat():
+	newCycle()
+	cycleProgress = 0.36
+
 func shouldOvulate():
 	if(!ovulatedThisCycle && cycleProgress >= willOvulateAt && !isPregnant()):
 		return true
@@ -129,7 +133,7 @@ func removeEgg(egg):
 	impregnatedEggCells.erase(egg)
 	print("EGG DIED")
 	
-func obsorbCum(cumType, amountML, whosCum, orificeType = OrificeType.Vagina):
+func obsorbCum(cumType, amountML, whosCum, orificeType = OrificeType.Vagina, virility = 1.0):
 	if(!hasWombIn(orificeType)):
 		return
 	
@@ -140,12 +144,15 @@ func obsorbCum(cumType, amountML, whosCum, orificeType = OrificeType.Vagina):
 	# .. or should they?
 	if(whosCum == getCharacter().getID()):
 		return
+		
+	var fertility = getCharacter().getFertility()
+	var crossSpeciesCompatibility = getCharacter().getCrossSpeciesCompatibility()
 	
 	if(eggCells.has(orificeType) && eggCells[orificeType].size() > 0):
 		var eggAmountMult = sqrt(float(eggCells[orificeType].size()))
 		
 		var egg = RNG.pick(eggCells[orificeType])
-		if(egg.tryImpregnate(whosCum, amountML, eggAmountMult)):
+		if(egg.tryImpregnate(whosCum, amountML, eggAmountMult, virility, fertility, crossSpeciesCompatibility)):
 			eggCells[orificeType].erase(egg)
 			impregnatedEggCells.append(egg)
 

@@ -20,6 +20,9 @@ var genitalElasticity = 0.0
 var genitalResistance = 0.0
 var orificeMinLooseness = {}
 var blockedOrifices = {}
+var extraFertility = 0.0
+var extraVirility = 0.0
+var extraCrossSpeciesCompatibility = 0.0
 
 func _ready():
 	name = "Buffs"
@@ -45,6 +48,9 @@ func calculateBuffs():
 	exposure = 0
 	genitalElasticity = 0.0
 	genitalResistance = 0.0
+	extraFertility = 0.0
+	extraVirility = 0.0
+	extraCrossSpeciesCompatibility = 0.0
 	
 	for damageType in DamageType.getAll():
 		dealDamageMult[damageType] = 0.0
@@ -140,3 +146,12 @@ func getOrificeBlocked(orificeType):
 		return false
 	
 	return blockedOrifices[orificeType]
+
+func getFertility():
+	return extraFertility
+
+func getVirility():
+	return extraVirility
+
+func getCrossSpeciesCompatibility():
+	return extraCrossSpeciesCompatibility

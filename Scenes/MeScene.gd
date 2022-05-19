@@ -28,7 +28,9 @@ func _run():
 			sayn("Visible pregnant: "+str(menstrualCycle.isVisiblyPregnant()))
 			sayn("Is in heat: "+str(menstrualCycle.isInHeat()))
 			sayn("Estimate chance of becoming pregnant after sex: "+str(Util.roundF(menstrualCycle.getRoughChanceOfBecomingPregnant(), 1))+"%")
-					
+			sayn("Fertility: "+str(Util.roundF(GM.pc.getFertility()*100.0, 1))+"%")
+		if(GM.pc.hasPenis()):
+			sayn("Virility: "+str(Util.roundF(GM.pc.getVirility()*100.0, 1))+"%")
 		sayn("")
 		
 		var bodyparts = GM.pc.getBodyparts()

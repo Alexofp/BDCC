@@ -142,13 +142,20 @@ func getCurrentNaturalSpill() -> float:
 	return getNaturalDrain()
 	
 func addFluid(fluidType, amount: float, charID = null):
+	var virility = 1.0
+	if(charID != null):
+		var character = GlobalRegistry.getCharacter(charID)
+		if(character != null):
+			virility = character.getVirility()
+	
 	for contentData in contents:
 		if(fluidType == contentData[0] && charID == contentData[2]):
 			contentData[1] += amount
+			contentData[3] = max(contentData[3], virility)
 			dirtyFlag = true
 			return
 	
-	contents.append([fluidType, amount, charID])
+	contents.append([fluidType, amount, charID, virility])
 	dirtyFlag = true
 
 func hasFluidType(fluidType):
@@ -217,7 +224,7 @@ func processTime(seconds: int):
 		toRemove = clamp(toRemove, 0.0, fluidData[1])
 		
 		if(toObsorb > 0.0):
-			onObsorb(fluidData[0], toObsorb, fluidData[2])
+			onObsorb(fluidData[0], toObsorb, fluidData[2], fluidData[3])
 		
 		fluidData[1] -= toRemove
 		
@@ -227,12 +234,12 @@ func processTime(seconds: int):
 	contents = newContents
 	dirtyFlag = true
 
-func onObsorb(cumType, howMuch, who):
+func onObsorb(cumType, howMuch, who, virility):
 	if(bodypart != null):
 		var bodypartObject = bodypart.get_ref()
 		var pc = bodypartObject.getCharacter()
 		if(pc != null && pc.has_method("onFluidObsorb")):
-			pc.onFluidObsorb(orificeType, cumType, howMuch, who)
+			pc.onFluidObsorb(orificeType, cumType, howMuch, who, virility)
 
 func getFluidList():
 	var myfluids = []
@@ -270,5 +277,10 @@ func saveData():
 
 func loadData(data):
 	contents = SAVE.loadVar(data, "contents", [])
+	for conData in contents:
+		# Adding virility if it's missing
+		if(conData.size() == 3):
+			conData.append(1.0)
+	
 	looseness = SAVE.loadVar(data, "looseness", 0.0)
 	dirtyFlag = true

@@ -81,9 +81,9 @@ func playAnimation(dollAnim):
 
 # PREGNANCY STUFF (move to BaseCharacter when done)
 
-func onFluidObsorb(orificeType, cumType, howMuch, who):
+func onFluidObsorb(orificeType, cumType, howMuch, who, virility):
 	if(menstrualCycle != null):
-		menstrualCycle.obsorbCum(cumType, howMuch, who, orificeType)
+		menstrualCycle.obsorbCum(cumType, howMuch, who, orificeType, virility)
 
 func getMenstrualCycle():
 	return menstrualCycle
@@ -102,6 +102,10 @@ func isReadyToGiveBirth():
 	if(menstrualCycle != null):
 		return menstrualCycle.isReadyToGiveBirth()
 	return false
+
+func forceIntoHeat():
+	if(menstrualCycle != null):
+		menstrualCycle.forceIntoHeat()
 
 # END
 
@@ -264,6 +268,9 @@ func updateNonBattleEffects():
 		removeEffect(StatusEffect.InHeat)
 		
 	if(menstrualCycle != null && menstrualCycle.isVisiblyPregnant()):
+		if(!hasEffect(StatusEffect.Pregnant)):
+			GM.main.addLogMessage("Uh oh", "You notice that your belly is more inflated that normally. You can't deny it anymore, you are pregnant..")
+		
 		addEffect(StatusEffect.Pregnant)
 	else:
 		removeEffect(StatusEffect.Pregnant)

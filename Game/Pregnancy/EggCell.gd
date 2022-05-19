@@ -86,15 +86,22 @@ func impregnatedBy(newfatherID):
 
 	print("EGGCELL IMPREGNATED BY "+str(newfatherID)+", species: "+str(resultSpecies)+", gender: "+ChildGender.getVisibleName(resultGender))
 
-func tryImpregnate(whosCum, amountML, eggMultiplier = 1.0):
+func tryImpregnate(whosCum, amountML, eggMultiplier = 1.0, virility = 1.0, fertility = 1.0, crossSpeciesCompatibility = 0.0):
 	if(!canImpregnate()):
 		return false
 	
 	var father = GlobalRegistry.getCharacter(whosCum)
 	
 	var crossSpeciesMod = SpeciesCompatibility.pregnancyChanceMod(motherSpecies, father.getSpecies())
+	if(crossSpeciesCompatibility > 0.0):
+		crossSpeciesMod = min(crossSpeciesCompatibility, crossSpeciesMod)
+	if(crossSpeciesCompatibility < 0.0):
+		crossSpeciesMod = crossSpeciesMod * (1.0 - abs(crossSpeciesCompatibility))
+	crossSpeciesMod = clamp(crossSpeciesMod, 0.0, 1.0)
+	virility = max(virility, 0.0)
+	fertility = max(fertility, 0.0)
 	
-	var finalChance = amountML * crossSpeciesMod * 20.0 * eggMultiplier
+	var finalChance = amountML * crossSpeciesMod * 20.0 * eggMultiplier * virility * fertility
 	print(finalChance)
 	
 	if(RNG.chance(finalChance)):

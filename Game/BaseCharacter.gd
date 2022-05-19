@@ -742,3 +742,31 @@ func getOrificeMinLooseness(orificeType):
 	
 func getOrificeBlocked(orificeType):
 	return buffsHolder.getOrificeBlocked(orificeType)
+
+
+func getBaseFertility() -> float:
+	return 1.0
+
+func getFertility():
+	var value = getBaseFertility()
+	
+	value += buffsHolder.getFertility()
+	
+	return value
+
+func getBaseVirility() -> float:
+	return 1.0
+
+func getVirility():
+	var value = getBaseFertility()
+	
+	value += buffsHolder.getVirility()
+	
+	return value
+
+func getCrossSpeciesCompatibility():
+	var value = 0.0
+	
+	value += buffsHolder.getCrossSpeciesCompatibility()
+	
+	return value

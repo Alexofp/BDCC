@@ -35,3 +35,7 @@ const MinLoosenessAnusBuff = "MinLoosenessAnusBuff"
 const MinLoosenessThroatBuff = "MinLoosenessThroatBuff"
 const BlocksVaginaLeakingBuff = "BlocksVaginaLeakingBuff"
 const BlocksAnusLeakingBuff = "BlocksAnusLeakingBuff"
+
+const FertilityBuff = "FertilityBuff"
+const VirilityBuff = "VirilityBuff"
+const CrossSpeciesCompatibilityBuff = "CrossSpeciesCompatibilityBuff"
