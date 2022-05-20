@@ -106,7 +106,7 @@ func tryImpregnate(whosCum, amountML, eggMultiplier = 1.0, virility = 1.0, ferti
 	fertility = max(fertility, 0.0)
 	
 	var finalChance = amountML * crossSpeciesMod * 20.0 * eggMultiplier * virility * fertility
-	print(finalChance)
+	#print(finalChance)
 	
 	if(RNG.chance(finalChance)):
 		impregnatedBy(whosCum)

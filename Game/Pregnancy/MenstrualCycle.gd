@@ -105,7 +105,7 @@ func processTime(seconds):
 func ovulate():
 	ovulatedThisCycle = true
 	
-	print("OVULATED")
+	#print("OVULATED")
 	
 	var motherSpecies = getCharacter().getSpecies()
 	var possibleEggAmounts = []
@@ -120,7 +120,7 @@ func ovulate():
 		var amountOfEggs = RNG.pickWeightedPairs(possibleEggAmounts)
 		if(amountOfEggs == null):
 			amountOfEggs = 1
-		print("AMOUNT OF EGGS: "+str(amountOfEggs))
+		#print("AMOUNT OF EGGS: "+str(amountOfEggs))
 		
 		for _i in range(amountOfEggs):
 			var egg = createEggCell()
@@ -131,7 +131,7 @@ func ovulate():
 func removeEgg(egg):
 	eggCells[egg.getOrifice()].erase(egg)
 	impregnatedEggCells.erase(egg)
-	print("EGG DIED")
+	#print("EGG DIED")
 	
 func obsorbCum(cumType, amountML, whosCum, orificeType = OrificeType.Vagina, virility = 1.0):
 	if(!hasWombIn(orificeType)):
@@ -167,8 +167,8 @@ func getPregnancyProgress() -> float:
 		var newProgress = egg.getProgress()
 		if(newProgress > maxProgress):
 			maxProgress = newProgress
-	if(maxProgress > 0.0):
-		print("PREGNANCY: "+str(maxProgress))
+	#if(maxProgress > 0.0):
+	#	print("PREGNANCY: "+str(maxProgress))
 	return maxProgress
 
 func isReadyToGiveBirth():
@@ -246,7 +246,7 @@ func getRoughChanceOfBecomingPregnant() -> float:
 	return roughChance * 100.0
 
 func onEggCellReadyForBirth(_egg):
-	print("EGG READY TO BIRTH")
+	#print("EGG READY TO BIRTH")
 	emit_signal("readyToGiveBirth")
 
 func speedUpPregnancy():

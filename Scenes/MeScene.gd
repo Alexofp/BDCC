@@ -5,7 +5,7 @@ func _init():
 
 func _run():
 	if(state == ""):
-		GM.pc.cummedInVaginaBy("nova")
+		#GM.pc.cummedInVaginaBy("nova")
 		
 		sayn("[b]Personal information:[/b]")
 		sayn("Name: "+GM.pc.getName())

@@ -23,8 +23,10 @@ var bodypartStorageNode
 
 # Combat stats
 var initialDodgeChance = 0
-
 var fightingState = "" # dodge, block, defocus
+
+# pregnancy stuff
+var menstrualCycle: MenstrualCycle
 
 func _init():
 	name = "BaseCharacter"
@@ -743,6 +745,7 @@ func getOrificeMinLooseness(orificeType):
 func getOrificeBlocked(orificeType):
 	return buffsHolder.getOrificeBlocked(orificeType)
 
+# PREGNANCY STUFF
 
 func getBaseFertility() -> float:
 	return 1.0
@@ -770,3 +773,36 @@ func getCrossSpeciesCompatibility():
 	value += buffsHolder.getCrossSpeciesCompatibility()
 	
 	return value
+
+func onFluidObsorb(orificeType, cumType, howMuch, who, virility):
+	if(menstrualCycle != null):
+		menstrualCycle.obsorbCum(cumType, howMuch, who, orificeType, virility)
+
+func getMenstrualCycle():
+	return menstrualCycle
+
+func isPregnant():
+	if(menstrualCycle != null):
+		return menstrualCycle.isPregnant()
+	return false
+
+func isVisiblyPregnant():
+	if(menstrualCycle != null):
+		return menstrualCycle.isVisiblyPregnant()
+	return false
+
+func isReadyToGiveBirth():
+	if(menstrualCycle != null):
+		return menstrualCycle.isReadyToGiveBirth()
+	return false
+
+func forceIntoHeat():
+	if(menstrualCycle != null):
+		menstrualCycle.forceIntoHeat()
+
+func getPregnancyProgress():
+	if(menstrualCycle != null):
+		return menstrualCycle.getPregnancyProgress()
+	return 0.0
+
+# END OF PREGNANCY STUFF

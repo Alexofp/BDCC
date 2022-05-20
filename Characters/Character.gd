@@ -11,6 +11,7 @@ var npcArmor = {}
 var npcBasePain = null
 var npcBaseLust = null
 var npcBaseStamina = null
+var npcHasMenstrualCycle = false # If true can get pregnant
 
 func _ready():
 	name = id
@@ -28,6 +29,12 @@ func _ready():
 				lustInterests.addInterest(interestID, interestData[0])
 		else:
 			lustInterests.addInterest(interestID, interestData)
+			
+	if(npcHasMenstrualCycle):
+		menstrualCycle = MenstrualCycle.new()
+		menstrualCycle.setCharacter(self)
+		var _ok = menstrualCycle.connect("readyToGiveBirth", self, "onCharacterReadyToGiveBirth")
+		menstrualCycle.start()
 
 func _init():
 	pass
@@ -72,6 +79,8 @@ func saveData():
 	data["statusEffects"] = saveStatusEffectsData()
 	data["inventory"] = inventory.saveData()
 	data["lustInterests"] = lustInterests.saveData()
+	if(menstrualCycle != null):
+		data["menstrualCycle"] = menstrualCycle.saveData()
 	
 	return data
 
@@ -98,6 +107,9 @@ func loadData(data):
 	loadStatusEffectsData(SAVE.loadVar(data, "statusEffects", {}))
 	inventory.loadData(SAVE.loadVar(data, "inventory", {}))
 	lustInterests.loadData(SAVE.loadVar(data, "lustInterests", {}))
+
+	if(menstrualCycle != null && data.has("menstrualCycle")):
+		menstrualCycle.loadData(SAVE.loadVar(data, "menstrualCycle", {}))
 
 func getArmor(_damageType):
 	var calculatedArmor = .getArmor(_damageType)
@@ -132,6 +144,9 @@ func processTime(_secondsPassed):
 			continue
 		bodypart.processTime(_secondsPassed)
 		
+	if(menstrualCycle != null):
+		menstrualCycle.processTime(_secondsPassed)
+		
 func hoursPassed(_howmuch):
 	for bodypartSlot in bodyparts:
 		if(bodyparts[bodypartSlot] != null):
@@ -152,3 +167,25 @@ func updateNonBattleEffects():
 		addEffect(StatusEffect.HasCumInsideMouth)
 	else:
 		removeEffect(StatusEffect.HasCumInsideMouth)
+
+	if(menstrualCycle != null && menstrualCycle.isInHeat()):
+		addEffect(StatusEffect.InHeat)
+	else:
+		removeEffect(StatusEffect.InHeat)
+		
+	if(menstrualCycle != null && menstrualCycle.isVisiblyPregnant()):
+		#if(!hasEffect(StatusEffect.Pregnant)):
+		#	GM.main.addLogMessage("Uh oh", "You notice that your belly is more inflated that normally. You can't deny it anymore, you are pregnant..")
+		
+		addEffect(StatusEffect.Pregnant)
+	else:
+		removeEffect(StatusEffect.Pregnant)
+
+func onCharacterReadyToGiveBirth():
+	if(getMenstrualCycle() != null):
+		GM.main.addLogMessage("News", "You just received news that someone gave birth to your children! You can check who in the nursery")
+		
+		var bornChildren = getMenstrualCycle().giveBirth()
+		
+		for child in bornChildren:
+			GM.CS.addChild(child)

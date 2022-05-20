@@ -2,6 +2,7 @@ extends Character
 
 func _init():
 	id = "rahi"
+	npcHasMenstrualCycle = true
 	
 func _getName():
 	return "Rahi"
