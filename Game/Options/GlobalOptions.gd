@@ -27,12 +27,14 @@ func getChangeableOptions():
 			"options": [
 				{
 					"name": "Test option",
+					"description": "test description",
 					"id": "test_option",
 					"type": "checkbox",
 					"value": true,
 				},
 				{
 					"name": "Test option 2",
+					"description": "mew mew test description",
 					"id": "test_option2",
 					"type": "list",
 					"value": "v1",
@@ -50,6 +52,7 @@ func getChangeableOptions():
 			"options": [
 				{
 					"name": "Fetch latest release",
+					"description": "Should the game load latest update info from github when starting the game",
 					"id": "fetchLatestRelease",
 					"type": "checkbox",
 					"value": fetchNewRelease,
@@ -62,12 +65,13 @@ func getChangeableOptions():
 	for contentType in ContentType.getAll():
 		contentSettings.append({
 			"name": ContentType.getVisibleName(contentType),
+			"description": ContentType.getDescription(contentType),
 			"id": contentType,
 			"type": "checkbox",
 			"value": isContentEnabled(contentType),
 		})
 	settings.append({
-		"name": "Enabled Fetish Content (not implemented yet)",
+		"name": "Enabled Fetish Content",
 		"id": "enabledContent",
 		"options": contentSettings,
 	})

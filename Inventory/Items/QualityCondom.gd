@@ -29,4 +29,7 @@ func getTags():
 	]
 
 func getCondomBreakChance():
+	if(!OPTIONS.isContentEnabled(ContentType.RiskyCondoms)):
+		return 0.0
+	
 	return 1.0

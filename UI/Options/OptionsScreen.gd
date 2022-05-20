@@ -27,6 +27,9 @@ func updateOptions():
 			var optionID = option["id"]
 			var optionName = option["name"]
 			var optionValue = option["value"]
+			var optionDescription = null
+			if(option.has("description")):
+				optionDescription = option["description"]
 			
 			var optionUIObject: Node = null
 			if(optionType == "checkbox"):
@@ -48,6 +51,22 @@ func updateOptions():
 				var _ok = optionUIObject.connect("value_changed", self, "onOptionChanged")
 			if(optionType == "list"):
 				optionUIObject.setValues(option["values"])
+			
+			if(optionDescription != null && optionUIObject.has_signal("mouse_entered")):
+				var _ok = optionUIObject.connect("mouse_entered", self, "onOptionMouseEntered", [optionUIObject])
+				var _ok2 = optionUIObject.connect("mouse_exited", self, "onOptionMouseExited", [optionUIObject])
+				if(optionUIObject.has_method("setDescription")):
+					optionUIObject.setDescription(optionDescription)
+				
+func onOptionMouseEntered(optionUIObject):
+	if(optionUIObject.has_method("getDescription")):
+		var optionName = "Option"
+		if(optionUIObject.has_method("getOptionName")):
+			optionName = optionUIObject.getOptionName()
+		GlobalTooltip.showTooltip(optionName, optionUIObject.getDescription())
+			
+func onOptionMouseExited(_optionUIObject):
+	GlobalTooltip.hideTooltip()
 				
 func onOptionChanged(categoryID, optionID, optionNewValue):
 	OPTIONS.applyOption(categoryID, optionID, optionNewValue)
