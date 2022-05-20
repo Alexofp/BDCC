@@ -5,9 +5,9 @@ This game is influenced a lot by other erotic text rpg games like Trials in the 
 
 <img src="https://user-images.githubusercontent.com/14040378/163157468-96aeb9dc-6605-4abe-863f-524510b9f940.png" width="48%"> <img src="https://user-images.githubusercontent.com/14040378/163156752-7863a466-c790-48b8-a04c-c7f470db0373.png" width="48%"> <img src="https://user-images.githubusercontent.com/14040378/163156860-c7da2265-c971-42d6-8e07-c96084a2c902.png" width="48%"> <img src="https://user-images.githubusercontent.com/14040378/163156669-1bb5ed09-90da-4c38-b2aa-c2d82346eb8d.png" width="48%">
 
-Heavy wip
+### [Changelog](https://github.com/Alexofp/BDCC/blob/main/CHANGELOG.md)
 
-Uses Godot 3.4.2 engine
+Uses Godot 3.4.4 engine
 
 ## Kinks that this game will touch
 - Vanilla sex of course, vaginal/oral/anal/handjob/footjob. I plan every character to be pansexual
@@ -38,7 +38,8 @@ Uses Godot 3.4.2 engine
 - More story, more random events
 - More sex scenes
 - More skills, perks
-- Release of the first public build, feel free to compile the current build yourself, you just need godot 3.4
+- Reputation system
+- Better lust combat with more depth
 
 
 This game will stay open source, you can use this as a learning resource, help me expand it or use as a base for your own game.
