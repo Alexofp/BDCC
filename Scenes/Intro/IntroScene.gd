@@ -362,6 +362,9 @@ func _react(_action: String, _args):
 
 func _react_scene_end(_tag, _result):
 	if(_tag == "character_creator"):
+		setFlag(Flag.Game_PickedStartingPerks, true)
+		runScene("PickStartingPerksScene", [], "starting_perks")
+	if(_tag == "starting_perks"):
 		setState("donecreating")
 
 

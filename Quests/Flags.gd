@@ -5,6 +5,7 @@ const TestFlag = "TestFlag"
 const Canteen_PlayerAteToday = "Canteen_PlayerAteToday"
 const Mining_IntroducedToMinning = "Mining_IntroducedToMinning"
 const Game_CompletedPrologue = "Game_CompletedPrologue"
+const Game_PickedStartingPerks = "Game_PickedStartingPerks"
 const Player_Crime_Type = "Player_Crime_Type"
 enum Crime_Type {Innocent, Theft, Murder, Prostitution}
 

@@ -751,6 +751,9 @@ func getBaseFertility() -> float:
 	return 1.0
 
 func getFertility():
+	if(hasPerk(Perk.StartInfertile)):
+		return 0.0
+	
 	var value = getBaseFertility()
 	
 	value += buffsHolder.getFertility()
@@ -761,6 +764,9 @@ func getBaseVirility() -> float:
 	return 1.0
 
 func getVirility():
+	if(hasPerk(Perk.StartMaleInfertility)):
+		return 0.0
+	
 	var value = getBaseFertility()
 	
 	value += buffsHolder.getVirility()

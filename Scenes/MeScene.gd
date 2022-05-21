@@ -76,6 +76,8 @@ func _run():
 		addButton("Masturbate", "Do the thing", "domasturbate")
 		addButton("Gender", "Pick your gender", "pickgender")
 		addButton("Pronouns", "Pick your pronouns", "pickpronouns")
+		if(!getFlag(Flag.Game_PickedStartingPerks, false)):
+			addButton("Pick Perks!", "Pick your starting perks. You can only do this once", "pickstartingperks")
 
 	if(state == "domasturbate"):
 		saynn("You remove some stress by masturbating (temporary text)")
@@ -135,6 +137,12 @@ func _react(_action: String, _args):
 		
 		GM.main.processTime(newt)
 		
+		setState("")
+		return
+	
+	if(_action == "pickstartingperks"):
+		setFlag(Flag.Game_PickedStartingPerks, true)
+		runScene("PickStartingPerksScene")
 		setState("")
 		return
 	

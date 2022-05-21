@@ -59,6 +59,7 @@ func getPickableAttributes():
 				[5, "5 cm", "Pick this length"],
 				[8, "8 cm", "Pick this length"],
 				[10, "10 cm", "Pick this length"],
+				[13, "13 cm", "Pick this length"],
 				[15, "15 cm", "Pick this length"],
 				[18, "18 cm", "Pick this length"],
 				[22, "22 cm", "Pick this length"],

@@ -36,20 +36,23 @@ static func pregnancyChanceMod(motherSpecies: Array, fatherSpecies: Array) -> fl
 		
 	return 0.2
 
-static func generateChildSpecies(motherSpecies: Array, fatherSpecies: Array) -> Array:
+static func generateChildSpecies(motherSpecies: Array, fatherSpecies: Array, allowHybrids: bool = true) -> Array:
 	var possibleResults = []
 	for mSpecies in motherSpecies:
 		possibleResults.append([[mSpecies], 30.0/motherSpecies.size()])
-	possibleResults.append([motherSpecies, 10.0])
+	if(allowHybrids):
+		possibleResults.append([motherSpecies, 10.0])
 	
 	for fSpecies in fatherSpecies:
 		possibleResults.append([[fSpecies], 30.0/fatherSpecies.size()])
-	possibleResults.append([fatherSpecies, 10.0])
+	if(allowHybrids):
+		possibleResults.append([fatherSpecies, 10.0])
 
-	var permuationsAmount = motherSpecies.size() * fatherSpecies.size()
-	for mSpecies in motherSpecies:
-		for fSpecies in fatherSpecies:
-			possibleResults.append([[mSpecies, fSpecies], 20.0 / permuationsAmount])
+	if(allowHybrids):
+		var permuationsAmount = motherSpecies.size() * fatherSpecies.size()
+		for mSpecies in motherSpecies:
+			for fSpecies in fatherSpecies:
+				possibleResults.append([[mSpecies, fSpecies], 20.0 / permuationsAmount])
 
 	var result = Util.uniqueElements(RNG.pickWeightedPairs(possibleResults))
 	result.sort()

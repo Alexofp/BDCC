@@ -84,8 +84,13 @@ func impregnatedBy(newfatherID):
 	fatherID = newfatherID
 	
 	var father = GlobalRegistry.getCharacter(fatherID)
+	var mother = GlobalRegistry.getCharacter(motherID)
 	
-	resultSpecies = SpeciesCompatibility.generateChildSpecies(motherSpecies, father.getSpecies())
+	var allowHybrids = true
+	if(father.hasPerk(Perk.StartNoHybrids) || mother.hasPerk(Perk.StartNoHybrids)):
+		allowHybrids = false
+	
+	resultSpecies = SpeciesCompatibility.generateChildSpecies(motherSpecies, father.getSpecies(), allowHybrids)
 	resultGender = ChildGender.generate()
 
 	print("EGGCELL IMPREGNATED BY "+str(newfatherID)+", species: "+str(resultSpecies)+", gender: "+ChildGender.getVisibleName(resultGender))

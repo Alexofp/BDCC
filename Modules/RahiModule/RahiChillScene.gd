@@ -205,7 +205,7 @@ func _run():
 
 func _react(_action: String, _args):
 	if(_action == "take_a_sip"):
-		GM.pc.addIntoxication(30)
+		GM.pc.addIntoxication(0.3)
 		
 	if(_action == "bring_her_home"):
 		if(GM.pc.getPain() > 0):

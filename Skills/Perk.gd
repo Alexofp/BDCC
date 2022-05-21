@@ -1,6 +1,11 @@
 extends Object
 class_name Perk
 
+# Starting perks
+const StartInfertile = "StartInfertile"
+const StartMaleInfertility = "StartMaleInfertility"
+const StartNoHybrids = "StartNoHybrids"
+
 # Combat perks
 const CombatShove = "CombatShove"
 const CombatBetterBlock = "CombatBetterBlock"
