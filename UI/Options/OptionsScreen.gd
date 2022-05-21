@@ -5,6 +5,8 @@ var optionsCategoryScene = preload("res://UI/Options/OptionsCategory.tscn")
 var optionCategoryUnknown = preload("res://UI/Options/OptionUnknownType.tscn")
 var optionCategoryCheckbox = preload("res://UI/Options/OptionCheckboxType.tscn")
 var optionCategoryList = preload("res://UI/Options/OptionListType.tscn")
+var optionCategoryFloat = preload("res://UI/Options/OptionFloatType.tscn")
+var optionCategoryInt = preload("res://UI/Options/OptionIntType.tscn")
 signal onClosePressed
 
 func _ready():
@@ -36,6 +38,10 @@ func updateOptions():
 				optionUIObject = optionCategoryCheckbox.instance()
 			elif(optionType == "list"):
 				optionUIObject = optionCategoryList.instance()
+			elif(optionType == "float"):
+				optionUIObject = optionCategoryFloat.instance()
+			elif(optionType == "int"):
+				optionUIObject = optionCategoryInt.instance()
 			else:
 				optionUIObject = optionCategoryUnknown.instance()
 			

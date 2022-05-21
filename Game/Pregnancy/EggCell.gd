@@ -14,7 +14,14 @@ var resultGender = ChildGender.Male
 signal readyForBirth(egg)
 
 func _init():
-	lifeSpan = 60*60*24*2 + RNG.randi_range(-60*60*12, 60*60*24)
+	#lifeSpan = 60*60*24*2 + RNG.randi_range(-60*60*12, 60*60*24)
+	var optionsLifespan:int = OPTIONS.getEggCellLifespanHours()
+	optionsLifespan = Util.maxi(optionsLifespan, 1)
+	#warning-ignore:integer_division
+	var minRange = int(optionsLifespan / 4)
+	#warning-ignore:integer_division
+	var maxRange = int(optionsLifespan / 2)
+	lifeSpan = 60*60*optionsLifespan + RNG.randi_range(-60*60*minRange, 60*60*maxRange)
 
 var cycle = null
 
@@ -40,7 +47,16 @@ func removeMe():
 
 # Seconds
 func getGestationTime() -> int:
-	return 60*60*24*7
+	if(motherID == "pc"):
+		var pcPregTime:int = OPTIONS.getPlayerPregnancyTimeDays()
+		pcPregTime = Util.maxi(pcPregTime, 1)
+		return 60*60*24*pcPregTime
+	else:
+		var npcPregTime:int = OPTIONS.getNPCPregnancyTimeDays()
+		npcPregTime = Util.maxi(npcPregTime, 1)
+		return 60*60*24*npcPregTime
+	
+	#return 60*60*24*7
 
 func getTimeUntilReadyForBirth() -> int:
 	var gestationTime = getGestationTime()

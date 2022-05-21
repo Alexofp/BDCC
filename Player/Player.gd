@@ -632,8 +632,9 @@ func afterSleepingInBed():
 	for item in getInventory().getEquppedRestraints():
 		item.getRestraintData().resetOnNewDay()
 	
-	if(isPregnant() && !isVisiblyPregnant() && RNG.chance(20)):
+	if(isPregnant() && getPregnancyProgress() <= 0.33 && RNG.chance(30)):
 		GM.main.addLogMessage("Nausea", "You wake up and feel kinda nauseous.")
+		addEffect(StatusEffect.PregnancySickness)
 		
 	updateNonBattleEffects()
 

@@ -77,7 +77,11 @@ func newCycle():
 	
 # in seconds
 func getCycleLength() -> int:
-	return 60*60*24*10
+	#return 60*60*24*10
+	var settingValue:int = OPTIONS.getMenstrualCycleLengthDays()
+	settingValue = Util.maxi(1, settingValue)
+	
+	return 60*60*24*settingValue
 
 func processTime(seconds):
 	if(isPregnant()):
@@ -185,7 +189,7 @@ func getTimeUntilReadyForBirth() -> int:
 	return minTime
 
 func isVisiblyPregnant():
-	if(getPregnancyProgress() >= 0.15):
+	if(getPregnancyProgress() >= 0.20):
 		return true
 	return false
 	
