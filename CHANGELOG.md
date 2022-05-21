@@ -15,6 +15,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Pregnancy! You can get pregnant and give birth in the nursery. There you can also track all your kids. Can't interact with them (and will never be able to, is an adult game). Other characters give birth automatically when the time is right (you will be notified)
 - Menstrual cycle simulation for you and non-playable female characters. You can go into heat and ovulate (if you have a pussy ofc). Each eggcell/ovum inside your womb is simulated and tracked. The same code is used for other characters
 - Birth control pills, breeder pills, heat pills, pregnancy testers
+- Pregnancy settings were added to the options screen where you can adjust how long the menstrual cycle and pregnancy are
+- Ability to pick starting perks. So far they're all pregnancy related. If you have an old save file a button to pick them is added to your "Me" menu
 
 ### Changed
 - Pink inmates are now called lilacs because I like the name
