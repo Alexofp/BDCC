@@ -17,11 +17,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Birth control pills, breeder pills, heat pills, pregnancy testers
 - Pregnancy settings were added to the options screen where you can adjust how long the menstrual cycle and pregnancy are
 - Ability to pick starting perks. So far they're all pregnancy related. If you have an old save file a button to pick them is added to your "Me" menu
+- Lots of new icons for status effects and perks
 
 ### Changed
 - Pink inmates are now called lilacs because I like the name
 - Vendomats now use item tags rather than a hardcoded list of items.
 - Mentioned Mekyro on the credits screen
+
+### Fixed
+- Tallymarks and bodywritings should now save/load correctly. No more Error:Badzone1
 
 ## [0.0.13bugfix3] - 2022-05-10
 ### Fixed
