@@ -4,6 +4,7 @@ var marks = {}
 var totalAmount = 0
 
 func addMark(zone):
+	zone = str(zone)
 	if(!marks.has(zone)):
 		marks[zone] = 0
 	marks[zone] += 1
@@ -22,7 +23,7 @@ func getEffectName():
 func getEffectDesc():
 	var text = "Your tally marks:"
 	for zone in marks:
-		var zoneName = BodyWritingsZone.getZoneVisibleName(zone)
+		var zoneName = BodyWritingsZone.getZoneVisibleName(int(zone))
 		var amount = marks[zone]
 		var amountString = BodyWritings.getTallyMarksString(amount)
 		

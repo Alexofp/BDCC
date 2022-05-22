@@ -59,7 +59,7 @@ const zoneVisibleName = {
 static func getRandomZone():
 	return RNG.pick(zoneVisibleName.keys())
 
-static func getZoneVisibleName(zoneID):
+static func getZoneVisibleName(zoneID: int):
 	if(!zoneVisibleName.has(zoneID)):
 		return "error:BADZONE"+str(zoneID)
 	return zoneVisibleName[zoneID]

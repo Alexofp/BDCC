@@ -3,6 +3,7 @@ extends StatusEffectBase
 var writings = {}
 
 func addWriting(zone, writingID):
+	zone = str(zone)
 	for allZone in writings:
 		if(writings[allZone].has(writingID)):
 			return
@@ -29,7 +30,7 @@ func getEffectDesc():
 			var data = BodyWritings.getWritingInfo(writingID)
 			writingsNames.append("'[i]"+data[BodyWritingsDB.DBText]+"[/i]'")
 		
-		var zoneName = BodyWritingsZone.getZoneVisibleName(zone)
+		var zoneName = BodyWritingsZone.getZoneVisibleName(int(zone))
 		
 		text += "\n"+Util.humanReadableList(writingsNames)+" on your "+zoneName
 		#text += "\n"+zoneName+": "+Util.humanReadableList(writingsNames)
