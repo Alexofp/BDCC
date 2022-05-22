@@ -20,7 +20,7 @@ func getEffectDesc():
 	return "You can't use your hands. You can still punch but most tasks that require you to use your fingers are impossible"
 
 func getEffectImage():
-	return "res://UI/StatusEffectsPanel/images/mittens.png"
+	return "res://Images/StatusEffects/mittens.png"
 
 func getIconColor():
 	return IconColorPurple

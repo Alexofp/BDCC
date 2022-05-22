@@ -22,7 +22,7 @@ func getEffectDesc():
 	return "You feel dizzy.. "+Util.getTimeStringHumanReadable(turns)
 
 func getEffectImage():
-	return "res://UI/StatusEffectsPanel/images/mouth.png"
+	return "res://Images/StatusEffects/headache.png"
 
 func getIconColor():
 	return IconColorRed

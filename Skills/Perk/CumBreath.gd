@@ -16,7 +16,7 @@ func getSkillTier():
 	return 0
 
 func getPicture():
-	return "res://UI/StatusEffectsPanel/images/mouth.png"
+	return "res://Images/Perks/mouth-watering.png"
 
 func processBattleTurn():
 	if(!npc.isPlayer()):

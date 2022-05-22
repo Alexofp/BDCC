@@ -50,7 +50,7 @@ func getEffectDesc():
 	return "You are completely naked, be ready for some extra attention"
 
 func getEffectImage():
-	return "res://UI/StatusEffectsPanel/images/nudity.png"
+	return "res://Images/StatusEffects/nudity.png"
 
 func getIconColor():
 	return IconColorPurple

@@ -20,7 +20,7 @@ func getEffectDesc():
 	return "Your arms are bound together. You can't use them for combat but you can still do most tasks that require them"
 
 func getEffectImage():
-	return "res://UI/StatusEffectsPanel/images/cuffshands.png"
+	return "res://Images/StatusEffects/handcuffed.png"
 
 func getIconColor():
 	return IconColorPurple

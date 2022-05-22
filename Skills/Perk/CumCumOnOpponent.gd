@@ -19,7 +19,7 @@ func getSkillTier():
 	return 1
 
 func getPicture():
-	return "res://UI/StatusEffectsPanel/images/mess.png"
+	return "res://Images/Perks/splurt.png"
 
 func addsAttacks():
 	return ["ClimaxPerkAttack"]

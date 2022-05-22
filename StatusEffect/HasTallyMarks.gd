@@ -30,7 +30,7 @@ func getEffectDesc():
 	return text
 
 func getEffectImage():
-	return "res://UI/StatusEffectsPanel/images/tallymarks.png"
+	return "res://Images/StatusEffects/tallymarks.png"
 
 func getIconColor():
 	return IconColorPurple

@@ -16,7 +16,7 @@ func getSkillTier():
 	return 0
 
 func getPicture():
-	return "res://UI/StatusEffectsPanel/images/down.png"
+	return "res://Images/Perks/armor-downgrade.png"
 
 func addsAttacks():
 	return ["shoveattack"]

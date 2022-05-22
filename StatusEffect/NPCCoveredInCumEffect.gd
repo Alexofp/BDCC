@@ -34,7 +34,7 @@ func getBuffs():
 	]
 
 func getEffectImage():
-	return "res://UI/StatusEffectsPanel/images/mess.png"
+	return "res://Images/StatusEffects/splurt.png"
 
 func getIconColor():
 	return IconColorPurple

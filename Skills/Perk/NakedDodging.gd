@@ -16,7 +16,7 @@ func getSkillTier():
 	return 0
 
 func getPicture():
-	return "res://UI/StatusEffectsPanel/images/nudity.png"
+	return "res://Images/Perks/avoidance.png"
 
 func getBuffs():
 	if(!npc.isPlayer()):

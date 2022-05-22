@@ -19,9 +19,7 @@ func getSkillTier():
 	return 0
 
 func getPicture():
-	if(GM.pc.hasVagina()):
-		return "res://UI/StatusEffectsPanel/images/womb2.png"
-	return "res://UI/StatusEffectsPanel/images/butt.png"
+	return "res://Images/Perks/heartburn.png"
 
 func getBuffs():
 	if(!npc.isPlayer()):

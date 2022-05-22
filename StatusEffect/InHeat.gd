@@ -11,7 +11,7 @@ func getEffectDesc():
 	return "You have a huge urge to mate with someone.."
 
 func getEffectImage():
-	return "res://UI/StatusEffectsPanel/images/butt.png"
+	return "res://Images/StatusEffects/heartburn.png"
 
 func getIconColor():
 	return IconColorDarkPurple

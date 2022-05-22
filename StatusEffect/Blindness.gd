@@ -25,7 +25,7 @@ func getEffectDesc():
 	return "You're blind! " + str(turns) + " more turns"
 
 func getEffectImage():
-	return "res://UI/StatusEffectsPanel/images/blind.png"
+	return "res://Images/StatusEffects/blind.png"
 
 func getIconColor():
 	return IconColorRed

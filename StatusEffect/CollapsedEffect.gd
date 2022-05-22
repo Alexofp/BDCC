@@ -16,7 +16,7 @@ func getEffectDesc():
 	return message
 
 func getEffectImage():
-	return "res://UI/StatusEffectsPanel/images/down.png"
+	return "res://Images/StatusEffects/down.png"
 
 func getIconColor():
 	return IconColorBlue

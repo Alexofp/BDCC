@@ -36,7 +36,7 @@ func getEffectDesc():
 	return text
 
 func getEffectImage():
-	return "res://UI/StatusEffectsPanel/images/bodywritings.png"
+	return "res://Images/StatusEffects/bodywritings.png"
 
 func getIconColor():
 	return IconColorPurple

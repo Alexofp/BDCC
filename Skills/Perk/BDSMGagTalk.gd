@@ -16,5 +16,5 @@ func getSkillTier():
 	return 0
 
 func getPicture():
-	return "res://UI/StatusEffectsPanel/images/gag.png"
+	return "res://Images/Perks/gag.png"
 

@@ -27,7 +27,7 @@ func getEffectDesc():
 	return "3 lust per turn. " + str(turns) + " more turns"
 
 func getEffectImage():
-	return "res://UI/StatusEffectsPanel/images/bleeding.png"
+	return "res://Images/StatusEffects/smoke-bomb.png"
 
 func getIconColor():
 	return IconColorRed

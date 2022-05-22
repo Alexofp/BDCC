@@ -39,7 +39,7 @@ func getEffectDesc():
 	return message
 
 func getEffectImage():
-	return "res://UI/StatusEffectsPanel/images/butt.png"
+	return "res://Images/StatusEffects/butt.png"
 
 func getIconColor():
 	return IconColorPurple

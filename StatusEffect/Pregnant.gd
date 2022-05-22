@@ -27,7 +27,11 @@ func getEffectDesc():
 	return "You're visible pregnant.. "+addText
 
 func getEffectImage():
-	return "res://UI/StatusEffectsPanel/images/womb3.png"
+	var progress = character.getPregnancyProgress()
+	if(progress <= 0.33):
+		return "res://Images/StatusEffects/stomach-flu.png"
+	
+	return "res://Images/StatusEffects/mother.png"
 
 func getIconColor():
 	return IconColorDarkPurple

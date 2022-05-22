@@ -25,7 +25,7 @@ func getEffectDesc():
 	return "For the next "+Util.getTimeStringHumanReadable(time)+":"
 
 func getEffectImage():
-	return "res://UI/StatusEffectsPanel/images/mess.png"
+	return "res://Images/StatusEffects/overdose.png"
 
 func getIconColor():
 	return IconColorBlue

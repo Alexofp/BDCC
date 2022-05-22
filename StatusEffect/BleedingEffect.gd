@@ -27,7 +27,7 @@ func getEffectDesc():
 	return "I'm losing 3 health a turn. " + str(turns) + " more turns"
 
 func getEffectImage():
-	return "res://UI/StatusEffectsPanel/images/bleeding.png"
+	return "res://Images/StatusEffects/bleeding-wound.png"
 
 func getIconColor():
 	return IconColorRed

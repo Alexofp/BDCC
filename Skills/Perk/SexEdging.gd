@@ -17,7 +17,7 @@ func getSkillTier():
 	return 0
 
 func getPicture():
-	return "res://UI/StatusEffectsPanel/images/down.png"
+	return "res://Images/Perks/leak.png"
 
 func getBuffs():
 	if(npc.getLustLevel() >= 0.9):

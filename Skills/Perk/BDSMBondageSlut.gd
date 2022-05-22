@@ -16,7 +16,7 @@ func getSkillTier():
 	return 0
 
 func getPicture():
-	return "res://UI/StatusEffectsPanel/images/cuffs.png"
+	return "res://Images/Perks/chained-heart.png"
 
 func getBuffs():
 	if(!npc.isPlayer()):

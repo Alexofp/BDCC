@@ -16,7 +16,7 @@ func getSkillTier():
 	return 0
 
 func getPicture():
-	return "res://UI/StatusEffectsPanel/images/blind.png"
+	return "res://Images/Perks/goo-spurt.png"
 
 func addsAttacks():
 	return ["SqueezeBreasts"]

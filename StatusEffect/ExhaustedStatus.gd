@@ -20,7 +20,7 @@ func getEffectDesc():
 	return "You are completely out of energy"
 
 func getEffectImage():
-	return "res://UI/StatusEffectsPanel/images/noenergy.png"
+	return "res://Images/StatusEffects/noenergy.png"
 
 func getIconColor():
 	return IconColorRed

@@ -25,7 +25,7 @@ func getEffectDesc():
 	return "Your orifices stretch less from insertions and recover faster for "+Util.getTimeStringHumanReadable(turns)
 
 func getEffectImage():
-	return "res://UI/StatusEffectsPanel/images/butt.png"
+	return "res://Images/StatusEffects/transparent-slime.png"
 
 func getIconColor():
 	return IconColorGreen

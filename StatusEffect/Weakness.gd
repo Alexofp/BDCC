@@ -25,7 +25,7 @@ func getEffectDesc():
 	return "You feel weak. " + str(turns) + " more turns"
 
 func getEffectImage():
-	return "res://UI/StatusEffectsPanel/images/down.png"
+	return "res://Images/StatusEffects/kneeling.png"
 
 func getIconColor():
 	return IconColorRed

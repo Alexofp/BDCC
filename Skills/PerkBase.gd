@@ -21,7 +21,7 @@ func getSkillTier():
 	return 0
 
 func getPicture():
-	return "res://icon.png"
+	return "res://Images/Perks/upgrade.png"
 
 func getCost():
 	return 1

@@ -49,10 +49,10 @@ func getEffectImage():
 	var stuffLevel = womb.getStuffedLevel()
 	
 	if(stuffLevel < 0.3):
-		return "res://UI/StatusEffectsPanel/images/womb1.png"
+		return "res://Images/StatusEffects/womb1.png"
 	if(stuffLevel < 0.7):
-		return "res://UI/StatusEffectsPanel/images/womb2.png"
-	return "res://UI/StatusEffectsPanel/images/womb3.png"
+		return "res://Images/StatusEffects/womb2.png"
+	return "res://Images/StatusEffects/womb3.png"
 
 func getIconColor():
 	return IconColorPurple

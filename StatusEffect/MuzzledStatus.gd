@@ -20,7 +20,7 @@ func getEffectDesc():
 	return "You have a dog muzzle on your face!"
 
 func getEffectImage():
-	return "res://UI/StatusEffectsPanel/images/gag.png"
+	return "res://Images/StatusEffects/muzzle.png"
 
 func getIconColor():
 	return IconColorPurple

@@ -16,5 +16,5 @@ func getSkillTier():
 	return 0
 
 func getPicture():
-	return "res://UI/StatusEffectsPanel/images/tallymarks.png"
+	return "res://Images/Perks/tallymarks.png"
 

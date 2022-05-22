@@ -19,7 +19,7 @@ func getSkillTier():
 	return 0
 
 func getPicture():
-	return "res://UI/StatusEffectsPanel/images/mess.png"
+	return "res://Images/Perks/stomach.png"
 
 func addsAttacks():
 	return ["lickSelfPerkAttack"]

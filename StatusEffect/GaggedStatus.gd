@@ -20,7 +20,7 @@ func getEffectDesc():
 	return "Something in your mouth prevents you from biting and also garbles your speech"
 
 func getEffectImage():
-	return "res://UI/StatusEffectsPanel/images/gag.png"
+	return "res://Images/StatusEffects/gag.png"
 
 func getIconColor():
 	return IconColorPurple
