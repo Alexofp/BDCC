@@ -25,6 +25,12 @@ func getSlot():
 func getName():
 	return visibleName
 
+func getCharacterCreatorName():
+	return getName().capitalize()
+
+func getCharacterCreatorDesc():
+	return "Change to this"
+
 func getCompatibleSpecies():
 	return []
 

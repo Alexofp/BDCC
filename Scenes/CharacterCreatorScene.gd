@@ -142,7 +142,7 @@ func _run():
 			
 			for supported in supportedSpecies:
 				if(supported in playerSpecies || supported == Species.Any):
-					addButton(bodypart.getName().capitalize(), "Change to this", "setbodypart", [bodypart.id])
+					addButton(bodypart.getCharacterCreatorName(), bodypart.getCharacterCreatorDesc(), "setbodypart", [bodypart.id])
 					break
 
 	if(state == "bodypartAttributes"):
