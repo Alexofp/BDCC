@@ -187,10 +187,8 @@ func _run():
 	if(state == "won_fight" || state == "won_fight_lust"):
 		addButton("Leave", "Don't do anything", "endthescene")
 		addButtonWithChecks("Humiliate Nova", "Use her stun baton to mess with her", "humiliateAngel", [], [ButtonChecks.NotHandsBlocked])
-		if(GM.pc.hasReachableVagina()):
-			addButton("Ride Nova", "Use the herm’s cock for your pleasure", "rideSubbyAngel")
-		else:
-			addDisabledButton("Ride Nova", "Requires a vagina that you can reach")
+		addButtonWithChecks("Ride Nova", "Use the herm’s cock for your pleasure", "rideSubbyAngel", [], [ButtonChecks.HasReachableVagina])
+		addButtonWithChecks("Fuck Nova", "She is a herm so why not use her pussy", "fuckSubbyAngel", [], [ButtonChecks.HasReachablePenis])
 
 	if(state == "punishment"):
 		saynn("Nova walks up to you and uses her armored boot to pin you in-place. She then crouches before you and clips a leash to your collar.")
@@ -289,6 +287,11 @@ func _react(_action: String, _args):
 		
 	if(_action == "rideSubbyAngel"):
 		runScene("RideSubbyNovaScene")
+		endScene()
+		return
+		
+	if(_action == "fuckSubbyAngel"):
+		runScene("FuckSubbyNovaScene")
 		endScene()
 		return
 		

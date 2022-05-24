@@ -80,3 +80,11 @@ func getLoot(_battleName):
 
 func getPenisSize():
 	return 18.0
+
+func createBodyparts():
+	#var mybreasts: BodypartBreasts = GlobalRegistry.createBodypart("humanbreasts")
+	#mybreasts.size = BreastsSize.C
+	#giveBodypartUnlessSame(mybreasts)
+	giveBodypartUnlessSame(GlobalRegistry.createBodypart("caninehead"))
+	giveBodypartUnlessSame(GlobalRegistry.createBodypart("vagina"))
+	giveBodypartUnlessSame(GlobalRegistry.createBodypart("anus"))

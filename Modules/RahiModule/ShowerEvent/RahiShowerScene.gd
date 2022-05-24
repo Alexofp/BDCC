@@ -304,12 +304,18 @@ func _react(_action: String, _args):
 		return
 
 	if(_action == "cum_inside"):
-		var chance = GM.pc.useBestCondom()
-		if(chance != null && RNG.chance(chance)):
-			condomBroke = true
+		if(usedCondom):
+			var chance = GM.pc.useBestCondom()
+			if(chance != null && RNG.chance(chance)):
+				condomBroke = true
 		
 		if(!usedCondom || (usedCondom && condomBroke)):
-			GlobalRegistry.getCharacter("rahi").cummedInVaginaBy("pc")
+			getCharacter("rahi").cummedInVaginaBy("pc")
+			GM.pc.addSkillExperience(Skill.CumLover, 30, "rahi_showerfuck")
+			GM.pc.addSkillExperience(Skill.SexSlave, 30, "rahi_showerfuck")
+		else:
+			GM.pc.addSkillExperience(Skill.CumLover, 10, "rahi_showerfuck")
+			GM.pc.addSkillExperience(Skill.SexSlave, 50, "rahi_showerfuck")
 		GM.pc.orgasmFrom("rahi")
 
 	if(_action == "endthescene"):

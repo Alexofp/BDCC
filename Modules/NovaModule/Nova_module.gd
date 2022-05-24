@@ -11,6 +11,7 @@ func _init():
 		"res://Modules/NovaModule/HumiliateNovaScene.gd",
 		"res://Modules/NovaModule/RideSubbyNovaScene.gd",
 		"res://Modules/NovaModule/SuckNovaCockScene.gd",
+		"res://Modules/NovaModule/FuckSubbyNovaScene.gd"
 		]
 	characters = [
 		"res://Modules/NovaModule/NovaCharacter.gd",

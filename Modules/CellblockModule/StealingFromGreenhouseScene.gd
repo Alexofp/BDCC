@@ -53,7 +53,7 @@ func _react(_action: String, _args):
 	if(_action == "caughtcheck2"):
 		processTime(10 * 5)
 		
-		if(RNG.chance(50)):
+		if(RNG.chance(75)):
 			if(GM.ES.trigger(Trigger.CaughtStealingInGreenhouse)):
 				endScene()
 				return

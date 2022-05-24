@@ -175,7 +175,7 @@ func updateNonBattleEffects():
 		
 	if(menstrualCycle != null && menstrualCycle.isVisiblyPregnant()):
 		#if(!hasEffect(StatusEffect.Pregnant)):
-		#	GM.main.addLogMessage("Uh oh", "You notice that your belly is more inflated that normally. You can't deny it anymore, you are pregnant..")
+		#	GM.main.addLogMessage("News", "You just received news that "+getName()+" is pregnant with your children.")
 		
 		addEffect(StatusEffect.Pregnant)
 	else:
@@ -183,7 +183,7 @@ func updateNonBattleEffects():
 
 func onCharacterReadyToGiveBirth():
 	if(getMenstrualCycle() != null):
-		GM.main.addLogMessage("News", "You just received news that someone gave birth to your children! You can check who in the nursery")
+		GM.main.addLogMessage("News", "You just received news that "+getName()+" gave birth to your children! You can check who in the nursery")
 		
 		var bornChildren = getMenstrualCycle().giveBirth()
 		

@@ -258,6 +258,9 @@ func aimCameraAndSetLocName(roomID: String):
 		return
 	setLocationName(room.getName())
 
+func getCharacter(charID: String) -> BaseCharacter:
+	return GlobalRegistry.getCharacter(charID)
+
 func saveData():
 	var data = {}
 	data["state"] = state
