@@ -13,7 +13,10 @@ func getCompatibleSpecies():
 	return [Species.Any]
 	
 func getTooltipInfo():
-	return "Gonna be stuff here"
+	var text = ""
+	if(orifice != null):
+		text += orifice.getTooltipInfo()
+	return text
 
 func getOrificeName():
 	return "anus"

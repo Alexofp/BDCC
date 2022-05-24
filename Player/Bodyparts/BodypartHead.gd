@@ -14,3 +14,9 @@ func getCompatibleSpecies():
 
 func getOrificeName():
 	return "throat"
+
+func getTooltipInfo():
+	var text = ""
+	if(orifice != null):
+		text += orifice.getTooltipInfo()
+	return text

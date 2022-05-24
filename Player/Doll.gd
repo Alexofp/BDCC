@@ -144,3 +144,11 @@ func _on_AnusHitbox_mouse_entered():
 
 func _on_AnusHitbox_mouse_exited():
 	emit_signal("onBodypartMouseExited", self, BodypartSlot.Anus)
+
+
+func _on_HeadHitbox_mouse_entered():
+	emit_signal("onBodypartMouseEntered", self, BodypartSlot.Head)
+
+
+func _on_HeadHitbox_mouse_exited():
+	emit_signal("onBodypartMouseExited", self, BodypartSlot.Head)

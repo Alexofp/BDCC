@@ -811,4 +811,7 @@ func getPregnancyProgress():
 		return menstrualCycle.getPregnancyProgress()
 	return 0.0
 
+func onGivingBirth(_impregnatedEggCells: Array, _newkids: Array):
+	pass
+
 # END OF PREGNANCY STUFF

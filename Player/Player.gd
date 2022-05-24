@@ -158,7 +158,7 @@ func calculateBuffs():
 func updateNonBattleEffects():
 	buffsHolder.calculateBuffs()
 	
-	if(getIntoxicationLevel() >= 0.1):
+	if(getIntoxicationLevel() >= 0.01):
 		addEffect(StatusEffect.Intoxicated)
 	else:
 		removeEffect(StatusEffect.Intoxicated)
@@ -1079,3 +1079,24 @@ func useBestCondom():
 		bestObject.removeXOrDestroy(1)
 	return bestChance
 	
+func onGivingBirth(_impregnatedEggCells: Array, _newkids: Array):
+	var amountPerOrifice = {}
+	for egg in _impregnatedEggCells:
+		if(!amountPerOrifice.has(egg.getOrifice())):
+			amountPerOrifice[egg.getOrifice()] = 0
+		amountPerOrifice[egg.getOrifice()] += 1
+	
+	# This is meh
+	var mapping = {
+		OrificeType.Vagina: BodypartSlot.Vagina,
+		OrificeType.Anus: BodypartSlot.Anus,
+		OrificeType.Throat: BodypartSlot.Head,
+	}
+	
+	for orificeType in mapping:
+		if(!amountPerOrifice.has(orificeType)):
+			continue
+		
+		var amountToStretch = sqrt(amountPerOrifice[orificeType]) * 50.0
+		
+		gotOrificeStretchedWith(mapping[orificeType], amountToStretch)

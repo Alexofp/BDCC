@@ -276,6 +276,9 @@ func giveBirth():
 		
 		result.append(newChild)
 	
+	if(getCharacter() != null):
+		getCharacter().onGivingBirth(impregnatedEggCells, result)
+	
 	impregnatedEggCells.clear()
 	cycleProgress = 1.0
 	

@@ -2217,23 +2217,23 @@ visible = false
 
 [node name="RetargetedSkeleton" parent="." instance=ExtResource( 21 )]
 
+[node name="HeadHitbox" parent="RetargetedSkeleton/Hip/Chest/Neck/Head" index="0" instance=ExtResource( 2 )]
+position = Vector2( 47.1658, 22.5208 )
+
 [node name="BoobsHitbox" parent="RetargetedSkeleton/Hip/Chest" index="3" instance=ExtResource( 2 )]
 position = Vector2( 73.5161, -34.7534 )
 
 [node name="VaginaHitbox" parent="RetargetedSkeleton/Hip/Chest" index="4" instance=ExtResource( 2 )]
 position = Vector2( -88.1853, -6.93904 )
 rotation = -2.23517e-08
-scale = Vector2( 1, 1 )
 
 [node name="AnusHitbox" parent="RetargetedSkeleton/Hip/Chest" index="5" instance=ExtResource( 2 )]
 position = Vector2( -95.723, 57.4805 )
 rotation = -2.23517e-08
-scale = Vector2( 1, 1 )
 
 [node name="PenisHitbox" parent="RetargetedSkeleton/Hip/Penis" index="0" instance=ExtResource( 2 )]
 position = Vector2( 42.8291, -2.46646 )
 rotation = 1.51233
-scale = Vector2( 1, 1 )
 
 [node name="Catgirlexample" type="Sprite" parent="."]
 position = Vector2( 214.765, -20.7789 )
@@ -2257,6 +2257,8 @@ tree_root = SubResource( 11 )
 anim_player = NodePath("../AnimationPlayer")
 parameters/playback = SubResource( 12 )
 
+[connection signal="mouse_entered" from="RetargetedSkeleton/Hip/Chest/Neck/Head/HeadHitbox" to="." method="_on_HeadHitbox_mouse_entered"]
+[connection signal="mouse_exited" from="RetargetedSkeleton/Hip/Chest/Neck/Head/HeadHitbox" to="." method="_on_HeadHitbox_mouse_exited"]
 [connection signal="mouse_entered" from="RetargetedSkeleton/Hip/Chest/BoobsHitbox" to="." method="_on_BoobsHitbox_mouse_entered"]
 [connection signal="mouse_exited" from="RetargetedSkeleton/Hip/Chest/BoobsHitbox" to="." method="_on_BoobsHitbox_mouse_exited"]
 [connection signal="mouse_entered" from="RetargetedSkeleton/Hip/Chest/VaginaHitbox" to="." method="_on_VaginaHitbox_mouse_entered"]
