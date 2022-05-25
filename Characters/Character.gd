@@ -34,7 +34,8 @@ func _ready():
 		menstrualCycle = MenstrualCycle.new()
 		menstrualCycle.setCharacter(self)
 		var _ok = menstrualCycle.connect("readyToGiveBirth", self, "onCharacterReadyToGiveBirth")
-		var _ok2 = menstrualCycle.connect("visiblyPregnant", self, "onCharacterVisiblyPregnant")
+		var _ok2 = menstrualCycle.connect("heavyIntoPregnancy", self, "onCharacterHeavyIntoPregnancy")
+		var _ok3 = menstrualCycle.connect("visiblyPregnant", self, "onCharacterVisiblyPregnant")
 		menstrualCycle.start()
 
 func _init():
@@ -181,6 +182,10 @@ func updateNonBattleEffects():
 
 func onCharacterVisiblyPregnant():
 	GM.main.addLogMessage("News", "You just received news that "+getName()+" is pregnant with your children.")
+
+func onCharacterHeavyIntoPregnancy():
+	#print(getName()+" is heavy into pregnancy")
+	pass
 
 func onCharacterReadyToGiveBirth():
 	if(getMenstrualCycle() != null):

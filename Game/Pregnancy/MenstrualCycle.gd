@@ -7,11 +7,13 @@ var eggCells = {}
 var impregnatedEggCells = []
 var ovulatedThisCycle = false
 var noticedVisiblyPregnant = false
+var noticedHeavyIntoPregnancy = false
 var noticedReadyToGiveBirth = false
 var willOvulateAt: float = 0.5
 signal readyToGiveBirth
 signal readyToGiveBirthOnce
 signal visiblyPregnant
+signal heavyIntoPregnancy
 
 func _init():
 	initCycle()
@@ -94,6 +96,10 @@ func processTime(seconds):
 		if(!noticedVisiblyPregnant && isVisiblyPregnant()):
 			noticedVisiblyPregnant = true
 			emit_signal("visiblyPregnant")
+			
+		if(!noticedHeavyIntoPregnancy && getPregnancyProgress() > 0.66):
+			noticedHeavyIntoPregnancy = true
+			emit_signal("heavyIntoPregnancy")
 	elif(!hasAnyWomb()):
 		cycleProgress = 0.0	
 	else:
@@ -214,6 +220,7 @@ func saveData():
 		"willOvulateAt": willOvulateAt,
 		"noticedVisiblyPregnant": noticedVisiblyPregnant,
 		"noticedReadyToGiveBirth": noticedReadyToGiveBirth,
+		"noticedHeavyIntoPregnancy": noticedHeavyIntoPregnancy,
 	}
 	var eggData = []
 	for orificeType in eggCells:
@@ -231,6 +238,7 @@ func loadData(data):
 	willOvulateAt = SAVE.loadVar(data, "willOvulateAt", 0.5)
 	noticedVisiblyPregnant = SAVE.loadVar(data, "noticedVisiblyPregnant", false)
 	noticedReadyToGiveBirth = SAVE.loadVar(data, "noticedReadyToGiveBirth", false)
+	noticedHeavyIntoPregnancy = SAVE.loadVar(data, "noticedHeavyIntoPregnancy", false)
 
 	impregnatedEggCells.clear()
 	eggCells.clear()
@@ -297,6 +305,7 @@ func giveBirth():
 	impregnatedEggCells.clear()
 	cycleProgress = 1.0
 	noticedVisiblyPregnant = false
+	noticedHeavyIntoPregnancy = false
 	noticedReadyToGiveBirth = false
 	
 	return result

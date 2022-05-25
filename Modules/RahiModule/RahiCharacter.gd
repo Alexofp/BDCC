@@ -23,3 +23,8 @@ func createBodyparts():
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("felinehead"))
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("vagina"))
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("anus"))
+
+func onGivingBirth(_impregnatedEggCells: Array, _newkids: Array):
+	.onGivingBirth(_impregnatedEggCells, _newkids)
+	
+	GM.main.increaseFlag(RahiModule.Rahi_GaveBirthTimes, 1)

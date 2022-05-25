@@ -29,11 +29,40 @@ func _run():
 		else:
 			saynn("You approach the friendly-looking feline that sits on the bench and idles, like she always does. She offers you a little smile and gives you room to sit nearby in case you want to.")
 
-			saynn("[say=rahi]It’s a quiet day today, isn’t it? It was for her..[/say]")
+			if(getCharacter("rahi").isHeavilyPregnant()):
+				saynn("[say=rahi]"+RNG.pick([
+					"Her belly has become so big..",
+					"Her breasts.. They keep itching..",
+					"Can you.. Maybe.. no..",
+					"Hi.. Does she look fat..",
+					"She can’t stop making milk..",
+					"She can feel it.. Not too long left..",
+				])+"[/say]")
+			elif(getCharacter("rahi").isVisiblyPregnant()):
+				saynn("[say=rahi]"+RNG.pick([
+					"Her breasts are getting bigger..",
+					"Pregnant.. kitty.. Meow..",
+					"Look at her belly.. It’s ours..",
+					"Meow.. You want kittens?.. She does..",
+					"You think she would be a good mommy?..",
+				])+"[/say]")
+			else:
+				saynn("[say=rahi]"+RNG.pick([
+					"It’s a quiet day today, isn’t it? It was for her..",
+					"Hey there.. meow..",
+					"Kitty is happy to see you around.",
+					"Meow meow meow..",
+					"Do you think they can give her some tuna?",
+				])+"[/say]")
 
 		addButton("Talk", "Show a list of topics to talk about", "talk")
 		addButton("Appearance", "Take a closer look at the catgirl", "appearance")
-		addDisabledButton("Sex", "Not implemeted yet")
+		
+		if(RahiModule.trustsPC()):
+			addButtonWithChecks("Embrace kitty", "Be real close and intimate with kitty", "embrace", [], [ButtonChecks.NotArmsRestrained, ButtonChecks.NotHandsBlocked])
+		else:
+			addDisabledButton("Embrace kitty", "She doesn't trust you enough")
+		
 		if(!getFlag(RahiModule.Rahi_GaveApple)):
 			if(GM.pc.getInventory().hasItemID("appleitem")):
 				addButton("Offer apple", "Maybe she would like one", "giveapple")
@@ -44,7 +73,12 @@ func _run():
 	if(state == "appearance"):
 		saynn("You see a 1.6m feline girl with a ponytail and a pair of cute cat ears on top of her head. Brown-colored fur covers her body with her belly and maw being of a slightly lighter color. She has long white whiskers and blue eyes that she uses to mostly look down. Behind her is a feline tail that seems to have a mind of its own. Her uniform spots an orange trim and has a number P-12406 attached to it. Wrists and ankles are weighted down by the bulky cuffs and her neck has an inmate collar, the same one that you are wearing. She doesn’t seem particularly strong, the curves of her body are feminine and her body proportions seem of a pretty average housecat, not too slim and not too thick.")
 
-		saynn("Behind her uniform you can guess her breasts size to be somewhere around C-cup, each one with a perky pink nipple, nothing too spectacular but still nice to have.")
+		if(getCharacter("rahi").isVisiblyPregnant()):
+			saynn("The only thing that’s not slim is her belly, it looks quite huge for such a modest kitty. With so much extra weight kitty has to move slowly, her feline agility can’t shine anymore.")
+			
+			saynn("Her breasts look obviously bigger than they usually are, at least a D-cup for sure. Nipples have a darker tone to them. You can guess that she is lactating.")
+		else:
+			saynn("Behind her uniform you can guess her breasts size to be somewhere around C-cup, each one with a perky pink nipple, nothing too spectacular but still nice to have.")
 
 		saynn("You can guess that she has a cute pink pussy slit hidden by the shorts with a little nicely-trimmed bush above.")
 		
@@ -207,6 +241,11 @@ func _react(_action: String, _args):
 	
 	if(_action == "who_are_you"):
 		GM.main.setFlag(RahiModule.Rahi_AskedName, true)
+	
+	if(_action == "embrace"):
+		runScene("RahiEmbraceScene")
+		endScene()
+		return
 	
 	if(_action == "endthescene"):
 		endScene()

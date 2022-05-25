@@ -12,6 +12,8 @@ const Rahi_ChillCooldown = "Rahi_ChillCooldown"
 const Rahi_Denied = "Rahi_Denied"
 const Rahi_ShowerHappened = "Rahi_ShowerHappened"
 const Rahi_NotThereToday = "Rahi_NotThereToday"
+const Rahi_FirstTimePregnantHappened = "Rahi_FirstTimePregnantHappened"
+const Rahi_GaveBirthTimes = "Rahi_GaveBirthTimes"
 
 func _init():
 	id = "RahiModule"
@@ -23,6 +25,9 @@ func _init():
 		"res://Modules/RahiModule/RahiChillScene.gd",
 		
 		"res://Modules/RahiModule/ShowerEvent/RahiShowerScene.gd",
+		
+		"res://Modules/RahiModule/RahiFirstTimePregnantScene.gd",
+		"res://Modules/RahiModule/RahiEmbraceScene.gd",
 		]
 	characters = [
 		"res://Modules/RahiModule/RahiCharacter.gd",
@@ -35,6 +40,8 @@ func _init():
 		"res://Modules/RahiModule/RahiChillEvent.gd",
 		
 		"res://Modules/RahiModule/ShowerEvent/RahiShowerEvent.gd",
+		
+		"res://Modules/RahiModule/RahiFirstTimePregnantEvent.gd",
 	]
 
 func resetFlagsOnNewDay():
@@ -51,3 +58,6 @@ func resetFlagsOnNewDay():
 			setFlag(Rahi_ChillCooldown, RNG.randi_range(1, 3))
 		else:
 			setFlag(Rahi_ChillWillHappen, false)
+
+static func trustsPC():
+	return GM.main.getFlag(Rahi_ShowerHappened, false)

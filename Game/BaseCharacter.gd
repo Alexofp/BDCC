@@ -797,6 +797,11 @@ func isVisiblyPregnant():
 		return menstrualCycle.isVisiblyPregnant()
 	return false
 
+func isHeavilyPregnant():
+	if(menstrualCycle != null):
+		return menstrualCycle.getPregnancyProgress() > 0.66
+	return false
+
 func isReadyToGiveBirth():
 	if(menstrualCycle != null):
 		return menstrualCycle.isReadyToGiveBirth()

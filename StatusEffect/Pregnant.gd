@@ -20,7 +20,7 @@ func getEffectDesc():
 	elif(progress <= 0.66):
 		addText = "Second trimester. Breasts are swollen, belly is very pronounced."+timeLeftText
 	elif(progress <= 0.99):
-		addText = "Third trimester. You experience shortness of breath, your belly is really dragging you down."+timeLeftText
+		addText = "Third trimester. Lactation. You experience shortness of breath, your belly is really dragging you down."+timeLeftText
 	else:
 		addText = "Third trimester. You experience shortness of breath, you feel like you are ready to give birth."
 	
