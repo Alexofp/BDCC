@@ -6,8 +6,12 @@ var character = null
 var eggCells = {}
 var impregnatedEggCells = []
 var ovulatedThisCycle = false
+var noticedVisiblyPregnant = false
+var noticedReadyToGiveBirth = false
 var willOvulateAt: float = 0.5
 signal readyToGiveBirth
+signal readyToGiveBirthOnce
+signal visiblyPregnant
 
 func _init():
 	initCycle()
@@ -86,6 +90,10 @@ func getCycleLength() -> int:
 func processTime(seconds):
 	if(isPregnant()):
 		cycleProgress = 1.0
+		
+		if(!noticedVisiblyPregnant && isVisiblyPregnant()):
+			noticedVisiblyPregnant = true
+			emit_signal("visiblyPregnant")
 	elif(!hasAnyWomb()):
 		cycleProgress = 0.0	
 	else:
@@ -204,6 +212,8 @@ func saveData():
 		"cycleProgress": cycleProgress,
 		"ovulatedThisCycle": ovulatedThisCycle,
 		"willOvulateAt": willOvulateAt,
+		"noticedVisiblyPregnant": noticedVisiblyPregnant,
+		"noticedReadyToGiveBirth": noticedReadyToGiveBirth,
 	}
 	var eggData = []
 	for orificeType in eggCells:
@@ -219,6 +229,8 @@ func loadData(data):
 	cycleProgress = SAVE.loadVar(data, "cycleProgress", 0.0)
 	ovulatedThisCycle = SAVE.loadVar(data, "ovulatedThisCycle", false)
 	willOvulateAt = SAVE.loadVar(data, "willOvulateAt", 0.5)
+	noticedVisiblyPregnant = SAVE.loadVar(data, "noticedVisiblyPregnant", false)
+	noticedReadyToGiveBirth = SAVE.loadVar(data, "noticedReadyToGiveBirth", false)
 
 	impregnatedEggCells.clear()
 	eggCells.clear()
@@ -252,6 +264,9 @@ func getRoughChanceOfBecomingPregnant() -> float:
 func onEggCellReadyForBirth(_egg):
 	#print("EGG READY TO BIRTH")
 	emit_signal("readyToGiveBirth")
+	if(!noticedReadyToGiveBirth):
+		noticedReadyToGiveBirth = true
+		emit_signal("readyToGiveBirthOnce")
 
 func speedUpPregnancy():
 	for egg in impregnatedEggCells:
@@ -281,5 +296,7 @@ func giveBirth():
 	
 	impregnatedEggCells.clear()
 	cycleProgress = 1.0
+	noticedVisiblyPregnant = false
+	noticedReadyToGiveBirth = false
 	
 	return result

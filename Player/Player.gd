@@ -44,7 +44,8 @@ func _ready():
 	menstrualCycle = MenstrualCycle.new()
 	menstrualCycle.setCharacter(self)
 	menstrualCycle.start()
-
+	var _ok = menstrualCycle.connect("readyToGiveBirthOnce", self, "onPlayerReadyToGiveBirth")
+	var _ok2 = menstrualCycle.connect("visiblyPregnant", self, "onPlayerVisiblyPregnant")
 	
 	getInventory().clear()
 	giveBodypart(GlobalRegistry.createBodypart("felineleg"))
@@ -239,9 +240,6 @@ func updateNonBattleEffects():
 		removeEffect(StatusEffect.InHeat)
 		
 	if(menstrualCycle != null && menstrualCycle.isVisiblyPregnant()):
-		if(!hasEffect(StatusEffect.Pregnant)):
-			GM.main.addLogMessage("Uh oh", "You notice that your belly is more inflated that normally. You can't deny it anymore, you are pregnant..")
-		
 		addEffect(StatusEffect.Pregnant)
 	else:
 		removeEffect(StatusEffect.Pregnant)
@@ -1100,3 +1098,9 @@ func onGivingBirth(_impregnatedEggCells: Array, _newkids: Array):
 		var amountToStretch = sqrt(amountPerOrifice[orificeType]) * 50.0
 		
 		gotOrificeStretchedWith(mapping[orificeType], amountToStretch)
+
+func onPlayerVisiblyPregnant():
+	GM.main.addLogMessage("Uh oh", "You notice that your belly is more inflated that normally. You can't deny it anymore, you are pregnant..")
+
+func onPlayerReadyToGiveBirth():
+	GM.main.addLogMessage("It's time..", "Your belly is so swollen, it's hard to walk! You feel ready to give birth, maybe it's time to visit the nursery.")
