@@ -17,11 +17,6 @@ func _run():
 			addButton("Continue", "Go take a shower", "doShower")
 		
 	if(state == "doShower"):
-		if(GM.pc.location == "main_dressing1"):
-			aimCamera("main_shower1")
-		if(GM.pc.location == "main_dressing2"):
-			aimCamera("main_shower2")
-		
 		saynn("You get under one of the shower heads and begin tinkering with the faucets.")
 		
 		saynn("But no matter what you do, all you get is cold water. It's not freezing but it's clear enough how the prison saves on costs")
@@ -66,6 +61,11 @@ func _react(_action: String, _args):
 	if(_action == "doShower"):
 		GM.pc.afterTakingAShower()
 		processTime(60 * 30)
+		
+		if(GM.pc.location == "main_dressing1"):
+			aimCamera("main_shower1")
+		if(GM.pc.location == "main_dressing2"):
+			aimCamera("main_shower2")
 		
 		if(GM.ES.trigger(Trigger.TakingAShower)):
 			endScene()

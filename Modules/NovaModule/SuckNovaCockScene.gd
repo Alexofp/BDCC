@@ -45,11 +45,11 @@ func _run():
 		saynn("Nova’s paw is pressed into the back of your head, making sure you’re working your head back and forth. You can feel Nova’s cock twitching more often and even becoming slightly bigger and you welcome that, you begin to really push yourself, sticking your tongue out and increasing the pace to your maximum.")
 
 		# (if player has little sucking experience)
-		if(true):
+		if(GM.pc.getSkillLevel(Skill.SexSlave) <= 2):
 			saynn("Your throat is tight, you don’t have much experience, but with a huge motion you manage to force yourself onto Nova’s cock, making it slide down your throat, stretching it out, except the knot. You lose the ability to breath, your throat makes wet noises as you struggle, a few tears slide down your cheeks, your digits keep finger-fucking the herm’s cunt. You can’t keep up like this for long but your throat is so tight that it only takes a few seconds before Nova lets out a passionate lustful moan and cums, her legs shiver and shake while the twitching cock unloads a load after load of hot sticky cum down your throat, her cunt squirts with her girl juices onto your fingers. You begin to try and escape but Nova holds your head tight, she tries to push her cock deeper, to knot you, but it would probably dislocate your jaw. The husky keeps moaning and panting, she only lets go after a few more seconds, letting you escape from the cock. You cough and gasp for air while another few spurts of cum land on your face and hair, creating a mess.")
 
 		# (if player has a fair amount of sucking experience)
-		elif(false):
+		elif(GM.pc.getSkillLevel(Skill.SexSlave) <= 5):
 			saynn("Your throat feels tight but also stretchy, your past experience allows you to force yourself onto Nova’s cock with relative ease, deep throating it fully, except for the knot. And you don’t stop there, you control your breathing and continue pushing your head back and forth, causing your throat to visibly bulge as the cock gets deeply shoved in and out. All the while you continue to ravage her cunt with your digits, finger fucking it and pounding on the gspot, delievering an unbelievable amount of pleasure to her. Nova can’t endure this for long, she lets out a passionate lustful moan and cums, her legs shiver and shake while the twitching cock unloads a load after load of hot sticky cum down your throat, her cunt squirts with her girl juices onto your fingers. You try and squeeze her knot in but give up after a few attempts, you pull away and receive a few hot loads onto your face as well, you keep your mouth open like a good cum slut, catching some jizz and swallowing it in Nova’s view.")
 
 		# (if player has a lot of sucking experience)

@@ -9,6 +9,8 @@ const Tavi_GotApple = "Tavi_GotApple"
 const Tavi_AngryUntilDay = "Tavi_AngryUntilDay"
 const Tavi_Submissiveness = "Tavi_Submissiveness"
 
+const Tavi_ShowerEventHappened = "Tavi_ShowerEventHappened"
+
 const Tavi_Quest2Started = "Tavi_Quest2Started"
 const Tavi_Quest2Day = "Tavi_Quest2Day"
 const Tavi_Quest2MetHer = "Tavi_Quest2MetHer"
@@ -30,6 +32,8 @@ func _init():
 		"res://Modules/TaviModule/Quest2/TaviQuest2Meet.gd",
 		"res://Modules/TaviModule/Quest2/TaviQuest2Skar.gd",
 		"res://Modules/TaviModule/Quest2/TaviQuest2CaptainsOffice.gd",
+		
+		"res://Modules/TaviModule/ShowerEvent/TaviShowerScene.gd",
 		]
 	characters = []
 	items = []
@@ -39,6 +43,8 @@ func _init():
 		
 		"res://Modules/TaviModule/Quest2/TaviQuest2TalkEvent.gd",
 		"res://Modules/TaviModule/Quest2/TaviQuest2SkarEvent.gd",
+		
+		"res://Modules/TaviModule/ShowerEvent/TaviShowerEvent.gd",
 	]
 	quests = [
 		"res://Modules/TaviModule/TaviAppleQuest.gd",
@@ -56,3 +62,6 @@ static func getPunishmentScene():
 	return RNG.pick([
 		"TaviPunishment1Scene",
 		])
+
+static func trustsPC():
+	return !GM.main.getFlag(Tavi_IsAngryAtPlayer, false) && GM.main.getFlag(Tavi_IntroducedTo, false)
