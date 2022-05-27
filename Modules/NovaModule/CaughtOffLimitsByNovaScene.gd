@@ -8,6 +8,8 @@ func _run():
 		addCharacter("nova")
 		
 	if(state == ""):
+		setFlag(NovaModule.Nova_SawPC, true)
+		
 		saynn("You hear someone’s footsteps behind, sounds like heavy boots. You decide to hide behind the nearest wall and hope not to be spotted. You hear a female voice.")
 
 		saynn("[say=nova]I know you’re there, you can come out[/say]")
@@ -282,16 +284,19 @@ func _react(_action: String, _args):
 
 	if(_action == "humiliateAngel"):
 		runScene("HumiliateNovaScene")
+		setFlag(NovaModule.Nova_GotHumiliatedByPC, true)
 		endScene()
 		return
 		
 	if(_action == "rideSubbyAngel"):
 		runScene("RideSubbyNovaScene")
+		setFlag(NovaModule.Nova_GotHumiliatedByPC, true)
 		endScene()
 		return
 		
 	if(_action == "fuckSubbyAngel"):
 		runScene("FuckSubbyNovaScene")
+		setFlag(NovaModule.Nova_GotHumiliatedByPC, true)
 		endScene()
 		return
 		

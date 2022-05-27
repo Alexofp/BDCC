@@ -1,0 +1,130 @@
+extends "res://Scenes/SceneBase.gd"
+
+func _init():
+	sceneID = "NovaTalkScene"
+
+func _run():
+	if(state == ""):
+		addCharacter("nova")
+	if(state == ""):
+		if(!getFlag(NovaModule.Nova_Introduced)):
+			setFlag(NovaModule.Nova_Introduced, true)
+			saynn("You walk up to some guard that seems to be patrolling the yard area. First thing you notice is her canine features and a feminine body. Gray fur and curly tail help you identify her as a husky. She is armored and her armor seems to be quite advanced, even requiring something that looks like a little nuclear power generator on her back. Under it you spot a fancy stealthy bodysuit and a short black skirt.")
+
+			saynn("She is fidgeting with her stun baton when her eyes spot you. She stops her patrol and directs her full attention at you.")
+
+			# (if seen before)
+			if(getFlag(NovaModule.Nova_SawPC)):
+				saynn("[say=nova]I remember you, little rascal.[/say]")
+
+				# (if humiliated nova)
+				if(getFlag(NovaModule.Nova_GotHumiliatedByPC)):
+					saynn("[say=pc]Yeah, and I remember humiliating you.[/say]")
+
+					saynn("[say=nova]Well, you kno-o-ow. You win some, you lose some. Sometimes losing is fun too~[/say]")
+
+			# (else)
+			else:
+				saynn("[say=nova]Huh, a new face. I hope you’re behaving~.[/say]")
+
+			saynn("The husky flings her weapon at you and then masterfully catches it before you can realize, what a show off. She is only one step away from you now.")
+
+			saynn("[say=nova]I’m Nova in case you didn’t know, the best guard in this prison. And you..[/say]")
+
+			saynn("[say=pc]Inmate number {pc.inmateNumber}.[/say]")
+
+			saynn("[say=nova]Nah, dummy, leave that one to the asshole staff.[/say]")
+
+			saynn("She eyes you out as she walks around you with a playful sway to her hips.")
+
+			saynn("[say=nova]I’m one of the kind ones~.[/say]")
+
+			saynn("She stops in front of you and boops you on the nose. She giggles at your confused reaction.")
+
+		else:
+			saynn("Nova is patrolling the yard area, like she usually does. She notices you and gives you a careful look.")
+
+			saynn("[say=nova]What’s up.[/say]")
+
+		addButton("Talk", "Ask Nova about things", "talk")
+		addButton("Appearance", "Look at Nova", "appearance")
+		addDisabledButton("Sex", "Offer yourself to Nova")
+		addButton("Leave", "Time to go", "endthescene")
+		
+
+
+
+	if(state == "appearance"):
+		saynn("Nova is one of the guards, medium height, gray fur, amber eyes. Her hair is somewhat short, not even reaching the shoulders, one of the hair strands has a strong blue tint to it. Long canine muzzle, perky ears, curled up fluffy tail, Nova has all the signs of a husky. She must have pretty strong muscles to be able to wear the power armor that she has. Underneath it is a skin-tight bodysuit and a black short skirt. Her stun baton is attached with a strap to the leg.")
+
+		# (is pregnant)
+		if(getCharacter("nova").isVisiblyPregnant()):
+			saynn("Nova’s belly is visibly inflated, good thing that her bodysuit is stretchy enough. Her breasts gained an extra size and are probably full of milk.")
+
+		# (else)
+		else:
+			saynn("Nova’s breasts are a solid D-cup, encased in a stealthy black material.")
+
+		saynn("Underneath her skirt you can spot both a bulge and an outline of a pussy, this guard is packing quite some heat.")
+
+		addButton("Back", "Enough watching", "")
+
+	if(state == "talk"):
+		saynn("[say=nova]What are you curious about.[/say]")
+
+		saynn("She raises her brow and crosses her arms.")
+
+		addButton("Kind?", "Is she really kind", "kind?")
+		addButton("Job", "Ask why she is working here", "job")
+		addButton("Body", "Compliment her body", "body")
+		addButton("Back", "Enough talking", "")
+
+	if(state == "kind?"):
+		saynn("[say=pc]How are you the kind one?[/say]")
+
+		saynn("Nova chuckles and offers you a headpat.")
+
+		saynn("[say=nova]If any inmate is kind to me then I’m kind to them. I know how rough prison life can be.[/say]")
+
+		saynn("Her paw slides down your cheek and then gets a good grasp on your collar.")
+
+		saynn("[say=nova]But if they ever lie to me. Or betray me. I won’t be kind to that, believe me~.[/say]")
+
+		saynn("She scritches you under the chin and behind the ear.")
+
+		saynn("[say=nova]What it’s gonna be with you, sweetie~?[/say]")
+
+		saynn("You decide that a respectful silence is good enough for an answer. Nova smiles and licks her fangs.")
+
+		addButton("Continue", "Ask something else", "talk")
+
+	if(state == "job"):
+		saynn("[say=pc]So why work here?[/say]")
+
+		saynn("Nova looks at her wrists, at her armor.")
+
+		saynn("[say=nova]I didn’t exactly have a choice. But you know, it has some perks. I get to play with so many cuties. Some even call me mommy~.[/say]")
+
+		saynn("You look surprised, Nova chuckles at your reaction.")
+
+		addButton("Continue", "Ask something else", "talk")
+
+	if(state == "body"):
+		saynn("[say=pc]How did you get into such strong shape, are you working out a lot?[/say]")
+
+		saynn("Nova shrugs.")
+
+		saynn("[say=nova]Sometimes. But nah. It’s a long story, sweetie. I appreciate the compliment~.[/say]")
+
+		addButton("Continue", "Ask something else", "talk")
+		
+		
+
+func _react(_action: String, _args):
+
+	if(_action == "endthescene"):
+		endScene()
+		return
+
+	
+	setState(_action)

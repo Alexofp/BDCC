@@ -221,9 +221,11 @@ roomColor = 1
 self_modulate = Color( 0.7, 1, 0.7, 1 )
 position = Vector2( -128, 448 )
 roomName = "Prison Yard"
+roomID = "yard_novaspot"
 roomDescription = "A huge open area with lots of bushes, trees and other types of greenery. Ocasionally there is a bench to sit and relax.
 
 The ground is covered with grass, there are visible pathways made out of stone"
+roomSprite = 1
 roomColor = 1
 
 [node name="MainHallRoom29" parent="." index="29" instance=ExtResource( 2 )]
