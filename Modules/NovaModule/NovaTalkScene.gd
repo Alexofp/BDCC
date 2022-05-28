@@ -42,9 +42,20 @@ func _run():
 			saynn("She stops in front of you and boops you on the nose. She giggles at your confused reaction.")
 
 		else:
-			saynn("Nova is patrolling the yard area, like she usually does. She notices you and gives you a careful look.")
+			if(getCharacter("nova").isVisiblyPregnant()):
+				saynn("Nova is patrolling the yard area, holding one of her paws on her belly. She notices you and offers you a careful smile.")
+				
+				saynn("[say=nova]"+RNG.pick([
+					"Huff, so strange to be carrying a litter.",
+					"I’m gonna be a good mommy..",
+					"Do you have treats? I want treats..",
+					"I’m gonna be better than my parents.",
+					"I’m doing okay, thanks for checking.",
+				])+"[/say]")
+			else:
+				saynn("Nova is patrolling the yard area, like she usually does. She notices you and gives you a careful look.")
 
-			saynn("[say=nova]What’s up.[/say]")
+				saynn("[say=nova]What’s up.[/say]")
 
 		addButton("Talk", "Ask Nova about things", "talk")
 		addButton("Appearance", "Look at Nova", "appearance")

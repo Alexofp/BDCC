@@ -88,3 +88,14 @@ func createBodyparts():
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("caninehead"))
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("vagina"))
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("anus"))
+
+func onGivingBirth(_impregnatedEggCells: Array, _newkids: Array):
+	.onGivingBirth(_impregnatedEggCells, _newkids)
+	
+	GM.main.increaseFlag(NovaModule.Nova_GaveBirthTimes, 1)
+
+func onCharacterVisiblyPregnant():
+	.onCharacterVisiblyPregnant()
+	
+	if(!GM.main.getFlag(NovaModule.Nova_FirstTimePregnantHappened, false)):
+		GM.main.setFlag(NovaModule.Nova_NotThereToday, true)

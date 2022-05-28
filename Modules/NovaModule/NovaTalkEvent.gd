@@ -18,7 +18,10 @@ func delayedRun():
 		saynn("You see some guard patrolling this zone")
 	else:
 		saynn("You see Nova patrolling this zone")
-	addButtonUnlessLate("Nova", "Talk to the husky", "talk")
+	if(getFlag(NovaModule.Nova_NotThereToday, false)):
+		addDisabledButton("Nova", "She is not here today")
+	else:
+		addButtonUnlessLate("Nova", "Talk to the husky", "talk")
 
 func shouldInterupt():
 	return false

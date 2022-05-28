@@ -48,16 +48,19 @@ func _react(_action: String, _args):
 		GM.main.startNewDay()
 		GM.pc.afterSleepingInBed()
 		
-		if(GM.ES.trigger(Trigger.WakeUpInCell)):
-			endScene()
-			return
-		
 		setState("slept")
 		return
 
 	if(_action == "endthescene"):
-		endScene()
+		
+		
+		if(GM.ES.trigger(Trigger.WakeUpInCell)):
+			GM.main.showLog()
+			endScene()
+			return
 		GM.main.showLog()
+		
+		endScene()
 		return
 	
 	setState(_action)
