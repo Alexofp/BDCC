@@ -7,6 +7,8 @@ This game is influenced a lot by other erotic text rpg games like Trials in the 
 
 ### [Changelog](https://github.com/Alexofp/BDCC/blob/main/CHANGELOG.md)
 
+### [Support me on Subscribestar.adult](https://subscribestar.adult/rahi)
+
 Uses Godot 3.4.4 engine
 
 ## Kinks that this game will touch
