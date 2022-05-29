@@ -59,7 +59,10 @@ func _run():
 
 		addButton("Talk", "Ask Nova about things", "talk")
 		addButton("Appearance", "Look at Nova", "appearance")
-		addDisabledButton("Sex", "Offer yourself to Nova")
+		if(!getCharacter("nova").isVisiblyPregnant()):
+			addButton("Lewd", "Offer yourself to Nova", "lewd")
+		else:
+			addDisabledButton("Lewd", "Can't offer yourself to Nova while she is pregnant")
 		addButton("Leave", "Time to go", "endthescene")
 		
 
@@ -129,9 +132,24 @@ func _run():
 
 		addButton("Continue", "Ask something else", "talk")
 		
+	if(state == "lewd"):
+		saynn("You get closer to Nova and put on a cheeky smile while rubbing against her. You sway your {pc.masc} hips and the husky eventually joins you, her expression shows that she likes it.")
+		
+		saynn("[say=nova]Someone is horny~?[/say]")
+		
+		if(!GM.pc.hasBlockedHands()):
+			saynn("Boldy, you sneak a hand under Nova’s skirt and put it on her crotch. She chuckles softly as you grope the sheath that is hidden under her suit.")
+		
+		addButton("Petplay", "Offer to be Nova’s pet for a bit", "petplay")
+		addButton("Never mind", "You don't want anything", "")
 		
 
 func _react(_action: String, _args):
+
+	if(_action == "petplay"):
+		runScene("NovaPetplayScene")
+		endScene()
+		return
 
 	if(_action == "endthescene"):
 		endScene()

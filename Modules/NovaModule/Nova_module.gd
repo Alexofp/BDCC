@@ -21,6 +21,7 @@ func _init():
 		"res://Modules/NovaModule/FuckSubbyNovaScene.gd",
 		
 		"res://Modules/NovaModule/NovaTalkScene.gd",
+		"res://Modules/NovaModule/NovaPetplayScene.gd",
 		
 		"res://Modules/NovaModule/NovaFirstTimePregnantScene.gd",
 		]
