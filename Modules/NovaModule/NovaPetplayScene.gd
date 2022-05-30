@@ -264,6 +264,8 @@ func _run():
 		saynn("[say=nova]Huh~? It’s like I should keep you like this. You want something, cutie?[/say]")
 
 		addButton("Shake head", "You experienced enough for now", "shake_head")
+		addButton("Oral", "You really wanna suck Nova off", "oral")
+
 
 	if(state == "shake_head"):
 		saynn("You shake your head and raise yourself until you’re kneeling. Nova leans down to you and tugs on your cheeks, making you stick your tongue.")
@@ -286,6 +288,90 @@ func _run():
 		addButton("Continue", "Time to go", "endthescene")
 		
 
+	if(state == "oral"):
+		# (needs free mouth)
+
+		saynn("You crawl up to Nova’s legs and put your paws on her thighs. She gasps as you stick your head under her skirt and press your nose against her bulge.")
+
+		saynn("[say=nova]Someone’s thirsty~?[/say]")
+
+		# (if puppy)
+		if(isPuppy):
+			saynn("[say=pc]Ruff![/say]")
+
+		# (kitty)
+		if(!isPuppy):
+			saynn("[say=pc]Meow~[/say]")
+
+		saynn("You wiggle your {pc.thick} ass as you nuzzle her crotch. You feel her cock getting harder under the suit, Nova bites her lip as you try to find the zipper, licking and nibbling around her crotch. She wraps the leash around her hand so you can’t back away anymore even if you wanted.")
+
+		saynn("[say=nova]Such a silly~[/say]")
+
+		saynn("Eventually you stumble upon a hidden zipper with your tongue and tug on it, exposing her red canine cock, it’s so hard that it lifts her skirt up. You press your muzzle against it and let it drip precum onto your face, sniffing her horny scent makes you feel even more aroused. You drag your tongue along the veiny texture of her member and then take the pointy tip in. Nova lets out a few little moans and scritches you behind the ear.")
+
+		# (if puppy)
+		if(isPuppy):
+			saynn("[say=nova]Such a good puppy.[/say]")
+
+		# (if kitty)
+		if(!isPuppy):
+			saynn("[say=nova]Such a good kitty.[/say]")
+
+		saynn("You suck a little bit on her cock, getting used to the taste of her precum, you notice her knot slightly inflating already. You stick your tongue out and proceed to drag it across her member as you take more of it in. You stop just before the tip hits the back of your mouth and instead begin moving back and forth, taking you time, sucking Nova’s cock. She looks very aroused, her canine scent was only becoming stronger, she puts her paws on your head and offers you support, pulling your head onto her cock harder.")
+
+		saynn("[say=nova]Take it, slut~[/say]")
+
+		saynn("You hold your paws on her legs so she is free to make use of your mouth hole, she gets a better grasp and applies more pressure, causing her cock to slide deeper into your mouth and stretching your throat out, testing how well you can control your gag reflex. It gets to the point of her knot slapping against your nose as she starts to face-fuck you, throat bulging as you’re getting stretched. Your eyes roll up slightly, lack of air makes it really hard to concentrate. But it feels good, you keep pushing yourself deeper onto her cock and using your tongue to deliver so much pleasure to Nova that she starts to arch her back and moan loudly.")
+
+		addButton("Take it", "Let her cum down your throat", "take_it")
+		addButton("Outside", "You don’t wanna swallow Nova’s load", "outside")
+
+	if(state == "take_it"):
+		saynn("It only takes a few more seconds before that knot inflates even more and the whole cock starts throbbing inside your maw, the walls of your tight throat clench around the shaft and try to milk it, Nova moans as she shoves her member as deep as she can before going over the peak. Your belly quickly gets stuffed with her sticky cum, the husky sticks her tongue out and lets out passionate noises as more and more waves of hot semen get pushed into you. So much that some cum finds its way back and stuffs your mouth.")
+
+		saynn("[say=nova]Fuck me~[/say]")
+
+		saynn("Your eyes are rolled up, cheeks blushing red, you’re drooling saliva and cum. Nova tries to pull out but you hug her legs and don’t let her, you don’t wanna drop a single drop like a good slutty pet. It’s only when her balls are completely drained, you pull away and start gasping for air.")
+
+		saynn("You both are panting heavily. You left Nova’s cock in a pretty messy state so you quickly return to it and start licking it clean, gathering all the cum and swallowing it as needed. You clean her meaty stick and offer Nova the view of your empty mouth. She smiles and pats you many times.")
+
+		saynn("[say=nova]Good little cocksucker pet~[/say]")
+
+		saynn("She puts away her cock and undoes the leash, letting you stand up.")
+
+		# (if puppy)
+		if(isPuppy):
+			saynn("[say=pc]Bark..[/say]")
+
+		# (if kitty)
+		if(!isPuppy):
+			saynn("[say=pc]Meow..[/say]")
+
+		saynn("[say=nova]Thanks for sucking my cock, couldn’t have done it without you~[/say]")
+
+		saynn("You’re very messy but at least you didn’t add a layer of cum to it. You quickly fix your hair and get ready to leave.")
+
+		# (scene ends)
+		addButton("Continue", "Time to go", "endthescene")
+
+
+	if(state == "outside"):
+		saynn("It only takes a few more seconds before that knot inflates even more and the whole cock starts throbbing inside your maw, the walls of your tight throat clench around the shaft. You feel like Nova is about to cum any second so you push your hands against her thighs and manage to escape her grasp.")
+
+		saynn("You pull away from her cock and it’s too late for the husky to do anything, she groans as she cums hard, her messy cock throbbing and shooting a line after line of sticky cum that hits your face and hair. You keep your eyes and mouth closed but you still got to taste it, Nova holds your face pressed against her cock as it explodes with more cum. Your head, your neck, your shoulders, {pc.breasts}, all quickly get covered with cum.")
+
+		saynn("[say=nova]Didn’t wanna swallow and now you’re messy, bitch~[/say]")
+
+		saynn("When that’s over, you can only open one eye. You’re a complete mess, cum keeps dripping from you. Nova carefully removes the leash and lets you stand up.")
+
+		saynn("[say=nova]Hah, I don’t mind, you look like such a cute pet right now~[/say]")
+
+		saynn("You’re blushing a lot, opening your mouth right now would mean getting more cum onto your tongue so you decide to stay quiet. You grab your belongings and get ready to leave.")
+
+		# (scene ends)
+		addButton("Continue", "Time to go", "endthescene")
+		
+
 func _react(_action: String, _args):
 	if(_action == "hissgrowl"):
 		GM.pc.addPain(20)
@@ -303,6 +389,22 @@ func _react(_action: String, _args):
 	if(_action == "endthescene"):
 		endScene()
 		return
+		
+	if(_action == "oral"):
+		GM.pc.gotThroatFuckedBy("nova")
+		
+	if(_action == "outside"):
+		GM.pc.cummedOnBy("nova")
+		GM.pc.addSkillExperience(Skill.SexSlave, 10, "nova_petsuckcock")
+		GM.pc.addSkillExperience(Skill.CumLover, 20, "nova_petsuckcock")
+		GM.pc.updateNonBattleEffects()
+		
+	if(_action == "take_it"):
+		GM.pc.cummedInMouthBy("nova")
+		#GM.pc.cummedOnBy("nova")
+		GM.pc.addSkillExperience(Skill.SexSlave, 20, "nova_petsuckcock")
+		GM.pc.addSkillExperience(Skill.CumLover, 10, "nova_petsuckcock")
+		GM.pc.updateNonBattleEffects()
 	
 	setState(_action)
 
