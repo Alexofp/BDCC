@@ -1,6 +1,8 @@
 extends "res://Scenes/SceneBase.gd"
 
 var isPuppy = true
+var usedCondom = false
+var condomBroke = false
 
 func _init():
 	sceneID = "NovaPetplayScene"
@@ -265,6 +267,7 @@ func _run():
 
 		addButton("Shake head", "You experienced enough for now", "shake_head")
 		addButton("Oral", "You really wanna suck Nova off", "oral")
+		addButtonWithChecks("Vaginal", "Breed me!", "vaginal", [], [ButtonChecks.HasReachableVagina])
 
 
 	if(state == "shake_head"):
@@ -372,7 +375,201 @@ func _run():
 		addButton("Continue", "Time to go", "endthescene")
 		
 
+	if(state == "vaginal"):
+		# (needs pussy)
+
+		# (if puppy)
+		if(isPuppy):
+			saynn("You ruff playfully and turn around, putting your wet pussy and ass on full display. Nova hums as you eagerly wiggle your {pc.thick} butt and spread your legs more for her. It’s quite visible that the husky is visibly aroused by your actions.")
+
+			saynn("[say=nova]Such a needy puppy~[/say]")
+
+		# (if kitty)
+		if(!isPuppy):
+			saynn("You purr softly and rub your back against Nova’s legs as you crawl around her. You let the husky catch glimpses of your exposed pussy that is visibly wet. Nova hums as you stop a few steps away from her and lower your chest down to the floor so you can tease your slit in front of her.")
+
+			saynn("[say=nova]Such a needy kitty~[/say]")
+
+		saynn("You look behind you and notice Nova’s skirt bulging slightly. She chuckles and lifts it, exposing the undersuit underneath. Her hands catch the hidden zipper and undo it, exposing her hard canine cock that has a drop of precum hanging from its tip already.")
+
+		saynn("[say=nova]You want this, sweetie~?[/say]")
+
+		addButton("Nod", "No protection, you’re feeling very risky", "vaginalNoCondom")
+		addButtonWithChecks("Condom", "Offer your best condom to her", "vaginalCondom", [], [ButtonChecks.HasCondoms])
+
+	if(state == "fucking"):
+		# (if condom)
+		if(usedCondom):
+			saynn("You quickly rummage through your belongings and produce a packaged condom. You grab it with your mouth and proceed to wiggle your behind while watching Nova, your needy pussy gets more aroused from anticipation.")
+
+			saynn("[say=nova]You look so slutty with that thing, aww.[/say]")
+
+		# (else)
+		else:
+			saynn("You nod eagerly and just offer Nova the best view of your needy pussy you can give. You stick your tongue at the husky, with each second you feel more aroused just from anticipation.")
+
+			saynn("[say=nova]Well, don’t complain when you get my pups, slut~.[/say]")
+
+		saynn("Nova unzips the skirt too so it wouldn’t get in the way and some armor pieces too, her bodysuit emphasizes her rich muscle structure. She crouches behind you and licks her digits before shoving a few down your snatch. You moan as she quickly checks how lubricated you are. And she seems very satisfied.")
+
+		# (if puppy)
+		if(isPuppy):
+			saynn("[say=nova]I’m gonna fuck you doggystyle because that’s what a pup deserves.[/say]")
+
+			saynn("[say=pc]R-Ruff![/say]")
+
+		# (if kitty)
+		if(!isPuppy):
+			saynn("[say=nova]I’m a dog so today you’re getting fucked doggystyle, kitty.[/say]")
+
+			saynn("[say=pc]M-mew![/say]")
+
+		# (if condom)
+		if(usedCondom):
+			saynn("She fetches the condom from your maw and swiftly opens the package. She then takes the rubber and puts it on her cock, stretching it over the whole length of her shaft, its tip already holding some precum.")
+
+		saynn("Nova doesn’t plan to wait for very long, she puts her paws on your hips and pulls them back while directing her hard veiny cock towards your cunt. You gasp as your pussy petals get forced open and stretched for Nova to shove her dick inside, the amount of natural lube certainly helps.")
+
+		saynn("She is doing it right here, in a place that’s barely secluded, any inmate walking past would probably notice you being fucked by a guard. But you don’t mind, you love both the idea and the execution of it, you hold onto the stone tiles while Nova holds your butt above the floor and uses your cunt for her pleasure.")
+
+		saynn("You try to only make animal noises but the moans do start to slip past your lips, Nova’s cock is about 18 centimeters so she can easily stretch you out. She gets a grasp on your hair and uses it to make you move towards her cock as she thrusts inside, you can feel the bump appearing on your lower belly as she starts pounding at your cervix. You stick your tongue out and start moaning a lot, your pussy leaks more of your juices, creating a little wet spot under you both.")
+
+		saynn("Nova’s knot is inflating. You can’t see it but you certainly feel how it’s slapping against your pussy lips each time she pushes her hips forward. Nova’s lips produce some little moans too in between all the panting, it seems she wants to breed you nice and swift.")
+
+		saynn("[say=nova]Ready to be knotted, slut? I’m not gonna stop now[/say]")
+
+		saynn("With each her thrusts, your cunt is getting stretched more and more by Nova knot, it already starts to slip in deeper. You drool all over the floor and touch your {pc.breasts} with one hand, pulling on the firm nipple. Your own moans become louder. Fuck, you’re gonna cum.")
+
+		addButton("Cum", "Can’t hold it off forever", "vaginalcum")
+
+	if(state == "vaginalcum"):
+		saynn("Your whole body starts to experience orgasmic convulsions, your legs shake, body shivers, you squirm under Nova while your pussy gets tighter around her cock and starts to squirt. Your inner walls clench around the canine member, milking it while the cervix becomes less rigid and opens up more. Your passionate moans can probably be heard from a long distance so Nova decides to help you and shoves her paw into your mouth for you to suck on.")
+
+		# (if has cock)
+		if(GM.pc.hasPenis()):
+			saynn("Your cock throbs and shoots a strong line of {pc.cum} onto the stone pathway underneath you!")
+
+		saynn("[say=nova]Oh fuck, your cunt is gonna make me cum[/say]")
+
+		saynn("And indeed, Nova puts all her strength into the next thrust and manages to shove her inflated red orb inside you, stretching your slit twice as much as it was before. The pure sensation of getting knotted sends you over the second peak instantly, you cum and squirt again, your pussy pulsates around the orb, trying to squeeze it but it’s no help, Nova’s is completely inside you, its head breaks into your womb.")
+
+		# (if condom)
+		if(usedCondom && !condomBroke):
+			saynn("Nova can’t pull out or even just move anymore, only about a second passes before she lets out a series of groans and moans as her cock starts filling the condom inside your womb. There is so much, your belly quickly becomes inflated. The husky is experiencing the climax together with you. But then she slaps your ass and holds you pinned to the floor, still with the cock deep inside.")
+
+		# (if condom broke)
+		if(usedCondom && condomBroke):
+			saynn("Nova can’t pull out or even just move anymore, only about a second passes before she lets out a series of groans and moans as her cock starts filling the condom inside your womb. There is so much, your belly quickly becomes inflated. But you feel kinda strange.. You feel the hot cum freely slashing inside your womb.. [b]Oh no, the condom broke, spilling out all of its contents[/b]. Still, not knowing that, Nova slaps your ass and holds you pinned to the floor, still with the cock deep inside.")
+
+		# (if no condom)
+		if(!usedCondom):
+			saynn("Nova can’t pull out or even just move anymore, only about a second passes before she lets out a series of groans and moans as her cock starts filling your womb to the brim with virile cum. There is so much, your belly quickly becomes inflated. The husky is experiencing the climax together with you, moaning loudly and panting. But then she slaps your ass and holds you pinned to the floor, still with the cock deep inside.")
+
+		saynn("[say=nova]Good slut~. And now we rest until my knot deflates.[/say]")
+
+		saynn("The knot seems to isolate most of the leakage. You try to escape it but no, you’re stuck together for quite a while. At least it gives you time to catch your breath.")
+
+		# (if puppy)
+		if(isPuppy):
+			saynn("[say=pc]W-wuf..[/say]")
+
+		# (if kitty)
+		if(!isPuppy):
+			saynn("[say=pc]M-meow..[/say]")
+
+		addButton("Rest", "Aftercare is good, right?", "vagrest")
+
+	if(state == "vagrest"):
+		saynn("You both lay down on the floor for about half an hour. Eventually you begin to feel the discomfort of being stretched so much for so long so you whine a bit. Nova pets you and caresses your body.")
+
+		saynn("[say=nova]It’s okay, sweetie. It’s almost out.[/say]")
+
+		# (if condom)
+		if(usedCondom && !condomBroke):
+			saynn("After some effort Nova finally manages to pull out her cock. Luckily, all of the cum is still held by the condom inside you. Nova carefully ties it up and pulls it out too.")
+
+			saynn("[say=nova]That’s a nice load~.[/say]")
+
+		# (if condom broke)
+		if(usedCondom && condomBroke):
+			saynn("After some effort Nova finally manages to pull out her cock. But that’s when she realizes that something is wrong, your used cunt is leaking cum a lot, meaning that the condom broke..")
+
+			saynn("[say=nova]Ohh, tough love, cutie. I think I might have bred you by accident, hope you don’t mind~[/say]")
+
+			# (if puppy)
+			if(isPuppy):
+				saynn("You perk your ears.")
+
+				saynn("[say=pc]BARK?[/say]")
+
+			# (if kitty)
+			if(!isPuppy):
+				saynn("You perk your ears.")
+
+				saynn("[say=pc]MEOW?[/say]")
+
+			saynn("[say=nova]The condom broke~[/say]")
+
+			saynn("Oh well, what can you do.")
+
+		# (if nothing)
+		if(!usedCondom):
+			saynn("After some effort Nova finally manages to pull out her messy cock. Your used cunt is leaking cum a lot, the husky spanks your ass and the stream increases for a second.")
+
+			saynn("[say=nova]Such a slut~[/say]")
+
+		# (if puppy)
+		if(isPuppy):
+			saynn("[say=pc]Bark..[/say]")
+
+		# (if kitty)
+		if(!isPuppy):
+			saynn("[say=pc]Meow..[/say]")
+
+		saynn("Nova offers you her cock and you quickly clean it for her. Then she puts it away and disconnects the leash from your collar.")
+
+		saynn("[say=nova]You may stand up, sweetie.[/say]")
+
+		saynn("[say=pc]T-thanks..[/say]")
+
+		saynn("You stand up and gather your belongings.")
+
+		saynn("[say=nova]See you around~[/say]")
+
+		# (scene end)
+		addButton("Continue", "Time to go", "endthescene")
+		
+
 func _react(_action: String, _args):
+	if(_action == "vaginalCondom"):
+		usedCondom = true
+		GM.pc.gotVaginaFuckedBy("nova")
+		setState("fucking")
+		return
+	
+	if(_action == "vaginalNoCondom"):
+		usedCondom = false
+		GM.pc.gotVaginaFuckedBy("nova")
+		setState("fucking")
+		return
+	
+	if(_action == "vaginalcum"):
+		if(usedCondom):
+			var chance = GM.pc.useBestCondom()
+			
+			if(chance != null && RNG.chance(chance)):
+				condomBroke = true
+
+		if(!usedCondom || (usedCondom && condomBroke)):
+			GM.pc.cummedInVaginaBy("nova")
+			GM.pc.addSkillExperience(Skill.CumLover, 30, "nova_petfuck")
+			GM.pc.addSkillExperience(Skill.SexSlave, 20, "nova_petfuck")
+		else:
+			GM.pc.addSkillExperience(Skill.CumLover, 10, "nova_petfuck")
+			GM.pc.addSkillExperience(Skill.SexSlave, 40, "nova_petfuck")
+		
+		GM.pc.orgasmFrom("nova")
+	
 	if(_action == "hissgrowl"):
 		GM.pc.addPain(20)
 	
@@ -412,6 +609,8 @@ func saveData():
 	var data = .saveData()
 	
 	data["isPuppy"] = isPuppy
+	data["usedCondom"] = usedCondom
+	data["condomBroke"] = condomBroke
 	
 	return data
 	
@@ -419,3 +618,5 @@ func loadData(data):
 	.loadData(data)
 	
 	isPuppy = SAVE.loadVar(data, "isPuppy", false)
+	usedCondom = SAVE.loadVar(data, "usedCondom", false)
+	condomBroke = SAVE.loadVar(data, "condomBroke", false)
