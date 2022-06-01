@@ -268,6 +268,8 @@ func _run():
 		addButton("Shake head", "You experienced enough for now", "shake_head")
 		addButton("Oral", "You really wanna suck Nova off", "oral")
 		addButtonWithChecks("Vaginal", "Breed me!", "vaginal", [], [ButtonChecks.HasReachableVagina])
+		addButton("Anal", "Offer your butt!", "anal")
+
 
 
 	if(state == "shake_head"):
@@ -539,6 +541,147 @@ func _run():
 		# (scene end)
 		addButton("Continue", "Time to go", "endthescene")
 		
+	if(state == "anal"):
+		# (if puppy)
+		if(isPuppy):
+			saynn("You ruff playfully and crawl around Nova on all fours before stopping before her and turning around so she can see your {pc.masc} butt in full glory. You wiggle it eagerly and spread your rear legs more so she can get a look at your {pc.analStretch} star.")
+
+			# (if has cock)
+			if(GM.pc.hasPenis()):
+				saynn("Your {pc.cock} wiggles too as you do it. You are horny so much that you keep dripping onto the stone floor.")
+
+		# (if kitty)
+		if(!isPuppy):
+			saynn("You purr softly and crawl around Nova on all fours, making sure to put as much elegance as you can into your paw and hip movement. Then stop before Nova and teasingly offer her a view of your {pc.analStretch} star. You wiggle your {pc.masc} butt and watch her with your eyes full of desire.")
+
+			# (if has cock)
+			if(GM.pc.hasPenis()):
+				saynn("Your {pc.cock} wiggles too as you do it. You are horny so much that you keep dripping onto the stone floor.")
+
+		saynn("[say=nova]My little pet wants to be fucked, huh~. How can I say no to that.[/say]")
+
+		saynn("Nova quickly drops her skirt and finds a hidden zipper on her undersuit that she undoes, exposing her sheath with the red canine cock that’s slightly peeking. Then she wraps the leash around her hand and yanks you closer to her crotch, forcing your face into her ballsack.")
+
+		saynn("[say=nova]You better lick me good first cause that’s all the lube you’re getting~[/say]")
+
+		saynn("You eagerly press your face into the area between the sheath and the balls and give it a good sniff. Then you stick your tongue out and start lapping at her package, your paws rest on her knees while she holds your leash and keeps it deliberately short so you can feel your collar digging into your neck more.")
+
+		saynn("The husky pants softly while her dick starts to become harder. You decide to take advantage of that by shoving your tongue between her veiny cock and the ring of the sheath. Nova suddenly moans as you proceed to slide your tongue in that tight space, tracing the thick outline of it and feel it inflate with more blood. You open your mouth and welcome the pointy head, your tongue only works harder, brushing against the cock’s texture at its base as Nova puts her free hand on your head and scritches you behind the ear.")
+
+		saynn("[say=nova]Fuck~. Such an eager whore.[/say]")
+
+		saynn("You can only smile and proceed to suck on her meaty candy, you make sure to catch all her drops of precum and spread it along the full length while also coating the shaft with your saliva, at this point Nova is fully hard. You get a little carried away and get more of it in your mouth, testing your throat as you try to shove it down your throat but Nova yanks on the leash and pulls you out.")
+
+		saynn("[say=nova]Present me your ass, bitch~[/say]")
+
+		addButton("Do it", "Time for the fun part", "anal_fucking")
+
+	if(state == "anal_fucking"):
+		# (if puppy)
+		if(isPuppy):
+			saynn("You bark softly and lick your lips before doing as told, turning around and raising your ass up for Nova.")
+
+		# (if kitty)
+		if(!isPuppy):
+			saynn("You meow softly and lick your lips before doing as told, turning around and raising your ass up for Nova.")
+
+		saynn("She gets on one knee behind you and puts her paws on your {pc.thick} buttcheeks. She gives each one a few firm smacks, causing them to bounce and you to moan in anticipation. Then she spreads them open and takes a good look at your tailhole. You don’t even notice as you spread your legs more, just cause you feel so needy. Nova then stretches open your star with two digits and spits inside.")
+
+		# (if has cock)
+		if(GM.pc.hasPenis()):
+			saynn("You are so aroused that your {pc.cock} is throbbing already and leaking pre, creating a little wet spot underneath.")
+
+		saynn("[say=nova]Hope you like doggystyle, slut~[/say]")
+
+		saynn("Nova holds you still with one hand while the other one directs her cock directly towards your tailhole. She starts slowly, just prodding at your anus and seeing how tight it is. Thankfully, with so much lube you don’t feel any discomfort, you slightly sway your hips and move yourself back, trying to force the penetration but Nova just spanks you again. You’re practically begging to be taken roughly already.")
+
+		saynn("[say=nova]Fine~[/say]")
+
+		saynn("With one steady movement, Nova starts forcing her canine cock down your {pc.analStretch} rearhole. The pointy head finds your pucker resisting at first but with one hard push it stretches your star wide and slides inside with relative ease, preparing your butt for more thick parts of the cock that come soon after.")
+
+		# (if has cock)
+		if(GM.pc.hasPenis()):
+			saynn("You arch your back, you feel how her 18 cm cock starts pushing against the bumpy sensitive spot that is your prostate, causing you to let out a passionate moan and drip with more precum.")
+
+		# (if has vagina)
+		if(GM.pc.hasVagina()):
+			saynn("It’s very filling, so much that you feel the inner wall stretching out and pressing on your g-spot, your wet slit looks smaller than it usually is but more spread open instead.")
+
+		saynn("You tilt your head down and keep making noises of pleasure while Nova shoves her cock deeper, until the knot part is stopped by your ring. Fuck it feels great, every time you clench you feel more pleasure from increased friction and feeling of your butt being stretched.")
+
+		saynn("[say=nova]You’re a tight slut, milking my cock already~[/say]")
+
+		saynn("Nova starts pulling her cock out, leaving the empty space behind. Space that you really want to get filled again. You moan eagerly and drag your hips back along with her cock, trying to keep more of it. But just before she withdraws it completely, she instead shoves it back deep with full strength, causing you to fall forward even. It feels, you squirm around the cock and don’t even try to get up, just holding your ass up so Nova can fuck you raw.")
+
+		# (if has cock)
+		if(GM.pc.hasPenis()):
+			saynn("You moan as your p-spot is squeezed so much that your cock leaks some of your {pc.cum}.")
+
+		saynn("[say=nova]Bet you love it~. I do. Breaking little pets down until they’re a complete mess, begging to be stuffed with my cum 24/7.[/say]")
+
+		saynn("She doesn’t stop and switches to ravaging your tailhole at a steady pace, slowly stretching your inner walls to fit her knotted member. You bite your lip and focus on enjoying the pleasurable sensations. You feel Nova’s knot becoming bigger as it fills up with blood, it doesn’t even fit inside you anymore, your tight ring is keeping it out.")
+
+		# (if has cock)
+		if(GM.pc.hasPenis()):
+			saynn("With each her thrust, your poor little prostate is getting pounded again and again, forcing your cock to leak more of your {pc.cum}. You’re not even touching yourself and your cock is getting milked just from anal sex.")
+
+		saynn("The husky lands a spank on your butt and stands pulling your ass back for each thrust. You welcome that and help her, moving your hips to meet Nova’s dick, forcing it deeper each time. The knot is putting quite a bit of pressure on your backdoor, you feel it slowly winning over you clenching. Nova starts to grunt and pant heavily, she seems to be quite close. And so are you.")
+
+		saynn("[say=nova]You’re clenching so much~. You must be loving this~[/say]")
+
+		addButton("Get knotted", "Ohhhh", "anal_get_knotted")
+
+	if(state == "anal_get_knotted"):
+		saynn("Nova puts her hand onto your back and pins you still while she pounds your butt with slow but powerful thrusts, stretching you out even more. Eventually your ring gets stretched so much that her meaty orb slips inside, sending waves of sharp sensations throughout your body. You’re squirming and moaning like a slut, you’re so full.")
+
+		# (if has cock, say)
+		if(GM.pc.hasPenis()):
+			saynn("Your prostate gets milked so much that it sends you over the edge, your cock shoots many weak lines of {pc.cum} that all hit the floor. You have created a mess!")
+
+		# (if has pussy)
+		if(GM.pc.hasVagina()):
+			saynn("Your G-spot gets rubbed enough through the inner wall that it causes overstimulation, your cunt squirts with your juices even though it never received any stimulation. You’re such a buttslut!")
+
+		saynn("[say=nova]Oh fuck-k[/say]")
+
+		saynn("Nova grunts heavily as she cums too, the sure feeling of your tight insides applying so much pressure on her member causes it to explode with cum, the husky lets out long noises of pleasure while stuffing your butt full of cum with her knot keeping it all nice and secure inside. The orgasmic waves cause all your muscles to flex, including your anal ring, you’re milking Nova’s ball for all her cum!")
+
+		saynn("When her balls get drained, you both are left feeling like a mess. Nova tries to pull her cock out but it’s stuck too tight.")
+
+		saynn("[say=nova]Bitch, we’re stuck together for a while now~[/say]")
+
+		saynn("You pant heavily as you slowly recover from your orgasm.")
+
+		# (if puppy)
+		if(isPuppy):
+			saynn("[say=pc]Bark..[/say]")
+
+		# (if kitty)
+		if(!isPuppy):
+			saynn("[say=pc]Me-eow..[/say]")
+
+		saynn("You put a hand on your belly and feel that it’s slightly inflated with so much cum and cock in you. You feel like you’re gonna be there for a while so you decide to get into a better pose.")
+
+		addButton("Rest", "Wait until the knot deflates", "analrest")
+
+	if(state == "analrest"):
+		saynn("Eventually Nova manages to pull out her cock, causing a strong stream of cum from your used butthole, you moan again as Nova offers you her messy cock.")
+
+		saynn("[say=nova]Clean it, slut~[/say]")
+
+		saynn("You do as told, quickly whipping out your tongue and gathering all the cum that you can, moving your tongue along the full length of Nova’s cock and then swallowing what you got. As a reward you get patted. Husky puts away her cock, removes your leash and lets you stand up.")
+
+		saynn("[say=nova]Had fun?[/say]")
+
+		saynn("You nod, a red deep blush appears on your face, your butt is gonna be leaking for a while.")
+
+		saynn("[say=nova]Good~. Now let me rest before I get too horny looking at you and decide to fuck you again~[/say]")
+
+		saynn("It doesn’t seem like the worst fate but still, you gather your belongings and prepare to leave.")
+
+		# (scene ends)
+		addButton("Continue", "Time to go", "endthescene")
+		
 
 func _react(_action: String, _args):
 	if(_action == "vaginalCondom"):
@@ -567,6 +710,18 @@ func _react(_action: String, _args):
 		else:
 			GM.pc.addSkillExperience(Skill.CumLover, 10, "nova_petfuck")
 			GM.pc.addSkillExperience(Skill.SexSlave, 40, "nova_petfuck")
+		
+		GM.pc.orgasmFrom("nova")
+	
+	if(_action == "anal_fucking"):
+		GM.pc.gotAnusFuckedBy("nova")
+	
+	if(_action == "anal_get_knotted"):
+		GM.pc.gotAnusFuckedBy("nova")
+		GM.pc.cummedInAnusBy("nova")
+		
+		GM.pc.addSkillExperience(Skill.CumLover, 30, "nova_petfuck")
+		GM.pc.addSkillExperience(Skill.SexSlave, 20, "nova_petfuck")
 		
 		GM.pc.orgasmFrom("nova")
 	
