@@ -84,7 +84,7 @@ func _react(_action: String, _args):
 	if(_action == "afterbeloud"):
 		processTime(60*30)
 		GM.pc.addStamina(50)
-		triggerRandomEvent(3, 50, 50, 30, 20)
+		triggerRandomEvent(3, 20, 30, 30, 30)
 		setState("")
 		GM.main.showLog()
 		return

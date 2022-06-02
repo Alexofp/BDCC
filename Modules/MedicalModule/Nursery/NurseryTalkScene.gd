@@ -241,6 +241,7 @@ func _react(_action: String, _args):
 		GM.pc.afterSleepingInBed()
 	
 	if(_action == "startbirth"):
+		GM.pc.clearOrificeFluids()
 		if(GM.pc.getMenstrualCycle() != null):
 			var bornChildren = GM.pc.getMenstrualCycle().giveBirth()
 			bornChildAmount = bornChildren.size()

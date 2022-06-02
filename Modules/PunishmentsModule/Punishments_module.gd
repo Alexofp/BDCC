@@ -14,6 +14,7 @@ func _init():
 		"res://Modules/PunishmentsModule/StocksMeetEliza.gd",
 		"res://Modules/PunishmentsModule/StocksTinyMessages.gd",
 		"res://Modules/PunishmentsModule/StocksRishaBlowjob.gd",
+		"res://Modules/PunishmentsModule/StocksAvyForcedVaginalAnal.gd",
 		]
 	characters = [
 		
@@ -29,5 +30,7 @@ func getRandomSceneFor(sceneType):
 		return [["StocksSpankedByInmate", 10.0], ["StocksMeetEliza", 10.0], ["StocksTinyMessages", 10.0], ["StocksTinyMessages", 10.0]]
 	if(sceneType == RandomSceneType.StocksWillingSex):
 		return [["StocksRishaBlowjob", 10.0]]
+	if(sceneType == RandomSceneType.StocksUnWillingSex):
+		return [["StocksAvyForcedVaginalAnal", 10.0]]
 		
 	return []

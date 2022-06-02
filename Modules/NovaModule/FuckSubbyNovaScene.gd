@@ -221,7 +221,7 @@ func _react(_action: String, _args):
 			else:
 				chance = GM.pc.useBestCondom()
 			
-			if(chance != null && RNG.chance(chance)):
+			if(OPTIONS.isContentEnabled(ContentType.RiskyCondoms) && chance != null && RNG.chance(chance)):
 				condomBroke = true
 
 		if(!usedCondom || (usedCondom && condomBroke)):
