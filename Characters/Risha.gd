@@ -100,3 +100,6 @@ func createBodyparts():
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("felinehead"))
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("vagina"))
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("anus"))
+
+func getPenisSize():
+	return 21.0

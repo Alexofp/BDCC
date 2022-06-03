@@ -81,6 +81,9 @@ func getLoot(_battleName):
 func getPenisSize():
 	return 18.0
 
+func getChatColor():
+	return '#90A9F4'
+
 func createBodyparts():
 	#var mybreasts: BodypartBreasts = GlobalRegistry.createBodypart("humanbreasts")
 	#mybreasts.size = BreastsSize.C

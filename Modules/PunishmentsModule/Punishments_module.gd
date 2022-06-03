@@ -15,6 +15,7 @@ func _init():
 		"res://Modules/PunishmentsModule/StocksTinyMessages.gd",
 		"res://Modules/PunishmentsModule/StocksRishaBlowjob.gd",
 		"res://Modules/PunishmentsModule/StocksAvyForcedVaginalAnal.gd",
+		"res://Modules/PunishmentsModule/StocksNovaRishaForcedVagOrAnal.gd",
 		]
 	characters = [
 		
@@ -32,6 +33,7 @@ func getRandomSceneFor(sceneType):
 	if(sceneType == RandomSceneType.StocksWillingSex):
 		result.append_array([["StocksRishaBlowjob", 10.0]])
 	if(sceneType == RandomSceneType.StocksUnWillingSex):
+		result.append_array([["StocksNovaRishaForcedVagOrAnal", 10.0]])
 		if(GM.pc.hasVagina()):
 			result.append_array([["StocksAvyForcedVaginalAnal", 10.0]])
 		
