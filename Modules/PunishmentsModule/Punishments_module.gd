@@ -24,13 +24,15 @@ func _init():
 	]
 
 func getRandomSceneFor(sceneType):
+	var result = []
 	if(sceneType == RandomSceneType.StocksEscape):
-		return [["StocksEscape", 10.0]]
+		result.append_array([["StocksEscape", 10.0]])
 	if(sceneType == RandomSceneType.StocksEvent):
-		return [["StocksSpankedByInmate", 10.0], ["StocksMeetEliza", 10.0], ["StocksTinyMessages", 10.0], ["StocksTinyMessages", 10.0]]
+		result.append_array([["StocksSpankedByInmate", 10.0], ["StocksMeetEliza", 10.0], ["StocksTinyMessages", 10.0], ["StocksTinyMessages", 10.0]])
 	if(sceneType == RandomSceneType.StocksWillingSex):
-		return [["StocksRishaBlowjob", 10.0]]
+		result.append_array([["StocksRishaBlowjob", 10.0]])
 	if(sceneType == RandomSceneType.StocksUnWillingSex):
-		return [["StocksAvyForcedVaginalAnal", 10.0]]
+		if(GM.pc.hasVagina()):
+			result.append_array([["StocksAvyForcedVaginalAnal", 10.0]])
 		
-	return []
+	return result
