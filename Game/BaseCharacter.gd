@@ -704,8 +704,10 @@ func removeBodypart(slot):
 func clearOrificeFluids():
 	if(hasBodypart(BodypartSlot.Vagina)):
 		getBodypart(BodypartSlot.Vagina).clearOrificeFluids()
-	getBodypart(BodypartSlot.Anus).clearOrificeFluids()
-	getBodypart(BodypartSlot.Head).clearOrificeFluids()
+	if(hasBodypart(BodypartSlot.Anus)):
+		getBodypart(BodypartSlot.Anus).clearOrificeFluids()
+	if(hasBodypart(BodypartSlot.Head)):
+		getBodypart(BodypartSlot.Head).clearOrificeFluids()
 
 func cummedInBodypartBy(bodypartSlot, characterID, sourceType = null):
 	if(!hasBodypart(bodypartSlot)):

@@ -192,6 +192,7 @@ func onCharacterReadyToGiveBirth():
 		GM.main.addLogMessage("News", "You just received news that "+getName()+" gave birth to your children! You can check who in the nursery")
 		
 		var bornChildren = getMenstrualCycle().giveBirth()
+		clearOrificeFluids()
 		
 		for child in bornChildren:
 			GM.CS.addChild(child)
