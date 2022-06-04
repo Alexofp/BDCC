@@ -623,7 +623,7 @@ func hasBigBreasts():
 	else:
 		return false
 
-func afterSleepingInBed():
+func afterSleeping():
 	addStamina(getMaxStamina())
 	addPain(-100)
 	skillsHolder.onNewDay()
@@ -635,6 +635,9 @@ func afterSleepingInBed():
 		addEffect(StatusEffect.PregnancySickness)
 		
 	updateNonBattleEffects()
+
+func afterSleepingInBed():
+	afterSleeping()
 
 func afterRestingInBed(seconds):
 	var _hours = floor(seconds/3600.0)

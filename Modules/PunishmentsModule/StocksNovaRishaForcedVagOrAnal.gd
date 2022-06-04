@@ -209,18 +209,4 @@ func _react(_action: String, _args):
 
 	setState(_action)
 
-func saveData():
-	var data = .saveData()
-	
-#	data["usedCondom"] = usedCondom
-#	data["condomBroke"] = condomBroke
-#	data["extraScene"] = extraScene
-	
-	return data
-	
-func loadData(data):
-	.loadData(data)
-	
-#	usedCondom = SAVE.loadVar(data, "usedCondom", false)
-#	condomBroke = SAVE.loadVar(data, "condomBroke", false)
-#	extraScene = SAVE.loadVar(data, "extraScene", false)
+
