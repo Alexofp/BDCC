@@ -256,6 +256,12 @@ func processBattleTurn():
 		if(timedBuffsDurationTurns <= 0):
 			timedBuffsTurns.clear()
 
+func afterFightEnded():
+	.afterFightEnded()
+	
+	timedBuffsTurns.clear()
+	timedBuffsDurationTurns = 0
+
 func processTime(_secondsPassed):
 	for bodypartSlot in bodyparts:
 		var bodypart = bodyparts[bodypartSlot]

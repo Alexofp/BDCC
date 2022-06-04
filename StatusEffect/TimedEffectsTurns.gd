@@ -2,7 +2,7 @@ extends StatusEffectBase
 
 func _init():
 	id = StatusEffect.TimedEffectsTurns
-	isBattleOnly = false
+	isBattleOnly = true
 	
 func initArgs(_args = []):
 	pass

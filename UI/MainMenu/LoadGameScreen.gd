@@ -10,6 +10,9 @@ signal in_focus
 func _ready():
 	updateSaves()
 	
+	if(OS.get_name() == "HTML5"):
+		$VBoxContainer/GridContainer/SavesButton.visible = false
+	
 	if OS.get_name() == "HTML5" and OS.has_feature("JavaScript"):
 		_define_js()
 
@@ -155,3 +158,7 @@ func _on_ImportSaveDialog_file_selected(path: String):
 	var d = Directory.new()
 	d.copy(path, "user://saves/"+path.get_file().get_basename()+".save")
 	updateSaves()
+
+
+func _on_SavesButton_pressed():
+	var _ok = OS.shell_open(ProjectSettings.globalize_path("user://saves/"))

@@ -684,6 +684,12 @@ func _run():
 		
 
 func _react(_action: String, _args):
+	if(_action in ["meow", "bark", "get_on_all_fours", "follow", "follow1", "let_it_happen", "hissgrowl", "follow2"]):
+		processTime(RNG.randi_range(3, 10)*60)
+		
+	if(_action in ["oral", "vaginal", "anal", "vagrest", "analrest"]):
+		processTime(RNG.randi_range(30, 60)*60)
+	
 	if(_action == "vaginalCondom"):
 		usedCondom = true
 		GM.pc.gotVaginaFuckedBy("nova")
