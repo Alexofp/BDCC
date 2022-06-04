@@ -99,7 +99,11 @@ func triggerRandomEvent(escapeChance, _lewdChance, _willingSexChance, _unWilling
 func getEscapeChance(isLoud = false):
 	if(amountOfEventsPassed < 10):
 		return 0.0
+	if(amountOfEventsPassed > 40):
+		return 10.0
+		
 	if(isLoud):
+		print(max(3.0, amountOfEventsPassed / 8.0))
 		return max(3.0, amountOfEventsPassed / 8.0)
 		
 	return max(2.0, amountOfEventsPassed / 10.0)

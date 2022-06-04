@@ -92,6 +92,8 @@ func _run():
 		addButton("Continue", "See what happens next", "endthescene")
 
 func _react(_action: String, _args):
+	if(_action in ["nod"]):
+		processTime(RNG.randi_range(30, 60)*60)
 
 	if(_action == "nod"):
 		if(GM.pc.hasTallymarks()):

@@ -204,6 +204,9 @@ func _run():
 		
 
 func _react(_action: String, _args):
+	if(_action in ["follow", "continue", "continue1", "take_a_sip", "hug_her", "kiss_her", "bring_her_home"]):
+		processTime(RNG.randi_range(3, 10)*60)
+	
 	if(_action == "take_a_sip"):
 		GM.pc.addIntoxication(0.3)
 		

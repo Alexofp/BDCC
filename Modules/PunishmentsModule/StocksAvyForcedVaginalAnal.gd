@@ -193,6 +193,11 @@ func _run():
 		addButton("Continue", "See what happens next", "endthescene")
 
 func _react(_action: String, _args):
+	if(_action in ["beg", "breed_me!", "fuck_off"]):
+		processTime(RNG.randi_range(2, 5)*60)
+		
+	if(_action in ["fucking", "analSex"]):
+		processTime(RNG.randi_range(30, 60)*60)
 
 	if(_action == "beg"):
 		if(RNG.chance(50)):

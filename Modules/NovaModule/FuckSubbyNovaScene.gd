@@ -185,6 +185,9 @@ func _run():
 		
 
 func _react(_action: String, _args):
+	if(_action in ["no_condom", "use_condom", "use_her_condom"]):
+		processTime(RNG.randi_range(10, 40)*60)
+	
 	if(_action == "use_condom"):
 		usedCondom = true
 		setState("fucking")

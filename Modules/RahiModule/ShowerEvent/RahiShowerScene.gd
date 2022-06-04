@@ -293,6 +293,12 @@ func _run():
 		
 
 func _react(_action: String, _args):
+	if(_action in ["intervene", "rub_her_back", "crouch", "cum_inside"]):
+		processTime(RNG.randi_range(3, 10)*60)
+		
+	if(_action in ["make_her_cum", "use_condom", "just_kiss", "no_condom"]):
+		processTime(RNG.randi_range(20, 40)*60)
+	
 	if(_action == "use_condom"):
 		usedCondom = true
 		setState("fucking")
@@ -302,6 +308,10 @@ func _react(_action: String, _args):
 		usedCondom = false
 		setState("fucking")
 		return
+
+	if(_action == "make_her_cum"):
+		GM.pc.addSkillExperience(Skill.CumLover, 10, "rahi_showerlick")
+		GM.pc.addSkillExperience(Skill.SexSlave, 30, "rahi_showerlick")
 
 	if(_action == "cum_inside"):
 		if(usedCondom):

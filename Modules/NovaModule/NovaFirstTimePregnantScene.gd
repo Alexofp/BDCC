@@ -121,6 +121,8 @@ func _run():
 		
 
 func _react(_action: String, _args):
+	if(_action in ["talk_it_out", "force"]):
+		processTime(RNG.randi_range(10, 40)*60)
 
 	if(_action == "talk_it_out"):
 		GM.pc.addPain(20)
