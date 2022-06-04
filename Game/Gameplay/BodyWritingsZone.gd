@@ -56,6 +56,9 @@ const zoneVisibleName = {
 	ShinRight: "right shin",
 }
 
+static func getAll():
+	return zoneVisibleName.keys()
+
 static func getRandomZone():
 	return RNG.pick(zoneVisibleName.keys())
 

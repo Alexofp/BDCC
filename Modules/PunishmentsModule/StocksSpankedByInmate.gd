@@ -6,6 +6,12 @@ func _init():
 func _reactInit():
 	GM.pc.addLust(20)
 	addMessage("+20 lust")
+	
+	if(RNG.chance(100)):
+		var zone = BodyWritingsZone.getRandomZone()
+		GM.pc.addBodywriting(zone, BodyWritings.getRandomWritingIDForZone(zone))
+		addMessage("Someone also left a memento on your "+BodyWritingsZone.getZoneVisibleName(zone)+"..")
+		
 
 func _run():
 	if(state == ""):

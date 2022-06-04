@@ -630,7 +630,7 @@ func afterSleepingInBed():
 	for item in getInventory().getEquppedRestraints():
 		item.getRestraintData().resetOnNewDay()
 	
-	if(isPregnant() && getPregnancyProgress() <= 0.33 && RNG.chance(30)):
+	if(isPregnant() && getPregnancyProgress() <= 0.5 && RNG.chance(30)):
 		GM.main.addLogMessage("Nausea", "You wake up and feel kinda nauseous.")
 		addEffect(StatusEffect.PregnancySickness)
 		
@@ -1042,6 +1042,29 @@ func milkSeed(howmuch = 1.0):
 
 func addTallymark(zone):
 	addEffect(StatusEffect.HasTallyMarks, [zone])
+
+func addTallymarkPickBestZone(zonelist):
+	addEffect(StatusEffect.HasTallyMarks, [zonelist])
+
+func addTallymarkFace():
+	addTallymarkPickBestZone([
+		BodyWritingsZone.CheekLeft,
+		BodyWritingsZone.CheekRight,
+	])
+
+func addTallymarkCrotch():
+	addTallymarkPickBestZone([
+		BodyWritingsZone.LowerAbdomen,
+		BodyWritingsZone.HipLeft,
+		BodyWritingsZone.HipRight,
+		BodyWritingsZone.ButtcheekLeft,
+		BodyWritingsZone.ButtcheekRight,
+		BodyWritingsZone.ThighLeft,
+		BodyWritingsZone.ThighRight,
+	])
+
+func addTallymarkButt():
+	addTallymarkCrotch()
 
 func hasTallymarks():
 	return hasEffect(StatusEffect.HasTallyMarks)

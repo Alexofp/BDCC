@@ -105,12 +105,12 @@ func _react(_action: String, _args):
 			rishaRemovedGag = true
 			GM.pc.freeMouthDeleteAll()
 			
-		if(RNG.chance(20)):
+		if(RNG.chance(40)):
 			var zone = BodyWritingsZone.getRandomZone()
 			GM.pc.addBodywriting(zone, BodyWritings.getRandomWritingIDForZone(zone))
 			addMessage("Risha also left a memento on your "+BodyWritingsZone.getZoneVisibleName(zone)+"..")
 			
-		GM.pc.addTallymark(RNG.pick([BodyWritingsZone.CheekLeft])) #, BodyWritingsZone.CheekRight
+		GM.pc.addTallymarkFace()
 		GM.pc.cummedInMouthBy("risha")
 		GM.pc.cummedOnBy("risha")
 		GM.pc.addSkillExperience(Skill.SexSlave, 20, "risha_stocksblow")

@@ -215,14 +215,14 @@ func _react(_action: String, _args):
 			GM.pc.addSkillExperience(Skill.SexSlave, 40, "avy_fuck")
 		
 		GM.pc.orgasmFrom("avy")
-		GM.pc.addTallymark(RNG.pick([BodyWritingsZone.ButtcheekLeft]))
+		GM.pc.addTallymarkCrotch()
 		
 		if(RNG.chance(50)):
 			extraScene = true
 		else:
 			extraScene = false
 			
-		if(RNG.chance(40)):
+		if(RNG.chance(50)):
 			var zone = BodyWritingsZone.getRandomZone()
 			GM.pc.addBodywriting(zone, BodyWritings.getRandomWritingIDForZone(zone))
 			addMessage("Avy also left a memento on your "+BodyWritingsZone.getZoneVisibleName(zone)+"..")
@@ -234,7 +234,7 @@ func _react(_action: String, _args):
 		GM.pc.cummedOnBy("avy")
 		GM.pc.orgasmFrom("avy")
 		
-		GM.pc.addTallymark(RNG.pick([BodyWritingsZone.ButtcheekLeft]))
+		GM.pc.addTallymarkButt()
 
 	if(_action == "endthescene"):
 		endScene()

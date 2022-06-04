@@ -195,9 +195,8 @@ func _react(_action: String, _args):
 		GM.pc.orgasmFrom("risha")
 		
 	if(_action == "continue"):
-		GM.pc.addTallymark(RNG.pick([BodyWritingsZone.CheekLeft]))
-		GM.pc.addTallymark(RNG.pick([BodyWritingsZone.ButtcheekLeft]))
-		
+		GM.pc.addTallymarkFace()
+		GM.pc.addTallymarkCrotch()
 			
 		if(RNG.chance(60)):
 			var zone = BodyWritingsZone.getRandomZone()
