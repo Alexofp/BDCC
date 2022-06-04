@@ -5,19 +5,25 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+## [0.0.14] - 2022-06-04
 ### Added
-- Simple Rahi romance path
-- Condoms. PC will be able to use them in certain scenes. They will alter the scene slightly unless I'm lazy. Condoms can break unless disabled in options
-- Rahi shower event, first sex scenes with Rahi are added
-- An expandable system to pick a random scene based on weights and conditions.
-- Characters now have support for the bodypart system that the player uses. Less code duplication
-- Semen inside other characters is now tracked and shown as a status effect, same as player.
 - Pregnancy! You can get pregnant and give birth in the nursery. There you can also track all your kids. Can't interact with them (and will never be able to, is an adult game). Other characters give birth automatically when the time is right (you will be notified)
-- Menstrual cycle simulation for you and non-playable female characters. You can go into heat and ovulate (if you have a pussy ofc). Each eggcell/ovum inside your womb is simulated and tracked. The same code is used for other characters
+- Menstrual cycle simulation for you and non-playable female characters. You can go into heat and ovulate (if you have a pussy ofc). Each eggcell/ovum inside your womb is simulated and tracked. This allows to be pregnant from two differnet people at the same time for example. NPCs use the same systems for impregnation calculations.
 - Birth control pills, breeder pills, heat pills, pregnancy testers
 - Pregnancy settings were added to the options screen where you can adjust how long the menstrual cycle and pregnancy are
 - Ability to pick starting perks. So far they're all pregnancy related. If you have an old save file a button to pick them is added to your "Me" menu
+- Condoms. You will be able to use them in certain scenes. They will alter the scene slightly unless I'm lazy. Condoms can break unless disabled in options
+- Some Rahi content. To start it give her an apple, sleep and meet her.
+- Rahi shower event, first sex scenes with Rahi are added
+- Semen inside other characters/heat/pregnancy are now tracked and shown as a status effect, same as player.
 - Lots of new icons for status effects and perks
+- Tavi shower single-time random event, watersports related (fully optional)
+- Added a scene of fucking with Nova if you beat her at greenhouses
+- Added scenes for Rahi and Nova of them reacting to getting pregnant
+- Nova can now be found in the yard. Added a petplay scene with Nova
+- Added 2 scenes of non-con sex in stocks. One female-only, one universal
+- Late stages of pregnancy cause lactation
 
 ### Changed
 - Pink inmates are now called lilacs because I like the name
@@ -49,7 +55,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Turn-based fighting
 - Initial player customization
 
-[Unreleased]: https://github.com/Alexofp/BDCC/compare/v0.0.13bugfix3...main
+[Unreleased]: https://github.com/Alexofp/BDCC/compare/0.0.14...main
+[0.0.14]: https://github.com/Alexofp/BDCC/compare/v0.0.13bugfix3...0.0.14
 [0.0.13bugfix3]: https://github.com/Alexofp/BDCC/compare/v0.0.13bugfix2...v0.0.13bugfix3
 [0.0.13bugfix2]: https://github.com/Alexofp/BDCC/compare/v0.0.13bugfix1...v0.0.13bugfix2
 [0.0.13bugfix1]: https://github.com/Alexofp/BDCC/compare/v0.0.13...v0.0.13bugfix1
