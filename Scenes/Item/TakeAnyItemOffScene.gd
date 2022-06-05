@@ -1,40 +1,79 @@
 extends "res://Scenes/SceneBase.gd"
 
+var uniqueItemID = ""
 
 func _init():
 	sceneID = "TakeAnyItemOffScene"
 
+func _initScene(_args = []):
+	if(_args.size() > 0):
+		uniqueItemID = _args[0]
+	
+func _reactInit():
+	if(uniqueItemID == null || uniqueItemID == ""):
+		return
+		
+	var item: ItemBase = GM.pc.getInventory().getItemByUniqueID(uniqueItemID)
+	if(item == null):
+		return
+	
+	if(!GM.pc.hasBlockedHands()):
+		if(GM.pc.hasBoundArms()):
+			setState("awkwardtakeoff")
+		
+		GM.pc.getInventory().removeEquippedItem(item)
+		GM.pc.getInventory().addItem(item)
+	else:
+		setState("blockedhands")
+
 func _run():
 	if(state == ""):
-		if(GM.pc.hasBlockedHands()):
-			saynn("You really try to take anything off but your blocked hands prevent you from doing so")
-			
-			addButton("Continue", "Aww", "endthescene")
+		if(uniqueItemID == null || uniqueItemID == ""):
+			addButton("Continue", "Oops", "endthescene")
+			return
+		
+		var item: ItemBase = GM.pc.getInventory().getItemByUniqueID(uniqueItemID)
+		if(item == null):
+			saynn("Error: no item found")
 		else:
-			var item: ItemBase = GM.pc.getInventory().getItemByUniqueID(sceneArgs[0])
-			
-			if(GM.pc.hasBoundArms()):
-				saynn("It's very awkward to do with bound arms but you just about managed. You "+item.getPuttingOnStringLong(false))
-			else:
-				saynn("You "+item.getTakingOffStringLong(false))
+			saynn("You "+item.getTakingOffStringLong(false))
+		
+		addButton("Continue", "You took off an item", "endthescene")
 
-			addButton("Continue", "You took off an item", "removeitemandendthescene")
+	if(state == "awkwardtakeoff"):
+		if(uniqueItemID == null || uniqueItemID == ""):
+			addButton("Continue", "Oops", "endthescene")
+			return
+		
+		var item: ItemBase = GM.pc.getInventory().getItemByUniqueID(uniqueItemID)
+		if(item == null):
+			saynn("Error: no item found")
+		else:
+			saynn("It's very awkward to do with bound arms but you just about managed. You "+item.getTakingOffStringLong(false))
+		
+		addButton("Continue", "You took off an item", "endthescene")
+
+	if(state == "blockedhands"):
+		saynn("You really try to take anything off but your blocked hands prevent you from doing so")
+		
+		addButton("Continue", "Aww", "endthescene")
 
 
 func _react(_action: String, _args):
-	if(_action == "removeitemandendthescene"):
-		var item: ItemBase = GM.pc.getInventory().getItemByUniqueID(sceneArgs[0])
-		GM.pc.getInventory().removeEquippedItem(item)
-		GM.pc.getInventory().addItem(item)
-		
-		endScene()
-		return
-		
 	if(_action == "endthescene"):
 		endScene()
 		return
 	
 	setState(_action)
 
-func _react_scene_end(_tag, _result):
-	setState("")
+func saveData():
+	var data = .saveData()
+	
+	data["uniqueItemID"] = uniqueItemID
+	
+	return data
+	
+func loadData(data):
+	.loadData(data)
+	
+	uniqueItemID = SAVE.loadVar(data, "uniqueItemID", "")

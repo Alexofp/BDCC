@@ -6,8 +6,6 @@ func _init():
 
 func _run():
 	if(state == ""):
-		#var item: ItemBase = GM.pc.getInventory().getItemByUniqueID(sceneArgs[0])
-		
 		saynn("It's a locked restraint, you can't just take it off")
 		
 		saynn("If you wanna escape it you gotta use the struggle action.")

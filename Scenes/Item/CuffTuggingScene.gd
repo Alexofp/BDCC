@@ -6,8 +6,6 @@ func _init():
 
 func _run():
 	if(state == ""):
-		#var item: ItemBase = GM.pc.getInventory().getItemByUniqueID(sceneArgs[0])
-		
 		saynn("You take a look at your cuffs. They're not as complicated as the collar but they still feature a magnetic lock.")
 		
 		saynn("They sit pretty tightly, the soft padding on the inside doesn't help much.")

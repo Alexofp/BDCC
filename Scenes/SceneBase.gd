@@ -9,7 +9,6 @@ class_name SceneBase
 #signal addDisabledButton(text, tooltip)
 signal sceneEnded(result)
 var state: String = ""
-var sceneArgs = []
 var sceneID: String = "UNREGISTERED_SCENE"
 var currentCharacters: Array = []
 var fightCharacter: String = ""
@@ -41,7 +40,6 @@ func _reactInit():
 
 # Utility
 func initScene(args = []):
-	sceneArgs = args
 	clearCharacter()
 	clearFightCharacter()
 	_initScene(args)
@@ -264,7 +262,6 @@ func getCharacter(charID: String) -> BaseCharacter:
 func saveData():
 	var data = {}
 	data["state"] = state
-	data["sceneArgs"] = sceneArgs
 	data["currentCharacters"] = currentCharacters
 	data["fightCharacter"] = fightCharacter
 	data["sceneTag"] = sceneTag
@@ -273,7 +270,6 @@ func saveData():
 
 func loadData(data):
 	state = SAVE.loadVar(data, "state", "")
-	sceneArgs = SAVE.loadVar(data, "sceneArgs")
 	currentCharacters = SAVE.loadVar(data, "currentCharacters", [])
 	fightCharacter = SAVE.loadVar(data, "fightCharacter", "")
 	sceneTag = SAVE.loadVar(data, "sceneTag", "")
