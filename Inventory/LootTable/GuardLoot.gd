@@ -5,8 +5,8 @@ func _init():
 	loot = [
 		[2, ["lube"]],
 		[7, ["painkillers"]],
-		[20, ["EnergyDrink"]],
-		[10, [["restraintkey", 1, 2]]],
+		[2, ["EnergyDrink"]],
+		[1, [["restraintkey", 1, 2]]],
 		[0.2, ["sportyBriefs"]],
 	]
 	minCredits = 1

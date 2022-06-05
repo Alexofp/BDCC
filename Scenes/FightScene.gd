@@ -279,7 +279,14 @@ func _react(_action: String, _args):
 		GM.pc.afterFightEnded()
 		if(battleEndedHow == ""):
 			battleEndedHow = "pain"
-		endScene([battleState, battleEndedHow])
+		if(battleState == "win"):
+			var loot = enemyCharacter.getLoot(battleName)
+			if((loot.has("credits") && loot["credits"] > 0) || (loot.has("items") && loot["items"].size() > 0)):
+				runScene("LootingScene", [loot], "lootingscene")
+			else:
+				endScene([battleState, battleEndedHow])
+		else:
+			endScene([battleState, battleEndedHow])
 		return
 
 func doPlayerAttack(attackID):
@@ -384,15 +391,6 @@ func afterTurnChecks():
 		setState("lost")
 	if(won == "win"):
 		setState("win")
-		
-		var loot:Dictionary = enemyCharacter.getLoot(battleName)
-		if(loot.has("credits") && loot["credits"] >= 1):
-			GM.pc.addCredits(loot["credits"])
-			addMessage("You looted a chip with "+str(loot["credits"])+" "+Util.multipleOrSingularEnding(loot["credits"], "credit"))
-		if(loot.has("items")):
-			for item in loot["items"]:
-				addMessage("You looted "+item.getAStackName())
-				GM.pc.getInventory().addItem(item)
 
 func checkEnd():
 	if(GM.pc.getPain() >= GM.pc.painThreshold()):
@@ -474,6 +472,8 @@ func _react_scene_end(_tag, _result):
 		whatEnemyDid = aiTurn()
 
 		afterTurnChecks()
+	if(_tag == "lootingscene"):
+		endScene([battleState, battleEndedHow])
 
 func supportsBattleTurns():
 	return true

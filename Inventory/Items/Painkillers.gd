@@ -9,6 +9,9 @@ func getVisibleName():
 func getDescription():
 	return "Helps against pain, removes 80 pain"
 
+func getA():
+	return ""
+
 func canUseInCombat():
 	return true
 

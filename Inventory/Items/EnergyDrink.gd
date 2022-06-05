@@ -9,6 +9,9 @@ func getVisibleName():
 func getDescription():
 	return "A soda can with the 'Space cola' brand. Reduces drowsiness and gives you energy! +100 stamina on use"
 
+func getA():
+	return "an"
+
 func canUseInCombat():
 	return true
 

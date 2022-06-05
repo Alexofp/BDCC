@@ -9,6 +9,9 @@ func getVisibleName():
 func getDescription():
 	return "Personal lubricant that is water-based, insuring no irritation. Works both for vaginal and anal use, your orifices recover faster and don't stretch as much"
 
+func getA():
+	return ""
+
 func canUseInCombat():
 	return true
 

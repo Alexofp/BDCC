@@ -75,9 +75,6 @@ func getFightIntro(_battleName):
 	mes += "\n\n"
 	return mes+formatSay("You have no right to remain silent, anything I say will be used against you. Come here, sweetie~")
 
-func getLoot(_battleName):
-	return {"credits": 1}
-
 func getPenisSize():
 	return 18.0
 
@@ -102,3 +99,6 @@ func onCharacterVisiblyPregnant():
 	
 	if(!GM.main.getFlag(NovaModule.Nova_FirstTimePregnantHappened, false)):
 		GM.main.setFlag(NovaModule.Nova_NotThereToday, true)
+
+func getLootTable(_battleName):
+	return GuardLoot.new()
