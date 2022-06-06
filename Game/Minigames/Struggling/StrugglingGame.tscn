@@ -1,0 +1,98 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Game/Minigames/Struggling/StrugglingGame.gd" type="Script" id=1]
+
+[node name="StrugglingGame" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 0, 500 )
+rect_clip_content = true
+mouse_filter = 2
+size_flags_horizontal = 3
+script = ExtResource( 1 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.105882, 0.0588235, 0.258824, 1 )
+
+[node name="StartUI" type="CenterContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="StartUI"]
+margin_left = 420.0
+margin_top = 332.0
+margin_right = 859.0
+margin_bottom = 387.0
+
+[node name="Label" type="Label" parent="StartUI/VBoxContainer"]
+margin_right = 439.0
+margin_bottom = 31.0
+text = "Click the circle when the approaching ring reaches its outer border
+The better your accuracy is the better your struggling attempt will be"
+
+[node name="StartButton" type="Button" parent="StartUI/VBoxContainer"]
+margin_top = 35.0
+margin_right = 439.0
+margin_bottom = 55.0
+text = "Start"
+
+[node name="StartUI" type="Control" parent="StartUI"]
+margin_left = 640.0
+margin_top = 360.0
+margin_right = 640.0
+margin_bottom = 360.0
+
+[node name="Buttons" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="Patterns" type="Node2D" parent="."]
+visible = false
+
+[node name="NextButtonTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="GameUI" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="AccuracyLabel" type="Label" parent="GameUI"]
+margin_left = 5.34539
+margin_top = 8.01809
+margin_right = 66.3454
+margin_bottom = 22.0181
+
+[node name="WinTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="WinUI" type="CenterContainer" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="WinUI"]
+margin_left = 605.0
+margin_top = 341.0
+margin_right = 675.0
+margin_bottom = 379.0
+
+[node name="Label" type="Label" parent="WinUI/VBoxContainer"]
+margin_right = 70.0
+margin_bottom = 14.0
+text = "Completed"
+
+[node name="ContinueButton" type="Button" parent="WinUI/VBoxContainer"]
+margin_top = 18.0
+margin_right = 70.0
+margin_bottom = 38.0
+text = "Continue"
+
+[connection signal="pressed" from="StartUI/VBoxContainer/StartButton" to="." method="_on_StartButton_pressed"]
+[connection signal="timeout" from="NextButtonTimer" to="." method="_on_NextButtonTimer_timeout"]
+[connection signal="timeout" from="WinTimer" to="." method="_on_WinTimer_timeout"]
+[connection signal="pressed" from="WinUI/VBoxContainer/ContinueButton" to="." method="_on_ContinueButton_pressed"]

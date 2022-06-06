@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Game/Minigames/Struggling/Placers/PlacerButton.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Game/Minigames/Struggling/Pattern.gd" type="Script" id=2]
+
+[node name="Pattern" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="PlacerButton" parent="." instance=ExtResource( 1 )]
+position = Vector2( 440, 160 )
+
+[node name="PlacerButton2" parent="." instance=ExtResource( 1 )]
+position = Vector2( 840, 160 )
+
+[node name="PlacerButton3" parent="." instance=ExtResource( 1 )]
+position = Vector2( 640, 320 )

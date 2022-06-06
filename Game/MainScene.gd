@@ -116,6 +116,9 @@ func removeScene(scene, args = []):
 		return
 
 func _on_GameUI_on_option_button(method, args):
+	pickOption(method, args)
+	
+func pickOption(method, args):
 	GM.main.clearMessages()
 	GM.ES.clearDelayedEvents()
 	

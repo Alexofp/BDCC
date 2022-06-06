@@ -38,9 +38,6 @@ size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.4
 theme = ExtResource( 2 )
 script = ExtResource( 4 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="NameLabel" type="Label" parent="."]
 margin_right = 279.0

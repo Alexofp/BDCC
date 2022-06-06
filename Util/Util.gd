@@ -65,6 +65,23 @@ static func multipleOrSingularEnding(value, word, wordMultiple = null):
 		return word+"s"
 	return wordMultiple
 
+static func getFilesInFolder(folder):
+	var result = []
+	var dir = Directory.new()
+	if dir.open(folder) == OK:
+		dir.list_dir_begin()
+		var file_name = dir.get_next()
+		while file_name != "":
+			if dir.current_is_dir():
+				pass
+			else:
+				var full_path = folder.plus_file(file_name)
+				result.append(full_path)
+			file_name = dir.get_next()
+	else:
+		printerr("An error occurred when trying to access the path "+folder)
+	return result
+
 # https://godotengine.org/qa/20058/elegant-way-to-create-string-from-array-items
 static func join(arr: Array, separator: String = "") -> String:
 	var output = ""

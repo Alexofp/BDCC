@@ -47,16 +47,10 @@ margin_top = -2.82843
 margin_bottom = -2.82843
 theme = ExtResource( 1 )
 script = ExtResource( 3 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Panel2" type="Panel" parent="HBoxContainer"]
 margin_right = 260.0
@@ -278,9 +272,6 @@ margin_right = -12.0
 margin_bottom = -12.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="PlayerPanel" parent="HBoxContainer/Panel/MarginContainer" instance=ExtResource( 8 )]
 margin_right = 260.0

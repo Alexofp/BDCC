@@ -9,6 +9,12 @@ func canUnlockWithKey():
 func alwaysSavedWhenStruggledOutOf():
 	return true
 
+func shouldDoStruggleMinigame(_pc):
+	var _handsFree = !_pc.hasBlockedHands()
+	if(_handsFree):
+		return false
+	return .shouldDoStruggleMinigame(_pc)
+
 func doStruggle(_pc):
 	var _handsFree = !_pc.hasBlockedHands()
 	var _armsFree = !_pc.hasBoundArms()

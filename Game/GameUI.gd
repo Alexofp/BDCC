@@ -194,6 +194,14 @@ func addUITextbox(id):
 	textcontainer.add_child(uitextbox)
 	uitextbox.grab_focus()
 	textboxes[id] = uitextbox
+	
+func addCustomControl(id, control):
+	assert(!textboxes.has(id), "Trying to add a control with the same id. Id is "+id)
+
+	#var uitextbox = uiTextboxScene.instance()
+	#uitextbox.id = id
+	textcontainer.add_child(control)
+	textboxes[id] = control
 
 func getUIdata(id):
 	assert(textboxes.has(id), "Trying to get info from bad id. Id is "+id)

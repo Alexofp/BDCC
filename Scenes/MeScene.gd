@@ -1,5 +1,8 @@
 extends "res://Scenes/SceneBase.gd"
 
+#var minigameScene = preload("res://Game/Minigames/Struggling/StrugglingGameControl.tscn")
+var minigameScene = preload("res://Game/Minigames/Struggling/StrugglingGame.tscn")
+
 func _init():
 	sceneID = "MeScene"
 
@@ -71,6 +74,7 @@ func _run():
 			var skill: SkillBase = skills[skillID]
 			sayn(skill.getVisibleName()+": level "+str(skill.getLevel()))
 				
+				
 		addButton("Close", "Continue on your way", "endthescene")
 		addButtonUnlessLate("Wait here", "Spend some time idling", "wait")
 		addButton("Masturbate", "Do the thing", "domasturbate")
@@ -78,10 +82,19 @@ func _run():
 		addButton("Pronouns", "Pick your pronouns", "pickpronouns")
 		if(!getFlag(Flag.Game_PickedStartingPerks, false)):
 			addButton("Pick Perks!", "Pick your starting perks. You can only do this once", "pickstartingperks")
-
+		#addButton("[debug] Struggle", "Test the struggle minigame", "teststruggle")
+		
 	if(state == "domasturbate"):
 		saynn("You remove some stress by masturbating (temporary text)")
 		
+		addButton("Continue", "Good", "")
+		
+	if(state == "teststruggle"):
+		var game = minigameScene.instance()
+		game.setDifficulty(4)
+		game.connect("minigameCompleted", self, "onMinigameTest")
+		GM.ui.addCustomControl("minigame", game)
+
 		addButton("Continue", "Good", "")
 
 	if(state == "pickgender"):
@@ -112,6 +125,9 @@ func _run():
 		addButton("2 hours", "Wait this much", "dowait", [2*60*60])
 		addButton("3 hours", "Wait this much", "dowait", [3*60*60])
 		addButton("back", "Don't wait", "")
+
+func onMinigameTest(_score):
+	GM.main.pickOption("", [])
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):

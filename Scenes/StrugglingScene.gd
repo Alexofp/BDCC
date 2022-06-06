@@ -9,6 +9,9 @@ var keyGameTries: int = 5
 var keyGameValue: int = 50
 var keyText = ""
 var fightMode = false
+var restraintID = ""
+
+var minigameScene = preload("res://Game/Minigames/Struggling/StrugglingGame.tscn")
 
 func _init():
 	sceneID = "StrugglingScene"
@@ -45,7 +48,7 @@ func _run():
 				continue
 			
 			if(GM.pc.getStamina() > 0):
-				addButton(item.getVisibleName(), "Focus on this restraint", "struggleAgainst", [item.getUniqueID()])
+				addButton(item.getVisibleName(), "Focus on this restraint", "startStruggleAgainst", [item.getUniqueID()])
 			else:
 				addDisabledButton(item.getVisibleName(), "You are out of stamina")
 
@@ -81,6 +84,17 @@ func _run():
 		saynn("Oops, you dropped the key and it broke. There goes that.")
 		
 		addButton("Continue", "Heck", "checkifokay")
+
+	if(state == "startStruggleAgainst"):
+		var item = GM.pc.getInventory().getItemByUniqueID(restraintID)
+		var restraintData: RestraintData = item.getRestraintData()
+		
+		var game = minigameScene.instance()
+		game.setDifficulty(restraintData.getLevel())
+		game.connect("minigameCompleted", self, "onMinigameCompleted")
+		GM.ui.addCustomControl("minigame", game)
+		
+		addButton("Give up", "Give up the struggle and lose 10 stamina", "giveupstruggle")
 
 	if(state == "struggleAgainst"):
 		saynn(struggleText)
@@ -121,14 +135,36 @@ func _run():
 		saynn("You successfully unlocked the restraint. The key snaps in half, rendering it useless")
 		
 		addButton("Continue", "Good", "checkifokay")
+
+func onMinigameCompleted(result):
+	GM.main.pickOption("struggleAgainst", [restraintID, result])
+		
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
 		endScene()
 		return
+		
+	if(_action == "giveupstruggle"):
+		GM.pc.addStamina(-10)
+		restraintID = ""
+		setState("")
+		return
+		
+	if(_action == "startStruggleAgainst"):
+		var item = GM.pc.getInventory().getItemByUniqueID(_args[0])
+		var restraintData: RestraintData = item.getRestraintData()
+		
+		if(!restraintData.shouldDoStruggleMinigame(GM.pc)):
+			_action = "struggleAgainst"
+		else:
+			restraintID = _args[0]
 
 	if(_action == "struggleAgainst"):
 		var item = GM.pc.getInventory().getItemByUniqueID(_args[0])
 		var restraintData: RestraintData = item.getRestraintData()
+		var minigameStatus = 1.0
+		if(_args.size() > 1):
+			minigameStatus = float(_args[1]) * 5.0
 		
 		var damage = 0.0
 		var addLust = 0
@@ -137,7 +173,7 @@ func _react(_action: String, _args):
 		
 		var struggleData = restraintData.doStruggle(GM.pc)
 		if(struggleData.has("damage")):
-			damage = struggleData["damage"]
+			damage = struggleData["damage"] * minigameStatus
 		if(struggleData.has("lust") && struggleData["lust"] > 0):
 			addLust = struggleData["lust"]
 		if(struggleData.has("pain") && struggleData["pain"] > 0):
@@ -165,6 +201,7 @@ func _react(_action: String, _args):
 			
 		if(damage != 0.0):
 			restraintData.takeDamage(damage)
+			addMessage("You made "+str(Util.roundF(damage*100.0, 1))+"% of progress")
 		if(addLust != 0):
 			addLust = GM.pc.receiveDamage(DamageType.Lust, addLust)
 			addMessage("You received "+str(addLust)+" lust")
@@ -296,6 +333,7 @@ func saveData():
 	data["keyGameValue"] = keyGameValue
 	data["keyText"] = keyText
 	data["fightMode"] = fightMode
+	data["restraintID"] = restraintID
 	
 	return data
 	
@@ -312,3 +350,4 @@ func loadData(data):
 	keyGameValue = SAVE.loadVar(data, "keyGameValue", 50)
 	keyText = SAVE.loadVar(data, "keyText", "")
 	fightMode = SAVE.loadVar(data, "fightMode", false)
+	restraintID = SAVE.loadVar(data, "restraintID", "")
