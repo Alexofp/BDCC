@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 ### Added
 - Ability to choose what items do you wanna loot after winning a fight
+- New osu-like minigame for struggling out of restraints
 
 ## [0.0.14] - 2022-06-04
 ### Added
