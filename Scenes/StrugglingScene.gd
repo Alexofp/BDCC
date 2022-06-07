@@ -164,7 +164,10 @@ func _react(_action: String, _args):
 		var restraintData: RestraintData = item.getRestraintData()
 		var minigameStatus = 1.0
 		if(_args.size() > 1):
-			minigameStatus = float(_args[1]) * 5.0
+			var minigameResult = float(_args[1])
+			minigameStatus = pow(minigameResult, 3) * 5.0
+			if(minigameResult >= 1.0 && GM.pc.hasPerk(Perk.BDSMBetterStruggling)):
+				minigameStatus *= 2.0
 		
 		var damage = 0.0
 		var addLust = 0

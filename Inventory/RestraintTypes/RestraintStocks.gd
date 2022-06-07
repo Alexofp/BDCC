@@ -50,11 +50,11 @@ func doStruggle(_pc):
 	if(_legsFree):
 		text = "You wiggle your whole body to try and escape."
 		damage = calcDamage()
-		stamina = 20
+		stamina = 70
 	else:
 		text = "You helplessly wiggle your body, having your legs restrained makes this pretty much uselss."
 		damage = calcDamage(0.5)
-		stamina = RNG.randi_range(20, 30)
+		stamina = RNG.randi_range(70, 90)
 		
 	if(luckChance(1)):
 		text += " You managed to free one of your hands!"

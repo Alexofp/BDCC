@@ -74,7 +74,7 @@ func checkNewLevel():
 		emit_signal("levelChanged", id, level)
 
 func getLevelCap():
-	return 10
+	return 100
 
 func onNewDay():
 	activities.clear()

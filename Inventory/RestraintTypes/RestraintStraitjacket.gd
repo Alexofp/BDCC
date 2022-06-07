@@ -22,7 +22,7 @@ func doStruggle(_pc):
 	
 	text = "You helplessly try to wiggle the straitjacket off."
 	damage = calcDamage()
-	stamina = RNG.randi_range(20, 40)
+	stamina = RNG.randi_range(50, 60)
 	
 	#damage = calcDamage()
 	

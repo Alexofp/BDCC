@@ -37,6 +37,7 @@ const BDSMBondageSlut = "BDSMBondageSlut"
 const BDSMCollector = "BDSMCollector"
 const BDSMBetterKeys = "BDSMBetterKeys"
 const BDSMTallyMarks = "BDSMTallyMarks"
+const BDSMBetterStruggling = "BDSMBetterStruggling"
 
 # Milking perks
 const MilkSquirt = "MilkSquirt"
