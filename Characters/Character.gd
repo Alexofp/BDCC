@@ -196,3 +196,8 @@ func onCharacterReadyToGiveBirth():
 		
 		for child in bornChildren:
 			GM.CS.addChild(child)
+
+func getAiStrategy(_battleName):
+	var basicAI = BasicAI.new()
+	basicAI.setCharacterID(id)
+	return basicAI

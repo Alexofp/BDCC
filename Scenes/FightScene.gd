@@ -12,6 +12,7 @@ var savedAIAttackID = ""
 var battleName = ""
 var currentAttackerID = ""
 var currentReceiverID = ""
+var enemyAIStrategy: AIStrategyBase
 
 func _init():
 	sceneID = "FightScene"
@@ -24,6 +25,9 @@ func _initScene(_args = []):
 	
 	if(_args.size() > 1):
 		battleName = _args[1]
+		
+	enemyAIStrategy = enemyCharacter.getAiStrategy(battleName)
+	enemyAIStrategy.onBattleStart(GM.pc)
 
 func _run():
 	updateFightCharacter()
@@ -188,7 +192,7 @@ func _react(_action: String, _args):
 		
 		var attackID = _args[0]
 		whatPlayerDid += doPlayerAttack(attackID)
-		whatEnemyDid = aiTurn()
+		whatEnemyDid += aiTurn()
 
 		afterTurnChecks()
 		return
@@ -198,7 +202,7 @@ func _react(_action: String, _args):
 		
 		var item = _args[0]
 		whatPlayerDid += item.useInCombatWithBuffs(GM.pc, enemyCharacter)
-		whatEnemyDid = aiTurn()
+		whatEnemyDid += aiTurn()
 
 		afterTurnChecks()
 		return
@@ -208,7 +212,7 @@ func _react(_action: String, _args):
 		
 		whatPlayerDid += doPlayerAttack("trygetupattack")
 		
-		whatEnemyDid = aiTurn()
+		whatEnemyDid += aiTurn()
 
 		afterTurnChecks()
 		return
@@ -222,7 +226,7 @@ func _react(_action: String, _args):
 		#whatPlayerDid += "\n"+enemyCharacter._getName()+" received 10 damage!"
 		whatPlayerDid += doPlayerAttack("simplekickattack")
 		
-		whatEnemyDid = aiTurn()
+		whatEnemyDid += aiTurn()
 
 		afterTurnChecks()
 		return
@@ -231,7 +235,7 @@ func _react(_action: String, _args):
 		
 		whatPlayerDid = "You decide to wait for a good moment to attack"
 		
-		whatEnemyDid = aiTurn()
+		whatEnemyDid += aiTurn()
 		
 		afterTurnChecks()
 		return
@@ -259,7 +263,7 @@ func _react(_action: String, _args):
 			assert(false, "Bad attack: "+savedAIAttackID)
 			
 		setEnemyAsAttacker()
-		whatEnemyDid = GM.ui.processString(attack.doAttack(enemyCharacter, GM.pc))
+		whatEnemyDid += GM.ui.processString(attack.doAttack(enemyCharacter, GM.pc))
 		savedAIAttackID = ""
 		
 		GM.pc.setFightingStateNormal()
@@ -330,15 +334,24 @@ func aiTurn():
 	if(enemyCharacter.getPain() >= enemyCharacter.painThreshold() || enemyCharacter.getLust() >= enemyCharacter.lustThreshold()):
 		return ""
 	
+	setEnemyAsAttacker()
 	var enemyText = "It's "+enemyCharacter.getName()+"'s turn\n"
-	var attackID = getBestAIAttack()
+	if(enemyAIStrategy != null):
+		var strategyText = enemyAIStrategy.turnPassed(GM.pc)
+		if(strategyText != null && strategyText != ""):
+			enemyText += GM.ui.processString(strategyText) + "\n\n"
 	
-	var attack: Attack = GlobalRegistry.getAttack(attackID)
+	var attackID: String = ""
+	var attack: Attack
+	if(enemyAIStrategy != null):
+		attackID = enemyAIStrategy.getNextAttackFinal(GM.pc)
+		attack = GlobalRegistry.getAttack(attackID)
 	if(attack == null):
-		assert(false, "Bad attack: "+attackID)
+		printerr("Bad attack "+str(attackID))
+		attackID = "blunderAttack"
+		attack = GlobalRegistry.getAttack(attackID)
 		
 	if(!attack.canBeDodgedByPlayer(enemyCharacter, GM.pc)):	
-		setEnemyAsAttacker()
 		enemyText += GM.ui.processString(attack.doAttack(enemyCharacter, GM.pc))
 	else:
 		savedAIAttackID = attackID
@@ -469,7 +482,7 @@ func _react_scene_end(_tag, _result):
 		setState("fighting")
 		beforeTurnChecks()
 		
-		whatEnemyDid = aiTurn()
+		whatEnemyDid += aiTurn()
 
 		afterTurnChecks()
 	if(_tag == "lootingscene"):
@@ -492,6 +505,9 @@ func saveData():
 	data["currentAttackerID"] = currentAttackerID
 	data["currentReceiverID"] = currentReceiverID
 	
+	if(enemyAIStrategy != null):
+		data["enemyStrategyData"] = enemyAIStrategy.saveData()
+	
 	return data
 	
 func loadData(data):
@@ -509,3 +525,7 @@ func loadData(data):
 	battleName = SAVE.loadVar(data, "battleName", "")
 	currentAttackerID = SAVE.loadVar(data, "currentAttackerID", "")
 	currentReceiverID = SAVE.loadVar(data, "currentReceiverID", "")
+	
+	enemyAIStrategy = enemyCharacter.getAiStrategy(battleName)
+	enemyAIStrategy.setCharacterID(enemyID)
+	enemyAIStrategy.loadData(SAVE.loadVar(data, "enemyStrategyData", {}))
