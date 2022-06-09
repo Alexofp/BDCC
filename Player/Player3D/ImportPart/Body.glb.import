@@ -2,12 +2,12 @@
 
 importer="scene"
 type="PackedScene"
-path="res://.import/Body.glb-660c5649446f590569e682af98c4ed4e.scn"
+path="res://.import/Body.glb-1843e25bce624565cd4cc70d34d33061.scn"
 
 [deps]
 
-source_file="res://Player/Limbs3D/ImportPart/Body.glb"
-dest_files=[ "res://.import/Body.glb-660c5649446f590569e682af98c4ed4e.scn" ]
+source_file="res://Player/Player3D/ImportPart/Body.glb"
+dest_files=[ "res://.import/Body.glb-1843e25bce624565cd4cc70d34d33061.scn" ]
 
 [params]
 

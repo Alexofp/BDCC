@@ -2,8 +2,8 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/body.png-ba19f67b480ddf5946bde109877743a0.s3tc.stex"
-path.etc2="res://.import/body.png-ba19f67b480ddf5946bde109877743a0.etc2.stex"
+path.s3tc="res://.import/legup.png-f399d139cd8d382b1f840ec6a545f6c3.s3tc.stex"
+path.etc2="res://.import/legup.png-f399d139cd8d382b1f840ec6a545f6c3.etc2.stex"
 metadata={
 "imported_formats": [ "s3tc", "etc2" ],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://Player/Limbs3D/Parts/Body/HumanBody/body.png"
-dest_files=[ "res://.import/body.png-ba19f67b480ddf5946bde109877743a0.s3tc.stex", "res://.import/body.png-ba19f67b480ddf5946bde109877743a0.etc2.stex" ]
+source_file="res://Player/Player3D/Parts/Legs/HumanLegs/legup.png"
+dest_files=[ "res://.import/legup.png-f399d139cd8d382b1f840ec6a545f6c3.s3tc.stex", "res://.import/legup.png-f399d139cd8d382b1f840ec6a545f6c3.etc2.stex" ]
 
 [params]
 
