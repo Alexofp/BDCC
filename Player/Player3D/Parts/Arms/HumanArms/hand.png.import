@@ -2,8 +2,8 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/icon.png-487276ed1e3a0c39cad0279d744ee560.s3tc.stex"
-path.etc2="res://.import/icon.png-487276ed1e3a0c39cad0279d744ee560.etc2.stex"
+path.s3tc="res://.import/hand.png-757931fb9caf1f9ce64f97a78d38101c.s3tc.stex"
+path.etc2="res://.import/hand.png-757931fb9caf1f9ce64f97a78d38101c.etc2.stex"
 metadata={
 "imported_formats": [ "s3tc", "etc2" ],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://icon.png"
-dest_files=[ "res://.import/icon.png-487276ed1e3a0c39cad0279d744ee560.s3tc.stex", "res://.import/icon.png-487276ed1e3a0c39cad0279d744ee560.etc2.stex" ]
+source_file="res://Player/Player3D/Parts/Arms/HumanArms/hand.png"
+dest_files=[ "res://.import/hand.png-757931fb9caf1f9ce64f97a78d38101c.s3tc.stex", "res://.import/hand.png-757931fb9caf1f9ce64f97a78d38101c.etc2.stex" ]
 
 [params]
 

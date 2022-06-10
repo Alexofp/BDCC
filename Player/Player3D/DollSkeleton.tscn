@@ -1,4 +1,7 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Player/Player3D/DollSkeleton.gd" type="Script" id=1]
+[ext_resource path="res://icon.png" type="Texture" id=2]
 
 [sub_resource type="Animation" id=1]
 resource_name = "Idle-loop"
@@ -318,6 +321,7 @@ tracks/21/enabled = true
 tracks/21/keys = PoolRealArray( 0, 1, 0, 0, 0, -8.88178e-16, -1.77636e-15, -3.5128e-16, 1, 1, 1, 1, 0.208333, 1, 0, 0, 0, -8.88178e-16, -1.77636e-15, -3.5128e-16, 1, 1, 1, 1 )
 
 [node name="DollSkeleton" type="Spatial"]
+script = ExtResource( 1 )
 
 [node name="Doll3D" type="Spatial" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.053422, 0 )
@@ -434,6 +438,15 @@ bones/21/rest = Transform( 0.45052, -0.892766, 2.37181e-07, 0.892766, 0.45052, 3
 bones/21/enabled = true
 bones/21/bound_children = [  ]
 
+[node name="BoneAttachment" type="BoneAttachment" parent="Doll3D/Skeleton"]
+transform = Transform( -0.998473, 9.46268e-07, 0.0552458, 2.16492e-07, 0.999999, -2.82307e-08, -0.0552458, -1.86265e-08, -0.998473, 0.0449876, 6.88278, -4.83086e-08 )
+bone_name = "Head"
+
+[node name="Sprite3D" type="Sprite3D" parent="Doll3D/Skeleton/BoneAttachment"]
+visible = false
+texture = ExtResource( 2 )
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "Idle-loop"
 anims/Idle-loop = SubResource( 1 )
 anims/Nothing = SubResource( 2 )

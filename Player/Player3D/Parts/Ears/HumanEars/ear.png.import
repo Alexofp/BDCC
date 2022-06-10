@@ -2,8 +2,8 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/icon.png-487276ed1e3a0c39cad0279d744ee560.s3tc.stex"
-path.etc2="res://.import/icon.png-487276ed1e3a0c39cad0279d744ee560.etc2.stex"
+path.s3tc="res://.import/ear.png-4ac4289742385ab09b3d9f932cf3c4b1.s3tc.stex"
+path.etc2="res://.import/ear.png-4ac4289742385ab09b3d9f932cf3c4b1.etc2.stex"
 metadata={
 "imported_formats": [ "s3tc", "etc2" ],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://icon.png"
-dest_files=[ "res://.import/icon.png-487276ed1e3a0c39cad0279d744ee560.s3tc.stex", "res://.import/icon.png-487276ed1e3a0c39cad0279d744ee560.etc2.stex" ]
+source_file="res://Player/Player3D/Parts/Ears/HumanEars/ear.png"
+dest_files=[ "res://.import/ear.png-4ac4289742385ab09b3d9f932cf3c4b1.s3tc.stex", "res://.import/ear.png-4ac4289742385ab09b3d9f932cf3c4b1.etc2.stex" ]
 
 [params]
 
