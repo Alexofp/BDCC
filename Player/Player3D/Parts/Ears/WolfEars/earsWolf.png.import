@@ -2,8 +2,8 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/breastscurvy.png-d1fd75661bbf05584876b5fcc0620ade.s3tc.stex"
-path.etc2="res://.import/breastscurvy.png-d1fd75661bbf05584876b5fcc0620ade.etc2.stex"
+path.s3tc="res://.import/earsWolf.png-54f022aca066adb87c8593e22247f075.s3tc.stex"
+path.etc2="res://.import/earsWolf.png-54f022aca066adb87c8593e22247f075.etc2.stex"
 metadata={
 "imported_formats": [ "s3tc", "etc2" ],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://Player/Player3D/Parts/Breasts/Curvy/breastscurvy.png"
-dest_files=[ "res://.import/breastscurvy.png-d1fd75661bbf05584876b5fcc0620ade.s3tc.stex", "res://.import/breastscurvy.png-d1fd75661bbf05584876b5fcc0620ade.etc2.stex" ]
+source_file="res://Player/Player3D/Parts/Ears/WolfEars/earsWolf.png"
+dest_files=[ "res://.import/earsWolf.png-54f022aca066adb87c8593e22247f075.s3tc.stex", "res://.import/earsWolf.png-54f022aca066adb87c8593e22247f075.etc2.stex" ]
 
 [params]
 

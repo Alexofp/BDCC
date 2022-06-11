@@ -3,7 +3,7 @@
 [ext_resource path="res://Player/Player3D/DollSkeleton.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Player/Player3D/Parts/Head/HumanHead/HumanHead.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Player/Player3D/Parts/Legs/HumanLegs/HumanLegs.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Player/Player3D/Parts/Breasts/Curvy/BreastsCurvy.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Player/Player3D/Parts/Breasts/BreastsCurvy/BreastsCurvy.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Player/Player3D/Parts/Body/HumanBody/HumanBody.tscn" type="PackedScene" id=5]
 
 [node name="DollExample" type="Spatial"]
