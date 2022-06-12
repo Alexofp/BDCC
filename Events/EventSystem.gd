@@ -88,6 +88,9 @@ func triggerOnlyDelayed(_triggerType, _args = null, _passArgs = null):
 func doDelayedEvents():
 	for eventID in delayedEvents:
 		var event = GlobalRegistry.getEvent(eventID)
+		if(event == null):
+			printerr("Trying to run an event that doesn't exist "+str(eventID))
+			continue
 		event.delayedRun()
 
 func clearDelayedEvents():

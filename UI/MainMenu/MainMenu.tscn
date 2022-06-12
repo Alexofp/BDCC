@@ -187,7 +187,7 @@ margin_right = 754.0
 margin_bottom = 230.0
 bbcode_enabled = true
 bbcode_text = "[center]An erotic text-based rpg about being a prisoner in a space prison.[/center]"
-text = "[center]An erotic text-based rpg about being a prisoner in a space prison.[/center]"
+text = "An erotic text-based rpg about being a prisoner in a space prison."
 fit_content_height = true
 
 [node name="MarginContainer2" type="MarginContainer" parent="HBoxContainer/MainVBox/ScrollContainer/VBoxContainer"]
@@ -242,7 +242,7 @@ margin_right = 754.0
 margin_bottom = 478.0
 bbcode_enabled = true
 bbcode_text = "[right]Created by Rahi[/right]"
-text = "[right]Created by Rahi[/right]"
+text = "Created by Rahi"
 fit_content_height = true
 
 [node name="GridContainer" type="GridContainer" parent="HBoxContainer/MainVBox"]
