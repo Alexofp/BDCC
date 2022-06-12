@@ -3,11 +3,14 @@ extends VBoxContainer
 onready var grid = $FlexGridContainer
 onready var nameLabel = $NameLabel
 onready var creditsLabel = $CreditsLabel
-onready var camera = $ViewportContainer/Viewport/Camera2D
-onready var theStage = $ViewportContainer/Viewport/TheStage
+#onready var camera = $ViewportContainer/Viewport/Camera2D
+onready var camera = $Viewport/Camera2D
+#onready var theStage = $ViewportContainer/Viewport/TheStage
+onready var theStage = $Viewport/TheStage
 onready var doll = theStage.getPlayerDoll()
 onready var tooltip = $CanvasLayer/TooltipDisplay
-onready var viewport = $ViewportContainer/Viewport
+onready var viewport = $Viewport
+#onready var viewport = $ViewportContainer/Viewport
 onready var staminaBar = $StaminaBar
 onready var painBar = $PainBar
 onready var lustBar = $LustBar

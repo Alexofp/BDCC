@@ -198,7 +198,7 @@ func setDarknessSize(darknessSize):
 	$CanvasLayer/DarknessControl/DCenter.margin_right = darknessSize
 	$CanvasLayer/DarknessControl/DCenter.margin_bottom = darknessSize
 
-	$CanvasLayer/DarknessControl/DTop.margin_bottom = -darknessSize
-	$CanvasLayer/DarknessControl/DBottom.margin_top = darknessSize
-	$CanvasLayer/DarknessControl/DLeft.margin_right = -darknessSize
-	$CanvasLayer/DarknessControl/DRight.margin_left = darknessSize
+	$CanvasLayer/DarknessControl/DTop.margin_bottom = -darknessSize + 0.5
+	$CanvasLayer/DarknessControl/DBottom.margin_top = darknessSize - 0.5
+	$CanvasLayer/DarknessControl/DLeft.margin_right = -darknessSize + 0.5
+	$CanvasLayer/DarknessControl/DRight.margin_left = darknessSize - 0.5

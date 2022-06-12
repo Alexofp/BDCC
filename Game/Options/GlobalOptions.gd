@@ -9,16 +9,21 @@ var eggCellLifespanHours: int
 var playerPregnancyTimeDays: int
 var npcPregnancyTimeDays: int
 
+var shouldScaleUI: bool = true
+
 func resetToDefaults():
 	fetchNewRelease = true
 	menstrualCycleLengthDays = 7
 	eggCellLifespanHours = 48
 	playerPregnancyTimeDays = 5
 	npcPregnancyTimeDays = 5
+	shouldScaleUI = true
 	
 	enabledContent.clear()
 	for contentType in ContentType.getAll():
 		enabledContent[contentType] = !ContentType.isDisabledByDefault(contentType)
+		
+	call_deferred("applySettingsEffect")
 
 func _init():
 
@@ -49,38 +54,38 @@ func getNPCPregnancyTimeDays():
 
 func getChangeableOptions():
 	var settings = [
-		{
-			"name": "Test category",
-			"id": "testCategory",
-			"options": [
-				{
-					"name": "Test option",
-					"description": "test description",
-					"id": "test_option",
-					"type": "checkbox",
-					"value": true,
-				},
-				{
-					"name": "Test option 2",
-					"description": "mew mew test description",
-					"id": "test_option2",
-					"type": "list",
-					"value": "v1",
-					"values": [
-						["v0", "Meow meow v0"],
-						["v1", "Nya v1"],
-						["v2", "Hah v2"],
-					],
-				},
-				{
-					"name": "Test option 3",
-					"description": "Float test",
-					"id": "test_option3",
-					"type": "float",
-					"value": 0.5,
-				},
-			],
-		},
+#		{
+#			"name": "Test category",
+#			"id": "testCategory",
+#			"options": [
+#				{
+#					"name": "Test option",
+#					"description": "test description",
+#					"id": "test_option",
+#					"type": "checkbox",
+#					"value": true,
+#				},
+#				{
+#					"name": "Test option 2",
+#					"description": "mew mew test description",
+#					"id": "test_option2",
+#					"type": "list",
+#					"value": "v1",
+#					"values": [
+#						["v0", "Meow meow v0"],
+#						["v1", "Nya v1"],
+#						["v2", "Hah v2"],
+#					],
+#				},
+#				{
+#					"name": "Test option 3",
+#					"description": "Float test",
+#					"id": "test_option3",
+#					"type": "float",
+#					"value": 0.5,
+#				},
+#			],
+#		},
 		{
 			"name": "Pregnancy settings",
 			"id": "pregnancy",
@@ -126,6 +131,13 @@ func getChangeableOptions():
 					"type": "checkbox",
 					"value": fetchNewRelease,
 				},
+				{
+					"name": "UI scaling",
+					"description": "Should the game scale the ui for different resolutions. Don't turn off on mobile!",
+					"id": "shouldScaleUI",
+					"type": "checkbox",
+					"value": shouldScaleUI,
+				},
 			],
 		}
 	]
@@ -161,12 +173,22 @@ func applyOption(categoryID, optionID, value):
 	if(categoryID == "other"):
 		if(optionID == "fetchLatestRelease"):
 			fetchNewRelease = value
-	
+		if(optionID == "shouldScaleUI"):
+			shouldScaleUI = value
+			
+			if(shouldScaleUI):
+				get_tree().set_screen_stretch(SceneTree.STRETCH_MODE_2D,SceneTree.STRETCH_ASPECT_EXPAND,Vector2(1280,720))
+			else:
+				get_tree().set_screen_stretch(SceneTree.STRETCH_MODE_DISABLED,SceneTree.STRETCH_ASPECT_EXPAND,Vector2(1280,720))
 	if(categoryID == "enabledContent"):
 		enabledContent[optionID] = value
 	print("SETTING "+categoryID+":"+optionID+" TO "+str(value))
 
-
+func applySettingsEffect():
+	if(shouldScaleUI):
+		get_tree().set_screen_stretch(SceneTree.STRETCH_MODE_2D,SceneTree.STRETCH_ASPECT_EXPAND,Vector2(1280,720))
+	else:
+		get_tree().set_screen_stretch(SceneTree.STRETCH_MODE_DISABLED,SceneTree.STRETCH_ASPECT_EXPAND,Vector2(1280,720))
 
 func saveData():
 	var data = {
@@ -177,6 +199,7 @@ func saveData():
 		"eggCellLifespanHours": eggCellLifespanHours,
 		"playerPregnancyTimeDays": playerPregnancyTimeDays,
 		"npcPregnancyTimeDays": npcPregnancyTimeDays,
+		"shouldScaleUI": shouldScaleUI,
 	}
 	
 	return data
@@ -188,6 +211,7 @@ func loadData(data):
 	eggCellLifespanHours = loadVar(data, "eggCellLifespanHours", 48)
 	playerPregnancyTimeDays = loadVar(data, "playerPregnancyTimeDays", 5)
 	npcPregnancyTimeDays = loadVar(data, "npcPregnancyTimeDays", 5)
+	shouldScaleUI = loadVar(data, "shouldScaleUI", true)
 
 func saveToFile():
 	var saveData = saveData()
