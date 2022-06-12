@@ -4,15 +4,16 @@ importer="texture"
 type="StreamTexture"
 path.s3tc="res://.import/cathead.png-e2766d0f96ac3817b6f36e51b88e94de.s3tc.stex"
 path.etc2="res://.import/cathead.png-e2766d0f96ac3817b6f36e51b88e94de.etc2.stex"
+path.etc="res://.import/cathead.png-e2766d0f96ac3817b6f36e51b88e94de.etc.stex"
 metadata={
-"imported_formats": [ "s3tc", "etc2" ],
+"imported_formats": [ "s3tc", "etc2", "etc" ],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://Player/Player3D/Parts/Head/FelineHead/cathead.png"
-dest_files=[ "res://.import/cathead.png-e2766d0f96ac3817b6f36e51b88e94de.s3tc.stex", "res://.import/cathead.png-e2766d0f96ac3817b6f36e51b88e94de.etc2.stex" ]
+dest_files=[ "res://.import/cathead.png-e2766d0f96ac3817b6f36e51b88e94de.s3tc.stex", "res://.import/cathead.png-e2766d0f96ac3817b6f36e51b88e94de.etc2.stex", "res://.import/cathead.png-e2766d0f96ac3817b6f36e51b88e94de.etc.stex" ]
 
 [params]
 

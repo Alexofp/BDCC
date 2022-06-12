@@ -4,15 +4,16 @@ importer="texture"
 type="StreamTexture"
 path.s3tc="res://.import/ferrihair2.png-27959460dea809f74932714a1b66d346.s3tc.stex"
 path.etc2="res://.import/ferrihair2.png-27959460dea809f74932714a1b66d346.etc2.stex"
+path.etc="res://.import/ferrihair2.png-27959460dea809f74932714a1b66d346.etc.stex"
 metadata={
-"imported_formats": [ "s3tc", "etc2" ],
+"imported_formats": [ "s3tc", "etc2", "etc" ],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://Player/Player3D/Parts/Hair/FerriHair/ferrihair2.png"
-dest_files=[ "res://.import/ferrihair2.png-27959460dea809f74932714a1b66d346.s3tc.stex", "res://.import/ferrihair2.png-27959460dea809f74932714a1b66d346.etc2.stex" ]
+dest_files=[ "res://.import/ferrihair2.png-27959460dea809f74932714a1b66d346.s3tc.stex", "res://.import/ferrihair2.png-27959460dea809f74932714a1b66d346.etc2.stex", "res://.import/ferrihair2.png-27959460dea809f74932714a1b66d346.etc.stex" ]
 
 [params]
 

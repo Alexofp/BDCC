@@ -4,15 +4,16 @@ importer="texture"
 type="StreamTexture"
 path.s3tc="res://.import/hairsimple.png-12f26e0c6a60cea1e26f4b9a1fae3e5d.s3tc.stex"
 path.etc2="res://.import/hairsimple.png-12f26e0c6a60cea1e26f4b9a1fae3e5d.etc2.stex"
+path.etc="res://.import/hairsimple.png-12f26e0c6a60cea1e26f4b9a1fae3e5d.etc.stex"
 metadata={
-"imported_formats": [ "s3tc", "etc2" ],
+"imported_formats": [ "s3tc", "etc2", "etc" ],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://Player/Player3D/Parts/Hair/SimpleHair/hairsimple.png"
-dest_files=[ "res://.import/hairsimple.png-12f26e0c6a60cea1e26f4b9a1fae3e5d.s3tc.stex", "res://.import/hairsimple.png-12f26e0c6a60cea1e26f4b9a1fae3e5d.etc2.stex" ]
+dest_files=[ "res://.import/hairsimple.png-12f26e0c6a60cea1e26f4b9a1fae3e5d.s3tc.stex", "res://.import/hairsimple.png-12f26e0c6a60cea1e26f4b9a1fae3e5d.etc2.stex", "res://.import/hairsimple.png-12f26e0c6a60cea1e26f4b9a1fae3e5d.etc.stex" ]
 
 [params]
 

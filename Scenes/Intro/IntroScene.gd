@@ -46,7 +46,10 @@ func _run():
 
 		saynn("[say=intro_detective]Strange, we couldn’t find your dna-print in the database. Tell me your name. I will also need your sex, race and a few more things, shouldn’t take too long.[/say]")
 
-		say("Enter your name:")
+		addButton("Continue", "Enter your name", "askforname")
+
+	if(state == "askforname"):
+		say("Enter the name of your character:")
 		
 		addTextbox("player_name")
 		

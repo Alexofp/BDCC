@@ -766,7 +766,7 @@ _global_script_class_icons={
 
 config/name="BDCC"
 run/main_scene="res://UI/MainMenu/MainMenu.tscn"
-boot_splash/image="res://AssetsSource/splash.png"
+boot_splash/image="res://Images/Splash/splash.png"
 boot_splash/fullsize=false
 boot_splash/bg_color=Color( 0.145098, 0.145098, 0.501961, 1 )
 config/icon="res://icon.png"
@@ -789,6 +789,7 @@ gdscript/warnings/unsafe_cast=true
 
 window/size/width=1280
 window/size/height=720
+window/dpi/allow_hidpi=true
 window/stretch/mode="2d"
 window/stretch/aspect="expand"
 
@@ -811,5 +812,6 @@ common/enable_pause_aware_picking=true
 [rendering]
 
 quality/driver/fallback_to_gles2=true
+vram_compression/import_etc=true
 environment/default_clear_color=Color( 0.247059, 0.243137, 0.490196, 1 )
 environment/default_environment="res://default_env.tres"

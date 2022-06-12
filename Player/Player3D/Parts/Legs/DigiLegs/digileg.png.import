@@ -4,15 +4,16 @@ importer="texture"
 type="StreamTexture"
 path.s3tc="res://.import/digileg.png-556905384f0ef9693ee793db0ca6682f.s3tc.stex"
 path.etc2="res://.import/digileg.png-556905384f0ef9693ee793db0ca6682f.etc2.stex"
+path.etc="res://.import/digileg.png-556905384f0ef9693ee793db0ca6682f.etc.stex"
 metadata={
-"imported_formats": [ "s3tc", "etc2" ],
+"imported_formats": [ "s3tc", "etc2", "etc" ],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://Player/Player3D/Parts/Legs/DigiLegs/digileg.png"
-dest_files=[ "res://.import/digileg.png-556905384f0ef9693ee793db0ca6682f.s3tc.stex", "res://.import/digileg.png-556905384f0ef9693ee793db0ca6682f.etc2.stex" ]
+dest_files=[ "res://.import/digileg.png-556905384f0ef9693ee793db0ca6682f.s3tc.stex", "res://.import/digileg.png-556905384f0ef9693ee793db0ca6682f.etc2.stex", "res://.import/digileg.png-556905384f0ef9693ee793db0ca6682f.etc.stex" ]
 
 [params]
 

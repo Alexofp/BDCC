@@ -17,6 +17,7 @@ onready var lustBar = $LustBar
 onready var levelBar = $LevelBar
 
 var previousPosition: Vector2 = Vector2(0, 0)
+var startMousePosition: Vector2 = Vector2(0, 0)
 var draggingCamera: bool = false
 var mouseInsideViewport = false
 var savedTooltipDoll = null
@@ -53,7 +54,49 @@ func updateUI():
 	levelBar.setProgressBarValue(GM.pc.getSkillsHolder().getLevelProgress())
 	levelBar.setText(str(GM.pc.getSkillsHolder().getLevel()))
 
-func _input(event: InputEvent):
+func _gui_input(event: InputEvent):
+	if event is InputEventMouseButton && event.button_index == BUTTON_MIDDLE:
+		camera.position = Vector2(0, 0)
+		camera.zoom = Vector2(1, 1)
+	
+	if event is InputEventMouseButton:
+		if(event.button_index == BUTTON_WHEEL_UP):
+			camera.zoom *= 0.9
+		if(event.button_index == BUTTON_WHEEL_DOWN):
+			camera.zoom *= 1.1
+	
+	if event is InputEventMouseButton:
+		if event.pressed:
+			draggingCamera = true
+			startMousePosition = event.position
+			previousPosition = event.position
+		else:
+			draggingCamera = false
+	elif draggingCamera and event is InputEventMouseMotion:
+		var delta = previousPosition - event.position
+		camera.position += delta * camera.zoom
+		previousPosition = event.position
+
+func _old_gui_input(event: InputEvent):
+	if event is InputEventMouseButton && event.button_index == BUTTON_MIDDLE:
+		camera.position = Vector2(0, 0)
+		camera.zoom = Vector2(1, 1)
+		
+	if event is InputEventMouseButton:
+		if(event.button_index == BUTTON_WHEEL_UP):
+			camera.zoom *= 0.9
+		if(event.button_index == BUTTON_WHEEL_DOWN):
+			camera.zoom *= 1.1
+		
+	if(event is InputEventMouseMotion && Input.is_action_pressed("touch")):
+		var delta = (previousPosition - event.position) * camera.zoom
+		camera.position += delta
+		previousPosition = event.position
+
+	if(event is InputEventMouseMotion):
+		previousPosition = event.position
+
+func _oldinput(event: InputEvent):
 	if event is InputEventMouseButton && event.button_index == BUTTON_MIDDLE && mouseInsideViewport:
 		camera.position = Vector2(0, 0)
 		camera.zoom = Vector2(1, 1)

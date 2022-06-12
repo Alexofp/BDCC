@@ -4,15 +4,16 @@ importer="texture"
 type="StreamTexture"
 path.s3tc="res://.import/earsWolf.png-54f022aca066adb87c8593e22247f075.s3tc.stex"
 path.etc2="res://.import/earsWolf.png-54f022aca066adb87c8593e22247f075.etc2.stex"
+path.etc="res://.import/earsWolf.png-54f022aca066adb87c8593e22247f075.etc.stex"
 metadata={
-"imported_formats": [ "s3tc", "etc2" ],
+"imported_formats": [ "s3tc", "etc2", "etc" ],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://Player/Player3D/Parts/Ears/WolfEars/earsWolf.png"
-dest_files=[ "res://.import/earsWolf.png-54f022aca066adb87c8593e22247f075.s3tc.stex", "res://.import/earsWolf.png-54f022aca066adb87c8593e22247f075.etc2.stex" ]
+dest_files=[ "res://.import/earsWolf.png-54f022aca066adb87c8593e22247f075.s3tc.stex", "res://.import/earsWolf.png-54f022aca066adb87c8593e22247f075.etc2.stex", "res://.import/earsWolf.png-54f022aca066adb87c8593e22247f075.etc.stex" ]
 
 [params]
 

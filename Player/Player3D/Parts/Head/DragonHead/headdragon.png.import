@@ -4,15 +4,16 @@ importer="texture"
 type="StreamTexture"
 path.s3tc="res://.import/headdragon.png-fb5ec5ffbab3a7473938d15a36c3eb6d.s3tc.stex"
 path.etc2="res://.import/headdragon.png-fb5ec5ffbab3a7473938d15a36c3eb6d.etc2.stex"
+path.etc="res://.import/headdragon.png-fb5ec5ffbab3a7473938d15a36c3eb6d.etc.stex"
 metadata={
-"imported_formats": [ "s3tc", "etc2" ],
+"imported_formats": [ "s3tc", "etc2", "etc" ],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://Player/Player3D/Parts/Head/DragonHead/headdragon.png"
-dest_files=[ "res://.import/headdragon.png-fb5ec5ffbab3a7473938d15a36c3eb6d.s3tc.stex", "res://.import/headdragon.png-fb5ec5ffbab3a7473938d15a36c3eb6d.etc2.stex" ]
+dest_files=[ "res://.import/headdragon.png-fb5ec5ffbab3a7473938d15a36c3eb6d.s3tc.stex", "res://.import/headdragon.png-fb5ec5ffbab3a7473938d15a36c3eb6d.etc2.stex", "res://.import/headdragon.png-fb5ec5ffbab3a7473938d15a36c3eb6d.etc.stex" ]
 
 [params]
 

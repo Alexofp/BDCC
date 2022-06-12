@@ -4,15 +4,16 @@ importer="texture"
 type="StreamTexture"
 path.s3tc="res://.import/earsLynx2.png-5605d83ad8b0f5f173e41bb8c80bb9f7.s3tc.stex"
 path.etc2="res://.import/earsLynx2.png-5605d83ad8b0f5f173e41bb8c80bb9f7.etc2.stex"
+path.etc="res://.import/earsLynx2.png-5605d83ad8b0f5f173e41bb8c80bb9f7.etc.stex"
 metadata={
-"imported_formats": [ "s3tc", "etc2" ],
+"imported_formats": [ "s3tc", "etc2", "etc" ],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://Player/Player3D/Parts/Ears/LynxEars2/earsLynx2.png"
-dest_files=[ "res://.import/earsLynx2.png-5605d83ad8b0f5f173e41bb8c80bb9f7.s3tc.stex", "res://.import/earsLynx2.png-5605d83ad8b0f5f173e41bb8c80bb9f7.etc2.stex" ]
+dest_files=[ "res://.import/earsLynx2.png-5605d83ad8b0f5f173e41bb8c80bb9f7.s3tc.stex", "res://.import/earsLynx2.png-5605d83ad8b0f5f173e41bb8c80bb9f7.etc2.stex", "res://.import/earsLynx2.png-5605d83ad8b0f5f173e41bb8c80bb9f7.etc.stex" ]
 
 [params]
 

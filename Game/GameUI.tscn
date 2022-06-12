@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://GlobalTheme.tres" type="Theme" id=1]
 [ext_resource path="res://Game/TooltipDisplay.tscn" type="PackedScene" id=2]
@@ -13,6 +13,7 @@
 [ext_resource path="res://UI/CharactersPanel.tscn" type="PackedScene" id=11]
 [ext_resource path="res://UI/MainMenu/InGameMenu.tscn" type="PackedScene" id=12]
 [ext_resource path="res://UI/SkillsUI/SkillsUI.tscn" type="PackedScene" id=13]
+[ext_resource path="res://Game/SmartScrollContainer.gd" type="Script" id=14]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.207843, 0.133333, 0.364706, 1 )
@@ -21,18 +22,26 @@ corner_radius_bottom_right = 16
 
 [sub_resource type="DynamicFont" id=2]
 size = 24
+use_mipmaps = true
+use_filter = true
 font_data = ExtResource( 7 )
 
 [sub_resource type="DynamicFont" id=3]
 size = 24
+use_mipmaps = true
+use_filter = true
 font_data = ExtResource( 6 )
 
 [sub_resource type="DynamicFont" id=4]
 size = 24
+use_mipmaps = true
+use_filter = true
 font_data = ExtResource( 5 )
 
 [sub_resource type="DynamicFont" id=5]
 size = 24
+use_mipmaps = true
+use_filter = true
 font_data = ExtResource( 4 )
 
 [sub_resource type="StyleBoxFlat" id=6]
@@ -205,6 +214,7 @@ margin_right = 710.0
 margin_bottom = 616.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+script = ExtResource( 14 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer2/ScrollContainer"]
 margin_right = 710.0

@@ -4,15 +4,16 @@ importer="texture"
 type="StreamTexture"
 path.s3tc="res://.import/dragonhorns.png-a45503db0fd0a94a349ef4fc9b355535.s3tc.stex"
 path.etc2="res://.import/dragonhorns.png-a45503db0fd0a94a349ef4fc9b355535.etc2.stex"
+path.etc="res://.import/dragonhorns.png-a45503db0fd0a94a349ef4fc9b355535.etc.stex"
 metadata={
-"imported_formats": [ "s3tc", "etc2" ],
+"imported_formats": [ "s3tc", "etc2", "etc" ],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://Player/Player3D/Parts/Horns/DragonHorns/dragonhorns.png"
-dest_files=[ "res://.import/dragonhorns.png-a45503db0fd0a94a349ef4fc9b355535.s3tc.stex", "res://.import/dragonhorns.png-a45503db0fd0a94a349ef4fc9b355535.etc2.stex" ]
+dest_files=[ "res://.import/dragonhorns.png-a45503db0fd0a94a349ef4fc9b355535.s3tc.stex", "res://.import/dragonhorns.png-a45503db0fd0a94a349ef4fc9b355535.etc2.stex", "res://.import/dragonhorns.png-a45503db0fd0a94a349ef4fc9b355535.etc.stex" ]
 
 [params]
 

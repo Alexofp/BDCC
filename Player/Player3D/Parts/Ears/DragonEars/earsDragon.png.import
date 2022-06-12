@@ -4,15 +4,16 @@ importer="texture"
 type="StreamTexture"
 path.s3tc="res://.import/earsDragon.png-b3a749a3806714fdfa9b40adfb8f301f.s3tc.stex"
 path.etc2="res://.import/earsDragon.png-b3a749a3806714fdfa9b40adfb8f301f.etc2.stex"
+path.etc="res://.import/earsDragon.png-b3a749a3806714fdfa9b40adfb8f301f.etc.stex"
 metadata={
-"imported_formats": [ "s3tc", "etc2" ],
+"imported_formats": [ "s3tc", "etc2", "etc" ],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://Player/Player3D/Parts/Ears/DragonEars/earsDragon.png"
-dest_files=[ "res://.import/earsDragon.png-b3a749a3806714fdfa9b40adfb8f301f.s3tc.stex", "res://.import/earsDragon.png-b3a749a3806714fdfa9b40adfb8f301f.etc2.stex" ]
+dest_files=[ "res://.import/earsDragon.png-b3a749a3806714fdfa9b40adfb8f301f.s3tc.stex", "res://.import/earsDragon.png-b3a749a3806714fdfa9b40adfb8f301f.etc2.stex", "res://.import/earsDragon.png-b3a749a3806714fdfa9b40adfb8f301f.etc.stex" ]
 
 [params]
 

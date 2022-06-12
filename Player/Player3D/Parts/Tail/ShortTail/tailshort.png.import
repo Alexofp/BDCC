@@ -4,15 +4,16 @@ importer="texture"
 type="StreamTexture"
 path.s3tc="res://.import/tailshort.png-5ff2355d11ddf87e81cff51062c00c1b.s3tc.stex"
 path.etc2="res://.import/tailshort.png-5ff2355d11ddf87e81cff51062c00c1b.etc2.stex"
+path.etc="res://.import/tailshort.png-5ff2355d11ddf87e81cff51062c00c1b.etc.stex"
 metadata={
-"imported_formats": [ "s3tc", "etc2" ],
+"imported_formats": [ "s3tc", "etc2", "etc" ],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://Player/Player3D/Parts/Tail/ShortTail/tailshort.png"
-dest_files=[ "res://.import/tailshort.png-5ff2355d11ddf87e81cff51062c00c1b.s3tc.stex", "res://.import/tailshort.png-5ff2355d11ddf87e81cff51062c00c1b.etc2.stex" ]
+dest_files=[ "res://.import/tailshort.png-5ff2355d11ddf87e81cff51062c00c1b.s3tc.stex", "res://.import/tailshort.png-5ff2355d11ddf87e81cff51062c00c1b.etc2.stex", "res://.import/tailshort.png-5ff2355d11ddf87e81cff51062c00c1b.etc.stex" ]
 
 [params]
 

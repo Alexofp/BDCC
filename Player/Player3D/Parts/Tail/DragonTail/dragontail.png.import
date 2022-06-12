@@ -4,15 +4,16 @@ importer="texture"
 type="StreamTexture"
 path.s3tc="res://.import/dragontail.png-77af387d2c64463221b12f02ab39be7d.s3tc.stex"
 path.etc2="res://.import/dragontail.png-77af387d2c64463221b12f02ab39be7d.etc2.stex"
+path.etc="res://.import/dragontail.png-77af387d2c64463221b12f02ab39be7d.etc.stex"
 metadata={
-"imported_formats": [ "s3tc", "etc2" ],
+"imported_formats": [ "s3tc", "etc2", "etc" ],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://Player/Player3D/Parts/Tail/DragonTail/dragontail.png"
-dest_files=[ "res://.import/dragontail.png-77af387d2c64463221b12f02ab39be7d.s3tc.stex", "res://.import/dragontail.png-77af387d2c64463221b12f02ab39be7d.etc2.stex" ]
+dest_files=[ "res://.import/dragontail.png-77af387d2c64463221b12f02ab39be7d.s3tc.stex", "res://.import/dragontail.png-77af387d2c64463221b12f02ab39be7d.etc2.stex", "res://.import/dragontail.png-77af387d2c64463221b12f02ab39be7d.etc.stex" ]
 
 [params]
 

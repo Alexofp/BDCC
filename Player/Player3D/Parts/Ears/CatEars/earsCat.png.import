@@ -4,15 +4,16 @@ importer="texture"
 type="StreamTexture"
 path.s3tc="res://.import/earsCat.png-7fc3f0ae4dd4662293d5ba8284967374.s3tc.stex"
 path.etc2="res://.import/earsCat.png-7fc3f0ae4dd4662293d5ba8284967374.etc2.stex"
+path.etc="res://.import/earsCat.png-7fc3f0ae4dd4662293d5ba8284967374.etc.stex"
 metadata={
-"imported_formats": [ "s3tc", "etc2" ],
+"imported_formats": [ "s3tc", "etc2", "etc" ],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://Player/Player3D/Parts/Ears/CatEars/earsCat.png"
-dest_files=[ "res://.import/earsCat.png-7fc3f0ae4dd4662293d5ba8284967374.s3tc.stex", "res://.import/earsCat.png-7fc3f0ae4dd4662293d5ba8284967374.etc2.stex" ]
+dest_files=[ "res://.import/earsCat.png-7fc3f0ae4dd4662293d5ba8284967374.s3tc.stex", "res://.import/earsCat.png-7fc3f0ae4dd4662293d5ba8284967374.etc2.stex", "res://.import/earsCat.png-7fc3f0ae4dd4662293d5ba8284967374.etc.stex" ]
 
 [params]
 

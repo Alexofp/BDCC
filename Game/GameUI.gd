@@ -45,6 +45,9 @@ func _ready():
 		optionButtonsContainer.add_child(newbutton)
 		
 	updateButtons()
+	
+	if(OS.has_touchscreen_ui_hint()):
+		textOutput.selection_enabled = false
 		
 func say(text: String):
 	textOutput.bbcode_text += gameParser.executeString(sayParser.processString(text))

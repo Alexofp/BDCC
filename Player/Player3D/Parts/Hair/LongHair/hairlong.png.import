@@ -4,15 +4,16 @@ importer="texture"
 type="StreamTexture"
 path.s3tc="res://.import/hairlong.png-fee88f73392a4428adf6f147cbc790bd.s3tc.stex"
 path.etc2="res://.import/hairlong.png-fee88f73392a4428adf6f147cbc790bd.etc2.stex"
+path.etc="res://.import/hairlong.png-fee88f73392a4428adf6f147cbc790bd.etc.stex"
 metadata={
-"imported_formats": [ "s3tc", "etc2" ],
+"imported_formats": [ "s3tc", "etc2", "etc" ],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://Player/Player3D/Parts/Hair/LongHair/hairlong.png"
-dest_files=[ "res://.import/hairlong.png-fee88f73392a4428adf6f147cbc790bd.s3tc.stex", "res://.import/hairlong.png-fee88f73392a4428adf6f147cbc790bd.etc2.stex" ]
+dest_files=[ "res://.import/hairlong.png-fee88f73392a4428adf6f147cbc790bd.s3tc.stex", "res://.import/hairlong.png-fee88f73392a4428adf6f147cbc790bd.etc2.stex", "res://.import/hairlong.png-fee88f73392a4428adf6f147cbc790bd.etc.stex" ]
 
 [params]
 

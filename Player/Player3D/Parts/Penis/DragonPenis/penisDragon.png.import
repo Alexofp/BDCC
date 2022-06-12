@@ -4,15 +4,16 @@ importer="texture"
 type="StreamTexture"
 path.s3tc="res://.import/penisDragon.png-0955ab2bd48a38144152c35a53693539.s3tc.stex"
 path.etc2="res://.import/penisDragon.png-0955ab2bd48a38144152c35a53693539.etc2.stex"
+path.etc="res://.import/penisDragon.png-0955ab2bd48a38144152c35a53693539.etc.stex"
 metadata={
-"imported_formats": [ "s3tc", "etc2" ],
+"imported_formats": [ "s3tc", "etc2", "etc" ],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://Player/Player3D/Parts/Penis/DragonPenis/penisDragon.png"
-dest_files=[ "res://.import/penisDragon.png-0955ab2bd48a38144152c35a53693539.s3tc.stex", "res://.import/penisDragon.png-0955ab2bd48a38144152c35a53693539.etc2.stex" ]
+dest_files=[ "res://.import/penisDragon.png-0955ab2bd48a38144152c35a53693539.s3tc.stex", "res://.import/penisDragon.png-0955ab2bd48a38144152c35a53693539.etc2.stex", "res://.import/penisDragon.png-0955ab2bd48a38144152c35a53693539.etc.stex" ]
 
 [params]
 

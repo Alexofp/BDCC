@@ -10,6 +10,7 @@ var playerPregnancyTimeDays: int
 var npcPregnancyTimeDays: int
 
 var shouldScaleUI: bool = true
+var uiScaleMultiplier = 1.0
 
 func resetToDefaults():
 	fetchNewRelease = true
@@ -18,6 +19,7 @@ func resetToDefaults():
 	playerPregnancyTimeDays = 5
 	npcPregnancyTimeDays = 5
 	shouldScaleUI = true
+	uiScaleMultiplier = 1.0
 	
 	enabledContent.clear()
 	for contentType in ContentType.getAll():
@@ -133,10 +135,32 @@ func getChangeableOptions():
 				},
 				{
 					"name": "UI scaling",
-					"description": "Should the game scale the ui for different resolutions. Don't turn off on mobile!",
+					"description": "Should the game scale the ui for different resolutions. Disable if text is blurry.",
 					"id": "shouldScaleUI",
 					"type": "checkbox",
 					"value": shouldScaleUI,
+				},
+				{
+					"name": "UI scale multiplier",
+					"description": "Be careful when changing this value.",
+					"id": "uiScaleMultiplier",
+					"type": "list",
+					"value": uiScaleMultiplier,
+					"values": [
+						[0.5, "50%"],
+						[0.6, "60%"],
+						[0.7, "70%"],
+						[0.8, "80%"],
+						[0.9, "90%"],
+						[1.0, "100%"],
+						[1.05, "105%"],
+						[1.10, "110%"],
+						[1.15, "115%"],
+						[1.2, "120%"],
+						[1.25, "125%"],
+						[1.35, "135%"],
+						[1.5, "150%"],
+					],
 				},
 			],
 		}
@@ -176,17 +200,18 @@ func applyOption(categoryID, optionID, value):
 		if(optionID == "shouldScaleUI"):
 			shouldScaleUI = value
 			
-			if(shouldScaleUI):
-				get_tree().set_screen_stretch(SceneTree.STRETCH_MODE_2D,SceneTree.STRETCH_ASPECT_EXPAND,Vector2(1280,720))
-			else:
-				get_tree().set_screen_stretch(SceneTree.STRETCH_MODE_DISABLED,SceneTree.STRETCH_ASPECT_EXPAND,Vector2(1280,720))
+			applySettingsEffect()
+		if(optionID == "uiScaleMultiplier"):
+			uiScaleMultiplier = value
+			
+			applySettingsEffect()
 	if(categoryID == "enabledContent"):
 		enabledContent[optionID] = value
 	print("SETTING "+categoryID+":"+optionID+" TO "+str(value))
 
 func applySettingsEffect():
 	if(shouldScaleUI):
-		get_tree().set_screen_stretch(SceneTree.STRETCH_MODE_2D,SceneTree.STRETCH_ASPECT_EXPAND,Vector2(1280,720))
+		get_tree().set_screen_stretch(SceneTree.STRETCH_MODE_2D,SceneTree.STRETCH_ASPECT_EXPAND,Vector2(1280,720), uiScaleMultiplier)
 	else:
 		get_tree().set_screen_stretch(SceneTree.STRETCH_MODE_DISABLED,SceneTree.STRETCH_ASPECT_EXPAND,Vector2(1280,720))
 
@@ -200,6 +225,7 @@ func saveData():
 		"playerPregnancyTimeDays": playerPregnancyTimeDays,
 		"npcPregnancyTimeDays": npcPregnancyTimeDays,
 		"shouldScaleUI": shouldScaleUI,
+		"uiScaleMultiplier": uiScaleMultiplier,
 	}
 	
 	return data
@@ -212,6 +238,7 @@ func loadData(data):
 	playerPregnancyTimeDays = loadVar(data, "playerPregnancyTimeDays", 5)
 	npcPregnancyTimeDays = loadVar(data, "npcPregnancyTimeDays", 5)
 	shouldScaleUI = loadVar(data, "shouldScaleUI", true)
+	uiScaleMultiplier = loadVar(data, "uiScaleMultiplier", 1.0)
 
 func saveToFile():
 	var saveData = saveData()

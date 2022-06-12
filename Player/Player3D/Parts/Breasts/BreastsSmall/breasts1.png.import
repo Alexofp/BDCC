@@ -4,15 +4,16 @@ importer="texture"
 type="StreamTexture"
 path.s3tc="res://.import/breasts1.png-24d685b129f0ddc461d2aa769d865e4d.s3tc.stex"
 path.etc2="res://.import/breasts1.png-24d685b129f0ddc461d2aa769d865e4d.etc2.stex"
+path.etc="res://.import/breasts1.png-24d685b129f0ddc461d2aa769d865e4d.etc.stex"
 metadata={
-"imported_formats": [ "s3tc", "etc2" ],
+"imported_formats": [ "s3tc", "etc2", "etc" ],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://Player/Player3D/Parts/Breasts/BreastsSmall/breasts1.png"
-dest_files=[ "res://.import/breasts1.png-24d685b129f0ddc461d2aa769d865e4d.s3tc.stex", "res://.import/breasts1.png-24d685b129f0ddc461d2aa769d865e4d.etc2.stex" ]
+dest_files=[ "res://.import/breasts1.png-24d685b129f0ddc461d2aa769d865e4d.s3tc.stex", "res://.import/breasts1.png-24d685b129f0ddc461d2aa769d865e4d.etc2.stex", "res://.import/breasts1.png-24d685b129f0ddc461d2aa769d865e4d.etc.stex" ]
 
 [params]
 
