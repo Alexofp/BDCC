@@ -5,9 +5,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+## [0.0.15] - 2022-06-12
 ### Added
+- Android port!
 - Ability to choose what items do you wanna loot after winning a fight
-- New osu-like minigame for struggling out of restraints
+- New osu-like minigame for struggling out of restraints. Needs balancing
+- UI scaling for screens with big resolutions. Can be toggled off in the settings
 
 ## [0.0.14] - 2022-06-04
 ### Added
@@ -58,7 +62,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Turn-based fighting
 - Initial player customization
 
-[Unreleased]: https://github.com/Alexofp/BDCC/compare/0.0.14...main
+[Unreleased]: https://github.com/Alexofp/BDCC/compare/0.0.15...main
+[0.0.15]: https://github.com/Alexofp/BDCC/compare/0.0.14...0.0.15
 [0.0.14]: https://github.com/Alexofp/BDCC/compare/v0.0.13bugfix3...0.0.14
 [0.0.13bugfix3]: https://github.com/Alexofp/BDCC/compare/v0.0.13bugfix2...v0.0.13bugfix3
 [0.0.13bugfix2]: https://github.com/Alexofp/BDCC/compare/v0.0.13bugfix1...v0.0.13bugfix2
