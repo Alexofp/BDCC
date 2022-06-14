@@ -822,3 +822,24 @@ func onGivingBirth(_impregnatedEggCells: Array, _newkids: Array):
 	pass
 
 # END OF PREGNANCY STUFF
+
+func getDollParts() -> Dictionary:
+	var parts = {}
+	for bodypartSlot in bodyparts:
+		if(bodyparts[bodypartSlot] == null):
+			continue
+		var bodypart: Bodypart = bodyparts[bodypartSlot]
+		
+		var partSlot = bodypart.getSlot()
+		if(partSlot == null || partSlot == ""):
+			continue
+		
+		var partScene = bodypart.getDoll3DScene()
+		if(partScene == null || partScene == ""):
+			continue
+		
+		parts[partSlot] = partScene
+	return parts
+
+func updateDoll(_doll: Doll3D):
+	pass

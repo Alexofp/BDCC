@@ -52,7 +52,7 @@ func _react(_action: String, _args):
 		return
 
 	if(_action == "endthescene"):
-		
+		GM.pc.updateAppearance()
 		
 		if(GM.ES.trigger(Trigger.WakeUpInCell)):
 			GM.main.showLog()

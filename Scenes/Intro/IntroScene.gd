@@ -33,6 +33,7 @@ func _run():
 		aimCamera("intro_interogation")
 		setLocationName("Interogation room")
 		GM.pc.playAnimation(TheStage.SittingOnChair)
+		GM.main.playAnimation(StageScene.Solo, "kneel")
 		
 		saynn("You sit on the second chair, the one that is further from the only exit. You take a better look at the guy. He is clearly a wolf, quite tall, in his forties, gray fur, black pants and a white t-shirt.")
 
@@ -50,6 +51,7 @@ func _run():
 
 	if(state == "askforname"):
 		say("Enter the name of your character:")
+		GM.main.playAnimation(StageScene.Solo, "stand")
 		
 		addTextbox("player_name")
 		

@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Game/TooltipDisplay.tscn" type="PackedScene" id=1]
 [ext_resource path="res://GlobalTheme.tres" type="Theme" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://Fonts/Titillium-Regular.otf" type="DynamicFontData" id=6]
 [ext_resource path="res://UI/LabeledProgressBar.tscn" type="PackedScene" id=7]
 [ext_resource path="res://UI/CustomViewportControl.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Player/Stage3D/Stage3D.tscn" type="PackedScene" id=9]
 
 [sub_resource type="DynamicFont" id=1]
 size = 28
@@ -32,6 +33,8 @@ colors = PoolColorArray( 0.270588, 0.172549, 0.545098, 1, 0.678431, 0, 0.870588,
 [sub_resource type="Gradient" id=6]
 resource_local_to_scene = true
 colors = PoolColorArray( 0.172549, 0.345098, 0.545098, 1, 0.172549, 0.345098, 0.545098, 1 )
+
+[sub_resource type="Environment" id=8]
 
 [sub_resource type="ViewportTexture" id=7]
 viewport_path = NodePath("Viewport")
@@ -101,11 +104,22 @@ render_target_v_flip = true
 render_target_update_mode = 3
 
 [node name="Camera2D" type="Camera2D" parent="Viewport"]
+visible = false
 offset = Vector2( 0, -350 )
 current = true
 zoom = Vector2( 2, 2 )
 
 [node name="TheStage" parent="Viewport" instance=ExtResource( 5 )]
+visible = false
+
+[node name="Stage3D" parent="Viewport" instance=ExtResource( 9 )]
+
+[node name="Camera" type="Camera" parent="Viewport"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.141, 50 )
+environment = SubResource( 8 )
+projection = 1
+current = true
+size = 10.0
 
 [node name="CustomViewportControl" parent="." instance=ExtResource( 8 )]
 anchor_right = 0.0

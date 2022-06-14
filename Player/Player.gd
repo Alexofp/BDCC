@@ -1136,3 +1136,10 @@ func onPlayerVisiblyPregnant():
 
 func onPlayerReadyToGiveBirth():
 	GM.main.addLogMessage("It's time..", "Your belly is so swollen, it's hard to walk! You feel ready to give birth, maybe it's time to visit the nursery.")
+
+func updateDoll(doll: Doll3D):
+	var parts = getDollParts()
+	
+	doll.setParts(parts)
+	if(isVisiblyPregnant()):
+		doll.setShapeKeyValue("Pregnant", getPregnancyProgress())

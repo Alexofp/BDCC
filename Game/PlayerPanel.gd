@@ -5,6 +5,8 @@ onready var nameLabel = $NameLabel
 onready var creditsLabel = $CreditsLabel
 #onready var camera = $ViewportContainer/Viewport/Camera2D
 onready var camera = $Viewport/Camera2D
+onready var camera3d = $Viewport/Camera
+onready var stage3d = $Viewport/Stage3D
 #onready var theStage = $ViewportContainer/Viewport/TheStage
 onready var theStage = $Viewport/TheStage
 onready var doll = theStage.getPlayerDoll()
@@ -27,6 +29,8 @@ var savedTooltipBodypartSlot = null
 func _ready():
 	set_process_input(true)
 	set_process_unhandled_input(true)
+	
+	camera3d.current = true
 
 func on_player_bodypartchange():
 	doll.loadFromPlayer(GM.pc)
@@ -58,12 +62,15 @@ func _gui_input(event: InputEvent):
 	if event is InputEventMouseButton && event.button_index == BUTTON_MIDDLE:
 		camera.position = Vector2(0, 0)
 		camera.zoom = Vector2(1, 1)
+		camera3d.size = 10
 	
 	if event is InputEventMouseButton:
 		if(event.button_index == BUTTON_WHEEL_UP):
 			camera.zoom *= 0.9
+			camera3d.size *= 0.9
 		if(event.button_index == BUTTON_WHEEL_DOWN):
 			camera.zoom *= 1.1
+			camera3d.size *= 1.1
 	
 	if event is InputEventMouseButton:
 		if event.pressed:
@@ -75,6 +82,7 @@ func _gui_input(event: InputEvent):
 	elif draggingCamera and event is InputEventMouseMotion:
 		var delta = previousPosition - event.position
 		camera.position += delta * camera.zoom
+		camera3d.translate(Vector3(delta.x * camera3d.size / 500.0, -delta.y * camera3d.size / 500.0, 0.0))
 		previousPosition = event.position
 
 func _old_gui_input(event: InputEvent):
@@ -157,3 +165,6 @@ func _on_TheStage_onBodypartMouseExited(_who, _what):
 		savedTooltipDoll = null
 		savedTooltipBodypartSlot = null
 		tooltip.set_is_active(false)
+
+func getStage3d() -> Stage3D:
+	return stage3d

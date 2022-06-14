@@ -29,6 +29,7 @@ var perksBySkillGroups: Dictionary = {}
 var perksObjects: Dictionary = {}
 var lustTopics: Dictionary = {}
 var lustTopicsObjects: Array = []
+var stageScenes: Dictionary = {}
 
 var bodypartStorageNode
 
@@ -89,6 +90,8 @@ func _ready():
 	registerSpeciesFolder("res://Species/")
 	
 	registerQuestFolder("res://Quests/Quest/")
+	
+	registerStageSceneFolder("res://Player/StageScene3D/Scenes/")
 	
 	registerModule("res://Modules/TaviModule/Tavi_module.gd")
 	registerModule("res://Modules/RahiModule/Rahi_module.gd")
@@ -619,3 +622,35 @@ func getLustTopic(id: String):
 
 func getLustTopicObjects():
 	return lustTopicsObjects
+
+
+
+func registerStageScene(path: String):
+	var item:PackedScene = load(path)
+	var itemObject = item.instance()
+	stageScenes[itemObject.id] = item
+	itemObject.queue_free()
+
+func registerStageSceneFolder(folder: String):
+	var dir = Directory.new()
+	if dir.open(folder) == OK:
+		dir.list_dir_begin()
+		var file_name = dir.get_next()
+		while file_name != "":
+			if dir.current_is_dir():
+				pass
+				#print("Found directory: " + file_name)
+			else:
+				if(file_name.get_extension() == "tscn"):
+					var full_path = folder.plus_file(file_name)
+					#print("Registered stage scene: " + full_path)
+					registerStageScene(full_path)
+			file_name = dir.get_next()
+	else:
+		printerr("An error occurred when trying to access the path "+folder)
+		
+func createStageScene(id: String):
+	if(!stageScenes.has(id)):
+		printerr("ERROR: stage scene with the id "+id+" wasn't found")
+		return null
+	return stageScenes[id].instance()

@@ -7,3 +7,6 @@ func _init():
 
 func getCompatibleSpecies():
 	return [Species.Canine, Species.Wolf]
+
+func getDoll3DScene():
+	return "res://Player/Player3D/Parts/Ears/CanineEars/CanineEars.tscn"

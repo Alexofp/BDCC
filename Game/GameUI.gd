@@ -277,3 +277,6 @@ func _on_Player_bodypart_changed():
 
 func _on_Player_stat_changed():
 	playerPanel.on_player_statchange()
+
+func getStage3d() -> Stage3D:
+	return playerPanel.getStage3d()

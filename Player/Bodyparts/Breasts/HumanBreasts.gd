@@ -22,3 +22,15 @@ func _getDollType():
 
 func getCompatibleSpecies():
 	return [Species.Any]
+
+func getDoll3DScene():
+	var thesize = getSize()
+	if(thesize <= BreastsSize.FLAT):
+		return "res://Player/Player3D/Parts/Breasts/BreastsFlat/BreastsFlat.tscn"
+	if(thesize <= BreastsSize.A):
+		return "res://Player/Player3D/Parts/Breasts/BreastsSmall/BreastsSmall.tscn"
+	if(thesize <= BreastsSize.B):
+		return "res://Player/Player3D/Parts/Breasts/BreastsMedium/BreastsMedium.tscn"
+	if(thesize <= BreastsSize.C):
+		return "res://Player/Player3D/Parts/Breasts/BreastsCurvy/BreastsCurvy.tscn"
+	return "res://Player/Player3D/Parts/Breasts/BreastsBig/BreastsBig.tscn"

@@ -13,3 +13,6 @@ func getLewdSizeAdjective():
 
 func getLewdAdjective():
 	return RNG.pick(["feline", "fluffy"])
+
+func getDoll3DScene():
+	return "res://Player/Player3D/Parts/Tail/FelineTail/FelineTail.tscn"

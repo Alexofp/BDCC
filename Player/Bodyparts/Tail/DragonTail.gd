@@ -13,3 +13,6 @@ func getLewdSizeAdjective():
 
 func getLewdAdjective():
 	return RNG.pick(["scaly", "dragon"])
+
+func getDoll3DScene():
+	return "res://Player/Player3D/Parts/Tail/DragonTail/DragonTail.tscn"

@@ -10,3 +10,6 @@ func getCompatibleSpecies():
 
 func getHybridPriority():
 	return -1
+
+func getDoll3DScene():
+	return "res://Player/Player3D/Parts/Ears/HumanEars/HumanEars.tscn"

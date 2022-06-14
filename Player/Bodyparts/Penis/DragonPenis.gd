@@ -10,3 +10,6 @@ func getCompatibleSpecies():
 
 func getLewdAdjective():
 	return RNG.pick(["knotted", "ribbed", "dragon"])
+
+func getDoll3DScene():
+	return "res://Player/Player3D/Parts/Penis/DragonPenis/DragonPenis.tscn"

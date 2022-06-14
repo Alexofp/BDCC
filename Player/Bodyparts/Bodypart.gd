@@ -16,6 +16,9 @@ func _init():
 func _getDollType():
 	return dollType
 
+func getDoll3DScene():
+	return null
+
 func getLimbSlot():
 	return limbSlot
 
