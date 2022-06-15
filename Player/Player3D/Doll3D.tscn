@@ -1,9 +1,7 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Player/Player3D/DollSkeleton.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Player/Player3D/Doll3D.gd" type="Script" id=2]
-
-[sub_resource type="Environment" id=1]
 
 [node name="Doll3D" type="Spatial"]
 script = ExtResource( 2 )
@@ -12,6 +10,5 @@ script = ExtResource( 2 )
 
 [node name="Camera" type="Camera" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.141, 50 )
-environment = SubResource( 1 )
 projection = 1
 size = 10.0

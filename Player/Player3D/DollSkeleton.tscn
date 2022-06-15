@@ -1154,6 +1154,7 @@ bones/27/enabled = true
 bones/27/bound_children = [  ]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "Walk-loop"
 anims/Kneeling-loop = SubResource( 1 )
 anims/KneelingToStanding = SubResource( 2 )
 anims/Standing-loop = SubResource( 3 )
