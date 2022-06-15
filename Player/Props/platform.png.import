@@ -2,32 +2,28 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/platform.png-7de25cd9f3f18089ffc4b55ed77f5d06.s3tc.stex"
-path.etc2="res://.import/platform.png-7de25cd9f3f18089ffc4b55ed77f5d06.etc2.stex"
-path.etc="res://.import/platform.png-7de25cd9f3f18089ffc4b55ed77f5d06.etc.stex"
-path.pvrtc="res://.import/platform.png-7de25cd9f3f18089ffc4b55ed77f5d06.pvrtc.stex"
+path="res://.import/platform.png-7de25cd9f3f18089ffc4b55ed77f5d06.stex"
 metadata={
-"imported_formats": [ "s3tc", "etc2", "etc", "pvrtc" ],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
 source_file="res://Player/Props/platform.png"
-dest_files=[ "res://.import/platform.png-7de25cd9f3f18089ffc4b55ed77f5d06.s3tc.stex", "res://.import/platform.png-7de25cd9f3f18089ffc4b55ed77f5d06.etc2.stex", "res://.import/platform.png-7de25cd9f3f18089ffc4b55ed77f5d06.etc.stex", "res://.import/platform.png-7de25cd9f3f18089ffc4b55ed77f5d06.pvrtc.stex" ]
+dest_files=[ "res://.import/platform.png-7de25cd9f3f18089ffc4b55ed77f5d06.stex" ]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
-flags/repeat=true
+flags/repeat=0
 flags/filter=true
-flags/mipmaps=true
+flags/mipmaps=false
 flags/anisotropic=false
-flags/srgb=1
+flags/srgb=0
 process/fix_alpha_border=true
 process/premult_alpha=false
 process/HDR_as_SRGB=false
