@@ -29,6 +29,7 @@ func setSkeletonRecursive(childnode, skeleton, supportsBlendshapes):
 				var material = childnode.mesh.surface_get_material(_i)
 				if(material is SpatialMaterial):
 					material.flags_unshaded = true
+					material.params_depth_draw_mode = SpatialMaterial.DEPTH_DRAW_OPAQUE_ONLY
 					material.params_cull_mode = SpatialMaterial.CULL_DISABLED
 				
 	if(childnode is MyBoneAttachment):

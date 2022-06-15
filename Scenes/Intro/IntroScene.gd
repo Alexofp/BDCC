@@ -27,7 +27,7 @@ func _run():
 
 		saynn("You look at him, the [b]guy has clear canine features[/b] and a wolf mane, behind him is a fluffy tail. [b]You decide to step inside[/b]. It’s a well-lit small room with just a table, two metal chairs and a security camera in the corner. Panic is still there, the guy pushes you in slightly and locks the door behind before sitting down on one of the chairs himself and watching you.")
 
-		addButton("Take a sit", "Well, what else is there to do", "take_a_sit")
+		addButton("Take a seat", "Well, what else is there to do", "take_a_sit")
 
 	if(state == "take_a_sit"):
 		aimCamera("intro_interogation")
