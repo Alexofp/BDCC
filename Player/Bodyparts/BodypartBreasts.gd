@@ -79,6 +79,12 @@ func getPickableAttributes():
 				[BreastsSize.B, "B", "B-cup breasts"],
 				[BreastsSize.C, "C", "C-cup breasts"],
 				[BreastsSize.D, "D", "D-cup breasts"],
+				[BreastsSize.DD, "DD", "DD-cup breasts"],
+				[BreastsSize.E, "E", "E-cup breasts"],
+				[BreastsSize.F, "F", "F-cup breasts"],
+				[BreastsSize.FF, "FF", "FF-cup breasts"],
+				[BreastsSize.G, "G", "G-cup breasts"],
+				[BreastsSize.GG, "GG", "GG-cup breasts"],
 			]
 		}
 	}
@@ -117,3 +123,6 @@ func processTime(_seconds: int):
 	if(cached_size != newSize):
 		cached_size = newSize
 		updateAppearance()
+
+func getBreastsScale():
+	return 1.0

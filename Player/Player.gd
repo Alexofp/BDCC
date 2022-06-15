@@ -857,6 +857,10 @@ func getPickableAttributes():
 				[50, "Average", "50% thick"],
 				[75, "Thick", "75% thick"],
 				[100, "Very thick", "100% thicc"],
+				[125, "125% thick", "Sooo thicc"],
+				[150, "150% thick", "Sooo thicc"],
+				[175, "175% thick", "Sooo thicc"],
+				[200, "200% thick", "Sooo thicc"],
 			]
 		},
 	}
@@ -1140,6 +1144,38 @@ func onPlayerReadyToGiveBirth():
 func updateDoll(doll: Doll3D):
 	var parts = getDollParts()
 	
+	#doll.setButtScale(0.8)
+	#doll.setBreastsScale(1.5)
+	#doll.setPregnancy(1.0)
+	#doll.setThighThickness(-0.4)
+	#doll.setPenisScale(1.0)
+	#doll.setBallsScale(5.5)
+	
+	var breastsScale = 1.0
+	if(hasBodypart(BodypartSlot.Breasts)):
+		var breasts = getBodypart(BodypartSlot.Breasts)
+		if(breasts.has_method("getBreastsScale")):
+			breastsScale = breasts.getBreastsScale()
+	doll.setBreastsScale(breastsScale)
+	
+	var penisScale = 1.0
+	var ballsScale = 1.0
+	if(hasBodypart(BodypartSlot.Penis)):
+		var penis = getBodypart(BodypartSlot.Penis)
+		if(penis.has_method("getPenisScale")):
+			penisScale = penis.getPenisScale()
+		if(penis.has_method("getBallsScale")):
+			ballsScale = penis.getBallsScale()
+	doll.setPenisScale(penisScale)
+	doll.setBallsScale(ballsScale)
+	
+	var thicknessNorm = getThickness() / 100.0
+	doll.setPregnancy(getPregnancyProgress() + min(max(thicknessNorm-0.5, -0.4)/3.0, 0.2))
+	if(thicknessNorm <= 0.5):
+		doll.setButtScale(1.0 - 0.2 * (1.0 - thicknessNorm * 2))
+		doll.setThighThickness(- 0.4 * (1.0 - thicknessNorm * 2))
+	else:
+		doll.setButtScale(1.0 + (thicknessNorm - 0.5)/1.5)
+		doll.setThighThickness((thicknessNorm - 0.5))
+	
 	doll.setParts(parts)
-	if(isVisiblyPregnant()):
-		doll.setShapeKeyValue("Pregnant", getPregnancyProgress())

@@ -154,3 +154,75 @@ func onCharacterBodypartChanged():
 		return
 	if(ch.has_method("updateDoll")):
 		ch.updateDoll(self)
+
+func setBoneScaleVector(boneName: String, boneScale: Vector3):
+	var skeleton:Skeleton = getDollSkeleton().getSkeleton()
+	var boneId = skeleton.find_bone(boneName)
+	if(boneId < 0):
+		return
+	var newTransform:Transform = Transform.IDENTITY
+	newTransform = newTransform.scaled(boneScale)
+	
+	skeleton.set_bone_custom_pose(boneId, newTransform)
+
+func setBoneScale(boneName: String, boneScale: float):
+	var skeleton:Skeleton = getDollSkeleton().getSkeleton()
+	var boneId = skeleton.find_bone(boneName)
+	if(boneId < 0):
+		return
+	var newTransform:Transform = Transform.IDENTITY
+	newTransform = newTransform.scaled(Vector3(boneScale,boneScale,boneScale))
+	
+	skeleton.set_bone_custom_pose(boneId, newTransform)
+
+func setBoneScaleAndOffset(boneName: String, boneScale: float, offset: Vector3):
+	var skeleton:Skeleton = getDollSkeleton().getSkeleton()
+	var boneId = skeleton.find_bone(boneName)
+	if(boneId < 0):
+		return
+	var newTransform:Transform = Transform.IDENTITY
+	newTransform = newTransform.scaled(Vector3(boneScale,boneScale,boneScale))
+	newTransform = newTransform.translated(offset)
+	
+	skeleton.set_bone_custom_pose(boneId, newTransform)
+
+func setBoneOffset(boneName: String, offset: Vector3):
+	var skeleton:Skeleton = getDollSkeleton().getSkeleton()
+	var boneId = skeleton.find_bone(boneName)
+	if(boneId < 0):
+		return
+	var newTransform:Transform = Transform.IDENTITY
+	newTransform = newTransform.translated(offset)
+	
+	skeleton.set_bone_custom_pose(boneId, newTransform)
+
+func setButtScale(buttScale: float):
+	setBoneScale("DeformButt", buttScale)
+	setBoneOffset("Tail1", Vector3(0.409556, 0.409556, 0.0)*max(buttScale-1.0, 0.0))
+
+func setBreastsScale(breastsScale: float):
+	var mul = 0.0
+	if(breastsScale <= 1.0):
+		mul = max(1.0 - breastsScale, 0.0)
+	setBoneScaleAndOffset("DeformBreasts", breastsScale, Vector3(0.18713, 0.199727, 0.0)*mul)
+
+func setPregnancy(progress: float):
+	setBoneOffset("DeformBelly", Vector3(-0.03244, 0.706324, 0.0)*progress)
+
+func setThighThickness(progress: float):
+	setBoneOffset("DeformThigh.L", Vector3(-0.008168, 0.386037, 0.0)*progress)
+	setBoneOffset("DeformThigh.R", Vector3(-0.008168, 0.386037, 0.0)*progress)
+
+func setPenisScale(penisScale: float):
+	setBoneScale("Penis", penisScale)
+
+func setBallsScale(newScale: float):
+	var offsetScale = 0.0
+	if(newScale <= 1.0):
+		offsetScale = 0.0
+	elif(newScale <= 3.0):
+		offsetScale = newScale / 3.0
+	else:
+		offsetScale = 1.0
+	
+	setBoneScaleAndOffset("Balls", newScale, Vector3(0.0, 0.156431, 0.0)*offsetScale)

@@ -2,6 +2,7 @@ extends Bodypart
 class_name BodypartPenis
 
 var lengthCM = 15
+var ballsScale: float = 1.0
 
 func _init():
 	limbSlot = LimbTypes.Penis
@@ -19,11 +20,13 @@ func getTooltipInfo():
 func saveData():
 	var data = .saveData()
 	data["lengthCM"] = lengthCM
+	data["ballsScale"] = ballsScale
 	
 	return data
 
 func loadData(_data):
 	lengthCM = SAVE.loadVar(_data, "lengthCM", 15)
+	ballsScale = SAVE.loadVar(_data, "ballsScale", 1.0)
 	
 	.loadData(_data)
 
@@ -68,16 +71,39 @@ func getPickableAttributes():
 				[40, "40 cm", "Pick this length"],
 				[50, "50 cm", "Pick this length"],
 			]
+		},
+		"ballsscale": {
+			"text": "Pick your balls scale",
+			"textButton": "Balls",
+			"buttonDesc": "Pick the cock's balls scale",
+			"options": [
+				[0.0, "0%", "Pick this scale"],
+				[0.3, "20%", "Pick this scale"],
+				[0.5, "50%", "Pick this scale"],
+				[0.8, "80%", "Pick this scale"],
+				[1.0, "100%", "Pick this scale"],
+				[1.2, "120%", "Pick this scale"],
+				[1.5, "150%", "Pick this scale"],
+				[1.8, "180%", "Pick this scale"],
+				[2.0, "200%", "Pick this scale"],
+				[2.5, "250%", "Pick this scale"],
+				[3.0, "300%", "Pick this scale"],
+				[4.0, "400%", "Pick this scale"],
+				[5.0, "500%", "Pick this scale"],
+			]
 		}
 	}
 	
 func applyAttribute(_attrID: String, _attrValue):
 	if(_attrID == "cocksize"):
 		lengthCM = _attrValue
+	if(_attrID == "ballsscale"):
+		ballsScale = _attrValue
 
 func getAttributesText():
 	return [
 		["Penis length", str(lengthCM)+" cm"],
+		["Balls scale", str(Util.roundF(ballsScale*100.0, 1))+"%"],
 	]
 
 func getLength():
@@ -85,3 +111,9 @@ func getLength():
 
 func safeWhenExposed():
 	return false
+
+func getPenisScale():
+	return max(0.5 + (lengthCM - 5.0) / 26.0, 0.5)
+
+func getBallsScale():
+	return ballsScale

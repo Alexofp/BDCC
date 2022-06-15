@@ -17,6 +17,9 @@ enum {
 	GG = 11,
 }
 
+static func getAll():
+	return [FOREVER_FLAT, FLAT, A, B, C, D, DD, E, EE, F, FF, G, GG]
+
 static func breastSizeToString(bsize):
 	if(bsize == FOREVER_FLAT):
 		return "Forever flat"
@@ -44,4 +47,4 @@ static func breastSizeToString(bsize):
 		return "G"
 	if(bsize == GG):
 		return "GG"
-	return "Error?"
+	return "GG+"
