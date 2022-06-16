@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://GlobalTheme.tres" type="Theme" id=1]
 [ext_resource path="res://Fonts/Titillium-Regular.otf" type="DynamicFontData" id=2]
@@ -6,11 +6,17 @@
 [ext_resource path="res://UI/MainMenu/LoadGameScreen.tscn" type="PackedScene" id=4]
 [ext_resource path="res://UI/Options/OptionsScreen.tscn" type="PackedScene" id=5]
 [ext_resource path="res://UI/MainMenu/CreditsScreen.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Fonts/Titillium-Bold.otf" type="DynamicFontData" id=7]
+[ext_resource path="res://DonationInfo.tres" type="Resource" id=8]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.207843, 0.133333, 0.364706, 1 )
 corner_radius_top_right = 16
 corner_radius_bottom_right = 16
+
+[sub_resource type="DynamicFont" id=6]
+size = 30
+font_data = ExtResource( 7 )
 
 [sub_resource type="DynamicFont" id=3]
 size = 38
@@ -44,6 +50,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 theme = ExtResource( 1 )
 script = ExtResource( 3 )
+donationInfo = ExtResource( 8 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 anchor_right = 1.0
@@ -79,11 +86,24 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="VBoxContainer3" type="VBoxContainer" parent="HBoxContainer/Panel2/MarginContainer/VBoxContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer/Panel2/MarginContainer/VBoxContainer"]
 margin_right = 236.0
 margin_bottom = 696.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="HBoxContainer/Panel2/MarginContainer/VBoxContainer/ScrollContainer"]
+margin_right = 236.0
+margin_bottom = 696.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="DonationsLabel" type="RichTextLabel" parent="HBoxContainer/Panel2/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer3"]
+margin_right = 236.0
+margin_bottom = 21.0
+custom_fonts/bold_font = SubResource( 6 )
+bbcode_enabled = true
+fit_content_height = true
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="HBoxContainer/Panel2/MarginContainer/VBoxContainer"]
 visible = false

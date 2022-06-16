@@ -2,6 +2,12 @@ extends Control
 
 signal onClosePressed
 
+export(Resource) var donationInfo
+
+func _ready():
+	if(donationInfo != null):
+		$VBoxContainer/ScrollContainer/ScrollVBox/ContentContainer/DonationsLabel.bbcode_text = donationInfo.richText
+
 func _on_CloseButton_pressed():
 	emit_signal("onClosePressed")
 

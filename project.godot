@@ -219,6 +219,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Player/Player3D/DollSkeleton.gd"
 }, {
+"base": "Resource",
+"class": "DonationsInfo",
+"language": "GDScript",
+"path": "res://Util/DonationsInfo.gd"
+}, {
 "base": "Reference",
 "class": "EggCell",
 "language": "GDScript",
@@ -692,6 +697,7 @@ _global_script_class_icons={
 "Doll": "",
 "Doll3D": "",
 "DollSkeleton": "",
+"DonationsInfo": "",
 "EggCell": "",
 "EscapeQuest": "",
 "EventBase": "",
@@ -853,7 +859,6 @@ common/enable_pause_aware_picking=true
 
 [rendering]
 
-quality/driver/driver_name="GLES2"
 quality/driver/fallback_to_gles2=true
 vram_compression/import_etc=true
 vram_compression/import_pvrtc=true

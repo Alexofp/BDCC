@@ -1,0 +1,19 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://Util/DonationsInfo.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+richText = "[center][b]SubscribeStar patrons[/b]
+Compiled 16 of Jun 2022
+
+MaxMaxouCat21 - $1.00
+User#928169c6 - $1.00
+Maxtacks - $1.00
+SuPhox - $1.00
+Caliban - $1.00
+Gorgestboi - $1.00
+User#ce38ffcb - $1.00
+Lkystrike - $1.00
+
+Thank you [color=red]<3[/color][/center]"

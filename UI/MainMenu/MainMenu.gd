@@ -12,9 +12,14 @@ onready var gitHubReleaseButton = $HBoxContainer/Panel/MarginContainer/VBoxConta
 onready var devToolsScreen = $HBoxContainer/DevToolsScreen
 onready var devSubScreen = $HBoxContainer/DevToolsScreen/DevScreen
 
+export(Resource) var donationInfo
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	versionLabel.text = "Version: "+GlobalRegistry.getGameVersionString()
+
+	if(donationInfo != null):
+		$HBoxContainer/Panel2/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer3/DonationsLabel.bbcode_text = donationInfo.richText
 
 	checkCanResume()
 	if(OPTIONS.shouldFetchGithubRelease()):
