@@ -36,6 +36,7 @@ func _run():
 
 	if(state == "sit_still"):
 		GM.pc.playAnimation(TheStage.SittingOnChair)
+		GM.main.playAnimation(StageScene.Solo, "sit")
 		
 		saynn("Eliza leans down and quickly checks your pulse and the size of your pupils. You sit still, with your latex straitjacket on.")
 
@@ -176,6 +177,7 @@ func _run():
 
 	if(state == "continue2"):
 		GM.pc.playAnimation(TheStage.Kneeling)
+		GM.main.playAnimation(StageScene.Solo, "kneel")
 		
 		saynn("[say=eliza]I wanna see an obedient inmate.[/say]")
 
@@ -330,6 +332,7 @@ func _run():
 		aimCamera("medical_paddedcell_player")
 		GM.pc.setLocation("medical_paddedcell_player")
 		GM.pc.playAnimation(TheStage.Kneeling)
+		GM.main.playAnimation(StageScene.Solo, "kneel")
 		setLocationName("Padded cell")
 		
 		saynn("You crawl behind Eliza as she walks you through some more corridors, she is nice enough to walk slowly so you can catch up. Nurses aren’t that used to seeing completely naked inmates so you’re met with many curious glances. You sway your {pc.thick} {pc.masc} hips as you crawl, your head is tilted down, showing how submissive you are.")

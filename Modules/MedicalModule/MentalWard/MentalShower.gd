@@ -33,6 +33,7 @@ func _run():
 	if(state == "shower!"):
 		aimCamera("medical_shower")
 		GM.pc.playAnimation(TheStage.Walking)
+		GM.main.playAnimation(StageScene.Solo, "walk")
 		setLocationName("Shower")
 		
 		saynn("She brings you to the shower room. Bland gray floor, tiled walls, a few rows of shower heads.")

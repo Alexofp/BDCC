@@ -55,6 +55,9 @@ func getAnticipationText(_attacker, _receiver):
 func getAttackAnimation():
 	return TheStage.Bite
 
+func getAttackSoloAnimation():
+	return "bite"
+
 func getExperience():
 	return [[Skill.Combat, 10]]
 

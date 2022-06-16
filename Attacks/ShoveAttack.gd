@@ -55,5 +55,8 @@ func getAIScore(_attacker, _receiver):
 func getAttackAnimation():
 	return TheStage.Shove
 
+func getAttackSoloAnimation():
+	return "shove"
+
 func getExperience():
 	return [[Skill.Combat, 5]]

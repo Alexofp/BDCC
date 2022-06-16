@@ -1,9 +1,28 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=54 format=2]
 
 [ext_resource path="res://Player/StageScene3D/BaseStageScene3D.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Player/StageScene3D/Scenes/Solo.gd" type="Script" id=2]
 [ext_resource path="res://Player/Player3D/Doll3D.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Player/Props/platform.png" type="Texture" id=4]
+[ext_resource path="res://Player/Props/chair.png" type="Texture" id=5]
+
+[sub_resource type="AnimationNodeAnimation" id=23]
+animation = "Bite"
+
+[sub_resource type="AnimationNodeAnimation" id=24]
+animation = "Block"
+
+[sub_resource type="AnimationNodeAnimation" id=14]
+animation = "Defeat"
+
+[sub_resource type="AnimationNodeAnimation" id=25]
+animation = "Dodge"
+
+[sub_resource type="AnimationNodeAnimation" id=39]
+animation = "Hurt"
+
+[sub_resource type="AnimationNodeAnimation" id=40]
+animation = "Kick"
 
 [sub_resource type="AnimationNodeAnimation" id=7]
 animation = "Kneeling-loop"
@@ -11,22 +30,35 @@ animation = "Kneeling-loop"
 [sub_resource type="AnimationNodeAnimation" id=8]
 animation = "KneelingToStanding"
 
+[sub_resource type="AnimationNodeAnimation" id=41]
+animation = "Punch"
+
+[sub_resource type="AnimationNodeAnimation" id=42]
+animation = "Shove"
+
+[sub_resource type="AnimationNodeAnimation" id=26]
+animation = "Sitting-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=27]
+animation = "SittingToStanding"
+
 [sub_resource type="AnimationNodeAnimation" id=1]
 animation = "Standing-loop"
 
 [sub_resource type="AnimationNodeAnimation" id=9]
 animation = "StandingToKneeling"
 
+[sub_resource type="AnimationNodeAnimation" id=28]
+animation = "StandingToSitting"
+
+[sub_resource type="AnimationNodeAnimation" id=15]
+animation = "StandingToWalking"
+
 [sub_resource type="AnimationNodeAnimation" id=2]
 animation = "Walk-loop"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=3]
-xfade_time = 0.3
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=4]
-switch_mode = 2
-auto_advance = true
-xfade_time = 0.3
+[sub_resource type="AnimationNodeAnimation" id=16]
+animation = "WalkingToStanding"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=10]
 xfade_time = 0.1
@@ -44,20 +76,145 @@ switch_mode = 2
 auto_advance = true
 xfade_time = 0.1
 
+[sub_resource type="AnimationNodeStateMachineTransition" id=17]
+xfade_time = 0.1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=18]
+switch_mode = 2
+auto_advance = true
+xfade_time = 0.1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=19]
+switch_mode = 2
+auto_advance = true
+xfade_time = 0.1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=20]
+switch_mode = 2
+auto_advance = true
+xfade_time = 0.1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=21]
+xfade_time = 0.1
+priority = 0
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=22]
+switch_mode = 2
+auto_advance = true
+xfade_time = 0.1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=29]
+xfade_time = 0.1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=30]
+switch_mode = 2
+auto_advance = true
+xfade_time = 0.1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=31]
+xfade_time = 0.1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=32]
+switch_mode = 2
+auto_advance = true
+xfade_time = 0.1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=33]
+xfade_time = 0.1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=34]
+switch_mode = 2
+auto_advance = true
+xfade_time = 0.1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=35]
+xfade_time = 0.1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=36]
+switch_mode = 2
+auto_advance = true
+xfade_time = 0.1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=37]
+xfade_time = 0.1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=38]
+switch_mode = 2
+auto_advance = true
+xfade_time = 0.1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=43]
+switch_mode = 2
+auto_advance = true
+xfade_time = 0.1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=44]
+switch_mode = 2
+auto_advance = true
+xfade_time = 0.1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=45]
+switch_mode = 2
+auto_advance = true
+xfade_time = 0.1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=46]
+switch_mode = 2
+auto_advance = true
+xfade_time = 0.1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=47]
+xfade_time = 0.1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=48]
+xfade_time = 0.1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=49]
+xfade_time = 0.1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=50]
+xfade_time = 0.1
+
 [sub_resource type="AnimationNodeStateMachine" id=5]
+states/Bite/node = SubResource( 23 )
+states/Bite/position = Vector2( 644.547, -105 )
+states/Block/node = SubResource( 24 )
+states/Block/position = Vector2( 566.547, -166 )
+states/Defeat/node = SubResource( 14 )
+states/Defeat/position = Vector2( 365.547, 314 )
+states/Dodge/node = SubResource( 25 )
+states/Dodge/position = Vector2( 487.547, -218 )
+states/Hurt/node = SubResource( 39 )
+states/Hurt/position = Vector2( 365.547, -218 )
+states/Kick/node = SubResource( 40 )
+states/Kick/position = Vector2( 242.547, -209 )
 states/Kneeling-loop/node = SubResource( 7 )
-states/Kneeling-loop/position = Vector2( 273, 342 )
+states/Kneeling-loop/position = Vector2( 121, 314 )
 states/KneelingToStanding/node = SubResource( 8 )
-states/KneelingToStanding/position = Vector2( 187, 192 )
+states/KneelingToStanding/position = Vector2( 121, 175 )
+states/Punch/node = SubResource( 41 )
+states/Punch/position = Vector2( 127.547, -166 )
+states/Shove/node = SubResource( 42 )
+states/Shove/position = Vector2( 80, -100 )
+states/Sitting-loop/node = SubResource( 26 )
+states/Sitting-loop/position = Vector2( 629.547, 332 )
+states/SittingToStanding/node = SubResource( 27 )
+states/SittingToStanding/position = Vector2( 541.547, 249 )
 states/Standing-loop/node = SubResource( 1 )
 states/Standing-loop/position = Vector2( 421, 78 )
 states/StandingToKneeling/node = SubResource( 9 )
-states/StandingToKneeling/position = Vector2( 432, 237 )
+states/StandingToKneeling/position = Vector2( 248, 243 )
+states/StandingToSitting/node = SubResource( 28 )
+states/StandingToSitting/position = Vector2( 742.547, 249 )
+states/StandingToWalking/node = SubResource( 15 )
+states/StandingToWalking/position = Vector2( 837.547, 35 )
 states/Walk-loop/node = SubResource( 2 )
-states/Walk-loop/position = Vector2( 699, 78 )
-transitions = [ "Standing-loop", "Walk-loop", SubResource( 3 ), "Walk-loop", "Standing-loop", SubResource( 4 ), "Standing-loop", "StandingToKneeling", SubResource( 10 ), "StandingToKneeling", "Kneeling-loop", SubResource( 11 ), "Kneeling-loop", "KneelingToStanding", SubResource( 12 ), "KneelingToStanding", "Standing-loop", SubResource( 13 ) ]
+states/Walk-loop/position = Vector2( 837.547, 105 )
+states/WalkingToStanding/node = SubResource( 16 )
+states/WalkingToStanding/position = Vector2( 837.547, 175 )
+transitions = [ "Standing-loop", "StandingToKneeling", SubResource( 10 ), "StandingToKneeling", "Kneeling-loop", SubResource( 11 ), "Kneeling-loop", "KneelingToStanding", SubResource( 12 ), "KneelingToStanding", "Standing-loop", SubResource( 13 ), "Standing-loop", "StandingToWalking", SubResource( 17 ), "StandingToWalking", "Walk-loop", SubResource( 18 ), "Walk-loop", "WalkingToStanding", SubResource( 19 ), "WalkingToStanding", "Standing-loop", SubResource( 20 ), "Standing-loop", "Defeat", SubResource( 21 ), "Defeat", "Kneeling-loop", SubResource( 22 ), "Standing-loop", "StandingToSitting", SubResource( 29 ), "StandingToSitting", "Sitting-loop", SubResource( 30 ), "Sitting-loop", "SittingToStanding", SubResource( 31 ), "SittingToStanding", "Standing-loop", SubResource( 32 ), "Standing-loop", "Bite", SubResource( 33 ), "Bite", "Standing-loop", SubResource( 34 ), "Standing-loop", "Block", SubResource( 35 ), "Block", "Standing-loop", SubResource( 36 ), "Standing-loop", "Dodge", SubResource( 37 ), "Dodge", "Standing-loop", SubResource( 38 ), "Hurt", "Standing-loop", SubResource( 43 ), "Kick", "Standing-loop", SubResource( 44 ), "Punch", "Standing-loop", SubResource( 45 ), "Shove", "Standing-loop", SubResource( 46 ), "Standing-loop", "Hurt", SubResource( 47 ), "Standing-loop", "Kick", SubResource( 48 ), "Standing-loop", "Punch", SubResource( 49 ), "Standing-loop", "Shove", SubResource( 50 ) ]
 start_node = "Standing-loop"
-graph_offset = Vector2( -193.453, 108 )
+graph_offset = Vector2( -123.453, -211 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=6]
 
@@ -76,6 +233,10 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.196641, -1.77462 )
 texture = ExtResource( 4 )
 region_enabled = true
 region_rect = Rect2( 1, 1, 1022, 62 )
+
+[node name="Chair" type="Sprite3D" parent="." index="3"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.05789, 1.92807, 0.0685949 )
+texture = ExtResource( 5 )
 
 [editable path="Doll3D"]
 [editable path="Doll3D/DollSkeleton"]

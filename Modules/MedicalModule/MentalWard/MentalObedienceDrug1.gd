@@ -20,6 +20,7 @@ func _run():
 		aimCamera("med_researchlab")
 		setLocationName("Research lab")
 		GM.pc.playAnimation(TheStage.SittingOnChair)
+		GM.main.playAnimation(StageScene.Solo, "sit")
 		
 		saynn("You walk through some white corridors, all the staff here is clearly used to seeing bound and leashed inmates being passed around, though some nurses do look into your eyes, maybe trying to figure out how broken you are mentally.")
 

@@ -17,6 +17,7 @@ func _run():
 		aimCamera("intro_corridor")
 		setLocationName("IBS \"Integrity\"")
 		GM.pc.playAnimation(TheStage.Standing)
+		GM.main.playAnimation(StageScene.Solo, "stand")
 		
 		addCharacter("intro_detective")
 		saynn("[b]You follow a tall male figure through a long corridor[/b]. You don’t see any windows, everything is lit up by industrial-looking lights. Your head hurts, you suddenly realize that [b]you forgot where you are[/b] and what you are doing here. You panic, your eyes jump form point to point, gray floor tiles, dark-blue concrete walls, an unknown person’s back, what the heck is going on here. [b]Two guys walk by[/b], you notice their blue uniform and [b]badges that say “IIPF”[/b]. You also notice holsters and belts with equipment, the guy that you’re following has these too. You look down at your hands. No, you’re not cuffed.")
@@ -33,7 +34,7 @@ func _run():
 		aimCamera("intro_interogation")
 		setLocationName("Interogation room")
 		GM.pc.playAnimation(TheStage.SittingOnChair)
-		GM.main.playAnimation(StageScene.Solo, "kneel")
+		GM.main.playAnimation(StageScene.Solo, "sit")
 		
 		saynn("You sit on the second chair, the one that is further from the only exit. You take a better look at the guy. He is clearly a wolf, quite tall, in his forties, gray fur, black pants and a white t-shirt.")
 
@@ -51,7 +52,6 @@ func _run():
 
 	if(state == "askforname"):
 		say("Enter the name of your character:")
-		GM.main.playAnimation(StageScene.Solo, "stand")
 		
 		addTextbox("player_name")
 		
@@ -60,6 +60,7 @@ func _run():
 
 	if(state == "donecreating"):
 		GM.pc.playAnimation(TheStage.SittingOnChair)
+		GM.main.playAnimation(StageScene.Solo, "sit")
 		saynn("Jake nods and puts the tablet away for now, he leans forward on the chair and directs his eyes at you.")
 
 		saynn("[say=intro_detective]Alright, {pc.name}. How are you feeling?[/say]")

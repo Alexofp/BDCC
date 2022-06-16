@@ -14,6 +14,7 @@ func _run():
 		addCharacter("risha")
 		
 		GM.pc.playAnimation(TheStage.Standing)
+		GM.main.playAnimation(StageScene.Solo, "stand")
 		
 		saynn("You stand in a huge open hangar. Watching the colorful markings on the floor you can guess that it supports up to about 3 ships. Most of the corners are stuffed with metal crates or other types of cargo, all of it locked, behind you is a huge energy field that allows the spaceships to pass but keep the air in. The height of a hanger allows there to be many catwalks on the walls where all the guards stand, watching the fresh blood arrive. Your attention gets stolen by someone’s loud authoritative voice that gets echoed slightly.")
 
@@ -40,6 +41,7 @@ func _run():
 		setLocationName("Spaceship hangar")
 		
 		GM.pc.playAnimation(TheStage.Walking)
+		GM.main.playAnimation(StageScene.Solo, "walk")
 		
 		saynn("[say=pc]So. You came to take me in?[/say]")
 		
@@ -61,6 +63,7 @@ func _run():
 		
 	if(state == "shoveaway"):
 		GM.pc.playAnimation(TheStage.Shove)
+		GM.main.playAnimation(StageScene.Solo, "shove")
 		
 		saynn("You slap his arm away and shove him back. You growl and bare your fangs.")
 		
@@ -85,6 +88,7 @@ func _run():
 		setLocationName("Intake area")
 		
 		GM.pc.playAnimation(TheStage.Walking)
+		GM.main.playAnimation(StageScene.Solo, "walk")
 		
 		saynn("You follow the officer through some corridor and enter an inmate processing area. You see a little showering area that's divided from the main room with glass and automatic doors. Then there are some kinds of vendomats and, lastly, a small medical area. The floor has useful lines that show the order in which to process the inmate.")
 		
@@ -138,6 +142,7 @@ func _run():
 
 	if(state == "wonrisha"):
 		GM.pc.playAnimation(TheStage.GetDefeated)
+		GM.main.playAnimation(StageScene.Solo, "defeat")
 		
 		saynn("The guard kneels before you, defeated, her hand drops the baton as she grunts from pain. You quickly pick up the weapon and turn it on.")
 
@@ -178,6 +183,7 @@ func _run():
 		setLocationName("Shower")
 		
 		GM.pc.playAnimation(TheStage.Walking)
+		GM.main.playAnimation(StageScene.Solo, "walk")
 		
 		saynn("You step into the shower area that's closed-off with glass. It’s a small room with many shower heads attached to the ceiling. You keep covering yourself as a normal person would while preparing for the worst. And yes, when the shower begins, you feel that the water is freezing cold. It's so cold that you groan audibly.")
 		
@@ -212,6 +218,7 @@ func _run():
 		setLocationName("Intake area")
 		
 		GM.pc.playAnimation(TheStage.Walking)
+		GM.main.playAnimation(StageScene.Solo, "walk")
 		
 		saynn("You step out back into the intake room and follow the lines on the floor to your next stop. You see a vendomat mounted onto a wall, it’s a machine capable of producing and dispensing different things. Near it on a wall is a console. It looks pretty dated, a screen that can only output green color, a bulky card reader and a mechanical keyboard, not even sensory. The officer begins to type some stuff into it while the guard watches you out.")
 		

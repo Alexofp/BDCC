@@ -125,6 +125,7 @@ func _run():
 
 	if(state == "beg"):
 		GM.pc.playAnimation(TheStage.Kneeling)
+		GM.main.playAnimation(StageScene.Solo, "kneel")
 		
 		saynn("You do as she orders, getting on your knees before the red and tilting your head down.")
 
@@ -207,6 +208,7 @@ func _run():
 
 	if(state == "attack"):
 		GM.pc.playAnimation(TheStage.Shove)
+		GM.main.playAnimation(StageScene.Solo, "shove")
 		
 		saynn("You shove your elbow into her chest, causing the foxy to stumble back. She growls at you, showing off her bare fangs.")
 
@@ -219,6 +221,7 @@ func _run():
 
 	if(state == "intimidate"):
 		GM.pc.playAnimation(TheStage.Standing)
+		GM.main.playAnimation(StageScene.Solo, "stand")
 		
 		saynn("[say=pc]I’m looking at a huge mistake you’re making.[/say]")
 

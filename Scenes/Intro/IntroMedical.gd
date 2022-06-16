@@ -23,6 +23,7 @@ func _run():
 		aimCamera("intro_medicalarea")
 		setLocationName("Medical area")
 		GM.pc.playAnimation(TheStage.GetDefeated)
+		GM.main.playAnimation(StageScene.Solo, "defeat")
 		
 		saynn("You decide not to announce your presence and instead begin to slowly creep up to the lady, who seems to be too busy with reading something off of her tablet. You keep watching her as you make your steps as light as possible. You notice her feline ears twitching ever so slightly. As you approach the instrument table, you notice a variety of tools: syringes, clamps, retractors but most importantly, a few scalpels. Your hand hovers over one as you try to grab it. But as soon as you do, you hear a voice.")
 
@@ -90,6 +91,7 @@ func _run():
 
 	if(state == "sit"):
 		GM.pc.playAnimation(TheStage.SittingOnChair)
+		GM.main.playAnimation(StageScene.Solo, "sit")
 		
 		saynn("You sit on the side of a bed, it’s not the most comfy one but what can you do.")
 
@@ -142,6 +144,7 @@ func _run():
 
 	if(state == "fuck_no"):
 		GM.pc.playAnimation(TheStage.Shove)
+		GM.main.playAnimation(StageScene.Solo, "shove")
 		
 		aimCamera("intro_beforeelevator")
 		setLocationName("Intake area")
@@ -162,6 +165,7 @@ func _run():
 
 	if(state == "fine"):
 		GM.pc.playAnimation(TheStage.Standing)
+		GM.main.playAnimation(StageScene.Solo, "stand")
 		
 		aimCamera("intro_beforeelevator")
 		setLocationName("Intake area")
@@ -204,6 +208,7 @@ func _run():
 		setLocationName("Checkpoint")
 		
 		GM.pc.playAnimation(TheStage.Walking)
+		GM.main.playAnimation(StageScene.Solo, "walk")
 		
 		saynn("It takes a minute but the lift finally arrives. When the doors open, the first thing you see is a checkpoint with a few guards standing around.")
 
@@ -229,6 +234,7 @@ func _run():
 
 	if(state == "followtocell"):
 		GM.pc.playAnimation(TheStage.Walking)
+		GM.main.playAnimation(StageScene.Solo, "walk")
 		
 		aimCamera("cellblock_nearcells")
 		setLocationName("Cellblock")

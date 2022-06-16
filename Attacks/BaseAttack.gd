@@ -138,8 +138,10 @@ func doDamage(_attacker, _receiver, _damageType, _damage: int, playGetHitAnimati
 		if(_receiver == GM.pc):
 			if(GM.pc.isBlocking()):
 				GM.pc.playAnimation(TheStage.Block)
+				GM.main.playAnimation(StageScene.Solo, "block")
 			elif(_damageType == DamageType.Physical || _damageType == DamageType.Stamina):
 				GM.pc.playAnimation(TheStage.GetHit)
+				GM.main.playAnimation(StageScene.Solo, "hurt")
 	
 	return damage
 
@@ -230,12 +232,16 @@ func checkDodged(_attacker, _receiver, _damageType, customDodgeMult = 1, minChan
 		if(playDodgeAnimation):
 			if(_receiver == GM.pc):
 				GM.pc.playAnimation(TheStage.Dodge)
+				GM.main.playAnimation(StageScene.Solo, "dodge")
 		
 		return true
 		
 	return false
 	
 func getAttackAnimation():
+	return ""
+
+func getAttackSoloAnimation():
 	return ""
 
 func scaledDmgStr(_damageType, _damage: int):

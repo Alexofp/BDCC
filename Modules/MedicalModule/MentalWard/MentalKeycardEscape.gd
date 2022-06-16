@@ -25,6 +25,7 @@ func _run():
 	if(state == "slip_out"):
 		aimCamera("medical_firstcorridorcross")
 		GM.pc.playAnimation(TheStage.Walking)
+		GM.main.playAnimation(StageScene.Solo, "walk")
 		setLocationName("Corridors")
 		
 		saynn("Seems like no one has noticed you so far, you escape your cell and look around, the mental ward consists of many corridors and rooms, you look from behind one of the corners and notice nurses and guards patrolling them.")
@@ -36,6 +37,7 @@ func _run():
 	if(state == "continue"):
 		aimCamera("med_lobbyne")
 		GM.pc.playAnimation(TheStage.Walking)
+		GM.main.playAnimation(StageScene.Solo, "walk")
 		setLocationName("Medical lobby")
 		GM.pc.setLocation("med_lobbyne")
 		setFlag(MedicalModule.Mental_PlayerEscaped, true)

@@ -36,6 +36,7 @@ func _run():
 		aimCamera("medical_paddedcell_player")
 		GM.pc.setLocation("medical_paddedcell_player")
 		GM.pc.playAnimation(TheStage.Kneeling)
+		GM.main.playAnimation(StageScene.Solo, "kneel")
 		setLocationName("Padded cell")
 		
 		saynn("You’re stuck in a mental ward cell with nothing to do. Padded walls surround you, even the bulky door has a soft layer to it. The only thing connecting you to the outside world is a small reinforced window and an air vent that’s far above your reach.")

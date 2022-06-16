@@ -11,6 +11,7 @@ func _run():
 		aimCamera("medical_near_pccell")
 		GM.pc.setLocation("medical_near_pccell")
 		GM.pc.playAnimation(TheStage.Kneeling)
+		GM.main.playAnimation(StageScene.Solo, "kneel")
 		setLocationName("Near cells")
 		
 		saynn("Eliza holds your leash, you try to look brave even with that straitjacket on.")
@@ -81,6 +82,7 @@ func _run():
 		aimCamera("medical_paddedcell_player")
 		GM.pc.setLocation("medical_paddedcell_player")
 		GM.pc.playAnimation(TheStage.Kneeling)
+		GM.main.playAnimation(StageScene.Solo, "kneel")
 		setLocationName("Padded cell")
 		
 		saynn("You wake up in your padded cell. You have a little headache, such a familiar feeling.")

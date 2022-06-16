@@ -89,6 +89,7 @@ func _run():
 
 	if(state == "get_on_all_fours"):
 		GM.pc.playAnimation(TheStage.Kneeling)
+		GM.main.playAnimation(StageScene.Solo, "kneel")
 		# (if puppy)
 		if(isPuppy):
 			saynn("You bark and take a little step back before lowering yourself to your knees. Then you bend forward and get on all fours. Nova holds your leash while you begin to crawl around her, swaying your {pc.masc} hips a lot in the process.")

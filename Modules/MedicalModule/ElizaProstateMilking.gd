@@ -30,6 +30,7 @@ func _run():
 		aimCamera("med_milkingroom")
 		setLocationName("Milking heaven")
 		GM.pc.playAnimation(TheStage.Walking)
+		GM.main.playAnimation(StageScene.Solo, "walk")
 		
 		saynn("She brings you to a room that can only be described as a milking heaven. You notice a huge fluid storage tank and quite a few special milking stalls, not for animals but for humans. Eliza guides you into one of them. The stall itself is just some metal pipes, designed to keep the bull or the cow still, Eliza tied your leash to the stall’s frame.")
 

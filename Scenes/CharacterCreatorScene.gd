@@ -28,6 +28,7 @@ func _run():
 
 	if(state == "pickspecies"):
 		GM.pc.playAnimation(TheStage.Standing)
+		GM.main.playAnimation(StageScene.Solo, "stand")
 		say("Pick your character's species")
 		var allSpecies = GlobalRegistry.getAllPlayableSpecies()
 		for speciesID in allSpecies:

@@ -6,6 +6,7 @@ func _init():
 func _run():
 	if(state == ""):
 		GM.pc.playAnimation(TheStage.SittingOnChair)
+		GM.main.playAnimation(StageScene.Solo, "sit")
 		
 		saynn("You get into the queue and wait. The canteen is always busy with hungry inmates, some sit alone but you spot quite a few groups too.")
 		
