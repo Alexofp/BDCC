@@ -148,3 +148,7 @@ func _on_DiscordButton_pressed():
 	
 func _on_ChangelogButton_pressed():
 	var _ok = OS.shell_open("https://github.com/Alexofp/BDCC/blob/main/CHANGELOG.md")
+
+
+func _on_DonationsLabel_meta_clicked(meta):
+	var _ok = OS.shell_open(meta)

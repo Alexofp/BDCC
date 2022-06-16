@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://GlobalTheme.tres" type="Theme" id=1]
 [ext_resource path="res://Fonts/Titillium-Regular.otf" type="DynamicFontData" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://UI/MainMenu/CreditsScreen.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Fonts/Titillium-Bold.otf" type="DynamicFontData" id=7]
 [ext_resource path="res://DonationInfo.tres" type="Resource" id=8]
+[ext_resource path="res://Game/SmartScrollContainer.gd" type="Script" id=9]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.207843, 0.133333, 0.364706, 1 )
@@ -91,6 +92,7 @@ margin_right = 236.0
 margin_bottom = 696.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+script = ExtResource( 9 )
 
 [node name="VBoxContainer3" type="VBoxContainer" parent="HBoxContainer/Panel2/MarginContainer/VBoxContainer/ScrollContainer"]
 margin_right = 236.0
@@ -456,6 +458,7 @@ text = "Github Releases"
 
 [node name="HTTPRequest" type="HTTPRequest" parent="."]
 
+[connection signal="meta_clicked" from="HBoxContainer/Panel2/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer3/DonationsLabel" to="." method="_on_DonationsLabel_meta_clicked"]
 [connection signal="pressed" from="HBoxContainer/MainVBox/GridContainer/ResumeButton" to="." method="_on_ResumeButton_pressed"]
 [connection signal="pressed" from="HBoxContainer/MainVBox/GridContainer/NewGameButton" to="." method="_on_NewGameButton_pressed"]
 [connection signal="pressed" from="HBoxContainer/MainVBox/GridContainer/LoadGameButton" to="." method="_on_LoadGameButton_pressed"]
