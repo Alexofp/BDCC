@@ -33,6 +33,8 @@ var stageScenes: Dictionary = {}
 
 var bodypartStorageNode
 
+var sceneCache: Dictionary = {}
+
 func _init():
 	bodypartStorageNode = Node.new()
 	add_child(bodypartStorageNode)
@@ -654,3 +656,9 @@ func createStageScene(id: String):
 		printerr("ERROR: stage scene with the id "+id+" wasn't found")
 		return null
 	return stageScenes[id].instance()
+
+func instanceCached(scenePath):
+	if(sceneCache.has(scenePath)):
+		return sceneCache[scenePath].instance()
+	sceneCache[scenePath] = load(scenePath)
+	return sceneCache[scenePath].instance()

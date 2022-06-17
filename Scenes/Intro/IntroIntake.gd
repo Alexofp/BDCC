@@ -291,6 +291,7 @@ func _react(_action: String, _args):
 		GM.pc.getInventory().equipItem(GlobalRegistry.createItem("inmatewristcuffs"))
 		addMessage("A bulky collar gets locked around your neck with a satisfying click")
 		addMessage("Your wrists and ankles get cuffed")
+		GM.pc.updateAppearance()
 		
 	if(_action == "aftershower"):
 		processTime(10 * 60)

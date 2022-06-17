@@ -16,7 +16,6 @@ projection = 1
 size = 10.0
 
 [node name="Tooltips" type="Spatial" parent="."]
-visible = false
 
 [node name="HeadBoneAttachment" parent="Tooltips" instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.097, 7.152, 0 )
@@ -27,7 +26,7 @@ boneId = "Head"
 bodypartID = "head"
 
 [node name="BreastsBoneAttachment" parent="Tooltips" instance=ExtResource( 4 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.446259, 5.55351, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.691565, 5.6924, 0 )
 skeleton = NodePath("../../DollSkeleton/Doll3D/Skeleton")
 boneId = "Chest"
 
@@ -43,7 +42,7 @@ boneId = "Penis"
 bodypartID = "penis"
 
 [node name="VaginaBoneAttachment" parent="Tooltips" instance=ExtResource( 4 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0294734, 3.98406, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.177234, 3.98406, 0 )
 skeleton = NodePath("../../DollSkeleton/Doll3D/Skeleton")
 boneId = "Hips"
 
@@ -51,7 +50,7 @@ boneId = "Hips"
 bodypartID = "vagina"
 
 [node name="AnusBoneAttachment" parent="Tooltips" instance=ExtResource( 4 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.04501, 3.93292, 0.00700498 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.727946, 3.93292, 0.00700498 )
 skeleton = NodePath("../../DollSkeleton/Doll3D/Skeleton")
 boneId = "Hips"
 

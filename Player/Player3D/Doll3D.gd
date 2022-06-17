@@ -254,3 +254,13 @@ func _on_Doll3DTooltip_mouseExited(bodypartID):
 		if(bodypart == null):
 			return
 		GlobalTooltip.hideTooltip()
+
+func setUnriggedParts(scenes):
+	for part in parts:
+		for zone in parts[part].getAttachZones():
+			var attachments = parts[part].getAttachZones()[zone]
+			for attachment in attachments:
+				if(scenes.has(zone)):
+					attachment.setScenes(scenes[zone])
+				else:
+					attachment.setScenes([])

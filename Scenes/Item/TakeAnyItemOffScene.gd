@@ -23,6 +23,7 @@ func _reactInit():
 		
 		GM.pc.getInventory().removeEquippedItem(item)
 		GM.pc.getInventory().addItem(item)
+		GM.pc.updateAppearance()
 	else:
 		setState("blockedhands")
 

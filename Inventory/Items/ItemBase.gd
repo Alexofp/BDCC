@@ -256,3 +256,6 @@ func calculateBestRestraintLevel():
 		return GM.pc.calculateBestRestraintLevel()
 	else:
 		return RNG.randi_range(1, 5)
+
+func getUnriggedParts(_character):
+	return {}

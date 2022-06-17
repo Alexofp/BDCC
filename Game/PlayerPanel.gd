@@ -53,7 +53,7 @@ func updateUI():
 func _gui_input(event: InputEvent):
 	if event is InputEventMouseButton && event.button_index == BUTTON_MIDDLE:
 		camera3d.size = 10
-		camera3d.transform.origin = Vector3(0.0,0.0,0.0)
+		camera3d.transform.origin = Vector3(0.0,4.141,50.0)
 	
 	if event is InputEventMouseButton:
 		if(event.button_index == BUTTON_WHEEL_UP):

@@ -499,7 +499,6 @@ func loadData(data):
 		bodypart.name = bodypart.visibleName
 		bodypart.character = weakref(self)
 	
-	emit_signal("bodypart_changed")
 	loadStatusEffectsData(SAVE.loadVar(data, "statusEffects", {}))
 	inventory.loadData(SAVE.loadVar(data, "inventory", {}))
 	skillsHolder.loadData(SAVE.loadVar(data, "skills", {}))
@@ -515,6 +514,7 @@ func loadData(data):
 	checkLocation()
 		
 	updateNonBattleEffects()
+	emit_signal("bodypart_changed")
 
 func checkLocation():
 	var _roomInfo = GM.world.getRoomByID(getLocation())
@@ -1173,3 +1173,20 @@ func updateDoll(doll: Doll3D):
 		doll.setThighThickness((thicknessNorm - 0.5))
 	
 	doll.setParts(parts)
+
+
+	var partsScenes = {}
+	var equippedItems = getInventory().getAllEquippedItems()
+	for inventorySlot in equippedItems:
+		var item = equippedItems[inventorySlot]
+		
+		var scenes = item.getUnriggedParts(self)
+		if(scenes == null):
+			 continue
+		
+		for zone in scenes:
+			if(!partsScenes.has(zone)):
+				partsScenes[zone] = []
+			partsScenes[zone].append_array(scenes[zone])
+
+	doll.setUnriggedParts(partsScenes)

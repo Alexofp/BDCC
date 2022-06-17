@@ -26,7 +26,8 @@ func getAllRestTransformsForBone(skeletonObject:Skeleton, boneIdx):
 
 func _ready():
 	startTransform = transform
-	setSkeletonPath(skeleton)
+	if(!skeleton.is_empty()):
+		setSkeletonPath(skeleton)
 #	var skeletonObject:Skeleton = get_node_or_null(skeleton)
 #	if(skeletonObject != null):
 #		var boneIdx = skeletonObject.find_bone(boneId)

@@ -1,28 +1,20 @@
 extends Spatial
 
 var dollSkeleton: DollSkeleton
+var attachZones = {}
 
 func initPart(newDollSkeleton):
 	dollSkeleton = newDollSkeleton
 	
-	var supportsBlendshapes = true
-	if(OS.get_name() in ["Android", "iOS", "HTML5"]):
-		supportsBlendshapes = false
-	
 	for child in get_children():
-		setSkeletonRecursive(child, dollSkeleton.getSkeleton(), supportsBlendshapes)
+		setSkeletonRecursive(child, dollSkeleton.getSkeleton())
 #		if(child is MeshInstance):
 #			#child.skeleton = dollSkeleton.getSkeleton().get_path()
 #			child.skeleton = child.get_path_to(dollSkeleton.getSkeleton())
 
-func setSkeletonRecursive(childnode, skeleton, supportsBlendshapes):
+func setSkeletonRecursive(childnode, skeleton):
 	if(childnode is MeshInstance):
 		childnode.skeleton = childnode.get_path_to(skeleton)
-		
-		if(supportsBlendshapes && ("-noblendshapes" in childnode.name)):
-			childnode.visible = false
-		elif(!supportsBlendshapes && ("-hasblendshapes" in childnode.name)):
-			childnode.visible = false
 		
 		if(childnode.mesh != null):
 			for _i in range(childnode.mesh.get_surface_count()):
@@ -34,9 +26,13 @@ func setSkeletonRecursive(childnode, skeleton, supportsBlendshapes):
 				
 	if(childnode is MyBoneAttachment):
 		childnode.setSkeletonPath(childnode.get_path_to(skeleton))
+	if(childnode is DollAttachmentZone):
+		if(!attachZones.has(childnode.zoneName)):
+			attachZones[childnode.zoneName] = []
+		attachZones[childnode.zoneName].append(childnode)
 	
 	for child in childnode.get_children():
-		setSkeletonRecursive(child, skeleton, supportsBlendshapes)
+		setSkeletonRecursive(child, skeleton)
 
 func setStateRecursive(childnode, stateID, value):
 	if(childnode is PartStatePicker):
@@ -59,3 +55,11 @@ func setShapeKeyValueRecursive(childnode, shapekey: String, value: float):
 	
 	for child in childnode.get_children():
 		setShapeKeyValueRecursive(child, shapekey, value)
+
+func getAttachZonesFor(attachZone):
+	if(!attachZones.has(attachZone)):
+		return []
+	return attachZones[attachZone]
+
+func getAttachZones():
+	return attachZones

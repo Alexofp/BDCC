@@ -209,6 +209,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Player/Player3D/Doll3D.gd"
 }, {
+"base": "MyBoneAttachment",
+"class": "DollAttachmentZone",
+"language": "GDScript",
+"path": "res://Player/Player3D/Parts/DollAttachmentZone.gd"
+}, {
 "base": "Spatial",
 "class": "DollSkeleton",
 "language": "GDScript",
@@ -680,6 +685,7 @@ _global_script_class_icons={
 "DamageType": "",
 "Direction": "",
 "Doll3D": "",
+"DollAttachmentZone": "",
 "DollSkeleton": "",
 "DonationsInfo": "",
 "EggCell": "",

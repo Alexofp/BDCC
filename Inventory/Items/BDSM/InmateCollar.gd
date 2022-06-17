@@ -24,3 +24,8 @@ func isRestraint():
 
 func generateRestraintData():
 	restraintData = RestraintUnremovable.new()
+
+func getUnriggedParts(_character):
+	return {
+		"neck": ["res://Inventory/UnriggedModels/Collar/CollarModel.tscn"],
+	}
