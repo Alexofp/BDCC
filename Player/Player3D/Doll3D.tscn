@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Player/Player3D/DollSkeleton.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Player/Player3D/Doll3D.gd" type="Script" id=2]
+[ext_resource path="res://Player/Player3D/Parts/MyBoneAttachment.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Player/Player3D/Doll3DTooltip.tscn" type="PackedScene" id=5]
 
 [node name="Doll3D" type="Spatial"]
 script = ExtResource( 2 )
@@ -12,3 +14,59 @@ script = ExtResource( 2 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.141, 50 )
 projection = 1
 size = 10.0
+
+[node name="Tooltips" type="Spatial" parent="."]
+visible = false
+
+[node name="HeadBoneAttachment" parent="Tooltips" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.097, 7.152, 0 )
+skeleton = NodePath("../../DollSkeleton/Doll3D/Skeleton")
+boneId = "Head"
+
+[node name="Doll3DTooltip" parent="Tooltips/HeadBoneAttachment" instance=ExtResource( 5 )]
+bodypartID = "head"
+
+[node name="BreastsBoneAttachment" parent="Tooltips" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.446259, 5.55351, 0 )
+skeleton = NodePath("../../DollSkeleton/Doll3D/Skeleton")
+boneId = "Chest"
+
+[node name="Doll3DTooltip" parent="Tooltips/BreastsBoneAttachment" instance=ExtResource( 5 )]
+bodypartID = "breasts"
+
+[node name="PenisBoneAttachment" parent="Tooltips" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.12645, 3.94567, 0 )
+skeleton = NodePath("../../DollSkeleton/Doll3D/Skeleton")
+boneId = "Penis"
+
+[node name="Doll3DTooltip" parent="Tooltips/PenisBoneAttachment" instance=ExtResource( 5 )]
+bodypartID = "penis"
+
+[node name="VaginaBoneAttachment" parent="Tooltips" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0294734, 3.98406, 0 )
+skeleton = NodePath("../../DollSkeleton/Doll3D/Skeleton")
+boneId = "Hips"
+
+[node name="Doll3DTooltip" parent="Tooltips/VaginaBoneAttachment" instance=ExtResource( 5 )]
+bodypartID = "vagina"
+
+[node name="AnusBoneAttachment" parent="Tooltips" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.04501, 3.93292, 0.00700498 )
+skeleton = NodePath("../../DollSkeleton/Doll3D/Skeleton")
+boneId = "Hips"
+
+[node name="Doll3DTooltip" parent="Tooltips/AnusBoneAttachment" instance=ExtResource( 5 )]
+bodypartID = "anus"
+
+[connection signal="mouseEntered" from="Tooltips/HeadBoneAttachment/Doll3DTooltip" to="." method="_on_Doll3DTooltip_mouseEntered"]
+[connection signal="mouseExited" from="Tooltips/HeadBoneAttachment/Doll3DTooltip" to="." method="_on_Doll3DTooltip_mouseExited"]
+[connection signal="mouseEntered" from="Tooltips/BreastsBoneAttachment/Doll3DTooltip" to="." method="_on_Doll3DTooltip_mouseEntered"]
+[connection signal="mouseExited" from="Tooltips/BreastsBoneAttachment/Doll3DTooltip" to="." method="_on_Doll3DTooltip_mouseExited"]
+[connection signal="mouseEntered" from="Tooltips/PenisBoneAttachment/Doll3DTooltip" to="." method="_on_Doll3DTooltip_mouseEntered"]
+[connection signal="mouseExited" from="Tooltips/PenisBoneAttachment/Doll3DTooltip" to="." method="_on_Doll3DTooltip_mouseExited"]
+[connection signal="mouseEntered" from="Tooltips/VaginaBoneAttachment/Doll3DTooltip" to="." method="_on_Doll3DTooltip_mouseEntered"]
+[connection signal="mouseExited" from="Tooltips/VaginaBoneAttachment/Doll3DTooltip" to="." method="_on_Doll3DTooltip_mouseExited"]
+[connection signal="mouseEntered" from="Tooltips/AnusBoneAttachment/Doll3DTooltip" to="." method="_on_Doll3DTooltip_mouseEntered"]
+[connection signal="mouseExited" from="Tooltips/AnusBoneAttachment/Doll3DTooltip" to="." method="_on_Doll3DTooltip_mouseExited"]
+
+[editable path="DollSkeleton"]

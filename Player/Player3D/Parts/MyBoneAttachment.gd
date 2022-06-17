@@ -1,4 +1,4 @@
-extends Spatial
+extends Position3D
 class_name MyBoneAttachment
 
 export(NodePath) var skeleton: NodePath
@@ -26,12 +26,13 @@ func getAllRestTransformsForBone(skeletonObject:Skeleton, boneIdx):
 
 func _ready():
 	startTransform = transform
-	var skeletonObject:Skeleton = get_node_or_null(skeleton)
-	if(skeletonObject != null):
-		var boneIdx = skeletonObject.find_bone(boneId)
-		var boneTransform = getAllRestTransformsForBone(skeletonObject, boneIdx) * skeletonObject.get_bone_rest(boneIdx)#skeletonObject.get_bone_rest(boneIdx)
-		
-		correctedTransform = (boneTransform.inverse() * startTransform)
+	setSkeletonPath(skeleton)
+#	var skeletonObject:Skeleton = get_node_or_null(skeleton)
+#	if(skeletonObject != null):
+#		var boneIdx = skeletonObject.find_bone(boneId)
+#		var boneTransform = getAllRestTransformsForBone(skeletonObject, boneIdx) * skeletonObject.get_bone_rest(boneIdx)#skeletonObject.get_bone_rest(boneIdx)
+#
+#		correctedTransform = (boneTransform.inverse() * startTransform)
 
 func setSkeletonPath(skeletonPath: NodePath):
 	skeleton = skeletonPath

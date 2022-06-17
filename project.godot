@@ -374,7 +374,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Modules/Module.gd"
 }, {
-"base": "Spatial",
+"base": "Position3D",
 "class": "MyBoneAttachment",
 "language": "GDScript",
 "path": "res://Player/Player3D/Parts/MyBoneAttachment.gd"

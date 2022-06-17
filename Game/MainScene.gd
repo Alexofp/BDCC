@@ -121,6 +121,7 @@ func _on_GameUI_on_option_button(method, args):
 func pickOption(method, args):
 	GM.main.clearMessages()
 	GM.ES.clearDelayedEvents()
+	GlobalTooltip.resetTooltips()
 	
 	if(GM.ES.checkButtonInput(method, args)):
 		pass

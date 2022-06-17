@@ -37,6 +37,8 @@ func set_is_active(value: bool):
 		_tween.interpolate_property(self, "modulate", modulate, Color.transparent, 0.2)
 		_tween.start()
 
+func is_tooltip_active():
+	return is_active
 
 func set_text(title: String, body: String):
 	_title.text = title.capitalize()

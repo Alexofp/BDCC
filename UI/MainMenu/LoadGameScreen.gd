@@ -64,8 +64,23 @@ func onExportButtonClicked(savePath: String):
 		save_game.close()
 		return
 	
+	if(OS.get_name() == "Android"):
+		var has_permissions: bool = false
+		while not has_permissions:
+			#var permissions = OS.get_granted_permissions()
+			var permissions: Array = OS.get_granted_permissions() #for Godot 3 branch
+			
+			if not permissions.has("android.permission.READ_EXTERNAL_STORAGE") \
+				or not permissions.has("android.permission.WRITE_EXTERNAL_STORAGE"):
+				var _ok = OS.request_permissions()
+				#await get_tree().create_timer(1).timeout
+				yield(get_tree().create_timer(1), "timeout") #for Godot 3 branch
+			else:
+				has_permissions = true
+	
 	currentExportedPath = savePath
 	$ExportSaveDialog.current_file = savePath.get_file()
+	#$ExportSaveDialog.current_dir = OS.get_user_data_dir()
 	$ExportSaveDialog.popup_centered()
 	
 func _on_ExportSaveDialog_file_selected(path):
@@ -149,6 +164,22 @@ func _on_ImportButton_pressed():
 		SAVE.saveGameFromText(saveDataAndFileName[0], saveDataAndFileName[1])
 		updateSaves()
 	else:
+		if(OS.get_name() == "Android"):
+			var has_permissions: bool = false
+						
+			while not has_permissions:
+				#var permissions = OS.get_granted_permissions()
+				var permissions: Array = OS.get_granted_permissions() #for Godot 3 branch
+				
+				if not permissions.has("android.permission.READ_EXTERNAL_STORAGE") \
+					or not permissions.has("android.permission.WRITE_EXTERNAL_STORAGE"):
+					var _ok = OS.request_permissions()
+					#await get_tree().create_timer(1).timeout
+					yield(get_tree().create_timer(1), "timeout") #for Godot 3 branch
+				else:
+					has_permissions = true
+		
+		#$ImportSaveDialog.current_dir = OS.get_user_data_dir()
 		$ImportSaveDialog.popup_centered()
 
 func _on_ImportSaveDialog_file_selected(path: String):

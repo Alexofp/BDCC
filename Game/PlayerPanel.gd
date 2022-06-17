@@ -4,14 +4,14 @@ onready var grid = $FlexGridContainer
 onready var nameLabel = $NameLabel
 onready var creditsLabel = $CreditsLabel
 #onready var camera = $ViewportContainer/Viewport/Camera2D
-onready var camera = $Viewport/Camera2D
-onready var camera3d = $Viewport/Camera
-onready var stage3d = $Viewport/Stage3D
+onready var camera = $ViewportWrapper/Viewport/Camera2D
+onready var camera3d = $ViewportWrapper/Viewport/Camera
+onready var stage3d = $ViewportWrapper/Viewport/Stage3D
 #onready var theStage = $ViewportContainer/Viewport/TheStage
-onready var theStage = $Viewport/TheStage
+onready var theStage = $ViewportWrapper/Viewport/TheStage
 onready var doll = theStage.getPlayerDoll()
 onready var tooltip = $CanvasLayer/TooltipDisplay
-onready var viewport = $Viewport
+onready var viewport = $ViewportWrapper/Viewport
 #onready var viewport = $ViewportContainer/Viewport
 onready var staminaBar = $StaminaBar
 onready var painBar = $PainBar
@@ -168,3 +168,7 @@ func _on_TheStage_onBodypartMouseExited(_who, _what):
 
 func getStage3d() -> Stage3D:
 	return stage3d
+
+
+func _on_ViewportWrapper_gui_input(event):
+	_gui_input(event)

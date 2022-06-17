@@ -2,5 +2,5 @@
 
 [ext_resource path="res://Player/Player3D/Parts/MyBoneAttachment.gd" type="Script" id=1]
 
-[node name="MyBoneAttachment" type="Spatial"]
+[node name="MyBoneAttachment" type="Position3D"]
 script = ExtResource( 1 )

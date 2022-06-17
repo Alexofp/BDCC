@@ -13,3 +13,7 @@ func showTooltip(title: String, text: String, showBelow: bool = false):
 func hideTooltip():
 	if(tooltip != null):
 		tooltip.hideTooltip()
+
+func resetTooltips():
+	if(tooltip != null):
+		tooltip.resetTooltips()

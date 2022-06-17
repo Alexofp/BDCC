@@ -10,9 +10,9 @@ func _ready():
 	
 func setIgnoreInput(i):
 	ignoreInput = i
+	ignoreInput = true
 
 func _physics_process(_delta):
-
 	var mousePos = get_global_mouse_position()
 	var ourPos = global_position
 	var dist = ourPos.distance_to(mousePos)

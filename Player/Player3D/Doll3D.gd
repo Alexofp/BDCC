@@ -5,11 +5,14 @@ var state = {}
 var parts = {}
 var savedCharacterID: String
 
+export(bool) var addTestBody = false
+
 func getDollSkeleton():
 	return $DollSkeleton
 
 func _ready():
-	#testBody()
+	if(addTestBody):
+		testBody()
 	pass
 
 func testBody():
@@ -226,3 +229,28 @@ func setBallsScale(newScale: float):
 		offsetScale = 1.0
 	
 	setBoneScaleAndOffset("Balls", newScale, Vector3(0.0, 0.156431, 0.0)*offsetScale)
+
+
+func _on_Doll3DTooltip_mouseEntered(bodypartID):
+	if(savedCharacterID != "" && bodypartID != ""):
+		var character = GlobalRegistry.getCharacter(savedCharacterID)
+		if(character == null):
+			return
+		
+		var bodypart:Bodypart = character.getBodypart(bodypartID)
+		if(bodypart == null):
+			return
+			
+		GlobalTooltip.showTooltip(bodypart.getName(), bodypart.getTooltipInfo())
+		
+
+func _on_Doll3DTooltip_mouseExited(bodypartID):
+	if(savedCharacterID != "" && bodypartID != ""):
+		var character = GlobalRegistry.getCharacter(savedCharacterID)
+		if(character == null):
+			return
+		
+		var bodypart:Bodypart = character.getBodypart(bodypartID)
+		if(bodypart == null):
+			return
+		GlobalTooltip.hideTooltip()
