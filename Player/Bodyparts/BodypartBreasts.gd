@@ -26,7 +26,7 @@ func getSlot():
 	return BodypartSlot.Breasts
 
 func getTooltipInfo():
-	var text = "size: " + BreastsSize.breastSizeToString(size)
+	var text = "size: " + BreastsSize.breastSizeToString(getSize())
 	if(size != BreastsSize.FOREVER_FLAT):
 		text += "\n"+BodilyFluids.FluidType.getName(getFluidProduction().getFluidType())+": " + str(round(getFluidProduction().getFluidAmount() * 10.0)/10.0)+"/"+ str(round(getFluidProduction().getCapacity() * 10.0)/10.0)+" ml"
 	

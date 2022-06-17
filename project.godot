@@ -204,11 +204,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Game/Gameplay/Direction.gd"
 }, {
-"base": "Node2D",
-"class": "Doll",
-"language": "GDScript",
-"path": "res://Player/Doll.gd"
-}, {
 "base": "Spatial",
 "class": "Doll3D",
 "language": "GDScript",
@@ -333,11 +328,6 @@ _global_script_classes=[ {
 "class": "LightInventory",
 "language": "GDScript",
 "path": "res://Inventory/LightInventory.gd"
-}, {
-"base": "Node2D",
-"class": "Limb",
-"language": "GDScript",
-"path": "res://Player/Limbs/Limb.gd"
 }, {
 "base": "Object",
 "class": "LimbTypes",
@@ -614,11 +604,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Quests/Quest/TestQuest.gd"
 }, {
-"base": "Node2D",
-"class": "TheStage",
-"language": "GDScript",
-"path": "res://Player/TheStage.gd"
-}, {
 "base": "Orifice",
 "class": "ThroatOrifice",
 "language": "GDScript",
@@ -694,7 +679,6 @@ _global_script_class_icons={
 "CycleStage": "",
 "DamageType": "",
 "Direction": "",
-"Doll": "",
 "Doll3D": "",
 "DollSkeleton": "",
 "DonationsInfo": "",
@@ -720,7 +704,6 @@ _global_script_class_icons={
 "ItemTag": "",
 "Lactation": "",
 "LightInventory": "",
-"Limb": "",
 "LimbTypes": "",
 "LootTableBase": "",
 "LustInterests": "",
@@ -776,7 +759,6 @@ _global_script_class_icons={
 "TaviModule": "",
 "TeaseType": "",
 "TestQuest": "",
-"TheStage": "",
 "ThroatOrifice": "",
 "TopicBase": "",
 "Trigger": "",

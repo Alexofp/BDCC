@@ -51,9 +51,7 @@ func getOverriddenPC():
 	return overridenPC
 
 func connectSignalsToPC(who):
-	var _s = who.connect("animation_changed", $GameUI, "_on_Player_animation_changed")
-	_s = who.connect("bodypart_changed", $GameUI, "_on_Player_bodypart_changed")
-	_s = who.connect("levelChanged", self, "_on_Player_levelChanged")
+	var _s = who.connect("levelChanged", self, "_on_Player_levelChanged")
 	_s = who.connect("orificeBecomeMoreLoose", self, "_on_Player_orificeBecomeMoreLoose")
 	_s = who.connect("skillLevelChanged", self, "_on_Player_skillLevelChanged")
 	_s = who.connect("stat_changed", $GameUI, "_on_Player_stat_changed")

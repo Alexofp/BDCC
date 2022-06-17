@@ -3,7 +3,6 @@ class_name Player
 
 
 signal location_changed(newloc)
-signal animation_changed(newanim)
 
 var gamename = "Player"
 var credits:int = 0
@@ -75,11 +74,6 @@ func _ready():
 
 func getID():
 	return "pc"
-
-func playAnimation(dollAnim):
-	emit_signal("animation_changed", dollAnim)
-
-
 
 func setLocation(newRoomID:String):
 	location = newRoomID

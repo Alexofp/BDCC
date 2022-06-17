@@ -88,7 +88,6 @@ func _run():
 		addButton("Get on all fours", "Be the good pet for Nova", "get_on_all_fours")
 
 	if(state == "get_on_all_fours"):
-		GM.pc.playAnimation(TheStage.Kneeling)
 		GM.main.playAnimation(StageScene.Solo, "kneel")
 		# (if puppy)
 		if(isPuppy):

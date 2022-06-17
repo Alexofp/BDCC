@@ -35,7 +35,6 @@ func _run():
 	if(state == ""):
 		aimCamera("medical_paddedcell_player")
 		GM.pc.setLocation("medical_paddedcell_player")
-		GM.pc.playAnimation(TheStage.Kneeling)
 		GM.main.playAnimation(StageScene.Solo, "kneel")
 		setLocationName("Padded cell")
 		

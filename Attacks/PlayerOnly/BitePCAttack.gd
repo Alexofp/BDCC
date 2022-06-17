@@ -52,9 +52,6 @@ func getRequirements():
 func getAnticipationText(_attacker, _receiver):
 	return _attacker.getName() + " bares "+_attacker.hisHer()+" fangs and then suddenly ludges at you!"
 
-func getAttackAnimation():
-	return TheStage.Bite
-
 func getAttackSoloAnimation():
 	return "bite"
 

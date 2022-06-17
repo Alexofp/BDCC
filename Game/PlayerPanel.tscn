@@ -1,10 +1,9 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Game/TooltipDisplay.tscn" type="PackedScene" id=1]
 [ext_resource path="res://GlobalTheme.tres" type="Theme" id=2]
 [ext_resource path="res://UI/StatusEffectsPanel/StatusEffectsPanel.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Game/PlayerPanel.gd" type="Script" id=4]
-[ext_resource path="res://Player/TheStage.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Fonts/Titillium-Regular.otf" type="DynamicFontData" id=6]
 [ext_resource path="res://UI/LabeledProgressBar.tscn" type="PackedScene" id=7]
 [ext_resource path="res://UI/CustomViewportControl.tscn" type="PackedScene" id=8]
@@ -109,15 +108,6 @@ size = Vector2( 279, 472 )
 render_target_v_flip = true
 render_target_update_mode = 3
 
-[node name="Camera2D" type="Camera2D" parent="ViewportWrapper/Viewport"]
-visible = false
-offset = Vector2( 0, -350 )
-current = true
-zoom = Vector2( 2, 2 )
-
-[node name="TheStage" parent="ViewportWrapper/Viewport" instance=ExtResource( 5 )]
-visible = false
-
 [node name="Stage3D" parent="ViewportWrapper/Viewport" instance=ExtResource( 9 )]
 
 [node name="Camera" type="Camera" parent="ViewportWrapper/Viewport"]
@@ -156,7 +146,5 @@ margin_right = 280.291
 margin_bottom = -96.289
 
 [connection signal="gui_input" from="ViewportWrapper" to="." method="_on_ViewportWrapper_gui_input"]
-[connection signal="onBodypartMouseEntered" from="ViewportWrapper/Viewport/TheStage" to="." method="_on_TheStage_onBodypartMouseEntered"]
-[connection signal="onBodypartMouseExited" from="ViewportWrapper/Viewport/TheStage" to="." method="_on_TheStage_onBodypartMouseExited"]
 [connection signal="mouse_entered" from="ViewportWrapper/CustomViewportControl" to="." method="_on_ViewportContainer_mouse_entered"]
 [connection signal="mouse_exited" from="ViewportWrapper/CustomViewportControl" to="." method="_on_ViewportContainer_mouse_exited"]

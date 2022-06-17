@@ -12,7 +12,6 @@ func _run():
 		
 	if(state == ""):
 		aimCameraAndSetLocName("cd_captain_office")
-		GM.pc.playAnimation(TheStage.GetDefeated)
 		GM.main.playAnimation(StageScene.Solo, "defeat")
 		
 		saynn("The doors close behind you as you enter the captain's office. You look around, speechless. Walls are made out of red wood with an added golden trim, many carpets are covering the floor. The tall ceiling features a grand chandelier in a gothic style. A lot of antique design is incorporated into the furniture, there is even a huge old school radio in the corner. The center of a room is taken by a big wooden desk and a rich chair made out of black leather. Then there are two more smaller chairs before it and a few little tables placed around the room, a bookshelf. The main desk features a golden name plate saying ‘Cpt. Wright’, some writing utensils and a lamp. Everything looks pretty clean.")
@@ -178,7 +177,6 @@ func _run():
 		addButton("Continue", "Oww", "continue2")
 
 	if(state == "continue2"):
-		GM.pc.playAnimation(TheStage.Walking)
 		GM.main.playAnimation(StageScene.Solo, "walk")
 		aimCameraAndSetLocName("hall_mainentrance")
 		GM.pc.setLocation("hall_mainentrance")

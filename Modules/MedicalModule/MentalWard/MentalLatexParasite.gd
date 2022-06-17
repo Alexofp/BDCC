@@ -103,7 +103,6 @@ func _run():
 		addButton("Give in", "Maybe it will let you go sooner if you don’t resist..", "give_in")
 
 	if(state == "give_in"):
-		GM.pc.playAnimation(TheStage.GetDefeated)
 		GM.main.playAnimation(StageScene.Solo, "defeat")
 		
 		saynn("While the tentacles explore you, the latex-y goo continues to envelop more and more of your body. You feel like you can’t stand anymore, you relax and try to fall but the parasite catches you and gently places you down on your knees.")
@@ -168,7 +167,6 @@ func _run():
 	if(state == "take_a_nap"):
 		aimCamera("medical_paddedcell_player")
 		GM.pc.setLocation("medical_paddedcell_player")
-		GM.pc.playAnimation(TheStage.Kneeling)
 		GM.main.playAnimation(StageScene.Solo, "kneel")
 		setLocationName("Padded cell")
 		

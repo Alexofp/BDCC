@@ -52,9 +52,6 @@ func getAIScore(_attacker, _receiver):
 		return 0
 	return .getAIScore(_attacker, _receiver)
 
-func getAttackAnimation():
-	return TheStage.Shove
-
 func getAttackSoloAnimation():
 	return "shove"
 

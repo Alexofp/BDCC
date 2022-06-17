@@ -27,7 +27,6 @@ func _run():
 		addButton("back", "Back to picking gender", "pickgender")
 
 	if(state == "pickspecies"):
-		GM.pc.playAnimation(TheStage.Standing)
 		GM.main.playAnimation(StageScene.Solo, "stand")
 		say("Pick your character's species")
 		var allSpecies = GlobalRegistry.getAllPlayableSpecies()

@@ -27,7 +27,6 @@ func _run():
 	if(state == "follow"):
 		aimCamera("med_milkingroom")
 		setLocationName("Milking heaven")
-		GM.pc.playAnimation(TheStage.Walking)
 		GM.main.playAnimation(StageScene.Solo, "walk")
 		
 		saynn("You enter the space that is designed for milking activities, Eliza guides you into one of the stalls and ties your leash to one of the metal bars. You look around, the room has a moody warm feel to it, the lighting here is not as bright.")

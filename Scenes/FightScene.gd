@@ -275,7 +275,6 @@ func _react(_action: String, _args):
 		setState("lost")
 		whatHappened = "You give up the fight willingly and submit to your enemy\n"
 		battleState = "lost"
-		GM.pc.playAnimation(TheStage.Kneeling)
 		GM.main.playAnimation(StageScene.Solo, "kneel")
 		return
 	
@@ -301,9 +300,6 @@ func doPlayerAttack(attackID):
 	
 	setPlayerAsAttacker()
 	var text = GM.ui.processString(attack.doAttack(GM.pc, enemyCharacter))
-	var attackAnim = attack.getAttackAnimation()
-	if(attackAnim != null && attackAnim != ""):
-		GM.pc.playAnimation(attackAnim)
 	var attackSoloAnim = attack.getAttackSoloAnimation()
 	if(attackSoloAnim != null && attackSoloAnim != ""):
 		GM.main.playAnimation(StageScene.Solo, attackSoloAnim)
@@ -414,7 +410,6 @@ func checkEnd():
 		whatHappened += "You succumb to pain\n"
 		battleState = "lost"
 		battleEndedHow = "pain"
-		GM.pc.playAnimation(TheStage.GetDefeated)
 		GM.main.playAnimation(StageScene.Solo, "defeat")
 		return "lost"
 	if(enemyCharacter.getPain() >= enemyCharacter.painThreshold()):
@@ -426,7 +421,6 @@ func checkEnd():
 		whatHappened += "You're too aroused to continue\n"
 		battleState = "lost"
 		battleEndedHow = "lust"
-		GM.pc.playAnimation(TheStage.GetDefeated)
 		GM.main.playAnimation(StageScene.Solo, "defeat")
 		return "lost"
 	if(enemyCharacter.getLust() >= enemyCharacter.lustThreshold()):

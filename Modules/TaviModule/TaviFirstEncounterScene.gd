@@ -122,7 +122,6 @@ func _run():
 		addButton("Push away", "What she thinks she is doing", "push_away")
 
 	if(state == "kneel"):
-		GM.pc.playAnimation(TheStage.Kneeling)
 		GM.main.playAnimation(StageScene.Solo, "kneel")
 		
 		saynn("You feel her firm grasp and decide to comply. Without much resistance, you lower yourself and get on your knees before the tall cat. She can’t help but to smile and give you a few headpats.")
@@ -160,7 +159,6 @@ func _run():
 		addButton("Push", "Fight the pain and try to overpower her. You will probably have to fight her.", "push")
 
 	if(state == "submit"):
-		GM.pc.playAnimation(TheStage.Kneeling)
 		GM.main.playAnimation(StageScene.Solo, "kneel")
 		
 		saynn("The pain is too much so you decide to comply. You raise your hands up and cease resisting.")
@@ -227,7 +225,6 @@ func _run():
 		addButton("Continue", "Listen to the rules", "continue")
 
 	if(state == "no1"):
-		GM.pc.playAnimation(TheStage.GetDefeated)
 		GM.main.playAnimation(StageScene.Solo, "defeat")
 		
 		saynn("You just spit in her direction. And Tavi clearly didn’t like that answer, she growls as she pushes her leg into your chest and then kicks you away, causing you to hit the floor. That act puts a somewhat satisfied grin on her face.")
@@ -257,7 +254,6 @@ func _run():
 		addDisabledButton("Fuck Tavi", "Not done :(")
 
 	if(state == "submit2"):
-		GM.pc.playAnimation(TheStage.Kneeling)
 		GM.main.playAnimation(StageScene.Solo, "kneel")
 		
 		saynn("You crouch before Tavi and help her to get up. You swipe the dirt from her uniform and step away, tilting your head down, looking kinda sad after what you did.")

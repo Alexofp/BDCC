@@ -3,7 +3,6 @@ extends BodypartTail
 func _init():
 	visibleName = "dragon tail"
 	id = "dragontail"
-	dollType = "Dragon"
 
 func getCompatibleSpecies():
 	return [Species.Dragon]

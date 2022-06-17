@@ -3,7 +3,6 @@ extends BodypartPenis
 func _init():
 	visibleName = "dragon penis"
 	id = "dragonpenis"
-	dollType = "Dragon"
 
 func getCompatibleSpecies():
 	return [Species.Any]

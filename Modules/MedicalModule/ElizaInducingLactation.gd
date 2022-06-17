@@ -27,7 +27,6 @@ func _run():
 	if(state == "follow"):
 		aimCamera("med_researchlab")
 		setLocationName("Research lab")
-		GM.pc.playAnimation(TheStage.SittingOnChair)
 		GM.main.playAnimation(StageScene.Solo, "sit")
 		
 		saynn("You enter a bright white room, this is clearly where testing is done. You spot something that looks like a chemistry table, many lockers and a special table. This table is actually a part of a machine, you spot some kind of sensors on it, a screen with a keyboard and iron hooks that can be used to chain inmates to. Eliza brings to it and attaches the other end of the leash to its hooks, limiting your available reach by a lot.")
@@ -122,7 +121,6 @@ func _run():
 		addButton("Leave", "Seems like you’re done here", "leave")
 
 	if(state == "leave"):
-		GM.pc.playAnimation(TheStage.Walking)
 		GM.main.playAnimation(StageScene.Solo, "walk")
 		aimCamera("med_nearlab")
 		GM.pc.setLocation("med_nearlab")

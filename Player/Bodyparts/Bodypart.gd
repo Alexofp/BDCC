@@ -2,7 +2,6 @@ extends Node
 class_name Bodypart
 
 var id
-var dollType
 var limbSlot
 var visibleName
 
@@ -12,9 +11,6 @@ var character: WeakRef = null
 
 func _init():
 	pass
-
-func _getDollType():
-	return dollType
 
 func getDoll3DScene():
 	return null

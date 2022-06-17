@@ -2,8 +2,6 @@ extends Spatial
 class_name Stage3D
 
 var currentScene: BaseStageScene3D
-var viewport
-var camera
 
 func _ready():
 	call_deferred("play", StageScene.Solo, "stand") # Player is created late
@@ -25,13 +23,3 @@ func play(sceneID, actionID, args = []):
 	currentScene = newScene
 	add_child(newScene)
 	newScene.playAnimation(actionID, args)
-
-func _process(_delta):
-	viewport = get_viewport()
-	#var global_mouse_pos = get_viewport().get_mouse_position()
-	camera = get_viewport().get_camera()
-	#$Sprite3D.translation = get_viewport().get_camera().project_ray_origin(global_mouse_pos)
-	
-func _input(event: InputEvent):
-	if(camera != null && (event is InputEventMouseMotion || event is InputEventMouseButton)):
-		$Sprite3D.translation = camera.project_ray_origin(event.position)

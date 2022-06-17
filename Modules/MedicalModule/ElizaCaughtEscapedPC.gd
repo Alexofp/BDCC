@@ -10,7 +10,6 @@ func _run():
 	if(state == ""):
 		aimCamera("medical_near_pccell")
 		GM.pc.setLocation("medical_near_pccell")
-		GM.pc.playAnimation(TheStage.Kneeling)
 		GM.main.playAnimation(StageScene.Solo, "kneel")
 		setLocationName("Near cells")
 		
@@ -81,7 +80,6 @@ func _run():
 	if(state == "sleep1"):
 		aimCamera("medical_paddedcell_player")
 		GM.pc.setLocation("medical_paddedcell_player")
-		GM.pc.playAnimation(TheStage.Kneeling)
 		GM.main.playAnimation(StageScene.Solo, "kneel")
 		setLocationName("Padded cell")
 		

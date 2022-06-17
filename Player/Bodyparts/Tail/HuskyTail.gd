@@ -3,7 +3,6 @@ extends BodypartTail
 func _init():
 	visibleName = "husky tail"
 	id = "huskytail"
-	dollType = "Husky"
 
 func getCompatibleSpecies():
 	return [Species.Canine, Species.Wolf]

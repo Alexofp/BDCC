@@ -22,7 +22,6 @@ func _run():
 	if(state == "sneak_up"):
 		aimCamera("intro_medicalarea")
 		setLocationName("Medical area")
-		GM.pc.playAnimation(TheStage.GetDefeated)
 		GM.main.playAnimation(StageScene.Solo, "defeat")
 		
 		saynn("You decide not to announce your presence and instead begin to slowly creep up to the lady, who seems to be too busy with reading something off of her tablet. You keep watching her as you make your steps as light as possible. You notice her feline ears twitching ever so slightly. As you approach the instrument table, you notice a variety of tools: syringes, clamps, retractors but most importantly, a few scalpels. Your hand hovers over one as you try to grab it. But as soon as you do, you hear a voice.")
@@ -90,7 +89,6 @@ func _run():
 		addButton("Sit", "Take a sit", "sit")
 
 	if(state == "sit"):
-		GM.pc.playAnimation(TheStage.SittingOnChair)
 		GM.main.playAnimation(StageScene.Solo, "sit")
 		
 		saynn("You sit on the side of a bed, it’s not the most comfy one but what can you do.")
@@ -143,7 +141,6 @@ func _run():
 		addButton("Fuck no", "You’re not a dog", "fuck_no")
 
 	if(state == "fuck_no"):
-		GM.pc.playAnimation(TheStage.Shove)
 		GM.main.playAnimation(StageScene.Solo, "shove")
 		
 		aimCamera("intro_beforeelevator")
@@ -164,7 +161,6 @@ func _run():
 		addButton("Lift", "Enter the lift", "lift")
 
 	if(state == "fine"):
-		GM.pc.playAnimation(TheStage.Standing)
 		GM.main.playAnimation(StageScene.Solo, "stand")
 		
 		aimCamera("intro_beforeelevator")
@@ -207,7 +203,6 @@ func _run():
 		aimCamera("hall_elevator")
 		setLocationName("Checkpoint")
 		
-		GM.pc.playAnimation(TheStage.Walking)
 		GM.main.playAnimation(StageScene.Solo, "walk")
 		
 		saynn("It takes a minute but the lift finally arrives. When the doors open, the first thing you see is a checkpoint with a few guards standing around.")
@@ -233,7 +228,6 @@ func _run():
 		addButton("Follow", "Follow the leash", "followtocell")
 
 	if(state == "followtocell"):
-		GM.pc.playAnimation(TheStage.Walking)
 		GM.main.playAnimation(StageScene.Solo, "walk")
 		
 		aimCamera("cellblock_nearcells")

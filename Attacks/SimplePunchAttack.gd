@@ -40,9 +40,6 @@ func _canUse(_attacker, _receiver):
 func getRequirements():
 	return [["freearms"]]
 
-func getAttackAnimation():
-	return TheStage.Punch
-
 func getAttackSoloAnimation():
 	return "punch"
 

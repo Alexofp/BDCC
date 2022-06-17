@@ -24,7 +24,6 @@ func _run():
 
 	if(state == "slip_out"):
 		aimCamera("medical_firstcorridorcross")
-		GM.pc.playAnimation(TheStage.Walking)
 		GM.main.playAnimation(StageScene.Solo, "walk")
 		setLocationName("Corridors")
 		
@@ -36,7 +35,6 @@ func _run():
 
 	if(state == "continue"):
 		aimCamera("med_lobbyne")
-		GM.pc.playAnimation(TheStage.Walking)
 		GM.main.playAnimation(StageScene.Solo, "walk")
 		setLocationName("Medical lobby")
 		GM.pc.setLocation("med_lobbyne")
