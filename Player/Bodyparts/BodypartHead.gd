@@ -5,6 +5,7 @@ func _init():
 	limbSlot = LimbTypes.Head
 	orifice = ThroatOrifice.new()
 	orifice.bodypart = weakref(self)
+	needsProcessing = true
 
 func getSlot():
 	return BodypartSlot.Head

@@ -19,6 +19,7 @@ var lustInterests: LustInterests
 
 # Bodypart stuff
 var bodyparts: Dictionary
+var processingBodyparts: Array
 var bodypartStorageNode
 
 # Combat stats
@@ -665,16 +666,22 @@ func resetSlots():
 		if(bodyparts.has(slot) && bodyparts[slot] != null):
 			bodyparts[slot].queue_free()
 		bodyparts[slot] = null
+	processingBodyparts.clear()
 
-func giveBodypart(bodypart: Bodypart):
+func giveBodypart(bodypart: Bodypart, emitSignal = true):
 	var slot = bodypart.getSlot()
 	if(bodyparts.has(slot) && bodyparts[slot] != null):
-		bodyparts[slot].queue_free()
+		removeBodypart(slot, false)
+		
 	bodyparts[slot] = bodypart
 	bodypartStorageNode.add_child(bodypart)
 	bodypart.name = bodypart.visibleName
 	bodypart.character = weakref(self)
-	emit_signal("bodypart_changed")
+	if(bodypart.needsProcessing):
+		processingBodyparts.append(bodypart)
+	
+	if(emitSignal):
+		emit_signal("bodypart_changed")
 
 func giveBodypartUnlessSame(bodypart: Bodypart):
 	var slot = bodypart.getSlot()
@@ -695,11 +702,17 @@ func getBodypart(slot):
 func getBodyparts():
 	return bodyparts
 	
-func removeBodypart(slot):
+func removeBodypart(slot, emitSignal = true):
 	if(bodyparts.has(slot) && bodyparts[slot] != null):
-		bodyparts[slot].queue_free()
+		var bodypart = bodyparts[slot]
+		bodypart.queue_free()
+		
+		if(processingBodyparts.has(bodypart)):
+			processingBodyparts.erase(bodypart)
 	bodyparts[slot] = null
-	emit_signal("bodypart_changed")
+	
+	if(emitSignal):
+		emit_signal("bodypart_changed")
 
 func clearOrificeFluids():
 	if(hasBodypart(BodypartSlot.Vagina)):

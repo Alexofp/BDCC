@@ -257,9 +257,8 @@ func afterFightEnded():
 	timedBuffsDurationTurns = 0
 
 func processTime(_secondsPassed):
-	for bodypartSlot in bodyparts:
-		var bodypart = bodyparts[bodypartSlot]
-		if(bodypart == null):
+	for bodypart in processingBodyparts:
+		if(bodypart == null || !is_instance_valid(bodypart)):
 			continue
 		bodypart.processTime(_secondsPassed)
 	
@@ -299,9 +298,9 @@ func hoursPassed(_howmuch):
 		
 	skillsHolder.hoursPassed(_howmuch)
 	
-	for bodypartSlot in bodyparts:
-		if(bodyparts[bodypartSlot] != null):
-			bodyparts[bodypartSlot].hoursPassed(_howmuch)
+	for bodypart in processingBodyparts:
+		if(bodypart != null && is_instance_valid(bodypart)):
+			bodypart.hoursPassed(_howmuch)
 		
 	if(intoxication <= 0.0 && intoxicationTolerance > 0.0):
 		intoxicationTolerance -= 0.005
@@ -493,11 +492,8 @@ func loadData(data):
 			continue
 		var id = SAVE.loadVar(loadedBodyparts[slot], "id", "humanleg")
 		var bodypart = GlobalRegistry.createBodypart(id)
-		bodyparts[slot] = bodypart
 		bodypart.loadData(SAVE.loadVar(loadedBodyparts[slot], "data", {}))
-		bodypartStorageNode.add_child(bodypart)
-		bodypart.name = bodypart.visibleName
-		bodypart.character = weakref(self)
+		giveBodypart(bodypart, false)
 	
 	loadStatusEffectsData(SAVE.loadVar(data, "statusEffects", {}))
 	inventory.loadData(SAVE.loadVar(data, "inventory", {}))

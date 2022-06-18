@@ -8,6 +8,7 @@ func _init():
 	limbSlot = LimbTypes.Penis
 	fluidProduction = CumProduction.new()
 	fluidProduction.bodypart = weakref(self)
+	needsProcessing = true
 
 func getSlot():
 	return BodypartSlot.Penis

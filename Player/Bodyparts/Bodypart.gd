@@ -4,6 +4,7 @@ class_name Bodypart
 var id
 var limbSlot
 var visibleName
+var needsProcessing = false
 
 var orifice: Orifice = null
 var fluidProduction: FluidProduction = null

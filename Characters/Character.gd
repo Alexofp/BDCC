@@ -140,9 +140,8 @@ func createBodyparts():
 	pass
 
 func processTime(_secondsPassed):
-	for bodypartSlot in bodyparts:
-		var bodypart = bodyparts[bodypartSlot]
-		if(bodypart == null):
+	for bodypart in processingBodyparts:
+		if(bodypart == null || !is_instance_valid(bodypart)):
 			continue
 		bodypart.processTime(_secondsPassed)
 		
@@ -150,9 +149,9 @@ func processTime(_secondsPassed):
 		menstrualCycle.processTime(_secondsPassed)
 		
 func hoursPassed(_howmuch):
-	for bodypartSlot in bodyparts:
-		if(bodyparts[bodypartSlot] != null):
-			bodyparts[bodypartSlot].hoursPassed(_howmuch)
+	for bodypart in processingBodyparts:
+		if(bodypart != null && is_instance_valid(bodypart)):
+			bodypart.hoursPassed(_howmuch)
 
 func updateNonBattleEffects():
 	if(hasBodypart(BodypartSlot.Vagina) && !getBodypart(BodypartSlot.Vagina).isOrificeEmpty()):

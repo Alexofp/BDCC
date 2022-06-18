@@ -9,6 +9,7 @@ func _init():
 	limbSlot = LimbTypes.Breasts
 	fluidProduction = Lactation.new()
 	fluidProduction.bodypart = weakref(self)
+	needsProcessing = true
 	
 func saveData():
 	var data = .saveData()

@@ -5,6 +5,7 @@ func _init():
 	limbSlot = null
 	orifice = AnusOrifice.new()
 	orifice.bodypart = weakref(self)
+	needsProcessing = true
 
 func getSlot():
 	return BodypartSlot.Anus
