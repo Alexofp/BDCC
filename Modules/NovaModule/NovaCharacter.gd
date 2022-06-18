@@ -83,7 +83,7 @@ func getChatColor():
 
 func createBodyparts():
 	var mybreasts: BodypartBreasts = GlobalRegistry.createBodypart("humanbreasts")
-	mybreasts.size = BreastsSize.D
+	mybreasts.size = BreastsSize.EE
 	giveBodypartUnlessSame(mybreasts)
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("caninehead"))
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("vagina"))
@@ -102,6 +102,8 @@ func createEquipment():
 	#getInventory().equipItem(GlobalRegistry.createItemNoID("inmatecollar"))
 	pass
 
+func getThickness():
+	return 115
 
 func onGivingBirth(_impregnatedEggCells: Array, _newkids: Array):
 	.onGivingBirth(_impregnatedEggCells, _newkids)
