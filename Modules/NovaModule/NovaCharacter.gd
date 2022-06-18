@@ -99,7 +99,9 @@ func createBodyparts():
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("huskytail"))
 
 func createEquipment():
-	getInventory().equipItem(GlobalRegistry.createItemNoID("inmatecollar"))
+	#getInventory().equipItem(GlobalRegistry.createItemNoID("inmatecollar"))
+	pass
+
 
 func onGivingBirth(_impregnatedEggCells: Array, _newkids: Array):
 	.onGivingBirth(_impregnatedEggCells, _newkids)

@@ -327,3 +327,9 @@ func setUnriggedParts(scenes):
 #					attachment.setScenes(scenes[zone])
 #				else:
 #					attachment.setScenes([])
+
+func playAnimation(animName, blend = 0.1, speed = 1.0):
+	$DollSkeleton/AnimationPlayer.play(animName, blend, speed)
+
+func getAnimPlayer():
+	return $DollSkeleton/AnimationPlayer

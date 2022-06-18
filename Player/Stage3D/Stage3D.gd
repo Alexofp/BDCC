@@ -4,7 +4,8 @@ class_name Stage3D
 var currentScene: BaseStageScene3D
 
 func _ready():
-	call_deferred("play", StageScene.Solo, "stand") # Player is created late
+	#call_deferred("play", StageScene.Solo, "stand") # Player is created late
+	call_deferred("play", StageScene.Duo, "kneel", {npc="nova"}) # Player is created late
 	#play(StageScene.Solo, "stand")
 
 func play(sceneID, actionID, args = []):

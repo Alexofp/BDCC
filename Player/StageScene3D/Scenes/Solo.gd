@@ -9,7 +9,7 @@ func _init():
 func _ready():
 	animationTree.active = true
 	
-func playAnimation(animID, _args = []):
+func playAnimation(animID, _args = {}):
 	print("Playing: "+str(animID))
 	doll.prepareCharacter("pc")
 	#doll.forceSlotToBeVisible(BodypartSlot.Penis)

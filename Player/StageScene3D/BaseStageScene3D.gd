@@ -9,5 +9,5 @@ func _init():
 func _ready():
 	pass
 
-func playAnimation(animID, _args = []):
+func playAnimation(animID, _args = {}):
 	print("Playing: "+str(animID))
