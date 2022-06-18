@@ -401,3 +401,36 @@ func loadData(data):
 		newItem.uniqueID = uniqueID
 		newItem.loadData(itemLoadedData)
 		equipItem(newItem)
+
+func loadDataNPC(data):
+	for item in items:
+		item.currentInventory = null
+	items.clear()
+	
+	var loadedItems = SAVE.loadVar(data, "items", [])
+	for loadedItem in loadedItems:
+		var id = SAVE.loadVar(loadedItem, "id", "")
+		var uniqueID = SAVE.loadVar(loadedItem, "uniqueID", "")
+		var itemLoadedData = SAVE.loadVar(loadedItem, "data", {})
+		
+		var newItem: ItemBase = GlobalRegistry.createItem(id, false)
+		if(newItem == null):
+			printerr("ITEM WITH ID "+str(id)+" WASN'T FOUND IN REGISTRY")
+			continue
+		newItem.uniqueID = uniqueID
+		newItem.loadData(itemLoadedData)
+		addItem(newItem)
+	
+	var loadedEquippedItems = SAVE.loadVar(data, "equipped_items", {})
+	for loadedSlot in loadedEquippedItems:
+		var loadedItem = loadedEquippedItems[loadedSlot]
+		var id = SAVE.loadVar(loadedItem, "id", "")
+		#var uniqueID = SAVE.loadVar(loadedItem, "uniqueID", "")
+		var itemLoadedData = SAVE.loadVar(loadedItem, "data", {})
+		
+		if(hasSlotEquipped(loadedSlot)):
+			var currentItem: ItemBase = getEquippedItem(loadedSlot)
+			
+			if(currentItem.id != id):
+				continue
+			currentItem.loadData(itemLoadedData)

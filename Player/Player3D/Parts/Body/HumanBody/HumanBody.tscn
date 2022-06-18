@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Player/Player3D/Parts/Part3D.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Player/Player3D/Parts/Body/HumanBody/body.png" type="Texture" id=2]
-[ext_resource path="res://Player/Player3D/Parts/DollAttachmentZone.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Player/Player3D/Parts/AttachmentProxy.tscn" type="PackedScene" id=4]
 
 [sub_resource type="SpatialMaterial" id=5]
 resource_name = "body.png.001"
@@ -325,7 +325,7 @@ mesh = SubResource( 13 )
 skin = SubResource( 14 )
 material/0 = null
 
-[node name="DollAttachmentZone" parent="." index="3" instance=ExtResource( 3 )]
-transform = Transform( 0.991162, -0.132654, 0, 0.132654, 0.991162, 0, 0, 0, 1, 0.0567529, 6.63878, 0.0881704 )
+[node name="AttachmentProxy" parent="." index="3" instance=ExtResource( 4 )]
+transform = Transform( 0.991162, -0.132654, 0, 0.132654, 0.991162, 0, 0, 0, 1, 0.0741279, 6.65269, 0.088 )
 boneId = "Neck"
 zoneName = "neck"

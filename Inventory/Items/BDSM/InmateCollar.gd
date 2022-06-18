@@ -29,3 +29,14 @@ func getUnriggedParts(_character):
 	return {
 		"neck": ["res://Inventory/UnriggedModels/Collar/CollarModel.tscn"],
 	}
+
+#func getRiggedParts(_character):
+#	return {
+#		"asd": "res://Player/Player3D/Parts/Legs/DigiLegs/DigiLegs.tscn",
+#		"asd2": "res://Player/Player3D/Parts/Arms/HumanArms/HumanArms.tscn",
+#	}
+#
+#func getHidesParts(_character):
+#	return {
+#		BodypartSlot.Penis: true,
+#	}

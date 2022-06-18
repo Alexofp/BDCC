@@ -1,16 +1,22 @@
 extends Spatial
 
 var dollSkeleton: DollSkeleton
-var attachZones = {}
+var doll3D
+var attachProxies = []
 
-func initPart(newDollSkeleton):
-	dollSkeleton = newDollSkeleton
+func initPart(newDoll3d):
+	doll3D = newDoll3d
+	dollSkeleton = doll3D.getDollSkeleton()
 	
 	for child in get_children():
 		setSkeletonRecursive(child, dollSkeleton.getSkeleton())
 #		if(child is MeshInstance):
 #			#child.skeleton = dollSkeleton.getSkeleton().get_path()
 #			child.skeleton = child.get_path_to(dollSkeleton.getSkeleton())
+
+func onRemoved():
+	for proxy in attachProxies:
+		doll3D.removeDollAttachmentZone(proxy.dollAttachmentZone)
 
 func setSkeletonRecursive(childnode, skeleton):
 	if(childnode is MeshInstance):
@@ -26,10 +32,8 @@ func setSkeletonRecursive(childnode, skeleton):
 				
 	if(childnode is MyBoneAttachment):
 		childnode.setSkeletonPath(childnode.get_path_to(skeleton))
-	if(childnode is DollAttachmentZone):
-		if(!attachZones.has(childnode.zoneName)):
-			attachZones[childnode.zoneName] = []
-		attachZones[childnode.zoneName].append(childnode)
+	if(childnode is AttachmentProxy):
+		attachProxies.append(childnode)
 	
 	for child in childnode.get_children():
 		setSkeletonRecursive(child, skeleton)
@@ -56,10 +60,5 @@ func setShapeKeyValueRecursive(childnode, shapekey: String, value: float):
 	for child in childnode.get_children():
 		setShapeKeyValueRecursive(child, shapekey, value)
 
-func getAttachZonesFor(attachZone):
-	if(!attachZones.has(attachZone)):
-		return []
-	return attachZones[attachZone]
-
-func getAttachZones():
-	return attachZones
+func getAttachProxies():
+	return attachProxies

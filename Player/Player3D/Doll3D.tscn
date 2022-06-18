@@ -57,6 +57,8 @@ boneId = "Hips"
 [node name="Doll3DTooltip" parent="Tooltips/AnusBoneAttachment" instance=ExtResource( 5 )]
 bodypartID = "anus"
 
+[node name="DollAttachmentZones" type="Spatial" parent="."]
+
 [connection signal="mouseEntered" from="Tooltips/HeadBoneAttachment/Doll3DTooltip" to="." method="_on_Doll3DTooltip_mouseEntered"]
 [connection signal="mouseExited" from="Tooltips/HeadBoneAttachment/Doll3DTooltip" to="." method="_on_Doll3DTooltip_mouseExited"]
 [connection signal="mouseEntered" from="Tooltips/BreastsBoneAttachment/Doll3DTooltip" to="." method="_on_Doll3DTooltip_mouseEntered"]

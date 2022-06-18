@@ -16,6 +16,7 @@ var npcHasMenstrualCycle = false # If true can get pregnant
 func _ready():
 	name = id
 	createBodyparts()
+	createEquipment()
 	for statID in npcStats:
 		skillsHolder.setStat(statID, npcStats[statID])
 	skillsHolder.setLevel(npcLevel)
@@ -107,7 +108,7 @@ func loadData(data):
 		bodypart.loadDataNPC(bodypartData)
 	
 	loadStatusEffectsData(SAVE.loadVar(data, "statusEffects", {}))
-	inventory.loadData(SAVE.loadVar(data, "inventory", {}))
+	inventory.loadDataNPC(SAVE.loadVar(data, "inventory", {}))
 	lustInterests.loadData(SAVE.loadVar(data, "lustInterests", {}))
 
 	if(menstrualCycle != null && data.has("menstrualCycle")):
@@ -137,6 +138,9 @@ func getBaseLustThreshold() -> int:
 	return .getBaseLustThreshold()
 	
 func createBodyparts():
+	pass
+
+func createEquipment():
 	pass
 
 func processTime(_secondsPassed):

@@ -82,12 +82,24 @@ func getChatColor():
 	return '#90A9F4'
 
 func createBodyparts():
-	#var mybreasts: BodypartBreasts = GlobalRegistry.createBodypart("humanbreasts")
-	#mybreasts.size = BreastsSize.C
-	#giveBodypartUnlessSame(mybreasts)
+	var mybreasts: BodypartBreasts = GlobalRegistry.createBodypart("humanbreasts")
+	mybreasts.size = BreastsSize.D
+	giveBodypartUnlessSame(mybreasts)
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("caninehead"))
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("vagina"))
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("anus"))
+	giveBodypartUnlessSame(GlobalRegistry.createBodypart("humanbody"))
+	giveBodypartUnlessSame(GlobalRegistry.createBodypart("caninearms"))
+	giveBodypartUnlessSame(GlobalRegistry.createBodypart("canineears"))
+	giveBodypartUnlessSame(GlobalRegistry.createBodypart("shorthair"))
+	giveBodypartUnlessSame(GlobalRegistry.createBodypart("canineleg"))
+	var penis:BodypartPenis = GlobalRegistry.createBodypart("caninepenis")
+	penis.lengthCM = 21
+	giveBodypartUnlessSame(penis)
+	giveBodypartUnlessSame(GlobalRegistry.createBodypart("huskytail"))
+
+func createEquipment():
+	getInventory().equipItem(GlobalRegistry.createItemNoID("inmatecollar"))
 
 func onGivingBirth(_impregnatedEggCells: Array, _newkids: Array):
 	.onGivingBirth(_impregnatedEggCells, _newkids)

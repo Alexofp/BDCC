@@ -1,6 +1,7 @@
 extends "res://Player/StageScene3D/BaseStageScene3D.gd"
 
 onready var animationTree = $AnimationTree
+onready var doll = $Doll3D
 
 func _init():
 	id = StageScene.Solo
@@ -10,7 +11,8 @@ func _ready():
 	
 func playAnimation(animID, _args = []):
 	print("Playing: "+str(animID))
-	$Doll3D.loadCharacter("pc")
+	doll.prepareCharacter("pc")
+	#doll.forceSlotToBeVisible(BodypartSlot.Penis)
 	
 	if(animID == "sit"):
 		$Chair.visible = true

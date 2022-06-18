@@ -4,6 +4,11 @@ class_name DollAttachmentZone
 export(String) var zoneName = ""
 var savedScenes = {}
 
+func setProxy(attachmentProxy):
+	startTransform = attachmentProxy.transform
+	boneId = attachmentProxy.boneId
+	zoneName = attachmentProxy.zoneName
+
 func setScenes(scenes):
 	if(scenes.size() == 0 && savedScenes.empty()):
 		return

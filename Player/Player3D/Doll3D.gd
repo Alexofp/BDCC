@@ -3,9 +3,14 @@ class_name Doll3D
 
 var state = {}
 var parts = {}
+var dollAttachmentZones = {}
+var hiddenPartZones = {}
+var overridenPartHidden = {}
 var savedCharacterID: String
 
 export(bool) var addTestBody = false
+
+var dollAttachmentZoneScene = preload("res://Player/Player3D/Parts/DollAttachmentZone.tscn")
 
 func getDollSkeleton():
 	return $DollSkeleton
@@ -98,13 +103,32 @@ func addPartObject(slot, part: Spatial):
 	parts[slot] = part
 	getDollSkeleton().getSkeleton().add_child(part)
 	
-	part.initPart(getDollSkeleton())
+	part.initPart(self)
+	
+	for attachmentProxy in part.getAttachProxies():
+		var dollAttachmentZone = dollAttachmentZoneScene.instance()
+		
+		$DollAttachmentZones.add_child(dollAttachmentZone)
+		dollAttachmentZone.setProxy(attachmentProxy)
+		dollAttachmentZone.setSkeletonPath(dollAttachmentZone.get_path_to(getDollSkeleton().getSkeleton()))
+		attachmentProxy.dollAttachmentZone = dollAttachmentZone
+		
+		if(!dollAttachmentZones.has(attachmentProxy.zoneName)):
+			dollAttachmentZones[attachmentProxy.zoneName] = []
+		dollAttachmentZones[attachmentProxy.zoneName].append(dollAttachmentZone)
+		
 	
 	for stateID in state:
 		part.setState(stateID, state[stateID])
 	
+func removeDollAttachmentZone(attachZone):
+	attachZone.queue_free()
+	dollAttachmentZones[attachZone.zoneName].erase(attachZone)
+	# remove it from our list
+	
 func removeSlot(slot):
 	if(parts.has(slot)):
+		parts[slot].onRemoved()
 		parts[slot].queue_free()
 		parts.erase(slot)
 
@@ -119,19 +143,6 @@ func setShapeKeyValue(shapeKey: String, value: float):
 		
 		part.setShapeKeyValue(shapeKey, value)
 
-func setParts(newparts: Dictionary):
-	var dirtyFlags = {}
-	for slot in parts:
-		dirtyFlags[slot] = false
-		
-	for newslot in newparts:
-		addPartUnlessSame(newslot, newparts[newslot])
-		dirtyFlags[newslot] = true
-	
-	for slot in parts.keys():
-		if(!dirtyFlags[slot]):
-			removeSlot(slot)
-
 func disconnectFromOld():
 	if(savedCharacterID != null && savedCharacterID != ""):
 		var ch = GlobalRegistry.getCharacter(savedCharacterID)
@@ -141,6 +152,9 @@ func disconnectFromOld():
 			ch.disconnect("bodypart_changed", self, "onCharacterBodypartChanged")
 
 func loadCharacter(charID):
+	if(savedCharacterID == charID):
+		return
+	
 	var ch = GlobalRegistry.getCharacter(charID)
 	if(ch == null || !is_instance_valid(ch)):
 		return
@@ -150,6 +164,10 @@ func loadCharacter(charID):
 		ch.updateDoll(self)
 		savedCharacterID = charID
 		var _ok = ch.connect("bodypart_changed", self, "onCharacterBodypartChanged")
+		
+func prepareCharacter(charID):
+	loadCharacter(charID)
+	clearOverrideAlpha()
 		
 func onCharacterBodypartChanged():
 	var ch = GlobalRegistry.getCharacter(savedCharacterID)
@@ -255,12 +273,57 @@ func _on_Doll3DTooltip_mouseExited(bodypartID):
 			return
 		GlobalTooltip.hideTooltip()
 
+func setHiddenParts(newHiddenParts):
+	hiddenPartZones = newHiddenParts
+
+func updateAlpha():
+	for slot in parts:
+		if(hiddenPartZones.has(slot) && !overridenPartHidden.has(slot)):
+			parts[slot].visible = false
+		else:
+			parts[slot].visible = true
+
+func setParts(newparts: Dictionary):
+	var dirtyFlags = {}
+	for slot in parts:
+		dirtyFlags[slot] = false
+		
+	for newslot in newparts:
+		addPartUnlessSame(newslot, newparts[newslot])
+		dirtyFlags[newslot] = true
+	
+	for slot in parts.keys():
+		if(!dirtyFlags[slot]):
+			removeSlot(slot)
+			
+	updateAlpha()
+
+func clearOverrideAlpha():
+	for slot in overridenPartHidden:
+		if(hiddenPartZones.has(slot)):
+			parts[slot].visible = false
+		else:
+			parts[slot].visible = true
+	overridenPartHidden.clear()
+
+func forceSlotToBeVisible(zone):
+	overridenPartHidden[zone] = true
+	if(parts.has(zone)):
+		parts[zone].visible = true
+
 func setUnriggedParts(scenes):
-	for part in parts:
-		for zone in parts[part].getAttachZones():
-			var attachments = parts[part].getAttachZones()[zone]
-			for attachment in attachments:
-				if(scenes.has(zone)):
-					attachment.setScenes(scenes[zone])
-				else:
-					attachment.setScenes([])
+	for zone in dollAttachmentZones:
+		for attachment in dollAttachmentZones[zone]:
+			if(scenes.has(zone)):
+				attachment.setScenes(scenes[zone])
+			else:
+				attachment.setScenes([])
+	
+#	for part in parts:
+#		for zone in parts[part].getAttachZones():
+#			var attachments = parts[part].getAttachZones()[zone]
+#			for attachment in attachments:
+#				if(scenes.has(zone)):
+#					attachment.setScenes(scenes[zone])
+#				else:
+#					attachment.setScenes([])

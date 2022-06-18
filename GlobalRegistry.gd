@@ -2,7 +2,7 @@ extends Node
 
 var game_version_major = 0
 var game_version_minor = 0
-var game_version_revision = 15
+var game_version_revision = 16
 var game_version_suffix = ""
 
 var currentUniqueID = 0
@@ -377,6 +377,9 @@ func createItem(id: String, generateID = true):
 	if(generateID):
 		newItem.uniqueID = "item"+str(generateUniqueID())
 	return newItem
+
+func createItemNoID(id: String):
+	return createItem(id, false)
 
 func getItemRef(id: String):
 	if(!itemsRefs.has(id)):

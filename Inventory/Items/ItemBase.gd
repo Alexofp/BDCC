@@ -258,4 +258,10 @@ func calculateBestRestraintLevel():
 		return RNG.randi_range(1, 5)
 
 func getUnriggedParts(_character):
-	return {}
+	return null
+
+func getRiggedParts(_character):
+	return null
+
+func getHidesParts(_character):
+	return null
