@@ -9,6 +9,22 @@ func _init():
 func _run():
 	if(state == ""):
 		#GM.pc.cummedInVaginaBy("nova")
+		if(GM.main.getFlag(Flag.Game_CompletedPrologue)):
+			var genderSTR = "a male"
+			if(GM.pc.getGender() == Gender.Female):
+				genderSTR = "a female"
+			if(GM.pc.getGender() == Gender.Androgynous):
+				genderSTR = "an androgynous"
+			if(GM.pc.getGender() == Gender.Other):
+				genderSTR = "a non-gender"
+			var badThingName = "was imprisoned for the crime of theft"
+			if(GM.main.getFlag(Flag.Player_Crime_Type) == Flag.Crime_Type.Innocent):
+				badThingName = "was wrongly imprisoned"
+			if(GM.main.getFlag(Flag.Player_Crime_Type) == Flag.Crime_Type.Murder):
+				badThingName = "was imprisoned for the crime of murder"
+			if(GM.main.getFlag(Flag.Player_Crime_Type) == Flag.Crime_Type.Prostitution):
+				badThingName = "was imprisoned for the crime of prositution"
+			saynn(GM.pc.getName() +" is "+genderSTR+" "+GM.pc.getSpeciesFullName() + " that "+badThingName+". Sentence length is indefinite")
 		
 		sayn("[b]Personal information:[/b]")
 		sayn("Name: "+GM.pc.getName())
