@@ -2,6 +2,7 @@ extends Spatial
 class_name Stage3D
 
 var currentScene: BaseStageScene3D
+onready var animPlayer = $AnimationPlayer
 
 func _ready():
 	#call_deferred("play", StageScene.Solo, "stand") # Player is created late
@@ -14,6 +15,9 @@ func play(sceneID, actionID, args = []):
 		return
 	
 	if(currentScene != null):
+		animPlayer.play("Fade")
+		yield(animPlayer, "animation_finished")
+		animPlayer.play_backwards("Fade")
 		currentScene.queue_free()
 		currentScene = null
 	
