@@ -1,9 +1,10 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://Player/Player3D/Parts/Part3D.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Player/Player3D/Parts/Legs/HumanLegs/foot.png" type="Texture" id=2]
 [ext_resource path="res://Player/Player3D/Parts/Legs/HumanLegs/legdown.png" type="Texture" id=3]
 [ext_resource path="res://Player/Player3D/Parts/Legs/HumanLegs/legup.png" type="Texture" id=4]
+[ext_resource path="res://Player/Player3D/Parts/AttachmentProxy.tscn" type="PackedScene" id=5]
 
 [sub_resource type="SpatialMaterial" id=11]
 resource_name = "foot.png.003"
@@ -386,3 +387,13 @@ material/0 = null
 mesh = SubResource( 39 )
 skin = SubResource( 38 )
 material/0 = null
+
+[node name="AttachmentProxy" parent="." index="8" instance=ExtResource( 5 )]
+transform = Transform( 1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 0.268209, 0.568661, 0.284713 )
+boneId = "LegDown.L"
+zoneName = "ankle.L"
+
+[node name="AttachmentProxy2" parent="." index="9" instance=ExtResource( 5 )]
+transform = Transform( 1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 0.168, 0.569, -0.175 )
+boneId = "LegDown.R"
+zoneName = "ankle.R"

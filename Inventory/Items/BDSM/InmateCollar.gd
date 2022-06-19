@@ -28,6 +28,10 @@ func generateRestraintData():
 func getUnriggedParts(_character):
 	return {
 		"neck": ["res://Inventory/UnriggedModels/Collar/CollarModel.tscn"],
+		#"wrist.L": ["res://Inventory/UnriggedModels/Cuff/CuffModel.tscn"],
+		#"wrist.R": ["res://Inventory/UnriggedModels/Cuff/CuffModel.tscn"],
+		#"ankle.L": ["res://Inventory/UnriggedModels/Cuff/CuffModel.tscn"],
+		#"ankle.R": ["res://Inventory/UnriggedModels/Cuff/CuffModel.tscn"],
 	}
 
 #func getRiggedParts(_character):

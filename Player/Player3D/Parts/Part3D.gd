@@ -3,6 +3,7 @@ extends Spatial
 var dollSkeleton: DollSkeleton
 var doll3D
 var attachProxies = []
+var partPickers = {}
 
 func initPart(newDoll3d):
 	doll3D = newDoll3d
@@ -34,6 +35,10 @@ func setSkeletonRecursive(childnode, skeleton):
 		childnode.setSkeletonPath(childnode.get_path_to(skeleton))
 	if(childnode is AttachmentProxy):
 		attachProxies.append(childnode)
+	if(childnode is PartStatePicker):
+		if(!partPickers.has(childnode.getState())):
+			partPickers[childnode.getState()] = []
+		partPickers[childnode.getState()].append(childnode)
 	
 	for child in childnode.get_children():
 		setSkeletonRecursive(child, skeleton)
@@ -48,7 +53,11 @@ func setStateRecursive(childnode, stateID, value):
 		
 
 func setState(stateID, value):
-	setStateRecursive(self, stateID, value)
+	if(!partPickers.has(stateID)):
+		return
+	for picker in partPickers[stateID]:
+		picker.setValue(value)
+	#setStateRecursive(self, stateID, value)
 
 func setShapeKeyValue(shapekey: String, value: float):
 	setShapeKeyValueRecursive(self, shapekey, value)

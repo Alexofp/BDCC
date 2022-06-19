@@ -97,6 +97,7 @@ func addPartUnlessSame(slot, partPath):
 
 func addPartObject(slot, part: Spatial):
 	if(parts.has(slot)):
+		parts[slot].onRemoved()
 		parts[slot].queue_free()
 		parts.erase(slot)
 	

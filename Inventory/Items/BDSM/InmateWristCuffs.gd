@@ -32,3 +32,9 @@ func generateRestraintData():
 
 func getForcedOnMessage():
 	return getAStackNameCapitalize()+" were locked onto your arms, just below your elbows, with a chain connecting them"
+
+func getUnriggedParts(_character):
+	return {
+		"wrist.L": ["res://Inventory/UnriggedModels/Cuff/CuffModel.tscn"],
+		"wrist.R": ["res://Inventory/UnriggedModels/Cuff/CuffModel.tscn"],
+	}

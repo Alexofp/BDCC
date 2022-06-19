@@ -81,7 +81,6 @@ func _react(_action: String, _args):
 	if(_action == "getrestrained"):
 		for item in GM.pc.getInventory().forceRestraintsWithTag(ItemTag.CanBeForcedByGuards, RNG.randi_range(1, 2)):
 			addMessage(item.getForcedOnMessage())
-	
 	setState(_action)
 
 

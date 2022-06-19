@@ -250,6 +250,7 @@ func calculateBuffs():
 	
 func onEquippedItemsChange():
 	calculateBuffs()
+	updateAppearance()
 	
 func onStatChange():
 	emit_signal("stat_changed")
@@ -863,6 +864,10 @@ func updateDoll(doll: Doll3D):
 	#doll.setThighThickness(-0.4)
 	#doll.setPenisScale(1.0)
 	#doll.setBallsScale(5.5)
+	if(hasEffect(StatusEffect.Muzzled)):
+		doll.setState("muzzle", "muzzled")
+	else:
+		doll.setState("muzzle", "")
 	
 	var breastsScale = 1.0
 	if(hasBodypart(BodypartSlot.Breasts)):

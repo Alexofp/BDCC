@@ -32,3 +32,9 @@ func generateRestraintData():
 
 func getForcedOnMessage():
 	return getAStackNameCapitalize()+" were forced onto your legs, they are connected by a chain, forcing you to waddle or hop around!"
+
+func getUnriggedParts(_character):
+	return {
+		"ankle.L": ["res://Inventory/UnriggedModels/Cuff/CuffModel.tscn"],
+		"ankle.R": ["res://Inventory/UnriggedModels/Cuff/CuffModel.tscn"],
+	}

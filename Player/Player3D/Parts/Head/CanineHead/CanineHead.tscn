@@ -1,15 +1,21 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Player/Player3D/Parts/Part3D.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Player/Player3D/Parts/Head/CanineHead/headcanine.png" type="Texture" id=2]
+[ext_resource path="res://Inventory/UnriggedModels/Muzzle/muzzle.png" type="Texture" id=2]
+[ext_resource path="res://Player/Player3D/Parts/PartState.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Player/Player3D/Parts/PartStatePicker.tscn" type="PackedScene" id=4]
 
-[sub_resource type="SpatialMaterial" id=4]
+[sub_resource type="StreamTexture" id=7]
+flags = 4
+load_path = "res://.import/headcanine.png-b5d342bf539453e65cd5c8515bb7a51f.stex"
+
+[sub_resource type="SpatialMaterial" id=8]
 resource_name = "headcanine.png"
 flags_transparent = true
 vertex_color_use_as_albedo = true
 params_cull_mode = 2
 params_depth_draw_mode = 3
-albedo_texture = ExtResource( 2 )
+albedo_texture = SubResource( 7 )
 metallic = 1.0
 
 [sub_resource type="ArrayMesh" id=5]
@@ -21,7 +27,7 @@ surfaces/0 = {
 "blend_shape_data": [  ],
 "format": 2194903,
 "index_count": 6,
-"material": SubResource( 4 ),
+"material": SubResource( 8 ),
 "primitive": 4,
 "skeleton_aabb": [ AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( -1.50065, 6.0738, 0.0399996, 2.56, 2.56, 9.99868e-06 ) ],
 "vertex_count": 4
@@ -97,9 +103,48 @@ bind/21/name = "Foot.R"
 bind/21/bone = -1
 bind/21/pose = Transform( 0.486096, -0.873925, 4.58786e-07, -0.874017, -0.486062, -1.14923e-08, 2.21924e-07, -3.57599e-07, -1, 0.196343, 0.375003, -0.209835 )
 
+[sub_resource type="SpatialMaterial" id=11]
+resource_name = "headcanine.png"
+flags_transparent = true
+vertex_color_use_as_albedo = true
+params_cull_mode = 2
+params_depth_draw_mode = 3
+albedo_texture = ExtResource( 2 )
+metallic = 1.0
+
+[sub_resource type="ArrayMesh" id=10]
+resource_name = "Tail_headcaninepng"
+surfaces/0 = {
+"aabb": AABB( -1.50065, 6.0738, 0.0399996, 2.56, 2.56, 9.99868e-06 ),
+"array_data": PoolByteArray( 73, 21, 192, 191, 143, 92, 194, 64, 166, 214, 35, 61, 0, 0, 127, 63, 0, 0, 0, 60, 3, 0, 0, 0, 255, 255, 0, 0, 0, 0, 0, 0, 203, 152, 135, 63, 143, 92, 194, 64, 166, 214, 35, 61, 0, 0, 127, 63, 0, 60, 0, 60, 3, 0, 0, 0, 255, 255, 0, 0, 0, 0, 0, 0, 203, 152, 135, 63, 10, 36, 10, 65, 166, 214, 35, 61, 0, 0, 127, 63, 0, 60, 0, 0, 3, 0, 0, 0, 255, 255, 0, 0, 0, 0, 0, 0, 73, 21, 192, 191, 10, 36, 10, 65, 166, 214, 35, 61, 0, 0, 127, 63, 0, 0, 0, 0, 3, 0, 0, 0, 255, 255, 0, 0, 0, 0, 0, 0 ),
+"array_index_data": PoolByteArray( 0, 0, 2, 0, 1, 0, 0, 0, 3, 0, 2, 0 ),
+"blend_shape_data": [  ],
+"format": 2194903,
+"index_count": 6,
+"material": SubResource( 11 ),
+"primitive": 4,
+"skeleton_aabb": [ AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( -1.50065, 6.0738, 0.0399996, 2.56, 2.56, 9.99868e-06 ) ],
+"vertex_count": 4
+}
+
 [node name="CanineHead" instance=ExtResource( 1 )]
 
 [node name="headcaninepng" type="MeshInstance" parent="." index="0"]
 mesh = SubResource( 5 )
 skin = SubResource( 6 )
+material/0 = null
+
+[node name="PartStatePicker" parent="." index="1" instance=ExtResource( 4 )]
+state = "muzzle"
+
+[node name="PartState" parent="PartStatePicker" index="0" instance=ExtResource( 3 )]
+
+[node name="PartState2" parent="PartStatePicker" index="1" instance=ExtResource( 3 )]
+stateValue = "muzzled"
+
+[node name="muzzle" type="MeshInstance" parent="PartStatePicker/PartState2" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00351858, 0.01 )
+mesh = SubResource( 10 )
+skin = SubResource( 6 )
+skeleton = NodePath("../../..")
 material/0 = null
