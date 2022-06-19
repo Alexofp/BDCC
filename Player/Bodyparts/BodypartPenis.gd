@@ -106,6 +106,12 @@ func getAttributesText():
 		["Penis length", str(lengthCM)+" cm"],
 		["Balls scale", str(Util.roundF(ballsScale*100.0, 1))+"%"],
 	]
+	
+func getCharCreatorData():
+	return [
+		["lengthCM", lengthCM],
+		["ballsScale", ballsScale],
+	]
 
 func getLength():
 	return lengthCM

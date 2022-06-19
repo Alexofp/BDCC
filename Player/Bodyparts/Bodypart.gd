@@ -69,6 +69,9 @@ func applyAttribute(_attrID: String, _attrValue):
 func getAttributesText():
 	return []
 
+func getCharCreatorData():
+	return null
+
 func addFluidOrifice(fluidType, amount: float, charID = null):
 	assert(orifice != null)
 	orifice.addFluid(fluidType, amount, charID)

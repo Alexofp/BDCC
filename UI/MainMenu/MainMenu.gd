@@ -39,6 +39,8 @@ func hideAllMenus():
 	optionsGameTab.visible = false
 	creditsGameTab.visible = false
 	devToolsScreen.visible = false
+	$HBoxContainer/Panel2.visible = true
+	$HBoxContainer/Panel.visible = true
 
 func switchToMainMenu():
 	hideAllMenus()
@@ -127,6 +129,8 @@ func _on_DevClose_pressed():
 func _on_DevToolsButton_pressed():
 	hideAllMenus()
 	devToolsScreen.visible = true
+	$HBoxContainer/Panel2.visible = false
+	$HBoxContainer/Panel.visible = false
 
 
 func _on_DevSceneConverter_pressed():
@@ -152,3 +156,10 @@ func _on_ChangelogButton_pressed():
 
 func _on_DonationsLabel_meta_clicked(meta):
 	var _ok = OS.shell_open(meta)
+
+
+func _on_DevCharCreator_pressed():
+	Util.delete_children(devSubScreen)
+	
+	var scene = load("res://UI/QuickCharacterCreator/QuickCharacterCreator.tscn")
+	devSubScreen.add_child(scene.instance())

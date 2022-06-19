@@ -99,6 +99,11 @@ func getAttributesText():
 		["Breast size", BreastsSize.breastSizeToString(getSize())],
 	]
 
+func getCharCreatorData():
+	return [
+		["size", size],
+	]
+
 func getBaseSize():
 	return size
 
