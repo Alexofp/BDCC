@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://Player/Player3D/Parts/Part3D.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Player/Player3D/Parts/Head/DragonHead/headdragon.png" type="Texture" id=2]
@@ -6,15 +6,19 @@
 [ext_resource path="res://Inventory/UnriggedModels/Muzzle/muzzle.png" type="Texture" id=4]
 [ext_resource path="res://Player/Player3D/Parts/PartStatePicker.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Player/Player3D/Parts/PartState.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Player/Player3D/Parts/Head/DragonHead/headdragonballgag.png" type="Texture" id=7]
+[ext_resource path="res://Player/Player3D/Parts/Head/DragonHead/headdragonringgag.png" type="Texture" id=8]
+[ext_resource path="res://Player/Player3D/Parts/Head/DragonHead/headdragonmouth.png" type="Texture" id=9]
+[ext_resource path="res://Player/Player3D/Parts/AttachmentProxy.tscn" type="PackedScene" id=10]
 
 [sub_resource type="SpatialMaterial" id=12]
 resource_name = "headdragon.png"
 flags_transparent = true
+flags_unshaded = true
 vertex_color_use_as_albedo = true
 params_cull_mode = 2
 params_depth_draw_mode = 3
 albedo_texture = ExtResource( 2 )
-metallic = 1.0
 
 [sub_resource type="ArrayMesh" id=13]
 resource_name = "DollSkeleton_headdragonpng"
@@ -196,6 +200,33 @@ bind/21/name = "Foot.R"
 bind/21/bone = -1
 bind/21/pose = Transform( 0.486096, -0.873925, 4.58786e-07, -0.874017, -0.486062, -1.14923e-08, 2.21924e-07, -3.57599e-07, -1, 0.196343, 0.375003, -0.209835 )
 
+[sub_resource type="SpatialMaterial" id=26]
+resource_name = "headdragon.png"
+flags_transparent = true
+flags_unshaded = true
+vertex_color_use_as_albedo = true
+params_cull_mode = 2
+params_depth_draw_mode = 3
+albedo_texture = ExtResource( 7 )
+
+[sub_resource type="SpatialMaterial" id=27]
+resource_name = "headdragon.png"
+flags_transparent = true
+flags_unshaded = true
+vertex_color_use_as_albedo = true
+params_cull_mode = 2
+params_depth_draw_mode = 3
+albedo_texture = ExtResource( 8 )
+
+[sub_resource type="SpatialMaterial" id=28]
+resource_name = "headdragon.png"
+flags_transparent = true
+flags_unshaded = true
+vertex_color_use_as_albedo = true
+params_cull_mode = 2
+params_depth_draw_mode = 3
+albedo_texture = ExtResource( 9 )
+
 [sub_resource type="SpatialMaterial" id=11]
 resource_name = "headcanine.png"
 flags_transparent = true
@@ -294,9 +325,10 @@ bind/21/pose = Transform( 0.486096, -0.873925, 4.58786e-07, -0.874017, -0.486062
 
 [node name="headdragonpng" type="MeshInstance" parent="." index="0"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000609875, 0, 0 )
+visible = false
 mesh = SubResource( 13 )
 skin = SubResource( 14 )
-material/0 = null
+material/0 = SubResource( 12 )
 
 [node name="headpng" type="MeshInstance" parent="." index="1"]
 visible = false
@@ -304,7 +336,48 @@ mesh = SubResource( 22 )
 skin = SubResource( 23 )
 material/0 = null
 
-[node name="PartStatePicker" parent="." index="2" instance=ExtResource( 5 )]
+[node name="PartStatePicker2" parent="." index="2" instance=ExtResource( 5 )]
+state = "mouth"
+
+[node name="PartState" parent="PartStatePicker2" index="0" instance=ExtResource( 6 )]
+
+[node name="headdragonpng" type="MeshInstance" parent="PartStatePicker2/PartState" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000609875, 0, 0 )
+mesh = SubResource( 13 )
+skin = SubResource( 14 )
+material/0 = SubResource( 12 )
+
+[node name="PartState2" parent="PartStatePicker2" index="1" instance=ExtResource( 6 )]
+visible = false
+stateValue = "ballgag"
+
+[node name="headdragonpng" type="MeshInstance" parent="PartStatePicker2/PartState2" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000609875, 0, 0 )
+mesh = SubResource( 13 )
+skin = SubResource( 14 )
+material/0 = SubResource( 26 )
+
+[node name="PartState3" parent="PartStatePicker2" index="2" instance=ExtResource( 6 )]
+visible = false
+stateValue = "ringgag"
+
+[node name="headdragonpng" type="MeshInstance" parent="PartStatePicker2/PartState3" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000609875, 0, 0 )
+mesh = SubResource( 13 )
+skin = SubResource( 14 )
+material/0 = SubResource( 27 )
+
+[node name="PartState4" parent="PartStatePicker2" index="3" instance=ExtResource( 6 )]
+visible = false
+stateValue = "open"
+
+[node name="headdragonpng" type="MeshInstance" parent="PartStatePicker2/PartState4" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000609875, 0, 0 )
+mesh = SubResource( 13 )
+skin = SubResource( 14 )
+material/0 = SubResource( 28 )
+
+[node name="PartStatePicker" parent="." index="3" instance=ExtResource( 5 )]
 state = "muzzle"
 
 [node name="PartState" parent="PartStatePicker" index="0" instance=ExtResource( 6 )]
@@ -318,3 +391,8 @@ mesh = SubResource( 24 )
 skin = SubResource( 25 )
 skeleton = NodePath("../../..")
 material/0 = null
+
+[node name="AttachmentProxy" parent="." index="4" instance=ExtResource( 10 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.135938, 7.35741, 0.0560234 )
+boneId = "Head"
+zoneName = "blindfold"

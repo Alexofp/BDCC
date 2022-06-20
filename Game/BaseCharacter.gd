@@ -868,6 +868,15 @@ func updateDoll(doll: Doll3D):
 		doll.setState("muzzle", "muzzled")
 	else:
 		doll.setState("muzzle", "")
+		
+	if(buffsHolder.hasBuff(Buff.GagBuff)):
+		doll.setState("mouth", "ballgag")
+	elif(buffsHolder.hasBuff(Buff.RingGagBuff)):
+		doll.setState("mouth", "ringgag")
+	else:
+		doll.setState("mouth", "")
+		#doll.setState("mouth", "open")
+	#doll.setState("mouth", "open")
 	
 	var breastsScale = 1.0
 	if(hasBodypart(BodypartSlot.Breasts)):

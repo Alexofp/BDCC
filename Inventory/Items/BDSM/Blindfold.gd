@@ -35,3 +35,8 @@ func generateRestraintData():
 	
 func getForcedOnMessage():
 	return getAStackNameCapitalize()+" was forced over your eyes. You are blind!"
+
+func getUnriggedParts(_character):
+	return {
+		"blindfold": ["res://Inventory/UnriggedModels/Blindfold/BlindfoldModel.tscn"],
+	}
