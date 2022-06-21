@@ -883,6 +883,16 @@ func updateDoll(doll: Doll3D):
 	else:
 		doll.setState("gloves", "")
 	
+	if(buffsHolder.hasBuff(Buff.RestrainedArmsBuff)):
+		doll.setArmsCuffed(true)
+	else:
+		doll.setArmsCuffed(false)
+	
+	if(buffsHolder.hasBuff(Buff.RestrainedLegsBuff)):
+		doll.setLegsCuffed(true)
+	else:
+		doll.setLegsCuffed(false)
+	
 	var breastsScale = 1.0
 	if(hasBodypart(BodypartSlot.Breasts)):
 		var breasts = getBodypart(BodypartSlot.Breasts)

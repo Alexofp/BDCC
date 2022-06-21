@@ -19,9 +19,17 @@ func playAnimation(animID, _args = {}):
 	else:
 		$Chair.visible = false
 	
-	var state_machine = animationTree["parameters/playback"]
+	if(doll.getArmsCuffed()):
+		animationTree["parameters/CuffsBlend/blend_amount"] = 1.0
+	else:
+		animationTree["parameters/CuffsBlend/blend_amount"] = 0.0
+	
+	var state_machine = animationTree["parameters/AnimationNodeStateMachine/playback"]
 	if(animID == "walk"):
-		state_machine.travel("Walk-loop")
+		if(!doll.getLegsCuffed()):
+			state_machine.travel("Walk-loop")
+		else:
+			state_machine.travel("ShacklesWalk-loop")
 	elif(animID == "stand"):
 		state_machine.travel("Standing-loop")
 	elif(animID == "kneel"):

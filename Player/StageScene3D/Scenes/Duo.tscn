@@ -5,7 +5,7 @@
 [ext_resource path="res://Player/Player3D/Doll3D.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Player/Props/platform.png" type="Texture" id=4]
 [ext_resource path="res://Player/Props/chair.png" type="Texture" id=5]
-[ext_resource path="res://Player/StageScene3D/Scenes/DollSoloAnimationTree.tres" type="AnimationNodeStateMachine" id=6]
+[ext_resource path="res://Player/StageScene3D/Scenes/DollSoloAndCuffsTree.tres" type="AnimationNodeBlendTree" id=6]
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=1]
 
@@ -32,8 +32,10 @@ transform = Transform( -1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 0 )
 
 [node name="AnimationTree" type="AnimationTree" parent="." index="4"]
 tree_root = ExtResource( 6 )
-parameters/playback = SubResource( 1 )
+parameters/AnimationNodeStateMachine/playback = SubResource( 1 )
+parameters/CuffsBlend/blend_amount = 0
 
 [node name="AnimationTree2" type="AnimationTree" parent="." index="5"]
 tree_root = ExtResource( 6 )
-parameters/playback = SubResource( 2 )
+parameters/AnimationNodeStateMachine/playback = SubResource( 2 )
+parameters/CuffsBlend/blend_amount = 0

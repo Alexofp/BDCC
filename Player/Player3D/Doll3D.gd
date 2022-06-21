@@ -8,6 +8,9 @@ var hiddenPartZones = {}
 var overridenPartHidden = {}
 var savedCharacterID: String
 
+var armsCuffed = false
+var legsCuffed = false
+
 export(bool) var addTestBody = false
 
 var dollAttachmentZoneScene = preload("res://Player/Player3D/Parts/DollAttachmentZone.tscn")
@@ -334,3 +337,15 @@ func playAnimation(animName, blend = 0.1, speed = 1.0):
 
 func getAnimPlayer():
 	return $DollSkeleton/AnimationPlayer
+
+func setArmsCuffed(newcuffed):
+	armsCuffed = newcuffed
+	
+func getArmsCuffed():
+	return armsCuffed
+	
+func setLegsCuffed(newcuffed):
+	legsCuffed = newcuffed
+	
+func getLegsCuffed():
+	return legsCuffed

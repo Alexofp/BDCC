@@ -34,21 +34,34 @@ func playAnimation(animID, _args = {}):
 	else:
 		$Chair.visible = false
 	
-	var state_machine = animationTree["parameters/playback"]
-	if(!stateMachineTravel(state_machine, animID)):
+	if(doll.getArmsCuffed()):
+		animationTree["parameters/CuffsBlend/blend_amount"] = 1.0
+	else:
+		animationTree["parameters/CuffsBlend/blend_amount"] = 0.0
+	
+	if(doll2.getArmsCuffed()):
+		animationTree2["parameters/CuffsBlend/blend_amount"] = 1.0
+	else:
+		animationTree2["parameters/CuffsBlend/blend_amount"] = 0.0
+	
+	var state_machine = animationTree["parameters/AnimationNodeStateMachine/playback"]
+	if(!stateMachineTravel(doll, state_machine, animID)):
 		printerr("Action "+str(animID)+" is not found for stage "+str(id))
 	
 	if(_args.has("npcAction")):
-		var state_machine2 = animationTree2["parameters/playback"]
-		if(!stateMachineTravel(state_machine2, _args["npcAction"])):
+		var state_machine2 = animationTree2["parameters/AnimationNodeStateMachine/playback"]
+		if(!stateMachineTravel(doll2, state_machine2, _args["npcAction"])):
 			printerr("Action "+str(animID)+" is not found for stage "+str(id))
 	else:
-		var state_machine2 = animationTree2["parameters/playback"]
-		stateMachineTravel(state_machine2, "stand")
+		var state_machine2 = animationTree2["parameters/AnimationNodeStateMachine/playback"]
+		stateMachineTravel(doll2, state_machine2, "stand")
 
-func stateMachineTravel(state_machine, animID):
+func stateMachineTravel(thedoll, state_machine, animID):
 	if(animID == "walk"):
-		state_machine.travel("Walk-loop")
+		if(!thedoll.getLegsCuffed()):
+			state_machine.travel("Walk-loop")
+		else:
+			state_machine.travel("ShacklesWalk-loop")
 	elif(animID == "stand"):
 		state_machine.travel("Standing-loop")
 	elif(animID == "kneel"):
