@@ -36,6 +36,11 @@ func getUnriggedParts(_character):
 
 #func getRiggedParts(_character):
 #	return {
+#		"harness": "res://Inventory/RiggedModels/RopeHarness/RopeHarness.tscn",
+#	}
+
+#func getRiggedParts(_character):
+#	return {
 #		"asd": "res://Player/Player3D/Parts/Legs/DigiLegs/DigiLegs.tscn",
 #		"asd2": "res://Player/Player3D/Parts/Arms/HumanArms/HumanArms.tscn",
 #	}

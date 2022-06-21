@@ -47,3 +47,8 @@ func getPuttingOnStringLong(withS):
 
 func getForcedOnMessage():
 	return getAStackNameCapitalize()+" was forced onto you. The ropes keep rubbing against your sensetive spots"
+
+func getRiggedParts(_character):
+	return {
+		"harness": "res://Inventory/RiggedModels/RopeHarness/RopeHarness.tscn",
+	}

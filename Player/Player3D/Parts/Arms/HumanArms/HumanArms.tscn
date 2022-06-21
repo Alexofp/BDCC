@@ -1,10 +1,13 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://Player/Player3D/Parts/Part3D.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Player/Player3D/Parts/Arms/HumanArms/hand.png" type="Texture" id=2]
 [ext_resource path="res://Player/Player3D/Parts/Arms/HumanArms/arm.png" type="Texture" id=3]
 [ext_resource path="res://Player/Player3D/Parts/Arms/HumanArms/forearm.png" type="Texture" id=4]
 [ext_resource path="res://Player/Player3D/Parts/AttachmentProxy.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Player/Player3D/Parts/PartStatePicker.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Player/Player3D/Parts/PartState.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Inventory/UnriggedModels/BondageMitten/bondagemitten.png" type="Texture" id=8]
 
 [sub_resource type="SpatialMaterial" id=1]
 resource_name = "arm.png.001"
@@ -193,6 +196,54 @@ surfaces/0 = {
 "vertex_count": 4
 }
 
+[sub_resource type="SpatialMaterial" id=26]
+resource_name = "hand.png.001"
+flags_transparent = true
+flags_unshaded = true
+vertex_color_use_as_albedo = true
+params_cull_mode = 2
+params_depth_draw_mode = 3
+albedo_texture = ExtResource( 8 )
+
+[sub_resource type="ArrayMesh" id=27]
+resource_name = "DollSkeleton_handpng003"
+surfaces/0 = {
+"aabb": AABB( -0.458191, 2.9371, 0.388036, 0.64, 1.28, 1.00136e-05 ),
+"array_data": PoolByteArray( 14, 152, 234, 190, 101, 249, 59, 64, 157, 172, 198, 62, 0, 0, 127, 63, 0, 0, 0, 60, 6, 0, 0, 0, 255, 255, 0, 0, 0, 0, 0, 0, 12, 44, 58, 62, 101, 249, 59, 64, 157, 172, 198, 62, 0, 0, 127, 63, 0, 60, 0, 60, 6, 0, 0, 0, 255, 255, 0, 0, 0, 0, 0, 0, 12, 44, 58, 62, 117, 242, 134, 64, 157, 172, 198, 62, 0, 0, 127, 63, 0, 60, 0, 0, 6, 0, 0, 0, 255, 255, 0, 0, 0, 0, 0, 0, 14, 152, 234, 190, 117, 242, 134, 64, 157, 172, 198, 62, 0, 0, 127, 63, 0, 0, 0, 0, 6, 0, 0, 0, 255, 255, 0, 0, 0, 0, 0, 0 ),
+"array_index_data": PoolByteArray( 0, 0, 2, 0, 1, 0, 0, 0, 3, 0, 2, 0 ),
+"blend_shape_data": [  ],
+"format": 2194903,
+"index_count": 6,
+"material": SubResource( 26 ),
+"primitive": 4,
+"skeleton_aabb": [ AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( -0.458191, 2.9371, 0.388036, 0.64, 1.28, 1.00136e-05 ) ],
+"vertex_count": 4
+}
+
+[sub_resource type="SpatialMaterial" id=28]
+resource_name = "hand.png.001"
+flags_transparent = true
+flags_unshaded = true
+vertex_color_use_as_albedo = true
+params_cull_mode = 2
+params_depth_draw_mode = 3
+albedo_texture = ExtResource( 8 )
+
+[sub_resource type="ArrayMesh" id=29]
+resource_name = "DollSkeleton_handpng002"
+surfaces/0 = {
+"aabb": AABB( -0.558191, 2.9371, -0.372042, 0.64, 1.28, 1.00136e-05 ),
+"array_data": PoolByteArray( 160, 229, 14, 191, 101, 249, 59, 64, 60, 124, 190, 190, 0, 0, 127, 63, 0, 0, 0, 60, 9, 0, 0, 0, 255, 255, 0, 0, 0, 0, 0, 0, 80, 139, 167, 61, 101, 249, 59, 64, 60, 124, 190, 190, 0, 0, 127, 63, 0, 60, 0, 60, 9, 0, 0, 0, 255, 255, 0, 0, 0, 0, 0, 0, 80, 139, 167, 61, 117, 242, 134, 64, 60, 124, 190, 190, 0, 0, 127, 63, 0, 60, 0, 0, 9, 0, 0, 0, 255, 255, 0, 0, 0, 0, 0, 0, 160, 229, 14, 191, 117, 242, 134, 64, 60, 124, 190, 190, 0, 0, 127, 63, 0, 0, 0, 0, 9, 0, 0, 0, 255, 255, 0, 0, 0, 0, 0, 0 ),
+"array_index_data": PoolByteArray( 0, 0, 2, 0, 1, 0, 0, 0, 3, 0, 2, 0 ),
+"blend_shape_data": [  ],
+"format": 2194903,
+"index_count": 6,
+"material": SubResource( 28 ),
+"primitive": 4,
+"skeleton_aabb": [ AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( -0.558191, 2.9371, -0.372042, 0.64, 1.28, 1.00136e-05 ) ],
+"vertex_count": 4
+}
+
 [node name="HumanArms" instance=ExtResource( 1 )]
 
 [node name="armpng" type="MeshInstance" parent="." index="0"]
@@ -234,3 +285,23 @@ zoneName = "wrist.L"
 transform = Transform( 0.98213, 0.188204, 0, -0.188204, 0.98213, 0, 0, 0, 1, -0.228, 3.913, -0.308372 )
 boneId = "ForeArm.R"
 zoneName = "wrist.R"
+
+[node name="PartStatePicker" parent="." index="8" instance=ExtResource( 6 )]
+state = "gloves"
+
+[node name="PartState" parent="PartStatePicker" index="0" instance=ExtResource( 7 )]
+stateValue = "mittens"
+
+[node name="handpng2" type="MeshInstance" parent="PartStatePicker/PartState" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0264019 )
+mesh = SubResource( 27 )
+skin = SubResource( 20 )
+skeleton = NodePath("../../..")
+material/0 = null
+
+[node name="handpng002" type="MeshInstance" parent="PartStatePicker/PartState" index="1"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.026 )
+mesh = SubResource( 29 )
+skin = SubResource( 20 )
+skeleton = NodePath("../../..")
+material/0 = null
