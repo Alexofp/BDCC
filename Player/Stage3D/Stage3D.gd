@@ -28,3 +28,7 @@ func play(sceneID, actionID, args = []):
 	currentScene = newScene
 	add_child(newScene)
 	newScene.playAnimation(actionID, args)
+
+func updateSubAnims():
+	if(currentScene != null):
+		currentScene.updateSubAnims()

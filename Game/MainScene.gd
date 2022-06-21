@@ -400,3 +400,7 @@ func clearLog():
 func playAnimation(sceneID, actionID, args = []):
 	if(GM.ui != null):
 		GM.ui.getStage3d().play(sceneID, actionID, args)
+
+func updateSubAnims():
+	if(GM.ui != null):
+		GM.ui.getStage3d().updateSubAnims()

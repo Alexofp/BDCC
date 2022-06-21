@@ -11,3 +11,6 @@ func _ready():
 
 func playAnimation(animID, _args = {}):
 	print("Playing: "+str(animID))
+
+func updateSubAnims():
+	pass

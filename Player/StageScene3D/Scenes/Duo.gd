@@ -14,6 +14,17 @@ func _ready():
 	animationTree2.anim_player = animationTree2.get_path_to(doll2.getAnimPlayer())
 	animationTree2.active = true
 
+func updateSubAnims():
+	if(doll.getArmsCuffed()):
+		animationTree["parameters/CuffsBlend/blend_amount"] = 1.0
+	else:
+		animationTree["parameters/CuffsBlend/blend_amount"] = 0.0
+	
+	if(doll2.getArmsCuffed()):
+		animationTree2["parameters/CuffsBlend/blend_amount"] = 1.0
+	else:
+		animationTree2["parameters/CuffsBlend/blend_amount"] = 0.0
+
 # StageScene.Duo, "kneel", {npc="nova", pc="pc"}
 func playAnimation(animID, _args = {}):
 	print("Playing duo: "+str(animID))
@@ -34,15 +45,7 @@ func playAnimation(animID, _args = {}):
 	else:
 		$Chair.visible = false
 	
-	if(doll.getArmsCuffed()):
-		animationTree["parameters/CuffsBlend/blend_amount"] = 1.0
-	else:
-		animationTree["parameters/CuffsBlend/blend_amount"] = 0.0
-	
-	if(doll2.getArmsCuffed()):
-		animationTree2["parameters/CuffsBlend/blend_amount"] = 1.0
-	else:
-		animationTree2["parameters/CuffsBlend/blend_amount"] = 0.0
+	updateSubAnims()
 	
 	var state_machine = animationTree["parameters/AnimationNodeStateMachine/playback"]
 	if(!stateMachineTravel(doll, state_machine, animID)):

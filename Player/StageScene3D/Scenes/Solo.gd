@@ -9,6 +9,12 @@ func _init():
 func _ready():
 	animationTree.active = true
 	
+func updateSubAnims():
+	if(doll.getArmsCuffed()):
+		animationTree["parameters/CuffsBlend/blend_amount"] = 1.0
+	else:
+		animationTree["parameters/CuffsBlend/blend_amount"] = 0.0
+	
 func playAnimation(animID, _args = {}):
 	print("Playing: "+str(animID))
 	doll.prepareCharacter("pc")
@@ -19,10 +25,7 @@ func playAnimation(animID, _args = {}):
 	else:
 		$Chair.visible = false
 	
-	if(doll.getArmsCuffed()):
-		animationTree["parameters/CuffsBlend/blend_amount"] = 1.0
-	else:
-		animationTree["parameters/CuffsBlend/blend_amount"] = 0.0
+	updateSubAnims()
 	
 	var state_machine = animationTree["parameters/AnimationNodeStateMachine/playback"]
 	if(animID == "walk"):
