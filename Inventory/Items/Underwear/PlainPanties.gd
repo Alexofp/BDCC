@@ -40,3 +40,11 @@ func getTags():
 	return [
 		ItemTag.SoldByUnderwearVendomat,
 		]
+
+func getLustActions():
+	return [
+		"MovePantiesAside",
+	]
+
+func resetLustState():
+	print("PANTIES WERE RESET")

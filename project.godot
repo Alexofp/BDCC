@@ -350,6 +350,16 @@ _global_script_classes=[ {
 "path": "res://Inventory/LootTable/LootTableBase.gd"
 }, {
 "base": "Reference",
+"class": "LustAction",
+"language": "GDScript",
+"path": "res://Game/LustCombat/LustAction.gd"
+}, {
+"base": "Reference",
+"class": "LustCombatState",
+"language": "GDScript",
+"path": "res://Game/LustCombat/LustCombatState.gd"
+}, {
+"base": "Reference",
 "class": "LustInterests",
 "language": "GDScript",
 "path": "res://Game/LustCombat/LustInterests.gd"
@@ -718,6 +728,8 @@ _global_script_class_icons={
 "LightInventory": "",
 "LimbTypes": "",
 "LootTableBase": "",
+"LustAction": "",
+"LustCombatState": "",
 "LustInterests": "",
 "MainThing": "",
 "MedicalModule": "",

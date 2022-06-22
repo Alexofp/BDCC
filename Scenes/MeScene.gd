@@ -161,8 +161,11 @@ func _react(_action: String, _args):
 		return
 	
 	if(_action == "domasturbate"):
-		processTime(5*60)
-		GM.pc.orgasmFrom("pc")
+		runScene("MasturbationScene")
+		endScene()
+		return
+		#processTime(5*60)
+		#GM.pc.orgasmFrom("pc")
 	
 	if(_action == "dowait"):
 		var newt = _args[0]

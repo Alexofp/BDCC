@@ -30,6 +30,7 @@ var perksObjects: Dictionary = {}
 var lustTopics: Dictionary = {}
 var lustTopicsObjects: Array = []
 var stageScenes: Dictionary = {}
+var lustActions: Dictionary = {}
 
 var bodypartStorageNode
 
@@ -84,6 +85,8 @@ func _ready():
 	registerAttackFolder("res://Attacks/PlayerOnly/")
 	registerAttackFolder("res://Attacks/PerkAttacks/")
 	registerAttackFolder("res://Attacks/NpcAttacks/")
+	
+	registerLustActionFolder("res://Game/LustCombat/LustActions/")
 	
 	registerLustTopicFolder("res://Game/LustCombat/Topic/")
 	
@@ -665,3 +668,33 @@ func instanceCached(scenePath):
 		return sceneCache[scenePath].instance()
 	sceneCache[scenePath] = load(scenePath)
 	return sceneCache[scenePath].instance()
+
+
+func registerLustAction(path: String):
+	var item = load(path)
+	var itemObject = item.new()
+	lustActions[itemObject.id] = itemObject
+
+func registerLustActionFolder(folder: String):
+	var dir = Directory.new()
+	if dir.open(folder) == OK:
+		dir.list_dir_begin()
+		var file_name = dir.get_next()
+		while file_name != "":
+			if dir.current_is_dir():
+				pass
+				#print("Found directory: " + file_name)
+			else:
+				if(file_name.get_extension() == "gd"):
+					var full_path = folder.plus_file(file_name)
+					#print("Registered lust action: " + full_path)
+					registerLustAction(full_path)
+			file_name = dir.get_next()
+	else:
+		printerr("An error occurred when trying to access the path "+folder)
+		
+func getLustAction(id: String):
+	if(!lustActions.has(id)):
+		printerr("ERROR: lust action with the id "+id+" wasn't found")
+		return null
+	return lustActions[id]

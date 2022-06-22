@@ -265,3 +265,9 @@ func getRiggedParts(_character):
 
 func getHidesParts(_character):
 	return null
+
+func getLustActions():
+	return []
+
+func resetLustState():
+	pass

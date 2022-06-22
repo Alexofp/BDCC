@@ -31,7 +31,8 @@ var timedBuffsDurationTurns: int = 0
 #
 signal orificeBecomeMoreLoose(orificeName, newvalue, oldvalue)
 
-
+# lust combat stuff
+var lustCombatState
 
 
 func _init():
@@ -43,6 +44,10 @@ func _ready():
 	menstrualCycle = MenstrualCycle.new()
 	menstrualCycle.setCharacter(self)
 	menstrualCycle.start()
+	
+	lustCombatState = LustCombatState.new()
+	lustCombatState.setCharacter(self)
+	
 	var _ok = menstrualCycle.connect("readyToGiveBirthOnce", self, "onPlayerReadyToGiveBirth")
 	var _ok2 = menstrualCycle.connect("visiblyPregnant", self, "onPlayerVisiblyPregnant")
 	
@@ -1130,3 +1135,6 @@ func onPlayerVisiblyPregnant():
 
 func onPlayerReadyToGiveBirth():
 	GM.main.addLogMessage("It's time..", "Your belly is so swollen, it's hard to walk! You feel ready to give birth, maybe it's time to visit the nursery.")
+
+func getLustCombatState():
+	return lustCombatState
