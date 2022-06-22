@@ -370,6 +370,8 @@ func getChatColor():
 
 func formatSay(text):
 	var color = getChatColor()
+	if(GM.ui != null):
+		text = GM.ui.processString(text)
 	
 	if(isGagged() && hasPerk(Perk.BDSMGagTalk)):
 		return "[color="+color+"]\""+Util.muffledSpeech(text)+"\" ("+text+") [/color]"

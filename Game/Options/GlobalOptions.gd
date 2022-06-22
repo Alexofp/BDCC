@@ -12,6 +12,9 @@ var npcPregnancyTimeDays: int
 var shouldScaleUI: bool = true
 var uiScaleMultiplier = 1.0
 
+var showSpeakerName = false
+var fontSize = "normal"
+
 func resetToDefaults():
 	fetchNewRelease = true
 	menstrualCycleLengthDays = 7
@@ -20,6 +23,8 @@ func resetToDefaults():
 	npcPregnancyTimeDays = 5
 	shouldScaleUI = true
 	uiScaleMultiplier = 1.0
+	showSpeakerName = false
+	fontSize = "normal"
 	
 	enabledContent.clear()
 	for contentType in ContentType.getAll():
@@ -53,6 +58,12 @@ func getPlayerPregnancyTimeDays():
 	
 func getNPCPregnancyTimeDays():
 	return npcPregnancyTimeDays
+
+func shouldShowSpeakerName():
+	return showSpeakerName
+
+func getFontSize():
+	return fontSize
 
 func getChangeableOptions():
 	var settings = [
@@ -162,6 +173,25 @@ func getChangeableOptions():
 						[1.5, "150%"],
 					],
 				},
+				{
+					"name": "Show speaker name",
+					"description": "Adds a name of the speaker before the speech",
+					"id": "showSpeakerName",
+					"type": "checkbox",
+					"value": showSpeakerName,
+				},
+				{
+					"name": "Output font size",
+					"description": "Font size for the scene text output",
+					"id": "fontSize",
+					"type": "list",
+					"value": fontSize,
+					"values": [
+						["small", "Small"],
+						["normal", "Normal"],
+						["big", "Big"],
+					],
+				},
 			],
 		}
 	]
@@ -205,6 +235,11 @@ func applyOption(categoryID, optionID, value):
 			uiScaleMultiplier = value
 			
 			applySettingsEffect()
+		if(optionID == "showSpeakerName"):
+			showSpeakerName = value
+		if(optionID == "fontSize"):
+			fontSize = value
+			
 	if(categoryID == "enabledContent"):
 		enabledContent[optionID] = value
 	print("SETTING "+categoryID+":"+optionID+" TO "+str(value))
@@ -226,6 +261,8 @@ func saveData():
 		"npcPregnancyTimeDays": npcPregnancyTimeDays,
 		"shouldScaleUI": shouldScaleUI,
 		"uiScaleMultiplier": uiScaleMultiplier,
+		"showSpeakerName": showSpeakerName,
+		"fontSize": fontSize,
 	}
 	
 	return data
@@ -239,6 +276,8 @@ func loadData(data):
 	npcPregnancyTimeDays = loadVar(data, "npcPregnancyTimeDays", 5)
 	shouldScaleUI = loadVar(data, "shouldScaleUI", true)
 	uiScaleMultiplier = loadVar(data, "uiScaleMultiplier", 1.0)
+	showSpeakerName = loadVar(data, "showSpeakerName", false)
+	fontSize = loadVar(data, "fontSize", "normal")
 
 func saveToFile():
 	var saveData = saveData()

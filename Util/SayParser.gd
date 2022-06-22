@@ -141,10 +141,22 @@ func processTag(tag, arg, text):
 		if(object == null):
 			return "!Error: "+arg+" character is not found to say text: "+text+"!"
 		
-		return object.formatSay(text)
+		var prefix = ""
+		if(OPTIONS.shouldShowSpeakerName()):
+			prefix = "[b]"+object.getName()+"[/b]: "
+		
+		return prefix+object.formatSay(text)
 	if(tag == "sayMale"):
-		return Util.sayMale(text)
+		var prefix = ""
+		if(OPTIONS.shouldShowSpeakerName()):
+			prefix = "[b]Someone[/b]: "
+		
+		return prefix+Util.sayMale(text)
 	if(tag == "sayFemale"):
-		return Util.sayFemale(text)
+		var prefix = ""
+		if(OPTIONS.shouldShowSpeakerName()):
+			prefix = "[b]Someone[/b]: "
+			
+		return prefix+Util.sayFemale(text)
 	
 	return "!"+tag+"="+arg+":"+text+"!"
