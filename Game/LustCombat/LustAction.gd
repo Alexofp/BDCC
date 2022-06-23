@@ -2,11 +2,15 @@ extends Reference
 class_name LustAction
 
 var id = "error"
+var needsFreeHand = false
+var hasByDefault = false
 
 func shouldShow(_lustState: LustCombatState, _args):
 	return true
 
 func canDo(_lustState: LustCombatState, _args):
+	if(needsFreeHand && !_lustState.canDoAction()):
+		return [false, "Your hands are all busy"]
 	# return [false, "Too horny"]
 	return true
 
@@ -25,3 +29,6 @@ func getItem(_lustState: LustCombatState, _args) -> ItemBase:
 	if(!_args.has("item")):
 		return null
 	return _lustState.getCharacter().getInventory().getItemByUniqueID(_args["item"])
+
+func getLustTopics():
+	return {}

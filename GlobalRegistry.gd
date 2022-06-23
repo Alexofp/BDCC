@@ -31,6 +31,7 @@ var lustTopics: Dictionary = {}
 var lustTopicsObjects: Array = []
 var stageScenes: Dictionary = {}
 var lustActions: Dictionary = {}
+var defaultLustActions: Array = []
 
 var bodypartStorageNode
 
@@ -674,6 +675,8 @@ func registerLustAction(path: String):
 	var item = load(path)
 	var itemObject = item.new()
 	lustActions[itemObject.id] = itemObject
+	if(itemObject.hasByDefault):
+		defaultLustActions.append(itemObject.id)
 
 func registerLustActionFolder(folder: String):
 	var dir = Directory.new()
@@ -698,3 +701,6 @@ func getLustAction(id: String):
 		printerr("ERROR: lust action with the id "+id+" wasn't found")
 		return null
 	return lustActions[id]
+
+func getDefaultLustActions():
+	return defaultLustActions

@@ -1,37 +1,34 @@
 extends LustAction
 
 func _init():
-	id = "MovePantiesAside"
+	id = "FingerPussy"
+	hasByDefault = true
 	
 func shouldShow(_lustState: LustCombatState, _args):
-	if(_lustState.isInventorySlotBlocked(InventorySlot.UnderwearBottom)):
+	if(!_lustState.isDoingActivity(LustActivity.SpreadingPussy)):
+		return false
+	var pc:Player = _lustState.getCharacter()
+	if(!pc.hasBodypart(BodypartSlot.Vagina) || pc.isBodypartCovered(BodypartSlot.Vagina)):
 		return false
 	
 	return true
 
 func canDo(_lustState: LustCombatState, _args):
-	var itemState: PantiesState = _args["itemState"]
-	#var pc:BaseCharacter = _lustState.getCharacter()
-	if(itemState.arePantiesShiftedAside()):
-		return [false, "Panties already shifted aside"]
 	return .canDo(_lustState, _args)
 
 func getVisibleName(_lustState: LustCombatState, _args):
-	return "Shift panties aside"
+	return "Finger pussy"
 
 func getVisibleDescription(_lustState: LustCombatState, _args):
-	if(_args.has("itemName")):
-		return "Shift your "+_args["itemName"]+" aside"
-	return "Shift your panties aside"
+	return "Finger your pussy"
 
 func doAction(_lustState: LustCombatState, _args):
-	var _item:ItemBase = getItem(_lustState, _args)
-	
-	var itemState: PantiesState = _args["itemState"]
-	itemState.shiftPantiesAside()
-	
+	#_lustState.getCharacter().addLust(1)
+	#_lustState.startActivity(LustActivity.StrokingCock)
+
 	return {
-		text = "{attacker.name} moved the panties aside"
+		text = "{attacker.name} is fingering {attacker.his} pussy!",
+		lust = 5,
 	}
 
 func getLustTopics():

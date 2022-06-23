@@ -6,6 +6,7 @@ var uniqueID = null
 var amount = 1
 var currentInventory = null
 var restraintData: RestraintData = null
+var itemState: ItemState = null
 
 func _init():
 	#if(uniqueID == null):
@@ -14,6 +15,10 @@ func _init():
 		generateRestraintData()
 		if(restraintData != null):
 			restraintData.item = weakref(self)
+		
+	generateItemState()
+	if(itemState != null):
+		itemState.item = weakref(self)
 
 func getVisibleName():
 	return "Bad item"
@@ -143,6 +148,9 @@ func saveData():
 	if(restraintData != null):
 		data["restraintData"] = restraintData.saveData()
 
+	if(itemState != null):
+		data["itemState"] = itemState.saveData()
+
 	return data
 	
 func loadData(_data):
@@ -150,6 +158,9 @@ func loadData(_data):
 	
 	if(restraintData != null):
 		restraintData.loadData(SAVE.loadVar(_data, "restraintData", {}))
+		
+	if(itemState != null && _data.has("itemState")):
+		itemState.loadData(SAVE.loadVar(_data, "itemState", {}))
 
 func getClothingSlot():
 	return null
@@ -241,6 +252,12 @@ func hasTag(tag):
 		return true
 	return false
 
+func generateItemState():
+	pass
+
+func getItemState():
+	return itemState
+
 func isRestraint():
 	return false
 
@@ -267,7 +284,10 @@ func getHidesParts(_character):
 	return null
 
 func getLustActions():
+	if(itemState != null):
+		return itemState.getActions()
 	return []
 
 func resetLustState():
-	pass
+	if(itemState != null):
+		return itemState.resetState()

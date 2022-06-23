@@ -31,6 +31,8 @@ func getPuttingOnStringLong(withS):
 		return "put on the panties"
 
 func coversBodyparts():
+	if(itemState != null):
+		return itemState.coversBodyparts()
 	return [BodypartSlot.Vagina, BodypartSlot.Penis, BodypartSlot.Anus]
 
 func getPrice():
@@ -41,10 +43,5 @@ func getTags():
 		ItemTag.SoldByUnderwearVendomat,
 		]
 
-func getLustActions():
-	return [
-		"MovePantiesAside",
-	]
-
-func resetLustState():
-	print("PANTIES WERE RESET")
+func generateItemState():
+	itemState = PantiesState.new()
