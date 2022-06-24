@@ -1,18 +1,10 @@
 extends LustAction
 
 func _init():
-	id = "StartRubPussy"
+	id = "MiscSwayHips"
 	hasByDefault = true
 	
 func shouldShow(_lustState: LustCombatState, _args):
-	if(_lustState.isDoingActivity(LustActivity.SpreadingPussy)):
-		return false
-	
-	if(!_lustState.canStartNewActivity(LustActivity.RubbingPussy)):
-		return false
-	var pc:Player = _lustState.getCharacter()
-	if(!pc.hasBodypart(BodypartSlot.Vagina) || pc.isBodypartCovered(BodypartSlot.Vagina)):
-		return false
 	
 	return true
 
@@ -20,17 +12,16 @@ func canDo(_lustState: LustCombatState, _args):
 	return .canDo(_lustState, _args)
 
 func getVisibleName(_lustState: LustCombatState, _args):
-	return "Rub pussy"
+	return "Sway hips"
 
 func getVisibleDescription(_lustState: LustCombatState, _args):
-	return "Focus on your pussy"
+	return "Do a little dance with your hips"
 
 func doAction(_lustState: LustCombatState, _args):
-	#_lustState.getCharacter().addLust(1)
-	_lustState.startActivity(LustActivity.RubbingPussy)
+	#_lustState.getCharacter().addLust(3)
 
 	return {
-		text = "{attacker.name} began groping {attacker.his} pussy!",
+		text = "{attacker.name} is swaying {attacker.his} {attacker.masc} hips!",
 		lust = 1,
 	}
 
@@ -43,3 +34,6 @@ func getLustTopics():
 		InterestTopic.StuffedPussy : 0.5,
 		InterestTopic.StuffedAss : 0.5,
 	}
+
+func getPriority():
+	return 4

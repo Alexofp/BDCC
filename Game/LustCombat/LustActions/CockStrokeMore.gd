@@ -1,14 +1,14 @@
 extends LustAction
 
 func _init():
-	id = "StartGropeChest"
+	id = "CockStrokeMore"
 	hasByDefault = true
 	
 func shouldShow(_lustState: LustCombatState, _args):
-	if(!_lustState.canStartNewActivity(LustActivity.GropingChest)):
+	if(!_lustState.isDoingActivity(LustActivity.StrokingCock)):
 		return false
 	var pc:Player = _lustState.getCharacter()
-	if(!pc.hasBodypart(BodypartSlot.Breasts) || pc.isBodypartCovered(BodypartSlot.Breasts)):
+	if(!pc.hasBodypart(BodypartSlot.Penis) || pc.isBodypartCovered(BodypartSlot.Penis)):
 		return false
 	
 	return true
@@ -17,18 +17,18 @@ func canDo(_lustState: LustCombatState, _args):
 	return .canDo(_lustState, _args)
 
 func getVisibleName(_lustState: LustCombatState, _args):
-	return "Grope tits"
+	return "Stroke cock"
 
 func getVisibleDescription(_lustState: LustCombatState, _args):
-	return "Start groping your tits"
+	return "Stroke cock more"
 
 func doAction(_lustState: LustCombatState, _args):
 	#_lustState.getCharacter().addLust(1)
-	_lustState.startActivity(LustActivity.GropingChest)
+	#_lustState.startActivity(LustActivity.StrokingCock)
 
 	return {
-		text = "{attacker.name} began groping {attacker.his} tits!",
-		lust = 1,
+		text = "{attacker.name} is stroking {attacker.his} {pc.cock}!",
+		lust = 5,
 	}
 
 func getLustTopics():
@@ -40,3 +40,6 @@ func getLustTopics():
 		InterestTopic.StuffedPussy : 0.5,
 		InterestTopic.StuffedAss : 0.5,
 	}
+
+func getPriority():
+	return 5

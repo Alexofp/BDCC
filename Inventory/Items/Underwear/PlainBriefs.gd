@@ -30,9 +30,6 @@ func getPuttingOnStringLong(withS):
 	else:
 		return "put on the briefs"
 
-func coversBodyparts():
-	return [BodypartSlot.Vagina, BodypartSlot.Penis, BodypartSlot.Anus]
-
 func getPrice():
 	return 1
 
@@ -40,3 +37,13 @@ func getTags():
 	return [
 		ItemTag.SoldByUnderwearVendomat,
 		]
+
+func coversBodyparts():
+	if(itemState != null):
+		return itemState.coversBodyparts()
+	return [BodypartSlot.Vagina, BodypartSlot.Penis, BodypartSlot.Anus]
+
+func generateItemState():
+	itemState = PantiesState.new()
+	itemState.canShiftAside = false
+	itemState.casualName = "briefs"

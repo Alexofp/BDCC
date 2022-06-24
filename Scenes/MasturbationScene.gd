@@ -22,7 +22,7 @@ func _run():
 		
 		var lustCombatState:LustCombatState = GM.pc.getLustCombatState()
 	
-		for actionData in lustCombatState.getActions():
+		for actionData in lustCombatState.getActionsSorted():
 			var lustAction:LustAction = GlobalRegistry.getLustAction(actionData["id"])
 			
 			if(!lustAction.shouldShow(lustCombatState, actionData)):
@@ -68,12 +68,13 @@ func _react(_action: String, _args):
 	if(_action == "doAction"):
 		var actionData = _args[0]
 		var lustCombatState:LustCombatState = GM.pc.getLustCombatState()
-		var lustAction:LustAction = GlobalRegistry.getLustAction(actionData["id"])
 		
-		var result = lustAction.doAction(lustCombatState, actionData)
+		var result = lustCombatState.doAction(actionData)
 		savedActionText = result["text"]
 		if("lust" in result):
 			GM.pc.addLust(result["lust"])
+		if("pain" in result):
+			GM.pc.addPain(result["pain"])
 		
 		processTime(30)
 		

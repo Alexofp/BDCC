@@ -32,9 +32,6 @@ func getPuttingOnStringLong(withS):
 	else:
 		return "put on the sporty top"
 
-func coversBodyparts():
-	return [BodypartSlot.Breasts]
-
 func getPrice():
 	return 5
 
@@ -42,3 +39,12 @@ func getTags():
 	return [
 		ItemTag.SoldByUnderwearVendomat,
 		]
+
+func coversBodyparts():
+	if(itemState != null):
+		return itemState.coversBodyparts()
+	return [BodypartSlot.Breasts]
+
+func generateItemState():
+	itemState = BraState.new()
+	itemState.casualName = "top"

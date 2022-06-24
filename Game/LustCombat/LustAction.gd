@@ -32,3 +32,6 @@ func getItem(_lustState: LustCombatState, _args) -> ItemBase:
 
 func getLustTopics():
 	return {}
+
+func getPriority():
+	return 0

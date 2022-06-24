@@ -1,11 +1,11 @@
 extends LustAction
 
 func _init():
-	id = "StartGropeChest"
+	id = "BreastsPinchNipples"
 	hasByDefault = true
 	
 func shouldShow(_lustState: LustCombatState, _args):
-	if(!_lustState.canStartNewActivity(LustActivity.GropingChest)):
+	if(!_lustState.isDoingActivity(LustActivity.GropingChest)):
 		return false
 	var pc:Player = _lustState.getCharacter()
 	if(!pc.hasBodypart(BodypartSlot.Breasts) || pc.isBodypartCovered(BodypartSlot.Breasts)):
@@ -14,21 +14,26 @@ func shouldShow(_lustState: LustCombatState, _args):
 	return true
 
 func canDo(_lustState: LustCombatState, _args):
+	var pc:Player = _lustState.getCharacter()
+	if(pc.hasBoundArms()):
+		return [false, "You can't do that with bound arms"]
+	if(pc.hasBlockedHands()):
+		return [false, "You can't do that with blocked hands"]
+	
 	return .canDo(_lustState, _args)
 
 func getVisibleName(_lustState: LustCombatState, _args):
-	return "Grope tits"
+	return "Pinch nipples"
 
 func getVisibleDescription(_lustState: LustCombatState, _args):
-	return "Start groping your tits"
+	return "Pinch your nipples until the milk comes out!"
 
 func doAction(_lustState: LustCombatState, _args):
-	#_lustState.getCharacter().addLust(1)
-	_lustState.startActivity(LustActivity.GropingChest)
+	#_lustState.getCharacter().addLust(3)
 
 	return {
-		text = "{attacker.name} began groping {attacker.his} tits!",
-		lust = 1,
+		text = "{attacker.name} is pinching {attacker.his} nipples!",
+		lust = 5,
 	}
 
 func getLustTopics():
@@ -40,3 +45,6 @@ func getLustTopics():
 		InterestTopic.StuffedPussy : 0.5,
 		InterestTopic.StuffedAss : 0.5,
 	}
+
+func getPriority():
+	return 5

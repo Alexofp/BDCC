@@ -13,7 +13,19 @@ func getCharacter():
 
 func setCharacter(newchar):
 	character = weakref(newchar)
+
+static func myactionsorter(a, b):
+	if a["priority"] > b["priority"]:
+		return true
+	return false
+
+func getActionsSorted():
+	var actions:Array = getActions()
 	
+	actions.sort_custom(self, "myactionsorter")
+	
+	return actions
+
 func getActions():
 	var result = []
 	
@@ -22,7 +34,11 @@ func getActions():
 #	result.append({id="RubNipples"})
 #	result.append({id="StopAll"})
 	for actionID in GlobalRegistry.getDefaultLustActions():
-		result.append({id=actionID})
+		var action = GlobalRegistry.getLustAction(actionID)
+		if(action == null):
+			continue
+		
+		result.append({id=actionID, priority=action.getPriority()})
 	
 	if(getCharacter() != null):
 		var pc = getCharacter()
@@ -32,11 +48,16 @@ func getActions():
 			var newActions = item.getLustActions()
 			if(newActions != null):
 				for newAction in newActions:
+					var action = GlobalRegistry.getLustAction(newAction)
+					if(action == null):
+						continue
+					
 					result.append({
 						"id": newAction,
 						"item": item.getUniqueID(),
 						"itemName": item.getVisibleName(),
 						"itemState": item.getItemState(),
+						"priority": action.getPriority(),
 					})
 	
 	return result
@@ -117,12 +138,12 @@ func getActivitiesAsText():
 			result.append("{attacker.name}'s hand is groping {attacker.his} butt")
 		if(activity == LustActivity.GropingChest):
 			result.append("{attacker.name}'s hand is groping {attacker.his} tits")
-		if(activity == LustActivity.RubbingPussy):
-			result.append("{attacker.name}'s hand is rubbing {attacker.his} pussy")
 		if(activity == LustActivity.SpreadingPussy):
 			result.append("{attacker.name}'s hand is spreading {attacker.his} pussy open")
 		if(activity == LustActivity.StrokingCock):
 			result.append("{attacker.name}'s hand is stroking {attacker.his} cock")
+		if(activity == LustActivity.ProddingAnal):
+			result.append("{attacker.name}'s fingers are prodding {attacker.his} anal ring")
 			
 	return result
 
@@ -145,4 +166,11 @@ func getAllText():
 	var result = []
 	result.append_array(getActivitiesAsText())
 	result.append_array(getItemStatesAsText())
+	return result
+
+func doAction(actionData):
+	var lustAction = GlobalRegistry.getLustAction(actionData["id"])
+	
+	var result = lustAction.doAction(self, actionData)
+	
 	return result

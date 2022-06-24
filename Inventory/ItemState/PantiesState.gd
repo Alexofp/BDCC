@@ -2,42 +2,57 @@ extends ItemState
 class_name PantiesState
 
 var shiftedAside = false
+var casualName = "panties"
+var canShiftAside = true
 
 func arePantiesShiftedAside():
 	return shiftedAside
 
 func shiftPantiesAside():
 	shiftedAside = true
+	removed = false
 
 func getActions():
-	return [
-		"MovePantiesAside",
-	]
+	if(canShiftAside):
+		return [
+			"PantiesMoveAside",
+			"PantiesShakeOff",
+		]
+	else:
+		return [
+			"PantiesShakeOff",
+			"PantiesPullDown",
+		]
 
 func resetState():
+	.resetState()
 	shiftedAside = false
 
 func saveData():
-	var data = {}
+	var data = .saveData()
 	
 	data["shiftedAside"] = shiftedAside
+	data["casualName"] = casualName
+	data["canShiftAside"] = canShiftAside
 
 	return data
 	
 func loadData(_data):
+	.loadData(_data)
 	shiftedAside = SAVE.loadVar(_data, "shiftedAside", false)
+	casualName = SAVE.loadVar(_data, "casualName", "panties")
+	canShiftAside = SAVE.loadVar(_data, "canShiftAside", true)
 
 func coversBodyparts():
-	var result = []
-	if(!shiftedAside):
-		result.append(BodypartSlot.Vagina)
-		result.append(BodypartSlot.Penis)
-		result.append(BodypartSlot.Anus)
+	if(removed || shiftedAside):
+		return []
 	
-	return result
+	return [BodypartSlot.Vagina, BodypartSlot.Penis, BodypartSlot.Anus]
 
 func getStateText():
 	var text = ""
 	if(shiftedAside):
-		text += "Panties are shifted aside. "
+		text += casualName.capitalize()+" are shifted aside. "
+	if(removed):
+		text = casualName.capitalize()+" are pulled down. "
 	return text

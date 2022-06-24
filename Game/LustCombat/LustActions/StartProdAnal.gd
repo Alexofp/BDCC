@@ -1,14 +1,14 @@
 extends LustAction
 
 func _init():
-	id = "FingerPussy"
+	id = "StartProdAnal"
 	hasByDefault = true
 	
 func shouldShow(_lustState: LustCombatState, _args):
-	if(!_lustState.isDoingActivity(LustActivity.SpreadingPussy)):
+	if(!_lustState.canStartNewActivity(LustActivity.ProddingAnal)):
 		return false
 	var pc:Player = _lustState.getCharacter()
-	if(!pc.hasBodypart(BodypartSlot.Vagina) || pc.isBodypartCovered(BodypartSlot.Vagina)):
+	if(!pc.hasBodypart(BodypartSlot.Anus) || pc.isBodypartCovered(BodypartSlot.Anus)):
 		return false
 	
 	return true
@@ -17,18 +17,17 @@ func canDo(_lustState: LustCombatState, _args):
 	return .canDo(_lustState, _args)
 
 func getVisibleName(_lustState: LustCombatState, _args):
-	return "Finger pussy"
+	return "Prod anal"
 
 func getVisibleDescription(_lustState: LustCombatState, _args):
-	return "Finger your pussy"
+	return "Prod your anal ring with your finger"
 
 func doAction(_lustState: LustCombatState, _args):
-	#_lustState.getCharacter().addLust(1)
-	#_lustState.startActivity(LustActivity.StrokingCock)
+	_lustState.startActivity(LustActivity.ProddingAnal)
 
 	return {
-		text = "{attacker.name} is fingering {attacker.his} pussy!",
-		lust = 5,
+		text = "{attacker.name} is prodding {attacker.his} butt!",
+		lust = 1,
 	}
 
 func getLustTopics():

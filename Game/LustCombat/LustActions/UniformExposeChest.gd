@@ -18,6 +18,8 @@ func canDo(_lustState: LustCombatState, _args):
 	var pc:Player = _lustState.getCharacter()
 	if(pc.hasBoundArms()):
 		return [false, "You can't do that with bound arms"]
+	if(pc.hasBlockedHands()):
+		return [false, "You can't do that with blocked hands"]
 	return .canDo(_lustState, _args)
 
 func getVisibleName(_lustState: LustCombatState, _args):
@@ -35,3 +37,6 @@ func doAction(_lustState: LustCombatState, _args):
 	return {
 		text = "{attacker.name} opened up {attacker.his} shirt!"
 	}
+
+func getPriority():
+	return -4

@@ -1,11 +1,11 @@
 extends LustAction
 
 func _init():
-	id = "SpreadPussy"
+	id = "StartSpreadPussy"
 	hasByDefault = true
 	
 func shouldShow(_lustState: LustCombatState, _args):
-	if(!_lustState.isDoingActivity(LustActivity.RubbingPussy)):
+	if(!_lustState.canStartNewActivity(LustActivity.SpreadingPussy)):
 		return false
 	var pc:Player = _lustState.getCharacter()
 	if(!pc.hasBodypart(BodypartSlot.Vagina) || pc.isBodypartCovered(BodypartSlot.Vagina)):
@@ -24,7 +24,7 @@ func getVisibleDescription(_lustState: LustCombatState, _args):
 
 func doAction(_lustState: LustCombatState, _args):
 	#_lustState.getCharacter().addLust(1)
-	_lustState.replaceActivity(LustActivity.RubbingPussy, LustActivity.SpreadingPussy)
+	_lustState.startActivity(LustActivity.SpreadingPussy)
 
 	return {
 		text = "{attacker.name} spreads {attacker.his} pussy lips!",

@@ -134,6 +134,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Player/Bodyparts/BodypartVagina.gd"
 }, {
+"base": "ItemState",
+"class": "BraState",
+"language": "GDScript",
+"path": "res://Inventory/ItemState/BraState.gd"
+}, {
 "base": "Object",
 "class": "BreastsSize",
 "language": "GDScript",
@@ -705,6 +710,7 @@ _global_script_class_icons={
 "BodypartSlot": "",
 "BodypartTail": "",
 "BodypartVagina": "",
+"BraState": "",
 "BreastsSize": "",
 "Buff": "",
 "BuffBase": "",

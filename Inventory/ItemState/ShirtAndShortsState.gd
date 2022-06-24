@@ -20,14 +20,16 @@ func getActions():
 	return [
 		"UniformExposeChest",
 		"UniformExposeCrotch",
+		"UniformShakeShortsOff",
 	]
 
 func resetState():
+	.resetState()
 	shortsPulledDown = false
 	shirtOpened = false
 
 func saveData():
-	var data = {}
+	var data = .saveData()
 	
 	data["shortsPulledDown"] = shortsPulledDown
 	data["shirtOpened"] = shirtOpened
@@ -35,6 +37,8 @@ func saveData():
 	return data
 	
 func loadData(_data):
+	.loadData(_data)
+	
 	shortsPulledDown = SAVE.loadVar(_data, "shortsPulledDown", false)
 	shirtOpened = SAVE.loadVar(_data, "shirtOpened", false)
 

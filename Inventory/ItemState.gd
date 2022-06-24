@@ -2,6 +2,13 @@ extends Reference
 class_name ItemState
 
 var item: WeakRef
+var removed = false
+
+func isRemoved():
+	return removed
+
+func remove():
+	removed = true
 
 func getItem():
 	if(item == null):
@@ -12,7 +19,7 @@ func getActions():
 	return []
 
 func resetState():
-	pass
+	removed = false
 
 func saveData():
 	var data = {}
