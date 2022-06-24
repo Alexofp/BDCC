@@ -28,6 +28,8 @@ func _initScene(_args = []):
 		
 	enemyAIStrategy = enemyCharacter.getAiStrategy(battleName)
 	enemyAIStrategy.onBattleStart(GM.pc)
+	
+	GM.pc.beforeFightStarted()
 
 func _run():
 	updateFightCharacter()
@@ -65,7 +67,13 @@ func _run():
 			else:
 				sayn("Nothing yet")
 		
-		addAttackButtons(Attack.Category.Lust)
+		var lustCombatState:LustCombatState = GM.pc.getLustCombatState()
+		addLustActionsButtons(lustCombatState, lustCombatState.getActionsSorted())
+		
+		sayn("")
+		for activity in lustCombatState.getAllText():
+			sayn(activity)
+		#addAttackButtons(Attack.Category.Lust)
 		
 		addButton("Back", "Back to fighting", "return")
 	
@@ -113,6 +121,10 @@ func _run():
 		saynn(enemyCharacter.getFightState(battleName))
 		
 		saynn(GM.pc.getFightState(battleName))
+		
+		var lustCombatState:LustCombatState = GM.pc.getLustCombatState()
+		for activity in lustCombatState.getAllText():
+			sayn(activity)
 			
 	if(state == "playerMustDodge"):
 		var attack: Attack = GlobalRegistry.getAttack(savedAIAttackID)
@@ -175,16 +187,33 @@ func _run():
 		
 	if(state == "lost" || state == "win"):		
 		addButton("Continue", "the battle has ended", "endbattle")
+		
+	if(state == "lustCombatAboutToCum"):
+		saynn(whatPlayerDid)
+		
+		saynn("You're about to cum..")
+		
+		var lustCombatState:LustCombatState = GM.pc.getLustCombatState()
+		addLustActionsButtons(lustCombatState, lustCombatState.getOrgasmActionsSorted())
+		
+	if(state == "lustCombatAfterCame"):
+		saynn(whatPlayerDid)
+		
+		addButton("Continue", "You're not done yet", "")
+		addButton("Stop", "That's enough for now..", "endthescene")
 
 func _react(_action: String, _args):
 	if(_action == "struggle"):
 		runScene("StrugglingScene", [true], "struggle_scene")
+		return
 		
 	if(_action == "physattacks" || _action == "lustattacks" || _action == "specialattacks" || _action == "selfhumattacks" || _action == "humattacks" || _action == "inventory"):
 		setState(_action)
+		return
 		
 	if(_action == "return"):
 		setState("fighting")
+		return
 	
 	if(_action == "doattack"):
 		setState("fighting")
@@ -292,6 +321,64 @@ func _react(_action: String, _args):
 		else:
 			endScene([battleState, battleEndedHow])
 		return
+	
+	if(_action == "doLustAction"):
+		var actionData = _args[0]
+		if(!(actionData["id"] in GlobalRegistry.getOrgasmLustActions())):
+			beforeTurnChecks()
+		setPlayerAsAttacker()
+		
+		var lustCombatState:LustCombatState = GM.pc.getLustCombatState()
+		
+		var result = lustCombatState.doAction(actionData)
+		whatPlayerDid = GM.ui.processString(result["text"])
+		if("lust" in result):
+			GM.pc.addLust(result["lust"])
+		if("pain" in result):
+			GM.pc.addPain(result["pain"])
+		
+		processTime(30)
+		
+		#if("came" in result):
+		#	setState("lustCombatAfterCame")
+		#	afterTurnChecks()
+		#	return
+		
+		if("lostBattle" in result):
+			GM.pc.addLust(GM.pc.lustThreshold())
+			afterTurnChecks()
+			return
+			
+		if(GM.pc.getLustLevel() >= 1.0):
+			setState("lustCombatAboutToCum")
+			#afterTurnChecks()
+			return
+			
+		whatEnemyDid += aiTurn()
+			
+		afterTurnChecks()
+		return
+	
+	setState(_action)
+
+func addLustActionsButtons(lustCombatState:LustCombatState, theActions):
+	for actionData in theActions:
+		var lustAction:LustAction = GlobalRegistry.getLustAction(actionData["id"])
+		
+		if(!lustAction.shouldShow(lustCombatState, actionData)):
+			continue
+		var canDo = lustAction.canDo(lustCombatState, actionData)
+		var reasonWhyCant = "You can't do this right now"
+		if(canDo is Array):
+			if(canDo.size() > 1):
+				reasonWhyCant = canDo[1]
+			canDo = canDo[0]
+		
+		if(canDo):
+			addButton(lustAction.getVisibleName(lustCombatState, actionData), lustAction.getVisibleDescription(lustCombatState, actionData), "doLustAction", [actionData])
+		else:
+			addDisabledButton(lustAction.getVisibleName(lustCombatState, actionData), reasonWhyCant)
+	
 
 func doPlayerAttack(attackID):
 	var attack: Attack = GlobalRegistry.getAttack(attackID)

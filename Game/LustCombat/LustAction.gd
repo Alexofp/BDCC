@@ -4,6 +4,7 @@ class_name LustAction
 var id = "error"
 var needsFreeHand = false
 var hasByDefault = false
+var isOrgasmAction = false
 
 func shouldShow(_lustState: LustCombatState, _args):
 	return true

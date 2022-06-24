@@ -41,4 +41,4 @@ func getLustTopics():
 	}
 
 func getPriority():
-	return 5
+	return 4

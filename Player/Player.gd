@@ -255,11 +255,19 @@ func processBattleTurn():
 		if(timedBuffsDurationTurns <= 0):
 			timedBuffsTurns.clear()
 
+func beforeFightStarted():
+	.beforeFightStarted()
+	if(lustCombatState != null):
+		lustCombatState.enteredBattle()
+
 func afterFightEnded():
 	.afterFightEnded()
 	
 	timedBuffsTurns.clear()
 	timedBuffsDurationTurns = 0
+	
+	if(lustCombatState != null):
+		lustCombatState.exitedBattle()
 
 func processTime(_secondsPassed):
 	for bodypart in processingBodyparts:

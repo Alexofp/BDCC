@@ -1,33 +1,31 @@
 extends LustAction
 
 func _init():
-	id = "TeasePussy"
-	hasByDefault = true
+	id = "CumCum"
+	isOrgasmAction = true
 	
 func shouldShow(_lustState: LustCombatState, _args):
-	if(_lustState.isDoingActivity(LustActivity.SpreadingPussy)):
-		return false
-	var pc:Player = _lustState.getCharacter()
-	if(!pc.hasBodypart(BodypartSlot.Vagina) || !pc.isBodypartCovered(BodypartSlot.Vagina)):
-		return false
-	
 	return true
 
 func canDo(_lustState: LustCombatState, _args):
 	return .canDo(_lustState, _args)
 
 func getVisibleName(_lustState: LustCombatState, _args):
-	return "Tease pussy"
+	return "Cum"
 
 func getVisibleDescription(_lustState: LustCombatState, _args):
-	return "Tease your pussy through the clothing"
+	return "Embrace the orgasm.. If you are in a fight, you will lose and succumb to your enemy"
 
 func doAction(_lustState: LustCombatState, _args):
-	#_lustState.getCharacter().addLust(3)
+	#_lustState.getCharacter().addLust(1)
+	#_lustState.startActivity(LustActivity.StrokingCock)
+	var pc: Player = _lustState.getCharacter()
+	pc.orgasmFrom(pc.getID())
 
 	return {
-		text = "{attacker.name} is teasing {attacker.his} pussy!",
-		lust = 3,
+		text = "{attacker.name} came hard!",
+		came = true,
+		lostBattle = true,
 	}
 
 func getLustTopics():
@@ -41,4 +39,4 @@ func getLustTopics():
 	}
 
 func getPriority():
-	return 4
+	return 1

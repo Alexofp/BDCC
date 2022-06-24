@@ -13,50 +13,52 @@ func _run():
 		else:
 			saynn("You found yourself a mostly private spot where you can do your things without anyone spotting you..")
 			
-	if(state == "doAction"):
+	if(state == "doLustAction"):
 		saynn(savedActionText)
 				
-	if(state == "" || state == "doAction"):
+	if(state == "" || state == "doLustAction"):
 		addButtonAt(14, "Stop", "Enough horny", "endthescene")
 		
 		
 		var lustCombatState:LustCombatState = GM.pc.getLustCombatState()
 	
-		for actionData in lustCombatState.getActionsSorted():
-			var lustAction:LustAction = GlobalRegistry.getLustAction(actionData["id"])
-			
-			if(!lustAction.shouldShow(lustCombatState, actionData)):
-				continue
-			var canDo = lustAction.canDo(lustCombatState, actionData)
-			var reasonWhyCant = "You can't do this right now"
-			if(canDo is Array):
-				if(canDo.size() > 1):
-					reasonWhyCant = canDo[1]
-				canDo = canDo[0]
-			
-			if(canDo):
-				addButton(lustAction.getVisibleName(lustCombatState, actionData), lustAction.getVisibleDescription(lustCombatState, actionData), "doAction", [actionData])
-			else:
-				addDisabledButton(lustAction.getVisibleName(lustCombatState, actionData), reasonWhyCant)
-		
+		addLustActionsButtons(lustCombatState, lustCombatState.getActionsSorted())
+
 		for activity in lustCombatState.getAllText():
 			sayn(activity)
 	
-	if(state == "aboutToCum"):
+	if(state == "lustCombatAboutToCum"):
+		saynn(savedActionText)
+		
 		saynn("You're about to cum..")
 		
-		addButton("Cum", "Embrace the orgasm.. If you are in a fight, you will lose and succumb to your enemy", "docum")
+		var lustCombatState:LustCombatState = GM.pc.getLustCombatState()
+		addLustActionsButtons(lustCombatState, lustCombatState.getOrgasmActionsSorted())
 		
-		if(GM.pc.getStamina() > 0):
-			addButton("Deny self", "Go against your will and use 20 stamina to deny yourself the orgasm.", "denyorgasm")
-		else:
-			addDisabledButton("Deny self", "You don't have enough will to stop now..")
-		
-	if(state == "docum"):
-		saynn("You came hard")
+	if(state == "lustCombatAfterCame"):
+		saynn(savedActionText)
 		
 		addButton("Continue", "You're not done yet", "")
 		addButton("Stop", "That's enough for now..", "endthescene")
+
+func addLustActionsButtons(lustCombatState:LustCombatState, theActions):
+	for actionData in theActions:
+		var lustAction:LustAction = GlobalRegistry.getLustAction(actionData["id"])
+		
+		if(!lustAction.shouldShow(lustCombatState, actionData)):
+			continue
+		var canDo = lustAction.canDo(lustCombatState, actionData)
+		var reasonWhyCant = "You can't do this right now"
+		if(canDo is Array):
+			if(canDo.size() > 1):
+				reasonWhyCant = canDo[1]
+			canDo = canDo[0]
+		
+		if(canDo):
+			addButton(lustAction.getVisibleName(lustCombatState, actionData), lustAction.getVisibleDescription(lustCombatState, actionData), "doLustAction", [actionData])
+		else:
+			addDisabledButton(lustAction.getVisibleName(lustCombatState, actionData), reasonWhyCant)
+	
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
@@ -65,7 +67,7 @@ func _react(_action: String, _args):
 		endScene()
 		return
 	
-	if(_action == "doAction"):
+	if(_action == "doLustAction"):
 		var actionData = _args[0]
 		var lustCombatState:LustCombatState = GM.pc.getLustCombatState()
 		
@@ -78,29 +80,14 @@ func _react(_action: String, _args):
 		
 		processTime(30)
 		
+		if("came" in result):
+			setState("lustCombatAfterCame")
+			return
+		
 		if(GM.pc.getLustLevel() >= 1.0):
-			setState("aboutToCum")
+			setState("lustCombatAboutToCum")
 			return
 
-	if(_action == "denyorgasm"):
-		savedActionText = "You denied yourself the orgasm.."
-		GM.pc.addStamina(-20)
-		
-		GM.pc.addLust( -int(float(GM.pc.getLust()) / 2) )
-		
-		processTime(30)
-		
-		setState("doAction")
-		return
-	if(_action == "docum"):
-		savedActionText = ""
-		
-		GM.pc.orgasmFrom("pc")
-		
-		processTime(60)
-		setState("docum")
-		return
-	
 	setState(_action)
 
 func resolveCustomCharacterName(_charID):

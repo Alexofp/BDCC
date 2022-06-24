@@ -26,6 +26,23 @@ func getActionsSorted():
 	
 	return actions
 
+func getOrgasmActionsSorted():
+	var actions:Array = getOrgasmActions()
+	
+	actions.sort_custom(self, "myactionsorter")
+	
+	return actions
+
+func getOrgasmActions():
+	var result = []
+	for actionID in GlobalRegistry.getOrgasmLustActions():
+		var action = GlobalRegistry.getLustAction(actionID)
+		if(action == null):
+			continue
+		
+		result.append({id=actionID, priority=action.getPriority()})
+	return result
+
 func getActions():
 	var result = []
 	

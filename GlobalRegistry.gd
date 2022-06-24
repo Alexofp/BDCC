@@ -32,6 +32,7 @@ var lustTopicsObjects: Array = []
 var stageScenes: Dictionary = {}
 var lustActions: Dictionary = {}
 var defaultLustActions: Array = []
+var orgasmLustActions: Array = []
 
 var bodypartStorageNode
 
@@ -677,6 +678,8 @@ func registerLustAction(path: String):
 	lustActions[itemObject.id] = itemObject
 	if(itemObject.hasByDefault):
 		defaultLustActions.append(itemObject.id)
+	if(itemObject.isOrgasmAction):
+		orgasmLustActions.append(itemObject.id)
 
 func registerLustActionFolder(folder: String):
 	var dir = Directory.new()
@@ -704,3 +707,6 @@ func getLustAction(id: String):
 
 func getDefaultLustActions():
 	return defaultLustActions
+
+func getOrgasmLustActions():
+	return orgasmLustActions
