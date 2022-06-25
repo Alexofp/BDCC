@@ -13,6 +13,7 @@ roomName = "Mineshafts"
 roomID = "mining_nearentrance"
 roomDescription = "Scary mineshafts"
 roomColor = 8
+population = 3
 
 [node name="MiningTaviRoom" parent="." index="1" instance=ExtResource( 2 )]
 self_modulate = Color( 0.7, 0.7, 0.7, 1 )
@@ -31,6 +32,7 @@ roomID = "mining_shafts_entering"
 roomDescription = "Scary mineshafts"
 roomSprite = 4
 roomColor = 7
+population = 3
 
 [node name="MiningElevator" parent="." index="3" instance=ExtResource( 2 )]
 self_modulate = Color( 1, 0.6, 0.6, 1 )
@@ -40,6 +42,7 @@ roomID = "mining_elevator"
 roomDescription = "Spacious elevator that can move people or a huge amount of cargo between floors. Walls are made out of black painted metal, you notice a control panel that has a few buttons."
 roomSprite = 3
 roomColor = 2
+population = 3
 
 [connection signal="onEnter" from="MiningElevator" to="." method="_on_MiningElevator_onEnter"]
 [connection signal="onReact" from="MiningElevator" to="." method="_on_MiningElevator_onReact"]

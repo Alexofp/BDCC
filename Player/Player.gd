@@ -91,6 +91,16 @@ func setLocation(newRoomID:String):
 func getLocation():
 	return location
 	
+func isInSecludedLocation():
+	if(GM.world == null):
+		return false
+	var cell:GameRoom = GM.world.getRoomByID(location)
+	if(cell == null):
+		return false
+	if(cell.population > 0):
+		return false
+	return true
+	
 func getName() -> String:
 	return gamename
 	

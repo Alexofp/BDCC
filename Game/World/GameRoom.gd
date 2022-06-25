@@ -54,6 +54,8 @@ export(bool) var loctag_Greenhouses = false
 export(bool) var loctag_MentalWard = false
 export(bool) var loctag_GuardsEncounter = false
 
+export(int, FLAGS, "Inmates", "Guards") var population = 0
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	if(Engine.editor_hint):

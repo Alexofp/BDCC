@@ -74,7 +74,7 @@ func _react(_action: String, _args):
 		var result = lustCombatState.doAction(actionData)
 		savedActionText = result["text"]
 		if("lust" in result):
-			GM.pc.addLust(result["lust"])
+			GM.pc.addLust(result["lust"] * 3)
 		if("pain" in result):
 			GM.pc.addPain(result["pain"])
 		

@@ -91,7 +91,12 @@ func exitedBattle():
 	resetState()
 
 func isInPublic():
-	return true
+	if(getCharacter() == null || isInBattle()):
+		return true
+	var pc = getCharacter()
+	if(!pc.has_method("isInSecludedLocation")):
+		return true
+	return !pc.isInSecludedLocation()
 
 func resetState():
 	stopActivities()
