@@ -38,5 +38,30 @@ func doAction(_lustState: LustCombatState, _args):
 		text = "{attacker.name} opened up {attacker.his} shirt!"
 	}
 
+func getLustTopics():
+	return {
+		InterestTopic.FeminineBody : 0.1,
+		InterestTopic.MasculineBody : 0.1,
+		InterestTopic.AndroBody : 0.1,
+		InterestTopic.ThickBody : 0.1,
+		InterestTopic.SlimBody : 0.1,
+		InterestTopic.AverageMassBody : 0.1,
+		InterestTopic.BigBreasts : 0.4,
+		InterestTopic.SmallBreasts : 0.4,
+		InterestTopic.MediumBreasts : 0.4,
+		InterestTopic.NoBreasts : 0.4,
+		InterestTopic.LactatingBreasts : 0.1,
+		InterestTopic.CoveredInCum : 0.1,
+		InterestTopic.CoveredInLotsOfCum : 0.1,
+		InterestTopic.FullyNaked : 0.1,
+		InterestTopic.ExposedBreasts : 0.1,
+		InterestTopic.ExposedBra : 0.1,
+		InterestTopic.Bodywritings : 0.1,
+		InterestTopic.BDSMRestraints : 0.1,
+	}
+
 func getPriority():
 	return -4
+
+func isTease():
+	return true

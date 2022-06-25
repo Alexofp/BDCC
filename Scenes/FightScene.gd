@@ -65,11 +65,12 @@ func _run():
 					var topic = GlobalRegistry.getLustTopic(topicID)
 					sayn("- "+enemyCharacter.getName() + " [color="+Interest.getColorString(whatPlayerKnows[topicID])+"]" + Interest.getVisibleName(whatPlayerKnows[topicID])+"[/color] seeing "+str(topic.getVisibleName(topicID)))
 			else:
-				sayn("Nothing yet")
+				sayn("- Nothing yet")
 		
 		var lustCombatState:LustCombatState = GM.pc.getLustCombatState()
 		addLustActionsButtons(lustCombatState, lustCombatState.getActionsSorted())
 		
+		setPlayerAsAttacker()
 		sayn("")
 		for activity in lustCombatState.getAllText():
 			sayn(activity)
@@ -323,6 +324,7 @@ func _react(_action: String, _args):
 		return
 	
 	if(_action == "doLustAction"):
+		setState("fighting")
 		var actionData = _args[0]
 		if(!(actionData["id"] in GlobalRegistry.getOrgasmLustActions())):
 			beforeTurnChecks()
@@ -337,7 +339,51 @@ func _react(_action: String, _args):
 		if("pain" in result):
 			GM.pc.addPain(result["pain"])
 		
-		processTime(30)
+		if("lustInterests" in result):
+			var actionLustInterests = result["lustInterests"]
+			var isTease = false
+			if("isTease" in result):
+				isTease = true
+			
+			var maxUnlocks = 1
+			if(GM.pc.hasPerk(Perk.SexBetterTease)):
+				maxUnlocks = 2
+			
+			var lustInterests: LustInterests = enemyCharacter.getLustInterests()
+			var teaseData = lustInterests.reactLustAction(GM.pc, actionLustInterests, maxUnlocks)
+			var damageMult = teaseData["value"]
+			var positiveDamage = teaseData["positiveValue"]
+			var negativeDamage = teaseData["negativeValue"]
+			var learned = teaseData["learned"]
+			#var alreadyKnownTopics = teaseData["alreadyKnownTopics"]
+			print(damageMult)
+			
+			var pcDamageMult = GM.pc.getDamageMultiplier(DamageType.Lust) + 1.0
+			var damageBalanceMod = negativeDamage/pcDamageMult + positiveDamage*pcDamageMult
+			if(damageBalanceMod > 0.0):
+				damageBalanceMod = pow(damageBalanceMod, 0.7)
+			if(damageBalanceMod < 0.0):
+				damageBalanceMod = -pow(abs(damageBalanceMod), 0.7)
+			var theDamage = damageBalanceMod*10.0*RNG.randf_range(0.9, 1.1)
+			
+			var extraText = ""
+			if(isTease && enemyCharacter.getLustLevel() < 0.4 && theDamage > 0.0):
+				theDamage *= 1.5
+			if(isTease && enemyCharacter.getLustLevel() >= 0.4):
+				theDamage *= 0.5
+				extraText = "[b]Teasing is not effective, the enemy is too horny![/b] "
+			
+			var damage = enemyCharacter.receiveDamage(DamageType.Lust, int(round(theDamage)))
+			
+			whatPlayerDid += "\n\n"
+			whatPlayerDid += enemyCharacter.lustDamageReaction(damage, GM.pc)
+			whatPlayerDid += "\n"
+			whatPlayerDid += extraText + enemyCharacter.getName()+" received [color="+DamageType.getColorString(DamageType.Lust)+"]"+str(damage)+" "+DamageType.getBattleName(DamageType.Lust)+"[/color]"
+			
+			if(learned.size() > 0):
+				whatPlayerDid += "\n[i]You learned more about what "+enemyCharacter.getName()+" likes[/i]"
+		
+		#processTime(30)
 		
 		#if("came" in result):
 		#	setState("lustCombatAfterCame")
@@ -493,28 +539,28 @@ func afterTurnChecks():
 		setState("win")
 
 func checkEnd():
+	if(enemyCharacter.getPain() >= enemyCharacter.painThreshold()):
+		whatHappened += "Enemy is in too much pain to continue\n"
+		battleState = "win"
+		battleEndedHow = "pain"
+		return "win"
+	if(enemyCharacter.getLust() >= enemyCharacter.lustThreshold()):
+		whatHappened += "Enemy is too aroused to continue\n"
+		battleState = "win"
+		battleEndedHow = "lust"
+		return "win"
 	if(GM.pc.getPain() >= GM.pc.painThreshold()):
 		whatHappened += "You succumb to pain\n"
 		battleState = "lost"
 		battleEndedHow = "pain"
 		GM.main.playAnimation(StageScene.Solo, "defeat")
 		return "lost"
-	if(enemyCharacter.getPain() >= enemyCharacter.painThreshold()):
-		whatHappened += "Enemy is in too much pain to continue\n"
-		battleState = "win"
-		battleEndedHow = "pain"
-		return "win"
 	if(GM.pc.getLust() >= GM.pc.lustThreshold()):
 		whatHappened += "You're too aroused to continue\n"
 		battleState = "lost"
 		battleEndedHow = "lust"
 		GM.main.playAnimation(StageScene.Solo, "defeat")
 		return "lost"
-	if(enemyCharacter.getLust() >= enemyCharacter.lustThreshold()):
-		whatHappened += "Enemy is too aroused to continue\n"
-		battleState = "win"
-		battleEndedHow = "lust"
-		return "win"
 	
 	return ""
 

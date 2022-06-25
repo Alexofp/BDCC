@@ -707,6 +707,15 @@ func isBodypartCovered(bodypartSlot):
 func isWearingAnyUnderwear():
 	return inventory.hasSlotEquipped(InventorySlot.UnderwearBottom) || inventory.hasSlotEquipped(InventorySlot.UnderwearTop)
 
+func isInventorySlotBlocked(invslot):
+	var items = getInventory().getAllEquippedItems()
+	for itemSlot in items:
+		var item:ItemBase = items[itemSlot]
+		var itemState = item.getItemState()
+		if(itemState != null && (invslot in itemState.blocksInventorySlots())):
+			return true
+	return false
+
 func afterEatingAtCanteen():
 	addStamina(100)
 	addPain(-20)

@@ -34,13 +34,13 @@ static func getVisibleName(interest):
 
 static func getValue(interest):
 	if(interest == Hates):
-		return -1.0
+		return -2.0
 	if(interest == ReallyDislikes):
-		return -0.75
+		return -1.5
 	if(interest == Dislikes):
-		return -0.5
+		return -1.0
 	if(interest == SlightlyDislikes):
-		return -0.25
+		return -0.5
 	if(interest == Neutral):
 		return 0.0
 	if(interest == KindaLikes):

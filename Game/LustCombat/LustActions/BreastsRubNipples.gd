@@ -38,12 +38,24 @@ func doAction(_lustState: LustCombatState, _args):
 
 func getLustTopics():
 	return {
-		InterestTopic.ButtPlugs : 0.2,
-		InterestTopic.VaginalPlugs : 0.2,
-		InterestTopic.ExposedPussy : 1.0,
-		InterestTopic.ExposedAnus : 1.0,
-		InterestTopic.StuffedPussy : 0.5,
-		InterestTopic.StuffedAss : 0.5,
+		InterestTopic.FeminineBody : 0.1,
+		InterestTopic.MasculineBody : 0.1,
+		InterestTopic.AndroBody : 0.1,
+		InterestTopic.ThickBody : 0.1,
+		InterestTopic.SlimBody : 0.1,
+		InterestTopic.AverageMassBody : 0.1,
+		InterestTopic.BigBreasts : 0.9,
+		InterestTopic.SmallBreasts : 0.9,
+		InterestTopic.MediumBreasts : 0.9,
+		InterestTopic.NoBreasts : 0.9,
+		InterestTopic.LactatingBreasts : 0.1,
+		InterestTopic.CoveredInCum : 0.2,
+		InterestTopic.CoveredInLotsOfCum : 0.1,
+		InterestTopic.FullyNaked : 0.5,
+		InterestTopic.ExposedBreasts : 0.4,
+		InterestTopic.ExposedBra : 0.4,
+		InterestTopic.Bodywritings : 0.2,
+		InterestTopic.BDSMRestraints : 0.2,
 	}
 
 func getPriority():

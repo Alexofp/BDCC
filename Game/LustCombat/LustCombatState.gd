@@ -105,12 +105,7 @@ func resetState():
 func isInventorySlotBlocked(invslot):
 	if(getCharacter() != null):
 		var pc = getCharacter()
-		var items = pc.getInventory().getAllEquippedItems()
-		for itemSlot in items:
-			var item:ItemBase = items[itemSlot]
-			var itemState = item.getItemState()
-			if(itemState != null && (invslot in itemState.blocksInventorySlots())):
-				return true
+		return pc.isInventorySlotBlocked(invslot)
 	return false
 
 func startActivity(newActivity):
@@ -189,5 +184,8 @@ func doAction(actionData):
 	var lustAction = GlobalRegistry.getLustAction(actionData["id"])
 	
 	var result = lustAction.doAction(self, actionData)
+	result["lustInterests"] = lustAction.getLustTopics()
+	if(lustAction.isTease()):
+		result["isTease"] = true
 	
 	return result

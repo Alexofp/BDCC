@@ -37,6 +37,7 @@ func _init():
 		InterestTopic.TightPussy: Interest.Likes,
 		InterestTopic.HasVaginaAndCock: Interest.Dislikes,
 		InterestTopic.BigCock: Interest.ReallyDislikes,
+		InterestTopic.AverageCock: Interest.Dislikes,
 		InterestTopic.SmallCock: Interest.SlightlyDislikes,
 	}
 	

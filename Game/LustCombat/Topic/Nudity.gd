@@ -28,10 +28,10 @@ func getTopicValue(_topicID, _pc):
 		if(!_pc.isBodypartCovered(BodypartSlot.Penis)):
 			return 1.0
 	if(_topicID == InterestTopic.ExposedPanties):
-		if(!_pc.isBodypartCovered(BodypartSlot.Body) && _pc.getInventory().hasSlotEquipped(InventorySlot.UnderwearBottom)):
+		if(!_pc.isInventorySlotBlocked(InventorySlot.UnderwearBottom) && _pc.getInventory().hasSlotEquipped(InventorySlot.UnderwearBottom)):
 			return 1.0
 	if(_topicID == InterestTopic.ExposedBra):
-		if(!_pc.isBodypartCovered(BodypartSlot.Body) && _pc.getInventory().hasSlotEquipped(InventorySlot.UnderwearBottom)):
+		if(!_pc.isInventorySlotBlocked(InventorySlot.UnderwearTop) && _pc.getInventory().hasSlotEquipped(InventorySlot.UnderwearTop)):
 			return 1.0
 	
 	return 0

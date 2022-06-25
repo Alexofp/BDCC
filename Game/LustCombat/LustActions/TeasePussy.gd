@@ -32,13 +32,25 @@ func doAction(_lustState: LustCombatState, _args):
 
 func getLustTopics():
 	return {
-		InterestTopic.ButtPlugs : 0.2,
-		InterestTopic.VaginalPlugs : 0.2,
-		InterestTopic.ExposedPussy : 1.0,
-		InterestTopic.ExposedAnus : 1.0,
-		InterestTopic.StuffedPussy : 0.5,
-		InterestTopic.StuffedAss : 0.5,
+		InterestTopic.HasVaginaOnly : 0.8,
+		InterestTopic.HasVaginaAndCock : 0.8,
+		InterestTopic.StuffedPussy : 0.7,
+		InterestTopic.StuffedPussyOrAss : 0.4,
+		InterestTopic.CoveredInCum : 0.4,
+		InterestTopic.CoveredInLotsOfCum : 0.2,
+		InterestTopic.FullyNaked : 0.3,
+		InterestTopic.ExposedPussy : 0.6,
+		InterestTopic.ExposedBreasts : 0.3,
+		InterestTopic.ExposedCock : 0.3,
+		InterestTopic.ExposedPanties : 0.7,
+		InterestTopic.ExposedBra : 0.5,
+		InterestTopic.LoosePussy : 0.3,
+		InterestTopic.TightPussy : 0.3,
+		InterestTopic.VaginalPlugs : 0.7,
 	}
 
 func getPriority():
 	return 4
+
+func isTease():
+	return true

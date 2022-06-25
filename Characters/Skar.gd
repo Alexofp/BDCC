@@ -47,6 +47,7 @@ func _init():
 		InterestTopic.HasVaginaOnly: Interest.ReallyLikes,
 		InterestTopic.HasVaginaAndCock: Interest.Likes,
 		InterestTopic.BigCock: Interest.Dislikes,
+		InterestTopic.AverageCock: Interest.Dislikes,
 		InterestTopic.SmallCock: Interest.SlightlyDislikes,
 		InterestTopic.NoCock: Interest.Likes,
 		InterestTopic.HasCockOnly: Interest.SlightlyDislikes,

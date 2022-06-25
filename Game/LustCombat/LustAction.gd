@@ -36,3 +36,6 @@ func getLustTopics():
 
 func getPriority():
 	return 0
+
+func isTease():
+	return false

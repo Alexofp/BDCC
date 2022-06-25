@@ -95,7 +95,7 @@ func _run():
 
 		addButton("Pull out", "Stay on the safe side and cum outside", "pull_out")
 		addButton("Cum inside", "You are not planning to stop now", "cum_inside")
-		addButton("Random", "Fifty fifty between cumming inside and outside", "random")
+		addButton("Random", "Fifty fifty between cumming inside and outside", "do_random")
 
 	if(state == "pull_out"):
 		saynn("You keep pushing yourself to your peak, you push your hand into her back firmly just so you can switch to slow powerful pounding. After a few seconds of such a great onslaught, her moans become more loud and passionate, her slit clenches around your shaft as she starts cumming. Her body is shaking and shivering, her red canine cock shooting a few weak lines of cum down at the floor, her pussy pulsating and squirting girlcum, her cunt is trying to milk you. That’s when you pull your throbbing {pc.cock} out, just in time for your own orgasm.")

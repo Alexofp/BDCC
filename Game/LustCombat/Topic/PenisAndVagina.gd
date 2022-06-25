@@ -6,6 +6,7 @@ func _init():
 		InterestTopic.HasVaginaOnly,
 		InterestTopic.HasVaginaAndCock,
 		InterestTopic.BigCock,
+		InterestTopic.AverageCock,
 		InterestTopic.SmallCock,
 		InterestTopic.NoCock,
 		InterestTopic.HasCockOnly,
@@ -33,6 +34,12 @@ func getTopicValue(_topicID, _pc):
 			return 0.0
 		return constantIfAbove(cockSize, 30.0, 1.0, linearCloseness(cockSize, 30.0, 20.0))
 	
+	if(_topicID == InterestTopic.AverageCock):
+		if(!hasCock):
+			return 0.0
+		return linearCloseness(cockSize, 15.0, 10.0)
+	
+	
 	if(_topicID == InterestTopic.SmallCock):
 		if(!hasCock):
 			return 0.0
@@ -55,6 +62,8 @@ func getVisibleName(_topicID):
 		return "herms"
 	if(_topicID == InterestTopic.BigCock):
 		return "huge cocks"
+	if(_topicID == InterestTopic.AverageCock):
+		return "average-sized cocks"
 	if(_topicID == InterestTopic.SmallCock):
 		return "small cute cocks"
 	if(_topicID == InterestTopic.NoCock):
