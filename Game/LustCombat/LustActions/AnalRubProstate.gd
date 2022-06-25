@@ -35,7 +35,7 @@ func doAction(_lustState: LustCombatState, _args):
 
 	return {
 		text = "{attacker.name} is fingering {attacker.his} prostate!",
-		lust = 3,
+		lust = 4,
 	}
 
 func getLustTopics():
@@ -62,3 +62,6 @@ func getLustTopics():
 
 func getPriority():
 	return 5
+
+func skillNeeded():
+	return 3

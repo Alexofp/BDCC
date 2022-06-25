@@ -72,3 +72,6 @@ func getPriority():
 
 func isTease():
 	return true
+
+func skillNeeded():
+	return 1

@@ -70,3 +70,6 @@ func getLustTopics():
 
 func getPriority():
 	return 5
+
+func skillNeeded():
+	return 3

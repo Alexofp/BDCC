@@ -28,7 +28,7 @@ func doAction(_lustState: LustCombatState, _args):
 
 	return {
 		text = "{attacker.name} is cupping {attacker.his} balls!",
-		lust = 3,
+		lust = 2,
 	}
 
 func getLustTopics():
@@ -54,3 +54,6 @@ func getLustTopics():
 
 func getPriority():
 	return 5
+
+func skillNeeded():
+	return 3

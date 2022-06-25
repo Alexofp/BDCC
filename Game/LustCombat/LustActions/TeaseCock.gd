@@ -27,7 +27,7 @@ func doAction(_lustState: LustCombatState, _args):
 
 	return {
 		text = "{attacker.name} is teasing {attacker.his} cock!",
-		lust = 3,
+		lust = 1,
 	}
 
 func getLustTopics():

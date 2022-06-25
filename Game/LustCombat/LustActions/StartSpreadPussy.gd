@@ -56,3 +56,6 @@ func getLustTopics():
 
 func isTease():
 	return true
+
+func skillNeeded():
+	return 2

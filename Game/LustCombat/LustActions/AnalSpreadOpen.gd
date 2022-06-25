@@ -33,7 +33,7 @@ func doAction(_lustState: LustCombatState, _args):
 
 	return {
 		text = "{attacker.name} is spreading {attacker.his} anus!",
-		lust = 3,
+		lust = 2,
 	}
 
 func getLustTopics():

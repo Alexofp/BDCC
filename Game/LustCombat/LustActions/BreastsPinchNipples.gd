@@ -15,6 +15,9 @@ func shouldShow(_lustState: LustCombatState, _args):
 
 func canDo(_lustState: LustCombatState, _args):
 	var pc:Player = _lustState.getCharacter()
+	if(!pc.hasPerk(Perk.MilkSquirt)):
+		return [false, "Requires a \"Battle Cow\" perk"]
+	
 	if(pc.hasBoundArms()):
 		return [false, "You can't do that with bound arms"]
 	if(pc.hasBlockedHands()):
@@ -33,7 +36,7 @@ func doAction(_lustState: LustCombatState, _args):
 
 	return {
 		text = "{attacker.name} is pinching {attacker.his} nipples!",
-		lust = 5,
+		lust = 3,
 	}
 
 func getLustTopics():
@@ -60,3 +63,6 @@ func getLustTopics():
 
 func getPriority():
 	return 5
+
+func skillNeeded():
+	return 2
