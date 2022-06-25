@@ -26,6 +26,9 @@ func doAction(_lustState: LustCombatState, _args):
 	pc.addStamina(-20)
 	pc.addLust( -int(float(pc.getLust()) / 2) )
 
+	if(_lustState.isInBattle()):
+		pc.addEffect(StatusEffect.DeniedDesperate, [2])
+
 	return {
 		text = "{attacker.name} denied {attacker.himself} the orgasm..",
 		came = true,
