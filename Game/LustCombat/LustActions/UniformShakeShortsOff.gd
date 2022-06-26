@@ -20,7 +20,7 @@ func canDo(_lustState: LustCombatState, _args):
 	return .canDo(_lustState, _args)
 
 func getVisibleName(_lustState: LustCombatState, _args):
-	return "Shake shorts off"
+	return "Shake off shorts"
 
 func getVisibleDescription(_lustState: LustCombatState, _args):
 	return "You can't your hands so you have to shake your whole body to remote your shorts"
@@ -31,8 +31,37 @@ func doAction(_lustState: LustCombatState, _args):
 	var itemState: ShirtAndShortsState = _args["itemState"]
 	itemState.pullDownShorts()
 	
+	var pc:Player = _lustState.getCharacter()
+	
+	var text = ""
+	if(!pc.isBodypartCovered(BodypartSlot.Anus)):
+		text += "You sway your {pc.masc} hips to the sides, trying to get the shorts to come off. Eventually you start to make progress! The shorts slowly slide down, exposing your {pc.thick} butt."
+		text += "\n\n"
+		
+		if(pc.hasPenis()):
+			text += "The ribbon gets caught on your hard {pc.cock} but after shaking your ass a bit more it lets go, exposing your cock completely!"
+			text += "\n\n"
+		elif(pc.hasVagina()):
+			text += "As the shorts fall down on the floor, your wet needy slit gets completely exposed too. So naughty~. The thought of your privates being exposed to anyone to see fills you with so much desire."
+			text += "\n\n"
+	else:
+		text += "You sway your {pc.masc} hips to the sides, trying to get the shorts to come off. Eventually you start to make progress, the shorts slowly slide down, exposing your underwear. The fabric brushing against your {pc.thick} thighs as it slides down feels nice, maybe you should strip more often."
+		text += "\n\n"
+	
+	if(pc.hasEffect(StatusEffect.CoveredInCum)):
+		text += "Pulling down the shorts reveals how much cum you also have underneath, so messy."
+		text += "\n\n"
+	
+	if(!pc.isBodypartCovered(BodypartSlot.Anus) && (pc.hasEffect(StatusEffect.HasCumInsideVagina) || pc.hasEffect(StatusEffect.HasCumInsideAnus))):
+		text += "And your used fuckhole seems to be stuffed with someone’s cum, seeing it drip down onto the floor is so lewd."
+		text += "\n\n"
+	
+	if(_lustState.isInBattle()):
+		text += "The enemy seems to be watching you carefully as you try to do a little striptease dance for them~"
+		text += "\n\n"
+	
 	return {
-		text = "{attacker.name} managed to shake off {attacker.his} shorts!"
+		text = text
 	}
 
 func getLustTopics():

@@ -333,7 +333,7 @@ func _react(_action: String, _args):
 		var lustCombatState:LustCombatState = GM.pc.getLustCombatState()
 		
 		var result = lustCombatState.doAction(actionData)
-		whatPlayerDid = GM.ui.processString(result["text"])
+		whatPlayerDid = GM.ui.processString(result["text"]).trim_suffix("\n\n")
 		if("lust" in result):
 			GM.pc.addLust(result["lust"])
 		if("pain" in result):

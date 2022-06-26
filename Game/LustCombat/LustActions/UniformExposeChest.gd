@@ -23,10 +23,10 @@ func canDo(_lustState: LustCombatState, _args):
 	return .canDo(_lustState, _args)
 
 func getVisibleName(_lustState: LustCombatState, _args):
-	return "Expose tits a little"
+	return "Expose tits"
 
 func getVisibleDescription(_lustState: LustCombatState, _args):
-	return "Open up your shirt"
+	return "Open up your shirt and expose what’s behind it"
 
 func doAction(_lustState: LustCombatState, _args):
 	var _item:ItemBase = getItem(_lustState, _args)
@@ -34,8 +34,34 @@ func doAction(_lustState: LustCombatState, _args):
 	var itemState: ShirtAndShortsState = _args["itemState"]
 	itemState.openShirt()
 	
+	var pc:Player = _lustState.getCharacter()
+	
+	var text = ""
+	if(!pc.isBodypartCovered(BodypartSlot.Breasts)):
+		text += "You grab onto your uniform’s shirt and begin to sneakily unbutton it, enjoying yourself as your chest is slowly getting exposed. You feel your hard nips brushing against the fabric as you do it. Eventually you reach the bottom and then move the cloth to the sides, exposing your {pc.breasts} completely!"
+		text += "\n\n"
+		
+		if(RNG.chance(50) && pc.hasNonFlatBreasts()):
+			text += RNG.pick([
+				"[say=pc]Oh fuck, my tits are exposed. Anyone can see them if they look at me, makes me so horny~[/say]",
+				"[say=pc]Showing off my tits feels so good, I should do it more often~.[/say]",
+				"[say=pc]So liberating~. Can’t wait to rub my perky nips.[/say]",
+			])
+			text += "\n\n"
+	else:
+		text += "You grab onto your uniform’s shirt and begin to sneakily unbutton it, enjoying yourself as your chest is slowly getting more exposed. You feel your hard nips brushing against the fabric as you do it. Eventually you reach the bottom and then move the cloth to the sides, exposing what's underneath."
+		text += "\n\n"
+
+	if(pc.hasEffect(StatusEffect.CoveredInCum)):
+		text += "Opening the shirt up reveals how much cum you also have underneath it on your {pc.breasts}, you’re so messy~"
+		text += "\n\n"
+	
+	if(_lustState.isInBattle()):
+		text += "The enemy seems to be watching your hands carefully. And you’re ready to make a show for them."
+		text += "\n\n"
+	
 	return {
-		text = "{attacker.name} opened up {attacker.his} shirt!"
+		text = text
 	}
 
 func getLustTopics():

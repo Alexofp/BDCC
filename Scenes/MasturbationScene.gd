@@ -7,14 +7,56 @@ func _init():
 
 func _run():
 	if(state == ""):
+		GM.main.playAnimation(StageScene.Solo, "stand")
+		
 		var lustCombatState:LustCombatState = GM.pc.getLustCombatState()
-		if(lustCombatState.isInPublic()):
-			saynn("You are thinking about touching yourself in a public area, how lewd..")
+		if(GM.pc.getLocation() == GM.pc.getCellLocation()):
+			#(if in cell)
+			if(RNG.chance(50)):
+				saynn("You look around, the cell seems to be mostly secluded, you should be safe as long as nobody peeks through the reinforced window. But that thought only sparks up more desire in you. You feel kinda horny, maybe it’s a good time to blow some steam off..")
+			else:
+				saynn("You’re standing in your cell, alone. There are lots of inmates outside but nobody seems to be paying attention to the cell’s window so you should be safe as long as you’re careful. Maybe you can expose yourself a bit without anyone noticing here..")
+		elif(!lustCombatState.isInPublic()):
+			#(if in private place)
+			if(RNG.chance(50)):
+				saynn("You take a look around. It’s mostly quiet. The idea of doing some naughty things suddenly crosses your lusty mind. This isn’t your cell but this spot is mostly out of the way so you should be safe as long as you’re fast and nobody notices you. You walk around a bit to make sure there is no one around, your face already starts to glow slightly red, you are so excited.")
+			
+				saynn("[say=pc]Anyone here?[/say]")
+			else:
+				saynn("Horny thoughts invade your mind as you stand in this room. It’s a public place but right now there is no one around so it’s your chance. And even if somebody walks in on you, maybe it’s not such a bad thing..")
+				
+				saynn("[say=pc]Some privacy. good..[/say]")
 		else:
-			saynn("You found yourself a mostly private spot where you can do your things without anyone spotting you..")
+			#(if in public place)
+			if(GM.pc.getSkillLevel(Skill.Exhibitionism) < 1):
+				saynn("You look around, there are people around, lots of them in fact. Doing something lewd would surely get somebody’s attention.. But you are feeling kinda horny, the idea of teasing yourself in public sounds so hot right now.. Just gotta make sure to not get noticed.. You walk around a bit, trying to find a better spot, making sure not to catch too many eyes. Hands travel along your curves, your face is blushing red already..")
+				
+				saynn(RNG.pick([
+					"[say=pc]What am I doing..[/say]",
+					"[say=pc]Should I stop.. But..[/say]",
+					"[say=pc]I’m gonna get caught.. I can’t..[/say]",
+				]))
+			elif(GM.pc.getSkillLevel(Skill.Exhibitionism) < 2):
+				saynn("It’s a public place, you see people around, doing their things. You wonder how much you can get away with, the idea of exposing yourself crosses your mind and you can’t resist it, you feel aroused already. If you’re careful, people shouldn’t even notice you.. Maybe you do want them to notice.. You don’t really wanna hide and decide to stay mostly in the open, so risky..")
+				
+				saynn(RNG.pick([
+					"[say=pc]I can’t believe myself..[/say]",
+					"[say=pc]Why do I want this so much..[/say]",
+					"[say=pc]Why does it feel so nice..[/say]",
+				]))
+			else:
+				saynn("The thought of doing something lewd in public excites you immensely. There are people around but you don’t even mind them, you’re so horny!")
+				
+				saynn("You’re so tempted to start exposing yourself, maybe more than that. After all the practice you feel very confident in showing off your body. Your cheeks blush red, you can’t wait to get started.")
+				
+				saynn(RNG.pick([
+					"[say=pc]I so wanna touch myself..[/say]",
+					"[say=pc]Everyone’s watching.. Good.[/say]",
+					"[say=pc]Wonder how long will it take before I get noticed~[/say]",
+				]))
 			
 	if(state == "doLustAction"):
-		saynn(savedActionText)
+		saynn(savedActionText.trim_suffix("\n\n"))
 				
 	if(state == "" || state == "doLustAction"):
 		addButtonAt(14, "Stop", "Enough horny", "endthescene")

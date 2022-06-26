@@ -27,10 +27,10 @@ func canDo(_lustState: LustCombatState, _args):
 	return .canDo(_lustState, _args)
 
 func getVisibleName(_lustState: LustCombatState, _args):
-	return "Expose crotch a little"
+	return "Expose crotch"
 
 func getVisibleDescription(_lustState: LustCombatState, _args):
-	return "Pull down your shorts"
+	return "Pull down the shorts of your uniform"
 
 func doAction(_lustState: LustCombatState, _args):
 	var _item:ItemBase = getItem(_lustState, _args)
@@ -38,8 +38,37 @@ func doAction(_lustState: LustCombatState, _args):
 	var itemState: ShirtAndShortsState = _args["itemState"]
 	itemState.pullDownShorts()
 	
+	var pc:Player = _lustState.getCharacter()
+	
+	var text = ""
+	if(!pc.isBodypartCovered(BodypartSlot.Anus)):
+		text += "You sneak two digits under your shorts and proceed to teasingly pull it down, exposing your {pc.thick} {pc.masc} butt."
+		text += "\n\n"
+		
+		if(pc.hasPenis()):
+			text += "As you do it, the tip of your {pc.cock} catches on the ribbon, gets tugged down by it and then springs back as your shorts fall onto the floor. Your cock is completely exposed and your other privates too."
+			text += "\n\n"
+		elif(pc.hasVagina()):
+			text += "As your shorts are pulled down, your wet needy slit gets completely exposed too. So naughty~. The thought of your privates being exposed to anyone to see fills you with so much desire."
+			text += "\n\n"
+	else:
+		text += "You sneak two digits under your shorts and proceed to teasingly pull them down, exposing the underwear. The fabric brushing against your {pc.thick} thighs as it slides down feels nice, maybe you should strip more often."
+		text += "\n\n"
+	
+	if(pc.hasEffect(StatusEffect.CoveredInCum)):
+		text += "Pulling down the shorts reveals how much cum you also have underneath, so messy."
+		text += "\n\n"
+	
+	if(!pc.isBodypartCovered(BodypartSlot.Anus) && (pc.hasEffect(StatusEffect.HasCumInsideVagina) || pc.hasEffect(StatusEffect.HasCumInsideAnus))):
+		text += "And your used fuckhole seems to be stuffed with someone’s cum, seeing it drip down onto the floor is so lewd."
+		text += "\n\n"
+	
+	if(_lustState.isInBattle()):
+		text += "The enemy seems to be watching you carefully as you do a little striptease dance for them~"
+		text += "\n\n"
+	
 	return {
-		text = "{attacker.name} pulled down {attacker.his} shorts!"
+		text = text
 	}
 
 func getPriority():

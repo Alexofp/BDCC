@@ -24,9 +24,46 @@ func getVisibleDescription(_lustState: LustCombatState, _args):
 
 func doAction(_lustState: LustCombatState, _args):
 	#_lustState.getCharacter().addLust(3)
+	var pc:Player = _lustState.getCharacter()
+	
+	var text = ""
+	if(RNG.chance(50)):
+		text += "You move your hand down to your crotch and give your {pc.cock} a little rub through the clothing. Your digits find the sensitive tip and focus on it, making your clothes bulge out more in the process."
+		text += "\n\n"
+	else:
+		text += "You get a feel for your covered up {pc.cock} and stroke it slightly through the clothing. The outline of your shaft becomes bigger as you tease yourself more, it’s already leaking some pre."
+		text += "\n\n"
+	
+	if(RNG.chance(50) && _lustState.isInBattle()):
+		text += "You offer the enemy a good view of your bulge as you rub yourself. You smirk, hoping that they like the show."
+		text += "\n\n"
+	
+	if(RNG.chance(20) && pc.hasEffect(StatusEffect.CoveredInCum)):
+		text += "So much cum on your body.. You catch some with your fingers and use it as lube, don’t wanna waste the good stuff."
+		text += "\n\n"
+	
+	if(RNG.chance(30) && pc.getLust() >= 50):
+		text += "Your cock is so drippy, you feel it twitching slightly as it leaks more and more pre, leaving dark spots on your clothing."
+		text += "\n\n"
+	
+	if(RNG.chance(20) && pc.hasVagina()):
+		text += "As you tease your cock, your slit is getting more needy and wet, you feel how cloth is digging into it as you rub your crotch. You can’t hide the moans."
+		text += "\n\n"
+	
+	if(RNG.chance(50)):
+		text += RNG.pick([
+			"[say=pc]Fuck yeah..[/say]",
+			"[say=pc]Fuck, stroking my cock feels so good..[/say]",
+			"[say=pc]Anyone can see doing this..[/say]",
+			"[say=pc]Oh fuck..[/say]",
+		])
+		text += "\n\n"
+		if(_lustState.isInPublic() && !_lustState.isInBattle()):
+			text += "You hope no one heard that.. You try to keep your mouth shut."
+			text += "\n\n"
 
 	return {
-		text = "{attacker.name} is teasing {attacker.his} cock!",
+		text = text,
 		lust = 1,
 	}
 
