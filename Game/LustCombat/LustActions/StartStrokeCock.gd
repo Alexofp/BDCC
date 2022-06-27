@@ -21,14 +21,24 @@ func getVisibleName(_lustState: LustCombatState, _args):
 	return "Stroke cock"
 
 func getVisibleDescription(_lustState: LustCombatState, _args):
-	return "Focus on your cock"
+	return "Begin stroking your shaft"
 
 func doAction(_lustState: LustCombatState, _args):
 	#_lustState.getCharacter().addLust(1)
 	_lustState.startActivity(LustActivity.StrokingCock)
 
+	#var pc:Player = _lustState.getCharacter()
+	
+	var text = ""
+	if(RNG.chance(50)):
+		text += "You wrap your digits around your {pc.cock} and begin sliding your hand back and forth at a steady pace, stroking yourself off!"
+		text += "\n\n"
+	else:
+		text += "You get a grasp on your {pc.cock} and give its tip a good rub with your digits, catching some precum that you then spread over the shaft as you stroke yourself!"
+		text += "\n\n"
+
 	return {
-		text = "{attacker.name} began stroking {attacker.his} {pc.cock}!",
+		text = text,
 		lust = 1,
 	}
 

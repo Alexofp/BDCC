@@ -56,6 +56,10 @@ func doAction(_lustState: LustCombatState, _args):
 		text += "Opening the shirt up reveals how much cum you also have underneath it on your {pc.breasts}, you’re so messy~"
 		text += "\n\n"
 	
+	if(RNG.chance(50) && pc.isVisiblyPregnant()):
+		text += "Your belly is looking quite pregnant, with no shirt it’s even more obvious that you’re carrying someone’s litter!"
+		text += "\n\n"
+	
 	if(_lustState.isInBattle()):
 		text += "The enemy seems to be watching your hands carefully. And you’re ready to make a show for them."
 		text += "\n\n"

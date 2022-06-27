@@ -31,8 +31,43 @@ func doAction(_lustState: LustCombatState, _args):
 	var itemState: PantiesState = _args["itemState"]
 	itemState.shiftPantiesAside()
 	
+	var pc:Player = _lustState.getCharacter()
+	
+	var text = ""
+	if(true):
+		text += "Overwhelmed with lust, you grab onto the side of your panties and move it aside, exposing what’s underneath."
+		text += "\n\n"
+		
+	if(pc.hasPenis()):
+		text += "Your {pc.cock} quickly springs up after it is freed, a drop of precum shines as it slides down from the tip."
+		text += "\n\n"
+	
+	if(pc.hasVagina()):
+		text += "Your cute pussy slit is now totally exposed for anyone who might see you, so lewd! Your inviting sensitive folds feel the light breeze of fresh air."
+		text += "\n\n"
+		
+	if(RNG.chance(50) && (pc.hasEffect(StatusEffect.HasCumInsideVagina) || pc.hasEffect(StatusEffect.HasCumInsideAnus))):
+		text += "As soon as you move the panties, cum starts leaking from your used fuckhole, reminding you of your past lewd adventures and displaying how big of a cum slut you are."
+		text += "\n\n"
+		
+	if(RNG.chance(70) && pc.getLust() >= 50 && pc.hasVagina()):
+		text += "Wow, your pussy is very much drenched with your juices, all the horny thoughts in your head only make you drip more."
+		text += "\n\n"
+	
+	if(RNG.chance(50) && pc.hasVagina() && pc.hasEffect(StatusEffect.InHeat)):
+		text += "The heat is driving you insane, you spread your pussy lips for a second and a flow of your juices starts running down your fingers. Fuck, you really want to be used."
+		text += "\n\n"
+		
+	if(RNG.chance(30) && pc.hasVagina()):
+		text += RNG.pick([
+			"[say=pc]Huh, should I spread my legs.. I really want to..[/say]",
+			"[say=pc]My pussy is so wet..[/say]",
+			"[say=pc]Yes-s~[/say]",
+		])
+		text += "\n\n"
+	
 	return {
-		text = "{attacker.name} moved the panties aside"
+		text = text
 	}
 
 func getLustTopics():
@@ -68,7 +103,7 @@ func getLustTopics():
 	}
 
 func getPriority():
-	return -3
+	return -6
 
 func isTease():
 	return true

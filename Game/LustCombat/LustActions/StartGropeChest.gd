@@ -20,14 +20,28 @@ func getVisibleName(_lustState: LustCombatState, _args):
 	return "Grope tits"
 
 func getVisibleDescription(_lustState: LustCombatState, _args):
-	return "Start groping your tits"
+	return "Begin groping your chest"
 
 func doAction(_lustState: LustCombatState, _args):
 	#_lustState.getCharacter().addLust(1)
 	_lustState.startActivity(LustActivity.GropingChest)
 
+	var pc:Player = _lustState.getCharacter()
+	
+	var text = ""
+	if(RNG.chance(50)):
+		text += "You put your free hand on your {pc.breasts} and squeeze one of them gently, the nipple rubbing between two digits as you let out a little moan."
+		text += "\n\n"
+	else:
+		text += "Your free hand jumps on your {pc.breasts} and gives one of them a squeeze. You begin to breathe more deeply as you start teasing your breasts."
+		text += "\n\n"
+	
+	if(RNG.chance(50) && pc.canBeMilked()):
+		text += "A bit of your {pc.milk} leaks out, your breasts seem to be full."
+		text += "\n\n"
+
 	return {
-		text = "{attacker.name} began groping {attacker.his} tits!",
+		text = text,
 		lust = 1,
 	}
 

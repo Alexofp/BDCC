@@ -14,17 +14,31 @@ func canDo(_lustState: LustCombatState, _args):
 	return .canDo(_lustState, _args)
 
 func getVisibleName(_lustState: LustCombatState, _args):
-	return "Grope ass"
+	return "Grope butt"
 
 func getVisibleDescription(_lustState: LustCombatState, _args):
-	return "Start groping your ass"
+	return "Begin groping your rear"
 
 func doAction(_lustState: LustCombatState, _args):
 	#_lustState.getCharacter().addLust(1)
 	_lustState.startActivity(LustActivity.GropingButt)
 
+	var pc:Player = _lustState.getCharacter()
+	
+	var text = ""
+	if(RNG.chance(50)):
+		text += "You shift one of your hands down to your {pc.thick} butt and get a good grasp on it. Yeah, you have a good ass, the palm of your hand slides along the surface and explores it."
+		text += "\n\n"
+	else:
+		text += "You put your free hand on your rear and give it a little rub. Your {pc.thick} is on display."
+		text += "\n\n"
+
+	if(RNG.chance(50) && pc.hasEffect(StatusEffect.HasCumInsideAnus)):
+		text += "Some cum leaks out of your tailhole, a sign of your previous sex."
+		text += "\n\n"
+
 	return {
-		text = "{attacker.name} began groping {attacker.his} ass!",
+		text = text,
 		lust = 1,
 	}
 

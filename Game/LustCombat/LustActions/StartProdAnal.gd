@@ -20,13 +20,23 @@ func getVisibleName(_lustState: LustCombatState, _args):
 	return "Prod anal"
 
 func getVisibleDescription(_lustState: LustCombatState, _args):
-	return "Prod your anal ring with your finger"
+	return "Start prodding at your anal ring"
 
 func doAction(_lustState: LustCombatState, _args):
 	_lustState.startActivity(LustActivity.ProddingAnal)
 
+	#var pc:Player = _lustState.getCharacter()
+	
+	var text = ""
+	if(RNG.chance(50)):
+		text += "You move your free hand down to your butt and spread the buttcheeks open with two fingers while using the third one to poke at your {pc.analStretch} ring. Quickly lubing the finger with your saliva helps it to slide inside with ease."
+		text += "\n\n"
+	else:
+		text += "You produce a cute little noise as two of your digits prod at your {pc.analStretch} anal ring before eventually sinking inside."
+		text += "\n\n"
+
 	return {
-		text = "{attacker.name} is prodding {attacker.his} butt!",
+		text = text,
 		lust = 1,
 	}
 

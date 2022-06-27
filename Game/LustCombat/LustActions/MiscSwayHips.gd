@@ -15,13 +15,55 @@ func getVisibleName(_lustState: LustCombatState, _args):
 	return "Sway hips"
 
 func getVisibleDescription(_lustState: LustCombatState, _args):
-	return "Do a little dance with your hips"
+	return "Do a little lewd dance and show off your curves"
 
 func doAction(_lustState: LustCombatState, _args):
 	#_lustState.getCharacter().addLust(3)
 
+	var pc:Player = _lustState.getCharacter()
+	
+	var text = ""
+	if(RNG.chance(50)):
+		text += "You spread your legs to the width of your shoulders and proceed to sway your {pc.masc} rear to the sides and also up and down, causing your thighs and buttcheeks to follow the movements with small delay. You let your {pc.thick} body do this hypnotic dance for a while."
+		text += "\n\n"
+	else:
+		text += "You put some extra swing into your hip motions as you do a little sensual dance on the spot. No rush, just slow and sexy movements, you sway your {pc.thick} {pc.masc} hips to the sides while showing off all your curves."
+		text += "\n\n"
+		
+	if(RNG.chance(60) && pc.hasEffect(StatusEffect.CoveredInCum)):
+		text += "The cum that’s all over your body slowly drips down from you. As you move around and sway your hips, you leave a messy trail behind. And you don’t mind it, you welcome the sticky messiness."
+		text += "\n\n"
+	
+	if(RNG.chance(50) && pc.isFullyNaked()):
+		text += "So bold, there is absolutely no clothing on you. And you don’t mind, you enjoy the attention that others might have for you and your private spots, it’s very liberating."
+		text += "\n\n"
+	
+	if(RNG.chance(40) && pc.hasBodypart(BodypartSlot.Breasts) && !pc.isBodypartCovered(BodypartSlot.Breasts)):
+		text += "Your {pc.breasts} are exposed to anyone to see. Hard perky nips follow the body and brush against the air as you shake your butt."
+		text += "\n\n"
+	
+	if(RNG.chance(40) && pc.hasBodypart(BodypartSlot.Penis) && !pc.isBodypartCovered(BodypartSlot.Penis)):
+		text += "Your rock-hard {pc.cock} is out and dripping pre, balls swaying in the air."
+		text += "\n\n"
+		
+	if(RNG.chance(40) && pc.hasBodypart(BodypartSlot.Vagina) && !pc.isBodypartCovered(BodypartSlot.Vagina)):
+		text += "You’re not hiding your pussy slit, you teasingly show the sensitive drippy folds as you turn around and rub your legs together."
+		text += "\n\n"
+	
+	if(RNG.chance(40) && (pc.hasEffect(StatusEffect.HasCumInsideVagina) || pc.hasEffect(StatusEffect.HasCumInsideAnus))):
+		text += "And wow, someone’s cum is leaking out of your used hole and dripping down your thighs, creating such a mess. It looks so hot though, anyone who sees you would think that you’re a natural cum slut."
+		text += "\n\n"
+	
+	if(RNG.chance(50) && pc.hasEffect(StatusEffect.HasTallyMarks)):
+		text += "As you swing around, people that see you might spot that you have some black vertical lines drawn on your body, each one is a mark of somebody using you."
+		text += "\n\n"
+	
+	if(RNG.chance(50) && pc.hasEffect(StatusEffect.HasBodyWritings)):
+		text += "Someone left writings on your body and right now anyone can see them clearly."
+		text += "\n\n"
+
 	return {
-		text = "{attacker.name} is swaying {attacker.his} {attacker.masc} hips!",
+		text = text,
 		lust = 1,
 	}
 

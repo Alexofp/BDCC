@@ -156,7 +156,7 @@ func getActivitiesAsText():
 		if(activity == LustActivity.GropingChest):
 			result.append("{attacker.name}'s hand is groping {attacker.his} tits")
 		if(activity == LustActivity.SpreadingPussy):
-			result.append("{attacker.name}'s hand is spreading {attacker.his} pussy open")
+			result.append("{attacker.name}'s hand is rubbing {attacker.his} pussy")
 		if(activity == LustActivity.StrokingCock):
 			result.append("{attacker.name}'s hand is stroking {attacker.his} cock")
 		if(activity == LustActivity.ProddingAnal):

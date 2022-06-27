@@ -17,17 +17,27 @@ func canDo(_lustState: LustCombatState, _args):
 	return .canDo(_lustState, _args)
 
 func getVisibleName(_lustState: LustCombatState, _args):
-	return "Spread pussy"
+	return "Rub pussy"
 
 func getVisibleDescription(_lustState: LustCombatState, _args):
-	return "Spread your pussy lips"
+	return "Begin rubbing your kitty"
 
 func doAction(_lustState: LustCombatState, _args):
 	#_lustState.getCharacter().addLust(1)
 	_lustState.startActivity(LustActivity.SpreadingPussy)
 
+	#var pc:Player = _lustState.getCharacter()
+	
+	var text = ""
+	if(RNG.chance(50)):
+		text += "You slide your hand down to your crotch and find your cute pussy. You give the sensitive folds a few rubs to make sure they’re all nice and wet."
+		text += "\n\n"
+	else:
+		text += "Your hand lands on your pussy and gives your clit a little rub. You moan and close your legs slightly with the stuck hand still teasing your slit."
+		text += "\n\n"
+
 	return {
-		text = "{attacker.name} spreads {attacker.his} pussy lips!",
+		text = text,
 		lust = 1,
 	}
 
