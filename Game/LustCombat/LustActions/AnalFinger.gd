@@ -23,16 +23,38 @@ func canDo(_lustState: LustCombatState, _args):
 	return .canDo(_lustState, _args)
 
 func getVisibleName(_lustState: LustCombatState, _args):
-	return "Finger ass"
+	return "Finger butt"
 
 func getVisibleDescription(_lustState: LustCombatState, _args):
-	return "Finger your ass"
+	return "Pleasure your backdoor"
 
 func doAction(_lustState: LustCombatState, _args):
 	#_lustState.getCharacter().addLust(3)
 
+	var pc:Player = _lustState.getCharacter()
+	
+	var text = ""
+	if(RNG.chance(50)):
+		text += "A quiet moan escapes from your lips as you slide your digits back and forth in your butt. The more you do it, the less resistance your {pc.analStretch} anal ring gives you."
+		text += "\n\n"
+	else:
+		text += "You push your digits deeper down your {pc.analStretch} ring, exploring yourself and then pull them back, leaving empty space that slowly closes up."
+		text += "\n\n"
+	
+	if(RNG.chance(50) && _lustState.isInBattle()):
+		text += "You make sure to give your enemy the best view of your {pc.thick} ass and {pc.masc} thighs as you finger yourself."
+		text += "\n\n"
+	
+	if(RNG.chance(30) && pc.hasEffect(StatusEffect.HasCumInsideAnus)):
+		text += "Your digits get coated with cum of your previous lovers, it acts great as a lube, allowing you to thrust your fingers in and out with greater force."
+		text += "\n\n"
+	
+	if(RNG.chance(30) && pc.hasPenis()):
+		text += "Your {pc.cock} throbbing as you occasionally brush over your pleasure spot."
+		text += "\n\n"
+
 	return {
-		text = "{attacker.name} is fingering {attacker.his} ass!",
+		text = text,
 		lust = 4,
 	}
 

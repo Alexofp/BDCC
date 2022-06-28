@@ -20,14 +20,40 @@ func getVisibleName(_lustState: LustCombatState, _args):
 	return "Rub clit"
 
 func getVisibleDescription(_lustState: LustCombatState, _args):
-	return "Focus on rubbing your clit"
+	return "Give your sensitive bean some love"
 
 func doAction(_lustState: LustCombatState, _args):
 	#_lustState.getCharacter().addLust(1)
 	#_lustState.startActivity(LustActivity.StrokingCock)
 
+	var pc:Player = _lustState.getCharacter()
+	
+	var text = ""
+	if(RNG.chance(50)):
+		text += "Your finger switches focus to your cute clit and rubs it in a smooth circular motion. It makes your neglected pussy folds get wet with even more fluids. The desire fills your mind."
+		text += "\n\n"
+	else:
+		text += "You quickly rub your nub from side to side, producing a cute moan as your pussy juices drip down your {pc.masc} thighs."
+		text += "\n\n"
+	
+	if(RNG.chance(50) && _lustState.isInBattle()):
+		text += "You make sure to show off how much pleasure teasing your clit brings you to hopefully drive your opponent desperate."
+		text += "\n\n"
+	
+	if(RNG.chance(30) && pc.hasEffect(StatusEffect.HasCumInsideVagina)):
+		text += "As you play with your pussy, old cum leaks out of your used fuckhole, creating a mess."
+		text += "\n\n"
+	
+	if(RNG.chance(30) && pc.hasPenis()):
+		text += "Your {pc.cock} is throbbing and leaking pre as you pleasure your other set of bits."
+		text += "\n\n"
+	
+	if(RNG.chance(50) && pc.getLust() >= 50):
+		text += "You feel really close, your drippy cunt visibly pulsates and squirts with your juices."
+		text += "\n\n"
+
 	return {
-		text = "{attacker.name} is rubbing {attacker.his} clit!",
+		text = text,
 		lust = 5,
 	}
 

@@ -20,14 +20,40 @@ func getVisibleName(_lustState: LustCombatState, _args):
 	return "Finger pussy"
 
 func getVisibleDescription(_lustState: LustCombatState, _args):
-	return "Finger your pussy"
+	return "Pleasure yourself"
 
 func doAction(_lustState: LustCombatState, _args):
 	#_lustState.getCharacter().addLust(1)
 	#_lustState.startActivity(LustActivity.StrokingCock)
 
+	var pc:Player = _lustState.getCharacter()
+	
+	var text = ""
+	if(RNG.chance(50)):
+		text += "You slide a digit in and out of your {pc.pussyStretch} pussy, coating it in your juices while doing so. It feels good, you let out a noise of pleasure and keep finger-fucking yourself for anyone who might been lucky to see."
+		text += "\n\n"
+	else:
+		text += "You thrust a few fingers in and out your {pc.pussyStretch} slit, shoving them nice and deep, pounding at the G-spot. Your juices make it easy for your digits to slide inside and fuck your needy pussy."
+		text += "\n\n"
+	
+	if(RNG.chance(30) && pc.hasEffect(StatusEffect.HasCumInsideVagina)):
+		text += "As you finger yourself towards the orgasm, cum leaks out of your cunt and mixes with your girly fluids, so messy."
+		text += "\n\n"
+	
+	if(RNG.chance(50) && _lustState.isInBattle()):
+		text += "You make sure to show off how much pleasure this brings you to make your opponent jealous."
+		text += "\n\n"
+	
+	if(RNG.chance(30) && pc.hasPenis()):
+		text += "Your {pc.cock} is throbbing and leaking pre as you pleasure your other set of bits."
+		text += "\n\n"
+	
+	if(RNG.chance(50) && pc.getLust() >= 50):
+		text += "You feel really close, your drippy cunt squirts with your juices, soft inner walls clench around your fingers as you push yourself further."
+		text += "\n\n"
+
 	return {
-		text = "{attacker.name} is fingering {attacker.his} pussy!",
+		text = text,
 		lust = 5,
 	}
 

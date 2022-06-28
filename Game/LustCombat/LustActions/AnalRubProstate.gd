@@ -28,13 +28,35 @@ func getVisibleName(_lustState: LustCombatState, _args):
 	return "Rub prostate"
 
 func getVisibleDescription(_lustState: LustCombatState, _args):
-	return "Give your prostate some love"
+	return "Focus on your p-spot"
 
 func doAction(_lustState: LustCombatState, _args):
 	#_lustState.getCharacter().addLust(3)
 
+	var pc:Player = _lustState.getCharacter()
+	
+	var text = ""
+	if(RNG.chance(50)):
+		text += "A passionate moan slides past your lips as you curl your finger inside your butt enough to start pounding at the prostate. Your {pc.cock} reacts each time by throbbing and leaking some transparent fluid down onto the floor."
+		text += "\n\n"
+	else:
+		text += "You shift the fingers in such a way that allows you to rub your prostate each time you thrust them inside. It feels so good, your {pc.cock} is leaking precum almost non-stop while you do that."
+		text += "\n\n"
+	
+	if(RNG.chance(50) && _lustState.isInBattle()):
+		text += "You make sure to give your enemy the best view of your {pc.thick} rear and your dripping cock as you pleasure yourself through the ass."
+		text += "\n\n"
+	
+	if(RNG.chance(30) && pc.hasEffect(StatusEffect.HasCumInsideAnus)):
+		text += "Your digits get coated with cum of your previous lovers, it acts great as a lube, allowing you to thrust your fingers in and out with greater force."
+		text += "\n\n"
+	
+	if(RNG.chance(30) && pc.getLust() >= 50):
+		text += "Wow, your cock throbs and pulsates a lot, showing that you’re on the right track of reaching your orgasm with anal stimulation."
+		text += "\n\n"
+
 	return {
-		text = "{attacker.name} is fingering {attacker.his} prostate!",
+		text = text,
 		lust = 4,
 	}
 

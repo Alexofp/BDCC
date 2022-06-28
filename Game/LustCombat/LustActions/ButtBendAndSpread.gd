@@ -17,17 +17,55 @@ func canDo(_lustState: LustCombatState, _args):
 	return .canDo(_lustState, _args)
 
 func getVisibleName(_lustState: LustCombatState, _args):
-	return "Bend forward"
+	return "Bend and spread butt"
 
 func getVisibleDescription(_lustState: LustCombatState, _args):
-	return "Bend forward and spread your legs!"
+	return "Bend forward and spread your ass"
 
 func doAction(_lustState: LustCombatState, _args):
 	#_lustState.getCharacter().addLust(1)
 	#_lustState.startActivity(LustActivity.StrokingCock)
 
+	var pc:Player = _lustState.getCharacter()
+	
+	var text = ""
+	if(!pc.isBodypartCovered(BodypartSlot.Anus)):
+		text += "You can’t hide your excitement, you turn around and bend your body forward, taking your time, holding your legs together until the moment your tailhole and other privates become visible! Then you spread your legs and use your arms to spread open your butt, showing off everything."
+		text += "\n\n"
+	else:
+		text += "You can’t hide your excitement, you turn around and bend your body forward, taking your time to show off your curves. Then you spread your legs and use your arms to spread open your butt. Lewd."
+		text += "\n\n"
+	
+	if(RNG.chance(50) && pc.hasBodypart(BodypartSlot.Vagina) && !pc.isBodypartCovered(BodypartSlot.Vagina)):
+		text += "Your pussy is out on display, it looks spread open too, very inviting."
+		text += "\n\n"
+	
+	if(RNG.chance(50) && pc.hasBodypart(BodypartSlot.Penis) && !pc.isBodypartCovered(BodypartSlot.Penis)):
+		text += "Your {pc.cock} is hanging between your legs, looking very erect."
+		text += "\n\n"
+		
+	if(RNG.chance(60) && pc.hasEffect(StatusEffect.CoveredInCum)):
+		text += "The cum that’s all over your body slowly drips down from you."
+		text += "\n\n"
+	
+	if(RNG.chance(50) && pc.isFullyNaked()):
+		text += "So bold, there is absolutely no clothing on you. And you don’t mind, you enjoy the attention that others might have for you and your private spots, so nice."
+		text += "\n\n"
+	
+	if(RNG.chance(40) && (pc.hasEffect(StatusEffect.HasCumInsideVagina) || pc.hasEffect(StatusEffect.HasCumInsideAnus))):
+		text += "And wow, someone’s cum is leaking out of your used hole and dripping down your thighs, creating such a mess. It looks so hot though, anyone who sees you would think that you’re a natural cum slut."
+		text += "\n\n"
+	
+	if(RNG.chance(50) && pc.hasEffect(StatusEffect.HasTallyMarks)):
+		text += "As you swing around, people that see you might spot that you have some black vertical lines drawn on your body, each one is a mark of somebody using you."
+		text += "\n\n"
+	
+	if(RNG.chance(50) && pc.hasEffect(StatusEffect.HasBodyWritings)):
+		text += "Someone left writings on your body and right now anyone can see them clearly."
+		text += "\n\n"
+
 	return {
-		text = "{attacker.name} bends forwards and spreads {attacker.his} legs!",
+		text = text,
 		lust = 1,
 	}
 

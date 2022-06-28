@@ -20,14 +20,36 @@ func getVisibleName(_lustState: LustCombatState, _args):
 	return "Spank ass"
 
 func getVisibleDescription(_lustState: LustCombatState, _args):
-	return "Spank your ass!"
+	return "Send your butt to bounce"
 
 func doAction(_lustState: LustCombatState, _args):
 	#_lustState.getCharacter().addLust(1)
 	#_lustState.startActivity(LustActivity.StrokingCock)
 
+	var pc:Player = _lustState.getCharacter()
+	
+	var text = ""
+	if(RNG.chance(50)):
+		text += "You give your {pc.thick} ass a powerful smack, sending it to jiggle! Ow, you drop a lustful noise as your rear gets a slight red tint."
+		text += "\n\n"
+	else:
+		text += "You rub your cute butt and then slap it with full force, making it bounce. You let out a moan and caress the area that you smacked so it doesn’t sting as much."
+		text += "\n\n"
+	
+	if(RNG.chance(40) && (pc.hasEffect(StatusEffect.HasCumInsideVagina) || pc.hasEffect(StatusEffect.HasCumInsideAnus))):
+		text += "And as you spank yourself, more cum is leaking out of your used hole and dripping down your thighs, creating a mess."
+		text += "\n\n"
+	
+	if(_lustState.isInBattle()):
+		text += "You made sure to show off how your butt jiggles after your smacks."
+		text += "\n\n"
+	
+	if(RNG.chance(50) && pc.getLust() >= 50):
+		text += "You pant softly and give your butt another smack. Huff, you feel like you can get off from that."
+		text += "\n\n"
+
 	return {
-		text = "{attacker.name} has spanked {attacker.his} ass!",
+		text = text,
 		lust = 1,
 		pain = 3,
 	}

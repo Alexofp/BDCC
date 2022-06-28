@@ -20,14 +20,32 @@ func getVisibleName(_lustState: LustCombatState, _args):
 	return "Rub butt"
 
 func getVisibleDescription(_lustState: LustCombatState, _args):
-	return "Rub your butt!"
+	return "Give your rear some love!"
 
 func doAction(_lustState: LustCombatState, _args):
 	#_lustState.getCharacter().addLust(1)
 	#_lustState.startActivity(LustActivity.StrokingCock)
 
+	var pc:Player = _lustState.getCharacter()
+	
+	var text = ""
+	if(RNG.chance(50)):
+		text += "You let out a noise of pleasure as you give your rear some playful rubs."
+		text += "\n\n"
+	else:
+		text += "You fondle your {pc.thick} ass and give it a good grope."
+		text += "\n\n"
+	
+	if(RNG.chance(50) && _lustState.isInBattle()):
+		text += "You present your butt to your opponent, maybe your curves will make it harder to focus."
+		text += "\n\n"
+	
+	if(RNG.chance(50) && pc.getLust() >= 50):
+		text += "You let out some passionate moans as you rub your rear more and more, you’re almost desperate for some stimulation."
+		text += "\n\n"
+
 	return {
-		text = "{attacker.name} rubs {attacker.his} butt!",
+		text = text,
 		lust = 2,
 	}
 

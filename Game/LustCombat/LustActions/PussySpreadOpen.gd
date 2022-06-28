@@ -17,17 +17,39 @@ func canDo(_lustState: LustCombatState, _args):
 	return .canDo(_lustState, _args)
 
 func getVisibleName(_lustState: LustCombatState, _args):
-	return "Spread pussy open"
+	return "Spread pussy"
 
 func getVisibleDescription(_lustState: LustCombatState, _args):
-	return "Spread your pussy"
+	return "Part your sensitive folds to show off how needy you are"
 
 func doAction(_lustState: LustCombatState, _args):
 	#_lustState.getCharacter().addLust(1)
 	#_lustState.startActivity(LustActivity.StrokingCock)
 
+	var pc:Player = _lustState.getCharacter()
+	
+	var text = ""
+	if(RNG.chance(50)):
+		text += "Feeling incredibly lusty, you put two fingers onto your folds and spread them open. There is a visible line of transparent fluids connecting them as you hold your pussy spread for anyone who might be lucky to see it."
+		text += "\n\n"
+	else:
+		text += "You use two digits to spread your needy pussy open, giving an incredible view of your pussy with strings of juices stretching down lower the longer you hold your fingers like that."
+		text += "\n\n"
+	
+	if(RNG.chance(50) && _lustState.isInBattle()):
+		text += "You provide such a great view of your fuckhole, there is no way your opponent’s attention wasn’t stolen by your lewd action."
+		text += "\n\n"
+	
+	if(RNG.chance(60) && pc.hasEffect(StatusEffect.HasCumInsideVagina)):
+		text += "Wow, as you hold your slit spread open, more and more jizz leaks out of it, messing up your thighs and dripping down to the floor."
+		text += "\n\n"
+	
+	if(RNG.chance(50) && pc.getLust() >= 50):
+		text += "You are so horny that you move your digits down to your pussy entering directly and stretch that one instead. Your digits slip due to the amount of juices there but you manage to provide a great view of your inner walls being all drippy and even show off the fuckable cervix."
+		text += "\n\n"
+
 	return {
-		text = "{attacker.name} is spreading {attacker.his} pussy!",
+		text = text,
 		lust = 2,
 	}
 
