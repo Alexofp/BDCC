@@ -21,9 +21,41 @@ func doAction(_lustState: LustCombatState, _args):
 	#_lustState.startActivity(LustActivity.StrokingCock)
 	var pc: Player = _lustState.getCharacter()
 	pc.orgasmFrom(pc.getID())
+	
+	var text = ""
+	if(RNG.chance(50)):
+		text += "You feel your climax approaching fast and decide to let it happen. You produce a series of passionate moans before going over the peak and finally cumming. The orgasmic waves overtake your whole body and cause you to shiver and squirm as you ride off each one."
+		text += "\n\n"
+	else:
+		text += "The ecstatic waves suddenly wash over you, leaving you no choice but to cum. You let out some long moans as your body betrays you, most muscles begin flexing and tensing up, legs and arms shiver, you’re shaking and quivering as your eyes shine brightly with lust and desire."
+		text += "\n\n"
+	
+	if(pc.hasPenis()):
+		if(_lustState.isDoingActivity(LustActivity.StrokingCock)):
+			text += "You stroke yourself just past the orgasm until your {pc.cock} starts throbbing and shooting ropes of hot sticky {pc.cum} all over the floor. You feel your balls being drained as each second the shaft erupts again and again."
+			text += "\n\n"
+		else:
+			text += "Your {pc.cock} starts throbbing and shooting ropes of hot sticky {pc.cum} all over the floor without you even stroking it. You feel your balls being drained until you’re completely spent."
+			text += "\n\n"
+	
+	if(pc.canBeMilked() && _lustState.isDoingActivity(LustActivity.GropingChest)):
+		text += "Your nipples squirt with your {pc.milk} as you grope them through the orgasm! An almost constant flow of {pc.milk} spawns from your {pc.breasts} and flows down your curves as you’re squirming from orgasm."
+		text += "\n\n"
+	
+	if(pc.hasVagina()):
+		if(_lustState.isDoingActivity(LustActivity.SpreadingPussy)):
+			text += "Your pussy squirts with your girly juices all over your fingers and the floor. You close your legs around your hand and feel your slit pulsate and leak more girlcum, coating your {pc.masc} thighs with it too. You pull your digits out of your snatch and let out another moan."
+			text += "\n\n"
+		else:
+			text += "Your pussy pulsates and sprays your girly juices all over your thighs and floor."
+			text += "\n\n"
+
+	if(_lustState.isDoingActivity(LustActivity.ProddingAnal)):
+		text += "Your {pc.analStretch} ring is clenching around your digits. Muscles spasming uncontrollably and putting pressure on your fingers brings you so much extra pleasure."
+		text += "\n\n"
 
 	return {
-		text = "{attacker.name} came hard!",
+		text = text,
 		came = true,
 		lostBattle = true,
 	}

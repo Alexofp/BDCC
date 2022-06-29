@@ -123,6 +123,7 @@ func _react(_action: String, _args):
 		processTime(30)
 		
 		if("came" in result):
+			lustCombatState.stopActivities()
 			setState("lustCombatAfterCame")
 			return
 		

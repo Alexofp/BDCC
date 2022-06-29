@@ -26,13 +26,39 @@ func getVisibleName(_lustState: LustCombatState, _args):
 	return "Squeeze breasts"
 
 func getVisibleDescription(_lustState: LustCombatState, _args):
-	return "Squeeze your breasts"
+	return "Give your tits a good squeeze"
 
 func doAction(_lustState: LustCombatState, _args):
 	#_lustState.getCharacter().addLust(3)
 
+	var pc:Player = _lustState.getCharacter()
+	
+	var text = ""
+	if(RNG.chance(50)):
+		text += "Feeling very turned on, you sink your fingers deeper into your {pc.breasts} before proceeding to eagerly grope and squeeze them. Hard nipples press against your palms as you knead your chest and produce quiet moans."
+		text += "\n\n"
+	else:
+		text += "You get a better grasp on your {pc.breasts} and passionately massage them, pressing your digits harder into your soft flesh and brushing over the nips with your palms. It feels so good, you let out some quiet moans and keep fondling your chest."
+		text += "\n\n"
+	
+	if(RNG.chance(30) && _lustState.isInBattle()):
+		text += "You make sure to show off your nice tits to your opponent, groping them harder to let the enemy know what they are missing out on."
+		text += "\n\n"
+	
+	if(RNG.chance(50) && pc.hasEffect(StatusEffect.CoveredInCum)):
+		text += "You are covered in cum, including your tits, it feels so good to knead them while little drops of cum slide down your fingers."
+		text += "\n\n"
+	
+	if(RNG.chance(50) && pc.hasVagina() && pc.getLust() >= 50):
+		text += "Teasing your breasts makes you so wet down there, your pussy is leaking with so much female juices.. You don’t stop and let out another quiet moan."
+		text += "\n\n"
+	
+	if(RNG.chance(40) && pc.canBeMilked()):
+		text += "Your breasts seem to have quite some weight to them. As you grope yourself, you spot a few drops of {pc.milk} streaming down your tits. They are so itching to be milked properly."
+		text += "\n\n"
+
 	return {
-		text = "{attacker.name} is squeezing {attacker.his} breasts!",
+		text = text,
 		lust = 2,
 	}
 

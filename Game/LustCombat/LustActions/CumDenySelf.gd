@@ -29,8 +29,16 @@ func doAction(_lustState: LustCombatState, _args):
 	if(_lustState.isInBattle()):
 		pc.addEffect(StatusEffect.DeniedDesperate, [2])
 
+	var text = ""
+	if(RNG.chance(50)):
+		text += "You feel yourself on the edge of your peak. You only need so little extra stimulation to get that sweet release.. but instead you hold completely still and let that feeling calm down. You are denying yourself the climax that you wanted so much, you’re squirming desperate!"
+		text += "\n\n"
+	else:
+		text += "The climax is so close, all you need is a little more.. But no, using a huge chunk of your will you manage to go against your desires and deny yourself the orgasm. You stay completely still while waiting for the pleasurable feelings to soften up. You skipped this one and it makes you feel desperate for another one.."
+		text += "\n\n"
+
 	return {
-		text = "{attacker.name} denied {attacker.himself} the orgasm..",
+		text = text,
 		came = true,
 	}
 

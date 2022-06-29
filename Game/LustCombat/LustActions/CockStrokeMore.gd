@@ -17,17 +17,43 @@ func canDo(_lustState: LustCombatState, _args):
 	return .canDo(_lustState, _args)
 
 func getVisibleName(_lustState: LustCombatState, _args):
-	return "Stroke cock"
+	return "Stroke more"
 
 func getVisibleDescription(_lustState: LustCombatState, _args):
-	return "Stroke cock more"
+	return "Jerk yourself off"
 
 func doAction(_lustState: LustCombatState, _args):
 	#_lustState.getCharacter().addLust(1)
 	#_lustState.startActivity(LustActivity.StrokingCock)
 
+	var pc:Player = _lustState.getCharacter()
+	
+	var text = ""
+	if(RNG.chance(50)):
+		text += "A muffled moan escapes from your lips as you eagerly slide your {pc.masc} fingers along the length of your {pc.cock}."
+		text += "\n\n"
+	else:
+		text += "Feeling horny, you’re giving the tip of your {pc.cock} a rub before focusing on stroking yourself closer to your climax."
+		text += "\n\n"
+	
+	if(RNG.chance(50) && _lustState.isInBattle()):
+		text += "You offer the enemy a good view of your cock as you jerk off. You smirk, hoping that they like the show."
+		text += "\n\n"
+	
+	if(RNG.chance(10) && pc.hasEffect(StatusEffect.CoveredInCum)):
+		text += "So much cum on your body.. You catch some with your fingers and use it as lube, don’t wanna waste the good stuff."
+		text += "\n\n"
+	
+	if(RNG.chance(50) && pc.getLust() >= 50):
+		text += "You feel that you’re not that far, your cock is so throbbing and twitching a lot, each time you stroke your shaft a drop of precum appears at the tip and slides down your fingers."
+		text += "\n\n"
+	
+	if(RNG.chance(20) && pc.hasVagina()):
+		text += "As you tease your cock, your slit is getting more needy and wet, you feel it dripping juices as you focus on your other set of bits. You can’t hide the moans."
+		text += "\n\n"
+
 	return {
-		text = "{attacker.name} is stroking {attacker.his} {pc.cock}!",
+		text = text,
 		lust = 5,
 	}
 

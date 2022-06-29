@@ -30,6 +30,8 @@ func _initScene(_args = []):
 	enemyAIStrategy.onBattleStart(GM.pc)
 	
 	GM.pc.beforeFightStarted()
+	if(GM.pc.getLustCombatState() != null):
+		GM.pc.getLustCombatState().setEnemyID(enemyID)
 
 func _run():
 	updateFightCharacter()

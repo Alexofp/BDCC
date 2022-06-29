@@ -3,6 +3,7 @@ class_name LustCombatState
 
 var character: WeakRef
 var inBattle = false
+var enemyID = ""
 
 var currentActivities = []
 
@@ -13,6 +14,14 @@ func getCharacter():
 
 func setCharacter(newchar):
 	character = weakref(newchar)
+
+func setEnemyID(newenemyID):
+	enemyID = newenemyID
+
+func getEnemyCharacter():
+	if(enemyID == null || enemyID == ""):
+		return null
+	return GlobalRegistry.getCharacter(enemyID)
 
 static func myactionsorter(a, b):
 	if a["priority"] > b["priority"]:
@@ -87,6 +96,7 @@ func enteredBattle():
 
 func exitedBattle():
 	inBattle = false
+	enemyID = ""
 	
 	resetState()
 
