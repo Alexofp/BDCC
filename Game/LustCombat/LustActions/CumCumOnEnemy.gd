@@ -5,7 +5,7 @@ func _init():
 	isOrgasmAction = true
 	
 func shouldShow(_lustState: LustCombatState, _args):
-	if(_lustState.isInBattle()):
+	if(!_lustState.isInBattle()):
 		return false
 	var pc: Player = _lustState.getCharacter()
 	if(!pc.hasPerk(Perk.CumCumOnOpponent)):

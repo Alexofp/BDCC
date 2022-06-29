@@ -25,6 +25,7 @@ const SexBetterDefocus = "SexBetterDefocus"
 const SexBiter = "SexBiter"
 const SexBetterTease = "SexBetterTease"
 const SexEdging = "SexEdging"
+const SexDefocusNeverLose = "SexDefocusNeverLose"
 
 # Exhibitionism perks
 const NakedNoShame = "NakedNoShame"

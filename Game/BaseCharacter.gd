@@ -337,6 +337,8 @@ func receiveDamage(damageType, amount: int, armorScale: float = 1.0):
 		var oldlust = lust
 
 		addLust(newdamage)
+		if(isDefocusing() && hasPerk(Perk.SexDefocusNeverLose) && (getLust() >= lustThreshold())):
+			addLust(-1)
 		
 		var actualAddlust = lust - oldlust
 		onDamage(damageType, actualAddlust)
