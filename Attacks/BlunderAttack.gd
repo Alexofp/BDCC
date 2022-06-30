@@ -13,7 +13,7 @@ func getVisibleDesc():
 func _doAttack(_attacker, _receiver):
 	var attackerName = _attacker.getName()
 
-	return attackerName + " couldn't figure out what to do and skipped "+_attacker.hisHer()+" turn"
+	return attackerName + " wasn't able to attack"
 	
 func _canUse(_attacker, _receiver):
 	return true
@@ -23,3 +23,6 @@ func canBeDodgedByPlayer(_attacker, _receiver):
 
 func getAIScore(_attacker, _receiver):
 	return 0.0
+
+func canDoWhileStunned():
+	return true

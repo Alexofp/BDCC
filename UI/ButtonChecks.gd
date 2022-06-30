@@ -14,6 +14,7 @@ enum {
 	HasCondoms,
 	HasReachablePenis,
 	HasReachableVagina,
+	NotStunned,
 }
 
 static func getReasonText(reason):
@@ -43,6 +44,8 @@ static func getReasonText(reason):
 		return ""
 	if(reason == PerkCheck):
 		return ""
+	if(reason == NotStunned):
+		return "You can't do this while stunned"
 	return "Error?"
 
 static func check(checks: Array):
@@ -87,6 +90,9 @@ static func check(checks: Array):
 				return reason
 		if(reason == HasReachableVagina):
 			if(!GM.pc.hasReachableVagina()):
+				return reason
+		if(reason == NotStunned):
+			if(GM.pc.hasEffect(StatusEffect.Stunned)):
 				return reason
 	return null
 

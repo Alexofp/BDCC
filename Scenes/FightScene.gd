@@ -158,17 +158,17 @@ func _run():
 			addDisabledButton("Defocus", "You need more stamina for this")
 		
 	if(state == "" || state == "fighting"):		
-		addButton("Physical Attack", "Show a list of physical attacks that you can do", "physattacks")
-		addButton("Lust Attack", "Show a list of lewd actions that you can do", "lustattacks")
+		addButtonWithChecks("Physical Attack", "Show a list of physical attacks that you can do", "physattacks", [], [ButtonChecks.NotStunned])
+		addButtonWithChecks("Lust Attack", "Show a list of lewd actions that you can do", "lustattacks", [], [ButtonChecks.NotStunned])
 		
 		if(pcHasAnyAttacksOfCategory(Attack.Category.Special)):
-			addButton("Special", "Show a list of your special moves", "specialattacks")
+			addButtonWithChecks("Special", "Show a list of your special moves", "specialattacks", [], [ButtonChecks.NotStunned])
 		else:
 			addDisabledButton("Special", "You don't know any special moves")
 		
 		#addButton("Inspect", "Look closer", "inspect")
 		if(GM.pc.getInventory().hasRemovableRestraints()):
-			addButton("Struggle", "Struggle against your restraints", "struggle")
+			addButtonWithChecks("Struggle", "Struggle against your restraints", "struggle", [], [ButtonChecks.NotStunned])
 		else:
 			addDisabledButton("Struggle", "You don't have any restraints that you can struggle out of")
 		addButton("Wait", "Do nothing", "wait")
@@ -180,7 +180,7 @@ func _run():
 		
 		if(GM.pc.hasEffect(StatusEffect.Collapsed)):
 			if(GM.pc.canStandUpCombat()):
-				addButton("Get up", "spends the whole turn", "getup")
+				addButtonWithChecks("Get up", "spends the whole turn", "getup", [], [ButtonChecks.NotStunned])
 			else:
 				addDisabledButton("Get up", "You can't stand up now")
 		else:

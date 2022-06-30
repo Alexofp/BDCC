@@ -7,6 +7,7 @@ const ArtificialHeat = "ArtificialHeat"
 const Weakness = "Weakness"
 const Blindness = "Blindness"
 const Collapsed = "Collapsed"
+const Stunned = "Stunned"
 
 # BDSM effects
 const ArmsBound = "ArmsBound"

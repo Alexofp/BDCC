@@ -289,3 +289,6 @@ func genericDodgeMessage(_attacker, _receiver):
 		"{receiver.name} managed to avoid being hit.",
 		"{receiver.name} dodged masterfully.",
 	])
+
+func canDoWhileStunned():
+	return false

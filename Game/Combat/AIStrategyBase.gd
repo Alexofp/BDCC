@@ -25,6 +25,9 @@ func getBestAttackIDWeighted(_enemy):
 		var attack: Attack = GlobalRegistry.getAttack(attackID)
 		if(attack == null):
 			assert(false, "Bad attack: "+attackID)
+		if(!attack.canDoWhileStunned() && character.hasEffect(StatusEffect.Stunned)):
+			continue
+			
 		if(attack.canUse(character, _enemy)):
 			savedAttacks.append([attackID, attack.getAIScore(character, _enemy)])
 	
