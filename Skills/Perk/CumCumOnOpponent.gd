@@ -20,6 +20,3 @@ func getSkillTier():
 
 func getPicture():
 	return "res://Images/Perks/splurt.png"
-
-func addsAttacks():
-	return ["ClimaxPerkAttack"]

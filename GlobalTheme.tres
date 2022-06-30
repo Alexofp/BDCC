@@ -1,12 +1,6 @@
-[gd_resource type="Theme" load_steps=3 format=2]
+[gd_resource type="Theme" load_steps=2 format=2]
 
-[ext_resource path="res://Fonts/Titillium-Regular.otf" type="DynamicFontData" id=1]
-
-[sub_resource type="DynamicFont" id=1]
-size = 20
-use_mipmaps = true
-use_filter = true
-font_data = ExtResource( 1 )
+[ext_resource path="res://UI/FontResources/GlobalDefaultFont.tres" type="DynamicFont" id=1]
 
 [resource]
-default_font = SubResource( 1 )
+default_font = ExtResource( 1 )

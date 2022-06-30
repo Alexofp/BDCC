@@ -20,6 +20,3 @@ func getSkillTier():
 
 func getPicture():
 	return "res://Images/Perks/stomach.png"
-
-func addsAttacks():
-	return ["lickSelfPerkAttack"]

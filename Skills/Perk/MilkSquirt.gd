@@ -17,6 +17,3 @@ func getSkillTier():
 
 func getPicture():
 	return "res://Images/Perks/goo-spurt.png"
-
-#func addsAttacks():
-#	return ["SqueezeBreasts"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Game/TooltipDisplay.gd" type="Script" id=1]
 [ext_resource path="res://GlobalTheme.tres" type="Theme" id=2]
@@ -14,12 +14,19 @@ expand_margin_right = 8.0
 expand_margin_top = 8.0
 expand_margin_bottom = 8.0
 
+[sub_resource type="DynamicFontData" id=10]
+font_path = "res://Fonts/SourceCodePro/SourceCodePro-BoldIt.otf"
+
 [sub_resource type="DynamicFontData" id=2]
 font_path = "res://Fonts/Titillium-BoldItalic.otf"
 
 [sub_resource type="DynamicFont" id=3]
 size = 20
 font_data = SubResource( 2 )
+fallback/0 = SubResource( 10 )
+
+[sub_resource type="DynamicFontData" id=11]
+font_path = "res://Fonts/SourceCodePro/SourceCodePro-MediumIt.otf"
 
 [sub_resource type="DynamicFontData" id=4]
 font_path = "res://Fonts/Titillium-RegularItalic.otf"
@@ -27,6 +34,10 @@ font_path = "res://Fonts/Titillium-RegularItalic.otf"
 [sub_resource type="DynamicFont" id=5]
 size = 20
 font_data = SubResource( 4 )
+fallback/0 = SubResource( 11 )
+
+[sub_resource type="DynamicFontData" id=12]
+font_path = "res://Fonts/SourceCodePro/SourceCodePro-Bold.otf"
 
 [sub_resource type="DynamicFontData" id=6]
 font_path = "res://Fonts/Titillium-Bold.otf"
@@ -34,6 +45,10 @@ font_path = "res://Fonts/Titillium-Bold.otf"
 [sub_resource type="DynamicFont" id=7]
 size = 20
 font_data = SubResource( 6 )
+fallback/0 = SubResource( 12 )
+
+[sub_resource type="DynamicFontData" id=13]
+font_path = "res://Fonts/SourceCodePro/SourceCodePro-Regular.otf"
 
 [sub_resource type="DynamicFontData" id=8]
 font_path = "res://Fonts/Titillium-Regular.otf"
@@ -41,6 +56,7 @@ font_path = "res://Fonts/Titillium-Regular.otf"
 [sub_resource type="DynamicFont" id=9]
 size = 20
 font_data = SubResource( 8 )
+fallback/0 = SubResource( 13 )
 
 [node name="TooltipDisplay" type="MarginContainer"]
 margin_right = 250.0
@@ -51,9 +67,6 @@ mouse_filter = 2
 size_flags_horizontal = 3
 theme = ExtResource( 2 )
 script = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="TooltipDisplayPanel" type="Panel" parent="."]
 margin_right = 250.0

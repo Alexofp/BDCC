@@ -20,9 +20,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 custom_styles/panel = SubResource( 3 )
 script = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 colorGradient = SubResource( 5 )
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
