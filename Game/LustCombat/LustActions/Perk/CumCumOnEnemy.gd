@@ -39,6 +39,7 @@ func doAction(_lustState: LustCombatState, _args):
 			enemy.addEffect(StatusEffect.NPCCoveredInCum, [3, "cum"])
 		elif(pc.hasVagina()):
 			enemy.addEffect(StatusEffect.NPCCoveredInCum, [3, "girlcum"])
+		enemy.addEffect(StatusEffect.Stunned, [1])
 	
 	var text = ""
 	if(pc.hasPenis()):
