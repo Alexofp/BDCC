@@ -14,6 +14,8 @@ var currentCharacters: Array = []
 var fightCharacter: String = ""
 var sceneTag = ""
 #var currentCharacter: String = ""
+var sceneEndedFlag = false
+var sceneEndedArgs
 
 func _run():
 	pass
@@ -61,10 +63,22 @@ func run():
 			continue
 		character.updateNonBattleEffects()
 	GM.ui.getCharactersPanel().updateStatuses()
+	
+	checkSceneEnded()
 		
+func checkSceneEnded():
+	if(sceneEndedFlag):
+		_onSceneEnd()
+		GM.main.removeScene(self, sceneEndedArgs)
+		emit_signal("sceneEnded", sceneEndedArgs)
+		print("removing scene "+name)
+		
+		queue_free()
 	
 func react(_action: String, _args):
-	return _react(_action, _args)
+	var result = _react(_action, _args)
+	checkSceneEnded()
+	return result
 
 func setState(newState: String):
 	state = newState
@@ -149,12 +163,8 @@ func _onSceneEnd():
 	pass
 
 func endScene(result = []):
-	_onSceneEnd()
-	GM.main.removeScene(self, result)
-	emit_signal("sceneEnded", result)
-	print("removing scene "+name)
-	
-	queue_free()
+	sceneEndedFlag = true
+	sceneEndedArgs = result
 
 func runScene(id: String, args = [], tag = ""):
 	var scene = GM.main.runScene(id, args)
@@ -165,6 +175,7 @@ func react_scene_end(_tag, _result):
 	updateCharacter()
 	updateFightCharacter()
 	_react_scene_end(_tag, _result)
+	checkSceneEnded()
 
 func addNextButton(method: String, args = []):
 	if(GM.ui):
