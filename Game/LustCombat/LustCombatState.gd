@@ -204,3 +204,15 @@ func doAction(actionData):
 		result["isTease"] = true
 	
 	return result
+
+func saveData():
+	return {
+		"inBattle": inBattle,
+		"enemyID": enemyID,
+		"currentActivities": currentActivities,
+	}
+
+func loadData(data):
+	inBattle = SAVE.loadVar(data, "inBattle", false)
+	enemyID = SAVE.loadVar(data, "enemyID", "")
+	currentActivities = SAVE.loadVar(data, "currentActivities", [])

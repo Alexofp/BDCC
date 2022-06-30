@@ -353,12 +353,11 @@ func _react(_action: String, _args):
 			
 			var lustInterests: LustInterests = enemyCharacter.getLustInterests()
 			var teaseData = lustInterests.reactLustAction(GM.pc, actionLustInterests, maxUnlocks)
-			var damageMult = teaseData["value"]
+			#var damageMult = teaseData["value"]
 			var positiveDamage = teaseData["positiveValue"]
 			var negativeDamage = teaseData["negativeValue"]
 			var learned = teaseData["learned"]
 			#var alreadyKnownTopics = teaseData["alreadyKnownTopics"]
-			print(damageMult)
 			
 			var pcDamageMult = GM.pc.getDamageMultiplier(DamageType.Lust) + 1.0
 			var damageBalanceMod = negativeDamage/pcDamageMult + positiveDamage*pcDamageMult

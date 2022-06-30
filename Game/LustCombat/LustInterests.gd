@@ -46,7 +46,7 @@ func reactLustAction(_pc, _actionInterests, _maxUnlocks = 1):
 			bestTopics.append([topicID, interestData[0], abs(addValue)])
 		
 	bestTopics.sort_custom(self, "customBestTopicComparison")
-	print(bestTopics)
+	#print(bestTopics)
 	
 	var pcLearned = []
 	var i = 0
@@ -71,7 +71,7 @@ func reactLustAction(_pc, _actionInterests, _maxUnlocks = 1):
 	
 	return result
 	
-
+# Used by old teasing system. can be removed
 func receiveTease(_pc, _teaseType, _maxUnlocks = 1):
 	var resultValue = 0.0
 	

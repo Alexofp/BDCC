@@ -25,6 +25,7 @@ func saveData():
 	var data = .saveData()
 	
 	data["pulledUp"] = pulledUp
+	data["removed"] = removed
 	data["casualName"] = casualName
 
 	return data
@@ -32,6 +33,7 @@ func saveData():
 func loadData(_data):
 	.loadData(_data)
 	pulledUp = SAVE.loadVar(_data, "pulledUp", false)
+	removed = SAVE.loadVar(_data, "removed", false)
 	casualName = SAVE.loadVar(_data, "casualName", "bra")
 
 func coversBodyparts():

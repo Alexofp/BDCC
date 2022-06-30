@@ -483,6 +483,7 @@ func saveData():
 	data["inventory"] = inventory.saveData()
 	data["skills"] = skillsHolder.saveData()
 	data["menstrualCycle"] = menstrualCycle.saveData()
+	data["lustCombatState"] = lustCombatState.saveData()
 	
 	data["timedBuffs"] = saveBuffsData(timedBuffs)
 	data["timedBuffsDurationSeconds"] = timedBuffsDurationSeconds
@@ -524,6 +525,7 @@ func loadData(data):
 	inventory.loadData(SAVE.loadVar(data, "inventory", {}))
 	skillsHolder.loadData(SAVE.loadVar(data, "skills", {}))
 	menstrualCycle.loadData(SAVE.loadVar(data, "menstrualCycle", {}))
+	lustCombatState.loadData(SAVE.loadVar(data, "lustCombatState", {}))
 	
 	timedBuffs = loadBuffsData(SAVE.loadVar(data, "timedBuffs", []))
 	timedBuffsDurationSeconds = SAVE.loadVar(data, "timedBuffsDurationSeconds", 0)

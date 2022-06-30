@@ -32,6 +32,7 @@ func saveData():
 	var data = .saveData()
 	
 	data["shiftedAside"] = shiftedAside
+	data["removed"] = removed
 	data["casualName"] = casualName
 	data["canShiftAside"] = canShiftAside
 
@@ -40,6 +41,7 @@ func saveData():
 func loadData(_data):
 	.loadData(_data)
 	shiftedAside = SAVE.loadVar(_data, "shiftedAside", false)
+	removed = SAVE.loadVar(_data, "removed", false)
 	casualName = SAVE.loadVar(_data, "casualName", "panties")
 	canShiftAside = SAVE.loadVar(_data, "canShiftAside", true)
 
