@@ -683,6 +683,11 @@ _global_script_classes=[ {
 "class": "WorldFloor",
 "language": "GDScript",
 "path": "res://Game/World/WorldFloor.gd"
+}, {
+"base": "Object",
+"class": "WorldPopulation",
+"language": "GDScript",
+"path": "res://Game/World/WorldPopulation.gd"
 } ]
 _global_script_class_icons={
 "AIStrategyBase": "",
@@ -819,7 +824,8 @@ _global_script_class_icons={
 "TriggerCondition": "",
 "Util": "",
 "VaginaOrifice": "",
-"WorldFloor": ""
+"WorldFloor": "",
+"WorldPopulation": ""
 }
 
 [application]

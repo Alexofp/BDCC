@@ -80,3 +80,8 @@ func getLustTopics():
 
 func getPriority():
 	return 5
+
+func getExperience(_lustState: LustCombatState, _args):
+	if(_lustState.isInPublic()):
+		return [[Skill.Exhibitionism, 1]]
+	return []

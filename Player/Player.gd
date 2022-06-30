@@ -101,6 +101,14 @@ func isInSecludedLocation():
 		return false
 	return true
 	
+func getLocationPopulation():
+	if(GM.world == null):
+		return []
+	var cell:GameRoom = GM.world.getRoomByID(location)
+	if(cell == null):
+		return []
+	return cell.getPopulation()
+	
 func getName() -> String:
 	return gamename
 	
@@ -303,6 +311,9 @@ func processTime(_secondsPassed):
 	
 	if(menstrualCycle != null):
 		menstrualCycle.processTime(_secondsPassed)
+	
+	if(lustCombatState != null):
+		lustCombatState.processTime(_secondsPassed)
 
 func hoursPassed(_howmuch):
 	var currentLust = getLust()

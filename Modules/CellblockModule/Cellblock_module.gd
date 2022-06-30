@@ -15,6 +15,8 @@ func _init():
 		"res://Modules/CellblockModule/MaleGuardCanineOffLimits.gd",
 		"res://Modules/CellblockModule/FemaleGuardFelineOffLimits.gd",
 		"res://Modules/CellblockModule/StealingFromGreenhouseScene.gd",
+		
+		"res://Modules/CellblockModule/TestMasturbationSpottedScene.gd",
 		]
 	characters = [
 		"res://Modules/CellblockModule/CheckpointGuardCharacter.gd",
@@ -31,3 +33,12 @@ func _init():
 func resetFlagsOnNewDay():
 	GM.main.setFlag(Cellblock_FreeToPassCheckpoint, false)
 	GM.main.setFlag(Cellblock_GreenhouseLooted, false)
+
+func getRandomSceneFor(sceneType):
+	var result = []
+	if(sceneType == RandomSceneType.MasturbationSpottedGuard):
+		result.append_array([["TestMasturbationSpottedScene", 0.001]])
+	if(sceneType == RandomSceneType.MasturbationSpottedInmate):
+		result.append_array([["TestMasturbationSpottedScene", 0.001]])
+		
+	return result

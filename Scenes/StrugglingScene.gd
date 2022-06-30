@@ -126,10 +126,15 @@ func _run():
 		else:
 			addButton("Continue", "Good", "")
 		
+	if(state == "toolusty"):
+		saynn("You are too aroused to be able to escape from restraints")
+		
+		addButton("Continue", "Oh no", "endthescene")#"spottedcheck")
+		
 	if(state == "toopainful"):
 		saynn("It's too painful! You let out a desperate cry. You were so loud that someone might have heard that. (Temporary text)")
 
-		addButton("Continue", "Oh no", "spottedcheck")
+		addButton("Continue", "Oh no", "endthescene")
 		
 	if(state == "unlockedGear"):
 		saynn("You successfully unlocked the restraint. The key snaps in half, rendering it useless")
@@ -243,13 +248,14 @@ func _react(_action: String, _args):
 			endScene()
 			return
 		
-		if(GM.pc.getLust() >= GM.pc.lustThreshold()):
-			setState("orgasm")
-			GM.pc.orgasmFrom("pc")
-			return
-		if(GM.pc.getPain() >= GM.pc.painThreshold()):
-			setState("toopainful")
-			return
+		#if(GM.pc.getLust() >= GM.pc.lustThreshold()):
+		#	setState("toolusty")
+			#setState("orgasm")
+			#GM.pc.orgasmFrom("pc")
+		#	return
+		#if(GM.pc.getPain() >= GM.pc.painThreshold()):
+		#	setState("toopainful")
+		#	return
 		setState("")
 		return
 		

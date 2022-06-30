@@ -7,6 +7,58 @@ var enemyID = ""
 
 var currentActivities = []
 
+var currentVisibility = 0.0
+var currentDanger = 0.0
+
+func processLewdTurn(didSomethingLewd = false):
+	if(inBattle):
+		return
+	var pc = getCharacter()
+	if(pc == null):
+		return
+	
+	var population = pc.getLocationPopulation()
+	var popSize = population.size()
+	
+	var exposure = pc.getExposure()
+	var ambientVisibility = -RNG.randf_range(0.01, 0.02) # 0.0
+	if(didSomethingLewd):
+		ambientVisibility = 0.0
+	#if(exposure <= 0.0):
+	#	ambientVisibility = -0.05
+	
+	if(popSize > 0):
+		ambientVisibility += exposure / 10.0 + currentActivities.size() / 50.0
+	else:
+		ambientVisibility += exposure / 50.0
+		
+	currentVisibility += ambientVisibility
+	currentVisibility = clamp(currentVisibility, 0.0, 1.0)
+	processDanger()
+	
+func processDanger():
+	if(currentVisibility >= 1.0):
+		currentDanger += RNG.randf_range(0.15, 0.25)
+	else:
+		currentDanger -= RNG.randf_range(0.01, 0.1)
+	currentDanger = clamp(currentDanger, 0.0, 1.0)
+
+func getVisibility():
+	return currentVisibility
+
+func getDanger():
+	return currentDanger
+
+func resetDanger():
+	currentDanger = 0.0
+	currentVisibility = 0.0
+
+func processTime(seconds):
+	if(currentVisibility > 0.0):
+		currentVisibility -= seconds / 3600.0
+		if(currentVisibility < 0.0):
+			currentVisibility = 0.0
+
 func getCharacter():
 	if(character == null):
 		return character
@@ -109,6 +161,7 @@ func isInPublic():
 	return !pc.isInSecludedLocation()
 
 func resetState():
+	currentDanger = 0.0
 	stopActivities()
 	if(getCharacter() != null):
 		var pc = getCharacter()
@@ -202,6 +255,18 @@ func doAction(actionData):
 	result["lustInterests"] = lustAction.getLustTopics()
 	if(lustAction.isTease()):
 		result["isTease"] = true
+		
+	var experienceData = lustAction.getExperience(self, actionData)
+	var pc = getCharacter()
+	if(experienceData != null && pc != null):
+		for expAdd in experienceData:
+			pc.addSkillExperience(expAdd[0], expAdd[1])
+	
+	if(!isInBattle() && isInPublic()):
+
+		currentVisibility += lustAction.getVisibility() * (1.0+pc.getExposure()/4.0)
+		currentVisibility = clamp(currentVisibility, 0.0, 1.0)
+		processLewdTurn(true)
 	
 	return result
 

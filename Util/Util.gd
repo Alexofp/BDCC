@@ -455,3 +455,29 @@ const asciiletters = {
 	"y": true, "Y": true,
 	"z": true, "Z": true,
 }
+
+#█░
+#▰▱
+#◼▭
+#▮▯
+static func textProgressBar(value, barLetterSize = 15, fullLetter = "█", emptyLetter = "▁"):
+	value = clamp(value, 0.0, 1.0)
+	var amountOfFull = floor(barLetterSize * value)
+	var amountOfEmpty = barLetterSize - amountOfFull
+	
+	var result = ""
+	for _i in range(amountOfFull):
+		result += fullLetter
+	for _i in range(amountOfEmpty):
+		result += emptyLetter
+	
+	return result
+
+static func isBitEnabled(mask, index):
+	return mask & (1 << index) != 0
+
+static func enableBit(mask, index):
+	return mask | (1 << index)
+
+static func disableBit(mask, index):
+	return mask & ~(1 << index)

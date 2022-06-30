@@ -56,6 +56,14 @@ export(bool) var loctag_GuardsEncounter = false
 
 export(int, FLAGS, "Inmates", "Guards") var population = 0
 
+func getPopulation():
+	var result = []
+	if(Util.isBitEnabled(population, 0)):
+		result.append(WorldPopulation.Inmates)
+	if(Util.isBitEnabled(population, 1)):
+		result.append(WorldPopulation.Guards)
+	return result
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	if(Engine.editor_hint):

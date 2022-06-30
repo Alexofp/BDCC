@@ -86,6 +86,7 @@ func startNewGame():
 
 func runScene(id, _args = []):
 	var scene = GlobalRegistry.createScene(id)
+	assert(scene != null, "SCENE WITH ID "+str(id)+" IS NOT FOUND")
 	add_child(scene)
 	sceneStack.append(scene)
 	print("Starting scene "+id)

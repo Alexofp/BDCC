@@ -78,3 +78,11 @@ func getLustTopics():
 
 func getPriority():
 	return 1
+
+func getExperience(_lustState: LustCombatState, _args):
+	if(_lustState.isInPublic()):
+		return [[Skill.Exhibitionism, 10], [Skill.CumLover, 5]]
+	return [[Skill.CumLover, 5]]
+
+func getVisibility():
+	return RNG.randf_range(0.1, 0.4)

@@ -55,7 +55,7 @@ func doAction(_lustState: LustCombatState, _args):
 
 	return {
 		text = text,
-		lust = 4,
+		lust = 5,
 	}
 
 func getLustTopics():
@@ -82,3 +82,8 @@ func getPriority():
 
 func skillNeeded():
 	return 3
+
+func getExperience(_lustState: LustCombatState, _args):
+	if(_lustState.isInPublic()):
+		return [[Skill.Exhibitionism, 2]]
+	return []

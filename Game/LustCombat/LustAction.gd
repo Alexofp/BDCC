@@ -45,3 +45,9 @@ func isTease():
 
 func skillNeeded():
 	return 0
+
+func getExperience(_lustState: LustCombatState, _args):
+	return []
+
+func getVisibility():
+	return RNG.randf_range(0.05, 0.1)

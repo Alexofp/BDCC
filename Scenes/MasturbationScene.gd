@@ -59,6 +59,7 @@ func _run():
 		saynn(savedActionText.trim_suffix("\n\n"))
 				
 	if(state == "" || state == "doLustAction"):
+		addButtonAt(13, "Do nothing", "Try not to attract any attention", "doidle")
 		addButtonAt(14, "Stop", "Enough horny", "endthescene")
 		
 		
@@ -68,7 +69,14 @@ func _run():
 
 		for activity in lustCombatState.getAllText():
 			sayn(activity)
-	
+		
+		if(lustCombatState.isInPublic()):
+			var visibility = lustCombatState.getVisibility()
+			sayn("\nVisibility: "+Util.textProgressBar(visibility)+" "+str(Util.roundF(visibility*100, 1))+"%")
+			var danger = lustCombatState.getDanger()
+			if(danger > 0.0):
+				sayn("Danger: "+Util.textProgressBar(danger)+" "+str(Util.roundF(danger*100, 1))+"%")
+		
 	if(state == "lustCombatAboutToCum"):
 		saynn(savedActionText)
 		
@@ -109,18 +117,32 @@ func _react(_action: String, _args):
 		endScene()
 		return
 	
+	if(_action == "doidle"):
+		processTime(30)
+		var lustCombatState:LustCombatState = GM.pc.getLustCombatState()
+		
+		lustCombatState.processLewdTurn()
+		
+		savedActionText = "You decide to idle for a bit"
+		#GM.pc.addLust(-1)
+		
+		checkDanger()
+		
+		setState("doLustAction")
+		return
+	
 	if(_action == "doLustAction"):
+		processTime(30)
+		
 		var actionData = _args[0]
 		var lustCombatState:LustCombatState = GM.pc.getLustCombatState()
 		
 		var result = lustCombatState.doAction(actionData)
 		savedActionText = result["text"]
 		if("lust" in result):
-			GM.pc.addLust(result["lust"] * 3)
+			GM.pc.addLust(result["lust"] * 4)
 		if("pain" in result):
 			GM.pc.addPain(result["pain"])
-		
-		processTime(30)
 		
 		if("came" in result):
 			lustCombatState.stopActivities()
@@ -130,11 +152,46 @@ func _react(_action: String, _args):
 		if(GM.pc.getLustLevel() >= 1.0):
 			setState("lustCombatAboutToCum")
 			return
+			
+		checkDanger()
 
 	setState(_action)
+
+func checkDanger():
+	var lustCombatState:LustCombatState = GM.pc.getLustCombatState()
+	var newDanger = lustCombatState.getDanger()
+	if(lustCombatState.isInPublic() && newDanger >= 1.0):
+		print("SPOTTED")
+		lustCombatState.resetDanger()
+		var population = GM.pc.getLocationPopulation()
+		if(population.size() > 0):
+			var randomPop = RNG.pick(population)
+			var sceneID
+			if(randomPop == WorldPopulation.Inmates):
+				sceneID = GM.main.getRandomSceneFor(RandomSceneType.MasturbationSpottedInmate)
+			if(randomPop == WorldPopulation.Guards):
+				sceneID = GM.main.getRandomSceneFor(RandomSceneType.MasturbationSpottedGuard)
+			
+			if(sceneID != null && sceneID != ""):
+				GM.pc.getLustCombatState().resetState()
+				GM.pc.updateNonBattleEffects()
+				endScene()
+				runScene(sceneID)
 
 func resolveCustomCharacterName(_charID):
 	if(_charID == "attacker"):
 		return "pc"
 	
 	return null
+
+func saveData():
+	var data = .saveData()
+	
+	data["savedActionText"] = savedActionText
+	
+	return data
+	
+func loadData(data):
+	.loadData(data)
+	
+	savedActionText = SAVE.loadVar(data, "savedActionText", "")
