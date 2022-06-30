@@ -2,6 +2,7 @@ extends FluidProduction
 class_name Lactation
 
 var lactationTimer = 0
+var lactationProgress = 0.0
 
 func induceLactation():
 	lactationTimer = Util.maxi(lactationTimer, 60*60*24*7)
@@ -13,6 +14,16 @@ func afterMilked():
 			return
 	
 	lactationTimer = Util.maxi(lactationTimer, 60*60*24*2)
+
+func stimulate():
+	lactationProgress += RNG.randf_range(0.01, 0.05)
+	if(lactationProgress > 0.4 && RNG.chance(lactationProgress * 10.0)):
+		if(!shouldProduce()):
+			induceLactation()
+			return true
+		else:
+			afterMilked()
+	return false
 
 func shouldProduce():
 	return lactationTimer > 0 # or isPregnant()
@@ -37,6 +48,10 @@ func processTime(seconds: int):
 		lactationTimer -= seconds
 	if(lactationTimer < 0):
 		lactationTimer = 0
+	if(lactationProgress > 0.0):
+		lactationProgress -= seconds/float(60*60*24*5)
+		if(lactationProgress <= 0.0):
+			lactationProgress = 0.0
 		
 func getProductionSpeedPerHour() -> float:
 	if(!shouldProduce()):

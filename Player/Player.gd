@@ -1070,11 +1070,23 @@ func canBeMilked():
 	return production.getFluidAmount() > 0.0
 
 func milk(howmuch = 1.0):
+	if(!hasBodypart(BodypartSlot.Breasts)):
+		return 0.0
 	var breasts: BodypartBreasts = getBodypart(BodypartSlot.Breasts)
 	var production: FluidProduction = breasts.getFluidProduction()
 	var howMuchMilk = production.drain(howmuch)
 	production.afterMilked()
 	return howMuchMilk
+
+func stimulateLactation():
+	if(!hasBodypart(BodypartSlot.Breasts)):
+		return false
+	
+	var breasts: BodypartBreasts = getBodypart(BodypartSlot.Breasts)
+	var production: Lactation = breasts.getFluidProduction()
+	if(production.has_method("stimulate")):
+		return production.stimulate()
+	return false
 
 func canBeSeedMilked():
 	if(!hasBodypart(BodypartSlot.Penis)):
@@ -1084,6 +1096,8 @@ func canBeSeedMilked():
 	return production.getFluidAmount() > 0.0
 
 func milkSeed(howmuch = 1.0):
+	if(!hasBodypart(BodypartSlot.Penis)):
+		return 0.0
 	var penis: BodypartPenis = getBodypart(BodypartSlot.Penis)
 	var production: FluidProduction = penis.getFluidProduction()
 	var howMuchSeed = production.drain(howmuch)

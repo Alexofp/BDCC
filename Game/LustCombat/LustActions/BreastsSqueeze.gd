@@ -57,6 +57,10 @@ func doAction(_lustState: LustCombatState, _args):
 		text += "Your breasts seem to have quite some weight to them. As you grope yourself, you spot a few drops of {pc.milk} streaming down your tits. They are so itching to be milked properly."
 		text += "\n\n"
 
+	if(pc.stimulateLactation()):
+		text += "[b]Your {pc.breasts} leak with some {pc.milk}, you began lactating![/b]"
+		text += "\n\n"
+
 	return {
 		text = text,
 		lust = 2,
