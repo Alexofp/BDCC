@@ -275,9 +275,13 @@ func saveData():
 		"inBattle": inBattle,
 		"enemyID": enemyID,
 		"currentActivities": currentActivities,
+		"currentVisibility": currentVisibility,
+		"currentDanger": currentDanger,
 	}
 
 func loadData(data):
 	inBattle = SAVE.loadVar(data, "inBattle", false)
 	enemyID = SAVE.loadVar(data, "enemyID", "")
 	currentActivities = SAVE.loadVar(data, "currentActivities", [])
+	currentVisibility = SAVE.loadVar(data, "currentVisibility", 0.0)
+	currentDanger = SAVE.loadVar(data, "currentDanger", 0.0)
