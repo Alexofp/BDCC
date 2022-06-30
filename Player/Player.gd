@@ -127,10 +127,10 @@ func isPlayer():
 	return true
 
 func _getAttacks():
-	var attacks = ["PunchPCAttack", "BitePCAttack", "KickPCAttack",
-	"TeaseBodyPCAttack",
-	"TeaseCrotchPCAttack",
-	"TeaseButtPCAttack",
+	var attacks = [
+		"PunchPCAttack",
+		"BitePCAttack",
+		"KickPCAttack",
 	]
 	
 	attacks.append_array(skillsHolder.getPerkAttacks())
