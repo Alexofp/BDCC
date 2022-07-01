@@ -76,3 +76,26 @@ func _getAttacks():
 
 func getFightIntro(_battleName):
 	return "Avy stands straight, her hands slightly behind her, clawed digits spread out."
+
+func getThickness() -> int:
+	return 75
+
+func getFemininity() -> int:
+	return 50
+
+func createBodyparts():
+	giveBodypartUnlessSame(GlobalRegistry.createBodypart("anthrobody"))
+	giveBodypartUnlessSame(GlobalRegistry.createBodypart("anthroarms"))
+	giveBodypartUnlessSame(GlobalRegistry.createBodypart("anus"))
+	giveBodypartUnlessSame(GlobalRegistry.createBodypart("digilegs"))
+	var breasts = GlobalRegistry.createBodypart("humanbreasts")
+	breasts.size = 4
+	giveBodypartUnlessSame(breasts)
+	giveBodypartUnlessSame(GlobalRegistry.createBodypart("foxhead"))
+	giveBodypartUnlessSame(GlobalRegistry.createBodypart("shorthair"))
+	giveBodypartUnlessSame(GlobalRegistry.createBodypart("canineears"))
+	var penis = GlobalRegistry.createBodypart("caninepenis")
+	penis.lengthCM = 22
+	penis.ballsScale = 1
+	giveBodypartUnlessSame(penis)
+	giveBodypartUnlessSame(GlobalRegistry.createBodypart("caninetail"))

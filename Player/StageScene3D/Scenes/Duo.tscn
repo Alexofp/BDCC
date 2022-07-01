@@ -24,18 +24,22 @@ region_rect = Rect2( 1, 1, 1022, 62 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.058, 1.928, 0.069 )
 texture = ExtResource( 5 )
 
-[node name="Doll3D" parent="." index="2" instance=ExtResource( 3 )]
+[node name="Chair2" type="Sprite3D" parent="." index="2"]
+transform = Transform( -1, 0, 0, 0, 1, 0, 0, 0, 1, -3.058, 1.928, 0.069 )
+texture = ExtResource( 5 )
+
+[node name="Doll3D" parent="." index="3" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0 )
 
-[node name="Doll3D2" parent="." index="3" instance=ExtResource( 3 )]
+[node name="Doll3D2" parent="." index="4" instance=ExtResource( 3 )]
 transform = Transform( -1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 0 )
 
-[node name="AnimationTree" type="AnimationTree" parent="." index="4"]
+[node name="AnimationTree" type="AnimationTree" parent="." index="5"]
 tree_root = ExtResource( 6 )
 parameters/AnimationNodeStateMachine/playback = SubResource( 1 )
 parameters/CuffsBlend/blend_amount = 0
 
-[node name="AnimationTree2" type="AnimationTree" parent="." index="5"]
+[node name="AnimationTree2" type="AnimationTree" parent="." index="6"]
 tree_root = ExtResource( 6 )
 parameters/AnimationNodeStateMachine/playback = SubResource( 2 )
 parameters/CuffsBlend/blend_amount = 0

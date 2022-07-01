@@ -9,6 +9,7 @@ func _run():
 		addCharacter("captain")
 		addCharacter("tavi")
 		addCharacter("risha")
+		GM.main.playAnimation(StageScene.Duo, "stand", {npc="captain", npcAction="stand"})
 		
 	if(state == ""):
 		aimCameraAndSetLocName("cd_captain_office")

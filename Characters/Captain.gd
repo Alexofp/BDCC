@@ -14,3 +14,22 @@ func getSmallDescription() -> String:
 
 func getSpecies():
 	return ["canine"]
+
+func getThickness() -> int:
+	return 50
+
+func getFemininity() -> int:
+	return 0
+
+func createBodyparts():
+	giveBodypartUnlessSame(GlobalRegistry.createBodypart("anthrobody"))
+	giveBodypartUnlessSame(GlobalRegistry.createBodypart("anthroarms"))
+	giveBodypartUnlessSame(GlobalRegistry.createBodypart("anus"))
+	var breasts = GlobalRegistry.createBodypart("malebreasts")
+	breasts.size = -1
+	giveBodypartUnlessSame(breasts)
+	giveBodypartUnlessSame(GlobalRegistry.createBodypart("caninetail"))
+	giveBodypartUnlessSame(GlobalRegistry.createBodypart("digilegs"))
+	giveBodypartUnlessSame(GlobalRegistry.createBodypart("canineears"))
+	giveBodypartUnlessSame(GlobalRegistry.createBodypart("caninehead"))
+	giveBodypartUnlessSame(GlobalRegistry.createBodypart("combedbackhair"))

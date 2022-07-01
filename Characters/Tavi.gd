@@ -59,7 +59,23 @@ func _getAttacks():
 func getFightIntro(_battleName):
 	return getName() + " gets into the combat stance and prepares for a fight. "+formatSay("Are you afraid of a little kitty cat~?")
 
+func getThickness() -> int:
+	return 80
+
+func getFemininity() -> int:
+	return 100
+
 func createBodyparts():
-	giveBodypartUnlessSame(GlobalRegistry.createBodypart("felinehead"))
-	giveBodypartUnlessSame(GlobalRegistry.createBodypart("vagina"))
+	giveBodypartUnlessSame(GlobalRegistry.createBodypart("anthrobody"))
+	giveBodypartUnlessSame(GlobalRegistry.createBodypart("anthroarms"))
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("anus"))
+	giveBodypartUnlessSame(GlobalRegistry.createBodypart("digilegs"))
+	var breasts = GlobalRegistry.createBodypart("humanbreasts")
+	breasts.size = 4
+	giveBodypartUnlessSame(breasts)
+	giveBodypartUnlessSame(GlobalRegistry.createBodypart("felinehead"))
+	giveBodypartUnlessSame(GlobalRegistry.createBodypart("shorthair"))
+	giveBodypartUnlessSame(GlobalRegistry.createBodypart("felineears"))
+	giveBodypartUnlessSame(GlobalRegistry.createBodypart("vagina"))
+	giveBodypartUnlessSame(GlobalRegistry.createBodypart("felinetail"))
+

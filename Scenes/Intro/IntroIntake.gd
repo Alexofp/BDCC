@@ -7,13 +7,12 @@ func _init():
 
 func _run():
 	if(state == ""):
+		GM.main.playAnimation(StageScene.Duo, "stand", {npc="captain", npcAction="stand"})
 		aimCamera("intro_arrive")
 		setLocationName("Spaceship hangar")
 		
 		addCharacter("captain")
 		addCharacter("risha")
-		
-		GM.main.playAnimation(StageScene.Solo, "stand")
 		
 		saynn("You stand in a huge open hangar. Watching the colorful markings on the floor you can guess that it supports up to about 3 ships. Most of the corners are stuffed with metal crates or other types of cargo, all of it locked, behind you is a huge energy field that allows the spaceships to pass but keep the air in. The height of a hanger allows there to be many catwalks on the walls where all the guards stand, watching the fresh blood arrive. Your attention gets stolen by someone’s loud authoritative voice that gets echoed slightly.")
 
@@ -38,8 +37,6 @@ func _run():
 	if(state == "whatnow"):
 		aimCamera("intro_nearcaptain")
 		setLocationName("Spaceship hangar")
-		
-		GM.main.playAnimation(StageScene.Solo, "walk")
 		
 		saynn("[say=pc]So. You came to take me in?[/say]")
 		
@@ -117,6 +114,8 @@ func _run():
 		addButton("Shower", "Take the refreshing shower", "shower")
 		
 	if(state == "notundress"):
+		GM.main.playAnimation(StageScene.Duo, "stand", {npc="risha", npcAction="stand"})
+		
 		aimCamera("intro_nearshower")
 		
 		saynn("You grit your teeth and show a middle finger to the guy.")

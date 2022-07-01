@@ -31,6 +31,9 @@ func _run():
 			if(GM.pc.getSkillLevel(Skill.Exhibitionism) < 1):
 				saynn("You look around, there are people around, lots of them in fact. Doing something lewd would surely get somebody’s attention.. But you are feeling kinda horny, the idea of teasing yourself in public sounds so hot right now.. Just gotta make sure to not get noticed.. You walk around a bit, trying to find a better spot, making sure not to catch too many eyes. Hands travel along your curves, your face is blushing red already..")
 				
+				if(GM.pc.getExposedPrivates().size() > 0):
+					saynn("Your face only gets more flustered as you try to cover your exposed privates as best you can. [b]You're not brave enough to do anything sexual.[/b]")
+				
 				saynn(RNG.pick([
 					"[say=pc]What am I doing..[/say]",
 					"[say=pc]Should I stop.. But..[/say]",

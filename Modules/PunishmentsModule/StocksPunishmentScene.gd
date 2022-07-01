@@ -10,6 +10,7 @@ func _reactInit():
 
 func _run():
 	if(state == ""):
+		GM.main.playAnimation(StageScene.Solo, "kneel")
 		GM.pc.setLocation("main_punishment_spot")
 		aimCamera("main_punishment_spot")
 		

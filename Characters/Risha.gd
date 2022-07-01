@@ -97,10 +97,26 @@ func getFightState(_battleName):
 		
 	return getName() + " looks completely fine, no visible bruises or signs of lust."
 
+func getThickness() -> int:
+	return 100
+
+func getFemininity() -> int:
+	return 50
+
 func createBodyparts():
+	giveBodypartUnlessSame(GlobalRegistry.createBodypart("anthrobody"))
+	giveBodypartUnlessSame(GlobalRegistry.createBodypart("anthroarms"))
+	giveBodypartUnlessSame(GlobalRegistry.createBodypart("anus"))
+	giveBodypartUnlessSame(GlobalRegistry.createBodypart("digilegs"))
+	var breasts = GlobalRegistry.createBodypart("humanbreasts")
+	breasts.size = 6
+	giveBodypartUnlessSame(breasts)
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("felinehead"))
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("vagina"))
-	giveBodypartUnlessSame(GlobalRegistry.createBodypart("anus"))
-
-func getPenisSize():
-	return 21.0
+	giveBodypartUnlessSame(GlobalRegistry.createBodypart("shorttail"))
+	giveBodypartUnlessSame(GlobalRegistry.createBodypart("shorthair"))
+	giveBodypartUnlessSame(GlobalRegistry.createBodypart("lynxears2"))
+	var penis = GlobalRegistry.createBodypart("caninepenis")
+	penis.lengthCM = 22
+	penis.ballsScale = 1
+	giveBodypartUnlessSame(penis)

@@ -6,6 +6,7 @@ func _init():
 func _run():
 	if(state == ""):
 		addCharacter("eliza")
+		GM.main.playAnimation(StageScene.Duo, "stand", {npc="eliza", npcAction="stand"})
 		
 	if(state == ""):
 		aimCamera("medical_near_pccell")

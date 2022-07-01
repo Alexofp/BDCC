@@ -6,6 +6,7 @@ func _init():
 func _run():
 	if(state == ""):
 		addCharacter("rahi")
+		GM.main.playAnimation(StageScene.Duo, "stand", {npc="rahi", npcAction="stand"})
 		
 	if(state == ""):
 		saynn("You were heading out the cellblock when you noticed a familiar feline waiting and then slowly approaching you. Kitty seems to be acting quite shy, her gaze directed downwards as she gathers enough willpower to start a conversation.")

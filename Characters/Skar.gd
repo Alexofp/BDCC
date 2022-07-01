@@ -70,3 +70,26 @@ func _getAttacks():
 
 func getFightIntro(_battleName):
 	return "The guard holds his weapon tightly and waits for you to do the first move.\n\n"+formatSay("You know it’s only gonna end one way for you.")
+
+func getThickness() -> int:
+	return 70
+
+func getFemininity() -> int:
+	return 0
+
+func createBodyparts():
+	giveBodypartUnlessSame(GlobalRegistry.createBodypart("anthrobody"))
+	giveBodypartUnlessSame(GlobalRegistry.createBodypart("anthroarms"))
+	giveBodypartUnlessSame(GlobalRegistry.createBodypart("anus"))
+	var penis = GlobalRegistry.createBodypart("caninepenis")
+	penis.lengthCM = 22
+	penis.ballsScale = 1
+	giveBodypartUnlessSame(penis)
+	giveBodypartUnlessSame(GlobalRegistry.createBodypart("wolfhead"))
+	giveBodypartUnlessSame(GlobalRegistry.createBodypart("messyhair"))
+	giveBodypartUnlessSame(GlobalRegistry.createBodypart("wolfears"))
+	var breasts = GlobalRegistry.createBodypart("malebreasts")
+	breasts.size = -1
+	giveBodypartUnlessSame(breasts)
+	giveBodypartUnlessSame(GlobalRegistry.createBodypart("caninetail"))
+	giveBodypartUnlessSame(GlobalRegistry.createBodypart("digilegs"))

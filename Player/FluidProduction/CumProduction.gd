@@ -2,7 +2,10 @@ extends FluidProduction
 class_name CumProduction
 
 func getCapacity() -> float:
-	return round(100.0)
+	var penis = getBodypart()
+	var lenCM = penis.getLength()
+	
+	return round(50.0 + pow(lenCM, 2.0))
 
 func getFluidType():
 	return BodilyFluids.FluidType.Cum
@@ -10,4 +13,4 @@ func getFluidType():
 func getProductionSpeedPerHour() -> float:
 	if(!shouldProduce()):
 		return 0.0
-	return getCapacity() / 5.0
+	return getCapacity() / 2.0

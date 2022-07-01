@@ -8,6 +8,7 @@ func _init():
 
 func _run():
 	if(state == ""):
+		GM.main.playAnimation(StageScene.Duo, "sit", {pc = "nurse", npc="pc", npcAction="stand"})
 		addCharacter("nurse")
 		
 	if(state == ""):

@@ -9,6 +9,7 @@ func _init():
 func _run():
 	if(state == ""):
 		addCharacter("rahi")
+		GM.main.playAnimation(StageScene.Duo, "stand", {npc="rahi", npcAction="stand"})
 		
 	if(state == ""):
 		saynn("You watch the familiar kitty that is standing under the shower, completely naked. She is taking her sweet time, washing herself, her hand holding a piece of soap that she uses on her hair. Her body is directed away from you but it still presents you with a nice view. Her wet fur now shows just how slim her curves are, something that is must have for an agile kitty. She is humming some tune to herself while slowly swaying her hips.")

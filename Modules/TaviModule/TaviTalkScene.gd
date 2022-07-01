@@ -6,6 +6,7 @@ func _init():
 func _run():
 	if(state == ""):
 		addCharacter("tavi")
+		GM.main.playAnimation(StageScene.Duo, "stand", {npc="tavi"})
 		
 	if(state == ""):
 		if(getFlag(TaviModule.Tavi_IsAngryAtPlayer)):

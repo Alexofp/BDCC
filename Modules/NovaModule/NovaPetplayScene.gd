@@ -10,6 +10,7 @@ func _init():
 func _run():
 	if(state == ""):
 		addCharacter("nova")
+		GM.main.playAnimation(StageScene.Duo, "stand", {npc="nova", npcAction="stand"})
 	if(state == ""):
 		saynn("[say=pc]You’re looking for pets maybe?..[/say]")
 
@@ -88,7 +89,7 @@ func _run():
 		addButton("Get on all fours", "Be the good pet for Nova", "get_on_all_fours")
 
 	if(state == "get_on_all_fours"):
-		GM.main.playAnimation(StageScene.Solo, "kneel")
+		GM.main.playAnimation(StageScene.Duo, "kneel", {npc="nova", npcAction="stand"})
 		# (if puppy)
 		if(isPuppy):
 			saynn("You bark and take a little step back before lowering yourself to your knees. Then you bend forward and get on all fours. Nova holds your leash while you begin to crawl around her, swaying your {pc.masc} hips a lot in the process.")

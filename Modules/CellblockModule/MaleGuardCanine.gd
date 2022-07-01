@@ -81,3 +81,26 @@ func getLootTable(_battleName):
 
 func getPenisSize():
 	return 25.0
+
+func getThickness() -> int:
+	return 60
+
+func getFemininity() -> int:
+	return 0
+
+func createBodyparts():
+	giveBodypartUnlessSame(GlobalRegistry.createBodypart("anthrobody"))
+	giveBodypartUnlessSame(GlobalRegistry.createBodypart("anthroarms"))
+	giveBodypartUnlessSame(GlobalRegistry.createBodypart("anus"))
+	giveBodypartUnlessSame(GlobalRegistry.createBodypart("digilegs"))
+	var breasts = GlobalRegistry.createBodypart("malebreasts")
+	breasts.size = -1
+	giveBodypartUnlessSame(breasts)
+	var penis = GlobalRegistry.createBodypart("caninepenis")
+	penis.lengthCM = 15
+	penis.ballsScale = 1
+	giveBodypartUnlessSame(penis)
+	giveBodypartUnlessSame(GlobalRegistry.createBodypart("caninetail"))
+	giveBodypartUnlessSame(GlobalRegistry.createBodypart("caninehead"))
+	giveBodypartUnlessSame(GlobalRegistry.createBodypart("mohawkhair"))
+	giveBodypartUnlessSame(GlobalRegistry.createBodypart("canineears"))

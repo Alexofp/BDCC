@@ -40,6 +40,7 @@ func playAnimation(animID, _args = {}):
 	
 	#doll.forceSlotToBeVisible(BodypartSlot.Penis)
 	
+	
 	if(animID == "sit"):
 		$Chair.visible = true
 	else:
@@ -51,9 +52,14 @@ func playAnimation(animID, _args = {}):
 	if(!stateMachineTravel(doll, state_machine, animID)):
 		printerr("Action "+str(animID)+" is not found for stage "+str(id))
 	
+	$Chair2.visible = false
 	if(_args.has("npcAction")):
+		var npcAnimID = _args["npcAction"]
+		if(npcAnimID == "sit"):
+			$Chair2.visible = true
+		
 		var state_machine2 = animationTree2["parameters/AnimationNodeStateMachine/playback"]
-		if(!stateMachineTravel(doll2, state_machine2, _args["npcAction"])):
+		if(!stateMachineTravel(doll2, state_machine2, npcAnimID)):
 			printerr("Action "+str(animID)+" is not found for stage "+str(id))
 	else:
 		var state_machine2 = animationTree2["parameters/AnimationNodeStateMachine/playback"]

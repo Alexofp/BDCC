@@ -16,13 +16,25 @@ func getSmallDescription() -> String:
 func getSpecies():
 	return ["feline"]
 
+func getThickness() -> int:
+	return 50
+
+func getFemininity() -> int:
+	return 100
+
 func createBodyparts():
-	#var mybreasts: BodypartBreasts = GlobalRegistry.createBodypart("humanbreasts")
-	#mybreasts.size = BreastsSize.C
-	#giveBodypartUnlessSame(mybreasts)
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("felinehead"))
+	giveBodypartUnlessSame(GlobalRegistry.createBodypart("ponytailhair"))
+	giveBodypartUnlessSame(GlobalRegistry.createBodypart("felineears"))
+	giveBodypartUnlessSame(GlobalRegistry.createBodypart("anthrobody"))
+	giveBodypartUnlessSame(GlobalRegistry.createBodypart("anthroarms"))
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("vagina"))
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("anus"))
+	giveBodypartUnlessSame(GlobalRegistry.createBodypart("felinetail"))
+	giveBodypartUnlessSame(GlobalRegistry.createBodypart("digilegs"))
+	var breasts = GlobalRegistry.createBodypart("humanbreasts")
+	breasts.size = 3
+	giveBodypartUnlessSame(breasts)
 
 func onGivingBirth(_impregnatedEggCells: Array, _newkids: Array):
 	.onGivingBirth(_impregnatedEggCells, _newkids)

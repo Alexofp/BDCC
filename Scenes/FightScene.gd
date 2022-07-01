@@ -368,10 +368,10 @@ func _react(_action: String, _args):
 			var theDamage = damageBalanceMod*10.0*RNG.randf_range(0.9, 1.1)
 			
 			var extraText = ""
-			if(isTease && enemyCharacter.getLustLevel() < 0.4 && theDamage > 0.0):
+			if(isTease && enemyCharacter.getLustLevel() < 0.6 && theDamage > 0.0):
 				theDamage *= 1.5
-			if(isTease && enemyCharacter.getLustLevel() >= 0.4):
-				theDamage *= 0.5
+			if(isTease && enemyCharacter.getLustLevel() >= 0.6):
+				theDamage *= 1.0
 				extraText = "[b]Teasing is not effective, the enemy is too horny![/b] "
 			
 			var damage = enemyCharacter.receiveDamage(DamageType.Lust, int(round(theDamage)))

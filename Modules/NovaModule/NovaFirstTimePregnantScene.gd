@@ -6,6 +6,7 @@ func _init():
 func _run():
 	if(state == ""):
 		addCharacter("nova")
+		GM.main.playAnimation(StageScene.Duo, "stand", {npc="nova", npcAction="stand"})
 		
 	if(state == ""):
 		saynn("You wake up in your cell hearing a loud voice closing in on your cell.")

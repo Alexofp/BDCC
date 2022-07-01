@@ -7,6 +7,7 @@ func _init():
 func _run():
 	if(state == ""):
 		addCharacter("tavi")
+		GM.main.playAnimation(StageScene.Duo, "stand", {npc="tavi", npcAction="kneel"})
 		
 	if(state == ""):
 		saynn("You are standing under the shower, completely naked, cleaning yourself. You were about done with washing your {pc.breasts} when you felt someone hugging you from behind.")

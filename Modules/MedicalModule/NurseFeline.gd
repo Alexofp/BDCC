@@ -79,3 +79,22 @@ func getFightIntro(_battleName):
 func getLootTable(_battleName):
 	return GuardLoot.new()
 
+func getThickness() -> int:
+	return 120
+
+func getFemininity() -> int:
+	return 0
+
+func createBodyparts():
+	giveBodypartUnlessSame(GlobalRegistry.createBodypart("anthrobody"))
+	giveBodypartUnlessSame(GlobalRegistry.createBodypart("anthroarms"))
+	#giveBodypartUnlessSame(GlobalRegistry.createBodypart("anus"))
+	giveBodypartUnlessSame(GlobalRegistry.createBodypart("digilegs"))
+	giveBodypartUnlessSame(GlobalRegistry.createBodypart("felinehead"))
+	giveBodypartUnlessSame(GlobalRegistry.createBodypart("longhair"))
+	giveBodypartUnlessSame(GlobalRegistry.createBodypart("felineears"))
+	#giveBodypartUnlessSame(GlobalRegistry.createBodypart("vagina"))
+	giveBodypartUnlessSame(GlobalRegistry.createBodypart("felinetail"))
+	var breasts = GlobalRegistry.createBodypart("humanbreasts")
+	breasts.size = 8
+	giveBodypartUnlessSame(breasts)

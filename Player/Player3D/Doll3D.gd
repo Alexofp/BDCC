@@ -88,7 +88,7 @@ func clearState():
 	state.clear()
 
 func addPart(slot, partPath):
-	addPartObject(slot, load(partPath).instance())
+	addPartObject(slot, GlobalRegistry.instanceCached(partPath))
 
 func addPartUnlessSame(slot, partPath):
 	if(parts.has(slot)):
