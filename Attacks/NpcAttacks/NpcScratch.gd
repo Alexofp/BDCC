@@ -5,13 +5,13 @@ func _init():
 	category = Category.Physical
 	aiCategory = AICategory.Offensive
 	
-func getVisibleName():
+func getVisibleName(_context = {}):
 	return "Scratch"
 	
-func getVisibleDesc():
+func getVisibleDesc(_context = {}):
 	return "Shouldn't see this"
 	
-func _doAttack(_attacker, _receiver):
+func _doAttack(_attacker, _receiver, _context = {}):
 	if(checkMissed(_attacker, _receiver, DamageType.Physical)):
 		return genericMissMessage(_attacker, _receiver)
 	
@@ -27,7 +27,7 @@ func _doAttack(_attacker, _receiver):
 		text += " Sharp claws caused {receiver.name} to start [color=red]bleeding[/color]."
 	return text
 	
-func _canUse(_attacker, _receiver):
+func _canUse(_attacker, _receiver, _context = {}):
 	return true
 
 func getAnticipationText(_attacker, _receiver):

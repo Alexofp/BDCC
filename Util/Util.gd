@@ -481,3 +481,12 @@ static func enableBit(mask, index):
 
 static func disableBit(mask, index):
 	return mask & ~(1 << index)
+
+static func dmgRangeStr(min_damage: int, max_damage: int):
+	var damage1 = min_damage
+	var damage2 = max_damage
+	
+	return str(damage1)+"-"+str(damage2)
+
+static func dmgRangeArrayStr(damage: Array):
+	return dmgRangeStr(damage[0], damage[1])

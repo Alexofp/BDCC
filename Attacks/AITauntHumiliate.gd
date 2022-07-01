@@ -5,13 +5,13 @@ func _init():
 	category = Category.Humiliation
 	aiCategory = AICategory.Offensive
 	
-func getVisibleName():
+func getVisibleName(_context = {}):
 	return "Taunt (Humiliate)"
 	
-func getVisibleDesc():
+func getVisibleDesc(_context = {}):
 	return "You shouldn't see this"
 	
-func _doAttack(_attacker, _receiver):
+func _doAttack(_attacker, _receiver, _context = {}):
 	var attackerName = _attacker.getName()
 	var receiverName = _receiver.getName()
 	

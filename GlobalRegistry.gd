@@ -61,6 +61,7 @@ func _ready():
 	registerItemFolder("res://Inventory/Items/Underwear/")
 	registerItemFolder("res://Inventory/Items/BDSM/")
 	registerItemFolder("res://Inventory/Items/StaticBDSM/")
+	registerItemFolder("res://Inventory/Items/Weapons/")
 	
 	registerBuffFolder("res://Inventory/Buffs/")
 	
@@ -85,7 +86,7 @@ func _ready():
 	
 	registerAttackFolder("res://Attacks/")
 	registerAttackFolder("res://Attacks/PlayerOnly/")
-	registerAttackFolder("res://Attacks/PerkAttacks/")
+	registerAttackFolder("res://Attacks/WeaponAttacks/")
 	registerAttackFolder("res://Attacks/NpcAttacks/")
 	
 	registerLustActionFolder("res://Game/LustCombat/LustActions/")

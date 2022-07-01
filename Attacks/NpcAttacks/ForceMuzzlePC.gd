@@ -6,13 +6,13 @@ func _init():
 	aiCategory = AICategory.Defensive
 	aiScoreMultiplier = 0.4
 	
-func getVisibleName():
+func getVisibleName(_context = {}):
 	return "Force muzzle"
 	
-func getVisibleDesc():
+func getVisibleDesc(_context = {}):
 	return "Shouldn't see this"
 	
-func _doAttack(_attacker, _receiver):
+func _doAttack(_attacker, _receiver, _context = {}):
 	if(checkMissed(_attacker, _receiver, DamageType.Physical)):
 		return genericMissMessage(_attacker, _receiver)
 	
@@ -28,7 +28,7 @@ func _doAttack(_attacker, _receiver):
 		"What's wrong, cat got your tongue?",
 	])+"[/say]"
 	
-func _canUse(_attacker, _receiver):
+func _canUse(_attacker, _receiver, _context = {}):
 	return _receiver.isPlayer() && !_receiver.isGagged()
 
 func getAnticipationText(_attacker, _receiver):

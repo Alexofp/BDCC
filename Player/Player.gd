@@ -143,6 +143,17 @@ func _getAttacks():
 	
 	attacks.append_array(skillsHolder.getPerkAttacks())
 	
+	for item in getInventory().getItems():
+		var itemAttacks = item.getAttacks()
+		if(itemAttacks == null):
+			continue
+		for attackID in itemAttacks:
+			attacks.append({
+				"attackID": attackID,
+				"itemID": item.getUniqueID(),
+				"charID": getID(),
+				})
+	
 	return attacks
 
 func hasBoundArms():

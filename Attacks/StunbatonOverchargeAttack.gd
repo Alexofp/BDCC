@@ -6,13 +6,13 @@ func _init():
 	aiCategory = AICategory.Offensive
 	aiScoreMultiplier = 0.5
 	
-func getVisibleName():
+func getVisibleName(_context = {}):
 	return "Use the stunbaton"
 	
-func getVisibleDesc():
+func getVisibleDesc(_context = {}):
 	return "You shouldn't see this"
 	
-func _doAttack(_attacker, _receiver):
+func _doAttack(_attacker, _receiver, _context = {}):
 	var attackerName = _attacker.getName()
 	var receiverName = _receiver.getName()
 	
@@ -40,7 +40,7 @@ func _doAttack(_attacker, _receiver):
 	
 	return text
 	
-func _canUse(_attacker, _receiver):
+func _canUse(_attacker, _receiver, _context = {}):
 	return true
 
 func getRequirements():

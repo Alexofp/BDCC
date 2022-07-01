@@ -291,3 +291,6 @@ func getLustActions():
 func resetLustState():
 	if(itemState != null):
 		return itemState.resetState()
+
+func getAttacks():
+	return null

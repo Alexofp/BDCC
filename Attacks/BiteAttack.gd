@@ -5,13 +5,13 @@ func _init():
 	category = Category.Physical
 	aiCategory = AICategory.Offensive
 	
-func getVisibleName():
+func getVisibleName(_context = {}):
 	return "Bite"
 	
-func getVisibleDesc():
+func getVisibleDesc(_context = {}):
 	return "60% chance to do "+scaledDmgRangeStr(DamageType.Physical, 15, 20)+" damage and cause bleeding. Can't miss if the opponent is on the ground"
 	
-func _doAttack(_attacker, _receiver):
+func _doAttack(_attacker, _receiver, _context = {}):
 	var attackerName = _attacker.getName()
 	var receiverName = _receiver.getName()
 	
@@ -40,7 +40,7 @@ func _doAttack(_attacker, _receiver):
 	
 	return text
 	
-func _canUse(_attacker, _receiver):
+func _canUse(_attacker, _receiver, _context = {}):
 	return true
 
 func getRequirements():

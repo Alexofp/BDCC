@@ -6,13 +6,13 @@ func _init():
 	aiCategory = AICategory.Lust
 	aiScoreMultiplier = 0.8
 	
-func getVisibleName():
+func getVisibleName(_context = {}):
 	return "Heat grenade"
 	
-func getVisibleDesc():
+func getVisibleDesc(_context = {}):
 	return "Shouldn't see this"
 	
-func _doAttack(_attacker, _receiver):
+func _doAttack(_attacker, _receiver, _context = {}):
 	if(checkMissed(_attacker, _receiver, DamageType.Lust)):
 		return genericMissMessage(_attacker, _receiver)
 	
@@ -24,7 +24,7 @@ func _doAttack(_attacker, _receiver):
 	text += " " + receiverDamageMessage(DamageType.Lust, _damage)
 	return text
 	
-func _canUse(_attacker, _receiver):
+func _canUse(_attacker, _receiver, _context = {}):
 	return true
 
 func getAnticipationText(_attacker, _receiver):

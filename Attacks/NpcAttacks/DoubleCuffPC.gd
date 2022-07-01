@@ -6,13 +6,13 @@ func _init():
 	aiCategory = AICategory.Defensive
 	aiScoreMultiplier = 0.2
 	
-func getVisibleName():
+func getVisibleName(_context = {}):
 	return "Cuffs hands and legs"
 	
-func getVisibleDesc():
+func getVisibleDesc(_context = {}):
 	return "Shouldn't see this"
 	
-func _doAttack(_attacker, _receiver):
+func _doAttack(_attacker, _receiver, _context = {}):
 	if(checkMissed(_attacker, _receiver, DamageType.Physical)):
 		return genericMissMessage(_attacker, _receiver)
 	
@@ -25,7 +25,7 @@ func _doAttack(_attacker, _receiver):
 	
 	return "{attacker.name} manages to bring you down to the floor. Then {attacker.he} pulls two sets of cuffs and [b]restraints your arms and legs[/b]! You manage to shake {attacker.him} off but you are still on the floor."
 	
-func _canUse(_attacker, _receiver):
+func _canUse(_attacker, _receiver, _context = {}):
 	return _receiver.isPlayer() && !_receiver.hasBoundArms() && !_receiver.hasBoundLegs()
 
 func getAnticipationText(_attacker, _receiver):

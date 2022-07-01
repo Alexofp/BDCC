@@ -5,13 +5,13 @@ func _init():
 	category = Category.Lust
 	aiCategory = AICategory.Defensive
 	
-func getVisibleName():
+func getVisibleName(_context = {}):
 	return "Stretching"
 	
-func getVisibleDesc():
+func getVisibleDesc(_context = {}):
 	return "You shouldn't see this"
 	
-func _doAttack(_attacker, _receiver):
+func _doAttack(_attacker, _receiver, _context = {}):
 	var _damage = doDamage(_attacker, _receiver, DamageType.Lust, RNG.randi_range(20, 20))
 	
 	var texts = [

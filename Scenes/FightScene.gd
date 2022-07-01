@@ -248,20 +248,7 @@ func _react(_action: String, _args):
 
 		afterTurnChecks()
 		return
-	
-	if(_action == "attack"):
-		beforeTurnChecks()
-		
-		whatPlayerDid = "It's your turn to attack\n"
-		
-		#enemyCharacter.receivePain(10)
-		#whatPlayerDid += "\n"+enemyCharacter._getName()+" received 10 damage!"
-		whatPlayerDid += doPlayerAttack("simplekickattack")
-		
-		whatEnemyDid += aiTurn()
 
-		afterTurnChecks()
-		return
 	if(_action == "wait"):
 		beforeTurnChecks()
 		
@@ -427,13 +414,18 @@ func addLustActionsButtons(lustCombatState:LustCombatState, theActions):
 			addDisabledButton(lustAction.getVisibleName(lustCombatState, actionData), reasonWhyCant)
 	
 
-func doPlayerAttack(attackID):
+func doPlayerAttack(attackData):
+	var attackID = attackData
+	if(attackID is Dictionary):
+		attackID = attackData["attackID"]
+	else:
+		attackData = {"attackID": attackID}
 	var attack: Attack = GlobalRegistry.getAttack(attackID)
 	if(attack == null):
 		assert(false, "Bad attack: "+attackID)
 	
 	setPlayerAsAttacker()
-	var text = GM.ui.processString(attack.doAttack(GM.pc, enemyCharacter))
+	var text = GM.ui.processString(attack.doAttack(GM.pc, enemyCharacter, attackData))
 	var attackSoloAnim = attack.getAttackSoloAnimation()
 	if(attackSoloAnim != null && attackSoloAnim != ""):
 		GM.main.playAnimation(StageScene.Solo, attackSoloAnim)
@@ -451,6 +443,8 @@ func getBestAIAttack():
 	var attacks = enemyCharacter.getAttacks()
 	
 	for attackID in attacks:
+		if(attackID is Dictionary):
+			attackID = attackID["attackID"]
 		var attack: Attack = GlobalRegistry.getAttack(attackID)
 		if(attack == null):
 			assert(false, "Bad attack: "+attackID)
@@ -568,6 +562,8 @@ func checkEnd():
 func pcHasAnyAttacksOfCategory(category):
 	var playerAttacks = GM.pc.getAttacks()
 	for attackID in playerAttacks:
+		if(attackID is Dictionary):
+			attackID = attackID["attackID"]
 		var attack: Attack = GlobalRegistry.getAttack(attackID)
 		if(attack == null):
 			assert(false, "Bad attack: "+attackID)
@@ -578,7 +574,10 @@ func pcHasAnyAttacksOfCategory(category):
 
 func addAttackButtons(category):
 	var playerAttacks = GM.pc.getAttacks()
-	for attackID in playerAttacks:
+	for attackData in playerAttacks:
+		var attackID = attackData
+		if(attackData is Dictionary):
+			attackID = attackData["attackID"]
 		var attack: Attack = GlobalRegistry.getAttack(attackID)
 		if(attack == null):
 			assert(false, "Bad attack: "+attackID)
@@ -588,12 +587,12 @@ func addAttackButtons(category):
 		var desc = attack.getRequirementsColorText(GM.pc, enemyCharacter)
 		#if(desc != ""):
 		#	desc += "\n"
-		desc += attack.getVisibleDesc()
+		desc += attack.getVisibleDesc(attackData)
 			
-		if(attack.canUse(GM.pc, enemyCharacter)):
-			addButton(attack.getVisibleName(),  desc, "doattack", [attack.id])
+		if(attack.canUse(GM.pc, enemyCharacter, attackData)):
+			addButton(attack.getVisibleName(attackData),  desc, "doattack", [attackData])
 		else:
-			addDisabledButton(attack.getVisibleName(),  desc)
+			addDisabledButton(attack.getVisibleName(attackData),  desc)
 
 func setPlayerAsAttacker():
 	currentAttackerID = "pc"

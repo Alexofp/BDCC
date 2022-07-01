@@ -5,13 +5,13 @@ func _init():
 	category = Category.Special
 	aiCategory = AICategory.Offensive
 	
-func getVisibleName():
+func getVisibleName(_context = {}):
 	return "Strong kick"
 	
-func getVisibleDesc():
+func getVisibleDesc(_context = {}):
 	return "Sacrifice 25 stamina to do a very powerful kick doing "+scaledDmgStr(DamageType.Physical, 20)+" damage and knocking the opponent"
 	
-func _doAttack(_attacker, _receiver):
+func _doAttack(_attacker, _receiver, _context = {}):
 	var attackerName = _attacker.getName()
 	var receiverName = _receiver.getName()
 	
@@ -27,7 +27,7 @@ func _doAttack(_attacker, _receiver):
 	
 	return text
 	
-func _canUse(_attacker, _receiver):
+func _canUse(_attacker, _receiver, _context = {}):
 	return true
 
 func getRequirements():

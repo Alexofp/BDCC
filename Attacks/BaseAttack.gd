@@ -13,25 +13,25 @@ var aiScoreMultiplier = 1
 func _init():
 	pass
 	
-func getVisibleName():
+func getVisibleName(_context = {}):
 	return "Bad attack"
 	
-func getVisibleDesc():
+func getVisibleDesc(_context = {}):
 	return "Bad attack, let the developer know"
 	
-func _doAttack(_attacker, _receiver):
+func _doAttack(_attacker, _receiver, _context = {}):
 	return "Mew happened"
 	
-func _canUse(_attacker, _receiver):
+func _canUse(_attacker, _receiver, _context = {}):
 	return true
 	
 	
-func doAttack(_attacker, _receiver):
+func doAttack(_attacker, _receiver, _context = {}):
 	doRequirements(_attacker, _receiver)
-	return _doAttack(_attacker, _receiver)
+	return _doAttack(_attacker, _receiver, _context)
 	
-func canUse(_attacker, _receiver):
-	return _canUse(_attacker, _receiver) && meetsRequirements(_attacker, _receiver)
+func canUse(_attacker, _receiver, _context = {}):
+	return _canUse(_attacker, _receiver, _context) && meetsRequirements(_attacker, _receiver)
 
 func getRequirements():
 	return []
@@ -292,3 +292,11 @@ func genericDodgeMessage(_attacker, _receiver):
 
 func canDoWhileStunned():
 	return false
+
+func getItem(_context) -> ItemBase:
+	if("itemID" in _context):
+		var item = GlobalRegistry.getCharacter(_context["charID"]).getInventory().getItemByUniqueID(_context["itemID"])
+		if(item == null):
+			return null
+		return item
+	return null

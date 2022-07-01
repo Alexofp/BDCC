@@ -5,13 +5,13 @@ func _init():
 	category = Category.Physical
 	aiCategory = AICategory.Offensive
 	
-func getVisibleName():
+func getVisibleName(_context = {}):
 	return "Scratch"
 	
-func getVisibleDesc():
+func getVisibleDesc(_context = {}):
 	return "You scratch the enemy for "+scaledDmgRangeStr(DamageType.Physical, 5, 15)+" damage. May cause bleeding with 50%"
 	
-func _doAttack(_attacker, _receiver):
+func _doAttack(_attacker, _receiver, _context = {}):
 	var attackerName = _attacker.getName()
 	var receiverName = _receiver.getName()
 	
@@ -39,7 +39,7 @@ func _doAttack(_attacker, _receiver):
 	
 	return text
 	
-func _canUse(_attacker, _receiver):
+func _canUse(_attacker, _receiver, _context = {}):
 	return true
 
 func getRequirements():

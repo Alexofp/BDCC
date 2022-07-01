@@ -5,13 +5,13 @@ func _init():
 	category = Category.Physical
 	aiCategory = AICategory.Lust
 	
-func getVisibleName():
+func getVisibleName(_context = {}):
 	return "Mommy humiliation"
 	
-func getVisibleDesc():
+func getVisibleDesc(_context = {}):
 	return "You shouldn't see this"
 	
-func _doAttack(_attacker, _receiver):
+func _doAttack(_attacker, _receiver, _context = {}):
 	var _damage = doDamage(_attacker, _receiver, DamageType.Lust, RNG.randi_range(20, 20))
 	#_receiver.addEffect(StatusEffect.Bleeding)
 
@@ -21,7 +21,7 @@ func _doAttack(_attacker, _receiver):
 	
 	return text
 	
-func _canUse(_attacker, _receiver):
+func _canUse(_attacker, _receiver, _context = {}):
 	return true
 
 func getAnticipationText(_attacker, _receiver):

@@ -5,19 +5,19 @@ func _init():
 	category = Category.Lust
 	aiCategory = AICategory.Lust
 	
-func getVisibleName():
+func getVisibleName(_context = {}):
 	return "Eliza taunt"
 	
-func getVisibleDesc():
+func getVisibleDesc(_context = {}):
 	return "Shouldn't see this"
 	
-func _doAttack(_attacker, _receiver):
+func _doAttack(_attacker, _receiver, _context = {}):
 	var text = "You feel aroused after thinking about what Eliza said.."
 	var _damage = doDamage(_attacker, _receiver, DamageType.Lust, 20)
 	text += " " + receiverDamageMessage(DamageType.Lust, _damage)
 	return text
 	
-func _canUse(_attacker, _receiver):
+func _canUse(_attacker, _receiver, _context = {}):
 	return true
 
 func getAnticipationText(_attacker, _receiver):
