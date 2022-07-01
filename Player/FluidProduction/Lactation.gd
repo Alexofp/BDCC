@@ -16,8 +16,8 @@ func afterMilked():
 	lactationTimer = Util.maxi(lactationTimer, 60*60*24*2)
 
 func stimulate():
-	lactationProgress += RNG.randf_range(0.01, 0.05)
-	if(lactationProgress > 0.4 && RNG.chance(lactationProgress * 10.0)):
+	lactationProgress += RNG.randf_range(0.01, 0.02)
+	if(lactationProgress > 0.5 && RNG.chance(lactationProgress * 10.0)):
 		if(!shouldProduce()):
 			induceLactation()
 			return true
@@ -49,7 +49,7 @@ func processTime(seconds: int):
 	if(lactationTimer < 0):
 		lactationTimer = 0
 	if(lactationProgress > 0.0):
-		lactationProgress -= seconds/float(60*60*24*5)
+		lactationProgress -= float(seconds)/float(60*60*24*5)
 		if(lactationProgress <= 0.0):
 			lactationProgress = 0.0
 		
@@ -61,10 +61,12 @@ func getProductionSpeedPerHour() -> float:
 func saveData():
 	var data = .saveData()
 	data["lactationTimer"] = lactationTimer
+	data["lactationProgress"] = lactationProgress
 	
 	return data
 
 func loadData(_data):
-	lactationTimer = SAVE.loadVar(_data, "lactationTimer", 1000)
+	lactationTimer = SAVE.loadVar(_data, "lactationTimer", 0)
+	lactationProgress = SAVE.loadVar(_data, "lactationProgress", 0.0)
 	
 	.loadData(_data)
