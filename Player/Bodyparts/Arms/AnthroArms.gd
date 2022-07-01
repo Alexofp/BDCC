@@ -1,11 +1,11 @@
 extends BodypartArms
 
 func _init():
-	visibleName = "feline arms"
-	id = "felinearms"
+	visibleName = "anthro arms"
+	id = "anthroarms"
 
 func getCompatibleSpecies():
-	return [Species.Feline]
+	return [Species.Any]
 
 func getDoll3DScene():
 	return "res://Player/Player3D/Parts/Arms/HumanArms/HumanArms.tscn"

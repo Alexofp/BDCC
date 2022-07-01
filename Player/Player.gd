@@ -52,15 +52,15 @@ func _ready():
 	var _ok2 = menstrualCycle.connect("visiblyPregnant", self, "onPlayerVisiblyPregnant")
 	
 	getInventory().clear()
-	giveBodypart(GlobalRegistry.createBodypart("felineleg"))
+	giveBodypart(GlobalRegistry.createBodypart("digilegs"))
 	var mybreasts: BodypartBreasts = GlobalRegistry.createBodypart("humanbreasts")
 	mybreasts.size = BreastsSize.C
 	giveBodypart(mybreasts)
 	giveBodypart(GlobalRegistry.createBodypart("baldhair"))
 	giveBodypart(GlobalRegistry.createBodypart("felinetail"))
 	giveBodypart(GlobalRegistry.createBodypart("felinehead"))
-	giveBodypart(GlobalRegistry.createBodypart("humanbody"))
-	giveBodypart(GlobalRegistry.createBodypart("humanarms"))
+	giveBodypart(GlobalRegistry.createBodypart("anthrobody"))
+	giveBodypart(GlobalRegistry.createBodypart("anthroarms"))
 	giveBodypart(GlobalRegistry.createBodypart("felineears"))
 	giveBodypart(GlobalRegistry.createBodypart("vagina"))
 	giveBodypart(GlobalRegistry.createBodypart("anus"))
@@ -527,8 +527,15 @@ func loadData(data):
 		if(loadedBodyparts[slot] == null):
 			bodyparts[slot] = null
 			continue
-		var id = SAVE.loadVar(loadedBodyparts[slot], "id", "humanleg")
+		var id = SAVE.loadVar(loadedBodyparts[slot], "id", "errorbad")
 		var bodypart = GlobalRegistry.createBodypart(id)
+		if(bodypart == null):
+			var replacementID = BodypartSlot.findReplacement(slot, id)
+			if(replacementID == null || replacementID == ""):
+				printerr("Couldn't find an replacement bodypart for slot "+str(slot))
+				continue
+			bodypart = GlobalRegistry.createBodypart(replacementID)
+			
 		bodypart.loadData(SAVE.loadVar(loadedBodyparts[slot], "data", {}))
 		giveBodypart(bodypart, false)
 	

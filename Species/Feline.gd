@@ -7,7 +7,7 @@ func getVisibleName():
 	return "Feline"
 
 func getDefaultLegs(_gender):
-	return "felineleg"
+	return "digilegs"
 
 func getDefaultTail(_gender):
 	return "felinetail"
@@ -22,7 +22,7 @@ func getDefaultHead(_gender):
 	return "felinehead"
 
 func getDefaultArms(_gender):
-	return "felinearms"
+	return "anthroarms"
 
 func getDefaultEars(_gender):
 	return "felineears"

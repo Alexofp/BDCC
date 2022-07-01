@@ -20,7 +20,7 @@ func getVisibleDescription():
 	return "Not implemented, Let the developer know"
 
 func getDefaultLegs(_gender):
-	return "felineleg"
+	return "plantilegs"
 
 func getDefaultBreasts(_gender):
 	if(_gender in [Gender.Male]):
@@ -35,13 +35,13 @@ func getDefaultTail(_gender):
 	return null
 
 func getDefaultBody(_gender):
-	return "humanbody"
+	return "anthrobody"
 
 func getDefaultHead(_gender):
 	return "humanhead"
 	
 func getDefaultArms(_gender):
-	return "humanarms"
+	return "anthroarms"
 
 func getDefaultEars(_gender):
 	return "felineears"

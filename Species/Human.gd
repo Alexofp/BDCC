@@ -7,7 +7,7 @@ func getVisibleName():
 	return "Human"
 
 func getDefaultLegs(_gender):
-	return "humanleg"
+	return "plantilegs"
 
 func isPlayable():
 	return true

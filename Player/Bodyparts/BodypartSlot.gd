@@ -31,3 +31,17 @@ static func isEssential(slot):
 		return false
 	
 	return true
+
+static func findReplacement(slot, oldvalue):
+	if(slot == Body):
+		return "anthrobody"
+	if(slot == Arms):
+		return "anthroarms"
+	if(slot == Legs):
+		if(oldvalue in ["felineleg", "canineleg", "dragonleg"]):
+			return "digilegs"
+		if(oldvalue in ["humanleg"]):
+			return "plantilegs"
+		return "plantilegs"
+	
+	return null

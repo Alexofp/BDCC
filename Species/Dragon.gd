@@ -7,7 +7,7 @@ func getVisibleName():
 	return "Dragon"
 
 func getDefaultLegs(_gender):
-	return "dragonleg"
+	return "digilegs"
 
 func getDefaultTail(_gender):
 	return "dragontail"
@@ -19,7 +19,7 @@ func getVisibleDescription():
 	return "They roar and stuff"
 
 func getDefaultArms(_gender):
-	return "dragonarms"
+	return "anthroarms"
 
 func getDefaultHorns(_gender):
 	return "dragonhorns"
