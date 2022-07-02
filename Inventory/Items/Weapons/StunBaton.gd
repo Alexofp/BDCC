@@ -35,3 +35,6 @@ func loadData(data):
 
 func getAttacks():
 	return ["StunBatonPCAttack"]
+
+func getTags():
+	return [ItemTag.Illegal]

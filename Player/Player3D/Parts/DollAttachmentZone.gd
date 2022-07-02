@@ -3,6 +3,7 @@ class_name DollAttachmentZone
 
 export(String) var zoneName = ""
 var savedScenes = {}
+var temporaryScenes = []
 
 func setProxy(attachmentProxy):
 	startTransform = attachmentProxy.transform
@@ -33,3 +34,14 @@ func setScenes(scenes):
 	for sceneToDelete in shouldDelteScenes:
 		savedScenes[sceneToDelete].queue_free()
 		savedScenes.erase(sceneToDelete)
+
+func addTemporaryScene(scene):
+	var sceneOBJ = GlobalRegistry.instanceCached(scene)
+	add_child(sceneOBJ)
+	temporaryScenes.append(sceneOBJ)
+
+func clearTemporaryScenes():
+	for scene in temporaryScenes:
+		scene.queue_free()
+	temporaryScenes.clear()
+	

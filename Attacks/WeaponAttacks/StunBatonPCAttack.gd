@@ -51,7 +51,7 @@ func getRequirements():
 	return [["freearms"]]
 
 func getAttackSoloAnimation():
-	return "punch"
+	return "stunbaton"
 
 func getExperience():
 	return [[Skill.Combat, 5]]

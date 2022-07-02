@@ -45,6 +45,7 @@ func playAnimation(animID, _args = {}):
 		state_machine.travel("Bite")
 	elif(animID == "block"):
 		state_machine.travel("Block")
+		doll.setTemporaryState("hands", "fists")
 	elif(animID == "dodge"):
 		state_machine.travel("Dodge")
 	elif(animID == "hurt"):
@@ -53,6 +54,15 @@ func playAnimation(animID, _args = {}):
 		state_machine.travel("Kick")
 	elif(animID == "punch"):
 		state_machine.travel("Punch")
+		doll.setTemporaryState("hands", "fists")
+	elif(animID == "stunbaton"):
+		state_machine.travel("WeaponSwing")
+		doll.attachTemporaryUnriggedPart("hand.R", "res://Inventory/UnriggedModels/StunBaton/StunBaton.tscn")
+		doll.setTemporaryState("hands", "fists")
+	elif(animID == "shiv"):
+		state_machine.travel("WeaponShiv")
+		doll.attachTemporaryUnriggedPart("hand.R", "res://Inventory/UnriggedModels/Shiv/Shiv.tscn")
+		doll.setTemporaryState("hands", "fists")
 	elif(animID == "shove"):
 		state_machine.travel("Shove")
 	else:

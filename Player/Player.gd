@@ -143,16 +143,24 @@ func _getAttacks():
 	
 	attacks.append_array(skillsHolder.getPerkAttacks())
 	
+	var uniqueItemAttacks = {}
+	
 	for item in getInventory().getItems():
 		var itemAttacks = item.getAttacks()
 		if(itemAttacks == null):
 			continue
 		for attackID in itemAttacks:
+			if(uniqueItemAttacks.has(item.id) && uniqueItemAttacks[item.id].has(attackID)):
+				continue
+			
 			attacks.append({
 				"attackID": attackID,
 				"itemID": item.getUniqueID(),
 				"charID": getID(),
 				})
+			if(!uniqueItemAttacks.has(item.id)):
+				uniqueItemAttacks[item.id] = []
+			uniqueItemAttacks[item.id].append(attackID)
 	
 	return attacks
 

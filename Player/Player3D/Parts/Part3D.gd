@@ -50,7 +50,6 @@ func setStateRecursive(childnode, stateID, value):
 	
 	for child in childnode.get_children():
 		setStateRecursive(child, stateID, value)
-		
 
 func setState(stateID, value):
 	if(!partPickers.has(stateID)):

@@ -7,6 +7,7 @@ var dollAttachmentZones = {}
 var hiddenPartZones = {}
 var overridenPartHidden = {}
 var savedCharacterID: String
+var temporaryState = {}
 
 var armsCuffed = false
 var legsCuffed = false
@@ -76,14 +77,39 @@ func testBody():
 func setState(stateID, value):
 	state[stateID] = value
 	
+	if(temporaryState.has(stateID)):
+		return
+	
 	for slot in parts:
 		var part = parts[slot]
 		part.setState(stateID, value)
 
-func clearState():
+func setTemporaryState(stateID, value):
+	temporaryState[stateID] = value
+	
 	for slot in parts:
 		var part = parts[slot]
-		for stateID in state:
+		part.setState(stateID, value)
+
+func clearTemporaryState():
+	for stateID in temporaryState:
+		if(state.has(stateID)):
+			for slot in parts:
+				var part = parts[slot]
+				part.setState(stateID, state[stateID])
+		else:
+			for slot in parts:
+				var part = parts[slot]
+				part.setState(stateID, "")
+	temporaryState.clear()
+
+func clearState():
+	for stateID in state:
+		if(temporaryState.has(stateID)):
+			continue
+		
+		for slot in parts:
+			var part = parts[slot]
 			part.setState(stateID, "")
 	state.clear()
 
@@ -170,8 +196,12 @@ func loadCharacter(charID):
 		var _ok = ch.connect("bodypart_changed", self, "onCharacterBodypartChanged")
 		
 func prepareCharacter(charID):
+	clearTemporaryState()
 	loadCharacter(charID)
 	clearOverrideAlpha()
+	for zone in dollAttachmentZones:
+		for attachment in dollAttachmentZones[zone]:
+			attachment.clearTemporaryScenes()
 		
 func onCharacterBodypartChanged():
 	var ch = GlobalRegistry.getCharacter(savedCharacterID)
@@ -331,6 +361,11 @@ func setUnriggedParts(scenes):
 #					attachment.setScenes(scenes[zone])
 #				else:
 #					attachment.setScenes([])
+
+func attachTemporaryUnriggedPart(zone, scene):
+	if(dollAttachmentZones.has(zone)):
+		for attachment in dollAttachmentZones[zone]:
+			attachment.addTemporaryScene(scene)
 
 func playAnimation(animName, blend = 0.1, speed = 1.0):
 	$DollSkeleton/AnimationPlayer.play(animName, blend, speed)
