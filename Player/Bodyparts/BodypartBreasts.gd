@@ -44,6 +44,8 @@ func getLewdSizeAdjective():
 		return RNG.pick(["perky", "generous", "average", "c-cup"])
 	if(size <= BreastsSize.D):
 		return RNG.pick(["curvy", "rounded", "huge", "big", "d-cup"])
+	if(size <= BreastsSize.DD):
+		return RNG.pick(["curvy", "rounded", "huge", "big", "dd-cup"])
 	if(size <= BreastsSize.E):
 		return RNG.pick(["large" , "weighty", "curvy", "heavy"])
 	if(size <= BreastsSize.F):

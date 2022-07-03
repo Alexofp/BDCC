@@ -126,7 +126,7 @@ func _run():
 
 			saynn("[say=eliza]Spread them~. Hands behind your back.[/say]")
 
-			saynn("You do as she orders, hiding your hands and exposing your needy slit for her, you don’t even think about misbehaving anymore. Eliza gets more of your arousal onto her digits, then spreading your petals and trusting two fingers inside, forcing a moan out of you.")
+			saynn("You do as she orders, hiding your hands and exposing your needy slit for her, you don’t even think about misbehaving anymore. Eliza gets more of your arousal onto her digits, then spreading your petals and thrusting two fingers inside, forcing a moan out of you.")
 
 			saynn("[say=eliza]Your brain quickly rewired itself, it wants all the pleasure it can get. And it wants to avoid pain at all costs. That’s why you’re so subby and slutty. My adorable little slut~. Say it.[/say]")
 

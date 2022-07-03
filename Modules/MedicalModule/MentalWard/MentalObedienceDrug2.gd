@@ -217,7 +217,7 @@ func _run():
 		elif(GM.pc.hasPenis()):
 			saynn("Your {pc.cock} is rock hard already, dripping pre onto the floor, you’re so turned on by what you are doing.. You’d stroke yourself to an orgasm there and now but your mind is fully consumed by the idea of being a perfect sub.")
 
-		saynn("You stick your tongue out and begin dragging it along Eliza’s beans, licking each one. Then you trust it between her toes and give the claws there a lick too. She looks down at you and smirks, her eyes clearly show lust too, her hand sneaks under her labcoat and begins squeezing and groping her own breasts.")
+		saynn("You stick your tongue out and begin dragging it along Eliza’s beans, licking each one. Then you thrust it between her toes and give the claws there a lick too. She looks down at you and smirks, her eyes clearly show lust too, her hand sneaks under her labcoat and begins squeezing and groping her own breasts.")
 
 		saynn("[say=eliza]Such a good subby pet..[/say]")
 
@@ -237,7 +237,7 @@ func _run():
 
 			saynn("[say=eliza]Well then, if you like my feet so much you may use them to get off~[/say]")
 
-			saynn("That’s all you needed to hear, you start trusting your cock between the tight opening, she starts rubbing her toes against the tip of your {pc.cock} while you do that. It feels so good. You can’t stop pleasuring yourself, you basically hump her feet, moaning and squirming, your cock already throbbing hard.")
+			saynn("That’s all you needed to hear, you start thrusting your cock between the tight opening, she starts rubbing her toes against the tip of your {pc.cock} while you do that. It feels so good. You can’t stop pleasuring yourself, you basically hump her feet, moaning and squirming, your cock already throbbing hard.")
 
 		# (if cock or pussy)
 		if(GM.pc.hasVagina() || GM.pc.hasPenis()):

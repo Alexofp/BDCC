@@ -53,7 +53,7 @@ func _run():
 
 		saynn("[say=tavi]Do it better.[/say]")
 
-		saynn("You gently take a hold of her leg and support it while you give each bean a good lick. Then you trust your tongue between each toe and lick there too. Blush appears on your face, it’s quite arousing. Tavi’s eyes are still mean but you can catch a subtle smirk.")
+		saynn("You gently take a hold of her leg and support it while you give each bean a good lick. Then you thrust your tongue between each toe and lick there too. Blush appears on your face, it’s quite arousing. Tavi’s eyes are still mean but you can catch a subtle smirk.")
 
 		saynn("She then pulls her leg away and pushes the second one in your face. You immediately start giving it the same treatment, gently massaging with your hands while your tongue traces around the toe pads and between the toes. Tavi’s grin widens.")
 
