@@ -914,7 +914,12 @@ func updateDoll(doll: Doll3D):
 	doll.setBallsScale(ballsScale)
 	
 	var thicknessNorm = getThickness() / 100.0
-	doll.setPregnancy(getPregnancyProgress() + min(max(thicknessNorm-0.5, -0.4)/3.0, 0.2))
+	var femNorm = getFemininity() / 100.0
+	var pregnancyAddition = 0.0
+	if(femNorm < 0.5):
+		pregnancyAddition = -0.1 * (1.0 - (femNorm * 2.0))
+	doll.setPregnancy(getPregnancyProgress() + pregnancyAddition)
+	
 	if(thicknessNorm <= 0.5):
 		doll.setButtScale(1.0 - 0.2 * (1.0 - thicknessNorm * 2))
 		doll.setThighThickness(- 0.4 * (1.0 - thicknessNorm * 2))

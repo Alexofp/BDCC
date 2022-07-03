@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://GlobalTheme.tres" type="Theme" id=1]
 [ext_resource path="res://Fonts/Titillium-Regular.otf" type="DynamicFontData" id=2]
@@ -40,12 +40,6 @@ corner_radius_bottom_left = 32
 [sub_resource type="DynamicFont" id=5]
 size = 24
 font_data = ExtResource( 2 )
-
-[sub_resource type="InputEventKey" id=7]
-physical_scancode = 67
-
-[sub_resource type="ShortCut" id=8]
-shortcut = SubResource( 7 )
 
 [sub_resource type="StyleBoxFlat" id=2]
 bg_color = Color( 0.207843, 0.133333, 0.364706, 1 )
@@ -349,7 +343,6 @@ margin_right = 600.0
 margin_bottom = 56.0
 hint_tooltip = "View the project's changelog"
 size_flags_horizontal = 3
-shortcut = SubResource( 8 )
 text = "Changelog"
 
 [node name="DevToolsScreen" type="VBoxContainer" parent="HBoxContainer"]
