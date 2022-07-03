@@ -6,6 +6,7 @@
 margin_right = 157.0
 margin_bottom = 26.0
 size_flags_horizontal = 3
+shortcut_in_tooltip = false
 text = "Meow"
 clip_text = true
 script = ExtResource( 1 )

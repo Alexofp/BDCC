@@ -20,53 +20,41 @@ bg_color = Color( 0.207843, 0.133333, 0.364706, 1 )
 corner_radius_top_right = 16
 corner_radius_bottom_right = 16
 
-[sub_resource type="InputEventKey" id=15]
-scancode = 16777248
-physical_scancode = 16777248
-unicode = 16777248
+[sub_resource type="InputEventAction" id=21]
+action = "gameui_quicksave"
 
 [sub_resource type="ShortCut" id=16]
-shortcut = SubResource( 15 )
+shortcut = SubResource( 21 )
 
-[sub_resource type="InputEventKey" id=17]
-scancode = 16777252
-physical_scancode = 16777252
-unicode = 16777252
+[sub_resource type="InputEventAction" id=22]
+action = "gameui_quickload"
 
 [sub_resource type="ShortCut" id=18]
-shortcut = SubResource( 17 )
+shortcut = SubResource( 22 )
 
-[sub_resource type="InputEventKey" id=9]
-scancode = 88
-physical_scancode = 88
-unicode = 88
+[sub_resource type="InputEventAction" id=23]
+action = "gameui_skills"
 
 [sub_resource type="ShortCut" id=10]
-shortcut = SubResource( 9 )
+shortcut = SubResource( 23 )
 
-[sub_resource type="InputEventKey" id=7]
-scancode = 67
-physical_scancode = 67
-unicode = 67
+[sub_resource type="InputEventAction" id=24]
+action = "gameui_menu"
 
 [sub_resource type="ShortCut" id=8]
-shortcut = SubResource( 7 )
+shortcut = SubResource( 24 )
 
-[sub_resource type="InputEventKey" id=11]
-scancode = 90
-physical_scancode = 90
-unicode = 90
+[sub_resource type="InputEventAction" id=19]
+action = "gameui_prevpage"
 
 [sub_resource type="ShortCut" id=12]
-shortcut = SubResource( 11 )
+shortcut = SubResource( 19 )
 
-[sub_resource type="InputEventKey" id=13]
-scancode = 86
-physical_scancode = 86
-unicode = 86
+[sub_resource type="InputEventAction" id=20]
+action = "gameui_nextpage"
 
 [sub_resource type="ShortCut" id=14]
-shortcut = SubResource( 13 )
+shortcut = SubResource( 20 )
 
 [sub_resource type="StyleBoxFlat" id=6]
 bg_color = Color( 0.207843, 0.133333, 0.364706, 1 )
@@ -153,8 +141,9 @@ __meta__ = {
 [node name="SaveButton" type="Button" parent="HBoxContainer/Panel2/MarginContainer/VBoxContainer/HBoxContainer2"]
 margin_right = 116.0
 margin_bottom = 26.0
-hint_tooltip = "Quick save"
+hint_tooltip = "Quick save (F5)"
 size_flags_horizontal = 3
+shortcut_in_tooltip = false
 shortcut = SubResource( 16 )
 text = "Q.save"
 
@@ -162,8 +151,9 @@ text = "Q.save"
 margin_left = 120.0
 margin_right = 236.0
 margin_bottom = 26.0
-hint_tooltip = "Quick load"
+hint_tooltip = "Quick load (F9)"
 size_flags_horizontal = 3
+shortcut_in_tooltip = false
 shortcut = SubResource( 18 )
 text = "Q.load"
 
@@ -178,8 +168,9 @@ __meta__ = {
 [node name="SkillsButton" type="Button" parent="HBoxContainer/Panel2/MarginContainer/VBoxContainer/HBoxContainer3"]
 margin_right = 116.0
 margin_bottom = 26.0
-hint_tooltip = "Spend the stat points and look at your skills"
+hint_tooltip = "Spend the stat points and look at your skills (X)"
 size_flags_horizontal = 3
+shortcut_in_tooltip = false
 shortcut = SubResource( 10 )
 text = "Skills"
 
@@ -187,8 +178,9 @@ text = "Skills"
 margin_left = 120.0
 margin_right = 236.0
 margin_bottom = 26.0
-hint_tooltip = "Open the menu"
+hint_tooltip = "Open the menu (C)"
 size_flags_horizontal = 3
+shortcut_in_tooltip = false
 shortcut = SubResource( 8 )
 text = "Menu"
 
@@ -200,8 +192,9 @@ margin_bottom = 696.0
 [node name="PrevPageButton" type="Button" parent="HBoxContainer/Panel2/MarginContainer/VBoxContainer/HBoxContainer"]
 margin_right = 116.0
 margin_bottom = 26.0
-hint_tooltip = "Flip to the previous page of options"
+hint_tooltip = "Flip to the previous page of options (Z)"
 size_flags_horizontal = 3
+shortcut_in_tooltip = false
 shortcut = SubResource( 12 )
 text = "<- Page"
 __meta__ = {
@@ -212,8 +205,9 @@ __meta__ = {
 margin_left = 120.0
 margin_right = 236.0
 margin_bottom = 26.0
-hint_tooltip = "Flip to the next page of options"
+hint_tooltip = "Flip to the next page of options (V)"
 size_flags_horizontal = 3
+shortcut_in_tooltip = false
 shortcut = SubResource( 14 )
 text = "Page ->"
 __meta__ = {
