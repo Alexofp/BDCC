@@ -9,6 +9,11 @@ size_flags_horizontal = 3
 text = "Meow"
 clip_text = true
 script = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+
+[node name="KeyLabel" type="Label" parent="."]
+self_modulate = Color( 1, 1, 1, 0.317647 )
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_right = 8.0
+text = "1"
+valign = 1

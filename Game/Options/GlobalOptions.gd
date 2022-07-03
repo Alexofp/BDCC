@@ -14,6 +14,7 @@ var uiScaleMultiplier = 1.0
 
 var showSpeakerName = false
 var fontSize = "normal"
+var showShortcuts = true
 
 func resetToDefaults():
 	fetchNewRelease = true
@@ -25,6 +26,7 @@ func resetToDefaults():
 	uiScaleMultiplier = 1.0
 	showSpeakerName = false
 	fontSize = "normal"
+	showShortcuts = true
 	
 	enabledContent.clear()
 	for contentType in ContentType.getAll():
@@ -64,6 +66,9 @@ func shouldShowSpeakerName():
 
 func getFontSize():
 	return fontSize
+
+func shouldShowShortcuts():
+	return showShortcuts
 
 func getChangeableOptions():
 	var settings = [
@@ -192,6 +197,13 @@ func getChangeableOptions():
 						["big", "Big"],
 					],
 				},
+				{
+					"name": "Show shortcuts",
+					"description": "Show the shortcut key on the button",
+					"id": "showShortcuts",
+					"type": "checkbox",
+					"value": showShortcuts,
+				},
 			],
 		}
 	]
@@ -239,6 +251,8 @@ func applyOption(categoryID, optionID, value):
 			showSpeakerName = value
 		if(optionID == "fontSize"):
 			fontSize = value
+		if(optionID == "showShortcuts"):
+			showShortcuts = value
 			
 	if(categoryID == "enabledContent"):
 		enabledContent[optionID] = value
@@ -263,6 +277,7 @@ func saveData():
 		"uiScaleMultiplier": uiScaleMultiplier,
 		"showSpeakerName": showSpeakerName,
 		"fontSize": fontSize,
+		"showShortcuts": showShortcuts,
 	}
 	
 	return data
@@ -278,6 +293,7 @@ func loadData(data):
 	uiScaleMultiplier = loadVar(data, "uiScaleMultiplier", 1.0)
 	showSpeakerName = loadVar(data, "showSpeakerName", false)
 	fontSize = loadVar(data, "fontSize", "normal")
+	showShortcuts = loadVar(data, "showShortcuts", true)
 
 func saveToFile():
 	var saveData = saveData()

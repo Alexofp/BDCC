@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://GlobalTheme.tres" type="Theme" id=1]
 [ext_resource path="res://Game/TooltipDisplay.tscn" type="PackedScene" id=2]
@@ -19,6 +19,54 @@
 bg_color = Color( 0.207843, 0.133333, 0.364706, 1 )
 corner_radius_top_right = 16
 corner_radius_bottom_right = 16
+
+[sub_resource type="InputEventKey" id=15]
+scancode = 16777248
+physical_scancode = 16777248
+unicode = 16777248
+
+[sub_resource type="ShortCut" id=16]
+shortcut = SubResource( 15 )
+
+[sub_resource type="InputEventKey" id=17]
+scancode = 16777252
+physical_scancode = 16777252
+unicode = 16777252
+
+[sub_resource type="ShortCut" id=18]
+shortcut = SubResource( 17 )
+
+[sub_resource type="InputEventKey" id=9]
+scancode = 88
+physical_scancode = 88
+unicode = 88
+
+[sub_resource type="ShortCut" id=10]
+shortcut = SubResource( 9 )
+
+[sub_resource type="InputEventKey" id=7]
+scancode = 67
+physical_scancode = 67
+unicode = 67
+
+[sub_resource type="ShortCut" id=8]
+shortcut = SubResource( 7 )
+
+[sub_resource type="InputEventKey" id=11]
+scancode = 90
+physical_scancode = 90
+unicode = 90
+
+[sub_resource type="ShortCut" id=12]
+shortcut = SubResource( 11 )
+
+[sub_resource type="InputEventKey" id=13]
+scancode = 86
+physical_scancode = 86
+unicode = 86
+
+[sub_resource type="ShortCut" id=14]
+shortcut = SubResource( 13 )
 
 [sub_resource type="StyleBoxFlat" id=6]
 bg_color = Color( 0.207843, 0.133333, 0.364706, 1 )
@@ -107,6 +155,7 @@ margin_right = 116.0
 margin_bottom = 26.0
 hint_tooltip = "Quick save"
 size_flags_horizontal = 3
+shortcut = SubResource( 16 )
 text = "Q.save"
 
 [node name="LoadButton" type="Button" parent="HBoxContainer/Panel2/MarginContainer/VBoxContainer/HBoxContainer2"]
@@ -115,6 +164,7 @@ margin_right = 236.0
 margin_bottom = 26.0
 hint_tooltip = "Quick load"
 size_flags_horizontal = 3
+shortcut = SubResource( 18 )
 text = "Q.load"
 
 [node name="HBoxContainer3" type="HBoxContainer" parent="HBoxContainer/Panel2/MarginContainer/VBoxContainer"]
@@ -130,6 +180,7 @@ margin_right = 116.0
 margin_bottom = 26.0
 hint_tooltip = "Spend the stat points and look at your skills"
 size_flags_horizontal = 3
+shortcut = SubResource( 10 )
 text = "Skills"
 
 [node name="MenuButton" type="Button" parent="HBoxContainer/Panel2/MarginContainer/VBoxContainer/HBoxContainer3"]
@@ -138,6 +189,7 @@ margin_right = 236.0
 margin_bottom = 26.0
 hint_tooltip = "Open the menu"
 size_flags_horizontal = 3
+shortcut = SubResource( 8 )
 text = "Menu"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/Panel2/MarginContainer/VBoxContainer"]
@@ -150,6 +202,7 @@ margin_right = 116.0
 margin_bottom = 26.0
 hint_tooltip = "Flip to the previous page of options"
 size_flags_horizontal = 3
+shortcut = SubResource( 12 )
 text = "<- Page"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -161,6 +214,7 @@ margin_right = 236.0
 margin_bottom = 26.0
 hint_tooltip = "Flip to the next page of options"
 size_flags_horizontal = 3
+shortcut = SubResource( 14 )
 text = "Page ->"
 __meta__ = {
 "_edit_use_anchors_": false

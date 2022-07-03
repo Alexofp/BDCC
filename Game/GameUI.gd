@@ -45,10 +45,21 @@ func _ready():
 	gameParser = GameParser.new()
 	sayParser = SayParser.new()
 	
+	var shortCutKeys = [
+		49, 50, 51, 52, 53,
+		81, 87, 69, 82, 84,
+		65, 83, 68, 70, 71,
+		#90, 88, 67, 86, 66,
+	]
+	var _i = 0
 	for n in buttonsCountPerPage:
 		var newbutton = optionButtonScene.instance()
 		buttons.append(newbutton)
 		optionButtonsContainer.add_child(newbutton)
+		
+		if(_i < shortCutKeys.size()):
+			newbutton.setShortcutPhysicalScancode(shortCutKeys[_i])
+		_i += 1
 		
 	updateButtons()
 	
