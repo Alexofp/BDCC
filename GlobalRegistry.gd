@@ -33,6 +33,7 @@ var stageScenes: Dictionary = {}
 var lustActions: Dictionary = {}
 var defaultLustActions: Array = []
 var orgasmLustActions: Array = []
+var lootLists: Dictionary = {}
 
 var bodypartStorageNode
 
@@ -64,6 +65,8 @@ func _ready():
 	registerItemFolder("res://Inventory/Items/Weapons/")
 	
 	registerBuffFolder("res://Inventory/Buffs/")
+	
+	registerLootListFolder("res://Inventory/LootLists/")
 	
 	registerStat("res://Skills/Stat/AgilityStat.gd")
 	registerStat("res://Skills/Stat/StrengthStat.gd")
@@ -712,3 +715,35 @@ func getDefaultLustActions():
 
 func getOrgasmLustActions():
 	return orgasmLustActions
+
+
+func registerLootList(path: String):
+	var item = load(path)
+	var itemObject = item.new()
+	for id in itemObject.handlesIds:
+		if(!lootLists.has(id)):
+			lootLists[id] = []
+		lootLists[id].append(itemObject)
+
+func registerLootListFolder(folder: String):
+	var dir = Directory.new()
+	if dir.open(folder) == OK:
+		dir.list_dir_begin()
+		var file_name = dir.get_next()
+		while file_name != "":
+			if dir.current_is_dir():
+				pass
+				#print("Found directory: " + file_name)
+			else:
+				if(file_name.get_extension() == "gd"):
+					var full_path = folder.plus_file(file_name)
+					#print("Registered loot list: " + full_path)
+					registerLootList(full_path)
+			file_name = dir.get_next()
+	else:
+		printerr("An error occurred when trying to access the path "+folder)
+		
+func getLootLists(id: String):
+	if(!lootLists.has(id)):
+		return []
+	return lootLists[id]

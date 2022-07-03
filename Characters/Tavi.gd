@@ -79,3 +79,5 @@ func createBodyparts():
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("vagina"))
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("felinetail"))
 
+func getLootTable(_battleName):
+	return InmateLoot.new()

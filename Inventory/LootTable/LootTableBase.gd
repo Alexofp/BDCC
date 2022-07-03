@@ -1,6 +1,7 @@
 extends Reference
 class_name LootTableBase
 
+var id = "error"
 var loot = []
 var minCredits = 0
 var maxCredits = 0
@@ -11,13 +12,20 @@ func generateCredits():
 		return 0
 	return RNG.randi_range(minCredits, maxCredits)
 
-func getPossibleLoot():
-	return loot
+func getPossibleLoot(characterID, battleName):
+	var resultLoot = loot
+	var lootLists = GlobalRegistry.getLootLists(id)
+	for lootList in lootLists:
+		var newLoot = lootList.getLoot(id, characterID, battleName)
+		if(newLoot is Array):
+			resultLoot.append_array(newLoot)
+	
+	return resultLoot
 
-func generate():
+func generate(characterID, battleName):
 	var items = []
 	
-	for lootLine in getPossibleLoot():
+	for lootLine in getPossibleLoot(characterID, battleName):
 		var chance = lootLine[0]
 		var possibleItems = lootLine[1]
 		

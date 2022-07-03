@@ -572,7 +572,7 @@ func getLootTable(_battleName):
 
 func getLoot(_battleName):
 	var lootTable = getLootTable(_battleName)
-	var generatedLoot = lootTable.generate()
+	var generatedLoot = lootTable.generate(getID(), _battleName)
 	
 	var resultCredits = 0
 	

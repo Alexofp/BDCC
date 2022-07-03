@@ -2,6 +2,7 @@ extends LootTableBase
 class_name GuardLoot
 
 func _init():
+	id = "guard"
 	loot = [
 		[2, ["lube"]],
 		[7, ["painkillers"]],

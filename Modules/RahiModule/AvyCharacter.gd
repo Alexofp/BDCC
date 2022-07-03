@@ -99,3 +99,6 @@ func createBodyparts():
 	penis.ballsScale = 1
 	giveBodypartUnlessSame(penis)
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("caninetail"))
+
+func getLootTable(_battleName):
+	return InmateLoot.new()
