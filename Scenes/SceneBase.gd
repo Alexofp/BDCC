@@ -46,6 +46,8 @@ func initScene(args = []):
 	clearFightCharacter()
 	_initScene(args)
 	_reactInit()
+	
+	checkSceneEnded()
 
 func run():
 	GM.ui.clearText()

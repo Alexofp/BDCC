@@ -111,6 +111,7 @@ func _ready():
 	registerModule("res://Modules/PunishmentsModule/Punishments_module.gd")
 	registerModule("res://Modules/CellblockModule/Cellblock_module.gd")
 	registerModule("res://Modules/MedicalModule/Medical_module.gd")
+	registerModule("res://Modules/GymModule/module.gd")
 	
 # The point is that it will still generate unique ids even after saving/loading
 func generateUniqueID():

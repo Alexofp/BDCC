@@ -1,0 +1,44 @@
+extends "res://Scenes/SceneBase.gd"
+
+func _init():
+	sceneID = "YogaScene"
+
+func _reactInit():
+	if(GM.ES.trigger(Trigger.ApproachedYogaMats)):
+		endScene()
+		return
+
+func _run():
+
+	if(state == ""):
+		saynn("You approach the little carpets that are laid down on the floor. Nothing complicated about them but at least they look soft enough. Much better deal than doing yoga on the cold floor.")
+
+		saynn("You step onto one of the unoccupied mats and prepare yourself.")
+
+		addButton("Simple poses", "Train your agility a bit", "simple_poses")
+		addButton("Leave", "You don't feel like doing yoga", "endthescene")
+
+	if(state == "simple_poses"):
+		saynn("No need to do anything complicated, sometimes simple is all you need.")
+
+		saynn("You stand straight with your feet together and arms at your side. You make sure to ground your feet completely, yoga requires full body awareness and balance. Then you straighten your {pc.thick} legs and tense up your thigh muscles. As you inhale, you arch your back and extend your arms high up and then out.")
+
+		saynn("Open chest, open heart.. you feel your whole being engaged. Even though it might look like you are just.. standing, all of your muscles are working hard to keep you at balance. After some time like that, you release your arms and instead position behind your back, palms connected, as you hold this new pose, again feeling your thighs and back working hard. So liberating.")
+
+		saynn("You slowly exhale and let your body relax. That felt good.")
+		addButton("Leave", "Nice", "endthescene")
+
+
+func _react(_action: String, _args):
+	if(_action == "simple_poses"):
+		processTime(60*5)
+		#GM.pc.addStamina(-40)
+		# ADD SOME BUFF HERE
+		GM.pc.updateNonBattleEffects()
+	
+	if(_action == "endthescene"):
+		endScene()
+		return
+
+	setState(_action)
+

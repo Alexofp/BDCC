@@ -12,4 +12,6 @@ enum {
 	StocksEscape,
 	StocksEvent,
 	StocksWillingSex,
+	ApproachedYogaMats,
+	ApproachedWeightsBench,
 }
