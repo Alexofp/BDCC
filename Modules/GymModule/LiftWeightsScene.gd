@@ -3,6 +3,11 @@ extends "res://Scenes/SceneBase.gd"
 func _init():
 	sceneID = "LiftWeightsScene"
 
+func _reactInit():
+	if(GM.ES.trigger(Trigger.ApproachedWeightsBench)):
+		endScene()
+		return
+
 
 func _run():
 

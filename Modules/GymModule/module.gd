@@ -1,6 +1,8 @@
 extends Module
 class_name GymModule
 
+const Gym_RishaLastDayGotPaid = "Gym_RishaLastDayGotPaid"
+
 func _init():
 	id = "GymModule"
 	author = "Rahi"
@@ -9,6 +11,7 @@ func _init():
 		"res://Modules/GymModule/LiftWeightsScene.gd",
 		"res://Modules/GymModule/YogaScene.gd",
 		"res://Modules/GymModule/RahiYogaScene.gd",
+		"res://Modules/GymModule/RishaGymScene.gd",
 		]
 	characters = []
 	items = []
@@ -16,6 +19,7 @@ func _init():
 		"res://Modules/GymModule/LiftWeightsEvent.gd",
 		"res://Modules/GymModule/YogaEvent.gd",
 		"res://Modules/GymModule/RahiYogaEvent.gd",
+		"res://Modules/GymModule/RishaGymEvent.gd",
 	]
 	quests = [
 	]

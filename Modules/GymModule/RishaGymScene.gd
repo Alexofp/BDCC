@@ -1,0 +1,420 @@
+extends "res://Scenes/SceneBase.gd"
+
+var gotPayed = false
+
+func _init():
+	sceneID = "RishaGymScene"
+
+func _run():
+	if(state == ""):
+		addCharacter("risha")
+
+	if(state == ""):
+		saynn("It’s pretty late so this area is not that crowded. But, you see somebody that you didn’t expect to see here. Risha, the lynx, is sitting on one of the benches and removing pieces of her armor. You decide to approach her and ask what’s up.")
+
+		saynn("[say=pc]What are you doing?[/say]")
+
+		saynn("[say=risha]What does it look like I’m doing? I’m here to lift some heavy ass weights. Gotta keep the gains somehow.[/say]")
+
+		saynn("As Risha strips her forearm and shoulder protectors, you do indeed notice the curves of her toned muscles covered by bright cyan fur. The girl’s been working out quite regularly.")
+
+		saynn("[say=pc]Aren’t you afraid that somebody will steal your armor?[/say]")
+
+		saynn("[say=risha]My riot gear? You know, the last fucktoy that even touched it got his neck fried. I’d honestly like to see you try, you would make a great show for all the cameras. AlphaCorp isn’t fucking around with their security.[/say]")
+
+		saynn("She finishes stripping off her arms. Then she moves on to her chest, taking off the waist and chest plates. As she strips you realize that she has absolutely nothing under her armor. She casually exposes her huge breasts with bright red perky nipples and stretches a bit like all cats do.")
+
+		saynn("[say=risha]Wearing it feels like being in an oven and it weighs a ton, fuck me.[/say]")
+
+		saynn("Risha carefully places all the pieces nearby and strips further, removing her protected boots and armored thigh pieces. She also removes the crotch protector, revealing her feline barbed cock and a red moist cunt hidden behind her ballsack, she is a herm. All the while still being casual about it. She catches your concerned look.")
+
+		saynn("[say=risha]What? Never seen a cat dick before or what?[/say]")
+
+		saynn("[say=pc]Uh. Nothing.[/say]")
+
+		saynn("[say=risha]How about you stop staring at my cock and spot me instead. It’s the end of my shift, I can do whatever I fucking want.[/say]")
+
+		addButton("Sure", "Why not", "sure")
+		addButton("Nah", "You don’t feel like spotting for a naked guard lynx", "nah")
+
+	if(state == "nah"):
+		saynn("[say=pc]Nah, you better find someone else.[/say]")
+
+		saynn("[say=risha]Well then don’t fucking waste my time, fucktoy[/say]")
+
+		saynn("Risha lies onto the bend and starts lifting heavy weights. She is growling as she quickly picks up the pace and starts to consistently push her body. You stare at her and her stored equipment a little longer and decide to leave her be.")
+
+		# (scene ends)
+		addButton("Continue", "Time to go", "endthescene")
+
+	if(state == "sure"):
+		saynn("You shrug and stand behind the bench so you can watch over Risha.")
+
+		saynn("[say=pc]You’re putting a lot of trust into someone you don’t know.[/say]")
+
+		saynn("Completely naked lynx quickly stretches some more and then takes place on the bench. She grabs the heavy bar, lifts it from its resting position and starts doing barbell bench presses.")
+
+		saynn("[say=risha]Oh yeah? You inmates are all the same, either want to stick your limp dicks into someone else or be railed so hard you can’t walk the next day.[/say]")
+
+		saynn("[say=pc]Really, now? And what do you want?[/say]")
+
+		saynn("Risha starts really pushing herself, panting and growling slightly as she works the barbell at a steady pace. Due to her fur she is not really sweating but you do catch her strong scent.")
+
+		saynn("[say=risha]Me? I’m just here to have fun. I will take the job of handling fucktoys like you over dying somewhere out there on a war for some fucker that has too much money.[/say]")
+
+		saynn("[say=pc]Huh. What about the captain, he seems to like having you around. Isn’t he like that.[/say]")
+
+		saynn("Risha does some more reps until she is completely out of breath. And even then, she focuses on the lifting weights and growls louder as she pushes herself past the point of exhaustion. You seem to notice her barbed cock getting harder as she does that, it leaks precum and throbs each time she lifts the bar. Finally, she stops and, with your help, puts the bar back into its resting place. Risha sits down and quickly catches her breath.")
+
+		saynn("[say=risha]Fuck yeah, I’m so fucking ripped! The captain? I don’t ask stupid questions, I just do what’s told. Hey, do you wanna get paid? I have a huge problem that needs to be taken care of.[/say]")
+
+		saynn("You move from behind the bench and approach the sitting Risha. Your gaze gets stolen by her erect cock, even the barbs look like they are inflated with blood.")
+
+		saynn("[say=pc]Yeah, one huge problem. With a cock.[/say]")
+
+		saynn("[say=risha]Very funny, slut. 5 credits.[/say]")
+
+		saynn("You look around and decide. The place is empty, everyone is either sleeping or doing something else.")
+
+		addButton("Nah", "She can go fuck herself", "nah1")
+		addButtonWithChecks("Offer pussy", "Be bred by Risha", "offer_pussy", [], [ButtonChecks.HasReachableVagina])
+		addButton("Offer ass", "Be fucked in the ass by Risha", "offer_ass")
+		addButton("Offer handjob", "Make her cum while being a bit of a brat", "offer_handjob")
+
+	if(state == "nah1"):
+		saynn("[say=pc]I think you can go fuck yourself for 5 credits.[/say]")
+
+		saynn("Risha chuckles.")
+
+		saynn("[say=risha]Everyone has a price, sweetie. You’re no angel, no one is. You can fuck off though, I need some alone time, can’t you see.[/say]")
+
+		saynn("Well, you decide that you don’t need to watch this show. You shrug and leave the cat alone.")
+
+		# (scene ends)
+		addButton("Continue", "Time to go", "endthescene")
+
+	if(state == "offer_ass"):
+		saynn("You turn and playfully wiggle your {pc.thick} rear for the lynx. You look behind your shoulder and see Risha checking out your ass. She seems to be very pent up, already massaging her feline balls at the view.")
+
+		saynn("[say=pc]How’s this for a solution.[/say]")
+
+		saynn("[say=risha]Good enough.[/say]")
+
+		saynn("Suddenly she grabs you by the arms and switches places, bending you over the bench. You don’t even find time to struggle before she masterfully shoves your head under the metal bar while chaining your arms to its heavy rings, creating a makeshift pillory. The bench itself prevents you from closing your legs, you are quickly made helpless!")
+
+		# (if has clothing)
+		if(!GM.pc.isFullyNaked()):
+			saynn("Risha {pc.undressMessageS}, leaving you butt-naked.")
+
+		saynn("[say=pc]H-hey..[/say]")
+
+		saynn("She then lands a smack on your {pc.masc} butt and spreads the cheeks open, catching the view of your {pc.analStretch} anal ring clenching from the pain. She hovers over your ass and drools over your star.")
+
+		saynn("[say=risha]Hope you’re ready for me, slut. I just need to take the edge off.[/say]")
+
+		saynn("Well she isn’t wrong technically, you are doing this for the credits. Risha doesn’t waste time for too long, she guides her barbed feline cock and presses it against your tailhole. You arch your back and struggle against the metal bar as the cat’s soft spikes are brushing against your soft {pc.thick} butt.")
+
+		# (if has cock)
+		if(GM.pc.hasPenis()):
+			saynn("Even though you are stuck in quite an exposed position and are about to be taken advantage of, you feel kinda excited, your {pc.cock} is getting more erect.")
+
+		saynn("Risha spits on her cock and, without much more preparation, buckles her hips forward, forcing her barbed member to penetrate your {pc.analStretch} hole and stretch it open enough to shove the head inside. You arch your back more and let out a moan as she roughly pushes her cock deeper, her spikes raking at your soft inner walls.")
+
+		# (if has cock)
+		if(GM.pc.hasPenis()):
+			saynn("You feel her cock pushing at your sensitive spot, squeezing transparent fluids out of your cock.")
+
+		saynn("[say=pc]Fuck.. So rough.[/say]")
+
+		saynn("[say=risha]See, you, inmates, are so easy to handle.[/say]")
+
+		saynn("Risha shoves her cock as deep as your {pc.masc} ass allows before retracting just enough to not pull out completely. She gives your butt another smack, causing you to moan and clench your tailhole, before thrusting deep again, easily pushing through your attempts at resistance. Risha quickly picks up the pace, ramming her cock down your ass before almost pulling it out. You feel the discomfort slowly fading away, being replaced by a very pleasurable feeling, you part your lips and begin moaning out loud.")
+
+		saynn("[say=risha]Oh yeah, I know you love it. Each whore of this station was on this cock, zero complaints so far.[/say]")
+
+		# (if has cock)
+		if(GM.pc.hasPenis()):
+			saynn("Your {pc.cock} is leaking more and more precum mixed with your prostate fluids, the way her thick shaft rubs your p-spot sends shivers down your spine and makes your member throb. You feel like you won’t be able to endure this for long, after your hard prostate is squeezed it only gets filled more the next second, you feel the peak closing in..")
+
+		# (if has vagina)
+		if(GM.pc.hasVagina()):
+			saynn("Even though your other bits aren’t being used, your needy pussy is drenched with juices! Risha’s cock is so thick it rubs your pleasure spot through the inner wall, making it feel very good. Can you really get off to anal sex..")
+
+		saynn("You feel like you are about to cum, your anal ring is getting tighter around the cat’s cock and she feels it. She only increases her pace, basically ravaging your stretched fuckhole, using her precum and saliva as lube.")
+
+		saynn("[say=risha]You're gonna take it all, you hear?[/say]")
+
+		saynn("Your eyes begin to roll up on their own..")
+
+		addButton("Cum", "The orgasm overtakes your body", "cumAnal")
+
+	if(state == "cumAnal"):
+		saynn("You begin to trash against the restraints and make loud pleasure noises, your whole body squirms and shivers as you struggle to stay still. Though Risha’s hands hold your ass nice and tight, she keeps shoving her cock in and out even through your climax.")
+
+		# (if has cock)
+		if(GM.pc.hasPenis()):
+			saynn("Your prostate got absolutely smashed, it didn’t take long for your {pc.cock} to start leaking strong lines of {pc.cum} onto the bench and floor. She really drains you, even during your wet orgasm she pounds at your p-spot until there is nothing left in your balls.")
+
+		# (if has pussy)
+		if(GM.pc.hasVagina()):
+			saynn("Your tailhole got so much stimulation that your neglected pussy suddenly squirts juices all over the bench.")
+
+		saynn("[say=risha]Did my little fuckdoll cum already? Oh, what a shame. Now it’s my turn.[/say]")
+
+		saynn("And she wasn’t kidding, even as your inner walls try to close around her shaft, she keeps fucking your ass, thrusting slow but putting full force into each one. Eventually you begin to feel her barbs hardening, they catch onto your soft insides and scrape on them, preventing Risha from pulling out. She starts to groan, her cock throbbing and pulsating as it shoots wave after wave of hot cum down your anus! Your belly starts to look inflated as she fills you to the brim.")
+
+		saynn("Eventually you both come down from your orgasms but your body still shivers on its own. Risha’s barbs soften up so she pulls her messy cock out, leaving your used fuckhole to gape and leak cum.")
+
+		saynn("Risha quickly catches her breath and admires the view.")
+
+		# (if not pay)
+		if(!gotPayed):
+			saynn("[say=risha]You are a great fuck. But I already paid you this week, can’t have you spoiled. Sorry fucktoy~.[/say]")
+
+			saynn("[say=pc]Huh?.. H-hey..[/say]")
+
+			saynn("Risha quickly unchains you from the bar, causing you to fall onto the bench.")
+
+			saynn("[say=risha]Now go away, I’m sure some lilac will happily clean up after you.[/say]")
+
+			saynn("With nothing else to do, you quickly gather yourself and stand up, cum still leaking out of you as you awkwardly walk away. Satisfied, though.")
+
+		# (if will pay)
+		else:
+			saynn("[say=risha]You are a great fuck. There you go, you earned it.[/say]")
+
+			saynn("Risha slides a credit chip into your hand and then quickly unchains you from the bar, causing you to fall onto the bench.")
+
+			saynn("[say=risha]Now go away, I’m sure some lilac will happily clean up after you.[/say]")
+
+			saynn("With nothing else to do, you quickly gather yourself and stand up, cum still leaking out of you as you awkwardly walk away. Satisfied, though.")
+
+		# (scene ends)
+		addButton("Continue", "Time to go", "endthescene")
+
+	if(state == "offer_handjob"):
+		# (You get on her knees and start stroking her)
+
+		saynn("Five credits is still something, you lower yourself onto your knees and shift closer to the bench. Risha spreads her legs for you, offering a full view of her male and female bits. She idly strokes her feline cock while her balls sway slightly, sometimes offering glimpses of her wet cunt.")
+
+		saynn("[say=risha]That was the right choice.[/say]")
+
+		saynn("[say=pc]Why don’t you find someone to fuck you. Would give a reason for your slit.[/say]")
+
+		saynn("Risha stops stroking herself as you wrap your digits around her shaft instead and start gently sliding them along her length. You feel her barbs softly tickling your palm as you brush it over the cock’s head, such a strange feeling. Risha just leans back and enjoys you working.")
+
+		saynn("[say=risha]I didn’t exactly choose it, you know. I’m not gonna bottom for some wanna be criminal scum. I’d rather use them as my cock sock.[/say]")
+
+		saynn("[say=pc]Really now?[/say]")
+
+		saynn("You keep stroking her red meaty shaft, you digits catch some of her precum and spread it along the surface. Risha smirks while watching you, her face doesn’t really indicate how much pleasure your stroking brings. You decide to toy with her and sneak the second hand under her ballsack, your digits landing on her pussy and teasing the sensitive folds, they are so wet. Risha lets out a surprised moan.")
+
+		saynn("[say=risha]Ah. The toy is getting cheeky, huh?[/say]")
+
+		saynn("[say=pc]Just proving that you’re wrong~.[/say]")
+
+		saynn("[say=risha]Sure, slut. Just make me cum.[/say]")
+
+		saynn("Two of your digits spread her needy pussy, spawning a few strings of her juices between the petals. Then you use the third digit to prod at her pussy hole until it gives in, surprisingly easy. You other hand still slides over her shaft while the second now playfully fingers her cunt. You feel how big of an effect it has on Risha, her legs start to shift and shake slightly, she raises her chin high and lets out a few lusty moans as you pleasure her both sets of bits.")
+
+		saynn("[say=pc]I think somebody is enjoying this way too much~[/say]")
+
+		saynn("[say=risha]Shut up.. And do it faster.[/say]")
+
+		saynn("You decide to obey but not exactly. As you increase your onslaught on her cunt, you slow down your other hand, barely stroking her cock at this point. You feel her shaft throbbing and pulsing, leaking precum and begging for more attention but you only finger her cunt harder instead, searching for her g-spot and then hammering away at it, causing the lynx to start arching her back and squirming, she clearly won’t be able to resist this for long.")
+
+		addButton("Make her cum", "Send that bitch to the heavens", "make_her_cum")
+
+	if(state == "make_her_cum"):
+		# (cum in mouth, stretches mouth, covers in cum)
+
+		saynn("You stop stroking her cock completely, instead just squeezing it near the base. You can feel her veins bulging as she is being edged, her member is leaking precum profusely but she doesn’t cum. You hear her desperate moans as you finger-fuck her pussy, subtle growling can be heard too.")
+
+		saynn("[say=pc]Why aren’t you begging, slut~[/say]")
+
+		saynn("Suddenly Risha leans forward and puts her hands around your head, the sharp discomfort makes you whine and open your mouth enough for her to pull your head onto her shaft, making you part your lips and then shoving her throbbing cock deep down your throat. She cries out a groan as your throat closes around her dick, quickly sending the lynx over the edge.")
+
+		saynn("[say=risha]Grr.. I told you to shut up, fucktoy[/say]")
+
+		saynn("Your fingers are still lodged into her cunt, you feel her pussy clenching and squirting juices all over your hand as her cock starts shooting many waves of hot cum down your throat. The barbs make sure pulling out at this moment would be a very painful thing so you sit still and allow the dickgirl to force feed you her semen. This orgasm seems very powerful for her, she is groaning and squirming a lot, moans escape one after another until you drain her balls completely.")
+
+		saynn("Her barbs finally soften up, allowing you to escape her grasp. As you pull away from the cock, the last strings of cum end up stuffing your mouth and on your face, leaving quite a lovely mess.")
+
+		saynn("[say=pc]Bitch..[/say]")
+
+		saynn("Risha leans down to you, still panting slightly.")
+
+		saynn("[say=risha]Wanna repeat that?[/say]")
+
+		saynn("You notice her cock still being mostly hard and twitching so you shake your head. Her cum slowly oozes down your cheeks and drips from the chin.")
+
+		# (if no pay)
+		if(!gotPayed):
+			saynn("[say=risha]That’s better. No credits for you, I already gave you some. Now go clean yourself or whatever, slut.[/say]")
+
+			saynn("[say=pc]Really?..[/say]")
+
+			saynn("You stand up and quickly fix your appearance to the best of your ability.")
+
+		# (if pay)
+		else:
+			saynn("[say=risha]That’s better. These are your credits. Now go clean yourself or whatever, slut.[/say]")
+
+			saynn("You grab the chip, then stand up and quickly fix your appearance to the best of your ability.")
+
+		# (scene ends)
+		addButton("Continue", "Time to go", "endthescene")
+
+	if(state == "offer_pussy"):
+		# (needs pussy)
+
+		saynn("You put your hand over your pussy and begin teasing yourself in Risha’s line of sight. You find your clit and begin rubbing it while producing some cute moans. The lynx seems to be very pent up watching you, already massaging her feline balls.")
+
+		saynn("[say=pc]You’d love to breed this, wouldn’t you~.[/say]")
+
+		saynn("[say=risha]And who will stop me.[/say]")
+
+		saynn("Suddenly she grabs you by the arms and switches places, bending you over the bench. You don’t even find time to struggle before she masterfully shoves your head under the metal bar while chaining your arms to its heavy rings, creating a makeshift pillory. The bench itself prevents you from closing your legs, you are quickly made helpless!")
+
+		# (if has clothing)
+		if(!GM.pc.isFullyNaked()):
+			saynn("Risha {pc.undressMessageS}, leaving you naked and your pussy exposed!")
+
+		saynn("[say=pc]H-hey..[/say]")
+
+		saynn("She then spreads open your slit with her digits and checks how wet you are. Having your arms restrained to this frame brings some discomfort but you also feel quite.. excited. Warm feeling rushes throughout your body while Risha focuses on rubbing your little sensitive clit, you are swaying your hips while your snatch gets wet from your juices.")
+
+		saynn("[say=risha]What an eager whore, I will enjoy breeding you[/say]")
+
+		saynn("Risha doesn’t waste time for too long, she guides her barbed feline cock and presses it against your pussy, its tip sliding up and down along your petals. You arch your back and struggle against the metal bar as the cat’s soft spikes are brushing against your soft flesh.")
+
+		# (if has cock)
+		if(GM.pc.hasPenis()):
+			saynn("Even though you are stuck in quite an exposed position and are about to be taken advantage of, you feel so horny, your {pc.cock} is getting hard.")
+
+		saynn("Risha gets some of your juices and rubs them into her cock and then, without much more preparation, buckles her hips forward, forcing her barbed member to penetrate your {pc.pussyStretch} pussy hole and stretch it open enough to shove the tip inside. You arch your back more and let out a moan as she roughly pushes her cock deeper, her spikes raking at your soft inner walls.")
+
+		# (if has cock)
+		if(GM.pc.hasPenis()):
+			saynn("You feel your neglected cock leaking, being fucked by a tall lynx makes you so aroused.")
+
+		saynn("[say=pc]Fuck.. So rough.[/say]")
+
+		saynn("[say=risha]See, you, inmates, are so easy to handle.[/say]")
+
+		saynn("Risha shoves her cock balls deep down your fuckhole, smashing the cervix, before retracting just enough to not pull out completely. She gives your butt a firm smack, causing you to moan and clench, before thrusting deep again, easily pushing through your attempts at resistance, a high amount of lube and precum help her to rail you harder. Risha quickly picks up the pace,the way her barbed member pounds at the natural barrier makes you roll up your eyes and moan passionately.")
+
+		saynn("[say=risha]Oh yeah, I know you love it. Each whore of this station was on this cock, zero complaints so far.[/say]")
+
+		# (if has cock)
+		if(GM.pc.hasPenis()):
+			saynn("Your {pc.cock} is leaking more and more precum, the way her thick shaft fucks you sends shivers down your spine and makes both your member and your pussy pulse. You feel like you won’t be able to endure this for long.")
+
+		saynn("Each time Risha rams her cock inside you she hits your g-spot, sending a huge amount of pleasure through your body, sure amount of it slowly making your mind hazy. You stick your tongue out and moan more often.")
+
+		saynn("You feel like you are about to cum, your pussy hole is getting tighter around the cat’s cock and she feels it. She only increases her pace, basically ravaging your stretched fuckhole, using her precum and your female juices as lube.")
+
+		saynn("[say=risha]Ready to carry my kittens, whore?[/say]")
+
+		saynn("Your eyes begin to roll up on their own..")
+
+		addButton("Cum", "The orgasm overtakes your body", "cumVaginal")
+
+	if(state == "cumVaginal"):
+		saynn("You begin to trash against the restraints and make loud pleasure noises, your whole body squirms and shivers as you struggle to stay still. Though Risha’s hands hold your ass nice and tight, she keeps shoving her cock in and out even through your climax. Your fuckhole got so overstimulated that you squirt juices all over the bench.")
+
+		# (if has cock)
+		if(GM.pc.hasPenis()):
+			saynn("It didn’t take long for your {pc.cock} to start shooting strong lines of {pc.cum} onto the bench and the floor. She really drains you, even during your orgasm she pounds at your pleasure spot, causing your cock to erupt with more {pc.cun} until there is nothing left in your balls.")
+
+		saynn("[say=risha]Did my little fuckdoll cum already? Oh, what a shame. Now it’s my turn.[/say]")
+
+		saynn("And she wasn’t kidding, even as your inner walls try to close around her shaft, she keeps fucking your slit, thrusting slow but putting full force into each one, your cervix getting softer and eventually getting penetrated, causing you to have another spike of pleasure. You feel her barbs hardening, they catch onto your soft insides and scrape on them, preventing Risha from pulling out. She starts to groan, her cock throbbing and pulsating as it shoots wave after wave of hot cum directly into your womb! Your belly starts to look inflated as she fills you to the brim. She stuffs you so much that some cum already starts to leak.")
+
+		saynn("Eventually you both come down from your orgasms but your body still shivers on its own. Risha’s barbs soften up so she pulls her messy cock out, leaving your used fuckhole to gape and leak cum at a high rate.")
+
+		saynn("Risha quickly catches her breath and admires the view.")
+
+		# (if not pay)
+		if(!gotPayed):
+			saynn("[say=risha]You are a great fuck. But I already paid you this week, can’t have you spoiled. Sorry fucktoy~.[/say]")
+
+			saynn("[say=pc]Huh?.. H-hey..[/say]")
+
+			saynn("Risha quickly unchains you from the bar, causing you to fall onto the bench.")
+
+			saynn("[say=risha]Now go away, I’m sure some lilac will happily clean up after you.[/say]")
+
+			saynn("With nothing else to do, you quickly gather yourself and stand up, cum still leaking out of you as you awkwardly walk away. Satisfied, though.")
+
+		# (if will pay)
+		else:
+			saynn("[say=risha]You are a great fuck. There you go, you earned it.[/say]")
+
+			saynn("Risha slides a credit chip into your hand and then quickly unchains you from the bar, causing you to fall onto the bench.")
+
+			saynn("[say=risha]Now go away, I’m sure some lilac will happily clean up after you.[/say]")
+
+			saynn("With nothing else to do, you quickly gather yourself and stand up, cum still leaking out of you as you awkwardly walk away. Satisfied, though.")
+
+		addButton("Continue", "Time to go", "endthescene")
+		# (scene ends)
+
+func _react(_action: String, _args):
+
+	if(_action in ["offer_pussy", "offer_ass", "offer_handjob"]):
+		var lastDay = getFlag(GymModule.Gym_RishaLastDayGotPaid, -10)
+		var currentDay = GM.main.getDays()
+		if(currentDay >= (lastDay + 7) ):
+			gotPayed = true
+			setFlag(GymModule.Gym_RishaLastDayGotPaid, currentDay)
+		else:
+			gotPayed = false
+			
+	if(_action in ["cumAnal", "make_her_cum", "cumVaginal"]):
+		if(gotPayed):
+			GM.pc.addCredits(5)
+	
+	if(_action == "cumAnal"):
+		GM.pc.orgasmFrom("risha")
+		GM.pc.gotAnusFuckedBy("risha")
+		GM.pc.cummedInAnusBy("risha")
+		GM.pc.addSkillExperience(Skill.CumLover, 30, "risha_gymfuck")
+		GM.pc.addSkillExperience(Skill.SexSlave, 50, "risha_gymfuck")
+		GM.pc.updateNonBattleEffects()
+	
+	if(_action == "make_her_cum"):
+		GM.pc.gotThroatFuckedBy("risha")
+		GM.pc.cummedInMouthBy("risha")
+		GM.pc.cummedOnBy("risha")
+		GM.pc.addSkillExperience(Skill.CumLover, 30, "risha_gymfuck")
+		GM.pc.addSkillExperience(Skill.SexSlave, 10, "risha_gymfuck")
+		GM.pc.updateNonBattleEffects()
+	
+	if(_action == "cumVaginal"):
+		GM.pc.orgasmFrom("risha")
+		GM.pc.gotVaginaFuckedBy("risha")
+		GM.pc.cummedInVaginaBy("risha")
+		GM.pc.addSkillExperience(Skill.CumLover, 30, "risha_gymfuck")
+		GM.pc.addSkillExperience(Skill.SexSlave, 50, "risha_gymfuck")
+		GM.pc.updateNonBattleEffects()
+	
+	if(_action == "endthescene"):
+		processTime(60*60*1)
+		
+		endScene()
+		return
+
+	setState(_action)
+
+func saveData():
+	var data = .saveData()
+	
+	data["gotPayed"] = gotPayed
+	
+	return data
+	
+func loadData(data):
+	.loadData(data)
+	
+	gotPayed = SAVE.loadVar(data, "gotPayed", false)
