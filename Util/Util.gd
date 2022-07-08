@@ -490,3 +490,10 @@ static func dmgRangeStr(min_damage: int, max_damage: int):
 
 static func dmgRangeArrayStr(damage: Array):
 	return dmgRangeStr(damage[0], damage[1])
+
+static func getStackFunction():
+	var stack = get_stack()
+	if(stack == null || !(stack is Array) || stack.size() <= 2):
+		return "No stack available"
+	var text = "File: "+stack[2]["source"]+" Line: "+str(stack[2]["line"])
+	return text

@@ -115,17 +115,14 @@ func switchToGameAndResumeLatestSave():
 
 func loadVar(data: Dictionary, key, nullvalue = null):
 	if(!data.has(key)):
-		if(OS.get_name() == "Windows"):
-			printerr("Warning: Save doesn't have key "+key+". Using "+str(nullvalue)+" as default value. File: "+get_stack()[1]["source"]+" Line: "+str(get_stack()[1]["line"]))
+		printerr("Warning: Save doesn't have key "+key+". Using "+str(nullvalue)+" as default value. "+Util.getStackFunction())
 		return nullvalue
 		
 	if(nullvalue != null && typeof(data[key]) != typeof(nullvalue) && !(typeof(data[key]) == TYPE_REAL && typeof(nullvalue) == TYPE_INT)):
-		if(OS.get_name() == "Windows"):
-			printerr("Warning: value mismatch when loading a save. Key '"+key+"' has type "+Util.variantTypeToString(typeof(data[key]))+" and default value has type "+Util.variantTypeToString(typeof(nullvalue))+". Is that an error? File: "+get_stack()[1]["source"]+" Line: "+str(get_stack()[1]["line"]))
+		printerr("Warning: value mismatch when loading a save. Key '"+key+"' has type "+Util.variantTypeToString(typeof(data[key]))+" and default value has type "+Util.variantTypeToString(typeof(nullvalue))+". Is that an error? "+Util.getStackFunction())
 		
 	if(data[key] == null && nullvalue != null):
-		if(OS.get_name() == "Windows"):
-			printerr("Warning: loaded value is null while the default value isn't. Is that correct? File: "+get_stack()[1]["source"]+" Line: "+str(get_stack()[1]["line"]))
+		printerr("Warning: loaded value is null while the default value isn't. Is that correct? "+Util.getStackFunction())
 		
 	return data[key]
 
