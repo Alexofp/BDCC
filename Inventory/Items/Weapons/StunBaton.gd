@@ -2,10 +2,13 @@ extends ItemBase
 
 var charges:int = 3
 
-func useCharge():
-	charges -= 1
+func useCharge(amount = 1):
+	charges -= amount
 	if(charges <= 0):
 		destroyMe()
+
+func getCharges():
+	return charges
 
 func getDamageRange():
 	return [30, 40]
@@ -34,7 +37,7 @@ func loadData(data):
 	charges = SAVE.loadVar(data, "charges", 3)
 
 func getAttacks():
-	return ["StunBatonPCAttack"]
+	return ["StunBatonPCAttack", "StunBatonStunPCAttack"]
 
 func getTags():
 	return [ItemTag.Illegal]

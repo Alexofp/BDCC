@@ -2,10 +2,13 @@ extends ItemBase
 
 var charges:int = 2
 
-func useCharge():
-	charges -= 1
+func useCharge(amount = 1):
+	charges -= amount
 	if(charges <= 0):
 		destroyMe()
+
+func getCharges():
+	return charges
 
 func getDamageRange():
 	return [20, 30]
