@@ -228,7 +228,7 @@ func _run():
 		saynn("Nova then begins to parade you through the cellblock, tugging on the leash more when you stop or take too long. You step behind her, your head tilted down. You try to avoid all the glances that you get from other inmates, some giggle, some eye you out, probably imagining having sex with you and some just stay quiet.")
 
 
-		saynn(RNG.pick(["[sayMale]Let me try that mouth![/say]", "[sayMale]I’m gonna be first[/say]", "[sayMale]Look, what a slave![/say]"]))
+		saynn(RNG.pick(["[sayMale]Let me try that mouth![/sayMale]", "[sayMale]I’m gonna be first[/sayMale]", "[sayMale]Look, what a slave![/sayMale]"]))
 
 		if(RNG.chance(50)):
 			saynn("Some other guard approaches you, a tall guard that looks like a lynx with cyan fur. She gives your butt a firm smack and chuckles.")
