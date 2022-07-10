@@ -765,6 +765,9 @@ func _react(_action: String, _args):
 		GM.pc.addSkillExperience(Skill.CumLover, 10, "nova_petsuckcock")
 		GM.pc.updateNonBattleEffects()
 	
+	if(_action in ["oral", "anal_fucking", "vaginalcum"]):
+		GM.main.addRoomMemoryCurrentLoc("You notice some cum stains, a sign that somebody had sex here. Meow? Bark?", 1)
+	
 	setState(_action)
 
 func saveData():

@@ -374,6 +374,7 @@ func _react(_action: String, _args):
 	if(_action in ["cumAnal", "make_her_cum", "cumVaginal"]):
 		if(gotPayed):
 			GM.pc.addCredits(5)
+		GM.main.addRoomMemoryCurrentLoc("You notice some cum stains on one of the benches", 2)
 	
 	if(_action == "cumAnal"):
 		GM.pc.orgasmFrom("risha")

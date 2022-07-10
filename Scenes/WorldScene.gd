@@ -46,6 +46,11 @@ func _run():
 		saynn(_roomInfo.getBlindDescription())
 	else:
 		saynn(_roomInfo.getDescription())
+		
+	var roomMemory = GM.main.getRoomMemory(roomID)
+	if(roomMemory != null && roomMemory != ""):
+		saynn("[i]"+roomMemory+"[/i]")
+	
 	_roomInfo._onEnter()
 
 func _react(_action: String, _args):

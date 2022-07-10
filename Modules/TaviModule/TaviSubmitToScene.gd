@@ -148,6 +148,7 @@ func _react(_action: String, _args):
 		processTime(60*10)
 	
 	if(_action == "i_want_more"):
+		GM.main.addRoomMemoryCurrentLoc("You can still smell the scent of Tavi's juices here..", 2)
 		processTime(60*10)
 		if(GM.pc.hasReachablePenis()):
 			GM.pc.orgasmFrom("tavi")

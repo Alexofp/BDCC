@@ -11,6 +11,7 @@ var flags = {}
 var playerScene = preload("res://Player/Player.tscn")
 var overridenPC
 var originalPC
+var roomMemories = {}
 
 signal time_passed(_secondsPassed)
 
@@ -177,6 +178,7 @@ func saveData():
 	data["EventSystem"] = GM.ES.saveData()
 	data["ChildSystem"] = GM.CS.saveData()
 	data["logMessages"] = logMessages
+	data["roomMemories"] = roomMemories
 	
 	data["scenes"] = []
 	for scene in sceneStack:
@@ -196,6 +198,7 @@ func loadData(data):
 	GM.ES.loadData(SAVE.loadVar(data, "EventSystem", {}))
 	GM.CS.loadData(SAVE.loadVar(data, "ChildSystem", {}))
 	logMessages = SAVE.loadVar(data, "logMessages", [])
+	roomMemories = SAVE.loadVar(data, "roomMemories", {})
 	
 	var scenes = SAVE.loadVar(data, "scenes", [])
 	
@@ -291,6 +294,7 @@ func startNewDay():
 	timeOfDay = newtime
 	
 	Flag.resetFlagsOnNewDay()
+	roomMemoriesProcessDay()
 	
 	doTimeProcess(timediff)
 	
@@ -405,3 +409,27 @@ func playAnimation(sceneID, actionID, args = []):
 func updateSubAnims():
 	if(GM.ui != null):
 		GM.ui.getStage3d().updateSubAnims()
+
+func addRoomMemory(roomID, text, days):
+	roomMemories[roomID] = {
+		"text": text,
+		"days": days,
+	}
+	
+func addRoomMemoryCurrentLoc(text, days):
+	if(GM.pc == null):
+		return
+	addRoomMemory(GM.pc.getLocation(), text, days)
+
+func getRoomMemory(roomID):
+	if(!roomMemories.has(roomID)):
+		return null
+	return roomMemories[roomID]["text"]
+
+func roomMemoriesProcessDay():
+	for roomID in roomMemories.keys():
+		var data = roomMemories[roomID]
+		data["days"] -= 1
+		
+		if(data["days"] <= 0):
+			roomMemories.erase(roomID)

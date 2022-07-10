@@ -175,7 +175,7 @@ func _react(_action: String, _args):
 		GM.pc.addSkillExperience(Skill.SexSlave, 30, "nova_ridecock")
 		GM.pc.gotVaginaFuckedBy("nova")
 		GM.pc.updateNonBattleEffects()
-	
+
 	if(_action == "inside" || _action == "get_knotted"):
 		GM.pc.cummedInVaginaBy("nova")
 		GM.pc.orgasmFrom("nova")
@@ -183,6 +183,9 @@ func _react(_action: String, _args):
 		GM.pc.addSkillExperience(Skill.SexSlave, 30, "nova_ridecock")
 		GM.pc.gotVaginaFuckedBy("nova")
 		GM.pc.updateNonBattleEffects()
+		
+	if(_action in ["outside", "inside", "get_knotted"]):
+		GM.main.addRoomMemoryCurrentLoc("You notice some cum stains, a sign that somebody had sex here", 1)
 	
 	setState(_action)
 
