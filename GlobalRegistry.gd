@@ -86,6 +86,7 @@ func _ready():
 	registerSceneFolder("res://Scenes/Mineshaft/")
 	
 	registerCharacterFolder("res://Characters/")
+	registerCharacterFolder("res://Characters/Generic/")
 	
 	registerAttackFolder("res://Attacks/")
 	registerAttackFolder("res://Attacks/PlayerOnly/")
