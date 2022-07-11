@@ -8,6 +8,7 @@ var logMessages: Array = []
 var currentDay = 0
 var timeOfDay = 6*60*60 # seconds since 00:00
 var flags = {}
+var moduleFlags = {}
 var playerScene = preload("res://Player/Player.tscn")
 var overridenPC
 var originalPC
@@ -175,6 +176,7 @@ func saveData():
 	data["timeOfDay"] = timeOfDay
 	data["currentDay"] = currentDay
 	data["flags"] = flags
+	data["moduleFlags"] = moduleFlags
 	data["EventSystem"] = GM.ES.saveData()
 	data["ChildSystem"] = GM.CS.saveData()
 	data["logMessages"] = logMessages
@@ -195,6 +197,7 @@ func loadData(data):
 	currentDay = SAVE.loadVar(data, "currentDay", 0)
 	GM.ui.onTimePassed(0)
 	flags = SAVE.loadVar(data, "flags", {})
+	moduleFlags = SAVE.loadVar(data, "moduleFlags", {})
 	GM.ES.loadData(SAVE.loadVar(data, "EventSystem", {}))
 	GM.CS.loadData(SAVE.loadVar(data, "ChildSystem", {}))
 	logMessages = SAVE.loadVar(data, "logMessages", [])
@@ -329,6 +332,24 @@ func getFlag(flagID, defaultValue = null):
 		return defaultValue
 	
 	return flags[flagID]
+
+func setModuleFlag(moduleID, flagID, value):
+	if(!moduleFlags.has(moduleID)):
+		moduleFlags[moduleID] = {}
+	moduleFlags[moduleID][flagID] = value
+
+func increaseModuleFlag(moduleID, flagID, addvalue = 1):
+	if(!moduleFlags.has(moduleID)):
+		moduleFlags[moduleID] = {}
+	if(!moduleFlags[moduleID].has(flagID)):
+		moduleFlags[moduleID][flagID] = 0
+	moduleFlags[moduleID][flagID] += addvalue
+
+func getModuleFlag(moduleID, flagID, defaultValue = null):
+	if(!moduleFlags.has(moduleID) || !moduleFlags[moduleID].has(flagID)):
+		return defaultValue
+	
+	return moduleFlags[moduleID][flagID]
 
 func resolveCustomCharacterName(charID):
 	if(sceneStack.size() > 0):

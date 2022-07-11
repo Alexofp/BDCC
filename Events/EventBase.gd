@@ -68,3 +68,12 @@ func getFlag(flagID, defaultValue = null):
 
 func increaseFlag(flagID, addvalue = 1):
 	GM.main.increaseFlag(flagID, addvalue)
+
+func setModuleFlag(moduleID, flagID, value):
+	GM.main.setModuleFlag(moduleID, flagID, value)
+
+func increaseModuleFlag(moduleID, flagID, addvalue = 1):
+	GM.main.increaseModuleFlag(moduleID, flagID, addvalue)
+
+func getModuleFlag(moduleID, flagID, defaultValue = null):
+	return GM.main.getModuleFlag(moduleID, flagID, defaultValue)
