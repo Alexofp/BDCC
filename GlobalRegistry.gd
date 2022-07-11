@@ -105,13 +105,7 @@ func _ready():
 	
 	registerStageSceneFolder("res://Player/StageScene3D/Scenes/")
 	
-	registerModule("res://Modules/TaviModule/Tavi_module.gd")
-	registerModule("res://Modules/RahiModule/Rahi_module.gd")
-	registerModule("res://Modules/NovaModule/Nova_module.gd")
-	registerModule("res://Modules/PunishmentsModule/Punishments_module.gd")
-	registerModule("res://Modules/CellblockModule/Cellblock_module.gd")
-	registerModule("res://Modules/MedicalModule/Medical_module.gd")
-	registerModule("res://Modules/GymModule/module.gd")
+	registerModulesFolder("res://Modules/")
 	
 # The point is that it will still generate unique ids even after saving/loading
 func generateUniqueID():
@@ -748,3 +742,22 @@ func getLootLists(id: String):
 	if(!lootLists.has(id)):
 		return []
 	return lootLists[id]
+
+func registerModulesFolder(folder: String):
+	var dir = Directory.new()
+	if dir.open(folder) == OK:
+		dir.list_dir_begin(true)
+		var file_name = dir.get_next()
+		while file_name != "":
+			if dir.current_is_dir():
+				var full_path = folder.plus_file(file_name)
+				#print("FOUND DIR: "+full_path)
+				
+				var modulePath:String = full_path.plus_file("module.gd")
+				if(dir.file_exists(modulePath)):
+					#print("MODULE FILE: " +modulePath)
+					registerModule(modulePath)
+				pass
+			file_name = dir.get_next()
+	else:
+		printerr("An error occurred when trying to access the path "+folder)

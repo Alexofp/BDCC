@@ -167,7 +167,7 @@ _global_script_classes=[ {
 "base": "Module",
 "class": "CellblockModule",
 "language": "GDScript",
-"path": "res://Modules/CellblockModule/Cellblock_module.gd"
+"path": "res://Modules/CellblockModule/module.gd"
 }, {
 "base": "BaseCharacter",
 "class": "Character",
@@ -253,6 +253,11 @@ _global_script_classes=[ {
 "class": "EventSystem",
 "language": "GDScript",
 "path": "res://Events/EventSystem.gd"
+}, {
+"base": "Module",
+"class": "FightClubModule",
+"language": "GDScript",
+"path": "res://Modules/FightClubModule/module.gd"
 }, {
 "base": "Object",
 "class": "Flag",
@@ -402,7 +407,7 @@ _global_script_classes=[ {
 "base": "Module",
 "class": "MedicalModule",
 "language": "GDScript",
-"path": "res://Modules/MedicalModule/Medical_module.gd"
+"path": "res://Modules/MedicalModule/module.gd"
 }, {
 "base": "Reference",
 "class": "MenstrualCycle",
@@ -422,7 +427,7 @@ _global_script_classes=[ {
 "base": "Module",
 "class": "NovaModule",
 "language": "GDScript",
-"path": "res://Modules/NovaModule/Nova_module.gd"
+"path": "res://Modules/NovaModule/module.gd"
 }, {
 "base": "Reference",
 "class": "Orifice",
@@ -467,7 +472,7 @@ _global_script_classes=[ {
 "base": "Module",
 "class": "PunishmentsModule",
 "language": "GDScript",
-"path": "res://Modules/PunishmentsModule/Punishments_module.gd"
+"path": "res://Modules/PunishmentsModule/module.gd"
 }, {
 "base": "Object",
 "class": "Quest",
@@ -492,7 +497,7 @@ _global_script_classes=[ {
 "base": "Module",
 "class": "RahiModule",
 "language": "GDScript",
-"path": "res://Modules/RahiModule/Rahi_module.gd"
+"path": "res://Modules/RahiModule/module.gd"
 }, {
 "base": "Object",
 "class": "RandomSceneType",
@@ -652,7 +657,7 @@ _global_script_classes=[ {
 "base": "Module",
 "class": "TaviModule",
 "language": "GDScript",
-"path": "res://Modules/TaviModule/Tavi_module.gd"
+"path": "res://Modules/TaviModule/module.gd"
 }, {
 "base": "Object",
 "class": "TeaseType",
@@ -754,6 +759,7 @@ _global_script_class_icons={
 "EscapeQuest": "",
 "EventBase": "",
 "EventSystem": "",
+"FightClubModule": "",
 "Flag": "",
 "FlexGridContainer": "",
 "FluidProduction": "",
