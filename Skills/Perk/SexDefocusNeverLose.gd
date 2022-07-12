@@ -8,7 +8,7 @@ func getVisibleName():
 	return "Spacing out"
 
 func getVisibleDescription():
-	return "You learned to control your horny thoughts, you can NEVER lose from [color="+DamageType.getColorString(DamageType.Lust)+"]lust[/color] damage as long as you are defocused"
+	return "You learned to control your horny thoughts, while defocusing you will NEVER lose from [color="+DamageType.getColorString(DamageType.Lust)+"]lust[/color] damage as long as you're not at your peak already"
 
 func getCost():
 	return 1
