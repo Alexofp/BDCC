@@ -497,3 +497,17 @@ static func getStackFunction():
 		return "No stack available"
 	var text = "File: "+stack[2]["source"]+" Line: "+str(stack[2]["line"])
 	return text
+
+static func cmToString(cm):
+	var measureUnits = OPTIONS.getMeasurementUnits()
+	
+	if(measureUnits == "metric"):
+		return str(roundF(cm, 2))+" cm"
+	
+	if(measureUnits == "imperial"):
+		return str(roundF(cm/2.54, 2))+" in"
+
+	if(measureUnits == "metricimperial"):
+		return str(roundF(cm, 2))+" cm"+"/"+str(roundF(cm/2.54, 2))+" in"
+		
+	return str(roundF(cm, 2))+" cm"

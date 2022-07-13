@@ -16,6 +16,8 @@ var showSpeakerName = false
 var fontSize = "normal"
 var showShortcuts = true
 
+var measurementUnits = "metric"
+
 func resetToDefaults():
 	fetchNewRelease = true
 	menstrualCycleLengthDays = 7
@@ -27,6 +29,7 @@ func resetToDefaults():
 	showSpeakerName = false
 	fontSize = "normal"
 	showShortcuts = true
+	measurementUnits = "metric"
 	
 	enabledContent.clear()
 	for contentType in ContentType.getAll():
@@ -69,6 +72,9 @@ func getFontSize():
 
 func shouldShowShortcuts():
 	return showShortcuts
+
+func getMeasurementUnits():
+	return measurementUnits
 
 func getChangeableOptions():
 	var settings = [
@@ -204,6 +210,18 @@ func getChangeableOptions():
 					"type": "checkbox",
 					"value": showShortcuts,
 				},
+				{
+					"name": "Measurement units",
+					"description": "Choose how to display length values",
+					"id": "measurementUnits",
+					"type": "list",
+					"value": measurementUnits,
+					"values": [
+						["metric", "Metric (cm)"],
+						["imperial", "Imperial (in)"],
+						["metricimperial", "Metric and Imperial"],
+					],
+				},
 			],
 		}
 	]
@@ -253,6 +271,8 @@ func applyOption(categoryID, optionID, value):
 			fontSize = value
 		if(optionID == "showShortcuts"):
 			showShortcuts = value
+		if(optionID == "measurementUnits"):
+			measurementUnits = value
 			
 	if(categoryID == "enabledContent"):
 		enabledContent[optionID] = value
@@ -278,6 +298,7 @@ func saveData():
 		"showSpeakerName": showSpeakerName,
 		"fontSize": fontSize,
 		"showShortcuts": showShortcuts,
+		"measurementUnits": measurementUnits,
 	}
 	
 	return data
@@ -294,6 +315,7 @@ func loadData(data):
 	showSpeakerName = loadVar(data, "showSpeakerName", false)
 	fontSize = loadVar(data, "fontSize", "normal")
 	showShortcuts = loadVar(data, "showShortcuts", true)
+	measurementUnits = loadVar(data, "measurementUnits", "metric")
 
 func saveToFile():
 	var saveData = saveData()

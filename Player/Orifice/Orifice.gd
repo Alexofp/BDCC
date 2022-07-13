@@ -262,7 +262,7 @@ func getAttributesText():
 		["Capacity", str(round(getFluidAmount() * 10.0)/10.0)+"/"+ str(round(getCapacity() * 10.0)/10.0)+" ml"],		
 		["Looseness level", str(round(getLooseness() * 10.0)/10.0)+", "+getLoosenessString()],
 		["Looseness level minimal", str(round(getMinLooseness() * 10.0)/10.0)],
-		["Comfortable insertion", str(round(getComfortableInsertion() * 10.0)/10.0)+" cm"],
+		["Comfortable insertion", Util.cmToString(round(getComfortableInsertion() * 10.0)/10.0)],
 		["Elasticity", str(round(getElasticity() * 1000.0)/10.0)+"%"],
 		["Tightness", str(round(getResistance() * 1000.0)/10.0)+"%"],
 	]
@@ -270,7 +270,7 @@ func getAttributesText():
 func getTooltipInfo():
 	var text = "capacity: " + str(round(getFluidAmount() * 10.0)/10.0)+"/"+ str(round(getCapacity() * 10.0)/10.0)+" ml\n"
 	text += "looseness level: " + str(round(getLooseness() * 10.0)/10.0)+", "+getLoosenessString() + "\n"
-	text += "comfortable insertion: " + str(round(getComfortableInsertion() * 10.0)/10.0)+" cm"
+	text += "comfortable insertion: " + Util.cmToString(round(getComfortableInsertion() * 10.0)/10.0)
 	return text
 
 func saveData():

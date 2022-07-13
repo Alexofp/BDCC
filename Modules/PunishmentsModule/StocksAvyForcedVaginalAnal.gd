@@ -107,7 +107,7 @@ func _run():
 
 		saynn("[say=avy]Such a whore, already wet for me~. Maybe I wanted to make your dry cunt suffer.[/say]")
 
-		saynn("She chuckles and bends forward to hold onto the top part of the stocks while she fucks you. She starts thrusting her hips back and forth, forcing her cock deeper inside your cunt and making it stretch to fit her length, you can only guess that the length of her cock is about 20 cm, it easily reaches your cervix and starts pounding at it.")
+		saynn("She chuckles and bends forward to hold onto the top part of the stocks while she fucks you. She starts thrusting her hips back and forth, forcing her cock deeper inside your cunt and making it stretch to fit her length, you can only guess that the length of her cock is about "+Util.cmToString(20)+", it easily reaches your cervix and starts pounding at it.")
 
 		saynn("You can’t hold it, you open your mouth and moan, your body is forced into a prime position for breeding, your slit being ravaged so rough makes you feel ecstatic. You cum quick, your body starts squirming and struggling against the restraints but Avy keeps fucking you through your orgasm, your inner walls clenching around her cock overstimulate you and make you squirt.")
 

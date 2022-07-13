@@ -14,7 +14,7 @@ func getSlot():
 	return BodypartSlot.Penis
 
 func getTooltipInfo():
-	var text = "length: " + str(lengthCM) + " cm\n"
+	var text = "length: " + Util.cmToString(lengthCM) + "\n"
 	text += BodilyFluids.FluidType.getName(getFluidProduction().getFluidType())+": " + str(round(getFluidProduction().getFluidAmount() * 10.0)/10.0)+"/"+ str(round(getFluidProduction().getCapacity() * 10.0)/10.0)+" ml"
 	return text
 
@@ -60,17 +60,17 @@ func getPickableAttributes():
 			"textButton": "Length",
 			"buttonDesc": "Pick the cock's length",
 			"options": [
-				[5, "5 cm", "Pick this length"],
-				[8, "8 cm", "Pick this length"],
-				[10, "10 cm", "Pick this length"],
-				[13, "13 cm", "Pick this length"],
-				[15, "15 cm", "Pick this length"],
-				[18, "18 cm", "Pick this length"],
-				[22, "22 cm", "Pick this length"],
-				[25, "25 cm", "Pick this length"],
-				[30, "30 cm", "Pick this length"],
-				[40, "40 cm", "Pick this length"],
-				[50, "50 cm", "Pick this length"],
+				[5, Util.cmToString(5), "Pick this length"],
+				[8, Util.cmToString(8), "Pick this length"],
+				[10, Util.cmToString(10), "Pick this length"],
+				[13, Util.cmToString(13), "Pick this length"],
+				[15, Util.cmToString(15), "Pick this length"],
+				[18, Util.cmToString(18), "Pick this length"],
+				[22, Util.cmToString(22), "Pick this length"],
+				[25, Util.cmToString(25), "Pick this length"],
+				[30, Util.cmToString(30), "Pick this length"],
+				[40, Util.cmToString(40), "Pick this length"],
+				[50, Util.cmToString(50), "Pick this length"],
 			]
 		},
 		"ballsscale": {
@@ -103,7 +103,7 @@ func applyAttribute(_attrID: String, _attrValue):
 
 func getAttributesText():
 	return [
-		["Penis length", str(lengthCM)+" cm"],
+		["Penis length", Util.cmToString(lengthCM)],
 		["Balls scale", str(Util.roundF(ballsScale*100.0, 1))+"%"],
 	]
 	

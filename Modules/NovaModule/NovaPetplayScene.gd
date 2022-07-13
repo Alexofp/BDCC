@@ -602,7 +602,7 @@ func _run():
 
 		# (if has cock)
 		if(GM.pc.hasPenis()):
-			saynn("You arch your back, you feel how her 18 cm cock starts pushing against the bumpy sensitive spot that is your prostate, causing you to let out a passionate moan and drip with more precum.")
+			saynn("You arch your back, you feel how her "+Util.cmToString(18)+" cock starts pushing against the bumpy sensitive spot that is your prostate, causing you to let out a passionate moan and drip with more precum.")
 
 		# (if has vagina)
 		if(GM.pc.hasVagina()):
