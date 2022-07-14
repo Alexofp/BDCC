@@ -32,8 +32,14 @@ func getData():
 			
 		data.append(newData)
 	
+	data.sort_custom(self, "sort_my")
+	
 	return data
 	
+func sort_my(a, b):
+	if a["gross"] > b["gross"]:
+		return true
+	return false
 
 
 func _on_Button2_pressed():
