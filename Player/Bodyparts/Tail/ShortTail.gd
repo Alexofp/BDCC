@@ -5,7 +5,7 @@ func _init():
 	id = "shorttail"
 
 func getCompatibleSpecies():
-	return [Species.Canine, Species.Wolf, Species.Feline]
+	return [Species.Canine, Species.Wolf, Species.Feline, Species.Equine]
 
 func getLewdSizeAdjective():
 	return RNG.pick(["short"])

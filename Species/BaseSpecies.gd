@@ -7,6 +7,7 @@ const Feline = "feline"
 const Dragon = "dragon"
 const Wolf = "wolf"
 const Canine = "canine"
+const Equine = "equine"
 
 var id = "error"
 
