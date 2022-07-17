@@ -19,7 +19,7 @@ func getVisibleDescription():
 	return "Studs and mares"
 
 func getDefaultHead(_gender):
-	return "horsehead"
+	return "horsehead2"
 
 func getDefaultArms(_gender):
 	return "anthroarms"
@@ -29,7 +29,7 @@ func getDefaultEars(_gender):
 
 func getDefaultPenis(_gender):
 	if(_gender in [Gender.Male, Gender.Androgynous]):
-		return "caninepenis"
+		return "equinepenis"
 	else:
 		return null
 
