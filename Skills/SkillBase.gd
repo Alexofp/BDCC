@@ -39,7 +39,11 @@ func addExperience(addexp: int, activityID = null):
 		return
 	if(activityID != null && activityID != "" && activities.has(activityID)):
 		return
-	experience += addexp
+		
+	var mult = 1.0
+	mult += npc.getSkillExperienceMult(id)
+		
+	experience += round(addexp * mult)
 	if(activityID != null && activityID != ""):
 		activities[activityID] = 1
 	

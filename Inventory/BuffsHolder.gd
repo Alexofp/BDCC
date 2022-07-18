@@ -23,6 +23,7 @@ var blockedOrifices = {}
 var extraFertility = 0.0
 var extraVirility = 0.0
 var extraCrossSpeciesCompatibility = 0.0
+var skillsExperience = {}
 
 func _ready():
 	name = "Buffs"
@@ -51,6 +52,7 @@ func calculateBuffs():
 	extraFertility = 0.0
 	extraVirility = 0.0
 	extraCrossSpeciesCompatibility = 0.0
+	skillsExperience.clear()
 	
 	for damageType in DamageType.getAll():
 		dealDamageMult[damageType] = 0.0
@@ -155,3 +157,9 @@ func getVirility():
 
 func getCrossSpeciesCompatibility():
 	return extraCrossSpeciesCompatibility
+
+func getSkillExperienceMult(skill):
+	if(!skillsExperience.has(skill)):
+		return 0.0
+	
+	return skillsExperience[skill]

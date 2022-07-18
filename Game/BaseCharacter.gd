@@ -961,3 +961,10 @@ func updateDoll(doll: Doll3D):
 	doll.setHiddenParts(newAlphas)
 	doll.setParts(parts)
 	doll.setUnriggedParts(partsScenes)
+
+func getSkillExperienceMult(skill):
+	var mult = 0.0
+
+	mult += buffsHolder.getSkillExperienceMult(skill)
+
+	return mult

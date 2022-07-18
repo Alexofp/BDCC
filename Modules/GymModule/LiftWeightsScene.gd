@@ -59,6 +59,7 @@ func _react(_action: String, _args):
 		processTime(60*5)
 		GM.pc.addStamina(-40)
 		# ADD SOME BUFF HERE
+		GM.pc.addEffect(StatusEffect.WorkOut)
 		GM.pc.updateNonBattleEffects()
 	
 	if(_action == "endthescene"):

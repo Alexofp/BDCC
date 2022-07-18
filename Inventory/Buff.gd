@@ -39,3 +39,5 @@ const BlocksAnusLeakingBuff = "BlocksAnusLeakingBuff"
 const FertilityBuff = "FertilityBuff"
 const VirilityBuff = "VirilityBuff"
 const CrossSpeciesCompatibilityBuff = "CrossSpeciesCompatibilityBuff"
+
+const SkillExperienceBuff = "SkillExperienceBuff"
