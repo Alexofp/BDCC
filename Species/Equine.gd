@@ -7,7 +7,7 @@ func getVisibleName():
 	return "Equine"
 
 func getDefaultLegs(_gender):
-	return "digilegs"
+	return "hoofs"
 
 func getDefaultTail(_gender):
 	return "horsetail"
