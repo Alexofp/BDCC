@@ -1,57 +1,60 @@
-[
-	{
-		"gross": "$7.00",
-		"nickname": "MaxMaxouCat21",
-		"tier": "$1.00"
-	},
-	{
-		"gross": "$2.00",
-		"nickname": "Maxtacks",
-		"tier": "$1.00"
-	},
-	{
-		"gross": "$2.00",
-		"nickname": "SuPhox",
-		"tier": "$1.00"
-	},
-	{
-		"gross": "$2.00",
-		"nickname": "Caliban",
-		"tier": "$1.00"
-	},
-	{
-		"gross": "$2.00",
-		"nickname": "Gorgestboi",
-		"tier": "$1.00"
-	},
-	{
-		"gross": "$2.00",
-		"nickname": "Blastburn",
-		"tier": "$1.00"
-	},
-	{
-		"gross": "$1.00",
-		"nickname": "User#928169c6",
-		"tier": "$1.00"
-	},
-	{
-		"gross": "$1.00",
-		"nickname": "Kyle Oran Evans ",
-		"tier": "$1.00"
-	},
-	{
-		"gross": "$1.00",
-		"nickname": "LadySasha",
-		"tier": "$1.00"
-	},
-	{
-		"gross": "$1.00",
-		"nickname": "User#677ffa21",
-		"tier": "$1.00"
-	},
-	{
-		"gross": "$1.00",
-		"nickname": "Zeneroth",
-		"tier": "$1.00"
-	}
-]
+{
+	"dateString": "21 of Jul 2022",
+	"entries": [
+		{
+			"gross": "$7.00",
+			"nickname": "MaxMaxouCat21",
+			"tier": "$1.00"
+		},
+		{
+			"gross": "$2.00",
+			"nickname": "Maxtacks",
+			"tier": "$1.00"
+		},
+		{
+			"gross": "$2.00",
+			"nickname": "SuPhox",
+			"tier": "$1.00"
+		},
+		{
+			"gross": "$2.00",
+			"nickname": "Caliban",
+			"tier": "$1.00"
+		},
+		{
+			"gross": "$2.00",
+			"nickname": "Gorgestboi",
+			"tier": "$1.00"
+		},
+		{
+			"gross": "$2.00",
+			"nickname": "Blastburn",
+			"tier": "$1.00"
+		},
+		{
+			"gross": "$1.00",
+			"nickname": "User#928169c6",
+			"tier": "$1.00"
+		},
+		{
+			"gross": "$1.00",
+			"nickname": "Kyle Oran Evans ",
+			"tier": "$1.00"
+		},
+		{
+			"gross": "$1.00",
+			"nickname": "LadySasha",
+			"tier": "$1.00"
+		},
+		{
+			"gross": "$1.00",
+			"nickname": "User#677ffa21",
+			"tier": "$1.00"
+		},
+		{
+			"gross": "$1.00",
+			"nickname": "Zeneroth",
+			"tier": "$1.00"
+		}
+	]
+}
