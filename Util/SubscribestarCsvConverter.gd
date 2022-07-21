@@ -53,3 +53,24 @@ func _on_Button2_pressed():
 	newText += "\nThank you [color=red]<3[/color][/center]"
 	
 	$VBoxContainer/TextEdit2.text = newText
+
+
+func _on_Button3_pressed():
+	var data = getData()
+	
+	var dateDict = OS.get_date()
+	var dateStr = Util.dateToString(dateDict)
+	
+	var newdata = []
+	for entry in data:
+		newdata.append({
+			"nickname": entry["nickname"],
+			"gross": entry["gross"],
+			"tier": entry["tier"],
+		})
+	var result = {
+		"dateString": dateStr,
+		"entries": newdata,
+	}
+	
+	$VBoxContainer/TextEdit2.text = JSON.print(result, "\t", true)
