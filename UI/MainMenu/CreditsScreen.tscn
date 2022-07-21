@@ -1,9 +1,8 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://GlobalTheme.tres" type="Theme" id=1]
 [ext_resource path="res://UI/MainMenu/CreditsScreen.gd" type="Script" id=2]
 [ext_resource path="res://Fonts/Titillium-Bold.otf" type="DynamicFontData" id=3]
-[ext_resource path="res://DonationInfo.tres" type="Resource" id=4]
 
 [sub_resource type="DynamicFont" id=1]
 size = 30
@@ -16,7 +15,6 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource( 1 )
 script = ExtResource( 2 )
-donationInfo = ExtResource( 4 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 anchor_right = 1.0

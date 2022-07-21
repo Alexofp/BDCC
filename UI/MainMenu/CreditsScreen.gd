@@ -2,11 +2,12 @@ extends Control
 
 signal onClosePressed
 
-export(Resource) var donationInfo
-
 func _ready():
-	if(donationInfo != null):
-		$VBoxContainer/ScrollContainer/ScrollVBox/ContentContainer/DonationsLabel.bbcode_text = donationInfo.richText
+	$VBoxContainer/ScrollContainer/ScrollVBox/ContentContainer/DonationsLabel.bbcode_text = GlobalRegistry.getDonationDataString()
+	var _ok = GlobalRegistry.connect("donationDataUpdated", self, "updateDonationData")
+
+func updateDonationData():
+	$VBoxContainer/ScrollContainer/ScrollVBox/ContentContainer/DonationsLabel.bbcode_text = GlobalRegistry.getDonationDataString()
 
 func _on_CloseButton_pressed():
 	emit_signal("onClosePressed")

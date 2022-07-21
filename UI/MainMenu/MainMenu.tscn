@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://GlobalTheme.tres" type="Theme" id=1]
 [ext_resource path="res://Fonts/Titillium-Regular.otf" type="DynamicFontData" id=2]
@@ -7,7 +7,6 @@
 [ext_resource path="res://UI/Options/OptionsScreen.tscn" type="PackedScene" id=5]
 [ext_resource path="res://UI/MainMenu/CreditsScreen.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Fonts/Titillium-Bold.otf" type="DynamicFontData" id=7]
-[ext_resource path="res://DonationInfo.tres" type="Resource" id=8]
 [ext_resource path="res://Game/SmartScrollContainer.gd" type="Script" id=9]
 
 [sub_resource type="StyleBoxFlat" id=1]
@@ -51,7 +50,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 theme = ExtResource( 1 )
 script = ExtResource( 3 )
-donationInfo = ExtResource( 8 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 anchor_right = 1.0

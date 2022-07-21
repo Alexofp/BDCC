@@ -39,12 +39,82 @@ var bodypartStorageNode
 
 var sceneCache: Dictionary = {}
 
+var cachedDonationData = null
+var cachedLocalDonationData = null
+var donationDataRequest: HTTPRequest
+signal donationDataUpdated
+
 func _init():
 	bodypartStorageNode = Node.new()
 	add_child(bodypartStorageNode)
 	bodypartStorageNode.name = "Bodyparts"	
+	
+func startLoadingDonationData():
+	var file = File.new()
+	if(file.file_exists("res://DonationInfo.json")):
+		file.open("res://DonationInfo.json", File.READ)
+		var content = file.get_as_text()
+		file.close()
+		
+		var jsonResult = JSON.parse(content)
+		if(jsonResult.error == OK):
+			cachedLocalDonationData = jsonResult.result
+	
+	donationDataRequest = HTTPRequest.new()
+	add_child(donationDataRequest)
+	var _ok = donationDataRequest.connect("request_completed", self, "onDonationDataRequest")
+	var _ok2 = donationDataRequest.request("https://raw.githubusercontent.com/Alexofp/BDCC/main/DonationInfo.json")
+
+func onDonationDataRequest(result, _response_code, _headers, body):
+	if result != HTTPRequest.RESULT_SUCCESS:
+		printerr("[onDonationDataRequest] Couldn't get data from github")
+		return
+	
+	var jsonResult = JSON.parse(body.get_string_from_utf8())
+	if(jsonResult.error != OK):
+		printerr("[onDonationDataRequest] Couldn't parse json data from github.")
+		return
+	
+	var donationData = jsonResult.result
+
+	if(!(donationData is Dictionary)):
+		printerr("[onDonationDataRequest] Bad data from github")
+		return
+		
+	if(!donationData.has("dateString") || !donationData.has("entries") || !(donationData["entries"] is Array)):
+		printerr("[onDonationDataRequest] Bad data from github")
+		return
+		
+	for entry in donationData["entries"]:
+		var requiredFields = ["gross", "nickname", "tier"]
+		for req in requiredFields:
+			if(!entry.has(req)):
+				printerr("[onDonationDataRequest] Bad data from github")
+				return
+	
+	cachedDonationData = donationData
+	emit_signal("donationDataUpdated")
+
+func getDonationDataString():
+	var theData
+	if(cachedDonationData == null):
+		theData = cachedLocalDonationData
+	else:
+		theData = cachedDonationData
+	
+	if(theData == null || !theData.has("entries") || !theData.has("dateString")):
+		return ""
+	
+	var newText = "[center][b][url=https://subscribestar.adult/rahi]SubscribeStar[/url][/b]\nCompiled "+str(theData["dateString"])+"\n\n"
+	
+	for entry in theData["entries"]:
+		newText += entry["nickname"]+" - "+entry["gross"]+"\n"
+	newText += "\nThank you [color=red]<3[/color][/center]"
+	return newText
 
 func _ready():
+	startLoadingDonationData()
+	
 	registerBodypartFolder("res://Player/Bodyparts/Legs/")
 	registerBodypartFolder("res://Player/Bodyparts/Breasts/")
 	registerBodypartFolder("res://Player/Bodyparts/Hair/")

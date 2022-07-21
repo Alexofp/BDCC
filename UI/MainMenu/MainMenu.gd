@@ -12,14 +12,12 @@ onready var gitHubReleaseButton = $HBoxContainer/Panel/MarginContainer/VBoxConta
 onready var devToolsScreen = $HBoxContainer/DevToolsScreen
 onready var devSubScreen = $HBoxContainer/DevToolsScreen/DevScreen
 
-export(Resource) var donationInfo
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	versionLabel.text = "Version: "+GlobalRegistry.getGameVersionString()
 
-	if(donationInfo != null):
-		$HBoxContainer/Panel2/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer3/DonationsLabel.bbcode_text = donationInfo.richText
+	$HBoxContainer/Panel2/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer3/DonationsLabel.bbcode_text = GlobalRegistry.getDonationDataString()
+	var _ok = GlobalRegistry.connect("donationDataUpdated", self, "updateDonationData")
 
 	checkCanResume()
 	if(OPTIONS.shouldFetchGithubRelease()):
@@ -29,6 +27,8 @@ func _ready():
 		gutHubReleaseLabel.visible = false
 		gitHubReleaseButton.visible = false
 
+func updateDonationData():
+	$HBoxContainer/Panel2/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer3/DonationsLabel.bbcode_text = GlobalRegistry.getDonationDataString()
 
 func _on_NewGameButton_pressed():
 	var _ok = get_tree().change_scene("res://Game/MainScene.tscn")
