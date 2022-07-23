@@ -13,7 +13,11 @@ func _init():
 		"res://Modules/GymModule/RahiYogaScene.gd",
 		"res://Modules/GymModule/RishaGymScene.gd",
 		]
-	characters = []
+	characters = [
+		"res://Modules/GymModule/GymBullyCharacter.gd",
+		"res://Modules/GymModule/GymBully2Character.gd",
+		"res://Modules/GymModule/GymBully3Character.gd",
+	]
 	items = []
 	events = [
 		"res://Modules/GymModule/LiftWeightsEvent.gd",
