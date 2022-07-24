@@ -4,6 +4,7 @@ func _init():
 	id = "lickWounds"
 	category = Category.Lust
 	aiCategory = AICategory.Defensive
+	aiScoreMultiplier = 0.5
 	
 func getVisibleName(_context = {}):
 	return "Lick wounds"

@@ -543,7 +543,7 @@ func getSpeciesFullName():
 	return Util.getSpeciesName(species)
 	
 func getFightIntro(_battleName):
-	return "Plase change the fight intro"
+	return getName() + " gets into the combat stance and prepares for a fight."
 
 func getFightState(_battleName):
 	if(getPainLevel() > getLustLevel()):

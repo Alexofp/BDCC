@@ -4,6 +4,7 @@ func _init():
 	id = "stretchingAttack"
 	category = Category.Lust
 	aiCategory = AICategory.Defensive
+	aiScoreMultiplier = 0.5
 	
 func getVisibleName(_context = {}):
 	return "Stretching"

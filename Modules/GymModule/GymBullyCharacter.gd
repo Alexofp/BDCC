@@ -51,3 +51,7 @@ func createBodyparts():
 
 func getLootTable(_battleName):
 	return InmateLoot.new()
+
+func createEquipment():
+	getInventory().equipItem(GlobalRegistry.createItemNoID("inmatecollar"))
+	pass
