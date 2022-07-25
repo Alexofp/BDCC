@@ -112,6 +112,7 @@ func _react(_action: String, _args):
 		setModuleFlag(FightClubModule.ModID, FightClubModule.BulldogBypassed, true)
 		GM.pc.setLocation("fight_entrance")
 		endScene()
+		runScene("FightClubIntroScene")
 		return
 	
 	if(_action == "pay_50_credits"):

@@ -18,7 +18,7 @@ func delayedRun():
 	elif(!getModuleFlag(FightClubModule.ModID, FightClubModule.BulldogBypassed)):
 		addButtonUnlessLate("Bulldog", "Approach the guy", "bulldogtalk")
 	else:
-		pass
+		addButton("The Underground", "Go down to the fight club", "fightclub")
 
 func shouldInterupt():
 	return false
@@ -32,3 +32,6 @@ func onButton(_method, _args):
 		setModuleFlag(FightClubModule.ModID, FightClubModule.BulldogFirstTimeHappened, true)
 	if(_method == "bulldogtalk"):
 		runScene("BulldogTalkScene")
+	if(_method == "fightclub"):
+		GM.pc.setLocation("fight_entrance")
+		GM.main.reRun()

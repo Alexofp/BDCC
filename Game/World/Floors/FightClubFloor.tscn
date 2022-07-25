@@ -1,9 +1,11 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Game/World/SubWorld.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Game/World/GameRoom.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Game/World/Floors/FightClubFloor.gd" type="Script" id=3]
 
 [node name="FightClubFloor" instance=ExtResource( 1 )]
+script = ExtResource( 3 )
 
 [node name="FightClubRoom" parent="." index="0" instance=ExtResource( 2 )]
 self_modulate = Color( 0.7, 0.7, 0.7, 1 )
@@ -16,6 +18,7 @@ population = 1
 [node name="FightClubRoom2" parent="." index="1" instance=ExtResource( 2 )]
 self_modulate = Color( 0.7, 0.7, 0.7, 1 )
 position = Vector2( 0, -64 )
+roomID = "fight_nearentrance"
 roomDescription = "Fight club"
 roomColor = 8
 population = 1
@@ -74,6 +77,7 @@ population = 1
 [node name="FightClubRoom9" parent="." index="8" instance=ExtResource( 2 )]
 self_modulate = Color( 0.7, 0.7, 0.7, 1 )
 position = Vector2( 64, -128 )
+roomID = "fight_neararena"
 roomDescription = "Fight club"
 roomColor = 8
 population = 1
@@ -84,3 +88,6 @@ position = Vector2( 64, -64 )
 roomDescription = "Fight club"
 roomColor = 8
 population = 1
+
+[connection signal="onEnter" from="FightClubRoom" to="." method="_on_FightClubRoom_onEnter"]
+[connection signal="onReact" from="FightClubRoom" to="." method="_on_FightClubRoom_onReact"]
