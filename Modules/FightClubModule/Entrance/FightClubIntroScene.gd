@@ -129,6 +129,7 @@ func _react(_action: String, _args):
 		getCharacter("kait").cummedInVaginaBy("avy")
 
 	if(_action == "endthescene"):
+		getCharacter("kait").clearOrificeFluids()
 		endScene()
 		return
 

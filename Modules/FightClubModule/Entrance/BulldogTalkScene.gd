@@ -155,6 +155,7 @@ func _react_scene_end(_tag, _result):
 		
 		if(battlestate == "win"):
 			setState("if_won")
+			setModuleFlag(FightClubModule.ModID, FightClubModule.BulldogBeatenUp, true)
 			addExperienceToPlayer(100)
 		else:
 			setState("if_lost")

@@ -9,6 +9,7 @@ script = ExtResource( 3 )
 
 [node name="FightClubRoom" parent="." index="0" instance=ExtResource( 2 )]
 self_modulate = Color( 0.7, 0.7, 0.7, 1 )
+roomName = "Entrance"
 roomID = "fight_entrance"
 roomDescription = "Fight club"
 roomSprite = 3
@@ -18,6 +19,7 @@ population = 1
 [node name="FightClubRoom2" parent="." index="1" instance=ExtResource( 2 )]
 self_modulate = Color( 0.7, 0.7, 0.7, 1 )
 position = Vector2( 0, -64 )
+roomName = "The Underground"
 roomID = "fight_nearentrance"
 roomDescription = "Fight club"
 roomColor = 8
@@ -26,6 +28,7 @@ population = 1
 [node name="FightClubRoom3" parent="." index="2" instance=ExtResource( 2 )]
 self_modulate = Color( 0.7, 0.7, 0.7, 1 )
 position = Vector2( -64, -64 )
+roomName = "The Underground"
 roomDescription = "Fight club"
 roomColor = 8
 population = 1
@@ -33,6 +36,7 @@ population = 1
 [node name="FightClubRoom4" parent="." index="3" instance=ExtResource( 2 )]
 self_modulate = Color( 0.7, 0.7, 0.7, 1 )
 position = Vector2( -64, -128 )
+roomName = "The Underground"
 roomDescription = "Fight club"
 roomColor = 8
 population = 1
@@ -55,6 +59,7 @@ population = 1
 [node name="FightClubRoom6" parent="." index="5" instance=ExtResource( 2 )]
 self_modulate = Color( 0.7, 0.7, 0.7, 1 )
 position = Vector2( -64, -192 )
+roomName = "The Underground"
 roomDescription = "Fight club"
 roomColor = 8
 population = 1
@@ -62,6 +67,8 @@ population = 1
 [node name="FightClubRoom7" parent="." index="6" instance=ExtResource( 2 )]
 self_modulate = Color( 0.5, 0.5, 0.5, 1 )
 position = Vector2( 0, -192 )
+roomName = "Announcer's Balcony"
+roomID = "fight_announcer"
 roomDescription = "Fight club"
 roomSprite = 1
 roomColor = 7
@@ -70,6 +77,7 @@ population = 1
 [node name="FightClubRoom8" parent="." index="7" instance=ExtResource( 2 )]
 self_modulate = Color( 0.7, 0.7, 0.7, 1 )
 position = Vector2( 64, -192 )
+roomName = "The Underground"
 roomDescription = "Fight club"
 roomColor = 8
 population = 1
@@ -77,6 +85,7 @@ population = 1
 [node name="FightClubRoom9" parent="." index="8" instance=ExtResource( 2 )]
 self_modulate = Color( 0.7, 0.7, 0.7, 1 )
 position = Vector2( 64, -128 )
+roomName = "The Underground"
 roomID = "fight_neararena"
 roomDescription = "Fight club"
 roomColor = 8
@@ -85,6 +94,7 @@ population = 1
 [node name="FightClubRoom10" parent="." index="9" instance=ExtResource( 2 )]
 self_modulate = Color( 0.7, 0.7, 0.7, 1 )
 position = Vector2( 64, -64 )
+roomName = "The Underground"
 roomDescription = "Fight club"
 roomColor = 8
 population = 1
