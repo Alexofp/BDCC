@@ -10,6 +10,8 @@ const BulldogBypassed = "BulldogBypassed"
 
 const AnnouncerIntroduced = "AnnouncerIntroduced"
 
+const AvyIntroduced = "AvyIntroduced"
+
 func _init():
 	id = "FightClubModule"
 	author = "Rahi"
@@ -21,6 +23,8 @@ func _init():
 		"res://Modules/FightClubModule/Entrance/FightClubIntroScene.gd",
 		"res://Modules/FightClubModule/Announcer/AnnouncerFirstTimeTalkScene.gd",
 		"res://Modules/FightClubModule/Announcer/AnnouncerTalkScene.gd",
+		"res://Modules/FightClubModule/Avy/AvyFirstTimeTalkScene.gd",
+		"res://Modules/FightClubModule/Avy/AvyTalkScene.gd",
 		]
 	characters = [
 		"res://Modules/FightClubModule/Entrance/Bulldog.gd",
@@ -31,6 +35,7 @@ func _init():
 	events = [
 		"res://Modules/FightClubModule/Entrance/FightClubEntranceEvent.gd",
 		"res://Modules/FightClubModule/Announcer/FightClubAnnouncerTalkEvent.gd",
+		"res://Modules/FightClubModule/Avy/FightClubAvyTalkEvent.gd",
 	]
 	quests = [
 	]
