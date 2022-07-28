@@ -74,3 +74,34 @@ func _on_Button3_pressed():
 	}
 	
 	$VBoxContainer/TextEdit2.text = JSON.print(result, "\t", true)
+
+static func tierSortFunc(a:String, b:String):
+	if float(a.trim_prefix("$")) > float(b.trim_prefix("$")):
+		return true
+	return false
+
+
+func _on_Button4_pressed():
+	var data = getData()
+	
+	var dateDict = OS.get_date()
+	var dateStr = Util.dateToString(dateDict)
+	
+	var newdata = {}
+	for entry in data:
+		var tier = entry["tier"]
+		if(!newdata.has(tier)):
+			newdata[tier] = []
+		newdata[tier].append({
+			"nickname": entry["nickname"],
+		})
+		
+	var tiers = newdata.keys()
+	tiers.sort_custom(self, "tierSortFunc")
+	var result = {
+		"dateString": dateStr,
+		"entries": newdata,
+		"tiers": tiers,
+	}
+	
+	$VBoxContainer/TextEdit2.text = JSON.print(result, "\t", true)

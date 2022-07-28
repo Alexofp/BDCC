@@ -65,6 +65,22 @@ func startLoadingDonationData():
 	var _ok = donationDataRequest.connect("request_completed", self, "onDonationDataRequest")
 	var _ok2 = donationDataRequest.request("https://raw.githubusercontent.com/Alexofp/BDCC/main/DonationInfo.json")
 
+func validateDonationData(donationData):
+	if(!(donationData is Dictionary)):
+		return false
+	if(!donationData.has("dateString") || !donationData.has("entries") || !(donationData["entries"] is Dictionary) || !donationData.has("tiers") || !(donationData["tiers"] is Array)):
+		return false
+	for tierName in donationData["entries"]:
+		var tier = donationData["entries"][tierName]
+		if(!(tier is Array)):
+			return false
+		for entry in tier:
+			var requiredFields = ["nickname"]
+			for req in requiredFields:
+				if(!entry.has(req)):
+					return false
+	return true
+
 func onDonationDataRequest(result, _response_code, _headers, body):
 	if result != HTTPRequest.RESULT_SUCCESS:
 		printerr("[onDonationDataRequest] Couldn't get data from github")
@@ -77,20 +93,9 @@ func onDonationDataRequest(result, _response_code, _headers, body):
 	
 	var donationData = jsonResult.result
 
-	if(!(donationData is Dictionary)):
+	if(!validateDonationData(donationData)):
 		printerr("[onDonationDataRequest] Bad data from github")
 		return
-		
-	if(!donationData.has("dateString") || !donationData.has("entries") || !(donationData["entries"] is Array)):
-		printerr("[onDonationDataRequest] Bad data from github")
-		return
-		
-	for entry in donationData["entries"]:
-		var requiredFields = ["gross", "nickname", "tier"]
-		for req in requiredFields:
-			if(!entry.has(req)):
-				printerr("[onDonationDataRequest] Bad data from github")
-				return
 	
 	cachedDonationData = donationData
 	emit_signal("donationDataUpdated")
@@ -102,14 +107,19 @@ func getDonationDataString():
 	else:
 		theData = cachedDonationData
 	
-	if(theData == null || !theData.has("entries") || !theData.has("dateString")):
+	if(theData == null || !validateDonationData(theData)):
 		return ""
 	
 	var newText = "[center][b][url=https://subscribestar.adult/rahi]SubscribeStar[/url][/b]\nCompiled "+str(theData["dateString"])+"\n\n"
 	
-	for entry in theData["entries"]:
-		newText += entry["nickname"]+" - "+entry["gross"]+"\n"
-	newText += "\nThank you [color=red]<3[/color][/center]"
+	for tierName in theData["tiers"]:
+		if(!theData["entries"].has(tierName)):
+			continue
+		newText += "[b]"+tierName+" tier[/b]\n"
+		for entry in theData["entries"][tierName]:
+			newText += entry["nickname"]+"\n"
+		newText += "\n"
+	newText += "Thank you [color=red]<3[/color][/center]"
 	return newText
 
 func _ready():
