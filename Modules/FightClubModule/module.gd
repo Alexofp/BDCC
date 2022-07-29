@@ -40,5 +40,11 @@ func _init():
 	quests = [
 	]
 
+func register():
+	.register()
+	
+	GlobalRegistry.registerFightClubFighter("res://Modules/FightClubModule/Fighters/Rubi/RubiFighter.gd")
+	GlobalRegistry.registerFightClubFighter("res://Modules/FightClubModule/Fighters/Volk/VolkFighter.gd")
+
 func resetFlagsOnNewDay():
 	pass

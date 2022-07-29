@@ -31,6 +31,19 @@ func _run():
 
 		saynn("She shows you her notes:")
 
+		for rankID in FightClubRank.getAll():
+			var rankName = FightClubRank.getVisibleName(rankID)
+			
+			sayn(rankName+":")
+			
+			for fighterID in GlobalRegistry.getFightClubFightersIDsByRank(rankID):
+				var fighter:FightClubFighter = GlobalRegistry.getFightClubFighter(fighterID)
+				
+				sayn(fighter.getNameAndNickname())
+			
+			sayn("")
+
+
 		saynn("Grand Champion:")
 
 		saynn("1 - Avy, The Unbeatable")

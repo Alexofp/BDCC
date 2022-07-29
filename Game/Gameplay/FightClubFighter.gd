@@ -1,0 +1,34 @@
+extends Reference
+class_name FightClubFighter
+
+var id = "error"
+
+func getVisibleName():
+	return "Error"
+
+func getNameAndNickname():
+	return "Error, The Error"
+
+func getAvyIntroduction():
+	return "PLEASE CHANGE ME"
+	
+func getAnnouncerIntroduction():
+	return "PLEASE CHANGE ME TOO"
+	
+func getRank():
+	return FightClubRank.FuckMeat
+
+func getOrder():
+	return 0
+
+func getFightCharacter():
+	return null
+
+func getBattleName():
+	return ""
+
+func getWinScene():
+	return null
+
+func getLoseScene():
+	return null

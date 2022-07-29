@@ -34,6 +34,8 @@ var lustActions: Dictionary = {}
 var defaultLustActions: Array = []
 var orgasmLustActions: Array = []
 var lootLists: Dictionary = {}
+var fightClubFightersByRank: Dictionary = {}
+var fightClubFighters: Dictionary = {}
 
 var bodypartStorageNode
 
@@ -842,3 +844,25 @@ func registerModulesFolder(folder: String):
 			file_name = dir.get_next()
 	else:
 		printerr("An error occurred when trying to access the path "+folder)
+
+func registerFightClubFighter(path: String):
+	var item = load(path)
+	var itemObject = item.new()
+	
+	var rank = itemObject.getRank()
+	if(!fightClubFightersByRank.has(rank)):
+		fightClubFightersByRank[rank] = []
+	
+	fightClubFightersByRank[rank].append(itemObject.id)
+	fightClubFighters[itemObject.id] = itemObject
+
+func getFightClubFighter(id):
+	if(!fightClubFighters.has(id)):
+		return null
+	return fightClubFighters[id]
+
+func getFightClubFightersIDsByRank(rank):
+	if(!fightClubFightersByRank.has(rank)):
+		return []
+	
+	return fightClubFightersByRank[rank]
