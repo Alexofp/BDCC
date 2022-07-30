@@ -2,6 +2,9 @@ extends Button
 
 var savedKey = -1
 
+signal pressedActually
+var showingDescription = false
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	if(OPTIONS.shouldShowShortcuts()):
@@ -27,3 +30,23 @@ func setShortcutPhysicalScancode(code):
 #			grab_click_focus()
 #			grab_focus()
 #			emit_signal("pressed")
+
+
+func _on_SceneOptionButton_pressed():
+	if(OS.has_touchscreen_ui_hint() && OPTIONS.shouldRequireDoubleTapOnMobile()):
+		if(!showingDescription):
+			showingDescription = true
+			emit_signal("mouse_entered")
+		else:
+			showingDescription = false
+			emit_signal("pressedActually")
+	else:
+		emit_signal("pressedActually")
+
+
+func _on_SceneOptionButton_focus_exited():
+	showingDescription = false
+
+
+func _on_SceneOptionButton_mouse_exited():
+	showingDescription = false

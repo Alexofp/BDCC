@@ -11,6 +11,7 @@ var npcPregnancyTimeDays: int
 
 var shouldScaleUI: bool = true
 var uiScaleMultiplier = 1.0
+var requireDoubleTapOnMobile = false
 
 var showSpeakerName = false
 var fontSize = "normal"
@@ -30,6 +31,7 @@ func resetToDefaults():
 	fontSize = "normal"
 	showShortcuts = true
 	measurementUnits = "metric"
+	requireDoubleTapOnMobile = false
 	
 	enabledContent.clear()
 	for contentType in ContentType.getAll():
@@ -75,6 +77,9 @@ func shouldShowShortcuts():
 
 func getMeasurementUnits():
 	return measurementUnits
+
+func shouldRequireDoubleTapOnMobile():
+	return requireDoubleTapOnMobile
 
 func getChangeableOptions():
 	var settings = [
@@ -211,6 +216,13 @@ func getChangeableOptions():
 					"value": showShortcuts,
 				},
 				{
+					"name": "Double-tap to pick option (mobile)",
+					"description": "First tap shows the description, second tap picks the option. Works only with touchscreens",
+					"id": "requireDoubleTapOnMobile",
+					"type": "checkbox",
+					"value": requireDoubleTapOnMobile,
+				},
+				{
 					"name": "Measurement units",
 					"description": "Choose how to display length values",
 					"id": "measurementUnits",
@@ -273,6 +285,8 @@ func applyOption(categoryID, optionID, value):
 			showShortcuts = value
 		if(optionID == "measurementUnits"):
 			measurementUnits = value
+		if(optionID == "requireDoubleTapOnMobile"):
+			requireDoubleTapOnMobile = value
 			
 	if(categoryID == "enabledContent"):
 		enabledContent[optionID] = value

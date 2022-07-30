@@ -120,12 +120,13 @@ func updateButtons():
 		var button:Button = buttons[i]
 		button.disabled = true
 		button.text = ""
-		if(button.is_connected("pressed", self, "_on_option_button")):
-			button.disconnect("pressed", self, "_on_option_button")
+		if(button.is_connected("pressedActually", self, "_on_option_button")):
+			button.disconnect("pressedActually", self, "_on_option_button")
 		if(button.is_connected("mouse_entered", self, "_on_option_button_tooltip")):
 			button.disconnect("mouse_entered", self, "_on_option_button_tooltip")
 		if(button.is_connected("mouse_exited", self, "_on_option_button_tooltip_end")):
 			button.disconnect("mouse_exited", self, "_on_option_button_tooltip_end")
+	
 	
 	for i in buttonsCountPerPage:
 		var index = currentPage * buttonsCountPerPage + i
@@ -139,13 +140,15 @@ func updateButtons():
 		button.text = option[1]
 		button.disabled = !option[0]
 		#button.set_meta("game_option", index)
-		var _some = button.connect("pressed", self, "_on_option_button", [index])
+		var _some = button.connect("pressedActually", self, "_on_option_button", [index])
 		var _some2 = button.connect("mouse_entered", self, "_on_option_button_tooltip", [index])
 		var _some3 = button.connect("mouse_exited", self, "_on_option_button_tooltip_end")
+
 		
 func _on_option_button(index):
 	var option = options[index]
 	#print("hello ",index, option)
+	
 	emit_signal("on_option_button", option[3], option[4])
 	
 func _on_option_button_tooltip(index):
@@ -155,7 +158,6 @@ func _on_option_button_tooltip(index):
 
 func _on_option_button_tooltip_end():
 	optionTooltip.set_is_active(false)
-
 
 func checkPageButtons():
 	if(currentPage > 0):

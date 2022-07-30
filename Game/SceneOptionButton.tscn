@@ -18,3 +18,7 @@ margin_left = 4.0
 margin_right = 8.0
 text = "1"
 valign = 1
+
+[connection signal="focus_exited" from="." to="." method="_on_SceneOptionButton_focus_exited"]
+[connection signal="mouse_exited" from="." to="." method="_on_SceneOptionButton_mouse_exited"]
+[connection signal="pressed" from="." to="." method="_on_SceneOptionButton_pressed"]
