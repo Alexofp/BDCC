@@ -31,15 +31,26 @@ func _run():
 
 		saynn("She shows you her notes:")
 
+		GlobalRegistry.sortFightClubFighters()
+		var showedPC = false
+		var pcRank = FightClubModule.getPCRank()
+		
 		for rankID in FightClubRank.getAll():
 			var rankName = FightClubRank.getVisibleName(rankID)
 			
 			sayn(rankName+":")
 			
 			for fighterID in GlobalRegistry.getFightClubFightersIDsByRank(rankID):
+				if(!showedPC && pcRank == rankID && FightClubModule.isFighterDefeated(fighterID)):
+					showedPC = true
+					sayn("{pc.name}")
+				
 				var fighter:FightClubFighter = GlobalRegistry.getFightClubFighter(fighterID)
 				
 				sayn(fighter.getNameAndNickname())
+			
+			if(rankID == FightClubRank.FuckMeat && !showedPC):
+				sayn("{pc.name}")
 			
 			sayn("")
 

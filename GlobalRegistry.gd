@@ -866,3 +866,14 @@ func getFightClubFightersIDsByRank(rank):
 		return []
 	
 	return fightClubFightersByRank[rank]
+
+func sortFightClubFighterFunc(a, b):
+	var aFighter = fightClubFighters[a]
+	var bFighter = fightClubFighters[b]
+	if aFighter.getOrder() < bFighter.getOrder():
+		return true
+	return false
+
+func sortFightClubFighters():
+	for rank in fightClubFightersByRank:
+		fightClubFightersByRank[rank].sort_custom(self, "sortFightClubFighterFunc")

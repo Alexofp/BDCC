@@ -48,3 +48,11 @@ func register():
 
 func resetFlagsOnNewDay():
 	pass
+
+static func getPCRank():
+	return FightClubRank.FuckMeat
+
+static func isFighterDefeated(fighterID):
+	if(fighterID == "rubi"):
+		return true
+	return false
