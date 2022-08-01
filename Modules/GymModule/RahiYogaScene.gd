@@ -32,7 +32,7 @@ func _run():
 		saynn("[say=rahi]T-thanks.[/say]")
 
 		addButton("Leave", "Enough starring", "leave")
-		addButtonWithChecks("Help", "Ask if the kitty needs some help", "help", [], [[ButtonChecks.StatCheck, Stat.Agility, 10]])
+		addButtonWithChecks("Help", "Ask if the kitty needs some help", "help", [], [[ButtonChecks.StatCheck, Stat.Agility, 5]])
 
 	if(state == "leave"):
 		saynn("You decide not to make the poor kitty look even more embarrassed and stand up from the bench.")
@@ -99,12 +99,67 @@ func _run():
 		saynn("Maybe one day.")
 
 		addButton("Leave", "You helped kitty", "leave2")
+		addButtonWithChecks("Stretching", "(lewd) Help Rahi do an advanced exercise", "stretching", [], [[ButtonChecks.StatCheck, Stat.Agility, 10]])
 
 	if(state == "leave2"):
 		saynn("You offer the feline a headpat as a reward for her efforts. She mewls happily, still holding her pose.")
 
 		addButton("Continue", "Time to go", "endthescene")
 		# (scene ends)
+
+	if(state == "stretching"):
+		# (needs even more agility)
+
+		saynn("You offer the feline a headpat as a reward for her efforts. She mewls happily, still holding her pose.")
+
+		saynn("[say=pc]Let’s try something else. Work on other parts of your body.[/say]")
+
+		saynn("Kitty produces a curious mewl and then a cute moan as her paws slip off, causing her to break the pose and lie down flat.")
+
+		saynn("[say=rahi]Ah.. like what?[/say]")
+
+		saynn("Your hand slides over kitty’s leg and taps on her shorts.")
+
+		saynn("[say=pc]Are you able to do leg splits?[/say]")
+
+		saynn("[say=rahi]Uh.. maybe?[/say]")
+
+		saynn("Hearing her doesn’t give you much confidence, better to check it. You use your hands to guide the kitty to lay flat on her back with her paws by her sides, she seems to be quite used to your touch by now. Kitty is now ready so you get a hold of her right ankle and make her raise it while keeping the leg straight.")
+
+		saynn("[say=rahi]Ohh-hh..[/say]")
+
+		saynn("It goes pretty well up to a certain point, Kitty’s feline flexibility allows her to raise her leg to about 150 degrees compared to the other one. Anything past that and kitty starts struggling, her legs shivering, knees bending.")
+
+		saynn("[say=pc]Not bad, I bet we can get there with some extra warming up. Hold your leg like this, kitty.[/say]")
+
+		saynn("[say=rahi]Ah.. Kitty doesn’t know..[/say]")
+
+		saynn("Brown kitty wraps her arm under her raised knee and tries to hold her leg high for you. She tilts her head down, probably realizing how exposed it makes her crotch look even with shorts. You put your hands on kitty’s exposed fluffy thighs and begin kneading them, giving a little massage to make that blood flow better. Kitty reacts by squirming slightly and mewling, she is so tensed up that your touches seem to set off little uncontrollable reactions in her body. You notice a little damp spot appearing on kitty’s shorts roughly where her sensitive folds would be, seems like the sexual tenstion is high in her as well. That puts a smile on your face.")
+
+		saynn("You decide to be a bit more bold and slide your hand over the kitty’s shorts, your digits brush right over where her clit would be under the cloth. Kitty reacts by looking around and blushing red.")
+
+		saynn("[say=rahi]O-others are w-watching..[/say]")
+
+		saynn("[say=pc]So? They’re busy lifting heavy chunks of metal.[/say]")
+
+		saynn("Your hand slides over the girl’s shorts again but this time it stops and boldly lands on them, your digit starts tracing little circles around where her pussy is, rubbing the sensitive folds through the fabric and watching her reaction. Kitty only squirms and blushes more, little soft moans escape from her as the damp spot on her shorts becomes bigger. But she still tries to hold the pose, holding her leg high for you.")
+
+		saynn("Your digits focus on rubbing kitty’s folds and her sensitive clit, all through the clothing. A second hand joins and moves down to the feline’s rear, a single finger gets a feel for the girl’s tailhole and starts prodding at it, making kitty open her mouth and produce moans more often.")
+
+		saynn("[say=pc]So much tension inside you. You gotta let it out sometimes, kitty.[/say]")
+
+		saynn("[say=rahi]Ah.. If you c-continue.. kitty w-will..[/say]")
+
+		saynn("And sure enough, she cuts the end of her sentence short and lets out a passionate pleasure noise as her body squirms from sudden orgasmic waves washing over her and resonating near her crotch. As you continue rubbing her through the cloth, kitty’s shorts receive a shower of her juices as she cums hard, you see her curling her toes and arching her back.")
+
+		saynn("[say=pc]Good~. It’s a good way to work out, isn’t it.[/say]")
+
+		saynn("You lick your digits and smile at the girl. Kitty pants softly and covers her face with her free hand, she is clearly feeling embarrassed. You let her close her legs and stand up, kitty obeys and follows you, leaving a wet spot on the yoga mat too where she was.")
+
+		saynn("[say=rahi]Kitty will.. go wash herself..[/say]")
+
+		# (scene ends)
+		addButton("Continue", "Time to go", "endthescene")
 
 func _react(_action: String, _args):
 	
