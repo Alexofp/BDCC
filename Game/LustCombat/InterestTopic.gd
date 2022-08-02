@@ -30,6 +30,7 @@ const HasCockOnly = "HasCockOnly"
 const StuffedPussy = "StuffedPussy"
 const StuffedAss = "StuffedAss"
 const StuffedPussyOrAss = "StuffedPussyOrAss"
+const Pregnant = "Pregnant"
 
 const StuffedThroat = "StuffedThroat"
 

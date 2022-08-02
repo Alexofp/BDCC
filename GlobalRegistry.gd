@@ -189,6 +189,7 @@ func _ready():
 	registerStageSceneFolder("res://Player/StageScene3D/Scenes/")
 	
 	registerModulesFolder("res://Modules/")
+	sortFightClubFighters()
 	
 # The point is that it will still generate unique ids even after saving/loading
 func generateUniqueID():
@@ -870,7 +871,7 @@ func getFightClubFightersIDsByRank(rank):
 func sortFightClubFighterFunc(a, b):
 	var aFighter = fightClubFighters[a]
 	var bFighter = fightClubFighters[b]
-	if aFighter.getOrder() < bFighter.getOrder():
+	if aFighter.getOrder() > bFighter.getOrder():
 		return true
 	return false
 

@@ -24,11 +24,14 @@ func getOrder():
 func getFightCharacter():
 	return null
 
-func getBattleName():
-	return ""
-
 func getWinScene():
 	return null
 
 func getLoseScene():
 	return null
+
+func getWinExperience():
+	return 30
+
+func getWinCredits():
+	return 5

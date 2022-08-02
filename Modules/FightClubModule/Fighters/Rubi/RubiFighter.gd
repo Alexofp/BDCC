@@ -24,11 +24,8 @@ func getOrder():
 func getFightCharacter():
 	return "rubi"
 
-func getBattleName():
-	return "RubiFight"
-
 func getWinScene():
-	return null
+	return "RubiWonScene"
 
 func getLoseScene():
-	return null
+	return "RubiLostToScene"

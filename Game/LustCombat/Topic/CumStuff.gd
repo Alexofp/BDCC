@@ -5,6 +5,7 @@ func _init():
 		InterestTopic.StuffedPussy,
 		InterestTopic.StuffedAss,
 		InterestTopic.StuffedPussyOrAss,
+		InterestTopic.Pregnant,
 		InterestTopic.StuffedThroat,
 		InterestTopic.CoveredInCum,
 		InterestTopic.CoveredInLotsOfCum,
@@ -39,6 +40,11 @@ func getTopicValue(_topicID, _pc):
 	if(_topicID == InterestTopic.StuffedPussyOrAss):
 		return float(isButtStuffed || isPussyStuffed)
 	
+	if(_topicID == InterestTopic.Pregnant):
+		if(_pc.isVisiblyPregnant()):
+			return 1.0
+		return 0.0
+	
 	if(_topicID == InterestTopic.StuffedThroat):
 		return float(isThroatStuffed)
 	
@@ -51,6 +57,8 @@ func getVisibleName(_topicID):
 		return "a cum-stuffed ass"
 	if(_topicID == InterestTopic.StuffedPussyOrAss):
 		return "any used hole"
+	if(_topicID == InterestTopic.Pregnant):
+		return "pregnant bellies"
 	if(_topicID == InterestTopic.StuffedThroat):
 		return "cum eaters"
 	if(_topicID == InterestTopic.CoveredInCum):

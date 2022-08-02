@@ -86,6 +86,7 @@ func getLustTopics():
 		InterestTopic.ExposedBra : 0.4,
 		InterestTopic.Bodywritings : 0.2,
 		InterestTopic.BDSMRestraints : 0.2,
+		InterestTopic.Pregnant: 0.2,
 	}
 
 func getPriority():

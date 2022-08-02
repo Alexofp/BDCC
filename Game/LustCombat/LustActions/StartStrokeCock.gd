@@ -64,6 +64,7 @@ func getLustTopics():
 		InterestTopic.ExposedPanties : 0.2,
 		InterestTopic.ExposedBra : 0.1,
 		InterestTopic.BDSMRestraints : 0.1,
+		InterestTopic.Pregnant: 0.1,
 	}
 
 func isTease():

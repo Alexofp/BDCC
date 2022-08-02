@@ -45,3 +45,8 @@ func getAttackSoloAnimation():
 
 func getExperience():
 	return [[Skill.Combat, 10]]
+
+func getAnticipationText(_attacker, _receiver):
+	return RNG.pick([
+		"{attacker.name} tries to punch {receiver.name}",
+	])

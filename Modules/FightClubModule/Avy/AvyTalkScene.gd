@@ -1,5 +1,7 @@
 extends "res://Scenes/SceneBase.gd"
 
+var savedFighterID = ""
+
 func _init():
 	sceneID = "AvyTalkScene"
 
@@ -9,31 +11,32 @@ func _run():
 		GM.main.playAnimation(StageScene.Duo, "stand", {npc="avy"})
 
 	if(state == ""):
+		var pcRank = FightClubModule.getPCRank()
+		
 		# (if fuck meat rank)
-
-		saynn("[say=avy]So, ready to prove yourself, fuck meat?[/say]")
+		if(pcRank == FightClubRank.FuckMeat):
+			saynn("[say=avy]So, ready to prove yourself, fuck meat?[/say]")
 
 		# (if failed hero rank)
-
-		saynn("[say=avy]You’re making quite some noise for yourself, failed hero. Think you can handle the heat?[/say]")
+		if(pcRank == FightClubRank.FailedHero):
+			saynn("[say=avy]You’re making quite some noise for yourself, failed hero. Think you can handle the heat?[/say]")
 
 		# (if play toy rank)
-
-		saynn("[say=avy]People like how you fight. Don’t get any wrong ideas though, you’re still just a play toy.[/say]")
+		if(pcRank == FightClubRank.PlayToy):
+			saynn("[say=avy]People like how you fight. Don’t get any wrong ideas though, you’re still just a play toy.[/say]")
 
 		# (if attention whore)
-
-		saynn("[say=avy]Think you almost reached the top? Think twice, attention whore.[/say]")
+		if(pcRank == FightClubRank.AttentionWhore):
+			saynn("[say=avy]Think you almost reached the top? Think twice, attention whore.[/say]")
 
 		# (if grand champion)
-
-		saynn("[say=avy]Nobody stayed at the top for long, except for me. Enjoy it while it lasts.[/say]")
+		if(pcRank == FightClubRank.GrandChampion):
+			saynn("[say=avy]Nobody stayed at the top for long, except for me. Enjoy it while it lasts.[/say]")
 
 		saynn("She shows you her notes:")
 
-		GlobalRegistry.sortFightClubFighters()
 		var showedPC = false
-		var pcRank = FightClubModule.getPCRank()
+		var i = 1
 		
 		for rankID in FightClubRank.getAll():
 			var rankName = FightClubRank.getVisibleName(rankID)
@@ -43,69 +46,64 @@ func _run():
 			for fighterID in GlobalRegistry.getFightClubFightersIDsByRank(rankID):
 				if(!showedPC && pcRank == rankID && FightClubModule.isFighterDefeated(fighterID)):
 					showedPC = true
-					sayn("{pc.name}")
+					sayn(str(i)+" - {pc.name}")
+					i+=1
 				
 				var fighter:FightClubFighter = GlobalRegistry.getFightClubFighter(fighterID)
 				
-				sayn(fighter.getNameAndNickname())
+				if(FightClubModule.isFighterDefeated(fighterID)):
+					sayn(str(i)+" - "+fighter.getNameAndNickname()+" (defeated)")
+				else:
+					sayn(str(i)+" - "+fighter.getNameAndNickname())
+				i+=1
 			
 			if(rankID == FightClubRank.FuckMeat && !showedPC):
-				sayn("{pc.name}")
+				sayn(str(i)+" - {pc.name}")
+				i+=1
 			
 			sayn("")
-
-
-		saynn("Grand Champion:")
-
-		saynn("1 - Avy, The Unbeatable")
-
-		saynn("Attention Whore:")
-
-		saynn("2 - Some stallion stud")
-
-		saynn("3 - Kait, Tavi’s old pet")
-
-		saynn("Play Toy:")
-
-		saynn("4 - Axis. Some buff dude? Canine that wants you to call him Daddy")
-
-		saynn("5 - Nova")
-
-		saynn("Failed Hero:")
-
-		saynn("6 - Rebel, Horse that likes to fist")
-
-		saynn("7 - Ferri")
-
-		saynn("Fuck Meat:")
-
-		saynn("8 - Volk, Small canine that has a shiv")
-
-		saynn("9 - Rubi, The Horny Femboy")
-
-		saynn("10 - {pc.name}")
-
-		addButton("Fight", "Tell her that you are ready to fight the next opponent", "fight")
+		
+		var nextFighter = FightClubModule.getNextFighter()
+		if(nextFighter != null):
+			addButton("Fight", "Tell her that you are ready to fight the next opponent", "fightnext")
+		else:
+			addDisabledButton("Fight", "No one left to fight :(")
+		addDisabledButton("Fight Avy", "Final arena fight not implemented yet")
+		addButton("Rematch", "Fight one of your defeated opponents again", "rematchmenu")
 		addButton("Leave", "Gotta go", "endthescene")
 
+	if(state == "rematchmenu"):
+		saynn("Who do you wanna rematch?")
+		
+		for rankID in FightClubRank.getAll():
+			for fighterID in GlobalRegistry.getFightClubFightersIDsByRank(rankID):
+				if(!FightClubModule.isFighterDefeated(fighterID)):
+					continue
+				var fighter: FightClubFighter = GlobalRegistry.getFightClubFighter(fighterID)
+				
+				addButton(fighter.getVisibleName(), fighter.getNameAndNickname(), "rematch", [fighterID])
+		
+		addButton("Back", "You don't wanna fight anyone", "")
+
 	if(state == "fight"):
+		var arenaFighter:FightClubFighter = GlobalRegistry.getFightClubFighter(savedFighterID)
 		# (if first time)
+		if(!getModuleFlag(FightClubModule.ModID, FightClubModule.FightClubFirstArenaIntroduction)):
+			saynn("[say=pc]I’m ready.[/say]")
 
-		saynn("[say=pc]I’m ready.[/say]")
+			saynn("[say=avy]First time is always special, isn’t it, sugar.[/say]")
 
-		saynn("[say=avy]First time is always special, isn’t it, SUGAR.[/say]")
+			saynn("Avy leans onto the fence and quickly goes through her notes.")
 
-		saynn("Avy leans onto the fence and quickly goes through her notes.")
-
-		saynn("[say=avy]Alright, your first opponent is <opponent>. <opponent_details>[/say]")
+			saynn("[say=avy]"+arenaFighter.getAvyIntroduction()+"[/say]")
 
 		# (if not first time)
+		else:
+			saynn("[say=pc]Who’s next?[/say]")
 
-		saynn("[say=pc]Who’s next?[/say]")
+			saynn("Avy leans onto the fence and quickly goes through her notes.")
 
-		saynn("Avy leans onto the fence and quickly goes through her notes.")
-
-		saynn("[say=avy]So eager. Alright, your next opponent is <opponent>. <opponent_details>[/say]")
+			saynn("[say=avy]"+arenaFighter.getAvyIntroduction()+"[/say]")
 
 		# (can start fight or leave)
 
@@ -113,6 +111,15 @@ func _run():
 		addButton("Cancel", "You need some time to think", "endthescene")
 
 	if(state == "fight1"):
+		aimCameraAndSetLocName("fight_arena")
+		removeCharacter("avy")
+		addCharacter("announcer")
+		
+		var arenaFighter:FightClubFighter = GlobalRegistry.getFightClubFighter(savedFighterID)
+		
+		GM.main.playAnimation(StageScene.Duo, "stand", {npc=arenaFighter.getFightCharacter()})
+		addCharacter(arenaFighter.getFightCharacter())
+		
 		saynn("You nod and get into the fighting space by climbing over the fence. The arena itself is just a huge empty square space that’s separated from the crowd with a tall chain-link fence. Over one of the sides there is a balcony where the announcer stands.")
 
 		saynn("[say=announcer]Welcome, ladies and gentleman! Are you ready to be entertained?[/say]")
@@ -120,33 +127,41 @@ func _run():
 		saynn("The crowd goes wild, you hear cheering and people banging against the fence.")
 
 		# (if player first time)
+		if(!getModuleFlag(FightClubModule.ModID, FightClubModule.FightClubFirstArenaIntroduction)):
+			setModuleFlag(FightClubModule.ModID, FightClubModule.FightClubFirstArenaIntroduction, true)
+			saynn("[say=announcer]Let’s do this then! We actually have a new addition in our ranks of fighters! In the left corner, we have {pc.name}! Can we make some noise for the fresh meat![/say]")
 
-		saynn("[say=announcer]Let’s do this then! We actually have a new addition in our ranks of fighters! In the left corner, we have {pc.name}! Can we make some noise for the fresh meat![/say]")
-
-		saynn("The cheering only gets louder. Though some inmates yell out things like ‘Fuck meat!’, ‘Breeding stock!’, ‘Whore!’.")
+			saynn("The cheering only gets louder. Though some inmates yell out things like ‘Fuck meat!’, ‘Breeding stock!’, ‘Whore!’.")
 
 		# (if fuck meat rank)
+		else:
+			saynn("[say=announcer]Let’s do this then! In the left corner, we have {pc.name}, a proud warrior with a " +FightClubRank.getVisibleName(FightClubModule.getPCRank())+ " rank! Make some noise![/say]")
 
-		saynn("[say=announcer]Let’s do this then! In the left corner, we have {pc.name}, a proud warrior with a Fuck Meat rank! Make some noise![/say]")
+			saynn("The cheering only gets louder.")
 
-		saynn("The cheering only gets louder.")
-
-		saynn("[say=announcer]<opponent_greeting>[/say]")
+		saynn("[say=announcer]"+arenaFighter.getAnnouncerIntroduction()+"[/say]")
 
 		saynn("[say=announcer]And remember, the winner gets to do whatever they want to the loser. Let the fight begin![/say]")
 
-		addButton("Fight", "Time to fight", "fight2")
-
-	if(state == "fight2"):
-		# (the fight scene gets started)
-
-		# (it also handles the winning/losing)
-		pass
-		# (scene ends)
+		addButton("Fight", "Time to fight", "startfight")
 
 
 
 func _react(_action: String, _args):
+	if(_action == "startfight"):
+		var arenaFighter:FightClubFighter = GlobalRegistry.getFightClubFighter(savedFighterID)
+		
+		runScene("FightScene", [arenaFighter.getFightCharacter(), "arenafight"], "arenafight")
+	
+	if(_action == "fightnext"):
+		savedFighterID = FightClubModule.getNextFighter()
+		setState("fight")
+		return
+		
+	if(_action == "rematch"):
+		savedFighterID = _args[0]
+		setState("fight")
+		return
 	
 	if(_action == "endthescene"):
 		endScene()
@@ -154,3 +169,49 @@ func _react(_action: String, _args):
 
 	setState(_action)
 
+
+func saveData():
+	var data = .saveData()
+	
+	data["savedFighterID"] = savedFighterID
+	
+	return data
+	
+func loadData(data):
+	.loadData(data)
+	
+	savedFighterID = SAVE.loadVar(data, "savedFighterID", "")
+
+func _react_scene_end(_tag, _result):
+	if(_tag == "arenafight"):
+		processTime(30 * 60)
+		var battlestate = _result[0]
+		#var wonHow = _result[1]
+		var arenaFighter:FightClubFighter = GlobalRegistry.getFightClubFighter(savedFighterID)
+		
+		if(battlestate == "win"):
+			#setState("if_won")
+			
+			# first time
+			if(!FightClubModule.isFighterDefeated(savedFighterID)):
+				addExperienceToPlayer(arenaFighter.getWinExperience())
+				var addCredits = arenaFighter.getWinCredits()
+				GM.pc.addCredits(addCredits)
+				addMessage("You received "+str(addCredits)+" "+Util.multipleOrSingularEnding(addCredits, "credit"))
+			else:
+				GM.pc.addCredits(1)
+				addMessage("You received 1 credit for a rematch")
+				
+			FightClubModule.markFighterAsDefeated(savedFighterID)
+			
+			var winScene = arenaFighter.getWinScene()
+			if(winScene != null):
+				runScene(winScene)
+			endScene()
+		else:
+			#setState("if_lost")
+			var lostScene = arenaFighter.getLoseScene()
+			if(lostScene != null):
+				runScene(lostScene)
+			
+			endScene()

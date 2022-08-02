@@ -24,9 +24,6 @@ func getOrder():
 func getFightCharacter():
 	return "volk"
 
-func getBattleName():
-	return "VolkFight"
-
 func getWinScene():
 	return null
 

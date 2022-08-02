@@ -12,6 +12,10 @@ const AnnouncerIntroduced = "AnnouncerIntroduced"
 
 const AvyIntroduced = "AvyIntroduced"
 
+const FightClubPCRank = "FightClubPCRank"
+const FightClubDefeatedFighters = "FightClubDefeatedFighters"
+const FightClubFirstArenaIntroduction = "FightClubFirstArenaIntroduction"
+
 func _init():
 	id = "FightClubModule"
 	author = "Rahi"
@@ -25,11 +29,15 @@ func _init():
 		"res://Modules/FightClubModule/Announcer/AnnouncerTalkScene.gd",
 		"res://Modules/FightClubModule/Avy/AvyFirstTimeTalkScene.gd",
 		"res://Modules/FightClubModule/Avy/AvyTalkScene.gd",
+		
+		"res://Modules/FightClubModule/Fighters/Rubi/RubiLostToScene.gd",
+		"res://Modules/FightClubModule/Fighters/Rubi/RubiWonScene.gd",
 		]
 	characters = [
 		"res://Modules/FightClubModule/Entrance/Bulldog.gd",
 		"res://Modules/FightClubModule/Announcer/TheAnnouncer.gd",
 		"res://Modules/FightClubModule/Entrance/KaitCharacter.gd",
+		"res://Modules/FightClubModule/Fighters/Rubi/RubiCharacter.gd",
 	]
 	items = []
 	events = [
@@ -50,9 +58,40 @@ func resetFlagsOnNewDay():
 	pass
 
 static func getPCRank():
-	return FightClubRank.FuckMeat
+	return GM.main.getModuleFlag(ModID, FightClubPCRank, FightClubRank.FuckMeat)
 
-static func isFighterDefeated(fighterID):
-	if(fighterID == "rubi"):
+static func raisePCRankTo(newRank):
+	var currentRank = getPCRank()
+	var currentRankOrder = FightClubRank.getOrder(currentRank)
+	var newRankOrder = FightClubRank.getOrder(newRank)
+	
+	if(newRankOrder < currentRankOrder):
+		GM.main.setModuleFlag(ModID, FightClubPCRank, newRank)
 		return true
 	return false
+
+static func isFighterDefeated(fighterID):
+	var defeated = GM.main.getModuleFlag(ModID, FightClubDefeatedFighters, {})
+	if(defeated.has(fighterID) && defeated[fighterID]):
+		return true
+	
+	return false
+
+static func getNextFighter():
+	var ranks = FightClubRank.getAll()
+	
+	# iterating backwards over ranks and fighters to find the first one we didn't fight yet
+	for i in ranks.size():
+		var rankID = ranks[-i-1]
+		
+		var fighters = GlobalRegistry.getFightClubFightersIDsByRank(rankID)
+		for i2 in fighters.size():
+			var fighterID = fighters[-i2-1]
+			if(!isFighterDefeated(fighterID)):
+				return fighterID
+	return null
+
+static func markFighterAsDefeated(fighterID):
+	var defeated = GM.main.getModuleFlag(ModID, FightClubDefeatedFighters, {})
+	defeated[fighterID] = true
+	GM.main.setModuleFlag(ModID, FightClubDefeatedFighters, defeated)

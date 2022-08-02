@@ -76,6 +76,7 @@ func getLustTopics():
 		InterestTopic.ExposedCock : 0.4,
 		InterestTopic.ExposedPanties : 0.2,
 		InterestTopic.BDSMRestraints : 0.2,
+		InterestTopic.Pregnant: 0.2,
 	}
 
 func getPriority():

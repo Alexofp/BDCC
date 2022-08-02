@@ -91,6 +91,7 @@ func getLustTopics():
 		InterestTopic.BDSMRestraints : 0.4,
 		InterestTopic.ButtPlugs : 0.5,
 		InterestTopic.VaginalPlugs : 0.5,
+		InterestTopic.Pregnant: 1.0,
 	}
 
 func getPriority():
