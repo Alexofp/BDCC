@@ -119,3 +119,12 @@ func _on_MainHallRoom9_onEnter(room):
 func _on_MainHallRoom9_onReact(room, key):
 	if(key == "stocks"):
 		room.runScene("TryStocksScene")
+
+
+func _on_MainHallRoom21_onEnter(room):
+	room.addButton("Mirror", "Change your haircut", "mirror")
+
+
+func _on_MainHallRoom21_onReact(room, key):
+	if(key == "mirror"):
+		room.runScene("ChangeHaircutScene")
