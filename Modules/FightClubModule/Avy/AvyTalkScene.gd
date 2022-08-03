@@ -65,9 +65,9 @@ func _run():
 		
 		var nextFighter = FightClubModule.getNextFighter()
 		if(nextFighter != null):
-			addButton("Fight", "Tell her that you are ready to fight the next opponent", "fightnext")
+			addButton("Arena", "Tell her that you are ready to fight the next opponent", "fightnext")
 		else:
-			addDisabledButton("Fight", "No one left to fight :(")
+			addDisabledButton("Arena", "No one left to fight :(")
 		addDisabledButton("Fight Avy", "Final arena fight not implemented yet")
 		addButton("Rematch", "Fight one of your defeated opponents again", "rematchmenu")
 		addButton("Leave", "Gotta go", "endthescene")
@@ -107,7 +107,7 @@ func _run():
 
 		# (can start fight or leave)
 
-		addButton("Fight", "Climb over the fence and start the fight", "fight1")
+		addButton("Let's go", "Climb over the fence and start the fight", "fight1")
 		addButton("Cancel", "You need some time to think", "endthescene")
 
 	if(state == "fight1"):

@@ -389,6 +389,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Inventory/LootTable/LootTableBase.gd"
 }, {
+"base": "AIStrategyBase",
+"class": "LoseEarlyAI",
+"language": "GDScript",
+"path": "res://Game/Combat/AIStrategy/LoseEarlyAI.gd"
+}, {
 "base": "Reference",
 "class": "LustAction",
 "language": "GDScript",
@@ -796,6 +801,7 @@ _global_script_class_icons={
 "LimbTypes": "",
 "LootList": "",
 "LootTableBase": "",
+"LoseEarlyAI": "",
 "LustAction": "",
 "LustActivity": "",
 "LustCombatState": "",

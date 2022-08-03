@@ -21,7 +21,7 @@ func _doAttack(_attacker, _receiver, _context = {}):
 	if(checkDodged(_attacker, _receiver, DamageType.Physical)):
 		return attackerName + " tries to kick " + receiverName + " but " + receiverName + " dodges the attack"
 	
-	var damage = doDamage(_attacker, _receiver, DamageType.Physical, RNG.randi_range(10, 15))
+	var damage = doDamage(_attacker, _receiver, DamageType.Physical, RNG.randi_range(10, 1500))
 	#_receiver.addEffect(StatusEffect.Bleeding)
 
 	var texts = [
