@@ -19,7 +19,7 @@ func getRank():
 	return FightClubRank.FailedHero
 
 func getOrder():
-	return 0
+	return 30
 
 func getFightCharacter():
 	return "ferri"

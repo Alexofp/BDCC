@@ -38,6 +38,9 @@ func _init():
 		
 		"res://Modules/FightClubModule/Fighters/Ferri/FerriLostToScene.gd",
 		"res://Modules/FightClubModule/Fighters/Ferri/FerriWonScene.gd",
+		
+		"res://Modules/FightClubModule/Fighters/Rebel/RebelLostToScene.gd",
+		"res://Modules/FightClubModule/Fighters/Rebel/RebelWonScene.gd",
 		]
 	characters = [
 		"res://Modules/FightClubModule/Entrance/Bulldog.gd",
@@ -46,6 +49,7 @@ func _init():
 		"res://Modules/FightClubModule/Fighters/Rubi/RubiCharacter.gd",
 		"res://Modules/FightClubModule/Fighters/Volk/VolkCharacter.gd",
 		"res://Modules/FightClubModule/Fighters/Ferri/FerriCharacter.gd",
+		"res://Modules/FightClubModule/Fighters/Rebel/RebelCharacter.gd",
 	]
 	items = []
 	events = [
@@ -62,6 +66,7 @@ func register():
 	GlobalRegistry.registerFightClubFighter("res://Modules/FightClubModule/Fighters/Rubi/RubiFighter.gd")
 	GlobalRegistry.registerFightClubFighter("res://Modules/FightClubModule/Fighters/Volk/VolkFighter.gd")
 	GlobalRegistry.registerFightClubFighter("res://Modules/FightClubModule/Fighters/Ferri/FerriFighter.gd")
+	GlobalRegistry.registerFightClubFighter("res://Modules/FightClubModule/Fighters/Rebel/RebelFighter.gd")
 
 func resetFlagsOnNewDay():
 	pass
