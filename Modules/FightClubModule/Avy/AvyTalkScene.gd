@@ -203,15 +203,18 @@ func _react_scene_end(_tag, _result):
 				addMessage("You received 1 credit for a rematch")
 				
 			FightClubModule.markFighterAsDefeated(savedFighterID)
+			FightClubModule.raisePCRankTo(arenaFighter.getRank())
 			
 			var winScene = arenaFighter.getWinScene()
 			if(winScene != null):
+				GM.main.playAnimation(StageScene.Duo, "stand", {npc=arenaFighter.getFightCharacter(), npcAction="kneel"})
 				runScene(winScene)
 			endScene()
 		else:
 			#setState("if_lost")
 			var lostScene = arenaFighter.getLoseScene()
 			if(lostScene != null):
+				GM.main.playAnimation(StageScene.Duo, "kneel", {npc=arenaFighter.getFightCharacter()})
 				runScene(lostScene)
 			
 			endScene()

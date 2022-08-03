@@ -32,12 +32,16 @@ func _init():
 		
 		"res://Modules/FightClubModule/Fighters/Rubi/RubiLostToScene.gd",
 		"res://Modules/FightClubModule/Fighters/Rubi/RubiWonScene.gd",
+		
+		"res://Modules/FightClubModule/Fighters/Volk/VolkLostToScene.gd",
+		"res://Modules/FightClubModule/Fighters/Volk/VolkWonScene.gd",
 		]
 	characters = [
 		"res://Modules/FightClubModule/Entrance/Bulldog.gd",
 		"res://Modules/FightClubModule/Announcer/TheAnnouncer.gd",
 		"res://Modules/FightClubModule/Entrance/KaitCharacter.gd",
 		"res://Modules/FightClubModule/Fighters/Rubi/RubiCharacter.gd",
+		"res://Modules/FightClubModule/Fighters/Volk/VolkCharacter.gd",
 	]
 	items = []
 	events = [

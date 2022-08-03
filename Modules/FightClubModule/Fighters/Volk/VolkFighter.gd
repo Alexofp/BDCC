@@ -25,7 +25,13 @@ func getFightCharacter():
 	return "volk"
 
 func getWinScene():
-	return null
+	return "VolkWonScene"
 
 func getLoseScene():
-	return null
+	return "VolkLostToScene"
+
+func getWinExperience():
+	return 40
+
+func getWinCredits():
+	return 5

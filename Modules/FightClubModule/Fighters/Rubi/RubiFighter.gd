@@ -29,3 +29,9 @@ func getWinScene():
 
 func getLoseScene():
 	return "RubiLostToScene"
+
+func getWinExperience():
+	return 30
+
+func getWinCredits():
+	return 3

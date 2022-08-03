@@ -7,6 +7,9 @@ var minCredits = 0
 var maxCredits = 0
 var creditsChance = 100
 
+func addLoot(chance, items):
+	loot.append([chance, items])
+
 func generateCredits():
 	if(!RNG.chance(creditsChance)):
 		return 0

@@ -11,7 +11,7 @@ func getCharges():
 	return charges
 
 func getDamageRange():
-	return [20, 30]
+	return [50, 60]
 
 func _init():
 	id = "Shiv"
