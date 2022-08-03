@@ -14,7 +14,7 @@ func _run():
 		addButton("Pay", "Use your credits to pay the guy", "trypay")
 		addButton("Intimidate", "Try to fight the guy. This will be a very tough one", "intimidate")
 		if(!getModuleFlag(FightClubModule.ModID, FightClubModule.BulldogSeduced)):
-			addButton("Sex?", "Offer to pay with your body. This will be very rough..", "sex?")
+			addButtonWithChecks("Sex?", "Offer to pay with your body. This will be very rough..", "sex?", [], [[ButtonChecks.StatCheck, Stat.Sexiness, 5]])
 		else:
 			addDisabledButton("Sex?", "You already seduced him..")
 		addButton("Leave", "You don't feel like talking", "endthescene")
