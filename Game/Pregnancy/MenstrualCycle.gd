@@ -309,3 +309,9 @@ func giveBirth():
 	noticedReadyToGiveBirth = false
 	
 	return result
+
+func isPregnantFromPlayer():
+	for egg in impregnatedEggCells:
+		if(egg.fatherID == "pc"):
+			return true
+	return false

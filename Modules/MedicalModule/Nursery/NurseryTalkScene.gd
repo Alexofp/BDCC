@@ -118,40 +118,16 @@ func _run():
 		if(GM.CS.getChildren().size() == 0):
 			sayn(" - Nothing found, get to breeding!")
 		else:
-			saynn("- Total records found "+str(GM.CS.getChildren().size())+":")
-		# (Your children here)
-		for ch in GM.CS.getChildren():
-			var child: Child = ch
+			saynn("- Total records found "+str(calculateAmount(true))+":")
+			# (Your children here)
+			printChildren(true)
+		
+			var other = calculateAmount(false)
+			if(other > 0):
+				sayn("")
+				saynn("- Unrelated records found "+str(calculateAmount(true))+":")
 			
-			var birthDay = child.birthDay
-			var daysPassed = GM.main.getDays() - birthDay
-			var yearsOld:int = daysPassed / 365
-			var daysOld:int = daysPassed - yearsOld * 365
-			var ageStr = str(daysOld)+" days old"
-			if(daysOld == 1):
-				ageStr = str(daysOld)+" day old"
-			
-			if(yearsOld == 1):	
-				ageStr = "1 year "+ageStr
-			else:
-				ageStr = str(yearsOld)+" years "+ageStr
-			
-			var resultString = "[color="+ChildGender.getColorString(child.gender)+"]"+ ChildGender.getVisibleName(child.gender)+"[/color]"+" - "
-			resultString += Util.getSpeciesName(child.species)+" - "
-			resultString += ageStr+" - "
-			
-			var fatherObject = GlobalRegistry.getCharacter(child.fatherID)
-			var motherObject = GlobalRegistry.getCharacter(child.motherID)
-			var fatherName = "unknown"
-			var motherName = "unknown"
-			if(fatherObject != null):
-				fatherName = fatherObject.getName()
-			if(motherObject != null):
-				motherName = motherObject.getName()
-			
-			resultString += "Mother: "+motherName+", Father: "+fatherName
-			
-			sayn(resultString)
+				printChildren(false)
 			
 		
 		addButton("Continue", "That's nice", "")
@@ -233,6 +209,55 @@ func _run():
 
 		addButton("Leave", "Time to go", "endthescene")
 
+func calculateAmount(pcKids = true):
+	var amount = 0
+	
+	for ch in GM.CS.getChildren():
+		var child: Child = ch
+		if(pcKids && child.fatherID != "pc" && child.motherID != "pc"):
+			continue
+		if(!pcKids && (child.fatherID == "pc" || child.motherID == "pc")):
+			continue
+		amount += 1
+	return amount
+
+func printChildren(pcKids = true):
+	for ch in GM.CS.getChildren():
+		var child: Child = ch
+		if(pcKids && child.fatherID != "pc" && child.motherID != "pc"):
+			continue
+		if(!pcKids && (child.fatherID == "pc" || child.motherID == "pc")):
+			continue
+		
+		var birthDay = child.birthDay
+		var daysPassed = GM.main.getDays() - birthDay
+		var yearsOld:int = daysPassed / 365
+		var daysOld:int = daysPassed - yearsOld * 365
+		var ageStr = str(daysOld)+" days old"
+		if(daysOld == 1):
+			ageStr = str(daysOld)+" day old"
+		
+		if(yearsOld == 1):	
+			ageStr = "1 year "+ageStr
+		else:
+			ageStr = str(yearsOld)+" years "+ageStr
+		
+		var resultString = "[color="+ChildGender.getColorString(child.gender)+"]"+ ChildGender.getVisibleName(child.gender)+"[/color]"+" - "
+		resultString += Util.getSpeciesName(child.species)+" - "
+		resultString += ageStr+" - "
+		
+		var fatherObject = GlobalRegistry.getCharacter(child.fatherID)
+		var motherObject = GlobalRegistry.getCharacter(child.motherID)
+		var fatherName = "unknown"
+		var motherName = "unknown"
+		if(fatherObject != null):
+			fatherName = fatherObject.getName()
+		if(motherObject != null):
+			motherName = motherObject.getName()
+		
+		resultString += "Mother: "+motherName+", Father: "+fatherName
+		
+		sayn(resultString)
 
 func _react(_action: String, _args):
 	if(_action == "sleep"):

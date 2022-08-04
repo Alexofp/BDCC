@@ -184,7 +184,9 @@ func updateNonBattleEffects():
 		removeEffect(StatusEffect.Pregnant)
 
 func onCharacterVisiblyPregnant():
-	GM.main.addLogMessage("News", "You just received news that "+getName()+" is pregnant with your children.")
+	if(getMenstrualCycle() != null):
+		if(getMenstrualCycle().isPregnantFromPlayer()):
+			GM.main.addLogMessage("News", "You just received news that "+getName()+" is pregnant with your children.")
 
 func onCharacterHeavyIntoPregnancy():
 	#print(getName()+" is heavy into pregnancy")
@@ -192,7 +194,10 @@ func onCharacterHeavyIntoPregnancy():
 
 func onCharacterReadyToGiveBirth():
 	if(getMenstrualCycle() != null):
-		GM.main.addLogMessage("News", "You just received news that "+getName()+" gave birth to your children! You can check who in the nursery")
+		if(getMenstrualCycle().isPregnantFromPlayer()):
+			GM.main.addLogMessage("News", "You just received news that "+getName()+" gave birth to your children! You can check who in the nursery")
+		else:
+			GM.main.addLogMessage("News", "Rumors spread fast. You just received news that "+getName()+" gave birth to someone's children!")
 		
 		var bornChildren = getMenstrualCycle().giveBirth()
 		clearOrificeFluids()
