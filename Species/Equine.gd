@@ -35,11 +35,7 @@ func getDefaultPenis(_gender):
 
 func getEggCellOvulationAmount():
 	return [
-		[1, 2.0],
-		[2, 8.0],
-		[3, 6.0],
-		[4, 4.0],
-		[5, 2.0],
-		[6, 1.0],
-		[7, 0.5],
+		[1, 6.0],
+		[2, 1.0],
+		[3, 0.5],
 	]

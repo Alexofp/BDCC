@@ -54,6 +54,8 @@ func _init():
 		InterestTopic.HasCockOnly: Interest.SlightlyDislikes,
 	}
 	
+	npcHasMenstrualCycle = true
+	
 func _getName():
 	return "Risha"
 

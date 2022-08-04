@@ -80,6 +80,7 @@ func _run():
 		addButtonWithChecks("Offer pussy", "Be bred by Risha", "offer_pussy", [], [ButtonChecks.HasReachableVagina])
 		addButton("Offer ass", "Be fucked in the ass by Risha", "offer_ass")
 		addButton("Offer handjob", "Make her cum while being a bit of a brat", "offer_handjob")
+		addButtonWithChecks("Fuck Risha", "(noncon) That lynx is a herm so how about you help her take the edge off by fucking her", "fuck_risha", [], [ButtonChecks.HasReachablePenis, [ButtonChecks.StatCheck, Stat.Strength, 8]])
 
 	if(state == "nah1"):
 		saynn("[say=pc]I think you can go fuck yourself for 5 credits.[/say]")
@@ -359,6 +360,104 @@ func _run():
 
 		addButton("Continue", "Time to go", "endthescene")
 		# (scene ends)
+		
+		
+
+	if(state == "fuck_risha"):
+		# (needs cock and strength)
+
+		saynn("[say=pc]I don’t need your credits.[/say]")
+
+		saynn("[say=risha]Well then fuck off, why don’t you.[/say]")
+
+		saynn("You swiftly expose your {pc.cock} and reach for Risha’s neck. The lynx snarls as you put pressure on her throat and pin her to the bench. The lynx instinctevely tries to pry your hands off but you manage to overpower her.")
+
+		saynn("[say=pc]Your pussy will do just fine. Don’t worry, slut. You will cum by the end of this.[/say]")
+
+		saynn("The lynx squirms and struggles, she is clearly not done resisting, her sweaty body is tensing up and tries to shove you away but you get a better grasp and reach for a long chain that connects the barbell to the bench. That chain is long enough for you to wrap around the herm’s paws a few times, rendering them restrained.")
+
+		saynn("[say=risha]F-fuc..ker![/say]")
+
+		saynn("Now that she can’t scratch, bite or punch you, it’s time to get to the business. You let go of her throat, making her cough and breathe heavily as you pull her down along the bench, her chained paws are now above her head and her lower part of the body is fully accessible to you. Risha’s barbed cock is still hard as a rock, her slit hides behind her fluffy balls and seems to be quite wet too, maybe she likes roughness.")
+
+		saynn("You forcefully spread Risha’s legs and keep them parted with your knees as you get a grasp on the herm’s cock and balls and move them out of the way while guiding your own cock towards the guard’s now-exposed slit.")
+
+		saynn("[say=risha]Don’t you dare, bitch.[/say]")
+
+		saynn("[say=pc]What? This?[/say]")
+
+		saynn("And as you say that, you force yourself inside the lynx, your {pc.cock} is spreading the herm’s folds and stretches the hole enough to plop inside. Risha lets out a grunt, she is surprisingly tight for a girl of her height, her wet insides wrap around your shaft very much.")
+
+		saynn("[say=risha]GHh-h..h..[/say]")
+
+		saynn("[say=pc]I’m just helping you take the edge off, shut up and enjoy it, slut.[/say]")
+
+		saynn("You shove your member in until you feel her natural barricade. Then you start pulling out but stop just before retracting the tip and instead ram your dick deep inside her again. Risha lets out another noise as her barbed cock leaks some precum. You start fucking her raw, pounding at her cervix and making sure to hit the pleasure button on the way there. Little moans escape from the tall kitty, moans that she tries to hide, her eyes go from burning with hatred to showing pleasure. She didn’t agree to this but seems like her body betrays her.")
+
+		saynn("[say=risha]F-fuck.. I will throw you into stocks.. when you’re done with me. ah..[/say]")
+
+		saynn("[say=pc]No you won’t. You love this. You will come back for more.[/say]")
+
+		saynn("You catch all of the precum off the tip of her cock and shove your digits into the herm’s mouth. Risha seems surprised at that bold move but it seems she doesn’t plan on biting you. Instead, she starts gently sucking her own precum off of your fingers while you keep thrusting inside her, stretching her wet needy pussy out. Your digits get pulled out and dried against the dickgirl’s cheeks, humiliating her.")
+
+		saynn("You bend forward and support yourself off of the bench while picking up the pace. Risha’s hard cock gets trapped between your bodies, rubbing against them while you slide your hips back and forth. It only takes a few more seconds before Risha suddenly lets out a loud moan and cum, her cock starts shooting cum onto her own breasts and belly, her pussy tenses around your shaft even more and squirts, her body wants to create an arch but you keep her pinned to the bench.")
+
+		saynn("[say=risha]Ahh-h.. fu-u-uck..[/say]")
+
+		saynn("That needy cunt quickly makes you reach your own peak, you feel like you’re about to cum too. And Risha feels that.")
+
+		saynn("[say=risha]N-not.. inside.[/say]")
+
+		addButton("Cum inside", "Stuff her womb full of your cum", "cum_inside_risha")
+		addButton("Pull out", "You’d rather be safe", "pull_out_on_risha")
+
+
+	if(state == "cum_inside_risha"):
+		saynn("[say=pc]Prepare.. to receive.. my load..[/say]")
+
+		saynn("You grunt and shove your {pc.cock} as deep as Risha’s pussy allows, you break into her womb and start filling it up with your {pc.cum}. The lynx moans and struggles against her chains, her eyes show a mixture of pleasure and regret. A little bump appears on her lower part of the belly, that amount of {pc.cum} is too much for her so some is already leaking back out of her stuffed slit and creating a mess on her thighs.")
+
+		# (if risha not visibly pregnant)
+		if(!getCharacter("risha").isVisiblyPregnant()):
+			saynn("[say=risha]That will get me p-pregnant, you fucker![/say]")
+
+		# (else)
+		else:
+			saynn("[say=risha]Fuck![/say]")
+
+		saynn("You ride the rest of your orgasm and flop on top of Risha, resting with your member still inside her pussy.")
+
+		saynn("[say=pc]Shut up. You loved it.[/say]")
+
+		saynn("You slowly pull your messy cock out and watch how the herm’s used cunt is already leaking some of the load back. As you prepare to leave, you catch Risha’s concerned eyes. She rattles the chain and tries to free her paws but can’t.")
+
+		saynn("[say=risha]Hey! Fucker! You forgot something![/say]")
+
+		saynn("[say=pc]No I didn’t~[/say]")
+
+		saynn("Risha rolls her eyes and throws her head back, it’s like she accepted her faith.")
+
+		# (scene ends)
+		addButton("Continue", "Time to go", "endthescene")
+
+
+	if(state == "pull_out_on_risha"):
+		saynn("You grunt as the orgasm overwhelms you but manage to pull out the moment before your {pc.cock} throbs and shoots out many strings of {pc.cum}, the first one hitting the girl’s outer pussy lips with the rest landing on her tits and belly. Risha now looks quite messy, covered in two layers of cum.")
+
+		saynn("[say=risha]You fucker..[/say]")
+
+		saynn("[say=pc]Shut up. You loved it.[/say]")
+
+		saynn("You take a step back and admire the view of a messy herm, her cock is still hard and leaking. As you prepare to leave, you catch Risha’s concerned eyes. She rattles the chain and tries to free her paws but can’t.")
+
+		saynn("[say=risha]Hey! Fucker! You forgot something![/say]")
+
+		saynn("[say=pc]No I didn’t~[/say]")
+
+		saynn("Risha rolls her eyes and throws her head back, it’s like she accepted her faith.")
+
+		# (scene ends)
+		addButton("Continue", "Time to go", "endthescene")
 
 func _react(_action: String, _args):
 
@@ -375,6 +474,21 @@ func _react(_action: String, _args):
 		if(gotPayed):
 			GM.pc.addCredits(5)
 		GM.main.addRoomMemoryCurrentLoc("You notice some cum stains on one of the benches", 2)
+
+	if(_action in ["cum_inside_risha", "pull_out_on_risha"]):
+		GM.main.addRoomMemoryCurrentLoc("You notice some cum stains on one of the benches, a reminder of the fun time you had with Risha", 2)
+
+	if(_action == "cum_inside_risha"):
+		getCharacter("risha").cummedInVaginaBy("pc")
+		GM.pc.orgasmFrom("risha")
+		GM.pc.addSkillExperience(Skill.CumLover, 30, "risha_gymfuck")
+		GM.pc.addSkillExperience(Skill.SexSlave, 50, "risha_gymfuck")
+		GM.pc.updateNonBattleEffects()
+	
+	if(_action == "pull_out_on_risha"):
+		GM.pc.orgasmFrom("risha")
+		GM.pc.addSkillExperience(Skill.SexSlave, 60, "risha_gymfuck")
+		GM.pc.updateNonBattleEffects()
 	
 	if(_action == "cumAnal"):
 		GM.pc.orgasmFrom("risha")
