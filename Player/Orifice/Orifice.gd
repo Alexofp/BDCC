@@ -61,17 +61,17 @@ func getMinLooseness() -> float:
 static func loosenessToString(value):
 	if(value <= 0.1):
 		return "very tight"
-	if(value <= 1.1):
+	if(value <= 0.5):
 		return "tight"
-	if(value <= 2.5):
+	if(value <= 1.1):
 		return "nice and pretty"
-	if(value <= 5.5):
+	if(value <= 2.2):
 		return "slightly loose"
-	if(value <= 9.5):
+	if(value <= 4.5):
 		return "loose"
-	if(value <= 20.5):
+	if(value <= 7.5):
 		return "very used"
-	if(value <= 50.5):
+	if(value <= 12.0):
 		return "stretched wide"
 	return "gaping wide"
 

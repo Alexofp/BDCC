@@ -102,8 +102,12 @@ func _run():
 
 func _react(_action: String, _args):
 	
+	if(_action == "get_fisted"):
+		GM.pc.gotOrificeStretchedWith(BodypartSlot.Anus, 40)
+	
 	if(_action == "continue"):
 		GM.pc.orgasmFrom("rebel")
+		GM.pc.gotOrificeStretchedWith(BodypartSlot.Anus, 40)
 	
 	if(_action == "endthescene"):
 		endScene()
