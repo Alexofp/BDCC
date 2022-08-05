@@ -53,6 +53,8 @@ func _run():
 		addButton("Continue", "See what happens next", "continue")
 
 	if(state == "continue"):
+		GM.main.playAnimation(StageScene.Solo, "walk")
+		
 		saynn("Suddenly everything goes completely silent. No Nova, no crowd, no room ambience. You shake your head but no, your blindfold and earplugs sit very tight. Oh no, you’re in complete isolation! All you feel is the floor underneath and your deep breathing.")
 
 		saynn("That’s not right, it feels weird, you try to get up but can’t, your cuffed legs only allow you to get to a kneeling position. And with no support from your arms, all you can do is drop onto the floor again and begin crawling forward, hoping that you will hit the fence. You crawl like a warm, wiggling your whole body and using arms and legs to push yourself forward.")
