@@ -106,3 +106,15 @@ func stateMachineTravel(thedoll, state_machine, animID):
 	else:
 		return false
 	return true
+
+func canTransitionTo(_actionID, _args = []):
+	var firstDoll = "pc"
+	if(_args.has("pc")):
+		firstDoll = _args["pc"]
+	var secondDoll = "pc"
+	if(_args.has("npc")):
+		secondDoll = _args["npc"]
+		
+	if(doll.getCharacterID() != firstDoll || doll2.getCharacterID() != secondDoll):
+		return false
+	return true

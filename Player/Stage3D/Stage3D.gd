@@ -10,7 +10,7 @@ func _ready():
 	#play(StageScene.Solo, "stand")
 
 func play(sceneID, actionID, args = []):
-	if(currentScene != null && currentScene.id == sceneID):
+	if(currentScene != null && currentScene.id == sceneID && currentScene.canTransitionTo(actionID, args)):
 		currentScene.playAnimation(actionID, args)
 		return
 	

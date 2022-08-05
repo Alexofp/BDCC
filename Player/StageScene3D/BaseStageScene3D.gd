@@ -14,3 +14,6 @@ func playAnimation(animID, _args = {}):
 
 func updateSubAnims():
 	pass
+
+func canTransitionTo(_actionID, _args = []):
+	return true

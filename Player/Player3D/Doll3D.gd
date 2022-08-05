@@ -384,3 +384,6 @@ func setLegsCuffed(newcuffed):
 	
 func getLegsCuffed():
 	return legsCuffed
+
+func getCharacterID():
+	return savedCharacterID
