@@ -19,7 +19,7 @@ func getVisibleDescription():
 	return "Studs and mares"
 
 func getDefaultHead(_gender):
-	return "horsehead2"
+	return "horsehead"
 
 func getDefaultArms(_gender):
 	return "anthroarms"

@@ -101,7 +101,7 @@ func createBodyparts():
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("anus"))
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("horsetail"))
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("hoofs"))
-	giveBodypartUnlessSame(GlobalRegistry.createBodypart("horsehead2"))
+	giveBodypartUnlessSame(GlobalRegistry.createBodypart("horsehead"))
 
 func getLootTable(_battleName):
 	return InmateLoot.new()
