@@ -210,7 +210,6 @@ func _react(_action: String, _args):
 		GM.pc.updateNonBattleEffects()
 		
 		GM.pc.addSkillExperience(Skill.SexSlave, 20)
-		GM.pc.addSkillExperience(Skill.CumLover, 20)
 		MedicalModule.addPCBehavior(0.1)
 		
 		setFlag(MedicalModule.Mental_ExpTentacles, Util.maxi(1, getFlag(MedicalModule.Mental_ExpTentacles, 0)))

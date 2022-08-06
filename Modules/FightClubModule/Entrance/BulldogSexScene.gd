@@ -355,7 +355,6 @@ func _react(_action: String, _args):
 			GM.pc.cummedInAnusBy("bulldog")
 			
 			GM.pc.addTallymarkButt()
-		GM.pc.addSkillExperience(Skill.CumLover, 50)
 		GM.pc.addSkillExperience(Skill.SexSlave, 50)
 		GM.pc.orgasmFrom("bulldog")
 		addMessage("Bulldog left a tally mark on you..")
@@ -373,7 +372,6 @@ func _react(_action: String, _args):
 			GM.pc.cummedInAnusBy("inmateMale")
 			
 			GM.pc.addTallymarkButt()
-		GM.pc.addSkillExperience(Skill.CumLover, 50)
 		GM.pc.addSkillExperience(Skill.SexSlave, 50)
 		GM.pc.orgasmFrom("inmateMale")
 		
@@ -428,7 +426,6 @@ func _react(_action: String, _args):
 			
 			GM.pc.addTallymarkButt()
 			GM.pc.addTallymarkButt()
-		GM.pc.addSkillExperience(Skill.CumLover, 50)
 		GM.pc.addSkillExperience(Skill.SexSlave, 50)
 		GM.pc.orgasmFrom("inmateMale")
 		GM.pc.addLust(200)

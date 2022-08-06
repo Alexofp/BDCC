@@ -311,7 +311,6 @@ func _react(_action: String, _args):
 		return
 
 	if(_action == "make_her_cum"):
-		GM.pc.addSkillExperience(Skill.CumLover, 10, "rahi_showerlick")
 		GM.pc.addSkillExperience(Skill.SexSlave, 30, "rahi_showerlick")
 
 	if(_action == "cum_inside"):
@@ -322,10 +321,8 @@ func _react(_action: String, _args):
 		
 		if(!usedCondom || (usedCondom && condomBroke)):
 			getCharacter("rahi").cummedInVaginaBy("pc")
-			GM.pc.addSkillExperience(Skill.CumLover, 30, "rahi_showerfuck")
 			GM.pc.addSkillExperience(Skill.SexSlave, 30, "rahi_showerfuck")
 		else:
-			GM.pc.addSkillExperience(Skill.CumLover, 10, "rahi_showerfuck")
 			GM.pc.addSkillExperience(Skill.SexSlave, 50, "rahi_showerfuck")
 		GM.pc.orgasmFrom("rahi")
 

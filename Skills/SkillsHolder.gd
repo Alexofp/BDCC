@@ -290,8 +290,26 @@ func giveSkillExperienceBattleTurn():
 func hoursPassed(_howmuch):
 	var pc = npc
 	
+	# Don't award any experience if we're just sleeping/idling
+	if(_howmuch >= 3):
+		return
+	
 	if(pc.getInventory().hasRemovableRestraints()):
 		pc.addSkillExperience(Skill.BDSM, 5)
 
 	if(pc.hasEffect(StatusEffect.Naked)):
 		pc.addSkillExperience(Skill.Exhibitionism, 5)
+
+	if(pc.hasEffect(StatusEffect.HasCumInsideAnus) || pc.hasEffect(StatusEffect.HasCumInsideVagina) || pc.hasEffect(StatusEffect.HasCumInsideMouth)):
+		pc.addSkillExperience(Skill.CumLover, 20)
+
+	if(pc.hasEffect(StatusEffect.CoveredInCum)):
+		pc.addSkillExperience(Skill.CumLover, 5)
+
+func receivedCreampie(_charID):
+	if(npc != null && npc.isPlayer()):
+		npc.addSkillExperience(Skill.CumLover, 30)
+		
+func cameInsideSomeone(_charID):
+	if(npc != null && npc.isPlayer()):
+		npc.addSkillExperience(Skill.CumLover, 50)

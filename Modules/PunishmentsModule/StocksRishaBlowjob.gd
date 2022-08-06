@@ -116,7 +116,6 @@ func _react(_action: String, _args):
 		GM.pc.cummedInMouthBy("risha")
 		GM.pc.cummedOnBy("risha")
 		GM.pc.addSkillExperience(Skill.SexSlave, 20, "risha_stocksblow")
-		GM.pc.addSkillExperience(Skill.CumLover, 50, "risha_stocksblow")
 		GM.pc.gotThroatFuckedBy("risha")
 		GM.pc.updateNonBattleEffects()
 

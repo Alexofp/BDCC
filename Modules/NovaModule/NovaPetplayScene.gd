@@ -712,10 +712,8 @@ func _react(_action: String, _args):
 
 		if(!usedCondom || (usedCondom && condomBroke)):
 			GM.pc.cummedInVaginaBy("nova")
-			GM.pc.addSkillExperience(Skill.CumLover, 30, "nova_petfuck")
 			GM.pc.addSkillExperience(Skill.SexSlave, 20, "nova_petfuck")
 		else:
-			GM.pc.addSkillExperience(Skill.CumLover, 10, "nova_petfuck")
 			GM.pc.addSkillExperience(Skill.SexSlave, 40, "nova_petfuck")
 		
 		GM.pc.orgasmFrom("nova")
@@ -727,7 +725,6 @@ func _react(_action: String, _args):
 		GM.pc.gotAnusFuckedBy("nova")
 		GM.pc.cummedInAnusBy("nova")
 		
-		GM.pc.addSkillExperience(Skill.CumLover, 30, "nova_petfuck")
 		GM.pc.addSkillExperience(Skill.SexSlave, 20, "nova_petfuck")
 		
 		GM.pc.orgasmFrom("nova")
@@ -755,14 +752,12 @@ func _react(_action: String, _args):
 	if(_action == "outside"):
 		GM.pc.cummedOnBy("nova")
 		GM.pc.addSkillExperience(Skill.SexSlave, 10, "nova_petsuckcock")
-		GM.pc.addSkillExperience(Skill.CumLover, 20, "nova_petsuckcock")
 		GM.pc.updateNonBattleEffects()
 		
 	if(_action == "take_it"):
 		GM.pc.cummedInMouthBy("nova")
 		#GM.pc.cummedOnBy("nova")
 		GM.pc.addSkillExperience(Skill.SexSlave, 20, "nova_petsuckcock")
-		GM.pc.addSkillExperience(Skill.CumLover, 10, "nova_petsuckcock")
 		GM.pc.updateNonBattleEffects()
 	
 	if(_action in ["oral", "anal_fucking", "vaginalcum"]):

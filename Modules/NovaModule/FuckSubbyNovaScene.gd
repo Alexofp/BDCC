@@ -213,7 +213,6 @@ func _react(_action: String, _args):
 	
 	if(_action == "pull_out"):
 		GM.pc.addSkillExperience(Skill.SexSlave, 30, "nova_subbyfuck")
-		GM.pc.addSkillExperience(Skill.CumLover, 10, "nova_subbyfuck")
 		GM.pc.orgasmFrom("nova")
 	
 	if(_action == "cum_inside"):
@@ -231,10 +230,8 @@ func _react(_action: String, _args):
 			GM.main.addRoomMemoryCurrentLoc("You notice some cum stains, a sign that somebody had sex here", 1)
 			
 			getCharacter("nova").cummedInVaginaBy("pc")
-			GM.pc.addSkillExperience(Skill.CumLover, 30, "nova_subbyfuck")
 			GM.pc.addSkillExperience(Skill.SexSlave, 20, "nova_subbyfuck")
 		else:
-			GM.pc.addSkillExperience(Skill.CumLover, 10, "nova_subbyfuck")
 			GM.pc.addSkillExperience(Skill.SexSlave, 40, "nova_subbyfuck")
 		
 		GM.pc.orgasmFrom("nova")

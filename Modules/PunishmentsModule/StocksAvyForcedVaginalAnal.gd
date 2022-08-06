@@ -213,10 +213,8 @@ func _react(_action: String, _args):
 		GM.pc.gotVaginaFuckedBy("avy")
 		if(!usedCondom || (usedCondom && condomBroke)):
 			GM.pc.cummedInVaginaBy("avy")
-			GM.pc.addSkillExperience(Skill.CumLover, 30, "avy_fuck")
 			GM.pc.addSkillExperience(Skill.SexSlave, 20, "avy_fuck")
 		else:
-			GM.pc.addSkillExperience(Skill.CumLover, 10, "avy_fuck")
 			GM.pc.addSkillExperience(Skill.SexSlave, 40, "avy_fuck")
 		
 		GM.pc.orgasmFrom("avy")

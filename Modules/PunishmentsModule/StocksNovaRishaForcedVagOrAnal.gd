@@ -186,7 +186,6 @@ func _react(_action: String, _args):
 		GM.pc.gotThroatFuckedBy("nova")
 		GM.pc.cummedInMouthBy("nova")
 		GM.pc.cummedOnBy("nova")
-		GM.pc.addSkillExperience(Skill.CumLover, 40, "rishanova_fuck")
 		GM.pc.addSkillExperience(Skill.SexSlave, 40, "rishanova_fuck")
 		GM.pc.orgasmFrom("risha")
 		
@@ -196,7 +195,6 @@ func _react(_action: String, _args):
 		GM.pc.gotThroatFuckedBy("nova")
 		GM.pc.cummedInMouthBy("nova")
 		GM.pc.cummedOnBy("nova")
-		GM.pc.addSkillExperience(Skill.CumLover, 40, "rishanova_fuck")
 		GM.pc.addSkillExperience(Skill.SexSlave, 40, "rishanova_fuck")
 		GM.pc.orgasmFrom("risha")
 		

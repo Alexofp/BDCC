@@ -481,7 +481,6 @@ func _react(_action: String, _args):
 	if(_action == "cum_inside_risha"):
 		getCharacter("risha").cummedInVaginaBy("pc")
 		GM.pc.orgasmFrom("risha")
-		GM.pc.addSkillExperience(Skill.CumLover, 30, "risha_gymfuck")
 		GM.pc.addSkillExperience(Skill.SexSlave, 50, "risha_gymfuck")
 		GM.pc.updateNonBattleEffects()
 	
@@ -494,7 +493,6 @@ func _react(_action: String, _args):
 		GM.pc.orgasmFrom("risha")
 		GM.pc.gotAnusFuckedBy("risha")
 		GM.pc.cummedInAnusBy("risha")
-		GM.pc.addSkillExperience(Skill.CumLover, 30, "risha_gymfuck")
 		GM.pc.addSkillExperience(Skill.SexSlave, 50, "risha_gymfuck")
 		GM.pc.updateNonBattleEffects()
 	
@@ -502,7 +500,6 @@ func _react(_action: String, _args):
 		GM.pc.gotThroatFuckedBy("risha")
 		GM.pc.cummedInMouthBy("risha")
 		GM.pc.cummedOnBy("risha")
-		GM.pc.addSkillExperience(Skill.CumLover, 30, "risha_gymfuck")
 		GM.pc.addSkillExperience(Skill.SexSlave, 10, "risha_gymfuck")
 		GM.pc.updateNonBattleEffects()
 	
@@ -510,7 +507,6 @@ func _react(_action: String, _args):
 		GM.pc.orgasmFrom("risha")
 		GM.pc.gotVaginaFuckedBy("risha")
 		GM.pc.cummedInVaginaBy("risha")
-		GM.pc.addSkillExperience(Skill.CumLover, 30, "risha_gymfuck")
 		GM.pc.addSkillExperience(Skill.SexSlave, 50, "risha_gymfuck")
 		GM.pc.updateNonBattleEffects()
 	
