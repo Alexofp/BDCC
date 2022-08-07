@@ -811,6 +811,7 @@ func coverBodyWithFluid(characterID, fluidType, howMuchLevels: int = 1):
 func clearBodyFluids():
 	bodyFluids.clear()
 	bodyMessiness = 0
+	removeEffect(StatusEffect.DrenchedInPiss)
 
 func getOutsideMessinessLevel():
 	return bodyMessiness

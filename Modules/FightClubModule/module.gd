@@ -47,17 +47,20 @@ func _init():
 		
 		"res://Modules/FightClubModule/Fighters/Axis/AxisLostToScene.gd",
 		"res://Modules/FightClubModule/Fighters/Axis/AxisWonScene.gd",
+		
+		"res://Modules/FightClubModule/Fighters/Kait/KaitLostToScene.gd",
+		"res://Modules/FightClubModule/Fighters/Kait/KaitWonScene.gd",
 		]
 	characters = [
 		"res://Modules/FightClubModule/Entrance/Bulldog.gd",
 		"res://Modules/FightClubModule/Announcer/TheAnnouncer.gd",
-		"res://Modules/FightClubModule/Entrance/KaitCharacter.gd",
 		"res://Modules/FightClubModule/Fighters/Rubi/RubiCharacter.gd",
 		"res://Modules/FightClubModule/Fighters/Volk/VolkCharacter.gd",
 		"res://Modules/FightClubModule/Fighters/Ferri/FerriCharacter.gd",
 		"res://Modules/FightClubModule/Fighters/Rebel/RebelCharacter.gd",
 		"res://Modules/FightClubModule/Fighters/Nova/NovaArenaCharacter.gd",
 		"res://Modules/FightClubModule/Fighters/Axis/AxisCharacter.gd",
+		"res://Modules/FightClubModule/Fighters/Kait/KaitCharacter.gd",
 	]
 	items = []
 	events = [
@@ -77,6 +80,7 @@ func register():
 	GlobalRegistry.registerFightClubFighter("res://Modules/FightClubModule/Fighters/Rebel/RebelFighter.gd")
 	GlobalRegistry.registerFightClubFighter("res://Modules/FightClubModule/Fighters/Nova/NovaFighter.gd")
 	GlobalRegistry.registerFightClubFighter("res://Modules/FightClubModule/Fighters/Axis/AxisFighter.gd")
+	GlobalRegistry.registerFightClubFighter("res://Modules/FightClubModule/Fighters/Kait/KaitFighter.gd")
 
 func resetFlagsOnNewDay():
 	pass
