@@ -86,6 +86,7 @@ func register():
 	GlobalRegistry.registerFightClubFighter("res://Modules/FightClubModule/Fighters/Axis/AxisFighter.gd")
 	GlobalRegistry.registerFightClubFighter("res://Modules/FightClubModule/Fighters/Kait/KaitFighter.gd")
 	GlobalRegistry.registerFightClubFighter("res://Modules/FightClubModule/Fighters/Jack/JackFighter.gd")
+	GlobalRegistry.registerFightClubFighter("res://Modules/FightClubModule/Fighters/Avy/AvyFighter.gd")
 
 func resetFlagsOnNewDay():
 	pass
@@ -121,6 +122,10 @@ static func getNextFighter():
 		for i2 in fighters.size():
 			var fighterID = fighters[-i2-1]
 			if(!isFighterDefeated(fighterID)):
+				var fighter: FightClubFighter = GlobalRegistry.getFightClubFighter(fighterID)
+				if(!fighter.canFight()):
+					return null
+				
 				return fighterID
 	return null
 

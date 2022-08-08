@@ -41,3 +41,6 @@ func getRepeatWinExperience():
 	
 func getRepeatWinCredits():
 	return floor(getWinCredits() / 4.0)
+
+func canFight():
+	return true
