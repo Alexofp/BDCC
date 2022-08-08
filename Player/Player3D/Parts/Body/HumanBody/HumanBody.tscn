@@ -326,6 +326,6 @@ skin = SubResource( 14 )
 material/0 = null
 
 [node name="AttachmentProxy" parent="." index="3" instance=ExtResource( 4 )]
-transform = Transform( 0.991162, -0.132654, 0, 0.132654, 0.991162, 0, 0, 0, 1, 0.0741279, 6.65269, 0.088 )
+transform = Transform( 0.991162, -0.132654, 0, 0.132654, 0.991162, 0, 0, 0, 1, 0.0741279, 6.65269, 0.0196892 )
 boneId = "Neck"
 zoneName = "neck"

@@ -75,7 +75,7 @@ func _run():
 
 		saynn("[say=pc]Now the shorts.[/say]")
 
-		saynn("The wolf doesn’t fight you, he starts pulling down his shorts, letting his member out, it’s a red knotted cock that is at least 25 cm long. And it’s dripping more precum. He looks at you with his lusty eyes.")
+		saynn("The wolf doesn’t fight you, he starts pulling down his shorts, letting his member out, it’s a red knotted cock that is at least "+Util.cmToString(25)+" long. And it’s dripping more precum. He looks at you with his lusty eyes.")
 
 		saynn("[say=axis]Gonna ride me? Be my guest.[/say]")
 
