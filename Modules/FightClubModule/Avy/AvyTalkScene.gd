@@ -199,8 +199,10 @@ func _react_scene_end(_tag, _result):
 				GM.pc.addCredits(addCredits)
 				addMessage("You received "+str(addCredits)+" "+Util.multipleOrSingularEnding(addCredits, "credit"))
 			else:
-				GM.pc.addCredits(1)
-				addMessage("You received 1 credit for a rematch")
+				addExperienceToPlayer(arenaFighter.getRepeatWinExperience())
+				var addCredits = arenaFighter.getRepeatWinCredits()
+				GM.pc.addCredits(addCredits)
+				addMessage("You received "+str(addCredits)+" "+Util.multipleOrSingularEnding(addCredits, "credit")+" for a rematch")
 				
 			FightClubModule.markFighterAsDefeated(savedFighterID)
 			FightClubModule.raisePCRankTo(arenaFighter.getRank())

@@ -35,3 +35,9 @@ func getWinExperience():
 
 func getWinCredits():
 	return 5
+
+func getRepeatWinExperience():
+	return round(getWinExperience() / 2.0)
+	
+func getRepeatWinCredits():
+	return floor(getWinCredits() / 4.0)
