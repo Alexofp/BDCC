@@ -473,10 +473,7 @@ func resetBodypartsToDefault():
 			if(bodypart.getHybridPriority() > bestBodypart.getHybridPriority()):
 				bestBodypart = bodypart
 				
-		bodyparts[slot] = bestBodypart
-		bodypartStorageNode.add_child(bestBodypart)
-		bestBodypart.name = bestBodypart.visibleName
-		bestBodypart.character = weakref(self)
+		giveBodypart(bestBodypart, false)
 		
 	emit_signal("bodypart_changed")
 
