@@ -57,6 +57,37 @@ func _init():
 	
 	npcHasMenstrualCycle = true
 	
+func interestVerbalReaction(interest):
+	if(interest == InterestTopic.Pregnant):
+		return "You like breeding too, huh. Come to me when you're in heat next time"
+	if(interest == InterestTopic.BDSMRestraints):
+		return "Fuck yeah, bound sluts are so hot"
+	if(interest == InterestTopic.NoVagina):
+		return "If you don't have a vagina how I'm gonna breed you, whore?"
+	if(interest == InterestTopic.ExposedBra):
+		return "Throw that bra into trash, you don't need it here"
+	if(interest == InterestTopic.ExposedPanties):
+		return "Your stupid panties are getting torn first"
+	if(interest == InterestTopic.ExposedPussy):
+		return "Yeah~. Now bend over, slut"
+	if(interest == InterestTopic.BigCock):
+		return "I will find the smallest cage for that cock, I swear"
+	if(interest == InterestTopic.StuffedPussy):
+		return "Oh yeah, I love seeing bred sluts"
+	if(interest == InterestTopic.StuffedAss):
+		return "You're leaking back there, slut"
+	if(interest == InterestTopic.CoveredInCum):
+		return "So messy, I love cum sluts"
+	if(interest == InterestTopic.FullyNaked):
+		return "Think you can just undress without me fucking you after?"
+	if(interest == InterestTopic.SlimButt):
+		return "That butt can't fit all my cum, whore"
+	if(interest == InterestTopic.FeminineBody):
+		return "I like girly types, they moan the best"
+	if(interest == InterestTopic.HasVaginaAndCock):
+		return "You're a herm too, huh~. I'm the top though"
+	
+	
 func _getName():
 	return "Risha"
 
@@ -76,29 +107,7 @@ func _getAttacks():
 	return ["aitaunthumiliate", "stunbatonAttack", "stunbatonStrongAttack", "biteattack", "simplekickattack", "shoveattack", "trygetupattack"]
 
 func getFightIntro(_battleName):
-	return getName() + " eyes you out and licks her lips.\n\n"+formatSay("You're an easy prey for me. Why don't you just undress and we can have some fun instead~")+"\n\nRisha then gets into a combat stance and gestures you to come closer. Her heavy armor doesn't seem to inpact her mobility one bit, her hand holds the stun baton very tightly\n\nSeems the first move is yours"
-
-func getFightState(_battleName):
-	if(getPainLevel() > getLustLevel()):
-		var mypain = getPainLevel() * 100
-		
-		if(mypain >= 70):
-			return getName() + " constantly grunts from pain. "+heShe()+" can barely stand at this point, all "+hisHer()+" bruises are really wearing "+himHer()+" down.\n" + formatSay("GHh.. Fuck it really hurts")
-		if(mypain >= 50):
-			return getName() + " looks pretty beat up and "+hisHer()+" face shows it but "+heShe()+" is still standing strong.\n" + formatSay("I'm not losing to some inmate, you're done for!")
-		if(mypain >= 25):
-			return getName() + " has a bruise there and there but "+heShe()+" clearly won't give up the fight any time soon.\n" + formatSay("Is that the best you got? Weak")
-	else:
-		var mylust = getLustLevel() * 100
-		
-		if(mylust >= 70):
-			return getName() + " keeps moaning to "+himselfHerself()+" and can't hide the arousal anymore, "+heShe()+" blatantly gropes and rubs "+hisHer()+" body in front of you.\n" + formatSay("Fuck you're hot")
-		if(mylust >= 50):
-			return getName() + " breathes warmly, "+hisHer()+" blush starts to shine through, "+ heShe()+" is lusty and "+hisHer()+" eyes show it.\n" + formatSay("Stop it, you whore, I wanna fight you")
-		if(mylust >= 25):
-			return getName() + " looks alright but you notice some desire in "+hisHer()+" eyes.\n" + formatSay("What a slut you are")
-		
-	return getName() + " looks completely fine, no visible bruises or signs of lust."
+	return getName() + " eyes you out and licks her lips.\n\n"+("[say=risha]You're an easy prey for me. Why don't you just undress and we can have some fun instead~[/say]")+"\n\nRisha then gets into a combat stance and gestures you to come closer. Her heavy armor doesn't seem to inpact her mobility one bit, her hand holds the stun baton very tightly\n\nSeems the first move is yours"
 
 func getThickness() -> int:
 	return 110

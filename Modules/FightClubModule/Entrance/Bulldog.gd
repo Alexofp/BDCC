@@ -56,6 +56,20 @@ func _init():
 		InterestTopic.HasCockOnly: Interest.Hates,
 	}
 	
+func interestVerbalReaction(interest):
+	if(interest == InterestTopic.Gags):
+		return "Quit drooling, whore"
+	if(interest == InterestTopic.ExposedCock):
+		return "The fuck do you want with that cock"
+	if(interest == InterestTopic.FullyNaked):
+		return "Preparing to be fucked?"
+	if(interest == InterestTopic.HasCockOnly):
+		return "And you don't even have a cunt"
+	if(interest == InterestTopic.MasculineBody):
+		return "Am I supposed to fear your sorry ass?"
+	if(interest == InterestTopic.FeminineBody):
+		return "Just be a good girl and spread your legs"
+	
 func _getName():
 	return "Bulldog"
 

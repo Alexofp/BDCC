@@ -54,7 +54,35 @@ func _init():
 		InterestTopic.SmallCock: Interest.Likes,
 		InterestTopic.NoCock: Interest.KindaLikes,
 		InterestTopic.HasCockOnly: Interest.KindaLikes,
+		InterestTopic.Pregnant: Interest.Loves,
 	}
+	
+func interestVerbalReaction(interest):
+	if(interest == InterestTopic.HasVaginaAndCock):
+		return "You're a herm, huh~"
+	if(interest == InterestTopic.ExposedPanties):
+		return "Take those panties off before I rip them off, slut"
+	if(interest == InterestTopic.TallyMarks):
+		return "Oh my~. I love when sluts have tally marks"
+	if(interest == InterestTopic.Bodywritings):
+		return "Can I leave some words on you too~?"
+	if(interest == InterestTopic.BigCock):
+		return "Pff-f, how do you even have enough blood for your cock to get hard?"
+	if(interest == InterestTopic.LoosePussy):
+		return "Meh, your cunt is too ruined already, it's not fun."
+	if(interest == InterestTopic.LooseAnus):
+		return "Can you ride less horsecocks with that ass maybe?"
+	if(interest == InterestTopic.StuffedThroat):
+		return "Oh yeah, I love when sluts drool cum~"
+	if(interest == InterestTopic.CoveredInLotsOfCum):
+		return "You're such a cum dump~"
+	if(interest == InterestTopic.SlimBody):
+		return "Oh, you're so slim I think I can hold you hovering while fucking~"
+	if(interest == InterestTopic.Pregnant):
+		return "Someone knocked you up, huh~. Was it me by any chance?"
+	if(interest == InterestTopic.ExposedCock):
+		return "Hide that cock, slut, you won't need it with me"
+	
 	
 func _getName():
 	return "Avy"

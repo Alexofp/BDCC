@@ -55,6 +55,22 @@ func _init():
 		InterestTopic.HasCockOnly: Interest.Likes,
 	}
 	
+func interestVerbalReaction(interest):
+	if(interest == InterestTopic.BigCock):
+		return "I love me a good stallion cock"
+	if(interest == InterestTopic.LooseAnus):
+		return "Hah! Your ass is stretched already. But we always go futher"
+	if(interest == InterestTopic.TightAnus):
+		return "Training your ass will take a while"
+	if(interest == InterestTopic.Pregnant):
+		return "Why did you come here pregnant?"
+	if(interest == InterestTopic.ButtPlugs):
+		return "Oh yeah, I see you love training your butt"
+	if(interest == InterestTopic.ExposedPanties):
+		return "Take off the panties, sweetie"
+	if(interest == InterestTopic.AverageButt):
+		return "Shake that ass, sweetie~"
+
 func _getName():
 	return "Rebel"
 

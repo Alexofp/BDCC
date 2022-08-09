@@ -58,6 +58,22 @@ func _init():
 		InterestTopic.HasCockOnly: Interest.Loves,
 	}
 	
+func interestVerbalReaction(interest):
+	if(interest == InterestTopic.BDSMRestraints):
+		return "You're a restriction slut, huh"
+	if(interest == InterestTopic.CoveredInCum):
+		return "Ew, you need a shower right now"
+	if(interest == InterestTopic.StuffedPussy):
+		return "Yes, you have cum in your cunt, go wash it"
+	if(interest == InterestTopic.BigBreasts):
+		return "I'm jealous of your tits, inmate"
+	if(interest == InterestTopic.ExposedPanties):
+		return "Nice panties~"
+	if(interest == InterestTopic.BigCock):
+		return "Hm.. That's a great cock though"
+	if(interest == InterestTopic.MasculineBody):
+		return "Oh wow, you're so hot"
+	
 func _getName():
 	return "Female guard"
 

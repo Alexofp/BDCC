@@ -42,6 +42,28 @@ func _init():
 		InterestTopic.Pregnant: Interest.Hates,
 	}
 	
+func interestVerbalReaction(interest):
+	if(interest == InterestTopic.Pregnant):
+		return "Why did you bend over for someone? You know what happens to prison babies?"
+	if(interest == InterestTopic.Blindfolds):
+		return "How can I fight you if you can't see me"
+	if(interest == InterestTopic.BigBreasts):
+		return "Stop showing off your udders and fight"
+	if(interest == InterestTopic.LooseAnus):
+		return "That ass looks ruined, gross"
+	if(interest == InterestTopic.LoosePussy):
+		return "You fuck without giving your pussy any rest, huh?"
+	if(interest == InterestTopic.BigCock):
+		return "That cock is not going anywhere near me"
+	if(interest == InterestTopic.HasVaginaAndCock):
+		return "So what happens when you cum inside yourself?"
+	if(interest == InterestTopic.StuffedThroat):
+		return "Don't breathe at me, whore"
+	if(interest == InterestTopic.CoveredInCum):
+		return "Hah, you're such a messy slut"
+	if(interest == InterestTopic.LactatingBreasts):
+		return "Go milk your tits, you're leaking"
+	
 func _getName():
 	return "Tavi"
 

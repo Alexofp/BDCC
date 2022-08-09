@@ -34,8 +34,8 @@ func _init():
 		InterestTopic.StuffedPussyOrAss: Interest.SlightlyDislikes,
 		InterestTopic.Pregnant: Interest.Hates,
 		InterestTopic.StuffedThroat: Interest.SlightlyDislikes,
-		InterestTopic.CoveredInCum: Interest.Likes,
-		InterestTopic.CoveredInLotsOfCum: Interest.KindaLikes,
+		InterestTopic.CoveredInCum: Interest.Hates,
+		InterestTopic.CoveredInLotsOfCum: Interest.Dislikes,
 		InterestTopic.FullyNaked: Interest.Likes,
 		InterestTopic.ExposedPussy: Interest.ReallyLikes,
 		InterestTopic.ExposedAnus: Interest.KindaLikes,
@@ -54,6 +54,30 @@ func _init():
 		InterestTopic.NoCock: Interest.Likes,
 	}
 	
+func interestVerbalReaction(interest):
+	if(interest == InterestTopic.TallyMarks):
+		return "What a whore~"
+	if(interest == InterestTopic.CoveredInCum):
+		return "I don't wanna taste cum while biting you!"
+	if(interest == InterestTopic.Pregnant):
+		return "I don't wanna bite a pregnant slut! Grr!"
+	if(interest == InterestTopic.HasVaginaAndCock):
+		return "Herms? Hot!"
+	if(interest == InterestTopic.BDSMRestraints):
+		return "Yes-yes! Need more restraints!"
+	if(interest == InterestTopic.Gags):
+		return "Drool for me, gagged slut~"
+	if(interest == InterestTopic.Blindfolds):
+		return "Can't see me? What a shame~"
+	if(interest == InterestTopic.LactatingBreasts):
+		return "Huff, I wanna be lactating too.."
+	if(interest == InterestTopic.MediumBreasts):
+		return "Nice funbags, can I play with them~?"
+	if(interest == InterestTopic.FullyNaked):
+		return "So much skin to bite~"
+	if(interest == InterestTopic.TightPussy):
+		return "That's a nice pussy~"
+		
 func _getName():
 	return "Ferri"
 

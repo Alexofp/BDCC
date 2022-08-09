@@ -359,7 +359,7 @@ func _react(_action: String, _args):
 				theDamage *= 1.5
 			if(isTease && enemyCharacter.getLustLevel() >= 0.6):
 				theDamage *= 1.0
-				extraText = "[b]Teasing is not effective, the enemy is too horny![/b] "
+				extraText = "[b]Teasing is less effective when the enemy is horny![/b] "
 			
 			var damage = enemyCharacter.receiveDamage(DamageType.Lust, int(round(theDamage)))
 			
@@ -369,6 +369,10 @@ func _react(_action: String, _args):
 			whatPlayerDid += extraText + enemyCharacter.getName()+" received [color="+DamageType.getColorString(DamageType.Lust)+"]"+str(damage)+" "+DamageType.getBattleName(DamageType.Lust)+"[/color]"
 			
 			if(learned.size() > 0):
+				var npcReaction = enemyCharacter.interestVerbalReaction(learned[0][0])
+				if(npcReaction != null && npcReaction != ""):
+					whatPlayerDid += "\n\n"+"[say="+enemyCharacter.getID()+"]" +str(npcReaction)+"[/say]"
+				
 				whatPlayerDid += "\n[i]You learned more about what "+enemyCharacter.getName()+" likes[/i]"
 		
 		#processTime(30)

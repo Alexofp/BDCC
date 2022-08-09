@@ -57,6 +57,28 @@ func _init():
 		InterestTopic.HasCockOnly: Interest.KindaLikes,
 	}
 	
+func interestVerbalReaction(interest):
+	if(interest == InterestTopic.ButtPlugs):
+		return "Buttplugs, fuck yeahhh~"
+	if(interest == InterestTopic.ThickBody):
+		return "Sorry, I'm not interested"
+	if(interest == InterestTopic.MasculineBody):
+		return "Oh, I love strong types~"
+	if(interest == InterestTopic.BigBreasts):
+		return "Oh yeah, make those funbags bounce"
+	if(interest == InterestTopic.HasVaginaAndCock):
+		return "I'm not a fan of herms, too much things cramped in one place"
+	if(interest == InterestTopic.ExposedCock):
+		return "Nice dick~"
+	if(interest == InterestTopic.BigCock):
+		return "Oh, I don't want my insides rearranged"
+	if(interest == InterestTopic.Pregnant):
+		return "Slut, I don't wanna fight a pregnant bitch"
+	if(interest == InterestTopic.LactatingBreasts):
+		return "I can pretend to be a kitten if you let me suck on those~"
+	if(interest == InterestTopic.SmallCock):
+		return "How the fuck am I gonna feel anything with that cock?"
+	
 func _getName():
 	return "Rubi"
 

@@ -57,6 +57,30 @@ func _init():
 		InterestTopic.HasCockOnly: Interest.Likes,
 	}
 	
+func interestVerbalReaction(interest):
+	if(interest == InterestTopic.HasVaginaAndCock):
+		return "I fucking hate herms"
+	if(interest == InterestTopic.ExposedBreasts):
+		return "Nice tits, I will admit"
+	if(interest == InterestTopic.LoosePussy):
+		return "Wow, your cunt is ruined"
+	if(interest == InterestTopic.LooseAnus):
+		return "Really? Your ass is destroyed"
+	if(interest == InterestTopic.BigBreasts):
+		return "Don't fucking shake your udders"
+	if(interest == InterestTopic.LactatingBreasts):
+		return "Are you a fucking cow or something"
+	if(interest == InterestTopic.ExposedCock):
+		return "Mmm.. nice cock"
+	if(interest == InterestTopic.FullyNaked):
+		return "Wow, you have no shame. I'm jealous"
+	if(interest == InterestTopic.Pregnant):
+		return "Someone bred you? Gross."
+	if(interest == InterestTopic.MasculineBody):
+		return "Mm.. You're so manly.."
+	if(interest == InterestTopic.SmallCock):
+		return "Hah, that's a pathetic cock."
+	
 func _getName():
 	return "Kait"
 

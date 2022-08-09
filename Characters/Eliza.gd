@@ -24,6 +24,7 @@ func _init():
 		InterestTopic.SmallBreasts: Interest.SlightlyDislikes,
 		InterestTopic.MediumBreasts: Interest.Likes,
 		InterestTopic.BigBreasts: Interest.Hates,
+		InterestTopic.LactatingBreasts: Interest.Loves,
 		InterestTopic.StuffedPussy: Interest.Likes,
 		InterestTopic.StuffedPussyOrAss: Interest.Likes,
 		InterestTopic.StuffedThroat: Interest.Likes,
@@ -48,6 +49,28 @@ func _init():
 		InterestTopic.HasCockOnly: Interest.Loves,
 		InterestTopic.Pregnant: Interest.KindaLikes,
 	}
+	
+func interestVerbalReaction(interest):
+	if(interest == InterestTopic.Bodywritings):
+		return "I'd love to use your body to keep some medical notes~"
+	if(interest == InterestTopic.ThickButt):
+		return "You should lose some weight, having such huge ass is unhealthy"
+	if(interest == InterestTopic.NoBreasts):
+		return "Flat chests don't turn me on, sorry"
+	if(interest == InterestTopic.BigBreasts):
+		return "Such udders are only useful for milking, ugh"
+	if(interest == InterestTopic.ExposedCock):
+		return "Oh~, now we're talking"
+	if(interest == InterestTopic.BigCock):
+		return "Oh my, you're so big~"
+	if(interest == InterestTopic.SmallCock):
+		return "That's a cute cock~"
+	if(interest == InterestTopic.Pregnant):
+		return "Come to us when you're ready to give birth~"
+	if(interest == InterestTopic.TightPussy):
+		return "I like a good tight-looking slit, looks so clean and sexy"
+	if(interest == InterestTopic.LactatingBreasts):
+		return "Ohhh! Can I milk those? I really want to~"
 	
 func _getName():
 	return "Eliza Quinn"

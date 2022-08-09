@@ -209,3 +209,6 @@ func getAiStrategy(_battleName):
 	var basicAI = BasicAI.new()
 	basicAI.setCharacterID(id)
 	return basicAI
+
+func interestVerbalReaction(_interest):
+	return null

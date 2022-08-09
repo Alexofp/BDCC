@@ -55,6 +55,26 @@ func _init():
 		InterestTopic.NoCock: Interest.ReallyLikes,
 	}
 	
+func interestVerbalReaction(interest):
+	if(interest == InterestTopic.Gags):
+		return "I wanna hear you moan, suka"
+	if(interest == InterestTopic.ButtPlugs):
+		return "Why don't you use dicks instead?"
+	if(interest == InterestTopic.HasVaginaAndCock):
+		return "Suka, having both dick and pussy is not normal"
+	if(interest == InterestTopic.ExposedPanties):
+		return "Can't wait to cut your panties into little bits"
+	if(interest == InterestTopic.ExposedBra):
+		return "Is that bra armored, suka?"
+	if(interest == InterestTopic.FullyNaked):
+		return "Put something on, suka"
+	if(interest == InterestTopic.CoveredInCum):
+		return "I'm not touching you, suka"
+	if(interest == InterestTopic.AndroBody):
+		return "Are you a girl or a boy?"
+	if(interest == InterestTopic.SmallBreasts):
+		return "Will you squeel if I poke your tits?"
+		
 func _getName():
 	return "Volk"
 
