@@ -31,6 +31,11 @@ func getPixelSize():
 	var globalRect = get_global_rect()
 	var newSize
 	
+	if(is_nan(globalRect.position.x) || is_nan(globalRect.position.y) || is_nan(globalRect.size.x) || is_nan(globalRect.size.y)):
+		if(viewport == null):
+			return Vector2(32, 32)
+		return viewport.size
+	
 	if(get_viewport().is_size_override_enabled()):
 		newSize = globalRect.size / get_viewport().get_size_override() * get_viewport().size
 	else:
