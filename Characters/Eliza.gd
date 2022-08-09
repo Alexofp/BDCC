@@ -46,6 +46,7 @@ func _init():
 		InterestTopic.AverageCock: Interest.Likes,
 		InterestTopic.SmallCock: Interest.KindaLikes,
 		InterestTopic.HasCockOnly: Interest.Loves,
+		InterestTopic.Pregnant: Interest.KindaLikes,
 	}
 	
 func _getName():
@@ -83,7 +84,7 @@ func getFemininity() -> int:
 
 func createBodyparts():
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("felinehead"))
-	giveBodypartUnlessSame(GlobalRegistry.createBodypart("ponytailhair"))
+	giveBodypartUnlessSame(GlobalRegistry.createBodypart("ponytailhair2"))
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("felineears"))
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("anthrobody"))
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("anthroarms"))

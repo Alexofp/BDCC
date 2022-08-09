@@ -40,3 +40,6 @@ func onGivingBirth(_impregnatedEggCells: Array, _newkids: Array):
 	.onGivingBirth(_impregnatedEggCells, _newkids)
 	
 	GM.main.increaseFlag(RahiModule.Rahi_GaveBirthTimes, 1)
+
+func createEquipment():
+	getInventory().equipItem(GlobalRegistry.createItemNoID("inmatecollar"))

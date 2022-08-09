@@ -39,6 +39,7 @@ func _init():
 		InterestTopic.BigCock: Interest.ReallyDislikes,
 		InterestTopic.AverageCock: Interest.Dislikes,
 		InterestTopic.SmallCock: Interest.SlightlyDislikes,
+		InterestTopic.Pregnant: Interest.Hates,
 	}
 	
 func _getName():
@@ -63,21 +64,24 @@ func getThickness() -> int:
 	return 80
 
 func getFemininity() -> int:
-	return 100
+	return 90
 
 func createBodyparts():
+	giveBodypartUnlessSame(GlobalRegistry.createBodypart("felinehead"))
+	giveBodypartUnlessSame(GlobalRegistry.createBodypart("tavihair"))
+	giveBodypartUnlessSame(GlobalRegistry.createBodypart("felineears"))
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("anthrobody"))
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("anthroarms"))
-	giveBodypartUnlessSame(GlobalRegistry.createBodypart("anus"))
-	giveBodypartUnlessSame(GlobalRegistry.createBodypart("digilegs"))
 	var breasts = GlobalRegistry.createBodypart("humanbreasts")
 	breasts.size = 4
 	giveBodypartUnlessSame(breasts)
-	giveBodypartUnlessSame(GlobalRegistry.createBodypart("felinehead"))
-	giveBodypartUnlessSame(GlobalRegistry.createBodypart("shorthair"))
-	giveBodypartUnlessSame(GlobalRegistry.createBodypart("felineears"))
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("vagina"))
+	giveBodypartUnlessSame(GlobalRegistry.createBodypart("anus"))
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("felinetail"))
+	giveBodypartUnlessSame(GlobalRegistry.createBodypart("digilegs"))
 
 func getLootTable(_battleName):
 	return InmateLoot.new()
+
+func createEquipment():
+	getInventory().equipItem(GlobalRegistry.createItemNoID("inmatecollar"))

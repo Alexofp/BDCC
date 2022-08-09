@@ -52,6 +52,7 @@ func _init():
 		InterestTopic.SmallCock: Interest.KindaLikes,
 		InterestTopic.NoCock: Interest.Likes,
 		InterestTopic.HasCockOnly: Interest.SlightlyDislikes,
+		InterestTopic.Pregnant: Interest.ReallyLikes,
 	}
 	
 	npcHasMenstrualCycle = true
@@ -100,25 +101,25 @@ func getFightState(_battleName):
 	return getName() + " looks completely fine, no visible bruises or signs of lust."
 
 func getThickness() -> int:
-	return 100
+	return 110
 
 func getFemininity() -> int:
-	return 50
+	return 70
 
 func createBodyparts():
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("anthrobody"))
-	giveBodypartUnlessSame(GlobalRegistry.createBodypart("anthroarms"))
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("anus"))
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("digilegs"))
-	var breasts = GlobalRegistry.createBodypart("humanbreasts")
-	breasts.size = 6
-	giveBodypartUnlessSame(breasts)
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("felinehead"))
-	giveBodypartUnlessSame(GlobalRegistry.createBodypart("vagina"))
-	giveBodypartUnlessSame(GlobalRegistry.createBodypart("shorttail"))
-	giveBodypartUnlessSame(GlobalRegistry.createBodypart("shorthair"))
+	giveBodypartUnlessSame(GlobalRegistry.createBodypart("overeyehair"))
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("lynxears2"))
-	var penis = GlobalRegistry.createBodypart("caninepenis")
+	giveBodypartUnlessSame(GlobalRegistry.createBodypart("buffarms"))
+	var breasts = GlobalRegistry.createBodypart("humanbreasts")
+	breasts.size = 8
+	giveBodypartUnlessSame(breasts)
+	var penis = GlobalRegistry.createBodypart("felinepenis")
 	penis.lengthCM = 22
 	penis.ballsScale = 1
 	giveBodypartUnlessSame(penis)
+	giveBodypartUnlessSame(GlobalRegistry.createBodypart("vagina"))
+	giveBodypartUnlessSame(GlobalRegistry.createBodypart("shorttail"))

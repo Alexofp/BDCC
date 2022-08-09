@@ -51,8 +51,11 @@ func createBodyparts():
 	giveBodypartUnlessSame(penis)
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("anthroarms"))
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("humanears"))
-	giveBodypartUnlessSame(GlobalRegistry.createBodypart("baldhair"))
+	giveBodypartUnlessSame(GlobalRegistry.createBodypart("coolhair"))
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("humanhead"))
 
 func getLootTable(_battleName):
 	return InmateLoot.new()
+
+func createEquipment():
+	getInventory().equipItem(GlobalRegistry.createItemNoID("inmatecollar"))

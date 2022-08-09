@@ -92,7 +92,7 @@ func createBodyparts():
 	breasts.size = 4
 	giveBodypartUnlessSame(breasts)
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("foxhead"))
-	giveBodypartUnlessSame(GlobalRegistry.createBodypart("shorthair"))
+	giveBodypartUnlessSame(GlobalRegistry.createBodypart("overeyehair"))
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("canineears"))
 	var penis = GlobalRegistry.createBodypart("caninepenis")
 	penis.lengthCM = 22
@@ -102,3 +102,6 @@ func createBodyparts():
 
 func getLootTable(_battleName):
 	return InmateLoot.new()
+
+func createEquipment():
+	getInventory().equipItem(GlobalRegistry.createItemNoID("inmatecollar"))

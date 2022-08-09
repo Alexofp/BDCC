@@ -6,6 +6,7 @@ func _init():
 func _run():
 	if(state == ""):
 		addCharacter("cp_guard")
+		GM.main.playAnimation(StageScene.Duo, "stand", {npc="cp_guard"})
 
 	if(state == "" && !getFlag(CellblockModule.Cellblock_CheckpointVisited, false)):
 		setFlag(CellblockModule.Cellblock_CheckpointVisited, true)
