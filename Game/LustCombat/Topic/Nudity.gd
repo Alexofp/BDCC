@@ -54,15 +54,3 @@ func getVisibleName(_topicID):
 
 	
 	return "error:"+str(_topicID)
-
-func getTeaseValue(_topicID, _teaseType):
-	if(_teaseType == TeaseType.Body):
-		if(_topicID in [InterestTopic.FullyNaked, InterestTopic.ExposedBreasts, InterestTopic.ExposedBra]):
-			return 1.0
-	if(_teaseType == TeaseType.Crotch):
-		if(_topicID in [InterestTopic.ExposedPussy, InterestTopic.ExposedCock, InterestTopic.ExposedPanties]):
-			return 1.0
-	if(_teaseType == TeaseType.Butt):
-		if(_topicID in [InterestTopic.ExposedAnus, InterestTopic.ExposedPanties]):
-			return 1.0
-	return 0.0

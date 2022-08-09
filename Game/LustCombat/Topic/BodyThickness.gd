@@ -39,12 +39,3 @@ func getVisibleName(_topicID):
 		return "a slim butt"
 	
 	return "error:"+str(_topicID)
-
-func getTeaseValue(_topicID, _teaseType):
-	if(_teaseType == TeaseType.Body):
-		if(_topicID in [InterestTopic.ThickBody, InterestTopic.AverageMassBody, InterestTopic.SlimBody]):
-			return 0.5
-	if(_teaseType == TeaseType.Butt):
-		if(_topicID in [InterestTopic.ThickButt, InterestTopic.AverageButt, InterestTopic.SlimButt]):
-			return 1.0
-	return 0.0

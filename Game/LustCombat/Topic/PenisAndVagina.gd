@@ -72,8 +72,3 @@ func getVisibleName(_topicID):
 		return "just a cock"
 	
 	return "error:"+str(_topicID)
-
-func getTeaseValue(_topicID, _teaseType):
-	if(_teaseType == TeaseType.Crotch):
-		return 1.0
-	return 0.0

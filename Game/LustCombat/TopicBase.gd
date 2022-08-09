@@ -41,6 +41,3 @@ static func constantIfAbove(myvalue: float, aboveValue: float, constantValue: fl
 		return constantValue
 	else:
 		return otherwise
-
-func getTeaseValue(_topicID, _teaseType) -> float:
-	return 0.0

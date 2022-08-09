@@ -67,15 +67,3 @@ func getVisibleName(_topicID):
 		return "total cumdumpsters"
 	
 	return "error:"+str(_topicID)
-
-func getTeaseValue(_topicID, _teaseType):
-	if(_teaseType == TeaseType.Body):
-		if(_topicID in [InterestTopic.StuffedThroat, InterestTopic.CoveredInCum, InterestTopic.CoveredInLotsOfCum]):
-			return 0.6
-	if(_teaseType == TeaseType.Crotch):
-		if(_topicID in [InterestTopic.StuffedPussy, InterestTopic.StuffedPussyOrAss]):
-			return 0.6
-	if(_teaseType == TeaseType.Butt):
-		if(_topicID in [InterestTopic.StuffedAss, InterestTopic.StuffedPussyOrAss]):
-			return 0.6
-	return 0.0

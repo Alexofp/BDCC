@@ -30,8 +30,3 @@ func getVisibleName(_topicID):
 		return "a masculine body"
 	
 	return "error:"+str(_topicID)
-
-func getTeaseValue(_topicID, _teaseType):
-	if(_teaseType == TeaseType.Body):
-		return 0.5
-	return 0.0
