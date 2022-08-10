@@ -70,7 +70,7 @@ func startLoadingDonationData():
 func validateDonationData(donationData):
 	if(!(donationData is Dictionary)):
 		return false
-	if(!donationData.has("dateString") || !donationData.has("entries") || !(donationData["entries"] is Dictionary) || !donationData.has("tiers") || !(donationData["tiers"] is Array)):
+	if(!donationData.has("dateString") || !donationData.has("unixTime") || !donationData.has("entries") || !(donationData["entries"] is Dictionary) || !donationData.has("tiers") || !(donationData["tiers"] is Array)):
 		return false
 	for tierName in donationData["entries"]:
 		var tier = donationData["entries"][tierName]
@@ -107,7 +107,8 @@ func getDonationDataString():
 	if(cachedDonationData == null):
 		theData = cachedLocalDonationData
 	else:
-		theData = cachedDonationData
+		if(cachedDonationData["unixTime"] >= cachedLocalDonationData["unixTime"]):
+			theData = cachedDonationData
 	
 	if(theData == null || !validateDonationData(theData)):
 		return ""

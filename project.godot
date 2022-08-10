@@ -229,11 +229,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Player/Player3D/DollSkeleton.gd"
 }, {
-"base": "Resource",
-"class": "DonationsInfo",
-"language": "GDScript",
-"path": "res://Util/DonationsInfo.gd"
-}, {
 "base": "Reference",
 "class": "EggCell",
 "language": "GDScript",
@@ -764,7 +759,6 @@ _global_script_class_icons={
 "Doll3D": "",
 "DollAttachmentZone": "",
 "DollSkeleton": "",
-"DonationsInfo": "",
 "EggCell": "",
 "EscapeQuest": "",
 "EventBase": "",

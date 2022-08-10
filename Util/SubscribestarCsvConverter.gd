@@ -100,6 +100,7 @@ func _on_Button4_pressed():
 	tiers.sort_custom(self, "tierSortFunc")
 	var result = {
 		"dateString": dateStr,
+		"unixTime": OS.get_unix_time(),
 		"entries": newdata,
 		"tiers": tiers,
 	}

@@ -1,18 +1,18 @@
 {
-	"dateString": "28 of Jul 2022",
+	"dateString": "10 of Aug 2022",
 	"entries": {
 		"$1.00": [
 			{
 				"nickname": "MaxMaxouCat21"
 			},
 			{
-				"nickname": "User#928169c6"
-			},
-			{
 				"nickname": "Maxtacks"
 			},
 			{
 				"nickname": "SuPhox"
+			},
+			{
+				"nickname": "User#928169c6"
 			},
 			{
 				"nickname": "Caliban"
@@ -31,10 +31,14 @@
 			},
 			{
 				"nickname": "Zeneroth"
+			},
+			{
+				"nickname": "Shadowfaux"
 			}
 		]
 	},
 	"tiers": [
 		"$1.00"
-	]
+	],
+	"unixTime": 1660124519
 }
