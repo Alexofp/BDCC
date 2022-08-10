@@ -105,6 +105,9 @@ func _run():
 
 
 func _react(_action: String, _args):
+	if(_action in ["intimidate", "seduce", "wait", "someone!"]):
+		processTime(RNG.randi_range(5, 10) * 60)
+	
 	if(_action == "starttalk"):
 		runScene("BulldogTalkScene")
 		endScene()

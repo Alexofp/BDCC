@@ -38,6 +38,7 @@ func _run():
 		addButton("Watch the fight", "Now this is getting interesting", "watch_the_fight")
 
 	if(state == "watch_the_fight"):
+		GM.main.playAnimation(StageScene.Duo, "stand", {pc = "kait", npc = "avy"})
 		# (Avy, dark fox red with a cock)
 
 		# (Kait, Snow leopard lilac girl)
@@ -99,6 +100,8 @@ func _run():
 
 
 	if(state == "stay"):
+		GM.main.playAnimation(StageScene.Duo, "kneel", {pc = "kait", npc = "avy"})
+		
 		saynn("The naked cat tries to crawl away from the fox but these attempts are quickly ended by Avy grabbing lilac’s legs and then raising and pinning them into the floor using her body, getting the girl into a mating press position. She then quickly directs her veiny cock down the girl’s cunt and thrusts inside, causing her knotted cock to spread the sensitive pink folds and slide inside the pussy balls-deep!")
 
 		saynn("The audience goes wild, some begin to pleasure themselves while watching the scene unfold. Some cheer and yell “Fuck her harder! Break the slut!”.")
@@ -124,6 +127,8 @@ func _run():
 
 
 func _react(_action: String, _args):
+	if(_action in ["continue", "watch_the_fight", "stay"]):
+		processTime(RNG.randi_range(5, 10) * 60)
 	
 	if(_action == "stay"):
 		getCharacter("kait").cummedInVaginaBy("avy")

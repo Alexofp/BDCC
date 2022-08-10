@@ -107,6 +107,7 @@ func _run():
 func _react(_action: String, _args):
 
 	if(_action == "pay"):
+		processTime(5 * 60)
 		GM.pc.addCredits(-5)
 
 	if(_action == "fight"):

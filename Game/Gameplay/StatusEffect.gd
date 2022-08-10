@@ -39,4 +39,5 @@ const DrenchedInPiss = "DrenchedInPiss"
 
 # Useful effects
 const Yoga = "Yoga"
+const WorkOutLight = "WorkOutLight"
 const WorkOut = "WorkOut"

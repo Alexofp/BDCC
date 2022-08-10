@@ -37,6 +37,6 @@ func combine(_args = []):
 func getBuffs():
 	return [
 		buff(Buff.LustDamageBuff, [20.0]),
-		buff(Buff.DodgeChanceBuff, [10.0]),
+		buff(Buff.DodgeChanceBuff, [20.0]),
 		buff(Buff.SkillExperienceBuff, [Skill.Exhibitionism, 50.0])
 	]

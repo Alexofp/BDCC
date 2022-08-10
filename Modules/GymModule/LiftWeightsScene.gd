@@ -8,7 +8,6 @@ func _reactInit():
 		endScene()
 		return
 
-
 func _run():
 
 	if(state == ""):
@@ -16,8 +15,12 @@ func _run():
 
 		saynn("You take a seat on the bench, deciding what you wanna do.")
 		
-		addButtonWithChecks("Light workout", "Do some dumbbell exercises", "light_workout", [], [ButtonChecks.HasStamina])
-		addButtonWithChecks("Heavy workout", "Grab a heavy barbell", "heavy_workout", [], [ButtonChecks.HasStamina, [ButtonChecks.StatCheck, Stat.Strength, 10]])
+		if(GM.pc.hasEffect(StatusEffect.WorkOut) || GM.pc.hasEffect(StatusEffect.WorkOutLight)):
+			addDisabledButton("Light workout", "You already did a work out recently")
+			addDisabledButton("Heavy workout", "You already did a work out recently")
+		else:
+			addButtonWithChecks("Light workout", "Do some dumbbell exercises", "light_workout", [], [ButtonChecks.HasStamina])
+			addButtonWithChecks("Heavy workout", "Grab a heavy barbell", "heavy_workout", [], [ButtonChecks.HasStamina, [ButtonChecks.StatCheck, Stat.Strength, 10]])
 		addButton("Leave", "You don't wanna do anything", "endthescene")
 
 	if(state == "light_workout"):
@@ -55,10 +58,15 @@ func _run():
 
 
 func _react(_action: String, _args):
-	if(_action == "light_workout" || _action == "heavy_workout"):
-		processTime(60*5)
+	if(_action == "light_workout"):
+		processTime(60*10)
+		GM.pc.addStamina(-30)
+		GM.pc.addEffect(StatusEffect.WorkOutLight)
+		GM.pc.updateNonBattleEffects()
+	
+	if(_action == "heavy_workout"):
+		processTime(60*20)
 		GM.pc.addStamina(-40)
-		# ADD SOME BUFF HERE
 		GM.pc.addEffect(StatusEffect.WorkOut)
 		GM.pc.updateNonBattleEffects()
 	

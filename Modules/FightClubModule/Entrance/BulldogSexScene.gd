@@ -344,6 +344,9 @@ func _react(_action: String, _args):
 	if(_action == "do_random"):
 		_action = RNG.pick(["run_away!", "uhh.."])
 	
+	if(_action in ["cum!", "run_away!", "uhh..", "heatdrug", "inmatesFirstLoad", "inmatesSecondLoad"]):
+		processTime(RNG.randi_range(5, 10) * 60)
+	
 	if(_action == "cum!"):
 		if(GM.pc.hasVagina()):
 			GM.pc.gotVaginaFuckedBy("bulldog")

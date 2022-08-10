@@ -87,6 +87,8 @@ func _run():
 
 
 func _react(_action: String, _args):
+	if(_action in ["continue"]):
+		processTime(RNG.randi_range(5, 10) * 60)
 	
 	if(_action == "endthescene"):
 		endScene()

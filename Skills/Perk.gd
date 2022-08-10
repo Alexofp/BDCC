@@ -30,6 +30,8 @@ const SexDefocusNeverLose = "SexDefocusNeverLose"
 # Exhibitionism perks
 const NakedNoShame = "NakedNoShame"
 const NakedDodging = "NakedDodging"
+const NakedMagicHips = "NakedMagicHips"
+const NakedStunningLips = "NakedStunningLips"
 
 # BDSM perks
 const BDSMGagTalk = "BDSMGagTalk"

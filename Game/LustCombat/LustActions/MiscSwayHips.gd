@@ -62,6 +62,13 @@ func doAction(_lustState: LustCombatState, _args):
 		text += "Someone left writings on your body and right now anyone can see them clearly."
 		text += "\n\n"
 
+	if(_lustState.isInBattle() && pc.hasPerk(Perk.NakedMagicHips) && RNG.chance(20 + sqrt(pc.getStat(Stat.Vitality)))):
+		var enemy:BaseCharacter = _lustState.getEnemyCharacter()
+		if(enemy != null):
+			enemy.addEffect(StatusEffect.Weakness, [2])
+			text += "[b]Enemy is weakened by your hips![/b]"
+			text += "\n\n"
+
 	return {
 		text = text,
 		lust = 1,

@@ -6,6 +6,7 @@ func _init():
 func _run():
 	if(state == ""):
 		addCharacter("tavi")
+		GM.main.playAnimation(StageScene.Duo, "stand", {npc="tavi"})
 		
 	if(state == ""):
 		saynn("You were exploring the mineshafts level when your ears suddenly caught an unknown voice somewhere from behind.")
@@ -205,6 +206,8 @@ func _run():
 	#	addButton("Lost fight", "", "lost_fight")
 
 	if(state == "lost_fight"):
+		GM.main.playAnimation(StageScene.Duo, "kneel", {npc="tavi"})
+		
 		saynn("You can’t fight anymore, the cat was too strong for you. You give up and drop to your knees, all your bruises cause you pain. Tavi is clearly looking very annoyed, you can’t see her smile anymore. She walks up to you and grabs you by the collar with the other hand threatening to strike you.")
 
 		saynn("[say=tavi]Since your willpower is so fucking strong, I will give you one last chance. Submit. Or suffer.[/say]")
@@ -238,6 +241,8 @@ func _run():
 		#addButton("Won fight", "", "won_fight")
 
 	if(state == "won_fight"):
+		GM.main.playAnimation(StageScene.Duo, "stand", {npc="tavi", npcAction="kneel"})
+		
 		saynn("Tavi loses her strength and collapses onto the floor. All her many bruises seem to be glowing green, with the color of her blood.")
 
 		saynn("[say=tavi]Yes, you won. I won’t touch you anymore. Go the fuck away now. Mghhh..[/say]")

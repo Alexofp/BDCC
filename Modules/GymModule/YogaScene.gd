@@ -15,7 +15,10 @@ func _run():
 
 		saynn("You step onto one of the unoccupied mats and prepare yourself.")
 
-		addButton("Simple poses", "Train your agility a bit", "simple_poses")
+		if(GM.pc.hasEffect(StatusEffect.Yoga)):
+			addDisabledButton("Simple poses", "You already did yoga recently")
+		else:
+			addButtonWithChecks("Simple poses", "Train your agility a bit", "simple_poses", [], [ButtonChecks.HasStamina])
 		addButton("Leave", "You don't feel like doing yoga", "endthescene")
 
 	if(state == "simple_poses"):
@@ -31,9 +34,8 @@ func _run():
 
 func _react(_action: String, _args):
 	if(_action == "simple_poses"):
-		processTime(60*5)
-		#GM.pc.addStamina(-40)
-		# ADD SOME BUFF HERE
+		processTime(60*20)
+		GM.pc.addStamina(-20)
 		GM.pc.addEffect(StatusEffect.Yoga)
 		GM.pc.updateNonBattleEffects()
 	

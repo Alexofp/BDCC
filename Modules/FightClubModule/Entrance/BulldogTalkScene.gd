@@ -109,6 +109,7 @@ func _run():
 
 func _react(_action: String, _args):
 	if(_action == "walk_in"):
+		processTime(3*60)
 		setModuleFlag(FightClubModule.ModID, FightClubModule.BulldogBypassed, true)
 		GM.pc.setLocation("fight_entrance")
 		endScene()

@@ -1,31 +1,34 @@
 extends StatusEffectBase
 
 func _init():
-	id = StatusEffect.PregnancySickness
+	id = StatusEffect.WorkOutLight
 	isBattleOnly = false
-
+	
 func initArgs(_args = []):
 	if(_args.size() > 0):
 		turns = _args[0]
 	else:
-		turns = 2*60*60 + RNG.randi_range(0, 60*60)
-
+		turns = 12*60*60
+	
+func processBattleTurn():
+	pass
+	
 func processTime(_secondsPassed: int):
 	turns -= _secondsPassed
 	if(turns <= 0):
 		stop()
 
 func getEffectName():
-	return "Morning sickness"
+	return "Light work out"
 
 func getEffectDesc():
-	return "You feel dizzy.. "+Util.getTimeStringHumanReadable(turns)
+	return "Doing weights exercices made you more powerful for "+Util.getTimeStringHumanReadable(turns)
 
 func getEffectImage():
-	return "res://Images/StatusEffects/headache.png"
+	return "res://Images/StatusEffects/biceps.png"
 
 func getIconColor():
-	return IconColorRed
+	return IconColorGreen
 
 func combine(_args = []):
 	if(_args.size() > 0):
@@ -33,5 +36,7 @@ func combine(_args = []):
 
 func getBuffs():
 	return [
-		buff(Buff.AmbientPainBuff, [20.0]),
+		buff(Buff.PhysicalDamageBuff, [10.0]),
+		buff(Buff.PhysicalArmorBuff, [10]),
+		buff(Buff.SkillExperienceBuff, [Skill.Combat, 50.0])
 	]

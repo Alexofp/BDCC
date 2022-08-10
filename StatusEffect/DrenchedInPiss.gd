@@ -21,8 +21,8 @@ func getEffectDesc():
 
 func getBuffs():
 	return [
-		buff(Buff.LustDamageBuff, [-50]),
-		buff(Buff.ReceivedLustDamageBuff, [-20]),
+		buff(Buff.LustDamageBuff, [-80]),
+		buff(Buff.LustArmorBuff, [50]),
 	]
 	
 func getEffectImage():
