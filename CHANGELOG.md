@@ -5,6 +5,44 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Added
+- Lust combat was completely overhauled, teasing got expanded a lot. Now you can gradually strip before the enemy and touch yourself in many different ways. The same system is now used for masturbation scene
+- Npcs will sometimes react to your teases with unique dialogue
+- Melee weapons. So far there is a stun baton and shiv. Stun baton can be used for damage or to stun enemies, shiv does high damage and causes bleeding. Melee weapons have very limited durability and are illegal, meaning they will be stripped during any search
+- Some sliders change player's shape. Thickness slider makes the doll look more thick. Breasts/dick sliders work too. Belly will increases in size during pregnancy.
+- Most of the restraints are now visible on the player. Cuffs will move the hands behind the back or make the player do hobble animation. The only restraints that aren't visible yet are buttplugs and the straitjacket
+- Subscribestar subscribers are now displayed in the main menu, current list is fetched from github
+- In most talking scenes you will see npc's doll standing near your doll
+- Masturbation in public can cause you to be spotted. (no scenes for that yet, will be added in next update but the system is there)
+- Player doll will be shown stuck in stocks during the stocks punishment scene
+- Keyboard controls are added, they -should- work the same on any layout. Visibility of the keys on the buttons can be disabled in the options
+- Gym content. Ability to lift weights and do yoga. Both give temporary bonuses.
+- Rahi gym event
+- Risha gym event
+- Bully gang gym event
+- Some strange dude is standing near gym. Convince him to get access to new area
+- Underground club arena added. Climb the ranks and beat up others to earn credits/experience/have fun with them
+- 8 fighters for the arena, each with unique scenes for when you lose/win against them
+- Added ability to have buff arms in character creator
+- Added bulldog head and ears in character creator
+- Added horse species in character creator
+- Added feline and horse dicks
+- Added lots of new hair
+- Added ability to change your hair in bathrooms
+- Dev tool to quickly create character dolls
+- Your crime is displayed on the 'me' screen
+- Option to show names of characters before their speech
+- Memories. Some scenes will attach little temporary memories to locations that are visible when you visit them later
+- 3 new perks
+- An option to show lengths in inches or cm+inches
+- An option to make it so the first tap only shows the description of an action and second one actually does it. Only works on touch devices
+
+### Changed
+- Player doll is completely redone, now using rigged flat 3d models under the hood.
+- Cum lover experience is added automatically when you receive a creampie or cum inside others. Or when you walk around with cum on you
+
+### Fixed
+- Tooltips when hovering over the bodyparts are fixed and working again
 
 ## [0.0.15] - 2022-06-12
 ### Added
