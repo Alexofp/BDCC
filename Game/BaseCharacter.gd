@@ -508,6 +508,14 @@ func verbS(verbWithNoS, verbWithS = null):
 	if(gender == Gender.Other):
 		return verbWithS
 
+func getPenisSizeString() -> String:
+	if(!hasBodypart(BodypartSlot.Penis)):
+		return "ERROR:NO_PENIS"
+	
+	var penis = getBodypart(BodypartSlot.Penis)
+	var size = penis.getLength()
+	return Util.cmToString(size)
+
 func getInventory() -> Inventory:
 	return inventory
 

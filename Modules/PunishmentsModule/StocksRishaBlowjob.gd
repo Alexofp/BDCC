@@ -43,7 +43,7 @@ func _run():
 		addButton("Continue", "It's fine", "endthescene")
 
 	if(state == "nod"):
-		saynn("You nod slightly. Risha chuckles and strips the crotch piece of her heavy armor. Then she pulls down her panties and exposes her girthy cock. It’s about "+Util.cmToString(25)+" and is of a feline type, no knot or anything, just little barbs on its long tip.")
+		saynn("You nod slightly. Risha chuckles and strips the crotch piece of her heavy armor. Then she pulls down her panties and exposes her girthy cock. It’s about {risha.penisSizeStr} and is of a feline type, no knot or anything, just little barbs on its long tip.")
 
 		# (if can’t oral)
 		if(rishaRemovedGag):

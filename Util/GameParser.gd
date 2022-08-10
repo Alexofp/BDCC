@@ -64,6 +64,8 @@ func callObjectFunc(_obj: String, _command: String, _args: Array):
 		return object.getBodypartLewdSizeAdjective(BodypartSlot.Penis)
 	if(_command in ["penisDesc", "cockDesc"] && _args.size() == 0 && object.has_method("getBodypartLewdAdjective")):
 		return object.getBodypartLewdAdjective(BodypartSlot.Penis)
+	if(_command in ["penisSizeStr", "cockSizeStr"] && _args.size() == 0 && object.has_method("getPenisSizeString")):
+		return object.getPenisSizeString()
 		
 	if(_command == "vagina" && _args.size() == 0 && object.has_method("getBodypartLewdDescriptionAndName")):
 		return object.getBodypartLewdDescriptionAndName(BodypartSlot.Vagina)

@@ -22,7 +22,7 @@ func _run():
 		addButton("Get fucked", "See what happens next..", "get_fucked")
 
 	if(state == "get_fucked"):
-		saynn("Axis pulls his shorts down, exposing his giant red cock, it must be at least "+Util.cmToString(25)+". Its knot is already fat, filled with blood, and the tip is actively leaking precum, the audience is cheering loudly seeing that heavy tool. You don’t get enough time to react to that sudden introduction, the wolf grabs you by the collar and pulls your head straight towards his shaft, your nose is pressed against the wet meaty orb, making you smell his scent. It’s.. arousing.. Unusually so. As soon as you got a taste of his alpha scent, your mind got instantly attacked with his pheromones, causing you to act so subby.. and needy.")
+		saynn("Axis pulls his shorts down, exposing his giant red cock, it must be at least {axis.penisSizeStr}. Its knot is already fat, filled with blood, and the tip is actively leaking precum, the audience is cheering loudly seeing that heavy tool. You don’t get enough time to react to that sudden introduction, the wolf grabs you by the collar and pulls your head straight towards his shaft, your nose is pressed against the wet meaty orb, making you smell his scent. It’s.. arousing.. Unusually so. As soon as you got a taste of his alpha scent, your mind got instantly attacked with his pheromones, causing you to act so subby.. and needy.")
 
 		saynn("Your eyes show desire, you eagerly stick your tongue out and drag it along the lengthy knotted cock. Then you catch the precum off of its pointy tip and swallow it, feeling even more lusty after that.")
 

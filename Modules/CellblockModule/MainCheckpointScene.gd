@@ -124,7 +124,7 @@ func _run():
 		if(GM.pc.getInmateType() == InmateType.SexDeviant):
 			saynn("[say=cp_guard]Glad the sextoys know their place. Keep working.[/say]")
 
-		saynn("His member slowly reaches the maximum length of "+Util.cmToString(18)+", very hefty. On its tip you see some precum beginning to gather, you catch it with your hand and spread it along the length down. Your free hand slips into his unzipped pants and gives his balls a small massage. His breathing becomes deeper while you stroke his canine cock, slowly picking up the pace.")
+		saynn("His member slowly reaches the maximum length of {cp_guard.penisSizeStr}, very hefty. On its tip you see some precum beginning to gather, you catch it with your hand and spread it along the length down. Your free hand slips into his unzipped pants and gives his balls a small massage. His breathing becomes deeper while you stroke his canine cock, slowly picking up the pace.")
 
 		saynn("It all happens in a public place but you don’t care, you look up at the guy and teasingly lick his cock once, getting some of his pre, you hand slides back and forth at a steady pace, you notice his knot inflating, his shaft throbbing.")
 
@@ -220,7 +220,7 @@ func _run():
 
 		saynn("[say=cp_guard]Oh yeah? I like the sound of that[/say]")
 
-		saynn("Your hand pulls out his cock and keeps stroking it until he becomes hard. His member has a pointy canine shape with a fat knot at the end and is pretty long, about "+Util.cmToString(18)+". The guy smirks and tries to get a hold of your {pc.breasts} but you smack his hand away.")
+		saynn("Your hand pulls out his cock and keeps stroking it until he becomes hard. His member has a pointy canine shape with a fat knot at the end and is pretty long, about {cp_guard.penisSizeStr}. The guy smirks and tries to get a hold of your {pc.breasts} but you smack his hand away.")
 
 		# (if canUndress)
 		if(GM.pc.canUndress()):

@@ -25,7 +25,7 @@ func _run():
 
 		saynn("You find a hidden zipper on her suit and begin to undo it, slowly revealing her hard canine shaft, a pair of furry balls and.. a moist cunt, the husky is clearly a herm. You get your muzzle in there and give her cock a good lick with your tongue from the base to its head, catching a drop Nova’s pre. Gently, you begin to give her ballsack a squeeze while also teasingly rubbing her clit in a circular motion. You can feel a pleasure wave go through Nova, she bites her lip harder and arches her back, her knotted cock twitching in reaction to what you’re doing.")
 
-		saynn("Suddenly she grabs you by the hair and pulls you into her crotch, your muzzle pressing into the base area of her cock. You can’t help but to catch that husky aroused scent, your tongue is being dragged along her big length, it’s about "+Util.cmToString(18)+" when it’s out of its sheath and fully erected.")
+		saynn("Suddenly she grabs you by the hair and pulls you into her crotch, your muzzle pressing into the base area of her cock. You can’t help but to catch that husky aroused scent, your tongue is being dragged along her big length, it’s about {nova.penisSizeStr} when it’s out of its sheath and fully erected.")
 
 		saynn("[say=nova]Such a good little whore~[/say]")
 

@@ -58,7 +58,7 @@ func _run():
 		else:
 			saynn("Since your {pc.pussyStretch} pussy is already exposed, you don’t need to undress. But Jack does, you shift back slightly and you grab onto the sides of his shorts to slowly tug them down, allowing his cock to spring back after being caught on the elastic band.")
 
-		saynn("And wow, his horse cock is huge, it gets trapped between your {pc.masc} thighs and gradually gets more erect, reaching a length of at least "+Util.cmToString(30)+" by the end, even brushing against your {pc.breasts}. Its flared head is staring you in the face, between all the inflated glands there is an urethra that seems to be leaking pre already. The balls are massive and heavy too, just imagining how much is stored in them makes you more wet. You can’t deny it, you are kinda excited to try this stallion for a ride.")
+		saynn("And wow, his horse cock is huge, it gets trapped between your {pc.masc} thighs and gradually gets more erect, reaching a length of at least {jack.penisSizeStr} by the end, even brushing against your {pc.breasts}. Its flared head is staring you in the face, between all the inflated glands there is an urethra that seems to be leaking pre already. The balls are massive and heavy too, just imagining how much is stored in them makes you more wet. You can’t deny it, you are kinda excited to try this stallion for a ride.")
 
 		addButtonWithChecks("Condom", "Stay on the safe side", "condom", [], [ButtonChecks.HasCondoms])
 		addButton("Go raw", "Who needs protection", "go_raw")
@@ -202,7 +202,7 @@ func _run():
 		else:
 			saynn("Since your {pc.analStretch} tailhole is already exposed, you don’t need to undress. But Jack does, you shift back slightly and you grab onto the sides of his shorts to slowly tug them down, allowing his cock to spring back after being caught on the elastic band.")
 
-		saynn("And wow, his horse cock is huge, it gets trapped between your {pc.masc} thighs and gradually gets more erect, reaching a length of at least "+Util.cmToString(30)+" by the end, even brushing against your {pc.breasts}. Its flared head is staring you in the face, between all the inflated glands there is an urethra that seems to be leaking pre already. The balls are massive and heavy too, just imagining how much is stored in them makes you more aroused. You can’t deny it, you are kinda excited to try this stallion for a ride.")
+		saynn("And wow, his horse cock is huge, it gets trapped between your {pc.masc} thighs and gradually gets more erect, reaching a length of at least {jack.penisSizeStr} by the end, even brushing against your {pc.breasts}. Its flared head is staring you in the face, between all the inflated glands there is an urethra that seems to be leaking pre already. The balls are massive and heavy too, just imagining how much is stored in them makes you more aroused. You can’t deny it, you are kinda excited to try this stallion for a ride.")
 
 		addButtonWithChecks("Condom", "Use the best rubber you have", "condom1", [], [ButtonChecks.HasCondoms])
 		addButton("Go raw", "Who needs protection", "go_raw1")

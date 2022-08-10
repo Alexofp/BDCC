@@ -31,7 +31,7 @@ func _run():
 
 		saynn("Instead of explaining, Jack instead puts a hand on the back of your head and shoves it towards his crotch, letting you get a great view of his flat flared member while it’s being rubbed against your cheek. His precum is thick, it quickly makes you look like a wet mess. After being used as a sheath polisher for a bit, you begin to feel his cock getting harder and pushing you away even as it fills with blood.")
 
-		saynn("His cock is huge, like "+Util.cmToString(30)+" huge. The glands on the tip being inflated and the veiny texture make it look even more intimidating. Jack grabs your attention by pulling your chin close while holding the condom.")
+		saynn("His cock is huge, like {jack.penisSizeStr} huge. The glands on the tip being inflated and the veiny texture make it look even more intimidating. Jack grabs your attention by pulling your chin close while holding the condom.")
 
 		saynn("[say=jack]I’m gonna put this on. And stuff it inside your belly.[/say]")
 
@@ -111,7 +111,7 @@ func _run():
 		else:
 			saynn("Jack slides his hand over your naked curves and plays with your {pc.breasts}, making the crowd happy.")
 
-		saynn("He then forcibly pulls you down to your knees before tugging his shorts down, letting his cock out. And wow, as he strokes it in your view, you notice how huge it is, the shaft must be at least "+Util.cmToString(30)+" with the heavy balls swaying underneath, one slightly higher than the other. Jack also offers you a view of the flat flared tip with inflated glances and a drop of thick precum hanging off of it.")
+		saynn("He then forcibly pulls you down to your knees before tugging his shorts down, letting his cock out. And wow, as he strokes it in your view, you notice how huge it is, the shaft must be at least {jack.penisSizeStr} with the heavy balls swaying underneath, one slightly higher than the other. Jack also offers you a view of the flat flared tip with inflated glances and a drop of thick precum hanging off of it.")
 
 		saynn("You gulp and raise your brow, your body tenses up just imagining this cock inside you.")
 
