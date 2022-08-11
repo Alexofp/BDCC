@@ -230,6 +230,7 @@ func _react(_action: String, _args):
 		return
 		
 	if(_action == "useitem"):
+		setState("fighting")
 		beforeTurnChecks()
 		
 		var item = _args[0]
