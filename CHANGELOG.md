@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 ### Added
+- 20+ new lewd scenes with all sorts of kinks, at least 100+ pages of text added
 - Lust combat was completely overhauled, teasing got expanded a lot. Now you can gradually strip before the enemy and touch yourself in many different ways. The same system is now used for masturbation scene
 - Npcs will sometimes react to your teases with unique dialogue
 - Melee weapons. So far there is a stun baton and shiv. Stun baton can be used for damage or to stun enemies, shiv does high damage and causes bleeding. Melee weapons have very limited durability and are illegal, meaning they will be stripped during any search
@@ -40,9 +41,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Player doll is completely redone, now using rigged flat 3d models under the hood.
 - Cum lover experience is added automatically when you receive a creampie or cum inside others. Or when you walk around with cum on you
+- Buttons in the struggling minigame give more leeway on easier difficulties
 
 ### Fixed
 - Tooltips when hovering over the bodyparts are fixed and working again
+- Main text panel shouldn't scroll anymore when you pan the player doll panel on touch devices
 
 ## [0.0.15] - 2022-06-12
 ### Added
