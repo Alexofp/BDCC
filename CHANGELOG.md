@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+## [0.0.16] - 2022-08-11
 ### Added
 - 20+ new lewd scenes with all sorts of kinks, at least 100+ pages of text added
 - Lust combat was completely overhauled, teasing got expanded a lot. Now you can gradually strip before the enemy and touch yourself in many different ways. The same system is now used for masturbation scene
@@ -103,7 +105,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Turn-based fighting
 - Initial player customization
 
-[Unreleased]: https://github.com/Alexofp/BDCC/compare/0.0.15...main
+[Unreleased]: https://github.com/Alexofp/BDCC/compare/0.0.16...main
+[0.0.15]: https://github.com/Alexofp/BDCC/compare/0.0.15...0.0.16
 [0.0.15]: https://github.com/Alexofp/BDCC/compare/0.0.14...0.0.15
 [0.0.14]: https://github.com/Alexofp/BDCC/compare/v0.0.13bugfix3...0.0.14
 [0.0.13bugfix3]: https://github.com/Alexofp/BDCC/compare/v0.0.13bugfix2...v0.0.13bugfix3
