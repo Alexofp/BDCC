@@ -2,6 +2,7 @@ extends Node2D
 
 var progress = 0.0
 var waitTime = 5.0
+var deadZone = 0.1
 onready var _animation_player := $AnimationPlayer
 var hit = false
 
@@ -12,8 +13,9 @@ signal onHit(score)
 func _ready():
 	_animation_player.play("show")
 
-func setup(timeBeforeFull: float):
+func setup(timeBeforeFull: float, newDeadzone: float):
 	waitTime = timeBeforeFull
+	deadZone = newDeadzone
 	
 func _process(delta: float):
 	if(waitTime <= 0.0 || hit):
@@ -57,7 +59,7 @@ func gotHit(_tooLate = false):
 func getScore():
 	var closeness = abs(progress - 1.0)
 	var checkZone = 0.4
-	var deadZone = 0.1
+	#var deadZone = 0.1
 	
 	if(closeness > checkZone):
 		return 0.0

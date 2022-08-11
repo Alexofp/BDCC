@@ -19,6 +19,7 @@ var calculatedFlip = false
 
 # Difficulty stuff
 var buttonTime: float = 1.0
+var buttonDeadzone: float = 0.1
 var betweenButtonsTime: float = 0.5
 var amountOfPatternsMin: int = 2
 var amountOfPatternsMax: int = 2
@@ -26,30 +27,35 @@ var amountOfPatternsMax: int = 2
 var difficultySettings = [
 	{
 		buttonTime = 2.0,
+		buttonDeadZone = 0.2,
 		betweenButtonsTime = 1.2,
 		amountOfPatternsMin = 1,
 		amountOfPatternsMax = 1,
 	},
 	{
 		buttonTime = 1.5,
+		buttonDeadZone = 0.2,
 		betweenButtonsTime = 1.0,
 		amountOfPatternsMin = 2,
 		amountOfPatternsMax = 2,
 	},
 	{
 		buttonTime = 1.2,
+		buttonDeadZone = 0.2,
 		betweenButtonsTime = 0.6,
 		amountOfPatternsMin = 2,
 		amountOfPatternsMax = 3,
 	},
 	{
 		buttonTime = 1.0,
+		buttonDeadZone = 0.15,
 		betweenButtonsTime = 0.5,
 		amountOfPatternsMin = 2,
 		amountOfPatternsMax = 3,
 	},
 	{
 		buttonTime = 1.0,
+		buttonDeadZone = 0.15,
 		betweenButtonsTime = 0.3,
 		amountOfPatternsMin = 3,
 		amountOfPatternsMax = 4,
@@ -65,6 +71,7 @@ func setDifficulty(diff):
 	
 	var currentDifficulty = difficultySettings[diff]
 	buttonTime = currentDifficulty["buttonTime"]
+	buttonDeadzone = currentDifficulty["buttonDeadZone"]
 	betweenButtonsTime = currentDifficulty["betweenButtonsTime"]
 	amountOfPatternsMin = currentDifficulty["amountOfPatternsMin"]
 	amountOfPatternsMax = currentDifficulty["amountOfPatternsMax"]
@@ -153,7 +160,7 @@ func _on_NextButtonTimer_timeout():
 			pos.x = 1.0 - pos.x
 		
 		button.position = rect_size * pos
-		button.setup(buttonTime)
+		button.setup(buttonTime, buttonDeadzone)
 		button.connect("onHit", self, "onButtonHit")
 		$Buttons.add_child(button)
 		$Buttons.move_child(button, 0)

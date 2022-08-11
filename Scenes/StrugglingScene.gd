@@ -170,7 +170,7 @@ func _react(_action: String, _args):
 		var minigameStatus = 1.0
 		if(_args.size() > 1):
 			var minigameResult = float(_args[1])
-			minigameStatus = pow(minigameResult, 3) * 5.0
+			minigameStatus = pow(minigameResult, 1.5) * 5.0
 			if(minigameResult >= 1.0 && GM.pc.hasPerk(Perk.BDSMBetterStruggling)):
 				minigameStatus *= 2.0
 		
