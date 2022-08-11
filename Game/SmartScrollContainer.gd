@@ -12,7 +12,7 @@ var swipe_mouse_start
 var swipe_mouse_times = []
 var swipe_mouse_positions = []
 
-func _input(ev):
+func _gui_input(ev):
 	if(!OS.has_touchscreen_ui_hint()):
 		return
 	
