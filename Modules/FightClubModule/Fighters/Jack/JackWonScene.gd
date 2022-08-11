@@ -345,6 +345,7 @@ func _react(_action: String, _args):
 			GM.pc.cummedOnBy("jack")
 		
 		GM.pc.orgasmFrom("jack")
+		GM.pc.addSkillExperience(Skill.SexSlave, 50, "jack_getbred")
 		
 	if(_action == "inside1"):
 		GM.pc.gotAnusFuckedBy("jack")
@@ -353,6 +354,7 @@ func _react(_action: String, _args):
 			GM.pc.cummedOnBy("jack")
 		
 		GM.pc.orgasmFrom("jack")
+		GM.pc.addSkillExperience(Skill.SexSlave, 50, "jack_getbred")
 	
 	if(_action == "endthescene"):
 		endScene()

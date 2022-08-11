@@ -163,6 +163,8 @@ func _react(_action: String, _args):
 			GM.pc.cummedInAnusBy("nova")
 		GM.pc.cummedOnBy("nova")
 		GM.pc.orgasmFrom("nova")
+		GM.pc.addSkillExperience(Skill.SexSlave, 40, "nova_bdsmfuck")
+		GM.pc.addSkillExperience(Skill.BDSM, 30, "nova_bdsmfuck")
 
 	if(_action == "endthescene"):
 		endScene()

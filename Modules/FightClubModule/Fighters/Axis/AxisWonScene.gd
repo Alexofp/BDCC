@@ -251,6 +251,10 @@ func _react(_action: String, _args):
 	if(_action == "cum"):
 		getCharacter("axis").cummedInAnusBy("pc")
 		GM.pc.orgasmFrom("axis")
+		GM.pc.addSkillExperience(Skill.SexSlave, 40, "axis_fuckhim")
+	
+	if(_action == "grind_face"):
+		GM.pc.addSkillExperience(Skill.SexSlave, 30, "axis_grindface")
 	
 	if(_action == "cum1"):
 		GM.pc.orgasmFrom("axis")

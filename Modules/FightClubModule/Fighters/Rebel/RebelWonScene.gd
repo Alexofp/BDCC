@@ -130,6 +130,9 @@ func _run():
 
 
 func _react(_action: String, _args):
+	if(_action == "fisting"):
+		GM.pc.addSkillExperience(Skill.SexSlave, 30, "rebel_fisther")
+	
 	if(_action == "endthescene"):
 		endScene()
 		return

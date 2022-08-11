@@ -92,6 +92,7 @@ func _react(_action: String, _args):
 	if(_action == "rail_him"):
 		getCharacter("rubi").cummedInAnusBy("pc")
 		GM.pc.orgasmFrom("rubi")
+		GM.pc.addSkillExperience(Skill.SexSlave, 30, "rubi_railhim")
 	
 	if(_action == "endthescene"):
 		endScene()

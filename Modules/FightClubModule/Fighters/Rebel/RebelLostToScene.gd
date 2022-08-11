@@ -108,6 +108,7 @@ func _react(_action: String, _args):
 	if(_action == "continue"):
 		GM.pc.orgasmFrom("rebel")
 		GM.pc.gotOrificeStretchedWith(BodypartSlot.Anus, 40)
+		GM.pc.addSkillExperience(Skill.SexSlave, 30, "rebel_getfisted")
 	
 	if(_action == "endthescene"):
 		endScene()

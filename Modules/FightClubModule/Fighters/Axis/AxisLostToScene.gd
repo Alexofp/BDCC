@@ -164,6 +164,7 @@ func _react(_action: String, _args):
 			GM.pc.gotAnusFuckedBy("axis")
 			GM.pc.cummedInAnusBy("axis")
 		GM.pc.orgasmFrom("axis")
+		GM.pc.addSkillExperience(Skill.SexSlave, 30, "axis_getfucked")
 
 	if(_action == "endthescene"):
 		endScene()

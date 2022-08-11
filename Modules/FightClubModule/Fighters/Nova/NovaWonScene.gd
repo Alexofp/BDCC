@@ -187,10 +187,12 @@ func _run():
 func _react(_action: String, _args):
 	if(_action == "offer_pussy"):
 		GM.pc.orgasmFrom("nova")
+		GM.pc.addSkillExperience(Skill.SexSlave, 30, "nova_suitfuck")
 	
 	if(_action == "offer_cock"):
 		getCharacter("nova").cummedInMouthBy("pc")
 		GM.pc.orgasmFrom("nova")
+		GM.pc.addSkillExperience(Skill.SexSlave, 30, "nova_suitfuck")
 	
 	if(_action == "endthescene"):
 		endScene()

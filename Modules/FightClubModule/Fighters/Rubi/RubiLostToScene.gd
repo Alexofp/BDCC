@@ -95,6 +95,7 @@ func _react(_action: String, _args):
 	if(_action == "cum!"):
 		getCharacter("rubi").cummedInAnusBy("pc")
 		GM.pc.orgasmFrom("rubi")
+		GM.pc.addSkillExperience(Skill.SexSlave, 30, "rubi_powerbottom")
 	
 	if(_action == "let_it_happen"):
 		GM.pc.cummedOnBy("rubi")

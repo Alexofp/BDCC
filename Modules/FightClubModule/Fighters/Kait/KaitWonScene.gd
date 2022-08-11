@@ -208,9 +208,11 @@ func _react(_action: String, _args):
 	if(_action == "inside"):
 		getCharacter("kait").cummedInVaginaBy("pc")
 		GM.pc.orgasmFrom("kait")
+		GM.pc.addSkillExperience(Skill.SexSlave, 50, "kait_roughfuck")
 	
 	if(_action == "pull_out"):
 		GM.pc.orgasmFrom("kait")
+		GM.pc.addSkillExperience(Skill.SexSlave, 50, "kait_roughfuck")
 	
 	if(_action == "endthescene"):
 		endScene()

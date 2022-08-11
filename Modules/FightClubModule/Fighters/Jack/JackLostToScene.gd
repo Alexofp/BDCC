@@ -200,6 +200,7 @@ func _react(_action: String, _args):
 	
 	if(_action == "open_mouth"):
 		GM.pc.gotThroatFuckedBy("jack")
+		GM.pc.addSkillExperience(Skill.SexSlave, 20, "jack_condombj")
 	
 	if(_action == "get_bred"):
 		if(GM.pc.hasVagina()):
@@ -209,6 +210,7 @@ func _react(_action: String, _args):
 			GM.pc.gotAnusFuckedBy("jack")
 			GM.pc.cummedInAnusBy("jack")
 		GM.pc.orgasmFrom("jack")
+		GM.pc.addSkillExperience(Skill.SexSlave, 30, "jack_getbred")
 
 	if(_action == "endthescene"):
 		endScene()

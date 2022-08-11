@@ -143,6 +143,7 @@ func _react(_action: String, _args):
 	if(_action == "get_marked"):
 		GM.pc.cummedOnBy("kait")
 		GM.pc.addLust(40)
+		GM.pc.addSkillExperience(Skill.CumLover, 30, "kait_getmarked")
 
 	if(_action == "endthescene"):
 		endScene()
