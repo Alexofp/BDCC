@@ -106,7 +106,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Initial player customization
 
 [Unreleased]: https://github.com/Alexofp/BDCC/compare/0.0.16...main
-[0.0.15]: https://github.com/Alexofp/BDCC/compare/0.0.15...0.0.16
+[0.0.16]: https://github.com/Alexofp/BDCC/compare/0.0.15...0.0.16
 [0.0.15]: https://github.com/Alexofp/BDCC/compare/0.0.14...0.0.15
 [0.0.14]: https://github.com/Alexofp/BDCC/compare/v0.0.13bugfix3...0.0.14
 [0.0.13bugfix3]: https://github.com/Alexofp/BDCC/compare/v0.0.13bugfix2...v0.0.13bugfix3
