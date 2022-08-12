@@ -109,6 +109,8 @@ func getDonationDataString():
 	else:
 		if(cachedDonationData["unixTime"] >= cachedLocalDonationData["unixTime"]):
 			theData = cachedDonationData
+		else:
+			theData = cachedLocalDonationData
 	
 	if(theData == null || !validateDonationData(theData)):
 		return ""
