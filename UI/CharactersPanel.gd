@@ -7,7 +7,6 @@ onready var optionTooltip = $CanvasLayer/TooltipDisplay
 
 func _ready():
 	clear()
-	addCharacter("testchar")
 
 func addCharacter(charID: String):
 	if(addedCharacters.has(charID)):

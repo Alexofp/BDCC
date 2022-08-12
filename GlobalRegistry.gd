@@ -46,7 +46,50 @@ var cachedLocalDonationData = null
 var donationDataRequest: HTTPRequest
 signal donationDataUpdated
 
+var modsSupport = false
+var loadedMods = []
+
+func hasModSupport():
+	return modsSupport
+
+func getLoadedMods():
+	return loadedMods
+
+func loadMods():
+	# If we're in editor we have to do this silly thing
+	# read more here: https://github.com/godotengine/godot/issues/19815
+	if(OS.has_feature("editor")):
+		var _haveBase = ProjectSettings.load_resource_pack("res://BDCC.pck")
+		if(!_haveBase):
+			modsSupport = false
+			return
+	else:
+		modsSupport = true
+	
+	var modsFolder = "user://mods"
+	
+	var dir = Directory.new()
+	if dir.open(modsFolder) == OK:
+		dir.list_dir_begin()
+		var file_name = dir.get_next()
+		while file_name != "":
+			if dir.current_is_dir():
+				pass
+			else:
+				if(file_name.get_extension() in ["pck", "zip"]):
+					var full_path = modsFolder.plus_file(file_name)
+					#print("Registered mod: " + full_path)
+					var _ok = ProjectSettings.load_resource_pack(full_path)
+					if(_ok):
+						loadedMods.append(file_name)
+			file_name = dir.get_next()
+	else:
+		printerr("An error occurred when trying to access the path "+modsFolder)
+	
+
 func _init():
+	loadMods()
+	
 	bodypartStorageNode = Node.new()
 	add_child(bodypartStorageNode)
 	bodypartStorageNode.name = "Bodyparts"	

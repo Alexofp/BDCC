@@ -11,6 +11,7 @@ onready var gutHubReleaseLabel = $HBoxContainer/Panel/MarginContainer/VBoxContai
 onready var gitHubReleaseButton = $HBoxContainer/Panel/MarginContainer/VBoxContainer/GithubReleasesButton
 onready var devToolsScreen = $HBoxContainer/DevToolsScreen
 onready var devSubScreen = $HBoxContainer/DevToolsScreen/DevScreen
+onready var loadedModsLabel = $HBoxContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/LoadedModsLabel
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -26,6 +27,13 @@ func _ready():
 		gutHubReleaseLabel.text = "Latest github release: DISABLED"
 		gutHubReleaseLabel.visible = false
 		gitHubReleaseButton.visible = false
+		
+	var loadedMods = GlobalRegistry.getLoadedMods()
+	if(loadedMods.size() > 0):
+		var text = "Loaded mods:"
+		for mod in loadedMods:
+			text += "\n"+str(mod)
+		loadedModsLabel.bbcode_text = text
 
 func updateDonationData():
 	$HBoxContainer/Panel2/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer3/DonationsLabel.bbcode_text = GlobalRegistry.getDonationDataString()

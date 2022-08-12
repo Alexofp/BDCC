@@ -8,3 +8,5 @@ doc/_build/
 # Misc
 .DS_Store
 logs/
+
+*.pck
