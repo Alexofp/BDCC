@@ -116,7 +116,7 @@ func _run():
 
 		# (if no pussy)
 		else:
-			saynn("Suddenly you feel your collar grabbed, the hand makes you bend forward lower and stick your butt out. Then another hand lands on your {pc.thick} butt and pulls you back onto a hard cock! Your {pc.analStrech} tailhole gets spread open by a pointy meaty tip that gets shoved inside a second later, causing you to drop another moan.")
+			saynn("Suddenly you feel your collar grabbed, the hand makes you bend forward lower and stick your butt out. Then another hand lands on your {pc.thick} butt and pulls you back onto a hard cock! Your {pc.analStretch} tailhole gets spread open by a pointy meaty tip that gets shoved inside a second later, causing you to drop another moan.")
 
 			saynn("Yes! Please! The toy still buzzes inside you while the canine-shaped cock starts fucking your needy star. You don’t resist and instead move your hips to meet Nova’s motions as she thrusts inside. The hands hold you in place while Nova’s hips are slapping against your buttcheeks, your soft inner walls welcoming the knotted cock and becoming more slick from her precum.")
 
