@@ -184,8 +184,6 @@ func _on_ImportButton_pressed():
 
 func _on_ImportSaveDialog_file_selected(path: String):
 	print(path.get_file().get_basename())
-	if(true):
-		return
 	var d = Directory.new()
 	d.copy(path, "user://saves/"+path.get_file().get_basename()+".save")
 	updateSaves()

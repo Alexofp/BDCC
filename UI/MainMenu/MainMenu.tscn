@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://GlobalTheme.tres" type="Theme" id=1]
 [ext_resource path="res://Fonts/Titillium-Regular.otf" type="DynamicFontData" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://UI/Options/OptionsScreen.tscn" type="PackedScene" id=5]
 [ext_resource path="res://UI/MainMenu/CreditsScreen.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Fonts/Titillium-Bold.otf" type="DynamicFontData" id=7]
+[ext_resource path="res://UI/ModsMenu/ModsMenu.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Game/SmartScrollContainer.gd" type="Script" id=9]
 
 [sub_resource type="StyleBoxFlat" id=1]
@@ -54,9 +55,6 @@ script = ExtResource( 3 )
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Panel2" type="Panel" parent="HBoxContainer"]
 margin_right = 260.0
@@ -343,6 +341,15 @@ hint_tooltip = "View the project's changelog"
 size_flags_horizontal = 3
 text = "Changelog"
 
+[node name="ModsButton" type="Button" parent="HBoxContainer/MainVBox/GridContainer"]
+margin_left = 604.0
+margin_top = 30.0
+margin_right = 751.0
+margin_bottom = 56.0
+hint_tooltip = "See what modules are loaded currently"
+size_flags_horizontal = 3
+text = "Mods"
+
 [node name="DevToolsScreen" type="VBoxContainer" parent="HBoxContainer"]
 visible = false
 margin_left = 273.0
@@ -418,6 +425,14 @@ margin_left = 730.0
 margin_right = 1027.0
 margin_bottom = 720.0
 
+[node name="ModsMenu" parent="HBoxContainer" instance=ExtResource( 8 )]
+visible = false
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 1027.0
+margin_right = 1027.0
+margin_bottom = 720.0
+
 [node name="HSplitContainer2" type="HSplitContainer" parent="HBoxContainer"]
 margin_left = 1031.0
 margin_right = 1036.0
@@ -487,6 +502,7 @@ fit_content_height = true
 [connection signal="pressed" from="HBoxContainer/MainVBox/GridContainer/GithubButton" to="." method="_on_GithubButton_pressed"]
 [connection signal="pressed" from="HBoxContainer/MainVBox/GridContainer/DevToolsButton" to="." method="_on_DevToolsButton_pressed"]
 [connection signal="pressed" from="HBoxContainer/MainVBox/GridContainer/ChangelogButton" to="." method="_on_ChangelogButton_pressed"]
+[connection signal="pressed" from="HBoxContainer/MainVBox/GridContainer/ModsButton" to="." method="_on_ModsButton_pressed"]
 [connection signal="pressed" from="HBoxContainer/DevToolsScreen/GridContainer/DevClose" to="." method="_on_DevClose_pressed"]
 [connection signal="pressed" from="HBoxContainer/DevToolsScreen/GridContainer/DevSceneConverter" to="." method="_on_DevSceneConverter_pressed"]
 [connection signal="pressed" from="HBoxContainer/DevToolsScreen/GridContainer/DevLikesGenerator" to="." method="_on_DevLikesGenerator_pressed"]
@@ -494,5 +510,6 @@ fit_content_height = true
 [connection signal="onClosePressed" from="HBoxContainer/LoadGameScreen" to="." method="switchToMainMenu"]
 [connection signal="onClosePressed" from="HBoxContainer/OptionsScreen" to="." method="switchToMainMenu"]
 [connection signal="onClosePressed" from="HBoxContainer/CreditsScreen" to="." method="switchToMainMenu"]
+[connection signal="onClosePressed" from="HBoxContainer/ModsMenu" to="." method="switchToMainMenu"]
 [connection signal="pressed" from="HBoxContainer/Panel/MarginContainer/VBoxContainer/GithubReleasesButton" to="." method="_on_GithubReleasesButton_pressed"]
 [connection signal="request_completed" from="HTTPRequest" to="." method="_on_HTTPRequest_request_completed"]

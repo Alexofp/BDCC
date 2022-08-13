@@ -12,6 +12,7 @@ onready var gitHubReleaseButton = $HBoxContainer/Panel/MarginContainer/VBoxConta
 onready var devToolsScreen = $HBoxContainer/DevToolsScreen
 onready var devSubScreen = $HBoxContainer/DevToolsScreen/DevScreen
 onready var loadedModsLabel = $HBoxContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/LoadedModsLabel
+onready var modsMenu = $HBoxContainer/ModsMenu
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -47,6 +48,7 @@ func hideAllMenus():
 	optionsGameTab.visible = false
 	creditsGameTab.visible = false
 	devToolsScreen.visible = false
+	modsMenu.visible = false
 	$HBoxContainer/Panel2.visible = true
 	$HBoxContainer/Panel.visible = true
 
@@ -171,3 +173,8 @@ func _on_DevCharCreator_pressed():
 	
 	var scene = load("res://UI/QuickCharacterCreator/QuickCharacterCreator.tscn")
 	devSubScreen.add_child(scene.instance())
+
+
+func _on_ModsButton_pressed():
+	hideAllMenus()
+	modsMenu.visible = true
