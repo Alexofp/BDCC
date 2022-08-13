@@ -86,3 +86,7 @@ func _on_RevertButton_pressed():
 func _on_CloseButton_pressed():
 	OPTIONS.saveToFile()
 	emit_signal("onClosePressed")
+
+
+func _on_ResetRenderButton_pressed():
+	OPTIONS.resetRenderSettings()

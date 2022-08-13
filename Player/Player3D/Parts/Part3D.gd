@@ -22,10 +22,17 @@ func onRemoved():
 func setSkeletonRecursive(childnode, skeleton):
 	if(childnode is MeshInstance):
 		childnode.skeleton = childnode.get_path_to(skeleton)
+		childnode.software_skinning_transform_normals = false # Removing this will make Software Skinning break so don't
 		
 		if(childnode.mesh != null):
 			for _i in range(childnode.mesh.get_surface_count()):
 				var material = childnode.mesh.surface_get_material(_i)
+				if(material is SpatialMaterial):
+					material.flags_unshaded = true
+					material.params_depth_draw_mode = SpatialMaterial.DEPTH_DRAW_OPAQUE_ONLY
+					material.params_cull_mode = SpatialMaterial.CULL_DISABLED
+			for _i in range(childnode.get_surface_material_count()):
+				var material = childnode.get_surface_material(_i)
 				if(material is SpatialMaterial):
 					material.flags_unshaded = true
 					material.params_depth_draw_mode = SpatialMaterial.DEPTH_DRAW_OPAQUE_ONLY

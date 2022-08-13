@@ -1,6 +1,6 @@
 extends Node
 
-var myProjectSettings: MyProjectSettings
+var myProjectSettings
 
 var enabledContent = {}
 const optionsFilepath = "user://options.json"
@@ -42,7 +42,8 @@ func resetToDefaults():
 	call_deferred("applySettingsEffect")
 
 func _init():
-	myProjectSettings = MyProjectSettings.new()
+	myProjectSettings = load("res://Game/Options/MyProjectSettings.gd").new()
+	myProjectSettings.save()
 
 	resetToDefaults()
 	
@@ -404,3 +405,6 @@ func loadVar(data: Dictionary, key, nullvalue = null):
 		printerr("Warning: loaded value is null while the default value isn't. Is that correct? "+Util.getStackFunction())
 		
 	return data[key]
+
+func resetRenderSettings():
+	myProjectSettings.resetToDefault()
