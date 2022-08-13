@@ -1,5 +1,7 @@
 extends Node
 
+var myProjectSettings: MyProjectSettings
+
 var enabledContent = {}
 const optionsFilepath = "user://options.json"
 var fetchNewRelease = true
@@ -40,6 +42,7 @@ func resetToDefaults():
 	call_deferred("applySettingsEffect")
 
 func _init():
+	myProjectSettings = MyProjectSettings.new()
 
 	resetToDefaults()
 	
@@ -146,6 +149,30 @@ func getChangeableOptions():
 					"id": "npcPregnancyTimeDays",
 					"type": "int",
 					"value": npcPregnancyTimeDays,
+				},
+			]
+		},
+		{
+			"name": "Render (Restart game after changing these)",
+			"id": "render",
+			"options": [
+				{
+					"name": "Renderer",
+					"description": "GLES3 = Fancy, GLES2 = More support",
+					"id": "renderer",
+					"type": "list",
+					"value": ProjectSettings.get_setting("rendering/quality/driver/driver_name"),
+					"values": [
+						["GLES3", "GLES3"],
+						["GLES2", "GLES2"],
+					]
+				},
+				{
+					"name": "Force Software Skinning",
+					"description": "Turn this on if the player doll is displayed incorrectly. Might lower performance.",
+					"id": "softwareSkinning",
+					"type": "checkbox",
+					"value": ProjectSettings.get_setting("rendering/quality/skinning/force_software_skinning"),
 				},
 			]
 		},
@@ -287,6 +314,14 @@ func applyOption(categoryID, optionID, value):
 			measurementUnits = value
 		if(optionID == "requireDoubleTapOnMobile"):
 			requireDoubleTapOnMobile = value
+		
+	if(categoryID == "render"):
+		if(optionID == "renderer"):
+			myProjectSettings.setDriverName(value)
+			myProjectSettings.save()
+		if(optionID == "softwareSkinning"):
+			myProjectSettings.setForceSoftwareSkinning(value)
+			myProjectSettings.save()
 			
 	if(categoryID == "enabledContent"):
 		enabledContent[optionID] = value

@@ -434,6 +434,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Player/Player3D/Parts/MyBoneAttachment.gd"
 }, {
+"base": "Reference",
+"class": "MyProjectSettings",
+"language": "GDScript",
+"path": "res://Game/Options/MyProjectSettings.gd"
+}, {
 "base": "Module",
 "class": "NovaModule",
 "language": "GDScript",
@@ -800,6 +805,7 @@ _global_script_class_icons={
 "MenstrualCycle": "",
 "Module": "",
 "MyBoneAttachment": "",
+"MyProjectSettings": "",
 "NovaModule": "",
 "Orifice": "",
 "OrificeType": "",
@@ -862,6 +868,7 @@ _global_script_class_icons={
 
 config/name="BDCC"
 run/main_scene="res://UI/MainMenu/MainMenu.tscn"
+config/project_settings_override="user://override.cfg"
 boot_splash/image="res://Images/Splash/splash.png"
 boot_splash/fullsize=false
 boot_splash/bg_color=Color( 0.145098, 0.145098, 0.501961, 1 )
@@ -964,6 +971,7 @@ common/enable_pause_aware_picking=true
 quality/driver/fallback_to_gles2=true
 vram_compression/import_etc=true
 vram_compression/import_pvrtc=true
+gles2/compatibility/disable_half_float=true
 environment/default_clear_color=Color( 0.247059, 0.243137, 0.490196, 1 )
 quality/filters/use_fxaa=true
 environment/default_environment="res://default_env.tres"
