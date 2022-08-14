@@ -8,6 +8,8 @@ var showedModDialog = false
 func _ready():
 	if(OS.get_name() in ["Android", "iOS", "HTML5"]):
 		$VBoxContainer/GridContainer/ModsFolderButton.disabled = true
+	else:
+		$VBoxContainer/GridContainer/RemoveModsButton.disabled = true
 
 	if OS.get_name() == "HTML5" and OS.has_feature("JavaScript"):
 		_define_js()

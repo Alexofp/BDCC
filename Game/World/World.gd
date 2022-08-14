@@ -11,6 +11,7 @@ onready var camera = $Camera2D
 var highlightedRoom: Node2D
 
 var roomConnectionScene = preload("res://Game/World/RoomConnection.tscn")
+onready var worldFloorScene = load("res://Game/World/WorldFloor.tscn")
 
 func opposite(dir):
 	if(dir == Direction.WEST):
@@ -108,6 +109,17 @@ func _exit_tree():
 func _ready():
 	assert(GM.world == null)
 	GM.world = self
+	
+	var mapFloors = GlobalRegistry.getMapFloors()
+	for mapID in mapFloors:
+		var mapPath = mapFloors[mapID]
+		var mapObject = load(mapPath).instance()
+		
+		var newWorldFloor = worldFloorScene.instance()
+		newWorldFloor.id = mapID
+		
+		add_child(newWorldFloor)
+		newWorldFloor.add_child(mapObject)
 	
 	for f in get_children():
 		if(f.has_method("getRooms")):

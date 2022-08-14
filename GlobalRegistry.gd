@@ -36,6 +36,7 @@ var orgasmLustActions: Array = []
 var lootLists: Dictionary = {}
 var fightClubFightersByRank: Dictionary = {}
 var fightClubFighters: Dictionary = {}
+var mapFloors: Dictionary = {}
 
 var bodypartStorageNode
 
@@ -233,6 +234,9 @@ func _ready():
 	registerQuestFolder("res://Quests/Quest/")
 	
 	registerStageSceneFolder("res://Player/StageScene3D/Scenes/")
+	
+	#registerMapFloor("Medical", "res://Game/World/Floors/Medical.tscn")
+	registerMapFloorFolder("res://Game/World/Floors/")
 	
 	registerModulesFolder("res://Modules/")
 	sortFightClubFighters()
@@ -924,3 +928,30 @@ func sortFightClubFighterFunc(a, b):
 func sortFightClubFighters():
 	for rank in fightClubFightersByRank:
 		fightClubFightersByRank[rank].sort_custom(self, "sortFightClubFighterFunc")
+
+
+func registerMapFloor(id: String, path: String):
+	if(mapFloors.has(id)):
+		print(id+" floor is being overwritten!")
+	mapFloors[id] = path
+
+func registerMapFloorFolder(folder: String):
+	var dir = Directory.new()
+	if dir.open(folder) == OK:
+		dir.list_dir_begin()
+		var file_name = dir.get_next()
+		while file_name != "":
+			if dir.current_is_dir():
+				pass
+				#print("Found directory: " + file_name)
+			else:
+				if(file_name.get_extension() == "tscn"):
+					var full_path = folder.plus_file(file_name)
+					#print("Registered map floor: " + full_path)
+					registerMapFloor(full_path.get_file().get_basename(), full_path)
+			file_name = dir.get_next()
+	else:
+		printerr("An error occurred when trying to access the path "+folder)
+
+func getMapFloors():
+	return mapFloors
