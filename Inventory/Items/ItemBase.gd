@@ -283,6 +283,9 @@ func getRiggedParts(_character):
 func getHidesParts(_character):
 	return null
 
+func getHidesAttachments(_character):
+	return null
+
 func getLustActions():
 	if(itemState != null):
 		return itemState.getActions()

@@ -939,6 +939,7 @@ func updateDoll(doll: Doll3D):
 		doll.setThighThickness((thicknessNorm - 0.5))
 	
 	var newAlphas = {}
+	var newAttachmentAlphas = {}
 
 	var partsScenes = {}
 	var equippedItems = getInventory().getAllEquippedItems()
@@ -949,6 +950,11 @@ func updateDoll(doll: Doll3D):
 		if(alphaStuff != null):
 			for zone in alphaStuff:
 				newAlphas[zone] = true
+				
+		var alphaStuff2 = item.getHidesAttachments(self)
+		if(alphaStuff2 != null):
+			for zone in alphaStuff2:
+				newAttachmentAlphas[zone] = true
 		
 		var riggedScenes = item.getRiggedParts(self)
 		if(riggedScenes == null):
@@ -970,6 +976,7 @@ func updateDoll(doll: Doll3D):
 			partsScenes[zone].append_array(scenes[zone])
 
 	doll.setHiddenParts(newAlphas)
+	doll.setHiddenAttachmentZones(newAttachmentAlphas)
 	doll.setParts(parts)
 	doll.setUnriggedParts(partsScenes)
 

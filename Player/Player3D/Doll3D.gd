@@ -5,6 +5,7 @@ var state = {}
 var parts = {}
 var dollAttachmentZones = {}
 var hiddenPartZones = {}
+var hiddenAttachmentZones = {}
 var overridenPartHidden = {}
 var savedCharacterID: String
 var temporaryState = {}
@@ -310,12 +311,23 @@ func _on_Doll3DTooltip_mouseExited(bodypartID):
 func setHiddenParts(newHiddenParts):
 	hiddenPartZones = newHiddenParts
 
+func setHiddenAttachmentZones(newHiddenAttachmentZones):
+	hiddenAttachmentZones = newHiddenAttachmentZones
+
 func updateAlpha():
 	for slot in parts:
 		if(hiddenPartZones.has(slot) && !overridenPartHidden.has(slot)):
 			parts[slot].visible = false
 		else:
 			parts[slot].visible = true
+			
+	for attachmentID in dollAttachmentZones:
+		if(hiddenAttachmentZones.has(attachmentID)):
+			for attach in dollAttachmentZones[attachmentID]:
+				attach.visible = false
+		else:
+			for attach in dollAttachmentZones[attachmentID]:
+				attach.visible = true
 
 func setParts(newparts: Dictionary):
 	var dirtyFlags = {}

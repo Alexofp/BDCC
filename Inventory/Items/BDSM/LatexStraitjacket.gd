@@ -31,3 +31,20 @@ func coversBodyparts():
 func generateRestraintData():
 	restraintData = RestraintStraitjacket.new()
 	restraintData.setLevel(5)
+
+func getRiggedParts(_character):
+	return {
+		"straitjacket": "res://Inventory/RiggedModels/StraitJacket/StraitJacket.tscn",
+	}
+
+func getHidesParts(_character):
+	return {
+		BodypartSlot.Penis: true,
+		BodypartSlot.Arms: true,
+	}
+
+func getHidesAttachments(_character):
+	return {
+		"wrist.R": true,
+		"wrist.L": true,
+	}
