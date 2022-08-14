@@ -55,7 +55,7 @@ func _run():
 
 		saynn("From what you can tell, her breasts are about D cup size but they don’t look that big considering her height. Her nipples spot that bright green color of her flesh, very exotic.")
 
-		saynn("Between her legs is her pussy. The shape looks tight, it’s fair to assume this lady doesn’t do much fucking and managed to avoid the faith of becoming a sex toy like some inmates.")
+		saynn("Between her legs is her pussy. The shape looks tight, it’s fair to assume this lady doesn’t do much fucking and managed to avoid the fate of becoming a sex toy like some inmates.")
 		
 		addButton("Back", "Go back", "")
 		
