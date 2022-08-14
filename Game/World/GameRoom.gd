@@ -31,15 +31,15 @@ const RoomColorToColor = {
 
 const sprites = {
 	#RoomSprite.NONE: ,
-	RoomSprite.PERSON: preload("res://Game/World/sprites/person.png"),
-	RoomSprite.CANTEEN: preload("res://Game/World/sprites/canteen.png"),
-	RoomSprite.STAIRS: preload("res://Game/World/sprites/stairs.png"),
-	RoomSprite.IMPORTANT: preload("res://Game/World/sprites/important.png"),
-	RoomSprite.COMPUTER: preload("res://Game/World/sprites/computer.png"),
-	RoomSprite.VENDOMAT: preload("res://Game/World/sprites/vendomat.png"),
-	RoomSprite.SHOWER: preload("res://Game/World/sprites/shower.png"),
-	RoomSprite.WC: preload("res://Game/World/sprites/wc.png"),
-	RoomSprite.LAUNDRY: preload("res://Game/World/sprites/laundry.png"),
+	RoomSprite.PERSON: preload("res://Images/World/person.png"),
+	RoomSprite.CANTEEN: preload("res://Images/World/canteen.png"),
+	RoomSprite.STAIRS: preload("res://Images/World/stairs.png"),
+	RoomSprite.IMPORTANT: preload("res://Images/World/important.png"),
+	RoomSprite.COMPUTER: preload("res://Images/World/computer.png"),
+	RoomSprite.VENDOMAT: preload("res://Images/World/vendomat.png"),
+	RoomSprite.SHOWER: preload("res://Images/World/shower.png"),
+	RoomSprite.WC: preload("res://Images/World/wc.png"),
+	RoomSprite.LAUNDRY: preload("res://Images/World/laundry.png"),
 }
 
 onready var roomSpriteObject = $Sprite

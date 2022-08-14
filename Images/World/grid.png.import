@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/darkness.png-8292324d1b6829b997456ccb24e89ba0.stex"
+path="res://.import/grid.png-d5de2ffba09a5e9b67cdb49938878a65.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Game/World/sprites/darkness.png"
-dest_files=[ "res://.import/darkness.png-8292324d1b6829b997456ccb24e89ba0.stex" ]
+source_file="res://Images/World/grid.png"
+dest_files=[ "res://.import/grid.png-d5de2ffba09a5e9b67cdb49938878a65.stex" ]
 
 [params]
 

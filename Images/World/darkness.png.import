@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/laundry.png-fc8db522cca4cc92b1d3da2c9b927968.stex"
+path="res://.import/darkness.png-c2f4098fdcb147e36e30ba2e9581a461.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Game/World/sprites/laundry.png"
-dest_files=[ "res://.import/laundry.png-fc8db522cca4cc92b1d3da2c9b927968.stex" ]
+source_file="res://Images/World/darkness.png"
+dest_files=[ "res://.import/darkness.png-c2f4098fdcb147e36e30ba2e9581a461.stex" ]
 
 [params]
 

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/canteen.png-32cfab1222a565b03ce253fe95874527.stex"
+path="res://.import/room.png-c78b7a52009f9c4b31f990bfe4277232.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Game/World/sprites/canteen.png"
-dest_files=[ "res://.import/canteen.png-32cfab1222a565b03ce253fe95874527.stex" ]
+source_file="res://Images/World/room.png"
+dest_files=[ "res://.import/room.png-c78b7a52009f9c4b31f990bfe4277232.stex" ]
 
 [params]
 

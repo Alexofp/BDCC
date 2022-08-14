@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/wc.png-b94130399920a0bbe140e85badef2586.stex"
+path="res://.import/computer.png-f81ae4afa670875dd69819f042b7f34b.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Game/World/sprites/wc.png"
-dest_files=[ "res://.import/wc.png-b94130399920a0bbe140e85badef2586.stex" ]
+source_file="res://Images/World/computer.png"
+dest_files=[ "res://.import/computer.png-f81ae4afa670875dd69819f042b7f34b.stex" ]
 
 [params]
 

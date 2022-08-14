@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/person.png-ad6017590af266cacd45da83220dbb6a.stex"
+path="res://.import/stairs.png-faadded3a8d5fd7ad5662e70398ffb1d.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Game/World/sprites/person.png"
-dest_files=[ "res://.import/person.png-ad6017590af266cacd45da83220dbb6a.stex" ]
+source_file="res://Images/World/stairs.png"
+dest_files=[ "res://.import/stairs.png-faadded3a8d5fd7ad5662e70398ffb1d.stex" ]
 
 [params]
 

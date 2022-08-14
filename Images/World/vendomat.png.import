@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/important.png-786314e50425ecd100a91c74e51b32da.stex"
+path="res://.import/vendomat.png-40bd7a6a3490e52d783b17d4d98f82cf.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Game/World/sprites/important.png"
-dest_files=[ "res://.import/important.png-786314e50425ecd100a91c74e51b32da.stex" ]
+source_file="res://Images/World/vendomat.png"
+dest_files=[ "res://.import/vendomat.png-40bd7a6a3490e52d783b17d4d98f82cf.stex" ]
 
 [params]
 

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/stairs.png-d3603fa13fe44c44f65efb0d2a9d8299.stex"
+path="res://.import/connection.png-427190ed380556927771c42316a4eced.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Game/World/sprites/stairs.png"
-dest_files=[ "res://.import/stairs.png-d3603fa13fe44c44f65efb0d2a9d8299.stex" ]
+source_file="res://Images/World/connection.png"
+dest_files=[ "res://.import/connection.png-427190ed380556927771c42316a4eced.stex" ]
 
 [params]
 

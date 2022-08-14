@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/computer.png-fa5787fc2bb90c7d64d5a346488e14c1.stex"
+path="res://.import/laundry.png-e8a9880184ed2c49db3ec4476c5f42fe.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Game/World/sprites/computer.png"
-dest_files=[ "res://.import/computer.png-fa5787fc2bb90c7d64d5a346488e14c1.stex" ]
+source_file="res://Images/World/laundry.png"
+dest_files=[ "res://.import/laundry.png-e8a9880184ed2c49db3ec4476c5f42fe.stex" ]
 
 [params]
 

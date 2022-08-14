@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/shower.png-816320305f72c2952b56c2a7fcc415eb.stex"
+path="res://.import/person.png-3c345eaf70c4038edd01ac507f791ede.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Game/World/sprites/shower.png"
-dest_files=[ "res://.import/shower.png-816320305f72c2952b56c2a7fcc415eb.stex" ]
+source_file="res://Images/World/person.png"
+dest_files=[ "res://.import/person.png-3c345eaf70c4038edd01ac507f791ede.stex" ]
 
 [params]
 
