@@ -33,8 +33,8 @@ population = 1
 [node name="CellblockRoom4" parent="." index="3" instance=ExtResource( 2 )]
 self_modulate = Color( 1, 0.6, 0.8, 1 )
 position = Vector2( 0, 192 )
-roomName = "Pink cellblock"
-roomDescription = "You enter a prisoner cellblock, it's a huge spacious room with many prisoner cells. All the walls are painted with white and pastel pink color, there are a bunch of comfy-looking sofas and chairs around. Each cell looks cozy and even has a soft carpet. This block is for inmates that are sexual deviants"
+roomName = "Lilac cellblock"
+roomDescription = "You enter a prisoner cellblock, it's a huge spacious room with many prisoner cells. All the walls are painted with white and purple color, there are a bunch of comfy-looking sofas and chairs around. Each cell looks cozy and even has a soft carpet. This block is for inmates that are sexual deviants"
 roomColor = 4
 population = 1
 
