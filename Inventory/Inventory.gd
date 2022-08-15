@@ -118,6 +118,11 @@ func canEquipSlot(slot):
 		return get_parent().invCanEquipSlot(slot)
 	return true
 		
+func getCharacter():
+	if(get_parent() != null):
+		return get_parent()
+	return null
+		
 func equipItem(item):
 	if(hasItem(item)):
 		removeItem(item)

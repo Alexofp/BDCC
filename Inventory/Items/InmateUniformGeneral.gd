@@ -63,3 +63,27 @@ func coversBodyparts():
 
 func generateItemState():
 	itemState = ShirtAndShortsState.new()
+
+func getRiggedParts(_character):
+	if(inmateType == InmateType.SexDeviant):
+		return {
+			"clothing": "res://Inventory/RiggedModels/InmateUniform/LilacInmateUniform.tscn",
+		}
+	elif(inmateType == InmateType.HighSec):
+		return {
+			"clothing": "res://Inventory/RiggedModels/InmateUniform/RedInmateUniform.tscn",
+		}
+	
+	return {
+		"clothing": "res://Inventory/RiggedModels/InmateUniform/OrangeInmateUniform.tscn",
+	}
+
+func getHidesParts(_character):
+	if(itemState != null):
+		if(itemState.isRemoved()):
+			return null
+		if(itemState.areShortsPulledDown()):
+			return null
+	return {
+		BodypartSlot.Penis: true,
+	}

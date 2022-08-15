@@ -297,3 +297,14 @@ func resetLustState():
 
 func getAttacks():
 	return null
+
+func getWearer():
+	if(currentInventory == null):
+		return null
+	
+	return currentInventory.getCharacter()
+
+func updateWearerAppearance():
+	var wearer = getWearer()
+	if(wearer != null && wearer.has_method("updateAppearance")):
+		wearer.updateAppearance()

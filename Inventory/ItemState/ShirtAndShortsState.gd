@@ -9,6 +9,7 @@ func areShortsPulledDown():
 
 func pullDownShorts():
 	shortsPulledDown = true
+	updateWearerAppearance()
 
 func isShirtOpened():
 	return shirtOpened

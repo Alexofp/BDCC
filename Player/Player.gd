@@ -639,47 +639,6 @@ func getBodypartTooltipInfo(_bodypartSlot):
 	
 	return "error"
 
-func hasPenis():
-	return hasBodypart(BodypartSlot.Penis)
-
-func hasReachablePenis():
-	return hasPenis()
-
-func hasVagina():
-	return hasBodypart(BodypartSlot.Vagina)
-
-func hasReachableVagina():
-	return hasVagina()
-
-func hasHair():
-	return hasBodypart(BodypartSlot.Hair) && getBodypart(BodypartSlot.Hair).id != "baldhair"
-
-func hasTail():
-	return hasBodypart(BodypartSlot.Tail)
-	
-func hasHorns():
-	return hasBodypart(BodypartSlot.Horns)
-
-func hasNonFlatBreasts():
-	var breasts = getBodypart(BodypartSlot.Breasts)
-	
-	var size = breasts.size
-	
-	if(size > BreastsSize.FLAT):
-		return true
-	else:
-		return false
-
-func hasBigBreasts():
-	var breasts = getBodypart(BodypartSlot.Breasts)
-	
-	var size = breasts.size
-	
-	if(size > BreastsSize.B):
-		return true
-	else:
-		return false
-
 func afterSleeping():
 	addStamina(getMaxStamina())
 	addPain(-100)

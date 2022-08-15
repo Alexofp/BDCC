@@ -850,6 +850,47 @@ func onGivingBirth(_impregnatedEggCells: Array, _newkids: Array):
 
 # END OF PREGNANCY STUFF
 
+func hasPenis():
+	return hasBodypart(BodypartSlot.Penis)
+
+func hasReachablePenis():
+	return hasPenis()
+
+func hasVagina():
+	return hasBodypart(BodypartSlot.Vagina)
+
+func hasReachableVagina():
+	return hasVagina()
+
+func hasHair():
+	return hasBodypart(BodypartSlot.Hair) && getBodypart(BodypartSlot.Hair).id != "baldhair"
+
+func hasTail():
+	return hasBodypart(BodypartSlot.Tail)
+	
+func hasHorns():
+	return hasBodypart(BodypartSlot.Horns)
+
+func hasNonFlatBreasts():
+	var breasts = getBodypart(BodypartSlot.Breasts)
+	
+	var size = breasts.size
+	
+	if(size > BreastsSize.FLAT):
+		return true
+	else:
+		return false
+
+func hasBigBreasts():
+	var breasts = getBodypart(BodypartSlot.Breasts)
+	
+	var size = breasts.size
+	
+	if(size > BreastsSize.B):
+		return true
+	else:
+		return false
+
 func getDollParts() -> Dictionary:
 	var parts = {}
 	for bodypartSlot in bodyparts:
@@ -923,6 +964,11 @@ func updateDoll(doll: Doll3D):
 			ballsScale = penis.getBallsScale()
 	doll.setPenisScale(penisScale)
 	doll.setBallsScale(ballsScale)
+	
+	if(hasNonFlatBreasts()):
+		doll.setState("breasts", "nonflat")
+	else:
+		doll.setState("breasts", "flat")
 	
 	var thicknessNorm = getThickness() / 100.0
 	var femNorm = getFemininity() / 100.0

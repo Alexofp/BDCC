@@ -169,6 +169,7 @@ func resetState():
 		for itemSlot in items:
 			var item:ItemBase = items[itemSlot]
 			item.resetLustState()
+		pc.updateAppearance()
 
 func isInventorySlotBlocked(invslot):
 	if(getCharacter() != null):

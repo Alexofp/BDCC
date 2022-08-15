@@ -37,3 +37,8 @@ func coversBodyparts():
 
 func getStateText():
 	return ""
+	
+func updateWearerAppearance():
+	var theitem = getItem()
+	if(theitem != null):
+		theitem.updateWearerAppearance()
