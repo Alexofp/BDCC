@@ -133,4 +133,4 @@ func getLootTable(_battleName):
 
 func createEquipment():
 	getInventory().equipItem(GlobalRegistry.createItemNoID("inmatecollar"))
-	pass
+	getInventory().equipItem(GlobalRegistry.createItemNoID("inmateuniformSexDeviant"))
