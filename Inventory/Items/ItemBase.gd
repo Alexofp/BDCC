@@ -237,10 +237,13 @@ func getForcedOnMessage():
 	return getAStackNameCapitalize()+" was forced on you!"
 
 func coversBodyparts():
-	return []
+	if(itemState != null):
+		return itemState.coversBodyparts()
+	return {}
 
 func coversBodypart(bodypartSlot):
-	if(bodypartSlot in coversBodyparts()):
+	var covers = coversBodyparts()
+	if(covers.has(bodypartSlot)):
 		return true
 	return false
 

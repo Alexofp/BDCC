@@ -38,9 +38,11 @@ func loadData(_data):
 
 func coversBodyparts():
 	if(removed || pulledUp):
-		return []
+		return {}
 	
-	return [BodypartSlot.Breasts]
+	return {
+		BodypartSlot.Breasts: true,
+		}
 
 func getStateText():
 	var text = ""

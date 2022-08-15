@@ -20,6 +20,11 @@ func playAnimation(animID, _args = {}):
 	doll.prepareCharacter("pc")
 	#doll.forceSlotToBeVisible(BodypartSlot.Penis)
 	
+	if(_args.has("exposedBodyparts")):
+		doll.setExposedBodyparts(_args["exposedBodyparts"])
+	else:
+		doll.setExposedBodyparts([])
+	
 	if(animID == "sit"):
 		$Chair.visible = true
 	else:

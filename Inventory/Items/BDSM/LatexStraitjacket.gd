@@ -26,7 +26,11 @@ func isRestraint():
 	return true
 
 func coversBodyparts():
-	return [BodypartSlot.Body, BodypartSlot.Vagina, BodypartSlot.Penis]
+	return {
+		BodypartSlot.Body: true,
+		BodypartSlot.Vagina: true,
+		BodypartSlot.Penis: true,
+		}
 
 func generateRestraintData():
 	restraintData = RestraintStraitjacket.new()

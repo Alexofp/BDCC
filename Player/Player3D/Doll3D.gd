@@ -9,6 +9,7 @@ var hiddenAttachmentZones = {}
 var overridenPartHidden = {}
 var savedCharacterID: String
 var temporaryState = {}
+var exposedBodyparts = []
 
 var armsCuffed = false
 var legsCuffed = false
@@ -210,6 +211,15 @@ func onCharacterBodypartChanged():
 		return
 	if(ch.has_method("updateDoll")):
 		ch.updateDoll(self)
+
+func setExposedBodyparts(newExposedBodyparts):
+	if(exposedBodyparts == newExposedBodyparts):
+		return
+	exposedBodyparts = newExposedBodyparts
+	onCharacterBodypartChanged()
+
+func getExposedBodyparts():
+	return exposedBodyparts
 
 func setBoneScaleVector(boneName: String, boneScale: Vector3):
 	var skeleton:Skeleton = getDollSkeleton().getSkeleton()

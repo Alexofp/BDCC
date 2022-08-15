@@ -56,11 +56,6 @@ func getPuttingOnStringLong(withS):
 	else:
 		return "put on your inmate shirt and the shorts"
 
-func coversBodyparts():
-	if(itemState != null):
-		return itemState.coversBodyparts()
-	return [BodypartSlot.Body, BodypartSlot.Breasts, BodypartSlot.Vagina, BodypartSlot.Penis, BodypartSlot.Anus]
-
 func generateItemState():
 	itemState = ShirtAndShortsState.new()
 

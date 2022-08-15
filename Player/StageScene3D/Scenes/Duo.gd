@@ -36,10 +36,18 @@ func playAnimation(animID, _args = {}):
 	if(_args.has("npc")):
 		secondDoll = _args["npc"]
 	doll2.prepareCharacter(secondDoll)
-	#doll2.playAnimation("Standing-loop")
 	
 	#doll.forceSlotToBeVisible(BodypartSlot.Penis)
 	
+	if(_args.has("exposedBodyparts")):
+		doll.setExposedBodyparts(_args["exposedBodyparts"])
+	else:
+		doll.setExposedBodyparts([])
+	
+	if(_args.has("npcExposedBodyparts")):
+		doll2.setExposedBodyparts(_args["npcExposedBodyparts"])
+	else:
+		doll2.setExposedBodyparts([])
 	
 	if(animID == "sit"):
 		$Chair.visible = true

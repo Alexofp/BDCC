@@ -33,7 +33,13 @@ func blocksInventorySlots():
 	return []
 
 func coversBodyparts():
-	return []
+	return {}
+
+func coversBodypart(bodypartSlot):
+	var covers = coversBodyparts()
+	if(covers.has(bodypartSlot)):
+		return true
+	return false
 
 func getStateText():
 	return ""

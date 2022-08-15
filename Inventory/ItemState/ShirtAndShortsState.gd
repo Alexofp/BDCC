@@ -52,13 +52,13 @@ func blocksInventorySlots():
 	return result
 
 func coversBodyparts():
-	var result = [BodypartSlot.Body]
+	var result = {}
 	if(!shortsPulledDown):
-		result.append(BodypartSlot.Vagina)
-		result.append(BodypartSlot.Penis)
-		result.append(BodypartSlot.Anus)
+		result[BodypartSlot.Vagina] = true
+		result[BodypartSlot.Penis] = true
+		result[BodypartSlot.Anus] = true
 	if(!shirtOpened):
-		result.append(BodypartSlot.Breasts)
+		result[BodypartSlot.Breasts] = true
 	
 	return result
 

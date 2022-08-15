@@ -13,6 +13,11 @@ func playAnimation(animID, _args = {}):
 	print("Playing stocks: "+str(animID))
 	doll.prepareCharacter("pc")
 	
+	if(_args.has("exposedBodyparts")):
+		doll.setExposedBodyparts(_args["exposedBodyparts"])
+	else:
+		doll.setExposedBodyparts([])
+	
 	if(animID == "idle"):
 		animationPlayer.play("Idle")
 	else:

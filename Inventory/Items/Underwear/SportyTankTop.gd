@@ -40,11 +40,6 @@ func getTags():
 		ItemTag.SoldByUnderwearVendomat,
 		]
 
-func coversBodyparts():
-	if(itemState != null):
-		return itemState.coversBodyparts()
-	return [BodypartSlot.Breasts]
-
 func generateItemState():
 	itemState = BraState.new()
 	itemState.casualName = "tanktop"

@@ -40,10 +40,5 @@ func getTags():
 		ItemTag.SoldByUnderwearVendomat,
 		]
 
-func coversBodyparts():
-	if(itemState != null):
-		return itemState.coversBodyparts()
-	return [BodypartSlot.Vagina, BodypartSlot.Penis, BodypartSlot.Anus]
-
 func generateItemState():
 	itemState = PantiesState.new()

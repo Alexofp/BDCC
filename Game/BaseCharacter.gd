@@ -987,10 +987,21 @@ func updateDoll(doll: Doll3D):
 	var newAlphas = {}
 	var newAttachmentAlphas = {}
 
+	var exposedBodyparts = doll.getExposedBodyparts()
+
 	var partsScenes = {}
 	var equippedItems = getInventory().getAllEquippedItems()
 	for inventorySlot in equippedItems:
 		var item = equippedItems[inventorySlot]
+		var blocksBodyparts = item.coversBodyparts()
+		if(exposedBodyparts!=null && exposedBodyparts.size() > 0 && blocksBodyparts != null):
+			var shouldBeSkipped = false
+			for exposedBodypart in exposedBodyparts:
+				if(blocksBodyparts.has(exposedBodypart)):
+					shouldBeSkipped = true
+					break
+			if(shouldBeSkipped):
+				continue
 		
 		var alphaStuff = item.getHidesParts(self)
 		if(alphaStuff != null):

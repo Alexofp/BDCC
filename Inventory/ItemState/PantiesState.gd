@@ -47,9 +47,13 @@ func loadData(_data):
 
 func coversBodyparts():
 	if(removed || shiftedAside):
-		return []
+		return {}
 	
-	return [BodypartSlot.Vagina, BodypartSlot.Penis, BodypartSlot.Anus]
+	return {
+		BodypartSlot.Vagina: true,
+		BodypartSlot.Penis: true,
+		BodypartSlot.Anus: true,
+		}
 
 func getStateText():
 	var text = ""
