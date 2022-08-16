@@ -42,7 +42,7 @@ func _run():
 		
 		saynn("What do you wanna do?")
 
-		addButton("Buy", "See what the machine has for sell", "buymenu")
+		addButton("Buy", "See what the machine has to sell", "buymenu")
 		addButton("Sell", "See what you can sell", "sellmenu")
 		addButton("Step away", "Step away from the machine", "endthescene")
 	

@@ -74,7 +74,7 @@ func _on_MainVendomatRoom_onReact(room, key):
 func _on_MainLaundry_onEnter(room):
 	room.saynn("You also see a vendomat nearby. This one seems to be selling some kind of clothing")
 	
-	room.addButton("Uniform vender", "Approach the vender", "uniform")
+	room.addButton("Uniform vendor", "Approach the vendor", "uniform")
 	room.addButton("Vendomat", "Approach it", "vendomat")
 
 func _on_MainLaundry_onReact(room, key):

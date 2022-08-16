@@ -673,7 +673,7 @@ self_modulate = Color( 0.7, 0.7, 1, 1 )
 position = Vector2( 192, 256 )
 roomName = "Laundry"
 roomID = "main_laundry"
-roomDescription = "Half of the room is taken by a row of bulky industrial-looking washing machines. Then your eye spots a few bins with inmate uniforms and a uniform vender, similliar to the one that you saw during the intake"
+roomDescription = "Half of the room is taken by a row of bulky industrial-looking washing machines. Then your eye spots a few bins with inmate uniforms and a uniform vendor, similliar to the one that you saw during the intake"
 roomSprite = 9
 roomColor = 3
 
