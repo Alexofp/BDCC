@@ -53,6 +53,7 @@ func blocksInventorySlots():
 
 func coversBodyparts():
 	var result = {}
+	result[BodypartSlot.Body] = true
 	if(!shortsPulledDown):
 		result[BodypartSlot.Vagina] = true
 		result[BodypartSlot.Penis] = true

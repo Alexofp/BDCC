@@ -6,9 +6,7 @@ func _init():
 	sceneID = "IntroScene"
 
 func _initScene(_args = []):
-		var uniform = GlobalRegistry.createItem("inmateuniform")
-		
-		uniform.setPrisonerNumber(GM.pc.getFullInmateNumber())
+		var uniform = GlobalRegistry.createItem("CasualClothes")
 		
 		GM.pc.getInventory().equipItem(uniform)
 
