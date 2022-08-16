@@ -178,3 +178,10 @@ func _on_DevCharCreator_pressed():
 func _on_ModsButton_pressed():
 	hideAllMenus()
 	modsMenu.visible = true
+
+
+func _on_DevModCreator_pressed():
+	Util.delete_children(devSubScreen)
+	
+	var scene = load("res://UI/ModMaker/ModMaker.tscn")
+	devSubScreen.add_child(scene.instance())

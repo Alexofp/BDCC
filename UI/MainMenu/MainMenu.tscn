@@ -401,6 +401,14 @@ hint_tooltip = "A thing to quickly design an npc"
 size_flags_horizontal = 3
 text = "Char Creator"
 
+[node name="DevModCreator" type="Button" parent="HBoxContainer/DevToolsScreen/GridContainer"]
+margin_left = 306.0
+margin_right = 455.0
+margin_bottom = 26.0
+hint_tooltip = "A tool to export your mod"
+size_flags_horizontal = 3
+text = "ModMaker"
+
 [node name="LoadGameScreen" parent="HBoxContainer" instance=ExtResource( 4 )]
 visible = false
 anchor_right = 0.0
@@ -507,6 +515,7 @@ fit_content_height = true
 [connection signal="pressed" from="HBoxContainer/DevToolsScreen/GridContainer/DevSceneConverter" to="." method="_on_DevSceneConverter_pressed"]
 [connection signal="pressed" from="HBoxContainer/DevToolsScreen/GridContainer/DevLikesGenerator" to="." method="_on_DevLikesGenerator_pressed"]
 [connection signal="pressed" from="HBoxContainer/DevToolsScreen/GridContainer/DevCharCreator" to="." method="_on_DevCharCreator_pressed"]
+[connection signal="pressed" from="HBoxContainer/DevToolsScreen/GridContainer/DevModCreator" to="." method="_on_DevModCreator_pressed"]
 [connection signal="onClosePressed" from="HBoxContainer/LoadGameScreen" to="." method="switchToMainMenu"]
 [connection signal="onClosePressed" from="HBoxContainer/OptionsScreen" to="." method="switchToMainMenu"]
 [connection signal="onClosePressed" from="HBoxContainer/CreditsScreen" to="." method="switchToMainMenu"]

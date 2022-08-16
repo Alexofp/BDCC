@@ -71,7 +71,7 @@ func _define_js():
 		canceled = true;
 		var input = document.createElement('INPUT');
 		input.setAttribute("type", "file");
-		input.setAttribute("accept", ".zip");
+		input.setAttribute("accept", ".zip,.pck");
 		input.click();
 		input.addEventListener('change', event => {
 			if (event.target.files.length > 0){

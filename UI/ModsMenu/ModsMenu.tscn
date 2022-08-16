@@ -100,7 +100,7 @@ window_title = "Open a File"
 resizable = true
 mode = 0
 access = 2
-filters = PoolStringArray( "*.zip ; Mod file" )
+filters = PoolStringArray( "*.zip, *.pck ; Mod file" )
 current_dir = "/"
 current_path = "/"
 

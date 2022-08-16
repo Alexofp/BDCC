@@ -3,6 +3,8 @@ extends Control
 onready var filterLine = $HBoxContainer/VBoxContainer/FilterLine
 onready var tree = $HBoxContainer/VBoxContainer/Tree
 onready var itemList = $HBoxContainer/VBoxContainer2/ItemList
+onready var modNameEdit = $HBoxContainer/VBoxContainer2/HBoxContainer/ModNameEdit
+onready var exportModeSelector = $HBoxContainer/VBoxContainer2/ExportModeSelector
 
 var addedFiles = []
 
@@ -31,7 +33,8 @@ func updateTree():
 	
 
 func _on_Tree_item_selected():
-	print(tree.get_selected())
+	#print(tree.get_selected())
+	pass
 
 func fillFolder(root:TreeItem, folder, filter):
 	var dir = Directory.new()
@@ -75,7 +78,20 @@ func _on_FilterLine_text_entered(_new_text):
 
 
 func _on_AddFilesButton_pressed():
-	var selected = tree.get_selected()
+	var selectedAr = []
+	var thingie = tree.get_next_selected(null)
+	while(thingie != null):
+		selectedAr.append(thingie)
+		thingie = tree.get_next_selected(thingie)
+	
+	#print(selectedAr)
+	for stuff in selectedAr:
+		addSelected(stuff)
+	
+func addSelected(selected):
+	#var selected = tree.get_selected()
+	if(selected == null):
+		return
 	var metadata = selected.get_metadata(0)
 	if(metadata == null):
 		return
@@ -128,9 +144,85 @@ func _on_RemoveFilesButton_pressed():
 
 
 func _on_MakeModButton_pressed():
-	var packer = PCKPacker.new()
-	packer.pck_start("user://mods/test.pck")
+	print(exportModeSelector.selected)
+	if(exportModeSelector.selected == 1):
+		makePCKFile()
+	else:
+		gatherFiles()
+	
+func gatherFiles():
+	var modName = "new_mod"
+	var editModName = Util.stripBadFilenameCharacters(modNameEdit.text)
+	if(editModName != ""):
+		modName = editModName
+	
+	var directory = Directory.new( )
+	#directory.remove("user://new_mod")
+	var baseNewModFolder = "user://exported_mods/"+modName
+	var newModFolder = baseNewModFolder
+	var i = 1
+	while(directory.dir_exists(newModFolder)):
+		i += 1
+		newModFolder = baseNewModFolder + str(i)
+	directory.make_dir_recursive(newModFolder)
+	
 	for file in addedFiles:
+		if(file.get_extension() == "import"):
+			var config = ConfigFile.new()
+			var err = config.load(file)
+			if err == OK:
+				if(config.has_section_key("remap", "path")):
+					var importFile:String = config.get_value("remap", "path")
+					
+					var newPath2:String = importFile.replace("res://",newModFolder+"/")
+					directory.make_dir_recursive(newPath2.get_base_dir())
+					directory.copy(importFile, newPath2)
+					print("Also exported as dependency "+importFile)
+					
+		var newPath:String = file.replace("res://",newModFolder+"/")
+		directory.make_dir_recursive(newPath.get_base_dir())
+		directory.copy(file, newPath)
+	
+	if(!(OS.get_name() in ["Android", "iOS", "HTML5"])):
+		var _ok = OS.shell_open(ProjectSettings.globalize_path(newModFolder))
+	
+func makePCKFile():
+	var directory = Directory.new( )
+	directory.make_dir("user://exported_mods")
+	
+	var modName = "newmod.pck"
+	var editModName = Util.stripBadFilenameCharacters(modNameEdit.text)
+	if(editModName != ""):
+		modName = editModName+".pck"
+	
+	var packer = PCKPacker.new()
+	packer.pck_start("user://exported_mods".plus_file(modName))
+	for file in addedFiles:
+		if(file.get_extension() == "import"):
+			var config = ConfigFile.new()
+			var err = config.load(file)
+			if err == OK:
+				if(config.has_section_key("remap", "path")):
+					var importFile = config.get_value("remap", "path")
+					packer.add_file(importFile, importFile)
+					print("Also exported as dependency "+importFile)
+					
 		packer.add_file(file, file)
 	packer.flush()
 
+	if(!(OS.get_name() in ["Android", "iOS", "HTML5"])):
+		var _ok = OS.shell_open(ProjectSettings.globalize_path("user://exported_mods"))
+
+
+func _on_Tree_multi_selected(_item, _column, _selected):
+	if(true):
+		return
+	var selectedAr = []
+	var thingie = tree.get_next_selected(null)
+	while(thingie != null):
+		selectedAr.append(thingie)
+		thingie = tree.get_next_selected(thingie)
+	
+	print(selectedAr)
+
+	#print("BEGIN ", tree.get_selected(), " END ", tree.get_end())
