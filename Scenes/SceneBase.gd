@@ -281,6 +281,12 @@ func aimCameraAndSetLocName(roomID: String):
 func getCharacter(charID: String) -> BaseCharacter:
 	return GlobalRegistry.getCharacter(charID)
 
+func getDebugActions():
+	return []
+
+func doDebugAction(_id, _args = {}):
+	pass
+
 func saveData():
 	var data = {}
 	data["state"] = state

@@ -116,6 +116,11 @@ func removeScene(scene, args = []):
 		gameUI.say("Error: no more scenes in the scenestack. Please let the developer know")
 		return
 
+func getCurrentScene():
+	if(sceneStack.size() > 0):
+		return sceneStack.back()
+	return null
+
 func _on_GameUI_on_option_button(method, args):
 	pickOption(method, args)
 	

@@ -23,6 +23,7 @@ onready var mainGameScreen = $HBoxContainer/VBoxContainer2
 onready var ingameMenuScreen = $HBoxContainer/InGameMenu
 onready var skillsScreen = $HBoxContainer/SkillsUI
 onready var skillsButton = $HBoxContainer/Panel2/MarginContainer/VBoxContainer/HBoxContainer3/SkillsButton
+onready var debugScreen = $HBoxContainer/DebugPanel
 var uiTextboxScene = preload("res://UI/UITextbox.tscn")
 onready var textcontainer = $HBoxContainer/VBoxContainer2/ScrollContainer/VBoxContainer
 var textboxes: Dictionary = {}
@@ -258,6 +259,7 @@ func hideAllScreens():
 	mainGameScreen.visible = false
 	ingameMenuScreen.visible = false
 	skillsScreen.visible = false
+	debugScreen.visible = false
 
 func _on_MenuButton_pressed():
 	if(!ingameMenuScreen.visible):
@@ -317,4 +319,11 @@ func setFontSize(newsize):
 		textOutput.add_font_override("bold_italics_font", load("res://UI/FontResources/Small/BoldItalicsFont.tres"))
 		textOutput.add_font_override("bold_font", load("res://UI/FontResources/Small/BoldFont.tres"))
 		
-	
+func _on_DebugMenu_pressed():
+	if(!debugScreen.visible):
+		hideAllScreens()
+		debugScreen.visible = true
+	else:
+		hideAllScreens()
+		mainGameScreen.visible = true
+

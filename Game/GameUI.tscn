@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://GlobalTheme.tres" type="Theme" id=1]
 [ext_resource path="res://Game/TooltipDisplay.tscn" type="PackedScene" id=2]
@@ -14,6 +14,7 @@
 [ext_resource path="res://UI/MainMenu/InGameMenu.tscn" type="PackedScene" id=12]
 [ext_resource path="res://UI/SkillsUI/SkillsUI.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Game/SmartScrollContainer.gd" type="Script" id=14]
+[ext_resource path="res://UI/DebugUI/DebugPanel.tscn" type="PackedScene" id=15]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.207843, 0.133333, 0.364706, 1 )
@@ -166,7 +167,7 @@ __meta__ = {
 }
 
 [node name="SkillsButton" type="Button" parent="HBoxContainer/Panel2/MarginContainer/VBoxContainer/HBoxContainer3"]
-margin_right = 116.0
+margin_right = 95.0
 margin_bottom = 26.0
 hint_tooltip = "Spend the stat points and look at your skills (X)"
 size_flags_horizontal = 3
@@ -175,14 +176,22 @@ shortcut = SubResource( 10 )
 text = "Skills"
 
 [node name="MenuButton" type="Button" parent="HBoxContainer/Panel2/MarginContainer/VBoxContainer/HBoxContainer3"]
-margin_left = 120.0
-margin_right = 236.0
+margin_left = 99.0
+margin_right = 195.0
 margin_bottom = 26.0
 hint_tooltip = "Open the menu (C)"
 size_flags_horizontal = 3
 shortcut_in_tooltip = false
 shortcut = SubResource( 8 )
 text = "Menu"
+
+[node name="DebugMenu" type="Button" parent="HBoxContainer/Panel2/MarginContainer/VBoxContainer/HBoxContainer3"]
+margin_left = 199.0
+margin_right = 236.0
+margin_bottom = 26.0
+hint_tooltip = "Open the debug/cheats menu"
+shortcut_in_tooltip = false
+text = "DG"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/Panel2/MarginContainer/VBoxContainer"]
 margin_top = 670.0
@@ -283,6 +292,14 @@ margin_left = 984.0
 margin_right = 984.0
 margin_bottom = 720.0
 
+[node name="DebugPanel" parent="HBoxContainer" instance=ExtResource( 15 )]
+visible = false
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 984.0
+margin_right = 984.0
+margin_bottom = 720.0
+
 [node name="HSplitContainer2" type="HSplitContainer" parent="HBoxContainer"]
 margin_left = 987.0
 margin_right = 992.0
@@ -324,6 +341,7 @@ margin_bottom = -96.289
 [connection signal="pressed" from="HBoxContainer/Panel2/MarginContainer/VBoxContainer/HBoxContainer2/LoadButton" to="." method="_on_LoadButton_pressed"]
 [connection signal="pressed" from="HBoxContainer/Panel2/MarginContainer/VBoxContainer/HBoxContainer3/SkillsButton" to="." method="_on_SkillsButton_pressed"]
 [connection signal="pressed" from="HBoxContainer/Panel2/MarginContainer/VBoxContainer/HBoxContainer3/MenuButton" to="." method="_on_MenuButton_pressed"]
+[connection signal="pressed" from="HBoxContainer/Panel2/MarginContainer/VBoxContainer/HBoxContainer3/DebugMenu" to="." method="_on_DebugMenu_pressed"]
 [connection signal="pressed" from="HBoxContainer/Panel2/MarginContainer/VBoxContainer/HBoxContainer/PrevPageButton" to="." method="_on_PrevPageButton_pressed"]
 [connection signal="pressed" from="HBoxContainer/Panel2/MarginContainer/VBoxContainer/HBoxContainer/NextPageButton" to="." method="_on_NextPageButton_pressed"]
 [connection signal="onResumeButtonPressed" from="HBoxContainer/InGameMenu" to="." method="showGameScreen"]

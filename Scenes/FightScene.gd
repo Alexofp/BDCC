@@ -667,3 +667,16 @@ func loadData(data):
 	enemyAIStrategy = enemyCharacter.getAiStrategy(battleName)
 	enemyAIStrategy.setCharacterID(enemyID)
 	enemyAIStrategy.loadData(SAVE.loadVar(data, "enemyStrategyData", {}))
+
+func getDebugActions():
+	return [
+		{
+			"id": "instantWin",
+			"name": "Instant win",
+			"args": [],
+		}
+	]
+
+func doDebugAction(_id, _args = {}):
+	if(_id == "instantWin"):
+		enemyCharacter.addPain(enemyCharacter.painThreshold())
