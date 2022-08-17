@@ -89,25 +89,25 @@ func _on_GithubButton_pressed():
 func getNewRelease():
 	var error = http_request.request("https://api.github.com/repos/Alexofp/BDCC/releases")
 	if error != OK:
-		printerr("[MainMenu] An error occurred in the HTTP request.")
+		Log.printerr("[MainMenu] An error occurred in the HTTP request.")
 		gutHubReleaseLabel.text = "Latest github release: Error"
 
 func _on_HTTPRequest_request_completed(result, _response_code, _headers, body):
 	if result != HTTPRequest.RESULT_SUCCESS:
-		printerr("[MainMenu] Couldn't get the latest release from github")
+		Log.printerr("[MainMenu] Couldn't get the latest release from github")
 		gutHubReleaseLabel.text = "Latest github release: Error"
 		return
 	
 	var jsonResult = JSON.parse(body.get_string_from_utf8())
 	if(jsonResult.error != OK):
-		printerr("[MainMenu] Couldn't parse json data from github.")
+		Log.printerr("[MainMenu] Couldn't parse json data from github.")
 		gutHubReleaseLabel.text = "Latest github release: Error"
 		return
 	
 	var releasesData = jsonResult.result
 
 	if(!(releasesData is Array)):
-		printerr("[MainMenu] Bad data from github")
+		Log.printerr("[MainMenu] Bad data from github")
 		gutHubReleaseLabel.text = "Latest github release: Error"
 		return
 		

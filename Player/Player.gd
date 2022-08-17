@@ -548,7 +548,7 @@ func loadData(data):
 		if(bodypart == null):
 			var replacementID = BodypartSlot.findReplacement(slot, id)
 			if(replacementID == null || replacementID == ""):
-				printerr("Couldn't find an replacement bodypart for slot "+str(slot))
+				Log.printerr("Couldn't find an replacement bodypart for slot "+str(slot))
 				continue
 			bodypart = GlobalRegistry.createBodypart(replacementID)
 			
@@ -576,7 +576,7 @@ func loadData(data):
 func checkLocation():
 	var _roomInfo = GM.world.getRoomByID(getLocation())
 	if(_roomInfo == null):
-		printerr("Player's location '"+str(location)+"' doesn't exists, reseting them to their cell")
+		Log.printerr("Player's location '"+str(location)+"' doesn't exists, reseting them to their cell")
 		location = getCellLocation()
 
 func saveBuffsData(buffs):

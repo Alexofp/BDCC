@@ -79,7 +79,7 @@ static func getFilesInFolder(folder):
 				result.append(full_path)
 			file_name = dir.get_next()
 	else:
-		printerr("An error occurred when trying to access the path "+folder)
+		Log.printerr("An error occurred when trying to access the path "+folder)
 	return result
 
 # https://godotengine.org/qa/20058/elegant-way-to-create-string-from-array-items

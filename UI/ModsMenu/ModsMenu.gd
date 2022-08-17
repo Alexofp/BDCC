@@ -179,4 +179,4 @@ func _on_ConfirmationDialog_confirmed():
 			file_name = dir.get_next()
 		OPTIONS.saveToFile()
 	else:
-		printerr("An error occurred when trying to access the path "+modsFolder)
+		Log.printerr("An error occurred when trying to access the path "+modsFolder)

@@ -21,4 +21,4 @@ func playAnimation(animID, _args = {}):
 	if(animID == "idle"):
 		animationPlayer.play("Idle")
 	else:
-		printerr("Action "+str(animID)+" is not found for stage "+str(id))
+		Log.printerr("Action "+str(animID)+" is not found for stage "+str(id))

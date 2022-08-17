@@ -66,7 +66,7 @@ func fillFolder(root:TreeItem, folder, filter):
 					child1.set_metadata(0, full_path)
 			file_name = dir.get_next()
 	else:
-		printerr("An error occurred when trying to access the path "+folder)
+		Log.printerr("An error occurred when trying to access the path "+folder)
 
 
 func _on_Button_pressed():

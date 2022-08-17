@@ -26,6 +26,10 @@ func setArgs(_args):
 		for itemID in GlobalRegistry.getItemRefs():
 			myvalues.append([itemID, itemID])
 			$OptionButton.add_item(itemID)
+	if("skill" in _args && _args["skill"]):
+		for thingID in GlobalRegistry.getSkills():
+			myvalues.append([thingID, thingID])
+			$OptionButton.add_item(thingID)
 
 func getResult():
 	if($OptionButton.get_selected_id() >= myvalues.size()):

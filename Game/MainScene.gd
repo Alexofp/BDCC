@@ -416,7 +416,7 @@ func getRandomSceneFor(sceneType):
 		if(moduleScenes == null || !(moduleScenes is Array)):
 			continue
 		if(moduleScenes.size() > 0 && !(moduleScenes[0] is Array)):
-			printerr("Module "+str(moduleID)+" returns bad getRandomSceneFor() data")
+			Log.printerr("Module "+str(moduleID)+" returns bad getRandomSceneFor() data")
 			continue
 		resultScenes.append_array(moduleScenes)
 	
@@ -549,6 +549,24 @@ func getDebugActions():
 			]
 		},
 		{
+			"id": "addSkillExp",
+			"name": "Add skill exp. PC",
+			"args": [
+				{
+					"id": "skillID",
+					"name": "Skill",
+					"type": "list",
+					"skill": true,
+				},
+				{
+					"id": "amount",
+					"name": "Amount",
+					"type": "number",
+					"value": 100,
+				},
+			]
+		},
+		{
 			"id": "openConsole",
 			"name": "Open console",
 		}
@@ -573,6 +591,9 @@ func doDebugAction(id, args = {}):
 	
 	if(id == "addExp"):
 		GM.pc.addExperience(args["amount"])
+	
+	if(id == "addSkillExp"):
+		GM.pc.addSkillExperience(args["skillID"], args["amount"])
 	
 	if(id == "giveItem"):
 		var item:ItemBase = GlobalRegistry.createItem(args["itemID"])

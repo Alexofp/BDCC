@@ -71,4 +71,4 @@ func playAnimation(animID, _args = {}):
 	elif(animID == "shove"):
 		state_machine.travel("Shove")
 	else:
-		printerr("Action "+str(animID)+" is not found for stage "+str(id))
+		Log.printerr("Action "+str(animID)+" is not found for stage "+str(id))

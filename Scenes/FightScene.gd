@@ -480,7 +480,7 @@ func aiTurn():
 		attackID = enemyAIStrategy.getNextAttackFinal(GM.pc)
 		attack = GlobalRegistry.getAttack(attackID)
 	if(attack == null):
-		printerr("Bad attack "+str(attackID))
+		Log.printerr("Bad attack "+str(attackID))
 		attackID = "blunderAttack"
 		attack = GlobalRegistry.getAttack(attackID)
 		

@@ -147,7 +147,7 @@ func loadData(data):
 		
 		var newItem: ItemBase = GlobalRegistry.createItem(id, false)
 		if(newItem == null):
-			printerr("ITEM WITH ID "+str(id)+" WASN'T FOUND IN REGISTRY")
+			Log.printerr("ITEM WITH ID "+str(id)+" WASN'T FOUND IN REGISTRY")
 			continue
 		newItem.uniqueID = uniqueID
 		newItem.loadData(itemLoadedData)

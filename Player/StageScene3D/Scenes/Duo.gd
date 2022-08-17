@@ -58,7 +58,7 @@ func playAnimation(animID, _args = {}):
 	
 	var state_machine = animationTree["parameters/AnimationNodeStateMachine/playback"]
 	if(!stateMachineTravel(doll, state_machine, animID)):
-		printerr("Action "+str(animID)+" is not found for stage "+str(id))
+		Log.printerr("Action "+str(animID)+" is not found for stage "+str(id))
 	
 	$Chair2.visible = false
 	if(_args.has("npcAction")):
@@ -68,7 +68,7 @@ func playAnimation(animID, _args = {}):
 		
 		var state_machine2 = animationTree2["parameters/AnimationNodeStateMachine/playback"]
 		if(!stateMachineTravel(doll2, state_machine2, npcAnimID)):
-			printerr("Action "+str(animID)+" is not found for stage "+str(id))
+			Log.printerr("Action "+str(animID)+" is not found for stage "+str(id))
 	else:
 		var state_machine2 = animationTree2["parameters/AnimationNodeStateMachine/playback"]
 		stateMachineTravel(doll2, state_machine2, "stand")

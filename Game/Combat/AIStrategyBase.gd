@@ -32,7 +32,7 @@ func getBestAttackIDWeighted(_enemy):
 			savedAttacks.append([attackID, attack.getAIScore(character, _enemy)])
 	
 	if(savedAttacks.size() == 0):
-		printerr("Error: Couldn't find any possible attacks for the enemy")
+		Log.printerr("Error: Couldn't find any possible attacks for the enemy")
 		return "blunderAttack"
 	
 	return RNG.pickWeightedPairs(savedAttacks)

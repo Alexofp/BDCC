@@ -157,15 +157,15 @@ func registerRoom(floorid, room):
 	var pos:Vector2 = room.getCell()
 	
 	if(hasRoom(floorid, pos)):
-		printerr("Map Error: there is already a room at cell "+str(pos)+" floor: "+str(floorid)+" roomid: "+str(room.roomID))
+		Log.printerr("Map Error: there is already a room at cell "+str(pos)+" floor: "+str(floorid)+" roomid: "+str(room.roomID))
 		room.queue_free()
 		return
 		
 	if(!room.roomID):
-		printerr("Map Error: room at "+str(pos)+" has no roomID")
+		Log.printerr("Map Error: room at "+str(pos)+" has no roomID")
 	else:
 		if(roomDict.has(room.roomID)):
-			printerr("Map Error: room with id "+room.roomID+" is already registered")
+			Log.printerr("Map Error: room with id "+room.roomID+" is already registered")
 			room.queue_free()
 			return
 		roomDict[room.roomID] = room

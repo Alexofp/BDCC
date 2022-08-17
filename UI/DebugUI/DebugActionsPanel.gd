@@ -13,7 +13,7 @@ func updateActions():
 	if(currentScene == null):
 		return
 	
-	print(currentScene.sceneID)
+	#print(currentScene.sceneID)
 	var actions = currentScene.getDebugActions()
 	if(actions == null || !(actions is Array)):
 		return
@@ -43,7 +43,7 @@ func updateActions():
 		debugActionObject.isMain = true
 		
 func onDebugAction(debugAction):
-	print(debugAction.id)
+	#print(debugAction.id)
 	
 	if(GM.main == null):
 		return
