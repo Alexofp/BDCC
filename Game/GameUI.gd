@@ -24,6 +24,7 @@ onready var ingameMenuScreen = $HBoxContainer/InGameMenu
 onready var skillsScreen = $HBoxContainer/SkillsUI
 onready var skillsButton = $HBoxContainer/Panel2/MarginContainer/VBoxContainer/HBoxContainer3/SkillsButton
 onready var debugScreen = $HBoxContainer/DebugPanel
+onready var debugPanelButton = $HBoxContainer/Panel2/MarginContainer/VBoxContainer/HBoxContainer3/DebugMenu
 var uiTextboxScene = preload("res://UI/UITextbox.tscn")
 onready var textcontainer = $HBoxContainer/VBoxContainer2/ScrollContainer/VBoxContainer
 var textboxes: Dictionary = {}
@@ -36,6 +37,10 @@ func _exit_tree():
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	GM.ui = self
+	
+	if(!OPTIONS.isDebugPanelEnabled()):
+		debugPanelButton.visible = false
+		debugPanelButton.disabled = true
 	
 	var fontOverride = OPTIONS.getFontSize()
 	if(fontOverride == "small"):

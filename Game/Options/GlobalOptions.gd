@@ -21,6 +21,8 @@ var showShortcuts = true
 
 var measurementUnits = "metric"
 
+var debugPanel = false
+
 func resetToDefaults():
 	fetchNewRelease = true
 	menstrualCycleLengthDays = 7
@@ -34,6 +36,7 @@ func resetToDefaults():
 	showShortcuts = true
 	measurementUnits = "metric"
 	requireDoubleTapOnMobile = false
+	debugPanel = false
 	
 	enabledContent.clear()
 	for contentType in ContentType.getAll():
@@ -84,6 +87,9 @@ func getMeasurementUnits():
 
 func shouldRequireDoubleTapOnMobile():
 	return requireDoubleTapOnMobile
+
+func isDebugPanelEnabled():
+	return debugPanel
 
 func getChangeableOptions():
 	var settings = [
@@ -263,7 +269,20 @@ func getChangeableOptions():
 					],
 				},
 			],
-		}
+		},
+		{
+			"name": "Debug",
+			"id": "debug",
+			"options": [
+				{
+					"name": "Debug/Cheats panel",
+					"description": "Adds a button that shows the debug panel",
+					"id": "debugPanel",
+					"type": "checkbox",
+					"value": debugPanel,
+				},
+			]
+		},
 	]
 	
 	var contentSettings = []
@@ -324,6 +343,10 @@ func applyOption(categoryID, optionID, value):
 			myProjectSettings.setForceSoftwareSkinning(value)
 			myProjectSettings.save()
 			
+	if(categoryID == "debug"):
+		if(optionID == "debugPanel"):
+			debugPanel = value
+			
 	if(categoryID == "enabledContent"):
 		enabledContent[optionID] = value
 	print("SETTING "+categoryID+":"+optionID+" TO "+str(value))
@@ -349,6 +372,7 @@ func saveData():
 		"fontSize": fontSize,
 		"showShortcuts": showShortcuts,
 		"measurementUnits": measurementUnits,
+		"debugPanel": debugPanel,
 	}
 	
 	return data
@@ -366,6 +390,7 @@ func loadData(data):
 	fontSize = loadVar(data, "fontSize", "normal")
 	showShortcuts = loadVar(data, "showShortcuts", true)
 	measurementUnits = loadVar(data, "measurementUnits", "metric")
+	debugPanel = loadVar(data, "debugPanel", false)
 
 func saveToFile():
 	var saveData = saveData()
