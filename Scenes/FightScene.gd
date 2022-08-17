@@ -674,60 +674,17 @@ func getDebugActions():
 			"id": "instantWin",
 			"name": "Instant win",
 			"args": [
-				{
-					"id": "somenum",
-					"name": "Some number IDUNNO",
-					"type": "number",
-					"value": 50,
-					"onlyPositive": true,
-					"float": true,
-				},
-				{
-					"id": "somenum2",
-					"name": "Some number asd",
-					"type": "number",
-					"value": -1,
-					"onlyPositive": false,
-				},
-				{
-					"id": "asd",
-					"name": "ASDDDDD",
-					"type": "string",
-					"value": "HELLOs",
-				},
-				{
-					"id": "somelist",
-					"name": "mhm",
-					"type": "list",
-					"value": "NOPE",
-					"values": [
-						["YES", "yep"],
-						["NOPE", "nyop"],
-						["MAYBE", "maybe"],
-					],
-				},
-				{
-					"id": "zzz",
-					"name": "YEP",
-					"type": "bool",
-					"value": true,
-				},
-				{
-					"id": "someitem",
-					"name": "someitem",
-					"type": "list",
-					"item": true,
-				},
-				{
-					"id": "somenpc",
-					"name": "somenpc",
-					"type": "list",
-					"npc": true,
-				},
 			],
-		}
+		},
+		{
+			"id": "healEnemy",
+			"name": "Heal enemy",
+			"args": [
+			],
+		},
 	]
 
 func doDebugAction(_id, _args = {}):
-	if(_id == "instantWin"):
-		enemyCharacter.addPain(enemyCharacter.painThreshold())
+	if(_id == "healEnemy"):
+		enemyCharacter.addPain(-enemyCharacter.painThreshold())
+		enemyCharacter.addLust(-enemyCharacter.lustThreshold())

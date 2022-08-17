@@ -20,11 +20,11 @@ func setArgs(_args):
 			i += 1
 	if("npc" in _args && _args["npc"]):
 		for npcID in GlobalRegistry.getCharacters():
-			myvalues.append(npcID)
+			myvalues.append([npcID, npcID])
 			$OptionButton.add_item(npcID)
 	if("item" in _args && _args["item"]):
 		for itemID in GlobalRegistry.getItemRefs():
-			myvalues.append(itemID)
+			myvalues.append([itemID, itemID])
 			$OptionButton.add_item(itemID)
 
 func getResult():

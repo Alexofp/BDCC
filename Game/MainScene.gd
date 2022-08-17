@@ -77,6 +77,11 @@ func _ready():
 	runCurrentScene()
 	GM.ui.onTimePassed(0)
 	
+	Console.addCommand("setflag", self, "consoleSetFlagBool", ["flagID", "trueOrFalse"], "Changes the game flag, be very careful")
+	Console.addCommand("clearflag", self, "consoleClearFlag", ["flagID"], "Resets the game flag, be very careful")
+	Console.addCommand("setmoduleflag", self, "consoleSetModuleFlagBool", ["moduleID", "flagID", "trueOrFalse"], "Changes the game flag, be very careful")
+	Console.addCommand("clearmoduleflag", self, "consoleClearModuleFlag", ["moduleID", "flagID"], "Resets the game flag, be very careful")
+	
 func startNewGame():
 	for scene in sceneStack:
 		scene.queue_free()
@@ -327,6 +332,9 @@ func getDays():
 func setFlag(flagID, value):
 	flags[flagID] = value
 
+func clearFlag(flagID):
+	flags.erase(flagID)
+
 func increaseFlag(flagID, addvalue = 1):
 	if(!flags.has(flagID)):
 		flags[flagID] = 0
@@ -355,6 +363,11 @@ func getModuleFlag(moduleID, flagID, defaultValue = null):
 		return defaultValue
 	
 	return moduleFlags[moduleID][flagID]
+
+func clearModuleFlag(moduleID, flagID):
+	if(!moduleFlags.has(moduleID) || !moduleFlags[moduleID].has(flagID)):
+		return
+	moduleFlags[moduleID].erase(flagID)
 
 func resolveCustomCharacterName(charID):
 	if(sceneStack.size() > 0):
@@ -463,23 +476,76 @@ func roomMemoriesProcessDay():
 func getDebugActions():
 	return [
 		{
-			"id": "asdfsdf",
-			"name": "Main scene action",
+			"id": "giveItem",
+			"name": "Give player item",
 			"args": [
 				{
-					"id": "z1",
-					"name": "Some number IDUNNO",
+					"id": "itemID",
+					"name": "Item id",
+					"type": "list",
+					"item": true,
+				},
+				{
+					"id": "amount",
+					"name": "Amount",
 					"type": "number",
-					"value": 50,
+					"value": 1,
 					"onlyPositive": true,
-					"float": true,
 				},
 			]
 		},
 		{
-			"id": "z2",
-			"name": "Main scene action 2",
+			"id": "addPain",
+			"name": "Add pain PC",
 			"args": [
+				{
+					"id": "amount",
+					"name": "Amount",
+					"type": "number",
+					"value": 10,
+				},
+			]
+		},
+		{
+			"id": "addLust",
+			"name": "Add lust PC",
+			"args": [
+				{
+					"id": "amount",
+					"name": "Amount",
+					"type": "number",
+					"value": 10,
+				},
+			]
+		},
+		{
+			"id": "addStamina",
+			"name": "Add stamina PC",
+			"args": [
+				{
+					"id": "amount",
+					"name": "Amount",
+					"type": "number",
+					"value": 100,
+				},
+			]
+		},
+		{
+			"id": "healPC",
+			"name": "Heal PC",
+			"args": [
+			]
+		},
+		{
+			"id": "addExp",
+			"name": "Add experience PC",
+			"args": [
+				{
+					"id": "amount",
+					"name": "Amount",
+					"type": "number",
+					"value": 100,
+				},
 			]
 		},
 		{
@@ -488,8 +554,74 @@ func getDebugActions():
 		}
 	]
 
-func doDebugAction(id, _args = {}):
-	print(id, " ", _args)
+func doDebugAction(id, args = {}):
+	print(id, " ", args)
 	
+	if(id == "healPC"):
+		GM.pc.addPain(-GM.pc.painThreshold())
+		GM.pc.addLust(-GM.pc.lustThreshold())
+		GM.pc.addStamina(GM.pc.getMaxStamina())
+	
+	if(id == "addPain"):
+		GM.pc.addPain(args["amount"])
+	
+	if(id == "addLust"):
+		GM.pc.addLust(args["amount"])
+		
+	if(id == "addStamina"):
+		GM.pc.addStamina(args["amount"])
+	
+	if(id == "addExp"):
+		GM.pc.addExperience(args["amount"])
+	
+	if(id == "giveItem"):
+		var item:ItemBase = GlobalRegistry.createItem(args["itemID"])
+		if(item.canCombine()):
+			item.setAmount(args["amount"]) 
+			GM.pc.getInventory().addItem(item)
+			Log.print("Item "+item.getStackName()+" added to player")
+		else:
+			GM.pc.getInventory().addItem(item)
+			args["amount"] -= 1
+			while(args["amount"] > 0):
+				item = GlobalRegistry.createItem(args["itemID"])
+				GM.pc.getInventory().addItem(item)
+				args["amount"] -= 1
+			Log.print("Item "+item.getStackName()+" added to player")
+		
 	if(id == "openConsole"):
 		Console.toggleConsole()
+
+func consoleSetFlagBool(flagID, valuestr):
+	var value = false
+	if(valuestr in ["true", "TRUE", "True", "1"]):
+		value = true
+	elif(valuestr in ["false", "FALSE", "False", "0"]):
+		value = false
+	else:
+		Console.printLine("Accept values are true or false")
+		return
+		
+	setFlag(flagID, value)
+	Console.printLine("Flag set")
+
+func consoleSetModuleFlagBool(moduleID, flagID, valuestr):
+	var value = false
+	if(valuestr in ["true", "TRUE", "True", "1"]):
+		value = true
+	elif(valuestr in ["false", "FALSE", "False", "0"]):
+		value = false
+	else:
+		Console.printLine("Accept values are true or false")
+		return
+		
+	setModuleFlag(moduleID, flagID, value)
+	Console.printLine("Flag set")
+
+func consoleClearFlag(flagID):
+	clearFlag(flagID)
+	Console.printLine("Flag cleared")
+	
+func consoleClearModuleFlag(moduleID, flagID):
+	clearModuleFlag(moduleID, flagID)
+	Console.printLine("Flag cleared")
