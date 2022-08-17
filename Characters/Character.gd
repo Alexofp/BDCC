@@ -103,7 +103,7 @@ func loadData(data):
 			continue
 		var bodypart = getBodypart(slot)
 		if(bodypartid != bodypart.id):
-			printerr("Bodypart changed for "+getName()+"'s "+str(slot)+", ignoring data (was "+bodypartid+", became "+bodypart.id+")")
+			Log.printerr("Bodypart changed for "+getName()+"'s "+str(slot)+", ignoring data (was "+bodypartid+", became "+bodypart.id+")")
 			continue
 		bodypart.loadDataNPC(bodypartData)
 	

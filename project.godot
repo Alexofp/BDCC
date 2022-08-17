@@ -374,6 +374,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Player/LimbTypes.gd"
 }, {
+"base": "Object",
+"class": "Log",
+"language": "GDScript",
+"path": "res://Util/Log.gd"
+}, {
 "base": "Reference",
 "class": "LootList",
 "language": "GDScript",
@@ -793,6 +798,7 @@ _global_script_class_icons={
 "Lactation": "",
 "LightInventory": "",
 "LimbTypes": "",
+"Log": "",
 "LootList": "",
 "LootTableBase": "",
 "LoseEarlyAI": "",
@@ -877,6 +883,7 @@ config/windows_native_icon="res://icon.ico"
 
 [autoload]
 
+Console="*res://UI/DebugUI/ConsoleSingleton.gd"
 OPTIONS="*res://Game/Options/GlobalOptions.gd"
 GlobalRegistry="*res://GlobalRegistry.gd"
 GM="*res://Game/GM.gd"

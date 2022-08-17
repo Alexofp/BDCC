@@ -76,7 +76,7 @@ func _ready():
 	
 	runCurrentScene()
 	GM.ui.onTimePassed(0)
-
+	
 func startNewGame():
 	for scene in sceneStack:
 		scene.queue_free()
@@ -459,3 +459,37 @@ func roomMemoriesProcessDay():
 		
 		if(data["days"] <= 0):
 			roomMemories.erase(roomID)
+
+func getDebugActions():
+	return [
+		{
+			"id": "asdfsdf",
+			"name": "Main scene action",
+			"args": [
+				{
+					"id": "z1",
+					"name": "Some number IDUNNO",
+					"type": "number",
+					"value": 50,
+					"onlyPositive": true,
+					"float": true,
+				},
+			]
+		},
+		{
+			"id": "z2",
+			"name": "Main scene action 2",
+			"args": [
+			]
+		},
+		{
+			"id": "openConsole",
+			"name": "Open console",
+		}
+	]
+
+func doDebugAction(id, _args = {}):
+	print(id, " ", _args)
+	
+	if(id == "openConsole"):
+		Console.toggleConsole()

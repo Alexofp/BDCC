@@ -2,6 +2,8 @@ extends HBoxContainer
 
 var id
 var args
+var actionName
+var isMain = false
 
 signal onActionPressed(debugAction)
 

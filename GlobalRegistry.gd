@@ -531,6 +531,9 @@ func getItemIDsByTag(tag):
 		return []
 	return itemsByTag[tag]
 
+func getItemRefs():
+	return itemsRefs
+
 func registerBuff(path: String):
 	var item = load(path)
 	var itemObject = item.new()

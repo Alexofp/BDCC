@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://UI/DebugUI/DebugActionsPanel.gd" type="Script" id=1]
-[ext_resource path="res://UI/DebugUI/DebugActionButton.tscn" type="PackedScene" id=2]
+[ext_resource path="res://UI/DebugUI/DebugActionArgumentsWindow.tscn" type="PackedScene" id=3]
+[ext_resource path="res://UI/FlexGridContainer.gd" type="Script" id=4]
 
 [node name="DebugActionsPanel" type="Control"]
 anchor_right = 1.0
@@ -12,16 +13,29 @@ script = ExtResource( 1 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer"]
+[node name="VBoxContainer" type="Container" parent="VBoxContainer"]
+margin_right = 1280.0
+size_flags_horizontal = 3
+script = ExtResource( 4 )
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
+margin_top = 4.0
+margin_right = 1280.0
+margin_bottom = 8.0
+
+[node name="VBoxContainer2" type="Container" parent="VBoxContainer"]
+margin_top = 12.0
 margin_right = 1280.0
 margin_bottom = 720.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+script = ExtResource( 4 )
 
-[node name="DebugActionButton" parent="VBoxContainer/VBoxContainer" instance=ExtResource( 2 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_right = 1280.0
-margin_bottom = 20.0
+[node name="DebugActionArgumentsWindow" parent="." instance=ExtResource( 3 )]
+margin_left = -218.0
+margin_top = -95.0
+margin_right = 218.0
+margin_bottom = 95.0
 
 [connection signal="visibility_changed" from="." to="." method="_on_DebugActionsPanel_visibility_changed"]
+[connection signal="onDoActionButton" from="DebugActionArgumentsWindow" to="." method="_on_DebugActionArgumentsWindow_onDoActionButton"]
