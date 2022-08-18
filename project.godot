@@ -167,7 +167,7 @@ _global_script_classes=[ {
 "base": "Module",
 "class": "CellblockModule",
 "language": "GDScript",
-"path": "res://Modules/CellblockModule/module.gd"
+"path": "res://Modules/CellblockModule/Module.gd"
 }, {
 "base": "BaseCharacter",
 "class": "Character",
@@ -257,7 +257,7 @@ _global_script_classes=[ {
 "base": "Module",
 "class": "FightClubModule",
 "language": "GDScript",
-"path": "res://Modules/FightClubModule/module.gd"
+"path": "res://Modules/FightClubModule/Module.gd"
 }, {
 "base": "Object",
 "class": "FightClubRank",
@@ -312,7 +312,7 @@ _global_script_classes=[ {
 "base": "Module",
 "class": "GymModule",
 "language": "GDScript",
-"path": "res://Modules/GymModule/module.gd"
+"path": "res://Modules/GymModule/Module.gd"
 }, {
 "base": "LootTableBase",
 "class": "InmateLoot",
@@ -422,7 +422,7 @@ _global_script_classes=[ {
 "base": "Module",
 "class": "MedicalModule",
 "language": "GDScript",
-"path": "res://Modules/MedicalModule/module.gd"
+"path": "res://Modules/MedicalModule/Module.gd"
 }, {
 "base": "Reference",
 "class": "MenstrualCycle",
@@ -447,7 +447,7 @@ _global_script_classes=[ {
 "base": "Module",
 "class": "NovaModule",
 "language": "GDScript",
-"path": "res://Modules/NovaModule/module.gd"
+"path": "res://Modules/NovaModule/Module.gd"
 }, {
 "base": "Reference",
 "class": "Orifice",
@@ -492,7 +492,7 @@ _global_script_classes=[ {
 "base": "Module",
 "class": "PunishmentsModule",
 "language": "GDScript",
-"path": "res://Modules/PunishmentsModule/module.gd"
+"path": "res://Modules/PunishmentsModule/Module.gd"
 }, {
 "base": "Object",
 "class": "Quest",
@@ -517,7 +517,7 @@ _global_script_classes=[ {
 "base": "Module",
 "class": "RahiModule",
 "language": "GDScript",
-"path": "res://Modules/RahiModule/module.gd"
+"path": "res://Modules/RahiModule/Module.gd"
 }, {
 "base": "Object",
 "class": "RandomSceneType",
@@ -677,7 +677,7 @@ _global_script_classes=[ {
 "base": "Module",
 "class": "TaviModule",
 "language": "GDScript",
-"path": "res://Modules/TaviModule/module.gd"
+"path": "res://Modules/TaviModule/Module.gd"
 }, {
 "base": "QuestBase",
 "class": "TestQuest",

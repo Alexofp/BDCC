@@ -130,7 +130,6 @@ dialog_text = "This will remove all mods in your mods folder. Are you sure?
 Restart the game to let the action take effect"
 
 [node name="AndroidPathAlert" type="AcceptDialog" parent="."]
-visible = true
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5

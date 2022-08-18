@@ -898,7 +898,7 @@ func registerModulesFolder(folder: String):
 				var full_path = folder.plus_file(file_name)
 				#print("FOUND DIR: "+full_path)
 				
-				var modulePath:String = full_path.plus_file("module.gd")
+				var modulePath:String = full_path.plus_file("Module.gd")
 				if(dir.file_exists(modulePath)):
 					#print("MODULE FILE: " +modulePath)
 					registerModule(modulePath)
