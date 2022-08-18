@@ -37,6 +37,7 @@ var lootLists: Dictionary = {}
 var fightClubFightersByRank: Dictionary = {}
 var fightClubFighters: Dictionary = {}
 var mapFloors: Dictionary = {}
+var imagePacks: Dictionary = {}
 
 var bodypartStorageNode
 
@@ -243,6 +244,9 @@ func _ready():
 	
 	#registerMapFloor("Medical", "res://Game/World/Floors/Medical.tscn")
 	registerMapFloorFolder("res://Game/World/Floors/")
+	
+	registerImagePackFolder("res://Images/ImagePacks/")
+	OPTIONS.checkImagePackOrder(imagePacks)
 	
 	registerModulesFolder("res://Modules/")
 	sortFightClubFighters()
@@ -966,3 +970,37 @@ func registerMapFloorFolder(folder: String):
 
 func getMapFloors():
 	return mapFloors
+
+
+func registerImagePack(path: String):
+	var imagepack = load(path)
+	var imagepackObject = imagepack.new()
+	imagePacks[imagepackObject.id] = imagepackObject
+
+func registerImagePackFolder(folder: String):
+	var dir = Directory.new()
+	if dir.open(folder) == OK:
+		dir.list_dir_begin(true)
+		var file_name = dir.get_next()
+		while file_name != "":
+			if dir.current_is_dir():
+				var full_path = folder.plus_file(file_name)
+				#print("FOUND DIR: "+full_path)
+				
+				var imagePackPath:String = full_path.plus_file("ImagePack.gd")
+				if(dir.file_exists(imagePackPath)):
+					#print("IMAGE PACK FILE: " +modulePath)
+					registerImagePack(imagePackPath)
+				pass
+			file_name = dir.get_next()
+	else:
+		Log.printerr("An error occurred when trying to access the path "+folder)
+		
+func getImagePack(id: String):
+	if(!imagePacks.has(id)):
+		Log.printerr("ERROR: image pack with the id "+id+" wasn't found")
+		return null
+	return imagePacks[id]
+
+func getImagePacks():
+	return imagePacks

@@ -7,6 +7,7 @@ var optionCategoryCheckbox = preload("res://UI/Options/OptionCheckboxType.tscn")
 var optionCategoryList = preload("res://UI/Options/OptionListType.tscn")
 var optionCategoryFloat = preload("res://UI/Options/OptionFloatType.tscn")
 var optionCategoryInt = preload("res://UI/Options/OptionIntType.tscn")
+var optionCategoryPriorityList = preload("res://UI/Options/OptionPriorityListType.tscn")
 signal onClosePressed
 
 func _ready():
@@ -42,6 +43,8 @@ func updateOptions():
 				optionUIObject = optionCategoryFloat.instance()
 			elif(optionType == "int"):
 				optionUIObject = optionCategoryInt.instance()
+			elif(optionType == "prioritylist"):
+				optionUIObject = optionCategoryPriorityList.instance()
 			else:
 				optionUIObject = optionCategoryUnknown.instance()
 			
@@ -55,7 +58,13 @@ func updateOptions():
 			optionUIObject.setOptionValue(optionValue)
 			if(optionUIObject.has_signal("value_changed")):
 				var _ok = optionUIObject.connect("value_changed", self, "onOptionChanged")
+
 			if(optionType == "list"):
+				optionUIObject.setValues(option["values"])
+			if(optionType == "prioritylist"):
+				if("imagePacks" in option):
+					optionUIObject.makeImagepackList()
+				
 				optionUIObject.setValues(option["values"])
 			
 			if(optionDescription != null && optionUIObject.has_signal("mouse_entered")):

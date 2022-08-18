@@ -11,6 +11,7 @@ signal sceneEnded(result)
 var state: String = ""
 var sceneID: String = "UNREGISTERED_SCENE"
 var currentCharacters: Array = []
+var currentCharactersVariants: Dictionary = {}
 var fightCharacter: String = ""
 var sceneTag = ""
 #var currentCharacter: String = ""
@@ -65,6 +66,7 @@ func run():
 			continue
 		character.updateNonBattleEffects()
 	GM.ui.getCharactersPanel().updateStatuses()
+	GM.ui.updateCharacterInPanel()
 	
 	checkSceneEnded()
 		
@@ -119,46 +121,43 @@ func updateCharactersPanelVisibility():
 	else:
 		GM.ui.setCharactersPanelVisible(false)
 
-func setCharacter(id: String):
-	if(id == ""):
-		clearCharacter()
-		return
-	
-	var character = GlobalRegistry.getCharacter(id)
-	if(!character):
-		return
-	currentCharacters = [id]
-	GM.ui.getCharactersPanel().clear()
-	GM.ui.getCharactersPanel().addCharacter(id)
-	updateCharactersPanelVisibility()
-
-func addCharacter(id: String):
+func addCharacter(id: String, variant: Array = []):
 	if(id == ""):
 		return
 	if(currentCharacters.has(id)):
+		GM.ui.addCharacterToPanel(id, variant)
 		return
+	currentCharactersVariants[id] = variant
 	currentCharacters.append(id)
 	GM.ui.getCharactersPanel().addCharacter(id)
+	GM.ui.addCharacterToPanel(id, variant)
 	updateCharactersPanelVisibility()
 
 func removeCharacter(id: String):
 	if(currentCharacters.has(id)):
 		currentCharacters.erase(id)
+		var _ok = currentCharactersVariants.erase(id)
 		GM.ui.getCharactersPanel().removeCharacter(id)
+		GM.ui.removeCharacterFromPanel(id)
 		updateCharactersPanelVisibility()
 
 func updateCharacter():
 	GM.ui.getCharactersPanel().clear()
+	GM.ui.clearCharactersPanel()
 	for id in currentCharacters:
 		var character = GlobalRegistry.getCharacter(id)
 		if(!character):
 			continue
 		GM.ui.getCharactersPanel().addCharacter(id)
+		if(currentCharactersVariants.has(id)):
+			GM.ui.addCharacterToPanel(id, currentCharactersVariants[id])
 	updateCharactersPanelVisibility()
 
 func clearCharacter():
-	currentCharacters = []
+	currentCharacters.clear()
+	currentCharactersVariants.clear()
 	GM.ui.getCharactersPanel().clear()
+	GM.ui.clearCharactersPanel()
 	updateCharactersPanelVisibility()
 
 func _onSceneEnd():
@@ -291,6 +290,7 @@ func saveData():
 	var data = {}
 	data["state"] = state
 	data["currentCharacters"] = currentCharacters
+	data["currentCharactersVariants"] = currentCharactersVariants
 	data["fightCharacter"] = fightCharacter
 	data["sceneTag"] = sceneTag
 	
@@ -299,6 +299,7 @@ func saveData():
 func loadData(data):
 	state = SAVE.loadVar(data, "state", "")
 	currentCharacters = SAVE.loadVar(data, "currentCharacters", [])
+	currentCharactersVariants = SAVE.loadVar(data, "currentCharactersVariants", {})
 	fightCharacter = SAVE.loadVar(data, "fightCharacter", "")
 	sceneTag = SAVE.loadVar(data, "sceneTag", "")
 	updateCharacter()

@@ -23,6 +23,8 @@ var measurementUnits = "metric"
 
 var debugPanel = false
 
+var imagePackOrder = []
+
 func resetToDefaults():
 	fetchNewRelease = true
 	menstrualCycleLengthDays = 7
@@ -37,6 +39,7 @@ func resetToDefaults():
 	measurementUnits = "metric"
 	requireDoubleTapOnMobile = false
 	debugPanel = false
+	imagePackOrder = []
 	
 	enabledContent.clear()
 	for contentType in ContentType.getAll():
@@ -268,6 +271,15 @@ func getChangeableOptions():
 						["metricimperial", "Metric and Imperial"],
 					],
 				},
+				{
+					"name": "Image packs",
+					"description": "Choose artist priority",
+					"id": "imagePackOrder",
+					"type": "prioritylist",
+					"imagePacks": true,
+					"value": "",
+					"values": imagePackOrder,
+				},
 			],
 		},
 		{
@@ -373,6 +385,7 @@ func saveData():
 		"showShortcuts": showShortcuts,
 		"measurementUnits": measurementUnits,
 		"debugPanel": debugPanel,
+		"imagePackOrder": imagePackOrder,
 	}
 	
 	return data
@@ -391,6 +404,7 @@ func loadData(data):
 	showShortcuts = loadVar(data, "showShortcuts", true)
 	measurementUnits = loadVar(data, "measurementUnits", "metric")
 	debugPanel = loadVar(data, "debugPanel", false)
+	imagePackOrder = loadVar(data, "imagePackOrder", [])
 
 func saveToFile():
 	var saveData = saveData()
@@ -433,3 +447,20 @@ func loadVar(data: Dictionary, key, nullvalue = null):
 
 func resetRenderSettings():
 	myProjectSettings.resetToDefault()
+
+func checkImagePackOrder(imagePacks):
+	var newImagePackOrder = []
+	
+	for imagePackID in imagePackOrder:
+		if (imagePacks.has(imagePackID)):
+			newImagePackOrder.append(imagePackID)
+	
+	for imagePackID in imagePacks:
+		if(!newImagePackOrder.has(imagePackID)):
+			newImagePackOrder.append(imagePackID)
+	
+	imagePackOrder = newImagePackOrder
+	print("checkImagePackOrder DONE ",imagePackOrder)
+
+func getImagePackOrder():
+	return imagePackOrder

@@ -35,6 +35,8 @@ func _ready():
 		for mod in loadedMods:
 			text += "\n"+str(mod)
 		loadedModsLabel.bbcode_text = text
+		
+	print(Images.getCharacter("rahi", []))
 
 func updateDonationData():
 	$HBoxContainer/Panel2/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer3/DonationsLabel.bbcode_text = GlobalRegistry.getDonationDataString()

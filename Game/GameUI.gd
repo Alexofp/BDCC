@@ -27,6 +27,7 @@ onready var debugScreen = $HBoxContainer/DebugPanel
 onready var debugPanelButton = $HBoxContainer/Panel2/MarginContainer/VBoxContainer/HBoxContainer3/DebugMenu
 var uiTextboxScene = preload("res://UI/UITextbox.tscn")
 onready var textcontainer = $HBoxContainer/VBoxContainer2/ScrollContainer/VBoxContainer
+onready var charactersArtworkPanel = $HBoxContainer/Panel2/MarginContainer/VBoxContainer/CharactersArtworkPanel
 var textboxes: Dictionary = {}
 var gameParser: GameParser
 var sayParser: SayParser
@@ -212,7 +213,8 @@ func getCharactersPanel():
 	return charactersPanel
 
 func setCharactersPanelVisible(vis):
-	charactersPanel.visible = vis
+	charactersPanel.visible = false
+	charactersArtworkPanel.visible = vis
 
 func addUITextbox(id):
 	assert(!textboxes.has(id), "Trying to add a textbox with the same id. Id is "+id)
@@ -332,3 +334,15 @@ func _on_DebugMenu_pressed():
 		hideAllScreens()
 		mainGameScreen.visible = true
 
+
+func addCharacterToPanel(id, variant):
+	charactersArtworkPanel.addCharacter(id, variant)
+	
+func removeCharacterFromPanel(id):
+	charactersArtworkPanel.removeCharacter(id)
+	
+func clearCharactersPanel():
+	charactersArtworkPanel.clear()
+
+func updateCharacterInPanel():
+	charactersArtworkPanel.updateMainCharacter()

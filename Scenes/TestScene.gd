@@ -41,7 +41,7 @@ func _run():
 		
 	if(state == "option1"):
 		say("You selected 1")
-		setCharacter("testchar")
+		addCharacter("rahi")
 		addNextButton("endstuff")
 		
 	if(state == "option2"):
@@ -50,7 +50,7 @@ func _run():
 		
 	if(state == "endstuff"):
 		say("Yes this is dog")
-		setCharacter("")
+		removeCharacter("rahi")
 		addNextButton("endthescene")
 		
 	if(state == "meowmeow"):

@@ -314,6 +314,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Modules/GymModule/Module.gd"
 }, {
+"base": "Reference",
+"class": "ImagePack",
+"language": "GDScript",
+"path": "res://Images/ImagePacks/ImagePack.gd"
+}, {
+"base": "Object",
+"class": "Images",
+"language": "GDScript",
+"path": "res://Images/ImagePacks/Images.gd"
+}, {
 "base": "LootTableBase",
 "class": "InmateLoot",
 "language": "GDScript",
@@ -786,6 +796,8 @@ _global_script_class_icons={
 "Gender": "",
 "GuardLoot": "",
 "GymModule": "",
+"ImagePack": "",
+"Images": "",
 "InmateLoot": "",
 "InmateType": "",
 "Interest": "",
@@ -920,7 +932,7 @@ texture={
 "flags/filter": true,
 "flags/mipmaps": false,
 "flags/repeat": 0,
-"flags/srgb": 1,
+"flags/srgb": 0,
 "process/HDR_as_SRGB": false,
 "process/fix_alpha_border": true,
 "process/invert_color": false,
@@ -981,4 +993,5 @@ vram_compression/import_pvrtc=true
 gles2/compatibility/disable_half_float=true
 environment/default_clear_color=Color( 0.247059, 0.243137, 0.490196, 1 )
 quality/filters/use_fxaa=true
+quality/depth/hdr=false
 environment/default_environment="res://default_env.tres"
