@@ -129,6 +129,17 @@ dialog_text = "This will remove all mods in your mods folder. Are you sure?
 
 Restart the game to let the action take effect"
 
+[node name="AndroidPathAlert" type="AcceptDialog" parent="."]
+visible = true
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -247.5
+margin_top = -57.0
+margin_right = 247.5
+margin_bottom = 57.0
+
 [connection signal="pressed" from="VBoxContainer/GridContainer/CloseButton" to="." method="_on_CloseButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/GridContainer/ModsFolderButton" to="." method="_on_ModsFolderButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/GridContainer/AddModButton" to="." method="_on_AddModButton_pressed"]

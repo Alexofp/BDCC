@@ -68,6 +68,12 @@ func loadMods():
 		modsSupport = true
 	
 	var modsFolder = "user://mods"
+	if(OS.get_name() == "Android"):
+		var permissions: Array = OS.get_granted_permissions() #for Godot 3 branch
+		if permissions.has("android.permission.READ_EXTERNAL_STORAGE"):
+			var externalDir:String = OS.get_system_dir(OS.SYSTEM_DIR_DOCUMENTS, true)
+			var finalDir = externalDir.plus_file("BDCCMods")
+			modsFolder = finalDir
 	
 	var dir = Directory.new()
 	if dir.open(modsFolder) == OK:

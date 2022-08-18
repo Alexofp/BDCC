@@ -920,7 +920,7 @@ texture={
 "flags/filter": true,
 "flags/mipmaps": false,
 "flags/repeat": 0,
-"flags/srgb": 0,
+"flags/srgb": 1,
 "process/HDR_as_SRGB": false,
 "process/fix_alpha_border": true,
 "process/invert_color": false,

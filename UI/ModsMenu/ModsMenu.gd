@@ -11,6 +11,10 @@ func _ready():
 	else:
 		$VBoxContainer/GridContainer/RemoveModsButton.disabled = true
 
+	if(OS.get_name() == "Android"):
+		$VBoxContainer/GridContainer/ModsFolderButton.disabled = true
+		$VBoxContainer/GridContainer/RemoveModsButton.disabled = true
+
 	if OS.get_name() == "HTML5" and OS.has_feature("JavaScript"):
 		_define_js()
 
@@ -153,8 +157,16 @@ func _on_AddModButton_pressed():
 					yield(get_tree().create_timer(1), "timeout") #for Godot 3 branch
 				else:
 					has_permissions = true
+					
+			var d = Directory.new()
+			var externalDir:String = OS.get_system_dir(OS.SYSTEM_DIR_DOCUMENTS, true)
+			var finalDir = externalDir.plus_file("BDCCMods")
+			d.make_dir_recursive(finalDir)
+			#$ImportModDialog.current_dir = finalDir
+			$AndroidPathAlert.dialog_text = "Mods on android are loaded from:\n"+finalDir+"\nPlace them there and restart the game."
+			$AndroidPathAlert.popup_centered()
+			return
 		
-		#$ImportSaveDialog.current_dir = OS.get_user_data_dir()
 		$ImportModDialog.popup_centered()
 
 

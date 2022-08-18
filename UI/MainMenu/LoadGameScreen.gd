@@ -10,6 +10,9 @@ signal in_focus
 func _ready():
 	updateSaves()
 	
+	if(OS.get_name() == "Android"):
+		$VBoxContainer/GridContainer/SavesButton.disabled = true
+	
 	if(OS.get_name() == "HTML5"):
 		$VBoxContainer/GridContainer/SavesButton.visible = false
 	
@@ -77,6 +80,16 @@ func onExportButtonClicked(savePath: String):
 				yield(get_tree().create_timer(1), "timeout") #for Godot 3 branch
 			else:
 				has_permissions = true
+		
+		var d = Directory.new()
+		var externalDir:String = OS.get_system_dir(OS.SYSTEM_DIR_DOCUMENTS, true)
+		var finalDir = externalDir.plus_file("BDCCSaves")
+		d.make_dir_recursive(finalDir)
+		var finalPath = finalDir.plus_file(savePath.get_file())
+		d.copy(savePath, finalPath)
+		$SaveExportedAlert.dialog_text = "Your save was exported to:\n"+str(finalPath)
+		$SaveExportedAlert.popup_centered()
+		return
 	
 	currentExportedPath = savePath
 	$ExportSaveDialog.current_file = savePath.get_file()
@@ -179,7 +192,11 @@ func _on_ImportButton_pressed():
 				else:
 					has_permissions = true
 		
-		#$ImportSaveDialog.current_dir = OS.get_user_data_dir()
+			var d = Directory.new()
+			var externalDir:String = OS.get_system_dir(OS.SYSTEM_DIR_DOCUMENTS, true)
+			var finalDir = externalDir.plus_file("BDCCSaves")
+			d.make_dir_recursive(finalDir)
+			$ImportSaveDialog.current_dir = finalDir
 		$ImportSaveDialog.popup_centered()
 
 func _on_ImportSaveDialog_file_selected(path: String):
