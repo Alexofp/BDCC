@@ -8,6 +8,7 @@ onready var textureRect = $VBoxContainer2/Control/TextureRect
 onready var textureRect2 = $VBoxContainer2/Control/TextureRect2
 onready var textureRect3 = $VBoxContainer2/Control/TextureRect3
 onready var characterStatusGrid = $VBoxContainer2/CharacterStatusGrid
+onready var nextCharacterButton = $VBoxContainer2/Control/MarginContainer/VBoxContainer/HBoxContainer/NextButton
 
 func _ready():
 	clear()
@@ -68,6 +69,7 @@ func updateImages():
 		textureRect.texture = null
 		textureRect2.texture = null
 		textureRect3.texture = null
+		nextCharacterButton.visible = false
 		return
 	
 	if(currentCharacter == null):
@@ -84,8 +86,10 @@ func updateImages():
 			nextIndex = 0
 		
 		textureRect2.texture = load(characters[keys[nextIndex]]["imagePath"])
+		nextCharacterButton.visible = true
 	else:
 		textureRect2.texture = null
+		nextCharacterButton.visible = false
 	
 	if(characters.size() > 2):
 		var prevIndex = index - 1

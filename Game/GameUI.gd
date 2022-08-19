@@ -213,8 +213,12 @@ func getCharactersPanel():
 	return charactersPanel
 
 func setCharactersPanelVisible(vis):
-	charactersPanel.visible = false
-	charactersArtworkPanel.visible = vis
+	if(OPTIONS.shouldShowCharacterArt()):
+		charactersPanel.visible = false
+		charactersArtworkPanel.visible = vis
+	else:
+		charactersPanel.visible = vis
+		charactersArtworkPanel.visible = false
 
 func addUITextbox(id):
 	assert(!textboxes.has(id), "Trying to add a textbox with the same id. Id is "+id)

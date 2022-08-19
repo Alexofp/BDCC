@@ -23,6 +23,7 @@ var measurementUnits = "metric"
 
 var debugPanel = false
 
+var showCharacterArt = true
 var imagePackOrder = []
 
 func resetToDefaults():
@@ -40,6 +41,7 @@ func resetToDefaults():
 	requireDoubleTapOnMobile = false
 	debugPanel = false
 	imagePackOrder = []
+	showCharacterArt = true
 	
 	enabledContent.clear()
 	for contentType in ContentType.getAll():
@@ -93,6 +95,9 @@ func shouldRequireDoubleTapOnMobile():
 
 func isDebugPanelEnabled():
 	return debugPanel
+
+func shouldShowCharacterArt():
+	return showCharacterArt
 
 func getChangeableOptions():
 	var settings = [
@@ -272,6 +277,13 @@ func getChangeableOptions():
 					],
 				},
 				{
+					"name": "Show character art",
+					"description": "Show panel with character art instead of small one",
+					"id": "showCharacterArt",
+					"type": "checkbox",
+					"value": showCharacterArt,
+				},
+				{
 					"name": "Image packs",
 					"description": "Choose artist priority",
 					"id": "imagePackOrder",
@@ -346,6 +358,8 @@ func applyOption(categoryID, optionID, value):
 			measurementUnits = value
 		if(optionID == "requireDoubleTapOnMobile"):
 			requireDoubleTapOnMobile = value
+		if(optionID == "showCharacterArt"):
+			showCharacterArt = value
 		
 	if(categoryID == "render"):
 		if(optionID == "renderer"):
@@ -386,6 +400,7 @@ func saveData():
 		"measurementUnits": measurementUnits,
 		"debugPanel": debugPanel,
 		"imagePackOrder": imagePackOrder,
+		"showCharacterArt": showCharacterArt,
 	}
 	
 	return data
@@ -405,6 +420,7 @@ func loadData(data):
 	measurementUnits = loadVar(data, "measurementUnits", "metric")
 	debugPanel = loadVar(data, "debugPanel", false)
 	imagePackOrder = loadVar(data, "imagePackOrder", [])
+	showCharacterArt = loadVar(data, "showCharacterArt", true)
 
 func saveToFile():
 	var saveData = saveData()
