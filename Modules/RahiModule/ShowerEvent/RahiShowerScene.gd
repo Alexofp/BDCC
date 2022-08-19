@@ -8,7 +8,7 @@ func _init():
 
 func _run():
 	if(state == ""):
-		addCharacter("rahi")
+		addCharacter("rahi", ["naked"])
 		GM.main.playAnimation(StageScene.Duo, "stand", {npc="rahi", npcAction="stand"})
 		
 	if(state == ""):

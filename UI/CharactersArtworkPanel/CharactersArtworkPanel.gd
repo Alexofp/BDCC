@@ -31,7 +31,7 @@ func addCharacter(charID:String, variant:Array):
 	
 	var imagePath = Images.getCharacter(charID, variant)
 	if(imagePath == null):
-		imagePath = "res://icon.png"
+		imagePath = "res://Images/UI/GenericFace.png"
 	
 	data["imagePath"] = imagePath
 	

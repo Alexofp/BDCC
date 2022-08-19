@@ -317,6 +317,8 @@ func _run():
 		addButton("Obey", "Put your hands behind your back and close eyes", "obey")
 
 	if(state == "obey"):
+		addCharacter("tavi", ["naked"])
+		
 		saynn("You do as she says. Your eyes are shut, arms are behind the back. You are kneeling before a tall feline that has a grab on your hair. Suddenly she starts tugging you closer, closer to herself. And you give in, leaning forward for your new Miss, until meeting with her covered crotch. She is still wearing the shorts but you still feel the warmness of her body, get her nice female scent.")
 
 		saynn("[say=tavi]Like it, cutie? You like being used like a toy?[/say]")
