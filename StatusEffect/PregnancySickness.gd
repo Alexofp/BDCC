@@ -35,3 +35,11 @@ func getBuffs():
 	return [
 		buff(Buff.AmbientPainBuff, [20.0]),
 	]
+
+func saveData():
+	return {
+		"turns": turns,
+	}
+	
+func loadData(_data):
+	turns = SAVE.loadVar(_data, "turns", 60*60)

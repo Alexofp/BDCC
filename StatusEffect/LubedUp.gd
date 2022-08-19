@@ -39,3 +39,11 @@ func getBuffs():
 		buff(Buff.GenitalElasticityBuff, [300.0]),
 		buff(Buff.GenitalResistanceBuff, [300.0]),
 	]
+
+func saveData():
+	return {
+		"turns": turns,
+	}
+	
+func loadData(_data):
+	turns = SAVE.loadVar(_data, "turns", 60*60)
