@@ -1,6 +1,5 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=9 format=2]
 
-[ext_resource path="res://Images/ImagePacks/Risha/Characters/rahi.png" type="Texture" id=1]
 [ext_resource path="res://UI/CharactersArtworkPanel/CharactersArtworkPanel.gd" type="Script" id=2]
 [ext_resource path="res://Images/ImagePacks/Rahi/Characters/rahi.png" type="Texture" id=3]
 [ext_resource path="res://Fonts/Titillium-Bold.otf" type="DynamicFontData" id=4]
@@ -39,7 +38,7 @@ custom_styles/panel = SubResource( 2 )
 [node name="TextureRect3" type="TextureRect" parent="VBoxContainer2/Control"]
 anchor_right = 0.5
 anchor_bottom = 1.0
-texture = ExtResource( 1 )
+texture = ExtResource( 3 )
 expand = true
 stretch_mode = 6
 

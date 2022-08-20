@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/rahi.png-a7e868535952d9b7e6027907d0c3ee93.stex"
+path="res://.import/risha-naked.png-d68ced61db34c788810aea620b69796d.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Images/ImagePacks/Risha/Characters/rahi.png"
-dest_files=[ "res://.import/rahi.png-a7e868535952d9b7e6027907d0c3ee93.stex" ]
+source_file="res://Images/ImagePacks/Rahi/Characters/risha/risha-naked.png"
+dest_files=[ "res://.import/risha-naked.png-d68ced61db34c788810aea620b69796d.stex" ]
 
 [params]
 

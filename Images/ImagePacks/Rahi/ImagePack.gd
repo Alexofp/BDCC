@@ -9,3 +9,9 @@ func _init():
 
 	addCharacter("tavi", [], "res://Images/ImagePacks/Rahi/Characters/tavi/tavi.png")
 	addCharacter("tavi", ["naked"], "res://Images/ImagePacks/Rahi/Characters/tavi/tavi-naked.png")
+
+	addCharacter("risha", [], "res://Images/ImagePacks/Rahi/Characters/risha/risha.png")
+	addCharacter("risha", ["naked"], "res://Images/ImagePacks/Rahi/Characters/risha/risha-naked.png")
+
+	addCharacter("eliza", [], "res://Images/ImagePacks/Rahi/Characters/eliza/eliza.png")
+	addCharacter("eliza", ["naked"], "res://Images/ImagePacks/Rahi/Characters/eliza/eliza-naked.png")

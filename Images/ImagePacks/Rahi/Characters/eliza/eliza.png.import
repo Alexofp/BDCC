@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/rahi.png-e2649686e32ca03815c1afca53956d67.stex"
+path="res://.import/eliza.png-7f4c4c45a7f120f90981410661b44acf.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Images/ImagePacks/Tavi/Characters/rahi.png"
-dest_files=[ "res://.import/rahi.png-e2649686e32ca03815c1afca53956d67.stex" ]
+source_file="res://Images/ImagePacks/Rahi/Characters/eliza/eliza.png"
+dest_files=[ "res://.import/eliza.png-7f4c4c45a7f120f90981410661b44acf.stex" ]
 
 [params]
 
