@@ -5,7 +5,7 @@ func _init():
 
 func _run():
 	if(state == ""):
-		addCharacter("nova")
+		addCharacter("nova", ["naked"])
 	if(state == ""):
 		saynn("[say=pc]Gonna have my fun with you~[/say]")
 

@@ -5,7 +5,7 @@ func _init():
 
 func _run():
 	if(state == ""):
-		addCharacter("nova")
+		addCharacter("nova", ["naked"])
 
 	if(state == ""):
 		saynn("You come up to Nova and quickly snatch her weapon so she can’t use it against you. You then straddle and pin her to the floor, your hands behind ripping the parts of her armor off.")
