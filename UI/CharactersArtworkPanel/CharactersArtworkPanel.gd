@@ -50,6 +50,7 @@ func removeCharacter(charID:String):
 	var keys = characters.keys()
 	var index = keys.find(currentCharacter)
 	characters.erase(charID)
+	keys = characters.keys()
 	
 	if(characters.size() == 0):
 		currentCharacter = null

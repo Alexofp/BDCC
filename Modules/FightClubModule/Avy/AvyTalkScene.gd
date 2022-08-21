@@ -113,12 +113,12 @@ func _run():
 	if(state == "fight1"):
 		aimCameraAndSetLocName("fight_arena")
 		removeCharacter("avy")
-		addCharacter("announcer")
 		
 		var arenaFighter:FightClubFighter = GlobalRegistry.getFightClubFighter(savedFighterID)
 		
 		GM.main.playAnimation(StageScene.Duo, "stand", {npc=arenaFighter.getFightCharacter()})
 		addCharacter(arenaFighter.getFightCharacter())
+		addCharacter("announcer")
 		
 		saynn("You nod and get into the fighting space by climbing over the fence. The arena itself is just a huge empty square space that’s separated from the crowd with a tall chain-link fence. Over one of the sides there is a balcony where the announcer stands.")
 
