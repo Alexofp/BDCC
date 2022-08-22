@@ -120,7 +120,7 @@ func createBodyparts():
 	breasts.size = 4
 	giveBodypartUnlessSame(breasts)
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("foxhead"))
-	giveBodypartUnlessSame(GlobalRegistry.createBodypart("overeyehair"))
+	giveBodypartUnlessSame(GlobalRegistry.createBodypart("longhair"))
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("canineears"))
 	var penis = GlobalRegistry.createBodypart("caninepenis")
 	penis.lengthCM = 22

@@ -21,3 +21,6 @@ func _init():
 
 	addCharacter("ferri", [], "res://Images/ImagePacks/Rahi/Characters/ferri/ferri.png")
 	addCharacter("ferri", ["naked"], "res://Images/ImagePacks/Rahi/Characters/ferri/ferri-naked.png")
+
+	addCharacter("avy", [], "res://Images/ImagePacks/Rahi/Characters/avy/avy.png")
+	addCharacter("avy", ["naked"], "res://Images/ImagePacks/Rahi/Characters/avy/avy-naked.png")
