@@ -313,3 +313,15 @@ func receivedCreampie(_charID):
 func cameInsideSomeone(_charID):
 	if(npc != null && npc.isPlayer()):
 		npc.addSkillExperience(Skill.CumLover, 50)
+
+func resetPickedPerks():
+	for perkID in perks.keys():
+		var perk : PerkBase = perks[perkID]
+		
+		if(perk.getSkillGroup() == Skill.Start):
+			continue
+			
+		var _ok = perks.erase(perkID)
+
+func resetStats():
+	stats.clear()

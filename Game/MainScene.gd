@@ -583,9 +583,17 @@ func getDebugActions():
 			]
 		},
 		{
+			"id": "resetPCPerks",
+			"name": "Reset picked perks",
+		},	
+		{
+			"id": "resetPCStats",
+			"name": "Reset picked stats",
+		},
+		{
 			"id": "openConsole",
 			"name": "Open console",
-		}
+		},
 	]
 
 func doDebugAction(id, args = {}):
@@ -610,6 +618,13 @@ func doDebugAction(id, args = {}):
 	
 	if(id == "addSkillExp"):
 		GM.pc.addSkillExperience(args["skillID"], args["amount"])
+	
+	if(id == "resetPCPerks"):
+		GM.pc.getSkillsHolder().resetPickedPerks()
+	
+	if(id == "resetPCStats"):
+		GM.pc.getSkillsHolder().resetStats()
+	
 	
 	if(id == "giveItem"):
 		var item:ItemBase = GlobalRegistry.createItem(args["itemID"])
