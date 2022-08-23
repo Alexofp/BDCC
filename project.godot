@@ -267,7 +267,12 @@ _global_script_classes=[ {
 "base": "Object",
 "class": "Flag",
 "language": "GDScript",
-"path": "res://Quests/Flags.gd"
+"path": "res://Game/Flags/Flags.gd"
+}, {
+"base": "Object",
+"class": "FlagType",
+"language": "GDScript",
+"path": "res://Game/Flags/FlagType.gd"
 }, {
 "base": "Container",
 "class": "FlexGridContainer",
@@ -787,6 +792,7 @@ _global_script_class_icons={
 "FightClubModule": "",
 "FightClubRank": "",
 "Flag": "",
+"FlagType": "",
 "FlexGridContainer": "",
 "FluidProduction": "",
 "GameParser": "",

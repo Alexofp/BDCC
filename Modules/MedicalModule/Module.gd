@@ -72,31 +72,31 @@ func _init():
 	]
 
 func resetFlagsOnNewDay():
-	GM.main.setFlag(Med_wasMilkedToday, false)
-	GM.main.setFlag(Mental_CheckupHappened, false)
-	GM.main.setFlag(Mental_ExperimentHappened, false)
-	GM.main.setFlag(Mental_ShowerHappened, false)
-	GM.main.setFlag(Mental_PlayerEscaped, false)
+	GM.main.setFlag("Med_wasMilkedToday", false)
+	GM.main.setFlag("Mental_CheckupHappened", false)
+	GM.main.setFlag("Mental_ExperimentHappened", false)
+	GM.main.setFlag("Mental_ShowerHappened", false)
+	GM.main.setFlag("Mental_PlayerEscaped", false)
 
 static func resetFlagsOnGettingIntoMentalWard():
-	GM.main.setFlag(Mental_PCBehavior, 0.1)
-	GM.main.setFlag(Mental_PCSanity, 0.0)
+	GM.main.setFlag("Mental_PCBehavior", 0.1)
+	GM.main.setFlag("Mental_PCSanity", 0.0)
 	
-	GM.main.setFlag(Mental_ExpObeyDrug, 0)
-	GM.main.setFlag(Mental_ExpTentacles, 0)
-	GM.main.setFlag(Mental_HasKeycard, false)
-	GM.main.setFlag(Mental_PlayerEscaped, false)
+	GM.main.setFlag("Mental_ExpObeyDrug", 0)
+	GM.main.setFlag("Mental_ExpTentacles", 0)
+	GM.main.setFlag("Mental_HasKeycard", false)
+	GM.main.setFlag("Mental_PlayerEscaped", false)
 
 static func addPCBehavior(value):
-	GM.main.setFlag(Mental_PCBehavior, GM.main.getFlag(Mental_PCBehavior, 0.0) + value)
-	if(GM.main.getFlag(Mental_PCBehavior, 0.0) < 0.0):
-		GM.main.setFlag(Mental_PCBehavior, 0.0)
-	if(GM.main.getFlag(Mental_PCBehavior, 0.0) > 1.0):
-		GM.main.setFlag(Mental_PCBehavior, 1.0)
+	GM.main.setFlag("Mental_PCBehavior", GM.main.getFlag("Mental_PCBehavior", 0.0) + value)
+	if(GM.main.getFlag("Mental_PCBehavior", 0.0) < 0.0):
+		GM.main.setFlag("Mental_PCBehavior", 0.0)
+	if(GM.main.getFlag("Mental_PCBehavior", 0.0) > 1.0):
+		GM.main.setFlag("Mental_PCBehavior", 1.0)
 
 static func addPCSanity(value):
-	GM.main.setFlag(Mental_PCSanity, GM.main.getFlag(Mental_PCSanity, 0.0) + value)
-	if(GM.main.getFlag(Mental_PCSanity, 0.0) < 0.0):
-		GM.main.setFlag(Mental_PCSanity, 0.0)
-	if(GM.main.getFlag(Mental_PCSanity, 0.0) > 1.0):
-		GM.main.setFlag(Mental_PCSanity, 1.0)
+	GM.main.setFlag("Mental_PCSanity", GM.main.getFlag("Mental_PCSanity", 0.0) + value)
+	if(GM.main.getFlag("Mental_PCSanity", 0.0) < 0.0):
+		GM.main.setFlag("Mental_PCSanity", 0.0)
+	if(GM.main.getFlag("Mental_PCSanity", 0.0) > 1.0):
+		GM.main.setFlag("Mental_PCSanity", 1.0)

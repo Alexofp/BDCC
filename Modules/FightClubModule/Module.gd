@@ -16,6 +16,19 @@ const FightClubPCRank = "FightClubPCRank"
 const FightClubDefeatedFighters = "FightClubDefeatedFighters"
 const FightClubFirstArenaIntroduction = "FightClubFirstArenaIntroduction"
 
+func getFlags():
+	return {
+		"BulldogFirstTimeHappened": flag(FlagType.Bool),
+		"BulldogSeduced": flag(FlagType.Bool),
+		"BulldogBeatenUp": flag(FlagType.Bool),
+		"BulldogBypassed": flag(FlagType.Bool),
+		"AnnouncerIntroduced": flag(FlagType.Bool),
+		"AvyIntroduced": flag(FlagType.Bool),
+		"FightClubPCRank": flag(FlagType.Text),
+		"FightClubDefeatedFighters": flag(FlagType.Dict),
+		"FightClubFirstArenaIntroduction": flag(FlagType.Bool),
+	}
+
 func _init():
 	id = "FightClubModule"
 	author = "Rahi"

@@ -8,9 +8,10 @@ var events = []
 var quests = []
 var id = "badmodule"
 var author = "no author"
+var flagsCache = null
 
 func _init():
-	pass
+	flagsCache = getFlags()
 
 func register():
 	for scene in scenes:
@@ -42,3 +43,14 @@ func increaseFlag(flagID, addvalue = 1):
 
 func getRandomSceneFor(_sceneType):
 	return []
+
+func getFlags():
+	return {}
+	
+func getFlagsCache():
+	return flagsCache
+
+func flag(type):
+	return {
+		"type": type,
+	}

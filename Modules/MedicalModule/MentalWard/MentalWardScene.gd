@@ -102,8 +102,8 @@ func _run():
 func _react(_action: String, _args):
 	if(_action == "afterrest"):
 		# Random scene checks
-		if(!getFlag(MedicalModule.Mental_CheckupHappened, false) && GM.main.getTime() >= 9*60*60):
-			setFlag(MedicalModule.Mental_CheckupHappened, true)
+		if(!getFlag("Mental_CheckupHappened", false) && GM.main.getTime() >= 9*60*60):
+			setFlag("Mental_CheckupHappened", true)
 			
 			if(isPCWearingAStraitjacket()):
 				if(getFlag(MedicalModule.Mental_PCSanity, 0.0) >= 1.0):

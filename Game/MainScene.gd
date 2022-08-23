@@ -8,6 +8,7 @@ var logMessages: Array = []
 var currentDay = 0
 var timeOfDay = 6*60*60 # seconds since 00:00
 var flags = {}
+var flagsCache = null
 var moduleFlags = {}
 var playerScene = preload("res://Player/Player.tscn")
 var overridenPC
@@ -18,6 +19,7 @@ signal time_passed(_secondsPassed)
 
 func _init():
 	GlobalRegistry.recreateCharacters()
+	flagsCache = Flag.getFlags()
 
 func overridePC():
 	if(overridenPC != null):
@@ -330,6 +332,16 @@ func getDays():
 	return currentDay
 
 func setFlag(flagID, value):
+	if(!flagsCache.has(flagID)):
+		Log.printerr("setFlag(): Detected the usage of an unknown flag: "+str(flagID)+" "+Util.getStackFunction())
+		return
+	
+	if("type" in flagsCache[flagID]):
+		var flagType = flagsCache[flagID]["type"]
+		if(!FlagType.isCorrectType(flagType, value)):
+			Log.printerr("setFlag(): Wrong type for flag "+str(flagID)+". Value: "+str(value)+" "+Util.getStackFunction())
+			return
+			
 	flags[flagID] = value
 
 func clearFlag(flagID):
@@ -341,6 +353,10 @@ func increaseFlag(flagID, addvalue = 1):
 	flags[flagID] += addvalue
 
 func getFlag(flagID, defaultValue = null):
+	if(!flagsCache.has(flagID)):
+		Log.printerr("getFlag(): Detected the usage of an unknown flag: "+str(flagID)+" "+Util.getStackFunction())
+		return defaultValue
+	
 	if(!flags.has(flagID)):
 		return defaultValue
 	

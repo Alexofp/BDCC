@@ -685,6 +685,9 @@ func getDebugActions():
 	]
 
 func doDebugAction(_id, _args = {}):
+	if(_id == "instantWin"):
+		enemyCharacter.addLust(enemyCharacter.lustThreshold())
+		GM.main.pickOption("wait", [])
 	if(_id == "healEnemy"):
 		enemyCharacter.addPain(-enemyCharacter.painThreshold())
 		enemyCharacter.addLust(-enemyCharacter.lustThreshold())

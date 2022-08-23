@@ -1,0 +1,98 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://UI/DebugUI/FlagEditWindow.gd" type="Script" id=1]
+
+[node name="FlagEditWindow" type="WindowDialog"]
+visible = true
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -205.5
+margin_top = -87.5
+margin_right = 205.5
+margin_bottom = 87.5
+window_title = "Editing a flag"
+resizable = true
+script = ExtResource( 1 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer"]
+margin_right = 411.0
+margin_bottom = 151.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/ScrollContainer"]
+margin_right = 411.0
+margin_bottom = 151.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="FlagLabel" type="Label" parent="VBoxContainer/ScrollContainer/VBoxContainer"]
+margin_right = 411.0
+margin_bottom = 14.0
+text = "FLAG NAME"
+align = 1
+
+[node name="CurrentValueLabel" type="Label" parent="VBoxContainer/ScrollContainer/VBoxContainer"]
+margin_top = 18.0
+margin_right = 411.0
+margin_bottom = 32.0
+text = "Current Value = 123"
+clip_text = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/ScrollContainer/VBoxContainer"]
+margin_top = 36.0
+margin_right = 411.0
+margin_bottom = 151.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="SpinBox" type="SpinBox" parent="VBoxContainer/ScrollContainer/VBoxContainer/VBoxContainer"]
+margin_right = 411.0
+margin_bottom = 24.0
+step = 0.01
+allow_greater = true
+allow_lesser = true
+
+[node name="LineEdit" type="LineEdit" parent="VBoxContainer/ScrollContainer/VBoxContainer/VBoxContainer"]
+margin_top = 28.0
+margin_right = 411.0
+margin_bottom = 52.0
+
+[node name="CheckBox" type="CheckBox" parent="VBoxContainer/ScrollContainer/VBoxContainer/VBoxContainer"]
+margin_top = 56.0
+margin_right = 411.0
+margin_bottom = 80.0
+text = "New value"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 155.0
+margin_right = 411.0
+margin_bottom = 175.0
+
+[node name="ChangeFlagButton" type="Button" parent="VBoxContainer/HBoxContainer"]
+margin_right = 202.0
+margin_bottom = 20.0
+size_flags_horizontal = 3
+text = "Change flag"
+
+[node name="ClearFlag" type="Button" parent="VBoxContainer/HBoxContainer"]
+margin_left = 206.0
+margin_right = 353.0
+margin_bottom = 20.0
+text = "Clear flag (set to null)"
+
+[node name="CancelButton" type="Button" parent="VBoxContainer/HBoxContainer"]
+margin_left = 357.0
+margin_right = 411.0
+margin_bottom = 20.0
+text = "Cancel"
+
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/ChangeFlagButton" to="." method="_on_ChangeFlagButton_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/ClearFlag" to="." method="_on_ClearFlag_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/CancelButton" to="." method="_on_CancelButton_pressed"]
