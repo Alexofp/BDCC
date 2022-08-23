@@ -591,6 +591,10 @@ func getDebugActions():
 			"name": "Reset picked stats",
 		},
 		{
+			"id": "characterCreator",
+			"name": "Open character creator",
+		},
+		{
 			"id": "openConsole",
 			"name": "Open console",
 		},
@@ -625,6 +629,9 @@ func doDebugAction(id, args = {}):
 	if(id == "resetPCStats"):
 		GM.pc.getSkillsHolder().resetStats()
 	
+	if(id == "characterCreator"):
+		GM.ES.clearDelayedEvents()
+		runScene("CharacterCreatorScene", [true])
 	
 	if(id == "giveItem"):
 		var item:ItemBase = GlobalRegistry.createItem(args["itemID"])

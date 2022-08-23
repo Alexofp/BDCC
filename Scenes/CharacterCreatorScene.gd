@@ -4,6 +4,12 @@ var pickingBodypartType = BodypartSlot.Legs
 var pickedFirstSpeciesHybrid = ""
 var pickedAttribID = ""
 var bodyPickedAttribID = ""
+var debugMode = false
+
+func _initScene(_args = []):
+	if(_args.size() > 0 && _args[0]):
+		debugMode = true
+		state = "pickedspecies"
 
 func _init():
 	sceneID = "CharacterCreatorScene"
@@ -27,7 +33,6 @@ func _run():
 		addButton("back", "Back to picking gender", "pickgender")
 
 	if(state == "pickspecies"):
-		GM.main.playAnimation(StageScene.Solo, "stand", {exposedBodyparts=[BodypartSlot.Body]})
 		say("Pick your character's species")
 		var allSpecies = GlobalRegistry.getAllPlayableSpecies()
 		for speciesID in allSpecies:
@@ -60,6 +65,8 @@ func _run():
 		addButton("back", "Back", "pickhybrid1")
 
 	if(state == "pickedspecies"):
+		GM.main.playAnimation(StageScene.Solo, "stand", {exposedBodyparts=[BodypartSlot.Body]})
+		
 		say("You are a "+GM.pc.getSpeciesFullName())
 		say("\n----\n")
 		
@@ -109,9 +116,12 @@ func _run():
 				saynn("You have {pc.aTail}")
 			saynn("Your body shape is {pc.thick}, you look {pc.feminine}")
 			
-
-		addButton("back", "Back to picking species", "pickspecies")
-
+		
+		if(!debugMode):
+			addButton("back", "Back to picking species", "pickspecies")
+		else:
+			addButton("Change species", "! This will override all the bodyparts !", "pickspecies")
+		
 	if(state == "pickbodypart"):
 		saynn("Choose the bodypart or change the attributes of the current one")
 		
@@ -303,6 +313,7 @@ func saveData():
 	data["pickedFirstSpeciesHybrid"] = pickedFirstSpeciesHybrid
 	data["pickedAttribID"] = pickedAttribID
 	data["bodyPickedAttribID"] = bodyPickedAttribID
+	data["debugMode"] = debugMode
 	
 	return data
 	
@@ -313,3 +324,4 @@ func loadData(data):
 	pickedFirstSpeciesHybrid = SAVE.loadVar(data, "pickedFirstSpeciesHybrid", "")
 	pickedAttribID = SAVE.loadVar(data, "pickedAttribID", "")
 	bodyPickedAttribID = SAVE.loadVar(data, "bodyPickedAttribID", "")
+	debugMode = SAVE.loadVar(data, "debugMode", false)
