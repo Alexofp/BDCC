@@ -9,6 +9,7 @@ var currentUniqueID = 0
 var currentChildUniqueID = 0
 
 var scenes: Dictionary = {}
+var sceneCreators: Dictionary = {}
 var bodyparts: Dictionary = {}
 var characters: Dictionary = {}
 var characterClasses: Dictionary = {}
@@ -263,7 +264,7 @@ func generateChildUniqueID():
 func getGameVersionString():
 	return str(game_version_major)+"."+str(game_version_minor)+"."+str(game_version_revision)+str(game_version_suffix)
 
-func registerScene(path: String):
+func registerScene(path: String, creator = null):
 	var scene = load(path)
 	if(!scene):
 		Log.printerr("ERROR: couldn't load scene from path "+path)
@@ -271,6 +272,13 @@ func registerScene(path: String):
 	var sceneObject = scene.new()
 	scenes[sceneObject.sceneID] = scene
 	sceneObject.queue_free()
+	if(creator != null):
+		sceneCreators[sceneObject.sceneID] = creator
+
+func getSceneCreator(id: String):
+	if(!sceneCreators.has(id)):
+		return null
+	return sceneCreators[id]
 
 func createScene(id: String):
 	if(!scenes.has(id)):

@@ -18,6 +18,7 @@ var requireDoubleTapOnMobile = false
 var showSpeakerName = false
 var fontSize = "normal"
 var showShortcuts = true
+var showSceneCreator = true
 
 var measurementUnits = "metric"
 
@@ -42,6 +43,7 @@ func resetToDefaults():
 	debugPanel = false
 	imagePackOrder = []
 	showCharacterArt = true
+	showSceneCreator = true
 	
 	enabledContent.clear()
 	for contentType in ContentType.getAll():
@@ -98,6 +100,9 @@ func isDebugPanelEnabled():
 
 func shouldShowCharacterArt():
 	return showCharacterArt
+
+func shouldShowSceneCreator():
+	return showSceneCreator
 
 func getChangeableOptions():
 	var settings = [
@@ -292,6 +297,13 @@ func getChangeableOptions():
 					"value": "",
 					"values": imagePackOrder,
 				},
+				{
+					"name": "Show scene creator",
+					"description": "Displays a 'scene by' text with the author's name under the minimap",
+					"id": "showSceneCreator",
+					"type": "checkbox",
+					"value": showSceneCreator,
+				},
 			],
 		},
 		{
@@ -360,6 +372,8 @@ func applyOption(categoryID, optionID, value):
 			requireDoubleTapOnMobile = value
 		if(optionID == "showCharacterArt"):
 			showCharacterArt = value
+		if(optionID == "showSceneCreator"):
+			showSceneCreator = value
 		
 	if(categoryID == "render"):
 		if(optionID == "renderer"):
@@ -401,6 +415,7 @@ func saveData():
 		"debugPanel": debugPanel,
 		"imagePackOrder": imagePackOrder,
 		"showCharacterArt": showCharacterArt,
+		"showSceneCreator": showSceneCreator,
 	}
 	
 	return data
@@ -421,6 +436,7 @@ func loadData(data):
 	debugPanel = loadVar(data, "debugPanel", false)
 	imagePackOrder = loadVar(data, "imagePackOrder", [])
 	showCharacterArt = loadVar(data, "showCharacterArt", true)
+	showSceneCreator = loadVar(data, "showSceneCreator", true)
 
 func saveToFile():
 	var saveData = saveData()

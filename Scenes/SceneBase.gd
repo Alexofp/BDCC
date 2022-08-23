@@ -67,6 +67,7 @@ func run():
 		character.updateNonBattleEffects()
 	GM.ui.getCharactersPanel().updateStatuses()
 	GM.ui.updateCharacterInPanel()
+	GM.ui.setSceneCreator(getSceneCreator())
 	
 	checkSceneEnded()
 		
@@ -285,6 +286,13 @@ func getDebugActions():
 
 func doDebugAction(_id, _args = {}):
 	pass
+
+func getSceneCreator():
+	var registryCreator = GlobalRegistry.getSceneCreator(sceneID)
+	
+	if(registryCreator != null && registryCreator != ""):
+		return str(registryCreator)
+	return null
 
 func saveData():
 	var data = {}

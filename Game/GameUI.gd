@@ -192,6 +192,9 @@ func _on_PrevPageButton_pressed():
 func setLocationName(locname: String):
 	mapAndTimePanel.setLocationName(locname)
 
+func setSceneCreator(sceneCreator):
+	mapAndTimePanel.setSceneCreator(sceneCreator)
+
 func setCharacterPanelVisible(vis: bool):
 	characterPanel.visible = vis
 

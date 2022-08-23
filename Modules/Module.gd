@@ -14,7 +14,7 @@ func _init():
 
 func register():
 	for scene in scenes:
-		GlobalRegistry.registerScene(scene)
+		GlobalRegistry.registerScene(scene, author)
 	
 	for character in characters:
 		GlobalRegistry.registerCharacter(character)
