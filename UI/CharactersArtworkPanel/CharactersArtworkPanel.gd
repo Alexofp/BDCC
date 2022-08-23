@@ -29,11 +29,17 @@ func clear():
 func addCharacter(charID:String, variant:Array):
 	var data = {}
 	
-	var imagePath = Images.getCharacter(charID, variant)
-	if(imagePath == null):
+	var imageArtist = null
+	var imagePath = null
+	var imageData = Images.getCharacter(charID, variant)
+	if(imageData == null):
 		imagePath = "res://Images/UI/GenericFace.png"
+	else:
+		imagePath = imageData[0]
+		imageArtist = imageData[1]
 	
 	data["imagePath"] = imagePath
+	data["imageArtist"] = imageArtist
 	
 	characters[charID] = data
 	
@@ -143,6 +149,13 @@ func _on_NameLabel_mouse_entered():
 	if(character == null):
 		return
 		
+	if(characters.has(currentCharacter)):
+		var charData = characters[currentCharacter]
+		
+		if(charData.has("imageArtist") && charData["imageArtist"]):
+			GlobalTooltip.showTooltip(character.getName() + ", " + character.getSpeciesFullName(), character.getSmallDescription()+"\n\n[i]Art drawn by "+str(charData["imageArtist"])+"[/i]", true)
+			return
+	
 	GlobalTooltip.showTooltip(character.getName() + ", " + character.getSpeciesFullName(), character.getSmallDescription(), true)
 
 

@@ -10,6 +10,6 @@ static func getCharacter(characterID: String, variant: Array):
 			continue
 		var imagePath = pack.getCharacterImage(characterID, variant)
 		if(imagePath != null):
-			return imagePath
+			return [imagePath, pack.getArtist()]
 		
 	return null
