@@ -3,6 +3,11 @@ extends "res://Scenes/SceneBase.gd"
 func _init():
 	sceneID = "AnnouncerTalkScene"
 
+func _reactInit():
+	if(GM.ES.triggerReact(Trigger.TalkingToNPC, ["announcer"])):
+		endScene()
+		return
+
 func _run():
 	if(state == ""):
 		addCharacter("announcer")
@@ -15,6 +20,7 @@ func _run():
 
 		addButton("Talk", "Ask him some questions", "talk")
 		addButton("Leave", "Enough talking", "endthescene")
+		GM.ES.triggerRun(Trigger.TalkingToNPC, ["announcer"])
 
 	if(state == "talk"):
 		saynn("[say=pc]Just wanted to talk, ask some things.[/say]")

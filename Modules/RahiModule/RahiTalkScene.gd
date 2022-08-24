@@ -3,6 +3,11 @@ extends "res://Scenes/SceneBase.gd"
 func _init():
 	sceneID = "RahiTalkScene"
 
+func _reactInit():
+	if(GM.ES.triggerReact(Trigger.TalkingToNPC, ["rahi"])):
+		endScene()
+		return
+
 func _run():
 	if(state == ""):
 		addCharacter("rahi")
@@ -70,6 +75,7 @@ func _run():
 			else:
 				addDisabledButton("Offer apple", "You need an apple for this")
 		addButton("Leave", "Do something else", "endthescene")
+		GM.ES.triggerRun(Trigger.TalkingToNPC, ["rahi"])
 		
 	if(state == "appearance"):
 		saynn("You see a 1.6m feline girl with a ponytail and a pair of cute cat ears on top of her head. Brown-colored fur covers her body with her belly and maw being of a slightly lighter color. She has long white whiskers and blue eyes that she uses to mostly look down. Behind her is a feline tail that seems to have a mind of its own. Her uniform spots an orange trim and has a number P-12406 attached to it. Wrists and ankles are weighted down by the bulky cuffs and her neck has an inmate collar, the same one that you are wearing. She doesn’t seem particularly strong, the curves of her body are feminine and her body proportions seem of a pretty average housecat, not too slim and not too thick.")

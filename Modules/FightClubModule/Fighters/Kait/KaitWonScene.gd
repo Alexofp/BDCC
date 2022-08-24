@@ -32,6 +32,7 @@ func _run():
 		addDisabledButton("Join", "Begin the Team Escape route (not done, sorry)")
 		addButton("Just leave", "You don’t feel like doing anything with her", "just_leave")
 		addButton("Beat her up", "(brutal noncon) She is just a lilac slut, no need to listen to her", "beat_her_up")
+		GM.ES.triggerRun("ArenaFighterPCWon", ["kait"])
 
 	if(state == "just_leave"):
 		saynn("[say=pc]Your idea seems pretty bad. Look around. It’s a fortress. Just learn to live here.[/say]")

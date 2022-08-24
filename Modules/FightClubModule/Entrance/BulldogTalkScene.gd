@@ -3,6 +3,11 @@ extends "res://Scenes/SceneBase.gd"
 func _init():
 	sceneID = "BulldogTalkScene"
 
+func _reactInit():
+	if(GM.ES.triggerReact(Trigger.TalkingToNPC, ["bulldog"])):
+		endScene()
+		return
+
 func _run():
 	if(state == ""):
 		addCharacter("bulldog")
@@ -18,6 +23,7 @@ func _run():
 		else:
 			addDisabledButton("Sex?", "You already seduced him..")
 		addButton("Leave", "You don't feel like talking", "endthescene")
+		GM.ES.triggerRun(Trigger.TalkingToNPC, ["bulldog"])
 
 	if(state == "pay"):
 		saynn("[say=pc]How much was it again?[/say]")

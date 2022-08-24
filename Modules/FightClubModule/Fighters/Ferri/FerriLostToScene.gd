@@ -20,6 +20,7 @@ func _run():
 		saynn("Judging from Ferri’s tone, she almost sounds disappointed. She lets go of your neck and straddles you, wondering about what she should do with you.")
 
 		addButton("Get teased", "See what happens next", "get_teased")
+		GM.ES.triggerRun("ArenaFighterPCLost", ["ferri"])
 
 	if(state == "get_teased"):
 		saynn("Ferri slides her paws teasingly over your {pc.masc} curves. Soft purring can be heard from her maw as she reaches your {pc.breasts} and then gives them a smack! Ow, you arch your back but she pins you back to the ground. The crowd behind the fence cheers for more fucking but the dracat’s plans are different.")

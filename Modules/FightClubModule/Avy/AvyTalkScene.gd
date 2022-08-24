@@ -5,6 +5,11 @@ var savedFighterID = ""
 func _init():
 	sceneID = "AvyTalkScene"
 
+func _reactInit():
+	if(GM.ES.triggerReact(Trigger.TalkingToNPC, ["avy"])):
+		endScene()
+		return
+
 func _run():
 	if(state == ""):
 		addCharacter("avy")
@@ -71,6 +76,7 @@ func _run():
 		addDisabledButton("Fight Avy", "Final arena fight not implemented yet")
 		addButton("Rematch", "Fight one of your defeated opponents again", "rematchmenu")
 		addButton("Leave", "Gotta go", "endthescene")
+		GM.ES.triggerRun(Trigger.TalkingToNPC, ["avy"])
 
 	if(state == "rematchmenu"):
 		saynn("Who do you wanna rematch?")

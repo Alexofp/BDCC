@@ -58,6 +58,7 @@ func _run():
 		else:
 			addDisabledButton("Get pissed on", "(Watersports content is disabled) You would rather suffer the consequences")
 		addButton("Get marked", "Get Kait’s scent on you but not in a gross way", "get_marked")
+		GM.ES.triggerRun("ArenaFighterPCLost", ["kait"])
 
 	if(state == "get_pissed_on"):
 		# (piss version)

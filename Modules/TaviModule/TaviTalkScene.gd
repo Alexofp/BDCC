@@ -3,6 +3,11 @@ extends "res://Scenes/SceneBase.gd"
 func _init():
 	sceneID = "TaviTalkScene"
 
+func _reactInit():
+	if(GM.ES.triggerReact(Trigger.TalkingToNPC, ["tavi"])):
+		endScene()
+		return
+
 func _run():
 	if(state == ""):
 		addCharacter("tavi")
@@ -49,6 +54,7 @@ func _run():
 				addButton("What now", "Ask Tavi what now", "quest2start")
 		
 		addButton("Leave", "Do something else", "endthescene")
+		GM.ES.triggerRun(Trigger.TalkingToNPC, ["tavi"])
 		
 	if(state == "appearance"):
 		saynn("You see a very tall feline, about 2 meters high. Her most unique thing is her fur, it’s of a strange purple color bundled together with bright green spots and lines, which make her very visible in the dark, purple of her belly and maw areas are more light than the rest. She has side swept hair, length is medium, barely reaching her shoulder. The hair is purple as well with a few hair strands behind green. Her eyes are different in color, right one is red and left is green. You can see that the inside of her ears, mouth and tongue are all toxic-green, meaning that that’s the color of her flesh and blood. She seems pretty fit but you don’t spot any pronounced muscles, looks like most of her strength is focused in her legs, the femine hips look curvy. Behind her is a normal feline tail.")

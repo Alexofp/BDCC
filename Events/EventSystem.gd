@@ -9,6 +9,9 @@ func _ready():
 	
 	# Default event triggers
 	registerEventTrigger(Trigger.EnteringRoom, LocationEventTrigger.new())
+	registerEventTrigger(Trigger.TalkingToNPC, LocationEventTrigger.new())
+	registerEventTrigger(Trigger.CaughtStealingInGreenhouse, WeightedEventTrigger.new())
+	registerEventTrigger(Trigger.CaughtOffLimits, WeightedEventTrigger.new())
 	
 	var modules = GlobalRegistry.getModules()
 	for moduleID in modules:

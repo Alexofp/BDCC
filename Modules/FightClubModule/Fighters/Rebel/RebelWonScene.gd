@@ -19,6 +19,7 @@ func _run():
 
 		addButton("Just leave", "She fought well, no need to humiliate her", "just_leave")
 		addButton("Fisting", "She wanted to fist you. Might as well repay her the favor", "fisting")
+		GM.ES.triggerRun("ArenaFighterPCWon", ["rebel"])
 
 
 	if(state == "just_leave"):

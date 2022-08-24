@@ -3,6 +3,11 @@ extends "res://Scenes/SceneBase.gd"
 func _init():
 	sceneID = "NovaTalkScene"
 
+func _reactInit():
+	if(GM.ES.triggerReact(Trigger.TalkingToNPC, ["nova"])):
+		endScene()
+		return
+
 func _run():
 	if(state == ""):
 		addCharacter("nova")
@@ -65,8 +70,7 @@ func _run():
 		else:
 			addDisabledButton("Lewd", "Can't offer yourself to Nova while she is pregnant")
 		addButton("Leave", "Time to go", "endthescene")
-		
-
+		GM.ES.triggerRun(Trigger.TalkingToNPC, ["nova"])
 
 
 	if(state == "appearance"):

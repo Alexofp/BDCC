@@ -20,6 +20,7 @@ func _run():
 		saynn("Mommy? What is she talking about.")
 
 		addButton("Get fucked", "See what happens next", "get_fucked")
+		GM.ES.triggerRun("ArenaFighterPCLost", ["nova"])
 
 	if(state == "get_fucked"):
 		saynn("[say=pc]I won’t call you anything, do your worst![/say]")

@@ -17,6 +17,7 @@ func _run():
 
 		addButtonWithChecks("Offer a condom", "(oral) Maybe the horsie won’t breed you raw", "offer_a_condom", [], [ButtonChecks.HasCondoms])
 		addButton("Breeding", "See what happens next..", "breeding")
+		GM.ES.triggerRun("ArenaFighterPCLost", ["jack"])
 
 	if(state == "offer_a_condom"):
 		# (needs a condom)

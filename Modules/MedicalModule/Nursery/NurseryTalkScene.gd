@@ -6,6 +6,11 @@ var bornChildString = ""
 func _init():
 	sceneID = "NurseryTalkScene"
 
+func _reactInit():
+	if(GM.ES.triggerReact(Trigger.TalkingToNPC, ["nurse"])):
+		endScene()
+		return
+
 func _run():
 	if(state == ""):
 		GM.main.playAnimation(StageScene.Duo, "sit", {pc = "nurse", npc="pc", npcAction="stand"})
@@ -63,6 +68,7 @@ func _run():
 			addDisabledButton("Give birth", "You need to be pregnant to do that")
 			
 		addButton("Leave", "Time to go", "endthescene")
+		GM.ES.triggerRun(Trigger.TalkingToNPC, ["nurse"])
 
 	if(state == "how_works"):
 		setFlag(MedicalModule.Nursery_AskedHowWorks, true)

@@ -3,6 +3,11 @@ extends "res://Scenes/SceneBase.gd"
 func _init():
 	sceneID = "ElizaTalkScene"
 
+func _reactInit():
+	if(GM.ES.triggerReact(Trigger.TalkingToNPC, ["eliza"])):
+		endScene()
+		return
+
 func _run():
 	if(state == ""):
 		addCharacter("eliza")
@@ -49,6 +54,7 @@ func _run():
 		else:
 			addDisabledButton("Milking", "Talk about it with Eliza first")
 		addButton("Leave", "Do something else", "endthescene")
+		GM.ES.triggerRun(Trigger.TalkingToNPC, ["eliza"])
 		
 	if(state == "appearance"):
 		saynn("Doctor Quinn looks like your typical doctor, she is pretty tall for a feline, about 1.8 meters tall, her fur is of a pastel yellow color with some white and pink accents. Her long hair is made into a ponytail. She is wearing glasses and a white labcoat with her badge attached to it. Under it you can spot a green top and a black knee length skirt. You do spot her wearing some dark transparent tights. She seems to be carrying quite a bit of equipment in her pockets and on her belt, mostly medical stuff but also a shock remote.")

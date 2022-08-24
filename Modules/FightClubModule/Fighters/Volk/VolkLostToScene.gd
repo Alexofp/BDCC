@@ -22,6 +22,7 @@ func _run():
 		saynn("[say=volk]You were right to be afraid though, suka..[/say]")
 
 		addButton("Weapon play", "See what happens next", "weapon_play")
+		GM.ES.triggerRun("ArenaFighterPCLost", ["volk"])
 
 	if(state == "weapon_play"):
 		saynn("[say=pc]What do you want?[/say]")

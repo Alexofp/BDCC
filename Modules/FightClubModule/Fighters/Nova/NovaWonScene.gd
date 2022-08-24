@@ -21,6 +21,7 @@ func _run():
 
 		addButton("Leave", "Nova suffered enough", "leave")
 		addButton("Power suit", "Her suit seems to be quite advanced, maybe it has some hidden functions", "power_suit")
+		GM.ES.triggerRun("ArenaFighterPCWon", ["nova"])
 
 	if(state == "leave"):
 		saynn("[say=pc]Consider yourself lucky, I’m not gonna fuck you.[/say]")

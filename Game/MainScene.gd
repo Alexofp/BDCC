@@ -128,6 +128,11 @@ func getCurrentScene():
 		return sceneStack.back()
 	return null
 
+func endCurrentScene():
+	var currentScene = getCurrentScene()
+	if(currentScene != null):
+		currentScene.endScene()
+
 func _on_GameUI_on_option_button(method, args):
 	pickOption(method, args)
 	

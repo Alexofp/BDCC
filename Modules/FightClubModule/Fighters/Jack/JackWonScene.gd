@@ -23,6 +23,7 @@ func _run():
 		addButton("Leave", "You won and that all that matters", "leave")
 		addButtonWithChecks("Vaginal", "Ride him using your pussy", "vaginal", [], [ButtonChecks.HasReachableVagina])
 		addButton("Anal", "Ride him while taking his cock up your butt", "anal")
+		GM.ES.triggerRun("ArenaFighterPCWon", ["jack"])
 
 
 	if(state == "leave"):

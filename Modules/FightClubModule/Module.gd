@@ -101,6 +101,10 @@ func register():
 	GlobalRegistry.registerFightClubFighter("res://Modules/FightClubModule/Fighters/Jack/JackFighter.gd")
 	GlobalRegistry.registerFightClubFighter("res://Modules/FightClubModule/Fighters/Avy/AvyFighter.gd")
 
+func registerEventTriggers():
+	GM.ES.registerEventTrigger("ArenaFighterPCLost", LocationEventTrigger.new())
+	GM.ES.registerEventTrigger("ArenaFighterPCWon", LocationEventTrigger.new())
+
 func resetFlagsOnNewDay():
 	pass
 

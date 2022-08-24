@@ -20,6 +20,7 @@ func _run():
 		saynn("The audience blows up with even louder yells and cheering. Seems like she won’t ask for your opinion on the matter. It’s not like you can do anything about that, you’re busy panting and catching your breath.")
 
 		addButton("Get fisted", "See what happens next..", "get_fisted")
+		GM.ES.triggerRun("ArenaFighterPCLost", ["rebel"])
 
 	if(state == "get_fisted"):
 		saynn("The giant buff mare directs her attention to you and puts on an evil smile. You try to brace and cover yourself with your hands but she easily picks your whole body up like it’s nothing and carries you to the middle of the arena.")

@@ -33,6 +33,7 @@ func _run():
 
 		addButton("Spare", "You don’t feel like humiliating him", "spare")
 		addButton("Humiliate", "That’s a nice chastity cage he has. You wonder if it will fit on him", "humiliate")
+		GM.ES.triggerRun("ArenaFighterPCWon", ["axis"])
 
 	if(state == "spare"):
 		saynn("[say=pc]Fine. You can stay alpha if you need it so much.[/say]")

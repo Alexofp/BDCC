@@ -21,7 +21,7 @@ func _run():
 
 		addButtonWithChecks("Power bottom", "See what happens to you", "power_bottom", [], [ButtonChecks.HasReachablePenis])
 		addButton("He cums on you", "See what happens", "he_cums_on_you")
-
+		GM.ES.triggerRun("ArenaFighterPCLost", ["rubi"])
 
 	if(state == "power_bottom"):
 		# (if has cock)
