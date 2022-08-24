@@ -59,3 +59,9 @@ func loadData(data):
 	
 	savedText = SAVE.loadVar(data, "savedText", "")
 	uniqueItemID = SAVE.loadVar(data, "uniqueItemID", "")
+
+func resolveCustomCharacterName(_charID):
+	if(_charID == "attacker"):
+		return "pc"
+	
+	return null

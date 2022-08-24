@@ -233,8 +233,9 @@ func _react(_action: String, _args):
 		setState("fighting")
 		beforeTurnChecks()
 		
+		setPlayerAsAttacker()
 		var item = _args[0]
-		whatPlayerDid += item.useInCombatWithBuffs(GM.pc, enemyCharacter)
+		whatPlayerDid += GM.ui.processString(item.useInCombatWithBuffs(GM.pc, enemyCharacter))
 		whatEnemyDid += aiTurn()
 
 		afterTurnChecks()
