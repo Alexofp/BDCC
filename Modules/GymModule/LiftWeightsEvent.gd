@@ -6,17 +6,8 @@ func _init():
 func registerTriggers(es):
 	es.addTrigger(self, Trigger.EnteringRoom, "gym_weights")
 
-func shouldRun():
-	return true
-
-func run(_args):
-	pass
-	
-func delayedRun():
+func run(_triggerID, _args):
 	addButtonUnlessLate("Lift weights", "Approach one of the benches", "benches")
-
-func shouldInterupt():
-	return false
 
 func getPriority():
 	return 0

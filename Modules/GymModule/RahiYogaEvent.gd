@@ -6,13 +6,10 @@ func _init():
 func registerTriggers(es):
 	es.addTrigger(self, Trigger.ApproachedYogaMats)
 
-func shouldRun():
-	return getFlag(RahiModule.Rahi_Introduced)
-
-func run(_args):
-	pass
+func run(_triggerID, _args):
+	if(!getFlag(RahiModule.Rahi_Introduced)):
+		return
 	
-func delayedRun():
 	if(GM.main.getTime() <= 7*60*60):
 		saynn("You notice a familliar kitty doing yoga")		
 		
@@ -20,8 +17,6 @@ func delayedRun():
 	else:
 		addDisabledButton("Rahi", "Visit during early morning")
 
-func shouldInterupt():
-	return false
 
 func getPriority():
 	return 0

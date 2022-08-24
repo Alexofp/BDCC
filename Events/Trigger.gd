@@ -1,17 +1,12 @@
 extends Object
 class_name Trigger
 
-enum {
-	EnteringRoom,
-	TakingAShower,
-	EatingInCanteen,
-	WorkingInMines,
-	WakeUpInCell,
-	CaughtOffLimits,
-	CaughtStealingInGreenhouse,
-	StocksEscape,
-	StocksEvent,
-	StocksWillingSex,
-	ApproachedYogaMats,
-	ApproachedWeightsBench,
-}
+const EnteringRoom = "EnteringRoom"
+const TakingAShower = "TakingAShower"
+const EatingInCanteen = "EatingInCanteen"
+const WorkingInMines = "WorkingInMines"
+const WakeUpInCell = "WakeUpInCell"
+const CaughtOffLimits = "CaughtOffLimits"
+const CaughtStealingInGreenhouse = "CaughtStealingInGreenhouse"
+const ApproachedYogaMats = "ApproachedYogaMats"
+const ApproachedWeightsBench = "ApproachedWeightsBench"

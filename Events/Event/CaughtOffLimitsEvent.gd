@@ -6,25 +6,16 @@ func _init():
 func registerTriggers(es):
 	es.addTrigger(self, Trigger.EnteringRoom)
 
-func shouldRun():
-	
+func react(_triggerID, _args):
 	if(GM.world.getRoomByID(GM.pc.getLocation()).loctag_Greenhouses):
-		return RNG.chance(30 + 10.0*GM.pc.getExposure())
+		if(RNG.chance(30 + 10.0*GM.pc.getExposure())):
+			return GM.ES.triggerReact(Trigger.CaughtOffLimits)
 		
 	if(GM.world.getRoomByID(GM.pc.getLocation()).loctag_GuardsEncounter):
-		return RNG.chance(30 + 10.0*GM.pc.getExposure())
+		if(RNG.chance(30 + 10.0*GM.pc.getExposure())):
+			return GM.ES.triggerReact(Trigger.CaughtOffLimits)
 		
-	return false
-
-func run(_args):
-	return GM.ES.trigger(Trigger.CaughtOffLimits)
-	
-func delayedRun():
-	pass
-	
-func shouldInterupt():
 	return false
 
 func getPriority():
 	return 5
-

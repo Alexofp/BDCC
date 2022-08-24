@@ -66,3 +66,53 @@ static func pickWeightedPairs(ar: Array):
 			return ar[i][0]
 			
 	return ar[0][0]
+
+# Same as RNG.pickWeighted() but it also removes the picked entry from both arrays
+static func grabWeighted(ar, weights: Array):
+	if(ar is Dictionary):
+		ar = ar.keys()
+		
+	assert(ar.size() == weights.size(), "Weights array doesn't have the same amount of elements as array")
+	
+	if(ar.empty()):
+		return null
+	
+	var sum = 0.0
+	for w in weights:
+		sum += w
+	
+	var r:float = rand_range(0.0, sum)
+	for i in range(weights.size()):
+		r -= weights[i]
+		if r <= 0.0:
+			var result = ar[i]
+			ar.remove(i)
+			weights.remove(i)
+			return result
+			
+	var result = ar[0]
+	ar.remove(0)
+	weights.remove(0)
+	return result
+
+# Same as RNG.pickWeightedPairs() but it also removes the picked entry from the array
+static func grabWeightedPairs(ar: Array):
+	if(ar.empty()):
+		return null
+		
+	var sum = 0.0
+	for pair in ar:
+		sum += pair[1]
+		
+	var r:float = rand_range(0.0, sum)
+	for i in range(ar.size()):
+		r -= ar[i][1]
+		if r <= 0.0:
+			var result = ar[i][0]
+			ar.remove(i)
+			return result
+			
+	var result = ar[0][0]
+	ar.remove(0)
+	return result
+	

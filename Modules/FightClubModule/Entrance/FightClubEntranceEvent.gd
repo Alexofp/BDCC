@@ -6,13 +6,7 @@ func _init():
 func registerTriggers(es):
 	es.addTrigger(self, Trigger.EnteringRoom, "gym_secret")
 
-func shouldRun():
-	return true
-
-func run(_args):
-	pass
-	
-func delayedRun():
+func run(_triggerID, _args):
 	if(!getModuleFlag(FightClubModule.ModID, FightClubModule.BulldogFirstTimeHappened)):
 		addButtonUnlessLate("Bulldog", "Approach the guy", "bulldog")
 	elif(!getModuleFlag(FightClubModule.ModID, FightClubModule.BulldogBypassed)):
@@ -20,8 +14,6 @@ func delayedRun():
 	else:
 		addButton("The Underground", "Go down to the fight club", "fightclub")
 
-func shouldInterupt():
-	return false
 
 func getPriority():
 	return 0

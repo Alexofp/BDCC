@@ -23,11 +23,13 @@ func _run():
 		saynn("You take your time consuming the paste, it's practially tasteless but it's better than nothing")
 		
 		addButton("Continue", "Stand up and continue on your way", "endthescene")
+		GM.ES.triggerRun(Trigger.EatingInCanteen)
 		
 	if(state == "donteat"):
 		saynn("You leave the plate without taking a single bite")
 		
 		addButton("Continue", "Leave", "endthescene")
+		GM.ES.triggerRun(Trigger.EatingInCanteen)
 
 func _react(_action: String, _args):
 	if(_action == "doeat"):		
@@ -36,7 +38,7 @@ func _react(_action: String, _args):
 		
 		setFlag(Flag.Canteen_PlayerAteToday, true)
 		
-		if(GM.ES.trigger(Trigger.EatingInCanteen)):
+		if(GM.ES.triggerReact(Trigger.EatingInCanteen)):
 			endScene()
 			return
 		

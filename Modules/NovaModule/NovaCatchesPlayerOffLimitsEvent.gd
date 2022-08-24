@@ -6,10 +6,7 @@ func _init():
 func registerTriggers(es):
 	es.addTrigger(self, Trigger.CaughtStealingInGreenhouse)
 
-func shouldRun():
-	return true
-
-func run(_args):
+func react(_triggerID, _args):
 	runScene("CaughtOffLimitsByNovaScene")
 	return true
 

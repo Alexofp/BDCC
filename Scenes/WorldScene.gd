@@ -50,6 +50,8 @@ func _run():
 	var roomMemory = GM.main.getRoomMemory(roomID)
 	if(roomMemory != null && roomMemory != ""):
 		saynn("[i]"+roomMemory+"[/i]")
+		
+	GM.ES.triggerRun(Trigger.EnteringRoom, [GM.pc.location])
 	
 	_roomInfo._onEnter()
 
@@ -71,7 +73,7 @@ func _react(_action: String, _args):
 		GM.pc.setLocation(GM.world.applyDirectionID(GM.pc.location, _args[0]))
 		processTime(30)
 		aimCamera(GM.pc.location)
-		GM.ES.trigger(Trigger.EnteringRoom, GM.pc.location, [_args[1]])
+		GM.ES.triggerReact(Trigger.EnteringRoom, [GM.pc.location, _args[1]])
 		
 		GM.main.showLog()
 
@@ -83,7 +85,3 @@ func _react(_action: String, _args):
 		runScene("StrugglingScene")
 	if(_action == "me"):
 		runScene("MeScene")
-
-func _react_scene_end(_tag, _result):
-	GM.ES.triggerOnlyDelayed(Trigger.EnteringRoom, GM.pc.location)
-	setState("")

@@ -6,10 +6,10 @@ func _init():
 func registerTriggers(es):
 	es.addTrigger(self, Trigger.EatingInCanteen)
 
-func shouldRun():
-	return RNG.chance(50) && GM.main.getFlag(RahiModule.Rahi_Introduced) && !GM.main.getFlag(RahiModule.Rahi_CanteenSceneHappened)
-
-func run(_args):
+func react(_triggerID, _args):
+	if(RNG.chance(50) || !GM.main.getFlag(RahiModule.Rahi_Introduced) || GM.main.getFlag(RahiModule.Rahi_CanteenSceneHappened)):
+		return false
+	
 	runScene("RahiAvyCanteenScene")
 	return true
 

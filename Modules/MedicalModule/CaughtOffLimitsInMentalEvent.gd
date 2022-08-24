@@ -6,24 +6,18 @@ func _init():
 func registerTriggers(es):
 	es.addTrigger(self, Trigger.EnteringRoom)
 
-func shouldRun():
+func react(_triggerID, _args):
 	if(!TriggerCondition.canTrigger(Trigger.CaughtOffLimits)):
 		return false
 	
-	return RNG.chance(30 + 10.0*GM.pc.getExposure()) && GM.world.getRoomByID(GM.pc.getLocation()).loctag_MentalWard
-
-func run(_args):
+	if(!RNG.chance(30 + 10.0*GM.pc.getExposure()) || !GM.world.getRoomByID(GM.pc.getLocation()).loctag_MentalWard):
+		return false
+	
 	#return GM.ES.trigger(Trigger.CaughtOffLimits)
 	TriggerCondition.onTrigger(Trigger.CaughtOffLimits)
 	runScene(RNG.pick([
 		"NurseFelineOffLimits",
 		]))
-	return true
-	
-func delayedRun():
-	pass
-	
-func shouldInterupt():
 	return true
 
 func getPriority():

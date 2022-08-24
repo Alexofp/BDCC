@@ -6,22 +6,13 @@ func _init():
 func registerTriggers(es):
 	es.addTrigger(self, Trigger.ApproachedWeightsBench)
 
-func shouldRun():
-	return true
-
-func run(_args):
-	pass
-	
-func delayedRun():
+func run(_triggerID, _args):
 	if(GM.main.getTime() >= 22*60*60):
 		saynn("You notice Risha sitting on one of the benches")
 		
 		addButtonUnlessLate("Risha", "Ask what's up", "risha")
 	else:
 		addDisabledButton("Risha", "Visit after 22:00")
-
-func shouldInterupt():
-	return false
 
 func getPriority():
 	return 0

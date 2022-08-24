@@ -6,7 +6,7 @@ func _init():
 func registerTriggers(es):
 	es.addTrigger(self, Trigger.EnteringRoom, "cd_near_captain_office")
 
-func shouldRun():
+func react(_triggerID, _args):
 	if(GM.QS.isCompleted("TaviQuest2")):
 		return false
 	if(!GM.main.getFlag(TaviModule.Tavi_Quest2Started, false)):
@@ -14,9 +14,6 @@ func shouldRun():
 	if(!GM.main.getFlag(TaviModule.Tavi_Quest2MetHer, false)):
 		return false
 	
-	return true
-
-func run(_args):
 	runScene("TaviQuest2Skar")
 	return true
 

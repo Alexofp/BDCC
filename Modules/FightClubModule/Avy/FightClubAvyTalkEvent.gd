@@ -5,14 +5,8 @@ func _init():
 
 func registerTriggers(es):
 	es.addTrigger(self, Trigger.EnteringRoom, "fight_neararena")
-
-func shouldRun():
-	return true
-
-func run(_args):
-	pass
 	
-func delayedRun():
+func run(_triggerID, _args):
 	saynn("Avy stands near the fences that make up the improvised arena")
 	
 	if(!getModuleFlag(FightClubModule.ModID, FightClubModule.AnnouncerIntroduced)):
@@ -22,9 +16,6 @@ func delayedRun():
 			addButtonUnlessLate("Avy", "Approach the dickgirl", "avyfirst")
 		else:
 			addButtonUnlessLate("Avy", "Approach the dickgirl", "avy")
-
-func shouldInterupt():
-	return false
 
 func getPriority():
 	return 0

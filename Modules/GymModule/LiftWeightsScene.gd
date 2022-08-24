@@ -4,7 +4,7 @@ func _init():
 	sceneID = "LiftWeightsScene"
 
 func _reactInit():
-	if(GM.ES.trigger(Trigger.ApproachedWeightsBench)):
+	if(GM.ES.triggerReact(Trigger.ApproachedWeightsBench)):
 		endScene()
 		return
 
@@ -22,6 +22,7 @@ func _run():
 			addButtonWithChecks("Light workout", "Do some dumbbell exercises", "light_workout", [], [ButtonChecks.HasStamina])
 			addButtonWithChecks("Heavy workout", "Grab a heavy barbell", "heavy_workout", [], [ButtonChecks.HasStamina, [ButtonChecks.StatCheck, Stat.Strength, 10]])
 		addButton("Leave", "You don't wanna do anything", "endthescene")
+		GM.ES.triggerRun(Trigger.ApproachedWeightsBench)
 
 	if(state == "light_workout"):
 		# (if low strength)

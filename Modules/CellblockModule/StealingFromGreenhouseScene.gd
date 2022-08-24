@@ -27,6 +27,7 @@ func _run():
 		
 		addButton("Steal more", "Try to escape without being seen", "caughtcheck2")
 		addButton("Don't steal", "Too dangerous", "endthescene")
+		GM.ES.triggerRun(Trigger.CaughtStealingInGreenhouse)
 
 func _react(_action: String, _args):
 	if(_action == "apple"):
@@ -43,7 +44,7 @@ func _react(_action: String, _args):
 		processTime(10 * 5)
 		
 		if(RNG.chance(50)):
-			if(GM.ES.trigger(Trigger.CaughtStealingInGreenhouse)):
+			if(GM.ES.triggerReact(Trigger.CaughtStealingInGreenhouse)):
 				endScene()
 				return
 		
@@ -54,7 +55,7 @@ func _react(_action: String, _args):
 		processTime(10 * 5)
 		
 		if(RNG.chance(75)):
-			if(GM.ES.trigger(Trigger.CaughtStealingInGreenhouse)):
+			if(GM.ES.triggerReact(Trigger.CaughtStealingInGreenhouse)):
 				endScene()
 				return
 		endScene()

@@ -35,6 +35,7 @@ func _run():
 		addButton("Clean inside", "Wash out any bodily fluids from inside too", "clean_inside")
 		addButton("Cold shower", "Helps to calm down", "cold_shower")
 		addDisabledButton("Masturbate", "Not done")
+		GM.ES.triggerRun(Trigger.TakingAShower)
 			
 	if(state == "cold_shower"):
 		saynn("You switch the water to the coldest it can be. It's refreshing and helps you to get away from the horny thoughts")
@@ -67,7 +68,7 @@ func _react(_action: String, _args):
 		if(GM.pc.location == "main_dressing2"):
 			aimCamera("main_shower2")
 		
-		if(GM.ES.trigger(Trigger.TakingAShower)):
+		if(GM.ES.triggerReact(Trigger.TakingAShower)):
 			endScene()
 			return
 		

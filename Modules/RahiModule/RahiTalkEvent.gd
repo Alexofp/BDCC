@@ -6,13 +6,7 @@ func _init():
 func registerTriggers(es):
 	es.addTrigger(self, Trigger.EnteringRoom, "main_bench2")
 
-func shouldRun():
-	return true
-
-func run(_args):
-	pass
-	
-func delayedRun():
+func run(_triggerID, _args):
 	if(getFlag(RahiModule.Rahi_NotThereToday, false)):
 		saynn("Seems like the kitty is not here")
 		
@@ -24,9 +18,6 @@ func delayedRun():
 	else:
 		saynn("You see the Kitty sitting on a bench")
 	addButtonUnlessLate("Rahi", "Talk to the feline", "talk")
-
-func shouldInterupt():
-	return false
 
 func getPriority():
 	return 0

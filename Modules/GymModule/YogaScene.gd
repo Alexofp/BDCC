@@ -4,7 +4,7 @@ func _init():
 	sceneID = "YogaScene"
 
 func _reactInit():
-	if(GM.ES.trigger(Trigger.ApproachedYogaMats)):
+	if(GM.ES.triggerReact(Trigger.ApproachedYogaMats)):
 		endScene()
 		return
 
@@ -20,6 +20,7 @@ func _run():
 		else:
 			addButtonWithChecks("Simple poses", "Train your agility a bit", "simple_poses", [], [ButtonChecks.HasStamina])
 		addButton("Leave", "You don't feel like doing yoga", "endthescene")
+		GM.ES.triggerRun(Trigger.ApproachedYogaMats)
 
 	if(state == "simple_poses"):
 		saynn("No need to do anything complicated, sometimes simple is all you need.")

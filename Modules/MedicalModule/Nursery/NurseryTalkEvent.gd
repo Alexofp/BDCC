@@ -6,17 +6,8 @@ func _init():
 func registerTriggers(es):
 	es.addTrigger(self, Trigger.EnteringRoom, "medical_nursery")
 
-func shouldRun():
-	return true
-
-func run(_args):
-	pass
-	
-func delayedRun():
+func run(_triggerID, _args):
 	addButtonUnlessLate("Nurse", "Talk to the nurse", "talk")
-
-func shouldInterupt():
-	return false
 
 func getPriority():
 	return 0

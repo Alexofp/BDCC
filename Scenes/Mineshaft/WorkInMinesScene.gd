@@ -14,6 +14,8 @@ func _run():
 		
 		addButton("Continue", "Finally rest", "endthescene")
 
+		GM.ES.triggerRun(Trigger.WorkingInMines)
+
 func _react(_action: String, _args):
 	if(_action == "work"):
 		
@@ -22,7 +24,7 @@ func _react(_action: String, _args):
 		
 		processTime(2*60*60)
 		
-		if(GM.ES.trigger(Trigger.WorkingInMines)):
+		if(GM.ES.triggerReact(Trigger.WorkingInMines)):
 			endScene()
 			return
 		

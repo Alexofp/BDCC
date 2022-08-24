@@ -9,20 +9,14 @@ func _init():
 func registerTriggers(_es):
 	pass
 
-func shouldRun():
-	return true
-
-func run(_args):
+func react(_triggerID, _args):
 	pass
 	
-func delayedRun():
+func run(_triggerID, _args):
 	pass
 
 func getPriority():
-	return 0
-
-func shouldInterupt():
-	return false
+	return 10
 
 func onButton(_method, _args):
 	pass

@@ -133,7 +133,6 @@ func _on_GameUI_on_option_button(method, args):
 	
 func pickOption(method, args):
 	GM.main.clearMessages()
-	GM.ES.clearDelayedEvents()
 	GlobalTooltip.resetTooltips()
 	
 	if(GM.ES.checkButtonInput(method, args)):
@@ -149,8 +148,6 @@ func pickOption(method, args):
 func runCurrentScene():
 	if(sceneStack.size() > 0):
 		sceneStack.back().run()
-		
-		GM.ES.doDelayedEvents()
 		
 		if(messages.size() > 0):
 			GM.ui.trimLineEndings()
@@ -630,7 +627,6 @@ func doDebugAction(id, args = {}):
 		GM.pc.getSkillsHolder().resetStats()
 	
 	if(id == "characterCreator"):
-		GM.ES.clearDelayedEvents()
 		runScene("CharacterCreatorScene", [true])
 	
 	if(id == "giveItem"):

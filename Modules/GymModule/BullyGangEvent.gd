@@ -7,17 +7,15 @@ func registerTriggers(es):
 	es.addTrigger(self, Trigger.ApproachedYogaMats)
 	es.addTrigger(self, Trigger.ApproachedWeightsBench)
 
-func shouldRun():
+func react(_triggerID, _args):
 	if(getModuleFlag(GymModule.ModID, GymModule.Gym_BullyGangPayed)):
 		return false
+		
+	if(RNG.chance(50)):
+		return false
 	
-	return RNG.chance(50)
-
-func run(_args):
 	runScene("BullyGangScene")
 	setModuleFlag(GymModule.ModID, GymModule.Gym_BullyGangPayed, true)
-
-func shouldInterupt():
 	return true
 
 func getPriority():

@@ -6,11 +6,7 @@ func _init():
 func registerTriggers(es):
 	es.addTrigger(self, Trigger.EnteringRoom, "mining_shafts_entering")
 
-func run(_args):
-	pass
-	#runScene("FightScene", ["risha"], "rishafight")
-	
-func delayedRun():
+func run(_triggerID, _args):
 	if(GM.pc.getStamina() > 0):
 		if(!GM.main.getFlag(Flag.Mining_IntroducedToMinning, false)):
 			addButtonWithChecks("Work", "See what's it about", "first_time", [], [ButtonChecks.NotLate, ButtonChecks.NotHandsBlocked])
@@ -19,11 +15,6 @@ func delayedRun():
 	else:
 		addDisabledButton("Work", "You are way too tired to work")
 	
-
-
-func shouldInterupt():
-	return false
-
 func getPriority():
 	return 0
 

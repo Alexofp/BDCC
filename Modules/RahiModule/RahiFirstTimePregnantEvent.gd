@@ -7,10 +7,10 @@ func registerTriggers(es):
 	es.addTrigger(self, Trigger.EnteringRoom, "cellblock_nearcells")
 	es.addTrigger(self, Trigger.EnteringRoom, "main_bench2")
 
-func shouldRun():
-	return !getFlag(RahiModule.Rahi_FirstTimePregnantHappened, false) && GlobalRegistry.getCharacter("rahi").isVisiblyPregnant()
-
-func run(_args):
+func react(_triggerID, _args):
+	if(getFlag(RahiModule.Rahi_FirstTimePregnantHappened, false) || !GlobalRegistry.getCharacter("rahi").isVisiblyPregnant()):
+		return false
+	
 	setFlag(RahiModule.Rahi_FirstTimePregnantHappened, true)
 	runScene("RahiFirstTimePregnantScene")
 	

@@ -6,14 +6,7 @@ func _init():
 func registerTriggers(es):
 	es.addTrigger(self, Trigger.EnteringRoom, "yard_novaspot")
 
-func shouldRun():
-	return true
-
-func run(_args):
-	pass
-	
-func delayedRun():
-
+func run(_triggerID, _args):
 	if(!GM.main.getFlag(NovaModule.Nova_Introduced)):
 		saynn("You see some guard patrolling this zone")
 	else:
@@ -22,9 +15,6 @@ func delayedRun():
 		addDisabledButton("Nova", "She is not here today")
 	else:
 		addButtonUnlessLate("Nova", "Talk to the husky", "talk")
-
-func shouldInterupt():
-	return false
 
 func getPriority():
 	return 0
