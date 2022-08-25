@@ -891,6 +891,88 @@ func hasBigBreasts():
 	else:
 		return false
 
+func canBeMilked():
+	if(!hasBodypart(BodypartSlot.Breasts)):
+		return false
+	var breasts: BodypartBreasts = getBodypart(BodypartSlot.Breasts)
+	var production: FluidProduction = breasts.getFluidProduction()
+	if(production == null):
+		return false
+	return production.getFluidAmount() > 0.0
+
+func hasBreastsFullOfMilk():
+	if(!hasBodypart(BodypartSlot.Breasts)):
+		return false
+	var breasts: BodypartBreasts = getBodypart(BodypartSlot.Breasts)
+	var production: FluidProduction = breasts.getFluidProduction()
+	if(production == null):
+		return false
+	return production.getFluidLevel() >= 1.0
+
+func milk(howmuch = 1.0):
+	if(!hasBodypart(BodypartSlot.Breasts)):
+		return 0.0
+	var breasts: BodypartBreasts = getBodypart(BodypartSlot.Breasts)
+	var production: FluidProduction = breasts.getFluidProduction()
+	if(production == null):
+		return 0.0
+	var howMuchMilk = production.drain(howmuch)
+	production.afterMilked()
+	return howMuchMilk
+
+func stimulateLactation():
+	if(!hasBodypart(BodypartSlot.Breasts)):
+		return false
+	
+	var breasts: BodypartBreasts = getBodypart(BodypartSlot.Breasts)
+	var production: Lactation = breasts.getFluidProduction()
+	if(production == null):
+		return false
+	if(production.has_method("stimulate")):
+		return production.stimulate()
+	return false
+
+func canBeSeedMilked():
+	if(!hasBodypart(BodypartSlot.Penis)):
+		return false
+	var penis: BodypartPenis = getBodypart(BodypartSlot.Penis)
+	var production: FluidProduction = penis.getFluidProduction()
+	if(production == null):
+		return false
+	return production.getFluidAmount() > 0.0
+
+func milkSeed(howmuch = 1.0):
+	if(!hasBodypart(BodypartSlot.Penis)):
+		return 0.0
+	var penis: BodypartPenis = getBodypart(BodypartSlot.Penis)
+	var production: FluidProduction = penis.getFluidProduction()
+	if(production == null):
+		return 0.0
+	var howMuchSeed = production.drain(howmuch)
+	production.afterMilked()
+	return howMuchSeed
+
+func getCumInflationLevel():
+	if(!OPTIONS.isContentEnabled(ContentType.CumInflation)):
+		return 0.0
+	
+	var bodypartsToCalculate = [BodypartSlot.Head, BodypartSlot.Vagina, BodypartSlot.Anus]
+	var result = -1.0
+
+	for bodypartSlot in bodypartsToCalculate:
+		if(!hasBodypart(bodypartSlot)):
+			continue
+		var bodypart:Bodypart = getBodypart(bodypartSlot)
+		var orifice: Orifice = bodypart.getOrifice()
+		if(orifice == null):
+			continue
+		
+		var overflow = max(0.0, orifice.getStuffedLevel() - 1.0)
+		result += overflow
+		
+	return max(result, 0.0)
+# Doll stuff
+
 func getDollParts() -> Dictionary:
 	var parts = {}
 	for bodypartSlot in bodyparts:
@@ -909,8 +991,27 @@ func getDollParts() -> Dictionary:
 		parts[partSlot] = partScene
 	return parts
 
+func updateLeaking(doll: Doll3D):
+	if(hasEffect(StatusEffect.BreastsFull)):
+		doll.setBreastsLeaking(true)
+	else:
+		doll.setBreastsLeaking(false)
+		
+	if(hasEffect(StatusEffect.HasCumInsideVagina) && !buffsHolder.hasBuff(Buff.BlocksVaginaLeakingBuff)):
+		doll.setPussyLeaking(true)
+	else:
+		doll.setPussyLeaking(false)
+
+	if(hasEffect(StatusEffect.HasCumInsideAnus) && !buffsHolder.hasBuff(Buff.BlocksAnusLeakingBuff)):
+		doll.setAnusLeaking(true)
+	else:
+		doll.setAnusLeaking(false)
+
 func updateDoll(doll: Doll3D):
+	
 	var parts = getDollParts()
+	
+	updateLeaking(doll)
 	
 	#doll.setButtScale(0.8)
 	#doll.setBreastsScale(1.5)
@@ -969,13 +1070,22 @@ func updateDoll(doll: Doll3D):
 		doll.setState("breasts", "nonflat")
 	else:
 		doll.setState("breasts", "flat")
+
+	var pregnancyValue = getPregnancyProgress()
 	
 	var thicknessNorm = getThickness() / 100.0
 	var femNorm = getFemininity() / 100.0
 	var pregnancyAddition = 0.0
 	if(femNorm < 0.5):
 		pregnancyAddition = -0.1 * (1.0 - (femNorm * 2.0))
-	doll.setPregnancy(getPregnancyProgress() + pregnancyAddition)
+	
+	pregnancyValue += pregnancyAddition
+	
+	if(true):
+		var cumInflationLevel = getCumInflationLevel()
+		pregnancyValue += clamp(cumInflationLevel / 10.0, 0.0, 1.0)
+	
+	doll.setPregnancy(clamp(pregnancyValue, 0.0, 1.1))
 	
 	if(thicknessNorm <= 0.5):
 		doll.setButtScale(1.0 - 0.2 * (1.0 - thicknessNorm * 2))

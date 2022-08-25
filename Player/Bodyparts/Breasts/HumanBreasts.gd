@@ -13,7 +13,7 @@ func getCompatibleSpecies():
 func getBreastsScale():
 	var thesize = getSize()
 	if(thesize <= BreastsSize.FLAT):
-		return 1.0
+		return 0.5
 	if(thesize <= BreastsSize.A):
 		return 0.5
 	if(thesize <= BreastsSize.B):

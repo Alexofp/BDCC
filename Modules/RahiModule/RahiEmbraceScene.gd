@@ -94,6 +94,7 @@ func _react(_action: String, _args):
 	
 	if(_action == "milk_her"):
 		GM.pc.addSkillExperience(Skill.Milking, 30.0, "rahi_handmilking")
+		getCharacter("rahi").milk()
 
 	if(_action == "endthescene"):
 		endScene()

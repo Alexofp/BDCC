@@ -10,6 +10,13 @@ func getCapacity() -> float:
 func getFluidAmount() -> float:
 	return fluidAmount
 
+func getFluidLevel() -> float:
+	var capacity:float = getCapacity()
+	if(capacity < 0.01):
+		return 0.0
+	
+	return clamp(getFluidAmount() / capacity, 0.0, 1.0)
+
 func drain(howmuch = 1.0) -> float:
 	var result = getCapacity() * howmuch
 	if(result > fluidAmount):

@@ -36,6 +36,8 @@ const Pregnant = "Pregnant"
 const PregnancySickness = "PregnancySickness"
 const DeniedDesperate = "DeniedDesperate"
 const DrenchedInPiss = "DrenchedInPiss"
+const BreastsFull = "BreastsFull"
+const CumInflated = "CumInflated"
 
 # Useful effects
 const Yoga = "Yoga"

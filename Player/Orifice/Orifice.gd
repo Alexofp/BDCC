@@ -88,9 +88,9 @@ func handleInsertion(size: float):
 	if(diff <= -10.0):
 		return
 	
-	var add = pow(diff + 10.0, 0.5) / getResistance() / 8.0
+	var add = pow(diff + 10.0, 0.5) / getResistance() / 5.0
 	if(diff > 0):
-		add += pow(diff, 0.5) / getResistance() / 4.0
+		add += pow(diff, 0.5) / getResistance() / 2.0
 	
 	looseness += add
 
@@ -125,7 +125,7 @@ func getNaturalSpill() -> float:
 	return 0.2
 
 func getOverstuffedSpill() -> float:
-	return 5.0
+	return 15.0
 
 func isClosedOff():
 	if(bodypart == null || bodypart.get_ref().character == null):

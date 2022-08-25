@@ -41,7 +41,7 @@ func processTime(seconds: int):
 	
 	var pc = getCharacter()
 	if(pc != null):
-		if(pc.getPregnancyProgress() >= 0.33):
+		if(pc.getPregnancyProgress() >= 0.33 && lactationTimer < 60*60*24*10):
 			lactationTimer += seconds * 3
 	
 	if(lactationTimer > 0):

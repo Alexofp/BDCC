@@ -13,10 +13,17 @@ var exposedBodyparts = []
 
 var armsCuffed = false
 var legsCuffed = false
+var breastsLeaking = false
+var pussyLeaking = false
+var anusLeaking = false
 
 export(bool) var addTestBody = false
 
 var dollAttachmentZoneScene = preload("res://Player/Player3D/Parts/DollAttachmentZone.tscn")
+
+onready var nipplesParticles = $BoneAttachments/NipplesBoneAttachment/NipplesParticles
+onready var pussyParticles = $BoneAttachments/VaginaBoneAttachment/PussyParticles
+onready var anusParticles = $BoneAttachments/VaginaBoneAttachment/AnusParticles
 
 func getDollSkeleton():
 	return $DollSkeleton
@@ -24,7 +31,7 @@ func getDollSkeleton():
 func _ready():
 	if(addTestBody):
 		testBody()
-	pass
+	$RandomLeakTimer.start(RNG.randf_range(3, 20))
 
 func testBody():
 	addPartObject("body", load("res://Player/Player3D/Parts/Body/HumanBody/HumanBody.tscn").instance())
@@ -409,3 +416,40 @@ func getLegsCuffed():
 
 func getCharacterID():
 	return savedCharacterID
+
+func setBreastsLeaking(newBreastsLeaking):
+	breastsLeaking = newBreastsLeaking
+
+func setPussyLeaking(newPussyLeaking):
+	pussyLeaking = newPussyLeaking
+
+func setAnusLeaking(newAnusLeaking):
+	anusLeaking = newAnusLeaking
+
+func _on_RandomLeakTimer_timeout():
+	var possible = []
+	if(breastsLeaking):
+		possible.append(0)
+	if(pussyLeaking):
+		possible.append(1)
+	if(anusLeaking):
+		possible.append(2)
+	
+	var randomPicked = RNG.pick(possible)
+	if(randomPicked != null):
+		if(randomPicked == 0):
+			nipplesParticles.emitting = true
+		if(randomPicked == 1):
+			pussyParticles.emitting = true
+		if(randomPicked == 2):
+			anusParticles.emitting = true
+	
+	var waitTime = 25.0
+	if(breastsLeaking):
+		waitTime -= 5.0
+	if(pussyLeaking):
+		waitTime -= 5.0
+	if(anusLeaking):
+		waitTime -= 5.0
+	
+	$RandomLeakTimer.start(RNG.randf_range(waitTime * 0.5, waitTime * 1.5))

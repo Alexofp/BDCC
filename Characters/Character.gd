@@ -183,6 +183,16 @@ func updateNonBattleEffects():
 	else:
 		removeEffect(StatusEffect.Pregnant)
 
+	if(hasBreastsFullOfMilk()):
+		addEffect(StatusEffect.BreastsFull)
+	else:
+		removeEffect(StatusEffect.BreastsFull)
+
+	if(getCumInflationLevel() > 0.01):
+		addEffect(StatusEffect.CumInflated)
+	else:
+		removeEffect(StatusEffect.CumInflated)
+
 func onCharacterVisiblyPregnant():
 	if(getMenstrualCycle() != null):
 		if(getMenstrualCycle().isPregnantFromPlayer()):

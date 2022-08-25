@@ -40,7 +40,7 @@ func getEffectDesc():
 
 func getEffectImage():
 	if(!character.isPlayer()):
-		return "res://UI/StatusEffectsPanel/images/womb2.png"
+		return "res://Images/StatusEffects/womb2.png"
 	
 	if(!character.hasBodypart(BodypartSlot.Vagina)):
 		return null
