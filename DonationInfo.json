@@ -1,5 +1,5 @@
 {
-	"dateString": "22 of Aug 2022",
+	"dateString": "25 of Aug 2022",
 	"entries": {
 		"$1.00": [
 			{
@@ -44,6 +44,9 @@
 			},
 			{
 				"nickname": "SilverZeb"
+			},
+			{
+				"nickname": "thatoneguyatthebar"
 			}
 		]
 	},
@@ -52,5 +55,5 @@
 		"$5.00",
 		"$1.00"
 	],
-	"unixTime": 1661158910
+	"unixTime": 1661410310
 }
