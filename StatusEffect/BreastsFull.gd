@@ -8,7 +8,7 @@ func getEffectName():
 	return "Breasts full"
 
 func getEffectDesc():
-	return "You breasts feel so heavy, they're full of milk! They are itching to be milked"
+	return "Your breasts feel so heavy, they're full of milk! They are itching to be milked"
 
 func getEffectImage():
 	return "res://Images/StatusEffects/lactation.png"
