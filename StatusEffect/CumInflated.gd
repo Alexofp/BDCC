@@ -21,14 +21,14 @@ func getEffectDesc():
 	
 	if(cumInflationLevel <= 1.5):
 		return "Your belly has a slight visible bump"
-	if(cumInflationLevel <= 9.5):
+	if(cumInflationLevel <= 4.5):
 		return "Your belly looks quite inflated!"
 	
 	return "Wow, you are stuffed so much that you look pregnant!"
 
 func getEffectImage():
 	var cumInflationLevel = character.getCumInflationLevel()
-	if(cumInflationLevel <= 9.5):
+	if(cumInflationLevel <= 4.5):
 		return "res://Images/StatusEffects/belly.png"
 		
 	return "res://Images/StatusEffects/bloating.png"
