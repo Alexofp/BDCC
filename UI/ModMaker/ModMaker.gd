@@ -145,10 +145,58 @@ func _on_RemoveFilesButton_pressed():
 
 func _on_MakeModButton_pressed():
 	print(exportModeSelector.selected)
+	
+	#if(exportModeSelector.selected == 0):
+	#	useTar()
+		
+	if(exportModeSelector.selected == 0):
+		gatherFiles()
 	if(exportModeSelector.selected == 1):
 		makePCKFile()
-	else:
-		gatherFiles()
+
+func useTar():
+	var modName = "new_mod"
+	var editModName = Util.stripBadFilenameCharacters(modNameEdit.text)
+	if(editModName != ""):
+		modName = editModName
+	
+	var directory = Directory.new( )
+	#directory.remove("user://new_mod")
+	var baseNewModFolder = "user://exported_mods/"+modName
+	var newModFolder = baseNewModFolder
+	var i = 1
+	while(directory.dir_exists(newModFolder)):
+		i += 1
+		newModFolder = baseNewModFolder + str(i)
+	directory.make_dir_recursive(newModFolder)
+	
+	for file in addedFiles:
+		if(file.get_extension() == "import"):
+			var config = ConfigFile.new()
+			var err = config.load(file)
+			if err == OK:
+				if(config.has_section_key("remap", "path")):
+					var importFile:String = config.get_value("remap", "path")
+					
+					var newPath2:String = importFile.replace("res://",newModFolder+"/")
+					directory.make_dir_recursive(newPath2.get_base_dir())
+					directory.copy(importFile, newPath2)
+					print("Also exported as dependency "+importFile)
+					
+		var newPath:String = file.replace("res://",newModFolder+"/")
+		directory.make_dir_recursive(newPath.get_base_dir())
+		directory.copy(file, newPath)
+	
+	var output = []
+	
+	#var _ok = OS.execute('tar', ['-a', '-cf', ProjectSettings.globalize_path("user://exported_mods/".plus_file(modName+".zip")), "-C", ProjectSettings.globalize_path(newModFolder), "*", '.import/', '--force-local'], true, output, true)
+	var _ok = OS.execute('powershell', ['Compress-Archive', ProjectSettings.globalize_path(newModFolder).plus_file("*"), ProjectSettings.globalize_path("user://exported_mods/".plus_file(modName+".zip"))], true, output, true)
+	print(output)
+	
+	Util.removeDirectory(newModFolder)
+	
+	if(!(OS.get_name() in ["Android", "iOS", "HTML5"])):
+		var _ok2 = OS.shell_open(ProjectSettings.globalize_path("user://exported_mods/"))
 	
 func gatherFiles():
 	var modName = "new_mod"
