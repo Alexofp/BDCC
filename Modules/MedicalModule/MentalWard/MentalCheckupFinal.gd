@@ -36,11 +36,11 @@ func _run():
 		saynn("She pulls her digit and drags it across your other cheek. Eliza softly giggles.")
 
 		# (if bad behaviour)
-		if(getFlag(MedicalModule.Mental_PCBehavior, 0.0) < 0.3):
+		if(getModuleFlag("MedicalModule", "Mental_PCBehavior", 0.0) < 0.3):
 			saynn("[say=eliza]Your behavior was quite awful, you clearly need more punishments. I will note that in the database. Now let’s go.[/say]")
 
 		# (if medium behavior)
-		elif(getFlag(MedicalModule.Mental_PCBehavior, 0.0) < 0.7):
+		elif(getModuleFlag("MedicalModule", "Mental_PCBehavior", 0.0) < 0.7):
 			saynn("[say=eliza]You were pretty helpful and mostly collaborated. Could have been better but oh well. Let’s go.[/say]")
 
 		# (if high behavior)
@@ -157,7 +157,7 @@ func _react(_action: String, _args):
 
 	if(_action == "endthesceneEscape"):
 		endScene(["escape"])
-		setFlag(MedicalModule.Mental_PlayerEscaped, true)
+		setModuleFlag("MedicalModule", "Mental_PlayerEscaped", true)
 		return
 
 	if(_action == "endthesceneGoodEscape"):

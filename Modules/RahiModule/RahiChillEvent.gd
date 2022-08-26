@@ -7,10 +7,10 @@ func registerTriggers(es):
 	es.addTrigger(self, Trigger.EnteringRoom, "cellblock_nearcells")
 
 func react(_triggerID, _args):
-	if(!getFlag(RahiModule.Rahi_ChillWillHappen)):
+	if(!getModuleFlag("RahiModule", "Rahi_ChillWillHappen")):
 		return false
 	
-	setFlag(RahiModule.Rahi_ChillWillHappen, false)
+	setModuleFlag("RahiModule", "Rahi_ChillWillHappen", false)
 	runScene("RahiChillScene")
 	
 	return true

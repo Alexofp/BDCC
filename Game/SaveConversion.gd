@@ -44,6 +44,59 @@ static func fixFlagsFromVersion1(_main, data):
 			"Tavi_Quest2MetHer",
 			"Tavi_Quest2Completed",
 		],
+		"RahiModule": [
+			"Rahi_Introduced",
+			"Rahi_AskedName",
+			"Rahi_GaveApple",
+			"Rahi_CanteenSceneHappened",
+			"Avy_WonCanteenFight",
+			"Rahi_ChillWillHappen",
+			"Rahi_ChillHappened",
+			"Rahi_ChillCooldown",
+			"Rahi_Denied",
+			"Rahi_ShowerHappened",
+			"Rahi_NotThereToday",
+			"Rahi_FirstTimePregnantHappened",
+			"Rahi_GaveBirthTimes",
+		],
+		"MedicalModule": [
+			"Eliza_IntroducedMedical",
+			"Med_pcKnowsAboutWork",
+			"Med_pcKnowsAboutBreeding",
+			"Med_pcKnowsAboutTests",
+			"Med_pcKnowsAboutMilking",
+			"Med_milkingMilkFirstTime",
+			"Med_milkingSeedFirstTime",
+			
+			"Med_milkMilked",
+			"Med_seedMilked",
+			"Med_milkedMilkTimes",
+			"Med_milkedSeedTimes",
+			
+			"Med_wasMilkedToday",
+			
+			"Mental_PCBehavior",
+			"Mental_PCSanity",
+			"Mental_CheckupHappened",
+			"Mental_ExperimentHappened",
+			"Mental_ShowerHappened",
+			
+			"Mental_ExpObeyDrug",
+			"Mental_ExpTentacles",
+			
+			"Mental_HasKeycard",
+			"Mental_PlayerEscaped",
+			
+			"Nursery_Introduced",
+			"Nursery_AskedHowWorks",
+			"Nursery_AskedDatabase",
+		],
+		"CellblockModule": [
+			"Cellblock_FreeToPassCheckpoint",
+			"Cellblock_CheckpointVisited",
+			"Cellblock_GreenhouseLooted",
+			"Cellblock_GreenhouseFoundChip",
+		],
 	}
 	
 	for moduleID in flagsToFix:

@@ -1,19 +1,23 @@
 extends Module
 class_name RahiModule
 
-const Rahi_Introduced = "Rahi_Introduced"
-const Rahi_AskedName = "Rahi_AskedName"
-const Rahi_GaveApple = "Rahi_GaveApple"
-const Rahi_CanteenSceneHappened = "Rahi_CanteenSceneHappened"
-const Avy_WonCanteenFight = "Avy_WonCanteenFight"
-const Rahi_ChillWillHappen = "Rahi_ChillWillHappen"
-const Rahi_ChillHappened = "Rahi_ChillHappened"
-const Rahi_ChillCooldown = "Rahi_ChillCooldown"
-const Rahi_Denied = "Rahi_Denied"
-const Rahi_ShowerHappened = "Rahi_ShowerHappened"
-const Rahi_NotThereToday = "Rahi_NotThereToday"
-const Rahi_FirstTimePregnantHappened = "Rahi_FirstTimePregnantHappened"
-const Rahi_GaveBirthTimes = "Rahi_GaveBirthTimes"
+func getFlags():
+	return {
+		# Rahi module
+		"Rahi_Introduced": flag(FlagType.Bool),
+		"Rahi_AskedName": flag(FlagType.Bool),
+		"Rahi_GaveApple": flag(FlagType.Bool),
+		"Rahi_CanteenSceneHappened": flag(FlagType.Bool),
+		"Avy_WonCanteenFight": flag(FlagType.Bool),
+		"Rahi_ChillWillHappen": flag(FlagType.Bool),
+		"Rahi_ChillHappened": flag(FlagType.Bool),
+		"Rahi_ChillCooldown": flag(FlagType.Number),
+		"Rahi_Denied": flag(FlagType.Bool),
+		"Rahi_ShowerHappened": flag(FlagType.Bool),
+		"Rahi_NotThereToday": flag(FlagType.Bool),
+		"Rahi_FirstTimePregnantHappened": flag(FlagType.Bool),
+		"Rahi_GaveBirthTimes": flag(FlagType.Number),
+	}
 
 func _init():
 	id = "RahiModule"
@@ -45,19 +49,19 @@ func _init():
 	]
 
 func resetFlagsOnNewDay():
-	if(getFlag(Rahi_NotThereToday, false)):
-		setFlag(Rahi_NotThereToday, false)
+	if(GM.main.getModuleFlag("RahiModule", "Rahi_NotThereToday", false)):
+		GM.main.setModuleFlag("RahiModule", "Rahi_NotThereToday", false)
 	
 	# Chill near waterfall event stuff
-	if(!getFlag(Rahi_ChillHappened, false) && !getFlag(Rahi_Denied, false)):
-		if(getFlag(Rahi_ChillCooldown, 0) > 0):
-			increaseFlag(Rahi_ChillCooldown, -1)
+	if(!GM.main.getModuleFlag("RahiModule", "Rahi_ChillHappened", false) && !GM.main.getModuleFlag("RahiModule", "Rahi_Denied", false)):
+		if(GM.main.getModuleFlag("RahiModule", "Rahi_ChillCooldown", 0) > 0):
+			GM.main.increaseModuleFlag("RahiModule", "Rahi_ChillCooldown", -1)
 
-		if(getFlag(Rahi_ChillCooldown, 0) == 0 && getFlag(Rahi_GaveApple, false)):
-			setFlag(Rahi_ChillWillHappen, true)
-			setFlag(Rahi_ChillCooldown, RNG.randi_range(1, 3))
+		if(GM.main.getModuleFlag("RahiModule", "Rahi_ChillCooldown", 0) == 0 && GM.main.getModuleFlag("RahiModule", "Rahi_GaveApple", false)):
+			GM.main.setModuleFlag("RahiModule", "Rahi_ChillWillHappen", true)
+			GM.main.setModuleFlag("RahiModule", "Rahi_ChillCooldown", RNG.randi_range(1, 3))
 		else:
-			setFlag(Rahi_ChillWillHappen, false)
+			GM.main.setModuleFlag("RahiModule", "Rahi_ChillWillHappen", false)
 
 static func trustsPC():
-	return GM.main.getFlag(Rahi_ShowerHappened, false)
+	return GM.main.getModuleFlag("RahiModule", "Rahi_ShowerHappened", false)

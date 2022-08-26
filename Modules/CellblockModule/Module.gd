@@ -1,10 +1,14 @@
 extends Module
 class_name CellblockModule
 
-const Cellblock_FreeToPassCheckpoint = "Cellblock_FreeToPassCheckpoint"
-const Cellblock_CheckpointVisited = "Cellblock_CheckpointVisited"
-const Cellblock_GreenhouseLooted = "Cellblock_GreenhouseLooted"
-const Cellblock_GreenhouseFoundChip = "Cellblock_GreenhouseFoundChip"
+func getFlags():
+	return {
+		# Cellblock module
+		"Cellblock_FreeToPassCheckpoint": flag(FlagType.Bool),
+		"Cellblock_CheckpointVisited": flag(FlagType.Bool),
+		"Cellblock_GreenhouseLooted": flag(FlagType.Bool),
+		"Cellblock_GreenhouseFoundChip": flag(FlagType.Bool),
+	}
 
 func _init():
 	id = "CellblockModule"
@@ -31,8 +35,8 @@ func _init():
 	]
 
 func resetFlagsOnNewDay():
-	GM.main.setFlag(Cellblock_FreeToPassCheckpoint, false)
-	GM.main.setFlag(Cellblock_GreenhouseLooted, false)
+	GM.main.setModuleFlag("CellblockModule", "Cellblock_FreeToPassCheckpoint", false)
+	GM.main.setModuleFlag("CellblockModule", "Cellblock_GreenhouseLooted", false)
 
 func getRandomSceneFor(sceneType):
 	var result = []

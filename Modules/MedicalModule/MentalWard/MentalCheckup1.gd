@@ -13,13 +13,13 @@ func _run():
 		saynn("You hear a static noise as the intercom turns on.")
 
 		# (if best behaviour)
-		if(getFlag(MedicalModule.Mental_PCBehavior, 0.0) >= 0.8):
+		if(getModuleFlag("MedicalModule", "Mental_PCBehavior", 0.0) >= 0.8):
 			saynn("[say=eliza]How is my cutie doing?[/say]")
 
 			saynn("[say=pc]Yeah, I’m doing good.[/say]")
 
 		# (if medium behaviour)
-		elif(getFlag(MedicalModule.Mental_PCBehavior, 0.0) >= 0.3):
+		elif(getModuleFlag("MedicalModule", "Mental_PCBehavior", 0.0) >= 0.3):
 			saynn("[say=eliza]How are we doing, test subject?[/say]")
 
 			saynn("[say=pc]I’m okay.[/say]")
@@ -87,7 +87,7 @@ func _run():
 func _react(_action: String, _args):
 
 	if(_action == "refuse"):
-		savedBehavior = getFlag(MedicalModule.Mental_PCBehavior, 0.0)
+		savedBehavior = getModuleFlag("MedicalModule", "Mental_PCBehavior", 0.0)
 		
 		MedicalModule.addPCBehavior(-0.1)
 		

@@ -13,7 +13,7 @@ func _run():
 		saynn("[say=eliza]Ready to be a test subject?[/say]")
 
 		# (if normal behaviour)
-		if(getFlag(MedicalModule.Mental_PCBehavior, 0.0) > 0.5):
+		if(getModuleFlag("MedicalModule", "Mental_PCBehavior", 0.0) > 0.5):
 			saynn("[say=pc]Maybe.[/say]")
 
 			saynn("[say=eliza]It’s gonna be fun, don’t worry.[/say]")
@@ -212,7 +212,7 @@ func _react(_action: String, _args):
 		GM.pc.addSkillExperience(Skill.SexSlave, 20)
 		MedicalModule.addPCBehavior(0.1)
 		
-		setFlag(MedicalModule.Mental_ExpTentacles, Util.maxi(1, getFlag(MedicalModule.Mental_ExpTentacles, 0)))
+		setModuleFlag("MedicalModule", "Mental_ExpTentacles", Util.maxi(1, getModuleFlag("MedicalModule", "Mental_ExpTentacles", 0)))
 
 	if(_action == "endthescene"):
 		endScene()

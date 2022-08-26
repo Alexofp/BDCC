@@ -4,14 +4,14 @@ func getPossibleScenes():
 	var newScenes = []
 	var reusedScenes = []
 	
-	var tentacles = getFlag(MedicalModule.Mental_ExpTentacles, 0)
+	var tentacles = getModuleFlag("MedicalModule", "Mental_ExpTentacles", 0)
 	if(tentacles >= 1):
 		reusedScenes.append("MentalLatexParasite")
 	else:
 		newScenes.append("MentalLatexParasite")
 	
 	
-	var obeyDrug = getFlag(MedicalModule.Mental_ExpObeyDrug, 0)
+	var obeyDrug = getModuleFlag("MedicalModule", "Mental_ExpObeyDrug", 0)
 	if(obeyDrug >= 2):
 		reusedScenes.append("MentalObedienceDrug2")
 		reusedScenes.append("MentalObedienceDrug1")
@@ -46,8 +46,8 @@ func _run():
 			saynn("You sit against a wall, not constantly hugging yourself for once.")
 		#addButton("Continue", "Time to go", "endthescene")
 		
-		var behavior = getFlag(MedicalModule.Mental_PCBehavior, 0.0)
-		var sanity = getFlag(MedicalModule.Mental_PCSanity, 0.0)
+		var behavior = getModuleFlag("MedicalModule", "Mental_PCBehavior", 0.0)
+		var sanity = getModuleFlag("MedicalModule", "Mental_PCSanity", 0.0)
 		
 		say("Your behavior: ")
 		if(behavior <= 0.1):
@@ -79,7 +79,7 @@ func _run():
 			
 		addButton("Wait", "Spend some time idling", "rest")
 		addButton("Struggle", "Try to struggle out of your restraints", "struggle")
-		if(getFlag(MedicalModule.Mental_HasKeycard, false)):
+		if(getModuleFlag("MedicalModule", "Mental_HasKeycard", false)):
 			addButton("Escape", "Use the keycard to escape", "doescape")
 	
 	if(state == "sleeping"):
@@ -102,11 +102,11 @@ func _run():
 func _react(_action: String, _args):
 	if(_action == "afterrest"):
 		# Random scene checks
-		if(!getFlag("Mental_CheckupHappened", false) && GM.main.getTime() >= 9*60*60):
-			setFlag("Mental_CheckupHappened", true)
+		if(!getModuleFlag("MedicalModule", "Mental_CheckupHappened", false) && GM.main.getTime() >= 9*60*60):
+			setModuleFlag("MedicalModule", "Mental_CheckupHappened", true)
 			
 			if(isPCWearingAStraitjacket()):
-				if(getFlag(MedicalModule.Mental_PCSanity, 0.0) >= 1.0):
+				if(getModuleFlag("MedicalModule", "Mental_PCSanity", 0.0) >= 1.0):
 					runScene("MentalCheckupFinal", [], "finalCheckup")
 				else:
 					# Random checkup scene
@@ -119,8 +119,8 @@ func _react(_action: String, _args):
 			setState("")
 			return
 		
-		if(!getFlag(MedicalModule.Mental_ExperimentHappened, false) && GM.main.getTime() >= 14*60*60):
-			setFlag(MedicalModule.Mental_ExperimentHappened, true)
+		if(!getModuleFlag("MedicalModule", "Mental_ExperimentHappened", false) && GM.main.getTime() >= 14*60*60):
+			setModuleFlag("MedicalModule", "Mental_ExperimentHappened", true)
 			
 			if(!isPCWearingAStraitjacket()):
 				runScene("MentalCheckupNoJacket", [], "mentalnojacketfight")
@@ -133,8 +133,8 @@ func _react(_action: String, _args):
 			setState("")
 			return
 		
-		if(!getFlag(MedicalModule.Mental_ShowerHappened, false) && GM.main.getTime() >= 19*60*60):
-			setFlag(MedicalModule.Mental_ShowerHappened, true)
+		if(!getModuleFlag("MedicalModule", "Mental_ShowerHappened", false) && GM.main.getTime() >= 19*60*60):
+			setModuleFlag("MedicalModule", "Mental_ShowerHappened", true)
 			
 			if(isPCWearingAStraitjacket()):
 				runScene("MentalShower")

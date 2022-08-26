@@ -99,7 +99,7 @@ func _on_MainGreenhousesJumpable_onReact(_room, key):
 
 
 func _on_MainGreenhouses9_onEnter(room):
-	if(!GM.main.getFlag(CellblockModule.Cellblock_GreenhouseFoundChip, false)):
+	if(!GM.main.getModuleFlag("CellblockModule", "Cellblock_GreenhouseFoundChip", false)):
 		room.saynn("You notice a credit chip under one of the crates, huh.")
 		
 		room.addButton("Grab chip", "Ohh, whats this", "grabchip")
@@ -107,7 +107,7 @@ func _on_MainGreenhouses9_onEnter(room):
 
 func _on_MainGreenhouses9_onReact(_room, key):
 	if(key == "grabchip"):
-		GM.main.setFlag(CellblockModule.Cellblock_GreenhouseFoundChip, true)
+		GM.main.setModuleFlag("CellblockModule", "Cellblock_GreenhouseFoundChip", true)
 		GM.pc.addCredits(3)
 		GM.main.addMessage("You looted a chip with 3 work credits!")
 		GM.main.reRun()

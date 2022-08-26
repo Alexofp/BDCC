@@ -294,7 +294,7 @@ func _react_scene_end(_tag, _result):
 		if(battlestate == "win"):
 			setState("won_battle")
 			addExperienceToPlayer(80)
-			setFlag(RahiModule.Avy_WonCanteenFight, true)
+			setModuleFlag("RahiModule", "Avy_WonCanteenFight", true)
 		else:
 			setState("lost_battle")
 			addExperienceToPlayer(50)

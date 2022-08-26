@@ -168,13 +168,13 @@ func _run():
 
 func _react(_action: String, _args):
 	if(_action == "give_in_completely"):
-		setFlag(MedicalModule.Med_wasMilkedToday, true)
+		setModuleFlag("MedicalModule", "Med_wasMilkedToday", true)
 		processTime(60*60)
 		howMuchMilked = GM.pc.milk()
 		GM.pc.addLust(40)
 		
-		increaseFlag(MedicalModule.Med_milkMilked, howMuchMilked)
-		increaseFlag(MedicalModule.Med_milkedMilkTimes)
+		increaseModuleFlag("MedicalModule", "Med_milkMilked", howMuchMilked)
+		increaseModuleFlag("MedicalModule", "Med_milkedMilkTimes")
 		
 		addMessage(str(round(howMuchMilked / 10.0)*10.0)+" ml of milk was milked from your breasts")
 

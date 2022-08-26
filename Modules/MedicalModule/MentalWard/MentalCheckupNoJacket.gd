@@ -120,7 +120,7 @@ func _react_scene_end(_tag, _result):
 		
 		if(battlestate == "win"):
 			setState("won_fight")
-			setFlag(MedicalModule.Mental_PlayerEscaped, true)
+			setModuleFlag("MedicalModule", "Mental_PlayerEscaped", true)
 			#endScene([true])
 			addExperienceToPlayer(50)
 		else:

@@ -11,11 +11,11 @@ func _run():
 		saynn("It’s an early morning, you hear someone approaching your cell, the sound of an intercom resonates in your ears. You hear Eliza yawning and then catching herself.")
 
 		# (if bad behavior)
-		if(getFlag(MedicalModule.Mental_PCBehavior, 0.0) < 0.3):
+		if(getModuleFlag("MedicalModule", "Mental_PCBehavior", 0.0) < 0.3):
 			saynn("[say=eliza]How is the unwilling test subject doing? Plan on behaving today?[/say]")
 
 		# (if medium behavior)
-		elif(getFlag(MedicalModule.Mental_PCBehavior, 0.0) < 0.8):
+		elif(getModuleFlag("MedicalModule", "Mental_PCBehavior", 0.0) < 0.8):
 			saynn("[say=eliza]Good morning, inmate. Doing fine? Good.[/say]")
 
 		# (if best heavior)
@@ -32,7 +32,7 @@ func _run():
 		saynn("She crouches before you and observes you, your bound body, your exposed {pc.breasts}. Then she grabs your head and looks into your eyes.")
 
 		# (if low sanity)
-		if(getFlag(MedicalModule.Mental_PCSanity, 0.0) < 0.7):
+		if(getModuleFlag("MedicalModule", "Mental_PCSanity", 0.0) < 0.7):
 			saynn("[say=eliza]Still recovering but I do see some progress. Although, for now, you are still marked as ‘insane’ in our database. Just to be on the safe side~[/say]")
 
 		# (if high sanity)

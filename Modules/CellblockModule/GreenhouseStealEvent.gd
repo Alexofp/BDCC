@@ -7,7 +7,7 @@ func registerTriggers(es):
 	es.addTrigger(self, Trigger.EnteringRoom, "main_greenhouses")
 
 func run(_triggerID, _args):
-	if(!GM.main.getFlag(CellblockModule.Cellblock_GreenhouseLooted, false)):
+	if(!GM.main.getModuleFlag("CellblockModule", "Cellblock_GreenhouseLooted", false)):
 		addButtonUnlessLate("Steal", "Try and steal something", "steal_apple")
 	else:
 		addDisabledButton("Steal", "Too dangerous to do this again today")

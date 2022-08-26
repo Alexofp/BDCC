@@ -31,7 +31,7 @@ func _run():
 
 func _react(_action: String, _args):
 	if(_action == "apple"):
-		GM.main.setFlag(CellblockModule.Cellblock_GreenhouseLooted, true)
+		GM.main.setModuleFlag("CellblockModule", "Cellblock_GreenhouseLooted", true)
 		
 		GM.pc.getInventory().addItem(GlobalRegistry.createItem("appleitem"))
 		if(RNG.chance(50)):

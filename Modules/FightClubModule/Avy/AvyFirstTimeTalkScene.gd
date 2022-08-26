@@ -14,7 +14,7 @@ func _run():
 		saynn("[say=avy]What do you want?[/say]")
 
 		# (if saw before)
-		if(getFlag(RahiModule.Rahi_CanteenSceneHappened)):
+		if(getModuleFlag("RahiModule", "Rahi_CanteenSceneHappened")):
 			saynn("She raises her gaze and looks at you, suddenly realizing something.")
 
 			saynn("[say=avy]Wait, I remember you. Hah. The fuck do you need.[/say]")

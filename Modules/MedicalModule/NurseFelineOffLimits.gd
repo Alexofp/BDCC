@@ -114,7 +114,7 @@ func _react_scene_end(_tag, _result):
 		else:
 			addExperienceToPlayer(5)
 			
-			if(getFlag(MedicalModule.Mental_PlayerEscaped, false)):
+			if(getModuleFlag("MedicalModule", "Mental_PlayerEscaped", false)):
 				setState("catchEscapedPC")
 			else:
 				setState("lost_fight")

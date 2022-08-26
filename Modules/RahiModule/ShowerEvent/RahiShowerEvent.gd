@@ -7,7 +7,7 @@ func registerTriggers(es):
 	es.addTrigger(self, Trigger.TakingAShower)
 
 func run(_triggerID, _args):
-	if(!getFlag(RahiModule.Rahi_ChillHappened) || getFlag(RahiModule.Rahi_Denied) || getFlag(RahiModule.Rahi_NotThereToday)):
+	if(!getModuleFlag("RahiModule", "Rahi_ChillHappened") || getModuleFlag("RahiModule", "Rahi_Denied") || getModuleFlag("RahiModule", "Rahi_NotThereToday")):
 		return
 	
 	saynn("You notice that the familiar kitty with brown fur is taking a shower here too.")
@@ -18,6 +18,6 @@ func getPriority():
 
 func onButton(_method, _args):
 	if(_method == "talk"):
-		setFlag(RahiModule.Rahi_ShowerHappened, true)
-		setFlag(RahiModule.Rahi_NotThereToday, true)
+		setModuleFlag("RahiModule", "Rahi_ShowerHappened", true)
+		setModuleFlag("RahiModule", "Rahi_NotThereToday", true)
 		runScene("RahiShowerScene")

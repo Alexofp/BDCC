@@ -8,8 +8,8 @@ func _run():
 		addCharacter("cp_guard")
 		GM.main.playAnimation(StageScene.Duo, "stand", {npc="cp_guard"})
 
-	if(state == "" && !getFlag(CellblockModule.Cellblock_CheckpointVisited, false)):
-		setFlag(CellblockModule.Cellblock_CheckpointVisited, true)
+	if(state == "" && !getModuleFlag("CellblockModule", "Cellblock_CheckpointVisited", false)):
+		setModuleFlag("CellblockModule", "Cellblock_CheckpointVisited", true)
 		
 		saynn("To get to the elevator you first need to get through the checkpoint. It looks like a short corridor that’s protected by a security camera and a guard. The guard is clearly a guy, medium build, blue uniform, light armor, a belt with a few things like a stunstick and a remote.")
 
@@ -318,7 +318,7 @@ func _react(_action: String, _args):
 		GM.pc.updateNonBattleEffects()
 
 	if(_action == "allowFullAndendthescene"):
-		setFlag(CellblockModule.Cellblock_FreeToPassCheckpoint, true)
+		setModuleFlag("CellblockModule", "Cellblock_FreeToPassCheckpoint", true)
 		endScene()
 		return
 

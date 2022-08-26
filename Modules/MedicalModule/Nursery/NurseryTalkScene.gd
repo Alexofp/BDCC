@@ -17,8 +17,8 @@ func _run():
 		addCharacter("nurse")
 		
 	if(state == ""):
-		if(!GM.main.getFlag(MedicalModule.Nursery_Introduced)):
-			GM.main.setFlag(MedicalModule.Nursery_Introduced, true)
+		if(!GM.main.getModuleFlag("MedicalModule", "Nursery_Introduced")):
+			GM.main.setModuleFlag("MedicalModule", "Nursery_Introduced", true)
 			
 			saynn("You approach the nurse and try to get her attention. She drags her gaze away from the screen and looks at you.")
 
@@ -50,8 +50,8 @@ func _run():
 		
 		addButton("How works", "Ask her how everything works", "how_works")
 		
-		if(getFlag(MedicalModule.Nursery_AskedHowWorks, false)):
-			if(!getFlag(MedicalModule.Nursery_AskedDatabase, false)):
+		if(getModuleFlag("MedicalModule", "Nursery_AskedHowWorks", false)):
+			if(!getModuleFlag("MedicalModule", "Nursery_AskedDatabase", false)):
 				addButton("Database", "Is there really no way to interact with them", "children")
 			else:
 				addButton("Database", "Take a look at your children", "database")
@@ -71,7 +71,7 @@ func _run():
 		GM.ES.triggerRun(Trigger.TalkingToNPC, ["nurse"])
 
 	if(state == "how_works"):
-		setFlag(MedicalModule.Nursery_AskedHowWorks, true)
+		setModuleFlag("MedicalModule", "Nursery_AskedHowWorks", true)
 		
 		saynn("[say=pc]How does this all work?[/say]")
 
@@ -110,7 +110,7 @@ func _run():
 		addButton("Continue", "That's nice", "")
 
 	if(state == "children"):
-		setFlag(MedicalModule.Nursery_AskedDatabase, true)
+		setModuleFlag("MedicalModule", "Nursery_AskedDatabase", true)
 		
 		saynn("[say=pc]Is there really no way to check my children?[/say]")
 

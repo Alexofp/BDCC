@@ -1,34 +1,40 @@
 extends Module
 class_name MedicalModule
 
-const Eliza_IntroducedMedical = "Eliza_IntroducedMedical"
-const Med_pcKnowsAboutWork = "Med_pcKnowsAboutWork"
-const Med_pcKnowsAboutBreeding = "Med_pcKnowsAboutBreeding"
-const Med_pcKnowsAboutTests = "Med_pcKnowsAboutTests"
-const Med_pcKnowsAboutMilking = "Med_pcKnowsAboutBreeding"
-const Med_milkingMilkFirstTime = "Med_milkingMilkFirstTime"
-const Med_milkingSeedFirstTime = "Med_milkingSeedFirstTime"
+func getFlags():
+	return {
+		# Medical module
+		"Eliza_IntroducedMedical": flag(FlagType.Bool),
+		"Med_pcKnowsAboutWork": flag(FlagType.Bool),
+		"Med_pcKnowsAboutBreeding": flag(FlagType.Bool),
+		"Med_pcKnowsAboutTests": flag(FlagType.Bool),
+		"Med_pcKnowsAboutMilking": flag(FlagType.Bool),
+		"Med_milkingMilkFirstTime": flag(FlagType.Bool),
+		"Med_milkingSeedFirstTime": flag(FlagType.Bool),
 
-const Med_milkMilked = "Med_milkMilked"
-const Med_seedMilked = "Med_seedMilked"
-const Med_milkedMilkTimes = "Med_milkedMilkTimes"
-const Med_milkedSeedTimes = "Med_milkedSeedTimes"
-
-const Med_wasMilkedToday = "Med_wasMilkedToday"
-
-const Mental_PCBehavior = "Mental_PCBehavior"
-const Mental_PCSanity = "Mental_PCSanity"
-const Mental_CheckupHappened = "Mental_DidCheckup"
-const Mental_ExperimentHappened = "Mental_ExperimentHappened"
-const Mental_ShowerHappened = "Mental_ShowerHappened"
-const Mental_ExpObeyDrug = "Mental_ExpObeyDrug"
-const Mental_ExpTentacles = "Mental_ExpTentacles"
-const Mental_HasKeycard = "Mental_HasKeycard"
-const Mental_PlayerEscaped = "Mental_PlayerEscaped"
-
-const Nursery_Introduced = "Nursery_Introduced"
-const Nursery_AskedHowWorks = "Nursery_AskedHowWorks"
-const Nursery_AskedDatabase = "Nursery_AskedDatabase"
+		"Med_milkMilked": flag(FlagType.Number),
+		"Med_seedMilked": flag(FlagType.Number),
+		"Med_milkedMilkTimes": flag(FlagType.Number),
+		"Med_milkedSeedTimes": flag(FlagType.Number),
+		
+		"Med_wasMilkedToday": flag(FlagType.Bool),
+		
+		"Mental_PCBehavior": flag(FlagType.Number),
+		"Mental_PCSanity": flag(FlagType.Number),
+		"Mental_CheckupHappened": flag(FlagType.Bool),
+		"Mental_ExperimentHappened": flag(FlagType.Bool),
+		"Mental_ShowerHappened": flag(FlagType.Bool),
+		
+		"Mental_ExpObeyDrug": flag(FlagType.Number),
+		"Mental_ExpTentacles": flag(FlagType.Number),
+		
+		"Mental_HasKeycard": flag(FlagType.Bool),
+		"Mental_PlayerEscaped": flag(FlagType.Bool),
+		
+		"Nursery_Introduced": flag(FlagType.Bool),
+		"Nursery_AskedHowWorks": flag(FlagType.Bool),
+		"Nursery_AskedDatabase": flag(FlagType.Bool),
+	}
 
 func _init():
 	id = "MedicalModule"
@@ -72,31 +78,31 @@ func _init():
 	]
 
 func resetFlagsOnNewDay():
-	GM.main.setFlag("Med_wasMilkedToday", false)
-	GM.main.setFlag("Mental_CheckupHappened", false)
-	GM.main.setFlag("Mental_ExperimentHappened", false)
-	GM.main.setFlag("Mental_ShowerHappened", false)
-	GM.main.setFlag("Mental_PlayerEscaped", false)
+	GM.main.setModuleFlag("MedicalModule", "Med_wasMilkedToday", false)
+	GM.main.setModuleFlag("MedicalModule", "Mental_CheckupHappened", false)
+	GM.main.setModuleFlag("MedicalModule", "Mental_ExperimentHappened", false)
+	GM.main.setModuleFlag("MedicalModule", "Mental_ShowerHappened", false)
+	GM.main.setModuleFlag("MedicalModule", "Mental_PlayerEscaped", false)
 
 static func resetFlagsOnGettingIntoMentalWard():
-	GM.main.setFlag("Mental_PCBehavior", 0.1)
-	GM.main.setFlag("Mental_PCSanity", 0.0)
+	GM.main.setModuleFlag("MedicalModule", "Mental_PCBehavior", 0.1)
+	GM.main.setModuleFlag("MedicalModule", "Mental_PCSanity", 0.0)
 	
-	GM.main.setFlag("Mental_ExpObeyDrug", 0)
-	GM.main.setFlag("Mental_ExpTentacles", 0)
-	GM.main.setFlag("Mental_HasKeycard", false)
-	GM.main.setFlag("Mental_PlayerEscaped", false)
+	GM.main.setModuleFlag("MedicalModule", "Mental_ExpObeyDrug", 0)
+	GM.main.setModuleFlag("MedicalModule", "Mental_ExpTentacles", 0)
+	GM.main.setModuleFlag("MedicalModule", "Mental_HasKeycard", false)
+	GM.main.setModuleFlag("MedicalModule", "Mental_PlayerEscaped", false)
 
 static func addPCBehavior(value):
-	GM.main.setFlag("Mental_PCBehavior", GM.main.getFlag("Mental_PCBehavior", 0.0) + value)
-	if(GM.main.getFlag("Mental_PCBehavior", 0.0) < 0.0):
-		GM.main.setFlag("Mental_PCBehavior", 0.0)
-	if(GM.main.getFlag("Mental_PCBehavior", 0.0) > 1.0):
-		GM.main.setFlag("Mental_PCBehavior", 1.0)
+	GM.main.setModuleFlag("MedicalModule", "Mental_PCBehavior", GM.main.getModuleFlag("MedicalModule", "Mental_PCBehavior", 0.0) + value)
+	if(GM.main.getModuleFlag("MedicalModule", "Mental_PCBehavior", 0.0) < 0.0):
+		GM.main.setModuleFlag("MedicalModule", "Mental_PCBehavior", 0.0)
+	if(GM.main.getModuleFlag("MedicalModule", "Mental_PCBehavior", 0.0) > 1.0):
+		GM.main.setModuleFlag("MedicalModule", "Mental_PCBehavior", 1.0)
 
 static func addPCSanity(value):
-	GM.main.setFlag("Mental_PCSanity", GM.main.getFlag("Mental_PCSanity", 0.0) + value)
-	if(GM.main.getFlag("Mental_PCSanity", 0.0) < 0.0):
-		GM.main.setFlag("Mental_PCSanity", 0.0)
-	if(GM.main.getFlag("Mental_PCSanity", 0.0) > 1.0):
-		GM.main.setFlag("Mental_PCSanity", 1.0)
+	GM.main.setModuleFlag("MedicalModule", "Mental_PCSanity", GM.main.getModuleFlag("MedicalModule", "Mental_PCSanity", 0.0) + value)
+	if(GM.main.getModuleFlag("MedicalModule", "Mental_PCSanity", 0.0) < 0.0):
+		GM.main.setModuleFlag("MedicalModule", "Mental_PCSanity", 0.0)
+	if(GM.main.getModuleFlag("MedicalModule", "Mental_PCSanity", 0.0) > 1.0):
+		GM.main.setModuleFlag("MedicalModule", "Mental_PCSanity", 1.0)

@@ -24,7 +24,7 @@ func _run():
 		addButton("Nah", "Say that you’re not interested at all, this will stop any further interactions from Rahi", "nah")
 
 	if(state == "nah"):
-		setFlag(RahiModule.Rahi_Denied, true)
+		setModuleFlag("RahiModule", "Rahi_Denied", true)
 		
 		saynn("[say=pc]Sorry, nothing wrong with you but I’m just not interested.[/say]")
 
@@ -40,7 +40,7 @@ func _run():
 		addButton("Continue", "Continue on your way", "endthescene")
 
 	if(state == "busy"):
-		setFlag(RahiModule.Rahi_ChillCooldown, RNG.randi_range(4, 10))
+		setModuleFlag("RahiModule", "Rahi_ChillCooldown", RNG.randi_range(4, 10))
 		
 		saynn("[say=pc]I’m deeply sorry but can you find me some other time?[/say]")
 
@@ -56,7 +56,7 @@ func _run():
 		addButton("Continue", "Continue on your way", "endthescene")
 
 	if(state == "sure"):
-		setFlag(RahiModule.Rahi_ChillHappened, true)
+		setModuleFlag("RahiModule", "Rahi_ChillHappened", true)
 		
 		saynn("[say=pc]Yeah, sure, we can do that. Know any good spots?[/say]")
 
@@ -216,7 +216,7 @@ func _react(_action: String, _args):
 			GM.pc.addPain(-40)
 			addMessage("That made you feel better")
 			
-		setFlag(RahiModule.Rahi_NotThereToday, true)
+		setModuleFlag("RahiModule", "Rahi_NotThereToday", true)
 
 	if(_action == "endthescene"):
 		endScene()

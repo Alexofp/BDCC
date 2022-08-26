@@ -147,13 +147,13 @@ func _run():
 
 func _react(_action: String, _args):
 	if(_action == "give_in_completely"):
-		setFlag(MedicalModule.Med_wasMilkedToday, true)
+		setModuleFlag("MedicalModule", "Med_wasMilkedToday", true)
 		processTime(80*60)
 		howMuchMilked = GM.pc.milkSeed()
 		GM.pc.orgasmFrom("eliza")
 		
-		increaseFlag(MedicalModule.Med_seedMilked, howMuchMilked)
-		increaseFlag(MedicalModule.Med_milkedSeedTimes)
+		increaseModuleFlag("MedicalModule", "Med_seedMilked", howMuchMilked)
+		increaseModuleFlag("MedicalModule", "Med_milkedSeedTimes")
 		
 		addMessage(str(round(howMuchMilked / 10.0)*10.0)+" ml of cum was milked from your cock")
 

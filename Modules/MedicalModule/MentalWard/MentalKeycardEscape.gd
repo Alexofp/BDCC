@@ -38,7 +38,7 @@ func _run():
 		GM.main.playAnimation(StageScene.Solo, "walk")
 		setLocationName("Medical lobby")
 		GM.pc.setLocation("med_lobbyne")
-		setFlag(MedicalModule.Mental_PlayerEscaped, true)
+		setModuleFlag("MedicalModule", "Mental_PlayerEscaped", true)
 		
 		# (if no hands)
 		if(GM.pc.hasBlockedHands()):

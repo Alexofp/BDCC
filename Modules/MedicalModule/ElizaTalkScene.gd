@@ -14,8 +14,8 @@ func _run():
 		GM.main.playAnimation(StageScene.Duo, "stand", {npc="eliza", npcAction="stand"})
 		
 	if(state == ""):
-		if(!GM.main.getFlag(MedicalModule.Eliza_IntroducedMedical)):
-			GM.main.setFlag(MedicalModule.Eliza_IntroducedMedical, true)
+		if(!GM.main.getModuleFlag("MedicalModule", "Eliza_IntroducedMedical")):
+			GM.main.setModuleFlag("MedicalModule", "Eliza_IntroducedMedical", true)
 			
 			saynn("Medical wing lobby looks bright, the walls are made out of white concrete and are well-lit by many fluorescent lights. Behind the counter you see a doctor, a familiar face, the one who processed you on the day of your arrival. She is sitting on an office chair and sipping coffee. Her mug seems to be a personal one, your gaze catches the words ‘best mom’ written on it.")
 
@@ -41,13 +41,13 @@ func _run():
 
 		addButton("Talk", "Ask her some questions", "talk")
 		addButton("Appearance", "Take a closer look", "appearance")
-		if(getFlag(MedicalModule.Med_pcKnowsAboutTests)):
+		if(getModuleFlag("MedicalModule", "Med_pcKnowsAboutTests")):
 			addButton("Research", "You're curious about the experiments", "research")
 		else:
 			addDisabledButton("Research", "Talk about it with Eliza first")
-		if(getFlag(MedicalModule.Med_pcKnowsAboutMilking)):
+		if(getModuleFlag("MedicalModule", "Med_pcKnowsAboutMilking")):
 			
-			if(!getFlag(MedicalModule.Med_wasMilkedToday, false)):
+			if(!getModuleFlag("MedicalModule", "Med_wasMilkedToday", false)):
 				addButton("Milking", "Ask to be milked", "milking")
 			else:
 				addDisabledButton("Milking", "Give yourself some rest")
@@ -76,13 +76,13 @@ func _run():
 		
 		addButton("Best mom?", "Ask her why she has that mug", "best_mom?")
 		addButton("Work", "What kind of stuff happens here", "work")
-		if(getFlag(MedicalModule.Med_pcKnowsAboutWork)):
+		if(getModuleFlag("MedicalModule", "Med_pcKnowsAboutWork")):
 			addButton("Pregnancies", "Ask about how the childbirth is handled", "pregnancies")
 			addButton("Research", "Ask about what are they researching here", "talkresearch")
 		else:
 			addDisabledButton("Pregnancies", "You don't know about this yet")
 			addDisabledButton("Research", "You don't know about this yet")
-		if(getFlag(MedicalModule.Med_pcKnowsAboutBreeding)):
+		if(getModuleFlag("MedicalModule", "Med_pcKnowsAboutBreeding")):
 			addButton("Milking", "What’s up with that", "talkmilking")
 		else:
 			addDisabledButton("Milking", "You don't know about this yet")
@@ -102,7 +102,7 @@ func _run():
 		addButton("Continue", "Continue talking", "talk")
 
 	if(state == "work"):
-		setFlag(MedicalModule.Med_pcKnowsAboutWork, true)
+		setModuleFlag("MedicalModule", "Med_pcKnowsAboutWork", true)
 		
 		saynn("[say=pc]Inmates that are beaten up badly end up here?[/say]")
 
@@ -115,7 +115,7 @@ func _run():
 		addButton("Continue", "Continue talking", "talk")
 
 	if(state == "pregnancies"):
-		setFlag(MedicalModule.Med_pcKnowsAboutBreeding, true)
+		setModuleFlag("MedicalModule", "Med_pcKnowsAboutBreeding", true)
 		
 		saynn("[say=pc]What happens to the inmates that become pregnant?[/say]")
 
@@ -136,7 +136,7 @@ func _run():
 		addButton("Continue", "Continue talking", "talk")
 
 	if(state == "talkresearch"):
-		setFlag(MedicalModule.Med_pcKnowsAboutTests, true)
+		setModuleFlag("MedicalModule", "Med_pcKnowsAboutTests", true)
 		
 		saynn("[say=pc]What types of research are you doing here?[/say]")
 
@@ -157,7 +157,7 @@ func _run():
 		addButton("Continue", "Continue talking", "talk")
 
 	if(state == "talkmilking"):
-		setFlag(MedicalModule.Med_pcKnowsAboutMilking, true)
+		setModuleFlag("MedicalModule", "Med_pcKnowsAboutMilking", true)
 		
 		saynn("[say=pc]If I’m lactating I can donate milk here?[/say]")
 
@@ -202,8 +202,8 @@ func _run():
 
 	if(state == "milk"):
 		# (First time scene)
-		if(!getFlag(MedicalModule.Med_milkingMilkFirstTime)):
-			setFlag(MedicalModule.Med_milkingMilkFirstTime, true)
+		if(!getModuleFlag("MedicalModule", "Med_milkingMilkFirstTime")):
+			setModuleFlag("MedicalModule", "Med_milkingMilkFirstTime", true)
 			saynn("[say=pc]I want my breasts to be milked..[/say]")
 
 			saynn("The doctor steps away from the counter and walks behind some wall just to appear a few seconds later from one of the airlocks. She walks up to you and starts observing you.")
@@ -266,14 +266,14 @@ func _run():
 
 			saynn("[say=eliza]Alright, inmate. Any preferences?[/say]")
 			
-			sayn("Amount of milk donated: "+str(floor(getFlag(MedicalModule.Med_milkMilked, 0.0)))+" ml")
-			saynn("Amount of times milked: "+str(getFlag(MedicalModule.Med_milkedMilkTimes, 0)))
+			sayn("Amount of milk donated: "+str(floor(getModuleFlag("MedicalModule", "Med_milkMilked", 0.0)))+" ml")
+			saynn("Amount of times milked: "+str(getModuleFlag("MedicalModule", "Med_milkedMilkTimes", 0)))
 			
 		if(GM.pc.canBeMilked()):
 			addButton("Hand milking", "You’re not very picky, the old-fashioned way will do just fine", "milk_handmilk")
 		else:
 			addDisabledButton("Hand milking", "You can't be milked right now")
-		if(getFlag(MedicalModule.Med_milkedMilkTimes, 0) >= 1 && getFlag(MedicalModule.Med_milkMilked, 0.0) > 0.0):
+		if(getModuleFlag("MedicalModule", "Med_milkedMilkTimes", 0) >= 1 && getModuleFlag("MedicalModule", "Med_milkMilked", 0.0) > 0.0):
 			if(GM.pc.canBeMilked()):
 				addButton("Milking pumps", "An automated way of milking sounds nice", "milk_pumps")
 			else:
@@ -287,8 +287,8 @@ func _run():
 
 	if(state == "seed"):
 		# (first time)
-		if(!getFlag(MedicalModule.Med_milkingSeedFirstTime)):
-			setFlag(MedicalModule.Med_milkingSeedFirstTime, true)
+		if(!getModuleFlag("MedicalModule", "Med_milkingSeedFirstTime")):
+			setModuleFlag("MedicalModule", "Med_milkingSeedFirstTime", true)
 			saynn("[say=pc]I wanna be cock-milked.[/say]")
 
 			saynn("The doctor steps away from the counter and walks behind some wall just to appear a few seconds later from one of the airlocks. She walks up to you and starts observing you, focusing mostly on your crotch.")
@@ -313,8 +313,8 @@ func _run():
 
 			saynn("[say=eliza]We can certainly do that~.[/say]")
 			
-			sayn("Amount of seed donated: "+str(floor(getFlag(MedicalModule.Med_seedMilked, 0.0)))+" ml")
-			saynn("Amount of times seed milked: "+str(getFlag(MedicalModule.Med_milkedSeedTimes, 0)))
+			sayn("Amount of seed donated: "+str(floor(getModuleFlag("MedicalModule", "Med_seedMilked", 0.0)))+" ml")
+			saynn("Amount of times seed milked: "+str(getModuleFlag("MedicalModule", "Med_milkedSeedTimes", 0)))
 			
 			
 		if(GM.pc.canBeSeedMilked()):
@@ -332,13 +332,6 @@ func _run():
 
 
 func _react(_action: String, _args):
-	if(_action == "giveapple"):
-		GM.main.setFlag(RahiModule.Rahi_GaveApple, true)
-		GM.pc.getInventory().removeXOfOrDestroy("appleitem", 1)
-	
-	if(_action == "who_are_you"):
-		GM.main.setFlag(RahiModule.Rahi_AskedName, true)
-	
 	if(_action == "induce_lactation"):
 		runScene("ElizaInducingLactation")
 		endScene()

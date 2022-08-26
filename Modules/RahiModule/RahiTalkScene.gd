@@ -14,8 +14,8 @@ func _run():
 		GM.main.playAnimation(StageScene.Duo, "stand", {npc="rahi", npcAction="sit"})
 		
 	if(state == ""):
-		if(!GM.main.getFlag(RahiModule.Rahi_Introduced)):
-			GM.main.setFlag(RahiModule.Rahi_Introduced, true)
+		if(!GM.main.getModuleFlag("RahiModule", "Rahi_Introduced")):
+			GM.main.setModuleFlag("RahiModule", "Rahi_Introduced", true)
 			
 			saynn("While wandering around the cellblock you stumble upon a feline, a new face. She is sitting on a metal bench, legs tucked under her with her fluffy tail on top that she idly strokes from time to time. Her orange uniform and collar show that she is from a general block, she doesn’t look very intimidating.")
 
@@ -69,7 +69,7 @@ func _run():
 		else:
 			addDisabledButton("Embrace kitty", "She doesn't trust you enough")
 		
-		if(!getFlag(RahiModule.Rahi_GaveApple)):
+		if(!getModuleFlag("RahiModule", "Rahi_GaveApple")):
 			if(GM.pc.getInventory().hasItemID("appleitem")):
 				addButton("Offer apple", "Maybe she would like one", "giveapple")
 			else:
@@ -97,7 +97,7 @@ func _run():
 		saynn("[say=rahi]You wanna talk about something? Meow..[/say]")
 		
 		addButton("Who are you", "Ask the feline’s name", "who_are_you")
-		if(!GM.main.getFlag(RahiModule.Rahi_AskedName)):
+		if(!GM.main.getModuleFlag("RahiModule", "Rahi_AskedName")):
 			addDisabledButton("Speech", "She doesn't know you yet")
 			addDisabledButton("Why are you here", "She doesn't know you yet")
 			addDisabledButton("What is this place", "She doesn't know you yet")
@@ -243,11 +243,11 @@ func _run():
 
 func _react(_action: String, _args):
 	if(_action == "giveapple"):
-		GM.main.setFlag(RahiModule.Rahi_GaveApple, true)
+		GM.main.setModuleFlag("RahiModule", "Rahi_GaveApple", true)
 		GM.pc.getInventory().removeXOfOrDestroy("appleitem", 1)
 	
 	if(_action == "who_are_you"):
-		GM.main.setFlag(RahiModule.Rahi_AskedName, true)
+		GM.main.setModuleFlag("RahiModule", "Rahi_AskedName", true)
 	
 	if(_action == "embrace"):
 		runScene("RahiEmbraceScene")

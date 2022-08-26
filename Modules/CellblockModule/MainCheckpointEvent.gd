@@ -7,7 +7,7 @@ func registerTriggers(es):
 	es.addTrigger(self, Trigger.EnteringRoom, "hall_checkpoint")
 
 func react(_triggerID, _args):
-	if(GM.main.getFlag(CellblockModule.Cellblock_FreeToPassCheckpoint)):
+	if(GM.main.getModuleFlag("CellblockModule", "Cellblock_FreeToPassCheckpoint")):
 		return false
 	
 	if(_args != null && _args.size() > 1 && _args[1] == Direction.North):

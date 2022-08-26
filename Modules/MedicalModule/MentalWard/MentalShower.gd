@@ -46,8 +46,8 @@ func _run():
 		saynn("She puts the straitjacket away for now and turns one of the showers for you, the water seems pleasingly warm.")
 
 		# (if bad behavior)
-		if(getFlag(MedicalModule.Mental_PCBehavior, 0.0) < 0.4):
-			if(getFlag(MedicalModule.Mental_PCBehavior, 0.0) < 0.2):
+		if(getModuleFlag("MedicalModule", "Mental_PCBehavior", 0.0) < 0.4):
+			if(getModuleFlag("MedicalModule", "Mental_PCBehavior", 0.0) < 0.2):
 				saynn("[say=eliza]Since you’re such a bratty test subject I will be looking at you to make sure you don’t cause any trouble.[/say]")
 			else:
 				saynn("[say=eliza]I don't trust you enough so I will be looking at you to make sure you don’t cause any trouble.[/say]")
@@ -203,7 +203,7 @@ func _react(_action: String, _args):
 			MedicalModule.addPCBehavior(-0.7)
 		else:
 			setState("steal_keycard_succ")
-			setFlag(MedicalModule.Mental_HasKeycard, true)
+			setModuleFlag("MedicalModule", "Mental_HasKeycard", true)
 		return
 
 	if(_action == "endthescene"):
@@ -213,6 +213,6 @@ func _react(_action: String, _args):
 	setState(_action)
 
 func calculateStealChance():
-	var result = -30.0 + getFlag(MedicalModule.Mental_PCBehavior, 0.0) * 130.0 + GM.pc.getStat(Stat.Agility) * 2.0
+	var result = -30.0 + getModuleFlag("MedicalModule", "Mental_PCBehavior", 0.0) * 130.0 + GM.pc.getStat(Stat.Agility) * 2.0
 	
 	return clamp(result, 0.0, 100.0)

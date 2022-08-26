@@ -7,13 +7,13 @@ func registerTriggers(es):
 	es.addTrigger(self, Trigger.EnteringRoom, "main_bench2")
 
 func run(_triggerID, _args):
-	if(getFlag(RahiModule.Rahi_NotThereToday, false)):
+	if(getModuleFlag("RahiModule", "Rahi_NotThereToday", false)):
 		saynn("Seems like the kitty is not here")
 		
 		addDisabledButton("Rahi", "She is not here today")
 		return
 	
-	if(!GM.main.getFlag(RahiModule.Rahi_Introduced)):
+	if(!getModuleFlag("RahiModule", "Rahi_Introduced")):
 		saynn("You see some unknown feline sitting on a bench")
 	else:
 		saynn("You see the Kitty sitting on a bench")

@@ -218,7 +218,7 @@ func _react(_action: String, _args):
 		GM.pc.addCredits(1)
 		addMessage("You received 1 work credit!")
 		
-		setFlag(MedicalModule.Mental_ExpObeyDrug, Util.maxi(1, getFlag(MedicalModule.Mental_ExpObeyDrug, 0)))
+		setModuleFlag("MedicalModule", "Mental_ExpObeyDrug", Util.maxi(1, getModuleFlag("MedicalModule", "Mental_ExpObeyDrug", 0)))
 
 	if(_action == "endthescene"):
 		endScene()

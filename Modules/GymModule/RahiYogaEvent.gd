@@ -7,7 +7,7 @@ func registerTriggers(es):
 	es.addTrigger(self, Trigger.ApproachedYogaMats)
 
 func run(_triggerID, _args):
-	if(!getFlag(RahiModule.Rahi_Introduced)):
+	if(!getModuleFlag("RahiModule", "Rahi_Introduced")):
 		return
 	
 	if(GM.main.getTime() <= 7*60*60):
