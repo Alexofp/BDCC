@@ -106,7 +106,7 @@ func _react(_action: String, _args):
 		endScene()
 		processTime(30*5)
 		
-		increaseFlag(TaviModule.Tavi_Submissiveness)
+		GM.main.increaseModuleFlag("TaviModule", "Tavi_Submissiveness")
 		return
 
 

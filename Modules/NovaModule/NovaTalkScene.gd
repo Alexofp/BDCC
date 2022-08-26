@@ -13,18 +13,18 @@ func _run():
 		addCharacter("nova")
 		GM.main.playAnimation(StageScene.Duo, "stand", {npc="nova", npcAction="stand"})
 	if(state == ""):
-		if(!getFlag(NovaModule.Nova_Introduced)):
-			setFlag(NovaModule.Nova_Introduced, true)
+		if(!GM.main.getModuleFlag("NovaModule", "Nova_Introduced")):
+			GM.main.setModuleFlag("NovaModule", "Nova_Introduced", true)
 			saynn("You walk up to some guard that seems to be patrolling the yard area. First thing you notice is her canine features and a feminine body. Gray fur and curly tail help you identify her as a husky. She is armored and her armor seems to be quite advanced, even requiring something that looks like a little nuclear power generator on her back. Under it you spot a fancy stealthy bodysuit and a short black skirt.")
 
 			saynn("She is fidgeting with her stun baton when her eyes spot you. She stops her patrol and directs her full attention at you.")
 
 			# (if seen before)
-			if(getFlag(NovaModule.Nova_SawPC)):
+			if(GM.main.getModuleFlag("NovaModule", "Nova_SawPC")):
 				saynn("[say=nova]I remember you, little rascal.[/say]")
 
 				# (if humiliated nova)
-				if(getFlag(NovaModule.Nova_GotHumiliatedByPC)):
+				if(GM.main.getModuleFlag("NovaModule", "Nova_GotHumiliatedByPC")):
 					saynn("[say=pc]Yeah, and I remember humiliating you.[/say]")
 
 					saynn("[say=nova]Well, you kno-o-ow. You win some, you lose some. Sometimes losing is fun too~[/say]")

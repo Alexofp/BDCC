@@ -8,14 +8,14 @@ func registerTriggers(es):
 	es.addTrigger(self, Trigger.ApproachedWeightsBench)
 
 func react(_triggerID, _args):
-	if(getModuleFlag(GymModule.ModID, GymModule.Gym_BullyGangPayed)):
+	if(getModuleFlag("GymModule", "Gym_BullyGangPayed")):
 		return false
 		
 	if(RNG.chance(50)):
 		return false
 	
 	runScene("BullyGangScene")
-	setModuleFlag(GymModule.ModID, GymModule.Gym_BullyGangPayed, true)
+	setModuleFlag("GymModule", "Gym_BullyGangPayed", true)
 	return true
 
 func getPriority():

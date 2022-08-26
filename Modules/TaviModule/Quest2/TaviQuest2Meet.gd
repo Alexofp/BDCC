@@ -97,7 +97,7 @@ func _react(_action: String, _args):
 		GM.pc.getInventory().addItem(GlobalRegistry.createItem("painkillers"))
 		addMessage("You recieved 2 painkillers")
 		
-		setFlag(TaviModule.Tavi_Quest2MetHer, true)
+		setModuleFlag("TaviModule", "Tavi_Quest2MetHer", true)
 	
 	if(_action == "endthescene"):
 		endScene()

@@ -252,7 +252,7 @@ func _run():
 		addButton("Submit", "Maybe you went too far..", "submit2")
 		addButton("Walk away", "Leave Tavi", "walk_away")
 		addButtonWithChecks("Dominate Tavi", "Make that bitch submit to you using violence", "dominateTavi", [], [ButtonChecks.NotHandsBlocked])
-		if(getFlag(TaviModule.Tavi_Submissiveness, 0) >= 1):
+		if(getModuleFlag("TaviModule", "Tavi_Submissiveness", 0) >= 1):
 			addButtonWithChecks("Degrade Tavi", "Force her to act like a puppy", "degradeTavi", [], [ButtonChecks.NotHandsBlocked])
 		else:
 			addDisabledButton("Degrade Tavi", "Tavi needs to be at least a little bit obedient")
@@ -438,12 +438,10 @@ func _react(_action: String, _args):
 
 	if(_action == "endthescene"):
 		endScene()
-		GM.main.setFlag(TaviModule.Tavi_IntroducedTo, true)
 		return
 		
 	if(_action == "dominateTavi"):
 		TaviModule.makeTaviAngry()
-		GM.main.setFlag(TaviModule.Tavi_IntroducedTo, true)
 		
 		runScene("DominateTaviScene")
 		endScene()
@@ -451,7 +449,6 @@ func _react(_action: String, _args):
 		
 	if(_action == "degradeTavi"):
 		TaviModule.makeTaviAngry()
-		GM.main.setFlag(TaviModule.Tavi_IntroducedTo, true)
 		
 		runScene("DegradeTaviScene")
 		endScene()

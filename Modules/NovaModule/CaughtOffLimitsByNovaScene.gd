@@ -9,7 +9,7 @@ func _run():
 		GM.main.playAnimation(StageScene.Duo, "stand", {npc="nova", npcAction="stand"})
 		
 	if(state == ""):
-		setFlag(NovaModule.Nova_SawPC, true)
+		GM.main.setModuleFlag("NovaModule", "Nova_SawPC", true)
 		
 		saynn("You hear someone’s footsteps behind, sounds like heavy boots. You decide to hide behind the nearest wall and hope not to be spotted. You hear a female voice.")
 
@@ -285,19 +285,19 @@ func _react(_action: String, _args):
 
 	if(_action == "humiliateAngel"):
 		runScene("HumiliateNovaScene")
-		setFlag(NovaModule.Nova_GotHumiliatedByPC, true)
+		GM.main.setModuleFlag("NovaModule", "Nova_GotHumiliatedByPC", true)
 		endScene()
 		return
 		
 	if(_action == "rideSubbyAngel"):
 		runScene("RideSubbyNovaScene")
-		setFlag(NovaModule.Nova_GotHumiliatedByPC, true)
+		GM.main.setModuleFlag("NovaModule", "Nova_GotHumiliatedByPC", true)
 		endScene()
 		return
 		
 	if(_action == "fuckSubbyAngel"):
 		runScene("FuckSubbyNovaScene")
-		setFlag(NovaModule.Nova_GotHumiliatedByPC, true)
+		GM.main.setModuleFlag("NovaModule", "Nova_GotHumiliatedByPC", true)
 		endScene()
 		return
 		

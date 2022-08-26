@@ -134,13 +134,13 @@ func getThickness():
 func onGivingBirth(_impregnatedEggCells: Array, _newkids: Array):
 	.onGivingBirth(_impregnatedEggCells, _newkids)
 	
-	GM.main.increaseFlag(NovaModule.Nova_GaveBirthTimes, 1)
+	GM.main.increaseModuleFlag("NovaModule", "Nova_GaveBirthTimes", 1)
 
 func onCharacterVisiblyPregnant():
 	.onCharacterVisiblyPregnant()
 	
-	if(!GM.main.getFlag(NovaModule.Nova_FirstTimePregnantHappened, false)):
-		GM.main.setFlag(NovaModule.Nova_NotThereToday, true)
+	if(!GM.main.getModuleFlag("NovaModule", "Nova_FirstTimePregnantHappened", false)):
+		GM.main.setModuleFlag("NovaModule", "Nova_NotThereToday", true)
 
 func getLootTable(_battleName):
 	return GuardLoot.new()

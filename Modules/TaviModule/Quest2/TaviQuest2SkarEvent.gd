@@ -9,9 +9,9 @@ func registerTriggers(es):
 func react(_triggerID, _args):
 	if(GM.QS.isCompleted("TaviQuest2")):
 		return false
-	if(!GM.main.getFlag(TaviModule.Tavi_Quest2Started, false)):
+	if(!GM.main.getModuleFlag("TaviModule", "Tavi_Quest2Started", false)):
 		return false
-	if(!GM.main.getFlag(TaviModule.Tavi_Quest2MetHer, false)):
+	if(!GM.main.getModuleFlag("TaviModule", "Tavi_Quest2MetHer", false)):
 		return false
 	
 	runScene("TaviQuest2Skar")

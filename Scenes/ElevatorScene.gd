@@ -15,7 +15,7 @@ func _run():
 			["Medical", "med_elevator", "Floor that has all the medical and science facilities"],
 		]
 		
-		if(GM.QS.isActive("TaviQuest2") && getFlag(TaviModule.Tavi_Quest2MetHer, false)):
+		if(GM.QS.isActive("TaviQuest2") && getModuleFlag("TaviModule", "Tavi_Quest2MetHer", false)):
 			floors.append([
 				"Command deck", "cd_elevator", "Where all the higher-ups live"
 			])

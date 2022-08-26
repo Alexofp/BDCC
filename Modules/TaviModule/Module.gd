@@ -1,20 +1,22 @@
 extends Module
 class_name TaviModule
 
-const Tavi_IntroducedTo = "Tavi_IntroducedTo"
-const Tavi_IsAngryAtPlayer = "Tavi_IsAngryAtPlayer"
-const Tavi_ToldHowToEscape = "Tavi_ToldHowToEscape"
-const Tavi_NeedsApple = "Tavi_NeedsApple"
-const Tavi_GotApple = "Tavi_GotApple"
-const Tavi_AngryUntilDay = "Tavi_AngryUntilDay"
-const Tavi_Submissiveness = "Tavi_Submissiveness"
-
-const Tavi_ShowerEventHappened = "Tavi_ShowerEventHappened"
-
-const Tavi_Quest2Started = "Tavi_Quest2Started"
-const Tavi_Quest2Day = "Tavi_Quest2Day"
-const Tavi_Quest2MetHer = "Tavi_Quest2MetHer"
-const Tavi_Quest2Completed = "Tavi_Quest2Completed"
+func getFlags():
+	return {
+		# Tavi module
+		"Tavi_IntroducedTo": flag(FlagType.Bool),
+		"Tavi_IsAngryAtPlayer": flag(FlagType.Bool),
+		"Tavi_ToldHowToEscape": flag(FlagType.Bool),
+		"Tavi_NeedsApple": flag(FlagType.Bool),
+		"Tavi_GotApple": flag(FlagType.Bool),
+		"Tavi_AngryUntilDay": flag(FlagType.Number),
+		"Tavi_Submissiveness": flag(FlagType.Number),
+		"Tavi_ShowerEventHappened": flag(FlagType.Bool),
+		"Tavi_Quest2Started": flag(FlagType.Bool),
+		"Tavi_Quest2Day": flag(FlagType.Number),
+		"Tavi_Quest2MetHer": flag(FlagType.Bool),
+		"Tavi_Quest2Completed": flag(FlagType.Bool),
+	}
 
 func _init():
 	id = "TaviModule"
@@ -55,8 +57,8 @@ func resetFlagsOnNewDay():
 	pass
 
 static func makeTaviAngry():
-	GM.main.setFlag(Tavi_IsAngryAtPlayer, true)
-	GM.main.setFlag(Tavi_AngryUntilDay, GM.main.getDays() + 2)
+	GM.main.setModuleFlag("TaviModule", "Tavi_IsAngryAtPlayer", true)
+	GM.main.setModuleFlag("TaviModule", "Tavi_AngryUntilDay", GM.main.getDays() + 2)
 	
 static func getPunishmentScene():
 	return RNG.pick([
@@ -64,4 +66,4 @@ static func getPunishmentScene():
 		])
 
 static func trustsPC():
-	return !GM.main.getFlag(Tavi_IsAngryAtPlayer, false) && GM.main.getFlag(Tavi_IntroducedTo, false)
+	return !GM.main.getModuleFlag("TaviModule", "Tavi_IsAngryAtPlayer", false) && GM.main.getModuleFlag("TaviModule", "Tavi_IntroducedTo", false)

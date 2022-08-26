@@ -1,5 +1,5 @@
 extends Node
-class_name MainThing
+class_name MainScene
 
 onready var gameUI = $GameUI
 var sceneStack: Array = []
@@ -206,6 +206,9 @@ func saveData():
 	return data
 
 func loadData(data):
+	if(SAVE.isUpdatingFromSaveVersion(1)):
+		SaveConversion.fixFlagsFromVersion1(self, data)
+	
 	messages = SAVE.loadVar(data, "messages", [])
 	timeOfDay = SAVE.loadVar(data, "timeOfDay", 6*60*60)
 	currentDay = SAVE.loadVar(data, "currentDay", 0)
@@ -350,9 +353,7 @@ func clearFlag(flagID):
 	flags.erase(flagID)
 
 func increaseFlag(flagID, addvalue = 1):
-	if(!flags.has(flagID)):
-		flags[flagID] = 0
-	flags[flagID] += addvalue
+	setFlag(flagID, getFlag(flagID, 0) + addvalue)
 
 func getFlag(flagID, defaultValue = null):
 	if(!flagsCache.has(flagID)):
@@ -364,19 +365,51 @@ func getFlag(flagID, defaultValue = null):
 	
 	return flags[flagID]
 
+func hasFlag(flagID):
+	if(!flagsCache.has(flagID)):
+		return false
+	return true
+
 func setModuleFlag(moduleID, flagID, value):
+	var modules = GlobalRegistry.getModules()
+	if(!modules.has(moduleID)):
+		Log.printerr("getModuleFlag(): Module "+str(moduleID)+" doesn't exist "+Util.getStackFunction())
+		return
+	
+	var module:Module = modules[moduleID]
+	var moduleFlagsCache = module.getFlagsCache()
+	
+	if(!moduleFlagsCache.has(flagID)):
+		Log.printerr("setModuleFlag(): Module is "+str(moduleID)+". Detected the usage of an unknown flag: "+str(flagID)+" "+Util.getStackFunction())
+		return
+	
+	if("type" in moduleFlagsCache[flagID]):
+		var flagType = moduleFlagsCache[flagID]["type"]
+		if(!FlagType.isCorrectType(flagType, value)):
+			Log.printerr("setModuleFlag(): Module is "+str(moduleID)+". Wrong type for flag "+str(flagID)+". Value: "+str(value)+" "+Util.getStackFunction())
+			return
+	
 	if(!moduleFlags.has(moduleID)):
 		moduleFlags[moduleID] = {}
 	moduleFlags[moduleID][flagID] = value
+	
 
 func increaseModuleFlag(moduleID, flagID, addvalue = 1):
-	if(!moduleFlags.has(moduleID)):
-		moduleFlags[moduleID] = {}
-	if(!moduleFlags[moduleID].has(flagID)):
-		moduleFlags[moduleID][flagID] = 0
-	moduleFlags[moduleID][flagID] += addvalue
+	setModuleFlag(moduleID, flagID, getModuleFlag(moduleID, flagID, 0) + addvalue)
 
 func getModuleFlag(moduleID, flagID, defaultValue = null):
+	var modules = GlobalRegistry.getModules()
+	if(!modules.has(moduleID)):
+		Log.printerr("getModuleFlag(): Module "+str(moduleID)+" doesn't exist "+Util.getStackFunction())
+		return defaultValue
+	
+	var module:Module = modules[moduleID]
+	var moduleFlagsCache = module.getFlagsCache()
+	
+	if(!moduleFlagsCache.has(flagID)):
+		Log.printerr("getModuleFlag(): Module is "+str(moduleID)+". Detected the usage of an unknown flag: "+str(flagID)+" "+Util.getStackFunction())
+		return defaultValue
+	
 	if(!moduleFlags.has(moduleID) || !moduleFlags[moduleID].has(flagID)):
 		return defaultValue
 	

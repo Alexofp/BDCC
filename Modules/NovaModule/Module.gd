@@ -1,13 +1,16 @@
 extends Module
 class_name NovaModule
 
-const Nova_GotHumiliatedByPC = "Nova_GotHumiliatedByPC"
-const Nova_SawPC = "Nova_SawPC"
-const Nova_Introduced = "Nova_Introduced"
-const Nova_NotThereToday = "Nova_NotThereToday"
-
-const Nova_FirstTimePregnantHappened = "Nova_FirstTimePregnantHappened"
-const Nova_GaveBirthTimes = "Nova_GaveBirthTimes"
+func getFlags():
+	return {
+		# Nova module
+		"Nova_GotHumiliatedByPC": flag(FlagType.Bool),
+		"Nova_SawPC": flag(FlagType.Bool),
+		"Nova_Introduced": flag(FlagType.Bool),
+		"Nova_NotThereToday": flag(FlagType.Bool),
+		"Nova_FirstTimePregnantHappened": flag(FlagType.Bool),
+		"Nova_GaveBirthTimes": flag(FlagType.Number),
+	}
 
 func _init():
 	id = "NovaModule"
@@ -38,5 +41,5 @@ func _init():
 	]
 
 func resetFlagsOnNewDay():
-	if(getFlag(Nova_NotThereToday, false)):
-		setFlag(Nova_NotThereToday, false)
+	if(GM.main.getModuleFlag("NovaModule", "Nova_NotThereToday")):
+		GM.main.setModuleFlag("NovaModule", "Nova_NotThereToday", false)

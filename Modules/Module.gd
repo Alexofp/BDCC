@@ -50,6 +50,9 @@ func getRandomSceneFor(_sceneType):
 func getFlags():
 	return {}
 	
+func hasFlag(flagID):
+	return flagsCache.has(flagID)
+	
 func getFlagsCache():
 	return flagsCache
 

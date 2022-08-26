@@ -78,15 +78,6 @@ static func getFlags():
 		"Nursery_AskedDatabase": flag(FlagType.Bool),
 		
 		
-		# Nova module
-		"Nova_GotHumiliatedByPC": flag(FlagType.Bool),
-		"Nova_SawPC": flag(FlagType.Bool),
-		"Nova_Introduced": flag(FlagType.Bool),
-		"Nova_NotThereToday": flag(FlagType.Bool),
-		"Nova_FirstTimePregnantHappened": flag(FlagType.Bool),
-		"Nova_GaveBirthTimes": flag(FlagType.Number),
-		
-		
 		# Rahi module
 		"Rahi_Introduced": flag(FlagType.Bool),
 		"Rahi_AskedName": flag(FlagType.Bool),
@@ -102,25 +93,5 @@ static func getFlags():
 		"Rahi_FirstTimePregnantHappened": flag(FlagType.Bool),
 		"Rahi_GaveBirthTimes": flag(FlagType.Number),
 		
-		
-		# Tavi module
-		"Tavi_IntroducedTo": flag(FlagType.Bool),
-		"Tavi_IsAngryAtPlayer": flag(FlagType.Bool),
-		"Tavi_ToldHowToEscape": flag(FlagType.Bool),
-		"Tavi_NeedsApple": flag(FlagType.Bool),
-		"Tavi_GotApple": flag(FlagType.Bool),
-		"Tavi_AngryUntilDay": flag(FlagType.Number),
-		"Tavi_Submissiveness": flag(FlagType.Number),
-		"Tavi_ShowerEventHappened": flag(FlagType.Bool),
-		"Tavi_Quest2Started": flag(FlagType.Bool),
-		"Tavi_Quest2Day": flag(FlagType.Number),
-		"Tavi_Quest2MetHer": flag(FlagType.Bool),
-		"Tavi_Quest2Completed": flag(FlagType.Bool),
-		
-		
-		# Gym module
-		"Gym_RishaLastDayGotPaid": flag(FlagType.Number),
-		"Gym_BullyGangIntroduced": flag(FlagType.Bool),
-		"Gym_BullyGangPayed": flag(FlagType.Bool),
 	}
 	

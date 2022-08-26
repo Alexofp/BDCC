@@ -7,10 +7,10 @@ func registerTriggers(es):
 	es.addTrigger(self, Trigger.WakeUpInCell)
 
 func react(_triggerID, _args):
-	if(getFlag(NovaModule.Nova_FirstTimePregnantHappened, false) || !GlobalRegistry.getCharacter("nova").isVisiblyPregnant()):
+	if(GM.main.getModuleFlag("NovaModule", "Nova_FirstTimePregnantHappened", false) || !GlobalRegistry.getCharacter("nova").isVisiblyPregnant()):
 		return false
 	
-	setFlag(NovaModule.Nova_FirstTimePregnantHappened, true)
+	GM.main.setModuleFlag("NovaModule", "Nova_FirstTimePregnantHappened", true)
 	runScene("NovaFirstTimePregnantScene")
 	
 	return true

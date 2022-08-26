@@ -14,8 +14,8 @@ func _run():
 
 	if(state == ""):
 		# (if first time)
-		if(!getModuleFlag(GymModule.ModID, GymModule.Gym_BullyGangIntroduced)):
-			setModuleFlag(GymModule.ModID, GymModule.Gym_BullyGangIntroduced, true)
+		if(!getModuleFlag("GymModule", "Gym_BullyGangIntroduced")):
+			setModuleFlag("GymModule", "Gym_BullyGangIntroduced", true)
 			
 			saynn("As you look around the gym area and think about what you wanna do, three inmates approach you from behind. Two guys and a girl. The main guy taps on your shoulder. You hear a very raspy male voice.")
 

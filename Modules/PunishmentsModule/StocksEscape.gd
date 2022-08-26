@@ -5,7 +5,7 @@ func _init():
 
 func _reactInit():
 	var possible = ["rahi_saves_you"]
-	if(GM.main.getFlag(TaviModule.Tavi_IntroducedTo) && !GM.main.getFlag(TaviModule.Tavi_IsAngryAtPlayer)):
+	if(GM.main.getModuleFlag("TaviModule", "Tavi_IntroducedTo") && !GM.main.getModuleFlag("TaviModule", "Tavi_IsAngryAtPlayer")):
 		possible.append("tavi_saves_you")
 	setState(RNG.pick(possible))
 	

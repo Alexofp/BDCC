@@ -1,11 +1,13 @@
 extends Module
 class_name GymModule
 
-const ModID = "GymModule"
-
-const Gym_RishaLastDayGotPaid = "Gym_RishaLastDayGotPaid"
-const Gym_BullyGangIntroduced = "Gym_BullyGangIntroduced"
-const Gym_BullyGangPayed = "Gym_BullyGangPayed"
+func getFlags():
+	return {
+		# Gym module
+		"Gym_RishaLastDayGotPaid": flag(FlagType.Number),
+		"Gym_BullyGangIntroduced": flag(FlagType.Bool),
+		"Gym_BullyGangPayed": flag(FlagType.Bool),
+	}
 
 func _init():
 	id = "GymModule"
@@ -35,5 +37,5 @@ func _init():
 	]
 
 func resetFlagsOnNewDay():
-	if(GM.main.getModuleFlag(ModID, Gym_BullyGangPayed)):
-		GM.main.setModuleFlag(ModID, Gym_BullyGangPayed, false)
+	if(GM.main.getModuleFlag("GymModule", "Gym_BullyGangPayed")):
+		GM.main.setModuleFlag("GymModule", "Gym_BullyGangPayed", false)

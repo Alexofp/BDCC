@@ -1,7 +1,7 @@
 extends Node
 
 var ui: GameUI
-var main: MainThing
+var main: MainScene
 var pc: Player
 var world: GameWorld
 var ES: EventSystem

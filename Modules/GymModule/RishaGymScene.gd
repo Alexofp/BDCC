@@ -462,11 +462,11 @@ func _run():
 func _react(_action: String, _args):
 
 	if(_action in ["offer_pussy", "offer_ass", "offer_handjob"]):
-		var lastDay = getFlag(GymModule.Gym_RishaLastDayGotPaid, -10)
+		var lastDay = getModuleFlag("GymModule", "Gym_RishaLastDayGotPaid", -10)
 		var currentDay = GM.main.getDays()
 		if(currentDay >= (lastDay + 7) ):
 			gotPayed = true
-			setFlag(GymModule.Gym_RishaLastDayGotPaid, currentDay)
+			setModuleFlag("GymModule", "Gym_RishaLastDayGotPaid", currentDay)
 		else:
 			gotPayed = false
 			

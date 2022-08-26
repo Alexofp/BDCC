@@ -14,7 +14,7 @@ func _run():
 		GM.main.playAnimation(StageScene.Duo, "stand", {npc="tavi"})
 		
 	if(state == ""):
-		if(getFlag(TaviModule.Tavi_IsAngryAtPlayer)):
+		if(getModuleFlag("TaviModule", "Tavi_IsAngryAtPlayer")):
 			saynn("You approach the tall feline that stands in the dimly lit space. Her face doesn’t show much emotion but you can tell that she is not happy. She glares at you with her mean eyes.")
 
 			saynn("[say=tavi]The fuck do you want?[/say]")
@@ -30,8 +30,8 @@ func _run():
 		addButton("Talk", "Pick a topic to talk about", "talk")
 		addButton("Appearance", "Take a closer look at Tavi", "appearance")
 		addButton("Attack", "This can only go one way", "attack")
-		if(getFlag(TaviModule.Tavi_IsAngryAtPlayer)):
-			var day = getFlag(TaviModule.Tavi_AngryUntilDay, -10)
+		if(getModuleFlag("TaviModule", "Tavi_IsAngryAtPlayer")):
+			var day = getModuleFlag("TaviModule", "Tavi_AngryUntilDay", -10)
 			if(GM.main.getDays() >= day):
 				addButton("Submit", "Try and patch things up", "submit")
 			else:
@@ -41,16 +41,16 @@ func _run():
 			
 			addButton("Punish me", "Ask Tavi to punish you", "askForPunishment")
 			
-			if(!getFlag(TaviModule.Tavi_ToldHowToEscape)):
+			if(!getModuleFlag("TaviModule", "Tavi_ToldHowToEscape")):
 				addButton("Plot to escape", "Tavi mentioned she can help you to escape", "plot_to_escape")
 			
-			if(getFlag(TaviModule.Tavi_NeedsApple) && !getFlag(TaviModule.Tavi_GotApple)):
+			if(getModuleFlag("TaviModule", "Tavi_NeedsApple") && !getModuleFlag("TaviModule", "Tavi_GotApple")):
 				if(GM.pc.getInventory().hasItemID("appleitem")):
 					addButton("Give apple", "Tavi wants an apple", "give_apple")
 				else:
 					addDisabledButton("Give apple", "You don't have one")
 					
-			if(GM.QS.isCompleted("TaviAppleQuest") && !getFlag(TaviModule.Tavi_Quest2Started, false)):
+			if(GM.QS.isCompleted("TaviAppleQuest") && !getModuleFlag("TaviModule", "Tavi_Quest2Started", false)):
 				addButton("What now", "Ask Tavi what now", "quest2start")
 		
 		addButton("Leave", "Do something else", "endthescene")
@@ -66,7 +66,7 @@ func _run():
 		addButton("Back", "Go back", "")
 		
 	if(state == "attack"):
-		if(!getFlag(TaviModule.Tavi_IsAngryAtPlayer)):
+		if(!getModuleFlag("TaviModule", "Tavi_IsAngryAtPlayer")):
 			saynn("[say=pc]I’m sick of being your slave, this ends now.[/say]")
 
 			saynn("Tavi tilts her head at you and stands up.")
@@ -101,7 +101,7 @@ func _run():
 		
 	if(state == "won_fight" || state == "won_fight_lust"):
 		addButtonWithChecks("Dominate Tavi", "Make that bitch submit to you using violence", "dominateTavi", [], [ButtonChecks.NotHandsBlocked])
-		if(getFlag(TaviModule.Tavi_Submissiveness, 0) >= 1):
+		if(getModuleFlag("TaviModule", "Tavi_Submissiveness", 0) >= 1):
 			addButtonWithChecks("Degrade Tavi", "Force her to act like a puppy", "degradeTavi", [], [ButtonChecks.NotHandsBlocked])
 		else:
 			addDisabledButton("Degrade Tavi", "Tavi needs to be at least a little bit obedient")
@@ -122,7 +122,7 @@ func _run():
 	#	addButton("Continue", "You are forgiven", "endthescene")
 	
 	if(state == "talk"):
-		if(getFlag(TaviModule.Tavi_IsAngryAtPlayer)):
+		if(getModuleFlag("TaviModule", "Tavi_IsAngryAtPlayer")):
 			saynn("[say=pc]Can we talk?[/say]")
 
 			saynn("She growls at your weak attempt to communicate, her hands are forming fists, her voice sounds strict and annoyed.")
@@ -203,8 +203,8 @@ func _run():
 
 	if(state == "plot_to_escape"):
 		# (triggers once)
-		setFlag(TaviModule.Tavi_ToldHowToEscape, true)
-		setFlag(TaviModule.Tavi_NeedsApple, true)
+		setModuleFlag("TaviModule", "Tavi_ToldHowToEscape", true)
+		setModuleFlag("TaviModule", "Tavi_NeedsApple", true)
 		addMessage("You got a new task")
 
 		saynn("You take a seat on one of the empty ore crates.")
@@ -314,10 +314,10 @@ func _react(_action: String, _args):
 	
 	if(_action == "give_apple"):
 		addExperienceToPlayer(50)
-		setFlag(TaviModule.Tavi_GotApple, true)
+		setModuleFlag("TaviModule", "Tavi_GotApple", true)
 	
 	if(_action == "submit"):
-		#setFlag(TaviModule.Tavi_IsAngryAtPlayer, false)
+		#setModuleFlag("TaviModule", "Tavi_IsAngryAtPlayer", false)
 		runScene("TaviSubmitToScene")
 		endScene()
 		return

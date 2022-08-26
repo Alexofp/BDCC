@@ -14,10 +14,10 @@ func getProgress():
 	return result
 
 func isVisible():
-	return GM.main.getFlag(TaviModule.Tavi_Quest2Started)
+	return GM.main.getModuleFlag("TaviModule", "Tavi_Quest2Started")
 
 func isCompleted():
-	return GM.main.getFlag(TaviModule.Tavi_Quest2Completed)
+	return GM.main.getModuleFlag("TaviModule", "Tavi_Quest2Completed")
 
 func isMainQuest():
 	return true

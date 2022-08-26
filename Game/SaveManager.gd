@@ -1,7 +1,9 @@
 extends Node
 
-var currentSavefileVersion = 1
+var currentSavefileVersion = 2
 var maxBackupQuicksaves = 3
+
+var loadedSavefileVersion = -1
 
 func saveData():
 	var data = {
@@ -28,9 +30,12 @@ func loadData(data: Dictionary):
 	if(!data.has("savefile_version")):
 		Log.printerr("Error: Save file doesn't have a version in it. It might not be a savefile")
 		return
-	if(data["savefile_version"] != currentSavefileVersion):
+	if(data["savefile_version"] > currentSavefileVersion):
 		Log.printerr("Error: This savefile is not supported, sorry. Current supported version: "+str(currentSavefileVersion)+". Savefile version: "+data["savefile_version"])
-		return	
+		return
+		
+	loadedSavefileVersion = data["savefile_version"]
+		
 	GlobalRegistry.currentUniqueID = SAVE.loadVar(data, "currentUniqueID_DONT_TOUCH", 0)
 	GlobalRegistry.currentChildUniqueID = SAVE.loadVar(data, "currentChildUniqueID_DONT_TOUCH", 0)
 	
@@ -112,6 +117,24 @@ func switchToGameAndResumeLatestSave():
 	var _ok = get_tree().change_scene("res://Game/MainScene.tscn")
 	yield(get_tree(),"idle_frame")
 	loadGame(saves[0])
+
+func getLoadedSavefileVersion():
+	return loadedSavefileVersion
+	
+func getCurrentSavefileVersion():
+	return currentSavefileVersion
+
+func isUpdatingFromSaveVersion(oldSaveVersion: int):
+	if(loadedSavefileVersion < 0):
+		return false
+
+	if(currentSavefileVersion <= oldSaveVersion):
+		return false
+		
+	if(oldSaveVersion >= loadedSavefileVersion):
+		return true
+
+	return false
 
 func loadVar(data: Dictionary, key, nullvalue = null):
 	if(!data.has(key)):

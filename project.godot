@@ -440,7 +440,7 @@ _global_script_classes=[ {
 "path": "res://Game/LustCombat/LustInterests.gd"
 }, {
 "base": "Node",
-"class": "MainThing",
+"class": "MainScene",
 "language": "GDScript",
 "path": "res://Game/MainScene.gd"
 }, {
@@ -618,6 +618,11 @@ _global_script_classes=[ {
 "class": "RoomAction",
 "language": "GDScript",
 "path": "res://Game/World/RoomAction.gd"
+}, {
+"base": "Reference",
+"class": "SaveConversion",
+"language": "GDScript",
+"path": "res://Game/SaveConversion.gd"
 }, {
 "base": "Reference",
 "class": "SayParser",
@@ -841,7 +846,7 @@ _global_script_class_icons={
 "LustActivity": "",
 "LustCombatState": "",
 "LustInterests": "",
-"MainThing": "",
+"MainScene": "",
 "MedicalModule": "",
 "MenstrualCycle": "",
 "Module": "",
@@ -877,6 +882,7 @@ _global_script_class_icons={
 "RestraintUnremovable": "",
 "RestraintVaginalplug": "",
 "RoomAction": "",
+"SaveConversion": "",
 "SayParser": "",
 "SceneBase": "",
 "ShirtAndShortsState": "",
