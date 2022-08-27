@@ -259,9 +259,9 @@ func _run():
 
 		saynn("[say=intro_detective]I’m here to tell you that the Intergalactic Court of Justice has found you guilty of your charges. You will be committed to the department of corrections shortly.[/say]")
 
-		if(getFlag(Flag.Player_Crime_Type) == Flag.Crime_Type.Innocent):
+		if(getFlag("Player_Crime_Type") == Flag.Crime_Type.Innocent):
 			saynn("[say=intro_detective]The lack of evidence was deemed not important enough to stop the hearings.[/say]")
-		elif(getFlag(Flag.Player_Crime_Type) == Flag.Crime_Type.Prostitution):
+		elif(getFlag("Player_Crime_Type") == Flag.Crime_Type.Prostitution):
 			saynn("[say=intro_detective]Even though paid erotic or sexual services are allowed, by not properly disclosing that you commited tax fraud and put the lives of others in danger.[/say]")
 		else:
 			saynn("[say=intro_detective]Your crimes were committed with malicious intent, your testimony showed you as a very tainted person.[/say]")
@@ -347,23 +347,23 @@ func _react(_action: String, _args):
 	#"crime_innocent", "crime_theft", "crime_murder", "crime_prostitution"
 	
 	if(_action == "crime_innocent"):
-		setFlag(Flag.Player_Crime_Type, Flag.Crime_Type.Innocent)
+		setFlag("Player_Crime_Type", Flag.Crime_Type.Innocent)
 		GM.pc.setInmateType(InmateType.General)
 	if(_action == "crime_theft"):
-		setFlag(Flag.Player_Crime_Type, Flag.Crime_Type.Theft)
+		setFlag("Player_Crime_Type", Flag.Crime_Type.Theft)
 		GM.pc.setInmateType(InmateType.General)
 	if(_action == "crime_murder"):
-		setFlag(Flag.Player_Crime_Type, Flag.Crime_Type.Murder)
+		setFlag("Player_Crime_Type", Flag.Crime_Type.Murder)
 		GM.pc.setInmateType(InmateType.HighSec)
 	if(_action == "crime_prostitution"):
-		setFlag(Flag.Player_Crime_Type, Flag.Crime_Type.Prostitution)
+		setFlag("Player_Crime_Type", Flag.Crime_Type.Prostitution)
 		GM.pc.setInmateType(InmateType.SexDeviant)
 	
 	setState(_action)
 
 func _react_scene_end(_tag, _result):
 	if(_tag == "character_creator"):
-		setFlag(Flag.Game_PickedStartingPerks, true)
+		setFlag("Game_PickedStartingPerks", true)
 		runScene("PickStartingPerksScene", [], "starting_perks")
 	if(_tag == "starting_perks"):
 		setState("donecreating")

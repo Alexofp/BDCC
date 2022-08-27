@@ -18,7 +18,7 @@ func _run():
 
 		addButton("Pay", "Use your credits to pay the guy", "trypay")
 		addButton("Intimidate", "Try to fight the guy. This will be a very tough one", "intimidate")
-		if(!getModuleFlag(FightClubModule.ModID, FightClubModule.BulldogSeduced)):
+		if(!getFlag("FightClubModule.BulldogSeduced")):
 			addButtonWithChecks("Sex?", "Offer to pay with your body. This will be very rough..", "sex?", [], [[ButtonChecks.StatCheck, Stat.Sexiness, 5]])
 		else:
 			addDisabledButton("Sex?", "You already seduced him..")
@@ -116,7 +116,7 @@ func _run():
 func _react(_action: String, _args):
 	if(_action == "walk_in"):
 		processTime(3*60)
-		setModuleFlag(FightClubModule.ModID, FightClubModule.BulldogBypassed, true)
+		setFlag("FightClubModule.BulldogBypassed", true)
 		GM.pc.setLocation("fight_entrance")
 		endScene()
 		runScene("FightClubIntroScene")
@@ -129,12 +129,12 @@ func _react(_action: String, _args):
 	
 	if(_action == "sex?"):
 		runScene("BulldogSexScene")
-		setModuleFlag(FightClubModule.ModID, FightClubModule.BulldogSeduced, true)
+		setFlag("FightClubModule.BulldogSeduced", true)
 		endScene()
 		return
 	
 	if(_action == "trypay"):
-		if(!getModuleFlag(FightClubModule.ModID, FightClubModule.BulldogSeduced)):
+		if(!getFlag("FightClubModule.BulldogSeduced")):
 			setState("pay")
 		else:
 			setState("pay_25")
@@ -162,7 +162,7 @@ func _react_scene_end(_tag, _result):
 		
 		if(battlestate == "win"):
 			setState("if_won")
-			setModuleFlag(FightClubModule.ModID, FightClubModule.BulldogBeatenUp, true)
+			setFlag("FightClubModule.BulldogBeatenUp", true)
 			addExperienceToPlayer(100)
 		else:
 			setState("if_lost")

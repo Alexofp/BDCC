@@ -8,7 +8,7 @@ func registerTriggers(es):
 
 func run(_triggerID, _args):
 	if(GM.pc.getStamina() > 0):
-		if(!GM.main.getFlag(Flag.Mining_IntroducedToMinning, false)):
+		if(!GM.main.getFlag("Mining_IntroducedToMinning", false)):
 			addButtonWithChecks("Work", "See what's it about", "first_time", [], [ButtonChecks.NotLate, ButtonChecks.NotHandsBlocked])
 		else:
 			addButtonWithChecks("Work", "Go work in the mines", "not_first_time", [], [ButtonChecks.NotLate, ButtonChecks.NotHandsBlocked])

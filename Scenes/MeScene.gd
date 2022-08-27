@@ -9,7 +9,7 @@ func _init():
 func _run():
 	if(state == ""):
 		#GM.pc.cummedInVaginaBy("nova")
-		if(GM.main.getFlag(Flag.Game_CompletedPrologue)):
+		if(GM.main.getFlag("Game_CompletedPrologue")):
 			var genderSTR = "a male"
 			if(GM.pc.getGender() == Gender.Female):
 				genderSTR = "a female"
@@ -18,11 +18,11 @@ func _run():
 			if(GM.pc.getGender() == Gender.Other):
 				genderSTR = "a non-gender"
 			var badThingName = "was imprisoned for the crime of theft"
-			if(GM.main.getFlag(Flag.Player_Crime_Type) == Flag.Crime_Type.Innocent):
+			if(GM.main.getFlag("Player_Crime_Type") == Flag.Crime_Type.Innocent):
 				badThingName = "was wrongly imprisoned"
-			if(GM.main.getFlag(Flag.Player_Crime_Type) == Flag.Crime_Type.Murder):
+			if(GM.main.getFlag("Player_Crime_Type") == Flag.Crime_Type.Murder):
 				badThingName = "was imprisoned for the crime of murder"
-			if(GM.main.getFlag(Flag.Player_Crime_Type) == Flag.Crime_Type.Prostitution):
+			if(GM.main.getFlag("Player_Crime_Type") == Flag.Crime_Type.Prostitution):
 				badThingName = "was imprisoned for the crime of prositution"
 			saynn(GM.pc.getName() +" is "+genderSTR+" "+GM.pc.getSpeciesFullName() + " that "+badThingName+". Sentence length is indefinite")
 		
@@ -96,7 +96,7 @@ func _run():
 		addButton("Masturbate", "Do the thing", "domasturbate")
 		addButton("Gender", "Pick your gender", "pickgender")
 		addButton("Pronouns", "Pick your pronouns", "pickpronouns")
-		if(!getFlag(Flag.Game_PickedStartingPerks, false)):
+		if(!getFlag("Game_PickedStartingPerks", false)):
 			addButton("Pick Perks!", "Pick your starting perks. You can only do this once", "pickstartingperks")
 		#addButton("[debug] Struggle", "Test the struggle minigame", "teststruggle")
 		
@@ -176,7 +176,7 @@ func _react(_action: String, _args):
 		return
 	
 	if(_action == "pickstartingperks"):
-		setFlag(Flag.Game_PickedStartingPerks, true)
+		setFlag("Game_PickedStartingPerks", true)
 		runScene("PickStartingPerksScene")
 		setState("")
 		return

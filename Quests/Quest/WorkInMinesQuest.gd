@@ -17,7 +17,7 @@ func isVisible():
 	return true
 
 func isCompleted():
-	return GM.main.getFlag(Flag.Mining_IntroducedToMinning, false)
+	return GM.main.getFlag("Mining_IntroducedToMinning", false)
 
 func isMainQuest():
 	return false

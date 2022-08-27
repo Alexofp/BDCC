@@ -22,7 +22,7 @@ func _run():
 		saynn("[say=announcer]Had any problems with our guard?[/say]")
 
 		# (if just payed)
-		if(!getModuleFlag(FightClubModule.ModID, FightClubModule.BulldogBeatenUp) || !getModuleFlag(FightClubModule.ModID, FightClubModule.BulldogSeduced)):
+		if(!getFlag("FightClubModule.BulldogBeatenUp") || !getFlag("FightClubModule.BulldogSeduced")):
 			saynn("[say=pc]Well, I had to pay him quite a bit.[/say]")
 
 			saynn("The announcer chuckles.")
@@ -30,7 +30,7 @@ func _run():
 			saynn("[say=announcer]A worthy sacrifice, don’t you think.[/say]")
 
 		# (if beat him)
-		elif(getModuleFlag(FightClubModule.ModID, FightClubModule.BulldogBeatenUp)):
+		elif(getFlag("FightClubModule.BulldogBeatenUp")):
 			saynn("[say=pc]Had to beat him up. Hope you don’t mind.[/say]")
 
 			saynn("The announcer chuckles.")
@@ -39,7 +39,7 @@ func _run():
 
 		# (if seduced and payed)
 
-		elif(getModuleFlag(FightClubModule.ModID, FightClubModule.BulldogSeduced)):
+		elif(getFlag("FightClubModule.BulldogSeduced")):
 			saynn("[say=pc]Uh.. Had to do some negotiations with him.[/say]")
 
 			saynn("The announcer chuckles.")

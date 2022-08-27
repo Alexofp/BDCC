@@ -91,7 +91,7 @@ func _react(_action: String, _args):
 		GM.pc.addCredits(1)
 		GM.pc.addStamina(-40)
 		
-		GM.main.setFlag(Flag.Mining_IntroducedToMinning, true)
+		GM.main.setFlag("Mining_IntroducedToMinning", true)
 		
 		processTime(2*60)
 		

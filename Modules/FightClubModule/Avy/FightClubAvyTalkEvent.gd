@@ -9,10 +9,10 @@ func registerTriggers(es):
 func run(_triggerID, _args):
 	saynn("Avy stands near the fences that make up the improvised arena")
 	
-	if(!getModuleFlag(FightClubModule.ModID, FightClubModule.AnnouncerIntroduced)):
+	if(!getFlag("FightClubModule.AnnouncerIntroduced")):
 		addDisabledButton("Avy", "Talk to the announcer first")
 	else:
-		if(!getModuleFlag(FightClubModule.ModID, FightClubModule.AvyIntroduced)):
+		if(!getFlag("FightClubModule.AvyIntroduced")):
 			addButtonUnlessLate("Avy", "Approach the dickgirl", "avyfirst")
 		else:
 			addButtonUnlessLate("Avy", "Approach the dickgirl", "avy")
@@ -23,6 +23,6 @@ func getPriority():
 func onButton(_method, _args):
 	if(_method == "avyfirst"):
 		runScene("AvyFirstTimeTalkScene")
-		setModuleFlag(FightClubModule.ModID, FightClubModule.AvyIntroduced, true)
+		setFlag("FightClubModule.AvyIntroduced", true)
 	if(_method == "avy"):
 		runScene("AvyTalkScene")

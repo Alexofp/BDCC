@@ -94,7 +94,7 @@ func _run():
 	if(state == "fight"):
 		var arenaFighter:FightClubFighter = GlobalRegistry.getFightClubFighter(savedFighterID)
 		# (if first time)
-		if(!getModuleFlag(FightClubModule.ModID, FightClubModule.FightClubFirstArenaIntroduction)):
+		if(!getFlag("FightClubModule.FightClubFirstArenaIntroduction")):
 			saynn("[say=pc]I’m ready.[/say]")
 
 			saynn("[say=avy]First time is always special, isn’t it, sugar.[/say]")
@@ -133,8 +133,8 @@ func _run():
 		saynn("The crowd goes wild, you hear cheering and people banging against the fence.")
 
 		# (if player first time)
-		if(!getModuleFlag(FightClubModule.ModID, FightClubModule.FightClubFirstArenaIntroduction)):
-			setModuleFlag(FightClubModule.ModID, FightClubModule.FightClubFirstArenaIntroduction, true)
+		if(!getFlag("FightClubModule.FightClubFirstArenaIntroduction")):
+			setFlag("FightClubModule.FightClubFirstArenaIntroduction", true)
 			saynn("[say=announcer]Let’s do this then! We actually have a new addition in our ranks of fighters! In the left corner, we have {pc.name}! Can we make some noise for the fresh meat![/say]")
 
 			saynn("The cheering only gets louder. Though some inmates yell out things like ‘Fuck meat!’, ‘Breeding stock!’, ‘Whore!’.")

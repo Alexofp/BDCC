@@ -1,21 +1,6 @@
 extends Module
 class_name FightClubModule
 
-const ModID = "FightClubModule"
-
-const BulldogFirstTimeHappened = "BulldogFirstTimeHappened"
-const BulldogSeduced = "BulldogSeduced"
-const BulldogBeatenUp = "BulldogBeatenUp"
-const BulldogBypassed = "BulldogBypassed"
-
-const AnnouncerIntroduced = "AnnouncerIntroduced"
-
-const AvyIntroduced = "AvyIntroduced"
-
-const FightClubPCRank = "FightClubPCRank"
-const FightClubDefeatedFighters = "FightClubDefeatedFighters"
-const FightClubFirstArenaIntroduction = "FightClubFirstArenaIntroduction"
-
 func getFlags():
 	return {
 		"BulldogFirstTimeHappened": flag(FlagType.Bool),
@@ -109,7 +94,7 @@ func resetFlagsOnNewDay():
 	pass
 
 static func getPCRank():
-	return GM.main.getModuleFlag(ModID, FightClubPCRank, FightClubRank.FuckMeat)
+	return GM.main.getFlag("FightClubModule.FightClubPCRank", FightClubRank.FuckMeat)
 
 static func raisePCRankTo(newRank):
 	var currentRank = getPCRank()
@@ -117,12 +102,12 @@ static func raisePCRankTo(newRank):
 	var newRankOrder = FightClubRank.getOrder(newRank)
 	
 	if(newRankOrder < currentRankOrder):
-		GM.main.setModuleFlag(ModID, FightClubPCRank, newRank)
+		GM.main.setFlag("FightClubModule.FightClubPCRank", newRank)
 		return true
 	return false
 
 static func isFighterDefeated(fighterID):
-	var defeated = GM.main.getModuleFlag(ModID, FightClubDefeatedFighters, {})
+	var defeated = GM.main.getFlag("FightClubModule.FightClubDefeatedFighters", {})
 	if(defeated.has(fighterID) && defeated[fighterID]):
 		return true
 	
@@ -147,6 +132,6 @@ static func getNextFighter():
 	return null
 
 static func markFighterAsDefeated(fighterID):
-	var defeated = GM.main.getModuleFlag(ModID, FightClubDefeatedFighters, {})
+	var defeated = GM.main.getFlag("FightClubModule.FightClubDefeatedFighters", {})
 	defeated[fighterID] = true
-	GM.main.setModuleFlag(ModID, FightClubDefeatedFighters, defeated)
+	GM.main.setFlag("FightClubModule.FightClubDefeatedFighters", defeated)
