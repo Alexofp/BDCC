@@ -532,3 +532,16 @@ static func removeDirectory(path):
 		directory.remove(path)
 	else:
 		print("Error removing " + path)
+
+# input splitOnFirst("Test.Meow.Woof", ".")
+# output ["Test", "Meow.Woof"]
+static func splitOnFirst(text: String, separator: String):
+	var stuff = text.split(separator)
+	
+	if(stuff.size() <= 1):
+		return stuff
+	
+	var firstEntry = stuff[0]
+	stuff.remove(0)
+	
+	return [firstEntry, join(stuff, separator)]

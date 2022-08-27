@@ -337,6 +337,12 @@ func getDays():
 	return currentDay
 
 func setFlag(flagID, value):
+	# Handling "ModuleID.FlagID" here
+	var splitData = Util.splitOnFirst(flagID, ".")
+	if(splitData.size() > 1):
+		setModuleFlag(splitData[0], splitData[1], value)
+		return
+	
 	if(!flagsCache.has(flagID)):
 		Log.printerr("setFlag(): Detected the usage of an unknown flag: "+str(flagID)+" "+Util.getStackFunction())
 		return
@@ -350,12 +356,21 @@ func setFlag(flagID, value):
 	flags[flagID] = value
 
 func clearFlag(flagID):
+	var splitData = Util.splitOnFirst(flagID, ".")
+	if(splitData.size() > 1):
+		clearModuleFlag(splitData[0], splitData[1])
+		return
+	
 	flags.erase(flagID)
 
 func increaseFlag(flagID, addvalue = 1):
 	setFlag(flagID, getFlag(flagID, 0) + addvalue)
 
 func getFlag(flagID, defaultValue = null):
+	var splitData = Util.splitOnFirst(flagID, ".")
+	if(splitData.size() > 1):
+		return getModuleFlag(splitData[0], splitData[1], defaultValue)
+	
 	if(!flagsCache.has(flagID)):
 		Log.printerr("getFlag(): Detected the usage of an unknown flag: "+str(flagID)+" "+Util.getStackFunction())
 		return defaultValue
@@ -364,11 +379,6 @@ func getFlag(flagID, defaultValue = null):
 		return defaultValue
 	
 	return flags[flagID]
-
-func hasFlag(flagID):
-	if(!flagsCache.has(flagID)):
-		return false
-	return true
 
 func setModuleFlag(moduleID, flagID, value):
 	var modules = GlobalRegistry.getModules()

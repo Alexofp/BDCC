@@ -6,6 +6,14 @@ var characters = []
 var items = []
 var events = []
 var quests = []
+
+var attacks = []
+var bodyparts = []
+var species = []
+var perks = []
+var lustActions = []
+var statusEffects = []
+
 var id = "badmodule"
 var author = "no author"
 var flagsCache = null
@@ -28,6 +36,24 @@ func register():
 
 	for quest in quests:
 		GlobalRegistry.registerQuest(quest)
+		
+	for attack in attacks:
+		GlobalRegistry.registerAttack(attack)
+		
+	for bodypart in bodyparts:
+		GlobalRegistry.registerBodypart(bodypart)
+	
+	for specie in species:
+		GlobalRegistry.registerSpecies(specie)
+		
+	for perk in perks:
+		GlobalRegistry.registerPerk(perk)
+	
+	for lustAction in lustActions:
+		GlobalRegistry.registerLustAction(lustAction)
+	
+	for statusEffect in statusEffects:
+		GlobalRegistry.registerStatusEffect(statusEffect)
 
 func registerEventTriggers():
 	pass
@@ -49,9 +75,6 @@ func getRandomSceneFor(_sceneType):
 
 func getFlags():
 	return {}
-	
-func hasFlag(flagID):
-	return flagsCache.has(flagID)
 	
 func getFlagsCache():
 	return flagsCache
