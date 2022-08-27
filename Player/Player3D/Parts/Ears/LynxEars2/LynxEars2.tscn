@@ -6,11 +6,11 @@
 [sub_resource type="SpatialMaterial" id=8]
 resource_name = "earsLynx2.png"
 flags_transparent = true
+flags_unshaded = true
 vertex_color_use_as_albedo = true
 params_cull_mode = 2
 params_depth_draw_mode = 3
 albedo_texture = ExtResource( 2 )
-metallic = 1.0
 
 [sub_resource type="ArrayMesh" id=9]
 resource_name = "Tail_earsLynx2png"
@@ -103,4 +103,4 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.09937, -0.0808821, 0.0345902
 [node name="earsLynx2png" type="MeshInstance" parent="." index="0"]
 mesh = SubResource( 9 )
 skin = SubResource( 10 )
-material/0 = null
+material/0 = SubResource( 8 )

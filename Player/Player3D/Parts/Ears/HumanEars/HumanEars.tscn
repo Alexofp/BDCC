@@ -6,11 +6,11 @@
 [sub_resource type="SpatialMaterial" id=9]
 resource_name = "ear.png.001"
 flags_transparent = true
+flags_unshaded = true
 vertex_color_use_as_albedo = true
 params_cull_mode = 2
 params_depth_draw_mode = 3
 albedo_texture = ExtResource( 2 )
-metallic = 1.0
 
 [sub_resource type="ArrayMesh" id=10]
 resource_name = "DollSkeleton_earpng001"
@@ -102,4 +102,4 @@ bind/21/pose = Transform( 0.486096, -0.873925, 4.58786e-07, -0.874017, -0.486062
 [node name="earpng" type="MeshInstance" parent="." index="0"]
 mesh = SubResource( 10 )
 skin = SubResource( 11 )
-material/0 = null
+material/0 = SubResource( 9 )

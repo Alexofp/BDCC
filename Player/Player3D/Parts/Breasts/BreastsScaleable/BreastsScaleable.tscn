@@ -115,11 +115,11 @@ bind/26/pose = Transform( 1.08032e-07, 1, 7.54979e-08, 0.99999, -1.45657e-06, 1.
 [sub_resource type="SpatialMaterial" id=1]
 resource_name = "breasts4.png"
 flags_transparent = true
+flags_unshaded = true
 vertex_color_use_as_albedo = true
 params_cull_mode = 2
 params_depth_draw_mode = 3
 albedo_texture = ExtResource( 2 )
-metallic = 1.0
 
 [sub_resource type="ArrayMesh" id=10]
 resource_name = "DollSkeleton_breasts4png002"
@@ -235,4 +235,4 @@ material/0 = null
 [node name="breastsScalable001" type="MeshInstance" parent="." index="1"]
 mesh = SubResource( 10 )
 skin = SubResource( 11 )
-material/0 = null
+material/0 = SubResource( 1 )

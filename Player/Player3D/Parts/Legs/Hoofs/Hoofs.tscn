@@ -8,11 +8,11 @@
 [sub_resource type="SpatialMaterial" id=42]
 resource_name = "legup.png.001"
 flags_transparent = true
+flags_unshaded = true
 vertex_color_use_as_albedo = true
 params_cull_mode = 2
 params_depth_draw_mode = 3
 albedo_texture = ExtResource( 4 )
-metallic = 1.0
 
 [sub_resource type="ArrayMesh" id=43]
 resource_name = "DollSkeleton_leguppng001"
@@ -269,12 +269,12 @@ surfaces/0 = {
 [node name="legupDeformable" type="MeshInstance" parent="." index="0"]
 mesh = SubResource( 43 )
 skin = SubResource( 44 )
-material/0 = null
+material/0 = SubResource( 42 )
 
 [node name="legupDeformable001" type="MeshInstance" parent="." index="1"]
 mesh = SubResource( 45 )
 skin = SubResource( 44 )
-material/0 = null
+material/0 = SubResource( 42 )
 
 [node name="hoofspng001" type="MeshInstance" parent="." index="2"]
 mesh = SubResource( 46 )

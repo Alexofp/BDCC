@@ -15,11 +15,11 @@ load_path = "res://.import/strongarm.png-484cc8e63a59c022e7a8f5f408621852.stex"
 [sub_resource type="SpatialMaterial" id=36]
 resource_name = "arm.png.001"
 flags_transparent = true
+flags_unshaded = true
 vertex_color_use_as_albedo = true
 params_cull_mode = 2
 params_depth_draw_mode = 3
 albedo_texture = SubResource( 35 )
-metallic = 1.0
 
 [sub_resource type="ArrayMesh" id=37]
 resource_name = "DollSkeleton_armpng003"
@@ -141,11 +141,11 @@ load_path = "res://.import/strongforearm.png-d42ac519ab7faa24c5641125e166609d.st
 [sub_resource type="SpatialMaterial" id=42]
 resource_name = "forearm.png.001"
 flags_transparent = true
+flags_unshaded = true
 vertex_color_use_as_albedo = true
 params_cull_mode = 2
 params_depth_draw_mode = 3
 albedo_texture = SubResource( 41 )
-metallic = 1.0
 
 [sub_resource type="ArrayMesh" id=43]
 resource_name = "DollSkeleton_forearmpng003"
@@ -193,11 +193,11 @@ surfaces/0 = {
 [sub_resource type="SpatialMaterial" id=18]
 resource_name = "hand.png.001"
 flags_transparent = true
+flags_unshaded = true
 vertex_color_use_as_albedo = true
 params_cull_mode = 2
 params_depth_draw_mode = 3
 albedo_texture = ExtResource( 2 )
-metallic = 1.0
 
 [sub_resource type="ArrayMesh" id=24]
 resource_name = "DollSkeleton_handpng003"
@@ -241,11 +241,11 @@ surfaces/0 = {
 [sub_resource type="SpatialMaterial" id=31]
 resource_name = "hand.png.001"
 flags_transparent = true
+flags_unshaded = true
 vertex_color_use_as_albedo = true
 params_cull_mode = 2
 params_depth_draw_mode = 3
 albedo_texture = ExtResource( 9 )
-metallic = 1.0
 
 [sub_resource type="ArrayMesh" id=32]
 resource_name = "DollSkeleton_handpng003"
@@ -339,22 +339,22 @@ surfaces/0 = {
 [node name="armpng" type="MeshInstance" parent="." index="0"]
 mesh = SubResource( 37 )
 skin = SubResource( 20 )
-material/0 = null
+material/0 = SubResource( 36 )
 
 [node name="armpng001" type="MeshInstance" parent="." index="1"]
 mesh = SubResource( 40 )
 skin = SubResource( 20 )
-material/0 = null
+material/0 = SubResource( 36 )
 
 [node name="forearmpng" type="MeshInstance" parent="." index="2"]
 mesh = SubResource( 43 )
 skin = SubResource( 20 )
-material/0 = null
+material/0 = SubResource( 42 )
 
 [node name="forearmpng001" type="MeshInstance" parent="." index="3"]
 mesh = SubResource( 46 )
 skin = SubResource( 20 )
-material/0 = null
+material/0 = SubResource( 42 )
 
 [node name="PartStatePicker2" parent="." index="4" instance=ExtResource( 6 )]
 state = "hands"
@@ -365,13 +365,13 @@ state = "hands"
 mesh = SubResource( 24 )
 skin = SubResource( 20 )
 skeleton = NodePath("../../..")
-material/0 = null
+material/0 = SubResource( 18 )
 
 [node name="handpng001" type="MeshInstance" parent="PartStatePicker2/PartState" index="1"]
 mesh = SubResource( 25 )
 skin = SubResource( 20 )
 skeleton = NodePath("../../..")
-material/0 = null
+material/0 = SubResource( 18 )
 
 [node name="PartState2" parent="PartStatePicker2" index="1" instance=ExtResource( 7 )]
 visible = false
@@ -381,13 +381,13 @@ stateValue = "fists"
 mesh = SubResource( 32 )
 skin = SubResource( 20 )
 skeleton = NodePath("../../..")
-material/0 = null
+material/0 = SubResource( 31 )
 
 [node name="handpng002" type="MeshInstance" parent="PartStatePicker2/PartState2" index="1"]
 mesh = SubResource( 34 )
 skin = SubResource( 20 )
 skeleton = NodePath("../../..")
-material/0 = null
+material/0 = SubResource( 31 )
 
 [node name="AttachmentProxy" parent="." index="5" instance=ExtResource( 5 )]
 transform = Transform( 0.98213, 0.188204, 0, -0.188204, 0.98213, 0, 0, 0, 1, -0.127511, 3.91339, 0.419232 )
@@ -416,11 +416,11 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0264019 )
 mesh = SubResource( 27 )
 skin = SubResource( 20 )
 skeleton = NodePath("../../..")
-material/0 = null
+material/0 = SubResource( 26 )
 
 [node name="handpng002" type="MeshInstance" parent="PartStatePicker/PartState" index="1"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.026 )
 mesh = SubResource( 29 )
 skin = SubResource( 20 )
 skeleton = NodePath("../../..")
-material/0 = null
+material/0 = SubResource( 26 )

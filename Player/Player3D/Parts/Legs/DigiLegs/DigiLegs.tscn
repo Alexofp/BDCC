@@ -8,11 +8,11 @@
 [sub_resource type="SpatialMaterial" id=1]
 resource_name = "digileg.png"
 flags_transparent = true
+flags_unshaded = true
 vertex_color_use_as_albedo = true
 params_cull_mode = 2
 params_depth_draw_mode = 3
 albedo_texture = ExtResource( 5 )
-metallic = 1.0
 
 [sub_resource type="ArrayMesh" id=38]
 resource_name = "DollSkeleton_digilegpng"
@@ -126,11 +126,11 @@ surfaces/0 = {
 [sub_resource type="SpatialMaterial" id=42]
 resource_name = "legup.png.001"
 flags_transparent = true
+flags_unshaded = true
 vertex_color_use_as_albedo = true
 params_cull_mode = 2
 params_depth_draw_mode = 3
 albedo_texture = ExtResource( 4 )
-metallic = 1.0
 
 [sub_resource type="ArrayMesh" id=43]
 resource_name = "DollSkeleton_leguppng001"
@@ -252,22 +252,22 @@ surfaces/0 = {
 [node name="digilegpng" type="MeshInstance" parent="." index="0"]
 mesh = SubResource( 38 )
 skin = SubResource( 39 )
-material/0 = null
+material/0 = SubResource( 1 )
 
 [node name="digilegpng001" type="MeshInstance" parent="." index="1"]
 mesh = SubResource( 40 )
 skin = SubResource( 39 )
-material/0 = null
+material/0 = SubResource( 1 )
 
 [node name="legupDeformable" type="MeshInstance" parent="." index="2"]
 mesh = SubResource( 43 )
 skin = SubResource( 44 )
-material/0 = null
+material/0 = SubResource( 42 )
 
 [node name="legupDeformable001" type="MeshInstance" parent="." index="3"]
 mesh = SubResource( 45 )
 skin = SubResource( 44 )
-material/0 = null
+material/0 = SubResource( 42 )
 
 [node name="AttachmentProxy" parent="." index="4" instance=ExtResource( 2 )]
 transform = Transform( 1.19189, 0.519039, 0, -0.519039, 1.19189, 0, 0, 0, 1.3, 0.498434, 0.792379, 0.284713 )
