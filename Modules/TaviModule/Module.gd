@@ -45,6 +45,7 @@ func _init():
 		
 		"res://Modules/TaviModule/Quest2/TaviQuest2TalkEvent.gd",
 		"res://Modules/TaviModule/Quest2/TaviQuest2SkarEvent.gd",
+		"res://Modules/TaviModule/Quest2/TaviQuest2ElevatorEvent.gd",
 		
 		"res://Modules/TaviModule/ShowerEvent/TaviShowerEvent.gd",
 	]

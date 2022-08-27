@@ -51,9 +51,8 @@ func _run():
 	if(roomMemory != null && roomMemory != ""):
 		saynn("[i]"+roomMemory+"[/i]")
 		
-	GM.ES.triggerRun(Trigger.EnteringRoom, [GM.pc.location])
-	
 	_roomInfo._onEnter()
+	GM.ES.triggerRun(Trigger.EnteringRoom, [GM.pc.location])
 
 func _react(_action: String, _args):
 	# RoomAction support

@@ -15,16 +15,13 @@ func _run():
 			["Medical", "med_elevator", "Floor that has all the medical and science facilities"],
 		]
 		
-		if(GM.QS.isActive("TaviQuest2") && getModuleFlag("TaviModule", "Tavi_Quest2MetHer", false)):
-			floors.append([
-				"Command deck", "cd_elevator", "Where all the higher-ups live"
-			])
-		
 		for fl in floors:
 			if(fl[1] == GM.pc.location):
 				addDisabledButton(fl[0], "You are already here")
 			else:
 				addButton(fl[0], fl[2], "gofloor", [fl[1]])
+				
+		GM.ES.triggerRun(Trigger.InsideElevator)
 				
 		addButton("Get out", "You don't feel like going anywhere", "endthescene")
 	
