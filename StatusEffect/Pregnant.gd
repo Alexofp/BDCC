@@ -29,7 +29,7 @@ func getEffectDesc():
 func getEffectImage():
 	var progress = character.getPregnancyProgress()
 	if(progress <= 0.33):
-		return "res://Images/StatusEffects/stomach-flu.png"
+		return "res://Images/StatusEffects/impregnation.png"
 	
 	return "res://Images/StatusEffects/mother.png"
 

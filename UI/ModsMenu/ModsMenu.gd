@@ -192,3 +192,7 @@ func _on_ConfirmationDialog_confirmed():
 		OPTIONS.saveToFile()
 	else:
 		Log.printerr("An error occurred when trying to access the path "+modsFolder)
+
+
+func _on_WikiButton_pressed():
+	var _ok = OS.shell_open("https://github.com/Alexofp/BDCC/wiki")

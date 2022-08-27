@@ -61,31 +61,38 @@ rect_min_size = Vector2( 0, 100 )
 columns = 5
 
 [node name="CloseButton" type="Button" parent="VBoxContainer/GridContainer"]
-margin_right = 253.0
+margin_right = 252.0
 margin_bottom = 20.0
 size_flags_horizontal = 3
 text = "Close"
 
 [node name="ModsFolderButton" type="Button" parent="VBoxContainer/GridContainer"]
-margin_left = 257.0
-margin_right = 510.0
+margin_left = 256.0
+margin_right = 508.0
 margin_bottom = 20.0
 size_flags_horizontal = 3
 text = "Open mods folder"
 
 [node name="AddModButton" type="Button" parent="VBoxContainer/GridContainer"]
-margin_left = 514.0
-margin_right = 767.0
+margin_left = 512.0
+margin_right = 764.0
 margin_bottom = 20.0
 size_flags_horizontal = 3
 text = "Import mod"
 
 [node name="RemoveModsButton" type="Button" parent="VBoxContainer/GridContainer"]
-margin_left = 771.0
-margin_right = 1024.0
+margin_left = 768.0
+margin_right = 1020.0
 margin_bottom = 20.0
 size_flags_horizontal = 3
 text = "Delete ALL mods"
+
+[node name="WikiButton" type="Button" parent="VBoxContainer/GridContainer"]
+margin_left = 1024.0
+margin_right = 1276.0
+margin_bottom = 20.0
+size_flags_horizontal = 3
+text = "Modding wiki"
 
 [node name="ImportModDialog" type="FileDialog" parent="."]
 anchor_left = 0.5
@@ -143,5 +150,6 @@ margin_bottom = 57.0
 [connection signal="pressed" from="VBoxContainer/GridContainer/ModsFolderButton" to="." method="_on_ModsFolderButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/GridContainer/AddModButton" to="." method="_on_AddModButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/GridContainer/RemoveModsButton" to="." method="_on_RemoveModsButton_pressed"]
+[connection signal="pressed" from="VBoxContainer/GridContainer/WikiButton" to="." method="_on_WikiButton_pressed"]
 [connection signal="file_selected" from="ImportModDialog" to="." method="_on_ImportModDialog_file_selected"]
 [connection signal="confirmed" from="ConfirmationDialog" to="." method="_on_ConfirmationDialog_confirmed"]
