@@ -1,5 +1,5 @@
 extends EventTrigger
-class_name PriorityEventTrigger
+class_name EventTriggerPriority
 
 var events = []
 

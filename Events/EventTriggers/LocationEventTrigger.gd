@@ -1,5 +1,5 @@
 extends EventTrigger
-class_name LocationEventTrigger
+class_name EventTriggerLocation
 
 var eventsWithoutLocation = []
 var eventsByLocation = {}

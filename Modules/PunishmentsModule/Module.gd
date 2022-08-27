@@ -7,34 +7,36 @@ func _init():
 	author = "Rahi"
 	
 	scenes = [
-		"res://Modules/PunishmentsModule/StocksPunishmentScene.gd",
-		"res://Modules/PunishmentsModule/TryStocksScene.gd",
-		"res://Modules/PunishmentsModule/StocksEscape.gd",
-		"res://Modules/PunishmentsModule/StocksSpankedByInmate.gd",
-		"res://Modules/PunishmentsModule/StocksMeetEliza.gd",
-		"res://Modules/PunishmentsModule/StocksTinyMessages.gd",
-		"res://Modules/PunishmentsModule/StocksRishaBlowjob.gd",
-		"res://Modules/PunishmentsModule/StocksAvyForcedVaginalAnal.gd",
-		"res://Modules/PunishmentsModule/StocksNovaRishaForcedVagOrAnal.gd",
+		"res://Modules/PunishmentsModule/Stocks/StocksPunishmentScene.gd",
+		"res://Modules/PunishmentsModule/Stocks/TryStocksScene.gd",
+		
+		"res://Modules/PunishmentsModule/Stocks/Willing/StocksRishaBlowjob.gd",
+		"res://Modules/PunishmentsModule/Stocks/UnWilling/StocksAvyForcedVaginalAnal.gd",
+		"res://Modules/PunishmentsModule/Stocks/UnWilling/StocksNovaRishaForcedVagOrAnal.gd",
+		
+		"res://Modules/PunishmentsModule/Stocks/Escape/StocksEscape.gd",
+		"res://Modules/PunishmentsModule/Stocks/Escape/TaviStocksEscape.gd",
+		"res://Modules/PunishmentsModule/Stocks/Event/StocksMeetEliza.gd",
+		"res://Modules/PunishmentsModule/Stocks/Event/StocksSpankedByInmate.gd",
+		"res://Modules/PunishmentsModule/Stocks/Event/StocksTinyMessages.gd",
 		]
 	characters = [
 		
 	]
 	items = []
 	events = [
+		"res://Modules/PunishmentsModule/Stocks/Willing/StocksRishaBlowjobEvent.gd",
+		"res://Modules/PunishmentsModule/Stocks/UnWilling/StocksAvyForcedVaginalAnalEvent.gd",
+		"res://Modules/PunishmentsModule/Stocks/UnWilling/StocksNovaRishaForcedVagOrAnalEvent.gd",
+		"res://Modules/PunishmentsModule/Stocks/Escape/StocksEscapeEvent.gd",
+		"res://Modules/PunishmentsModule/Stocks/Escape/TaviStocksEscapeEvent.gd",
+		"res://Modules/PunishmentsModule/Stocks/Event/StocksMeetElizaEvent.gd",
+		"res://Modules/PunishmentsModule/Stocks/Event/StocksSpankedByInmateEvent.gd",
+		"res://Modules/PunishmentsModule/Stocks/Event/StocksTinyMessagesEvent.gd",
 	]
 
-func getRandomSceneFor(sceneType):
-	var result = []
-	if(sceneType == RandomSceneType.StocksEscape):
-		result.append_array([["StocksEscape", 10.0]])
-	if(sceneType == RandomSceneType.StocksEvent):
-		result.append_array([["StocksSpankedByInmate", 10.0], ["StocksMeetEliza", 10.0], ["StocksTinyMessages", 10.0], ["StocksTinyMessages", 10.0]])
-	if(sceneType == RandomSceneType.StocksWillingSex):
-		result.append_array([["StocksRishaBlowjob", 10.0]])
-	if(sceneType == RandomSceneType.StocksUnWillingSex):
-		result.append_array([["StocksNovaRishaForcedVagOrAnal", 10.0]])
-		if(GM.pc.hasVagina()):
-			result.append_array([["StocksAvyForcedVaginalAnal", 10.0]])
-		
-	return result
+func registerEventTriggers():
+	GM.ES.registerEventTrigger("StocksEscape", EventTriggerWeighted.new())
+	GM.ES.registerEventTrigger("StocksEvent", EventTriggerWeighted.new())
+	GM.ES.registerEventTrigger("StocksWillingSex", EventTriggerWeighted.new())
+	GM.ES.registerEventTrigger("StocksUnWillingSex", EventTriggerWeighted.new())

@@ -169,17 +169,16 @@ func checkDanger():
 		var population = GM.pc.getLocationPopulation()
 		if(population.size() > 0):
 			var randomPop = RNG.pick(population)
-			var sceneID
+			var triggerID
 			if(randomPop == WorldPopulation.Inmates):
-				sceneID = GM.main.getRandomSceneFor(RandomSceneType.MasturbationSpottedInmate)
+				triggerID = Trigger.MasturbationSpottedInmate
 			if(randomPop == WorldPopulation.Guards):
-				sceneID = GM.main.getRandomSceneFor(RandomSceneType.MasturbationSpottedGuard)
+				triggerID = Trigger.MasturbationSpottedGuard
 			
-			if(sceneID != null && sceneID != ""):
+			if(triggerID != null && GM.ES.triggerReact(triggerID)):
 				GM.pc.getLustCombatState().resetState()
 				GM.pc.updateNonBattleEffects()
 				endScene()
-				runScene(sceneID)
 
 func resolveCustomCharacterName(_charID):
 	if(_charID == "attacker"):

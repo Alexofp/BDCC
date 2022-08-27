@@ -618,7 +618,7 @@ func getFluidAmount(fluidSource):
 		if(hasBodypart(BodypartSlot.Penis)):
 			var penis:BodypartPenis = getBodypart(BodypartSlot.Penis)
 			return penis.getFluidProduction().getFluidAmount()
-		return 100.0
+		return RNG.randf_range(100.0, 500.0)
 	if(fluidSource == BodilyFluids.FluidSource.Vagina):
 		return RNG.randf_range(50.0, 200.0)
 		
@@ -1081,9 +1081,8 @@ func updateDoll(doll: Doll3D):
 	
 	pregnancyValue += pregnancyAddition
 	
-	if(true):
-		var cumInflationLevel = getCumInflationLevel()
-		pregnancyValue += clamp(cumInflationLevel / 10.0, 0.0, 1.0)
+	var cumInflationLevel = getCumInflationLevel()
+	pregnancyValue += clamp(cumInflationLevel / 2.0, 0.0, 1.0)
 	
 	doll.setPregnancy(clamp(pregnancyValue, 0.0, 1.1))
 	

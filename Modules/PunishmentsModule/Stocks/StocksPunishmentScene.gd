@@ -13,6 +13,7 @@ func _run():
 		GM.main.playAnimation(StageScene.Stocks, "idle")
 		GM.pc.setLocation("main_punishment_spot")
 		aimCamera("main_punishment_spot")
+		GM.pc.updateAppearance()
 		
 		saynn("You’re stuck in stocks, there is very little you can do, the movement of your head and arms is blocked by a giant metal frame with 3 holes, its angle is forcing you to constantly stay bent forward, exposing your butt, your ankles are chained so you can’t really move them too. You’re completely helpless.")
 
@@ -68,31 +69,24 @@ func _run():
 		addButton("Continue", "What's next", "")
 
 func triggerRandomEvent(escapeChance, _lewdChance, _willingSexChance, _unWillingSexChance, _nothingChance):
-	var eventType = RNG.pickWeighted([RandomSceneType.StocksEscape, RandomSceneType.StocksEvent, RandomSceneType.StocksWillingSex, RandomSceneType.StocksUnWillingSex, ""], [escapeChance, _lewdChance, _willingSexChance, _unWillingSexChance, _nothingChance])
+	var eventType = RNG.pickWeighted(["StocksEscape", "StocksEvent", "StocksWillingSex", "StocksUnWillingSex", ""], [escapeChance, _lewdChance, _willingSexChance, _unWillingSexChance, _nothingChance])
 	
-	if(eventType == RandomSceneType.StocksEscape):
-		var sceneID = GM.main.getRandomSceneFor(RandomSceneType.StocksEscape)
-		if(sceneID != null):
-			runScene(sceneID)
+	if(eventType == "StocksEscape"):
+		if(GM.ES.triggerReact("StocksEscape")):
 			endScene()
 			return true
 	
-	if(eventType == RandomSceneType.StocksEvent):
-		var sceneID = GM.main.getRandomSceneFor(RandomSceneType.StocksEvent)
-		if(sceneID != null):
-			runScene(sceneID)
+	if(eventType == "StocksEvent"):
+		if(GM.ES.triggerReact("StocksEvent")):
+			return true
+
+			
+	if(eventType == "StocksWillingSex"):
+		if(GM.ES.triggerReact("StocksWillingSex")):
 			return true
 			
-	if(eventType == RandomSceneType.StocksWillingSex):
-		var sceneID = GM.main.getRandomSceneFor(RandomSceneType.StocksWillingSex)
-		if(sceneID != null):
-			runScene(sceneID)
-			return true
-			
-	if(eventType == RandomSceneType.StocksUnWillingSex):
-		var sceneID = GM.main.getRandomSceneFor(RandomSceneType.StocksUnWillingSex)
-		if(sceneID != null):
-			runScene(sceneID)
+	if(eventType == "StocksUnWillingSex"):
+		if(GM.ES.triggerReact("StocksUnWillingSex")):
 			return true
 	
 	return false
@@ -104,7 +98,6 @@ func getEscapeChance(isLoud = false):
 		return 10.0
 		
 	if(isLoud):
-		print(max(3.0, amountOfEventsPassed / 8.0))
 		return max(3.0, amountOfEventsPassed / 8.0)
 		
 	return max(2.0, amountOfEventsPassed / 10.0)

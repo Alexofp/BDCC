@@ -118,14 +118,14 @@ func hoursPassed(_howmuch):
 
 # How much fluids get naturally obsorbed every hour
 func getNaturalDrain() -> float:
-	return 1.0
+	return 5.0
 
 # How much leaks out naturally
 func getNaturalSpill() -> float:
-	return 0.2
+	return 1.0
 
 func getOverstuffedSpill() -> float:
-	return 15.0
+	return 20.0
 
 func isClosedOff():
 	if(bodypart == null || bodypart.get_ref().character == null):

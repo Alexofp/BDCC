@@ -8,10 +8,12 @@ func _ready():
 	name = "EventSystem"
 	
 	# Default event triggers
-	registerEventTrigger(Trigger.EnteringRoom, LocationEventTrigger.new())
-	registerEventTrigger(Trigger.TalkingToNPC, LocationEventTrigger.new())
-	registerEventTrigger(Trigger.CaughtStealingInGreenhouse, WeightedEventTrigger.new())
-	registerEventTrigger(Trigger.CaughtOffLimits, WeightedEventTrigger.new())
+	registerEventTrigger(Trigger.EnteringRoom, EventTriggerLocation.new())
+	registerEventTrigger(Trigger.TalkingToNPC, EventTriggerLocation.new())
+	registerEventTrigger(Trigger.CaughtStealingInGreenhouse, EventTriggerWeighted.new())
+	registerEventTrigger(Trigger.CaughtOffLimits, EventTriggerWeighted.new())
+	registerEventTrigger(Trigger.MasturbationSpottedGuard, EventTriggerWeighted.new())
+	registerEventTrigger(Trigger.MasturbationSpottedInmate, EventTriggerWeighted.new())
 	
 	var modules = GlobalRegistry.getModules()
 	for moduleID in modules:
@@ -36,7 +38,7 @@ func registerEventTrigger(triggerID, eventTriggerObject):
 
 func addTrigger(event, triggerID, args = []):
 	if(!eventTriggers.has(triggerID)):
-		registerEventTrigger(triggerID, PriorityEventTrigger.new())
+		registerEventTrigger(triggerID, EventTriggerPriority.new())
 	
 	eventTriggers[triggerID].addEvent(event, args)
 	

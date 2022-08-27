@@ -1,5 +1,5 @@
 extends EventTrigger
-class_name WeightedEventTrigger
+class_name EventTriggerWeighted
 
 var events = []
 var weights = []

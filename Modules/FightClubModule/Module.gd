@@ -87,8 +87,8 @@ func register():
 	GlobalRegistry.registerFightClubFighter("res://Modules/FightClubModule/Fighters/Avy/AvyFighter.gd")
 
 func registerEventTriggers():
-	GM.ES.registerEventTrigger("ArenaFighterPCLost", LocationEventTrigger.new())
-	GM.ES.registerEventTrigger("ArenaFighterPCWon", LocationEventTrigger.new())
+	GM.ES.registerEventTrigger("ArenaFighterPCLost", EventTriggerLocation.new())
+	GM.ES.registerEventTrigger("ArenaFighterPCWon", EventTriggerLocation.new())
 
 func resetFlagsOnNewDay():
 	pass

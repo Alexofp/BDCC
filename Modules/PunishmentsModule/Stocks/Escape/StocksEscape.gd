@@ -3,14 +3,9 @@ extends "res://Scenes/SceneBase.gd"
 func _init():
 	sceneID = "StocksEscape"
 
-func _reactInit():
-	var possible = ["rahi_saves_you"]
-	if(GM.main.getModuleFlag("TaviModule", "Tavi_IntroducedTo") && !GM.main.getModuleFlag("TaviModule", "Tavi_IsAngryAtPlayer")):
-		possible.append("tavi_saves_you")
-	setState(RNG.pick(possible))
-	
+
 func _run():
-	if(state == "rahi_saves_you"):
+	if(state == ""):
 		addCharacter("rahi")
 		GM.main.playAnimation(StageScene.Duo, "stand", {npc="rahi"})
 		
@@ -33,32 +28,7 @@ func _run():
 
 			saynn("[say=rahi]All good[/say]")
 
-
 		saynn("The brown feline makes sure you’re okay and then goes back to resting on the bench in the corner.")
-
-		addButton("Leave", "You got saved!", "endthescene")
-
-	if(state == "tavi_saves_you"):
-		addCharacter("tavi")
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc="tavi"})
-		
-		saynn("You hear a voice behind.")
-
-		saynn("[say=tavi]Oh hey, that butt looks familliar.[/say]")
-
-		saynn("You try to look back but your neck has a very small angle of freedom. You feel your butt being spanked and let out a soft moan.")
-
-		saynn("[say=tavi]My pet has been naughty, huh~?[/say]")
-
-		saynn("Tavi walks into your view and crouches before you, her paw slides along your cheek and taps a few times.")
-
-		saynn("[say=tavi]You look cute there, maybe I shouldn’t unlock you. But oh well[/say]")
-
-		saynn("Tall feline unchains your legs and then unlocks the stocks, letting you stand up at last.")
-
-		saynn("[say=tavi]Don’t get used to it~[/say]")
-
-		saynn("She gives you a little head pat and then leaves.")
 
 		addButton("Leave", "You got saved!", "endthescene")
 

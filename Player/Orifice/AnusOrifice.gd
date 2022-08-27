@@ -5,7 +5,7 @@ func _init():
 	orificeType = OrificeType.Anus
 
 func getCapacity() -> float:
-	return round(500.0 + 100.0 * looseness)
+	return round(500.0 + 50.0 * looseness * looseness)
 
 func getBaseElasticity() -> float:
 	return 1.5
