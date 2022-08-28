@@ -640,6 +640,18 @@ func getDebugActions():
 			"name": "Open character creator",
 		},
 		{
+			"id": "runScene",
+			"name": "Run scene",
+			"args": [
+				{
+					"id": "sceneID",
+					"name": "Scene ID",
+					"type": "string",
+					"value": "",
+				},
+			]
+		},
+		{
 			"id": "openConsole",
 			"name": "Open console",
 		},
@@ -676,6 +688,9 @@ func doDebugAction(id, args = {}):
 	
 	if(id == "characterCreator"):
 		runScene("CharacterCreatorScene", [true])
+	
+	if(id == "runScene"):
+		runScene(args["sceneID"])
 	
 	if(id == "giveItem"):
 		var item:ItemBase = GlobalRegistry.createItem(args["itemID"])

@@ -672,7 +672,7 @@ func onSkillLevelChange(skillID):
 # Bodyparts stuff
 
 func updateAppearance():
-	print(getName()+" UPDATED APPEARENCE "+Util.getStackFunction(3))
+	#print(getName()+" UPDATED APPEARENCE "+Util.getStackFunction(3))
 	emit_signal("bodypart_changed")
 
 func resetSlots():
