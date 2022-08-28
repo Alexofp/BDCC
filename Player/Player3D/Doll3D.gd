@@ -191,11 +191,13 @@ func disconnectFromOld():
 			ch.disconnect("bodypart_changed", self, "onCharacterBodypartChanged")
 
 func loadCharacter(charID):
-	if(savedCharacterID == charID):
-		return
-	
 	var ch = GlobalRegistry.getCharacter(charID)
 	if(ch == null || !is_instance_valid(ch)):
+		return
+	
+	if(savedCharacterID == charID):
+		if(ch.has_method("softUpdateDoll")):
+			ch.softUpdateDoll(self)
 		return
 	
 	if(ch.has_method("updateDoll")):

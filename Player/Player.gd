@@ -29,7 +29,6 @@ var timedBuffsTurns: Array = []
 var timedBuffsDurationTurns: int = 0
 
 #
-signal orificeBecomeMoreLoose(orificeName, newvalue, oldvalue)
 
 # lust combat stuff
 var lustCombatState
@@ -796,35 +795,7 @@ func getPenisSize():
 	var bodypart = getBodypart(BodypartSlot.Penis)
 	return bodypart.getLength()
 
-func gotOrificeStretchedWith(bodypartSlot, insertionSize, showMessages = true):
-	var thebodypart = getBodypart(bodypartSlot)
-	
-	var orifice: Orifice = thebodypart.getOrifice()
-	var oldLooseness = orifice.getLooseness()
-	thebodypart.handleInsertion(insertionSize)
-	var newLooseness = orifice.getLooseness()
-	if(newLooseness > oldLooseness && showMessages):
-		emit_signal("orificeBecomeMoreLoose", thebodypart.getOrificeName(), newLooseness, oldLooseness)
 
-func gotFuckedBy(bodypartSlot, characterID, showMessages = true):
-	if(!hasBodypart(bodypartSlot)):
-		return
-	
-	var ch = GlobalRegistry.getCharacter(characterID)
-	assert(ch != null)
-	gotOrificeStretchedWith(bodypartSlot, ch.getPenisSize(), showMessages)
-
-func gotVaginaFuckedBy(characterID, showMessages = true):
-	return gotFuckedBy(BodypartSlot.Vagina, characterID, showMessages)
-
-func gotAnusFuckedBy(characterID, showMessages = true):
-	return gotFuckedBy(BodypartSlot.Anus, characterID, showMessages)
-
-func gotThroatFuckedBy(characterID, showMessages = true):
-	return gotFuckedBy(BodypartSlot.Head, characterID, showMessages)
-
-func getExposure():
-	return buffsHolder.getExposure()
 
 func getInmateNumber():
 	return inmateNumber
@@ -1114,28 +1085,6 @@ func useBestCondom():
 	if(bestObject != null):
 		bestObject.removeXOrDestroy(1)
 	return bestChance
-	
-func onGivingBirth(_impregnatedEggCells: Array, _newkids: Array):
-	var amountPerOrifice = {}
-	for egg in _impregnatedEggCells:
-		if(!amountPerOrifice.has(egg.getOrifice())):
-			amountPerOrifice[egg.getOrifice()] = 0
-		amountPerOrifice[egg.getOrifice()] += 1
-	
-	# This is meh
-	var mapping = {
-		OrificeType.Vagina: BodypartSlot.Vagina,
-		OrificeType.Anus: BodypartSlot.Anus,
-		OrificeType.Throat: BodypartSlot.Head,
-	}
-	
-	for orificeType in mapping:
-		if(!amountPerOrifice.has(orificeType)):
-			continue
-		
-		var amountToStretch = sqrt(amountPerOrifice[orificeType]) * 50.0
-		
-		gotOrificeStretchedWith(mapping[orificeType], amountToStretch)
 
 func onPlayerVisiblyPregnant():
 	GM.main.addLogMessage("Uh oh", "You notice that your belly is more inflated that normally. You can't deny it anymore, you are pregnant..")

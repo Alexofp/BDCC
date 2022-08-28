@@ -311,3 +311,6 @@ func updateWearerAppearance():
 	var wearer = getWearer()
 	if(wearer != null && wearer.has_method("updateAppearance")):
 		wearer.updateAppearance()
+
+func updateDoll(_doll: Doll3D):
+	pass

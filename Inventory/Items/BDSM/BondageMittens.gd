@@ -41,3 +41,6 @@ func getA():
 
 func getForcedOnMessage():
 	return getAStackNameCapitalize()+" were locked onto your hands"
+
+func updateDoll(doll: Doll3D):
+	doll.setState("gloves", "mittens")

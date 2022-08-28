@@ -6,6 +6,8 @@ signal stat_changed
 signal levelChanged
 signal skillLevelChanged(skillID)
 signal bodypart_changed
+signal orificeBecomeMoreLoose(orificeName, newvalue, oldvalue)
+#signal soft_doll_update
 
 var pain:int = 0
 var lust:int = 0
@@ -670,6 +672,7 @@ func onSkillLevelChange(skillID):
 # Bodyparts stuff
 
 func updateAppearance():
+	print(getName()+" UPDATED APPEARENCE "+Util.getStackFunction(3))
 	emit_signal("bodypart_changed")
 
 func resetSlots():
@@ -774,6 +777,40 @@ func getOrificeMinLooseness(orificeType):
 func getOrificeBlocked(orificeType):
 	return buffsHolder.getOrificeBlocked(orificeType)
 
+func gotOrificeStretchedWith(bodypartSlot, insertionSize, showMessages = true):
+	if(!hasBodypart(bodypartSlot)):
+		return
+	var thebodypart = getBodypart(bodypartSlot)
+	
+	var orifice: Orifice = thebodypart.getOrifice()
+	if(orifice == null):
+		return
+	var oldLooseness = orifice.getLooseness()
+	thebodypart.handleInsertion(insertionSize)
+	var newLooseness = orifice.getLooseness()
+	if(newLooseness > oldLooseness && showMessages):
+		emit_signal("orificeBecomeMoreLoose", thebodypart.getOrificeName(), newLooseness, oldLooseness)
+
+func gotFuckedBy(bodypartSlot, characterID, showMessages = true):
+	if(!hasBodypart(bodypartSlot)):
+		return
+	
+	var ch = GlobalRegistry.getCharacter(characterID)
+	assert(ch != null)
+	gotOrificeStretchedWith(bodypartSlot, ch.getPenisSize(), showMessages)
+
+func gotVaginaFuckedBy(characterID, showMessages = true):
+	return gotFuckedBy(BodypartSlot.Vagina, characterID, showMessages)
+
+func gotAnusFuckedBy(characterID, showMessages = true):
+	return gotFuckedBy(BodypartSlot.Anus, characterID, showMessages)
+
+func gotThroatFuckedBy(characterID, showMessages = true):
+	return gotFuckedBy(BodypartSlot.Head, characterID, showMessages)
+
+func getExposure():
+	return buffsHolder.getExposure()
+
 # PREGNANCY STUFF
 
 func getBaseFertility() -> float:
@@ -846,7 +883,26 @@ func getPregnancyProgress():
 	return 0.0
 
 func onGivingBirth(_impregnatedEggCells: Array, _newkids: Array):
-	pass
+	var amountPerOrifice = {}
+	for egg in _impregnatedEggCells:
+		if(!amountPerOrifice.has(egg.getOrifice())):
+			amountPerOrifice[egg.getOrifice()] = 0
+		amountPerOrifice[egg.getOrifice()] += 1
+	
+	# This is meh
+	var mapping = {
+		OrificeType.Vagina: BodypartSlot.Vagina,
+		OrificeType.Anus: BodypartSlot.Anus,
+		OrificeType.Throat: BodypartSlot.Head,
+	}
+	
+	for orificeType in mapping:
+		if(!amountPerOrifice.has(orificeType)):
+			continue
+		
+		var amountToStretch = sqrt(amountPerOrifice[orificeType]) * 30.0
+		
+		gotOrificeStretchedWith(mapping[orificeType], amountToStretch)
 
 # END OF PREGNANCY STUFF
 
@@ -1006,47 +1062,14 @@ func updateLeaking(doll: Doll3D):
 		doll.setAnusLeaking(true)
 	else:
 		doll.setAnusLeaking(false)
-
-func updateDoll(doll: Doll3D):
-	
-	var parts = getDollParts()
-	
-	updateLeaking(doll)
-	
-	#doll.setButtScale(0.8)
-	#doll.setBreastsScale(1.5)
-	#doll.setPregnancy(1.0)
-	#doll.setThighThickness(-0.4)
-	#doll.setPenisScale(1.0)
-	#doll.setBallsScale(5.5)
-	if(hasEffect(StatusEffect.Muzzled)):
-		doll.setState("muzzle", "muzzled")
-	else:
-		doll.setState("muzzle", "")
 		
-	if(buffsHolder.hasBuff(Buff.GagBuff)):
-		doll.setState("mouth", "ballgag")
-	elif(buffsHolder.hasBuff(Buff.RingGagBuff)):
-		doll.setState("mouth", "ringgag")
-	else:
-		doll.setState("mouth", "")
-		#doll.setState("mouth", "open")
-	#doll.setState("mouth", "open")
-	
-	if(buffsHolder.hasBuff(Buff.BlockedHandsBuff)):
-		doll.setState("gloves", "mittens")
-	else:
-		doll.setState("gloves", "")
-	
-	if(buffsHolder.hasBuff(Buff.RestrainedArmsBuff)):
-		doll.setArmsCuffed(true)
-	else:
-		doll.setArmsCuffed(false)
-	
-	if(buffsHolder.hasBuff(Buff.RestrainedLegsBuff)):
-		doll.setLegsCuffed(true)
-	else:
-		doll.setLegsCuffed(false)
+func softUpdateDoll(doll: Doll3D):
+	doll.setArmsCuffed(false)
+	doll.setLegsCuffed(false)
+	doll.setState("mouth", "")
+	doll.setState("muzzle", "")
+	doll.setState("gloves", "")
+	updateLeaking(doll)
 	
 	var breastsScale = 1.0
 	if(hasBodypart(BodypartSlot.Breasts)):
@@ -1092,6 +1115,18 @@ func updateDoll(doll: Doll3D):
 	else:
 		doll.setButtScale(1.0 + (thicknessNorm - 0.5)/1.5)
 		doll.setThighThickness((thicknessNorm - 0.5))
+	
+	var wearingItems = getInventory().getAllEquippedItems()
+	for inventorySlot in wearingItems:
+		var item = wearingItems[inventorySlot]
+		if(item == null):
+			continue
+		
+		item.updateDoll(doll)
+
+func updateDoll(doll: Doll3D):
+	
+	var parts = getDollParts()
 	
 	var newAlphas = {}
 	var newAttachmentAlphas = {}
@@ -1145,6 +1180,8 @@ func updateDoll(doll: Doll3D):
 	doll.setHiddenAttachmentZones(newAttachmentAlphas)
 	doll.setParts(parts)
 	doll.setUnriggedParts(partsScenes)
+	
+	softUpdateDoll(doll)
 
 func getSkillExperienceMult(skill):
 	var mult = 0.0

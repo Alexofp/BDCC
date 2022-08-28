@@ -39,3 +39,6 @@ func generateRestraintData():
 
 func getForcedOnMessage():
 	return getAStackNameCapitalize()+" was forced into your mouth! You are drooling already"
+
+func updateDoll(doll: Doll3D):
+	doll.setState("mouth", "ballgag")

@@ -13,7 +13,6 @@ func _run():
 		GM.main.playAnimation(StageScene.Stocks, "idle")
 		GM.pc.setLocation("main_punishment_spot")
 		aimCamera("main_punishment_spot")
-		GM.pc.updateAppearance()
 		
 		saynn("You’re stuck in stocks, there is very little you can do, the movement of your head and arms is blocked by a giant metal frame with 3 holes, its angle is forcing you to constantly stay bent forward, exposing your butt, your ankles are chained so you can’t really move them too. You’re completely helpless.")
 

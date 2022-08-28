@@ -38,3 +38,6 @@ func getUnriggedParts(_character):
 		"wrist.L": ["res://Inventory/UnriggedModels/Cuff/CuffModel.tscn"],
 		"wrist.R": ["res://Inventory/UnriggedModels/Cuff/CuffModel.tscn"],
 	}
+
+func updateDoll(doll: Doll3D):
+	doll.setArmsCuffed(true)

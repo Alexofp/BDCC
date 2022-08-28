@@ -38,3 +38,6 @@ func generateRestraintData():
 
 func getForcedOnMessage():
 	return getAStackNameCapitalize()+" was forced onto you. No more biting for you!"
+
+func updateDoll(doll: Doll3D):
+	doll.setState("muzzle", "muzzled")

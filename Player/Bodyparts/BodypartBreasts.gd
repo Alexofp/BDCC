@@ -23,6 +23,10 @@ func loadData(_data):
 	.loadData(_data)
 	cached_size = getSize()
 
+func loadDataNPC(_data):
+	.loadDataNPC(_data)
+	cached_size = getSize()
+
 func getSlot():
 	return BodypartSlot.Breasts
 

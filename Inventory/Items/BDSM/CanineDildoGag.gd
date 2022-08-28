@@ -40,3 +40,6 @@ func generateRestraintData():
 
 func getForcedOnMessage():
 	return getAStackNameCapitalize()+" was locked around your head. The canine-shaped rubber cock is stretching your throat out!"
+
+func updateDoll(doll: Doll3D):
+	doll.setState("mouth", "ballgag")
