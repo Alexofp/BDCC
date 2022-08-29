@@ -1,6 +1,13 @@
 extends "res://Scenes/SceneBase.gd"
 
 var savedActionText = ""
+var spottedText = ""
+var isInPublic = false
+
+func _reactInit():
+	var lustCombatState:LustCombatState = GM.pc.getLustCombatState()
+	if(lustCombatState.isInPublic()):
+		isInPublic = true
 
 func _init():
 	sceneID = "MasturbationScene"
@@ -60,6 +67,9 @@ func _run():
 			
 	if(state == "doLustAction"):
 		saynn(savedActionText.trim_suffix("\n\n"))
+		
+		if(spottedText != ""):
+			saynn(spottedText)
 				
 	if(state == "" || state == "doLustAction"):
 		addButtonAt(13, "Do nothing", "Try not to attract any attention", "doidle")
@@ -130,6 +140,7 @@ func _react(_action: String, _args):
 		#GM.pc.addLust(-1)
 		
 		checkDanger()
+		spottedMessages()
 		
 		setState("doLustAction")
 		return
@@ -157,8 +168,111 @@ func _react(_action: String, _args):
 			return
 			
 		checkDanger()
+		spottedMessages()
 
 	setState(_action)
+
+func spottedMessages():
+	spottedText = ""
+	
+	var lustCombatState:LustCombatState = GM.pc.getLustCombatState()
+	if(lustCombatState.isInPublic()):
+		if(lustCombatState.getVisibility() < 1.0):
+			
+			if(RNG.chance(50)):
+				return
+			
+			var barks = [
+				"Your heart races, you swear you saw someone’s eyes watching you.",
+				"You look around frantically, constantly checking if someone sees you.",
+				"You can’t believe that you are doing this, you feel like you could be spotted at any second.",
+				"What if someone is watching?.. Just thinking about it makes you more aroused.",
+				"You wonder how far you can push this before being spotted..",
+			]
+			
+			spottedText = RNG.pick(barks)
+			return
+		
+		if(lustCombatState.getDanger() > 0):
+			var population = GM.pc.getLocationPopulation()
+			if(population.size() <= 0 || RNG.chance(50)):
+				return
+			
+			var randomPop = RNG.pick(population)
+			if(randomPop == WorldPopulation.Inmates):
+				var randI = RNG.randi_range(0, 5)
+				match(randI):
+					0:
+						spottedText = "You catch a lewd gaze of one of the inmates that stares at you and your {pc.masc} body."
+					1:
+						spottedText = "One of the inmates exposes his canine cock and starts stroking himself while watching the show that you’re offering."
+						spottedText += "\n\n"
+						spottedText += RNG.pick([
+							"[sayMale]Yeah, wiggle that ass![/sayMale]",
+							"[sayMale]What a slut![/sayMale]",
+							"[sayMale]Don’t stop, whore. Give us a good show.[/sayMale]",
+						])
+					2:
+						spottedText = "A group of inmates turn around and catch the glimpses of your hands doing lewd things."
+						spottedText += "\n\n"
+						spottedText += RNG.pick([
+							"[sayMale]Look at {pc.him}, should we go help?[/sayMale]",
+							"[sayMale]Wow, {pc.he} is making me want to fuck {pc.him}.[/sayMale]",
+							"[sayFemale]The boys can do whatever they want with that ass, {pc.his} face is mine~.[/sayFemale]",
+						])
+					3:
+						spottedText = "One of the inmate girls walks past and then spots what you are doing before taking a step back, blushing."
+						spottedText += "\n\n"
+						spottedText += RNG.pick([
+							"[sayFemale]H-hey, you can’t do that![/sayFemale]",
+							"[sayFemale]Um-m.. my bad.[/sayFemale]",
+						])
+					4:
+						spottedText = "An inmate creeps closer to you and watches you play with yourself, smiling."
+					5:
+						spottedText = "You notice the eyes of many inmates attached to you, it seems you are attracting quite an audience."
+						spottedText += "\n\n"
+						spottedText += RNG.pick([
+							"[sayMale]I wanna fuck {pc.him} first![/sayMale]",
+							"[sayMale]That ass is so {pc.thick}, makes me wanna stretch it.[/sayMale]",
+							"[sayMale]Hey, look at that slut whoring herself out![/sayMale]",
+							"[sayFemale]Sweetie, why don’t you lick me out.[/sayFemale]",
+							"[sayFemale]What a slut![/sayFemale]",
+						])
+			if(randomPop == WorldPopulation.Guards):
+				var randI = RNG.randi_range(0, 7)
+				match(randI):
+					0:
+						spottedText = "One of the staff members glances at you. You quickly turn away but you’re almost certain he saw you doing something lewd."
+					1:
+						spottedText = "A staff member walks past and sees you. She rolls her eyes and leaves you to your things."
+					2:
+						spottedText = "A few staff members walk past but one of them stops and stares at you."
+						spottedText += "\n\n"
+						spottedText += RNG.pick([
+							"[sayMale]Hey, should we go punish {pc.him}?[/sayMale]",
+							"[sayMale]Look at that slut.[/sayMale]",
+							"[sayFemale]Hey, stop that or we will have to use force.[/sayFemale]",
+						])
+					3:
+						spottedText = "One of the guards sees your actions and starts walking towards you with a stun baton in his hand. Luckily, he stops to watch you some more."
+					4:
+						spottedText = "One of the female staff members raises her brow at you."
+						spottedText += "\n\n"
+						spottedText += RNG.pick([
+							"[sayFemale]Are you a lilac? That would explain it.[/sayFemale]",
+							"[sayFemale]Someone begs to be punished.[/sayFemale]",
+							"[sayFemale]Hey, don’t complain later when people will start passing you around.[/sayFemale]",
+							"[sayFemale]Someone’s horny, huh~?[/sayFemale]",
+						])
+					5:
+						spottedText = "Staff starts crowding around you but that only makes you more eager, you’ve been spotted."
+					6:
+						spottedText = "A guard sneaks a hand under his crotch armor piece and clearly strokes himself while watching you."
+					7:
+						spottedText = "One of the staff members walks past and pretends to not see what you are doing."
+						
+	
 
 func checkDanger():
 	var lustCombatState:LustCombatState = GM.pc.getLustCombatState()
@@ -190,6 +304,8 @@ func saveData():
 	var data = .saveData()
 	
 	data["savedActionText"] = savedActionText
+	data["isInPublic"] = isInPublic
+	data["spottedText"] = spottedText
 	
 	return data
 	
@@ -197,3 +313,5 @@ func loadData(data):
 	.loadData(data)
 	
 	savedActionText = SAVE.loadVar(data, "savedActionText", "")
+	isInPublic = SAVE.loadVar(data, "isInPublic", false)
+	spottedText = SAVE.loadVar(data, "spottedText", "")

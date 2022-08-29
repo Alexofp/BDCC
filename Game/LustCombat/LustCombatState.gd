@@ -34,13 +34,13 @@ func processLewdTurn(didSomethingLewd = false):
 		
 	currentVisibility += ambientVisibility
 	currentVisibility = clamp(currentVisibility, 0.0, 1.0)
-	processDanger()
+	processDanger(didSomethingLewd)
 	
-func processDanger():
-	if(currentVisibility >= 1.0):
+func processDanger(didSomethingLewd = false):
+	if(currentVisibility >= 1.0 && didSomethingLewd):
 		currentDanger += RNG.randf_range(0.15, 0.25)
 	else:
-		currentDanger -= RNG.randf_range(0.01, 0.1)
+		currentDanger -= RNG.randf_range(0.11, 0.4)
 	currentDanger = clamp(currentDanger, 0.0, 1.0)
 
 func getVisibility():
@@ -265,7 +265,7 @@ func doAction(actionData):
 	
 	if(!isInBattle() && isInPublic()):
 
-		currentVisibility += lustAction.getVisibility() * (1.0+pc.getExposure()/4.0)
+		currentVisibility += lustAction.getVisibility() * (1.0+pc.getExposure()/2.0)
 		currentVisibility = clamp(currentVisibility, 0.0, 1.0)
 		processLewdTurn(true)
 	
