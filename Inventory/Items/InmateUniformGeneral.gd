@@ -79,6 +79,8 @@ func getHidesParts(_character):
 			return null
 		if(itemState.areShortsPulledDown()):
 			return null
+		if(itemState.isDamaged()):
+			return null
 	return {
 		BodypartSlot.Penis: true,
 	}

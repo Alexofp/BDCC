@@ -168,6 +168,7 @@ func _react(_action: String, _args):
 
 	if(_action == "get_drugged"):
 		GM.pc.addIntoxication(0.7)
+		GM.pc.addLust(100)
 
 	if(_action in ["cum", "cumDrugged"]):
 		processTime(60*6)

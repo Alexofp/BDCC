@@ -35,6 +35,7 @@ func saveData():
 	
 	data["shortsPulledDown"] = shortsPulledDown
 	data["shirtOpened"] = shirtOpened
+	data["clothesDamaged"] = clothesDamaged
 
 	return data
 	
@@ -43,6 +44,7 @@ func loadData(_data):
 	
 	shortsPulledDown = SAVE.loadVar(_data, "shortsPulledDown", false)
 	shirtOpened = SAVE.loadVar(_data, "shirtOpened", false)
+	clothesDamaged = SAVE.loadVar(_data, "clothesDamaged", false)
 
 func blocksInventorySlots():
 	var result = []
