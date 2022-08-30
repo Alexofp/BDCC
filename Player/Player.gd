@@ -1094,3 +1094,30 @@ func onPlayerReadyToGiveBirth():
 
 func getLustCombatState():
 	return lustCombatState
+
+func getDamagebleClothesZones():
+	var piecesToDamage = [InventorySlot.Torso, InventorySlot.Body]
+	if(RNG.chance(50)):
+		piecesToDamage.append(InventorySlot.UnderwearTop)
+		piecesToDamage.append(InventorySlot.UnderwearBottom)
+	else:
+		piecesToDamage.append(InventorySlot.UnderwearBottom)
+		piecesToDamage.append(InventorySlot.UnderwearTop)
+	return piecesToDamage
+
+func canDamageClothes():
+	for piece in getDamagebleClothesZones():
+		if(getInventory().hasSlotEquipped(piece)):
+			var item:ItemBase = getInventory().getEquippedItem(piece)
+			if(item.canDamage()):
+				return true
+	return false
+
+func damageClothes():
+	for piece in getDamagebleClothesZones():
+		if(getInventory().hasSlotEquipped(piece)):
+			var item:ItemBase = getInventory().getEquippedItem(piece)
+			if(item.canDamage()):
+				item.receiveDamage()
+				return true
+	return false

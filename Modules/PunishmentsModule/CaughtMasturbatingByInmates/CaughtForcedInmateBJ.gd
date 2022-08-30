@@ -1,5 +1,7 @@
 extends "res://Scenes/SceneBase.gd"
 
+var brokeClothes = false
+
 func _init():
 	sceneID = "CaughtForcedInmateBJ"
 
@@ -94,8 +96,8 @@ func _run():
 		saynn("Your head hurts, ow. You open your eyes and get your cheek off the cold dirty floor. You slowly get up and check your mouth for any foreign substances but find nothing, it seems you lucked out.")
 
 		# (if wearing uniform and it got borked)
-
-		saynn("You look down at your clothes and find that they endured lots of damage, they don't even cover you as much anymore. Oh well.")
+		if(brokeClothes):
+			saynn("You look down at your clothes and find that they endured lots of damage, they don't even cover you as much anymore. Oh well.")
 
 		saynn("You hold onto your head and rub it while looking around. The place is empty. Time to go.")
 
@@ -159,6 +161,10 @@ func _react(_action: String, _args):
 
 	if(_action == "sleep"):
 		GM.main.processTimeUntil(23*60*60)
+		
+		if(GM.pc.canDamageClothes()):
+			GM.pc.damageClothes()
+			brokeClothes = true
 
 	if(_action == "get_drugged"):
 		GM.pc.addIntoxication(0.7)
@@ -180,3 +186,14 @@ func _react(_action: String, _args):
 
 	setState(_action)
 
+func saveData():
+	var data = .saveData()
+	
+	data["brokeClothes"] = brokeClothes
+	
+	return data
+	
+func loadData(data):
+	.loadData(data)
+	
+	brokeClothes = SAVE.loadVar(data, "brokeClothes", false)

@@ -3,6 +3,7 @@ class_name ShirtAndShortsState
 
 var shortsPulledDown = false
 var shirtOpened = false
+var clothesDamaged = false
 
 func areShortsPulledDown():
 	return shortsPulledDown
@@ -45,20 +46,20 @@ func loadData(_data):
 
 func blocksInventorySlots():
 	var result = []
-	if(!shortsPulledDown):
+	if(!shortsPulledDown && !clothesDamaged):
 		result.append(InventorySlot.UnderwearBottom)
-	if(!shirtOpened):
+	if(!shirtOpened && !clothesDamaged):
 		result.append(InventorySlot.UnderwearTop)
 	return result
 
 func coversBodyparts():
 	var result = {}
 	result[BodypartSlot.Body] = true
-	if(!shortsPulledDown):
+	if(!shortsPulledDown && !clothesDamaged):
 		result[BodypartSlot.Vagina] = true
 		result[BodypartSlot.Penis] = true
 		result[BodypartSlot.Anus] = true
-	if(!shirtOpened):
+	if(!shirtOpened && !clothesDamaged):
 		result[BodypartSlot.Breasts] = true
 	
 	return result
@@ -70,3 +71,20 @@ func getStateText():
 	if(shortsPulledDown):
 		text += "Shorts are pulled down. "
 	return text
+
+func canDamage():
+	return !clothesDamaged
+
+func isDamaged():
+	return clothesDamaged
+
+func receiveDamage():
+	clothesDamaged = true
+
+func repairDamage():
+	clothesDamaged = false
+
+func getDamageDescription():
+	if(clothesDamaged):
+		return "Pieces of fabric are ripped off, exposing privates"
+	return ""

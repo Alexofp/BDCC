@@ -49,6 +49,10 @@ func getDescription():
 	
 func getVisisbleDescription():
 	var text = getDescription()
+	if(itemState != null):
+		var extraDesc = itemState.getExtraDescription()
+		if(extraDesc != null && extraDesc != ""):
+			text += "\n"+extraDesc
 	if(hasTag(ItemTag.Illegal)):
 		text += "\n[color=red]This item is illegal![/color]"
 	if(addsIntoxication() > 0.0):
@@ -314,3 +318,21 @@ func updateWearerAppearance():
 
 func updateDoll(_doll: Doll3D):
 	pass
+
+func canDamage():
+	if(itemState != null):
+		return itemState.canDamage()
+	return false
+
+func receiveDamage():
+	if(itemState != null):
+		itemState.receiveDamage()
+
+func isDamaged():
+	if(itemState != null):
+		return itemState.isDamaged()
+	return false
+
+func repairDamage():
+	if(itemState != null):
+		itemState.repairDamage()

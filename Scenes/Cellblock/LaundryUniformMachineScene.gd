@@ -12,14 +12,32 @@ func _run():
 		saynn("What do you wanna do?")
 
 		addButton("Print uniform", "You want a fresh inmate uniform", "printUniform")
-		addDisabledButton("Repair", "Not implemented")
+		if(GM.pc.getInventory().hasSlotEquipped(InventorySlot.Body)):
+			var item:ItemBase = GM.pc.getInventory().getEquippedItem(InventorySlot.Body)
+			if(item.id in ["inmateuniform", "inmateuniformHighsec", "inmateuniformSexDeviant"]):
+				if(item.isDamaged()):
+					addButton("Repair", "Repair your uniform", "repairUniform")
+				else:
+					addDisabledButton("Repair", "Your uniform is not damaged")
+			else:
+				addDisabledButton("Repair", "You're not wearing an inmate uniform")
+		else:
+			addDisabledButton("Repair", "You're not wearing a uniform")
+			
 		addButton("Walk away", "You don't wanna spend your hard earned work credits", "endthescene")
 	
 	if(state == "notEnough"):
 		saynn("The machine angrily beeps at you, the screen displays: [b]Not enough credits, go work in the mines, lazy inmate[/b]")
 		
 		addButton("Walk away", "So rude", "endthescene")
-
+	
+	if(state == "repairUniform"):
+		saynn("You press the button and the machine withdraws some credits from you. Then take off your uniform and place it into the offered space. The machine grabs your uniform and starts working on it, making lots of noise as it tries to patch it up.")
+		
+		saynn("The machine beeps and offers you your uniform back, fully repaired and cleaned!")
+		
+		addButton("Walk away", "Sweet", "endthescene")
+	
 	if(state == "afterPrinting"):
 		if(GM.pc.isBlindfolded()):
 			saynn("Even though you're blindfolded you somehow find the right button by pressing all of them. Then it withdraws some credits from you and prints you a fresh uniform. You can't tell if its the correct one but what can you do, you grab it and go")
@@ -30,6 +48,19 @@ func _run():
 			
 		addButton("Walk away", "Good", "endthescene")
 func _react(_action: String, _args):
+	if(_action == "repairUniform"):
+		processTime(30)
+		
+		if(GM.pc.getCredits() < 5):
+			setState("notEnough")
+		else:
+			GM.pc.addCredits(-5)
+			
+			var item:ItemBase = GM.pc.getInventory().getEquippedItem(InventorySlot.Body)
+			if(item!=null && item.id in ["inmateuniform", "inmateuniformHighsec", "inmateuniformSexDeviant"]):
+				item.repairDamage()
+				GM.pc.updateNonBattleEffects()
+	
 	if(_action == "printUniform"):
 		processTime(30)
 		

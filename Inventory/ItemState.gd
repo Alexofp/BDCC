@@ -48,3 +48,28 @@ func updateWearerAppearance():
 	var theitem = getItem()
 	if(theitem != null):
 		theitem.updateWearerAppearance()
+
+func canDamage():
+	return false
+
+func isDamaged():
+	return false
+
+func receiveDamage():
+	pass
+
+func repairDamage():
+	pass
+
+func getDamageDescription():
+	return
+
+func getExtraDescription():
+	var damageDescription = getDamageDescription()
+	
+	var text = []
+	
+	if(damageDescription != null && damageDescription != ""):
+		text.append("[i]"+damageDescription+"[/i]")
+	
+	return Util.join(text, "\n")
