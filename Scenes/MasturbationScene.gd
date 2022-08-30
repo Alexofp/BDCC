@@ -85,10 +85,27 @@ func _run():
 		
 		if(lustCombatState.isInPublic()):
 			var visibility = lustCombatState.getVisibility()
-			sayn("\nVisibility: "+Util.textProgressBar(visibility)+" "+str(Util.roundF(visibility*100, 1))+"%")
+			if(visibility >= 1.0):
+				sayn("\nVisibility: You are visible to everyone!")
+			elif(visibility >= 0.9):
+				sayn("\nVisibility: You're pretty sure people are watching you..")
+			elif(visibility >= 0.6):
+				sayn("\nVisibility: You have a feeling that you are being watched..")
+			elif(visibility >= 0.3):
+				sayn("\nVisibility: You think no one watches you")
+			else:
+				sayn("\nVisibility: You're pretty sure no one sees you")
+			
 			var danger = lustCombatState.getDanger()
 			if(danger > 0.0):
-				sayn("Danger: "+Util.textProgressBar(danger)+" "+str(Util.roundF(danger*100, 1))+"%")
+				if(danger >= 0.8):
+					sayn("Danger: People are literally reaching out to grope you")
+				elif(danger >= 0.5):
+					sayn("Danger: People are crowding around you, careful!")
+				elif(danger >= 0.2):
+					sayn("Danger: There are a few randoms around, watching you")
+				else:
+					sayn("Danger: No danger")
 		
 	if(state == "lustCombatAboutToCum"):
 		saynn(savedActionText)
