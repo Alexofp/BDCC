@@ -176,6 +176,8 @@ func _react(_action: String, _args):
 		GM.pc.cummedInMouthBy("inmateMale")
 		GM.pc.cummedOnBy("inmateMale")
 		GM.pc.updateNonBattleEffects()
+		if(_action == "cumDrugged"):
+			GM.pc.orgasmFrom("inmateMale")
 		
 	if(_action == "shove_away"):
 		processTime(60*1)

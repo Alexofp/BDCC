@@ -206,6 +206,13 @@ func _run():
 		addButton("Continue", "See what happens next", "endthescene")
 
 func _react(_action: String, _args):
+	if(_action == "follow"):
+		runScene("ParadedOnALeashScene", ["eliza", GM.pc.getLocation(), "med_researchlab", [
+			"Almost there, patient",
+			"Today's experiment should be interesting",
+			"Smile to the nurses",
+		]])
+	
 	if(_action == "resist"):
 		GM.pc.addPain(30)
 		MedicalModule.addPCSanity(-0.1)

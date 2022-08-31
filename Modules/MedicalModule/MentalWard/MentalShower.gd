@@ -174,6 +174,10 @@ func _run():
 		addButton("Continue", "You feel fresh", "endthescene")
 
 func _react(_action: String, _args):
+	if(_action == "shower!"):
+		runScene("ParadedOnALeashScene", ["eliza", GM.pc.getLocation(), "medical_shower", [
+			"Almost there, patient",
+		]])
 
 	if(_action in ["clean_inside", "clean_inside1"]):
 		GM.pc.clearOrificeFluids()

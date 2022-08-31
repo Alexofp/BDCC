@@ -140,6 +140,15 @@ func _run():
 
 
 func _react(_action: String, _args):
+	if(_action == "follow"):
+		runScene("ParadedOnALeashScene", ["eliza", GM.pc.getLocation(), "med_milkingroom", [
+			"Almost there, inmate",
+			"Feeling excited? You should be~",
+			"Thanks for participating in our program, inmate",
+			"We have the best milking equipment and staff here~",
+			"The leash is for your own safety, really~",
+		]])
+	
 	if(_action == "get_milked"):
 		GM.pc.orgasmFrom("eliza")
 	

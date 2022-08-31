@@ -90,6 +90,7 @@ roomName = "Med Floor Corridor"
 roomDescription = "You stand in a wide white corridor, it looks pretty long, every so often you see airlocks that lead to laboratories and other rooms. This part of the corridor seems to be safe for inmates to walk through but you better not go too far or the staff will start asking questions."
 gridColor = 3
 population = 2
+astarConnectedTo = PoolStringArray( "med_lobbynw" )
 
 [node name="MedRoom8" parent="." index="8" instance=ExtResource( 2 )]
 position = Vector2( 128, -64 )
@@ -97,6 +98,7 @@ roomName = "Med Floor Corridor"
 roomDescription = "You stand in a wide white corridor, it looks pretty long, every so often you see airlocks that lead to laboratories and other rooms. This part of the corridor seems to be safe for inmates to walk through but you better not go too far or the staff will start asking questions."
 gridColor = 3
 population = 2
+astarConnectedTo = PoolStringArray( "med_lobbyne" )
 
 [node name="MedRoom9" parent="." index="9" instance=ExtResource( 2 )]
 position = Vector2( 128, -128 )
@@ -333,7 +335,8 @@ population = 2
 [node name="MedRoom34" parent="." index="39" instance=ExtResource( 2 )]
 position = Vector2( 256, -384 )
 roomName = "Padded cell"
-roomDescription = "You enter a mental ward cell. All of the walls are made out of a soft padded material so you can’t hurt yourself here even if you really wanted to."
+roomDescription = "You are in a mental ward cell. All of the walls are made out of a soft padded material so you can’t hurt yourself here even if you really wanted to."
+blindRoomDescription = "You have no idea where you are but the walls and the floor feel soft to the touch"
 canWest = false
 canNorth = false
 canSouth = false
@@ -383,7 +386,8 @@ population = 2
 position = Vector2( 256, -320 )
 roomName = "Padded cell"
 roomID = "medical_paddedcell_player"
-roomDescription = "You enter a mental ward cell. All of the walls are made out of a soft padded material so you can’t hurt yourself here even if you really wanted to."
+roomDescription = "You are in a mental ward cell. All of the walls are made out of a soft padded material so you can’t hurt yourself here even if you really wanted to."
+blindRoomDescription = "You have no idea where you are but the walls and the floor feel soft to the touch"
 canWest = false
 canNorth = false
 canSouth = false
@@ -391,7 +395,8 @@ canSouth = false
 [node name="MedRoom39" parent="." index="46" instance=ExtResource( 2 )]
 position = Vector2( 256, -256 )
 roomName = "Padded cell"
-roomDescription = "You enter a mental ward cell. All of the walls are made out of a soft padded material so you can’t hurt yourself here even if you really wanted to."
+roomDescription = "You are in a mental ward cell. All of the walls are made out of a soft padded material so you can’t hurt yourself here even if you really wanted to."
+blindRoomDescription = "You have no idea where you are but the walls and the floor feel soft to the touch"
 canWest = false
 canNorth = false
 canSouth = false

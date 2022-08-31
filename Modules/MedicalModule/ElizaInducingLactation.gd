@@ -137,6 +137,14 @@ func _run():
 
 
 func _react(_action: String, _args):
+	if(_action == "follow"):
+		runScene("ParadedOnALeashScene", ["eliza", GM.pc.getLocation(), "med_researchlab", [
+			"Almost there, inmate",
+			"Full breasts will start to itch if you don't milk them, don't forget~",
+			"We have a zero accidents reported policy, you should be fine",
+			"The leash is for your own safety, really~",
+		]])
+	
 	if(_action == "sure"):
 		processTime(29*60)
 		var breasts:BodypartBreasts = GM.pc.getBodypart(BodypartSlot.Breasts)

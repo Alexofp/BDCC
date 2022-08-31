@@ -322,6 +322,18 @@ func _react(_action: String, _args):
 	if(_action == "fight"):
 		runScene("FightScene", ["nova"], "novafight")
 	
+	if(_action == "beleashedtostocks"):
+		runScene("ParadedOnALeashScene", ["nova", GM.pc.getLocation(), "main_punishment_spot", [
+			"I love parading bratty cuties around~",
+			"Everyone's looking at you~",
+			"I like leashes, don't you?",
+			"Just giving my cutie some walkies~",
+			"Stocks are waiting, let's hurry~",
+			"Did you thought this would happen before stealing?",
+			"This is gonna be such a good lesson for you~",
+			"I'm walking you like you're a pet~",
+		]])
+	
 	if(_action == "startstocks"):
 		runScene("StocksPunishmentScene", ["nova"])
 		endScene()

@@ -21,7 +21,7 @@ func _run():
 	if(state == "changehair"):
 		saynn("You humm as you work on your hair, using the instant hair grower and scissors to shape the way your hair looks")
 		
-		addButton("Leave", "Good well done", "endthescene")
+		addButton("Leave", "Job well done", "endthescene")
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):

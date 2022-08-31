@@ -50,6 +50,7 @@ roomDescription = "Spacious elevator that can move people or a huge amount of ca
 roomSprite = 3
 roomColor = 2
 population = 2
+astarConnectedTo = PoolStringArray( "med_elevator", "mining_elevator" )
 
 [node name="MainStairs1" parent="." index="5" instance=ExtResource( 2 )]
 self_modulate = Color( 0.5, 0.5, 0.5, 1 )
@@ -61,6 +62,7 @@ canSouth = false
 roomSprite = 3
 roomColor = 7
 population = 3
+astarConnectedTo = PoolStringArray( "CBStairs1" )
 
 [node name="MainHallRoom7" parent="." index="6" instance=ExtResource( 2 )]
 position = Vector2( 0, 128 )
@@ -179,6 +181,7 @@ roomID = "gym_secret"
 roomDescription = "You find that behind one of the tall bushes there is actually a little secluded spot. It’s not too interesting, there is no pathway here even. But you notice someone leaning against the wall near some kind of maintenance hatch."
 roomSprite = 1
 population = 1
+astarConnectedTo = PoolStringArray( "fight_entrance" )
 
 [node name="MainHallRoom28" parent="." index="22" instance=ExtResource( 2 )]
 self_modulate = Color( 0.7, 1, 0.7, 1 )

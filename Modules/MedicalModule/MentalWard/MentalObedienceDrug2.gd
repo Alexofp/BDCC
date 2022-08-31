@@ -345,6 +345,14 @@ func _run():
 		addButton("Continue", "See what happens next", "endthescene")
 
 func _react(_action: String, _args):
+	if(_action == "continue"):
+		runScene("ParadedOnALeashScene", ["eliza", GM.pc.getLocation(), "med_researchlab", [
+			"Almost there, patient",
+			"Today's experiment should be interesting",
+			"Smile to the nurses",
+			"We will do a follow up on a previous experiment today",
+		]])
+	
 	if(_action == "sayrealname"):
 		MedicalModule.addPCBehavior(0.05)
 	

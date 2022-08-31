@@ -13,6 +13,25 @@ var highlightedRoom: Node2D
 var roomConnectionScene = preload("res://Game/World/RoomConnection.tscn")
 onready var worldFloorScene = load("res://Game/World/WorldFloor.tscn")
 
+var astar:AStar2D
+var astarIDToRoomIDMap: Dictionary = {}
+
+func calculatePath(startRoomID:String, endRoomID:String):
+	if(!hasRoomID(startRoomID) || !hasRoomID(endRoomID)):
+		return []
+	var startRoom = getRoomByID(startRoomID)
+	var endRoom = getRoomByID(endRoomID)
+
+	var result = astar.get_id_path(startRoom.astarID, endRoom.astarID)
+	var resultRooms = []
+	for astarID in result:
+		if(astarIDToRoomIDMap.has(astarID)):
+			resultRooms.append(astarIDToRoomIDMap[astarID])
+		else:
+			Log.print("calculatePath() Unknown atarID "+str(astarID))
+	
+	return resultRooms
+
 func opposite(dir):
 	if(dir == Direction.WEST):
 		return Direction.EAST
@@ -86,20 +105,34 @@ func addTransitions():
 	#Util.delete_children(connections)
 	
 	for floorid in cells:
-		var floorcells = cells[floorid]
+		var floorcells = cells[floorid]		
 		for pos in floorcells:
 			var _room = floorcells[pos]
+			for extraAstarConnection in _room.astarConnectedTo:
+				var extraRoom = getRoomByID(extraAstarConnection)
+				if(extraRoom != null):
+					astar.connect_points(_room.astarID, extraRoom.astarID)
+			
 			if(canGo(floorid, pos, Direction.EAST)):
 				#print("ADD TRANSITION FROM "+str(pos)+" TO EAST")
 				var transitionLine = roomConnectionScene.instance()
 				_room.add_child(transitionLine)
 				transitionLine.global_position = (pos + Vector2(0.5, 0))*gridsize
+				
+				var nextRoomID = applyDirectionID(_room.roomID, Direction.EAST)
+				var nextRoom = getRoomByID(nextRoomID)
+				astar.connect_points(_room.astarID, nextRoom.astarID)
+				
 			if(canGo(floorid, pos, Direction.SOUTH)):
 				#print("ADD TRANSITION FROM "+str(pos)+" TO SOUTH")
 				var transitionLine = roomConnectionScene.instance()
 				transitionLine.rotation_degrees = 90
 				_room.add_child(transitionLine)
 				transitionLine.global_position = (pos + Vector2(0, 0.5))*gridsize
+				
+				var nextRoomID = applyDirectionID(_room.roomID, Direction.SOUTH)
+				var nextRoom = getRoomByID(nextRoomID)
+				astar.connect_points(_room.astarID, nextRoom.astarID)
 
 func _exit_tree():
 	assert(GM.world == self)
@@ -109,6 +142,7 @@ func _exit_tree():
 func _ready():
 	assert(GM.world == null)
 	GM.world = self
+	astar = AStar2D.new()
 	
 	var mapFloors = GlobalRegistry.getMapFloors()
 	for mapID in mapFloors:
@@ -138,6 +172,8 @@ func _ready():
 	addTransitions()
 	#print(roomDict)
 	#aimCamera("ScriptedRoom")#"cellblock_orange_playercell")
+	
+	print(calculatePath("cellblock_orange_playercell", "main_shower1"))
 
 func hasRoom(floorid: String, pos: Vector2):
 	if(!cells.has(floorid)):
@@ -152,6 +188,11 @@ func getRoomByID(id:String):
 	if(!roomDict.has(id)):
 		return null
 	return roomDict[id]
+
+func hasRoomID(id:String):
+	if(!roomDict.has(id)):
+		return false
+	return true
 
 func registerRoom(floorid, room):
 	var pos:Vector2 = room.getCell()
@@ -174,6 +215,9 @@ func registerRoom(floorid, room):
 		cells[floorid] = {}
 	
 	cells[floorid][pos] = room
+	room.astarID = astar.get_available_point_id()
+	astar.add_point(room.astarID, pos)
+	astarIDToRoomIDMap[room.astarID] = room.roomID
 
 func switchToFloor(floorID):
 	for myfloorid in floorDict:

@@ -155,6 +155,13 @@ func _run():
 
 func _react(_action: String, _args):
 
+	if(_action == "follow"):
+		runScene("ParadedOnALeashScene", ["eliza", GM.pc.getLocation(), "med_lobbyne", [
+			"Come back soon~",
+			"Aw, shame that I have to let you out",
+			"You've been such a good test subject, patient~",
+		]])
+
 	if(_action == "endthesceneEscape"):
 		endScene(["escape"])
 		setModuleFlag("MedicalModule", "Mental_PlayerEscaped", true)
