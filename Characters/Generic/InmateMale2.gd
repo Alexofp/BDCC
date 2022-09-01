@@ -13,5 +13,5 @@ func getSmallDescription() -> String:
 	return "Generic male inmate"
 
 func getSpecies():
-	return ["canine"]
+	return ["feline"]
 

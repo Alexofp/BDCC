@@ -22,6 +22,7 @@ func _init():
 		
 		"res://Modules/PunishmentsModule/CaughtMasturbatingByInmates/CaughtForcedInmateBJ.gd",
 		"res://Modules/PunishmentsModule/CaughtMasturbatingByInmates/CaughtForcedStaffBJ.gd",
+		"res://Modules/PunishmentsModule/CaughtMasturbatingByInmates/CaughtForcedInmateSpitroast.gd",
 		]
 	characters = [
 		
@@ -39,6 +40,7 @@ func _init():
 		
 		"res://Modules/PunishmentsModule/CaughtMasturbatingByInmates/CaughtForcedInmateBJEvent.gd",
 		"res://Modules/PunishmentsModule/CaughtMasturbatingByInmates/CaughtForcedStaffBJEvent.gd",
+		"res://Modules/PunishmentsModule/CaughtMasturbatingByInmates/CaughtForcedInmateSpitroastEvent.gd",
 	]
 
 func registerEventTriggers():
