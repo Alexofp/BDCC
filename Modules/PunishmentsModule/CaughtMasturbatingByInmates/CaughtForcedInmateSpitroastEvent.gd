@@ -11,5 +11,5 @@ func react(_triggerID, _args):
 	return true
 
 func getPriority():
-	return 1000
+	return 10
 
