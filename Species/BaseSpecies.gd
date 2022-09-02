@@ -93,6 +93,10 @@ func getDefaultForSlot(slot, _gender):
 	
 	return null
 
+# Allows to pick these bodyparts even if they're from another species. Useful for mods
+func getAllowedBodyparts():
+	return []
+
 func isPlayable():
 	return false
 

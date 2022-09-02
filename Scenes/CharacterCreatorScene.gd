@@ -150,10 +150,22 @@ func _run():
 			var bodypart = GlobalRegistry.getBodypartRef(bodypartID)
 			var supportedSpecies = bodypart.getCompatibleSpecies()
 			
+			var hasInSupported = false
+			var hasInAllowed = false
+			
 			for supported in supportedSpecies:
 				if(supported in playerSpecies || supported == Species.Any):
-					addButton(bodypart.getCharacterCreatorName(), bodypart.getCharacterCreatorDesc(), "setbodypart", [bodypart.id])
+					hasInSupported = true
 					break
+				
+			for playerSpecie in playerSpecies:
+				var speciesObject = GlobalRegistry.getSpecies(playerSpecie)
+				if(bodypartID in speciesObject.getAllowedBodyparts()):
+					hasInAllowed = true
+					break
+			
+			if(hasInSupported || hasInAllowed):
+				addButton(bodypart.getCharacterCreatorName(), bodypart.getCharacterCreatorDesc(), "setbodypart", [bodypart.id])
 
 	if(state == "bodypartAttributes"):
 		var bodypart = GM.pc.getBodypart(pickingBodypartType)
