@@ -1,6 +1,10 @@
 extends Module
 class_name PunishmentsModule
 
+func getFlags():
+	return {
+		"FirstTimeCaughtMasturbating": flag(FlagType.Bool),
+	}
 
 func _init():
 	id = "PunishmentsModule"
@@ -23,6 +27,9 @@ func _init():
 		"res://Modules/PunishmentsModule/CaughtMasturbatingByInmates/CaughtForcedInmateBJ.gd",
 		"res://Modules/PunishmentsModule/CaughtMasturbatingByInmates/CaughtForcedStaffBJ.gd",
 		"res://Modules/PunishmentsModule/CaughtMasturbatingByInmates/CaughtForcedInmateSpitroast.gd",
+		"res://Modules/PunishmentsModule/CaughtMasturbatingByInmates/CaughtForcedStaffLick.gd",
+		"res://Modules/PunishmentsModule/CaughtMasturbatingByInmates/CaughtFirstTimeInmate.gd",
+		"res://Modules/PunishmentsModule/CaughtMasturbatingByInmates/CaughtFirstTimeStaff.gd",
 		]
 	characters = [
 		
@@ -41,6 +48,8 @@ func _init():
 		"res://Modules/PunishmentsModule/CaughtMasturbatingByInmates/CaughtForcedInmateBJEvent.gd",
 		"res://Modules/PunishmentsModule/CaughtMasturbatingByInmates/CaughtForcedStaffBJEvent.gd",
 		"res://Modules/PunishmentsModule/CaughtMasturbatingByInmates/CaughtForcedInmateSpitroastEvent.gd",
+		"res://Modules/PunishmentsModule/CaughtMasturbatingByInmates/CaughtForcedStaffLickEvent.gd",
+		"res://Modules/PunishmentsModule/CaughtMasturbatingByInmates/CaughtFirstTimeEvent.gd",
 	]
 
 func registerEventTriggers():
