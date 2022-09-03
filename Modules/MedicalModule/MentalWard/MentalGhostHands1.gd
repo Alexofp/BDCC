@@ -160,7 +160,7 @@ func _run():
 
 		# (else if has pussy)
 		elif(GM.pc.hasVagina()):
-			saynn("The digits focus on your pleasure spot and hammer at it relentlessly, causing your slick pussy walls to start clenching around them. You squirt from so much stimulation, creating a little poodle of your femcum on the floor underneath.")
+			saynn("The digits focus on your pleasure spot and hammer at it relentlessly, causing your slick pussy walls to start clenching around them. You squirt from so much stimulation, creating a little puddle of your femcum on the floor underneath.")
 
 		# (else)
 		else:
