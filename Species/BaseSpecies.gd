@@ -8,6 +8,7 @@ const Dragon = "dragon"
 const Wolf = "wolf"
 const Canine = "canine"
 const Equine = "equine"
+const Unknown = "unknown"
 
 var id = "error"
 

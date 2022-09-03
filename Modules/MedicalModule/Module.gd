@@ -27,6 +27,7 @@ func getFlags():
 		
 		"Mental_ExpObeyDrug": flag(FlagType.Number),
 		"Mental_ExpTentacles": flag(FlagType.Number),
+		"Mental_ExpGhostHands": flag(FlagType.Number),
 		
 		"Mental_HasKeycard": flag(FlagType.Bool),
 		"Mental_PlayerEscaped": flag(FlagType.Bool),
@@ -60,6 +61,7 @@ func _init():
 		"res://Modules/MedicalModule/MentalWard/MentalShower.gd",
 		"res://Modules/MedicalModule/MentalWard/MentalKeycardEscape.gd",
 		"res://Modules/MedicalModule/MentalWard/MentalCheckupFinal.gd",
+		"res://Modules/MedicalModule/MentalWard/MentalGhostHands1.gd",
 		
 		"res://Modules/MedicalModule/NurseFelineOffLimits.gd",
 		
@@ -67,6 +69,7 @@ func _init():
 		]
 	characters = [
 		"res://Modules/MedicalModule/MentalWard/LatexParasite.gd",
+		"res://Modules/MedicalModule/MentalWard/GhostHands.gd",
 		"res://Modules/MedicalModule/NurseFeline.gd",
 	]
 	items = []
