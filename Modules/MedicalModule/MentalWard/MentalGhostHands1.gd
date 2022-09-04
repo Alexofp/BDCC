@@ -54,8 +54,7 @@ func _run():
 
 	if(state == "follow"):
 		# (launches a walking scene first)
-		aimCamera("med_researchlab")
-		setLocationName("Research lab")
+		aimCameraAndSetLocName("med_researchlab")
 		GM.main.playAnimation(StageScene.Solo, "sit")
 
 		saynn("Eliza brings you into the lab and leashes you to the testing table. The leash is short enough for you not to be able to reach any equipment. You take a seat on the edge of the table and get cozy in your straitjacket while Eliza turns away and walks up to her chemistry station.")
@@ -198,6 +197,9 @@ func _react(_action: String, _args):
 	
 	if(_action == "obey"):
 		MedicalModule.addPCBehavior(0.1)
+		
+	if(_action == "get_drugged"):
+		GM.pc.addIntoxication(0.8)
 		
 	if(_action == "cum!"):
 		GM.pc.orgasmFrom("eliza")

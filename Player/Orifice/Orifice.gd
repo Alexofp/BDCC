@@ -142,6 +142,9 @@ func getCurrentNaturalSpill() -> float:
 	return getNaturalDrain()
 	
 func addFluid(fluidType, amount: float, charID = null):
+	if(amount <= 0.0):
+		return
+	
 	var virility = 1.0
 	if(charID != null):
 		var character = GlobalRegistry.getCharacter(charID)

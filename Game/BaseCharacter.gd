@@ -612,6 +612,8 @@ func getFluidType(fluidSource):
 		return BodilyFluids.FluidType.Cum
 	if(fluidSource == BodilyFluids.FluidSource.Vagina):
 		return BodilyFluids.FluidType.GirlCum
+	if(fluidSource == BodilyFluids.FluidSource.Strapon):
+		return BodilyFluids.FluidType.CumLube
 		
 	return null
 
@@ -623,6 +625,8 @@ func getFluidAmount(fluidSource):
 		return RNG.randf_range(100.0, 500.0)
 	if(fluidSource == BodilyFluids.FluidSource.Vagina):
 		return RNG.randf_range(50.0, 200.0)
+	if(fluidSource == BodilyFluids.FluidSource.Strapon):
+		return RNG.randf_range(100.0, 500.0)
 		
 	return 0.0
 

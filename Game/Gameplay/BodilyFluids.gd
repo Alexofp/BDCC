@@ -6,6 +6,7 @@ class FluidType:
 	const GirlCum = "girlcum"
 	const Milk = "milk"
 	const BlackGoo = "blackgoo"
+	const CumLube = "cumlube"
 	
 	static func getName(fl):
 		if(fl == Cum):
@@ -16,6 +17,8 @@ class FluidType:
 			return "milk"
 		if(fl == BlackGoo):
 			return "black goo"
+		if(fl == CumLube):
+			return "cub lube"
 		return "Error"
 		
 	static func canMakeYouPregnant(fl):
@@ -27,6 +30,7 @@ class FluidType:
 enum FluidSource {
 	Penis,
 	Vagina,
+	Strapon,
 }
 
 enum MessinessLevel {

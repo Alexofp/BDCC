@@ -22,10 +22,14 @@ func getPossibleScenes():
 		newScenes.append("MentalObedienceDrug1")
 		
 	var ghostHands = getModuleFlag("MedicalModule", "Mental_ExpGhostHands", 0)
-	if(ghostHands >= 1):
+	if(ghostHands >= 2):
+		reusedScenes.append("MentalGhostHands2")
+		reusedScenes.append("MentalGhostHands1")
+	elif(ghostHands >= 1):
+		newScenes.append("MentalGhostHands2")
 		reusedScenes.append("MentalGhostHands1")
 	else:
-		reusedScenes.append("MentalGhostHands1")
+		newScenes.append("MentalGhostHands1")
 		
 	if(newScenes.size() > 0):
 		return newScenes

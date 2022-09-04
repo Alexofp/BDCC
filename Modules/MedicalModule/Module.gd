@@ -62,6 +62,7 @@ func _init():
 		"res://Modules/MedicalModule/MentalWard/MentalKeycardEscape.gd",
 		"res://Modules/MedicalModule/MentalWard/MentalCheckupFinal.gd",
 		"res://Modules/MedicalModule/MentalWard/MentalGhostHands1.gd",
+		"res://Modules/MedicalModule/MentalWard/MentalGhostHands2.gd",
 		
 		"res://Modules/MedicalModule/NurseFelineOffLimits.gd",
 		
