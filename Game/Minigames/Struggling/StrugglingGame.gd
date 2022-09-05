@@ -138,6 +138,10 @@ func updateUI():
 
 func _on_NextButtonTimer_timeout():
 	var pattern = $Patterns.get_child(currentPatternI)
+	if(pattern == null): # In case things went very wrong for some reason
+		$WinTimer.start()
+		return
+	
 	var patternObject = pattern.get_child(currentPatternChild)
 	if(!calculatedFlip):
 		shouldFlipV = false

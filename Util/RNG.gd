@@ -4,7 +4,16 @@ class_name RNG
 # generates an [from,to] int, both are inclusive
 static func randi_range(from: int, to: int) -> int:
 	assert(to >= from)
-	return from + (randi() % (to - from + 1))
+	
+	var randValue = int(floor(rand_range(from, to+1)))
+	if(randValue < from):
+		randValue = from
+	if(randValue > to):
+		randValue = to
+	
+	return randValue
+	# This way is bugged apparently?
+	#return from + (randi() % (to - from + 1))
 
 static func randf_range(from: float, to: float) -> float:
 	return rand_range(from, to)
