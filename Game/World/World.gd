@@ -172,8 +172,6 @@ func _ready():
 	addTransitions()
 	#print(roomDict)
 	#aimCamera("ScriptedRoom")#"cellblock_orange_playercell")
-	
-	print(calculatePath("cellblock_orange_playercell", "main_shower1"))
 
 func hasRoom(floorid: String, pos: Vector2):
 	if(!cells.has(floorid)):

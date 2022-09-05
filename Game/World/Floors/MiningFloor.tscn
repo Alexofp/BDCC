@@ -11,30 +11,68 @@ script = ExtResource( 3 )
 self_modulate = Color( 0.7, 0.7, 0.7, 1 )
 roomName = "Mineshafts"
 roomID = "mining_nearentrance"
-roomDescription = "Scary mineshafts"
+roomDescription = "A huge open space that was clearly carved out from a huge rock.
+
+A few catwalks lead into different directions, one of them being the mineshafts"
 roomColor = 8
 population = 3
 
-[node name="MiningTaviRoom" parent="." index="1" instance=ExtResource( 2 )]
+[node name="MiningRoom2" parent="." index="1" instance=ExtResource( 2 )]
+self_modulate = Color( 0.7, 0.7, 0.7, 1 )
+position = Vector2( -64, 0 )
+roomName = "Mineshafts"
+roomDescription = "More catwalks that go over the raw stone. Connects the lift and the engineering bay"
+roomColor = 8
+population = 3
+
+[node name="MiningRoom3" parent="." index="2" instance=ExtResource( 2 )]
+self_modulate = Color( 1, 1, 0.7, 1 )
+position = Vector2( -128, 0 )
+roomName = "Engineering lobby"
+roomDescription = "Entrance to the engineering bay"
+roomColor = 6
+population = 2
+
+[node name="MiningRoom4" parent="." index="3" instance=ExtResource( 2 )]
+self_modulate = Color( 1, 1, 0.7, 1 )
+position = Vector2( -192, 0 )
+roomName = "Engineering bay"
+roomDescription = "Just a corridor that leads to many other rooms. Walls feature a yellow trim, showing that you are in engineering"
+roomColor = 6
+population = 2
+
+[node name="MiningRoom5" parent="." index="4" instance=ExtResource( 2 )]
+self_modulate = Color( 1, 1, 0.7, 1 )
+position = Vector2( -192, 64 )
+roomName = "Workshop"
+roomDescription = "A place where engineers work. Features lots of machinery
+
+Heavily monitored by security cameras"
+roomColor = 6
+population = 2
+
+[node name="MiningTaviRoom" parent="." index="5" instance=ExtResource( 2 )]
 self_modulate = Color( 0.7, 0.7, 0.7, 1 )
 position = Vector2( 64, 0 )
 roomName = "Mineshafts"
 roomID = "mining_taviroom"
-roomDescription = "Scary mineshafts"
+roomDescription = "A maintenance area that has some old equipment, most of it is broken"
 roomSprite = 1
 roomColor = 8
 
-[node name="MiningShafts" parent="." index="2" instance=ExtResource( 2 )]
+[node name="MiningShafts" parent="." index="6" instance=ExtResource( 2 )]
 self_modulate = Color( 0.5, 0.5, 0.5, 1 )
 position = Vector2( 0, -64 )
 roomName = "Mineshafts"
 roomID = "mining_shafts_entering"
-roomDescription = "Scary mineshafts"
+roomDescription = "You see a little area where the mining equipment is stored.
+
+After it begin the mainshafts"
 roomSprite = 4
 roomColor = 7
 population = 3
 
-[node name="MiningElevator" parent="." index="3" instance=ExtResource( 2 )]
+[node name="MiningElevator" parent="." index="7" instance=ExtResource( 2 )]
 self_modulate = Color( 1, 0.6, 0.6, 1 )
 position = Vector2( 0, 64 )
 roomName = "Elevator"
