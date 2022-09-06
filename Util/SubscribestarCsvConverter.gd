@@ -37,10 +37,12 @@ func getData():
 	return data
 	
 func sort_my(a, b):
-	if a["gross"] > b["gross"]:
+	if getAsNumber(a["gross"]) > getAsNumber(b["gross"]):
 		return true
 	return false
 
+func getAsNumber(a:String):
+	return float(a.trim_prefix("$"))
 
 func _on_Button2_pressed():
 	var dateDict = OS.get_date()
