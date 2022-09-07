@@ -45,6 +45,7 @@ population = 2
 self_modulate = Color( 1, 1, 0.7, 1 )
 position = Vector2( -192, 64 )
 roomName = "Workshop"
+roomID = "eng_workshop"
 roomDescription = "A place where engineers work. Features lots of machinery
 
 Heavily monitored by security cameras"
