@@ -13,7 +13,9 @@ func _init():
 			"res://Modules/PortalPantiesModule/AlexRynard/AlexRynardFirstTimeTalk.gd",
 		]
 	characters = []
-	items = []
+	items = [
+		"res://Modules/PortalPantiesModule/PortalPanties/PortalPanties.gd",
+	]
 	events = [
 		"res://Modules/PortalPantiesModule/AlexRynard/AlexRynardFirstTalkEvent.gd",
 	]
