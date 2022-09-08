@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://GlobalTheme.tres" type="Theme" id=1]
 [ext_resource path="res://UI/MainMenu/SaveGameElement.tscn" type="PackedScene" id=2]
 [ext_resource path="res://UI/MainMenu/SaveGameScreen.gd" type="Script" id=3]
+[ext_resource path="res://UI/FontResources/Normal/BoldFont.tres" type="DynamicFont" id=4]
 
 [node name="SaveGameScreen" type="Control"]
 anchor_right = 1.0
@@ -24,90 +25,128 @@ __meta__ = {
 
 [node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer"]
 margin_right = 1280.0
-margin_bottom = 616.0
+margin_bottom = 666.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="ScrollVBox" type="VBoxContainer" parent="VBoxContainer/ScrollContainer"]
 margin_right = 1280.0
-margin_bottom = 616.0
+margin_bottom = 666.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer/ScrollContainer/ScrollVBox"]
 margin_right = 1280.0
-margin_bottom = 20.0
+margin_bottom = 174.0
 rect_min_size = Vector2( 0, 20 )
+custom_constants/margin_right = 0
+custom_constants/margin_top = 20
+custom_constants/margin_left = 0
+custom_constants/margin_bottom = 20
 
-[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer/ScrollContainer/ScrollVBox"]
-margin_top = 24.0
+[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer/ScrollContainer/ScrollVBox/MarginContainer2"]
+margin_top = 20.0
 margin_right = 1280.0
-margin_bottom = 87.0
+margin_bottom = 154.0
+custom_fonts/bold_font = ExtResource( 4 )
 bbcode_enabled = true
-bbcode_text = "Here you can save your game
-Keep in mind that during the early development save structure might change a lot and so your previous saves might not work anymore, sorry. Your best bet would be saving inside your cell when you wanna switch versions"
+bbcode_text = "[center]Here you can save your game
+
+[b]Keep in mind that during the early development save structure might change a lot and so your previous saves might not work anymore, sorry.[/b]
+
+Your best bet would be saving inside your cell when you wanna switch versions.[/center]"
 text = "Here you can save your game
-Keep in mind that during the early development save structure might change a lot and so your previous saves might not work anymore, sorry. Your best bet would be saving inside your cell when you wanna switch versions"
+
+Keep in mind that during the early development save structure might change a lot and so your previous saves might not work anymore, sorry.
+
+Your best bet would be saving inside your cell when you wanna switch versions."
 fit_content_height = true
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/ScrollContainer/ScrollVBox"]
-margin_top = 91.0
+[node name="HSeparator2" type="HSeparator" parent="VBoxContainer/ScrollContainer/ScrollVBox"]
+margin_top = 178.0
 margin_right = 1280.0
-margin_bottom = 121.0
+margin_bottom = 182.0
 
-[node name="SaveFileNameInput" type="LineEdit" parent="VBoxContainer/ScrollContainer/ScrollVBox/HBoxContainer"]
-margin_right = 500.0
+[node name="MarginContainer3" type="MarginContainer" parent="VBoxContainer/ScrollContainer/ScrollVBox"]
+margin_top = 186.0
+margin_right = 1280.0
+margin_bottom = 256.0
+custom_constants/margin_top = 20
+custom_constants/margin_bottom = 20
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/ScrollContainer/ScrollVBox/MarginContainer3"]
+margin_top = 20.0
+margin_right = 1280.0
+margin_bottom = 50.0
+alignment = 1
+
+[node name="Label" type="Label" parent="VBoxContainer/ScrollContainer/ScrollVBox/MarginContainer3/HBoxContainer"]
+margin_left = 311.0
+margin_top = 5.0
+margin_right = 408.0
+margin_bottom = 25.0
+text = "Save name:"
+
+[node name="SaveFileNameInput" type="LineEdit" parent="VBoxContainer/ScrollContainer/ScrollVBox/MarginContainer3/HBoxContainer"]
+margin_left = 412.0
+margin_right = 912.0
 margin_bottom = 30.0
 rect_min_size = Vector2( 500, 0 )
 size_flags_horizontal = 13
 size_flags_vertical = 3
 
-[node name="SaveButton" type="Button" parent="VBoxContainer/ScrollContainer/ScrollVBox/HBoxContainer"]
-margin_left = 504.0
-margin_right = 557.0
+[node name="SaveButton" type="Button" parent="VBoxContainer/ScrollContainer/ScrollVBox/MarginContainer3/HBoxContainer"]
+margin_left = 916.0
+margin_right = 969.0
 margin_bottom = 30.0
 text = "Save"
 
 [node name="HSeparator" type="HSeparator" parent="VBoxContainer/ScrollContainer/ScrollVBox"]
-margin_top = 125.0
+margin_top = 260.0
 margin_right = 1280.0
-margin_bottom = 129.0
+margin_bottom = 264.0
 
-[node name="SavesContainer" type="VBoxContainer" parent="VBoxContainer/ScrollContainer/ScrollVBox"]
-margin_top = 133.0
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/ScrollContainer/ScrollVBox"]
+margin_top = 268.0
 margin_right = 1280.0
-margin_bottom = 195.0
+margin_bottom = 350.0
+custom_constants/margin_top = 20
+
+[node name="SavesContainer" type="VBoxContainer" parent="VBoxContainer/ScrollContainer/ScrollVBox/MarginContainer"]
+margin_top = 20.0
+margin_right = 1280.0
+margin_bottom = 82.0
 size_flags_horizontal = 3
 custom_constants/separation = 10
 
-[node name="SaveGameElement" parent="VBoxContainer/ScrollContainer/ScrollVBox/SavesContainer" instance=ExtResource( 2 )]
+[node name="SaveGameElement" parent="VBoxContainer/ScrollContainer/ScrollVBox/MarginContainer/SavesContainer" instance=ExtResource( 2 )]
 
-[node name="SaveGameElement2" parent="VBoxContainer/ScrollContainer/ScrollVBox/SavesContainer" instance=ExtResource( 2 )]
+[node name="SaveGameElement2" parent="VBoxContainer/ScrollContainer/ScrollVBox/MarginContainer/SavesContainer" instance=ExtResource( 2 )]
 margin_top = 36.0
 margin_bottom = 62.0
 
-[node name="GridContainer" type="GridContainer" parent="VBoxContainer"]
-margin_top = 620.0
+[node name="GridContainer" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 670.0
 margin_right = 1280.0
 margin_bottom = 720.0
-rect_min_size = Vector2( 0, 100 )
-columns = 5
+rect_min_size = Vector2( 0, 50 )
+custom_constants/separation = 10
 
 [node name="CloseButton" type="Button" parent="VBoxContainer/GridContainer"]
-margin_right = 255.0
-margin_bottom = 26.0
+margin_right = 635.0
+margin_bottom = 50.0
 size_flags_horizontal = 3
 text = "Close"
 
 [node name="DeleteButton" type="Button" parent="VBoxContainer/GridContainer"]
-margin_left = 259.0
-margin_right = 514.0
-margin_bottom = 26.0
+margin_left = 645.0
+margin_right = 1280.0
+margin_bottom = 50.0
 size_flags_horizontal = 3
 text = "Delete Save"
 
 [connection signal="visibility_changed" from="." to="." method="_on_LoadGameScreen_visibility_changed"]
-[connection signal="text_changed" from="VBoxContainer/ScrollContainer/ScrollVBox/HBoxContainer/SaveFileNameInput" to="." method="_on_SaveFileNameInput_text_changed"]
-[connection signal="pressed" from="VBoxContainer/ScrollContainer/ScrollVBox/HBoxContainer/SaveButton" to="." method="_on_SaveButton_pressed"]
+[connection signal="text_changed" from="VBoxContainer/ScrollContainer/ScrollVBox/MarginContainer3/HBoxContainer/SaveFileNameInput" to="." method="_on_SaveFileNameInput_text_changed"]
+[connection signal="pressed" from="VBoxContainer/ScrollContainer/ScrollVBox/MarginContainer3/HBoxContainer/SaveButton" to="." method="_on_SaveButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/GridContainer/CloseButton" to="." method="_on_CloseButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/GridContainer/DeleteButton" to="." method="_on_DeleteButton_pressed"]

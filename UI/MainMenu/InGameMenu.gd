@@ -1,45 +1,22 @@
-extends Control
+extends TabContainer
 
-onready var loadGameScreen = $LoadGameScreen
-onready var mainMenuScreen = $MainMenu
-onready var saveMenuScreen = $SaveGameScreen
 signal onResumeButtonPressed
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
-func hideAllMenus():
-	mainMenuScreen.visible = false
-	loadGameScreen.visible = false
-	saveMenuScreen.visible = false
-
 func _on_LoadGameButton_pressed():
-	hideAllMenus()
-	loadGameScreen.visible = true
-
-func _on_LoadGameScreen_onClosePressed():
-	hideAllMenus()
-	mainMenuScreen.visible = true
-
+	current_tab = 1
 
 func _on_MainMenuButton_pressed():
-	var _ok = get_tree().change_scene("res://UI/MainMenu/MainMenu.tscn")
-
+	GM.main.runScene("MainMenu")
+	GM.main.runCurrentScene()
 
 func _on_ResumeButton_pressed():
 	emit_signal("onResumeButtonPressed")
 
-
 func _on_SaveGameButton2_pressed():
-	hideAllMenus()
-	saveMenuScreen.visible = true
-
+	current_tab = 2
 
 func _on_SaveGameScreen_onClosePressed():
-	hideAllMenus()
-	mainMenuScreen.visible = true
+	current_tab = 0
+
+func _on_LoadGameScreen_onClosePressed():
+	current_tab = 0

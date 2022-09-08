@@ -1,36 +1,30 @@
 extends Button
 
-var savedKey = -1
+class_name SceneOptionButton
+
+var showingDescription 	= false
+var description			= ""
 
 signal pressedActually
-var showingDescription = false
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	if(OPTIONS.shouldShowShortcuts()):
+	if (OPTIONS.shouldShowShortcuts()):
 		$KeyLabel.visible = true
 	else:
 		$KeyLabel.visible = false
 
 func setShortcutPhysicalScancode(code):
-	var newShortcut = ShortCut.new()
-	var inputKey = InputEventKey.new()
-	inputKey.physical_scancode = code
-	newShortcut.shortcut = inputKey
-	shortcut = newShortcut
-
+	var input_event_key = InputEventKey.new()
+	input_event_key.physical_scancode = code
+	
+	shortcut = ShortCut.new()
+	shortcut.shortcut = input_event_key
+	
 	$KeyLabel.text = OS.get_scancode_string(code)
-	savedKey = code
-
-#func _unhandled_input(event):
-#	if(disabled):
-#		return
-#	if(event is InputEventKey):
-#		if(event.pressed && event.physical_scancode == savedKey):
-#			grab_click_focus()
-#			grab_focus()
-#			emit_signal("pressed")
-
+	
+	# Make a bit shorter version of this function
+	# And you forget erase unused savedKey vairible!
+	# KISS - Keep It Simple, Silly!.. Aaaaaaand clean code... too...
 
 func _on_SceneOptionButton_pressed():
 	if(OS.has_touchscreen_ui_hint() && OPTIONS.shouldRequireDoubleTapOnMobile()):
@@ -43,10 +37,18 @@ func _on_SceneOptionButton_pressed():
 	else:
 		emit_signal("pressedActually")
 
-
 func _on_SceneOptionButton_focus_exited():
 	showingDescription = false
 
-
 func _on_SceneOptionButton_mouse_exited():
 	showingDescription = false
+
+#func _unhandled_input(event):
+#	if(disabled):
+#		return
+#	if(event is InputEventKey):
+#		if(event.pressed && event.physical_scancode == savedKey):
+#			grab_click_focus()
+#			grab_focus()
+#			emit_signal("pressed")
+

@@ -1,15 +1,18 @@
 extends Control
 
-onready var savesContainer = $VBoxContainer/ScrollContainer/ScrollVBox/SavesContainer
-var saveGameElemenetScene = preload("res://UI/MainMenu/SaveGameElement.tscn")
-signal onClosePressed
-var inDeleteMode = false
-var currentExportedPath = ""
+var saveGameElemenetScene 	= preload("res://UI/MainMenu/SaveGameElement.tscn")
+var inDeleteMode 			= false
+var currentExportedPath 	= ""
+
+onready var savesContainer 	= $VBoxContainer/ScrollContainer/ScrollVBox/MarginContainer/SavesContainer
+
+onready var UIbuttonsCon	= $VBoxContainer/GridContainer
+
 signal in_focus
+signal onClosePressed
+signal changeDeleteMode(mode)
 
 func _ready():
-	updateSaves()
-	
 	if(OS.get_name() == "Android"):
 		$VBoxContainer/GridContainer/SavesButton.disabled = true
 	
@@ -19,39 +22,34 @@ func _ready():
 	if OS.get_name() == "HTML5" and OS.has_feature("JavaScript"):
 		_define_js()
 
-func updateSaves():
-	Util.delete_children(savesContainer)
-	
+func updateSaves(): #Argh!!! It's was so unefficient...
 	var savesPaths = SAVE.getSavesSortedByDate()
 	
-	for savePath in savesPaths:
+	for save in savesContainer.get_children():
+		var path = save.getSavePath()
+		if path in savesPaths:
+			savesPaths.erase(path) # Removing existiong ones from check list - they aren't needed...
+		else:
+			save.queue_free() # ...And deleting saves that not existed!
+			
+	for savePath in savesPaths: # Then we load ONLY necessary ones!
 		var saveGameElementObject = saveGameElemenetScene.instance()
 		savesContainer.add_child(saveGameElementObject)
 		saveGameElementObject.setSaveFile(savePath)
 		saveGameElementObject.connect("onLoadButtonPressed", self, "onSaveLoadButtonClicked")
 		saveGameElementObject.connect("onDeleteButtonPressed", self, "onDeleteButtonClicked")
 		saveGameElementObject.connect("onExportButtonPressed", self, "onExportButtonClicked")
+		# Saves know when change to delete mode! We now can call this func less often!
+		var _ok = connect("changeDeleteMode", saveGameElementObject, "setDeleteMode")
 		saveGameElementObject.setDeleteMode(inDeleteMode)
+		
+		UIbuttonsCon.visible = !(is_instance_valid(GM.ui) && GM.ui.main_menu_open)
 		
 func onSaveLoadButtonClicked(savePath):
 	SAVE.switchToGameAndLoad(savePath)
 
 func onDeleteButtonClicked(savePath):
 	SAVE.deleteSave(savePath)
-	updateSaves()
-
-func _on_CloseButton_pressed():
-	emit_signal("onClosePressed")
-
-
-func _on_LoadGameScreen_visibility_changed():
-	if(visible):
-		updateSaves()
-
-
-func _on_DeleteButton_pressed():
-	inDeleteMode = !inDeleteMode
-	updateSaves()
 
 func onExportButtonClicked(savePath: String):
 	print("EXPORT: "+savePath)
@@ -95,12 +93,6 @@ func onExportButtonClicked(savePath: String):
 	$ExportSaveDialog.current_file = savePath.get_file()
 	#$ExportSaveDialog.current_dir = OS.get_user_data_dir()
 	$ExportSaveDialog.popup_centered()
-	
-func _on_ExportSaveDialog_file_selected(path):
-	if(currentExportedPath == null || currentExportedPath == ""):
-		return
-	var d = Directory.new()
-	d.copy(currentExportedPath, path)
 
 func _notification(notification: int) -> void:
 	if notification == MainLoop.NOTIFICATION_WM_FOCUS_IN:
@@ -167,9 +159,8 @@ func readSaveFileHTML5():
 	var file_name = JavaScript.eval("fileName;", true)
 	
 	return [file_name, file_data]
-
-
-func _on_ImportButton_pressed():
+	
+func importSaveFile():
 	if OS.get_name() == "HTML5":
 		var saveDataAndFileName = yield(readSaveFileHTML5(), "completed")
 		if(saveDataAndFileName == null || saveDataAndFileName.size() != 2):
@@ -199,12 +190,37 @@ func _on_ImportButton_pressed():
 			$ImportSaveDialog.current_dir = finalDir
 		$ImportSaveDialog.popup_centered()
 
+func showSaveFolder():
+	var _ok = OS.shell_open(ProjectSettings.globalize_path("user://saves/"))
+
+func switchDeleteMode():
+	inDeleteMode = !inDeleteMode
+	emit_signal("changeDeleteMode", inDeleteMode)
+
+func _on_ImportButton_pressed():
+	importSaveFile()
+
+func _on_ExportSaveDialog_file_selected(path):
+	if(currentExportedPath == null || currentExportedPath == ""):
+		return
+	var d = Directory.new()
+	d.copy(currentExportedPath, path)
+
 func _on_ImportSaveDialog_file_selected(path: String):
 	print(path.get_file().get_basename())
 	var d = Directory.new()
 	d.copy(path, "user://saves/"+path.get_file().get_basename()+".save")
 	updateSaves()
 
-
 func _on_SavesButton_pressed():
-	var _ok = OS.shell_open(ProjectSettings.globalize_path("user://saves/"))
+	showSaveFolder()
+
+func _on_CloseButton_pressed():
+	emit_signal("onClosePressed")
+
+func _on_LoadGameScreen_visibility_changed():
+	if(visible):
+		updateSaves()
+
+func _on_DeleteButton_pressed():
+	switchDeleteMode()

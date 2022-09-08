@@ -10,10 +10,11 @@ font_data = ExtResource( 2 )
 [node name="SaveGameElement" type="HBoxContainer"]
 margin_right = 1280.0
 margin_bottom = 26.0
+custom_constants/separation = 20
 script = ExtResource( 1 )
 
 [node name="SaveNameLabel" type="RichTextLabel" parent="."]
-margin_right = 1057.0
+margin_right = 933.0
 margin_bottom = 26.0
 size_flags_horizontal = 3
 custom_fonts/bold_font = SubResource( 1 )
@@ -21,20 +22,20 @@ bbcode_enabled = true
 fit_content_height = true
 
 [node name="LoadButton" type="Button" parent="."]
-margin_left = 1061.0
-margin_right = 1103.0
+margin_left = 953.0
+margin_right = 1007.0
 margin_bottom = 26.0
 text = "Load"
 
 [node name="ExportButton" type="Button" parent="."]
-margin_left = 1107.0
-margin_right = 1159.0
+margin_left = 1027.0
+margin_right = 1095.0
 margin_bottom = 26.0
 hint_tooltip = "Export the savefile. Useful for transfering your savefile from the web version into the standalone one or just to backup your save"
 text = "Export"
 
 [node name="DeleteButton" type="Button" parent="."]
-margin_left = 1163.0
+margin_left = 1115.0
 margin_right = 1280.0
 margin_bottom = 26.0
 text = "DELETE FOREVER"

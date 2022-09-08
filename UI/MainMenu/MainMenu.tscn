@@ -1,524 +1,551 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=34 format=2]
 
-[ext_resource path="res://GlobalTheme.tres" type="Theme" id=1]
-[ext_resource path="res://Fonts/Titillium-Regular.otf" type="DynamicFontData" id=2]
+[ext_resource path="res://Game/Title.tscn" type="PackedScene" id=1]
+[ext_resource path="res://UI/FontResources/Small/BoldFont.tres" type="DynamicFont" id=2]
 [ext_resource path="res://UI/MainMenu/MainMenu.gd" type="Script" id=3]
-[ext_resource path="res://UI/MainMenu/LoadGameScreen.tscn" type="PackedScene" id=4]
-[ext_resource path="res://UI/Options/OptionsScreen.tscn" type="PackedScene" id=5]
-[ext_resource path="res://UI/MainMenu/CreditsScreen.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Fonts/Titillium-Bold.otf" type="DynamicFontData" id=7]
-[ext_resource path="res://UI/ModsMenu/ModsMenu.tscn" type="PackedScene" id=8]
-[ext_resource path="res://Game/SmartScrollContainer.gd" type="Script" id=9]
+[ext_resource path="res://Themes/TabContainerEmptyStyle.tres" type="StyleBox" id=4]
+[ext_resource path="res://Fonts/Titillium-Bold.otf" type="DynamicFontData" id=5]
+[ext_resource path="res://UI/MapAndTimePanel.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Game/TooltipDisplay.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Events/EventSystem.gd" type="Script" id=8]
+[ext_resource path="res://Quests/QuestSystem.gd" type="Script" id=9]
+[ext_resource path="res://Game/Pregnancy/ChildSystem.gd" type="Script" id=10]
+[ext_resource path="res://UI/CharactersArtworkPanel/CharactersArtworkPanel.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Game/PlayerPanel.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Game/CharacterPanel.tscn" type="PackedScene" id=13]
+[ext_resource path="res://UI/CharactersPanel.tscn" type="PackedScene" id=14]
+[ext_resource path="res://UI/MainMenu/InGameMenu.tscn" type="PackedScene" id=15]
+[ext_resource path="res://UI/SkillsUI/SkillsUI.tscn" type="PackedScene" id=16]
+[ext_resource path="res://UI/DebugUI/DebugPanel.tscn" type="PackedScene" id=17]
+[ext_resource path="res://Game/MainScene.gd" type="Script" id=18]
+[ext_resource path="res://UI/Options/OptionsScreen.tscn" type="PackedScene" id=19]
+[ext_resource path="res://UI/MainMenu/CreditsScreen.tscn" type="PackedScene" id=20]
+[ext_resource path="res://UI/ModsMenu/ModsMenu.tscn" type="PackedScene" id=21]
+[ext_resource path="res://UI/MainMenu/LoadGameScreen.tscn" type="PackedScene" id=22]
+[ext_resource path="res://Util/SceneConverter.tscn" type="PackedScene" id=23]
+[ext_resource path="res://UI/LikesGenerator/NpcLikesGenerator.tscn" type="PackedScene" id=24]
+[ext_resource path="res://UI/QuickCharacterCreator/QuickCharacterCreator.tscn" type="PackedScene" id=25]
+[ext_resource path="res://UI/ModMaker/ModMaker.tscn" type="PackedScene" id=26]
+[ext_resource path="res://Game/SmartScrollContainer.gd" type="Script" id=27]
 
-[sub_resource type="StyleBoxFlat" id=1]
+[sub_resource type="StyleBoxFlat" id=2]
 bg_color = Color( 0.207843, 0.133333, 0.364706, 1 )
 corner_radius_top_right = 16
 corner_radius_bottom_right = 16
 
-[sub_resource type="DynamicFont" id=6]
+[sub_resource type="DynamicFont" id=9]
 size = 30
-font_data = ExtResource( 7 )
+font_data = ExtResource( 5 )
 
-[sub_resource type="DynamicFont" id=3]
-size = 38
-outline_size = 2
-outline_color = Color( 0, 0, 0, 1 )
-font_data = ExtResource( 2 )
+[sub_resource type="GDScript" id=8]
+script/source = "extends RichTextLabel
 
-[sub_resource type="StyleBoxFlat" id=4]
-bg_color = Color( 0.364706, 0.133333, 0.329412, 1 )
-border_width_left = 4
-border_width_top = 4
-border_width_right = 4
-border_width_bottom = 4
-border_color = Color( 0.364706, 0.133333, 0.329412, 1 )
-corner_radius_top_left = 32
-corner_radius_top_right = 32
-corner_radius_bottom_right = 32
-corner_radius_bottom_left = 32
+func _ready():
+	var _ok = GlobalRegistry.connect(\"donationDataUpdated\", self, \"updateDonationData\")
+	updateDonationData()
+	
+func updateDonationData():
+	bbcode_text = GlobalRegistry.getDonationDataString()
+"
 
-[sub_resource type="DynamicFont" id=5]
-size = 24
-font_data = ExtResource( 2 )
+[sub_resource type="GDScript" id=12]
+script/source = "extends MarginContainer
 
-[sub_resource type="StyleBoxFlat" id=2]
+var current_font_size 		= \"\"
+var textboxes 				= {}
+
+var simple_text				= \"\"
+
+onready var text 			= $GameText/Fitter/Text
+onready var fitter			= $GameText/Fitter
+onready var scroll			= $GameText
+
+onready var uiTextboxScene 	= preload(\"res://UI/UITextbox.tscn\")
+
+func _ready():
+	text.selection_enabled = OS.has_touchscreen_ui_hint()
+
+func _physics_process(_delta):
+	text.bbcode_text = \"[fill]\" + simple_text + \"[/fill]\"
+	
+	if current_font_size != OPTIONS.getFontSize():
+		current_font_size = OPTIONS.getFontSize()
+		
+		match current_font_size:
+			\"big\":
+				text.add_font_override(\"normal_font\", load(\"res://UI/FontResources/Big/NormalFont.tres\"))
+				text.add_font_override(\"italics_font\", load(\"res://UI/FontResources/Big/ItalicsFont.tres\"))
+				text.add_font_override(\"bold_italics_font\", load(\"res://UI/FontResources/Big/BoldItalicsFont.tres\"))
+				text.add_font_override(\"bold_font\", load(\"res://UI/FontResources/Big/BoldFont.tres\"))
+			\"small\":
+				text.add_font_override(\"normal_font\", load(\"res://UI/FontResources/Small/NormalFont.tres\"))
+				text.add_font_override(\"italics_font\", load(\"res://UI/FontResources/Small/ItalicsFont.tres\"))
+				text.add_font_override(\"bold_italics_font\", load(\"res://UI/FontResources/Small/BoldItalicsFont.tres\"))
+				text.add_font_override(\"bold_font\", load(\"res://UI/FontResources/Small/BoldFont.tres\"))
+			_:
+				text.add_font_override(\"normal_font\", load(\"res://UI/FontResources/Normal/NormalFont.tres\"))
+				text.add_font_override(\"italics_font\", load(\"res://UI/FontResources/Normal/ItalicsFont.tres\"))
+				text.add_font_override(\"bold_italics_font\", load(\"res://UI/FontResources/Normal/BoldItalicsFont.tres\"))
+				text.add_font_override(\"bold_font\", load(\"res://UI/FontResources/Normal/BoldFont.tres\"))
+
+func addUITextbox(id):
+	assert(!textboxes.has(id), \"Trying to add a textbox with the same id. Id is \"+id)
+	
+	var uitextbox = uiTextboxScene.instance()
+	uitextbox.id = id
+	fitter.add_child(uitextbox)
+	uitextbox.grab_focus()
+	textboxes[id] = uitextbox
+	
+func addCustomControl(id, control):
+	assert(!textboxes.has(id), \"Trying to add a control with the same id. Id is \"+id)
+
+	fitter.add_child(control)
+	textboxes[id] = control
+
+func getUIdata(id):
+	assert(textboxes.has(id), \"Trying to get info from bad id. Id is \"+id)
+	return textboxes[id].getData()
+
+func clearUItextboxes():
+	for id in textboxes.keys():
+		var textbox = textboxes[id]
+		textbox.queue_free()
+	textboxes = {}
+
+func add_text(new_text: String):
+	simple_text += new_text
+
+func clearText():
+	scroll.set_v_scroll(0)
+	simple_text = \"\"
+
+func trimLineEndings():
+	simple_text = simple_text.trim_suffix(\"\\n\")
+"
+
+[sub_resource type="StyleBoxFlat" id=11]
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color( 1, 1, 1, 1 )
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+expand_margin_left = 10.0
+expand_margin_right = 10.0
+expand_margin_top = 10.0
+expand_margin_bottom = 10.0
+
+[sub_resource type="StyleBoxFlat" id=3]
 bg_color = Color( 0.207843, 0.133333, 0.364706, 1 )
 corner_radius_top_left = 16
 corner_radius_bottom_left = 16
 
-[node name="MainMenu" type="Control"]
+[node name="Main" type="HBoxContainer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-theme = ExtResource( 1 )
+custom_constants/separation = 30
 script = ExtResource( 3 )
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
-anchor_right = 1.0
-anchor_bottom = 1.0
-
-[node name="Panel2" type="Panel" parent="HBoxContainer"]
+[node name="LeftPanel" type="Panel" parent="."]
+show_behind_parent = true
 margin_right = 260.0
 margin_bottom = 720.0
 rect_min_size = Vector2( 260, 0 )
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.3
-custom_styles/panel = SubResource( 1 )
+size_flags_horizontal = 0
+custom_styles/panel = SubResource( 2 )
 
-[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/Panel2"]
+[node name="MarginContainer" type="MarginContainer" parent="LeftPanel"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 12.0
-margin_top = 12.0
-margin_right = -12.0
-margin_bottom = -12.0
+custom_constants/margin_right = 16
+custom_constants/margin_top = 16
+custom_constants/margin_left = 16
+custom_constants/margin_bottom = 16
+
+[node name="ContentPanel" type="VBoxContainer" parent="LeftPanel/MarginContainer"]
+margin_left = 16.0
+margin_top = 16.0
+margin_right = 244.0
+margin_bottom = 704.0
+
+[node name="Scroll" type="ScrollContainer" parent="LeftPanel/MarginContainer/ContentPanel"]
+margin_right = 228.0
+margin_bottom = 304.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+scroll_horizontal_enabled = false
+script = ExtResource( 27 )
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/Panel2/MarginContainer"]
-margin_right = 236.0
-margin_bottom = 696.0
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.4
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer/Panel2/MarginContainer/VBoxContainer"]
-margin_right = 236.0
-margin_bottom = 696.0
+[node name="ChangableContent" type="TabContainer" parent="LeftPanel/MarginContainer/ContentPanel/Scroll"]
+margin_right = 228.0
+margin_bottom = 304.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-script = ExtResource( 9 )
+custom_styles/panel = ExtResource( 4 )
+tabs_visible = false
 
-[node name="VBoxContainer3" type="VBoxContainer" parent="HBoxContainer/Panel2/MarginContainer/VBoxContainer/ScrollContainer"]
-margin_right = 236.0
-margin_bottom = 696.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="DonationsLabel" type="RichTextLabel" parent="HBoxContainer/Panel2/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer3"]
-margin_right = 236.0
-margin_bottom = 21.0
-custom_fonts/bold_font = SubResource( 6 )
+[node name="Donations" type="RichTextLabel" parent="LeftPanel/MarginContainer/ContentPanel/Scroll/ChangableContent"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/bold_font = SubResource( 9 )
 bbcode_enabled = true
 fit_content_height = true
+script = SubResource( 8 )
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="HBoxContainer/Panel2/MarginContainer/VBoxContainer"]
+[node name="NPC_panel" type="VBoxContainer" parent="LeftPanel/MarginContainer/ContentPanel/Scroll/ChangableContent"]
 visible = false
-margin_top = 640.0
-margin_right = 236.0
-margin_bottom = 666.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
+anchor_right = 1.0
+anchor_bottom = 1.0
 
-[node name="SaveButton" type="Button" parent="HBoxContainer/Panel2/MarginContainer/VBoxContainer/HBoxContainer2"]
-margin_right = 116.0
-margin_bottom = 26.0
-hint_tooltip = "Save the game"
+[node name="CharacterPanel" parent="LeftPanel/MarginContainer/ContentPanel/Scroll/ChangableContent/NPC_panel" instance=ExtResource( 13 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 228.0
+margin_bottom = 136.0
+
+[node name="CharactersPanel" parent="LeftPanel/MarginContainer/ContentPanel/Scroll/ChangableContent/NPC_panel" instance=ExtResource( 14 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 140.0
+margin_right = 228.0
+margin_bottom = 196.0
+
+[node name="CharactersArtworkPanel" parent="LeftPanel/MarginContainer/ContentPanel/Scroll/ChangableContent/NPC_panel" instance=ExtResource( 11 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 200.0
+margin_right = 228.0
+margin_bottom = 304.0
 size_flags_horizontal = 3
-text = "Quick save"
+size_flags_vertical = 3
 
-[node name="LoadButton" type="Button" parent="HBoxContainer/Panel2/MarginContainer/VBoxContainer/HBoxContainer2"]
-margin_left = 120.0
-margin_right = 236.0
+[node name="LGamePanel" type="VBoxContainer" parent="LeftPanel/MarginContainer/ContentPanel"]
+margin_top = 308.0
+margin_right = 228.0
+margin_bottom = 688.0
+
+[node name="MapAndTimePanel" parent="LeftPanel/MarginContainer/ContentPanel/LGamePanel" instance=ExtResource( 6 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 228.0
+margin_bottom = 260.0
+
+[node name="QSaveLoad" type="HBoxContainer" parent="LeftPanel/MarginContainer/ContentPanel/LGamePanel"]
+margin_top = 264.0
+margin_right = 228.0
+margin_bottom = 290.0
+custom_constants/separation = 10
+
+[node name="QSaveBt" type="Button" parent="LeftPanel/MarginContainer/ContentPanel/LGamePanel/QSaveLoad"]
+margin_right = 109.0
 margin_bottom = 26.0
-hint_tooltip = "Load the saved game"
 size_flags_horizontal = 3
-text = "Quick load"
+text = "Q. Save"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/Panel2/MarginContainer/VBoxContainer"]
-visible = false
-margin_top = 670.0
-margin_right = 236.0
-margin_bottom = 696.0
-
-[node name="PrevPageButton" type="Button" parent="HBoxContainer/Panel2/MarginContainer/VBoxContainer/HBoxContainer"]
-margin_right = 116.0
+[node name="QLoadBt" type="Button" parent="LeftPanel/MarginContainer/ContentPanel/LGamePanel/QSaveLoad"]
+margin_left = 119.0
+margin_right = 228.0
 margin_bottom = 26.0
-hint_tooltip = "Flip to the previous page of options"
 size_flags_horizontal = 3
-disabled = true
+text = "Q. Load"
+
+[node name="MenusCaller" type="HBoxContainer" parent="LeftPanel/MarginContainer/ContentPanel/LGamePanel"]
+margin_top = 294.0
+margin_right = 228.0
+margin_bottom = 320.0
+custom_constants/separation = 10
+
+[node name="ToSkillsBt" type="Button" parent="LeftPanel/MarginContainer/ContentPanel/LGamePanel/MenusCaller"]
+margin_right = 109.0
+margin_bottom = 26.0
+size_flags_horizontal = 3
+text = "Skills"
+
+[node name="ToPauseBt" type="Button" parent="LeftPanel/MarginContainer/ContentPanel/LGamePanel/MenusCaller"]
+margin_left = 119.0
+margin_right = 228.0
+margin_bottom = 26.0
+size_flags_horizontal = 3
+text = "Menu"
+
+[node name="Pages" type="HBoxContainer" parent="LeftPanel/MarginContainer/ContentPanel/LGamePanel"]
+margin_top = 324.0
+margin_right = 228.0
+margin_bottom = 350.0
+custom_constants/separation = 10
+
+[node name="PrevPageBt" type="Button" parent="LeftPanel/MarginContainer/ContentPanel/LGamePanel/Pages"]
+margin_right = 109.0
+margin_bottom = 26.0
+size_flags_horizontal = 3
 text = "<- Page"
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="NextPageButton" type="Button" parent="HBoxContainer/Panel2/MarginContainer/VBoxContainer/HBoxContainer"]
-margin_left = 120.0
-margin_right = 236.0
+[node name="NextPageBt" type="Button" parent="LeftPanel/MarginContainer/ContentPanel/LGamePanel/Pages"]
+margin_left = 119.0
+margin_right = 228.0
 margin_bottom = 26.0
-hint_tooltip = "Flip to the next page of options"
 size_flags_horizontal = 3
-disabled = true
 text = "Page ->"
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="HSplitContainer" type="HSplitContainer" parent="HBoxContainer"]
-margin_left = 264.0
-margin_right = 269.0
-margin_bottom = 720.0
-rect_min_size = Vector2( 5, 0 )
+[node name="DebugBt" type="Button" parent="LeftPanel/MarginContainer/ContentPanel/LGamePanel"]
+margin_top = 354.0
+margin_right = 228.0
+margin_bottom = 380.0
+text = "Debug Menu"
 
-[node name="MainVBox" type="VBoxContainer" parent="HBoxContainer"]
-margin_left = 273.0
-margin_right = 1027.0
+[node name="CentrPanel" type="VBoxContainer" parent="."]
+margin_left = 290.0
+margin_right = 1004.0
 margin_bottom = 720.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+alignment = 1
 
-[node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer/MainVBox"]
-margin_right = 754.0
-margin_bottom = 616.0
+[node name="ContentSwitcher" type="TabContainer" parent="CentrPanel"]
+margin_right = 714.0
+margin_bottom = 687.0
+size_flags_horizontal = 7
+size_flags_vertical = 3
+custom_styles/panel = ExtResource( 4 )
+tab_align = 0
+tabs_visible = false
+
+[node name="Title" parent="CentrPanel/ContentSwitcher" instance=ExtResource( 1 )]
+
+[node name="Margin" type="MarginContainer" parent="CentrPanel/ContentSwitcher"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+custom_constants/margin_right = 0
+custom_constants/margin_top = 20
+custom_constants/margin_left = 0
+custom_constants/margin_bottom = 10
+script = SubResource( 12 )
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/MainVBox/ScrollContainer"]
-margin_right = 754.0
-margin_bottom = 616.0
+[node name="GameText" type="ScrollContainer" parent="CentrPanel/ContentSwitcher/Margin"]
+margin_top = 20.0
+margin_right = 714.0
+margin_bottom = 677.0
+size_flags_horizontal = 3
+scroll_horizontal_enabled = false
+script = ExtResource( 27 )
+
+[node name="Fitter" type="VBoxContainer" parent="CentrPanel/ContentSwitcher/Margin/GameText"]
+margin_right = 714.0
+margin_bottom = 657.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/separation = 10
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/MainVBox/ScrollContainer/VBoxContainer"]
-margin_right = 754.0
-margin_bottom = 150.0
-rect_min_size = Vector2( 0, 150 )
-
-[node name="Label" type="Label" parent="HBoxContainer/MainVBox/ScrollContainer/VBoxContainer"]
-margin_top = 160.0
-margin_right = 754.0
-margin_bottom = 199.0
-custom_fonts/font = SubResource( 3 )
-text = "Broken Dreams Correctional Center"
-align = 1
-autowrap = true
-
-[node name="Label3" type="RichTextLabel" parent="HBoxContainer/MainVBox/ScrollContainer/VBoxContainer"]
-margin_top = 209.0
-margin_right = 754.0
-margin_bottom = 230.0
+[node name="Text" type="RichTextLabel" parent="CentrPanel/ContentSwitcher/Margin/GameText/Fitter"]
+margin_right = 700.0
+margin_bottom = 63.0
+focus_mode = 2
+size_flags_horizontal = 3
 bbcode_enabled = true
-bbcode_text = "[center]An erotic text-based rpg about being a prisoner in a space prison.[/center]"
-text = "An erotic text-based rpg about being a prisoner in a space prison."
+bbcode_text = "[i]new one[/i]
+[b]new one[/b]
+new one"
+text = "new one
+new one
+new one"
 fit_content_height = true
+selection_enabled = true
 
-[node name="MarginContainer2" type="MarginContainer" parent="HBoxContainer/MainVBox/ScrollContainer/VBoxContainer"]
-margin_top = 240.0
-margin_right = 754.0
-margin_bottom = 309.0
-rect_min_size = Vector2( 0, 69 )
-
-[node name="Panel" type="PanelContainer" parent="HBoxContainer/MainVBox/ScrollContainer/VBoxContainer"]
-margin_top = 319.0
-margin_right = 754.0
-margin_bottom = 417.0
-custom_styles/panel = SubResource( 4 )
-
-[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/MainVBox/ScrollContainer/VBoxContainer/Panel"]
-margin_left = 4.0
-margin_top = 4.0
-margin_right = 750.0
-margin_bottom = 94.0
-custom_constants/margin_right = 20
-custom_constants/margin_top = 20
-custom_constants/margin_left = 20
-custom_constants/margin_bottom = 20
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Label2" type="RichTextLabel" parent="HBoxContainer/MainVBox/ScrollContainer/VBoxContainer/Panel/MarginContainer"]
-margin_left = 20.0
-margin_top = 20.0
-margin_right = 726.0
-margin_bottom = 70.0
-custom_fonts/normal_font = SubResource( 5 )
-bbcode_enabled = true
-bbcode_text = "This game contains a lot of adult themes including sexual and fetish content and is meant to be played by adults only"
-text = "This game contains a lot of adult themes including sexual and fetish content and is meant to be played by adults only"
-fit_content_height = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="VersionLabel" type="Label" parent="HBoxContainer/MainVBox/ScrollContainer/VBoxContainer"]
-margin_top = 427.0
-margin_right = 754.0
-margin_bottom = 447.0
-text = "Version number here"
-align = 2
-
-[node name="Label2" type="RichTextLabel" parent="HBoxContainer/MainVBox/ScrollContainer/VBoxContainer"]
-margin_top = 457.0
-margin_right = 754.0
-margin_bottom = 478.0
-bbcode_enabled = true
-bbcode_text = "[right]Created by Rahi[/right]"
-text = "Created by Rahi"
-fit_content_height = true
-
-[node name="GridContainer" type="GridContainer" parent="HBoxContainer/MainVBox"]
-margin_top = 620.0
-margin_right = 754.0
-margin_bottom = 720.0
-rect_min_size = Vector2( 0, 100 )
-columns = 5
-
-[node name="ResumeButton" type="Button" parent="HBoxContainer/MainVBox/GridContainer"]
-margin_right = 147.0
-margin_bottom = 26.0
-hint_tooltip = "Load the latest save and continue playing"
-size_flags_horizontal = 3
-disabled = true
-text = "Resume"
-
-[node name="NewGameButton" type="Button" parent="HBoxContainer/MainVBox/GridContainer"]
-margin_left = 151.0
-margin_right = 298.0
-margin_bottom = 26.0
-size_flags_horizontal = 3
-text = "New game"
-
-[node name="LoadGameButton" type="Button" parent="HBoxContainer/MainVBox/GridContainer"]
-margin_left = 302.0
-margin_right = 449.0
-margin_bottom = 26.0
-size_flags_horizontal = 3
-text = "Load game"
-
-[node name="OptionsButton" type="Button" parent="HBoxContainer/MainVBox/GridContainer"]
-margin_left = 453.0
-margin_right = 600.0
-margin_bottom = 26.0
-size_flags_horizontal = 3
-text = "Options"
-
-[node name="CreditsButton" type="Button" parent="HBoxContainer/MainVBox/GridContainer"]
-margin_left = 604.0
-margin_right = 751.0
-margin_bottom = 26.0
-size_flags_horizontal = 3
-text = "Credits"
-
-[node name="DiscordButton" type="Button" parent="HBoxContainer/MainVBox/GridContainer"]
-margin_top = 30.0
-margin_right = 147.0
-margin_bottom = 56.0
-hint_tooltip = "Join the game's community on discord"
-size_flags_horizontal = 3
-text = "Join Discord"
-
-[node name="GithubButton" type="Button" parent="HBoxContainer/MainVBox/GridContainer"]
-margin_left = 151.0
-margin_top = 30.0
-margin_right = 298.0
-margin_bottom = 56.0
-hint_tooltip = "Open the project's github page"
-size_flags_horizontal = 3
-text = "Github"
-
-[node name="DevToolsButton" type="Button" parent="HBoxContainer/MainVBox/GridContainer"]
-margin_left = 302.0
-margin_top = 30.0
-margin_right = 449.0
-margin_bottom = 56.0
-hint_tooltip = "Open the panel with the tools that are useful for content developers"
-size_flags_horizontal = 3
-text = "DevTools"
-
-[node name="ChangelogButton" type="Button" parent="HBoxContainer/MainVBox/GridContainer"]
-margin_left = 453.0
-margin_top = 30.0
-margin_right = 600.0
-margin_bottom = 56.0
-hint_tooltip = "View the project's changelog"
-size_flags_horizontal = 3
-text = "Changelog"
-
-[node name="ModsButton" type="Button" parent="HBoxContainer/MainVBox/GridContainer"]
-margin_left = 604.0
-margin_top = 30.0
-margin_right = 751.0
-margin_bottom = 56.0
-hint_tooltip = "See what modules are loaded currently"
-size_flags_horizontal = 3
-text = "Mods"
-
-[node name="DevToolsScreen" type="VBoxContainer" parent="HBoxContainer"]
+[node name="InGameMenu" parent="CentrPanel/ContentSwitcher" instance=ExtResource( 15 )]
 visible = false
-margin_left = 273.0
-margin_right = 1027.0
-margin_bottom = 720.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
 
-[node name="DevScreen" type="Control" parent="HBoxContainer/DevToolsScreen"]
-margin_right = 754.0
-margin_bottom = 616.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="GridContainer" type="GridContainer" parent="HBoxContainer/DevToolsScreen"]
-margin_top = 620.0
-margin_right = 754.0
-margin_bottom = 720.0
-rect_min_size = Vector2( 0, 100 )
-columns = 5
-
-[node name="DevClose" type="Button" parent="HBoxContainer/DevToolsScreen/GridContainer"]
-margin_right = 149.0
-margin_bottom = 26.0
-size_flags_horizontal = 3
-text = "Close"
-
-[node name="DevSceneConverter" type="Button" parent="HBoxContainer/DevToolsScreen/GridContainer"]
-margin_left = 153.0
-margin_right = 302.0
-margin_bottom = 26.0
-hint_tooltip = "Converts scenes from plain-text format into what the game can use"
-size_flags_horizontal = 3
-text = "SceneConverter"
-
-[node name="DevLikesGenerator" type="Button" parent="HBoxContainer/DevToolsScreen/GridContainer"]
-margin_left = 306.0
-margin_right = 455.0
-margin_bottom = 26.0
-hint_tooltip = "Panel for easy creation of npc likes/dislikes tables. Used for lust combat"
-size_flags_horizontal = 3
-text = "Npc Likes Gen."
-
-[node name="DevCharCreator" type="Button" parent="HBoxContainer/DevToolsScreen/GridContainer"]
-margin_left = 306.0
-margin_right = 455.0
-margin_bottom = 26.0
-hint_tooltip = "A thing to quickly design an npc"
-size_flags_horizontal = 3
-text = "Char Creator"
-
-[node name="DevModCreator" type="Button" parent="HBoxContainer/DevToolsScreen/GridContainer"]
-margin_left = 306.0
-margin_right = 455.0
-margin_bottom = 26.0
-hint_tooltip = "A tool to export your mod"
-size_flags_horizontal = 3
-text = "ModMaker"
-
-[node name="LoadGameScreen" parent="HBoxContainer" instance=ExtResource( 4 )]
+[node name="SkillsUI" parent="CentrPanel/ContentSwitcher" instance=ExtResource( 16 )]
 visible = false
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 730.0
-margin_right = 1027.0
-margin_bottom = 720.0
 
-[node name="OptionsScreen" parent="HBoxContainer" instance=ExtResource( 5 )]
+[node name="DebugPanel" parent="CentrPanel/ContentSwitcher" instance=ExtResource( 17 )]
 visible = false
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 761.0
-margin_right = 1027.0
-margin_bottom = 720.0
 
-[node name="CreditsScreen" parent="HBoxContainer" instance=ExtResource( 6 )]
+[node name="OptionsScreen" parent="CentrPanel/ContentSwitcher" instance=ExtResource( 19 )]
 visible = false
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 730.0
-margin_right = 1027.0
-margin_bottom = 720.0
 
-[node name="ModsMenu" parent="HBoxContainer" instance=ExtResource( 8 )]
+[node name="CreditsScreen" parent="CentrPanel/ContentSwitcher" instance=ExtResource( 20 )]
 visible = false
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 1027.0
-margin_right = 1027.0
-margin_bottom = 720.0
 
-[node name="HSplitContainer2" type="HSplitContainer" parent="HBoxContainer"]
-margin_left = 1031.0
-margin_right = 1036.0
-margin_bottom = 720.0
-rect_min_size = Vector2( 5, 0 )
+[node name="ModsMenu" parent="CentrPanel/ContentSwitcher" instance=ExtResource( 21 )]
+visible = false
 
-[node name="Panel" type="Panel" parent="HBoxContainer"]
-margin_left = 1040.0
-margin_right = 1280.0
-margin_bottom = 720.0
-rect_min_size = Vector2( 240, 0 )
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.3
-custom_styles/panel = SubResource( 2 )
+[node name="LoadGameScreen" parent="CentrPanel/ContentSwitcher" instance=ExtResource( 22 )]
+visible = false
 
-[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/Panel"]
+[node name="DevToolsScreen" type="TabContainer" parent="CentrPanel/ContentSwitcher"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 12.0
-margin_top = 12.0
-margin_right = -12.0
-margin_bottom = -12.0
+custom_styles/panel = ExtResource( 4 )
+tabs_visible = false
+
+[node name="SceneConverter" parent="CentrPanel/ContentSwitcher/DevToolsScreen" instance=ExtResource( 23 )]
+
+[node name="NpcLikesGenerator" parent="CentrPanel/ContentSwitcher/DevToolsScreen" instance=ExtResource( 24 )]
+visible = false
+
+[node name="QuickCharacterCreator" parent="CentrPanel/ContentSwitcher/DevToolsScreen" instance=ExtResource( 25 )]
+visible = false
+
+[node name="ModMaker" parent="CentrPanel/ContentSwitcher/DevToolsScreen" instance=ExtResource( 26 )]
+visible = false
+
+[node name="MarginContainer" type="MarginContainer" parent="CentrPanel"]
+margin_top = 691.0
+margin_right = 714.0
+margin_bottom = 691.0
+
+[node name="Pad" type="GridContainer" parent="CentrPanel/MarginContainer"]
+show_behind_parent = true
+margin_right = 714.0
+custom_constants/vseparation = 10
+custom_constants/hseparation = 10
+columns = 5
+
+[node name="ColorRect" type="Panel" parent="CentrPanel/MarginContainer"]
+modulate = Color( 1, 1, 1, 0.196078 )
+margin_right = 714.0
+mouse_default_cursor_shape = 8
+custom_styles/panel = SubResource( 11 )
+
+[node name="UsefulPlaceholder" type="Control" parent="CentrPanel"]
+margin_top = 695.0
+margin_right = 714.0
+margin_bottom = 720.0
+rect_min_size = Vector2( 0, 25 )
+
+[node name="RightPanel" type="Panel" parent="."]
+show_behind_parent = true
+margin_left = 1034.0
+margin_right = 1294.0
+margin_bottom = 720.0
+rect_min_size = Vector2( 260, 0 )
+custom_styles/panel = SubResource( 3 )
+
+[node name="MarginContainer" type="MarginContainer" parent="RightPanel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/margin_right = 16
+custom_constants/margin_top = 16
+custom_constants/margin_left = 16
+custom_constants/margin_bottom = 16
+
+[node name="ContentPanel" type="VBoxContainer" parent="RightPanel/MarginContainer"]
+margin_left = 16.0
+margin_top = 16.0
+margin_right = 244.0
+margin_bottom = 704.0
+
+[node name="Scroll" type="ScrollContainer" parent="RightPanel/MarginContainer/ContentPanel"]
+margin_right = 228.0
+margin_bottom = 688.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+scroll_horizontal_enabled = false
+script = ExtResource( 27 )
+
+[node name="ChangebleContent" type="TabContainer" parent="RightPanel/MarginContainer/ContentPanel/Scroll"]
+margin_right = 228.0
+margin_bottom = 688.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/panel = ExtResource( 4 )
+tabs_visible = false
+
+[node name="GithubPanel" type="VBoxContainer" parent="RightPanel/MarginContainer/ContentPanel/Scroll/ChangebleContent"]
+anchor_right = 1.0
+anchor_bottom = 1.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/Panel/MarginContainer"]
-margin_right = 216.0
-margin_bottom = 696.0
-
-[node name="GithubReleaseLabel" type="Label" parent="HBoxContainer/Panel/MarginContainer/VBoxContainer"]
-margin_right = 216.0
+[node name="GithubInfo" type="Label" parent="RightPanel/MarginContainer/ContentPanel/Scroll/ChangebleContent/GithubPanel"]
+margin_right = 228.0
 margin_bottom = 43.0
-text = "Latest github release: loading"
+text = "Latest Github relese:
+loading..."
 autowrap = true
 
-[node name="GithubReleasesButton" type="Button" parent="HBoxContainer/Panel/MarginContainer/VBoxContainer"]
+[node name="ToGihubBt" type="Button" parent="RightPanel/MarginContainer/ContentPanel/Scroll/ChangebleContent/GithubPanel"]
 margin_top = 47.0
-margin_right = 216.0
+margin_right = 228.0
 margin_bottom = 73.0
 text = "Github Releases"
 
-[node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer/Panel/MarginContainer/VBoxContainer"]
+[node name="HSeparator2" type="HSeparator" parent="RightPanel/MarginContainer/ContentPanel/Scroll/ChangebleContent/GithubPanel"]
 margin_top = 77.0
-margin_right = 216.0
-margin_bottom = 696.0
+margin_right = 228.0
+margin_bottom = 81.0
+
+[node name="Label" type="Label" parent="RightPanel/MarginContainer/ContentPanel/Scroll/ChangebleContent/GithubPanel"]
+margin_top = 85.0
+margin_right = 228.0
+margin_bottom = 105.0
+text = "MODS:"
+align = 1
+
+[node name="HSeparator" type="HSeparator" parent="RightPanel/MarginContainer/ContentPanel/Scroll/ChangebleContent/GithubPanel"]
+margin_top = 109.0
+margin_right = 228.0
+margin_bottom = 113.0
+
+[node name="ScrollContainer" type="ScrollContainer" parent="RightPanel/MarginContainer/ContentPanel/Scroll/ChangebleContent/GithubPanel"]
+margin_top = 117.0
+margin_right = 228.0
+margin_bottom = 688.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+script = ExtResource( 27 )
 
-[node name="LoadedModsLabel" type="RichTextLabel" parent="HBoxContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer"]
-margin_right = 216.0
-margin_bottom = 619.0
-rect_min_size = Vector2( 0, 500 )
+[node name="LoadedModsLabel" type="RichTextLabel" parent="RightPanel/MarginContainer/ContentPanel/Scroll/ChangebleContent/GithubPanel/ScrollContainer"]
+margin_right = 228.0
+margin_bottom = 21.0
 size_flags_horizontal = 3
-size_flags_vertical = 7
+custom_fonts/bold_font = ExtResource( 2 )
 bbcode_enabled = true
 fit_content_height = true
 
+[node name="PlayerPanel" parent="RightPanel/MarginContainer/ContentPanel/Scroll/ChangebleContent" instance=ExtResource( 12 )]
+visible = false
+
+[node name="TooltipLayer" type="CanvasLayer" parent="."]
+
+[node name="TooltipDisplay" parent="TooltipLayer" instance=ExtResource( 7 )]
+margin_left = 112.0
+margin_top = -169.0
+margin_right = 362.0
+margin_bottom = -48.0
+
+[node name="EventSystem" type="Node" parent="."]
+script = ExtResource( 8 )
+
+[node name="ChildSystem" type="Node" parent="."]
+script = ExtResource( 10 )
+
+[node name="QuestSystem" type="Node" parent="."]
+script = ExtResource( 9 )
+
 [node name="HTTPRequest" type="HTTPRequest" parent="."]
 
-[connection signal="meta_clicked" from="HBoxContainer/Panel2/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer3/DonationsLabel" to="." method="_on_DonationsLabel_meta_clicked"]
-[connection signal="pressed" from="HBoxContainer/MainVBox/GridContainer/ResumeButton" to="." method="_on_ResumeButton_pressed"]
-[connection signal="pressed" from="HBoxContainer/MainVBox/GridContainer/NewGameButton" to="." method="_on_NewGameButton_pressed"]
-[connection signal="pressed" from="HBoxContainer/MainVBox/GridContainer/LoadGameButton" to="." method="_on_LoadGameButton_pressed"]
-[connection signal="pressed" from="HBoxContainer/MainVBox/GridContainer/OptionsButton" to="." method="_on_OptionsButton_pressed"]
-[connection signal="pressed" from="HBoxContainer/MainVBox/GridContainer/CreditsButton" to="." method="_on_CreditsButton_pressed"]
-[connection signal="pressed" from="HBoxContainer/MainVBox/GridContainer/DiscordButton" to="." method="_on_DiscordButton_pressed"]
-[connection signal="pressed" from="HBoxContainer/MainVBox/GridContainer/GithubButton" to="." method="_on_GithubButton_pressed"]
-[connection signal="pressed" from="HBoxContainer/MainVBox/GridContainer/DevToolsButton" to="." method="_on_DevToolsButton_pressed"]
-[connection signal="pressed" from="HBoxContainer/MainVBox/GridContainer/ChangelogButton" to="." method="_on_ChangelogButton_pressed"]
-[connection signal="pressed" from="HBoxContainer/MainVBox/GridContainer/ModsButton" to="." method="_on_ModsButton_pressed"]
-[connection signal="pressed" from="HBoxContainer/DevToolsScreen/GridContainer/DevClose" to="." method="_on_DevClose_pressed"]
-[connection signal="pressed" from="HBoxContainer/DevToolsScreen/GridContainer/DevSceneConverter" to="." method="_on_DevSceneConverter_pressed"]
-[connection signal="pressed" from="HBoxContainer/DevToolsScreen/GridContainer/DevLikesGenerator" to="." method="_on_DevLikesGenerator_pressed"]
-[connection signal="pressed" from="HBoxContainer/DevToolsScreen/GridContainer/DevCharCreator" to="." method="_on_DevCharCreator_pressed"]
-[connection signal="pressed" from="HBoxContainer/DevToolsScreen/GridContainer/DevModCreator" to="." method="_on_DevModCreator_pressed"]
-[connection signal="onClosePressed" from="HBoxContainer/LoadGameScreen" to="." method="switchToMainMenu"]
-[connection signal="onClosePressed" from="HBoxContainer/OptionsScreen" to="." method="switchToMainMenu"]
-[connection signal="onClosePressed" from="HBoxContainer/CreditsScreen" to="." method="switchToMainMenu"]
-[connection signal="onClosePressed" from="HBoxContainer/ModsMenu" to="." method="switchToMainMenu"]
-[connection signal="pressed" from="HBoxContainer/Panel/MarginContainer/VBoxContainer/GithubReleasesButton" to="." method="_on_GithubReleasesButton_pressed"]
+[node name="MainScene" type="Node" parent="."]
+script = ExtResource( 18 )
+
+[connection signal="on_option_button" from="." to="MainScene" method="_on_Main_on_option_button"]
+[connection signal="ready" from="." to="MainScene" method="_on_Main_ready"]
+[connection signal="pressed" from="LeftPanel/MarginContainer/ContentPanel/LGamePanel/QSaveLoad/QSaveBt" to="." method="_on_QSaveBt_pressed"]
+[connection signal="pressed" from="LeftPanel/MarginContainer/ContentPanel/LGamePanel/QSaveLoad/QLoadBt" to="." method="_on_QLoadBt_pressed"]
+[connection signal="pressed" from="LeftPanel/MarginContainer/ContentPanel/LGamePanel/MenusCaller/ToSkillsBt" to="." method="_on_ToSkillsBt_pressed"]
+[connection signal="pressed" from="LeftPanel/MarginContainer/ContentPanel/LGamePanel/MenusCaller/ToPauseBt" to="." method="_on_ToPauseBt_pressed"]
+[connection signal="pressed" from="LeftPanel/MarginContainer/ContentPanel/LGamePanel/Pages/PrevPageBt" to="." method="_on_PrevPageBt_pressed"]
+[connection signal="pressed" from="LeftPanel/MarginContainer/ContentPanel/LGamePanel/Pages/NextPageBt" to="." method="_on_NextPageBt_pressed"]
+[connection signal="pressed" from="LeftPanel/MarginContainer/ContentPanel/LGamePanel/DebugBt" to="." method="_on_DebugBt_pressed"]
+[connection signal="onResumeButtonPressed" from="CentrPanel/ContentSwitcher/InGameMenu" to="." method="_on_InGameMenu_onResumeButtonPressed"]
+[connection signal="onClosePressed" from="CentrPanel/ContentSwitcher/SkillsUI" to="." method="_on_SkillsUI_onClosePressed"]
+[connection signal="pressed" from="RightPanel/MarginContainer/ContentPanel/Scroll/ChangebleContent/GithubPanel/ToGihubBt" to="." method="_on_ToGihubBt_pressed"]
 [connection signal="request_completed" from="HTTPRequest" to="." method="_on_HTTPRequest_request_completed"]

@@ -1,14 +1,17 @@
 extends VBoxContainer
 
-onready var locationLabel = $LocationLabel
-onready var timeLabel = $timeLabel
-onready var sceneCreatorLabel = $sceneCreatorLabel
+onready var locationLabel 		= $LocationLabel
+onready var timeLabel 			= $Time/timeLabel
+onready var dayLabel			= $Time/dayLabel
+onready var sceneCreatorLabel 	= $sceneCreatorLabel
 
 func setLocationName(newname: String):
 	locationLabel.text = newname
 
 func onTimePassed(_secondsPassed):
-	timeLabel.text = GM.main.getVisibleTime()
+	var timeday 	= GM.main.getVisibleTime()
+	timeLabel.text 	= timeday[0]
+	dayLabel.text 	= "Day: " + timeday[1]
 
 func getLocationName():
 	return locationLabel.text

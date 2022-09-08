@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://UI/CustomViewportControl.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Player/Player3D/Doll3D.tscn" type="PackedScene" id=2]
 [ext_resource path="res://UI/QuickCharacterCreator/QuickCharacterCreator.gd" type="Script" id=3]
 [ext_resource path="res://UI/Options/OptionIntType.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Themes/ItemListPretty.tres" type="StyleBox" id=6]
 
 [sub_resource type="Environment" id=2]
 
@@ -18,9 +19,10 @@ script = ExtResource( 3 )
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
+custom_constants/separation = 10
 
 [node name="DollWrapper" type="Control" parent="HBoxContainer"]
-margin_right = 638.0
+margin_right = 635.0
 margin_bottom = 720.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -43,74 +45,92 @@ texture = SubResource( 1 )
 viewportPath = NodePath("../Viewport")
 
 [node name="PanelContainer" type="PanelContainer" parent="HBoxContainer"]
-margin_left = 642.0
+margin_left = 645.0
 margin_right = 1280.0
 margin_bottom = 720.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/PanelContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/PanelContainer"]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 631.0
+margin_right = 628.0
 margin_bottom = 713.0
+custom_constants/margin_right = 5
+custom_constants/margin_top = 5
+custom_constants/margin_left = 5
+custom_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/PanelContainer/MarginContainer"]
+margin_left = 5.0
+margin_top = 5.0
+margin_right = 616.0
+margin_bottom = 701.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+custom_constants/separation = 10
 
-[node name="SlotList" type="ItemList" parent="HBoxContainer/PanelContainer/VBoxContainer"]
-margin_right = 624.0
-margin_bottom = 223.0
+[node name="SlotList" type="ItemList" parent="HBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
+margin_right = 611.0
+margin_bottom = 207.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.8
+custom_styles/bg_focus = ExtResource( 6 )
+custom_styles/bg = ExtResource( 6 )
 
-[node name="BodypartList" type="ItemList" parent="HBoxContainer/PanelContainer/VBoxContainer"]
-margin_top = 227.0
-margin_right = 624.0
-margin_bottom = 366.0
+[node name="BodypartList" type="ItemList" parent="HBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
+margin_top = 217.0
+margin_right = 611.0
+margin_bottom = 346.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.5
+custom_styles/bg_focus = ExtResource( 6 )
+custom_styles/bg = ExtResource( 6 )
 
-[node name="Thickness" parent="HBoxContainer/PanelContainer/VBoxContainer" instance=ExtResource( 4 )]
+[node name="Thickness" parent="HBoxContainer/PanelContainer/MarginContainer/VBoxContainer" instance=ExtResource( 4 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 370.0
-margin_right = 624.0
-margin_bottom = 394.0
+margin_top = 356.0
+margin_right = 611.0
+margin_bottom = 386.0
 
-[node name="Feminity" parent="HBoxContainer/PanelContainer/VBoxContainer" instance=ExtResource( 4 )]
+[node name="Feminity" parent="HBoxContainer/PanelContainer/MarginContainer/VBoxContainer" instance=ExtResource( 4 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 398.0
-margin_right = 624.0
-margin_bottom = 422.0
+margin_top = 396.0
+margin_right = 611.0
+margin_bottom = 426.0
 
-[node name="Control" type="Control" parent="HBoxContainer/PanelContainer/VBoxContainer"]
-margin_top = 426.0
-margin_right = 624.0
-margin_bottom = 706.0
+[node name="Control" type="Control" parent="HBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
+margin_top = 436.0
+margin_right = 611.0
+margin_bottom = 696.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/PanelContainer/VBoxContainer/Control"]
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 
-[node name="CurrentBodypartChoices" type="VBoxContainer" parent="HBoxContainer/PanelContainer/VBoxContainer/Control/HBoxContainer"]
-margin_right = 310.0
-margin_bottom = 280.0
+[node name="CurrentBodypartChoices" type="VBoxContainer" parent="HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/Control/HBoxContainer"]
+margin_right = 303.0
+margin_bottom = 260.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="OutputText" type="TextEdit" parent="HBoxContainer/PanelContainer/VBoxContainer/Control/HBoxContainer"]
-margin_left = 314.0
-margin_right = 624.0
-margin_bottom = 280.0
+[node name="OutputText" type="TextEdit" parent="HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/Control/HBoxContainer"]
+margin_left = 307.0
+margin_right = 611.0
+margin_bottom = 260.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+custom_styles/focus = ExtResource( 6 )
+custom_styles/normal = ExtResource( 6 )
+wrap_enabled = true
 
-[connection signal="item_selected" from="HBoxContainer/PanelContainer/VBoxContainer/SlotList" to="." method="_on_SlotList_item_selected"]
-[connection signal="item_selected" from="HBoxContainer/PanelContainer/VBoxContainer/BodypartList" to="." method="_on_BodypartList_item_selected"]
-[connection signal="value_changed" from="HBoxContainer/PanelContainer/VBoxContainer/Thickness" to="." method="_on_Thickness_value_changed"]
-[connection signal="value_changed" from="HBoxContainer/PanelContainer/VBoxContainer/Feminity" to="." method="_on_Feminity_value_changed"]
+[connection signal="item_selected" from="HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/SlotList" to="." method="_on_SlotList_item_selected"]
+[connection signal="item_selected" from="HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/BodypartList" to="." method="_on_BodypartList_item_selected"]
+[connection signal="value_changed" from="HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/Thickness" to="." method="_on_Thickness_value_changed"]
+[connection signal="value_changed" from="HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/Feminity" to="." method="_on_Feminity_value_changed"]

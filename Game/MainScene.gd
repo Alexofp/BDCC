@@ -1,7 +1,7 @@
 extends Node
 class_name MainScene
 
-onready var gameUI = $GameUI
+onready var gameUI = GM.ui
 var sceneStack: Array = []
 var messages: Array = []
 var logMessages: Array = []
@@ -22,7 +22,7 @@ func _init():
 	flagsCache = Flag.getFlags()
 
 func overridePC():
-	if(overridenPC != null):
+	if(is_instance_valid(overridenPC)):
 		assert(false, "Trying to override player twice!")
 		return
 	
@@ -35,16 +35,15 @@ func overridePC():
 	add_child(newpc)
 	
 func clearOverridePC():
-	if(overridenPC == null):
+	if(!is_instance_valid(overridenPC)):
 		assert(false, "Player wasn't overridden when we are trying to clear it")
 		return
 	overridenPC.queue_free()
-	overridenPC = null
 	GM.pc = originalPC
 	connectSignalsToPC(originalPC)
 	
 func getCurrentPC():
-	if(overridenPC != null):
+	if(is_instance_valid(overridenPC)):
 		return overridenPC
 	return originalPC
 
@@ -58,33 +57,28 @@ func connectSignalsToPC(who):
 	var _s = who.connect("levelChanged", self, "_on_Player_levelChanged")
 	_s = who.connect("orificeBecomeMoreLoose", self, "_on_Player_orificeBecomeMoreLoose")
 	_s = who.connect("skillLevelChanged", self, "_on_Player_skillLevelChanged")
-	_s = who.connect("stat_changed", $GameUI, "_on_Player_stat_changed")
+	_s = who.connect("stat_changed", gameUI, "_on_Player_stat_changed")
 
 func _exit_tree():
 	GM.main = null
 	
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	randomize()
+	GM.main = self
+	
+	Console.addCommand("setflag", self, "consoleSetFlagBool", ["flagID", "trueOrFalse"], "Changes the game flag, be very careful")
+	Console.addCommand("clearflag", self, "consoleClearFlag", ["flagID"], "Resets the game flag, be very careful")
+	Console.addCommand("setmoduleflag", self, "consoleSetModuleFlagBool", ["moduleID", "flagID", "trueOrFalse"], "Changes the game flag, be very careful")
+	Console.addCommand("clearmoduleflag", self, "consoleClearModuleFlag", ["moduleID", "flagID"], "Resets the game flag, be very careful")
+
+func startNewGame():
 	var pc = playerScene.instance()
 	originalPC = pc
 	GM.pc = pc
 	connectSignalsToPC(pc)
 	add_child(pc)
 	
-	randomize()
-	GM.main = self
-
-	startNewGame()
-	
-	runCurrentScene()
-	GM.ui.onTimePassed(0)
-	
-	Console.addCommand("setflag", self, "consoleSetFlagBool", ["flagID", "trueOrFalse"], "Changes the game flag, be very careful")
-	Console.addCommand("clearflag", self, "consoleClearFlag", ["flagID"], "Resets the game flag, be very careful")
-	Console.addCommand("setmoduleflag", self, "consoleSetModuleFlagBool", ["moduleID", "flagID", "trueOrFalse"], "Changes the game flag, be very careful")
-	Console.addCommand("clearmoduleflag", self, "consoleClearModuleFlag", ["moduleID", "flagID"], "Resets the game flag, be very careful")
-	
-func startNewGame():
 	for scene in sceneStack:
 		scene.queue_free()
 	sceneStack = []
@@ -92,6 +86,18 @@ func startNewGame():
 	runScene("IntroScene")
 	#runScene("FightScene", ["testchar"])
 	#runScene("FightScene", ["tavi"])
+	runCurrentScene()
+	GM.ui.onTimePassed(0)
+	
+func _on_Main_ready():
+	var pc = playerScene.instance()
+	originalPC = pc
+	GM.pc = pc
+	connectSignalsToPC(pc)
+	add_child(pc)
+	
+	runScene("MainMenu")
+	runCurrentScene()
 
 func runScene(id, _args = []):
 	var scene = GlobalRegistry.createScene(id)
@@ -132,18 +138,12 @@ func endCurrentScene():
 	var currentScene = getCurrentScene()
 	if(currentScene != null):
 		currentScene.endScene()
-
-func _on_GameUI_on_option_button(method, args):
-	pickOption(method, args)
 	
 func pickOption(method, args):
 	GM.main.clearMessages()
 	GlobalTooltip.resetTooltips()
 	
-	if(GM.ES.checkButtonInput(method, args)):
-		pass
-		
-	elif(sceneStack.size() > 0):
+	if !(GM.ES.checkButtonInput(method, args) && (sceneStack.size() > 0)):
 		sceneStack.back().react(method, args)
 		#if(sceneStack.back().react(method, args)):
 		#	return
@@ -153,9 +153,9 @@ func pickOption(method, args):
 func runCurrentScene():
 	if(sceneStack.size() > 0):
 		sceneStack.back().run()
+		GM.ui.trimLineEndings()
 		
 		if(messages.size() > 0):
-			GM.ui.trimLineEndings()
 			GM.ui.say("\n\n")
 			GM.ui.say("[center][i]")
 			for message in messages:
@@ -174,14 +174,12 @@ func canSave():
 	for scene in sceneStack:
 		if(!scene.canSave()):
 			return false
-	
 	return true
 
 func supportsBattleTurns():
 	for scene in sceneStack:
 		if(scene.supportsBattleTurns()):
 			return true
-	
 	return false
 
 func saveData():
@@ -321,14 +319,10 @@ func startNewDay():
 	return timediff
 
 func getVisibleTime():
-	var text = ""
 	if(isVeryLate()):
-		text = "Night time"
+		return ["Night time", str(currentDay)]
 	else:
-		text = Util.getTimeStringHHMM(timeOfDay)
-	
-	text += ", day " + str(currentDay)
-	return text
+		return [Util.getTimeStringHHMM(timeOfDay), str(currentDay)]
 
 func getTime():
 	return timeOfDay
@@ -436,7 +430,7 @@ func resolveCustomCharacterName(charID):
 	return null
 
 func updateStuff():
-	if(GM.pc == null):
+	if(!is_instance_valid(GM.pc)):
 		return
 	
 	var playerIsBlindfolded = GM.pc.isBlindfolded()
@@ -657,6 +651,8 @@ func getDebugActions():
 		},
 	]
 
+# I see you like sceletons?)))
+
 func doDebugAction(id, args = {}):
 	print(id, " ", args)
 	
@@ -743,3 +739,6 @@ func consoleClearFlag(flagID):
 func consoleClearModuleFlag(moduleID, flagID):
 	clearModuleFlag(moduleID, flagID)
 	Console.printLine("Flag cleared")
+
+func _on_Main_on_option_button(method, args):
+	pickOption(method, args)

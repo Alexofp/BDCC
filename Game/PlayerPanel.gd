@@ -4,10 +4,9 @@ onready var grid = $FlexGridContainer
 onready var nameLabel = $NameLabel
 onready var creditsLabel = $CreditsLabel
 #onready var camera = $ViewportContainer/Viewport/Camera2D
-onready var camera3d = $ViewportWrapper/Viewport/Camera
-onready var stage3d = $ViewportWrapper/Viewport/Stage3D
-onready var tooltip = $CanvasLayer/TooltipDisplay
-onready var viewport = $ViewportWrapper/Viewport
+onready var camera3d = $ViewportWrapper/MarginContainer/Viewport/Camera
+onready var stage3d = $ViewportWrapper/MarginContainer/Viewport/Stage3D
+onready var viewport = $ViewportWrapper/MarginContainer/Viewport
 #onready var viewport = $ViewportContainer/Viewport
 onready var staminaBar = $StaminaBar
 onready var painBar = $PainBar
@@ -27,6 +26,12 @@ func _ready():
 	set_process_unhandled_input(true)
 	
 	camera3d.current = true
+	
+func _physics_process(_delta):
+	if visible:
+		stage3d.translation.x = 0
+	else:
+		stage3d.translation.x = 1000
 
 func loadingSavefileFinished():
 	updateUI()
@@ -68,6 +73,7 @@ func _gui_input(event: InputEvent):
 			previousPosition = event.position
 		else:
 			draggingCamera = false
+	
 	elif draggingCamera and event is InputEventMouseMotion:
 		var delta = previousPosition - event.position
 		camera3d.translate(Vector3(delta.x * camera3d.size / 500.0, -delta.y * camera3d.size / 500.0, 0.0))

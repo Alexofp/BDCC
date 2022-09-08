@@ -1,12 +1,14 @@
 extends Control
 
-onready var slotSlit = $HBoxContainer/PanelContainer/VBoxContainer/SlotList
-onready var bodypartList = $HBoxContainer/PanelContainer/VBoxContainer/BodypartList
-onready var doll = $HBoxContainer/DollWrapper/Viewport/Doll3D
-onready var currentBodypartChoicesList = $HBoxContainer/PanelContainer/VBoxContainer/Control/HBoxContainer/CurrentBodypartChoices
-onready var outputText = $HBoxContainer/PanelContainer/VBoxContainer/Control/HBoxContainer/OutputText
-onready var thicknessSlider = $HBoxContainer/PanelContainer/VBoxContainer/Thickness
-onready var feminitySlider = $HBoxContainer/PanelContainer/VBoxContainer/Feminity
+onready var slotSlit					= $HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/SlotList
+onready var bodypartList				= $HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/BodypartList
+onready var doll 						= $HBoxContainer/DollWrapper/Viewport/Doll3D
+onready var cam3d						= $HBoxContainer/DollWrapper/Viewport/Camera
+onready var currentBodypartChoicesList 	= $HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/Control/HBoxContainer/CurrentBodypartChoices
+onready var outputText 					= $HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/Control/HBoxContainer/OutputText
+onready var thicknessSlider				= $HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/Thickness
+onready var feminitySlider				= $HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/Feminity
+
 var currentSlot
 var bodypartChoices = []
 var bodyparts = {}
@@ -17,8 +19,10 @@ var pickedFemininity = 50
 
 var optionListType = preload("res://UI/Options/OptionListType.tscn")
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
+	doll.translation.x = -1000
+	cam3d.translation.x = -1000
+	
 	thicknessSlider.setOptionName("Thickness")
 	thicknessSlider.setOptionValue(pickedThickness)
 	feminitySlider.setOptionValue(pickedFemininity)

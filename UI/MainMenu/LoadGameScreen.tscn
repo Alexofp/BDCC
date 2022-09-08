@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://GlobalTheme.tres" type="Theme" id=1]
 [ext_resource path="res://UI/MainMenu/SaveGameElement.tscn" type="PackedScene" id=2]
 [ext_resource path="res://UI/MainMenu/LoadGameScreen.gd" type="Script" id=3]
+[ext_resource path="res://UI/FontResources/Normal/BoldFont.tres" type="DynamicFont" id=4]
 
 [node name="LoadGameScreen" type="Control"]
 anchor_right = 1.0
@@ -15,87 +16,103 @@ script = ExtResource( 3 )
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer"]
 margin_right = 1280.0
-margin_bottom = 616.0
+margin_bottom = 666.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="ScrollVBox" type="VBoxContainer" parent="VBoxContainer/ScrollContainer"]
 margin_right = 1280.0
-margin_bottom = 616.0
+margin_bottom = 666.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer/ScrollContainer/ScrollVBox"]
 margin_right = 1280.0
-margin_bottom = 20.0
+margin_bottom = 174.0
 rect_min_size = Vector2( 0, 20 )
+custom_constants/margin_right = 0
+custom_constants/margin_top = 20
+custom_constants/margin_left = 0
+custom_constants/margin_bottom = 20
 
-[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer/ScrollContainer/ScrollVBox"]
-margin_top = 24.0
+[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer/ScrollContainer/ScrollVBox/MarginContainer2"]
+margin_top = 20.0
 margin_right = 1280.0
-margin_bottom = 87.0
+margin_bottom = 154.0
+custom_fonts/bold_font = ExtResource( 4 )
 bbcode_enabled = true
-bbcode_text = "Here you can load your previous game
-Keep in mind that during the early development save structure might change a lot and so your previous saves might not work anymore, sorry. Your best bet would be saving inside your cell when you wanna switch versions"
-text = "Here you can load your previous game
-Keep in mind that during the early development save structure might change a lot and so your previous saves might not work anymore, sorry. Your best bet would be saving inside your cell when you wanna switch versions"
+bbcode_text = "[center]Here you can load your previous games.
+
+[b]Keep in mind that during the early development save structure might change a lot and so your previous saves might not work anymore, sorry.[/b]
+
+Your best bet would be saving inside your cell when you wanna switch versions.[/center]"
+text = "Here you can load your previous games.
+
+Keep in mind that during the early development save structure might change a lot and so your previous saves might not work anymore, sorry.
+
+Your best bet would be saving inside your cell when you wanna switch versions."
 fit_content_height = true
 
 [node name="HSeparator" type="HSeparator" parent="VBoxContainer/ScrollContainer/ScrollVBox"]
-margin_top = 91.0
+margin_top = 178.0
 margin_right = 1280.0
-margin_bottom = 95.0
+margin_bottom = 182.0
 
-[node name="SavesContainer" type="VBoxContainer" parent="VBoxContainer/ScrollContainer/ScrollVBox"]
-margin_top = 99.0
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/ScrollContainer/ScrollVBox"]
+margin_top = 186.0
 margin_right = 1280.0
-margin_bottom = 161.0
+margin_bottom = 288.0
+custom_constants/margin_right = 0
+custom_constants/margin_top = 20
+custom_constants/margin_left = 0
+custom_constants/margin_bottom = 20
+
+[node name="SavesContainer" type="VBoxContainer" parent="VBoxContainer/ScrollContainer/ScrollVBox/MarginContainer"]
+margin_top = 20.0
+margin_right = 1280.0
+margin_bottom = 82.0
 size_flags_horizontal = 3
 custom_constants/separation = 10
 
-[node name="SaveGameElement" parent="VBoxContainer/ScrollContainer/ScrollVBox/SavesContainer" instance=ExtResource( 2 )]
+[node name="SaveGameElement" parent="VBoxContainer/ScrollContainer/ScrollVBox/MarginContainer/SavesContainer" instance=ExtResource( 2 )]
 
-[node name="SaveGameElement2" parent="VBoxContainer/ScrollContainer/ScrollVBox/SavesContainer" instance=ExtResource( 2 )]
+[node name="SaveGameElement2" parent="VBoxContainer/ScrollContainer/ScrollVBox/MarginContainer/SavesContainer" instance=ExtResource( 2 )]
 margin_top = 36.0
 margin_bottom = 62.0
 
-[node name="GridContainer" type="GridContainer" parent="VBoxContainer"]
-margin_top = 620.0
+[node name="GridContainer" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 670.0
 margin_right = 1280.0
 margin_bottom = 720.0
-rect_min_size = Vector2( 0, 100 )
-columns = 5
+rect_min_size = Vector2( 0, 50 )
 
 [node name="CloseButton" type="Button" parent="VBoxContainer/GridContainer"]
-margin_right = 253.0
-margin_bottom = 26.0
+margin_right = 317.0
+margin_bottom = 50.0
 size_flags_horizontal = 3
 text = "Close"
 
 [node name="DeleteButton" type="Button" parent="VBoxContainer/GridContainer"]
-margin_left = 257.0
-margin_right = 510.0
-margin_bottom = 26.0
+margin_left = 321.0
+margin_right = 638.0
+margin_bottom = 50.0
 size_flags_horizontal = 3
 text = "Delete Save"
 
 [node name="ImportButton" type="Button" parent="VBoxContainer/GridContainer"]
-margin_left = 514.0
-margin_right = 767.0
-margin_bottom = 26.0
+margin_left = 642.0
+margin_right = 959.0
+margin_bottom = 50.0
 size_flags_horizontal = 3
 text = "Import Save"
 
 [node name="SavesButton" type="Button" parent="VBoxContainer/GridContainer"]
-margin_left = 771.0
-margin_right = 1024.0
-margin_bottom = 26.0
+margin_left = 963.0
+margin_right = 1280.0
+margin_bottom = 50.0
 size_flags_horizontal = 3
 text = "Saves folder"
 
@@ -108,12 +125,11 @@ margin_left = -300.0
 margin_top = -200.0
 margin_right = 300.0
 margin_bottom = 200.0
+rect_min_size = Vector2( 150, 52.5 )
 window_title = "Export Save"
 resizable = true
 access = 2
 filters = PoolStringArray( "*.save ; Save file" )
-current_dir = "/"
-current_path = "/"
 
 [node name="ImportSaveDialog" type="FileDialog" parent="."]
 anchor_left = 0.5
@@ -124,13 +140,12 @@ margin_left = -300.0
 margin_top = -200.0
 margin_right = 300.0
 margin_bottom = 200.0
-window_title = "Open a File"
+rect_min_size = Vector2( 150, 52.5 )
+window_title = "Открыть файл"
 resizable = true
 mode = 0
 access = 2
 filters = PoolStringArray( "*.save ; Save file" )
-current_dir = "/"
-current_path = "/"
 
 [node name="SaveExportedAlert" type="AcceptDialog" parent="."]
 anchor_left = 0.5

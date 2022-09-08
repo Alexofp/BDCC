@@ -50,42 +50,42 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_top = 32.0
 margin_right = 1280.0
-margin_bottom = 48.0
+margin_bottom = 54.0
 colorGradient = SubResource( 10 )
 propertyName = "Level"
 
 [node name="PainBar" parent="." instance=ExtResource( 4 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 52.0
+margin_top = 58.0
 margin_right = 1280.0
-margin_bottom = 68.0
+margin_bottom = 80.0
 colorGradient = SubResource( 8 )
 propertyName = "Pain"
 
 [node name="LustBar" parent="." instance=ExtResource( 4 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 72.0
+margin_top = 84.0
 margin_right = 1280.0
-margin_bottom = 88.0
+margin_bottom = 106.0
 colorGradient = SubResource( 9 )
 propertyName = "Lust"
 
 [node name="StaminaBar" parent="." instance=ExtResource( 4 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 92.0
+margin_top = 110.0
 margin_right = 1280.0
-margin_bottom = 108.0
+margin_bottom = 132.0
 colorGradient = SubResource( 11 )
 propertyName = "Stamina"
 
 [node name="StatusEffectsPanel" parent="." instance=ExtResource( 3 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 112.0
+margin_top = 136.0
 margin_right = 1280.0
-margin_bottom = 112.0
+margin_bottom = 136.0
 rect_min_size = Vector2( 0, 0 )
 showTooltipBelow = true

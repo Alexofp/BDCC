@@ -314,10 +314,10 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Game/World/GameRoom.gd"
 }, {
-"base": "Control",
+"base": "HBoxContainer",
 "class": "GameUI",
 "language": "GDScript",
-"path": "res://Game/GameUI.gd"
+"path": "res://UI/MainMenu/MainMenu.gd"
 }, {
 "base": "Node2D",
 "class": "GameWorld",
@@ -634,6 +634,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scenes/SceneBase.gd"
 }, {
+"base": "Button",
+"class": "SceneOptionButton",
+"language": "GDScript",
+"path": "res://Game/SceneOptionButton.gd"
+}, {
 "base": "ItemState",
 "class": "ShirtAndShortsState",
 "language": "GDScript",
@@ -880,6 +885,7 @@ _global_script_class_icons={
 "SaveConversion": "",
 "SayParser": "",
 "SceneBase": "",
+"SceneOptionButton": "",
 "ShirtAndShortsState": "",
 "SimpleParser": "",
 "Skill": "",
@@ -941,6 +947,7 @@ window/stretch/aspect="expand"
 
 [gui]
 
+theme/custom_font="res://UI/FontResources/GlobalDefaultFont.tres"
 timers/tooltip_delay_sec=0.1
 
 [importer_defaults]

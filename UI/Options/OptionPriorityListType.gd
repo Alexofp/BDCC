@@ -21,7 +21,7 @@ func repopulateList():
 	for valueData in myvalues:
 		if(isImagesPacks):
 			var imagePack = GlobalRegistry.getImagePack(valueData)
-			if(imagePack != null):
+			if(is_instance_valid(imagePack)):
 				$List.add_item(imagePack.getArtist())
 			else:
 				$List.add_item(valueData)

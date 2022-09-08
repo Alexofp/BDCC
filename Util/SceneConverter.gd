@@ -1,4 +1,4 @@
-extends Control
+extends MarginContainer
 
 # Can be used to quickly convert a scene from a google docs document into code
 

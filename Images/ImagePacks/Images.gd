@@ -6,10 +6,9 @@ static func getCharacter(characterID: String, variant: Array):
 	
 	for packID in packs:
 		var pack = GlobalRegistry.getImagePack(packID)
-		if(pack == null):
-			continue
-		var imagePath = pack.getCharacterImage(characterID, variant)
-		if(imagePath != null):
-			return [imagePath, pack.getArtist()]
+		if(is_instance_valid(pack)):
+			var imagePath = pack.getCharacterImage(characterID, variant)
+			if(imagePath != ""):
+				return [imagePath, pack.getArtist()]
 		
-	return null
+	return []

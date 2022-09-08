@@ -57,7 +57,7 @@ export(bool) var loctag_GuardsEncounter = false
 export(int, FLAGS, "Inmates", "Guards") var population = 0
 
 var astarID
-export(PoolStringArray) var astarConnectedTo = []
+export (PoolStringArray) var astarConnectedTo
 
 func getPopulation():
 	var result = []

@@ -97,6 +97,7 @@ func loadGame(_path):
 	save_game.open(_path, File.READ)
 	#var saveData = parse_json(save_game.get_as_text())
 	var jsonResult = JSON.parse(save_game.get_as_text())
+	
 	if(jsonResult.error != OK):
 		assert(false, "Trying to load a bad save file "+str(_path))
 		return
@@ -106,17 +107,19 @@ func loadGame(_path):
 	save_game.close()
 
 func switchToGameAndLoad(_path):
-	var _ok = get_tree().change_scene("res://Game/MainScene.tscn")
+	#var _ok = get_tree().change_scene("res://Game/MainScene.tscn")
+	GM.ui.prepareToGame()
 	yield(get_tree(),"idle_frame")
 	loadGame(_path)
 
 func switchToGameAndResumeLatestSave():
 	var saves: Array = getSavesSortedByDate()
-	if(saves.size() == 0):
-		return
-	var _ok = get_tree().change_scene("res://Game/MainScene.tscn")
-	yield(get_tree(),"idle_frame")
-	loadGame(saves[0])
+	
+	if(saves.size() > 0):
+		#var _ok = get_tree().change_scene("res://Game/MainScene.tscn")
+		GM.ui.prepareToGame()
+		yield(get_tree(),"idle_frame")
+		loadGame(saves[0])
 
 func getLoadedSavefileVersion():
 	return loadedSavefileVersion

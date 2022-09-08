@@ -1,78 +1,110 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://UI/MainMenu/LoadGameScreen.tscn" type="PackedScene" id=1]
 [ext_resource path="res://GlobalTheme.tres" type="Theme" id=2]
 [ext_resource path="res://UI/MainMenu/InGameMenu.gd" type="Script" id=3]
 [ext_resource path="res://UI/MainMenu/SaveGameScreen.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Themes/TabContainerEmptyStyle.tres" type="StyleBox" id=5]
+[ext_resource path="res://Fonts/Titillium-Regular.otf" type="DynamicFontData" id=6]
+[ext_resource path="res://Images/Splash/logo.png" type="Texture" id=7]
 
-[node name="InGameMenu" type="Control"]
+[sub_resource type="DynamicFont" id=1]
+size = 48
+outline_size = 2
+outline_color = Color( 0, 0, 0, 1 )
+use_filter = true
+font_data = ExtResource( 6 )
+
+[node name="InGameMenu" type="TabContainer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource( 2 )
+custom_styles/panel = ExtResource( 5 )
+tabs_visible = false
 script = ExtResource( 3 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+
+[node name="MainMenu" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( -585, -55 )
+custom_constants/separation = 50
+alignment = 1
+
+[node name="HBoxContainer" type="VBoxContainer" parent="MainMenu"]
+margin_top = 121.0
+margin_right = 1280.0
+margin_bottom = 289.0
+custom_constants/separation = 20
+alignment = 1
+
+[node name="Title" type="Label" parent="MainMenu/HBoxContainer"]
+margin_right = 1280.0
+margin_bottom = 48.0
+size_flags_vertical = 1
+custom_fonts/font = SubResource( 1 )
+text = "Broken Dreams Correctional Center"
+align = 1
+valign = 1
+
+[node name="TextureRect" type="TextureRect" parent="MainMenu/HBoxContainer"]
+margin_top = 68.0
+margin_right = 1280.0
+margin_bottom = 168.0
+rect_min_size = Vector2( 100, 100 )
+texture = ExtResource( 7 )
+expand = true
+stretch_mode = 6
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainMenu"]
+margin_left = 540.0
+margin_top = 339.0
+margin_right = 740.0
+margin_bottom = 599.0
+rect_min_size = Vector2( 200, 200 )
+size_flags_horizontal = 6
+custom_constants/separation = 20
+
+[node name="ResumeButton" type="Button" parent="MainMenu/VBoxContainer"]
+margin_right = 200.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 0, 50 )
+text = "Resume"
+
+[node name="SaveGameButton2" type="Button" parent="MainMenu/VBoxContainer"]
+margin_top = 70.0
+margin_right = 200.0
+margin_bottom = 120.0
+rect_min_size = Vector2( 0, 50 )
+text = "Save Game"
+
+[node name="LoadGameButton" type="Button" parent="MainMenu/VBoxContainer"]
+margin_top = 140.0
+margin_right = 200.0
+margin_bottom = 190.0
+rect_min_size = Vector2( 0, 50 )
+text = "Load Game"
+
+[node name="MainMenuButton" type="Button" parent="MainMenu/VBoxContainer"]
+margin_top = 210.0
+margin_right = 200.0
+margin_bottom = 260.0
+rect_min_size = Vector2( 0, 50 )
+text = "Main Menu"
 
 [node name="LoadGameScreen" parent="." instance=ExtResource( 1 )]
 visible = false
+margin_left = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
 
 [node name="SaveGameScreen" parent="." instance=ExtResource( 4 )]
 visible = false
 
-[node name="MainMenu" type="Control" parent="."]
-anchor_right = 1.0
-anchor_bottom = 1.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="MainMenuCenter" type="CenterContainer" parent="MainMenu"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_right = 67.0
-margin_bottom = 32.0
-size_flags_horizontal = 3
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="VBoxContainer" type="VBoxContainer" parent="MainMenu/MainMenuCenter"]
-margin_left = 620.0
-margin_top = 294.0
-margin_right = 727.0
-margin_bottom = 458.0
-size_flags_horizontal = 3
-custom_constants/separation = 20
-
-[node name="ResumeButton" type="Button" parent="MainMenu/MainMenuCenter/VBoxContainer"]
-margin_right = 107.0
-margin_bottom = 26.0
-text = "Resume"
-
-[node name="SaveGameButton2" type="Button" parent="MainMenu/MainMenuCenter/VBoxContainer"]
-margin_top = 46.0
-margin_right = 107.0
-margin_bottom = 72.0
-text = "Save Game"
-
-[node name="LoadGameButton" type="Button" parent="MainMenu/MainMenuCenter/VBoxContainer"]
-margin_top = 92.0
-margin_right = 107.0
-margin_bottom = 118.0
-text = "Load Game"
-
-[node name="MainMenuButton" type="Button" parent="MainMenu/MainMenuCenter/VBoxContainer"]
-margin_top = 138.0
-margin_right = 107.0
-margin_bottom = 164.0
-text = "Main Menu"
-
+[connection signal="pressed" from="MainMenu/VBoxContainer/ResumeButton" to="." method="_on_ResumeButton_pressed"]
+[connection signal="pressed" from="MainMenu/VBoxContainer/SaveGameButton2" to="." method="_on_SaveGameButton2_pressed"]
+[connection signal="pressed" from="MainMenu/VBoxContainer/LoadGameButton" to="." method="_on_LoadGameButton_pressed"]
+[connection signal="pressed" from="MainMenu/VBoxContainer/MainMenuButton" to="." method="_on_MainMenuButton_pressed"]
 [connection signal="onClosePressed" from="LoadGameScreen" to="." method="_on_LoadGameScreen_onClosePressed"]
 [connection signal="onClosePressed" from="SaveGameScreen" to="." method="_on_SaveGameScreen_onClosePressed"]
-[connection signal="pressed" from="MainMenu/MainMenuCenter/VBoxContainer/ResumeButton" to="." method="_on_ResumeButton_pressed"]
-[connection signal="pressed" from="MainMenu/MainMenuCenter/VBoxContainer/SaveGameButton2" to="." method="_on_SaveGameButton2_pressed"]
-[connection signal="pressed" from="MainMenu/MainMenuCenter/VBoxContainer/LoadGameButton" to="." method="_on_LoadGameButton_pressed"]
-[connection signal="pressed" from="MainMenu/MainMenuCenter/VBoxContainer/MainMenuButton" to="." method="_on_MainMenuButton_pressed"]

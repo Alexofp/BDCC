@@ -1,57 +1,47 @@
 extends Control
 
-onready var modsLabel = $VBoxContainer/ScrollContainer/VBoxContainer/ModsLabel
-signal onClosePressed
-signal in_focus
 var showedModDialog = false
 
+onready var modsLabel 		= $VBoxContainer/ScrollContainer/VBoxContainer/MarginContainer/ModsLabel
+onready var warningLabel 	= $VBoxContainer/ScrollContainer/VBoxContainer/MarginContainer3/Warning
+
+signal in_focus
+
 func _ready():
-	if(OS.get_name() in ["Android", "iOS", "HTML5"]):
-		$VBoxContainer/GridContainer/ModsFolderButton.disabled = true
-	else:
-		$VBoxContainer/GridContainer/RemoveModsButton.disabled = true
-
-	if(OS.get_name() == "Android"):
-		$VBoxContainer/GridContainer/ModsFolderButton.disabled = true
-		$VBoxContainer/GridContainer/RemoveModsButton.disabled = true
-
 	if OS.get_name() == "HTML5" and OS.has_feature("JavaScript"):
 		_define_js()
-
-	var text = "To install a mod drag it into the mods folder and restart the game. Mods are loaded in alphabetical order.\n\n"
+		
+	var war_text = "[center]To install a mod drag it into the mods folder and restart the game. Mods are loaded in alphabetical order."
+	var text = ""
 	if(!GlobalRegistry.hasModSupport()):
-		text += "! Mods aren't supported when running the game from the editor, this is godot issue. Export the game and run it standalone to get mod support !\n\n"
+		war_text += "\n\n[b]Mods aren't supported when running the game from the editor, this is godot issue. Export the game and run it standalone to get mod support![/b]"
 		# read more here: https://github.com/godotengine/godot/issues/19815
 	else:
 		var mods = GlobalRegistry.getLoadedMods()
-		text += "Loaded mods ("+str(mods.size())+"):\n"
+		
 		if(mods.size() == 0):
-			text += "None loaded\n"
+			text += "[b]None mods found.[/b]\n"
 		else:
-			var i = 1
+			var mod_number = 0
+			
+			text += "[b]Loaded mods ("+str(mods.size())+"):[/b]\n"
+			
 			for mod in mods:
-				text += str(i) + ") " + mod +"\n"
-				i += 1
+				mod_number += 1
+				text += str(mod_number) + " - " + mod + ".\n"
 		
 		text += "\n"
 		
-	text += "Currently loaded modules:\n"
+	text += "[b]Currently loaded modules:[/b]\n"
+	
 	var allModules = GlobalRegistry.getModules()
+	
 	for moduleID in allModules:
 		var module: Module = allModules[moduleID]
-		
-		text += module.id + " by " + module.author+"\n"
-		
-		
-	modsLabel.bbcode_text = text
+		text += "- " + module.id + " by " + module.author+".\n"
 	
-func _on_CloseButton_pressed():
-	emit_signal("onClosePressed")
-
-
-func _on_ModsFolderButton_pressed():
-	var _ok = OS.shell_open(ProjectSettings.globalize_path("user://mods"))
-
+	warningLabel.bbcode_text = war_text + "[/center]"
+	modsLabel.bbcode_text = text
 
 func _on_ImportModDialog_file_selected(path:String):
 	print(path)
@@ -59,7 +49,7 @@ func _on_ImportModDialog_file_selected(path:String):
 	d.copy(path, "user://mods/"+path.get_file())
 	if(!showedModDialog):
 		showedModDialog = true
-		$ModAcceptDialog.visible = true
+		$ModAcceptDialog.popup_centered()
 
 # Copied from https://github.com/Orama-Interactive/Pixelorama/blob/master/src/Autoload/HTML5FileExchange.gd
 # Thanks to Pixelorama devs
@@ -127,8 +117,7 @@ func readModHTML5():
 	
 	return [file_name, file_data]
 
-
-func _on_AddModButton_pressed():
+func importMod():
 	if OS.get_name() == "HTML5":
 		var modDataAndFileName = yield(readModHTML5(), "completed")
 		if(modDataAndFileName == null || modDataAndFileName.size() != 2):
@@ -169,10 +158,8 @@ func _on_AddModButton_pressed():
 		
 		$ImportModDialog.popup_centered()
 
-
-func _on_RemoveModsButton_pressed():
-	$ConfirmationDialog.visible = true
-
+func showRMpopup():
+	$ConfirmationDialog.popup_centered()
 
 func _on_ConfirmationDialog_confirmed():
 	var modsFolder = "user://mods"
@@ -192,7 +179,3 @@ func _on_ConfirmationDialog_confirmed():
 		OPTIONS.saveToFile()
 	else:
 		Log.printerr("An error occurred when trying to access the path "+modsFolder)
-
-
-func _on_WikiButton_pressed():
-	var _ok = OS.shell_open("https://github.com/Alexofp/BDCC/wiki")

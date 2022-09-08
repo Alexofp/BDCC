@@ -18,7 +18,7 @@ func addCharacter(characterID:String, variant:Array, path:String):
 
 func getCharacterImage(characterID: String, variant: Array):
 	if(!characters.has(characterID)):
-		return null
+		return ""
 	
 	var subIndex = "default"
 	if(variant.size() > 0):
@@ -27,7 +27,7 @@ func getCharacterImage(characterID: String, variant: Array):
 		
 	if(!characters[characterID].has(subIndex)):
 		if(!characters[characterID].has("default")):
-			return null
+			return ""
 		return characters[characterID]["default"]
 	
 	return characters[characterID][subIndex]

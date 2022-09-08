@@ -8,16 +8,16 @@ signal onExportButtonPressed(saveFile)
 var showLoadButton = true
 var isInDeleteMode = false
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass
-	#setDeleteMode(false)
+func getSavePath():
+	return saveFile
 
 func setSaveFile(path):
 	var file = File.new()
 	var fileModifTime = file.get_modified_time(path)
+	
 	if(fileModifTime is String):
 		assert(false)
+	
 	var fileModifTimeDict = OS.get_datetime_from_unix_time(fileModifTime)
 	var fileModifTimeString = Util.datetimeToRFC113(fileModifTimeDict)
 	
@@ -25,8 +25,9 @@ func setSaveFile(path):
 	
 	var gameData = SAVE.loadGameInformationFromSave(path)
 	var extra = ""
+	
 	if(gameData == null):
-		extra = "Couldn't load game info, bad save?"
+		extra = "Couldn't load game info!.. Bad save?.."
 	else:
 		extra = "Name: "+str(gameData["gamename"])+" - Day: "+str(gameData["currentDay"])+" - Credits: "+str(gameData["credits"])
 		extra += " - Time: "+str(Util.getTimeStringHHMM(gameData["timeOfDay"]))
@@ -37,23 +38,14 @@ func setSaveFile(path):
 func _on_LoadButton_pressed():
 	emit_signal("onLoadButtonPressed", saveFile)
 
-
 func _on_DeleteButton_pressed():
 	emit_signal("onDeleteButtonPressed", saveFile)
+	queue_free() #Keep it simple!!! If you havn't any steps what can revert action, free node!
 
 func updateButtons():
-	if(isInDeleteMode):
-		$LoadButton.visible = false
-		$ExportButton.visible = false
-		$DeleteButton.visible = true
-	else:
-		$DeleteButton.visible = false
-		if(showLoadButton):
-			$LoadButton.visible = true
-			$ExportButton.visible = true
-		else:
-			$LoadButton.visible = false
-			$ExportButton.visible = false
+	$LoadButton.visible = !isInDeleteMode && showLoadButton #Erm... Why in old func you was needed this second var?
+	$ExportButton.visible = !isInDeleteMode && showLoadButton #Better leave logic here...
+	$DeleteButton.visible = isInDeleteMode
 
 func setDeleteMode(m):
 	isInDeleteMode = m
@@ -62,7 +54,6 @@ func setDeleteMode(m):
 func setShowLoadButton(m):
 	showLoadButton = m
 	updateButtons()
-
 
 func _on_ExportButton_pressed():
 	emit_signal("onExportButtonPressed", saveFile)

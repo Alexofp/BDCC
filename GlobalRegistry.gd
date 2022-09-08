@@ -277,7 +277,7 @@ func registerScene(path: String, creator = null):
 
 func getSceneCreator(id: String):
 	if(!sceneCreators.has(id)):
-		return null
+		return ""
 	return sceneCreators[id]
 
 func createScene(id: String):
@@ -392,8 +392,9 @@ func getCharacter(id: String):
 		return GM.pc
 	
 	if(!characters.has(id)):
-		Log.printerr("ERROR: character with the id "+id+" wasn't found")
+		if (id != ""): Log.printerr("ERROR: character with the id "+id+" wasn't found")
 		return null
+	
 	return characters[id]
 
 func getCharacters():
@@ -978,7 +979,6 @@ func registerMapFloorFolder(folder: String):
 
 func getMapFloors():
 	return mapFloors
-
 
 func registerImagePack(path: String):
 	var imagepack = load(path)

@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://UI/ModsMenu/ModsMenu.gd" type="Script" id=1]
+[ext_resource path="res://UI/FontResources/Normal/BoldFont.tres" type="DynamicFont" id=2]
 
 [node name="ModsMenu" type="Control"]
 anchor_right = 1.0
@@ -15,84 +16,70 @@ anchor_bottom = 1.0
 
 [node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer"]
 margin_right = 1280.0
-margin_bottom = 616.0
+margin_bottom = 720.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/ScrollContainer"]
 margin_right = 1280.0
-margin_bottom = 616.0
+margin_bottom = 720.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer/ScrollContainer/VBoxContainer"]
 margin_right = 1280.0
-margin_bottom = 20.0
+margin_bottom = 64.0
 rect_min_size = Vector2( 0, 20 )
+custom_constants/margin_right = 0
+custom_constants/margin_top = 40
+custom_constants/margin_left = 0
 
-[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer/ScrollContainer/VBoxContainer"]
-margin_top = 24.0
+[node name="RichTextLabel" type="Label" parent="VBoxContainer/ScrollContainer/VBoxContainer/MarginContainer2"]
+margin_top = 40.0
 margin_right = 1280.0
-margin_bottom = 39.0
-bbcode_enabled = true
-bbcode_text = "Mods"
-text = "Mods"
-fit_content_height = true
+margin_bottom = 64.0
+custom_fonts/font = ExtResource( 2 )
+text = "MODS"
+align = 1
 
 [node name="HSeparator" type="HSeparator" parent="VBoxContainer/ScrollContainer/VBoxContainer"]
-margin_top = 43.0
+margin_top = 68.0
 margin_right = 1280.0
-margin_bottom = 47.0
+margin_bottom = 72.0
 
-[node name="ModsLabel" type="RichTextLabel" parent="VBoxContainer/ScrollContainer/VBoxContainer"]
-margin_top = 51.0
+[node name="MarginContainer3" type="MarginContainer" parent="VBoxContainer/ScrollContainer/VBoxContainer"]
+margin_top = 76.0
 margin_right = 1280.0
-margin_bottom = 66.0
+margin_bottom = 97.0
+
+[node name="Warning" type="RichTextLabel" parent="VBoxContainer/ScrollContainer/VBoxContainer/MarginContainer3"]
+margin_right = 1280.0
+margin_bottom = 21.0
+custom_fonts/bold_font = ExtResource( 2 )
+bbcode_enabled = true
+fit_content_height = true
+
+[node name="HSeparator2" type="HSeparator" parent="VBoxContainer/ScrollContainer/VBoxContainer"]
+margin_top = 101.0
+margin_right = 1280.0
+margin_bottom = 105.0
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/ScrollContainer/VBoxContainer"]
+margin_top = 109.0
+margin_right = 1280.0
+margin_bottom = 150.0
+custom_constants/margin_top = 10
+custom_constants/margin_bottom = 10
+
+[node name="ModsLabel" type="RichTextLabel" parent="VBoxContainer/ScrollContainer/VBoxContainer/MarginContainer"]
+margin_top = 10.0
+margin_right = 1280.0
+margin_bottom = 31.0
 focus_mode = 2
+custom_fonts/bold_font = ExtResource( 2 )
 bbcode_enabled = true
 fit_content_height = true
 selection_enabled = true
-
-[node name="GridContainer" type="GridContainer" parent="VBoxContainer"]
-margin_top = 620.0
-margin_right = 1280.0
-margin_bottom = 720.0
-rect_min_size = Vector2( 0, 100 )
-columns = 5
-
-[node name="CloseButton" type="Button" parent="VBoxContainer/GridContainer"]
-margin_right = 252.0
-margin_bottom = 20.0
-size_flags_horizontal = 3
-text = "Close"
-
-[node name="ModsFolderButton" type="Button" parent="VBoxContainer/GridContainer"]
-margin_left = 256.0
-margin_right = 508.0
-margin_bottom = 20.0
-size_flags_horizontal = 3
-text = "Open mods folder"
-
-[node name="AddModButton" type="Button" parent="VBoxContainer/GridContainer"]
-margin_left = 512.0
-margin_right = 764.0
-margin_bottom = 20.0
-size_flags_horizontal = 3
-text = "Import mod"
-
-[node name="RemoveModsButton" type="Button" parent="VBoxContainer/GridContainer"]
-margin_left = 768.0
-margin_right = 1020.0
-margin_bottom = 20.0
-size_flags_horizontal = 3
-text = "Delete ALL mods"
-
-[node name="WikiButton" type="Button" parent="VBoxContainer/GridContainer"]
-margin_left = 1024.0
-margin_right = 1276.0
-margin_bottom = 20.0
-size_flags_horizontal = 3
-text = "Modding wiki"
 
 [node name="ImportModDialog" type="FileDialog" parent="."]
 anchor_left = 0.5
@@ -103,13 +90,12 @@ margin_left = -300.0
 margin_top = -200.0
 margin_right = 300.0
 margin_bottom = 200.0
-window_title = "Open a File"
+rect_min_size = Vector2( 150, 52.5 )
+window_title = "Открыть файл"
 resizable = true
 mode = 0
 access = 2
 filters = PoolStringArray( "*.zip, *.pck ; Mod file" )
-current_dir = "/"
-current_path = "/"
 
 [node name="ModAcceptDialog" type="AcceptDialog" parent="."]
 anchor_left = 0.5
@@ -132,6 +118,8 @@ margin_left = -211.5
 margin_top = -58.0
 margin_right = 211.5
 margin_bottom = 58.0
+rect_min_size = Vector2( 150, 52.5 )
+window_title = "Подтверждение..."
 dialog_text = "This will remove all mods in your mods folder. Are you sure?
 
 Restart the game to let the action take effect"
@@ -145,11 +133,7 @@ margin_left = -247.5
 margin_top = -57.0
 margin_right = 247.5
 margin_bottom = 57.0
+window_title = "Внимание!"
 
-[connection signal="pressed" from="VBoxContainer/GridContainer/CloseButton" to="." method="_on_CloseButton_pressed"]
-[connection signal="pressed" from="VBoxContainer/GridContainer/ModsFolderButton" to="." method="_on_ModsFolderButton_pressed"]
-[connection signal="pressed" from="VBoxContainer/GridContainer/AddModButton" to="." method="_on_AddModButton_pressed"]
-[connection signal="pressed" from="VBoxContainer/GridContainer/RemoveModsButton" to="." method="_on_RemoveModsButton_pressed"]
-[connection signal="pressed" from="VBoxContainer/GridContainer/WikiButton" to="." method="_on_WikiButton_pressed"]
 [connection signal="file_selected" from="ImportModDialog" to="." method="_on_ImportModDialog_file_selected"]
 [connection signal="confirmed" from="ConfirmationDialog" to="." method="_on_ConfirmationDialog_confirmed"]

@@ -1,29 +1,36 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://GlobalTheme.tres" type="Theme" id=1]
 [ext_resource path="res://Util/SceneConverter.gd" type="Script" id=2]
+[ext_resource path="res://Themes/RichTextPretty1.tres" type="StyleBox" id=3]
 
-[node name="SceneConverter" type="Control"]
+[node name="SceneConverter" type="MarginContainer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 theme = ExtResource( 1 )
+custom_constants/margin_right = 20
+custom_constants/margin_top = 20
+custom_constants/margin_left = 20
+custom_constants/margin_bottom = 20
 script = ExtResource( 2 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
-anchor_right = 1.0
-anchor_bottom = 1.0
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 1260.0
+margin_bottom = 700.0
+custom_constants/separation = 5
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="TextEdit" type="TextEdit" parent="VBoxContainer"]
-margin_right = 1280.0
-margin_bottom = 343.0
+margin_right = 1240.0
+margin_bottom = 322.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+custom_styles/focus = ExtResource( 3 )
+custom_styles/normal = ExtResource( 3 )
 text = "The idea of this tool is to use Google docs to write scenes because it's easier there
 
 This is an example of how the input may look like
@@ -49,26 +56,31 @@ The converter doesn't support multiple actions so you will have to rearrange add
 You dance like a happy cat
 
 Life is good"
+wrap_enabled = true
+caret_blink = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="TextEdit2" type="TextEdit" parent="VBoxContainer"]
-margin_top = 347.0
-margin_right = 1280.0
-margin_bottom = 690.0
+margin_top = 327.0
+margin_right = 1240.0
+margin_bottom = 649.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+custom_styles/focus = ExtResource( 3 )
+custom_styles/normal = ExtResource( 3 )
 text = "Output will be here"
 syntax_highlighting = true
+wrap_enabled = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Button" type="Button" parent="VBoxContainer"]
-margin_top = 694.0
-margin_right = 1280.0
-margin_bottom = 720.0
+margin_top = 654.0
+margin_right = 1240.0
+margin_bottom = 680.0
 text = "Convert"
 
 [connection signal="pressed" from="VBoxContainer/Button" to="." method="_on_Button_pressed"]

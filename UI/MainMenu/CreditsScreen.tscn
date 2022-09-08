@@ -25,13 +25,13 @@ __meta__ = {
 
 [node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer"]
 margin_right = 1280.0
-margin_bottom = 616.0
+margin_bottom = 720.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="ScrollVBox" type="VBoxContainer" parent="VBoxContainer/ScrollContainer"]
 margin_right = 1280.0
-margin_bottom = 616.0
+margin_bottom = 720.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -79,7 +79,7 @@ Thanks to [color=#0059FF]Godot team[/color] for creating the engine that this ga
 
 The game uses some icons from [url=https://game-icons.net/]game-icons.net[/url] and [url=https://www.flaticon.com/]flaticon.com[/url]
 
-Thanks to everyone else who I probably forgot..
+Thanks to everyone else who I probably forgot...
 [/center]"
 text = "This game is very early in its development. If you are reading this - thank you!
 
@@ -94,7 +94,7 @@ Thanks to Godot team for creating the engine that this game is running on, it's 
 
 The game uses some icons from game-icons.net and flaticon.com
 
-Thanks to everyone else who I probably forgot..
+Thanks to everyone else who I probably forgot...
 "
 fit_content_height = true
 
@@ -106,28 +106,5 @@ custom_fonts/bold_font = SubResource( 1 )
 bbcode_enabled = true
 fit_content_height = true
 
-[node name="GridContainer" type="GridContainer" parent="VBoxContainer"]
-margin_top = 620.0
-margin_right = 1280.0
-margin_bottom = 720.0
-rect_min_size = Vector2( 0, 100 )
-columns = 5
-
-[node name="CloseButton" type="Button" parent="VBoxContainer/GridContainer"]
-margin_right = 255.0
-margin_bottom = 26.0
-size_flags_horizontal = 3
-text = "Close"
-
-[node name="SupportRahiButton" type="Button" parent="VBoxContainer/GridContainer"]
-margin_left = 259.0
-margin_right = 514.0
-margin_bottom = 26.0
-hint_tooltip = "In case you like my work and wanna support me <3"
-size_flags_horizontal = 3
-text = "Support Rahi"
-
 [connection signal="meta_clicked" from="VBoxContainer/ScrollContainer/ScrollVBox/ContentContainer/RichTextLabel" to="." method="_on_RichTextLabel_meta_clicked"]
 [connection signal="meta_clicked" from="VBoxContainer/ScrollContainer/ScrollVBox/ContentContainer/DonationsLabel" to="." method="_on_RichTextLabel_meta_clicked"]
-[connection signal="pressed" from="VBoxContainer/GridContainer/CloseButton" to="." method="_on_CloseButton_pressed"]
-[connection signal="pressed" from="VBoxContainer/GridContainer/SupportRahiButton" to="." method="_on_SupportRahiButton_pressed"]

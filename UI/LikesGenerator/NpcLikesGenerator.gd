@@ -1,6 +1,6 @@
-extends Control
+extends MarginContainer
 
-onready var optionsList = $HBoxContainer/VBoxContainer/ScrollContainer/Options
+onready var optionsList = $HBoxContainer/ScrollContainer/Options
 var npcLikeLineUI = preload("res://UI/LikesGenerator/NpcLikesLineUI.tscn")
 var linesUi = []
 var linesByTopicID = {}

@@ -1,4 +1,4 @@
-extends Control
+extends MarginContainer
 
 onready var optionsContainer = $VBoxContainer/ScrollContainer/ScrollVBox/OptionsContainer
 var optionsCategoryScene = preload("res://UI/Options/OptionsCategory.tscn")
@@ -9,10 +9,6 @@ var optionCategoryFloat = preload("res://UI/Options/OptionFloatType.tscn")
 var optionCategoryInt = preload("res://UI/Options/OptionIntType.tscn")
 var optionCategoryPriorityList = preload("res://UI/Options/OptionPriorityListType.tscn")
 signal onClosePressed
-
-func _ready():
-	updateOptions()
-
 
 func updateOptions():
 	Util.delete_children(optionsContainer)
@@ -72,6 +68,8 @@ func updateOptions():
 				var _ok2 = optionUIObject.connect("mouse_exited", self, "onOptionMouseExited", [optionUIObject])
 				if(optionUIObject.has_method("setDescription")):
 					optionUIObject.setDescription(optionDescription)
+					
+		$VBoxContainer/GridContainer.visible = !(is_instance_valid(GM.ui) && GM.ui.main_menu_open)
 				
 func onOptionMouseEntered(optionUIObject):
 	if(optionUIObject.has_method("getDescription")):
@@ -86,16 +84,27 @@ func onOptionMouseExited(_optionUIObject):
 func onOptionChanged(categoryID, optionID, optionNewValue):
 	OPTIONS.applyOption(categoryID, optionID, optionNewValue)
 
-
-func _on_RevertButton_pressed():
+func resetToDefalut():
 	OPTIONS.resetToDefaults()
 	updateOptions()
 
+func onCloseSave():
+	OPTIONS.saveToFile()
+	
+func resetRender():
+	OPTIONS.resetRenderSettings()
+	updateOptions()
+
+func _on_RevertButton_pressed():
+	resetToDefalut()
 
 func _on_CloseButton_pressed():
-	OPTIONS.saveToFile()
+	onCloseSave()
 	emit_signal("onClosePressed")
 
-
 func _on_ResetRenderButton_pressed():
-	OPTIONS.resetRenderSettings()
+	resetRender()
+
+func _on_OptionsScreen_visibility_changed():
+	if visible:
+		updateOptions()
