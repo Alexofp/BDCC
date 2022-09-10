@@ -20,6 +20,10 @@ func _init():
 	
 	scenes = [
 			"res://Modules/PortalPantiesModule/AlexRynard/AlexRynardFirstTimeTalk.gd",
+			"res://Modules/PortalPantiesModule/AlexRynard/AlexRynardTalkScene.gd",
+			
+			"res://Modules/PortalPantiesModule/PantiesQuest/AlexRynardStartPantiesQuestScene.gd",
+			"res://Modules/PortalPantiesModule/PantiesQuest/AlexRynardPantiesQuestGivePanties.gd",
 		]
 	characters = []
 	items = [
@@ -27,9 +31,12 @@ func _init():
 	]
 	events = [
 		"res://Modules/PortalPantiesModule/AlexRynard/AlexRynardFirstTalkEvent.gd",
+		"res://Modules/PortalPantiesModule/AlexRynard/AlexRynardTalkEvent.gd",
+		
+		"res://Modules/PortalPantiesModule/PantiesQuest/AlexRynardStartPantiesQuestEvent.gd",
 	]
 	quests = [
-
+		"res://Modules/PortalPantiesModule/PantiesQuest/PortalPantiesQuest.gd",
 	]
 
 func resetFlagsOnNewDay():
