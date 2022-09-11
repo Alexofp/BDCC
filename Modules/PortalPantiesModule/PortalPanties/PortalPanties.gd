@@ -53,3 +53,6 @@ func getHidesParts(_character):
 	return {
 		BodypartSlot.Penis: true,
 	}
+
+func getTakeOffScene():
+	return "PortalPantiesTakeOffScene"
