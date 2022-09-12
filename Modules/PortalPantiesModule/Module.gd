@@ -25,6 +25,8 @@ func _init():
 			"res://Modules/PortalPantiesModule/PantiesQuest/AlexRynardStartPantiesQuestScene.gd",
 			"res://Modules/PortalPantiesModule/PantiesQuest/AlexRynardPantiesQuestGivePanties.gd",
 			"res://Modules/PortalPantiesModule/PortalPanties/PortalPantiesTakeOffScene.gd",
+			
+			"res://Modules/PortalPantiesModule/PortalPantiesEvents/PortalPantiesFirstPokeScene.gd",
 		]
 	characters = []
 	items = [
@@ -35,6 +37,8 @@ func _init():
 		"res://Modules/PortalPantiesModule/AlexRynard/AlexRynardTalkEvent.gd",
 		
 		"res://Modules/PortalPantiesModule/PantiesQuest/AlexRynardStartPantiesQuestEvent.gd",
+		"res://Modules/PortalPantiesModule/PortalPanties/PortalPantiesEvent.gd",
+		"res://Modules/PortalPantiesModule/PortalPantiesEvents/PortalPantiesTestsEvent.gd",
 	]
 	quests = [
 		"res://Modules/PortalPantiesModule/PantiesQuest/PortalPantiesQuest.gd",
@@ -42,3 +46,8 @@ func _init():
 
 func resetFlagsOnNewDay():
 	pass
+
+func registerEventTriggers():
+	GM.ES.registerEventTrigger("PortalPantiesEvent", EventTriggerWeighted.new())
+	GM.ES.registerEventTrigger("PortalPantiesShowerEvent", EventTriggerWeighted.new())
+	GM.ES.registerEventTrigger("PortalPantiesSleepingEvent", EventTriggerWeighted.new())

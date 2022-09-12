@@ -1121,3 +1121,6 @@ func damageClothes():
 				item.receiveDamage()
 				return true
 	return false
+
+func isWearingPortalPanties():
+	return getInventory().hasItemIDEquipped("PortalPanties")
