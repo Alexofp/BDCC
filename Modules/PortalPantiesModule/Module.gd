@@ -27,6 +27,7 @@ func _init():
 			"res://Modules/PortalPantiesModule/PortalPanties/PortalPantiesTakeOffScene.gd",
 			
 			"res://Modules/PortalPantiesModule/PortalPantiesEvents/PortalPantiesFirstPokeScene.gd",
+			"res://Modules/PortalPantiesModule/PortalPantiesEvents/PortalPantiesSleepTestsScene.gd",
 		]
 	characters = []
 	items = [

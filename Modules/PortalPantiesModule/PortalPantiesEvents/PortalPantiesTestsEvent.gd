@@ -5,12 +5,20 @@ func _init():
 
 func registerTriggers(es):
 	es.addTrigger(self, "PortalPantiesEvent")
+	es.addTrigger(self, "PortalPantiesSleepingEvent")
 	
 func react(_triggerID, _args):
-	increaseFlag("PortalPantiesModule.Panties_TestAmmount")
-	runScene("PortalPantiesFirstPokeScene")
-	
-	return true
+	if(_triggerID == "PortalPantiesEvent"):
+		increaseFlag("PortalPantiesModule.Panties_TestAmmount")
+		runScene("PortalPantiesFirstPokeScene")
+		
+		return true
+		
+	if(_triggerID == "PortalPantiesSleepingEvent" && getFlag("PortalPantiesModule.Panties_FirstTestHappened")):
+		#increaseFlag("PortalPantiesModule.Panties_TestAmmount")
+		runScene("PortalPantiesSleepTestsScene")
+		
+		return true
 	
 func getPriority():
 	return 1

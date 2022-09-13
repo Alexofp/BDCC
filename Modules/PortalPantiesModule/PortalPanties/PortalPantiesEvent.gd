@@ -5,6 +5,7 @@ func _init():
 
 func registerTriggers(es):
 	es.addTrigger(self, Trigger.EnteringRoom)
+	es.addTrigger(self, Trigger.WakeUpInCell)
 	
 func react(_triggerID, _args):
 	if(!GM.pc.isWearingPortalPanties()):
@@ -15,6 +16,11 @@ func react(_triggerID, _args):
 		#Replace me with cooldown?
 		if(RNG.chance(10)):
 			return GM.ES.triggerReact("PortalPantiesEvent")
+	
+	if(_triggerID == Trigger.WakeUpInCell):
+		
+		#Replace me with cooldown?
+		return GM.ES.triggerReact("PortalPantiesSleepingEvent")
 	
 	return false
 	
