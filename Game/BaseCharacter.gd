@@ -605,7 +605,11 @@ func getBodypartTooltipInfo(_bodypartSlot):
 	return "error"
 
 func getPenisSize():
-	return 20.0
+	if(!hasBodypart(BodypartSlot.Penis)):
+		return 20.0
+	
+	var bodypart = getBodypart(BodypartSlot.Penis)
+	return bodypart.getLength()
 
 func getFluidType(fluidSource):
 	if(fluidSource == BodilyFluids.FluidSource.Penis):
