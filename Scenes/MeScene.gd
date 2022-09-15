@@ -172,6 +172,10 @@ func _react(_action: String, _args):
 		
 		GM.main.processTime(newt)
 		
+		if(GM.ES.triggerReact(Trigger.Waiting, [newt])):
+			endScene()
+			return
+		
 		setState("")
 		return
 	

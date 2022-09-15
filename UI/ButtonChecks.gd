@@ -14,12 +14,14 @@ enum {
 	HasCondoms,
 	HasReachablePenis,
 	HasReachableVagina,
+	HasPenis,
+	HasVagina,
 	NotStunned,
 	HasStamina,
+	HasCredits,
 }
 
 static func getReasonText(reason):
-	#var args = reason
 	if(reason is Array):
 		reason = reason[0]
 	
@@ -36,8 +38,12 @@ static func getReasonText(reason):
 	if(reason == HasCondoms):
 		return "You don't have any condoms"
 	if(reason == HasReachablePenis):
-		return "You need to have a dick"
+		return "You need to have a reachable dick"
 	if(reason == HasReachableVagina):
+		return "You need to have a reachable pussy"
+	if(reason == HasPenis):
+		return "You need to have a dick"
+	if(reason == HasVagina):
 		return "You need to have a pussy"
 	if(reason == SkillCheck):
 		return ""
@@ -49,6 +55,8 @@ static func getReasonText(reason):
 		return "You can't do this while stunned"
 	if(reason == HasStamina):
 		return "You don't have any stamina to do this"
+	if(reason == HasCredits):
+		return "You need more credits!"
 	return "Error?"
 
 static func check(checks: Array):
@@ -94,11 +102,20 @@ static func check(checks: Array):
 		if(reason == HasReachableVagina):
 			if(!GM.pc.hasReachableVagina()):
 				return reason
+		if(reason == HasPenis):
+			if(!GM.pc.hasPenis()):
+				return reason
+		if(reason == HasVagina):
+			if(!GM.pc.hasVagina()):
+				return reason
 		if(reason == NotStunned):
 			if(GM.pc.hasEffect(StatusEffect.Stunned)):
 				return reason
 		if(reason == HasStamina):
 			if(GM.pc.getStamina() <= 0):
+				return reason
+		if(reason == HasCredits):
+			if(GM.pc.getCredits() < args[1]):
 				return reason
 	return null
 

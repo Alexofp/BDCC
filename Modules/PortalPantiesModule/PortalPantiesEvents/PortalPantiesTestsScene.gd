@@ -1,7 +1,7 @@
 extends "res://Scenes/SceneBase.gd"
 
 func _init():
-	sceneID = "PortalPantiesFirstPokeScene"
+	sceneID = "PortalPantiesTestsScene"
 
 func _reactInit():
 	if(!getFlag("PortalPantiesModule.Panties_FirstTestHappened")):

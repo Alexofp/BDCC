@@ -8,9 +8,12 @@ func registerTriggers(es):
 	es.addTrigger(self, "PortalPantiesSleepingEvent")
 	
 func react(_triggerID, _args):
+	if(getFlag("PortalPantiesModule.Panties_FleshlightsGotStolen") && !GM.QS.isCompleted("PortalPantiesQuest")):
+		return false
+	
 	if(_triggerID == "PortalPantiesEvent"):
 		increaseFlag("PortalPantiesModule.Panties_TestAmmount")
-		runScene("PortalPantiesFirstPokeScene")
+		runScene("PortalPantiesTestsScene")
 		
 		return true
 		
@@ -21,4 +24,4 @@ func react(_triggerID, _args):
 		return true
 	
 func getPriority():
-	return 1
+	return 10

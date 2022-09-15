@@ -55,4 +55,13 @@ func getHidesParts(_character):
 	}
 
 func getTakeOffScene():
+	if(GM.QS.isCompleted("PortalPantiesQuest")):
+		return .getTakeOffScene()
 	return "PortalPantiesTakeOffScene"
+
+func coversBodyparts():
+	return {
+		BodypartSlot.Vagina: true,
+		BodypartSlot.Penis: true,
+		BodypartSlot.Anus: true,
+		}

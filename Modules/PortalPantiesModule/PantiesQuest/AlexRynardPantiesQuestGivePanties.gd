@@ -203,7 +203,7 @@ func _react(_action: String, _args):
 	if(_action == "put_them_on"):
 		GM.pc.getInventory().unequipSlot(InventorySlot.Body)
 		GM.pc.getInventory().forceEquipStoreOtherUnlessRestraint(GlobalRegistry.createItem("PortalPanties"))
-		GM.pc.addExperience(50)
+		addExperienceToPlayer(50)
 		
 	if(_action == "nah"):
 		var item:ItemBase = GM.pc.getInventory().getEquippedItem(InventorySlot.UnderwearBottom)

@@ -4,6 +4,7 @@ class_name Trigger
 const EnteringRoom = "EnteringRoom"
 const EnteringPlayerCell = "EnteringPlayerCell"
 const TakingAShower = "TakingAShower"
+const Waiting = "Waiting"
 const EatingInCanteen = "EatingInCanteen"
 const WorkingInMines = "WorkingInMines"
 const WakeUpInCell = "WakeUpInCell"
