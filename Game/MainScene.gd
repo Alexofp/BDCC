@@ -652,6 +652,10 @@ func getDebugActions():
 			]
 		},
 		{
+			"id": "removePCRestraints",
+			"name": "Remove all restraints",
+		},
+		{
 			"id": "openConsole",
 			"name": "Open console",
 		},
@@ -691,6 +695,9 @@ func doDebugAction(id, args = {}):
 	
 	if(id == "runScene"):
 		runScene(args["sceneID"])
+	
+	if(id == "removePCRestraints"):
+		GM.pc.removeAllRestraints()
 	
 	if(id == "giveItem"):
 		var item:ItemBase = GlobalRegistry.createItem(args["itemID"])

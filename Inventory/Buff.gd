@@ -41,3 +41,7 @@ const VirilityBuff = "VirilityBuff"
 const CrossSpeciesCompatibilityBuff = "CrossSpeciesCompatibilityBuff"
 
 const SkillExperienceBuff = "SkillExperienceBuff"
+
+const ChastityPenisBuff = "ChastityPenisBuff"
+const ChastityVaginaBuff = "ChastityVaginaBuff"
+const ChastityAnusBuff = "ChastityAnusBuff"

@@ -14,6 +14,9 @@ func getClothingSlot():
 
 func getBuffs():
 	return [
+		buff(Buff.ChastityPenisBuff),
+		buff(Buff.ChastityVaginaBuff),
+		buff(Buff.ChastityAnusBuff),
 		]
 
 func getPrice():
@@ -26,6 +29,9 @@ func getTags():
 	return [ItemTag.BDSMRestraint]
 
 func isRestraint():
+	return true
+
+func isImportant():
 	return true
 
 func generateRestraintData():
@@ -65,3 +71,6 @@ func coversBodyparts():
 		BodypartSlot.Penis: true,
 		BodypartSlot.Anus: true,
 		}
+
+func alwaysVisible():
+	return true

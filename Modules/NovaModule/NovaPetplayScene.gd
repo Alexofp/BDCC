@@ -269,7 +269,7 @@ func _run():
 		addButton("Shake head", "You experienced enough for now", "shake_head")
 		addButton("Oral", "You really wanna suck Nova off", "oral")
 		addButtonWithChecks("Vaginal", "Breed me!", "vaginal", [], [ButtonChecks.HasReachableVagina])
-		addButton("Anal", "Offer your butt!", "anal")
+		addButtonWithChecks("Anal", "Offer your butt!", "anal", [], [ButtonChecks.HasReachableAnus])
 
 
 

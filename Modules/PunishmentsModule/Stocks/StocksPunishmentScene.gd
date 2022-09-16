@@ -156,3 +156,18 @@ func loadData(data):
 	.loadData(data)
 	
 	amountOfEventsPassed = SAVE.loadVar(data, "amountOfEventsPassed", 0)
+
+func getDebugActions():
+	return [
+		{
+			"id": "instantEscape",
+			"name": "Instant escape",
+			"args": [
+			],
+		},
+	]
+
+func doDebugAction(_id, _args = {}):
+	if(_id == "instantEscape"):
+		endScene()
+		GM.main.reRun()

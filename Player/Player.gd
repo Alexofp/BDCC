@@ -1124,3 +1124,10 @@ func damageClothes():
 
 func isWearingPortalPanties():
 	return getInventory().hasItemIDEquipped("PortalPanties")
+
+func removeAllRestraints():
+	for item in inventory.getEquppedRestraints():
+		if(item.isImportant()):
+			continue
+		
+		inventory.unequipItem(item)

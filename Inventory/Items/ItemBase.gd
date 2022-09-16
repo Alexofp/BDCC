@@ -265,6 +265,9 @@ func generateItemState():
 func getItemState():
 	return itemState
 
+func isImportant():
+	return false
+
 func isRestraint():
 	return false
 
@@ -338,3 +341,6 @@ func isDamaged():
 func repairDamage():
 	if(itemState != null):
 		itemState.repairDamage()
+
+func alwaysVisible():
+	return false

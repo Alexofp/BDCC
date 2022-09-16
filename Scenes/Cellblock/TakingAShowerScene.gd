@@ -5,6 +5,8 @@ func _init():
 
 func _run():
 	if(state == ""):
+		GM.main.playAnimation(StageScene.Solo, "stand", {exposedBodyparts=[BodypartSlot.Body, BodypartSlot.Breasts, BodypartSlot.Vagina, BodypartSlot.Penis, BodypartSlot.Anus]})
+		
 		if(GM.pc.isFullyNaked()):
 			saynn("You look around for an empty spot and go towards it")
 			
@@ -49,6 +51,7 @@ func _run():
 		addDisabledButton("Masturbate", "Not done")
 			
 	if(state == "finish"):
+		GM.main.playAnimation(StageScene.Solo, "stand")
 		aimCamera(GM.pc.location)
 		
 		saynn("You turn off the water and go grab a towel to rub yourself dry")
@@ -69,7 +72,8 @@ func _react(_action: String, _args):
 			aimCamera("main_shower2")
 		
 		if(GM.ES.triggerReact(Trigger.TakingAShower)):
-			endScene()
+			#endScene()
+			setState(_action)
 			return
 		
 		addMessage("You feel fresh and clean")
@@ -78,7 +82,8 @@ func _react(_action: String, _args):
 		GM.pc.addLust(-50)
 
 	if(_action == "clean_inside"):
-		GM.pc.clearOrificeFluids()
+		if(!GM.pc.clearOrificeFluidsCheckBlocked()):
+			addMessage("Something prevented you from clearing every hole")
 		processTime(60 * 10)
 
 

@@ -78,7 +78,7 @@ func _run():
 
 		addButton("Nah", "She can go fuck herself", "nah1")
 		addButtonWithChecks("Offer pussy", "Be bred by Risha", "offer_pussy", [], [ButtonChecks.HasReachableVagina])
-		addButton("Offer ass", "Be fucked in the ass by Risha", "offer_ass")
+		addButtonWithChecks("Offer ass", "Be fucked in the ass by Risha", "offer_ass", [], [ButtonChecks.HasReachableAnus])
 		addButton("Offer handjob", "Make her cum while being a bit of a brat", "offer_handjob")
 		addButtonWithChecks("Fuck Risha", "(noncon) That lynx is a herm so how about you help her take the edge off by fucking her", "fuck_risha", [], [ButtonChecks.HasReachablePenis, [ButtonChecks.StatCheck, Stat.Strength, 8]])
 

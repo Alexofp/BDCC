@@ -744,6 +744,24 @@ func clearOrificeFluids():
 	if(hasBodypart(BodypartSlot.Head)):
 		getBodypart(BodypartSlot.Head).clearOrificeFluids()
 
+func clearOrificeFluidsCheckBlocked():
+	var success = true
+	
+	if(hasBodypart(BodypartSlot.Vagina)):
+		if(!hasReachableVagina()):
+			success = false
+		else:
+			getBodypart(BodypartSlot.Vagina).clearOrificeFluids()
+	if(hasBodypart(BodypartSlot.Anus)):
+		if(!hasReachableAnus()):
+			success = false
+		else:
+			getBodypart(BodypartSlot.Anus).clearOrificeFluids()
+	if(hasBodypart(BodypartSlot.Head)):
+		getBodypart(BodypartSlot.Head).clearOrificeFluids()
+		
+	return success
+
 func cummedInBodypartBy(bodypartSlot, characterID, sourceType = null):
 	if(!hasBodypart(bodypartSlot)):
 		return
@@ -918,13 +936,25 @@ func hasPenis():
 	return hasBodypart(BodypartSlot.Penis)
 
 func hasReachablePenis():
+	if(buffsHolder.hasBuff(Buff.ChastityPenisBuff)):
+		return false
 	return hasPenis()
 
 func hasVagina():
 	return hasBodypart(BodypartSlot.Vagina)
 
 func hasReachableVagina():
+	if(buffsHolder.hasBuff(Buff.ChastityVaginaBuff)):
+		return false
 	return hasVagina()
+
+func hasAnus():
+	return true
+
+func hasReachableAnus():
+	if(buffsHolder.hasBuff(Buff.ChastityAnusBuff)):
+		return false
+	return hasAnus()
 
 func hasHair():
 	return hasBodypart(BodypartSlot.Hair) && getBodypart(BodypartSlot.Hair).id != "baldhair"
@@ -1146,7 +1176,7 @@ func updateDoll(doll: Doll3D):
 	for inventorySlot in equippedItems:
 		var item = equippedItems[inventorySlot]
 		var blocksBodyparts = item.coversBodyparts()
-		if(exposedBodyparts!=null && exposedBodyparts.size() > 0 && blocksBodyparts != null):
+		if(!item.alwaysVisible() && exposedBodyparts!=null && exposedBodyparts.size() > 0 && blocksBodyparts != null):
 			var shouldBeSkipped = false
 			for exposedBodypart in exposedBodyparts:
 				if(blocksBodyparts.has(exposedBodypart)):
