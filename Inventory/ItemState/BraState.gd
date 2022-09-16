@@ -10,6 +10,7 @@ func isBraPulledUp():
 func pullBraUp():
 	pulledUp = true
 	removed = false
+	updateWearerAppearance()
 
 func getActions():
 	return [

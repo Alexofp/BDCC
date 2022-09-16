@@ -11,6 +11,7 @@ func arePantiesShiftedAside():
 func shiftPantiesAside():
 	shiftedAside = true
 	removed = false
+	updateWearerAppearance()
 
 func getActions():
 	if(canShiftAside):
@@ -62,3 +63,14 @@ func getStateText():
 	if(removed):
 		text = casualName.capitalize()+" are pulled down. "
 	return text
+
+func getHidesParts(_character):
+	if(isRemoved()):
+		return null
+	if(arePantiesShiftedAside()):
+		return null
+	if(isDamaged()):
+		return null
+	return {
+		BodypartSlot.Penis: true,
+	}

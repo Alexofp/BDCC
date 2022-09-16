@@ -41,3 +41,10 @@ func getTags():
 
 func generateItemState():
 	itemState = PantiesState.new()
+
+func getRiggedParts(_character):
+	if(itemState.isRemoved()):
+		return null
+	return {
+		"panties": "res://Inventory/RiggedModels/Panties/PinkPanties.tscn",
+	}

@@ -40,3 +40,10 @@ func getTags():
 
 func generateItemState():
 	itemState = BraState.new()
+
+func getRiggedParts(_character):
+	if(itemState.isRemoved() || itemState.isBraPulledUp()):
+		return null
+	return {
+		"bra": "res://Inventory/RiggedModels/Bra/PinkBra.tscn",
+	}

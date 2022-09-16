@@ -17,6 +17,7 @@ func isShirtOpened():
 
 func openShirt():
 	shirtOpened = true
+	updateWearerAppearance()
 
 func getActions():
 	return [
@@ -90,3 +91,14 @@ func getDamageDescription():
 	if(clothesDamaged):
 		return "Pieces of fabric are ripped off, exposing privates"
 	return ""
+
+func getHidesParts(_character):
+	if(isRemoved()):
+		return null
+	if(areShortsPulledDown()):
+		return null
+	if(isDamaged()):
+		return null
+	return {
+		BodypartSlot.Penis: true,
+	}

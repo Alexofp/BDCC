@@ -44,3 +44,10 @@ func generateItemState():
 	itemState = PantiesState.new()
 	itemState.canShiftAside = false
 	itemState.casualName = "briefs"
+
+func getRiggedParts(_character):
+	if(itemState.isRemoved()):
+		return null
+	return {
+		"panties": "res://Inventory/RiggedModels/Briefs/Briefs.tscn",
+	}

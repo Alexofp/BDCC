@@ -72,15 +72,3 @@ func getRiggedParts(_character):
 	return {
 		"clothing": "res://Inventory/RiggedModels/InmateUniform/OrangeInmateUniform.tscn",
 	}
-
-func getHidesParts(_character):
-	if(itemState != null):
-		if(itemState.isRemoved()):
-			return null
-		if(itemState.areShortsPulledDown()):
-			return null
-		if(itemState.isDamaged()):
-			return null
-	return {
-		BodypartSlot.Penis: true,
-	}

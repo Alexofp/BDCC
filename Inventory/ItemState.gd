@@ -9,6 +9,7 @@ func isRemoved():
 
 func remove():
 	removed = true
+	updateWearerAppearance()
 
 func getItem():
 	if(item == null):
@@ -73,3 +74,6 @@ func getExtraDescription():
 		text.append("[i]"+damageDescription+"[/i]")
 	
 	return Util.join(text, "\n")
+
+func getHidesParts(_character):
+	return null

@@ -277,8 +277,8 @@ func setButtScale(buttScale: float):
 
 func setBreastsScale(breastsScale: float):
 	var mul = 0.0
-	if(breastsScale <= 1.0):
-		mul = max(1.0 - breastsScale, 0.0)
+	if(breastsScale <= 1.2):
+		mul = max(1.2 - breastsScale, 0.0)
 	setBoneScaleAndOffset("DeformBreasts", breastsScale, Vector3(0.18713, 0.199727, 0.0)*mul)
 
 func setPregnancy(progress: float):

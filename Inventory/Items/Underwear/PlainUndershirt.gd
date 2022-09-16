@@ -41,3 +41,10 @@ func getTags():
 func generateItemState():
 	itemState = BraState.new()
 	itemState.casualName = "undershirt"
+
+func getRiggedParts(_character):
+	if(itemState.isRemoved() || itemState.isBraPulledUp()):
+		return null
+	return {
+		"top": "res://Inventory/RiggedModels/Undershirt/Undershirt.tscn",
+	}
