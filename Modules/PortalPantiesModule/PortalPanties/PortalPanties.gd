@@ -61,8 +61,6 @@ func getHidesParts(_character):
 	}
 
 func getTakeOffScene():
-	if(GM.QS.isCompleted("PortalPantiesQuest")):
-		return .getTakeOffScene()
 	return "PortalPantiesTakeOffScene"
 
 func coversBodyparts():

@@ -14,6 +14,7 @@ func getFlags():
 		"Panties_FleshlightsFoundFleshlights": flag(FlagType.Bool),
 		"Panties_FleshlightsReturnedToAlex": flag(FlagType.Bool),
 		"Panties_FleshlightsReturnedPanties": flag(FlagType.Bool),
+		"Panties_Mode": flag(FlagType.Number),
 	}
 
 func _init():

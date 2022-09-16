@@ -13,7 +13,17 @@ func react(_triggerID, _args):
 	if(!GM.pc.isWearingPortalPanties()):
 		return false
 	
+	var currentMode = getFlag("PortalPantiesModule.Panties_Mode", 0)
 	var nonQuestMult = 0.3
+	if(currentMode == -1):
+		nonQuestMult = 1.0
+	elif(currentMode == 0):
+		nonQuestMult = 0.3
+	elif(currentMode == 1):
+		nonQuestMult = 0.1
+	elif(currentMode == 2):
+		nonQuestMult = 0.05
+	
 	if(GM.QS.isActive("PortalPantiesQuest")):
 		nonQuestMult = 1.0
 		
@@ -24,7 +34,7 @@ func react(_triggerID, _args):
 		var currentCooldown = getFlag("PortalPantiesModule.Panties_SceneCooldown", 0)
 		if(currentCooldown <= 0):
 			if(RNG.chance(20 * nonQuestMult)):
-				setFlag("PortalPantiesModule.Panties_SceneCooldown", round(4 / nonQuestMult))
+				setFlag("PortalPantiesModule.Panties_SceneCooldown", int(min(20, round(4 / nonQuestMult))))
 				return GM.ES.triggerReact("PortalPantiesEvent")
 		else:
 			increaseFlag("PortalPantiesModule.Panties_SceneCooldown", -1)
