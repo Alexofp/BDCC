@@ -60,6 +60,8 @@ func generateItemState():
 	itemState = ShirtAndShortsState.new()
 
 func getRiggedParts(_character):
+	if(itemState.isRemoved()):
+		return null
 	if(inmateType == InmateType.SexDeviant):
 		return {
 			"clothing": "res://Inventory/RiggedModels/InmateUniform/LilacInmateUniform.tscn",

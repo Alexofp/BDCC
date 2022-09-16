@@ -1,13 +1,13 @@
 extends ItemBase
 
 func _init():
-	id = "CasualClothes"
+	id = "EngineerClothes"
 
 func getVisibleName():
-	return "Casual clothes"
+	return "Engineer Uniform"
 	
 func getDescription():
-	return "Just a simple shirt and shorts"
+	return "Just a simple shirt and shorts colored in orange"
 
 func getClothingSlot():
 	return InventorySlot.Body
@@ -35,5 +35,6 @@ func getRiggedParts(_character):
 	if(itemState.isRemoved()):
 		return null
 	return {
-		"clothing": "res://Inventory/RiggedModels/CasualClothes/CasualClothes.tscn",
+		"clothing": "res://Inventory/RiggedModels/CasualClothes/EngineerClothes.tscn",
 	}
+
