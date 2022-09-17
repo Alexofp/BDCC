@@ -14,6 +14,7 @@ var npcPregnancyTimeDays: int
 var shouldScaleUI: bool = true
 var uiScaleMultiplier = 1.0
 var requireDoubleTapOnMobile = false
+var uiButtonSize:int = 0
 
 var showSpeakerName = false
 var fontSize = "normal"
@@ -40,6 +41,7 @@ func resetToDefaults():
 	showShortcuts = true
 	measurementUnits = "metric"
 	requireDoubleTapOnMobile = false
+	uiButtonSize = 0
 	debugPanel = false
 	imagePackOrder = []
 	showCharacterArt = true
@@ -95,6 +97,9 @@ func getMeasurementUnits():
 func shouldRequireDoubleTapOnMobile():
 	return requireDoubleTapOnMobile
 
+func getUiButtonSize():
+	return uiButtonSize
+
 func isDebugPanelEnabled():
 	return debugPanel
 
@@ -106,38 +111,6 @@ func shouldShowSceneCreator():
 
 func getChangeableOptions():
 	var settings = [
-#		{
-#			"name": "Test category",
-#			"id": "testCategory",
-#			"options": [
-#				{
-#					"name": "Test option",
-#					"description": "test description",
-#					"id": "test_option",
-#					"type": "checkbox",
-#					"value": true,
-#				},
-#				{
-#					"name": "Test option 2",
-#					"description": "mew mew test description",
-#					"id": "test_option2",
-#					"type": "list",
-#					"value": "v1",
-#					"values": [
-#						["v0", "Meow meow v0"],
-#						["v1", "Nya v1"],
-#						["v2", "Hah v2"],
-#					],
-#				},
-#				{
-#					"name": "Test option 3",
-#					"description": "Float test",
-#					"id": "test_option3",
-#					"type": "float",
-#					"value": 0.5,
-#				},
-#			],
-#		},
 		{
 			"name": "Pregnancy settings",
 			"id": "pregnancy",
@@ -263,6 +236,19 @@ func getChangeableOptions():
 					"value": showShortcuts,
 				},
 				{
+					"name": "Button size",
+					"description": "Changes the size of the buttons inside the main game screen",
+					"id": "uiButtonSize",
+					"type": "list",
+					"value": uiButtonSize,
+					"values": [
+						[0, "Default"],
+						[1, "Slightly bigger"],
+						[2, "Big"],
+						[3, "Very big"],
+					],
+				},
+				{
 					"name": "Double-tap to pick option (mobile)",
 					"description": "First tap shows the description, second tap picks the option. Works only with touchscreens",
 					"id": "requireDoubleTapOnMobile",
@@ -370,6 +356,8 @@ func applyOption(categoryID, optionID, value):
 			measurementUnits = value
 		if(optionID == "requireDoubleTapOnMobile"):
 			requireDoubleTapOnMobile = value
+		if(optionID == "uiButtonSize"):
+			uiButtonSize = value
 		if(optionID == "showCharacterArt"):
 			showCharacterArt = value
 		if(optionID == "showSceneCreator"):
@@ -408,6 +396,7 @@ func saveData():
 		"npcPregnancyTimeDays": npcPregnancyTimeDays,
 		"shouldScaleUI": shouldScaleUI,
 		"uiScaleMultiplier": uiScaleMultiplier,
+		"uiButtonSize": uiButtonSize,
 		"showSpeakerName": showSpeakerName,
 		"fontSize": fontSize,
 		"showShortcuts": showShortcuts,
@@ -429,6 +418,7 @@ func loadData(data):
 	npcPregnancyTimeDays = loadVar(data, "npcPregnancyTimeDays", 5)
 	shouldScaleUI = loadVar(data, "shouldScaleUI", true)
 	uiScaleMultiplier = loadVar(data, "uiScaleMultiplier", 1.0)
+	uiButtonSize = loadVar(data, "uiButtonSize", 0)
 	showSpeakerName = loadVar(data, "showSpeakerName", false)
 	fontSize = loadVar(data, "fontSize", "normal")
 	showShortcuts = loadVar(data, "showShortcuts", true)

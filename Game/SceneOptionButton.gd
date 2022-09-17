@@ -11,6 +11,10 @@ func _ready():
 		$KeyLabel.visible = true
 	else:
 		$KeyLabel.visible = false
+		
+	var minButtonSize = OPTIONS.getUiButtonSize()
+	if(minButtonSize > 0):
+		rect_min_size = Vector2(0, 20 + minButtonSize * 16)
 
 func setShortcutPhysicalScancode(code):
 	var newShortcut = ShortCut.new()
