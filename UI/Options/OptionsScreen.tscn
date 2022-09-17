@@ -88,21 +88,21 @@ rect_min_size = Vector2( 0, 100 )
 columns = 5
 
 [node name="CloseButton" type="Button" parent="VBoxContainer/GridContainer"]
-margin_right = 254.0
+margin_right = 255.0
 margin_bottom = 26.0
 size_flags_horizontal = 3
 text = "Save and close"
 
 [node name="RevertButton" type="Button" parent="VBoxContainer/GridContainer"]
-margin_left = 258.0
-margin_right = 512.0
+margin_left = 259.0
+margin_right = 514.0
 margin_bottom = 26.0
 size_flags_horizontal = 3
 text = "Revert to defaults"
 
 [node name="ResetRenderButton" type="Button" parent="VBoxContainer/GridContainer"]
-margin_left = 516.0
-margin_right = 770.0
+margin_left = 518.0
+margin_right = 772.0
 margin_bottom = 26.0
 hint_tooltip = "Resets render settings, useful if someting breaks. Restart the game after pressing"
 size_flags_horizontal = 3

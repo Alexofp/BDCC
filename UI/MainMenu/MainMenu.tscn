@@ -271,7 +271,7 @@ rect_min_size = Vector2( 0, 100 )
 columns = 5
 
 [node name="ResumeButton" type="Button" parent="HBoxContainer/MainVBox/GridContainer"]
-margin_right = 147.0
+margin_right = 148.0
 margin_bottom = 26.0
 hint_tooltip = "Load the latest save and continue playing"
 size_flags_horizontal = 3
@@ -279,72 +279,72 @@ disabled = true
 text = "Resume"
 
 [node name="NewGameButton" type="Button" parent="HBoxContainer/MainVBox/GridContainer"]
-margin_left = 151.0
-margin_right = 298.0
+margin_left = 152.0
+margin_right = 300.0
 margin_bottom = 26.0
 size_flags_horizontal = 3
 text = "New game"
 
 [node name="LoadGameButton" type="Button" parent="HBoxContainer/MainVBox/GridContainer"]
-margin_left = 302.0
-margin_right = 449.0
+margin_left = 304.0
+margin_right = 452.0
 margin_bottom = 26.0
 size_flags_horizontal = 3
 text = "Load game"
 
 [node name="OptionsButton" type="Button" parent="HBoxContainer/MainVBox/GridContainer"]
-margin_left = 453.0
-margin_right = 600.0
+margin_left = 456.0
+margin_right = 603.0
 margin_bottom = 26.0
 size_flags_horizontal = 3
 text = "Options"
 
 [node name="CreditsButton" type="Button" parent="HBoxContainer/MainVBox/GridContainer"]
-margin_left = 604.0
-margin_right = 751.0
+margin_left = 607.0
+margin_right = 754.0
 margin_bottom = 26.0
 size_flags_horizontal = 3
 text = "Credits"
 
 [node name="DiscordButton" type="Button" parent="HBoxContainer/MainVBox/GridContainer"]
 margin_top = 30.0
-margin_right = 147.0
+margin_right = 148.0
 margin_bottom = 56.0
 hint_tooltip = "Join the game's community on discord"
 size_flags_horizontal = 3
 text = "Join Discord"
 
 [node name="GithubButton" type="Button" parent="HBoxContainer/MainVBox/GridContainer"]
-margin_left = 151.0
+margin_left = 152.0
 margin_top = 30.0
-margin_right = 298.0
+margin_right = 300.0
 margin_bottom = 56.0
 hint_tooltip = "Open the project's github page"
 size_flags_horizontal = 3
 text = "Github"
 
 [node name="DevToolsButton" type="Button" parent="HBoxContainer/MainVBox/GridContainer"]
-margin_left = 302.0
+margin_left = 304.0
 margin_top = 30.0
-margin_right = 449.0
+margin_right = 452.0
 margin_bottom = 56.0
 hint_tooltip = "Open the panel with the tools that are useful for content developers"
 size_flags_horizontal = 3
 text = "DevTools"
 
 [node name="ChangelogButton" type="Button" parent="HBoxContainer/MainVBox/GridContainer"]
-margin_left = 453.0
+margin_left = 456.0
 margin_top = 30.0
-margin_right = 600.0
+margin_right = 603.0
 margin_bottom = 56.0
 hint_tooltip = "View the project's changelog"
 size_flags_horizontal = 3
 text = "Changelog"
 
 [node name="ModsButton" type="Button" parent="HBoxContainer/MainVBox/GridContainer"]
-margin_left = 604.0
+margin_left = 607.0
 margin_top = 30.0
-margin_right = 751.0
+margin_right = 754.0
 margin_bottom = 56.0
 hint_tooltip = "See what modules are loaded currently"
 size_flags_horizontal = 3

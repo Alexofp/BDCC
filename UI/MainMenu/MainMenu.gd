@@ -43,6 +43,7 @@ func _on_NewGameButton_pressed():
 	var _ok = get_tree().change_scene("res://Game/MainScene.tscn")
 
 func hideAllMenus():
+	GlobalTooltip.resetTooltips()
 	MainVBox.visible = false
 	LoadGameTab.visible = false
 	optionsGameTab.visible = false

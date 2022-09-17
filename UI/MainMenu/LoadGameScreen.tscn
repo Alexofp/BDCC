@@ -73,28 +73,28 @@ rect_min_size = Vector2( 0, 100 )
 columns = 5
 
 [node name="CloseButton" type="Button" parent="VBoxContainer/GridContainer"]
-margin_right = 253.0
+margin_right = 254.0
 margin_bottom = 26.0
 size_flags_horizontal = 3
 text = "Close"
 
 [node name="DeleteButton" type="Button" parent="VBoxContainer/GridContainer"]
-margin_left = 257.0
-margin_right = 510.0
+margin_left = 258.0
+margin_right = 512.0
 margin_bottom = 26.0
 size_flags_horizontal = 3
 text = "Delete Save"
 
 [node name="ImportButton" type="Button" parent="VBoxContainer/GridContainer"]
-margin_left = 514.0
-margin_right = 767.0
+margin_left = 516.0
+margin_right = 770.0
 margin_bottom = 26.0
 size_flags_horizontal = 3
 text = "Import Save"
 
 [node name="SavesButton" type="Button" parent="VBoxContainer/GridContainer"]
-margin_left = 771.0
-margin_right = 1024.0
+margin_left = 774.0
+margin_right = 1027.0
 margin_bottom = 26.0
 size_flags_horizontal = 3
 text = "Saves folder"
@@ -112,8 +112,6 @@ window_title = "Export Save"
 resizable = true
 access = 2
 filters = PoolStringArray( "*.save ; Save file" )
-current_dir = "/"
-current_path = "/"
 
 [node name="ImportSaveDialog" type="FileDialog" parent="."]
 anchor_left = 0.5
@@ -129,8 +127,6 @@ resizable = true
 mode = 0
 access = 2
 filters = PoolStringArray( "*.save ; Save file" )
-current_dir = "/"
-current_path = "/"
 
 [node name="SaveExportedAlert" type="AcceptDialog" parent="."]
 anchor_left = 0.5

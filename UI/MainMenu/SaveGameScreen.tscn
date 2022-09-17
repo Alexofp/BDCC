@@ -94,14 +94,14 @@ rect_min_size = Vector2( 0, 100 )
 columns = 5
 
 [node name="CloseButton" type="Button" parent="VBoxContainer/GridContainer"]
-margin_right = 255.0
+margin_right = 256.0
 margin_bottom = 26.0
 size_flags_horizontal = 3
 text = "Close"
 
 [node name="DeleteButton" type="Button" parent="VBoxContainer/GridContainer"]
-margin_left = 259.0
-margin_right = 514.0
+margin_left = 260.0
+margin_right = 515.0
 margin_bottom = 26.0
 size_flags_horizontal = 3
 text = "Delete Save"
