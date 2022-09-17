@@ -592,6 +592,18 @@ func getDebugActions():
 			]
 		},
 		{
+			"id": "addCredits",
+			"name": "Add Credits PC",
+			"args": [
+				{
+					"id": "amount",
+					"name": "Amount",
+					"type": "number",
+					"value": 10,
+				},
+			]
+		},
+		{
 			"id": "healPC",
 			"name": "Heal PC",
 			"args": [
@@ -677,6 +689,9 @@ func doDebugAction(id, args = {}):
 		
 	if(id == "addStamina"):
 		GM.pc.addStamina(args["amount"])
+		
+	if(id == "addCredits"):
+		GM.pc.addCredits(args["amount"])
 	
 	if(id == "addExp"):
 		GM.pc.addExperience(args["amount"])

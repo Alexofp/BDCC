@@ -51,6 +51,8 @@ func _run():
 		addButton("Put them on", "See what happens", "put_them_on")
 
 	if(state == "put_them_on"):
+		GM.main.playAnimation(StageScene.Duo, "stand", {npc="alexrynard", exposedBodyparts=[BodypartSlot.Body]})
+		
 		# (You put the panties on, cold metal rubs against your privates)
 
 		# (But when he turns the portals on, you suddenly feel your privates free)
@@ -201,7 +203,6 @@ func _run():
 func _react(_action: String, _args):
 
 	if(_action == "put_them_on"):
-		GM.pc.getInventory().unequipSlot(InventorySlot.Body)
 		GM.pc.getInventory().forceEquipStoreOtherUnlessRestraint(GlobalRegistry.createItem("PortalPanties"))
 		addExperienceToPlayer(50)
 		
