@@ -35,7 +35,7 @@ func isImportant():
 	return true
 
 func generateRestraintData():
-	restraintData = RestraintUnremovable.new()
+	restraintData = load("res://Modules/PortalPantiesModule/PortalPanties/RestraintPortalPanties.gd").new()
 	restraintData.setLevel(calculateBestRestraintLevel())
 
 func getTakingOffStringLong(withS):

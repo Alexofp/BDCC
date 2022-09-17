@@ -43,6 +43,7 @@ func _run():
 			addButton("Engineer", "Ask about his role", "engineer")
 			addButton("Bluespace", "What is bluespace", "bluespace")
 			addButton("Him", "Why is he here", "him")
+			addButton("Back", "Enough talking", "")
 
 
 	if(state == "engineer"):

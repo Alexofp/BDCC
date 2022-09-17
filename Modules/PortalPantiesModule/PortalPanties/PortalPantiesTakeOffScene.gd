@@ -12,7 +12,7 @@ func _init():
 func _run():
 
 	if(state == ""):
-		if(GM.QS.isCompleted("PortalPantiesQuest")):
+		if(!GM.QS.isActive("PortalPantiesQuest")):
 			saynn("What do you wanna do with your portal panties?")
 			
 			addButton("Take off", "Take portal panties off", "takeoff")

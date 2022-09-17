@@ -134,7 +134,7 @@ func _run():
 
 		saynn("[say=alexrynard]It works, who would have thought. And we didn’t even create a singularity in the process. Do you like your portal panties?[/say]")
 
-		saynn("[say=pc]Portal panties?[/say]")
+		saynn("[say=pc]The what panties?[/say]")
 
 		saynn("[say=alexrynard]I think that’s a fitting name, isn’t it? I made sure that you can’t take them off unless I disable them. You know, for safety.[/say]")
 
@@ -204,7 +204,6 @@ func _react(_action: String, _args):
 
 	if(_action == "put_them_on"):
 		GM.pc.getInventory().forceEquipStoreOtherUnlessRestraint(GlobalRegistry.createItem("PortalPanties"))
-		addExperienceToPlayer(50)
 		
 	if(_action == "nah"):
 		var item:ItemBase = GM.pc.getInventory().getEquippedItem(InventorySlot.UnderwearBottom)

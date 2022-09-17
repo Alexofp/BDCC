@@ -523,7 +523,8 @@ func beforeTurnChecks():
 		else:
 			addMessage("You used "+str(addStamina)+" stamina")
 	
-	whatHappened += additionalStruggleText
+	if(additionalStruggleText != null && additionalStruggleText != ""):
+		whatHappened += "[i]"+additionalStruggleText+"[/i]"
 	
 	if(state == ""):
 		setState("fighting")

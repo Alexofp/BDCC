@@ -127,7 +127,9 @@ func addsIntoxicationToPC() -> float:
 
 func destroyMe():
 	assert(currentInventory != null)
-	currentInventory.removeItem(self)
+	var invent = currentInventory
+	invent.removeItem(self)
+	invent.removeEquippedItem(self)
 
 func removeXOrDestroy(remamount):
 	amount -= remamount
