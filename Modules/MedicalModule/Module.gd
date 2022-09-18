@@ -63,6 +63,7 @@ func _init():
 		"res://Modules/MedicalModule/MentalWard/MentalCheckupFinal.gd",
 		"res://Modules/MedicalModule/MentalWard/MentalGhostHands1.gd",
 		"res://Modules/MedicalModule/MentalWard/MentalGhostHands2.gd",
+		"res://Modules/MedicalModule/MentalWard/MentalGhostHands3.gd",
 		
 		"res://Modules/MedicalModule/NurseFelineOffLimits.gd",
 		
@@ -94,6 +95,7 @@ static func resetFlagsOnGettingIntoMentalWard():
 	
 	GM.main.setModuleFlag("MedicalModule", "Mental_ExpObeyDrug", 0)
 	GM.main.setModuleFlag("MedicalModule", "Mental_ExpTentacles", 0)
+	GM.main.setModuleFlag("MedicalModule", "Mental_ExpGhostHands", 0)
 	GM.main.setModuleFlag("MedicalModule", "Mental_HasKeycard", false)
 	GM.main.setModuleFlag("MedicalModule", "Mental_PlayerEscaped", false)
 

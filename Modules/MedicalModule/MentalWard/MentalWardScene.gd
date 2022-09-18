@@ -22,7 +22,12 @@ func getPossibleScenes():
 		newScenes.append("MentalObedienceDrug1")
 		
 	var ghostHands = getModuleFlag("MedicalModule", "Mental_ExpGhostHands", 0)
-	if(ghostHands >= 2):
+	if(ghostHands >= 3):
+		reusedScenes.append("MentalGhostHands3")
+		reusedScenes.append("MentalGhostHands2")
+		reusedScenes.append("MentalGhostHands1")
+	elif(ghostHands >= 2):
+		newScenes.append("MentalGhostHands3")
 		reusedScenes.append("MentalGhostHands2")
 		reusedScenes.append("MentalGhostHands1")
 	elif(ghostHands >= 1):
@@ -38,13 +43,15 @@ func getPossibleScenes():
 func _init():
 	sceneID = "MentalWardScene"
 
+func _reactInit():
+	GM.pc.setLocation("medical_paddedcell_player")
+
 func _run():
 	#if(state == ""):
 		#addCharacter("eliza")
 		
 	if(state == ""):
 		aimCamera("medical_paddedcell_player")
-		GM.pc.setLocation("medical_paddedcell_player")
 		GM.main.playAnimation(StageScene.Solo, "kneel")
 		setLocationName("Padded cell")
 		
@@ -216,3 +223,19 @@ func _react_scene_end(_tag, _result):
 			var shouldStop = _result[0]
 			if(shouldStop):
 				endScene()
+
+func getDebugActions():
+	return [
+		{
+			"id": "instantEscape",
+			"name": "Instant escape",
+			"args": [
+			],
+		},
+	]
+
+func doDebugAction(_id, _args = {}):
+	if(_id == "instantEscape"):
+		endScene()
+		GM.pc.setLocation("med_lobbymain")
+		GM.main.reRun()

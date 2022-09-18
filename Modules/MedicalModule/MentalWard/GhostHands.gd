@@ -19,10 +19,10 @@ func getPenisSize():
 	return 20.0
 
 func getFluidType(_fluidSource):
-	return BodilyFluids.FluidType.GirlCum
+	return BodilyFluids.FluidType.WhiteGoo
 
 func getFluidAmount(_fluidSource):
-	return RNG.randf_range(400.0, 600.0)
+	return RNG.randf_range(100.0, 200.0)
 
 func getBaseFertility() -> float:
 	return 0.0

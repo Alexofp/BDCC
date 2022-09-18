@@ -126,10 +126,9 @@ func _run():
 
 func _react(_action: String, _args):
 	if(_action == "continue"):
-		GM.pc.freeEyesDeleteAll()
-		GM.pc.freeHandsDeleteAll()
-		GM.pc.freeLegsDeleteAll()
-		GM.pc.freeMouthDeleteAll()
+		GM.pc.removeAllRestraints()
+		GM.pc.getInventory().unequipSlot(InventorySlot.UnderwearBottom)
+		GM.pc.getInventory().unequipSlot(InventorySlot.UnderwearTop)
 		
 		GM.pc.getInventory().forceEquipStoreOtherUnlessRestraint(GlobalRegistry.createItem("LatexStraitjacket"))
 		

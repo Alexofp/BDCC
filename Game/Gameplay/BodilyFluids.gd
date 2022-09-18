@@ -7,6 +7,7 @@ class FluidType:
 	const Milk = "milk"
 	const BlackGoo = "blackgoo"
 	const CumLube = "cumlube"
+	const WhiteGoo = "whitegoo"
 	
 	static func getName(fl):
 		if(fl == Cum):
@@ -19,6 +20,8 @@ class FluidType:
 			return "black goo"
 		if(fl == CumLube):
 			return "cub lube"
+		if(fl == WhiteGoo):
+			return "white goo"
 		return "Error"
 		
 	static func canMakeYouPregnant(fl):
