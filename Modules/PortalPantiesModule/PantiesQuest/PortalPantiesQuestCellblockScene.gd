@@ -708,7 +708,8 @@ func _react_scene_end(_tag, _result):
 		
 		if(battlestate == "win"):
 			setState("if_won")
-			addExperienceToPlayer(50)
+			addExperienceToPlayer(60)
+			addMessage("Task was updated")
 		else:
 			setState("if_lost")
 			addExperienceToPlayer(30)

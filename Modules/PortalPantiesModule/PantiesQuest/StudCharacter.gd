@@ -3,8 +3,8 @@ extends Character
 func _init():
 	id = "stud"
 	
-	npcLevel = 10
-	npcBasePain = 200
+	npcLevel = 5
+	npcBasePain = 115
 	npcBaseLust = 100
 	npcLustInterests = {
 		InterestTopic.TallyMarks: Interest.Loves,
@@ -69,7 +69,7 @@ func getSpecies():
 	return ["equine"]
 
 func _getAttacks():
-	return ["simplepunchattack", "StrongKick", "BreedingTaunt", "biteattack", "trygetupattack"]
+	return ["simplepunchattack", "ShivAttack", "simplekickattack", "BreedingTaunt", "biteattack", "trygetupattack"]
 
 func getFightIntro(_battleName):
 	var mes = "Stud rubs his fist and waits for your first move"
