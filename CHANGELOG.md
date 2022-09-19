@@ -5,6 +5,28 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Added
+- Modding support! Mods can add pretty much anything, from a new item to a new quest. It's even possible to replace the game's files with modded ones, allowing for global modifications if someone dares to try that. Same mods should work both on desktop and android.
+- A new quest that involves testing prototype panties that apparently have portals in them. Quest can be started in the mineshafts
+- 4 sex scenes (+2 little intro ones) that are triggered when you get spotted during masturbation in public spots. They involve public use
+- 3 new scenes in mental ward that explore a strange new drug that makes you 'partically-blind'
+- Straitjacket, inmate uniforms and underwear are now visible on the player doll.
+- Debug/cheat menu added. Enable it in the settings if you want, there is no punishment for using it.
+- Added panel that displays the npc's artwork. 8 characters have portraits added with the ability to add more through mods. Artwork panel can be switched back to the old list in the options.
+- Cum inflation. Character's belly will start looking bigger the more stuffed they are. Can be disabled in options
+- Cum/milk particles. If a character has full breasts or their holes are stuffed with cum, their doll will sometimes visible leak. Just a visual effect
+- Gles2/Gles3 renderer and 'forced software skinning' options added to the settings. It's generally recomended to use Gles3 on desktop and Gles2 on mobile/web. Tinker with these settings if your game doesn't work or doesn't display the player doll correctly.
+- Little messages for when others spot you masturbating
+- Being leashed is now a separate scene. Can skip it or watch your character being pulled somewhere one room at a time.
+- Can make the option buttons bigger in the settings. Should be handy for touch devices.
+
+### Changed
+- Android now exports saves into the documents folder, allowing to actually backup your saves if you so desire
+- Refactored the event system, it uses way cleaner code under the hood and should have less bugs
+- Game flags are now grouped by module. An automatic save converter will upgrade old saves to use these new flags without losing progress
+
+### Fixed
+- Status effects from yoga/lifting weights now save/load correctly
 
 ## [0.0.16] - 2022-08-11
 ### Added
