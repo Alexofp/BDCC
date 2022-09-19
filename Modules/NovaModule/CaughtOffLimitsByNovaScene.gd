@@ -338,6 +338,11 @@ func _react(_action: String, _args):
 		runScene("StocksPunishmentScene", ["nova"])
 		endScene()
 		return
+		
+	if(_action == "punishment"):
+		GM.pc.getInventory().unequipSlotUnlessRestraint(InventorySlot.Body)
+		GM.pc.getInventory().unequipSlotUnlessRestraint(InventorySlot.UnderwearBottom)
+		GM.pc.getInventory().unequipSlotUnlessRestraint(InventorySlot.UnderwearTop)
 	
 	setState(_action)
 

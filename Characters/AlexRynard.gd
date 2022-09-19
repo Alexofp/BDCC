@@ -38,7 +38,7 @@ func createBodyparts():
 	penis.ballsScale = 1
 	giveBodypartUnlessSame(penis)
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("anus"))
-	giveBodypartUnlessSame(GlobalRegistry.createBodypart("caninetail"))
+	giveBodypartUnlessSame(GlobalRegistry.createBodypart("foxtail"))
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("digilegs"))
 
 func createEquipment():

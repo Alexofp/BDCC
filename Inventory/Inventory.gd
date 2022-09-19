@@ -155,13 +155,22 @@ func unequipSlot(slot):
 		return true
 	return false
 
+func unequipSlotUnlessRestraint(slot):
+	var theitem = getEquippedItem(slot)
+	if(theitem != null):
+		if(theitem.isRestraint()):
+			return false
+		
+		return unequipItem(theitem)
+	return false
+
 func unequipSlotRemoveIfRestraint(slot):
 	var theitem = getEquippedItem(slot)
 	if(theitem == null):
 		return false
 
 	removeItemFromSlot(slot)
-	if(!theitem.isRestraint()):
+	if(!theitem.isRestraint() || theitem.isImportant()):
 		addItem(theitem)
 		return true
 

@@ -1051,7 +1051,7 @@ func getCumInflationLevel():
 		return 0.0
 	
 	var bodypartsToCalculate = [BodypartSlot.Head, BodypartSlot.Vagina, BodypartSlot.Anus]
-	var result = -1.0
+	var totalAmount = 0.0
 
 	for bodypartSlot in bodypartsToCalculate:
 		if(!hasBodypart(bodypartSlot)):
@@ -1061,10 +1061,13 @@ func getCumInflationLevel():
 		if(orifice == null):
 			continue
 		
-		var overflow = max(0.0, orifice.getStuffedLevel() - 1.0)
-		result += overflow
+		totalAmount += orifice.getFluidAmount()
 		
-	return max(result, 0.0)
+	# If we have more than 3L inside of us, anything extra makes us inflated
+	var threshold = 3000.0
+	var tooMuch = max(totalAmount - threshold, 0.0)
+	
+	return max(tooMuch / 2000.0, 0.0)
 # Doll stuff
 
 func getDollParts() -> Dictionary:
