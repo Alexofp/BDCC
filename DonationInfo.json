@@ -1,5 +1,5 @@
 {
-	"dateString": "14 of Sep 2022",
+	"dateString": "19 of Sep 2022",
 	"entries": {
 		"$1.00": [
 			{
@@ -15,19 +15,16 @@
 				"nickname": "SuPhox"
 			},
 			{
-				"nickname": "User#928169c6"
-			},
-			{
 				"nickname": "Caliban"
 			},
 			{
 				"nickname": "Blastburn"
 			},
 			{
-				"nickname": "Kyle Oran Evans "
+				"nickname": "User#928169c6"
 			},
 			{
-				"nickname": "User#677ffa21"
+				"nickname": "Kyle Oran Evans "
 			},
 			{
 				"nickname": "Zeneroth"
@@ -42,6 +39,9 @@
 		"$10.00": [
 			{
 				"nickname": "Shadowfaux"
+			},
+			{
+				"nickname": "KomodoWarans"
 			}
 		],
 		"$5.00": [
@@ -61,5 +61,5 @@
 		"$5.00",
 		"$1.00"
 	],
-	"unixTime": 1663188001
+	"unixTime": 1663600370
 }
