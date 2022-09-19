@@ -192,7 +192,7 @@ func _react(_action: String, _args):
 		GM.pc.gotThroatFuckedBy("ghostHands")
 		GM.pc.cummedInMouthBy("ghostHands")
 		GM.pc.orgasmFrom("ghostHands")
-		GM.pc.addSkillExperience(Skill.SexSlave, 20)
+		GM.pc.addSkillExperience(Skill.SexSlave, 10)
 		
 
 	if(_action == "continue"):

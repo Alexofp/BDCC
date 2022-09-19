@@ -598,6 +598,7 @@ func _react(_action: String, _args):
 			GM.pc.cummedInAnusBy("stud")
 		
 		GM.pc.orgasmFrom("stud")
+		GM.pc.addSkillExperience(Skill.SexSlave, 10, "portalpanties_studfuck")
 		
 	if(_action == "continue2"):
 		var randomInmate = [
@@ -618,12 +619,21 @@ func _react(_action: String, _args):
 			GM.pc.gotAnusFuckedBy(pickedInmate2)
 			GM.pc.cummedInAnusBy(pickedInmate2)
 			GM.pc.orgasmFrom(pickedInmate)
+			GM.pc.addTallymarkCrotch()
+			GM.pc.addTallymarkButt()
 		else:
 			var pickedInmate = RNG.pick(randomInmate)
 			
 			GM.pc.gotAnusFuckedBy(pickedInmate)
 			GM.pc.cummedInAnusBy(pickedInmate)
 			GM.pc.orgasmFrom(pickedInmate)
+			GM.pc.addTallymarkButt()
+			
+		GM.pc.addSkillExperience(Skill.SexSlave, 10, "portalpanties_gangfuck")
+		addMessage("Someone keeps track of the amount of times you were fucked")
+		var zone = BodyWritingsZone.getRandomZone()
+		GM.pc.addBodywriting(zone, BodyWritings.getRandomWritingIDForZone(zone))
+		addMessage("Someone also left a memento on your "+BodyWritingsZone.getZoneVisibleName(zone)+"..")
 	
 	if(_action == "continue3"):
 		var randomInmate = [
@@ -645,6 +655,8 @@ func _react(_action: String, _args):
 			GM.pc.gotAnusFuckedBy(pickedInmate2)
 			GM.pc.cummedInAnusBy(pickedInmate2)
 			GM.pc.orgasmFrom(pickedInmate)
+			GM.pc.addTallymarkCrotch()
+			GM.pc.addTallymarkButt()
 		else:
 			var pickedInmate = RNG.pick(randomInmate)
 			var pickedInmate2 = RNG.pick(randomInmate)
@@ -654,6 +666,12 @@ func _react(_action: String, _args):
 			GM.pc.gotAnusFuckedBy(pickedInmate2)
 			GM.pc.cummedInAnusBy(pickedInmate2)
 			GM.pc.orgasmFrom(pickedInmate)
+			GM.pc.addTallymarkButt()
+			GM.pc.addTallymarkButt()
+			
+		var zone = BodyWritingsZone.getRandomZone()
+		GM.pc.addBodywriting(zone, BodyWritings.getRandomWritingIDForZone(zone))
+		addMessage("Someone also left a memento on your "+BodyWritingsZone.getZoneVisibleName(zone)+"..")
 	
 	if(_action == "more"):
 		var randomInmate = [
@@ -670,21 +688,29 @@ func _react(_action: String, _args):
 				
 				GM.pc.gotVaginaFuckedBy(pickedInmate)
 				GM.pc.cummedInVaginaBy(pickedInmate)
+				GM.pc.addTallymarkCrotch()
 			elif(randValue < 80):
 				var pickedInmate = RNG.pick(randomInmate)
 				
 				GM.pc.gotAnusFuckedBy(pickedInmate)
 				GM.pc.cummedInAnusBy(pickedInmate)
+				GM.pc.addTallymarkButt()
 			else:
 				GM.pc.cummedOnBy(RNG.pick(randomInmate))
+				
+				var zone = BodyWritingsZone.getRandomZone()
+				GM.pc.addBodywriting(zone, BodyWritings.getRandomWritingIDForZone(zone))
+				addMessage("Someone left a memento on your "+BodyWritingsZone.getZoneVisibleName(zone)+"..")
 	
 	if(_action == "cum_inside_self"):
 		if(GM.pc.hasVagina()):
 			GM.pc.gotVaginaFuckedBy("pc")
 			GM.pc.cummedInVaginaBy("pc")
+			GM.pc.addTallymarkCrotch()
 		else:
 			GM.pc.gotAnusFuckedBy("pc")
 			GM.pc.cummedInAnusBy("pc")
+			GM.pc.addTallymarkButt()
 		GM.pc.orgasmFrom("pc")
 	
 	if(_action in ["continue4", "leave!", "offer_20_creds"]):

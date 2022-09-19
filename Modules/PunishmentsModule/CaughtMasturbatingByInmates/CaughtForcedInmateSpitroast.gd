@@ -232,20 +232,36 @@ func _react(_action: String, _args):
 		GM.pc.cummedOnBy("inmateMale")
 		GM.pc.cummedOnBy("inmateMale2")
 		GM.pc.updateNonBattleEffects()
+		
+		if(RNG.chance(50)):
+			var zone = BodyWritingsZone.getRandomZone()
+			GM.pc.addBodywriting(zone, BodyWritings.getRandomWritingIDForZone(zone))
+			addMessage("They also left a memento on your "+BodyWritingsZone.getZoneVisibleName(zone)+"..")
 
 	if(_action == "creampies"):
 		processTime(60*6)
 		if(GM.pc.hasVagina()):
 			GM.pc.gotVaginaFuckedBy("inmateMale")
 			GM.pc.cummedInVaginaBy("inmateMale")
+			GM.pc.addTallymarkCrotch()
 		else:
 			GM.pc.gotAnusFuckedBy("inmateMale")
 			GM.pc.cummedInAnusBy("inmateMale")
+			GM.pc.addTallymarkButt()
 		GM.pc.cummedOnBy("inmateMale")
 		GM.pc.gotThroatFuckedBy("inmateMale2")
 		GM.pc.cummedInMouthBy("inmateMale2")
+		GM.pc.addTallymarkFace()
 		GM.pc.cummedOnBy("inmateMale2")
 		GM.pc.updateNonBattleEffects()
+		GM.pc.addSkillExperience(Skill.SexSlave, 10, "caught_inmate_spitroast")
+		
+		addMessage("They drew some tallymarks on you")
+		
+		if(RNG.chance(50)):
+			var zone = BodyWritingsZone.getRandomZone()
+			GM.pc.addBodywriting(zone, BodyWritings.getRandomWritingIDForZone(zone))
+			addMessage("They also left a memento on your "+BodyWritingsZone.getZoneVisibleName(zone)+"..")
 
 	if(_action == "endthescene"):
 		endScene()

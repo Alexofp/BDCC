@@ -253,19 +253,26 @@ func _react(_action: String, _args):
 	if(_action == "get_drugged"):
 		GM.pc.addIntoxication(0.8)
 
+	if(_action == "mouth"):
+		GM.pc.gotOrificeStretchedWith(BodypartSlot.Head, 30)
+		GM.pc.cummedInMouthBy("eliza", BodilyFluids.FluidSource.Strapon)
+		GM.pc.cummedOnBy("eliza", BodilyFluids.FluidSource.Strapon)
+		#GM.pc.orgasmFrom("eliza")
+		GM.pc.addSkillExperience(Skill.SexSlave, 25)
+
 	if(_action == "cum!"):
 		GM.pc.gotOrificeStretchedWith(BodypartSlot.Vagina, 30)
 		GM.pc.cummedInVaginaBy("eliza", BodilyFluids.FluidSource.Strapon)
 		GM.pc.cummedOnBy("eliza", BodilyFluids.FluidSource.Strapon)
 		GM.pc.orgasmFrom("eliza")
-		GM.pc.addSkillExperience(Skill.SexSlave, 20)
+		GM.pc.addSkillExperience(Skill.SexSlave, 30)
 		
 	if(_action == "cum!1"):
 		GM.pc.gotOrificeStretchedWith(BodypartSlot.Anus, 30)
 		GM.pc.cummedInAnusBy("eliza", BodilyFluids.FluidSource.Strapon)
 		GM.pc.cummedOnBy("eliza", BodilyFluids.FluidSource.Strapon)
 		GM.pc.orgasmFrom("eliza")
-		GM.pc.addSkillExperience(Skill.SexSlave, 20)
+		GM.pc.addSkillExperience(Skill.SexSlave, 30)
 		
 	if(_action == "continue"):
 		GM.pc.addCredits(1)

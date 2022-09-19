@@ -29,6 +29,7 @@ population = 3
 self_modulate = Color( 1, 1, 0.7, 1 )
 position = Vector2( -128, 0 )
 roomName = "Engineering lobby"
+roomID = "eng_lobby"
 roomDescription = "Entrance to the engineering bay"
 roomColor = 6
 population = 2
@@ -37,6 +38,7 @@ population = 2
 self_modulate = Color( 1, 1, 0.7, 1 )
 position = Vector2( -192, 0 )
 roomName = "Engineering bay"
+roomID = "eng_bay_corridor"
 roomDescription = "Just a corridor that leads to many other rooms. Walls feature a yellow trim, showing that you are in engineering"
 roomColor = 6
 population = 2
@@ -68,7 +70,7 @@ roomName = "Mineshafts"
 roomID = "mining_shafts_entering"
 roomDescription = "You see a little area where the mining equipment is stored.
 
-After it begin the mainshafts"
+Behind it are the caves where the inmates work."
 roomSprite = 4
 roomColor = 7
 population = 3

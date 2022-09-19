@@ -180,6 +180,12 @@ func _react(_action: String, _args):
 		GM.pc.updateNonBattleEffects()
 		if(_action == "cumDrugged"):
 			GM.pc.orgasmFrom("inmateMale")
+			
+			if(RNG.chance(50)):
+				var zone = BodyWritingsZone.getRandomZone()
+				GM.pc.addBodywriting(zone, BodyWritings.getRandomWritingIDForZone(zone))
+				addMessage("He also left a memento on your "+BodyWritingsZone.getZoneVisibleName(zone)+"..")
+		GM.pc.addSkillExperience(Skill.SexSlave, 10, "caught_inmate_forcedbj")
 		
 	if(_action == "shove_away"):
 		processTime(60*1)
