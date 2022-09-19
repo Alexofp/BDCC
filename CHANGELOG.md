@@ -8,7 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.0.17] - 2022-09-19
 ### Added
-- Modding support! Mods can add pretty much anything, from a new item to a new quest. It's even possible to replace the game's files with modded ones, allowing for global modifications if someone dares to try that. Same mods should work both on desktop and android.
+- [Modding support!](https://github.com/Alexofp/BDCC/wiki) Mods can add pretty much anything, from a new item to a new quest. It's even possible to replace the game's files with modded ones, allowing for global modifications if someone dares to try that. Same mods should work both on desktop and android.
 - A new quest that involves testing prototype panties that apparently have portals in them. Quest can be started in the mineshafts
 - 4 sex scenes (+2 little intro ones) that are triggered when you get spotted during masturbation in public spots. They involve public use
 - 3 new scenes in mental ward that explore a strange new drug that makes you 'partically-blind'
