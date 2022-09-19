@@ -33,6 +33,8 @@ func _run():
 
 
 	if(state == "finger_him"):
+		GM.main.playAnimation(StageScene.Duo, "stand", {npc="rubi", npcAction="kneel", npcExposedBodyparts=[BodypartSlot.Anus]})
+		
 		saynn("[say=pc]Yeah, I ain’t gonna just leave such cute slut wanting~[/say]")
 
 		saynn("You pull the femboy up and push him against the nearest fence. Your hand gets pressed into his back, causing him to bend forward and pull his ass back. You drag his shorts down and give his ass a firm smack, sending it to bounce while a cute moan escapes from Rubi’s lips.")
@@ -59,6 +61,7 @@ func _run():
 
 	if(state == "rail_him"):
 		# (needs cock)
+		GM.main.playAnimation(StageScene.Duo, "stand", {npc="rubi", npcAction="kneel", npcExposedBodyparts=[BodypartSlot.Anus], exposedBodyparts=[BodypartSlot.Penis]})
 
 		saynn("[say=pc]How can I leave without first using such a slut?[/say]")
 

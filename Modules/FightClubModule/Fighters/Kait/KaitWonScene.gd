@@ -117,6 +117,7 @@ func _run():
 
 	if(state == "piss_on_her"):
 		# (needs cock or pussy and piss content)
+		GM.main.playAnimation(StageScene.Duo, "stand", {npc="kait", npcAction="kneel", exposedBodyparts=[BodypartSlot.Penis, BodypartSlot.Vagina]})
 
 		# (if has cock)
 		if(GM.pc.hasPenis()):
@@ -140,6 +141,7 @@ func _run():
 
 	if(state == "breed_her"):
 		# (need cock)
+		GM.main.playAnimation(StageScene.Duo, "stand", {npc="kait", npcAction="kneel", exposedBodyparts=[BodypartSlot.Penis], npcExposedBodyparts=[BodypartSlot.Vagina]})
 
 		saynn("You flex your {pc.masc} arms and then expose your {pc.cock}. Kait sees it and shakes her head subtly.")
 

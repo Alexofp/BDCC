@@ -36,7 +36,7 @@ func _run():
 		addButton("Done", "Finish showering", "finish")
 		addButton("Clean inside", "Wash out any bodily fluids from inside too", "clean_inside")
 		addButton("Cold shower", "Helps to calm down", "cold_shower")
-		addDisabledButton("Masturbate", "Not done")
+		#addDisabledButton("Masturbate", "Not done")
 		GM.ES.triggerRun(Trigger.TakingAShower)
 			
 	if(state == "cold_shower"):

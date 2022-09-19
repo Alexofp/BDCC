@@ -6,7 +6,7 @@ func _init():
 func _run():
 	if(state == ""):
 		addCharacter("axis")
-		GM.main.playAnimation(StageScene.Duo, "kneel", {npc="axis"})
+		GM.main.playAnimation(StageScene.Duo, "kneel", {npc="axis", npcExposedBodyparts=[BodypartSlot.Penis], exposedBodyparts=[BodypartSlot.Vagina, BodypartSlot.Anus]})
 
 	if(state == ""):
 		saynn("Unable to continue fighting, you drop to your knees. Fuck, that alpha energy was just too strong. Axis takes his time approaching you.")

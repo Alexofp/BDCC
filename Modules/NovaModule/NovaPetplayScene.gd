@@ -296,6 +296,7 @@ func _run():
 
 	if(state == "oral"):
 		# (needs free mouth)
+		GM.main.playAnimation(StageScene.Duo, "kneel", {npc="nova", npcExposedBodyparts=[BodypartSlot.Penis]})
 
 		saynn("You crawl up to Nova’s legs and put your paws on her thighs. She gasps as you stick your head under her skirt and press your nose against her bulge.")
 
@@ -380,6 +381,7 @@ func _run():
 
 	if(state == "vaginal"):
 		# (needs pussy)
+		GM.main.playAnimation(StageScene.Duo, "kneel", {npc="nova", npcExposedBodyparts=[BodypartSlot.Penis], exposedBodyparts=[BodypartSlot.Vagina]})
 
 		# (if puppy)
 		if(isPuppy):
@@ -543,6 +545,7 @@ func _run():
 		addButton("Continue", "Time to go", "endthescene")
 		
 	if(state == "anal"):
+		GM.main.playAnimation(StageScene.Duo, "kneel", {npc="nova", npcExposedBodyparts=[BodypartSlot.Penis], exposedBodyparts=[BodypartSlot.Anus]})
 		# (if puppy)
 		if(isPuppy):
 			saynn("You ruff playfully and crawl around Nova on all fours before stopping before her and turning around so she can see your {pc.masc} butt in full glory. You wiggle it eagerly and spread your rear legs more so she can get a look at your {pc.analStretch} star.")

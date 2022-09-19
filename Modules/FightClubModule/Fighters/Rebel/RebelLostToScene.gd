@@ -23,6 +23,8 @@ func _run():
 		GM.ES.triggerRun("ArenaFighterPCLost", ["rebel"])
 
 	if(state == "get_fisted"):
+		GM.main.playAnimation(StageScene.Duo, "kneel", {npc="rebel", exposedBodyparts=[BodypartSlot.Vagina, BodypartSlot.Anus]})
+		
 		saynn("The giant buff mare directs her attention to you and puts on an evil smile. You try to brace and cover yourself with your hands but she easily picks your whole body up like it’s nothing and carries you to the middle of the arena.")
 
 		saynn("[say=rebel]No point in running away, sweetheart. It will be very enjoyable. For me at least.[/say]")

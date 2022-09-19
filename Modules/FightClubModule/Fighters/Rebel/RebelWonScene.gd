@@ -34,6 +34,8 @@ func _run():
 		addButton("Continue", "Time to leave", "endthescene")
 
 	if(state == "fisting"):
+		GM.main.playAnimation(StageScene.Duo, "stand", {npc="rebel", npcAction="kneel", npcExposedBodyparts=[BodypartSlot.Vagina]})
+		
 		saynn("The crowd cheers louder as you put on your mean eyes and step towards the defeated opponent. Rebel’s face expression shows acceptance, she tries to cover herself but you take a running start and shove her down to the floor.")
 
 		saynn("[say=rebel]Ugh. Gonna be a rough ride, huh?[/say]")

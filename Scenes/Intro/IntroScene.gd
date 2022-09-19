@@ -250,6 +250,7 @@ func _run():
 		addButton("Wait", "What else is there to do", "saidwhy")
 		
 	if(state == "saidwhy"):
+		GM.main.playAnimation(StageScene.Solo, "sit")
 		saynn("With nothing better to do, you sit still and think about what happened. You begin to remember everything. You hold onto your face. Minutes pass, it feels like forever. The guy lied to you, you’re there for at least an hour already.")
 		
 		addButton("Wait more", "What else is there to do", "waitmore")

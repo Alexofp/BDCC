@@ -215,6 +215,8 @@ func _run():
 		addButton("Continue", "See what happens next", "continue")
 
 	if(state == "continue"):
+		GM.main.playAnimation(StageScene.Duo, "kneel", {npc="stud", npcExposedBodyparts=[BodypartSlot.Penis]})
+		
 		# (if pussy)
 		if(GM.pc.hasVagina()):
 			saynn("But just before you can make yourself cum, the horsie returns and grabs the fleshlight with your pussy for himself.")

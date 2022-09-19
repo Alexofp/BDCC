@@ -62,6 +62,7 @@ func _run():
 
 	if(state == "get_pissed_on"):
 		# (piss version)
+		GM.main.playAnimation(StageScene.Duo, "kneel", {npc="kait", npcExposedBodyparts=[BodypartSlot.Vagina]})
 
 		saynn("You shake your head at the offered hand and try to get up yourself.")
 
@@ -98,6 +99,8 @@ func _run():
 		addButton("Continue", "Time to leave", "endthescene")
 
 	if(state == "get_marked"):
+		GM.main.playAnimation(StageScene.Duo, "kneel", {npc="kait", npcExposedBodyparts=[BodypartSlot.Vagina]})
+		
 		saynn("You shake your head at the offered hand and try to get up yourself.")
 
 		saynn("[say=pc]Nah, I can’t trust a lilac.[/say]")

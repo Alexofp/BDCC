@@ -25,6 +25,7 @@ func _run():
 
 	if(state == "power_bottom"):
 		# (if has cock)
+		GM.main.playAnimation(StageScene.Duo, "kneel", {npc="rubi", exposedBodyparts=[BodypartSlot.Penis], npcExposedBodyparts=[BodypartSlot.Anus]})
 
 		saynn("He looks at your bulge and finally decides what he wants to do with you.")
 
@@ -65,6 +66,7 @@ func _run():
 
 	if(state == "he_cums_on_you"):
 		# (if no penis)
+		GM.main.playAnimation(StageScene.Duo, "kneel", {npc="rubi", npcExposedBodyparts=[BodypartSlot.Penis]})
 
 		saynn("His shorts are bulging harder when he finally decides what to do with you.")
 

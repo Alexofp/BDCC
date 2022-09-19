@@ -100,7 +100,7 @@ func _run():
 
 
 	if(state == "stay"):
-		GM.main.playAnimation(StageScene.Duo, "kneel", {pc = "kait", npc = "avy"})
+		GM.main.playAnimation(StageScene.Duo, "kneel", {pc = "kait", npc = "avy", exposedBodyparts=[BodypartSlot.Vagina, BodypartSlot.Anus], npcExposedBodyparts=[BodypartSlot.Penis]})
 		
 		saynn("The naked cat tries to crawl away from the fox but these attempts are quickly ended by Avy grabbing lilac’s legs and then raising and pinning them into the floor using her body, getting the girl into a mating press position. She then quickly directs her veiny cock down the girl’s cunt and thrusts inside, causing her knotted cock to spread the sensitive pink folds and slide inside the pussy balls-deep!")
 

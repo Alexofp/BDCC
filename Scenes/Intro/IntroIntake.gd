@@ -99,6 +99,7 @@ func _run():
 		addButton("Fuck no", "Say that you will never do it. This might not be the best idea", "notundress")
 	
 	if(state == "undress"):
+		GM.main.playAnimation(StageScene.Solo, "stand", {exposedBodyparts=[BodypartSlot.Body]})
 		aimCamera("intro_nearshower")
 		
 		saynn("Initial confusion is switched with embarrassment, you immediately blush just from the thought.")
@@ -176,7 +177,7 @@ func _run():
 		aimCamera("intro_shower")
 		setLocationName("Shower")
 		
-		GM.main.playAnimation(StageScene.Solo, "walk")
+		GM.main.playAnimation(StageScene.Solo, "walk", {exposedBodyparts=[BodypartSlot.Body]})
 		
 		saynn("You step into the shower area that's closed-off with glass. It’s a small room with many shower heads attached to the ceiling. You keep covering yourself as a normal person would while preparing for the worst. And yes, when the shower begins, you feel that the water is freezing cold. It's so cold that you groan audibly.")
 		

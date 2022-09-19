@@ -100,6 +100,8 @@ func _run():
 		
 
 	if(state == "offer_handjob"):
+		GM.main.playAnimation(StageScene.Duo, "stand", {npc="cp_guard", npcExposedBodyparts=[BodypartSlot.Penis]})
+		
 		saynn("Instead of doing as told you walk up closer to the guard and boldly put a hand on his crotch, giving it a slight squeeze. The guy hums and smirks.")
 
 		saynn("[say=pc]How about I offer you something else~[/say]")
@@ -212,6 +214,8 @@ func _run():
 		addButtonWithChecks("Catch anal", "Use the guy’s dick for your pleasure", "catch_anal", [], [ButtonChecks.NotHandsBlocked])
 
 	if(state == "catch_anal"):
+		GM.main.playAnimation(StageScene.Duo, "stand", {npc="cp_guard", npcExposedBodyparts=[BodypartSlot.Penis], exposedBodyparts=[BodypartSlot.Anus]})
+		
 		saynn("You straddle the guy and unzip his pants, he seems more intrigued than scared, watching you. You of course made sure he can’t reach his weapons or the shock remote, rendering him helpless.")
 
 		saynn("[say=cp_guard]You could have asked, you know[/say]")

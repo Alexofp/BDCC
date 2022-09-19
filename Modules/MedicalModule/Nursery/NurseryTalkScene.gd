@@ -131,7 +131,7 @@ func _run():
 			var other = calculateAmount(false)
 			if(other > 0):
 				sayn("")
-				saynn("- Unrelated records found "+str(calculateAmount(true))+":")
+				saynn("- Unrelated records found "+str(calculateAmount(false))+":")
 			
 				printChildren(false)
 			
