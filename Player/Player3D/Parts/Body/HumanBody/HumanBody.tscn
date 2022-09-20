@@ -127,7 +127,7 @@ albedo_texture = ExtResource( 2 )
 [node name="HumanBody" instance=ExtResource( 1 )]
 
 [node name="AttachmentProxy" parent="." index="0" instance=ExtResource( 4 )]
-transform = Transform( 0.991162, -0.132654, 0, 0.132654, 0.991162, 0, 0, 0, 1, 0.0741279, 6.65269, 0.0196892 )
+transform = Transform( 0.991162, -0.132654, 0, 0.132654, 0.991162, 0, 0, 0, 1, 0.074, 6.653, 0.043 )
 boneId = "Neck"
 zoneName = "neck"
 
