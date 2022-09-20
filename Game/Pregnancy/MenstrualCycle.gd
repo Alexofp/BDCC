@@ -157,11 +157,6 @@ func obsorbCum(cumType, amountML, whosCum, orificeType = OrificeType.Vagina, vir
 	
 	if(!BodilyFluids.FluidType.canMakeYouPregnant(cumType)):
 		return
-	
-	# Herms shouldn't get pregnant from their own cum
-	# .. or should they?
-	if(whosCum == getCharacter().getID()):
-		return
 		
 	var fertility = getCharacter().getFertility()
 	var crossSpeciesCompatibility = getCharacter().getCrossSpeciesCompatibility()
