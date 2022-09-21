@@ -145,3 +145,6 @@ func getThickness():
 
 func getLootTable(_battleName):
 	return GuardLoot.new()
+
+func getParentCharacterID():
+	return "nova"

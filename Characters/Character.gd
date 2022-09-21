@@ -222,3 +222,13 @@ func getAiStrategy(_battleName):
 
 func interestVerbalReaction(_interest):
 	return null
+
+func getLustInterests() -> LustInterests:
+	var parentCharID = getParentCharacterID()
+	if(parentCharID == null):
+		return .getLustInterests()
+	
+	return GlobalRegistry.getCharacter(parentCharID).getLustInterests()
+
+func getParentCharacterID():
+	return null
