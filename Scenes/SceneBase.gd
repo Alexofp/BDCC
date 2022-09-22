@@ -55,6 +55,7 @@ func run():
 	GM.ui.clearButtons()
 	GM.ui.clearUItextboxes()
 	_run()
+	GM.ES.triggerRun(Trigger.SceneAndStateHook, [sceneID, state])
 	
 	GM.pc.updateEffectPanel(GM.ui.getPlayerStatusEffectsPanel())
 	if(fightCharacter):

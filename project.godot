@@ -265,6 +265,11 @@ _global_script_classes=[ {
 "path": "res://Events/EventTriggers/PriorityEventTrigger.gd"
 }, {
 "base": "EventTrigger",
+"class": "EventTriggerSceneHook",
+"language": "GDScript",
+"path": "res://Events/EventTriggers/SceneHookEventTrigger.gd"
+}, {
+"base": "EventTrigger",
 "class": "EventTriggerWeighted",
 "language": "GDScript",
 "path": "res://Events/EventTriggers/WeightedEventTrigger.gd"
@@ -806,6 +811,7 @@ _global_script_class_icons={
 "EventTrigger": "",
 "EventTriggerLocation": "",
 "EventTriggerPriority": "",
+"EventTriggerSceneHook": "",
 "EventTriggerWeighted": "",
 "FightClubFighter": "",
 "FightClubModule": "",
