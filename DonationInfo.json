@@ -1,5 +1,5 @@
 {
-	"dateString": "19 of Sep 2022",
+	"dateString": "22 of Sep 2022",
 	"entries": {
 		"$1.00": [
 			{
@@ -9,22 +9,22 @@
 				"nickname": "thatoneguyatthebar"
 			},
 			{
-				"nickname": "Maxtacks"
-			},
-			{
-				"nickname": "SuPhox"
+				"nickname": "Blastburn"
 			},
 			{
 				"nickname": "Caliban"
 			},
 			{
-				"nickname": "Blastburn"
+				"nickname": "SuPhox"
 			},
 			{
-				"nickname": "User#928169c6"
+				"nickname": "Maxtacks"
 			},
 			{
 				"nickname": "Kyle Oran Evans "
+			},
+			{
+				"nickname": "User#928169c6"
 			},
 			{
 				"nickname": "Zeneroth"
@@ -41,10 +41,13 @@
 				"nickname": "Shadowfaux"
 			},
 			{
-				"nickname": "KomodoWarans"
+				"nickname": "Meepyneepy"
 			},
 			{
 				"nickname": "Sami"
+			},
+			{
+				"nickname": "KomodoWarans"
 			}
 		],
 		"$5.00": [
@@ -64,5 +67,5 @@
 		"$5.00",
 		"$1.00"
 	],
-	"unixTime": 1663606156
+	"unixTime": 1663826713
 }
