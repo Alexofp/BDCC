@@ -506,7 +506,7 @@ albedo_texture = ExtResource( 8 )
 [node name="InmateUniform" instance=ExtResource( 2 )]
 
 [node name="bodywidepng" type="MeshInstance" parent="." index="0"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.053 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.07 )
 mesh = SubResource( 16 )
 skin = SubResource( 17 )
 material/0 = SubResource( 51 )
@@ -542,7 +542,7 @@ state = "breasts"
 stateValue = "nonflat"
 
 [node name="breastsScalable001" type="MeshInstance" parent="PartStatePicker/PartState" index="0"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.04 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.07 )
 mesh = SubResource( 48 )
 skin = SubResource( 49 )
 skeleton = NodePath("../../..")
