@@ -12,34 +12,32 @@ export(bool) var canNorth = true
 export(bool) var canEast = true
 export(bool) var canSouth = true
 
-enum RoomSprite { NONE, PERSON, CANTEEN, STAIRS, IMPORTANT, COMPUTER, VENDOMAT, SHOWER, WC, LAUNDRY }
-export(RoomSprite) var roomSprite = RoomSprite.NONE
-enum RoomColor { White, Green, Red, Blue, Pink, Orange, Yellow, Grey, LightGrey }
-export(RoomColor) var roomColor = RoomColor.White setget onRoomChangeColor
-export(RoomColor) var gridColor = RoomColor.White setget onGridChangeColor
+export(RoomStuff.RoomSprite) var roomSprite = RoomStuff.RoomSprite.NONE
+export(RoomStuff.RoomColor) var roomColor = RoomStuff.RoomColor.White setget onRoomChangeColor
+export(RoomStuff.RoomColor) var gridColor = RoomStuff.RoomColor.White setget onGridChangeColor
 const RoomColorToColor = {
-	RoomColor.White : Color.white,
-	RoomColor.Green : Color(0.7, 1.0, 0.7),
-	RoomColor.Red : Color(1.0, 0.6, 0.6),
-	RoomColor.Blue : Color(0.7, 0.7, 1.0),
-	RoomColor.Pink : Color(1.0, 0.6, 0.8),
-	RoomColor.Orange : Color(255.0/255.0, 204.0/255.0, 153.0/255.0),
-	RoomColor.Yellow : Color(1.0, 1.0, 0.7),
-	RoomColor.Grey : Color(0.5, 0.5, 0.5),
-	RoomColor.LightGrey : Color(0.7, 0.7, 0.7),
+	RoomStuff.RoomColor.White : Color.white,
+	RoomStuff.RoomColor.Green : Color(0.7, 1.0, 0.7),
+	RoomStuff.RoomColor.Red : Color(1.0, 0.6, 0.6),
+	RoomStuff.RoomColor.Blue : Color(0.7, 0.7, 1.0),
+	RoomStuff.RoomColor.Pink : Color(1.0, 0.6, 0.8),
+	RoomStuff.RoomColor.Orange : Color(255.0/255.0, 204.0/255.0, 153.0/255.0),
+	RoomStuff.RoomColor.Yellow : Color(1.0, 1.0, 0.7),
+	RoomStuff.RoomColor.Grey : Color(0.5, 0.5, 0.5),
+	RoomStuff.RoomColor.LightGrey : Color(0.7, 0.7, 0.7),
 }
 
 const sprites = {
 	#RoomSprite.NONE: ,
-	RoomSprite.PERSON: preload("res://Images/World/person.png"),
-	RoomSprite.CANTEEN: preload("res://Images/World/canteen.png"),
-	RoomSprite.STAIRS: preload("res://Images/World/stairs.png"),
-	RoomSprite.IMPORTANT: preload("res://Images/World/important.png"),
-	RoomSprite.COMPUTER: preload("res://Images/World/computer.png"),
-	RoomSprite.VENDOMAT: preload("res://Images/World/vendomat.png"),
-	RoomSprite.SHOWER: preload("res://Images/World/shower.png"),
-	RoomSprite.WC: preload("res://Images/World/wc.png"),
-	RoomSprite.LAUNDRY: preload("res://Images/World/laundry.png"),
+	RoomStuff.RoomSprite.PERSON: preload("res://Images/World/person.png"),
+	RoomStuff.RoomSprite.CANTEEN: preload("res://Images/World/canteen.png"),
+	RoomStuff.RoomSprite.STAIRS: preload("res://Images/World/stairs.png"),
+	RoomStuff.RoomSprite.IMPORTANT: preload("res://Images/World/important.png"),
+	RoomStuff.RoomSprite.COMPUTER: preload("res://Images/World/computer.png"),
+	RoomStuff.RoomSprite.VENDOMAT: preload("res://Images/World/vendomat.png"),
+	RoomStuff.RoomSprite.SHOWER: preload("res://Images/World/shower.png"),
+	RoomStuff.RoomSprite.WC: preload("res://Images/World/wc.png"),
+	RoomStuff.RoomSprite.LAUNDRY: preload("res://Images/World/laundry.png"),
 }
 
 onready var roomSpriteObject = $Sprite
@@ -84,13 +82,29 @@ func _ready():
 	#	world = get_parent().get_parent()
 	#	gridsize = world.gridsize
 	
-	self_modulate = RoomColorToColor[roomColor]
+	
 	
 	#if(world):
 	#	world.registerRoom(self)
-		
+	if(RoomColorToColor.has(roomColor)):
+		self_modulate = RoomColorToColor[roomColor]
 	if(sprites.has(roomSprite)):
 		roomSpriteObject.texture = sprites[roomSprite]
+		
+func setRoomColor(newColor):
+	if(newColor != roomColor && RoomColorToColor.has(newColor)):
+		roomColor = newColor
+		
+func setRoomGridColor(newColor):
+	if(newColor != gridColor && RoomColorToColor.has(newColor)):
+		gridColor = newColor
+		
+func setRoomSprite(newSprite):
+	if(newSprite != roomSprite && sprites.has(newSprite)):
+		roomSprite = newSprite
+		roomSpriteObject.texture = sprites[roomSprite]
+	
+
 	
 func getFloorID():
 	var myParent = get_parent()
@@ -192,7 +206,7 @@ func onRoomChangeColor(newvalue):
 func onGridChangeColor(newvalue):
 	gridColor = newvalue
 	
-	if(newvalue == RoomColor.White):
+	if(newvalue == RoomStuff.RoomColor.White):
 		$Grid.visible = false
 	else:
 		$Grid.visible = true

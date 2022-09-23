@@ -17,3 +17,4 @@ func onButton(_method, _args):
 	if(_method == "alexfirst"):
 		runScene("AlexRynardFirstTimeTalk")
 		setFlag("PortalPantiesModule.Alex_FirstTimeTalked", true)
+		GM.main.applyWorldEdit("AlexRynardWorldEdit")

@@ -13,6 +13,7 @@ var species = []
 var perks = []
 var lustActions = []
 var statusEffects = []
+var worldEdits = []
 
 var id = "badmodule"
 var author = "no author"
@@ -54,6 +55,9 @@ func register():
 	
 	for statusEffect in statusEffects:
 		GlobalRegistry.registerStatusEffect(statusEffect)
+
+	for worldEdit in worldEdits:
+		GlobalRegistry.registerWorldEdit(worldEdit)
 
 func registerEventTriggers():
 	pass

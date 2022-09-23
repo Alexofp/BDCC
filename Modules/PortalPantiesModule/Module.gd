@@ -59,6 +59,9 @@ func _init():
 	quests = [
 		"res://Modules/PortalPantiesModule/PantiesQuest/PortalPantiesQuest.gd",
 	]
+	worldEdits = [
+		"res://Modules/PortalPantiesModule/AlexRynard/AlexRynardWorldEdit.gd",
+	]
 
 func resetFlagsOnNewDay():
 	pass

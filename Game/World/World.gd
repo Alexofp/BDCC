@@ -135,12 +135,13 @@ func addTransitions():
 				astar.connect_points(_room.astarID, nextRoom.astarID)
 
 func _exit_tree():
-	assert(GM.world == self)
-	GM.world = null
+	pass
+	#assert(GM.world == self)
+	#GM.world = null
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	assert(GM.world == null)
+	#assert(GM.world == null)
 	GM.world = self
 	astar = AStar2D.new()
 	
@@ -186,6 +187,21 @@ func getRoomByID(id:String):
 	if(!roomDict.has(id)):
 		return null
 	return roomDict[id]
+
+func setRoomSprite(id:String, newRoomSprite):
+	var room = getRoomByID(id)
+	if(room != null):
+		room.setRoomSprite(newRoomSprite)
+
+func setRoomColor(id:String, newRoomColor):
+	var room = getRoomByID(id)
+	if(room != null):
+		room.setRoomColor(newRoomColor)
+
+func setRoomGridColor(id:String, newRoomColor):
+	var room = getRoomByID(id)
+	if(room != null):
+		room.setRoomGridColor(newRoomColor)
 
 func hasRoomID(id:String):
 	if(!roomDict.has(id)):

@@ -624,6 +624,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Game/World/RoomAction.gd"
 }, {
+"base": "Object",
+"class": "RoomStuff",
+"language": "GDScript",
+"path": "res://Game/World/RoomStuff.gd"
+}, {
 "base": "Reference",
 "class": "SaveConversion",
 "language": "GDScript",
@@ -748,6 +753,11 @@ _global_script_classes=[ {
 "class": "VaginaOrifice",
 "language": "GDScript",
 "path": "res://Player/Orifice/VaginaOrifice.gd"
+}, {
+"base": "Reference",
+"class": "WorldEditBase",
+"language": "GDScript",
+"path": "res://Game/World/WorldEditBase.gd"
 }, {
 "base": "Node2D",
 "class": "WorldFloor",
@@ -883,6 +893,7 @@ _global_script_class_icons={
 "RestraintUnremovable": "",
 "RestraintVaginalplug": "",
 "RoomAction": "",
+"RoomStuff": "",
 "SaveConversion": "",
 "SayParser": "",
 "SceneBase": "",
@@ -908,6 +919,7 @@ _global_script_class_icons={
 "Trigger": "",
 "Util": "",
 "VaginaOrifice": "",
+"WorldEditBase": "",
 "WorldFloor": "",
 "WorldPopulation": ""
 }

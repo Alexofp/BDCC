@@ -39,6 +39,8 @@ var fightClubFightersByRank: Dictionary = {}
 var fightClubFighters: Dictionary = {}
 var mapFloors: Dictionary = {}
 var imagePacks: Dictionary = {}
+var worldEdits: Dictionary = {}
+var regularWorldEdits: Array = []
 
 var bodypartStorageNode
 
@@ -1012,3 +1014,42 @@ func getImagePack(id: String):
 
 func getImagePacks():
 	return imagePacks
+
+
+
+func registerWorldEdit(path: String):
+	var worldEdit = load(path)
+	var worldEditObject = worldEdit.new()
+	worldEdits[worldEditObject.id] = worldEditObject
+	if(worldEditObject.isRegular):
+		regularWorldEdits.append(worldEditObject)
+
+func registerWorldEditFolder(folder: String):
+	var dir = Directory.new()
+	if dir.open(folder) == OK:
+		dir.list_dir_begin()
+		var file_name = dir.get_next()
+		while file_name != "":
+			if dir.current_is_dir():
+				pass
+				#print("Found directory: " + file_name)
+			else:
+				if(file_name.get_extension() == "gd"):
+					var full_path = folder.plus_file(file_name)
+					#print("Registered world edit: " + full_path)
+					registerWorldEdit(full_path)
+			file_name = dir.get_next()
+	else:
+		Log.printerr("An error occurred when trying to access the path "+folder)
+		
+func getWorldEdit(id: String):
+	if(!worldEdits.has(id)):
+		Log.printerr("ERROR: world edit with the id "+id+" wasn't found")
+		return null
+	return worldEdits[id]
+
+func getWorldEdits():
+	return worldEdits
+
+func getRegularWorldEdits():
+	return regularWorldEdits

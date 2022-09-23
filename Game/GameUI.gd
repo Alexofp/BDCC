@@ -353,3 +353,6 @@ func clearCharactersPanel():
 
 func updateCharacterInPanel():
 	charactersArtworkPanel.updateMainCharacter()
+
+func recreateWorld():
+	mapAndTimePanel.recreateWorld()

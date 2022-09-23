@@ -53,6 +53,9 @@ func _init():
 		"res://Modules/TaviModule/TaviAppleQuest.gd",
 		"res://Modules/TaviModule/Quest2/TaviQuest2.gd",
 	]
+	worldEdits = [
+		"res://Modules/TaviModule/TaviWorldEdit.gd",
+	]
 
 func resetFlagsOnNewDay():
 	pass

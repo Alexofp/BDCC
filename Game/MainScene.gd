@@ -83,6 +83,7 @@ func _ready():
 	Console.addCommand("clearflag", self, "consoleClearFlag", ["flagID"], "Resets the game flag, be very careful")
 	Console.addCommand("setmoduleflag", self, "consoleSetModuleFlagBool", ["moduleID", "flagID", "trueOrFalse"], "Changes the game flag, be very careful")
 	Console.addCommand("clearmoduleflag", self, "consoleClearModuleFlag", ["moduleID", "flagID"], "Resets the game flag, be very careful")
+	applyAllWorldEdits()
 	
 func startNewGame():
 	for scene in sceneStack:
@@ -168,7 +169,21 @@ func reRun():
 	runCurrentScene()
 
 func loadingSavefileFinished():
+	GM.ui.recreateWorld()
 	reRun()
+	
+	applyAllWorldEdits()
+	
+func applyAllWorldEdits():
+	var worldEdits = GlobalRegistry.getWorldEdits()
+	for worldEditID in worldEdits:
+		var worldEdit = worldEdits[worldEditID]
+		worldEdit.apply(GM.world)
+
+func applyWorldEdit(id):
+	var worldEdits = GlobalRegistry.getWorldEdits()
+	if(worldEdits.has(id)):
+		worldEdits[id].apply(GM.world)
 
 func canSave():
 	for scene in sceneStack:
@@ -446,6 +461,9 @@ func updateStuff():
 			GM.world.setDarknessSize(64)
 		else:
 			GM.world.setDarknessSize(16)
+			
+	for worldEdit in GlobalRegistry.getRegularWorldEdits():
+		worldEdit.apply(GM.world)
 
 
 func _on_Player_levelChanged():

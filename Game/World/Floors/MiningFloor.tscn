@@ -60,7 +60,6 @@ position = Vector2( 64, 0 )
 roomName = "Mineshafts"
 roomID = "mining_taviroom"
 roomDescription = "A maintenance area that has some old equipment, most of it is broken"
-roomSprite = 1
 roomColor = 8
 
 [node name="MiningShafts" parent="." index="6" instance=ExtResource( 2 )]
