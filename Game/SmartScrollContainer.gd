@@ -39,7 +39,7 @@ func _gui_input(ev):
 				var tween = Tween.new()
 				add_child(tween)
 				var delta = ev.position - flick_start
-				var target = source - delta * flick_dur * 15.0
+				var target = source - delta * flick_dur * 1.0
 				tween.interpolate_method(self, 'set_h_scroll', source.x, target.x, flick_dur, Tween.TRANS_LINEAR, Tween.EASE_OUT)
 				tween.interpolate_method(self, 'set_v_scroll', source.y, target.y, flick_dur, Tween.TRANS_LINEAR, Tween.EASE_OUT)
 				tween.interpolate_callback(tween, flick_dur, 'queue_free')
