@@ -48,6 +48,8 @@ func _run():
 		addButton("Datapad", "Look at the menu", "datapad")
 
 	if(state == "datapad"):
+		removeCharacter("tavi")
+		
 		saynn("- - - AlphaOS Kernel v.0.9.8 Loaded Successfully In Debug Mode - - -")
 
 		saynn("- - - AlphaCorp Technologies, ALL RIGHTS BELONG TO US - - -")
@@ -199,11 +201,11 @@ func _run():
 
 		saynn("[sayShowName=captain]Just wanna let you know that it’s nice to have a person by my side that follows the orders for once.[/sayShowName]")
 
-		saynn("[sayShowName=risha]It’s my job, sir.[/sayShowName]")
+		saynn("[sayShowName=risha]Just doing my job.[/sayShowName]")
 
 		saynn("[sayShowName=captain]I had a strange feeling lately, you know. Like something big is about to happen.[/sayShowName]")
 
-		saynn("[sayShowName=risha]I got your back, sir.[/sayShowName]")
+		saynn("[sayShowName=risha]I got your back, sir. I share your vision completely, it's the only way we can win this war.[/sayShowName]")
 
 		saynn("[sayShowName=captain]I’m glad, just be careful from now on. Medical wing keeps complaining about you. Don’t give them extra work. I understand that you have needs but try to be professional about it.[/sayShowName]")
 
@@ -240,6 +242,7 @@ func _run():
 
 	if(state == "after_that"):
 		# (when reading the two announcements)
+		addCharacter("tavi")
 
 		saynn("After some time, the datapad suddenly locks itself again and shuts off soon after. Tavi grabs it off of you and sighs before just throwing it away.")
 

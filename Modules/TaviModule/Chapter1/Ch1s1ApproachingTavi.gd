@@ -121,21 +121,21 @@ func _run():
 
 		saynn("She looks at you, frowning. Her eyes are reading yours.")
 
-		saynn("[say=tavi]Think I’m evil? You don’t know me.[/say]")
+		saynn("[say=tavi]Think I’m evil? It's not that easy.[/say]")
 
 		saynn("[say=pc]Tell me.[/say]")
 
-		saynn("[say=tavi]Tell you what? That I’m a killer? Yes, everything he said is true.[/say]")
+		saynn("[say=tavi]Tell you what? That I’m a killer? Yes, everything he said is true. I killed people who created me.[/say]")
 
-		saynn("[say=pc]But why?[/say]")
+		saynn("[say=pc]But why did you do that?[/say]")
 
-		saynn("[say=tavi]Because I need to. Ruining their lives makes me feel something inside. I can’t explain it. I’m only making this world better. You will have to trust me.[/say]")
+		saynn("[say=tavi]Because I need to. I'm an empty husk. But ruining their lives made me feel something inside. I can’t explain it. I’m only making this world better. You will have to trust me.[/say]")
 
-		saynn("[say=pc]Will you kill me?[/say]")
+		saynn("[say=pc]Will you kill me if I don't?[/say]")
 
 		saynn("That question makes Tavi chuckle for some reason. You can see her intimidating sharp fangs.")
 
-		saynn("[say=tavi]Why would I? You’re safe as long as you’re obeying, cutie~[/say]")
+		saynn("[say=tavi]You’re safe as long as you’re obeying, cutie~.[/say]")
 
 		saynn("Monster that kills monsters, huh.")
 

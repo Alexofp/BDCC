@@ -19,6 +19,9 @@ func getFlags():
 		
 		# chapter1
 		"ch1ApproachedAfterQuest2": flag(FlagType.Bool),
+		"ch1SeducedRishaAndAttacked": flag(FlagType.Bool),
+		"ch1SeducedRishaAndGotFucked": flag(FlagType.Bool),
+		"ch1WaitedBeforePushingRisha": flag(FlagType.Bool),
 	}
 
 func _init():

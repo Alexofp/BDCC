@@ -594,6 +594,7 @@ func _react(_action: String, _args):
 		GM.pc.orgasmFrom("risha")
 		
 		GM.pc.addSkillExperience(Skill.SexSlave, 40)
+		setFlag("TaviModule.ch1SeducedRishaAndGotFucked", true)
 	
 	if(_action == "struggle!"):
 		GM.pc.addPain(100)
@@ -615,8 +616,10 @@ func _react(_action: String, _args):
 	if(_action in ["fight_horny", "fight_normal", "fight_easier"]):
 		if(_action == "fight_horny"):
 			getCharacter("risha").addLust(30)
+			setFlag("TaviModule.ch1SeducedRishaAndAttacked", true)
 		if(_action == "fight_easier"):
 			getCharacter("risha").addPain(50)
+			setFlag("TaviModule.ch1WaitedBeforePushingRisha", true)
 		runScene("FightScene", ["risha"], "ch1rishafight")
 		return
 
