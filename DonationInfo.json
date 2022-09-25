@@ -1,10 +1,7 @@
 {
-	"dateString": "22 of Sep 2022",
+	"dateString": "25 of Sep 2022",
 	"entries": {
 		"$1.00": [
-			{
-				"nickname": "MaxMaxouCat21"
-			},
 			{
 				"nickname": "thatoneguyatthebar"
 			},
@@ -24,10 +21,10 @@
 				"nickname": "Kyle Oran Evans "
 			},
 			{
-				"nickname": "User#928169c6"
+				"nickname": "Zeneroth"
 			},
 			{
-				"nickname": "Zeneroth"
+				"nickname": "User#928169c6"
 			},
 			{
 				"nickname": "Shadowwall123"
@@ -52,6 +49,9 @@
 		],
 		"$5.00": [
 			{
+				"nickname": "MaxMaxouCat21"
+			},
+			{
 				"nickname": "Loch55"
 			},
 			{
@@ -67,5 +67,5 @@
 		"$5.00",
 		"$1.00"
 	],
-	"unixTime": 1663826713
+	"unixTime": 1664121229
 }
