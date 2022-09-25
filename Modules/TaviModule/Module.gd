@@ -16,6 +16,9 @@ func getFlags():
 		"Tavi_Quest2Day": flag(FlagType.Number),
 		"Tavi_Quest2MetHer": flag(FlagType.Bool),
 		"Tavi_Quest2Completed": flag(FlagType.Bool),
+		
+		# chapter1
+		"ch1ApproachedAfterQuest2": flag(FlagType.Bool),
 	}
 
 func _init():
@@ -36,6 +39,10 @@ func _init():
 		"res://Modules/TaviModule/Quest2/TaviQuest2CaptainsOffice.gd",
 		
 		"res://Modules/TaviModule/ShowerEvent/TaviShowerScene.gd",
+		
+		"res://Modules/TaviModule/Chapter1/Ch1s1ApproachingTavi.gd",
+		"res://Modules/TaviModule/Chapter1/Ch1s2Risha.gd",
+		"res://Modules/TaviModule/Chapter1/Ch1s3Datapad.gd",
 		]
 	characters = []
 	items = []
@@ -48,6 +55,8 @@ func _init():
 		"res://Modules/TaviModule/Quest2/TaviQuest2ElevatorEvent.gd",
 		
 		"res://Modules/TaviModule/ShowerEvent/TaviShowerEvent.gd",
+		
+		"res://Modules/TaviModule/Chapter1/Ch1s1ApproachingTaviEvent.gd",
 	]
 	quests = [
 		"res://Modules/TaviModule/TaviAppleQuest.gd",

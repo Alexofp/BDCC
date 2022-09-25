@@ -1026,47 +1026,6 @@ func addTimedBuffsTurns(buffs: Array, turns):
 		timedBuffsDurationTurns = turns
 	updateNonBattleEffects()
 
-func addTallymark(zone):
-	addEffect(StatusEffect.HasTallyMarks, [zone])
-
-func addTallymarkPickBestZone(zonelist):
-	addEffect(StatusEffect.HasTallyMarks, [zonelist])
-
-func addTallymarkFace():
-	addTallymarkPickBestZone([
-		BodyWritingsZone.CheekLeft,
-		BodyWritingsZone.CheekRight,
-	])
-
-func addTallymarkCrotch():
-	addTallymarkPickBestZone([
-		BodyWritingsZone.LowerAbdomen,
-		BodyWritingsZone.HipLeft,
-		BodyWritingsZone.HipRight,
-		BodyWritingsZone.ButtcheekLeft,
-		BodyWritingsZone.ButtcheekRight,
-		BodyWritingsZone.ThighLeft,
-		BodyWritingsZone.ThighRight,
-	])
-
-func addTallymarkButt():
-	addTallymarkCrotch()
-
-func hasTallymarks():
-	return hasEffect(StatusEffect.HasTallyMarks)
-
-func clearTallymarks():
-	removeEffect(StatusEffect.HasTallyMarks)
-
-func addBodywriting(zone, writingID):
-	addEffect(StatusEffect.HasBodyWritings, [zone, writingID])
-
-func hasBodywritings():
-	return hasEffect(StatusEffect.HasBodyWritings)
-
-func clearBodywritings():
-	removeEffect(StatusEffect.HasBodyWritings)
-
 func hasCondoms():
 	return getInventory().getItemsWithTag(ItemTag.Condom).size() > 0
 
