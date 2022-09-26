@@ -1,7 +1,7 @@
 extends "res://Scenes/SceneBase.gd"
 
-#var minigameScene = preload("res://Game/Minigames/Struggling/StrugglingGameControl.tscn")
-var minigameScene = preload("res://Game/Minigames/Struggling/StrugglingGame.tscn")
+var minigameScene = preload("res://Game/Minigames/ClickAtTheRightTime/ClickAtTheRightTime.tscn")
+#var minigameScene = preload("res://Game/Minigames/Struggling/StrugglingGame.tscn")
 
 func _init():
 	sceneID = "MeScene"
@@ -107,9 +107,9 @@ func _run():
 		
 	if(state == "teststruggle"):
 		var game = minigameScene.instance()
+		GM.ui.addCustomControl("minigame", game)
 		game.setDifficulty(4)
 		game.connect("minigameCompleted", self, "onMinigameTest")
-		GM.ui.addCustomControl("minigame", game)
 
 		addButton("Continue", "Good", "")
 

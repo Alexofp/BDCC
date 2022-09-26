@@ -11,7 +11,8 @@ var keyText = ""
 var fightMode = false
 var restraintID = ""
 
-var minigameScene = preload("res://Game/Minigames/Struggling/StrugglingGame.tscn")
+#var minigameScene = preload("res://Game/Minigames/Struggling/StrugglingGame.tscn")
+var minigameScene = preload("res://Game/Minigames/ClickAtTheRightTime/ClickAtTheRightTime.tscn")
 
 func _init():
 	sceneID = "StrugglingScene"
@@ -90,9 +91,9 @@ func _run():
 		var restraintData: RestraintData = item.getRestraintData()
 		
 		var game = minigameScene.instance()
+		GM.ui.addCustomControl("minigame", game)
 		game.setDifficulty(restraintData.getLevel())
 		game.connect("minigameCompleted", self, "onMinigameCompleted")
-		GM.ui.addCustomControl("minigame", game)
 		
 		addButton("Give up", "Give up the struggle and lose 10 stamina", "giveupstruggle")
 
