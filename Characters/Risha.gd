@@ -2,9 +2,9 @@ extends Character
 
 func _init():
 	id = "risha"
-	npcLevel = 3
-	npcBasePain = 140
-	npcBaseLust = 70
+	npcLevel = 5
+	npcBasePain = 150
+	npcBaseLust = 120
 	
 	npcLustInterests = {
 		InterestTopic.TallyMarks: Interest.Likes,
