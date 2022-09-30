@@ -7,6 +7,7 @@ signal levelChanged
 signal skillLevelChanged(skillID)
 signal bodypart_changed
 signal orificeBecomeMoreLoose(orificeName, newvalue, oldvalue)
+signal exchangedCumDuringRubbing(senderName, receiverName)
 #signal soft_doll_update
 
 var pain:int = 0
@@ -784,6 +785,25 @@ func cummedInAnusBy(characterID, sourceType = null):
 
 func cummedInMouthBy(characterID, sourceType = null):
 	cummedInBodypartBy(BodypartSlot.Head, characterID, sourceType)
+
+func rubsVaginasWith(characterID, chanceToStealCum = 100, showMessages = true):
+	if(!RNG.chance(chanceToStealCum)):
+		return
+	
+	if(!hasBodypart(BodypartSlot.Vagina)):
+		return
+	var ch = GlobalRegistry.getCharacter(characterID)
+	if(ch == null || !ch.hasBodypart(BodypartSlot.Vagina)):
+		return
+	
+	var orifice: Orifice = getBodypart(BodypartSlot.Vagina).getOrifice()
+	var npcOrifice: Orifice = ch.getBodypart(BodypartSlot.Vagina).getOrifice()
+	if(orifice == null || npcOrifice == null):
+		return
+	
+	var success = orifice.transferTo(npcOrifice, RNG.randf_range(0.3, 0.6))
+	if(showMessages && success):
+		emit_signal("exchangedCumDuringRubbing", getName(), ch.getName())
 
 func getGenitalElasticity():
 	var value = 0.0

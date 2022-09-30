@@ -141,12 +141,11 @@ func getCurrentNaturalSpill() -> float:
 	
 	return getNaturalDrain()
 	
-func addFluid(fluidType, amount: float, charID = null):
+func addFluid(fluidType, amount: float, charID = null, virility = -100.0):
 	if(amount <= 0.0):
 		return
 	
-	var virility = 1.0
-	if(charID != null):
+	if(charID != null && virility < -99.0):
 		var character = GlobalRegistry.getCharacter(charID)
 		if(character != null):
 			virility = character.getVirility()
@@ -160,6 +159,26 @@ func addFluid(fluidType, amount: float, charID = null):
 	
 	contents.append([fluidType, amount, charID, virility])
 	dirtyFlag = true
+
+func transferTo(otherOrifice: Orifice, fraction = 0.5):
+	var result = false
+	for contentData in contents:
+		var amountToTransfer = contentData[1] * fraction
+		contentData[1] -= amountToTransfer
+		
+		result = true
+		otherOrifice.addFluid(contentData[0], amountToTransfer, contentData[2], contentData[3])
+	removeEmptyInternalEntries()
+	dirtyFlag = true
+	return result
+
+func removeEmptyInternalEntries():
+	var newContents = []
+	for fluidData in contents:
+		if(fluidData[1] > 0):
+			newContents.append(fluidData)
+
+	contents = newContents
 
 func hasFluidType(fluidType):
 	for fluidData in contents:

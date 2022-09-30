@@ -57,6 +57,7 @@ func getOverriddenPC():
 func connectSignalsToPC(who):
 	var _s = who.connect("levelChanged", self, "_on_Player_levelChanged")
 	_s = who.connect("orificeBecomeMoreLoose", self, "_on_Player_orificeBecomeMoreLoose")
+	_s = who.connect("exchangedCumDuringRubbing", self, "_on_Player_exchangedCumDuringRubbing")
 	_s = who.connect("skillLevelChanged", self, "_on_Player_skillLevelChanged")
 	_s = who.connect("stat_changed", $GameUI, "_on_Player_stat_changed")
 
@@ -483,6 +484,9 @@ func _on_Player_skillLevelChanged(_skillID):
 
 func _on_Player_orificeBecomeMoreLoose(orificeName, _newvalue, _oldvalue):
 	addMessage("Your "+orificeName+" is stretched and is now more used to the insertions")
+
+func _on_Player_exchangedCumDuringRubbing(senderName, receiverName):
+	addMessage(receiverName + " stole some cum from "+senderName+" during tribbing")
 
 func getRandomSceneFor(sceneType):
 	var resultScenes = []
