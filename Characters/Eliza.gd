@@ -49,6 +49,7 @@ func _init():
 		InterestTopic.HasCockOnly: Interest.Loves,
 		InterestTopic.Pregnant: Interest.KindaLikes,
 	}
+	npcHasMenstrualCycle = true
 	
 func interestVerbalReaction(interest):
 	if(interest == InterestTopic.Bodywritings):

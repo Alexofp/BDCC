@@ -801,7 +801,7 @@ func rubsVaginasWith(characterID, chanceToStealCum = 100, showMessages = true):
 	if(orifice == null || npcOrifice == null):
 		return
 	
-	var success = orifice.transferTo(npcOrifice, RNG.randf_range(0.3, 0.6))
+	var success = orifice.shareFluids(npcOrifice, RNG.randf_range(0.2, 0.4))
 	if(showMessages && success):
 		emit_signal("exchangedCumDuringRubbing", getName(), ch.getName())
 
