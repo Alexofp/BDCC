@@ -628,6 +628,12 @@ func registerModule(path: String):
 func getModules():
 	return modules
 
+func getModule(id):
+	if(!modules.has(id)):
+		Log.printerr("ERROR: module with the id "+id+" wasn't found")
+		return null
+	return modules[id]
+
 func registerQuest(path: String):
 	var item = load(path)
 	var itemObject = item.new()

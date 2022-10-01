@@ -143,6 +143,10 @@ func createBodyparts():
 func createEquipment():
 	pass
 
+func resetEquipment():
+	inventory.clearEquippedItems()
+	createEquipment()
+
 func processTime(_secondsPassed):
 	for bodypart in processingBodyparts:
 		if(bodypart == null || !is_instance_valid(bodypart)):

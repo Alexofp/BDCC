@@ -165,11 +165,11 @@ func _run():
 	if(state == "alex_rynard"):
 		saynn(".. previous messages are missing ..")
 
-		saynn("[sayShowName=alexrynard]Risha.. Did you know that the camera automatically takes a picture when the datapad is being vandalized? Yeah, now I have a 16k pic of your giant ass.[/sayShowName]")
+		saynn("[sayShowName=alexrynard]Risha.. Did you know that the camera automatically takes a picture when the datapad is being vandalized? Yeah, now I have an 8k pic of your giant ass.[/sayShowName]")
 
-		saynn("[sayShowName=risha]HAH, u don like my curves?[/sayShowName]")
+		saynn("[sayShowName=risha]HAH, u want more?[/sayShowName]")
 
-		saynn("[sayShowName=alexrynard]Yeah, whatever. Just bring it here now.[/sayShowName]")
+		saynn("[sayShowName=alexrynard]Please no. Just bring the datapad here now.[/sayShowName]")
 
 		saynn("[sayShowName=alexrynard]Risha?[/sayShowName]")
 

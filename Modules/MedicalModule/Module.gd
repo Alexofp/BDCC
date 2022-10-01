@@ -5,6 +5,7 @@ func getFlags():
 	return {
 		# Medical module
 		"Eliza_IntroducedMedical": flag(FlagType.Bool),
+		"Eliza_BusyDays": flag(FlagType.Number),
 		"Med_pcKnowsAboutWork": flag(FlagType.Bool),
 		"Med_pcKnowsAboutBreeding": flag(FlagType.Bool),
 		"Med_pcKnowsAboutTests": flag(FlagType.Bool),
@@ -88,8 +89,19 @@ func resetFlagsOnNewDay():
 	GM.main.setModuleFlag("MedicalModule", "Mental_ExperimentHappened", false)
 	GM.main.setModuleFlag("MedicalModule", "Mental_ShowerHappened", false)
 	GM.main.setModuleFlag("MedicalModule", "Mental_PlayerEscaped", false)
+	if(GM.main.getFlag("MedicalModule.Eliza_BusyDays", 0) > 0):
+		GM.main.increaseFlag("MedicalModule.Eliza_BusyDays", -1)
 
-static func resetFlagsOnGettingIntoMentalWard():
+func preparePCForMentalWard():
+	GM.pc.removeAllRestraints()
+	GM.pc.getInventory().unequipSlot(InventorySlot.UnderwearBottom)
+	GM.pc.getInventory().unequipSlot(InventorySlot.UnderwearTop)
+	
+	GM.pc.getInventory().forceEquipStoreOtherUnlessRestraint(GlobalRegistry.createItem("LatexStraitjacket"))
+	
+	resetFlagsOnGettingIntoMentalWard()
+
+func resetFlagsOnGettingIntoMentalWard():
 	GM.main.setModuleFlag("MedicalModule", "Mental_PCBehavior", 0.1)
 	GM.main.setModuleFlag("MedicalModule", "Mental_PCSanity", 0.0)
 	

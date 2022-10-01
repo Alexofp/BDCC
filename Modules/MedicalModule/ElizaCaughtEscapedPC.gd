@@ -99,14 +99,7 @@ func _react(_action: String, _args):
 		GM.pc.addStamina(-200)
 	
 	if(_action == "sleep1"):
-		GM.pc.freeEyesDeleteAll()
-		GM.pc.freeHandsDeleteAll()
-		GM.pc.freeLegsDeleteAll()
-		GM.pc.freeMouthDeleteAll()
-		
-		GM.pc.getInventory().forceEquipStoreOtherUnlessRestraint(GlobalRegistry.createItem("LatexStraitjacket"))
-		
-		MedicalModule.resetFlagsOnGettingIntoMentalWard()
+		getModule("MedicalModule").preparePCForMentalWard()
 
 	if(_action == "endthescene"):
 		endScene()

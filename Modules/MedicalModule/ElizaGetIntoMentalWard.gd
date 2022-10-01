@@ -126,13 +126,7 @@ func _run():
 
 func _react(_action: String, _args):
 	if(_action == "continue"):
-		GM.pc.removeAllRestraints()
-		GM.pc.getInventory().unequipSlot(InventorySlot.UnderwearBottom)
-		GM.pc.getInventory().unequipSlot(InventorySlot.UnderwearTop)
-		
-		GM.pc.getInventory().forceEquipStoreOtherUnlessRestraint(GlobalRegistry.createItem("LatexStraitjacket"))
-		
-		MedicalModule.resetFlagsOnGettingIntoMentalWard()
+		getModule("MedicalModule").preparePCForMentalWard()
 
 	if(_action == "endthescene"):
 		endScene()

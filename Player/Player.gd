@@ -968,7 +968,7 @@ func addIntoxication(howmuch: float):
 	intoxication += howmuch
 	intoxication = clamp(intoxication, 0.0, 2.0)
 	
-	if(intoxication >= 0.5):
+	if(intoxication >= 0.5 && howmuch > 0.0):
 		intoxicationTolerance += howmuch / 20.0
 		if(intoxicationTolerance > 1.0):
 			intoxicationTolerance = 1.0
@@ -1090,3 +1090,24 @@ func removeAllRestraints():
 			continue
 		
 		inventory.unequipItem(item)
+
+func hasTightHoles():
+	var maxLooseness = 0.0
+	var bodypartsToCheck = [BodypartSlot.Vagina, BodypartSlot.Anus]
+	
+	for bodypartID in bodypartsToCheck:
+		if(!hasBodypart(bodypartID)):
+			continue
+			
+		var bodypart:Bodypart = getBodypart(bodypartID)
+		
+		var orifice:Orifice = bodypart.getOrifice()
+		if(orifice == null):
+			continue
+		
+		maxLooseness = max(maxLooseness, orifice.getLooseness())
+	
+	if(maxLooseness < 1.5):
+		return true
+	else:
+		return false

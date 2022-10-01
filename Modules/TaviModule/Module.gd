@@ -22,6 +22,17 @@ func getFlags():
 		"ch1SeducedRishaAndAttacked": flag(FlagType.Bool),
 		"ch1SeducedRishaAndGotFucked": flag(FlagType.Bool),
 		"ch1WaitedBeforePushingRisha": flag(FlagType.Bool),
+		
+		# chapter2
+		"ch2ElizaBeganCheckup": flag(FlagType.Bool),
+		"ch2ElizaDeclinedFullCheckup": flag(FlagType.Bool),
+		"ch2PCFailedToStealDuringCheckup": flag(FlagType.Bool),
+		"ch2PCAttackedEliza": flag(FlagType.Bool),
+		"ch2PCAttackedElizaAndWon": flag(FlagType.Bool),
+		"ch2PCDidBadThingsToEliza": flag(FlagType.Bool),
+		"ch2PCGotPutIntoMentalByEliza": flag(FlagType.Bool),
+		"ch2PCPutDrugsInsideSelf": flag(FlagType.Bool),
+		"ch2PCStoleDrugs": flag(FlagType.Bool),
 	}
 
 func _init():
@@ -46,6 +57,7 @@ func _init():
 		"res://Modules/TaviModule/Chapter1/Ch1s1ApproachingTavi.gd",
 		"res://Modules/TaviModule/Chapter1/Ch1s2Risha.gd",
 		"res://Modules/TaviModule/Chapter1/Ch1s3Datapad.gd",
+		"res://Modules/TaviModule/Chapter2/Ch2e1MedicalCheckup.gd",
 		]
 	characters = []
 	items = []
@@ -60,10 +72,13 @@ func _init():
 		"res://Modules/TaviModule/ShowerEvent/TaviShowerEvent.gd",
 		
 		"res://Modules/TaviModule/Chapter1/Ch1s1ApproachingTaviEvent.gd",
+		"res://Modules/TaviModule/Chapter2/Ch2e1ElizaTalkEvent.gd",
+		"res://Modules/TaviModule/Chapter2/Ch2e1StealDrugsFromStorageEvent.gd",
 	]
 	quests = [
 		"res://Modules/TaviModule/TaviAppleQuest.gd",
 		"res://Modules/TaviModule/Quest2/TaviQuest2.gd",
+		"res://Modules/TaviModule/Chapter2/Ch2ElizaQuest.gd",
 	]
 	worldEdits = [
 		"res://Modules/TaviModule/TaviWorldEdit.gd",
