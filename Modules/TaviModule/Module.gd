@@ -33,6 +33,15 @@ func getFlags():
 		"ch2PCGotPutIntoMentalByEliza": flag(FlagType.Bool),
 		"ch2PCPutDrugsInsideSelf": flag(FlagType.Bool),
 		"ch2PCStoleDrugs": flag(FlagType.Bool),
+		
+		"ch2AlexTalkedTo": flag(FlagType.Bool),
+		"ch2AlexUsedStunbaton": flag(FlagType.Bool),
+		"ch2AlexTriedToSeduce": flag(FlagType.Bool),
+		"ch2AlexSurrendered": flag(FlagType.Bool),
+		"ch2AlexAttackedAndWon": flag(FlagType.Bool),
+		"ch2AlexAttacked": flag(FlagType.Bool),
+		"ch2AlexEscapedSymbian": flag(FlagType.Bool),
+		"ch2PCLearnedCode": flag(FlagType.Bool),
 	}
 
 func _init():
