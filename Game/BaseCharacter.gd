@@ -787,7 +787,7 @@ func cummedInMouthBy(characterID, sourceType = null):
 	cummedInBodypartBy(BodypartSlot.Head, characterID, sourceType)
 
 func rubsVaginasWith(characterID, chanceToStealCum = 100, showMessages = true):
-	if(!RNG.chance(chanceToStealCum)):
+	if(!RNG.chance(chanceToStealCum) || !OPTIONS.isContentEnabled(ContentType.CumStealing)):
 		return
 	
 	if(!hasBodypart(BodypartSlot.Vagina)):
