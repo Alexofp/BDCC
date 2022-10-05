@@ -174,6 +174,15 @@ func isPregnant():
 		return true
 	return false
 
+func isPregnantFromPlayer():
+	if(!isPregnant()):
+		return false
+	
+	for egg in impregnatedEggCells:
+		if(egg.getFatherID() == "pc" || egg.getMotherID() == "pc"):
+			return true
+	return false
+
 func getPregnancyProgress() -> float:
 	var maxProgress = 0.0
 	for egg in impregnatedEggCells:
@@ -201,6 +210,12 @@ func isVisiblyPregnant():
 	if(getPregnancyProgress() >= 0.20):
 		return true
 	return false
+	
+func isVisiblyPregnantFromPlayer():
+	if(!isVisiblyPregnant()):
+		return false
+	
+	return isPregnantFromPlayer()
 	
 func createEggCell():
 	var egg = EggCell.new()
@@ -305,8 +320,3 @@ func giveBirth():
 	
 	return result
 
-func isPregnantFromPlayer():
-	for egg in impregnatedEggCells:
-		if(egg.fatherID == "pc"):
-			return true
-	return false

@@ -909,6 +909,11 @@ func isVisiblyPregnant():
 		return menstrualCycle.isVisiblyPregnant()
 	return false
 
+func isVisiblyPregnantFromPlayer():
+	if(menstrualCycle != null):
+		return menstrualCycle.isVisiblyPregnantFromPlayer()
+	return false
+
 func isHeavilyPregnant():
 	if(menstrualCycle != null):
 		return menstrualCycle.getPregnancyProgress() > 0.66

@@ -8,7 +8,7 @@ func registerTriggers(es):
 	es.addTrigger(self, Trigger.EnteringRoom, "main_bench2")
 
 func react(_triggerID, _args):
-	if(getModuleFlag("RahiModule", "Rahi_FirstTimePregnantHappened", false) || !GlobalRegistry.getCharacter("rahi").isVisiblyPregnant()):
+	if(getModuleFlag("RahiModule", "Rahi_FirstTimePregnantHappened", false) || !GlobalRegistry.getCharacter("rahi").isVisiblyPregnantFromPlayer()):
 		return false
 	
 	setModuleFlag("RahiModule", "Rahi_FirstTimePregnantHappened", true)
