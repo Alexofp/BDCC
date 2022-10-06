@@ -47,11 +47,13 @@ population = 2
 self_modulate = Color( 1, 1, 0.7, 1 )
 position = Vector2( -256, 0 )
 roomName = "Engineering bay"
+roomID = "eng_bay_nearbreakroom"
 roomDescription = "Just a corridor that leads to many other rooms. Walls feature a yellow trim, showing that you are in engineering"
 canEast = false
 roomColor = 6
 gridColor = 5
 population = 2
+astarConnectedTo = PoolStringArray( "eng_bay_corridor" )
 
 [node name="MiningRoom7" parent="." index="5" instance=ExtResource( 2 )]
 self_modulate = Color( 1, 1, 0.7, 1 )

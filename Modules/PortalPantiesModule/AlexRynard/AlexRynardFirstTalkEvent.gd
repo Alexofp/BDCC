@@ -8,7 +8,10 @@ func registerTriggers(es):
 	
 func run(_triggerID, _args):
 	if(getFlag("Mining_IntroducedToMinning") && !getFlag("PortalPantiesModule.Alex_FirstTimeTalked")):
-		addButtonUnlessLate("Alex", "Approach the fox engineer", "alexfirst")
+		if(getFlag("PortalPantiesModule.Alex_BusyDays", 0) > 0):
+			addDisabledButton("Alex", "He is not here today")
+		else:
+			addButtonUnlessLate("Alex", "Approach the fox engineer", "alexfirst")
 
 func getPriority():
 	return 0

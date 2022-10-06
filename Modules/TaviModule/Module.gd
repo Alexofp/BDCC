@@ -35,12 +35,14 @@ func getFlags():
 		"ch2PCStoleDrugs": flag(FlagType.Bool),
 		
 		"ch2AlexTalkedTo": flag(FlagType.Bool),
+		"ch2AlexCapturedSpying": flag(FlagType.Bool),
 		"ch2AlexUsedStunbaton": flag(FlagType.Bool),
 		"ch2AlexTriedToSeduce": flag(FlagType.Bool),
 		"ch2AlexSurrendered": flag(FlagType.Bool),
 		"ch2AlexAttackedAndWon": flag(FlagType.Bool),
 		"ch2AlexAttacked": flag(FlagType.Bool),
-		"ch2AlexEscapedSymbian": flag(FlagType.Bool),
+		"ch2EscapedSymbian": flag(FlagType.Bool),
+		"ch2EnduredSymbian": flag(FlagType.Bool),
 		"ch2PCLearnedCode": flag(FlagType.Bool),
 	}
 
@@ -67,6 +69,8 @@ func _init():
 		"res://Modules/TaviModule/Chapter1/Ch1s2Risha.gd",
 		"res://Modules/TaviModule/Chapter1/Ch1s3Datapad.gd",
 		"res://Modules/TaviModule/Chapter2/Ch2e1MedicalCheckup.gd",
+		"res://Modules/TaviModule/Chapter2/Ch2a1AlexTalkScene.gd",
+		"res://Modules/TaviModule/Chapter2/Ch2a2CorridorScene.gd",
 		]
 	characters = []
 	items = []
@@ -83,11 +87,15 @@ func _init():
 		"res://Modules/TaviModule/Chapter1/Ch1s1ApproachingTaviEvent.gd",
 		"res://Modules/TaviModule/Chapter2/Ch2e1ElizaTalkEvent.gd",
 		"res://Modules/TaviModule/Chapter2/Ch2e1StealDrugsFromStorageEvent.gd",
+		"res://Modules/TaviModule/Chapter2/Ch2a1AlexTalkEvent.gd",
+		"res://Modules/TaviModule/Chapter2/Ch2a2CorridorEvent.gd",
+		"res://Modules/TaviModule/Chapter2/Ch2EnterCorridorEvent.gd",
 	]
 	quests = [
 		"res://Modules/TaviModule/TaviAppleQuest.gd",
 		"res://Modules/TaviModule/Quest2/TaviQuest2.gd",
 		"res://Modules/TaviModule/Chapter2/Ch2ElizaQuest.gd",
+		"res://Modules/TaviModule/Chapter2/Ch2AlexQuest.gd",
 	]
 	worldEdits = [
 		"res://Modules/TaviModule/TaviWorldEdit.gd",

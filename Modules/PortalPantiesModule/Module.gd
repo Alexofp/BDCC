@@ -3,6 +3,7 @@ extends Module
 func getFlags():
 	return {
 		"Alex_FirstTimeTalked": flag(FlagType.Bool),
+		"Alex_BusyDays": flag(FlagType.Number),
 		"Panties_AskedAlex": flag(FlagType.Bool),
 		"Panties_GavePantiesToAlex": flag(FlagType.Bool),
 		"Panties_PcDenied": flag(FlagType.Bool),
@@ -64,7 +65,8 @@ func _init():
 	]
 
 func resetFlagsOnNewDay():
-	pass
+	if(GM.main.getFlag("PortalPantiesModule.Alex_BusyDays", 0) > 0):
+		GM.main.increaseFlag("PortalPantiesModule.Alex_BusyDays", -1)
 
 func registerEventTriggers():
 	GM.ES.registerEventTrigger("PortalPantiesEvent", EventTriggerWeighted.new())

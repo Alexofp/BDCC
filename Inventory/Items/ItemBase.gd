@@ -280,6 +280,10 @@ func generateRestraintData():
 func getRestraintData() -> RestraintData:
 	return restraintData
 
+func setRestraintLevel(newlevel):
+	if(restraintData != null):
+		restraintData.setLevel(newlevel)
+
 func calculateBestRestraintLevel():
 	if(GM.pc != null):
 		return GM.pc.calculateBestRestraintLevel()
