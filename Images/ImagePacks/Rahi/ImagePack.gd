@@ -27,3 +27,6 @@ func _init():
 
 	addCharacter("captain", [], "res://Images/ImagePacks/Rahi/Characters/captain/captain.png")
 	addCharacter("captain", ["naked"], "res://Images/ImagePacks/Rahi/Characters/captain/captain-naked.png")
+
+	addCharacter("alexrynard", [], "res://Images/ImagePacks/Rahi/Characters/alexrynard/alexrynard.png")
+	addCharacter("alexrynard", ["naked"], "res://Images/ImagePacks/Rahi/Characters/alexrynard/alexrynard-naked.png")
