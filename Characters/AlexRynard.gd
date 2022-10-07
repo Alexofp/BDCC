@@ -3,6 +3,86 @@ extends Character
 func _init():
 	id = "alexrynard"
 	
+	npcLevel = 10
+	npcBasePain = 150
+	npcBaseLust = 250
+	
+	npcLustInterests = {
+		InterestTopic.TallyMarks: Interest.Loves,
+		InterestTopic.Bodywritings: Interest.Loves,
+		InterestTopic.Gags: Interest.Loves,
+		InterestTopic.Blindfolds: Interest.Loves,
+		InterestTopic.BDSMRestraints: Interest.Loves,
+		InterestTopic.ButtPlugs: Interest.Loves,
+		InterestTopic.VaginalPlugs: Interest.Loves,
+		InterestTopic.FeminineBody: Interest.Likes,
+		InterestTopic.AndroBody: Interest.Likes,
+		InterestTopic.MasculineBody: Interest.Likes,
+		InterestTopic.ThickBody: Interest.ReallyLikes,
+		InterestTopic.AverageMassBody: Interest.ReallyLikes,
+		InterestTopic.SlimBody: Interest.ReallyLikes,
+		InterestTopic.ThickButt: Interest.Likes,
+		InterestTopic.AverageButt: Interest.Likes,
+		InterestTopic.SlimButt: Interest.Likes,
+		InterestTopic.NoBreasts: Interest.Likes,
+		InterestTopic.SmallBreasts: Interest.Likes,
+		InterestTopic.MediumBreasts: Interest.Likes,
+		InterestTopic.BigBreasts: Interest.Likes,
+		InterestTopic.LactatingBreasts: Interest.Hates,
+		InterestTopic.StuffedPussy: Interest.Hates,
+		InterestTopic.StuffedAss: Interest.Hates,
+		InterestTopic.StuffedPussyOrAss: Interest.Dislikes,
+		InterestTopic.Pregnant: Interest.ReallyDislikes,
+		InterestTopic.StuffedThroat: Interest.Dislikes,
+		InterestTopic.CoveredInCum: Interest.Dislikes,
+		InterestTopic.CoveredInLotsOfCum: Interest.Hates,
+		InterestTopic.FullyNaked: Interest.Hates,
+		InterestTopic.ExposedPussy: Interest.KindaLikes,
+		InterestTopic.ExposedAnus: Interest.KindaLikes,
+		InterestTopic.ExposedBreasts: Interest.Dislikes,
+		InterestTopic.ExposedCock: Interest.Dislikes,
+		InterestTopic.ExposedPanties: Interest.ReallyLikes,
+		InterestTopic.ExposedBra: Interest.ReallyLikes,
+		InterestTopic.LooseAnus: Interest.Hates,
+		InterestTopic.LoosePussy: Interest.Hates,
+		InterestTopic.TightAnus: Interest.Loves,
+		InterestTopic.TightPussy: Interest.Loves,
+		InterestTopic.NoVagina: Interest.SlightlyDislikes,
+		InterestTopic.HasVaginaOnly: Interest.KindaLikes,
+		InterestTopic.HasVaginaAndCock: Interest.Dislikes,
+		InterestTopic.BigCock: Interest.Hates,
+		InterestTopic.AverageCock: Interest.Likes,
+		InterestTopic.SmallCock: Interest.Likes,
+		InterestTopic.NoCock: Interest.KindaLikes,
+		InterestTopic.HasCockOnly: Interest.KindaLikes,
+	}
+	
+func interestVerbalReaction(interest):
+	if(interest == InterestTopic.Pregnant):
+		return "Having kids in prison? Are you out of your mind?"
+	if(interest == InterestTopic.Bodywritings):
+		return "I do like art. I guess even the body art."
+	if(interest == InterestTopic.CoveredInCum):
+		return "Go get a shower, kiddo."
+	if(interest == InterestTopic.LoosePussy):
+		return "What makes you fuck so much. Go fix your libido."
+	if(interest == InterestTopic.LooseAnus):
+		return "I don't need to see your destoyed ass."
+	if(interest == InterestTopic.BDSMRestraints):
+		return "Bondage rigging is my biggest pleasure. I will leave breeding to others."
+	if(interest == InterestTopic.AndroBody):
+		return "I never cared how people look. What inside matters more."
+	if(interest == InterestTopic.FullyNaked):
+		return "Put some clothes on, this is embarrassing."
+	if(interest == InterestTopic.LactatingBreasts):
+		return "Are you a cow? Go eat grass."
+	if(interest == InterestTopic.BigCock):
+		return "How are you even.. whatever"
+	if(interest == InterestTopic.StuffedPussy):
+		return "Breeding is all you can think about? Do you have dreams?"
+	if(interest == InterestTopic.StuffedAss):
+		return "I didn't need to see that."
+	
 func _getName():
 	return "Alex Rynard"
 
@@ -43,3 +123,9 @@ func createBodyparts():
 
 func createEquipment():
 	getInventory().equipItem(GlobalRegistry.createItemNoID("EngineerClothes"))
+
+func _getAttacks():
+	return ["NpcScratch", "StrongBite", "simplekickattack", "HeatGrenade", "BolaThrow", "ForceBlindfoldPC", "trygetupattack"]
+
+func getFightIntro(_battleName):
+	return "Alex grunts as he gets into a fighting stance, his prosthetic spine is not meant for combat. But he seems tough even with that handicap."
