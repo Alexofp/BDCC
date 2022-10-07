@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Game/World/SubWorld.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Game/World/GameRoom.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Game/World/Floors/Cellblock.gd" type="Script" id=3]
+[ext_resource path="res://Game/World/WorldProp.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Game/World/WorldTileMap.tscn" type="PackedScene" id=5]
 
 [node name="Cellblock" instance=ExtResource( 1 )]
 script = ExtResource( 3 )
@@ -93,6 +95,42 @@ position = Vector2( -128, 128 )
 roomName = "My cell"
 roomID = "cellblock_orange_playercell"
 roomColor = 5
+
+[node name="Props" type="Node2D" parent="." index="11"]
+visible = false
+
+[node name="WorldProp" parent="Props" index="0" instance=ExtResource( 4 )]
+position = Vector2( -204, 62 )
+rotation = 0.187689
+propType = 1
+
+[node name="WorldProp4" parent="Props" index="1" instance=ExtResource( 4 )]
+position = Vector2( -146, 63 )
+propType = 1
+
+[node name="WorldProp2" parent="Props" index="2" instance=ExtResource( 4 )]
+position = Vector2( -66, 333 )
+rotation = -1.57079
+propType = 1
+
+[node name="WorldProp5" parent="Props" index="3" instance=ExtResource( 4 )]
+position = Vector2( -67, 244 )
+rotation = -1.57079
+propType = 1
+
+[node name="WorldProp3" parent="Props" index="4" instance=ExtResource( 4 )]
+position = Vector2( 205, 128 )
+propType = 1
+
+[node name="WorldProp6" parent="Props" index="5" instance=ExtResource( 4 )]
+position = Vector2( 203, 65 )
+propType = 1
+
+[node name="Tiles" type="Node2D" parent="." index="12"]
+visible = false
+
+[node name="WorldTileMap" parent="Tiles" index="0" instance=ExtResource( 5 )]
+tile_data = PoolIntArray( -2, 0, 0, -1, 2, 0, -65536, 0, 0, 65532, 0, 0, 65533, 0, 0, 65535, 1, 0, 2, 0, 0, 131068, 0, 0, 131069, 0, 0, 131070, -1073741823, 0, 131071, 2, 0, 65536, -1073741823, 0, 65537, -1073741823, 0, 65538, 0, 0, 196607, 1, 0, 262142, 0, 0, 262143, 0, 0, 327678, 0, 0, 327679, 0, 0 )
 
 [connection signal="onEnter" from="CBStairs1" to="." method="_on_CBStairs1_onEnter"]
 [connection signal="onReact" from="CBStairs1" to="." method="_on_CBStairs1_onReact"]
