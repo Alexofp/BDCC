@@ -33,6 +33,7 @@ func getFlags():
 		"ch2PCGotPutIntoMentalByEliza": flag(FlagType.Bool),
 		"ch2PCPutDrugsInsideSelf": flag(FlagType.Bool),
 		"ch2PCStoleDrugs": flag(FlagType.Bool),
+		"ch2ElizaReactedToRoughness": flag(FlagType.Bool),
 		
 		"ch2AlexTalkedTo": flag(FlagType.Bool),
 		"ch2AlexCapturedSpying": flag(FlagType.Bool),
@@ -71,6 +72,7 @@ func _init():
 		"res://Modules/TaviModule/Chapter2/Ch2e1MedicalCheckup.gd",
 		"res://Modules/TaviModule/Chapter2/Ch2a1AlexTalkScene.gd",
 		"res://Modules/TaviModule/Chapter2/Ch2a2CorridorScene.gd",
+		"res://Modules/TaviModule/Chapter2/Ch2e2ElizaReactionToRoughness.gd",
 		]
 	characters = []
 	items = []
@@ -90,6 +92,7 @@ func _init():
 		"res://Modules/TaviModule/Chapter2/Ch2a1AlexTalkEvent.gd",
 		"res://Modules/TaviModule/Chapter2/Ch2a2CorridorEvent.gd",
 		"res://Modules/TaviModule/Chapter2/Ch2EnterCorridorEvent.gd",
+		"res://Modules/TaviModule/Chapter2/Ch2e2ElizaReactionToRoughnessEvent.gd",
 	]
 	quests = [
 		"res://Modules/TaviModule/TaviAppleQuest.gd",
