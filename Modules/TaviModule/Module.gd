@@ -45,6 +45,10 @@ func getFlags():
 		"ch2EscapedSymbian": flag(FlagType.Bool),
 		"ch2EnduredSymbian": flag(FlagType.Bool),
 		"ch2PCLearnedCode": flag(FlagType.Bool),
+		
+		"ch2DrugsGaveToTavi": flag(FlagType.Bool),
+		"ch2DrugsAgreedToTest": flag(FlagType.Bool),
+		"ch2DrugsPickedFuta": flag(FlagType.Bool),
 	}
 
 func _init():
