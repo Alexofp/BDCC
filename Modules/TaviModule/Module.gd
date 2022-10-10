@@ -49,6 +49,7 @@ func getFlags():
 		"ch2DrugsGaveToTavi": flag(FlagType.Bool),
 		"ch2DrugsAgreedToTest": flag(FlagType.Bool),
 		"ch2DrugsPickedFuta": flag(FlagType.Bool),
+		"ch2DrugsSaidYesToDemonTavi": flag(FlagType.Bool),
 	}
 
 func _init():
