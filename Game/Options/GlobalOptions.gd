@@ -25,6 +25,8 @@ var measurementUnits = "metric"
 
 var debugPanel = false
 
+var showMapArt = false
+
 var showCharacterArt = true
 var imagePackOrder = []
 
@@ -43,6 +45,7 @@ func resetToDefaults():
 	requireDoubleTapOnMobile = false
 	uiButtonSize = 0
 	debugPanel = false
+	showMapArt = false
 	imagePackOrder = []
 	showCharacterArt = true
 	showSceneCreator = true
@@ -108,6 +111,9 @@ func shouldShowCharacterArt():
 
 func shouldShowSceneCreator():
 	return showSceneCreator
+
+func shouldShowMapArt():
+	return showMapArt
 
 func getChangeableOptions():
 	var settings = [
@@ -290,6 +296,13 @@ func getChangeableOptions():
 					"type": "checkbox",
 					"value": showSceneCreator,
 				},
+				{
+					"name": "Show map art (WIP)",
+					"description": "(WORK IN PROGRESS) Shows props and walls on the minimap when supported",
+					"id": "showMapArt",
+					"type": "checkbox",
+					"value": showMapArt,
+				},
 			],
 		},
 		{
@@ -362,6 +375,8 @@ func applyOption(categoryID, optionID, value):
 			showCharacterArt = value
 		if(optionID == "showSceneCreator"):
 			showSceneCreator = value
+		if(optionID == "showMapArt"):
+			showMapArt = value
 		
 	if(categoryID == "render"):
 		if(optionID == "renderer"):
@@ -405,6 +420,7 @@ func saveData():
 		"imagePackOrder": imagePackOrder,
 		"showCharacterArt": showCharacterArt,
 		"showSceneCreator": showSceneCreator,
+		"showMapArt": showMapArt,
 	}
 	
 	return data
@@ -427,6 +443,7 @@ func loadData(data):
 	imagePackOrder = loadVar(data, "imagePackOrder", [])
 	showCharacterArt = loadVar(data, "showCharacterArt", true)
 	showSceneCreator = loadVar(data, "showSceneCreator", true)
+	showMapArt = loadVar(data, "showMapArt", false)
 
 func saveToFile():
 	var saveData = saveData()
