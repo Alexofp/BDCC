@@ -5,7 +5,7 @@ func _init():
 	id = "dragonhorns"
 
 func getCompatibleSpecies():
-	return [Species.Dragon]
+	return [Species.Dragon, Species.Demon]
 
 func getDoll3DScene():
 	return "res://Player/Player3D/Parts/Horns/DragonHorns/DragonHorns.tscn"
