@@ -765,6 +765,9 @@ func cummedOnBy(characterID, sourceType = null, howMessy: int = 1):
 	
 	coverBodyWithFluid(characterID, ch.getFluidType(sourceType), howMessy)
 
+func pissedOnBy(_characterID):
+	addEffect(StatusEffect.DrenchedInPiss)
+
 func coverBodyWithFluid(characterID, fluidType, howMuchLevels: int = 1):
 	bodyFluids.append([characterID, fluidType, howMuchLevels])
 	bodyMessiness += howMuchLevels

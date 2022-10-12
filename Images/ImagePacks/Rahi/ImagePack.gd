@@ -9,6 +9,10 @@ func _init():
 
 	addCharacter("tavi", [], "res://Images/ImagePacks/Rahi/Characters/tavi/tavi.png")
 	addCharacter("tavi", ["naked"], "res://Images/ImagePacks/Rahi/Characters/tavi/tavi-naked.png")
+	addCharacter("taviDemon", [], "res://Images/ImagePacks/Rahi/Characters/tavi/tavi.png")
+	addCharacter("taviDemon", ["naked"], "res://Images/ImagePacks/Rahi/Characters/tavi/tavi-naked.png")
+	addCharacter("taviDemonFuta", [], "res://Images/ImagePacks/Rahi/Characters/tavi/tavi.png")
+	addCharacter("taviDemonFuta", ["naked"], "res://Images/ImagePacks/Rahi/Characters/tavi/tavi-naked.png")
 
 	addCharacter("risha", [], "res://Images/ImagePacks/Rahi/Characters/risha/risha.png")
 	addCharacter("risha", ["naked"], "res://Images/ImagePacks/Rahi/Characters/risha/risha-naked.png")

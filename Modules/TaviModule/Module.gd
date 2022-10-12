@@ -78,6 +78,7 @@ func _init():
 		"res://Modules/TaviModule/Chapter2/Ch2a1AlexTalkScene.gd",
 		"res://Modules/TaviModule/Chapter2/Ch2a2CorridorScene.gd",
 		"res://Modules/TaviModule/Chapter2/Ch2e2ElizaReactionToRoughness.gd",
+		"res://Modules/TaviModule/Chapter2/Ch2t3TaviDrugsScene.gd",
 		]
 	characters = []
 	items = []
@@ -98,12 +99,14 @@ func _init():
 		"res://Modules/TaviModule/Chapter2/Ch2a2CorridorEvent.gd",
 		"res://Modules/TaviModule/Chapter2/Ch2EnterCorridorEvent.gd",
 		"res://Modules/TaviModule/Chapter2/Ch2e2ElizaReactionToRoughnessEvent.gd",
+		"res://Modules/TaviModule/Chapter2/Ch2t3TaviTalkEvent.gd",
 	]
 	quests = [
 		"res://Modules/TaviModule/TaviAppleQuest.gd",
 		"res://Modules/TaviModule/Quest2/TaviQuest2.gd",
 		"res://Modules/TaviModule/Chapter2/Ch2ElizaQuest.gd",
 		"res://Modules/TaviModule/Chapter2/Ch2AlexQuest.gd",
+		"res://Modules/TaviModule/Chapter2/Ch2TaviQuest.gd",
 	]
 	worldEdits = [
 		"res://Modules/TaviModule/TaviWorldEdit.gd",
