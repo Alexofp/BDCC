@@ -33,7 +33,9 @@ func playAnimation(animID, _args = {}):
 	updateSubAnims()
 	
 	var state_machine = animationTree["parameters/AnimationNodeStateMachine/playback"]
-	if(animID == "walk"):
+	if(animID == ""):
+		pass
+	elif(animID == "walk"):
 		if(!doll.getLegsCuffed()):
 			state_machine.travel("Walk-loop")
 		else:

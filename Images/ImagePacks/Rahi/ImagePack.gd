@@ -22,6 +22,8 @@ func _init():
 
 	addCharacter("nova", [], "res://Images/ImagePacks/Rahi/Characters/nova/nova.png")
 	addCharacter("nova", ["naked"], "res://Images/ImagePacks/Rahi/Characters/nova/nova-naked.png")
+	addCharacter("novaArena", [], "res://Images/ImagePacks/Rahi/Characters/nova/nova.png")
+	addCharacter("novaArena", ["naked"], "res://Images/ImagePacks/Rahi/Characters/nova/nova-naked.png")
 
 	addCharacter("ferri", [], "res://Images/ImagePacks/Rahi/Characters/ferri/ferri.png")
 	addCharacter("ferri", ["naked"], "res://Images/ImagePacks/Rahi/Characters/ferri/ferri-naked.png")

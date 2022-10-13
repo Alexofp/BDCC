@@ -22,7 +22,9 @@ func _doAttack(_attacker, _receiver, _context = {}):
 	
 	text += " {attacker.name} is feeling better!"
 	
-	return text
+	return {
+		text = text,
+	}
 
 func canBeDodgedByPlayer(_attacker, _receiver):
 	return false

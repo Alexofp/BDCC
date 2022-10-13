@@ -74,7 +74,9 @@ func playAnimation(animID, _args = {}):
 		stateMachineTravel(doll2, state_machine2, "stand")
 
 func stateMachineTravel(thedoll, state_machine, animID):
-	if(animID == "walk"):
+	if(animID == ""):
+		pass
+	elif(animID == "walk"):
 		if(!thedoll.getLegsCuffed()):
 			state_machine.travel("Walk-loop")
 		else:

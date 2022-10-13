@@ -21,12 +21,15 @@ func _doAttack(_attacker, _receiver, _context = {}):
 	
 	_receiver.getInventory().forceEquipStoreOtherUnlessRestraint(GlobalRegistry.createItem("blindfold"))
 	
-	return "{attacker.name} pounces at you and manages to [b]blindfold you[/b]! You shove {attacker.him} back.\n\n[say=attacker]"+RNG.pick([
+	var text = "{attacker.name} pounces at you and manages to [b]blindfold you[/b]! You shove {attacker.him} back.\n\n[say=attacker]"+RNG.pick([
 		"Lights out.",
 		"Enjoy the darkness.",
 		"Say hello to the darkness.",
 		"Something is wrong?",
 	])+"[/say]"
+	return {
+		text = text,
+	}
 	
 func _canUse(_attacker, _receiver, _context = {}):
 	return _receiver.isPlayer() && !_receiver.isBlindfolded()

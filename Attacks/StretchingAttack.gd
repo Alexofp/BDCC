@@ -13,8 +13,6 @@ func getVisibleDesc(_context = {}):
 	return "You shouldn't see this"
 	
 func _doAttack(_attacker, _receiver, _context = {}):
-	var _damage = doDamage(_attacker, _receiver, DamageType.Lust, RNG.randi_range(20, 20))
-	
 	var texts = [
 		"{attacker.name} takes {attacker.his} time arching {attacker.his} back and stretching. A few cute moans can be heard from {attacker.name} as {attacker.he} does that."
 	]
@@ -22,11 +20,12 @@ func _doAttack(_attacker, _receiver, _context = {}):
 	
 	_attacker.addPain(-30)
 	
-	text += " {attacker.name} is feeling better! "
+	text += " {attacker.name} is feeling better!"
 	
-	text += receiverDamageMessage(DamageType.Lust, _damage)
-	
-	return text
+	return {
+		text = text,
+		lust = RNG.randi_range(20, 20),
+	}
 
 func canBeDodgedByPlayer(_attacker, _receiver):
 	return true

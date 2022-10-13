@@ -13,30 +13,25 @@ func getVisibleDesc(_context = {}):
 	return "An attempt to shove the enemy away for "+scaledDmgStr(DamageType.Physical, 5)+" damage. 30% chance to miss. Will cause the opponent to collapse"
 	
 func _doAttack(_attacker, _receiver, _context = {}):
-	var attackerName = _attacker.getName()
-	var receiverName = _receiver.getName()
-	
 	if(checkMissed(_attacker, _receiver, DamageType.Physical, 0.7, 0.5)):
-		return attackerName + " tries to shove " + receiverName + " but fails"
+		return genericMissMessage(_attacker, _receiver, "shove")
 	
 	if(checkDodged(_attacker, _receiver, DamageType.Physical)):
-		return attackerName + " tries to shove " + receiverName + " away but " + receiverName + " dodges the weak attempt with ease"
-	
-	var damage = doDamage(_attacker, _receiver, DamageType.Physical, 5)
-	#_receiver.addEffect(StatusEffect.Bleeding)
-	#_receiver.addEffect(StatusEffect.Collapsed)
+		return genericDodgeMessage(_attacker, _receiver, "shove")
 	
 	var texts = [
-		attackerName + " shoves " + receiverName + " away. "
+		"{attacker.name} shoves {receiver.name} away."
 	]
 	var text = RNG.pick(texts)
-	text += receiverDamageMessage(DamageType.Physical, damage)
 	
 	if(!_receiver.hasEffect(StatusEffect.Collapsed)):
-		text += "\n[b]"+receiverName+" loses "+_receiver.hisHer()+" balance and collapses onto the floor[/b]"
+		text += "\n[b]{receiver.name} loses {receiver.his} balance and collapses onto the floor[/b]"
 		_receiver.addEffect(StatusEffect.Collapsed)
 	
-	return text
+	return {
+		text = text,
+		pain = 5,
+	}
 	
 func _canUse(_attacker, _receiver, _context = {}):
 	return true
@@ -45,7 +40,7 @@ func getRequirements():
 	return []
 
 func getAnticipationText(_attacker, _receiver):
-	return _attacker.getName() + " frees "+_attacker.hisHer()+" arms and tries to shove you"
+	return "{attacker.name} frees {attacker.his} arms and tries to shove you"
 
 func getAIScore(_attacker, _receiver):
 	if(_receiver.hasEffect(StatusEffect.Collapsed)):

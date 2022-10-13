@@ -222,8 +222,8 @@ func _react(_action: String, _args):
 		setState("fighting")
 		beforeTurnChecks()
 		
-		var attackID = _args[0]
-		whatPlayerDid += doPlayerAttack(attackID)
+		var attackData = _args[0]
+		whatPlayerDid += doPlayerAttack(attackData)
 		whatEnemyDid += aiTurn()
 
 		afterTurnChecks()
@@ -244,7 +244,7 @@ func _react(_action: String, _args):
 	if(_action == "getup"):
 		beforeTurnChecks()
 		
-		whatPlayerDid += doPlayerAttack("trygetupattack")
+		whatPlayerDid += doPlayerAttack({"attackID": "trygetupattack"})
 		
 		whatEnemyDid += aiTurn()
 
@@ -284,7 +284,13 @@ func _react(_action: String, _args):
 			assert(false, "Bad attack: "+savedAIAttackID)
 			
 		setEnemyAsAttacker()
-		whatEnemyDid += GM.ui.processString(attack.doAttack(enemyCharacter, GM.pc))
+		
+		var result = attack.doAttack(enemyCharacter, GM.pc)
+		result["text"] = GM.ui.processString(result["text"])
+		
+		GM.main.playAnimation(StageScene.Duo, result["receiverAnimation"], {npc=enemyID, npcAction=result["attackerAnimation"]})
+		
+		whatEnemyDid += result["text"]
 		savedAIAttackID = ""
 		
 		GM.pc.setFightingStateNormal()
@@ -421,48 +427,24 @@ func addLustActionsButtons(lustCombatState:LustCombatState, theActions):
 	
 
 func doPlayerAttack(attackData):
-	var attackID = attackData
-	if(attackID is Dictionary):
-		attackID = attackData["attackID"]
-	else:
-		attackData = {"attackID": attackID}
+	var attackID = attackData["attackID"]
+	
 	var attack: Attack = GlobalRegistry.getAttack(attackID)
 	if(attack == null):
 		assert(false, "Bad attack: "+attackID)
 	
 	setPlayerAsAttacker()
-	var text = GM.ui.processString(attack.doAttack(GM.pc, enemyCharacter, attackData))
-	var attackSoloAnim = attack.getAttackSoloAnimation()
-	if(attackSoloAnim != null && attackSoloAnim != ""):
-		GM.main.playAnimation(StageScene.Solo, attackSoloAnim)
+	
+	var result = attack.doAttack(GM.pc, enemyCharacter, attackData)
+	result["text"] = GM.ui.processString(result["text"])
+	
+	GM.main.playAnimation(StageScene.Duo, result["attackerAnimation"], {npc=enemyID, npcAction=result["receiverAnimation"]})
 	
 	var expData = attack.getExperience()
 	for expAdd in expData:
 		GM.pc.addSkillExperience(expAdd[0], expAdd[1])
 	
-	return text
-
-func getBestAIAttack():
-	var savedAttacks = []
-	var savedAttacksWeights = []
-	
-	var attacks = enemyCharacter.getAttacks()
-	
-	for attackID in attacks:
-		if(attackID is Dictionary):
-			attackID = attackID["attackID"]
-		var attack: Attack = GlobalRegistry.getAttack(attackID)
-		if(attack == null):
-			assert(false, "Bad attack: "+attackID)
-		if(attack.canUse(enemyCharacter, GM.pc)):
-			savedAttacks.append(attackID)
-			savedAttacksWeights.append(attack.getAIScore(enemyCharacter, GM.pc))
-	
-	if(savedAttacks.size() == 0):
-		print("Error: Couldn't find any possible attacks for the enemy")
-		return "blunderAttack"
-	
-	return RNG.pickWeighted(savedAttacks, savedAttacksWeights)
+	return result["text"]
 	
 func aiTurn():
 	if(enemyCharacter.getPain() >= enemyCharacter.painThreshold() || enemyCharacter.getLust() >= enemyCharacter.lustThreshold()):
@@ -486,7 +468,13 @@ func aiTurn():
 		attack = GlobalRegistry.getAttack(attackID)
 		
 	if(!attack.canBeDodgedByPlayer(enemyCharacter, GM.pc)):	
-		enemyText += GM.ui.processString(attack.doAttack(enemyCharacter, GM.pc))
+		
+		var result = attack.doAttack(enemyCharacter, GM.pc)
+		result["text"] = GM.ui.processString(result["text"])
+			
+		GM.main.playAnimation(StageScene.Duo, result["receiverAnimation"], {npc=enemyID, npcAction=result["attackerAnimation"]})
+		
+		enemyText += result["text"]
 	else:
 		savedAIAttackID = attackID
 		setState("playerMustDodge")
@@ -581,10 +569,17 @@ func pcHasAnyAttacksOfCategory(category):
 
 func addAttackButtons(category):
 	var playerAttacks = GM.pc.getAttacks()
-	for attackData in playerAttacks:
-		var attackID = attackData
-		if(attackData is Dictionary):
-			attackID = attackData["attackID"]
+	for attackDataOrString in playerAttacks:
+		var attackID
+		var attackData : Dictionary
+		
+		if(attackDataOrString is String):
+			attackData = {"attackID" : attackDataOrString}
+			attackID = attackDataOrString
+		else:
+			attackData = attackDataOrString
+			attackID = attackDataOrString["attackID"]
+		
 		var attack: Attack = GlobalRegistry.getAttack(attackID)
 		if(attack == null):
 			assert(false, "Bad attack: "+attackID)
@@ -592,8 +587,6 @@ func addAttackButtons(category):
 			continue
 			
 		var desc = attack.getRequirementsColorText(GM.pc, enemyCharacter)
-		#if(desc != ""):
-		#	desc += "\n"
 		desc += attack.getVisibleDesc(attackData)
 			
 		if(attack.canUse(GM.pc, enemyCharacter, attackData)):

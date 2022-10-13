@@ -13,7 +13,9 @@ func getVisibleDesc(_context = {}):
 	
 func _doAttack(_attacker, _receiver, _context = {}):
 	var text = "Rebel's taunting didn't have any effect on you"
-	return text
+	return {
+		text = text,
+	}
 	
 func _canUse(_attacker, _receiver, _context = {}):
 	return true

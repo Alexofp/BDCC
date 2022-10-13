@@ -20,7 +20,9 @@ func getVisibleDesc(_context = {}):
 	return "Bad attack, let the developer know"
 	
 func _doAttack(_attacker, _receiver, _context = {}):
-	return "Mew happened"
+	return {
+		text = "Bad attack happened, let the developer know",
+	}
 	
 func _canUse(_attacker, _receiver, _context = {}):
 	return true
@@ -28,7 +30,39 @@ func _canUse(_attacker, _receiver, _context = {}):
 	
 func doAttack(_attacker, _receiver, _context = {}):
 	doRequirements(_attacker, _receiver)
-	return _doAttack(_attacker, _receiver, _context)
+	var result = _doAttack(_attacker, _receiver, _context)
+	if(result is String):
+		result = {text="!OLD STYLE!"+result}
+	elif(!result.has("text")):
+		result["text"] = "!No attack text provided!"
+	
+	result["attackerAnimation"] = getAttackSoloAnimation()
+	var receiverAnimation = ""
+	if(_receiver.isBlocking()):
+		receiverAnimation = "block"
+	elif(_receiver.isDodging() || (result.has("dodged") && result["dodged"])):
+		receiverAnimation = "dodge"
+	elif(result.has("pain") && result["pain"] > 0):
+		receiverAnimation = "hurt"
+	result["receiverAnimation"] = receiverAnimation
+	
+	if(result.has("pain")):
+		result["pain"] = calcDamage(_attacker, _receiver, DamageType.Physical, result["pain"])
+		var origDamage = result["pain"]
+		result["pain"] = _receiver.receiveDamage(DamageType.Physical, result["pain"], getRecieverArmorScaling(_attacker, _receiver, DamageType.Physical))
+		result["text"] += " "+receiverDamageMessageShort(DamageType.Physical, result["pain"], origDamage)
+	if(result.has("lust")):
+		result["lust"] = calcDamage(_attacker, _receiver, DamageType.Lust, result["lust"])
+		var origDamage = result["lust"]
+		result["lust"] = _receiver.receiveDamage(DamageType.Lust, result["lust"], getRecieverArmorScaling(_attacker, _receiver, DamageType.Lust))
+		result["text"] += " "+receiverDamageMessageShort(DamageType.Lust, result["lust"], origDamage)
+	if(result.has("stamina")):
+		result["stamina"] = calcDamage(_attacker, _receiver, DamageType.Stamina, result["stamina"])
+		var origDamage = result["stamina"]
+		result["stamina"] = _receiver.receiveDamage(DamageType.Stamina, result["stamina"], getRecieverArmorScaling(_attacker, _receiver, DamageType.Stamina))
+		result["text"] += " "+receiverDamageMessageShort(DamageType.Stamina, result["stamina"], origDamage)
+	
+	return result
 	
 func canUse(_attacker, _receiver, _context = {}):
 	return _canUse(_attacker, _receiver, _context) && meetsRequirements(_attacker, _receiver)
@@ -124,22 +158,22 @@ func getRequirementsColorText(_attacker, _receiver):
 	
 	return text
 
-func getRecieverArmorScaling(_damageType) -> float:
+func getRecieverArmorScaling(_attacker, _receiver, _damageType) -> float:
 	return 1.0
 
-func doDamage(_attacker, _receiver, _damageType, _damage: int, playGetHitAnimation = true):
+func calcDamage(_attacker, _receiver, _damageType, _damage: int) -> int:
+	var damageMult = _attacker.getDamageMultiplier(_damageType)
+	if(_damage < 0):
+		damageMult = -damageMult
+		
+	return int(round(_damage * (1.0 + damageMult)))
+
+func doDamage(_attacker, _receiver, _damageType, _damage: int, _playGetHitAnimation = true):
 	var damageMult = _attacker.getDamageMultiplier(_damageType)
 	if(_damage < 0):
 		damageMult = -damageMult
 	
-	var damage = _receiver.receiveDamage(_damageType, round(_damage * (1.0 + damageMult)), getRecieverArmorScaling(_damageType))
-	
-	if(playGetHitAnimation):
-		if(_receiver == GM.pc):
-			if(GM.pc.isBlocking()):
-				GM.main.playAnimation(StageScene.Solo, "block")
-			elif(_damageType == DamageType.Physical || _damageType == DamageType.Stamina):
-				GM.main.playAnimation(StageScene.Solo, "hurt")
+	var damage = _receiver.receiveDamage(_damageType, round(_damage * (1.0 + damageMult)), getRecieverArmorScaling(_attacker, _receiver, _damageType))
 	
 	return damage
 
@@ -222,15 +256,11 @@ func checkMissed(_attacker, _receiver, _damageType, customAccuracyMult = 1.0, mi
 		return true
 	return false
 
-func checkDodged(_attacker, _receiver, _damageType, customDodgeMult = 1, minChangeToDodge = 0.0, playDodgeAnimation = true):
+func checkDodged(_attacker, _receiver, _damageType, customDodgeMult = 1, minChangeToDodge = 0.0, _playDodgeAnimation = true):
 	var dodgeChance = _receiver.getDodgeChance() * customDodgeMult
 	
 	dodgeChance = max(dodgeChance, minChangeToDodge)
 	if(RNG.chance(100.0 * dodgeChance)):
-		if(playDodgeAnimation):
-			if(_receiver == GM.pc):
-				GM.main.playAnimation(StageScene.Solo, "dodge")
-		
 		return true
 		
 	return false
@@ -257,7 +287,23 @@ func receiverDamageMessage(damageType, howMuch):
 	var damageColor = DamageType.getColor(damageType)
 	var damageColorString = "#"+damageColor.to_html(false)
 	
-	return "{receiver.name} received [color="+damageColorString+"]"+str(howMuch)+" "+DamageType.getBattleName(damageType)+"[/color]"
+	return "{receiver.name} received [color="+damageColorString+"]"+str(howMuch)+" "+DamageType.getBattleName(damageType)+"[/color]."
+
+func receiverDamageMessageShort(damageType, howMuch, origDamage = 0):
+	var damageColor = DamageType.getColor(damageType)
+	var damageColorString = "#"+damageColor.to_html(false)
+	
+	var stringHowMuch = str(howMuch)
+	if(howMuch > 0):
+		stringHowMuch = "+" + stringHowMuch
+	
+		if(howMuch < origDamage):
+			var stringDamageDif = str(origDamage - howMuch)
+			
+			return "[color="+damageColorString+"]("+stringHowMuch+" "+DamageType.getBattleName(damageType)+", "+stringDamageDif+" blocked)[/color]"
+	
+	return "[color="+damageColorString+"]("+stringHowMuch+" "+DamageType.getBattleName(damageType)+")[/color]"
+
 
 func receiverDamageMessageList(damages: Array):
 	var result = "{receiver.name} received "
@@ -276,19 +322,29 @@ func receiverDamageMessageList(damages: Array):
 func getExperience():
 	return []
 
-func genericMissMessage(_attacker, _receiver):
-	return RNG.pick([
-		"{attacker.name} missed!",
+func genericMissMessage(_attacker, _receiver, _optionalVerb = "attack"):
+	var randomText = RNG.pick([
+		"{attacker.name} tried to "+_optionalVerb+" {receiver.name} but missed!",
 		"{attacker.name} missed {attacker.his} attack!",
 		])
 	
-func genericDodgeMessage(_attacker, _receiver):
-	return RNG.pick([
-		"{receiver.name} managed to dodge the attack.",
-		"{receiver.name} managed to dodge the attack at the last second.",
+	return {
+		text = randomText,
+		missed = true,
+	}
+	
+func genericDodgeMessage(_attacker, _receiver, _optionalVerb = "attack"):
+	var randomText = RNG.pick([
+		"{receiver.name} managed to dodge the "+_optionalVerb+".",
+		"{receiver.name} managed to dodge the "+_optionalVerb+" at the last second.",
 		"{receiver.name} managed to avoid being hit.",
-		"{receiver.name} dodged masterfully.",
+		"{receiver.name} dodged the "+_optionalVerb+" masterfully.",
 	])
+	
+	return {
+		text = randomText,
+		dodged = true,
+	}
 
 func canDoWhileStunned():
 	return false

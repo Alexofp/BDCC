@@ -19,11 +19,12 @@ func _doAttack(_attacker, _receiver, _context = {}):
 		return genericDodgeMessage(_attacker, _receiver)
 	
 	var text = "The bola wraps around {receiver.name}'s legs and makes {receiver.him} trip!"
-	var _damage = doDamage(_attacker, _receiver, DamageType.Physical, RNG.randi_range(10, 20))
-	text += " " + receiverDamageMessage(DamageType.Physical, _damage)
-	
 	_receiver.addEffect(StatusEffect.Collapsed)
-	return text
+	
+	return {
+		text = text,
+		pain = RNG.randi_range(10, 20),
+	}
 	
 func _canUse(_attacker, _receiver, _context = {}):
 	if(_receiver.hasEffect(StatusEffect.Collapsed)):

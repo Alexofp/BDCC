@@ -19,10 +19,11 @@ func _doAttack(_attacker, _receiver, _context = {}):
 		return genericDodgeMessage(_attacker, _receiver)
 	
 	var text = "{attacker.name} manages to stick a syringe into your neck! Your muscles refuse to tense up, you suddenly feel very weak!"
-	var _damage = doDamage(_attacker, _receiver, DamageType.Stamina, 10)
 	_receiver.addEffect(StatusEffect.Weakness)
-	text += " " + receiverDamageMessage(DamageType.Stamina, _damage)
-	return text
+	return {
+		text = text,
+		stamina = 10,
+	}
 	
 func _canUse(_attacker, _receiver, _context = {}):
 	return true

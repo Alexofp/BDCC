@@ -17,12 +17,13 @@ func _doAttack(_attacker, _receiver, _context = {}):
 		return genericMissMessage(_attacker, _receiver)
 	
 	if(checkDodged(_attacker, _receiver, DamageType.Lust)):
-		return "{receiver.name} managed to avoid the pink smoke cloud!"
+		return genericDodgeMessage(_attacker, _receiver)
 	
 	var text = "You breathe in the pink mist and feel hornier, many dirty thoughts pass through your head. Maybe surrendering isn’t such a bad idea.."
-	var _damage = doDamage(_attacker, _receiver, DamageType.Lust, 30)
-	text += " " + receiverDamageMessage(DamageType.Lust, _damage)
-	return text
+	return {
+		text = text,
+		lust = 30,
+	}
 	
 func _canUse(_attacker, _receiver, _context = {}):
 	return true

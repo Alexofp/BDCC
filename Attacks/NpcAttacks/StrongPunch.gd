@@ -19,10 +19,11 @@ func _doAttack(_attacker, _receiver, _context = {}):
 		return genericDodgeMessage(_attacker, _receiver)
 	
 	var text = "{attacker.name} manages to land a powerful blow to {receiver.name}’s chest with {attacker.his} fist!"
-	var _damage = doDamage(_attacker, _receiver, DamageType.Physical, RNG.randi_range(40, 50))
-	text += " " + receiverDamageMessage(DamageType.Physical, _damage)
 	
-	return text
+	return {
+		text = text,
+		pain = RNG.randi_range(40, 50),
+	}
 	
 func _canUse(_attacker, _receiver, _context = {}):
 	return true

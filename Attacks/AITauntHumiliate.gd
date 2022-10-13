@@ -23,7 +23,9 @@ func _doAttack(_attacker, _receiver, _context = {}):
 	]
 	var text = RNG.pick(texts)
 	
-	return text
+	return {
+		text = text,
+	}
 
 func canBeDodgedByPlayer(_attacker, _receiver):
 	return false

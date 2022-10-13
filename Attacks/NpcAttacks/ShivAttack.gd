@@ -19,11 +19,12 @@ func _doAttack(_attacker, _receiver, _context = {}):
 		return genericDodgeMessage(_attacker, _receiver)
 	
 	var text = "{attacker.name} manages to leave a few cuts on {receiver.name}, causing {receiver.him} to [color=red]bleed[/color]!"
-	var _damage = doDamage(_attacker, _receiver, DamageType.Physical, RNG.randi_range(20, 30))
-	text += " " + receiverDamageMessage(DamageType.Physical, _damage)
 	
 	_receiver.addEffect(StatusEffect.Bleeding)
-	return text
+	return {
+		text = text,
+		pain = RNG.randi_range(20, 30),
+	}
 	
 func _canUse(_attacker, _receiver, _context = {}):
 	return true

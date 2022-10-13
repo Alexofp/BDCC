@@ -27,11 +27,11 @@ func _doAttack(_attacker, _receiver, _context = {}):
 	])
 	text += "\n\n"
 	
-	var _damage = doDamage(_attacker, _receiver, DamageType.Physical, RNG.randi_range(20, 20))
-	text += " " + receiverDamageMessage(DamageType.Physical, _damage)
-	
 	_receiver.addEffect(StatusEffect.Collapsed)
-	return text
+	return {
+		text = text,
+		pain = RNG.randi_range(20, 20),
+	}
 	
 func _canUse(_attacker, _receiver, _context = {}):
 	if(_receiver.hasEffect(StatusEffect.Collapsed)):

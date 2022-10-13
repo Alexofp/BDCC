@@ -21,12 +21,15 @@ func _doAttack(_attacker, _receiver, _context = {}):
 	
 	_receiver.getInventory().forceEquipStoreOtherUnlessRestraint(GlobalRegistry.createItem("ballgag"))
 	
-	return "{attacker.name} pounces at you and manages to [b]force a gag into your mouth[/b]! You manage to shove {attacker.him} back.\n\n[say=attacker]"+RNG.pick([
+	var text = "{attacker.name} pounces at you and manages to [b]force a gag into your mouth[/b]! You manage to shove {attacker.him} back.\n\n[say=attacker]"+RNG.pick([
 		"Much better.",
 		"Bite this.",
 		"Behave, inmate.",
 		"What's wrong, cat got your tongue?",
 	])+"[/say]"
+	return {
+		text = text,
+	}
 	
 func _canUse(_attacker, _receiver, _context = {}):
 	return _receiver.isPlayer() && !_receiver.isGagged()

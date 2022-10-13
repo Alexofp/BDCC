@@ -11,9 +11,6 @@ func getVisibleDesc(_context = {}):
 	return "You shouldn't see this"
 	
 func _doAttack(_attacker, _receiver, _context = {}):
-	var attackerName = _attacker.getName()
-	#var receiverName = _receiver.getName()
-	
 	var success = false
 	if(RNG.chance(70) || _attacker.hasPerk(Perk.CombatBetterGetUp)):
 		_attacker.removeEffect(StatusEffect.Collapsed)
@@ -21,11 +18,13 @@ func _doAttack(_attacker, _receiver, _context = {}):
 	
 	var text
 	if(success):
-		text = attackerName + " wastes "+_attacker.hisHer()+" turn but [b]"+_attacker.heShe()+" manages to get up[/b]"
+		text = "{attacker.name} wastes {attacker.his} turn but [b]{attacker.he} manages to get up[/b]"
 	else:
-		text = attackerName + " tries to get up [b]but fails to do so[/b] in time"
+		text = "{attacker.name} tries to get up [b]but fails to do so[/b] in time"
 	
-	return text
+	return {
+		text = text,
+	}
 	
 func _canUse(_attacker, _receiver, _context = {}):
 	return _attacker.hasEffect(StatusEffect.Collapsed) && _attacker.canStandUpCombat()
