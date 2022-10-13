@@ -10,8 +10,6 @@ func getVisibleName():
 func getVisibleDescription():
 	return "You gain the ability to shove the opponent away with your shoulder, possible making them trip."
 
-func getCost():
-	return 1
 func getSkillTier():
 	return 0
 

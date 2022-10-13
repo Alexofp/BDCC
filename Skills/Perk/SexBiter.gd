@@ -10,8 +10,6 @@ func getVisibleName():
 func getVisibleDescription():
 	return "You know how to use your mouth more effectively, your bites cause more bleeding and do more damage"
 
-func getCost():
-	return 1
 func getSkillTier():
 	return 0
 

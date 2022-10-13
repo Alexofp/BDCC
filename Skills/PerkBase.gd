@@ -24,7 +24,10 @@ func getPicture():
 	return "res://Images/Perks/upgrade.png"
 
 func getCost():
-	return 1
+	return Util.maxi(int(getSkillTier() + 1), 0)
+
+func getRequiredPerks():
+	return []
 
 func setCharacter(newnpc):
 	npc = newnpc

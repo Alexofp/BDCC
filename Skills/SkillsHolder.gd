@@ -224,6 +224,12 @@ func canUnlockPerk(perkID):
 	
 	if(skill.getLevel() < requiredLevel):
 		return false
+	
+	var requiredPerks = perk.getRequiredPerks()
+	for requiredPerkID in requiredPerks:
+		if(!hasPerk(requiredPerkID)):
+			return false
+		
 	return true
 	
 func getPerkAttacks():

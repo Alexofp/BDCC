@@ -10,8 +10,6 @@ func getVisibleName():
 func getVisibleDescription():
 	return "You gain (5 + Exhibitionism * 2)% additional dodge chance when you are COMPLETELY naked"
 
-func getCost():
-	return 1
 func getSkillTier():
 	return 0
 

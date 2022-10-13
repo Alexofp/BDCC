@@ -10,8 +10,6 @@ func getVisibleName():
 func getVisibleDescription():
 	return "You no longer feel ashamed when you don't wear any clothes, you are comfortable being naked"
 
-func getCost():
-	return 1
 func getSkillTier():
 	return 0
 

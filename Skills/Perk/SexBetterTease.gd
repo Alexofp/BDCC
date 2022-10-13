@@ -10,8 +10,6 @@ func getVisibleName():
 func getVisibleDescription():
 	return "You learn opponent's likes/dislikes faster when teasing"
 
-func getCost():
-	return 1
 func getSkillTier():
 	return 0
 

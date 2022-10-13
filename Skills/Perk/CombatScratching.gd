@@ -10,8 +10,6 @@ func getVisibleName():
 func getVisibleDescription():
 	return "You learned to use your claws in a fight, sometimes you will cause bleeding when punching somebody"
 
-func getCost():
-	return 1
 func getSkillTier():
 	return 0
 

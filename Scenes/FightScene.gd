@@ -186,7 +186,7 @@ func _run():
 		else:
 			addDisabledButton("Get up", "You're already standing")
 		
-		addButton("Submit", "Give up", "submit")
+		addButtonAt(14, "Submit", "Give up", "submit")
 		
 	if(state == "lost" || state == "win"):		
 		addButton("Continue", "the battle has ended", "endbattle")

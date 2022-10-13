@@ -83,9 +83,25 @@ func updatePerkText():
 	var reqText = "Requirements:\n"
 	var perkCost = perk.getCost()
 	if(perkCost == 1):
-		reqText += str(perkCost)+" perk point"
+		if(GM.pc.getSkillsHolder().getFreePerkPoints(perk.getSkillGroup()) >= perkCost):
+			reqText += str(perkCost)+" perk point"
+		else:
+			reqText += "[color=red]"+str(perkCost)+" perk point[/color]"
 	else:
-		reqText += str(perkCost)+" perk points"
+		if(GM.pc.getSkillsHolder().getFreePerkPoints(perk.getSkillGroup()) >= perkCost):
+			reqText += str(perkCost)+" perk points"
+		else:
+			reqText += "[color=red]"+str(perkCost)+" perk points[/color]"
+			
+	var requiredPerks = perk.getRequiredPerks()
+	for requiredPerkID in requiredPerks:
+		var requiredperk: PerkBase = GlobalRegistry.getPerk(requiredPerkID)
+		if(requiredperk == null):
+			continue
+		if(GM.pc.hasPerk(requiredPerkID)):
+			reqText += "\n"+str(requiredperk.getVisibleName())+" perk"
+		else:
+			reqText += "\n[color=red]"+str(requiredperk.getVisibleName())+" perk[/color]"
 	
 	perkRequirmentsLabel.bbcode_text = reqText
 	

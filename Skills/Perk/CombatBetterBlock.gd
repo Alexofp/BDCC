@@ -10,8 +10,6 @@ func getVisibleName():
 func getVisibleDescription():
 	return "You learned how to block with your hands better, blocking 50% of the physical damage"
 
-func getCost():
-	return 1
 func getSkillTier():
 	return 0
 

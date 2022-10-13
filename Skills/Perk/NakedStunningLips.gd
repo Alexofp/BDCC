@@ -10,8 +10,6 @@ func getVisibleName():
 func getVisibleDescription():
 	return "Licking your lips when the opponent is above 30% lust may cause them to be distracted with lewd thoughts, stunning them with 10% chance! Chance scales up with your sexiness"
 
-func getCost():
-	return 1
 func getSkillTier():
 	return 0
 

@@ -10,8 +10,6 @@ func getVisibleName():
 func getVisibleDescription():
 	return "You gain the ability to squeeze your breasts to blind the opponent with your milk!"
 
-func getCost():
-	return 1
 func getSkillTier():
 	return 0
 
