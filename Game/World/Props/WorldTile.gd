@@ -5,16 +5,16 @@ enum TileType {Floor1, Floor2, Floor3, WideStairs}
 
 const propData = {
 	TileType.Floor1:{
-		texture = preload("res://Images/WorldTiles/floor1.png")
+		texture = preload("res://Images/WorldTiles/old/floor1.png")
 	},
 	TileType.Floor2:{
-		texture = preload("res://Images/WorldTiles/floor2.png")
+		texture = preload("res://Images/WorldTiles/old/floor2.png")
 	},
 	TileType.Floor3:{
-		texture = preload("res://Images/WorldTiles/floor3.png")
+		texture = preload("res://Images/WorldTiles/old/floor3.png")
 	},
 	TileType.WideStairs:{
-		texture = preload("res://Images/WorldTiles/widestairs.png")
+		texture = preload("res://Images/WorldTiles/old/widestairs.png")
 	},
 }
 
