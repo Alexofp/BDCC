@@ -65,7 +65,7 @@ func scaleDamage(dam) -> int:
 func shouldDoStruggleMinigame(_pc):
 	return true
 
-func doStruggle(_pc):
+func doStruggle(_pc, _minigame):
 	var _handsFree = !_pc.hasBlockedHands()
 	var _armsFree = !_pc.hasBoundArms()
 	var _legsFree = !_pc.hasBoundLegs()

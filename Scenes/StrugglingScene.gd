@@ -180,7 +180,7 @@ func _react(_action: String, _args):
 		var addPain = 0
 		var addStamina = 0
 		
-		var struggleData = restraintData.doStruggle(GM.pc)
+		var struggleData = restraintData.doStruggle(GM.pc, minigameStatus)
 		if(struggleData.has("damage")):
 			damage = struggleData["damage"] * minigameStatus
 		if(struggleData.has("lust") && struggleData["lust"] > 0):
@@ -329,6 +329,9 @@ func _react(_action: String, _args):
 		
 	setState(_action)
 
+func resolveCustomCharacterName(_charID):
+	if(_charID == "user"):
+		return "pc"
 
 func saveData():
 	var data = .saveData()

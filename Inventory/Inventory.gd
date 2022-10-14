@@ -113,6 +113,15 @@ func getAllCombatUsableItems():
 	
 	return result
 		
+func getAllCombatUsableRestraints():
+	var result = []
+	
+	for item in items:
+		if(item.canForceOntoNpc()):
+			result.append(item)
+		
+	return result
+		
 func canEquipSlot(slot):
 	if(get_parent() != null && get_parent().has_method("invCanEquipSlot")):
 		return get_parent().invCanEquipSlot(slot)

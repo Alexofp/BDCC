@@ -34,7 +34,7 @@ func alwaysBreaksWhenStruggledOutOf():
 func getLevelDamage():
 	return 0.05
 
-func doStruggle(_pc):
+func doStruggle(_pc, _minigame):
 	var _handsFree = !_pc.hasBlockedHands()
 	var _armsFree = !_pc.hasBoundArms()
 	var _legsFree = !_pc.hasBoundLegs()
@@ -48,19 +48,19 @@ func doStruggle(_pc):
 	var stamina = 0
 	
 	if(_legsFree):
-		text = "You wiggle your whole body to try and escape."
+		text = "{user.name} wiggles {user.his} whole body to try to escape."
 		damage = calcDamage()
 		stamina = 70
 	else:
-		text = "You helplessly wiggle your body, having your legs restrained makes this pretty much uselss."
+		text = "{user.name} helplessly wiggles {user.his} body, having {user.his} legs restrained makes this pretty much uselss."
 		damage = calcDamage(0.5)
 		stamina = RNG.randi_range(70, 90)
 		
 	if(luckChance(1)):
-		text += " You managed to free one of your hands!"
+		text += " {user.name} managed to free one of {user.his} hands!"
 		damage = max(0.5, damage)
 	elif(failChance(10)):
-		text += " You desperately try to break the stocks locks but just end up more tired."
+		text += " {user.name} desperately tries to break the stocks locks but just ends up more tired."
 		stamina += 20
 	
 	return {"text": text, "damage": damage, "lust": lust, "pain": pain, "stamina": stamina}

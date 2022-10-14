@@ -2,7 +2,7 @@ extends RestraintData
 class_name RestraintBallGag
 
 
-func doStruggle(_pc):
+func doStruggle(_pc, _minigame):
 	var _handsFree = !_pc.hasBlockedHands()
 	var _armsFree = !_pc.hasBoundArms()
 	var _legsFree = !_pc.hasBoundLegs()
@@ -16,16 +16,16 @@ func doStruggle(_pc):
 	var stamina = 0
 	
 	if(_handsFree):
-		text = "You tug on the straps of your head harness, trying to take it off."
+		text = "{user.name} tugs on the straps of {user.his} head harness, trying to take it off."
 		damage = calcDamage()
 		stamina = 10
 	else:
-		text = "You try to bite down on the ball in your mouth but the rubber makes it very tough."
+		text = "{user.name} tries to bite down on the ball in {user.his} mouth but the rubber makes it very tough."
 		damage = calcDamage(0.1)
 		stamina = 5
 	
 	if(RNG.chance(20)):
-		text += " The ball in your mouth makes you drool a lot."
+		text += " The ball in {user.his} mouth makes {user.him} drool a lot."
 		lust = scaleDamage(5)
 	
 	#damage = calcDamage()

@@ -13,7 +13,7 @@ func shouldDoStruggleMinigame(_pc):
 		return false
 	return .shouldDoStruggleMinigame(_pc)
 
-func doStruggle(_pc):
+func doStruggle(_pc, _minigame):
 	var _handsFree = !_pc.hasBlockedHands()
 	var _armsFree = !_pc.hasBoundArms()
 	var _legsFree = !_pc.hasBoundLegs()
@@ -27,22 +27,22 @@ func doStruggle(_pc):
 	var stamina = 0
 	
 	if(_handsFree):
-		text = "Because your hands are free you manage to just remove the buttplug"
+		text = "Because {user.name}'s hands are free {user.he} {user.verbS('manage')} to just remove the buttplug"
 		damage = 1.0
 		lust = 10
 	elif(_legsFree):
-		text = "You squirm and wiggle your rear, trying to push the buttplug out of your butt"
+		text = "{user.name} squirms and wiggles {user.his} rear, trying to push the buttplug out of {user.his} butt"
 		damage = calcDamage()
 		stamina = 5
 		lust = scaleDamage(5)
 	else:
-		text = "You desperatelly squirm, trying to make the buttplug fall out. Not being able to spread your legs makes it very hard"
+		text = "{user.name} desperatelly squirms, trying to make the buttplug fall out. Not being able to spread {user.his} legs makes it very hard"
 		damage = calcDamage(0.5)
 		stamina = 10
 		lust = scaleDamage(5)
 	
 	if(damage < 1.0):
-		if(failChance(40) && GM.pc.getInventory().hasSlotEquipped(InventorySlot.UnderwearBottom)):
+		if(_pc.isPlayer() && failChance(40) && GM.pc.getInventory().hasSlotEquipped(InventorySlot.UnderwearBottom)):
 			if(GM.pc.getInventory().getEquippedItem(InventorySlot.UnderwearBottom).coversBodypart(BodypartSlot.Vagina)):
 				text += " The plug presses into your panties."
 				damage /= 2.0

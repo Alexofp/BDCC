@@ -4,7 +4,7 @@ class_name RestraintRopeHarness
 func canUnlockWithKey():
 	return false
 
-func doStruggle(_pc):
+func doStruggle(_pc, _minigame):
 	var _handsFree = !_pc.hasBlockedHands()
 	var _armsFree = !_pc.hasBoundArms()
 	var _legsFree = !_pc.hasBoundLegs()
@@ -18,7 +18,7 @@ func doStruggle(_pc):
 	var stamina = 0
 	
 	if(true):
-		text = "You try to blindly find the knot to tug on"
+		text = "{user.name} tries to blindly find the knot to tug on"
 		damage = calcDamage()
 		stamina = 10
 		lust = scaleDamage(5)

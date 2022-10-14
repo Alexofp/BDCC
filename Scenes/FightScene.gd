@@ -13,6 +13,7 @@ var battleName = ""
 var currentAttackerID = ""
 var currentReceiverID = ""
 var enemyAIStrategy: AIStrategyBase
+var restraintIdsForcedByPC = []
 
 func _init():
 	sceneID = "FightScene"
@@ -103,6 +104,16 @@ func _run():
 	
 		addButton("Back", "Back to fighting", "return")
 	
+	if(state == "bdsm_attacks"):
+		saynn("Pick what restraint you wanna force onto your enemy")
+		
+		var usableItems = GM.pc.getInventory().getAllCombatUsableRestraints()
+		
+		for item in usableItems:
+			addButton(item.getVisibleName(), item.getCombatDescription(), "forcerestraint", [item])
+			
+		addButton("Back", "Back to fighting", "return")
+	
 	if(state == "playerMustDodge"):
 		if(whatPlayerDid != ""):
 			saynn(whatPlayerDid)
@@ -186,6 +197,10 @@ func _run():
 		else:
 			addDisabledButton("Get up", "You're already standing")
 		
+		# Add perk check here
+		if(true):
+			addButtonWithChecks("BDSM", "Pick which restraint you wanna try to force onto your enemy", "bdsm_attacks", [], [ButtonChecks.NotHandsBlocked, ButtonChecks.NotArmsRestrained])
+		
 		addButtonAt(14, "Submit", "Give up", "submit")
 		
 	if(state == "lost" || state == "win"):		
@@ -236,6 +251,23 @@ func _react(_action: String, _args):
 		setPlayerAsAttacker()
 		var item = _args[0]
 		whatPlayerDid += GM.ui.processString(item.useInCombatWithBuffs(GM.pc, enemyCharacter))
+		whatEnemyDid += aiTurn()
+
+		afterTurnChecks()
+		return
+		
+	if(_action == "forcerestraint"):
+		setState("fighting")
+		beforeTurnChecks()
+		
+		setPlayerAsAttacker()
+		var item:ItemBase = _args[0]
+		whatPlayerDid += "You force "+item.getVisibleName()+" onto them"
+		
+		restraintIdsForcedByPC.append(item.getUniqueID())
+		GM.pc.getInventory().removeItem(item)
+		enemyCharacter.getInventory().forceEquipRemoveOther(item)
+		
 		whatEnemyDid += aiTurn()
 
 		afterTurnChecks()
@@ -306,6 +338,25 @@ func _react(_action: String, _args):
 		return
 	
 	if(_action == "endbattle"):
+		if(restraintIdsForcedByPC.size() > 0):
+			var recoverChance = GM.pc.getBuffsHolder().getCustom(BuffAttribute.RestraintRecovery) * 100.0
+			
+			for itemUniqueID in restraintIdsForcedByPC:
+				var item:ItemBase = enemyCharacter.getInventory().getItemByUniqueID(itemUniqueID)
+				
+				if(item == null):
+					continue
+				
+				if(RNG.chance(recoverChance) or true):
+					enemyCharacter.getInventory().removeItem(item)
+					enemyCharacter.getInventory().removeEquippedItem(item)
+					GM.pc.getInventory().addItem(item)
+					addMessage("You recovered "+item.getAStackName())
+				else:
+					addMessage("You lost "+item.getAStackName())
+			if(enemyCharacter.has_method("resetEquipment")):
+				enemyCharacter.resetEquipment()
+		
 		enemyCharacter.afterFightEnded()
 		GM.pc.afterFightEnded()
 		if(battleEndedHow == ""):
@@ -520,6 +571,7 @@ func beforeTurnChecks():
 func afterTurnChecks():
 	#GM.pc.processBattleTurn()
 	#enemyCharacter.processBattleTurn()
+	enemyCharacter.updateNonBattleEffects()
 	GM.pc.updateNonBattleEffects()
 	
 	var won = checkEnd()
@@ -637,6 +689,7 @@ func saveData():
 	data["battleName"] = battleName
 	data["currentAttackerID"] = currentAttackerID
 	data["currentReceiverID"] = currentReceiverID
+	data["restraintIdsForcedByPC"] = restraintIdsForcedByPC
 	
 	if(enemyAIStrategy != null):
 		data["enemyStrategyData"] = enemyAIStrategy.saveData()
@@ -658,6 +711,7 @@ func loadData(data):
 	battleName = SAVE.loadVar(data, "battleName", "")
 	currentAttackerID = SAVE.loadVar(data, "currentAttackerID", "")
 	currentReceiverID = SAVE.loadVar(data, "currentReceiverID", "")
+	restraintIdsForcedByPC = SAVE.loadVar(data, "restraintIdsForcedByPC", [])
 	
 	enemyAIStrategy = enemyCharacter.getAiStrategy(battleName)
 	enemyAIStrategy.setCharacterID(enemyID)

@@ -290,6 +290,9 @@ func calculateBestRestraintLevel():
 	else:
 		return RNG.randi_range(1, 5)
 
+func canForceOntoNpc():
+	return isRestraint() && !isImportant()
+
 func getUnriggedParts(_character):
 	return null
 

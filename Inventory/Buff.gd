@@ -45,3 +45,5 @@ const SkillExperienceBuff = "SkillExperienceBuff"
 const ChastityPenisBuff = "ChastityPenisBuff"
 const ChastityVaginaBuff = "ChastityVaginaBuff"
 const ChastityAnusBuff = "ChastityAnusBuff"
+
+const RestraintRecoveryBuff = "RestraintRecoveryBuff"

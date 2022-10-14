@@ -2,7 +2,7 @@ extends RestraintData
 class_name RestraintLegCuffs
 
 
-func doStruggle(_pc):
+func doStruggle(_pc, _minigame):
 	var _handsFree = !_pc.hasBlockedHands()
 	var _armsFree = !_pc.hasBoundArms()
 	var _legsFree = !_pc.hasBoundLegs()
@@ -16,16 +16,16 @@ func doStruggle(_pc):
 	var stamina = 0
 	
 	if(_handsFree):
-		text = "You use your hands to try and take off the leg cuffs."
+		text = "{user.name} uses {user.his} hands to try and take off the leg cuffs."
 		damage = calcDamage()
 		stamina = 10
 	else:
-		text = "You roll around and try to helplessly wiggle your leg cuffs off."
+		text = "{user.name} rolls around and tries to helplessly wiggle {user.his} leg cuffs off."
 		damage = calcDamage(0.5)
 		stamina = 10
 		
 		if(RNG.chance(10)):
-			text += " Ow! You accidently smashed them against "+RNG.pick(["the wall", "the ground", "something"])
+			text += " Ow! {user.name} accidently smashed them against "+RNG.pick(["the wall", "the ground", "something"])
 			pain = scaleDamage(RNG.randi_range(5, 10))
 	
 	#damage = calcDamage()

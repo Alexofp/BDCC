@@ -528,6 +528,9 @@ func getLustInterests() -> LustInterests:
 func getSkillsHolder() -> SkillsHolder:
 	return skillsHolder
 
+func getBuffsHolder() -> BuffsHolder:
+	return buffsHolder
+
 func addExperience(newexp: int):
 	skillsHolder.addExperience(newexp)
 
@@ -1296,3 +1299,24 @@ func hasBodywritings():
 
 func clearBodywritings():
 	removeEffect(StatusEffect.HasBodyWritings)
+
+func hasBoundArms():
+	return buffsHolder.hasBuff(Buff.RestrainedArmsBuff)
+
+func hasBlockedHands():
+	return buffsHolder.hasBuff(Buff.BlockedHandsBuff)
+
+func hasBoundLegs():
+	return buffsHolder.hasBuff(Buff.RestrainedLegsBuff)
+
+func isBlindfolded():
+	return buffsHolder.hasBuff(Buff.BlindfoldBuff)
+
+func isBitingBlocked():
+	return buffsHolder.hasBuff(Buff.GagBuff) || buffsHolder.hasBuff(Buff.RingGagBuff) || buffsHolder.hasBuff(Buff.MuzzleBuff)
+
+func isGagged():
+	return buffsHolder.hasBuff(Buff.GagBuff) || buffsHolder.hasBuff(Buff.RingGagBuff)
+
+func isOralBlocked():
+	return buffsHolder.hasBuff(Buff.GagBuff) || buffsHolder.hasBuff(Buff.MuzzleBuff)

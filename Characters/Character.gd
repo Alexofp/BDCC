@@ -162,6 +162,36 @@ func hoursPassed(_howmuch):
 			bodypart.hoursPassed(_howmuch)
 
 func updateNonBattleEffects():
+	if(hasBoundArms()):
+		addEffect(StatusEffect.ArmsBound)
+	else:
+		removeEffect(StatusEffect.ArmsBound)
+		
+	if(hasBlockedHands()):
+		addEffect(StatusEffect.HandsBlocked)
+	else:
+		removeEffect(StatusEffect.HandsBlocked)
+			
+	if(hasBoundLegs()):
+		addEffect(StatusEffect.LegsBound)
+	else:
+		removeEffect(StatusEffect.LegsBound)
+			
+	if(isBlindfolded()):
+		addEffect(StatusEffect.Blindfolded)
+	else:
+		removeEffect(StatusEffect.Blindfolded)
+			
+	if(isGagged()):
+		addEffect(StatusEffect.Gagged)
+	else:
+		removeEffect(StatusEffect.Gagged)
+		
+	if(buffsHolder.hasBuff(Buff.MuzzleBuff)):
+		addEffect(StatusEffect.Muzzled)
+	else:
+		removeEffect(StatusEffect.Muzzled)
+	
 	if(hasBodypart(BodypartSlot.Vagina) && !getBodypart(BodypartSlot.Vagina).isOrificeEmpty()):
 		addEffect(StatusEffect.HasCumInsideVagina)
 	else:

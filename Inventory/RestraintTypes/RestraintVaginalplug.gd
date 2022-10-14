@@ -15,7 +15,7 @@ func shouldDoStruggleMinigame(_pc):
 		return false
 	return .shouldDoStruggleMinigame(_pc)
 
-func doStruggle(_pc):
+func doStruggle(_pc, _minigame):
 	var _handsFree = !_pc.hasBlockedHands()
 	var _armsFree = !_pc.hasBoundArms()
 	var _legsFree = !_pc.hasBoundLegs()
@@ -29,16 +29,16 @@ func doStruggle(_pc):
 	var stamina = 0
 	
 	if(_handsFree):
-		text = "Because your hands are free you just remove the plug."
+		text = "Because {user.name}'s hands are free {user.he} just {user.verbS('remove')} the plug."
 		damage = 1.0
 		lust = scaleDamage(10)
 	elif(_legsFree):
-		text = "You squirm and wiggle your rear, trying to push the plug out of your pussy."
+		text = "{user.name} squirms and wiggles {user.his} rear, trying to push the plug out of {user.his} pussy."
 		damage = calcDamage()
 		stamina = 5
 		lust = scaleDamage(5)
 	else:
-		text = "You desperatelly squirm, trying to push the vaginal plug out. Not being able to spread your legs makes it very hard."
+		text = "{user.name} desperatelly squirms, trying to push the vaginal plug out. Not being able to spread {user.his} legs makes it very hard."
 		damage = calcDamage(0.5)
 		stamina = 10
 		lust = scaleDamage(5)
@@ -46,7 +46,7 @@ func doStruggle(_pc):
 
 				
 	if(damage < 1.0):
-		if(failChance(40) && GM.pc.getInventory().hasSlotEquipped(InventorySlot.UnderwearBottom)):
+		if(_pc.isPlayer() && failChance(40) && GM.pc.getInventory().hasSlotEquipped(InventorySlot.UnderwearBottom)):
 			if(GM.pc.getInventory().getEquippedItem(InventorySlot.UnderwearBottom).coversBodypart(BodypartSlot.Vagina)):
 				text += " The plug presses into your panties."
 				damage /= 2.0
@@ -56,10 +56,10 @@ func doStruggle(_pc):
 					GM.pc.getInventory().unequipSlot(InventorySlot.UnderwearBottom)
 		
 		if(!turnedOn && failChance(40)):
-			text += " You accidentally turn on the plug inside you and it starts vibrating!"
+			text += " {user.name} accidentally turns on the plug inside {user.him} and it starts vibrating!"
 			turnedOn = true
 		elif(turnedOn && failChance(20)):
-			text += " You managed to randomly turn off the vibrating plug."
+			text += " {user.name} managed to randomly turn off the vibrating plug."
 			turnedOn = false
 	
 	#damage = calcDamage()

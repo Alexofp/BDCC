@@ -2,7 +2,7 @@ extends RestraintData
 class_name RestraintHandCuffs
 
 
-func doStruggle(_pc):
+func doStruggle(_pc, _minigame):
 	var _handsFree = !_pc.hasBlockedHands()
 	var _armsFree = !_pc.hasBoundArms()
 	var _legsFree = !_pc.hasBoundLegs()
@@ -16,32 +16,32 @@ func doStruggle(_pc):
 	var stamina = 0
 	
 	if(_handsFree && _canBite):
-		text = "You use your hands and mouth to try and take off the handcuffs without unlocking them."
+		text = "{user.name} uses {user.his} hands and mouth to try and take off the handcuffs without unlocking them."
 		damage = calcDamage()
 		stamina = 10
 		
 		if(failChance(20)):
-			text += " You find yourself drooling a lot."
+			text += " {user.name} finds {user.himself} drooling a lot."
 			lust = scaleDamage(5)
 	elif(_handsFree):
-		text = "You can't use your mouth but you can just about reach the handcuffs with your hands. You're tugging on the restrant, trying to slip it off."
+		text = "{user.name} can't use {user.his} mouth but {user.he} can just about reach the handcuffs with {user.his} hands. {user.name} is tugging on the restrant, trying to slip it off."
 		damage = calcDamage(0.8)
 		stamina = 10
 	elif(_canBite):
-		text = "You try to wiggle the handcuffs off. Not being able to use hands really sucks but using your mouth instead helps to keep them still."
+		text = "{user.name} is trying to wiggle the handcuffs off. Not being able to use hands really sucks but using {user.his} mouth instead helps {user.him} to keep them still."
 		damage = calcDamage(0.7)
 		stamina = 10
 		
 		if(failChance(40)):
-			text += " You find yourself drooling a lot."
+			text += " {user.name} finds {user.himself} drooling a lot."
 			lust = scaleDamage(5)
 	else:
-		text = "You try to helplessly wiggle the handcuffs off."
+		text = "{user.name} tries to helplessly wiggle the handcuffs off."
 		damage = calcDamage(0.5)
 		stamina = RNG.randi_range(10, 20)
 		
 		if(failChance(20)):
-			text += " Ow! You accidently smashed them against "+RNG.pick(["the wall", "the ground", "something"])
+			text += " Ow! {user.name} accidently smashed them against "+RNG.pick(["the wall", "the ground", "something"])
 			pain = scaleDamage(RNG.randi_range(5, 10))
 	
 	#damage = calcDamage()

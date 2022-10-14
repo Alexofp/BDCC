@@ -7,7 +7,7 @@ func resetOnNewDay():
 func getLevelDamage():
 	return 0.04 + 0.1 / level
 
-func doStruggle(_pc):
+func doStruggle(_pc, _minigame):
 	var _handsFree = !_pc.hasBlockedHands()
 	var _armsFree = !_pc.hasBoundArms()
 	var _legsFree = !_pc.hasBoundLegs()
@@ -20,7 +20,7 @@ func doStruggle(_pc):
 	var damage = 0
 	var stamina = 0
 	
-	text = "You helplessly try to wiggle the straitjacket off."
+	text = "{user.name} helplessly tries to wiggle the straitjacket off."
 	damage = calcDamage()
 	stamina = RNG.randi_range(50, 60)
 	

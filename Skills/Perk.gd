@@ -41,6 +41,9 @@ const BDSMCollector = "BDSMCollector"
 const BDSMBetterKeys = "BDSMBetterKeys"
 const BDSMTallyMarks = "BDSMTallyMarks"
 const BDSMBetterStruggling = "BDSMBetterStruggling"
+const BDSMRigger = "BDSMRigger"
+const BDSMRiggerV2 = "BDSMRiggerV2"
+const BDSMRiggerV3 = "BDSMRiggerV3"
 
 # Milking perks
 const MilkSquirt = "MilkSquirt"
