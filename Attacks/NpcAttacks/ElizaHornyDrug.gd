@@ -29,3 +29,6 @@ func _canUse(_attacker, _receiver, _context = {}):
 
 func getAnticipationText(_attacker, _receiver):
 	return "{attacker.name} grabs a syringe with a pink-colored drug inside off {attacker.his} belt and pounces at you."
+
+func getRequirements():
+	return [AttackRequirement.FreeArms, AttackRequirement.FreeHands]

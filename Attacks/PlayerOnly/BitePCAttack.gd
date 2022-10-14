@@ -40,7 +40,7 @@ func _canUse(_attacker, _receiver, _context = {}):
 	return true
 
 func getRequirements():
-	return [["canbite"]]
+	return [AttackRequirement.CanBite]
 
 func getAnticipationText(_attacker, _receiver):
 	return "{attacker.name} bares {attacker.his} fangs and then suddenly ludges at you!"

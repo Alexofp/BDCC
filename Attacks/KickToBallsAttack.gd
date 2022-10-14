@@ -44,3 +44,6 @@ func getAnticipationText(_attacker, _receiver):
 	return RNG.pick([
 		"{attacker.name} wants to play dirty, {attacker.he} lunges forward and tries to kick {receiver.name} in the balls! If {receiver.he} has any this will be very painful.",
 	])
+
+func getRequirements():
+	return [AttackRequirement.FreeLegs]

@@ -73,6 +73,8 @@ func getRequirements():
 func meetsRequirements(_attacker, _receiver):
 	var reqs = getRequirements()
 	for req in reqs:
+		if(req is String):
+			req = [req]
 		if(!checkRequirement(_attacker, _receiver, req)):
 			return false
 	
@@ -80,31 +82,34 @@ func meetsRequirements(_attacker, _receiver):
 
 func checkRequirement(_attacker, _receiver, req):
 	var reqtype = req[0]
-	if(reqtype == "stamina"):
+	if(reqtype == AttackRequirement.Stamina):
 		if(_attacker.getStamina() < req[1]):
 			return false
-	if(reqtype == "freearms"):
-		if(_attacker.hasEffect(StatusEffect.ArmsBound)):
+	if(reqtype == AttackRequirement.FreeArms):
+		if(_attacker.hasBoundArms()):
 			return false
-	if(reqtype == "freelegs"):
-		if(_attacker.hasEffect(StatusEffect.LegsBound)):
+	if(reqtype == AttackRequirement.FreeHands):
+		if(_attacker.hasBlockedHands()):
 			return false
-	if(reqtype == "freemouth"):
-		if(_attacker.hasEffect(StatusEffect.Gagged)):
+	if(reqtype == AttackRequirement.FreeLegs):
+		if(_attacker.hasBoundLegs()):
 			return false
-	if(reqtype == "canbite"):
-		if(_attacker.isPlayer() && _attacker.isBitingBlocked()):
+	if(reqtype == AttackRequirement.CanTalk):
+		if(_attacker.isGagged()):
 			return false
-	if(reqtype == "coveredincum"):
+	if(reqtype == AttackRequirement.CanBite):
+		if(_attacker.isBitingBlocked()):
+			return false
+	if(reqtype == AttackRequirement.CoveredInCum):
 		if(!_attacker.hasEffect(StatusEffect.CoveredInCum)):
 			return false
-	if(reqtype == "lustabove"):
+	if(reqtype == AttackRequirement.LustAbove):
 		if(_attacker.getLust() < req[1]):
 			return false
-	if(reqtype == "lustabovepercent"):
+	if(reqtype == AttackRequirement.LustAbovePercent):
 		if(_attacker.getLustLevel() < req[1]):
 			return false
-	if(reqtype == "hasmilk"):
+	if(reqtype == AttackRequirement.HasMilk):
 		if(_attacker.getBodypart(BodypartSlot.Breasts).getProducedFluidAmount() < req[1]):
 			return false
 			
@@ -112,34 +117,38 @@ func checkRequirement(_attacker, _receiver, req):
 
 func doRequirement(_attacker, _receiver, req):
 	var reqtype = req[0]
-	if(reqtype == "stamina"):
+	if(reqtype == AttackRequirement.Stamina):
 		_attacker.addStamina(-req[1])
 
 func doRequirements(_attacker, _receiver):
 	var reqs = getRequirements()
 	for req in reqs:
+		if(req is String):
+			req = [req]
 		doRequirement(_attacker, _receiver, req)
 
 func getRequirementText(req):
 	var reqtype = req[0]
-	if(reqtype == "stamina"):
+	if(reqtype == AttackRequirement.Stamina):
 		return "Uses " + str(req[1]) + " stamina"
-	if(reqtype == "freearms"):
+	if(reqtype == AttackRequirement.FreeArms):
 		return "Arms must be free"
-	if(reqtype == "freelegs"):
+	if(reqtype == AttackRequirement.FreeHands):
+		return "Hands must be free"
+	if(reqtype == AttackRequirement.FreeLegs):
 		return "Legs must be free"
-	if(reqtype == "freemouth"):
+	if(reqtype == AttackRequirement.CanTalk):
 		return "Mouth must be free"
-	if(reqtype == "canbite"):
+	if(reqtype == AttackRequirement.CanBite):
 		return "Must be able to bite"
-	if(reqtype == "coveredincum"):
+	if(reqtype == AttackRequirement.CoveredInCum):
 		return "Must be covered in cum/girlcum"
-	if(reqtype == "lustabove"):
+	if(reqtype == AttackRequirement.LustAbove):
 		return "Lust must be above "+str(req[1])
-	if(reqtype == "lustabovepercent"):
+	if(reqtype == AttackRequirement.LustAbovePercent):
 		#return "Lust must be above "+str(int(req[1]*100))+"%"
 		return "Lust must be above "+str(int(req[1]*GM.pc.lustThreshold())) +" ("+str(int(req[1]*100))+"%)"
-	if(reqtype == "hasmilk"):
+	if(reqtype == AttackRequirement.HasMilk):
 		return "Must have at least "+str(Util.roundF(req[1], 1))+"ml of milk stored in breasts"
 			
 	return "Error: bad requirement:" + reqtype
@@ -148,6 +157,9 @@ func getRequirementsColorText(_attacker, _receiver):
 	var reqs = getRequirements()
 	var text = ""
 	for req in reqs:
+		if(req is String):
+			req = [req]
+		
 		var reqText = getRequirementText(req)
 		var reqCan = checkRequirement(_attacker, _receiver, req)
 		if(reqCan):

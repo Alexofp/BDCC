@@ -33,3 +33,9 @@ func _canUse(_attacker, _receiver, _context = {}):
 
 func getAnticipationText(_attacker, _receiver):
 	return _attacker.getName() + " turns on "+_attacker.hisHer()+" stunbaton to it's maximum setting, causing it to spark and make an electrical noise. "+_attacker.heShe()+" then starts walking towards you"
+
+func getRequirements():
+	return [AttackRequirement.FreeArms, AttackRequirement.FreeHands]
+
+func getAttackSoloAnimation():
+	return "stunbaton"

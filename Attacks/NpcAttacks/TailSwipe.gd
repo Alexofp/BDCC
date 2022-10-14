@@ -35,3 +35,6 @@ func _canUse(_attacker, _receiver, _context = {}):
 func getAnticipationText(_attacker, _receiver):
 	return "{attacker.name} uses {attacker.his} tail to swipe the ground from under {receiver.name}’s feet!"
 
+func getRequirements():
+	return [AttackRequirement.FreeLegs]
+

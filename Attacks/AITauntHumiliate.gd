@@ -34,3 +34,9 @@ func getAIScore(_attacker, _receiver):
 	if(_attacker.hasEffect(StatusEffect.Collapsed)):
 		return 0.0
 	return min(0.5, .getAIScore(_attacker, _receiver) * 0.8)
+
+func getRequirements():
+	return [AttackRequirement.CanTalk]
+
+func canSeeAnticipationTextWhenBlind():
+	return true

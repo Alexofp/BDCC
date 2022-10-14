@@ -40,3 +40,6 @@ func getRecieverArmorScaling(_attacker, _receiver, _damageType) -> float:
 
 func getAttackSoloAnimation():
 	return "bite"
+
+func getRequirements():
+	return [AttackRequirement.CanBite]

@@ -40,3 +40,6 @@ func getAnticipationText(_attacker, _receiver):
 	return RNG.pick([
 		"{attacker.name} rushes at {receiver.name} and aims to slap {receiver.his} tits!",
 	])
+
+func getRequirements():
+	return [AttackRequirement.FreeArms]

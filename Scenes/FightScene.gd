@@ -110,7 +110,14 @@ func _run():
 		var usableItems = GM.pc.getInventory().getAllCombatUsableRestraints()
 		
 		for item in usableItems:
-			addButton(item.getVisibleName(), item.getCombatDescription(), "forcerestraint", [item])
+			var itemSlot = item.getClothingSlot()
+			
+			if(!enemyCharacter.invCanEquipSlot(itemSlot)):
+				addDisabledButton(item.getVisibleName(), "Unable to force this restraint on them")
+			elif(enemyCharacter.getInventory().hasSlotEquipped(itemSlot) && enemyCharacter.getInventory().getEquippedItem(itemSlot).isRestraint()):
+				addDisabledButton(item.getVisibleName(), "They are wearing this type of restraint already")
+			else:
+				addButton(item.getVisibleName(), item.getCombatDescription(), "forcerestraint", [item])
 			
 		addButton("Back", "Back to fighting", "return")
 	
@@ -267,6 +274,8 @@ func _react(_action: String, _args):
 		restraintIdsForcedByPC.append(item.getUniqueID())
 		GM.pc.getInventory().removeItem(item)
 		enemyCharacter.getInventory().forceEquipRemoveOther(item)
+		enemyCharacter.getBuffsHolder().calculateBuffs()
+		enemyCharacter.updateNonBattleEffects()
 		
 		whatEnemyDid += aiTurn()
 

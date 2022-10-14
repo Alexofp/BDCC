@@ -29,5 +29,8 @@ func getAnticipationText(_attacker, _receiver):
 	text += "\n"
 	return text
 
+func getRequirements():
+	return [AttackRequirement.CanTalk]
+
 func canSeeAnticipationTextWhenBlind():
 	return true

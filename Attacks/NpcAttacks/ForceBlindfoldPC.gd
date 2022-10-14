@@ -36,3 +36,6 @@ func _canUse(_attacker, _receiver, _context = {}):
 
 func getAnticipationText(_attacker, _receiver):
 	return "{attacker.name} produces a blindfold and tries to force it on you."
+
+func getRequirements():
+	return [AttackRequirement.FreeArms, AttackRequirement.FreeHands]

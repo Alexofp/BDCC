@@ -916,14 +916,6 @@ func getCellLocation():
 	
 	return "cellblock_orange_playercell"
 
-func invCanEquipSlot(slot):
-	if(slot == InventorySlot.Penis && !hasPenis()):
-		return false
-	if(slot == InventorySlot.Vagina && !hasVagina()):
-		return false
-	
-	return true
-
 func calculateBestRestraintLevel():
 	var restraintsCount = 0
 	var levelsTotal = 0

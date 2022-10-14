@@ -36,8 +36,6 @@ func _doAttack(_attacker, _receiver, _context = {}):
 func _canUse(_attacker, _receiver, _context = {}):
 	return true
 
-func getRequirements():
-	return []
 
 func getAnticipationText(_attacker, _receiver):
 	return "{attacker.name} frees {attacker.his} arms and tries to shove you"
@@ -52,3 +50,6 @@ func getAttackSoloAnimation():
 
 func getExperience():
 	return [[Skill.Combat, 5]]
+
+func getRequirements():
+	return [AttackRequirement.FreeArms]

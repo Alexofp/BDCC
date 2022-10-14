@@ -36,5 +36,4 @@ func getAnticipationText(_attacker, _receiver):
 	])
 
 func getRequirements():
-	return [["stamina", 20]]
-
+	return [[AttackRequirement.Stamina, 20]]

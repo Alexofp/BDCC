@@ -29,6 +29,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Attacks/BaseAttack.gd"
 }, {
+"base": "Object",
+"class": "AttackRequirement",
+"language": "GDScript",
+"path": "res://Game/Combat/AttackRequirement.gd"
+}, {
 "base": "Node",
 "class": "BaseCharacter",
 "language": "GDScript",
@@ -914,6 +919,7 @@ _global_script_class_icons={
 "AnusOrifice": "",
 "AttachmentProxy": "",
 "Attack": "",
+"AttackRequirement": "",
 "BaseCharacter": "",
 "BaseStageScene3D": "",
 "BasicAI": "",

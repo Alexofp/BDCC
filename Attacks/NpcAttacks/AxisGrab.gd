@@ -31,3 +31,7 @@ func getAnticipationText(_attacker, _receiver):
 	var text = "{attacker.name} is trying to get a grasp on {receiver.name}!"
 
 	return text
+
+func getRequirements():
+	return [AttackRequirement.FreeArms, AttackRequirement.FreeHands]
+	

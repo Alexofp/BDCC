@@ -31,3 +31,9 @@ func _canUse(_attacker, _receiver, _context = {}):
 
 func getAnticipationText(_attacker, _receiver):
 	return "{attacker.name} dashes towards {receiver.name} and tries to cut {receiver.him} with {attacker.his} shiv!"
+
+func getRequirements():
+	return [AttackRequirement.FreeArms, AttackRequirement.FreeHands]
+
+func getAttackSoloAnimation():
+	return "shiv"

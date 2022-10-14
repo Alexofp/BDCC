@@ -37,10 +37,13 @@ func _doAttack(_attacker, _receiver, _context = {}):
 func _canUse(_attacker, _receiver, _context = {}):
 	return true
 
-func getRequirements():
-	return [["stamina", 25]]
-
 func getAnticipationText(_attacker, _receiver):
 	return RNG.pick([
 		"{attacker.name} overcharges {attacker.his} stun baton, you see it spawning a great amount of sparks and making a buzzy noise. {attacker.name} then lunges at {receiver.name}. This one will hurt a lot.",
 	])
+
+func getRequirements():
+	return [[AttackRequirement.Stamina, 25], AttackRequirement.FreeArms, AttackRequirement.FreeHands]
+
+func getAttackSoloAnimation():
+	return "stunbaton"

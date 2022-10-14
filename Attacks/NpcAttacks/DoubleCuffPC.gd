@@ -38,3 +38,6 @@ func getAnticipationText(_attacker, _receiver):
 		"Give up and you might even get to enjoy it.",
 		"Ready to be pacified?",
 	])+"[/say]"
+
+func getRequirements():
+	return [AttackRequirement.FreeArms, AttackRequirement.FreeHands]

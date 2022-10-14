@@ -39,3 +39,9 @@ func getAnticipationText(_attacker, _receiver):
 		"{attacker.name} swings {attacker.his} stun baton at {receiver.name}, aiming for {receiver.his} exposed areas where it would have the most effect.",
 		"{attacker.name}’s stun baton makes sparks as {attacker.he} prepares to strike {receiver.name}.",
 	])
+
+func getRequirements():
+	return [AttackRequirement.FreeArms, AttackRequirement.FreeHands]
+
+func getAttackSoloAnimation():
+	return "stunbaton"

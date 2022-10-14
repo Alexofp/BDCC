@@ -33,3 +33,9 @@ func getAnticipationText(_attacker, _receiver):
 	])+"[/say]"
 
 	return text
+
+func getRequirements():
+	return [AttackRequirement.CanTalk]
+
+func canSeeAnticipationTextWhenBlind():
+	return true

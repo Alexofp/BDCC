@@ -50,9 +50,6 @@ func _doAttack(_attacker, _receiver, _context = {}):
 func _canUse(_attacker, _receiver, _context = {}):
 	return true
 
-func getRequirements():
-	return [["freearms"]]
-
 func getAttackSoloAnimation():
 	return "shiv"
 
@@ -61,3 +58,6 @@ func getExperience():
 
 func getRecieverArmorScaling(_attacker, _receiver, _damageType) -> float:
 	return 3.0
+
+func getRequirements():
+	return [AttackRequirement.FreeArms, AttackRequirement.FreeHands]

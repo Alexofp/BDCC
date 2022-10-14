@@ -42,3 +42,5 @@ func _canUse(_attacker, _receiver, _context = {}):
 func getAnticipationText(_attacker, _receiver):
 	return "{attacker.name} tries to grab {receiver.name}!"
 
+func getRequirements():
+	return [AttackRequirement.FreeArms, AttackRequirement.FreeHands]

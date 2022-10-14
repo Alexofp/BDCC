@@ -1320,3 +1320,11 @@ func isGagged():
 
 func isOralBlocked():
 	return buffsHolder.hasBuff(Buff.GagBuff) || buffsHolder.hasBuff(Buff.MuzzleBuff)
+
+func invCanEquipSlot(slot):
+	if(slot == InventorySlot.Penis && !hasPenis()):
+		return false
+	if(slot == InventorySlot.Vagina && !hasVagina()):
+		return false
+	
+	return true

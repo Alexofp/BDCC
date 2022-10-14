@@ -30,7 +30,7 @@ func _canUse(_attacker, _receiver, _context = {}):
 	return true
 
 func getRequirements():
-	return [["stamina", 25], ["freelegs"]]
+	return [[AttackRequirement.Stamina, 25], AttackRequirement.FreeLegs]
 
 func getAttackSoloAnimation():
 	return "kick"

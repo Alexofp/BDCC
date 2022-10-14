@@ -41,3 +41,9 @@ func getAnticipationText(_attacker, _receiver):
 		"C’mon, we both know you want this.",
 		"Time to silence the opposition.",
 	])+"[/say]"
+
+func getRequirements():
+	return [AttackRequirement.FreeArms, AttackRequirement.FreeHands]
+
+func canSeeAnticipationTextWhenBlind():
+	return true

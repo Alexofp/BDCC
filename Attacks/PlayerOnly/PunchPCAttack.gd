@@ -39,7 +39,7 @@ func _canUse(_attacker, _receiver, _context = {}):
 	return true
 
 func getRequirements():
-	return [["freearms"]]
+	return [AttackRequirement.FreeArms]
 
 func getAttackSoloAnimation():
 	return "punch"

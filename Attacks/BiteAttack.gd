@@ -39,9 +39,6 @@ func _doAttack(_attacker, _receiver, _context = {}):
 func _canUse(_attacker, _receiver, _context = {}):
 	return true
 
-func getRequirements():
-	return [["canbite"]]
-
 func getAnticipationText(_attacker, _receiver):
 	return "{attacker.name} bares {attacker.his} fangs and then suddenly ludges at you!"
 
@@ -56,3 +53,6 @@ func getRecieverArmorScaling(_attacker, _receiver, _damageType) -> float:
 		return 4.0
 	
 	return 10.0
+
+func getRequirements():
+	return [AttackRequirement.CanBite]
