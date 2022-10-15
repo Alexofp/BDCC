@@ -2,6 +2,18 @@ extends "res://Util/SimpleParser.gd"
 class_name GameParser
 
 func callFunc(_command: String, _args: Array):
+	var shouldBeUpperCase = false
+	if(_command.length() > 0 && _command[0].to_upper() == _command[0]):
+		shouldBeUpperCase = true
+		_command[0] = _command[0].to_lower()
+	
+	var result = callFuncWrapper(_command, _args)
+	if((result is String) && shouldBeUpperCase && result.length() > 0):
+		result[0] = result[0].to_upper()
+	
+	return result
+	
+func callFuncWrapper(_command: String, _args: Array):
 	if(_command == "sayMale" && _args.size() == 1):
 		return Util.sayMale(str(_args[0]))
 	if(_command == "sayFemale" && _args.size() == 1):
@@ -16,6 +28,18 @@ func callFunc(_command: String, _args: Array):
 	return "!RUNTIME ERROR NO COMMAND FOUND "+_command+" "+str(_args)+"!"
 	
 func callObjectFunc(_obj: String, _command: String, _args: Array):
+	var shouldBeUpperCase = false
+	if(_command.length() > 0 && _command[0].to_upper() == _command[0]):
+		shouldBeUpperCase = true
+		_command[0] = _command[0].to_lower()
+	
+	var result = callObjectFuncWrapper(_obj, _command, _args)
+	if((result is String) && shouldBeUpperCase && result.length() > 0):
+		result[0] = result[0].to_upper()
+	
+	return result
+	
+func callObjectFuncWrapper(_obj: String, _command: String, _args: Array):
 	var resolvedName = GM.main.resolveCustomCharacterName(_obj)
 	if(resolvedName != null):
 		_obj = resolvedName
