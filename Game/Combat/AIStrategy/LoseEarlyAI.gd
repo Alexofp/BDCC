@@ -1,8 +1,8 @@
 extends AIStrategyBase
 class_name LoseEarlyAI
 
-func getNextAttackID(_enemy):
-	return getBestAttackIDWeighted(_enemy)
+func getNextAttacksWeighted(_enemy):
+	return getBestAttackIDsWeighted(_enemy)
 
 func turnPassed(_enemy):
 	var charObject: BaseCharacter = getCharacter()

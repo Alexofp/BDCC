@@ -36,8 +36,11 @@ func generateRestraintData():
 	restraintData = RestraintBallGag.new()
 	restraintData.setLevel(calculateBestRestraintLevel())
 
-func getForcedOnMessage():
-	return getAStackNameCapitalize()+" was forced onto you. No more biting for you!"
+func getForcedOnMessage(isPlayer = true):
+	if(isPlayer):
+		return getAStackNameCapitalize()+" was forced onto you. No more biting for you!"
+	else:
+		return getAStackNameCapitalize()+" was forced onto {receiver.name}! No more biting for {receiver.him}!"
 
 func updateDoll(doll: Doll3D):
 	doll.setState("muzzle", "muzzled")

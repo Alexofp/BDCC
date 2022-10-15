@@ -168,7 +168,7 @@ func getLexems(text: String):
 
 # barebone interpetator with skipped AST generation
 # no error handling but it's enough for me
-func runLexems(lexems):
+func runLexems(lexems, overrides: Dictionary = {}):
 	var pos = 0
 	
 	if(lexems[pos][0] == Token.EOF):
@@ -216,7 +216,7 @@ func runLexems(lexems):
 				pos += 1
 				
 				if(lexems[pos][0] == Token.EOF):
-					return [true, callObjectFunc(first, second, [])]
+					return [true, callObjectFunc(first, second, [], overrides)]
 				elif(lexems[pos][0] == Token.OPENBRACKET):
 					pos += 1
 					var arguments = []
@@ -224,7 +224,7 @@ func runLexems(lexems):
 					if(lexems[pos][0] == Token.CLOSEBRACKET):
 						pos += 1
 						if(lexems[pos][0] == Token.EOF):
-							return [true, callObjectFunc(first, second, arguments)]
+							return [true, callObjectFunc(first, second, arguments, overrides)]
 					
 					elif(lexems[pos][0] == Token.STRING || lexems[pos][0] == Token.NUMBER):
 						arguments.append(lexems[pos][1])
@@ -241,14 +241,14 @@ func runLexems(lexems):
 								if(lexems[pos][0] == Token.CLOSEBRACKET):
 									pos += 1
 									if(lexems[pos][0] == Token.EOF):
-										return [true, callObjectFunc(first, second, arguments)]
+										return [true, callObjectFunc(first, second, arguments, overrides)]
 						elif(lexems[pos][0] == Token.CLOSEBRACKET):
 							pos += 1
 							if(lexems[pos][0] == Token.EOF):
-								return [true, callObjectFunc(first, second, arguments)]
+								return [true, callObjectFunc(first, second, arguments, overrides)]
 	return [false, "Error while executing the expression"]
 			
-func executeString(text: String):
+func executeString(text: String, overrides: Dictionary = {}):
 	var expressions = getExpressionsFromText(text)
 	var result = ""
 	for expr in expressions:
@@ -256,7 +256,7 @@ func executeString(text: String):
 			result += expr[1]
 		if(expr[0] == "expr"):
 			var lexems = getLexems(expr[1])
-			var exprResult = runLexems(lexems)
+			var exprResult = runLexems(lexems, overrides)
 			if(exprResult[0]):
 				result += exprResult[1]
 			else:
@@ -266,5 +266,5 @@ func executeString(text: String):
 func callFunc(_command: String, _args: Array):
 	return "!callFunc "+_command+" "+str(_args)+"!"
 	
-func callObjectFunc(_obj: String, _command: String, _args: Array):
+func callObjectFunc(_obj: String, _command: String, _args: Array, _overrides: Dictionary = {}):
 	return "!callObjectFunc "+_obj+"."+_command+" "+str(_args)+"!"

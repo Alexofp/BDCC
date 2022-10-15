@@ -114,7 +114,7 @@ func combineTags(tags: Array):
 
 	return result
 
-func processString(text: String):
+func processString(text: String, overrides: Dictionary = {}):
 	var tags = findTags(text)
 	var combinedTags = combineTags(tags)
 	var result = ""
@@ -123,12 +123,15 @@ func processString(text: String):
 		if(tag[0] == TagType.Text):
 			result += tag[1]
 		if(tag[0] == TagType.Tag):
-			result += processTag(tag[1], tag[2], tag[3])
+			result += processTag(tag[1], tag[2], tag[3], overrides)
 			
 	return result
 
-func processTag(tag, arg, text):
+func processTag(tag, arg, text, overrides: Dictionary = {}):
 	if(tag == "say" || tag == "sayShowName"):
+		if(overrides.has(arg)):
+			arg = overrides[arg]
+		
 		var resolvedName = GM.main.resolveCustomCharacterName(arg)
 		if(resolvedName != null):
 			arg = resolvedName

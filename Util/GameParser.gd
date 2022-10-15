@@ -27,7 +27,10 @@ func callFuncWrapper(_command: String, _args: Array):
 	
 	return "!RUNTIME ERROR NO COMMAND FOUND "+_command+" "+str(_args)+"!"
 	
-func callObjectFunc(_obj: String, _command: String, _args: Array):
+func callObjectFunc(_obj: String, _command: String, _args: Array, overrides: Dictionary = {}):
+	if(overrides.has(_obj)):
+		_obj = overrides[_obj]
+	
 	var shouldBeUpperCase = false
 	if(_command.length() > 0 && _command[0].to_upper() == _command[0]):
 		shouldBeUpperCase = true
@@ -54,6 +57,8 @@ func callObjectFuncWrapper(_obj: String, _command: String, _args: Array):
 		return "!RUNTIME ERROR NO CHARACTER FOUND "+_obj+"."+_command+" "+str(_args)+"!"
 	if(_command == "name" && _args.size() == 0):
 		return object.getName()		
+	if(_command == "nameS" && _args.size() == 0):
+		return object.getName()+"'s"
 	if(_command == "inmateNumber" && _args.size() == 0 && object.has_method("getInmateNumber")):
 		return object.getInmateNumber()		
 	if(_command == "inmateNumberFull" && _args.size() == 0 && object.has_method("getFullInmateNumber")):

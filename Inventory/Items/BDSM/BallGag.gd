@@ -37,8 +37,11 @@ func generateRestraintData():
 	restraintData = RestraintBallGag.new()
 	restraintData.setLevel(calculateBestRestraintLevel())
 
-func getForcedOnMessage():
-	return getAStackNameCapitalize()+" was forced into your mouth! You are drooling already"
+func getForcedOnMessage(isPlayer = true):
+	if(isPlayer):
+		return getAStackNameCapitalize()+" was forced into your mouth! You are drooling already"
+	else:
+		return getAStackNameCapitalize()+" was forced into {receiver.nameS} mouth! {receiver.He} {receiver.is} drooling already"
 
 func updateDoll(doll: Doll3D):
 	doll.setState("mouth", "ballgag")

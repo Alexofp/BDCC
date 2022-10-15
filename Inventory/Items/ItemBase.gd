@@ -11,10 +11,9 @@ var itemState: ItemState = null
 func _init():
 	#if(uniqueID == null):
 	#	uniqueID = "item"+str(GlobalRegistry.generateUniqueID())
-	if(isRestraint()):
-		generateRestraintData()
-		if(restraintData != null):
-			restraintData.item = weakref(self)
+	generateRestraintData()
+	if(restraintData != null):
+		restraintData.item = weakref(self)
 		
 	generateItemState()
 	if(itemState != null):
@@ -29,7 +28,14 @@ func getStackName():
 	else:
 		return getVisibleName()
 
+# Hacky but good enough for most things, can always just override just function with a proper one
 func getA():
+	var visName = getVisibleName()
+	
+	if(visName.ends_with("s")):
+		return ""
+	if(visName.length() > 0 && visName[0].to_lower() in ["a", "e", "i", "o", "u"]):
+		return "an"
 	return "a"
 
 func getAStackName():
@@ -239,8 +245,11 @@ func getPuttingOnVerb(withS):
 	else:
 		return "put on"
 
-func getForcedOnMessage():
-	return getAStackNameCapitalize()+" was forced on you!"
+func getForcedOnMessage(isPlayer = true):
+	if(isPlayer):
+		return getAStackNameCapitalize()+" was forced on you!"
+	else:
+		return getAStackNameCapitalize()+" was forced on {receiver.name}!"
 
 func coversBodyparts():
 	if(itemState != null):
@@ -271,11 +280,10 @@ func isImportant():
 	return false
 
 func isRestraint():
-	return false
+	return restraintData != null
 
 func generateRestraintData():
-	restraintData = RestraintData.new()
-	restraintData.setLevel(1)
+	pass
 
 func getRestraintData() -> RestraintData:
 	return restraintData

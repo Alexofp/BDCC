@@ -47,5 +47,8 @@ func getPuttingOnStringLong(withS):
 	else:
 		return "insert the buttplug into your butt"
 
-func getForcedOnMessage():
-	return getAStackNameCapitalize()+" was stuffed into your "+RNG.pick(["anus", "rear hole", "rear", "butt", "tailhole"])+". It shifts around while you move!"
+func getForcedOnMessage(isPlayer = true):
+	if(isPlayer):
+		return getAStackNameCapitalize()+" was stuffed into your "+RNG.pick(["anus", "rear hole", "rear", "butt", "tailhole"])+". It shifts around while you move!"
+	else:
+		return getAStackNameCapitalize()+" was stuffed into {receiver.nameS} "+RNG.pick(["anus", "rear hole", "rear", "butt", "tailhole"])+". It shifts around while {receiver.he} {receiver.verbS('move')}!"

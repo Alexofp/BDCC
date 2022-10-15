@@ -39,8 +39,11 @@ func generateRestraintData():
 func getA():
 	return ""
 
-func getForcedOnMessage():
-	return getAStackNameCapitalize()+" were locked onto your hands"
+func getForcedOnMessage(isPlayer = true):
+	if(isPlayer):
+		return getAStackNameCapitalize()+" were locked onto your hands"
+	else:
+		return getAStackNameCapitalize()+" were locked onto {receiver.nameS} hands"
 
 func updateDoll(doll: Doll3D):
 	doll.setState("gloves", "mittens")

@@ -6,6 +6,9 @@ func _init():
 func getVisibleName():
 	return "Zip ties (ankles)"
 	
+func getA():
+	return ""
+	
 func getDescription():
 	return "Bulky metal restraints. Can be locked to bind legs together"
 
@@ -20,3 +23,9 @@ func getUnriggedParts(_character):
 		"ankle.L": ["res://Inventory/UnriggedModels/ZipTies/ZipTiesModel.tscn"],
 		"ankle.R": ["res://Inventory/UnriggedModels/ZipTies/ZipTiesModel.tscn"],
 	}
+
+func getForcedOnMessage(isPlayer = true):
+	if(isPlayer):
+		return "Some zip ties were forced onto your legs, forcing you to waddle or hop around!"
+	else:
+		return "Some zip ties were forced onto {receiver.nameS} legs, forcing {receiver.him} to waddle or hop around!"

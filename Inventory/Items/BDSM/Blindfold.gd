@@ -33,8 +33,11 @@ func generateRestraintData():
 	restraintData = RestraintBlindfold.new()
 	restraintData.setLevel(RNG.randi_range(1, 2))
 	
-func getForcedOnMessage():
-	return getAStackNameCapitalize()+" was forced over your eyes. You are blind!"
+func getForcedOnMessage(isPlayer = true):
+	if(isPlayer):
+		return getAStackNameCapitalize()+" was forced over your eyes. You are blind!"
+	else:
+		return getAStackNameCapitalize()+" was forced over {receiver.nameS} eyes! {receiver.He} {receiver.is} blind!"
 
 func getUnriggedParts(_character):
 	return {

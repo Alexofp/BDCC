@@ -65,12 +65,24 @@ func scaleDamage(dam) -> int:
 func shouldDoStruggleMinigame(_pc):
 	return true
 
+func calculateAIScore(_pc):
+	if(!shouldDoStruggleMinigame(_pc)):
+		return 5.0
+	
+	var result = 1.0
+	if(!_pc.isBlindfolded() || canInspectWhileBlindfolded()):
+		result = result * 2.0 / float(level)
+	if(tightness > 0.0):
+		result /= tightness
+	
+	return result
+
 func doStruggle(_pc, _minigame):
 	var _handsFree = !_pc.hasBlockedHands()
 	var _armsFree = !_pc.hasBoundArms()
 	var _legsFree = !_pc.hasBoundLegs()
 	var _canSee = !_pc.isBlindfolded()
-	var _canBite = !_pc.isGagged()
+	var _canBite = !_pc.isBitingBlocked()
 	
 	var text = "error?"
 	var lust = 0

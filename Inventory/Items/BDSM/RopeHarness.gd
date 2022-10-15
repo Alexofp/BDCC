@@ -6,6 +6,9 @@ func _init():
 func getVisibleName():
 	return "Rope harness"
 	
+func getA():
+	return "a"
+	
 func getDescription():
 	return "A set of ropes that go over your body"
 
@@ -45,8 +48,11 @@ func getPuttingOnStringLong(withS):
 	else:
 		return "tie your body up with ropes"
 
-func getForcedOnMessage():
-	return getAStackNameCapitalize()+" was forced onto you. The ropes keep rubbing against your sensetive spots"
+func getForcedOnMessage(isPlayer = true):
+	if(isPlayer):
+		return getAStackNameCapitalize()+" was forced onto you. The ropes keep rubbing against your sensetive spots"
+	else:
+		return getAStackNameCapitalize()+" was forced onto {receiver.name}. The ropes keep rubbing against {receiver.his} sensetive spots"
 
 func getRiggedParts(_character):
 	return {

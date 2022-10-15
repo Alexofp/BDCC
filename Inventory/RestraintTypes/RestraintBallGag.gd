@@ -7,7 +7,7 @@ func doStruggle(_pc, _minigame):
 	var _armsFree = !_pc.hasBoundArms()
 	var _legsFree = !_pc.hasBoundLegs()
 	var _canSee = !_pc.isBlindfolded()
-	var _canBite = !_pc.isGagged()
+	var _canBite = !_pc.isBitingBlocked()
 	
 	var text = "error?"
 	var lust = 0

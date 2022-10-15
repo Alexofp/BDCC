@@ -47,5 +47,8 @@ func getPuttingOnStringLong(withS):
 	else:
 		return "insert the vaginal plug into your pussy"
 
-func getForcedOnMessage():
-	return getAStackNameCapitalize()+" was stuffed into your "+RNG.pick(["pussy", "pussy", "cunt", "slit"])+". It can accidentally start vibrating!"
+func getForcedOnMessage(isPlayer = true):
+	if(isPlayer):
+		return getAStackNameCapitalize()+" was stuffed into your "+RNG.pick(["pussy", "pussy", "cunt", "slit"])+". It can accidentally start vibrating!"
+	else:
+		return getAStackNameCapitalize()+" was stuffed into {receiver.nameS} "+RNG.pick(["pussy", "pussy", "cunt", "slit"])+". It can accidentally start vibrating!"

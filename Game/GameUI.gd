@@ -266,8 +266,8 @@ func trimLineEndings():
 func onTimePassed(_secondsPassed):
 	mapAndTimePanel.onTimePassed(_secondsPassed)
 
-func processString(strText: String):
-	return gameParser.executeString(sayParser.processString(strText))
+func processString(strText: String, overrides: Dictionary = {}):
+	return gameParser.executeString(sayParser.processString(strText, overrides), overrides)
 
 func hideAllScreens():
 	mainGameScreen.visible = false
