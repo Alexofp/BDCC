@@ -17,16 +17,16 @@ func doStruggle(_pc, _minigame):
 	var damage = 0
 	var stamina = 0
 	
-	if(_handsFree):
+	if(_handsFree && _armsFree):
 		text = "{user.name} uses {user.his} hands to try and take off the leg cuffs."
-		damage = calcDamage()
+		damage = calcDamage(_pc)
 		stamina = 10
 	else:
 		text = "{user.name} rolls around and tries to helplessly wiggle {user.his} leg cuffs off."
-		damage = calcDamage(0.5)
+		damage = calcDamage(_pc, 0.5)
 		stamina = 10
 		
-		if(RNG.chance(10)):
+		if(failChance(_pc, 10)):
 			text += " Ow! {user.name} accidently smashed them against "+RNG.pick(["the wall", "the ground", "something"])
 			pain = scaleDamage(RNG.randi_range(5, 10))
 	

@@ -17,8 +17,8 @@ func saveData():
 func loadData(_data):
 	pass
 
-func processStruggleTurn():
-	if(failChance(10) && GM.main.getFlag("PortalPantiesModule.Panties_FleshlightsGotStolen")):
+func processStruggleTurn(_pc, _isActivelyStruggling):
+	if(RNG.chance(10) && GM.main.getFlag("PortalPantiesModule.Panties_FleshlightsGotStolen")):
 		var possible = ["anus"]
 		if(GM.pc.hasVagina()):
 			possible.append("vag")

@@ -94,6 +94,11 @@ func getNextAction(_enemy):
 			action = "surrender",
 			reason = surrenderData[1],
 		}
+		
+	if(character.hasEffect(StatusEffect.Stunned)):
+		return {
+			action = "stunned",
+		}
 	
 	var possibleActions:Array = getNextAttacksWeighted(_enemy)
 	

@@ -1337,3 +1337,31 @@ func getRestraintStrugglePower():
 
 func getRestraintStrugglingMinigameResult():
 	return RNG.randf_range(0.8, 1.1)
+
+func processStruggleTurn(isActivelyStruggling = false):
+	var texts = []
+	var damage = 0.0
+	var addLust = 0
+	var addPain = 0
+	var addStamina = 0
+	
+	for item in getInventory().getEquppedRestraints():
+		var restraintData: RestraintData = item.getRestraintData()
+		var struggleData = restraintData.processStruggleTurn(self, isActivelyStruggling)
+		
+		if(struggleData == null):
+			continue
+			
+		if(struggleData.has("damage")):
+			damage += struggleData["damage"]
+		if(struggleData.has("lust")):
+			addLust += struggleData["lust"]
+		if(struggleData.has("pain")):
+			addPain += struggleData["pain"]
+		if(struggleData.has("stamina")):
+			addStamina += struggleData["stamina"]
+		if(struggleData.has("text")):
+			texts.append(struggleData["text"])
+			#additionalStruggleText += struggleData["text"] + "\n\n"
+		
+	return {"damage": damage, "lust": addLust, "pain": addPain, "stamina": addStamina, "text": Util.join(texts, "\n\n")}

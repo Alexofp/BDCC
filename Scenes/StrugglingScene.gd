@@ -193,7 +193,7 @@ func _react(_action: String, _args):
 		struggleText = struggleData["text"]
 		
 		if(!fightMode):
-			var turnData = GM.pc.processStruggleTurn()
+			var turnData = GM.pc.processStruggleTurn(true)
 			damage += turnData["damage"]
 			addLust += turnData["lust"]
 			addPain += turnData["pain"]

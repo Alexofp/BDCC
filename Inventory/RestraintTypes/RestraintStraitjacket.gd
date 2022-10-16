@@ -24,9 +24,7 @@ func doStruggle(_pc, _minigame):
 	var stamina = 0
 	
 	text = "{user.name} helplessly tries to wiggle the straitjacket off."
-	damage = calcDamage()
+	damage = calcDamage(_pc)
 	stamina = RNG.randi_range(50, 60)
-	
-	#damage = calcDamage()
 	
 	return {"text": text, "damage": damage, "lust": lust, "pain": pain, "stamina": stamina}

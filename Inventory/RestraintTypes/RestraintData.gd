@@ -47,11 +47,11 @@ func getFinalChanceToForceARestraint(_pc):
 func getLevelDamage():
 	return 0.5 / pow(max(1.0, level), 0.8)
 
-func getStatDamageMult():
-	return 1.0 + GM.pc.getStat(Stat.Strength) / 20.0
+func getStatDamageMult(_pc):
+	return 1.0 + _pc.getStat(Stat.Strength) / 20.0
 
-func calcDamage(mult = 1.0):
-	return mult * getLevelDamage() * getStatDamageMult() * RNG.randf_range(0.8, 1.0)
+func calcDamage(_pc, mult = 1.0):
+	return mult * getLevelDamage() * getStatDamageMult(_pc) * RNG.randf_range(0.8, 1.0)
 
 func takeDamage(howMuch):
 	tightness -= howMuch
@@ -65,10 +65,10 @@ func getRemoveMessage():
 func canStruggle():
 	return true
 
-func failChance(chance):
+func failChance(_pc, chance):
 	return RNG.chance(chance)
 
-func luckChance(chance):
+func luckChance(_pc, chance):
 	return RNG.chance(chance)
 
 func scaleDamage(dam) -> int:
@@ -103,14 +103,14 @@ func doStruggle(_pc, _minigame):
 	var stamina = 0
 	
 	text = "You struggle, trying to make the "+getItem().getVisibleName()+" slip off"
-	damage = calcDamage()
+	damage = calcDamage(_pc)
 	stamina = 10
 	
 	#damage = calcDamage()
 	
 	return {"text": text, "damage": damage, "lust": lust, "pain": pain, "stamina": stamina}
 
-func processStruggleTurn():
+func processStruggleTurn(_pc, _isActivelyStruggling):
 	return null#{"text": "TEST "+getItem().getVisibleName()}
 
 func getVisibleTightness():

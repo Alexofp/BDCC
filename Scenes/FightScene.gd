@@ -634,6 +634,8 @@ func aiTurn():
 			setState("playerMustDodge")
 	elif(actionType == "wait"):
 		enemyText += "{attacker.name} decided to wait"
+	elif(actionType == "stunned"):
+		enemyText += "{attacker.name} couldn't do anything because {attacker.he} was stunned"
 	elif(actionType == "surrender"):
 		if(actionData.has("reason")):
 			enemyText += "{attacker.name} surrendered. Reason: "+str(actionData["reason"])
@@ -645,7 +647,7 @@ func aiTurn():
 	
 	return enemyText
 
-func beforeTurnChecks():
+func beforeTurnChecks(pcWasStruggling = false):
 	whatPlayerDid = ""
 	whatEnemyDid = ""
 	whatHappened = ""
@@ -653,31 +655,53 @@ func beforeTurnChecks():
 	GM.pc.processBattleTurn()
 	enemyCharacter.processBattleTurn()
 	
-	var turnData = GM.pc.processStruggleTurn()
-	#var damage = turnData["damage"]
-	var addLust = turnData["lust"]
-	var addPain = turnData["pain"]
-	var addStamina = turnData["stamina"]
-	var additionalStruggleText = turnData["text"]
+	if(true):
+		var turnData = GM.pc.processStruggleTurn(pcWasStruggling)
+		var addLust = turnData["lust"]
+		var addPain = turnData["pain"]
+		var addStamina = turnData["stamina"]
+		var additionalStruggleText = turnData["text"]
+		
+		if(addLust != 0):
+			addLust = GM.pc.receiveDamage(DamageType.Lust, addLust)
+			addMessage("You received "+str(addLust)+" lust")
+		if(addPain != 0):
+			addPain = GM.pc.receiveDamage(DamageType.Physical, addPain)
+			addMessage("You received "+str(addPain)+" pain")
+		if(addStamina != 0):
+			GM.pc.addStamina(-addStamina)
+			if(addStamina < 0):
+				addMessage("You gained "+str(-addStamina)+" stamina")
+			else:
+				addMessage("You used "+str(addStamina)+" stamina")
+		
+		if(additionalStruggleText != null && additionalStruggleText != ""):
+			whatHappened += "[i]"+GM.ui.processString(additionalStruggleText, {"user":"pc"})+"[/i]\n"
 	
-	#if(damage != 0.0):
-	#	restraintData.takeDamage(damage)
-	if(addLust != 0):
-		addLust = GM.pc.receiveDamage(DamageType.Lust, addLust)
-		addMessage("You received "+str(addLust)+" lust")
-	if(addPain != 0):
-		addPain = GM.pc.receiveDamage(DamageType.Physical, addPain)
-		addMessage("You received "+str(addPain)+" pain")
-	if(addStamina != 0):
-		GM.pc.addStamina(-addStamina)
-		if(addStamina < 0):
-			addMessage("You gained "+str(-addStamina)+" stamina")
-		else:
-			addMessage("You used "+str(addStamina)+" stamina")
+	if(true):
+		var turnData = enemyCharacter.processStruggleTurn(true)
+		var addLust = turnData["lust"]
+		var addPain = turnData["pain"]
+		var addStamina = turnData["stamina"]
+		var additionalStruggleText = turnData["text"]
+		
+		if(addLust != 0):
+			addLust = enemyCharacter.receiveDamage(DamageType.Lust, addLust)
+			addMessage("Enemy received "+str(addLust)+" lust")
+		if(addPain != 0):
+			addPain = enemyCharacter.receiveDamage(DamageType.Physical, addPain)
+			addMessage("Enemy received "+str(addPain)+" pain")
+		if(addStamina != 0):
+			enemyCharacter.addStamina(-addStamina)
+			if(addStamina < 0):
+				addMessage("Enemy gained "+str(-addStamina)+" stamina")
+			else:
+				addMessage("Enemy used "+str(addStamina)+" stamina")
+		
+		if(additionalStruggleText != null && additionalStruggleText != ""):
+			whatHappened += "[i]"+GM.ui.processString(additionalStruggleText, {"user": enemyID})+"[/i]\n"
 	
-	if(additionalStruggleText != null && additionalStruggleText != ""):
-		whatHappened += "[i]"+additionalStruggleText+"[/i]"
-	
+	whatHappened = whatHappened.rstrip("\n")
 	if(state == ""):
 		setState("fighting")
 
@@ -695,27 +719,37 @@ func afterTurnChecks():
 
 func checkEnd():
 	if(enemySurrendered):
+		if(whatHappened != ""):
+			whatHappened += "\n"
 		whatHappened += "Enemy surrendered, you win the fight\n"
 		battleState = "win"
 		battleEndedHow = "surrendered"
 		return "win"
 	if(enemyCharacter.getPain() >= enemyCharacter.painThreshold()):
+		if(whatHappened != ""):
+			whatHappened += "\n"
 		whatHappened += "Enemy is in too much pain to continue\n"
 		battleState = "win"
 		battleEndedHow = "pain"
 		return "win"
 	if(enemyCharacter.getLust() >= enemyCharacter.lustThreshold()):
+		if(whatHappened != ""):
+			whatHappened += "\n"
 		whatHappened += "Enemy is too aroused to continue\n"
 		battleState = "win"
 		battleEndedHow = "lust"
 		return "win"
 	if(GM.pc.getPain() >= GM.pc.painThreshold()):
+		if(whatHappened != ""):
+			whatHappened += "\n"
 		whatHappened += "You succumb to pain\n"
 		battleState = "lost"
 		battleEndedHow = "pain"
 		GM.main.playAnimation(StageScene.Solo, "defeat")
 		return "lost"
 	if(GM.pc.getLust() >= GM.pc.lustThreshold()):
+		if(whatHappened != ""):
+			whatHappened += "\n"
 		whatHappened += "You're too aroused to continue\n"
 		battleState = "lost"
 		battleEndedHow = "lust"
@@ -783,7 +817,7 @@ func resolveCustomCharacterName(_charID):
 func _react_scene_end(_tag, _result):
 	if(_tag == "struggle_scene"):
 		setState("fighting")
-		beforeTurnChecks()
+		beforeTurnChecks(true)
 		
 		whatEnemyDid += aiTurn()
 

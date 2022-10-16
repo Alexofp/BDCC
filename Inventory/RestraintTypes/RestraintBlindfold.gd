@@ -41,7 +41,7 @@ func doStruggle(_pc, _minigame):
 		stamina = 5
 	else:
 		text = "{user.name} shakes {user.his} head, trying to make the blindfold slip off."
-		damage = calcDamage()
+		damage = calcDamage(_pc)
 		stamina = 10
 	
 	#damage = calcDamage()

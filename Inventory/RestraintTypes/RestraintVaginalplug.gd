@@ -31,51 +31,49 @@ func doStruggle(_pc, _minigame):
 	var damage = 0
 	var stamina = 0
 	
-	if(_handsFree):
+	if(_handsFree && _armsFree):
 		text = "Because {user.name}'s hands are free {user.he} just {user.verbS('remove')} the plug."
 		damage = 1.0
 		lust = scaleDamage(10)
 	elif(_legsFree):
 		text = "{user.name} squirms and wiggles {user.his} rear, trying to push the plug out of {user.his} pussy."
-		damage = calcDamage()
+		damage = calcDamage(_pc)
 		stamina = 5
 		lust = scaleDamage(5)
 	else:
 		text = "{user.name} desperatelly squirms, trying to push the vaginal plug out. Not being able to spread {user.his} legs makes it very hard."
-		damage = calcDamage(0.5)
+		damage = calcDamage(_pc, 0.5)
 		stamina = 10
 		lust = scaleDamage(5)
 	
 
 				
 	if(damage < 1.0):
-		if(_pc.isPlayer() && failChance(40) && GM.pc.getInventory().hasSlotEquipped(InventorySlot.UnderwearBottom)):
-			if(GM.pc.getInventory().getEquippedItem(InventorySlot.UnderwearBottom).coversBodypart(BodypartSlot.Vagina)):
+		if(_pc.isPlayer() && failChance(_pc, 40) && GM.pc.getInventory().hasSlotEquipped(InventorySlot.UnderwearBottom)):
+			if(_pc.getInventory().getEquippedItem(InventorySlot.UnderwearBottom).coversBodypart(BodypartSlot.Vagina)):
 				text += " The plug presses into your panties."
 				damage /= 2.0
 				
-				if(failChance(30)):
+				if(failChance(_pc, 30)):
 					text += " [b]Your panties slipped down, oops.[/b]"
-					GM.pc.getInventory().unequipSlot(InventorySlot.UnderwearBottom)
+					_pc.getInventory().unequipSlot(InventorySlot.UnderwearBottom)
 		
-		if(!turnedOn && failChance(40)):
+		if(!turnedOn && failChance(_pc, 40)):
 			text += " {user.name} accidentally turns on the plug inside {user.him} and it starts vibrating!"
 			turnedOn = true
-		elif(turnedOn && failChance(20)):
+		elif(turnedOn && failChance(_pc, 20)):
 			text += " {user.name} managed to randomly turn off the vibrating plug."
 			turnedOn = false
 	
-	#damage = calcDamage()
-	
 	return {"text": text, "damage": damage, "lust": lust, "pain": pain, "stamina": stamina}
 
-func processStruggleTurn():
+func processStruggleTurn(_pc, _isActivelyStruggling):
 	if(turnedOn):
-		return {"text": "The vaginal plug strongly vibrates inside your pussy", "lust": scaleDamage(5)}
+		return {"text": "The vaginal plug strongly vibrates inside {user.nameS} pussy", "lust": scaleDamage(5)}
 	else:
-		if(failChance(5)):
+		if(failChance(_pc, 5) || (_isActivelyStruggling && failChance(_pc, 30))):
 			turnedOn = true
-			return {"text": "[b]The plug inside your pussy accidentally turns on[/b]. It vibrates, bringing you pleasure!"}
+			return {"text": "[b]The plug inside {user.nameS} pussy accidentally turns on[/b]. It vibrates, bringing {user.him} pleasure!"}
 	
 	
 func resetOnNewDay():
