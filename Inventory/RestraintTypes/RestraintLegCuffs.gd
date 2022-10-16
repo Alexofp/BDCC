@@ -1,6 +1,8 @@
 extends RestraintData
 class_name RestraintLegCuffs
 
+func _init():
+	npcDodgeDifficultyMod = 1.1
 
 func doStruggle(_pc, _minigame):
 	var _handsFree = !_pc.hasBlockedHands()

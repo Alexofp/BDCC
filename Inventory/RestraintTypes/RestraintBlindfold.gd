@@ -1,6 +1,9 @@
 extends RestraintData
 class_name RestraintBlindfold
 
+func _init():
+	npcDodgeDifficultyMod = 0.8
+
 func canInspectWhileBlindfolded():
 	return true
 

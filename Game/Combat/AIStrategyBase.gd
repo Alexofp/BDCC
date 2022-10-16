@@ -86,7 +86,7 @@ func shouldSurrender(_enemy):
 		return [true, "unable to resist the restraints"]
 
 func getNextAction(_enemy):
-	var _character = getCharacter()
+	var character = getCharacter()
 	
 	var surrenderData = shouldSurrender(_enemy)
 	if(surrenderData[0]):
@@ -97,7 +97,7 @@ func getNextAction(_enemy):
 	
 	var possibleActions:Array = getNextAttacksWeighted(_enemy)
 	
-	if(shouldStruggleOutOfRestraints()):
+	if(shouldStruggleOutOfRestraints() && character.getStamina() > 0):
 		possibleActions.append_array(calculateStrugglingActions())
 		
 	var selectedAction = RNG.pickWeightedPairs(possibleActions)

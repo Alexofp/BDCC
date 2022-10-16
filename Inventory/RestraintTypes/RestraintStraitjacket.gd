@@ -1,6 +1,9 @@
 extends RestraintData
 class_name RestraintStraitjacket
 
+func _init():
+	npcDodgeDifficultyMod = 1.5
+
 func resetOnNewDay():
 	pass
 

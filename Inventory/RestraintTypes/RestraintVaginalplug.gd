@@ -1,6 +1,9 @@
 extends RestraintData
 class_name RestraintVaginalplug
 
+func _init():
+	npcDodgeDifficultyMod = 0.5
+
 var turnedOn = false
 
 func canUnlockWithKey():

@@ -34,7 +34,7 @@ func combine(_args = []):
 func getBuffs():
 	if(character.hasPerk(Perk.BDSMBlindfold)):
 		return [
-			buff(Buff.AccuracyBuff, [-25])
+			buff(Buff.AccuracyBuff, [-15])
 		]
 	
 	return [

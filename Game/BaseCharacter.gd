@@ -1328,3 +1328,12 @@ func invCanEquipSlot(slot):
 		return false
 	
 	return true
+
+func getRestraintResistance():
+	return 0.9
+
+func getRestraintStrugglePower():
+	return 1.0
+
+func getRestraintStrugglingMinigameResult():
+	return RNG.randf_range(0.8, 1.1)

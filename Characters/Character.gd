@@ -11,6 +11,10 @@ var npcArmor = {}
 var npcBasePain = null
 var npcBaseLust = null
 var npcBaseStamina = null
+var npcBaseRestraintDodgeChanceMult = null
+var npcRestraintStrugglePower = 1.0
+var npcRestraintMinigameResultMin = 0.8
+var npcRestraintMinigameResultMax = 1.1
 var npcHasMenstrualCycle = false # If true can get pregnant
 
 func _ready():
@@ -270,3 +274,15 @@ func getLustInterests() -> LustInterests:
 	
 func getParentCharacterID():
 	return null
+
+func getRestraintResistance():
+	if(npcBaseRestraintDodgeChanceMult != null):
+		return npcBaseRestraintDodgeChanceMult
+	else:
+		return .getRestraintResistance()
+
+func getRestraintStrugglePower():
+	return npcRestraintStrugglePower
+
+func getRestraintStrugglingMinigameResult():
+	return RNG.randf_range(npcRestraintMinigameResultMin, npcRestraintMinigameResultMax)

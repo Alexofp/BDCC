@@ -1,6 +1,8 @@
 extends RestraintData
 class_name RestraintMittens
 
+func _init():
+	npcDodgeDifficultyMod = 1.2
 
 func doStruggle(_pc, _minigame):
 	var _handsFree = !_pc.hasBlockedHands()

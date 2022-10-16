@@ -1,6 +1,9 @@
 extends RestraintData
 class_name RestraintButtplug
 
+func _init():
+	npcDodgeDifficultyMod = 0.5
+
 func canUnlockWithKey():
 	return false
 

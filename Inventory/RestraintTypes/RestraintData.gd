@@ -4,6 +4,8 @@ class_name RestraintData
 var level: int = 0
 var tightness: float = 1.0
 var item: WeakRef
+var npcDodgeDifficultyMod: float = 1.0
+var npcAiScoreMod: float = 1.0
 
 func getItem():
 	return item.get_ref()
@@ -31,6 +33,16 @@ func getVisibleLevel(isBlind = false):
 
 func canInspectWhileBlindfolded():
 	return false
+
+func getDodgeDifficulty():
+	return 1.0 * level * npcDodgeDifficultyMod
+
+func getFinalChanceToForceARestraint(_pc):
+	var dodgeChance = _pc.getDodgeChance()
+	var restraintDodgeDifficulty = getDodgeDifficulty()
+	var finalSuccessChance = _pc.getRestraintResistance() * (1.0 / restraintDodgeDifficulty) * (1.0 - dodgeChance)
+
+	return finalSuccessChance
 
 func getLevelDamage():
 	return 0.5 / pow(max(1.0, level), 0.8)
@@ -67,7 +79,7 @@ func shouldDoStruggleMinigame(_pc):
 
 func calculateAIScore(_pc):
 	if(!shouldDoStruggleMinigame(_pc)):
-		return 5.0
+		return 5.0 * npcDodgeDifficultyMod
 	
 	var result = 1.0
 	if(!_pc.isBlindfolded() || canInspectWhileBlindfolded()):
@@ -75,7 +87,7 @@ func calculateAIScore(_pc):
 	if(tightness > 0.0):
 		result /= tightness
 	
-	return result
+	return result * npcDodgeDifficultyMod
 
 func doStruggle(_pc, _minigame):
 	var _handsFree = !_pc.hasBlockedHands()

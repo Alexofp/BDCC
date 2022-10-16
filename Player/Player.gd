@@ -1092,3 +1092,6 @@ func hasTightHoles():
 		return true
 	else:
 		return false
+
+func getRestraintForcingSuccessChanceMod():
+	return max(1.0 + min(getAttackAccuracy(), 0.0), 0.0) * (1.0 + buffsHolder.getCustom(BuffAttribute.RestraintForcingSuccess))

@@ -133,9 +133,13 @@ func _run():
 				var restraintData:RestraintData = item.getRestraintData()
 				if(restraintData == null):
 					continue
-				var chanceToForce = 1.0
+				var pcAccuracy = GM.pc.getRestraintForcingSuccessChanceMod()
 					
-				addButton(item.getVisibleName(), "Restraint level: "+str(restraintData.getLevel()) + "\n" + "Success chance: "+ str(Util.numberToPercentString(chanceToForce)) + "\n\n" + item.getCombatDescription(), "forcerestraint", [item])
+				var chanceToForce = pcAccuracy
+				if(enemyCharacter.getStamina() > 0):
+					 chanceToForce *= restraintData.getFinalChanceToForceARestraint(enemyCharacter)
+					
+				addButton(item.getVisibleName(), "Restraint level: "+str(restraintData.getLevel()) + "\n" + "Success chance: "+ str(Util.roundF(chanceToForce*100.0, 1))+"%" + "\n\n" + item.getCombatDescription(), "forcerestraint", [item])
 			
 		addButton("Back", "Back to fighting", "return")
 	
@@ -222,9 +226,8 @@ func _run():
 		else:
 			addDisabledButton("Get up", "You're already standing")
 		
-		# Add perk check here
-		if(true):
-			addButtonWithChecks("BDSM", "Pick which restraint you wanna try to force onto your enemy", "bdsm_attacks", [], [ButtonChecks.NotHandsBlocked, ButtonChecks.NotArmsRestrained])
+		if(GM.pc.hasPerk(Perk.BDSMRigger)):
+			addButtonWithChecks("Bondage", "Pick which restraint you wanna try to force onto your enemy", "bdsm_attacks", [], [ButtonChecks.NotHandsBlocked, ButtonChecks.NotArmsRestrained])
 		
 		addButtonAt(14, "Submit", "Give up", "submit")
 		
@@ -286,14 +289,28 @@ func _react(_action: String, _args):
 		beforeTurnChecks()
 		
 		setPlayerAsAttacker()
-		var item:ItemBase = _args[0]
-		whatPlayerDid += GM.ui.processString(item.getForcedOnMessage(false))
 		
-		restraintIdsForcedByPC.append(item.getUniqueID())
-		GM.pc.getInventory().removeItem(item)
-		enemyCharacter.getInventory().forceEquipRemoveOther(item)
-		enemyCharacter.getBuffsHolder().calculateBuffs()
-		enemyCharacter.updateNonBattleEffects()
+		var accuracy = GM.pc.getRestraintForcingSuccessChanceMod()
+		if(!RNG.chance(accuracy * 100.0)):
+			whatPlayerDid += "You tried to force a restraint onto your enemy but you missed!"
+		else:
+			var item:ItemBase = _args[0]
+			var restraintData:RestraintData = item.getRestraintData()
+			var finalSuccessChance = restraintData.getFinalChanceToForceARestraint(enemyCharacter)
+			
+			if(!RNG.chance(finalSuccessChance * 100.0) && enemyCharacter.getStamina() > 0):
+				enemyCharacter.addStamina(-10)
+				whatPlayerDid += "You try to force a restraint onto {receiver.name} but {receiver.he} avoided your attempt!"
+			
+				GM.main.playAnimation(StageScene.Duo, "", {npc=enemyID, npcAction="dodge"})
+			else:
+				whatPlayerDid += GM.ui.processString(item.getForcedOnMessage(false))
+				
+				restraintIdsForcedByPC.append(item.getUniqueID())
+				GM.pc.getInventory().removeItem(item)
+				enemyCharacter.getInventory().forceEquipRemoveOther(item)
+				enemyCharacter.getBuffsHolder().calculateBuffs()
+				enemyCharacter.updateNonBattleEffects()
 		
 		whatEnemyDid += aiTurn()
 
@@ -374,7 +391,7 @@ func _react(_action: String, _args):
 				if(item == null):
 					continue
 				
-				if(RNG.chance(recoverChance) or true):
+				if(RNG.chance(recoverChance)):
 					enemyCharacter.getInventory().removeItem(item)
 					enemyCharacter.getInventory().removeEquippedItem(item)
 					var restraintData:RestraintData = item.getRestraintData()
@@ -548,7 +565,7 @@ func aiTurn():
 		
 		var minigameStatus = 1.0
 		if(restraintData.shouldDoStruggleMinigame(enemyCharacter)):
-			minigameStatus = clamp(RNG.randf_range(0.8, 1.1), 0.0, 1.0) * 2.0
+			minigameStatus = clamp(enemyCharacter.getRestraintStrugglingMinigameResult(), 0.0, 1.0) * 2.0 * enemyCharacter.getRestraintStrugglePower()
 		
 		var damage = 0.0
 		var addLust = 0

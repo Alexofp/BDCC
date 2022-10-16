@@ -22,4 +22,5 @@ func getPicture():
 func getBuffs():
 	return [
 		buff(Buff.RestraintRecoveryBuff, [30]),
+		buff(Buff.RestraintForcingSuccessBuff, [10]),
 	]
