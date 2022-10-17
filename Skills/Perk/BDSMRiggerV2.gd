@@ -17,7 +17,7 @@ func getSkillTier():
 	return 1
 
 func getPicture():
-	return "res://Images/Perks/chained-heart.png"
+	return "res://Images/Perks/cage.png"
 
 func getBuffs():
 	return [
