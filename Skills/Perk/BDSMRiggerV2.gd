@@ -8,7 +8,7 @@ func getVisibleName():
 	return "Eager Rigger"
 
 func getVisibleDescription():
-	return "You got more experienced at tying up people. Your chances at forcing a restraint onto someone are increased by 10% and you also recover 30% of the restraints when the fight ends."
+	return "You got more experienced at tying up people. Your chances at forcing a restraint onto someone are increased by 10% and you also recover 20% of the restraints when the enemy struggles out of them."
 
 func getRequiredPerks():
 	return [Perk.BDSMRigger]
@@ -21,6 +21,6 @@ func getPicture():
 
 func getBuffs():
 	return [
-		buff(Buff.RestraintRecoveryBuff, [30]),
+		buff(Buff.RestraintRecoveryBuff, [20]),
 		buff(Buff.RestraintForcingSuccessBuff, [10]),
 	]

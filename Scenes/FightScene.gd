@@ -389,7 +389,7 @@ func _react(_action: String, _args):
 	
 	if(_action == "endbattle"):
 		if(restraintIdsForcedByPC.size() > 0):
-			var recoverChance = GM.pc.getBuffsHolder().getCustom(BuffAttribute.RestraintRecovery) * 100.0
+			#var recoverChance = GM.pc.getBuffsHolder().getCustom(BuffAttribute.RestraintRecovery) * 100.0
 			
 			for itemUniqueID in restraintIdsForcedByPC:
 				var item:ItemBase = enemyCharacter.getInventory().getItemByUniqueID(itemUniqueID)
@@ -397,7 +397,7 @@ func _react(_action: String, _args):
 				if(item == null):
 					continue
 				
-				if(RNG.chance(recoverChance)):
+				if(true):#if(RNG.chance(recoverChance)):
 					enemyCharacter.getInventory().removeItem(item)
 					enemyCharacter.getInventory().removeEquippedItem(item)
 					var restraintData:RestraintData = item.getRestraintData()
@@ -613,6 +613,12 @@ func aiTurn():
 			restraintData.onStruggleRemoval()
 			enemyCharacter.getInventory().removeEquippedItem(item)
 			
+			var recoverChance = GM.pc.getBuffsHolder().getCustom(BuffAttribute.RestraintRecovery) * 100.0
+			if(!restraintData.alwaysBreaksWhenStruggledOutOf() && RNG.chance(recoverChance)):
+				GM.pc.getInventory().addItem(item)
+				addMessage("You recovered "+item.getAStackName())
+			elif(recoverChance > 0):
+				addMessage("You lost "+item.getAStackName())
 #			if(!restraintData.alwaysBreaksWhenStruggledOutOf() && (GM.pc.hasPerk(Perk.BDSMCollector) || restraintData.alwaysSavedWhenStruggledOutOf())):
 #				GM.pc.getInventory().addItem(item)
 		var restraintsAmount = enemyCharacter.getInventory().getEquppedRestraints().size()

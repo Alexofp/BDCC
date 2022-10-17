@@ -8,7 +8,7 @@ func getVisibleName():
 	return "Professional Rigger"
 
 func getVisibleDescription():
-	return "You're a real pro at making rope bunnies out of people. Even if they never asked for it. Your chances at forcing a restraint onto someone are increased by 30% and you also recover additional 50% of the restraints when the fight ends."
+	return "You're a real pro at making rope bunnies out of people. Even if they never asked for it. Your chances at forcing a restraint onto someone are increased by 30% and you also recover additional 30% of the restraints during fights."
 
 func getRequiredPerks():
 	return [Perk.BDSMRigger, Perk.BDSMRiggerV2]
@@ -21,6 +21,6 @@ func getPicture():
 
 func getBuffs():
 	return [
-		buff(Buff.RestraintRecoveryBuff, [50]),
+		buff(Buff.RestraintRecoveryBuff, [30]),
 		buff(Buff.RestraintForcingSuccessBuff, [30]),
 	]

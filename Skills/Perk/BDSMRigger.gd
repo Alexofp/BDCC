@@ -8,7 +8,7 @@ func getVisibleName():
 	return "Rigger"
 
 func getVisibleDescription():
-	return "You have quite some experience with BDSM and now want others to experience it too. You get an ability to force BDSM restraints onto others during fights! Restraints are lost if the enemy struggles out of them or if the fight ends."
+	return "You have quite some experience with BDSM and now want others to experience it too. You get an ability to force BDSM restraints onto others during fights! Restraints are lost if the enemy struggles out of them."
 
 func getSkillTier():
 	return 0
