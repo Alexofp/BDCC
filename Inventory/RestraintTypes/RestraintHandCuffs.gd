@@ -1,6 +1,8 @@
 extends RestraintData
 class_name RestraintHandCuffs
 
+func _init():
+	restraintType = RestraintType.WristCuffs
 
 func doStruggle(_pc, _minigame):
 	var _handsFree = !_pc.hasBlockedHands()

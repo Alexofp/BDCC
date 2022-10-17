@@ -376,19 +376,6 @@ func getChatColor():
 	
 	return "red"
 
-func formatSay(text):
-	var color = getChatColor()
-	if(GM.ui != null):
-		text = GM.ui.processString(text)
-	
-	if(isGagged() && hasPerk(Perk.BDSMGagTalk)):
-		return "[color="+color+"]\""+Util.muffledSpeech(text)+"\" ("+text+") [/color]"
-	
-	if(isGagged()):
-		text = Util.muffledSpeech(text)
-	
-	return "[color="+color+"]\""+text+"\"[/color]"
-
 func getSpecies():
 	return pickedSpecies
 

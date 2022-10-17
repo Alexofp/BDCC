@@ -108,3 +108,57 @@ func getLootTable(_battleName):
 func createEquipment():
 	getInventory().equipItem(GlobalRegistry.createItemNoID("inmatecollar"))
 	getInventory().equipItem(GlobalRegistry.createItemNoID("inmateuniformHighsec"))
+
+func reactRestraint(restraintType, restraintAmount, isGettingForced):
+	if(!isGettingForced):
+		if(restraintAmount == 0):
+			return RNG.pick([
+				"Got any more, cutie~?",
+				"You better find some good chains~",
+				"I can't be stopped, never~",
+				"I'm like your worst dream~",
+			])
+		
+		return RNG.pick([
+			"This is a good work out",
+			"These won't keep me forever~",
+			"I'm coming for you next~",
+		])
+	
+	if(isGettingForced):
+		if(restraintAmount > 2 && RNG.chance(30)):
+			return RNG.pick([
+				"This is a little too much",
+				"Quit ressisting and accept your fate",
+				"Uh.. wanna talk it out?",
+			])
+		
+		if(restraintType == RestraintType.Gag):
+			return RNG.pick([
+				"A gag? Really?",
+				"You don't like me talking?",
+			])
+		if(restraintType == RestraintType.Muzzle):
+			return RNG.pick([
+				"A muzzle? Really?",
+				"A red with a muzzle. So stereotypical",
+			])
+		if(restraintType == RestraintType.ButtPlug):
+			return RNG.pick([
+				"Ow!",
+				"Huff",
+			])
+		if(restraintType == RestraintType.VaginalPlug):
+			return RNG.pick([
+				"Hey! Don't push it too far!",
+			])
+	
+		return RNG.pick([
+			"Is that your idea of foreplay?",
+			"Cuffs and collars won't stop me",
+			"Don't make me mad",
+			"You can't win like this",
+			"Why don't you try fighting fair",
+			"Kinky~",
+		])
+	return null

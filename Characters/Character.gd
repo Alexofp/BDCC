@@ -286,3 +286,18 @@ func getRestraintStrugglePower():
 
 func getRestraintStrugglingMinigameResult():
 	return RNG.randf_range(npcRestraintMinigameResultMin, npcRestraintMinigameResultMax)
+
+func shouldReactToRestraint(_restraintType, _restraintAmount, _isGettingForced):
+	if(_isGettingForced && _restraintType in [RestraintType.ButtPlug, RestraintType.VaginalPlug]):
+		return RNG.chance(90)
+	
+	if(_restraintAmount == 0):
+		return RNG.chance(50)
+	return RNG.chance(20)
+
+func reactRestraint(_restraintType, _restraintAmount, _isGettingForced):
+	var parentCharID = getParentCharacterID()
+	if(parentCharID != null):
+		return GlobalRegistry.getCharacter(parentCharID).reactRestraint(_restraintType, _restraintAmount, _isGettingForced)
+	
+	return null

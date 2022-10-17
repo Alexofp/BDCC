@@ -3,7 +3,8 @@ class_name RestraintStraitjacket
 
 func _init():
 	npcDodgeDifficultyMod = 1.5
-
+	restraintType = RestraintType.Straitjacket
+	
 func resetOnNewDay():
 	pass
 

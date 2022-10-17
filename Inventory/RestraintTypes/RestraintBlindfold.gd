@@ -3,6 +3,7 @@ class_name RestraintBlindfold
 
 func _init():
 	npcDodgeDifficultyMod = 0.8
+	restraintType = RestraintType.Blindfold
 
 func canInspectWhileBlindfolded():
 	return true

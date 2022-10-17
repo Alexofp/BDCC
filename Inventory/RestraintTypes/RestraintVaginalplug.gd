@@ -2,7 +2,8 @@ extends RestraintData
 class_name RestraintVaginalplug
 
 func _init():
-	npcDodgeDifficultyMod = 0.5
+	npcDodgeDifficultyMod = 1.5
+	restraintType = RestraintType.VaginalPlug
 
 var turnedOn = false
 

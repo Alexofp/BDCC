@@ -6,6 +6,7 @@ func _init():
 	npcLevel = 10
 	npcBasePain = 150
 	npcBaseLust = 250
+	npcBaseStamina = 150
 	
 	npcLustInterests = {
 		InterestTopic.TallyMarks: Interest.Loves,
@@ -129,3 +130,53 @@ func _getAttacks():
 
 func getFightIntro(_battleName):
 	return "Alex grunts as he gets into a fighting stance, his prosthetic spine is not meant for combat. But he seems tough even with that handicap."
+
+
+func reactRestraint(restraintType, restraintAmount, isGettingForced):
+	if(!isGettingForced):
+		if(restraintAmount == 0):
+			return RNG.pick([
+				"You can't tie me up so easily",
+				"Try harder next time",
+				"What now?",
+				"You can't tie up a rigger",
+			])
+		
+		return RNG.pick([
+			"I will break your toys",
+			"These can't hold me back forever",
+		])
+	
+	if(isGettingForced):
+		if(restraintAmount > 2 && RNG.chance(30)):
+			return RNG.pick([
+				"Stop with this crap",
+				"Enough, save these for lilacs and reds",
+				"How many more do you have?",
+			])
+		
+		if(restraintType == RestraintType.Gag):
+			return RNG.pick([
+				"Hey! Don't fucking gag me",
+				"You think gagging me will save you?",
+			])
+		if(restraintType == RestraintType.Muzzle):
+			return RNG.pick([
+				"Hey! Don't fucking muzzle me",
+				"You think muzzling me will save you?",
+			])
+		if(restraintType == RestraintType.ButtPlug):
+			return RNG.pick([
+				"Hey! Not my ass!",
+				"Don't touch my fucking ass",
+			])
+	
+		return RNG.pick([
+			"Hey! Restraints are my thing!",
+			"The fuck are you doing?",
+			"You are making me real mad",
+			"You can't win like this",
+			"Fight me instead of this shit",
+			"Keep that shit away from me",
+		])
+	return null

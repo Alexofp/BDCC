@@ -1,8 +1,8 @@
 extends RestraintData
-class_name RestraintBallGag
+class_name RestraintMuzzle
 
 func _init():
-	restraintType = RestraintType.Gag
+	restraintType = RestraintType.Muzzle
 
 func doStruggle(_pc, _minigame):
 	var _handsFree = !_pc.hasBlockedHands()
@@ -22,15 +22,13 @@ func doStruggle(_pc, _minigame):
 		damage = calcDamage(_pc)
 		stamina = 10
 	else:
-		text = "{user.name} tries to bite down on the ball in {user.his} mouth but the rubber makes it very tough."
+		text = "{user.name} desperately tries to wiggle the harness off {user.his} head."
 		damage = calcDamage(_pc, 0.1)
 		stamina = 5
 	
-	if(failChance(_pc, 20)):
-		text += " The ball in {user.his} mouth makes {user.him} drool a lot."
-		lust = scaleDamage(5)
-	
-	#damage = calcDamage()
+		if(failChance(_pc, 40)):
+			text += " Shaking {user.his} head so much makes {user.him} disoriented."
+			pain = scaleDamage(5)
 	
 	return {"text": text, "damage": damage, "lust": lust, "pain": pain, "stamina": stamina}
 

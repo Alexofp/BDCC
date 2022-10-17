@@ -34,7 +34,7 @@ func isRestraint():
 	return true
 
 func generateRestraintData():
-	restraintData = RestraintBallGag.new()
+	restraintData = RestraintRingGag.new()
 	restraintData.setLevel(calculateBestRestraintLevel())
 
 func getForcedOnMessage(isPlayer = true):

@@ -68,7 +68,7 @@ func calculateStrugglingActions():
 		if(restraintData == null || !restraintData.canStruggle()):
 			continue
 		
-		print(item.getVisibleName(), " ", restraintData.calculateAIScore(character))
+		#print(item.getVisibleName(), " ", restraintData.calculateAIScore(character))
 		result.append([["struggle", item], restraintData.calculateAIScore(character)])
 	return result
 

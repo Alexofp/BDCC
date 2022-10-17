@@ -300,7 +300,7 @@ func _react(_action: String, _args):
 			
 			if(!RNG.chance(finalSuccessChance * 100.0) && enemyCharacter.getStamina() > 0):
 				enemyCharacter.addStamina(-10)
-				whatPlayerDid += "You try to force a restraint onto {receiver.name} but {receiver.he} avoided your attempt!"
+				whatPlayerDid += GM.ui.processString("You try to force a restraint onto {receiver.name} but {receiver.he} avoided your attempt!")
 			
 				GM.main.playAnimation(StageScene.Duo, "", {npc=enemyID, npcAction="dodge"})
 			else:
@@ -311,6 +311,12 @@ func _react(_action: String, _args):
 				enemyCharacter.getInventory().forceEquipRemoveOther(item)
 				enemyCharacter.getBuffsHolder().calculateBuffs()
 				enemyCharacter.updateNonBattleEffects()
+				
+				var restraintsAmount = enemyCharacter.getInventory().getEquppedRestraints().size()
+				if(enemyCharacter.shouldReactToRestraint(restraintData.getRestraintType(), restraintsAmount, true)):
+					var reaction = enemyCharacter.reactRestraint(restraintData.getRestraintType(), restraintsAmount, true)
+					if(reaction != null && reaction != ""):
+						whatPlayerDid += "\n" + "[say="+str(enemyID)+"]"+str(reaction)+"[/say]"
 		
 		whatEnemyDid += aiTurn()
 
@@ -609,6 +615,12 @@ func aiTurn():
 			
 #			if(!restraintData.alwaysBreaksWhenStruggledOutOf() && (GM.pc.hasPerk(Perk.BDSMCollector) || restraintData.alwaysSavedWhenStruggledOutOf())):
 #				GM.pc.getInventory().addItem(item)
+		var restraintsAmount = enemyCharacter.getInventory().getEquppedRestraints().size()
+		if(enemyCharacter.shouldReactToRestraint(restraintData.getRestraintType(), restraintsAmount, false)):
+			var reaction = enemyCharacter.reactRestraint(restraintData.getRestraintType(), restraintsAmount, false)
+			if(reaction != null && reaction != ""):
+				enemyText += "[say="+str(enemyID)+"]"+str(reaction)+"[/say]"
+
 		enemyText = enemyText.rstrip("\n")
 		
 	elif(actionType == "attack"):

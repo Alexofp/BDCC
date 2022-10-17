@@ -1,6 +1,9 @@
 extends RestraintData
 class_name RestraintRopeHarness
 
+func _init():
+	restraintType = RestraintType.Harness
+
 func canUnlockWithKey():
 	return false
 

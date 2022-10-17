@@ -6,6 +6,7 @@ var tightness: float = 1.0
 var item: WeakRef
 var npcDodgeDifficultyMod: float = 1.0
 var npcAiScoreMod: float = 1.0
+var restraintType = RestraintType.Generic
 
 func getItem():
 	return item.get_ref()
@@ -145,6 +146,9 @@ func alwaysSavedWhenStruggledOutOf():
 
 func alwaysBreaksWhenStruggledOutOf():
 	return false
+
+func getRestraintType():
+	return restraintType
 
 func saveData():
 	var data = {}
