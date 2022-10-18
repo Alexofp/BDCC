@@ -45,8 +45,8 @@ func processTime(seconds: int):
 	var minutesPassed: float = seconds / 60.0
 	var hoursPassed: float = minutesPassed / 60.0
 
-	fluidAmount += getProductionSpeedPerHour() * hoursPassed
 	var maxCapacity = getCapacity()
+	fluidAmount += getProductionSpeedPerHour() * hoursPassed
 	if(fluidAmount > maxCapacity):
 		fluidAmount = maxCapacity
 	if(fluidAmount < 0.0):

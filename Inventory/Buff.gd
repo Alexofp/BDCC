@@ -48,3 +48,7 @@ const ChastityAnusBuff = "ChastityAnusBuff"
 
 const RestraintRecoveryBuff = "RestraintRecoveryBuff"
 const RestraintForcingSuccessBuff = "RestraintForcingSuccessBuff"
+
+const BreastsLactatingSizeLimitBuff = "BreastsLactatingSizeLimitBuff"
+const BreastsMilkProductionBuff = "BreastsMilkProductionBuff"
+const PenisCumProductionBuff = "PenisCumProductionBuff"

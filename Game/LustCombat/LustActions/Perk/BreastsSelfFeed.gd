@@ -1,18 +1,18 @@
 extends LustAction
 
 func _init():
-	id = "BreastsPinchNipples"
+	id = "BreastsSelfFeed"
 	hasByDefault = true
 	
 func shouldShow(_lustState: LustCombatState, _args):
-	if(!_lustState.isInBattle()):
-		return false
+	#if(!_lustState.isInBattle()):
+	#	return false
 	#if(!_lustState.isDoingActivity(LustActivity.GropingChest)):
 	#	return false
 	var pc:Player = _lustState.getCharacter()
 	if(!pc.hasBodypart(BodypartSlot.Breasts)):# || pc.isBodypartCovered(BodypartSlot.Breasts)):
 		return false
-	if(!pc.hasPerk(Perk.MilkSquirt)):
+	if(!pc.hasPerk(Perk.MilkSelfFeed)):
 		return false
 	
 	return true
@@ -32,39 +32,35 @@ func canDo(_lustState: LustCombatState, _args):
 	return .canDo(_lustState, _args)
 
 func getVisibleName(_lustState: LustCombatState, _args):
-	return "Pinch nipples"
+	return "Self-feed milk"
 
 func getVisibleDescription(_lustState: LustCombatState, _args):
-	return "Pinch your nipples with great force, forcing them to squirt milk and blind the enemy. Can be done through clothing with weaker effect."
+	return "Squeeze your breasts and catch some of the milk into your mouth, restoring 50 stamina"
 
 func doAction(_lustState: LustCombatState, _args):
 	#_lustState.getCharacter().addLust(3)
-
+	
 	var pc:Player = _lustState.getCharacter()
 	pc.stimulateLactation()
-	pc.milk(0.3)
+	pc.milk(0.2)
 	
 	var text = ""
-	if(pc.isBodypartCovered(BodypartSlot.Breasts)):
-		text += "You quickly reach your hands to your {pc.breasts} and squeeze them very tight while pinching your nipples through all the cloth. It’s arousing, you’re barely standing on your feet as you knead your breasts and let out some passionate moans."
+	if(pc.hasBigBreasts()):
+		text += "You quickly reach your hands to your {pc.breasts} and squeeze them very tight while guiding the nipples towards your mouth. Your tits are big enough for you to reach towards one of the nips with your lips and latch onto it."
 		text += "\n\n"
 		
-		text += "After enough stimulation, your nipples suddenly shoot a strong stream of {pc.milk} that goes through the clothing and is aimed directly at your opponent."
+		text += "After enough stimulation, your nipples suddenly shoot a strong stream of {pc.milk} that is aimed directly into your mouth. You let out a moan while tasting your own product."
 		text += "\n\n"
 		
-		var enemy:BaseCharacter = _lustState.getEnemyCharacter()
-		if(enemy != null):
-			enemy.addEffect(StatusEffect.Blindness, [2])
+		pc.addStamina(50)
 	else:
-		text += "You quickly reach your hands to your {pc.breasts} and squeeze them very tight while pinching your exposed nipples. It’s arousing, you’re barely standing on your feet as you knead your breasts and let out some passionate moans."
+		text += "You quickly reach your hands to your {pc.breasts} and squeeze them very tight while guiding the nipples towards your mouth. Your tits aren't big enough for you to reach them with your lips so you just knead them harder and open your mouth."
 		text += "\n\n"
 	
-		text += "After enough stimulation, your nipples suddenly shoot a strong stream of {pc.milk} that is aimed directly at your opponent."
+		text += "After enough stimulation, your nipples suddenly shoot a strong stream of {pc.milk} that is aimed directly into your mouth. You let out a moan while tasting your own product."
 		text += "\n\n"
 		
-		var enemy:BaseCharacter = _lustState.getEnemyCharacter()
-		if(enemy != null):
-			enemy.addEffect(StatusEffect.Blindness, [3])
+		pc.addStamina(50)
 
 	return {
 		text = text,
@@ -101,5 +97,5 @@ func skillNeeded():
 
 func getExperience(_lustState: LustCombatState, _args):
 	if(_lustState.isInPublic()):
-		return [[Skill.Milking, 5]]
+		return [[Skill.Milking, 10]]
 	return []

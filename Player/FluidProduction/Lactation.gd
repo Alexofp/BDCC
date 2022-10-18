@@ -31,10 +31,41 @@ func shouldProduce():
 func getCapacity() -> float:
 	var breasts = getBodypart()
 	var size = breasts.getSize()
+	
+	return getCapacityForSize(size)
+
+func getCapacityForSize(size):
 	if(size == BreastsSize.FOREVER_FLAT):
 		return 0.0
 	
 	return round(0.0 + size*size*100.0)
+
+func getOptimalBreastsSize():
+	var baseSize = getBodypart().getBaseSize()
+	if(baseSize == BreastsSize.FOREVER_FLAT):
+		return baseSize
+	var fluidAmount = getFluidAmount()
+	
+	var maxAdditionalSize = 0
+	if(shouldProduce()):
+		maxAdditionalSize += 1
+	
+	var pc = getCharacter()
+	if(pc != null):
+		baseSize += pc.getCustomAttribute(BuffAttribute.BreastsSize)
+		maxAdditionalSize += pc.getCustomAttribute(BuffAttribute.BreastsMaxLactatingSize)
+	
+	if(maxAdditionalSize <= 0):
+		return Util.maxi(baseSize + maxAdditionalSize, BreastsSize.FLAT)
+		
+	for _i in range(0, maxAdditionalSize):
+		var capacity = getCapacityForSize(baseSize + _i)
+		if(capacity <= 0.0):
+			continue
+		var level = clamp(fluidAmount/capacity, 0.0, 1.0)
+		if(level < 0.9):
+			return baseSize + _i
+	return baseSize + maxAdditionalSize
 
 func processTime(seconds: int):
 	.processTime(seconds)
@@ -56,7 +87,14 @@ func processTime(seconds: int):
 func getProductionSpeedPerHour() -> float:
 	if(!shouldProduce()):
 		return -5.0
-	return getCapacity() / 30.0
+		
+	var mult = 1.0
+		
+	var pc = getCharacter()
+	if(pc != null):
+		mult += pc.getCustomAttribute(BuffAttribute.BreastsMilkProduction)
+		
+	return getCapacity() / 30.0 * mult
 
 func saveData():
 	var data = .saveData()

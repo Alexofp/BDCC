@@ -1373,3 +1373,6 @@ func processStruggleTurn(isActivelyStruggling = false):
 			#additionalStruggleText += struggleData["text"] + "\n\n"
 		
 	return {"damage": damage, "lust": addLust, "pain": addPain, "stamina": addStamina, "text": Util.join(texts, "\n\n")}
+
+func getCustomAttribute(id):
+	return buffsHolder.getCustom(id)

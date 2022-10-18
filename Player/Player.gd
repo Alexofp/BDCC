@@ -248,7 +248,7 @@ func updateNonBattleEffects():
 	else:
 		removeEffect(StatusEffect.HasCumInsideMouth)
 		
-	if(menstrualCycle != null && menstrualCycle.isInHeat()):
+	if(menstrualCycle != null && menstrualCycle.isInHeat() && !GM.pc.hasPerk(Perk.StartNoHeat)):
 		addEffect(StatusEffect.InHeat)
 	else:
 		removeEffect(StatusEffect.InHeat)
