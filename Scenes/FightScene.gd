@@ -15,6 +15,7 @@ var currentReceiverID = ""
 var enemyAIStrategy: AIStrategyBase
 var restraintIdsForcedByPC = []
 var enemySurrendered = false
+var lastPlayerAttackData = null
 
 func _init():
 	sceneID = "FightScene"
@@ -178,25 +179,20 @@ func _run():
 		else:
 			saynn(GM.ui.processString(attack.getAnticipationText(enemyCharacter, GM.pc)))
 		addButton("Do nothing", "You don't counter the attack in any way", "dodge_donothing")
-		if(GM.pc.getStamina() > 0 && !GM.pc.hasEffect(StatusEffect.Collapsed)):
-			addButton("Dodge", "You dodge a physical attack completely spending 30 stamina in the process", "dodge_dodge")
-		else:
-			addDisabledButton("Dodge", "You need more stamina for this")
-		if(GM.pc.getStamina() > 0):
-			if(GM.pc.hasPerk(Perk.CombatBetterBlock)):
-				addButton("Block", "You gain 50 additional physical armor against the attack while spending 15 stamina", "dodge_block")
+		addButtonWithChecks("Dodge", "You dodge a physical attack completely spending 30 stamina in the process", "dodge_dodge", [], [ButtonChecks.HasStamina])
+		addButtonWithChecks("Block", "You gain "+str(GM.pc.getBlockArmor())+" additional physical armor against the attack while spending 15 stamina", "dodge_block", [], [ButtonChecks.HasStamina])
+		addButtonWithChecks("Defocus", "You try to distract yourself from the fight, gaining "+str(GM.pc.getDefocusArmor())+" lust armor and spending 15 stamina", "dodge_defocus", [], [ButtonChecks.HasStamina])
+		if(GM.pc.hasPerk(Perk.CombatDoubleDown)):
+			if(lastPlayerAttackData != null):
+				var pcAttack:Attack = GlobalRegistry.getAttack(lastPlayerAttackData["attackID"])
+				
+				if(pcAttack.canUse(GM.pc, enemyCharacter, lastPlayerAttackData)):
+					addButtonWithChecks("Double down", "Spend 30 stamina to do the same attack that you did a second time before the enemy attacks you", "dodge_doubledown", [], [ButtonChecks.HasStamina])
+				else:
+					addDisabledButton("Double down", "You can't double down on this attack")
 			else:
-				addButton("Block", "You gain 20 additional physical armor against the attack while spending 15 stamina", "dodge_block")
-		else:
-			addDisabledButton("Block", "You need more stamina for this")
-		if(GM.pc.getStamina() > 0):
-			if(GM.pc.hasPerk(Perk.SexBetterDefocus)):
-				addButton("Defocus", "You try to distract yourself from the fight, gaining 100 lust armor and spending 15 stamina", "dodge_defocus")
-			else:
-				addButton("Defocus", "You try to distract yourself from the fight, gaining 20 lust armor and spending 15 stamina", "dodge_defocus")
-		else:
-			addDisabledButton("Defocus", "You need more stamina for this")
-		
+				addDisabledButton("Double down", "You can only double down on a basic physical attack")
+				
 	if(state == "" || state == "fighting"):		
 		addButtonWithChecks("Physical Attack", "Show a list of physical attacks that you can do", "physattacks", [], [ButtonChecks.NotStunned])
 		addButtonWithChecks("Lust Attack", "Show a list of lewd actions that you can do", "lustattacks", [], [ButtonChecks.NotStunned])
@@ -343,7 +339,7 @@ func _react(_action: String, _args):
 		afterTurnChecks()
 		return
 		
-	if(_action == "dodge_donothing" || _action == "dodge_dodge" || _action == "dodge_block" || _action == "dodge_defocus"):
+	if(_action == "dodge_donothing" || _action == "dodge_dodge" || _action == "dodge_block" || _action == "dodge_defocus" || _action == "dodge_doubledown"):
 		setState("fighting")
 		whatHappened = ""
 		if(_action == "dodge_donothing"):
@@ -360,6 +356,17 @@ func _react(_action: String, _args):
 			whatPlayerDid = "You try to get distracted"
 			GM.pc.setFightingStateDefocusing()
 			GM.pc.addStamina(-15)
+		if(_action == "dodge_doubledown"):
+			whatPlayerDid = doPlayerAttack(lastPlayerAttackData)
+			GM.pc.addStamina(-30)
+		
+			var won = checkEnd()
+			if(won == "lost"):
+				setState("lost")
+				return
+			if(won == "win"):
+				setState("win")
+				return
 		
 		var attack: Attack = GlobalRegistry.getAttack(savedAIAttackID)
 		if(attack == null):
@@ -532,6 +539,7 @@ func addLustActionsButtons(lustCombatState:LustCombatState, theActions):
 	
 
 func doPlayerAttack(attackData):
+	lastPlayerAttackData = attackData
 	var attackID = attackData["attackID"]
 	
 	var attack: Attack = GlobalRegistry.getAttack(attackID)
@@ -669,6 +677,7 @@ func beforeTurnChecks(pcWasStruggling = false):
 	whatPlayerDid = ""
 	whatEnemyDid = ""
 	whatHappened = ""
+	lastPlayerAttackData = null
 	
 	GM.pc.processBattleTurn()
 	enemyCharacter.processBattleTurn()
@@ -861,6 +870,7 @@ func saveData():
 	data["currentReceiverID"] = currentReceiverID
 	data["restraintIdsForcedByPC"] = restraintIdsForcedByPC
 	data["enemySurrendered"] = enemySurrendered
+	data["lastPlayerAttackData"] = lastPlayerAttackData
 	
 	if(enemyAIStrategy != null):
 		data["enemyStrategyData"] = enemyAIStrategy.saveData()
@@ -884,6 +894,7 @@ func loadData(data):
 	currentReceiverID = SAVE.loadVar(data, "currentReceiverID", "")
 	restraintIdsForcedByPC = SAVE.loadVar(data, "restraintIdsForcedByPC", [])
 	enemySurrendered = SAVE.loadVar(data, "enemySurrendered", false)
+	lastPlayerAttackData = SAVE.loadVar(data, "lastPlayerAttackData", null)
 	
 	enemyAIStrategy = enemyCharacter.getAiStrategy(battleName)
 	enemyAIStrategy.setCharacterID(enemyID)

@@ -44,7 +44,7 @@ func _doAttack(_attacker, _receiver, _context = {}):
 	}
 	
 func _canUse(_attacker, _receiver, _context = {}):
-	return true
+	return itemExists(_context)
 
 func getAttackSoloAnimation():
 	return "stunbaton"

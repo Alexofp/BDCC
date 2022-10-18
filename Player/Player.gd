@@ -684,14 +684,16 @@ func orgasmFrom(_characterID: String):
 	cumOnFloor()
 	
 	addLust(-lust)
-	if(hasPerk(Perk.SexLustPassion)):
-		addStamina(20)
 	updateNonBattleEffects()
 
 func cumOnFloor():
 	if(hasBodypart(BodypartSlot.Penis)):
 		var penis:BodypartPenis = getBodypart(BodypartSlot.Penis)
-		return penis.getFluidProduction().drain()
+		var production: FluidProduction = penis.getFluidProduction()
+		if(production != null):
+			var returnValue = penis.getFluidProduction().drain()
+			production.fillPercent(buffsHolder.getCustom(BuffAttribute.CumGenerationAfterOrgasm))
+			return returnValue
 
 func cummedOnBy(characterID, sourceType = null, howMessy: int = 1):	
 	var ch = GlobalRegistry.getCharacter(characterID)
@@ -1054,3 +1056,4 @@ func hasTightHoles():
 
 func getRestraintForcingSuccessChanceMod():
 	return max(1.0 + min(getAttackAccuracy(), 0.0), 0.0) * (1.0 + buffsHolder.getCustom(BuffAttribute.RestraintForcingSuccess))
+

@@ -9,24 +9,36 @@ const StartNoHeat = "StartNoHeat"
 
 # Combat perks
 const CombatShove = "CombatShove"
+const CombatRam = "CombatRam"
 const CombatBetterBlock = "CombatBetterBlock"
+const CombatBetterBlockV2 = "CombatBetterBlockV2"
+const CombatBetterBlockV3 = "CombatBetterBlockV3"
 const CombatScratching = "CombatScratching"
 const CombatBetterGetUp = "CombatBetterGetUp"
+const CombatDoubleDown = "CombatDoubleDown"
+const CombatDrunkenMaster = "CombatDrunkenMaster"
+const CombatFullStaminaBonus = "CombatFullStaminaBonus"
 
 # Cum Lover perks
 const CumBreath = "CumBreath"
+const CumBreathV2 = "CumBreathV2"
 const CumSlut = "CumSlut"
 const CumSwallower = "CumSwallower"
 const CumSloppySeconds = "CumSloppySeconds"
 const CumCumOnOpponent = "CumCumOnOpponent"
+const CumStud = "CumStud"
+const CumStudV2 = "CumStudV2"
 
 # Sex Slave perks
 const SexLustPassion = "SexLustPassion"
+const SexLustPassionV2 = "SexLustPassionV2"
+const SexLustPassionV3 = "SexLustPassionV3"
 const SexBetterDefocus = "SexBetterDefocus"
 const SexBiter = "SexBiter"
 const SexBetterTease = "SexBetterTease"
 const SexEdging = "SexEdging"
 const SexDefocusNeverLose = "SexDefocusNeverLose"
+const SexIntoxicationBonus = "SexIntoxicationBonus"
 
 # Exhibitionism perks
 const NakedNoShame = "NakedNoShame"

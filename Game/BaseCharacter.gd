@@ -233,16 +233,10 @@ func getArmor(_damageType):
 	var armor = 0
 	if(isBlocking()):
 		if(_damageType == DamageType.Physical):
-			if(hasPerk(Perk.CombatBetterBlock)):
-				armor += 50
-			else:
-				armor += 20
+			armor += getBlockArmor()
 	if(isDefocusing()):
 		if(_damageType == DamageType.Lust):
-			if(hasPerk(Perk.SexBetterDefocus)):
-				armor += 50
-			else:
-				armor += 20
+			armor += getDefocusArmor()
 	
 	armor += buffsHolder.getArmor(_damageType)
 	
@@ -855,6 +849,8 @@ func gotFuckedBy(bodypartSlot, characterID, showMessages = true):
 	var ch = GlobalRegistry.getCharacter(characterID)
 	assert(ch != null)
 	gotOrificeStretchedWith(bodypartSlot, ch.getPenisSize(), showMessages)
+	addStamina(buffsHolder.getCustom(BuffAttribute.StaminaRecoverAfterSex))
+	ch.addStamina(ch.getBuffsHolder().getCustom(BuffAttribute.StaminaRecoverAfterSex))
 
 func gotVaginaFuckedBy(characterID, showMessages = true):
 	return gotFuckedBy(BodypartSlot.Vagina, characterID, showMessages)
@@ -1376,3 +1372,9 @@ func processStruggleTurn(isActivelyStruggling = false):
 
 func getCustomAttribute(id):
 	return buffsHolder.getCustom(id)
+
+func getBlockArmor() -> int:
+	return 20 + buffsHolder.getCustom(BuffAttribute.BlockArmor)
+
+func getDefocusArmor() -> int:
+	return 20 + buffsHolder.getCustom(BuffAttribute.DefocusArmor)

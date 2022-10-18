@@ -16,3 +16,7 @@ func getSkillTier():
 func getPicture():
 	return "res://Images/Perks/distraction.png"
 
+func getBuffs():
+	return [
+		buff(Buff.DefocusArmorBuff, [30]),
+	]

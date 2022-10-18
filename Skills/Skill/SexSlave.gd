@@ -8,3 +8,10 @@ func getVisibleName():
 
 func getVisibleDescription():
 	return "Shows how skilled you are at sex with others"
+
+func getPerkTiers():
+	return [
+		[0],
+		[5],
+		[10],
+	]

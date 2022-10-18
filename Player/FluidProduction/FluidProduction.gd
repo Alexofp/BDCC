@@ -52,6 +52,14 @@ func processTime(seconds: int):
 	if(fluidAmount < 0.0):
 		fluidAmount = 0.0
 
+func fillPercent(howMuch:float):
+	var maxCapacity = getCapacity()
+	fluidAmount += maxCapacity * howMuch
+	if(fluidAmount > maxCapacity):
+		fluidAmount = maxCapacity
+	if(fluidAmount < 0.0):
+		fluidAmount = 0.0
+
 func getBodypart():
 	return bodypart.get_ref()
 

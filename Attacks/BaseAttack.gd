@@ -368,3 +368,11 @@ func getItem(_context) -> ItemBase:
 			return null
 		return item
 	return null
+
+func itemExists(_context):
+	if("itemID" in _context):
+		var item = GlobalRegistry.getCharacter(_context["charID"]).getInventory().getItemByUniqueID(_context["itemID"])
+		if(item == null):
+			return false
+		return true
+	return false

@@ -8,3 +8,10 @@ func getVisibleName():
 
 func getVisibleDescription():
 	return "Shows how much you are used to cumming or being cummed into"
+
+func getPerkTiers():
+	return [
+		[0],
+		[5],
+		[10],
+	]
