@@ -34,7 +34,22 @@ func setCharacter(newnpc):
 
 func calculateBuffs():
 	assert(npc != null)
-	buffs.clear()
+	
+	var newbuffs = []
+	
+	var items = npc.getInventory().getAllEquippedItems()
+	for slot in items:
+		var item = items[slot]
+		newbuffs.append_array(item.getBuffs())
+		
+	var statusEffects = npc.getStatusEffects()
+	for statusEffectID in statusEffects:
+		var statusEffect = statusEffects[statusEffectID]
+		newbuffs.append_array(statusEffect.getBuffs())
+
+	newbuffs.append_array(npc.getSkillsHolder().getBuffs())
+	
+	buffs = newbuffs
 	buffsIds.clear()
 	dealDamageMult.clear()
 	receiveDamageMult.clear()
@@ -66,18 +81,6 @@ func calculateBuffs():
 		orificeMinLooseness[orificeType] = 0.0
 		blockedOrifices[orificeType] = false
 	
-	var items = npc.getInventory().getAllEquippedItems()
-	for slot in items:
-		var item = items[slot]
-		buffs.append_array(item.getBuffs())
-		
-	var statusEffects = npc.getStatusEffects()
-	for statusEffectID in statusEffects:
-		var statusEffect = statusEffects[statusEffectID]
-		buffs.append_array(statusEffect.getBuffs())
-
-	buffs.append_array(npc.getSkillsHolder().getBuffs())
-
 	for buff in buffs:
 		buffsIds[buff.id] = true
 		buff.apply(self)
