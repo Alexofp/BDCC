@@ -625,10 +625,8 @@ func aiTurn():
 			if(!restraintData.alwaysBreaksWhenStruggledOutOf() && RNG.chance(recoverChance)):
 				GM.pc.getInventory().addItem(item)
 				addMessage("You recovered "+item.getAStackName())
-			elif(recoverChance > 0):
-				addMessage("You lost "+item.getAStackName())
-#			if(!restraintData.alwaysBreaksWhenStruggledOutOf() && (GM.pc.hasPerk(Perk.BDSMCollector) || restraintData.alwaysSavedWhenStruggledOutOf())):
-#				GM.pc.getInventory().addItem(item)
+			#elif(recoverChance > 0):
+			#	addMessage("You lost "+item.getAStackName())
 		var restraintsAmount = enemyCharacter.getInventory().getEquppedRestraints().size()
 		if(enemyCharacter.shouldReactToRestraint(restraintData.getRestraintType(), restraintsAmount, false)):
 			var reaction = enemyCharacter.reactRestraint(restraintData.getRestraintType(), restraintsAmount, false)
