@@ -35,6 +35,8 @@ var lustActions: Dictionary = {}
 var defaultLustActions: Array = []
 var orgasmLustActions: Array = []
 var lootLists: Dictionary = {}
+var lootListsByCharacter: Dictionary = {}
+var lootListsByBattle: Dictionary = {}
 var fightClubFightersByRank: Dictionary = {}
 var fightClubFighters: Dictionary = {}
 var mapFloors: Dictionary = {}
@@ -884,6 +886,14 @@ func registerLootList(path: String):
 		if(!lootLists.has(id)):
 			lootLists[id] = []
 		lootLists[id].append(itemObject)
+	for id in itemObject.handlesCharacters:
+		if(!lootListsByCharacter.has(id)):
+			lootListsByCharacter[id] = []
+		lootListsByCharacter[id].append(itemObject)
+	for id in itemObject.handlesBattles:
+		if(!lootListsByBattle.has(id)):
+			lootListsByBattle[id] = []
+		lootListsByBattle[id].append(itemObject)
 
 func registerLootListFolder(folder: String):
 	var dir = Directory.new()
@@ -907,6 +917,11 @@ func getLootLists(id: String):
 	if(!lootLists.has(id)):
 		return []
 	return lootLists[id]
+
+func getLootListsByCharacter(charID: String):
+	if(!lootListsByCharacter.has(charID)):
+		return []
+	return lootListsByCharacter[charID]
 
 func registerModulesFolder(folder: String):
 	var dir = Directory.new()

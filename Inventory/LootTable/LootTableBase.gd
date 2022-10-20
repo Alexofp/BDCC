@@ -17,8 +17,32 @@ func generateCredits():
 
 func getPossibleLoot(characterID, battleName):
 	var resultLoot = loot
+	
+	var handledLists = {}
+	
 	var lootLists = GlobalRegistry.getLootLists(id)
 	for lootList in lootLists:
+		if(handledLists.has(lootList)):
+			continue
+		handledLists[lootList] = true
+		var newLoot = lootList.getLoot(id, characterID, battleName)
+		if(newLoot is Array):
+			resultLoot.append_array(newLoot)
+	
+	var charLootLists = GlobalRegistry.getLootListsByCharacter(characterID)
+	for lootList in charLootLists:
+		if(handledLists.has(lootList)):
+			continue
+		handledLists[lootList] = true
+		var newLoot = lootList.getLoot(id, characterID, battleName)
+		if(newLoot is Array):
+			resultLoot.append_array(newLoot)
+	
+	var battleLootLists = GlobalRegistry.getLootListsByCharacter(battleName)
+	for lootList in battleLootLists:
+		if(handledLists.has(lootList)):
+			continue
+		handledLists[lootList] = true
 		var newLoot = lootList.getLoot(id, characterID, battleName)
 		if(newLoot is Array):
 			resultLoot.append_array(newLoot)
