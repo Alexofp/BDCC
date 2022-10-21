@@ -1180,7 +1180,7 @@ func softUpdateDoll(doll: Doll3D):
 	var cumInflationLevel = getCumInflationLevel()
 	pregnancyValue += clamp(cumInflationLevel / 2.0, 0.0, 1.0)
 	
-	doll.setPregnancy(clamp(pregnancyValue, 0.0, 1.1))
+	doll.setPregnancy(clamp(pregnancyValue, -0.5, 1.1))
 	
 	if(thicknessNorm <= 0.5):
 		doll.setButtScale(1.0 - 0.2 * (1.0 - thicknessNorm * 2))
