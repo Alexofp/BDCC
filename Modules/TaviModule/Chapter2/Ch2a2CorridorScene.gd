@@ -354,6 +354,7 @@ func _run():
 	if(state == "follow_foxy"):
 		# (also runs a leashed scene)
 		# Sybian scene here?
+		aimCameraAndSetLocName("eng_breakroom")
 		GM.main.playAnimation(StageScene.Duo, "stand", {npc="alexrynard", exposedBodyparts=[BodypartSlot.Vagina, BodypartSlot.Anus]})
 
 		saynn("He brings you somewhere.. You’re not quite sure where since the blindfold makes it very hard to orient yourself around.")
