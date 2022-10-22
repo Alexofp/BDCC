@@ -36,6 +36,8 @@ func getFlags():
 		"Nursery_Introduced": flag(FlagType.Bool),
 		"Nursery_AskedHowWorks": flag(FlagType.Bool),
 		"Nursery_AskedDatabase": flag(FlagType.Bool),
+		
+		"Medical_StoleDrugsToday": flag(FlagType.Bool),
 	}
 
 func _init():
@@ -81,6 +83,7 @@ func _init():
 		"res://Modules/MedicalModule/CaughtOffLimitsInMentalEvent.gd",
 		
 		"res://Modules/MedicalModule/Nursery/NurseryTalkEvent.gd",
+		"res://Modules/MedicalModule/StealDrugsFromMedicalEvent.gd",
 	]
 
 func resetFlagsOnNewDay():
@@ -91,6 +94,8 @@ func resetFlagsOnNewDay():
 	GM.main.setModuleFlag("MedicalModule", "Mental_PlayerEscaped", false)
 	if(GM.main.getFlag("MedicalModule.Eliza_BusyDays", 0) > 0):
 		GM.main.increaseFlag("MedicalModule.Eliza_BusyDays", -1)
+	if(getFlag("MedicalModule.Medical_StoleDrugsToday")):
+		setFlag("MedicalModule.Medical_StoleDrugsToday", false)
 
 func preparePCForMentalWard():
 	GM.pc.removeAllRestraints()

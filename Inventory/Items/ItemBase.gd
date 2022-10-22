@@ -109,7 +109,10 @@ func useInCombatWithBuffs(_attacker, _receiver):
 	if(_attacker.isPlayer()):
 		var intoxic = addsIntoxication()
 		if(intoxic > 0.0):
-			_attacker.addIntoxication(addsIntoxication())
+			if(_attacker.isPlayer()):
+				_attacker.addIntoxication(addsIntoxicationToPC())
+			else:
+				_attacker.addIntoxication(addsIntoxication())
 			
 		var timedBuffs = getTimedBuffs()
 		if(timedBuffs.size() > 0):
