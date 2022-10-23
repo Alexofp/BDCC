@@ -15,6 +15,10 @@ func getFlags():
 		"BathroomBulliesPayed": flag(FlagType.Bool),
 		"BathroomBulliesBecameCumToilet": flag(FlagType.Bool),
 		"BathroomBulliesBecamePissToilet": flag(FlagType.Bool),
+		
+		"Jacki_StocksSceneHappened": flag(FlagType.Bool),
+		"Jacki_ContentDisabled": flag(FlagType.Bool),
+		"Jacki_PCKnowsName": flag(FlagType.Bool),
 	}
 
 func _init():
@@ -24,6 +28,7 @@ func _init():
 	scenes = [
 		"res://Modules/JackiModule/Ch1/JackiFirstEncounterScene.gd",
 		"res://Modules/JackiModule/Ch1/JackiBulliesInBathroomScene.gd",
+		"res://Modules/JackiModule/Ch1/JackiStuckInStocksScene.gd",
 		]
 	characters = [
 		"res://Modules/JackiModule/JackiCharacter.gd",
@@ -32,6 +37,7 @@ func _init():
 	events = [
 		"res://Modules/JackiModule/Ch1/JackiFirstEncounterEvent.gd",
 		"res://Modules/JackiModule/Ch1/JackiBulliesInBathroomEvent.gd",
+		"res://Modules/JackiModule/Ch1/JackiStuckInStocksEvent.gd",
 	]
 	quests = [
 	]

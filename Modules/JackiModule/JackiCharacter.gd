@@ -39,3 +39,5 @@ func createBodyparts():
 func createEquipment():
 	getInventory().equipItem(GlobalRegistry.createItemNoID("inmatecollar"))
 	getInventory().equipItem(GlobalRegistry.createItemNoID("inmateuniform"))
+	getInventory().equipItem(GlobalRegistry.createItemNoID("sportyTop"))
+	getInventory().equipItem(GlobalRegistry.createItemNoID("sportyBriefs"))
