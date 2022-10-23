@@ -18,7 +18,7 @@ script = ExtResource( 2 )
 tree_root = ExtResource( 6 )
 anim_player = NodePath("../Doll3D/DollSkeleton/AnimationPlayer")
 parameters/AnimationNodeStateMachine/playback = SubResource( 2 )
-parameters/CuffsBlend/blend_amount = 1.0
+parameters/CuffsBlend/blend_amount = 0.0
 
 [node name="Sprite3D" type="Sprite3D" parent="." index="2"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.196641, -1.77462 )

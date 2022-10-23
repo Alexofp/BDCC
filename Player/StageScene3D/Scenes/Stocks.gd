@@ -11,7 +11,10 @@ func _init():
 	
 func playAnimation(animID, _args = {}):
 	print("Playing stocks: "+str(animID))
-	doll.prepareCharacter("pc")
+	if(_args.has("pc")):
+		doll.prepareCharacter(_args["pc"])
+	else:
+		doll.prepareCharacter("pc")
 	
 	if(_args.has("exposedBodyparts")):
 		doll.setExposedBodyparts(_args["exposedBodyparts"])

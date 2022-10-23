@@ -59,6 +59,8 @@ func beforeFightStarted():
 	.beforeFightStarted()
 	addLust(getAmbientLust())
 	addPain(getAmbientPain())
+	if(stamina > getMaxStamina()):
+		stamina = getMaxStamina()
 
 func afterFightEnded():
 	.afterFightEnded()
