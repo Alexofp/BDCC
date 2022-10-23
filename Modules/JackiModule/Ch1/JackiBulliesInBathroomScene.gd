@@ -113,6 +113,7 @@ func _run():
 
 	if(state == "pay_15_creds"):
 		# (needs 15 creds)
+		setFlag("JackiModule.BathroomBulliesPayed", true)
 
 		saynn("You hand the guy the chip with 15 more credits. He seems satisfied enough.")
 
@@ -183,6 +184,8 @@ func _run():
 		addButton("Fight", "Begin the fight", "startfight")
 
 	if(state == "if_won"):
+		setFlag("JackiModule.BathroomBulliesWon", true)
+		
 		saynn("The girl falls to her knees and drops the weapon. You quickly grab it and point at the other gang members. They seem to be somewhat intimidated by it.")
 
 		saynn("[say=gymbully3]Fucker![/say]")
@@ -200,6 +203,8 @@ func _run():
 
 
 	if(state == "if_lost"):
+		setFlag("JackiModule.BathroomBulliesLost", true)
+		
 		saynn("Since you lost the fight you can only submit to them now and see what happens.")
 
 		# (submit button)
@@ -207,6 +212,7 @@ func _run():
 
 
 	if(state == "submit"):
+		setFlag("JackiModule.BathroomBulliesSubmitted", true)
 		# (they strip and tie you up to a urinal. They force a ring gag into your mouth)
 
 		# (you can choose to be a cum toilet or a piss toilet)
@@ -248,6 +254,8 @@ func _run():
 
 
 	if(state == "cum_toilet"):
+		setFlag("JackiModule.BathroomBulliesBecameCumToilet", true)
+		
 		saynn("The second guy pulls his canine cock out while the girl exposes her pussy. You can’t help but to drool while they both begin masturbating right in front of you.")
 
 		saynn("[say=gymbully3]Oh yeah~. Hope you’re ready, little cum toilet.[/say]")
@@ -275,6 +283,7 @@ func _run():
 
 	if(state == "piss_toilet"):
 		# (needs waterspots content)
+		setFlag("JackiModule.BathroomBulliesBecamePissToilet", true)
 
 		saynn("The second guy pulls his canine cock out while the girl exposes her pussy. You can’t help but to drool while they both begin looming over you, waiting for their urges to come.")
 

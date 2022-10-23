@@ -9,6 +9,12 @@ func getFlags():
 		
 		"BathroomBulliesSceneWillHappen": flag(FlagType.Bool),
 		"BathroomBulliesSceneHappened": flag(FlagType.Bool),
+		"BathroomBulliesWon": flag(FlagType.Bool),
+		"BathroomBulliesLost": flag(FlagType.Bool),
+		"BathroomBulliesSubmitted": flag(FlagType.Bool),
+		"BathroomBulliesPayed": flag(FlagType.Bool),
+		"BathroomBulliesBecameCumToilet": flag(FlagType.Bool),
+		"BathroomBulliesBecamePissToilet": flag(FlagType.Bool),
 	}
 
 func _init():
