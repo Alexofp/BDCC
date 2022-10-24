@@ -57,8 +57,6 @@ func _ready():
 	var _con4 = skillsHolder.connect("levelChanged", self, "onLevelChange")
 	var _con5 = skillsHolder.connect("skillLevelChanged", self, "onSkillLevelChange")
 	stamina = getMaxStamina()
-	if(getName() == "Bully Girl"):
-		pass
 	#resetToDefault()
 	lustInterests = LustInterests.new()
 

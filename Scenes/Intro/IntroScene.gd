@@ -230,7 +230,7 @@ func _run():
 
 		saynn("[say=pc]License? No? Why would I need a license to whore myself out[/say]")
 
-		saynn("[say=intro_detective]Sexual services aren’t really that differnet from any other types of services, the intergalactic law allows it as long as you have a license. If you can do it for free why shouldn’t you be able to get paid for it. The license proves that you don’t have any STDs or other diseases. You pay taxes and in exchange you get the same benefits as any other worker.[/say]")
+		saynn("[say=intro_detective]Sexual services aren’t really that different from any other types of services, the intergalactic law allows it as long as you have a license. If you can do it for free why shouldn’t you be able to get paid for it. The license proves that you don’t have any STDs or other diseases. You pay taxes and in exchange you get the same benefits as any other worker.[/say]")
 
 		saynn("[say=pc]Well, I don’t have it. My planet doesn’t follow the intergalactic law[/say]")
 
