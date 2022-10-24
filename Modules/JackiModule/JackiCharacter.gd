@@ -44,3 +44,4 @@ func createEquipment():
 	getInventory().equipItem(GlobalRegistry.createItemNoID("inmateuniform"))
 	getInventory().equipItem(GlobalRegistry.createItemNoID("sportyTop"))
 	getInventory().equipItem(GlobalRegistry.createItemNoID("sportyBriefs"))
+	getInventory().equipItem(GlobalRegistry.createItemNoID("JackiChastityPiercings"))

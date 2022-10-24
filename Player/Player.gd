@@ -642,20 +642,6 @@ func getExposedPrivates():
 		
 	return result
 
-func isBodypartCovered(bodypartSlot):
-	var coveredParts = {}
-	
-	var equippedItems = inventory.getAllEquippedItems()
-	for inventorySlot in equippedItems:
-		var item = equippedItems[inventorySlot]
-		var itemCovers = item.coversBodyparts()
-		for itemCover in itemCovers:
-			coveredParts[itemCover] = true
-	
-	if(coveredParts.has(bodypartSlot) && coveredParts[bodypartSlot]):
-		return true
-	return false
-
 func isWearingAnyUnderwear():
 	return inventory.hasSlotEquipped(InventorySlot.UnderwearBottom) || inventory.hasSlotEquipped(InventorySlot.UnderwearTop)
 

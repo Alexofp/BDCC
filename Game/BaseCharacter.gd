@@ -1378,3 +1378,17 @@ func getBlockArmor() -> int:
 
 func getDefocusArmor() -> int:
 	return 20 + buffsHolder.getCustom(BuffAttribute.DefocusArmor)
+
+func isBodypartCovered(bodypartSlot):
+	var coveredParts = {}
+	
+	var equippedItems = inventory.getAllEquippedItems()
+	for inventorySlot in equippedItems:
+		var item = equippedItems[inventorySlot]
+		var itemCovers = item.coversBodyparts()
+		for itemCover in itemCovers:
+			coveredParts[itemCover] = true
+	
+	if(coveredParts.has(bodypartSlot) && coveredParts[bodypartSlot]):
+		return true
+	return false
