@@ -66,6 +66,7 @@ func _run():
 
 	if(state == "illegal?"):
 		GM.main.playAnimation(StageScene.Stocks, "idle", {pc="jacki", exposedBodyparts=[BodypartSlot.Vagina, BodypartSlot.Anus]})
+		addCharacter("jacki", ["naked"])
 		
 		saynn("[say=pc]Peeing is illegal now?[/say]")
 
@@ -241,7 +242,7 @@ func _run():
 		# (scene ends here)
 		addButton("Leave", "Job well done", "endthescene")
 
-	if(state == "anal_fingering"):
+	if(state == "anal_fingering"):		
 		# (if pc has no penis)
 		setFlag("JackiModule.Jacki_StocksPunishedByPC", true)
 		setFlag("JackiModule.Jacki_StocksFingeredByPC", true)
@@ -354,6 +355,7 @@ func _run():
 		addButton("Help", "Try to unlock the girl", "help")
 
 	if(state == "help"):
+		addCharacter("jacki")
 		saynn("You act fast, the first thing you do is run up to the locked wolfy and crouch behind her. Your hands quickly removed the wide metal rod that held the girl’s legs spread, it didn’t require a key luckily. Wolfy produces a confused noise while you pull her pants back up to cover her cute butt.")
 
 		saynn("Then you walk around and try to take off the ball gag. Luckily that one is also just held by some straps and buckles. When the wolfy gets her drooling maw free, she closes and opens it a few times.")
@@ -442,6 +444,7 @@ func _run():
 		removeCharacter("gymbully")
 		removeCharacter("gymbully2")
 		GM.main.playAnimation(StageScene.Duo, "stand", {npc="jacki"})
+		addCharacter("jacki")
 		
 		# (knows name = true)
 		setFlag("JackiModule.Jacki_PCKnowsName", true)
@@ -491,6 +494,8 @@ func _run():
 		addButton("Continue", "Time to go", "endthescene")
 
 	if(state == "stay"):
+		addCharacter("jacki", ["naked"])
+		
 		setFlag("JackiModule.Jacki_StocksPCLostFightAndWatched", true)
 		GM.main.playAnimation(StageScene.Stocks, "idle", {pc="jacki", exposedBodyparts=[BodypartSlot.Vagina, BodypartSlot.Anus]})
 		
@@ -554,6 +559,7 @@ func _run():
 	if(state == "help_her"):
 		removeCharacter("gymbully")
 		removeCharacter("gymbully2")
+		addCharacter("jacki")
 		GM.main.playAnimation(StageScene.Duo, "stand", {npc="jacki"})
 		
 		saynn("You get up and approach the stocks. You’re still feeling weak after losing but you just about manage to unlock the stocks and open them. The wolfy slides down onto her knees and coughs more. You help her put her shorts on, they are ruined with cum already anyway.")
@@ -575,6 +581,7 @@ func _run():
 
 	if(state == "break_stocks"):
 		# (needs 10 str)
+		addCharacter("jacki")
 		GM.main.playAnimation(StageScene.Duo, "stand", {npc="jacki"})
 
 		saynn("You’re not letting some fuckers use this wolfy, you tense your muscles up and begin applying pressure onto the top parts of the stocks, brute-forcing the problem. You let out an angry intimidating scream while the metal slowly starts to bend. The wolfy manages to free her paw, then her head, and then another paw.")
@@ -591,6 +598,7 @@ func _run():
 		removeCharacter("gymbully")
 		removeCharacter("gymbully2")
 		aimCameraAndSetLocName("main_bathroom1")
+		GM.pc.setLocation("main_bathroom1")
 		setFlag("JackiModule.Jacki_StocksSavedByPC", true)
 		GM.main.playAnimation(StageScene.Duo, "stand", {npc="jacki"})
 		# (knows name = true)
@@ -614,6 +622,7 @@ func _run():
 
 	if(state == "use_a_restraint_key"):
 		# (needs and uses a key)
+		addCharacter("jacki")
 		GM.main.playAnimation(StageScene.Duo, "stand", {npc="jacki"})
 
 		saynn("You think fast and realize that you have a key that is universal for any restraint. You quickly produce one and stuff it into the padlock that holds the stocks together before unlocking them. The key breaks in the process but you manage to free the girl.")
@@ -626,6 +635,7 @@ func _run():
 
 	if(state == "seduce"):
 		# (needs sexiness 6+)
+		addCharacter("jacki")
 		GM.main.playAnimation(StageScene.Duo, "stand", {npc="gymbully"})
 
 		saynn("[say=pc]Why don’t you guys use me instead~[/say]")
@@ -692,16 +702,15 @@ func _react(_action: String, _args):
 	if(_action == "use_a_restraint_key"):
 		GM.pc.getInventory().removeXOfOrDestroy("restraintkey", 1)
 	
-	if(_action == "endthescene"):
-		endScene()
-		
 	if(_action == "bullies_cum"):
 		GM.pc.addLust(30)
 		var jacki = getCharacter("jacki")
 		jacki.cummedInMouthBy("gymbully")
 		jacki.cummedInAnusBy("gymbully2")
 		GM.pc.addSkillExperience(Skill.SexSlave, 10)
-		
+	
+	if(_action == "endthescene"):
+		endScene()
 		return
 
 	setState(_action)
