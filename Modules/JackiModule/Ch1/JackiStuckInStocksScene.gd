@@ -109,6 +109,8 @@ func _run():
 
 	if(state == "anal"):
 		# (needs cock)
+		setFlag("JackiModule.Jacki_StocksPunishedByPC", true)
+		setFlag("JackiModule.Jacki_StocksFuckedByPC", true)
 
 		saynn("[say=pc]Sure, she looks hot and that ass does need a lesson or two.[/say]")
 
@@ -241,6 +243,9 @@ func _run():
 
 	if(state == "anal_fingering"):
 		# (if pc has no penis)
+		setFlag("JackiModule.Jacki_StocksPunishedByPC", true)
+		setFlag("JackiModule.Jacki_StocksFingeredByPC", true)
+		
 		if(!GM.pc.hasPenis()):
 			saynn("[say=pc]I don’t really have anything to stuff her ass with, I guess I will use my hands.[/say]")
 
@@ -315,6 +320,9 @@ func _run():
 
 
 	if(state == "lie"):
+		setFlag("JackiModule.Jacki_StocksPCLied", true)
+		removeCharacter("femaleguard_feline")
+		
 		# (You say that you will just watch for now.)
 
 		# (The guard leaves to find some inmates)
@@ -359,6 +367,9 @@ func _run():
 		addButton("Stocks", "Gotta get those unlocked somehow", "stocks")
 
 	if(state == "stocks"):
+		addCharacter("gymbully")
+		addCharacter("gymbully2")
+		
 		saynn("The metal stocks. You tug on the frame but it doesn’t even budge. You try to break the lock that holds the two pieces locked together but that one doesn’t give too. Finally you begin to make progress when you find a little hinge that doesn’t seem to be properly screwed in.")
 
 		saynn("[say=gymbully]Wha’cha doin’ there, kiddo?[/say]")
@@ -410,6 +421,9 @@ func _run():
 
 
 	if(state == "if_won"):
+		setFlag("JackiModule.Jacki_StocksPCWonFight", true)
+		setFlag("JackiModule.Jacki_StocksSavedByPC", true)
+		
 		saynn("The guy hits the floor, unable to continue fighting. His friend shows his fangs and seems to be ready to pick the fight but the main guy stops him.")
 
 		saynn("[say=gymbully]Let {pc.him} have the girl. There is a huge chance that {pc.he} {pc.is} making a mistake.[/say]")
@@ -425,6 +439,8 @@ func _run():
 		addButton("Help", "You gotta save her before more come", "help1")
 
 	if(state == "help1"):
+		removeCharacter("gymbully")
+		removeCharacter("gymbully2")
 		GM.main.playAnimation(StageScene.Duo, "stand", {npc="jacki"})
 		
 		# (knows name = true)
@@ -452,6 +468,8 @@ func _run():
 		addButton("Continue", "Time to go", "endthescene")
 
 	if(state == "if_lost"):
+		setFlag("JackiModule.Jacki_StocksPCLostFight", true)
+		
 		saynn("You lost the fight. Unable to continue, you drop to your knees while the guy looks down at you.")
 
 		saynn("[say=gymbully]Well. Don’t be sad. It was gonna happen, sooner or later.[/say]")
@@ -473,6 +491,7 @@ func _run():
 		addButton("Continue", "Time to go", "endthescene")
 
 	if(state == "stay"):
+		setFlag("JackiModule.Jacki_StocksPCLostFightAndWatched", true)
 		GM.main.playAnimation(StageScene.Stocks, "idle", {pc="jacki", exposedBodyparts=[BodypartSlot.Vagina, BodypartSlot.Anus]})
 		
 		# (dudes approach Jacki. One pulls her shorts down and complains about piercings.)
@@ -513,9 +532,9 @@ func _run():
 
 		saynn("[say=gymbully]Gag around my dick more, girl. Make me cum.[/say]")
 
-		addButton("Continue", "See what happens next", "continue3")
+		addButton("Continue", "See what happens next", "bullies_cum")
 
-	if(state == "continue3"):
+	if(state == "bullies_cum"):
 		saynn("You notice their knots inflating and they both struggle to force them in. The girl’s ass is being stretched too much already, to the point of the soft flesh looking irritated. And her jaw can’t open wide enough. But they both continue pounding her holes until the orgasms overwhelm them roughly at the same time.")
 
 		saynn("The main guy rams his cock as deep as that girl’s throat allows before proceeding to grunt while his cock starts to visibly pulsate inside her mouth and shoot cum deep down it. At the same time the guy behind arches his back and thrusts his cock deep inside too and cums while the girl’s tailhole tries to clench around it, milking it for all its cum. You see bright red blush on that poor wolfy’s cheeks.")
@@ -533,6 +552,8 @@ func _run():
 		addButton("Help her", "Well, you should be able to save her now", "help_her")
 
 	if(state == "help_her"):
+		removeCharacter("gymbully")
+		removeCharacter("gymbully2")
 		GM.main.playAnimation(StageScene.Duo, "stand", {npc="jacki"})
 		
 		saynn("You get up and approach the stocks. You’re still feeling weak after losing but you just about manage to unlock the stocks and open them. The wolfy slides down onto her knees and coughs more. You help her put her shorts on, they are ruined with cum already anyway.")
@@ -567,6 +588,10 @@ func _run():
 		addButton("Bathroom", "Bring her into the safe place", "bathroom")
 
 	if(state == "bathroom"):
+		removeCharacter("gymbully")
+		removeCharacter("gymbully2")
+		aimCameraAndSetLocName("main_bathroom1")
+		setFlag("JackiModule.Jacki_StocksSavedByPC", true)
 		GM.main.playAnimation(StageScene.Duo, "stand", {npc="jacki"})
 		# (knows name = true)
 		setFlag("JackiModule.Jacki_PCKnowsName", true)
@@ -635,6 +660,29 @@ func _run():
 
 
 func _react(_action: String, _args):
+	if(_action in ["just_leave", "ask", "cum_inside", "continue", "make_her_cum", "lie", "help", "stocks", "attack", "help1", "bullies_cum", "help_her", "break_stocks", "bathroom", "use_a_restraint_key", "seduce"]):
+		processTime(RNG.randi_range(1,5) * 60)
+	
+	if(_action in ["anal", "anal_fingering", "stay"]):
+		processTime(20 * 60)
+	
+	if(_action in ["continue1", "continue2"]):
+		addExperienceToPlayer(50)
+		GM.pc.addCredits(1)
+	
+	if(_action == "cum_inside"):
+		getCharacter("jacki").cummedInAnusBy("pc")
+		GM.pc.orgasmFrom("jacki")
+		GM.pc.addSkillExperience(Skill.SexSlave, 30)
+		
+	if(_action == "pull_out"):
+		GM.pc.orgasmFrom("jacki")
+		GM.pc.addSkillExperience(Skill.SexSlave, 30)
+	
+	if(_action == "make_her_cum"):
+		GM.pc.addLust(20)
+		GM.pc.addSkillExperience(Skill.SexSlave, 30)
+	
 	if(_action == "help"):
 		getCharacter("jacki").resetEquipment()
 		
@@ -646,6 +694,13 @@ func _react(_action: String, _args):
 	
 	if(_action == "endthescene"):
 		endScene()
+		
+	if(_action == "bullies_cum"):
+		GM.pc.addLust(30)
+		var jacki = getCharacter("jacki")
+		jacki.cummedInMouthBy("gymbully")
+		jacki.cummedInAnusBy("gymbully2")
+		GM.pc.addSkillExperience(Skill.SexSlave, 10)
 		
 		return
 

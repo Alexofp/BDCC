@@ -16,9 +16,18 @@ func getFlags():
 		"BathroomBulliesBecameCumToilet": flag(FlagType.Bool),
 		"BathroomBulliesBecamePissToilet": flag(FlagType.Bool),
 		
-		"Jacki_StocksSceneHappened": flag(FlagType.Bool),
 		"Jacki_ContentDisabled": flag(FlagType.Bool),
 		"Jacki_PCKnowsName": flag(FlagType.Bool),
+		
+		"Jacki_StocksSceneHappened": flag(FlagType.Bool),
+		"Jacki_StocksPunishedByPC": flag(FlagType.Bool),
+		"Jacki_StocksFuckedByPC": flag(FlagType.Bool),
+		"Jacki_StocksFingeredByPC": flag(FlagType.Bool),
+		"Jacki_StocksPCLied": flag(FlagType.Bool),
+		"Jacki_StocksSavedByPC": flag(FlagType.Bool),
+		"Jacki_StocksPCWonFight": flag(FlagType.Bool),
+		"Jacki_StocksPCLostFight": flag(FlagType.Bool),
+		"Jacki_StocksPCLostFightAndWatched": flag(FlagType.Bool),
 	}
 
 func _init():
