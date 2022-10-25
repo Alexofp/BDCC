@@ -21,6 +21,11 @@ func canTransitionTo(_actionID, _args = []):
 
 
 func stateMachineTravel(thedoll, state_machine, animID):
+	var args = []
+	if(animID is Array):
+		args = animID
+		animID = animID[0]
+	
 	if(animID == ""):
 		pass
 	elif(animID == "walk"):
@@ -56,11 +61,17 @@ func stateMachineTravel(thedoll, state_machine, animID):
 		state_machine.travel("AllFoursCrawl-loop")
 	elif(animID == "stunbaton"):
 		state_machine.travel("WeaponSwing")
-		thedoll.attachTemporaryUnriggedPart("hand.R", "res://Inventory/UnriggedModels/StunBaton/StunBaton.tscn")
+		if(args.size() > 1):
+			thedoll.attachTemporaryUnriggedPart("hand.R", args[1])
+		else:
+			thedoll.attachTemporaryUnriggedPart("hand.R", "res://Inventory/UnriggedModels/StunBaton/StunBaton.tscn")
 		thedoll.setTemporaryState("hands", "fists")
 	elif(animID == "shiv"):
 		state_machine.travel("WeaponShiv")
-		thedoll.attachTemporaryUnriggedPart("hand.R", "res://Inventory/UnriggedModels/Shiv/Shiv.tscn")
+		if(args.size() > 1):
+			thedoll.attachTemporaryUnriggedPart("hand.R", args[1])
+		else:
+			thedoll.attachTemporaryUnriggedPart("hand.R", "res://Inventory/UnriggedModels/Shiv/Shiv.tscn")
 		thedoll.setTemporaryState("hands", "fists")
 	elif(animID == "shove"):
 		state_machine.travel("Shove")

@@ -27,6 +27,10 @@ func updateSubAnims():
 
 # StageScene.Duo, "kneel", {npc="nova", pc="pc"}
 func playAnimation(animID, _args = {}):
+	var fullAnimID = animID
+	if(animID is Array):
+		animID = animID[0]
+	
 	print("Playing duo: "+str(animID))
 	var firstDoll = "pc"
 	if(_args.has("pc")):
@@ -57,17 +61,21 @@ func playAnimation(animID, _args = {}):
 	updateSubAnims()
 	
 	var state_machine = animationTree["parameters/AnimationNodeStateMachine/playback"]
-	if(!stateMachineTravel(doll, state_machine, animID)):
+	if(!stateMachineTravel(doll, state_machine, fullAnimID)):
 		Log.printerr("Action "+str(animID)+" is not found for stage "+str(id))
 	
 	$Chair2.visible = false
 	if(_args.has("npcAction")):
 		var npcAnimID = _args["npcAction"]
+		var fullNpcAnimID = npcAnimID
+		if(npcAnimID is Array):
+			npcAnimID = npcAnimID[0]
+		
 		if(npcAnimID == "sit"):
 			$Chair2.visible = true
 		
 		var state_machine2 = animationTree2["parameters/AnimationNodeStateMachine/playback"]
-		if(!stateMachineTravel(doll2, state_machine2, npcAnimID)):
+		if(!stateMachineTravel(doll2, state_machine2, fullNpcAnimID)):
 			Log.printerr("Action "+str(animID)+" is not found for stage "+str(id))
 	else:
 		var state_machine2 = animationTree2["parameters/AnimationNodeStateMachine/playback"]
