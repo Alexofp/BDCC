@@ -305,6 +305,8 @@ func saveData():
 	data["currentCharactersVariants"] = currentCharactersVariants
 	data["fightCharacter"] = fightCharacter
 	data["sceneTag"] = sceneTag
+	data["sceneEndedFlag"] = sceneEndedFlag
+	data["sceneEndedArgs"] = sceneEndedArgs
 	
 	return data
 
@@ -314,4 +316,6 @@ func loadData(data):
 	currentCharactersVariants = SAVE.loadVar(data, "currentCharactersVariants", {})
 	fightCharacter = SAVE.loadVar(data, "fightCharacter", "")
 	sceneTag = SAVE.loadVar(data, "sceneTag", "")
+	sceneEndedFlag = SAVE.loadVar(data, "sceneEndedFlag", false)
+	sceneEndedArgs = SAVE.loadVar(data, "sceneEndedArgs", null)
 	updateCharacter()

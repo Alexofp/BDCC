@@ -14,10 +14,12 @@ var playerScene = preload("res://Player/Player.tscn")
 var overridenPC
 var originalPC
 var roomMemories = {}
+var rollbacker:Rollbacker
 
 signal time_passed(_secondsPassed)
 
 func _init():
+	rollbacker = Rollbacker.new()
 	GlobalRegistry.recreateCharacters()
 	flagsCache = Flag.getFlags()
 
@@ -139,6 +141,7 @@ func _on_GameUI_on_option_button(method, args):
 	pickOption(method, args)
 	
 func pickOption(method, args):
+	rollbacker.pushRollbackState()
 	GM.main.clearMessages()
 	GlobalTooltip.resetTooltips()
 	
@@ -151,7 +154,7 @@ func pickOption(method, args):
 		#	return
 
 	runCurrentScene()
-
+	
 func runCurrentScene():
 	if(sceneStack.size() > 0):
 		sceneStack.back().run()
@@ -170,7 +173,6 @@ func reRun():
 	runCurrentScene()
 
 func loadingSavefileFinished():
-	GM.ui.recreateWorld()
 	reRun()
 	
 	applyAllWorldEdits()
@@ -211,6 +213,7 @@ func saveData():
 	data["ChildSystem"] = GM.CS.saveData()
 	data["logMessages"] = logMessages
 	data["roomMemories"] = roomMemories
+	data["world"] = GM.world.saveData()
 	
 	data["scenes"] = []
 	for scene in sceneStack:
@@ -254,6 +257,9 @@ func loadData(data):
 		
 		#scene.initScene(_args)
 		scene.loadData(SAVE.loadVar(sceneData, "sceneData", {}))
+		
+	GM.ui.recreateWorld()
+	GM.world.loadData(SAVE.loadVar(data, "world", {}))
 
 func addMessage(text: String):
 	messages.append(text)
@@ -787,3 +793,6 @@ func consoleClearFlag(flagID):
 func consoleClearModuleFlag(moduleID, flagID):
 	clearModuleFlag(moduleID, flagID)
 	Console.printLine("Flag cleared")
+
+func _on_GameUI_on_rollback_button():
+	rollbacker.rollback()

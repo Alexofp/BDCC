@@ -30,6 +30,10 @@ var showMapArt = false
 var showCharacterArt = true
 var imagePackOrder = []
 
+var rollbackEnabled = false
+var rollbackSlots = 5
+var rollbackSaveEvery = 1
+
 func resetToDefaults():
 	fetchNewRelease = true
 	menstrualCycleLengthDays = 7
@@ -46,9 +50,12 @@ func resetToDefaults():
 	uiButtonSize = 0
 	debugPanel = false
 	showMapArt = false
-	imagePackOrder = []
+	#imagePackOrder = []
 	showCharacterArt = true
 	showSceneCreator = true
+	rollbackEnabled = false
+	rollbackSlots = 5
+	rollbackSaveEvery = 1
 	
 	enabledContent.clear()
 	for contentType in ContentType.getAll():
@@ -114,6 +121,15 @@ func shouldShowSceneCreator():
 
 func shouldShowMapArt():
 	return showMapArt
+
+func isRollbackEnabled():
+	return rollbackEnabled
+
+func getRollbackSlotsAmount():
+	return rollbackSlots
+
+func getRollbackSaveEveryXChoices():
+	return rollbackSaveEvery
 
 func getChangeableOptions():
 	var settings = [
@@ -306,6 +322,33 @@ func getChangeableOptions():
 			],
 		},
 		{
+			"name": "Rollback settings (Experimental)",
+			"id": "rollback",
+			"options": [
+				{
+					"name": "Rollback enabled",
+					"description": "If checked you will be able to rollback the game's state, undoing any choices that the player made. Might use a lot of memory. Disable if the game is too laggy",
+					"id": "rollbackEnabled",
+					"type": "checkbox",
+					"value": rollbackEnabled,
+				},
+				{
+					"name": "Rollback history size",
+					"description": "How many actions you wanna be able to undo",
+					"id": "rollbackSlots",
+					"type": "int",
+					"value": rollbackSlots,
+				},
+				{
+					"name": "Make snapshot every X choices",
+					"description": "How often do you wanna save the rollback state. 1 = every choice",
+					"id": "rollbackSaveEvery",
+					"type": "int",
+					"value": rollbackSaveEvery,
+				},
+			]
+		},
+		{
 			"name": "Debug",
 			"id": "debug",
 			"options": [
@@ -389,6 +432,14 @@ func applyOption(categoryID, optionID, value):
 	if(categoryID == "debug"):
 		if(optionID == "debugPanel"):
 			debugPanel = value
+	
+	if(categoryID == "rollback"):
+		if(optionID == "rollbackEnabled"):
+			rollbackEnabled = value
+		if(optionID == "rollbackSlots"):
+			rollbackSlots = Util.maxi(value, 1)
+		if(optionID == "rollbackSaveEvery"):
+			rollbackSaveEvery = Util.maxi(value, 1)
 			
 	if(categoryID == "enabledContent"):
 		enabledContent[optionID] = value
@@ -421,6 +472,9 @@ func saveData():
 		"showCharacterArt": showCharacterArt,
 		"showSceneCreator": showSceneCreator,
 		"showMapArt": showMapArt,
+		"rollbackEnabled": rollbackEnabled,
+		"rollbackSlots": rollbackSlots,
+		"rollbackSaveEvery": rollbackSaveEvery,
 	}
 	
 	return data
@@ -444,6 +498,9 @@ func loadData(data):
 	showCharacterArt = loadVar(data, "showCharacterArt", true)
 	showSceneCreator = loadVar(data, "showSceneCreator", true)
 	showMapArt = loadVar(data, "showMapArt", false)
+	rollbackEnabled = loadVar(data, "rollbackEnabled", false)
+	rollbackSlots = loadVar(data, "rollbackSlots", 5)
+	rollbackSaveEvery = loadVar(data, "rollbackSaveEvery", 1)
 
 func saveToFile():
 	var saveData = saveData()

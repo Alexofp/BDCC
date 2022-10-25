@@ -123,14 +123,14 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_top = 200.0
 margin_right = 236.0
-margin_bottom = 358.0
+margin_bottom = 328.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="VBoxContainer3" type="VBoxContainer" parent="HBoxContainer/Panel2/MarginContainer/VBoxContainer"]
-margin_top = 362.0
+margin_top = 332.0
 margin_right = 236.0
-margin_bottom = 372.0
+margin_bottom = 342.0
 rect_min_size = Vector2( 0, 10 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -139,14 +139,14 @@ size_flags_stretch_ratio = 0.01
 [node name="MapAndTimePanel" parent="HBoxContainer/Panel2/MarginContainer/VBoxContainer" instance=ExtResource( 9 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 376.0
+margin_top = 346.0
 margin_right = 236.0
-margin_bottom = 636.0
+margin_bottom = 606.0
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="HBoxContainer/Panel2/MarginContainer/VBoxContainer"]
-margin_top = 640.0
+margin_top = 610.0
 margin_right = 236.0
-margin_bottom = 666.0
+margin_bottom = 636.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -171,9 +171,9 @@ shortcut = SubResource( 18 )
 text = "Q.load"
 
 [node name="HBoxContainer3" type="HBoxContainer" parent="HBoxContainer/Panel2/MarginContainer/VBoxContainer"]
-margin_top = 670.0
+margin_top = 640.0
 margin_right = 236.0
-margin_bottom = 696.0
+margin_bottom = 666.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -204,6 +204,19 @@ margin_bottom = 26.0
 hint_tooltip = "Open the debug/cheats menu"
 shortcut_in_tooltip = false
 text = "DG"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/Panel2/MarginContainer/VBoxContainer"]
+margin_top = 670.0
+margin_right = 236.0
+margin_bottom = 696.0
+
+[node name="RollbackButton" type="Button" parent="HBoxContainer/Panel2/MarginContainer/VBoxContainer/HBoxContainer"]
+margin_right = 236.0
+margin_bottom = 26.0
+hint_tooltip = "Rollback the game's state back"
+size_flags_horizontal = 3
+shortcut_in_tooltip = false
+text = "Rollback"
 
 [node name="HSplitContainer" type="HSplitContainer" parent="HBoxContainer"]
 margin_left = 264.0
@@ -351,6 +364,7 @@ margin_bottom = -96.289
 [connection signal="pressed" from="HBoxContainer/Panel2/MarginContainer/VBoxContainer/HBoxContainer3/SkillsButton" to="." method="_on_SkillsButton_pressed"]
 [connection signal="pressed" from="HBoxContainer/Panel2/MarginContainer/VBoxContainer/HBoxContainer3/MenuButton" to="." method="_on_MenuButton_pressed"]
 [connection signal="pressed" from="HBoxContainer/Panel2/MarginContainer/VBoxContainer/HBoxContainer3/DebugMenu" to="." method="_on_DebugMenu_pressed"]
+[connection signal="pressed" from="HBoxContainer/Panel2/MarginContainer/VBoxContainer/HBoxContainer/RollbackButton" to="." method="_on_RollbackButton_pressed"]
 [connection signal="pressed" from="HBoxContainer/VBoxContainer2/HBoxContainer/PrevPageButton" to="." method="_on_PrevPageButton_pressed"]
 [connection signal="pressed" from="HBoxContainer/VBoxContainer2/HBoxContainer/NextPageButton" to="." method="_on_NextPageButton_pressed"]
 [connection signal="onResumeButtonPressed" from="HBoxContainer/InGameMenu" to="." method="showGameScreen"]

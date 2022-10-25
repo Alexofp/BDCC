@@ -9,6 +9,7 @@ var floorDict: Dictionary = {}
 const gridsize = 64
 onready var camera = $Camera2D
 var highlightedRoom: Node2D
+var lastAimedRoomID = null
 
 var roomConnectionScene = preload("res://Game/World/RoomConnection.tscn")
 onready var worldFloorScene = load("res://Game/World/WorldFloor.tscn")
@@ -242,7 +243,7 @@ func switchToFloor(floorID):
 		else:
 			floorObject.visible = false
 
-func aimCamera(roomID):
+func aimCamera(roomID, instantly = false):
 	var room = getRoomByID(roomID)
 	
 	if(!room):
@@ -257,7 +258,9 @@ func aimCamera(roomID):
 	highlightedRoom = room
 	highlightedRoom.setHighlighted(true)
 	
-	setDarknessSize(16)
+	lastAimedRoomID = roomID
+	if(instantly):
+		camera.reset_smoothing()
 
 func setDarknessVisible(vis):
 	$CanvasLayer/DarknessControl.visible = vis
@@ -272,3 +275,15 @@ func setDarknessSize(darknessSize):
 	$CanvasLayer/DarknessControl/DBottom.margin_top = darknessSize - 0.5
 	$CanvasLayer/DarknessControl/DLeft.margin_right = -darknessSize + 0.5
 	$CanvasLayer/DarknessControl/DRight.margin_left = darknessSize - 0.5
+
+func saveData():
+	var data = {}
+	data["lastAimedRoomID"] = lastAimedRoomID
+	
+	return data
+	
+func loadData(data):
+	lastAimedRoomID = SAVE.loadVar(data, "lastAimedRoomID", "")
+	
+	if(lastAimedRoomID != null && lastAimedRoomID != ""):
+		aimCamera(lastAimedRoomID, true)

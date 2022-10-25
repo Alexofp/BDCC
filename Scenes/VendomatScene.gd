@@ -11,12 +11,21 @@ var sortedItemsIds = []
 func _init():
 	sceneID = "VendomatScene"
 	
-func _initScene(_args = []):
+func _reactInit():
+	updateSellingItems()
+	
+func updateSellingItems():
+	sellItemsData.clear()
+	sortedItemsIds.clear()
+	
+	var finalSellingItems = []
+	finalSellingItems.append_array(sellingItems)
+	
 	for itemTag in sellingItemsTags:
 		var itemIDs = GlobalRegistry.getItemIDsByTag(itemTag)
-		sellingItems.append_array(itemIDs)
+		finalSellingItems.append_array(itemIDs)
 	
-	for itemID in sellingItems:
+	for itemID in finalSellingItems:
 		if(sellItemsData.has(itemID)):
 			continue
 		
@@ -108,3 +117,8 @@ func _react(_action: String, _args):
 		return
 	
 	setState(_action)
+
+func loadData(data):
+	.loadData(data)
+	
+	updateSellingItems()

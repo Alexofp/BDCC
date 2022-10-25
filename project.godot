@@ -674,6 +674,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Inventory/RestraintTypes/RestraintVaginalplug.gd"
 }, {
+"base": "Reference",
+"class": "Rollbacker",
+"language": "GDScript",
+"path": "res://Game/Options/Rollbacker.gd"
+}, {
 "base": "Node",
 "class": "RoomAction",
 "language": "GDScript",
@@ -1063,6 +1068,7 @@ _global_script_class_icons={
 "RestraintType": "",
 "RestraintUnremovable": "",
 "RestraintVaginalplug": "",
+"Rollbacker": "",
 "RoomAction": "",
 "RoomStuff": "",
 "SS2D_Common_Functions": "",
