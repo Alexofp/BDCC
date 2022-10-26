@@ -32,7 +32,7 @@ func _doAttack(_attacker, _receiver, _context = {}):
 	}
 	
 func _canUse(_attacker, _receiver, _context = {}):
-	return _receiver.isPlayer() && !_receiver.isGagged()
+	return _receiver.isPlayer() && !_receiver.isBitingBlocked()
 
 func getAnticipationText(_attacker, _receiver):
 	return "{attacker.name} takes a step back and produces a ball gag out of one of {attacker.his} pockets. {attacker.name} plays with it in {attacker.his} hands.\n\n[say=attacker]"+RNG.pick([

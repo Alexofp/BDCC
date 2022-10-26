@@ -536,7 +536,7 @@ func getBuffsHolder() -> BuffsHolder:
 func addExperience(newexp: int):
 	skillsHolder.addExperience(newexp)
 
-func addSkillExperience(skillID, amount, activityID = null):
+func addSkillExperience(skillID, amount:int, activityID = null):
 	skillsHolder.addSkillExperience(skillID, amount, activityID)
 
 func hasPerk(perkID):

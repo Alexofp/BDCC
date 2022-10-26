@@ -300,6 +300,7 @@ func _react(_action: String, _args):
 			
 				GM.main.playAnimation(StageScene.Duo, "", {npc=enemyID, npcAction="dodge"})
 			else:
+				GM.pc.addSkillExperience(Skill.BDSM, restraintData.getLevel() * 3)
 				whatPlayerDid += GM.ui.processString(item.getForcedOnMessage(false))
 				
 				restraintIdsForcedByPC.append(item.getUniqueID())

@@ -388,6 +388,8 @@ func _run():
 		addButton("Continue", "See what happens next", "endthescene")
 
 	if(state == "humiliate"):
+		addCharacter("risha", ["naked"])
+		
 		saynn("[say=pc]Can you help me strip her?[/say]")
 
 		saynn("[say=tavi]Sure~.[/say]")
