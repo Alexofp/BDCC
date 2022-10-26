@@ -1,5 +1,5 @@
 {
-	"dateString": "10 of Oct 2022",
+	"dateString": "26 of Oct 2022",
 	"entries": {
 		"$1.00": [
 			{
@@ -18,13 +18,13 @@
 				"nickname": "Maxtacks"
 			},
 			{
-				"nickname": "User#928169c6"
-			},
-			{
 				"nickname": "Kyle Oran Evans "
 			},
 			{
 				"nickname": "Zeneroth"
+			},
+			{
+				"nickname": "User#928169c6"
 			},
 			{
 				"nickname": "Shadowwall123"
@@ -67,5 +67,5 @@
 		"$5.00",
 		"$1.00"
 	],
-	"unixTime": 1665417853
+	"unixTime": 1666785741
 }
