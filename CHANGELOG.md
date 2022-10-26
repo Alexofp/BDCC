@@ -6,6 +6,30 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.0.18] - 2022-10-26
+### Added
+- Main quest extended with new events/scenes. Help Tavi on her mission to escape the prison while getting into lots of kinky situations. This was the focus of this update ^^
+- Jacki Northstar added as one of a characters with her permission ^^. Jacki's content will be focused around hard noncon stuff and corrupting her. For now there are 2 scenes + 1 encounter with her.
+- Ability to force restraints onto NPCs! A radically new way to approach combat. Get 'Rigger' perk in bdsm skill tree to get this ability. Tie the npc up and exhaust them until they can't struggle anymore to win or just use gear to prevent them from using their most powerful attacks
+- New minigame for struggling out of restraints, much simplier than the old one but less forgiving
+- Cum stealing. Optional feature that allows you to exchange cum during tribbing, potentially allowing you to impregnate others as a dickless girl. Only one scene has tribbing option for now
+- New perks in every skill tree
+- Demon species. Based on a human but has horns and a special tail. Good for making hybrids with
+- New debug panel that shows info about currently running scenes
+- Map icons can change now, used for when you meet a character on that tile
+- Mods can add new options to existing scenes
+- Can steal drugs from the medical wing storage
+- Experimental rollback feature. Can be enabled in the options. Allows you to undo any choice without making lots of quicksaves
+- Loot tables expanded
+
+### Changed
+- Removed the check that prevented self-impregnation
+- The way damage is displayed in fighting is changed. Now also shows how much damage was blocked
+
+### Fixed
+- Uniform/underwear shouldn't clip anymore when the pc has very big breasts
+- Scrolling on touch devices should be less jerky
+
 ## [0.0.17] - 2022-09-19
 ### Added
 - [Modding support!](https://github.com/Alexofp/BDCC/wiki) Mods can add pretty much anything, from a new item to a new quest. It's even possible to replace the game's files with modded ones, allowing for global modifications if someone dares to try that. Same mods should work both on desktop and android.
@@ -130,7 +154,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Turn-based fighting
 - Initial player customization
 
-[Unreleased]: https://github.com/Alexofp/BDCC/compare/0.0.17...main
+[Unreleased]: https://github.com/Alexofp/BDCC/compare/0.0.18...main
+[0.0.18]: https://github.com/Alexofp/BDCC/compare/0.0.17...0.0.18
 [0.0.17]: https://github.com/Alexofp/BDCC/compare/0.0.16...0.0.17
 [0.0.16]: https://github.com/Alexofp/BDCC/compare/0.0.15...0.0.16
 [0.0.15]: https://github.com/Alexofp/BDCC/compare/0.0.14...0.0.15
