@@ -24,6 +24,7 @@ var extraFertility = 0.0
 var extraVirility = 0.0
 var extraCrossSpeciesCompatibility = 0.0
 var skillsExperience = {}
+var customAttributes = {}
 
 func _ready():
 	name = "Buffs"
@@ -33,7 +34,22 @@ func setCharacter(newnpc):
 
 func calculateBuffs():
 	assert(npc != null)
-	buffs.clear()
+	
+	var newbuffs = []
+	
+	var items = npc.getInventory().getAllEquippedItems()
+	for slot in items:
+		var item = items[slot]
+		newbuffs.append_array(item.getBuffs())
+		
+	var statusEffects = npc.getStatusEffects()
+	for statusEffectID in statusEffects:
+		var statusEffect = statusEffects[statusEffectID]
+		newbuffs.append_array(statusEffect.getBuffs())
+
+	newbuffs.append_array(npc.getSkillsHolder().getBuffs())
+	
+	buffs = newbuffs
 	buffsIds.clear()
 	dealDamageMult.clear()
 	receiveDamageMult.clear()
@@ -53,6 +69,7 @@ func calculateBuffs():
 	extraVirility = 0.0
 	extraCrossSpeciesCompatibility = 0.0
 	skillsExperience.clear()
+	customAttributes.clear()
 	
 	for damageType in DamageType.getAll():
 		dealDamageMult[damageType] = 0.0
@@ -64,21 +81,25 @@ func calculateBuffs():
 		orificeMinLooseness[orificeType] = 0.0
 		blockedOrifices[orificeType] = false
 	
-	var items = npc.getInventory().getAllEquippedItems()
-	for slot in items:
-		var item = items[slot]
-		buffs.append_array(item.getBuffs())
-		
-	var statusEffects = npc.getStatusEffects()
-	for statusEffectID in statusEffects:
-		var statusEffect = statusEffects[statusEffectID]
-		buffs.append_array(statusEffect.getBuffs())
-
-	buffs.append_array(npc.getSkillsHolder().getBuffs())
-
 	for buff in buffs:
 		buffsIds[buff.id] = true
 		buff.apply(self)
+
+func addCustom(id:String, value):
+	if(!customAttributes.has(id)):
+		customAttributes[id] = 0
+	
+	customAttributes[id] += value
+
+func getCustom(id:String):
+	if(!customAttributes.has(id)):
+		return 0.0
+	return customAttributes[id]
+
+func getCustomBool(id:String):
+	if(!customAttributes.has(id)):
+		return false
+	return customAttributes[id] > 0.0
 
 func isGagged():
 	return gagged

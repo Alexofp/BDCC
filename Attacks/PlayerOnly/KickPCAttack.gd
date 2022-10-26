@@ -12,39 +12,34 @@ func getVisibleDesc(_context = {}):
 	return "Kick them for "+scaledDmgRangeStr(DamageType.Physical, 10, 15)+" damage.\n\nMay knock the opponent down with a low chance.\n\nGood against armored opponents"
 	
 func _doAttack(_attacker, _receiver, _context = {}):
-	var attackerName = _attacker.getName()
-	var receiverName = _receiver.getName()
-	
 	if(checkMissed(_attacker, _receiver, DamageType.Physical)):
-		return attackerName + " tries to kick " + receiverName + " but misses"
+		return genericMissMessage(_attacker, _receiver, "kick")
 	
 	if(checkDodged(_attacker, _receiver, DamageType.Physical)):
-		return attackerName + " tries to kick " + receiverName + " but " + receiverName + " dodges the attack"
+		return genericDodgeMessage(_attacker, _receiver, "kick")
 	
-	var damage = doDamage(_attacker, _receiver, DamageType.Physical, RNG.randi_range(10, 15))
-	#_receiver.addEffect(StatusEffect.Bleeding)
-
 	var texts = [
-		attackerName + " kicks " + receiverName + ". "
+		"{attacker.name} kicks {receiver.name}."
 	]
 	var text = RNG.pick(texts)
 	
-	text += receiverDamageMessage(DamageType.Physical, damage)
-	
 	if(RNG.chance(20) && !_receiver.hasEffect(StatusEffect.Collapsed)):
-		text += "\n[b]"+receiverName+" loses "+_receiver.hisHer()+" balance and collapses onto the floor[/b]"
+		text += "\n[b]{receiver.name} loses {receiver.his} balance and collapses onto the floor[/b]."
 		_receiver.addEffect(StatusEffect.Collapsed)
 	
-	return text
+	return {
+		text = text,
+		pain = RNG.randi_range(10, 15),
+	}
 	
 func _canUse(_attacker, _receiver, _context = {}):
 	return true
 
 func getRequirements():
-	return [["freelegs"]]
+	return [AttackRequirement.FreeLegs]
 
 func getAnticipationText(_attacker, _receiver):
-	return _attacker.getName() + " lunges forward and tries to kick you"
+	return "{attacker.name} lunges forward and tries to kick you"
 
 func getAttackSoloAnimation():
 	return "kick"
@@ -52,5 +47,5 @@ func getAttackSoloAnimation():
 func getExperience():
 	return [[Skill.Combat, 10]]
 
-func getRecieverArmorScaling(_damageType) -> float:
+func getRecieverArmorScaling(_attacker, _receiver, _damageType) -> float:
 	return 0.25

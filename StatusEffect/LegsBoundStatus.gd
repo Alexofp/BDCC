@@ -30,5 +30,5 @@ func combine(_args = []):
 
 func getBuffs():
 	return [
-		buff(Buff.DodgeChanceBuff, [-20])
+		buff(Buff.DodgeChanceBuff, [-30])
 	]

@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Images/WorldProps/LightShapes/default.png" type="Texture" id=1]
+[ext_resource path="res://Game/World/Props/LightShape.gd" type="Script" id=2]
+
+[node name="LightShape" type="Node2D"]
+z_index = -6
+script = ExtResource( 2 )
+aboveWalls = false
+
+[node name="WorldPropSprite" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+offset = Vector2( 0, 4 )

@@ -144,3 +144,60 @@ func onCharacterVisiblyPregnant():
 
 func getLootTable(_battleName):
 	return GuardLoot.new()
+
+func reactRestraint(restraintType, restraintAmount, isGettingForced):
+	if(!isGettingForced):
+		if(restraintAmount == 0):
+			return RNG.pick([
+				"Oh, that was a great try, sweetie~",
+				"I'm free. And you're not~",
+				"Cute~",
+				"Was that your worst~?",
+			])
+		
+		return RNG.pick([
+			"Huff, I didn't became a guard to do this",
+			"This wasn't in my contract",
+			"This reminds me of my past",
+		])
+	
+	if(isGettingForced):
+		if(restraintAmount > 2 && RNG.chance(30)):
+			return RNG.pick([
+				"Hey-hey-hey! I have enough already",
+				"Why don't you wear that?",
+				"Can you unlock that one? I don't need it",
+				"Heck, I hope you don't have a spare collar",
+			])
+		
+		if(restraintType == RestraintType.Gag):
+			return RNG.pick([
+				"Huff. But I wanna tease you, sweetie",
+				"Time to train my gag speech",
+			])
+		if(restraintType == RestraintType.Muzzle):
+			return RNG.pick([
+				"Wow. I'm not your fucking pet",
+				"A muzzle? Are you serious?",
+			])
+		if(restraintType == RestraintType.ButtPlug):
+			return RNG.pick([
+				"Oh, there is room for more~",
+				"Hey! I'm not a buttslut, you are!",
+				"I have much bigger ones, wanna try~?",
+			])
+		if(restraintType == RestraintType.VaginalPlug):
+			return RNG.pick([
+				"Is that a present for me?",
+				"I have much bigger ones, wanna try~?",
+			])
+	
+		return RNG.pick([
+			"That won't break me",
+			"Heck!",
+			"Hey, quit it",
+			"Silly pet, stop it",
+			"That's kinky but only if it was on you",
+			"I'm a guard, I'm not a bondage slut",
+		])
+	return null

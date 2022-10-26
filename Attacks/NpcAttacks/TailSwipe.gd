@@ -19,11 +19,12 @@ func _doAttack(_attacker, _receiver, _context = {}):
 		return genericDodgeMessage(_attacker, _receiver)
 	
 	var text = "{attacker.name} whips {receiver.name}’s legs with {attacker.his} tail and then makes {receiver.him} trip!"
-	var _damage = doDamage(_attacker, _receiver, DamageType.Physical, RNG.randi_range(10, 10))
-	text += " " + receiverDamageMessage(DamageType.Physical, _damage)
-	
 	_receiver.addEffect(StatusEffect.Collapsed)
-	return text
+	
+	return {
+		text = text,
+		pain = 10,
+	}
 	
 func _canUse(_attacker, _receiver, _context = {}):
 	if(_receiver.hasEffect(StatusEffect.Collapsed)):
@@ -33,4 +34,7 @@ func _canUse(_attacker, _receiver, _context = {}):
 
 func getAnticipationText(_attacker, _receiver):
 	return "{attacker.name} uses {attacker.his} tail to swipe the ground from under {receiver.name}’s feet!"
+
+func getRequirements():
+	return [AttackRequirement.FreeLegs]
 

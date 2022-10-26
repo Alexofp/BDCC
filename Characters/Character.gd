@@ -11,6 +11,10 @@ var npcArmor = {}
 var npcBasePain = null
 var npcBaseLust = null
 var npcBaseStamina = null
+var npcBaseRestraintDodgeChanceMult = null
+var npcRestraintStrugglePower = 1.0
+var npcRestraintMinigameResultMin = 0.8
+var npcRestraintMinigameResultMax = 1.1
 var npcHasMenstrualCycle = false # If true can get pregnant
 
 func _ready():
@@ -55,6 +59,8 @@ func beforeFightStarted():
 	.beforeFightStarted()
 	addLust(getAmbientLust())
 	addPain(getAmbientPain())
+	if(stamina > getMaxStamina()):
+		stamina = getMaxStamina()
 
 func afterFightEnded():
 	.afterFightEnded()
@@ -143,6 +149,10 @@ func createBodyparts():
 func createEquipment():
 	pass
 
+func resetEquipment():
+	inventory.clearEquippedItems()
+	createEquipment()
+
 func processTime(_secondsPassed):
 	for bodypart in processingBodyparts:
 		if(bodypart == null || !is_instance_valid(bodypart)):
@@ -158,6 +168,36 @@ func hoursPassed(_howmuch):
 			bodypart.hoursPassed(_howmuch)
 
 func updateNonBattleEffects():
+	if(hasBoundArms()):
+		addEffect(StatusEffect.ArmsBound)
+	else:
+		removeEffect(StatusEffect.ArmsBound)
+		
+	if(hasBlockedHands()):
+		addEffect(StatusEffect.HandsBlocked)
+	else:
+		removeEffect(StatusEffect.HandsBlocked)
+			
+	if(hasBoundLegs()):
+		addEffect(StatusEffect.LegsBound)
+	else:
+		removeEffect(StatusEffect.LegsBound)
+			
+	if(isBlindfolded()):
+		addEffect(StatusEffect.Blindfolded)
+	else:
+		removeEffect(StatusEffect.Blindfolded)
+			
+	if(isGagged()):
+		addEffect(StatusEffect.Gagged)
+	else:
+		removeEffect(StatusEffect.Gagged)
+		
+	if(buffsHolder.hasBuff(Buff.MuzzleBuff)):
+		addEffect(StatusEffect.Muzzled)
+	else:
+		removeEffect(StatusEffect.Muzzled)
+	
 	if(hasBodypart(BodypartSlot.Vagina) && !getBodypart(BodypartSlot.Vagina).isOrificeEmpty()):
 		addEffect(StatusEffect.HasCumInsideVagina)
 	else:
@@ -221,4 +261,45 @@ func getAiStrategy(_battleName):
 	return basicAI
 
 func interestVerbalReaction(_interest):
+	var parentCharID = getParentCharacterID()
+	if(parentCharID != null):
+		return GlobalRegistry.getCharacter(parentCharID).interestVerbalReaction(_interest)
+	
+	return null
+
+func getLustInterests() -> LustInterests:
+	var parentCharID = getParentCharacterID()
+	if(parentCharID != null):
+		return GlobalRegistry.getCharacter(parentCharID).getLustInterests()
+	
+	return .getLustInterests()
+	
+func getParentCharacterID():
+	return null
+
+func getRestraintResistance():
+	if(npcBaseRestraintDodgeChanceMult != null):
+		return npcBaseRestraintDodgeChanceMult
+	else:
+		return .getRestraintResistance()
+
+func getRestraintStrugglePower():
+	return npcRestraintStrugglePower
+
+func getRestraintStrugglingMinigameResult():
+	return RNG.randf_range(npcRestraintMinigameResultMin, npcRestraintMinigameResultMax)
+
+func shouldReactToRestraint(_restraintType, _restraintAmount, _isGettingForced):
+	if(_isGettingForced && _restraintType in [RestraintType.ButtPlug, RestraintType.VaginalPlug]):
+		return RNG.chance(90)
+	
+	if(_restraintAmount == 0):
+		return RNG.chance(50)
+	return RNG.chance(20)
+
+func reactRestraint(_restraintType, _restraintAmount, _isGettingForced):
+	var parentCharID = getParentCharacterID()
+	if(parentCharID != null):
+		return GlobalRegistry.getCharacter(parentCharID).reactRestraint(_restraintType, _restraintAmount, _isGettingForced)
+	
 	return null

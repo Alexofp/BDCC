@@ -9,73 +9,8 @@ func _init():
 	npcLevel = 10
 	npcBasePain = 200
 	npcBaseLust = 150
-	npcLustInterests = {
-		InterestTopic.TallyMarks: Interest.Loves,
-		InterestTopic.Bodywritings: Interest.Loves,
-		InterestTopic.Gags: Interest.Likes,
-		InterestTopic.Blindfolds: Interest.Likes,
-		InterestTopic.BDSMRestraints: Interest.Loves,
-		InterestTopic.ButtPlugs: Interest.ReallyLikes,
-		InterestTopic.VaginalPlugs: Interest.ReallyLikes,
-		InterestTopic.FeminineBody: Interest.ReallyLikes,
-		InterestTopic.AndroBody: Interest.ReallyDislikes,
-		InterestTopic.SlimBody: Interest.KindaLikes,
-		InterestTopic.ThickButt: Interest.Loves,
-		InterestTopic.AverageButt: Interest.KindaLikes,
-		InterestTopic.SlimButt: Interest.SlightlyDislikes,
-		InterestTopic.NoBreasts: Interest.SlightlyDislikes,
-		InterestTopic.SmallBreasts: Interest.KindaLikes,
-		InterestTopic.MediumBreasts: Interest.Loves,
-		InterestTopic.BigBreasts: Interest.ReallyLikes,
-		InterestTopic.StuffedPussy: Interest.Loves,
-		InterestTopic.StuffedPussyOrAss: Interest.Loves,
-		InterestTopic.StuffedThroat: Interest.Likes,
-		InterestTopic.CoveredInCum: Interest.Likes,
-		InterestTopic.CoveredInLotsOfCum: Interest.Loves,
-		InterestTopic.FullyNaked: Interest.KindaLikes,
-		InterestTopic.ExposedPussy: Interest.ReallyLikes,
-		InterestTopic.ExposedAnus: Interest.Likes,
-		InterestTopic.ExposedBreasts: Interest.Likes,
-		InterestTopic.ExposedPanties: Interest.Dislikes,
-		InterestTopic.ExposedBra: Interest.Dislikes,
-		InterestTopic.LooseAnus: Interest.KindaLikes,
-		InterestTopic.LoosePussy: Interest.KindaLikes,
-		InterestTopic.TightAnus: Interest.Loves,
-		InterestTopic.TightPussy: Interest.Loves,
-		InterestTopic.HasVaginaOnly: Interest.ReallyLikes,
-		InterestTopic.HasVaginaAndCock: Interest.Loves,
-		InterestTopic.BigCock: Interest.Likes,
-		InterestTopic.AverageCock: Interest.ReallyLikes,
-		InterestTopic.SmallCock: Interest.ReallyLikes,
-		InterestTopic.HasCockOnly: Interest.ReallyDislikes,
-		InterestTopic.Pregnant: Interest.Loves,
-	}
+
 	
-	#npcHasMenstrualCycle = true
-	
-func interestVerbalReaction(interest):
-	if(interest == InterestTopic.Pregnant):
-		return "Gonna be a mommy soon? Nice~"
-	if(interest == InterestTopic.TallyMarks):
-		return "I'd love to leave more marks on you"
-	if(interest == InterestTopic.BDSMRestraints):
-		return "Aren't you a cute restriction slut~"
-	if(interest == InterestTopic.ThickButt):
-		return "That's an ass I would grope"
-	if(interest == InterestTopic.ExposedPanties):
-		return "Take your panties off, cutie"
-	if(interest == InterestTopic.HasVaginaAndCock):
-		return "Herms are nice~. I love the full package~"
-	if(interest == InterestTopic.StuffedPussyOrAss):
-		return "You got fucked, huh~. Lewd"
-	if(interest == InterestTopic.TightAnus):
-		return "Mommy would love to train that ass of yours"
-	if(interest == InterestTopic.TightPussy):
-		return "We can have so much fun stretching you~"
-	if(interest == InterestTopic.MediumBreasts):
-		return "I love your tits, not too small, not too big~"
-	if(interest == InterestTopic.AverageCock):
-		return "Great cock you have there~"
 	
 func getAmbientLust():
 	return 40
@@ -145,3 +80,6 @@ func getThickness():
 
 func getLootTable(_battleName):
 	return GuardLoot.new()
+
+func getParentCharacterID():
+	return "nova"

@@ -12,18 +12,12 @@ func getVisibleDesc(_context = {}):
 	return "You shouldn't see this"
 	
 func _doAttack(_attacker, _receiver, _context = {}):
-	var attackerName = _attacker.getName()
-	var receiverName = _receiver.getName()
-	
 	if(checkMissed(_attacker, _receiver, DamageType.Physical)):
-		return attackerName + " swings "+_attacker.hisHer()+" stunbaton but misses"
+		return genericMissMessage(_attacker, _receiver)
 	
 	if(checkDodged(_attacker, _receiver, DamageType.Physical)):
-		return attackerName + " swings "+_attacker.hisHer()+" stunbaton but " + receiverName + " dodges the attack at the last second"
+		return genericDodgeMessage(_attacker, _receiver)
 	
-	var _damage = doDamage(_attacker, _receiver, DamageType.Physical, RNG.randi_range(20, 40))
-	#_receiver.addEffect(StatusEffect.Bleeding)
-
 	var texts = [
 		"{attacker.name} lands a strike on {receiver.name} with a stun baton, sending a painful shock through {receiver.his} body",
 		"{attacker.name}’s stun baton hits {receiver.name} causing a huge spike of pain.",
@@ -31,9 +25,10 @@ func _doAttack(_attacker, _receiver, _context = {}):
 	]
 	var text = RNG.pick(texts)
 	
-	text += " " + receiverDamageMessage(DamageType.Physical, _damage)
-	
-	return text
+	return {
+		text = text,
+		pain = RNG.randi_range(20, 40),
+	}
 	
 func _canUse(_attacker, _receiver, _context = {}):
 	return true
@@ -44,3 +39,9 @@ func getAnticipationText(_attacker, _receiver):
 		"{attacker.name} swings {attacker.his} stun baton at {receiver.name}, aiming for {receiver.his} exposed areas where it would have the most effect.",
 		"{attacker.name}’s stun baton makes sparks as {attacker.he} prepares to strike {receiver.name}.",
 	])
+
+func getRequirements():
+	return [AttackRequirement.FreeArms, AttackRequirement.FreeHands]
+
+func getAttackSoloAnimation():
+	return "stunbaton"

@@ -19,7 +19,6 @@ func shouldShow(_lustState: LustCombatState, _args):
 
 func canDo(_lustState: LustCombatState, _args):
 	var pc:Player = _lustState.getCharacter()
-	pc.stimulateLactation()
 	#if(!pc.hasPerk(Perk.MilkSquirt)):
 	#	return [false, "Requires a \"Battle Cow\" perk"]
 	
@@ -42,6 +41,7 @@ func doAction(_lustState: LustCombatState, _args):
 	#_lustState.getCharacter().addLust(3)
 
 	var pc:Player = _lustState.getCharacter()
+	pc.stimulateLactation()
 	pc.milk(0.3)
 	
 	var text = ""

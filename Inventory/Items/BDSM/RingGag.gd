@@ -34,11 +34,14 @@ func isRestraint():
 	return true
 
 func generateRestraintData():
-	restraintData = RestraintBallGag.new()
+	restraintData = RestraintRingGag.new()
 	restraintData.setLevel(calculateBestRestraintLevel())
 
-func getForcedOnMessage():
-	return getAStackNameCapitalize()+" was forced into your mouth! You are drooling and can't close your mouth anymore!"
+func getForcedOnMessage(isPlayer = true):
+	if(isPlayer):
+		return getAStackNameCapitalize()+" was forced into your mouth! You are drooling and can't close your mouth anymore!"
+	else:
+		return getAStackNameCapitalize()+" was forced into {receiver.nameS} mouth! {receiver.He} {receiver.is} drooling and can't close {receiver.his} mouth anymore!"
 
 func updateDoll(doll: Doll3D):
 	doll.setState("mouth", "ringgag")

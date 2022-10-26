@@ -61,6 +61,7 @@ func combineTags(tags: Array):
 	var pos = 0
 	var processThese = {
 		"say": true,
+		"sayShowName": true,
 		"sayMale": true,
 		"sayFemale": true,
 	}
@@ -93,7 +94,7 @@ func combineTags(tags: Array):
 							tagText += "["+tags[pos][1]+"="+tags[pos][2]+"]"
 						pos += 1
 					elif(tags[pos][0] == TagType.CloseTag):
-						if(tags[pos][1] == tagCommand):
+						if(tags[pos][1] == tagCommand || tags[pos][1] == ""):
 							result.append([TagType.Tag, tagCommand, tagArg, tagText])
 							pos += 1
 							break
@@ -113,7 +114,7 @@ func combineTags(tags: Array):
 
 	return result
 
-func processString(text: String):
+func processString(text: String, overrides: Dictionary = {}):
 	var tags = findTags(text)
 	var combinedTags = combineTags(tags)
 	var result = ""
@@ -122,12 +123,15 @@ func processString(text: String):
 		if(tag[0] == TagType.Text):
 			result += tag[1]
 		if(tag[0] == TagType.Tag):
-			result += processTag(tag[1], tag[2], tag[3])
+			result += processTag(tag[1], tag[2], tag[3], overrides)
 			
 	return result
 
-func processTag(tag, arg, text):
-	if(tag == "say"):
+func processTag(tag, arg, text, overrides: Dictionary = {}):
+	if(tag == "say" || tag == "sayShowName"):
+		if(overrides.has(arg)):
+			arg = overrides[arg]
+		
 		var resolvedName = GM.main.resolveCustomCharacterName(arg)
 		if(resolvedName != null):
 			arg = resolvedName
@@ -142,7 +146,7 @@ func processTag(tag, arg, text):
 			return "!Error: "+arg+" character is not found to say text: "+text+"!"
 		
 		var prefix = ""
-		if(OPTIONS.shouldShowSpeakerName()):
+		if(OPTIONS.shouldShowSpeakerName() || tag == "sayShowName"):
 			prefix = "[b]"+object.getName()+"[/b]: "
 		
 		return prefix+object.formatSay(text)

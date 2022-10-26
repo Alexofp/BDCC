@@ -8,10 +8,8 @@ func getVisibleName():
 	return "Naked agility"
 
 func getVisibleDescription():
-	return "You gain (5 + Exhibitionism * 2)% additional dodge chance when you are COMPLETELY naked"
+	return "The less clothes on you, the harder for them to grab you! You gain 5% additional dodge chance when you are COMPLETELY naked"
 
-func getCost():
-	return 1
 func getSkillTier():
 	return 0
 
@@ -24,6 +22,6 @@ func getBuffs():
 	
 	if(npc.isFullyNaked()):
 		return [
-			buff(Buff.DodgeChanceBuff, [5.0 + npc.getSkillLevel(Skill.Exhibitionism)*2.0])
+			buff(Buff.DodgeChanceBuff, [5.0])
 		]
 	return []

@@ -5,13 +5,14 @@ var struggleText = ""
 var additionalStruggleText = ""
 var canKeepTheRestraint = false
 var keptRestraintID = ""
-var keyGameTries: int = 5
+var keyGameTries: int = 3
 var keyGameValue: int = 50
 var keyText = ""
 var fightMode = false
 var restraintID = ""
 
-var minigameScene = preload("res://Game/Minigames/Struggling/StrugglingGame.tscn")
+#var minigameScene = preload("res://Game/Minigames/Struggling/StrugglingGame.tscn")
+var minigameScene = preload("res://Game/Minigames/ClickAtTheRightTime/ClickAtTheRightTime.tscn")
 
 func _init():
 	sceneID = "StrugglingScene"
@@ -71,14 +72,16 @@ func _run():
 	if(state == "keyminigame"):
 		saynn("Since you can't use your fingers you have to carefully balance the key between your palms and guide it towards the lock.")
 		
-		saynn("To succsessfully unlock the restraint you have to guess a number between 1 and 100. You have "+str(keyGameTries)+" "+Util.multipleOrSingularEnding(keyGameTries, "try", "tries")+" left")
+		saynn("To succsessfully unlock the restraint you have to guess a number between 1 and 15. You have "+str(keyGameTries)+" "+Util.multipleOrSingularEnding(keyGameTries, "try", "tries")+" left")
 
 		if(keyText != ""):
 			saynn(keyText)
 
-		addTextbox("key_number")
+		#addTextbox("key_number")
 		
-		addButton("Guess", "Try and guess this number", "key_guess")
+		#addButton("Guess", "Try and guess this number", "key_guess")
+		for _i in range(1, 16):
+			addButton(str(_i), "Try this number", "key_guess", [_i])
 
 	if(state == "keyminigameFailed"):
 		saynn("Oops, you dropped the key and it broke. There goes that.")
@@ -90,9 +93,9 @@ func _run():
 		var restraintData: RestraintData = item.getRestraintData()
 		
 		var game = minigameScene.instance()
+		GM.ui.addCustomControl("minigame", game)
 		game.setDifficulty(restraintData.getLevel())
 		game.connect("minigameCompleted", self, "onMinigameCompleted")
-		GM.ui.addCustomControl("minigame", game)
 		
 		addButton("Give up", "Give up the struggle and lose 10 stamina", "giveupstruggle")
 
@@ -170,7 +173,7 @@ func _react(_action: String, _args):
 		var minigameStatus = 1.0
 		if(_args.size() > 1):
 			var minigameResult = clamp(float(_args[1]), 0.0, 1.0)
-			minigameStatus = pow(minigameResult, 1.5) * 5.0
+			minigameStatus = pow(minigameResult, 1.5) * 2.0
 			if(minigameResult >= 1.0 && GM.pc.hasPerk(Perk.BDSMBetterStruggling)):
 				minigameStatus *= 2.0
 		
@@ -179,7 +182,7 @@ func _react(_action: String, _args):
 		var addPain = 0
 		var addStamina = 0
 		
-		var struggleData = restraintData.doStruggle(GM.pc)
+		var struggleData = restraintData.doStruggle(GM.pc, minigameStatus)
 		if(struggleData.has("damage")):
 			damage = struggleData["damage"] * minigameStatus
 		if(struggleData.has("lust") && struggleData["lust"] > 0):
@@ -192,7 +195,7 @@ func _react(_action: String, _args):
 		struggleText = struggleData["text"]
 		
 		if(!fightMode):
-			var turnData = GM.pc.processStruggleTurn()
+			var turnData = GM.pc.processStruggleTurn(true)
 			damage += turnData["damage"]
 			addLust += turnData["lust"]
 			addPain += turnData["pain"]
@@ -200,10 +203,10 @@ func _react(_action: String, _args):
 			additionalStruggleText = turnData["text"]
 			
 		if(damage < 1.0):
-			var mult = 1
+			var mult = 4
 			if(fightMode):
-				mult = 2
-			# 5 xp for struggling out of a level 5 restraint. 10 xp if you're doing it during combat
+				mult = 5
+			# 20 xp for struggling out of a level 5 restraint. 25 xp if you're doing it during combat
 			
 			GM.pc.addSkillExperience(Skill.BDSM, restraintData.getLevel() * mult)
 			
@@ -273,22 +276,23 @@ func _react(_action: String, _args):
 			GM.pc.getInventory().unequipItem(item)
 			setState("unlockedGear")
 		else:
-			keyGameTries = 5
+			keyGameTries = 3
 			if(GM.pc.hasPerk(Perk.BDSMBetterKeys)):
-				keyGameTries += 3
-			keyGameValue = RNG.randi_range(1, 100)
+				keyGameTries += 2
+			keyGameValue = RNG.randi_range(1, 15)
 			keyText = ""
 			setState("keyminigame")
 		return
 		
 	if(_action == "key_guess"):
-		var textboxText = getTextboxData("key_number")
-		if(textboxText == "" || !textboxText.is_valid_integer()):
-			keyText = ""
-			setState("keyminigame")
-			return
 		
-		var number = int(textboxText)
+#		var textboxText = getTextboxData("key_number")
+#		if(textboxText == "" || !textboxText.is_valid_integer()):
+#			keyText = ""
+#			setState("keyminigame")
+#			return
+		
+		var number = _args[0]#int(textboxText)
 		if(number == keyGameValue):
 			var item = GM.pc.getInventory().getItemByUniqueID(unlockedRestraintID)
 			GM.pc.getInventory().unequipItem(item)
@@ -297,27 +301,27 @@ func _react(_action: String, _args):
 		
 		var diff = abs(number - keyGameValue)
 		if(number > keyGameValue):
-			if(diff >= 50):
+			if(diff >= 8):
 				keyText = str(number)+" is not even close. You almost dropped the key right there"
-			elif(diff >= 25):
-				keyText = str(number)+" is way too much"
-			elif(diff >= 10):
-				keyText = str(number)+" is too much"
 			elif(diff >= 5):
+				keyText = str(number)+" is way too much"
+			elif(diff >= 3):
+				keyText = str(number)+" is too much"
+			elif(diff >= 2):
 				keyText = str(number)+" is too much but you feel that you're pretty close"
 			else:
-				keyText = str(number)+" is slightly too much. Very close."
+				keyText = str(number)+" is very close."
 		if(number < keyGameValue):
-			if(diff >= 50):
+			if(diff >= 8):
 				keyText = str(number)+" is not even close. You almost dropped the key right there"
-			elif(diff >= 25):
-				keyText = str(number)+" is way too little"
-			elif(diff >= 10):
-				keyText = str(number)+" is too little"
 			elif(diff >= 5):
+				keyText = str(number)+" is way too little"
+			elif(diff >= 3):
+				keyText = str(number)+" is too little"
+			elif(diff >= 2):
 				keyText = str(number)+" is too little but you feel that you're pretty close"
 			else:
-				keyText = str(number)+" is slightly too little. Very close."
+				keyText = str(number)+" is very close."
 		
 		keyGameTries -= 1
 		if(keyGameTries <= 0):
@@ -328,6 +332,9 @@ func _react(_action: String, _args):
 		
 	setState(_action)
 
+func resolveCustomCharacterName(_charID):
+	if(_charID == "user"):
+		return "pc"
 
 func saveData():
 	var data = .saveData()
@@ -355,8 +362,8 @@ func loadData(data):
 	additionalStruggleText = SAVE.loadVar(data, "additionalStruggleText", "")
 	canKeepTheRestraint = SAVE.loadVar(data, "canKeepTheRestraint", false)
 	keptRestraintID = SAVE.loadVar(data, "keptRestraintID", "")
-	keyGameTries = SAVE.loadVar(data, "keyGameTries", 5)
-	keyGameValue = SAVE.loadVar(data, "keyGameValue", 50)
+	keyGameTries = SAVE.loadVar(data, "keyGameTries", 3)
+	keyGameValue = SAVE.loadVar(data, "keyGameValue", 7)
 	keyText = SAVE.loadVar(data, "keyText", "")
 	fightMode = SAVE.loadVar(data, "fightMode", false)
 	restraintID = SAVE.loadVar(data, "restraintID", "")

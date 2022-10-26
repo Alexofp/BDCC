@@ -141,15 +141,16 @@ func getCurrentNaturalSpill() -> float:
 	
 	return getNaturalDrain()
 	
-func addFluid(fluidType, amount: float, charID = null):
+func addFluid(fluidType, amount: float, charID = null, virility = -100.0):
 	if(amount <= 0.0):
 		return
 	
-	var virility = 1.0
-	if(charID != null):
+	if(charID != null && virility < -99.0):
 		var character = GlobalRegistry.getCharacter(charID)
 		if(character != null):
 			virility = character.getVirility()
+	else:
+		virility = 1.0
 	
 	for contentData in contents:
 		if(fluidType == contentData[0] && charID == contentData[2]):
@@ -160,6 +161,53 @@ func addFluid(fluidType, amount: float, charID = null):
 	
 	contents.append([fluidType, amount, charID, virility])
 	dirtyFlag = true
+
+func transferTo(otherOrifice: Orifice, fraction = 0.5):
+	var result = false
+	for contentData in contents:
+		var amountToTransfer = contentData[1] * fraction
+		contentData[1] -= amountToTransfer
+		
+		result = true
+		otherOrifice.addFluid(contentData[0], amountToTransfer, contentData[2], contentData[3])
+	removeEmptyInternalEntries()
+	dirtyFlag = true
+	return result
+
+func shareFluids(otherOrifice: Orifice, fraction = 0.5):
+	var result = false
+	var ourFluids = []
+	var theirFluids = []
+	
+	for contentData in contents:
+		var amountToTransfer = contentData[1] * fraction
+		contentData[1] -= amountToTransfer
+		ourFluids.append([contentData[0], amountToTransfer, contentData[2], contentData[3]])
+		result = true
+	
+	for contentData in otherOrifice.contents:
+		var amountToTransfer = contentData[1] * fraction
+		contentData[1] -= amountToTransfer
+		theirFluids.append([contentData[0], amountToTransfer, contentData[2], contentData[3]])
+		result = true
+		
+	for fluidsToAdd in ourFluids:
+		otherOrifice.addFluid(fluidsToAdd[0], fluidsToAdd[1], fluidsToAdd[2], fluidsToAdd[3])
+	for fluidsToAdd in theirFluids:
+		addFluid(fluidsToAdd[0], fluidsToAdd[1], fluidsToAdd[2], fluidsToAdd[3])
+	removeEmptyInternalEntries()
+	otherOrifice.removeEmptyInternalEntries()
+	dirtyFlag = true
+	otherOrifice.dirtyFlag = true
+	return result
+
+func removeEmptyInternalEntries():
+	var newContents = []
+	for fluidData in contents:
+		if(fluidData[1] > 0):
+			newContents.append(fluidData)
+
+	contents = newContents
 
 func hasFluidType(fluidType):
 	for fluidData in contents:

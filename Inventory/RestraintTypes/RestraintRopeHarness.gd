@@ -1,15 +1,18 @@
 extends RestraintData
 class_name RestraintRopeHarness
 
+func _init():
+	restraintType = RestraintType.Harness
+
 func canUnlockWithKey():
 	return false
 
-func doStruggle(_pc):
+func doStruggle(_pc, _minigame):
 	var _handsFree = !_pc.hasBlockedHands()
 	var _armsFree = !_pc.hasBoundArms()
 	var _legsFree = !_pc.hasBoundLegs()
 	var _canSee = !_pc.isBlindfolded()
-	var _canBite = !_pc.isGagged()
+	var _canBite = !_pc.isBitingBlocked()
 	
 	var text = "error?"
 	var lust = 0
@@ -17,16 +20,19 @@ func doStruggle(_pc):
 	var damage = 0
 	var stamina = 0
 	
-	if(true):
-		text = "You try to blindly find the knot to tug on"
-		damage = calcDamage()
+	if(_armsFree && _handsFree):
+		text = "{user.name} tries to blindly find the knot to tug on"
+		damage = calcDamage(_pc)
+		stamina = 10
+		lust = scaleDamage(5)
+	else:
+		text = "{user.name} tries to wiggle the rope harness off"
+		damage = calcDamage(_pc, 0.5)
 		stamina = 10
 		lust = scaleDamage(5)
 	
 	return {"text": text, "damage": damage, "lust": lust, "pain": pain, "stamina": stamina}
 
-func processStruggleTurn():
-	if(failChance(10)):
-		return {"text": "Your rope harness rubs against one of your nips", "lust": scaleDamage(5)}
-	elif(failChance(10)):
-		return {"text": "Your rope harness digs into your crotch", "lust": scaleDamage(5)}
+func processStruggleTurn(_pc, _isActivelyStruggling):
+	if(failChance(_pc, 10) || _isActivelyStruggling):
+		return {"text": RNG.pick(["{user.nameS} rope harness rubs against one of {user.his} nips", "{user.nameS} rope harness digs into {user.his} crotch"]), "lust": scaleDamage(5)}

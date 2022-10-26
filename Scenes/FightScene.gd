@@ -13,6 +13,9 @@ var battleName = ""
 var currentAttackerID = ""
 var currentReceiverID = ""
 var enemyAIStrategy: AIStrategyBase
+var restraintIdsForcedByPC = []
+var enemySurrendered = false
+var lastPlayerAttackData = null
 
 func _init():
 	sceneID = "FightScene"
@@ -103,6 +106,44 @@ func _run():
 	
 		addButton("Back", "Back to fighting", "return")
 	
+	if(state == "bdsm_attacks"):
+		saynn("Pick what restraint you wanna force onto your enemy")
+		
+		if(!GM.pc.isBlindfolded() || GM.pc.canHandleBlindness()):
+			for item in enemyCharacter.getInventory().getEquppedRestraints():
+				var restraintData: RestraintData = item.getRestraintData()
+				
+				sayn(item.getVisibleName()+", restraint level: "+restraintData.getVisibleLevel(false))
+				#sayn("- Durability: "+restraintData.getVisibleDurability())
+				saynn("- Tightness: "+restraintData.getVisibleTightness()+" ("+restraintData.getTightnessPercentString()+")")
+
+		else:
+			saynn("You can't judge enemy's restraints while blind")
+		
+		
+		var usableItems = GM.pc.getInventory().getAllCombatUsableRestraints()
+		
+		for item in usableItems:
+			var itemSlot = item.getClothingSlot()
+			
+			if(!enemyCharacter.invCanEquipSlot(itemSlot)):
+				addDisabledButton(item.getVisibleName(), "Unable to force this restraint on them")
+			elif(enemyCharacter.getInventory().hasSlotEquipped(itemSlot) && enemyCharacter.getInventory().getEquippedItem(itemSlot).isRestraint()):
+				addDisabledButton(item.getVisibleName(), "They are wearing this type of restraint already")
+			else:
+				var restraintData:RestraintData = item.getRestraintData()
+				if(restraintData == null):
+					continue
+				var pcAccuracy = GM.pc.getRestraintForcingSuccessChanceMod()
+					
+				var chanceToForce = pcAccuracy
+				if(enemyCharacter.getStamina() > 0):
+					 chanceToForce *= restraintData.getFinalChanceToForceARestraint(enemyCharacter)
+					
+				addButton(item.getVisibleName(), "Restraint level: "+str(restraintData.getLevel()) + "\n" + "Success chance: "+ str(Util.roundF(chanceToForce*100.0, 1))+"%" + "\n\n" + item.getCombatDescription(), "forcerestraint", [item])
+			
+		addButton("Back", "Back to fighting", "return")
+	
 	if(state == "playerMustDodge"):
 		if(whatPlayerDid != ""):
 			saynn(whatPlayerDid)
@@ -138,25 +179,20 @@ func _run():
 		else:
 			saynn(GM.ui.processString(attack.getAnticipationText(enemyCharacter, GM.pc)))
 		addButton("Do nothing", "You don't counter the attack in any way", "dodge_donothing")
-		if(GM.pc.getStamina() > 0 && !GM.pc.hasEffect(StatusEffect.Collapsed)):
-			addButton("Dodge", "You dodge a physical attack completely spending 30 stamina in the process", "dodge_dodge")
-		else:
-			addDisabledButton("Dodge", "You need more stamina for this")
-		if(GM.pc.getStamina() > 0):
-			if(GM.pc.hasPerk(Perk.CombatBetterBlock)):
-				addButton("Block", "You gain 50 additional physical armor against the attack while spending 15 stamina", "dodge_block")
+		addButtonWithChecks("Dodge", "You dodge a physical attack completely spending 30 stamina in the process", "dodge_dodge", [], [ButtonChecks.HasStamina])
+		addButtonWithChecks("Block", "You gain "+str(GM.pc.getBlockArmor())+" additional physical armor against the attack while spending 15 stamina", "dodge_block", [], [ButtonChecks.HasStamina])
+		addButtonWithChecks("Defocus", "You try to distract yourself from the fight, gaining "+str(GM.pc.getDefocusArmor())+" lust armor and spending 15 stamina", "dodge_defocus", [], [ButtonChecks.HasStamina])
+		if(GM.pc.hasPerk(Perk.CombatDoubleDown)):
+			if(lastPlayerAttackData != null):
+				var pcAttack:Attack = GlobalRegistry.getAttack(lastPlayerAttackData["attackID"])
+				
+				if(pcAttack.canUse(GM.pc, enemyCharacter, lastPlayerAttackData)):
+					addButtonWithChecks("Double down", "Spend 30 stamina to do the same attack that you did a second time before the enemy attacks you", "dodge_doubledown", [], [ButtonChecks.HasStamina])
+				else:
+					addDisabledButton("Double down", "You can't double down on this attack")
 			else:
-				addButton("Block", "You gain 20 additional physical armor against the attack while spending 15 stamina", "dodge_block")
-		else:
-			addDisabledButton("Block", "You need more stamina for this")
-		if(GM.pc.getStamina() > 0):
-			if(GM.pc.hasPerk(Perk.SexBetterDefocus)):
-				addButton("Defocus", "You try to distract yourself from the fight, gaining 100 lust armor and spending 15 stamina", "dodge_defocus")
-			else:
-				addButton("Defocus", "You try to distract yourself from the fight, gaining 20 lust armor and spending 15 stamina", "dodge_defocus")
-		else:
-			addDisabledButton("Defocus", "You need more stamina for this")
-		
+				addDisabledButton("Double down", "You can only double down on a basic physical attack")
+				
 	if(state == "" || state == "fighting"):		
 		addButtonWithChecks("Physical Attack", "Show a list of physical attacks that you can do", "physattacks", [], [ButtonChecks.NotStunned])
 		addButtonWithChecks("Lust Attack", "Show a list of lewd actions that you can do", "lustattacks", [], [ButtonChecks.NotStunned])
@@ -186,7 +222,10 @@ func _run():
 		else:
 			addDisabledButton("Get up", "You're already standing")
 		
-		addButton("Submit", "Give up", "submit")
+		if(GM.pc.hasPerk(Perk.BDSMRigger)):
+			addButtonWithChecks("Bondage", "Pick which restraint you wanna try to force onto your enemy", "bdsm_attacks", [], [ButtonChecks.NotHandsBlocked, ButtonChecks.NotArmsRestrained])
+		
+		addButtonAt(14, "Submit", "Give up", "submit")
 		
 	if(state == "lost" || state == "win"):		
 		addButton("Continue", "the battle has ended", "endbattle")
@@ -222,8 +261,8 @@ func _react(_action: String, _args):
 		setState("fighting")
 		beforeTurnChecks()
 		
-		var attackID = _args[0]
-		whatPlayerDid += doPlayerAttack(attackID)
+		var attackData = _args[0]
+		whatPlayerDid += doPlayerAttack(attackData)
 		whatEnemyDid += aiTurn()
 
 		afterTurnChecks()
@@ -240,11 +279,51 @@ func _react(_action: String, _args):
 
 		afterTurnChecks()
 		return
+		
+	if(_action == "forcerestraint"):
+		setState("fighting")
+		beforeTurnChecks()
+		
+		setPlayerAsAttacker()
+		
+		var accuracy = GM.pc.getRestraintForcingSuccessChanceMod()
+		if(!RNG.chance(accuracy * 100.0)):
+			whatPlayerDid += "You tried to force a restraint onto your enemy but you missed!"
+		else:
+			var item:ItemBase = _args[0]
+			var restraintData:RestraintData = item.getRestraintData()
+			var finalSuccessChance = restraintData.getFinalChanceToForceARestraint(enemyCharacter)
+			
+			if(!RNG.chance(finalSuccessChance * 100.0) && enemyCharacter.getStamina() > 0):
+				enemyCharacter.addStamina(-10)
+				whatPlayerDid += GM.ui.processString("You try to force a restraint onto {receiver.name} but {receiver.he} avoided your attempt!")
+			
+				GM.main.playAnimation(StageScene.Duo, "", {npc=enemyID, npcAction="dodge"})
+			else:
+				GM.pc.addSkillExperience(Skill.BDSM, restraintData.getLevel() * 3)
+				whatPlayerDid += GM.ui.processString(item.getForcedOnMessage(false))
+				
+				restraintIdsForcedByPC.append(item.getUniqueID())
+				GM.pc.getInventory().removeItem(item)
+				enemyCharacter.getInventory().forceEquipRemoveOther(item)
+				enemyCharacter.getBuffsHolder().calculateBuffs()
+				enemyCharacter.updateNonBattleEffects()
+				
+				var restraintsAmount = enemyCharacter.getInventory().getEquppedRestraints().size()
+				if(enemyCharacter.shouldReactToRestraint(restraintData.getRestraintType(), restraintsAmount, true)):
+					var reaction = enemyCharacter.reactRestraint(restraintData.getRestraintType(), restraintsAmount, true)
+					if(reaction != null && reaction != ""):
+						whatPlayerDid += "\n" + "[say="+str(enemyID)+"]"+str(reaction)+"[/say]"
+		
+		whatEnemyDid += aiTurn()
+
+		afterTurnChecks()
+		return
 	
 	if(_action == "getup"):
 		beforeTurnChecks()
 		
-		whatPlayerDid += doPlayerAttack("trygetupattack")
+		whatPlayerDid += doPlayerAttack({"attackID": "trygetupattack"})
 		
 		whatEnemyDid += aiTurn()
 
@@ -261,7 +340,7 @@ func _react(_action: String, _args):
 		afterTurnChecks()
 		return
 		
-	if(_action == "dodge_donothing" || _action == "dodge_dodge" || _action == "dodge_block" || _action == "dodge_defocus"):
+	if(_action == "dodge_donothing" || _action == "dodge_dodge" || _action == "dodge_block" || _action == "dodge_defocus" || _action == "dodge_doubledown"):
 		setState("fighting")
 		whatHappened = ""
 		if(_action == "dodge_donothing"):
@@ -278,13 +357,30 @@ func _react(_action: String, _args):
 			whatPlayerDid = "You try to get distracted"
 			GM.pc.setFightingStateDefocusing()
 			GM.pc.addStamina(-15)
+		if(_action == "dodge_doubledown"):
+			whatPlayerDid = doPlayerAttack(lastPlayerAttackData)
+			GM.pc.addStamina(-30)
+		
+			var won = checkEnd()
+			if(won == "lost"):
+				setState("lost")
+				return
+			if(won == "win"):
+				setState("win")
+				return
 		
 		var attack: Attack = GlobalRegistry.getAttack(savedAIAttackID)
 		if(attack == null):
 			assert(false, "Bad attack: "+savedAIAttackID)
 			
 		setEnemyAsAttacker()
-		whatEnemyDid += GM.ui.processString(attack.doAttack(enemyCharacter, GM.pc))
+		
+		var result = attack.doAttack(enemyCharacter, GM.pc)
+		result["text"] = GM.ui.processString(result["text"])
+		
+		GM.main.playAnimation(StageScene.Duo, result["receiverAnimation"], {npc=enemyID, npcAction=result["attackerAnimation"]})
+		
+		whatEnemyDid += result["text"]
 		savedAIAttackID = ""
 		
 		GM.pc.setFightingStateNormal()
@@ -300,6 +396,29 @@ func _react(_action: String, _args):
 		return
 	
 	if(_action == "endbattle"):
+		if(restraintIdsForcedByPC.size() > 0):
+			#var recoverChance = GM.pc.getBuffsHolder().getCustom(BuffAttribute.RestraintRecovery) * 100.0
+			
+			for itemUniqueID in restraintIdsForcedByPC:
+				var item:ItemBase = enemyCharacter.getInventory().getItemByUniqueID(itemUniqueID)
+				
+				if(item == null):
+					continue
+				
+				if(true):#if(RNG.chance(recoverChance)):
+					enemyCharacter.getInventory().removeItem(item)
+					enemyCharacter.getInventory().removeEquippedItem(item)
+					var restraintData:RestraintData = item.getRestraintData()
+					if(restraintData != null):
+						restraintData.onStruggleRemoval()
+					
+					GM.pc.getInventory().addItem(item)
+					addMessage("You recovered "+item.getAStackName())
+				else:
+					addMessage("You lost "+item.getAStackName())
+			if(enemyCharacter.has_method("resetEquipment")):
+				enemyCharacter.resetEquipment()
+		
 		enemyCharacter.afterFightEnded()
 		GM.pc.afterFightEnded()
 		if(battleEndedHow == ""):
@@ -421,48 +540,25 @@ func addLustActionsButtons(lustCombatState:LustCombatState, theActions):
 	
 
 func doPlayerAttack(attackData):
-	var attackID = attackData
-	if(attackID is Dictionary):
-		attackID = attackData["attackID"]
-	else:
-		attackData = {"attackID": attackID}
+	lastPlayerAttackData = attackData
+	var attackID = attackData["attackID"]
+	
 	var attack: Attack = GlobalRegistry.getAttack(attackID)
 	if(attack == null):
 		assert(false, "Bad attack: "+attackID)
 	
 	setPlayerAsAttacker()
-	var text = GM.ui.processString(attack.doAttack(GM.pc, enemyCharacter, attackData))
-	var attackSoloAnim = attack.getAttackSoloAnimation()
-	if(attackSoloAnim != null && attackSoloAnim != ""):
-		GM.main.playAnimation(StageScene.Solo, attackSoloAnim)
+	
+	var result = attack.doAttack(GM.pc, enemyCharacter, attackData)
+	result["text"] = GM.ui.processString(result["text"])
+	
+	GM.main.playAnimation(StageScene.Duo, result["attackerAnimation"], {npc=enemyID, npcAction=result["receiverAnimation"]})
 	
 	var expData = attack.getExperience()
 	for expAdd in expData:
 		GM.pc.addSkillExperience(expAdd[0], expAdd[1])
 	
-	return text
-
-func getBestAIAttack():
-	var savedAttacks = []
-	var savedAttacksWeights = []
-	
-	var attacks = enemyCharacter.getAttacks()
-	
-	for attackID in attacks:
-		if(attackID is Dictionary):
-			attackID = attackID["attackID"]
-		var attack: Attack = GlobalRegistry.getAttack(attackID)
-		if(attack == null):
-			assert(false, "Bad attack: "+attackID)
-		if(attack.canUse(enemyCharacter, GM.pc)):
-			savedAttacks.append(attackID)
-			savedAttacksWeights.append(attack.getAIScore(enemyCharacter, GM.pc))
-	
-	if(savedAttacks.size() == 0):
-		print("Error: Couldn't find any possible attacks for the enemy")
-		return "blunderAttack"
-	
-	return RNG.pickWeighted(savedAttacks, savedAttacksWeights)
+	return result["text"]
 	
 func aiTurn():
 	if(enemyCharacter.getPain() >= enemyCharacter.painThreshold() || enemyCharacter.getLust() >= enemyCharacter.lustThreshold()):
@@ -475,63 +571,170 @@ func aiTurn():
 		if(strategyText != null && strategyText != ""):
 			enemyText += GM.ui.processString(strategyText) + "\n\n"
 	
-	var attackID: String = ""
-	var attack: Attack
-	if(enemyAIStrategy != null):
-		attackID = enemyAIStrategy.getNextAttackFinal(GM.pc)
-		attack = GlobalRegistry.getAttack(attackID)
-	if(attack == null):
-		Log.printerr("Bad attack "+str(attackID))
-		attackID = "blunderAttack"
-		attack = GlobalRegistry.getAttack(attackID)
+	var actionData = enemyAIStrategy.getNextActionFinal(GM.pc)
+	var actionType = actionData["action"]
+	
+	if(actionType == "struggle"):
+		var item:ItemBase = actionData["item"]
+		var restraintData = item.getRestraintData()
 		
-	if(!attack.canBeDodgedByPlayer(enemyCharacter, GM.pc)):	
-		enemyText += GM.ui.processString(attack.doAttack(enemyCharacter, GM.pc))
+		var minigameStatus = 1.0
+		if(restraintData.shouldDoStruggleMinigame(enemyCharacter)):
+			minigameStatus = clamp(enemyCharacter.getRestraintStrugglingMinigameResult(), 0.0, 1.0) * 2.0 * enemyCharacter.getRestraintStrugglePower()
+		
+		var damage = 0.0
+		var addLust = 0
+		var addPain = 0
+		var addStamina = 0
+		
+		var struggleData = restraintData.doStruggle(enemyCharacter, minigameStatus)
+		if(struggleData.has("damage")):
+			damage = struggleData["damage"] * minigameStatus
+		if(struggleData.has("lust") && struggleData["lust"] > 0):
+			addLust = struggleData["lust"]
+		if(struggleData.has("pain") && struggleData["pain"] > 0):
+			addPain = struggleData["pain"]
+		if(struggleData.has("stamina") && struggleData["stamina"] != 0):
+			addStamina = struggleData["stamina"]
+		
+		var struggleText = GM.ui.processString(struggleData["text"], {"user":"attacker"})
+		enemyText += struggleText + "\n\n"
+		
+		if(damage != 0.0):
+			restraintData.takeDamage(damage)
+			enemyText += ("{attacker.name} made "+str(Util.roundF(damage*100.0, 1))+"% of progress\n")
+		if(addLust != 0):
+			addLust = enemyCharacter.receiveDamage(DamageType.Lust, addLust)
+			enemyText += ("{attacker.name} received "+str(addLust)+" lust\n")
+		if(addPain != 0):
+			addPain = enemyCharacter.receiveDamage(DamageType.Physical, addPain)
+			enemyText += ("{attacker.name} received "+str(addPain)+" pain\n")
+		if(addStamina != 0):
+			enemyCharacter.addStamina(-addStamina)
+			
+			if(addStamina < 0):
+				enemyText += ("{attacker.name} gained "+str(-addStamina)+" stamina\n")
+			else:
+				enemyText += ("{attacker.name} used "+str(addStamina)+" stamina\n")
+		
+		if(restraintData.shouldBeRemoved()):
+			enemyText += "[b]"+restraintData.getRemoveMessage()+"[/b]\n"
+			restraintData.onStruggleRemoval()
+			enemyCharacter.getInventory().removeEquippedItem(item)
+			
+			var recoverChance = GM.pc.getBuffsHolder().getCustom(BuffAttribute.RestraintRecovery) * 100.0
+			if(!restraintData.alwaysBreaksWhenStruggledOutOf() && RNG.chance(recoverChance)):
+				GM.pc.getInventory().addItem(item)
+				addMessage("You recovered "+item.getAStackName())
+			#elif(recoverChance > 0):
+			#	addMessage("You lost "+item.getAStackName())
+		var restraintsAmount = enemyCharacter.getInventory().getEquppedRestraints().size()
+		if(enemyCharacter.shouldReactToRestraint(restraintData.getRestraintType(), restraintsAmount, false)):
+			var reaction = enemyCharacter.reactRestraint(restraintData.getRestraintType(), restraintsAmount, false)
+			if(reaction != null && reaction != ""):
+				enemyText += "[say="+str(enemyID)+"]"+str(reaction)+"[/say]"
+
+		enemyText = enemyText.rstrip("\n")
+		
+	elif(actionType == "attack"):
+	
+		var attackID: String = actionData["attackID"]
+		var attack: Attack = GlobalRegistry.getAttack(attackID)
+
+		if(attack == null):
+			Log.printerr("Bad attack "+str(attackID))
+			attackID = "blunderAttack"
+			attack = GlobalRegistry.getAttack(attackID)
+			
+		if(!attack.canBeDodgedByPlayer(enemyCharacter, GM.pc)):	
+			
+			var result = attack.doAttack(enemyCharacter, GM.pc)
+			result["text"] = GM.ui.processString(result["text"])
+				
+			GM.main.playAnimation(StageScene.Duo, result["receiverAnimation"], {npc=enemyID, npcAction=result["attackerAnimation"]})
+			
+			enemyText += result["text"]
+		else:
+			savedAIAttackID = attackID
+			setState("playerMustDodge")
+	elif(actionType == "wait"):
+		enemyText += "{attacker.name} decided to wait"
+	elif(actionType == "stunned"):
+		enemyText += "{attacker.name} couldn't do anything because {attacker.he} was stunned"
+	elif(actionType == "surrender"):
+		if(actionData.has("reason")):
+			enemyText += "{attacker.name} surrendered. Reason: "+str(actionData["reason"])
+		else:
+			enemyText += "{attacker.name} surrendered"
+		enemySurrendered = true
 	else:
-		savedAIAttackID = attackID
-		setState("playerMustDodge")
+		enemyText += "{attacker.name} couldn't decide what to do"
 	
 	return enemyText
 
-func beforeTurnChecks():
+func beforeTurnChecks(pcWasStruggling = false):
 	whatPlayerDid = ""
 	whatEnemyDid = ""
 	whatHappened = ""
+	lastPlayerAttackData = null
 	
 	GM.pc.processBattleTurn()
 	enemyCharacter.processBattleTurn()
 	
-	var turnData = GM.pc.processStruggleTurn()
-	#var damage = turnData["damage"]
-	var addLust = turnData["lust"]
-	var addPain = turnData["pain"]
-	var addStamina = turnData["stamina"]
-	var additionalStruggleText = turnData["text"]
+	if(true):
+		var turnData = GM.pc.processStruggleTurn(pcWasStruggling)
+		var addLust = turnData["lust"]
+		var addPain = turnData["pain"]
+		var addStamina = turnData["stamina"]
+		var additionalStruggleText = turnData["text"]
+		
+		if(addLust != 0):
+			addLust = GM.pc.receiveDamage(DamageType.Lust, addLust)
+			addMessage("You received "+str(addLust)+" lust")
+		if(addPain != 0):
+			addPain = GM.pc.receiveDamage(DamageType.Physical, addPain)
+			addMessage("You received "+str(addPain)+" pain")
+		if(addStamina != 0):
+			GM.pc.addStamina(-addStamina)
+			if(addStamina < 0):
+				addMessage("You gained "+str(-addStamina)+" stamina")
+			else:
+				addMessage("You used "+str(addStamina)+" stamina")
+		
+		if(additionalStruggleText != null && additionalStruggleText != ""):
+			whatHappened += "[i]"+GM.ui.processString(additionalStruggleText, {"user":"pc"})+"[/i]\n"
 	
-	#if(damage != 0.0):
-	#	restraintData.takeDamage(damage)
-	if(addLust != 0):
-		addLust = GM.pc.receiveDamage(DamageType.Lust, addLust)
-		addMessage("You received "+str(addLust)+" lust")
-	if(addPain != 0):
-		addPain = GM.pc.receiveDamage(DamageType.Physical, addPain)
-		addMessage("You received "+str(addPain)+" pain")
-	if(addStamina != 0):
-		GM.pc.addStamina(-addStamina)
-		if(addStamina < 0):
-			addMessage("You gained "+str(-addStamina)+" stamina")
-		else:
-			addMessage("You used "+str(addStamina)+" stamina")
+	if(true):
+		var turnData = enemyCharacter.processStruggleTurn(true)
+		var addLust = turnData["lust"]
+		var addPain = turnData["pain"]
+		var addStamina = turnData["stamina"]
+		var additionalStruggleText = turnData["text"]
+		
+		if(addLust != 0):
+			addLust = enemyCharacter.receiveDamage(DamageType.Lust, addLust)
+			addMessage("Enemy received "+str(addLust)+" lust")
+		if(addPain != 0):
+			addPain = enemyCharacter.receiveDamage(DamageType.Physical, addPain)
+			addMessage("Enemy received "+str(addPain)+" pain")
+		if(addStamina != 0):
+			enemyCharacter.addStamina(-addStamina)
+			if(addStamina < 0):
+				addMessage("Enemy gained "+str(-addStamina)+" stamina")
+			else:
+				addMessage("Enemy used "+str(addStamina)+" stamina")
+		
+		if(additionalStruggleText != null && additionalStruggleText != ""):
+			whatHappened += "[i]"+GM.ui.processString(additionalStruggleText, {"user": enemyID})+"[/i]\n"
 	
-	if(additionalStruggleText != null && additionalStruggleText != ""):
-		whatHappened += "[i]"+additionalStruggleText+"[/i]"
-	
+	whatHappened = whatHappened.rstrip("\n")
 	if(state == ""):
 		setState("fighting")
 
 func afterTurnChecks():
 	#GM.pc.processBattleTurn()
 	#enemyCharacter.processBattleTurn()
+	enemyCharacter.updateNonBattleEffects()
 	GM.pc.updateNonBattleEffects()
 	
 	var won = checkEnd()
@@ -541,23 +744,38 @@ func afterTurnChecks():
 		setState("win")
 
 func checkEnd():
+	if(enemySurrendered):
+		if(whatHappened != ""):
+			whatHappened += "\n"
+		whatHappened += "Enemy surrendered, you win the fight\n"
+		battleState = "win"
+		battleEndedHow = "surrendered"
+		return "win"
 	if(enemyCharacter.getPain() >= enemyCharacter.painThreshold()):
+		if(whatHappened != ""):
+			whatHappened += "\n"
 		whatHappened += "Enemy is in too much pain to continue\n"
 		battleState = "win"
 		battleEndedHow = "pain"
 		return "win"
 	if(enemyCharacter.getLust() >= enemyCharacter.lustThreshold()):
+		if(whatHappened != ""):
+			whatHappened += "\n"
 		whatHappened += "Enemy is too aroused to continue\n"
 		battleState = "win"
 		battleEndedHow = "lust"
 		return "win"
 	if(GM.pc.getPain() >= GM.pc.painThreshold()):
+		if(whatHappened != ""):
+			whatHappened += "\n"
 		whatHappened += "You succumb to pain\n"
 		battleState = "lost"
 		battleEndedHow = "pain"
 		GM.main.playAnimation(StageScene.Solo, "defeat")
 		return "lost"
 	if(GM.pc.getLust() >= GM.pc.lustThreshold()):
+		if(whatHappened != ""):
+			whatHappened += "\n"
 		whatHappened += "You're too aroused to continue\n"
 		battleState = "lost"
 		battleEndedHow = "lust"
@@ -581,10 +799,17 @@ func pcHasAnyAttacksOfCategory(category):
 
 func addAttackButtons(category):
 	var playerAttacks = GM.pc.getAttacks()
-	for attackData in playerAttacks:
-		var attackID = attackData
-		if(attackData is Dictionary):
-			attackID = attackData["attackID"]
+	for attackDataOrString in playerAttacks:
+		var attackID
+		var attackData : Dictionary
+		
+		if(attackDataOrString is String):
+			attackData = {"attackID" : attackDataOrString}
+			attackID = attackDataOrString
+		else:
+			attackData = attackDataOrString
+			attackID = attackDataOrString["attackID"]
+		
 		var attack: Attack = GlobalRegistry.getAttack(attackID)
 		if(attack == null):
 			assert(false, "Bad attack: "+attackID)
@@ -592,8 +817,6 @@ func addAttackButtons(category):
 			continue
 			
 		var desc = attack.getRequirementsColorText(GM.pc, enemyCharacter)
-		#if(desc != ""):
-		#	desc += "\n"
 		desc += attack.getVisibleDesc(attackData)
 			
 		if(attack.canUse(GM.pc, enemyCharacter, attackData)):
@@ -620,7 +843,7 @@ func resolveCustomCharacterName(_charID):
 func _react_scene_end(_tag, _result):
 	if(_tag == "struggle_scene"):
 		setState("fighting")
-		beforeTurnChecks()
+		beforeTurnChecks(true)
 		
 		whatEnemyDid += aiTurn()
 
@@ -644,6 +867,9 @@ func saveData():
 	data["battleName"] = battleName
 	data["currentAttackerID"] = currentAttackerID
 	data["currentReceiverID"] = currentReceiverID
+	data["restraintIdsForcedByPC"] = restraintIdsForcedByPC
+	data["enemySurrendered"] = enemySurrendered
+	data["lastPlayerAttackData"] = lastPlayerAttackData
 	
 	if(enemyAIStrategy != null):
 		data["enemyStrategyData"] = enemyAIStrategy.saveData()
@@ -665,6 +891,9 @@ func loadData(data):
 	battleName = SAVE.loadVar(data, "battleName", "")
 	currentAttackerID = SAVE.loadVar(data, "currentAttackerID", "")
 	currentReceiverID = SAVE.loadVar(data, "currentReceiverID", "")
+	restraintIdsForcedByPC = SAVE.loadVar(data, "restraintIdsForcedByPC", [])
+	enemySurrendered = SAVE.loadVar(data, "enemySurrendered", false)
+	lastPlayerAttackData = SAVE.loadVar(data, "lastPlayerAttackData", null)
 	
 	enemyAIStrategy = enemyCharacter.getAiStrategy(battleName)
 	enemyAIStrategy.setCharacterID(enemyID)

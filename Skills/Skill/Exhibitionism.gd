@@ -11,3 +11,10 @@ func getShortName():
 	
 func getVisibleDescription():
 	return "Shows how used you are to being completely naked in public"
+
+func getPerkTiers():
+	return [
+		[0],
+		[5],
+		[10],
+	]

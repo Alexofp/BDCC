@@ -7,6 +7,7 @@ signal levelChanged
 signal skillLevelChanged(skillID)
 signal bodypart_changed
 signal orificeBecomeMoreLoose(orificeName, newvalue, oldvalue)
+signal exchangedCumDuringRubbing(senderName, receiverName)
 #signal soft_doll_update
 
 var pain:int = 0
@@ -232,16 +233,10 @@ func getArmor(_damageType):
 	var armor = 0
 	if(isBlocking()):
 		if(_damageType == DamageType.Physical):
-			if(hasPerk(Perk.CombatBetterBlock)):
-				armor += 50
-			else:
-				armor += 20
+			armor += getBlockArmor()
 	if(isDefocusing()):
 		if(_damageType == DamageType.Lust):
-			if(hasPerk(Perk.SexBetterDefocus)):
-				armor += 50
-			else:
-				armor += 20
+			armor += getDefocusArmor()
 	
 	armor += buffsHolder.getArmor(_damageType)
 	
@@ -420,6 +415,14 @@ func getChatColor():
 
 func formatSay(text):
 	var color = getChatColor()
+	if(GM.ui != null):
+		text = GM.ui.processString(text)
+	
+	if(isGagged() && GM.pc.hasPerk(Perk.BDSMGagTalk)):
+		return "[color="+color+"]\""+Util.muffledSpeech(text)+"\" ("+text+")[/color]"
+	
+	if(isGagged()):
+		text = Util.muffledSpeech(text)
 	
 	return "[color="+color+"]\""+text+"\"[/color]"
 
@@ -527,10 +530,13 @@ func getLustInterests() -> LustInterests:
 func getSkillsHolder() -> SkillsHolder:
 	return skillsHolder
 
+func getBuffsHolder() -> BuffsHolder:
+	return buffsHolder
+
 func addExperience(newexp: int):
 	skillsHolder.addExperience(newexp)
 
-func addSkillExperience(skillID, amount, activityID = null):
+func addSkillExperience(skillID, amount:int, activityID = null):
 	skillsHolder.addSkillExperience(skillID, amount, activityID)
 
 func hasPerk(perkID):
@@ -785,6 +791,25 @@ func cummedInAnusBy(characterID, sourceType = null):
 func cummedInMouthBy(characterID, sourceType = null):
 	cummedInBodypartBy(BodypartSlot.Head, characterID, sourceType)
 
+func rubsVaginasWith(characterID, chanceToStealCum = 100, showMessages = true):
+	if(!RNG.chance(chanceToStealCum) || !OPTIONS.isContentEnabled(ContentType.CumStealing)):
+		return
+	
+	if(!hasBodypart(BodypartSlot.Vagina)):
+		return
+	var ch = GlobalRegistry.getCharacter(characterID)
+	if(ch == null || !ch.hasBodypart(BodypartSlot.Vagina)):
+		return
+	
+	var orifice: Orifice = getBodypart(BodypartSlot.Vagina).getOrifice()
+	var npcOrifice: Orifice = ch.getBodypart(BodypartSlot.Vagina).getOrifice()
+	if(orifice == null || npcOrifice == null):
+		return
+	
+	var success = orifice.shareFluids(npcOrifice, RNG.randf_range(0.2, 0.4))
+	if(showMessages && success):
+		emit_signal("exchangedCumDuringRubbing", getName(), ch.getName())
+
 func getGenitalElasticity():
 	var value = 0.0
 	value += buffsHolder.getGenitalElasticity()
@@ -824,6 +849,8 @@ func gotFuckedBy(bodypartSlot, characterID, showMessages = true):
 	var ch = GlobalRegistry.getCharacter(characterID)
 	assert(ch != null)
 	gotOrificeStretchedWith(bodypartSlot, ch.getPenisSize(), showMessages)
+	addStamina(buffsHolder.getCustom(BuffAttribute.StaminaRecoverAfterSex))
+	ch.addStamina(ch.getBuffsHolder().getCustom(BuffAttribute.StaminaRecoverAfterSex))
 
 func gotVaginaFuckedBy(characterID, showMessages = true):
 	return gotFuckedBy(BodypartSlot.Vagina, characterID, showMessages)
@@ -887,6 +914,11 @@ func isPregnant():
 func isVisiblyPregnant():
 	if(menstrualCycle != null):
 		return menstrualCycle.isVisiblyPregnant()
+	return false
+
+func isVisiblyPregnantFromPlayer():
+	if(menstrualCycle != null):
+		return menstrualCycle.isVisiblyPregnantFromPlayer()
 	return false
 
 func isHeavilyPregnant():
@@ -1148,7 +1180,7 @@ func softUpdateDoll(doll: Doll3D):
 	var cumInflationLevel = getCumInflationLevel()
 	pregnancyValue += clamp(cumInflationLevel / 2.0, 0.0, 1.0)
 	
-	doll.setPregnancy(clamp(pregnancyValue, 0.0, 1.1))
+	doll.setPregnancy(clamp(pregnancyValue, -0.5, 1.1))
 	
 	if(thicknessNorm <= 0.5):
 		doll.setButtScale(1.0 - 0.2 * (1.0 - thicknessNorm * 2))
@@ -1230,3 +1262,133 @@ func getSkillExperienceMult(skill):
 	mult += buffsHolder.getSkillExperienceMult(skill)
 
 	return mult
+
+func addTallymark(zone):
+	addEffect(StatusEffect.HasTallyMarks, [zone])
+
+func addTallymarkPickBestZone(zonelist):
+	addEffect(StatusEffect.HasTallyMarks, [zonelist])
+
+func addTallymarkFace():
+	addTallymarkPickBestZone([
+		BodyWritingsZone.CheekLeft,
+		BodyWritingsZone.CheekRight,
+	])
+
+func addTallymarkCrotch():
+	addTallymarkPickBestZone([
+		BodyWritingsZone.LowerAbdomen,
+		BodyWritingsZone.HipLeft,
+		BodyWritingsZone.HipRight,
+		BodyWritingsZone.ButtcheekLeft,
+		BodyWritingsZone.ButtcheekRight,
+		BodyWritingsZone.ThighLeft,
+		BodyWritingsZone.ThighRight,
+	])
+
+func addTallymarkButt():
+	addTallymarkCrotch()
+
+func hasTallymarks():
+	return hasEffect(StatusEffect.HasTallyMarks)
+
+func clearTallymarks():
+	removeEffect(StatusEffect.HasTallyMarks)
+
+func addBodywriting(zone, writingID):
+	addEffect(StatusEffect.HasBodyWritings, [zone, writingID])
+
+func hasBodywritings():
+	return hasEffect(StatusEffect.HasBodyWritings)
+
+func clearBodywritings():
+	removeEffect(StatusEffect.HasBodyWritings)
+
+func hasBoundArms():
+	return buffsHolder.hasBuff(Buff.RestrainedArmsBuff)
+
+func hasBlockedHands():
+	return buffsHolder.hasBuff(Buff.BlockedHandsBuff)
+
+func hasBoundLegs():
+	return buffsHolder.hasBuff(Buff.RestrainedLegsBuff)
+
+func isBlindfolded():
+	return buffsHolder.hasBuff(Buff.BlindfoldBuff)
+
+func isBitingBlocked():
+	return buffsHolder.hasBuff(Buff.GagBuff) || buffsHolder.hasBuff(Buff.RingGagBuff) || buffsHolder.hasBuff(Buff.MuzzleBuff)
+
+func isGagged():
+	return buffsHolder.hasBuff(Buff.GagBuff) || buffsHolder.hasBuff(Buff.RingGagBuff)
+
+func isOralBlocked():
+	return buffsHolder.hasBuff(Buff.GagBuff) || buffsHolder.hasBuff(Buff.MuzzleBuff)
+
+func invCanEquipSlot(slot):
+	if(slot == InventorySlot.Penis && !hasPenis()):
+		return false
+	if(slot == InventorySlot.Vagina && !hasVagina()):
+		return false
+	
+	return true
+
+func getRestraintResistance():
+	return 0.9
+
+func getRestraintStrugglePower():
+	return 1.0
+
+func getRestraintStrugglingMinigameResult():
+	return RNG.randf_range(0.8, 1.1)
+
+func processStruggleTurn(isActivelyStruggling = false):
+	var texts = []
+	var damage = 0.0
+	var addLust = 0
+	var addPain = 0
+	var addStamina = 0
+	
+	for item in getInventory().getEquppedRestraints():
+		var restraintData: RestraintData = item.getRestraintData()
+		var struggleData = restraintData.processStruggleTurn(self, isActivelyStruggling)
+		
+		if(struggleData == null):
+			continue
+			
+		if(struggleData.has("damage")):
+			damage += struggleData["damage"]
+		if(struggleData.has("lust")):
+			addLust += struggleData["lust"]
+		if(struggleData.has("pain")):
+			addPain += struggleData["pain"]
+		if(struggleData.has("stamina")):
+			addStamina += struggleData["stamina"]
+		if(struggleData.has("text")):
+			texts.append(struggleData["text"])
+			#additionalStruggleText += struggleData["text"] + "\n\n"
+		
+	return {"damage": damage, "lust": addLust, "pain": addPain, "stamina": addStamina, "text": Util.join(texts, "\n\n")}
+
+func getCustomAttribute(id):
+	return buffsHolder.getCustom(id)
+
+func getBlockArmor() -> int:
+	return 20 + buffsHolder.getCustom(BuffAttribute.BlockArmor)
+
+func getDefocusArmor() -> int:
+	return 20 + buffsHolder.getCustom(BuffAttribute.DefocusArmor)
+
+func isBodypartCovered(bodypartSlot):
+	var coveredParts = {}
+	
+	var equippedItems = inventory.getAllEquippedItems()
+	for inventorySlot in equippedItems:
+		var item = equippedItems[inventorySlot]
+		var itemCovers = item.coversBodyparts()
+		for itemCover in itemCovers:
+			coveredParts[itemCover] = true
+	
+	if(coveredParts.has(bodypartSlot) && coveredParts[bodypartSlot]):
+		return true
+	return false

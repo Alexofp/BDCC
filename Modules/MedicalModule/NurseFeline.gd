@@ -77,7 +77,7 @@ func getFightIntro(_battleName):
 	return "The nurse prepares to fight"
 	
 func getLootTable(_battleName):
-	return GuardLoot.new()
+	return MedicalLoot.new()
 
 func getThickness() -> int:
 	return 110

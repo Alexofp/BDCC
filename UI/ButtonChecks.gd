@@ -20,6 +20,7 @@ enum {
 	NotStunned,
 	HasStamina,
 	HasCredits,
+	ContentEnabled,
 }
 
 static func getReasonText(reason):
@@ -60,6 +61,8 @@ static func getReasonText(reason):
 		return "You don't have any stamina to do this"
 	if(reason == HasCredits):
 		return "You need more credits!"
+	if(reason == ContentEnabled):
+		return ""
 	return "Error?"
 
 static func check(checks: Array):
@@ -123,6 +126,9 @@ static func check(checks: Array):
 		if(reason == HasCredits):
 			if(GM.pc.getCredits() < args[1]):
 				return reason
+		if(reason == ContentEnabled):
+			if(!OPTIONS.isContentEnabled(args[1])):
+				return args
 	return null
 
 static func getPrefix(checks: Array):
@@ -143,6 +149,10 @@ static func getPrefix(checks: Array):
 		if(reason == PerkCheck):
 			var perk: PerkBase = GlobalRegistry.createPerk(args[1])
 			result += "["+perk.getVisibleName()+" perk]"
+			
+		if(reason == ContentEnabled):
+			var contentName = ContentType.getVisibleName(args[1])
+			result += "["+str(contentName)+" content]"
 	
 	if(result != ""):
 		result += " "

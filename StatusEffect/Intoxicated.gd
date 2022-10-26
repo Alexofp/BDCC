@@ -24,7 +24,7 @@ func getEffectDesc():
 
 	var text = "You are "+str(round(intoxication*100.0))+"% intoxicated."
 	
-	if(intoxication >= 0.4):
+	if(intoxication >= 0.7):
 		text += " You can barely stand on your feet."
 	elif(intoxication >= 0.4):
 		text += " You feel drunk."
@@ -43,7 +43,13 @@ func combine(_args = []):
 func getBuffs():
 	var intoxication: float = character.getIntoxicationLevel()
 	
-	if(intoxication >= 0.8):
+	if(intoxication >= 0.7):
+		if(character.hasPerk(Perk.SexIntoxicationBonus)):
+			return [
+				buff(Buff.ExposureBuff, [100]),
+				buff(Buff.ReceivedLustDamageBuff, [20]),
+				buff(Buff.LustDamageBuff, [10]),
+			]
 		return [
 			buff(Buff.ExposureBuff, [100]),
 			buff(Buff.ReceivedLustDamageBuff, [40]),

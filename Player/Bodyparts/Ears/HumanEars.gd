@@ -5,7 +5,7 @@ func _init():
 	id = "humanears"
 
 func getCompatibleSpecies():
-	return [Species.Human]
+	return [Species.Human, Species.Demon]
 
 func getHybridPriority():
 	return -1

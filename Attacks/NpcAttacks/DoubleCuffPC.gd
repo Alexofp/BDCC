@@ -23,7 +23,10 @@ func _doAttack(_attacker, _receiver, _context = {}):
 	_receiver.getInventory().forceEquipStoreOtherUnlessRestraint(GlobalRegistry.createItem("inmateanklecuffs"))
 	_receiver.addEffect(StatusEffect.Collapsed)
 	
-	return "{attacker.name} manages to bring you down to the floor. Then {attacker.he} pulls two sets of cuffs and [b]restraints your arms and legs[/b]! You manage to shake {attacker.him} off but you are still on the floor."
+	var text = "{attacker.name} manages to bring you down to the floor. Then {attacker.he} pulls two sets of cuffs and [b]restraints your arms and legs[/b]! You manage to shake {attacker.him} off but you are still on the floor."
+	return {
+		text = text
+	}
 	
 func _canUse(_attacker, _receiver, _context = {}):
 	return _receiver.isPlayer() && !_receiver.hasBoundArms() && !_receiver.hasBoundLegs()
@@ -35,3 +38,6 @@ func getAnticipationText(_attacker, _receiver):
 		"Give up and you might even get to enjoy it.",
 		"Ready to be pacified?",
 	])+"[/say]"
+
+func getRequirements():
+	return [AttackRequirement.FreeArms, AttackRequirement.FreeHands]

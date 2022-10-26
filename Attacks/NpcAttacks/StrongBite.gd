@@ -19,11 +19,12 @@ func _doAttack(_attacker, _receiver, _context = {}):
 		return genericDodgeMessage(_attacker, _receiver)
 	
 	var text = "{attacker.name} manages to bite {receiver.name}, making them [color=red]bleed[/color]!"
-	var _damage = doDamage(_attacker, _receiver, DamageType.Physical, RNG.randi_range(50, 60))
-	text += " " + receiverDamageMessage(DamageType.Physical, _damage)
-	
 	_receiver.addEffect(StatusEffect.Bleeding)
-	return text
+	
+	return {
+		text = text,
+		pain = RNG.randi_range(50, 60),
+	}
 	
 func _canUse(_attacker, _receiver, _context = {}):
 	return true
@@ -31,8 +32,14 @@ func _canUse(_attacker, _receiver, _context = {}):
 func getAnticipationText(_attacker, _receiver):
 	return "{attacker.name} lunges forward at {receiver.name}, trying to sink {attacker.his} sharp fangs into {receiver.him}!"
 
-func getRecieverArmorScaling(_damageType) -> float:
-	if(GM.pc.hasPerk(Perk.SexBiter)):
+func getRecieverArmorScaling(_attacker, _receiver, _damageType) -> float:
+	if(_attacker.hasPerk(Perk.SexBiter)):
 		return 4.0
 	
 	return 10.0
+
+func getAttackSoloAnimation():
+	return "bite"
+
+func getRequirements():
+	return [AttackRequirement.CanBite]

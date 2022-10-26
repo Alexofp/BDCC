@@ -10,8 +10,6 @@ func getVisibleName():
 func getVisibleDescription():
 	return "You're used to the taste of cum and even kinda like it. Fighting while having cum inside your belly will remove [color="+DamageType.getColorString(DamageType.Physical)+"]1 pain[/color] each turn"
 
-func getCost():
-	return 1
 func getSkillTier():
 	return 0
 

@@ -10,8 +10,6 @@ func getVisibleName():
 func getVisibleDescription():
 	return "With all your combat practice you have learned how to fall properly. You will get up with a 100% chance and can even do it the same turn you were knocked down"
 
-func getCost():
-	return 1
 func getSkillTier():
 	return 0
 

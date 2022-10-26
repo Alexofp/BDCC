@@ -38,8 +38,11 @@ func generateRestraintData():
 	restraintData = RestraintBallGag.new()
 	restraintData.setLevel(calculateBestRestraintLevel())
 
-func getForcedOnMessage():
-	return getAStackNameCapitalize()+" was locked around your head. The canine-shaped rubber cock is stretching your throat out!"
+func getForcedOnMessage(isPlayer = true):
+	if(isPlayer):
+		return getAStackNameCapitalize()+" was locked around your head. The canine-shaped rubber cock is stretching your throat out!"
+	else:
+		return getAStackNameCapitalize()+" was locked around {receiver.nameS} head. The canine-shaped rubber cock is stretching {receiver.his} throat out!"
 
 func updateDoll(doll: Doll3D):
 	doll.setState("mouth", "ballgag")

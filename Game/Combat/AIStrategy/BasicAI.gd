@@ -1,5 +1,5 @@
 extends AIStrategyBase
 class_name BasicAI
 
-func getNextAttackID(_enemy):
-	return getBestAttackIDWeighted(_enemy)
+func getNextAttacksWeighted(_enemy):
+	return getBestAttackIDsWeighted(_enemy)

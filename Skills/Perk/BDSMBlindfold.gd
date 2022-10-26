@@ -10,8 +10,6 @@ func getVisibleName():
 func getVisibleDescription():
 	return "You got used to being blindfolded, you learned to not rely on your eyes as much anymore. By using your others senses you can orient yourself in almost any space"
 
-func getCost():
-	return 1
 func getSkillTier():
 	return 0
 

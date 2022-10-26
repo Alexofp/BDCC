@@ -1,0 +1,27 @@
+extends EventBase
+
+func _init():
+	id = "Ch2EnterCorridorEvent"
+
+func registerTriggers(es):
+	es.addTrigger(self, Trigger.EnteringRoom, "eng_bay_corridor")
+	es.addTrigger(self, Trigger.EnteringRoom, "eng_bay_nearbreakroom")
+	
+func run(_triggerID, _args):
+	if(GM.QS.isCompleted("Ch2AlexQuest")):
+		if(GM.pc.getLocation() == "eng_bay_corridor"):
+			addButton("Corridor", "Enter the secure corridor", "entersecure")
+		else:
+			addButton("Corridor", "Leave the secure corridor", "exitsecure")
+
+func getPriority():
+	return 0
+
+func onButton(_method, _args):
+	if(_method == "entersecure"):
+		GM.pc.setLocation("eng_bay_nearbreakroom")
+		GM.main.reRun()
+	if(_method == "exitsecure"):
+		GM.pc.setLocation("eng_bay_corridor")
+		GM.main.reRun()
+

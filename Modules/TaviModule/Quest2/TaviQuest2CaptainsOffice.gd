@@ -188,7 +188,6 @@ func _run():
 		saynn("[say=risha]Now get lost before I change my mind.[/say]")
 
 		# (scene end)
-		saynn("((Tavi's route ends here for now. Expect more in the next big updates!))")
 
 		addButton("Continue", "That was an adventure", "endthescene")
 

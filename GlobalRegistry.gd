@@ -2,7 +2,7 @@ extends Node
 
 var game_version_major = 0
 var game_version_minor = 0
-var game_version_revision = 17
+var game_version_revision = 18
 var game_version_suffix = ""
 
 var currentUniqueID = 0
@@ -35,10 +35,14 @@ var lustActions: Dictionary = {}
 var defaultLustActions: Array = []
 var orgasmLustActions: Array = []
 var lootLists: Dictionary = {}
+var lootListsByCharacter: Dictionary = {}
+var lootListsByBattle: Dictionary = {}
 var fightClubFightersByRank: Dictionary = {}
 var fightClubFighters: Dictionary = {}
 var mapFloors: Dictionary = {}
 var imagePacks: Dictionary = {}
+var worldEdits: Dictionary = {}
+var regularWorldEdits: Array = []
 
 var bodypartStorageNode
 
@@ -626,6 +630,12 @@ func registerModule(path: String):
 func getModules():
 	return modules
 
+func getModule(id):
+	if(!modules.has(id)):
+		Log.printerr("ERROR: module with the id "+id+" wasn't found")
+		return null
+	return modules[id]
+
 func registerQuest(path: String):
 	var item = load(path)
 	var itemObject = item.new()
@@ -876,6 +886,14 @@ func registerLootList(path: String):
 		if(!lootLists.has(id)):
 			lootLists[id] = []
 		lootLists[id].append(itemObject)
+	for id in itemObject.handlesCharacters:
+		if(!lootListsByCharacter.has(id)):
+			lootListsByCharacter[id] = []
+		lootListsByCharacter[id].append(itemObject)
+	for id in itemObject.handlesBattles:
+		if(!lootListsByBattle.has(id)):
+			lootListsByBattle[id] = []
+		lootListsByBattle[id].append(itemObject)
 
 func registerLootListFolder(folder: String):
 	var dir = Directory.new()
@@ -899,6 +917,11 @@ func getLootLists(id: String):
 	if(!lootLists.has(id)):
 		return []
 	return lootLists[id]
+
+func getLootListsByCharacter(charID: String):
+	if(!lootListsByCharacter.has(charID)):
+		return []
+	return lootListsByCharacter[charID]
 
 func registerModulesFolder(folder: String):
 	var dir = Directory.new()
@@ -1012,3 +1035,42 @@ func getImagePack(id: String):
 
 func getImagePacks():
 	return imagePacks
+
+
+
+func registerWorldEdit(path: String):
+	var worldEdit = load(path)
+	var worldEditObject = worldEdit.new()
+	worldEdits[worldEditObject.id] = worldEditObject
+	if(worldEditObject.isRegular):
+		regularWorldEdits.append(worldEditObject)
+
+func registerWorldEditFolder(folder: String):
+	var dir = Directory.new()
+	if dir.open(folder) == OK:
+		dir.list_dir_begin()
+		var file_name = dir.get_next()
+		while file_name != "":
+			if dir.current_is_dir():
+				pass
+				#print("Found directory: " + file_name)
+			else:
+				if(file_name.get_extension() == "gd"):
+					var full_path = folder.plus_file(file_name)
+					#print("Registered world edit: " + full_path)
+					registerWorldEdit(full_path)
+			file_name = dir.get_next()
+	else:
+		Log.printerr("An error occurred when trying to access the path "+folder)
+		
+func getWorldEdit(id: String):
+	if(!worldEdits.has(id)):
+		Log.printerr("ERROR: world edit with the id "+id+" wasn't found")
+		return null
+	return worldEdits[id]
+
+func getWorldEdits():
+	return worldEdits
+
+func getRegularWorldEdits():
+	return regularWorldEdits

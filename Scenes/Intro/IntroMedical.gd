@@ -185,8 +185,6 @@ func _run():
 		aimCamera("intro_elevator")
 		setLocationName("Lift")
 		
-		addCharacter("tavi")
-		
 		saynn("You step into the spacious lift. It’s control panel shows that this prison has quite a few levels to it but their names are shortened to two letters so it's hard to figure out what is what.")
 
 		say("Levels:\n")
@@ -219,6 +217,7 @@ func _run():
 	if(state == "lookaroundmainhall"):
 		aimCamera("hall_mainentrance")
 		setLocationName("Main hall")
+		addCharacter("tavi")
 		
 		saynn("You spot a few inmates around. All sorts of inmates of different species. Some wear orange uniforms, others wear red or pink. Obviously they weren’t told that you’re arriving but you do begin to catch their stares. Almost every inmate is now watching you being led around on a leash, you can hear some voices talking about you but it’s all incomprehensible to you.")
 

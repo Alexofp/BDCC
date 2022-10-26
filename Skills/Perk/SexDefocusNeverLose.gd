@@ -10,8 +10,6 @@ func getVisibleName():
 func getVisibleDescription():
 	return "You learned to control your horny thoughts, while defocusing you will NEVER lose from [color="+DamageType.getColorString(DamageType.Lust)+"]lust[/color] damage as long as you're not at your peak already"
 
-func getCost():
-	return 1
 func getSkillTier():
 	return 0
 

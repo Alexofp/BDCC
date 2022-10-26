@@ -13,6 +13,8 @@ func getRooms():
 	for r in get_children():
 		if(r is SubGameWorld):
 			result.append_array(getRoomsRecursive(r))
+		elif(r is MapDecoration):
+			continue
 		elif(r is GameRoom):
 			result.append(r)
 		
@@ -23,6 +25,8 @@ func getRoomsRecursive(node):
 	for r in node.get_children():
 		if(r is GameRoom):
 			result.append(r)
+		elif(r is MapDecoration):
+			continue
 		else:
 			result.append_array(getRoomsRecursive(r))
 	

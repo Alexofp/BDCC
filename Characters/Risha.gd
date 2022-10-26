@@ -2,9 +2,9 @@ extends Character
 
 func _init():
 	id = "risha"
-	npcLevel = 3
-	npcBasePain = 140
-	npcBaseLust = 70
+	npcLevel = 5
+	npcBasePain = 150
+	npcBaseLust = 120
 	
 	npcLustInterests = {
 		InterestTopic.TallyMarks: Interest.Likes,
@@ -132,3 +132,60 @@ func createBodyparts():
 	giveBodypartUnlessSame(penis)
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("vagina"))
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("shorttail"))
+
+func reactRestraint(restraintType, restraintAmount, isGettingForced):
+	if(!isGettingForced):
+		if(restraintAmount == 0):
+			return RNG.pick([
+				"Haha! Is that all?",
+				"Pathetic attempt",
+				"Now stop trying to tie me up and spread your legs",
+				"Hahaha, cute",
+			])
+		
+		return RNG.pick([
+			"I'm strong, I will rip these in half if I have to",
+			"These won't keep me forever",
+			"This only makes me more horny for that ass",
+		])
+	
+	if(isGettingForced):
+		if(restraintAmount > 2 && RNG.chance(30)):
+			return RNG.pick([
+				"Oh shit, stop",
+				"I can't breed you if I'm tied up",
+				"Bitch, I'm in control here",
+			])
+		
+		if(restraintType == RestraintType.Gag):
+			return RNG.pick([
+				"Hey! Don't fucking gag me",
+				"Oh, I'm so-o-o biting you",
+			])
+		if(restraintType == RestraintType.Muzzle):
+			return RNG.pick([
+				"Hey! Don't fucking muzzle me",
+				"Oh, I'm so-o-o biting you",
+			])
+		if(restraintType == RestraintType.ButtPlug):
+			return RNG.pick([
+				"Fuck!",
+				"My ass!",
+				"Bitch, I will have my revenge on your ass",
+			])
+		if(restraintType == RestraintType.VaginalPlug):
+			return RNG.pick([
+				"Keep these for the sluts!",
+				"I'm not a slut, you are!",
+				"Only sluts use toys. I have the real thing",
+			])
+	
+		return RNG.pick([
+			"Hey! I'm a guard!",
+			"I'm gonna use these against you later",
+			"Don't make me mad",
+			"You can't win like this",
+			"Fight me instead of this shit",
+			"I'm a huge cat, you can't tie me up",
+		])
+	return null

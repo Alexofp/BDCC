@@ -134,3 +134,53 @@ func getAiStrategy(_battleName):
 	var basicAI = LoseEarlyAI.new()
 	basicAI.setCharacterID(id)
 	return basicAI
+
+func reactRestraint(restraintType, restraintAmount, isGettingForced):
+	if(!isGettingForced):
+		if(restraintAmount == 0):
+			return RNG.pick([
+				"Oh, I broke it. Aw",
+				"Your stuff won't work on a mighty dracat!",
+				"Aww. Do you have more?",
+				"Is that all? Mew..",
+			])
+		
+		return RNG.pick([
+			"I will bite chu for this!",
+			"There are no such chains that can stop me!",
+			"Your stuff won't work on a mighty dracat!",
+		])
+	
+	if(isGettingForced):
+		if(restraintAmount > 2 && RNG.chance(30)):
+			return RNG.pick([
+				"Oh.. mew..",
+				"I will so bite you.. when I can, mew..",
+				"You are actually tying me up, huff",
+				"Meeew",
+			])
+		
+		if(restraintType == RestraintType.Gag):
+			return RNG.pick([
+				"Huff. I don't wanna drool!",
+				"I wanted to bite you, not the gag. Mew..",
+			])
+		if(restraintType == RestraintType.Muzzle):
+			return RNG.pick([
+				"Huff. But I wanna bite you..",
+				"Did you just muzzle a mighty dracat.. mew..",
+			])
+		if(restraintType == RestraintType.Straitjacket):
+			return RNG.pick([
+				"Oh.. this is comfy..",
+			])
+	
+		return RNG.pick([
+			"Try to tie me up, I dare you!",
+			"Cute!",
+			"You're very cute!",
+			"Why are you so soft and adorable",
+			"I bet you can't tie up a mighty dracat",
+			"I'm too powerful to be tied up so easily",
+		])
+	return null

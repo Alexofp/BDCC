@@ -49,6 +49,7 @@ func _init():
 		InterestTopic.HasCockOnly: Interest.Loves,
 		InterestTopic.Pregnant: Interest.KindaLikes,
 	}
+	npcHasMenstrualCycle = true
 	
 func interestVerbalReaction(interest):
 	if(interest == InterestTopic.Bodywritings):
@@ -99,6 +100,9 @@ func getFightIntro(_battleName):
 func _getAttacks():
 	return ["biteattack", "stretchingAttack", "lickWounds", "trygetupattack", "ElizaHornyCloud", "ElizaHornyDrug", "ElizaTaunt", "ElizaWeaknessDrug", "NpcScratch", "ForceMuzzlePC"]
 
+func getLootTable(_battleName):
+	return MedicalLoot.new()
+
 func getThickness() -> int:
 	return 75
 
@@ -119,3 +123,60 @@ func createBodyparts():
 	breasts.size = 4
 	giveBodypartUnlessSame(breasts)
 
+func reactRestraint(restraintType, restraintAmount, isGettingForced):
+	if(!isGettingForced):
+		if(restraintAmount == 0):
+			return RNG.pick([
+				"That was a cute attempt",
+				"Adorable~",
+				"Got any more of these?",
+				"That's going into my collection",
+			])
+		
+		return RNG.pick([
+			"Ah..",
+			"This is too much",
+		])
+	
+	if(isGettingForced):
+		if(restraintAmount > 2 && RNG.chance(30)):
+			return RNG.pick([
+				"Oh wow, am I gonna be the rope bunny today?",
+				"Is it weird that I kinda like this?",
+				"How many more do you have?",
+			])
+		
+		if(restraintType == RestraintType.Gag):
+			return RNG.pick([
+				"C'mooon, I can't stop drooling",
+				"This feels weird.. oh, don't listen to me",
+			])
+		if(restraintType == RestraintType.Muzzle):
+			return RNG.pick([
+				"I'm not a dog!",
+				"Why did you muzzle a cat",
+			])
+		if(restraintType == RestraintType.ButtPlug):
+			return RNG.pick([
+				"Ow.. My butt",
+				"Ow! Did you not lube it up?",
+			])
+		if(restraintType == RestraintType.VaginalPlug):
+			return RNG.pick([
+				"Oh.. kinky",
+				"I like playing with toys. But my toys usually talk and squirm.",
+			])
+		if(restraintType == RestraintType.Straitjacket):
+			return RNG.pick([
+				"Hey! Where did you get that? It's our stuff!",
+				"Straitjacket? Really? You're a patient here!",
+			])
+	
+		return RNG.pick([
+			"Are we fighting or doing kinky stuff? Both?",
+			"Kinky..",
+			"I'm not a rope bunny. Am I a bondage cat?",
+			"You're into bondage, huh",
+			"Drugs go well with bondage",
+		])
+	return null

@@ -219,10 +219,11 @@ population = 2
 
 [node name="MedRoom45" parent="." index="24" instance=ExtResource( 2 )]
 position = Vector2( -192, -512 )
-roomName = "Med Floor Corridor"
-roomDescription = "You stand in a wide white corridor, it looks pretty long, every so often you see airlocks that lead to laboratories and other rooms. This part of the medical wing is marked as [color=red]off-limits[/color] for inmates."
+roomName = "Medical Storage"
+roomID = "medical_storage"
+roomDescription = "You enter a room with a lot of storage cabinets and special types of freezers. It seems this is the room where they keep their equipment and drugs"
+roomSprite = 4
 gridColor = 2
-loctag_MentalWard = true
 population = 2
 
 [node name="MedRoom30" parent="." index="25" instance=ExtResource( 2 )]

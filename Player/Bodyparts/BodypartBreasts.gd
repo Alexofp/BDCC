@@ -116,9 +116,8 @@ func getBaseSize():
 func getSize():
 	var resultSize = getBaseSize()
 	
-	# Change to isPregnant check when that's done
-	if(size != BreastsSize.FOREVER_FLAT && fluidProduction != null && fluidProduction.shouldProduce()):
-		resultSize += 1
+	if(size != BreastsSize.FOREVER_FLAT && fluidProduction != null):
+		resultSize = fluidProduction.getOptimalBreastsSize()
 	return resultSize
 
 func safeWhenExposed():

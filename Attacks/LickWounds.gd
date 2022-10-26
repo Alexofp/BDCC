@@ -22,11 +22,15 @@ func _doAttack(_attacker, _receiver, _context = {}):
 	
 	text += " {attacker.name} is feeling better!"
 	
-	return text
+	return {
+		text = text,
+	}
 
 func canBeDodgedByPlayer(_attacker, _receiver):
 	return false
 
 func getRequirements():
-	return [["stamina", 50]]
+	return [[AttackRequirement.Stamina, 50], AttackRequirement.CanBite]
 
+func canSeeAnticipationTextWhenBlind():
+	return true

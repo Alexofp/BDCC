@@ -1,6 +1,7 @@
 extends Object
 class_name Trigger
 
+const SceneAndStateHook = "SceneAndStateHook"
 const EnteringRoom = "EnteringRoom"
 const EnteringPlayerCell = "EnteringPlayerCell"
 const TakingAShower = "TakingAShower"

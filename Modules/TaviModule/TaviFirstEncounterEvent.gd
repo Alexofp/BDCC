@@ -11,6 +11,7 @@ func react(_triggerID, _args):
 		return false
 		
 	GM.main.setModuleFlag("TaviModule", "Tavi_IntroducedTo", true)
+	GM.main.applyWorldEdit("TaviWorldEdit")
 	runScene("TaviFirstEncounterScene")
 	return true
 

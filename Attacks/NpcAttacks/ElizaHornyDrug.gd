@@ -19,12 +19,16 @@ func _doAttack(_attacker, _receiver, _context = {}):
 		return genericDodgeMessage(_attacker, _receiver)
 	
 	var text = "{attacker.name} manages to stick a syringe into your neck! You feel so warm, your crotch is burning, you can’t stop touching yourself in front of {attacker.name}, you really need to have sex!"
-	var _damage = doDamage(_attacker, _receiver, DamageType.Lust, 20)
-	text += " " + receiverDamageMessage(DamageType.Lust, _damage)
-	return text
+	return {
+		text = text,
+		lust = 20,
+	}
 	
 func _canUse(_attacker, _receiver, _context = {}):
 	return true
 
 func getAnticipationText(_attacker, _receiver):
 	return "{attacker.name} grabs a syringe with a pink-colored drug inside off {attacker.his} belt and pounces at you."
+
+func getRequirements():
+	return [AttackRequirement.FreeArms, AttackRequirement.FreeHands]

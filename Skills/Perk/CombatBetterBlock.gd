@@ -5,15 +5,18 @@ func _init():
 	skillGroup = Skill.Combat
 
 func getVisibleName():
-	return "The fortress"
+	return "The wall"
 
 func getVisibleDescription():
-	return "You learned how to block with your hands better, blocking 50% of the physical damage"
+	return "You learned how to block with your hands better. You now receive extra 10 armor when blocking an attack. Each 50 armor halfs the incoming damage."
 
-func getCost():
-	return 1
 func getSkillTier():
 	return 0
 
 func getPicture():
-	return "res://Images/Perks/armor-upgrade.png"
+	return "res://Images/Perks/mansory.png"
+
+func getBuffs():
+	return [
+		buff(Buff.BlockArmorBuff, [10]),
+	]

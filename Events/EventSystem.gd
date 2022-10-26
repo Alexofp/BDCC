@@ -14,6 +14,7 @@ func _ready():
 	registerEventTrigger(Trigger.CaughtOffLimits, EventTriggerWeighted.new())
 	registerEventTrigger(Trigger.MasturbationSpottedGuard, EventTriggerWeighted.new())
 	registerEventTrigger(Trigger.MasturbationSpottedInmate, EventTriggerWeighted.new())
+	registerEventTrigger(Trigger.SceneAndStateHook, EventTriggerSceneHook.new())
 	
 	var modules = GlobalRegistry.getModules()
 	for moduleID in modules:

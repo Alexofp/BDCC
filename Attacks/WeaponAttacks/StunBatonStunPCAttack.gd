@@ -23,13 +23,8 @@ func _doAttack(_attacker, _receiver, _context = {}):
 	if(checkDodged(_attacker, _receiver, DamageType.Physical)):
 		return genericDodgeMessage(_attacker, _receiver)
 	
-	var damage = 0
-	
 	var item = getItem(_context)
 	if(item != null):
-		#var damageRange = item.getDamageRange()
-		damage = doDamage(_attacker, _receiver, DamageType.Physical, RNG.randi_range(5, 10))
-		
 		item.useCharge(2)
 	
 	var texts = [
@@ -39,18 +34,22 @@ func _doAttack(_attacker, _receiver, _context = {}):
 	
 	var text = RNG.pick(texts)
 	
-	text += " "+receiverDamageMessage(DamageType.Physical, damage)
-	
-	return text
+	return {
+		text = text,
+		pain = RNG.randi_range(5, 10),
+	}
 	
 func _canUse(_attacker, _receiver, _context = {}):
-	return true
-
-func getRequirements():
-	return [["freearms"]]
+	return itemExists(_context)
 
 func getAttackSoloAnimation():
 	return "stunbaton"
 
 func getExperience():
 	return [[Skill.Combat, 5]]
+
+func getRecieverArmorScaling(_attacker, _receiver, _damageType) -> float:
+	return 0.1
+
+func getRequirements():
+	return [AttackRequirement.FreeArms, AttackRequirement.FreeHands]

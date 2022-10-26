@@ -10,8 +10,6 @@ func getVisibleName():
 func getVisibleDescription():
 	return "You learned how to struggle out of restraints without breaking them, you can now store them for later use"
 
-func getCost():
-	return 1
 func getSkillTier():
 	return 0
 

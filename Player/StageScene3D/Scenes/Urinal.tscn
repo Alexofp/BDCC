@@ -1,0 +1,71 @@
+[gd_scene load_steps=15 format=2]
+
+[ext_resource path="res://Player/StageScene3D/BaseStageScene3D.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Player/Props/urinal.png" type="Texture" id=2]
+[ext_resource path="res://Player/Player3D/Doll3D.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Player/Props/platform.png" type="Texture" id=4]
+[ext_resource path="res://Player/StageScene3D/Scenes/Urinal.gd" type="Script" id=5]
+
+[sub_resource type="AnimationNodeAnimation" id=3]
+animation = "CuffedArms-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=10]
+animation = "UrinalIdle-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=11]
+animation = "UrinalIdle2-loop"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=12]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=13]
+
+[sub_resource type="AnimationNodeStateMachine" id=9]
+states/UrinalIdle-loop/node = SubResource( 10 )
+states/UrinalIdle-loop/position = Vector2( 313, 107 )
+states/UrinalIdle2-loop/node = SubResource( 11 )
+states/UrinalIdle2-loop/position = Vector2( 531, 107 )
+transitions = [ "UrinalIdle-loop", "UrinalIdle2-loop", SubResource( 12 ), "UrinalIdle2-loop", "UrinalIdle-loop", SubResource( 13 ) ]
+start_node = "UrinalIdle-loop"
+graph_offset = Vector2( -115, -3 )
+
+[sub_resource type="AnimationNodeBlend2" id=4]
+filter_enabled = true
+filters = [ "Doll3D/Skeleton:Arm.L", "Doll3D/Skeleton:Arm.R", "Doll3D/Skeleton:ForeArm.L", "Doll3D/Skeleton:ForeArm.R", "Doll3D/Skeleton:Hand.L", "Doll3D/Skeleton:Hand.R" ]
+
+[sub_resource type="AnimationNodeBlendTree" id=14]
+graph_offset = Vector2( -280.25, -44.2485 )
+nodes/Animation/node = SubResource( 3 )
+nodes/Animation/position = Vector2( 60, 260 )
+nodes/AnimationNodeStateMachine/node = SubResource( 9 )
+nodes/AnimationNodeStateMachine/position = Vector2( 0, 20 )
+nodes/CuffsBlend/node = SubResource( 4 )
+nodes/CuffsBlend/position = Vector2( 320, 120 )
+nodes/output/position = Vector2( 540, 160 )
+node_connections = [ "output", 0, "CuffsBlend", "CuffsBlend", 0, "AnimationNodeStateMachine", "CuffsBlend", 1, "Animation" ]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=15]
+
+[node name="Urinal" instance=ExtResource( 1 )]
+script = ExtResource( 5 )
+
+[node name="Doll3D" parent="." index="0" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.161, -0.327, 0 )
+
+[node name="Sprite3D" type="Sprite3D" parent="." index="1"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.324482, -1.77462 )
+texture = ExtResource( 4 )
+region_enabled = true
+region_rect = Rect2( 1, 1, 1022, 62 )
+
+[node name="Stocks" type="Sprite3D" parent="." index="2"]
+transform = Transform( 1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 1.46655, 3.61363, -1.60034 )
+texture = ExtResource( 2 )
+
+[node name="AnimationTree" type="AnimationTree" parent="." index="3"]
+tree_root = SubResource( 14 )
+anim_player = NodePath("../Doll3D/DollSkeleton/AnimationPlayer")
+parameters/AnimationNodeStateMachine/playback = SubResource( 15 )
+parameters/CuffsBlend/blend_amount = 0.0
+
+[editable path="Doll3D"]
+[editable path="Doll3D/DollSkeleton"]

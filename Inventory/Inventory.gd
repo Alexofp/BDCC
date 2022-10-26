@@ -113,6 +113,15 @@ func getAllCombatUsableItems():
 	
 	return result
 		
+func getAllCombatUsableRestraints():
+	var result = []
+	
+	for item in items:
+		if(item.canForceOntoNpc()):
+			result.append(item)
+		
+	return result
+		
 func canEquipSlot(slot):
 	if(get_parent() != null && get_parent().has_method("invCanEquipSlot")):
 		return get_parent().invCanEquipSlot(slot)
@@ -251,6 +260,13 @@ func clear():
 		#item.queue_free()
 	items.clear()
 	
+	for itemSlot in equippedItems.keys():
+		#equippedItems[itemSlot].queue_free()
+		equippedItems[itemSlot].currentInventory = null
+	equippedItems.clear()
+	emit_signal("equipped_items_changed")
+
+func clearEquippedItems():
 	for itemSlot in equippedItems.keys():
 		#equippedItems[itemSlot].queue_free()
 		equippedItems[itemSlot].currentInventory = null
@@ -420,6 +436,12 @@ func loadDataNPC(data):
 	for item in items:
 		item.currentInventory = null
 	items.clear()
+	for itemSlot in equippedItems.keys():
+		if(equippedItems[itemSlot].uniqueID in [null, ""]):
+			continue
+		equippedItems[itemSlot].currentInventory = null
+		equippedItems.erase(itemSlot)
+	#equippedItems.clear()
 	
 	var loadedItems = SAVE.loadVar(data, "items", [])
 	for loadedItem in loadedItems:
@@ -439,12 +461,25 @@ func loadDataNPC(data):
 	for loadedSlot in loadedEquippedItems:
 		var loadedItem = loadedEquippedItems[loadedSlot]
 		var id = SAVE.loadVar(loadedItem, "id", "")
-		#var uniqueID = SAVE.loadVar(loadedItem, "uniqueID", "")
+		var uniqueID = SAVE.loadVar(loadedItem, "uniqueID", null)
 		var itemLoadedData = SAVE.loadVar(loadedItem, "data", {})
 		
-		if(hasSlotEquipped(loadedSlot)):
-			var currentItem: ItemBase = getEquippedItem(loadedSlot)
-			
-			if(currentItem.id != id):
-				continue
-			currentItem.loadData(itemLoadedData)
+		# Npc's 'default' equipped items
+		if(uniqueID in [null, ""]):
+			if(hasSlotEquipped(loadedSlot)):
+				var currentItem: ItemBase = getEquippedItem(loadedSlot)
+				
+				if(currentItem.id != id):
+					continue
+				currentItem.loadData(itemLoadedData)
+		# Anything player might have forced onto them
+		else:
+			if(!hasSlotEquipped(loadedSlot)):
+				var newItem: ItemBase = GlobalRegistry.createItem(id, false)
+				if(newItem == null):
+					Log.printerr("ITEM WITH ID "+str(id)+" WASN'T FOUND IN REGISTRY")
+					continue
+				newItem.uniqueID = uniqueID
+				newItem.loadData(itemLoadedData)
+				equipItem(newItem)
+	emit_signal("equipped_items_changed")

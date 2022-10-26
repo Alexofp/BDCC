@@ -55,6 +55,7 @@ func run():
 	GM.ui.clearButtons()
 	GM.ui.clearUItextboxes()
 	_run()
+	GM.ES.triggerRun(Trigger.SceneAndStateHook, [sceneID, state])
 	
 	GM.pc.updateEffectPanel(GM.ui.getPlayerStatusEffectsPanel())
 	if(fightCharacter):
@@ -281,6 +282,9 @@ func aimCameraAndSetLocName(roomID: String):
 func getCharacter(charID: String) -> BaseCharacter:
 	return GlobalRegistry.getCharacter(charID)
 
+func getModule(modID: String) -> Module:
+	return GlobalRegistry.getModule(modID)
+
 func getDebugActions():
 	return []
 
@@ -301,6 +305,8 @@ func saveData():
 	data["currentCharactersVariants"] = currentCharactersVariants
 	data["fightCharacter"] = fightCharacter
 	data["sceneTag"] = sceneTag
+	data["sceneEndedFlag"] = sceneEndedFlag
+	data["sceneEndedArgs"] = sceneEndedArgs
 	
 	return data
 
@@ -310,4 +316,6 @@ func loadData(data):
 	currentCharactersVariants = SAVE.loadVar(data, "currentCharactersVariants", {})
 	fightCharacter = SAVE.loadVar(data, "fightCharacter", "")
 	sceneTag = SAVE.loadVar(data, "sceneTag", "")
+	sceneEndedFlag = SAVE.loadVar(data, "sceneEndedFlag", false)
+	sceneEndedArgs = SAVE.loadVar(data, "sceneEndedArgs", null)
 	updateCharacter()

@@ -9,6 +9,7 @@ var floorDict: Dictionary = {}
 const gridsize = 64
 onready var camera = $Camera2D
 var highlightedRoom: Node2D
+var lastAimedRoomID = null
 
 var roomConnectionScene = preload("res://Game/World/RoomConnection.tscn")
 onready var worldFloorScene = load("res://Game/World/WorldFloor.tscn")
@@ -135,12 +136,13 @@ func addTransitions():
 				astar.connect_points(_room.astarID, nextRoom.astarID)
 
 func _exit_tree():
-	assert(GM.world == self)
-	GM.world = null
+	pass
+	#assert(GM.world == self)
+	#GM.world = null
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	assert(GM.world == null)
+	#assert(GM.world == null)
 	GM.world = self
 	astar = AStar2D.new()
 	
@@ -187,6 +189,21 @@ func getRoomByID(id:String):
 		return null
 	return roomDict[id]
 
+func setRoomSprite(id:String, newRoomSprite):
+	var room = getRoomByID(id)
+	if(room != null):
+		room.setRoomSprite(newRoomSprite)
+
+func setRoomColor(id:String, newRoomColor):
+	var room = getRoomByID(id)
+	if(room != null):
+		room.setRoomColor(newRoomColor)
+
+func setRoomGridColor(id:String, newRoomColor):
+	var room = getRoomByID(id)
+	if(room != null):
+		room.setRoomGridColor(newRoomColor)
+
 func hasRoomID(id:String):
 	if(!roomDict.has(id)):
 		return false
@@ -226,7 +243,7 @@ func switchToFloor(floorID):
 		else:
 			floorObject.visible = false
 
-func aimCamera(roomID):
+func aimCamera(roomID, instantly = false):
 	var room = getRoomByID(roomID)
 	
 	if(!room):
@@ -241,7 +258,9 @@ func aimCamera(roomID):
 	highlightedRoom = room
 	highlightedRoom.setHighlighted(true)
 	
-	setDarknessSize(16)
+	lastAimedRoomID = roomID
+	if(instantly):
+		camera.reset_smoothing()
 
 func setDarknessVisible(vis):
 	$CanvasLayer/DarknessControl.visible = vis
@@ -256,3 +275,15 @@ func setDarknessSize(darknessSize):
 	$CanvasLayer/DarknessControl/DBottom.margin_top = darknessSize - 0.5
 	$CanvasLayer/DarknessControl/DLeft.margin_right = -darknessSize + 0.5
 	$CanvasLayer/DarknessControl/DRight.margin_left = darknessSize - 0.5
+
+func saveData():
+	var data = {}
+	data["lastAimedRoomID"] = lastAimedRoomID
+	
+	return data
+	
+func loadData(data):
+	lastAimedRoomID = SAVE.loadVar(data, "lastAimedRoomID", "")
+	
+	if(lastAimedRoomID != null && lastAimedRoomID != ""):
+		aimCamera(lastAimedRoomID, true)

@@ -14,38 +14,32 @@ func getVisibleDesc(_context = {}):
 	return "You do a combo of 2 punches, each one dealing "+scaledDmgRangeStr(DamageType.Physical, 5, 10)+" damage"
 	
 func _doAttack(_attacker, _receiver, _context = {}):
-	var attackerName = _attacker.getName()
-	var receiverName = _receiver.getName()
-	
 	if(checkMissed(_attacker, _receiver, DamageType.Physical)):
-		return attackerName + " tries to punch " + receiverName + " but misses and fails completely"
+		return genericMissMessage(_attacker, _receiver)
 	
 	if(checkDodged(_attacker, _receiver, DamageType.Physical)):
-		return attackerName + " tries to punch " + receiverName + " but " + receiverName + " dodges just in time"
-	
-	var damage = 0
-	damage = doDamage(_attacker, _receiver, DamageType.Physical, RNG.randi_range(5,10))
-	damage += doDamage(_attacker, _receiver, DamageType.Physical, RNG.randi_range(5,10))
-	
+		return genericDodgeMessage(_attacker, _receiver)
+
 	var texts = [
-		attackerName + " manages to land a few strong punches on " + receiverName + ". ",
+		"{attacker.name} manages to land a few strong punches on {receiver.name}",
 	]
 	var text = RNG.pick(texts)
 	
 	if(RNG.chance(50)):
 		if(_attacker.getSkillsHolder().hasPerk(Perk.CombatScratching)):
 			_receiver.addEffect(StatusEffect.Bleeding)
-			text += "Sharp claws caused "+_receiver.himHer() + " to start [color=red]bleeding[/color]. "
+			text += "Sharp claws caused {receiver.him} to start [color=red]bleeding[/color]."
 		
-	text += receiverDamageMessage(DamageType.Physical, damage)
-	
-	return text
+	return {
+		text = text,
+		pain = RNG.randi_range(5,10) + RNG.randi_range(5,10),
+	}
 	
 func _canUse(_attacker, _receiver, _context = {}):
 	return true
 
 func getRequirements():
-	return [["freearms"]]
+	return [AttackRequirement.FreeArms]
 
 func getAttackSoloAnimation():
 	return "punch"

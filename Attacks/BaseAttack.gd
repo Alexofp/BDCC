@@ -20,7 +20,9 @@ func getVisibleDesc(_context = {}):
 	return "Bad attack, let the developer know"
 	
 func _doAttack(_attacker, _receiver, _context = {}):
-	return "Mew happened"
+	return {
+		text = "Bad attack happened, let the developer know",
+	}
 	
 func _canUse(_attacker, _receiver, _context = {}):
 	return true
@@ -28,7 +30,39 @@ func _canUse(_attacker, _receiver, _context = {}):
 	
 func doAttack(_attacker, _receiver, _context = {}):
 	doRequirements(_attacker, _receiver)
-	return _doAttack(_attacker, _receiver, _context)
+	var result = _doAttack(_attacker, _receiver, _context)
+	if(result is String):
+		result = {text="!OLD STYLE!"+result}
+	elif(!result.has("text")):
+		result["text"] = "!No attack text provided!"
+	
+	result["attackerAnimation"] = getAttackSoloAnimation()
+	var receiverAnimation = ""
+	if(_receiver.isBlocking()):
+		receiverAnimation = "block"
+	elif(_receiver.isDodging() || (result.has("dodged") && result["dodged"])):
+		receiverAnimation = "dodge"
+	elif(result.has("pain") && result["pain"] > 0):
+		receiverAnimation = "hurt"
+	result["receiverAnimation"] = receiverAnimation
+	
+	if(result.has("pain")):
+		result["pain"] = calcDamage(_attacker, _receiver, DamageType.Physical, result["pain"])
+		var origDamage = result["pain"]
+		result["pain"] = _receiver.receiveDamage(DamageType.Physical, result["pain"], getRecieverArmorScaling(_attacker, _receiver, DamageType.Physical))
+		result["text"] += " "+receiverDamageMessageShort(DamageType.Physical, result["pain"], origDamage)
+	if(result.has("lust")):
+		result["lust"] = calcDamage(_attacker, _receiver, DamageType.Lust, result["lust"])
+		var origDamage = result["lust"]
+		result["lust"] = _receiver.receiveDamage(DamageType.Lust, result["lust"], getRecieverArmorScaling(_attacker, _receiver, DamageType.Lust))
+		result["text"] += " "+receiverDamageMessageShort(DamageType.Lust, result["lust"], origDamage)
+	if(result.has("stamina")):
+		result["stamina"] = calcDamage(_attacker, _receiver, DamageType.Stamina, result["stamina"])
+		var origDamage = result["stamina"]
+		result["stamina"] = _receiver.receiveDamage(DamageType.Stamina, result["stamina"], getRecieverArmorScaling(_attacker, _receiver, DamageType.Stamina))
+		result["text"] += " "+receiverDamageMessageShort(DamageType.Stamina, result["stamina"], origDamage)
+	
+	return result
 	
 func canUse(_attacker, _receiver, _context = {}):
 	return _canUse(_attacker, _receiver, _context) && meetsRequirements(_attacker, _receiver)
@@ -39,6 +73,8 @@ func getRequirements():
 func meetsRequirements(_attacker, _receiver):
 	var reqs = getRequirements()
 	for req in reqs:
+		if(req is String):
+			req = [req]
 		if(!checkRequirement(_attacker, _receiver, req)):
 			return false
 	
@@ -46,31 +82,34 @@ func meetsRequirements(_attacker, _receiver):
 
 func checkRequirement(_attacker, _receiver, req):
 	var reqtype = req[0]
-	if(reqtype == "stamina"):
+	if(reqtype == AttackRequirement.Stamina):
 		if(_attacker.getStamina() < req[1]):
 			return false
-	if(reqtype == "freearms"):
-		if(_attacker.hasEffect(StatusEffect.ArmsBound)):
+	if(reqtype == AttackRequirement.FreeArms):
+		if(_attacker.hasBoundArms()):
 			return false
-	if(reqtype == "freelegs"):
-		if(_attacker.hasEffect(StatusEffect.LegsBound)):
+	if(reqtype == AttackRequirement.FreeHands):
+		if(_attacker.hasBlockedHands()):
 			return false
-	if(reqtype == "freemouth"):
-		if(_attacker.hasEffect(StatusEffect.Gagged)):
+	if(reqtype == AttackRequirement.FreeLegs):
+		if(_attacker.hasBoundLegs()):
 			return false
-	if(reqtype == "canbite"):
-		if(_attacker.isPlayer() && _attacker.isBitingBlocked()):
+	if(reqtype == AttackRequirement.CanTalk):
+		if(_attacker.isGagged()):
 			return false
-	if(reqtype == "coveredincum"):
+	if(reqtype == AttackRequirement.CanBite):
+		if(_attacker.isBitingBlocked()):
+			return false
+	if(reqtype == AttackRequirement.CoveredInCum):
 		if(!_attacker.hasEffect(StatusEffect.CoveredInCum)):
 			return false
-	if(reqtype == "lustabove"):
+	if(reqtype == AttackRequirement.LustAbove):
 		if(_attacker.getLust() < req[1]):
 			return false
-	if(reqtype == "lustabovepercent"):
+	if(reqtype == AttackRequirement.LustAbovePercent):
 		if(_attacker.getLustLevel() < req[1]):
 			return false
-	if(reqtype == "hasmilk"):
+	if(reqtype == AttackRequirement.HasMilk):
 		if(_attacker.getBodypart(BodypartSlot.Breasts).getProducedFluidAmount() < req[1]):
 			return false
 			
@@ -78,34 +117,38 @@ func checkRequirement(_attacker, _receiver, req):
 
 func doRequirement(_attacker, _receiver, req):
 	var reqtype = req[0]
-	if(reqtype == "stamina"):
+	if(reqtype == AttackRequirement.Stamina):
 		_attacker.addStamina(-req[1])
 
 func doRequirements(_attacker, _receiver):
 	var reqs = getRequirements()
 	for req in reqs:
+		if(req is String):
+			req = [req]
 		doRequirement(_attacker, _receiver, req)
 
 func getRequirementText(req):
 	var reqtype = req[0]
-	if(reqtype == "stamina"):
+	if(reqtype == AttackRequirement.Stamina):
 		return "Uses " + str(req[1]) + " stamina"
-	if(reqtype == "freearms"):
+	if(reqtype == AttackRequirement.FreeArms):
 		return "Arms must be free"
-	if(reqtype == "freelegs"):
+	if(reqtype == AttackRequirement.FreeHands):
+		return "Hands must be free"
+	if(reqtype == AttackRequirement.FreeLegs):
 		return "Legs must be free"
-	if(reqtype == "freemouth"):
+	if(reqtype == AttackRequirement.CanTalk):
 		return "Mouth must be free"
-	if(reqtype == "canbite"):
+	if(reqtype == AttackRequirement.CanBite):
 		return "Must be able to bite"
-	if(reqtype == "coveredincum"):
+	if(reqtype == AttackRequirement.CoveredInCum):
 		return "Must be covered in cum/girlcum"
-	if(reqtype == "lustabove"):
+	if(reqtype == AttackRequirement.LustAbove):
 		return "Lust must be above "+str(req[1])
-	if(reqtype == "lustabovepercent"):
+	if(reqtype == AttackRequirement.LustAbovePercent):
 		#return "Lust must be above "+str(int(req[1]*100))+"%"
 		return "Lust must be above "+str(int(req[1]*GM.pc.lustThreshold())) +" ("+str(int(req[1]*100))+"%)"
-	if(reqtype == "hasmilk"):
+	if(reqtype == AttackRequirement.HasMilk):
 		return "Must have at least "+str(Util.roundF(req[1], 1))+"ml of milk stored in breasts"
 			
 	return "Error: bad requirement:" + reqtype
@@ -114,6 +157,9 @@ func getRequirementsColorText(_attacker, _receiver):
 	var reqs = getRequirements()
 	var text = ""
 	for req in reqs:
+		if(req is String):
+			req = [req]
+		
 		var reqText = getRequirementText(req)
 		var reqCan = checkRequirement(_attacker, _receiver, req)
 		if(reqCan):
@@ -124,22 +170,22 @@ func getRequirementsColorText(_attacker, _receiver):
 	
 	return text
 
-func getRecieverArmorScaling(_damageType) -> float:
+func getRecieverArmorScaling(_attacker, _receiver, _damageType) -> float:
 	return 1.0
 
-func doDamage(_attacker, _receiver, _damageType, _damage: int, playGetHitAnimation = true):
+func calcDamage(_attacker, _receiver, _damageType, _damage: int) -> int:
+	var damageMult = _attacker.getDamageMultiplier(_damageType)
+	if(_damage < 0):
+		damageMult = -damageMult
+		
+	return int(round(_damage * (1.0 + damageMult)))
+
+func doDamage(_attacker, _receiver, _damageType, _damage: int, _playGetHitAnimation = true):
 	var damageMult = _attacker.getDamageMultiplier(_damageType)
 	if(_damage < 0):
 		damageMult = -damageMult
 	
-	var damage = _receiver.receiveDamage(_damageType, round(_damage * (1.0 + damageMult)), getRecieverArmorScaling(_damageType))
-	
-	if(playGetHitAnimation):
-		if(_receiver == GM.pc):
-			if(GM.pc.isBlocking()):
-				GM.main.playAnimation(StageScene.Solo, "block")
-			elif(_damageType == DamageType.Physical || _damageType == DamageType.Stamina):
-				GM.main.playAnimation(StageScene.Solo, "hurt")
+	var damage = _receiver.receiveDamage(_damageType, round(_damage * (1.0 + damageMult)), getRecieverArmorScaling(_attacker, _receiver, _damageType))
 	
 	return damage
 
@@ -222,15 +268,11 @@ func checkMissed(_attacker, _receiver, _damageType, customAccuracyMult = 1.0, mi
 		return true
 	return false
 
-func checkDodged(_attacker, _receiver, _damageType, customDodgeMult = 1, minChangeToDodge = 0.0, playDodgeAnimation = true):
+func checkDodged(_attacker, _receiver, _damageType, customDodgeMult = 1, minChangeToDodge = 0.0, _playDodgeAnimation = true):
 	var dodgeChance = _receiver.getDodgeChance() * customDodgeMult
 	
 	dodgeChance = max(dodgeChance, minChangeToDodge)
 	if(RNG.chance(100.0 * dodgeChance)):
-		if(playDodgeAnimation):
-			if(_receiver == GM.pc):
-				GM.main.playAnimation(StageScene.Solo, "dodge")
-		
 		return true
 		
 	return false
@@ -257,7 +299,23 @@ func receiverDamageMessage(damageType, howMuch):
 	var damageColor = DamageType.getColor(damageType)
 	var damageColorString = "#"+damageColor.to_html(false)
 	
-	return "{receiver.name} received [color="+damageColorString+"]"+str(howMuch)+" "+DamageType.getBattleName(damageType)+"[/color]"
+	return "{receiver.name} received [color="+damageColorString+"]"+str(howMuch)+" "+DamageType.getBattleName(damageType)+"[/color]."
+
+func receiverDamageMessageShort(damageType, howMuch, origDamage = 0):
+	var damageColor = DamageType.getColor(damageType)
+	var damageColorString = "#"+damageColor.to_html(false)
+	
+	var stringHowMuch = str(howMuch)
+	if(howMuch > 0):
+		stringHowMuch = "+" + stringHowMuch
+	
+		if(howMuch < origDamage):
+			var stringDamageDif = str(origDamage - howMuch)
+			
+			return "[color="+damageColorString+"]("+stringHowMuch+" "+DamageType.getBattleName(damageType)+", "+stringDamageDif+" blocked)[/color]"
+	
+	return "[color="+damageColorString+"]("+stringHowMuch+" "+DamageType.getBattleName(damageType)+")[/color]"
+
 
 func receiverDamageMessageList(damages: Array):
 	var result = "{receiver.name} received "
@@ -276,19 +334,29 @@ func receiverDamageMessageList(damages: Array):
 func getExperience():
 	return []
 
-func genericMissMessage(_attacker, _receiver):
-	return RNG.pick([
-		"{attacker.name} missed!",
+func genericMissMessage(_attacker, _receiver, _optionalVerb = "attack"):
+	var randomText = RNG.pick([
+		"{attacker.name} tried to "+_optionalVerb+" {receiver.name} but missed!",
 		"{attacker.name} missed {attacker.his} attack!",
 		])
 	
-func genericDodgeMessage(_attacker, _receiver):
-	return RNG.pick([
-		"{receiver.name} managed to dodge the attack.",
-		"{receiver.name} managed to dodge the attack at the last second.",
+	return {
+		text = randomText,
+		missed = true,
+	}
+	
+func genericDodgeMessage(_attacker, _receiver, _optionalVerb = "attack"):
+	var randomText = RNG.pick([
+		"{receiver.name} managed to dodge the "+_optionalVerb+".",
+		"{receiver.name} managed to dodge the "+_optionalVerb+" at the last second.",
 		"{receiver.name} managed to avoid being hit.",
-		"{receiver.name} dodged masterfully.",
+		"{receiver.name} dodged the "+_optionalVerb+" masterfully.",
 	])
+	
+	return {
+		text = randomText,
+		dodged = true,
+	}
 
 func canDoWhileStunned():
 	return false
@@ -300,3 +368,11 @@ func getItem(_context) -> ItemBase:
 			return null
 		return item
 	return null
+
+func itemExists(_context):
+	if("itemID" in _context):
+		var item = GlobalRegistry.getCharacter(_context["charID"]).getInventory().getItemByUniqueID(_context["itemID"])
+		if(item == null):
+			return false
+		return true
+	return false

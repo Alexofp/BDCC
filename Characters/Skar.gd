@@ -96,3 +96,36 @@ func createBodyparts():
 	giveBodypartUnlessSame(penis)
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("caninetail"))
 
+func reactRestraint(_restraintType, restraintAmount, isGettingForced):
+	if(!isGettingForced):
+		if(restraintAmount == 0):
+			return RNG.pick([
+				"To hell with these",
+				"Easy",
+				"That was too easy",
+			])
+		
+		return RNG.pick([
+			"Grr-r",
+			"Grr",
+			"Not funny",
+			"So fucking humiliating",
+		])
+	
+	if(isGettingForced):
+		if(restraintAmount > 2 && RNG.chance(30)):
+			return RNG.pick([
+				"Fucking hell",
+				"I have enough metal in me already",
+				"Quit it already",
+				"Fuck you",
+			])
+		
+		return RNG.pick([
+			"Is that how you gonna play?",
+			"You think it's funny?",
+			"Where did you stole these",
+			"Oh c'mon, I don't need this",
+			"Fuck off",
+		])
+	return null

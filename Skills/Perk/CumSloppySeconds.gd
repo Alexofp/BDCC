@@ -13,8 +13,6 @@ func getVisibleDescription():
 func getMoreDescription():
 	return "If you have cum inside your pussy/ass from 2+ different people you get a +20% bonus to your [color="+DamageType.getColorString(DamageType.Lust)+"]Lust damage[/color]."
 
-func getCost():
-	return 1
 func getSkillTier():
 	return 0
 

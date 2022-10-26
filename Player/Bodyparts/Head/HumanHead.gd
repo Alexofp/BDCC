@@ -5,7 +5,7 @@ func _init():
 	id = "humanhead"
 
 func getCompatibleSpecies():
-	return [Species.Human]
+	return [Species.Human, Species.Demon]
 
 func getDoll3DScene():
 	return "res://Player/Player3D/Parts/Head/HumanHead/HumanHead.tscn"

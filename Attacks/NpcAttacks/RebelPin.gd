@@ -28,10 +28,10 @@ func _doAttack(_attacker, _receiver, _context = {}):
 	])
 	text += "\n\nOw!"
 	
-	var _damage = doDamage(_attacker, _receiver, DamageType.Physical, RNG.randi_range(80, 100))
-	text += " " + receiverDamageMessage(DamageType.Physical, _damage)
-	
-	return text
+	return {
+		text = text,
+		pain = RNG.randi_range(80, 100),
+	}
 	
 func _canUse(_attacker, _receiver, _context = {}):
 	if(!_receiver.hasEffect(StatusEffect.Collapsed)):
@@ -42,3 +42,5 @@ func _canUse(_attacker, _receiver, _context = {}):
 func getAnticipationText(_attacker, _receiver):
 	return "{attacker.name} tries to pin {receiver.name} in place, this one will hurt!"
 
+func getRequirements():
+	return [AttackRequirement.FreeLegs]

@@ -14,14 +14,16 @@ func getVisibleDesc(_context = {}):
 func _doAttack(_attacker, _receiver, _context = {}):
 	if(RNG.chance(60)):
 		var text = "It's weird but you somehow feel aroused after thinking about what Volk said.."
-		var _damage = doDamage(_attacker, _receiver, DamageType.Lust, 20)
-		text += " " + receiverDamageMessage(DamageType.Lust, _damage)
-		return text
+		return {
+			text = text,
+			lust = 20,
+		}
 	else:
 		var text = "Volk's weird actions were a turn off for you"
-		var _damage = doDamage(_attacker, _receiver, DamageType.Lust, -10)
-		#text += " " + receiverDamageMessage(DamageType.Lust, _damage)
-		return text
+		return {
+			text = text,
+			lust = -10,
+		}
 	
 func _canUse(_attacker, _receiver, _context = {}):
 	return true
@@ -37,3 +39,9 @@ func getAnticipationText(_attacker, _receiver):
 	])+"[/say]"
 
 	return text
+
+func getRequirements():
+	return [AttackRequirement.CanTalk]
+
+func canSeeAnticipationTextWhenBlind():
+	return true

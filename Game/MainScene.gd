@@ -14,10 +14,12 @@ var playerScene = preload("res://Player/Player.tscn")
 var overridenPC
 var originalPC
 var roomMemories = {}
+var rollbacker:Rollbacker
 
 signal time_passed(_secondsPassed)
 
 func _init():
+	rollbacker = Rollbacker.new()
 	GlobalRegistry.recreateCharacters()
 	flagsCache = Flag.getFlags()
 
@@ -57,6 +59,7 @@ func getOverriddenPC():
 func connectSignalsToPC(who):
 	var _s = who.connect("levelChanged", self, "_on_Player_levelChanged")
 	_s = who.connect("orificeBecomeMoreLoose", self, "_on_Player_orificeBecomeMoreLoose")
+	_s = who.connect("exchangedCumDuringRubbing", self, "_on_Player_exchangedCumDuringRubbing")
 	_s = who.connect("skillLevelChanged", self, "_on_Player_skillLevelChanged")
 	_s = who.connect("stat_changed", $GameUI, "_on_Player_stat_changed")
 
@@ -83,6 +86,7 @@ func _ready():
 	Console.addCommand("clearflag", self, "consoleClearFlag", ["flagID"], "Resets the game flag, be very careful")
 	Console.addCommand("setmoduleflag", self, "consoleSetModuleFlagBool", ["moduleID", "flagID", "trueOrFalse"], "Changes the game flag, be very careful")
 	Console.addCommand("clearmoduleflag", self, "consoleClearModuleFlag", ["moduleID", "flagID"], "Resets the game flag, be very careful")
+	applyAllWorldEdits()
 	
 func startNewGame():
 	for scene in sceneStack:
@@ -137,6 +141,7 @@ func _on_GameUI_on_option_button(method, args):
 	pickOption(method, args)
 	
 func pickOption(method, args):
+	rollbacker.pushRollbackState()
 	GM.main.clearMessages()
 	GlobalTooltip.resetTooltips()
 	
@@ -149,7 +154,7 @@ func pickOption(method, args):
 		#	return
 
 	runCurrentScene()
-
+	
 func runCurrentScene():
 	if(sceneStack.size() > 0):
 		sceneStack.back().run()
@@ -169,6 +174,19 @@ func reRun():
 
 func loadingSavefileFinished():
 	reRun()
+	
+	applyAllWorldEdits()
+	
+func applyAllWorldEdits():
+	var worldEdits = GlobalRegistry.getWorldEdits()
+	for worldEditID in worldEdits:
+		var worldEdit = worldEdits[worldEditID]
+		worldEdit.apply(GM.world)
+
+func applyWorldEdit(id):
+	var worldEdits = GlobalRegistry.getWorldEdits()
+	if(worldEdits.has(id)):
+		worldEdits[id].apply(GM.world)
 
 func canSave():
 	for scene in sceneStack:
@@ -195,6 +213,7 @@ func saveData():
 	data["ChildSystem"] = GM.CS.saveData()
 	data["logMessages"] = logMessages
 	data["roomMemories"] = roomMemories
+	data["world"] = GM.world.saveData()
 	
 	data["scenes"] = []
 	for scene in sceneStack:
@@ -238,6 +257,9 @@ func loadData(data):
 		
 		#scene.initScene(_args)
 		scene.loadData(SAVE.loadVar(sceneData, "sceneData", {}))
+		
+	GM.ui.recreateWorld()
+	GM.world.loadData(SAVE.loadVar(data, "world", {}))
 
 func addMessage(text: String):
 	messages.append(text)
@@ -446,6 +468,9 @@ func updateStuff():
 			GM.world.setDarknessSize(64)
 		else:
 			GM.world.setDarknessSize(16)
+			
+	for worldEdit in GlobalRegistry.getRegularWorldEdits():
+		worldEdit.apply(GM.world)
 
 
 func _on_Player_levelChanged():
@@ -465,6 +490,9 @@ func _on_Player_skillLevelChanged(_skillID):
 
 func _on_Player_orificeBecomeMoreLoose(orificeName, _newvalue, _oldvalue):
 	addMessage("Your "+orificeName+" is stretched and is now more used to the insertions")
+
+func _on_Player_exchangedCumDuringRubbing(senderName, receiverName):
+	addMessage(receiverName + " stole some cum from "+senderName+" during tribbing")
 
 func getRandomSceneFor(sceneType):
 	var resultScenes = []
@@ -765,3 +793,6 @@ func consoleClearFlag(flagID):
 func consoleClearModuleFlag(moduleID, flagID):
 	clearModuleFlag(moduleID, flagID)
 	Console.printLine("Flag cleared")
+
+func _on_GameUI_on_rollback_button():
+	rollbacker.rollback()

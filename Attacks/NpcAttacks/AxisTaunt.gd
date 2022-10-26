@@ -13,9 +13,10 @@ func getVisibleDesc(_context = {}):
 	
 func _doAttack(_attacker, _receiver, _context = {}):
 	var text = "You feel aroused.."
-	var _damage = doDamage(_attacker, _receiver, DamageType.Lust, RNG.randi_range(30, 40))
-	text += " " + receiverDamageMessage(DamageType.Lust, _damage)
-	return text
+	return {
+		text = text,
+		lust = RNG.randi_range(30, 40),
+	}
 	
 func _canUse(_attacker, _receiver, _context = {}):
 	return true
@@ -31,3 +32,9 @@ func getAnticipationText(_attacker, _receiver):
 	])+"[/say]"
 
 	return text
+
+func getRequirements():
+	return [AttackRequirement.CanTalk]
+
+func canSeeAnticipationTextWhenBlind():
+	return true

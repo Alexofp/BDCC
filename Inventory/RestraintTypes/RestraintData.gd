@@ -4,6 +4,9 @@ class_name RestraintData
 var level: int = 0
 var tightness: float = 1.0
 var item: WeakRef
+var npcDodgeDifficultyMod: float = 1.0
+var npcAiScoreMod: float = 1.0
+var restraintType = RestraintType.Generic
 
 func getItem():
 	return item.get_ref()
@@ -32,14 +35,24 @@ func getVisibleLevel(isBlind = false):
 func canInspectWhileBlindfolded():
 	return false
 
+func getDodgeDifficulty():
+	return 1.0 * level * npcDodgeDifficultyMod
+
+func getFinalChanceToForceARestraint(_pc):
+	var dodgeChance = _pc.getDodgeChance()
+	var restraintDodgeDifficulty = getDodgeDifficulty()
+	var finalSuccessChance = _pc.getRestraintResistance() * (1.0 / restraintDodgeDifficulty) * (1.0 - dodgeChance)
+
+	return finalSuccessChance
+
 func getLevelDamage():
 	return 0.5 / pow(max(1.0, level), 0.8)
 
-func getStatDamageMult():
-	return 1.0 + GM.pc.getStat(Stat.Strength) / 20.0
+func getStatDamageMult(_pc):
+	return 1.0 + _pc.getStat(Stat.Strength) / 20.0
 
-func calcDamage(mult = 1.0):
-	return mult * getLevelDamage() * getStatDamageMult() * RNG.randf_range(0.8, 1.0)
+func calcDamage(_pc, mult = 1.0):
+	return mult * getLevelDamage() * getStatDamageMult(_pc) * RNG.randf_range(0.8, 1.0)
 
 func takeDamage(howMuch):
 	tightness -= howMuch
@@ -53,10 +66,10 @@ func getRemoveMessage():
 func canStruggle():
 	return true
 
-func failChance(chance):
+func failChance(_pc, chance):
 	return RNG.chance(chance)
 
-func luckChance(chance):
+func luckChance(_pc, chance):
 	return RNG.chance(chance)
 
 func scaleDamage(dam) -> int:
@@ -65,12 +78,24 @@ func scaleDamage(dam) -> int:
 func shouldDoStruggleMinigame(_pc):
 	return true
 
-func doStruggle(_pc):
+func calculateAIScore(_pc):
+	if(!shouldDoStruggleMinigame(_pc)):
+		return 5.0 * npcDodgeDifficultyMod
+	
+	var result = 1.0
+	if(!_pc.isBlindfolded() || canInspectWhileBlindfolded()):
+		result = result * 2.0 / float(level)
+	if(tightness > 0.0):
+		result /= tightness
+	
+	return result * npcDodgeDifficultyMod
+
+func doStruggle(_pc, _minigame):
 	var _handsFree = !_pc.hasBlockedHands()
 	var _armsFree = !_pc.hasBoundArms()
 	var _legsFree = !_pc.hasBoundLegs()
 	var _canSee = !_pc.isBlindfolded()
-	var _canBite = !_pc.isGagged()
+	var _canBite = !_pc.isBitingBlocked()
 	
 	var text = "error?"
 	var lust = 0
@@ -79,14 +104,14 @@ func doStruggle(_pc):
 	var stamina = 0
 	
 	text = "You struggle, trying to make the "+getItem().getVisibleName()+" slip off"
-	damage = calcDamage()
+	damage = calcDamage(_pc)
 	stamina = 10
 	
 	#damage = calcDamage()
 	
 	return {"text": text, "damage": damage, "lust": lust, "pain": pain, "stamina": stamina}
 
-func processStruggleTurn():
+func processStruggleTurn(_pc, _isActivelyStruggling):
 	return null#{"text": "TEST "+getItem().getVisibleName()}
 
 func getVisibleTightness():
@@ -121,6 +146,9 @@ func alwaysSavedWhenStruggledOutOf():
 
 func alwaysBreaksWhenStruggledOutOf():
 	return false
+
+func getRestraintType():
+	return restraintType
 
 func saveData():
 	var data = {}

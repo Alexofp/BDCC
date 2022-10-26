@@ -36,8 +36,11 @@ func generateRestraintData():
 	restraintData = RestraintHandCuffs.new()
 	restraintData.setLevel(calculateBestRestraintLevel())
 
-func getForcedOnMessage():
-	return getAStackNameCapitalize()+" were locked onto your arms, chaining your arms together"
+func getForcedOnMessage(isPlayer = true):
+	if(isPlayer):
+		return getAStackNameCapitalize()+" were locked onto your arms, chaining them together"
+	else:
+		return getAStackNameCapitalize()+" were locked onto {receiver.nameS} arms, chaining them together"
 
 func getUnriggedParts(_character):
 	return {

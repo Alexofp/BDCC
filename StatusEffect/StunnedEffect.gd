@@ -30,6 +30,11 @@ func getEffectImage():
 func getIconColor():
 	return IconColorRed
 
+func getBuffs():
+	return [
+		buff(Buff.DodgeChanceBuff, [-50])
+	]
+
 func combine(_args = []):
 	if(_args.size() > 0):
 		turns = max(_args[0], turns)

@@ -30,8 +30,11 @@ func generateRestraintData():
 	restraintData = RestraintLegCuffs.new()
 	restraintData.setLevel(calculateBestRestraintLevel())
 
-func getForcedOnMessage():
-	return getAStackNameCapitalize()+" were forced onto your legs, they are connected by a chain, forcing you to waddle or hop around!"
+func getForcedOnMessage(isPlayer = true):
+	if(isPlayer):
+		return getAStackNameCapitalize()+" were forced onto your legs, they are connected by a chain, forcing you to waddle or hop around!"
+	else:
+		return getAStackNameCapitalize()+" were forced onto {receiver.nameS} legs, they are connected by a chain, forcing {receiver.him} to waddle or hop around!"
 
 func getUnriggedParts(_character):
 	return {

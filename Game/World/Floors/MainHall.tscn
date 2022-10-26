@@ -164,6 +164,7 @@ population = 1
 [node name="MainHallRoom56" parent="." index="19" instance=ExtResource( 2 )]
 position = Vector2( -192, 640 )
 roomName = "Gym area"
+roomID = "gym_nearbathroom"
 roomDescription = "You can see yoga carpets, treadmills and a few benches for weight lifting"
 population = 1
 
@@ -488,6 +489,7 @@ population = 1
 self_modulate = Color( 0.7, 1, 0.7, 1 )
 position = Vector2( -64, 512 )
 roomName = "Prison Yard"
+roomID = "yard_westCorridor"
 roomDescription = "A huge open area with lots of bushes, trees and other types of greenery. Ocasionally there is a bench to sit and relax.
 
 The ground is covered with grass, there are visible pathways made out of stone"
@@ -614,6 +616,7 @@ population = 3
 self_modulate = Color( 0.7, 0.7, 1, 1 )
 position = Vector2( -192, 256 )
 roomName = "Bathroom"
+roomID = "main_bathroom1"
 roomDescription = "A bunch of sinks in a row with a long mirror above. On the opposite side from them are the toilet stalls and a few urinals"
 roomSprite = 8
 roomColor = 3
@@ -622,6 +625,7 @@ roomColor = 3
 self_modulate = Color( 0.7, 0.7, 1, 1 )
 position = Vector2( -256, 640 )
 roomName = "Bathroom"
+roomID = "main_bathroom2"
 roomDescription = "A bunch of sinks in a row with a long mirror above. On the opposite side from them are the toilet stalls and a few urinals"
 roomSprite = 8
 roomColor = 3

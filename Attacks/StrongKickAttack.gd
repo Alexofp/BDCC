@@ -15,23 +15,22 @@ func _doAttack(_attacker, _receiver, _context = {}):
 	var attackerName = _attacker.getName()
 	var receiverName = _receiver.getName()
 	
-	var damage = doDamage(_attacker, _receiver, DamageType.Physical, RNG.randi_range(20, 20))
-	
 	var text = attackerName + " uses "+_attacker.hisHer()+" full strength to kick " + receiverName + ". "
-	
-	text += receiverDamageMessage(DamageType.Physical, damage)
 	
 	if(!_receiver.hasEffect(StatusEffect.Collapsed)):
 		text += "\n[b]"+receiverName+" loses "+_receiver.hisHer()+" balance and collapses onto the floor[/b]"
 		_receiver.addEffect(StatusEffect.Collapsed)
 	
-	return text
+	return {
+		text = text,
+		pain = RNG.randi_range(20, 20),
+	}
 	
 func _canUse(_attacker, _receiver, _context = {}):
 	return true
 
 func getRequirements():
-	return [["stamina", 25], ["freelegs"]]
+	return [[AttackRequirement.Stamina, 25], AttackRequirement.FreeLegs]
 
 func getAttackSoloAnimation():
 	return "kick"

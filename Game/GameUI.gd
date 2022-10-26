@@ -2,16 +2,17 @@ extends Control
 class_name GameUI
 
 signal on_option_button(method, args)
+signal on_rollback_button
 var buttons: Array = []
 const buttonsCountPerPage: int = 15
 var optionButtonScene: PackedScene = preload("res://Game/SceneOptionButton.tscn")
-onready var optionButtonsContainer = $HBoxContainer/VBoxContainer2/GridContainer
+onready var optionButtonsContainer = $HBoxContainer/VBoxContainer2/HBoxContainer/GridContainer
 var currentPage = 0
 var options: Dictionary = {}
 var optionsCurrentID = 0
 var buttonsNeedUpdating = false
-onready var nextPageButton = $HBoxContainer/Panel2/MarginContainer/VBoxContainer/HBoxContainer/NextPageButton
-onready var prevPageButton = $HBoxContainer/Panel2/MarginContainer/VBoxContainer/HBoxContainer/PrevPageButton
+onready var nextPageButton = $HBoxContainer/VBoxContainer2/HBoxContainer/NextPageButton
+onready var prevPageButton = $HBoxContainer/VBoxContainer2/HBoxContainer/PrevPageButton
 onready var optionTooltip = $CanvasLayer/TooltipDisplay
 onready var textOutput = $HBoxContainer/VBoxContainer2/ScrollContainer/VBoxContainer/RichTextLabel
 onready var mapAndTimePanel = $HBoxContainer/Panel2/MarginContainer/VBoxContainer/MapAndTimePanel
@@ -25,6 +26,7 @@ onready var skillsScreen = $HBoxContainer/SkillsUI
 onready var skillsButton = $HBoxContainer/Panel2/MarginContainer/VBoxContainer/HBoxContainer3/SkillsButton
 onready var debugScreen = $HBoxContainer/DebugPanel
 onready var debugPanelButton = $HBoxContainer/Panel2/MarginContainer/VBoxContainer/HBoxContainer3/DebugMenu
+onready var rollbackButton = $HBoxContainer/Panel2/MarginContainer/VBoxContainer/HBoxContainer/RollbackButton
 var uiTextboxScene = preload("res://UI/UITextbox.tscn")
 onready var textcontainer = $HBoxContainer/VBoxContainer2/ScrollContainer/VBoxContainer
 onready var charactersArtworkPanel = $HBoxContainer/Panel2/MarginContainer/VBoxContainer/CharactersArtworkPanel
@@ -67,6 +69,9 @@ func _ready():
 		if(_i < shortCutKeys.size()):
 			newbutton.setShortcutPhysicalScancode(shortCutKeys[_i])
 		_i += 1
+		
+	if(!OPTIONS.isRollbackEnabled()):
+		rollbackButton.visible = false
 		
 	updateButtons()
 	
@@ -123,6 +128,12 @@ func queueUpdate():
 func updateButtons():
 	checkPageButtons()
 	
+	if(GM.main != null):
+		if(GM.main.rollbacker.canRollback()):
+			rollbackButton.disabled = false
+		else:
+			rollbackButton.disabled = true
+	
 	for i in buttonsCountPerPage:
 		var button:Button = buttons[i]
 		button.disabled = true
@@ -177,6 +188,13 @@ func checkPageButtons():
 		nextPageButton.disabled = false
 	else:
 		nextPageButton.disabled = true
+		
+	if(maxpages > 1):
+		nextPageButton.visible = true
+		prevPageButton.visible = true
+	else:
+		nextPageButton.visible = false
+		prevPageButton.visible = false
 
 func _on_NextPageButton_pressed():
 	currentPage += 1
@@ -266,8 +284,8 @@ func trimLineEndings():
 func onTimePassed(_secondsPassed):
 	mapAndTimePanel.onTimePassed(_secondsPassed)
 
-func processString(strText: String):
-	return gameParser.executeString(sayParser.processString(strText))
+func processString(strText: String, overrides: Dictionary = {}):
+	return gameParser.executeString(sayParser.processString(strText, overrides), overrides)
 
 func hideAllScreens():
 	mainGameScreen.visible = false
@@ -353,3 +371,9 @@ func clearCharactersPanel():
 
 func updateCharacterInPanel():
 	charactersArtworkPanel.updateMainCharacter()
+
+func recreateWorld():
+	mapAndTimePanel.recreateWorld()
+
+func _on_RollbackButton_pressed():
+	emit_signal("on_rollback_button")

@@ -9,6 +9,10 @@ func _init():
 
 	addCharacter("tavi", [], "res://Images/ImagePacks/Rahi/Characters/tavi/tavi.png")
 	addCharacter("tavi", ["naked"], "res://Images/ImagePacks/Rahi/Characters/tavi/tavi-naked.png")
+	addCharacter("taviDemon", [], "res://Images/ImagePacks/Rahi/Characters/tavi/tavi.png")
+	addCharacter("taviDemon", ["naked"], "res://Images/ImagePacks/Rahi/Characters/tavi/tavi-naked.png")
+	addCharacter("taviDemonFuta", [], "res://Images/ImagePacks/Rahi/Characters/tavi/tavi.png")
+	addCharacter("taviDemonFuta", ["naked"], "res://Images/ImagePacks/Rahi/Characters/tavi/tavi-naked.png")
 
 	addCharacter("risha", [], "res://Images/ImagePacks/Rahi/Characters/risha/risha.png")
 	addCharacter("risha", ["naked"], "res://Images/ImagePacks/Rahi/Characters/risha/risha-naked.png")
@@ -18,6 +22,8 @@ func _init():
 
 	addCharacter("nova", [], "res://Images/ImagePacks/Rahi/Characters/nova/nova.png")
 	addCharacter("nova", ["naked"], "res://Images/ImagePacks/Rahi/Characters/nova/nova-naked.png")
+	addCharacter("novaArena", [], "res://Images/ImagePacks/Rahi/Characters/nova/nova.png")
+	addCharacter("novaArena", ["naked"], "res://Images/ImagePacks/Rahi/Characters/nova/nova-naked.png")
 
 	addCharacter("ferri", [], "res://Images/ImagePacks/Rahi/Characters/ferri/ferri.png")
 	addCharacter("ferri", ["naked"], "res://Images/ImagePacks/Rahi/Characters/ferri/ferri-naked.png")
@@ -27,3 +33,9 @@ func _init():
 
 	addCharacter("captain", [], "res://Images/ImagePacks/Rahi/Characters/captain/captain.png")
 	addCharacter("captain", ["naked"], "res://Images/ImagePacks/Rahi/Characters/captain/captain-naked.png")
+
+	addCharacter("alexrynard", [], "res://Images/ImagePacks/Rahi/Characters/alexrynard/alexrynard.png")
+	addCharacter("alexrynard", ["naked"], "res://Images/ImagePacks/Rahi/Characters/alexrynard/alexrynard-naked.png")
+
+	addCharacter("jacki", [], "res://Images/ImagePacks/Rahi/Characters/jacki/jacki.png")
+	addCharacter("jacki", ["naked"], "res://Images/ImagePacks/Rahi/Characters/jacki/jacki-naked.png")

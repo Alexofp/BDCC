@@ -274,7 +274,7 @@ func _run():
 
 func _react(_action: String, _args):
 	if(_action == "fightrisha"):
-		runScene("FightScene", ["risha"], "rishafight")
+		runScene("FightScene", ["rishaIntro"], "rishafight")
 		return
 	
 	if(_action == "getgagged"):

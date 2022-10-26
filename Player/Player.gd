@@ -163,27 +163,6 @@ func _getAttacks():
 	
 	return attacks
 
-func hasBoundArms():
-	return buffsHolder.hasBuff(Buff.RestrainedArmsBuff)
-
-func hasBlockedHands():
-	return buffsHolder.hasBuff(Buff.BlockedHandsBuff)
-
-func hasBoundLegs():
-	return buffsHolder.hasBuff(Buff.RestrainedLegsBuff)
-
-func isBlindfolded():
-	return buffsHolder.hasBuff(Buff.BlindfoldBuff)
-
-func isBitingBlocked():
-	return buffsHolder.hasBuff(Buff.GagBuff) || buffsHolder.hasBuff(Buff.RingGagBuff) || buffsHolder.hasBuff(Buff.MuzzleBuff)
-
-func isGagged():
-	return buffsHolder.hasBuff(Buff.GagBuff) || buffsHolder.hasBuff(Buff.RingGagBuff)
-
-func isOralBlocked():
-	return buffsHolder.hasBuff(Buff.GagBuff) || buffsHolder.hasBuff(Buff.MuzzleBuff)
-
 func canHandleBlindness():
 	return skillsHolder.hasPerk(Perk.BDSMBlindfold)
 	
@@ -269,7 +248,7 @@ func updateNonBattleEffects():
 	else:
 		removeEffect(StatusEffect.HasCumInsideMouth)
 		
-	if(menstrualCycle != null && menstrualCycle.isInHeat()):
+	if(menstrualCycle != null && menstrualCycle.isInHeat() && !GM.pc.hasPerk(Perk.StartNoHeat)):
 		addEffect(StatusEffect.InHeat)
 	else:
 		removeEffect(StatusEffect.InHeat)
@@ -369,34 +348,6 @@ func hoursPassed(_howmuch):
 		if(intoxicationTolerance < 0.0):
 			intoxicationTolerance = 0.0
 
-func processStruggleTurn():
-	var texts = []
-	var damage = 0.0
-	var addLust = 0
-	var addPain = 0
-	var addStamina = 0
-	
-	for item in getInventory().getEquppedRestraints():
-		var restraintData: RestraintData = item.getRestraintData()
-		var struggleData = restraintData.processStruggleTurn()
-		
-		if(struggleData == null):
-			continue
-			
-		if(struggleData.has("damage")):
-			damage += struggleData["damage"]
-		if(struggleData.has("lust")):
-			addLust += struggleData["lust"]
-		if(struggleData.has("pain")):
-			addPain += struggleData["pain"]
-		if(struggleData.has("stamina")):
-			addStamina += struggleData["stamina"]
-		if(struggleData.has("text")):
-			texts.append(struggleData["text"])
-			#additionalStruggleText += struggleData["text"] + "\n\n"
-		
-	return {"damage": damage, "lust": addLust, "pain": addPain, "stamina": addStamina, "text": Util.join(texts, "\n\n")}
-
 func getGender():
 	return pickedGender
 
@@ -424,19 +375,6 @@ func getChatColor():
 		return "#C3E8BE"
 	
 	return "red"
-
-func formatSay(text):
-	var color = getChatColor()
-	if(GM.ui != null):
-		text = GM.ui.processString(text)
-	
-	if(isGagged() && hasPerk(Perk.BDSMGagTalk)):
-		return "[color="+color+"]\""+Util.muffledSpeech(text)+"\" ("+text+") [/color]"
-	
-	if(isGagged()):
-		text = Util.muffledSpeech(text)
-	
-	return "[color="+color+"]\""+text+"\"[/color]"
 
 func getSpecies():
 	return pickedSpecies
@@ -704,20 +642,6 @@ func getExposedPrivates():
 		
 	return result
 
-func isBodypartCovered(bodypartSlot):
-	var coveredParts = {}
-	
-	var equippedItems = inventory.getAllEquippedItems()
-	for inventorySlot in equippedItems:
-		var item = equippedItems[inventorySlot]
-		var itemCovers = item.coversBodyparts()
-		for itemCover in itemCovers:
-			coveredParts[itemCover] = true
-	
-	if(coveredParts.has(bodypartSlot) && coveredParts[bodypartSlot]):
-		return true
-	return false
-
 func isWearingAnyUnderwear():
 	return inventory.hasSlotEquipped(InventorySlot.UnderwearBottom) || inventory.hasSlotEquipped(InventorySlot.UnderwearTop)
 
@@ -746,14 +670,16 @@ func orgasmFrom(_characterID: String):
 	cumOnFloor()
 	
 	addLust(-lust)
-	if(hasPerk(Perk.SexLustPassion)):
-		addStamina(20)
 	updateNonBattleEffects()
 
 func cumOnFloor():
 	if(hasBodypart(BodypartSlot.Penis)):
 		var penis:BodypartPenis = getBodypart(BodypartSlot.Penis)
-		return penis.getFluidProduction().drain()
+		var production: FluidProduction = penis.getFluidProduction()
+		if(production != null):
+			var returnValue = penis.getFluidProduction().drain()
+			production.fillPercent(buffsHolder.getCustom(BuffAttribute.CumGenerationAfterOrgasm))
+			return returnValue
 
 func cummedOnBy(characterID, sourceType = null, howMessy: int = 1):	
 	var ch = GlobalRegistry.getCharacter(characterID)
@@ -764,6 +690,9 @@ func cummedOnBy(characterID, sourceType = null, howMessy: int = 1):
 			sourceType = BodilyFluids.FluidSource.Penis
 	
 	coverBodyWithFluid(characterID, ch.getFluidType(sourceType), howMessy)
+
+func pissedOnBy(_characterID):
+	addEffect(StatusEffect.DrenchedInPiss)
 
 func coverBodyWithFluid(characterID, fluidType, howMuchLevels: int = 1):
 	bodyFluids.append([characterID, fluidType, howMuchLevels])
@@ -934,14 +863,6 @@ func getCellLocation():
 	
 	return "cellblock_orange_playercell"
 
-func invCanEquipSlot(slot):
-	if(slot == InventorySlot.Penis && !hasPenis()):
-		return false
-	if(slot == InventorySlot.Vagina && !hasVagina()):
-		return false
-	
-	return true
-
 func calculateBestRestraintLevel():
 	var restraintsCount = 0
 	var levelsTotal = 0
@@ -968,7 +889,7 @@ func addIntoxication(howmuch: float):
 	intoxication += howmuch
 	intoxication = clamp(intoxication, 0.0, 2.0)
 	
-	if(intoxication >= 0.5):
+	if(intoxication >= 0.5 && howmuch > 0.0):
 		intoxicationTolerance += howmuch / 20.0
 		if(intoxicationTolerance > 1.0):
 			intoxicationTolerance = 1.0
@@ -1025,47 +946,6 @@ func addTimedBuffsTurns(buffs: Array, turns):
 	if(turns > timedBuffsDurationTurns):
 		timedBuffsDurationTurns = turns
 	updateNonBattleEffects()
-
-func addTallymark(zone):
-	addEffect(StatusEffect.HasTallyMarks, [zone])
-
-func addTallymarkPickBestZone(zonelist):
-	addEffect(StatusEffect.HasTallyMarks, [zonelist])
-
-func addTallymarkFace():
-	addTallymarkPickBestZone([
-		BodyWritingsZone.CheekLeft,
-		BodyWritingsZone.CheekRight,
-	])
-
-func addTallymarkCrotch():
-	addTallymarkPickBestZone([
-		BodyWritingsZone.LowerAbdomen,
-		BodyWritingsZone.HipLeft,
-		BodyWritingsZone.HipRight,
-		BodyWritingsZone.ButtcheekLeft,
-		BodyWritingsZone.ButtcheekRight,
-		BodyWritingsZone.ThighLeft,
-		BodyWritingsZone.ThighRight,
-	])
-
-func addTallymarkButt():
-	addTallymarkCrotch()
-
-func hasTallymarks():
-	return hasEffect(StatusEffect.HasTallyMarks)
-
-func clearTallymarks():
-	removeEffect(StatusEffect.HasTallyMarks)
-
-func addBodywriting(zone, writingID):
-	addEffect(StatusEffect.HasBodyWritings, [zone, writingID])
-
-func hasBodywritings():
-	return hasEffect(StatusEffect.HasBodyWritings)
-
-func clearBodywritings():
-	removeEffect(StatusEffect.HasBodyWritings)
 
 func hasCondoms():
 	return getInventory().getItemsWithTag(ItemTag.Condom).size() > 0
@@ -1125,9 +1005,41 @@ func damageClothes():
 func isWearingPortalPanties():
 	return getInventory().hasItemIDEquipped("PortalPanties")
 
-func removeAllRestraints():
+func unequipAllRestraints():
 	for item in inventory.getEquppedRestraints():
 		if(item.isImportant()):
 			continue
 		
 		inventory.unequipItem(item)
+
+func removeAllRestraints():
+	for item in inventory.getEquppedRestraints():
+		if(item.isImportant()):
+			continue
+		
+		inventory.removeEquippedItem(item)
+
+func hasTightHoles():
+	var maxLooseness = 0.0
+	var bodypartsToCheck = [BodypartSlot.Vagina, BodypartSlot.Anus]
+	
+	for bodypartID in bodypartsToCheck:
+		if(!hasBodypart(bodypartID)):
+			continue
+			
+		var bodypart:Bodypart = getBodypart(bodypartID)
+		
+		var orifice:Orifice = bodypart.getOrifice()
+		if(orifice == null):
+			continue
+		
+		maxLooseness = max(maxLooseness, orifice.getLooseness())
+	
+	if(maxLooseness < 1.5):
+		return true
+	else:
+		return false
+
+func getRestraintForcingSuccessChanceMod():
+	return max(1.0 + min(getAttackAccuracy(), 0.0), 0.0) * (1.0 + buffsHolder.getCustom(BuffAttribute.RestraintForcingSuccess))
+

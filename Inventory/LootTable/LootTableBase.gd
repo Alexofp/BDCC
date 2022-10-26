@@ -17,15 +17,41 @@ func generateCredits():
 
 func getPossibleLoot(characterID, battleName):
 	var resultLoot = loot
+	
+	var handledLists = {}
+	
 	var lootLists = GlobalRegistry.getLootLists(id)
 	for lootList in lootLists:
+		if(handledLists.has(lootList)):
+			continue
+		handledLists[lootList] = true
 		var newLoot = lootList.getLoot(id, characterID, battleName)
 		if(newLoot is Array):
 			resultLoot.append_array(newLoot)
 	
+	if(characterID != null):
+		var charLootLists = GlobalRegistry.getLootListsByCharacter(characterID)
+		for lootList in charLootLists:
+			if(handledLists.has(lootList)):
+				continue
+			handledLists[lootList] = true
+			var newLoot = lootList.getLoot(id, characterID, battleName)
+			if(newLoot is Array):
+				resultLoot.append_array(newLoot)
+	
+	if(battleName != null):
+		var battleLootLists = GlobalRegistry.getLootListsByCharacter(battleName)
+		for lootList in battleLootLists:
+			if(handledLists.has(lootList)):
+				continue
+			handledLists[lootList] = true
+			var newLoot = lootList.getLoot(id, characterID, battleName)
+			if(newLoot is Array):
+				resultLoot.append_array(newLoot)
+	
 	return resultLoot
 
-func generate(characterID, battleName):
+func generate(characterID = null, battleName = null):
 	var items = []
 	
 	for lootLine in getPossibleLoot(characterID, battleName):
@@ -52,3 +78,18 @@ func generate(characterID, battleName):
 				items.append([possibleItemData[0], RNG.randi_range(possibleItemData[1], possibleItemData[2])])
 	
 	return {"items": items, "credits": generateCredits()}
+
+func generateAndCreateItems(characterID = null, battleName = null):
+	var generatedloot = generate(characterID, battleName)
+	
+	var createdItems = []
+	
+	if(generatedloot.has("items")):
+		for generatedItemData in generatedloot["items"]:
+			var generatedItem = GlobalRegistry.createItem(generatedItemData[0])
+			if(generatedItemData[1] > 1):
+				generatedItem.setAmount(generatedItemData[1])
+			createdItems.append(generatedItem)
+			
+	generatedloot["items"] = createdItems
+	return generatedloot

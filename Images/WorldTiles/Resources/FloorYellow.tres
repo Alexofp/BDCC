@@ -1,0 +1,49 @@
+[gd_resource type="Resource" load_steps=10 format=2]
+
+[ext_resource path="res://addons/rmsmartshape/materials/edge_material.gd" type="Script" id=1]
+[ext_resource path="res://addons/rmsmartshape/materials/edge_material_metadata.gd" type="Script" id=2]
+[ext_resource path="res://addons/rmsmartshape/materials/shape_material.gd" type="Script" id=3]
+[ext_resource path="res://addons/rmsmartshape/normal_range.gd" type="Script" id=4]
+[ext_resource path="res://Images/WorldTiles/TrimDarkGreen.png" type="Texture" id=5]
+[ext_resource path="res://Images/WorldTiles/FloorYellow.png" type="Texture" id=6]
+
+[sub_resource type="Resource" id=33]
+script = ExtResource( 1 )
+textures = [ ExtResource( 5 ) ]
+texture_normals = [  ]
+textures_corner_outer = [  ]
+textures_corner_inner = [  ]
+texture_normals_corner_outer = [  ]
+texture_normals_corner_inner = [  ]
+textures_taper_left = [  ]
+textures_taper_right = [  ]
+texture_normals_taper_left = [  ]
+texture_normals_taper_right = [  ]
+use_corner_texture = true
+use_taper_texture = true
+fit_mode = 0
+
+[sub_resource type="Resource" id=32]
+script = ExtResource( 4 )
+begin = 0.0
+distance = 0.0
+edgeRendering = Vector2( 0, 0 )
+
+[sub_resource type="Resource" id=34]
+script = ExtResource( 2 )
+edge_material = SubResource( 33 )
+normal_range = SubResource( 32 )
+weld = false
+render = true
+z_index = 0
+z_as_relative = true
+offset = 0.0
+
+[resource]
+script = ExtResource( 3 )
+_edge_meta_materials = [ SubResource( 34 ) ]
+fill_textures = [ ExtResource( 6 ) ]
+fill_texture_normals = [  ]
+fill_texture_z_index = -10
+fill_mesh_offset = 0.0
+render_offset = 0.0

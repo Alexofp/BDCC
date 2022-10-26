@@ -163,7 +163,7 @@ func _react(_action: String, _args):
 		
 		addMessage(str(round(howMuchMilked / 10.0)*10.0)+" ml of milk was milked from your breasts")
 
-		GM.pc.addSkillExperience(Skill.Milking, 80.0, "eliza_milkingpumps")
+		GM.pc.addSkillExperience(Skill.Milking, 80, "eliza_milkingpumps")
 		
 		if(howMuchMilked >= 400.0):
 			var credits = Util.maxi(1, int(floor(sqrt(howMuchMilked / 100.0) / 2.0)))

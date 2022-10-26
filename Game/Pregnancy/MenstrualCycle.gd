@@ -157,11 +157,6 @@ func obsorbCum(cumType, amountML, whosCum, orificeType = OrificeType.Vagina, vir
 	
 	if(!BodilyFluids.FluidType.canMakeYouPregnant(cumType)):
 		return
-	
-	# Herms shouldn't get pregnant from their own cum
-	# .. or should they?
-	if(whosCum == getCharacter().getID()):
-		return
 		
 	var fertility = getCharacter().getFertility()
 	var crossSpeciesCompatibility = getCharacter().getCrossSpeciesCompatibility()
@@ -177,6 +172,15 @@ func obsorbCum(cumType, amountML, whosCum, orificeType = OrificeType.Vagina, vir
 func isPregnant():
 	if(impregnatedEggCells.size() > 0):
 		return true
+	return false
+
+func isPregnantFromPlayer():
+	if(!isPregnant()):
+		return false
+	
+	for egg in impregnatedEggCells:
+		if(egg.getFatherID() == "pc" || egg.getMotherID() == "pc"):
+			return true
 	return false
 
 func getPregnancyProgress() -> float:
@@ -206,6 +210,12 @@ func isVisiblyPregnant():
 	if(getPregnancyProgress() >= 0.20):
 		return true
 	return false
+	
+func isVisiblyPregnantFromPlayer():
+	if(!isVisiblyPregnant()):
+		return false
+	
+	return isPregnantFromPlayer()
 	
 func createEggCell():
 	var egg = EggCell.new()
@@ -310,8 +320,3 @@ func giveBirth():
 	
 	return result
 
-func isPregnantFromPlayer():
-	for egg in impregnatedEggCells:
-		if(egg.fatherID == "pc"):
-			return true
-	return false

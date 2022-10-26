@@ -29,6 +29,12 @@ func setMother(newmotherID, newmotherSpecies):
 	motherID = newmotherID
 	motherSpecies = newmotherSpecies
 
+func getMotherID():
+	return motherID
+
+func getFatherID():
+	return fatherID
+
 func setOrifice(orif):
 	orificeType = orif
 
