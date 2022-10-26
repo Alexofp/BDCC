@@ -131,6 +131,8 @@ func _getAttacks():
 func getFightIntro(_battleName):
 	return "Alex grunts as he gets into a fighting stance, his prosthetic spine is not meant for combat. But he seems tough even with that handicap."
 
+func getLootTable(_battleName):
+	return EngineerLoot.new()
 
 func reactRestraint(restraintType, restraintAmount, isGettingForced):
 	if(!isGettingForced):

@@ -6,11 +6,11 @@ func _init():
 func getLoot(_id, _characterID, _battleName):
 	if(_id == "guard"):
 		return [
-			[15, ["StunBaton"]],
+			[10, ["StunBaton"]],
 		]
 	if(_id == "inmate"):
 		return [
-			[10, ["Shiv"]],
+			[5, ["Shiv"]],
 		]
 
 	return []

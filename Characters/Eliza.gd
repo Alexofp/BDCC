@@ -100,6 +100,9 @@ func getFightIntro(_battleName):
 func _getAttacks():
 	return ["biteattack", "stretchingAttack", "lickWounds", "trygetupattack", "ElizaHornyCloud", "ElizaHornyDrug", "ElizaTaunt", "ElizaWeaknessDrug", "NpcScratch", "ForceMuzzlePC"]
 
+func getLootTable(_battleName):
+	return MedicalLoot.new()
+
 func getThickness() -> int:
 	return 75
 
