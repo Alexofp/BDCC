@@ -130,7 +130,7 @@ func _run():
 	if(state == "sure"):
 		saynn("[say=pc]Yeah, sure. She should only leak cum and not blood.[/say]")
 
-		saynn("The guard swiftly takes off her gloves before getting on her knees before you. Her naked paw grabs your {pc.dick} and supports it while she starts licking the tip with her rough-textured tongue. As you gradually get hard, she holds your shaft on her tongue while gently kneading your balls. A drop of precum lands on the guard’s tongue and she swallows it. You hear faint purring.")
+		saynn("The guard swiftly takes off her gloves before getting on her knees before you. Her naked paw grabs your {pc.cock} and supports it while she starts licking the tip with her rough-textured tongue. As you gradually get hard, she holds your shaft on her tongue while gently kneading your balls. A drop of precum lands on the guard’s tongue and she swallows it. You hear faint purring.")
 
 		saynn("When your cock is fully erected, the guard parts her lips wide before letting your member past her teeth and down her tight throat. All the while the tongue keeps working on your dick, coating it with saliva and making you exhale audibly. You offer the kitty a pat on the head but she only frowns at you before moving her head away.")
 
