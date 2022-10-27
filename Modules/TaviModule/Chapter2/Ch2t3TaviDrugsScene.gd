@@ -447,8 +447,11 @@ func _run():
 		addButton("Continue", "See what happens next", "continue7")
 
 	if(state == "continue7"):
-		saynn("Tavi pulls her hoof away from your chest and takes a step back, her massive hard horsecock sways a lot from each movement.")
-
+		if(getFlag("TaviModule.ch2DrugsPickedFuta")):
+			saynn("Tavi pulls her hoof away from your chest and takes a step back, her massive hard horsecock sways a lot from each movement.")
+		else:
+			saynn("Tavi pulls her hoof away from your chest and takes a step back.")
+		
 		saynn("[say=tavi]Now. On your knees, servant.[/say]")
 
 		saynn("You swipe off the ash that her hoof left on your exposed chest and obey her order. Your wounds still remind you about themselves so you can’t help but to grunt from pain.")
