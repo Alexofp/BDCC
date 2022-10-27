@@ -7,11 +7,9 @@
 [node name="PerksTierContainer" type="PanelContainer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 1
 size_flags_horizontal = 3
 script = ExtResource( 2 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 margin_left = 7.0
@@ -30,6 +28,7 @@ text = "Unlocks at level 0"
 margin_top = 18.0
 margin_right = 1266.0
 margin_bottom = 706.0
+mouse_filter = 1
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource( 1 )
