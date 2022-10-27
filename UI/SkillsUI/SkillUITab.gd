@@ -47,9 +47,12 @@ func getTabName():
 func updatePerks():
 	Util.delete_children(tiersContainer)
 	
+	var skill: SkillBase = GM.pc.getSkillsHolder().getSkill(skillID)
+	if(skill == null):
+		return
+	
 	perksLabel.text = "Free perk points: "+str(GM.pc.getSkillsHolder().getFreePerkPoints(skillID))
 	
-	var skill: SkillBase = GM.pc.getSkillsHolder().getSkill(skillID)
 	var tiers = skill.getPerkTiers()
 	
 	var i = 0

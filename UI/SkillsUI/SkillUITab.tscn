@@ -118,7 +118,7 @@ margin_bottom = 103.0
 margin_right = 624.0
 margin_bottom = 14.0
 mouse_filter = 1
-text = "Perk name"
+text = "Select a perk on the left"
 
 [node name="MarginContainer" type="MarginContainer" parent="ScrollContainer/VBoxContainer/HBoxContainer/PanelContainer2/VBoxContainer"]
 margin_top = 18.0
@@ -132,8 +132,8 @@ margin_right = 624.0
 margin_bottom = 42.0
 mouse_filter = 1
 bbcode_enabled = true
-bbcode_text = "Description of a selected perk"
-text = "Description of a selected perk"
+bbcode_text = "Description will be shown here"
+text = "Description will be shown here"
 fit_content_height = true
 
 [node name="MarginContainer2" type="MarginContainer" parent="ScrollContainer/VBoxContainer/HBoxContainer/PanelContainer2/VBoxContainer"]
@@ -148,8 +148,8 @@ margin_right = 624.0
 margin_bottom = 70.0
 mouse_filter = 1
 bbcode_enabled = true
-bbcode_text = "Description of a selected perk"
-text = "Description of a selected perk"
+bbcode_text = "Requirements will be shown here"
+text = "Requirements will be shown here"
 fit_content_height = true
 
 [node name="UnlockPerkButton" type="Button" parent="ScrollContainer/VBoxContainer/HBoxContainer/PanelContainer2/VBoxContainer"]

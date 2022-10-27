@@ -207,6 +207,14 @@ func getFreePerkPoints(skillID):
 	
 	return result
 
+func getLearnedPerkAmount(skillID):
+	var result = 0
+	for perkID in perks:
+		var perk = perks[perkID]
+		if(perk.getSkillGroup() == skillID):
+			result += 1
+	return result
+
 func canUnlockPerk(perkID):
 	var perk: PerkBase = GlobalRegistry.getPerk(perkID)
 	var perkSkill = perk.getSkillGroup()
