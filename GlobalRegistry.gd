@@ -43,6 +43,8 @@ var mapFloors: Dictionary = {}
 var imagePacks: Dictionary = {}
 var worldEdits: Dictionary = {}
 var regularWorldEdits: Array = []
+var sexSubActions: Dictionary = {}
+var sexDomActions: Dictionary = {}
 
 var bodypartStorageNode
 
@@ -238,6 +240,8 @@ func _ready():
 	registerLustActionFolder("res://Game/LustCombat/LustActions/Perk/")
 	
 	registerLustTopicFolder("res://Game/LustCombat/Topic/")
+	
+	registerSexActionsFolder("res://Game/SexEngine/SexActions/")
 	
 	registerStatusEffectFolder("res://StatusEffect/")
 	
@@ -1074,3 +1078,49 @@ func getWorldEdits():
 
 func getRegularWorldEdits():
 	return regularWorldEdits
+
+
+
+
+
+func registerSexAction(path: String):
+	var sexAction = load(path)
+	var sexActionObject = sexAction.new()
+	
+	if(sexActionObject.isDomAction):
+		sexDomActions[sexActionObject.id] = sexActionObject
+	else:
+		sexSubActions[sexActionObject.id] = sexActionObject
+
+func registerSexActionsFolder(folder: String):
+	var dir = Directory.new()
+	if dir.open(folder) == OK:
+		dir.list_dir_begin()
+		var file_name = dir.get_next()
+		while file_name != "":
+			if dir.current_is_dir():
+				pass
+				#print("Found directory: " + file_name)
+			else:
+				if(file_name.get_extension() == "gd"):
+					var full_path = folder.plus_file(file_name)
+					#print("Registered sex action: " + full_path)
+					registerSexAction(full_path)
+			file_name = dir.get_next()
+	else:
+		Log.printerr("An error occurred when trying to access the path "+folder)
+		
+func getSexAction(id: String):
+	if(sexDomActions.has(id)):
+		return sexDomActions[id]
+	elif(sexSubActions.has(id)):
+		return sexSubActions[id]
+	else:
+		Log.printerr("ERROR: sex action with the id "+id+" wasn't found")
+		return null
+
+func getDomSexActions():
+	return sexDomActions
+
+func getSubSexActions():
+	return sexSubActions
