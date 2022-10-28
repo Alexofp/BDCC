@@ -45,6 +45,8 @@ var worldEdits: Dictionary = {}
 var regularWorldEdits: Array = []
 var sexSubActions: Dictionary = {}
 var sexDomActions: Dictionary = {}
+var sexActivities: Dictionary = {}
+var sexActivitiesReferences: Dictionary = {}
 
 var bodypartStorageNode
 
@@ -241,7 +243,8 @@ func _ready():
 	
 	registerLustTopicFolder("res://Game/LustCombat/Topic/")
 	
-	registerSexActionsFolder("res://Game/SexEngine/SexActions/")
+	#registerSexActionsFolder("res://Game/SexEngine/SexActions/")
+	registerSexActivitiesFolder("res://Game/SexEngine/SexActivity/")
 	
 	registerStatusEffectFolder("res://StatusEffect/")
 	
@@ -1124,3 +1127,47 @@ func getDomSexActions():
 
 func getSubSexActions():
 	return sexSubActions
+
+
+
+func registerSexActivity(path: String):
+	var sexActivity = load(path)
+	var sexActivityObject = sexActivity.new()
+	
+	sexActivities[sexActivityObject.id] = sexActivity
+	sexActivitiesReferences[sexActivityObject.id] = sexActivityObject
+
+func registerSexActivitiesFolder(folder: String):
+	var dir = Directory.new()
+	if dir.open(folder) == OK:
+		dir.list_dir_begin()
+		var file_name = dir.get_next()
+		while file_name != "":
+			if dir.current_is_dir():
+				pass
+				#print("Found directory: " + file_name)
+			else:
+				if(file_name.get_extension() == "gd"):
+					var full_path = folder.plus_file(file_name)
+					#print("Registered sex activity: " + full_path)
+					registerSexActivity(full_path)
+			file_name = dir.get_next()
+	else:
+		Log.printerr("An error occurred when trying to access the path "+folder)
+		
+func createSexActivity(id: String):
+	if(sexActivities.has(id)):
+		return sexActivities[id].new()
+	else:
+		Log.printerr("ERROR: sex activity with the id "+id+" wasn't found")
+		return null
+
+func getSexActivityReference(id: String):
+	if(sexActivitiesReferences.has(id)):
+		return sexActivitiesReferences[id]
+	else:
+		Log.printerr("ERROR: sex activity with the id "+id+" wasn't found")
+		return null
+		
+func getSexActivityReferences():
+	return sexActivitiesReferences

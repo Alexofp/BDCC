@@ -825,6 +825,16 @@ _global_script_classes=[ {
 "path": "res://Game/SexEngine/SexActionBase.gd"
 }, {
 "base": "Reference",
+"class": "SexActivityBase",
+"language": "GDScript",
+"path": "res://Game/SexEngine/SexActivityBase.gd"
+}, {
+"base": "Object",
+"class": "SexActivityTag",
+"language": "GDScript",
+"path": "res://Game/SexEngine/SexActivityTag.gd"
+}, {
+"base": "Reference",
 "class": "SexDomInfo",
 "language": "GDScript",
 "path": "res://Game/SexEngine/SexTopInfo.gd"
@@ -1138,6 +1148,8 @@ _global_script_class_icons={
 "SayParser": "",
 "SceneBase": "",
 "SexActionBase": "",
+"SexActivityBase": "",
+"SexActivityTag": "",
 "SexDomInfo": "",
 "SexEngine": "",
 "SexGoal": "",
