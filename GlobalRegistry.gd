@@ -47,6 +47,7 @@ var sexSubActions: Dictionary = {}
 var sexDomActions: Dictionary = {}
 var sexActivities: Dictionary = {}
 var sexActivitiesReferences: Dictionary = {}
+var fetishes: Dictionary = {}
 
 var bodypartStorageNode
 
@@ -245,6 +246,7 @@ func _ready():
 	
 	#registerSexActionsFolder("res://Game/SexEngine/SexActions/")
 	registerSexActivitiesFolder("res://Game/SexEngine/SexActivity/")
+	registerFetishesFolder("res://Game/SexEngine/Fetish/")
 	
 	registerStatusEffectFolder("res://StatusEffect/")
 	
@@ -1171,3 +1173,47 @@ func getSexActivityReference(id: String):
 		
 func getSexActivityReferences():
 	return sexActivitiesReferences
+
+
+
+func registerFetish(path: String):
+	var loadedClass = load(path)
+	var object = loadedClass.new()
+	
+	fetishes[object.id] = object
+
+func getScriptsInFolder(folder: String):
+	var result = []
+	
+	var dir = Directory.new()
+	if dir.open(folder) == OK:
+		dir.list_dir_begin()
+		var file_name = dir.get_next()
+		while file_name != "":
+			if dir.current_is_dir():
+				pass
+				#print("Found directory: " + file_name)
+			else:
+				if(file_name.get_extension() == "gd"):
+					var full_path = folder.plus_file(file_name)
+					result.append(full_path)
+			file_name = dir.get_next()
+	else:
+		Log.printerr("An error occurred when trying to access the path "+folder)
+	
+	return result
+	
+func registerFetishesFolder(folder: String):
+	var scripts = getScriptsInFolder(folder)
+	for scriptPath in scripts:
+		registerFetish(scriptPath)
+
+func getFetish(id: String):
+	if(fetishes.has(id)):
+		return fetishes[id]
+	else:
+		Log.printerr("ERROR: fetish with the id "+id+" wasn't found")
+		return null
+
+func getFetishes():
+	return fetishes

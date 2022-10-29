@@ -35,12 +35,36 @@ func endActivity():
 	hasEnded = true
 
 func canStartActivity(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexSubInfo):
+	return tagsNotBusy(_sexEngine, _domInfo, _subInfo)
+
+func getActivityScore(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexSubInfo):
+	return 0.0
+
+func tagsNotBusy(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexSubInfo):
+	var domTags = getDomTags()
+	for tag in domTags:
+		if(_sexEngine.hasTag(_domInfo.charID, tag)):
+			return false
+	
+	var subTags = getSubTags()
+	for tag in subTags:
+		if(_sexEngine.hasTag(_subInfo.charID, tag)):
+			return false
+	
 	return true
 
 func startActivity(_args):
 	return {
 		text = str(id)+" HAS STARTED",
 	}
+
+func onSwitchFrom(_otherActivity, _args):
+	return {
+		text = str(id)+" HAS STARTED BY BEING SWITCHED FROM "+str(_otherActivity.id)
+	}
+
+func switchCurrentActivityTo(newactivityID, _args = []):
+	getSexEngine().switchActivity(self, newactivityID, _args)
 
 func getDomTags():
 	return []
