@@ -2,25 +2,33 @@ extends Reference
 class_name SexEngine
 
 var activities:Array = []
-var domID = null
-var subID = null
-var domInfo: SexDomInfo
-var subInfo: SexSubInfo
+
 var messages:Array = []
 var state = "start" # start, waitingForPCSub, waitingForPCDom
 var waitingActivityID
 
+var doms = {}
+var subs = {}
+
 var currentLastActivityID = 0
 
-func initPeople(theTopID, theSubID):
-	domID = theTopID
-	subID = theSubID
+func initPeople(domIDs, subIDs):
+	if(domIDs is String):
+		domIDs = [domIDs]
+	if(subIDs is String):
+		subIDs = [subIDs]
 	
-	domInfo = SexDomInfo.new()
-	domInfo.initInfo(domID)
-	
-	subInfo = SexSubInfo.new()
-	subInfo.initInfo(subID)
+	for domID in domIDs:
+		var domInfo = SexDomInfo.new()
+		domInfo.initInfo(domID)
+		
+		doms[domID] = domInfo
+		
+	for subID in subIDs:
+		var subInfo = SexSubInfo.new()
+		subInfo.initInfo(subID)
+		
+		subs[subID] = subInfo
 
 func makeActivity(id, theDomID, theSubID):
 	var activityObject = GlobalRegistry.createSexActivity(id)
@@ -28,10 +36,17 @@ func makeActivity(id, theDomID, theSubID):
 		return null
 	
 	activityObject.uniqueID = currentLastActivityID
-	activityObject.sexEngine = weakref(self)
+	activityObject.sexEngineRef = weakref(self)
 	activities.append(activityObject)
 	activityObject.initParticipants(theDomID, theSubID)
+	currentLastActivityID += 1
 	return activityObject
+
+func processText(thetext, theDomID, theSubID):
+	return GM.ui.processString(thetext, {dom=theDomID, sub=theSubID})
+
+func addText(thetext, theDomID, theSubID):
+	messages.append(processText(thetext, theDomID, theSubID))
 
 func startActivity(id, theDomID, theSubID, _args = null):
 	var activityObject = makeActivity(id, theDomID, theSubID)
@@ -40,10 +55,8 @@ func startActivity(id, theDomID, theSubID, _args = null):
 		
 	var startData = activityObject.startActivity(_args)
 	if(startData != null && startData.has("text")):
-		messages.append(startData["text"])
+		addText(startData["text"], theDomID, theSubID)
 	
-	currentLastActivityID += 1
-
 func switchActivity(oldActivity, newActivityID, _args = []):
 	oldActivity.endActivity()
 	
@@ -53,9 +66,7 @@ func switchActivity(oldActivity, newActivityID, _args = []):
 	
 	var startData = activityObject.onSwitchFrom(oldActivity, _args)
 	if(startData != null && startData.has("text")):
-		messages.append(startData["text"])
-	
-	currentLastActivityID += 1
+		addText(startData["text"], oldActivity.domID, oldActivity.subID)
 
 func getActivityWithUniqueID(uniqueID):
 	for activity in activities:
@@ -64,15 +75,19 @@ func getActivityWithUniqueID(uniqueID):
 	return null
 
 func generateGoals():
-	var peopleToGenerateGoalsFor = [domInfo]
-	var subsInfo = [subInfo]
+	var amountToGenerate = 2
 	
-	for personDomInfo in peopleToGenerateGoalsFor:
+	for domID in doms:
+		if(domID == "pc"):
+			continue
+		
+		var personDomInfo = doms[domID]
 		var possibleGoals = []
 		
 		var dom = personDomInfo.getChar()
 		
-		for personSubInfo in subsInfo:
+		for subID in subs:
+			var personSubInfo = subs[subID]
 			var sub = personSubInfo.getChar()
 			
 			var goalsToAdd = dom.getFetishHolder().getGoals(self, sub)
@@ -81,8 +96,9 @@ func generateGoals():
 					possibleGoals.append([[goal[0], sub.getID()], goal[1]])
 		
 		if(possibleGoals.size() > 0):
-			var randomGoalInfo = RNG.pickWeightedPairs(possibleGoals)
-			personDomInfo.goals.append(randomGoalInfo)
+			for _i in range(0, amountToGenerate):
+				var randomGoalInfo = RNG.pickWeightedPairs(possibleGoals)
+				personDomInfo.goals.append(randomGoalInfo)
 			
 		print(personDomInfo.goals)
 	
@@ -98,27 +114,35 @@ func hasGoal(thedominfo, goal, thesubinfo):
 			return true
 	return false
 
-func getDom() -> BaseCharacter:
-	if(domID == null):
-		return null
-	var character = GlobalRegistry.getCharacter(domID)
-	return character
+func satisfyGoal(thedominfo, goalid, thesubinfo):
+	for _i in range(0, thedominfo.goals.size()):
+		var goalInfo = thedominfo.goals[_i]
+		
+		if(goalInfo[0] == goalid && goalInfo[1] == thesubinfo.charID):
+			thedominfo.goals.remove(_i)
+			print(str(thedominfo.charID)+"'s goal to "+str(goalInfo[0])+" "+str(goalInfo[1])+" was satisfied")
+			return true
+	return false
 
 func getDomInfo(theDomID) -> SexDomInfo:
-	if(theDomID == domID):
-		return domInfo
-	return null
+	if(!doms.has(theDomID)):
+		return null
+	return doms[theDomID]
 
 func getSubInfo(theSubID) -> SexSubInfo:
-	if(theSubID == subID):
-		return subInfo
-	return null
-
-func getSub() -> BaseCharacter:
-	if(subID == null):
+	if(!subs.has(theSubID)):
 		return null
-	var character = GlobalRegistry.getCharacter(subID)
-	return character
+	return subs[theSubID]
+
+func isDom(charID):
+	if(!doms.has(charID)):
+		return false
+	return true
+
+func isSub(charID):
+	if(!subs.has(charID)):
+		return false
+	return true
 
 func removeEndedActivities():
 	for i in range(activities.size() - 1, -1, -1):
@@ -132,23 +156,28 @@ func processTurn():
 	for activity in activities:
 		var processResult = activity.processTurn()
 		if(processResult != null && processResult.has("text")):
-			processMessages.append(processResult["text"])
+			processMessages.append(processText(processResult["text"], activity.domID, activity.subID))
 	if(processMessages.size() > 0):
 		messages.append(Util.join(processMessages, " "))
 		
 	removeEndedActivities()
 	
+func getSubIDs():
+	return subs.keys()
+	
+func getDomIDs():
+	return doms.keys()
+	
 func processAIActions(isDom = true):
 	var peopleToCheck = [
-		#domID,
-		#subID,
 	]
 	if(isDom):
-		peopleToCheck = [domID]
+		peopleToCheck = doms
 	else:
-		peopleToCheck = [subID]
+		peopleToCheck = subs
 	
 	for personID in peopleToCheck:
+		var theinfo = peopleToCheck[personID]
 		if(personID == "pc"):
 			continue
 		
@@ -156,21 +185,50 @@ func processAIActions(isDom = true):
 		var actionsScores = []
 		
 		# if is dom
-		if(personID == domID):
+		if(isDom(personID)):
 			var allSexActivities = GlobalRegistry.getSexActivityReferences()
 			for possibleSexActivityID in allSexActivities:
 				var newSexActivityRef = allSexActivities[possibleSexActivityID]
 				
-				if(!newSexActivityRef.canStartActivity(self, getDomInfo(personID), getSubInfo(subID))):
-					continue
+				for subID in subs:
+					var subInfo = subs[subID]
+					if(!newSexActivityRef.canBeStartedByDom()):
+						continue
+					
+					if(!newSexActivityRef.canStartActivity(self, theinfo, subInfo)):
+						continue
+					
+					var score = newSexActivityRef.getActivityScore(self, theinfo, subInfo)
+					if(score > 0.0):
+						possibleActions.append({
+							id = "startNewDomActivity",
+							activityID = possibleSexActivityID,
+							subID = subInfo.charID,
+						})
+						actionsScores.append(score)
+		
+		if(isSub(personID)):
+			var allSexActivities = GlobalRegistry.getSexActivityReferences()
+			for possibleSexActivityID in allSexActivities:
+				var newSexActivityRef = allSexActivities[possibleSexActivityID]
 				
-				var score = newSexActivityRef.getActivityScore(self, getDomInfo(personID), getSubInfo(subID))
-				if(score > 0.0):
-					possibleActions.append({
-						id = "startNewDomActivity",
-						activityID = possibleSexActivityID,
-					})
-					actionsScores.append(score)
+				for domID in doms:
+					var domInfo = doms[domID]
+					if(!newSexActivityRef.canBeStartedBySub()):
+						continue
+					
+					if(!newSexActivityRef.canStartActivity(self, domInfo, theinfo)):
+						continue
+					
+					var score = newSexActivityRef.getActivityScore(self, domInfo, theinfo)
+					if(score > 0.0):
+						possibleActions.append({
+							id = "startNewSubActivity",
+							activityID = possibleSexActivityID,
+							domID = domInfo.charID,
+						})
+						actionsScores.append(score)
+		
 		
 		for activity in activities:
 			
@@ -183,7 +241,10 @@ func processAIActions(isDom = true):
 							activityID = activity.uniqueID,
 							action = action,
 						})
-						actionsScores.append(1.0)
+						if(action.has("score")):
+							actionsScores.append(action["score"])
+						else:
+							actionsScores.append(1.0)
 				
 			if(activity.subID == personID):
 				var subActions = activity.getSubActions()
@@ -194,7 +255,10 @@ func processAIActions(isDom = true):
 							activityID = activity.uniqueID,
 							action = action,
 						})
-						actionsScores.append(1.0)
+						if(action.has("score")):
+							actionsScores.append(action["score"])
+						else:
+							actionsScores.append(1.0)
 
 		if(possibleActions.size() > 0):
 			var pickedFinalAction = RNG.pickWeighted(possibleActions, actionsScores)
@@ -206,7 +270,9 @@ func processAIActions(isDom = true):
 				var activity = getActivityWithUniqueID(pickedFinalAction["activityID"])
 				doSubAction(activity, pickedFinalAction["action"])
 			if(pickedFinalAction["id"] == "startNewDomActivity"):
-				startActivity(pickedFinalAction["activityID"], domID, subID)
+				startActivity(pickedFinalAction["activityID"], personID, pickedFinalAction["subID"])
+			if(pickedFinalAction["id"] == "startNewSubActivity"):
+				startActivity(pickedFinalAction["activityID"], pickedFinalAction["domID"], personID)
 
 	removeEndedActivities()
 
@@ -214,16 +280,17 @@ func doDomAction(activity, action):
 	var actionResult = activity.doDomAction(action["id"], action)
 	
 	if(actionResult != null && actionResult.has("text")):
-		messages.append(actionResult["text"])
+		addText(actionResult["text"], activity.domID, activity.subID)
 
 func doSubAction(activity, action):
 	var actionResult = activity.doSubAction(action["id"], action)
 	
 	if(actionResult != null && actionResult.has("text")):
-		messages.append(actionResult["text"])
+		addText(actionResult["text"], activity.domID, activity.subID)
 
 func start():
-	processAIActions(true)
+	if(isSub("pc")):
+		processAIActions(true)
 
 func getFinalText():
 	return Util.join(messages, "\n\n")
@@ -256,7 +323,58 @@ func getActions():
 						action = action,
 						name = action["name"],
 					})
+					
+	if(isDom("pc")):
+		var pctargetID = getPCTarget()
+		if(pctargetID != null):
+			var allSexActivities = GlobalRegistry.getSexActivityReferences()
+			for possibleSexActivityID in allSexActivities:
+				var newSexActivityRef = allSexActivities[possibleSexActivityID]
+				
+				if(!newSexActivityRef.canBeStartedByDom()):
+					continue
+				
+				if(!newSexActivityRef.canStartActivity(self, getDomInfo("pc"), getSubInfo(pctargetID))):
+					continue
+				
+				result.append({
+					id = "startNewDomActivity",
+					activityID = possibleSexActivityID,
+					name = newSexActivityRef.getVisibleName(),
+					category = newSexActivityRef.getCategory(),
+					subID = pctargetID,
+				})
+					
+	if(isSub("pc")):
+		var pctargetID = getPCTarget()
+		if(pctargetID != null):
+			var allSexActivities = GlobalRegistry.getSexActivityReferences()
+			for possibleSexActivityID in allSexActivities:
+				var newSexActivityRef = allSexActivities[possibleSexActivityID]
+				
+				if(!newSexActivityRef.canBeStartedBySub()):
+					continue
+				
+				if(!newSexActivityRef.canStartActivity(self, getDomInfo(pctargetID), getSubInfo("pc"))):
+					continue
+				
+				result.append({
+					id = "startNewSubActivity",
+					activityID = possibleSexActivityID,
+					name = newSexActivityRef.getVisibleName(),
+					category = newSexActivityRef.getCategory(),
+					domID = pctargetID,
+				})
+				
 	return result
+
+func getPCTarget():
+	if(isDom("pc")):
+		return subs.keys()[0]
+	if(isSub("pc")):
+		return doms.keys()[0]
+	
+	return null
 
 func doAction(_actionInfo):
 	if(_actionInfo["id"] == "continue"):
@@ -278,6 +396,18 @@ func doAction(_actionInfo):
 		processAIActions(false)
 		processTurn()
 		processAIActions(true)
+	if(_actionInfo["id"] == "startNewDomActivity"):
+		messages.clear()
+		startActivity(_actionInfo["activityID"], "pc", _actionInfo["subID"])
+		processAIActions(true)
+		processAIActions(false)
+		processTurn()
+	if(_actionInfo["id"] == "startNewSubActivity"):
+		messages.clear()
+		startActivity(_actionInfo["activityID"], _actionInfo["domID"], "pc")
+		processAIActions(true)
+		processAIActions(false)
+		processTurn()
 
 func hasTag(charID, tag):
 	for activity in activities:
@@ -287,4 +417,13 @@ func hasTag(charID, tag):
 		if(activity.subID == charID):
 			if(tag in activity.getSubTags()):
 				return true
+	return false
+
+func hasActivity(id, thedomID, thesubID):
+	for activity in activities:
+		if(activity.id != id):
+			continue
+		
+		if(activity.domID == thedomID && activity.subID == thesubID):
+			return true
 	return false

@@ -4,11 +4,13 @@ var times = 0
 func _init():
 	id = "SexFuckExample"
 
-func getActivityScore(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexSubInfo):
-	if(_sexEngine.hasGoal(_domInfo, SexGoal.Fuck, _subInfo)):
-		return 1.0
-	
-	return 0.0
+func getGoals():
+	return {
+		SexGoal.Fuck: 1.0,
+	}
+
+func getCategory():
+	return []
 
 func getDomTags():
 	return [SexActivityTag.PenisUsed]
@@ -20,16 +22,16 @@ func startActivity(_args):
 	state = ""
 	
 	return {
-		text = "Positions himself behind your butt with his dick out.",
+		text = "{dom.name} positions {dom.himself} behind {sub.your} butt with {dom.his} dick out.",
 	}
 
 func processTurn():
 	if(state == "fucking"):
 		times += 1
 		
-		return {text="HE is still fucking you."}
+		return {text="{dom.You} {dom.youAre} still fucking {sub.youHim}."}
 	else:
-		return {text="HE is NOT fucking you."}
+		return {text="{dom.You} {dom.youAre} NOT fucking {sub.youHim}."}
 	
 func getDomActions():
 	if(state == "fucking" && times > 5):
@@ -49,27 +51,39 @@ func getDomActions():
 				"score": 1.0,
 				"name": "FUCK THEM",
 				"desc": "fuck them raw",
+			},
+			{
+				"id": "stop",
+				"score": getStopScore(),
+				"name": "STOP FUCK",
+				"desc": "enough fucking",
 			}
 		]
 
 func doDomAction(_id, _actionInfo):
+	if(_id == "stop" && state == ""):
+		endActivity()
+		return {text = "{dom.You} stopped the fuck"}
+	
 	if(_id == "cum"):
 		if(state == "fucking"):
 			if(RNG.chance(50)):
 				times = 0
 				state = ""
-				return {text = "HE CAMEEEE"}
+				satisfyGoals()
+				return {text = "{dom.You} CAMEEEE"}
 			else:
+				satisfyGoals()
 				endActivity()
-				return {text = "HE CAME AND DECIDED TO STOP"}
+				return {text = "{dom.You} CAME AND DECIDED TO STOP"}
 	
 	if(_id == "fuck"):
 		if(state == ""):
 			if(RNG.chance(50)):
-				return {text = "He tries to insert but fails"}
+				return {text = "{dom.You} {dom.youVerb('try', 'tries')} to insert but {dom.youVerb('fail')}"}
 			else:
 				state = "fucking"
-				return {text = "He inserts his cock!"}
+				return {text = "{dom.You} {dom.youVerb('insert')} {dom.yourHis} cock!"}
 
 func getSubActions():
 	var actions = []
@@ -100,14 +114,14 @@ func doSubAction(_id, _actionInfo):
 	if(_id == "rub"):
 		#switchCurrentActivityTo("SexFuckTest2")
 		
-		return {text = "You rub against them",}
+		return {text = "{sub.You} {sub.youVerb('rub')} against {dom.youHim}",}
 	if(_id == "begnottocum"):
 		if(state == "fucking"):
-			return {text = "YOU BEG THEM NOT TO CUM INSIDE"}
+			return {text = "{sub.You} {sub.youVerb('BEG')} {dom.youHim} NOT TO CUM INSIDE"}
 	if(_id == "avoid"):
 		if(state == "fucking"):
 			if(RNG.chance(50)):
-				return {text = "You try to avoid but fail"}
+				return {text = "{sub.You} {sub.youVerb('try', 'tries')} to avoid but {sub.youVerb('fail')}"}
 			else:
 				state = ""
-				return {text = "YOU MAKE HIM PULL OUT, NICE"}
+				return {text = "{sub.You} {sub.youVerb('make')} {dom.youHim} PULL OUT, NICE"}

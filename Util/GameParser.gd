@@ -59,6 +59,42 @@ func callObjectFuncWrapper(_obj: String, _command: String, _args: Array):
 		return object.getName()		
 	if(_command == "nameS" && _args.size() == 0):
 		return object.getName()+"'s"
+	if(_command in ["nameOrYou", "you"] && _args.size() == 0):
+		if(object.isPlayer()):
+			return "you"
+		else:
+			return object.getName()
+	if(_command in ["himYou", "youHim"] && _args.size() == 0):
+		if(object.isPlayer()):
+			return "you"
+		else:
+			return object.himHer()
+	if(_command in ["hisYour", "hisYou", "yourHis", "youHis"] && _args.size() == 0):
+		if(object.isPlayer()):
+			return "your"
+		else:
+			return object.hisHer()
+	if(_command in ["nameSOrYou", "your"] && _args.size() == 0):
+		if(object.isPlayer()):
+			return "your"
+		else:
+			return object.getName()+"'s"
+	if(_command in ["youAre"] && _args.size() == 0):
+		if(object.isPlayer()):
+			return "are"
+		else:
+			return object.isAre()
+	if(_command == "youVerb"):
+		if(object.isPlayer()):
+			return str(_args[0])
+		if(_args.size() == 1):
+			return object.verbS(str(_args[0]))
+		if(_args.size() == 2):
+			return object.verbS(str(_args[0]), str(_args[1]))
+	if((_command == "yourself") && _args.size() == 0):
+		if(object.isPlayer()):
+			return "yourself"
+		return object.himselfHerself()
 	if(_command == "inmateNumber" && _args.size() == 0 && object.has_method("getInmateNumber")):
 		return object.getInmateNumber()		
 	if(_command == "inmateNumberFull" && _args.size() == 0 && object.has_method("getFullInmateNumber")):

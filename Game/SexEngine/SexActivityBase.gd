@@ -6,14 +6,22 @@ var uniqueID = 0
 var domID = null
 var subID = null
 var hasEnded = false
-var sexEngine: WeakRef
+var sexEngineRef: WeakRef
+var startedByDom = true
+var startedBySub = false
 
 var state:String = ""
 
+func getVisibleName():
+	return id
+
+func getCategory():
+	return []
+
 func getSexEngine() -> SexEngine:
-	if(sexEngine == null):
+	if(sexEngineRef == null):
 		return null
-	return sexEngine.get_ref()
+	return sexEngineRef.get_ref()
 
 func getSub() -> BaseCharacter:
 	var se = getSexEngine()
@@ -34,11 +42,47 @@ func initParticipants(theDomID, theSubID):
 func endActivity():
 	hasEnded = true
 
+func getGoals():
+	return {}
+
+func satisfyGoals():
+	var goalData = getGoals()
+	var sexEngine = getSexEngine()
+	
+	for goalID in goalData:
+		sexEngine.satisfyGoal(sexEngine.getDomInfo(domID), goalID, sexEngine.getSubInfo(subID))
+
 func canStartActivity(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexSubInfo):
-	return tagsNotBusy(_sexEngine, _domInfo, _subInfo)
+	return tagsNotBusy(_sexEngine, _domInfo, _subInfo) && !hasActivity(_sexEngine, id, _domInfo, _subInfo)
+
+func canBeStartedByDom():
+	return startedByDom
+	
+func canBeStartedBySub():
+	return startedBySub
 
 func getActivityScore(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexSubInfo):
-	return 0.0
+	var goalData = getGoals()
+	
+	var resultScore = 0.0
+	
+	for goalID in goalData:
+		if(_sexEngine.hasGoal(_domInfo, goalID, _subInfo)):
+			resultScore += goalData[goalID]
+
+	return resultScore
+
+func getStopScore(stopscore = 2.0, alwaysstopscore = 0.0):
+	var sexEngine = getSexEngine()
+	
+	var activityScore = getActivityScore(sexEngine, sexEngine.getDomInfo(domID), sexEngine.getSubInfo(subID))
+	
+	if(activityScore > 0.0):
+		return alwaysstopscore
+	return stopscore
+
+func hasActivity(_sexEngine: SexEngine, theid, _domInfo: SexDomInfo, _subInfo: SexSubInfo):
+	return _sexEngine.hasActivity(theid, _domInfo.charID, _subInfo.charID)
 
 func tagsNotBusy(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexSubInfo):
 	var domTags = getDomTags()
