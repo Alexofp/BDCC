@@ -569,6 +569,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Skills/PerkBase.gd"
 }, {
+"base": "Reference",
+"class": "Personality",
+"language": "GDScript",
+"path": "res://Game/SexEngine/Personality.gd"
+}, {
+"base": "Object",
+"class": "PersonalityStat",
+"language": "GDScript",
+"path": "res://Game/SexEngine/PersonalityStat.gd"
+}, {
 "base": "BaseCharacter",
 "class": "Player",
 "language": "GDScript",
@@ -1117,6 +1127,8 @@ _global_script_class_icons={
 "PartStatePicker": "",
 "Perk": "",
 "PerkBase": "",
+"Personality": "",
+"PersonalityStat": "",
 "Player": "",
 "PunishmentsModule": "",
 "Quest": "",

@@ -33,6 +33,13 @@ func _run():
 		#saynn(whatHappened)
 		saynn(sexEngine.getFinalText())
 		
+		for domID in sexEngine.getDomIDs():
+			var domInfo: SexDomInfo = sexEngine.getDomInfo(domID)
+			sayn(domInfo.getInfoString())
+		for subID in sexEngine.getSubIDs():
+			var subInfo: SexSubInfo = sexEngine.getSubInfo(subID)
+			sayn(subInfo.getInfoString())
+		
 		var categoryButtons = {}
 		for actionInfo in sexEngine.getActions():
 			var actionCategory = []

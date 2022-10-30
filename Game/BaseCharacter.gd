@@ -20,6 +20,7 @@ var buffsHolder: BuffsHolder
 var skillsHolder: SkillsHolder
 var lustInterests: LustInterests
 var fetishHolder: FetishHolder
+var personality: Personality
 
 # Bodypart stuff
 var bodyparts: Dictionary
@@ -62,6 +63,8 @@ func _ready():
 	lustInterests = LustInterests.new()
 	fetishHolder = FetishHolder.new()
 	fetishHolder.setCharacter(self)
+	personality = Personality.new()
+	personality.setCharacter(self)
 
 func getID():
 	assert(false, "Getting an ID of a baseCharacter class")
@@ -538,6 +541,9 @@ func getBuffsHolder() -> BuffsHolder:
 
 func getFetishHolder() -> FetishHolder:
 	return fetishHolder
+
+func getPersonality() -> Personality:
+	return personality
 
 func addExperience(newexp: int):
 	skillsHolder.addExperience(newexp)

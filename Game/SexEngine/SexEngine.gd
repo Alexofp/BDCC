@@ -152,6 +152,13 @@ func removeEndedActivities():
 func processTurn():
 	removeEndedActivities()
 	
+	for domID in doms:
+		var domInfo = doms[domID]
+		domInfo.processTurn()
+	for subID in subs:
+		var subInfo = subs[subID]
+		subInfo.processTurn()
+	
 	var processMessages = []
 	for activity in activities:
 		var processResult = activity.processTurn()
@@ -168,6 +175,12 @@ func getSubIDs():
 func getDomIDs():
 	return doms.keys()
 	
+func hasAnyAcitivites(charID):
+	for activity in activities:
+		if(activity.subID == charID || activity.domID == charID):
+			return true
+	return false
+	
 func processAIActions(isDom = true):
 	var peopleToCheck = [
 	]
@@ -183,6 +196,9 @@ func processAIActions(isDom = true):
 		
 		var possibleActions = []
 		var actionsScores = []
+		if(hasAnyAcitivites(personID)):
+			possibleActions = [{id="donothing"}]
+			actionsScores = [1.0]
 		
 		# if is dom
 		if(isDom(personID)):
@@ -242,7 +258,7 @@ func processAIActions(isDom = true):
 							action = action,
 						})
 						if(action.has("score")):
-							actionsScores.append(action["score"])
+							actionsScores.append(max(action["score"], 0.0))
 						else:
 							actionsScores.append(1.0)
 				
@@ -256,7 +272,7 @@ func processAIActions(isDom = true):
 							action = action,
 						})
 						if(action.has("score")):
-							actionsScores.append(action["score"])
+							actionsScores.append(max(action["score"], 0.0))
 						else:
 							actionsScores.append(1.0)
 

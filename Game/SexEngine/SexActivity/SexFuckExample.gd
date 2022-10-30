@@ -30,35 +30,44 @@ func processTurn():
 		times += 1
 		
 		return {text="{dom.You} {dom.youAre} still fucking {sub.youHim}."}
+	elif(state == "noncon"):
+		times += 1
+		
+		return {text="{dom.You} {dom.youAre} still fucking {sub.youHim} VERY ROUGH."}
 	else:
 		return {text="{dom.You} {dom.youAre} NOT fucking {sub.youHim}."}
 	
 func getDomActions():
-	if(state == "fucking" && times > 5):
-		return [
-			{
+	var actions = []
+	if(state in ["fucking", "noncon"] && times > 5):
+		actions.append({
 				"id": "cum",
 				"score": 1.0,
 				"name": "Cum inside them",
 				"desc": "fuck them raw",
-			}
-		]
+			})
+	
+	if(state in ["fucking"]):
+		actions.append({
+				"id": "startnoncon",
+				"score": -0.2 + getDomAngryScore() * 0.8,
+				"name": "Fuck roughly",
+				"desc": "fuck them rough",
+			})
 	
 	if(state == ""):
-		return [
-			{
+		actions.append_array([{
 				"id": "fuck",
 				"score": 1.0,
 				"name": "FUCK THEM",
 				"desc": "fuck them raw",
-			},
-			{
+			},{
 				"id": "stop",
 				"score": getStopScore(),
 				"name": "STOP FUCK",
 				"desc": "enough fucking",
-			}
-		]
+			}])
+	return actions
 
 func doDomAction(_id, _actionInfo):
 	if(_id == "stop" && state == ""):
@@ -66,7 +75,7 @@ func doDomAction(_id, _actionInfo):
 		return {text = "{dom.You} stopped the fuck"}
 	
 	if(_id == "cum"):
-		if(state == "fucking"):
+		if(state in ["fucking", "noncon"]):
 			if(RNG.chance(50)):
 				times = 0
 				state = ""
@@ -76,6 +85,10 @@ func doDomAction(_id, _actionInfo):
 				satisfyGoals()
 				endActivity()
 				return {text = "{dom.You} CAME AND DECIDED TO STOP"}
+	
+	if(_id == "startnoncon"):
+		state = "noncon"
+		return {text = "{dom.You} began fucking {sub.you} ROUGH!"}
 	
 	if(_id == "fuck"):
 		if(state == ""):
@@ -94,7 +107,7 @@ func getSubActions():
 				"name": "Rub",
 				"desc": "MEOW",
 			})
-	if(state == "fucking"):
+	if(state in ["fucking", "noncon"]):
 		actions.append({
 				"id": "avoid",
 				"score": 1.0,
@@ -113,15 +126,18 @@ func getSubActions():
 func doSubAction(_id, _actionInfo):
 	if(_id == "rub"):
 		#switchCurrentActivityTo("SexFuckTest2")
+		calmDomDown(0.1)
 		
 		return {text = "{sub.You} {sub.youVerb('rub')} against {dom.youHim}",}
 	if(_id == "begnottocum"):
-		if(state == "fucking"):
-			return {text = "{sub.You} {sub.youVerb('BEG')} {dom.youHim} NOT TO CUM INSIDE"}
+		calmDomDown(0.1)
+		return {text = "{sub.You} {sub.youVerb('BEG')} {dom.youHim} NOT TO CUM INSIDE"}
 	if(_id == "avoid"):
-		if(state == "fucking"):
+		if(state in ["fucking", "noncon"]):
 			if(RNG.chance(50)):
+				makeDomAngry(0.1)
 				return {text = "{sub.You} {sub.youVerb('try', 'tries')} to avoid but {sub.youVerb('fail')}"}
 			else:
+				makeDomAngry(0.5)
 				state = ""
 				return {text = "{sub.You} {sub.youVerb('make')} {dom.youHim} PULL OUT, NICE"}

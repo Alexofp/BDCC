@@ -160,6 +160,15 @@ static func roundF(number: float, digitsAmount: int = 0):
 	
 	return round(number*mult)/mult
 
+static func moveNumberTowards(origNumber, targetNumber, speed):
+	var delta = targetNumber - origNumber
+	if(delta > speed):
+		delta = speed
+	if(delta < -speed):
+		delta = -speed
+	
+	return origNumber + delta
+
 static func getSpeciesName(species: Array):
 	if(species.size() == 0):
 		return "Unknown species"

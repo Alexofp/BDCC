@@ -81,6 +81,26 @@ func getStopScore(stopscore = 2.0, alwaysstopscore = 0.0):
 		return alwaysstopscore
 	return stopscore
 
+func getDomAngryScore():
+	var sexEngine = getSexEngine()
+	var domInfo:SexDomInfo = sexEngine.getDomInfo(domID)
+	return clamp(domInfo.anger, 0.0, 1.0)
+
+func makeDomAngry(howmuch = 0.2):
+	var sexEngine = getSexEngine()
+	var domInfo:SexDomInfo = sexEngine.getDomInfo(domID)
+	var personality: Personality = domInfo.getChar().getPersonality()
+	var evilness = personality.getStat(PersonalityStat.Evilness)
+	if(evilness >= 0.0):
+		domInfo.makeAngry(howmuch * (1.0 + evilness))
+	else:
+		domInfo.makeAngry(howmuch * (1.0 + evilness))
+
+func calmDomDown(howmuch = 0.2):
+	var sexEngine = getSexEngine()
+	var domInfo:SexDomInfo = sexEngine.getDomInfo(domID)
+	domInfo.makeAngry(-howmuch)
+
 func hasActivity(_sexEngine: SexEngine, theid, _domInfo: SexDomInfo, _subInfo: SexSubInfo):
 	return _sexEngine.hasActivity(theid, _domInfo.charID, _subInfo.charID)
 
