@@ -21,65 +21,71 @@ func _initScene(_args = []):
 	sexEngine.generateGoals()
 	
 	sexEngine.start()
-
+	setFightCharacter(top)
 
 func _run():
+	updateFightCharacter()
+	
 	if(state == ""):
-		saynn("Nya")
-		
-		if(currentCategory != []):
-			addButton("Back", "Back to the previous menu", "backbutton")
-		
+
 		#saynn(whatHappened)
 		saynn(sexEngine.getFinalText())
 		
-		for domID in sexEngine.getDomIDs():
-			var domInfo: SexDomInfo = sexEngine.getDomInfo(domID)
-			sayn(domInfo.getInfoString())
-		for subID in sexEngine.getSubIDs():
-			var subInfo: SexSubInfo = sexEngine.getSubInfo(subID)
-			sayn(subInfo.getInfoString())
 		
-		var categoryButtons = {}
-		for actionInfo in sexEngine.getActions():
-			var actionCategory = []
-			if("category" in actionInfo):
-				actionCategory = actionInfo["category"]
+		if(sexEngine.hasSexEnded()):
+			pass
+		else:
+			if(currentCategory != []):
+				addButton("Back", "Back to the previous menu", "backbutton")
+			
+			for domID in sexEngine.getDomIDs():
+				var domInfo: SexDomInfo = sexEngine.getDomInfo(domID)
+				sayn(domInfo.getInfoString())
+			for subID in sexEngine.getSubIDs():
+				var subInfo: SexSubInfo = sexEngine.getSubInfo(subID)
+				sayn(subInfo.getInfoString())
+			
+			var categoryButtons = {}
+			for actionInfo in sexEngine.getActions():
+				var actionCategory = []
+				if("category" in actionInfo):
+					actionCategory = actionInfo["category"]
+					
+				if(currentCategory.size() >= actionCategory.size()):
+					continue
 				
-			if(currentCategory.size() >= actionCategory.size()):
-				continue
+				var good = true
+				for _i in range(0, currentCategory.size()):
+					if(currentCategory[_i] != actionCategory[_i]):
+						good = false
+						break
+				
+				if(!good):
+					continue
+				
+				var newCategory = actionCategory[currentCategory.size()]
+				if(!categoryButtons.has(newCategory)):
+					categoryButtons[newCategory] = true
+					addButton("!"+newCategory, "Look at the actions in this category", "pickcategory", [newCategory])
 			
-			var good = true
-			for _i in range(0, currentCategory.size()):
-				if(currentCategory[_i] != actionCategory[_i]):
-					good = false
-					break
+			for actionInfo in sexEngine.getActions():
+				var actionCategory = []
+				if("category" in actionInfo):
+					actionCategory = actionInfo["category"]
+				
+				if(currentCategory == actionCategory):
+					addButton(actionInfo["name"], "ASD", "doAction", [actionInfo])
 			
-			if(!good):
-				continue
+			#addButton("Process", "Process", "processTurn")
 			
-			var newCategory = actionCategory[currentCategory.size()]
-			if(!categoryButtons.has(newCategory)):
-				categoryButtons[newCategory] = true
-				addButton("!"+newCategory, "Look at the actions in this category", "pickcategory", [newCategory])
-		
-		for actionInfo in sexEngine.getActions():
-			var actionCategory = []
-			if("category" in actionInfo):
-				actionCategory = actionInfo["category"]
-			
-			if(currentCategory == actionCategory):
-				addButton(actionInfo["name"], "ASD", "doAction", [actionInfo])
-		
-		#addButton("Process", "Process", "processTurn")
-		
-		addButton("Close", "Close the scene", "endthescene")
+		addButton("QUIT", "Close the scene", "endthescene")
 
 
 func _react(_action: String, _args):
 	if(_action == "doAction"):
 		currentCategory = []
 		sexEngine.doAction(_args[0])
+		processTime(30)
 		setState("")
 		return
 	

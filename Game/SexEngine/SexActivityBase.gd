@@ -5,6 +5,9 @@ var id = "error"
 var uniqueID = 0
 var domID = null
 var subID = null
+var domInfo: SexDomInfo
+var subInfo: SexSubInfo
+
 var hasEnded = false
 var sexEngineRef: WeakRef
 var startedByDom = true
@@ -24,20 +27,17 @@ func getSexEngine() -> SexEngine:
 	return sexEngineRef.get_ref()
 
 func getSub() -> BaseCharacter:
-	var se = getSexEngine()
-	if(se != null):
-		return se.getSub()
-	return null
+	return GlobalRegistry.getCharacter(subID)
 
 func getDom() -> BaseCharacter:
-	var se = getSexEngine()
-	if(se != null):
-		return se.getDom()
-	return null
+	return GlobalRegistry.getCharacter(domID)
 
 func initParticipants(theDomID, theSubID):
 	domID = theDomID
 	subID = theSubID
+	
+	domInfo = getSexEngine().getDomInfo(domID)
+	subInfo = getSexEngine().getSubInfo(subID)
 
 func endActivity():
 	hasEnded = true
@@ -61,10 +61,13 @@ func canBeStartedByDom():
 func canBeStartedBySub():
 	return startedBySub
 
+func getActivityBaseScore(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexSubInfo):
+	return 0.0
+
 func getActivityScore(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexSubInfo):
 	var goalData = getGoals()
 	
-	var resultScore = 0.0
+	var resultScore = getActivityBaseScore(_sexEngine, _domInfo, _subInfo)
 	
 	for goalID in goalData:
 		if(_sexEngine.hasGoal(_domInfo, goalID, _subInfo)):
@@ -82,13 +85,9 @@ func getStopScore(stopscore = 2.0, alwaysstopscore = 0.0):
 	return stopscore
 
 func getDomAngryScore():
-	var sexEngine = getSexEngine()
-	var domInfo:SexDomInfo = sexEngine.getDomInfo(domID)
 	return clamp(domInfo.anger, 0.0, 1.0)
 
 func makeDomAngry(howmuch = 0.2):
-	var sexEngine = getSexEngine()
-	var domInfo:SexDomInfo = sexEngine.getDomInfo(domID)
 	var personality: Personality = domInfo.getChar().getPersonality()
 	var evilness = personality.getStat(PersonalityStat.Evilness)
 	if(evilness >= 0.0):
@@ -97,8 +96,6 @@ func makeDomAngry(howmuch = 0.2):
 		domInfo.makeAngry(howmuch * (1.0 + evilness))
 
 func calmDomDown(howmuch = 0.2):
-	var sexEngine = getSexEngine()
-	var domInfo:SexDomInfo = sexEngine.getDomInfo(domID)
 	domInfo.makeAngry(-howmuch)
 
 func hasActivity(_sexEngine: SexEngine, theid, _domInfo: SexDomInfo, _subInfo: SexSubInfo):
@@ -156,3 +153,35 @@ func doSubAction(_id, _actionInfo):
 	return {
 		"text": "Sub bad stuff happened",
 	}
+
+func getDomFetishesMod(fetishes = {}):
+	var fetishHolder: FetishHolder = getDom().getFetishHolder()
+	
+	var result = 0.0
+	for fetishID in fetishes:
+		var fetishValue = fetishHolder.getFetishValue(fetishID)
+		result += fetishValue
+	
+	return result
+	
+func getSubFetishesMod(fetishes = {}):
+	var fetishHolder: FetishHolder = getSub().getFetishHolder()
+	
+	var result = 0.0
+	for fetishID in fetishes:
+		var fetishValue = fetishHolder.getFetishValue(fetishID)
+		result += fetishValue
+	
+	return result
+
+func addDomLust(howmuch, fetishes = {}):
+	getDom().addLust(howmuch * (1.0 + getDomFetishesMod(fetishes)))
+		
+func addSubLust(howmuch, fetishes = {}):
+	getSub().addLust(howmuch * (1.0 + getSubFetishesMod(fetishes)))
+		
+func getSubLikingItScore():
+	return getSub().getLustLevel()
+
+func getSubHatingItScore():
+	return 1.0 - getSub().getLustLevel()

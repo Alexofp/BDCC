@@ -854,6 +854,36 @@ func gotOrificeStretchedWith(bodypartSlot, insertionSize, showMessages = true):
 	if(newLooseness > oldLooseness && showMessages):
 		emit_signal("orificeBecomeMoreLoose", thebodypart.getOrificeName(), newLooseness, oldLooseness)
 
+func gotOrificeStretchedBy(bodypartSlot, characterID, showMessages = true):
+	if(!hasBodypart(bodypartSlot)):
+		return
+	
+	var ch = GlobalRegistry.getCharacter(characterID)
+	assert(ch != null)
+	gotOrificeStretchedWith(bodypartSlot, ch.getPenisSize(), showMessages)
+
+func getPenetrateChance(bodypartSlot, insertionSize):
+	if(!hasBodypart(bodypartSlot)):
+		return 0.0
+	var thebodypart = getBodypart(bodypartSlot)
+	
+	var orifice: Orifice = thebodypart.getOrifice()
+	if(orifice == null):
+		return 0.0
+	
+	var goodSize = orifice.getComfortableInsertion()
+	
+	var diff = insertionSize - goodSize
+	if(diff <= 0.0):
+		return 100.0
+	
+	return 500.0 / (5.0 + diff)
+
+func getPenetrateChanceBy(bodypartSlot, characterID):
+	var ch = GlobalRegistry.getCharacter(characterID)
+	assert(ch != null)
+	return getPenetrateChance(bodypartSlot, ch.getPenisSize())
+
 func gotFuckedBy(bodypartSlot, characterID, showMessages = true):
 	if(!hasBodypart(bodypartSlot)):
 		return
@@ -1404,3 +1434,15 @@ func isBodypartCovered(bodypartSlot):
 	if(coveredParts.has(bodypartSlot) && coveredParts[bodypartSlot]):
 		return true
 	return false
+
+# Should apply a temporary cummed on status probably
+func cummedOnBy(_characterID, _sourceType = null, _howMessy: int = 1):
+	pass
+
+func afterSexEnded(sexInfo):
+	if(sexInfo.getTimesCame() > 0):
+		addLust(-getLust())
+	if(!isPlayer()):
+		addLust(-getLust())
+		addPain(-getPain())
+		addStamina(getMaxStamina())

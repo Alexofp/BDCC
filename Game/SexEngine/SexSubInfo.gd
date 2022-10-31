@@ -1,21 +1,10 @@
-extends Reference
+extends SexInfoBase
 class_name SexSubInfo
 
-var charID = null
 var stance = SexStance.Standing
 
 var resistance: float = 0.0
 var fear: float = 0.0
-
-func initInfo(theCharID):
-	charID = theCharID
-	initFromPersonality()
-
-func getChar() -> BaseCharacter:
-	if(charID == null):
-		return null
-	
-	return GlobalRegistry.getCharacter(charID)
 
 func getInfoString():
 	var character = getChar()
@@ -25,6 +14,7 @@ func getInfoString():
 		text += character.getName()+". "
 	text += "Resistance: "+str(Util.roundF(resistance*100))+"% "
 	text += "Fear: "+str(Util.roundF(fear*100))+"% "
+	text += "Arousal: "+str(Util.roundF(getArousal()*100))+"% "
 	
 	return text
 
@@ -38,6 +28,8 @@ func initFromPersonality():
 		resistance = RNG.randf_range(0.0, bratiness)
 
 func processTurn():
+	arousalNaturalFade()
+	
 	var character = getChar()
 	var personality:Personality = character.getPersonality()
 

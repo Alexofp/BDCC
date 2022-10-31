@@ -1,21 +1,10 @@
-extends Reference
+extends SexInfoBase
 class_name SexDomInfo
 
-var charID = null
 var stance = SexStance.Standing
 var goals:Array = []
 var anger: float = 0.0
 var trust: float = 0.0
-
-func initInfo(theCharID):
-	charID = theCharID
-	initFromPersonality()
-
-func getChar() -> BaseCharacter:
-	if(charID == null):
-		return null
-	
-	return GlobalRegistry.getCharacter(charID)
 
 func makeAngry(howmuch = 0.2):
 	anger += howmuch
@@ -29,6 +18,7 @@ func getInfoString():
 		text += character.getName()+". "
 	text += "Anger: "+str(Util.roundF(anger*100))+"% "
 	text += "Trust: "+str(Util.roundF(trust*100))+"% "
+	text += "Arousal: "+str(Util.roundF(getArousal()*100))+"% "
 	
 	return text
 
@@ -42,8 +32,13 @@ func initFromPersonality():
 		anger = RNG.randf_range(0.0, evilness)
 
 func processTurn():
+	arousalNaturalFade()
+	
 	var character = getChar()
 	var personality:Personality = character.getPersonality()
 
 	var evilness = personality.getStat(PersonalityStat.Evilness)
 	anger = Util.moveNumberTowards(anger, evilness, 0.01)
+
+func hasGoals():
+	return goals.size() > 0

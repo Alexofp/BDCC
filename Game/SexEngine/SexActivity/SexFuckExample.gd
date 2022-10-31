@@ -6,7 +6,7 @@ func _init():
 
 func getGoals():
 	return {
-		SexGoal.Fuck: 1.0,
+		#SexGoal.Fuck: 1.0,
 	}
 
 func getCategory():
@@ -28,10 +28,24 @@ func startActivity(_args):
 func processTurn():
 	if(state == "fucking"):
 		times += 1
+		addDomLust(10, {Fetish.VaginalSexTop: 1.0})
+		addSubLust(10, {Fetish.VaginalSexBottom: 1.0})
+		
+		domInfo.addArousalSex(0.2)
+		subInfo.addArousalSex(0.2)
+
+		
+		if(subInfo.isReadyToCum()):
+			subInfo.cum()
+			return {text="{sub.You} came!"}
 		
 		return {text="{dom.You} {dom.youAre} still fucking {sub.youHim}."}
 	elif(state == "noncon"):
 		times += 1
+		addDomLust(10, {Fetish.VaginalSexTop: 1.0})
+		addSubLust(5, {Fetish.VaginalSexBottom: 1.0})
+		domInfo.addArousalSex(0.2)
+		subInfo.addArousalSex(0.2)
 		
 		return {text="{dom.You} {dom.youAre} still fucking {sub.youHim} VERY ROUGH."}
 	else:
@@ -39,7 +53,7 @@ func processTurn():
 	
 func getDomActions():
 	var actions = []
-	if(state in ["fucking", "noncon"] && times > 5):
+	if(state in ["fucking", "noncon"] && domInfo.isReadyToCum()):
 		actions.append({
 				"id": "cum",
 				"score": 1.0,
@@ -79,9 +93,11 @@ func doDomAction(_id, _actionInfo):
 			if(RNG.chance(50)):
 				times = 0
 				state = ""
+				domInfo.cum()
 				satisfyGoals()
 				return {text = "{dom.You} CAMEEEE"}
 			else:
+				domInfo.cum()
 				satisfyGoals()
 				endActivity()
 				return {text = "{dom.You} CAME AND DECIDED TO STOP"}
@@ -114,7 +130,7 @@ func getSubActions():
 				"name": "AVOID",
 				"desc": "MEOW",
 			})
-		if(times > 3):
+		if(domInfo.isCloseToCumming()):
 			actions.append({
 					"id": "begnottocum",
 					"score": 1.0,
@@ -127,6 +143,8 @@ func doSubAction(_id, _actionInfo):
 	if(_id == "rub"):
 		#switchCurrentActivityTo("SexFuckTest2")
 		calmDomDown(0.1)
+		domInfo.addArousalForeplay(0.1)
+		subInfo.addArousalForeplay(0.1)
 		
 		return {text = "{sub.You} {sub.youVerb('rub')} against {dom.youHim}",}
 	if(_id == "begnottocum"):

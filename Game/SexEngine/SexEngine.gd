@@ -12,6 +12,8 @@ var subs = {}
 
 var currentLastActivityID = 0
 
+var sexEnded = false
+
 func initPeople(domIDs, subIDs):
 	if(domIDs is String):
 		domIDs = [domIDs]
@@ -182,6 +184,9 @@ func hasAnyAcitivites(charID):
 	return false
 	
 func processAIActions(isDom = true):
+	if(sexEnded):
+		return
+	
 	var peopleToCheck = [
 	]
 	if(isDom):
@@ -198,7 +203,7 @@ func processAIActions(isDom = true):
 		var actionsScores = []
 		if(hasAnyAcitivites(personID)):
 			possibleActions = [{id="donothing"}]
-			actionsScores = [1.0]
+			actionsScores = [0.01]
 		
 		# if is dom
 		if(isDom(personID)):
@@ -277,20 +282,29 @@ func processAIActions(isDom = true):
 							actionsScores.append(1.0)
 
 		if(possibleActions.size() > 0):
-			var pickedFinalAction = RNG.pickWeighted(possibleActions, actionsScores)
+			var totalScore = 0.0
+			for thescore in actionsScores:
+				if(thescore > 0.0):
+					totalScore += thescore
 			
-			if(pickedFinalAction["id"] == "domAction"):
-				var activity = getActivityWithUniqueID(pickedFinalAction["activityID"])
-				doDomAction(activity, pickedFinalAction["action"])
-			if(pickedFinalAction["id"] == "subAction"):
-				var activity = getActivityWithUniqueID(pickedFinalAction["activityID"])
-				doSubAction(activity, pickedFinalAction["action"])
-			if(pickedFinalAction["id"] == "startNewDomActivity"):
-				startActivity(pickedFinalAction["activityID"], personID, pickedFinalAction["subID"])
-			if(pickedFinalAction["id"] == "startNewSubActivity"):
-				startActivity(pickedFinalAction["activityID"], pickedFinalAction["domID"], personID)
+			if(RNG.chance(totalScore * 100.0)):
+				var pickedFinalAction = RNG.pickWeighted(possibleActions, actionsScores)
+				
+				if(pickedFinalAction["id"] == "domAction"):
+					var activity = getActivityWithUniqueID(pickedFinalAction["activityID"])
+					doDomAction(activity, pickedFinalAction["action"])
+				if(pickedFinalAction["id"] == "subAction"):
+					var activity = getActivityWithUniqueID(pickedFinalAction["activityID"])
+					doSubAction(activity, pickedFinalAction["action"])
+				if(pickedFinalAction["id"] == "startNewDomActivity"):
+					startActivity(pickedFinalAction["activityID"], personID, pickedFinalAction["subID"])
+				if(pickedFinalAction["id"] == "startNewSubActivity"):
+					startActivity(pickedFinalAction["activityID"], pickedFinalAction["domID"], personID)
 
 	removeEndedActivities()
+	
+	if(sexShouldEnd()):
+		endSex()
 
 func doDomAction(activity, action):
 	var actionResult = activity.doDomAction(action["id"], action)
@@ -315,7 +329,7 @@ func getActions():
 	var result = []
 	result.append({
 		id = "continue",
-		name = "Do nothing",
+		name = "Continue",
 	})
 	
 	for activity in activities:
@@ -381,7 +395,7 @@ func getActions():
 					category = newSexActivityRef.getCategory(),
 					domID = pctargetID,
 				})
-				
+	
 	return result
 
 func getPCTarget():
@@ -443,3 +457,44 @@ func hasActivity(id, thedomID, thesubID):
 		if(activity.domID == thedomID && activity.subID == thesubID):
 			return true
 	return false
+
+func sexShouldEnd():
+	if(isDom("pc")):
+		return false
+		
+	for domID in doms:
+		var domInfo = doms[domID]
+		
+		if(domInfo.hasGoals()):
+			return false
+	
+	return true
+	#return false
+
+func endSex():
+	if(sexEnded):
+		return
+	
+	sexEnded = true
+	var texts = ["The sex scene has ended!"]
+	
+	for domID in doms:
+		var domInfo = doms[domID]
+		
+		GlobalRegistry.getCharacter(domID).afterSexEnded(domInfo)
+		
+		if(domInfo.getTimesCame() > 0):
+			texts.append(processText("{dom.You} came "+str(domInfo.getTimesCame())+" times", domID, domID))
+
+	for subID in subs:
+		var subInfo = subs[subID]
+		
+		GlobalRegistry.getCharacter(subID).afterSexEnded(subInfo)
+
+		if(subInfo.getTimesCame() > 0):
+			texts.append(processText("{sub.You} came "+str(subInfo.getTimesCame())+" times", subID, subID))
+
+	messages.append(Util.join(texts, "\n"))
+
+func hasSexEnded():
+	return sexEnded

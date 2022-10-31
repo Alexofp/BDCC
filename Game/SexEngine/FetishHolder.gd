@@ -23,6 +23,11 @@ func getFetishInterest(fetishID):
 		return FetishInterest.Neutral
 	return fetishMap[fetishID]
 
+func getFetishValue(fetishID):
+	if(!fetishMap.has(fetishID)):
+		return 0.0
+	return FetishInterest.getScore(fetishMap[fetishID])
+
 func getGoals(_sexEngine, _sub):
 	var result = []
 	
