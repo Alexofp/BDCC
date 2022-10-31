@@ -39,7 +39,7 @@ func getEffectDesc():
 func getVisisbleDescription():
 	var text = getEffectDesc()
 	var buffs = getBuffs()
-	if(buffs.size() > 0):
+	if(buffs != null && (buffs is Array) && buffs.size() > 0):
 		for buff in buffs:
 			text += "\n" + "[color=#"+buff.getBuffColor().to_html(false)+"]" + buff.getVisibleDescription() + "[/color]"
 	return text

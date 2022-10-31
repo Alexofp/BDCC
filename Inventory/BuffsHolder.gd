@@ -40,14 +40,20 @@ func calculateBuffs():
 	var items = npc.getInventory().getAllEquippedItems()
 	for slot in items:
 		var item = items[slot]
-		newbuffs.append_array(item.getBuffs())
+		var itemBuffs = item.getBuffs()
+		if(itemBuffs != null && itemBuffs is Array):
+			newbuffs.append_array(itemBuffs)
 		
 	var statusEffects = npc.getStatusEffects()
 	for statusEffectID in statusEffects:
 		var statusEffect = statusEffects[statusEffectID]
-		newbuffs.append_array(statusEffect.getBuffs())
+		var statusEffectBuffs = statusEffect.getBuffs()
+		if(statusEffectBuffs != null && statusEffectBuffs is Array):
+			newbuffs.append_array(statusEffectBuffs)
 
-	newbuffs.append_array(npc.getSkillsHolder().getBuffs())
+	var perkBuffs = npc.getSkillsHolder().getBuffs()
+	if(perkBuffs != null && perkBuffs is Array):
+		newbuffs.append_array(perkBuffs)
 	
 	buffs = newbuffs
 	buffsIds.clear()
