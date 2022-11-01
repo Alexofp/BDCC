@@ -8,10 +8,13 @@ func getGoals():
 	}
 
 func getActivityBaseScore(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexSubInfo):
-	return 0.1
+	return _domInfo.fetishScore({Fetish.Bodywritings: 0.2}) * (1.0 + _domInfo.personalityScore({PersonalityStat.Mean: 1.0}))
+
+func getVisibleName():
+	return "Draw on body"
 
 func getCategory():
-	return []
+	return ["BDSM"]
 
 func getDomTags():
 	return [SexActivityTag.HandsUsed]
@@ -24,6 +27,8 @@ func startActivity(_args):
 	
 	return {
 		text = "{dom.You} {dom.youVerb('pull')} out a [b]black marker[/b].",
+		domSay = domReaction(SexReaction.AboutToDrawOnBody, 30),
+		subSay = subReaction(SexReaction.AboutToDrawOnBody, 20, {Fetish.Bodywritings: 1.0}),
 	}
 
 func processTurn():
@@ -39,7 +44,11 @@ func processTurn():
 		var zone = BodyWritingsZone.getRandomZone()
 		var writingID = BodyWritings.getRandomWritingIDForZone(zone)
 		getSub().addBodywriting(zone, writingID)
-		return {text="{dom.You} drew '"+str(BodyWritings.getWritingText(writingID))+"' on {sub.yourHis} "+BodyWritingsZone.getZoneVisibleName(zone)+"."}
+		return {
+			text="{dom.You} drew [b]'"+str(BodyWritings.getWritingText(writingID))+"'[/b] on {sub.yourHis} "+BodyWritingsZone.getZoneVisibleName(zone)+".",
+			domSay = domReaction(SexReaction.AfterDrawingOnBody, 30),
+			subSay = subReaction(SexReaction.AfterDrawingOnBody, 20, {Fetish.Bodywritings: 1.0}),
+			}
 	
 func getDomActions():
 	var actions = []
@@ -54,7 +63,7 @@ func getSubActions():
 	if(!getSub().hasBoundArms()):
 		actions.append({
 				"id": "resist",
-				"score": getSubHatingItScore(),
+				"score": subFetishScore({Fetish.Bodywritings:-1.0}) * (1.0 + subPersonalityScore({PersonalityStat.Subby: -1.0})) + subPersonalityScore({PersonalityStat.Brat: 0.2}),
 				"name": "Whack marker away",
 				"desc": "Resist against the marker",
 			})
@@ -64,7 +73,7 @@ func doSubAction(_id, _actionInfo):
 	if(_id == "resist"):
 		if(RNG.chance(30)):
 			endActivity()
-			makeDomAngry(0.2)
+			domInfo.addAnger(0.2)
 			return {text = "{sub.You} managed to whack the marker out of {dom.yourHis} hands!"}
 		
-		return {text = "{sub.You} {sub.youVerb('try', 'tries')} to whack the marker out of {dom.yourHis} hands but {sub.youVerb('fail'}.",}
+		return {text = "{sub.You} {sub.youVerb('try', 'tries')} to whack the marker out of {dom.yourHis} hands but {sub.youVerb('fail')}.",}

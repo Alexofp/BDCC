@@ -12,10 +12,10 @@ func _initScene(_args = []):
 	
 	var top = _args[0]
 	
-	sexEngine.initPeople(top, "pc")
+	#sexEngine.initPeople(top, "pc")
 	#sexEngine.initPeople(top, "rahi")
 	
-	#sexEngine.initPeople("pc", top)
+	sexEngine.initPeople("pc", top)
 	#sexEngine.initPeople(top, "pc")
 	#sexEngine.initPeople(top, "rahi")
 	sexEngine.generateGoals()
@@ -44,30 +44,7 @@ func _run():
 			for subID in sexEngine.getSubIDs():
 				var subInfo: SexSubInfo = sexEngine.getSubInfo(subID)
 				sayn(subInfo.getInfoString())
-			
-			var categoryButtons = {}
-			for actionInfo in sexEngine.getActions():
-				var actionCategory = []
-				if("category" in actionInfo):
-					actionCategory = actionInfo["category"]
-					
-				if(currentCategory.size() >= actionCategory.size()):
-					continue
-				
-				var good = true
-				for _i in range(0, currentCategory.size()):
-					if(currentCategory[_i] != actionCategory[_i]):
-						good = false
-						break
-				
-				if(!good):
-					continue
-				
-				var newCategory = actionCategory[currentCategory.size()]
-				if(!categoryButtons.has(newCategory)):
-					categoryButtons[newCategory] = true
-					addButton("!"+newCategory, "Look at the actions in this category", "pickcategory", [newCategory])
-			
+
 			for actionInfo in sexEngine.getActions():
 				var actionCategory = []
 				if("category" in actionInfo):
@@ -76,9 +53,11 @@ func _run():
 				if(currentCategory == actionCategory):
 					addButton(actionInfo["name"], "ASD", "doAction", [actionInfo])
 			
+			addCategoryButtons()
+			
 			#addButton("Process", "Process", "processTurn")
 			
-		addButton("QUIT", "Close the scene", "endthescene")
+		addButtonAt(14, "QUIT", "Close the scene", "endthescene")
 
 
 func _react(_action: String, _args):
@@ -86,6 +65,10 @@ func _react(_action: String, _args):
 		currentCategory = []
 		sexEngine.doAction(_args[0])
 		processTime(30)
+		for domID in sexEngine.doms:
+			getCharacter(domID).updateNonBattleEffects()
+		for subID in sexEngine.subs:
+			getCharacter(subID).updateNonBattleEffects()
 		setState("")
 		return
 	
@@ -108,3 +91,28 @@ func _react(_action: String, _args):
 		return
 
 	setState(_action)
+
+func addCategoryButtons():
+	var categoryButtons = {}
+	for actionInfo in sexEngine.getActions():
+		var actionCategory = []
+		if("category" in actionInfo):
+			actionCategory = actionInfo["category"]
+			
+		if(currentCategory.size() >= actionCategory.size()):
+			continue
+		
+		var good = true
+		for _i in range(0, currentCategory.size()):
+			if(currentCategory[_i] != actionCategory[_i]):
+				good = false
+				break
+		
+		if(!good):
+			continue
+		
+		var newCategory = actionCategory[currentCategory.size()]
+		if(!categoryButtons.has(newCategory)):
+			categoryButtons[newCategory] = true
+			addButton("!"+newCategory, "Look at the actions in this category", "pickcategory", [newCategory])
+	

@@ -33,3 +33,5 @@ static func getScore(interest):
 			return 1.0
 	return 0.0
 		
+static func getAll():
+	return [Hates, ReallyDislikes, Dislikes, SlighlyDislikes, Neutral, SlightlyLikes, Likes, ReallyLikes, Loves]

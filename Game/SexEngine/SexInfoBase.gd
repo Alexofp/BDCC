@@ -63,3 +63,23 @@ func getTimesCame():
 
 func isReadyToPenetrate() -> bool:
 	return getChar().getLustLevel() >= 0.5
+
+func fetishScore(fetishes = {}):
+	var fetishHolder: FetishHolder = getChar().getFetishHolder()
+	
+	var result = 0.0
+	for fetishID in fetishes:
+		var fetishValue = fetishHolder.getFetishValue(fetishID)
+		result += fetishValue * fetishes[fetishID]
+	
+	return result
+
+func personalityScore(personalityStats = {}):
+	var personality: Personality = getChar().getPersonality()
+	
+	var result = 0.0
+	for personalityStatID in personalityStats:
+		var personalityValue = personality.getStat(personalityStatID)
+		result += personalityValue * personalityStats[personalityStatID]
+	
+	return result

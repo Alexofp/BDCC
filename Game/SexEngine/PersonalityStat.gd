@@ -1,14 +1,15 @@
 extends Object
 class_name PersonalityStat
 
-const Brattiness = "Brattiness"
-const Evilness = "Evilness"
-const Subbyness = "Subbyness"
-const Impatience = "Impatience"
-const Openmindness = "Openmindness"
+const Brat = "Brat"
+const Mean = "Mean"
+const Subby = "Subby"
+const Impatient = "Impatient"
+const Openminded = "Openminded"
+const Naive = "Naive"
 
 static func getAll():
-	return [Brattiness, Evilness, Subbyness, Impatience, Openmindness]
+	return [Brat, Mean, Subby, Impatient, Openminded, Naive]
 
 static func getVisibleName(stat):
 	return str(stat)

@@ -50,14 +50,28 @@ func processText(thetext, theDomID, theSubID):
 func addText(thetext, theDomID, theSubID):
 	messages.append(processText(thetext, theDomID, theSubID))
 
-func startActivity(id, theDomID, theSubID, _args = null):
-	var activityObject = makeActivity(id, theDomID, theSubID)
-	if(activityObject == null):
+func startActivity(id, theDomID, theSubID, _args = null, startedBySub = false):
+	var activity = makeActivity(id, theDomID, theSubID)
+	if(activity == null):
 		return
 		
-	var startData = activityObject.startActivity(_args)
-	if(startData != null && startData.has("text")):
-		addText(startData["text"], theDomID, theSubID)
+	var startData = activity.startActivity(_args)
+	if(startData != null):
+		if(startData.has("text")):
+			addText(startData["text"], theDomID, theSubID)
+		
+		if(!startedBySub):
+			if(startData.has("domSay") && startData["domSay"] != null):
+				addText("[say=dom]"+startData["domSay"]+"[/say]", activity.domID, activity.subID)
+
+			elif(startData.has("subSay") && startData["subSay"] != null):
+				addText("[say=sub]"+startData["subSay"]+"[/say]", activity.domID, activity.subID)
+		else:
+			if(startData.has("subSay") && startData["subSay"] != null):
+				addText("[say=sub]"+startData["subSay"]+"[/say]", activity.domID, activity.subID)
+	
+			elif(startData.has("domSay") && startData["domSay"] != null):
+				addText("[say=dom]"+startData["domSay"]+"[/say]", activity.domID, activity.subID)
 	
 func switchActivity(oldActivity, newActivityID, _args = []):
 	oldActivity.endActivity()
@@ -162,12 +176,28 @@ func processTurn():
 		subInfo.processTurn()
 	
 	var processMessages = []
+	var subMessages = []
+	var domMessages = []
 	for activity in activities:
 		var processResult = activity.processTurn()
-		if(processResult != null && processResult.has("text")):
-			processMessages.append(processText(processResult["text"], activity.domID, activity.subID))
+		if(processResult != null):
+			if(processResult.has("text")):
+				processMessages.append(processText(processResult["text"], activity.domID, activity.subID))
+			
+			if(processResult.has("domSay") && processResult["domSay"] != null):
+				domMessages.append(processText("[say=dom]"+processResult["domSay"]+"[/say]", activity.domID, activity.subID))
+
+			elif(processResult.has("subSay") && processResult["subSay"] != null):
+				subMessages.append(processText("[say=sub]"+processResult["subSay"]+"[/say]", activity.domID, activity.subID))
+		
 	if(processMessages.size() > 0):
 		messages.append(Util.join(processMessages, " "))
+	
+	if(domMessages.size() > 0):
+		messages.append(RNG.pick(domMessages))
+		
+	if(subMessages.size() > 0):
+		messages.append(RNG.pick(subMessages))
 		
 	removeEndedActivities()
 	
@@ -241,7 +271,7 @@ func processAIActions(isDom = true):
 					if(!newSexActivityRef.canStartActivity(self, domInfo, theinfo)):
 						continue
 					
-					var score = newSexActivityRef.getActivityScore(self, domInfo, theinfo)
+					var score = newSexActivityRef.getActivityScoreSub(self, domInfo, theinfo)
 					if(score > 0.0):
 						possibleActions.append({
 							id = "startNewSubActivity",
@@ -309,14 +339,29 @@ func processAIActions(isDom = true):
 func doDomAction(activity, action):
 	var actionResult = activity.doDomAction(action["id"], action)
 	
-	if(actionResult != null && actionResult.has("text")):
-		addText(actionResult["text"], activity.domID, activity.subID)
+	if(actionResult != null):
+		if(actionResult.has("text")):
+			addText(actionResult["text"], activity.domID, activity.subID)
+		
+		if(actionResult.has("domSay") && actionResult["domSay"] != null):
+			addText("[say=dom]"+actionResult["domSay"]+"[/say]", activity.domID, activity.subID)
+
+		elif(actionResult.has("subSay") && actionResult["subSay"] != null):
+			addText("[say=sub]"+actionResult["subSay"]+"[/say]", activity.domID, activity.subID)
+
 
 func doSubAction(activity, action):
 	var actionResult = activity.doSubAction(action["id"], action)
 	
-	if(actionResult != null && actionResult.has("text")):
-		addText(actionResult["text"], activity.domID, activity.subID)
+	if(actionResult != null):
+		if(actionResult.has("text")):
+			addText(actionResult["text"], activity.domID, activity.subID)
+		
+		if(actionResult.has("subSay") && actionResult["subSay"] != null):
+			addText("[say=sub]"+actionResult["subSay"]+"[/say]", activity.domID, activity.subID)
+
+		elif(actionResult.has("domSay") && actionResult["domSay"] != null):
+			addText("[say=dom]"+actionResult["domSay"]+"[/say]", activity.domID, activity.subID)
 
 func start():
 	if(isSub("pc")):
@@ -423,9 +468,9 @@ func doAction(_actionInfo):
 		messages.clear()
 		var activity = getActivityWithUniqueID(_actionInfo["activityID"])
 		doSubAction(activity, _actionInfo["action"])
+		processAIActions(true)
 		processAIActions(false)
 		processTurn()
-		processAIActions(true)
 	if(_actionInfo["id"] == "startNewDomActivity"):
 		messages.clear()
 		startActivity(_actionInfo["activityID"], "pc", _actionInfo["subID"])

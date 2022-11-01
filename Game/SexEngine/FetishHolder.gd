@@ -5,7 +5,10 @@ var character: WeakRef
 var fetishMap: Dictionary = {}
 
 func _init():
-	addFetish(Fetish.VaginalSexTop, FetishInterest.Loves)
+	for fetishID in GlobalRegistry.getFetishes():
+		addFetish(fetishID, RNG.pick(FetishInterest.getAll()))
+	
+	addFetish(Fetish.VaginalSexGiving, FetishInterest.Loves)
 
 func getCharacter():
 	if(character == null):

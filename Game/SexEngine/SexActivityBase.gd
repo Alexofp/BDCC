@@ -75,6 +75,9 @@ func getActivityScore(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: Sex
 
 	return resultScore
 
+func getActivityScoreSub(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexSubInfo):
+	return getActivityBaseScore(_sexEngine, _domInfo, _subInfo)
+
 func getStopScore(stopscore = 2.0, alwaysstopscore = 0.0):
 	var sexEngine = getSexEngine()
 	
@@ -83,20 +86,6 @@ func getStopScore(stopscore = 2.0, alwaysstopscore = 0.0):
 	if(activityScore > 0.0):
 		return alwaysstopscore
 	return stopscore
-
-func getDomAngryScore():
-	return clamp(domInfo.anger, 0.0, 1.0)
-
-func makeDomAngry(howmuch = 0.2):
-	var personality: Personality = domInfo.getChar().getPersonality()
-	var evilness = personality.getStat(PersonalityStat.Evilness)
-	if(evilness >= 0.0):
-		domInfo.makeAngry(howmuch * (1.0 + evilness))
-	else:
-		domInfo.makeAngry(howmuch * (1.0 + evilness))
-
-func calmDomDown(howmuch = 0.2):
-	domInfo.makeAngry(-howmuch)
 
 func hasActivity(_sexEngine: SexEngine, theid, _domInfo: SexDomInfo, _subInfo: SexSubInfo):
 	return _sexEngine.hasActivity(theid, _domInfo.charID, _subInfo.charID)
@@ -154,34 +143,62 @@ func doSubAction(_id, _actionInfo):
 		"text": "Sub bad stuff happened",
 	}
 
-func getDomFetishesMod(fetishes = {}):
+func domFetishScore(fetishes = {}):
 	var fetishHolder: FetishHolder = getDom().getFetishHolder()
 	
 	var result = 0.0
 	for fetishID in fetishes:
 		var fetishValue = fetishHolder.getFetishValue(fetishID)
-		result += fetishValue
+		result += fetishValue * fetishes[fetishID]
 	
 	return result
 	
-func getSubFetishesMod(fetishes = {}):
+func subFetishScore(fetishes = {}):
 	var fetishHolder: FetishHolder = getSub().getFetishHolder()
 	
 	var result = 0.0
 	for fetishID in fetishes:
 		var fetishValue = fetishHolder.getFetishValue(fetishID)
-		result += fetishValue
+		result += fetishValue * fetishes[fetishID]
+	
+	return result
+
+func domPersonalityScore(personalityStats = {}):
+	var personality: Personality = getDom().getPersonality()
+	
+	var result = 0.0
+	for personalityStatID in personalityStats:
+		var personalityValue = personality.getStat(personalityStatID)
+		result += personalityValue * personalityStats[personalityStatID]
+	
+	return result
+
+func subPersonalityScore(personalityStats = {}):
+	var personality: Personality = getSub().getPersonality()
+	
+	var result = 0.0
+	for personalityStatID in personalityStats:
+		var personalityValue = personality.getStat(personalityStatID)
+		result += personalityValue * personalityStats[personalityStatID]
 	
 	return result
 
 func addDomLust(howmuch, fetishes = {}):
-	getDom().addLust(howmuch * (1.0 + getDomFetishesMod(fetishes)))
+	getDom().addLust(howmuch * (1.0 + domFetishScore(fetishes)))
 		
 func addSubLust(howmuch, fetishes = {}):
-	getSub().addLust(howmuch * (1.0 + getSubFetishesMod(fetishes)))
+	getSub().addLust(howmuch * (1.0 + subFetishScore(fetishes)))
 		
 func getSubLikingItScore():
 	return getSub().getLustLevel()
 
 func getSubHatingItScore():
 	return 1.0 - getSub().getLustLevel()
+
+func subReaction(reactionID, chance = 100, fetishes = {}):
+	if(chance >= 100 || RNG.chance(chance)):
+		return getSub().getVoice().getSubReaction(reactionID, getSexEngine(), domInfo, subInfo, subFetishScore(fetishes))
+
+func domReaction(reactionID, chance = 100, fetishes = {}):
+	if(chance >= 100 || RNG.chance(chance)):
+		return getSub().getVoice().getDomReaction(reactionID, getSexEngine(), domInfo, subInfo, domFetishScore(fetishes))

@@ -885,6 +885,11 @@ _global_script_classes=[ {
 "path": "res://Game/SexEngine/SexInfoBase.gd"
 }, {
 "base": "Object",
+"class": "SexReaction",
+"language": "GDScript",
+"path": "res://Game/SexEngine/SexReaction.gd"
+}, {
+"base": "Object",
 "class": "SexStance",
 "language": "GDScript",
 "path": "res://Game/SexEngine/SexStance.gd"
@@ -893,6 +898,11 @@ _global_script_classes=[ {
 "class": "SexSubInfo",
 "language": "GDScript",
 "path": "res://Game/SexEngine/SexSubInfo.gd"
+}, {
+"base": "Reference",
+"class": "SexVoice",
+"language": "GDScript",
+"path": "res://Game/SexEngine/SexVoice.gd"
 }, {
 "base": "ItemState",
 "class": "ShirtAndShortsState",
@@ -1195,8 +1205,10 @@ _global_script_class_icons={
 "SexEngine": "",
 "SexGoal": "",
 "SexInfoBase": "",
+"SexReaction": "",
 "SexStance": "",
 "SexSubInfo": "",
+"SexVoice": "",
 "ShirtAndShortsState": "",
 "SimpleParser": "",
 "Skill": "",

@@ -21,6 +21,7 @@ var skillsHolder: SkillsHolder
 var lustInterests: LustInterests
 var fetishHolder: FetishHolder
 var personality: Personality
+var sexVoice: SexVoice
 
 # Bodypart stuff
 var bodyparts: Dictionary
@@ -65,6 +66,7 @@ func _ready():
 	fetishHolder.setCharacter(self)
 	personality = Personality.new()
 	personality.setCharacter(self)
+	createVoice()
 
 func getID():
 	assert(false, "Getting an ID of a baseCharacter class")
@@ -1446,3 +1448,10 @@ func afterSexEnded(sexInfo):
 		addLust(-getLust())
 		addPain(-getPain())
 		addStamina(getMaxStamina())
+
+func createVoice():
+	sexVoice = SexVoice.new()
+	sexVoice.setCharacter(self)
+
+func getVoice() -> SexVoice:
+	return sexVoice

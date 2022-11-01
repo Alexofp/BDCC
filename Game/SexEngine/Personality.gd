@@ -9,7 +9,7 @@ func _init():
 	for statID in PersonalityStat.getAll():
 		stats[statID] = 0.0
 
-	setStat(PersonalityStat.Evilness, 1.0)
+	setStat(PersonalityStat.Mean, 1.0)
 
 func setCharacter(newchar):
 	character = weakref(newchar)
@@ -26,4 +26,4 @@ func getStat(statID) -> float:
 	return stats[statID]
 
 func setStat(statID, newvalue: float):
-	stats[statID] = newvalue
+	stats[statID] = clamp(newvalue, -1.0, 1.0)
