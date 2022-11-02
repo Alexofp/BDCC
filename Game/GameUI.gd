@@ -16,9 +16,7 @@ onready var prevPageButton = $HBoxContainer/VBoxContainer2/HBoxContainer/PrevPag
 onready var optionTooltip = $CanvasLayer/TooltipDisplay
 onready var textOutput = $HBoxContainer/VBoxContainer2/ScrollContainer/VBoxContainer/RichTextLabel
 onready var mapAndTimePanel = $HBoxContainer/Panel2/MarginContainer/VBoxContainer/MapAndTimePanel
-onready var characterPanel = $HBoxContainer/Panel2/MarginContainer/VBoxContainer/CharacterPanel
 onready var playerPanel = $HBoxContainer/Panel/MarginContainer/PlayerPanel
-onready var charactersPanel = $HBoxContainer/Panel2/MarginContainer/VBoxContainer/CharactersPanel
 onready var scrollPanel = $HBoxContainer/VBoxContainer2/ScrollContainer
 onready var mainGameScreen = $HBoxContainer/VBoxContainer2
 onready var ingameMenuScreen = $HBoxContainer/InGameMenu
@@ -29,7 +27,7 @@ onready var debugPanelButton = $HBoxContainer/Panel2/MarginContainer/VBoxContain
 onready var rollbackButton = $HBoxContainer/Panel2/MarginContainer/VBoxContainer/HBoxContainer/RollbackButton
 var uiTextboxScene = preload("res://UI/UITextbox.tscn")
 onready var textcontainer = $HBoxContainer/VBoxContainer2/ScrollContainer/VBoxContainer
-onready var charactersArtworkPanel = $HBoxContainer/Panel2/MarginContainer/VBoxContainer/CharactersArtworkPanel
+onready var smartCharacterPanel = $HBoxContainer/Panel2/MarginContainer/VBoxContainer/SmartCharacterPanel
 var textboxes: Dictionary = {}
 var gameParser: GameParser
 var sayParser: SayParser
@@ -213,33 +211,14 @@ func setLocationName(locname: String):
 func setSceneCreator(sceneCreator):
 	mapAndTimePanel.setSceneCreator(sceneCreator)
 
-func setCharacterPanelVisible(vis: bool):
-	characterPanel.visible = vis
-
-func setCharacterData(character: Character):
-	if(character == null):
-		characterPanel.visible = false
-		return
-	
-	characterPanel.visible = true
-	characterPanel.updateFromCharacter(character)
+func clearCharactersPanel():
+	smartCharacterPanel.clear()
 
 func getPlayerStatusEffectsPanel():
 	return playerPanel.getStatusEffectsPanel()
 
-func getNPCStatusEffectsPanel():
-	return characterPanel.getStatusEffectsPanel()
-
 func getCharactersPanel():
-	return charactersPanel
-
-func setCharactersPanelVisible(vis):
-	if(OPTIONS.shouldShowCharacterArt()):
-		charactersPanel.visible = false
-		charactersArtworkPanel.visible = vis
-	else:
-		charactersPanel.visible = vis
-		charactersArtworkPanel.visible = false
+	return smartCharacterPanel
 
 func addUITextbox(id):
 	assert(!textboxes.has(id), "Trying to add a textbox with the same id. Id is "+id)
@@ -359,18 +338,14 @@ func _on_DebugMenu_pressed():
 		hideAllScreens()
 		mainGameScreen.visible = true
 
-
 func addCharacterToPanel(id, variant):
-	charactersArtworkPanel.addCharacter(id, variant)
+	smartCharacterPanel.addCharacter(id, variant)
 	
 func removeCharacterFromPanel(id):
-	charactersArtworkPanel.removeCharacter(id)
-	
-func clearCharactersPanel():
-	charactersArtworkPanel.clear()
+	smartCharacterPanel.removeCharacter(id)
 
-func updateCharacterInPanel():
-	charactersArtworkPanel.updateMainCharacter()
+func updateCharactersInPanel():
+	smartCharacterPanel.updateData()
 
 func recreateWorld():
 	mapAndTimePanel.recreateWorld()

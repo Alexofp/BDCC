@@ -19,12 +19,13 @@ var lastPlayerAttackData = null
 
 func _init():
 	sceneID = "FightScene"
+	showFightUI = true
 
 func _initScene(_args = []):
 	enemyID = _args[0]
 	enemyCharacter = GlobalRegistry.getCharacter(enemyID)
 	enemyCharacter.beforeFightStarted()
-	setFightCharacter(enemyID)
+	addCharacter(enemyID)
 	
 	if(_args.size() > 1):
 		battleName = _args[1]
@@ -37,7 +38,6 @@ func _initScene(_args = []):
 		GM.pc.getLustCombatState().setEnemyID(enemyID)
 
 func _run():
-	updateFightCharacter()
 	if(state == ""):
 		saynn(enemyCharacter.getFightIntro(battleName))
 		#setState("fighting")
@@ -887,7 +887,6 @@ func loadData(data):
 	battleEndedHow = SAVE.loadVar(data, "battleEndedHow", "")
 	savedAIAttackID = SAVE.loadVar(data, "savedAIAttackID", "")
 	enemyCharacter = GlobalRegistry.getCharacter(enemyID)
-	setFightCharacter(enemyID)
 	battleName = SAVE.loadVar(data, "battleName", "")
 	currentAttackerID = SAVE.loadVar(data, "currentAttackerID", "")
 	currentReceiverID = SAVE.loadVar(data, "currentReceiverID", "")

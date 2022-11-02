@@ -232,6 +232,11 @@ func updateNonBattleEffects():
 		addEffect(StatusEffect.CumInflated)
 	else:
 		removeEffect(StatusEffect.CumInflated)
+	
+	if(GM.main != null && GM.main.supportsSexEngine()):
+		addEffect(StatusEffect.SexEngineLikes)
+	else:
+		removeEffect(StatusEffect.SexEngineLikes)
 
 func onCharacterVisiblyPregnant():
 	if(getMenstrualCycle() != null):

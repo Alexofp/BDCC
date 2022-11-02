@@ -202,6 +202,13 @@ func supportsBattleTurns():
 	
 	return false
 
+func supportsSexEngine():
+	for scene in sceneStack:
+		if(scene.supportsSexEngine()):
+			return true
+	
+	return false
+
 func saveData():
 	var data = {}
 	data["messages"] = messages
@@ -245,8 +252,7 @@ func loadData(data):
 		scene.queue_free()
 	sceneStack = []
 	
-	GM.ui.setCharacterData(null)
-	GM.ui.setCharactersPanelVisible(false)
+	GM.ui.clearCharactersPanel()
 	for sceneData in scenes:
 		var id = SAVE.loadVar(sceneData, "id", "error")
 		

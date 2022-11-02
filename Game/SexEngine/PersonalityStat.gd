@@ -5,11 +5,11 @@ const Brat = "Brat"
 const Mean = "Mean"
 const Subby = "Subby"
 const Impatient = "Impatient"
-const Openminded = "Openminded"
 const Naive = "Naive"
+const Coward = "Coward"
 
 static func getAll():
-	return [Brat, Mean, Subby, Impatient, Openminded, Naive]
+	return [Brat, Mean, Subby, Impatient, Naive, Coward]
 
 static func getVisibleName(stat):
 	return str(stat)

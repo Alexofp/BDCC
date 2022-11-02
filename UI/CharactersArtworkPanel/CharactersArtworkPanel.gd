@@ -29,6 +29,7 @@ func clear():
 func addCharacter(charID:String, variant:Array):
 	var data = {}
 	
+	var isGenericPortrait = true
 	var imageArtist = null
 	var imagePath = null
 	var imageData = Images.getCharacter(charID, variant)
@@ -37,9 +38,11 @@ func addCharacter(charID:String, variant:Array):
 	else:
 		imagePath = imageData[0]
 		imageArtist = imageData[1]
+		isGenericPortrait = false
 	
 	data["imagePath"] = imagePath
 	data["imageArtist"] = imageArtist
+	data["isGenericPortrait"] = isGenericPortrait
 	
 	characters[charID] = data
 	
@@ -161,3 +164,10 @@ func _on_NameLabel_mouse_entered():
 
 func _on_NameLabel_mouse_exited():
 	GlobalTooltip.hideTooltip()
+
+func hasNonGenericPortrait():
+	for charID in characters:
+		if(!characters[charID]["isGenericPortrait"]):
+			return true
+	
+	return false

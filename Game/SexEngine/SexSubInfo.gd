@@ -28,10 +28,33 @@ func initFromPersonality():
 		resistance = RNG.randf_range(0.0, bratiness)
 
 func isResisting():
-	return resistance >= 0.1
+	return resistance >= 0.2
+
+func isScared():
+	return fear >= 0.5
+	
+func isVeryScared():
+	return fear >= 0.9
+	
+func addFear(addfear):	
+	fear += addfear * (1.0 + personalityScore({PersonalityStat.Coward: 1.0}))
+	fear = clamp(fear, 0.0, 1.0)
+
+func addResistance(addres):
+	if(isScared()):
+		addres /= 2.0
+	if(isVeryScared()):
+		addres /= 2.0
+	
+	resistance += addres * (1.0 + personalityScore({PersonalityStat.Subby: -1.0, PersonalityStat.Brat: 0.5}))
+	resistance = clamp(resistance, 0.0, 1.0)
 
 func getResistScore():
+	if(isScared()):
+		return 0.0
 	if(isResisting()):
+		return 1.0
+	if(RNG.chance(personalityScore({PersonalityStat.Brat: 1.0}) * 10.0)):
 		return 1.0
 	return 0.0
 
@@ -48,3 +71,4 @@ func processTurn():
 #
 #	var bratiness = personality.getStat(PersonalityStat.Brattiness)
 #	resistance = Util.moveNumberTowards(resistance, bratiness, 0.01)
+	fear = Util.moveNumberTowards(fear, 0.0, 0.02 + personalityScore({PersonalityStat.Coward: -0.02}))

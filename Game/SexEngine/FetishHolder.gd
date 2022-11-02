@@ -31,6 +31,9 @@ func getFetishValue(fetishID):
 		return 0.0
 	return FetishInterest.getScore(fetishMap[fetishID])
 
+func getFetishes():
+	return fetishMap
+
 func getGoals(_sexEngine, _sub):
 	var result = []
 	

@@ -268,6 +268,11 @@ func updateNonBattleEffects():
 	else:
 		removeEffect(StatusEffect.CumInflated)
 		
+	if(GM.main != null && GM.main.supportsSexEngine()):
+		addEffect(StatusEffect.SexEngineLikes)
+	else:
+		removeEffect(StatusEffect.SexEngineLikes)
+		
 	emit_signal("stat_changed")
 
 func processBattleTurn():

@@ -33,7 +33,18 @@ func setStamina(newstamina: int, maxstamina: int = 100):
 func setColor(newcolor):
 	nameLabel.self_modulate = newcolor
 
+func updateFromCharacterID(charID):
+	var character = GlobalRegistry.getCharacter(charID)
+	if(character == null):
+		setName("BAD: "+str(charID))
+		return
+	updateFromCharacter(character)
+
 func updateFromCharacter(character: BaseCharacter):
+	if(character == null):
+		setName("BAD CHARACTER")
+		return
+	
 	setName(character.getName())
 	setPain(character.getPain(), character.painThreshold())
 	setLust(character.getLust(), character.lustThreshold())
@@ -41,3 +52,5 @@ func updateFromCharacter(character: BaseCharacter):
 	setColor(character.getChatColor())
 	levelBar.setProgressBarValue(character.getSkillsHolder().getLevelProgress())
 	levelBar.setText(str(character.getSkillsHolder().getLevel()))
+
+	character.updateEffectPanel(statusEffectsPanel)

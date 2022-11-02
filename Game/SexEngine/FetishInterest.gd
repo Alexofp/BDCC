@@ -4,7 +4,7 @@ class_name FetishInterest
 const Hates = "Hates"
 const ReallyDislikes = "ReallyDislikes"
 const Dislikes = "Dislikes"
-const SlighlyDislikes = "SlighlyDislikes"
+const SlightlyDislikes = "SlightlyDislikes"
 const Neutral = "Neutral"
 const SlightlyLikes = "SlightlyLikes"
 const Likes = "Likes"
@@ -19,7 +19,7 @@ static func getScore(interest):
 			return -0.75
 		Dislikes:
 			return -0.5
-		SlighlyDislikes:
+		SlightlyDislikes:
 			return -0.25
 		Neutral:
 			return 0.0
@@ -34,4 +34,47 @@ static func getScore(interest):
 	return 0.0
 		
 static func getAll():
-	return [Hates, ReallyDislikes, Dislikes, SlighlyDislikes, Neutral, SlightlyLikes, Likes, ReallyLikes, Loves]
+	return [Hates, ReallyDislikes, Dislikes, SlightlyDislikes, Neutral, SlightlyLikes, Likes, ReallyLikes, Loves]
+
+static func getColorString(interest):
+	if(interest == Hates):
+		return "#FF554C"
+	if(interest == ReallyDislikes):
+		return "#FF837A"
+	if(interest == Dislikes):
+		return "#FFB0A0"
+	if(interest == SlightlyDislikes):
+		return "#FFCED2"
+	if(interest == Neutral):
+		return "#D5CEFF"
+	if(interest == SlightlyLikes):
+		return "#FFC9FE"
+	if(interest == Likes):
+		return "#FFBAF8"
+	if(interest == ReallyLikes):
+		return "#FF9EE3"
+	if(interest == Loves):
+		return "#FF63E7"
+	
+	return "#FFFFFF"
+	
+static func getVisibleName(interest):
+	if(interest == Hates):
+		return "hates"
+	if(interest == ReallyDislikes):
+		return "really dislikes"
+	if(interest == Dislikes):
+		return "dislikes"
+	if(interest == SlightlyDislikes):
+		return "slightly dislikes"
+	if(interest == Neutral):
+		return "is neutral about"
+	if(interest == SlightlyLikes):
+		return "kinda likes"
+	if(interest == Likes):
+		return "likes"
+	if(interest == ReallyLikes):
+		return "really likes"
+	if(interest == Loves):
+		return "loves"
+	return "error:"+str(interest)

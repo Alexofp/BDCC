@@ -51,6 +51,7 @@ anchor_bottom = 0.0
 margin_top = 32.0
 margin_right = 1280.0
 margin_bottom = 48.0
+mouse_filter = 1
 colorGradient = SubResource( 10 )
 propertyName = "Level"
 
@@ -60,6 +61,7 @@ anchor_bottom = 0.0
 margin_top = 52.0
 margin_right = 1280.0
 margin_bottom = 68.0
+mouse_filter = 1
 colorGradient = SubResource( 8 )
 propertyName = "Pain"
 
@@ -69,6 +71,7 @@ anchor_bottom = 0.0
 margin_top = 72.0
 margin_right = 1280.0
 margin_bottom = 88.0
+mouse_filter = 1
 colorGradient = SubResource( 9 )
 propertyName = "Lust"
 
@@ -78,6 +81,7 @@ anchor_bottom = 0.0
 margin_top = 92.0
 margin_right = 1280.0
 margin_bottom = 108.0
+mouse_filter = 1
 colorGradient = SubResource( 11 )
 propertyName = "Stamina"
 
@@ -88,4 +92,5 @@ margin_top = 112.0
 margin_right = 1280.0
 margin_bottom = 112.0
 rect_min_size = Vector2( 0, 0 )
+mouse_filter = 1
 showTooltipBelow = true

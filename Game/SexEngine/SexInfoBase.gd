@@ -28,6 +28,9 @@ func addArousal(howmuch: float):
 	arousal += howmuch
 	arousal = clamp(arousal, 0.0, 1.0)
 
+func addPain(newpain):
+	getChar().addPain(newpain)
+
 func arousalNaturalFade():
 	addArousal(-0.01)
 
@@ -56,6 +59,7 @@ func isReadyToCum() -> bool:
 	
 func cum():
 	arousal = 0.0
+	getChar().addLust(-int(getChar().getLust()/2.0))
 	timesCame += 1
 
 func getTimesCame():

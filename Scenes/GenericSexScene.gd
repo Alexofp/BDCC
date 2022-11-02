@@ -6,26 +6,28 @@ var currentCategory = []
 
 func _init():
 	sceneID = "GenericSexScene"
+	showFightUI = true
 
 func _initScene(_args = []):
 	sexEngine = SexEngine.new()
 	
 	var top = _args[0]
 	
-	#sexEngine.initPeople(top, "pc")
+	sexEngine.initPeople(top, "pc")
 	#sexEngine.initPeople(top, "rahi")
 	
-	sexEngine.initPeople("pc", top)
+	#sexEngine.initPeople("pc", top)
 	#sexEngine.initPeople(top, "pc")
 	#sexEngine.initPeople(top, "rahi")
 	sexEngine.generateGoals()
 	
 	sexEngine.start()
-	setFightCharacter(top)
+	addCharacter(top)
+
+func _reactInit():
+	updateDomsAndSubs()
 
 func _run():
-	updateFightCharacter()
-	
 	if(state == ""):
 
 		#saynn(whatHappened)
@@ -65,10 +67,7 @@ func _react(_action: String, _args):
 		currentCategory = []
 		sexEngine.doAction(_args[0])
 		processTime(30)
-		for domID in sexEngine.doms:
-			getCharacter(domID).updateNonBattleEffects()
-		for subID in sexEngine.subs:
-			getCharacter(subID).updateNonBattleEffects()
+		updateDomsAndSubs()
 		setState("")
 		return
 	
@@ -91,6 +90,12 @@ func _react(_action: String, _args):
 		return
 
 	setState(_action)
+
+func updateDomsAndSubs():
+	for domID in sexEngine.doms:
+		getCharacter(domID).updateNonBattleEffects()
+	for subID in sexEngine.subs:
+		getCharacter(subID).updateNonBattleEffects()
 
 func addCategoryButtons():
 	var categoryButtons = {}
@@ -116,3 +121,5 @@ func addCategoryButtons():
 			categoryButtons[newCategory] = true
 			addButton("!"+newCategory, "Look at the actions in this category", "pickcategory", [newCategory])
 	
+func supportsSexEngine():
+	return true

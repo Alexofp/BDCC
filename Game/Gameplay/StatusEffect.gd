@@ -9,6 +9,9 @@ const Blindness = "Blindness"
 const Collapsed = "Collapsed"
 const Stunned = "Stunned"
 
+# Sex engine effects
+const SexEngineLikes = "SexEngineLikes"
+
 # BDSM effects
 const ArmsBound = "ArmsBound"
 const HandsBlocked = "HandsBlocked"
