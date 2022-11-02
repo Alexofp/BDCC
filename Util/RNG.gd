@@ -27,7 +27,7 @@ static func chance(ch: float) -> bool:
 	return false
 	
 # picks a random element from an array or a random key from a dictionary
-static func pick(ar):	
+static func pick(ar):
 	if(ar is Dictionary):
 		ar = ar.keys()
 		
@@ -35,6 +35,18 @@ static func pick(ar):
 		return null
 	
 	return ar[randi() % ar.size()]
+
+static func grab(ar):	
+	if(ar is Dictionary):
+		ar = ar.keys()
+		
+	if(ar.empty()):
+		return null
+	
+	var elementI = randi() % ar.size()
+	var value = ar[randi() % ar.size()]
+	ar.remove(elementI)
+	return value
 
 # RNG.pickWeighted(["a", "b", "c"], [10, 100, 10]) # 'b' will show up 10 times more
 static func pickWeighted(ar, weights: Array):

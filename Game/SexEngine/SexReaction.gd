@@ -7,4 +7,6 @@ enum {
 	Resistance,
 	AboutToDrawOnBody,
 	AfterDrawingOnBody,
+	AboutToBeatUp,
+	BeatingUp,
 }

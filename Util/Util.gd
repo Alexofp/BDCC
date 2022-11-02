@@ -19,7 +19,7 @@ static func maxi(value1: int, value2: int) -> int:
 	return value2
 
 static func mini(value1: int, value2: int) -> int:
-	if(value2 > value1):
+	if(value1 > value2):
 		return value2
 	return value1
 
