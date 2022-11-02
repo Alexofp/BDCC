@@ -321,3 +321,6 @@ func doSubAction(_id, _actionInfo):
 			text += " {dom.you} listened!"
 		
 		return {text = text}
+
+func getAnimation():
+	return [StageScene.Duo, "allfours", {pc=subID, npc=domID, npcAction="kneel", flipPc=true}]

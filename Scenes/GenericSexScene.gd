@@ -29,7 +29,7 @@ func _reactInit():
 
 func _run():
 	if(state == ""):
-
+		sexEngine.playAnimation()
 		#saynn(whatHappened)
 		saynn(sexEngine.getFinalText())
 		
@@ -53,7 +53,10 @@ func _run():
 					actionCategory = actionInfo["category"]
 				
 				if(currentCategory == actionCategory):
-					addButton(actionInfo["name"], "ASD", "doAction", [actionInfo])
+					var desc = "No description provided"
+					if(actionInfo.has("desc")):
+						desc = actionInfo["desc"]
+					addButton(actionInfo["name"], desc, "doAction", [actionInfo])
 			
 			addCategoryButtons()
 			

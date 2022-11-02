@@ -375,6 +375,7 @@ func getActions():
 	result.append({
 		id = "continue",
 		name = "Continue",
+		desc = "Just continue doing what you're doing",
 	})
 	
 	for activity in activities:
@@ -387,6 +388,7 @@ func getActions():
 						activityID = activity.uniqueID,
 						action = action,
 						name = action["name"],
+						desc = action["desc"],
 					})
 		if(activity.subID == "pc"):
 			var subActions = activity.getSubActions()
@@ -397,6 +399,7 @@ func getActions():
 						activityID = activity.uniqueID,
 						action = action,
 						name = action["name"],
+						desc = action["desc"],
 					})
 					
 	if(isDom("pc")):
@@ -418,6 +421,7 @@ func getActions():
 					name = newSexActivityRef.getVisibleName(),
 					category = newSexActivityRef.getCategory(),
 					subID = pctargetID,
+					desc = "Start new activity",
 				})
 					
 	if(isSub("pc")):
@@ -439,6 +443,7 @@ func getActions():
 					name = newSexActivityRef.getVisibleName(),
 					category = newSexActivityRef.getCategory(),
 					domID = pctargetID,
+					desc = "Start new activity",
 				})
 	
 	return result
@@ -543,3 +548,32 @@ func endSex():
 
 func hasSexEnded():
 	return sexEnded
+
+func getBestAnimation():
+	var hasPlayer = false
+	if(isSub("pc") || isDom("pc")):
+		hasPlayer = true
+	
+	for activity in activities:
+		var animInfo = activity.getAnimation()
+		if(animInfo == null):
+			continue
+		
+		if(hasPlayer):
+			if(activity.subID == "pc" || activity.domID == "pc"):
+				return animInfo
+		else:
+			return animInfo
+	
+	return [StageScene.Solo, "stand", {}]
+
+func playAnimation():
+	var animInfo = getBestAnimation()
+	
+	if(animInfo == null):
+		return
+	
+	if(animInfo.size() > 2):
+		GM.main.playAnimation(animInfo[0], animInfo[1], animInfo[2])
+	else:
+		GM.main.playAnimation(animInfo[0], animInfo[1])

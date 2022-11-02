@@ -202,3 +202,6 @@ func subReaction(reactionID, chance = 100, fetishes = {}):
 func domReaction(reactionID, chance = 100, fetishes = {}):
 	if(chance >= 100 || RNG.chance(chance)):
 		return getSub().getVoice().getDomReaction(reactionID, getSexEngine(), domInfo, subInfo, domFetishScore(fetishes))
+
+func getAnimation():
+	return null
