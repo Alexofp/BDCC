@@ -7,7 +7,7 @@ var stats:Dictionary = {}
 
 func _init():
 	for statID in PersonalityStat.getAll():
-		stats[statID] = 0.0
+		stats[statID] = RNG.randf_range(-1.0, 1.0)
 
 	setStat(PersonalityStat.Mean, 1.0)
 

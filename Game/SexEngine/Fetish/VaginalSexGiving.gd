@@ -9,7 +9,6 @@ func getVisibleName():
 func getGoals(_sexEngine, _dom, _sub):
 	var possible = []
 	
-	if(_dom.hasReachablePenis() && _sub.hasReachableVagina()):
-		possible.append(SexGoal.FuckVaginal)
+	possible.append(SexGoal.FuckVaginal)
 	
 	return possible

@@ -31,6 +31,9 @@ func addArousal(howmuch: float):
 func addPain(newpain):
 	getChar().addPain(newpain)
 
+func canDoActions():
+	return true
+
 func arousalNaturalFade():
 	addArousal(-0.01)
 

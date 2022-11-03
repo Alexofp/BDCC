@@ -43,11 +43,10 @@ var mapFloors: Dictionary = {}
 var imagePacks: Dictionary = {}
 var worldEdits: Dictionary = {}
 var regularWorldEdits: Array = []
-var sexSubActions: Dictionary = {}
-var sexDomActions: Dictionary = {}
 var sexActivities: Dictionary = {}
 var sexActivitiesReferences: Dictionary = {}
 var fetishes: Dictionary = {}
+var sexGoals: Dictionary = {}
 
 var bodypartStorageNode
 
@@ -247,6 +246,7 @@ func _ready():
 	#registerSexActionsFolder("res://Game/SexEngine/SexActions/")
 	registerSexActivitiesFolder("res://Game/SexEngine/SexActivity/")
 	registerFetishesFolder("res://Game/SexEngine/Fetish/")
+	registerSexGoalsFolder("res://Game/SexEngine/Goal/")
 	
 	registerStatusEffectFolder("res://StatusEffect/")
 	
@@ -256,7 +256,6 @@ func _ready():
 	
 	registerStageSceneFolder("res://Player/StageScene3D/Scenes/")
 	
-	#registerMapFloor("Medical", "res://Game/World/Floors/Medical.tscn")
 	registerMapFloorFolder("res://Game/World/Floors/")
 	
 	registerImagePackFolder("res://Images/ImagePacks/")
@@ -1088,50 +1087,6 @@ func getRegularWorldEdits():
 
 
 
-func registerSexAction(path: String):
-	var sexAction = load(path)
-	var sexActionObject = sexAction.new()
-	
-	if(sexActionObject.isDomAction):
-		sexDomActions[sexActionObject.id] = sexActionObject
-	else:
-		sexSubActions[sexActionObject.id] = sexActionObject
-
-func registerSexActionsFolder(folder: String):
-	var dir = Directory.new()
-	if dir.open(folder) == OK:
-		dir.list_dir_begin()
-		var file_name = dir.get_next()
-		while file_name != "":
-			if dir.current_is_dir():
-				pass
-				#print("Found directory: " + file_name)
-			else:
-				if(file_name.get_extension() == "gd"):
-					var full_path = folder.plus_file(file_name)
-					#print("Registered sex action: " + full_path)
-					registerSexAction(full_path)
-			file_name = dir.get_next()
-	else:
-		Log.printerr("An error occurred when trying to access the path "+folder)
-		
-func getSexAction(id: String):
-	if(sexDomActions.has(id)):
-		return sexDomActions[id]
-	elif(sexSubActions.has(id)):
-		return sexSubActions[id]
-	else:
-		Log.printerr("ERROR: sex action with the id "+id+" wasn't found")
-		return null
-
-func getDomSexActions():
-	return sexDomActions
-
-func getSubSexActions():
-	return sexSubActions
-
-
-
 func registerSexActivity(path: String):
 	var sexActivity = load(path)
 	var sexActivityObject = sexActivity.new()
@@ -1217,3 +1172,27 @@ func getFetish(id: String):
 
 func getFetishes():
 	return fetishes
+
+
+
+
+func registerSexGoal(path: String):
+	var loadedClass = load(path)
+	var object = loadedClass.new()
+	
+	sexGoals[object.id] = object
+
+func registerSexGoalsFolder(folder: String):
+	var scripts = getScriptsInFolder(folder)
+	for scriptPath in scripts:
+		registerSexGoal(scriptPath)
+
+func getSexGoal(id: String):
+	if(sexGoals.has(id)):
+		return sexGoals[id]
+	else:
+		Log.printerr("ERROR: sex goal with the id "+id+" wasn't found")
+		return null
+
+func getSexGoals():
+	return sexGoals

@@ -109,7 +109,9 @@ func generateGoals():
 			var goalsToAdd = dom.getFetishHolder().getGoals(self, sub)
 			if(goalsToAdd != null):
 				for goal in goalsToAdd:
-					possibleGoals.append([[goal[0], sub.getID()], goal[1]])
+					var sexGoal:SexGoalBase = GlobalRegistry.getSexGoal(goal[0])
+					if(sexGoal.isPossible(self, dom, sub) && !sexGoal.isCompleted(self, dom, sub)):
+						possibleGoals.append([[goal[0], sub.getID()], goal[1]])
 		
 		if(possibleGoals.size() > 0):
 			for _i in range(0, amountToGenerate):
@@ -160,24 +162,52 @@ func isSub(charID):
 		return false
 	return true
 
+func checkFailedAndCompletedGoals():
+	for domID in doms:
+		var domInfo = doms[domID]
+		var domChar = domInfo.getChar()
+		
+		for i in range(domInfo.goals.size() - 1, -1, -1):
+			var subChar = getSubInfo(domInfo.goals[i][1]).getChar()
+			
+			var sexGoal:SexGoalBase = GlobalRegistry.getSexGoal(domInfo.goals[i][0])
+			if(sexGoal.isCompleted(self, domChar, subChar)):
+				print("GOAL "+str(sexGoal.getVisibleName())+" "+str(domID)+" "+str(domInfo.goals[i][1])+" got completed")
+				domInfo.goals.remove(i)
+			elif(!sexGoal.isPossible(self, domChar, subChar)):
+				print("GOAL "+str(sexGoal.getVisibleName())+" "+str(domID)+" "+str(domInfo.goals[i][1])+" is impossible, removed")
+				domInfo.goals.remove(i)
+
 func removeEndedActivities():
 	for i in range(activities.size() - 1, -1, -1):
 		if(activities[i].hasEnded):
 			activities.remove(i)
+			
+	checkFailedAndCompletedGoals()
 
 func processTurn():
 	removeEndedActivities()
 	
+	var processMessages = []
+	var subMessages = []
+	var domMessages = []
+	
 	for domID in doms:
 		var domInfo = doms[domID]
+		
+		if(domInfo.checkIsDown()):
+			processMessages.append(processText("{dom.You} can't continue anymore!", domID, domID))
+			
+			for i in range(activities.size() - 1, -1, -1):
+				if(activities[i].domID == domID):
+					activities.remove(i)
+			continue
+			
 		domInfo.processTurn()
 	for subID in subs:
 		var subInfo = subs[subID]
 		subInfo.processTurn()
 	
-	var processMessages = []
-	var subMessages = []
-	var domMessages = []
 	for activity in activities:
 		var processResult = activity.processTurn()
 		if(processResult != null):
@@ -311,7 +341,7 @@ func processAIActions(isDom = true):
 						else:
 							actionsScores.append(1.0)
 
-		if(possibleActions.size() > 0):
+		if(possibleActions.size() > 0 && theinfo.canDoActions()):
 			var totalScore = 0.0
 			for thescore in actionsScores:
 				if(thescore > 0.0):
@@ -379,7 +409,7 @@ func getActions():
 	})
 	
 	for activity in activities:
-		if(activity.domID == "pc"):
+		if(activity.domID == "pc" && getDomInfo("pc").canDoActions()):
 			var domActions = activity.getDomActions()
 			if(domActions != null):
 				for action in domActions:
@@ -390,7 +420,7 @@ func getActions():
 						name = action["name"],
 						desc = action["desc"],
 					})
-		if(activity.subID == "pc"):
+		if(activity.subID == "pc" && getSubInfo("pc").canDoActions()):
 			var subActions = activity.getSubActions()
 			if(subActions != null):
 				for action in subActions:
@@ -402,7 +432,7 @@ func getActions():
 						desc = action["desc"],
 					})
 					
-	if(isDom("pc")):
+	if(isDom("pc") && getDomInfo("pc").canDoActions()):
 		var pctargetID = getPCTarget()
 		if(pctargetID != null):
 			var allSexActivities = GlobalRegistry.getSexActivityReferences()
@@ -424,7 +454,7 @@ func getActions():
 					desc = "Start new activity",
 				})
 					
-	if(isSub("pc")):
+	if(isSub("pc") && getSubInfo("pc").canDoActions()):
 		var pctargetID = getPCTarget()
 		if(pctargetID != null):
 			var allSexActivities = GlobalRegistry.getSexActivityReferences()
@@ -509,13 +539,13 @@ func hasActivity(id, thedomID, thesubID):
 	return false
 
 func sexShouldEnd():
-	if(isDom("pc")):
+	if(isDom("pc") && getDomInfo("pc").canDoActions()):
 		return false
 		
 	for domID in doms:
 		var domInfo = doms[domID]
 		
-		if(domInfo.hasGoals()):
+		if(domInfo.canDoActions() && domInfo.hasGoals()):
 			return false
 	
 	return true

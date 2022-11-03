@@ -850,11 +850,6 @@ _global_script_classes=[ {
 "path": "res://Scenes/SceneBase.gd"
 }, {
 "base": "Reference",
-"class": "SexActionBase",
-"language": "GDScript",
-"path": "res://Game/SexEngine/SexActionBase.gd"
-}, {
-"base": "Reference",
 "class": "SexActivityBase",
 "language": "GDScript",
 "path": "res://Game/SexEngine/SexActivityBase.gd"
@@ -878,6 +873,11 @@ _global_script_classes=[ {
 "class": "SexGoal",
 "language": "GDScript",
 "path": "res://Game/SexEngine/SexGoal.gd"
+}, {
+"base": "Reference",
+"class": "SexGoalBase",
+"language": "GDScript",
+"path": "res://Game/SexEngine/SexGoalBase.gd"
 }, {
 "base": "Reference",
 "class": "SexInfoBase",
@@ -1198,12 +1198,12 @@ _global_script_class_icons={
 "SaveConversion": "",
 "SayParser": "",
 "SceneBase": "",
-"SexActionBase": "",
 "SexActivityBase": "",
 "SexActivityTag": "",
 "SexDomInfo": "",
 "SexEngine": "",
 "SexGoal": "",
+"SexGoalBase": "",
 "SexInfoBase": "",
 "SexReaction": "",
 "SexStance": "",

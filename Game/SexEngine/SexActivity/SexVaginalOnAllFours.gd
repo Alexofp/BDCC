@@ -211,7 +211,7 @@ func getSubActions():
 			})
 		actions.append({
 				"id": "resist",
-				"score": subFetishScore({Fetish.VaginalSexReceiving: -1.0}),
+				"score": subInfo.getResistScore(),
 				"name": RNG.pick(["Resist", "Struggle", "Kick"]),
 				"desc": "Resist the attempts",
 			})
@@ -275,6 +275,7 @@ func doSubAction(_id, _actionInfo):
 		return {text = "{sub.You} {sub.youVerb('engulf')} {dom.youHis} cock, letting it penetrate {sub.yourHis} pussy."}
 	if(_id == "resist"):
 		domInfo.addAnger(0.2)
+		domInfo.addPain(40)
 		if(RNG.chance(20)):
 			endActivity()
 			return {text = "{sub.You} {sub.youVerb('manage')} to kick {dom.you} off of {sub.youHim}."}

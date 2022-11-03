@@ -4,6 +4,16 @@ class_name SexDomInfo
 var stance = SexStance.Standing
 var goals:Array = []
 var anger: float = 0.0
+var isDown:bool = false
+
+func checkIsDown():
+	if(!isDown && getChar().getPainLevel() >= 1.0):
+		isDown = true
+		return true
+	return false
+
+func canDoActions():
+	return !isDown
 
 func addAnger(howmuch = 0.2):
 	anger += howmuch * max(0.0, (1.0 + personalityScore({PersonalityStat.Mean:1.0, PersonalityStat.Impatient:0.5})))
