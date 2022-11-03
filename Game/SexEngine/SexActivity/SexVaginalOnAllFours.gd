@@ -34,12 +34,9 @@ func startActivity(_args):
 func processTurn():
 	if(state == "fucking"):
 		times += 1
-		addDomLust(10, {Fetish.VaginalSexGiving: 1.0})
-		addSubLust(10, {Fetish.VaginalSexReceiving: 1.0})
+		affectSub(subInfo.fetishScore({Fetish.VaginalSexReceiving: 1.0}), 0.05, 0.2, -0.1, -0.01)
+		affectDom(domInfo.fetishScore({Fetish.VaginalSexGiving: 1.0}), 0.05, 0.2, 0.0)
 		
-		domInfo.addArousalSex(0.2)
-		subInfo.addArousalSex(0.2)
-
 		var text = RNG.pick([
 			"{dom.You} {dom.youAre} fucking {sub.youHim}.",
 			"{dom.You} {dom.youVerb('pound')} {sub.your} pussy.",
@@ -91,13 +88,13 @@ func getDomActions():
 		if(domInfo.isReadyToCum()):
 			actions.append({
 				"id": "cuminside",
-				"score": 1.0 - 2.0*float(gonnaCumOutside),
+				"score": domInfo.fetishScore({Fetish.Breeding: 1.0}) - 20.0*float(gonnaCumOutside),
 				"name": RNG.pick(["Cum inside"]),
 				"desc": "Cum inside their pussy",
 			})
 			actions.append({
 				"id": "cumpullout",
-				"score": 1.0,
+				"score": 1.0 - domInfo.fetishScore({Fetish.Breeding: 1.0}),
 				"name": RNG.pick(["Pull out"]),
 				"desc": "Cum on their butt",
 			})
@@ -121,8 +118,8 @@ func getDomActions():
 
 func doDomAction(_id, _actionInfo):
 	if(_id == "rub"):
-		addDomLust(10, {Fetish.VaginalSexGiving: 0.5})
-		addSubLust(10, {Fetish.VaginalSexReceiving: 0.5})
+		affectSub(subInfo.fetishScore({Fetish.VaginalSexReceiving: 1.0}), 0.05, 0.0, -0.1, 0.0)
+		affectDom(domInfo.fetishScore({Fetish.VaginalSexGiving: 1.0}), 0.05, 0.0, 0.0)
 		
 		var text = RNG.pick([
 			"{dom.You} {dom.youVerb('rub')} {dom.yourHis} dick against {sub.your} pussy.",
@@ -130,6 +127,9 @@ func doDomAction(_id, _actionInfo):
 		return {text=text}
 	if(_id == "insert"):
 		if(RNG.chance(30)):
+			affectSub(subInfo.fetishScore({Fetish.VaginalSexReceiving: 1.0}), 0.01, 0.0, -0.1, 0.0)
+			affectDom(domInfo.fetishScore({Fetish.VaginalSexGiving: 1.0}), 0.01, 0.0, 0.01)
+			
 			var text = RNG.pick([
 				"{dom.You} {dom.youVerb('attempt')} to sink {dom.yourHis} dick into {sub.your} pussy.",
 				"{dom.You} {dom.youVerb('try','tries')} to penetrate {sub.your} pussy with {dom.yourHis} dick.",
@@ -143,17 +143,15 @@ func doDomAction(_id, _actionInfo):
 				var text = RNG.pick([
 					"{dom.You} {dom.youVerb('try','tries')} cock stretches {sub.your} pussy out while trying to fit inside",
 				])
-				addDomLust(5, {Fetish.VaginalSexGiving: 0.3})
-				addSubLust(5, {Fetish.VaginalSexReceiving: 0.3})
+				affectSub(subInfo.fetishScore({Fetish.VaginalSexReceiving: 1.0}), 0.05, 0.03, -0.2, -0.01)
+				affectDom(domInfo.fetishScore({Fetish.VaginalSexGiving: 1.0}), 0.05, 0.03, -0.01)
 				return {text = text}
 			else:
 				gonnaCumOutside = false
 				getSub().gotFuckedBy(BodypartSlot.Vagina, domID)
 				state = "fucking"
-				addDomLust(10, {Fetish.VaginalSexGiving: 1.0})
-				addSubLust(10, {Fetish.VaginalSexReceiving: 1.0})
-				domInfo.addArousalSex(0.1)
-				subInfo.addArousalSex(0.1)
+				affectSub(subInfo.fetishScore({Fetish.VaginalSexReceiving: 1.0}), 0.1, 0.1, -0.3, 0.0)
+				affectDom(domInfo.fetishScore({Fetish.VaginalSexGiving: 1.0}), 0.1, 0.1, -0.05)
 				var text = RNG.pick([
 					"{dom.You} {dom.youVerb('manage','manages')} to penetrate {sub.your} pussy!",
 					"{dom.You} {dom.youVerb('shove','shoves')} {dom.yourHis} cock inside {sub.your} pussy!",
@@ -205,13 +203,13 @@ func getSubActions():
 	if(state == ""):
 		actions.append({
 				"id": "rub",
-				"score": subFetishScore({Fetish.VaginalSexReceiving: 1.0}),
+				"score": subInfo.getComplyScore() * subFetishScore({Fetish.VaginalSexReceiving: 1.0}),
 				"name": "Rub",
 				"desc": "Rub your pussy against their cock",
 			})
 		actions.append({
 				"id": "resist",
-				"score": subInfo.getResistScore(),
+				"score": subInfo.getResistScore() / 2.0,
 				"name": RNG.pick(["Resist", "Struggle", "Kick"]),
 				"desc": "Resist the attempts",
 			})
@@ -224,20 +222,20 @@ func getSubActions():
 	if(state in ["fucking"]):
 		actions.append({
 				"id": "moan",
-				"score": subFetishScore({Fetish.VaginalSexReceiving: 1.0}) + subPersonalityScore({PersonalityStat.Subby: 1.0}),
+				"score": max(0.1, subFetishScore({Fetish.VaginalSexReceiving: 1.0}) + subPersonalityScore({PersonalityStat.Subby: 1.0})),
 				"name": "Moan",
 				"desc": "Show how much you like it",
 			})
 		actions.append({
 				"id": "resistduringfuck",
-				"score": subFetishScore({Fetish.VaginalSexReceiving: -1.0}),
+				"score": subInfo.getResistScore() / 2.0,
 				"name": "Resist",
 				"desc": "Try to stop them!",
 			})
 		if(domInfo.isCloseToCumming()):
 			actions.append({
 					"id": "begtopullout",
-					"score": subFetishScore({Fetish.VaginalSexReceiving: -1.0}),
+					"score": (subInfo.getResistScore() / 2.0 - domInfo.fetishScore({Fetish.BeingBred: 1.0})) / 3.0,
 					"name": "Beg to pull out",
 					"desc": "Ask them not to cum inside you",
 				})
@@ -247,27 +245,19 @@ func doSubAction(_id, _actionInfo):
 	if(_id == "rub"):
 		#switchCurrentActivityTo("SexFuckTest2")
 		domInfo.addAnger(-0.05)
-		addDomLust(10, {Fetish.VaginalSexGiving: 1.0})
-		addSubLust(10, {Fetish.VaginalSexReceiving: 1.0})
-		domInfo.addArousalForeplay(0.05)
-		subInfo.addArousalForeplay(0.05)
+		affectSub(subInfo.fetishScore({Fetish.VaginalSexReceiving: 1.0}), 0.1, 0.0, 0.0, 0.0)
+		affectDom(domInfo.fetishScore({Fetish.VaginalSexGiving: 1.0}), 0.1, 0.0, -0.01)
 		
 		return {text = "{sub.You} {sub.youVerb('rub')} against {dom.youHim}.",}
 	if(_id == "envelop"):
 		if(!RNG.chance(getSub().getPenetrateChanceBy(BodypartSlot.Vagina, domID))):
 			getSub().gotOrificeStretchedBy(BodypartSlot.Vagina, domID)
-			domInfo.addAnger(-0.05)
-			addDomLust(20, {Fetish.VaginalSexGiving: 1.0})
-			addSubLust(20, {Fetish.VaginalSexReceiving: 1.0})
-			domInfo.addArousalForeplay(0.05)
-			subInfo.addArousalForeplay(0.05)
+			affectSub(subInfo.fetishScore({Fetish.VaginalSexReceiving: 1.0}), 0.1, 0.0, 0.0, 0.0)
+			affectDom(domInfo.fetishScore({Fetish.VaginalSexGiving: 1.0}), 0.2, 0.0, -0.01)
 			return {text="{sub.You} {sub.youVerb('try', 'tries')} to engulf {dom.yourHis} cock but it's too big!"}
 		
-		domInfo.addAnger(-0.05)
-		addDomLust(20, {Fetish.VaginalSexGiving: 1.0})
-		addSubLust(20, {Fetish.VaginalSexReceiving: 1.0})
-		domInfo.addArousalForeplay(0.05)
-		subInfo.addArousalForeplay(0.05)
+		affectSub(subInfo.fetishScore({Fetish.VaginalSexReceiving: 1.0}), 0.1, 0.1, 0.0, 0.0)
+		affectDom(domInfo.fetishScore({Fetish.VaginalSexGiving: 1.0}), 0.1, 0.1, -0.01)
 		
 		getSub().gotFuckedBy(BodypartSlot.Vagina, domID)
 		gonnaCumOutside = false
@@ -275,7 +265,7 @@ func doSubAction(_id, _actionInfo):
 		return {text = "{sub.You} {sub.youVerb('engulf')} {dom.youHis} cock, letting it penetrate {sub.yourHis} pussy."}
 	if(_id == "resist"):
 		domInfo.addAnger(0.2)
-		domInfo.addPain(40)
+		domInfo.addPain(1)
 		if(RNG.chance(20)):
 			endActivity()
 			return {text = "{sub.You} {sub.youVerb('manage')} to kick {dom.you} off of {sub.youHim}."}
@@ -287,7 +277,7 @@ func doSubAction(_id, _actionInfo):
 			"{sub.You} {sub.youVerb('moan')} while having {dom.yourHis} pussy used!",
 			"{sub.You} {sub.youVerb('moan')} eagerly!",
 		])
-		
+		affectDom(domInfo.fetishScore({Fetish.VaginalSexGiving: 1.0}), 0.1, 0.0, -0.03)
 		return {text = text}
 	if(_id == "resistduringfuck"):
 		
@@ -317,7 +307,7 @@ func doSubAction(_id, _actionInfo):
 			"{sub.You} {sub.youVerb('beg')} {dom.youHim} to pull out.",
 		])
 		
-		if(RNG.chance(10) && !getDom().isPlayer()):
+		if(RNG.chance(10 - 10 * domInfo.fetishScore({Fetish.Breeding: 1.0})) && !getDom().isPlayer()):
 			gonnaCumOutside = true
 			text += " {dom.you} listened!"
 		

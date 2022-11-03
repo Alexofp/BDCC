@@ -196,6 +196,9 @@ func getSubHatingItScore():
 	return 1.0 - getSub().getLustLevel()
 
 func subReaction(reactionID, chance = 100, fetishes = {}):
+	if(!subInfo.canDoActions()):
+		return null
+	
 	if(chance >= 100 || RNG.chance(chance)):
 		return getSub().getVoice().getSubReaction(reactionID, getSexEngine(), domInfo, subInfo, subFetishScore(fetishes))
 
@@ -205,3 +208,21 @@ func domReaction(reactionID, chance = 100, fetishes = {}):
 
 func getAnimation():
 	return null
+
+func affectSub(howmuch:float, lustMod = 0.0, arousalMod = 0.0, resistanceMod = 0.0, fearMod = 0.0):
+	if(lustMod != 0.0):
+		getSub().addLust(int(round(howmuch * lustMod * 100.0)))
+	if(arousalMod != 0.0):
+		subInfo.addArousalSex(max(howmuch * arousalMod, 0.01))
+	if(resistanceMod != 0.0):
+		subInfo.addResistance(howmuch * resistanceMod)
+	if(fearMod != 0.0):
+		subInfo.addFear(max(howmuch * fearMod, 0.01))
+
+func affectDom(howmuch:float, lustMod = 0.0, arousalMod = 0.0, angerMod = 0.0):
+	if(lustMod != 0.0):
+		getDom().addLust(int(round(howmuch * lustMod * 100.0)))
+	if(arousalMod != 0.0):
+		domInfo.addArousalSex(howmuch * arousalMod)
+	if(angerMod != 0.0):
+		domInfo.addAnger(howmuch * angerMod)

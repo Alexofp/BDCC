@@ -68,7 +68,7 @@ static func getVisibleName(interest):
 	if(interest == SlightlyDislikes):
 		return "slightly dislikes"
 	if(interest == Neutral):
-		return "is neutral about"
+		return "neutral"
 	if(interest == SlightlyLikes):
 		return "kinda likes"
 	if(interest == Likes):

@@ -8,7 +8,7 @@ func getGoals():
 	}
 
 func getActivityBaseScore(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexSubInfo):
-	return _domInfo.getIsAngryScore() * 1.0 * max(0.0, 0.1 + _domInfo.personalityScore({PersonalityStat.Mean: 1.0}))
+	return _domInfo.getIsAngryScore() * 1.0 * max(0.0, 0.1 + _domInfo.personalityScore({PersonalityStat.Mean: 1.0})) - _subInfo.getAboutToPassOutScore() * _domInfo.fetishScore({Fetish.UnconsciousSex: -1.0})
 
 func getVisibleName():
 	return "Beat up"
@@ -33,8 +33,8 @@ func startActivity(_args):
 
 func processTurn():
 	if(state == ""):
-		subInfo.addFear(0.1)
-		subInfo.addResistance(0.05)
+		affectSub(subInfo.fetishScore({Fetish.Masochist: 1.0}, -0.5), 0.1, 0.0, -0.2, -0.05)
+		affectDom(domInfo.fetishScore({Fetish.Sadist: 1.0}), 0.01, 0.0, 0.0)
 		subInfo.addPain(5)
 		
 		var texts = [
@@ -63,7 +63,7 @@ func getDomActions():
 	var actions = []
 	actions.append({
 			"id": "stop",
-			"score": 1.0 - domInfo.getIsAngryScore(),
+			"score": 1.0 - domInfo.getIsAngryScore() + subInfo.getAboutToPassOutScore() * domInfo.fetishScore({Fetish.UnconsciousSex: 1.0}, 0.5),
 			"name": "Stop beating up",
 			"desc": "Enough violence",
 		})

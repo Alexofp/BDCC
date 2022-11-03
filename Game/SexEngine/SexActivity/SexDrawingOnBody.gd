@@ -25,7 +25,7 @@ func getSubTags():
 func startActivity(_args):
 	state = ""
 	
-	subInfo.addResistance(0.5 * subInfo.fetishScore({Fetish.Bodywritings: -1.0}))
+	affectSub(subInfo.fetishScore({Fetish.Bodywritings: 1.0}, -0.25), 0.01, 0.0, -0.2, -0.02)
 	
 	return {
 		text = "{dom.You} {dom.youVerb('pull')} out a [b]black marker[/b].",
@@ -39,12 +39,12 @@ func processTurn():
 		return null
 	if(state == "drawsoon"):
 		state = "abouttodraw"
-		subInfo.addResistance(0.2 * subInfo.fetishScore({Fetish.Bodywritings: -1.0}))
+		affectSub(subInfo.fetishScore({Fetish.Bodywritings: 1.0}, -0.25), 0.01, 0.0, -0.2, -0.02)
 		return {text="{dom.You} {dom.youVerb('move')} the marker close to {sub.yourHis} body."}
 	if(state == "abouttodraw"):
 		endActivity()
 		
-		subInfo.addResistance(0.5 * subInfo.fetishScore({Fetish.Bodywritings: -1.0}))
+		affectSub(subInfo.fetishScore({Fetish.Bodywritings: 1.0}, -0.25), 0.01, 0.0, -0.2, -0.02)
 		
 		var zone = BodyWritingsZone.getRandomZone()
 		var writingID = BodyWritings.getRandomWritingIDForZone(zone)
