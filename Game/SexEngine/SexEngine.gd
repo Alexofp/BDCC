@@ -279,14 +279,20 @@ func processAIActions(isDom = true):
 					if(!newSexActivityRef.canStartActivity(self, theinfo, subInfo)):
 						continue
 					
-					var score = newSexActivityRef.getActivityScore(self, theinfo, subInfo)
-					if(score > 0.0):
-						possibleActions.append({
-							id = "startNewDomActivity",
-							activityID = possibleSexActivityID,
-							subID = subInfo.charID,
-						})
-						actionsScores.append(score)
+					var newpossibleActions = newSexActivityRef.getStartActions(self, theinfo, subInfo)
+					if(possibleActions == null):
+						continue
+					
+					for newaction in newpossibleActions:
+						var score = newaction["score"]
+						if(score > 0.0):
+							possibleActions.append({
+								id = "startNewDomActivity",
+								activityID = possibleSexActivityID,
+								subID = subInfo.charID,
+								args = newaction["args"],
+							})
+							actionsScores.append(score)
 		
 		if(isSub(personID)):
 			var allSexActivities = GlobalRegistry.getSexActivityReferences()
@@ -301,14 +307,20 @@ func processAIActions(isDom = true):
 					if(!newSexActivityRef.canStartActivity(self, domInfo, theinfo)):
 						continue
 					
-					var score = newSexActivityRef.getActivityScoreSub(self, domInfo, theinfo)
-					if(score > 0.0):
-						possibleActions.append({
-							id = "startNewSubActivity",
-							activityID = possibleSexActivityID,
-							domID = domInfo.charID,
-						})
-						actionsScores.append(score)
+					var newpossibleActions = newSexActivityRef.getStartActions(self, domInfo, theinfo)
+					if(possibleActions == null):
+						continue
+					
+					for newaction in newpossibleActions:
+						var score = newaction["score"]
+						if(score > 0.0):
+							possibleActions.append({
+								id = "startNewSubActivity",
+								activityID = possibleSexActivityID,
+								domID = domInfo.charID,
+								args = newaction["args"],
+							})
+							actionsScores.append(score)
 		
 		
 		for activity in activities:
@@ -357,9 +369,9 @@ func processAIActions(isDom = true):
 					var activity = getActivityWithUniqueID(pickedFinalAction["activityID"])
 					doSubAction(activity, pickedFinalAction["action"])
 				if(pickedFinalAction["id"] == "startNewDomActivity"):
-					startActivity(pickedFinalAction["activityID"], personID, pickedFinalAction["subID"])
+					startActivity(pickedFinalAction["activityID"], personID, pickedFinalAction["subID"], pickedFinalAction["args"])
 				if(pickedFinalAction["id"] == "startNewSubActivity"):
-					startActivity(pickedFinalAction["activityID"], pickedFinalAction["domID"], personID)
+					startActivity(pickedFinalAction["activityID"], pickedFinalAction["domID"], personID, pickedFinalAction["args"])
 
 	removeEndedActivities()
 	
@@ -445,14 +457,20 @@ func getActions():
 				if(!newSexActivityRef.canStartActivity(self, getDomInfo("pc"), getSubInfo(pctargetID))):
 					continue
 				
-				result.append({
-					id = "startNewDomActivity",
-					activityID = possibleSexActivityID,
-					name = newSexActivityRef.getVisibleName(),
-					category = newSexActivityRef.getCategory(),
-					subID = pctargetID,
-					desc = "Start new activity",
-				})
+				var possibleActions = newSexActivityRef.getStartActions(self, getDomInfo("pc"), getSubInfo(pctargetID))
+				if(possibleActions == null):
+					continue
+				
+				for newaction in possibleActions:
+					result.append({
+						id = "startNewDomActivity",
+						activityID = possibleSexActivityID,
+						name = newaction["name"],
+						category = newSexActivityRef.getCategory(),
+						subID = pctargetID,
+						desc = "Start new activity",
+						args = newaction["args"],
+					})
 					
 	if(isSub("pc") && getSubInfo("pc").canDoActions()):
 		var pctargetID = getPCTarget()
@@ -467,14 +485,20 @@ func getActions():
 				if(!newSexActivityRef.canStartActivity(self, getDomInfo(pctargetID), getSubInfo("pc"))):
 					continue
 				
-				result.append({
-					id = "startNewSubActivity",
-					activityID = possibleSexActivityID,
-					name = newSexActivityRef.getVisibleName(),
-					category = newSexActivityRef.getCategory(),
-					domID = pctargetID,
-					desc = "Start new activity",
-				})
+				var possibleActions = newSexActivityRef.getStartActions(self, getDomInfo(pctargetID), getSubInfo("pc"))
+				if(possibleActions == null):
+					continue
+				
+				for newaction in possibleActions:
+					result.append({
+						id = "startNewSubActivity",
+						activityID = possibleSexActivityID,
+						name = newaction["name"],
+						category = newSexActivityRef.getCategory(),
+						domID = pctargetID,
+						desc = "Start new activity",
+						args = newaction["args"],
+					})
 	
 	return result
 
@@ -508,13 +532,13 @@ func doAction(_actionInfo):
 		processTurn()
 	if(_actionInfo["id"] == "startNewDomActivity"):
 		messages.clear()
-		startActivity(_actionInfo["activityID"], "pc", _actionInfo["subID"])
+		startActivity(_actionInfo["activityID"], "pc", _actionInfo["subID"], _actionInfo["args"])
 		processAIActions(true)
 		processAIActions(false)
 		processTurn()
 	if(_actionInfo["id"] == "startNewSubActivity"):
 		messages.clear()
-		startActivity(_actionInfo["activityID"], _actionInfo["domID"], "pc")
+		startActivity(_actionInfo["activityID"], _actionInfo["domID"], "pc", _actionInfo["args"])
 		processAIActions(true)
 		processAIActions(false)
 		processTurn()
@@ -595,7 +619,7 @@ func getBestAnimation():
 		else:
 			return animInfo
 	
-	return [StageScene.Solo, "stand", {}]
+	return null
 
 func playAnimation():
 	var animInfo = getBestAnimation()

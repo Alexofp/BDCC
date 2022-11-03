@@ -55,6 +55,13 @@ func satisfyGoals():
 func canStartActivity(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexSubInfo):
 	return tagsNotBusy(_sexEngine, _domInfo, _subInfo) && !hasActivity(_sexEngine, id, _domInfo, _subInfo)
 
+func getStartActions(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexSubInfo):
+	return [{
+		name = getVisibleName(),
+		args = [],
+		score = getActivityScore(_sexEngine, _domInfo, _subInfo),
+	}]
+
 func canBeStartedByDom():
 	return startedByDom
 	
