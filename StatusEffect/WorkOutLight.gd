@@ -22,7 +22,7 @@ func getEffectName():
 	return "Light work out"
 
 func getEffectDesc():
-	return "Doing weights exercices made you more powerful for "+Util.getTimeStringHumanReadable(turns)
+	return "Doing weights exercises made you more powerful for "+Util.getTimeStringHumanReadable(turns)
 
 func getEffectImage():
 	return "res://Images/StatusEffects/biceps.png"
