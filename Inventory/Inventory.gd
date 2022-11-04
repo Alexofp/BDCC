@@ -70,6 +70,20 @@ func getItemByUniqueID(uniqueID: String):
 			return item
 	return null
 
+func getEquippedItemByUniqueID(uniqueID: String):
+	for slot in equippedItems.keys():
+		var item = equippedItems[slot]
+		if(item.uniqueID == uniqueID):
+			return item
+	return null
+
+func getEquippedItemByID(theID: String):
+	for slot in equippedItems.keys():
+		var item = equippedItems[slot]
+		if(item.id == theID):
+			return item
+	return null
+
 func removeItem(item):
 	if(items.has(item)):
 		items.erase(item)

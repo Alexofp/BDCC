@@ -69,7 +69,7 @@ func getTimesCame():
 	return timesCame
 
 func isReadyToPenetrate() -> bool:
-	return getChar().getLustLevel() >= 0.5
+	return getChar().getLustLevel() >= 0.5 || getChar().getLust() >= 50
 
 func fetishScore(fetishes = {}, addscore = 0.0):
 	var fetishHolder: FetishHolder = getChar().getFetishHolder()

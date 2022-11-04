@@ -37,11 +37,16 @@ func canDoActions():
 		return false
 	return true
 
+func isUnconscious():
+	if(consciousness <= 0.0):
+		return true
+	return false
+
 func isResisting():
 	return resistance >= 0.2
 
 func isScared():
-	return fear >= (0.4 - 0.2 * personalityScore({PersonalityStat.Coward: 1.0}))
+	return fear >= (0.5 - 0.3 * personalityScore({PersonalityStat.Coward: 1.0}))
 	
 func isVeryScared():
 	return fear >= 0.9
@@ -84,6 +89,8 @@ func getResistScore():
 	return 0.0
 
 func getComplyScore():
+	if(isScared()):
+		return 0.0
 	if(isResisting()):
 		return 0.0
 	return 1.0

@@ -77,3 +77,6 @@ func getExtraDescription():
 
 func getHidesParts(_character):
 	return null
+
+func getCasualName():
+	return null

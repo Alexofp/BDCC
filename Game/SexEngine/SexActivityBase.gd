@@ -60,6 +60,7 @@ func getStartActions(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexS
 		name = getVisibleName(),
 		args = [],
 		score = getActivityScore(_sexEngine, _domInfo, _subInfo),
+		category = getCategory(),
 	}]
 
 func canBeStartedByDom():
@@ -103,7 +104,17 @@ func tagsNotBusy(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexSubIn
 		if(_sexEngine.hasTag(_domInfo.charID, tag)):
 			return false
 	
+	domTags = getDomTagsCheck()
+	for tag in domTags:
+		if(_sexEngine.hasTag(_domInfo.charID, tag)):
+			return false
+	
 	var subTags = getSubTags()
+	for tag in subTags:
+		if(_sexEngine.hasTag(_subInfo.charID, tag)):
+			return false
+			
+	subTags = getSubTagsCheck()
 	for tag in subTags:
 		if(_sexEngine.hasTag(_subInfo.charID, tag)):
 			return false
@@ -129,10 +140,19 @@ func getDomTags():
 func getSubTags():
 	return []
 
+func getDomTagsCheck():
+	return []
+
+func getSubTagsCheck():
+	return []
+
 func processTurn():
 	return {
 		text = str(id)+" IS STILL HAPPENING.",
 	}
+
+func reactActivityEnd(_otheractivity):
+	return null
 
 func getDomActions():
 	return []

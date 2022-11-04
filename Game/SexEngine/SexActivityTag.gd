@@ -6,4 +6,6 @@ enum {
 	VaginaUsed,
 	PenisUsed,
 	MouthUsed,
+	OrderedToDoSomething,
+	OrderedToUndress,
 }

@@ -1448,6 +1448,12 @@ func afterSexEnded(sexInfo):
 		addLust(-getLust())
 		addPain(-getPain())
 		addStamina(getMaxStamina())
+		
+	var items = getInventory().getAllEquippedItems()
+	for itemSlot in items:
+		var item = items[itemSlot]
+		item.resetLustState()
+	updateAppearance()
 
 func createVoice():
 	sexVoice = SexVoice.new()
@@ -1455,3 +1461,15 @@ func createVoice():
 
 func getVoice() -> SexVoice:
 	return sexVoice
+
+func getFirstItemThatCoversBodypart(bodypartSlot):
+	for inventorySlot in InventorySlot.getAll():
+		if(!getInventory().hasSlotEquipped(inventorySlot)):
+			continue
+		
+		var item = getInventory().getEquippedItem(inventorySlot)
+		if(item.coversBodypart(bodypartSlot)):
+			return item
+	
+	return null
+	

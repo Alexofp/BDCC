@@ -19,10 +19,13 @@ func _initScene(_args = []):
 	#sexEngine.initPeople("pc", top)
 	#sexEngine.initPeople(top, "pc")
 	#sexEngine.initPeople(top, "rahi")
+	#sexEngine.initPeople("alexrynard", "rahi")
 	sexEngine.generateGoals()
 	
 	sexEngine.start()
 	addCharacter(top)
+	#addCharacter("alexrynard")
+	#addCharacter("rahi")
 
 func _reactInit():
 	updateDomsAndSubs()
@@ -126,3 +129,6 @@ func addCategoryButtons():
 	
 func supportsSexEngine():
 	return true
+
+func _onSceneEnd():
+	sexEngine.endSex()

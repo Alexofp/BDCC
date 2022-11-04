@@ -50,12 +50,55 @@ func processText(thetext, theDomID, theSubID):
 func addText(thetext, theDomID, theSubID):
 	messages.append(processText(thetext, theDomID, theSubID))
 
+func combineData(firstData, secondData):
+	if(firstData == null && secondData == null):
+		return null
+	if(firstData == null):
+		return secondData
+	if(secondData == null):
+		return firstData
+	
+	var texts = []
+	var domSays = []
+	var subSays = []
+	
+	for data in [firstData, secondData]:
+		if(data.has("text")):
+			texts.append(data["text"])
+		if(data.has("domSay") && data["domSay"] != null):
+			domSays.append(data["domSay"])
+		if(data.has("subSay") && data["subSay"] != null):
+			subSays.append(data["subSay"])
+		
+	var resultData = {}
+	if(texts.size() > 0):
+		resultData["text"] = Util.join(texts, " ")
+	if(domSays.size() > 0):
+		resultData["domSay"] = RNG.pick(domSays)
+	if(subSays.size() > 0):
+		resultData["subSay"] = RNG.pick(subSays)
+	return resultData
+
+func reactToActivityEnd(theactivity):
+	var resultData = null
+	
+	for activity in activities:
+		if(activity.hasEnded || activity == theactivity):
+			continue
+		
+		resultData = combineData(resultData, activity.reactActivityEnd(theactivity))
+	
+	return resultData
+
 func startActivity(id, theDomID, theSubID, _args = null, startedBySub = false):
 	var activity = makeActivity(id, theDomID, theSubID)
 	if(activity == null):
 		return
 		
 	var startData = activity.startActivity(_args)
+	if(activity.hasEnded):
+		startData = combineData(startData, reactToActivityEnd(activity))
+	
 	if(startData != null):
 		if(startData.has("text")):
 			addText(startData["text"], theDomID, theSubID)
@@ -209,6 +252,8 @@ func processTurn():
 		subInfo.processTurn()
 	
 	for activity in activities:
+		if(activity.hasEnded):
+			continue
 		var processResult = activity.processTurn()
 		if(processResult != null):
 			if(processResult.has("text")):
@@ -239,6 +284,8 @@ func getDomIDs():
 	
 func hasAnyAcitivites(charID):
 	for activity in activities:
+		if(activity.hasEnded):
+			continue
 		if(activity.subID == charID || activity.domID == charID):
 			return true
 	return false
@@ -324,7 +371,8 @@ func processAIActions(isDom = true):
 		
 		
 		for activity in activities:
-			
+			if(activity.hasEnded):
+				continue
 			if(activity.domID == personID):
 				var domActions = activity.getDomActions()
 				if(domActions != null):
@@ -380,6 +428,8 @@ func processAIActions(isDom = true):
 
 func doDomAction(activity, action):
 	var actionResult = activity.doDomAction(action["id"], action)
+	if(activity.hasEnded):
+		actionResult = combineData(actionResult, reactToActivityEnd(activity))
 	
 	if(actionResult != null):
 		if(actionResult.has("text")):
@@ -394,6 +444,8 @@ func doDomAction(activity, action):
 
 func doSubAction(activity, action):
 	var actionResult = activity.doSubAction(action["id"], action)
+	if(activity.hasEnded):
+		actionResult = combineData(actionResult, reactToActivityEnd(activity))
 	
 	if(actionResult != null):
 		if(actionResult.has("text")):
@@ -406,8 +458,10 @@ func doSubAction(activity, action):
 			addText("[say=dom]"+actionResult["domSay"]+"[/say]", activity.domID, activity.subID)
 
 func start():
-	if(isSub("pc")):
+	if(!isDom("pc")):
 		processAIActions(true)
+		processAIActions(false)
+		processTurn()
 
 func getFinalText():
 	return Util.join(messages, "\n\n")
@@ -421,6 +475,8 @@ func getActions():
 	})
 	
 	for activity in activities:
+		if(activity.hasEnded):
+			continue
 		if(activity.domID == "pc" && getDomInfo("pc").canDoActions()):
 			var domActions = activity.getDomActions()
 			if(domActions != null):
@@ -466,7 +522,7 @@ func getActions():
 						id = "startNewDomActivity",
 						activityID = possibleSexActivityID,
 						name = newaction["name"],
-						category = newSexActivityRef.getCategory(),
+						category = newaction["category"],
 						subID = pctargetID,
 						desc = "Start new activity",
 						args = newaction["args"],
@@ -494,7 +550,7 @@ func getActions():
 						id = "startNewSubActivity",
 						activityID = possibleSexActivityID,
 						name = newaction["name"],
-						category = newSexActivityRef.getCategory(),
+						category = newaction["category"],
 						domID = pctargetID,
 						desc = "Start new activity",
 						args = newaction["args"],
@@ -514,15 +570,15 @@ func doAction(_actionInfo):
 	if(_actionInfo["id"] == "continue"):
 		messages.clear()
 		processAIActions(true)
-		processAIActions(false)
 		processTurn()
+		processAIActions(false)
 	if(_actionInfo["id"] == "domAction"):
 		messages.clear()
 		var activity = getActivityWithUniqueID(_actionInfo["activityID"])
 		doDomAction(activity, _actionInfo["action"])
 		processAIActions(true)
-		processAIActions(false)
 		processTurn()
+		processAIActions(false)
 	if(_actionInfo["id"] == "subAction"):
 		messages.clear()
 		var activity = getActivityWithUniqueID(_actionInfo["activityID"])
@@ -534,8 +590,8 @@ func doAction(_actionInfo):
 		messages.clear()
 		startActivity(_actionInfo["activityID"], "pc", _actionInfo["subID"], _actionInfo["args"])
 		processAIActions(true)
-		processAIActions(false)
 		processTurn()
+		processAIActions(false)
 	if(_actionInfo["id"] == "startNewSubActivity"):
 		messages.clear()
 		startActivity(_actionInfo["activityID"], _actionInfo["domID"], "pc", _actionInfo["args"])
@@ -545,6 +601,9 @@ func doAction(_actionInfo):
 
 func hasTag(charID, tag):
 	for activity in activities:
+		if(activity.hasEnded):
+			continue
+		
 		if(activity.domID == charID):
 			if(tag in activity.getDomTags()):
 				return true
@@ -555,6 +614,9 @@ func hasTag(charID, tag):
 
 func hasActivity(id, thedomID, thesubID):
 	for activity in activities:
+		if(activity.hasEnded):
+			continue
+		
 		if(activity.id != id):
 			continue
 		
@@ -609,6 +671,8 @@ func getBestAnimation():
 		hasPlayer = true
 	
 	for activity in activities:
+		if(activity.hasEnded):
+			continue
 		var animInfo = activity.getAnimation()
 		if(animInfo == null):
 			continue
@@ -619,7 +683,11 @@ func getBestAnimation():
 		else:
 			return animInfo
 	
-	return null
+	#return null
+	if(subs.size() == 0 || doms.size() == 0):
+		return null
+	
+	return [StageScene.Duo, "stand", {pc=subs.keys()[0], npc=doms.keys()[0]}]
 
 func playAnimation():
 	var animInfo = getBestAnimation()

@@ -10,6 +10,12 @@ func getGoals():
 		SexGoal.FuckVaginal: 1.0,
 	}
 
+func canStartActivity(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexSubInfo):
+	if(_domInfo.getChar().getFirstItemThatCoversBodypart(BodypartSlot.Penis) != null):
+		return false
+	
+	return .canStartActivity(_sexEngine, _domInfo, _subInfo)
+
 func getVisibleName():
 	return "On all fours"
 
@@ -21,6 +27,12 @@ func getDomTags():
 
 func getSubTags():
 	return [SexActivityTag.VaginaUsed]
+
+func getDomTagsCheck():
+	return [SexActivityTag.OrderedToDoSomething]
+
+func getSubTagsCheck():
+	return [SexActivityTag.OrderedToDoSomething]
 
 func startActivity(_args):
 	state = ""
@@ -71,7 +83,7 @@ func getDomActions():
 			"name": RNG.pick(["Rub", "Tease"]),
 			"desc": "Rub your dick against their pussy",
 		})
-		if(domInfo.isReadyToPenetrate()):
+		if(domInfo.isReadyToPenetrate() && subInfo.getChar().getFirstItemThatCoversBodypart(BodypartSlot.Vagina) == null):
 			actions.append({
 				"id": "insert",
 				"score": 1.0,
@@ -213,12 +225,13 @@ func getSubActions():
 				"name": RNG.pick(["Resist", "Struggle", "Kick"]),
 				"desc": "Resist the attempts",
 			})
-		actions.append({
-				"id": "envelop",
-				"score": subFetishScore({Fetish.VaginalSexReceiving: 1.0}),
-				"name": RNG.pick(["Envelop cock"]),
-				"desc": "Try to get this cock inside you",
-			})
+		if(subInfo.getChar().getFirstItemThatCoversBodypart(BodypartSlot.Vagina) == null):
+			actions.append({
+					"id": "envelop",
+					"score": subFetishScore({Fetish.VaginalSexReceiving: 1.0}),
+					"name": RNG.pick(["Envelop cock"]),
+					"desc": "Try to get this cock inside you",
+				})
 	if(state in ["fucking"]):
 		actions.append({
 				"id": "moan",

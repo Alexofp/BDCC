@@ -22,6 +22,15 @@ func _init():
 func getVisibleName():
 	return "Bad item"
 
+func getCasualName():
+	if(itemState == null):
+		return getVisibleName()
+	
+	var theCasualName = itemState.getCasualName()
+	if(theCasualName == null):
+		return getVisibleName()
+	return theCasualName
+
 func getStackName():
 	if(amount > 1):
 		return ""+str(amount)+"x"+getVisibleName()

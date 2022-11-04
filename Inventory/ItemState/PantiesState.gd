@@ -5,6 +5,9 @@ var shiftedAside = false
 var casualName = "panties"
 var canShiftAside = true
 
+func getCasualName():
+	return casualName
+
 func arePantiesShiftedAside():
 	return shiftedAside
 
