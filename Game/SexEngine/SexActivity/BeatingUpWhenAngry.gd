@@ -35,9 +35,10 @@ func startActivity(_args):
 
 func processTurn():
 	if(state == ""):
-		affectSub(subInfo.fetishScore({Fetish.Masochist: 1.0}, -0.5), 0.1, 0.0, -0.2, -0.05)
-		affectDom(domInfo.fetishScore({Fetish.Sadist: 1.0}), 0.01, 0.0, 0.0)
+		affectSub(subInfo.fetishScore({Fetish.Masochist: 1.0}, -0.5), 0.1, -0.2, -0.05)
+		affectDom(domInfo.fetishScore({Fetish.Sadist: 1.0}), 0.01, 0.0)
 		subInfo.addPain(5)
+		domInfo.addAnger(-0.1)
 		
 		var texts = [
 			"{dom.You} {dom.youVerb('punch', 'punches')} {sub.youHim}.",

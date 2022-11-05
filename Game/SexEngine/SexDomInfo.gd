@@ -16,7 +16,19 @@ func canDoActions():
 	return !isDown
 
 func addAnger(howmuch = 0.2):
-	anger += howmuch * max(0.0, (1.0 + personalityScore({PersonalityStat.Mean:1.0, PersonalityStat.Impatient:0.5})))
+	var meanness = personalityScore({PersonalityStat.Mean:0.5, PersonalityStat.Impatient:0.2, PersonalityStat.Subby:-0.2})
+	if(meanness >= 0.0):
+		if(howmuch > 0.0):
+			howmuch *= (1.0 + meanness)
+		else:
+			howmuch *= max(1.0 - meanness, 0.1)
+	else:
+		if(howmuch > 0.0):
+			howmuch *= max(1.0 + meanness, 0.1)
+		else:
+			howmuch *= (1.0 - meanness)
+	
+	anger += howmuch
 	anger = clamp(anger, 0.0, 1.0)
 
 func getAngerScore():

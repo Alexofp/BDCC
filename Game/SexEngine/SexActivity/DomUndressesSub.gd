@@ -126,6 +126,6 @@ func getItemToRemove(character):
 
 	for bodypartToExpose in bodypartsToExpose:
 		var firstItem = character.getFirstItemThatCoversBodypart(bodypartToExpose)
-		if(firstItem != null && !canRemoveItems.has(firstItem)):
+		if(firstItem != null && !canRemoveItems.has(firstItem) && !firstItem.isRestraint()):
 			canRemoveItems.append(firstItem)
 	return RNG.pick(canRemoveItems)

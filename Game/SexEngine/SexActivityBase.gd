@@ -236,20 +236,16 @@ func domReaction(reactionID, chance = 100, fetishes = {}):
 func getAnimation():
 	return null
 
-func affectSub(howmuch:float, lustMod = 0.0, arousalMod = 0.0, resistanceMod = 0.0, fearMod = 0.0):
+func affectSub(howmuch:float, lustMod, resistanceMod, fearMod):
 	if(lustMod != 0.0):
 		getSub().addLust(int(round(howmuch * lustMod * 100.0)))
-	if(arousalMod != 0.0):
-		subInfo.addArousalSex(max(howmuch * arousalMod, 0.01))
 	if(resistanceMod != 0.0):
 		subInfo.addResistance(howmuch * resistanceMod)
 	if(fearMod != 0.0):
 		subInfo.addFear(max(howmuch * fearMod, 0.01))
 
-func affectDom(howmuch:float, lustMod = 0.0, arousalMod = 0.0, angerMod = 0.0):
+func affectDom(howmuch:float, lustMod, angerMod):
 	if(lustMod != 0.0):
 		getDom().addLust(int(round(howmuch * lustMod * 100.0)))
-	if(arousalMod != 0.0):
-		domInfo.addArousalSex(howmuch * arousalMod)
 	if(angerMod != 0.0):
 		domInfo.addAnger(howmuch * angerMod)
