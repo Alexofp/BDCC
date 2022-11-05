@@ -68,7 +68,7 @@ func processTurn():
 			}
 			
 		tick += 1
-		if(tick > 5):
+		if(tick > 3):
 			endActivity()
 			return {
 				text = "{dom.You} gave up waiting."

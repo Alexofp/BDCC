@@ -1432,6 +1432,15 @@ func isBodypartCovered(bodypartSlot):
 
 	return false
 
+func cumOnFloor():
+	if(hasBodypart(BodypartSlot.Penis)):
+		var penis:BodypartPenis = getBodypart(BodypartSlot.Penis)
+		var production: FluidProduction = penis.getFluidProduction()
+		if(production != null):
+			var returnValue = penis.getFluidProduction().drain()
+			production.fillPercent(buffsHolder.getCustom(BuffAttribute.CumGenerationAfterOrgasm))
+			return returnValue
+
 # Should apply a temporary cummed on status probably
 func cummedOnBy(_characterID, _sourceType = null, _howMessy: int = 1):
 	pass
@@ -1448,6 +1457,7 @@ func afterSexEnded(sexInfo):
 	for itemSlot in items:
 		var item = items[itemSlot]
 		item.resetLustState()
+		item.onSexEnd()
 	updateAppearance()
 
 func createVoice():

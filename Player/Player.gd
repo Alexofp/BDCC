@@ -679,15 +679,6 @@ func orgasmFrom(_characterID: String):
 	addLust(-lust)
 	updateNonBattleEffects()
 
-func cumOnFloor():
-	if(hasBodypart(BodypartSlot.Penis)):
-		var penis:BodypartPenis = getBodypart(BodypartSlot.Penis)
-		var production: FluidProduction = penis.getFluidProduction()
-		if(production != null):
-			var returnValue = penis.getFluidProduction().drain()
-			production.fillPercent(buffsHolder.getCustom(BuffAttribute.CumGenerationAfterOrgasm))
-			return returnValue
-
 func cummedOnBy(characterID, sourceType = null, howMessy: int = 1):	
 	var ch = GlobalRegistry.getCharacter(characterID)
 	if(sourceType == null):

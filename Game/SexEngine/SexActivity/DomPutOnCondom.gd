@@ -1,0 +1,80 @@
+extends SexActivityBase
+
+func _init():
+	id = "DomPutOnCondom"
+	startedByDom = true
+	startedBySub = false
+
+func getGoals():
+	return {
+		SexGoal.FuckAnal: 1.0,
+		SexGoal.FuckVaginal: 1.0,
+	}
+
+func getActivityBaseScore(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexSubInfo):
+	return 1.0
+
+func getStartActions(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexSubInfo):
+	var dom:BaseCharacter = _domInfo.getChar()
+	var sub:BaseCharacter = _subInfo.getChar()
+	var actions = []
+	
+	if(dom.isPlayer() && !dom.hasCondoms()):
+		return []
+	
+	if(!_sexEngine.hasTag(_domInfo.charID, SexActivityTag.PenisInside) && dom.hasReachablePenis() && !dom.getInventory().hasSlotEquipped(InventorySlot.Penis) && dom.getFirstItemThatCoversBodypart(BodypartSlot.Penis) == null):
+		actions.append({
+			name = "Wear condom",
+			desc = "Put on your best condom",
+			args = ["dom"],
+			score = getActivityScore(_sexEngine, _domInfo, _subInfo),
+			category = ["Wear"],
+		})
+	if(!_sexEngine.hasTag(_subInfo.charID, SexActivityTag.PenisInside) && sub.hasReachablePenis() && !sub.getInventory().hasSlotEquipped(InventorySlot.Penis) && sub.getFirstItemThatCoversBodypart(BodypartSlot.Penis) == null):
+		actions.append({
+			name = "Put condom on sub",
+			desc = "Put on your best condom on the sub",
+			args = ["sub"],
+			score = getActivityScore(_sexEngine, _domInfo, _subInfo),
+			category = ["Wear"],
+		})
+	
+	return actions
+
+func getVisibleName():
+	return "Wear condom"
+
+func getCategory():
+	return ["Wear"]
+
+func getDomTags():
+	return [SexActivityTag.HandsUsed]
+
+func getSubTags():
+	return []
+
+func startActivity(_args):
+	state = ""
+	
+	var breakChance = 20
+	if(getDom().isPlayer()):
+		breakChance = getDom().useBestCondom()
+	
+	var condomItem:ItemBase = GlobalRegistry.createItem("UsedCondom")
+	condomItem.breakChance = breakChance
+	
+	endActivity()
+	
+	if(_args[0] == "dom"):
+		getDom().getInventory().equipItem(condomItem)
+		
+		return {
+			text = "{dom.You} {dom.youVerb('put')} a condom on {dom.yourHis} cock.",
+		}
+	
+	if(_args[0] == "sub"):
+		getSub().getInventory().equipItem(condomItem)
+	
+		return {
+			text = "{dom.You} {dom.youVerb('put')} a condom on {sub.your} cock.",
+		}

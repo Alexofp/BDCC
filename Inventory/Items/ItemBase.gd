@@ -144,7 +144,8 @@ func addsIntoxicationToPC() -> float:
 	return addsIntoxication() * GM.pc.getIntoxicationMod()
 
 func destroyMe():
-	assert(currentInventory != null)
+	if(currentInventory == null):
+		return
 	var invent = currentInventory
 	invent.removeItem(self)
 	invent.removeEquippedItem(self)
@@ -373,3 +374,6 @@ func repairDamage():
 
 func alwaysVisible():
 	return false
+
+func onSexEnd():
+	pass

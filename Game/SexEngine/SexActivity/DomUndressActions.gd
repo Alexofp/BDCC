@@ -46,7 +46,7 @@ func getDomTags():
 	return []
 
 func getSubTags():
-	return []
+	return [SexActivityTag.OrderedToUndress]
 
 func startActivity(_args):
 	state = ""

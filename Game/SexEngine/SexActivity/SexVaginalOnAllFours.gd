@@ -23,6 +23,8 @@ func getCategory():
 	return ["Fuck"]
 
 func getDomTags():
+	if(state in ["fucking", "aftercumminginside"]):
+		return [SexActivityTag.PenisUsed, SexActivityTag.PenisInside]
 	return [SexActivityTag.PenisUsed]
 
 func getSubTags():
@@ -100,9 +102,13 @@ func getDomActions():
 		})
 	if(state in ["fucking"]):
 		if(domInfo.isReadyToCum()):
+			var condomScore = 0.0
+			if(getDomCondom() != null):
+				condomScore = 1.0
+			
 			actions.append({
 				"id": "cuminside",
-				"score": domInfo.fetishScore({Fetish.Breeding: 1.0}) - 20.0*float(gonnaCumOutside),
+				"score": min(condomScore, domInfo.fetishScore({Fetish.Breeding: 1.0}) - 20.0*float(gonnaCumOutside)),
 				"name": RNG.pick(["Cum inside"]),
 				"desc": "Cum inside their pussy",
 			})
@@ -133,7 +139,7 @@ func getDomActions():
 func doDomAction(_id, _actionInfo):
 	if(_id == "rub"):
 		affectSub(subInfo.fetishScore({Fetish.VaginalSexReceiving: 1.0}), 0.05, -0.1, 0.0)
-		affectDom(domInfo.fetishScore({Fetish.VaginalSexGiving: 1.0}), 0.05, 0.0)
+		affectDom(max(0.1, domInfo.fetishScore({Fetish.VaginalSexGiving: 1.0})+1.0), 0.05, 0.0)
 		
 		var text = RNG.pick([
 			"{dom.You} {dom.youVerb('rub')} {dom.yourHis} dick against {sub.your} pussy.",
@@ -176,25 +182,68 @@ func doDomAction(_id, _actionInfo):
 				])
 				return {text = text}
 	if(_id == "cuminside"):
+		var text = RNG.pick([
+			"{dom.You} came inside {sub.your} pussy!",
+			"{dom.You} stuffed {sub.your} pussy full of {dom.your} seed!",
+		])
+		
+		var condom:ItemBase = getDomCondom()
+		if(condom != null):
+			var breakChance = condom.getCondomBreakChance()
+			
+			if(RNG.chance(breakChance)):
+				text = "[b]The condom broke![/b] "+text
+				condom.destroyMe()
+			else:
+				text = RNG.pick([
+					"{dom.You} filled the condom inside {sub.your} pussy!",
+					"{dom.You} stuffed the condom in {sub.your} pussy full of {dom.yourHis} seed!",
+				])
+				getDom().cumOnFloor()
+				domInfo.cum()
+				subInfo.addArousalSex(0.2)
+				satisfyGoals()
+				state = "aftercumminginside"
+				
+				return {text=text}
+		
 		getSub().cummedInVaginaBy(domID)
 		domInfo.cum()
 		subInfo.addArousalSex(0.2)
 		satisfyGoals()
 		state = "aftercumminginside"
-		var text = RNG.pick([
-			"{dom.You} came inside {sub.your} pussy!",
-			"{dom.You} stuffed {sub.your} pussy full of {dom.your} seed!",
-		])
+
 		return {text=text}
 	if(_id == "cumpullout"):
-		getSub().cummedOnBy(domID)
-		domInfo.cum()
-		satisfyGoals()
-		state = ""
 		var text = RNG.pick([
 			"{dom.You} {dom.youVerb('pull')} {dom.your} cock out and cums all over {sub.your} butt!",
 			"{dom.You} {dom.youVerb('pull')} out, cumming all over {sub.your} ass!",
 		])
+		
+		var condom:ItemBase = getDomCondom()
+		if(condom != null):
+			var breakChance = condom.getCondomBreakChance()
+			
+			if(RNG.chance(breakChance)):
+				text = "[b]The condom broke![/b] "+text
+				condom.destroyMe()
+			else:
+				text = RNG.pick([
+					"{dom.You} {dom.youVerb('pull')} {dom.your} cock out and {dom.youVerb('fill')} {dom.yourHis} condom!",
+					"{dom.You} {dom.youVerb('pull')} out, stuffing {dom.yourHis} condom!",
+				])
+				getDom().cumOnFloor()
+				domInfo.cum()
+				satisfyGoals()
+				state = ""
+				
+				return {text=text}
+		
+		getSub().cummedOnBy(domID)
+		domInfo.cum()
+		satisfyGoals()
+		state = ""
+
 		return {text=text}
 	if(_id == "continuefucking"):
 		gonnaCumOutside = false
@@ -338,3 +387,10 @@ func doSubAction(_id, _actionInfo):
 
 func getAnimation():
 	return [StageScene.Duo, "allfours", {pc=subID, npc=domID, npcAction="kneel", flipPc=true}]
+
+func getDomCondom():
+	if(getDom().getInventory().hasSlotEquipped(InventorySlot.Penis)):
+		var item:ItemBase = getDom().getInventory().getEquippedItem(InventorySlot.Penis)
+		if(item.id == "UsedCondom"):
+			return item
+	return null

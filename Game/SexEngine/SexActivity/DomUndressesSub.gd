@@ -34,6 +34,9 @@ func canStartActivity(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: Sex
 	if(itemToUndress == null):
 		return false
 	
+	if(_sexEngine.hasTag(_subInfo.charID, SexActivityTag.OrderedToUndress)):
+		return false
+	
 	return .canStartActivity(_sexEngine, _domInfo, _subInfo)
 
 func startActivity(_args):
