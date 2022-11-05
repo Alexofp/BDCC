@@ -3,6 +3,8 @@ class_name SexEngine
 
 var activities:Array = []
 
+var revealedBodyparts: Dictionary = {}
+
 var messages:Array = []
 var state = "start" # start, waitingForPCSub, waitingForPCDom
 var waitingActivityID
@@ -31,6 +33,74 @@ func initPeople(domIDs, subIDs):
 		subInfo.initInfo(subID)
 		
 		subs[subID] = subInfo
+		
+	checkExposedBodypartsOnStart()
+
+func checkExposedBodypartsOnStart():
+	var bodypartsToCheck = [BodypartSlot.Breasts, BodypartSlot.Penis, BodypartSlot.Vagina, BodypartSlot.Anus]
+	revealedBodyparts.clear()
+	
+	for domID in doms:
+		revealedBodyparts[domID] = {}
+		var domInfo = doms[domID]
+		var character = domInfo.getChar()
+		
+		for bodypartID in bodypartsToCheck:
+			if(character.hasBodypart(bodypartID) && !character.isBodypartCovered(bodypartID)):
+				revealedBodyparts[domID][bodypartID] = true
+
+	for subID in subs:
+		revealedBodyparts[subID] = {}
+		var subInfo = subs[subID]
+		var character = subInfo.getChar()
+		
+		for bodypartID in bodypartsToCheck:
+			if(character.hasBodypart(bodypartID) && !character.isBodypartCovered(bodypartID)):
+				revealedBodyparts[subID][bodypartID] = true
+
+func wrapWithSayTag(charID, text):
+	if(charID == null || text == null || text == ""):
+		return null
+	return "[say="+str(charID)+"]"+str(text)+"[/say]"
+
+func getExposedBodypartsNewData():
+	var bodypartsToCheck = [BodypartSlot.Breasts, BodypartSlot.Penis, BodypartSlot.Vagina, BodypartSlot.Anus]
+	var resultData = null
+	
+	for domID in doms:
+		var domInfo = doms[domID]
+		var character = domInfo.getChar()
+		
+		for bodypartID in bodypartsToCheck:
+			if(character.hasBodypart(bodypartID) && !revealedBodyparts[domID].has(bodypartID) && !character.isBodypartCovered(bodypartID)):
+				revealedBodyparts[domID][bodypartID] = true
+				
+				var bodypart = character.getBodypart(bodypartID)
+				var randomSubID = RNG.pick(subs)
+				
+				resultData = combineData(resultData, {
+					text = "[b]"+bodypart.getRevealMessage()+"[/b]",
+					domSay = wrapWithSayTag(domID, character.getVoice().domReactionWhenUndressing(bodypart, self, domInfo, subs[randomSubID])),
+				})
+
+	for subID in subs:
+		var subInfo = subs[subID]
+		var character = subInfo.getChar()
+		
+		for bodypartID in bodypartsToCheck:
+			if(character.hasBodypart(bodypartID) && !revealedBodyparts[subID].has(bodypartID) && !character.isBodypartCovered(bodypartID)):
+				revealedBodyparts[subID][bodypartID] = true
+				
+				var bodypart = character.getBodypart(bodypartID)
+				var randomDomID = RNG.pick(doms)
+				var domCharacter = doms[randomDomID].getChar()
+				
+				resultData = combineData(resultData, {
+					text = "[b]"+bodypart.getRevealMessage()+"[/b]",
+					domSay = wrapWithSayTag(randomDomID, domCharacter.getVoice().domReactToSubBodypart(bodypart, self, doms[randomDomID], subInfo)),
+				})
+				
+	return resultData
 
 func makeActivity(id, theDomID, theSubID):
 	var activityObject = GlobalRegistry.createSexActivity(id)
@@ -49,6 +119,30 @@ func processText(thetext, theDomID, theSubID):
 
 func addText(thetext, theDomID, theSubID):
 	messages.append(processText(thetext, theDomID, theSubID))
+
+func processData(data, theDomID, theSubID):
+	if(data == null):
+		return null
+	var newresult = {}
+	if(data.has("text")):
+		newresult["text"] = processText(data["text"], theDomID, theSubID)
+	if(data.has("domSay") && data["domSay"] != null):
+		newresult["domSay"] = "[say="+str(theDomID)+"]"+processText(data["domSay"], theDomID, theSubID)+"[/say]"
+	if(data.has("subSay") && data["subSay"] != null):
+		newresult["subSay"] = "[say="+str(theSubID)+"]"+processText(data["subSay"], theDomID, theSubID)+"[/say]"
+	
+	return newresult
+
+func sendProcessedData(data):
+	if(data == null):
+		return
+	
+	if(data.has("text")):
+		messages.append(data["text"])
+	if(data.has("domSay")):
+		messages.append(data["domSay"])
+	if(data.has("subSay")):
+		messages.append(data["subSay"])
 
 func combineData(firstData, secondData):
 	if(firstData == null && secondData == null):
@@ -86,46 +180,36 @@ func reactToActivityEnd(theactivity):
 		if(activity.hasEnded || activity == theactivity):
 			continue
 		
-		resultData = combineData(resultData, activity.reactActivityEnd(theactivity))
+		resultData = combineData(resultData, processData(activity.reactActivityEnd(theactivity), activity.domID, activity.subID))
+		resultData = combineData(resultData, getExposedBodypartsNewData())
 	
 	return resultData
 
-func startActivity(id, theDomID, theSubID, _args = null, startedBySub = false):
+func startActivity(id, theDomID, theSubID, _args = null, _startedBySub = false):
 	var activity = makeActivity(id, theDomID, theSubID)
 	if(activity == null):
 		return
 		
-	var startData = activity.startActivity(_args)
+	var startData = processData(activity.startActivity(_args), theDomID, theSubID)
 	if(activity.hasEnded):
 		startData = combineData(startData, reactToActivityEnd(activity))
+	startData = combineData(startData, getExposedBodypartsNewData())
 	
-	if(startData != null):
-		if(startData.has("text")):
-			addText(startData["text"], theDomID, theSubID)
-		
-		if(!startedBySub):
-			if(startData.has("domSay") && startData["domSay"] != null):
-				addText("[say=dom]"+startData["domSay"]+"[/say]", activity.domID, activity.subID)
-
-			elif(startData.has("subSay") && startData["subSay"] != null):
-				addText("[say=sub]"+startData["subSay"]+"[/say]", activity.domID, activity.subID)
-		else:
-			if(startData.has("subSay") && startData["subSay"] != null):
-				addText("[say=sub]"+startData["subSay"]+"[/say]", activity.domID, activity.subID)
-	
-			elif(startData.has("domSay") && startData["domSay"] != null):
-				addText("[say=dom]"+startData["domSay"]+"[/say]", activity.domID, activity.subID)
+	sendProcessedData(startData)
 	
 func switchActivity(oldActivity, newActivityID, _args = []):
 	oldActivity.endActivity()
 	
-	var activityObject = makeActivity(newActivityID, oldActivity.domID, oldActivity.subID)
-	if(activityObject == null):
+	var activity = makeActivity(newActivityID, oldActivity.domID, oldActivity.subID)
+	if(activity == null):
 		return
 	
-	var startData = activityObject.onSwitchFrom(oldActivity, _args)
-	if(startData != null && startData.has("text")):
-		addText(startData["text"], oldActivity.domID, oldActivity.subID)
+	var startData = processData(activity.onSwitchFrom(oldActivity, _args), oldActivity.domID, oldActivity.subID)
+	if(activity.hasEnded):
+		startData = combineData(startData, reactToActivityEnd(activity))
+	startData = combineData(startData, getExposedBodypartsNewData())
+	
+	sendProcessedData(startData)
 
 func getActivityWithUniqueID(uniqueID):
 	for activity in activities:
@@ -231,15 +315,13 @@ func removeEndedActivities():
 func processTurn():
 	removeEndedActivities()
 	
-	var processMessages = []
-	var subMessages = []
-	var domMessages = []
+	var processedDatas = []
 	
 	for domID in doms:
 		var domInfo = doms[domID]
 		
 		if(domInfo.checkIsDown()):
-			processMessages.append(processText("{dom.You} can't continue anymore!", domID, domID))
+			processedDatas.append({text=processText("{dom.You} can't continue anymore!", domID, domID)})
 			
 			for i in range(activities.size() - 1, -1, -1):
 				if(activities[i].domID == domID):
@@ -254,26 +336,18 @@ func processTurn():
 	for activity in activities:
 		if(activity.hasEnded):
 			continue
-		var processResult = activity.processTurn()
+		var processResult = processData(activity.processTurn(), activity.domID, activity.subID)
 		if(processResult != null):
-			if(processResult.has("text")):
-				processMessages.append(processText(processResult["text"], activity.domID, activity.subID))
-			
-			if(processResult.has("domSay") && processResult["domSay"] != null):
-				domMessages.append(processText("[say=dom]"+processResult["domSay"]+"[/say]", activity.domID, activity.subID))
+			processedDatas.append(processResult)
 
-			elif(processResult.has("subSay") && processResult["subSay"] != null):
-				subMessages.append(processText("[say=sub]"+processResult["subSay"]+"[/say]", activity.domID, activity.subID))
-		
-	if(processMessages.size() > 0):
-		messages.append(Util.join(processMessages, " "))
+	var result = null
+	for processedData in processedDatas:
+		result = combineData(result, processedData)
+
+	result = combineData(result, (getExposedBodypartsNewData()))
 	
-	if(domMessages.size() > 0):
-		messages.append(RNG.pick(domMessages))
-		
-	if(subMessages.size() > 0):
-		messages.append(RNG.pick(subMessages))
-		
+	sendProcessedData(result)
+	
 	removeEndedActivities()
 	
 func getSubIDs():
@@ -427,35 +501,21 @@ func processAIActions(isDom = true):
 		endSex()
 
 func doDomAction(activity, action):
-	var actionResult = activity.doDomAction(action["id"], action)
+	var actionResult = processData(activity.doDomAction(action["id"], action), activity.domID, activity.subID)
 	if(activity.hasEnded):
 		actionResult = combineData(actionResult, reactToActivityEnd(activity))
+	actionResult = combineData(actionResult, getExposedBodypartsNewData())
 	
-	if(actionResult != null):
-		if(actionResult.has("text")):
-			addText(actionResult["text"], activity.domID, activity.subID)
-		
-		if(actionResult.has("domSay") && actionResult["domSay"] != null):
-			addText("[say=dom]"+actionResult["domSay"]+"[/say]", activity.domID, activity.subID)
-
-		elif(actionResult.has("subSay") && actionResult["subSay"] != null):
-			addText("[say=sub]"+actionResult["subSay"]+"[/say]", activity.domID, activity.subID)
+	sendProcessedData(actionResult)
 
 
 func doSubAction(activity, action):
-	var actionResult = activity.doSubAction(action["id"], action)
+	var actionResult = processData(activity.doSubAction(action["id"], action), activity.domID, activity.subID)
 	if(activity.hasEnded):
 		actionResult = combineData(actionResult, reactToActivityEnd(activity))
+	actionResult = combineData(actionResult, getExposedBodypartsNewData())
 	
-	if(actionResult != null):
-		if(actionResult.has("text")):
-			addText(actionResult["text"], activity.domID, activity.subID)
-		
-		if(actionResult.has("subSay") && actionResult["subSay"] != null):
-			addText("[say=sub]"+actionResult["subSay"]+"[/say]", activity.domID, activity.subID)
-
-		elif(actionResult.has("domSay") && actionResult["domSay"] != null):
-			addText("[say=dom]"+actionResult["domSay"]+"[/say]", activity.domID, activity.subID)
+	sendProcessedData(actionResult)
 
 func start():
 	if(!isDom("pc")):

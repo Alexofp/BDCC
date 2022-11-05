@@ -46,8 +46,8 @@ func startActivity(_args):
 func processTurn():
 	if(state == "fucking"):
 		times += 1
-		affectSub(subInfo.fetishScore({Fetish.VaginalSexReceiving: 1.0}), 0.05, -0.1, -0.01)
-		affectDom(domInfo.fetishScore({Fetish.VaginalSexGiving: 1.0}), 0.05, 0.0)
+		affectSub(subInfo.fetishScore({Fetish.VaginalSexReceiving: 1.0})+0.5, 0.1, -0.1, -0.01)
+		affectDom(domInfo.fetishScore({Fetish.VaginalSexGiving: 1.0})+0.3, 0.1, 0.0)
 		subInfo.addArousalSex(0.2)
 		domInfo.addArousalSex(0.2)
 		

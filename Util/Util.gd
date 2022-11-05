@@ -361,6 +361,11 @@ static func muffledSpeech(text: String, strenght: int = 1):
 		
 	return newtext
 
+static func capitalizeFirstLetter(string:String):
+	if(string.length() == 0):
+		return string
+	return string[0].to_upper() + string.substr(1,-1)
+
 static func variantTypeToString(type):
 	if(type == TYPE_NIL):
 		return "TYPE_NIL"

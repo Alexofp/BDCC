@@ -175,3 +175,6 @@ func hasWomb():
 func updateAppearance():
 	if(character != null && getCharacter() != null):
 		getCharacter().updateAppearance()
+
+func getRevealMessage():
+	return getLewdName()+" got revealed."

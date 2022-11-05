@@ -76,7 +76,7 @@ func addResistance(addres):
 	if(isVeryScared()):
 		addres /= 2.0
 	
-	resistance += addres * (1.0 + personalityScore({PersonalityStat.Subby: -1.0, PersonalityStat.Brat: 0.5}))
+	resistance += addres * (1.0 + personalityScore({PersonalityStat.Subby: -0.2, PersonalityStat.Brat: 0.1}))
 	resistance = clamp(resistance, 0.0, 1.0)
 
 func getResistScore():

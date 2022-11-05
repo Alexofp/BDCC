@@ -124,3 +124,6 @@ func getPenisScale():
 
 func getBallsScale():
 	return ballsScale
+
+func getRevealMessage():
+	return Util.capitalizeFirstLetter(getLewdDescriptionAndName()) + " got revealed."

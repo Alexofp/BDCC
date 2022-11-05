@@ -112,3 +112,13 @@ func getSubReaction(_reactionID, _sexEngine, _domInfo, _subInfo, _likesScore = 0
 	if(possible.size() > 0):
 		return RNG.pick(possible)
 		
+func domReactToSubBodypart(_bodypart, _sexEngine, _domInfo, _subInfo):
+	if(_bodypart is BodypartVagina):
+		return "That's a nice pussy"
+	if(_bodypart is BodypartPenis):
+		return "Nice cock"
+
+func domReactionWhenUndressing(_bodypart, _sexEngine, _domInfo, _subInfo):
+	if(_bodypart is BodypartPenis):
+		return "Like it?"
+	

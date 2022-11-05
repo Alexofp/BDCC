@@ -8,7 +8,7 @@ func getGoals():
 	}
 
 func getActivityBaseScore(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexSubInfo):
-	return _domInfo.fetishScore({Fetish.Bodywritings: 0.2}) * (1.0 + _domInfo.personalityScore({PersonalityStat.Mean: 1.0}))
+	return _domInfo.fetishScore({Fetish.Bodywritings: 0.05}) * (1.0 + _domInfo.personalityScore({PersonalityStat.Mean: 0.3}))
 
 func getVisibleName():
 	return "Draw on body"
