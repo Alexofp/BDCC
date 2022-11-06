@@ -51,7 +51,7 @@ func isSlightlyAngry():
 	return anger > 0.2
 
 func isAngry():
-	return anger > 0.6
+	return anger > (0.6 - personalityScore({PersonalityStat.Mean: 0.2}))
 
 func getInfoString():
 	var character = getChar()

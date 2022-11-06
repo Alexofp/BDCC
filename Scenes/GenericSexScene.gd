@@ -13,13 +13,13 @@ func _initScene(_args = []):
 	
 	var top = _args[0]
 	
-	#sexEngine.initPeople(top, "pc")
+	sexEngine.initPeople(top, "pc")
 	#sexEngine.initPeople(top, "rahi")
 	
 	#sexEngine.initPeople("pc", top)
 	#sexEngine.initPeople(top, "pc")
 	#sexEngine.initPeople(top, "rahi")
-	sexEngine.initPeople("alexrynard", "rahi")
+	#sexEngine.initPeople("alexrynard", "rahi")
 	sexEngine.generateGoals()
 	
 	sexEngine.start()

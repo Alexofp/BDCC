@@ -98,6 +98,47 @@ func getExposedBodypartsNewData():
 				
 	return resultData
 
+func subOrgasmData():
+	var result = null
+	
+	for subID in subs:
+		var subInfo = subs[subID]
+		if(subInfo.isReadyToCum()):
+			# add a check to see if some activity wants to handle this event instead here
+			
+			subInfo.getChar().cumOnFloor()
+			subInfo.cum()
+			var text = RNG.pick([
+				"A [b]powerful orgasm[/b] overwhelms {sub.your} body.",
+				"[b]{sub.You} {sub.youVerb('cum')}[/b] hard!",
+			])
+			
+			if(subInfo.getChar().hasPenis()):
+				text += RNG.pick([
+					" {sub.YourHis} "+RNG.pick(["cock", "dick", "member"])+" wastes its load!",
+					" {sub.YourHis} "+RNG.pick(["cock", "dick", "member"])+" shoots out a load!",
+					" {sub.YourHis} "+RNG.pick(["cock", "dick", "member"])+" throbs while wasting its seed!",
+				])
+			if(subInfo.getChar().hasVagina()):
+				text += RNG.pick([
+					" {sub.YourHis} "+RNG.pick(["pussy", "slit"])+" gets tight!",
+					" {sub.YourHis} "+RNG.pick(["pussy", "slit"])+" clenches and twitches!",
+					" {sub.YourHis} "+RNG.pick(["pussy", "slit"])+" pulsates irregularly!",
+					" {sub.YourHis} "+RNG.pick(["pussy", "slit"])+" squirts!",
+				])
+			
+			result = combineData(result, processData({
+				text = text,
+			}, RNG.pick(doms), subID))
+
+	return result
+
+func getExtraData():
+	var result = null
+	result = combineData(result, getExposedBodypartsNewData())
+	result = combineData(result, subOrgasmData())
+	return result
+
 func makeActivity(id, theDomID, theSubID):
 	var activityObject = GlobalRegistry.createSexActivity(id)
 	if(activityObject == null):
@@ -177,7 +218,7 @@ func reactToActivityEnd(theactivity):
 			continue
 		
 		resultData = combineData(resultData, processData(activity.reactActivityEnd(theactivity), activity.domID, activity.subID))
-		resultData = combineData(resultData, getExposedBodypartsNewData())
+		resultData = combineData(resultData, getExtraData())
 	
 	return resultData
 
@@ -189,7 +230,7 @@ func startActivity(id, theDomID, theSubID, _args = null, _startedBySub = false):
 	var startData = processData(activity.startActivity(_args), theDomID, theSubID)
 	if(activity.hasEnded):
 		startData = combineData(startData, reactToActivityEnd(activity))
-	startData = combineData(startData, getExposedBodypartsNewData())
+	startData = combineData(startData, getExtraData())
 	
 	sendProcessedData(startData)
 	
@@ -203,7 +244,7 @@ func switchActivity(oldActivity, newActivityID, _args = []):
 	var startData = processData(activity.onSwitchFrom(oldActivity, _args), oldActivity.domID, oldActivity.subID)
 	if(activity.hasEnded):
 		startData = combineData(startData, reactToActivityEnd(activity))
-	startData = combineData(startData, getExposedBodypartsNewData())
+	startData = combineData(startData, getExtraData())
 	
 	sendProcessedData(startData)
 
@@ -340,7 +381,7 @@ func processTurn():
 	for processedData in processedDatas:
 		result = combineData(result, processedData)
 
-	result = combineData(result, (getExposedBodypartsNewData()))
+	result = combineData(result, (getExtraData()))
 	
 	sendProcessedData(result)
 	
@@ -397,7 +438,7 @@ func processAIActions(isDom = true):
 						continue
 					
 					var newpossibleActions = newSexActivityRef.getStartActions(self, theinfo, subInfo)
-					if(possibleActions == null):
+					if(newpossibleActions == null):
 						continue
 					
 					for newaction in newpossibleActions:
@@ -425,7 +466,7 @@ func processAIActions(isDom = true):
 						continue
 					
 					var newpossibleActions = newSexActivityRef.getStartActions(self, domInfo, theinfo)
-					if(possibleActions == null):
+					if(newpossibleActions == null):
 						continue
 					
 					for newaction in newpossibleActions:
@@ -500,7 +541,7 @@ func doDomAction(activity, action):
 	var actionResult = processData(activity.doDomAction(action["id"], action), activity.domID, activity.subID)
 	if(activity.hasEnded):
 		actionResult = combineData(actionResult, reactToActivityEnd(activity))
-	actionResult = combineData(actionResult, getExposedBodypartsNewData())
+	actionResult = combineData(actionResult, getExtraData())
 	
 	sendProcessedData(actionResult)
 
@@ -509,7 +550,7 @@ func doSubAction(activity, action):
 	var actionResult = processData(activity.doSubAction(action["id"], action), activity.domID, activity.subID)
 	if(activity.hasEnded):
 		actionResult = combineData(actionResult, reactToActivityEnd(activity))
-	actionResult = combineData(actionResult, getExposedBodypartsNewData())
+	actionResult = combineData(actionResult, getExtraData())
 	
 	sendProcessedData(actionResult)
 
@@ -764,3 +805,23 @@ func playAnimation():
 		GM.main.playAnimation(animInfo[0], animInfo[1], animInfo[2])
 	else:
 		GM.main.playAnimation(animInfo[0], animInfo[1])
+
+func getStartActivityScore(activityID, domInfo, subInfo):
+	var newSexActivityRef = GlobalRegistry.getSexActivityReference(activityID)
+	if(newSexActivityRef == null):
+		return -1.0
+	
+	if(!newSexActivityRef.canStartActivity(self, domInfo, subInfo)):
+		return -1.0
+	
+	var newpossibleActions = newSexActivityRef.getStartActions(self, domInfo, subInfo)
+	if(newpossibleActions == null):
+		return -1.0
+	
+	var maxScore = 0.0
+	for newaction in newpossibleActions:
+		var score = newaction["score"]
+		
+		maxScore = max(maxScore, score)
+	
+	return maxScore

@@ -35,8 +35,9 @@ func startActivity(_args):
 
 func processTurn():
 	if(state == ""):
-		affectSub(subInfo.fetishScore({Fetish.Masochist: 1.0}, -0.5), 0.1, -0.2, -0.05)
-		affectDom(domInfo.fetishScore({Fetish.Sadist: 1.0}), 0.01, 0.0)
+		subInfo.addFear(0.05)
+		affectSub(subInfo.fetishScore({Fetish.Masochist: 1.0}, -0.5), 0.1, -0.2, 0.0)
+		affectDom(domInfo.fetishScore({Fetish.Sadist: 0.5}, 0.5), 0.1, 0.0)
 		subInfo.addPain(5)
 		domInfo.addAnger(-0.1)
 		
@@ -70,6 +71,12 @@ func getDomActions():
 			"name": "Stop beating up",
 			"desc": "Enough violence",
 		})
+	actions.append({
+			"id": "hithard",
+			"score": domInfo.getIsAngryScore()*domInfo.fetishScore({Fetish.Masochist: 0.4}) - subInfo.getAboutToPassOutScore() * domInfo.fetishScore({Fetish.UnconsciousSex: 1.0}, 0.5),
+			"name": "Hit really hard",
+			"desc": "Make that bitch regret it",
+		})
 	return actions
 
 func doDomAction(_id, _actionInfo):
@@ -80,7 +87,22 @@ func doDomAction(_id, _actionInfo):
 			text = "{dom.You} {dom.youVerb('have', 'has')} stopped beating {sub.you} up.",
 		}
 	
-	return null
+	if(_id == "hithard"):
+		affectSub(subInfo.fetishScore({Fetish.Masochist: 1.0}, -0.5), 0.1, -0.05, 0.0)
+		affectDom(domInfo.fetishScore({Fetish.Sadist: 0.5}, 0.5), 0.2, 0.0)
+		subInfo.addPain(RNG.randi_range(15, 25))
+		domInfo.addAnger(-0.2)
+		subInfo.addFear(0.3)
+		
+		var text = RNG.pick([
+			"{dom.You} {dom.youVerb('hit')} {sub.youHim} [b]really hard[/b].",
+			"{dom.You} {dom.youVerb('slam')} {sub.youHim} against the wall [b]really hard[/b].",
+			"{dom.You} {dom.youVerb('punch', 'punches')} {sub.youHim} [b]really hard[/b].",
+		])
+		
+		return {
+			text = text
+		}
 
 func getSubActions():
 	var actions = []

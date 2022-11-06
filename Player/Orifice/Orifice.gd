@@ -81,7 +81,7 @@ func getLoosenessString():
 func getComfortableInsertion() -> float:
 	return 10.0 + pow(looseness, 2.0)
 
-func handleInsertion(size: float):
+func handleInsertion(size: float, stretchMult = 1.0):
 	var comfortable = getComfortableInsertion()
 	
 	var diff = size - comfortable
@@ -92,7 +92,7 @@ func handleInsertion(size: float):
 	if(diff > 0):
 		add += pow(diff, 0.5) / getResistance() / 2.0
 	
-	looseness += add
+	looseness += add / 10.0 * stretchMult
 
 func hoursPassed(_howmuch):
 	var minLoose = getMinLooseness()

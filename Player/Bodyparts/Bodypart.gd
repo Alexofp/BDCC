@@ -123,10 +123,10 @@ func hoursPassed(_howmuch):
 		return
 	orifice.hoursPassed(_howmuch)
 
-func handleInsertion(size: float):
+func handleInsertion(size: float, stretchMult = 1.0):
 	if(orifice == null):
 		return
-	orifice.handleInsertion(size)
+	orifice.handleInsertion(size, stretchMult)
 
 func getOrificeName():
 	return "error"

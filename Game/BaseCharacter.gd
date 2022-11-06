@@ -842,7 +842,7 @@ func getOrificeMinLooseness(orificeType):
 func getOrificeBlocked(orificeType):
 	return buffsHolder.getOrificeBlocked(orificeType)
 
-func gotOrificeStretchedWith(bodypartSlot, insertionSize, showMessages = true):
+func gotOrificeStretchedWith(bodypartSlot, insertionSize, showMessages = true, stretchMult = 1.0):
 	if(!hasBodypart(bodypartSlot)):
 		return
 	var thebodypart = getBodypart(bodypartSlot)
@@ -851,18 +851,37 @@ func gotOrificeStretchedWith(bodypartSlot, insertionSize, showMessages = true):
 	if(orifice == null):
 		return
 	var oldLooseness = orifice.getLooseness()
-	thebodypart.handleInsertion(insertionSize)
+	thebodypart.handleInsertion(insertionSize, stretchMult)
 	var newLooseness = orifice.getLooseness()
 	if(newLooseness > oldLooseness && showMessages):
 		emit_signal("orificeBecomeMoreLoose", thebodypart.getOrificeName(), newLooseness, oldLooseness)
 
-func gotOrificeStretchedBy(bodypartSlot, characterID, showMessages = true):
+func gotOrificeStretchedBy(bodypartSlot, characterID, showMessages = true, stretchMult = 1.0):
 	if(!hasBodypart(bodypartSlot)):
 		return
 	
 	var ch = GlobalRegistry.getCharacter(characterID)
 	assert(ch != null)
-	gotOrificeStretchedWith(bodypartSlot, ch.getPenisSize(), showMessages)
+	gotOrificeStretchedWith(bodypartSlot, ch.getPenisSize(), showMessages, stretchMult)
+
+func getPenetrationFreeRoom(bodypartSlot, insertionSize):
+	if(!hasBodypart(bodypartSlot)):
+		return 0.0
+	var thebodypart = getBodypart(bodypartSlot)
+	
+	var orifice: Orifice = thebodypart.getOrifice()
+	if(orifice == null):
+		return 0.0
+	
+	var goodSize = orifice.getComfortableInsertion()
+	
+	var diff = goodSize - insertionSize
+	return diff
+
+func getPenetrationFreeRoomBy(bodypartSlot, characterID):
+	var ch = GlobalRegistry.getCharacter(characterID)
+	assert(ch != null)
+	return getPenetrationFreeRoom(bodypartSlot, ch.getPenisSize())
 
 func getPenetrateChance(bodypartSlot, insertionSize):
 	if(!hasBodypart(bodypartSlot)):
@@ -879,7 +898,7 @@ func getPenetrateChance(bodypartSlot, insertionSize):
 	if(diff <= 0.0):
 		return 100.0
 	
-	return 500.0 / (5.0 + diff)
+	return max(500.0 / (5.0 + diff), 30.0)
 
 func getPenetrateChanceBy(bodypartSlot, characterID):
 	var ch = GlobalRegistry.getCharacter(characterID)

@@ -64,6 +64,11 @@ func callObjectFuncWrapper(_obj: String, _command: String, _args: Array):
 			return "you"
 		else:
 			return object.getName()
+	if(_command in ["youHe"] && _args.size() == 0):
+		if(object.isPlayer()):
+			return "you"
+		else:
+			return object.heShe()
 	if(_command in ["himYou", "youHim"] && _args.size() == 0):
 		if(object.isPlayer()):
 			return "you"

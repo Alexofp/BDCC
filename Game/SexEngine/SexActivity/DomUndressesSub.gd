@@ -108,13 +108,13 @@ func getSubActions():
 				"score": subInfo.getResistScore() * 1.0 - subInfo.fetishScore({Fetish.Exhibitionism: 1.0}) * subInfo.getComplyScore(),
 				"name": "Resist undressing",
 				"desc": "You don't wanna be undressed",
-				"chance": 70,
+				"chance": 70.0 - domInfo.getAngerScore()*60.0,
 			})
 	return actions
 
 func doSubAction(_id, _actionInfo):
 	if(_id == "resist"):
-		if(RNG.chance(70)):
+		if(RNG.chance(70.0 - domInfo.getAngerScore()*60.0)):
 			domInfo.addAnger(0.3)
 			endActivity()
 			return {
