@@ -15,5 +15,6 @@ const UnconsciousSex = "UnconsciousSex"
 
 const Breeding = "Breeding"
 const BeingBred = "BeingBred"
+const Condoms = "Condoms"
 
 const Exhibitionism = "Exhibitionism"

@@ -4,6 +4,7 @@ class_name SexInfoBase
 var charID = null
 var arousal: float = 0.0
 var timesCame: int = 0
+var memory:Dictionary = {}
 
 func initInfo(theCharID):
 	charID = theCharID
@@ -90,3 +91,16 @@ func personalityScore(personalityStats = {}, addscore = 0.0):
 		result += personalityValue * personalityStats[personalityStatID]
 	
 	return result
+
+func remember(keyid, value = true):
+	memory[keyid] = value
+
+func hasMemory(keyid):
+	if(memory.has(keyid)):
+		return true
+	return false
+
+func getMemory(keyid, defaultValue = null):
+	if(!memory.has(keyid)):
+		return defaultValue
+	return memory[keyid]

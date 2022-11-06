@@ -1478,3 +1478,9 @@ func getFirstItemThatCoversBodypart(bodypartSlot):
 	
 	return null
 	
+func getWornCondom():
+	if(getInventory().hasSlotEquipped(InventorySlot.Penis)):
+		var item = getInventory().getEquippedItem(InventorySlot.Penis)
+		if(item.id == "UsedCondom"):
+			return item
+	return null

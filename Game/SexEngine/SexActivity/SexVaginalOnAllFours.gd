@@ -229,9 +229,10 @@ func doDomAction(_id, _actionInfo):
 				condom.destroyMe()
 			else:
 				text = RNG.pick([
-					"{dom.You} {dom.youVerb('pull')} {dom.your} cock out and {dom.youVerb('fill')} {dom.yourHis} condom!",
-					"{dom.You} {dom.youVerb('pull')} out, stuffing {dom.yourHis} condom!",
+					"{dom.You} {dom.youVerb('pull')} {dom.your} cock out and {dom.youVerb('fill')} {dom.yourHis} condom! {dom.You} {dom.youVerb('dispose')} of it.",
+					"{dom.You} {dom.youVerb('pull')} out, stuffing {dom.yourHis} condom! {dom.You} {dom.youVerb('dispose')} of it.",
 				])
+				condom.destroyMe()
 				getDom().cumOnFloor()
 				domInfo.cum()
 				satisfyGoals()
@@ -256,8 +257,13 @@ func doDomAction(_id, _actionInfo):
 	if(_id == "pullout"):
 		endActivity()
 		var text = RNG.pick([
-			"{dom.You} {dom.youVerb('pull')} {dom.yourHis} cock out",
+			"{dom.You} {dom.youVerb('pull')} {dom.yourHis} cock out.",
 		])
+		var condom:ItemBase = getDomCondom()
+		if(condom != null):
+			text += " {dom.You} {dom.youVerb('dispose')} of {dom.yourHis} condom."
+			condom.destroyMe()
+		
 		return {text = text}
 	
 	if(_id == "stop"):
@@ -279,6 +285,7 @@ func getSubActions():
 				"score": subInfo.getResistScore() / 2.0,
 				"name": RNG.pick(["Resist", "Struggle", "Kick"]),
 				"desc": "Resist the attempts",
+				"chance": 20,
 			})
 		if(subInfo.getChar().getFirstItemThatCoversBodypart(BodypartSlot.Vagina) == null):
 			actions.append({
@@ -299,6 +306,7 @@ func getSubActions():
 				"score": subInfo.getResistScore() / 2.0,
 				"name": "Resist",
 				"desc": "Try to stop them!",
+				"chance": 20,
 			})
 		if(domInfo.isCloseToCumming()):
 			actions.append({
@@ -306,6 +314,7 @@ func getSubActions():
 					"score": (subInfo.getResistScore() / 2.0 - domInfo.fetishScore({Fetish.BeingBred: 1.0})) / 3.0,
 					"name": "Beg to pull out",
 					"desc": "Ask them not to cum inside you",
+					"chance": 10 - 10 * domInfo.fetishScore({Fetish.Breeding: 1.0}),
 				})
 	return actions
 
@@ -389,8 +398,4 @@ func getAnimation():
 	return [StageScene.Duo, "allfours", {pc=subID, npc=domID, npcAction="kneel", flipPc=true}]
 
 func getDomCondom():
-	if(getDom().getInventory().hasSlotEquipped(InventorySlot.Penis)):
-		var item:ItemBase = getDom().getInventory().getEquippedItem(InventorySlot.Penis)
-		if(item.id == "UsedCondom"):
-			return item
-	return null
+	return getDom().getWornCondom()

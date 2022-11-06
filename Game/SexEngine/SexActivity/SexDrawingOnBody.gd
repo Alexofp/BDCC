@@ -71,6 +71,7 @@ func getSubActions():
 				"score": subInfo.getResistScore() * 2.0,
 				"name": "Whack marker away",
 				"desc": "Resist against the marker",
+				"chance": 30,
 			})
 	return actions
 

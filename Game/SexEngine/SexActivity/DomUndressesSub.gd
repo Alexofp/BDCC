@@ -108,6 +108,7 @@ func getSubActions():
 				"score": subInfo.getResistScore() * 1.0 - subInfo.fetishScore({Fetish.Exhibitionism: 1.0}) * subInfo.getComplyScore(),
 				"name": "Resist undressing",
 				"desc": "You don't wanna be undressed",
+				"chance": 70,
 			})
 	return actions
 

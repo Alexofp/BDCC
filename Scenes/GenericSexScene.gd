@@ -59,6 +59,8 @@ func _run():
 					var desc = "No description provided"
 					if(actionInfo.has("desc")):
 						desc = actionInfo["desc"]
+					if(actionInfo.has("chance") && actionInfo["chance"] != null):
+						desc = "Success chance: "+str(Util.roundF(actionInfo["chance"], 1))+"%\n"+desc
 					addButton(actionInfo["name"], desc, "doAction", [actionInfo])
 			
 			addCategoryButtons()

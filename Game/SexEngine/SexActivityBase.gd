@@ -76,12 +76,16 @@ func getActivityScore(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: Sex
 	var goalData = getGoals()
 	
 	var resultScore = getActivityBaseScore(_sexEngine, _domInfo, _subInfo)
+	var addToScore = 0.0
 	
 	for goalID in goalData:
 		if(_sexEngine.hasGoal(_domInfo, goalID, _subInfo)):
-			resultScore += goalData[goalID]
+			addToScore = max(addToScore, goalData[goalID])
 
-	return resultScore
+	return (resultScore + addToScore) * getActivityScoreMult(_sexEngine, _domInfo, _subInfo)
+
+func getActivityScoreMult(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexSubInfo):
+	return 1.0
 
 func getActivityScoreSub(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexSubInfo):
 	return getActivityBaseScore(_sexEngine, _domInfo, _subInfo)

@@ -2,12 +2,8 @@ extends Reference
 class_name SexEngine
 
 var activities:Array = []
-
 var revealedBodyparts: Dictionary = {}
-
 var messages:Array = []
-var state = "start" # start, waitingForPCSub, waitingForPCDom
-var waitingActivityID
 
 var doms = {}
 var subs = {}
@@ -547,6 +543,7 @@ func getActions():
 						action = action,
 						name = action["name"],
 						desc = action["desc"],
+						chance = getSafeValueFromDict(action, "chance"),
 					})
 		if(activity.subID == "pc" && getSubInfo("pc").canDoActions()):
 			var subActions = activity.getSubActions()
@@ -558,6 +555,7 @@ func getActions():
 						action = action,
 						name = action["name"],
 						desc = action["desc"],
+						chance = getSafeValueFromDict(action, "chance"),
 					})
 					
 	if(isDom("pc") && getDomInfo("pc").canDoActions()):
@@ -584,8 +582,9 @@ func getActions():
 						name = newaction["name"],
 						category = newaction["category"],
 						subID = pctargetID,
-						desc = "Start new activity",
 						args = newaction["args"],
+						chance = getSafeValueFromDict(newaction, "chance"),
+						desc = getSafeValueFromDict(newaction, "desc", "Start new activity"),
 					})
 					
 	if(isSub("pc") && getSubInfo("pc").canDoActions()):
@@ -612,11 +611,17 @@ func getActions():
 						name = newaction["name"],
 						category = newaction["category"],
 						domID = pctargetID,
-						desc = "Start new activity",
 						args = newaction["args"],
+						chance = getSafeValueFromDict(newaction, "chance"),
+						desc = getSafeValueFromDict(newaction, "desc", "Start new activity"),
 					})
 	
 	return result
+
+func getSafeValueFromDict(thedict:Dictionary, keyid:String, defaultValue = null):
+	if(thedict.has(keyid)):
+		return thedict[keyid]
+	return defaultValue
 
 func getPCTarget():
 	if(isDom("pc")):

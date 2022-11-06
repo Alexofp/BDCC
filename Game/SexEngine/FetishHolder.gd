@@ -11,6 +11,8 @@ func _init():
 		#addFetish(fetishID, FetishInterest.Hates)
 	
 	addFetish(Fetish.VaginalSexGiving, FetishInterest.Loves)
+	addFetish(Fetish.Breeding, FetishInterest.Hates)
+	addFetish(Fetish.BeingBred, FetishInterest.Hates)
 	#addFetish(Fetish.VaginalSexReceiving, FetishInterest.Hates)
 
 func getCharacter():
