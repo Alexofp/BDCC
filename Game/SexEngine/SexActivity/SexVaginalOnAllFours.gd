@@ -3,6 +3,7 @@ var times = 0
 var gonnaCumOutside = false
 
 var usedBodypart = BodypartSlot.Vagina
+var usedTag = SexActivityTag.VaginaUsed
 var fetishGiving = Fetish.VaginalSexGiving
 var fetishReceiving = Fetish.VaginalSexReceiving
 var aboutToPenetrateReaction = SexReaction.AboutToPenetratePussy
@@ -40,7 +41,7 @@ func getDomTags():
 	return [SexActivityTag.PenisUsed]
 
 func getSubTags():
-	return [SexActivityTag.VaginaUsed, SexActivityTag.PreventsSubViolence]
+	return [usedTag, SexActivityTag.PreventsSubViolence, SexActivityTag.PreventsSubTeasing]
 
 func getDomTagsCheck():
 	return [SexActivityTag.OrderedToDoSomething, SexActivityTag.PenisUsed]

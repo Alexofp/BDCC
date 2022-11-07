@@ -3,6 +3,7 @@ extends "res://Game/SexEngine/SexActivity/SexVaginalOnAllFours.gd"
 func _init():
 	id = "SexAnalOnAllFours"
 	usedBodypart = BodypartSlot.Anus
+	usedTag = SexActivityTag.AnusUsed
 	fetishGiving = Fetish.AnalSexGiving
 	fetishReceiving = Fetish.AnalSexReceiving
 	aboutToPenetrateReaction = SexReaction.AboutToPenetratePussy
@@ -24,6 +25,3 @@ func getVisibleName():
 
 func getCategory():
 	return ["Fuck"]
-
-func getSubTags():
-	return [SexActivityTag.AnusUsed]

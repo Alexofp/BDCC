@@ -12,4 +12,5 @@ enum {
 	OrderedToUndress,
 	BeingUndressed,
 	PreventsSubViolence,
+	PreventsSubTeasing,
 }

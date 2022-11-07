@@ -17,7 +17,7 @@ func getStartActions(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexS
 	#var dom:BaseCharacter = _domInfo.getChar()
 	var actions = []
 	
-	if(!_sexEngine.hasAnyAcitivites(_subInfo.charID)):
+	if(!_sexEngine.hasTag(_subInfo.charID, SexActivityTag.PreventsSubTeasing)):
 		actions.append({
 			name = "Tease",
 			desc = "Tease them",
