@@ -11,4 +11,5 @@ enum {
 	OrderedToDoSomething,
 	OrderedToUndress,
 	BeingUndressed,
+	PreventsSubViolence,
 }

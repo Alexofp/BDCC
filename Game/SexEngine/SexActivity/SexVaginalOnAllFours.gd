@@ -40,13 +40,13 @@ func getDomTags():
 	return [SexActivityTag.PenisUsed]
 
 func getSubTags():
-	return [SexActivityTag.VaginaUsed]
+	return [SexActivityTag.VaginaUsed, SexActivityTag.PreventsSubViolence]
 
 func getDomTagsCheck():
-	return [SexActivityTag.OrderedToDoSomething]
+	return [SexActivityTag.OrderedToDoSomething, SexActivityTag.PenisUsed]
 
 func getSubTagsCheck():
-	return [SexActivityTag.OrderedToDoSomething]
+	return [SexActivityTag.OrderedToDoSomething, SexActivityTag.VaginaUsed]
 
 func startActivity(_args):
 	state = ""

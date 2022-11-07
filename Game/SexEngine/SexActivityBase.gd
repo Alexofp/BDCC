@@ -110,22 +110,12 @@ func hasActivity(_sexEngine: SexEngine, theid, _domInfo: SexDomInfo, _subInfo: S
 	return _sexEngine.hasActivity(theid, _domInfo.charID, _subInfo.charID)
 
 func tagsNotBusy(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexSubInfo):
-	var domTags = getDomTags()
+	var domTags = getDomTagsCheck()
 	for tag in domTags:
 		if(_sexEngine.hasTag(_domInfo.charID, tag)):
-			return false
-	
-	domTags = getDomTagsCheck()
-	for tag in domTags:
-		if(_sexEngine.hasTag(_domInfo.charID, tag)):
-			return false
-	
-	var subTags = getSubTags()
-	for tag in subTags:
-		if(_sexEngine.hasTag(_subInfo.charID, tag)):
 			return false
 			
-	subTags = getSubTagsCheck()
+	var subTags = getSubTagsCheck()
 	for tag in subTags:
 		if(_sexEngine.hasTag(_subInfo.charID, tag)):
 			return false
@@ -152,10 +142,10 @@ func getSubTags():
 	return []
 
 func getDomTagsCheck():
-	return []
+	return getDomTags()
 
 func getSubTagsCheck():
-	return []
+	return getSubTags()
 
 func processTurn():
 	return {
