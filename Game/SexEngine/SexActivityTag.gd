@@ -10,4 +10,5 @@ enum {
 	MouthUsed,
 	OrderedToDoSomething,
 	OrderedToUndress,
+	BeingUndressed,
 }

@@ -84,3 +84,11 @@ func processTurn():
 
 func hasGoals():
 	return goals.size() > 0
+
+func goalsScore(thegoals:Dictionary, theSubID):
+	var result = 0.0
+	for goalInfo in goals:
+		if(thegoals.has(goalInfo[0]) && goalInfo[1] == theSubID):
+			result += thegoals[goalInfo[0]]
+	
+	return result

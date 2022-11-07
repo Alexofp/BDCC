@@ -104,3 +104,9 @@ func getMemory(keyid, defaultValue = null):
 	if(!memory.has(keyid)):
 		return defaultValue
 	return memory[keyid]
+
+func increaseMemory(keyid):
+	if(!memory.has(keyid)):
+		memory[keyid] = 0
+	
+	memory[keyid] += 1

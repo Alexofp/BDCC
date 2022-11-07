@@ -24,6 +24,9 @@ func getDomTags():
 func getSubTags():
 	return [SexActivityTag.OrderedToDoSomething, SexActivityTag.OrderedToUndress]
 
+func getSubTagsCheck():
+	return [SexActivityTag.BeingUndressed]
+
 func canStartActivity(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexSubInfo):
 	var itemToUndress = getItemToRemove(_subInfo.getChar())
 	if(itemToUndress == null):

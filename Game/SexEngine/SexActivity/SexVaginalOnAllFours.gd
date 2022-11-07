@@ -10,6 +10,9 @@ var usedBodypartNames = ["pussy", "pussy", "slit", "cunt", "kitty"]
 var switchHoleActivity = "SexAnalOnAllFours"
 var otherHoleNames = ["anus"]
 var otherHoleBodypart = BodypartSlot.Anus
+var otherHoleTag = SexActivityTag.AnusUsed
+var otherHoleFetishGiving = Fetish.AnalSexGiving
+var otherHoleFetishReceiving = Fetish.AnalSexReceiving
 
 func _init():
 	id = "SexVaginalOnAllFours"
@@ -48,16 +51,22 @@ func getSubTagsCheck():
 func startActivity(_args):
 	state = ""
 	
+	var text = RNG.pick([
+		"{dom.name} positions {dom.himself} behind {sub.your} butt with {dom.his} dick out and presses it against {sub.yourHis} "+RNG.pick(usedBodypartNames)+".",
+	])
+	
+	if(subInfo.getChar().getFirstItemThatCoversBodypart(usedBodypart) != null):
+		text = RNG.pick([
+			"{dom.name} positions {dom.himself} behind {sub.your} butt with {dom.his} dick out and presses it against {sub.yourHis} "+RNG.pick(usedBodypartNames)+" through {sub.yourHis} clothing.",
+		])
+	
 	return {
-		text = "{dom.name} positions {dom.himself} behind {sub.your} butt with {dom.his} dick out and presses it against {sub.yourHis} "+RNG.pick(usedBodypartNames)+".",
+		text = text,
 		domSay = domReaction(aboutToPenetrateReaction, 50),
 		subSay = subReaction(aboutToPenetrateReaction, 50, {fetishReceiving: 1.0}),
 	}
 
 func onSwitchFrom(_otherActivity, _args):
-	if(_args != null && _args[0] == "switchHole"):
-		state = ""
-	
 	return
 
 func processTurn():
@@ -142,6 +151,13 @@ func getDomActions():
 			"name": RNG.pick(["Stop rubbing"]),
 			"desc": "Stop fucking",
 		})
+		if(subInfo.getChar().hasBodypart(otherHoleBodypart) && !getSexEngine().hasTag(subID, otherHoleTag)):
+			actions.append({
+				"id": "switchhole",
+				"score": 5.0 * (-domInfo.goalsScore(getGoals(), subID) + domInfo.goalsScore({SexGoal.FuckAnal: 1.0}, subID)),
+				"name": RNG.pick(["Switch hole"]),
+				"desc": "Switch to the sub's "+RNG.pick(otherHoleNames),
+			})
 	if(state in ["fucking"]):
 		if(domInfo.isReadyToCum()):
 			var condomScore = 0.0
@@ -226,11 +242,31 @@ func doDomAction(_id, _actionInfo):
 					"{dom.You} {dom.youVerb('shove','shoves')} {dom.yourHis} cock inside {sub.your} "+RNG.pick(usedBodypartNames)+"!",
 				])
 				return {text = text}
-	if(_id == "cuminside"):
+	if(_id == "switchhole"):
+		switchCurrentActivityTo(switchHoleActivity)
+		
 		var text = RNG.pick([
-			"{dom.You} came inside {sub.your} "+RNG.pick(usedBodypartNames)+"!",
-			"{dom.You} stuffed {sub.your} "+RNG.pick(usedBodypartNames)+" full of {dom.your} seed!",
+			"{dom.You} {dom.youVerb('switch', 'switches')} holes. {dom.YouHe} {dom.are} "+RNG.pick(["prodding", "teasing", "rubbing"])+" {sub.your} "+RNG.pick(otherHoleNames)+" now.",
 		])
+		
+		return {text = text}
+		
+	if(_id == "cuminside"):
+		var text
+		if(usedBodypart == BodypartSlot.Vagina):
+			text = RNG.pick([
+				"{dom.You} "+RNG.pick(["{dom.youVerb('ram')}", "{dom.youVerb('shove')}", "{dom.youVerb('slide')}"])+" {dom.yourHis} cock deep inside {sub.yourHis} "+RNG.pick(usedBodypartNames)+" and [b]"+RNG.pick(["{dom.youVerb('stuff')}", "{dom.youVerb('fill')}"])+" it full of {dom.yourHis} seed[/b]!",
+				"{dom.You} {dom.youVerb('grunt')} as {dom.yourHis} cock starts shooting thick ropes of "+RNG.pick(["cum", "seed", "jizz", "semen"])+" deep [b]inside {sub.yourHis} womb[/b]!",
+				"{dom.Your} balls tense up as {dom.youHe} "+RNG.pick(["{dom.youVerb('ram')}", "{dom.youVerb('shove')}", "{dom.youVerb('slide')}"])+" {dom.yourHis} cock deep and [b]cums inside {sub.you}[/b]!",
+				"{dom.You} "+RNG.pick(["{dom.youVerb('ram')}", "{dom.youVerb('shove')}", "{dom.youVerb('slide')}"])+" {dom.yourHis} cock balls-deep and {dom.youVerb('grunt')} while [b]stuffing {sub.yourHis} "+RNG.pick(usedBodypartNames)+"[/b]!",
+			])
+		else:
+			text = RNG.pick([
+				"{dom.You} "+RNG.pick(["{dom.youVerb('ram')}", "{dom.youVerb('shove')}", "{dom.youVerb('slide')}"])+" {dom.yourHis} cock deep inside {sub.yourHis} "+RNG.pick(usedBodypartNames)+" and [b]"+RNG.pick(["{dom.youVerb('stuff')}", "{dom.youVerb('fill')}"])+" it full of {dom.yourHis} seed[/b]!",
+				"{dom.You} {dom.youVerb('grunt')} as {dom.yourHis} cock starts shooting thick ropes of "+RNG.pick(["cum", "seed", "jizz", "semen"])+" deep [b]inside {sub.yourHis} guts[/b]!",
+				"{dom.Your} balls tense up as {dom.youHe} "+RNG.pick(["{dom.youVerb('ram')}", "{dom.youVerb('shove')}", "{dom.youVerb('slide')}"])+" {dom.yourHis} cock deep and [b]cums inside {sub.you}[/b]!",
+				"{dom.You} "+RNG.pick(["{dom.youVerb('ram')}", "{dom.youVerb('shove')}", "{dom.youVerb('slide')}"])+" {dom.yourHis} cock balls-deep and {dom.youVerb('grunt')} while [b]stuffing {sub.yourHis} "+RNG.pick(usedBodypartNames)+"[/b]!",
+			])
 		
 		var condom:ItemBase = getDomCondom()
 		if(condom != null):
@@ -242,7 +278,7 @@ func doDomAction(_id, _actionInfo):
 			else:
 				text = RNG.pick([
 					"{dom.You} filled the condom inside {sub.your} "+RNG.pick(usedBodypartNames)+"!",
-					"{dom.You} stuffed the condom in {sub.your} "+RNG.pick(usedBodypartNames)+" full of {dom.yourHis} seed!",
+					"{dom.You} stuffed the condom in {sub.your} "+RNG.pick(usedBodypartNames)+" full of {dom.yourHis} "+RNG.pick(["cum", "seed", "jizz", "semen"])+"!",
 				])
 				getDom().cumOnFloor()
 				domInfo.cum()
@@ -339,6 +375,14 @@ func getSubActions():
 					"name": RNG.pick(["Envelop cock"]),
 					"desc": "Try to get this cock inside you",
 				})
+		if(subInfo.getChar().hasBodypart(otherHoleBodypart) && !getSexEngine().hasTag(subID, otherHoleTag)):
+			actions.append({
+					"id": "offerotherhole",
+					"score": min(0.2, subInfo.fetishScore({fetishReceiving: -1.0}) + subInfo.fetishScore({otherHoleFetishReceiving: 1.0})),
+					"name": "Offer "+RNG.pick(otherHoleNames)+" instead",
+					"desc": "Offer your other hole",
+					"chance": getDomSwitchHoleChance(),
+				})
 	if(state in ["fucking"]):
 		actions.append({
 				"id": "moan",
@@ -390,6 +434,33 @@ func doSubAction(_id, _actionInfo):
 		gonnaCumOutside = false
 		state = "fucking"
 		return {text = "{sub.You} {sub.youVerb('engulf')} {dom.youHis} cock, letting it penetrate {sub.yourHis} "+RNG.pick(usedBodypartNames)+"."}
+	if(_id == "offerotherhole"):
+		var text = RNG.pick([
+			"{sub.You} {sub.youVerb('offer')} {sub.yourHis} other hole to {dom.you}.",
+		])
+		if(getDom().isPlayer()):
+			return {text = text}
+		
+		if(RNG.chance(getDomSwitchHoleChance())):
+			text += RNG.pick([
+				" {dom.You} {dom.youVerb('nod')}."
+			])
+			domInfo.remember("switchedHoles")
+			
+			if(usedBodypart == BodypartSlot.Vagina):
+				replaceGoalsTo(SexGoal.FuckAnal)
+			else:
+				replaceGoalsTo(SexGoal.FuckVaginal)
+			
+			return {text = text}
+		else:
+			domInfo.addAnger(0.05)
+			text += RNG.pick([
+				" {dom.You} {dom.youVerb('ignore')} {sub.yourHis} offer."
+			])
+			
+			return {text = text}
+	
 	if(_id == "resist"):
 		domInfo.addPain(RNG.randi_range(1, 3))
 		if(RNG.chance(30.0 - domInfo.getAngerScore()*25.0)):
@@ -446,3 +517,11 @@ func getAnimation():
 
 func getDomCondom():
 	return getDom().getWornCondom()
+
+func getDomSwitchHoleChance():
+	if(domInfo.hasMemory("switchedHoles")):
+		return 0.0
+	
+	var domLikesOtherHoleScore = domInfo.fetishScore({otherHoleFetishGiving:1.0, fetishGiving: -0.5})
+	
+	return max(5.0, domLikesOtherHoleScore * 100.0 * (1.0 - domInfo.getAngerScore()))

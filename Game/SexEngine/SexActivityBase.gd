@@ -50,7 +50,14 @@ func satisfyGoals():
 	var sexEngine = getSexEngine()
 	
 	for goalID in goalData:
-		sexEngine.satisfyGoal(sexEngine.getDomInfo(domID), goalID, sexEngine.getSubInfo(subID))
+		sexEngine.satisfyGoal(domInfo, goalID, subInfo)
+
+func replaceGoalsTo(newgoalID, replaceAll = true):
+	var goalData = getGoals()
+	var sexEngine = getSexEngine()
+	
+	for goalID in goalData:
+		sexEngine.replaceGoal(domInfo, goalID, subInfo, newgoalID, replaceAll)
 
 func canStartActivity(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexSubInfo):
 	return tagsNotBusy(_sexEngine, _domInfo, _subInfo) && !hasActivity(_sexEngine, id, _domInfo, _subInfo)

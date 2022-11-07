@@ -10,6 +10,9 @@ func _init():
 	switchHoleActivity = "SexVaginalOnAllFours"
 	otherHoleNames = ["pussy"]
 	otherHoleBodypart = BodypartSlot.Vagina
+	otherHoleTag = SexActivityTag.VaginaUsed
+	otherHoleFetishGiving = Fetish.VaginalSexGiving
+	otherHoleFetishReceiving = Fetish.VaginalSexReceiving
 	
 func getGoals():
 	return {

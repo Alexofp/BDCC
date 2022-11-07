@@ -306,6 +306,20 @@ func satisfyGoal(thedominfo, goalid, thesubinfo):
 			return true
 	return false
 
+func replaceGoal(thedominfo, goalid, thesubinfo, newgoalid, replaceAll = true):
+	var atLeastOneReplaced = false
+	for goalInfo in thedominfo.goals:
+		if(goalInfo[0] == goalid && goalInfo[1] == thesubinfo.charID):
+			goalInfo[0] = newgoalid
+			print("Replaced goal")
+			if(!replaceAll):
+				return true
+			atLeastOneReplaced = true
+
+	if(atLeastOneReplaced):
+		return true
+	return false
+
 func getDomInfo(theDomID) -> SexDomInfo:
 	if(!doms.has(theDomID)):
 		return null
