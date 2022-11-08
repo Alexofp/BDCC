@@ -7,6 +7,7 @@ var messages:Array = []
 
 var doms = {}
 var subs = {}
+var trackedItems = {}
 
 var currentLastActivityID = 0
 
@@ -282,7 +283,7 @@ func generateGoals():
 		if(possibleGoals.size() > 0):
 			for _i in range(0, amountToGenerate):
 				var randomGoalInfo = RNG.pickWeightedPairs(possibleGoals)
-				personDomInfo.goals.append(randomGoalInfo)
+				personDomInfo.goals.append(randomGoalInfo.duplicate(true))
 			
 		print(personDomInfo.goals)
 	
@@ -799,6 +800,22 @@ func endSex():
 			texts.append(subInfo.getChar().getName()+":")
 			texts.append(Util.join(sexEndInfo, "\n"))
 
+	if(trackedItems.has("pc")):
+		for trackedItem in trackedItems["pc"]:
+			var character:BaseCharacter = GlobalRegistry.getCharacter(trackedItem[0])
+			var item:ItemBase = character.getInventory().getItemByUniqueID(trackedItem[1])
+			if(item == null):
+				continue
+			character.getInventory().removeItem(item)
+			character.getInventory().removeEquippedItem(item)
+			var restraintData:RestraintData = item.getRestraintData()
+			if(restraintData != null):
+				restraintData.onStruggleRemoval()
+			
+			GM.pc.getInventory().addItem(item)
+			GM.main.addMessage("You recovered "+item.getAStackName())
+	trackedItems.erase("pc")
+
 	messages.append(Util.join(texts, "\n"))
 
 func hasSexEnded():
@@ -858,3 +875,9 @@ func getStartActivityScore(activityID, domInfo, subInfo):
 		maxScore = max(maxScore, score)
 	
 	return maxScore
+
+func addTrackedGear(ownerID, whoWearsItID, itemUniqueID):
+	if(!trackedItems.has(ownerID)):
+		trackedItems[ownerID] = []
+	
+	trackedItems[ownerID].append([whoWearsItID, itemUniqueID])

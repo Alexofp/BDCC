@@ -59,6 +59,9 @@ func replaceGoalsTo(newgoalID, replaceAll = true):
 	for goalID in goalData:
 		sexEngine.replaceGoal(domInfo, goalID, subInfo, newgoalID, replaceAll)
 
+func progressGoal(goalid, args = []):
+	return getSexEngine().progressGoal(domInfo, goalid, subInfo, args)
+
 func canStartActivity(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexSubInfo):
 	return tagsNotBusy(_sexEngine, _domInfo, _subInfo) && !hasActivity(_sexEngine, id, _domInfo, _subInfo)
 

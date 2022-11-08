@@ -258,14 +258,14 @@ func doDomAction(_id, _actionInfo):
 			text = RNG.pick([
 				"{dom.You} "+RNG.pick(["{dom.youVerb('ram')}", "{dom.youVerb('shove')}", "{dom.youVerb('slide')}"])+" {dom.yourHis} cock deep inside {sub.yourHis} "+RNG.pick(usedBodypartNames)+" and [b]"+RNG.pick(["{dom.youVerb('stuff')}", "{dom.youVerb('fill')}"])+" it full of {dom.yourHis} seed[/b]!",
 				"{dom.You} {dom.youVerb('grunt')} as {dom.yourHis} cock starts shooting thick ropes of "+RNG.pick(["cum", "seed", "jizz", "semen"])+" deep [b]inside {sub.yourHis} womb[/b]!",
-				"{dom.Your} balls tense up as {dom.youHe} "+RNG.pick(["{dom.youVerb('ram')}", "{dom.youVerb('shove')}", "{dom.youVerb('slide')}"])+" {dom.yourHis} cock deep and [b]cums inside {sub.you}[/b]!",
+				"{dom.Your} balls tense up as {dom.youHe} "+RNG.pick(["{dom.youVerb('ram')}", "{dom.youVerb('shove')}", "{dom.youVerb('slide')}"])+" {dom.yourHis} cock deep and [b]{dom.youVerb('cum')} inside {sub.you}[/b]!",
 				"{dom.You} "+RNG.pick(["{dom.youVerb('ram')}", "{dom.youVerb('shove')}", "{dom.youVerb('slide')}"])+" {dom.yourHis} cock balls-deep and {dom.youVerb('grunt')} while [b]stuffing {sub.yourHis} "+RNG.pick(usedBodypartNames)+"[/b]!",
 			])
 		else:
 			text = RNG.pick([
 				"{dom.You} "+RNG.pick(["{dom.youVerb('ram')}", "{dom.youVerb('shove')}", "{dom.youVerb('slide')}"])+" {dom.yourHis} cock deep inside {sub.yourHis} "+RNG.pick(usedBodypartNames)+" and [b]"+RNG.pick(["{dom.youVerb('stuff')}", "{dom.youVerb('fill')}"])+" it full of {dom.yourHis} seed[/b]!",
 				"{dom.You} {dom.youVerb('grunt')} as {dom.yourHis} cock starts shooting thick ropes of "+RNG.pick(["cum", "seed", "jizz", "semen"])+" deep [b]inside {sub.yourHis} guts[/b]!",
-				"{dom.Your} balls tense up as {dom.youHe} "+RNG.pick(["{dom.youVerb('ram')}", "{dom.youVerb('shove')}", "{dom.youVerb('slide')}"])+" {dom.yourHis} cock deep and [b]cums inside {sub.you}[/b]!",
+				"{dom.Your} balls tense up as {dom.youHe} "+RNG.pick(["{dom.youVerb('ram')}", "{dom.youVerb('shove')}", "{dom.youVerb('slide')}"])+" {dom.yourHis} cock deep and [b]{dom.youVerb('cum')} inside {sub.you}[/b]!",
 				"{dom.You} "+RNG.pick(["{dom.youVerb('ram')}", "{dom.youVerb('shove')}", "{dom.youVerb('slide')}"])+" {dom.yourHis} cock balls-deep and {dom.youVerb('grunt')} while [b]stuffing {sub.yourHis} "+RNG.pick(usedBodypartNames)+"[/b]!",
 			])
 		
@@ -289,6 +289,10 @@ func doDomAction(_id, _actionInfo):
 				
 				return {text=text}
 		
+		var beingBredScore = subInfo.fetishScore({Fetish.BeingBred: 1.0})
+		if(beingBredScore < 0.0):
+			subInfo.addResistance(1.0)
+			subInfo.addFear(0.1)
 		getSub().cummedInBodypartBy(usedBodypart, domID)
 		domInfo.cum()
 		subInfo.addArousalSex(0.2)
@@ -365,9 +369,9 @@ func getSubActions():
 		actions.append({
 				"id": "resist",
 				"score": subInfo.getResistScore() / 2.0,
-				"name": RNG.pick(["Resist", "Struggle", "Kick"]),
+				"name": RNG.pick(["Pull away"]),
 				"desc": "Resist the attempts",
-				"chance": 30.0 - domInfo.getAngerScore()*25.0,
+				"chance": getSubResistChance(30.0, 25.0),
 			})
 		if(subInfo.getChar().getFirstItemThatCoversBodypart(usedBodypart) == null):
 			actions.append({
@@ -396,17 +400,28 @@ func getSubActions():
 				"score": subInfo.getResistScore() / 2.0,
 				"name": "Resist",
 				"desc": "Try to stop them!",
-				"chance": 20.0 - domInfo.getAngerScore()*15.0,
+				"chance": getSubResistChance(20.0, 15.0),
 			})
 		if(domInfo.isCloseToCumming()):
 			actions.append({
 					"id": "begtopullout",
-					"score": (subInfo.getResistScore() / 2.0 - domInfo.fetishScore({Fetish.BeingBred: 1.0})) / 3.0,
+					"score": (subInfo.getResistScore() / 2.0 - subInfo.fetishScore({Fetish.BeingBred: 1.0})) / 3.0,
 					"name": "Beg to pull out",
 					"desc": "Ask them not to cum inside you",
 					"chance": 10 - 10 * domInfo.fetishScore({Fetish.Breeding: 1.0}),
 				})
 	return actions
+
+func getSubResistChance(baseChance, domAngerRemoval):
+	var theChance = baseChance - domInfo.getAngerScore()*domAngerRemoval
+	if(getSub().hasBlockedHands()):
+		theChance *= 0.5
+	if(getSub().hasBoundArms()):
+		theChance *= 0.5
+	if(getSub().isBlindfolded()):
+		theChance *= 0.8
+	
+	return max(theChance, 5.0)
 
 func doSubAction(_id, _actionInfo):
 	if(_id == "rub"):
@@ -464,7 +479,7 @@ func doSubAction(_id, _actionInfo):
 	
 	if(_id == "resist"):
 		domInfo.addPain(RNG.randi_range(1, 3))
-		if(RNG.chance(30.0 - domInfo.getAngerScore()*25.0)):
+		if(RNG.chance(getSubResistChance(30.0, 25.0))):
 			domInfo.addAnger(0.4)
 			endActivity()
 			return {text = "{sub.You} {sub.youVerb('manage')} to kick {dom.you} off of {sub.youHim}."}
@@ -481,7 +496,7 @@ func doSubAction(_id, _actionInfo):
 		return {text = text}
 	if(_id == "resistduringfuck"):
 		
-		if(RNG.chance(20.0 - domInfo.getAngerScore()*15.0)):
+		if(RNG.chance(getSubResistChance(20.0, 15.0))):
 			domInfo.addAnger(0.2)
 			
 			state = ""

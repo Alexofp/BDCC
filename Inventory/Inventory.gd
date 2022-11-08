@@ -377,6 +377,25 @@ func forceRestraintsWithTag(tag, amount = 1):
 				return result
 	return result
 
+func getAmountOfRestraintsThatCanForce(tag):
+	var itemIDs = GlobalRegistry.getItemIDsByTag(tag)
+	var result = 0
+	
+	for itemID in itemIDs:
+		var potentialItem = GlobalRegistry.getItemRef(itemID)
+		
+		var slot = potentialItem.getClothingSlot()
+		if(slot == null || !canEquipSlot(slot)):
+			continue
+		
+		if(hasSlotEquipped(slot)):
+			var ourItem = getEquippedItem(slot)
+			if(ourItem.isRestraint()):
+				continue
+		
+		result += 1
+	return result
+
 func clearStaticRestraints():
 	for slot in InventorySlot.getStatic():
 		removeItemFromSlot(slot)

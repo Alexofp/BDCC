@@ -20,6 +20,9 @@ func getStartActions(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexS
 	var handledItems = {}
 	var actions = []
 	
+	if(sub.hasBoundArms() || sub.hasBlockedHands()):
+		return
+	
 	for bodypartToExpose in bodypartsToExpose:
 		var firstItem = sub.getFirstItemThatCoversBodypart(bodypartToExpose)
 		if(firstItem == null || handledItems.has(firstItem) || firstItem.isRestraint()):

@@ -14,7 +14,7 @@ func getVisibleName():
 	return "Draw on body"
 
 func getCategory():
-	return ["BDSM"]
+	return ["Humiliate"]
 
 func getDomTags():
 	return [SexActivityTag.HandsUsed]
@@ -63,6 +63,16 @@ func getDomActions():
 func doDomAction(_id, _actionInfo):
 	return null
 
+func getSubResistChance():
+	var defaultChance = 30.0
+	if(getSub().hasBoundArms()):
+		defaultChance *= 0.5
+	if(getSub().hasBlockedHands()):
+		defaultChance *= 0.5
+	if(getSub().isBlindfolded()):
+		defaultChance *= 0.5
+	return defaultChance
+
 func getSubActions():
 	var actions = []
 	if(!getSub().hasBoundArms()):
@@ -71,13 +81,13 @@ func getSubActions():
 				"score": subInfo.getResistScore() * 2.0,
 				"name": "Whack marker away",
 				"desc": "Resist against the marker",
-				"chance": 30,
+				"chance": getSubResistChance(),
 			})
 	return actions
 
 func doSubAction(_id, _actionInfo):
 	if(_id == "resist"):
-		if(RNG.chance(30)):
+		if(RNG.chance(getSubResistChance())):
 			endActivity()
 			domInfo.addAnger(0.2)
 			return {text = "{sub.You} managed to whack the marker out of {dom.yourHis} hands!"}

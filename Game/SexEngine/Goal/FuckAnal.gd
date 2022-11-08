@@ -6,8 +6,8 @@ func _init():
 func getVisibleName():
 	return "Fuck anally"
 
-func isPossible(_sexEngine, _dom, _sub, _data):
-	if(_dom.hasReachablePenis() && _sub.hasReachableAnus()):
+func isPossible(_sexEngine, _domInfo, _subInfo, _data):
+	if(_domInfo.getChar().hasReachablePenis() && _subInfo.getChar().hasReachableAnus()):
 		return true
 	
 	return false

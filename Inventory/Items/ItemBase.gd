@@ -190,6 +190,9 @@ func loadData(_data):
 func getClothingSlot():
 	return null
 
+func getRequiredBodypart():
+	return null
+
 func getTakeOffScene():
 	return "TakeAnyItemOffScene"
 

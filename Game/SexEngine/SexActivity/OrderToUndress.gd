@@ -32,6 +32,9 @@ func canStartActivity(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: Sex
 	if(itemToUndress == null):
 		return false
 	
+	if(_subInfo.getChar().hasBoundArms() || _subInfo.getChar().hasBlockedHands()):
+		return false
+	
 	return .canStartActivity(_sexEngine, _domInfo, _subInfo)
 
 func startActivity(_args):

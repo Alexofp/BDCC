@@ -38,6 +38,9 @@ func addArousal(howmuch: float):
 func addPain(newpain):
 	getChar().addPain(newpain)
 
+func addLust(newlust):
+	getChar().addLust(newlust)
+
 func canDoActions():
 	return true
 

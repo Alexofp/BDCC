@@ -12,6 +12,9 @@ func getDescription():
 func getClothingSlot():
 	return InventorySlot.Vagina
 
+func getRequiredBodypart():
+	return BodypartSlot.Vagina
+
 func getBuffs():
 	return [
 		buff(Buff.AmbientLustBuff, [10]),

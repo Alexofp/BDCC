@@ -13,7 +13,7 @@ func getActivityBaseScore(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo:
 	return 0.0
 
 func getStartActions(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexSubInfo):
-	#var sub:BaseCharacter = _subInfo.getChar()
+	var sub:BaseCharacter = _subInfo.getChar()
 	#var dom:BaseCharacter = _domInfo.getChar()
 	var actions = []
 	
@@ -27,8 +27,9 @@ func getStartActions(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexS
 			#chance = getApologySuccessChance(_domInfo),
 		})
 		
+	var resistScore = _subInfo.getResistScore() * (0.15 + _subInfo.personalityScore({PersonalityStat.Subby: -0.1, PersonalityStat.Mean: 0.1, PersonalityStat.Coward: -0.05}))
+		
 	if(!_sexEngine.hasTag(_subInfo.charID, SexActivityTag.PreventsSubViolence)):
-		var resistScore = _subInfo.getResistScore() * (0.15 + _subInfo.personalityScore({PersonalityStat.Subby: -0.1, PersonalityStat.Mean: 0.1, PersonalityStat.Coward: -0.05}))
 		if(!_subInfo.getChar().hasBoundArms()):
 			actions.append({
 				name = "Punch",
@@ -48,6 +49,15 @@ func getStartActions(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexS
 				#chance = getApologySuccessChance(_domInfo),
 			})
 	
+	if(sub.getInventory().hasRemovableRestraints() && sub.getStamina() > 0):
+		actions.append({
+			name = "Struggle",
+			desc = "Struggle against your restraints",
+			args = ["struggle"],
+			score = _subInfo.getResistScore() - _subInfo.getComplyScore()*_subInfo.fetishScore({Fetish.Bondage: 1.0}),
+			category = getCategory(),
+		})
+	
 	if(_domInfo.isAngry()):
 		actions.append({
 			name = "Apologize",
@@ -57,8 +67,6 @@ func getStartActions(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexS
 			category = getCategory(),
 			chance = getApologySuccessChance(_domInfo),
 		})
-	
-
 	
 	return actions
 
@@ -80,6 +88,59 @@ func getApologySuccessChance(_domInfo):
 func startActivity(_args):
 	state = ""
 	var actionID = _args[0]
+	
+	if(actionID in ["struggle"]):
+		endActivity()
+		var sub = getSub()
+		var possible = []
+		var trivial = []
+		
+		for item in getSub().getInventory().getEquppedRestraints():
+			var restraintData: RestraintData = item.getRestraintData()
+			
+			if(restraintData == null || !restraintData.canStruggle()):
+				continue
+			
+			if(!restraintData.shouldDoStruggleMinigame(sub)):
+				trivial.append(item)
+			else:
+				possible.append(item)
+		
+		var pickedItem
+		var minigameStatus
+		if(trivial.size() > 0):
+			pickedItem = RNG.pick(trivial)
+			minigameStatus = 1.0
+		elif(possible.size() > 0):
+			pickedItem = RNG.pick(possible)
+			minigameStatus = RNG.randf_range(0.6, 0.8)
+		else:
+			return
+		
+		var text = ""
+		var restraintData: RestraintData = pickedItem.getRestraintData()
+		var struggleData = restraintData.doStruggle(sub, minigameStatus)
+		
+		var struggleText = GM.ui.processString(struggleData["text"], {"user":subID})
+		text += struggleText
+		
+		if(struggleData.has("damage")):
+			var damage = struggleData["damage"] * minigameStatus
+			restraintData.takeDamage(damage)
+			text += ("\n{sub.You} made "+str(Util.roundF(damage*100.0, 1))+"% of progress, "+str(Util.roundF(max(0.0, restraintData.getTightness()*100.0), 1))+"% left.")
+		if(struggleData.has("lust") && struggleData["lust"] > 0):
+			subInfo.addLust(struggleData["lust"])
+		if(struggleData.has("pain") && struggleData["pain"] > 0):
+			subInfo.addPain(struggleData["pain"])
+		if(struggleData.has("stamina") && struggleData["stamina"] != 0):
+			sub.addStamina(-struggleData["stamina"])
+		
+		if(restraintData.shouldBeRemoved()):
+			text += "\n[b]"+restraintData.getRemoveMessage()+"[/b]"
+			restraintData.onStruggleRemoval()
+			sub.getInventory().removeEquippedItem(pickedItem)
+		
+		return {text=text}
 	
 	if(actionID in ["apologize"]):
 		endActivity()

@@ -31,25 +31,27 @@ func getStartActions(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexS
 		args = ["beg"],
 		score = getActivityScore(_sexEngine, _domInfo, _subInfo) * _subInfo.fetishScore({Fetish.BeingBred: -1.0}),
 		category = getCategory(),
-		chance = calculateSuccessChance(_domInfo, 100.0),
+		chance = calculateSuccessChance(_domInfo, _subInfo, 100.0),
 	})
-	if(sub.isPlayer() && sub.hasCondoms()):
+	if(sub.isPlayer() && sub.hasCondoms() && !sub.hasBlockedHands()):
 		actions.append({
 			name = "Offer a condom",
 			desc = "Beg the dom to use your condom",
 			args = ["offer"],
 			score = getActivityScore(_sexEngine, _domInfo, _subInfo) * _subInfo.fetishScore({Fetish.BeingBred: -1.0}),
 			category = getCategory(),
-			chance = calculateSuccessChance(_domInfo, 130.0, 0.5),
+			chance = calculateSuccessChance(_domInfo, _subInfo, 130.0, 0.5),
 		})
 	
 	return actions
 
-func calculateSuccessChance(_domInfo: SexDomInfo, baseChance = 100.0, angerMult = 1.0):
+func calculateSuccessChance(_domInfo: SexDomInfo, _subInfo: SexSubInfo, baseChance = 100.0, angerMult = 1.0):
 	var successChance = 0.1 -_domInfo.fetishScore({Fetish.Breeding: 0.5}) + _domInfo.fetishScore({Fetish.Condoms: 1.0})
 	successChance = successChance * baseChance
 	if(successChance > 0.0):
 		successChance *= max(0.0, 1.0 - _domInfo.getAngerScore() * angerMult)
+	if(_subInfo.getChar().isGagged()):
+		successChance *= 0.5
 	return max(successChance, 5.0)
 
 func getVisibleName():
@@ -94,9 +96,9 @@ func startActivity(_args):
 		
 		var successChance
 		if(_args[0] == "beg"):
-			successChance = calculateSuccessChance(domInfo, 100.0)
+			successChance = calculateSuccessChance(domInfo, subInfo, 100.0)
 		else:
-			successChance = calculateSuccessChance(domInfo, 130.0, 0.5)
+			successChance = calculateSuccessChance(domInfo, subInfo, 130.0, 0.5)
 		
 		if(RNG.chance(successChance)):
 			if(_args[0] == "beg"):
