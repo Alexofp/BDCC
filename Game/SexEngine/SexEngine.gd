@@ -274,8 +274,10 @@ func generateGoals():
 			if(goalsToAdd != null):
 				for goal in goalsToAdd:
 					var sexGoal:SexGoalBase = GlobalRegistry.getSexGoal(goal[0])
-					if(sexGoal.isPossible(self, dom, sub) && !sexGoal.isCompleted(self, dom, sub)):
-						possibleGoals.append([[goal[0], sub.getID()], goal[1]])
+					var goalData = sexGoal.generateData(self, personDomInfo, personSubInfo)
+					
+					if(sexGoal.isPossible(self, personDomInfo, personSubInfo, goalData) && !sexGoal.isCompleted(self, personDomInfo, personSubInfo, goalData)):
+						possibleGoals.append([[goal[0], sub.getID(), goalData], goal[1]])
 		
 		if(possibleGoals.size() > 0):
 			for _i in range(0, amountToGenerate):
@@ -303,6 +305,16 @@ func satisfyGoal(thedominfo, goalid, thesubinfo):
 		if(goalInfo[0] == goalid && goalInfo[1] == thesubinfo.charID):
 			thedominfo.goals.remove(_i)
 			print(str(thedominfo.charID)+"'s goal to "+str(goalInfo[0])+" "+str(goalInfo[1])+" was satisfied")
+			return true
+	return false
+
+func progressGoal(thedominfo, goalid, thesubinfo, args = []):
+	for _i in range(0, thedominfo.goals.size()):
+		var goalInfo = thedominfo.goals[_i]
+		
+		if(goalInfo[0] == goalid && goalInfo[1] == thesubinfo.charID):
+			var thegoal:SexGoalBase = GlobalRegistry.getSexGoal(goalid)
+			thegoal.progressGoal(self, thedominfo, thesubinfo, goalInfo[2], args)
 			return true
 	return false
 
@@ -343,17 +355,17 @@ func isSub(charID):
 func checkFailedAndCompletedGoals():
 	for domID in doms:
 		var domInfo = doms[domID]
-		var domChar = domInfo.getChar()
 		
 		for i in range(domInfo.goals.size() - 1, -1, -1):
-			var subChar = getSubInfo(domInfo.goals[i][1]).getChar()
+			var goalInfo = domInfo.goals[i]
+			var subInfo = getSubInfo(goalInfo[1])
 			
-			var sexGoal:SexGoalBase = GlobalRegistry.getSexGoal(domInfo.goals[i][0])
-			if(sexGoal.isCompleted(self, domChar, subChar)):
-				print("GOAL "+str(sexGoal.getVisibleName())+" "+str(domID)+" "+str(domInfo.goals[i][1])+" got completed")
+			var sexGoal:SexGoalBase = GlobalRegistry.getSexGoal(goalInfo[0])
+			if(sexGoal.isCompleted(self, domInfo, subInfo, goalInfo[2])):
+				print("GOAL "+str(sexGoal.getVisibleName())+" "+str(domID)+" "+str(goalInfo[1])+" got completed")
 				domInfo.goals.remove(i)
-			elif(!sexGoal.isPossible(self, domChar, subChar)):
-				print("GOAL "+str(sexGoal.getVisibleName())+" "+str(domID)+" "+str(domInfo.goals[i][1])+" is impossible, removed")
+			elif(!sexGoal.isPossible(self, domInfo, subInfo, goalInfo[2])):
+				print("GOAL "+str(sexGoal.getVisibleName())+" "+str(domID)+" "+str(goalInfo[1])+" is impossible, removed")
 				domInfo.goals.remove(i)
 
 func removeEndedActivities():
@@ -707,8 +719,8 @@ func doAction(_actionInfo):
 		var activity = getActivityWithUniqueID(_actionInfo["activityID"])
 		doSubAction(activity, _actionInfo["action"])
 		processAIActions(true)
-		processAIActions(false)
 		processTurn()
+		processAIActions(false)
 	if(_actionInfo["id"] == "startNewDomActivity"):
 		messages.clear()
 		startActivity(_actionInfo["activityID"], "pc", _actionInfo["subID"], _actionInfo["args"])
@@ -719,8 +731,8 @@ func doAction(_actionInfo):
 		messages.clear()
 		startActivity(_actionInfo["activityID"], _actionInfo["domID"], "pc", _actionInfo["args"])
 		processAIActions(true)
-		processAIActions(false)
 		processTurn()
+		processAIActions(false)
 
 func hasTag(charID, tag):
 	for activity in activities:

@@ -6,8 +6,14 @@ var id = "error"
 func getVisibleName():
 	return "Error"
 
-func isPossible(_sexEngine, _dom, _sub):
+func isPossible(_sexEngine, _domInfo, _subInfo, _data):
 	return true
 
-func isCompleted(_sexEngine, _dom, _sub):
+func isCompleted(_sexEngine, _domInfo, _subInfo, _data):
 	return false
+
+func generateData(_sexEngine, _domInfo, _subInfo):
+	return []
+
+func progressGoal(_sexEngine, _domInfo, _subInfo, _data, _args = []):
+	pass
