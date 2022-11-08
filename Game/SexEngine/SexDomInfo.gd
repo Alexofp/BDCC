@@ -5,6 +5,7 @@ var stance = SexStance.Standing
 var goals:Array = []
 var anger: float = 0.0
 var isDown:bool = false
+var angerFull: float = 0.0
 
 func checkIsDown():
 	if(!isDown && getChar().getPainLevel() >= 1.0):
@@ -82,6 +83,9 @@ func processTurn():
 #	var evilness = personality.getStat(PersonalityStat.Evilness)
 #	anger = Util.moveNumberTowards(anger, evilness, 0.01)
 
+	.processTurn()
+	angerFull += anger
+
 func hasGoals():
 	return goals.size() > 0
 
@@ -92,3 +96,13 @@ func goalsScore(thegoals:Dictionary, theSubID):
 			result += thegoals[goalInfo[0]]
 	
 	return result
+
+func getAverageAnger() -> float:
+	return angerFull / float(Util.maxi(1, tick))
+
+func getSexEndInfo():
+	var texts:Array = .getSexEndInfo()
+	
+	texts.append("Average anger: "+str(Util.roundF(getAverageAnger()*100.0, 1))+"%")
+	
+	return texts

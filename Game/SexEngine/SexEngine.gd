@@ -366,6 +366,9 @@ func removeEndedActivities():
 func processTurn():
 	removeEndedActivities()
 	
+	if(sexEnded):
+		return
+	
 	var processedDatas = []
 	
 	for domID in doms:
@@ -767,18 +770,22 @@ func endSex():
 	for domID in doms:
 		var domInfo = doms[domID]
 		
-		GlobalRegistry.getCharacter(domID).afterSexEnded(domInfo)
+		domInfo.getChar().afterSexEnded(domInfo)
 		
-		if(domInfo.getTimesCame() > 0):
-			texts.append(processText("{dom.You} came "+str(domInfo.getTimesCame())+" times", domID, domID))
+		var sexEndInfo = domInfo.getSexEndInfo()
+		if(sexEndInfo.size() > 0):
+			texts.append(domInfo.getChar().getName()+":")
+			texts.append(Util.join(sexEndInfo, "\n"))
 
 	for subID in subs:
 		var subInfo = subs[subID]
 		
-		GlobalRegistry.getCharacter(subID).afterSexEnded(subInfo)
+		subInfo.getChar().afterSexEnded(subInfo)
 
-		if(subInfo.getTimesCame() > 0):
-			texts.append(processText("{sub.You} came "+str(subInfo.getTimesCame())+" times", subID, subID))
+		var sexEndInfo = subInfo.getSexEndInfo()
+		if(sexEndInfo.size() > 0):
+			texts.append(subInfo.getChar().getName()+":")
+			texts.append(Util.join(sexEndInfo, "\n"))
 
 	messages.append(Util.join(texts, "\n"))
 

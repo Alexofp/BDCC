@@ -5,6 +5,8 @@ var charID = null
 var arousal: float = 0.0
 var timesCame: int = 0
 var memory:Dictionary = {}
+var tick:int = 0
+var lustFull: float = 0.0
 
 func initInfo(theCharID):
 	charID = theCharID
@@ -23,7 +25,11 @@ func initFromPersonality():
 	pass
 
 func processTurn():
-	pass
+	tick += 1
+	lustFull += getChar().getLustLevel()
+
+func getAverageLust():
+	return lustFull / float(Util.maxi(1, tick))
 
 func addArousal(howmuch: float):
 	arousal += howmuch
@@ -110,3 +116,12 @@ func increaseMemory(keyid):
 		memory[keyid] = 0
 	
 	memory[keyid] += 1
+
+func getSexEndInfo():
+	var texts = []
+	
+	if(timesCame > 0):
+		texts.append("Times came: "+str(timesCame))
+	texts.append("Average lust: "+str(Util.roundF(getAverageLust()*100.0, 1))+"%")
+	
+	return texts

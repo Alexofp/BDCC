@@ -6,6 +6,8 @@ var stance = SexStance.Standing
 var resistance: float = 0.0
 var fear: float = 0.0
 var consciousness: float = 1.0
+var resistanceFull:float = 0.0
+var fearFull:float = 0.0
 
 func getInfoString():
 	var character = getChar()
@@ -107,4 +109,20 @@ func processTurn():
 	if(isScared()):
 		resistance = Util.moveNumberTowards(resistance, 0.0, fear / 10.0)
 	
+	.processTurn()
+	resistanceFull += resistance
+	fearFull += fear
 
+func getAverageResistance():
+	return resistanceFull / float(Util.maxi(1, tick))
+
+func getAverageFear():
+	return fearFull / float(Util.maxi(1, tick))
+
+func getSexEndInfo():
+	var texts:Array = .getSexEndInfo()
+	
+	texts.append("Average resistance: "+str(Util.roundF(getAverageResistance()*100.0, 1))+"%")
+	texts.append("Average fear: "+str(Util.roundF(getAverageFear()*100.0, 1))+"%")
+	
+	return texts
