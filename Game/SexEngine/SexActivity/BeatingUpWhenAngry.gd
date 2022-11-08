@@ -36,8 +36,8 @@ func startActivity(_args):
 func processTurn():
 	if(state == ""):
 		subInfo.addFear(0.05)
-		affectSub(subInfo.fetishScore({Fetish.Masochist: 1.0}, -0.5), 0.1, -0.2, 0.0)
-		affectDom(domInfo.fetishScore({Fetish.Sadist: 0.5}, 0.5), 0.1, 0.0)
+		affectSub(subInfo.fetishScore({Fetish.Masochism: 1.0}, -0.5), 0.1, -0.2, 0.0)
+		affectDom(domInfo.fetishScore({Fetish.Sadism: 0.5}, 0.5), 0.1, 0.0)
 		subInfo.addPain(5)
 		domInfo.addAnger(-0.1)
 		
@@ -73,7 +73,7 @@ func getDomActions():
 		})
 	actions.append({
 			"id": "hithard",
-			"score": domInfo.getIsAngryScore()*domInfo.fetishScore({Fetish.Masochist: 0.4}) - subInfo.getAboutToPassOutScore() * domInfo.fetishScore({Fetish.UnconsciousSex: 1.0}, 0.5),
+			"score": domInfo.getIsAngryScore()*domInfo.fetishScore({Fetish.Masochism: 0.4}) - subInfo.getAboutToPassOutScore() * domInfo.fetishScore({Fetish.UnconsciousSex: 1.0}, 0.5),
 			"name": "Hit really hard",
 			"desc": "Make that bitch regret it",
 		})
@@ -88,8 +88,8 @@ func doDomAction(_id, _actionInfo):
 		}
 	
 	if(_id == "hithard"):
-		affectSub(subInfo.fetishScore({Fetish.Masochist: 1.0}, -0.5), 0.1, -0.05, 0.0)
-		affectDom(domInfo.fetishScore({Fetish.Sadist: 0.5}, 0.5), 0.2, 0.0)
+		affectSub(subInfo.fetishScore({Fetish.Masochism: 1.0}, -0.5), 0.1, -0.05, 0.0)
+		affectDom(domInfo.fetishScore({Fetish.Sadism: 0.5}, 0.5), 0.2, 0.0)
 		subInfo.addPain(RNG.randi_range(15, 25))
 		domInfo.addAnger(-0.2)
 		subInfo.addFear(0.3)

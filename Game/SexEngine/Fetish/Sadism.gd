@@ -1,10 +1,10 @@
 extends FetishBase
 
 func _init():
-	id = Fetish.Sadist
+	id = Fetish.Sadism
 
 func getVisibleName():
-	return "Sadist"
+	return "Sadism"
 
 func getGoals(_sexEngine, _dom, _sub):
 	var possible = []

@@ -117,7 +117,7 @@ func startActivity(_args):
 			text = RNG.pick([
 				"{sub.You} {sub.youVerb('kick')} {dom.youHim}!",
 			])
-		domInfo.addAnger(0.2 + 0.1 * domInfo.fetishScore({Fetish.Masochist: -1.0}))
+		domInfo.addAnger(0.2 + 0.1 * domInfo.fetishScore({Fetish.Masochism: -1.0}))
 		domInfo.addPain(RNG.randi_range(1, 2))
 		
 		return {text=text}

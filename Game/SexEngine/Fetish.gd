@@ -8,8 +8,8 @@ const AnalSexReceiving = "AnalSexReceiving"
 
 const Bodywritings = "Bodywritings"
 
-const Masochist = "Masochist"
-const Sadist = "Sadist"
+const Masochism = "Masochism"
+const Sadism = "Sadism"
 
 const UnconsciousSex = "UnconsciousSex"
 
@@ -18,3 +18,6 @@ const BeingBred = "BeingBred"
 const Condoms = "Condoms"
 
 const Exhibitionism = "Exhibitionism"
+
+const Bondage = "Bondage"
+const Rigging = "Rigging"
