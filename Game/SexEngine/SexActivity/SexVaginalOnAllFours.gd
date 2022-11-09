@@ -57,12 +57,12 @@ func startActivity(_args):
 	state = ""
 	
 	var text = RNG.pick([
-		"{dom.name} positions {dom.himself} behind {sub.your} butt with {dom.his} dick out and presses it against {sub.yourHis} "+RNG.pick(usedBodypartNames)+".",
+		"{dom.You} {dom.youVerb('position')} {dom.yourself} behind {sub.your} butt with {dom.yourHis} dick out and presses it against {sub.yourHis} "+RNG.pick(usedBodypartNames)+".",
 	])
 	
 	if(subInfo.getChar().getFirstItemThatCoversBodypart(usedBodypart) != null):
 		text = RNG.pick([
-			"{dom.name} positions {dom.himself} behind {sub.your} butt with {dom.his} dick out and presses it against {sub.yourHis} "+RNG.pick(usedBodypartNames)+" through {sub.yourHis} clothing.",
+			"{dom.You} {dom.youVerb('position')} {dom.yourself} behind {sub.your} butt with {dom.yourHis} dick out and presses it against {sub.yourHis} "+RNG.pick(usedBodypartNames)+" through {sub.yourHis} clothing.",
 		])
 	
 	return {
@@ -312,8 +312,8 @@ func doDomAction(_id, _actionInfo):
 		return {text=text}
 	if(_id == "cumpullout"):
 		var text = RNG.pick([
-			"{dom.You} {dom.youVerb('pull')} {dom.your} cock out and cums all over {sub.your} butt!",
-			"{dom.You} {dom.youVerb('pull')} out, cumming all over {sub.your} ass!",
+			"{dom.You} {dom.youVerb('pull')} {dom.your} cock out and [b]cums all over {sub.your} butt[/b]!",
+			"{dom.You} {dom.youVerb('pull')} out, [b]cumming all over {sub.your} ass[/b]!",
 		])
 		
 		var condom:ItemBase = getDomCondom()

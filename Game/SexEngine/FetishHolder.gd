@@ -10,7 +10,8 @@ func _init():
 		#addFetish(fetishID, FetishInterest.Loves)
 		#addFetish(fetishID, FetishInterest.Hates)
 	
-	addFetish(Fetish.VaginalSexGiving, FetishInterest.Loves)
+	addFetish(Fetish.OralSexReceiving, FetishInterest.Loves)
+	#addFetish(Fetish.VaginalSexGiving, FetishInterest.Loves)
 	#addFetish(Fetish.Breeding, FetishInterest.Hates)
 	#addFetish(Fetish.BeingBred, FetishInterest.Hates)
 	#addFetish(Fetish.VaginalSexReceiving, FetishInterest.Hates)

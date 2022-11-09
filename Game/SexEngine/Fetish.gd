@@ -5,6 +5,8 @@ const VaginalSexGiving = "VaginalSexGiving"
 const VaginalSexReceiving = "VaginalSexReceiving"
 const AnalSexGiving = "AnalSexGiving"
 const AnalSexReceiving = "AnalSexReceiving"
+const OralSexGiving = "OralSexGiving"
+const OralSexReceiving = "OralSexReceiving"
 
 const Bodywritings = "Bodywritings"
 

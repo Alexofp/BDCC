@@ -202,6 +202,16 @@ func getPutOnScene():
 func getBuffs():
 	return []
 
+func hasBuff(buffID):
+	var thebuffs = getBuffs()
+	if(thebuffs == null):
+		return false
+	
+	for buff in thebuffs:
+		if(buff.id == buffID):
+			return true
+	return false
+
 func getTimedBuffs():
 	return []
 
