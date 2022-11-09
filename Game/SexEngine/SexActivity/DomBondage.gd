@@ -33,23 +33,38 @@ func getStartActions(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexS
 	var dom:BaseCharacter = _domInfo.getChar()
 	var sub:BaseCharacter = _subInfo.getChar()
 	
+	var usableItems = []
+	
 	if(_domInfo.getChar().isPlayer()):
-		var usableItems = dom.getInventory().getAllCombatUsableRestraints()
+		usableItems = dom.getInventory().getAllCombatUsableRestraints()
+	else:
+		var possibleRestraints = GlobalRegistry.getItemIDsByTag(ItemTag.CanBeForcedByGuards)
 		
-		for item in usableItems:
-			var itemSlot = item.getClothingSlot()
-			var bodypartSlot = item.getRequiredBodypart()
-			if(bodypartSlot != null && sub.getFirstItemThatCoversBodypart(bodypartSlot) != null):
+		for possibleRestraintID in possibleRestraints:
+			var item:ItemBase = GlobalRegistry.getItemRef(possibleRestraintID)
+			usableItems.append(item)
+		
+	for item in usableItems:
+		var itemSlot = item.getClothingSlot()
+		var bodypartSlot = item.getRequiredBodypart()
+		
+		if(item.getRequiredBodypart() == BodypartSlot.Vagina && _subInfo.hasTag(SexActivityTag.VaginaPenetrated)):
+			continue
+		if(item.getRequiredBodypart() == BodypartSlot.Anus && _subInfo.hasTag(SexActivityTag.AnusPenetrated)):
+			continue
+		
+		if(bodypartSlot != null && sub.getFirstItemThatCoversBodypart(bodypartSlot) != null):
+			continue
+		elif(!sub.invCanEquipSlot(itemSlot)):
+			continue
+		elif(sub.getInventory().hasSlotEquipped(itemSlot)):
+			continue
+		else:
+			var restraintData:RestraintData = item.getRestraintData()
+			if(restraintData == null):
 				continue
-			elif(!sub.invCanEquipSlot(itemSlot)):
-				continue
-			elif(sub.getInventory().hasSlotEquipped(itemSlot)):
-				continue
-			else:
-				var restraintData:RestraintData = item.getRestraintData()
-				if(restraintData == null):
-					continue
-					
+			
+			if(_domInfo.getChar().isPlayer()):
 				actions.append({
 					name = item.getVisibleName(),
 					args = ["pc", item.uniqueID],
@@ -57,28 +72,10 @@ func getStartActions(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexS
 					category = getCategory(),
 					desc = "Restraint level: "+str(restraintData.getLevel()) + "\n" + item.getCombatDescription(),
 				})
-	else:
-		var possibleRestraints = GlobalRegistry.getItemIDsByTag(ItemTag.CanBeForcedByGuards)
-		
-		for possibleRestraintID in possibleRestraints:
-			var item:ItemBase = GlobalRegistry.getItemRef(possibleRestraintID)
-			
-			var itemSlot = item.getClothingSlot()
-			var bodypartSlot = item.getRequiredBodypart()
-			if(bodypartSlot != null && sub.getFirstItemThatCoversBodypart(bodypartSlot) != null):
-				continue
-			elif(!sub.invCanEquipSlot(itemSlot)):
-				continue
-			elif(sub.getInventory().hasSlotEquipped(itemSlot)):
-				continue
 			else:
-				var restraintData:RestraintData = item.getRestraintData()
-				if(restraintData == null):
-					continue
-					
 				actions.append({
 					name = item.getVisibleName(),
-					args = ["npc", possibleRestraintID],
+					args = ["npc", item.id],
 					score = getActivityScore(_sexEngine, _domInfo, _subInfo),
 					category = getCategory(),
 					desc = "Restraint level: "+str(restraintData.getLevel()) + "\n" + item.getCombatDescription(),
@@ -89,7 +86,7 @@ func getStartActions(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexS
 func startActivity(_args):
 	state = ""
 	
-	subInfo.addResistance(subInfo.fetishScore({Fetish.Bondage: 0.5})+0.3-subInfo.personalityScore({PersonalityStat.Subby: 0.2}))
+	subInfo.addResistance(subInfo.fetishScore({Fetish.Bondage: -0.5})+0.3-subInfo.personalityScore({PersonalityStat.Subby: 0.2}))
 	subInfo.addLust(subInfo.fetishScore({Fetish.Bondage: 1.0}) * 20)
 	
 	if(_args[0] == "pc"):

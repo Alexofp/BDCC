@@ -13,4 +13,6 @@ enum {
 	BeingUndressed,
 	PreventsSubViolence,
 	PreventsSubTeasing,
+	VaginaPenetrated,
+	AnusPenetrated,
 }

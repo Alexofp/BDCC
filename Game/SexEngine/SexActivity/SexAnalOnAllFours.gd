@@ -4,6 +4,7 @@ func _init():
 	id = "SexAnalOnAllFours"
 	usedBodypart = BodypartSlot.Anus
 	usedTag = SexActivityTag.AnusUsed
+	usedTagInside = SexActivityTag.AnusPenetrated
 	fetishGiving = Fetish.AnalSexGiving
 	fetishReceiving = Fetish.AnalSexReceiving
 	aboutToPenetrateReaction = SexReaction.AboutToPenetratePussy
@@ -23,5 +24,3 @@ func getGoals():
 func getVisibleName():
 	return "Anal"
 
-func getCategory():
-	return ["Fuck"]

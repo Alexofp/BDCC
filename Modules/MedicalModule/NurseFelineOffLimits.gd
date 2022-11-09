@@ -35,7 +35,7 @@ func _run():
 		addButton("Fight", "Seems like there is no other way", "fight")
 
 	if(state == "lost_fight"):
-		saynn("You got defeated by a nurse. Unable to continue fighting, you drop to your knees and await your faith.")
+		saynn("You got defeated by a nurse. Unable to continue fighting, you drop to your knees and await your fate.")
 		
 		addButton("Continue", "See what happens", "getrestrained")
 

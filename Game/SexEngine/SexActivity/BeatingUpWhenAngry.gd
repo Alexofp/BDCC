@@ -38,7 +38,7 @@ func processTurn():
 		subInfo.addFear(0.05)
 		affectSub(subInfo.fetishScore({Fetish.Masochism: 1.0}, -0.5), 0.1, -0.2, 0.0)
 		affectDom(domInfo.fetishScore({Fetish.Sadism: 0.5}, 0.5), 0.1, 0.0)
-		subInfo.addPain(5)
+		subInfo.addPain(RNG.randi_range(4, 8))
 		domInfo.addAnger(-0.1)
 		
 		var texts = [

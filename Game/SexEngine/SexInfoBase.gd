@@ -1,6 +1,7 @@
 extends Reference
 class_name SexInfoBase
 
+var sexEngineRef: WeakRef
 var charID = null
 var arousal: float = 0.0
 var timesCame: int = 0
@@ -8,8 +9,14 @@ var memory:Dictionary = {}
 var tick:int = 0
 var lustFull: float = 0.0
 
-func initInfo(theCharID):
+func getSexEngine():
+	if(sexEngineRef == null):
+		return null
+	return sexEngineRef.get_ref()
+
+func initInfo(theCharID, sexengine):
 	charID = theCharID
+	sexEngineRef = weakref(sexengine)
 	initFromPersonality()
 	
 func getChar() -> BaseCharacter:
@@ -128,3 +135,6 @@ func getSexEndInfo():
 	texts.append("Average lust: "+str(Util.roundF(getAverageLust()*100.0, 1))+"%")
 	
 	return texts
+
+func hasTag(thetag):
+	return getSexEngine().hasTag(charID, thetag)

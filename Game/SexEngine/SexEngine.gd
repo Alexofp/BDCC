@@ -21,13 +21,13 @@ func initPeople(domIDs, subIDs):
 	
 	for domID in domIDs:
 		var domInfo = SexDomInfo.new()
-		domInfo.initInfo(domID)
+		domInfo.initInfo(domID, self)
 		
 		doms[domID] = domInfo
 		
 	for subID in subIDs:
 		var subInfo = SexSubInfo.new()
-		subInfo.initInfo(subID)
+		subInfo.initInfo(subID, self)
 		
 		subs[subID] = subInfo
 		

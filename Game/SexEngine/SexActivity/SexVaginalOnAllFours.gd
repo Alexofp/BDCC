@@ -4,6 +4,7 @@ var gonnaCumOutside = false
 
 var usedBodypart = BodypartSlot.Vagina
 var usedTag = SexActivityTag.VaginaUsed
+var usedTagInside = SexActivityTag.VaginaPenetrated
 var fetishGiving = Fetish.VaginalSexGiving
 var fetishReceiving = Fetish.VaginalSexReceiving
 var aboutToPenetrateReaction = SexReaction.AboutToPenetratePussy
@@ -41,7 +42,10 @@ func getDomTags():
 	return [SexActivityTag.PenisUsed]
 
 func getSubTags():
-	return [usedTag, SexActivityTag.PreventsSubViolence, SexActivityTag.PreventsSubTeasing]
+	var thetags = [usedTag, SexActivityTag.PreventsSubViolence, SexActivityTag.PreventsSubTeasing]
+	if(state in ["fucking", "aftercumminginside"]):
+		thetags.append(usedTagInside)
+	return thetags
 
 func getDomTagsCheck():
 	return [SexActivityTag.OrderedToDoSomething, SexActivityTag.PenisUsed]
@@ -242,6 +246,12 @@ func doDomAction(_id, _actionInfo):
 					"{dom.You} {dom.youVerb('manage','manages')} to penetrate {sub.your} "+RNG.pick(usedBodypartNames)+"!",
 					"{dom.You} {dom.youVerb('shove','shoves')} {dom.yourHis} cock inside {sub.your} "+RNG.pick(usedBodypartNames)+"!",
 				])
+				if(usedBodypart == BodypartSlot.Anus && getSub().getInventory().hasSlotEquipped(InventorySlot.Anal)):
+					var item = getSub().getInventory().getEquippedItem(InventorySlot.Anal)
+					text = "{dom.You} temporary {dom.youVerb('take')} out "+str(item.getAStackName())+" out of {sub.your} ass. "+text
+				elif(usedBodypart == BodypartSlot.Vagina && getSub().getInventory().hasSlotEquipped(InventorySlot.Vagina)):
+					var item = getSub().getInventory().getEquippedItem(InventorySlot.Vagina)
+					text = "{dom.You} temporary {dom.youVerb('take')} out "+str(item.getAStackName())+" out of {sub.your} pussy. "+text
 				return {text = text}
 	if(_id == "switchhole"):
 		switchCurrentActivityTo(switchHoleActivity)
@@ -478,7 +488,7 @@ func doSubAction(_id, _actionInfo):
 			return {text = text}
 	
 	if(_id == "resist"):
-		domInfo.addPain(RNG.randi_range(1, 3))
+		domInfo.addPain(RNG.randi_range(2, 6))
 		if(RNG.chance(getSubResistChance(30.0, 25.0))):
 			domInfo.addAnger(0.4)
 			endActivity()
