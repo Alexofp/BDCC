@@ -17,7 +17,7 @@ func getStartActions(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexS
 	#var dom:BaseCharacter = _domInfo.getChar()
 	var actions = []
 	
-	if(!_sexEngine.hasTag(_subInfo.charID, SexActivityTag.PreventsSubTeasing)):
+	if(!_sexEngine.hasTag(_subInfo.charID, SexActivityTag.PreventsSubTeasing) && !_sexEngine.hasTag(_subInfo.charID, SexActivityTag.MouthUsed)):
 		actions.append({
 			name = "Tease",
 			desc = "Tease them",
@@ -51,14 +51,14 @@ func getStartActions(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexS
 	
 	if(sub.getInventory().hasRemovableRestraints() && sub.getStamina() > 0):
 		actions.append({
-			name = "Struggle",
+			name = "Restraints",
 			desc = "Struggle against your restraints",
 			args = ["struggle"],
 			score = _subInfo.getResistScore() - _subInfo.getComplyScore()*_subInfo.fetishScore({Fetish.Bondage: 1.0}),
 			category = getCategory(),
 		})
 	
-	if(_domInfo.isAngry()):
+	if(_domInfo.isAngry() && !_sexEngine.hasTag(_subInfo.charID, SexActivityTag.MouthUsed)):
 		actions.append({
 			name = "Apologize",
 			desc = "Try to calm them down",

@@ -45,7 +45,7 @@ func isUnconscious():
 	return false
 
 func isResisting():
-	return resistance >= 0.2
+	return resistance >= (0.3 + personalityScore({PersonalityStat.Naive: 0.2}))
 
 func isScared():
 	return fear >= (0.5 - 0.3 * personalityScore({PersonalityStat.Coward: 1.0}))
@@ -65,6 +65,10 @@ func addPain(newpain):
 		consciousness -= float(newpain) / 100.0
 		
 		consciousness = clamp(consciousness, 0.0, 1.0)
+	
+func addConsciousness(newcon):
+	consciousness += newcon
+	consciousness = clamp(consciousness, 0.0, 1.0)
 	
 func addFear(addfear):
 	if(consciousness <= 1.0 && addfear > 0.0):
@@ -86,7 +90,7 @@ func getResistScore():
 		return 0.0
 	if(isResisting()):
 		return 1.0
-	if(RNG.chance(personalityScore({PersonalityStat.Brat: 1.0}) * 10.0)):
+	if(RNG.chance(personalityScore({PersonalityStat.Brat: 1.0}) * 5.0)):
 		return 1.0
 	return 0.0
 
