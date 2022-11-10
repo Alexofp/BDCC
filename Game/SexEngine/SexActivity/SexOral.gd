@@ -28,6 +28,8 @@ func getDomTags():
 
 func getSubTags():
 	var thetags = [SexActivityTag.PreventsSubViolence, SexActivityTag.PreventsSubTeasing]
+	if(state in ["blowjob", "deepthroat"]):
+		thetags.append(SexActivityTag.MouthUsed)
 	return thetags
 
 func getDomTagsCheck():
@@ -62,7 +64,7 @@ func onSwitchFrom(_otherActivity, _args):
 	return
 
 func processTurn():
-	if(state == "askingtosuck"):
+	if(state in ["askingtosuck", "askingtolick"]):
 		if(waitTimer > 2):
 			domInfo.addAnger(0.3)
 			state = ""
@@ -77,7 +79,7 @@ func processTurn():
 		waitTimer += 1
 		return
 	if(state == "blowjob"):
-		affectSub(subInfo.fetishScore({Fetish.OralSexGiving: 1.0})+0.5, 0.1, -0.1, -0.01)
+		affectSub(subInfo.fetishScore({Fetish.OralSexGiving: 1.0})+0.1, 0.1, -0.1, -0.01)
 		affectDom(domInfo.fetishScore({Fetish.OralSexReceiving: 0.5})+0.6, 0.1, 0.0)
 		subInfo.addArousalForeplay(0.03)
 		domInfo.addArousalSex(0.2)
@@ -125,7 +127,7 @@ func processTurn():
 		
 	if(state == "deepthroat"):
 		getSub().gotOrificeStretchedBy(BodypartSlot.Head, domID, 0.1)
-		affectSub(subInfo.fetishScore({Fetish.OralSexGiving: 1.0})+0.2, 0.1, -0.1, -0.01)
+		affectSub(subInfo.fetishScore({Fetish.OralSexGiving: 1.0})-0.3, 0.1, -0.1, -0.01)
 		affectDom(domInfo.fetishScore({Fetish.OralSexReceiving: 0.5})+0.6, 0.1, 0.0)
 		subInfo.addArousalSex(0.06)
 		domInfo.addArousalSex(0.25)
@@ -173,6 +175,71 @@ func processTurn():
 		
 		return {text = text}
 	
+	if(state == "licking"):
+		affectSub(subInfo.fetishScore({Fetish.OralSexGiving: 1.0})+0.1, 0.1, -0.1, -0.01)
+		affectDom(domInfo.fetishScore({Fetish.OralSexReceiving: 0.5})+0.6, 0.1, 0.0)
+		domInfo.addArousalSex(0.1)
+		
+		var clothingItem = getDom().getFirstItemThatCoversBodypart(BodypartSlot.Vagina)
+		var throughTheClothing = ""
+		if(clothingItem != null):
+			throughTheClothing = " through the "+clothingItem.getCasualName()
+		var text = RNG.pick([
+			"{sub.You} {sub.youAre} licking {dom.yourHis} "+RNG.pick(["pussy", "pussy slit", "kitty", "petals", "slit", "folds"])+ throughTheClothing +".",
+			"{sub.You} {sub.youAre} dragging {sub.yourHis} tongue over {dom.yourHis} "+RNG.pick(["pussy lips", "kitty", "slit", "petals", "folds", "clit and pussy"])+ throughTheClothing +".",
+		])
+		if(subInfo.isUnconscious()):
+			text = RNG.pick([
+				"{dom.You} {dom.youVerb('rub')} {dom.yourHis} "+RNG.pick(["pussy", "slit", "kitty"])+" over {sub.yourHis} tongue"+throughTheClothing+".",
+				"{dom.You} {dom.youVerb('use')} {sub.yourHis} tongue on {dom.yourHis} "+RNG.pick(["pussy", "slit", "kitty"])+" for {dom.yourHis} pleasure.",
+			])
+		
+		if(domInfo.isReadyToCum()):
+			text += RNG.pick([
+				" {dom.YouHe} {dom.youAre} about to cum!",
+				" {dom.YouHe} {dom.youAre} edging {dom.yourself}.",
+				" {dom.YourHis} "+RNG.pick(["pussy", "pussy slit"])+" is twitching a lot.",
+				" {dom.YourHis} "+RNG.pick(["pussy", "pussy slit"])+" is leaking arousal a lot.",
+				" {dom.YouHe} {dom.youAre} barely keeping {dom.yourself} from cumming.",
+				" {dom.YouHe} reached {dom.yourHis} peak!",
+			])
+		elif(domInfo.isCloseToCumming()):
+			text += RNG.pick([
+				" {dom.You} "+RNG.pick(["{dom.youVerb('let')} out some moans", "{dom.youVerb('let')} out a moan", "{dom.youVerb('bite')} {dom.yourHis} lip", "{dom.youVerb('breathe')} deeply"])+" while {dom.yourHis} pussy "+RNG.pick(["gets more wet", "leaks arousal", "becomes more aroused", "drips arousal", "lets out an aroused scent"])+"."
+			])
+		
+		return {text = text}
+	
+	if(state == "grinding"):
+		affectSub(subInfo.fetishScore({Fetish.OralSexGiving: 1.0})-0.1, 0.1, -0.1, -0.01)
+		affectDom(domInfo.fetishScore({Fetish.OralSexReceiving: 0.5})+0.6, 0.1, 0.0)
+		domInfo.addArousalSex(0.1)
+		
+		var clothingItem = getDom().getFirstItemThatCoversBodypart(BodypartSlot.Vagina)
+		var throughTheClothing = ""
+		if(clothingItem != null):
+			throughTheClothing = " through the "+clothingItem.getCasualName()
+		var text = RNG.pick([
+			"{dom.You} {dom.youAre} grinding {dom.yourHis} "+RNG.pick(["pussy", "pussy slit", "kitty", "petals", "slit", "folds"])+" over {sub.yourHis} face"+ throughTheClothing +".",
+			"{dom.You} {dom.youVerb('use')} {sub.yourHis} face for {dom.yourHis} pleasure by grinding it!",
+		])
+		
+		if(domInfo.isReadyToCum()):
+			text += RNG.pick([
+				" {dom.YouHe} {dom.youAre} about to cum!",
+				" {dom.YouHe} {dom.youAre} edging {dom.yourself}.",
+				" {dom.YourHis} "+RNG.pick(["pussy", "pussy slit"])+" is twitching a lot.",
+				" {dom.YourHis} "+RNG.pick(["pussy", "pussy slit"])+" is leaking arousal a lot.",
+				" {dom.YouHe} {dom.youAre} barely keeping {dom.yourself} from cumming.",
+				" {dom.YouHe} reached {dom.yourHis} peak!",
+			])
+		elif(domInfo.isCloseToCumming()):
+			text += RNG.pick([
+				" {dom.You} "+RNG.pick(["{dom.youVerb('let')} out some moans", "{dom.youVerb('let')} out a moan", "{dom.youVerb('bite')} {dom.yourHis} lip", "{dom.youVerb('breathe')} deeply"])+" while {dom.yourHis} pussy "+RNG.pick(["gets more wet", "leaks arousal", "becomes more aroused", "drips arousal", "lets out an aroused scent"])+"."
+			])
+		
+		return {text = text}
+	
 func getDomActions():
 	var actions = []
 
@@ -198,16 +265,16 @@ func getDomActions():
 					"name": "Force to suck cock",
 					"desc": "Make that bitch suck your cock",
 				})
-		if(getDom().hasReachableVagina() && getDom().getFirstItemThatCoversBodypart(BodypartSlot.Vagina) == null):
+		if(getDom().hasReachableVagina()):
 			actions.append({
 				"id": "asktolick",
-				"score": 0.0,
+				"score": 1.0 - 0.9 * float(getDom().getFirstItemThatCoversBodypart(BodypartSlot.Vagina) != null),
 				"name": "Order to lick",
 				"desc": "Ask the sub to lick your pussy",
 			})
 			actions.append({
-				"id": "grindface",
-				"score": 0.0,
+				"id": "startgrindface",
+				"score": 1.0 - 0.9 * float(getDom().getFirstItemThatCoversBodypart(BodypartSlot.Vagina) != null),
 				"name": "Grind face",
 				"desc": "Grind their face with your pussy",
 			})
@@ -231,6 +298,14 @@ func getDomActions():
 				"score": 1.0,
 				"name": "Pull out",
 				"desc": "Cum all over their face instead",
+			})
+	if(state in ["licking", "grinding"]):
+		if(domInfo.isReadyToCum()):
+			actions.append({
+				"id": "pussycum",
+				"score": 1.0,
+				"name": "Cum!",
+				"desc": "Cum all over the sub",
 			})
 		
 	actions.append({
@@ -274,6 +349,26 @@ func doDomAction(_id, _actionInfo):
 		affectSub(subInfo.fetishScore({Fetish.OralSexGiving: 1.0}), 0.05, -0.4, 0.0)
 		
 		return {text=text}
+	if(_id == "asktolick"):
+		state = "askingtolick"
+		waitTimer = 0
+		var text = RNG.pick([
+			"{dom.You} {dom.youVerb('order')} {sub.youHim} to "+RNG.pick(["start licking {dom.yourHis} pussy", "stick {sub.yourHis} tongue out and start working on {dom.yourHis} pussy"])+".",
+		])
+		
+		affectSub(subInfo.fetishScore({Fetish.OralSexGiving: 1.0}), 0.05, -0.4, 0.0)
+		
+		return {text=text}
+		
+	if(_id == "startgrindface"):
+		state = "grinding"
+		var text = RNG.pick([
+			"{dom.You} {dom.youVerb('press', 'presses')} {dom.yourHis} "+RNG.pick(["pussy", "slit", "kitty"])+" to {sub.yourHis} face and {dom.youVerb('proceed')} to grind it!",
+		])
+		affectSub(subInfo.fetishScore({Fetish.OralSexGiving: 1.0}), 0.1, -0.3, -0.02)
+		domInfo.addAnger(-0.05)
+		return {text = text}
+		
 	if(_id == "forcetosuck"):
 		var successChance = 30
 		if(getSub().isBitingBlocked()):
@@ -368,6 +463,29 @@ func doDomAction(_id, _actionInfo):
 				return {text=text}
 		
 		getSub().cummedOnBy(domID)
+		getDom().cumOnFloor()
+		domInfo.cum()
+		satisfyGoals()
+		state = ""
+
+		return {text=text}
+	if(_id == "pussycum"):
+		var text = RNG.pick([
+			"{dom.You} {dom.youVerb('shake')} and {dom.youVerb('shiver')} while {dom.yourHis} "+RNG.pick(["pulsating", "twitching"])+" "+RNG.pick(["pussy", "pussy", "slit", "kitty"])+" [b]"+RNG.pick(["cums", "squirts", "orgasms", "climaxes"])+" all over {sub.your} face[/b]!",
+		])
+		if(getDom().getFirstItemThatCoversBodypart(InventorySlot.Vagina) != null):
+			text = RNG.pick([
+				"{dom.You} {dom.youVerb('shake')} and {dom.youVerb('shiver')} while {dom.yourHis} "+RNG.pick(["pulsating", "twitching"])+" "+RNG.pick(["pussy", "pussy", "slit", "kitty"])+" [b]"+RNG.pick(["makes", "creates"])+" a wet spot on {dom.yourHis} clothing[/b]!",
+			])
+		else:
+			getSub().cummedOnBy(domID)
+		
+		if(getDom().hasReachablePenis()):
+			getDom().cumOnFloor()
+			text += RNG.pick([
+				" {dom.YourHis} "+RNG.pick(["cock", "dick"])+" throbs while shooting strings of "+RNG.pick(["cum", "seed", "semen"])+"!",
+			])
+		
 		domInfo.cum()
 		satisfyGoals()
 		state = ""
@@ -415,8 +533,21 @@ func getSubActions():
 				"name": "Shake head",
 				"desc": "You're not gonna suck their cock",
 			})
+	if(state in ["askingtolick"]):
+		actions.append({
+			"id": "startlicking",
+			"score": subInfo.getComplyScore() * subInfo.fetishScore({Fetish.OralSexGiving: 1.0}, 0.5),
+			"name": "Lick pussy",
+			"desc": "Obey their orders and start licking them out",
+		})
+		actions.append({
+			"id": "refusetolick",
+			"score": subInfo.getResistScore(),
+			"name": "Refuse to lick",
+			"desc": "You're not gonna lick their pussy",
+		})
 
-	if(state in ["", "blowjob", "askingtosuck"]):
+	if(state in ["", "blowjob", "askingtosuck", "licking", "askingtolick"]):
 		if(!getSub().isBitingBlocked()):
 			actions.append({
 				"id": "bite",
@@ -432,6 +563,20 @@ func getSubActions():
 			"desc": "Try to pull away",
 			"chance": getSubResistChance(30.0, 25.0),
 		})
+	if(state in ["licking"]):
+		actions.append({
+			"id": "prodpussy",
+			"score": subInfo.getComplyScore()/2.0,
+			"name": "Prod with tongue",
+			"desc": "Use your tongue more",
+		})
+	if(state in ["grinding"]):
+		actions.append({
+			"id": "grindtongue",
+			"score": subInfo.getComplyScore()/2.0,
+			"name": "Use tongue",
+			"desc": "Use your tongue more",
+		})
 	if(state in [""]):
 		if(getDom().hasReachablePenis()):
 			actions.append({
@@ -439,6 +584,13 @@ func getSubActions():
 				"score": subInfo.getComplyScore() * 0.5 + subInfo.fetishScore({Fetish.OralSexGiving: 0.5}),
 				"name": "Tease cock",
 				"desc": "Show their cock some love",
+			})
+		if(getDom().hasReachableVagina()):
+			actions.append({
+				"id": "teasevagina",
+				"score": subInfo.getComplyScore() * 0.5 + subInfo.fetishScore({Fetish.OralSexGiving: 0.5}),
+				"name": "Tease pussy",
+				"desc": "Show their pussy some love",
 			})
 	if(state in ["blowjob"]):
 		actions.append({
@@ -482,7 +634,7 @@ func getSubResistChance(baseChance, domAngerRemoval):
 	return max(theChance, 5.0)
 
 func getSubBiteChance(baseChance, domAngerRemoval):
-	if(state in ["blowjob"]):
+	if(state in ["blowjob", "licking"]):
 		return 100.0
 	var theChance = baseChance - domInfo.getAngerScore()*domAngerRemoval
 	if(getSub().hasBlockedHands()):
@@ -521,6 +673,31 @@ func doSubAction(_id, _actionInfo):
 			])
 			
 		return {text = text}
+	if(_id == "teasevagina"):
+		var clothingItem = getDom().getFirstItemThatCoversBodypart(BodypartSlot.Penis)
+		var throughTheClothing = ""
+		if(clothingItem != null):
+			throughTheClothing = " through the "+clothingItem.getCasualName()
+		
+		var text
+		if(getSub().isOralBlocked()):
+			text = RNG.pick([
+				"{sub.You} {sub.youVerb('nuzzle')} {dom.your} "+RNG.pick(["pussy", "slit", "petals", "pussy folds"])+throughTheClothing+".",
+			])
+		else:
+			text = RNG.pick([
+				"{sub.You} "+RNG.pick(["{sub.youVerb('nuzzle')}", "{sub.youVerb('lick')}"])+" {dom.your} "+RNG.pick(["pussy", "slit", "petals", "pussy folds"])+throughTheClothing+".",
+			])
+			
+		domInfo.addLust(10.0 + domInfo.fetishScore({Fetish.OralSexReceiving: 5.0}))
+		domInfo.addArousalForeplay(0.05)
+		
+		if(domInfo.isReadyToPenetrate() && clothingItem == null):
+			text += RNG.pick([
+				" {dom.Your} pussy is looking "+RNG.pick(["wet", "moist", "needy", "very wet"])+".",
+			])
+			
+		return {text = text}
 		
 	if(_id == "openmouth"):
 		var text = RNG.pick([
@@ -534,6 +711,31 @@ func doSubAction(_id, _actionInfo):
 			"{sub.You} {sub.youVerb('refuse')} to open {sub.yourHis} mouth.",
 		])
 		domInfo.addAnger(0.2)
+		return {text = text}
+	if(_id == "startlicking"):
+		var text = RNG.pick([
+			"{sub.You} {sub.youVerb('stick')} {sub.yourHis} tongue out and {sub.youVerb('press', 'presses')} it against {dom.your} "+RNG.pick(["pussy", "slit", "petals", "folds"])+" before proceeding to lick them.",
+		])
+		state = "licking"
+		return {text = text}
+	if(_id == "refusetolick"):
+		state = ""
+		var text = RNG.pick([
+			"{sub.You} {sub.youVerb('refuse')} to lick {dom.yourHis} pussy.",
+		])
+		domInfo.addAnger(0.2)
+		return {text = text}
+	if(_id == "prodpussy"):
+		var text = RNG.pick([
+			"{sub.You} {sub.youVerb('use')} {sub.yourHis} tongue to "+RNG.pick(["prod {dom.yourHis} pussy entrance and lap up all the juices", "prod at the wet pussy entrance", "lap at the wet pussy hole"])+".",
+		])
+		domInfo.addArousalSex(0.05)
+		return {text = text}
+	if(_id == "grindtongue"):
+		var text = RNG.pick([
+			"{sub.You} {sub.youVerb('stick')} {sub.yourHis} tongue out and {sub.youVerb('catch', 'catches')} some "+RNG.pick(["arousal", "juices"])+RNG.pick([" from that wet pussy","", " onto it"," while {sub.yourHis} face is being grinded"])+".",
+		])
+		domInfo.addArousalSex(0.05)
 		return {text = text}
 	if(_id == "bite"):
 		var successChance = getSubBiteChance(50.0, 30.0)
@@ -559,7 +761,7 @@ func doSubAction(_id, _actionInfo):
 				"{sub.You} {sub.youVerb('pull')} away from {dom.you}.",
 			])
 			domInfo.addAnger(0.3)
-			if(state == "blowjob"):
+			if(state in ["blowjob", "licking", "deepthroat"]):
 				state = ""
 			else:
 				endActivity()
