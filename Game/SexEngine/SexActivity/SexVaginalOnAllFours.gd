@@ -25,6 +25,12 @@ func getGoals():
 	}
 
 func canStartActivity(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexSubInfo):
+	if(!_domInfo.getChar().hasReachablePenis()):
+		return false
+	if(usedBodypart == BodypartSlot.Vagina && !_subInfo.getChar().hasReachableVagina()):
+		return false
+	if(usedBodypart == BodypartSlot.Anus && !_subInfo.getChar().hasReachableAnus()):
+		return false
 	if(_domInfo.getChar().getFirstItemThatCoversBodypart(BodypartSlot.Penis) != null):
 		return false
 	
@@ -51,7 +57,7 @@ func getDomTagsCheck():
 	return [SexActivityTag.OrderedToDoSomething, SexActivityTag.PenisUsed]
 
 func getSubTagsCheck():
-	return [SexActivityTag.OrderedToDoSomething, SexActivityTag.VaginaUsed]
+	return [SexActivityTag.OrderedToDoSomething, usedTag]
 
 func startActivity(_args):
 	state = ""
@@ -164,7 +170,7 @@ func getDomActions():
 				"desc": "Switch to the sub's "+RNG.pick(otherHoleNames),
 			})
 	if(state in ["fucking"]):
-		if(domInfo.isReadyToCum()):
+		if(domInfo.isReadyToCum() && isHandlingDomOrgasms()):
 			var condomScore = 0.0
 			if(getDomCondom() != null):
 				condomScore = 1.0
@@ -176,12 +182,14 @@ func getDomActions():
 				"score": scoreToCumInside,
 				"name": RNG.pick(["Cum inside"]),
 				"desc": "Cum inside their "+RNG.pick(usedBodypartNames),
+				"priority": 1001,
 			})
 			actions.append({
 				"id": "cumpullout",
 				"score": 1.0 - min(1.0, scoreToCumInside),
 				"name": RNG.pick(["Pull out"]),
 				"desc": "Cum on their butt",
+				"priority": 1001,
 			})
 	if(state in ["aftercumminginside"]):
 		actions.append({

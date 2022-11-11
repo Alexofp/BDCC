@@ -9,4 +9,6 @@ func getVisibleName():
 func getGoals(_sexEngine, _dom, _sub):
 	var possible = []
 	
+	possible.append(SexGoal.ReceiveVaginal)
+	
 	return possible
