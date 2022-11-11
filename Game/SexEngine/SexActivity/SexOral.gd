@@ -286,26 +286,29 @@ func getDomActions():
 			"desc": "Make that slut deepthroat you",
 		})
 	if(state in ["blowjob", "deepthroat"]):
-		if(domInfo.isReadyToCum()):
+		if(domInfo.isReadyToCum() && isHandlingDomOrgasms()):
 			actions.append({
 				"id": "bjcuminside",
 				"score": 1.0,
 				"name": "Cum inside",
 				"desc": "Stuff that mouth",
+				"priority": 1001,
 			})
 			actions.append({
 				"id": "bjpullout",
 				"score": 1.0,
 				"name": "Pull out",
 				"desc": "Cum all over their face instead",
+				"priority": 1001,
 			})
 	if(state in ["licking", "grinding"]):
-		if(domInfo.isReadyToCum()):
+		if(domInfo.isReadyToCum() && isHandlingDomOrgasms()):
 			actions.append({
 				"id": "pussycum",
 				"score": 1.0,
 				"name": "Cum!",
 				"desc": "Cum all over the sub",
+				"priority": 1001,
 			})
 		
 	actions.append({
@@ -812,3 +815,8 @@ func doSubAction(_id, _actionInfo):
 func getAnimation():
 	return [StageScene.Duo, "kneel", {pc=subID, npc=domID, npcAction="stand"}]
 
+func getDomOrgasmHandlePriority():
+	return 10
+
+func getSubOrgasmHandlePriority():
+	return -1

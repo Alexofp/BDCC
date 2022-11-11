@@ -99,45 +99,9 @@ func getExposedBodypartsNewData():
 				
 	return resultData
 
-func subOrgasmData():
-	var result = null
-	
-	for subID in subs:
-		var subInfo = subs[subID]
-		if(subInfo.isReadyToCum()):
-			# add a check to see if some activity wants to handle this event instead here
-			
-			subInfo.getChar().cumOnFloor()
-			subInfo.cum()
-			var text = RNG.pick([
-				"A [b]powerful orgasm[/b] overwhelms {sub.your} body.",
-				"[b]{sub.You} {sub.youVerb('cum')}[/b] hard!",
-			])
-			
-			if(subInfo.getChar().hasPenis()):
-				text += RNG.pick([
-					" {sub.YourHis} "+RNG.pick(["cock", "dick", "member"])+" wastes its load!",
-					" {sub.YourHis} "+RNG.pick(["cock", "dick", "member"])+" shoots out a load!",
-					" {sub.YourHis} "+RNG.pick(["cock", "dick", "member"])+" throbs while wasting its seed!",
-				])
-			if(subInfo.getChar().hasVagina()):
-				text += RNG.pick([
-					" {sub.YourHis} "+RNG.pick(["pussy", "slit"])+" gets tight!",
-					" {sub.YourHis} "+RNG.pick(["pussy", "slit"])+" clenches and twitches!",
-					" {sub.YourHis} "+RNG.pick(["pussy", "slit"])+" pulsates irregularly!",
-					" {sub.YourHis} "+RNG.pick(["pussy", "slit"])+" squirts!",
-				])
-			
-			result = combineData(result, processData({
-				text = text,
-			}, RNG.pick(doms), subID))
-
-	return result
-
 func getExtraData():
 	var result = null
 	result = combineData(result, getExposedBodypartsNewData())
-	result = combineData(result, subOrgasmData())
 	return result
 
 func makeActivity(id, theDomID, theSubID):
@@ -449,9 +413,6 @@ func processAIActions(isDom = true):
 		
 		var possibleActions = []
 		var actionsScores = []
-		if(hasAnyAcitivites(personID)):
-			possibleActions = [{id="donothing"}]
-			actionsScores = [0.01]
 		
 		# if is dom
 		if(isDom(personID)):
@@ -479,6 +440,8 @@ func processAIActions(isDom = true):
 								activityID = possibleSexActivityID,
 								subID = subInfo.charID,
 								args = newaction["args"],
+								score = score,
+								priority = getSafeValueFromDict(newaction, "priority", 0),
 							})
 							actionsScores.append(score)
 		
@@ -507,6 +470,8 @@ func processAIActions(isDom = true):
 								activityID = possibleSexActivityID,
 								domID = domInfo.charID,
 								args = newaction["args"],
+								score = score,
+								priority = getSafeValueFromDict(newaction, "priority", 0),
 							})
 							actionsScores.append(score)
 		
@@ -518,49 +483,73 @@ func processAIActions(isDom = true):
 				var domActions = activity.getDomActions()
 				if(domActions != null):
 					for action in domActions:
+						var score = 1.0
+						if(action.has("score")):
+							score = max(action["score"], 0.0)
+							
 						possibleActions.append({
 							id = "domAction",
 							activityID = activity.uniqueID,
 							action = action,
+							score = score,
+							priority = getSafeValueFromDict(action, "priority", 0),
 						})
-						if(action.has("score")):
-							actionsScores.append(max(action["score"], 0.0))
-						else:
-							actionsScores.append(1.0)
+						actionsScores.append(score)
 				
 			if(activity.subID == personID):
 				var subActions = activity.getSubActions()
 				if(subActions != null):
 					for action in subActions:
+						var score = 1.0
+						if(action.has("score")):
+							score = max(action["score"], 0.0)
+						
 						possibleActions.append({
 							id = "subAction",
 							activityID = activity.uniqueID,
 							action = action,
+							score = score,
+							priority = getSafeValueFromDict(action, "priority", 0),
 						})
-						if(action.has("score")):
-							actionsScores.append(max(action["score"], 0.0))
-						else:
-							actionsScores.append(1.0)
+						actionsScores.append(score)
 
 		if(possibleActions.size() > 0 && theinfo.canDoActions()):
+			var importantActions = []
+			var importantScores = []
+			#var importantScore = 0.0
+			
 			var totalScore = 0.0
-			for thescore in actionsScores:
+			for actionInfo in possibleActions:
+				var thescore = actionInfo["score"]
 				if(thescore > 0.0):
 					totalScore += thescore
+				if(actionInfo["priority"] >= 1000):
+					importantActions.append(actionInfo)
+					importantScores.append(actionInfo["score"])
+					#importantScore += actionInfo["score"]
 			
-			if(RNG.chance(totalScore * 100.0)):
-				var pickedFinalAction = RNG.pickWeighted(possibleActions, actionsScores)
+			var finalScore = totalScore
+			var finalPossibleActions = possibleActions
+			var finalActionScores = actionsScores
+			if(importantActions.size() > 0):
+				finalScore = 1.0#importantScore
+				finalPossibleActions = importantActions
+				finalActionScores = importantScores
+			
+			if(RNG.chance(finalScore * 100.0)):
+				var pickedFinalAction = RNG.pickWeighted(finalPossibleActions, finalActionScores)
 				
-				if(pickedFinalAction["id"] == "domAction"):
-					var activity = getActivityWithUniqueID(pickedFinalAction["activityID"])
-					doDomAction(activity, pickedFinalAction["action"])
-				if(pickedFinalAction["id"] == "subAction"):
-					var activity = getActivityWithUniqueID(pickedFinalAction["activityID"])
-					doSubAction(activity, pickedFinalAction["action"])
-				if(pickedFinalAction["id"] == "startNewDomActivity"):
-					startActivity(pickedFinalAction["activityID"], personID, pickedFinalAction["subID"], pickedFinalAction["args"])
-				if(pickedFinalAction["id"] == "startNewSubActivity"):
-					startActivity(pickedFinalAction["activityID"], pickedFinalAction["domID"], personID, pickedFinalAction["args"])
+				if(pickedFinalAction != null):
+					if(pickedFinalAction["id"] == "domAction"):
+						var activity = getActivityWithUniqueID(pickedFinalAction["activityID"])
+						doDomAction(activity, pickedFinalAction["action"])
+					if(pickedFinalAction["id"] == "subAction"):
+						var activity = getActivityWithUniqueID(pickedFinalAction["activityID"])
+						doSubAction(activity, pickedFinalAction["action"])
+					if(pickedFinalAction["id"] == "startNewDomActivity"):
+						startActivity(pickedFinalAction["activityID"], personID, pickedFinalAction["subID"], pickedFinalAction["args"])
+					if(pickedFinalAction["id"] == "startNewSubActivity"):
+						startActivity(pickedFinalAction["activityID"], pickedFinalAction["domID"], personID, pickedFinalAction["args"])
 
 	removeEndedActivities()
 	
@@ -599,6 +588,7 @@ func getActions():
 		id = "continue",
 		name = "Continue",
 		desc = "Just continue doing what you're doing",
+		priority = 999,
 	})
 	
 	for activity in activities:
@@ -615,6 +605,7 @@ func getActions():
 						name = action["name"],
 						desc = action["desc"],
 						chance = getSafeValueFromDict(action, "chance"),
+						priority = getSafeValueFromDict(action, "priority", 0),
 					})
 		if(activity.subID == "pc" && getSubInfo("pc").canDoActions()):
 			var subActions = activity.getSubActions()
@@ -627,6 +618,7 @@ func getActions():
 						name = action["name"],
 						desc = action["desc"],
 						chance = getSafeValueFromDict(action, "chance"),
+						priority = getSafeValueFromDict(action, "priority", 0),
 					})
 					
 	if(isDom("pc") && getDomInfo("pc").canDoActions()):
@@ -656,6 +648,7 @@ func getActions():
 						args = newaction["args"],
 						chance = getSafeValueFromDict(newaction, "chance"),
 						desc = getSafeValueFromDict(newaction, "desc", "Start new activity"),
+						priority = getSafeValueFromDict(newaction, "priority", 0),
 					})
 					
 	if(isSub("pc") && getSubInfo("pc").canDoActions()):
@@ -685,9 +678,32 @@ func getActions():
 						args = newaction["args"],
 						chance = getSafeValueFromDict(newaction, "chance"),
 						desc = getSafeValueFromDict(newaction, "desc", "Start new activity"),
+						priority = getSafeValueFromDict(newaction, "priority", 0),
 					})
 	
+	var importantActions = []
+	for actionInfo in result:
+		if(actionInfo.has("priority") && actionInfo["priority"] >= 1000):
+			importantActions.append(actionInfo)
+		
+	if(importantActions.size() > 0):
+#		importantActions.insert(0, {
+#			id = "continue",
+#			name = "Continue",
+#			desc = "Just continue doing what you're doing",
+#			priority = 99999,
+#		})
+		
+		importantActions.sort_custom(self, "sortActionsByPriority")
+		return importantActions
+	
+	result.sort_custom(self, "sortActionsByPriority")
 	return result
+
+func sortActionsByPriority(a, b):
+	if a["priority"] > b["priority"]:
+		return true
+	return false
 
 func getSafeValueFromDict(thedict:Dictionary, keyid:String, defaultValue = null):
 	if(thedict.has(keyid)):
@@ -881,3 +897,21 @@ func addTrackedGear(ownerID, whoWearsItID, itemUniqueID):
 		trackedItems[ownerID] = []
 	
 	trackedItems[ownerID].append([whoWearsItID, itemUniqueID])
+
+func getCurrentActivitiesMaxSubOrgasmHandlePriority(domID, subID):
+	var maxResult = -1
+	for activity in activities:
+		if(activity.domID == domID && activity.subID == subID):
+			var thePriority = activity.getSubOrgasmHandlePriority()
+			if(thePriority > maxResult):
+				maxResult = thePriority
+	return maxResult
+
+func getCurrentActivitiesMaxDomOrgasmHandlePriority(domID, subID):
+	var maxResult = -1
+	for activity in activities:
+		if(activity.domID == domID && activity.subID == subID):
+			var thePriority = activity.getDomOrgasmHandlePriority()
+			if(thePriority > maxResult):
+				maxResult = thePriority
+	return maxResult

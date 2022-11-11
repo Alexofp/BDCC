@@ -72,7 +72,7 @@ func initFromPersonality():
 	var mean = personality.getStat(PersonalityStat.Mean)
 	
 	if(mean > 0.0):
-		anger = RNG.randf_range(0.0, mean) / 2.0
+		anger = RNG.randf_range(0.0, mean) / 5.0
 
 func processTurn():
 	arousalNaturalFade()

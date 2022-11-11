@@ -253,3 +253,55 @@ func affectDom(howmuch:float, lustMod, angerMod):
 		getDom().addLust(int(round(howmuch * lustMod * 100.0)))
 	if(angerMod != 0.0):
 		domInfo.addAnger(howmuch * angerMod)
+
+func getDomOrgasmHandlePriority():
+	return -1
+
+func getSubOrgasmHandlePriority():
+	return -1
+
+func isHandlingSubOrgasms():
+	return getSubOrgasmHandlePriority() >= getSexEngine().getCurrentActivitiesMaxSubOrgasmHandlePriority(domID, subID)
+
+func isHandlingDomOrgasms():
+	return getDomOrgasmHandlePriority() >= getSexEngine().getCurrentActivitiesMaxDomOrgasmHandlePriority(domID, subID)
+
+func getGenericOrgasmData(isSub):
+	var character
+	if(isSub):
+		character = getSub()
+	else:
+		character = getDom()
+	var text = RNG.pick([
+		"A [b]powerful orgasm[/b] overwhelms {<ORGASMER>.your} body.",
+		"[b]{<ORGASMER>.You} {sub.youVerb('cum')}[/b] hard!",
+	])
+	
+	if(character.hasPenis()):
+		text += RNG.pick([
+			" {<ORGASMER>.YourHis} "+RNG.pick(["cock", "dick", "member"])+" wastes its load!",
+			" {<ORGASMER>.YourHis} "+RNG.pick(["cock", "dick", "member"])+" shoots out a load!",
+			" {<ORGASMER>.YourHis} "+RNG.pick(["cock", "dick", "member"])+" throbs while wasting its seed!",
+		])
+	if(character.hasVagina()):
+		text += RNG.pick([
+			" {<ORGASMER>.YourHis} "+RNG.pick(["pussy", "slit"])+" gets tight!",
+			" {<ORGASMER>.YourHis} "+RNG.pick(["pussy", "slit"])+" clenches and twitches!",
+			" {<ORGASMER>.YourHis} "+RNG.pick(["pussy", "slit"])+" pulsates irregularly!",
+			" {<ORGASMER>.YourHis} "+RNG.pick(["pussy", "slit"])+" squirts!",
+		])
+	
+	if(isSub):
+		text = text.replace("<ORGASMER>", "sub")
+	else:
+		text = text.replace("<ORGASMER>", "dom")
+	
+	return {
+		text = text,
+	}
+
+func getGenericSubOrgasmData():
+	return getGenericOrgasmData(true)
+
+func getGenericDomOrgasmData():
+	return getGenericOrgasmData(false)

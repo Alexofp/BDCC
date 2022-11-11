@@ -420,6 +420,14 @@ func getSubActions():
 					"desc": "Ask them not to cum inside you",
 					"chance": 10 - 10 * domInfo.fetishScore({Fetish.Breeding: 1.0}),
 				})
+		if(subInfo.isReadyToCum() && isHandlingSubOrgasms()):
+			actions.append({
+				"id": "subcum",
+				"score": 1.0,
+				"name": "Cum!",
+				"desc": "You're about to cum!",
+				"priority" : 1001,
+			})
 	return actions
 
 func getSubResistChance(baseChance, domAngerRemoval):
@@ -434,6 +442,11 @@ func getSubResistChance(baseChance, domAngerRemoval):
 	return max(theChance, 5.0)
 
 func doSubAction(_id, _actionInfo):
+	if(_id == "subcum"):
+		getSub().cumOnFloor()
+		subInfo.cum()
+		return getGenericSubOrgasmData()
+	
 	if(_id == "rub"):
 		#switchCurrentActivityTo("SexFuckTest2")
 		domInfo.addAnger(-0.05)
@@ -497,10 +510,18 @@ func doSubAction(_id, _actionInfo):
 			domInfo.addAnger(0.2)
 			return {text = "{sub.You} {sub.youVerb('resist')} attempts to penetrate {sub.youHis} "+RNG.pick(usedBodypartNames)+"."}
 	if(_id == "moan"):
+		var moanText = RNG.pick([
+			"{sub.youVerb('moan')}"
+		])
+		if(getSub().isGagged()):
+			moanText = RNG.pick([
+				"{sub.youVerb('let')} out muffled moans",
+			])
+		
 		var text = RNG.pick([
-			"{sub.You} {sub.youVerb('moan')} while being fucked!",
-			"{sub.You} {sub.youVerb('moan')} while having {dom.yourHis} "+RNG.pick(usedBodypartNames)+" used!",
-			"{sub.You} {sub.youVerb('moan')} eagerly!",
+			"{sub.You} "+moanText+" while being fucked!",
+			"{sub.You} "+moanText+" while having {dom.yourHis} "+RNG.pick(usedBodypartNames)+" used!",
+			"{sub.You} "+moanText+" eagerly!",
 		])
 		affectDom(domInfo.fetishScore({fetishGiving: 1.0}), 0.1, -0.03)
 		return {text = text}
@@ -551,3 +572,9 @@ func getDomSwitchHoleChance():
 	var domLikesOtherHoleScore = domInfo.fetishScore({otherHoleFetishGiving:1.0, fetishGiving: -0.5})
 	
 	return max(5.0, domLikesOtherHoleScore * 100.0 * (1.0 - domInfo.getAngerScore()))
+
+func getDomOrgasmHandlePriority():
+	return 10
+
+func getSubOrgasmHandlePriority():
+	return 5
