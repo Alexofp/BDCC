@@ -4,8 +4,11 @@ onready var nameLabel = $NameLabel
 onready var statusEffectsPanel = $StatusEffectsPanel
 onready var staminaBar = $StaminaBar
 onready var painBar = $PainBar
-onready var lustBar = $LustBar
+onready var lustBar = $HBoxContainer/LustBar
 onready var levelBar = $LevelBar
+
+onready var consciousnessBar = $ConsciousnessBar
+onready var arousalBar = $HBoxContainer/ArousalBar
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -54,3 +57,24 @@ func updateFromCharacter(character: BaseCharacter):
 	levelBar.setText(str(character.getSkillsHolder().getLevel()))
 
 	character.updateEffectPanel(statusEffectsPanel)
+
+	var arousal = character.getArousal()
+	if(arousal > 0.0):
+		arousalBar.visible = true
+		arousalBar.setProgressBarValue(arousal)
+		arousalBar.setText( str(Util.roundF(arousal*100.0))+"%" )
+		lustBar.setText( str(Util.roundF(character.getLustLevel()*100.0))+"%" )
+	else:
+		arousalBar.visible = false
+		arousalBar.setProgressBarValue(0.0)
+
+	var consciousness = character.getConsciousness()
+	if(consciousness < 1.0):
+		levelBar.visible = false
+		consciousnessBar.visible = true
+		consciousnessBar.setProgressBarValue(consciousness)
+		consciousnessBar.setText( str(Util.roundF(consciousness*100.0))+"%" )
+	else:
+		levelBar.visible = true
+		consciousnessBar.visible = false
+		consciousnessBar.setProgressBarValue(1.0)

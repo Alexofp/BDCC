@@ -3,7 +3,6 @@ class_name SexInfoBase
 
 var sexEngineRef: WeakRef
 var charID = null
-var arousal: float = 0.0
 var timesCame: int = 0
 var memory:Dictionary = {}
 var tick:int = 0
@@ -39,8 +38,10 @@ func getAverageLust():
 	return lustFull / float(Util.maxi(1, tick))
 
 func addArousal(howmuch: float):
-	arousal += howmuch
-	arousal = clamp(arousal, 0.0, 1.0)
+	getChar().addArousal(howmuch)
+
+func getArousal()->float:
+	return getChar().getArousal()
 
 func addPain(newpain):
 	getChar().addPain(newpain)
@@ -57,7 +58,7 @@ func arousalNaturalFade():
 func addArousalForeplay(howmuch: float):
 	#var lustLevel = getChar().getLustLevel()
 	# should be less efficient at high lust. or not
-	if(arousal < 0.5):
+	if(getArousal() < 0.5):
 		addArousal(howmuch)
 
 func addArousalSex(howmuch: float):
@@ -68,17 +69,14 @@ func addArousalSex(howmuch: float):
 	else:
 		addArousal(howmuch)
 
-func getArousal() -> float:
-	return arousal
-
 func isCloseToCumming() -> bool:
-	return arousal >= 0.7
+	return getArousal() >= 0.7
 
 func isReadyToCum() -> bool:
-	return arousal >= 1.0
+	return getArousal() >= 1.0
 	
 func cum():
-	arousal = 0.0
+	addArousal(-1.0)
 	getChar().addLust(-int(getChar().getLust()/2.0))
 	timesCame += 1
 
@@ -86,7 +84,7 @@ func getTimesCame():
 	return timesCame
 
 func isReadyToPenetrate() -> bool:
-	return getChar().getLustLevel() >= 0.5 || getChar().getLust() >= 50 || arousal >= 0.4
+	return getChar().isReadyToPenetrate()
 
 func fetishScore(fetishes = {}, addscore = 0.0):
 	var fetishHolder: FetishHolder = getChar().getFetishHolder()

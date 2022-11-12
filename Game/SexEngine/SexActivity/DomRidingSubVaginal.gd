@@ -276,7 +276,6 @@ func doDomAction(_id, _actionInfo):
 	if(_id == "makesubcumoutside"):
 		var text = RNG.pick([
 			"{dom.You} {dom.youVerb('ride')} {sub.yourHis} "+RNG.pick(["dick", "cock", "member"])+" until {sub.youHe} {sub.youAre} ready to cum. But {dom.you} {dom.youVerb('stop')} riding {sub.youHim} just in time!",
-			"{dom.You} {dom.youVerb('pull')} out, [b]cumming all over {sub.your} ass[/b]!",
 		])
 		state = ""
 		
@@ -476,7 +475,7 @@ func doSubAction(_id, _actionInfo):
 				" Waves after waves of sticky "+RNG.pick(["cum", "seed", "jizz", "semen"])+" flow into {dom.yourHis} "+RNG.pick(["womb", "babymaker", "womb"])+".",
 			])
 		else:
-			text = RNG.pick([
+			text += RNG.pick([
 				" Waves after waves of sticky "+RNG.pick(["cum", "seed", "jizz", "semen"])+" get shoved into {dom.yourHis} "+RNG.pick(["ass", "butt"])+".",
 			])
 		

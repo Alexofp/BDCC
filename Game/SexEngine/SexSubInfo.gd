@@ -5,14 +5,13 @@ var stance = SexStance.Standing
 
 var resistance: float = 0.0
 var fear: float = 0.0
-var consciousness: float = 1.0
 var resistanceFull:float = 0.0
 var fearFull:float = 0.0
 
 func getInfoString():
 	var character = getChar()
 	
-	if(consciousness <= 0.0):
+	if(getConsciousness() <= 0.0):
 		return character.getName()+" is unconscious."
 	
 	var text = ""
@@ -21,7 +20,7 @@ func getInfoString():
 	text += "Resistance: "+str(Util.roundF(resistance*100))+"% "
 	text += "Fear: "+str(Util.roundF(fear*100))+"% "
 	text += "Arousal: "+str(Util.roundF(getArousal()*100))+"% "
-	text += "Consciousness: "+str(Util.roundF(consciousness*100))+"% "
+	text += "Consciousness: "+str(Util.roundF(getConsciousness()*100))+"% "
 	
 	return text
 
@@ -35,12 +34,12 @@ func initFromPersonality():
 		resistance = RNG.randf_range(0.0, bratiness)
 
 func canDoActions():
-	if(consciousness <= 0.0):
+	if(getConsciousness() <= 0.0):
 		return false
 	return true
 
 func isUnconscious():
-	if(consciousness <= 0.0):
+	if(getConsciousness() <= 0.0):
 		return true
 	return false
 
@@ -54,25 +53,25 @@ func isVeryScared():
 	return fear >= 0.9
 	
 func getAboutToPassOutScore():
-	if(consciousness > 0.8):
+	if(getConsciousness() > 0.8):
 		return 0.0
 	
-	return clamp(1.0 - consciousness*2.0, 0.0, 1.0)
+	return clamp(1.0 - getConsciousness()*2.0, 0.0, 1.0)
 	
 func addPain(newpain):
 	.addPain(newpain)
 	if(newpain >= 0.0 && getChar().getPainLevel() >= 1.0):
-		consciousness -= float(newpain) / 100.0
-		
-		consciousness = clamp(consciousness, 0.0, 1.0)
+		addConsciousness(-float(newpain) / 100.0)
+	
+func getConsciousness() -> float:
+	return getChar().getConsciousness()
 	
 func addConsciousness(newcon):
-	consciousness += newcon
-	consciousness = clamp(consciousness, 0.0, 1.0)
+	getChar().addConsciousness(newcon)
 	
 func addFear(addfear):
-	if(consciousness <= 1.0 && addfear > 0.0):
-		addfear = addfear / max(consciousness, 0.1)
+	if(getConsciousness() <= 1.0 && addfear > 0.0):
+		addfear = addfear / max(getConsciousness(), 0.1)
 	fear += addfear * (1.0 + personalityScore({PersonalityStat.Coward: 0.5}))
 	fear = clamp(fear, 0.0, 1.0)
 

@@ -7,7 +7,7 @@ var fetishMap: Dictionary = {}
 func _init():
 	for fetishID in GlobalRegistry.getFetishes():
 		addFetish(fetishID, RNG.pick(FetishInterest.getAll()))
-		addFetish(fetishID, FetishInterest.Loves)
+		#addFetish(fetishID, FetishInterest.Loves)
 		#addFetish(fetishID, FetishInterest.Hates)
 	
 	addFetish(Fetish.OralSexReceiving, FetishInterest.Loves)

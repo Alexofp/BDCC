@@ -13,6 +13,11 @@ signal exchangedCumDuringRubbing(senderName, receiverName)
 var pain:int = 0
 var lust:int = 0
 var stamina:int = 100
+
+# sex stats
+var arousal:float = 0
+var consciousness: float = 1.0
+
 var statusEffects:Dictionary = {}
 var statusEffectsStorageNode
 var inventory: Inventory
@@ -1471,6 +1476,8 @@ func afterSexEnded(sexInfo):
 		addLust(-getLust())
 		addPain(-getPain())
 		addStamina(getMaxStamina())
+	consciousness = 1.0
+	arousal = 0.0
 		
 	var items = getInventory().getAllEquippedItems()
 	for itemSlot in items:
@@ -1503,3 +1510,20 @@ func getWornCondom():
 		if(item.id == "UsedCondom"):
 			return item
 	return null
+
+func getArousal() -> float:
+	return arousal
+
+func addArousal(adda:float):
+	arousal += adda
+	arousal = clamp(arousal, 0.0, 1.0)
+
+func getConsciousness() -> float:
+	return consciousness
+
+func addConsciousness(newc:float):
+	consciousness += newc
+	consciousness = clamp(consciousness, 0.0, 1.0)
+
+func isReadyToPenetrate() -> bool:
+	return getLustLevel() >= 0.5 || getLust() >= 50 || getArousal() >= 0.4
