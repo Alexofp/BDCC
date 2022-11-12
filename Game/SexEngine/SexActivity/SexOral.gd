@@ -24,19 +24,19 @@ func getCategory():
 	return ["Fuck"]
 
 func getDomTags():
-	return [SexActivityTag.PenisUsed, SexActivityTag.VaginaUsed]
+	return [SexActivityTag.PenisUsed, SexActivityTag.VaginaUsed, SexActivityTag.HavingSex]
 
 func getSubTags():
-	var thetags = [SexActivityTag.PreventsSubViolence, SexActivityTag.PreventsSubTeasing]
+	var thetags = [SexActivityTag.PreventsSubViolence, SexActivityTag.PreventsSubTeasing, SexActivityTag.HavingSex]
 	if(state in ["blowjob", "deepthroat"]):
 		thetags.append(SexActivityTag.MouthUsed)
 	return thetags
 
 func getDomTagsCheck():
-	return [SexActivityTag.OrderedToDoSomething, SexActivityTag.PenisUsed, SexActivityTag.VaginaUsed]
+	return [SexActivityTag.OrderedToDoSomething, SexActivityTag.PenisUsed, SexActivityTag.VaginaUsed, SexActivityTag.HavingSex]
 
 func getSubTagsCheck():
-	return [SexActivityTag.OrderedToDoSomething, SexActivityTag.MouthUsed]
+	return [SexActivityTag.OrderedToDoSomething, SexActivityTag.MouthUsed, SexActivityTag.HavingSex]
 
 func startActivity(_args):
 	state = ""
@@ -49,7 +49,7 @@ func startActivity(_args):
 			exposedThings.append("balls")
 	if(getDom().hasVagina() && getDom().getFirstItemThatCoversBodypart(BodypartSlot.Vagina) == null):
 		exposedThings.append(RNG.pick(["pussy", "pussy", "slit", "kitty"]))
-	if(exposedThings.size()):
+	if(exposedThings.size() > 0):
 		genitalsText = "exposed "+Util.humanReadableList(exposedThings)
 	
 	var text = RNG.pick([
@@ -518,7 +518,19 @@ func doDomAction(_id, _actionInfo):
 	
 	if(_id == "stop"):
 		endActivity()
-		return {text = "{dom.You} {dom.youVerb('pull')} {dom.yourHis} cock away from {sub.yourHis} lips."}
+		
+	var exposedThings = []
+	var genitalsText = "crotch"
+	if(getDom().hasPenis() && getDom().getFirstItemThatCoversBodypart(BodypartSlot.Penis) == null):
+		exposedThings.append(RNG.pick(["dick", "cock", "member"]))
+		if(RNG.chance(50)):
+			exposedThings.append("balls")
+	if(getDom().hasVagina() && getDom().getFirstItemThatCoversBodypart(BodypartSlot.Vagina) == null):
+		exposedThings.append(RNG.pick(["pussy", "pussy", "slit", "kitty"]))
+	if(exposedThings.size() > 0):
+		genitalsText = "exposed "+Util.humanReadableList(exposedThings)
+		
+		return {text = "{dom.You} {dom.youVerb('pull')} {dom.yourHis} "+genitalsText+" away from {sub.yourHis} lips."}
 
 func getSubActions():
 	var actions = []

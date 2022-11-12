@@ -83,8 +83,10 @@ func getActivityBaseScore(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo:
 	return 0.0
 
 func getActivityScore(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexSubInfo):
-	var goalData = getGoals()
-	
+	#print(id," ",getActivityScoreCustomGoals(getGoals(), _sexEngine, _domInfo, _subInfo))
+	return getActivityScoreCustomGoals(getGoals(), _sexEngine, _domInfo, _subInfo)
+
+func getActivityScoreCustomGoals(goalData, _sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexSubInfo):
 	var resultScore = getActivityBaseScore(_sexEngine, _domInfo, _subInfo)
 	var addToScore = 0.0
 	

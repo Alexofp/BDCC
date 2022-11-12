@@ -15,6 +15,7 @@ var otherHoleBodypart = BodypartSlot.Anus
 var otherHoleTag = SexActivityTag.AnusUsed
 var otherHoleFetishGiving = Fetish.AnalSexGiving
 var otherHoleFetishReceiving = Fetish.AnalSexReceiving
+var otherGoal = SexGoal.FuckAnal
 
 func _init():
 	id = "SexVaginalOnAllFours"
@@ -44,20 +45,20 @@ func getCategory():
 
 func getDomTags():
 	if(state in ["fucking", "aftercumminginside"]):
-		return [SexActivityTag.PenisUsed, SexActivityTag.PenisInside]
-	return [SexActivityTag.PenisUsed]
+		return [SexActivityTag.PenisUsed, SexActivityTag.PenisInside, SexActivityTag.HavingSex]
+	return [SexActivityTag.PenisUsed, SexActivityTag.HavingSex]
 
 func getSubTags():
-	var thetags = [usedTag, SexActivityTag.PreventsSubViolence, SexActivityTag.PreventsSubTeasing]
+	var thetags = [usedTag, SexActivityTag.PreventsSubViolence, SexActivityTag.PreventsSubTeasing, SexActivityTag.HavingSex]
 	if(state in ["fucking", "aftercumminginside"]):
 		thetags.append(usedTagInside)
 	return thetags
 
 func getDomTagsCheck():
-	return [SexActivityTag.OrderedToDoSomething, SexActivityTag.PenisUsed]
+	return [SexActivityTag.OrderedToDoSomething, SexActivityTag.PenisUsed, SexActivityTag.HavingSex]
 
 func getSubTagsCheck():
-	return [SexActivityTag.OrderedToDoSomething, usedTag]
+	return [SexActivityTag.OrderedToDoSomething, usedTag, SexActivityTag.HavingSex]
 
 func startActivity(_args):
 	state = ""
@@ -165,7 +166,7 @@ func getDomActions():
 		if(subInfo.getChar().hasBodypart(otherHoleBodypart) && !getSexEngine().hasTag(subID, otherHoleTag)):
 			actions.append({
 				"id": "switchhole",
-				"score": 5.0 * (-domInfo.goalsScore(getGoals(), subID) + domInfo.goalsScore({SexGoal.FuckAnal: 1.0}, subID)),
+				"score": 5.0 * (-domInfo.goalsScore(getGoals(), subID) + domInfo.goalsScore({otherGoal: 1.0}, subID)),
 				"name": RNG.pick(["Switch hole"]),
 				"desc": "Switch to the sub's "+RNG.pick(otherHoleNames),
 			})
@@ -198,7 +199,7 @@ func getDomActions():
 			"name": RNG.pick(["Continue fucking"]),
 			"desc": "Continue fucking their "+RNG.pick(usedBodypartNames),
 		})
-	if(state in ["aftercumminginside", "fucking"]):
+	if(state in ["", "aftercumminginside", "fucking"]):
 		if(!domInfo.isReadyToCum()):
 			actions.append({
 				"id": "pullout",
@@ -361,7 +362,7 @@ func doDomAction(_id, _actionInfo):
 	if(_id == "pullout"):
 		endActivity()
 		var text = RNG.pick([
-			"{dom.You} {dom.youVerb('pull')} {dom.yourHis} cock out.",
+			"{dom.You} {dom.youVerb('pull')} {dom.yourHis} cock away.",
 		])
 		var condom:ItemBase = getDomCondom()
 		if(condom != null):
@@ -409,7 +410,7 @@ func getSubActions():
 	if(state in ["fucking"]):
 		actions.append({
 				"id": "moan",
-				"score": max(0.1, subFetishScore({fetishReceiving: 1.0}) + subPersonalityScore({PersonalityStat.Subby: 1.0})),
+				"score": max(0.1, subFetishScore({fetishReceiving: 0.5}) + subPersonalityScore({PersonalityStat.Subby: 0.5})),
 				"name": "Moan",
 				"desc": "Show how much you like it",
 			})
@@ -524,6 +525,8 @@ func doSubAction(_id, _actionInfo):
 		if(getSub().isGagged()):
 			moanText = RNG.pick([
 				"{sub.youVerb('let')} out muffled moans",
+				"{sub.youVerb('let')} out a muffled moan",
+				"{sub.youVerb('let')} out a muffled noise of pleasure",
 			])
 		
 		var text = RNG.pick([
@@ -531,7 +534,8 @@ func doSubAction(_id, _actionInfo):
 			"{sub.You} "+moanText+" while having {dom.yourHis} "+RNG.pick(usedBodypartNames)+" used!",
 			"{sub.You} "+moanText+" eagerly!",
 		])
-		affectDom(domInfo.fetishScore({fetishGiving: 1.0}), 0.1, -0.03)
+		domInfo.addAnger(-0.02)
+		domInfo.addLust(5)
 		return {text = text}
 	if(_id == "resistduringfuck"):
 		

@@ -1,7 +1,7 @@
-extends "res://Game/SexEngine/SexActivity/SexVaginalOnAllFours.gd"
+extends "res://Game/SexEngine/SexActivity/DomRidingSubVaginal.gd"
 
 func _init():
-	id = "SexAnalOnAllFours"
+	id = "DomRidingSubAnal"
 	usedBodypart = BodypartSlot.Anus
 	usedTag = SexActivityTag.AnusUsed
 	usedTagInside = SexActivityTag.AnusPenetrated
@@ -9,19 +9,19 @@ func _init():
 	fetishReceiving = Fetish.AnalSexReceiving
 	aboutToPenetrateReaction = SexReaction.AboutToPenetratePussy
 	usedBodypartNames = ["anus", "tailhole", "backdoor", "star", "anal ring"]
-	switchHoleActivity = "SexVaginalOnAllFours"
+	switchHoleActivity = "DomRidingSubVaginal"
 	otherHoleNames = ["pussy"]
 	otherHoleBodypart = BodypartSlot.Vagina
 	otherHoleTag = SexActivityTag.VaginaUsed
 	otherHoleFetishGiving = Fetish.VaginalSexGiving
 	otherHoleFetishReceiving = Fetish.VaginalSexReceiving
-	otherGoal = SexGoal.FuckVaginal
+	otherGoal = SexGoal.ReceiveVaginal
 	
 func getGoals():
 	return {
-		SexGoal.FuckAnal: 1.0,
+		SexGoal.ReceiveAnal: 1.0,
 	}
 
 func getVisibleName():
-	return "Anal"
+	return "Cowgirl Anal"
 

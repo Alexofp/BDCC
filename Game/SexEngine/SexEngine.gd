@@ -701,9 +701,9 @@ func getActions():
 	return result
 
 func sortActionsByPriority(a, b):
-	if a["priority"] > b["priority"]:
-		return true
-	return false
+	if a["priority"] < b["priority"]:
+		return false
+	return true
 
 func getSafeValueFromDict(thedict:Dictionary, keyid:String, defaultValue = null):
 	if(thedict.has(keyid)):

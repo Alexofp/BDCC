@@ -7,8 +7,6 @@ func _init():
 
 func getGoals():
 	return {
-		SexGoal.FuckAnal: 0.5,
-		SexGoal.FuckVaginal: 0.5,
 	}
 
 func getActivityBaseScore(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexSubInfo):
@@ -27,7 +25,7 @@ func getStartActions(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexS
 			name = "Wear condom",
 			desc = "Put on your best condom",
 			args = ["dom"],
-			score = getActivityScore(_sexEngine, _domInfo, _subInfo) * (_domInfo.fetishScore({Fetish.Condoms:1.0}) - _domInfo.fetishScore({Fetish.Breeding:1.0})),
+			score = getActivityScoreCustomGoals({SexGoal.FuckAnal: 0.5, SexGoal.FuckVaginal: 0.5}, _sexEngine, _domInfo, _subInfo) * (_domInfo.fetishScore({Fetish.Condoms:1.0}) - _domInfo.fetishScore({Fetish.Breeding:1.0})),
 			category = ["Wear"],
 		})
 	if(!_sexEngine.hasTag(_subInfo.charID, SexActivityTag.PenisInside) && sub.hasReachablePenis() && !sub.getInventory().hasSlotEquipped(InventorySlot.Penis) && sub.getFirstItemThatCoversBodypart(BodypartSlot.Penis) == null):
@@ -35,7 +33,7 @@ func getStartActions(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexS
 			name = "Put condom on sub",
 			desc = "Put on your best condom on the sub",
 			args = ["sub"],
-			score = getActivityScore(_sexEngine, _domInfo, _subInfo) * (_domInfo.fetishScore({Fetish.Condoms:1.0}) - _domInfo.fetishScore({Fetish.BeingBred:1.0})),
+			score = getActivityScoreCustomGoals({SexGoal.ReceiveAnal: 0.5, SexGoal.ReceiveVaginal: 0.5}, _sexEngine, _domInfo, _subInfo) * (_domInfo.fetishScore({Fetish.Condoms:1.0}) - _domInfo.fetishScore({Fetish.BeingBred:1.0})),
 			category = ["Wear"],
 		})
 	

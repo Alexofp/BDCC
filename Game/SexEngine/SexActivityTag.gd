@@ -15,4 +15,5 @@ enum {
 	PreventsSubTeasing,
 	VaginaPenetrated,
 	AnusPenetrated,
+	HavingSex,
 }

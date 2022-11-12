@@ -10,6 +10,9 @@ func getGoals():
 	return {
 		SexGoal.FuckAnal: 1.0,
 		SexGoal.FuckVaginal: 1.0,
+		SexGoal.ReceiveAnal: 1.0,
+		SexGoal.ReceiveVaginal: 1.0,
+		SexGoal.DoOralOnSub: 1.0,
 	}
 
 func getVisibleName():

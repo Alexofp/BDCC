@@ -6,6 +6,6 @@ const FuckAnal = "FuckAnal"
 const FuckOral = "FuckOral"
 const ReceiveVaginal = "ReceiveVaginal"
 const ReceiveAnal = "ReceiveAnal"
-const ReceiveOral = "ReceiveOral"
+const DoOralOnSub = "DoOralOnSub"
 
 const TieUp = "TieUp"

@@ -12,6 +12,8 @@ func getGoals():
 	return {
 		SexGoal.FuckAnal: 1.0,
 		SexGoal.FuckVaginal: 1.0,
+		SexGoal.ReceiveAnal: 1.0,
+		SexGoal.ReceiveVaginal: 1.0,
 	}
 
 func getActivityBaseScore(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexSubInfo):
