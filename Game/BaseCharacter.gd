@@ -1278,6 +1278,9 @@ func updateDoll(doll: Doll3D):
 	var equippedItems = getInventory().getAllEquippedItems()
 	for inventorySlot in equippedItems:
 		var item = equippedItems[inventorySlot]
+		if(!item.shouldBeVisibleOnDoll(self, doll)):
+			continue
+		
 		var blocksBodyparts = item.coversBodyparts()
 		if(!item.alwaysVisible() && exposedBodyparts!=null && exposedBodyparts.size() > 0 && blocksBodyparts != null):
 			var shouldBeSkipped = false

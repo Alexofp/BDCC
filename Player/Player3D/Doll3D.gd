@@ -230,6 +230,9 @@ func setExposedBodyparts(newExposedBodyparts):
 func getExposedBodyparts():
 	return exposedBodyparts
 
+func isForcedExposed(slot):
+	return exposedBodyparts.has(slot)
+
 func setBoneScaleVector(boneName: String, boneScale: Vector3):
 	var skeleton:Skeleton = getDollSkeleton().getSkeleton()
 	var boneId = skeleton.find_bone(boneName)

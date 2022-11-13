@@ -388,5 +388,8 @@ func repairDamage():
 func alwaysVisible():
 	return false
 
+func shouldBeVisibleOnDoll(_character, _doll):
+	return true
+
 func onSexEnd():
 	pass
