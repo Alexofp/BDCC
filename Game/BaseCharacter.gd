@@ -1212,6 +1212,11 @@ func softUpdateDoll(doll: Doll3D):
 	doll.setState("gloves", "")
 	updateLeaking(doll)
 	
+	if(isReadyToPenetrate()):
+		doll.setState("cock", "")
+	else:
+		doll.setState("cock", "limp")
+	
 	var breastsScale = 1.0
 	if(hasBodypart(BodypartSlot.Breasts)):
 		var breasts = getBodypart(BodypartSlot.Breasts)

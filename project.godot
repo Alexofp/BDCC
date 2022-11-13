@@ -654,6 +654,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Inventory/RestraintTypes/RestraintButtplug.gd"
 }, {
+"base": "RestraintData",
+"class": "RestraintChastityCage",
+"language": "GDScript",
+"path": "res://Inventory/RestraintTypes/RestraintChastityCage.gd"
+}, {
 "base": "Reference",
 "class": "RestraintData",
 "language": "GDScript",
@@ -1159,6 +1164,7 @@ _global_script_class_icons={
 "RestraintBallGag": "",
 "RestraintBlindfold": "",
 "RestraintButtplug": "",
+"RestraintChastityCage": "",
 "RestraintData": "",
 "RestraintHandCuffs": "",
 "RestraintLegCuffs": "",

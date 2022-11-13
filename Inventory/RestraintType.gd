@@ -13,4 +13,5 @@ enum {
 	Straitjacket,
 	ButtPlug,
 	VaginalPlug,
+	ChastityCage,
 }
