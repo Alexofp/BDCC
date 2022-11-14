@@ -1535,3 +1535,12 @@ func addConsciousness(newc:float):
 
 func isReadyToPenetrate() -> bool:
 	return getLustLevel() >= 0.5 || getLust() >= 50 || getArousal() >= 0.4
+
+func isWearingChastityCage() -> bool:
+	if(!getInventory().hasSlotEquipped(InventorySlot.Penis)):
+		return false
+	
+	var item = getInventory().getEquippedItem(InventorySlot.Penis)
+	if(item.hasTag(ItemTag.ChastityCage)):
+		return true
+	return false

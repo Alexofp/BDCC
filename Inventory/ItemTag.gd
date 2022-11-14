@@ -9,6 +9,7 @@ enum {
 	SoldByGeneralVendomat,
 	SoldByMedicalVendomat,
 	SoldByUnderwearVendomat,
+	ChastityCage,
 }
 
 static func getName(tag):

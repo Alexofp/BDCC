@@ -701,7 +701,7 @@ func getActions():
 	return result
 
 func sortActionsByPriority(a, b):
-	if a["priority"] < b["priority"]:
+	if a["priority"] <= b["priority"]:
 		return false
 	return true
 
