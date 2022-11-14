@@ -65,7 +65,7 @@ func _run():
 		addButton("back", "Back", "pickhybrid1")
 
 	if(state == "pickedspecies"):
-		GM.main.playAnimation(StageScene.Solo, "stand", {exposedBodyparts=[BodypartSlot.Body]})
+		GM.main.playAnimation(StageScene.Solo, "stand", {exposedBodyparts=[BodypartSlot.Body, BodypartSlot.Penis, BodypartSlot.Vagina, BodypartSlot.Anus, BodypartSlot.Breasts], hard=true})
 		
 		say("You are a "+GM.pc.getSpeciesFullName())
 		say("\n----\n")

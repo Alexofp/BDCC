@@ -447,6 +447,8 @@ func saveData():
 		"pickedFemininity": pickedFemininity,
 		"pickedThickness": pickedThickness,
 		"inmateType": inmateType,
+		"arousal": arousal,
+		"consciousness": consciousness,
 	}
 	
 	data["bodyparts"] = {}
@@ -490,6 +492,8 @@ func loadData(data):
 	pickedFemininity = SAVE.loadVar(data, "pickedFemininity", 50)
 	pickedThickness = SAVE.loadVar(data, "pickedThickness", 50)
 	inmateType = SAVE.loadVar(data, "inmateType", InmateType.General)
+	arousal = SAVE.loadVar(data, "arousal", 0.0)
+	consciousness = SAVE.loadVar(data, "consciousness", 1.0)
 	
 	resetSlots()
 	var loadedBodyparts = SAVE.loadVar(data, "bodyparts", {})

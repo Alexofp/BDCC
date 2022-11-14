@@ -57,22 +57,23 @@ func getName():
 
 func beforeFightStarted():
 	.beforeFightStarted()
-	addLust(getAmbientLust())
-	addPain(getAmbientPain())
-	if(stamina > getMaxStamina()):
-		stamina = getMaxStamina()
+	lust = RNG.randi_range(0, getAmbientLust())
+	pain = RNG.randi_range(0, getAmbientPain())
+	stamina = getMaxStamina()
 
 func afterFightEnded():
 	.afterFightEnded()
-	pain = 0
-	lust = 0
-	stamina = getMaxStamina()
+	#pain = 0
+	#lust = 0
+	#stamina = getMaxStamina()
 
 func saveData():
 	var data = {
 		"pain": pain,
 		"lust": lust,
 		"stamina": stamina,
+		"arousal": arousal,
+		"consciousness": consciousness,
 	}
 	
 	data["bodyparts"] = {}
@@ -97,6 +98,8 @@ func loadData(data):
 	pain = SAVE.loadVar(data, "pain", 0)
 	lust = SAVE.loadVar(data, "lust", 0)
 	stamina = SAVE.loadVar(data, "stamina", 100)
+	arousal = SAVE.loadVar(data, "arousal", 0.0)
+	consciousness = SAVE.loadVar(data, "consciousness", 1.0)
 	
 	var loadedBodyparts = SAVE.loadVar(data, "bodyparts", {})
 	for slot in loadedBodyparts:

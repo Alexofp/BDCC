@@ -617,13 +617,13 @@ func _react(_action: String, _args):
 		getCharacter("risha").addEffect(StatusEffect.DrenchedInPiss)
 	
 	if(_action in ["fight_horny", "fight_normal", "fight_easier"]):
+		runScene("FightScene", ["risha"], "ch1rishafight")
 		if(_action == "fight_horny"):
 			getCharacter("risha").addLust(30)
 			setFlag("TaviModule.ch1SeducedRishaAndAttacked", true)
 		if(_action == "fight_easier"):
 			getCharacter("risha").addPain(50)
 			setFlag("TaviModule.ch1WaitedBeforePushingRisha", true)
-		runScene("FightScene", ["risha"], "ch1rishafight")
 		return
 
 	if(_action == "endthescene"):
