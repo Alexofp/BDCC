@@ -130,7 +130,7 @@ func _run():
 
 	if(state == "offer_pussy"):
 		# (needs pussy)
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc="nova", npcAction="kneel", exposedBodyparts=[BodypartSlot.Vagina]})
+		GM.main.playAnimation(StageScene.Duo, "stand", {npc="nova", hard=true, npcAction="kneel", exposedBodyparts=[BodypartSlot.Vagina]})
 
 		saynn("Hmm. Yeah, using a desperate husky for your pleasure sounds kinda nice about now. You expose your cute pussy slit and lie down before shoving your crotch into Nova’s face. The husky quickly realizes what she needs to do and starts eagerly nuzzling your pussy. She then sticks her tongue out and starts dragging it across the sensitive petals and the clit, making you moan. All the while the suit is still denying the husky time after time, turning her more desperate and subby.")
 
@@ -160,7 +160,7 @@ func _run():
 
 	if(state == "offer_cock"):
 		# (needs cock)
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc="nova", npcAction="kneel", exposedBodyparts=[BodypartSlot.Penis]})
+		GM.main.playAnimation(StageScene.Duo, "stand", {npc="nova", hard=true, npcAction="kneel", exposedBodyparts=[BodypartSlot.Penis]})
 
 		saynn("Hmm. Yeah, using a desperate husky for your pleasure sounds kinda nice about now. You expose your {pc.cock} and kneel before Nova, offering her your shaft. The husky quickly realizes what she needs to do and starts eagerly nuzzling your cock. She then sticks her tongue out and starts dragging it across the length of your member, making it feel good. All the while the suit is still denying the husky time after time, turning her more desperate and subby.")
 

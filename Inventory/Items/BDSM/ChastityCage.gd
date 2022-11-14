@@ -12,6 +12,9 @@ func getDescription():
 func getClothingSlot():
 	return InventorySlot.Penis
 
+func getRequiredBodypart():
+	return BodypartSlot.Penis
+
 func getBuffs():
 	return [
 		buff(Buff.ChastityPenisBuff),

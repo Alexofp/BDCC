@@ -100,6 +100,13 @@ func setTemporaryState(stateID, value):
 		var part = parts[slot]
 		part.setState(stateID, value)
 
+func getFinalState(stateID):
+	if(temporaryState.has(stateID)):
+		return temporaryState[stateID]
+	if(state.has(stateID)):
+		return state[stateID]
+	return null
+
 func clearTemporaryState():
 	for stateID in temporaryState:
 		if(state.has(stateID)):
@@ -458,3 +465,10 @@ func _on_RandomLeakTimer_timeout():
 		waitTime -= 5.0
 	
 	$RandomLeakTimer.start(RNG.randf_range(waitTime * 0.5, waitTime * 1.5))
+
+func setCockTemporaryHard():
+	var currentCockState = getFinalState("cock")
+	if(currentCockState == "caged"):
+		return
+	
+	setTemporaryState("cock", "")

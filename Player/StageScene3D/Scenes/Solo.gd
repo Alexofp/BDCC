@@ -27,6 +27,9 @@ func playAnimation(animID, _args = {}):
 		doll.setExposedBodyparts(_args["exposedBodyparts"])
 	else:
 		doll.setExposedBodyparts([])
+		
+	if(_args.has("hard") && _args["hard"]):
+		doll.setCockTemporaryHard()
 	
 	if(animID == "sit"):
 		$Chair.visible = true

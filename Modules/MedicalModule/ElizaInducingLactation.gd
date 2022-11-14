@@ -66,7 +66,7 @@ func _run():
 		addButton("Sure", "Allow to be injected with some unknown drug", "sure")
 
 	if(state == "sure"):
-		GM.main.playAnimation(StageScene.Duo, "sit", {npc="eliza", exposedBodyparts=[BodypartSlot.Breasts]})
+		GM.main.playAnimation(StageScene.Duo, "sit", {npc="eliza", hard=true, exposedBodyparts=[BodypartSlot.Breasts]})
 		
 		saynn("You nod softly and offer the doctor your shoulder. She quickly disinfects the area just under your collar and moves the syringe close to it. You feel the doctor's breath through the mask.")
 

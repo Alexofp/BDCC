@@ -74,7 +74,7 @@ func _react(_action: String, _args):
 	if(_action == "doAction"):
 		currentCategory = []
 		sexEngine.doAction(_args[0])
-		processTime(30)
+		processTime(60)
 		updateDomsAndSubs()
 		setState("")
 		return

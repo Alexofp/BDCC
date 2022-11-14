@@ -115,6 +115,7 @@ func _run():
 		
 
 	if(state == "be_fucked"):
+		GM.main.playAnimation(StageScene.Duo, "stand", {npc="risha", npcHard=true, npcExposedBodyparts=[BodypartSlot.Penis]})
 		# (Risha chains and fucks pc)
 
 		# (Risha leaves and Tavi returns)

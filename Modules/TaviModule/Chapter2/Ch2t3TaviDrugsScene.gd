@@ -399,10 +399,10 @@ func _run():
 		removeCharacter("tavi")
 		if(getFlag("TaviModule.ch2DrugsPickedFuta")):
 			addCharacter("taviDemonFuta", ["naked"])
-			GM.main.playAnimation(StageScene.Duo, "kneel", {npc="taviDemonFuta", exposedBodyparts=[BodypartSlot.Penis, BodypartSlot.Vagina, BodypartSlot.Anus, BodypartSlot.Body, BodypartSlot.Breasts]})
+			GM.main.playAnimation(StageScene.Duo, "kneel", {npc="taviDemonFuta", npcHard=true, exposedBodyparts=[BodypartSlot.Penis, BodypartSlot.Vagina, BodypartSlot.Anus, BodypartSlot.Body, BodypartSlot.Breasts]})
 		else:
 			addCharacter("taviDemon", ["naked"])
-			GM.main.playAnimation(StageScene.Duo, "kneel", {npc="taviDemon", exposedBodyparts=[BodypartSlot.Penis, BodypartSlot.Vagina, BodypartSlot.Anus, BodypartSlot.Body, BodypartSlot.Breasts]})
+			GM.main.playAnimation(StageScene.Duo, "kneel", {npc="taviDemon", hard=true, exposedBodyparts=[BodypartSlot.Penis, BodypartSlot.Vagina, BodypartSlot.Anus, BodypartSlot.Body, BodypartSlot.Breasts]})
 		
 		saynn("A few moments later Tavi steps out of the green fire. New Tavi..")
 

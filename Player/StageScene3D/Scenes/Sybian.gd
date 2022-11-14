@@ -24,6 +24,9 @@ func playAnimation(animID, _args = {}):
 	else:
 		doll.setExposedBodyparts([])
 	
+	if(_args.has("hard") && _args["hard"]):
+		doll.setCockTemporaryHard()
+	
 	updateSubAnims()
 	
 	var state_machine = animationTree["parameters/AnimationNodeStateMachine/playback"]

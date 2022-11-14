@@ -6,7 +6,7 @@ func _init():
 func _run():
 	if(state == ""):
 		addCharacter("nova", ["naked"])
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc="nova", npcAction="kneel", npcExposedBodyparts=[BodypartSlot.Penis], exposedBodyparts=[BodypartSlot.Vagina]})
+		GM.main.playAnimation(StageScene.Duo, "stand", {npc="nova", npcHard=true, hard=true, npcAction="kneel", npcExposedBodyparts=[BodypartSlot.Penis], exposedBodyparts=[BodypartSlot.Vagina]})
 		
 	if(state == ""):
 		saynn("[say=pc]Gonna have my fun with you~[/say]")

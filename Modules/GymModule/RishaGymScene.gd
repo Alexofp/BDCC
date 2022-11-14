@@ -8,7 +8,7 @@ func _init():
 func _run():
 	if(state == ""):
 		addCharacter("risha", ["naked"])
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc="risha", npcAction="sit", npcExposedBodyparts=[BodypartSlot.Penis, BodypartSlot.Body]})
+		GM.main.playAnimation(StageScene.Duo, "stand", {npc="risha", npcHard=true, hard=true, npcAction="sit", npcExposedBodyparts=[BodypartSlot.Penis, BodypartSlot.Body]})
 
 	if(state == ""):
 		saynn("It’s pretty late so this area is not that crowded. But, you see somebody that you didn’t expect to see here. Risha, the lynx, is sitting on one of the benches and removing pieces of her armor. You decide to approach her and ask what’s up.")
@@ -365,6 +365,7 @@ func _run():
 		
 
 	if(state == "fuck_risha"):
+		GM.main.playAnimation(StageScene.Duo, "stand", {npc="risha", npcHard=true, hard=true, npcAction="sit", npcExposedBodyparts=[BodypartSlot.Penis, BodypartSlot.Body], exposedBodyparts=[BodypartSlot.Penis]})
 		# (needs cock and strength)
 
 		saynn("[say=pc]I don’t need your credits.[/say]")

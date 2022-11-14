@@ -89,7 +89,7 @@ func _run():
 		addButton("Get on all fours", "Be the good pet for Nova", "get_on_all_fours")
 
 	if(state == "get_on_all_fours"):
-		GM.main.playAnimation(StageScene.Duo, "allfours", {npc="nova", npcAction="stand", exposedBodyparts=[BodypartSlot.Body, BodypartSlot.Vagina, BodypartSlot.Anus, BodypartSlot.Anus, BodypartSlot.Breasts]})
+		GM.main.playAnimation(StageScene.Duo, "allfours", {npc="nova", npcHard=true, npcAction="stand", exposedBodyparts=[BodypartSlot.Body, BodypartSlot.Vagina, BodypartSlot.Anus, BodypartSlot.Anus, BodypartSlot.Breasts]})
 		# (if puppy)
 		if(isPuppy):
 			saynn("You bark and take a little step back before lowering yourself to your knees. Then you bend forward and get on all fours. Nova holds your leash while you begin to crawl around her, swaying your {pc.masc} hips a lot in the process.")
@@ -110,7 +110,7 @@ func _run():
 
 	if(state == "follow"):
 		aimCameraAndSetLocName("yard_northCorridor")
-		GM.main.playAnimation(StageScene.Duo, "crawl", {npc="nova", npcAction="stand", exposedBodyparts=[BodypartSlot.Body, BodypartSlot.Vagina, BodypartSlot.Anus, BodypartSlot.Anus, BodypartSlot.Breasts]})
+		GM.main.playAnimation(StageScene.Duo, "crawl", {npc="nova", npcHard=true, npcAction="stand", exposedBodyparts=[BodypartSlot.Body, BodypartSlot.Vagina, BodypartSlot.Anus, BodypartSlot.Anus, BodypartSlot.Breasts]})
 		
 		saynn("Nova tugs gently on the leash to make you follow her, you feel how it makes your bulky collar dig into the neck so you obey her while staying mostly quiet. Pets can’t speak after all.")
 
@@ -144,7 +144,7 @@ func _run():
 
 	if(state == "follow1"):
 		aimCameraAndSetLocName("yard_eastCorridor")
-		GM.main.playAnimation(StageScene.Duo, "crawl", {npc="nova", npcAction="stand", exposedBodyparts=[BodypartSlot.Body, BodypartSlot.Vagina, BodypartSlot.Anus, BodypartSlot.Anus, BodypartSlot.Breasts]})
+		GM.main.playAnimation(StageScene.Duo, "crawl", {npc="nova", npcHard=true, npcAction="stand", exposedBodyparts=[BodypartSlot.Body, BodypartSlot.Vagina, BodypartSlot.Anus, BodypartSlot.Anus, BodypartSlot.Breasts]})
 		
 		saynn("Two orange inmates sit on one of the benches, a guy and a girl. Nova approaches them and tugs on the leash, bringing you closer too. You feel a little embarrassed, all their gazes are instantly glued to you.")
 
@@ -255,7 +255,7 @@ func _run():
 
 	if(state == "follow2"):
 		aimCameraAndSetLocName("yard_novaspot")
-		GM.main.playAnimation(StageScene.Duo, "crawl", {npc="nova", npcAction="stand", exposedBodyparts=[BodypartSlot.Body, BodypartSlot.Vagina, BodypartSlot.Anus, BodypartSlot.Anus, BodypartSlot.Breasts]})
+		GM.main.playAnimation(StageScene.Duo, "crawl", {npc="nova", npcHard=true, npcAction="stand", exposedBodyparts=[BodypartSlot.Body, BodypartSlot.Vagina, BodypartSlot.Anus, BodypartSlot.Anus, BodypartSlot.Breasts]})
 		
 		saynn("You complete the full circle around the green yard and return to where you started, by the end of it you feel more used to crawling on all fours. Being on a leash makes you happy, you wiggle your butt more and rub your face into Nova’s leg.")
 
@@ -299,7 +299,7 @@ func _run():
 
 	if(state == "oral"):
 		# (needs free mouth)
-		GM.main.playAnimation(StageScene.Duo, "kneel", {npc="nova", npcExposedBodyparts=[BodypartSlot.Penis]})
+		GM.main.playAnimation(StageScene.Duo, "kneel", {npc="nova", npcHard=true, npcExposedBodyparts=[BodypartSlot.Penis]})
 
 		saynn("You crawl up to Nova’s legs and put your paws on her thighs. She gasps as you stick your head under her skirt and press your nose against her bulge.")
 
@@ -384,7 +384,7 @@ func _run():
 
 	if(state == "vaginal"):
 		# (needs pussy)
-		GM.main.playAnimation(StageScene.Duo, "allfours", {npc="nova", npcExposedBodyparts=[BodypartSlot.Penis], exposedBodyparts=[BodypartSlot.Body, BodypartSlot.Vagina, BodypartSlot.Anus, BodypartSlot.Anus, BodypartSlot.Breasts]})
+		GM.main.playAnimation(StageScene.Duo, "allfours", {npc="nova", npcHard=true, npcExposedBodyparts=[BodypartSlot.Penis], exposedBodyparts=[BodypartSlot.Body, BodypartSlot.Vagina, BodypartSlot.Anus, BodypartSlot.Anus, BodypartSlot.Breasts]})
 
 		# (if puppy)
 		if(isPuppy):
@@ -548,7 +548,7 @@ func _run():
 		addButton("Continue", "Time to go", "endthescene")
 		
 	if(state == "anal"):
-		GM.main.playAnimation(StageScene.Duo, "allfours", {npc="nova", npcExposedBodyparts=[BodypartSlot.Penis], exposedBodyparts=[BodypartSlot.Body, BodypartSlot.Vagina, BodypartSlot.Anus, BodypartSlot.Anus, BodypartSlot.Breasts]})
+		GM.main.playAnimation(StageScene.Duo, "allfours", {npc="nova", npcHard=true, npcExposedBodyparts=[BodypartSlot.Penis], exposedBodyparts=[BodypartSlot.Body, BodypartSlot.Vagina, BodypartSlot.Anus, BodypartSlot.Anus, BodypartSlot.Breasts]})
 		# (if puppy)
 		if(isPuppy):
 			saynn("You ruff playfully and crawl around Nova on all fours before stopping before her and turning around so she can see your {pc.masc} butt in full glory. You wiggle it eagerly and spread your rear legs more so she can get a look at your {pc.analStretch} star.")

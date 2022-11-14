@@ -46,7 +46,7 @@ func _run():
 		addButton("Continue", "Time to leave", "endthescene")
 
 	if(state == "humiliate"):
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc="axis", npcAction="kneel", npcExposedBodyparts=[BodypartSlot.Penis]})
+		GM.main.playAnimation(StageScene.Duo, "stand", {npc="axis", npcHard=true, npcAction="kneel", npcExposedBodyparts=[BodypartSlot.Penis]})
 		
 		saynn("As you approach the guy, his growling becomes more audible. You lean down and pick up the cage that he dropped.")
 
@@ -147,7 +147,7 @@ func _run():
 
 	if(state == "breed"):
 		# (needs cock)
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc="axis", npcAction="kneel", npcExposedBodyparts=[BodypartSlot.Penis, BodypartSlot.Anus], exposedBodyparts=[BodypartSlot.Penis]})
+		GM.main.playAnimation(StageScene.Duo, "stand", {npc="axis", npcHard=true, hard=true, npcAction="kneel", npcExposedBodyparts=[BodypartSlot.Penis, BodypartSlot.Anus], exposedBodyparts=[BodypartSlot.Penis]})
 
 		saynn("You feel like even though this ‘alpha’ was quite an unruly sub, he deserves a relief. You expose your {pc.cock} and stand in front of him, waiting silently.")
 
@@ -208,7 +208,7 @@ func _run():
 
 	if(state == "grind_face"):
 		# (needs pussy)
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc="axis", npcAction="kneel", npcExposedBodyparts=[BodypartSlot.Penis, BodypartSlot.Anus], exposedBodyparts=[BodypartSlot.Pussy]})
+		GM.main.playAnimation(StageScene.Duo, "stand", {npc="axis", npcHard=true, hard=true, npcAction="kneel", npcExposedBodyparts=[BodypartSlot.Penis, BodypartSlot.Anus], exposedBodyparts=[BodypartSlot.Pussy]})
 
 		saynn("You stand in front of him and expose your cute {pc.pussyStretch} pussy for him. Then you lean down and scritch the wolf under the chin.")
 

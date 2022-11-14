@@ -215,7 +215,7 @@ func _run():
 		addButton("Continue", "See what happens next", "continue")
 
 	if(state == "continue"):
-		GM.main.playAnimation(StageScene.Duo, "kneel", {npc="stud", npcExposedBodyparts=[BodypartSlot.Penis]})
+		GM.main.playAnimation(StageScene.Duo, "kneel", {npc="stud", npcHard=true, npcExposedBodyparts=[BodypartSlot.Penis]})
 		
 		# (if pussy)
 		if(GM.pc.hasVagina()):

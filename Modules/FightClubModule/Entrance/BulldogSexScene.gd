@@ -6,7 +6,7 @@ func _init():
 func _run():
 	if(state == ""):
 		addCharacter("bulldog")
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc="bulldog", exposedBodyparts=[BodypartSlot.Vagina, BodypartSlot.Anus], npcExposedBodyparts=[BodypartSlot.Penis]})
+		GM.main.playAnimation(StageScene.Duo, "stand", {npc="bulldog", npcHard=true, exposedBodyparts=[BodypartSlot.Vagina, BodypartSlot.Anus], npcExposedBodyparts=[BodypartSlot.Penis]})
 
 	if(state == ""):
 		saynn("Maybe the guy will let you through if you make him feel good. You tilt your head down and slowly close the distance, swaying your {pc.masc} thighs as you do. Your hand reaches for the bulldog’s chest and traces down with a single digit.")

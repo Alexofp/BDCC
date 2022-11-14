@@ -23,7 +23,7 @@ func _run():
 		GM.ES.triggerRun("ArenaFighterPCLost", ["nova"])
 
 	if(state == "get_fucked"):
-		GM.main.playAnimation(StageScene.Duo, "kneel", {npc="nova", exposedBodyparts=[BodypartSlot.Vagina, BodypartSlot.Anus, BodypartSlot.Body]})
+		GM.main.playAnimation(StageScene.Duo, "kneel", {npc="nova", hard=true, exposedBodyparts=[BodypartSlot.Vagina, BodypartSlot.Anus, BodypartSlot.Body]})
 		
 		saynn("[say=pc]I won’t call you anything, do your worst![/say]")
 
@@ -56,7 +56,7 @@ func _run():
 		addButton("Continue", "See what happens next", "continue")
 
 	if(state == "continue"):
-		GM.main.playAnimation(StageScene.Solo, "walk", {exposedBodyparts=[BodypartSlot.Vagina, BodypartSlot.Anus, BodypartSlot.Body]})
+		GM.main.playAnimation(StageScene.Solo, "walk", {exposedBodyparts=[BodypartSlot.Vagina, BodypartSlot.Anus, BodypartSlot.Body], hard=true})
 		
 		saynn("Suddenly everything goes completely silent. No Nova, no crowd, no room ambience. You shake your head but no, your blindfold and earplugs sit very tight. Oh no, you’re in complete isolation! All you feel is the floor underneath and your deep breathing.")
 
