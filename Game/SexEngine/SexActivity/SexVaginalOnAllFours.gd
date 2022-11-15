@@ -345,7 +345,7 @@ func doDomAction(_id, _actionInfo):
 				
 				return {text=text}
 		
-		getSub().cummedOnBy(domID)
+		getSub().cummedOnBy(domID, BodilyFluids.FluidSource.Penis)
 		domInfo.cum()
 		satisfyGoals()
 		state = ""

@@ -174,7 +174,7 @@ func getDomActions():
 				"priority" : 1001,
 			})
 			
-	if(state in ["subabouttocum"] || (subInfo.isReadyToCum() && subInfo.isUnconscious())):
+	if(state in ["subabouttocum"] || (state == "fucking" && subInfo.isReadyToCum() && subInfo.isUnconscious())):
 		actions.append({
 			"id": "letsubcuminside",
 			"score": 1.0,
@@ -301,7 +301,7 @@ func doDomAction(_id, _actionInfo):
 			" {sub.You} [b]{sub.youVerb('cum')} all over {sub.yourself}[/b]! Strings of {sub.yourHis} own "+RNG.pick(["cum", "seed", "semen"])+" land on {sub.yourHis} chest, leaving a mess.",
 		])
 		
-		getSub().cummedOnBy(subID)
+		getSub().cummedOnBy(subID, BodilyFluids.FluidSource.Penis)
 		subInfo.cum()
 		satisfyGoals()
 
@@ -461,7 +461,7 @@ func doSubAction(_id, _actionInfo):
 	if(_id == "warndom"):
 		state = "subabouttocum"
 		var text = RNG.pick([
-			"{sub.You} {sub.youVerb('warn')} {dom.youHim} that {sub.youHe} {sub.youAre} "+RNG.pick(["about to cum", "close", "very close", "want to cum"])+".",
+			"{sub.You} {sub.youVerb('warn')} {dom.youHim} that {sub.youHe} {sub.youAre} "+RNG.pick(["about to cum", "close", "very close"])+".",
 		])
 		domInfo.addAnger(-0.05)
 		return {text = text}

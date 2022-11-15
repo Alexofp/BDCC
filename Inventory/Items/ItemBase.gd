@@ -393,3 +393,6 @@ func shouldBeVisibleOnDoll(_character, _doll):
 
 func onSexEnd():
 	pass
+
+func getAIForceItemWeight():
+	return 1.0

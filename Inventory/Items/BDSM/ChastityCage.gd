@@ -47,3 +47,6 @@ func getForcedOnMessage(isPlayer = true):
 
 func updateDoll(doll: Doll3D):
 	doll.setState("cock", "caged")
+
+func getAIForceItemWeight():
+	return 0.2

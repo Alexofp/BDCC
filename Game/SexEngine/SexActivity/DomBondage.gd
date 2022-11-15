@@ -57,6 +57,8 @@ func getStartActions(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexS
 			continue
 		if(item.getRequiredBodypart() == BodypartSlot.Anus && _subInfo.hasTag(SexActivityTag.AnusPenetrated)):
 			continue
+		if(item.getRequiredBodypart() == BodypartSlot.Penis && _subInfo.hasTag(SexActivityTag.PenisUsed)):
+			continue
 		
 		if(bodypartSlot != null && sub.getFirstItemThatCoversBodypart(bodypartSlot) != null):
 			continue
@@ -81,7 +83,7 @@ func getStartActions(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexS
 				actions.append({
 					name = item.getVisibleName(),
 					args = ["npc", item.id],
-					score = getActivityScore(_sexEngine, _domInfo, _subInfo),
+					score = getActivityScore(_sexEngine, _domInfo, _subInfo) * item.getAIForceItemWeight(),
 					category = getCategory(),
 					desc = "Restraint level: "+str(restraintData.getLevel()) + "\n" + item.getCombatDescription(),
 				})
