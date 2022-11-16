@@ -7,6 +7,7 @@ const AnalSexGiving = "AnalSexGiving"
 const AnalSexReceiving = "AnalSexReceiving"
 const OralSexGiving = "OralSexGiving"
 const OralSexReceiving = "OralSexReceiving"
+const Tribadism = "Tribadism"
 
 const Bodywritings = "Bodywritings"
 
