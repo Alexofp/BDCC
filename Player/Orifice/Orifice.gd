@@ -162,7 +162,10 @@ func addFluid(fluidType, amount: float, charID = null, virility = -100.0):
 	contents.append([fluidType, amount, charID, virility])
 	dirtyFlag = true
 
-func transferTo(otherOrifice: Orifice, fraction = 0.5):
+func transferTo(otherOrifice: Orifice, fraction = 0.5, minAmount = 0.0):
+	if(minAmount > 0.0 && getFluidAmount() > 0.0):
+		fraction = max(fraction, min(1.0, minAmount/getFluidAmount()))
+	
 	var result = false
 	for contentData in contents:
 		var amountToTransfer = contentData[1] * fraction

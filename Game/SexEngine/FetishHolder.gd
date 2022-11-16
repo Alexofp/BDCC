@@ -47,11 +47,11 @@ func getGoals(_sexEngine, _sub):
 		var fetishInterest = fetishMap[fetishID]
 		var fetishInterestValue = FetishInterest.getScore(fetishInterest)
 		
-		if(fetishInterestValue > 0.0):
+		if(fetishInterestValue >= 0.0):
 			var fetish:FetishBase = GlobalRegistry.getFetish(fetishID)
 			var goals = fetish.getGoals(_sexEngine, getCharacter(), _sub)
 			
 			for goal in goals:
-				result.append([goal, fetishInterestValue])
+				result.append([goal, max(0.1, fetishInterestValue)])
 
 	return result

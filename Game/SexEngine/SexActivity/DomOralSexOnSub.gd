@@ -152,6 +152,13 @@ func processTurn():
 			"{dom.You} {dom.youAre} dragging {dom.yourHis} tongue over {sub.yourHis} "+RNG.pick(["pussy lips", "kitty", "slit", "petals", "folds", "clit and pussy"])+ throughTheClothing +".",
 		])
 		
+		if(clothingItem == null):
+			if(getSub().hasEffect(StatusEffect.HasCumInsideVagina)):
+				if(RNG.chance(30)):
+					text += RNG.pick([ 
+						" "+Util.capitalizeFirstLetter(getSub().getBodypartContentsStringList(BodypartSlot.Vagina))+" "+RNG.pick(["oozes", "leaks"])+" out of {sub.yourHis} "+RNG.pick(["", "used ", "stuffed "])+RNG.pick(["pussy", "slit", "kitty"])+".",
+					])
+		
 		if(subInfo.isReadyToCum()):
 			text += RNG.pick([
 				" {sub.YouHe} {sub.youAre} about to cum!",
@@ -178,6 +185,13 @@ func processTurn():
 			"{dom.You} {dom.youVerb('tongue-fuck')} {sub.yourHis} "+RNG.pick(["pussy", "slit", "kitty"])+"!",
 			"{dom.You} {dom.youVerb('slide')} {dom.yourHis} tongue inside {sub.yourHis} "+RNG.pick(["pussy", "slit", "kitty"])+", fucking it!",
 		])
+		
+		if(getSub().hasEffect(StatusEffect.HasCumInsideVagina) && OPTIONS.isContentEnabled(ContentType.CumStealing)):
+			if(RNG.chance(20)):
+				if(getSub().bodypartTransferFluidsTo(BodypartSlot.Vagina, domID, BodypartSlot.Head, 0.1, 20.0)):
+					text += RNG.pick([ 
+						" "+Util.capitalizeFirstLetter(getSub().getBodypartContentsStringList(BodypartSlot.Vagina))+" lands on {dom.yourHis} tongue, leaking out of {sub.yourHis} "+RNG.pick(["", "used ", "stuffed "])+RNG.pick(["pussy", "slit", "kitty"])+" and [b]{dom.you} {dom.youVerb('swallow')} it[/b].",
+					])
 		
 		if(subInfo.isReadyToCum()):
 			text += RNG.pick([
@@ -247,6 +261,15 @@ func getDomActions():
 				"desc": "Fuck that pussy with your tongue",
 			})
 
+	if(state in ["licking", "tonguefucking"]):
+		if(getDom().hasEffect(StatusEffect.HasCumInsideMouth) && getSub().getFirstItemThatCoversBodypart(BodypartSlot.Vagina) == null && !getDom().isOralBlocked() && OPTIONS.isContentEnabled(ContentType.CumStealing)):
+			actions.append({
+				"id": "spitcumintosubspussy",
+				"score": 0.01 + domInfo.fetishScore({Fetish.Breeding: 0.1}),
+				"name": "Spit cum into pussy",
+				"desc": "Force some cum into their slit",
+			})
+
 	if(state in ["subabouttocum", "subabouttocumcock"] || ((state in ["licking", "tonguefucking", "lickingcock", "blowjob"]) && subInfo.isReadyToCum() && subInfo.isUnconscious())):
 		actions.append({
 			"id": "letsubcuminside",
@@ -280,6 +303,15 @@ func getDomActions():
 	return actions
 
 func doDomAction(_id, _actionInfo):
+	if(_id == "spitcumintosubspussy"):
+		var mixtureText = getDom().getBodypartContentsStringList(BodypartSlot.Head)
+		var text = RNG.pick([
+			"{dom.You} {dom.youVerb('press')} {dom.yourHis} lips against {sub.yourHis} "+RNG.pick(["pussy", "slit"])+" and [b]{dom.youVerb('spit')} "+mixtureText+" into it[/b]!",
+		])
+		getDom().bodypartTransferFluidsTo(BodypartSlot.Head, subID, BodypartSlot.Vagina, 0.2, 20.0)
+		affectSub(subInfo.fetishScore({Fetish.BeingBred:1.0}), 0.1, -0.1, -0.05)
+		return {text = text}
+	
 	if(_id == "makesubcumavoidmess"):
 		satisfyGoals()
 		var text = ""

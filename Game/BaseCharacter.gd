@@ -1544,3 +1544,65 @@ func isWearingChastityCage() -> bool:
 	if(item.hasTag(ItemTag.ChastityCage)):
 		return true
 	return false
+
+#example return values: some cum | a mixture of cum and girlcum | a mixture of cum, black goo and girlcum
+func getBodypartContentsStringList(bodypartID):
+	if(!hasBodypart(bodypartID)):
+		return "some cum"
+	var bodypart = getBodypart(bodypartID)
+	var orifice = bodypart.getOrifice()
+	if(orifice == null):
+		return "some cum"
+	
+	var messFluids = orifice.getFluidList()
+	if(messFluids == null || messFluids.size() == 0):
+		return "some cum"
+	
+	var processedFluidNames = []
+	for fluidID in messFluids:
+		processedFluidNames.append(BodilyFluids.FluidType.getName(fluidID))
+	
+	if(processedFluidNames.size() == 1):
+		return "some "+processedFluidNames[0]
+	
+	return "a mixture of "+Util.humanReadableList(processedFluidNames)
+
+func bodypartTransferFluidsTo(bodypartID, otherCharacterID, otherBodypartID, fraction = 0.5, minAmount = 0.0):
+	if(!hasBodypart(bodypartID)):
+		return false
+	var bodypart = getBodypart(bodypartID)
+	var orifice = bodypart.getOrifice()
+	if(orifice == null):
+		return false
+	
+	var otherCharacter = GlobalRegistry.getCharacter(otherCharacterID)
+	if(otherCharacter == null):
+		return false
+	if(!otherCharacter.hasBodypart(otherBodypartID)):
+		return false
+	var otherBodypart = otherCharacter.getBodypart(otherBodypartID)
+	var otherOrifice = otherBodypart.getOrifice()
+	if(otherOrifice == null):
+		return false
+	
+	return orifice.transferTo(otherOrifice, fraction, minAmount)
+
+func bodypartShareFluidsWith(bodypartID, otherCharacterID, otherBodypartID, fraction = 0.5):
+	if(!hasBodypart(bodypartID)):
+		return false
+	var bodypart = getBodypart(bodypartID)
+	var orifice = bodypart.getOrifice()
+	if(orifice == null):
+		return false
+	
+	var otherCharacter = GlobalRegistry.getCharacter(otherCharacterID)
+	if(otherCharacter == null):
+		return false
+	if(!otherCharacter.hasBodypart(otherBodypartID)):
+		return false
+	var otherBodypart = otherCharacter.getBodypart(otherBodypartID)
+	var otherOrifice = otherBodypart.getOrifice()
+	if(otherOrifice == null):
+		return false
+	
+	return orifice.shareFluids(otherOrifice, fraction)

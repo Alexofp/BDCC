@@ -194,6 +194,13 @@ func processTurn():
 				"{dom.You} {dom.youVerb('use')} {sub.yourHis} tongue on {dom.yourHis} "+RNG.pick(["pussy", "slit", "kitty"])+" for {dom.yourHis} pleasure.",
 			])
 		
+		if(clothingItem == null):
+			if(getDom().hasEffect(StatusEffect.HasCumInsideVagina)):
+				if(RNG.chance(30)):
+					text += RNG.pick([ 
+						" "+Util.capitalizeFirstLetter(getDom().getBodypartContentsStringList(BodypartSlot.Vagina))+" "+RNG.pick(["oozes", "leaks"])+" out of {dom.yourHis} "+RNG.pick(["", "used ", "stuffed "])+RNG.pick(["pussy", "slit", "kitty"])+".",
+					])
+		
 		if(domInfo.isReadyToCum()):
 			text += RNG.pick([
 				" {dom.YouHe} {dom.youAre} about to cum!",
@@ -223,6 +230,13 @@ func processTurn():
 			"{dom.You} {dom.youAre} grinding {dom.yourHis} "+RNG.pick(["pussy", "pussy slit", "kitty", "petals", "slit", "folds"])+" over {sub.yourHis} face"+ throughTheClothing +".",
 			"{dom.You} {dom.youVerb('use')} {sub.yourHis} face for {dom.yourHis} pleasure by grinding it!",
 		])
+		
+		if(clothingItem == null):
+			if(getDom().hasEffect(StatusEffect.HasCumInsideVagina)):
+				if(RNG.chance(30)):
+					text += RNG.pick([ 
+						" "+Util.capitalizeFirstLetter(getDom().getBodypartContentsStringList(BodypartSlot.Vagina))+" gets spread across {sub.yourHis} face.",
+					])
 		
 		if(domInfo.isReadyToCum()):
 			text += RNG.pick([
@@ -771,12 +785,28 @@ func doSubAction(_id, _actionInfo):
 		var text = RNG.pick([
 			"{sub.You} {sub.youVerb('use')} {sub.yourHis} tongue to "+RNG.pick(["prod {dom.yourHis} pussy entrance and lap up all the juices", "prod at the wet pussy entrance", "lap at the wet pussy hole"])+".",
 		])
+		
+		if(getDom().hasEffect(StatusEffect.HasCumInsideVagina) && OPTIONS.isContentEnabled(ContentType.CumStealing)):
+			if(RNG.chance(40)):
+				if(getDom().bodypartTransferFluidsTo(BodypartSlot.Vagina, subID, BodypartSlot.Head, 0.1, 20.0)):
+					text += RNG.pick([ 
+						" {sub.YouHe} {sub.youVerb('get')} "+Util.capitalizeFirstLetter(getDom().getBodypartContentsStringList(BodypartSlot.Vagina))+" onto {sub.yourHis} tongue while eating {dom.yourHis} "+RNG.pick(["", "used ", "stuffed "])+RNG.pick(["pussy", "slit", "kitty"])+" out. [b]{sub.You} {sub.youVerb('swallow')} it all[/b].",
+					])
+		
 		domInfo.addArousalSex(0.05)
 		return {text = text}
 	if(_id == "grindtongue"):
 		var text = RNG.pick([
 			"{sub.You} {sub.youVerb('stick')} {sub.yourHis} tongue out and {sub.youVerb('catch', 'catches')} some "+RNG.pick(["arousal", "juices"])+RNG.pick([" from that wet pussy","", " onto it"," while {sub.yourHis} face is being grinded"])+".",
 		])
+		
+		if(getDom().hasEffect(StatusEffect.HasCumInsideVagina) && OPTIONS.isContentEnabled(ContentType.CumStealing)):
+			if(RNG.chance(50)):
+				if(getDom().bodypartTransferFluidsTo(BodypartSlot.Vagina, subID, BodypartSlot.Head, 0.1, 20.0)):
+					text += RNG.pick([ 
+						" "+Util.capitalizeFirstLetter(getDom().getBodypartContentsStringList(BodypartSlot.Vagina))+" "+RNG.pick(["leaks", "oozes"])+" onto {sub.yourHis} tongue out of {dom.yourHis} "+RNG.pick(["", "used ", "stuffed "])+RNG.pick(["pussy", "slit", "kitty"])+". [b]{sub.You} {sub.youVerb('swallow')} it all[/b].",
+					])
+		
 		domInfo.addArousalSex(0.05)
 		return {text = text}
 	if(_id == "bite"):
