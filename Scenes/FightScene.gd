@@ -187,7 +187,7 @@ func _run():
 				var pcAttack:Attack = GlobalRegistry.getAttack(lastPlayerAttackData["attackID"])
 				
 				if(pcAttack.canUse(GM.pc, enemyCharacter, lastPlayerAttackData)):
-					addButtonWithChecks("Double down", "Spend 30 stamina to do the same attack that you did a second time before the enemy attacks you", "dodge_doubledown", [], [ButtonChecks.HasStamina])
+					addButtonWithChecks("Double down", "Spend 10 stamina to do the same attack that you did a second time before the enemy attacks you", "dodge_doubledown", [], [ButtonChecks.HasStamina])
 				else:
 					addDisabledButton("Double down", "You can't double down on this attack")
 			else:
@@ -359,7 +359,7 @@ func _react(_action: String, _args):
 			GM.pc.addStamina(-15)
 		if(_action == "dodge_doubledown"):
 			whatPlayerDid = doPlayerAttack(lastPlayerAttackData)
-			GM.pc.addStamina(-30)
+			GM.pc.addStamina(-10)
 		
 			var won = checkEnd()
 			if(won == "lost"):
