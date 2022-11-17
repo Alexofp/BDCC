@@ -12,6 +12,8 @@ const Stunned = "Stunned"
 # Sex engine effects
 const SexEngineLikes = "SexEngineLikes"
 const SexEnginePersonality = "SexEnginePersonality"
+const SexHeatDrug = "SexHeatDrug"
+const SexAnaphrodisiacDrug = "SexAnaphrodisiacDrug"
 
 # BDSM effects
 const ArmsBound = "ArmsBound"

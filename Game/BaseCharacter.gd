@@ -40,6 +40,11 @@ var fightingState = "" # dodge, block, defocus
 # pregnancy stuff
 var menstrualCycle: MenstrualCycle
 
+var timedBuffs: Array = []
+var timedBuffsDurationSeconds: int = 0
+var timedBuffsTurns: Array = []
+var timedBuffsDurationTurns: int = 0
+
 func _init():
 	name = "BaseCharacter"
 
@@ -214,6 +219,11 @@ func updateEffectPanel(panel: StatusEffectsPanel):
 		panel.addBattleEffect(effect.getIconColor(), effect.getEffectName(), effect.getVisisbleDescription(), effect.getEffectImage())
 
 func processBattleTurn():
+	if(timedBuffsDurationTurns > 0):
+		timedBuffsDurationTurns -= 1
+		if(timedBuffsDurationTurns <= 0):
+			timedBuffsTurns.clear()
+	
 	for effectID in statusEffects.keys():
 		var effect = statusEffects[effectID]
 		effect.processBattleTurn()
@@ -227,6 +237,9 @@ func beforeFightStarted():
 
 func afterFightEnded():
 	print(getName()+" my fight has ended")
+	
+	timedBuffsTurns.clear()
+	timedBuffsDurationTurns = 0
 	
 	for effectID in statusEffects.keys():
 		var effect = statusEffects[effectID]
@@ -1487,6 +1500,11 @@ func afterSexEnded(sexInfo):
 	consciousness = 1.0
 	arousal = 0.0
 		
+	for effectID in statusEffects.keys():
+		var effect = statusEffects[effectID]
+		if(effect.isSexEngineOnly):
+			removeEffect(effectID)
+		
 	var items = getInventory().getAllEquippedItems()
 	for itemSlot in items:
 		var item = items[itemSlot]
@@ -1606,3 +1624,69 @@ func bodypartShareFluidsWith(bodypartID, otherCharacterID, otherBodypartID, frac
 		return false
 	
 	return orifice.shareFluids(otherOrifice, fraction)
+
+func processSexTurn():
+	for effectID in statusEffects.keys():
+		var effect = statusEffects[effectID]
+		effect.processSexTurn()
+		
+	buffsHolder.calculateBuffs()
+
+func addTimedBuffs(buffs: Array, seconds):
+	for newbuff in buffs:
+		var foundBuff = false
+		for oldbuff in timedBuffs:
+			if(newbuff.id == oldbuff.id):
+				oldbuff.combine(newbuff)
+				foundBuff = true
+				break
+		if(!foundBuff):
+			timedBuffs.append(newbuff)
+	
+	if(seconds > timedBuffsDurationSeconds):
+		timedBuffsDurationSeconds = seconds
+	updateNonBattleEffects()
+
+func addTimedBuffsTurns(buffs: Array, turns):
+	if(!GM.main.supportsBattleTurns()):
+		return
+	
+	for newbuff in buffs:
+		var foundBuff = false
+		for oldbuff in timedBuffsTurns:
+			if(newbuff.id == oldbuff.id):
+				oldbuff.combine(newbuff)
+				foundBuff = true
+				break
+		if(!foundBuff):
+			timedBuffsTurns.append(newbuff)
+	
+	if(turns > timedBuffsDurationTurns):
+		timedBuffsDurationTurns = turns
+	updateNonBattleEffects()
+
+func updateNonBattleEffects():
+	pass
+
+func saveBuffsData(buffs):
+	var data = []
+	
+	for buff in buffs:
+		var buffData = {
+			"id": buff.id,
+			"buffdata": buff.saveData(),
+		}
+		data.append(buffData)
+	return data
+
+func loadBuffsData(data):
+	var result = []
+	
+	for buffFullData in data:
+		var id = SAVE.loadVar(buffFullData, "id", "error")
+		var buffdata = SAVE.loadVar(buffFullData, "buffdata", {})
+		
+		var buff: BuffBase = GlobalRegistry.createBuff(id)
+		buff.loadData(buffdata)
+		result.append(buff)
+	return result

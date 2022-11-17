@@ -396,3 +396,8 @@ func onSexEnd():
 
 func getAIForceItemWeight():
 	return 1.0
+
+func useInSex(_receiver):
+	return {
+		text = "something something",
+	}

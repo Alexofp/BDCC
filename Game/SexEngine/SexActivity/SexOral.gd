@@ -359,7 +359,7 @@ func doDomAction(_id, _actionInfo):
 		if(domInfo.isAngry()):
 			text = RNG.pick([
 				text,
-				"{dom.You} "+RNG.pick(["{dom.youVerb('cocksmack', 'cockslap', 'cockwhip')}"])+" {sub.yourHis} cheek with {dom.yourHis} "+RNG.pick(["dick", "member", "prick"])+".",
+				"{dom.You} "+RNG.pick(["{dom.youVerb('cocksmack')}", "{dom.youVerb('cockslap')}", "{dom.youVerb('cockwhip')}"])+" {sub.yourHis} cheek with {dom.yourHis} "+RNG.pick(["dick", "member", "prick"])+".",
 			])
 		
 		domInfo.addLust(10.0 + domInfo.fetishScore({Fetish.OralSexReceiving: 5.0}))

@@ -32,8 +32,6 @@ func canStartActivity(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: Sex
 		return false
 	if(usedBodypart == BodypartSlot.Anus && !_subInfo.getChar().hasReachableAnus()):
 		return false
-	if(_domInfo.getChar().getFirstItemThatCoversBodypart(BodypartSlot.Penis) != null):
-		return false
 	
 	return .canStartActivity(_sexEngine, _domInfo, _subInfo)
 
@@ -147,22 +145,16 @@ func getDomActions():
 		actions.append({
 			"id": "rub",
 			"score": 1.0,
-			"name": RNG.pick(["Rub", "Tease"]),
+			"name": RNG.pick(["Rub"]),
 			"desc": "Rub your dick against their "+RNG.pick(usedBodypartNames),
 		})
-		if(domInfo.isReadyToPenetrate() && subInfo.getChar().getFirstItemThatCoversBodypart(usedBodypart) == null):
+		if(domInfo.isReadyToPenetrate() && subInfo.getChar().getFirstItemThatCoversBodypart(usedBodypart) == null && domInfo.getChar().getFirstItemThatCoversBodypart(BodypartSlot.Penis) == null):
 			actions.append({
 				"id": "insert",
 				"score": 1.0,
 				"name": RNG.pick(["Insert", "Penetrate"]),
 				"desc": "Try to insert your cock into their "+RNG.pick(usedBodypartNames),
 			})
-		actions.append({
-			"id": "stop",
-			"score": getStopScore(),
-			"name": RNG.pick(["Stop rubbing"]),
-			"desc": "Stop fucking",
-		})
 		if(subInfo.getChar().hasBodypart(otherHoleBodypart) && !getSexEngine().hasTag(subID, otherHoleTag)):
 			actions.append({
 				"id": "switchhole",
@@ -170,6 +162,12 @@ func getDomActions():
 				"name": RNG.pick(["Switch hole"]),
 				"desc": "Switch to the sub's "+RNG.pick(otherHoleNames),
 			})
+		actions.append({
+			"id": "stop",
+			"score": getStopScore(),
+			"name": RNG.pick(["Stop fuck"]),
+			"desc": "Stop fucking",
+		})
 	if(state in ["fucking"]):
 		if(domInfo.isReadyToCum() && isHandlingDomOrgasms()):
 			var condomScore = 0.0
@@ -373,7 +371,7 @@ func doDomAction(_id, _actionInfo):
 	
 	if(_id == "stop"):
 		endActivity()
-		return {text = "{dom.You} {dom.youVerb('stop')} the fuck"}
+		return {text = "{dom.You} {dom.youVerb('stop')} the fuck."}
 	
 
 func getSubActions():
@@ -392,7 +390,7 @@ func getSubActions():
 				"desc": "Resist the attempts",
 				"chance": getSubResistChance(30.0, 25.0),
 			})
-		if(subInfo.getChar().getFirstItemThatCoversBodypart(usedBodypart) == null):
+		if(subInfo.getChar().getFirstItemThatCoversBodypart(usedBodypart) == null && getDom().getFirstItemThatCoversBodypart(BodypartSlot.Penis) == null && domInfo.isReadyToPenetrate()):
 			actions.append({
 					"id": "envelop",
 					"score": subFetishScore({fetishReceiving: 1.0}),

@@ -3,6 +3,7 @@ class_name StatusEffectBase
 
 var id = "badstatuseffect"
 var isBattleOnly = false
+var isSexEngineOnly = false
 var character
 var turns = -1
 
@@ -25,6 +26,9 @@ func setCharacter(c):
 	character = c
 	
 func processBattleTurn():
+	pass
+
+func processSexTurn():
 	pass
 	
 func processTime(_secondsPassed: int):

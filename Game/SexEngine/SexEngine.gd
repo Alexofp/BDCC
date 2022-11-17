@@ -359,9 +359,11 @@ func processTurn():
 					activities.remove(i)
 			continue
 			
+		domInfo.getChar().processSexTurn()
 		domInfo.processTurn()
 	for subID in subs:
 		var subInfo = subs[subID]
+		subInfo.getChar().processSexTurn()
 		subInfo.processTurn()
 	
 	for activity in activities:

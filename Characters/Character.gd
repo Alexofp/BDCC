@@ -91,6 +91,11 @@ func saveData():
 	data["lustInterests"] = lustInterests.saveData()
 	if(menstrualCycle != null):
 		data["menstrualCycle"] = menstrualCycle.saveData()
+
+	data["timedBuffs"] = saveBuffsData(timedBuffs)
+	data["timedBuffsDurationSeconds"] = timedBuffsDurationSeconds
+	data["timedBuffsTurns"] = saveBuffsData(timedBuffsTurns)
+	data["timedBuffsDurationTurns"] = timedBuffsDurationTurns
 	
 	return data
 
@@ -122,6 +127,11 @@ func loadData(data):
 
 	if(menstrualCycle != null && data.has("menstrualCycle")):
 		menstrualCycle.loadData(SAVE.loadVar(data, "menstrualCycle", {}))
+
+	timedBuffs = loadBuffsData(SAVE.loadVar(data, "timedBuffs", []))
+	timedBuffsDurationSeconds = SAVE.loadVar(data, "timedBuffsDurationSeconds", 0)
+	timedBuffsTurns = loadBuffsData(SAVE.loadVar(data, "timedBuffsTurns", []))
+	timedBuffsDurationTurns = SAVE.loadVar(data, "timedBuffsDurationTurns", 0)
 
 func getArmor(_damageType):
 	var calculatedArmor = .getArmor(_damageType)
@@ -157,6 +167,11 @@ func resetEquipment():
 	createEquipment()
 
 func processTime(_secondsPassed):
+	if(timedBuffsDurationSeconds > 0):
+		timedBuffsDurationSeconds -= _secondsPassed
+		if(timedBuffsDurationSeconds <= 0):
+			timedBuffs.clear()
+	
 	for bodypart in processingBodyparts:
 		if(bodypart == null || !is_instance_valid(bodypart)):
 			continue
@@ -171,6 +186,16 @@ func hoursPassed(_howmuch):
 			bodypart.hoursPassed(_howmuch)
 
 func updateNonBattleEffects():
+	if(timedBuffs.size() > 0):
+		addEffect(StatusEffect.TimedEffects)
+	else:
+		removeEffect(StatusEffect.TimedEffects)
+		
+	if(timedBuffsTurns.size() > 0):
+		addEffect(StatusEffect.TimedEffectsTurns)
+	else:
+		removeEffect(StatusEffect.TimedEffectsTurns)
+	
 	if(hasBoundArms()):
 		addEffect(StatusEffect.ArmsBound)
 	else:

@@ -23,10 +23,6 @@ var bodyMessiness = 0
 # Intoxication stuff
 var intoxication: float = 0.0
 var intoxicationTolerance: float = 0.0
-var timedBuffs: Array = []
-var timedBuffsDurationSeconds: int = 0
-var timedBuffsTurns: Array = []
-var timedBuffsDurationTurns: int = 0
 
 #
 
@@ -281,11 +277,6 @@ func processBattleTurn():
 	.processBattleTurn()
 	updateNonBattleEffects()
 	skillsHolder.giveSkillExperienceBattleTurn()
-	
-	if(timedBuffsDurationTurns > 0):
-		timedBuffsDurationTurns -= 1
-		if(timedBuffsDurationTurns <= 0):
-			timedBuffsTurns.clear()
 
 func beforeFightStarted():
 	.beforeFightStarted()
@@ -294,9 +285,6 @@ func beforeFightStarted():
 
 func afterFightEnded():
 	.afterFightEnded()
-	
-	timedBuffsTurns.clear()
-	timedBuffsDurationTurns = 0
 	
 	if(lustCombatState != null):
 		lustCombatState.exitedBattle()
@@ -537,28 +525,7 @@ func checkLocation():
 		Log.printerr("Player's location '"+str(location)+"' doesn't exists, reseting them to their cell")
 		location = getCellLocation()
 
-func saveBuffsData(buffs):
-	var data = []
-	
-	for buff in buffs:
-		var buffData = {
-			"id": buff.id,
-			"buffdata": buff.saveData(),
-		}
-		data.append(buffData)
-	return data
 
-func loadBuffsData(data):
-	var result = []
-	
-	for buffFullData in data:
-		var id = SAVE.loadVar(buffFullData, "id", "error")
-		var buffdata = SAVE.loadVar(buffFullData, "buffdata", {})
-		
-		var buff: BuffBase = GlobalRegistry.createBuff(id)
-		buff.loadData(buffdata)
-		result.append(buff)
-	return result
 		
 
 func getFightState(_battleName):
@@ -915,39 +882,6 @@ func canIntoxicateMore(_howmuch: float):
 		return false
 
 	return true
-
-func addTimedBuffs(buffs: Array, seconds):
-	for newbuff in buffs:
-		var foundBuff = false
-		for oldbuff in timedBuffs:
-			if(newbuff.id == oldbuff.id):
-				oldbuff.combine(newbuff)
-				foundBuff = true
-				break
-		if(!foundBuff):
-			timedBuffs.append(newbuff)
-	
-	if(seconds > timedBuffsDurationSeconds):
-		timedBuffsDurationSeconds = seconds
-	updateNonBattleEffects()
-
-func addTimedBuffsTurns(buffs: Array, turns):
-	if(!GM.main.supportsBattleTurns()):
-		return
-	
-	for newbuff in buffs:
-		var foundBuff = false
-		for oldbuff in timedBuffsTurns:
-			if(newbuff.id == oldbuff.id):
-				oldbuff.combine(newbuff)
-				foundBuff = true
-				break
-		if(!foundBuff):
-			timedBuffsTurns.append(newbuff)
-	
-	if(turns > timedBuffsDurationTurns):
-		timedBuffsDurationTurns = turns
-	updateNonBattleEffects()
 
 func hasCondoms():
 	return getInventory().getItemsWithTag(ItemTag.Condom).size() > 0

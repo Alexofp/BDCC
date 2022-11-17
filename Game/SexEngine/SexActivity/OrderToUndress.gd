@@ -71,6 +71,7 @@ func checkRemoved():
 func processTurn():
 	if(state == ""):
 		if(checkRemoved()):
+			domInfo.addAnger(-0.1)
 			endActivity()
 			return {
 				text = "{dom.You} {dom.youVerb('nod')}.",

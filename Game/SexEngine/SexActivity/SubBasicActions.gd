@@ -24,7 +24,7 @@ func getStartActions(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexS
 			args = ["tease"],
 			score = _subInfo.getComplyScore() * _subInfo.personalityScore({PersonalityStat.Subby: 0.2, PersonalityStat.Brat: 0.1, PersonalityStat.Impatient: 0.1}),
 			category = getCategory(),
-			#chance = getApologySuccessChance(_domInfo),
+			#chance = getApologySuccessChance(_domInfo, _subInfo),
 		})
 		
 	var resistScore = _subInfo.getResistScore() * (0.15 + _subInfo.personalityScore({PersonalityStat.Subby: -0.1, PersonalityStat.Mean: 0.1, PersonalityStat.Coward: -0.05}))
@@ -37,7 +37,7 @@ func getStartActions(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexS
 				args = ["punch"],
 				score = resistScore,
 				category = getCategory(),
-				#chance = getApologySuccessChance(_domInfo),
+				#chance = getApologySuccessChance(_domInfo, _subInfo),
 			})
 		elif(!_subInfo.getChar().hasBoundLegs()):
 			actions.append({
@@ -46,7 +46,7 @@ func getStartActions(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexS
 				args = ["kick"],
 				score = resistScore/1.5,
 				category = getCategory(),
-				#chance = getApologySuccessChance(_domInfo),
+				#chance = getApologySuccessChance(_domInfo, _subInfo),
 			})
 	
 	if(sub.getInventory().hasRemovableRestraints() && sub.getStamina() > 0):
@@ -65,7 +65,7 @@ func getStartActions(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexS
 			args = ["apologize"],
 			score = _subInfo.personalityScore({PersonalityStat.Coward: 0.2, PersonalityStat.Brat: -0.1, PersonalityStat.Subby: 0.2}),
 			category = getCategory(),
-			chance = getApologySuccessChance(_domInfo),
+			chance = getApologySuccessChance(_domInfo, _subInfo),
 		})
 	
 	return actions
@@ -82,8 +82,11 @@ func getDomTags():
 func getSubTags():
 	return []
 
-func getApologySuccessChance(_domInfo):
-	return clamp(90.0 - _domInfo.personalityScore({PersonalityStat.Mean: 1.0}) * 30.0, 5, 100)
+func getApologySuccessChance(_domInfo, _subInfo):
+	var theChance = 90.0 - _domInfo.personalityScore({PersonalityStat.Mean: 1.0}) * 20.0
+	if(_subInfo.getChar().isGagged()):
+		theChance *= 0.5
+	return clamp(theChance, 5, 100)
 
 func startActivity(_args):
 	state = ""
@@ -148,12 +151,13 @@ func startActivity(_args):
 			"{sub.You} {sub.youVerb('try', 'tries')} to apologize.",
 			"{sub.You} {sub.youVerb('attempt')} to apologize for {sub.yourHis} actions.",
 		])
-		if(!RNG.chance(getApologySuccessChance(domInfo))):
-			domInfo.addAnger(0.1)
-			text += RNG.pick([
-				" That only made {dom.youHim} more angry.",
-				" That only made {dom.youHim} more eager for violence.",
-			])
+		if(!RNG.chance(getApologySuccessChance(domInfo, subInfo))):
+			if(RNG.chance(30)):
+				domInfo.addAnger(0.1)
+				text += RNG.pick([
+					" That only made {dom.youHim} more angry.",
+					" That only made {dom.youHim} more eager for violence.",
+				])
 		else:
 			domInfo.addAnger(-0.3)
 		

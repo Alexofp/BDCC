@@ -97,6 +97,14 @@ func goalsScore(thegoals:Dictionary, theSubID):
 	
 	return result
 
+func goalsScoreMax(thegoals:Dictionary, theSubID):
+	var result = 0.0
+	for goalInfo in goals:
+		if(thegoals.has(goalInfo[0]) && goalInfo[1] == theSubID):
+			result = max(result, thegoals[goalInfo[0]])
+	
+	return result
+
 func getAverageAnger() -> float:
 	return angerFull / float(Util.maxi(1, tick))
 

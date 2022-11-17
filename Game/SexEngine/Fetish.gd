@@ -15,6 +15,7 @@ const Masochism = "Masochism"
 const Sadism = "Sadism"
 
 const UnconsciousSex = "UnconsciousSex"
+const DrugUse = "DrugUse"
 
 const Breeding = "Breeding"
 const BeingBred = "BeingBred"

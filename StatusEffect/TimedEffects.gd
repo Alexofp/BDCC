@@ -17,9 +17,6 @@ func getEffectName():
 	return "Timed effects"
 
 func getEffectDesc():
-	if(!character.isPlayer()):
-		return "Huh bad"
-	
 	var time = character.timedBuffsDurationSeconds
 
 	return "For the next "+Util.getTimeStringHumanReadable(time)+":"
