@@ -13,10 +13,10 @@ func _initScene(_args = []):
 	
 	var top = _args[0]
 	
-	sexEngine.initPeople(top, "pc")
+	#sexEngine.initPeople(top, "pc")
 	#sexEngine.initPeople(top, "rahi")
 	
-	#sexEngine.initPeople("pc", top)
+	sexEngine.initPeople("pc", top)
 	#sexEngine.initPeople(top, "pc")
 	#sexEngine.initPeople(top, "rahi")
 	#sexEngine.initPeople("alexrynard", "rahi")
@@ -67,10 +67,28 @@ func _run():
 			
 			#addButton("Process", "Process", "processTurn")
 			
-		addButtonAt(14, "QUIT", "Close the scene", "endthescene")
+		if(sexEngine.hasSexEnded()):
+			addButton("LEAVE", "The sex has ended", "endthescene")
+		else:
+			if(sexEngine.isDom("pc")):
+				addButtonAt(14, "END SEX", "Enough fun for now", "stopsex")
+			else:
+				addButtonAt(14, "QUICK SEX", "Simulate the sex for a while until it ends", "simulatesex")
 
 
 func _react(_action: String, _args):
+	if(_action == "stopsex"):
+		sexEngine.endSex()
+		return
+	
+	if(_action == "simulatesex"):
+		var turns = 100
+		while(!sexEngine.hasSexEnded() && turns > 0):
+			turns -= 1
+			sexEngine.doAction(sexEngine.getActions()[0])
+		sexEngine.endSex()
+		return
+	
 	if(_action == "doAction"):
 		currentCategory = []
 		sexEngine.doAction(_args[0])

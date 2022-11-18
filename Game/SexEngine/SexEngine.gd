@@ -580,8 +580,13 @@ func start():
 		processAIActions(true)
 		processAIActions(false)
 		processTurn()
+	else:
+		messages.append("You are a dom so you can choose what you wanna do with the sub.")
 
 func getFinalText():
+	if(messages.size() == 0):
+		return "Nothing new happened."
+	
 	return Util.join(messages, "\n\n")
 
 func getActions():
@@ -719,6 +724,12 @@ func getPCTarget():
 		return doms.keys()[0]
 	
 	return null
+
+func processScene():
+	messages.clear()
+	processAIActions(true)
+	processTurn()
+	processAIActions(false)
 
 func doAction(_actionInfo):
 	if(_actionInfo["id"] == "continue"):

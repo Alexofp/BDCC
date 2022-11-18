@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://Player/Player3D/Parts/Part3D.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Player/Player3D/Parts/Penis/CaninePenis/penisCanine.png" type="Texture" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://Player/Player3D/Parts/Penis/CaninePenis/penisSheath.png" type="Texture" id=4]
 [ext_resource path="res://Player/Player3D/Parts/PartState.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Player/Player3D/Parts/PartStatePicker.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Player/Player3D/Parts/Penis/CaninePenis/penisCanineCondom.png" type="Texture" id=7]
 
 [sub_resource type="SpatialMaterial" id=1]
 resource_name = "penisCanine.png"
@@ -230,6 +231,15 @@ params_cull_mode = 2
 params_depth_draw_mode = 3
 albedo_texture = ExtResource( 2 )
 
+[sub_resource type="SpatialMaterial" id=19]
+resource_name = "penisDragon.png.002"
+flags_transparent = true
+flags_unshaded = true
+vertex_color_use_as_albedo = true
+params_cull_mode = 2
+params_depth_draw_mode = 3
+albedo_texture = ExtResource( 7 )
+
 [sub_resource type="SpatialMaterial" id=7]
 resource_name = "penisDragon.png.002"
 flags_transparent = true
@@ -386,7 +396,16 @@ mesh = SubResource( 15 )
 skin = SubResource( 16 )
 material/0 = SubResource( 4 )
 
-[node name="PartState2" parent="PartStatePicker" index="1" instance=ExtResource( 5 )]
+[node name="PartState4" parent="PartStatePicker" index="1" instance=ExtResource( 5 )]
+visible = false
+stateValue = "condom"
+
+[node name="PenisRigged" type="MeshInstance" parent="PartStatePicker/PartState4" index="0"]
+mesh = SubResource( 15 )
+skin = SubResource( 16 )
+material/0 = SubResource( 19 )
+
+[node name="PartState2" parent="PartStatePicker" index="2" instance=ExtResource( 5 )]
 visible = false
 stateValue = "limp"
 
@@ -396,7 +415,7 @@ skin = SubResource( 16 )
 skeleton = NodePath("../../PartState")
 material/0 = SubResource( 7 )
 
-[node name="PartState3" parent="PartStatePicker" index="2" instance=ExtResource( 5 )]
+[node name="PartState3" parent="PartStatePicker" index="3" instance=ExtResource( 5 )]
 visible = false
 stateValue = "caged"
 

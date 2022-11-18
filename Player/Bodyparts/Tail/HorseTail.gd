@@ -9,3 +9,8 @@ func getCompatibleSpecies():
 
 func getDoll3DScene():
 	return "res://Player/Player3D/Parts/Tail/HorseTail/HorseTail.tscn"
+
+func getTraits():
+	return {
+		PartTrait.TailFlexible: true,
+	}

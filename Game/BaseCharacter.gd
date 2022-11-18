@@ -1690,3 +1690,10 @@ func loadBuffsData(data):
 		buff.loadData(buffdata)
 		result.append(buff)
 	return result
+
+func bodypartHasTrait(bodypartSlot, traitID):
+	if(!hasBodypart(bodypartSlot)):
+		return false
+	
+	var bodypart = getBodypart(bodypartSlot)
+	return bodypart.hasTrait(traitID)

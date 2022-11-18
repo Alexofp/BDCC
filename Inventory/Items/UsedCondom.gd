@@ -38,3 +38,6 @@ func loadData(data):
 
 func onSexEnd():
 	destroyMe()
+
+func updateDoll(doll: Doll3D):
+	doll.setState("cock", "condom")

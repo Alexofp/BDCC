@@ -16,3 +16,8 @@ func getDoll3DScene():
 
 func getPenisScale():
 	return max(0.1 + (lengthCM - 5.0) / 21.0, 0.3)
+
+func getTraits():
+	return {
+		PartTrait.PenisFlare: true,
+	}

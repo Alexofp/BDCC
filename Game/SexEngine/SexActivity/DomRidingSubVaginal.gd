@@ -42,12 +42,12 @@ func getCategory():
 
 func getDomTags():
 	var thetags = [usedTag, SexActivityTag.HavingSex]
-	if(state in ["fucking", "aftercumminginside"]):
+	if(state in ["fucking", "aftercumminginside", "knotting"]):
 		thetags.append(usedTagInside)
 	return thetags
 
 func getSubTags():
-	if(state in ["fucking", "aftercumminginside"]):
+	if(state in ["fucking", "aftercumminginside", "knotting"]):
 		return [SexActivityTag.PenisUsed, SexActivityTag.PenisInside, SexActivityTag.HavingSex, SexActivityTag.PreventsSubViolence, SexActivityTag.PreventsSubTeasing]
 	return [SexActivityTag.PenisUsed, SexActivityTag.HavingSex, SexActivityTag.PreventsSubViolence, SexActivityTag.PreventsSubTeasing]
 
@@ -72,6 +72,24 @@ func onSwitchFrom(_otherActivity, _args):
 	return
 
 func processTurn():
+	if(state == "knotting"):
+		var freeRoom = getDom().getPenetrationFreeRoomBy(usedBodypart, subID)
+		if(freeRoom > 0.0):
+			var text = RNG.pick([
+				"{dom.You} {dom.youAre} being a "+RNG.pick(["great", "good"])+" cock warmer for {sub.you}. There is enough room inside {dom.yourHis} "+RNG.pick(usedBodypartNames)+" for {dom.youHim} not to feel any pain.",
+			])
+			
+			return {text = text}
+		else:
+			var text = RNG.pick([
+				"{dom.You} {dom.youAre} trying to be a cock warmer for {sub.you} but {dom.yourHis} "+RNG.pick(usedBodypartNames)+" is too tight, it's very painful! But it sure feels good for {sub.you}.",
+			])
+			domInfo.addPain(RNG.randi_range(1, 2))
+			subInfo.addLust(10)
+			subInfo.addArousalForeplay(0.1)
+			getDom().gotOrificeStretchedBy(usedBodypart, subID, 0.1)
+			return {text = text}
+	
 	if(state == "fucking"):
 		affectSub(subInfo.fetishScore({fetishGiving: 1.0})+0.5, 0.1, -0.1, -0.01)
 		affectDom(domInfo.fetishScore({fetishReceiving: 1.0})+0.3, 0.1, 0.0)
@@ -110,6 +128,12 @@ func processTurn():
 						" The tip of {sub.yourHis} "+RNG.pick(["cock", "dick", "member"])+" can barely reach anywhere deep.",
 						" The tip of {sub.yourHis} "+RNG.pick(["cock", "dick", "member"])+" is struggling to reach {dom.yourHis} "+RNG.pick(["pleasure spot"])+".",
 					])
+		
+		if(RNG.chance(20) && getSub().bodypartHasTrait(BodypartSlot.Penis, PartTrait.PenisBarbs)):
+			text += RNG.pick([
+				" Barbs on {sub.yourHis} "+RNG.pick(["cock", "dick", "shaft"])+" provide extra stimulation.",
+				" Barbs on {sub.yourHis} "+RNG.pick(["cock", "dick", "shaft"])+" "+RNG.pick(["rake against", "scratch"])+" the "+RNG.pick(["soft insides", "soft inner walls"])+".",
+			])
 		
 		if(subInfo.isReadyToCum()):
 			text += RNG.pick([
@@ -175,9 +199,22 @@ func getDomActions():
 			})
 			
 	if(state in ["subabouttocum"] || (state == "fucking" && subInfo.isReadyToCum() && subInfo.isUnconscious())):
+		var scoreToCumInside = 1.0
+		var hasKnot = getSub().bodypartHasTrait(BodypartSlot.Penis, PartTrait.PenisKnot)
+		if(hasKnot):
+			scoreToCumInside *= 0.5
+			
+			actions.append({
+				"id": "letsubknotinside",
+				"score": scoreToCumInside,
+				"name": "Knot!",
+				"desc": "Try to force the knot into your "+RNG.pick(usedBodypartNames),
+				"priority": 1001,
+			})
+			
 		actions.append({
 			"id": "letsubcuminside",
-			"score": 1.0,
+			"score": scoreToCumInside,
 			"name": "Cum inside",
 			"desc": "Let the sub cum inside you",
 			"priority" : 1001,
@@ -189,13 +226,21 @@ func getDomActions():
 			"desc": "Stop riding the sub",
 			"priority" : 1001,
 		})
-			
-	actions.append({
-		"id": "stop",
-		"score": getStopScore(),
-		"name": "Stop riding",
-		"desc": "Stop the sex activity",
-	})
+	
+	if(!(state in ["knotting"])):
+		actions.append({
+			"id": "stop",
+			"score": getStopScore(),
+			"name": "Stop riding",
+			"desc": "Stop the sex activity",
+		})
+	if(state in ["knotting"]):
+		actions.append({
+			"id": "pullknotout",
+			"score": 1.0,
+			"name": "Pull out",
+			"desc": "Try to yank their knot out",
+		})
 			
 	return actions
 
@@ -230,18 +275,41 @@ func doDomAction(_id, _actionInfo):
 		domInfo.cum()
 		return getGenericDomOrgasmData()
 	
-	if(_id == "letsubcuminside"):
-		var text = RNG.pick([
-			"{dom.You} "+RNG.pick(["{dom.youVerb('nod')} and", "just"])+" {dom.youVerb('keep')} riding {sub.your} "+RNG.pick(["cock", "dick", "member"])+" until [b]{sub.youHe} {sub.youVerb('cum')} inside {dom.yourHis} "+RNG.pick(usedBodypartNames)+"[/b]!",
+	if(_id in ["letsubcuminside", "letsubknotinside"]):
+		var wombText = RNG.pick([
+			"womb", "womb",
+			"babymaker",
 		])
-		if(usedBodypart == BodypartSlot.Vagina):
-			text += RNG.pick([
-				" Waves after waves of sticky "+RNG.pick(["cum", "seed", "jizz", "semen"])+" flow into {dom.yourHis} "+RNG.pick(["womb", "babymaker", "womb"])+".",
+		if(usedBodypart == BodypartSlot.Anus):
+			wombText = RNG.pick([
+				"ass",
+				"butt",
+			])
+		var text = ""
+		
+		var knotSuccess = false
+		#var isTryingToKnot = false
+		if(_id == "letsubknotinside"):
+			#isTryingToKnot = true
+			getDom().gotOrificeStretchedBy(usedBodypart, subID, 0.5)
+			if(RNG.chance(getDom().getPenetrateChanceBy(usedBodypart, subID))):
+				knotSuccess = true
+			else:
+				text += RNG.pick([
+					"{dom.You} {dom.youVerb('try', 'tries')} to "+RNG.pick(["force {sub.yourHis} knot inside {dom.youHim}", "get knotted by {dom.you}"])+" but {dom.yourHis} hole is just too tight. "
+				])
+		
+		if(knotSuccess):
+			text = RNG.pick([
+				"{dom.You} "+RNG.pick(["{dom.youVerb('nod')} and", "just"])+" {dom.youVerb('keep')} riding {sub.your} "+RNG.pick(["cock", "dick", "member"])+" hard until {sub.yourHis} knot suddenly slips inside! [b]{sub.You} {sub.youVerb('moan')} as {sub.youHe} {sub.youVerb('cum')} inside {dom.yourHis} "+RNG.pick(usedBodypartNames)+"[/b]!",
 			])
 		else:
 			text = RNG.pick([
-				" Waves after waves of sticky "+RNG.pick(["cum", "seed", "jizz", "semen"])+" flow into {dom.yourHis} "+RNG.pick(["ass", "butt"])+".",
+				"{dom.You} "+RNG.pick(["{dom.youVerb('nod')} and", "just"])+" {dom.youVerb('keep')} riding {sub.your} "+RNG.pick(["cock", "dick", "member"])+" until [b]{sub.youHe} {sub.youVerb('cum')} inside {dom.yourHis} "+RNG.pick(usedBodypartNames)+"[/b]!",
 			])
+		text += RNG.pick([
+			" Waves after waves of sticky "+RNG.pick(["cum", "seed", "jizz", "semen"])+" flow into {dom.yourHis} "+wombText+".",
+		])
 		
 		var condom:ItemBase = getSub().getWornCondom()
 		if(condom != null):
@@ -251,9 +319,14 @@ func doDomAction(_id, _actionInfo):
 				text = "[b]The condom broke![/b] "+text
 				condom.destroyMe()
 			else:
-				text = RNG.pick([
-					"{dom.You} "+RNG.pick(["{dom.youVerb('nod')} and", "just"])+" {dom.youVerb('keep')} riding {sub.your} "+RNG.pick(["cock", "dick", "member"])+".",
-				])
+				if(knotSuccess):
+					text = RNG.pick([
+						"{dom.You} "+RNG.pick(["{dom.youVerb('nod')} and", "just"])+" {dom.youVerb('keep')} riding {sub.your} "+RNG.pick(["cock", "dick", "member"])+" hard until {sub.yourHis} knot suddenly slips inside!",
+					])
+				else:
+					text = RNG.pick([
+						"{dom.You} "+RNG.pick(["{dom.youVerb('nod')} and", "just"])+" {dom.youVerb('keep')} riding {sub.your} "+RNG.pick(["cock", "dick", "member"])+".",
+					])
 				text += RNG.pick([
 					" {sub.You} {sub.youVerb('moan')} as {sub.youHe} {sub.youVerb('fill')} the condom inside {dom.your} "+RNG.pick(usedBodypartNames)+"!",
 					" {sub.You} {sub.youVerb('moan')} as {sub.youHe} {sub.youVerb('stuff')} the condom in {dom.your} "+RNG.pick(usedBodypartNames)+" full of {sub.yourHis} "+RNG.pick(["cum", "seed", "jizz", "semen"])+"!",
@@ -262,7 +335,16 @@ func doDomAction(_id, _actionInfo):
 				subInfo.cum()
 				domInfo.addArousalSex(0.05)
 				satisfyGoals()
-				state = ""
+				if(knotSuccess):
+					state = "knotting"
+				else:
+					state = ""
+				
+				if(!knotSuccess):
+					condom.destroyMe()
+					text += RNG.pick([
+						" {dom.You} {dom.youVerb('dispose')} of the used condom.",
+					])
 				
 				return {text=text}
 		
@@ -306,7 +388,33 @@ func doDomAction(_id, _actionInfo):
 		satisfyGoals()
 
 		return {text=text}
-	
+	if(_id == "pullknotout"):
+		if(RNG.chance(30)):
+			state = ""
+			var text = RNG.pick([
+				"{dom.You} {dom.youVerb('manage')} to raise {dom.yourself}. The knot "+RNG.pick(["falls out", "gets pulled out"])+" with a satisfying plop noise.",
+			])
+			
+			if((getDom().hasEffect(StatusEffect.HasCumInsideVagina) && usedBodypart == BodypartSlot.Vagina) || (getDom().hasEffect(StatusEffect.HasCumInsideAnus) && usedBodypart == BodypartSlot.Anus)):
+				if((getDom().getBuffsHolder().hasBuff(Buff.BlocksVaginaLeakingBuff) && usedBodypart == BodypartSlot.Vagina) || (getDom().getBuffsHolder().hasBuff(Buff.BlocksAnusLeakingBuff) && usedBodypart == BodypartSlot.Anus)):
+					text += RNG.pick([
+						" Some "+RNG.pick(["cum", "seed", "semen"])+" tries to leak out but {dom.you} quickly {dom.youVerb('plug')} {dom.yourHis} "+RNG.pick(usedBodypartNames)+" back.",
+					])
+				else:	
+					text += RNG.pick([
+						" Some "+RNG.pick(["cum", "seed", "semen"])+" leaks out of {dom.yourHis} used "+RNG.pick(usedBodypartNames)+".",
+					])
+			return {text = text}
+		else:
+			var text = RNG.pick([
+				"{dom.You} {dom.youVerb('try', 'tries')} to "+RNG.pick(["pull", "yank"])+" {sub.yourHis} "+RNG.pick(["cock", "dick"])+" out but {dom.youVerb('fail')}. The knot inside {dom.youHim} slowly deflates.",
+			])
+			getDom().gotOrificeStretchedBy(usedBodypart, subID, 0.1)
+			affectSub(subInfo.fetishScore({fetishGiving: 1.0}), 0.1, -0.3, 0.0)
+			affectDom(domInfo.fetishScore({fetishReceiving: 1.0}), 0.1, -0.05)
+			subInfo.addArousalForeplay(0.1)
+			domInfo.addArousalForeplay(0.1)
+			return {text = text}
 	if(_id == "rub"):
 		affectSub(subInfo.fetishScore({fetishGiving: 1.0}), 0.1, 0.0, 0.0)
 		affectDom(domInfo.fetishScore({fetishReceiving: 1.0}), 0.1, -0.01)

@@ -9,3 +9,7 @@ func getCompatibleSpecies():
 
 func getDoll3DScene():
 	return "res://Player/Player3D/Parts/Horns/DemonHorns3/DemonHorns3.tscn"
+
+func getTraits():
+	# too small to be graspable
+	return {}

@@ -399,6 +399,11 @@ func doDomAction(_id, _actionInfo):
 		var text = RNG.pick([
 			"{dom.You} {dom.youVerb('press', 'presses')} {dom.yourHis} "+RNG.pick(["pussy", "slit", "kitty"])+" to {sub.yourHis} face and {dom.youVerb('proceed')} to grind it!",
 		])
+		if(getSub().bodypartHasTrait(BodypartSlot.Horns, PartTrait.HornsGraspable)):
+			text = RNG.pick([
+				"{dom.You} {dom.youVerb('reach', 'reaches')} for {sub.yourHis} horns and use them as handlebars. ",
+			]) + text
+		
 		affectSub(subInfo.fetishScore({Fetish.OralSexGiving: 1.0}), 0.1, -0.3, -0.02)
 		domInfo.addAnger(-0.05)
 		return {text = text}
@@ -542,6 +547,10 @@ func doDomAction(_id, _actionInfo):
 			var text = RNG.pick([
 				"{dom.You} {dom.youVerb('shove')} {dom.yourHis} cock deeper and {dom.youVerb('force')} {sub.you} to deepthroat {dom.youHim}!",
 			])
+			if(getSub().bodypartHasTrait(BodypartSlot.Horns, PartTrait.HornsGraspable)):
+				text = RNG.pick([
+					"{dom.You} {dom.youVerb('reach', 'reaches')} for {sub.yourHis} horns and use them as handlebars. ",
+				]) + text
 			getSub().gotOrificeStretchedBy(BodypartSlot.Head, domID, 0.2)
 			affectSub(domInfo.fetishScore({Fetish.OralSexGiving: 1.0}), 0.1, -0.2, -0.05)
 			domInfo.addArousalSex(0.05)

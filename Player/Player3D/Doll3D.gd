@@ -468,7 +468,7 @@ func _on_RandomLeakTimer_timeout():
 
 func setCockTemporaryHard():
 	var currentCockState = getFinalState("cock")
-	if(currentCockState == "caged"):
+	if(currentCockState in ["caged", "condom"]):
 		return
 	
 	setTemporaryState("cock", "")

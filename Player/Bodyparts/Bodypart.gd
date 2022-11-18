@@ -178,3 +178,20 @@ func updateAppearance():
 
 func getRevealMessage():
 	return getLewdName()+" got revealed."
+
+func getTraits():
+	return null
+
+func hasTrait(traitID):
+	var theTraits = getTraits()
+	
+	if(theTraits == null):
+		return false
+	
+	if(theTraits is Array):
+		return theTraits.has(traitID)
+	
+	if(theTraits is Dictionary):
+		return theTraits.has(traitID) && theTraits[traitID]
+	
+	return false

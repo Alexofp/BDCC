@@ -10,3 +10,7 @@ func getSlot():
 func getCompatibleSpecies():
 	return [Species.Any]
 	
+func getTraits():
+	return {
+		PartTrait.HornsGraspable: true,
+	}

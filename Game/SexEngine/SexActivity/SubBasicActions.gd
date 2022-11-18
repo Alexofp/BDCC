@@ -165,9 +165,27 @@ func startActivity(_args):
 	
 	if(actionID in ["tease"]):
 		endActivity()
-		var text = RNG.pick([
+		var possible = [
 			"{sub.You} {sub.youVerb('tease')} {dom.youHim}.",
-		])
+		]
+		if(getSub().isGagged()):
+			possible.append_array([
+				"{sub.You} {sub.youVerb('mumble')} something incoherent {dom.youHim}.",
+			])
+		else:
+			possible.append_array([
+				"{sub.You} {sub.youVerb('smile')} "+RNG.pick(["seductively", "playfully", "teasingly"])+" at {dom.youHim}.",
+			])
+		if(getSub().bodypartHasTrait(BodypartSlot.Tail, PartTrait.TailFlexible)):
+			possible.append_array([
+				"{sub.You} {sub.youVerb('sway')} {sub.yourHis} tail seductively at {dom.youHim}.",
+			])
+		if(getSub().hasBigBreasts()):
+			possible.append_array([
+				"{sub.You} {sub.youVerb('bounce')} slightly, making {sub.yourHis} "+RNG.pick(["tits", "breasts"])+" jiggle.",
+			])
+		var text = RNG.pick(possible)
+		
 		affectDom(1.0, 0.2, 0.0)
 		return {text=text}
 		

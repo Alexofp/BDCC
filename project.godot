@@ -560,6 +560,11 @@ _global_script_classes=[ {
 "path": "res://Player/Player3D/Parts/PartStatePicker.gd"
 }, {
 "base": "Object",
+"class": "PartTrait",
+"language": "GDScript",
+"path": "res://Player/Bodyparts/PartTrait.gd"
+}, {
+"base": "Object",
 "class": "Perk",
 "language": "GDScript",
 "path": "res://Skills/Perk.gd"
@@ -1145,6 +1150,7 @@ _global_script_class_icons={
 "PantiesState": "",
 "PartState": "",
 "PartStatePicker": "",
+"PartTrait": "",
 "Perk": "",
 "PerkBase": "",
 "Personality": "",
