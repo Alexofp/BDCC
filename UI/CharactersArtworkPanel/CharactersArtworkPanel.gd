@@ -13,9 +13,9 @@ onready var nextCharacterButton = $VBoxContainer2/Control/MarginContainer/VBoxCo
 func _ready():
 	clear()
 	
-	addCharacter("rahi", [])
-	addCharacter("tavi", [])
-	addCharacter("risha", [])
+	#addCharacter("rahi", [])
+	#addCharacter("tavi", [])
+	#addCharacter("risha", [])
 	pass
 	
 func clear():

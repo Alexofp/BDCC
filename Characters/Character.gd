@@ -17,6 +17,9 @@ var npcRestraintMinigameResultMin = 0.8
 var npcRestraintMinigameResultMax = 1.1
 var npcHasMenstrualCycle = false # If true can get pregnant
 
+var lastUpdatedDay:int = -1
+var lastUpdatedSecond:int = -1
+
 func _ready():
 	name = id
 	createBodyparts()
@@ -97,6 +100,10 @@ func saveData():
 	data["timedBuffsTurns"] = saveBuffsData(timedBuffsTurns)
 	data["timedBuffsDurationTurns"] = timedBuffsDurationTurns
 	
+	
+	data["lastUpdatedDay"] = lastUpdatedDay
+	data["lastUpdatedSecond"] = lastUpdatedSecond
+	
 	return data
 
 func loadData(data):
@@ -132,6 +139,9 @@ func loadData(data):
 	timedBuffsDurationSeconds = SAVE.loadVar(data, "timedBuffsDurationSeconds", 0)
 	timedBuffsTurns = loadBuffsData(SAVE.loadVar(data, "timedBuffsTurns", []))
 	timedBuffsDurationTurns = SAVE.loadVar(data, "timedBuffsDurationTurns", 0)
+	
+	lastUpdatedDay = SAVE.loadVar(data, "lastUpdatedDay", -1)
+	lastUpdatedSecond = SAVE.loadVar(data, "lastUpdatedSecond", -1)
 
 func getArmor(_damageType):
 	var calculatedArmor = .getArmor(_damageType)
@@ -179,6 +189,9 @@ func processTime(_secondsPassed):
 		
 	if(menstrualCycle != null):
 		menstrualCycle.processTime(_secondsPassed)
+		
+	# Not sure if needed
+	updateNonBattleEffects()
 		
 func hoursPassed(_howmuch):
 	for bodypart in processingBodyparts:
@@ -338,3 +351,63 @@ func reactRestraint(_restraintType, _restraintAmount, _isGettingForced):
 		return GlobalRegistry.getCharacter(parentCharID).reactRestraint(_restraintType, _restraintAmount, _isGettingForced)
 	
 	return null
+
+func shouldBeUpdated():
+	if(GM.main.characterIsVisible(getID())):
+		return true
+	
+	if(hasEffect(StatusEffect.HasCumInsideAnus) || hasEffect(StatusEffect.HasCumInsideMouth) || hasEffect(StatusEffect.HasCumInsideVagina)):
+		return true
+	
+	if(isPregnant()):
+		return true
+	
+	return false
+
+func checkOldWayOfUpdating(theday:int, theseconds:int):
+	if(lastUpdatedDay < 0):
+		lastUpdatedDay = theday
+		lastUpdatedSecond = theseconds
+
+func processUntilTime(theday:int, theseconds:int):
+	if(lastUpdatedDay < 0):
+		lastUpdatedDay = theday
+		lastUpdatedSecond = theseconds
+		return
+	if(lastUpdatedDay > theday):
+		return
+	if(lastUpdatedDay == theday && lastUpdatedSecond >= theseconds):
+		return
+	
+	var secondsDiff = 0
+	
+	var dayDiff = theday - lastUpdatedDay
+	if(dayDiff == 0):
+		secondsDiff = theseconds - lastUpdatedSecond
+	else:
+		secondsDiff = 24*60*60*dayDiff - lastUpdatedSecond + theseconds
+		
+	print("PROCESSED "+str(getID())+" FOR "+str(secondsDiff)+" SECONDS")
+	var oneDaySeconds = 24*60*60
+	var oneHourSeconds = 60*60
+	
+	# Processing entire days, then hours, then the rest
+	var secondsToProcess = secondsDiff
+	while(secondsToProcess > oneDaySeconds):
+		processTime(oneDaySeconds)
+		secondsToProcess -= oneDaySeconds
+	while(secondsToProcess > oneHourSeconds):
+		processTime(oneHourSeconds)
+		secondsToProcess -= oneHourSeconds
+	processTime(secondsToProcess)
+	
+	var oldHours = int(float(lastUpdatedSecond) / 60 / 60) + lastUpdatedDay*24
+	var newHours = int(float(theseconds) / 60 / 60) + theday*24
+	var hoursPassed = newHours - oldHours
+	
+	if(hoursPassed > 0):
+		print("and also for "+str(hoursPassed)+" hours")
+		hoursPassed(hoursPassed)
+	
+	lastUpdatedDay = theday
+	lastUpdatedSecond = theseconds

@@ -11,7 +11,6 @@ var currentChildUniqueID = 0
 var scenes: Dictionary = {}
 var sceneCreators: Dictionary = {}
 var bodyparts: Dictionary = {}
-var characters: Dictionary = {}
 var characterClasses: Dictionary = {}
 var attacks: Dictionary = {}
 var statusEffects: Dictionary = {}
@@ -365,21 +364,10 @@ func registerBodypartFolder(folder: String):
 func registerCharacter(path: String):
 	var character = load(path)
 	var characterObject = character.new()
-	characters[characterObject.id] = characterObject
+	#characters[characterObject.id] = characterObject
 	characterClasses[characterObject.id] = character
-	add_child(characterObject)
-
-func recreateCharacters():
-	for characterID in characters:
-		var ch = characters[characterID]
-		remove_child(ch)
-		ch.queue_free()
-	
-	for characterID in characterClasses:
-		var character = characterClasses[characterID]
-		var characterObject = character.new()
-		characters[characterObject.id] = characterObject
-		add_child(characterObject)
+	#add_child(characterObject)
+	characterObject.queue_free()
 
 func registerCharacterFolder(folder: String):
 	var dir = Directory.new()
@@ -403,13 +391,24 @@ func getCharacter(id: String):
 	if(id == "pc"):
 		return GM.pc
 	
-	if(!characters.has(id)):
-		Log.printerr("ERROR: character with the id "+id+" wasn't found")
-		return null
-	return characters[id]
+	if(GM.main != null):
+		var mainCharacter = GM.main.getCharacter(id)
+		if(mainCharacter != null):
+			return mainCharacter
+	
+	#if(!characters.has(id)):
+	Log.printerr("ERROR: character with the id "+id+" wasn't found ")
+	return null
+	#return characters[id]
 
 func getCharacters():
-	return characters
+	if(GM.main != null):
+		return GM.main.getCharacters()
+	
+	return {}
+
+func getCharacterClasses():
+	return characterClasses
 
 func registerAttack(path: String):
 	var attack = load(path)

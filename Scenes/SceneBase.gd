@@ -104,10 +104,16 @@ func addCharacter(id: String, variant: Array = []):
 		return
 	currentCharactersVariants[id] = variant
 	GM.ui.addCharacterToPanel(id, variant)
+	GM.main.startUpdatingCharacter(id)
 
 func removeCharacter(id: String):
 	var _ok = currentCharactersVariants.erase(id)
 	GM.ui.removeCharacterFromPanel(id)
+
+func hasCharacter(id: String):
+	if(currentCharactersVariants.has(id)):
+		return true
+	return false
 
 func updateCharacter():
 	GM.ui.clearCharactersPanel()

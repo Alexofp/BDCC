@@ -22,5 +22,7 @@ script = ExtResource( 5 )
 [node name="ChildSystem" type="Node" parent="."]
 script = ExtResource( 2 )
 
+[node name="Characters" type="Node" parent="."]
+
 [connection signal="on_option_button" from="GameUI" to="." method="_on_GameUI_on_option_button"]
 [connection signal="on_rollback_button" from="GameUI" to="." method="_on_GameUI_on_rollback_button"]

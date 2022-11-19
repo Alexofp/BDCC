@@ -16,11 +16,7 @@ func saveData():
 	if(GM.main.getOverriddenPC() != null):
 		data["player_override"] = GM.main.getOverriddenPC().saveData()
 	
-	var charactersData = {}
-	for characterID in GlobalRegistry.getCharacters():
-		charactersData[characterID] = GlobalRegistry.getCharacter(characterID).saveData()
-	
-	data["characters"] = charactersData
+	data["characters"] = GM.main.saveCharactersData()
 	
 	data["main"] = GM.main.saveData()
 	
@@ -47,13 +43,7 @@ func loadData(data: Dictionary):
 		GM.main.overridePC()
 		GM.main.getOverriddenPC().loadData(data["player_override"])
 	
-	var charactersData = SAVE.loadVar(data, "characters", {})
-	for characterID in charactersData:
-		var character = GlobalRegistry.getCharacter(characterID)
-		if(character == null):
-			continue
-		character.loadData(charactersData[characterID])
-	
+	GM.main.loadCharactersData(SAVE.loadVar(data, "characters", {}))
 	GM.main.loadData(SAVE.loadVar(data, "main", {}))
 	
 	# post loading refresh

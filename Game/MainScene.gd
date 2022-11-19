@@ -2,6 +2,7 @@ extends Node
 class_name MainScene
 
 onready var gameUI = $GameUI
+onready var charactersNode = $Characters
 var sceneStack: Array = []
 var messages: Array = []
 var logMessages: Array = []
@@ -16,11 +17,13 @@ var originalPC
 var roomMemories = {}
 var rollbacker:Rollbacker
 
+var staticCharacters = {}
+var charactersToUpdate = {}
+
 signal time_passed(_secondsPassed)
 
 func _init():
 	rollbacker = Rollbacker.new()
-	GlobalRegistry.recreateCharacters()
 	flagsCache = Flag.getFlags()
 
 func overridePC():
@@ -66,8 +69,29 @@ func connectSignalsToPC(who):
 func _exit_tree():
 	GM.main = null
 	
+func createStaticCharacters():
+	Util.delete_children(charactersNode)
+	staticCharacters.clear()
+	
+	var characterClasses = GlobalRegistry.getCharacterClasses()
+	for charID in characterClasses:
+		var character = characterClasses[charID]
+		var characterObject = character.new()
+		staticCharacters[characterObject.id] = characterObject
+		charactersNode.add_child(characterObject)
+	
+func getCharacter(charID):
+	if(staticCharacters.has(charID)):
+		return staticCharacters[charID]
+	return null
+
+func getCharacters():
+	return staticCharacters
+	
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	createStaticCharacters()
+	
 	var pc = playerScene.instance()
 	originalPC = pc
 	GM.pc = pc
@@ -173,6 +197,12 @@ func reRun():
 	runCurrentScene()
 
 func loadingSavefileFinished():
+	for charID in getCharacters():
+		var character = getCharacter(charID)
+		character.checkOldWayOfUpdating(currentDay, timeOfDay)
+		if(character.shouldBeUpdated()):
+			startUpdatingCharacter(charID)
+	
 	reRun()
 	
 	applyAllWorldEdits()
@@ -267,6 +297,17 @@ func loadData(data):
 	GM.ui.recreateWorld()
 	GM.world.loadData(SAVE.loadVar(data, "world", {}))
 
+func saveCharactersData():
+	var data = {}
+	for characterID in staticCharacters:
+		data[characterID] = staticCharacters[characterID].saveData()
+	return data
+	
+func loadCharactersData(data):
+	for characterID in staticCharacters:
+		var character = staticCharacters[characterID]
+		character.loadData(SAVE.loadVar(data, characterID, {}))
+	
 func addMessage(text: String):
 	messages.append(text)
 
@@ -282,12 +323,20 @@ func getTimeCap():
 func isVeryLate():
 	return timeOfDay >= getTimeCap()
 
+func stopProcessingUnusedCharacters():
+	for charID in charactersToUpdate.keys():
+		var character = getCharacter(charID)
+		if(!character.shouldBeUpdated()):
+			print("STOPPED PROCESSING: "+str(charID))
+			charactersToUpdate.erase(charID)
+
 func processTime(_seconds):
 	_seconds = int(round(_seconds))
 	
 	timeOfDay += _seconds
 	
 	doTimeProcess(_seconds)
+	stopProcessingUnusedCharacters()
 
 func doTimeProcess(_seconds):
 	# This splits long sleeping times into 1 hour chunks
@@ -295,9 +344,9 @@ func doTimeProcess(_seconds):
 	while(copySeconds > 0):
 		var clippedSeconds = min(60*60, copySeconds)
 		GM.pc.processTime(clippedSeconds)
-		var characters = GlobalRegistry.getCharacters()
-		for characterID in characters:
-			var character = characters[characterID]
+		
+		for characterID in charactersToUpdate:
+			var character = getCharacter(characterID)
 			character.processTime(clippedSeconds)
 		
 		copySeconds -= clippedSeconds
@@ -315,9 +364,9 @@ func doTimeProcess(_seconds):
 
 func hoursPassed(howMuch):
 	GM.pc.hoursPassed(howMuch)
-	var characters = GlobalRegistry.getCharacters()
-	for characterID in characters:
-		var character = characters[characterID]
+	
+	for characterID in charactersToUpdate:
+		var character = getCharacter(characterID)
 		character.hoursPassed(howMuch)
 
 func processTimeUntil(newseconds):
@@ -802,3 +851,19 @@ func consoleClearModuleFlag(moduleID, flagID):
 
 func _on_GameUI_on_rollback_button():
 	rollbacker.rollback()
+
+func characterIsVisible(charID):
+	if(charID == "pc"):
+		return true
+	
+	for scene in sceneStack:
+		if(scene.hasCharacter(charID)):
+			return true
+	
+	return false
+
+func startUpdatingCharacter(charID):
+	if(!charactersToUpdate.has(charID)):
+		charactersToUpdate[charID] = true
+		print("BEGAN PROCESSING "+str(charID))
+		getCharacter(charID).processUntilTime(currentDay, timeOfDay)
