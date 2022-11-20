@@ -195,3 +195,9 @@ func hasTrait(traitID):
 		return theTraits.has(traitID) && theTraits[traitID]
 	
 	return false
+
+func npcGenerationWeight(_dynamicCharacter):
+	return 1.0
+
+func generateDataFor(_dynamicCharacter):
+	pass

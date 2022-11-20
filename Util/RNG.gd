@@ -137,3 +137,8 @@ static func grabWeightedPairs(ar: Array):
 	ar.remove(0)
 	return result
 	
+static func randomMaleName():
+	return pick(RNGData.maleNames)
+
+static func randomFemaleName():
+	return pick(RNGData.femaleNames)

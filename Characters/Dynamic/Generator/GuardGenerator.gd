@@ -1,0 +1,3 @@
+extends CharacterGeneratorBase
+class_name GuardGenerator
+

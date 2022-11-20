@@ -16,7 +16,12 @@ func _initScene(_args = []):
 	#sexEngine.initPeople(top, "pc")
 	#sexEngine.initPeople(top, "rahi")
 	
-	sexEngine.initPeople("pc", top)
+	var newCharacter = GuardGenerator.generate()
+	addCharacter(newCharacter.id)
+	
+	#sexEngine.initPeople("pc", top)
+	sexEngine.initPeople("pc", newCharacter.id)
+	
 	#sexEngine.initPeople(top, "pc")
 	#sexEngine.initPeople(top, "rahi")
 	#sexEngine.initPeople("alexrynard", "rahi")
@@ -24,8 +29,10 @@ func _initScene(_args = []):
 	
 	sexEngine.start()
 	addCharacter(top)
-	addCharacter("alexrynard")
-	addCharacter("rahi")
+	#addCharacter("alexrynard")
+	#addCharacter("rahi")
+	
+
 
 func _reactInit():
 	updateDomsAndSubs()

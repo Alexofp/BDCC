@@ -21,3 +21,11 @@ func getTraits():
 	return {
 		PartTrait.PenisFlare: true,
 	}
+
+func generateDataFor(_dynamicCharacter):
+	lengthCM = RNG.randf_range(20.0, 30.0)
+	if(RNG.chance(5)):
+		lengthCM = RNG.randf_range(10.0, 20.0)
+	if(RNG.chance(5)):
+		lengthCM = RNG.randf_range(30.0, 40.0)
+	lengthCM = Util.roundF(lengthCM, 1)

@@ -7,6 +7,7 @@ var game_version_suffix = ""
 
 var currentUniqueID = 0
 var currentChildUniqueID = 0
+var currentNPCUniqueID = 0
 
 var scenes: Dictionary = {}
 var sceneCreators: Dictionary = {}
@@ -272,6 +273,10 @@ func generateChildUniqueID():
 	currentChildUniqueID += 1
 	return currentChildUniqueID - 1
 
+func generateNPCUniqueID():
+	currentNPCUniqueID += 1
+	return currentNPCUniqueID - 1
+
 func getGameVersionString():
 	return str(game_version_major)+"."+str(game_version_minor)+"."+str(game_version_revision)+str(game_version_suffix)
 
@@ -507,6 +512,8 @@ func getAllPlayableSpecies():
 			result[speciesID] = allSpecies[speciesID]
 	return result
 
+func getAllSpecies():
+	return allSpecies
 
 
 func registerItem(path: String):

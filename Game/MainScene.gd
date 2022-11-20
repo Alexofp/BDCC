@@ -3,6 +3,7 @@ class_name MainScene
 
 onready var gameUI = $GameUI
 onready var charactersNode = $Characters
+onready var dynamicCharactersNode = $DynamicCharacters
 var sceneStack: Array = []
 var messages: Array = []
 var logMessages: Array = []
@@ -19,6 +20,7 @@ var rollbacker:Rollbacker
 
 var staticCharacters = {}
 var charactersToUpdate = {}
+var dynamicCharacters = {}
 
 signal time_passed(_secondsPassed)
 
@@ -83,11 +85,35 @@ func createStaticCharacters():
 func getCharacter(charID):
 	if(staticCharacters.has(charID)):
 		return staticCharacters[charID]
+	if(dynamicCharacters.has(charID)):
+		return dynamicCharacters[charID]
 	return null
 
 func getCharacters():
 	return staticCharacters
+
+func addDynamicCharacter(character):
+	if(!(character is DynamicCharacter)):
+		assert(false, "addDynamicCharacter() Received a non-dynamic character")
+		
+	var newCharID = character.getID()
+	if(newCharID == null || newCharID == "" || newCharID == "errorerror"):
+		character.id = generateCharacterID()
 	
+	if(dynamicCharacters.has(newCharID)):
+		removeDynamicCharacter(newCharID)
+	
+	dynamicCharacters[newCharID] = character
+	dynamicCharactersNode.add_child(character)
+		
+func removeDynamicCharacter(characterID):
+	if(characterID is DynamicCharacter):
+		characterID = characterID.getID()
+	
+	if(dynamicCharacters.has(characterID)):
+		dynamicCharacters[characterID].queue_free()
+		dynamicCharacters.erase(characterID)
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	createStaticCharacters()
@@ -307,6 +333,30 @@ func loadCharactersData(data):
 	for characterID in staticCharacters:
 		var character = staticCharacters[characterID]
 		character.loadData(SAVE.loadVar(data, characterID, {}))
+	
+func saveDynamicCharactersData():
+	var data = {}
+	for characterID in dynamicCharacters:
+		var charData = {}
+		charData["type"] = "dynamic"
+		charData["data"] = dynamicCharacters[characterID].saveData()
+		data[characterID] = charData
+	return data
+
+func loadDynamicCharactersData(data):
+	Util.delete_children(dynamicCharactersNode)
+	dynamicCharacters.clear()
+	
+	for characterID in data:
+		var charData = SAVE.loadVar(data, characterID, {})
+		var charType = SAVE.loadVar(charData, "type", "error")
+		if(charType == "dynamic"):
+			var newDynamicChar = DynamicCharacter.new()
+			newDynamicChar.id = characterID
+			newDynamicChar.loadData(SAVE.loadVar(charData, "data", {}))
+			addDynamicCharacter(newDynamicChar)
+		else:
+			Log.printerr("loadDynamicCharactersData() Trying to load a non-dynamic character with id "+str(characterID))
 	
 func addMessage(text: String):
 	messages.append(text)
@@ -867,3 +917,7 @@ func startUpdatingCharacter(charID):
 		charactersToUpdate[charID] = true
 		print("BEGAN PROCESSING "+str(charID))
 		getCharacter(charID).processUntilTime(currentDay, timeOfDay)
+
+func generateCharacterID(beginPart = "npc"):
+	var numID = GlobalRegistry.generateNPCUniqueID()
+	return beginPart+str(numID)

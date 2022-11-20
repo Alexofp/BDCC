@@ -127,3 +127,11 @@ func getBallsScale():
 
 func getRevealMessage():
 	return Util.capitalizeFirstLetter(getLewdDescriptionAndName()) + " got revealed."
+
+func generateDataFor(_dynamicCharacter):
+	lengthCM = RNG.randf_range(10.0, 25.0)
+	if(RNG.chance(5)):
+		lengthCM = RNG.randf_range(5.0, 10.0)
+	if(RNG.chance(5)):
+		lengthCM = RNG.randf_range(25.0, 30.0)
+	lengthCM = Util.roundF(lengthCM, 1)

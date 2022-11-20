@@ -185,6 +185,11 @@ _global_script_classes=[ {
 "path": "res://Characters/Character.gd"
 }, {
 "base": "Reference",
+"class": "CharacterGeneratorBase",
+"language": "GDScript",
+"path": "res://Characters/Dynamic/Generator/CharacterGeneratorBase.gd"
+}, {
+"base": "Reference",
 "class": "Child",
 "language": "GDScript",
 "path": "res://Game/Pregnancy/Child.gd"
@@ -238,6 +243,11 @@ _global_script_classes=[ {
 "class": "DollSkeleton",
 "language": "GDScript",
 "path": "res://Player/Player3D/DollSkeleton.gd"
+}, {
+"base": "Character",
+"class": "DynamicCharacter",
+"language": "GDScript",
+"path": "res://Characters/Dynamic/DynamicCharacter.gd"
 }, {
 "base": "Reference",
 "class": "EggCell",
@@ -368,6 +378,11 @@ _global_script_classes=[ {
 "class": "Gender",
 "language": "GDScript",
 "path": "res://Game/Gameplay/Gender.gd"
+}, {
+"base": "CharacterGeneratorBase",
+"class": "GuardGenerator",
+"language": "GDScript",
+"path": "res://Characters/Dynamic/Generator/GuardGenerator.gd"
 }, {
 "base": "LootTableBase",
 "class": "GuardLoot",
@@ -638,6 +653,11 @@ _global_script_classes=[ {
 "class": "RNG",
 "language": "GDScript",
 "path": "res://Util/RNG.gd"
+}, {
+"base": "Object",
+"class": "RNGData",
+"language": "GDScript",
+"path": "res://Util/RNGData.gd"
 }, {
 "base": "Module",
 "class": "RahiModule",
@@ -1075,6 +1095,7 @@ _global_script_class_icons={
 "ButtonChecks": "",
 "CellblockModule": "",
 "Character": "",
+"CharacterGeneratorBase": "",
 "Child": "",
 "ChildGender": "",
 "ChildSystem": "",
@@ -1086,6 +1107,7 @@ _global_script_class_icons={
 "Doll3D": "",
 "DollAttachmentZone": "",
 "DollSkeleton": "",
+"DynamicCharacter": "",
 "EggCell": "",
 "EngineerLoot": "",
 "EscapeQuest": "",
@@ -1112,6 +1134,7 @@ _global_script_class_icons={
 "GameUI": "",
 "GameWorld": "",
 "Gender": "",
+"GuardGenerator": "",
 "GuardLoot": "",
 "GymModule": "",
 "ImagePack": "",
@@ -1166,6 +1189,7 @@ _global_script_class_icons={
 "RMSmartShape2D": "res://addons/rmsmartshape/assets/LEGACY_shape.png",
 "RMSmartShapeAnchor2D": "res://addons/rmsmartshape/assets/LEGACY_shape_anchor.png",
 "RNG": "",
+"RNGData": "",
 "RahiModule": "",
 "RestraintBallGag": "",
 "RestraintBlindfold": "",

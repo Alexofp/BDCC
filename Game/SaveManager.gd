@@ -10,6 +10,7 @@ func saveData():
 		"savefile_version": currentSavefileVersion,
 		"currentUniqueID_DONT_TOUCH": GlobalRegistry.currentUniqueID,
 		"currentChildUniqueID_DONT_TOUCH": GlobalRegistry.currentChildUniqueID,
+		"currentNPCUniqueID_DONT_TOUCH": GlobalRegistry.currentNPCUniqueID,
 	}
 	
 	data["player"] = GM.main.getOriginalPC().saveData()
@@ -17,6 +18,7 @@ func saveData():
 		data["player_override"] = GM.main.getOverriddenPC().saveData()
 	
 	data["characters"] = GM.main.saveCharactersData()
+	data["dynamicCharacters"] = GM.main.saveDynamicCharactersData()
 	
 	data["main"] = GM.main.saveData()
 	
@@ -34,6 +36,7 @@ func loadData(data: Dictionary):
 		
 	GlobalRegistry.currentUniqueID = SAVE.loadVar(data, "currentUniqueID_DONT_TOUCH", 0)
 	GlobalRegistry.currentChildUniqueID = SAVE.loadVar(data, "currentChildUniqueID_DONT_TOUCH", 0)
+	GlobalRegistry.currentNPCUniqueID = SAVE.loadVar(data, "currentNPCUniqueID_DONT_TOUCH", 0)
 	
 	GM.main.getOriginalPC().loadData(data["player"])
 	
@@ -44,6 +47,7 @@ func loadData(data: Dictionary):
 		GM.main.getOverriddenPC().loadData(data["player_override"])
 	
 	GM.main.loadCharactersData(SAVE.loadVar(data, "characters", {}))
+	GM.main.loadDynamicCharactersData(SAVE.loadVar(data, "dynamicCharacters", {}))
 	GM.main.loadData(SAVE.loadVar(data, "main", {}))
 	
 	# post loading refresh
