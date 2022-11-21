@@ -353,8 +353,8 @@ func loadDynamicCharactersData(data):
 		if(charType == "dynamic"):
 			var newDynamicChar = DynamicCharacter.new()
 			newDynamicChar.id = characterID
-			newDynamicChar.loadData(SAVE.loadVar(charData, "data", {}))
 			addDynamicCharacter(newDynamicChar)
+			newDynamicChar.loadData(SAVE.loadVar(charData, "data", {}))
 		else:
 			Log.printerr("loadDynamicCharactersData() Trying to load a non-dynamic character with id "+str(characterID))
 	
