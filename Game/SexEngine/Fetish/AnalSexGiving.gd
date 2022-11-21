@@ -12,3 +12,8 @@ func getGoals(_sexEngine, _dom, _sub):
 	possible.append(SexGoal.FuckAnal)
 	
 	return possible
+
+func isPossibleFor(_character):
+	if(!_character.hasPenis()):
+		return false
+	return true

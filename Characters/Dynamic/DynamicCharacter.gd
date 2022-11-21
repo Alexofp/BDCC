@@ -5,15 +5,22 @@ var npcName = "BAD NAME"
 var npcSpecies = ["canine"]
 var npcGender = Gender.Male
 var npcSmallDescription = "One of the generated characters"
-var npcThickness = 70
+var npcThickness = 50
 var npcFeminity = 0
 var npcDefaultEquipment = []
+var npcArchetypes = []
+var npcAttacks = []
 
 func _getName():
 	return npcName
 
 func getGender():
 	return npcGender
+	
+func getPronounGender():
+	if(npcGender == Gender.Androgynous):
+		return Gender.Female
+	return getGender()
 	
 func getSmallDescription() -> String:
 	return npcSmallDescription
@@ -37,6 +44,8 @@ func createEquipment():
 	for itemID in getDefaultEquipment():
 		getInventory().equipItem(GlobalRegistry.createItemNoID(itemID))
 
+func _getAttacks():
+	return npcAttacks
 
 func saveData():
 	var data = {
@@ -51,6 +60,8 @@ func saveData():
 		"npcSmallDescription": npcSmallDescription,
 		"npcThickness": npcThickness,
 		"npcFeminity": npcFeminity,
+		"npcArchetypes": npcArchetypes,
+		"npcAttacks": npcAttacks,
 	}
 	
 	data["bodyparts"] = {}
@@ -79,6 +90,10 @@ func saveData():
 	data["lastUpdatedDay"] = lastUpdatedDay
 	data["lastUpdatedSecond"] = lastUpdatedSecond
 	
+	data["lustInterests"] = lustInterests.saveDataDynamicNpc()
+	data["fetishHolder"] = fetishHolder.saveData()
+	data["personality"] = personality.saveData()
+	
 	return data
 
 func loadData(data):
@@ -93,6 +108,8 @@ func loadData(data):
 	npcSmallDescription = SAVE.loadVar(data, "npcSmallDescription", "No description")
 	npcThickness = SAVE.loadVar(data, "npcThickness", 50)
 	npcFeminity = SAVE.loadVar(data, "npcFeminity", 50)
+	npcArchetypes = SAVE.loadVar(data, "npcArchetypes", [])
+	npcAttacks = SAVE.loadVar(data, "npcAttacks", [])
 	
 	resetSlots()
 	var loadedBodyparts = SAVE.loadVar(data, "bodyparts", {})
@@ -126,3 +143,7 @@ func loadData(data):
 	
 	lastUpdatedDay = SAVE.loadVar(data, "lastUpdatedDay", -1)
 	lastUpdatedSecond = SAVE.loadVar(data, "lastUpdatedSecond", -1)
+	
+	lustInterests.loadDataDynamicNpc(SAVE.loadVar(data, "lustInterests", {}))
+	fetishHolder.loadData(SAVE.loadVar(data, "fetishHolder", {}))
+	personality.loadData(SAVE.loadVar(data, "personality", {}))

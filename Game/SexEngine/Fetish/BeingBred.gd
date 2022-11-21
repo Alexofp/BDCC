@@ -10,3 +10,8 @@ func getGoals(_sexEngine, _dom, _sub):
 	var possible = []
 	
 	return possible
+
+func isPossibleFor(_character):
+	if(!_character.hasAnyWomb()):
+		return false
+	return true

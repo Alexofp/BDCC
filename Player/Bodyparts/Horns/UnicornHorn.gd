@@ -13,3 +13,6 @@ func getDoll3DScene():
 func getTraits():
 	# Need two horns to be able to use them as handlebars
 	return {}
+
+func npcGenerationWeight(_dynamicCharacter):
+	return 0.05

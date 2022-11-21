@@ -36,6 +36,55 @@ static func getScore(interest):
 static func getAll():
 	return [Hates, ReallyDislikes, Dislikes, SlightlyDislikes, Neutral, SlightlyLikes, Likes, ReallyLikes, Loves]
 
+static func interestToNumber(interest):
+	match(interest):
+		Hates:
+			return -4
+		ReallyDislikes:
+			return -3
+		Dislikes:
+			return -2
+		SlightlyDislikes:
+			return -1
+		Neutral:
+			return 0
+		SlightlyLikes:
+			return 1
+		Likes:
+			return 2
+		ReallyLikes:
+			return 3
+		Loves:
+			return 4
+	return 0
+
+static func numberToInterest(theNumber:int):
+	if(theNumber < -4):
+		return Hates
+	if(theNumber > 4):
+		return Loves
+	
+	match(theNumber):
+		-4:
+			return Hates
+		-3:
+			return ReallyDislikes
+		-2:
+			return Dislikes
+		-1:
+			return SlightlyDislikes
+		0:
+			return Neutral
+		1:
+			return SlightlyLikes
+		2:
+			return Likes
+		3:
+			return ReallyLikes
+		4:
+			return Loves
+	return Neutral
+
 static func getColorString(interest):
 	if(interest == Hates):
 		return "#FF554C"

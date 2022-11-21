@@ -1697,3 +1697,8 @@ func bodypartHasTrait(bodypartSlot, traitID):
 	
 	var bodypart = getBodypart(bodypartSlot)
 	return bodypart.hasTrait(traitID)
+
+func hasAnyWomb():
+	if(menstrualCycle == null):
+		return false
+	return menstrualCycle.hasAnyWomb()

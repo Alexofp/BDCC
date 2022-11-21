@@ -10,8 +10,8 @@ func _init():
 #	addInterest(InterestTopic.AverageMassBody, Interest.Loves)
 	pass
 
-func addInterest(topicID, reaction, lustMult = 1.0):
-	interests[topicID] = [reaction, lustMult]
+func addInterest(topicID, reaction):
+	interests[topicID] = reaction
 
 func customBestTopicComparison(a, b):
 	return a[2] > b[2]
@@ -29,13 +29,12 @@ func reactLustAction(_pc, _actionInterests, _maxUnlocks = 1):
 		
 		var actionValue = _actionInterests[topicID]
 		
-		var interestData = interests[topicID]
-		var loveValue = Interest.getValue(interestData[0])
-		var lustMult = interestData[1]
+		var interestLikes = interests[topicID]
+		var loveValue = Interest.getValue(interestLikes)
 		
 		var playerValue = topicGroup.getTopicValue(topicID, _pc)
 		
-		var addValue = actionValue * loveValue * playerValue * lustMult
+		var addValue = actionValue * loveValue * playerValue
 		resultValue += addValue
 		if(addValue > 0.0):
 			positiveValue += addValue
@@ -43,7 +42,7 @@ func reactLustAction(_pc, _actionInterests, _maxUnlocks = 1):
 			negativeValue += addValue
 		
 		if(playerValue >= 0.01):
-			bestTopics.append([topicID, interestData[0], abs(addValue)])
+			bestTopics.append([topicID, interestLikes, abs(addValue)])
 		
 	bestTopics.sort_custom(self, "customBestTopicComparison")
 	#print(bestTopics)
@@ -86,3 +85,15 @@ func saveData():
 
 func loadData(data):
 	playerKnows = SAVE.loadVar(data, "playerKnows", {})
+
+func saveDataDynamicNpc():
+	var data = {
+		"playerKnows": playerKnows,
+		"interests": interests,
+	}
+	
+	return data
+
+func loadDataDynamicNpc(data):
+	playerKnows = SAVE.loadVar(data, "playerKnows", {})
+	interests = SAVE.loadVar(data, "interests", {})

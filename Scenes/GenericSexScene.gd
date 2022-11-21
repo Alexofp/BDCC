@@ -20,7 +20,10 @@ func _initScene(_args = []):
 	addCharacter(newCharacter.id)
 	
 	#sexEngine.initPeople("pc", top)
-	sexEngine.initPeople("pc", newCharacter.id)
+	if(RNG.chance(50)):
+		sexEngine.initPeople(newCharacter.id, "pc")
+	else:
+		sexEngine.initPeople("pc", newCharacter.id)
 	
 	#sexEngine.initPeople(top, "pc")
 	#sexEngine.initPeople(top, "rahi")
@@ -31,6 +34,7 @@ func _initScene(_args = []):
 	addCharacter(top)
 	#addCharacter("alexrynard")
 	#addCharacter("rahi")
+	#runScene("FightScene", [newCharacter.id])
 	
 
 
@@ -93,6 +97,7 @@ func _react(_action: String, _args):
 		while(!sexEngine.hasSexEnded() && turns > 0):
 			turns -= 1
 			sexEngine.doAction(sexEngine.getActions()[0])
+			processTime(60)
 		sexEngine.endSex()
 		return
 	

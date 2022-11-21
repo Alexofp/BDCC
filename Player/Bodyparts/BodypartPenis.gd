@@ -135,3 +135,6 @@ func generateDataFor(_dynamicCharacter):
 	if(RNG.chance(5)):
 		lengthCM = RNG.randf_range(25.0, 30.0)
 	lengthCM = Util.roundF(lengthCM, 1)
+	
+	if(fluidProduction != null):
+		fluidProduction.fillPercent(min(1.0, RNG.randf_range(0.8, 1.2)))

@@ -19,6 +19,9 @@ func getCharacter():
 		return character
 	return character.get_ref()
 
+func clear():
+	stats.clear()
+
 func getStat(statID) -> float:
 	if(!stats.has(statID)):
 		return 0.0
@@ -27,3 +30,19 @@ func getStat(statID) -> float:
 
 func setStat(statID, newvalue: float):
 	stats[statID] = clamp(newvalue, -1.0, 1.0)
+
+func addStat(statID, addvalue: float):
+	if(!stats.has(statID)):
+		stats[statID] = 0.0
+	
+	stats[statID] += addvalue
+	stats[statID] = clamp(stats[statID], -1.0, 1.0)
+
+func saveData():
+	var data = {
+		"stats": stats,
+	}
+	return data
+
+func loadData(data):
+	stats = SAVE.loadVar(data, "stats", {})

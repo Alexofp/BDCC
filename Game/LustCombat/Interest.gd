@@ -11,6 +11,9 @@ const Likes = "Likes"
 const ReallyLikes = "ReallyLikes"
 const Loves = "Loves"
 
+static func getAll():
+	return [Hates, ReallyDislikes, Dislikes, SlightlyDislikes, Neutral, KindaLikes, Likes, ReallyLikes, Loves]
+
 static func getVisibleName(interest):
 	if(interest == Hates):
 		return "hates"

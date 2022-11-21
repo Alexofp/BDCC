@@ -6,17 +6,20 @@ var fetishMap: Dictionary = {}
 
 func _init():
 	for fetishID in GlobalRegistry.getFetishes():
-		addFetish(fetishID, RNG.pick(FetishInterest.getAll()))
-		#addFetish(fetishID, FetishInterest.Loves)
-		#addFetish(fetishID, FetishInterest.Hates)
+		setFetish(fetishID, RNG.pick(FetishInterest.getAll()))
+		#setFetish(fetishID, FetishInterest.Loves)
+		#setFetish(fetishID, FetishInterest.Hates)
 	
-	addFetish(Fetish.OralSexReceiving, FetishInterest.Loves)
-	addFetish(Fetish.VaginalSexGiving, FetishInterest.Loves)
-	addFetish(Fetish.DrugUse, FetishInterest.Loves)
-	#addFetish(Fetish.VaginalSexGiving, FetishInterest.Loves)
-	#addFetish(Fetish.Breeding, FetishInterest.Hates)
-	#addFetish(Fetish.BeingBred, FetishInterest.Hates)
-	#addFetish(Fetish.VaginalSexReceiving, FetishInterest.Hates)
+	setFetish(Fetish.OralSexReceiving, FetishInterest.Loves)
+	setFetish(Fetish.VaginalSexGiving, FetishInterest.Loves)
+	setFetish(Fetish.DrugUse, FetishInterest.Loves)
+	#setFetish(Fetish.VaginalSexGiving, FetishInterest.Loves)
+	#setFetish(Fetish.Breeding, FetishInterest.Hates)
+	#setFetish(Fetish.BeingBred, FetishInterest.Hates)
+	#setFetish(Fetish.VaginalSexReceiving, FetishInterest.Hates)
+
+func clear():
+	fetishMap.clear()
 
 func getCharacter():
 	if(character == null):
@@ -26,8 +29,13 @@ func getCharacter():
 func setCharacter(newchar):
 	character = weakref(newchar)
 
-func addFetish(fetishID, interest):
+func setFetish(fetishID, interest):
 	fetishMap[fetishID] = interest
+
+func addFetish(fetishID, interest):
+	var currentInterest = getFetishInterest(fetishID)
+	var newvalue = FetishInterest.interestToNumber(currentInterest) + FetishInterest.interestToNumber(interest)
+	fetishMap[fetishID] = FetishInterest.numberToInterest(newvalue)
 
 func getFetishInterest(fetishID):
 	if(!fetishMap.has(fetishID)):
@@ -45,9 +53,11 @@ func getFetishes():
 func getGoals(_sexEngine, _sub):
 	var result = []
 	
-	for fetishID in fetishMap:
-		var fetishInterest = fetishMap[fetishID]
-		var fetishInterestValue = FetishInterest.getScore(fetishInterest)
+	for fetishID in GlobalRegistry.getFetishes():
+		var fetishInterestValue = 0.0
+		if(fetishMap.has(fetishID)):
+			var fetishInterest = fetishMap[fetishID]
+			fetishInterestValue = FetishInterest.getScore(fetishInterest)
 		
 		if(fetishInterestValue >= 0.0):
 			var fetish:FetishBase = GlobalRegistry.getFetish(fetishID)
@@ -57,3 +67,22 @@ func getGoals(_sexEngine, _sub):
 				result.append([goal, max(0.1, fetishInterestValue)])
 
 	return result
+
+func removeImpossibleFetishes():
+	var thecharacter = getCharacter()
+	if(thecharacter == null):
+		return
+	
+	for fetishID in fetishMap.keys():
+		var fetish:FetishBase = GlobalRegistry.getFetish(fetishID)
+		if(!fetish.isPossibleFor(thecharacter)):
+			var _ok = fetishMap.erase(fetishID)
+
+func saveData():
+	var data = {
+		"fetishMap": fetishMap,
+	}
+	return data
+
+func loadData(data):
+	fetishMap = SAVE.loadVar(data, "fetishMap", {})

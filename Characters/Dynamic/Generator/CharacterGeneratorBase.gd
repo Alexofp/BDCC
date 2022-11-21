@@ -1,29 +1,35 @@
 extends Reference
 class_name CharacterGeneratorBase
 
-static func makeBase(idprefix = "npc"):
+static func makeBase(idprefix = "npc", _args = {}):
 	var dynamicCharacter = DynamicCharacter.new()
 	dynamicCharacter.id = GM.main.generateCharacterID(idprefix)
 	GM.main.addDynamicCharacter(dynamicCharacter)
 	return dynamicCharacter
 
-static func pickGender(character:DynamicCharacter):
-	character.npcGender = RNG.pick([Gender.Male, Gender.Female])
+static func pickGender(character:DynamicCharacter, _args = {}):
+	var possibleGenders = [
+		[Gender.Male, 1.0],
+		[Gender.Female, 1.0],
+		[Gender.Androgynous, 0.5],
+	]
+	
+	character.npcGender = RNG.pickWeightedPairs(possibleGenders)
 
-static func pickName(character:DynamicCharacter):
+static func pickName(character:DynamicCharacter, _args = {}):
 	if(character.npcGender == Gender.Male):
 		character.npcName = RNG.randomMaleName()
 	else:
 		character.npcName = RNG.randomFemaleName()
 
-static func pickEquipment(character:DynamicCharacter):
-	character.npcDefaultEquipment = ["ballgag", "CasualClothes", "LaceBra", "LacePanties"]
+static func pickEquipment(character:DynamicCharacter, _args = {}):
+	character.npcDefaultEquipment = ["CasualClothes", "LaceBra", "LacePanties"]
 
-static func pickedSpeciesType():
+static func pickedSpeciesType(_args = {}):
 	return "guard"
 
-static func pickSpecies(character:DynamicCharacter):
-	var speciesType = pickedSpeciesType()
+static func pickSpecies(character:DynamicCharacter, _args = {}):
+	var speciesType = pickedSpeciesType(_args)
 	var allSpecies = GlobalRegistry.getAllSpecies()
 	var possible = []
 	for speciesID in allSpecies:
@@ -39,10 +45,11 @@ static func pickSpecies(character:DynamicCharacter):
 	
 	character.npcSpecies = [randomSpecies]
 
-static func createBodyparts(character:DynamicCharacter):
+static func createBodyparts(character:DynamicCharacter, _args = {}):
 	var theSpecies = character.npcSpecies
 	for bodypartSlot in BodypartSlot.getAll():
 		var possible = []
+		var fullWeight = 0.0
 		#if(!BodypartSlot.isEssential(bodypartSlot)):
 		#	possible.append([null, 1.0])
 		
@@ -69,8 +76,13 @@ static func createBodyparts(character:DynamicCharacter):
 				var weight = bodypart.npcGenerationWeight(character)
 				if(weight != null && weight > 0.0):
 					possible.append([bodypartID, weight])
+					fullWeight += weight
+
 		
 		if(possible.size() > 0):
+			if(!RNG.chance(fullWeight * 100.0)):
+				continue
+			
 			var bodypartID = RNG.pickWeightedPairs(possible)
 			if(bodypartID != null):
 				var bodypart = GlobalRegistry.createBodypart(bodypartID)
@@ -86,22 +98,116 @@ static func createBodyparts(character:DynamicCharacter):
 				var weight = bodypart.npcGenerationWeight(character)
 				if(weight != null && weight > 0.0):
 					possible.append([bodypartID, weight])
-		
+				
 			var bodypartID = RNG.pickWeightedPairs(possible)
 			if(bodypartID != null):
 				var bodypart = GlobalRegistry.createBodypart(bodypartID)
 				bodypart.generateDataFor(character)
 				character.giveBodypartUnlessSame(bodypart)
 
+static func pickBodyAttributes(character:DynamicCharacter, _args = {}):
+	if(character.npcGender == Gender.Male):
+		character.npcThickness = RNG.randi_range(0, 60)
+		character.npcFeminity = RNG.randi_range(0, 50)
+	if(character.npcGender == Gender.Female):
+		character.npcThickness = RNG.randi_range(0, 110)
+		character.npcFeminity = RNG.randi_range(25, 75)
+	if(character.npcGender == Gender.Androgynous):
+		character.npcThickness = RNG.randi_range(0, 100)
+		character.npcFeminity = RNG.randi_range(50, 100)
+	if(character.npcGender == Gender.Other):
+		character.npcThickness = RNG.randi_range(0, 100)
+		character.npcFeminity = RNG.randi_range(0, 100)
+
+static func pickArchetypes(character:DynamicCharacter, _args = {}):
+	var possible = CharacterArchetype.getAll()
 	
+	var picked = []
+	
+	var amount = RNG.randi_range(2, 4)
+	for _i in range(amount):
+		picked.append(RNG.pick(possible))
+	character.npcArchetypes = picked
+	print(picked)
+
+static func pickFetishes(character:DynamicCharacter, _args = {}):
+	var fetishHolder:FetishHolder = character.getFetishHolder()
+	
+	fetishHolder.clear()
+	
+	for fetishID in GlobalRegistry.getFetishes():
+		if(RNG.chance(50)):
+			fetishHolder.setFetish(fetishID, RNG.pick([FetishInterest.Dislikes, FetishInterest.SlightlyDislikes, FetishInterest.SlightlyLikes]))
+		elif(RNG.chance(5)):
+			fetishHolder.setFetish(fetishID, RNG.pick([FetishInterest.Hates, FetishInterest.Loves]))
+		
+	for archetype in character.npcArchetypes:
+		var fetishes = CharacterArchetype.getFetishes(archetype)
+		for fetishID in fetishes:
+			var maxInterest = fetishes[fetishID]
+			var maxInterestNumber = FetishInterest.interestToNumber(maxInterest)
+			if(maxInterestNumber > 0):
+				fetishHolder.addFetish(fetishID, FetishInterest.numberToInterest(RNG.randi_range(1, maxInterestNumber)))
+			elif(maxInterestNumber < -1):
+				fetishHolder.addFetish(fetishID, FetishInterest.numberToInterest(-RNG.randi_range(1, -maxInterestNumber)))
+	
+	fetishHolder.removeImpossibleFetishes()
+
+static func pickLustInterests(character:DynamicCharacter, _args = {}):
+	for topicA in GlobalRegistry.getLustTopicObjects():
+		var topic: TopicBase = topicA
+		var handlesIDs = topic.handles_ids
+		for id in handlesIDs:
+			var pickedInterest = RNG.pick(Interest.getAll())
+			
+			if(pickedInterest != Interest.Neutral):
+				character.getLustInterests().addInterest(id, pickedInterest)
+
+static func getAttacks():
+	return ["stunbatonAttack", "trygetupattack"]
+
+static func getPossibleAttacks():
+	return ["HeatGrenade", "DoubleCuffPC", "CuffPCHands", "ForceGagPC", "ForceMuzzlePC", "stunbatonOverchargeAttack", "simplekickattack", "biteattack", "shoveattack"]
+	
+static func pickAttacks(character:DynamicCharacter, _args = {}):
+	var baseAttacks = getAttacks()
+	for possibleAttack in getPossibleAttacks():
+		if(RNG.chance(50)):
+			baseAttacks.append(possibleAttack)
+	character.npcAttacks = baseAttacks
+
+static func pickPersonality(character:DynamicCharacter, _args = {}):
+	var personality:Personality = character.getPersonality()
+	
+	personality.clear()
+	for statID in PersonalityStat.getAll():
+		personality.setStat(statID, RNG.randf_range(-0.3, 0.3))
+		if(RNG.chance(5)):
+			personality.setStat(statID, RNG.randf_range(-0.3, 0.3)*5.0)
+	
+	for archetype in character.npcArchetypes:
+		var personalityChanges = CharacterArchetype.getPersonalityChanges(archetype)
+		for personalityStat in personalityChanges:
+			var howMuchMax = personalityChanges[personalityStat]
+			
+			if(howMuchMax > 0.0):
+				personality.addStat(personalityStat, RNG.randf_range(0.0, howMuchMax))
+			elif(howMuchMax < 0.0):
+				personality.addStat(personalityStat, -RNG.randf_range(0.0, -howMuchMax))
 
 static func generate(_args = {}):
-	var character = makeBase()
-	pickGender(character)
-	pickName(character)
-	pickEquipment(character)
-	pickSpecies(character)
-	createBodyparts(character)
-	character.resetEquipment()
+	var character = makeBase("npc", _args)
+	pickGender(character, _args)
+	pickBodyAttributes(character, _args)
+	pickName(character, _args)
+	pickEquipment(character, _args)
+	pickSpecies(character, _args)
+	createBodyparts(character, _args)
+	pickArchetypes(character, _args)
+	pickFetishes(character, _args)
+	pickLustInterests(character, _args)
+	pickAttacks(character, _args)
+	pickPersonality(character, _args)
 	
+	character.resetEquipment()
 	return character

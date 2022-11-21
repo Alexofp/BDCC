@@ -32,7 +32,7 @@ func _ready():
 		var interestData = npcLustInterests[interestID]
 		if(interestData is Array):
 			if(interestData.size() > 1):
-				lustInterests.addInterest(interestID, interestData[0], interestData[1])
+				lustInterests.addInterest(interestID, interestData[0])
 			else:
 				lustInterests.addInterest(interestID, interestData[0])
 		else:

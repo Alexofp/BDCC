@@ -8,3 +8,6 @@ func getVisibleName():
 
 func getGoals(_sexEngine, _dom, _sub):
 	return []
+
+func isPossibleFor(_character):
+	return true
