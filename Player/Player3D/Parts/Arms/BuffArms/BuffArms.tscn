@@ -336,27 +336,39 @@ surfaces/0 = {
 
 [node name="BuffArms" instance=ExtResource( 1 )]
 
-[node name="armpng" type="MeshInstance" parent="." index="0"]
+[node name="PartStatePicker3" parent="." index="0" instance=ExtResource( 6 )]
+state = "armalpha"
+
+[node name="PartState" parent="PartStatePicker3" index="0" instance=ExtResource( 7 )]
+
+[node name="armpng" type="MeshInstance" parent="PartStatePicker3/PartState" index="0"]
 mesh = SubResource( 37 )
 skin = SubResource( 20 )
+skeleton = NodePath("../../..")
 material/0 = SubResource( 36 )
 
-[node name="armpng001" type="MeshInstance" parent="." index="1"]
+[node name="armpng001" type="MeshInstance" parent="PartStatePicker3/PartState" index="1"]
 mesh = SubResource( 40 )
 skin = SubResource( 20 )
+skeleton = NodePath("../../..")
 material/0 = SubResource( 36 )
 
-[node name="forearmpng" type="MeshInstance" parent="." index="2"]
+[node name="forearmpng" type="MeshInstance" parent="PartStatePicker3/PartState" index="2"]
 mesh = SubResource( 43 )
 skin = SubResource( 20 )
+skeleton = NodePath("../../..")
 material/0 = SubResource( 42 )
 
-[node name="forearmpng001" type="MeshInstance" parent="." index="3"]
+[node name="forearmpng001" type="MeshInstance" parent="PartStatePicker3/PartState" index="3"]
 mesh = SubResource( 46 )
 skin = SubResource( 20 )
+skeleton = NodePath("../../..")
 material/0 = SubResource( 42 )
 
-[node name="PartStatePicker2" parent="." index="4" instance=ExtResource( 6 )]
+[node name="PartState2" parent="PartStatePicker3" index="1" instance=ExtResource( 7 )]
+stateValue = "hidearms"
+
+[node name="PartStatePicker2" parent="." index="1" instance=ExtResource( 6 )]
 state = "hands"
 
 [node name="PartState" parent="PartStatePicker2" index="0" instance=ExtResource( 7 )]
@@ -389,22 +401,22 @@ skin = SubResource( 20 )
 skeleton = NodePath("../../..")
 material/0 = SubResource( 31 )
 
-[node name="AttachmentProxy" parent="." index="5" instance=ExtResource( 5 )]
+[node name="AttachmentProxy" parent="." index="2" instance=ExtResource( 5 )]
 transform = Transform( 0.98213, 0.188204, 0, -0.188204, 0.98213, 0, 0, 0, 1, -0.127511, 3.91339, 0.419232 )
 boneId = "ForeArm.L"
 zoneName = "wrist.L"
 
-[node name="AttachmentProxy2" parent="." index="6" instance=ExtResource( 5 )]
+[node name="AttachmentProxy2" parent="." index="3" instance=ExtResource( 5 )]
 transform = Transform( 0.98213, 0.188204, 0, -0.188204, 0.98213, 0, 0, 0, 1, -0.228, 3.913, -0.308372 )
 boneId = "ForeArm.R"
 zoneName = "wrist.R"
 
-[node name="AttachmentProxy3" parent="." index="7" instance=ExtResource( 5 )]
+[node name="AttachmentProxy3" parent="." index="4" instance=ExtResource( 5 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.267793, 3.512, -0.300454 )
 boneId = "Hand.R"
 zoneName = "hand.R"
 
-[node name="PartStatePicker" parent="." index="8" instance=ExtResource( 6 )]
+[node name="PartStatePicker" parent="." index="5" instance=ExtResource( 6 )]
 state = "gloves"
 
 [node name="PartState" parent="PartStatePicker" index="0" instance=ExtResource( 7 )]

@@ -13,4 +13,9 @@ enum {
 	
 	# Tail
 	TailFlexible,
+	
+	# Legs
+	LegsDigi,
+	LegsPlanti,
+	LegsHoofs,
 }

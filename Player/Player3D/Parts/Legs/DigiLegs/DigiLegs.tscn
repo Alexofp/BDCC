@@ -5,7 +5,7 @@
 [ext_resource path="res://Player/Player3D/Parts/Legs/HumanLegs/legup.png" type="Texture" id=4]
 [ext_resource path="res://Player/Player3D/Parts/Legs/DigiLegs/digileg.png" type="Texture" id=5]
 
-[sub_resource type="SpatialMaterial" id=1]
+[sub_resource type="SpatialMaterial" id=59]
 resource_name = "digileg.png"
 flags_transparent = true
 flags_unshaded = true
@@ -23,7 +23,7 @@ surfaces/0 = {
 "blend_shape_data": [  ],
 "format": 2194903,
 "index_count": 720,
-"material": SubResource( 1 ),
+"material": SubResource( 59 ),
 "primitive": 4,
 "skeleton_aabb": [ AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( -0.273374, -0.13041, 0.205011, 1.16464, 2.5398, 9.99868e-06 ), AABB( -0.361842, -0.144812, 0.205011, 1.14969, 1.12859, 9.99868e-06 ) ],
 "vertex_count": 493
@@ -252,12 +252,12 @@ surfaces/0 = {
 [node name="digilegpng" type="MeshInstance" parent="." index="0"]
 mesh = SubResource( 38 )
 skin = SubResource( 39 )
-material/0 = SubResource( 1 )
+material/0 = SubResource( 59 )
 
 [node name="digilegpng001" type="MeshInstance" parent="." index="1"]
 mesh = SubResource( 40 )
 skin = SubResource( 39 )
-material/0 = SubResource( 1 )
+material/0 = SubResource( 59 )
 
 [node name="legupDeformable" type="MeshInstance" parent="." index="2"]
 mesh = SubResource( 43 )

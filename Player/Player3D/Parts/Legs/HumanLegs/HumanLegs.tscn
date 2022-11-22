@@ -370,13 +370,11 @@ material/0 = SubResource( 23 )
 visible = false
 mesh = SubResource( 35 )
 skin = SubResource( 31 )
-material/0 = null
 
 [node name="leguppng001" type="MeshInstance" parent="." index="5"]
 visible = false
 mesh = SubResource( 36 )
 skin = SubResource( 31 )
-material/0 = null
 
 [node name="legupDeformable" type="MeshInstance" parent="." index="6"]
 mesh = SubResource( 37 )

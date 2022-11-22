@@ -33,3 +33,6 @@ func createBodyparts():
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("canineears"))
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("caninehead"))
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("combedbackhair"))
+
+func createEquipment():
+	getInventory().equipItem(GlobalRegistry.createItemNoID("OfficialClothes"))

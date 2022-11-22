@@ -1223,6 +1223,15 @@ func softUpdateDoll(doll: Doll3D):
 	doll.setState("mouth", "")
 	doll.setState("muzzle", "")
 	doll.setState("gloves", "")
+	doll.setState("armalpha", "")
+	if(bodypartHasTrait(BodypartSlot.Legs, PartTrait.LegsPlanti)):
+		doll.setState("legstype", "planti")
+	elif(bodypartHasTrait(BodypartSlot.Legs, PartTrait.LegsDigi)):
+		doll.setState("legstype", "digi")
+	elif(bodypartHasTrait(BodypartSlot.Legs, PartTrait.LegsHoofs)):
+		doll.setState("legstype", "hoofs")
+	else:
+		doll.setState("legstype", "")
 	updateLeaking(doll)
 	
 	if(isReadyToPenetrate()):
@@ -1281,6 +1290,7 @@ func softUpdateDoll(doll: Doll3D):
 		if(item == null):
 			continue
 		
+		# Add a check here that the item is actually visible first?
 		item.updateDoll(doll)
 
 func updateDoll(doll: Doll3D):
