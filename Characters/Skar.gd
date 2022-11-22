@@ -129,3 +129,6 @@ func reactRestraint(_restraintType, restraintAmount, isGettingForced):
 			"Fuck off",
 		])
 	return null
+
+func createEquipment():
+	getInventory().equipItem(GlobalRegistry.createItemNoID("GuardClothes"))

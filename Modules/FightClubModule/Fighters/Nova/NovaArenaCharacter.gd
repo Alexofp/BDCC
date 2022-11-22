@@ -70,10 +70,6 @@ func createBodyparts():
 	giveBodypartUnlessSame(penis)
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("huskytail"))
 
-func createEquipment():
-	#getInventory().equipItem(GlobalRegistry.createItemNoID("inmatecollar"))
-	pass
-
 func getThickness():
 	return 115
 
@@ -83,3 +79,6 @@ func getLootTable(_battleName):
 
 func getParentCharacterID():
 	return "nova"
+
+func createEquipment():
+	getInventory().equipItem(GlobalRegistry.createItemNoID("GuardClothes"))

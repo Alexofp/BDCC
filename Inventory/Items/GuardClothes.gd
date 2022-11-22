@@ -1,13 +1,13 @@
 extends ItemBase
 
 func _init():
-	id = "OfficialClothes"
+	id = "GuardClothes"
 
 func getVisibleName():
-	return "Official clothes"
+	return "Guard clothes"
 	
 func getDescription():
-	return "Very fancy clothes for very fancy people"
+	return "A standart armor for guards"
 
 func getClothingSlot():
 	return InventorySlot.Body
@@ -18,15 +18,15 @@ func getBuffs():
 
 func getTakingOffStringLong(withS):
 	if(withS):
-		return "takes off your jacket and pulls down the pants"
+		return "takes off your armor"
 	else:
-		return "take off your jacket and pull down the pants"
+		return "take off your armor"
 
 func getPuttingOnStringLong(withS):
 	if(withS):
-		return "puts on your jacket and the pants"
+		return "puts on your armor"
 	else:
-		return "put on your jacket and the pants"
+		return "put on your armor"
 
 func generateItemState():
 	itemState = ShirtAndShortsState.new()
@@ -35,7 +35,7 @@ func getRiggedParts(_character):
 	if(itemState.isRemoved()):
 		return null
 	return {
-		"clothing": "res://Inventory/RiggedModels/OfficialClothes/OfficialClothes.tscn",
+		"clothing": "res://Inventory/RiggedModels/GuardClothes/GuardClothes.tscn",
 	}
 
 func getHidesParts(_character):
@@ -44,6 +44,7 @@ func getHidesParts(_character):
 	var removed = {
 		BodypartSlot.Legs: true,
 		BodypartSlot.Arms: true,
+		BodypartSlot.Body: true,
 		BodypartSlot.Breasts: true,
 		"panties": true,
 		"bra": true,

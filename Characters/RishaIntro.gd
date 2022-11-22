@@ -53,3 +53,6 @@ func createBodyparts():
 
 func getParentCharacterID():
 	return "risha"
+
+func createEquipment():
+	getInventory().equipItem(GlobalRegistry.createItemNoID("GuardClothes"))

@@ -114,3 +114,6 @@ func createBodyparts():
 	breasts.size = 4
 	giveBodypartUnlessSame(breasts)
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("shorthair"))
+
+func createEquipment():
+	getInventory().equipItem(GlobalRegistry.createItemNoID("GuardClothes"))

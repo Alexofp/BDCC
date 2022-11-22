@@ -180,3 +180,6 @@ func reactRestraint(restraintType, restraintAmount, isGettingForced):
 			"Drugs go well with bondage",
 		])
 	return null
+
+func createEquipment():
+	getInventory().equipItem(GlobalRegistry.createItemNoID("NurseClothes"))

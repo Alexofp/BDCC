@@ -98,3 +98,6 @@ func createBodyparts():
 	var breasts = GlobalRegistry.createBodypart("humanbreasts")
 	breasts.size = 8
 	giveBodypartUnlessSame(breasts)
+
+func createEquipment():
+	getInventory().equipItem(GlobalRegistry.createItemNoID("NurseClothes"))

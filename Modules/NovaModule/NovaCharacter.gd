@@ -124,10 +124,6 @@ func createBodyparts():
 	giveBodypartUnlessSame(penis)
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("huskytail"))
 
-func createEquipment():
-	#getInventory().equipItem(GlobalRegistry.createItemNoID("inmatecollar"))
-	pass
-
 func getThickness():
 	return 115
 
@@ -201,3 +197,6 @@ func reactRestraint(restraintType, restraintAmount, isGettingForced):
 			"I'm a guard, I'm not a bondage slut",
 		])
 	return null
+
+func createEquipment():
+	getInventory().equipItem(GlobalRegistry.createItemNoID("GuardClothes"))

@@ -189,3 +189,6 @@ func reactRestraint(restraintType, restraintAmount, isGettingForced):
 			"I'm a huge cat, you can't tie me up",
 		])
 	return null
+
+func createEquipment():
+	getInventory().equipItem(GlobalRegistry.createItemNoID("GuardClothes"))
