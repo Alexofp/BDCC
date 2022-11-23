@@ -16,7 +16,7 @@ func _initScene(_args = []):
 	#sexEngine.initPeople(top, "pc")
 	#sexEngine.initPeople(top, "rahi")
 	
-	var newCharacter = GuardGenerator.generate()
+	var newCharacter = GuardGenerator.new().generate()
 	addCharacter(newCharacter.id)
 	
 	#sexEngine.initPeople("pc", top)

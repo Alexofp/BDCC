@@ -297,7 +297,8 @@ func hasTag(tag):
 	return false
 
 func generateItemState():
-	pass
+	if(getClothingSlot() != null):
+		itemState = ItemState.new()
 
 func getItemState():
 	return itemState

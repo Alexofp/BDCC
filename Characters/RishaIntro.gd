@@ -55,4 +55,4 @@ func getParentCharacterID():
 	return "risha"
 
 func createEquipment():
-	getInventory().equipItem(GlobalRegistry.createItemNoID("GuardClothes"))
+	getInventory().equipItem(GlobalRegistry.createItemNoID("GuardArmor"))

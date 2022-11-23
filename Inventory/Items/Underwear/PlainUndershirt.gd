@@ -48,3 +48,10 @@ func getRiggedParts(_character):
 	return {
 		"top": "res://Inventory/RiggedModels/Undershirt/Undershirt.tscn",
 	}
+
+func getHidesParts(_character):
+	if(itemState.isRemoved() || itemState.isBraPulledUp()):
+		return null
+	return {
+		BodypartSlot.Breasts: true,
+	}

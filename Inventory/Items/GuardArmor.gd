@@ -1,10 +1,10 @@
 extends ItemBase
 
 func _init():
-	id = "GuardClothes"
+	id = "GuardArmor"
 
 func getVisibleName():
-	return "Guard clothes"
+	return "Guard armor"
 	
 func getDescription():
 	return "A standart armor for guards"

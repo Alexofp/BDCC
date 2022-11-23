@@ -81,4 +81,4 @@ func getParentCharacterID():
 	return "nova"
 
 func createEquipment():
-	getInventory().equipItem(GlobalRegistry.createItemNoID("GuardClothes"))
+	getInventory().equipItem(GlobalRegistry.createItemNoID("GuardArmor"))
