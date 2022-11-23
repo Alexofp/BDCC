@@ -411,3 +411,6 @@ func processUntilTime(theday:int, theseconds:int):
 	
 	lastUpdatedDay = theday
 	lastUpdatedSecond = theseconds
+
+func onStoppedProcessing():
+	pass

@@ -373,7 +373,10 @@ func doDomAction(_id, _actionInfo):
 				domInfo.cum()
 				subInfo.addArousalSex(0.2)
 				satisfyGoals()
-				state = "aftercumminginside"
+				if(knotSuccess):
+					state = "knotting"
+				else:
+					state = "aftercumminginside"
 				
 				return {text=text}
 		

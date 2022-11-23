@@ -18,6 +18,7 @@ func _initScene(_args = []):
 	
 	var newCharacter = GuardGenerator.new().generate()
 	addCharacter(newCharacter.id)
+	GM.main.addDynamicCharacterToPool(newCharacter.id, CharacterPool.Guards)
 	
 	#sexEngine.initPeople("pc", top)
 	if(RNG.chance(50)):

@@ -10,6 +10,8 @@ var npcFeminity = 0
 var npcDefaultEquipment = []
 var npcArchetypes = []
 var npcAttacks = []
+var temporaryCharacter = false
+var flags = {}
 
 func _getName():
 	return npcName
@@ -47,6 +49,29 @@ func createEquipment():
 func _getAttacks():
 	return npcAttacks
 
+func deleteSelf():
+	print(getID()+" SELF DELETED")
+	GM.main.removeDynamicCharacter(getID())
+
+func onStoppedProcessing():
+	if(temporaryCharacter):
+		deleteSelf()
+
+func setTemporary(newTemp:bool):
+	temporaryCharacter = newTemp
+
+func setFlag(flagID, value):
+	flags[flagID] = value
+
+func getFlag(flagID, defaultValue = null):
+	if(!flags.has(flagID)):
+		return defaultValue
+	
+	return flags[flagID]
+
+func increaseFlag(flagID, addvalue = 1):
+	setFlag(flagID, getFlag(flagID, 0) + addvalue)
+
 func saveData():
 	var data = {
 		"pain": pain,
@@ -62,6 +87,8 @@ func saveData():
 		"npcFeminity": npcFeminity,
 		"npcArchetypes": npcArchetypes,
 		"npcAttacks": npcAttacks,
+		"temporaryCharacter": temporaryCharacter,
+		"flags": flags,
 	}
 	
 	data["bodyparts"] = {}
@@ -110,6 +137,8 @@ func loadData(data):
 	npcFeminity = SAVE.loadVar(data, "npcFeminity", 50)
 	npcArchetypes = SAVE.loadVar(data, "npcArchetypes", [])
 	npcAttacks = SAVE.loadVar(data, "npcAttacks", [])
+	temporaryCharacter = SAVE.loadVar(data, "temporaryCharacter", false)
+	flags = SAVE.loadVar(data, "flags", {})
 	
 	resetSlots()
 	var loadedBodyparts = SAVE.loadVar(data, "bodyparts", {})

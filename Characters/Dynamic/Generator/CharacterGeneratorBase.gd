@@ -25,6 +25,9 @@ func pickName(character:DynamicCharacter, _args = {}):
 func pickEquipment(character:DynamicCharacter, _args = {}):
 	character.npcDefaultEquipment = ["CasualClothes", "LaceBra", "LacePanties"]
 
+func pickNonStaticEquipment(_character:DynamicCharacter, _args = {}):
+	pass
+
 func pickedSpeciesType(_args = {}):
 	return "guard"
 
@@ -210,4 +213,5 @@ func generate(_args = {}):
 	pickEquipment(character, _args)
 	
 	character.resetEquipment()
+	pickNonStaticEquipment(character, _args)
 	return character

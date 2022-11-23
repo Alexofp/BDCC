@@ -21,6 +21,7 @@ var rollbacker:Rollbacker
 var staticCharacters = {}
 var charactersToUpdate = {}
 var dynamicCharacters = {}
+var dynamicCharactersPools = {}
 
 signal time_passed(_secondsPassed)
 
@@ -111,8 +112,58 @@ func removeDynamicCharacter(characterID):
 		characterID = characterID.getID()
 	
 	if(dynamicCharacters.has(characterID)):
+		removeDynamicCharacterFromAllPools(characterID)
+		
 		dynamicCharacters[characterID].queue_free()
 		dynamicCharacters.erase(characterID)
+
+func addDynamicCharacterToPool(characterID, poolID:String):
+	if(characterID is DynamicCharacter):
+		characterID = characterID.getID()
+	
+	if(!dynamicCharacters.has(characterID)):
+		return false
+	
+	if(!dynamicCharactersPools.has(poolID)):
+		dynamicCharactersPools[poolID] = {}
+	
+	dynamicCharactersPools[poolID][characterID] = true
+	return true
+
+func removeDynamicCharacterFromPool(characterID, poolID:String):
+	if(characterID is DynamicCharacter):
+		characterID = characterID.getID()
+	
+	if(!dynamicCharactersPools.has(poolID)):
+		return false
+	if(!dynamicCharactersPools[poolID].has(characterID)):
+		return false
+
+	dynamicCharactersPools[poolID].erase(characterID)
+	return true
+
+func removeDynamicCharacterFromAllPools(characterID):
+	if(characterID is DynamicCharacter):
+		characterID = characterID.getID()
+	
+	for poolID in dynamicCharactersPools:
+		if(dynamicCharactersPools[poolID].has(characterID)):
+			dynamicCharactersPools[poolID].erase(characterID)
+
+func getDynamicCharacterIDsFromPool(poolID:String):
+	if(!dynamicCharactersPools.has(poolID)):
+		return []
+	
+	return dynamicCharactersPools[poolID].keys()
+
+func getDynamicCharactersPoolSize(poolID:String):
+	if(!dynamicCharactersPools.has(poolID)):
+		return 0
+	
+	return dynamicCharactersPools[poolID].size()
+
+func getDynamicCharactersPools():
+	return dynamicCharactersPools.keys()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -277,6 +328,7 @@ func saveData():
 	data["logMessages"] = logMessages
 	data["roomMemories"] = roomMemories
 	data["world"] = GM.world.saveData()
+	data["dynamicCharactersPools"] = dynamicCharactersPools
 	
 	data["scenes"] = []
 	for scene in sceneStack:
@@ -301,6 +353,7 @@ func loadData(data):
 	GM.CS.loadData(SAVE.loadVar(data, "ChildSystem", {}))
 	logMessages = SAVE.loadVar(data, "logMessages", [])
 	roomMemories = SAVE.loadVar(data, "roomMemories", {})
+	dynamicCharactersPools = SAVE.loadVar(data, "dynamicCharactersPools", {})
 	
 	var scenes = SAVE.loadVar(data, "scenes", [])
 	
@@ -376,9 +429,11 @@ func isVeryLate():
 func stopProcessingUnusedCharacters():
 	for charID in charactersToUpdate.keys():
 		var character = getCharacter(charID)
-		if(!character.shouldBeUpdated()):
+		if(character == null || !character.shouldBeUpdated()):
 			print("STOPPED PROCESSING: "+str(charID))
 			charactersToUpdate.erase(charID)
+			if(character != null):
+				character.onStoppedProcessing()
 
 func processTime(_seconds):
 	_seconds = int(round(_seconds))
@@ -397,7 +452,8 @@ func doTimeProcess(_seconds):
 		
 		for characterID in charactersToUpdate:
 			var character = getCharacter(characterID)
-			character.processTime(clippedSeconds)
+			if(character != null):
+				character.processTime(clippedSeconds)
 		
 		copySeconds -= clippedSeconds
 	

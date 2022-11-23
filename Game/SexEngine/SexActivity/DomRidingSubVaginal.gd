@@ -352,7 +352,10 @@ func doDomAction(_id, _actionInfo):
 		subInfo.cum()
 		domInfo.addArousalSex(0.05)
 		satisfyGoals()
-		state = ""
+		if(knotSuccess):
+			state = "knotting"
+		else:
+			state = ""
 
 		return {text=text}
 	if(_id == "makesubcumoutside"):

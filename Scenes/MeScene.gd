@@ -96,6 +96,7 @@ func _run():
 		addButton("Masturbate", "Do the thing", "domasturbate")
 		addButton("Gender", "Pick your gender", "pickgender")
 		addButton("Pronouns", "Pick your pronouns", "pickpronouns")
+		addButton("Encounters", "Info about your previous encounters", "encountersMenu")
 		if(!getFlag("Game_PickedStartingPerks", false)):
 			addButton("Pick Perks!", "Pick your starting perks. You can only do this once", "pickstartingperks")
 		#addButton("[debug] Struggle", "Test the struggle minigame", "teststruggle")
@@ -148,6 +149,10 @@ func onMinigameTest(_score):
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
 		endScene()
+		return
+	
+	if(_action == "encountersMenu"):
+		runScene("EncountersMenuScene")
 		return
 	
 	if(_action == "setgender"):
