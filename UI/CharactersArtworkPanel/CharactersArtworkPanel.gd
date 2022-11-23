@@ -34,7 +34,24 @@ func addCharacter(charID:String, variant:Array):
 	var imagePath = null
 	var imageData = Images.getCharacter(charID, variant)
 	if(imageData == null):
-		imagePath = "res://Images/UI/GenericFace.png"
+		var character = GlobalRegistry.getCharacter(charID)
+		if(character != null):
+			var defaultImageData = character.getDefaultArtwork(variant)
+			var defaultImagePath = defaultImageData
+			
+			if(defaultImagePath is Array):
+				defaultImagePath = defaultImagePath[0]
+				if(defaultImageData.size() > 1 && defaultImagePath != null):
+					imageArtist = defaultImageData[1]
+					
+			if(defaultImagePath == null):
+				imagePath = "res://Images/UI/GenericFace.png"
+			else:
+				if(defaultImagePath != "res://Images/UI/GenericFace.png"):
+					isGenericPortrait = false
+				imagePath = defaultImagePath
+		else:
+			imagePath = "res://Images/UI/GenericFace.png"
 	else:
 		imagePath = imageData[0]
 		imageArtist = imageData[1]

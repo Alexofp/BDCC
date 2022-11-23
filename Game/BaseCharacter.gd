@@ -1712,3 +1712,6 @@ func hasAnyWomb():
 	if(menstrualCycle == null):
 		return false
 	return menstrualCycle.hasAnyWomb()
+
+func getDefaultArtwork(_variant = []):
+	return "res://Images/UI/GenericFace.png"
