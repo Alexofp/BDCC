@@ -24,6 +24,7 @@ var dynamicCharacters = {}
 var dynamicCharactersPools = {}
 
 signal time_passed(_secondsPassed)
+signal saveLoadingFinished
 
 func _init():
 	rollbacker = Rollbacker.new()
@@ -280,6 +281,9 @@ func loadingSavefileFinished():
 		if(character.shouldBeUpdated()):
 			startUpdatingCharacter(charID)
 	
+	emit_signal("saveLoadingFinished")
+	#if(GM.ui != null):
+	#	GM.ui.getStage3d().resetToNothing()
 	reRun()
 	
 	applyAllWorldEdits()

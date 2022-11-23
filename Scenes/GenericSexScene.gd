@@ -165,3 +165,18 @@ func supportsSexEngine():
 
 func _onSceneEnd():
 	sexEngine.endSex()
+
+func saveData():
+	var data = .saveData()
+	
+	data["currentCategory"] = currentCategory
+	data["sexEngine"] = sexEngine.saveData()
+
+	return data
+	
+func loadData(data):
+	.loadData(data)
+	
+	sexEngine = SexEngine.new()
+	currentCategory = SAVE.loadVar(data, "currentCategory", [])
+	sexEngine.loadData(SAVE.loadVar(data, "sexEngine", {}))

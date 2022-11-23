@@ -1,6 +1,6 @@
 extends SexActivityBase
 
-var itemIDToRemove
+var itemIDToRemove = ""
 var tick = 0
 
 func _init():
@@ -57,6 +57,9 @@ func startActivity(_args):
 	}
 
 func checkRemoved():
+	if(itemIDToRemove == null || itemIDToRemove == ""):
+		return true
+		
 	var sub = getSub()
 	var subDidIt = false
 	var item = sub.getInventory().getEquippedItemByID(itemIDToRemove)
@@ -135,3 +138,17 @@ func getItemToRemove(character):
 		if(firstItem != null && !canRemoveItems.has(firstItem) && !firstItem.isRestraint()):
 			canRemoveItems.append(firstItem)
 	return RNG.pick(canRemoveItems)
+
+func saveData():
+	var data = .saveData()
+	
+	data["itemIDToRemove"] = itemIDToRemove
+	data["tick"] = tick
+
+	return data
+	
+func loadData(data):
+	.loadData(data)
+	
+	itemIDToRemove = SAVE.loadVar(data, "itemIDToRemove", "")
+	tick = SAVE.loadVar(data, "tick", 0)

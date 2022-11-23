@@ -928,3 +928,84 @@ func getCurrentActivitiesMaxDomOrgasmHandlePriority(domID, subID):
 			if(thePriority > maxResult):
 				maxResult = thePriority
 	return maxResult
+
+#var activities:Array = []
+#var revealedBodyparts: Dictionary = {}
+#var messages:Array = []
+#
+#var doms = {}
+#var subs = {}
+#var trackedItems = {}
+#
+#var currentLastActivityID = 0
+#
+#var sexEnded = false
+
+func saveData():
+	var data = {
+		"revealedBodyparts": revealedBodyparts,
+		"messages": messages,
+		"trackedItems": trackedItems,
+		"currentLastActivityID": currentLastActivityID,
+		"sexEnded": sexEnded,
+	}
+	
+	var domsData = {}
+	for domID in doms:
+		domsData[domID] = doms[domID].saveData()
+	data["doms"] = domsData
+
+	var subsData = {}
+	for subID in subs:
+		subsData[subID] = subs[subID].saveData()
+	data["subs"] = subsData
+	
+	var activityData = []
+	for activity in activities:
+		activityData.append({
+			"id": activity.id,
+			"data": activity.saveData(),
+		})
+	data["activities"] = activityData
+
+	return data
+	
+func loadData(data):
+	revealedBodyparts = SAVE.loadVar(data, "revealedBodyparts", {})
+	messages = SAVE.loadVar(data, "messages", [])
+	trackedItems = SAVE.loadVar(data, "trackedItems", {})
+	currentLastActivityID = SAVE.loadVar(data, "currentLastActivityID", 0)
+	sexEnded = SAVE.loadVar(data, "sexEnded", false)
+	
+	doms.clear()
+	subs.clear()
+	activities.clear()
+	
+	var domsData = SAVE.loadVar(data, "doms", {})
+	for domID in domsData:
+		var domInfo = SexDomInfo.new()
+		domInfo.initInfo(domID, self)
+		domInfo.loadData(domsData[domID])
+		
+		doms[domID] = domInfo
+
+	var subsData = SAVE.loadVar(data, "subs", {})
+	for subID in subsData:
+		var subInfo = SexSubInfo.new()
+		subInfo.initInfo(subID, self)
+		subInfo.loadData(subsData[subID])
+		
+		subs[subID] = subInfo
+	
+	var activityData = SAVE.loadVar(data, "activities", [])
+	for activityInfo in activityData:
+		var activityID = SAVE.loadVar(activityInfo, "id", "")
+		
+		var activityObject = GlobalRegistry.createSexActivity(activityID)
+		if(activityObject == null):
+			continue
+		
+		activityObject.sexEngineRef = weakref(self)
+		activityObject.loadData(SAVE.loadVar(activityInfo, "data", {}))
+		
+		activities.append(activityObject)

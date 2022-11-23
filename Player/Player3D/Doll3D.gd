@@ -32,6 +32,9 @@ func _ready():
 	if(addTestBody):
 		testBody()
 	$RandomLeakTimer.start(RNG.randf_range(3, 20))
+	
+	if(GM.main != null && is_instance_valid(GM.main)):
+		var _ok = GM.main.connect("saveLoadingFinished", self, "reconnect")
 
 func testBody():
 	addPartObject("body", load("res://Player/Player3D/Parts/Body/HumanBody/HumanBody.tscn").instance())
@@ -188,6 +191,15 @@ func setShapeKeyValue(shapeKey: String, value: float):
 		var part = parts[slot]
 		
 		part.setShapeKeyValue(shapeKey, value)
+
+func reconnect():
+	if(savedCharacterID == null || savedCharacterID == ""):
+		return
+	
+	disconnectFromOld()
+	var cashedCharID = savedCharacterID
+	savedCharacterID = ""
+	loadCharacter(cashedCharID)
 
 func disconnectFromOld():
 	if(savedCharacterID != null && savedCharacterID != ""):

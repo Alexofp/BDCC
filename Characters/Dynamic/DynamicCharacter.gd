@@ -89,6 +89,7 @@ func saveData():
 		"npcAttacks": npcAttacks,
 		"temporaryCharacter": temporaryCharacter,
 		"flags": flags,
+		"npcDefaultEquipment": npcDefaultEquipment,
 	}
 	
 	data["bodyparts"] = {}
@@ -139,6 +140,8 @@ func loadData(data):
 	npcAttacks = SAVE.loadVar(data, "npcAttacks", [])
 	temporaryCharacter = SAVE.loadVar(data, "temporaryCharacter", false)
 	flags = SAVE.loadVar(data, "flags", {})
+	npcDefaultEquipment = SAVE.loadVar(data, "npcDefaultEquipment", [])
+	resetEquipment()
 	
 	resetSlots()
 	var loadedBodyparts = SAVE.loadVar(data, "bodyparts", {})
@@ -176,3 +179,5 @@ func loadData(data):
 	lustInterests.loadDataDynamicNpc(SAVE.loadVar(data, "lustInterests", {}))
 	fetishHolder.loadData(SAVE.loadVar(data, "fetishHolder", {}))
 	personality.loadData(SAVE.loadVar(data, "personality", {}))
+
+	updateAppearance()

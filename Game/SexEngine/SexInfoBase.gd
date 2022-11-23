@@ -2,7 +2,7 @@ extends Reference
 class_name SexInfoBase
 
 var sexEngineRef: WeakRef
-var charID = null
+var charID = ""
 var timesCame: int = 0
 var memory:Dictionary = {}
 var tick:int = 0
@@ -19,7 +19,7 @@ func initInfo(theCharID, sexengine):
 	initFromPersonality()
 	
 func getChar() -> BaseCharacter:
-	if(charID == null):
+	if(charID == null || charID == ""):
 		return null
 	
 	return GlobalRegistry.getCharacter(charID)
@@ -136,3 +136,21 @@ func getSexEndInfo():
 
 func hasTag(thetag):
 	return getSexEngine().hasTag(charID, thetag)
+
+func saveData():
+	var data = {
+		"charID": charID,
+		"timesCame": timesCame,
+		"memory": memory,
+		"tick": tick,
+		"lustFull": lustFull,
+	}
+
+	return data
+	
+func loadData(data):
+	charID = SAVE.loadVar(data, "charID", "")
+	timesCame = SAVE.loadVar(data, "timesCame", 0)
+	memory = SAVE.loadVar(data, "memory", {})
+	tick = SAVE.loadVar(data, "tick", 0)
+	lustFull = SAVE.loadVar(data, "lustFull", 0.0)

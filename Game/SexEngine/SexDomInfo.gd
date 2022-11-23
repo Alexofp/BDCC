@@ -1,7 +1,8 @@
 extends SexInfoBase
 class_name SexDomInfo
 
-var stance = SexStance.Standing
+#var stance = SexStance.Standing
+
 var goals:Array = []
 var anger: float = 0.0
 var isDown:bool = false
@@ -114,3 +115,21 @@ func getSexEndInfo():
 	texts.append("Average anger: "+str(Util.roundF(getAverageAnger()*100.0, 1))+"%")
 	
 	return texts
+
+func saveData():
+	var data = .saveData()
+	
+	data["goals"] = goals
+	data["anger"] = anger
+	data["isDown"] = isDown
+	data["angerFull"] = angerFull
+
+	return data
+	
+func loadData(data):
+	.loadData(data)
+	
+	goals = SAVE.loadVar(data, "goals", [])
+	anger = SAVE.loadVar(data, "anger", 0.0)
+	isDown = SAVE.loadVar(data, "isDown", false)
+	angerFull = SAVE.loadVar(data, "angerFull", 0.0)

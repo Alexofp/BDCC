@@ -276,3 +276,15 @@ func getDomOrgasmHandlePriority():
 
 func getSubOrgasmHandlePriority():
 	return 5
+
+func saveData():
+	var data = .saveData()
+	
+	data["cumAmount"] = cumAmount
+
+	return data
+	
+func loadData(data):
+	.loadData(data)
+	
+	cumAmount = SAVE.loadVar(data, "cumAmount", 0)

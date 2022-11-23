@@ -314,3 +314,24 @@ func getGenericSubOrgasmData():
 
 func getGenericDomOrgasmData():
 	return getGenericOrgasmData(false)
+
+func saveData():
+	var data = {
+		"uniqueID": uniqueID,
+		"domID": domID,
+		"subID": subID,
+		"hasEnded": hasEnded,
+		"state": state,
+	}
+
+	return data
+	
+func loadData(data):
+	uniqueID = SAVE.loadVar(data, "uniqueID", 0)
+	domID = SAVE.loadVar(data, "domID", "")
+	subID = SAVE.loadVar(data, "subID", "")
+	hasEnded = SAVE.loadVar(data, "hasEnded", false)
+	state = SAVE.loadVar(data, "state", "")
+	
+	domInfo = getSexEngine().getDomInfo(domID)
+	subInfo = getSexEngine().getSubInfo(subID)

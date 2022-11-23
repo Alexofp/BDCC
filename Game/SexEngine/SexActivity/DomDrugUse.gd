@@ -386,3 +386,17 @@ func doSubAction(_id, _actionInfo):
 		
 		domInfo.addAnger(0.1)
 		return {text = "{sub.You} {sub.youVerb('try', 'tries')} to stop {dom.youHim} from taking the pill but {sub.youVerb('fail')}.",}
+
+func saveData():
+	var data = .saveData()
+	
+	data["usedItemID"] = usedItemID
+	data["timePassed"] = timePassed
+
+	return data
+	
+func loadData(data):
+	.loadData(data)
+	
+	usedItemID = SAVE.loadVar(data, "usedItemID", "")
+	timePassed = SAVE.loadVar(data, "timePassed", 0)

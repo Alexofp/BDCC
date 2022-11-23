@@ -178,3 +178,17 @@ func doSubAction(_id, _actionInfo):
 		
 		domInfo.addAnger(0.1)
 		return {text = "{sub.You} {sub.youVerb('try', 'tries')} to resist {dom.yourHis} attempt at restraining {sub.youHim} but {sub.youVerb('fail')}.",}
+
+func saveData():
+	var data = .saveData()
+	
+	data["pcUniqueID"] = pcUniqueID
+	data["npcItemID"] = npcItemID
+
+	return data
+	
+func loadData(data):
+	.loadData(data)
+	
+	pcUniqueID = SAVE.loadVar(data, "pcUniqueID", "")
+	npcItemID = SAVE.loadVar(data, "npcItemID", "")

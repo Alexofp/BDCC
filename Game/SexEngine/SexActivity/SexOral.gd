@@ -898,3 +898,15 @@ func getDomOrgasmHandlePriority():
 
 func getSubOrgasmHandlePriority():
 	return -1
+
+func saveData():
+	var data = .saveData()
+	
+	data["waitTimer"] = waitTimer
+
+	return data
+	
+func loadData(data):
+	.loadData(data)
+	
+	waitTimer = SAVE.loadVar(data, "waitTimer", 0)

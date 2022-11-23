@@ -1,7 +1,7 @@
 extends SexInfoBase
 class_name SexSubInfo
 
-var stance = SexStance.Standing
+#var stance = SexStance.Standing
 
 var resistance: float = 0.0
 var fear: float = 0.0
@@ -129,3 +129,21 @@ func getSexEndInfo():
 	texts.append("Average fear: "+str(Util.roundF(getAverageFear()*100.0, 1))+"%")
 	
 	return texts
+
+func saveData():
+	var data = .saveData()
+	
+	data["resistance"] = resistance
+	data["fear"] = fear
+	data["resistanceFull"] = resistanceFull
+	data["fearFull"] = fearFull
+
+	return data
+	
+func loadData(data):
+	.loadData(data)
+	
+	resistance = SAVE.loadVar(data, "resistance", 0.0)
+	fear = SAVE.loadVar(data, "fear", 0.0)
+	resistanceFull = SAVE.loadVar(data, "resistanceFull", 0.0)
+	fearFull = SAVE.loadVar(data, "fearFull", 0.0)

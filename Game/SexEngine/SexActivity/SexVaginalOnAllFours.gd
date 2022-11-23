@@ -693,3 +693,17 @@ func getDomOrgasmHandlePriority():
 
 func getSubOrgasmHandlePriority():
 	return 5
+
+func saveData():
+	var data = .saveData()
+	
+	data["times"] = times
+	data["gonnaCumOutside"] = gonnaCumOutside
+
+	return data
+	
+func loadData(data):
+	.loadData(data)
+	
+	times = SAVE.loadVar(data, "times", 0)
+	gonnaCumOutside = SAVE.loadVar(data, "gonnaCumOutside", false)

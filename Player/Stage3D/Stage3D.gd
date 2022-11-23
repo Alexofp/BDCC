@@ -5,19 +5,20 @@ var currentScene: BaseStageScene3D
 onready var animPlayer = $AnimationPlayer
 
 func _ready():
-	call_deferred("play", StageScene.Solo, "stand") # Player is created late
+	resetToNothing() # Player is created late
 	#call_deferred("play", StageScene.Duo, "kneel", {npc="nova"}) # Player is created late
 	#play(StageScene.Solo, "stand")
 
-func play(sceneID, actionID, args = []):
+func play(sceneID, actionID, args = [], skipFade = false):
 	if(currentScene != null && currentScene.id == sceneID && currentScene.canTransitionTo(actionID, args)):
 		currentScene.playAnimation(actionID, args)
 		return
 	
 	if(currentScene != null):
-		animPlayer.play("Fade")
-		yield(animPlayer, "animation_finished")
-		animPlayer.play_backwards("Fade")
+		if(!skipFade):
+			animPlayer.play("Fade")
+			yield(animPlayer, "animation_finished")
+			animPlayer.play_backwards("Fade")
 		currentScene.queue_free()
 		currentScene = null
 	
@@ -32,3 +33,6 @@ func play(sceneID, actionID, args = []):
 func updateSubAnims():
 	if(currentScene != null):
 		currentScene.updateSubAnims()
+
+func resetToNothing():
+	play(StageScene.Nothing, "", [], true)
