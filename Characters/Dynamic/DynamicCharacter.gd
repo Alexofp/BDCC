@@ -13,6 +13,9 @@ var npcAttacks = []
 var temporaryCharacter = false
 var flags = {}
 
+func _init():
+	npcHasMenstrualCycle = true
+
 func _getName():
 	return npcName
 

@@ -978,6 +978,6 @@ func startUpdatingCharacter(charID):
 		print("BEGAN PROCESSING "+str(charID))
 		getCharacter(charID).processUntilTime(currentDay, timeOfDay)
 
-func generateCharacterID(beginPart = "npc"):
+func generateCharacterID(beginPart = "dynamicnpc"):
 	var numID = GlobalRegistry.generateNPCUniqueID()
 	return beginPart+str(numID)

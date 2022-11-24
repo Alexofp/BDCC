@@ -406,6 +406,18 @@ func hasLockedStaticRestraints():
 			return true
 	return false
 
+func hasIllegalItems():
+	for item in items:
+		if(item.hasTag(ItemTag.Illegal)):
+			return true
+
+	for itemSlot in equippedItems.keys():
+		var item = equippedItems[itemSlot]
+
+		if(item.hasTag(ItemTag.Illegal)):
+			return true
+	return false
+
 func saveData():
 	var data = {}
 	

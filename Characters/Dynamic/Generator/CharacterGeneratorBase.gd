@@ -1,7 +1,7 @@
 extends Reference
 class_name CharacterGeneratorBase
 
-func makeBase(idprefix = "npc", _args = {}):
+func makeBase(idprefix = "dynamicnpc", _args = {}):
 	var dynamicCharacter = DynamicCharacter.new()
 	dynamicCharacter.id = GM.main.generateCharacterID(idprefix)
 	GM.main.addDynamicCharacter(dynamicCharacter)
@@ -198,8 +198,21 @@ func pickPersonality(character:DynamicCharacter, _args = {}):
 			elif(howMuchMax < 0.0):
 				personality.addStat(personalityStat, -RNG.randf_range(0.0, -howMuchMax))
 
+func pickSmallDescription(character:DynamicCharacter, _args = {}):
+	var thedesc = ""
+	thedesc += Util.getSpeciesName(character.npcSpecies)
+	thedesc += ". "
+	if(character.npcGender == Gender.Male):
+		thedesc += "Male."
+	if(character.npcGender == Gender.Female):
+		thedesc += "Female."
+	if(character.npcGender == Gender.Androgynous):
+		thedesc += "Androgynous."
+	
+	return thedesc
+
 func generate(_args = {}):
-	var character = makeBase("npc", _args)
+	var character = makeBase("dynamicnpc", _args)
 	pickGender(character, _args)
 	pickBodyAttributes(character, _args)
 	pickName(character, _args)
@@ -211,6 +224,7 @@ func generate(_args = {}):
 	pickAttacks(character, _args)
 	pickPersonality(character, _args)
 	pickEquipment(character, _args)
+	character.npcSmallDescription = pickSmallDescription(character, _args)
 	
 	character.resetEquipment()
 	pickNonStaticEquipment(character, _args)

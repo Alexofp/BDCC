@@ -1715,3 +1715,6 @@ func hasAnyWomb():
 
 func getDefaultArtwork(_variant = []):
 	return "res://Images/UI/GenericFace.png"
+
+func hasIllegalItems():
+	return getInventory().hasIllegalItems()

@@ -19,6 +19,7 @@ func _init():
 		"res://Modules/CellblockModule/MaleGuardCanineOffLimits.gd",
 		"res://Modules/CellblockModule/FemaleGuardFelineOffLimits.gd",
 		"res://Modules/CellblockModule/StealingFromGreenhouseScene.gd",
+		"res://Modules/CellblockModule/GuardCaughtOfflimitsScene.gd",
 		]
 	characters = [
 		"res://Modules/CellblockModule/CheckpointGuardCharacter.gd",

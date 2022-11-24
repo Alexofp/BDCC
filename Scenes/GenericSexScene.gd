@@ -11,20 +11,32 @@ func _init():
 func _initScene(_args = []):
 	sexEngine = SexEngine.new()
 	
-	var top = _args[0]
+	var tops = _args[0]
+	var bottoms = _args[1]
+	if(tops is String):
+		tops = [tops]
+	if(bottoms is String):
+		bottoms = [bottoms]
+	
+	for top in tops:
+		if(top != "pc"):
+			addCharacter(top)
+	for bottom in bottoms:
+		if(bottom != "pc"):
+			addCharacter(bottom)
+	
+	sexEngine.initPeople(tops, bottoms)
 	
 	#sexEngine.initPeople(top, "pc")
 	#sexEngine.initPeople(top, "rahi")
 	
-	var newCharacter = GuardGenerator.new().generate()
-	addCharacter(newCharacter.id)
-	GM.main.addDynamicCharacterToPool(newCharacter.id, CharacterPool.Guards)
-	
+
 	#sexEngine.initPeople("pc", top)
-	if(RNG.chance(50)):
-		sexEngine.initPeople(newCharacter.id, "pc")
-	else:
-		sexEngine.initPeople("pc", newCharacter.id)
+	
+	#if(RNG.chance(50)):
+	#	sexEngine.initPeople(newCharacter.id, "pc")
+	#else:
+	#	sexEngine.initPeople("pc", newCharacter.id)
 	
 	#sexEngine.initPeople(top, "pc")
 	#sexEngine.initPeople(top, "rahi")
@@ -32,7 +44,7 @@ func _initScene(_args = []):
 	sexEngine.generateGoals()
 	
 	sexEngine.start()
-	addCharacter(top)
+	#addCharacter(top)
 	#addCharacter("alexrynard")
 	#addCharacter("rahi")
 	#runScene("FightScene", [newCharacter.id])

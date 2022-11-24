@@ -2,6 +2,7 @@ extends CharacterGeneratorBase
 class_name GuardGenerator
 
 func pickEquipment(character:DynamicCharacter, _args = {}):
+	
 	var theEquipment = ["GuardArmor"]
 	
 	var ehibit = character.getFetishHolder().getFetishValue(Fetish.Exhibitionism)
@@ -26,3 +27,6 @@ func pickEquipment(character:DynamicCharacter, _args = {}):
 				theEquipment.append("sportyTop")
 	
 	character.npcDefaultEquipment = theEquipment
+
+func pickSmallDescription(character:DynamicCharacter, _args = {}):
+	return "One of the guards. "+str(.pickSmallDescription(character, _args))
