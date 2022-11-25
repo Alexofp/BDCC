@@ -71,3 +71,30 @@ func increaseModuleFlag(moduleID, flagID, addvalue = 1):
 
 func getModuleFlag(moduleID, flagID, defaultValue = null):
 	return GM.main.getModuleFlag(moduleID, flagID, defaultValue)
+
+func grabNpcIDFromPool(poolID, _conditions = {}):
+	var characters = GM.main.getDynamicCharacterIDsFromPool(poolID)
+	
+	if(characters.size() > 0):
+		return RNG.pick(characters)
+	
+	return null
+
+func generateNpcForPool(poolID, generator, _args = {}):
+	var newCharacter = generator.generate(_args)
+	GM.main.addDynamicCharacterToPool(newCharacter.id, poolID)
+	return newCharacter.id
+
+func grabNpcIDFromPoolOrGenerate(poolID, generator, _conditions = {}, _args = {}):
+	var poolSize = GM.main.getDynamicCharactersPoolSize(poolID)
+	var chanceToMeetOld = sqrt(float(poolSize)) * 25.0
+	if(getFlag("PreferKnownEncounters")):
+		chanceToMeetOld = 100
+	
+	if(RNG.chance(chanceToMeetOld)):
+		var characterID = grabNpcIDFromPool(poolID, _conditions)
+		if(characterID == null):
+			return generateNpcForPool(poolID, generator, _args)
+		return characterID
+	else:
+		return generateNpcForPool(poolID, generator, _args)

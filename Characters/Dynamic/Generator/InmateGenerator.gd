@@ -18,6 +18,10 @@ func pickEquipment(character:DynamicCharacter, _args = {}):
 		if(inmateType == InmateType.SexDeviant):
 			theEquipment.append("inmateuniformSexDeviant")
 	
+	# Sometimes they have a forced chastity cage on
+	if(RNG.chance(2.0) && character.hasPenis()):
+		theEquipment.append(RNG.pick(["ChastityCagePermanentNormal", "ChastityCagePermanent"]))
+	
 	if(!RNG.chance(ehibit * 100.0 + 50.0)):
 		if(character.getFemininity() < 50):
 			if(RNG.chance(50)):
@@ -39,9 +43,9 @@ func pickEquipment(character:DynamicCharacter, _args = {}):
 	
 	character.npcDefaultEquipment = theEquipment
 
-func pickNonStaticEquipment(character:DynamicCharacter, _args = {}):
-	# Sometimes they have a forced chastity cage on
-	if(RNG.chance(2.0)):
-		var chastityCageItem = GlobalRegistry.createItem(RNG.pick(["ChastityCage", "ChastityCagePermanent"]))
-		
-		character.getInventory().forceEquipRemoveOther(chastityCageItem)
+#func pickNonStaticEquipment(character:DynamicCharacter, _args = {}):
+#	# Sometimes they have a forced chastity cage on
+#	if(RNG.chance(2.0)):
+#		var chastityCageItem = GlobalRegistry.createItem(RNG.pick(["ChastityCage", "ChastityCagePermanent"]))
+#
+#		character.getInventory().forceEquipRemoveOther(chastityCageItem)

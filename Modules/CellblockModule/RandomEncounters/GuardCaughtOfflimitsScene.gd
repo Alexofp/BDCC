@@ -347,6 +347,7 @@ func addWonButton():
 func _react(_action: String, _args):
 
 	if(_action == "endthescene"):
+		getCharacter(npcID).resetEquipment()
 		endScene()
 		return
 
@@ -354,6 +355,7 @@ func _react(_action: String, _args):
 		runScene("FightScene", [npcID], "guardfight")
 	
 	if(_action == "startsexsubby"):
+		getCharacter(npcID).resetEquipment()
 		GlobalRegistry.getCharacter(npcID).addPain(-50)
 		runScene("GenericSexScene", [npcID, "pc"], "subbysex")
 	

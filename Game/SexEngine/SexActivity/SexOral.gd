@@ -12,8 +12,6 @@ func getGoals():
 func canStartActivity(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexSubInfo):
 	if(!_domInfo.getChar().hasReachablePenis() && !_domInfo.getChar().hasReachableVagina()):
 		return false
-	if(_subInfo.getChar().isOralBlocked()):
-		return false
 	
 	return .canStartActivity(_sexEngine, _domInfo, _subInfo)
 
@@ -266,7 +264,7 @@ func getDomActions():
 				"desc": "Make them tease your cock so you can get hard",
 			})
 			
-			if(domInfo.isReadyToPenetrate() && getDom().getFirstItemThatCoversBodypart(BodypartSlot.Penis) == null):
+			if(domInfo.isReadyToPenetrate() && getDom().getFirstItemThatCoversBodypart(BodypartSlot.Penis) == null && !getSub().isOralBlocked()):
 				if(!getSub().isBitingBlocked()):
 					actions.append({
 						"id": "asktosuck",
@@ -285,12 +283,13 @@ func getDomActions():
 			if(getDom().hasReachablePenis() && !domInfo.isReadyToPenetrate()):
 				lustyEnough = 0.1 # If dom is a herm, give them a chance to force bj too
 			
-			actions.append({
-				"id": "asktolick",
-				"score": lustyEnough*(1.0 - domInfo.getAngerScore() - 0.9 * float(getDom().getFirstItemThatCoversBodypart(BodypartSlot.Vagina) != null)),
-				"name": "Order to lick",
-				"desc": "Ask the sub to lick your pussy",
-			})
+			if(!getSub().isOralBlocked()):
+				actions.append({
+					"id": "asktolick",
+					"score": lustyEnough*(1.0 - domInfo.getAngerScore() - 0.9 * float(getDom().getFirstItemThatCoversBodypart(BodypartSlot.Vagina) != null)),
+					"name": "Order to lick",
+					"desc": "Ask the sub to lick your pussy",
+				})
 			actions.append({
 				"id": "startgrindface",
 				"score": lustyEnough * (0.1 + domInfo.getAngerScore() - 0.9 * float(getDom().getFirstItemThatCoversBodypart(BodypartSlot.Vagina) != null)),
