@@ -2,8 +2,10 @@ extends CharacterGeneratorBase
 class_name InmateGenerator
 
 func pickEquipment(character:DynamicCharacter, _args = {}):
-	var inmateType = RNG.pick([InmateType.General, InmateType.HighSec, InmateType.SexDeviant])
-	character.setFlag(CharacterFlag.InmateType, inmateType)
+	var inmateType = character.getFlag(CharacterFlag.InmateType)
+	if(inmateType == null):
+		inmateType = RNG.pick([InmateType.General, InmateType.HighSec, InmateType.SexDeviant])
+		character.setFlag(CharacterFlag.InmateType, inmateType)
 	
 	var theEquipment = ["inmatecollar"]
 	

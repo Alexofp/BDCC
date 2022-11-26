@@ -317,9 +317,9 @@ func generate(_args = {}):
 	pickLustInterests(character, _args)
 	pickAttacks(character, _args)
 	pickPersonality(character, _args)
+	applyArgs(character, _args)
 	pickEquipment(character, _args)
 	character.npcSmallDescription = pickSmallDescription(character, _args)
-	applyArgs(character, _args)
 	
 	character.resetEquipment()
 	resetStats(character, _args)
