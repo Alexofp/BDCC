@@ -559,3 +559,11 @@ static func splitOnFirst(text: String, separator: String):
 	stuff.remove(0)
 	
 	return [firstEntry, join(stuff, separator)]
+
+static func isArrayOfArrays(theArray: Array):
+	if(theArray.size() == 0):
+		return true
+	
+	if(theArray[0] is Array):
+		return true
+	return false

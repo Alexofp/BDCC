@@ -15,12 +15,21 @@ func react(_triggerID, _args):
 		if(RNG.chance(30 + 10.0*GM.pc.getExposure())):
 			GM.main.setFlag("Trigger_CaughtOffLimitsCD", 3)
 			
-			return GM.ES.triggerReact(Trigger.CaughtOffLimits)
+			var encounterLevel = GM.pc.getLevel() + RNG.randi_range(-5, 1)
+			encounterLevel = Util.maxi(encounterLevel, 0)
+			encounterLevel = Util.mini(encounterLevel, 15+RNG.randi_range(-1, 1))
+			
+			return GM.ES.triggerReact(Trigger.CaughtOffLimits, [encounterLevel])
 		
 	if(GM.world.getRoomByID(GM.pc.getLocation()).loctag_GuardsEncounter):
 		if(RNG.chance(30 + 10.0*GM.pc.getExposure())):
 			GM.main.setFlag("Trigger_CaughtOffLimitsCD", 3)
-			return GM.ES.triggerReact(Trigger.CaughtOffLimits)
+			
+			var encounterLevel = GM.pc.getLevel() + RNG.randi_range(-5, 1)
+			encounterLevel = Util.maxi(encounterLevel, 0)
+			encounterLevel = Util.mini(encounterLevel, 10+RNG.randi_range(-1, 1))
+			
+			return GM.ES.triggerReact(Trigger.CaughtOffLimits, [encounterLevel])
 		
 	return false
 

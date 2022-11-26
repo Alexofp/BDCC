@@ -29,4 +29,42 @@ func pickEquipment(character:DynamicCharacter, _args = {}):
 	character.npcDefaultEquipment = theEquipment
 
 func pickSmallDescription(character:DynamicCharacter, _args = {}):
-	return "One of the guards. "+str(.pickSmallDescription(character, _args))
+	var text = "One of the guards. "+str(.pickSmallDescription(character, _args))
+
+	var level = character.npcLevel
+	
+	var possibleRanks = []
+	
+	if(level <= 6):
+		possibleRanks.append_array([
+			NpcRank.Spacer,
+			NpcRank.SpaceCadet,
+		])
+	
+	if(level >= 5 && level <= 10):
+		possibleRanks.append_array([
+			NpcRank.Inspector,
+			NpcRank.ChiefInspector,
+			NpcRank.Sergeant,
+		])
+	
+	if(level >= 8 && level <= 15):
+		possibleRanks.append_array([
+			NpcRank.PettyOfficer,
+			NpcRank.ChiefPettyOfficer,
+		])
+
+	if(level >= 13):
+		possibleRanks.append_array([
+			NpcRank.Lieutenant,
+			NpcRank.Executor,
+		])
+	
+	var pickedRank = RNG.pick(possibleRanks)
+	if(pickedRank == null):
+		pickedRank = NpcRank.Spacer
+	
+	character.setFlag(CharacterFlag.Rank, pickedRank)
+	
+	text = NpcRank.getVisibleName(pickedRank)+". "+text
+	return text

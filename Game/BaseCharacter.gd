@@ -583,6 +583,9 @@ func getSkillLevel(skillID):
 		return 0
 	return skill.getLevel()
 
+func getLevel() -> int:
+	return skillsHolder.getLevel()
+
 func getSpecies():
 	return []
 

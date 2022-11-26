@@ -7,7 +7,11 @@ func registerTriggers(es):
 	es.addTrigger(self, Trigger.CaughtOffLimits)
 
 func react(_triggerID, _args):
-	var idToUse = grabNpcIDFromPoolOrGenerate(CharacterPool.Guards, GuardGenerator.new())
+	var encounterLevel = RNG.randi_range(0, 5)
+	if(_args.size() > 0):
+		encounterLevel = _args[0]
+	
+	var idToUse = grabNpcIDFromPoolOrGenerate(CharacterPool.Guards, [], GuardGenerator.new(), {NpcGen.Level: encounterLevel})
 	
 	if(idToUse == null || idToUse == ""):
 		return false

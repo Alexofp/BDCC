@@ -77,9 +77,13 @@ func increaseFlag(flagID, addvalue = 1):
 
 func saveData():
 	var data = {
+		"npcLevel": npcLevel,
 		"pain": pain,
+		"npcBasePain": npcBasePain,
 		"lust": lust,
+		"npcBaseLust": npcBaseLust,
 		"stamina": stamina,
+		"npcBaseStamina": npcBaseStamina,
 		"arousal": arousal,
 		"consciousness": consciousness,
 		"npcName": npcName,
@@ -108,6 +112,7 @@ func saveData():
 	
 	data["statusEffects"] = saveStatusEffectsData()
 	data["inventory"] = inventory.saveData()
+	data["skills"] = skillsHolder.saveData()
 	data["lustInterests"] = lustInterests.saveData()
 	if(menstrualCycle != null):
 		data["menstrualCycle"] = menstrualCycle.saveData()
@@ -128,8 +133,12 @@ func saveData():
 	return data
 
 func loadData(data):
+	npcLevel = SAVE.loadVar(data, "npcLevel", 0)
+	npcBasePain = SAVE.loadVar(data, "npcBasePain", 50)
 	pain = SAVE.loadVar(data, "pain", 0)
+	npcBaseLust = SAVE.loadVar(data, "npcBaseLust", 50)
 	lust = SAVE.loadVar(data, "lust", 0)
+	npcBaseStamina = SAVE.loadVar(data, "npcBaseStamina", 100)
 	stamina = SAVE.loadVar(data, "stamina", 100)
 	arousal = SAVE.loadVar(data, "arousal", 0.0)
 	consciousness = SAVE.loadVar(data, "consciousness", 1.0)
@@ -166,6 +175,7 @@ func loadData(data):
 	
 	loadStatusEffectsData(SAVE.loadVar(data, "statusEffects", {}))
 	inventory.loadDataNPC(SAVE.loadVar(data, "inventory", {}))
+	skillsHolder.loadData(SAVE.loadVar(data, "skills", {}))
 	lustInterests.loadData(SAVE.loadVar(data, "lustInterests", {}))
 
 	if(menstrualCycle != null && data.has("menstrualCycle")):

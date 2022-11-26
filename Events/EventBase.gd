@@ -72,11 +72,65 @@ func increaseModuleFlag(moduleID, flagID, addvalue = 1):
 func getModuleFlag(moduleID, flagID, defaultValue = null):
 	return GM.main.getModuleFlag(moduleID, flagID, defaultValue)
 
-func grabNpcIDFromPool(poolID, _conditions = {}):
+func npcSatisfiesCondition(character:BaseCharacter, conInfo):
+	var conditionID = conInfo[0]
+	
+	if(conditionID == NpcCon.Level):
+		if(character.getLevel() != conInfo[1]):
+			return false
+	elif(conditionID == NpcCon.LevelAbove):
+		if(character.getLevel() < conInfo[1]):
+			return false
+	elif(conditionID == NpcCon.LevelBelow):
+		if(character.getLevel() > conInfo[1]):
+			return false
+	elif(conditionID == NpcCon.Gender):
+		if(character.getGender() != conInfo[1]):
+			return false
+	elif(conditionID == NpcCon.NotGender):
+		if(character.getGender() == conInfo[1]):
+			return false
+	elif(conditionID == NpcCon.FlagTrue):
+		if(!character.getFlag(conInfo[1], false)):
+			return false
+	elif(conditionID == NpcCon.FlagFalse):
+		if(character.getFlag(conInfo[1], false)):
+			return false
+	elif(conditionID == NpcCon.FlagAbove):
+		if(character.getFlag(conInfo[1], 0) < conInfo[2]):
+			return false
+	elif(conditionID == NpcCon.FlagBelow):
+		if(character.getFlag(conInfo[1], 0) > conInfo[2]):
+			return false
+	elif(conditionID == NpcCon.FlagEquals):
+		if(character.getFlag(conInfo[1]) != conInfo[2]):
+			return false
+	return true
+
+func grabNpcIDFromPool(poolID, _conditions = []):
+	if(!(_conditions is Array) || _conditions == null):
+		_conditions = []
+	
 	var characters = GM.main.getDynamicCharacterIDsFromPool(poolID)
 	
 	if(characters.size() > 0):
-		return RNG.pick(characters)
+		if(_conditions.size() == 0):
+			return RNG.pick(characters)
+		
+		characters.shuffle()
+		for characterID in characters:
+			var character:BaseCharacter = GlobalRegistry.getCharacter(characterID)
+			if(character == null || !(character is DynamicCharacter)):
+				continue
+			
+			var goodNpc = true
+			for conInfo in _conditions:
+				if(!npcSatisfiesCondition(character, conInfo)):
+					goodNpc = false
+					break
+			
+			if(goodNpc):
+				return characterID
 	
 	return null
 
@@ -85,7 +139,7 @@ func generateNpcForPool(poolID, generator, _args = {}):
 	GM.main.addDynamicCharacterToPool(newCharacter.id, poolID)
 	return newCharacter.id
 
-func grabNpcIDFromPoolOrGenerate(poolID, generator, _conditions = {}, _args = {}):
+func grabNpcIDFromPoolOrGenerate(poolID, _conditions, generator, _args = {}):
 	var poolSize = GM.main.getDynamicCharactersPoolSize(poolID)
 	var chanceToMeetOld = sqrt(float(poolSize)) * 25.0
 	if(getFlag("PreferKnownEncounters")):
