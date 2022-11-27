@@ -15,7 +15,7 @@ func react(_triggerID, _args):
 		if(RNG.chance(30 + 10.0*GM.pc.getExposure())):
 			GM.main.setFlag("Trigger_CaughtOffLimitsCD", 3)
 			
-			var encounterLevel = GM.pc.getLevel() + RNG.randi_range(-5, 1)
+			var encounterLevel = RNG.randi_range(0, GM.pc.getLevel() + RNG.randi_range(-1, 1))
 			encounterLevel = Util.maxi(encounterLevel, 0)
 			encounterLevel = Util.mini(encounterLevel, 15+RNG.randi_range(-1, 1))
 			
@@ -25,7 +25,7 @@ func react(_triggerID, _args):
 		if(RNG.chance(30 + 10.0*GM.pc.getExposure())):
 			GM.main.setFlag("Trigger_CaughtOffLimitsCD", 3)
 			
-			var encounterLevel = GM.pc.getLevel() + RNG.randi_range(-5, 1)
+			var encounterLevel = RNG.randi_range(0, GM.pc.getLevel() + RNG.randi_range(-4, 1))
 			encounterLevel = Util.maxi(encounterLevel, 0)
 			encounterLevel = Util.mini(encounterLevel, 10+RNG.randi_range(-1, 1))
 			

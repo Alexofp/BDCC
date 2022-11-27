@@ -44,6 +44,7 @@ const DeniedDesperate = "DeniedDesperate"
 const DrenchedInPiss = "DrenchedInPiss"
 const BreastsFull = "BreastsFull"
 const CumInflated = "CumInflated"
+const Exposed = "Exposed"
 
 # Useful effects
 const Yoga = "Yoga"

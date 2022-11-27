@@ -24,6 +24,8 @@ func callFuncWrapper(_command: String, _args: Array):
 		return Util.sayOther(str(_args[0]))
 	if(_command == "sayPlayer" && _args.size() == 1):
 		return Util.sayPlayer(str(_args[0]))
+	if(_command == "pick"):
+		return str(RNG.pick(_args))
 	
 	return "!RUNTIME ERROR NO COMMAND FOUND "+_command+" "+str(_args)+"!"
 	

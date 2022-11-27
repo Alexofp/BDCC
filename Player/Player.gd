@@ -270,7 +270,12 @@ func updateNonBattleEffects():
 	else:
 		removeEffect(StatusEffect.SexEnginePersonality)
 		removeEffect(StatusEffect.SexEngineLikes)
-		
+	
+	if(GM.main != null && getExposure() > 0.0 && !GM.main.supportsSexEngine() && !GM.main.supportsBattleTurns()):
+		addEffect(StatusEffect.Exposed)
+	else:
+		removeEffect(StatusEffect.Exposed)
+
 	emit_signal("stat_changed")
 
 func processBattleTurn():

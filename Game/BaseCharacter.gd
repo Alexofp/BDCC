@@ -1506,6 +1506,10 @@ func cummedOnBy(_characterID, _sourceType = null, _howMessy: int = 1):
 func afterSexEnded(sexInfo):
 	if(sexInfo.getTimesCame() > 0):
 		addLust(-getLust())
+		
+		if(isPlayer()):
+			addStamina(buffsHolder.getCustom(BuffAttribute.StaminaRecoverAfterSex))
+			addSkillExperience(Skill.SexSlave, 30)
 	if(!isPlayer()):
 		addLust(-getLust())
 		addPain(-getPain())
