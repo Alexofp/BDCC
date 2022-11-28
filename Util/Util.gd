@@ -567,3 +567,8 @@ static func isArrayOfArrays(theArray: Array):
 	if(theArray[0] is Array):
 		return true
 	return false
+
+static func replaceIfNotNull(thestring, whattoreplace, replacewith):
+	if(thestring == null || !(thestring is String)):
+		return thestring
+	return thestring.replace(whattoreplace, replacewith)

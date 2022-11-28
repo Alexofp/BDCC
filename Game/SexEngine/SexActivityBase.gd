@@ -228,16 +228,19 @@ func getSubLikingItScore():
 func getSubHatingItScore():
 	return 1.0 - getSub().getLustLevel()
 
-func subReaction(reactionID, chance = 100, fetishes = {}):
-	if(!subInfo.canDoActions()):
+func subReaction(reactionID, chance = 100):
+	if(subInfo.isUnconscious()):
 		return null
 	
 	if(chance >= 100 || RNG.chance(chance)):
-		return getSub().getVoice().getSubReaction(reactionID, getSexEngine(), domInfo, subInfo, subFetishScore(fetishes))
+		return getSub().getVoice().getSubReaction(reactionID, getSexEngine(), domInfo, subInfo)
 
-func domReaction(reactionID, chance = 100, fetishes = {}):
+func domReaction(reactionID, chance = 100):
+	if(subInfo.isUnconscious()):
+		return null
+	
 	if(chance >= 100 || RNG.chance(chance)):
-		return getSub().getVoice().getDomReaction(reactionID, getSexEngine(), domInfo, subInfo, domFetishScore(fetishes))
+		return getDom().getVoice().getDomReaction(reactionID, getSexEngine(), domInfo, subInfo)
 
 func getAnimation():
 	return null

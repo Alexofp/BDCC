@@ -54,6 +54,8 @@ func startActivity(_args):
 	
 	return {
 		text = "{dom.You} {dom.youVerb('reach', 'reaches')} to take off {sub.yourHis} <ITEM>.".replace("<ITEM>", casualName),
+		domSay = Util.replaceIfNotNull(domReaction(SexReaction.ForceUndress, 50), "<ITEM>", casualName),
+		subSay = Util.replaceIfNotNull(subReaction(SexReaction.ForceUndress, 50), "<ITEM>", casualName),
 	}
 
 func checkRemoved():

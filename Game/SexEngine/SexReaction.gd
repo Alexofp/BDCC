@@ -9,4 +9,9 @@ enum {
 	AfterDrawingOnBody,
 	AboutToBeatUp,
 	BeatingUp,
+	
+	OrderToUndress,
+	ForceUndress,
+	
+	WarnAboutToCum,
 }

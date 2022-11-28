@@ -30,7 +30,7 @@ func startActivity(_args):
 	return {
 		text = "{dom.You} {dom.youVerb('pull')} out a [b]black marker[/b].",
 		domSay = domReaction(SexReaction.AboutToDrawOnBody, 30),
-		subSay = subReaction(SexReaction.AboutToDrawOnBody, 20, {Fetish.Bodywritings: 1.0}),
+		subSay = subReaction(SexReaction.AboutToDrawOnBody, 20),
 	}
 
 func processTurn():
@@ -52,7 +52,7 @@ func processTurn():
 		return {
 			text="{dom.You} drew [b]'"+str(BodyWritings.getWritingText(writingID))+"'[/b] on {sub.yourHis} "+BodyWritingsZone.getZoneVisibleName(zone)+".",
 			domSay = domReaction(SexReaction.AfterDrawingOnBody, 30),
-			subSay = subReaction(SexReaction.AfterDrawingOnBody, 50, {Fetish.Bodywritings: 1.0}),
+			subSay = subReaction(SexReaction.AfterDrawingOnBody, 50),
 			}
 	
 func getDomActions():

@@ -29,7 +29,7 @@ func startActivity(_args):
 	
 	return {
 		text = "{dom.You} {dom.youVerb('start')} beating {sub.you} up!",
-		domSay = domReaction(SexReaction.AboutToBeatUp, 50),
+		domSay = domReaction(SexReaction.AboutToBeatUp, 100),
 		subSay = subReaction(SexReaction.AboutToBeatUp, 20),
 	}
 
@@ -101,7 +101,9 @@ func doDomAction(_id, _actionInfo):
 		])
 		
 		return {
-			text = text
+			text = text,
+			domSay = domReaction(SexReaction.AboutToBeatUp, 100),
+			subSay = subReaction(SexReaction.AboutToBeatUp, 20),
 		}
 
 func getSubActions():

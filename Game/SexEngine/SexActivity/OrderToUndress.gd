@@ -53,6 +53,8 @@ func startActivity(_args):
 	
 	return {
 		text = "{dom.You} {dom.youVerb('order')} {sub.you} to undress {sub.yourHis} <ITEM>.".replace("<ITEM>", casualName),
+		domSay = Util.replaceIfNotNull(domReaction(SexReaction.OrderToUndress), "<ITEM>", casualName),
+		subSay = Util.replaceIfNotNull(subReaction(SexReaction.OrderToUndress), "<ITEM>", casualName),
 	}
 
 func checkRemoved():

@@ -599,7 +599,11 @@ func doSubAction(_id, _actionInfo):
 			"{sub.You} {sub.youVerb('warn')} {dom.youHim} that {sub.youHe} {sub.youAre} "+RNG.pick(["about to cum", "close", "very close"])+".",
 		])
 		domInfo.addAnger(-0.05)
-		return {text = text}
+		return {
+			text = text,
+			domSay = domReaction(SexReaction.WarnAboutToCum, 100),
+			subSay = subReaction(SexReaction.WarnAboutToCum, 100),
+			}
 	if(_id == "cumondom"):
 		satisfyGoals()
 		

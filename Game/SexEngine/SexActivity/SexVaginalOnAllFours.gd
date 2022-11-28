@@ -73,7 +73,7 @@ func startActivity(_args):
 	return {
 		text = text,
 		domSay = domReaction(aboutToPenetrateReaction, 50),
-		subSay = subReaction(aboutToPenetrateReaction, 50, {fetishReceiving: 1.0}),
+		subSay = subReaction(aboutToPenetrateReaction, 50),
 	}
 
 func onSwitchFrom(_otherActivity, _args):
