@@ -1,7 +1,7 @@
 extends EventBase
 
 func _init():
-	id = "InmateExposureForcedSexEvent"
+	id = "InmateExposureFlashEvent"
 
 func registerTriggers(es):
 	es.addTrigger(self, Trigger.HighExposureInmateEvent)
@@ -16,9 +16,9 @@ func react(_triggerID, _args):
 	if(idToUse == null || idToUse == ""):
 		return false
 		
-	runScene("InmateExposureForcedSexScene", [idToUse])
+	runScene("InmateExposureFlashScene", [idToUse])
 
 	return true
 
 func getPriority():
-	return 10
+	return 4
