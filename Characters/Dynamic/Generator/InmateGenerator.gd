@@ -1,6 +1,12 @@
 extends CharacterGeneratorBase
 class_name InmateGenerator
 
+func getAttacks():
+	return ["simplepunchattack", "trygetupattack"]
+
+func getPossibleAttacks():
+	return ["simplekickattack", "shoveattack", "stretchingAttack", "lickWounds", "ShivAttack", "biteattack", "NpcScratch"]
+
 func pickEquipment(character:DynamicCharacter, _args = {}):
 	var inmateType = character.getFlag(CharacterFlag.InmateType)
 	if(inmateType == null):

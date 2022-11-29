@@ -1,6 +1,12 @@
 extends CharacterGeneratorBase
 class_name GuardGenerator
 
+func getAttacks():
+	return ["stunbatonAttack", "trygetupattack"]
+
+func getPossibleAttacks():
+	return ["HeatGrenade", "DoubleCuffPC", "CuffPCHands", "ForceGagPC", "ForceMuzzlePC", "stunbatonOverchargeAttack", "simplekickattack", "biteattack", "shoveattack"]
+
 func pickEquipment(character:DynamicCharacter, _args = {}):
 	
 	var theEquipment = ["GuardArmor"]
