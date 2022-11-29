@@ -468,6 +468,9 @@ func saveData():
 	data["intoxication"] = intoxication
 	data["intoxicationTolerance"] = intoxicationTolerance
 	
+	data["fetishHolder"] = fetishHolder.saveData()
+	#data["personality"] = personality.saveData()
+	
 	return data
 
 func loadData(data):
@@ -518,6 +521,9 @@ func loadData(data):
 	timedBuffsDurationTurns = SAVE.loadVar(data, "timedBuffsDurationTurns", 0)
 	intoxication = SAVE.loadVar(data, "intoxication", 0.0)
 	intoxicationTolerance = SAVE.loadVar(data, "intoxicationTolerance", 0.0)
+	
+	fetishHolder.loadData(SAVE.loadVar(data, "fetishHolder", {}))
+	#personality.loadData(SAVE.loadVar(data, "personality", {}))
 	
 	checkLocation()
 		

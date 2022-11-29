@@ -43,11 +43,13 @@ func getBuffs():
 	if(character.hasPerk(Perk.CumSlut)):
 		return [
 			buff(Buff.LustDamageBuff, [5 * messLevel]),
+			buff(Buff.ExposureBuff, [10 * messLevel]),
 		]
 		
 	return [
 		buff(Buff.LustDamageBuff, [5 * messLevel]),
 		buff(Buff.ReceivedLustDamageBuff, [10 * messLevel]),
+		buff(Buff.ExposureBuff, [10 * messLevel]),
 	]
 
 func getEffectImage():

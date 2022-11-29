@@ -7,9 +7,9 @@ var stats:Dictionary = {}
 
 func _init():
 	for statID in PersonalityStat.getAll():
-		stats[statID] = RNG.randf_range(-1.0, 1.0)
+		stats[statID] = 0.0#RNG.randf_range(-1.0, 1.0)
 
-	setStat(PersonalityStat.Mean, 1.0)
+	#setStat(PersonalityStat.Mean, 1.0)
 
 func setCharacter(newchar):
 	character = weakref(newchar)

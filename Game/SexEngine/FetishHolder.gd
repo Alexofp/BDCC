@@ -6,13 +6,14 @@ var fetishMap: Dictionary = {}
 
 func _init():
 	for fetishID in GlobalRegistry.getFetishes():
-		setFetish(fetishID, RNG.pick(FetishInterest.getAll()))
+		#setFetish(fetishID, RNG.pick(FetishInterest.getAll()))
 		#setFetish(fetishID, FetishInterest.Loves)
 		#setFetish(fetishID, FetishInterest.Hates)
+		setFetish(fetishID, FetishInterest.Likes)
 	
-	setFetish(Fetish.OralSexReceiving, FetishInterest.Loves)
-	setFetish(Fetish.VaginalSexGiving, FetishInterest.Loves)
-	setFetish(Fetish.DrugUse, FetishInterest.Loves)
+	#setFetish(Fetish.OralSexReceiving, FetishInterest.Loves)
+	#setFetish(Fetish.VaginalSexGiving, FetishInterest.Loves)
+	#setFetish(Fetish.DrugUse, FetishInterest.Loves)
 	#setFetish(Fetish.VaginalSexGiving, FetishInterest.Loves)
 	#setFetish(Fetish.Breeding, FetishInterest.Hates)
 	#setFetish(Fetish.BeingBred, FetishInterest.Hates)
@@ -85,4 +86,6 @@ func saveData():
 	return data
 
 func loadData(data):
-	fetishMap = SAVE.loadVar(data, "fetishMap", {})
+	var newfetishMap = SAVE.loadVar(data, "fetishMap", null)
+	if(newfetishMap != null && (newfetishMap is Array)):
+		fetishMap = newfetishMap

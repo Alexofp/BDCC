@@ -1,6 +1,7 @@
 extends SceneBase
 
 var pickedPoolToForget = ""
+var pickedFetishToChange = ""
 
 func _init():
 	sceneID = "EncountersMenuScene"
@@ -32,6 +33,7 @@ func _run():
 			addDisabledButton("Forget", "You haven't met anyone that you can forget")
 		
 		addButton("Toggle known", "Toggle between meeting only old characters and meeting both old and new", "toggleKnown")
+		addButton("My fetishes", "Menu that allows you to see and change your fetishes", "fetishmenu")
 		
 		addButton("Back", "Close this menu", "endthescene")
 
@@ -59,10 +61,51 @@ func _run():
 				continue
 			
 			addButton(dynamicCharacter.getName(), dynamicCharacter.getSmallDescription(), "forget", [dynamicCharacter.getID()])
-
+	
+	if(state == "fetishmenu"):
+		var fetishHolder: FetishHolder = GM.pc.getFetishHolder()
+		saynn("Having a fetish for something means you will get more lust doing this activity during sex.")
+		addButton("Go back", "Go back a menu", "")
+		
+		sayn("Your fetishes:")
+		for fetishID in GlobalRegistry.getFetishes():
+			var fetish:FetishBase = GlobalRegistry.getFetish(fetishID)
+			var fetishInterest = fetishHolder.getFetishInterest(fetishID)
+			var fetishColor = FetishInterest.getColorString(fetishInterest)
+			var fetishInterestText = FetishInterest.getVisibleName(fetishInterest)
+			
+			sayn(fetish.getVisibleName()+": "+"[color="+fetishColor+"]"+fetishInterestText+"[/color]")
+			
+			addButton(fetish.getVisibleName(), "Change how much you enjoy this fetish", "changefetish", [fetishID])
+		
+	if(state == "changefetish"):
+		var fetishHolder: FetishHolder = GM.pc.getFetishHolder()
+		var fetish:FetishBase = GlobalRegistry.getFetish(pickedFetishToChange)
+		if(fetish != null):
+			saynn("Your current value for '"+fetish.getVisibleName()+"' fetish is "+FetishInterest.getVisibleName(fetishHolder.getFetishInterest(pickedFetishToChange)))
+			
+			saynn("Pick your new value for this fetish")
+			
+			for fetishInterest in FetishInterest.getAll():
+				addButton(FetishInterest.getVisibleName(fetishInterest), "Change to this", "changeinterest", [fetishInterest])
+			
+			
+		addButton("Back", "Don't change anything", "fetishmenu")
+		
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
 		endScene()
+		return
+	
+	if(_action == "changefetish"):
+		pickedFetishToChange = _args[0]
+	
+	if(_action == "changeinterest"):
+		var fetishHolder: FetishHolder = GM.pc.getFetishHolder()
+		var fetish:FetishBase = GlobalRegistry.getFetish(pickedFetishToChange)
+		if(fetish != null):
+			fetishHolder.setFetish(pickedFetishToChange, _args[0])
+		setState("fetishmenu")
 		return
 	
 	if(_action == "toggleKnown"):
@@ -86,6 +129,7 @@ func saveData():
 	var data = .saveData()
 	
 	data["pickedPoolToForget"] = pickedPoolToForget
+	data["pickedFetishToChange"] = pickedFetishToChange
 
 	return data
 	
@@ -93,3 +137,4 @@ func loadData(data):
 	.loadData(data)
 	
 	pickedPoolToForget = SAVE.loadVar(data, "pickedPoolToForget", "")
+	pickedFetishToChange = SAVE.loadVar(data, "pickedFetishToChange", "")
