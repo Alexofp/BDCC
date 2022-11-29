@@ -138,7 +138,7 @@ func affectPersonality(_personality:Personality):
 				theChanges.append("{npc.name} became less impatient because {npc.he} achieved {npc.his} goals.")
 		if(RNG.chance(30)):
 			if(_personality.addStat(PersonalityStat.Coward, RNG.randf_range(-0.05, -0.01))):
-				theChanges.append("{npc.name} became move brave because {npc.he} achieved {npc.his} goals.")
+				theChanges.append("{npc.name} became more brave because {npc.he} achieved {npc.his} goals.")
 
 		if(getTimesCame() >= 1 && getAverageAnger() < 0.3):
 			if(RNG.chance(50)):

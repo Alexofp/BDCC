@@ -95,8 +95,8 @@ func createBodyparts(character:DynamicCharacter, _args = {}):
 			var bodypartID = RNG.pickWeightedPairs(possible)
 			if(bodypartID != null):
 				var bodypart = GlobalRegistry.createBodypart(bodypartID)
-				bodypart.generateDataFor(character)
 				character.giveBodypartUnlessSame(bodypart)
+				bodypart.generateDataFor(character)
 		else:
 			for specie in theSpecies:
 				var speciesObject = GlobalRegistry.getSpecies(specie)
@@ -111,8 +111,8 @@ func createBodyparts(character:DynamicCharacter, _args = {}):
 			var bodypartID = RNG.pickWeightedPairs(possible)
 			if(bodypartID != null):
 				var bodypart = GlobalRegistry.createBodypart(bodypartID)
-				bodypart.generateDataFor(character)
 				character.giveBodypartUnlessSame(bodypart)
+				bodypart.generateDataFor(character)
 
 func pickBodyAttributes(character:DynamicCharacter, _args = {}):
 	if(character.npcGender == Gender.Male):
@@ -311,10 +311,10 @@ func generate(_args = {}):
 	pickSpecies(character, _args)
 	pickLevel(character, _args)
 	pickStats(character, _args)
-	createBodyparts(character, _args)
 	pickArchetypes(character, _args)
 	pickFetishes(character, _args)
 	pickLustInterests(character, _args)
+	createBodyparts(character, _args)
 	pickAttacks(character, _args)
 	pickPersonality(character, _args)
 	applyArgs(character, _args)

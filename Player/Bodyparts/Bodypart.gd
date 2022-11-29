@@ -200,4 +200,5 @@ func npcGenerationWeight(_dynamicCharacter):
 	return 1.0
 
 func generateDataFor(_dynamicCharacter):
-	pass
+	if(orifice != null):
+		orifice.generateDataFor(_dynamicCharacter)

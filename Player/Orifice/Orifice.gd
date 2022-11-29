@@ -327,6 +327,29 @@ func getTooltipInfo():
 	text += "comfortable insertion: " + Util.cmToString(round(getComfortableInsertion() * 10.0)/10.0)
 	return text
 
+func generateDataFor(_dynamicCharacter):
+	if(bodypart == null || bodypart.get_ref().character == null):
+		return
+	var character = bodypart.get_ref().getCharacter()
+	var fetishHolder:FetishHolder = character.getFetishHolder()
+	if(fetishHolder == null):
+		return
+	
+	looseness = max(0.0, RNG.randf_range(-0.1, 0.3))
+	
+	if(orificeType == OrificeType.Vagina):
+		var fetishValue = fetishHolder.getFetishValue(Fetish.VaginalSexReceiving)
+		if(fetishValue > 0.0):
+			looseness = RNG.randf_range(0.0, fetishValue*5.0)
+	if(orificeType == OrificeType.Anus):
+		var fetishValue = fetishHolder.getFetishValue(Fetish.AnalSexReceiving)
+		if(fetishValue > 0.0):
+			looseness = RNG.randf_range(0.0, fetishValue*5.0)
+	if(orificeType == OrificeType.Throat):
+		var fetishValue = fetishHolder.getFetishValue(Fetish.OralSexGiving)
+		if(fetishValue > 0.0):
+			looseness = RNG.randf_range(0.0, fetishValue*5.0)
+
 func saveData():
 	var data = {
 		"contents": contents,
