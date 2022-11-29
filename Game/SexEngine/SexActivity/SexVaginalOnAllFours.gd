@@ -233,7 +233,7 @@ func getDomActions():
 			"name": "Continue fucking",
 			"desc": "Continue fucking their "+RNG.pick(usedBodypartNames),
 		})
-	if(state in ["", "aftercumminginside", "fucking"]):
+	if(state in ["aftercumminginside", "fucking"]):
 		if(!domInfo.isReadyToCum()):
 			actions.append({
 				"id": "pullout",

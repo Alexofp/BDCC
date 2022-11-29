@@ -388,11 +388,18 @@ func processUntilTime(theday:int, theseconds:int):
 		secondsDiff = 24*60*60*dayDiff - lastUpdatedSecond + theseconds
 		
 	print("PROCESSED "+str(getID())+" FOR "+str(secondsDiff)+" SECONDS")
+	var oneWeekSeconds = 7*24*60*60
 	var oneDaySeconds = 24*60*60
 	var oneHourSeconds = 60*60
+	var processedWeeks = 0
 	
 	# Processing entire days, then hours, then the rest
 	var secondsToProcess = secondsDiff
+	while(secondsToProcess > oneWeekSeconds):
+		if(processedWeeks < 8): # After 2 months we stop processing to not lag as much
+			processTime(oneWeekSeconds)
+			processedWeeks += 1
+		secondsToProcess -= oneWeekSeconds
 	while(secondsToProcess > oneDaySeconds):
 		processTime(oneDaySeconds)
 		secondsToProcess -= oneDaySeconds
