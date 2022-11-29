@@ -35,8 +35,14 @@ func addStat(statID, addvalue: float):
 	if(!stats.has(statID)):
 		stats[statID] = 0.0
 	
+	var oldValue = stats[statID]
+	
 	stats[statID] += addvalue
 	stats[statID] = clamp(stats[statID], -1.0, 1.0)
+	
+	if(oldValue == stats[statID]):
+		return false
+	return true
 
 func saveData():
 	var data = {

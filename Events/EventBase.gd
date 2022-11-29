@@ -141,7 +141,7 @@ func generateNpcForPool(poolID, generator, _args = {}):
 
 func grabNpcIDFromPoolOrGenerate(poolID, _conditions, generator, _args = {}):
 	var poolSize = GM.main.getDynamicCharactersPoolSize(poolID)
-	var chanceToMeetOld = sqrt(float(poolSize)) * 25.0
+	var chanceToMeetOld = sqrt(float(poolSize)) * 10.0
 	if(getFlag("PreferKnownEncounters")):
 		chanceToMeetOld = 100
 	

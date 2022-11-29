@@ -1527,6 +1527,12 @@ func afterSexEnded(sexInfo):
 		var item = items[itemSlot]
 		item.resetLustState()
 		item.onSexEnd()
+		
+	if(personalityChangesAfterSex() && personality != null):
+		var resultText = sexInfo.affectPersonality(personality)
+		if(resultText != null && resultText != ""):
+			GM.main.addMessage(resultText)
+		
 	updateAppearance()
 
 func createVoice():
@@ -1725,3 +1731,6 @@ func getDefaultArtwork(_variant = []):
 
 func hasIllegalItems():
 	return getInventory().hasIllegalItems()
+
+func personalityChangesAfterSex():
+	return false

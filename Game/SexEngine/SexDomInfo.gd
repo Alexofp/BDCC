@@ -116,6 +116,55 @@ func getSexEndInfo():
 	
 	return texts
 
+func affectPersonality(_personality:Personality):
+	var theChanges = []
+	
+	if(!canDoActions()):
+		if(RNG.chance(50)):
+			if(_personality.addStat(PersonalityStat.Subby, RNG.randf_range(0.05, 0.1))):
+				theChanges.append("{npc.name} became less dominant because {npc.he} got beaten up by a sub.")
+		if(RNG.chance(50)):
+			if(_personality.addStat(PersonalityStat.Coward, RNG.randf_range(0.01, 0.1))):
+				theChanges.append("{npc.name} became more cowardly because {npc.he} got beaten up by a sub.")
+		if(RNG.chance(50)):
+			if(_personality.addStat(PersonalityStat.Mean, RNG.randf_range(0.01, 0.1))):
+				theChanges.append("{npc.name} became more mean because {npc.he} got beaten up by a sub.")
+	else:
+		if(RNG.chance(30)):
+			if(_personality.addStat(PersonalityStat.Subby, RNG.randf_range(-0.05, -0.01))):
+				theChanges.append("{npc.name} became slightly more dominant because {npc.he} achieved {npc.his} goals.")
+		if(RNG.chance(30)):
+			if(_personality.addStat(PersonalityStat.Impatient, RNG.randf_range(-0.05, -0.01))):
+				theChanges.append("{npc.name} became less impatient because {npc.he} achieved {npc.his} goals.")
+		if(RNG.chance(30)):
+			if(_personality.addStat(PersonalityStat.Coward, RNG.randf_range(-0.05, -0.01))):
+				theChanges.append("{npc.name} became move brave because {npc.he} achieved {npc.his} goals.")
+
+		if(getTimesCame() >= 1 && getAverageAnger() < 0.3):
+			if(RNG.chance(50)):
+				if(_personality.addStat(PersonalityStat.Subby, RNG.randf_range(-0.1, -0.01))):
+					theChanges.append("{npc.name} became more dominant after a good sex.")
+			if(RNG.chance(30)):
+				if(_personality.addStat(PersonalityStat.Brat, RNG.randf_range(0.01, 0.05))):
+					theChanges.append("{npc.name} became slightly more bratty after a good sex.")
+			if(RNG.chance(30)):
+				if(_personality.addStat(PersonalityStat.Coward, RNG.randf_range(-0.05, -0.01))):
+					theChanges.append("{npc.name} became less cowardly after a good sex.")
+
+		if(getAverageAnger() > 0.5):
+			if(RNG.chance(50)):
+				if(_personality.addStat(PersonalityStat.Mean, RNG.randf_range(0.01, 0.1))):
+					theChanges.append("{npc.name} became more mean after being so angry.")
+			if(RNG.chance(40)):
+				if(_personality.addStat(PersonalityStat.Subby, RNG.randf_range(-0.1, -0.01))):
+					theChanges.append("{npc.name} became more dominant after being so angry.")
+		else:
+			if(RNG.chance(30)):
+				if(_personality.addStat(PersonalityStat.Mean, RNG.randf_range(-0.05, -0.01))):
+					theChanges.append("{npc.name} became slightly more kind after not being so angry.")
+
+	return GM.ui.processString(Util.join(theChanges, "\n"), {npc=charID})
+
 func saveData():
 	var data = .saveData()
 	

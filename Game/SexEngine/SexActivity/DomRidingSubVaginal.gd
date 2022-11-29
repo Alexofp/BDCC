@@ -165,7 +165,7 @@ func getDomActions():
 				"desc": "Rub your "+RNG.pick(usedBodypartNames)+" against their cock",
 			})
 
-		if(getSub().getFirstItemThatCoversBodypart(usedBodypart) == null && subInfo.isReadyToPenetrate()):
+		if(getDom().getFirstItemThatCoversBodypart(usedBodypart) == null && getSub().getFirstItemThatCoversBodypart(BodypartSlot.Penis) == null && subInfo.isReadyToPenetrate()):
 			actions.append({
 					"id": "envelop",
 					"score": 1.0,

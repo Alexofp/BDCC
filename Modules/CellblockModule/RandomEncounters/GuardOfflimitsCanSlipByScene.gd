@@ -50,7 +50,7 @@ func _run():
 		saynn("You try to stay quiet while thinking about your options.")
 		
 		addButton("Confront", "Grab their attention", "confront")
-		addButton("Sneak past", "Success chance: 60%. Try to avoid them", "sneak_past")
+		addButton("Sneak past", "Success chance: "+str(Util.roundF(getSlipByChance(), 1))+"%. Try to avoid them", "sneak_past")
 		
 	if(state in ["confront", "spotted", "spottedstealing"]):
 		if(state == "confront"):
@@ -336,7 +336,7 @@ func _react(_action: String, _args):
 		return
 
 	if(_action == "sneak_past"):
-		if(RNG.chance(40)):
+		if(!RNG.chance(getSlipByChance())):
 			setState("spotted")
 		else:
 			getCharacter(npcID).setFlag(CharacterFlag.Introduced, true)
@@ -402,6 +402,20 @@ func _react_scene_end(_tag, _result):
 			setState("if_lost")
 			addExperienceToPlayer(5)
 			
+func getSlipByChance():
+	var baseChance = 60.0
+	
+	if(GM.pc.hasBoundLegs()):
+		baseChance *= 0.6
+	
+	if(GM.pc.isBlindfolded()):
+		baseChance *= 0.6
+
+	if(GM.pc.hasBoundArms()):
+		baseChance *= 0.8
+	
+	return max(5.0, baseChance)
+
 func saveData():
 	var data = .saveData()
 	

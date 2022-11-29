@@ -137,6 +137,9 @@ func getSexEndInfo():
 func hasTag(thetag):
 	return getSexEngine().hasTag(charID, thetag)
 
+func affectPersonality(_personality:Personality):
+	return ""
+
 func saveData():
 	var data = {
 		"charID": charID,

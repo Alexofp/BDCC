@@ -75,6 +75,9 @@ func getFlag(flagID, defaultValue = null):
 func increaseFlag(flagID, addvalue = 1):
 	setFlag(flagID, getFlag(flagID, 0) + addvalue)
 
+func personalityChangesAfterSex():
+	return true
+
 func saveData():
 	var data = {
 		"npcLevel": npcLevel,

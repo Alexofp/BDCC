@@ -611,7 +611,7 @@ func getSubActions():
 			"desc": "You're not gonna lick their pussy",
 		})
 
-	if(state in ["", "blowjob", "askingtosuck", "licking", "askingtolick"]):
+	if(state in ["", "blowjob", "askingtosuck", "licking", "askingtolick", "grinding"]):
 		if(!getSub().isBitingBlocked()):
 			actions.append({
 				"id": "bite",
