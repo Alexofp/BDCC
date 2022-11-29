@@ -87,5 +87,5 @@ func saveData():
 
 func loadData(data):
 	var newfetishMap = SAVE.loadVar(data, "fetishMap", null)
-	if(newfetishMap != null && (newfetishMap is Array)):
+	if(newfetishMap != null && (newfetishMap is Dictionary)):
 		fetishMap = newfetishMap

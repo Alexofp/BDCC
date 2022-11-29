@@ -29,6 +29,7 @@ var intoxicationTolerance: float = 0.0
 # lust combat stuff
 var lustCombatState
 
+var dynamicPersonality: bool = false
 
 func _init():
 	initialDodgeChance = 0.05 # Player has a small chance to dodge anything
@@ -442,6 +443,7 @@ func saveData():
 		"inmateType": inmateType,
 		"arousal": arousal,
 		"consciousness": consciousness,
+		"dynamicPersonality": dynamicPersonality,
 	}
 	
 	data["bodyparts"] = {}
@@ -469,7 +471,7 @@ func saveData():
 	data["intoxicationTolerance"] = intoxicationTolerance
 	
 	data["fetishHolder"] = fetishHolder.saveData()
-	#data["personality"] = personality.saveData()
+	data["personality"] = personality.saveData()
 	
 	return data
 
@@ -490,6 +492,7 @@ func loadData(data):
 	inmateType = SAVE.loadVar(data, "inmateType", InmateType.General)
 	arousal = SAVE.loadVar(data, "arousal", 0.0)
 	consciousness = SAVE.loadVar(data, "consciousness", 1.0)
+	dynamicPersonality = SAVE.loadVar(data, "dynamicPersonality", false)
 	
 	resetSlots()
 	var loadedBodyparts = SAVE.loadVar(data, "bodyparts", {})
@@ -523,7 +526,7 @@ func loadData(data):
 	intoxicationTolerance = SAVE.loadVar(data, "intoxicationTolerance", 0.0)
 	
 	fetishHolder.loadData(SAVE.loadVar(data, "fetishHolder", {}))
-	#personality.loadData(SAVE.loadVar(data, "personality", {}))
+	personality.loadData(SAVE.loadVar(data, "personality", {}))
 	
 	checkLocation()
 		
@@ -990,3 +993,5 @@ func hasTightHoles():
 func getRestraintForcingSuccessChanceMod():
 	return max(1.0 + min(getAttackAccuracy(), 0.0), 0.0) * (1.0 + buffsHolder.getCustom(BuffAttribute.RestraintForcingSuccess))
 
+func personalityChangesAfterSex():
+	return dynamicPersonality

@@ -51,4 +51,6 @@ func saveData():
 	return data
 
 func loadData(data):
-	stats = SAVE.loadVar(data, "stats", {})
+	var newstats = SAVE.loadVar(data, "stats", null)
+	if(newstats != null && (newstats is Dictionary)):
+		stats = newstats
