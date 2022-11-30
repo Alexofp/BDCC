@@ -210,9 +210,8 @@ func _run():
 		if(GM.pc.getInmateType() == InmateType.SexDeviant):
 			saynn("[say=cp_guard]Defeated by some sextoy, fuck me[/say]")
 		
-		addButton("Walk away", "You got your pass, you can just go", "allowFullAndendthescene")
-		addButtonWithChecks("Catch anal", "Use the guy’s dick for your pleasure", "catch_anal", [], [ButtonChecks.NotHandsBlocked])
-
+		addWonButton()
+		
 	if(state == "catch_anal"):
 		GM.main.playAnimation(StageScene.Duo, "stand", {npc="cp_guard", npcHard=true, npcExposedBodyparts=[BodypartSlot.Penis], exposedBodyparts=[BodypartSlot.Anus]})
 		
@@ -294,6 +293,15 @@ func _run():
 		
 		addButton("Walk away", "Yay", "allowFullAndendthescene")
 
+func addWonButton():
+	addButton("Walk away", "You got your pass, you can just go", "allowFullAndendthescene")
+	addButtonWithChecks("Catch anal", "Use the guy’s dick for your pleasure", "catch_anal", [], [ButtonChecks.NotHandsBlocked])
+	addButtonWithChecks("Sex!", "Time to fuck them!", "startsexasdom", [], [ButtonChecks.NotArmsRestrained, ButtonChecks.NotHandsBlocked, ButtonChecks.NotLegsRestrained, ButtonChecks.NotOralBlocked])
+	addButton("Submit to", "Let them have it their way with you", "startsexsubby")
+	addButton("Inventory", "Look at your inventory", "openinventory")
+	if(GM.pc.getInventory().hasRemovableRestraints()):
+		addButton("Struggle", "Struggle out of your restraints", "strugglemenu")
+
 func _react(_action: String, _args):
 	if(_action == "get_frisked"):
 		for item in GM.pc.getInventory().getItemsWithTag(ItemTag.Illegal):
@@ -347,10 +355,30 @@ func _react(_action: String, _args):
 		GM.pc.addSkillExperience(Skill.SexSlave, 30, "cpguard_catchanal")
 		GM.pc.updateNonBattleEffects()
 	
+	if(_action == "startsexsubby"):
+		getCharacter("cp_guard").resetEquipment()
+		GlobalRegistry.getCharacter("cp_guard").addPain(-50)
+		runScene("GenericSexScene", ["cp_guard", "pc"], "subbysex")
+	
+	if(_action == "startsexasdom"):
+		runScene("GenericSexScene", ["pc", "cp_guard"], "domsex")
+	
+	if(_action == "openinventory"):
+		runScene("InventoryScene")
+		return
+	
+	if(_action == "strugglemenu"):
+		runScene("StrugglingScene")
+		return
+	
 	setState(_action)
 
 
 func _react_scene_end(_tag, _result):
+	if(_tag in ["subbysex", "domsex"]):
+		setModuleFlag("CellblockModule", "Cellblock_FreeToPassCheckpoint", true)
+		endScene()
+	
 	if(_tag == "cpguardfight"):
 		processTime(20 * 60)
 		var battlestate = _result[0]
