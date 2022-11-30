@@ -5,6 +5,7 @@ func _init():
 	npcLevel = 1
 	npcBasePain = 100
 	npcBaseLust = 80
+	npcCharacterType = CharacterType.Guard
 	
 func _getName():
 	return "Risha"

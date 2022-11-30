@@ -9,6 +9,7 @@ func _init():
 	npcLevel = 10
 	npcBasePain = 200
 	npcBaseLust = 150
+	npcCharacterType = CharacterType.Guard
 
 	
 	

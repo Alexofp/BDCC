@@ -13,7 +13,7 @@ func getGoals():
 	}
 
 func getActivityBaseScore(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexSubInfo):
-	return 0.0 + _domInfo.fetishScore({Fetish.DrugUse: 0.1})
+	return 0.0 + _domInfo.fetishScore({Fetish.DrugUse: 0.5})
 
 func getVisibleName():
 	return "Drug use"
@@ -41,6 +41,7 @@ func getPossibleDrugsInfo(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo:
 		"scoreSubScore": 1.0,
 		"canUseOnDom": true,
 		"canUseOnSub": true,
+		"maxUsesByNPC": 1,
 	}
 	
 	thedrugs["HeatPill"] = {
@@ -52,6 +53,7 @@ func getPossibleDrugsInfo(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo:
 		"scoreSubScore": _subInfo.fetishScore({Fetish.BeingBred: 1.0}),
 		"canUseOnDom": !dom.hasEffect(StatusEffect.SexHeatDrug),
 		"canUseOnSub": !sub.hasEffect(StatusEffect.SexHeatDrug),
+		"maxUsesByNPC": 1,
 	}
 
 	thedrugs["BreederPill"] = {
@@ -63,6 +65,7 @@ func getPossibleDrugsInfo(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo:
 		"scoreSubScore": _subInfo.fetishScore({Fetish.Breeding: 1.0}),
 		"canUseOnDom": true,
 		"canUseOnSub": true,
+		"maxUsesByNPC": 1,
 	}
 
 	thedrugs["BirthControlPill"] = {
@@ -74,6 +77,7 @@ func getPossibleDrugsInfo(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo:
 		"scoreSubScore": _subInfo.fetishScore({Fetish.BeingBred: -1.0}),
 		"canUseOnDom": true,
 		"canUseOnSub": true,
+		"maxUsesByNPC": 1,
 	}
 
 	thedrugs["AnaphrodisiacPill"] = {
@@ -85,6 +89,7 @@ func getPossibleDrugsInfo(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo:
 		"scoreSubScore": 0.0,
 		"canUseOnDom": !dom.hasEffect(StatusEffect.SexAnaphrodisiacDrug),
 		"canUseOnSub": !sub.hasEffect(StatusEffect.SexAnaphrodisiacDrug),
+		"maxUsesByNPC": 1,
 	}
 
 	return thedrugs
@@ -108,6 +113,12 @@ func getStartActions(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexS
 		if(dom.isPlayer()):
 			if(!dom.getInventory().hasItemID(itemID)):
 				continue
+		else:
+			if(drugInfo.has("maxUsesByNPC")):
+				var maxUses = drugInfo["maxUsesByNPC"]
+				var currentUses = _domInfo.getMemory("USEDDRUG_"+str(itemID), 0)
+				if(currentUses >= maxUses):
+					continue
 
 		var desc = drugInfo["desc"]
 		if(dom.isPlayer()):
@@ -160,6 +171,8 @@ func startActivity(_args):
 		
 		if(getDom().isPlayer()):
 			getDom().getInventory().removeXOfOrDestroy(itemID, 1)
+		else:
+			domInfo.increaseMemory("USEDDRUG_"+str(itemID))
 		
 		if(drugInfo == null):
 			endActivity()
@@ -180,6 +193,8 @@ func startActivity(_args):
 		
 		if(getDom().isPlayer()):
 			getDom().getInventory().removeXOfOrDestroy(itemID, 1)
+		else:
+			domInfo.increaseMemory("USEDDRUG_"+str(itemID))
 		
 		if(drugInfo == null):
 			endActivity()
@@ -361,6 +376,8 @@ func doSubAction(_id, _actionInfo):
 		
 		if(getDom().isPlayer() && _id == "eatit"):
 			getDom().getInventory().removeXOfOrDestroy(usedItemID, 1)
+		elif(_id == "eatit"):
+			domInfo.increaseMemory("USEDDRUG_"+str(usedItemID))
 		
 		var itemRef = GlobalRegistry.getItemRef(usedItemID)
 		if(itemRef == null || drugInfo == null):

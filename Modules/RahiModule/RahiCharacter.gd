@@ -3,6 +3,7 @@ extends Character
 func _init():
 	id = "rahi"
 	npcHasMenstrualCycle = true
+	npcCharacterType = CharacterType.Inmate
 	
 func _getName():
 	return "Rahi"

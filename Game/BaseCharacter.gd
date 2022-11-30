@@ -1734,3 +1734,6 @@ func hasIllegalItems():
 
 func personalityChangesAfterSex():
 	return false
+
+func getCharacterType():
+	return CharacterType.Generic

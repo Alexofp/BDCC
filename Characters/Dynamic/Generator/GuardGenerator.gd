@@ -1,6 +1,9 @@
 extends CharacterGeneratorBase
 class_name GuardGenerator
 
+func pickCharacterType(character:DynamicCharacter, _args = {}):
+	character.npcCharacterType = CharacterType.Guard
+
 func getAttacks():
 	return ["stunbatonAttack", "trygetupattack"]
 

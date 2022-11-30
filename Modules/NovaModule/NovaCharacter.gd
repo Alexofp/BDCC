@@ -10,6 +10,7 @@ func _init():
 		Stat.Sexiness: 1,
 	}
 	npcLevel = 2
+	npcCharacterType = CharacterType.Guard
 	npcLustInterests = {
 		InterestTopic.TallyMarks: Interest.Loves,
 		InterestTopic.Bodywritings: Interest.Loves,

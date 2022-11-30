@@ -14,7 +14,11 @@ func getGoals():
 	}
 
 func getActivityBaseScore(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexSubInfo):
-	return 0.0 + _domInfo.fetishScore({Fetish.Rigging: 0.1})
+	var mult = 1.0
+	# Inmates don't have much bdsm gear
+	if(_domInfo.getChar().getCharacterType() == CharacterType.Inmate):
+		mult = 0.1
+	return 0.0 + _domInfo.fetishScore({Fetish.Rigging: 0.1}) * mult
 
 func getVisibleName():
 	return "Bondage"

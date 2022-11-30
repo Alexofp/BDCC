@@ -4,6 +4,7 @@ func _init():
 	id = "cp_guard"
 	
 	npcBasePain = 80
+	npcCharacterType = CharacterType.Guard
 	
 	npcArmor = {
 		DamageType.Physical: 10,

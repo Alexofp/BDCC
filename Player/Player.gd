@@ -995,3 +995,6 @@ func getRestraintForcingSuccessChanceMod():
 
 func personalityChangesAfterSex():
 	return dynamicPersonality
+
+func getCharacterType():
+	return CharacterType.Inmate

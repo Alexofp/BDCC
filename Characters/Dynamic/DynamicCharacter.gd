@@ -100,6 +100,7 @@ func saveData():
 		"temporaryCharacter": temporaryCharacter,
 		"flags": flags,
 		"npcDefaultEquipment": npcDefaultEquipment,
+		"npcCharacterType": npcCharacterType,
 	}
 	
 	data["bodyparts"] = {}
@@ -156,6 +157,7 @@ func loadData(data):
 	temporaryCharacter = SAVE.loadVar(data, "temporaryCharacter", false)
 	flags = SAVE.loadVar(data, "flags", {})
 	npcDefaultEquipment = SAVE.loadVar(data, "npcDefaultEquipment", [])
+	npcCharacterType = SAVE.loadVar(data, "npcCharacterType", CharacterType.Generic)
 	resetEquipment()
 	
 	resetSlots()

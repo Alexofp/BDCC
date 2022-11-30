@@ -10,6 +10,8 @@ func _init():
 	npcBasePain = 50
 	npcBaseLust = 70
 	npcBaseStamina = 120
+	npcCharacterType = CharacterType.Guard
+	
 	npcLustInterests = {
 		InterestTopic.TallyMarks: Interest.Hates,
 		InterestTopic.Bodywritings: Interest.Hates,

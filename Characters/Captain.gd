@@ -2,6 +2,7 @@ extends Character
 
 func _init():
 	id = "captain"
+	npcCharacterType = CharacterType.Generic
 	
 func _getName():
 	return "Cpt. Wright"

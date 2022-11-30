@@ -2,6 +2,7 @@ extends Character
 
 func _init():
 	id = "jacki"
+	npcCharacterType = CharacterType.Inmate
 	
 func _getName():
 	return "Jacki Northstar"

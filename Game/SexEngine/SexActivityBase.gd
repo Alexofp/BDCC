@@ -279,7 +279,7 @@ func getGenericOrgasmData(isSub):
 		character = getDom()
 	var text = RNG.pick([
 		"A [b]powerful orgasm[/b] overwhelms {<ORGASMER>.your} body.",
-		"[b]{<ORGASMER>.You} {sub.youVerb('cum')}[/b] hard!",
+		"[b]{<ORGASMER>.You} {<ORGASMER>.youVerb('cum')}[/b] hard!",
 	])
 	
 	if(character.hasPenis()):

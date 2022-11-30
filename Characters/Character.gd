@@ -16,6 +16,7 @@ var npcRestraintStrugglePower = 1.0
 var npcRestraintMinigameResultMin = 0.8
 var npcRestraintMinigameResultMax = 1.1
 var npcHasMenstrualCycle = false # If true can get pregnant
+var npcCharacterType = CharacterType.Generic
 
 var lastUpdatedDay:int = -1
 var lastUpdatedSecond:int = -1
@@ -421,3 +422,6 @@ func processUntilTime(theday:int, theseconds:int):
 
 func onStoppedProcessing():
 	pass
+
+func getCharacterType():
+	return npcCharacterType

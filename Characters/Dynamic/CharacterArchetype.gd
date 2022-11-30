@@ -38,6 +38,7 @@ static func getFetishes(archType):
 				Fetish.OralSexReceiving : FetishInterest.Likes,
 				Fetish.OralSexGiving : FetishInterest.Loves,
 				Fetish.Tribadism : FetishInterest.Loves,
+				Fetish.DrugUse : FetishInterest.Likes,
 			}
 		Bottom:
 			return {
@@ -56,6 +57,7 @@ static func getFetishes(archType):
 				Fetish.OralSexGiving : FetishInterest.Likes,
 				Fetish.Tribadism : FetishInterest.Loves,
 				Fetish.OralSexReceiving : FetishInterest.Likes,
+				Fetish.DrugUse : FetishInterest.Likes,
 			}
 		Dom:
 			return {
@@ -88,6 +90,7 @@ static func getFetishes(archType):
 				Fetish.Bondage : FetishInterest.Likes,
 				Fetish.Rigging : FetishInterest.Likes,
 				Fetish.Sadism : FetishInterest.Likes,
+				Fetish.DrugUse : FetishInterest.Likes,
 			}
 		RopeBunny:
 			return {
@@ -107,7 +110,7 @@ static func getFetishes(archType):
 			return {
 				Fetish.Sadism : FetishInterest.Likes,
 				Fetish.UnconsciousSex : FetishInterest.Likes,
-				Fetish.DrugUse : FetishInterest.Likes,
+				Fetish.DrugUse : FetishInterest.Loves,
 			}
 		TestSubject:
 			return {
@@ -120,11 +123,16 @@ static func getFetishes(archType):
 			return {
 				Fetish.Breeding : FetishInterest.Loves,
 				Fetish.BeingBred : FetishInterest.Dislikes,
+				Fetish.DrugUse : FetishInterest.Likes,
+				Fetish.VaginalSexGiving : FetishInterest.Loves,
+				Fetish.AnalSexGiving : FetishInterest.Likes,
 			}
 		BreedingStock:
 			return {
 				Fetish.BeingBred : FetishInterest.Loves,
 				Fetish.Breeding : FetishInterest.Dislikes,
+				Fetish.VaginalSexReceiving : FetishInterest.Loves,
+				Fetish.AnalSexReceiving : FetishInterest.Likes,
 			}
 	
 	return {}

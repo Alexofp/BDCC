@@ -303,8 +303,12 @@ func applyArgs(_character:DynamicCharacter, _args = {}):
 		for flagToChange in flagsToAdd:
 			_character.setFlag(flagToChange[0], flagToChange[1])
 		
+func pickCharacterType(character:DynamicCharacter, _args = {}):
+	character.npcCharacterType = CharacterType.Generic
+		
 func generate(_args = {}):
 	var character = makeBase("dynamicnpc", _args)
+	pickCharacterType(character, _args)
 	pickGender(character, _args)
 	pickBodyAttributes(character, _args)
 	pickName(character, _args)
