@@ -589,6 +589,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Characters/Dynamic/NpcRank.gd"
 }, {
+"base": "CharacterGeneratorBase",
+"class": "NurseGenerator",
+"language": "GDScript",
+"path": "res://Characters/Dynamic/Generator/NurseGenerator.gd"
+}, {
 "base": "Reference",
 "class": "Orifice",
 "language": "GDScript",
@@ -1216,6 +1221,7 @@ _global_script_class_icons={
 "NpcCon": "",
 "NpcGen": "",
 "NpcRank": "",
+"NurseGenerator": "",
 "Orifice": "",
 "OrificeType": "",
 "PantiesState": "",

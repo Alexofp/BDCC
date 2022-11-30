@@ -13,7 +13,10 @@ func getGoals():
 	}
 
 func getActivityBaseScore(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexSubInfo):
-	return 0.0 + _domInfo.fetishScore({Fetish.DrugUse: 0.5})
+	var mult = 1.0
+	if(_domInfo.getChar().getCharacterType() == CharacterType.Nurse):
+		mult = 2.0
+	return 0.0 + _domInfo.fetishScore({Fetish.DrugUse: 0.5}) * mult
 
 func getVisibleName():
 	return "Drug use"

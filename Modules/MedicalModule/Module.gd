@@ -71,6 +71,7 @@ func _init():
 		"res://Modules/MedicalModule/NurseFelineOffLimits.gd",
 		
 		"res://Modules/MedicalModule/Nursery/NurseryTalkScene.gd",
+		"res://Modules/MedicalModule/NurseCaughtOfflimitsScene.gd",
 		]
 	characters = [
 		"res://Modules/MedicalModule/MentalWard/LatexParasite.gd",
@@ -84,6 +85,7 @@ func _init():
 		
 		"res://Modules/MedicalModule/Nursery/NurseryTalkEvent.gd",
 		"res://Modules/MedicalModule/StealDrugsFromMedicalEvent.gd",
+		"res://Modules/MedicalModule/NurseCaughtOfflimitsEvent.gd",
 	]
 
 func resetFlagsOnNewDay():
