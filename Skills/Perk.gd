@@ -6,6 +6,7 @@ const StartInfertile = "StartInfertile"
 const StartMaleInfertility = "StartMaleInfertility"
 const StartNoHybrids = "StartNoHybrids"
 const StartNoHeat = "StartNoHeat"
+const StartMaleChastity = "StartMaleChastity"
 
 # Combat perks
 const CombatShove = "CombatShove"

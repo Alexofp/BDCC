@@ -499,7 +499,7 @@ func doDomAction(_id, _actionInfo):
 			throughTheClothing = " through the "+clothingItem.getCasualName()
 		
 		var text = RNG.pick([
-			"{dom.You} {dom.youVerb('stick')} {dom.yourHis} tongue out and {dom.youVerb('press', 'presses')} it against {sub.your} "+RNG.pick(["pussy", "slit", "petals", "folds"])+" before proceeding to lick them"+throughTheClothing+".",
+			"{dom.You} {dom.youVerb('stick')} {dom.yourHis} tongue out and {dom.youVerb('press', 'presses')} it against {sub.your} "+RNG.pick(["pussy", "slit", "petals", "folds"])+" before proceeding to lick {sub.youHim} out"+throughTheClothing+".",
 		])
 		
 		subInfo.addLust(10.0 + subInfo.fetishScore({Fetish.OralSexReceiving: 5.0}))

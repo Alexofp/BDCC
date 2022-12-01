@@ -168,7 +168,7 @@ func _run():
 		saynn(RNG.pick(possibleLines))
 		# (Options are Submit, Attack, Offer body)
 
-		addButton("Submit", "Let them look through your things", "submit")
+		addButton("Search", "Let them look through your things", "submit")
 		addButton("Attack", "Well, they are asking for it", "attack")
 		addButton("Offer body", "Maybe you can try to seduce them", "offer_body")
 

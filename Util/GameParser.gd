@@ -128,15 +128,15 @@ func callObjectFuncWrapper(_obj: String, _command: String, _args: Array):
 		if(_args.size() == 2):
 			return object.verbS(str(_args[0]), str(_args[1]))
 			
-	if(_command in ["penis", "cock"] && _args.size() == 0 && object.has_method("getBodypartLewdDescriptionAndName")):
+	if(_command in ["penis", "cock", "dick"] && _args.size() == 0 && object.has_method("getBodypartLewdDescriptionAndName")):
 		return object.getBodypartLewdDescriptionAndName(BodypartSlot.Penis)
-	if(_command in ["aPenis", "aCock"] && _args.size() == 0 && object.has_method("getBodypartLewdDescriptionAndNameWithA")):
+	if(_command in ["aPenis", "aCock", "aDick"] && _args.size() == 0 && object.has_method("getBodypartLewdDescriptionAndNameWithA")):
 		return object.getBodypartLewdDescriptionAndNameWithA(BodypartSlot.Penis)
-	if(_command in ["penisSize", "cockSize"] && _args.size() == 0 && object.has_method("getBodypartLewdSizeAdjective")):
+	if(_command in ["penisSize", "cockSize", "dickSize"] && _args.size() == 0 && object.has_method("getBodypartLewdSizeAdjective")):
 		return object.getBodypartLewdSizeAdjective(BodypartSlot.Penis)
-	if(_command in ["penisDesc", "cockDesc"] && _args.size() == 0 && object.has_method("getBodypartLewdAdjective")):
+	if(_command in ["penisDesc", "cockDesc", "dickDesc"] && _args.size() == 0 && object.has_method("getBodypartLewdAdjective")):
 		return object.getBodypartLewdAdjective(BodypartSlot.Penis)
-	if(_command in ["penisSizeStr", "cockSizeStr"] && _args.size() == 0 && object.has_method("getPenisSizeString")):
+	if(_command in ["penisSizeStr", "cockSizeStr", "dickSizeStr"] && _args.size() == 0 && object.has_method("getPenisSizeString")):
 		return object.getPenisSizeString()
 		
 	if(_command == "vagina" && _args.size() == 0 && object.has_method("getBodypartLewdDescriptionAndName")):

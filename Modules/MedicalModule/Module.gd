@@ -38,6 +38,9 @@ func getFlags():
 		"Nursery_AskedDatabase": flag(FlagType.Bool),
 		
 		"Medical_StoleDrugsToday": flag(FlagType.Bool),
+		
+		"PC_ReceivedPermanentCage": flag(FlagType.Bool),
+		"PC_PickedFlatPermanentCage": flag(FlagType.Bool),
 	}
 
 func _init():

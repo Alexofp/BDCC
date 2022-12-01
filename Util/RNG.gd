@@ -3,7 +3,11 @@ class_name RNG
 
 # generates an [from,to] int, both are inclusive
 static func randi_range(from: int, to: int) -> int:
-	assert(to >= from)
+	if(to < from):
+		var switch = to
+		to = from
+		from = switch
+	#assert(to >= from)
 	
 	var randValue = int(floor(rand_range(from, to+1)))
 	if(randValue < from):

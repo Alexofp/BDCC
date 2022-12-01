@@ -198,7 +198,7 @@ func getDomActions():
 			if(getDomCondom() != null):
 				condomScore = 1.0
 			
-			var scoreToCumInside = max(condomScore, domInfo.fetishScore({Fetish.Breeding: 1.0}) - 20.0*float(gonnaCumOutside))
+			var scoreToCumInside = max(condomScore, domInfo.fetishScore({Fetish.Breeding: 1.0}) + 0.5 - 20.0*float(gonnaCumOutside))
 			
 			var hasKnot = getDom().bodypartHasTrait(BodypartSlot.Penis, PartTrait.PenisKnot)
 			if(hasKnot):

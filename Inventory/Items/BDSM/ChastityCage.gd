@@ -30,7 +30,7 @@ func canSell():
 	return true
 
 func getTags():
-	return [ItemTag.BDSMRestraint, ItemTag.CanBeForcedByGuards]
+	return [ItemTag.BDSMRestraint, ItemTag.CanBeForcedByGuards, ItemTag.ChastityCage]
 
 func isRestraint():
 	return true
