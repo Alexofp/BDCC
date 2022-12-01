@@ -221,6 +221,7 @@ func getActivityWithUniqueID(uniqueID):
 
 func generateGoals():
 	var amountToGenerate = 2
+	var generatedAnyGoals = false
 	
 	for domID in doms:
 		if(domID == "pc"):
@@ -248,9 +249,15 @@ func generateGoals():
 			for _i in range(0, amountToGenerate):
 				var randomGoalInfo = RNG.pickWeightedPairs(possibleGoals)
 				personDomInfo.goals.append(randomGoalInfo.duplicate(true))
+				generatedAnyGoals = true
 			
 		print(personDomInfo.goals)
 	
+	if(!isDom("pc") && !generatedAnyGoals):
+		messages.append("Dom couldn't decide what to do with the sub, none of their fetishes apply.")
+		
+		messages.append("[say="+str(RNG.pick(doms))+"]You are a lucky slut.[/say]")
+		
 	#domInfo.goals.append([SexGoal.Fuck, subID])
 	
 	#startActivity("SexFuckTest", domID, subID)
