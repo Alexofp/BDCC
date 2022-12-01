@@ -5,15 +5,18 @@ func _init():
 
 func registerTriggers(es):
 	es.addTrigger(self, Trigger.EnteringRoom)
+	es.addTrigger(self, Trigger.PCLookingForTrouble)
 
 func react(_triggerID, _args):
-	if(GM.main.getFlag("ExposureEventCD", 0) > 0):
+	var isLookingForTrouble = (_triggerID == Trigger.PCLookingForTrouble)
+	
+	if(GM.main.getFlag("ExposureEventCD", 0) > 0 && !isLookingForTrouble):
 		GM.main.increaseFlag("ExposureEventCD", -1)
 		return
 	
-	if(GM.pc.hasEffect(StatusEffect.Exposed)):
+	if(GM.pc.hasEffect(StatusEffect.Exposed) || isLookingForTrouble):
 		if(WorldPopulation.Inmates in GM.pc.getLocationPopulation()):
-			if(RNG.chance(2.0 + min(5.0, 2.0*GM.pc.getExposure()))):
+			if(RNG.chance(2.0 + min(5.0, 2.0*GM.pc.getExposure())) || isLookingForTrouble):
 				GM.main.setFlag("ExposureEventCD", RNG.randi_range(5, 10))
 				
 				var encounterLevel = RNG.randi_range(0, GM.pc.getLevel() + RNG.randi_range(-1, 1))
