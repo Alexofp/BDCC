@@ -4,6 +4,7 @@ class_name RNG
 # generates an [from,to] int, both are inclusive
 static func randi_range(from: int, to: int) -> int:
 	if(from > to):
+		Log.printerr("randi_range() from is higher than to. From = "+str(from)+" To = "+str(to))
 		to = from
 	#assert(to >= from)
 	
