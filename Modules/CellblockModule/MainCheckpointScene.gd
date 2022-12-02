@@ -232,7 +232,9 @@ func _run():
 		saynn("You catch some of his precum with a few digits, then move them to your butt and rub it into your backdoor. Then you grab his cock and guide it towards your rear while slowly lowering yourself onto him. His cock slowly starts to prod and stretch your ring open. A few more attempts and you manage to do it, the tip of his cock is inside you.")
 
 		# (if has cock)
-		if(GM.pc.hasPenis()):
+		if(GM.pc.isWearingChastityCage()):
+			saynn("Your own {pc.cock} tries to get hard too without you even touching it but your chastity cage prevents a full blown erection. A lonely drop of pre can be seen shining on on the tip of the cage.")
+		elif(GM.pc.hasPenis()):
 			saynn("Your own {pc.cock} gets hard too without you even touching it, a lonely drop of pre can be seen shining on its end.")
 
 		# (if has vagina)
@@ -254,7 +256,9 @@ func _run():
 		saynn("You don’t stop, you slowly start riding him, moving your {pc.thick} {pc.feminine} body up down his cock, each time trying to stretch yourself out more, his precum works as a lube and makes riding the guard easier. It feels very pleasurable, you open your mouth and start moaning, your hands land on your chest and start playing with your sensitive nips.")
 
 		# (if has cock)
-		if(GM.pc.hasPenis()):
+		if(GM.pc.isWearingChastityCage()):
+			saynn("Your own caged up {pc.cockDesc} cock bobs up and down, your little prostate is being massaged so much, you can’t stop leaking.")
+		elif(GM.pc.hasPenis()):
 			saynn("Your own {pc.cockDesc} cock bobs up and down, your little prostate is being massaged so much, you can’t stop leaking.")
 
 		# (if has vagina)
@@ -268,7 +272,9 @@ func _run():
 		saynn("[say=cp_guard]And you’re not getting off without me stuffing you[/say]")
 
 		# (if has cock)
-		if(GM.pc.hasPenis()):
+		if(GM.pc.isWearingChastityCage()):
+			saynn("Your {pc.cockSize} toy throbs and becomes rock-hard, putting a serious amount of pressure on your cage. The guard’s cock has been pounding on your prostate so much that you feel like you’re about to go over the edge at any moment.")
+		elif(GM.pc.hasPenis()):
 			saynn("Your {pc.cockSize} toy throbs and becomes rock-hard, the guard’s cock has been pounding on your prostate so much that you feel like you’re about to go over the edge at any moment.")
 
 		saynn("You’re close. And so is he. You feel his canine member becoming bigger inside your rectum, his knot inflates with blood and stretches you out even more but doesn’t quite fit. Your moans and pants don’t stop coming out, you press your hands into the guard’s chest and start bringing yourself down onto his cock with extra strength, your anal ring letting more and more of his knot in each time. With one last push you manage to finally squeeze it in, the full size of his fat orb slides inside you, locking you two together. That is what pushes you both over the edge, the guy grunts as his cock starts shooting hot sticky cum inside you, stuffing you. You moan and shiver, your legs shake, your hands hold tightly onto him.")

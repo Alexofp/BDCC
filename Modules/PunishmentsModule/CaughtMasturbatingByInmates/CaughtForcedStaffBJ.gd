@@ -138,7 +138,9 @@ func _run():
 		saynn("The dickgirl lets out a passionate moan as her cock starts cumming inside your mouth, quickly stuffing your belly with her hot seed. All the while you sit on your knees and swallow her load like a good cock slut, your eyes are closed as you are focused on giving the girl the best experience.")
 
 		# (if has cock)
-		if(GM.pc.hasPenis()):
+		if(GM.pc.isWearingChastityCage()):
+			saynn("Your {pc.cock} is hard as your chastity allows, you wish you could stroke yourself at this moment..")
+		elif(GM.pc.hasPenis()):
 			saynn("Your {pc.cock} is hard as a rock, you wish you could stroke yourself at this moment..")
 
 		saynn("[say=shemaleguard]Ah~.. Such a good little fucktoy.[/say]")

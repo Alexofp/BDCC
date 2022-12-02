@@ -51,7 +51,9 @@ func _run():
 		saynn("You feel that she is not as nervous as she was, she is even leaning into your touch as you keep rubbing her back, slowly shifting down and now focusing on the area around her calm tail. As you focus your attention on rubbing her tail, it wraps around your hand and you can hear quiet moaning coming from her, she keeps arching her back and rubbing against you.")
 
 		# (if has dick)
-		if(GM.pc.hasReachablePenis()):
+		if(GM.pc.isWearingChastityCage()):
+			saynn("You can’t help but to be aroused by that, your {pc.cock} fills with blood and tries to become hard but your chastity prevents it. Your cage rubs against the feline’s fit buttocks but she doesn’t seem to mind it. She embraces it, gently squeezing your member between her legs as best as your cage allows for it.")
+		elif(GM.pc.hasReachablePenis()):
 			saynn("You can’t help but to be aroused by that, your {pc.cock} fills with blood and becomes more hard each second, its tip rubs against the feline’s fit buttocks but she doesn’t seem to mind it. She embraces it, gently squeezing your member between her legs.")
 
 		# (if has non-flat breasts)

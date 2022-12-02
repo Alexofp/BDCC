@@ -715,31 +715,6 @@ func getInmateNumber():
 func getFullInmateNumber():
 	return "P-"+inmateNumber
 
-func getBodypartLewdSizeAdjective(bodypartSlot):
-	if(!hasBodypart(bodypartSlot)):
-		return "ERROR:NO BODYPART IN SLOT " + str(bodypartSlot)
-	return getBodypart(bodypartSlot).getLewdSizeAdjective()
-	
-func getBodypartLewdAdjective(bodypartSlot):
-	if(!hasBodypart(bodypartSlot)):
-		return "ERROR:NO BODYPART IN SLOT " + str(bodypartSlot)
-	return getBodypart(bodypartSlot).getLewdAdjective()
-
-func getBodypartLewdName(bodypartSlot):
-	if(!hasBodypart(bodypartSlot)):
-		return "ERROR:NO BODYPART IN SLOT " + str(bodypartSlot)
-	return getBodypart(bodypartSlot).getLewdName()
-
-func getBodypartLewdDescriptionAndName(bodypartSlot):
-	if(!hasBodypart(bodypartSlot)):
-		return "ERROR:NO BODYPART IN SLOT " + str(bodypartSlot)
-	return getBodypart(bodypartSlot).getLewdDescriptionAndName()
-
-func getBodypartLewdDescriptionAndNameWithA(bodypartSlot):
-	if(!hasBodypart(bodypartSlot)):
-		return "ERROR:NO BODYPART IN SLOT " + str(bodypartSlot)
-	return getBodypart(bodypartSlot).getLewdDescriptionAndNameWithA()
-
 func getFemininity() -> int:
 	return pickedFemininity
 

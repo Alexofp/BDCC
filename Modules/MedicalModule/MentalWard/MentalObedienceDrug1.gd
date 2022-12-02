@@ -143,6 +143,27 @@ func _run():
 			saynn("Fuck, you think you blanked there for a second.")
 
 		# (if has reachable cock)
+		elif(GM.pc.isWearingChastityCage()):
+			saynn("You can feel your {pc.cock} trying to become harder while Eliza stares at you. She traces a digit along your cage and gives it a little rub.")
+			
+			saynn("[say=eliza]Spread your legs~. Hands behind your back, no touching.[/say]")
+			
+			saynn("You do as she orders, hiding your hands and giving her full access to your crotch, you don’t even think about misbehaving anymore. Eliza catches a drop of your precum and saves it for later. She then pushes on your chest slightly, forcing you to lean back and use your arms for support. She sneaks her lubed up digits down to your butt and forces them inside, making you moan..")
+			
+			saynn("[say=eliza]Your brain quickly rewired itself, it wants all the pleasure it can get. And it wants to avoid pain at all costs. That’s why you’re so subby and slutty. My adorable little slut~. Say it.[/say]")
+			
+			saynn("She starts fingering your anus, pressing on all the right spots, causing your rear hole to make wet noises as you moan and squirm around her digits. Your dick puts more and more pressure on your cage, you’re becoming desperate.")
+			
+			saynn("[say=pc]I’m your adorable little slut!.. Ow.. M-Mistress![/say]")
+			
+			saynn("Your brain quickly reacted to the uncomfortable feeling that returned and fixed the mistake. Eliza grabs your chin with her free hand and looks you into the eyes.")
+			
+			saynn("[say=eliza]Cum for me, slut. Cum a lot.[/say]")
+			
+			saynn("Your body wasn’t even that close but it pushed itself so it can obey, you suddenly feel a huge spike of pleasure flowing through you, a loud series of moans escapes your mouth as your {pc.cock} starts to pulsate. Your whole body shivers as a powerful orgasm overwhelms you. And then another one. And another. Ecstatic waves hit you and cause your body to give up, your {pc.analStretch} ring clenches around Eliza’s digits, you can barely support yourself with your arms while your throbbing dick starts shooting spurt after spurt of cum through the metal cage. Eliza stands to the side, as to not get messy, and keeps slowly fingering your ass. She giggles, clearly enjoying seeing you cum so much.")
+			
+			saynn("Fuck, you think you blanked there for a second.")
+		
 		elif(GM.pc.hasPenis()):
 			saynn("You can feel your {pc.cock} becoming harder while Eliza stares at you. She traces a digit along your length and gives your tip a little rub.")
 

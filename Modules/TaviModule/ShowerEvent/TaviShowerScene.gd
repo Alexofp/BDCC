@@ -82,7 +82,9 @@ func _run():
 		saynn("Your embarrassed gaze directed away, there is only so much teasing you can endure so you decide to let go..")
 
 		# (if has penis)
-		if(GM.pc.hasPenis()):
+		if(GM.pc.isWearingChastityCage()):
+			saynn("You let out a passionate moan before a stream of piss emerges from your cock. Tavi quickly moves away her thumb but she keeps her other digits wrapped around your chastity cage.")
+		elif(GM.pc.hasPenis()):
 			saynn("You let out a passionate moan before a stream of piss emerges from your cock. Tavi quickly moves away her thumb but she keeps her other digits wrapped around your member.")
 
 		# (else)
@@ -114,7 +116,9 @@ func _run():
 		saynn("You grunt a lot but you don’t leak a single drop. Tavi sees the efforts you went through and sighs. She stops teasing you.")
 
 		# (if dick)
-		if(GM.pc.hasPenis()):
+		if(GM.pc.isWearingChastityCage()):
+			saynn("Instead she switches to teasing. Her paw tugs and pulls on your {pc.cock} until it’s getting more hard under the chastity.")
+		elif(GM.pc.hasPenis()):
 			saynn("Instead she switches to stroking you off. Her paw slides along your {pc.cock} until it’s fully hard again.")
 
 		# (if else)
@@ -124,7 +128,9 @@ func _run():
 		saynn("[say=tavi]Awww. But I bet you would enjoy it.[/say]")
 
 		# (if dick)
-		if(GM.pc.hasPenis()):
+		if(GM.pc.isWearingChastityCage()):
+			saynn("You begin moaning for her. Tavi quickly reaches the full pace, she strokes and tugs on your cage so fast you think you won’t last for much longer. But just when you think you will go over your peak, Tavi suddenly stops, cutting off the supply of instant pleasure and causing you to squirm in desperation. Tavi welcomes it, she holds you still, hand on your cage, stroking it so slowly that it feels like a torture.")
+		elif(GM.pc.hasPenis()):
 			saynn("You begin moaning for her. Tavi quickly reaches the full pace, she strokes you so fast you think you won’t last for much longer. But just when you think you will go over your peak, Tavi suddenly stops, cutting off the supply of instant pleasure and causing you to squirm in desperation. Tavi welcomes it, she holds you still, hand on your cock, stroking you so slowly that it feels like a torture.")
 
 		# (else)
@@ -150,7 +156,7 @@ func _run():
 		saynn("[say=tavi]Well it’s a shame that you’re stuck with me then, pet~.[/say]")
 
 		# (if dick)
-		if(GM.pc.hasPenis()):
+		if(GM.pc.hasReachablePenis()):
 			saynn("She begins stroking you off. Her paw slides along your {pc.cock}, catching any precum and spreading it along the full length.")
 
 		# (if else)
@@ -160,7 +166,7 @@ func _run():
 		saynn("[say=tavi]Because I can be mean when I don’t get what I want~.[/say]")
 
 		# (if dick)
-		if(GM.pc.hasPenis()):
+		if(GM.pc.hasReachablePenis()):
 			saynn("You can’t hold your moans from escaping. Tavi quickly reaches the full pace, she strokes you so fast you think you won’t last for much longer. But just when you think you will go over your peak, Tavi suddenly stops, cutting off the supply of instant pleasure and causing you to squirm in desperation. Tavi welcomes it, she holds you still, hand on your cock, stroking you so slowly that it feels like a torture.")
 
 		# (else)

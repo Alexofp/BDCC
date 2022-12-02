@@ -106,7 +106,10 @@ func _run():
 
 		addButton("Deny", "Nope, Nova is not cumming today", "deny")
 		addButtonWithChecks("Offer pussy", "Make her work for it", "offer_pussy", [], [ButtonChecks.HasReachableVagina])
-		addButtonWithChecks("Offer cock", "Make her work for it", "offer_cock", [], [ButtonChecks.HasReachablePenis])
+		if(GM.pc.hasReachablePenis() || GM.pc.isWearingChastityCage()):
+			addButtonWithChecks("Offer cock", "Make her work for it", "offer_cock", [], [])
+		else:
+			addDisabledButton("Offer cock", "You need a cock for this")
 
 
 	if(state == "deny"):
@@ -161,14 +164,23 @@ func _run():
 	if(state == "offer_cock"):
 		# (needs cock)
 		GM.main.playAnimation(StageScene.Duo, "stand", {npc="nova", hard=true, npcAction="kneel", exposedBodyparts=[BodypartSlot.Penis]})
+		
+		if(GM.pc.isWearingChastityCage()):
+			saynn("Hmm. Yeah, using a desperate husky for your pleasure sounds kinda nice about now. You expose your {pc.cock} and kneel before Nova, offering her some work. The husky quickly realizes what she needs to do and starts eagerly nuzzling your chastity cage. She then sticks her tongue out and starts trying to reach your member through it, making it feel good in the process. All the while the suit is still denying the husky time after time, turning her more desperate and subby.")
+			
+			saynn("[say=pc]Such a good girl~. Don’t stop, do it properly.[/say]")
+			
+			saynn("Nova parts her lips and lets the head of your caged up cock inside. She then starts licking it while moving her head up and down, slowly allowing more of you inside. The whole thing looks somewhat humiliating for her but she keeps trying to pleasure you, poking her tongue through the holes in your cage and rubbing your skin and the sensitive tip of a cock as best as she can.")
+			
+			saynn("And it works, you start moaning, your body squirms around that mouth until the moment you are shoved over the edge. Your {pc.cock} starts shooting {pc.cum} deep down the girl’s mouth, your finger accidently hits the ‘allow to cum’ button on the PDA, causing Nova’s suit to keep vibrating no matter what. It only takes a few seconds before Nova starts moaning loudly too, her covered up cock is shooting cum inside the undersuit, creating quite a mess underneath. But she doesn’t care, she is arching her back and eagerly abusing her throat on your cock through the orgasm, milking your balls for every last drop of {pc.cum}.")
+		else:
+			saynn("Hmm. Yeah, using a desperate husky for your pleasure sounds kinda nice about now. You expose your {pc.cock} and kneel before Nova, offering her your shaft. The husky quickly realizes what she needs to do and starts eagerly nuzzling your cock. She then sticks her tongue out and starts dragging it across the length of your member, making it feel good. All the while the suit is still denying the husky time after time, turning her more desperate and subby.")
 
-		saynn("Hmm. Yeah, using a desperate husky for your pleasure sounds kinda nice about now. You expose your {pc.cock} and kneel before Nova, offering her your shaft. The husky quickly realizes what she needs to do and starts eagerly nuzzling your cock. She then sticks her tongue out and starts dragging it across the length of your member, making it feel good. All the while the suit is still denying the husky time after time, turning her more desperate and subby.")
+			saynn("[say=pc]Such a good girl~. Don’t stop, do it properly.[/say]")
 
-		saynn("[say=pc]Such a good girl~. Don’t stop, do it properly.[/say]")
+			saynn("Nova parts her lips and lets the head of your cock inside. She then starts licking it while moving her head up and down, slowly allowing more of your shaft inside. The head of your cock quickly reaches the back of her mouth but she is too aroused to care about her gag reflex, she forces herself onto your member, allowing it to go down her throat, stretching it. Little tears escape from Nova’s eyes when she is gagging on your cock but she keeps deepthroating you like a good slut. The husky quickly finds a good rhythm and starts pleasuring you with both, her tight throat and her canine tongue, the desperate dickgirl is clearly going for efficiency here.")
 
-		saynn("Nova parts her lips and lets the head of your cock inside. She then starts licking it while moving her head up and down, slowly allowing more of your shaft inside. The head of your cock quickly reaches the back of her mouth but she is too aroused to care about her gag reflex, she forces herself onto your member, allowing it to go down her throat, stretching it. Little tears escape from Nova’s eyes when she is gagging on your cock but she keeps deepthroating you like a good slut. The husky quickly finds a good rhythm and starts pleasuring you with both, her tight throat and her canine tongue, the desperate dickgirl is clearly going for efficiency here.")
-
-		saynn("But it works, you start moaning, your body squirms around that mouth until the moment you are shoved over the edge. Your {pc.cock} starts shooting {pc.cum} deep down the girl’s throat, your finger accidently hits the ‘allow to cum’ button on the PDA, causing Nova’s suit to keep vibrating no matter what. It only takes a few seconds before Nova starts moaning loudly too, her covered up cock is shooting cum inside the undersuit, creating quite a mess underneath. But she doesn’t care, she is arching her back and eagerly abusing her throat on your cock through the orgasm, milking your balls for every last drop of {pc.cum}.")
+			saynn("But it works, you start moaning, your body squirms around that mouth until the moment you are shoved over the edge. Your {pc.cock} starts shooting {pc.cum} deep down the girl’s throat, your finger accidently hits the ‘allow to cum’ button on the PDA, causing Nova’s suit to keep vibrating no matter what. It only takes a few seconds before Nova starts moaning loudly too, her covered up cock is shooting cum inside the undersuit, creating quite a mess underneath. But she doesn’t care, she is arching her back and eagerly abusing her throat on your cock through the orgasm, milking your balls for every last drop of {pc.cum}.")
 
 		# (if has pussy)
 		if(GM.pc.hasVagina()):

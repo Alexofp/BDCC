@@ -119,8 +119,11 @@ func _run():
 
 		saynn("[say=nova]There you go, wasn’t too hard was it?[/say]")
 
-		if(GM.pc.hasReachablePenis()):
-			saynn("Nova then crouches behind you and puts her hand on your crotch, feeling your hard shaft that seems to be leaking pre and a ballsack. You seem very aroused after")
+		if(GM.pc.hasPenis()):
+			if(GM.pc.isWearingChastityCage()):
+				saynn("Nova then crouches behind you and puts her hand on your crotch, feeling your chastity cage that seems to be leaking pre and your pair of balls. It’s quite arousing.")
+			else:
+				saynn("Nova then crouches behind you and puts her hand on your crotch, feeling your hard shaft that seems to be leaking pre and your pair of balls. It's quite arousing.")
 
 			if(GM.pc.hasReachableVagina()):
 				saynn("Then Nova’s paw shifts down to your wet cunt and brushes against it too, feeling its wetness,  you shiver and try to hide your moans when Nova finds your clit and gives it a rub.")
@@ -245,21 +248,27 @@ func _run():
 		saynn("You hesitate. But it seems like there is no choice, you bend forward and place your neck in the middle hole. Nova then unlocks your cuffs and places your hands where they need to be before closing and locking the stocks, rendering you completely helpless. You test how sturdy they are and can’t even move your neck, you’re stuck in a very compromising position where your private bits are visible to anyone. Stocks are made out of a metal unlockable frame, a rubber pad underneath and some chains on the bottom that Nova uses to make you spread your legs more.")
 
 		# (if only has cock)
-		if(GM.pc.hasReachablePenis() && !GM.pc.hasReachableVagina()):
-			saynn("Nova puts her hand on your balls and gives them a gentle squeeze. She then rubs the head of your cock and strokes you until you become hard. She also licks one of her digits and then prods at your backdoor. She manages to slide one in and then feels your prostate, causing you to start leaking pre.")
+		if(GM.pc.hasPenis() && !GM.pc.hasReachableVagina()):
+			if(GM.pc.isWearingChastityCage()):
+				saynn("Nova puts her hand on your balls and gives them a gentle squeeze. She then rubs the tip of your chastity cage and tries to get you hard. She then licks one of her digits and then prods at your backdoor. She manages to slide one in and then feels your prostate, causing you to start leaking pre.")
+			else:
+				saynn("Nova puts her hand on your balls and gives them a gentle squeeze. She then rubs the head of your cock and strokes you until you become hard. She also licks one of her digits and then prods at your backdoor. She manages to slide one in and then feels your prostate, causing you to start leaking pre.")
 
 			saynn("[say=nova]Hope you like being a buttslut~. Prepare to be used a lot[/say]")
 
 		# (if has vagina)
 		
-		if(!GM.pc.hasReachablePenis() && GM.pc.hasReachableVagina()):
+		if(!GM.pc.hasPenis() && GM.pc.hasReachableVagina()):
 			saynn("Nova puts her hand on your exposed slit and gives it a rub, she uses her digit to trace along your sensitive lips and then spreads them open before giving you a spank.")
 
 			saynn("[say=nova]Hope you like being fucked without a rubber~. Prepare to be used a lot[/say]")
 
 		# (if has both)
-		if(GM.pc.hasReachablePenis() && GM.pc.hasReachableVagina()):
-			saynn("Nova puts her hand on your balls and gives them a gentle squeeze, she then rubs both your cock and your cunt until you become aroused and needy. She also manages to slip one of her digits down your backdoor where she prods at your prostate, making you leak pre.")
+		if(GM.pc.hasPenis() && GM.pc.hasReachableVagina()):
+			if(GM.pc.isWearingChastityCage()):
+				saynn("Nova puts her hand on your balls and gives them a gentle squeeze, she then rubs both your caged up cock and your cunt until you become aroused and needy. She also manages to slip one of her digits down your backdoor where she prods at your prostate, making you leak pre.")
+			else:
+				saynn("Nova puts her hand on your balls and gives them a gentle squeeze, she then rubs both your cock and your cunt until you become aroused and needy. She also manages to slip one of her digits down your backdoor where she prods at your prostate, making you leak pre.")
 
 			saynn("[say=nova]Cock will probably be useless but the cunt and ass will get a lot of use~[/say]")
 

@@ -58,7 +58,10 @@ func _run():
 
 		# (if has cock)
 		if(GM.pc.hasPenis()):
-			saynn("Another inmate is fidgeting with the fleshlight that has your cock on it, she wiggles it in the air and bites her lip seeing how realistic your balls sway.")
+			if(GM.pc.isWearingChastityCage()):
+				saynn("Another inmate is fidgeting with the fleshlight that has your caged up cock on it, she wiggles it in the air and bites her lip seeing how realistic your balls sway.")
+			else:
+				saynn("Another inmate is fidgeting with the fleshlight that has your cock on it, she wiggles it in the air and bites her lip seeing how realistic your balls sway.")
 
 			saynn("[sayFemale]Can I keep this part~?[/sayFemale]")
 
@@ -154,8 +157,10 @@ func _run():
 
 		addButtonWithChecks("Lick pussy", "Lick your own pussy", "lick_pussy", [], [ButtonChecks.HasVagina])
 		addButton("Lick anus", "Rim yourself", "lick_anus")
-		addButtonWithChecks("Suck dick", "Suck your own dick", "suck_dick", [], [ButtonChecks.HasPenis])
-
+		if(!GM.pc.isWearingChastityCage()):
+			addButtonWithChecks("Suck dick", "Suck your own dick", "suck_dick", [], [ButtonChecks.HasPenis])
+		else:
+			addDisabledButton("Suck dick", "You can't suck a chastity cage :(")
 
 
 	if(state == "lick_pussy"):
@@ -364,7 +369,9 @@ func _run():
 			saynn("One of the inmates keeps sliding his digits in and out of your aroused {pc.analStretch} anus while watching you squirm and try to close the legs.")
 
 		# (if has cock)
-		if(GM.pc.hasPenis()):
+		if(GM.pc.isWearingChastityCage()):
+			saynn("One of the girls keeps teasing your chastity cage before hugging it between her generous breasts. Too bad you can’t really feel her grinding your cage against her tits..")
+		elif(GM.pc.hasPenis()):
 			saynn("One of the girls keeps stroking your cock before hugging it between her generous breasts and grinding your shaft like that. Feels so fucking good.")
 
 		saynn("[sayMale]You like it, huh?[/sayMale]")
@@ -391,7 +398,7 @@ func _run():
 			saynn("The answer is quite obvious, inmates get a better grasp on the fleshlights and use them for their purpose, pleasuring themselves with your needy fuckholes. And you don’t really mind, you love the experience, more moans escape from you while the cocks pound you from a distance.")
 
 			# (if has cock)
-			if(GM.pc.hasPenis()):
+			if(GM.pc.hasPenis() && !GM.pc.isWearingChastityCage()):
 				saynn("One of the girls seems like she wants to be on a safe side, she puts a condom over your hard shaft before exposing her pussy slit and stuffing it with your length, using your {pc.cock} as a dildo.")
 
 			saynn("Other inmates are awaiting their turn or just stroke themselves while watching you squirming around on the floor, the sight of a moving bump on your belly is quite hot.")
@@ -399,7 +406,9 @@ func _run():
 			saynn("So much onslaught is done to your bits, your first climax overwhelms you very soon, causing you to arch your back and throw your head back, moaning into the air while the inmates around begin firing the loads, covering you with their seed.")
 
 			# (if has cock)
-			if(GM.pc.hasPenis()):
+			if(GM.pc.isWearingChastityCage()):
+				saynn("Your cock shoots out a weak load through the chastity cage! Your {pc.cum} lands on the breasts of the curious girl.")
+			elif(GM.pc.hasPenis()):
 				saynn("Your cock stuffs the condom inside the girl full of your {pc.cum}. She takes it out and quickly ties it up so nothing leaks out.")
 
 			saynn("Your holes get tight around the intruding cocks, a few moments later you hear some manly grunts and then feel your womb and butt getting stuffed with virile seed!")
@@ -415,7 +424,7 @@ func _run():
 			saynn("The inmate gets a better grasp on the fleshlights and uses it for its purpose, pleasuring himself with your needy fuckhole. And you don’t really mind, you love the experience, more moans escape from you while the cock pounds you from a distance.")
 
 			# (if has cock)
-			if(GM.pc.hasPenis()):
+			if(GM.pc.hasPenis() && !GM.pc.isWearingChastityCage()):
 				saynn("One of the girls seems like she wants to be on a safe side, she puts a condom over your hard shaft before exposing her pussy slit and stuffing it with your length, using your {pc.cock} as a dildo.")
 
 			saynn("Other inmates are awaiting their turn or just stroke themselves while watching you squirming around on the floor, the sight of a moving bump on your belly is quite hot.")
@@ -423,7 +432,9 @@ func _run():
 			saynn("So much onslaught is done to your bits, your first climax overwhelms you very soon, causing you to arch your back and throw your head back, moaning into the air while the inmates around begin firing the loads, covering you with their seed.")
 
 			# (if has cock)
-			if(GM.pc.hasPenis()):
+			if(GM.pc.isWearingChastityCage()):
+				saynn("Your cock shoots out a weak load through the chastity cage! Your {pc.cum} lands on the breasts of the curious girl.")
+			elif(GM.pc.hasPenis()):
 				saynn("Your cock stuffs the condom inside the girl full of your {pc.cum}. She takes it out and quickly ties it up so nothing leaks out.")
 
 			saynn("Your fuckhole gets tight around the intruding cock, a few moments later you hear some manly grunts and then feel your butt getting stuffed with virile seed!")
@@ -440,7 +451,9 @@ func _run():
 			saynn("So much pleasure, your eyes start to roll up slightly after each thrust, tongue rolls out the mouth and drools a bit, your hands keep rubbing your body.")
 
 			# (if has cock)
-			if(GM.pc.hasPenis()):
+			if(GM.pc.isWearingChastityCage()):
+				saynn("Another, much more brave girl, grabs the fleshlight with your locked cock and cleans it with her tongue before trapping the device between her legs. She then starts lowering herself onto it, the tip of your chastity cage gently kisses her pussy lips before she proceeds to grind you, the only thing she can do with that cage on you. But she seems to be enjoying herself nonetheless.")
+			elif(GM.pc.hasPenis()):
 				saynn("Another, much more brave girl, grabs the fleshlight with your cock and cleans it with her tongue before trapping the device between her legs. She then starts lowering herself onto it, the tip of your shaft gently kisses her pussy lips before spreading them open and sliding inside. After she gets used to your size, she starts riding the toy, using your dick for her pleasure.")
 
 			saynn("More inmates force themselves over the edge, covering you with extra semen and making you look so messy. More passionate love noises escape from you while you watch your holes getting fucked so effortlessly.")
@@ -448,13 +461,15 @@ func _run():
 			saynn("The guys quickly pick up the pace and efficiently fuck you, never leaving at least one hole without a dick. Soon they also reach their peaks, grunting as their cocks start snowballing your holes, stuffing them with more cum while the old one is still there. Your womb is full to the brim already. And soon, another climax overwhelms you as well, making your body shiver and your legs shake from involuntary muscle contractions.")
 
 			# (if has cock)
-			if(GM.pc.hasPenis()):
+			if(GM.pc.isWearingChastityCage()):
+				saynn("The girl grinding your chastity cage moans and has her share of the pie as well, your member starts shooting weak spurts of {pc.cum} that land on her pussy.")
+			elif(GM.pc.hasPenis()):
 				saynn("The girl riding your cock moans and has her share of the pie as well, your {pc.cock} starts shooting {pc.cum} directly into her womb, stuffing her full.")
 
 			saynn("The guys then pull out, leaving your holes to gape and leak for a bit.")
 
 			# (if has cock)
-			if(GM.pc.hasPenis()):
+			if(GM.pc.hasPenis() && !GM.pc.isWearingChastityCage()):
 				saynn("Another female inmate then steals two of the fleshlights, one with your cock and one with your pussy. She starts rubbing your cock against your own slit, sending shivers down your spine.")
 
 				saynn("[sayFemale]I wonder, can we make that slut fuck {pc.himself}? Beg for it~[/sayFemale]")
@@ -466,7 +481,9 @@ func _run():
 			saynn("So much pleasure, your eyes start to roll up slightly after each thrust, tongue rolls out the mouth and drools a bit, your hands keep rubbing your body.")
 
 			# (if has cock)
-			if(GM.pc.hasPenis()):
+			if(GM.pc.isWearingChastityCage()):
+				saynn("Another, much more brave girl, grabs the fleshlight with your locked cock and cleans it with her tongue before trapping the device between her legs. She then starts lowering herself onto it, the tip of your chastity cage gently kisses her pussy lips before she proceeds to grind you, the only thing she can do with that cage on you. But she seems to be enjoying herself nonetheless.")
+			elif(GM.pc.hasPenis()):
 				saynn("Another, much more brave girl, grabs the fleshlight with your cock and cleans it with her tongue before trapping the device between her legs. She then starts lowering herself onto it, the tip of your shaft gently kisses her pussy lips before spreading them open and sliding inside. After she gets used to your size, she starts riding the toy, using your dick for her pleasure.")
 
 			saynn("More inmates force themselves over the edge, covering you with extra semen and making you look so messy. More passionate love noises escape from you while you watch your hole getting fucked so effortlessly.")
@@ -474,19 +491,24 @@ func _run():
 			saynn("The guys quickly pick up the pace and efficiently fuck you, never leaving your fuckhole without a dick. Soon they also reach their peaks, grunting as their cocks start snowballing you, stuffing your butt with more cum while the old one is still there. And soon, another climax overwhelms you as well, making your body shiver and your legs shake from involuntary muscle contractions.")
 
 			# (if has cock)
-			if(GM.pc.hasPenis()):
+			if(GM.pc.isWearingChastityCage()):
+				saynn("The girl grinding your chastity cage moans and has her share of the pie as well, your member starts shooting weak spurts of {pc.cum} that land on her pussy.")
+			elif(GM.pc.hasPenis()):
 				saynn("The girl riding your cock moans and has her share of the pie as well, your {pc.cock} starts shooting {pc.cum} directly into her womb, stuffing her full.")
 
 			saynn("The guys then pull out, leaving your hole to gape and leak for a bit.")
 
 			# (if has cock)
-			if(GM.pc.hasPenis()):
+			if(GM.pc.hasPenis() && !GM.pc.isWearingChastityCage()):
 				saynn("Another female inmate then steals both fleshlights, one with your cock and one with your anus. She starts rubbing your cock against your own ring, sending shivers down your spine.")
 
 				saynn("[sayFemale]I wonder, can we make that slut fuck {pc.himself}? Beg for it~[/sayFemale]")
 
 		addButton("More", "You just want more", "more")
-		addButtonWithChecks("Self-fuck", "That sounds too hot to pass up", "self-fuck", [], [ButtonChecks.HasPenis])
+		if(!GM.pc.isWearingChastityCage()):
+			addButtonWithChecks("Self-fuck", "That sounds too hot to pass up", "self-fuck", [], [ButtonChecks.HasPenis])
+		else:
+			addButton("Self-fuck", "You can't do that with chastity on :(")
 
 	if(state == "self-fuck"):
 		# (needs cock)

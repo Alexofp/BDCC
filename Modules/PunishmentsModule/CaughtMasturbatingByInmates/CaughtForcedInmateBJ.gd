@@ -112,7 +112,9 @@ func _run():
 		saynn("Your body begins to feel very warm, especially near your crotch. Rubbing yourself feels so-o-o good.. The pain is still there but the other sensations are so overwhelming..")
 
 		# (if has cock)
-		if(GM.pc.hasPenis()):
+		if(GM.pc.isWearingChastityCage()):
+			saynn("Even though your hair is being pulled, your {pc.cock} is trying to get hard and is already leaking pre.")
+		elif(GM.pc.hasPenis()):
 			saynn("Even though your hair is being pulled, your {pc.cock} is getting hard and already leaking pre.")
 
 		# (if has vagina)

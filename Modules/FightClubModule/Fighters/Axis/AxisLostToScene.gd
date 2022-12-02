@@ -48,7 +48,13 @@ func _run():
 			saynn("[say=axis]All ready for me already, good.[/say]")
 
 		# (if has cock)
-		if(GM.pc.hasPenis()):
+		if(GM.pc.isWearingChastityCage()):
+			saynn("He notices that you’re wearing a chastity cage on your {pc.cock} and smiles.")
+
+			saynn("[say=axis]Such a cute useless dick you have there. I would have locked it away myself if that wasn’t already the cage.[/say]")
+
+			saynn("Oh, you feel like you should be resisting. But.. You’re so horny that you don’t even care, you actually welcome him rubbing your chastity cage a bit. It makes your member put so much pressure onto the cage.. While it’s forcing your drippy cock to stay flacid.")
+		elif(GM.pc.hasPenis()):
 			saynn("He notices your erect {pc.cock} and smiles. He then pulls out something from one of his pockets. It’s a.. chastity cage.")
 
 			saynn("[say=axis]That cute dick is useless, might as well lock it away.[/say]")

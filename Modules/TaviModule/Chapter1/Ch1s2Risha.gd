@@ -143,7 +143,9 @@ func _run():
 		saynn("[say=pc]Kinky..[/say]")
 
 		# (if has cock)
-		if(GM.pc.hasPenis()):
+		if(GM.pc.isWearingChastityCage()):
+			saynn("Your own cock is getting somewhat hard behind the cage. Risha cups your balls and gives them a gentle squeeze.")
+		elif(GM.pc.hasPenis()):
 			saynn("Your own cock is getting somewhat hard. Risha cups your balls and gives them a gentle squeeze.")
 
 			saynn("[say=risha]Cute.[/say]")
@@ -181,7 +183,9 @@ func _run():
 			saynn("[say=risha]Yeah, exactly how a proper slut must react.[/say]")
 
 			# (if has cock)
-			if(GM.pc.hasPenis()):
+			if(GM.pc.isWearingChastityCage()):
+				saynn("Your chastity cage is just swaying around, the cock inside leaking pre while one of your pleasure points is being stimulated.")
+			elif(GM.pc.hasPenis()):
 				saynn("Your own cock is just swaying around, leaking pre while one of your pleasure points is being stimulated.")
 
 			# (if has big breasts)
@@ -211,7 +215,9 @@ func _run():
 			saynn("[say=risha]Yeah, exactly how a proper slut must react.[/say]")
 
 			# (if has cock)
-			if(GM.pc.hasPenis()):
+			if(GM.pc.isWearingChastityCage()):
+				saynn("Your chastity cage is just swaying around, the cock inside leaking dripping uncontrollably.")
+			elif(GM.pc.hasPenis()):
 				saynn("Your own cock is just swaying around and dripping uncontrollably.")
 
 			# (if has big breasts)

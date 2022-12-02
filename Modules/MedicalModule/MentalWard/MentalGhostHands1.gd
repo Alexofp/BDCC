@@ -124,7 +124,10 @@ func _run():
 
 		# (if has cock)
 		if(GM.pc.hasPenis()):
-			saynn("Your {pc.cock} swiftly springs up after it was released, already leaking precum. The ghost paw gets a hold of the balls and kneads them, causing you to let out a muffled moan and try to close your legs.")
+			if(GM.pc.isWearingChastityCage()):
+				saynn("Your {pc.cock} is already leaking precum after it was released. The ghost paw gets a hold of the balls and kneads them, causing you to let out a muffled moan and try to close your legs. The cage puts so much nice-feeling pressure on your shaft.")
+			else:
+				saynn("Your {pc.cock} swiftly springs up after it was released, already leaking precum. The ghost paw gets a hold of the balls and kneads them, causing you to let out a muffled moan and try to close your legs.")
 
 			# (if cock and also pussy)
 			if(GM.pc.hasVagina()):
@@ -139,7 +142,9 @@ func _run():
 		saynn("[say=pc]Wh-h..a..[/say]")
 
 		# (if cock)
-		if(GM.pc.hasPenis()):
+		if(GM.pc.isWearingChastityCage()):
+			saynn("The paw gags you by sliding its digits in and out, forcing you to focus on sucking them. All the while the second paw wraps its digits around your chastity cage and starts tugging and pushing on it, attempting to stimulate your member.")
+		elif(GM.pc.hasPenis()):
 			saynn("The paw gags you by sliding its digits in and out, forcing you to focus on sucking them. All the while the second paw wraps its digits around your shaft and starts stroking it.")
 
 		# (if pussy)
@@ -154,7 +159,9 @@ func _run():
 		saynn("You squirm and wiggle on the table uncontrollably while the paws keep you still. More moans escape from your mouth while a powerful orgasm overwhelms you.")
 
 		# (if has cock)
-		if(GM.pc.hasPenis()):
+		if(GM.pc.isWearingChastityCage()):
+			saynn("The paws feel your cock throbbing and just hold onto your chastity cage, letting your dick shoot many strings of your {pc.cum} through it all over the floor underneath.")
+		elif(GM.pc.hasPenis()):
 			saynn("The paws feel your cock throbbing and switch to a very slow pace, letting your dick shoot many strings of your {pc.cum} all over the floor underneath without overstimulating it.")
 
 		# (else if has pussy)

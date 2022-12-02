@@ -89,7 +89,7 @@ func _run():
 
 		# (if has penis)
 		if(GM.pc.hasPenis()):
-			saynn("Your cock shoots its whole load and creates a mess underneath you.")
+			saynn("Your {pc.cock} shoots its whole load and creates a mess underneath you.")
 
 		saynn("[say=nova]Oh fuck, {pc.his} throat is milking my cock, I can’t-[/say]")
 
@@ -142,7 +142,7 @@ func _run():
 
 		# (if has penis)
 		if(GM.pc.hasPenis()):
-			saynn("Your cock shoots its whole load and creates a mess underneath you.")
+			saynn("Your {pc.cock} shoots its whole load and creates a mess underneath you.")
 
 		saynn("[say=nova]Oh fuck, {pc.his} throat is milking my cock, I can’t-[/say]")
 

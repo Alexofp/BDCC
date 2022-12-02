@@ -109,7 +109,9 @@ func _run():
 		saynn("Your first orgasm quickly overtakes your body, passionate moans leave your mouth while your slit starts pulsating around the shaft, your legs and arms shiver while the rest of your body tenses up. Fuck it feels good, you push yourself through your climax and keep riding the horse, causing Jack to let out another animal noise, he seems to be close.")
 
 		# (if has cock)
-		if(GM.pc.hasPenis()):
+		if(GM.pc.isWearingChastityCage()):
+			saynn("Your pleasure point got rubbed to the point of your {pc.cock} shooting out a weak line of {pc.cum}. And then a few more, messing up your chastity cage.")
+		elif(GM.pc.hasPenis()):
 			saynn("Your pleasure point got rubbed to the point of your {pc.cock} shooting out a strong line of {pc.cum}. And then a few more.")
 
 		addButton("Inside", "Let the horsie cum", "inside")
@@ -256,7 +258,9 @@ func _run():
 		saynn("Your first orgasm quickly overtakes your body, passionate moans leave your mouth while your anal ring starts pulsating around the shaft, your legs and arms shiver while the rest of your body tenses up. Fuck it feels good, you push yourself through your climax and keep riding the horse, causing Jack to let out another animal noise, he seems to be close.")
 
 		# (if has cock)
-		if(GM.pc.hasPenis()):
+		if(GM.pc.isWearingChastityCage()):
+			saynn("Your prostate got rubbed to the point of your {pc.cock} shooting out a weak line of {pc.cum}. And then a few more, messing up your chastity cage.")
+		elif(GM.pc.hasPenis()):
 			saynn("Your prostate got rubbed to the point of your {pc.cock} shooting out a strong line of {pc.cum}. And then a few more.")
 
 		addButton("Inside", "Let the horsie cum", "inside1")

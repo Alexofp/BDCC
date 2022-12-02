@@ -75,7 +75,9 @@ func _run():
 			saynn("With that fist up your butt, your pussy looks cute and small in comparison. The overstimulation causes your slit to start squirting all over the floor.")
 
 		# (if has cock)
-		if(GM.pc.hasPenis()):
+		if(GM.pc.isWearingChastityCage()):
+			saynn("Your {pc.cock} instantly goes as hard as the chastity cage allows and shoots a strong line of your precum.")
+		elif(GM.pc.hasPenis()):
 			saynn("Your {pc.cock} instantly goes full hard and shoots a strong line of your precum.")
 
 		saynn("[say=rebel]What did ya say, sweetie? All I hear is your ass making wet noises.[/say]")

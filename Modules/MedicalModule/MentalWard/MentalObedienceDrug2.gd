@@ -215,7 +215,10 @@ func _run():
 
 		# (if has a cock)
 		elif(GM.pc.hasPenis()):
-			saynn("Your {pc.cock} is rock hard already, dripping pre onto the floor, you’re so turned on by what you are doing.. You’d stroke yourself to an orgasm there and now but your mind is fully consumed by the idea of being a perfect sub.")
+			if(GM.pc.isWearingChastityCage()):
+				saynn("Your {pc.cock} is hard already, putting pressure on your chastity and dripping pre onto the floor, you’re so turned on by what you are doing.. You’d stroke yourself to an orgasm there and now but your mind is fully consumed by the idea of being a perfect sub.")
+			else:
+				saynn("Your {pc.cock} is rock hard already, dripping pre onto the floor, you’re so turned on by what you are doing.. You’d stroke yourself to an orgasm there and now but your mind is fully consumed by the idea of being a perfect sub.")
 
 		saynn("You stick your tongue out and begin dragging it along Eliza’s beans, licking each one. Then you thrust it between her toes and give the claws there a lick too. She looks down at you and smirks, her eyes clearly show lust too, her hand sneaks under her labcoat and begins squeezing and groping her own breasts.")
 
@@ -232,12 +235,18 @@ func _run():
 			saynn("That’s all you needed to hear, you spread your legs as much as possible, your needy slit touched Eliza’s toes. You start moving your lower part of the body back and forth, grinding your pussy against the doctor’s feet, her fur quickly gets coated with your juices. It feels strange.. yet so good.. You can’t stop pleasuring yourself, you basically hump that leg, moaning and squirming, your clit rubbing against the animal toes.")
 
 		# (if has cock)
+		elif(GM.pc.isWearingChastityCage()):
+			saynn("Then she shifts her leg to your chastity cage. Your dick is forced to be limp but it’s still dripping quite a lot of pre. Eliza sits on the table and captures your cage between her feet.")
+			
+			saynn("[say=eliza]Well then, if you like my feet so much you may use them to get off~[/say]")
+			
+			saynn("That’s all you needed to hear, you start thrusting your caged up cock between the tight opening while she rubs her toes against the tip of your cage and against your balls. You can’t stop pleasuring yourself, you basically hump her feet, moaning and squirming, desperate to get at least some stimulation, your cock wants to throb real hard through that damn cage.")
 		elif(GM.pc.hasPenis()):
 			saynn("Then she shifts her leg to your cock. You’re hard and still dripping pre. Eliza sits on the table and captures your cock between her feet.")
 
 			saynn("[say=eliza]Well then, if you like my feet so much you may use them to get off~[/say]")
 
-			saynn("That’s all you needed to hear, you start thrusting your cock between the tight opening, she starts rubbing her toes against the tip of your {pc.cock} while you do that. It feels so good. You can’t stop pleasuring yourself, you basically hump her feet, moaning and squirming, your cock already throbbing hard.")
+			saynn("That’s all you needed to hear, you start thrusting your cock between the tight opening while she rubs her toes against the tip of your {pc.cock}. It feels so good. You can’t stop pleasuring yourself, you basically hump her feet, moaning and squirming, your cock already throbbing hard.")
 
 		# (if cock or pussy)
 		if(GM.pc.hasVagina() || GM.pc.hasPenis()):
@@ -255,7 +264,10 @@ func _run():
 
 		# (if has cock)
 		elif(GM.pc.hasPenis()):
-			saynn("And just like that, you cry out a moan as your cock starts shooting cum all over Eliza’s legs, her feet and toes. You shiver and squirm while she milks your balls dry. The climax and your submissiveness multiply together, causing your mind to blank for a second. When you get a hold of yourself, you lower yourself to her feet again and lick-clean your mess.")
+			if(GM.pc.isWearingChastityCage()):
+				saynn("And just like that, you cry out a moan as your cock starts shooting {pc.cum} through the little hole in your chastity cage all over Eliza’s legs, her feet and toes. You shiver and squirm while she milks your balls dry. The climax and your submissiveness multiply together, causing your mind to blank for a second. When you get a hold of yourself, you lower yourself to her feet again and lick-clean your mess.")
+			else:
+				saynn("And just like that, you cry out a moan as your cock starts shooting {pc.cum} all over Eliza’s legs, her feet and toes. You shiver and squirm while she milks your balls dry. The climax and your submissiveness multiply together, causing your mind to blank for a second. When you get a hold of yourself, you lower yourself to her feet again and lick-clean your mess.")
 
 		# (if has cock or pussy)
 		if(GM.pc.hasVagina() || GM.pc.hasPenis()):
@@ -312,7 +324,10 @@ func _run():
 
 		# (if has cock)
 		elif(GM.pc.hasPenis()):
-			saynn("And suddenly, you cry out a moan as your cock starts shooting cum all over the floor. You shiver and squirm while she milks your balls dry just by exploiting your poor mind. The climax and your submissiveness multiply together, causing your mind to blank for a second.")
+			if(GM.pc.isWearingChastityCage()):
+				saynn("And suddenly, you cry out a moan as your cock starts shooting {pc.cum} through the little hole in your chastity cage all over the floor. You shiver and squirm while she milks your balls dry just by exploiting your poor mind. The climax and your submissiveness multiply together, causing your mind to blank for a second.")
+			else:
+				saynn("And suddenly, you cry out a moan as your cock starts shooting {pc.cum} all over the floor. You shiver and squirm while she milks your balls dry just by exploiting your poor mind. The climax and your submissiveness multiply together, causing your mind to blank for a second.")
 
 		saynn("[say=eliza]Aren’t you an adorable toy. This was a great success, huh~[/say]")
 

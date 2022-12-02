@@ -42,15 +42,19 @@ func _run():
 		saynn("Nova drools through her gag and nods subtly at you, she even shifts her hips opposite to you, increasing the pleasurable friction, you can feel the base of her cock slowly inflating into a knot. You raise your body a bit and get a hold of that shaft, your digits grab some precum from the tip and spread it along the whole length. Subby Nova quickly watches you guide her cock towards your wet pussy as you begin to descend onto it, the pointy tip spreads your petals apparts and stretches the hole enough to finally slide inside, forcing a moan out of you. Such a good feeling, her canine shaft goes deeper inside as you sit back down, you can feel it almost reaching your cervix already and it’s leaking so much pre already. Your hands squeeze the herm’s breasts harder, you wiggle your hips around the cock, Nova reacts by rolling her eyes up and warmly exhaling.")
 
 		# (if has cock)
-		if(GM.pc.hasReachablePenis()):
-			saynn("And your own cock is hard as a rock too due to how aroused you are, Nova seems to drool slightly more each time she catches its glimpse.")
+		if(GM.pc.isWearingChastityCage()):
+			saynn("You begin to feel your chastity cage putting a lot of pressure onto your member due to how aroused you are. Nova seems to drool slightly more each time she catches its glimpse.")
+		elif(GM.pc.hasPenis()):
+			saynn("And your {pc.cock} is hard as a rock too due to how aroused you are, Nova seems to drool slightly more each time she catches its glimpse.")
 
 		saynn("[say=pc]You’re pretty big~, happy to have your cock inside my cunt?[/say]")
 
 		saynn("She nods eagerly as you begin to slowly rock your hips up and down, causing her length to rub against your soft lubed inner walls. You moan warmly and slide your hands along your own body, teasing your nips as you ride the herm. And she seems to enjoy it immensely, breathing heavily and making muffled noises of pleasure.")
 
 		# (if has cock)
-		if(GM.pc.hasReachablePenis()):
+		if(GM.pc.isWearingChastityCage()):
+			saynn("Your chastity cage is bobbing up and down, you’re dripping precum onto the guard’s belly and breasts.")
+		elif(GM.pc.hasPenis()):
 			saynn("Your cock is bobbing up and down in the air, dripping precum onto the guard’s belly and breasts.")
 
 		saynn("You slowly pick up the pace, trying to get more of that husky dick inside you each time, your pussy petals meeting with that fat knot each time and stretching around it, though getting that whole thing in would require some extra effort, the tip pounding at the blockade, causing you to moan from pleasure.")
@@ -72,7 +76,9 @@ func _run():
 		saynn("Only a few more seconds pass before you reach your peak and then smash it, letting out a loud passionate moan as you arch your back and impale yourself onto that cock with the last huge thrust. And as you do that, Nova mumbles a muffled moan and cums too, her cock throbbing as it stuffs your womb with waves of sticky cum, her potent semen.")
 
 		# (if has cock)
-		if(GM.pc.hasReachablePenis()):
+		if(GM.pc.isWearingChastityCage()):
+			saynn("Some {pc.cum} suddenly escapes from your cage and lands on the husky, leaving a huge mess on her breasts and face in the process while she can’t even argue about it with that ball gag stuffed into her mouth.")
+		elif(GM.pc.hasPenis()):
 			saynn("Your own cock explodes with cum too, showering the husky with it, leaving a huge mess on her breasts and face in the process while she can’t even argue about it with that ball gag stuffed into her mouth.")
 
 		saynn("[say=pc]Yes-s! Cum inside me, stuff my pussy full to the brim, use me as a cum bucket~[/say]")
@@ -104,7 +110,9 @@ func _run():
 		saynn("You feel how close Nova is to the peak and decide not to try your luck, you raise yourself and pull her shaft out before pushing it into her belly again and switching to grinding your slit against it. Nova protests but she is too close to do anything, it only takes a second before she suddenly cums. The husky lets out a muffled moan as her cock starts spewing out spurt after spurt of hot jizz back at the owner, Nova is covering herself in her own cum, her breasts, her face, even the hair. All the while you push yourself to your own climax, grinding that cock until your pussy squirts all over the guard’s crotch. You moan and push through the orgasm, draining that husky’s balls without a single drop landing inside your womb, such a clean job.")
 
 		# (if has cock)
-		if(GM.pc.hasReachablePenis()):
+		if(GM.pc.isWearingChastityCage()):
+			saynn("Though you can’t say that about Nova, during your orgasm your caged up cock cums as well and shoots more waves of cum that cover the poor herm with a second layer of sticky substance.")
+		elif(GM.pc.hasPenis()):
 			saynn("Though you can’t say that about Nova, during your orgasm your own cock cums as well and explodes with more waves of cum that cover the poor herm with a second layer of sticky substance.")
 
 		saynn("Eventually you both ride your climaxes to the end, you pant heavily and look at what you did with the cheeky guard. Nova’s cheeks are burning from embarrassment but her eyes show satisfaction, she breathes heavily too, under all that cum.")
@@ -133,7 +141,9 @@ func _run():
 		saynn("You decide that it’s the time for the main event and do a series of very big thrusts, putting huge power into each one, your wet cunt slowly gives way and stretches beyond its stretched size, that knot begins to enter you at each apex of your motion and, on the last thrust, it suddenly manages to slip inside completely sealing your pussy hole. You both cum that very moment, your slit squirting with female juices while the husky cock breaks into your womb and starts stuffing it with her potent cum, such a risky move. You keep moaning, loudly and passionately, your belly looks inflated, the bump on it becomes bigger as the husky cums more and more, all of it going inside with the knot preventing any leaks. Fuck that feels good, you arch your back, stick your tongue out and pant heavily, your pussy keeps squirting even now from that huge amount of stimulation that the knot provides as it shifts inside you and stretches you out more.")
 
 		# (if has cock)
-		if(GM.pc.hasReachablePenis()):
+		if(GM.pc.isWearingChastityCage()):
+			saynn("Some {pc.cum} suddenly escapes from your cage and lands on the husky, leaving a huge mess on her breasts and face in the process while she can’t even argue about it with that ball gag stuffed into her mouth. Not that she would anyway, she looks spaced out after what happened.")
+		elif(GM.pc.hasPenis()):
 			saynn("Your own cock explodes with cum too, showering the husky with it, leaving a huge mess on her breasts and face in the process while she can’t even argue about it with that ball gag stuffed into her mouth. Not that she would anyway, she looks spaced out after what happened.")
 
 		saynn("You slowly calm down from the incredibly intense orgasm. You can’t stop breathing heavily and husky too.")

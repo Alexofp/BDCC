@@ -59,3 +59,6 @@ func shouldBeVisibleOnDoll(_character, _doll):
 	if(!_character.isBodypartCovered(BodypartSlot.Penis) || _doll.isForcedExposed(BodypartSlot.Penis)):
 		return true
 	return false
+
+func isImportant():
+	return true

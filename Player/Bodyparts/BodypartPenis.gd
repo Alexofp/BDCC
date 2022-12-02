@@ -32,6 +32,10 @@ func loadData(_data):
 	.loadData(_data)
 
 func getLewdSizeAdjective():
+	var theCharacter = getCharacter()
+	if(theCharacter != null && theCharacter.isWearingChastityCage()):
+		return RNG.pick(["caged up", "locked away"])
+	
 	if(lengthCM <= 5.0):
 		return RNG.pick(["tiny", "minuscule"])
 	if(lengthCM <= 9.0):

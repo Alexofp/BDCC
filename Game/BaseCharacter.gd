@@ -1578,6 +1578,10 @@ func isReadyToPenetrate() -> bool:
 	return getLustLevel() >= 0.5 || getLust() >= 50 || getArousal() >= 0.4
 
 func isWearingChastityCage() -> bool:
+	# Having a chastity cage also means that you have a penis
+	if(!hasBodypart(BodypartSlot.Penis)):
+		return false
+	
 	if(!getInventory().hasSlotEquipped(InventorySlot.Penis)):
 		return false
 	
@@ -1737,3 +1741,28 @@ func personalityChangesAfterSex():
 
 func getCharacterType():
 	return CharacterType.Generic
+
+func getBodypartLewdSizeAdjective(bodypartSlot):
+	if(!hasBodypart(bodypartSlot)):
+		return "ERROR:NO BODYPART IN SLOT " + str(bodypartSlot)
+	return getBodypart(bodypartSlot).getLewdSizeAdjective()
+	
+func getBodypartLewdAdjective(bodypartSlot):
+	if(!hasBodypart(bodypartSlot)):
+		return "ERROR:NO BODYPART IN SLOT " + str(bodypartSlot)
+	return getBodypart(bodypartSlot).getLewdAdjective()
+
+func getBodypartLewdName(bodypartSlot):
+	if(!hasBodypart(bodypartSlot)):
+		return "ERROR:NO BODYPART IN SLOT " + str(bodypartSlot)
+	return getBodypart(bodypartSlot).getLewdName()
+
+func getBodypartLewdDescriptionAndName(bodypartSlot):
+	if(!hasBodypart(bodypartSlot)):
+		return "ERROR:NO BODYPART IN SLOT " + str(bodypartSlot)
+	return getBodypart(bodypartSlot).getLewdDescriptionAndName()
+
+func getBodypartLewdDescriptionAndNameWithA(bodypartSlot):
+	if(!hasBodypart(bodypartSlot)):
+		return "ERROR:NO BODYPART IN SLOT " + str(bodypartSlot)
+	return getBodypart(bodypartSlot).getLewdDescriptionAndNameWithA()

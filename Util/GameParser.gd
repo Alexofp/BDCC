@@ -122,7 +122,7 @@ func callObjectFuncWrapper(_obj: String, _command: String, _args: Array):
 		return object.hasHave()
 	if((_command == "himself" || _command == "herself" || _command == "himselfHerself") && _args.size() == 0):
 		return object.himselfHerself()
-	if(_command == "verbS"):
+	if(_command in ["verbS", "verb"]):
 		if(_args.size() == 1):
 			return object.verbS(str(_args[0]))
 		if(_args.size() == 2):
