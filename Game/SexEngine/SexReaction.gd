@@ -3,8 +3,9 @@ class_name SexReaction
 
 enum {
 	AboutToPenetratePussy,
-	AfterPenetrationPussy,
-	Resistance,
+	AboutToPenetrateAnal,
+	
+	Resisting,
 	AboutToDrawOnBody,
 	AfterDrawingOnBody,
 	AboutToBeatUp,
@@ -14,4 +15,12 @@ enum {
 	ForceUndress,
 	
 	WarnAboutToCum,
+	
+	Teasing,
+	Apologizing,
+	ResistingRestraints,
+	ActivelyResisting,
+	
+	BeggingToPullOutVaginal,
+	BeggingToPullOutAnal,
 }

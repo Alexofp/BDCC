@@ -264,7 +264,7 @@ func doSubAction(_id, _actionInfo):
 				"{sub.You} {sub.youVerb('try', 'tries')} to pull away from {dom.you} but {sub.youVerb('fail')}.",
 			])
 			domInfo.addAnger(0.1)
-			return {text = text}
+			return {text = text,subSay=subReaction(SexReaction.ActivelyResisting, 50)}
 
 	return
 

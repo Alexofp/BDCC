@@ -7,7 +7,6 @@ func _init():
 	usedTagInside = SexActivityTag.AnusPenetrated
 	fetishGiving = Fetish.AnalSexGiving
 	fetishReceiving = Fetish.AnalSexReceiving
-	aboutToPenetrateReaction = SexReaction.AboutToPenetratePussy
 	usedBodypartNames = ["anus", "tailhole", "backdoor", "star", "anal ring"]
 	switchHoleActivity = "SexVaginalOnAllFours"
 	otherHoleNames = ["pussy"]
@@ -16,6 +15,8 @@ func _init():
 	otherHoleFetishGiving = Fetish.VaginalSexGiving
 	otherHoleFetishReceiving = Fetish.VaginalSexReceiving
 	otherGoal = SexGoal.FuckVaginal
+	aboutToPenetrateReaction = SexReaction.AboutToPenetrateAnal
+	sexReactionPullOut = SexReaction.BeggingToPullOutAnal
 	
 func getGoals():
 	return {

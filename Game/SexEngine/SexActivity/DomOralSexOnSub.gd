@@ -719,7 +719,7 @@ func doSubAction(_id, _actionInfo):
 				"{sub.You} {sub.youVerb('try', 'tries')} to pull away from {dom.you} but {sub.youVerb('fail')}.",
 			])
 			domInfo.addAnger(0.1)
-			return {text = text}
+			return {text = text, subSay=subReaction(SexReaction.ActivelyResisting, 50)}
 	if(_id == "moan"):
 		var text = RNG.pick([
 			"{sub.You} "+RNG.pick(["{sub.youVerb('let')} out a moan", "{sub.youVerb('moan')}", "{sub.youVerb('produce')} a moan", "{sub.youVerb('make')} a noise of pleasure"])+" while ",

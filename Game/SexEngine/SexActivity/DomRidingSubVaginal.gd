@@ -552,13 +552,13 @@ func doSubAction(_id, _actionInfo):
 				"{sub.You} {sub.youVerb('manage')} to throw {dom.youHim} away from {sub.yourHis} "+RNG.pick(["cock", "dick", "member"])+".",
 			])
 			domInfo.addAnger(0.3)
-			return {text = text}
+			return {text = text, subSay=subReaction(SexReaction.ActivelyResisting, 50)}
 		else:
 			var text = RNG.pick([
 				"{sub.You} {sub.youVerb('try', 'tries')} to resist and "+RNG.pick(["shove", "push", "throw"])+" {dom.you} off but {sub.youVerb('fail')}.",
 			])
 			domInfo.addAnger(0.1)
-			return {text = text}
+			return {text = text, subSay=subReaction(SexReaction.ActivelyResisting, 50)}
 	
 	if(_id == "rub"):
 		affectSub(subInfo.fetishScore({fetishGiving: 1.0}), 0.05, -0.1, 0.0)

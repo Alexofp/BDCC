@@ -29,7 +29,7 @@ func startActivity(_args):
 	
 	return {
 		text = "{dom.You} {dom.youVerb('pull')} out a [b]black marker[/b].",
-		domSay = domReaction(SexReaction.AboutToDrawOnBody, 30),
+		domSay = domReaction(SexReaction.AboutToDrawOnBody, 100),
 		subSay = subReaction(SexReaction.AboutToDrawOnBody, 20),
 	}
 
@@ -51,7 +51,7 @@ func processTurn():
 		getSub().addBodywriting(zone, writingID)
 		return {
 			text="{dom.You} drew [b]'"+str(BodyWritings.getWritingText(writingID))+"'[/b] on {sub.yourHis} "+BodyWritingsZone.getZoneVisibleName(zone)+".",
-			domSay = domReaction(SexReaction.AfterDrawingOnBody, 30),
+			domSay = domReaction(SexReaction.AfterDrawingOnBody, 100),
 			subSay = subReaction(SexReaction.AfterDrawingOnBody, 50),
 			}
 	
@@ -90,6 +90,7 @@ func doSubAction(_id, _actionInfo):
 		if(RNG.chance(getSubResistChance())):
 			endActivity()
 			domInfo.addAnger(0.2)
-			return {text = "{sub.You} managed to whack the marker out of {dom.yourHis} hands!"}
+			return {text = "{sub.You} managed to whack the marker out of {dom.yourHis} hands!",subSay=subReaction(SexReaction.ActivelyResisting, 50)}
 		
-		return {text = "{sub.You} {sub.youVerb('try', 'tries')} to whack the marker out of {dom.yourHis} hands but {sub.youVerb('fail')}.",}
+		return {text = "{sub.You} {sub.youVerb('try', 'tries')} to whack the marker out of {dom.yourHis} hands but {sub.youVerb('fail')}.",
+		subSay=subReaction(SexReaction.Resisting, 50)}

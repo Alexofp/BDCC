@@ -22,7 +22,7 @@ func getStartActions(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexS
 			name = "Tease",
 			desc = "Tease them",
 			args = ["tease"],
-			score = _subInfo.getComplyScore() * _subInfo.personalityScore({PersonalityStat.Subby: 0.2, PersonalityStat.Brat: 0.1, PersonalityStat.Impatient: 0.1}),
+			score = _subInfo.getComplyScore() * 0.1 + _subInfo.getResistScore() * 0.05 + max(0.0, _subInfo.personalityScore({PersonalityStat.Impatient: 0.1})),
 			category = getCategory(),
 			#chance = getApologySuccessChance(_domInfo, _subInfo),
 		})
@@ -63,7 +63,7 @@ func getStartActions(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexS
 			name = "Apologize",
 			desc = "Try to calm them down",
 			args = ["apologize"],
-			score = _subInfo.personalityScore({PersonalityStat.Coward: 0.2, PersonalityStat.Brat: -0.1, PersonalityStat.Subby: 0.2}),
+			score = _subInfo.getAboutToPassOutScore() + _subInfo.personalityScore({PersonalityStat.Coward: 0.2, PersonalityStat.Brat: -0.1, PersonalityStat.Subby: 0.2}),
 			category = getCategory(),
 			chance = getApologySuccessChance(_domInfo, _subInfo),
 		})
@@ -143,7 +143,7 @@ func startActivity(_args):
 			restraintData.onStruggleRemoval()
 			sub.getInventory().removeEquippedItem(pickedItem)
 		
-		return {text=text}
+		return {text=text, subSay=subReaction(SexReaction.ResistingRestraints, 30)}
 	
 	if(actionID in ["apologize"]):
 		endActivity()
@@ -161,12 +161,12 @@ func startActivity(_args):
 		else:
 			domInfo.addAnger(-0.3)
 		
-		return {text = text}
+		return {text = text, subSay=subReaction(SexReaction.Apologizing)}
 	
 	if(actionID in ["tease"]):
 		endActivity()
 		var possible = [
-			"{sub.You} {sub.youVerb('tease')} {dom.youHim}.",
+			"{sub.You} {sub.youVerb('tease')} {dom.youHim} with {sub.yourHis} body.",
 		]
 		if(getSub().isGagged()):
 			possible.append_array([
@@ -175,6 +175,7 @@ func startActivity(_args):
 		else:
 			possible.append_array([
 				"{sub.You} {sub.youVerb('smile')} "+RNG.pick(["seductively", "playfully", "teasingly"])+" at {dom.youHim}.",
+				"{sub.You} {sub.youVerb('bite')} {sub.yourHis} lip "+RNG.pick(["seductively", "playfully", "teasingly"])+".",
 			])
 		if(getSub().bodypartHasTrait(BodypartSlot.Tail, PartTrait.TailFlexible)):
 			possible.append_array([
@@ -187,7 +188,8 @@ func startActivity(_args):
 		var text = RNG.pick(possible)
 		
 		affectDom(1.0, 0.2, 0.0)
-		return {text=text}
+		return {text=text,
+		subSay=subReaction(SexReaction.Teasing)}
 		
 	if(actionID in ["punch", "kick"]):
 		endActivity()
@@ -203,4 +205,4 @@ func startActivity(_args):
 		domInfo.addAnger(0.2 + 0.1 * domInfo.fetishScore({Fetish.Masochism: -1.0}))
 		domInfo.addPain(RNG.randi_range(4, 6))
 		
-		return {text=text}
+		return {text=text, subSay=subReaction(SexReaction.ActivelyResisting, 50)}

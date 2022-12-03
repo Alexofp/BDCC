@@ -181,7 +181,8 @@ func doSubAction(_id, _actionInfo):
 			}
 		
 		domInfo.addAnger(0.1)
-		return {text = "{sub.You} {sub.youVerb('try', 'tries')} to resist {dom.yourHis} attempt at restraining {sub.youHim} but {sub.youVerb('fail')}.",}
+		return {text = "{sub.You} {sub.youVerb('try', 'tries')} to resist {dom.yourHis} attempt at restraining {sub.youHim} but {sub.youVerb('fail')}.",
+		subSay=subReaction(SexReaction.Resisting, 50)}
 
 func saveData():
 	var data = .saveData()

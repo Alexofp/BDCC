@@ -126,10 +126,12 @@ func doSubAction(_id, _actionInfo):
 			endActivity()
 			return {
 				text = "{sub.You} {sub.youVerb('manage', 'managed')} to resist {dom.yourHis} attempt to undress.",
+				subSay=subReaction(SexReaction.ActivelyResisting, 50),
 			}
 		
 		domInfo.addAnger(0.1)
-		return {text = "{sub.You} {sub.youVerb('try', 'tries')} to resist {dom.yourHis} hands but {sub.youVerb('fail')}.",}
+		return {text = "{sub.You} {sub.youVerb('try', 'tries')} to resist {dom.yourHis} hands but {sub.youVerb('fail')}.",
+		subSay=subReaction(SexReaction.Resisting, 50)}
 
 func getItemToRemove(character):
 	var bodypartsToExpose = [BodypartSlot.Breasts, BodypartSlot.Penis, BodypartSlot.Vagina, BodypartSlot.Anus]

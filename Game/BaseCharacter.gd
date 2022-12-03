@@ -1024,6 +1024,11 @@ func getPregnancyProgress():
 		return menstrualCycle.getPregnancyProgress()
 	return 0.0
 
+func isInHeat():
+	if(menstrualCycle != null):
+		return menstrualCycle.isInHeat()
+	return false
+
 func onGivingBirth(_impregnatedEggCells: Array, _newkids: Array):
 	var amountPerOrifice = {}
 	for egg in _impregnatedEggCells:

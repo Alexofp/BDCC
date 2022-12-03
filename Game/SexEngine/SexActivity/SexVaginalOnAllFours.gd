@@ -7,7 +7,6 @@ var usedTag = SexActivityTag.VaginaUsed
 var usedTagInside = SexActivityTag.VaginaPenetrated
 var fetishGiving = Fetish.VaginalSexGiving
 var fetishReceiving = Fetish.VaginalSexReceiving
-var aboutToPenetrateReaction = SexReaction.AboutToPenetratePussy
 var usedBodypartNames = ["pussy", "pussy", "slit", "cunt", "kitty"]
 var switchHoleActivity = "SexAnalOnAllFours"
 var otherHoleNames = ["anus"]
@@ -16,6 +15,8 @@ var otherHoleTag = SexActivityTag.AnusUsed
 var otherHoleFetishGiving = Fetish.AnalSexGiving
 var otherHoleFetishReceiving = Fetish.AnalSexReceiving
 var otherGoal = SexGoal.FuckAnal
+var aboutToPenetrateReaction = SexReaction.AboutToPenetratePussy
+var sexReactionPullOut = SexReaction.BeggingToPullOutVaginal
 
 func _init():
 	id = "SexVaginalOnAllFours"
@@ -620,7 +621,8 @@ func doSubAction(_id, _actionInfo):
 			return {text = "{sub.You} {sub.youVerb('manage')} to kick {dom.you} off of {sub.youHim}."}
 		else:
 			domInfo.addAnger(0.2)
-			return {text = "{sub.You} {sub.youVerb('resist')} attempts to penetrate {sub.youHis} "+RNG.pick(usedBodypartNames)+"."}
+			return {text = "{sub.You} {sub.youVerb('resist')} attempts to penetrate {sub.youHis} "+RNG.pick(usedBodypartNames)+".",
+			subSay=subReaction(SexReaction.ActivelyResisting, 50)}
 	if(_id == "moan"):
 		var moanText = RNG.pick([
 			"{sub.youVerb('moan')}"
@@ -659,7 +661,7 @@ func doSubAction(_id, _actionInfo):
 				"{sub.You} {sub.youVerb('try', 'tries')} to make {dom.youHim} pull out!",
 			])
 			
-			return {text = text}
+			return {text = text, subSay=subReaction(SexReaction.ActivelyResisting, 50)}
 		
 	if(_id == "begtopullout"):
 		domInfo.addAnger(-0.02)
@@ -672,7 +674,7 @@ func doSubAction(_id, _actionInfo):
 			gonnaCumOutside = true
 			text += " {dom.you} listened!"
 		
-		return {text = text}
+		return {text = text, subSay=subReaction(sexReactionPullOut)}
 
 func getAnimation():
 	return [StageScene.Duo, "allfours", {pc=subID, npc=domID, npcAction="kneel", flipPc=true}]
