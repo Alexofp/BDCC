@@ -1,15 +1,9 @@
 {
-	"dateString": "02 of Dec 2022",
+	"dateString": "04 of Dec 2022",
 	"entries": {
 		"$1.00": [
 			{
 				"nickname": "thatoneguyatthebar"
-			},
-			{
-				"nickname": "Blastburn"
-			},
-			{
-				"nickname": "Caliban"
 			},
 			{
 				"nickname": "SuPhox"
@@ -18,19 +12,22 @@
 				"nickname": "Maxtacks"
 			},
 			{
+				"nickname": "Caliban"
+			},
+			{
+				"nickname": "Blastburn"
+			},
+			{
 				"nickname": "Zeneroth"
 			},
 			{
 				"nickname": "Kyle Oran Evans "
 			},
 			{
-				"nickname": "User#928169c6"
+				"nickname": "Shadowwall123"
 			},
 			{
 				"nickname": "kogost"
-			},
-			{
-				"nickname": "Shadowwall123"
 			},
 			{
 				"nickname": "Lichity"
@@ -40,6 +37,9 @@
 			},
 			{
 				"nickname": "VØID"
+			},
+			{
+				"nickname": "Tristan Leo Roberts "
 			}
 		],
 		"$10.00": [
@@ -59,6 +59,9 @@
 				"nickname": "Wyvernclaw00"
 			},
 			{
+				"nickname": "IzzenXAZ"
+			},
+			{
 				"nickname": "User#d45e8eac"
 			},
 			{
@@ -70,16 +73,16 @@
 				"nickname": "MaxMaxouCat21"
 			},
 			{
-				"nickname": "Feltenix"
-			},
-			{
 				"nickname": "SilverZeb"
 			},
 			{
-				"nickname": "User#b2c4ffed"
+				"nickname": "Feltenix"
 			},
 			{
 				"nickname": "WinterTorchlight"
+			},
+			{
+				"nickname": "User#b2c4ffed"
 			}
 		]
 	},
@@ -88,5 +91,5 @@
 		"$5.00",
 		"$1.00"
 	],
-	"unixTime": 1669957150
+	"unixTime": 1670184096
 }
