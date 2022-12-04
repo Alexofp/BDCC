@@ -32,6 +32,13 @@ func initPeople(domIDs, subIDs):
 		subs[subID] = subInfo
 		
 	checkExposedBodypartsOnStart()
+	checkForHurtDoms()
+
+func checkForHurtDoms():
+	for domID in doms:
+		var character = GlobalRegistry.getCharacter(domID)
+		if(character != null && character.getPainLevel() >= 1.0):
+			character.addPain(-1)
 
 func checkExposedBodypartsOnStart():
 	var bodypartsToCheck = [BodypartSlot.Breasts, BodypartSlot.Penis, BodypartSlot.Vagina, BodypartSlot.Anus]
