@@ -6,7 +6,7 @@ var usedTag = SexActivityTag.VaginaUsed
 var usedTagInside = SexActivityTag.VaginaPenetrated
 var fetishGiving = Fetish.VaginalSexGiving
 var fetishReceiving = Fetish.VaginalSexReceiving
-var aboutToPenetrateReaction = SexReaction.AboutToPenetratePussy
+var aboutToRideReaction = SexReaction.AboutToRidePussy
 var usedBodypartNames = ["pussy", "pussy", "slit", "cunt", "kitty"]
 var switchHoleActivity = "DomRidingSubAnal"
 var otherHoleNames = ["anus"]
@@ -66,6 +66,7 @@ func startActivity(_args):
 	
 	return {
 		text = text,
+		domSay = domReaction(aboutToRideReaction),
 	}
 
 func onSwitchFrom(_otherActivity, _args):

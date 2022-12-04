@@ -52,6 +52,7 @@ func startActivity(_args):
 	
 	return {
 		text = text,
+		domSay = domReaction(SexReaction.AboutToRubPussiesTogether),
 	}
 
 func onSwitchFrom(_otherActivity, _args):

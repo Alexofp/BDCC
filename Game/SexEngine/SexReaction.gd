@@ -4,12 +4,15 @@ class_name SexReaction
 enum {
 	AboutToPenetratePussy,
 	AboutToPenetrateAnal,
+	AboutToRidePussy,
+	AboutToRideAnal,
 	
 	Resisting,
 	AboutToDrawOnBody,
 	AfterDrawingOnBody,
 	AboutToBeatUp,
 	BeatingUp,
+	BeatingUpHard,
 	
 	OrderToUndress,
 	ForceUndress,
@@ -23,4 +26,24 @@ enum {
 	
 	BeggingToPullOutVaginal,
 	BeggingToPullOutAnal,
+	
+	OfferingDrug,
+	ForcingDrug,
+	RefusingToSwallowDrug,
+	
+	BeggingForCondom,
+	OfferingACondom,
+	
+	OrderBlowjob,
+	OrderLickPussy,
+	
+	GrindingFaceWithPussy,
+	DomsPussyGetsLicked,
+	
+	AboutToLickPussy,
+	AboutToSuckSubOff,
+	AboutToRubPussiesTogether,
+	
+	DomPutsOnACondom,
+	DomPutsOnACondomOnSub,
 }

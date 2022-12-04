@@ -102,8 +102,8 @@ func doDomAction(_id, _actionInfo):
 		
 		return {
 			text = text,
-			domSay = domReaction(SexReaction.AboutToBeatUp, 100),
-			subSay = subReaction(SexReaction.AboutToBeatUp, 20),
+			domSay = domReaction(SexReaction.BeatingUpHard, 100),
+			subSay = subReaction(SexReaction.BeatingUpHard, 20),
 		}
 
 func getSubActions():

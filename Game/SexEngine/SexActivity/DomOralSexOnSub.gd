@@ -215,7 +215,7 @@ func getDomActions():
 	if(getSub().hasPenis()):
 		actions.append({
 			"id": "cupballs",
-			"score": 0.1,
+			"score": 0.2,
 			"name": "Cup balls",
 			"desc": "Play with the their balls a bit",
 		})
@@ -223,7 +223,7 @@ func getDomActions():
 	if(getSub().hasVagina()):
 		actions.append({
 			"id": "rubclit",
-			"score": 0.1,
+			"score": 0.2,
 			"name": "Rub clit",
 			"desc": "Play with the their clit a bit",
 		})
@@ -505,7 +505,7 @@ func doDomAction(_id, _actionInfo):
 		subInfo.addLust(10.0 + subInfo.fetishScore({Fetish.OralSexReceiving: 5.0}))
 		subInfo.addArousalForeplay(0.05)
 		affectSub(subInfo.fetishScore({Fetish.OralSexReceiving: 1.0}), 0.0, -0.3, -0.01)
-		return {text = text}
+		return {text = text, domSay=domReaction(SexReaction.AboutToLickPussy)}
 	if(_id == "startblowjob"):
 		state = "blowjob"
 
@@ -514,7 +514,7 @@ func doDomAction(_id, _actionInfo):
 		])
 		getDom().gotOrificeStretchedBy(BodypartSlot.Head, subID, 0.1)
 		affectSub(subInfo.fetishScore({Fetish.OralSexReceiving: 1.0}), 0.1, -0.3, -0.01)
-		return {text = text}
+		return {text = text, domSay=domReaction(SexReaction.AboutToSuckSubOff)}
 	if(_id == "starttonguefuck"):
 		state = "tonguefucking"
 		

@@ -70,6 +70,7 @@ func startActivity(_args):
 	state = ""
 	
 	if(_args[0] in ["beg", "offer"]):
+		var condomBeggingReaction = SexReaction.BeggingForCondom
 		endActivity()
 		var text
 		if(_args[0] == "beg"):
@@ -77,12 +78,14 @@ func startActivity(_args):
 				"{sub.You} {sub.youVerb('beg')} {dom.youHim} to put on a condom.",
 			])
 		else:
+			condomBeggingReaction = SexReaction.OfferingACondom
 			text = RNG.pick([
 				"{sub.You} {sub.youVerb('offer')} {dom.youHim} to put on one of {sub.yourHis} condoms.",
 			])
 		if(domInfo.getChar().isPlayer()):
 			return {
 				text = text,
+				subSay = subReaction(condomBeggingReaction),
 			}
 		
 		if(domInfo.hasMemory("TiredOfCondomOffers")):
@@ -92,6 +95,7 @@ func startActivity(_args):
 			domInfo.addAnger(0.05)
 			return {
 				text = text,
+				subSay = subReaction(condomBeggingReaction),
 			}
 		
 		var successChance
@@ -115,7 +119,7 @@ func startActivity(_args):
 			if(getSub().isPlayer() && _args[0] == "offer"):
 				condomItem.breakChance = getSub().useBestCondom()
 			
-			return {text = text}
+			return {text = text, subSay = subReaction(condomBeggingReaction)}
 		else:
 			var superFailChance = domInfo.getAngerScore() * 30.0
 			if(RNG.chance(superFailChance)):
@@ -126,6 +130,7 @@ func startActivity(_args):
 				domInfo.addAnger(0.2)
 				return {
 					text = text,
+					subSay = subReaction(condomBeggingReaction),
 				}
 			
 			domInfo.addAnger(0.1)
@@ -135,5 +140,6 @@ func startActivity(_args):
 			
 			return {
 				text = text,
+				subSay = subReaction(condomBeggingReaction),
 			}
 

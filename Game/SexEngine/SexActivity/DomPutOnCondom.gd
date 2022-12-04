@@ -68,6 +68,7 @@ func startActivity(_args):
 		
 		return {
 			text = "{dom.You} {dom.youVerb('put')} a condom on {dom.yourHis} cock.",
+			domSay = domReaction(SexReaction.DomPutsOnACondom),
 		}
 	
 	if(_args[0] == "sub"):
@@ -75,4 +76,5 @@ func startActivity(_args):
 	
 		return {
 			text = "{dom.You} {dom.youVerb('put')} a condom on {sub.your} cock.",
+			domSay = domReaction(SexReaction.DomPutsOnACondomOnSub),
 		}

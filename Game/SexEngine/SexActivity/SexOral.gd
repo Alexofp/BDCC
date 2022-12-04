@@ -213,7 +213,7 @@ func processTurn():
 				" {dom.You} "+RNG.pick(["{dom.youVerb('let')} out some moans", "{dom.youVerb('let')} out a moan", "{dom.youVerb('bite')} {dom.yourHis} lip", "{dom.youVerb('breathe')} deeply"])+" while {dom.yourHis} pussy "+RNG.pick(["gets more wet", "leaks arousal", "becomes more aroused", "drips arousal", "lets out an aroused scent"])+"."
 			])
 		
-		return {text = text}
+		return {text = text, domSay=domReaction(SexReaction.DomsPussyGetsLicked, 10)}
 	
 	if(state == "grinding"):
 		affectSub(subInfo.fetishScore({Fetish.OralSexGiving: 1.0})-0.1, 0.1, -0.1, -0.01)
@@ -250,7 +250,7 @@ func processTurn():
 				" {dom.You} "+RNG.pick(["{dom.youVerb('let')} out some moans", "{dom.youVerb('let')} out a moan", "{dom.youVerb('bite')} {dom.yourHis} lip", "{dom.youVerb('breathe')} deeply"])+" while {dom.yourHis} pussy "+RNG.pick(["gets more wet", "leaks arousal", "becomes more aroused", "drips arousal", "lets out an aroused scent"])+"."
 			])
 		
-		return {text = text}
+		return {text = text,domSay=domReaction(SexReaction.GrindingFaceWithPussy, 10)}
 	
 func getDomActions():
 	var actions = []
@@ -381,7 +381,7 @@ func doDomAction(_id, _actionInfo):
 		
 		affectSub(subInfo.fetishScore({Fetish.OralSexGiving: 1.0}), 0.05, -0.4, 0.0)
 		
-		return {text=text}
+		return {text=text, domSay=domReaction(SexReaction.OrderBlowjob)}
 	if(_id == "asktolick"):
 		state = "askingtolick"
 		waitTimer = 0
@@ -391,7 +391,7 @@ func doDomAction(_id, _actionInfo):
 		
 		affectSub(subInfo.fetishScore({Fetish.OralSexGiving: 1.0}), 0.05, -0.4, 0.0)
 		
-		return {text=text}
+		return {text=text,domSay=domReaction(SexReaction.OrderLickPussy)}
 		
 	if(_id == "startgrindface"):
 		state = "grinding"

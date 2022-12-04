@@ -184,7 +184,7 @@ func startActivity(_args):
 		var text = RNG.pick([
 			"{dom.You} {dom.youVerb('produce')} "+pcCanSeeText(drugInfo["usedName"])+" and {dom.youVerb('try', 'tries')} to force it into {sub.your} mouth!",
 		])
-		return {text = text}
+		return {text = text, domSay=domReaction(SexReaction.ForcingDrug)}
 	
 	if(_args[0] == "useonself"):
 		state = "domabouttotake"
@@ -227,7 +227,7 @@ func startActivity(_args):
 			text += RNG.pick([
 				" {sub.YouHe} can only guess what drug that is.",
 			])
-		return {text = text}
+		return {text = text, domSay=domReaction(SexReaction.OfferingDrug)}
 	
 
 func processTurn():
@@ -372,7 +372,7 @@ func doSubAction(_id, _actionInfo):
 			text += RNG.pick([
 				" That made {dom.you} angry.",
 			])
-		return {text = text}
+		return {text = text, subSay=subReaction(SexReaction.RefusingToSwallowDrug)}
 		
 	if(_id in ["eatit", "swallowforced"]):
 		endActivity()
