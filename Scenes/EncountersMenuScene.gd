@@ -33,6 +33,8 @@ func _run():
 		else:
 			saynn("Your personality will never change after sex.")
 		
+		addButton("Back", "Close this menu", "endthescene")
+		
 		if(hasSomeoneToForget):
 			addButton("Forget", "Pick which character you wanna forget", "forgetmenu")
 		else:
@@ -43,17 +45,18 @@ func _run():
 		addButton("My fetishes", "Menu that allows you to see and change your fetishes", "fetishmenu")
 		addButton("My personality", "Menu that allows you to see and change your personality", "personalitymenu")
 		
-		addButton("Back", "Close this menu", "endthescene")
+		
 
 	if(state == "forgetmenu"):
 		var encounterPools = GM.main.getDynamicCharactersPools()
 
 		saynn("Select which occupation the character that you wanna forget has.")
 
+		addButton("Back", "Go back a level", "")
+
 		for encounterPoolID in encounterPools:
 			addButton(str(encounterPoolID), "Pick this occupation", "forgetmenupool", [encounterPoolID])
 		
-		addButton("Back", "Go back a level", "")
 		
 	if(state == "forgetmenupool"):
 		saynn("Pick who do you wanna forget. They will never show up again. This action can not be undone.")
@@ -67,8 +70,25 @@ func _run():
 			var dynamicCharacter:DynamicCharacter = GlobalRegistry.getCharacter(characterID)
 			if(dynamicCharacter == null):
 				continue
+				
+			var desc = dynamicCharacter.getSmallDescription()
+			if(desc == null):
+				desc = ""
 			
-			addButton(dynamicCharacter.getName(), dynamicCharacter.getSmallDescription(), "forget", [dynamicCharacter.getID()])
+			var kidsAmount = GM.CS.getChildrenAmountOf(characterID)
+			if(kidsAmount > 0):
+				if(desc != ""):
+					desc += "\n"
+				desc += dynamicCharacter.getName()+" has "+str(kidsAmount)+" "+Util.multipleOrSingularEnding(kidsAmount, "kid")+"."
+			
+			var sharedKidsAmount = GM.CS.getSharedChildrenAmount("pc", characterID)
+			if(sharedKidsAmount > 0):
+				if(sharedKidsAmount == kidsAmount):
+					desc += " All of them are from you."
+				else:
+					desc += " "+str(sharedKidsAmount)+" of them are from you."
+			
+			addButton(dynamicCharacter.getName(), desc, "forget", [dynamicCharacter.getID()])
 	
 	if(state == "fetishmenu"):
 		var fetishHolder: FetishHolder = GM.pc.getFetishHolder()
