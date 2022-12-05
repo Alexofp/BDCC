@@ -168,10 +168,12 @@ func _run():
 				addButton(bodypart.getCharacterCreatorName(), bodypart.getCharacterCreatorDesc(), "setbodypart", [bodypart.id])
 
 	if(state == "bodypartAttributes"):
+		GM.main.playAnimation(StageScene.Solo, "stand", {exposedBodyparts=[BodypartSlot.Body, BodypartSlot.Penis, BodypartSlot.Vagina, BodypartSlot.Anus, BodypartSlot.Breasts], hard=true})
+		
 		var bodypart = GM.pc.getBodypart(pickingBodypartType)
 		var attributes = bodypart.getPickableAttributes()
 		
-		saynn("Change the atributes of "+bodypart.getName())
+		saynn("Change the attributes of "+bodypart.getName())
 		for curAttrib in bodypart.getAttributesText():
 			sayn(curAttrib[0]+": "+str(curAttrib[1]))
 		
