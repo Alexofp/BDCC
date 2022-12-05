@@ -115,6 +115,7 @@ func updatePerkText():
 	
 
 func _on_UnlockPerkButton_pressed():
+	GlobalTooltip.resetTooltips()
 	if(selectedPerkID == null || selectedPerkID == ""):
 		return
 	
