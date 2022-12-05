@@ -5,6 +5,7 @@ func _init():
 	npcLevel = 5
 	npcBasePain = 150
 	npcBaseLust = 120
+	npcCharacterType = CharacterType.Guard
 	
 	npcLustInterests = {
 		InterestTopic.TallyMarks: Interest.Likes,
@@ -189,3 +190,6 @@ func reactRestraint(restraintType, restraintAmount, isGettingForced):
 			"I'm a huge cat, you can't tie me up",
 		])
 	return null
+
+func createEquipment():
+	getInventory().equipItem(GlobalRegistry.createItemNoID("GuardArmor"))

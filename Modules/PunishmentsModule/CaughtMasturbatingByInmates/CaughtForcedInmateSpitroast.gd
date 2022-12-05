@@ -110,7 +110,9 @@ func _run():
 		saynn("You begin to enjoy it even though they are still acting rough with you, both inmates expose their cocks, a knotted canine one is rubbing between your legs while a barbed feline one leaks precum onto your hips.")
 
 		# (if has cock)
-		if(GM.pc.hasPenis()):
+		if(GM.pc.isWearingChastityCage()):
+			saynn("Your own {pc.cock} is becoming quite hard too in its little cage, begging for some attention that it obviously won’t receive.")
+		elif(GM.pc.hasPenis()):
 			saynn("Your own {pc.cock} is becoming quite hard too, begging for some attention that it probably won’t receive.")
 
 		saynn("[say=pc]H-hey..[/say]")

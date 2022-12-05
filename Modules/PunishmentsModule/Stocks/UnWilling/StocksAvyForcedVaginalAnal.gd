@@ -112,7 +112,9 @@ func _run():
 		saynn("You can’t hold it, you open your mouth and moan, your body is forced into a prime position for breeding, your slit being ravaged so rough makes you feel ecstatic. You cum quick, your body starts squirming and struggling against the restraints but Avy keeps fucking you through your orgasm, your inner walls clenching around her cock overstimulate you and make you squirt.")
 
 		# (if has penis)
-		if(GM.pc.hasPenis()):
+		if(GM.pc.isWearingChastityCage()):
+			saynn("You own cock shoots out a loud down at the floor, it’s useless in its chastity cage so it just sways a lot while you’re being fucked.")
+		elif(GM.pc.hasPenis()):
 			saynn("You own cock shoots out a loud down at the floor, it’s useless today so it just sways a lot while you’re being fucked.")
 
 		saynn("[say=avy]Hope you’re ready to be bred, bitch.[/say]")

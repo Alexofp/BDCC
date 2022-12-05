@@ -6,6 +6,7 @@ func _init():
 	npcLevel = 5
 	npcBasePain = 115
 	npcBaseLust = 100
+	npcCharacterType = CharacterType.Inmate
 	npcLustInterests = {
 		InterestTopic.TallyMarks: Interest.Loves,
 		InterestTopic.Bodywritings: Interest.Loves,

@@ -38,6 +38,9 @@ func getFlags():
 		"Nursery_AskedDatabase": flag(FlagType.Bool),
 		
 		"Medical_StoleDrugsToday": flag(FlagType.Bool),
+		
+		"PC_ReceivedPermanentCage": flag(FlagType.Bool),
+		"PC_PickedFlatPermanentCage": flag(FlagType.Bool),
 	}
 
 func _init():
@@ -71,6 +74,7 @@ func _init():
 		"res://Modules/MedicalModule/NurseFelineOffLimits.gd",
 		
 		"res://Modules/MedicalModule/Nursery/NurseryTalkScene.gd",
+		"res://Modules/MedicalModule/NurseCaughtOfflimitsScene.gd",
 		]
 	characters = [
 		"res://Modules/MedicalModule/MentalWard/LatexParasite.gd",
@@ -84,6 +88,7 @@ func _init():
 		
 		"res://Modules/MedicalModule/Nursery/NurseryTalkEvent.gd",
 		"res://Modules/MedicalModule/StealDrugsFromMedicalEvent.gd",
+		"res://Modules/MedicalModule/NurseCaughtOfflimitsEvent.gd",
 	]
 
 func resetFlagsOnNewDay():

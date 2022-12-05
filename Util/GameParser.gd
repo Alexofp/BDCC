@@ -24,6 +24,8 @@ func callFuncWrapper(_command: String, _args: Array):
 		return Util.sayOther(str(_args[0]))
 	if(_command == "sayPlayer" && _args.size() == 1):
 		return Util.sayPlayer(str(_args[0]))
+	if(_command == "pick"):
+		return str(RNG.pick(_args))
 	
 	return "!RUNTIME ERROR NO COMMAND FOUND "+_command+" "+str(_args)+"!"
 	
@@ -59,6 +61,47 @@ func callObjectFuncWrapper(_obj: String, _command: String, _args: Array):
 		return object.getName()		
 	if(_command == "nameS" && _args.size() == 0):
 		return object.getName()+"'s"
+	if(_command in ["nameOrYou", "you"] && _args.size() == 0):
+		if(object.isPlayer()):
+			return "you"
+		else:
+			return object.getName()
+	if(_command in ["youHe"] && _args.size() == 0):
+		if(object.isPlayer()):
+			return "you"
+		else:
+			return object.heShe()
+	if(_command in ["himYou", "youHim"] && _args.size() == 0):
+		if(object.isPlayer()):
+			return "you"
+		else:
+			return object.himHer()
+	if(_command in ["hisYour", "hisYou", "yourHis", "youHis"] && _args.size() == 0):
+		if(object.isPlayer()):
+			return "your"
+		else:
+			return object.hisHer()
+	if(_command in ["nameSOrYou", "your"] && _args.size() == 0):
+		if(object.isPlayer()):
+			return "your"
+		else:
+			return object.getName()+"'s"
+	if(_command in ["youAre"] && _args.size() == 0):
+		if(object.isPlayer()):
+			return "are"
+		else:
+			return object.isAre()
+	if(_command == "youVerb"):
+		if(object.isPlayer()):
+			return str(_args[0])
+		if(_args.size() == 1):
+			return object.verbS(str(_args[0]))
+		if(_args.size() == 2):
+			return object.verbS(str(_args[0]), str(_args[1]))
+	if((_command == "yourself") && _args.size() == 0):
+		if(object.isPlayer()):
+			return "yourself"
+		return object.himselfHerself()
 	if(_command == "inmateNumber" && _args.size() == 0 && object.has_method("getInmateNumber")):
 		return object.getInmateNumber()		
 	if(_command == "inmateNumberFull" && _args.size() == 0 && object.has_method("getFullInmateNumber")):
@@ -79,21 +122,21 @@ func callObjectFuncWrapper(_obj: String, _command: String, _args: Array):
 		return object.hasHave()
 	if((_command == "himself" || _command == "herself" || _command == "himselfHerself") && _args.size() == 0):
 		return object.himselfHerself()
-	if(_command == "verbS"):
+	if(_command in ["verbS", "verb"]):
 		if(_args.size() == 1):
 			return object.verbS(str(_args[0]))
 		if(_args.size() == 2):
 			return object.verbS(str(_args[0]), str(_args[1]))
 			
-	if(_command in ["penis", "cock"] && _args.size() == 0 && object.has_method("getBodypartLewdDescriptionAndName")):
+	if(_command in ["penis", "cock", "dick"] && _args.size() == 0 && object.has_method("getBodypartLewdDescriptionAndName")):
 		return object.getBodypartLewdDescriptionAndName(BodypartSlot.Penis)
-	if(_command in ["aPenis", "aCock"] && _args.size() == 0 && object.has_method("getBodypartLewdDescriptionAndNameWithA")):
+	if(_command in ["aPenis", "aCock", "aDick"] && _args.size() == 0 && object.has_method("getBodypartLewdDescriptionAndNameWithA")):
 		return object.getBodypartLewdDescriptionAndNameWithA(BodypartSlot.Penis)
-	if(_command in ["penisSize", "cockSize"] && _args.size() == 0 && object.has_method("getBodypartLewdSizeAdjective")):
+	if(_command in ["penisSize", "cockSize", "dickSize"] && _args.size() == 0 && object.has_method("getBodypartLewdSizeAdjective")):
 		return object.getBodypartLewdSizeAdjective(BodypartSlot.Penis)
-	if(_command in ["penisDesc", "cockDesc"] && _args.size() == 0 && object.has_method("getBodypartLewdAdjective")):
+	if(_command in ["penisDesc", "cockDesc", "dickDesc"] && _args.size() == 0 && object.has_method("getBodypartLewdAdjective")):
 		return object.getBodypartLewdAdjective(BodypartSlot.Penis)
-	if(_command in ["penisSizeStr", "cockSizeStr"] && _args.size() == 0 && object.has_method("getPenisSizeString")):
+	if(_command in ["penisSizeStr", "cockSizeStr", "dickSizeStr"] && _args.size() == 0 && object.has_method("getPenisSizeString")):
 		return object.getPenisSizeString()
 		
 	if(_command == "vagina" && _args.size() == 0 && object.has_method("getBodypartLewdDescriptionAndName")):

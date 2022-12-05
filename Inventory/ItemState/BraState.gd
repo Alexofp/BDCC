@@ -4,6 +4,9 @@ class_name BraState
 var pulledUp = false
 var casualName = "bra"
 
+func getCasualName():
+	return casualName
+
 func isBraPulledUp():
 	return pulledUp
 

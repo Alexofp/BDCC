@@ -40,7 +40,7 @@ func _run():
 
 	if(state == "vaginal"):
 		# (needs pussy)
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc="jack", npcAction="kneel", npcExposedBodyparts=[BodypartSlot.Penis], exposedBodyparts=[BodypartSlot.Vagina, BodypartSlot.Anus]})
+		GM.main.playAnimation(StageScene.Duo, "stand", {npc="jack", npcHard=true, npcAction="kneel", npcExposedBodyparts=[BodypartSlot.Penis], exposedBodyparts=[BodypartSlot.Vagina, BodypartSlot.Anus]})
 
 		saynn("You tilt your head while gazing at that bulge, wondering how good it would feel to take an entire horse cock inside you. These thoughts make you horny quite quickly, you sneakily brush your hand over your slit and bite your lip as you step towards the stallion. Jack offers you a welcoming smile.")
 
@@ -109,7 +109,9 @@ func _run():
 		saynn("Your first orgasm quickly overtakes your body, passionate moans leave your mouth while your slit starts pulsating around the shaft, your legs and arms shiver while the rest of your body tenses up. Fuck it feels good, you push yourself through your climax and keep riding the horse, causing Jack to let out another animal noise, he seems to be close.")
 
 		# (if has cock)
-		if(GM.pc.hasPenis()):
+		if(GM.pc.isWearingChastityCage()):
+			saynn("Your pleasure point got rubbed to the point of your {pc.cock} shooting out a weak line of {pc.cum}. And then a few more, messing up your chastity cage.")
+		elif(GM.pc.hasPenis()):
 			saynn("Your pleasure point got rubbed to the point of your {pc.cock} shooting out a strong line of {pc.cum}. And then a few more.")
 
 		addButton("Inside", "Let the horsie cum", "inside")
@@ -186,7 +188,7 @@ func _run():
 
 
 	if(state == "anal"):
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc="jack", npcAction="kneel", npcExposedBodyparts=[BodypartSlot.Penis], exposedBodyparts=[BodypartSlot.Vagina, BodypartSlot.Anus]})
+		GM.main.playAnimation(StageScene.Duo, "stand", {npc="jack", npcHard=true, npcAction="kneel", npcExposedBodyparts=[BodypartSlot.Penis], exposedBodyparts=[BodypartSlot.Vagina, BodypartSlot.Anus]})
 		
 		saynn("You tilt your head while gazing at that bulge, wondering how good it would feel to take an entire horse cock inside you. These thoughts make you horny quite quickly, you sneakily brush your hand over your slit and bite your lip as you step towards the stallion. Jack offers you a welcoming smile.")
 
@@ -256,7 +258,9 @@ func _run():
 		saynn("Your first orgasm quickly overtakes your body, passionate moans leave your mouth while your anal ring starts pulsating around the shaft, your legs and arms shiver while the rest of your body tenses up. Fuck it feels good, you push yourself through your climax and keep riding the horse, causing Jack to let out another animal noise, he seems to be close.")
 
 		# (if has cock)
-		if(GM.pc.hasPenis()):
+		if(GM.pc.isWearingChastityCage()):
+			saynn("Your prostate got rubbed to the point of your {pc.cock} shooting out a weak line of {pc.cum}. And then a few more, messing up your chastity cage.")
+		elif(GM.pc.hasPenis()):
 			saynn("Your prostate got rubbed to the point of your {pc.cock} shooting out a strong line of {pc.cum}. And then a few more.")
 
 		addButton("Inside", "Let the horsie cum", "inside1")

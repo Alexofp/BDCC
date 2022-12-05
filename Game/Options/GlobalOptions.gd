@@ -467,6 +467,7 @@ func saveData():
 		"fontSize": fontSize,
 		"showShortcuts": showShortcuts,
 		"measurementUnits": measurementUnits,
+		"requireDoubleTapOnMobile": requireDoubleTapOnMobile,
 		"debugPanel": debugPanel,
 		"imagePackOrder": imagePackOrder,
 		"showCharacterArt": showCharacterArt,
@@ -493,6 +494,7 @@ func loadData(data):
 	fontSize = loadVar(data, "fontSize", "normal")
 	showShortcuts = loadVar(data, "showShortcuts", true)
 	measurementUnits = loadVar(data, "measurementUnits", "metric")
+	requireDoubleTapOnMobile = loadVar(data, "requireDoubleTapOnMobile", false)
 	debugPanel = loadVar(data, "debugPanel", false)
 	imagePackOrder = loadVar(data, "imagePackOrder", [])
 	showCharacterArt = loadVar(data, "showCharacterArt", true)

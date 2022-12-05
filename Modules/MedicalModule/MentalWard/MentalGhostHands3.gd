@@ -56,7 +56,10 @@ func _run():
 
 		# (else if has cock)
 		elif(GM.pc.hasPenis()):
-			saynn("The hands don’t react to your speech at all, the new pair of hands seems to be interested in your chastity belt. You look down and notice them straight up phasing through metal but then landing on your crotch and stroking your cock a bit.")
+			if(GM.pc.isWearingChastityCage()):
+				saynn("The hands don’t react to your speech at all, the new pair of hands seems to be interested in your chastity belt. You look down and notice them straight up phasing through metal and through your chastity cage before landing on your crotch and stroking your cock a bit. The hands don’t seem to follow the rules of this reality but your dick still does.")
+			else:
+				saynn("The hands don’t react to your speech at all, the new pair of hands seems to be interested in your chastity belt. You look down and notice them straight up phasing through metal but then landing on your crotch and stroking your cock a bit.")
 
 		# (else)
 		else:
@@ -132,7 +135,9 @@ func _run():
 			saynn("With so many sources of pleasure, you are quickly pushed over the edge, your body creates an arch and shivers as your hole twitches and pulsates around the cocks, trying to milk them. But they don’t stop and keep fucking you through your orgasm, extending it and messing with your mind. The first cock cums down your throat, soon followed by the other two that stuff your ass to the brim with some kind of transparent glowing seed that can even be seen shining through your belly.")
 
 		# (if has cock)
-		if(GM.pc.hasPenis()):
+		if(GM.pc.isWearingChastityCage()):
+			saynn("Even though your {pc.cock} is trapped behind the chastity belt and the chastity cage at the same time, it suddenly throbs and wastes its load.")
+		elif(GM.pc.hasPenis()):
 			saynn("Even though your {pc.cock} is trapped behind the chastity belt, it suddenly throbs and wastes its load.")
 
 		saynn("Then the other cocks cum one by one, shooting strings of that strange glowing goo all over your body and face, leaving quite a mess indeed. Drippy seed leaks out of you, lots of it.")

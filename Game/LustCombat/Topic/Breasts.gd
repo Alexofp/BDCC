@@ -11,6 +11,8 @@ func _init():
 
 func getTopicValue(_topicID, _pc):
 	var breasts = _pc.getBodypart(BodypartSlot.Breasts)
+	if(breasts == null):
+		return 0.0
 	var size = breasts.getSize()
 
 	if(_topicID == InterestTopic.NoBreasts):

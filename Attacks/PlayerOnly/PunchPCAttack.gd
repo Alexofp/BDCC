@@ -46,3 +46,6 @@ func getAttackSoloAnimation():
 
 func getExperience():
 	return [[Skill.Combat, 10]]
+
+func getAnticipationText(_attacker, _receiver):
+	return "{attacker.name} is about to punch {receiver.name}!"

@@ -53,6 +53,20 @@ func playAnimation(animID, _args = {}):
 	else:
 		doll2.setExposedBodyparts([])
 	
+	if(_args.has("flipPc") && _args["flipPc"]):
+		doll.scale.x = -1
+	else:
+		doll.scale.x = 1
+	if(_args.has("flipNpc") && _args["flipNpc"]):
+		doll2.scale.x = 1
+	else:
+		doll2.scale.x = -1
+	
+	if(_args.has("hard") && _args["hard"]):
+		doll.setCockTemporaryHard()
+	if(_args.has("npcHard") && _args["npcHard"]):
+		doll2.setCockTemporaryHard()
+	
 	if(animID == "sit"):
 		$Chair.visible = true
 	else:

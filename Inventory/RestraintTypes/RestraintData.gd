@@ -21,6 +21,9 @@ func resetOnNewTry():
 func onStruggleRemoval():
 	tightness = 1.0
 
+func getTightness():
+	return tightness
+
 func setLevel(newlevel):
 	level = newlevel
 	

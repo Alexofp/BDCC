@@ -9,7 +9,8 @@ static func getFlags():
 		"Game_PickedStartingPerks": flag(FlagType.Bool),
 		"Player_Crime_Type": flag(FlagType.Number),
 		"Trigger_CaughtOffLimitsCD": flag(FlagType.Number),
-		
+		"ExposureEventCD": flag(FlagType.Number),
+		"PreferKnownEncounters": flag(FlagType.Bool),
 	}
 
 enum Crime_Type {Innocent, Theft, Murder, Prostitution}

@@ -64,3 +64,12 @@ func getTags():
 
 func getBuyAmount():
 	return 3
+
+func useInSex(_receiver):
+	_receiver.addTimedBuffs(getTimedBuffs(), getBuffsDurationSeconds())
+	#return {
+	#	text = "{USER.You} {USER.youVerb('feel')} like {USER.youHe} became more fertile and virile.".replace("USER", _receiver.getID()),
+	#}
+
+func getItemCategory():
+	return ItemCategory.Medical

@@ -63,3 +63,9 @@ func getTags():
 
 func getBuyAmount():
 	return 5
+
+func useInSex(_receiver):
+	_receiver.addTimedBuffs(getTimedBuffs(), getBuffsDurationSeconds())
+
+func getItemCategory():
+	return ItemCategory.Medical

@@ -11,6 +11,8 @@ func shouldShow(_lustState: LustCombatState, _args):
 	var pc:Player = _lustState.getCharacter()
 	if(!pc.hasBodypart(BodypartSlot.Penis) || pc.isBodypartCovered(BodypartSlot.Penis)):
 		return false
+	if(pc.isWearingChastityCage()):
+		return false
 	
 	return true
 

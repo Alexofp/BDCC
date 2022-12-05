@@ -9,6 +9,7 @@ func _init():
 	npcLevel = 10
 	npcBasePain = 200
 	npcBaseLust = 150
+	npcCharacterType = CharacterType.Guard
 
 	
 	
@@ -70,10 +71,6 @@ func createBodyparts():
 	giveBodypartUnlessSame(penis)
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("huskytail"))
 
-func createEquipment():
-	#getInventory().equipItem(GlobalRegistry.createItemNoID("inmatecollar"))
-	pass
-
 func getThickness():
 	return 115
 
@@ -83,3 +80,6 @@ func getLootTable(_battleName):
 
 func getParentCharacterID():
 	return "nova"
+
+func createEquipment():
+	getInventory().equipItem(GlobalRegistry.createItemNoID("GuardArmor"))

@@ -10,6 +10,7 @@ func _init():
 	npcBasePain = 70
 	npcBaseLust = 50
 	npcBaseStamina = 60
+	npcCharacterType = CharacterType.Guard
 	npcLustInterests = {
 		InterestTopic.TallyMarks: Interest.KindaLikes,
 		InterestTopic.Bodywritings: Interest.KindaLikes,
@@ -104,3 +105,6 @@ func createBodyparts():
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("caninehead"))
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("mohawkhair"))
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("canineears"))
+
+func createEquipment():
+	getInventory().equipItem(GlobalRegistry.createItemNoID("GuardArmor"))

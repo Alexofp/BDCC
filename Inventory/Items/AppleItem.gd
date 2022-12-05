@@ -40,3 +40,6 @@ func canCombine():
 
 func getTags():
 	return [ItemTag.Illegal]
+
+func getItemCategory():
+	return ItemCategory.Medical

@@ -30,6 +30,11 @@ func getBuffs():
 	return [
 		]
 
+func getTags():
+	return [
+		ItemTag.GeneralInmateUniform,
+		]
+
 func saveData():
 	var data = .saveData()
 	

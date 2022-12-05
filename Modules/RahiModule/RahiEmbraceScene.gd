@@ -27,7 +27,7 @@ func _run():
 			saynn("The feline just keeps stroking her tail like she usually does.")
 
 		addButton("Kiss her", "Just a simple kiss won’t hurt", "kiss_her")
-		if(getCharacter("rahi").isVisiblyPregnant()):
+		if(getCharacter("rahi").canBeMilked()):
 			addButton("Milk her", "Help her with the itching nipples", "milk_her")
 		else:
 			addDisabledButton("Milk her", "Kitty is not lactating")
@@ -38,7 +38,7 @@ func _run():
 		saynn("You breathe in her feline scent and proceeds to cover her neck and shoulders with lots of little kisses. She tilts her away slightly, giving you more access to her fur.")
 
 		# (if heavily pregnant)
-		if(getCharacter("rahi").isHeavilyPregnant()):
+		if(getCharacter("rahi").canBeMilked()):
 			saynn("Your hands shift down to her D-cup breasts and cup them. A gentle squeeze is enough to make the kitty moan in your hands, her dark nipples squirt a bit of her milk.")
 
 		# (if not pregnant)

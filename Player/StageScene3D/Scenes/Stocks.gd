@@ -21,6 +21,9 @@ func playAnimation(animID, _args = {}):
 	else:
 		doll.setExposedBodyparts([])
 	
+	if(_args.has("hard") && _args["hard"]):
+		doll.setCockTemporaryHard()
+	
 	if(animID == "idle"):
 		animationPlayer.play("Idle")
 	else:

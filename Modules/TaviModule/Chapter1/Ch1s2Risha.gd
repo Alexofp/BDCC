@@ -115,6 +115,7 @@ func _run():
 		
 
 	if(state == "be_fucked"):
+		GM.main.playAnimation(StageScene.Duo, "stand", {npc="risha", npcHard=true, npcExposedBodyparts=[BodypartSlot.Penis]})
 		# (Risha chains and fucks pc)
 
 		# (Risha leaves and Tavi returns)
@@ -142,7 +143,9 @@ func _run():
 		saynn("[say=pc]Kinky..[/say]")
 
 		# (if has cock)
-		if(GM.pc.hasPenis()):
+		if(GM.pc.isWearingChastityCage()):
+			saynn("Your own cock is getting somewhat hard behind the cage. Risha cups your balls and gives them a gentle squeeze.")
+		elif(GM.pc.hasPenis()):
 			saynn("Your own cock is getting somewhat hard. Risha cups your balls and gives them a gentle squeeze.")
 
 			saynn("[say=risha]Cute.[/say]")
@@ -180,7 +183,9 @@ func _run():
 			saynn("[say=risha]Yeah, exactly how a proper slut must react.[/say]")
 
 			# (if has cock)
-			if(GM.pc.hasPenis()):
+			if(GM.pc.isWearingChastityCage()):
+				saynn("Your chastity cage is just swaying around, the cock inside leaking pre while one of your pleasure points is being stimulated.")
+			elif(GM.pc.hasPenis()):
 				saynn("Your own cock is just swaying around, leaking pre while one of your pleasure points is being stimulated.")
 
 			# (if has big breasts)
@@ -210,7 +215,9 @@ func _run():
 			saynn("[say=risha]Yeah, exactly how a proper slut must react.[/say]")
 
 			# (if has cock)
-			if(GM.pc.hasPenis()):
+			if(GM.pc.isWearingChastityCage()):
+				saynn("Your chastity cage is just swaying around, the cock inside leaking dripping uncontrollably.")
+			elif(GM.pc.hasPenis()):
 				saynn("Your own cock is just swaying around and dripping uncontrollably.")
 
 			# (if has big breasts)
@@ -616,13 +623,13 @@ func _react(_action: String, _args):
 		getCharacter("risha").addEffect(StatusEffect.DrenchedInPiss)
 	
 	if(_action in ["fight_horny", "fight_normal", "fight_easier"]):
+		runScene("FightScene", ["risha"], "ch1rishafight")
 		if(_action == "fight_horny"):
 			getCharacter("risha").addLust(30)
 			setFlag("TaviModule.ch1SeducedRishaAndAttacked", true)
 		if(_action == "fight_easier"):
 			getCharacter("risha").addPain(50)
 			setFlag("TaviModule.ch1WaitedBeforePushingRisha", true)
-		runScene("FightScene", ["risha"], "ch1rishafight")
 		return
 
 	if(_action == "endthescene"):

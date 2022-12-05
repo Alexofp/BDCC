@@ -29,7 +29,7 @@ func _run():
 	if(state == "follow"):
 		aimCamera("med_milkingroom")
 		setLocationName("Milking heaven")
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc="eliza", exposedBodyparts=[BodypartSlot.Anus, BodypartSlot.Penis]})
+		GM.main.playAnimation(StageScene.Duo, "stand", {npc="eliza", hard=true, exposedBodyparts=[BodypartSlot.Anus, BodypartSlot.Penis]})
 		
 		saynn("She brings you to a room that can only be described as a milking heaven. You notice a huge fluid storage tank and quite a few special milking stalls, not for animals but for humans. Eliza guides you into one of them. The stall itself is just some metal pipes, designed to keep the bull or the cow still, Eliza tied your leash to the stall’s frame.")
 
@@ -96,7 +96,7 @@ func _run():
 
 		saynn("She takes it slow as not to hurt you but fuck it feels good, your whole body starts to shiver, a wave after wave of warmess washes over you, lusty moans begin to escape from your lips. Eliza sees you like this bites her lip, her free hand runs over the curves of your {pc.thick} {pc.masc} body while milking you dry with the other.")
 
-		saynn("She slowly picks up the pace, the dildo hammers at your p-spot with little mercy, the rare leaks are now an almost constant weak stream, the fluid level of the milk container slowly raises. Eliza didn’t touch your dick once but you feel something building up, a pleasurable feeling that is so hard to resist. You pant and moan way more often, your legs want to close but you fight that, you stand still, your anus stuffed, hands on the bar, so you can be milked as efficiently as possible.")
+		saynn("She slowly picks up the pace, the dildo hammers at your p-spot with little mercy, the rare leaks are now an almost constant weak stream, the fluid level of the milk container slowly raises. Eliza didn’t touch your {pc.cock} once but you feel something building up, a pleasurable feeling that is so hard to resist. You pant and moan way more often, your legs want to close but you fight that, you stand still, your anus stuffed, hands on the bar, so you can be milked as efficiently as possible.")
 
 		addButton("Give in completely", "Be an obedient little bull for Eliza", "give_in_completely")
 
@@ -113,7 +113,10 @@ func _run():
 
 		saynn("[say=eliza]Are you close?[/say]")
 
-		saynn("The pressure in your cock keeps building up, you are being constantly edged, you feel like you only need a bit more to go over the peak. And it feels so good.")
+		if(GM.pc.isWearingChastityCage()):
+			saynn("The pressure in your chastity cage keeps building up, you are being constantly edged, you feel like you only need a bit more to go over the peak. And it feels so good.")
+		else:
+			saynn("The pressure in your cock keeps building up, you are being constantly edged, you feel like you only need a bit more to go over the peak. And it feels so good.")
 
 		saynn("[say=pc]Y-yes.. very.. p-please..[/say]")
 

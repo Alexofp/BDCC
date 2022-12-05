@@ -13,12 +13,20 @@ signal exchangedCumDuringRubbing(senderName, receiverName)
 var pain:int = 0
 var lust:int = 0
 var stamina:int = 100
+
+# sex stats
+var arousal:float = 0
+var consciousness: float = 1.0
+
 var statusEffects:Dictionary = {}
 var statusEffectsStorageNode
 var inventory: Inventory
 var buffsHolder: BuffsHolder
 var skillsHolder: SkillsHolder
 var lustInterests: LustInterests
+var fetishHolder: FetishHolder
+var personality: Personality
+var sexVoice: SexVoice
 
 # Bodypart stuff
 var bodyparts: Dictionary
@@ -31,6 +39,11 @@ var fightingState = "" # dodge, block, defocus
 
 # pregnancy stuff
 var menstrualCycle: MenstrualCycle
+
+var timedBuffs: Array = []
+var timedBuffsDurationSeconds: int = 0
+var timedBuffsTurns: Array = []
+var timedBuffsDurationTurns: int = 0
 
 func _init():
 	name = "BaseCharacter"
@@ -59,6 +72,11 @@ func _ready():
 	stamina = getMaxStamina()
 	#resetToDefault()
 	lustInterests = LustInterests.new()
+	fetishHolder = FetishHolder.new()
+	fetishHolder.setCharacter(self)
+	personality = Personality.new()
+	personality.setCharacter(self)
+	createVoice()
 
 func getID():
 	assert(false, "Getting an ID of a baseCharacter class")
@@ -201,6 +219,11 @@ func updateEffectPanel(panel: StatusEffectsPanel):
 		panel.addBattleEffect(effect.getIconColor(), effect.getEffectName(), effect.getVisisbleDescription(), effect.getEffectImage())
 
 func processBattleTurn():
+	if(timedBuffsDurationTurns > 0):
+		timedBuffsDurationTurns -= 1
+		if(timedBuffsDurationTurns <= 0):
+			timedBuffsTurns.clear()
+	
 	for effectID in statusEffects.keys():
 		var effect = statusEffects[effectID]
 		effect.processBattleTurn()
@@ -214,6 +237,9 @@ func beforeFightStarted():
 
 func afterFightEnded():
 	print(getName()+" my fight has ended")
+	
+	timedBuffsTurns.clear()
+	timedBuffsDurationTurns = 0
 	
 	for effectID in statusEffects.keys():
 		var effect = statusEffects[effectID]
@@ -533,6 +559,12 @@ func getSkillsHolder() -> SkillsHolder:
 func getBuffsHolder() -> BuffsHolder:
 	return buffsHolder
 
+func getFetishHolder() -> FetishHolder:
+	return fetishHolder
+
+func getPersonality() -> Personality:
+	return personality
+
 func addExperience(newexp: int):
 	skillsHolder.addExperience(newexp)
 
@@ -550,6 +582,9 @@ func getSkillLevel(skillID):
 	if(skill == null):
 		return 0
 	return skill.getLevel()
+
+func getLevel() -> int:
+	return skillsHolder.getLevel()
 
 func getSpecies():
 	return []
@@ -828,7 +863,7 @@ func getOrificeMinLooseness(orificeType):
 func getOrificeBlocked(orificeType):
 	return buffsHolder.getOrificeBlocked(orificeType)
 
-func gotOrificeStretchedWith(bodypartSlot, insertionSize, showMessages = true):
+func gotOrificeStretchedWith(bodypartSlot, insertionSize, showMessages = true, stretchMult = 1.0):
 	if(!hasBodypart(bodypartSlot)):
 		return
 	var thebodypart = getBodypart(bodypartSlot)
@@ -837,10 +872,59 @@ func gotOrificeStretchedWith(bodypartSlot, insertionSize, showMessages = true):
 	if(orifice == null):
 		return
 	var oldLooseness = orifice.getLooseness()
-	thebodypart.handleInsertion(insertionSize)
+	thebodypart.handleInsertion(insertionSize, stretchMult)
 	var newLooseness = orifice.getLooseness()
 	if(newLooseness > oldLooseness && showMessages):
 		emit_signal("orificeBecomeMoreLoose", thebodypart.getOrificeName(), newLooseness, oldLooseness)
+
+func gotOrificeStretchedBy(bodypartSlot, characterID, showMessages = true, stretchMult = 1.0):
+	if(!hasBodypart(bodypartSlot)):
+		return
+	
+	var ch = GlobalRegistry.getCharacter(characterID)
+	assert(ch != null)
+	gotOrificeStretchedWith(bodypartSlot, ch.getPenisSize(), showMessages, stretchMult)
+
+func getPenetrationFreeRoom(bodypartSlot, insertionSize):
+	if(!hasBodypart(bodypartSlot)):
+		return 0.0
+	var thebodypart = getBodypart(bodypartSlot)
+	
+	var orifice: Orifice = thebodypart.getOrifice()
+	if(orifice == null):
+		return 0.0
+	
+	var goodSize = orifice.getComfortableInsertion()
+	
+	var diff = goodSize - insertionSize
+	return diff
+
+func getPenetrationFreeRoomBy(bodypartSlot, characterID):
+	var ch = GlobalRegistry.getCharacter(characterID)
+	assert(ch != null)
+	return getPenetrationFreeRoom(bodypartSlot, ch.getPenisSize())
+
+func getPenetrateChance(bodypartSlot, insertionSize):
+	if(!hasBodypart(bodypartSlot)):
+		return 0.0
+	var thebodypart = getBodypart(bodypartSlot)
+	
+	var orifice: Orifice = thebodypart.getOrifice()
+	if(orifice == null):
+		return 0.0
+	
+	var goodSize = orifice.getComfortableInsertion()
+	
+	var diff = insertionSize - goodSize
+	if(diff <= 0.0):
+		return 100.0
+	
+	return max(500.0 / (5.0 + diff), 30.0)
+
+func getPenetrateChanceBy(bodypartSlot, characterID):
+	var ch = GlobalRegistry.getCharacter(characterID)
+	assert(ch != null)
+	return getPenetrateChance(bodypartSlot, ch.getPenisSize())
 
 func gotFuckedBy(bodypartSlot, characterID, showMessages = true):
 	if(!hasBodypart(bodypartSlot)):
@@ -939,6 +1023,11 @@ func getPregnancyProgress():
 	if(menstrualCycle != null):
 		return menstrualCycle.getPregnancyProgress()
 	return 0.0
+
+func isInHeat():
+	if(menstrualCycle != null):
+		return menstrualCycle.isInHeat()
+	return false
 
 func onGivingBirth(_impregnatedEggCells: Array, _newkids: Array):
 	var amountPerOrifice = {}
@@ -1142,7 +1231,21 @@ func softUpdateDoll(doll: Doll3D):
 	doll.setState("mouth", "")
 	doll.setState("muzzle", "")
 	doll.setState("gloves", "")
+	doll.setState("armalpha", "")
+	if(bodypartHasTrait(BodypartSlot.Legs, PartTrait.LegsPlanti)):
+		doll.setState("legstype", "planti")
+	elif(bodypartHasTrait(BodypartSlot.Legs, PartTrait.LegsDigi)):
+		doll.setState("legstype", "digi")
+	elif(bodypartHasTrait(BodypartSlot.Legs, PartTrait.LegsHoofs)):
+		doll.setState("legstype", "hoofs")
+	else:
+		doll.setState("legstype", "")
 	updateLeaking(doll)
+	
+	if(isReadyToPenetrate()):
+		doll.setState("cock", "")
+	else:
+		doll.setState("cock", "limp")
 	
 	var breastsScale = 1.0
 	if(hasBodypart(BodypartSlot.Breasts)):
@@ -1195,6 +1298,7 @@ func softUpdateDoll(doll: Doll3D):
 		if(item == null):
 			continue
 		
+		# Add a check here that the item is actually visible first?
 		item.updateDoll(doll)
 
 func updateDoll(doll: Doll3D):
@@ -1210,6 +1314,9 @@ func updateDoll(doll: Doll3D):
 	var equippedItems = getInventory().getAllEquippedItems()
 	for inventorySlot in equippedItems:
 		var item = equippedItems[inventorySlot]
+		if(!item.shouldBeVisibleOnDoll(self, doll)):
+			continue
+		
 		var blocksBodyparts = item.coversBodyparts()
 		if(!item.alwaysVisible() && exposedBodyparts!=null && exposedBodyparts.size() > 0 && blocksBodyparts != null):
 			var shouldBeSkipped = false
@@ -1380,15 +1487,287 @@ func getDefocusArmor() -> int:
 	return 20 + buffsHolder.getCustom(BuffAttribute.DefocusArmor)
 
 func isBodypartCovered(bodypartSlot):
-	var coveredParts = {}
-	
 	var equippedItems = inventory.getAllEquippedItems()
 	for inventorySlot in equippedItems:
 		var item = equippedItems[inventorySlot]
-		var itemCovers = item.coversBodyparts()
-		for itemCover in itemCovers:
-			coveredParts[itemCover] = true
+		if(item.coversBodypart(bodypartSlot)):
+			return true
+
+	return false
+
+func cumOnFloor():
+	if(hasBodypart(BodypartSlot.Penis)):
+		var penis:BodypartPenis = getBodypart(BodypartSlot.Penis)
+		var production: FluidProduction = penis.getFluidProduction()
+		if(production != null):
+			var returnValue = penis.getFluidProduction().drain()
+			production.fillPercent(buffsHolder.getCustom(BuffAttribute.CumGenerationAfterOrgasm))
+			return returnValue
+
+# Should apply a temporary cummed on status probably
+func cummedOnBy(_characterID, _sourceType = null, _howMessy: int = 1):
+	pass
+
+func afterSexEnded(sexInfo):
+	if(sexInfo.getTimesCame() > 0):
+		addLust(-getLust())
+		
+		if(isPlayer()):
+			addStamina(buffsHolder.getCustom(BuffAttribute.StaminaRecoverAfterSex))
+			addSkillExperience(Skill.SexSlave, 30)
+	if(!isPlayer()):
+		addLust(-getLust())
+		addPain(-getPain())
+		addStamina(getMaxStamina())
+	consciousness = 1.0
+	arousal = 0.0
+		
+	for effectID in statusEffects.keys():
+		var effect = statusEffects[effectID]
+		if(effect.isSexEngineOnly):
+			removeEffect(effectID)
+		
+	var items = getInventory().getAllEquippedItems()
+	for itemSlot in items:
+		var item = items[itemSlot]
+		item.resetLustState()
+		item.onSexEnd()
+		
+	if(personalityChangesAfterSex() && personality != null):
+		var resultText = sexInfo.affectPersonality(personality)
+		if(resultText != null && resultText != ""):
+			GM.main.addMessage(resultText)
+		
+	updateAppearance()
+
+func createVoice():
+	sexVoice = SexVoice.new()
+	sexVoice.setCharacter(self)
+
+func getVoice() -> SexVoice:
+	return sexVoice
+
+func getFirstItemThatCoversBodypart(bodypartSlot):
+	for inventorySlot in InventorySlot.getAll():
+		if(!getInventory().hasSlotEquipped(inventorySlot)):
+			continue
+		
+		var item = getInventory().getEquippedItem(inventorySlot)
+		if(item.coversBodypart(bodypartSlot)):
+			return item
 	
-	if(coveredParts.has(bodypartSlot) && coveredParts[bodypartSlot]):
+	return null
+	
+func getWornCondom():
+	if(getInventory().hasSlotEquipped(InventorySlot.Penis)):
+		var item = getInventory().getEquippedItem(InventorySlot.Penis)
+		if(item.id == "UsedCondom"):
+			return item
+	return null
+
+func getArousal() -> float:
+	return arousal
+
+func addArousal(adda:float):
+	arousal += adda
+	arousal = clamp(arousal, 0.0, 1.0)
+
+func getConsciousness() -> float:
+	return consciousness
+
+func addConsciousness(newc:float):
+	consciousness += newc
+	consciousness = clamp(consciousness, 0.0, 1.0)
+
+func isReadyToPenetrate() -> bool:
+	return getLustLevel() >= 0.5 || getLust() >= 50 || getArousal() >= 0.4
+
+func isWearingChastityCage() -> bool:
+	# Having a chastity cage also means that you have a penis
+	if(!hasBodypart(BodypartSlot.Penis)):
+		return false
+	
+	if(!getInventory().hasSlotEquipped(InventorySlot.Penis)):
+		return false
+	
+	var item = getInventory().getEquippedItem(InventorySlot.Penis)
+	if(item.hasTag(ItemTag.ChastityCage)):
 		return true
 	return false
+
+#example return values: some cum | a mixture of cum and girlcum | a mixture of cum, black goo and girlcum
+func getBodypartContentsStringList(bodypartID):
+	if(!hasBodypart(bodypartID)):
+		return "some cum"
+	var bodypart = getBodypart(bodypartID)
+	var orifice = bodypart.getOrifice()
+	if(orifice == null):
+		return "some cum"
+	
+	var messFluids = orifice.getFluidList()
+	if(messFluids == null || messFluids.size() == 0):
+		return "some cum"
+	
+	var processedFluidNames = []
+	for fluidID in messFluids:
+		processedFluidNames.append(BodilyFluids.FluidType.getName(fluidID))
+	
+	if(processedFluidNames.size() == 1):
+		return "some "+processedFluidNames[0]
+	
+	return "a mixture of "+Util.humanReadableList(processedFluidNames)
+
+func bodypartTransferFluidsTo(bodypartID, otherCharacterID, otherBodypartID, fraction = 0.5, minAmount = 0.0):
+	if(!hasBodypart(bodypartID)):
+		return false
+	var bodypart = getBodypart(bodypartID)
+	var orifice = bodypart.getOrifice()
+	if(orifice == null):
+		return false
+	
+	var otherCharacter = GlobalRegistry.getCharacter(otherCharacterID)
+	if(otherCharacter == null):
+		return false
+	if(!otherCharacter.hasBodypart(otherBodypartID)):
+		return false
+	var otherBodypart = otherCharacter.getBodypart(otherBodypartID)
+	var otherOrifice = otherBodypart.getOrifice()
+	if(otherOrifice == null):
+		return false
+	
+	return orifice.transferTo(otherOrifice, fraction, minAmount)
+
+func bodypartShareFluidsWith(bodypartID, otherCharacterID, otherBodypartID, fraction = 0.5):
+	if(!hasBodypart(bodypartID)):
+		return false
+	var bodypart = getBodypart(bodypartID)
+	var orifice = bodypart.getOrifice()
+	if(orifice == null):
+		return false
+	
+	var otherCharacter = GlobalRegistry.getCharacter(otherCharacterID)
+	if(otherCharacter == null):
+		return false
+	if(!otherCharacter.hasBodypart(otherBodypartID)):
+		return false
+	var otherBodypart = otherCharacter.getBodypart(otherBodypartID)
+	var otherOrifice = otherBodypart.getOrifice()
+	if(otherOrifice == null):
+		return false
+	
+	return orifice.shareFluids(otherOrifice, fraction)
+
+func processSexTurn():
+	for effectID in statusEffects.keys():
+		var effect = statusEffects[effectID]
+		effect.processSexTurn()
+		
+	buffsHolder.calculateBuffs()
+
+func addTimedBuffs(buffs: Array, seconds):
+	for newbuff in buffs:
+		var foundBuff = false
+		for oldbuff in timedBuffs:
+			if(newbuff.id == oldbuff.id):
+				oldbuff.combine(newbuff)
+				foundBuff = true
+				break
+		if(!foundBuff):
+			timedBuffs.append(newbuff)
+	
+	if(seconds > timedBuffsDurationSeconds):
+		timedBuffsDurationSeconds = seconds
+	updateNonBattleEffects()
+
+func addTimedBuffsTurns(buffs: Array, turns):
+	if(!GM.main.supportsBattleTurns()):
+		return
+	
+	for newbuff in buffs:
+		var foundBuff = false
+		for oldbuff in timedBuffsTurns:
+			if(newbuff.id == oldbuff.id):
+				oldbuff.combine(newbuff)
+				foundBuff = true
+				break
+		if(!foundBuff):
+			timedBuffsTurns.append(newbuff)
+	
+	if(turns > timedBuffsDurationTurns):
+		timedBuffsDurationTurns = turns
+	updateNonBattleEffects()
+
+func updateNonBattleEffects():
+	pass
+
+func saveBuffsData(buffs):
+	var data = []
+	
+	for buff in buffs:
+		var buffData = {
+			"id": buff.id,
+			"buffdata": buff.saveData(),
+		}
+		data.append(buffData)
+	return data
+
+func loadBuffsData(data):
+	var result = []
+	
+	for buffFullData in data:
+		var id = SAVE.loadVar(buffFullData, "id", "error")
+		var buffdata = SAVE.loadVar(buffFullData, "buffdata", {})
+		
+		var buff: BuffBase = GlobalRegistry.createBuff(id)
+		buff.loadData(buffdata)
+		result.append(buff)
+	return result
+
+func bodypartHasTrait(bodypartSlot, traitID):
+	if(!hasBodypart(bodypartSlot)):
+		return false
+	
+	var bodypart = getBodypart(bodypartSlot)
+	return bodypart.hasTrait(traitID)
+
+func hasAnyWomb():
+	if(menstrualCycle == null):
+		return false
+	return menstrualCycle.hasAnyWomb()
+
+func getDefaultArtwork(_variant = []):
+	return "res://Images/UI/GenericFace.png"
+
+func hasIllegalItems():
+	return getInventory().hasIllegalItems()
+
+func personalityChangesAfterSex():
+	return false
+
+func getCharacterType():
+	return CharacterType.Generic
+
+func getBodypartLewdSizeAdjective(bodypartSlot):
+	if(!hasBodypart(bodypartSlot)):
+		return "ERROR:NO BODYPART IN SLOT " + str(bodypartSlot)
+	return getBodypart(bodypartSlot).getLewdSizeAdjective()
+	
+func getBodypartLewdAdjective(bodypartSlot):
+	if(!hasBodypart(bodypartSlot)):
+		return "ERROR:NO BODYPART IN SLOT " + str(bodypartSlot)
+	return getBodypart(bodypartSlot).getLewdAdjective()
+
+func getBodypartLewdName(bodypartSlot):
+	if(!hasBodypart(bodypartSlot)):
+		return "ERROR:NO BODYPART IN SLOT " + str(bodypartSlot)
+	return getBodypart(bodypartSlot).getLewdName()
+
+func getBodypartLewdDescriptionAndName(bodypartSlot):
+	if(!hasBodypart(bodypartSlot)):
+		return "ERROR:NO BODYPART IN SLOT " + str(bodypartSlot)
+	return getBodypart(bodypartSlot).getLewdDescriptionAndName()
+
+func getBodypartLewdDescriptionAndNameWithA(bodypartSlot):
+	if(!hasBodypart(bodypartSlot)):
+		return "ERROR:NO BODYPART IN SLOT " + str(bodypartSlot)
+	return getBodypart(bodypartSlot).getLewdDescriptionAndNameWithA()

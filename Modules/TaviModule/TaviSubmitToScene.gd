@@ -91,7 +91,7 @@ func _run():
 		if(GM.pc.hasReachablePenis() || GM.pc.hasReachableVagina()):
 			addButton("I want more", "That amount of humiliation wasn’t enough", "i_want_more")
 		else:
-			addDisabledButton("I want more", "You need a pussy or cock for this")
+			addDisabledButton("I want more", "You need a pussy or reachable cock for this")
 
 	if(state == "i_want_more"):
 		if(!GM.pc.isFullyNaked()):

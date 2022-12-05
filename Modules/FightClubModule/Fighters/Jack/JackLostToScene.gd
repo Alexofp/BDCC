@@ -6,7 +6,7 @@ func _init():
 func _run():
 	if(state == ""):
 		addCharacter("jack")
-		GM.main.playAnimation(StageScene.Duo, "kneel", {npc="jack", npcExposedBodyparts=[BodypartSlot.Penis]})
+		GM.main.playAnimation(StageScene.Duo, "kneel", {npc="jack", npcExposedBodyparts=[BodypartSlot.Penis], npcHard=true, hard=true})
 
 	if(state == ""):
 		saynn("You lose all the ability to fight but just before you hit the ground, Jack catches you by the collar and keeps you from collapsing.")
@@ -58,7 +58,9 @@ func _run():
 		saynn("Your whole body is tensed up hard, including your throat. But the stud pushes past that, shoving his horse cock deeper, gradually stretching you out. Your eyes already start to roll up slightly on their own from the lack of oxygen.")
 
 		# (if has cock)
-		if(GM.pc.hasPenis()):
+		if(GM.pc.isWearingChastityCage()):
+			saynn("Your own {pc.cock} is putting a lot of pressure against your chastity cage and leaking profusely, who thought that deepthroating can be so arousing.")
+		elif(GM.pc.hasPenis()):
 			saynn("Your own {pc.cock} is hard as a rock and leaking profusely, who thought that deepthroating can be so arousing.")
 
 		saynn("[say=jack]So tight.[/say]")
@@ -70,7 +72,9 @@ func _run():
 		saynn("Oh wow, you’re surprised you managed to endure such an onslaught on your throat for so long. But the main event is still yet to happen, as your stretched fuckhole clenches tighter around the shaft, Jack switches to slow powerful thrusts instead, pushing himself to his peak until finally letting out a horse whinny and cumming. As the cum travels through his shaft, his dick pulsates and throbs while you are forced to sit still and obey his flared cock stuffing the condom inside you with so much sticky stuff that your belly quickly starts to look inflated.")
 
 		# (if has cock)
-		if(GM.pc.hasPenis()):
+		if(GM.pc.isWearingChastityCage()):
+			saynn("Your {pc.cock} shoots out a weak load too! Being used as a cock sleeve felt so good that you managed to cum just from that. Through the cage even.")
+		elif(GM.pc.hasPenis()):
 			saynn("Your {pc.cock} shoots out its load too! Being used as a cock sleeve felt so good that you managed to cum just from that.")
 
 		# (else if has pussy)
@@ -90,7 +94,7 @@ func _run():
 
 
 	if(state == "breeding"):
-		GM.main.playAnimation(StageScene.Duo, "kneel", {npc="jack", npcExposedBodyparts=[BodypartSlot.Penis], exposedBodyparts=[BodypartSlot.Vagina, BodypartSlot.Anus]})
+		GM.main.playAnimation(StageScene.Duo, "kneel", {npc="jack", npcHard=true, npcExposedBodyparts=[BodypartSlot.Penis], exposedBodyparts=[BodypartSlot.Vagina, BodypartSlot.Anus]})
 		# (if has pussy)
 		if(GM.pc.hasVagina()):
 			saynn("Jack makes you turn around and puts his free hand over your crotch, possessively feeling your pussy. His touch isn’t soft or gentle but you find it arousing. His bulge is pressing against your {pc.thick} butt.")

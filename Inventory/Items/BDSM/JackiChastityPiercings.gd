@@ -36,9 +36,11 @@ func generateRestraintData():
 	restraintData = RestraintUnremovable.new()
 
 func getRiggedParts(_character):
-	# Change this somehow to support exposedBodyparts in 3d scenes
-	if(_character.isBodypartCovered(BodypartSlot.Vagina)):
-		return null
 	return {
 		"chastity_piercings": "res://Inventory/RiggedModels/ChastityPiercings/ChastityPiercings.tscn",
 	}
+
+func shouldBeVisibleOnDoll(_character, _doll):
+	if(!_character.isBodypartCovered(BodypartSlot.Vagina) || _doll.isForcedExposed(BodypartSlot.Vagina)):
+		return true
+	return false

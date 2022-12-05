@@ -32,6 +32,10 @@ func loadData(_data):
 	.loadData(_data)
 
 func getLewdSizeAdjective():
+	var theCharacter = getCharacter()
+	if(theCharacter != null && theCharacter.isWearingChastityCage()):
+		return RNG.pick(["caged up", "locked away"])
+	
 	if(lengthCM <= 5.0):
 		return RNG.pick(["tiny", "minuscule"])
 	if(lengthCM <= 9.0):
@@ -124,3 +128,17 @@ func getPenisScale():
 
 func getBallsScale():
 	return ballsScale
+
+func getRevealMessage():
+	return Util.capitalizeFirstLetter(getLewdDescriptionAndName()) + " got revealed."
+
+func generateDataFor(_dynamicCharacter):
+	lengthCM = RNG.randf_range(10.0, 25.0)
+	if(RNG.chance(5)):
+		lengthCM = RNG.randf_range(5.0, 10.0)
+	if(RNG.chance(5)):
+		lengthCM = RNG.randf_range(25.0, 30.0)
+	lengthCM = Util.roundF(lengthCM, 1)
+	
+	if(fluidProduction != null):
+		fluidProduction.fillPercent(min(1.0, RNG.randf_range(0.8, 1.2)))

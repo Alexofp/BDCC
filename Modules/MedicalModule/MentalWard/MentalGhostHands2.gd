@@ -178,7 +178,9 @@ func _run():
 		saynn("The last thrusts get very close, you let your tongue out and drool while the disembodied dick fucks you rough. Its knot starts to slip past your folds, stretching them very wide in the process. And sure enough, one last thrust was enough for the whole cock to slip inside and break into your babymaker. You hear the doctor’s moans and a second later you cum too, your body starts shaking and shivering while squirting all over the floor. All the while the strapon stuffs your womb with a huge load of warm cum lube, making you feel full without the danger of getting pregnant, hopefully.")
 
 		# (if has cock)
-		if(GM.pc.hasPenis()):
+		if(GM.pc.isWearingChastityCage()):
+			saynn("It was too much pleasure, your {pc.cock} puts a lot of pressure on it’s cage and then wastes its load on the wall in front of you.")
+		elif(GM.pc.hasPenis()):
 			saynn("It was too much pleasure, your {pc.cock} wastes its load on the wall in front of you.")
 
 		saynn("[say=eliza]Ah~.. Yeah, I should use this toy more often~[/say]")
@@ -213,7 +215,9 @@ func _run():
 		saynn("The last thrusts get very close, you let your tongue out and drool while the disembodied dick fucks you rough. Its knot starts to slip past your star, stretching it very wide in the process. And sure enough, one last thrust was enough for the whole cock to slip inside your butt. You hear the doctor’s moans and a second later you cum too, your body starts shaking and shivering, legs barely support you. All the while the strapon stuffs your fuckhole with a huge load of warm cum lube, making you feel full.")
 
 		# (if has cock)
-		if(GM.pc.hasPenis()):
+		if(GM.pc.isWearingChastityCage()):
+			saynn("It was too much pleasure, your {pc.cock} puts a lot of pressure on it’s cage and then wastes its load on the wall in front of you.")
+		elif(GM.pc.hasPenis()):
 			saynn("It was too much pleasure, your {pc.cock} wastes its load on the wall in front of you.")
 
 		saynn("[say=eliza]Ah~.. Yeah, I should use this toy more often~[/say]")

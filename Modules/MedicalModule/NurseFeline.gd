@@ -9,6 +9,7 @@ func _init():
 	npcBasePain = 70
 	npcBaseLust = 130
 	npcBaseStamina = 120
+	npcCharacterType = CharacterType.Nurse
 	npcLustInterests = {
 		InterestTopic.TallyMarks: Interest.Hates,
 		InterestTopic.Bodywritings: Interest.Hates,
@@ -98,3 +99,6 @@ func createBodyparts():
 	var breasts = GlobalRegistry.createBodypart("humanbreasts")
 	breasts.size = 8
 	giveBodypartUnlessSame(breasts)
+
+func createEquipment():
+	getInventory().equipItem(GlobalRegistry.createItemNoID("NurseClothes"))

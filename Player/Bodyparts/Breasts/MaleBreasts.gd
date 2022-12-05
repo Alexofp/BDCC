@@ -19,3 +19,6 @@ func safeWhenExposed():
 		return true
 	
 	return false
+
+func generateDataFor(_dynamicCharacter):
+	pass

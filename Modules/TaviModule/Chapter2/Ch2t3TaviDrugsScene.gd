@@ -399,10 +399,10 @@ func _run():
 		removeCharacter("tavi")
 		if(getFlag("TaviModule.ch2DrugsPickedFuta")):
 			addCharacter("taviDemonFuta", ["naked"])
-			GM.main.playAnimation(StageScene.Duo, "kneel", {npc="taviDemonFuta", exposedBodyparts=[BodypartSlot.Penis, BodypartSlot.Vagina, BodypartSlot.Anus, BodypartSlot.Body, BodypartSlot.Breasts]})
+			GM.main.playAnimation(StageScene.Duo, "kneel", {npc="taviDemonFuta", npcHard=true, exposedBodyparts=[BodypartSlot.Penis, BodypartSlot.Vagina, BodypartSlot.Anus, BodypartSlot.Body, BodypartSlot.Breasts]})
 		else:
 			addCharacter("taviDemon", ["naked"])
-			GM.main.playAnimation(StageScene.Duo, "kneel", {npc="taviDemon", exposedBodyparts=[BodypartSlot.Penis, BodypartSlot.Vagina, BodypartSlot.Anus, BodypartSlot.Body, BodypartSlot.Breasts]})
+			GM.main.playAnimation(StageScene.Duo, "kneel", {npc="taviDemon", hard=true, exposedBodyparts=[BodypartSlot.Penis, BodypartSlot.Vagina, BodypartSlot.Anus, BodypartSlot.Body, BodypartSlot.Breasts]})
 		
 		saynn("A few moments later Tavi steps out of the green fire. New Tavi..")
 
@@ -447,8 +447,11 @@ func _run():
 		addButton("Continue", "See what happens next", "continue7")
 
 	if(state == "continue7"):
-		saynn("Tavi pulls her hoof away from your chest and takes a step back, her massive hard horsecock sways a lot from each movement.")
-
+		if(getFlag("TaviModule.ch2DrugsPickedFuta")):
+			saynn("Tavi pulls her hoof away from your chest and takes a step back, her massive hard horsecock sways a lot from each movement.")
+		else:
+			saynn("Tavi pulls her hoof away from your chest and takes a step back.")
+		
 		saynn("[say=tavi]Now. On your knees, servant.[/say]")
 
 		saynn("You swipe off the ash that her hoof left on your exposed chest and obey her order. Your wounds still remind you about themselves so you can’t help but to grunt from pain.")
@@ -480,7 +483,7 @@ func _run():
 		if(getFlag("TaviModule.ch2DrugsPickedFuta")):
 			addButton("Get fucked", "Time to serve as Tavi’s cockslave", "get_fucked")
 		else:
-			addButtonWithChecks("Fucking", "Serve as Tavi’s playtoy", "fucking", [], [ButtonChecks.HasPenis])
+			addButtonWithChecks("Fucking", "Serve as Tavi’s playtoy", "fucking", [], [ButtonChecks.HasReachablePenis])
 			addButton("Lick+Tailfuck", "That tail Tavi has is quite pointy..", "lick_tailfuck")
 
 	if(state == "get_fucked"):
@@ -505,7 +508,15 @@ func _run():
 		saynn("You look up at Tavi and audibly swallow her precum. It’s thick and salty.. But also so nice. You feel it numbing your pain away, instead replacing it with.. a desire. Your mind is racing wild.")
 
 		# (if has cock)
-		if(GM.pc.hasPenis()):
+		if(GM.pc.isWearingChastityCage()):
+			saynn("Your {pc.cock} is throbbing and leaking pre more. Tavi sees your cage but it seems she doesn’t like its look so she grabs onto it and breaks the lock with ease. She then motions with her hand again and one of the metal rods gets ripped out of the metal floor before twisting into a little arched spiral. It starts pressing on your cock’s head, battling your erection before another rod bends around your balls and welds together with the first, creating a little neat chastity cage.")
+			
+			saynn("[say=tavi]What? Thought I would release it? No~. You’re getting a proper cage. You don’t need that useless dick with me, cutie~.[/say]")
+			
+			saynn("What? Your hands reach out for your crotch but quickly realize that the cage is there. And that it doesn’t have a keyhole or any other ways to take it off. Tavi chuckles with her demonic voice.")
+			
+			saynn("[say=tavi]Miss it already? Such a shame that it’s permanent~.[/say]")
+		elif(GM.pc.hasPenis()):
 			saynn("Your {pc.cock} is throbbing and leaking pre more. Tavi finally decides to take action against that. She motions with her hand again and one of the metal rods gets ripped out of the metal floor before twisting into a little arched spiral. It starts pressing on your cock’s head, battling your erection before another rod bends around your balls and welds together with the first, creating a little neat chastity cage.")
 
 			saynn("[say=tavi]You don’t need that useless dick with me either way, cutie~.[/say]")
@@ -868,7 +879,16 @@ func _run():
 		saynn("All the while Tavi’s tail shifts down to your chest and tickles your {pc.breasts} before poking each nipple, teasing you until you squirm. Such a bratty tail.")
 
 		# (if has cock)
-		if(GM.pc.hasPenis()):
+		if(GM.pc.isWearingChastityCage()):
+			saynn("Your {pc.cock} is throbbing and leaking pre more. Tavi sees your cage but it seems she doesn’t like its look so she grabs onto it and breaks the lock with ease. She then motions with her hand again and one of the metal rods gets ripped out of the metal floor before twisting into a little arched spiral. It starts pressing on your cock’s head, battling your erection before another rod bends around your balls and welds together with the first, creating a little neat chastity cage.")
+			
+			saynn("[say=tavi]What? Thought I would release it? No~. You’re getting a proper cage. You don’t need that useless dick with me, cutie~.[/say]")
+			
+			saynn("What? Your hands reach out for your crotch but quickly realize that the cage is there. And that it doesn’t have a keyhole or any other ways to take it off. Tavi chuckles with her demonic voice.")
+			
+			saynn("[say=tavi]Miss it already? Can’t remove it without me, it’s permanent~.[/say]")
+		
+		elif(GM.pc.hasPenis()):
 			saynn("Your {pc.cock} is throbbing and leaking pre more. Tavi finally decides to take action against that. She motions with her hand again and one of the metal rods gets ripped out of the metal floor before twisting into a little arched spiral. It starts pressing on your cock’s head, battling your erection before another rod bends around your balls and welds together with the first, creating a little neat chastity cage.")
 
 			saynn("[say=tavi]You don’t need it right now, cutie~.[/say]")

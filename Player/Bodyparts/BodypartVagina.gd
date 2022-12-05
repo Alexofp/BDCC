@@ -27,3 +27,9 @@ func safeWhenExposed():
 
 func hasWomb():
 	return true
+
+func getRevealMessage():
+	if(orifice == null):
+		return .getRevealMessage()
+	
+	return Util.capitalizeFirstLetter(orifice.getLoosenessString()) + " pussy got revealed."

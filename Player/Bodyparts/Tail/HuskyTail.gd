@@ -15,3 +15,9 @@ func getLewdAdjective():
 
 func getDoll3DScene():
 	return "res://Player/Player3D/Parts/Tail/HuskyTail/HuskyTail.tscn"
+
+func getTraits():
+	# Can huskies unroll their tail? dunno
+	return {
+		#PartTrait.TailFlexible: true,
+	}

@@ -20,6 +20,11 @@ static func getWritingInfo(writingID):
 		return null
 	return BodyWritingsDB.database[writingID]
 
+static func getWritingText(writingID):
+	if(!BodyWritingsDB.database.has(writingID)):
+		return "error:BadWritingID:"+str(writingID)
+	return BodyWritingsDB.database[writingID]["text"]
+
 static func getRandomWritingID():
 	var allIds = BodyWritingsDB.database.keys()
 	allIds.shuffle()

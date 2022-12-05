@@ -186,7 +186,8 @@ func _react(_action: String, _args):
 			
 		checkDanger()
 		spottedMessages()
-
+		GM.pc.updateNonBattleEffects()
+		
 	setState(_action)
 
 func spottedMessages():

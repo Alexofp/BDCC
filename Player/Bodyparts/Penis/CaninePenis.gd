@@ -12,3 +12,8 @@ func getLewdAdjective():
 
 func getDoll3DScene():
 	return "res://Player/Player3D/Parts/Penis/CaninePenis/CaninePenis.tscn"
+
+func getTraits():
+	return {
+		PartTrait.PenisKnot: true,
+	}

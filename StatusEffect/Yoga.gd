@@ -22,7 +22,7 @@ func getEffectName():
 	return "Yoga"
 
 func getEffectDesc():
-	return "Doing yoga exercices made you more agile for "+Util.getTimeStringHumanReadable(turns)
+	return "Doing yoga exercises made you more agile for "+Util.getTimeStringHumanReadable(turns)
 
 func getEffectImage():
 	return "res://Images/StatusEffects/lotus.png"

@@ -11,8 +11,11 @@ onready var viewport = $ViewportWrapper/Viewport
 #onready var viewport = $ViewportContainer/Viewport
 onready var staminaBar = $StaminaBar
 onready var painBar = $PainBar
-onready var lustBar = $LustBar
+onready var lustBar = $HBoxContainer/LustBar
 onready var levelBar = $LevelBar
+
+onready var consciousnessBar = $ConsciousnessBar
+onready var arousalBar = $HBoxContainer/ArousalBar
 
 var previousPosition: Vector2 = Vector2(0, 0)
 var startMousePosition: Vector2 = Vector2(0, 0)
@@ -49,6 +52,27 @@ func updateUI():
 	
 	levelBar.setProgressBarValue(GM.pc.getSkillsHolder().getLevelProgress())
 	levelBar.setText(str(GM.pc.getSkillsHolder().getLevel()))
+	
+	var arousal = GM.pc.getArousal()
+	if(arousal > 0.0):
+		arousalBar.visible = true
+		arousalBar.setProgressBarValue(arousal)
+		arousalBar.setText( str(Util.roundF(arousal*100.0))+"%" )
+		lustBar.setText( str(Util.roundF(GM.pc.getLustLevel()*100.0))+"%" )
+	else:
+		arousalBar.visible = false
+		arousalBar.setProgressBarValue(0.0)
+
+	var consciousness = GM.pc.getConsciousness()
+	if(consciousness < 1.0):
+		levelBar.visible = false
+		consciousnessBar.visible = true
+		consciousnessBar.setProgressBarValue(consciousness)
+		consciousnessBar.setText( str(Util.roundF(consciousness*100.0))+"%" )
+	else:
+		levelBar.visible = true
+		consciousnessBar.visible = false
+		consciousnessBar.setProgressBarValue(1.0)
 
 func _gui_input(event: InputEvent):
 	if event is InputEventMouseButton && event.button_index == BUTTON_MIDDLE:

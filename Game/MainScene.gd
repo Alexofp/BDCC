@@ -2,6 +2,8 @@ extends Node
 class_name MainScene
 
 onready var gameUI = $GameUI
+onready var charactersNode = $Characters
+onready var dynamicCharactersNode = $DynamicCharacters
 var sceneStack: Array = []
 var messages: Array = []
 var logMessages: Array = []
@@ -16,11 +18,16 @@ var originalPC
 var roomMemories = {}
 var rollbacker:Rollbacker
 
+var staticCharacters = {}
+var charactersToUpdate = {}
+var dynamicCharacters = {}
+var dynamicCharactersPools = {}
+
 signal time_passed(_secondsPassed)
+signal saveLoadingFinished
 
 func _init():
 	rollbacker = Rollbacker.new()
-	GlobalRegistry.recreateCharacters()
 	flagsCache = Flag.getFlags()
 
 func overridePC():
@@ -66,8 +73,103 @@ func connectSignalsToPC(who):
 func _exit_tree():
 	GM.main = null
 	
+func createStaticCharacters():
+	Util.delete_children(charactersNode)
+	staticCharacters.clear()
+	
+	var characterClasses = GlobalRegistry.getCharacterClasses()
+	for charID in characterClasses:
+		var character = characterClasses[charID]
+		var characterObject = character.new()
+		staticCharacters[characterObject.id] = characterObject
+		charactersNode.add_child(characterObject)
+	
+func getCharacter(charID):
+	if(staticCharacters.has(charID)):
+		return staticCharacters[charID]
+	if(dynamicCharacters.has(charID)):
+		return dynamicCharacters[charID]
+	return null
+
+func getCharacters():
+	return staticCharacters
+
+func addDynamicCharacter(character):
+	if(!(character is DynamicCharacter)):
+		assert(false, "addDynamicCharacter() Received a non-dynamic character")
+		
+	var newCharID = character.getID()
+	if(newCharID == null || newCharID == "" || newCharID == "errorerror"):
+		character.id = generateCharacterID()
+	
+	if(dynamicCharacters.has(newCharID)):
+		removeDynamicCharacter(newCharID)
+	
+	dynamicCharacters[newCharID] = character
+	dynamicCharactersNode.add_child(character)
+		
+func removeDynamicCharacter(characterID):
+	if(characterID is DynamicCharacter):
+		characterID = characterID.getID()
+	
+	if(dynamicCharacters.has(characterID)):
+		removeDynamicCharacterFromAllPools(characterID)
+		
+		dynamicCharacters[characterID].queue_free()
+		dynamicCharacters.erase(characterID)
+
+func addDynamicCharacterToPool(characterID, poolID:String):
+	if(characterID is DynamicCharacter):
+		characterID = characterID.getID()
+	
+	if(!dynamicCharacters.has(characterID)):
+		return false
+	
+	if(!dynamicCharactersPools.has(poolID)):
+		dynamicCharactersPools[poolID] = {}
+	
+	dynamicCharactersPools[poolID][characterID] = true
+	return true
+
+func removeDynamicCharacterFromPool(characterID, poolID:String):
+	if(characterID is DynamicCharacter):
+		characterID = characterID.getID()
+	
+	if(!dynamicCharactersPools.has(poolID)):
+		return false
+	if(!dynamicCharactersPools[poolID].has(characterID)):
+		return false
+
+	dynamicCharactersPools[poolID].erase(characterID)
+	return true
+
+func removeDynamicCharacterFromAllPools(characterID):
+	if(characterID is DynamicCharacter):
+		characterID = characterID.getID()
+	
+	for poolID in dynamicCharactersPools:
+		if(dynamicCharactersPools[poolID].has(characterID)):
+			dynamicCharactersPools[poolID].erase(characterID)
+
+func getDynamicCharacterIDsFromPool(poolID:String):
+	if(!dynamicCharactersPools.has(poolID)):
+		return []
+	
+	return dynamicCharactersPools[poolID].keys()
+
+func getDynamicCharactersPoolSize(poolID:String):
+	if(!dynamicCharactersPools.has(poolID)):
+		return 0
+	
+	return dynamicCharactersPools[poolID].size()
+
+func getDynamicCharactersPools():
+	return dynamicCharactersPools.keys()
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	createStaticCharacters()
+	
 	var pc = playerScene.instance()
 	originalPC = pc
 	GM.pc = pc
@@ -173,6 +275,15 @@ func reRun():
 	runCurrentScene()
 
 func loadingSavefileFinished():
+	for charID in getCharacters():
+		var character = getCharacter(charID)
+		character.checkOldWayOfUpdating(currentDay, timeOfDay)
+		if(character.shouldBeUpdated()):
+			startUpdatingCharacter(charID)
+	
+	emit_signal("saveLoadingFinished")
+	#if(GM.ui != null):
+	#	GM.ui.getStage3d().resetToNothing()
 	reRun()
 	
 	applyAllWorldEdits()
@@ -202,6 +313,13 @@ func supportsBattleTurns():
 	
 	return false
 
+func supportsSexEngine():
+	for scene in sceneStack:
+		if(scene.supportsSexEngine()):
+			return true
+	
+	return false
+
 func saveData():
 	var data = {}
 	data["messages"] = messages
@@ -214,6 +332,7 @@ func saveData():
 	data["logMessages"] = logMessages
 	data["roomMemories"] = roomMemories
 	data["world"] = GM.world.saveData()
+	data["dynamicCharactersPools"] = dynamicCharactersPools
 	
 	data["scenes"] = []
 	for scene in sceneStack:
@@ -238,6 +357,7 @@ func loadData(data):
 	GM.CS.loadData(SAVE.loadVar(data, "ChildSystem", {}))
 	logMessages = SAVE.loadVar(data, "logMessages", [])
 	roomMemories = SAVE.loadVar(data, "roomMemories", {})
+	dynamicCharactersPools = SAVE.loadVar(data, "dynamicCharactersPools", {})
 	
 	var scenes = SAVE.loadVar(data, "scenes", [])
 	
@@ -245,8 +365,7 @@ func loadData(data):
 		scene.queue_free()
 	sceneStack = []
 	
-	GM.ui.setCharacterData(null)
-	GM.ui.setCharactersPanelVisible(false)
+	GM.ui.clearCharactersPanel()
 	for sceneData in scenes:
 		var id = SAVE.loadVar(sceneData, "id", "error")
 		
@@ -261,6 +380,41 @@ func loadData(data):
 	GM.ui.recreateWorld()
 	GM.world.loadData(SAVE.loadVar(data, "world", {}))
 
+func saveCharactersData():
+	var data = {}
+	for characterID in staticCharacters:
+		data[characterID] = staticCharacters[characterID].saveData()
+	return data
+	
+func loadCharactersData(data):
+	for characterID in staticCharacters:
+		var character = staticCharacters[characterID]
+		character.loadData(SAVE.loadVar(data, characterID, {}))
+	
+func saveDynamicCharactersData():
+	var data = {}
+	for characterID in dynamicCharacters:
+		var charData = {}
+		charData["type"] = "dynamic"
+		charData["data"] = dynamicCharacters[characterID].saveData()
+		data[characterID] = charData
+	return data
+
+func loadDynamicCharactersData(data):
+	Util.delete_children(dynamicCharactersNode)
+	dynamicCharacters.clear()
+	
+	for characterID in data:
+		var charData = SAVE.loadVar(data, characterID, {})
+		var charType = SAVE.loadVar(charData, "type", "error")
+		if(charType == "dynamic"):
+			var newDynamicChar = DynamicCharacter.new()
+			newDynamicChar.id = characterID
+			addDynamicCharacter(newDynamicChar)
+			newDynamicChar.loadData(SAVE.loadVar(charData, "data", {}))
+		else:
+			Log.printerr("loadDynamicCharactersData() Trying to load a non-dynamic character with id "+str(characterID))
+	
 func addMessage(text: String):
 	messages.append(text)
 
@@ -276,12 +430,22 @@ func getTimeCap():
 func isVeryLate():
 	return timeOfDay >= getTimeCap()
 
+func stopProcessingUnusedCharacters():
+	for charID in charactersToUpdate.keys():
+		var character = getCharacter(charID)
+		if(character == null || !character.shouldBeUpdated()):
+			print("STOPPED PROCESSING: "+str(charID))
+			charactersToUpdate.erase(charID)
+			if(character != null):
+				character.onStoppedProcessing()
+
 func processTime(_seconds):
 	_seconds = int(round(_seconds))
 	
 	timeOfDay += _seconds
 	
 	doTimeProcess(_seconds)
+	stopProcessingUnusedCharacters()
 
 func doTimeProcess(_seconds):
 	# This splits long sleeping times into 1 hour chunks
@@ -289,10 +453,11 @@ func doTimeProcess(_seconds):
 	while(copySeconds > 0):
 		var clippedSeconds = min(60*60, copySeconds)
 		GM.pc.processTime(clippedSeconds)
-		var characters = GlobalRegistry.getCharacters()
-		for characterID in characters:
-			var character = characters[characterID]
-			character.processTime(clippedSeconds)
+		
+		for characterID in charactersToUpdate:
+			var character = getCharacter(characterID)
+			if(character != null):
+				character.processTime(clippedSeconds)
 		
 		copySeconds -= clippedSeconds
 	
@@ -309,9 +474,9 @@ func doTimeProcess(_seconds):
 
 func hoursPassed(howMuch):
 	GM.pc.hoursPassed(howMuch)
-	var characters = GlobalRegistry.getCharacters()
-	for characterID in characters:
-		var character = characters[characterID]
+	
+	for characterID in charactersToUpdate:
+		var character = getCharacter(characterID)
 		character.hoursPassed(howMuch)
 
 func processTimeUntil(newseconds):
@@ -571,7 +736,7 @@ func getDebugActions():
 				{
 					"id": "itemID",
 					"name": "Item id",
-					"type": "list",
+					"type": "smartlist",
 					"item": true,
 				},
 				{
@@ -743,6 +908,9 @@ func doDebugAction(id, args = {}):
 		GM.pc.removeAllRestraints()
 	
 	if(id == "giveItem"):
+		if(!args.has("itemID") || args["itemID"] == null):
+			return
+		
 		var item:ItemBase = GlobalRegistry.createItem(args["itemID"])
 		if(item.canCombine()):
 			item.setAmount(args["amount"]) 
@@ -796,3 +964,23 @@ func consoleClearModuleFlag(moduleID, flagID):
 
 func _on_GameUI_on_rollback_button():
 	rollbacker.rollback()
+
+func characterIsVisible(charID):
+	if(charID == "pc"):
+		return true
+	
+	for scene in sceneStack:
+		if(scene.hasCharacter(charID)):
+			return true
+	
+	return false
+
+func startUpdatingCharacter(charID):
+	if(!charactersToUpdate.has(charID)):
+		charactersToUpdate[charID] = true
+		print("BEGAN PROCESSING "+str(charID))
+		getCharacter(charID).processUntilTime(currentDay, timeOfDay)
+
+func generateCharacterID(beginPart = "dynamicnpc"):
+	var numID = GlobalRegistry.generateNPCUniqueID()
+	return beginPart+str(numID)

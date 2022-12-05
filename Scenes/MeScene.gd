@@ -96,6 +96,8 @@ func _run():
 		addButton("Masturbate", "Do the thing", "domasturbate")
 		addButton("Gender", "Pick your gender", "pickgender")
 		addButton("Pronouns", "Pick your pronouns", "pickpronouns")
+		addButton("Encounters", "Info about your previous encounters", "encountersMenu")
+		addButton("Look for trouble", "Try to find an encounter", "lookfortrouble")
 		if(!getFlag("Game_PickedStartingPerks", false)):
 			addButton("Pick Perks!", "Pick your starting perks. You can only do this once", "pickstartingperks")
 		#addButton("[debug] Struggle", "Test the struggle minigame", "teststruggle")
@@ -142,12 +144,30 @@ func _run():
 		addButton("3 hours", "Wait this much", "dowait", [3*60*60])
 		addButton("back", "Don't wait", "")
 
+	if(state == "failedtofindtrouble"):
+		saynn("You try to look around for trouble but there is nothing here.")
+		
+		saynn("Try some other area.")
+		
+		addButton("Continue", "Oh well", "")
+
 func onMinigameTest(_score):
 	GM.main.pickOption("", [])
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
 		endScene()
+		return
+	
+	if(_action == "lookfortrouble"):
+		if(GM.ES.triggerReact(Trigger.PCLookingForTrouble)):
+			endScene()
+		else:
+			setState("failedtofindtrouble")
+		return
+	
+	if(_action == "encountersMenu"):
+		runScene("EncountersMenuScene")
 		return
 	
 	if(_action == "setgender"):

@@ -49,3 +49,6 @@ func getTags():
 
 func getBuyAmount():
 	return 3
+
+func getItemCategory():
+	return ItemCategory.Medical

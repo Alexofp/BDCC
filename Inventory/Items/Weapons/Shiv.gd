@@ -41,3 +41,6 @@ func getAttacks():
 
 func getTags():
 	return [ItemTag.Illegal]
+
+func getItemCategory():
+	return ItemCategory.Weapons

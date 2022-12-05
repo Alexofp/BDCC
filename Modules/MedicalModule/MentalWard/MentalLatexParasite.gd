@@ -95,7 +95,9 @@ func _run():
 			saynn("Another alien tentacle reaches your pussy, its pointy tip catches your sensitive clit and starts rubbing it. You can’t help but to bite your lip and let out a little moan, it feels as if a silicon dildo suddenly gained consciousness. You feel yourself becoming more wet, your slit attracts the alien even more, its tentacles trace across your petals and then spread them open. Your {pc.pussyStretch} pussy is exposed and you can’t do anything about it..")
 
 		# (if has cock)
-		if(GM.pc.hasPenis()):
+		if(GM.pc.isWearingChastityCage()):
+			saynn("A single tentacle slips under your chastity and has wrapped around your half-erect member. It begins to slide along the length of your {pc.cock}, it’s stroking you hard. You let out a soft moan as a drop of your precum already shines on the tip of your cock. Another tentacle quickly catches that and seemingly just absorbs it. Your cock quickly becomes rock hard, putting a lot of pressure onto your poor cage.")
+		elif(GM.pc.hasPenis()):
 			saynn("A single tentacle has wrapped around your half-erect member. It begins to slide along the length of your {pc.cock}, it’s stroking you hard. You let out a soft moan as a drop of your precum already shines on the tip of your cock. Another tentacle quickly catches that and seemingly just absorbs it. Your cock quickly becomes rock hard")
 
 		saynn("You catch a glimpse of Eliza’s face, she is blushing. And you feel like you can’t resist at all anymore..")
@@ -144,8 +146,10 @@ func _run():
 			saynn("The tentacle in your pussy has found your sweet spot, the spot that made your arch your back and moan from pleasure. It began hammering at it, shifting the fat part in and out your cunt, fucking you like that. You feel like you won’t endure it for long, waves of ecstatic pleasure overwhelm your body. You can’t stop cumming, your poor stuffed pussy keeps squirting juices and that only makes the onslaught stronger, the parasite manages to slip another tentacle inside you and past your cervix! It’s fucking your womb and it feels unbelievable.")
 
 		# (if dick)
-		if(GM.pc.hasPenis()):
-			saynn("One of the tentacles transform its tip into a fleshlight and engulfs your {pc.cock} with it! It feels amazing, the texture on the inside is bumpy and it’s so tight, the fleshlight then gets moved back and forth along your cock, letting you fuck it. It doesn’t take much time before you cum, muffled moans escape from your gagged mouth as your throbbing cock stuffs that fleshlight full of {pc.cum}. It doesn’t stop there, the tentacle in your butt finds your prostate and focuses on it, roughly pounding it. That causes a huge spike of pleasure, your cock shoots {pc.cum} again and again, stuffing that fleshlight to the brim until your balls are completely drained.")
+		if(GM.pc.isWearingChastityCage()):
+			saynn("One of the tentacles transforms its tip into a fleshlight and tries to engulf your {pc.cock} with it! You don’t get any direct stimulation but the feeling of your cage being pulled and pushed back and forth feels amazing. It doesn’t take much time before you cum, muffled moans escape from your gagged mouth as your throbbing cock stuffs that fleshlight full of {pc.cum}. It doesn’t stop there, the tentacle in your butt finds your prostate and focuses on it, roughly pounding it. That causes a huge spike of pleasure, your cock shoots {pc.cum} again and again, stuffing that fleshlight to the brim until your balls are completely drained.")
+		elif(GM.pc.hasPenis()):
+			saynn("One of the tentacles transforms its tip into a fleshlight and engulfs your {pc.cock} with it! It feels amazing, the texture on the inside is bumpy and it’s so tight, the fleshlight then gets moved back and forth along your cock, letting you fuck it. It doesn’t take much time before you cum, muffled moans escape from your gagged mouth as your throbbing cock stuffs that fleshlight full of {pc.cum}. It doesn’t stop there, the tentacle in your butt finds your prostate and focuses on it, roughly pounding it. That causes a huge spike of pleasure, your cock shoots {pc.cum} again and again, stuffing that fleshlight to the brim until your balls are completely drained.")
 
 		saynn("It feels so good, you can’t stop cumming, your mind slowly slips into obscurity, drowning in a sea of pleasure. As the tentacles milk you more they only get stronger, their onslaught on your holes increases, the plug in your mouth increases in size, it starts stretching and fucking your throat. You’re completely helpless, being held above the floor with your legs spread open. It feels like something will happen any second, something big.")
 

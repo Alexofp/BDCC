@@ -252,16 +252,7 @@ func printChildren(pcKids = true):
 		resultString += Util.getSpeciesName(child.species)+" - "
 		resultString += ageStr+" - "
 		
-		var fatherObject = GlobalRegistry.getCharacter(child.fatherID)
-		var motherObject = GlobalRegistry.getCharacter(child.motherID)
-		var fatherName = "unknown"
-		var motherName = "unknown"
-		if(fatherObject != null):
-			fatherName = fatherObject.getName()
-		if(motherObject != null):
-			motherName = motherObject.getName()
-		
-		resultString += "Mother: "+motherName+", Father: "+fatherName
+		resultString += "Mother: "+child.getMotherName()+", Father: "+child.getFatherName()
 		
 		sayn(resultString)
 

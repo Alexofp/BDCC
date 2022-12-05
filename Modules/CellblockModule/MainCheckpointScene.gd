@@ -100,7 +100,7 @@ func _run():
 		
 
 	if(state == "offer_handjob"):
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc="cp_guard", npcExposedBodyparts=[BodypartSlot.Penis]})
+		GM.main.playAnimation(StageScene.Duo, "stand", {npc="cp_guard", npcHard=true, npcExposedBodyparts=[BodypartSlot.Penis]})
 		
 		saynn("Instead of doing as told you walk up closer to the guard and boldly put a hand on his crotch, giving it a slight squeeze. The guy hums and smirks.")
 
@@ -210,11 +210,10 @@ func _run():
 		if(GM.pc.getInmateType() == InmateType.SexDeviant):
 			saynn("[say=cp_guard]Defeated by some sextoy, fuck me[/say]")
 		
-		addButton("Walk away", "You got your pass, you can just go", "allowFullAndendthescene")
-		addButtonWithChecks("Catch anal", "Use the guy’s dick for your pleasure", "catch_anal", [], [ButtonChecks.NotHandsBlocked])
-
+		addWonButton()
+		
 	if(state == "catch_anal"):
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc="cp_guard", npcExposedBodyparts=[BodypartSlot.Penis], exposedBodyparts=[BodypartSlot.Anus]})
+		GM.main.playAnimation(StageScene.Duo, "stand", {npc="cp_guard", npcHard=true, npcExposedBodyparts=[BodypartSlot.Penis], exposedBodyparts=[BodypartSlot.Anus]})
 		
 		saynn("You straddle the guy and unzip his pants, he seems more intrigued than scared, watching you. You of course made sure he can’t reach his weapons or the shock remote, rendering him helpless.")
 
@@ -233,7 +232,9 @@ func _run():
 		saynn("You catch some of his precum with a few digits, then move them to your butt and rub it into your backdoor. Then you grab his cock and guide it towards your rear while slowly lowering yourself onto him. His cock slowly starts to prod and stretch your ring open. A few more attempts and you manage to do it, the tip of his cock is inside you.")
 
 		# (if has cock)
-		if(GM.pc.hasPenis()):
+		if(GM.pc.isWearingChastityCage()):
+			saynn("Your own {pc.cock} tries to get hard too without you even touching it but your chastity cage prevents a full blown erection. A lonely drop of pre can be seen shining on on the tip of the cage.")
+		elif(GM.pc.hasPenis()):
 			saynn("Your own {pc.cock} gets hard too without you even touching it, a lonely drop of pre can be seen shining on its end.")
 
 		# (if has vagina)
@@ -255,7 +256,9 @@ func _run():
 		saynn("You don’t stop, you slowly start riding him, moving your {pc.thick} {pc.feminine} body up down his cock, each time trying to stretch yourself out more, his precum works as a lube and makes riding the guard easier. It feels very pleasurable, you open your mouth and start moaning, your hands land on your chest and start playing with your sensitive nips.")
 
 		# (if has cock)
-		if(GM.pc.hasPenis()):
+		if(GM.pc.isWearingChastityCage()):
+			saynn("Your own caged up {pc.cockDesc} cock bobs up and down, your little prostate is being massaged so much, you can’t stop leaking.")
+		elif(GM.pc.hasPenis()):
 			saynn("Your own {pc.cockDesc} cock bobs up and down, your little prostate is being massaged so much, you can’t stop leaking.")
 
 		# (if has vagina)
@@ -269,7 +272,9 @@ func _run():
 		saynn("[say=cp_guard]And you’re not getting off without me stuffing you[/say]")
 
 		# (if has cock)
-		if(GM.pc.hasPenis()):
+		if(GM.pc.isWearingChastityCage()):
+			saynn("Your {pc.cockSize} toy throbs and becomes rock-hard, putting a serious amount of pressure on your cage. The guard’s cock has been pounding on your prostate so much that you feel like you’re about to go over the edge at any moment.")
+		elif(GM.pc.hasPenis()):
 			saynn("Your {pc.cockSize} toy throbs and becomes rock-hard, the guard’s cock has been pounding on your prostate so much that you feel like you’re about to go over the edge at any moment.")
 
 		saynn("You’re close. And so is he. You feel his canine member becoming bigger inside your rectum, his knot inflates with blood and stretches you out even more but doesn’t quite fit. Your moans and pants don’t stop coming out, you press your hands into the guard’s chest and start bringing yourself down onto his cock with extra strength, your anal ring letting more and more of his knot in each time. With one last push you manage to finally squeeze it in, the full size of his fat orb slides inside you, locking you two together. That is what pushes you both over the edge, the guy grunts as his cock starts shooting hot sticky cum inside you, stuffing you. You moan and shiver, your legs shake, your hands hold tightly onto him.")
@@ -293,6 +298,15 @@ func _run():
 		saynn("You’re stuck together for about 30 minutes. In public. You do get many eyes from other inmates but for them it's almost a normal sight. Eventually the knot deflates enough to let you get up, your used butthole looks stretched and is leaking cum. Time to run before someone makes you clean the mess you made.")
 		
 		addButton("Walk away", "Yay", "allowFullAndendthescene")
+
+func addWonButton():
+	addButton("Walk away", "You got your pass, you can just go", "allowFullAndendthescene")
+	addButtonWithChecks("Catch anal", "Use the guy’s dick for your pleasure", "catch_anal", [], [ButtonChecks.NotHandsBlocked])
+	addButtonWithChecks("Sex!", "Time to fuck them!", "startsexasdom", [], [ButtonChecks.NotArmsRestrained, ButtonChecks.NotHandsBlocked, ButtonChecks.NotLegsRestrained, ButtonChecks.NotOralBlocked])
+	addButton("Submit to", "Let them have it their way with you", "startsexsubby")
+	addButton("Inventory", "Look at your inventory", "openinventory")
+	if(GM.pc.getInventory().hasRemovableRestraints()):
+		addButton("Struggle", "Struggle out of your restraints", "strugglemenu")
 
 func _react(_action: String, _args):
 	if(_action == "get_frisked"):
@@ -347,10 +361,30 @@ func _react(_action: String, _args):
 		GM.pc.addSkillExperience(Skill.SexSlave, 30, "cpguard_catchanal")
 		GM.pc.updateNonBattleEffects()
 	
+	if(_action == "startsexsubby"):
+		getCharacter("cp_guard").resetEquipment()
+		GlobalRegistry.getCharacter("cp_guard").addPain(-50)
+		runScene("GenericSexScene", ["cp_guard", "pc"], "subbysex")
+	
+	if(_action == "startsexasdom"):
+		runScene("GenericSexScene", ["pc", "cp_guard"], "domsex")
+	
+	if(_action == "openinventory"):
+		runScene("InventoryScene")
+		return
+	
+	if(_action == "strugglemenu"):
+		runScene("StrugglingScene")
+		return
+	
 	setState(_action)
 
 
 func _react_scene_end(_tag, _result):
+	if(_tag in ["subbysex", "domsex"]):
+		setModuleFlag("CellblockModule", "Cellblock_FreeToPassCheckpoint", true)
+		endScene()
+	
 	if(_tag == "cpguardfight"):
 		processTime(20 * 60)
 		var battlestate = _result[0]

@@ -13,9 +13,9 @@ onready var nextCharacterButton = $VBoxContainer2/Control/MarginContainer/VBoxCo
 func _ready():
 	clear()
 	
-	addCharacter("rahi", [])
-	addCharacter("tavi", [])
-	addCharacter("risha", [])
+	#addCharacter("rahi", [])
+	#addCharacter("tavi", [])
+	#addCharacter("risha", [])
 	pass
 	
 func clear():
@@ -29,17 +29,37 @@ func clear():
 func addCharacter(charID:String, variant:Array):
 	var data = {}
 	
+	var isGenericPortrait = true
 	var imageArtist = null
 	var imagePath = null
 	var imageData = Images.getCharacter(charID, variant)
 	if(imageData == null):
-		imagePath = "res://Images/UI/GenericFace.png"
+		var character = GlobalRegistry.getCharacter(charID)
+		if(character != null):
+			var defaultImageData = character.getDefaultArtwork(variant)
+			var defaultImagePath = defaultImageData
+			
+			if(defaultImagePath is Array):
+				defaultImagePath = defaultImagePath[0]
+				if(defaultImageData.size() > 1 && defaultImagePath != null):
+					imageArtist = defaultImageData[1]
+					
+			if(defaultImagePath == null):
+				imagePath = "res://Images/UI/GenericFace.png"
+			else:
+				if(defaultImagePath != "res://Images/UI/GenericFace.png"):
+					isGenericPortrait = false
+				imagePath = defaultImagePath
+		else:
+			imagePath = "res://Images/UI/GenericFace.png"
 	else:
 		imagePath = imageData[0]
 		imageArtist = imageData[1]
+		isGenericPortrait = false
 	
 	data["imagePath"] = imagePath
 	data["imageArtist"] = imageArtist
+	data["isGenericPortrait"] = isGenericPortrait
 	
 	characters[charID] = data
 	
@@ -161,3 +181,10 @@ func _on_NameLabel_mouse_entered():
 
 func _on_NameLabel_mouse_exited():
 	GlobalTooltip.hideTooltip()
+
+func hasNonGenericPortrait():
+	for charID in characters:
+		if(!characters[charID]["isGenericPortrait"]):
+			return true
+	
+	return false

@@ -52,7 +52,9 @@ func _run():
 			saynn("Suddenly you feel latex brushing against your sex. Someone’s digits are gently spreading open your folds, causing you to bite your lip. You can’t even see whoever does it to you which makes it so much more exciting.")
 
 			# (if has cock)
-			if(GM.pc.hasPenis()):
+			if(GM.pc.isWearingChastityCage()):
+				saynn("You feel someone’s digits gently stroke your chastity cage, causing your cock to twitch. Can’t they do something more..")
+			elif(GM.pc.hasPenis()):
 				saynn("You feel yourself getting harder, you would expect your {pc.cock} to start applying pressure onto the panties but no, there is zero bulging. You feel someone’s digits gently stroke you, causing your cock to twitch. Can’t they do something more..")
 
 			saynn("Then you feel some object inserted into your slit.. it feels like a.. pen? And then there is much more stuffing your hole soon after. Are they using you to store their writing utensils? At least you got paid a credit for that still.")
@@ -62,7 +64,9 @@ func _run():
 			saynn("Suddenly you feel latex brushing against your butt. Someone’s digits are prodding at your tailhole and then gently spreading it open, causing you to bite your lip. You can’t even see whoever does it to you which makes it so much more exciting.")
 
 			# (if has cock)
-			if(GM.pc.hasPenis()):
+			if(GM.pc.isWearingChastityCage()):
+				saynn("You feel someone’s digits gently stroke your chastity cage, causing your cock to twitch. Can’t they do something more..")
+			elif(GM.pc.hasPenis()):
 				saynn("You feel yourself getting harder, you would expect your {pc.cock} to start applying pressure onto the panties but no, there is zero bulging. You feel someone’s digits gently stroke you, causing your cock to twitch. Can’t they do something more..")
 
 			saynn("Then you feel some object inserted into your butt.. it feels like a.. pen? And then there is much more stuffing your hole soon after. Are they using you to store their writing utensils? At least you got paid a credit for that still.")
@@ -170,7 +174,10 @@ func _run():
 
 		saynn("A cock milker gets attached to your {pc.cock}! You can’t see it, your portal panties aren’t even bulging but the thing already starts stroking you with a steady pace, getting you nice and hard.")
 
-		saynn("It feels so good, the fleshy ribbed texture of the milker makes you feel like you’re fucking someone, quickly pushing you to your first orgasm.")
+		if(GM.pc.isWearingChastityCage()):
+			saynn("It feels so good, the fleshy ribbed texture of the milker vibrates, making you feel like you’re fucking someone and quickly pushing you to your first orgasm.")
+		else:
+			saynn("It feels so good, the fleshy ribbed texture of the milker makes you feel like you’re fucking someone, quickly pushing you to your first orgasm.")
 
 		addButton("Cum!", "You can’t endure it", "cum!")
 

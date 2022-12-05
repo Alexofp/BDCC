@@ -62,3 +62,12 @@ func getTags():
 	return [
 		ItemTag.SoldByMedicalVendomat,
 		]
+
+func useInSex(_receiver):
+	_receiver.addPain(-80)
+	return {
+		text = "{USER.You} {USER.youVerb('feel')} better.".replace("USER", _receiver.getID()),
+	}
+
+func getItemCategory():
+	return ItemCategory.Medical

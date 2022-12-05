@@ -10,6 +10,7 @@ func _init():
 		Stat.Sexiness: 1,
 	}
 	npcLevel = 2
+	npcCharacterType = CharacterType.Guard
 	npcLustInterests = {
 		InterestTopic.TallyMarks: Interest.Loves,
 		InterestTopic.Bodywritings: Interest.Loves,
@@ -124,10 +125,6 @@ func createBodyparts():
 	giveBodypartUnlessSame(penis)
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("huskytail"))
 
-func createEquipment():
-	#getInventory().equipItem(GlobalRegistry.createItemNoID("inmatecollar"))
-	pass
-
 func getThickness():
 	return 115
 
@@ -201,3 +198,6 @@ func reactRestraint(restraintType, restraintAmount, isGettingForced):
 			"I'm a guard, I'm not a bondage slut",
 		])
 	return null
+
+func createEquipment():
+	getInventory().equipItem(GlobalRegistry.createItemNoID("GuardArmor"))

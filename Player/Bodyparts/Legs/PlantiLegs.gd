@@ -9,3 +9,8 @@ func getCompatibleSpecies():
 
 func getDoll3DScene():
 	return "res://Player/Player3D/Parts/Legs/HumanLegs/HumanLegs.tscn"
+
+func getTraits():
+	return {
+		PartTrait.LegsPlanti: true,
+	}

@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://GlobalTheme.tres" type="Theme" id=1]
 [ext_resource path="res://Game/TooltipDisplay.tscn" type="PackedScene" id=2]
@@ -9,13 +9,11 @@
 [ext_resource path="res://UI/FontResources/Normal/BoldFont.tres" type="DynamicFont" id=7]
 [ext_resource path="res://Game/PlayerPanel.tscn" type="PackedScene" id=8]
 [ext_resource path="res://UI/MapAndTimePanel.tscn" type="PackedScene" id=9]
-[ext_resource path="res://Game/CharacterPanel.tscn" type="PackedScene" id=10]
-[ext_resource path="res://UI/CharactersPanel.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Game/SmartCharacterPanel.tscn" type="PackedScene" id=10]
 [ext_resource path="res://UI/MainMenu/InGameMenu.tscn" type="PackedScene" id=12]
 [ext_resource path="res://UI/SkillsUI/SkillsUI.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Game/SmartScrollContainer.gd" type="Script" id=14]
 [ext_resource path="res://UI/DebugUI/DebugPanel.tscn" type="PackedScene" id=15]
-[ext_resource path="res://UI/CharactersArtworkPanel/CharactersArtworkPanel.tscn" type="PackedScene" id=16]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.207843, 0.133333, 0.364706, 1 )
@@ -105,23 +103,9 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="CharacterPanel" parent="HBoxContainer/Panel2/MarginContainer/VBoxContainer" instance=ExtResource( 10 )]
+[node name="SmartCharacterPanel" parent="HBoxContainer/Panel2/MarginContainer/VBoxContainer" instance=ExtResource( 10 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 236.0
-margin_bottom = 136.0
-
-[node name="CharactersPanel" parent="HBoxContainer/Panel2/MarginContainer/VBoxContainer" instance=ExtResource( 11 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_top = 140.0
-margin_right = 236.0
-margin_bottom = 196.0
-
-[node name="CharactersArtworkPanel" parent="HBoxContainer/Panel2/MarginContainer/VBoxContainer" instance=ExtResource( 16 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_top = 200.0
 margin_right = 236.0
 margin_bottom = 328.0
 size_flags_horizontal = 3
@@ -348,7 +332,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="PlayerPanel" parent="HBoxContainer/Panel/MarginContainer" instance=ExtResource( 8 )]
-margin_right = 260.0
+margin_right = 354.0
 margin_bottom = 696.0
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]

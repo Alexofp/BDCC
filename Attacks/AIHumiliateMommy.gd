@@ -23,7 +23,7 @@ func _canUse(_attacker, _receiver, _context = {}):
 	return true
 
 func getAnticipationText(_attacker, _receiver):
-	var text = "{attacker.name} straightens the posture and puts {attacker.his} hands under {attacker.his} breasts, emphasizing their size."
+	var text = "{attacker.name} straightens her posture and puts {attacker.his} hands under {attacker.his} breasts, emphasizing their size."
 	text += "\n\n"
 	text += "[say=attacker]C’mon, quit fighting and let me nurture you with my breasts~. You can call me mommy~[/say]"
 	text += "\n"

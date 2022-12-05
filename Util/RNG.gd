@@ -3,7 +3,10 @@ class_name RNG
 
 # generates an [from,to] int, both are inclusive
 static func randi_range(from: int, to: int) -> int:
-	assert(to >= from)
+	if(from > to):
+		Log.printerr("randi_range() from is higher than to. From = "+str(from)+" To = "+str(to))
+		to = from
+	#assert(to >= from)
 	
 	var randValue = int(floor(rand_range(from, to+1)))
 	if(randValue < from):
@@ -27,7 +30,7 @@ static func chance(ch: float) -> bool:
 	return false
 	
 # picks a random element from an array or a random key from a dictionary
-static func pick(ar):	
+static func pick(ar):
 	if(ar is Dictionary):
 		ar = ar.keys()
 		
@@ -35,6 +38,18 @@ static func pick(ar):
 		return null
 	
 	return ar[randi() % ar.size()]
+
+static func grab(ar):	
+	if(ar is Dictionary):
+		ar = ar.keys()
+		
+	if(ar.empty()):
+		return null
+	
+	var elementI = randi() % ar.size()
+	var value = ar[randi() % ar.size()]
+	ar.remove(elementI)
+	return value
 
 # RNG.pickWeighted(["a", "b", "c"], [10, 100, 10]) # 'b' will show up 10 times more
 static func pickWeighted(ar, weights: Array):
@@ -125,3 +140,8 @@ static func grabWeightedPairs(ar: Array):
 	ar.remove(0)
 	return result
 	
+static func randomMaleName():
+	return pick(RNGData.maleNames)
+
+static func randomFemaleName():
+	return pick(RNGData.femaleNames)

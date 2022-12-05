@@ -8,7 +8,7 @@ func _init():
 func _run():
 	if(state == ""):
 		addCharacter("risha", ["naked"])
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc="risha", npcAction="sit", npcExposedBodyparts=[BodypartSlot.Penis, BodypartSlot.Body]})
+		GM.main.playAnimation(StageScene.Duo, "stand", {npc="risha", npcHard=true, hard=true, npcAction="sit", npcExposedBodyparts=[BodypartSlot.Penis, BodypartSlot.Body]})
 
 	if(state == ""):
 		saynn("It’s pretty late so this area is not that crowded. But, you see somebody that you didn’t expect to see here. Risha, the lynx, is sitting on one of the benches and removing pieces of her armor. You decide to approach her and ask what’s up.")
@@ -117,7 +117,9 @@ func _run():
 		saynn("Well she isn’t wrong technically, you are doing this for the credits. Risha doesn’t waste time for too long, she guides her barbed feline cock and presses it against your tailhole. You arch your back and struggle against the metal bar as the cat’s soft spikes are brushing against your soft {pc.thick} butt.")
 
 		# (if has cock)
-		if(GM.pc.hasPenis()):
+		if(GM.pc.isWearingChastityCage()):
+			saynn("Even though you are stuck in quite an exposed position and are about to be taken advantage of, you feel kinda excited, your {pc.cock} is trying to get more erect but it’s still neatly contained behind chastity.")
+		elif(GM.pc.hasPenis()):
 			saynn("Even though you are stuck in quite an exposed position and are about to be taken advantage of, you feel kinda excited, your {pc.cock} is getting more erect.")
 
 		saynn("Risha spits on her cock and, without much more preparation, buckles her hips forward, forcing her barbed member to penetrate your {pc.analStretch} hole and stretch it open enough to shove the head inside. You arch your back more and let out a moan as she roughly pushes her cock deeper, her spikes raking at your soft inner walls.")
@@ -154,7 +156,9 @@ func _run():
 		saynn("You begin to trash against the restraints and make loud pleasure noises, your whole body squirms and shivers as you struggle to stay still. Though Risha’s hands hold your ass nice and tight, she keeps shoving her cock in and out even through your climax.")
 
 		# (if has cock)
-		if(GM.pc.hasPenis()):
+		if(GM.pc.isWearingChastityCage()):
+			saynn("Your member desperately tries to get hard but the chastity cage is being very mean to you and prevents all of that. Your prostate got absolutely smashed, it didn’t take long for your {pc.cock} to start leaking weak lines of {pc.cum} onto the bench and floor. She really drains you, even during your wet orgasm she pounds at your p-spot until there is nothing left in your balls.")
+		elif(GM.pc.hasPenis()):
 			saynn("Your prostate got absolutely smashed, it didn’t take long for your {pc.cock} to start leaking strong lines of {pc.cum} onto the bench and floor. She really drains you, even during your wet orgasm she pounds at your p-spot until there is nothing left in your balls.")
 
 		# (if has pussy)
@@ -291,13 +295,17 @@ func _run():
 		saynn("Risha doesn’t waste time for too long, she guides her barbed feline cock and presses it against your pussy, its tip sliding up and down along your petals. You arch your back and struggle against the metal bar as the cat’s soft spikes are brushing against your soft flesh.")
 
 		# (if has cock)
-		if(GM.pc.hasPenis()):
+		if(GM.pc.isWearingChastityCage()):
+			saynn("Even though you are stuck in quite an exposed position and are about to be taken advantage of, you feel very horny, your {pc.cock} is trying to get more erect but it’s still neatly contained behind chastity.")
+		elif(GM.pc.hasPenis()):
 			saynn("Even though you are stuck in quite an exposed position and are about to be taken advantage of, you feel so horny, your {pc.cock} is getting hard.")
 
 		saynn("Risha gets some of your juices and rubs them into her cock and then, without much more preparation, buckles her hips forward, forcing her barbed member to penetrate your {pc.pussyStretch} pussy hole and stretch it open enough to shove the tip inside. You arch your back more and let out a moan as she roughly pushes her cock deeper, her spikes raking at your soft inner walls.")
 
 		# (if has cock)
-		if(GM.pc.hasPenis()):
+		if(GM.pc.isWearingChastityCage()):
+			saynn("You feel your useless cock leaking behind the chastity cage, being fucked by a tall lynx makes you so aroused.")
+		elif(GM.pc.hasPenis()):
 			saynn("You feel your neglected cock leaking, being fucked by a tall lynx makes you so aroused.")
 
 		saynn("[say=pc]Fuck.. So rough.[/say]")
@@ -326,7 +334,9 @@ func _run():
 		saynn("You begin to trash against the restraints and make loud pleasure noises, your whole body squirms and shivers as you struggle to stay still. Though Risha’s hands hold your ass nice and tight, she keeps shoving her cock in and out even through your climax. Your fuckhole got so overstimulated that you squirt juices all over the bench.")
 
 		# (if has cock)
-		if(GM.pc.hasPenis()):
+		if(GM.pc.isWearingChastityCage()):
+			saynn("Your member desperately tries to get hard but the chastity cage is being very mean to you and prevents all of that. It didn’t take long for your {pc.cock} to start leaking weak lines of {pc.cum} onto the bench and floor. She really drains you, even during your wet orgasm she pounds at your pleasure spot until there is nothing left in your balls.")
+		elif(GM.pc.hasPenis()):
 			saynn("It didn’t take long for your {pc.cock} to start shooting strong lines of {pc.cum} onto the bench and the floor. She really drains you, even during your orgasm she pounds at your pleasure spot, causing your cock to erupt with more {pc.cun} until there is nothing left in your balls.")
 
 		saynn("[say=risha]Did my little fuckdoll cum already? Oh, what a shame. Now it’s my turn.[/say]")
@@ -365,6 +375,7 @@ func _run():
 		
 
 	if(state == "fuck_risha"):
+		GM.main.playAnimation(StageScene.Duo, "stand", {npc="risha", npcHard=true, hard=true, npcAction="sit", npcExposedBodyparts=[BodypartSlot.Penis, BodypartSlot.Body], exposedBodyparts=[BodypartSlot.Penis]})
 		# (needs cock and strength)
 
 		saynn("[say=pc]I don’t need your credits.[/say]")

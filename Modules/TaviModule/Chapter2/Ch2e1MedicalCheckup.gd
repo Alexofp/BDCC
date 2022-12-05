@@ -646,7 +646,7 @@ func _run():
 
 
 	if(state == "obey"):
-		GM.main.playAnimation(StageScene.Duo, "sit", {npc="eliza", exposedBodyparts=[BodypartSlot.Vagina, BodypartSlot.Penis, BodypartSlot.Anus, BodypartSlot.Body, BodypartSlot.Breasts]})
+		GM.main.playAnimation(StageScene.Duo, "sit", {npc="eliza", hard=true, exposedBodyparts=[BodypartSlot.Vagina, BodypartSlot.Penis, BodypartSlot.Anus, BodypartSlot.Body, BodypartSlot.Breasts]})
 		
 		# (if has clothing)
 		if(!GM.pc.isFullyNaked()):

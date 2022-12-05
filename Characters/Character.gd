@@ -16,6 +16,10 @@ var npcRestraintStrugglePower = 1.0
 var npcRestraintMinigameResultMin = 0.8
 var npcRestraintMinigameResultMax = 1.1
 var npcHasMenstrualCycle = false # If true can get pregnant
+var npcCharacterType = CharacterType.Generic
+
+var lastUpdatedDay:int = -1
+var lastUpdatedSecond:int = -1
 
 func _ready():
 	name = id
@@ -29,7 +33,7 @@ func _ready():
 		var interestData = npcLustInterests[interestID]
 		if(interestData is Array):
 			if(interestData.size() > 1):
-				lustInterests.addInterest(interestID, interestData[0], interestData[1])
+				lustInterests.addInterest(interestID, interestData[0])
 			else:
 				lustInterests.addInterest(interestID, interestData[0])
 		else:
@@ -57,22 +61,23 @@ func getName():
 
 func beforeFightStarted():
 	.beforeFightStarted()
-	addLust(getAmbientLust())
-	addPain(getAmbientPain())
-	if(stamina > getMaxStamina()):
-		stamina = getMaxStamina()
+	lust = RNG.randi_range(0, getAmbientLust())
+	pain = RNG.randi_range(0, getAmbientPain())
+	stamina = getMaxStamina()
 
 func afterFightEnded():
 	.afterFightEnded()
-	pain = 0
-	lust = 0
-	stamina = getMaxStamina()
+	#pain = 0
+	#lust = 0
+	#stamina = getMaxStamina()
 
 func saveData():
 	var data = {
 		"pain": pain,
 		"lust": lust,
 		"stamina": stamina,
+		"arousal": arousal,
+		"consciousness": consciousness,
 	}
 	
 	data["bodyparts"] = {}
@@ -90,6 +95,15 @@ func saveData():
 	data["lustInterests"] = lustInterests.saveData()
 	if(menstrualCycle != null):
 		data["menstrualCycle"] = menstrualCycle.saveData()
+
+	data["timedBuffs"] = saveBuffsData(timedBuffs)
+	data["timedBuffsDurationSeconds"] = timedBuffsDurationSeconds
+	data["timedBuffsTurns"] = saveBuffsData(timedBuffsTurns)
+	data["timedBuffsDurationTurns"] = timedBuffsDurationTurns
+	
+	
+	data["lastUpdatedDay"] = lastUpdatedDay
+	data["lastUpdatedSecond"] = lastUpdatedSecond
 	
 	return data
 
@@ -97,6 +111,8 @@ func loadData(data):
 	pain = SAVE.loadVar(data, "pain", 0)
 	lust = SAVE.loadVar(data, "lust", 0)
 	stamina = SAVE.loadVar(data, "stamina", 100)
+	arousal = SAVE.loadVar(data, "arousal", 0.0)
+	consciousness = SAVE.loadVar(data, "consciousness", 1.0)
 	
 	var loadedBodyparts = SAVE.loadVar(data, "bodyparts", {})
 	for slot in loadedBodyparts:
@@ -119,6 +135,14 @@ func loadData(data):
 
 	if(menstrualCycle != null && data.has("menstrualCycle")):
 		menstrualCycle.loadData(SAVE.loadVar(data, "menstrualCycle", {}))
+
+	timedBuffs = loadBuffsData(SAVE.loadVar(data, "timedBuffs", []))
+	timedBuffsDurationSeconds = SAVE.loadVar(data, "timedBuffsDurationSeconds", 0)
+	timedBuffsTurns = loadBuffsData(SAVE.loadVar(data, "timedBuffsTurns", []))
+	timedBuffsDurationTurns = SAVE.loadVar(data, "timedBuffsDurationTurns", 0)
+	
+	lastUpdatedDay = SAVE.loadVar(data, "lastUpdatedDay", -1)
+	lastUpdatedSecond = SAVE.loadVar(data, "lastUpdatedSecond", -1)
 
 func getArmor(_damageType):
 	var calculatedArmor = .getArmor(_damageType)
@@ -154,6 +178,11 @@ func resetEquipment():
 	createEquipment()
 
 func processTime(_secondsPassed):
+	if(timedBuffsDurationSeconds > 0):
+		timedBuffsDurationSeconds -= _secondsPassed
+		if(timedBuffsDurationSeconds <= 0):
+			timedBuffs.clear()
+	
 	for bodypart in processingBodyparts:
 		if(bodypart == null || !is_instance_valid(bodypart)):
 			continue
@@ -162,12 +191,25 @@ func processTime(_secondsPassed):
 	if(menstrualCycle != null):
 		menstrualCycle.processTime(_secondsPassed)
 		
+	# Not sure if needed
+	updateNonBattleEffects()
+		
 func hoursPassed(_howmuch):
 	for bodypart in processingBodyparts:
 		if(bodypart != null && is_instance_valid(bodypart)):
 			bodypart.hoursPassed(_howmuch)
 
 func updateNonBattleEffects():
+	if(timedBuffs.size() > 0):
+		addEffect(StatusEffect.TimedEffects)
+	else:
+		removeEffect(StatusEffect.TimedEffects)
+		
+	if(timedBuffsTurns.size() > 0):
+		addEffect(StatusEffect.TimedEffectsTurns)
+	else:
+		removeEffect(StatusEffect.TimedEffectsTurns)
+	
 	if(hasBoundArms()):
 		addEffect(StatusEffect.ArmsBound)
 	else:
@@ -232,6 +274,13 @@ func updateNonBattleEffects():
 		addEffect(StatusEffect.CumInflated)
 	else:
 		removeEffect(StatusEffect.CumInflated)
+	
+	if(GM.main != null && GM.main.supportsSexEngine()):
+		addEffect(StatusEffect.SexEnginePersonality)
+		addEffect(StatusEffect.SexEngineLikes)
+	else:
+		removeEffect(StatusEffect.SexEnginePersonality)
+		removeEffect(StatusEffect.SexEngineLikes)
 
 func onCharacterVisiblyPregnant():
 	if(getMenstrualCycle() != null):
@@ -303,3 +352,76 @@ func reactRestraint(_restraintType, _restraintAmount, _isGettingForced):
 		return GlobalRegistry.getCharacter(parentCharID).reactRestraint(_restraintType, _restraintAmount, _isGettingForced)
 	
 	return null
+
+func shouldBeUpdated():
+	if(GM.main.characterIsVisible(getID())):
+		return true
+	
+	if(hasEffect(StatusEffect.HasCumInsideAnus) || hasEffect(StatusEffect.HasCumInsideMouth) || hasEffect(StatusEffect.HasCumInsideVagina)):
+		return true
+	
+	if(isPregnant()):
+		return true
+	
+	return false
+
+func checkOldWayOfUpdating(theday:int, theseconds:int):
+	if(lastUpdatedDay < 0):
+		lastUpdatedDay = theday
+		lastUpdatedSecond = theseconds
+
+func processUntilTime(theday:int, theseconds:int):
+	if(lastUpdatedDay < 0):
+		lastUpdatedDay = theday
+		lastUpdatedSecond = theseconds
+		return
+	if(lastUpdatedDay > theday):
+		return
+	if(lastUpdatedDay == theday && lastUpdatedSecond >= theseconds):
+		return
+	
+	var secondsDiff = 0
+	
+	var dayDiff = theday - lastUpdatedDay
+	if(dayDiff == 0):
+		secondsDiff = theseconds - lastUpdatedSecond
+	else:
+		secondsDiff = 24*60*60*dayDiff - lastUpdatedSecond + theseconds
+		
+	print("PROCESSED "+str(getID())+" FOR "+str(secondsDiff)+" SECONDS")
+	var oneWeekSeconds = 7*24*60*60
+	var oneDaySeconds = 24*60*60
+	var oneHourSeconds = 60*60
+	var processedWeeks = 0
+	
+	# Processing entire days, then hours, then the rest
+	var secondsToProcess = secondsDiff
+	while(secondsToProcess > oneWeekSeconds):
+		if(processedWeeks < 8): # After 2 months we stop processing to not lag as much
+			processTime(oneWeekSeconds)
+			processedWeeks += 1
+		secondsToProcess -= oneWeekSeconds
+	while(secondsToProcess > oneDaySeconds):
+		processTime(oneDaySeconds)
+		secondsToProcess -= oneDaySeconds
+	while(secondsToProcess > oneHourSeconds):
+		processTime(oneHourSeconds)
+		secondsToProcess -= oneHourSeconds
+	processTime(secondsToProcess)
+	
+	var oldHours = int(float(lastUpdatedSecond) / 60 / 60) + lastUpdatedDay*24
+	var newHours = int(float(theseconds) / 60 / 60) + theday*24
+	var hoursPassed = newHours - oldHours
+	
+	if(hoursPassed > 0):
+		print("and also for "+str(hoursPassed)+" hours")
+		hoursPassed(hoursPassed)
+	
+	lastUpdatedDay = theday
+	lastUpdatedSecond = theseconds
+
+func onStoppedProcessing():
+	pass
+
+func getCharacterType():
+	return npcCharacterType

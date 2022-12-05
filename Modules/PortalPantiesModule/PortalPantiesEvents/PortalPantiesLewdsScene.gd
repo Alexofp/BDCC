@@ -26,7 +26,7 @@ func _reactInit():
 	]
 	if(GM.pc.hasVagina()):
 		possible.append("vaginal")
-	if(GM.pc.hasPenis()):
+	if(GM.pc.hasPenis() && !GM.pc.isWearingChastityCage()):
 		possible.append("cock")
 
 	setState(RNG.pick(possible))

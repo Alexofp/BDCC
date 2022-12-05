@@ -55,7 +55,7 @@ func getCurrentStage():
 	return CycleStage.LutealPhase
 
 func isInHeat():
-	return getCurrentStage() == CycleStage.Ovulation && !isPregnant()
+	return getCurrentStage() == CycleStage.Ovulation && !isPregnant() && hasAnyWomb()
 
 func forceIntoHeat():
 	newCycle()

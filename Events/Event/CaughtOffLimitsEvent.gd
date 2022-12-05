@@ -5,22 +5,34 @@ func _init():
 
 func registerTriggers(es):
 	es.addTrigger(self, Trigger.EnteringRoom)
+	es.addTrigger(self, Trigger.PCLookingForTrouble)
 
 func react(_triggerID, _args):
-	if(GM.main.getFlag("Trigger_CaughtOffLimitsCD", 0) > 0):
+	var isLookingForTrouble = (_triggerID == Trigger.PCLookingForTrouble)
+	
+	if(GM.main.getFlag("Trigger_CaughtOffLimitsCD", 0) > 0 && !isLookingForTrouble):
 		GM.main.increaseFlag("Trigger_CaughtOffLimitsCD", -1)
 		return
 	
 	if(GM.world.getRoomByID(GM.pc.getLocation()).loctag_Greenhouses):
-		if(RNG.chance(30 + 10.0*GM.pc.getExposure())):
+		if(RNG.chance(30 + 10.0*GM.pc.getExposure()) || isLookingForTrouble):
 			GM.main.setFlag("Trigger_CaughtOffLimitsCD", 3)
 			
-			return GM.ES.triggerReact(Trigger.CaughtOffLimits)
+			var encounterLevel = RNG.randi_range(0, Util.maxi(0, GM.pc.getLevel() + RNG.randi_range(-1, 1)))
+			encounterLevel = Util.maxi(encounterLevel, 0)
+			encounterLevel = Util.mini(encounterLevel, 15+RNG.randi_range(-1, 1))
+			
+			return GM.ES.triggerReact(Trigger.CaughtOffLimits, [encounterLevel])
 		
 	if(GM.world.getRoomByID(GM.pc.getLocation()).loctag_GuardsEncounter):
-		if(RNG.chance(30 + 10.0*GM.pc.getExposure())):
+		if(RNG.chance(30 + 10.0*GM.pc.getExposure()) || isLookingForTrouble):
 			GM.main.setFlag("Trigger_CaughtOffLimitsCD", 3)
-			return GM.ES.triggerReact(Trigger.CaughtOffLimits)
+			
+			var encounterLevel = RNG.randi_range(0, Util.maxi(0, GM.pc.getLevel() + RNG.randi_range(-4, 1)))
+			encounterLevel = Util.maxi(encounterLevel, 0)
+			encounterLevel = Util.mini(encounterLevel, 10+RNG.randi_range(-1, 1))
+			
+			return GM.ES.triggerReact(Trigger.CaughtOffLimits, [encounterLevel])
 		
 	return false
 

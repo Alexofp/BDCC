@@ -5,6 +5,7 @@ func _init():
 	npcLevel = 5
 	npcBaseLust = 150
 	npcBasePain = 120
+	npcCharacterType = CharacterType.Nurse
 	
 	npcLustInterests = {
 		InterestTopic.Bodywritings: Interest.Loves,
@@ -180,3 +181,6 @@ func reactRestraint(restraintType, restraintAmount, isGettingForced):
 			"Drugs go well with bondage",
 		])
 	return null
+
+func createEquipment():
+	getInventory().equipItem(GlobalRegistry.createItemNoID("NurseClothes"))

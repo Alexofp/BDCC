@@ -2,6 +2,7 @@ extends Character
 
 func _init():
 	id = "captain"
+	npcCharacterType = CharacterType.Generic
 	
 func _getName():
 	return "Cpt. Wright"
@@ -33,3 +34,6 @@ func createBodyparts():
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("canineears"))
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("caninehead"))
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("combedbackhair"))
+
+func createEquipment():
+	getInventory().equipItem(GlobalRegistry.createItemNoID("OfficialClothes"))

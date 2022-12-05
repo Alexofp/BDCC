@@ -16,6 +16,7 @@ var statObjects = {}
 var addedPoints = {}
 var skillTabScene = preload("res://UI/SkillsUI/SkillUITab.tscn")
 var skillTabs = []
+var openedSkillTab = null
 
 func _ready():
 	pass
@@ -50,18 +51,22 @@ func updateData():
 
 	createAttribList()
 	
-	for tab in skillTabs:
-		tab.queue_free()
-	skillTabs.clear()
+	if(openedSkillTab != null):
+		openedSkillTab.queue_free()
+		openedSkillTab = null
 	
-	var skills = GM.pc.getSkillsHolder().getSkills()
-	for skillID in skills:
-		var tabID = tabContainer.get_child_count()
-		var skillTab = skillTabScene.instance()
-		tabContainer.add_child(skillTab)
-		skillTab.setSkillID(skillID)
-		skillTabs.append(skillTab)
-		tabContainer.set_tab_title(tabID, skillTab.getTabName())
+#	for tab in skillTabs:
+#		tab.queue_free()
+#	skillTabs.clear()
+#
+#	var skills = GM.pc.getSkillsHolder().getSkills()
+#	for skillID in skills:
+#		var tabID = tabContainer.get_child_count()
+#		var skillTab = skillTabScene.instance()
+#		tabContainer.add_child(skillTab)
+#		skillTab.setSkillID(skillID)
+#		skillTabs.append(skillTab)
+#		tabContainer.set_tab_title(tabID, skillTab.getTabName())
 	
 	
 func createAttribList():
@@ -171,3 +176,17 @@ func updateDamageStatsLabel():
 	text += "Ambient pain: "+str(GM.pc.getAmbientPain()) + "\n"
 	text += "Exposure: "+str(int(GM.pc.getExposure()*100))+"%" + "\n"
 	extraStatsLabel.bbcode_text = text
+
+
+func _on_Skills_openPerksButton(skillID):
+	if(openedSkillTab != null):
+		openedSkillTab.queue_free()
+		openedSkillTab = null
+	
+	var tabID = tabContainer.get_child_count()
+	var skillTab = skillTabScene.instance()
+	tabContainer.add_child(skillTab)
+	skillTab.setSkillID(skillID)
+	openedSkillTab = skillTab
+	tabContainer.set_tab_title(tabID, skillTab.getTabName())
+	tabContainer.current_tab = tabID

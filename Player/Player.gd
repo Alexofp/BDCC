@@ -23,16 +23,13 @@ var bodyMessiness = 0
 # Intoxication stuff
 var intoxication: float = 0.0
 var intoxicationTolerance: float = 0.0
-var timedBuffs: Array = []
-var timedBuffsDurationSeconds: int = 0
-var timedBuffsTurns: Array = []
-var timedBuffsDurationTurns: int = 0
 
 #
 
 # lust combat stuff
 var lustCombatState
 
+var dynamicPersonality: bool = false
 
 func _init():
 	initialDodgeChance = 0.05 # Player has a small chance to dodge anything
@@ -268,17 +265,24 @@ func updateNonBattleEffects():
 	else:
 		removeEffect(StatusEffect.CumInflated)
 		
+	if(GM.main != null && GM.main.supportsSexEngine()):
+		addEffect(StatusEffect.SexEnginePersonality)
+		addEffect(StatusEffect.SexEngineLikes)
+	else:
+		removeEffect(StatusEffect.SexEnginePersonality)
+		removeEffect(StatusEffect.SexEngineLikes)
+	
+	if(GM.main != null && getExposure() > 0.0 && !GM.main.supportsSexEngine() && !GM.main.supportsBattleTurns()):
+		addEffect(StatusEffect.Exposed)
+	else:
+		removeEffect(StatusEffect.Exposed)
+
 	emit_signal("stat_changed")
 
 func processBattleTurn():
 	.processBattleTurn()
 	updateNonBattleEffects()
 	skillsHolder.giveSkillExperienceBattleTurn()
-	
-	if(timedBuffsDurationTurns > 0):
-		timedBuffsDurationTurns -= 1
-		if(timedBuffsDurationTurns <= 0):
-			timedBuffsTurns.clear()
 
 func beforeFightStarted():
 	.beforeFightStarted()
@@ -287,9 +291,6 @@ func beforeFightStarted():
 
 func afterFightEnded():
 	.afterFightEnded()
-	
-	timedBuffsTurns.clear()
-	timedBuffsDurationTurns = 0
 	
 	if(lustCombatState != null):
 		lustCombatState.exitedBattle()
@@ -440,6 +441,9 @@ func saveData():
 		"pickedFemininity": pickedFemininity,
 		"pickedThickness": pickedThickness,
 		"inmateType": inmateType,
+		"arousal": arousal,
+		"consciousness": consciousness,
+		"dynamicPersonality": dynamicPersonality,
 	}
 	
 	data["bodyparts"] = {}
@@ -466,6 +470,9 @@ func saveData():
 	data["intoxication"] = intoxication
 	data["intoxicationTolerance"] = intoxicationTolerance
 	
+	data["fetishHolder"] = fetishHolder.saveData()
+	data["personality"] = personality.saveData()
+	
 	return data
 
 func loadData(data):
@@ -483,6 +490,9 @@ func loadData(data):
 	pickedFemininity = SAVE.loadVar(data, "pickedFemininity", 50)
 	pickedThickness = SAVE.loadVar(data, "pickedThickness", 50)
 	inmateType = SAVE.loadVar(data, "inmateType", InmateType.General)
+	arousal = SAVE.loadVar(data, "arousal", 0.0)
+	consciousness = SAVE.loadVar(data, "consciousness", 1.0)
+	dynamicPersonality = SAVE.loadVar(data, "dynamicPersonality", false)
 	
 	resetSlots()
 	var loadedBodyparts = SAVE.loadVar(data, "bodyparts", {})
@@ -515,6 +525,9 @@ func loadData(data):
 	intoxication = SAVE.loadVar(data, "intoxication", 0.0)
 	intoxicationTolerance = SAVE.loadVar(data, "intoxicationTolerance", 0.0)
 	
+	fetishHolder.loadData(SAVE.loadVar(data, "fetishHolder", {}))
+	personality.loadData(SAVE.loadVar(data, "personality", {}))
+	
 	checkLocation()
 		
 	updateNonBattleEffects()
@@ -526,28 +539,7 @@ func checkLocation():
 		Log.printerr("Player's location '"+str(location)+"' doesn't exists, reseting them to their cell")
 		location = getCellLocation()
 
-func saveBuffsData(buffs):
-	var data = []
-	
-	for buff in buffs:
-		var buffData = {
-			"id": buff.id,
-			"buffdata": buff.saveData(),
-		}
-		data.append(buffData)
-	return data
 
-func loadBuffsData(data):
-	var result = []
-	
-	for buffFullData in data:
-		var id = SAVE.loadVar(buffFullData, "id", "error")
-		var buffdata = SAVE.loadVar(buffFullData, "buffdata", {})
-		
-		var buff: BuffBase = GlobalRegistry.createBuff(id)
-		buff.loadData(buffdata)
-		result.append(buff)
-	return result
 		
 
 func getFightState(_battleName):
@@ -672,15 +664,6 @@ func orgasmFrom(_characterID: String):
 	addLust(-lust)
 	updateNonBattleEffects()
 
-func cumOnFloor():
-	if(hasBodypart(BodypartSlot.Penis)):
-		var penis:BodypartPenis = getBodypart(BodypartSlot.Penis)
-		var production: FluidProduction = penis.getFluidProduction()
-		if(production != null):
-			var returnValue = penis.getFluidProduction().drain()
-			production.fillPercent(buffsHolder.getCustom(BuffAttribute.CumGenerationAfterOrgasm))
-			return returnValue
-
 func cummedOnBy(characterID, sourceType = null, howMessy: int = 1):	
 	var ch = GlobalRegistry.getCharacter(characterID)
 	if(sourceType == null):
@@ -731,31 +714,6 @@ func getInmateNumber():
 
 func getFullInmateNumber():
 	return "P-"+inmateNumber
-
-func getBodypartLewdSizeAdjective(bodypartSlot):
-	if(!hasBodypart(bodypartSlot)):
-		return "ERROR:NO BODYPART IN SLOT " + str(bodypartSlot)
-	return getBodypart(bodypartSlot).getLewdSizeAdjective()
-	
-func getBodypartLewdAdjective(bodypartSlot):
-	if(!hasBodypart(bodypartSlot)):
-		return "ERROR:NO BODYPART IN SLOT " + str(bodypartSlot)
-	return getBodypart(bodypartSlot).getLewdAdjective()
-
-func getBodypartLewdName(bodypartSlot):
-	if(!hasBodypart(bodypartSlot)):
-		return "ERROR:NO BODYPART IN SLOT " + str(bodypartSlot)
-	return getBodypart(bodypartSlot).getLewdName()
-
-func getBodypartLewdDescriptionAndName(bodypartSlot):
-	if(!hasBodypart(bodypartSlot)):
-		return "ERROR:NO BODYPART IN SLOT " + str(bodypartSlot)
-	return getBodypart(bodypartSlot).getLewdDescriptionAndName()
-
-func getBodypartLewdDescriptionAndNameWithA(bodypartSlot):
-	if(!hasBodypart(bodypartSlot)):
-		return "ERROR:NO BODYPART IN SLOT " + str(bodypartSlot)
-	return getBodypart(bodypartSlot).getLewdDescriptionAndNameWithA()
 
 func getFemininity() -> int:
 	return pickedFemininity
@@ -914,39 +872,6 @@ func canIntoxicateMore(_howmuch: float):
 
 	return true
 
-func addTimedBuffs(buffs: Array, seconds):
-	for newbuff in buffs:
-		var foundBuff = false
-		for oldbuff in timedBuffs:
-			if(newbuff.id == oldbuff.id):
-				oldbuff.combine(newbuff)
-				foundBuff = true
-				break
-		if(!foundBuff):
-			timedBuffs.append(newbuff)
-	
-	if(seconds > timedBuffsDurationSeconds):
-		timedBuffsDurationSeconds = seconds
-	updateNonBattleEffects()
-
-func addTimedBuffsTurns(buffs: Array, turns):
-	if(!GM.main.supportsBattleTurns()):
-		return
-	
-	for newbuff in buffs:
-		var foundBuff = false
-		for oldbuff in timedBuffsTurns:
-			if(newbuff.id == oldbuff.id):
-				oldbuff.combine(newbuff)
-				foundBuff = true
-				break
-		if(!foundBuff):
-			timedBuffsTurns.append(newbuff)
-	
-	if(turns > timedBuffsDurationTurns):
-		timedBuffsDurationTurns = turns
-	updateNonBattleEffects()
-
 func hasCondoms():
 	return getInventory().getItemsWithTag(ItemTag.Condom).size() > 0
 
@@ -1043,3 +968,8 @@ func hasTightHoles():
 func getRestraintForcingSuccessChanceMod():
 	return max(1.0 + min(getAttackAccuracy(), 0.0), 0.0) * (1.0 + buffsHolder.getCustom(BuffAttribute.RestraintForcingSuccess))
 
+func personalityChangesAfterSex():
+	return dynamicPersonality
+
+func getCharacterType():
+	return CharacterType.Inmate

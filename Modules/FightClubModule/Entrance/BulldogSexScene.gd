@@ -6,7 +6,7 @@ func _init():
 func _run():
 	if(state == ""):
 		addCharacter("bulldog")
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc="bulldog", exposedBodyparts=[BodypartSlot.Vagina, BodypartSlot.Anus], npcExposedBodyparts=[BodypartSlot.Penis]})
+		GM.main.playAnimation(StageScene.Duo, "stand", {npc="bulldog", npcHard=true, exposedBodyparts=[BodypartSlot.Vagina, BodypartSlot.Anus], npcExposedBodyparts=[BodypartSlot.Penis]})
 
 	if(state == ""):
 		saynn("Maybe the guy will let you through if you make him feel good. You tilt your head down and slowly close the distance, swaying your {pc.masc} thighs as you do. Your hand reaches for the bulldog’s chest and traces down with a single digit.")
@@ -56,7 +56,9 @@ func _run():
 			saynn("He doesn’t stop there, his hand is still pinning you to the wall while he starts fucking your backhole, shoving his dick in and out. You can only squirm under his onslaught, the inners of your anal gets coated with his precum.")
 
 		# (has cock)
-		if(GM.pc.hasPenis()):
+		if(GM.pc.isWearingChastityCage()):
+			saynn("Your {pc.cock} throbs and leaks pre through your little chastity cage as you’re getting railed, balls swinging and touching with his when he rams his dick deep inside.")
+		elif(GM.pc.hasPenis()):
 			saynn("Your {pc.cock} throbs and leaks pre as you’re getting railed, balls swinging and touching with his when he rams his dick deep inside.")
 
 		saynn("He works up his rhythm to a fast steady one, thrusting his hips with full force, making them slap against your {pc.thick} buttcheeks. His knot begins to inflate with blood making it harder to shove it inside you until the moment he can’t do it anymore. Between your moans, you find a time to be a little bratty with him.")
@@ -93,7 +95,9 @@ func _run():
 			saynn("And as your ring starts clenching and pulsating around the guy’s member, he groans and cums too! His cock is shoved deep inside you and starts stuffing you full of his virile cum. All the while you’re helplessly stuck on his knot, forced to be his breeding bitch. With nowhere to go, all the cum makes your belly look slightly inflated. Your orgasm gets extended multiple times, you can’t stop squirming and shivering.")
 
 		# (if has cock)
-		if(GM.pc.hasPenis()):
+		if(GM.pc.isWearingChastityCage()):
+			saynn("Your {pc.cock} pulsates strongly against the chastity cage and shoots weak strings of {pc.cum} at the wall before you, creating such a mess! His knot completely drains your balls, you feel spent.")
+		elif(GM.pc.hasPenis()):
 			saynn("Your {pc.cock} throbs and starts shooting {pc.cum} at the wall before you, such a mess! His knot completely drains your balls, you feel spent.")
 
 		saynn("Eventually you both calm down from your orgasms. The guy pulls out his wet fingers. Your breathing is still heavy, you keep moaning as your hole is stretched to the extreme.")
@@ -177,7 +181,10 @@ func _run():
 
 		# (if has pussy and cock)
 		if(GM.pc.hasVagina() && GM.pc.hasPenis()):
-			saynn("You’re exposed! Your {pc.pussyStretch} stuffed pussy, {pc.breasts}, {pc.cock}, beautiful naked {pc.masc} body are all visible to everyone.")
+			if(GM.pc.isWearingChastityCage()):
+				saynn("You’re exposed! Your {pc.pussyStretch} stuffed pussy, {pc.breasts}, {pc.cock} and the chastity cage that’s on it, beautiful naked {pc.masc} body are all visible to everyone.")
+			else:
+				saynn("You’re exposed! Your {pc.pussyStretch} stuffed pussy, {pc.breasts}, {pc.cock}, beautiful naked {pc.masc} body are all visible to everyone.")
 
 		# (if has pussy and no cock)
 		if(GM.pc.hasVagina() && !GM.pc.hasPenis()):
@@ -185,7 +192,10 @@ func _run():
 
 		# (if has no pussy and cock)
 		if(!GM.pc.hasVagina() && GM.pc.hasPenis()):
-			saynn("You’re exposed! Your {pc.analStretch} backdoor leaking with cum, your {pc.breasts}, {pc.cock}, beautiful naked {pc.masc} body are all visible to everyone.")
+			if(GM.pc.isWearingChastityCage()):
+				saynn("You’re exposed! Your {pc.analStretch} backdoor leaking with cum, your {pc.breasts}, {pc.cock} and the chastity cage that’s on it, beautiful naked {pc.masc} body are all visible to everyone.")
+			else:
+				saynn("You’re exposed! Your {pc.analStretch} backdoor leaking with cum, your {pc.breasts}, {pc.cock}, beautiful naked {pc.masc} body are all visible to everyone.")
 
 		# (if has no pussy and no cock)
 		if(!GM.pc.hasVagina() && !GM.pc.hasPenis()):
@@ -220,7 +230,9 @@ func _run():
 			saynn("You feel somebody forcibly bending you forward before grabbing your hands and pulling them behind your back. You obey the rough grasp and let out a passionate moan as you feel some canine cock penetrating your anal ring! Your star is getting stretched and fucked again, you moan and spread your legs for them more, your {pc.breasts} are bouncing up and down as your soft inner walls close around the shaft, providing more friction. Feels so good to be fucked in front of everyone!")
 
 		# (if has cock)
-		if(GM.pc.hasPenis()):
+		if(GM.pc.isWearingChastityCage()):
+			saynn("Your {pc.cock} is trying to get hard in its little cage and leaking a lot while you’re getting used. Obviously it won’t get used by it’s fun to look at..")
+		elif(GM.pc.hasPenis()):
 			saynn("Your {pc.cock} is hard and leaking a lot while you’re getting used. You feel like it won’t get used at all..")
 
 		# (if has pussy)
@@ -232,7 +244,9 @@ func _run():
 			saynn("You don’t even care anymore, your eyes show how big of a slut you are, eager moans escape from your lips as the inmate suddenly starts to cum. Your body squirms and shivers, tailhole clenches as a knot spreads your star open wide and forces its way inside. You are being knotted while the cock stuffs your butt full of his cum. There is just no space for it, some sticky jizz starts leaking back out of your fuckhole. All the while inmates jerking off all around you to such a hot view.")
 
 		# (if has cock)
-		if(GM.pc.hasPenis()):
+		if(GM.pc.isWearingChastityCage()):
+			saynn("Your useless cock is bouncing up and down while shooting little lines of {pc.cum} through the chastity cage, your balls are being emptied without attention to them!")
+		elif(GM.pc.hasPenis()):
 			saynn("Your neglected cock is bouncing up and down while shooting little lines of {pc.cum}, your balls are being emptied without attention to them!")
 
 		# (tally mark, bodywriting)
@@ -278,7 +292,9 @@ func _run():
 			saynn("[sayFemale]Oh yeah, {pc.he} is much tighter like this. Take it, slut.[/sayFemale]")
 
 			# (if has cock)
-			if(GM.pc.hasPenis()):
+			if(GM.pc.isWearingChastityCage()):
+				saynn("Your {pc.cock} is leaking again as the lady’s cock smashes your prostate each time she stretches you out.")
+			elif(GM.pc.hasPenis()):
 				saynn("Your {pc.cock} is rock-hard and leaking again as the lady’s cock smashes your prostate each time she stretches you out.")
 
 		# (if no pussy)
@@ -292,7 +308,9 @@ func _run():
 			saynn("[sayFemale]Oh yeah, {pc.he} is much tighter like this. Take it, slut.[/sayFemale]")
 
 			# (if has cock)
-			if(GM.pc.hasPenis()):
+			if(GM.pc.isWearingChastityCage()):
+				saynn("Your {pc.cock} is leaking again as their cocks smash your prostate each they both thrust inside.")
+			elif(GM.pc.hasPenis()):
 				saynn("Your {pc.cock} is rock-hard and leaking again as their cocks smash your prostate each they both thrust inside.")
 
 		saynn("You keep riding both dicks at the same time while other inmates keep stroking themselves past their peaks and covering you with more layers of sticky stuff, you make sure to catch some of it into your opened mouth.")
@@ -302,7 +320,9 @@ func _run():
 			saynn("You can't endure this for very long, a spike of pleasure hits your mind like a brick, you arch your back and start moaning loudly like a slut while your body shivers and shakes. Your stretched pussy squirts with juices and clenches around the cock that’s using it, your tailhole too. Somebody grabs you by the head again and stuffs into your mouth a huge cock that is about to cum. You eagerly suck it and lick the shaft while it starts throbbing and shooting cum. Fuck yeah.")
 
 			# (if has cock)
-			if(GM.pc.hasPenis()):
+			if(GM.pc.isWearingChastityCage()):
+				saynn("As you’re getting fucked, your member throbs a lot but shoots only a few very weak strings of {pc.cum} past its cage, way less than before, seems like your balls got seriously drained during your fun time here.")
+			elif(GM.pc.hasPenis()):
 				saynn("As you’re getting fucked, your member throbs a lot but shoots only a few weak strings of {pc.cum}, way less than before, seems like your balls got seriously drained during your fun time here.")
 
 			saynn("Even through your orgasm, you keep bouncing on two cocks until the inmates under and behind you begin cumming too! Your eyes roll up completely, you look fucked silly while your womb and butt are being stuffed again and again. Your belly gets visibly inflated, some cum already starts spilling out of your holes. It’s too much pleasure, you feel like you’re about to pass out any second.")
@@ -314,7 +334,9 @@ func _run():
 			saynn("You can't endure this for very long, a spike of pleasure hits your mind like a brick, you arch your back and start moaning loudly like a slut while your body shivers and shakes. Your stretched anal ring clenches hard around the cocks that are using it. Somebody grabs you by the head again and stuffs into your mouth a huge cock that is about to cum. You eagerly suck it and lick the shaft while it starts throbbing and shooting cum. Fuck yeah.")
 
 			# (if has cock)
-			if(GM.pc.hasPenis()):
+			if(GM.pc.isWearingChastityCage()):
+				saynn("As you’re getting fucked, your member throbs a lot but shoots only a few very weak strings of {pc.cum} past its cage, way less than before, seems like your balls got seriously drained during your fun time here.")
+			elif(GM.pc.hasPenis()):
 				saynn("As you’re getting fucked, your member throbs a lot but shoots only a few weak strings of {pc.cum}, way less than before, seems like your balls got seriously drained during your fun time here.")
 
 			saynn("Even through your orgasm, you keep bouncing on two cocks until the inmates under and behind you begin cumming too! Your eyes roll up completely, you look fucked silly while your butt is being stuffed again and again. Your belly gets visibly inflated, some cum already starts spilling out of your hole. It’s too much pleasure, you feel like you’re about to pass out any second.")

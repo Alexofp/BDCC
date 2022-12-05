@@ -89,7 +89,7 @@ func _run():
 		addButton("Get on all fours", "Be the good pet for Nova", "get_on_all_fours")
 
 	if(state == "get_on_all_fours"):
-		GM.main.playAnimation(StageScene.Duo, "allfours", {npc="nova", npcAction="stand"})
+		GM.main.playAnimation(StageScene.Duo, "allfours", {npc="nova", npcHard=true, npcAction="stand", exposedBodyparts=[BodypartSlot.Body, BodypartSlot.Vagina, BodypartSlot.Anus, BodypartSlot.Anus, BodypartSlot.Breasts]})
 		# (if puppy)
 		if(isPuppy):
 			saynn("You bark and take a little step back before lowering yourself to your knees. Then you bend forward and get on all fours. Nova holds your leash while you begin to crawl around her, swaying your {pc.masc} hips a lot in the process.")
@@ -110,7 +110,7 @@ func _run():
 
 	if(state == "follow"):
 		aimCameraAndSetLocName("yard_northCorridor")
-		GM.main.playAnimation(StageScene.Duo, "crawl", {npc="nova", npcAction="stand"})
+		GM.main.playAnimation(StageScene.Duo, "crawl", {npc="nova", npcHard=true, npcAction="stand", exposedBodyparts=[BodypartSlot.Body, BodypartSlot.Vagina, BodypartSlot.Anus, BodypartSlot.Anus, BodypartSlot.Breasts]})
 		
 		saynn("Nova tugs gently on the leash to make you follow her, you feel how it makes your bulky collar dig into the neck so you obey her while staying mostly quiet. Pets can’t speak after all.")
 
@@ -130,7 +130,10 @@ func _run():
 
 		# (if has cock)
 		if(GM.pc.hasPenis()):
-			saynn("To be honest, even just doing this makes you feel horny, your exposed {pc.cock} is hard as a rock and dripping precum onto the stone tiles as you crawl forward.")
+			if(GM.pc.isWearingChastityCage()):
+				saynn("To be honest, even just doing this makes you feel horny, your exposed {pc.cock} is trying to get hard while dripping precum onto the stone tiles as you crawl forward. A caged up pet is probably such a good sight.")
+			else:
+				saynn("To be honest, even just doing this makes you feel horny, your exposed {pc.cock} is hard as a rock and dripping precum onto the stone tiles as you crawl forward.")
 
 			# (if also vagina)
 			if(GM.pc.hasVagina()):
@@ -144,7 +147,7 @@ func _run():
 
 	if(state == "follow1"):
 		aimCameraAndSetLocName("yard_eastCorridor")
-		GM.main.playAnimation(StageScene.Duo, "crawl", {npc="nova", npcAction="stand"})
+		GM.main.playAnimation(StageScene.Duo, "crawl", {npc="nova", npcHard=true, npcAction="stand", exposedBodyparts=[BodypartSlot.Body, BodypartSlot.Vagina, BodypartSlot.Anus, BodypartSlot.Anus, BodypartSlot.Breasts]})
 		
 		saynn("Two orange inmates sit on one of the benches, a guy and a girl. Nova approaches them and tugs on the leash, bringing you closer too. You feel a little embarrassed, all their gazes are instantly glued to you.")
 
@@ -255,7 +258,7 @@ func _run():
 
 	if(state == "follow2"):
 		aimCameraAndSetLocName("yard_novaspot")
-		GM.main.playAnimation(StageScene.Duo, "crawl", {npc="nova", npcAction="stand"})
+		GM.main.playAnimation(StageScene.Duo, "crawl", {npc="nova", npcHard=true, npcAction="stand", exposedBodyparts=[BodypartSlot.Body, BodypartSlot.Vagina, BodypartSlot.Anus, BodypartSlot.Anus, BodypartSlot.Breasts]})
 		
 		saynn("You complete the full circle around the green yard and return to where you started, by the end of it you feel more used to crawling on all fours. Being on a leash makes you happy, you wiggle your butt more and rub your face into Nova’s leg.")
 
@@ -299,7 +302,7 @@ func _run():
 
 	if(state == "oral"):
 		# (needs free mouth)
-		GM.main.playAnimation(StageScene.Duo, "kneel", {npc="nova", npcExposedBodyparts=[BodypartSlot.Penis]})
+		GM.main.playAnimation(StageScene.Duo, "kneel", {npc="nova", npcHard=true, npcExposedBodyparts=[BodypartSlot.Penis]})
 
 		saynn("You crawl up to Nova’s legs and put your paws on her thighs. She gasps as you stick your head under her skirt and press your nose against her bulge.")
 
@@ -384,7 +387,7 @@ func _run():
 
 	if(state == "vaginal"):
 		# (needs pussy)
-		GM.main.playAnimation(StageScene.Duo, "allfours", {npc="nova", npcExposedBodyparts=[BodypartSlot.Penis], exposedBodyparts=[BodypartSlot.Vagina]})
+		GM.main.playAnimation(StageScene.Duo, "allfours", {npc="nova", npcHard=true, npcExposedBodyparts=[BodypartSlot.Penis], exposedBodyparts=[BodypartSlot.Body, BodypartSlot.Vagina, BodypartSlot.Anus, BodypartSlot.Anus, BodypartSlot.Breasts]})
 
 		# (if puppy)
 		if(isPuppy):
@@ -414,11 +417,11 @@ func _run():
 
 		# (else)
 		else:
-			saynn("You nod eagerly and just offer Nova the best view of your needy pussy you can give. You stick your tongue at the husky, with each second you feel more aroused just from anticipation.")
+			saynn("You nod eagerly and just offer Nova the best view of your needy pussy you can give. You stick your tongue out at the husky, with each second you feel more aroused just from anticipation.")
 
 			saynn("[say=nova]Well, don’t complain when you get my pups, slut~.[/say]")
 
-		saynn("Nova unzips the skirt too so it wouldn’t get in the way and some armor pieces too, her bodysuit emphasizes her rich muscle structure. She crouches behind you and licks her digits before shoving a few down your snatch. You moan as she quickly checks how lubricated you are. And she seems very satisfied.")
+		saynn("Nova unzips the skirt so it wouldn’t get in the way and takes off some armor pieces too, her bodysuit emphasizes her rich muscle structure. She crouches behind you and licks her digits before shoving a few down your snatch. You moan as she quickly checks how lubricated you are. And she seems very satisfied.")
 
 		# (if puppy)
 		if(isPuppy):
@@ -454,7 +457,9 @@ func _run():
 		saynn("Your whole body starts to experience orgasmic convulsions, your legs shake, body shivers, you squirm under Nova while your pussy gets tighter around her cock and starts to squirt. Your inner walls clench around the canine member, milking it while the cervix becomes less rigid and opens up more. Your passionate moans can probably be heard from a long distance so Nova decides to help you and shoves her paw into your mouth for you to suck on.")
 
 		# (if has cock)
-		if(GM.pc.hasPenis()):
+		if(GM.pc.isWearingChastityCage()):
+			saynn("Your cock throbs and shoots a weak line of {pc.cum} through the hole in your chastity cage onto the stone pathway underneath you!")
+		elif(GM.pc.hasPenis()):
 			saynn("Your cock throbs and shoots a strong line of {pc.cum} onto the stone pathway underneath you!")
 
 		saynn("[say=nova]Oh fuck, your cunt is gonna make me cum[/say]")
@@ -548,13 +553,15 @@ func _run():
 		addButton("Continue", "Time to go", "endthescene")
 		
 	if(state == "anal"):
-		GM.main.playAnimation(StageScene.Duo, "allfours", {npc="nova", npcExposedBodyparts=[BodypartSlot.Penis], exposedBodyparts=[BodypartSlot.Anus]})
+		GM.main.playAnimation(StageScene.Duo, "allfours", {npc="nova", npcHard=true, npcExposedBodyparts=[BodypartSlot.Penis], exposedBodyparts=[BodypartSlot.Body, BodypartSlot.Vagina, BodypartSlot.Anus, BodypartSlot.Anus, BodypartSlot.Breasts]})
 		# (if puppy)
 		if(isPuppy):
 			saynn("You ruff playfully and crawl around Nova on all fours before stopping before her and turning around so she can see your {pc.masc} butt in full glory. You wiggle it eagerly and spread your rear legs more so she can get a look at your {pc.analStretch} star.")
 
 			# (if has cock)
-			if(GM.pc.hasPenis()):
+			if(GM.pc.isWearingChastityCage()):
+				saynn("Your chastity cage wiggles too as you do it. You are horny so much that you keep dripping onto the stone floor.")
+			elif(GM.pc.hasPenis()):
 				saynn("Your {pc.cock} wiggles too as you do it. You are horny so much that you keep dripping onto the stone floor.")
 
 		# (if kitty)
@@ -562,7 +569,9 @@ func _run():
 			saynn("You purr softly and crawl around Nova on all fours, making sure to put as much elegance as you can into your paw and hip movement. Then stop before Nova and teasingly offer her a view of your {pc.analStretch} star. You wiggle your {pc.masc} butt and watch her with your eyes full of desire.")
 
 			# (if has cock)
-			if(GM.pc.hasPenis()):
+			if(GM.pc.isWearingChastityCage()):
+				saynn("Your chastity cage wiggles too as you do it. You are horny so much that you keep dripping onto the stone floor.")
+			elif(GM.pc.hasPenis()):
 				saynn("Your {pc.cock} wiggles too as you do it. You are horny so much that you keep dripping onto the stone floor.")
 
 		saynn("[say=nova]My little pet wants to be fucked, huh~. How can I say no to that.[/say]")
@@ -608,7 +617,7 @@ func _run():
 
 		# (if has cock)
 		if(GM.pc.hasPenis()):
-			saynn("You arch your back, you feel how her {nova.penisSizeStr} cock starts pushing against the bumpy sensitive spot that is your prostate, causing you to let out a passionate moan and drip with more precum.")
+			saynn("You arch your back and feel how her {nova.penisSizeStr} cock starts pushing against the bumpy sensitive spot that is your prostate, causing you to let out a passionate moan and drip with more precum.")
 
 		# (if has vagina)
 		if(GM.pc.hasVagina()):
@@ -630,7 +639,7 @@ func _run():
 
 		# (if has cock)
 		if(GM.pc.hasPenis()):
-			saynn("With each her thrust, your poor little prostate is getting pounded again and again, forcing your cock to leak more of your {pc.cum}. You’re not even touching yourself and your cock is getting milked just from anal sex.")
+			saynn("With each her thrust, your poor little prostate is getting pounded again and again, forcing your {pc.cock} to leak more of your {pc.cum}. You’re not even touching yourself and your cock is getting milked just from anal sex.")
 
 		saynn("The husky lands a spank on your butt and stands pulling your ass back for each thrust. You welcome that and help her, moving your hips to meet Nova’s dick, forcing it deeper each time. The knot is putting quite a bit of pressure on your backdoor, you feel it slowly winning over you clenching. Nova starts to grunt and pant heavily, she seems to be quite close. And so are you.")
 
@@ -642,7 +651,9 @@ func _run():
 		saynn("Nova puts her hand onto your back and pins you still while she pounds your butt with slow but powerful thrusts, stretching you out even more. Eventually your ring gets stretched so much that her meaty orb slips inside, sending waves of sharp sensations throughout your body. You’re squirming and moaning like a slut, you’re so full.")
 
 		# (if has cock, say)
-		if(GM.pc.hasPenis()):
+		if(GM.pc.isWearingChastityCage()):
+			saynn("Your metal chastity cage puts a lot of pressure on your poor cock. Your prostate gets milked so much that it sends you over the edge, your cock shoots many weak lines of {pc.cum} that all hit the floor. You have created a mess!")
+		elif(GM.pc.hasPenis()):
 			saynn("Your prostate gets milked so much that it sends you over the edge, your cock shoots many weak lines of {pc.cum} that all hit the floor. You have created a mess!")
 
 		# (if has pussy)

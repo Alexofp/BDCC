@@ -12,6 +12,7 @@ func _ready():
 	registerEventTrigger(Trigger.TalkingToNPC, EventTriggerLocation.new())
 	registerEventTrigger(Trigger.CaughtStealingInGreenhouse, EventTriggerWeighted.new())
 	registerEventTrigger(Trigger.CaughtOffLimits, EventTriggerWeighted.new())
+	registerEventTrigger(Trigger.PCLookingForTrouble, EventTriggerWeighted.new())
 	registerEventTrigger(Trigger.MasturbationSpottedGuard, EventTriggerWeighted.new())
 	registerEventTrigger(Trigger.MasturbationSpottedInmate, EventTriggerWeighted.new())
 	registerEventTrigger(Trigger.SceneAndStateHook, EventTriggerSceneHook.new())

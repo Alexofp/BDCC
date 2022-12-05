@@ -55,3 +55,8 @@ func getDoll3DScene():
 #	if(thesize <= BreastsSize.C):
 #		return "res://Player/Player3D/Parts/Breasts/BreastsCurvy/BreastsCurvy.tscn"
 #	return "res://Player/Player3D/Parts/Breasts/BreastsBig/BreastsBig.tscn"
+
+func generateDataFor(_dynamicCharacter):
+	size = RNG.pick([
+		BreastsSize.A, BreastsSize.B, BreastsSize.C, BreastsSize.D, BreastsSize.DD, BreastsSize.E,
+	])

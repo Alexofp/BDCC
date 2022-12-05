@@ -23,7 +23,7 @@ func _run():
 		GM.ES.triggerRun("ArenaFighterPCLost", ["nova"])
 
 	if(state == "get_fucked"):
-		GM.main.playAnimation(StageScene.Duo, "kneel", {npc="nova", exposedBodyparts=[BodypartSlot.Vagina, BodypartSlot.Anus, BodypartSlot.Body]})
+		GM.main.playAnimation(StageScene.Duo, "kneel", {npc="nova", hard=true, exposedBodyparts=[BodypartSlot.Vagina, BodypartSlot.Anus, BodypartSlot.Body]})
 		
 		saynn("[say=pc]I won’t call you anything, do your worst![/say]")
 
@@ -56,7 +56,7 @@ func _run():
 		addButton("Continue", "See what happens next", "continue")
 
 	if(state == "continue"):
-		GM.main.playAnimation(StageScene.Solo, "walk", {exposedBodyparts=[BodypartSlot.Vagina, BodypartSlot.Anus, BodypartSlot.Body]})
+		GM.main.playAnimation(StageScene.Solo, "walk", {exposedBodyparts=[BodypartSlot.Vagina, BodypartSlot.Anus, BodypartSlot.Body], hard=true})
 		
 		saynn("Suddenly everything goes completely silent. No Nova, no crowd, no room ambience. You shake your head but no, your blindfold and earplugs sit very tight. Oh no, you’re in complete isolation! All you feel is the floor underneath and your deep breathing.")
 
@@ -71,6 +71,8 @@ func _run():
 			saynn("Your exposed pussy becomes wet with arousal, your subby inner self is cheering loudly. Suddenly Nova’s hand is thrusted between your legs and rubs your sensitive folds before slipping in a buzzing toy! Fuck, it feels so good, you let out a silent moan and arch your back, begging for it to buzz stronger.")
 
 		# (else if has cock)
+		elif(GM.pc.isWearingChastityCage()):
+			saynn("Your {pc.cock} is hard as a rock, your subby inner self is cheering loudly. Suddenly Nova’s hand reaches for your balls and gives them a squeeze before rubbing your chastity cage. Then the hand moves down to your tailhole and prods it before slipping in a buzzing toy! Fuck, it feels so good, you let out a silent moan and arch your back, begging for it to buzz stronger.")
 		elif(GM.pc.hasPenis()):
 			saynn("Your {pc.cock} is hard as a rock, your subby inner self is cheering loudly. Suddenly Nova’s hand reaches for your balls and gives them a squeeze before rubbing your shaft. Then the hand moves down to your tailhole and prods it before slipping in a buzzing toy! Fuck, it feels so good, you let out a silent moan and arch your back, begging for it to buzz stronger.")
 
@@ -112,7 +114,9 @@ func _run():
 			saynn("Nova’s thrusts become more and more powerful, her knot starts to stretch your slit wider before one last thrust that forces it inside! You cum instantly as Nova’s cock breaks through your cervix and suddenly starts stuffing your womb full of dickgirl’s cum. You moan into nothingness while your body squirms and shivers.")
 
 			# (if has cock)
-			if(GM.pc.hasPenis()):
+			if(GM.pc.isWearingChastityCage()):
+				saynn("All the while your own {pc.cock} shoots waves of cum somewhere forward, creating a mess. Wearing chastity only made this moment more special.")
+			elif(GM.pc.hasPenis()):
 				saynn("All the while your own {pc.cock} shoots waves of cum somewhere forward, creating a mess.")
 
 			saynn("After Nova is done cumming inside you, she roughly pulls her cock out and lets go of your hands, causing you to fall forward with your stuffed pussy pointed up and leaking. The buzzing toy flows out of your used fuckhole together with the stream of cum. Wow, you’re such a slut.")
@@ -130,7 +134,9 @@ func _run():
 			saynn("Nova’s thrusts become more and more powerful, her knot starts to stretch your tailhole wider before one last thrust that forces it inside! You cum instantly as Nova’s cock breaks deep inside and suddenly starts stuffing your butt full of dickgirl’s cum. You moan into nothingness while your body squirms and shivers.")
 
 			# (if has cock)
-			if(GM.pc.hasPenis()):
+			if(GM.pc.isWearingChastityCage()):
+				saynn("All the while your own {pc.cock} shoots waves of cum somewhere forward, creating a mess. Wearing chastity only made this moment more special.")
+			elif(GM.pc.hasPenis()):
 				saynn("All the while your own {pc.cock} shoots waves of cum somewhere forward, creating a mess.")
 
 			saynn("After Nova is done cumming inside you, she roughly pulls her cock out and lets go of your hands, causing you to fall forward with your stuffed tailhole pointed up and leaking. The buzzing toy flows out of your used fuckhole together with the stream of cum. Wow, you’re such a slut.")

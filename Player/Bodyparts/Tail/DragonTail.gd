@@ -15,3 +15,8 @@ func getLewdAdjective():
 
 func getDoll3DScene():
 	return "res://Player/Player3D/Parts/Tail/DragonTail/DragonTail.tscn"
+
+func getTraits():
+	return {
+		PartTrait.TailFlexible: true,
+	}

@@ -23,12 +23,14 @@ func resetState():
 	removed = false
 
 func saveData():
-	var data = {}
+	var data = {
+		"removed": removed,
+	}
 
 	return data
 	
 func loadData(_data):
-	pass
+	removed = SAVE.loadVar(_data, "removed", false)
 
 func blocksInventorySlots():
 	return []
@@ -76,4 +78,7 @@ func getExtraDescription():
 	return Util.join(text, "\n")
 
 func getHidesParts(_character):
+	return null
+
+func getCasualName():
 	return null

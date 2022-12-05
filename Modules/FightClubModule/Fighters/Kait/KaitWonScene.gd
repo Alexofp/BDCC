@@ -117,11 +117,14 @@ func _run():
 
 	if(state == "piss_on_her"):
 		# (needs cock or pussy and piss content)
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc="kait", npcAction="kneel", exposedBodyparts=[BodypartSlot.Penis, BodypartSlot.Vagina]})
+		GM.main.playAnimation(StageScene.Duo, "stand", {npc="kait", hard=true, npcAction="kneel", exposedBodyparts=[BodypartSlot.Penis, BodypartSlot.Vagina]})
 
 		# (if has cock)
 		if(GM.pc.hasPenis()):
-			saynn("You stand near Kait’s body and pull out your {pc.cock}. The urge comes quickly, a stream of warm piss emerges from the tip of your dick and offers the cat on the ground a golden shower. She winces and tries to cover herself but the piss gets everywhere, you make sure to coat her hair, face, exposed tits and her legs with your gross fluids. A puddle of piss is getting bigger under Kait, the way she is panting there is no way she didn’t catch the scent.")
+			if(GM.pc.isWearingChastityCage()):
+				saynn("You stand near Kait’s body and expose your {pc.cock} that’s locked away behind a chastity cage. The urge comes quickly, a stream of warm piss emerges from the tip of your dick and offers the cat on the ground a golden shower. She winces and tries to cover herself but the piss gets everywhere, you make sure to coat her hair, face, exposed tits and her legs with your gross fluids. A puddle of piss is getting bigger under Kait, the way she is panting there is no way she didn’t catch the scent.")
+			else:
+				saynn("You stand near Kait’s body and pull out your {pc.cock}. The urge comes quickly, a stream of warm piss emerges from the tip of your dick and offers the cat on the ground a golden shower. She winces and tries to cover herself but the piss gets everywhere, you make sure to coat her hair, face, exposed tits and her legs with your gross fluids. A puddle of piss is getting bigger under Kait, the way she is panting there is no way she didn’t catch the scent.")
 
 			saynn("You finish marking her and put your cock away. Her clothes are now all damp and ruined, kitty’s white fur now has many yellow spots, showcasing the piss quite clearly. It will be a while before she can wash it all off, including the gross scent. The crowd is laughing at the poor kitty that got humiliated so hard.")
 
@@ -141,7 +144,7 @@ func _run():
 
 	if(state == "breed_her"):
 		# (need cock)
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc="kait", npcAction="kneel", exposedBodyparts=[BodypartSlot.Penis], npcExposedBodyparts=[BodypartSlot.Vagina]})
+		GM.main.playAnimation(StageScene.Duo, "stand", {npc="kait", hard=true, npcAction="kneel", exposedBodyparts=[BodypartSlot.Penis], npcExposedBodyparts=[BodypartSlot.Vagina]})
 
 		saynn("You flex your {pc.masc} arms and then expose your {pc.cock}. Kait sees it and shakes her head subtly.")
 

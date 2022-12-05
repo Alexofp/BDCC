@@ -22,6 +22,15 @@ func _init():
 func getVisibleName():
 	return "Bad item"
 
+func getCasualName():
+	if(itemState == null):
+		return getVisibleName()
+	
+	var theCasualName = itemState.getCasualName()
+	if(theCasualName == null):
+		return getVisibleName()
+	return theCasualName
+
 func getStackName():
 	if(amount > 1):
 		return ""+str(amount)+"x"+getVisibleName()
@@ -135,7 +144,8 @@ func addsIntoxicationToPC() -> float:
 	return addsIntoxication() * GM.pc.getIntoxicationMod()
 
 func destroyMe():
-	assert(currentInventory != null)
+	if(currentInventory == null):
+		return
 	var invent = currentInventory
 	invent.removeItem(self)
 	invent.removeEquippedItem(self)
@@ -180,6 +190,9 @@ func loadData(_data):
 func getClothingSlot():
 	return null
 
+func getRequiredBodypart():
+	return null
+
 func getTakeOffScene():
 	return "TakeAnyItemOffScene"
 
@@ -188,6 +201,16 @@ func getPutOnScene():
 
 func getBuffs():
 	return []
+
+func hasBuff(buffID):
+	var thebuffs = getBuffs()
+	if(thebuffs == null):
+		return false
+	
+	for buff in thebuffs:
+		if(buff.id == buffID):
+			return true
+	return false
 
 func getTimedBuffs():
 	return []
@@ -274,7 +297,8 @@ func hasTag(tag):
 	return false
 
 func generateItemState():
-	pass
+	if(getClothingSlot() != null):
+		itemState = ItemState.new()
 
 func getItemState():
 	return itemState
@@ -296,10 +320,10 @@ func setRestraintLevel(newlevel):
 		restraintData.setLevel(newlevel)
 
 func calculateBestRestraintLevel():
-	if(GM.pc != null):
-		return GM.pc.calculateBestRestraintLevel()
-	else:
-		return RNG.randi_range(1, 5)
+	#if(GM.pc != null):
+	#	return GM.pc.calculateBestRestraintLevel()
+	#else:
+	return RNG.randi_range(1, 5)
 
 func canForceOntoNpc():
 	return isRestraint() && !isImportant()
@@ -364,3 +388,31 @@ func repairDamage():
 
 func alwaysVisible():
 	return false
+
+func shouldBeVisibleOnDoll(_character, _doll):
+	return true
+
+func onSexEnd():
+	pass
+
+func getAIForceItemWeight():
+	return 1.0
+
+func getItemWeightForNpcGeneration():
+	return 1.0
+
+func useInSex(_receiver):
+	return {
+		text = "something something",
+	}
+
+func getItemCategory():
+	if(restraintData != null):
+		return ItemCategory.BDSM
+	
+	if(getClothingSlot() in [InventorySlot.UnderwearBottom, InventorySlot.UnderwearTop]):
+		return ItemCategory.Underwear
+	elif(getClothingSlot() != null):
+		return ItemCategory.Clothes
+	
+	return ItemCategory.Generic

@@ -160,7 +160,10 @@ func _run():
 
 		# (if has cock)
 		if(GM.pc.hasPenis()):
-			saynn("You even stroke yourself sneakily until your {pc.cock} is fully hard.")
+			if(GM.pc.isWearingChastityCage()):
+				saynn("You even rub your cage sneakily until your member is hard behind the chastity.")
+			else:
+				saynn("You even stroke yourself sneakily until your {pc.cock} is fully hard.")
 
 		saynn("[say=eliza]You certainly are quite something, I gotta say.[/say]")
 

@@ -60,3 +60,14 @@ func getTags():
 
 func getBuyAmount():
 	return 1
+
+func useInSex(_receiver):
+	_receiver.forceIntoHeat()
+	_receiver.addEffect(StatusEffect.SexHeatDrug)
+	_receiver.removeEffect(StatusEffect.SexAnaphrodisiacDrug)
+	return {
+		text = "{USER.You} {USER.youVerb('feel')} incredibly lusty.".replace("USER", _receiver.getID()),
+	}
+
+func getItemCategory():
+	return ItemCategory.Medical

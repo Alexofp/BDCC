@@ -19,7 +19,7 @@ static func maxi(value1: int, value2: int) -> int:
 	return value2
 
 static func mini(value1: int, value2: int) -> int:
-	if(value2 > value1):
+	if(value1 > value2):
 		return value2
 	return value1
 
@@ -159,6 +159,15 @@ static func roundF(number: float, digitsAmount: int = 0):
 		mult *= 10.0
 	
 	return round(number*mult)/mult
+
+static func moveNumberTowards(origNumber, targetNumber, speed):
+	var delta = targetNumber - origNumber
+	if(delta > speed):
+		delta = speed
+	if(delta < -speed):
+		delta = -speed
+	
+	return origNumber + delta
 
 static func getSpeciesName(species: Array):
 	if(species.size() == 0):
@@ -351,6 +360,11 @@ static func muffledSpeech(text: String, strenght: int = 1):
 			newtext += oldch
 		
 	return newtext
+
+static func capitalizeFirstLetter(string:String):
+	if(string.length() == 0):
+		return string
+	return string[0].to_upper() + string.substr(1,-1)
 
 static func variantTypeToString(type):
 	if(type == TYPE_NIL):
@@ -545,3 +559,16 @@ static func splitOnFirst(text: String, separator: String):
 	stuff.remove(0)
 	
 	return [firstEntry, join(stuff, separator)]
+
+static func isArrayOfArrays(theArray: Array):
+	if(theArray.size() == 0):
+		return true
+	
+	if(theArray[0] is Array):
+		return true
+	return false
+
+static func replaceIfNotNull(thestring, whattoreplace, replacewith):
+	if(thestring == null || !(thestring is String)):
+		return thestring
+	return thestring.replace(whattoreplace, replacewith)

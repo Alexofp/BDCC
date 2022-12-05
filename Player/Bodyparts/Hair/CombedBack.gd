@@ -4,5 +4,8 @@ func _init():
 	visibleName = "combed back"
 	id = "combedbackhair"
 
+	maleWeight = 1.0
+	femaleWeight = 0.0
+
 func getDoll3DScene():
 	return "res://Player/Player3D/Parts/Hair/CombedBackHair/CombedBackHair.tscn"

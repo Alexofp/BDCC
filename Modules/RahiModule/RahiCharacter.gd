@@ -3,6 +3,7 @@ extends Character
 func _init():
 	id = "rahi"
 	npcHasMenstrualCycle = true
+	npcCharacterType = CharacterType.Inmate
 	
 func _getName():
 	return "Rahi"
@@ -44,3 +45,5 @@ func onGivingBirth(_impregnatedEggCells: Array, _newkids: Array):
 func createEquipment():
 	getInventory().equipItem(GlobalRegistry.createItemNoID("inmatecollar"))
 	getInventory().equipItem(GlobalRegistry.createItemNoID("inmateuniform"))
+	#getInventory().equipItem(GlobalRegistry.createItemNoID("LaceBra"))
+	#getInventory().equipItem(GlobalRegistry.createItemNoID("LacePanties"))

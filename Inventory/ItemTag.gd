@@ -9,6 +9,14 @@ enum {
 	SoldByGeneralVendomat,
 	SoldByMedicalVendomat,
 	SoldByUnderwearVendomat,
+	ChastityCage,
+	
+	GuardUniform,
+	NurseUniform,
+	EngineerUniform,
+	GeneralInmateUniform,
+	HighSecurityInmateUniform,
+	SexualDeviantInmateUniform,
 }
 
 static func getName(tag):

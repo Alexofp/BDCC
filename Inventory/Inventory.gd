@@ -70,6 +70,20 @@ func getItemByUniqueID(uniqueID: String):
 			return item
 	return null
 
+func getEquippedItemByUniqueID(uniqueID: String):
+	for slot in equippedItems.keys():
+		var item = equippedItems[slot]
+		if(item.uniqueID == uniqueID):
+			return item
+	return null
+
+func getEquippedItemByID(theID: String):
+	for slot in equippedItems.keys():
+		var item = equippedItems[slot]
+		if(item.id == theID):
+			return item
+	return null
+
 func removeItem(item):
 	if(items.has(item)):
 		items.erase(item)
@@ -363,6 +377,25 @@ func forceRestraintsWithTag(tag, amount = 1):
 				return result
 	return result
 
+func getAmountOfRestraintsThatCanForce(tag):
+	var itemIDs = GlobalRegistry.getItemIDsByTag(tag)
+	var result = 0
+	
+	for itemID in itemIDs:
+		var potentialItem = GlobalRegistry.getItemRef(itemID)
+		
+		var slot = potentialItem.getClothingSlot()
+		if(slot == null || !canEquipSlot(slot)):
+			continue
+		
+		if(hasSlotEquipped(slot)):
+			var ourItem = getEquippedItem(slot)
+			if(ourItem.isRestraint()):
+				continue
+		
+		result += 1
+	return result
+
 func clearStaticRestraints():
 	for slot in InventorySlot.getStatic():
 		removeItemFromSlot(slot)
@@ -370,6 +403,18 @@ func clearStaticRestraints():
 func hasLockedStaticRestraints():
 	for slot in InventorySlot.getStatic():
 		if(hasSlotEquipped(slot)):
+			return true
+	return false
+
+func hasIllegalItems():
+	for item in items:
+		if(item.hasTag(ItemTag.Illegal)):
+			return true
+
+	for itemSlot in equippedItems.keys():
+		var item = equippedItems[itemSlot]
+
+		if(item.hasTag(ItemTag.Illegal)):
 			return true
 	return false
 

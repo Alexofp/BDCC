@@ -2,16 +2,16 @@ extends Node
 
 var game_version_major = 0
 var game_version_minor = 0
-var game_version_revision = 18
+var game_version_revision = 19
 var game_version_suffix = ""
 
 var currentUniqueID = 0
 var currentChildUniqueID = 0
+var currentNPCUniqueID = 0
 
 var scenes: Dictionary = {}
 var sceneCreators: Dictionary = {}
 var bodyparts: Dictionary = {}
-var characters: Dictionary = {}
 var characterClasses: Dictionary = {}
 var attacks: Dictionary = {}
 var statusEffects: Dictionary = {}
@@ -43,6 +43,10 @@ var mapFloors: Dictionary = {}
 var imagePacks: Dictionary = {}
 var worldEdits: Dictionary = {}
 var regularWorldEdits: Array = []
+var sexActivities: Dictionary = {}
+var sexActivitiesReferences: Dictionary = {}
+var fetishes: Dictionary = {}
+var sexGoals: Dictionary = {}
 
 var bodypartStorageNode
 
@@ -239,6 +243,11 @@ func _ready():
 	
 	registerLustTopicFolder("res://Game/LustCombat/Topic/")
 	
+	#registerSexActionsFolder("res://Game/SexEngine/SexActions/")
+	registerSexActivitiesFolder("res://Game/SexEngine/SexActivity/")
+	registerFetishesFolder("res://Game/SexEngine/Fetish/")
+	registerSexGoalsFolder("res://Game/SexEngine/Goal/")
+	
 	registerStatusEffectFolder("res://StatusEffect/")
 	
 	registerSpeciesFolder("res://Species/")
@@ -247,7 +256,6 @@ func _ready():
 	
 	registerStageSceneFolder("res://Player/StageScene3D/Scenes/")
 	
-	#registerMapFloor("Medical", "res://Game/World/Floors/Medical.tscn")
 	registerMapFloorFolder("res://Game/World/Floors/")
 	
 	registerImagePackFolder("res://Images/ImagePacks/")
@@ -264,6 +272,10 @@ func generateUniqueID():
 func generateChildUniqueID():
 	currentChildUniqueID += 1
 	return currentChildUniqueID - 1
+
+func generateNPCUniqueID():
+	currentNPCUniqueID += 1
+	return currentNPCUniqueID - 1
 
 func getGameVersionString():
 	return str(game_version_major)+"."+str(game_version_minor)+"."+str(game_version_revision)+str(game_version_suffix)
@@ -357,21 +369,10 @@ func registerBodypartFolder(folder: String):
 func registerCharacter(path: String):
 	var character = load(path)
 	var characterObject = character.new()
-	characters[characterObject.id] = characterObject
+	#characters[characterObject.id] = characterObject
 	characterClasses[characterObject.id] = character
-	add_child(characterObject)
-
-func recreateCharacters():
-	for characterID in characters:
-		var ch = characters[characterID]
-		remove_child(ch)
-		ch.queue_free()
-	
-	for characterID in characterClasses:
-		var character = characterClasses[characterID]
-		var characterObject = character.new()
-		characters[characterObject.id] = characterObject
-		add_child(characterObject)
+	#add_child(characterObject)
+	characterObject.queue_free()
 
 func registerCharacterFolder(folder: String):
 	var dir = Directory.new()
@@ -395,13 +396,24 @@ func getCharacter(id: String):
 	if(id == "pc"):
 		return GM.pc
 	
-	if(!characters.has(id)):
-		Log.printerr("ERROR: character with the id "+id+" wasn't found")
-		return null
-	return characters[id]
+	if(GM.main != null):
+		var mainCharacter = GM.main.getCharacter(id)
+		if(mainCharacter != null):
+			return mainCharacter
+	
+	#if(!characters.has(id)):
+	Log.printerr("ERROR: character with the id "+id+" wasn't found ")
+	return null
+	#return characters[id]
 
 func getCharacters():
-	return characters
+	if(GM.main != null):
+		return GM.main.getCharacters()
+	
+	return {}
+
+func getCharacterClasses():
+	return characterClasses
 
 func registerAttack(path: String):
 	var attack = load(path)
@@ -500,6 +512,8 @@ func getAllPlayableSpecies():
 			result[speciesID] = allSpecies[speciesID]
 	return result
 
+func getAllSpecies():
+	return allSpecies
 
 
 func registerItem(path: String):
@@ -1074,3 +1088,117 @@ func getWorldEdits():
 
 func getRegularWorldEdits():
 	return regularWorldEdits
+
+
+
+
+
+func registerSexActivity(path: String):
+	var sexActivity = load(path)
+	var sexActivityObject = sexActivity.new()
+	
+	sexActivities[sexActivityObject.id] = sexActivity
+	sexActivitiesReferences[sexActivityObject.id] = sexActivityObject
+
+func registerSexActivitiesFolder(folder: String):
+	var dir = Directory.new()
+	if dir.open(folder) == OK:
+		dir.list_dir_begin()
+		var file_name = dir.get_next()
+		while file_name != "":
+			if dir.current_is_dir():
+				pass
+				#print("Found directory: " + file_name)
+			else:
+				if(file_name.get_extension() == "gd"):
+					var full_path = folder.plus_file(file_name)
+					#print("Registered sex activity: " + full_path)
+					registerSexActivity(full_path)
+			file_name = dir.get_next()
+	else:
+		Log.printerr("An error occurred when trying to access the path "+folder)
+		
+func createSexActivity(id: String):
+	if(sexActivities.has(id)):
+		return sexActivities[id].new()
+	else:
+		Log.printerr("ERROR: sex activity with the id "+id+" wasn't found")
+		return null
+
+func getSexActivityReference(id: String):
+	if(sexActivitiesReferences.has(id)):
+		return sexActivitiesReferences[id]
+	else:
+		Log.printerr("ERROR: sex activity with the id "+id+" wasn't found")
+		return null
+		
+func getSexActivityReferences():
+	return sexActivitiesReferences
+
+
+
+func registerFetish(path: String):
+	var loadedClass = load(path)
+	var object = loadedClass.new()
+	
+	fetishes[object.id] = object
+
+func getScriptsInFolder(folder: String):
+	var result = []
+	
+	var dir = Directory.new()
+	if dir.open(folder) == OK:
+		dir.list_dir_begin()
+		var file_name = dir.get_next()
+		while file_name != "":
+			if dir.current_is_dir():
+				pass
+				#print("Found directory: " + file_name)
+			else:
+				if(file_name.get_extension() == "gd"):
+					var full_path = folder.plus_file(file_name)
+					result.append(full_path)
+			file_name = dir.get_next()
+	else:
+		Log.printerr("An error occurred when trying to access the path "+folder)
+	
+	return result
+	
+func registerFetishesFolder(folder: String):
+	var scripts = getScriptsInFolder(folder)
+	for scriptPath in scripts:
+		registerFetish(scriptPath)
+
+func getFetish(id: String):
+	if(fetishes.has(id)):
+		return fetishes[id]
+	else:
+		Log.printerr("ERROR: fetish with the id "+id+" wasn't found")
+		return null
+
+func getFetishes():
+	return fetishes
+
+
+
+
+func registerSexGoal(path: String):
+	var loadedClass = load(path)
+	var object = loadedClass.new()
+	
+	sexGoals[object.id] = object
+
+func registerSexGoalsFolder(folder: String):
+	var scripts = getScriptsInFolder(folder)
+	for scriptPath in scripts:
+		registerSexGoal(scriptPath)
+
+func getSexGoal(id: String):
+	if(sexGoals.has(id)):
+		return sexGoals[id]
+	else:
+		Log.printerr("ERROR: sex goal with the id "+id+" wasn't found")
+		return null
+
+func getSexGoals():
+	return sexGoals

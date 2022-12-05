@@ -10,17 +10,15 @@ func saveData():
 		"savefile_version": currentSavefileVersion,
 		"currentUniqueID_DONT_TOUCH": GlobalRegistry.currentUniqueID,
 		"currentChildUniqueID_DONT_TOUCH": GlobalRegistry.currentChildUniqueID,
+		"currentNPCUniqueID_DONT_TOUCH": GlobalRegistry.currentNPCUniqueID,
 	}
 	
 	data["player"] = GM.main.getOriginalPC().saveData()
 	if(GM.main.getOverriddenPC() != null):
 		data["player_override"] = GM.main.getOverriddenPC().saveData()
 	
-	var charactersData = {}
-	for characterID in GlobalRegistry.getCharacters():
-		charactersData[characterID] = GlobalRegistry.getCharacter(characterID).saveData()
-	
-	data["characters"] = charactersData
+	data["characters"] = GM.main.saveCharactersData()
+	data["dynamicCharacters"] = GM.main.saveDynamicCharactersData()
 	
 	data["main"] = GM.main.saveData()
 	
@@ -38,6 +36,7 @@ func loadData(data: Dictionary):
 		
 	GlobalRegistry.currentUniqueID = SAVE.loadVar(data, "currentUniqueID_DONT_TOUCH", 0)
 	GlobalRegistry.currentChildUniqueID = SAVE.loadVar(data, "currentChildUniqueID_DONT_TOUCH", 0)
+	GlobalRegistry.currentNPCUniqueID = SAVE.loadVar(data, "currentNPCUniqueID_DONT_TOUCH", 0)
 	
 	GM.main.getOriginalPC().loadData(data["player"])
 	
@@ -47,13 +46,8 @@ func loadData(data: Dictionary):
 		GM.main.overridePC()
 		GM.main.getOverriddenPC().loadData(data["player_override"])
 	
-	var charactersData = SAVE.loadVar(data, "characters", {})
-	for characterID in charactersData:
-		var character = GlobalRegistry.getCharacter(characterID)
-		if(character == null):
-			continue
-		character.loadData(charactersData[characterID])
-	
+	GM.main.loadCharactersData(SAVE.loadVar(data, "characters", {}))
+	GM.main.loadDynamicCharactersData(SAVE.loadVar(data, "dynamicCharacters", {}))
 	GM.main.loadData(SAVE.loadVar(data, "main", {}))
 	
 	# post loading refresh

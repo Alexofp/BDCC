@@ -27,12 +27,20 @@ func doAction(_lustState: LustCombatState, _args):
 	var pc:Player = _lustState.getCharacter()
 	
 	var text = ""
-	if(RNG.chance(50)):
-		text += "You move your hand down to your crotch and give your {pc.cock} a little rub through the clothing. Your digits find the sensitive tip and focus on it, making your clothes bulge out more in the process."
-		text += "\n\n"
+	if(pc.isWearingChastityCage()):
+		if(RNG.chance(50)):
+			text += "You move your hand down to your crotch and give your {pc.cock} a little rub through the clothing. Your digits find the spot that feels the best and focus on it. Damn cage makes it impossible to stroke."
+			text += "\n\n"
+		else:
+			text += "You get a feel for your covered up {pc.cock} and stroke your cage slightly through the clothing. Too bad that barely provides any stimulation. Still, after teasing yourself you find your member leaking some pre."
+			text += "\n\n"
 	else:
-		text += "You get a feel for your covered up {pc.cock} and stroke it slightly through the clothing. The outline of your shaft becomes bigger as you tease yourself more, it’s already leaking some pre."
-		text += "\n\n"
+		if(RNG.chance(50)):
+			text += "You move your hand down to your crotch and give your {pc.cock} a little rub through the clothing. Your digits find the sensitive tip and focus on it, making your clothes bulge out more in the process."
+			text += "\n\n"
+		else:
+			text += "You get a feel for your covered up {pc.cock} and stroke it slightly through the clothing. The outline of your shaft becomes bigger as you tease yourself more, it’s already leaking some pre."
+			text += "\n\n"
 	
 	if(RNG.chance(50) && _lustState.isInBattle()):
 		text += "You offer the enemy a good view of your bulge as you rub yourself. You smirk, hoping that they like the show."
@@ -51,12 +59,20 @@ func doAction(_lustState: LustCombatState, _args):
 		text += "\n\n"
 	
 	if(RNG.chance(50)):
-		text += RNG.pick([
-			"[say=pc]Fuck yeah..[/say]",
-			"[say=pc]Fuck, stroking my cock feels so good..[/say]",
-			"[say=pc]Anyone can see me doing this..[/say]",
-			"[say=pc]Oh fuck..[/say]",
-		])
+		if(pc.isWearingChastityCage()):
+			text += RNG.pick([
+				"[say=pc]Huff.. Stupid cage..[/say]",
+				"[say=pc]Fuck, I wanna stroke my cock so much..[/say]",
+				"[say=pc]Anyone can see me doing this..[/say]",
+				"[say=pc]Oh fuck..[/say]",
+			])
+		else:
+			text += RNG.pick([
+				"[say=pc]Fuck yeah..[/say]",
+				"[say=pc]Fuck, stroking my cock feels so good..[/say]",
+				"[say=pc]Anyone can see me doing this..[/say]",
+				"[say=pc]Oh fuck..[/say]",
+			])
 		text += "\n\n"
 		if(_lustState.isInPublic() && !_lustState.isInBattle()):
 			text += "You hope no one heard that.. You try to keep your mouth shut."

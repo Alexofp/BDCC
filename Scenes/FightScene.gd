@@ -19,12 +19,13 @@ var lastPlayerAttackData = null
 
 func _init():
 	sceneID = "FightScene"
+	showFightUI = true
 
 func _initScene(_args = []):
 	enemyID = _args[0]
 	enemyCharacter = GlobalRegistry.getCharacter(enemyID)
 	enemyCharacter.beforeFightStarted()
-	setFightCharacter(enemyID)
+	addCharacter(enemyID)
 	
 	if(_args.size() > 1):
 		battleName = _args[1]
@@ -37,7 +38,6 @@ func _initScene(_args = []):
 		GM.pc.getLustCombatState().setEnemyID(enemyID)
 
 func _run():
-	updateFightCharacter()
 	if(state == ""):
 		saynn(enemyCharacter.getFightIntro(battleName))
 		#setState("fighting")
@@ -187,7 +187,7 @@ func _run():
 				var pcAttack:Attack = GlobalRegistry.getAttack(lastPlayerAttackData["attackID"])
 				
 				if(pcAttack.canUse(GM.pc, enemyCharacter, lastPlayerAttackData)):
-					addButtonWithChecks("Double down", "Spend 30 stamina to do the same attack that you did a second time before the enemy attacks you", "dodge_doubledown", [], [ButtonChecks.HasStamina])
+					addButtonWithChecks("Double down", "Spend 10 stamina to do the same attack that you did a second time before the enemy attacks you", "dodge_doubledown", [], [ButtonChecks.HasStamina])
 				else:
 					addDisabledButton("Double down", "You can't double down on this attack")
 			else:
@@ -359,7 +359,7 @@ func _react(_action: String, _args):
 			GM.pc.addStamina(-15)
 		if(_action == "dodge_doubledown"):
 			whatPlayerDid = doPlayerAttack(lastPlayerAttackData)
-			GM.pc.addStamina(-30)
+			GM.pc.addStamina(-10)
 		
 			var won = checkEnd()
 			if(won == "lost"):
@@ -887,7 +887,6 @@ func loadData(data):
 	battleEndedHow = SAVE.loadVar(data, "battleEndedHow", "")
 	savedAIAttackID = SAVE.loadVar(data, "savedAIAttackID", "")
 	enemyCharacter = GlobalRegistry.getCharacter(enemyID)
-	setFightCharacter(enemyID)
 	battleName = SAVE.loadVar(data, "battleName", "")
 	currentAttackerID = SAVE.loadVar(data, "currentAttackerID", "")
 	currentReceiverID = SAVE.loadVar(data, "currentReceiverID", "")

@@ -137,3 +137,6 @@ func processTime(_seconds: int):
 
 func getBreastsScale():
 	return 1.0
+
+func getRevealMessage():
+	return Util.capitalizeFirstLetter(getLewdDescriptionAndName()) + " got revealed."

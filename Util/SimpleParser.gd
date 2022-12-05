@@ -34,10 +34,10 @@ func getExpressionsFromText(text: String):
 			currentExpr += letter
 			continue
 		
-		if(!inString && inExpr && letter == "'"):
+		if(!inString && inExpr && letter in ["'", "’", "‘"]):
 			inString = true
 		else:
-			if(inString && inExpr && letter == "'"):
+			if(inString && inExpr && letter in ["'", "’", "‘"]):
 				inString = false
 				
 		if(!inString2 && inExpr && letter == "\""):

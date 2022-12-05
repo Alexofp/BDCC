@@ -23,7 +23,7 @@ func _run():
 		GM.ES.triggerRun("ArenaFighterPCLost", ["rebel"])
 
 	if(state == "get_fisted"):
-		GM.main.playAnimation(StageScene.Duo, "kneel", {npc="rebel", exposedBodyparts=[BodypartSlot.Vagina, BodypartSlot.Anus]})
+		GM.main.playAnimation(StageScene.Duo, "kneel", {npc="rebel", hard=true, exposedBodyparts=[BodypartSlot.Vagina, BodypartSlot.Anus]})
 		
 		saynn("The giant buff mare directs her attention to you and puts on an evil smile. You try to brace and cover yourself with your hands but she easily picks your whole body up like it’s nothing and carries you to the middle of the arena.")
 
@@ -75,7 +75,9 @@ func _run():
 			saynn("With that fist up your butt, your pussy looks cute and small in comparison. The overstimulation causes your slit to start squirting all over the floor.")
 
 		# (if has cock)
-		if(GM.pc.hasPenis()):
+		if(GM.pc.isWearingChastityCage()):
+			saynn("Your {pc.cock} instantly goes as hard as the chastity cage allows and shoots a strong line of your precum.")
+		elif(GM.pc.hasPenis()):
 			saynn("Your {pc.cock} instantly goes full hard and shoots a strong line of your precum.")
 
 		saynn("[say=rebel]What did ya say, sweetie? All I hear is your ass making wet noises.[/say]")

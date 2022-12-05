@@ -32,6 +32,9 @@ func _ready():
 	if(addTestBody):
 		testBody()
 	$RandomLeakTimer.start(RNG.randf_range(3, 20))
+	
+	if(GM.main != null && is_instance_valid(GM.main)):
+		var _ok = GM.main.connect("saveLoadingFinished", self, "reconnect")
 
 func testBody():
 	addPartObject("body", load("res://Player/Player3D/Parts/Body/HumanBody/HumanBody.tscn").instance())
@@ -99,6 +102,13 @@ func setTemporaryState(stateID, value):
 	for slot in parts:
 		var part = parts[slot]
 		part.setState(stateID, value)
+
+func getFinalState(stateID):
+	if(temporaryState.has(stateID)):
+		return temporaryState[stateID]
+	if(state.has(stateID)):
+		return state[stateID]
+	return null
 
 func clearTemporaryState():
 	for stateID in temporaryState:
@@ -182,6 +192,15 @@ func setShapeKeyValue(shapeKey: String, value: float):
 		
 		part.setShapeKeyValue(shapeKey, value)
 
+func reconnect():
+	if(savedCharacterID == null || savedCharacterID == ""):
+		return
+	
+	disconnectFromOld()
+	var cashedCharID = savedCharacterID
+	savedCharacterID = ""
+	loadCharacter(cashedCharID)
+
 func disconnectFromOld():
 	if(savedCharacterID != null && savedCharacterID != ""):
 		var ch = GlobalRegistry.getCharacter(savedCharacterID)
@@ -229,6 +248,9 @@ func setExposedBodyparts(newExposedBodyparts):
 
 func getExposedBodyparts():
 	return exposedBodyparts
+
+func isForcedExposed(slot):
+	return exposedBodyparts.has(slot)
 
 func setBoneScaleVector(boneName: String, boneScale: Vector3):
 	var skeleton:Skeleton = getDollSkeleton().getSkeleton()
@@ -455,3 +477,10 @@ func _on_RandomLeakTimer_timeout():
 		waitTime -= 5.0
 	
 	$RandomLeakTimer.start(RNG.randf_range(waitTime * 0.5, waitTime * 1.5))
+
+func setCockTemporaryHard():
+	var currentCockState = getFinalState("cock")
+	if(currentCockState in ["caged", "condom"]):
+		return
+	
+	setTemporaryState("cock", "")

@@ -24,3 +24,9 @@ func getOrificeName():
 
 func safeWhenExposed():
 	return false
+
+func getRevealMessage():
+	if(orifice == null):
+		return .getRevealMessage()
+	
+	return Util.capitalizeFirstLetter(orifice.getLoosenessString()) + " anus got revealed."

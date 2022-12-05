@@ -3,6 +3,7 @@ class_name StatusEffectBase
 
 var id = "badstatuseffect"
 var isBattleOnly = false
+var isSexEngineOnly = false
 var character
 var turns = -1
 
@@ -26,6 +27,9 @@ func setCharacter(c):
 	
 func processBattleTurn():
 	pass
+
+func processSexTurn():
+	pass
 	
 func processTime(_secondsPassed: int):
 	pass
@@ -39,7 +43,7 @@ func getEffectDesc():
 func getVisisbleDescription():
 	var text = getEffectDesc()
 	var buffs = getBuffs()
-	if(buffs.size() > 0):
+	if(buffs != null && (buffs is Array) && buffs.size() > 0):
 		for buff in buffs:
 			text += "\n" + "[color=#"+buff.getBuffColor().to_html(false)+"]" + buff.getVisibleDescription() + "[/color]"
 	return text

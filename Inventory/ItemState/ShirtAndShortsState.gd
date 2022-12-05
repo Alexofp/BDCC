@@ -5,6 +5,9 @@ var shortsPulledDown = false
 var shirtOpened = false
 var clothesDamaged = false
 
+func getCasualName():
+	return "uniform"
+
 func areShortsPulledDown():
 	return shortsPulledDown
 
@@ -56,6 +59,9 @@ func blocksInventorySlots():
 	return result
 
 func coversBodyparts():
+	if(isRemoved()):
+		return {}
+	
 	var result = {}
 	result[BodypartSlot.Body] = true
 	if(!shortsPulledDown && !clothesDamaged):

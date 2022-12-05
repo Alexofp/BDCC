@@ -123,10 +123,10 @@ func hoursPassed(_howmuch):
 		return
 	orifice.hoursPassed(_howmuch)
 
-func handleInsertion(size: float):
+func handleInsertion(size: float, stretchMult = 1.0):
 	if(orifice == null):
 		return
-	orifice.handleInsertion(size)
+	orifice.handleInsertion(size, stretchMult)
 
 func getOrificeName():
 	return "error"
@@ -175,3 +175,30 @@ func hasWomb():
 func updateAppearance():
 	if(character != null && getCharacter() != null):
 		getCharacter().updateAppearance()
+
+func getRevealMessage():
+	return getLewdName()+" got revealed."
+
+func getTraits():
+	return null
+
+func hasTrait(traitID):
+	var theTraits = getTraits()
+	
+	if(theTraits == null):
+		return false
+	
+	if(theTraits is Array):
+		return theTraits.has(traitID)
+	
+	if(theTraits is Dictionary):
+		return theTraits.has(traitID) && theTraits[traitID]
+	
+	return false
+
+func npcGenerationWeight(_dynamicCharacter):
+	return 1.0
+
+func generateDataFor(_dynamicCharacter):
+	if(orifice != null):
+		orifice.generateDataFor(_dynamicCharacter)
