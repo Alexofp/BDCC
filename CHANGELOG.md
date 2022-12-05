@@ -6,6 +6,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.0.19] - 2022-12-05
+### Added
+- Random encounters overhaul! Old encounters with a few generic predefined npcs got replaced with new ones that use procedurally generated npcs. New encounters change depending on the npc's procedurally generated personality
+- Sex engine! An initial implementation of it but already has too many features to list everything. All the important sex scenes will still be fully hand-written, only the random encounters with procedural npcs use the sex engine currently
+- Sex engine supports vaginal/anal/oral sex, tribadism, drug use, condoms, bodywritings, bondage, violence. Player can be the dom that fully controls where the scene goes or a sub that is on a receiveing end and has to endure what the npc has in store for them or try to fight their decisions. Relatively easy to expand with more activities
+- Procedural npcs. Guards, inmates, Nurses. Random name, gender, species, stats, attacks, equipment, personality, fetishes, likes/dislikes, etc. Should work with modded species out of the box
+- Procedural npcs have a dynamic personality that will change after sex depending on many factors. An npc might become more subby or more mean for example
+- New encounters menu where you can 'forget' procedural npcs and change some settings.
+- 'Look for trouble' button in the 'Me' menu button. Forces an encounter if the current room has any that are possible
+- Male chastity. Sometimes the guards will force a chastity cage on you. All the sex scenes got changed a bit to account for the chastity cage (Cage sprites by Max-Maxou)
+- Forced permanent chastity cage. You choose this option during the character creator. Eliza will then force a chastity cage on you during the intro scene that you can never take off. Might be expanded in the future
+- Captain, nurses and guards received their uniforms. Technically noone is nude anymore
+- Mods can now specify a default portrait art for a modded character without creating an entire new imagepack
+
+### Changed
+- Penises look flacid when the characters have less than 50 lust. (Sprites by Max-Maxou)
+- Skills are now grouped into a single 'Skills' tab instead of having one tab per skill, less clutter, easier to select on touch devices.
+- Huge optimization of how npcs are processed. If the npc is not currently participating in any scene they are no longer being processed every tick. Unless they are pregnant. This should allow for pretty much unlimited amount of important/generated npcs without any lag
+- Scrollbars are now more wide on android
+- Cheat menu to spawn an item got changed to a better and easier to use one. Should be usable on android too
+
 ## [0.0.18] - 2022-10-26
 ### Added
 - Main quest extended with new events/scenes. Help Tavi on her mission to escape the prison while getting into lots of kinky situations. This was the focus of this update ^^
@@ -154,7 +175,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Turn-based fighting
 - Initial player customization
 
-[Unreleased]: https://github.com/Alexofp/BDCC/compare/0.0.18...main
+[Unreleased]: https://github.com/Alexofp/BDCC/compare/0.0.19...main
+[0.0.19]: https://github.com/Alexofp/BDCC/compare/0.0.18...0.0.19
 [0.0.18]: https://github.com/Alexofp/BDCC/compare/0.0.17...0.0.18
 [0.0.17]: https://github.com/Alexofp/BDCC/compare/0.0.16...0.0.17
 [0.0.16]: https://github.com/Alexofp/BDCC/compare/0.0.15...0.0.16
