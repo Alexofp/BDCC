@@ -12,7 +12,11 @@ func getPossibleAttacks():
 
 func pickEquipment(character:DynamicCharacter, _args = {}):
 	
-	var theEquipment = ["GuardArmor"]
+	var theEquipment = []
+	
+	var randomUniform = getRandomItemIDByTag(ItemTag.GuardUniform)
+	if(randomUniform != null):
+		theEquipment.append(randomUniform)
 	
 	var ehibit = character.getFetishHolder().getFetishValue(Fetish.Exhibitionism)
 	

@@ -30,6 +30,11 @@ func getSubTags():
 func getSubTagsCheck():
 	return [SexActivityTag.OrderedToDoSomething, SexActivityTag.BeingUndressed]
 
+func getActivityBaseScore(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexSubInfo):
+	if(_domInfo.goalsScoreMax({SexGoal.TieUp: 1.0}, _subInfo.charID) > 0.0):
+		return 0.3
+	return 0.0
+
 func canStartActivity(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexSubInfo):
 	var itemToUndress = getItemToRemove(_subInfo.getChar())
 	if(itemToUndress == null):

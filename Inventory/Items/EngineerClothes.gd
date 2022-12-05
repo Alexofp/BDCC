@@ -16,6 +16,11 @@ func getBuffs():
 	return [
 		]
 
+func getTags():
+	return [
+		ItemTag.EngineerUniform,
+		]
+
 func getTakingOffStringLong(withS):
 	if(withS):
 		return "takes off your inmate shirt and pulls down the shorts"

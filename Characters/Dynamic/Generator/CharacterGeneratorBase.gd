@@ -306,6 +306,19 @@ func applyArgs(_character:DynamicCharacter, _args = {}):
 func pickCharacterType(character:DynamicCharacter, _args = {}):
 	character.npcCharacterType = CharacterType.Generic
 		
+func getRandomItemIDByTag(itemTag):
+	var itemIDs = GlobalRegistry.getItemIDsByTag(itemTag)
+	if(itemIDs == null || itemIDs.size() == 0):
+		return null
+	
+	var weights = []
+	for itemID in itemIDs:
+		var itemRef:ItemBase = GlobalRegistry.getItemRef(itemID)
+		
+		weights.append(itemRef.getItemWeightForNpcGeneration())
+	
+	return RNG.pickWeighted(itemIDs, weights)
+		
 func generate(_args = {}):
 	var character = makeBase("dynamicnpc", _args)
 	pickCharacterType(character, _args)

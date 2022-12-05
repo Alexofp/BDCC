@@ -23,11 +23,17 @@ func pickEquipment(character:DynamicCharacter, _args = {}):
 	# Sometimes they're naked
 	if(!RNG.chance(ehibit * 5.0)):
 		if(inmateType == InmateType.General):
-			theEquipment.append("inmateuniform")
+			var randomUniform = getRandomItemIDByTag(ItemTag.GeneralInmateUniform)
+			if(randomUniform != null):
+				theEquipment.append(randomUniform)
 		if(inmateType == InmateType.HighSec):
-			theEquipment.append("inmateuniformHighsec")
+			var randomUniform = getRandomItemIDByTag(ItemTag.HighSecurityInmateUniform)
+			if(randomUniform != null):
+				theEquipment.append(randomUniform)
 		if(inmateType == InmateType.SexDeviant):
-			theEquipment.append("inmateuniformSexDeviant")
+			var randomUniform = getRandomItemIDByTag(ItemTag.SexualDeviantInmateUniform)
+			if(randomUniform != null):
+				theEquipment.append(randomUniform)
 	
 	# Sometimes they have a forced chastity cage on
 	if(RNG.chance(2.0) && character.hasPenis()):

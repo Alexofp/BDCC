@@ -16,6 +16,11 @@ func getBuffs():
 	return [
 		]
 
+func getTags():
+	return [
+		ItemTag.GuardUniform,
+		]
+
 func getTakingOffStringLong(withS):
 	if(withS):
 		return "takes off your armor"
