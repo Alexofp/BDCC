@@ -355,7 +355,7 @@ func _run():
 		# (also runs a leashed scene)
 		# Sybian scene here?
 		aimCameraAndSetLocName("eng_breakroom")
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc="alexrynard", exposedBodyparts=[BodypartSlot.Vagina, BodypartSlot.Anus]})
+		GM.main.playAnimation(StageScene.Duo, "stand", {npc="alexrynard", exposedBodyparts=[BodypartSlot.Penis, BodypartSlot.Vagina, BodypartSlot.Anus]})
 
 		saynn("He brings you somewhere.. You’re not quite sure where since the blindfold makes it very hard to orient yourself around.")
 
@@ -380,7 +380,7 @@ func _run():
 		addButton("Shake head", "You don’t really know what answer he wants", "shake_head")
 
 	if(state == "shake_head"):
-		GM.main.playAnimation(StageScene.Sybian, "idle", {exposedBodyparts=[BodypartSlot.Vagina, BodypartSlot.Anus]})
+		GM.main.playAnimation(StageScene.Sybian, "idle", {exposedBodyparts=[BodypartSlot.Penis, BodypartSlot.Vagina, BodypartSlot.Anus]})
 		
 		# (if has pussy)
 		if(GM.pc.hasVagina()):
@@ -429,7 +429,7 @@ func _run():
 
 		# (part that’s the same)
 	if(state in ["stay_silent", "taunt_him"]):
-		GM.main.playAnimation(StageScene.Sybian, "ride", {exposedBodyparts=[BodypartSlot.Vagina, BodypartSlot.Anus]})
+		GM.main.playAnimation(StageScene.Sybian, "ride", {exposedBodyparts=[BodypartSlot.Penis, BodypartSlot.Vagina, BodypartSlot.Anus]})
 		
 		# (if has pussy)
 		if(GM.pc.hasVagina()):
@@ -522,6 +522,8 @@ func _run():
 
 
 	if(state == "sybian"):
+		GM.main.playAnimation(StageScene.Sybian, "ride", {exposedBodyparts=[BodypartSlot.Penis, BodypartSlot.Vagina, BodypartSlot.Anus]})
+		
 		var lustLevel = GM.pc.getLustLevel()
 		# (if low lust)
 		if(lustLevel < 0.2):
