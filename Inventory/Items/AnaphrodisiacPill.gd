@@ -66,3 +66,6 @@ func useInSex(_receiver):
 	return {
 		text = "{USER.You} {USER.youVerb('feel')} like {USER.youHe} lost passion for sex.".replace("USER", _receiver.getID()),
 	}
+
+func getItemCategory():
+	return ItemCategory.Medical

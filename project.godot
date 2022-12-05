@@ -464,6 +464,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Inventory/Items/ItemBase.gd"
 }, {
+"base": "Object",
+"class": "ItemCategory",
+"language": "GDScript",
+"path": "res://Inventory/ItemCategory.gd"
+}, {
 "base": "Reference",
 "class": "ItemState",
 "language": "GDScript",
@@ -1196,6 +1201,7 @@ _global_script_class_icons={
 "Inventory": "",
 "InventorySlot": "",
 "ItemBase": "",
+"ItemCategory": "",
 "ItemState": "",
 "ItemTag": "",
 "Lactation": "",

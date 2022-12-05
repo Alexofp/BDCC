@@ -267,6 +267,7 @@ func processString(strText: String, overrides: Dictionary = {}):
 	return gameParser.executeString(sayParser.processString(strText, overrides), overrides)
 
 func hideAllScreens():
+	GlobalTooltip.resetTooltips()
 	mainGameScreen.visible = false
 	ingameMenuScreen.visible = false
 	skillsScreen.visible = false

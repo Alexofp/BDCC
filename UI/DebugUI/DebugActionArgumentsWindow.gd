@@ -8,6 +8,7 @@ var numberArgScene = preload("res://UI/DebugUI/DebugActionArgs/DebugActionArgume
 var stringArgScene = preload("res://UI/DebugUI/DebugActionArgs/DebugActionArgumentString.tscn")
 var listArgScene = preload("res://UI/DebugUI/DebugActionArgs/DebugActionArgumentList.tscn")
 var boolArgScene = preload("res://UI/DebugUI/DebugActionArgs/DebugActionArgumentBool.tscn")
+var smartListArgScene = preload("res://UI/DebugUI/DebugActionArgs/DebugActionArgumentSmartList.tscn")
 
 var isMain = false
 signal onDoActionButton(actionID, isMain, result)
@@ -32,6 +33,8 @@ func updateArgs():
 			newControl = listArgScene.instance()
 		if(arg["type"] in ["bool", "checkbox"]):
 			newControl = boolArgScene.instance()
+		if(arg["type"] in ["smartlist"]):
+			newControl = smartListArgScene.instance()
 		
 		if(newControl != null):
 			argListContainer.add_child(newControl)

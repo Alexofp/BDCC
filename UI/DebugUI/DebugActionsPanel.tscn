@@ -29,10 +29,10 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="DebugActionArgumentsWindow" parent="." instance=ExtResource( 3 )]
-margin_left = -218.0
-margin_top = -95.0
-margin_right = 218.0
-margin_bottom = 95.0
+margin_left = -250.0
+margin_top = -150.0
+margin_right = 250.0
+margin_bottom = 150.0
 
 [connection signal="visibility_changed" from="." to="." method="_on_DebugActionsPanel_visibility_changed"]
 [connection signal="onDoActionButton" from="DebugActionArgumentsWindow" to="." method="_on_DebugActionArgumentsWindow_onDoActionButton"]

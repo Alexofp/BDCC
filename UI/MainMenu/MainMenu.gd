@@ -14,8 +14,14 @@ onready var devSubScreen = $HBoxContainer/DevToolsScreen/DevScreen
 onready var loadedModsLabel = $HBoxContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/LoadedModsLabel
 onready var modsMenu = $HBoxContainer/ModsMenu
 
+export(Resource) var GlobalTheme
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	if(GlobalTheme != null):
+		if(OS.has_touchscreen_ui_hint()):
+			GlobalTheme.rename_stylebox("scrollTouch", "scroll", "VScrollBar")
+	
 	versionLabel.text = "Version: "+GlobalRegistry.getGameVersionString()
 
 	$HBoxContainer/Panel2/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer3/DonationsLabel.bbcode_text = GlobalRegistry.getDonationDataString()

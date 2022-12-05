@@ -61,3 +61,6 @@ func getTags():
 	return [
 		ItemTag.SoldByGeneralVendomat,
 		]
+
+func getItemCategory():
+	return ItemCategory.Medical

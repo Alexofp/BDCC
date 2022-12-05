@@ -405,3 +405,14 @@ func useInSex(_receiver):
 	return {
 		text = "something something",
 	}
+
+func getItemCategory():
+	if(restraintData != null):
+		return ItemCategory.BDSM
+	
+	if(getClothingSlot() in [InventorySlot.UnderwearBottom, InventorySlot.UnderwearTop]):
+		return ItemCategory.Underwear
+	elif(getClothingSlot() != null):
+		return ItemCategory.Clothes
+	
+	return ItemCategory.Generic

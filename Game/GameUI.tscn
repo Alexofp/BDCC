@@ -332,7 +332,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="PlayerPanel" parent="HBoxContainer/Panel/MarginContainer" instance=ExtResource( 8 )]
-margin_right = 260.0
+margin_right = 354.0
 margin_bottom = 696.0
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]

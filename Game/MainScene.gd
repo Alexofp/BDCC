@@ -736,7 +736,7 @@ func getDebugActions():
 				{
 					"id": "itemID",
 					"name": "Item id",
-					"type": "list",
+					"type": "smartlist",
 					"item": true,
 				},
 				{
@@ -908,6 +908,9 @@ func doDebugAction(id, args = {}):
 		GM.pc.removeAllRestraints()
 	
 	if(id == "giveItem"):
+		if(!args.has("itemID") || args["itemID"] == null):
+			return
+		
 		var item:ItemBase = GlobalRegistry.createItem(args["itemID"])
 		if(item.canCombine()):
 			item.setAmount(args["amount"]) 

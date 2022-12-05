@@ -1,6 +1,21 @@
-[gd_resource type="Theme" load_steps=2 format=2]
+[gd_resource type="Theme" load_steps=3 format=2]
 
 [ext_resource path="res://UI/FontResources/GlobalDefaultFont.tres" type="DynamicFont" id=1]
 
+[sub_resource type="StyleBoxFlat" id=1]
+content_margin_left = 14.0
+content_margin_right = 14.0
+bg_color = Color( 0.184314, 0.184314, 0.184314, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0.286275, 0.286275, 0.286275, 1 )
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
 [resource]
 default_font = ExtResource( 1 )
+VScrollBar/styles/scrollTouch = SubResource( 1 )
