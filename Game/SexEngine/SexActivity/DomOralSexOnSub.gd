@@ -539,7 +539,7 @@ func doDomAction(_id, _actionInfo):
 	if(exposedThings.size() > 0):
 		genitalsText = "exposed "+Util.humanReadableList(exposedThings)
 		
-		return {text = "{dom.You} {dom.youVerb('pull')} {dom.yourHis} "+genitalsText+" away from {sub.yourHis} lips."}
+		return {text = "{dom.You} {dom.youVerb('pull')} {dom.yourHis} lips away from {sub.yourHis} "+genitalsText+"."}
 
 func getSubActions():
 	var actions = []

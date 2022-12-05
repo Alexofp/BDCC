@@ -476,7 +476,7 @@ func doDomAction(_id, _actionInfo):
 		return {text = text}
 	if(_id == "bjpullout"):
 		var text = RNG.pick([
-			"{dom.You} {dom.youVerb('pull')} {dom.your} cock out and [b]cums all over {sub.your} face[/b]!",
+			"{dom.You} {dom.youVerb('pull')} {dom.yourHis} cock out and [b]cums all over {sub.your} face[/b]!",
 			"{dom.You} {dom.youVerb('pull')} out, [b]cumming all over {sub.your} face[/b]!",
 		])
 		
@@ -489,7 +489,7 @@ func doDomAction(_id, _actionInfo):
 				condom.destroyMe()
 			else:
 				text = RNG.pick([
-					"{dom.You} {dom.youVerb('pull')} {dom.your} cock out and {dom.youVerb('fill')} {dom.yourHis} condom! {dom.You} {dom.youVerb('dispose')} of it.",
+					"{dom.You} {dom.youVerb('pull')} {dom.yourHis} cock out and {dom.youVerb('fill')} {dom.yourHis} condom! {dom.You} {dom.youVerb('dispose')} of it.",
 					"{dom.You} {dom.youVerb('pull')} out, stuffing {dom.yourHis} condom! {dom.You} {dom.youVerb('dispose')} of it.",
 				])
 				condom.destroyMe()

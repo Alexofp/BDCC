@@ -397,7 +397,7 @@ func doDomAction(_id, _actionInfo):
 		return {text=text}
 	if(_id == "cumpullout"):
 		var text = RNG.pick([
-			"{dom.You} {dom.youVerb('pull')} {dom.your} cock out and [b]cums all over {sub.your} butt[/b]!",
+			"{dom.You} {dom.youVerb('pull')} {dom.yourHis} cock out and [b]cums all over {sub.your} butt[/b]!",
 			"{dom.You} {dom.youVerb('pull')} out, [b]cumming all over {sub.your} ass[/b]!",
 		])
 		
@@ -410,7 +410,7 @@ func doDomAction(_id, _actionInfo):
 				condom.destroyMe()
 			else:
 				text = RNG.pick([
-					"{dom.You} {dom.youVerb('pull')} {dom.your} cock out and {dom.youVerb('fill')} {dom.yourHis} condom! {dom.You} {dom.youVerb('dispose')} of it.",
+					"{dom.You} {dom.youVerb('pull')} {dom.yourHis} cock out and {dom.youVerb('fill')} {dom.yourHis} condom! {dom.You} {dom.youVerb('dispose')} of it.",
 					"{dom.You} {dom.youVerb('pull')} out, stuffing {dom.yourHis} condom! {dom.You} {dom.youVerb('dispose')} of it.",
 				])
 				condom.destroyMe()
@@ -431,7 +431,7 @@ func doDomAction(_id, _actionInfo):
 		gonnaCumOutside = false
 		state = "fucking"
 		var text = RNG.pick([
-			"{dom.You} began moving {dom.your} hips again, fucking {sub.your} "+RNG.pick(usedBodypartNames)+"!",
+			"{dom.You} began moving {dom.yourHis} hips again, fucking {sub.your} "+RNG.pick(usedBodypartNames)+"!",
 			"{dom.You} went for a second round, fucking {sub.your} "+RNG.pick(usedBodypartNames)+" again!",
 		])
 		return {text = text}
