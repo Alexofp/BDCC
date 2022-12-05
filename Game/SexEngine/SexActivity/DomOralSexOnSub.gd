@@ -453,7 +453,7 @@ func doDomAction(_id, _actionInfo):
 			])
 		else:
 			text = RNG.pick([
-				"{dom.You} "+RNG.pick(["{dom.youVerb('grope')}", "{dom.youVerb('fondle')}", "{dom.youVerb('play')}"])+" with {sub.your} balls and {dom.youVerb('realize')} "+RNG.pick(["that they are full", "how heavy they are", "how much cum is stored in them"])+". They "+RNG.pick(["tense up slightly"])+" as {dom.youHe} tease them.",
+				"{dom.You} "+RNG.pick(["{dom.youVerb('grope')}", "{dom.youVerb('fondle')}", "{dom.youVerb('play')} with"])+" {sub.your} balls and {dom.youVerb('realize')} "+RNG.pick(["that they are full", "how heavy they are", "how much cum is stored in them"])+". They "+RNG.pick(["tense up slightly"])+" as {dom.youHe} tease them.",
 			])
 		cumProduction.fillPercent(0.2)
 		affectSub(subInfo.fetishScore({Fetish.OralSexReceiving: 1.0}), 0.1, -0.05, -0.01)
