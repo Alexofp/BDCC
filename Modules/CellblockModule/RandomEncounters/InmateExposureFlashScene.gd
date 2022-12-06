@@ -32,7 +32,7 @@ func resolveCustomCharacterName(_charID):
 func _run():
 	if(state == ""):
 		addCharacter(npcID)
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc=npcID})
+		playAnimation(StageScene.Duo, "stand", {npc=npcID})
 
 	if(state == ""):
 		# (if naked)

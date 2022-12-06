@@ -13,7 +13,9 @@ func _initScene(_args = []):
 func _run():
 	if(state == ""):
 		addCharacter("nova")
-		GM.main.playAnimation(StageScene.Duo, "kneel", {npc="nova", npcHard=true, npcExposedBodyparts=[BodypartSlot.Penis]})
+		playAnimation(StageScene.Duo, "kneel", {npc="nova",
+			npcBodyState={exposedCrotch=true,hard=true},
+		})
 
 	if(state == ""):
 		saynn("You follow Nova to a more secluded place where the cameras and other people shouldn’t find you. The husky leans against the wall and pulls you down to your knees.")

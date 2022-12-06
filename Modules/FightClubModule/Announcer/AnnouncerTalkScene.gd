@@ -11,7 +11,7 @@ func _reactInit():
 func _run():
 	if(state == ""):
 		addCharacter("announcer")
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc="announcer"})
+		playAnimation(StageScene.Duo, "stand", {npc="announcer"})
 
 	if(state == ""):
 		saynn("You wait until Ans is free and get his attention.")

@@ -43,29 +43,15 @@ func playAnimation(animID, _args = {}):
 	
 	#doll.forceSlotToBeVisible(BodypartSlot.Penis)
 	
-	if(_args.has("exposedBodyparts")):
-		doll.setExposedBodyparts(_args["exposedBodyparts"])
+	if(_args.has("bodyState")):
+		doll.applyBodyState(_args["bodyState"])
 	else:
-		doll.setExposedBodyparts([])
+		doll.applyBodyState({})
 	
-	if(_args.has("npcExposedBodyparts")):
-		doll2.setExposedBodyparts(_args["npcExposedBodyparts"])
+	if(_args.has("npcBodyState")):
+		doll2.applyBodyState(_args["npcBodyState"])
 	else:
-		doll2.setExposedBodyparts([])
-	
-	if(_args.has("flipPc") && _args["flipPc"]):
-		doll.scale.x = -1
-	else:
-		doll.scale.x = 1
-	if(_args.has("flipNpc") && _args["flipNpc"]):
-		doll2.scale.x = 1
-	else:
-		doll2.scale.x = -1
-	
-	if(_args.has("hard") && _args["hard"]):
-		doll.setCockTemporaryHard()
-	if(_args.has("npcHard") && _args["npcHard"]):
-		doll2.setCockTemporaryHard()
+		doll2.applyBodyState({})
 	
 	if(animID == "sit"):
 		$Chair.visible = true

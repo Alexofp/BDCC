@@ -34,7 +34,7 @@ func resolveCustomCharacterName(_charID):
 func _run():
 	if(state == ""):
 		addCharacter(npcID)
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc=npcID})
+		playAnimation(StageScene.Duo, "stand", {npc=npcID})
 
 	if(state == ""):
 		saynn("You were going somewhere when your gaze catches one of the inmates posing seductively at anyone who walks past. {npc.He} catches your stare and gestures to come closer.")

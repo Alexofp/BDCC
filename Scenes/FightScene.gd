@@ -298,7 +298,7 @@ func _react(_action: String, _args):
 				enemyCharacter.addStamina(-10)
 				whatPlayerDid += GM.ui.processString("You try to force a restraint onto {receiver.name} but {receiver.he} avoided your attempt!")
 			
-				GM.main.playAnimation(StageScene.Duo, "", {npc=enemyID, npcAction="dodge"})
+				playAnimation(StageScene.Duo, "", {npc=enemyID, npcAction="dodge"})
 			else:
 				GM.pc.addSkillExperience(Skill.BDSM, restraintData.getLevel() * 3)
 				whatPlayerDid += GM.ui.processString(item.getForcedOnMessage(false))
@@ -378,7 +378,7 @@ func _react(_action: String, _args):
 		var result = attack.doAttack(enemyCharacter, GM.pc)
 		result["text"] = GM.ui.processString(result["text"])
 		
-		GM.main.playAnimation(StageScene.Duo, result["receiverAnimation"], {npc=enemyID, npcAction=result["attackerAnimation"]})
+		playAnimation(StageScene.Duo, result["receiverAnimation"], {npc=enemyID, npcAction=result["attackerAnimation"]})
 		
 		whatEnemyDid += result["text"]
 		savedAIAttackID = ""
@@ -392,7 +392,7 @@ func _react(_action: String, _args):
 		setState("lost")
 		whatHappened = "You give up the fight willingly and submit to your enemy\n"
 		battleState = "lost"
-		GM.main.playAnimation(StageScene.Solo, "kneel")
+		playAnimation(StageScene.Solo, "kneel")
 		return
 	
 	if(_action == "endbattle"):
@@ -552,7 +552,7 @@ func doPlayerAttack(attackData):
 	var result = attack.doAttack(GM.pc, enemyCharacter, attackData)
 	result["text"] = GM.ui.processString(result["text"])
 	
-	GM.main.playAnimation(StageScene.Duo, result["attackerAnimation"], {npc=enemyID, npcAction=result["receiverAnimation"]})
+	playAnimation(StageScene.Duo, result["attackerAnimation"], {npc=enemyID, npcAction=result["receiverAnimation"]})
 	
 	var expData = attack.getExperience()
 	for expAdd in expData:
@@ -651,7 +651,7 @@ func aiTurn():
 			var result = attack.doAttack(enemyCharacter, GM.pc)
 			result["text"] = GM.ui.processString(result["text"])
 				
-			GM.main.playAnimation(StageScene.Duo, result["receiverAnimation"], {npc=enemyID, npcAction=result["attackerAnimation"]})
+			playAnimation(StageScene.Duo, result["receiverAnimation"], {npc=enemyID, npcAction=result["attackerAnimation"]})
 			
 			enemyText += result["text"]
 		else:
@@ -771,7 +771,7 @@ func checkEnd():
 		whatHappened += "You succumb to pain\n"
 		battleState = "lost"
 		battleEndedHow = "pain"
-		GM.main.playAnimation(StageScene.Solo, "defeat")
+		playAnimation(StageScene.Solo, "defeat")
 		return "lost"
 	if(GM.pc.getLust() >= GM.pc.lustThreshold()):
 		if(whatHappened != ""):
@@ -779,7 +779,7 @@ func checkEnd():
 		whatHappened += "You're too aroused to continue\n"
 		battleState = "lost"
 		battleEndedHow = "lust"
-		GM.main.playAnimation(StageScene.Solo, "defeat")
+		playAnimation(StageScene.Solo, "defeat")
 		return "lost"
 	
 	return ""

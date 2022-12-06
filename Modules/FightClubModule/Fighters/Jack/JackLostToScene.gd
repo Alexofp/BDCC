@@ -6,7 +6,11 @@ func _init():
 func _run():
 	if(state == ""):
 		addCharacter("jack")
-		GM.main.playAnimation(StageScene.Duo, "kneel", {npc="jack", npcExposedBodyparts=[BodypartSlot.Penis], npcHard=true, hard=true})
+		playAnimation(StageScene.Duo, "kneel", {
+			npc="jack", npcAction="stand", 
+			bodyState={},
+			npcBodyState={exposedCrotch=true,hard=true},
+		})
 
 	if(state == ""):
 		saynn("You lose all the ability to fight but just before you hit the ground, Jack catches you by the collar and keeps you from collapsing.")
@@ -94,7 +98,11 @@ func _run():
 
 
 	if(state == "breeding"):
-		GM.main.playAnimation(StageScene.Duo, "kneel", {npc="jack", npcHard=true, npcExposedBodyparts=[BodypartSlot.Penis], exposedBodyparts=[BodypartSlot.Vagina, BodypartSlot.Anus]})
+		playAnimation(StageScene.Duo, "kneel", {
+			npc="jack", npcAction="stand", 
+			bodyState={exposedCrotch=true,},
+			npcBodyState={exposedCrotch=true,hard=true},
+		})
 		# (if has pussy)
 		if(GM.pc.hasVagina()):
 			saynn("Jack makes you turn around and puts his free hand over your crotch, possessively feeling your pussy. His touch isn’t soft or gentle but you find it arousing. His bulge is pressing against your {pc.thick} butt.")

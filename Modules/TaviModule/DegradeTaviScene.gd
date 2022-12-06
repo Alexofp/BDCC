@@ -9,7 +9,7 @@ func _run():
 		addCharacter("tavi")
 		
 	if(state == ""):
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc="tavi", npcAction="allfours"})
+		playAnimation(StageScene.Duo, "stand", {npc="tavi", npcAction="allfours"})
 		
 		saynn("You pin the rebellious feline to the floor face-down and hold her by the collar. She hisses at you but lays still, seems like your lessons taught her at least something.")
 

@@ -6,7 +6,11 @@ func _init():
 func _run():
 	if(state == ""):
 		addCharacter("axis")
-		GM.main.playAnimation(StageScene.Duo, "kneel", {npc="axis", npcHard=true, npcExposedBodyparts=[BodypartSlot.Penis], exposedBodyparts=[BodypartSlot.Vagina, BodypartSlot.Anus]})
+		playAnimation(StageScene.Duo, "kneel", {
+			npc="axis", npcAction="stand", 
+			bodyState={exposedCrotch=true,},
+			npcBodyState={exposedCrotch=true,hard=true},
+		})
 
 	if(state == ""):
 		saynn("Unable to continue fighting, you drop to your knees. Fuck, that alpha energy was just too strong. Axis takes his time approaching you.")
@@ -55,6 +59,12 @@ func _run():
 
 			saynn("Oh, you feel like you should be resisting. But.. You’re so horny that you don’t even care, you actually welcome him rubbing your chastity cage a bit. It makes your member put so much pressure onto the cage.. While it’s forcing your drippy cock to stay flacid.")
 		elif(GM.pc.hasPenis()):
+			playAnimation(StageScene.Duo, "kneel", {
+				npc="axis", npcAction="stand", 
+				bodyState={exposedCrotch=true,caged=true},
+				npcBodyState={exposedCrotch=true,hard=true},
+			})
+			
 			saynn("He notices your erect {pc.cock} and smiles. He then pulls out something from one of his pockets. It’s a.. chastity cage.")
 
 			saynn("[say=axis]That cute dick is useless, might as well lock it away.[/say]")

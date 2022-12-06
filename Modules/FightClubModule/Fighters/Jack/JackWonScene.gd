@@ -9,7 +9,7 @@ func _init():
 func _run():
 	if(state == ""):
 		addCharacter("jack")
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc="jack", npcAction="kneel"})
+		playAnimation(StageScene.Duo, "stand", {npc="jack", npcAction="kneel"})
 
 	if(state == ""):
 		saynn("Jack knees before you, unable to continue fighting. The crowd gasps seeing the stud hit the floor.")
@@ -40,7 +40,11 @@ func _run():
 
 	if(state == "vaginal"):
 		# (needs pussy)
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc="jack", npcHard=true, npcAction="kneel", npcExposedBodyparts=[BodypartSlot.Penis], exposedBodyparts=[BodypartSlot.Vagina, BodypartSlot.Anus]})
+		playAnimation(StageScene.Duo, "stand", {
+			npc="jack", npcAction="kneel", 
+			bodyState={exposedCrotch=true,},
+			npcBodyState={exposedCrotch=true,hard=true},
+		})
 
 		saynn("You tilt your head while gazing at that bulge, wondering how good it would feel to take an entire horse cock inside you. These thoughts make you horny quite quickly, you sneakily brush your hand over your slit and bite your lip as you step towards the stallion. Jack offers you a welcoming smile.")
 
@@ -188,7 +192,11 @@ func _run():
 
 
 	if(state == "anal"):
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc="jack", npcHard=true, npcAction="kneel", npcExposedBodyparts=[BodypartSlot.Penis], exposedBodyparts=[BodypartSlot.Vagina, BodypartSlot.Anus]})
+		playAnimation(StageScene.Duo, "stand", {
+			npc="jack", npcAction="kneel", 
+			bodyState={exposedCrotch=true,},
+			npcBodyState={exposedCrotch=true,hard=true},
+		})
 		
 		saynn("You tilt your head while gazing at that bulge, wondering how good it would feel to take an entire horse cock inside you. These thoughts make you horny quite quickly, you sneakily brush your hand over your slit and bite your lip as you step towards the stallion. Jack offers you a welcoming smile.")
 

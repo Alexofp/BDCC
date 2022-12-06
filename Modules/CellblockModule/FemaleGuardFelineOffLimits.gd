@@ -6,7 +6,7 @@ func _init():
 func _run():
 	if(state == ""):
 		addCharacter("femaleguard_feline")
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc="femaleguard_feline"})
+		playAnimation(StageScene.Duo, "stand", {npc="femaleguard_feline"})
 
 	if(state == ""):
 		saynn("You hear footsteps behind you, the ones that bulky boots usually make. You try to hide but they announce their presence to you, the voice sounds feminine.")

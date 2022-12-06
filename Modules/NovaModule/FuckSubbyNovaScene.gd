@@ -10,7 +10,11 @@ func _init():
 func _run():
 	if(state == ""):
 		addCharacter("nova", ["naked"])
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc="nova", npcHard=true, hard=true, npcAction="kneel", npcExposedBodyparts=[BodypartSlot.Vagina], exposedBodyparts=[BodypartSlot.Penis]})
+		playAnimation(StageScene.Duo, "stand", {
+			npc="nova", npcAction="kneel", 
+			bodyState={exposedCrotch=true,hard=true},
+			npcBodyState={exposedCrotch=true,hard=true},
+		})
 	
 	if(state == ""):
 		saynn("You pick up her weapon and jam it into the backplate of her armor where the reactor is. You send a little shock through it and all the armor pieces disconnect and fall to the floor, exposing the guard’s skin-tight undersuit. Nova gets pinned to the floor by you as you search her belt for handcuffs. Then you wrench her hands behind her back and cuff them together. She tries to resist, to shove you off, but she is not too enthusiastic about it. You give her round ass a firm smack so she would stop.")

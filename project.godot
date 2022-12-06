@@ -1365,10 +1365,6 @@ window/dpi/allow_hidpi=true
 window/stretch/mode="2d"
 window/stretch/aspect="expand"
 
-[editor_plugins]
-
-enabled=PoolStringArray( "res://addons/rmsmartshape/plugin.cfg" )
-
 [gui]
 
 timers/tooltip_delay_sec=0.1

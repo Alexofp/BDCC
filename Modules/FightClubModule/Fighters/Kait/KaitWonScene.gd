@@ -6,7 +6,7 @@ func _init():
 func _run():
 	if(state == ""):
 		addCharacter("kait")
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc="kait", npcAction="kneel"})
+		playAnimation(StageScene.Duo, "stand", {npc="kait", npcAction="kneel"})
 
 	if(state == ""):
 		saynn("Kait cries out and falls down to her knees, too exhausted to continue fighting. She presses her hands into the ground and pants heavily. As you try to get closer, she recoils back into one of the fences.")
@@ -117,7 +117,11 @@ func _run():
 
 	if(state == "piss_on_her"):
 		# (needs cock or pussy and piss content)
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc="kait", hard=true, npcAction="kneel", exposedBodyparts=[BodypartSlot.Penis, BodypartSlot.Vagina]})
+		playAnimation(StageScene.Duo, "stand", {
+			npc="kait", npcAction="kneel", 
+			bodyState={exposedCrotch=true,hard=true},
+			npcBodyState={},
+		})
 
 		# (if has cock)
 		if(GM.pc.hasPenis()):
@@ -144,8 +148,12 @@ func _run():
 
 	if(state == "breed_her"):
 		# (need cock)
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc="kait", hard=true, npcAction="kneel", exposedBodyparts=[BodypartSlot.Penis], npcExposedBodyparts=[BodypartSlot.Vagina]})
-
+		playAnimation(StageScene.Duo, "stand", {
+			npc="kait", npcAction="kneel", 
+			bodyState={exposedCrotch=true,hard=true},
+			npcBodyState={exposedCrotch=true},
+		})
+		
 		saynn("You flex your {pc.masc} arms and then expose your {pc.cock}. Kait sees it and shakes her head subtly.")
 
 		saynn("[say=pc]I’m not done with you.[/say]")

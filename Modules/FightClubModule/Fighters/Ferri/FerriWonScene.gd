@@ -6,7 +6,7 @@ func _init():
 func _run():
 	if(state == ""):
 		addCharacter("ferri")
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc="ferri", npcAction="kneel"})
+		playAnimation(StageScene.Duo, "stand", {npc="ferri", npcAction="kneel"})
 
 	if(state == ""):
 		saynn("Ferri cries out and drops to her knees, she is clearly unable to continue fighting. You approach her and grab her by one of her horns. She is panting heavily but you do hear her growling.")
@@ -38,7 +38,7 @@ func _run():
 		addButton("Continue", "Time to leave", "endthescene")
 
 	if(state == "petplay"):
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc="ferri", npcAction="allfours"})
+		playAnimation(StageScene.Duo, "stand", {npc="ferri", npcAction="allfours"})
 		
 		saynn("You keep the girl pinned to the floor while she keeps resisting and growling at you. Even after using her horns to shove her head into the floor she keeps snarling. The crowd cheers, some yell ‘Break the brat! Choke her! Does anyone have a muzzle?’.")
 

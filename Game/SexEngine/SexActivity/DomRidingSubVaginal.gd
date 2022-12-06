@@ -634,7 +634,7 @@ func doSubAction(_id, _actionInfo):
 
 
 func getAnimation():
-	return [StageScene.Duo, "stand", {pc=subID, npc=domID, npcAction="kneel", flipPc=false}]
+	return [StageScene.Duo, "stand", {pc=subID, npc=domID, npcAction="kneel"}]
 
 func getDomSwitchHoleChance():
 	if(domInfo.hasMemory("switchedHoles")):

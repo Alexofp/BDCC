@@ -65,7 +65,7 @@ func _run():
 		addButton("back", "Back", "pickhybrid1")
 
 	if(state == "pickedspecies"):
-		GM.main.playAnimation(StageScene.Solo, "stand", {exposedBodyparts=[BodypartSlot.Body, BodypartSlot.Penis, BodypartSlot.Vagina, BodypartSlot.Anus, BodypartSlot.Breasts], hard=true})
+		playAnimation(StageScene.Solo, "stand", {bodyState={naked=true,hard=true}})
 		
 		say("You are a "+GM.pc.getSpeciesFullName())
 		say("\n----\n")
@@ -168,7 +168,7 @@ func _run():
 				addButton(bodypart.getCharacterCreatorName(), bodypart.getCharacterCreatorDesc(), "setbodypart", [bodypart.id])
 
 	if(state == "bodypartAttributes"):
-		GM.main.playAnimation(StageScene.Solo, "stand", {exposedBodyparts=[BodypartSlot.Body, BodypartSlot.Penis, BodypartSlot.Vagina, BodypartSlot.Anus, BodypartSlot.Breasts], hard=true})
+		playAnimation(StageScene.Solo, "stand", {bodyState={naked=true,hard=true}})
 		
 		var bodypart = GM.pc.getBodypart(pickingBodypartType)
 		var attributes = bodypart.getPickableAttributes()

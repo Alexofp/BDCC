@@ -23,13 +23,10 @@ func playAnimation(animID, _args = {}):
 	else:
 		doll.prepareCharacter("pc")
 	
-	if(_args.has("exposedBodyparts")):
-		doll.setExposedBodyparts(_args["exposedBodyparts"])
+	if(_args.has("bodyState")):
+		doll.applyBodyState(_args["bodyState"])
 	else:
-		doll.setExposedBodyparts([])
-	
-	if(_args.has("hard") && _args["hard"]):
-		doll.setCockTemporaryHard()
+		doll.applyBodyState({})
 	
 	#updateSubAnims()
 	

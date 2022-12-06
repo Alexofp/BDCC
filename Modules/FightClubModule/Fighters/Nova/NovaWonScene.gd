@@ -6,7 +6,7 @@ func _init():
 func _run():
 	if(state == ""):
 		addCharacter("nova")
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc="nova", npcAction="kneel"})
+		playAnimation(StageScene.Duo, "stand", {npc="nova", npcAction="kneel"})
 
 	if(state == ""):
 		saynn("Nova is defeated, she lets out a soft cry before losing her weapon and dropping down to her knees, her light power armor shuts down due to the capacitors being overloaded.")
@@ -133,7 +133,11 @@ func _run():
 
 	if(state == "offer_pussy"):
 		# (needs pussy)
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc="nova", hard=true, npcAction="kneel", exposedBodyparts=[BodypartSlot.Vagina]})
+		playAnimation(StageScene.Duo, "stand", {
+			npc="nova", npcAction="kneel", 
+			bodyState={exposedCrotch=true,hard=true},
+			npcBodyState={},
+		})
 
 		saynn("Hmm. Yeah, using a desperate husky for your pleasure sounds kinda nice about now. You expose your cute pussy slit and lie down before shoving your crotch into Nova’s face. The husky quickly realizes what she needs to do and starts eagerly nuzzling your pussy. She then sticks her tongue out and starts dragging it across the sensitive petals and the clit, making you moan. All the while the suit is still denying the husky time after time, turning her more desperate and subby.")
 
@@ -163,7 +167,11 @@ func _run():
 
 	if(state == "offer_cock"):
 		# (needs cock)
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc="nova", hard=true, npcAction="kneel", exposedBodyparts=[BodypartSlot.Penis]})
+		playAnimation(StageScene.Duo, "stand", {
+			npc="nova", npcAction="kneel", 
+			bodyState={exposedCrotch=true,hard=true},
+			npcBodyState={},
+		})
 		
 		if(GM.pc.isWearingChastityCage()):
 			saynn("Hmm. Yeah, using a desperate husky for your pleasure sounds kinda nice about now. You expose your {pc.cock} and kneel before Nova, offering her some work. The husky quickly realizes what she needs to do and starts eagerly nuzzling your chastity cage. She then sticks her tongue out and starts trying to reach your member through it, making it feel good in the process. All the while the suit is still denying the husky time after time, turning her more desperate and subby.")

@@ -6,7 +6,7 @@ func _init():
 func _run():
 	if(state == ""):
 		addCharacter("guardCrowd")
-		GM.main.playAnimation(StageScene.Duo, "kneel", {npc="maleguard_canine", npcAction="stand"})
+		playAnimation(StageScene.Duo, "kneel", {npc="maleguard_canine", npcAction="stand"})
 
 	if(state == ""):
 		saynn("A few guards crowd around you, each one holding a weapon or a shock remote. You look at all the armor they are equipped with and realize that you won’t even drop a single one before your neck gets fried. Oops, seems like it’s too late to stop exposing yourself, even after covering yourself the guards don’t back off.")

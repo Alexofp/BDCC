@@ -6,7 +6,7 @@ func _init():
 func _run():
 	if(state == ""):
 		addCharacter("maleguard_canine")
-		GM.main.playAnimation(StageScene.Duo, "defeat", {npc="maleguard_canine"})
+		playAnimation(StageScene.Duo, "defeat", {npc="maleguard_canine"})
 
 	if(state == ""):
 		saynn("You were doing lewd things with yourself when suddenly you felt your collar buzzing and shocking you. Ow! You drop to your knees and grab onto it, desperately trying to take it off but that only makes things worse. When the shock finally ends, you’re left panting and whining.")

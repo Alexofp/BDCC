@@ -6,7 +6,7 @@ func _init():
 func _run():
 	if(state == ""):
 		addCharacter("inmateCrowd")
-		GM.main.playAnimation(StageScene.Solo, "stand")
+		playAnimation(StageScene.Solo, "stand")
 
 	if(state == ""):
 		saynn("Two reds boldly approach you, one of them catches your arm while another already puts his paws all over your {pc.thick} butt and groping it.")

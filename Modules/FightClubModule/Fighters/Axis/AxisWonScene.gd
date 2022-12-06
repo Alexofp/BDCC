@@ -6,7 +6,7 @@ func _init():
 func _run():
 	if(state == ""):
 		addCharacter("axis")
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc="axis", npcAction="kneel"})
+		playAnimation(StageScene.Duo, "stand", {npc="axis", npcAction="kneel"})
 
 	if(state == ""):
 		saynn("Axis roars and drops to his knees, he is clearly done fighting. Something fell out of his pocket as he hit the ground, something small. You have to get closer to see what it is.")
@@ -46,7 +46,11 @@ func _run():
 		addButton("Continue", "Time to leave", "endthescene")
 
 	if(state == "humiliate"):
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc="axis", npcHard=true, npcAction="kneel", npcExposedBodyparts=[BodypartSlot.Penis]})
+		playAnimation(StageScene.Duo, "stand", {
+			npc="axis", npcAction="kneel", 
+			bodyState={},
+			npcBodyState={exposedCrotch=true,hard=true},
+		})
 		
 		saynn("As you approach the guy, his growling becomes more audible. You lean down and pick up the cage that he dropped.")
 
@@ -87,6 +91,12 @@ func _run():
 		addButton("Lock his cock", "This is gonna be tricky", "lock_his_cock")
 
 	if(state == "lock_his_cock"):
+		playAnimation(StageScene.Duo, "stand", {
+			npc="axis", npcAction="kneel", 
+			bodyState={},
+			npcBodyState={exposedCrotch=true,caged=true,},
+		})
+		
 		saynn("The wolf is kneeling before you, his aroused cock is dripping precum onto the floor. You use your foot to make Axis spread his legs wider before crouching near him. You fidget with the pink chastity cage.")
 
 		saynn("[say=axis]No..[/say]")
@@ -147,8 +157,12 @@ func _run():
 
 	if(state == "breed"):
 		# (needs cock)
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc="axis", npcHard=true, hard=true, npcAction="kneel", npcExposedBodyparts=[BodypartSlot.Penis, BodypartSlot.Anus], exposedBodyparts=[BodypartSlot.Penis]})
-
+		playAnimation(StageScene.Duo, "stand", {
+			npc="axis", npcAction="kneel", 
+			bodyState={exposedCrotch=true,hard=true},
+			npcBodyState={exposedCrotch=true,caged=true},
+		})
+		
 		saynn("You feel like even though this ‘alpha’ was quite an unruly sub, he deserves a relief. You expose your {pc.cock} and stand in front of him, waiting silently.")
 
 		saynn("Axis gazes at your cock and then looks up at you, pleadingly. Seeing your strict gaze, he moves his muzzle closer to your crotch and begins licking your cock with his long wolf tongue, getting it hard.")
@@ -208,7 +222,11 @@ func _run():
 
 	if(state == "grind_face"):
 		# (needs pussy)
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc="axis", npcHard=true, hard=true, npcAction="kneel", npcExposedBodyparts=[BodypartSlot.Penis, BodypartSlot.Anus], exposedBodyparts=[BodypartSlot.Pussy]})
+		playAnimation(StageScene.Duo, "stand", {
+			npc="axis", npcAction="kneel", 
+			bodyState={exposedCrotch=true,hard=true},
+			npcBodyState={exposedCrotch=true,caged=true},
+		})
 
 		saynn("You stand in front of him and expose your cute {pc.pussyStretch} pussy for him. Then you lean down and scritch the wolf under the chin.")
 

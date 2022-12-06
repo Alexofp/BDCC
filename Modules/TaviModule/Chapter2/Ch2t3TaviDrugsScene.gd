@@ -11,7 +11,7 @@ func _run():
 		addCharacter("tavi")
 		
 	if(state == ""):
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc="tavi"})
+		playAnimation(StageScene.Duo, "stand", {npc="tavi"})
 
 		saynn("You show Tavi the few vials that you stole from the medical wing.")
 
@@ -122,7 +122,7 @@ func _run():
 		
 
 	if(state == "kneel"):
-		GM.main.playAnimation(StageScene.Duo, "kneel", {npc="tavi"})
+		playAnimation(StageScene.Duo, "kneel", {npc="tavi"})
 		
 		saynn("You don’t mind that kind of reward, you welcome it, stepping closer and getting down to your knees, obeying the girl’s words. Your hands reach out for Tavi’s thighs but she swiftly slaps them away.")
 
@@ -152,7 +152,10 @@ func _run():
 
 	if(state == "teeth"):
 		# (cover pc with fluids)
-		GM.main.playAnimation(StageScene.Duo, "kneel", {npc="tavi", npcExposedBodyparts=[BodypartSlot.Vagina]})
+		playAnimation(StageScene.Duo, "kneel", {
+			npc="tavi",
+			npcBodyState={exposedCrotch=true,},
+		})
 		addCharacter("tavi", ["naked"])
 
 		saynn("You move your head to the short’s ribbon and open your mouth before carefully grabbing it with your teeth.Tavi giggles while you are pulling down her shorts, revealing her careful neat flower of a bright green color, just like the spots on her body. Your mouth starts to make saliva just from looking at it.")
@@ -180,7 +183,7 @@ func _run():
 
 
 	if(state == "continue1"):
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc="tavi"})
+		playAnimation(StageScene.Duo, "stand", {npc="tavi"})
 		addCharacter("tavi")
 		
 		saynn("You get up from your knees while Tavi puts her shorts back on.")
@@ -232,7 +235,7 @@ func _run():
 
 
 	if(state == "agree"):
-		GM.main.playAnimation(StageScene.Duo, "sit", {npc="tavi"})
+		playAnimation(StageScene.Duo, "sit", {npc="tavi"})
 		
 		saynn("You tilt your head down but Tavi catches your chin and offers support.")
 
@@ -268,7 +271,7 @@ func _run():
 		addButton("Continue", "See what happens next", "continue2")
 
 	if(state == "continue2"):
-		GM.main.playAnimation(StageScene.Solo, "stand")
+		playAnimation(StageScene.Solo, "stand")
 		removeCharacter("tavi")
 		
 		saynn("(( Do you like futas? ))")
@@ -284,7 +287,7 @@ func _run():
 
 	if(state == "wake_up"):
 		addCharacter("tavi")
-		GM.main.playAnimation(StageScene.Duo, "defeat", {npc="tavi"})
+		playAnimation(StageScene.Duo, "defeat", {npc="tavi"})
 		
 		saynn("You slowly open your eyes. Ow. Head hurts a little. But that’s about it.")
 
@@ -327,7 +330,7 @@ func _run():
 		addButton("Avoid", "Use your agility to escape her grasp", "avoid")
 
 	if(state == "shove"):
-		GM.main.playAnimation(StageScene.Duo, "shove", {npc="tavi"})
+		playAnimation(StageScene.Duo, "shove", {npc="tavi"})
 		
 		saynn("You quickly gather all your strength and lash out at crazy Tavi, trying to push her back. And you manage to do it! Your attack connects perfectly and makes the tall cat hiss as she loses balance and collapses onto the floor.")
 
@@ -336,7 +339,7 @@ func _run():
 		addButton("Continue", "See what happens next", "continue3")
 
 	if(state == "avoid"):
-		GM.main.playAnimation(StageScene.Duo, "dodge", {npc="tavi"})
+		playAnimation(StageScene.Duo, "dodge", {npc="tavi"})
 		
 		saynn("You swiftly inhale and dash towards the crazy Tavi. But instead of attacking her, you slide just past her so she can’t grab you by the hair even if she wanted to. Success! Tavi growls as she misses the window to catch you.")
 
@@ -358,7 +361,7 @@ func _run():
 		addButton("Continue", "See what happens next...", "continue4")
 
 	if(state == "continue4"):
-		GM.main.playAnimation(StageScene.Duo, "defeat", {npc="tavi"})
+		playAnimation(StageScene.Duo, "defeat", {npc="tavi"})
 		
 		saynn("But before you can react fully, Tavi just throws you back a few meters, she surely got stronger since last time you met. But that’s the least of your concerns. Because suddenly the whole prison around you began.. melting down. The walls slowly sink under the floor, revealing.. a hellish landscape behind.")
 
@@ -399,10 +402,18 @@ func _run():
 		removeCharacter("tavi")
 		if(getFlag("TaviModule.ch2DrugsPickedFuta")):
 			addCharacter("taviDemonFuta", ["naked"])
-			GM.main.playAnimation(StageScene.Duo, "kneel", {npc="taviDemonFuta", npcHard=true, exposedBodyparts=[BodypartSlot.Penis, BodypartSlot.Vagina, BodypartSlot.Anus, BodypartSlot.Body, BodypartSlot.Breasts]})
+			playAnimation(StageScene.Duo, "kneel", {
+				npc="taviDemonFuta",
+				bodyState={naked=true,hard=true},
+				npcBodyState={hard=true},
+			})
 		else:
 			addCharacter("taviDemon", ["naked"])
-			GM.main.playAnimation(StageScene.Duo, "kneel", {npc="taviDemon", hard=true, exposedBodyparts=[BodypartSlot.Penis, BodypartSlot.Vagina, BodypartSlot.Anus, BodypartSlot.Body, BodypartSlot.Breasts]})
+			playAnimation(StageScene.Duo, "kneel", {
+				npc="taviDemon",
+				bodyState={naked=true,hard=true},
+				npcBodyState={hard=true},
+			})
 		
 		saynn("A few moments later Tavi steps out of the green fire. New Tavi..")
 
@@ -517,6 +528,12 @@ func _run():
 			
 			saynn("[say=tavi]Miss it already? Such a shame that it’s permanent~.[/say]")
 		elif(GM.pc.hasPenis()):
+			playAnimation(StageScene.Duo, "kneel", {
+				npc="taviDemonFuta",
+				bodyState={naked=true,caged=true},
+				npcBodyState={hard=true},
+			})
+			
 			saynn("Your {pc.cock} is throbbing and leaking pre more. Tavi finally decides to take action against that. She motions with her hand again and one of the metal rods gets ripped out of the metal floor before twisting into a little arched spiral. It starts pressing on your cock’s head, battling your erection before another rod bends around your balls and welds together with the first, creating a little neat chastity cage.")
 
 			saynn("[say=tavi]You don’t need that useless dick with me either way, cutie~.[/say]")
@@ -719,7 +736,7 @@ func _run():
 		removeCharacter("taviDemonFuta")
 		removeCharacter("taviDemon")
 		addCharacter("tavi")
-		GM.main.playAnimation(StageScene.Duo, "sit", {npc="tavi"})
+		playAnimation(StageScene.Duo, "sit", {npc="tavi"})
 		
 		saynn("You gasp as you open your eyes. You’re sitting on a crate. Tavi has her paws wrapped around you, hugging you tightly. She jumps from your sudden reaction. There is a used medical injector on the floor.")
 
@@ -889,6 +906,12 @@ func _run():
 			saynn("[say=tavi]Miss it already? Can’t remove it without me, it’s permanent~.[/say]")
 		
 		elif(GM.pc.hasPenis()):
+			playAnimation(StageScene.Duo, "kneel", {
+				npc="taviDemon",
+				bodyState={naked=true,caged=true},
+				npcBodyState={hard=true},
+			})
+			
 			saynn("Your {pc.cock} is throbbing and leaking pre more. Tavi finally decides to take action against that. She motions with her hand again and one of the metal rods gets ripped out of the metal floor before twisting into a little arched spiral. It starts pressing on your cock’s head, battling your erection before another rod bends around your balls and welds together with the first, creating a little neat chastity cage.")
 
 			saynn("[say=tavi]You don’t need it right now, cutie~.[/say]")

@@ -13,7 +13,7 @@ func _reactInit():
 func _run():
 	if(state == ""):
 		addCharacter("avy")
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc="avy"})
+		playAnimation(StageScene.Duo, "stand", {npc="avy"})
 
 	if(state == ""):
 		var pcRank = FightClubModule.getPCRank()
@@ -122,7 +122,7 @@ func _run():
 		
 		var arenaFighter:FightClubFighter = GlobalRegistry.getFightClubFighter(savedFighterID)
 		
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc=arenaFighter.getFightCharacter()})
+		playAnimation(StageScene.Duo, "stand", {npc=arenaFighter.getFightCharacter()})
 		addCharacter(arenaFighter.getFightCharacter())
 		addCharacter("announcer")
 		
@@ -218,14 +218,14 @@ func _react_scene_end(_tag, _result):
 			
 			var winScene = arenaFighter.getWinScene()
 			if(winScene != null):
-				GM.main.playAnimation(StageScene.Duo, "stand", {npc=arenaFighter.getFightCharacter(), npcAction="kneel"})
+				playAnimation(StageScene.Duo, "stand", {npc=arenaFighter.getFightCharacter(), npcAction="kneel"})
 				runScene(winScene)
 			endScene()
 		else:
 			#setState("if_lost")
 			var lostScene = arenaFighter.getLoseScene()
 			if(lostScene != null):
-				GM.main.playAnimation(StageScene.Duo, "kneel", {npc=arenaFighter.getFightCharacter()})
+				playAnimation(StageScene.Duo, "kneel", {npc=arenaFighter.getFightCharacter()})
 				runScene(lostScene)
 			
 			endScene()

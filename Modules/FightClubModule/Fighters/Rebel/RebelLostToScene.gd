@@ -6,7 +6,7 @@ func _init():
 func _run():
 	if(state == ""):
 		addCharacter("rebel")
-		GM.main.playAnimation(StageScene.Duo, "kneel", {npc="rebel"})
+		playAnimation(StageScene.Duo, "kneel", {npc="rebel"})
 
 	if(state == ""):
 		saynn("You let out a gasp and fall down to your knees. Rebel turns to the audience and spreads her arms open, looking very smug.")
@@ -23,7 +23,10 @@ func _run():
 		GM.ES.triggerRun("ArenaFighterPCLost", ["rebel"])
 
 	if(state == "get_fisted"):
-		GM.main.playAnimation(StageScene.Duo, "kneel", {npc="rebel", hard=true, exposedBodyparts=[BodypartSlot.Vagina, BodypartSlot.Anus]})
+		GM.main.playAnimation(StageScene.Duo, "kneel", {
+			npc="rebel", npcAction="stand",
+			bodyState={exposedCrotch=true,hard=true}
+		})
 		
 		saynn("The giant buff mare directs her attention to you and puts on an evil smile. You try to brace and cover yourself with your hands but she easily picks your whole body up like it’s nothing and carries you to the middle of the arena.")
 

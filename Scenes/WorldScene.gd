@@ -69,7 +69,7 @@ func _react(_action: String, _args):
 		return _room._onButton(keyid)
 	
 	if(_action == "go"):
-		GM.main.playAnimation(StageScene.Solo, "walk")
+		playAnimation(StageScene.Solo, "walk")
 		GM.pc.setLocation(GM.world.applyDirectionID(GM.pc.location, _args[0]))
 		processTime(30)
 		aimCamera(GM.pc.location)

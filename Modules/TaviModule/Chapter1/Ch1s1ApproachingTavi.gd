@@ -9,7 +9,7 @@ func _run():
 		addCharacter("tavi")
 		
 	if(state == ""):
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc="tavi"})
+		playAnimation(StageScene.Duo, "stand", {npc="tavi"})
 		
 		# (you approach Tavi, she is walking around in circles and kicks stuff, clearly mad)
 
@@ -61,7 +61,7 @@ func _run():
 		addButton("Stop", "Obey Tavi", "stop")
 
 	if(state == "stop"):
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc="tavi", npcAction="sit"})
+		playAnimation(StageScene.Duo, "stand", {npc="tavi", npcAction="sit"})
 		
 		saynn("You hear her command and seize any movement. Her voice doesn’t sound intimidating anymore but the tone is still quite cold.")
 
@@ -82,7 +82,7 @@ func _run():
 
 
 	if(state == "kneel"):
-		GM.main.playAnimation(StageScene.Duo, "kneel", {npc="tavi", npcAction="sit"})
+		playAnimation(StageScene.Duo, "kneel", {npc="tavi", npcAction="sit"})
 		
 		saynn("You walk up closer but then kneel before Tavi instead of sitting nearby. A little smile returns to her face before she offers you a pat on the head.")
 
@@ -92,7 +92,7 @@ func _run():
 
 
 	if(state == "sit_nearby"):
-		GM.main.playAnimation(StageScene.Duo, "sit", {npc="tavi", npcAction="sit"})
+		playAnimation(StageScene.Duo, "sit", {npc="tavi", npcAction="sit"})
 		
 		saynn("You walk up closer and sit nearby. Tavi pulls you closer and wraps her paw around your waist possessively.")
 

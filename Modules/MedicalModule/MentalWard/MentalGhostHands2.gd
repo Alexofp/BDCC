@@ -43,7 +43,7 @@ func _run():
 	if(state == "follow"):
 		# (also runs the walking scene)
 		aimCameraAndSetLocName("med_researchlab")
-		GM.main.playAnimation(StageScene.Solo, "sit")
+		playAnimation(StageScene.Solo, "sit")
 
 		saynn("Doctor Quinn brings you into the research lab and makes you sit on the testing table before leashing your collar to one of its handy hooks.")
 

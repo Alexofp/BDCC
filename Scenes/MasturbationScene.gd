@@ -14,7 +14,7 @@ func _init():
 
 func _run():
 	if(state == ""):
-		GM.main.playAnimation(StageScene.Solo, "stand")
+		playAnimation(StageScene.Solo, "stand")
 		
 		var lustCombatState:LustCombatState = GM.pc.getLustCombatState()
 		if(GM.pc.getLocation() == GM.pc.getCellLocation()):

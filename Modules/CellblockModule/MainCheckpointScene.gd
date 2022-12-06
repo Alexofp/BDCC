@@ -6,7 +6,7 @@ func _init():
 func _run():
 	if(state == ""):
 		addCharacter("cp_guard")
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc="cp_guard"})
+		playAnimation(StageScene.Duo, "stand", {npc="cp_guard"})
 
 	if(state == "" && !getModuleFlag("CellblockModule", "Cellblock_CheckpointVisited", false)):
 		setModuleFlag("CellblockModule", "Cellblock_CheckpointVisited", true)
@@ -100,8 +100,12 @@ func _run():
 		
 
 	if(state == "offer_handjob"):
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc="cp_guard", npcHard=true, npcExposedBodyparts=[BodypartSlot.Penis]})
-		
+		playAnimation(StageScene.Duo, "stand", {
+			npc="cp_guard", npcAction="stand", 
+			bodyState={},
+			npcBodyState={exposedCrotch=true,hard=true},
+		})
+
 		saynn("Instead of doing as told you walk up closer to the guard and boldly put a hand on his crotch, giving it a slight squeeze. The guy hums and smirks.")
 
 		saynn("[say=pc]How about I offer you something else~[/say]")
@@ -213,7 +217,11 @@ func _run():
 		addWonButton()
 		
 	if(state == "catch_anal"):
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc="cp_guard", npcHard=true, npcExposedBodyparts=[BodypartSlot.Penis], exposedBodyparts=[BodypartSlot.Anus]})
+		playAnimation(StageScene.Duo, "stand", {
+			npc="cp_guard", npcAction="stand", 
+			bodyState={exposedCrotch=true,hard=true},
+			npcBodyState={exposedCrotch=true,hard=true},
+		})
 		
 		saynn("You straddle the guy and unzip his pants, he seems more intrigued than scared, watching you. You of course made sure he can’t reach his weapons or the shock remote, rendering him helpless.")
 

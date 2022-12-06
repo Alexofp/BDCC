@@ -11,7 +11,7 @@ func _reactInit():
 func _run():
 	if(state == ""):
 		addCharacter("nova")
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc="nova", npcAction="stand"})
+		playAnimation(StageScene.Duo, "stand", {npc="nova", npcAction="stand"})
 	if(state == ""):
 		if(!GM.main.getModuleFlag("NovaModule", "Nova_Introduced")):
 			GM.main.setModuleFlag("NovaModule", "Nova_Introduced", true)

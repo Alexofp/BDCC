@@ -677,7 +677,7 @@ func doSubAction(_id, _actionInfo):
 		return {text = text, subSay=subReaction(sexReactionPullOut)}
 
 func getAnimation():
-	return [StageScene.Duo, "allfours", {pc=subID, npc=domID, npcAction="kneel", flipPc=true}]
+	return [StageScene.Duo, "allfours", {pc=subID, npc=domID, npcAction="kneel"}] #, bodyState={lookLeft=false}
 
 func getDomCondom():
 	return getDom().getWornCondom()

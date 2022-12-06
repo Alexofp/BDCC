@@ -9,7 +9,7 @@ func _run():
 		addCharacter("eliza")
 		
 	if(state == ""):
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc="eliza"})
+		playAnimation(StageScene.Duo, "stand", {npc="eliza"})
 		
 		saynn("You look around and scratch your head, unsure of how to start the conversation.")
 
@@ -43,7 +43,7 @@ func _run():
 
 	if(state == "follow"):
 		aimCameraAndSetLocName("med_researchlab")
-		GM.main.playAnimation(StageScene.Duo, "sit", {npc="eliza"})
+		playAnimation(StageScene.Duo, "sit", {npc="eliza"})
 		# (also launches a parading scene towards the lab)
 
 		saynn("You enter the sterile lab with doctor Quinn. As you step in, the fluorescent lamps turn on automatically, blinding you. You squint and let your eyes adjust while you are being brought further into the room where the medical table is.")
@@ -237,7 +237,7 @@ func _run():
 	if(state == "leave"):
 		GM.pc.setLocation("med_nearlab")
 		aimCameraAndSetLocName("med_nearlab")
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc="eliza"})
+		playAnimation(StageScene.Duo, "stand", {npc="eliza"})
 		
 		saynn("She presses a button that closes the airlock behind.")
 
@@ -270,7 +270,7 @@ func _run():
 		addButton("Fight!", "Time to show how is the boss here", "fight")
 
 	if(state == "if_won"):
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc="eliza", npcAction="defeat"})
+		playAnimation(StageScene.Duo, "stand", {npc="eliza", npcAction="defeat"})
 		
 		saynn("Eliza is unable to fight any longer but just before she can hit the floor, you pin her against the wall again. All she can do is weakly try to pry your hands off of her neck.")
 
@@ -299,7 +299,7 @@ func _run():
 		removeCharacter("eliza")
 		GM.pc.setLocation("med_nearlab")
 		aimCameraAndSetLocName("med_nearlab")
-		GM.main.playAnimation(StageScene.Solo, "stand")
+		playAnimation(StageScene.Solo, "stand")
 		
 		saynn("You enter the corridor and close the door behind you. You stole the mind-melting drugs, Tavi should be safe now.")
 
@@ -341,7 +341,7 @@ func _run():
 
 
 	if(state == "bind_and_leave"):
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc="eliza"})
+		playAnimation(StageScene.Duo, "stand", {npc="eliza"})
 		
 		saynn("You grab the long chain that Eliza usually uses as a leash. You figure that it might work pretty well as a rope and begin tying the doctor's legs with it, making it so she can’t walk or even just spread her legs.")
 
@@ -593,7 +593,7 @@ func _run():
 	if(state == "nap"):
 		aimCameraAndSetLocName("medical_paddedcell_player")
 		GM.pc.setLocation("medical_paddedcell_player")
-		GM.main.playAnimation(StageScene.Solo, "kneel")
+		playAnimation(StageScene.Solo, "kneel")
 		
 		saynn("You sleep for a few hours. When you wake up, you notice something. The floor is.. soft. Yes, it’s a very soft floor, you almost don’t wanna open your eyes.")
 
@@ -646,7 +646,9 @@ func _run():
 
 
 	if(state == "obey"):
-		GM.main.playAnimation(StageScene.Duo, "sit", {npc="eliza", hard=true, exposedBodyparts=[BodypartSlot.Vagina, BodypartSlot.Penis, BodypartSlot.Anus, BodypartSlot.Body, BodypartSlot.Breasts]})
+		playAnimation(StageScene.Duo, "sit", {npc="eliza",
+			bodyState={naked=true,},
+		})
 		
 		# (if has clothing)
 		if(!GM.pc.isFullyNaked()):
@@ -734,7 +736,7 @@ func _run():
 
 
 	if(state == "explain"):
-		GM.main.playAnimation(StageScene.Duo, "defeat", {npc="eliza"})
+		playAnimation(StageScene.Duo, "defeat", {npc="eliza"})
 		
 		saynn("[say=pc]I can explain.[/say]")
 
@@ -756,7 +758,7 @@ func _run():
 		addButton("Nap", "Time to sleep", "nap")
 
 	if(state == "inside"):
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc="eliza"})
+		playAnimation(StageScene.Duo, "stand", {npc="eliza"})
 		
 		# (if has pussy)
 		if(GM.pc.hasReachableVagina()):
@@ -789,7 +791,7 @@ func _run():
 	if(state == "leave1"):
 		GM.pc.setLocation("med_nearlab")
 		aimCameraAndSetLocName("med_nearlab")
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc="eliza"})
+		playAnimation(StageScene.Duo, "stand", {npc="eliza"})
 		
 		saynn("Eliza opens the door that leads to the corridor. You get up and begin to step towards it. You do walk a little funny but luckily Eliza doesn’t spot it.")
 

@@ -6,7 +6,7 @@ func _init():
 func _run():
 	if(state == ""):
 		addCharacter("volk")
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc="volk", npcAction="kneel"})
+		playAnimation(StageScene.Duo, "stand", {npc="volk", npcAction="kneel"})
 
 	if(state == ""):
 		saynn("Volk drops his weapon and grunts as he hits the floor. As you approach him, his hand starts reaching for his shiv but you swiftly stop that by stepping on his palm and pinning it to the floor.")

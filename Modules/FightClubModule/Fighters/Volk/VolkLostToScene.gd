@@ -6,7 +6,7 @@ func _init():
 func _run():
 	if(state == ""):
 		addCharacter("volk")
-		GM.main.playAnimation(StageScene.Duo, "kneel", {npc="volk"})
+		playAnimation(StageScene.Duo, "kneel", {npc="volk"})
 
 	if(state == ""):
 		saynn("Volk laughs seeing you collapse to the floor.")

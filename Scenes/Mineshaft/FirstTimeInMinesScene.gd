@@ -6,7 +6,7 @@ func _init():
 func _run():
 	if(state == ""):
 		addCharacter("alexrynard")
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc="alexrynard"})
+		playAnimation(StageScene.Duo, "stand", {npc="alexrynard"})
 		
 		saynn("You approach the mineshafts, the black asteroid rock is what’s replacing the concrete walls here, it’s pretty dark even with a few floodlights around. There are a few inmates around doing something but your attention gets stolen after you notice some staff leaning against a wall, reading his datapad. He spots a yellow uniform and a toolbelt, he is clearly a fox judging from his orange fur and pointy canine muzzle. You spot a little detail on his fur under the right eye, two black rectangles.")
 

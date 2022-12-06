@@ -7,7 +7,7 @@ func _init():
 func _run():
 	if(state == ""):
 		addCharacter("skar")
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc="skar", npcAction="stand"})
+		playAnimation(StageScene.Duo, "stand", {npc="skar", npcAction="stand"})
 		
 	if(state == ""):
 		saynn("The captain’s office is in sight. But the door is guarded by one of the guards, clearly a wolf. But you notice that his appearance is quite unique.")

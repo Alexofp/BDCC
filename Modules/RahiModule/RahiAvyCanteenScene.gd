@@ -124,7 +124,7 @@ func _run():
 		addButton("Attack", "Show that bully what a real pain is", "attack")
 
 	if(state == "beg"):
-		GM.main.playAnimation(StageScene.Solo, "kneel")
+		playAnimation(StageScene.Solo, "kneel")
 		
 		saynn("You do as she orders, getting on your knees before the red and tilting your head down.")
 
@@ -206,7 +206,7 @@ func _run():
 		
 
 	if(state == "attack"):
-		GM.main.playAnimation(StageScene.Solo, "shove")
+		playAnimation(StageScene.Solo, "shove")
 		
 		saynn("You shove your elbow into her chest, causing the foxy to stumble back. She growls at you, showing off her bare fangs.")
 
@@ -218,7 +218,7 @@ func _run():
 		
 
 	if(state == "intimidate"):
-		GM.main.playAnimation(StageScene.Solo, "stand")
+		playAnimation(StageScene.Solo, "stand")
 		
 		saynn("[say=pc]I’m looking at a huge mistake you’re making.[/say]")
 

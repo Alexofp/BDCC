@@ -6,7 +6,7 @@ func _init():
 func _run():
 	if(state == ""):
 		addCharacter("avy")
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc="avy"})
+		playAnimation(StageScene.Duo, "stand", {npc="avy"})
 
 	if(state == ""):
 		saynn("You see the familiar foxy leaning against the metal fence. One of her arms is still bandaged with some rags. You walk up to her and try to get her attention, she seems to be busy looking at her notes.")

@@ -29,7 +29,7 @@ func _run():
 	if(state == "follow"):
 		aimCamera("med_milkingroom")
 		setLocationName("Milking heaven")
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc="eliza", hard=true, exposedBodyparts=[BodypartSlot.Anus, BodypartSlot.Penis]})
+		playAnimation(StageScene.Duo, "stand", {npc="eliza", bodyState={exposedCrotch=true,hard=true}})
 		
 		saynn("She brings you to a room that can only be described as a milking heaven. You notice a huge fluid storage tank and quite a few special milking stalls, not for animals but for humans. Eliza guides you into one of them. The stall itself is just some metal pipes, designed to keep the bull or the cow still, Eliza tied your leash to the stall’s frame.")
 
@@ -154,7 +154,7 @@ func _run():
 		aimCamera("med_nearmilking")
 		setLocationName("Corridor")
 		GM.pc.setLocation("med_nearmilking")
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc="eliza"})
+		playAnimation(StageScene.Duo, "stand", {npc="eliza"})
 		
 		saynn("Eliza brings you out into the corridor. She unclips the leash and sends you off.")
 

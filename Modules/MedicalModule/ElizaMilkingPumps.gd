@@ -27,7 +27,7 @@ func _run():
 	if(state == "follow"):
 		aimCamera("med_milkingroom")
 		setLocationName("Milking heaven")
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc="eliza", hard=true, exposedBodyparts=[BodypartSlot.Breasts]})
+		playAnimation(StageScene.Duo, "stand", {npc="eliza", bodyState={exposedChest=true}})
 		
 		saynn("You enter the space that is designed for milking activities, Eliza guides you into one of the stalls and ties your leash to one of the metal bars. You look around, the room has a moody warm feel to it, the lighting here is not as bright.")
 
@@ -127,7 +127,7 @@ func _run():
 		aimCamera("med_nearmilking")
 		setLocationName("Corridor")
 		GM.pc.setLocation("med_nearmilking")
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc="eliza"})
+		playAnimation(StageScene.Duo, "stand", {npc="eliza"})
 		
 		saynn("Eliza walks you out of the milking room and unleashes you.")
 

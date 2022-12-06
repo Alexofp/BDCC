@@ -9,7 +9,7 @@ func _run():
 		addCharacter("eliza")
 		
 	if(state == ""):
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc="eliza"})
+		playAnimation(StageScene.Duo, "stand", {npc="eliza"})
 
 		saynn("You approach the counter that Eliza usually sits behind. She is there, drinking her coffee as usual. But when she sees you, her expression changes to a very dark one, she frowns.")
 

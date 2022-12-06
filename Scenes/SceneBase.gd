@@ -265,6 +265,10 @@ func getSceneCreator():
 		return str(registryCreator)
 	return null
 
+func playAnimation(theSceneID, theActionID, args = {}):
+	if(GM.main != null):
+		GM.main.playAnimation(theSceneID, theActionID, args)
+
 func saveData():
 	var data = {}
 	data["state"] = state

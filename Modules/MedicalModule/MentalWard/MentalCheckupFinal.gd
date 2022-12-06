@@ -53,7 +53,7 @@ func _run():
 
 	if(state == "follow"):
 		aimCamera("med_lobbyne")
-		GM.main.playAnimation(StageScene.Solo, "walk")
+		playAnimation(StageScene.Solo, "walk")
 		setLocationName("Medical lobby")
 		GM.pc.setLocation("med_lobbyne")
 		
@@ -145,7 +145,7 @@ func _run():
 
 	if(state == "run"):
 		aimCamera("med_lobbyne")
-		GM.main.playAnimation(StageScene.Solo, "walk")
+		playAnimation(StageScene.Solo, "walk")
 		setLocationName("Medical lobby")
 		GM.pc.setLocation("med_lobbyne")
 		

@@ -6,7 +6,7 @@ func _init():
 func _run():
 	if(state == ""):
 		addCharacter("rubi")
-		GM.main.playAnimation(StageScene.Duo, "kneel", {npc="rubi"})
+		playAnimation(StageScene.Duo, "kneel", {npc="rubi"})
 
 	if(state == ""):
 		saynn("Defeated, you slump down to the floor.")
@@ -25,7 +25,11 @@ func _run():
 
 	if(state == "power_bottom"):
 		# (if has cock)
-		GM.main.playAnimation(StageScene.Duo, "kneel", {npc="rubi", npcHard=true, hard=true, exposedBodyparts=[BodypartSlot.Penis], npcExposedBodyparts=[BodypartSlot.Anus]})
+		playAnimation(StageScene.Duo, "kneel", {
+			npc="rubi", npcAction="stand", 
+			bodyState={exposedCrotch=true,hard=true},
+			npcBodyState={exposedCrotch=true,hard=true},
+		})
 
 		saynn("He looks at your bulge and finally decides what he wants to do with you.")
 
@@ -66,7 +70,11 @@ func _run():
 
 	if(state == "he_cums_on_you"):
 		# (if no penis)
-		GM.main.playAnimation(StageScene.Duo, "kneel", {npc="rubi", npcHard=true, npcExposedBodyparts=[BodypartSlot.Penis]})
+		playAnimation(StageScene.Duo, "kneel", {
+			npc="rubi", npcAction="stand", 
+			bodyState={},
+			npcBodyState={exposedCrotch=true,hard=true},
+		})
 
 		saynn("His shorts are bulging harder when he finally decides what to do with you.")
 

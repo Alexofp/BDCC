@@ -12,7 +12,7 @@ func _run():
 		addCharacter("femaleguard_feline")
 		
 	if(state == ""):
-		GM.main.playAnimation(StageScene.Stocks, "idle", {pc="jacki", exposedBodyparts=[]})
+		playAnimation(StageScene.Stocks, "idle", {pc="jacki"})
 		
 		# (Jacki peed in the garden area, behind one of the bushes. Because the bathrooms were both busy with bullies. But she also kinda liked the idea)
 
@@ -41,7 +41,7 @@ func _run():
 		addButton("Ask", "Ask why the wolfie is locked up", "ask")
 
 	if(state == "ask"):
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc="femaleguard_feline"})
+		playAnimation(StageScene.Duo, "stand", {npc="femaleguard_feline"})
 		# (guard offers to fuck jacki)
 
 		# (pc asks why is she locked up)
@@ -65,7 +65,7 @@ func _run():
 		addButton("Illegal?", "Ask what about it was against the law", "illegal?")
 
 	if(state == "illegal?"):
-		GM.main.playAnimation(StageScene.Stocks, "idle", {pc="jacki", exposedBodyparts=[BodypartSlot.Vagina, BodypartSlot.Anus]})
+		playAnimation(StageScene.Stocks, "idle", {pc="jacki", bodyState={exposedCrotch=true}})
 		addCharacter("jacki", ["naked"])
 		
 		saynn("[say=pc]Peeing is illegal now?[/say]")
@@ -407,7 +407,7 @@ func _run():
 
 
 	if(state == "attack"):
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc="gymbully"})
+		playAnimation(StageScene.Duo, "stand", {npc="gymbully"})
 		
 		saynn("Well, since they are clearly not gonna fuck off that easy, you stop tinkering with the stocks and then stand in their path.")
 
@@ -446,7 +446,7 @@ func _run():
 	if(state == "help1"):
 		removeCharacter("gymbully")
 		removeCharacter("gymbully2")
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc="jacki"})
+		playAnimation(StageScene.Duo, "stand", {npc="jacki"})
 		addCharacter("jacki")
 		
 		# (knows name = true)
@@ -500,7 +500,7 @@ func _run():
 		addCharacter("jacki", ["naked"])
 		
 		setFlag("JackiModule.Jacki_StocksPCLostFightAndWatched", true)
-		GM.main.playAnimation(StageScene.Stocks, "idle", {pc="jacki", exposedBodyparts=[BodypartSlot.Vagina, BodypartSlot.Anus]})
+		playAnimation(StageScene.Stocks, "idle", {pc="jacki", bodyState={exposedCrotch=true}})
 		
 		# (dudes approach Jacki. One pulls her shorts down and complains about piercings.)
 
@@ -563,7 +563,7 @@ func _run():
 		removeCharacter("gymbully")
 		removeCharacter("gymbully2")
 		addCharacter("jacki")
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc="jacki"})
+		playAnimation(StageScene.Duo, "stand", {npc="jacki"})
 		
 		saynn("You get up and approach the stocks. You’re still feeling weak after losing but you just about manage to unlock the stocks and open them. The wolfy slides down onto her knees and coughs more. You help her put her shorts on, they are ruined with cum already anyway.")
 
@@ -585,7 +585,7 @@ func _run():
 	if(state == "break_stocks"):
 		# (needs 10 str)
 		addCharacter("jacki")
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc="jacki"})
+		playAnimation(StageScene.Duo, "stand", {npc="jacki"})
 
 		saynn("You’re not letting some fuckers use this wolfy, you tense your muscles up and begin applying pressure onto the top parts of the stocks, brute-forcing the problem. You let out an angry intimidating scream while the metal slowly starts to bend. The wolfy manages to free her paw, then her head, and then another paw.")
 
@@ -603,7 +603,7 @@ func _run():
 		aimCameraAndSetLocName("main_bathroom1")
 		GM.pc.setLocation("main_bathroom1")
 		setFlag("JackiModule.Jacki_StocksSavedByPC", true)
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc="jacki"})
+		playAnimation(StageScene.Duo, "stand", {npc="jacki"})
 		# (knows name = true)
 		setFlag("JackiModule.Jacki_PCKnowsName", true)
 
@@ -626,7 +626,7 @@ func _run():
 	if(state == "use_a_restraint_key"):
 		# (needs and uses a key)
 		addCharacter("jacki")
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc="jacki"})
+		playAnimation(StageScene.Duo, "stand", {npc="jacki"})
 
 		saynn("You think fast and realize that you have a key that is universal for any restraint. You quickly produce one and stuff it into the padlock that holds the stocks together before unlocking them. The key breaks in the process but you manage to free the girl.")
 
@@ -639,7 +639,7 @@ func _run():
 	if(state == "seduce"):
 		# (needs sexiness 6+)
 		addCharacter("jacki")
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc="gymbully"})
+		playAnimation(StageScene.Duo, "stand", {npc="gymbully"})
 
 		saynn("[say=pc]Why don’t you guys use me instead~[/say]")
 

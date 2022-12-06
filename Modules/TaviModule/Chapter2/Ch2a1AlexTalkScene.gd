@@ -9,7 +9,7 @@ func _run():
 		addCharacter("alexrynard")
 		
 	if(state == ""):
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc="alexrynard"})
+		playAnimation(StageScene.Duo, "stand", {npc="alexrynard"})
 		
 		saynn("[say=pc]Can I ask a question?[/say]")
 

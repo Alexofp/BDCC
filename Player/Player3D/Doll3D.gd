@@ -484,3 +484,49 @@ func setCockTemporaryHard():
 		return
 	
 	setTemporaryState("cock", "")
+
+func setCockTemporaryCaged():
+	#var currentCockState = getFinalState("cock")
+	#if(currentCockState in ["caged", "condom"]):
+	#	return
+	
+	setTemporaryState("cock", "caged")
+
+func applyBodyState(bodystate):
+	if(bodystate == null):
+		bodystate = {}
+	
+	var shouldExposeChest = bodystate.has("exposedChest") && bodystate["exposedChest"]
+	var shouldExposeCrotch = bodystate.has("exposedCrotch") && bodystate["exposedCrotch"]
+	var shouldBeNaked = bodystate.has("naked") && bodystate["naked"]
+	var shouldBeHard = bodystate.has("hard") && bodystate["hard"]
+	var shouldBeCaged = bodystate.has("caged") && bodystate["caged"]
+	var shouldLookLeft = bodystate.has("lookLeft") && bodystate["lookLeft"]
+	
+	var exposeBodyparts = []
+	if(shouldExposeChest || shouldBeNaked):
+		exposeBodyparts.append_array([
+			BodypartSlot.Body,
+			BodypartSlot.Breasts,
+		])
+	if(shouldExposeCrotch || shouldBeNaked):
+		exposeBodyparts.append_array([
+			BodypartSlot.Body,
+			BodypartSlot.Penis,
+			BodypartSlot.Vagina,
+			BodypartSlot.Anus,
+		])
+	
+	setExposedBodyparts(exposeBodyparts)
+		
+	if(shouldBeHard):
+		setCockTemporaryHard()
+		
+	if(shouldBeCaged):
+		setCockTemporaryCaged()
+	
+	if(bodystate.has("lookLeft")):
+		if(shouldLookLeft):
+			scale.x = abs(scale.x)
+		else:
+			scale.x = -abs(scale.x)

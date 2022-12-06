@@ -9,7 +9,7 @@ func _run():
 		addCharacter("tavi")
 		
 	if(state == ""):
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc="tavi", npcAction="kneel"})
+		playAnimation(StageScene.Duo, "stand", {npc="tavi", npcAction="kneel"})
 		
 		saynn("You cross your arms and give Tavi a strict gaze of your own.")
 

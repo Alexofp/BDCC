@@ -105,7 +105,7 @@ func _run():
 		addButton("Give in", "Maybe it will let you go sooner if you don’t resist..", "give_in")
 
 	if(state == "give_in"):
-		GM.main.playAnimation(StageScene.Solo, "defeat")
+		playAnimation(StageScene.Solo, "defeat")
 		
 		saynn("While the tentacles explore you, the latex-y goo continues to envelop more and more of your body. You feel like you can’t stand anymore, you relax and try to fall but the parasite catches you and gently places you down on your knees.")
 
@@ -171,7 +171,7 @@ func _run():
 	if(state == "take_a_nap"):
 		aimCamera("medical_paddedcell_player")
 		GM.pc.setLocation("medical_paddedcell_player")
-		GM.main.playAnimation(StageScene.Solo, "kneel")
+		playAnimation(StageScene.Solo, "kneel")
 		setLocationName("Padded cell")
 		
 		saynn("You wake up somewhere else. You can hear Eliza as she grabs your blindfold and carefully removes it. Then she does the same for the gag. You squint from the bright light and cough out more of that black goo. Eliza giggles. You’re in your padded cell. The doctor continues to take off the restraints that the parasite has produced. Then she grabs a scalpel and carefully splits open the latex suit that’s on you and then takes it off you.")
