@@ -501,7 +501,7 @@ func applyBodyState(bodystate):
 	var shouldBeNaked = bodystate.has("naked") && bodystate["naked"]
 	var shouldBeHard = bodystate.has("hard") && bodystate["hard"]
 	var shouldBeCaged = bodystate.has("caged") && bodystate["caged"]
-	var shouldLookLeft = bodystate.has("lookLeft") && bodystate["lookLeft"]
+	#var shouldLookLeft = bodystate.has("lookLeft") && bodystate["lookLeft"]
 	
 	var exposeBodyparts = []
 	if(shouldExposeChest || shouldBeNaked):
@@ -525,8 +525,8 @@ func applyBodyState(bodystate):
 	if(shouldBeCaged):
 		setCockTemporaryCaged()
 	
-	if(bodystate.has("lookLeft")):
-		if(shouldLookLeft):
-			scale.x = abs(scale.x)
-		else:
-			scale.x = -abs(scale.x)
+#	if(bodystate.has("lookLeft")):
+#		if(shouldLookLeft):
+#			scale.x = abs(scale.x)
+#		else:
+#			scale.x = -abs(scale.x)
