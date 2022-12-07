@@ -10,7 +10,7 @@ filter_enabled = true
 filters = [ "Doll3D/Skeleton:Arm.L", "Doll3D/Skeleton:Arm.R", "Doll3D/Skeleton:ForeArm.L", "Doll3D/Skeleton:ForeArm.R", "Doll3D/Skeleton:Hand.L", "Doll3D/Skeleton:Hand.R" ]
 
 [resource]
-graph_offset = Vector2( -281.55, -94.5468 )
+graph_offset = Vector2( -417.249, 29.2417 )
 nodes/Animation/node = SubResource( 3 )
 nodes/Animation/position = Vector2( 140, 280 )
 nodes/AnimationNodeStateMachine/node = ExtResource( 1 )

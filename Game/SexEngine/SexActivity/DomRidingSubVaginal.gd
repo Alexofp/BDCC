@@ -634,7 +634,11 @@ func doSubAction(_id, _actionInfo):
 
 
 func getAnimation():
-	return [StageScene.DuoSex, "cowgirl", {pc=subID, npc=domID}]
+	if(state in [""]):
+		return [StageScene.SexCowgirl, "tease", {pc=subID, npc=domID}]
+	if(subInfo.isCloseToCumming()):
+		return [StageScene.SexCowgirl, "fast", {pc=subID, npc=domID}]
+	return [StageScene.SexCowgirl, "sex", {pc=subID, npc=domID}]
 
 func getDomSwitchHoleChance():
 	if(domInfo.hasMemory("switchedHoles")):
