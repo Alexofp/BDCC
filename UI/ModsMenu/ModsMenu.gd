@@ -159,7 +159,7 @@ func _on_AddModButton_pressed():
 					has_permissions = true
 					
 			var d = Directory.new()
-			var externalDir:String = OS.get_system_dir(OS.SYSTEM_DIR_DOWNLOADS, true)
+			var externalDir:String = OS.get_system_dir(OS.SYSTEM_DIR_DOCUMENTS, true)
 			var finalDir = externalDir.plus_file("BDCCMods")
 			d.make_dir_recursive(finalDir)
 			#$ImportModDialog.current_dir = finalDir
