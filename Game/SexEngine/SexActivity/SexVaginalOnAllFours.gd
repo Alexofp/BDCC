@@ -677,7 +677,18 @@ func doSubAction(_id, _actionInfo):
 		return {text = text, subSay=subReaction(sexReactionPullOut)}
 
 func getAnimation():
-	return [StageScene.Duo, "allfours", {pc=subID, npc=domID, npcAction="kneel"}] #, bodyState={lookLeft=false}
+	if(getSub().hasBoundArms() || subInfo.isUnconscious()):
+		if(state in [""]):
+			return [StageScene.SexAllFours, "teaseflop", {pc=domID, npc=subID}]
+		if(domInfo.isCloseToCumming()):
+			return [StageScene.SexAllFours, "fastflop", {pc=domID, npc=subID}]
+		return [StageScene.SexAllFours, "sexflop", {pc=domID, npc=subID}]
+	else:
+		if(state in [""]):
+			return [StageScene.SexAllFours, "tease", {pc=domID, npc=subID}]
+		if(domInfo.isCloseToCumming()):
+			return [StageScene.SexAllFours, "fast", {pc=domID, npc=subID}]
+		return [StageScene.SexAllFours, "sex", {pc=domID, npc=subID}]
 
 func getDomCondom():
 	return getDom().getWornCondom()
