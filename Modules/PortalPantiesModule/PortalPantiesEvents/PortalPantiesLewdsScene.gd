@@ -293,7 +293,7 @@ func _run():
 		
 		saynn("Then you feel your cock pressed against a pussy! Wet needy folds are being spread by your dick as you feel somebody lowering themselves onto the fleshlight with your member sticking out. Huh, they seem very eager to get their pussy stuffed.")
 		
-		saynn("They then start bouncing on your cock up and down. They ride you so well that you quickly find your panting and arching your back, their inner walls wrap around your shaft in such a pleasurable way.")
+		saynn("They then start bouncing on your cock up and down. They ride you so well that you quickly find yourself panting and arching your back, their inner walls wrap around your shaft in such a pleasurable way.")
 		
 		saynn("The tip of your cock is smashing their cervix, you feel like you’re about to cum!")
 		
