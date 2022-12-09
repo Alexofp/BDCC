@@ -130,6 +130,7 @@ skin = SubResource( 8 )
 material/0 = SubResource( 4 )
 
 [node name="ferrihair2png" type="MeshInstance" parent="." index="1"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0905542 )
 mesh = SubResource( 9 )
 skin = SubResource( 8 )
 material/0 = SubResource( 6 )

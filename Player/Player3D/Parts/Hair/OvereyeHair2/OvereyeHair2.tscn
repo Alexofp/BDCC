@@ -126,7 +126,7 @@ skin = SubResource( 3 )
 material/0 = SubResource( 4 )
 
 [node name="ponytailpng2" type="MeshInstance" parent="." index="1"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.02, 0, -0.0666085 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.02, 0, -0.091 )
 mesh = SubResource( 2 )
 skin = SubResource( 3 )
 material/0 = SubResource( 5 )

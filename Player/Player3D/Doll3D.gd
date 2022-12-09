@@ -17,6 +17,8 @@ var breastsLeaking = false
 var pussyLeaking = false
 var anusLeaking = false
 
+var rememberedPenisScale = 1.0
+
 export(bool) var addTestBody = false
 
 var dollAttachmentZoneScene = preload("res://Player/Player3D/Parts/DollAttachmentZone.tscn")
@@ -67,10 +69,10 @@ func testBody():
 	#addPartObject("tail", load("res://Player/Player3D/Parts/Tail/HuskyTail/HuskyTail.tscn").instance())
 	#addPartObject("penis", load("res://Player/Player3D/Parts/Penis/DragonPenis/DragonPenis.tscn").instance())
 	#addPartObject("penis", load("res://Player/Player3D/Parts/Penis/HumanPenis/HumanPenis.tscn").instance())
-	addPartObject("penis", load("res://Player/Player3D/Parts/Penis/CaninePenis/CaninePenis.tscn").instance())
-	#addPartObject("penis", load("res://Player/Player3D/Parts/Penis/EquinePenis/EquinePenis.tscn").instance())
-	addPartObject("hair", load("res://Player/Player3D/Parts/Hair/FerriHair/FerriHair.tscn").instance())
-	#addPartObject("hair", load("res://Player/Player3D/Parts/Hair/PonytailHair/PonytailHair.tscn").instance())
+	#addPartObject("penis", load("res://Player/Player3D/Parts/Penis/CaninePenis/CaninePenis.tscn").instance())
+	addPartObject("penis", load("res://Player/Player3D/Parts/Penis/EquinePenis/EquinePenis.tscn").instance())
+	#addPartObject("hair", load("res://Player/Player3D/Parts/Hair/FerriHair/FerriHair.tscn").instance())
+	addPartObject("hair", load("res://Player/Player3D/Parts/Hair/PonytailHair/PonytailHair.tscn").instance())
 	#addPartObject("hair", load("res://Player/Player3D/Parts/Hair/CombedBackHair/CombedBackHair.tscn").instance())
 	#addPartObject("hair", load("res://Player/Player3D/Parts/Hair/LongHair/LongHair.tscn").instance())
 	#addPartObject("hair", load("res://Player/Player3D/Parts/Hair/MessyHair/MessyHair.tscn").instance())
@@ -313,6 +315,11 @@ func setThighThickness(progress: float):
 
 func setPenisScale(penisScale: float):
 	setBoneScale("Penis", penisScale)
+	rememberedPenisScale = penisScale
+
+func clampPenisScale(minPenisScale: float, maxPenisScale: float):
+	rememberedPenisScale = clamp(rememberedPenisScale, minPenisScale, maxPenisScale)
+	setBoneScale("Penis", rememberedPenisScale)
 
 func setBallsScale(newScale: float):
 	var offsetScale = 0.0
