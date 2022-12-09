@@ -61,19 +61,19 @@ func playAnimation(animID, _args = {}):
 	if(animID == "tease"):
 		state_machine.travel("Sex_OralTease_1-loop")
 		state_machine2.travel("Sex_OralTease_2-loop")
-		#if(doll2.getFinalState("mouth") in ["", null]):
+		#if(doll2.getState("mouth") in ["", null]):
 		#	doll2.setTemporaryState("mouth", "open")
 	if(animID == "sex"):
 		state_machine.travel("Sex_Oral_1-loop")
 		state_machine2.travel("Sex_Oral_2-loop")
 		doll.clampPenisScale(0.95, 1.1)
-		if(doll2.getFinalState("mouth") in ["", null]):
+		if(doll2.getState("mouth") in ["", null]):
 			doll2.setTemporaryState("mouth", "open")
 	if(animID == "fast"):
 		state_machine.travel("Sex_OralFast_1-loop")
 		state_machine2.travel("Sex_OralFast_2-loop")
 		doll.clampPenisScale(0.95, 1.1)
-		if(doll2.getFinalState("mouth") in ["", null]):
+		if(doll2.getState("mouth") in ["", null]):
 			doll2.setTemporaryState("mouth", "open")
 
 func canTransitionTo(_actionID, _args = []):

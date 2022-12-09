@@ -106,6 +106,11 @@ func setTemporaryState(stateID, value):
 		var part = parts[slot]
 		part.setState(stateID, value)
 
+func getState(stateID):
+	if(state.has(stateID)):
+		return state[stateID]
+	return null
+
 func getFinalState(stateID):
 	if(temporaryState.has(stateID)):
 		return temporaryState[stateID]
