@@ -477,7 +477,8 @@ func hoursPassed(howMuch):
 	
 	for characterID in charactersToUpdate:
 		var character = getCharacter(characterID)
-		character.hoursPassed(howMuch)
+		if(character != null):
+			character.hoursPassed(howMuch)
 
 func processTimeUntil(newseconds):
 	if(timeOfDay >= newseconds):
@@ -979,7 +980,9 @@ func startUpdatingCharacter(charID):
 	if(!charactersToUpdate.has(charID)):
 		charactersToUpdate[charID] = true
 		print("BEGAN PROCESSING "+str(charID))
-		getCharacter(charID).processUntilTime(currentDay, timeOfDay)
+		var character = getCharacter(charID)
+		if(character != null):
+			character.processUntilTime(currentDay, timeOfDay)
 
 func generateCharacterID(beginPart = "dynamicnpc"):
 	var numID = GlobalRegistry.generateNPCUniqueID()
