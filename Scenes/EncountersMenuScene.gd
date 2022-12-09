@@ -67,7 +67,7 @@ func _run():
 		
 		var characterIDS = GM.main.getDynamicCharacterIDsFromPool(pickedPoolToForget)
 		for characterID in characterIDS:
-			var dynamicCharacter:DynamicCharacter = GlobalRegistry.getCharacter(characterID)
+			var dynamicCharacter = GlobalRegistry.getCharacter(characterID)
 			if(dynamicCharacter == null):
 				continue
 				
@@ -91,13 +91,13 @@ func _run():
 			addButton(dynamicCharacter.getName(), desc, "forget", [dynamicCharacter.getID()])
 	
 	if(state == "fetishmenu"):
-		var fetishHolder: FetishHolder = GM.pc.getFetishHolder()
+		var fetishHolder = GM.pc.getFetishHolder()
 		saynn("Having a fetish for something means you will get more lust doing this activity during sex.")
 		addButton("Go back", "Go back a menu", "")
 		
 		sayn("Your fetishes:")
 		for fetishID in GlobalRegistry.getFetishes():
-			var fetish:FetishBase = GlobalRegistry.getFetish(fetishID)
+			var fetish = GlobalRegistry.getFetish(fetishID)
 			var fetishInterest = fetishHolder.getFetishInterest(fetishID)
 			var fetishColor = FetishInterest.getColorString(fetishInterest)
 			var fetishInterestText = FetishInterest.getVisibleName(fetishInterest)
@@ -107,8 +107,8 @@ func _run():
 			addButton(fetish.getVisibleName(), "Change how much you enjoy this fetish", "changefetish", [fetishID])
 		
 	if(state == "changefetish"):
-		var fetishHolder: FetishHolder = GM.pc.getFetishHolder()
-		var fetish:FetishBase = GlobalRegistry.getFetish(pickedFetishToChange)
+		var fetishHolder = GM.pc.getFetishHolder()
+		var fetish = GlobalRegistry.getFetish(pickedFetishToChange)
 		if(fetish != null):
 			saynn("Your current value for '"+fetish.getVisibleName()+"' fetish is "+FetishInterest.getVisibleName(fetishHolder.getFetishInterest(pickedFetishToChange)))
 			
@@ -167,8 +167,8 @@ func _react(_action: String, _args):
 		return
 	
 	if(_action == "changeinterest"):
-		var fetishHolder: FetishHolder = GM.pc.getFetishHolder()
-		var fetish:FetishBase = GlobalRegistry.getFetish(pickedFetishToChange)
+		var fetishHolder = GM.pc.getFetishHolder()
+		var fetish = GlobalRegistry.getFetish(pickedFetishToChange)
 		if(fetish != null):
 			fetishHolder.setFetish(pickedFetishToChange, _args[0])
 		setState("fetishmenu")
@@ -186,7 +186,7 @@ func _react(_action: String, _args):
 		pickedPoolToForget = _args[0]
 	
 	if(_action == "forget"):
-		var dynamicCharacter:DynamicCharacter = GlobalRegistry.getCharacter(_args[0])
+		var dynamicCharacter = GlobalRegistry.getCharacter(_args[0])
 		addMessage("You forgot about "+str(dynamicCharacter.getName()))
 		
 		GM.main.removeDynamicCharacter(_args[0])

@@ -101,7 +101,7 @@ func _run():
 	if(state == "how_much"):
 		saynn("You ask the inmate how much {npc.his} services cost. {npc.He} offers you a cute smile.")
 
-		var npc:DynamicCharacter = GlobalRegistry.getCharacter(npcID)
+		var npc = GlobalRegistry.getCharacter(npcID)
 		var personality:Personality = npc.getPersonality()
 		var subbyStat = personality.getStat(PersonalityStat.Subby)
 		# (if npc is subby)
@@ -258,7 +258,7 @@ func _react(_action: String, _args):
 	if(_action == "how_much"):
 		amountRequested = 5
 
-		var npc:DynamicCharacter = GlobalRegistry.getCharacter(npcID)
+		var npc = GlobalRegistry.getCharacter(npcID)
 		var personality:Personality = npc.getPersonality()
 		var cowardStat = personality.getStat(PersonalityStat.Coward)
 		var naiveStat = personality.getStat(PersonalityStat.Naive)
@@ -287,7 +287,7 @@ func _react(_action: String, _args):
 		runScene("GenericSexScene", ["pc", npcID], "domsex")
 	
 	if(_action in ["paytosub", "paytodom"]):
-		var npc:DynamicCharacter = GlobalRegistry.getCharacter(npcID)
+		var npc = GlobalRegistry.getCharacter(npcID)
 		var personality:Personality = npc.getPersonality()
 		var meanStat = personality.getStat(PersonalityStat.Mean)
 		var bratStat = personality.getStat(PersonalityStat.Brat)

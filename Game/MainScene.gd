@@ -22,6 +22,7 @@ var staticCharacters = {}
 var charactersToUpdate = {}
 var dynamicCharacters = {}
 var dynamicCharactersPools = {}
+var dynamicCharacterScript = preload("res://Characters/Dynamic/DynamicCharacter.gd")
 
 signal time_passed(_secondsPassed)
 signal saveLoadingFinished
@@ -95,7 +96,7 @@ func getCharacters():
 	return staticCharacters
 
 func addDynamicCharacter(character):
-	if(!(character is DynamicCharacter)):
+	if(!(character.isDynamicCharacter())):
 		assert(false, "addDynamicCharacter() Received a non-dynamic character")
 		
 	var newCharID = character.getID()
@@ -109,7 +110,7 @@ func addDynamicCharacter(character):
 	dynamicCharactersNode.add_child(character)
 		
 func removeDynamicCharacter(characterID):
-	if(characterID is DynamicCharacter):
+	if(!(characterID is String)):
 		characterID = characterID.getID()
 	
 	if(dynamicCharacters.has(characterID)):
@@ -119,7 +120,7 @@ func removeDynamicCharacter(characterID):
 		dynamicCharacters.erase(characterID)
 
 func addDynamicCharacterToPool(characterID, poolID:String):
-	if(characterID is DynamicCharacter):
+	if(!(characterID is String)):
 		characterID = characterID.getID()
 	
 	if(!dynamicCharacters.has(characterID)):
@@ -132,7 +133,7 @@ func addDynamicCharacterToPool(characterID, poolID:String):
 	return true
 
 func removeDynamicCharacterFromPool(characterID, poolID:String):
-	if(characterID is DynamicCharacter):
+	if(!(characterID is String)):
 		characterID = characterID.getID()
 	
 	if(!dynamicCharactersPools.has(poolID)):
@@ -144,7 +145,7 @@ func removeDynamicCharacterFromPool(characterID, poolID:String):
 	return true
 
 func removeDynamicCharacterFromAllPools(characterID):
-	if(characterID is DynamicCharacter):
+	if(!(characterID is String)):
 		characterID = characterID.getID()
 	
 	for poolID in dynamicCharactersPools:
@@ -408,7 +409,7 @@ func loadDynamicCharactersData(data):
 		var charData = SAVE.loadVar(data, characterID, {})
 		var charType = SAVE.loadVar(charData, "type", "error")
 		if(charType == "dynamic"):
-			var newDynamicChar = DynamicCharacter.new()
+			var newDynamicChar = dynamicCharacterScript.new()
 			newDynamicChar.id = characterID
 			addDynamicCharacter(newDynamicChar)
 			newDynamicChar.loadData(SAVE.loadVar(charData, "data", {}))

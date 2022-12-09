@@ -120,7 +120,7 @@ func grabNpcIDFromPool(poolID, _conditions = []):
 		characters.shuffle()
 		for characterID in characters:
 			var character:BaseCharacter = GlobalRegistry.getCharacter(characterID)
-			if(character == null || !(character is DynamicCharacter)):
+			if(character == null || !character.isDynamicCharacter()):
 				continue
 			
 			var goodNpc = true

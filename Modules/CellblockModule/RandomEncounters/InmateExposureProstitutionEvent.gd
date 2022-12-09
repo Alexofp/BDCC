@@ -1,5 +1,7 @@
 extends EventBase
 
+var inmateGenerator = preload("res://Characters/Dynamic/Generator/InmateGenerator.gd")
+
 func _init():
 	id = "InmateExposureProstitutionEvent"
 
@@ -11,7 +13,7 @@ func react(_triggerID, _args):
 	if(_args.size() > 0):
 		encounterLevel = _args[0]
 	
-	var idToUse = grabNpcIDFromPoolOrGenerate(CharacterPool.Inmates, [[NpcCon.FlagEquals, CharacterFlag.InmateType, InmateType.SexDeviant]], InmateGenerator.new(), {NpcGen.Level: encounterLevel, NpcGen.Flag: [[CharacterFlag.InmateType, InmateType.SexDeviant]]})
+	var idToUse = grabNpcIDFromPoolOrGenerate(CharacterPool.Inmates, [[NpcCon.FlagEquals, CharacterFlag.InmateType, InmateType.SexDeviant]], inmateGenerator.new(), {NpcGen.Level: encounterLevel, NpcGen.Flag: [[CharacterFlag.InmateType, InmateType.SexDeviant]]})
 	
 	if(idToUse == null || idToUse == ""):
 		return false

@@ -78,6 +78,9 @@ func increaseFlag(flagID, addvalue = 1):
 func personalityChangesAfterSex():
 	return true
 
+func isDynamicCharacter():
+	return true
+
 func saveData():
 	var data = {
 		"npcLevel": npcLevel,

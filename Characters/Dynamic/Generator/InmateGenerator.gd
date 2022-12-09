@@ -1,7 +1,7 @@
 extends CharacterGeneratorBase
 class_name InmateGenerator
 
-func pickCharacterType(character:DynamicCharacter, _args = {}):
+func pickCharacterType(character, _args = {}):
 	character.npcCharacterType = CharacterType.Inmate
 
 func getAttacks():
@@ -10,7 +10,7 @@ func getAttacks():
 func getPossibleAttacks():
 	return ["simplekickattack", "shoveattack", "stretchingAttack", "lickWounds", "ShivAttack", "biteattack", "NpcScratch"]
 
-func pickEquipment(character:DynamicCharacter, _args = {}):
+func pickEquipment(character, _args = {}):
 	var inmateType = character.getFlag(CharacterFlag.InmateType)
 	if(inmateType == null):
 		inmateType = RNG.pick([InmateType.General, InmateType.HighSec, InmateType.SexDeviant])
@@ -60,7 +60,7 @@ func pickEquipment(character:DynamicCharacter, _args = {}):
 	
 	character.npcDefaultEquipment = theEquipment
 
-#func pickNonStaticEquipment(character:DynamicCharacter, _args = {}):
+#func pickNonStaticEquipment(character, _args = {}):
 #	# Sometimes they have a forced chastity cage on
 #	if(RNG.chance(2.0)):
 #		var chastityCageItem = GlobalRegistry.createItem(RNG.pick(["ChastityCage", "ChastityCagePermanent"]))

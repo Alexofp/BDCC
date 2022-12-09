@@ -1771,3 +1771,6 @@ func getBodypartLewdDescriptionAndNameWithA(bodypartSlot):
 	if(!hasBodypart(bodypartSlot)):
 		return "ERROR:NO BODYPART IN SLOT " + str(bodypartSlot)
 	return getBodypart(bodypartSlot).getLewdDescriptionAndNameWithA()
+
+func isDynamicCharacter():
+	return false

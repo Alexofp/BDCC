@@ -1,15 +1,15 @@
 extends "res://Scenes/SceneBase.gd"
 
-var sexEngine:SexEngine
+var sexEngine
 var currentCategory = []
-#var whatHappened = "ASD"
+var sexEngineScript = preload("res://Game/SexEngine/SexEngine.gd")
 
 func _init():
 	sceneID = "GenericSexScene"
 	showFightUI = true
 
 func _initScene(_args = []):
-	sexEngine = SexEngine.new()
+	sexEngine = sexEngineScript.new()
 	
 	var tops = _args[0]
 	var bottoms = _args[1]
@@ -68,10 +68,10 @@ func _run():
 				addButton("Back", "Back to the previous menu", "backbutton")
 			
 			for domID in sexEngine.getDomIDs():
-				var domInfo: SexDomInfo = sexEngine.getDomInfo(domID)
+				var domInfo = sexEngine.getDomInfo(domID)
 				sayn(domInfo.getInfoString())
 			for subID in sexEngine.getSubIDs():
-				var subInfo: SexSubInfo = sexEngine.getSubInfo(subID)
+				var subInfo = sexEngine.getSubInfo(subID)
 				sayn(subInfo.getInfoString())
 
 			for actionInfo in sexEngine.getActions():
@@ -189,6 +189,6 @@ func saveData():
 func loadData(data):
 	.loadData(data)
 	
-	sexEngine = SexEngine.new()
+	sexEngine = sexEngineScript.new()
 	currentCategory = SAVE.loadVar(data, "currentCategory", [])
 	sexEngine.loadData(SAVE.loadVar(data, "sexEngine", {}))

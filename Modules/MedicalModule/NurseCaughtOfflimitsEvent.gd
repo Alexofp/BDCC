@@ -1,5 +1,7 @@
 extends EventBase
 
+var nurseGenerator = preload("res://Characters/Dynamic/Generator/NurseGenerator.gd")
+
 func _init():
 	id = "NurseCaughtOfflimitsEvent"
 
@@ -11,7 +13,7 @@ func react(_triggerID, _args):
 	if(_args.size() > 0):
 		encounterLevel = _args[0]
 	
-	var idToUse = grabNpcIDFromPoolOrGenerate(CharacterPool.Nurses, [], NurseGenerator.new(), {NpcGen.Level: encounterLevel})
+	var idToUse = grabNpcIDFromPoolOrGenerate(CharacterPool.Nurses, [], nurseGenerator.new(), {NpcGen.Level: encounterLevel})
 	
 	if(idToUse == null || idToUse == ""):
 		return false
