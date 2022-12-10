@@ -890,11 +890,22 @@ func doSubAction(_id, _actionInfo):
 	return
 
 func getAnimation():
-	if(state in [""]):
+	if(state in ["", "askingtolick"]):
+		return [StageScene.SexOral, "start", {pc=domID, npc=subID}]
+	
+	if(state in ["licking"]):
+		return [StageScene.SexOral, "lick", {pc=domID, npc=subID}]
+	if(state in ["grinding"]):
+		return [StageScene.SexOral, "grind", {pc=domID, npc=subID}]
+	
+	if(state in ["blowjob", "deepthroat"]):
+		if(domInfo.isCloseToCumming() || state == "deepthroat"):
+			return [StageScene.SexOral, "fast", {pc=domID, npc=subID}]
+		return [StageScene.SexOral, "sex", {pc=domID, npc=subID}]
+	
+	if(state in ["askingtosuck"]):
 		return [StageScene.SexOral, "tease", {pc=domID, npc=subID}]
-	if(domInfo.isCloseToCumming()):
-		return [StageScene.SexOral, "fast", {pc=domID, npc=subID}]
-	return [StageScene.SexOral, "sex", {pc=domID, npc=subID}]
+	
 
 func getDomOrgasmHandlePriority():
 	return 10

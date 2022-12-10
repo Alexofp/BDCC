@@ -64,6 +64,8 @@ func resetToDefaults():
 	call_deferred("applySettingsEffect")
 
 func _init():
+	var _ok = OS.request_permissions()
+	
 	myProjectSettings = load("res://Game/Options/MyProjectSettings.gd").new()
 	myProjectSettings.save()
 

@@ -24,7 +24,7 @@ func getCategory():
 	return ["Fuck"]
 
 func getDomTags():
-	if(state in ["blowjob", "deepthroat", "licking", "grinding"]):
+	if(state in ["blowjob", "lickingcock", "licking", "grinding"]):
 		return [SexActivityTag.MouthUsed, SexActivityTag.HavingSex]
 	return [SexActivityTag.HavingSex]
 
@@ -751,8 +751,22 @@ func doSubAction(_id, _actionInfo):
 	return
 
 func getAnimation():
-	return [StageScene.Duo, "stand", {pc=subID, npc=domID, npcAction="kneel"}]
-
+	if(state in [""]):
+		return [StageScene.SexOral, "start", {pc=subID, npc=domID}]
+	
+	if(state in ["licking", "subabouttocum"]):
+		return [StageScene.SexOral, "lick", {pc=subID, npc=domID}]
+	if(state in ["tonguefucking"]):
+		return [StageScene.SexOral, "lick", {pc=subID, npc=domID}]
+	
+	if(state in ["blowjob", "subabouttocumcock"]):
+		if(domInfo.isCloseToCumming()):
+			return [StageScene.SexOral, "fast", {pc=subID, npc=domID}]
+		return [StageScene.SexOral, "sex", {pc=subID, npc=domID}]
+	
+	if(state in ["lickingcock"]):
+		return [StageScene.SexOral, "tease", {pc=subID, npc=domID}]
+		
 func getDomOrgasmHandlePriority():
 	return -1
 

@@ -75,6 +75,15 @@ func playAnimation(animID, _args = {}):
 		doll.clampPenisScale(0.95, 1.1)
 		if(doll2.getState("mouth") in ["", null]):
 			doll2.setTemporaryState("mouth", "open")
+	if(animID == "start"):
+		state_machine.travel("Sex_OralStart_1-loop")
+		state_machine2.travel("Sex_OralStart_2-loop")
+	if(animID == "lick"):
+		state_machine.travel("Sex_OralPussy_1-loop")
+		state_machine2.travel("Sex_OralPussy_2-loop")
+	if(animID == "grind"):
+		state_machine.travel("Sex_OralGrind_1-loop")
+		state_machine2.travel("Sex_OralGrind_2-loop")
 
 func canTransitionTo(_actionID, _args = []):
 	var firstDoll = "pc"

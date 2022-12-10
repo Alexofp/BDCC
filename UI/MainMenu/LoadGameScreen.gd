@@ -82,7 +82,7 @@ func onExportButtonClicked(savePath: String):
 				has_permissions = true
 		
 		var d = Directory.new()
-		var externalDir:String = OS.get_system_dir(OS.SYSTEM_DIR_DOCUMENTS, true)
+		var externalDir:String = OS.get_system_dir(OS.SYSTEM_DIR_DOCUMENTS)
 		var finalDir = externalDir.plus_file("BDCCSaves")
 		d.make_dir_recursive(finalDir)
 		var finalPath = finalDir.plus_file(savePath.get_file())
@@ -193,7 +193,7 @@ func _on_ImportButton_pressed():
 					has_permissions = true
 		
 			var d = Directory.new()
-			var externalDir:String = OS.get_system_dir(OS.SYSTEM_DIR_DOCUMENTS, true)
+			var externalDir:String = OS.get_system_dir(OS.SYSTEM_DIR_DOCUMENTS)
 			var finalDir = externalDir.plus_file("BDCCSaves")
 			d.make_dir_recursive(finalDir)
 			$ImportSaveDialog.current_dir = finalDir
