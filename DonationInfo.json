@@ -1,5 +1,5 @@
 {
-	"dateString": "04 of Dec 2022",
+	"dateString": "10 of Dec 2022",
 	"entries": {
 		"$1.00": [
 			{
@@ -56,16 +56,19 @@
 				"nickname": "Loch55"
 			},
 			{
+				"nickname": "Silver_Bloke"
+			},
+			{
 				"nickname": "Wyvernclaw00"
+			},
+			{
+				"nickname": "Masaki Akira"
 			},
 			{
 				"nickname": "IzzenXAZ"
 			},
 			{
 				"nickname": "User#d45e8eac"
-			},
-			{
-				"nickname": "Silver_Bloke"
 			}
 		],
 		"$5.00": [
@@ -91,5 +94,5 @@
 		"$5.00",
 		"$1.00"
 	],
-	"unixTime": 1670184096
+	"unixTime": 1670702259
 }
