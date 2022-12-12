@@ -11,7 +11,7 @@ func _ready():
 
 func play(sceneID, actionID, args = {}, skipFade = false):
 	if(currentScene != null && currentScene.id == sceneID && currentScene.canTransitionTo(actionID, args)):
-		currentScene.playAnimation(actionID, args)
+		currentScene.playAnimationFinal(actionID, args)
 		return
 	
 	if(currentScene != null):
@@ -28,7 +28,7 @@ func play(sceneID, actionID, args = {}, skipFade = false):
 		return
 	currentScene = newScene
 	add_child(newScene)
-	newScene.playAnimation(actionID, args)
+	newScene.playAnimationFinal(actionID, args)
 
 func updateSubAnims():
 	if(currentScene != null):

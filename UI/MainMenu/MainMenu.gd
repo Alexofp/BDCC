@@ -184,6 +184,7 @@ func _on_DevCharCreator_pressed():
 
 func _on_ModsButton_pressed():
 	hideAllMenus()
+	var _ok = OS.request_permissions()
 	modsMenu.visible = true
 
 

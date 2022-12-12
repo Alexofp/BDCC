@@ -886,7 +886,9 @@ func getBestAnimation():
 	if(subs.size() == 0 || doms.size() == 0):
 		return null
 	
-	return [StageScene.Duo, "stand", {pc=subs.keys()[0], npc=doms.keys()[0]}]
+	if(subs[subs.keys()[0]].isUnconscious()):
+		return [StageScene.SexStart, "defeated", {pc=doms.keys()[0], npc=subs.keys()[0]}]
+	return [StageScene.SexStart, "start", {pc=doms.keys()[0], npc=subs.keys()[0]}]
 
 func playAnimation():
 	var animInfo = getBestAnimation()

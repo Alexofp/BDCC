@@ -2,12 +2,17 @@ extends Spatial
 class_name BaseStageScene3D
 
 var id = "error"
+var currentAnim = ""
 
 func _init():
 	id = "error"
 
 func _ready():
 	pass
+
+func playAnimationFinal(animID, _args = {}):
+	playAnimation(animID, _args)
+	currentAnim = animID
 
 func playAnimation(animID, _args = {}):
 	print("Playing: "+str(animID))
