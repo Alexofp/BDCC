@@ -1,7 +1,5 @@
 extends EventBase
 
-var guardGenerator = preload("res://Characters/Dynamic/Generator/GuardGenerator.gd")
-
 func _init():
 	id = "GuardOfflimitsCanSlipByEvent"
 
@@ -13,7 +11,7 @@ func react(_triggerID, _args):
 	if(_args.size() > 0):
 		encounterLevel = _args[0]
 	
-	var idToUse = grabNpcIDFromPoolOrGenerate(CharacterPool.Guards, [], guardGenerator.new(), {NpcGen.Level: encounterLevel})
+	var idToUse = grabNpcIDFromPoolOrGenerate(CharacterPool.Guards, [], GuardGenerator.new(), {NpcGen.Level: encounterLevel})
 	
 	if(idToUse == null || idToUse == ""):
 		return false

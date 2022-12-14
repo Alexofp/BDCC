@@ -22,7 +22,6 @@ var staticCharacters = {}
 var charactersToUpdate = {}
 var dynamicCharacters = {}
 var dynamicCharactersPools = {}
-var dynamicCharacterScript = preload("res://Characters/Dynamic/DynamicCharacter.gd")
 
 signal time_passed(_secondsPassed)
 signal saveLoadingFinished
@@ -409,7 +408,7 @@ func loadDynamicCharactersData(data):
 		var charData = SAVE.loadVar(data, characterID, {})
 		var charType = SAVE.loadVar(charData, "type", "error")
 		if(charType == "dynamic"):
-			var newDynamicChar = dynamicCharacterScript.new()
+			var newDynamicChar = DynamicCharacter.new()
 			newDynamicChar.id = characterID
 			addDynamicCharacter(newDynamicChar)
 			newDynamicChar.loadData(SAVE.loadVar(charData, "data", {}))

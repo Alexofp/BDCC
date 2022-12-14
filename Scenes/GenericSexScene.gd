@@ -2,14 +2,13 @@ extends "res://Scenes/SceneBase.gd"
 
 var sexEngine
 var currentCategory = []
-var sexEngineScript = preload("res://Game/SexEngine/SexEngine.gd")
 
 func _init():
 	sceneID = "GenericSexScene"
 	showFightUI = true
 
 func _initScene(_args = []):
-	sexEngine = sexEngineScript.new()
+	sexEngine = SexEngine.new()
 	
 	var tops = _args[0]
 	var bottoms = _args[1]
@@ -189,6 +188,6 @@ func saveData():
 func loadData(data):
 	.loadData(data)
 	
-	sexEngine = sexEngineScript.new()
+	sexEngine = SexEngine.new()
 	currentCategory = SAVE.loadVar(data, "currentCategory", [])
 	sexEngine.loadData(SAVE.loadVar(data, "sexEngine", {}))

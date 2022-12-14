@@ -1,7 +1,7 @@
 extends CharacterGeneratorBase
 class_name GuardGenerator
 
-func pickCharacterType(character, _args = {}):
+func pickCharacterType(character:DynamicCharacter, _args = {}):
 	character.npcCharacterType = CharacterType.Guard
 
 func getAttacks():
@@ -10,7 +10,7 @@ func getAttacks():
 func getPossibleAttacks():
 	return ["HeatGrenade", "DoubleCuffPC", "CuffPCHands", "ForceGagPC", "ForceMuzzlePC", "stunbatonOverchargeAttack", "simplekickattack", "biteattack", "shoveattack"]
 
-func pickEquipment(character, _args = {}):
+func pickEquipment(character:DynamicCharacter, _args = {}):
 	
 	var theEquipment = []
 	
@@ -41,7 +41,7 @@ func pickEquipment(character, _args = {}):
 	
 	character.npcDefaultEquipment = theEquipment
 
-func pickSmallDescription(character, _args = {}):
+func pickSmallDescription(character:DynamicCharacter, _args = {}):
 	var text = "One of the guards. "+str(.pickSmallDescription(character, _args))
 
 	var level = character.npcLevel
