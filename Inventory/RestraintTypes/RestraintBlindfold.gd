@@ -48,3 +48,6 @@ func doStruggle(_pc, _minigame):
 	#damage = calcDamage()
 	
 	return {"text": text, "damage": damage, "lust": lust, "pain": pain, "stamina": stamina}
+
+func getResistAnimation():
+	return "struggle_gag"

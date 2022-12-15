@@ -80,6 +80,12 @@ func stateMachineTravel(thedoll, state_machine, animID):
 		thedoll.setTemporaryState("hands", "fists")
 	elif(animID == "shove"):
 		state_machine.travel("Shove")
+	elif(animID == "struggle"):
+		state_machine.travel("StruggleGeneric-loop")
+	elif(animID == "struggle_gag"):
+		state_machine.travel("StruggleGag-loop")
+	elif(animID == "struggle_legs"):
+		state_machine.travel("StruggleLegs-loop")
 	else:
 		return false
 	return true

@@ -808,7 +808,7 @@ func _react(_action: String, _args):
 	
 	if(_action == "struggle"):
 		processTime(5*60)
-		runScene("StrugglingScene", [true], "strugglesybian")
+		runScene("StrugglingScene", [true, false], "strugglesybian")
 		setState("sybian")
 		return
 		

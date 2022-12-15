@@ -582,6 +582,10 @@ func aiTurn():
 		if(restraintData.shouldDoStruggleMinigame(enemyCharacter)):
 			minigameStatus = clamp(enemyCharacter.getRestraintStrugglingMinigameResult(), 0.0, 1.0) * 2.0 * enemyCharacter.getRestraintStrugglePower()
 		
+		var animToPlay = restraintData.getResistAnimation()
+		if(animToPlay != null && animToPlay != ""):
+			playAnimation(StageScene.Duo, "", {npc=enemyID, npcAction=animToPlay})
+		
 		var damage = 0.0
 		var addLust = 0
 		var addPain = 0
@@ -628,6 +632,7 @@ func aiTurn():
 				addMessage("You recovered "+item.getAStackName())
 			#elif(recoverChance > 0):
 			#	addMessage("You lost "+item.getAStackName())
+			
 		var restraintsAmount = enemyCharacter.getInventory().getEquppedRestraints().size()
 		if(enemyCharacter.shouldReactToRestraint(restraintData.getRestraintType(), restraintsAmount, false)):
 			var reaction = enemyCharacter.reactRestraint(restraintData.getRestraintType(), restraintsAmount, false)

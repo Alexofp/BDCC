@@ -135,7 +135,7 @@ func _react(_action: String, _args):
 		return
 		
 	if(_action == "struggle"):
-		runScene("StrugglingScene")
+		runScene("StrugglingScene", [false, false])
 		setState("")
 		return
 	
