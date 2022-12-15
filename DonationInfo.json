@@ -1,5 +1,5 @@
 {
-	"dateString": "10 of Dec 2022",
+	"dateString": "15 of Dec 2022",
 	"entries": {
 		"$1.00": [
 			{
@@ -40,6 +40,12 @@
 			},
 			{
 				"nickname": "Tristan Leo Roberts "
+			},
+			{
+				"nickname": "User#a63f196a"
+			},
+			{
+				"nickname": "joelee29"
 			}
 		],
 		"$10.00": [
@@ -51,9 +57,6 @@
 			},
 			{
 				"nickname": "Sami"
-			},
-			{
-				"nickname": "Loch55"
 			},
 			{
 				"nickname": "Silver_Bloke"
@@ -83,9 +86,6 @@
 			},
 			{
 				"nickname": "WinterTorchlight"
-			},
-			{
-				"nickname": "User#b2c4ffed"
 			}
 		]
 	},
@@ -94,5 +94,5 @@
 		"$5.00",
 		"$1.00"
 	],
-	"unixTime": 1670702259
+	"unixTime": 1671082581
 }
