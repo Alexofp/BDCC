@@ -101,6 +101,12 @@ func _run():
 		addButton("Continue", "See what happens next..", "getused")
 
 	if(state == "getused"):
+		playAnimation(StageScene.SexStanding, "sex", {
+			pc="nova", npc="pc", 
+			bodyState={exposedCrotch=true,hard=true},
+			npcBodyState={naked=true,hard=true,},
+		})
+		
 		saynn("Complete darkness.. Complete isolation.. Heavy pants and soft moans escape into the abyss, your knees are touching together so as to not make the toy fall out.")
 
 		saynn("You swear you can feel Nova standing somewhere near. You turn to face her just to experience your {pc.breasts} being smacked. Ow! You drool profusely and moan desperately into the void.")

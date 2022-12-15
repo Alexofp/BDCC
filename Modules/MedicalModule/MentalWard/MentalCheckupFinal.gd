@@ -6,6 +6,7 @@ func _init():
 func _run():
 	if(state == ""):
 		addCharacter("eliza")
+		playAnimation(StageScene.Duo, "stand", {npc="eliza"})
 		
 	if(state == ""):
 		saynn("Someone knocks on the little window. You look up and see Eliza standing behind the door. Intercom makes a static noise.")

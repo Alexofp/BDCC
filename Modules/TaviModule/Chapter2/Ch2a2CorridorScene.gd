@@ -268,6 +268,12 @@ func _run():
 
 
 	if(state == "seduce"):
+		playAnimation(StageScene.SexStanding, "tease", {
+			pc="alexrynard", npc="pc", 
+			bodyState={},
+			npcBodyState={},
+		})
+		
 		saynn("Instead of doing anything silly, you decide to go the path of less resistance and offer some value. Your hands slip under the guy’s uniform and give his strong torso some love. He doesn’t seem to be against your touches so you continue exploring his body.")
 
 		saynn("You lean into him and purr ever so slightly while rubbing your cheek into his pecs through the shirt. Your hands slip lower and unbuckle the belt before sneaking under his pants and stumbling upon his sheath.")

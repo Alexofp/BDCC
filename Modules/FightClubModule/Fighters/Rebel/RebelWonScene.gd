@@ -35,7 +35,7 @@ func _run():
 
 	if(state == "fisting"):
 		playAnimation(StageScene.Duo, "stand", {
-			npc="rebel", npcAction="kneel",
+			npc="rebel", npcAction="allfours",
 			npcBodyState={exposedCrotch=true,},
 		})
 		

@@ -44,6 +44,8 @@ func _run():
 
 
 	if(state == "power_suit"):
+		playAnimation(StageScene.Duo, "stand", {npc="nova", npcAction="allfours"})
+		
 		saynn("You notice something. Something very interesting. Nova seems to be wearing some kind of PDA with a screen on her wrist. You approach the husky and shove her onto the ground before pinning her arm with your leg. Nova is growling and snarling at you but she can’t do anything about you taking that device off of her wrist.")
 
 		saynn("[say=nova]Hey! Bitch, that’s not for you to touch![/say]")
@@ -133,8 +135,8 @@ func _run():
 
 	if(state == "offer_pussy"):
 		# (needs pussy)
-		playAnimation(StageScene.Duo, "stand", {
-			npc="nova", npcAction="kneel", 
+		playAnimation(StageScene.SexFaceSitting, "sit", {
+			pc="pc", npc="nova", 
 			bodyState={exposedCrotch=true,hard=true},
 			npcBodyState={},
 		})
@@ -167,8 +169,8 @@ func _run():
 
 	if(state == "offer_cock"):
 		# (needs cock)
-		playAnimation(StageScene.Duo, "stand", {
-			npc="nova", npcAction="kneel", 
+		playAnimation(StageScene.SexOral, "sex", {
+			pc="pc", npc="nova", 
 			bodyState={exposedCrotch=true,hard=true},
 			npcBodyState={},
 		})

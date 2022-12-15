@@ -25,6 +25,8 @@ func _run():
 		GM.ES.triggerRun("ArenaFighterPCLost", ["volk"])
 
 	if(state == "weapon_play"):
+		playAnimation(StageScene.SexStart, "start", {pc="volk", npc="pc"})
+		
 		saynn("[say=pc]What do you want?[/say]")
 
 		saynn("He looms over you, his muzzle dangerously close to yours, his hand fidgeting with the sharpened piece of glass near your neck.")

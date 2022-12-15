@@ -31,6 +31,12 @@ func _run():
 		addButton("Continue", "Huff..", "endthescene")
 
 	if(state == "get_on_your_knees"):
+		playAnimation(StageScene.SexFeetPlay, "head", {
+			pc="tavi", npc="pc", 
+			bodyState={},
+			npcBodyState={hard=true,},
+		})
+		
 		saynn("You get on your knees and crawl up at her, she carefully watches to make sure you’re not doing anything stupid. She still sits on some machine and crosses her legs. You get a good look at her animal toes and soft pads underneath each, they have the same bright green color as her fur markings.")
 
 		saynn("[say=pc]You can do whatever you want with me..[/say]")
@@ -94,6 +100,12 @@ func _run():
 			addDisabledButton("I want more", "You need a pussy or reachable cock for this")
 
 	if(state == "i_want_more"):
+		playAnimation(StageScene.SexFeetPlay, "crotch", {
+			pc="tavi", npc="pc", 
+			bodyState={},
+			npcBodyState={exposedCrotch=true,hard=true,},
+		})
+		
 		if(!GM.pc.isFullyNaked()):
 			saynn("But then she shifts her leg down to your crotch area, her foot rubs it and then sneaks under your clothing.")
 		else:

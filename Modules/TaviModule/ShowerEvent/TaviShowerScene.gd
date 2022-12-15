@@ -7,9 +7,10 @@ func _init():
 func _run():
 	if(state == ""):
 		addCharacter("tavi", ["naked"])
-		playAnimation(StageScene.Duo, "stand", {npc="tavi",
-			bodyState={naked=true},
-			npcBodyState={naked=true},
+		playAnimation(StageScene.SexStanding, "tease", {
+			pc="tavi", npc="pc", 
+			bodyState={naked=true,},
+			npcBodyState={naked=true,hard=true,},
 		})
 		
 	if(state == ""):

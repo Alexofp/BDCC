@@ -72,6 +72,10 @@ func _run():
 		addButton("Get milked", "Let’s do this", "get_milked")
 
 	if(state == "get_milked"):
+		playAnimation(StageScene.SexStanding, "tease", {pc="eliza", npc="pc",
+			npcBodyState={exposedCrotch=true,hard=true}
+		})
+		
 		saynn("You look back and nod softly. Eliza smiles back as she pulls out a little glass dildo, it seems to be slightly curved up, its tip has a sphere shape and it also features a convenient handle.")
 
 		saynn("[say=eliza]This will be plenty for you, don’t worry~[/say]")

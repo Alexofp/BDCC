@@ -23,7 +23,7 @@ func _run():
 		GM.ES.triggerRun("ArenaFighterPCLost", ["rebel"])
 
 	if(state == "get_fisted"):
-		GM.main.playAnimation(StageScene.Duo, "kneel", {
+		GM.main.playAnimation(StageScene.Duo, "allfours", {
 			npc="rebel", npcAction="stand",
 			bodyState={exposedCrotch=true,hard=true}
 		})

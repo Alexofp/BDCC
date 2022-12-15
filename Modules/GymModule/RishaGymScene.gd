@@ -100,6 +100,12 @@ func _run():
 		addButton("Continue", "Time to go", "endthescene")
 
 	if(state == "offer_ass"):
+		playAnimation(StageScene.SexAllFours, "sex", {
+			pc="risha", npc="pc", 
+			bodyState={naked=true,hard=true},
+			npcBodyState={exposedCrotch=true,},
+		})
+		
 		saynn("You turn and playfully wiggle your {pc.thick} rear for the lynx. You look behind your shoulder and see Risha checking out your ass. She seems to be very pent up, already massaging her feline balls at the view.")
 
 		saynn("[say=pc]How’s this for a solution.[/say]")
@@ -157,6 +163,12 @@ func _run():
 		addButton("Cum", "The orgasm overtakes your body", "cumAnal")
 
 	if(state == "cumAnal"):
+		playAnimation(StageScene.SexAllFours, "fast", {
+			pc="risha", npc="pc", 
+			bodyState={naked=true,hard=true},
+			npcBodyState={exposedCrotch=true,hard=true},
+		})
+		
 		saynn("You begin to trash against the restraints and make loud pleasure noises, your whole body squirms and shivers as you struggle to stay still. Though Risha’s hands hold your ass nice and tight, she keeps shoving her cock in and out even through your climax.")
 
 		# (if has cock)
@@ -204,6 +216,11 @@ func _run():
 
 	if(state == "offer_handjob"):
 		# (You get on her knees and start stroking her)
+		playAnimation(StageScene.SexHandjob, "sex", {
+			pc="risha", npc="pc", 
+			bodyState={naked=true,hard=true},
+			npcBodyState={},
+		})
 
 		saynn("Five credits is still something, you lower yourself onto your knees and shift closer to the bench. Risha spreads her legs for you, offering a full view of her male and female bits. She idly strokes her feline cock while her balls sway slightly, sometimes offering glimpses of her wet cunt.")
 
@@ -237,6 +254,11 @@ func _run():
 
 	if(state == "make_her_cum"):
 		# (cum in mouth, stretches mouth, covers in cum)
+		playAnimation(StageScene.SexHandjob, "fast", {
+			pc="risha", npc="pc", 
+			bodyState={naked=true,hard=true},
+			npcBodyState={},
+		})
 
 		saynn("You stop stroking her cock completely, instead just squeezing it near the base. You can feel her veins bulging as she is being edged, her member is leaking precum profusely but she doesn’t cum. You hear her desperate moans as you finger-fuck her pussy, subtle growling can be heard too.")
 
@@ -277,6 +299,11 @@ func _run():
 
 	if(state == "offer_pussy"):
 		# (needs pussy)
+		playAnimation(StageScene.SexAllFours, "sex", {
+			pc="risha", npc="pc", 
+			bodyState={naked=true,hard=true},
+			npcBodyState={exposedCrotch=true,},
+		})
 
 		saynn("You put your hand over your pussy and begin teasing yourself in Risha’s line of sight. You find your clit and begin rubbing it while producing some cute moans. The lynx seems to be very pent up watching you, already massaging her feline balls.")
 
@@ -335,6 +362,12 @@ func _run():
 		addButton("Cum", "The orgasm overtakes your body", "cumVaginal")
 
 	if(state == "cumVaginal"):
+		playAnimation(StageScene.SexAllFours, "fast", {
+			pc="risha", npc="pc", 
+			bodyState={naked=true,hard=true},
+			npcBodyState={exposedCrotch=true,hard=true,},
+		})
+		
 		saynn("You begin to trash against the restraints and make loud pleasure noises, your whole body squirms and shivers as you struggle to stay still. Though Risha’s hands hold your ass nice and tight, she keeps shoving her cock in and out even through your climax. Your fuckhole got so overstimulated that you squirt juices all over the bench.")
 
 		# (if has cock)
@@ -380,9 +413,9 @@ func _run():
 
 	if(state == "fuck_risha"):
 		# (needs cock and strength)
-		playAnimation(StageScene.Duo, "stand", {
-			npc="risha", npcAction="sit", 
-			bodyState={exposedCrotch=true,hard=true},
+		playAnimation(StageScene.SexAllFours, "sex", {
+			pc="pc", npc="risha", 
+			bodyState={exposedCrotch=true,hard=true,},
 			npcBodyState={naked=true,hard=true},
 		})
 
@@ -433,6 +466,12 @@ func _run():
 
 
 	if(state == "cum_inside_risha"):
+		playAnimation(StageScene.SexAllFours, "fast", {
+			pc="pc", npc="risha", 
+			bodyState={exposedCrotch=true,hard=true,},
+			npcBodyState={naked=true,hard=true},
+		})
+		
 		saynn("[say=pc]Prepare.. to receive.. my load..[/say]")
 
 		saynn("You grunt and shove your {pc.cock} as deep as Risha’s pussy allows, you break into her womb and start filling it up with your {pc.cum}. The lynx moans and struggles against her chains, her eyes show a mixture of pleasure and regret. A little bump appears on her lower part of the belly, that amount of {pc.cum} is too much for her so some is already leaking back out of her stuffed slit and creating a mess on her thighs.")
@@ -462,6 +501,12 @@ func _run():
 
 
 	if(state == "pull_out_on_risha"):
+		playAnimation(StageScene.SexAllFours, "tease", {
+			pc="pc", npc="risha", 
+			bodyState={exposedCrotch=true,hard=true,},
+			npcBodyState={naked=true,hard=true},
+		})
+				
 		saynn("You grunt as the orgasm overwhelms you but manage to pull out the moment before your {pc.cock} throbs and shoots out many strings of {pc.cum}, the first one hitting the girl’s outer pussy lips with the rest landing on her tits and belly. Risha now looks quite messy, covered in two layers of cum.")
 
 		saynn("[say=risha]You fucker..[/say]")

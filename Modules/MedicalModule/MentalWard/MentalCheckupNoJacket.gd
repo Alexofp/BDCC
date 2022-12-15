@@ -6,6 +6,7 @@ func _init():
 func _run():
 	if(state == ""):
 		addCharacter("eliza")
+		playAnimation(StageScene.Duo, "stand", {npc="eliza"})
 		
 	if(state == ""):
 		saynn("You can hear faint footsteps as someone approaches the cells. Because you’re not wearing the straitjacket anymore, you decide to hide so you wouldn’t be seen through the little window. Maybe they will just pass by.")
@@ -35,6 +36,8 @@ func _run():
 		addButton("Continue", "Fight!", "startfight")
 
 	if(state == "surrender"):
+		playAnimation(StageScene.Duo, "defeated", {npc="eliza"})
+		
 		saynn("You decide to not resist. Eliza pins you down to the floor and forces a straitjacket back on you, locking all the straps tightly.")
 
 		saynn("[say=eliza]Silly inmate, what did you think was gonna happen.[/say]")

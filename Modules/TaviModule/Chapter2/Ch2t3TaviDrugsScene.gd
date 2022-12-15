@@ -122,7 +122,7 @@ func _run():
 		
 
 	if(state == "kneel"):
-		playAnimation(StageScene.Duo, "kneel", {npc="tavi"})
+		playAnimation(StageScene.SexOral, "start", {pc="tavi",npc="pc"})
 		
 		saynn("You don’t mind that kind of reward, you welcome it, stepping closer and getting down to your knees, obeying the girl’s words. Your hands reach out for Tavi’s thighs but she swiftly slaps them away.")
 
@@ -152,9 +152,8 @@ func _run():
 
 	if(state == "teeth"):
 		# (cover pc with fluids)
-		playAnimation(StageScene.Duo, "kneel", {
-			npc="tavi",
-			npcBodyState={exposedCrotch=true,},
+		playAnimation(StageScene.SexOral, "lick", {pc="tavi",npc="pc",
+			bodyState={exposedCrotch=true,},
 		})
 		addCharacter("tavi", ["naked"])
 
@@ -197,7 +196,9 @@ func _run():
 
 	if(state == "mark_me"):
 		# (watersports content)
-
+		playAnimation(StageScene.SexOral, "start", {pc="tavi",npc="pc",
+			bodyState={exposedCrotch=true,},
+		})
 		# (cover with piss)
 
 		saynn("You become so horny from this that you want more.")
@@ -499,6 +500,11 @@ func _run():
 
 	if(state == "get_fucked"):
 		# (only futa tavi)
+		playAnimation(StageScene.SexStart, "start", {
+			npc="pc", pc="taviDemonFuta",
+			bodyState={hard=true},
+			npcBodyState={naked=true,caged=true},
+		})
 
 		saynn("Tavi tilts her head slightly before moving her cock back and shoving it into your face, letting you see the inflated glands on its flared tip. And the scent it.. so arousing. You nuzzle the offered cock and give it a little smooch.")
 
@@ -528,11 +534,6 @@ func _run():
 			
 			saynn("[say=tavi]Miss it already? Such a shame that it’s permanent~.[/say]")
 		elif(GM.pc.hasPenis()):
-			playAnimation(StageScene.Duo, "kneel", {
-				npc="taviDemonFuta",
-				bodyState={naked=true,caged=true},
-				npcBodyState={hard=true},
-			})
 			
 			saynn("Your {pc.cock} is throbbing and leaking pre more. Tavi finally decides to take action against that. She motions with her hand again and one of the metal rods gets ripped out of the metal floor before twisting into a little arched spiral. It starts pressing on your cock’s head, battling your erection before another rod bends around your balls and welds together with the first, creating a little neat chastity cage.")
 
@@ -547,6 +548,12 @@ func _run():
 		addButton("Continue", "See what happens next", "continue8")
 
 	if(state == "continue8"):
+		playAnimation(StageScene.SexMissionary, "sex", {
+			npc="pc", pc="taviDemonFuta",
+			bodyState={hard=true},
+			npcBodyState={naked=true,caged=true},
+		})
+		
 		saynn("After letting you swallow her precum for a bit, Tavi suddenly grabs you under your armpits and lifts you up. She is strong, way stronger than you.")
 
 		saynn("[say=tavi]Time to show you your place, my servant.[/say]")
@@ -622,6 +629,12 @@ func _run():
 		addButton("Continue", "See how she will enslave your soul..", "continue9")
 
 	if(state == "continue9"):
+		playAnimation(StageScene.SexMissionary, "fast", {
+			npc="pc", pc="taviDemonFuta",
+			bodyState={hard=true},
+			npcBodyState={naked=true,caged=true},
+		})
+		
 		# (if has pussy)
 		if(GM.pc.hasVagina()):
 			saynn("Tavi switches to slow powerful thrusts before finally shoving her flared cock balls deep inside you, causing the bump on your belly to be even bigger. As she does that, you cum hard, arching your back as much as Tavi’s paws allow and moaning like a slut for her. Your pussy clenches around her shaft, trying to milk it. And after a few grunts from Tavi, her balls start tensing up as a load after load of hot magma-like seed begin flowing into your womb and instantly stuffing it to the brim.")
@@ -667,6 +680,19 @@ func _run():
 		addButton("Continue", "See what happens next", "finalsnapquestion")
 
 	if(state == "finalsnapquestion"):
+		if(getFlag("TaviModule.ch2DrugsPickedFuta")):
+			playAnimation(StageScene.SexStart, "start", {
+				npc="pc", pc="taviDemonFuta",
+				bodyState={hard=true},
+				npcBodyState={naked=true,caged=true},
+			})
+		else:
+			playAnimation(StageScene.SexStart, "start", {
+				npc="pc", pc="taviDemon",
+				bodyState={hard=true},
+				npcBodyState={naked=true,},
+			})
+			
 		saynn("[say=tavi]But before we continue.. We gotta seal your fate. Make you mine forever.[/say]")
 
 		saynn("Tavi raises her right hand and moves her digits, preparing to do a snap. A snap that will trap your soul here for eternity.")
@@ -796,6 +822,11 @@ func _run():
 
 	if(state == "fucking"):
 		# (needs a penis)
+		playAnimation(StageScene.SexOral, "lick", {
+			npc="pc", pc="taviDemon",
+			bodyState={hard=true},
+			npcBodyState={naked=true,hard=true},
+		})
 
 		# (only non futa tavi)
 
@@ -816,6 +847,12 @@ func _run():
 		addButton("Continue", "See what happens next", "continue11")
 
 	if(state == "continue11"):
+		playAnimation(StageScene.SexCowgirl, "sex", {
+			pc="pc", npc="taviDemon",
+			bodyState={naked=true,hard=true},
+			npcBodyState={hard=true},
+		})
+		
 		saynn("[say=tavi]Enough~[/say]")
 
 		saynn("Tavi pulls your head away from her slit just so she can press her burning hoof into your chest and make you fall onto your back. It was rough but it didn’t hurt, strangely enough. Your Miss puts her hoof onto your {pc.cock} and gently presses it into your belly. Having your cock under her hoof feels a bit humiliating.. but also so nice, you can’t stop leaking pre.")
@@ -854,6 +891,12 @@ func _run():
 		addButton("Cum inside", "Breed your Miss", "cum_inside")
 
 	if(state == "cum_inside"):
+		playAnimation(StageScene.SexCowgirl, "fast", {
+			pc="pc", npc="taviDemon",
+			bodyState={naked=true,hard=true},
+			npcBodyState={hard=true},
+		})
+		
 		saynn("You throw your head back and grunt while your {pc.cock} starts shooting waves after waves of {pc.cum} deep inside the demonic Tavi. At the same time, she brings herself down onto your length for the last time before letting out a growly moan, her glowing slit starts milking your dick for all seed that it can. The tip of your dick is prodding directly at her womb, allowing the {pc.cum} to freely flow inside her babymaker.")
 
 		saynn("And as that happens, Tavi’s womb tattoo begins to shine brightly, a little symbol appears in the middle of it that signifies the successful impregnation.")
@@ -873,6 +916,12 @@ func _run():
 
 
 	if(state == "lick_tailfuck"):
+		playAnimation(StageScene.SexOral, "lick", {
+			npc="pc", pc="taviDemon",
+			bodyState={hard=true},
+			npcBodyState={naked=true,caged=true},
+		})
+		
 		saynn("Tavi tilts her head before spreading her strong legs more, offering a greater view of her slick-looking pussy. She then makes a gesture with her hand that pulls your collar closer to her female crotch, your lips pressing against her enticing sensitive folds.")
 
 		# (if has cock)
@@ -906,11 +955,6 @@ func _run():
 			saynn("[say=tavi]Miss it already? Can’t remove it without me, it’s permanent~.[/say]")
 		
 		elif(GM.pc.hasPenis()):
-			playAnimation(StageScene.Duo, "kneel", {
-				npc="taviDemon",
-				bodyState={naked=true,caged=true},
-				npcBodyState={hard=true},
-			})
 			
 			saynn("Your {pc.cock} is throbbing and leaking pre more. Tavi finally decides to take action against that. She motions with her hand again and one of the metal rods gets ripped out of the metal floor before twisting into a little arched spiral. It starts pressing on your cock’s head, battling your erection before another rod bends around your balls and welds together with the first, creating a little neat chastity cage.")
 
@@ -925,6 +969,12 @@ func _run():
 		addButton("Continue", "See what happens next", "continue13")
 
 	if(state == "continue13"):
+		playAnimation(StageScene.SexFaceSitting, "sit", {
+			npc="pc", pc="taviDemon",
+			bodyState={hard=true},
+			npcBodyState={naked=true,caged=true},
+		})
+		
 		saynn("[say=tavi]I want more~[/say]")
 
 		saynn("Tavi pulls your head away from her slit just so she can press her burning hoof into your chest and make you fall onto your back. It was rough but it didn’t hurt, strangely enough. After that, she pulls her hoof away and straddles you, slowly lowering herself onto your head until your cheeks are trapped between her girly thighs. Her gorgeous pussy is right there.. you can smell the inviting slit but unable to reach it with your tongue, instead just breathing warmly and feeling it drip juices onto your face.")
@@ -966,6 +1016,12 @@ func _run():
 		addButton("Continue", "See what happens next", "continue14")
 
 	if(state == "continue14"):
+		playAnimation(StageScene.SexFaceSitting, "grind", {
+			npc="pc", pc="taviDemon",
+			bodyState={hard=true},
+			npcBodyState={naked=true,caged=true},
+		})
+		
 		saynn("It feels so strange, your hand tries to reach for Tavi’s tail and pull it out but she notices it and suddenly snaps her fingers for the second time. This snap forces your arms behind your back before another magic ring appears and binds them together.")
 
 		saynn("[say=tavi]Bad servant. If my tail wants to fuck you, you will let it fuck you. Now get back to work.[/say]")

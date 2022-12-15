@@ -6,10 +6,10 @@ func _init():
 func _run():
 	if(state == ""):
 		addCharacter("bulldog")
-		playAnimation(StageScene.Duo, "stand", {
-			npc="bulldog", npcAction="stand", 
-			bodyState={exposedCrotch=true},
-			npcBodyState={exposedCrotch=true,hard=true},
+		playAnimation(StageScene.SexStanding, "sex", {
+			pc="bulldog", npc="pc",
+			bodyState={exposedCrotch=true,hard=true},
+			npcBodyState={exposedCrotch=true},
 		})
 
 	if(state == ""):
@@ -88,6 +88,12 @@ func _run():
 		addButton("Cum!", "Let it happen", "cum!")
 
 	if(state == "cum!"):
+		playAnimation(StageScene.SexStanding, "fast", {
+			pc="bulldog", npc="pc",
+			bodyState={exposedCrotch=true,hard=true},
+			npcBodyState={exposedCrotch=true,hard=true},
+		})
+		
 		saynn("After a few tries, the bulldog gathers all of his strength for an even more powerful series of thrusts. At the last one your fuckhole gets force-stretched enough to let the knot slip in! The guy’s full length is inside you, it only takes you a few moments before the sensations overwhelm your body, sending a crazy amount of ecstatic pleasure spikes through you. You arch your back and let out many lewd muffled moans while drooling and passionately sucking on the fingers in your mouth.")
 
 		# (if has pussy)

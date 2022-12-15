@@ -100,9 +100,9 @@ func _run():
 
 
 	if(state == "stay"):
-		playAnimation(StageScene.Duo, "kneel", {
-			pc = "kait",
-			npc="avy", npcAction="stand", 
+		playAnimation(StageScene.SexMissionary, "fast", {
+			pc = "avy",
+			npc="kait",
 			bodyState={exposedCrotch=true,hard=true},
 			npcBodyState={exposedCrotch=true,hard=true},
 		})

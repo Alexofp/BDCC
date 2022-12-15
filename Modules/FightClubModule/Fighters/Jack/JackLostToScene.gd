@@ -25,6 +25,11 @@ func _run():
 
 	if(state == "offer_a_condom"):
 		# (needs a condom)
+		playAnimation(StageScene.SexOral, "tease", {
+			pc="jack", npc="pc", 
+			bodyState={exposedCrotch=true,hard=true,condom=true,},
+			npcBodyState={},
+		})
 
 		saynn("You give up any resistance and instead produce a packaged condom and bring it into Jack’s view. Your gaze is pleading for him to use it. Jack raises his brow.")
 
@@ -51,6 +56,12 @@ func _run():
 		addButton("Open mouth", "Let it happen", "open_mouth")
 
 	if(state == "open_mouth"):
+		playAnimation(StageScene.SexOral, "sex", {
+			pc="jack", npc="pc", 
+			bodyState={exposedCrotch=true,hard=true,condom=true,},
+			npcBodyState={},
+		})
+		
 		saynn("Blush appears on your cheeks the more you watch his erect horse cock. You slowly part your lips and then try to open your mouth as wide as you can but even that wasn’t enough, the flat flared out tip plugs your mouth full and gets caught on the teeth, preventing easy insertion.")
 
 		saynn("[say=jack]This is gonna be a bit rough, ya better brace.[/say]")
@@ -98,10 +109,10 @@ func _run():
 
 
 	if(state == "breeding"):
-		playAnimation(StageScene.Duo, "kneel", {
-			npc="jack", npcAction="stand", 
-			bodyState={exposedCrotch=true,},
-			npcBodyState={exposedCrotch=true,hard=true},
+		playAnimation(StageScene.SexAllFours, "sexflop", {
+			npc="pc", pc="jack", 
+			bodyState={exposedCrotch=true,hard=true},
+			npcBodyState={exposedCrotch=true,},
 		})
 		# (if has pussy)
 		if(GM.pc.hasVagina()):
@@ -174,6 +185,12 @@ func _run():
 		addButton("Get bred", "See what happens to you next..", "get_bred")
 
 	if(state == "get_bred"):
+		playAnimation(StageScene.SexAllFours, "fastflop", {
+			npc="pc", pc="jack", 
+			bodyState={exposedCrotch=true,hard=true},
+			npcBodyState={exposedCrotch=true,},
+		})
+		
 		# (if pussy)
 		if(GM.pc.hasVagina()):
 			saynn("After a few strong thrusts Jack neighs and forces his entire shaft inside you, smashing your womb before proceeding to stuff it! You bend your back and cry out a passionate moan while your babymaker is being filled to the brim with thick white horse cum. There is not nearly enough space, you can’t stop squirming around his cock while your soft insides are being painted white with some cum already escaping back and creating a quite wet mess.")

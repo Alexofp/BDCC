@@ -498,6 +498,13 @@ func setCockTemporaryHard():
 	
 	setTemporaryState("cock", "")
 
+func setCockTemporaryCondom():
+	var currentCockState = getFinalState("cock")
+	if(currentCockState in ["caged", "condom"]):
+		return
+	
+	setTemporaryState("cock", "condom")
+
 func setCockTemporaryCaged():
 	#var currentCockState = getFinalState("cock")
 	#if(currentCockState in ["caged", "condom"]):
@@ -514,6 +521,7 @@ func applyBodyState(bodystate):
 	var shouldBeNaked = bodystate.has("naked") && bodystate["naked"]
 	var shouldBeHard = bodystate.has("hard") && bodystate["hard"]
 	var shouldBeCaged = bodystate.has("caged") && bodystate["caged"]
+	var shouldBeCondom = bodystate.has("condom") && bodystate["condom"]
 	#var shouldLookLeft = bodystate.has("lookLeft") && bodystate["lookLeft"]
 	
 	var exposeBodyparts = []
@@ -537,6 +545,9 @@ func applyBodyState(bodystate):
 		
 	if(shouldBeCaged):
 		setCockTemporaryCaged()
+	
+	if(shouldBeCondom):
+		setCockTemporaryCondom()
 	
 #	if(bodystate.has("lookLeft")):
 #		if(shouldLookLeft):

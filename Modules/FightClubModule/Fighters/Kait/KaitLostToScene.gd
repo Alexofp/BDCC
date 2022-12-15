@@ -62,10 +62,10 @@ func _run():
 
 	if(state == "get_pissed_on"):
 		# (piss version)
-		playAnimation(StageScene.Duo, "kneel", {
-			npc="kait", npcAction="stand", 
-			bodyState={},
-			npcBodyState={exposedCrotch=true},
+		playAnimation(StageScene.SexFeetPlay, "head", {
+			pc="kait", npc="pc", 
+			bodyState={exposedCrotch=true},
+			npcBodyState={},
 		})
 
 		saynn("You shake your head at the offered hand and try to get up yourself.")
@@ -103,10 +103,10 @@ func _run():
 		addButton("Continue", "Time to leave", "endthescene")
 
 	if(state == "get_marked"):
-		playAnimation(StageScene.Duo, "kneel", {
-			npc="kait", npcAction="stand", 
-			bodyState={},
-			npcBodyState={exposedCrotch=true},
+		playAnimation(StageScene.SexFeetPlay, "head", {
+			pc="kait", npc="pc", 
+			bodyState={exposedCrotch=true},
+			npcBodyState={},
 		})
 		
 		saynn("You shake your head at the offered hand and try to get up yourself.")

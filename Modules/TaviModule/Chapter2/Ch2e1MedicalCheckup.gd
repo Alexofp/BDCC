@@ -287,6 +287,12 @@ func _run():
 		
 
 	if(state == "knock_her_out"):
+		playAnimation(StageScene.SexStart, "defeated", {
+			npc="eliza", pc="pc", 
+			bodyState={},
+			npcBodyState={},
+		})
+		
 		saynn("You start to apply more pressure onto the doctor’s neck until her resistance becomes even more weaker. Eventually, Eliza loses consciousness and you slowly make her slide down the wall before letting go of her neck.")
 
 		saynn("You grab the vials with the red drug, all of them. To make sure no one notices their disappearance, you replace the ones you stole with random ones that have roughly the same color.")
@@ -309,6 +315,12 @@ func _run():
 		addButton("Continue", "You got the drugs!", "endthescene")
 
 	if(state == "injector"):
+		playAnimation(StageScene.SexStart, "start", {
+			npc="eliza", pc="pc", 
+			bodyState={},
+			npcBodyState={},
+		})
+		
 		saynn("You reach out and pick up the injector that Eliza dropped. You’re not sure what it is but might as well test it on the doctor.")
 
 		saynn("[say=eliza]H-hey! Don’t you dare.[/say]")
@@ -407,6 +419,12 @@ func _run():
 
 
 	if(state == "whip_her"):
+		playAnimation(StageScene.SexStart, "defeated", {
+			npc="eliza", pc="pc", 
+			bodyState={},
+			npcBodyState={},
+		})
+		
 		saynn("[say=pc]What? Think your crying will make me stop?[/say]")
 
 		saynn("You reach down and grab a chain that Eliza uses to leash inmates around. You wrap one end of it around your hand, making it look like a makeshift whip. Then you pull the unwilling scared doctor towards the middle of the room before bending her over the table. Your free hand lands on her cute fit ass and gives it a rough smack. She is already wiggling but you pin her in place.")
@@ -462,6 +480,11 @@ func _run():
 
 	if(state == "breed_her"):
 		# (needs reachable penis)
+		playAnimation(StageScene.SexStanding, "tease", {
+			npc="eliza", pc="pc", 
+			bodyState={exposedCrotch=true,hard=true},
+			npcBodyState={naked=true},
+		})
 
 		saynn("Eliza is still trying to desperately push you away, you catch both her paws with one hand and force them above her head while your second hand lands on the girl’s bra and is groping her tits.")
 
@@ -480,6 +503,12 @@ func _run():
 		addButton("Continue", "Enough foreplay", "continue3")
 
 	if(state == "continue3"):
+		playAnimation(StageScene.SexStanding, "sex", {
+			npc="eliza", pc="pc", 
+			bodyState={exposedCrotch=true,hard=true},
+			npcBodyState={naked=true},
+		})
+		
 		saynn("Eliza makes muffled noises as you turn her around and pin against the wall, the hand that was holding her paws is now forcing her head into the cold concrete while the second pulls on that convenient feline tail to make her bend forward. And it works, her inner thighs trap your shaft between them.")
 
 		saynn("But you didn’t come here to fuck her thighs, you pull back a little and guide your cock directly towards her sex that seems to be mostly dry, missing any arousal juices. You press the tip of your dick against her slit and lean in to whisper her into the ear.")
@@ -506,6 +535,12 @@ func _run():
 		addButton("Pull out", "She clearly doesn’t want it, might as well have some mercy", "pull_out")
 
 	if(state == "cum_inside"):
+		playAnimation(StageScene.SexStanding, "fast", {
+			npc="eliza", pc="pc", 
+			bodyState={exposedCrotch=true,hard=true},
+			npcBodyState={naked=true},
+		})
+		
 		saynn("The feline under you doesn’t seem to be against it much, only her tail is wagging sporadically. You bend forward and support against the table with your hands while doing powerful thrusts with your hips, ramming that cock deep inside her and breaking into her womb. That’s when the tightness shoots you over the edge, grunts escape from your lips while your {pc.cock} bursts with multiple waves of your virile {pc.cum} that quickly stuffs the girl’s babymaker full.")
 
 		saynn("[say=pc]There we go~.[/say]")
@@ -519,6 +554,12 @@ func _run():
 
 
 	if(state == "pull_out"):
+		playAnimation(StageScene.SexStanding, "tease", {
+			npc="eliza", pc="pc", 
+			bodyState={exposedCrotch=true,hard=true},
+			npcBodyState={naked=true},
+		})
+		
 		saynn("The feline under you doesn’t seem to care much about her fate, only her tail is wagging sporadically. You keep railing that slutty pussy, bringing your peak closer. But in the end, you decide to be merciful and pull your cock out moments before it bursts with waves of your {pc.cum}. Instead of stuffing her babymaker, you leave her slit to gape and just cum all over her ass and back.")
 
 		saynn("[say=pc]Consider yourself lucky.[/say]")
@@ -532,6 +573,11 @@ func _run():
 
 
 	if(state == "scissoring"):
+		playAnimation(StageScene.SexTribadism, "sex", {
+			npc="eliza", pc="pc", 
+			bodyState={exposedCrotch=true,hard=true},
+			npcBodyState={naked=true},
+		})
 		# (needs pussy)
 
 		# (ideally should have a way to steal cum)
@@ -565,6 +611,12 @@ func _run():
 		addButton("Cum", "Keep grinding her until you cum", "tribcum")
 
 	if(state == "tribcum"):
+		playAnimation(StageScene.SexTribadism, "fast", {
+			npc="eliza", pc="pc", 
+			bodyState={exposedCrotch=true,hard=true},
+			npcBodyState={naked=true},
+		})
+		
 		saynn("Even though the doctor’s pussy is probably quite sensitive after the climax, you keep grinding and overstimulating it, causing the girl to squirt again soon after. Her folds are massaging yours by twitching and pulsating which makes you cum too, your legs start to shake, your slit showering Eliza’s crotch with your juices.")
 
 		saynn("[say=pc]F-fuck yeah~[/say]")

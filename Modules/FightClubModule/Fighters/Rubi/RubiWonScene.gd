@@ -33,8 +33,8 @@ func _run():
 
 
 	if(state == "finger_him"):
-		playAnimation(StageScene.Duo, "stand", {
-			npc="rubi", npcAction="kneel", 
+		playAnimation(StageScene.SexStanding, "tease", {
+			npc="rubi", pc="pc", 
 			bodyState={},
 			npcBodyState={exposedCrotch=true,hard=true},
 		})
@@ -65,15 +65,15 @@ func _run():
 
 	if(state == "rail_him"):
 		# (needs cock)
-		playAnimation(StageScene.Duo, "stand", {
-			npc="rubi", npcAction="kneel", 
+		playAnimation(StageScene.SexAllFours, "sex", {
+			npc="rubi", pc="pc", 
 			bodyState={exposedCrotch=true,hard=true},
 			npcBodyState={exposedCrotch=true,hard=true},
 		})
 
 		saynn("[say=pc]How can I leave without first using such a slut?[/say]")
 
-		saynn("You crouch before him and swiftly pull his shorts down, exposing his erect feline cock and a clean tight-looking pink pucker. You see excitement in his eyes as he is willingly spreading his legs for you.")
+		saynn("You crouch behind him and swiftly pull his shorts down, exposing his erect feline cock and a clean tight-looking pink pucker. You see excitement in his eyes as he is willingly spreading his legs for you.")
 
 		saynn("[say=pc]Good girl~[/say]")
 

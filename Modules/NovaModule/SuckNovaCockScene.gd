@@ -13,8 +13,10 @@ func _initScene(_args = []):
 func _run():
 	if(state == ""):
 		addCharacter("nova")
-		playAnimation(StageScene.Duo, "kneel", {npc="nova",
-			npcBodyState={exposedCrotch=true,hard=true},
+		playAnimation(StageScene.SexOral, "sex", {
+			npc="pc", pc="nova",
+			bodyState={exposedCrotch=true,hard=true},
+			npcBodyState={},
 		})
 
 	if(state == ""):

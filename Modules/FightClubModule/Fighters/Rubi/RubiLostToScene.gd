@@ -25,8 +25,8 @@ func _run():
 
 	if(state == "power_bottom"):
 		# (if has cock)
-		playAnimation(StageScene.Duo, "kneel", {
-			npc="rubi", npcAction="stand", 
+		playAnimation(StageScene.SexCowgirl, "sex", {
+			pc="pc", npc="rubi", 
 			bodyState={exposedCrotch=true,hard=true},
 			npcBodyState={exposedCrotch=true,hard=true},
 		})
@@ -56,6 +56,12 @@ func _run():
 		addButton("Cum!", "You can’t endure this for long", "cum!")
 
 	if(state == "cum!"):
+		playAnimation(StageScene.SexCowgirl, "fast", {
+			pc="pc", npc="rubi", 
+			bodyState={exposedCrotch=true,hard=true},
+			npcBodyState={exposedCrotch=true,hard=true},
+		})
+		
 		saynn("Eventually he starts to moan even more passionately, his barbed cock throbs and twitches as it starts to dribble cum onto your chest. As he cums, his tailhole clenches so much that you feel yourself being near your peak too!")
 
 		saynn("[say=rubi]C’mon, cum already![/say]")
@@ -70,10 +76,10 @@ func _run():
 
 	if(state == "he_cums_on_you"):
 		# (if no penis)
-		playAnimation(StageScene.Duo, "kneel", {
-			npc="rubi", npcAction="stand", 
-			bodyState={},
-			npcBodyState={exposedCrotch=true,hard=true},
+		playAnimation(StageScene.SexHandjob, "tease", {
+			pc="rubi", npc="pc", 
+			bodyState={exposedCrotch=true,hard=true},
+			npcBodyState={},
 		})
 
 		saynn("His shorts are bulging harder when he finally decides what to do with you.")
@@ -87,6 +93,12 @@ func _run():
 		addButton("Let it happen", "He will cum on you", "let_it_happen")
 
 	if(state == "let_it_happen"):
+		playAnimation(StageScene.SexHandjob, "tease", {
+			pc="rubi", npc="pc", 
+			bodyState={exposedCrotch=true,hard=true},
+			npcBodyState={},
+		})
+		
 		saynn("You switch your gaze between the crowd, the guy’s cock and his eyes. You’re not too happy to be used like some cum toilet but what can you do.")
 
 		saynn("[say=rubi]Prepare to carry my load! Ah..[/say]")

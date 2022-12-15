@@ -31,6 +31,8 @@ func _run():
 		addButton("Continue", "Time to leave", "endthescene")
 
 	if(state == "weapon_play"):
+		playAnimation(StageScene.SexStart, "start", {npc="volk", pc="pc"})
+		
 		saynn("You lean down and pick up his makeshift weapon. It looks like a piece of glass with some cloth wrapped around so it can be held.")
 
 		saynn("[say=volk]Hey. That’s mine![/say]")
