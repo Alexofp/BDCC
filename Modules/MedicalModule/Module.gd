@@ -41,6 +41,10 @@ func getFlags():
 		
 		"PC_ReceivedPermanentCage": flag(FlagType.Bool),
 		"PC_PickedFlatPermanentCage": flag(FlagType.Bool),
+		
+		"Chastity_EventNumber": flag(FlagType.Number),
+		"Chastity_LastEventDay": flag(FlagType.Number),
+		"Chastity_PickedEncounters": flag(FlagType.Dict),
 	}
 
 func _init():
