@@ -67,6 +67,12 @@ func _run():
 		addButton("Attack", "Fight the husky", "attack")
 
 	if(state == "submittosearch"):
+		playAnimation(StageScene.SexStanding, "tease", {
+			pc="nova",npc="pc",
+			bodyState={},
+			npcBodyState={},
+		})
+		
 		saynn("You do as she says, walking up to the nearest wall and leaning forwards, waiting to be frisked.")
 
 		# (if girl)

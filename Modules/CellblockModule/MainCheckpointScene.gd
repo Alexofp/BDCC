@@ -75,6 +75,12 @@ func _run():
 		addButton("Continue", "Oh well", "leaveandendthescene")
 
 	if(state == "get_frisked"):
+		playAnimation(StageScene.SexStanding, "tease", {
+			pc="cp_guard",npc="pc",
+			bodyState={},
+			npcBodyState={},
+		})
+		
 		saynn("You stand against a wall and wait for the guy. He stands behind you and makes you spread your feet more.")
 
 		saynn("He then crouches and starts going from bottom to the top, his hands slide along the curves of your {pc.thick} body, searching for anything unusual. He checks any pockets too.")
@@ -100,10 +106,10 @@ func _run():
 		
 
 	if(state == "offer_handjob"):
-		playAnimation(StageScene.Duo, "stand", {
-			npc="cp_guard", npcAction="stand", 
-			bodyState={},
-			npcBodyState={exposedCrotch=true,hard=true},
+		playAnimation(StageScene.SexHandjob, "sex", {
+			npc="pc", pc="cp_guard", 
+			bodyState={exposedCrotch=true,hard=true},
+			npcBodyState={},
 		})
 
 		saynn("Instead of doing as told you walk up closer to the guard and boldly put a hand on his crotch, giving it a slight squeeze. The guy hums and smirks.")
@@ -143,6 +149,12 @@ func _run():
 		addButtonWithChecks("Mouth", "Why should you waste all that jizz, open your mouth and catch it", "mouth", [], [ButtonChecks.NotOralBlocked])
 		
 	if(state == "outside"):
+		playAnimation(StageScene.SexHandjob, "tease", {
+			npc="pc", pc="cp_guard", 
+			bodyState={exposedCrotch=true,hard=true},
+			npcBodyState={},
+		})
+		
 		saynn("His cock throbs more, the knot is so fat you can’t wrap your digits around it. Only a few seconds pass before the guy starts grunting while his cock shoots spurts of cum, one after another. You sit slightly to the side and avoid all of the mess, watching the guy paint the opposite wall with thick jizz.")
 
 		saynn("[say=cp_guard]Nghr, fuck.. I should make you use that tongue to clean it.[/say]")
@@ -156,6 +168,12 @@ func _run():
 		
 		addButton("Continue", "That went well", "allowFullAndendthescene")
 	if(state == "facial"):
+		playAnimation(StageScene.SexHandjob, "fast", {
+			npc="pc", pc="cp_guard", 
+			bodyState={exposedCrotch=true,hard=true},
+			npcBodyState={},
+		})
+		
 		saynn("You close your eyes and put yourself right under that cock, your hands finally manage to push him over the edge. The guy grunts while his animal cock starts shooting hot cum onto your face, many waves of it. You quickly become messy, your hair, face, ears, shoulders, get covered in the sticky stuff. You sit still like a good cum rag and just take it all, your hands not moving but aiming his dick right down at you.")
 
 		saynn("Eventually he comes down from it, his cock slowly goes down and starts to deflate. Though he does take the liberty of wiping its tip against your clothes. You can only freely open one eye and opening the mouth would mean getting a taste of his seed.")
@@ -166,6 +184,12 @@ func _run():
 
 		addButton("Continue", "That went well", "allowFullAndendthescene")
 	if(state == "mouth"):
+		playAnimation(StageScene.SexOral, "fast", {
+			npc="pc", pc="cp_guard", 
+			bodyState={exposedCrotch=true,hard=true},
+			npcBodyState={},
+		})
+		
 		saynn("You get into the position and open your mouth wide, your tongue is out, the cock that you are stroking is resting on it. Your hands swiftly work that cock while you gaze up at the guard with your eyes, hungry for cum. Eventually he starts grunting and jerking his hips back and forth, his cock exploding with wave after wave of hot semen, most of which hits directly the back of your throat with some landing on the tongue. You do it like a proper slut, giving the guy a show while also not letting a single drop of his cum go to waste, you quickly swallow and let him stuff your mouth more, your hands milking his shaft and draining his balls until there is nothing left.")
 
 		saynn("Eventually his bliss state ends, you pull back and show him your mouth full of cum. Then you close it and raise your chin high, showing him the exact moment when you swallow that sticky mess completely. You then lick and suck on your every finger and swallow that too before showing the guard your empty mouth.")
@@ -217,8 +241,8 @@ func _run():
 		addWonButton()
 		
 	if(state == "catch_anal"):
-		playAnimation(StageScene.Duo, "stand", {
-			npc="cp_guard", npcAction="stand", 
+		playAnimation(StageScene.SexCowgirl, "sex", {
+			pc="cp_guard", npc="pc", 
 			bodyState={exposedCrotch=true,hard=true},
 			npcBodyState={exposedCrotch=true,hard=true},
 		})
