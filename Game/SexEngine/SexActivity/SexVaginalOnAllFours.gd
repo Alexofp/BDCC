@@ -308,7 +308,7 @@ func doDomAction(_id, _actionInfo):
 		switchCurrentActivityTo(switchHoleActivity)
 		
 		var text = RNG.pick([
-			"{dom.You} {dom.youVerb('switch', 'switches')} holes. {dom.YouHe} {dom.are} "+RNG.pick(["prodding", "teasing", "rubbing"])+" {sub.your} "+RNG.pick(otherHoleNames)+" now.",
+			"{dom.You} {dom.youVerb('switch', 'switches')} holes. {dom.YouHe} {dom.youAre} "+RNG.pick(["prodding", "teasing", "rubbing"])+" {sub.your} "+RNG.pick(otherHoleNames)+" now.",
 		])
 		
 		return {text = text}
