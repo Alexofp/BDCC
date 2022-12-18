@@ -45,6 +45,9 @@ func getResistance() -> float:
 		return 0.01
 	return value
 
+func setLooseness(newlooseness:float):
+	looseness = newlooseness
+
 func getLooseness() -> float:
 	return looseness
 
