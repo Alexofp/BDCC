@@ -455,7 +455,7 @@ func doDomAction(_id, _actionInfo):
 		
 		var text = RNG.pick([
 			"{dom.You} "+moanText+" while being fucked!",
-			"{dom.You} "+moanText+" while having {sub.yourHis} "+RNG.pick(usedBodypartNames)+" used!",
+			"{dom.You} "+moanText+" while riding {sub.youHim} with {dom.yourHis} "+RNG.pick(usedBodypartNames)+"!",
 			"{dom.You} "+moanText+" eagerly!",
 		])
 		affectSub(subInfo.fetishScore({fetishGiving: 1.0}), 0.03, -0.01, -0.0)
