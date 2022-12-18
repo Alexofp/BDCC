@@ -16,16 +16,16 @@ func getTopicValue(_topicID, _pc):
 		if(_pc.isFullyNaked()):
 			return 1.0
 	if(_topicID == InterestTopic.ExposedPussy):
-		if(!_pc.isBodypartCovered(BodypartSlot.Vagina)):
+		if(_pc.hasBodypart(BodypartSlot.Vagina) && !_pc.isBodypartCovered(BodypartSlot.Vagina)):
 			return 1.0
 	if(_topicID == InterestTopic.ExposedAnus):
-		if(!_pc.isBodypartCovered(BodypartSlot.Anus)):
+		if(_pc.hasBodypart(BodypartSlot.Anus) && !_pc.isBodypartCovered(BodypartSlot.Anus)):
 			return 1.0
 	if(_topicID == InterestTopic.ExposedBreasts):
-		if(!_pc.isBodypartCovered(BodypartSlot.Breasts)):
+		if(_pc.hasBodypart(BodypartSlot.Breasts) && !_pc.isBodypartCovered(BodypartSlot.Breasts)):
 			return 1.0
 	if(_topicID == InterestTopic.ExposedCock):
-		if(!_pc.isBodypartCovered(BodypartSlot.Penis)):
+		if(_pc.hasBodypart(BodypartSlot.Penis) && !_pc.isBodypartCovered(BodypartSlot.Penis)):
 			return 1.0
 	if(_topicID == InterestTopic.ExposedPanties):
 		if(!_pc.isInventorySlotBlocked(InventorySlot.UnderwearBottom) && _pc.getInventory().hasSlotEquipped(InventorySlot.UnderwearBottom)):
