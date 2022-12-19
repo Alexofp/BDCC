@@ -206,6 +206,8 @@ func loadStatusEffectsData(data):
 	
 	for effectID in data:
 		var effect = GlobalRegistry.createStatusEffect(effectID)
+		if(effect == null):
+			continue
 		effect.setCharacter(self)
 		statusEffects[effectID] = effect
 		statusEffectsStorageNode.add_child(effect)

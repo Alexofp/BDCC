@@ -1,0 +1,120 @@
+[gd_scene load_steps=27 format=2]
+
+[ext_resource path="res://Player/Player3D/Doll3D.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Player/StageScene3D/BaseStageScene3D.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Player/Props/platform.png" type="Texture" id=3]
+[ext_resource path="res://Player/Props/FuckMachine.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Player/StageScene3D/Scenes/HangingSexFuckmachine.gd" type="Script" id=5]
+[ext_resource path="res://Player/Props/Chain.png" type="Texture" id=6]
+
+[sub_resource type="AnimationNodeAnimation" id=24]
+animation = "HangingIdle-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=25]
+animation = "HangingSexFast_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=26]
+animation = "HangingSex_1-loop"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=27]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=28]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=29]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=30]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachine" id=31]
+states/HangingIdle-loop/node = SubResource( 24 )
+states/HangingIdle-loop/position = Vector2( 309, 116 )
+states/HangingSexFast_1-loop/node = SubResource( 25 )
+states/HangingSexFast_1-loop/position = Vector2( 309, 287 )
+states/HangingSex_1-loop/node = SubResource( 26 )
+states/HangingSex_1-loop/position = Vector2( 309, 200 )
+transitions = [ "HangingIdle-loop", "HangingSex_1-loop", SubResource( 27 ), "HangingSex_1-loop", "HangingIdle-loop", SubResource( 28 ), "HangingSex_1-loop", "HangingSexFast_1-loop", SubResource( 29 ), "HangingSexFast_1-loop", "HangingSex_1-loop", SubResource( 30 ) ]
+start_node = "HangingIdle-loop"
+
+[sub_resource type="AnimationNodeBlendTree" id=32]
+graph_offset = Vector2( -271.821, 46.258 )
+nodes/StateMachine/node = SubResource( 31 )
+nodes/StateMachine/position = Vector2( 180.179, 136.258 )
+nodes/output/position = Vector2( 680, 180 )
+node_connections = [ "output", 0, "StateMachine" ]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=22]
+
+[sub_resource type="AnimationNodeAnimation" id=33]
+animation = "Fuckmachine_idle-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=34]
+animation = "Fuckmachine_sex-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=35]
+animation = "Fuckmachine_sexFast-loop"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=36]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=37]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=38]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=39]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachine" id=40]
+states/Fuckmachine_idle-loop/node = SubResource( 33 )
+states/Fuckmachine_idle-loop/position = Vector2( 452, 132 )
+states/Fuckmachine_sex-loop/node = SubResource( 34 )
+states/Fuckmachine_sex-loop/position = Vector2( 452, 206 )
+states/Fuckmachine_sexFast-loop/node = SubResource( 35 )
+states/Fuckmachine_sexFast-loop/position = Vector2( 459, 286 )
+transitions = [ "Fuckmachine_idle-loop", "Fuckmachine_sex-loop", SubResource( 36 ), "Fuckmachine_sex-loop", "Fuckmachine_idle-loop", SubResource( 37 ), "Fuckmachine_sex-loop", "Fuckmachine_sexFast-loop", SubResource( 38 ), "Fuckmachine_sexFast-loop", "Fuckmachine_sex-loop", SubResource( 39 ) ]
+start_node = "Fuckmachine_idle-loop"
+
+[sub_resource type="AnimationNodeBlendTree" id=41]
+graph_offset = Vector2( -199.532, -23.3158 )
+nodes/StateMachine/node = SubResource( 40 )
+nodes/StateMachine/position = Vector2( 320, 140 )
+nodes/output/position = Vector2( 680, 180 )
+node_connections = [ "output", 0, "StateMachine" ]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=23]
+
+[node name="HangingSexFuckmachine" instance=ExtResource( 2 )]
+script = ExtResource( 5 )
+
+[node name="Sprite3D" type="Sprite3D" parent="." index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.196641, -1.77462 )
+texture = ExtResource( 3 )
+region_enabled = true
+region_rect = Rect2( 1, 1, 1022, 62 )
+
+[node name="Sprite3D2" type="Sprite3D" parent="." index="1"]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 11.5028, -1.77462 )
+texture = ExtResource( 6 )
+
+[node name="Doll3D" parent="." index="2" instance=ExtResource( 1 )]
+
+[node name="FuckMachine" parent="." index="3" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.005 )
+
+[node name="AnimationTree" type="AnimationTree" parent="." index="4"]
+tree_root = SubResource( 32 )
+anim_player = NodePath("../Doll3D/DollSkeleton/AnimationPlayer")
+parameters/StateMachine/playback = SubResource( 22 )
+
+[node name="AnimationTree2" type="AnimationTree" parent="." index="5"]
+tree_root = SubResource( 41 )
+anim_player = NodePath("../FuckMachine/AnimationPlayer")
+parameters/StateMachine/playback = SubResource( 23 )
+
+[editable path="Doll3D"]
+[editable path="Doll3D/DollSkeleton"]
+[editable path="FuckMachine"]
