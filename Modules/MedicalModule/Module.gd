@@ -44,7 +44,12 @@ func getFlags():
 		
 		"Chastity_EventNumber": flag(FlagType.Number),
 		"Chastity_LastEventDay": flag(FlagType.Number),
-		"Chastity_PickedEncounters": flag(FlagType.Dict),
+		"Chastity_Event1Choice1": flag(FlagType.Text), #How does it feel? Possible values: ["good", "awful", "why"]
+		"Chastity_Event2Choice1": flag(FlagType.Text), #How much was it already? At least ten days, right? You must be quite pent up, patient? Possible values: ["yes", "no"]
+		"Chastity_Event2Choice2": flag(FlagType.Text), #Maybe I’m wrong and I should stop now? Possible: ["everything_is_good", "ask_to_stop", "stay_silent"]
+		"Chastity_Event3Choice1": flag(FlagType.Text), # First time fuckmachine. Possible: ["clench", "let_it_in"]
+		"Chastity_Event3Choice2": flag(FlagType.Text), # Drink your own cum? Possible: ["drink", "refuse"]
+		"Chastity_FirstChosenPerson": flag(FlagType.Text), # Who will dick pc first. Possible: ["eliza", "risha", "rahi", "tavi", "nova"]
 	}
 
 func _init():
@@ -79,6 +84,10 @@ func _init():
 		
 		"res://Modules/MedicalModule/Nursery/NurseryTalkScene.gd",
 		"res://Modules/MedicalModule/NurseCaughtOfflimitsScene.gd",
+		
+		"res://Modules/MedicalModule/ForcedChastity/ForcedChastityScene1.gd",
+		"res://Modules/MedicalModule/ForcedChastity/ForcedChastityScene2.gd",
+		"res://Modules/MedicalModule/ForcedChastity/ForcedChastityScene3.gd",
 		]
 	characters = [
 		"res://Modules/MedicalModule/MentalWard/LatexParasite.gd",
@@ -93,6 +102,8 @@ func _init():
 		"res://Modules/MedicalModule/Nursery/NurseryTalkEvent.gd",
 		"res://Modules/MedicalModule/StealDrugsFromMedicalEvent.gd",
 		"res://Modules/MedicalModule/NurseCaughtOfflimitsEvent.gd",
+		
+		"res://Modules/MedicalModule/ForcedChastity/ForcedChastityEvents.gd",
 	]
 
 func resetFlagsOnNewDay():

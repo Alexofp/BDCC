@@ -6,12 +6,11 @@ func _init():
 func _run():
 	if(state == ""):
 		addCharacter("eliza")
-		playAnimation(StageScene.Duo, "stand", {npc="eliza", npcAction="stand"})
+		playAnimation(StageScene.Duo, "kneel", {npc="eliza", npcAction="stand"})
 		
 	if(state == ""):
 		aimCamera("medical_near_pccell")
 		GM.pc.setLocation("medical_near_pccell")
-		playAnimation(StageScene.Solo, "kneel")
 		setLocationName("Near cells")
 		
 		saynn("Eliza holds your leash, you try to look brave even with that straitjacket on.")
