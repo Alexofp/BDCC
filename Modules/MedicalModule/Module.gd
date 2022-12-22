@@ -50,6 +50,7 @@ func getFlags():
 		"Chastity_Event3Choice1": flag(FlagType.Text), # First time fuckmachine. Possible: ["clench", "let_it_in"]
 		"Chastity_Event3Choice2": flag(FlagType.Text), # Drink your own cum? Possible: ["drink", "refuse"]
 		"Chastity_FirstChosenPerson": flag(FlagType.Text), # Who will dick pc first. Possible: ["eliza", "risha", "rahi", "tavi", "nova"]
+		"Chastity_SecondChosenPerson": flag(FlagType.Text), # Who will dick pc second. Possible: ["eliza", "risha", "rahi", "tavi", "nova"]
 	}
 
 func _init():
