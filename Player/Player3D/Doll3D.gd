@@ -527,15 +527,19 @@ func applyBodyState(bodystate):
 	var exposeBodyparts = []
 	if(shouldExposeChest || shouldBeNaked):
 		exposeBodyparts.append_array([
-			BodypartSlot.Body,
 			BodypartSlot.Breasts,
 		])
 	if(shouldExposeCrotch || shouldBeNaked):
 		exposeBodyparts.append_array([
-			BodypartSlot.Body,
 			BodypartSlot.Penis,
 			BodypartSlot.Vagina,
 			BodypartSlot.Anus,
+		])
+	if(shouldBeNaked):
+		exposeBodyparts.append_array([
+			BodypartSlot.Body,
+			BodypartSlot.Arms,
+			BodypartSlot.Legs,
 		])
 	
 	setExposedBodyparts(exposeBodyparts)
