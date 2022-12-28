@@ -51,6 +51,13 @@ func getFlags():
 		"Chastity_Event3Choice2": flag(FlagType.Text), # Drink your own cum? Possible: ["drink", "refuse"]
 		"Chastity_FirstChosenPerson": flag(FlagType.Text), # Who will dick pc first. Possible: ["eliza", "risha", "rahi", "tavi", "nova"]
 		"Chastity_SecondChosenPerson": flag(FlagType.Text), # Who will dick pc second. Possible: ["eliza", "risha", "rahi", "tavi", "nova"]
+		"Chastity_OptionalBadBehavourCounter": flag(FlagType.Number), # How many times pc has misbehaved during the optional scenes
+		"Chastity_Event4Choice1": flag(FlagType.Text), # What did the pc do before Eliza arrived. Possible values: ["nothing", "magicwand", "horsecockdildo"]
+		"Chastity_Event4Choice2": flag(FlagType.Text), # Was it fun? ["yes", "no", "someparts"]
+		"Chastity_Event4Choice3": flag(FlagType.Text), # Did you like the cage? ["yes", "no", "toorestrictive"]
+		"Chastity_Event4Choice4": flag(FlagType.Text), # Are you obedient? ["yes", "no"]
+		"Chastity_Event4ObeyedEliza": flag(FlagType.Bool), # Did pc obey
+		"Chastity_Event4LickedPussy": flag(FlagType.Bool), # Did pc lick Eliza's pussy
 	}
 
 func _init():
