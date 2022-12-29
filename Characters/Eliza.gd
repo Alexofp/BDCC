@@ -184,3 +184,5 @@ func reactRestraint(restraintType, restraintAmount, isGettingForced):
 
 func createEquipment():
 	getInventory().equipItem(GlobalRegistry.createItemNoID("NurseClothes"))
+	getInventory().equipItem(GlobalRegistry.createItemNoID("LaceBra"))
+	getInventory().equipItem(GlobalRegistry.createItemNoID("LacePanties"))

@@ -519,6 +519,7 @@ func applyBodyState(bodystate):
 	var shouldExposeChest = bodystate.has("exposedChest") && bodystate["exposedChest"]
 	var shouldExposeCrotch = bodystate.has("exposedCrotch") && bodystate["exposedCrotch"]
 	var shouldBeNaked = bodystate.has("naked") && bodystate["naked"]
+	var shouldShowUnderwear = bodystate.has("underwear") && bodystate["underwear"]
 	var shouldBeHard = bodystate.has("hard") && bodystate["hard"]
 	var shouldBeCaged = bodystate.has("caged") && bodystate["caged"]
 	var shouldBeCondom = bodystate.has("condom") && bodystate["condom"]
@@ -540,6 +541,10 @@ func applyBodyState(bodystate):
 			BodypartSlot.Body,
 			BodypartSlot.Arms,
 			BodypartSlot.Legs,
+		])
+	if(shouldShowUnderwear):
+		exposeBodyparts.append_array([
+			BodypartSlot.Body,
 		])
 	
 	setExposedBodyparts(exposeBodyparts)

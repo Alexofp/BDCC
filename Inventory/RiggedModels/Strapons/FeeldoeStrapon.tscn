@@ -130,7 +130,7 @@ flags_unshaded = true
 vertex_color_use_as_albedo = true
 params_cull_mode = 2
 params_depth_draw_mode = 3
-albedo_color = Color( 0.321569, 0.0313726, 0.0313726, 1 )
+albedo_color = Color( 0.686275, 0.0823529, 0.0823529, 1 )
 albedo_texture = ExtResource( 1 )
 
 [node name="FeeldoeStrapon" instance=ExtResource( 2 )]

@@ -23,7 +23,7 @@ func react(_triggerID, _args):
 	var currentEventNumber = getFlag("MedicalModule.Chastity_EventNumber", 0)
 	
 	#						DON'T FORGET THESE
-	if(currentEventNumber in [0, 1, 2]):
+	if(currentEventNumber in [0, 1, 2, 3, 4, 5]):
 		setFlag("MedicalModule.Chastity_LastEventDay", GM.main.getDays())
 		GM.pc.removeAllRestraints()
 		
@@ -36,6 +36,30 @@ func react(_triggerID, _args):
 		if(currentEventNumber == 2):
 			setFlag("MedicalModule.Chastity_EventNumber", 3)
 			runScene("ForcedChastityScene3")
+		if(currentEventNumber in [3, 5]):
+			var choosenScene = getFlag("MedicalModule.Chastity_FirstChosenPerson", "rahi")
+			if(currentEventNumber == 5):
+				choosenScene = getFlag("MedicalModule.Chastity_SecondChosenPerson", "rahi")
+			
+			if(choosenScene == "rahi"):
+				setFlag("MedicalModule.Chastity_EventNumber", currentEventNumber + 1)
+				runScene("ForcedChastityOptionalRahiScene")
+			if(choosenScene == "risha"):
+				setFlag("MedicalModule.Chastity_EventNumber", currentEventNumber + 1)
+				runScene("ForcedChastityOptionalRishaScene")
+			if(choosenScene == "eliza"):
+				setFlag("MedicalModule.Chastity_EventNumber", currentEventNumber + 1)
+				runScene("ForcedChastityOptionalElizaScene")
+			if(choosenScene == "tavi"):
+				setFlag("MedicalModule.Chastity_EventNumber", currentEventNumber + 1)
+				runScene("ForcedChastityOptionalTaviScene")
+			if(choosenScene == "nova"):
+				setFlag("MedicalModule.Chastity_EventNumber", currentEventNumber + 1)
+				runScene("ForcedChastityOptionalNovaScene")
+		if(currentEventNumber == 4):
+			setFlag("MedicalModule.Chastity_EventNumber", 5)
+			runScene("ForcedChastityScene5")
+		
 		return true
 	
 	return false

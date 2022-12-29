@@ -96,6 +96,13 @@ func _init():
 		"res://Modules/MedicalModule/ForcedChastity/ForcedChastityScene1.gd",
 		"res://Modules/MedicalModule/ForcedChastity/ForcedChastityScene2.gd",
 		"res://Modules/MedicalModule/ForcedChastity/ForcedChastityScene3.gd",
+		"res://Modules/MedicalModule/ForcedChastity/ForcedChastityScene5.gd",
+		
+		"res://Modules/MedicalModule/ForcedChastity/ForcedChastityOptionalRahiScene.gd",
+		"res://Modules/MedicalModule/ForcedChastity/ForcedChastityOptionalRishaScene.gd",
+		"res://Modules/MedicalModule/ForcedChastity/ForcedChastityOptionalElizaScene.gd",
+		"res://Modules/MedicalModule/ForcedChastity/ForcedChastityOptionalTaviScene.gd",
+		"res://Modules/MedicalModule/ForcedChastity/ForcedChastityOptionalNovaScene.gd",
 		]
 	characters = [
 		"res://Modules/MedicalModule/MentalWard/LatexParasite.gd",

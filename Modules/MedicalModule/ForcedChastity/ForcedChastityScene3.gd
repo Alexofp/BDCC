@@ -253,6 +253,9 @@ func _react(_action: String, _args):
 	if(_action == "continue1"):
 		howMuchMilked = GM.pc.milkSeed()
 		GM.pc.orgasmFrom("eliza")
+		
+	if(_action == "continue"):
+		GM.pc.gotOrificeStretchedWith(BodypartSlot.Anus, 25)
 	
 	if(_action in ["clench", "let_it_in"]):
 		processTime(5*60)
