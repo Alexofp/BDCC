@@ -58,6 +58,9 @@ func getFlags():
 		"Chastity_Event4Choice4": flag(FlagType.Text), # Are you obedient? ["yes", "no"]
 		"Chastity_Event4ObeyedEliza": flag(FlagType.Bool), # Did pc obey
 		"Chastity_Event4LickedPussy": flag(FlagType.Bool), # Did pc lick Eliza's pussy
+		"Chastity_Event5LockedForever": flag(FlagType.Bool), # Did pc agree to be locked forever
+		"Chastity_Event5BredEliza": flag(FlagType.Bool),
+		"Chastity_Event5GaveElizaDrug": flag(FlagType.Bool),
 	}
 
 func _init():

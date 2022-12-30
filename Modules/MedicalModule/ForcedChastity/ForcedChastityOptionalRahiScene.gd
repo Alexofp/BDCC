@@ -283,6 +283,7 @@ func _react(_action: String, _args):
 		
 	if(_action == "badendscene"):
 		increaseFlag("MedicalModule.Chastity_OptionalBadBehavourCounter")
+		increaseFlag("MedicalModule.Chastity_OptionalBadBehavourCounter")
 		GM.pc.setLocation("medical_nearconfessionary")
 		
 		endScene()
