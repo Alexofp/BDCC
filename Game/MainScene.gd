@@ -300,10 +300,6 @@ func applyWorldEdit(id):
 		worldEdits[id].apply(GM.world)
 
 func canSave():
-	for scene in sceneStack:
-		if(!scene.canSave()):
-			return false
-	
 	return true
 
 func supportsBattleTurns():

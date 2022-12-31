@@ -220,9 +220,6 @@ func getModuleFlag(moduleID, flagID, defaultValue = null):
 func resolveCustomCharacterName(_charID):
 	return null
 
-func canSave():
-	return true
-
 func supportsBattleTurns():
 	return false
 
