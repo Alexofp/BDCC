@@ -6,6 +6,7 @@ const Mouth = "mouth"
 const Neck = "neck"
 const Wrists = "wrists"
 const Hands = "hands"
+const Ring = "ring"
 const Ankles = "ankles"
 const Torso = "torso"
 const Body = "body"
@@ -20,7 +21,7 @@ const Static2 = "static2"
 const Static3 = "static3"
 
 static func getAll():
-	return [Eyes, Mouth, Neck, Torso, Body, UnderwearTop, UnderwearBottom, Penis, Vagina, Anal, Wrists, Hands, Ankles]
+	return [Eyes, Mouth, Neck, Torso, Body, UnderwearTop, UnderwearBottom, Penis, Vagina, Anal, Wrists, Hands, Ring, Ankles]
 
 static func getStatic():
 	return [Static1, Static2, Static3]
