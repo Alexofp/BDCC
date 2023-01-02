@@ -61,6 +61,8 @@ func getFlags():
 		"Chastity_Event5LockedForever": flag(FlagType.Bool), # Did pc agree to be locked forever
 		"Chastity_Event5BredEliza": flag(FlagType.Bool),
 		"Chastity_Event5GaveElizaDrug": flag(FlagType.Bool),
+		"Chastity_ExperimentWasSuccessful": flag(FlagType.Bool),
+		"Chastity_ReceivedRing": flag(FlagType.Bool),
 	}
 
 func _init():
@@ -100,12 +102,16 @@ func _init():
 		"res://Modules/MedicalModule/ForcedChastity/ForcedChastityScene2.gd",
 		"res://Modules/MedicalModule/ForcedChastity/ForcedChastityScene3.gd",
 		"res://Modules/MedicalModule/ForcedChastity/ForcedChastityScene5.gd",
+		"res://Modules/MedicalModule/ForcedChastity/ForcedChastityScene7.gd",
 		
 		"res://Modules/MedicalModule/ForcedChastity/ForcedChastityOptionalRahiScene.gd",
 		"res://Modules/MedicalModule/ForcedChastity/ForcedChastityOptionalRishaScene.gd",
 		"res://Modules/MedicalModule/ForcedChastity/ForcedChastityOptionalElizaScene.gd",
 		"res://Modules/MedicalModule/ForcedChastity/ForcedChastityOptionalTaviScene.gd",
 		"res://Modules/MedicalModule/ForcedChastity/ForcedChastityOptionalNovaScene.gd",
+		
+		"res://Modules/MedicalModule/ForcedChastity/ForcedChastityReceiveRingScene.gd",
+		"res://Modules/MedicalModule/ForcedChastity/ForcedChastityMedbayStartScene.gd",
 		]
 	characters = [
 		"res://Modules/MedicalModule/MentalWard/LatexParasite.gd",

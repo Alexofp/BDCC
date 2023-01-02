@@ -16,7 +16,7 @@ var uiScaleMultiplier = 1.0
 var requireDoubleTapOnMobile = false
 var uiButtonSize:int = 0
 
-var showSpeakerName = false
+var showSpeakerName = true
 var fontSize = "normal"
 var showShortcuts = true
 var showSceneCreator = true
@@ -42,7 +42,7 @@ func resetToDefaults():
 	npcPregnancyTimeDays = 5
 	shouldScaleUI = true
 	uiScaleMultiplier = 1.0
-	showSpeakerName = false
+	showSpeakerName = true
 	fontSize = "normal"
 	showShortcuts = true
 	measurementUnits = "metric"
@@ -490,7 +490,7 @@ func loadData(data):
 	shouldScaleUI = loadVar(data, "shouldScaleUI", true)
 	uiScaleMultiplier = loadVar(data, "uiScaleMultiplier", 1.0)
 	uiButtonSize = loadVar(data, "uiButtonSize", 0)
-	showSpeakerName = loadVar(data, "showSpeakerName", false)
+	showSpeakerName = loadVar(data, "showSpeakerName", true)
 	fontSize = loadVar(data, "fontSize", "normal")
 	showShortcuts = loadVar(data, "showShortcuts", true)
 	measurementUnits = loadVar(data, "measurementUnits", "metric")

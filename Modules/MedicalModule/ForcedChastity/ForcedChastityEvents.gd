@@ -9,6 +9,12 @@ func registerTriggers(es):
 func react(_triggerID, _args):
 	if(!getFlag("MedicalModule.PC_ReceivedPermanentCage")):
 		return false
+	
+	if(getFlag("MedicalModule.Chastity_Event5LockedForever") && !getFlag("MedicalModule.Chastity_ReceivedRing")):
+		setFlag("MedicalModule.Chastity_ReceivedRing", true)
+		runScene("ForcedChastityReceiveRingScene")
+		return true
+	
 	if(GM.pc.isWearingPortalPanties()):
 		return false
 	if(getFlag("MedicalModule.Eliza_BusyDays", 0) > 0):
@@ -23,7 +29,7 @@ func react(_triggerID, _args):
 	var currentEventNumber = getFlag("MedicalModule.Chastity_EventNumber", 0)
 	
 	#						DON'T FORGET THESE
-	if(currentEventNumber in [0, 1, 2, 3, 4, 5]):
+	if(currentEventNumber in [0, 1, 2, 3, 4, 5, 6]):
 		setFlag("MedicalModule.Chastity_LastEventDay", GM.main.getDays())
 		GM.pc.removeAllRestraints()
 		
@@ -59,6 +65,9 @@ func react(_triggerID, _args):
 		if(currentEventNumber == 4):
 			setFlag("MedicalModule.Chastity_EventNumber", 5)
 			runScene("ForcedChastityScene5")
+		if(currentEventNumber == 6):
+			setFlag("MedicalModule.Chastity_EventNumber", 7)
+			runScene("ForcedChastityScene7")
 		
 		return true
 	

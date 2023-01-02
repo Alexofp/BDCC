@@ -16,3 +16,9 @@ func getBuffs():
 	return [
 		buff(Buff.SkillExperienceBuff, [Skill.BDSM, 50])
 		]
+
+func getPrice():
+	return 20
+
+func canSell():
+	return true

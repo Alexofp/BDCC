@@ -181,6 +181,15 @@ func _run():
 		#addDisabledButton("Drug testing", "Test a random drug with random effect. The paper says that these shouldn't have any long-lasting effects.")
 		addButton("Induce lactation", "She will probably use some kind of drug on you. At least it’s free", "induce_lactation")
 		addButton("Experiments", "Ask to be experimented on. This will probably include being a test subject for medical drugs that have unknown properties and also testing new prototypes (Warning, the scenes will include a lot of drug use, non-permanent transformations and mind-altering experiences)", "startexperiments")
+		
+		if(!getFlag("MedicalModule.PC_ReceivedPermanentCage")):
+			if(!GM.pc.hasReachablePenis()):
+				addDisabledButton("Obedience training", "(forced chastity content) You need a reachable penis to be able to start this program")
+			else:
+				addButton("Obedience training", "(forced chastity content) One of the booklets says that there is a new research going on that claims to improve low obedience levels of inmates", "startobedient")
+		else:
+			addDisabledButton("Obedience training", "(forced chastity content) You're already enrolled into this program")
+		
 		#addDisabledButton("Prototype testing", "Test bleeding-edge hi-tech machines or devices")
 		addButton("Back", "You're not interested", "")
 
@@ -354,6 +363,11 @@ func _react(_action: String, _args):
 		
 	if(_action == "milk_prostatemilking"):
 		runScene("ElizaProstateMilking")
+		endScene()
+		return
+	
+	if(_action == "startobedient"):
+		runScene("ForcedChastityMedbayStartScene")
 		endScene()
 		return
 	
