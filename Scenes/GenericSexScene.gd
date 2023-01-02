@@ -1,6 +1,6 @@
 extends "res://Scenes/SceneBase.gd"
 
-var sexEngine
+var sexEngine:SexEngine
 var currentCategory = []
 
 func _init():
@@ -176,6 +176,20 @@ func supportsSexEngine():
 
 func _onSceneEnd():
 	sexEngine.endSex()
+
+func getDebugActions():
+	return [
+		{
+			"id": "forceEnd",
+			"name": "Force end sex",
+			"args": [
+			],
+		},
+	]
+
+func doDebugAction(_id, _args = {}):
+	if(_id == "forceEnd"):
+		sexEngine.endSex()
 
 func saveData():
 	var data = .saveData()
