@@ -81,6 +81,17 @@ func personalityChangesAfterSex():
 func isDynamicCharacter():
 	return true
 
+func getLootTable(_battleName):
+	if(npcCharacterType == CharacterType.Engineer):
+		return EngineerLoot.new()
+	if(npcCharacterType == CharacterType.Guard):
+		return GuardLoot.new()
+	if(npcCharacterType == CharacterType.Nurse):
+		return MedicalLoot.new()
+	if(npcCharacterType == CharacterType.Inmate):
+		return InmateLoot.new()
+	return .getLootTable(_battleName)
+
 func saveData():
 	var data = {
 		"npcLevel": npcLevel,
