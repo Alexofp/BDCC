@@ -67,6 +67,7 @@ func saveData():
 		"preferKnownEncounters": preferKnownEncounters,
 		"genderWeights": genderWeights,
 		"disabledGoalsForSubPC": disabledGoalsForSubPC,
+		"speciesWeights": speciesWeights,
 	}
 	return data
 
@@ -74,3 +75,4 @@ func loadData(data):
 	preferKnownEncounters = SAVE.loadVar(data, "preferKnownEncounters", false)
 	genderWeights = SAVE.loadVar(data, "genderWeights", {})
 	disabledGoalsForSubPC = SAVE.loadVar(data, "disabledGoalsForSubPC", [])
+	speciesWeights = SAVE.loadVar(data, "speciesWeights", {})
