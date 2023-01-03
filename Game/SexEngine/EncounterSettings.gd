@@ -4,6 +4,7 @@ class_name EncounterSettings
 var preferKnownEncounters:bool = false
 var genderWeights = {}
 var disabledGoalsForSubPC = []
+var speciesWeights = {}
 
 func isGoalDisabledForSubPC(goalID):
 	if(disabledGoalsForSubPC.has(goalID)):
@@ -29,6 +30,20 @@ func setGenderWeight(gender, weight):
 		genderWeights.erase(gender)
 		return
 	genderWeights[gender] = weight
+
+func getSpeciesWeight(speciesID):
+	if(!speciesWeights.has(speciesID)):
+		var species:Species = GlobalRegistry.getSpecies(speciesID)
+		if(species == null):
+			return 0.0
+		return species.npcGenerationWeight()
+	return speciesWeights[speciesID]
+
+func setSpeciesWeight(speciesID, weight):
+	if(weight < 0.0):
+		speciesWeights.erase(speciesID)
+		return
+	speciesWeights[speciesID] = weight
 
 func togglePreferKnownEcnounters():
 	preferKnownEncounters = !preferKnownEncounters

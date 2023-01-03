@@ -131,7 +131,10 @@ func getEggCellOvulationAmount():
 	]
 
 # How often is this species will show up in procedural encounters. 0 = never, 0-1 = less often, 1 = default chance, >1 = more often
-func npcGenerationWeight(_npcType):
+func npcGenerationWeight():
 	if(!isPlayable() || id == "error"):
 		return 0.0
 	return 1.0
+
+func canBeUsedForNPCType(_npcType):
+	return true

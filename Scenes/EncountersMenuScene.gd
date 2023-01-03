@@ -4,6 +4,7 @@ var pickedPoolToForget = ""
 var pickedFetishToChange = ""
 var pickedPersonalityStat = ""
 var pickedGenderToChange = ""
+var pickedSpeciesToChange = ""
 
 func _init():
 	sceneID = "EncountersMenuScene"
@@ -48,6 +49,16 @@ func _run():
 			sayn(str(genderName)+": "+str(Util.roundF(weight*100.0, 1))+"%"+extraInfo)
 		sayn("")
 		
+		sayn("Relative chances for the species of encountered npcs:")
+		var species = GlobalRegistry.getAllPlayableSpecies()
+		for speciesID in species:
+			var speciesObject:Species = species[speciesID]
+			var speciesName = speciesObject.getVisibleName()
+			
+			var weight = encounterSettings.getSpeciesWeight(speciesID)
+			sayn(str(speciesName)+": "+str(Util.roundF(weight*100.0, 1))+"%")
+		sayn("")
+		
 		sayn("Things that npcs won't do to you:")
 		var disabledGoalsNames = []
 		var allGoals = GlobalRegistry.getSexGoals()
@@ -75,6 +86,7 @@ func _run():
 		addButton("My fetishes", "Menu that allows you to see and change your fetishes", "fetishmenu")
 		addButton("My personality", "Menu that allows you to see and change your personality", "personalitymenu")
 		addButton("Genders", "Pick the chances of the genders of the encountered npcs", "gendersmenu")
+		addButton("Species", "Pick the chances of the species of the encountered npcs", "speciesmenu")
 		addButton("Restrictions", "Pick what things you don't want to happen to you in sex", "goalsmenu")
 
 	if(state == "goalsmenu"):
@@ -98,6 +110,21 @@ func _run():
 			saynn("- Nothing is disabled")
 		else:
 			saynn(Util.humanReadableList(disabledGoalsNames))
+
+	if(state == "speciesmenu"):
+		var encounterSettings:EncounterSettings = GM.main.getEncounterSettings()
+		addButton("Back", "Close this menu", "")
+		
+		sayn("Relative chances for the species of encountered npcs:")
+		var species = GlobalRegistry.getAllPlayableSpecies()
+		for speciesID in species:
+			var speciesObject:Species = species[speciesID]
+			var speciesName = speciesObject.getVisibleName()
+			
+			var weight = encounterSettings.getSpeciesWeight(speciesID)
+			sayn(str(speciesName)+": "+str(Util.roundF(weight*100.0, 1))+"%")
+			addButton(speciesName, "Change the chance of this species", "specieschancemenu", [speciesID])
+		sayn("")
 
 	if(state == "gendersmenu"):
 		var encounterSettings:EncounterSettings = GM.main.getEncounterSettings()
@@ -125,6 +152,18 @@ func _run():
 		addButton("Default", "Set back to default chance", "setgenderchance", [gender, -1.0])
 		for chance in [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]:
 			addButton(str(Util.roundF(chance*100.0))+"%", "Pick this chance", "setgenderchance", [gender, chance])
+
+	if(state == "specieschancemenu"):
+		var species = pickedSpeciesToChange
+		var encounterSettings:EncounterSettings = GM.main.getEncounterSettings()
+		var speciesObject:Species = GlobalRegistry.getSpecies(species)
+		var speciesName = speciesObject.getVisibleName()
+		saynn("The current chance for "+speciesName+" is "+str(Util.roundF(encounterSettings.getSpeciesWeight(species)*100.0, 1))+"%")
+
+		addButton("Back", "Go back to the previous menu", "gendersmenu")
+		addButton("Default", "Set back to default chance", "setspecieschance", [species, -1.0])
+		for chance in [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0, 1.2, 1.5, 2.0, 3.0]:
+			addButton(str(Util.roundF(chance*100.0))+"%", "Pick this chance", "setspecieschance", [species, chance])
 
 	if(state == "forgetmenu"):
 		var encounterPools = GM.main.getDynamicCharactersPools()
@@ -283,10 +322,19 @@ func _react(_action: String, _args):
 	if(_action == "genderchancemenu"):
 		pickedGenderToChange = _args[0]
 	
+	if(_action == "specieschancemenu"):
+		pickedSpeciesToChange = _args[0]
+	
 	if(_action == "setgenderchance"):
 		GM.main.getEncounterSettings().setGenderWeight(_args[0], _args[1])
 		
 		setState("gendersmenu")
+		return	
+		
+	if(_action == "setspecieschance"):
+		GM.main.getEncounterSettings().setSpeciesWeight(_args[0], _args[1])
+		
+		setState("speciesmenu")
 		return
 	
 	setState(_action)
@@ -298,6 +346,7 @@ func saveData():
 	data["pickedFetishToChange"] = pickedFetishToChange
 	data["pickedPersonalityStat"] = pickedPersonalityStat
 	data["pickedGenderToChange"] = pickedGenderToChange
+	data["pickedSpeciesToChange"] = pickedSpeciesToChange
 
 	return data
 	
@@ -308,3 +357,4 @@ func loadData(data):
 	pickedFetishToChange = SAVE.loadVar(data, "pickedFetishToChange", "")
 	pickedPersonalityStat = SAVE.loadVar(data, "pickedPersonalityStat", "")
 	pickedGenderToChange = SAVE.loadVar(data, "pickedGenderToChange", "")
+	pickedSpeciesToChange = SAVE.loadVar(data, "pickedSpeciesToChange", "")

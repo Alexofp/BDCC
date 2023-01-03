@@ -37,8 +37,10 @@ func pickSpecies(character:DynamicCharacter, _args = {}):
 	var possible = []
 	for speciesID in allSpecies:
 		var specie = allSpecies[speciesID]
+		if(!specie.canBeUsedForNPCType(speciesType)):
+			continue
 		
-		var weight = specie.npcGenerationWeight(speciesType)
+		var weight = GM.main.getEncounterSettings().getSpeciesWeight(speciesID)
 		if(weight != null && weight > 0.0):
 			possible.append([speciesID, weight])
 	
