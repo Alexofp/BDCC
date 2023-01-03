@@ -3,12 +3,15 @@ extends SceneBase
 var pickedPoolToForget = ""
 var pickedFetishToChange = ""
 var pickedPersonalityStat = ""
+var pickedGenderToChange = ""
 
 func _init():
 	sceneID = "EncountersMenuScene"
 
 func _run():
 	if(state == ""):
+		var encounterSettings:EncounterSettings = GM.main.getEncounterSettings()
+		
 		saynn("This is a menu that contains info about your previous encounters.")
 		
 		var hasSomeoneToForget = false
@@ -23,7 +26,7 @@ func _run():
 			hasSomeoneToForget = true
 		sayn("")
 		
-		if(getFlag("PreferKnownEncounters")):
+		if(encounterSettings.doesPreferKnownEncounters()):
 			saynn("You prefer to encounter characters that you already saw.")
 		else:
 			saynn("You don't mind meeting new characters.")
@@ -32,6 +35,18 @@ func _run():
 			saynn("Your personality can dynamically change after sex.")
 		else:
 			saynn("Your personality will never change after sex.")
+		
+		sayn("Relative chances for the genders of encountered npcs:")
+		for gender in NpcGender.getAll():
+			var genderName = NpcGender.getVisibleNameColored(gender)
+			var extraInfo = ""
+			var genderExlanation = NpcGender.getGenderExplanation(gender)
+			if(genderExlanation != null):
+				extraInfo = " ("+str(genderExlanation)+")"
+			
+			var weight = encounterSettings.getGenderWeight(gender)
+			sayn(str(genderName)+": "+str(Util.roundF(weight*100.0, 1))+"%"+extraInfo)
+		sayn("")
 		
 		addButton("Back", "Close this menu", "endthescene")
 		
@@ -44,8 +59,34 @@ func _run():
 		addButton("Dynamic personality", "Change the way your personality changes after sex", "togglePersonalityChange")
 		addButton("My fetishes", "Menu that allows you to see and change your fetishes", "fetishmenu")
 		addButton("My personality", "Menu that allows you to see and change your personality", "personalitymenu")
+		addButton("Genders", "Pick the chances of the genders of the encountered npcs", "gendersmenu")
+
+	if(state == "gendersmenu"):
+		var encounterSettings:EncounterSettings = GM.main.getEncounterSettings()
+		addButton("Back", "Close this menu", "")
 		
-		
+		sayn("Relative chances for the genders of encountered npcs:")
+		for gender in NpcGender.getAll():
+			var genderName = NpcGender.getVisibleNameColored(gender)
+			var extraInfo = ""
+			var genderExlanation = NpcGender.getGenderExplanation(gender)
+			if(genderExlanation != null):
+				extraInfo = " ("+str(genderExlanation)+")"
+			
+			var weight = encounterSettings.getGenderWeight(gender)
+			sayn(str(genderName)+": "+str(Util.roundF(weight*100.0, 1))+"%"+extraInfo)
+			addButton(NpcGender.getVisibleName(gender), "Change the chance of this gender", "genderchancemenu", [gender])
+		sayn("")
+
+	if(state == "genderchancemenu"):
+		var gender = pickedGenderToChange
+		var encounterSettings:EncounterSettings = GM.main.getEncounterSettings()
+		saynn("The current chance for "+NpcGender.getVisibleNameColored(gender)+" is "+str(Util.roundF(encounterSettings.getGenderWeight(gender)*100.0, 1))+"%")
+
+		addButton("Back", "Go back to the previous menu", "gendersmenu")
+		addButton("Default", "Set back to default chance", "setgenderchance", [gender, -1.0])
+		for chance in [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]:
+			addButton(str(Util.roundF(chance*100.0))+"%", "Pick this chance", "setgenderchance", [gender, chance])
 
 	if(state == "forgetmenu"):
 		var encounterPools = GM.main.getDynamicCharactersPools()
@@ -175,7 +216,7 @@ func _react(_action: String, _args):
 		return
 	
 	if(_action == "toggleKnown"):
-		setFlag("PreferKnownEncounters", !getFlag("PreferKnownEncounters", false))
+		GM.main.getEncounterSettings().togglePreferKnownEcnounters()
 		return
 	
 	if(_action == "togglePersonalityChange"):
@@ -193,6 +234,15 @@ func _react(_action: String, _args):
 		setState("forgetmenupool")
 		return
 	
+	if(_action == "genderchancemenu"):
+		pickedGenderToChange = _args[0]
+	
+	if(_action == "setgenderchance"):
+		GM.main.getEncounterSettings().setGenderWeight(_args[0], _args[1])
+		
+		setState("gendersmenu")
+		return
+	
 	setState(_action)
 
 func saveData():
@@ -201,6 +251,7 @@ func saveData():
 	data["pickedPoolToForget"] = pickedPoolToForget
 	data["pickedFetishToChange"] = pickedFetishToChange
 	data["pickedPersonalityStat"] = pickedPersonalityStat
+	data["pickedGenderToChange"] = pickedGenderToChange
 
 	return data
 	
@@ -210,3 +261,4 @@ func loadData(data):
 	pickedPoolToForget = SAVE.loadVar(data, "pickedPoolToForget", "")
 	pickedFetishToChange = SAVE.loadVar(data, "pickedFetishToChange", "")
 	pickedPersonalityStat = SAVE.loadVar(data, "pickedPersonalityStat", "")
+	pickedGenderToChange = SAVE.loadVar(data, "pickedGenderToChange", "")

@@ -17,6 +17,7 @@ var overridenPC
 var originalPC
 var roomMemories = {}
 var rollbacker:Rollbacker
+var encounterSettings:EncounterSettings
 
 var staticCharacters = {}
 var charactersToUpdate = {}
@@ -29,6 +30,7 @@ signal saveLoadingFinished
 func _init():
 	rollbacker = Rollbacker.new()
 	flagsCache = Flag.getFlags()
+	encounterSettings = EncounterSettings.new()
 
 func overridePC():
 	if(overridenPC != null):
@@ -329,6 +331,7 @@ func saveData():
 	data["roomMemories"] = roomMemories
 	data["world"] = GM.world.saveData()
 	data["dynamicCharactersPools"] = dynamicCharactersPools
+	data["encounterSettings"] = encounterSettings.saveData()
 	
 	data["scenes"] = []
 	for scene in sceneStack:
@@ -354,6 +357,7 @@ func loadData(data):
 	logMessages = SAVE.loadVar(data, "logMessages", [])
 	roomMemories = SAVE.loadVar(data, "roomMemories", {})
 	dynamicCharactersPools = SAVE.loadVar(data, "dynamicCharactersPools", {})
+	encounterSettings.loadData(SAVE.loadVar(data, "encounterSettings", {}))
 	
 	var scenes = SAVE.loadVar(data, "scenes", [])
 	
@@ -983,3 +987,6 @@ func startUpdatingCharacter(charID):
 func generateCharacterID(beginPart = "dynamicnpc"):
 	var numID = GlobalRegistry.generateNPCUniqueID()
 	return beginPart+str(numID)
+
+func getEncounterSettings() -> EncounterSettings:
+	return encounterSettings

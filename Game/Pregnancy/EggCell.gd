@@ -9,7 +9,7 @@ var fatherID = ""
 var progress = 0.0
 var motherSpecies = []
 var resultSpecies = []
-var resultGender = ChildGender.Male
+var resultGender = NpcGender.Male
 
 signal readyForBirth(egg)
 
@@ -113,9 +113,9 @@ func impregnatedBy(newfatherID):
 		allowHybrids = false
 	
 	resultSpecies = SpeciesCompatibility.generateChildSpecies(motherSpecies, father.getSpecies(), allowHybrids)
-	resultGender = ChildGender.generate()
+	resultGender = NpcGender.generate()
 
-	print("EGGCELL IMPREGNATED BY "+str(newfatherID)+", species: "+str(resultSpecies)+", gender: "+ChildGender.getVisibleName(resultGender))
+	print("EGGCELL IMPREGNATED BY "+str(newfatherID)+", species: "+str(resultSpecies)+", gender: "+NpcGender.getVisibleName(resultGender))
 
 func tryImpregnate(whosCum, amountML, eggMultiplier = 1.0, virility = 1.0, fertility = 1.0, crossSpeciesCompatibility = 0.0):
 	if(!canImpregnate()):
@@ -164,4 +164,4 @@ func loadData(data):
 	progress = SAVE.loadVar(data, "progress", 0.0)
 	motherSpecies = SAVE.loadVar(data, "motherSpecies", ["feline"])
 	resultSpecies = SAVE.loadVar(data, "resultSpecies", [])
-	resultGender = SAVE.loadVar(data, "resultGender", ChildGender.Male)
+	resultGender = SAVE.loadVar(data, "resultGender", NpcGender.Male)

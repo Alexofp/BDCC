@@ -214,11 +214,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Game/Pregnancy/Child.gd"
 }, {
-"base": "Object",
-"class": "ChildGender",
-"language": "GDScript",
-"path": "res://Game/Pregnancy/ChildGender.gd"
-}, {
 "base": "Node",
 "class": "ChildSystem",
 "language": "GDScript",
@@ -273,6 +268,11 @@ _global_script_classes=[ {
 "class": "EggCell",
 "language": "GDScript",
 "path": "res://Game/Pregnancy/EggCell.gd"
+}, {
+"base": "Reference",
+"class": "EncounterSettings",
+"language": "GDScript",
+"path": "res://Game/SexEngine/EncounterSettings.gd"
 }, {
 "base": "LootTableBase",
 "class": "EngineerLoot",
@@ -588,6 +588,11 @@ _global_script_classes=[ {
 "class": "NpcGen",
 "language": "GDScript",
 "path": "res://Characters/Dynamic/NpcGen.gd"
+}, {
+"base": "Object",
+"class": "NpcGender",
+"language": "GDScript",
+"path": "res://Game/Pregnancy/NpcGender.gd"
 }, {
 "base": "Object",
 "class": "NpcRank",
@@ -1021,7 +1026,6 @@ _global_script_class_icons={
 "CharacterPool": "",
 "CharacterType": "",
 "Child": "",
-"ChildGender": "",
 "ChildSystem": "",
 "ContentType": "",
 "CumProduction": "",
@@ -1033,6 +1037,7 @@ _global_script_class_icons={
 "DollSkeleton": "",
 "DynamicCharacter": "",
 "EggCell": "",
+"EncounterSettings": "",
 "EngineerLoot": "",
 "EscapeQuest": "",
 "EventBase": "",
@@ -1096,6 +1101,7 @@ _global_script_class_icons={
 "NovaModule": "",
 "NpcCon": "",
 "NpcGen": "",
+"NpcGender": "",
 "NpcRank": "",
 "NurseGenerator": "",
 "Orifice": "",

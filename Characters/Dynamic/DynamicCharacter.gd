@@ -3,7 +3,7 @@ class_name DynamicCharacter
 
 var npcName = "BAD NAME"
 var npcSpecies = ["canine"]
-var npcGender = Gender.Male
+var npcGeneratedGender = NpcGender.Male
 var npcSmallDescription = "One of the generated characters"
 var npcThickness = 50
 var npcFeminity = 0
@@ -20,10 +20,10 @@ func _getName():
 	return npcName
 
 func getGender():
-	return npcGender
+	return NpcGender.toNormalGender(npcGeneratedGender)
 	
 func getPronounGender():
-	if(npcGender == Gender.Androgynous):
+	if(getGender() == Gender.Androgynous):
 		return Gender.Female
 	return getGender()
 	
@@ -105,7 +105,7 @@ func saveData():
 		"consciousness": consciousness,
 		"npcName": npcName,
 		"npcSpecies": npcSpecies,
-		"npcGender": npcGender,
+		"npcGeneratedGender": npcGeneratedGender,
 		"npcSmallDescription": npcSmallDescription,
 		"npcThickness": npcThickness,
 		"npcFeminity": npcFeminity,
@@ -151,6 +151,12 @@ func saveData():
 	return data
 
 func loadData(data):
+	var theNpcGender = SAVE.loadVar(data, "npcGender", null)
+	if(theNpcGender != null):
+		npcGeneratedGender = NpcGender.fromNormalGender(theNpcGender)
+	else:
+		npcGeneratedGender = SAVE.loadVar(data, "npcGeneratedGender", NpcGender.Male)
+	
 	npcLevel = SAVE.loadVar(data, "npcLevel", 0)
 	npcBasePain = SAVE.loadVar(data, "npcBasePain", 50)
 	pain = SAVE.loadVar(data, "pain", 0)
@@ -162,7 +168,6 @@ func loadData(data):
 	consciousness = SAVE.loadVar(data, "consciousness", 1.0)
 	npcName = SAVE.loadVar(data, "npcName", "Error")
 	npcSpecies = SAVE.loadVar(data, "npcSpecies", ["canine"])
-	npcGender = SAVE.loadVar(data, "npcGender", Gender.Male)
 	npcSmallDescription = SAVE.loadVar(data, "npcSmallDescription", "No description")
 	npcThickness = SAVE.loadVar(data, "npcThickness", 50)
 	npcFeminity = SAVE.loadVar(data, "npcFeminity", 50)

@@ -248,7 +248,7 @@ func printChildren(pcKids = true):
 		else:
 			ageStr = str(yearsOld)+" years "+ageStr
 		
-		var resultString = "[color="+ChildGender.getColorString(child.gender)+"]"+ ChildGender.getVisibleName(child.gender)+"[/color]"+" - "
+		var resultString = "[color="+NpcGender.getColorString(child.gender)+"]"+ NpcGender.getVisibleName(child.gender)+"[/color]"+" - "
 		resultString += Util.getSpeciesName(child.species)+" - "
 		resultString += ageStr+" - "
 		
@@ -278,7 +278,7 @@ func _react(_action: String, _args):
 				if(fatherObject != null):
 					fatherName = fatherObject.getName()
 				
-				bornChildString += "[color="+ChildGender.getColorString(child.gender)+"]"+ ChildGender.getVisibleName(child.gender)+"[/color]"+" - "+Util.getSpeciesName(child.species)+" - "+"Father: "+fatherName+"\n"
+				bornChildString += "[color="+NpcGender.getColorString(child.gender)+"]"+ NpcGender.getVisibleName(child.gender)+"[/color]"+" - "+Util.getSpeciesName(child.species)+" - "+"Father: "+fatherName+"\n"
 		processTime(60*60)
 		
 	if(_action == "endthescene"):

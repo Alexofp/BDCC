@@ -94,6 +94,28 @@ func getDefaultForSlot(slot, _gender):
 	
 	return null
 
+# A hackish method to tie together two gender types, sorry
+func getDefaultForSlotForNpcGender(slot, npcgender):
+	var normalGender = NpcGender.toNormalGender(npcgender)
+	
+	if(slot in [BodypartSlot.Penis]):
+		if(npcgender in [NpcGender.Peachboy]):
+			normalGender = Gender.Female
+		if(npcgender in [NpcGender.Herm, NpcGender.Shemale]):
+			normalGender = Gender.Male
+	if(slot in [BodypartSlot.Vagina]):
+		if(npcgender in [NpcGender.Peachboy, NpcGender.Herm]):
+			normalGender = Gender.Female
+		if(npcgender in [NpcGender.Shemale]):
+			normalGender = Gender.Male
+	if(slot in [BodypartSlot.Breasts]):
+		if(npcgender in [NpcGender.Shemale, NpcGender.Herm]):
+			normalGender = Gender.Female
+		if(npcgender in [NpcGender.Peachboy]):
+			normalGender = Gender.Male
+	
+	return getDefaultForSlot(slot, normalGender)
+
 # Allows to pick these bodyparts even if they're from another species. Useful for mods
 func getAllowedBodyparts():
 	return []
