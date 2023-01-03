@@ -3,6 +3,21 @@ class_name EncounterSettings
 
 var preferKnownEncounters:bool = false
 var genderWeights = {}
+var disabledGoalsForSubPC = []
+
+func isGoalDisabledForSubPC(goalID):
+	if(disabledGoalsForSubPC.has(goalID)):
+		return true
+	return false
+
+func disableGoalForSubPC(goalID):
+	if(disabledGoalsForSubPC.has(goalID)):
+		return
+	disabledGoalsForSubPC.append(goalID)
+
+func enableGoalForSubPC(goalID):
+	if(disabledGoalsForSubPC.has(goalID)):
+		disabledGoalsForSubPC.erase(goalID)
 
 func getGenderWeight(gender):
 	if(!genderWeights.has(gender)):
@@ -36,9 +51,11 @@ func saveData():
 	var data = {
 		"preferKnownEncounters": preferKnownEncounters,
 		"genderWeights": genderWeights,
+		"disabledGoalsForSubPC": disabledGoalsForSubPC,
 	}
 	return data
 
 func loadData(data):
 	preferKnownEncounters = SAVE.loadVar(data, "preferKnownEncounters", false)
 	genderWeights = SAVE.loadVar(data, "genderWeights", {})
+	disabledGoalsForSubPC = SAVE.loadVar(data, "disabledGoalsForSubPC", [])

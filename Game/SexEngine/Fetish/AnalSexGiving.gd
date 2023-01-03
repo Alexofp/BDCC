@@ -4,7 +4,7 @@ func _init():
 	id = Fetish.AnalSexGiving
 
 func getVisibleName():
-	return "Anal sex (Giving)"
+	return "Anal sex (Top)"
 
 func getGoals(_sexEngine, _dom, _sub):
 	var possible = []

@@ -48,6 +48,21 @@ func _run():
 			sayn(str(genderName)+": "+str(Util.roundF(weight*100.0, 1))+"%"+extraInfo)
 		sayn("")
 		
+		sayn("Things that npcs won't do to you:")
+		var disabledGoalsNames = []
+		var allGoals = GlobalRegistry.getSexGoals()
+		for goalID in allGoals:
+			if(encounterSettings.isGoalDisabledForSubPC(goalID)):
+				var goal: SexGoalBase = GlobalRegistry.getSexGoal(goalID)
+				if(goal == null):
+					continue
+				
+				disabledGoalsNames.append(goal.getVisibleName())
+		if(disabledGoalsNames.size() == 0):
+			saynn("- Nothing is disabled")
+		else:
+			saynn(Util.humanReadableList(disabledGoalsNames))
+		
 		addButton("Back", "Close this menu", "endthescene")
 		
 		if(hasSomeoneToForget):
@@ -60,6 +75,29 @@ func _run():
 		addButton("My fetishes", "Menu that allows you to see and change your fetishes", "fetishmenu")
 		addButton("My personality", "Menu that allows you to see and change your personality", "personalitymenu")
 		addButton("Genders", "Pick the chances of the genders of the encountered npcs", "gendersmenu")
+		addButton("Restrictions", "Pick what things you don't want to happen to you in sex", "goalsmenu")
+
+	if(state == "goalsmenu"):
+		var encounterSettings:EncounterSettings = GM.main.getEncounterSettings()
+		addButton("Back", "Close this menu", "")
+		
+		sayn("Things that npcs won't do to you:")
+		var disabledGoalsNames = []
+		var allGoals = GlobalRegistry.getSexGoals()
+		for goalID in allGoals:
+			var goal: SexGoalBase = GlobalRegistry.getSexGoal(goalID)
+			if(goal == null):
+				continue
+			
+			if(encounterSettings.isGoalDisabledForSubPC(goalID)):
+				disabledGoalsNames.append(goal.getVisibleName())
+				addButton("+"+goal.getVisibleName(), "Enable this", "enablegoalforpc", [goalID])
+			else:
+				addButton("-"+goal.getVisibleName(), "Disable this", "disablegoalforpc", [goalID])
+		if(disabledGoalsNames.size() == 0):
+			saynn("- Nothing is disabled")
+		else:
+			saynn(Util.humanReadableList(disabledGoalsNames))
 
 	if(state == "gendersmenu"):
 		var encounterSettings:EncounterSettings = GM.main.getEncounterSettings()
@@ -194,6 +232,14 @@ func _run():
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
 		endScene()
+		return
+		
+	if(_action == "enablegoalforpc"):
+		GM.main.getEncounterSettings().enableGoalForSubPC(_args[0])
+		return
+	
+	if(_action == "disablegoalforpc"):
+		GM.main.getEncounterSettings().disableGoalForSubPC(_args[0])
 		return
 	
 	if(_action == "changefetish"):

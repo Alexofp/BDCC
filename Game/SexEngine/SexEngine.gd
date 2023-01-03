@@ -246,6 +246,10 @@ func generateGoals():
 			var goalsToAdd = dom.getFetishHolder().getGoals(self, sub)
 			if(goalsToAdd != null):
 				for goal in goalsToAdd:
+					if(subID == "pc"):
+						if(GM.main.getEncounterSettings().isGoalDisabledForSubPC(goal[0])):
+							continue
+					
 					var sexGoal:SexGoalBase = GlobalRegistry.getSexGoal(goal[0])
 					var goalData = sexGoal.generateData(self, personDomInfo, personSubInfo)
 					
