@@ -1,5 +1,5 @@
 {
-	"dateString": "24 of Dec 2022",
+	"dateString": "03 of Jan 2023",
 	"entries": {
 		"$1.00": [
 			{
@@ -18,10 +18,10 @@
 				"nickname": "Maxtacks"
 			},
 			{
-				"nickname": "Kyle Oran Evans "
+				"nickname": "Zeneroth"
 			},
 			{
-				"nickname": "Zeneroth"
+				"nickname": "Kyle Oran Evans "
 			},
 			{
 				"nickname": "kogost"
@@ -30,13 +30,13 @@
 				"nickname": "Shadowwall123"
 			},
 			{
-				"nickname": "Lichity"
+				"nickname": "VØID"
 			},
 			{
 				"nickname": "User#be3a0c02"
 			},
 			{
-				"nickname": "VØID"
+				"nickname": "Lichity"
 			},
 			{
 				"nickname": "Tristan Leo Roberts "
@@ -49,6 +49,15 @@
 			},
 			{
 				"nickname": "BarryRkls"
+			},
+			{
+				"nickname": "User#2bd8af92"
+			},
+			{
+				"nickname": "User#871f7d52"
+			},
+			{
+				"nickname": "WonderLlama2008"
 			}
 		],
 		"$10.00": [
@@ -56,28 +65,31 @@
 				"nickname": "Shadowfaux"
 			},
 			{
-				"nickname": "Meepyneepy"
+				"nickname": "Sami"
 			},
 			{
-				"nickname": "Sami"
+				"nickname": "Meepyneepy"
 			},
 			{
 				"nickname": "Loch55"
 			},
 			{
-				"nickname": "Silver_Bloke"
-			},
-			{
 				"nickname": "Wyvernclaw00"
 			},
 			{
-				"nickname": "Masaki Akira"
+				"nickname": "User#d45e8eac"
+			},
+			{
+				"nickname": "Silver_Bloke"
 			},
 			{
 				"nickname": "IzzenXAZ"
 			},
 			{
-				"nickname": "User#d45e8eac"
+				"nickname": "Masaki Akira"
+			},
+			{
+				"nickname": "User#2242146d"
 			}
 		],
 		"$5.00": [
@@ -85,10 +97,10 @@
 				"nickname": "MaxMaxouCat"
 			},
 			{
-				"nickname": "Feltenix"
+				"nickname": "SilverZeb"
 			},
 			{
-				"nickname": "SilverZeb"
+				"nickname": "Feltenix"
 			},
 			{
 				"nickname": "User#b2c4ffed"
@@ -106,5 +118,5 @@
 		"$5.00",
 		"$1.00"
 	],
-	"unixTime": 1671874512
+	"unixTime": 1672733384
 }
