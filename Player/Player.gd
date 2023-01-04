@@ -700,15 +700,6 @@ func getOutsideMessinessFluidList():
 			myfluids.append(bodyFluidData[1])
 	return myfluids
 
-func getPenisSize():
-	if(!hasBodypart(BodypartSlot.Penis)):
-		return 0.0
-	
-	var bodypart = getBodypart(BodypartSlot.Penis)
-	return bodypart.getLength()
-
-
-
 func getInmateNumber():
 	return inmateNumber
 

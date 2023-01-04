@@ -35,6 +35,7 @@ func getPrice():
 
 func getTags():
 	return [
+		ItemTag.Strapon,
 		]
 
 #func generateItemState():
@@ -60,3 +61,15 @@ func shouldBeVisibleOnDoll(_character, _doll):
 func updateDoll(doll: Doll3D):
 	doll.setPenisScale(1.0)
 	doll.setBallsScale(1.0)
+
+func getStraponLength():
+	return 20.0
+
+func getStraponPleasureForDom():
+	return 0.1
+
+func onSexEnd():
+	destroyMe()
+
+func getPutOnScene():
+	return "StraponPutOnScene"

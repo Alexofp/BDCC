@@ -10,6 +10,7 @@ enum {
 	SoldByMedicalVendomat,
 	SoldByUnderwearVendomat,
 	ChastityCage,
+	Strapon,
 	
 	GuardUniform,
 	NurseUniform,

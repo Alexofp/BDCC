@@ -416,3 +416,8 @@ func getItemCategory():
 		return ItemCategory.Clothes
 	
 	return ItemCategory.Generic
+
+func isRemoved():
+	if(itemState == null):
+		return false
+	return itemState.isRemoved()

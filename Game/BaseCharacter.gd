@@ -542,12 +542,10 @@ func verbS(verbWithNoS, verbWithS = null):
 		return verbWithS
 
 func getPenisSizeString() -> String:
-	if(!hasBodypart(BodypartSlot.Penis)):
+	if(!hasBodypart(BodypartSlot.Penis) && !isWearingStrapon()):
 		return "ERROR:NO_PENIS"
 	
-	var penis = getBodypart(BodypartSlot.Penis)
-	var size = penis.getLength()
-	return Util.cmToString(size)
+	return Util.cmToString(getPenisSize())
 
 func getInventory() -> Inventory:
 	return inventory
@@ -648,6 +646,10 @@ func getBodypartTooltipInfo(_bodypartSlot):
 	return "error"
 
 func getPenisSize():
+	var strapon = getWornStrapon()
+	if(strapon != null):
+		return strapon.getStraponLength()
+	
 	if(!hasBodypart(BodypartSlot.Penis)):
 		return 20.0
 	
@@ -1582,7 +1584,7 @@ func addConsciousness(newc:float):
 	consciousness = clamp(consciousness, 0.0, 1.0)
 
 func isReadyToPenetrate() -> bool:
-	return getLustLevel() >= 0.5 || getLust() >= 50 || getArousal() >= 0.4
+	return getLustLevel() >= 0.5 || getLust() >= 50 || getArousal() >= 0.4 || isWearingStrapon()
 
 func isWearingChastityCage() -> bool:
 	# Having a chastity cage also means that you have a penis
@@ -1776,3 +1778,13 @@ func getBodypartLewdDescriptionAndNameWithA(bodypartSlot):
 
 func isDynamicCharacter():
 	return false
+
+func isWearingStrapon():
+	return getWornStrapon() != null
+
+func getWornStrapon():
+	if(getInventory().hasSlotEquipped(InventorySlot.UnderwearBottom)):
+		var item = getInventory().getEquippedItem(InventorySlot.UnderwearBottom)
+		if(item.hasTag(ItemTag.Strapon)):
+			return item
+	return null

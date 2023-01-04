@@ -11,3 +11,6 @@ func getGoals(_sexEngine, _dom, _sub):
 
 func isPossibleFor(_character):
 	return true
+
+func getInitialInterest(_character):
+	return FetishInterest.Likes

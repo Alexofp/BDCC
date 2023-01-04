@@ -827,6 +827,22 @@ func endSex():
 	sexEnded = true
 	var texts = ["The sex scene has ended!"]
 	
+	if(trackedItems.has("pc")):
+		for trackedItem in trackedItems["pc"]:
+			var character:BaseCharacter = GlobalRegistry.getCharacter(trackedItem[0])
+			var item:ItemBase = character.getInventory().getItemByUniqueID(trackedItem[1])
+			if(item == null):
+				continue
+			character.getInventory().removeItem(item)
+			character.getInventory().removeEquippedItem(item)
+			var restraintData:RestraintData = item.getRestraintData()
+			if(restraintData != null):
+				restraintData.onStruggleRemoval()
+			
+			GM.pc.getInventory().addItem(item)
+			GM.main.addMessage("You recovered "+item.getAStackName())
+	trackedItems.erase("pc")
+	
 	for domID in doms:
 		var domInfo = doms[domID]
 		
@@ -846,22 +862,6 @@ func endSex():
 		if(sexEndInfo.size() > 0):
 			texts.append(subInfo.getChar().getName()+":")
 			texts.append(Util.join(sexEndInfo, "\n"))
-
-	if(trackedItems.has("pc")):
-		for trackedItem in trackedItems["pc"]:
-			var character:BaseCharacter = GlobalRegistry.getCharacter(trackedItem[0])
-			var item:ItemBase = character.getInventory().getItemByUniqueID(trackedItem[1])
-			if(item == null):
-				continue
-			character.getInventory().removeItem(item)
-			character.getInventory().removeEquippedItem(item)
-			var restraintData:RestraintData = item.getRestraintData()
-			if(restraintData != null):
-				restraintData.onStruggleRemoval()
-			
-			GM.pc.getInventory().addItem(item)
-			GM.main.addMessage("You recovered "+item.getAStackName())
-	trackedItems.erase("pc")
 
 	messages.append(Util.join(texts, "\n"))
 
@@ -930,6 +930,15 @@ func addTrackedGear(ownerID, whoWearsItID, itemUniqueID):
 		trackedItems[ownerID] = []
 	
 	trackedItems[ownerID].append([whoWearsItID, itemUniqueID])
+
+func checkGearIsFromPC(whoWearsItID, itemUniqueID):
+	if(!trackedItems.has("pc")):
+		return false
+	
+	for trackedData in trackedItems["pc"]:
+		if(trackedData[0] == whoWearsItID && trackedData[1] == itemUniqueID):
+			return true
+	return false
 
 func getCurrentActivitiesMaxSubOrgasmHandlePriority(domID, subID):
 	var maxResult = -1

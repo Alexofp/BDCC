@@ -89,3 +89,10 @@ func loadData(data):
 	var newfetishMap = SAVE.loadVar(data, "fetishMap", null)
 	if(newfetishMap != null && (newfetishMap is Dictionary)):
 		fetishMap = newfetishMap
+	
+	# Adds missing fetishes
+	var thechar = getCharacter()
+	if(thechar != null && !thechar.isDynamicCharacter()):
+		for fetishID in GlobalRegistry.getFetishes():
+			if(!fetishMap.has(fetishID)):
+				fetishMap[fetishID] = GlobalRegistry.getFetish(fetishID).getInitialInterest(thechar)
