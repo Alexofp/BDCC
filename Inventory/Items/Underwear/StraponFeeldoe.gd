@@ -20,3 +20,6 @@ func getRiggedParts(_character):
 
 func getStraponPleasureForDom():
 	return 0.5
+
+func getCasualName():
+	return "feeldoe strapon"

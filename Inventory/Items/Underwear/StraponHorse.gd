@@ -20,3 +20,6 @@ func getRiggedParts(_character):
 
 func getStraponLength():
 	return 30.0
+
+func getCasualName():
+	return "giant horsecock strapon"

@@ -73,3 +73,6 @@ func onSexEnd():
 
 func getPutOnScene():
 	return "StraponPutOnScene"
+
+func getCasualName():
+	return "strapon"

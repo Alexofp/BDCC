@@ -93,7 +93,7 @@ func startActivity(_args):
 		getDom().getInventory().equipItem(straponItem)
 		
 		return {
-			text = "{dom.You} {dom.youVerb('put')} a strapon.",
+			text = "{dom.You} {dom.youVerb('put')} on a "+straponItem.getCasualName()+".",
 			#domSay = domReaction(SexReaction.DomPutsOnACondom),
 		}
 	
@@ -107,6 +107,6 @@ func startActivity(_args):
 		getSub().getInventory().equipItem(straponItem)
 		
 		return {
-			text = "{dom.You} {dom.youVerb('put')} a strapon on {sub.your}.",
+			text = "{dom.You} {dom.youVerb('put')} on a "+straponItem.getCasualName()+" on {sub.your}.",
 			#domSay = domReaction(SexReaction.DomPutsOnACondomOnSub),
 		}

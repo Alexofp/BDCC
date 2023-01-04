@@ -17,3 +17,6 @@ func getRiggedParts(_character):
 	return {
 		"panties": "res://Inventory/RiggedModels/Strapons/DragoncockStrapon.tscn",
 	}
+
+func getCasualName():
+	return "ribbed strapon"
