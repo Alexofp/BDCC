@@ -24,13 +24,13 @@ func getTakeOffScene():
 	return "RestraintTakeOffNopeScene"
 
 func getPrice():
-	return 0
+	return 10
 
 func canSell():
 	return true
 
 func getTags():
-	return [ItemTag.BDSMRestraint, ItemTag.CanBeForcedByGuards, ItemTag.ChastityCage]
+	return [ItemTag.BDSMRestraint, ItemTag.CanBeForcedByGuards, ItemTag.ChastityCage, ItemTag.SoldByTheAnnouncer]
 
 func isRestraint():
 	return true

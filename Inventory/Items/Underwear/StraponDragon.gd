@@ -20,3 +20,6 @@ func getRiggedParts(_character):
 
 func getCasualName():
 	return "ribbed strapon"
+
+func getPrice():
+	return 20

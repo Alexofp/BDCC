@@ -8,6 +8,7 @@ func getFlags():
 		"BulldogBeatenUp": flag(FlagType.Bool),
 		"BulldogBypassed": flag(FlagType.Bool),
 		"AnnouncerIntroduced": flag(FlagType.Bool),
+		"AnnouncerAskedAboutShop": flag(FlagType.Bool),
 		"AvyIntroduced": flag(FlagType.Bool),
 		"FightClubPCRank": flag(FlagType.Text),
 		"FightClubDefeatedFighters": flag(FlagType.Dict),

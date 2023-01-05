@@ -23,3 +23,6 @@ func getStraponLength():
 
 func getCasualName():
 	return "giant horsecock strapon"
+
+func getPrice():
+	return 50

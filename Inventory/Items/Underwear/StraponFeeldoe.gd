@@ -7,7 +7,7 @@ func getVisibleName():
 	return "Strapon (feeldoe)"
 	
 func getDescription():
-	var text = "A strapon with a knot"
+	var text = "A double-sided strapon with a knot. Also brings pleasure to the wearer during sex"
 
 	return text
 
@@ -23,3 +23,6 @@ func getStraponPleasureForDom():
 
 func getCasualName():
 	return "feeldoe strapon"
+
+func getPrice():
+	return 30

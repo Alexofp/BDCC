@@ -9,6 +9,7 @@ enum {
 	SoldByGeneralVendomat,
 	SoldByMedicalVendomat,
 	SoldByUnderwearVendomat,
+	SoldByTheAnnouncer,
 	ChastityCage,
 	Strapon,
 	

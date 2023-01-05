@@ -22,4 +22,5 @@ func canCombine():
 func getTags():
 	return [
 		ItemTag.SoldByGeneralVendomat,
+		ItemTag.SoldByTheAnnouncer,
 		]

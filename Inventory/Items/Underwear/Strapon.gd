@@ -7,7 +7,7 @@ func getVisibleName():
 	return "Strapon"
 	
 func getDescription():
-	var text = "A strapon"
+	var text = "A strapon that can be used during sex. Can wear it only if you don't have a dick already"
 
 	return text
 
@@ -31,11 +31,12 @@ func getPuttingOnStringLong(withS):
 		return "put on the strapon"
 
 func getPrice():
-	return 20
+	return 10
 
 func getTags():
 	return [
 		ItemTag.Strapon,
+		ItemTag.SoldByTheAnnouncer,
 		]
 
 #func generateItemState():
