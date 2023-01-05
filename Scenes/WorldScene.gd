@@ -38,7 +38,7 @@ func _run():
 	addButtonAt(9, "Me", "Shows actions related to you and also your personal information", "me")
 	addButtonAt(13, "Tasks", "Look at your tasks", "tasks")
 	addButtonAt(14, "Inventory", "Look at your inventory", "inventory")
-	addButtonAt(5, "Sex Test", "Sex test", "sextest")
+	#addButtonAt(5, "Sex Test", "Sex test", "sextest")
 	
 	_roomInfo._onPreEnter()
 	setLocationName(_roomInfo.getName())
@@ -86,8 +86,8 @@ func _react(_action: String, _args):
 	if(_action == "me"):
 		runScene("MeScene")
 	if(_action == "sextest"):
-		#runScene("GenericSexScene", ["pc", "rahi"])
-		runScene("GenericSexScene", ["rahi", "pc"])
+		runScene("GenericSexScene", ["pc", "rahi"])
+		#runScene("GenericSexScene", ["rahi", "pc"])
 		#if(RNG.chance(50)):
 		#	runScene("GenericSexScene", ["nova", "pc"])
 		#else:

@@ -755,6 +755,8 @@ func getDomOrgasmHandlePriority():
 	return 10
 
 func getSubOrgasmHandlePriority():
+	if(isStraponSex()):
+		return 10
 	return 5
 
 func saveData():

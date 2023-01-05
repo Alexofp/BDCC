@@ -20,7 +20,7 @@ func getStartActions(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexS
 	var domTakeOffScore = 1.0 - getActivityScoreCustomGoals({SexGoal.StraponVaginal: 1.0, SexGoal.StraponAnal: 1.0}, _sexEngine, _domInfo, _subInfo)
 	var subTakeOffScore = 1.0 - getActivityScoreCustomGoals({SexGoal.ReceiveStraponVaginal: 1.0, SexGoal.ReceiveStraponAnal: 1.0}, _sexEngine, _domInfo, _subInfo)
 	
-	if(!_sexEngine.hasTag(_domInfo.charID, SexActivityTag.HavingSex) && dom.isWearingStrapon()):
+	if(!_sexEngine.hasTag(_domInfo.charID, SexActivityTag.PenisUsed) && dom.isWearingStrapon()):
 		actions.append({
 			name = "Take off strapon",
 			desc = "Take off your strapon",
@@ -28,7 +28,7 @@ func getStartActions(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexS
 			score = domTakeOffScore,
 			category = ["Undress"],
 		})
-	if(!_sexEngine.hasTag(_subInfo.charID, SexActivityTag.HavingSex) && sub.isWearingStrapon()):
+	if(!_sexEngine.hasTag(_subInfo.charID, SexActivityTag.PenisUsed) && sub.isWearingStrapon()):
 		actions.append({
 			name = "Take off sub strapon",
 			desc = "Take off sub's strapon",

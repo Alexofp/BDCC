@@ -6,10 +6,13 @@ func _init():
 func getVisibleName():
 	return "Strapon sex (Vaginal)"
 
-func getGoals(_sexEngine, _dom, _sub):
+func getGoals(_sexEngine, _domFetishHolder, _dom, _sub):
 	var possible = []
 	
 	possible.append(SexGoal.StraponVaginal)
+	
+	if(_domFetishHolder.getFetishValue(Fetish.VaginalSexReceiving) >= 0.0):
+		possible.append(SexGoal.ReceiveStraponVaginal)
 	
 	return possible
 

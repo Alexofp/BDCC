@@ -56,6 +56,7 @@ filter_enabled = true
 filters = [ "Doll3D/Skeleton:Penis2", "Doll3D/Skeleton:Penis3" ]
 
 [sub_resource type="AnimationNodeBlendTree" id=27]
+graph_offset = Vector2( -117, -67 )
 nodes/Animation/node = SubResource( 25 )
 nodes/Animation/position = Vector2( 140, 60 )
 "nodes/Animation 2/node" = SubResource( 24 )
@@ -116,10 +117,10 @@ states/Sex_Oral_1-loop/node = SubResource( 27 )
 states/Sex_Oral_1-loop/position = Vector2( 217, 123 )
 transitions = [ "Sex_OralTease_1-loop", "Sex_Oral_1-loop", SubResource( 38 ), "Sex_Oral_1-loop", "Sex_OralTease_1-loop", SubResource( 39 ), "Sex_Oral_1-loop", "Sex_OralFast_1-loop", SubResource( 40 ), "Sex_OralFast_1-loop", "Sex_Oral_1-loop", SubResource( 41 ), "Sex_OralStart_1-loop", "Sex_OralTease_1-loop", SubResource( 51 ), "Sex_OralTease_1-loop", "Sex_OralStart_1-loop", SubResource( 52 ), "Sex_OralStart_1-loop", "Sex_OralPussy_1-loop", SubResource( 53 ), "Sex_OralPussy_1-loop", "Sex_OralStart_1-loop", SubResource( 54 ), "Sex_OralGrind_1-loop", "Sex_OralStart_1-loop", SubResource( 55 ), "Sex_OralStart_1-loop", "Sex_OralGrind_1-loop", SubResource( 56 ), "Sex_OralPussy_1-loop", "Sex_OralGrind_1-loop", SubResource( 57 ), "Sex_OralGrind_1-loop", "Sex_OralPussy_1-loop", SubResource( 58 ) ]
 start_node = "Sex_OralStart_1-loop"
-graph_offset = Vector2( -287, -109 )
+graph_offset = Vector2( -214, -172 )
 
 [sub_resource type="AnimationNodeBlendTree" id=29]
-graph_offset = Vector2( -26, 83 )
+graph_offset = Vector2( -190, -71 )
 nodes/Animation/node = SubResource( 3 )
 nodes/Animation/position = Vector2( 140, 280 )
 nodes/CuffsBlend/node = SubResource( 4 )
@@ -234,7 +235,7 @@ tree_root = SubResource( 29 )
 anim_player = NodePath("../Doll3D/DollSkeleton/AnimationPlayer")
 parameters/CuffsBlend/blend_amount = 0
 parameters/StateMachine/playback = SubResource( 22 )
-parameters/StateMachine/Sex_OralFast_1-loop/Blend2/blend_amount = 0
+parameters/StateMachine/Sex_OralFast_1-loop/Blend2/blend_amount = 0.58
 parameters/StateMachine/Sex_Oral_1-loop/Blend2/blend_amount = 0.58
 
 [node name="AnimationTree2" type="AnimationTree" parent="." index="4"]

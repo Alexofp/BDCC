@@ -6,7 +6,7 @@ func _init():
 func getVisibleName():
 	return "Oral sex (Performing)"
 
-func getGoals(_sexEngine, _dom, _sub):
+func getGoals(_sexEngine, _domFetishHolder, _dom, _sub):
 	var possible = [SexGoal.DoOralOnSub]
 	
 	return possible

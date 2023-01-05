@@ -18,8 +18,8 @@ func getStartActions(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexS
 	var actions = []
 	
 	var allStraponIds = GlobalRegistry.getItemIDsByTag(ItemTag.Strapon)
-	var putOnDomScore = getActivityScoreCustomGoals({SexGoal.StraponVaginal: 0.5, SexGoal.StraponAnal: 0.5}, _sexEngine, _domInfo, _subInfo)
-	var putOnSubScore = getActivityScoreCustomGoals({SexGoal.ReceiveStraponVaginal: 0.5, SexGoal.ReceiveStraponAnal: 0.5}, _sexEngine, _domInfo, _subInfo)
+	var putOnDomScore = getActivityScoreCustomGoals({SexGoal.StraponVaginal: 1.0, SexGoal.StraponAnal: 1.0}, _sexEngine, _domInfo, _subInfo) / float(allStraponIds.size())
+	var putOnSubScore = getActivityScoreCustomGoals({SexGoal.ReceiveStraponVaginal: 1.0, SexGoal.ReceiveStraponAnal: 1.0}, _sexEngine, _domInfo, _subInfo) / float(allStraponIds.size())
 	
 	if(!dom.hasPenis() && !dom.getInventory().hasSlotEquipped(InventorySlot.UnderwearBottom) && dom.getFirstItemThatCoversBodypart(BodypartSlot.Penis) == null):
 		if(dom.isPlayer()):
@@ -73,7 +73,7 @@ func getCategory():
 	return ["Wear"]
 
 func getDomTags():
-	return [SexActivityTag.HandsUsed]
+	return [SexActivityTag.HandsUsed, SexActivityTag.VaginaPenetrated, SexActivityTag.AnusPenetrated]
 
 func getSubTags():
 	return []
@@ -107,6 +107,6 @@ func startActivity(_args):
 		getSub().getInventory().equipItem(straponItem)
 		
 		return {
-			text = "{dom.You} {dom.youVerb('put')} on a "+straponItem.getCasualName()+" on {sub.your}.",
+			text = "{dom.You} {dom.youVerb('force')} a "+straponItem.getCasualName()+" on {sub.you}.",
 			#domSay = domReaction(SexReaction.DomPutsOnACondomOnSub),
 		}
