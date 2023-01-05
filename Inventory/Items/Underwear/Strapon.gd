@@ -12,7 +12,7 @@ func getDescription():
 	return text
 
 func getClothingSlot():
-	return InventorySlot.UnderwearBottom
+	return InventorySlot.Strapon
 
 func getBuffs():
 	return [

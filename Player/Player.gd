@@ -3,6 +3,8 @@ class_name Player
 
 
 signal location_changed(newloc)
+signal holePainfullyStretched(bodypart, who)
+signal gotWoundedBy(who)
 
 var gamename = "Player"
 var credits:int = 0
@@ -585,6 +587,9 @@ func afterSleeping():
 	for item in getInventory().getEquppedRestraints():
 		item.getRestraintData().resetOnNewDay()
 	
+	for statusEffectID in statusEffects:
+		statusEffects[statusEffectID].onSleeping()
+	
 	if(isPregnant() && getPregnancyProgress() <= 0.5 && RNG.chance(30)):
 		GM.main.addLogMessage("Nausea", "You wake up and feel kinda nauseous.")
 		addEffect(StatusEffect.PregnancySickness)
@@ -964,3 +969,21 @@ func personalityChangesAfterSex():
 
 func getCharacterType():
 	return CharacterType.Inmate
+
+func doPainfullyStretchHole(_bodypart, _who = "pc"):
+	if(_bodypart == BodypartSlot.Vagina):
+		if(hasEffect(StatusEffect.LubedUp)):
+			return
+		
+		addEffect(StatusEffect.StretchedPainfullyPussy, [1])
+		emit_signal("holePainfullyStretched", _bodypart, _who)
+	if(_bodypart == BodypartSlot.Anus):
+		if(hasEffect(StatusEffect.LubedUp)):
+			return
+		
+		addEffect(StatusEffect.StretchedPainfullyAnus, [1])
+		emit_signal("holePainfullyStretched", _bodypart, _who)
+
+func doWound(_who = "pc"):
+	addEffect(StatusEffect.Wounded, [1])
+	emit_signal("gotWoundedBy", _who)

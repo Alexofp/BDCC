@@ -1783,8 +1783,14 @@ func isWearingStrapon():
 	return getWornStrapon() != null
 
 func getWornStrapon():
-	if(getInventory().hasSlotEquipped(InventorySlot.UnderwearBottom)):
-		var item = getInventory().getEquippedItem(InventorySlot.UnderwearBottom)
+	if(getInventory().hasSlotEquipped(InventorySlot.Strapon)):
+		var item = getInventory().getEquippedItem(InventorySlot.Strapon)
 		if(item.hasTag(ItemTag.Strapon)):
 			return item
 	return null
+
+func doPainfullyStretchHole(_bodypart, _who = "pc"):
+	pass
+
+func doWound(_who = "pc"):
+	pass

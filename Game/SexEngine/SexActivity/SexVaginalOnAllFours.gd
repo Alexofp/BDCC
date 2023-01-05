@@ -329,6 +329,7 @@ func doDomAction(_id, _actionInfo):
 				affectDom(domInfo.fetishScore({fetishGiving: 1.0}), 0.05*domSensetivity(), -0.01)
 				subInfo.addArousalForeplay(0.05)
 				domInfo.addArousalForeplay(0.05*domSensetivity())
+				
 				return {text = text}
 			else:
 				gonnaCumOutside = false
@@ -349,6 +350,12 @@ func doDomAction(_id, _actionInfo):
 				elif(usedBodypart == BodypartSlot.Vagina && getSub().getInventory().hasSlotEquipped(InventorySlot.Vagina)):
 					var item = getSub().getInventory().getEquippedItem(InventorySlot.Vagina)
 					text = "{dom.You} temporary {dom.youVerb('take')} out "+str(item.getAStackName())+" out of {sub.your} pussy. "+text
+				
+				var freeRoom = getSub().getPenetrationFreeRoomBy(usedBodypart, domID)
+				var chanceToPain = -freeRoom * 2.0
+				if(RNG.chance(chanceToPain) || (domInfo.isAngry() && RNG.chance(20))):
+					getSub().doPainfullyStretchHole(usedBodypart, domID)
+				
 				return {text = text}
 	if(_id == "switchhole"):
 		switchCurrentActivityTo(switchHoleActivity)
@@ -374,6 +381,11 @@ func doDomAction(_id, _actionInfo):
 		var knotSuccess = false
 		#var isTryingToKnot = false
 		if(_id == "knotinside"):
+			var freeRoom = getSub().getPenetrationFreeRoomBy(usedBodypart, domID)
+			var chanceToPain = -freeRoom * 5.0
+			if(RNG.chance(chanceToPain) || (domInfo.isAngry() && RNG.chance(10))):
+				getSub().doPainfullyStretchHole(usedBodypart, domID)
+			
 			#isTryingToKnot = true
 			getSub().gotOrificeStretchedBy(usedBodypart, domID, 0.5)
 			if(RNG.chance(getSub().getPenetrateChanceBy(usedBodypart, domID))):

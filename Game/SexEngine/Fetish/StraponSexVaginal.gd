@@ -17,6 +17,6 @@ func getGoals(_sexEngine, _domFetishHolder, _dom, _sub):
 	return possible
 
 func isPossibleFor(_character):
-	if(_character.hasPenis()):
-		return false
+	#if(_character.hasPenis()):
+	#	return false
 	return true

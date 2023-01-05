@@ -31,6 +31,9 @@ func processBattleTurn():
 func processSexTurn():
 	pass
 	
+func onSleeping():
+	pass
+	
 func processTime(_secondsPassed: int):
 	pass
 

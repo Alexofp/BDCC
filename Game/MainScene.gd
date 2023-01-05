@@ -71,6 +71,8 @@ func connectSignalsToPC(who):
 	_s = who.connect("exchangedCumDuringRubbing", self, "_on_Player_exchangedCumDuringRubbing")
 	_s = who.connect("skillLevelChanged", self, "_on_Player_skillLevelChanged")
 	_s = who.connect("stat_changed", $GameUI, "_on_Player_stat_changed")
+	_s = who.connect("holePainfullyStretched", self, "_on_Player_holePinafullyStretched")
+	_s = who.connect("gotWoundedBy", self, "_on_Player_gotWoundedBy")
 
 func _exit_tree():
 	GM.main = null
@@ -659,6 +661,15 @@ func _on_Player_orificeBecomeMoreLoose(orificeName, _newvalue, _oldvalue):
 
 func _on_Player_exchangedCumDuringRubbing(senderName, receiverName):
 	addMessage(receiverName + " stole some cum from "+senderName+" during tribbing")
+
+func _on_Player_holePinafullyStretched(bodypart, _who):
+	if(bodypart == BodypartSlot.Vagina):
+		addMessage("OW! Your pussy [b]hurts[/b]..")
+	if(bodypart == BodypartSlot.Anus):
+		addMessage("OW! Your anus [b]hurts[/b]..")
+
+func _on_Player_gotWoundedBy(_who):
+	addMessage("OW! That [b]really[/b] hurt..")
 
 func getRandomSceneFor(sceneType):
 	var resultScenes = []

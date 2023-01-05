@@ -15,6 +15,11 @@ const SexEnginePersonality = "SexEnginePersonality"
 const SexHeatDrug = "SexHeatDrug"
 const SexAnaphrodisiacDrug = "SexAnaphrodisiacDrug"
 
+# Painful effects
+const StretchedPainfullyPussy = "StretchedPainfullyPussy"
+const StretchedPainfullyAnus = "StretchedPainfullyAnus"
+const Wounded = "Wounded"
+
 # BDSM effects
 const ArmsBound = "ArmsBound"
 const HandsBlocked = "HandsBlocked"

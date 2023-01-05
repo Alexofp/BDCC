@@ -21,7 +21,7 @@ func getStartActions(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexS
 	var putOnDomScore = getActivityScoreCustomGoals({SexGoal.StraponVaginal: 1.0, SexGoal.StraponAnal: 1.0}, _sexEngine, _domInfo, _subInfo) / float(allStraponIds.size())
 	var putOnSubScore = getActivityScoreCustomGoals({SexGoal.ReceiveStraponVaginal: 1.0, SexGoal.ReceiveStraponAnal: 1.0}, _sexEngine, _domInfo, _subInfo) / float(allStraponIds.size())
 	
-	if(!dom.hasPenis() && !dom.getInventory().hasSlotEquipped(InventorySlot.UnderwearBottom) && dom.getFirstItemThatCoversBodypart(BodypartSlot.Penis) == null):
+	if(!dom.hasPenis() && !dom.getInventory().hasSlotEquipped(InventorySlot.Strapon) && dom.getFirstItemThatCoversBodypart(BodypartSlot.Penis) == null):
 		if(dom.isPlayer()):
 			for straponObject in dom.getInventory().getItemsWithTag(ItemTag.Strapon):
 				actions.append({
@@ -42,7 +42,7 @@ func getStartActions(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexS
 					score = putOnDomScore,
 					category = ["Wear", "Strapon"],
 				})
-	if(!sub.hasPenis() && !sub.getInventory().hasSlotEquipped(InventorySlot.UnderwearBottom) && sub.getFirstItemThatCoversBodypart(BodypartSlot.Penis) == null):
+	if(!sub.hasPenis() && !sub.getInventory().hasSlotEquipped(InventorySlot.Strapon) && sub.getFirstItemThatCoversBodypart(BodypartSlot.Penis) == null):
 		if(dom.isPlayer()):
 			for straponObject in dom.getInventory().getItemsWithTag(ItemTag.Strapon):
 				actions.append({
