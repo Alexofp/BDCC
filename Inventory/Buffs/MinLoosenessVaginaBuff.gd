@@ -9,9 +9,7 @@ func initBuff(_args):
 	amount = _args[0]
 
 func getVisibleDescription():
-	if(amount >= 15.0):
-		return "Stretches pussy greatly"
-	return "Keeps pussy stretched"
+	return "Stretches pussy until "+str(Util.roundF(amount, 1))+" looseness"
 
 func apply(_buffHolder):
 	_buffHolder.orificeMinLooseness[OrificeType.Vagina] += amount

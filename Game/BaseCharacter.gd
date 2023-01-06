@@ -864,6 +864,12 @@ func getOrificeMinLooseness(orificeType):
 	value += buffsHolder.getOrificeMinLooseness(orificeType)
 	return value
 	
+func getOrificePreventedFromRecovering(orificeType):
+	if(buffsHolder.getOrificePreventedFromRecovering(orificeType)):
+		return true
+	
+	return false
+	
 func getOrificeBlocked(orificeType):
 	return buffsHolder.getOrificeBlocked(orificeType)
 
