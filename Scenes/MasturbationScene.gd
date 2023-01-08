@@ -172,6 +172,8 @@ func _react(_action: String, _args):
 		savedActionText = result["text"]
 		if("lust" in result):
 			GM.pc.addLust(result["lust"] * 4)
+			if(GM.pc.getLustLevel() >= 1.0 && ("cantCum" in result) && result["cantCum"]):
+				GM.pc.addLust(-1)
 		if("pain" in result):
 			GM.pc.addPain(result["pain"])
 		

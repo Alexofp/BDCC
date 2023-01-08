@@ -446,6 +446,8 @@ func _react(_action: String, _args):
 		whatPlayerDid = GM.ui.processString(result["text"]).trim_suffix("\n\n")
 		if("lust" in result):
 			GM.pc.addLust(result["lust"])
+			if(GM.pc.getLustLevel() >= 1.0 && ("cantCum" in result) && result["cantCum"]):
+				GM.pc.addLust(-1)
 		if("pain" in result):
 			GM.pc.addPain(result["pain"])
 		
