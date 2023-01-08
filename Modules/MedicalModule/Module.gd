@@ -38,6 +38,8 @@ func getFlags():
 		"Nursery_AskedDatabase": flag(FlagType.Bool),
 		
 		"Medical_StoleDrugsToday": flag(FlagType.Bool),
+		"Medical_FirstTimeHealedHappened": flag(FlagType.Bool),
+		"Medical_FirstTimeHealingGelHappened": flag(FlagType.Bool),
 		
 		"PC_ReceivedPermanentCage": flag(FlagType.Bool),
 		"PC_PickedFlatPermanentCage": flag(FlagType.Bool),
@@ -112,6 +114,10 @@ func _init():
 		
 		"res://Modules/MedicalModule/ForcedChastity/ForcedChastityReceiveRingScene.gd",
 		"res://Modules/MedicalModule/ForcedChastity/ForcedChastityMedbayStartScene.gd",
+		
+		"res://Modules/MedicalModule/HealingScenes/MedicalHealCryopodFirstTime.gd",
+		"res://Modules/MedicalModule/HealingScenes/MedicalHealCryopodScene.gd",
+		"res://Modules/MedicalModule/HealingScenes/MedicalHealingGelScene.gd",
 		]
 	characters = [
 		"res://Modules/MedicalModule/MentalWard/LatexParasite.gd",

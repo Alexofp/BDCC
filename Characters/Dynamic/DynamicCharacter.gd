@@ -151,7 +151,10 @@ func saveData():
 	return data
 
 func loadData(data):
-	var theNpcGender = SAVE.loadVar(data, "npcGender", null)
+	# Converting old-style npcGender into the new way
+	var theNpcGender = null
+	if(data.has("npcGender")):
+		theNpcGender = SAVE.loadVar(data, "npcGender", null)
 	if(theNpcGender != null):
 		npcGeneratedGender = NpcGender.fromNormalGender(theNpcGender)
 	else:

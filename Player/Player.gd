@@ -605,6 +605,17 @@ func afterRestingInBed(seconds):
 	addStamina(_hours * 10)
 	updateNonBattleEffects()
 
+func afterCryopodTreatment():
+	removeEffect(StatusEffect.Wounded)
+	removeEffect(StatusEffect.StretchedPainfullyAnus)
+	removeEffect(StatusEffect.StretchedPainfullyPussy)
+	addPain(-GM.pc.getPain())
+	addStamina(GM.pc.getMaxStamina())
+
+func afterHealingGelTreatment():
+	removeEffect(StatusEffect.StretchedPainfullyAnus)
+	removeEffect(StatusEffect.StretchedPainfullyPussy)
+
 func isFullyNaked():
 	var slotsToBeFullyNaked = [InventorySlot.Body, InventorySlot.UnderwearBottom, InventorySlot.UnderwearTop]
 	

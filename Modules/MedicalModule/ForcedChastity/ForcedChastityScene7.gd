@@ -492,7 +492,11 @@ func _react(_action: String, _args):
 	if(true):
 		processTime(RNG.randi_range(3,8)*60)
 
+	if(_action == "bottom"):
+		GM.pc.addExperience(300)
+
 	if(_action == "breeder"):
+		GM.pc.addExperience(300)
 		if(GM.pc.isWearingChastityCage()):
 			GM.pc.getInventory().removeItemFromSlot(InventorySlot.Penis)
 
