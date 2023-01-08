@@ -320,6 +320,11 @@ _global_script_classes=[ {
 "path": "res://Events/EventTriggers/WeightedEventTrigger.gd"
 }, {
 "base": "Object",
+"class": "ExtendGame",
+"language": "GDScript",
+"path": "res://Game/GameExtenders/ExtendGame.gd"
+}, {
+"base": "Object",
 "class": "Fetish",
 "language": "GDScript",
 "path": "res://Game/SexEngine/Fetish.gd"
@@ -373,6 +378,16 @@ _global_script_classes=[ {
 "class": "FluidProduction",
 "language": "GDScript",
 "path": "res://Player/FluidProduction/FluidProduction.gd"
+}, {
+"base": "Reference",
+"class": "GameExtender",
+"language": "GDScript",
+"path": "res://Game/GameExtenders/GameExtender.gd"
+}, {
+"base": "Reference",
+"class": "GameExtenderSystem",
+"language": "GDScript",
+"path": "res://Game/GameExtenders/GameExtenderSystem.gd"
 }, {
 "base": "Reference",
 "class": "GameParser",
@@ -1047,6 +1062,7 @@ _global_script_class_icons={
 "EventTriggerPriority": "",
 "EventTriggerSceneHook": "",
 "EventTriggerWeighted": "",
+"ExtendGame": "",
 "Fetish": "",
 "FetishBase": "",
 "FetishHolder": "",
@@ -1058,6 +1074,8 @@ _global_script_class_icons={
 "FlagType": "",
 "FlexGridContainer": "",
 "FluidProduction": "",
+"GameExtender": "",
+"GameExtenderSystem": "",
 "GameParser": "",
 "GameRoom": "",
 "GameUI": "",

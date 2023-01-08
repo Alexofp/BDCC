@@ -47,6 +47,7 @@ var sexActivities: Dictionary = {}
 var sexActivitiesReferences: Dictionary = {}
 var fetishes: Dictionary = {}
 var sexGoals: Dictionary = {}
+var gameExtenders: Dictionary = {}
 
 var bodypartStorageNode
 
@@ -262,8 +263,12 @@ func _ready():
 	registerImagePackFolder("res://Images/ImagePacks/")
 	OPTIONS.checkImagePackOrder(imagePacks)
 	
+	registerGameExtenderFolder("res://Game/GameExtenders/Extenders/")
+	
 	registerModulesFolder("res://Modules/")
 	sortFightClubFighters()
+	
+	GM.GES.registerAll()
 	
 # The point is that it will still generate unique ids even after saving/loading
 func generateUniqueID():
@@ -1203,3 +1208,26 @@ func getSexGoal(id: String):
 
 func getSexGoals():
 	return sexGoals
+
+
+
+func registerGameExtender(path: String):
+	var loadedClass = load(path)
+	var object = loadedClass.new()
+	
+	gameExtenders[object.id] = object
+
+func registerGameExtenderFolder(folder: String):
+	var scripts = getScriptsInFolder(folder)
+	for scriptPath in scripts:
+		registerGameExtender(scriptPath)
+
+func getGameExtender(id: String):
+	if(gameExtenders.has(id)):
+		return gameExtenders[id]
+	else:
+		Log.printerr("ERROR: game extender with the id "+id+" wasn't found")
+		return null
+
+func getGameExtenders():
+	return gameExtenders

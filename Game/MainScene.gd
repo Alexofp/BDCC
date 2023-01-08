@@ -334,6 +334,7 @@ func saveData():
 	data["world"] = GM.world.saveData()
 	data["dynamicCharactersPools"] = dynamicCharactersPools
 	data["encounterSettings"] = encounterSettings.saveData()
+	data["gameExtenders"] = GM.GES.saveData()
 	
 	data["scenes"] = []
 	for scene in sceneStack:
@@ -360,6 +361,7 @@ func loadData(data):
 	roomMemories = SAVE.loadVar(data, "roomMemories", {})
 	dynamicCharactersPools = SAVE.loadVar(data, "dynamicCharactersPools", {})
 	encounterSettings.loadData(SAVE.loadVar(data, "encounterSettings", {}))
+	GM.GES.loadData(SAVE.loadVar(data, "gameExtenders", {}))
 	
 	var scenes = SAVE.loadVar(data, "scenes", [])
 	

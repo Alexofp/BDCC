@@ -279,6 +279,8 @@ func updateNonBattleEffects():
 	else:
 		removeEffect(StatusEffect.Exposed)
 
+	GM.GES.callGameExtenders(ExtendGame.pcUpdateNonBattleEffects, [self])
+
 	emit_signal("stat_changed")
 
 func processBattleTurn():
@@ -286,16 +288,22 @@ func processBattleTurn():
 	updateNonBattleEffects()
 	skillsHolder.giveSkillExperienceBattleTurn()
 
+	GM.GES.callGameExtenders(ExtendGame.pcProcessBattleTurn, [self])
+
 func beforeFightStarted():
 	.beforeFightStarted()
 	if(lustCombatState != null):
 		lustCombatState.enteredBattle()
+	
+	GM.GES.callGameExtenders(ExtendGame.pcBeforeFightStarted, [self])
 
 func afterFightEnded():
 	.afterFightEnded()
 	
 	if(lustCombatState != null):
 		lustCombatState.exitedBattle()
+		
+	GM.GES.callGameExtenders(ExtendGame.pcAfterFightEnded, [self])
 
 func processTime(_secondsPassed):
 	for bodypart in processingBodyparts:
@@ -324,6 +332,8 @@ func processTime(_secondsPassed):
 	
 	if(lustCombatState != null):
 		lustCombatState.processTime(_secondsPassed)
+	
+	GM.GES.callGameExtenders(ExtendGame.pcProcessTime, [self, _secondsPassed])
 
 func hoursPassed(_howmuch):
 	var currentLust = getLust()
@@ -350,6 +360,8 @@ func hoursPassed(_howmuch):
 		intoxicationTolerance -= 0.005
 		if(intoxicationTolerance < 0.0):
 			intoxicationTolerance = 0.0
+
+	GM.GES.callGameExtenders(ExtendGame.pcHoursPassed, [self, _howmuch])
 
 func getGender():
 	return pickedGender

@@ -64,12 +64,15 @@ func beforeFightStarted():
 	lust = RNG.randi_range(0, getAmbientLust())
 	pain = RNG.randi_range(0, getAmbientPain())
 	stamina = getMaxStamina()
+	
+	GM.GES.callGameExtenders(ExtendGame.npcBeforeFightStarted, [self])
 
 func afterFightEnded():
 	.afterFightEnded()
 	#pain = 0
 	#lust = 0
 	#stamina = getMaxStamina()
+	GM.GES.callGameExtenders(ExtendGame.npcAfterFightEnded, [self])
 
 func saveData():
 	var data = {
@@ -191,6 +194,8 @@ func processTime(_secondsPassed):
 	if(menstrualCycle != null):
 		menstrualCycle.processTime(_secondsPassed)
 		
+	GM.GES.callGameExtenders(ExtendGame.npcProcessTime, [self, _secondsPassed])
+		
 	# Not sure if needed
 	updateNonBattleEffects()
 		
@@ -198,6 +203,8 @@ func hoursPassed(_howmuch):
 	for bodypart in processingBodyparts:
 		if(bodypart != null && is_instance_valid(bodypart)):
 			bodypart.hoursPassed(_howmuch)
+
+	GM.GES.callGameExtenders(ExtendGame.npcHoursPassed, [self, _howmuch])
 
 func updateNonBattleEffects():
 	if(timedBuffs.size() > 0):
@@ -281,6 +288,8 @@ func updateNonBattleEffects():
 	else:
 		removeEffect(StatusEffect.SexEnginePersonality)
 		removeEffect(StatusEffect.SexEngineLikes)
+		
+	GM.GES.callGameExtenders(ExtendGame.npcUpdateNonBattleEffects, [self])
 
 func onCharacterVisiblyPregnant():
 	if(getMenstrualCycle() != null):
@@ -425,3 +434,8 @@ func onStoppedProcessing():
 
 func getCharacterType():
 	return npcCharacterType
+
+func processBattleTurn():
+	.processBattleTurn()
+
+	GM.GES.callGameExtenders(ExtendGame.npcProcessBattleTurn, [self])
