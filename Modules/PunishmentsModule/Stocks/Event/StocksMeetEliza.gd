@@ -9,6 +9,7 @@ func _reactInit():
 func _run():
 	if(state == ""):
 		addCharacter("eliza")
+		playAnimation(StageScene.StocksSexOral, "tease", {npc="eliza"})
 		# (if can see)
 		if(!GM.pc.isBlindfolded()):
 			saynn("You see a familiar doctor walking past you. She notices you and walks up to you.")

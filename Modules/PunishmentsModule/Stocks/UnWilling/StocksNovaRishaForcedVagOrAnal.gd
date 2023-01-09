@@ -9,6 +9,8 @@ func _run():
 		addCharacter("risha")
 
 	if(state == ""):
+		playAnimation(StageScene.StocksSpitroast, "tease", {npc="risha", npc2="nova", bodyState={exposedCrotch=true}, npcBodyState={exposedCrotch=true, hard=true}, npc2BodyState={exposedCrotch=true, hard=true}})
+		
 		saynn("You hear two guards approaching, they were patrolling the station but now they seem to be more interested in your assets on offer. A husky and a tall lynx walk up to the stocks. Nova is first to talk.")
 
 		saynn("[say=nova]Oh hey, look at who is still stuck in stocks.[/say]")
@@ -59,6 +61,7 @@ func _run():
 			addButton("Open mouth", "Accept your faith, maybe you will like it", "anal")
 
 	if(state == "vaginal"):
+		playAnimation(StageScene.StocksSpitroast, "sex", {npc="risha", npc2="nova", bodyState={exposedCrotch=true}, npcBodyState={exposedCrotch=true, hard=true}, npc2BodyState={exposedCrotch=true, hard=true}})
 		# (vaginal version)
 
 		saynn("You open your mouth a bit, enough to stick your tongue out to lap at the base of her member. Nova smirks and positions herself so the tip of her cock is brushing against your lips. You take it in and start to teasingly lick it, catching her precum. Her husky tail wiggles happily.")
@@ -102,6 +105,7 @@ func _run():
 		addButton("Continue", "Wow..", "continue")
 
 	if(state == "anal"):
+		playAnimation(StageScene.StocksSpitroast, "sex", {npc="risha", npc2="nova", bodyState={exposedCrotch=true}, npcBodyState={exposedCrotch=true, hard=true}, npc2BodyState={exposedCrotch=true, hard=true}})
 		# (anal version)
 
 		saynn("You open your mouth a bit, enough to stick your tongue out to lap at the base of her member. Nova smirks and positions herself so the tip of her cock is brushing against your lips. You take it in and start to teasingly lick it, catching her precum. Her husky tail wiggles happily.")
@@ -159,6 +163,8 @@ func _run():
 		addButton("Continue", "Wow..", "continue")
 
 	if(state == "continue"):
+		playAnimation(StageScene.StocksSpitroast, "tease", {npc="risha", npc2="nova"})
+		
 		saynn("Dickgirls wipe their dicks against you and put them away. You’re still a mess, both mentally and physically, your face doesn’t show much of anything, just.. lust. Nova notices that and scritches you under the chin and then [b]draws a tally mark on your cheek[/b].")
 
 		saynn("[say=nova]Sorry for breaking you, sweetie~[/say]")

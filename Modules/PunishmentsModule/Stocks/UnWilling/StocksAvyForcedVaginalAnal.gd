@@ -10,6 +10,7 @@ func _init():
 func _run():
 	if(state == ""):
 		addCharacter("avy")
+		playAnimation(StageScene.StocksSexOral, "tease", {npc="avy"})
 
 	if(state == ""):
 		saynn("You feel a very firm smack on your butt! Ow! You squirm and try to protect your rear but that’s impossible, you feel another smach and then a feminine giggle behind you.")
@@ -34,6 +35,8 @@ func _run():
 
 
 	if(state == "breed_me!"):
+		playAnimation(StageScene.StocksSexOral, "tease", {npc="avy", npcBodyState={exposedCrotch=true, hard=true}})
+		
 		saynn("[say=pc]"+RNG.pick([
 			"Yes! Please use me raw!",
 			"Screw the rubber, you can breed me!",
@@ -50,6 +53,8 @@ func _run():
 		addButton("Continue", "See what happens next", "fucking")
 
 	if(state == "beg"):
+		playAnimation(StageScene.StocksSexOral, "tease", {npc="avy", npcBodyState={exposedCrotch=true, hard=true, condom=usedCondom}})
+		
 		saynn("[say=pc]"+RNG.pick([
 			"Please don’t breed me.. Anything but that.",
 			"Please use the condom, I don’t need your babies..",
@@ -73,6 +78,8 @@ func _run():
 		addButton("Continue", "See what happens next", "fucking")
 
 	if(state == "fuck_off"):
+		playAnimation(StageScene.StocksSexOral, "tease", {npc="avy", npcBodyState={exposedCrotch=true, hard=true}})
+		
 		saynn("[say=pc]"+RNG.pick([
 			"How about you go fuck yourself?",
 			"I will make you regret it, bitch, don’t you dare.",
@@ -93,6 +100,8 @@ func _run():
 		addButton("Continue", "See what happens next", "fucking")
 
 	if(state == "fucking"):
+		playAnimation(StageScene.StocksSex, "sex", {npc="avy", bodyState={exposedCrotch=true}, npcBodyState={exposedCrotch=true, hard=true, condom=usedCondom}})
+		
 		saynn("You can’t look behind you with the stocks blocking your head but you can feel it for sure. Avy places her hands on your {pc.thick} butt and presses her cock against your cunt. She starts rubbing her shaft against your sensitive pussy lips, your body betrays you and gets aroused quickly.")
 
 		# (if condom)
@@ -162,6 +171,8 @@ func _run():
 			addButton("Continue", "There is more??", "analSex")
 
 	if(state == "analSex"):
+		playAnimation(StageScene.StocksSex, "fast", {npc="avy", bodyState={exposedCrotch=true}, npcBodyState={exposedCrotch=true, hard=true, condom=usedCondom}})
+		
 		saynn("But that’s not all of it, Avy’s cock is still as hard as it was and she is still horny. She spreads your {pc.masc} buttcheeks and starts prodding at your anal ring! You wiggle, squirm and try to voice your opinion but she calms you down with another smack.")
 
 		saynn("[say=avy]Don’t need to waste a condom to fuck you in the ass at least.[/say]")

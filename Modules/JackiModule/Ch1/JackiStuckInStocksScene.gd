@@ -12,7 +12,7 @@ func _run():
 		addCharacter("femaleguard_feline")
 		
 	if(state == ""):
-		playAnimation(StageScene.Stocks, "idle", {pc="jacki"})
+		playAnimation(StageScene.StocksSexOral, "tease", {pc="jacki", npc="femaleguard_feline"})
 		
 		# (Jacki peed in the garden area, behind one of the bushes. Because the bathrooms were both busy with bullies. But she also kinda liked the idea)
 
@@ -109,6 +109,7 @@ func _run():
 
 
 	if(state == "anal"):
+		playAnimation(StageScene.StocksSex, "tease", {pc="jacki", npc="pc", bodyState={exposedCrotch=true}, npcBodyState={exposedCrotch=true, hard=true}})
 		# (needs cock)
 		setFlag("JackiModule.Jacki_StocksPunishedByPC", true)
 		setFlag("JackiModule.Jacki_StocksFuckedByPC", true)
@@ -153,6 +154,8 @@ func _run():
 		addButton("Continue", "See what happens next", "continue")
 
 	if(state == "continue"):
+		playAnimation(StageScene.StocksSex, "sex", {pc="jacki", npc="pc", bodyState={exposedCrotch=true}, npcBodyState={exposedCrotch=true, hard=true}})
+		
 		saynn("After the ‘lube’ has been applied, it’s time for action. The wolfy trembles and wiggles her ass, trying to struggle against the metal frame. But all it does is make her clit bell jingle.")
 
 		saynn("You get a good grasp on that fluffy tail near the base and move it away while guiding your {pc.cock} towards the clenching tight flesh-colored ring with another. There is no need for foreplay, the tip of your cock kisses that star and proceeds to try to stretch it. The wolfy mumbles something incoherent while her body squirms.")
@@ -192,6 +195,8 @@ func _run():
 
 
 	if(state == "cum_inside"):
+		playAnimation(StageScene.StocksSex, "fast", {pc="jacki", npc="pc", bodyState={exposedCrotch=true}, npcBodyState={exposedCrotch=true, hard=true}})
+		
 		saynn("Your orgasm is close and you welcome it, your hand yanks on that tail hard while you ram your cock as deep as that tight clenching asshole allows. Her inner walls start to milk you while your dick shoots long strings of your warm sticky {pc.cum} deep into her ass, stuffing her guts full of your seed.")
 
 		saynn("[say=femaleguard_feline]Oh yeah, give her that sweet nectar~.[/say]")
@@ -212,6 +217,8 @@ func _run():
 		addButton("Continue", "See what happens next", "continue1")
 
 	if(state == "pull_out"):
+		playAnimation(StageScene.StocksSex, "tease", {pc="jacki", npc="pc", bodyState={exposedCrotch=true}, npcBodyState={exposedCrotch=true, hard=true}})
+		
 		saynn("Your orgasm is close and you welcome it. But instead of stuffing the girl’s guts you decide to pull out and cum all over her ass. String of warm sticky {pc.cum} land onto the wolfy’s shirt, back, tail, ass. Some even land on that gaping pulsating star and then drip down over her wet stitched up pussy and messing up her thighs.")
 
 		saynn("[say=femaleguard_feline]Aww. I would have totally stuffed her ass if I could.[/say]")
@@ -242,7 +249,8 @@ func _run():
 		# (scene ends here)
 		addButton("Leave", "Job well done", "endthescene")
 
-	if(state == "anal_fingering"):		
+	if(state == "anal_fingering"):
+		playAnimation(StageScene.StocksSex, "tease", {pc="jacki", npc="pc", bodyState={exposedCrotch=true}})
 		# (if pc has no penis)
 		setFlag("JackiModule.Jacki_StocksPunishedByPC", true)
 		setFlag("JackiModule.Jacki_StocksFingeredByPC", true)
@@ -358,6 +366,8 @@ func _run():
 		addButton("Help", "Try to unlock the girl", "help")
 
 	if(state == "help"):
+		playAnimation(StageScene.StocksSexOral, "tease", {pc="jacki", npc="pc", bodyState={exposedCrotch=true}})
+		
 		addCharacter("jacki")
 		saynn("You act fast, the first thing you do is run up to the locked wolfy and crouch behind her. Your hands quickly removed the wide metal rod that held the girl’s legs spread, it didn’t require a key luckily. Wolfy produces a confused noise while you pull her pants back up to cover her cute butt.")
 
@@ -474,6 +484,7 @@ func _run():
 		addButton("Continue", "Time to go", "endthescene")
 
 	if(state == "if_lost"):
+		playAnimation(StageScene.StocksSpitroast, "tease", {pc="jacki", npc="gymbully", npc2="gymbully2", bodyState={exposedCrotch=true}, npcBodyState={exposedCrotch=true,hard=true}, npc2BodyState={exposedCrotch=true,hard=true}})
 		setFlag("JackiModule.Jacki_StocksPCLostFight", true)
 		
 		saynn("You lost the fight. Unable to continue, you drop to your knees while the guy looks down at you.")
@@ -500,7 +511,8 @@ func _run():
 		addCharacter("jacki", ["naked"])
 		
 		setFlag("JackiModule.Jacki_StocksPCLostFightAndWatched", true)
-		playAnimation(StageScene.Stocks, "idle", {pc="jacki", bodyState={exposedCrotch=true}})
+		#playAnimation(StageScene.Stocks, "idle", {pc="jacki", bodyState={exposedCrotch=true}})
+		playAnimation(StageScene.StocksSpitroast, "sex", {pc="jacki", npc="gymbully", npc2="gymbully2", bodyState={exposedCrotch=true}, npcBodyState={exposedCrotch=true,hard=true}, npc2BodyState={exposedCrotch=true,hard=true}})
 		
 		# (dudes approach Jacki. One pulls her shorts down and complains about piercings.)
 
@@ -543,6 +555,8 @@ func _run():
 		addButton("Continue", "See what happens next", "bullies_cum")
 
 	if(state == "bullies_cum"):
+		playAnimation(StageScene.StocksSpitroast, "fast", {pc="jacki", npc="gymbully", npc2="gymbully2", bodyState={exposedCrotch=true}, npcBodyState={exposedCrotch=true,hard=true}, npc2BodyState={exposedCrotch=true,hard=true}})
+		
 		saynn("You notice their knots inflating and they both struggle to force them in. The girl’s ass is being stretched too much already, to the point of the soft flesh looking irritated. And her jaw can’t open wide enough. But they both continue pounding her holes until the orgasms overwhelm them roughly at the same time.")
 
 		saynn("The main guy rams his cock as deep as that girl’s throat allows before proceeding to grunt while his cock starts to visibly pulsate inside her mouth and shoot cum deep down it. At the same time the guy behind arches his back and thrusts his cock deep inside too and cums while the girl’s tailhole tries to clench around it, milking it for all its cum. You see bright red blush on that poor wolfy’s cheeks.")
