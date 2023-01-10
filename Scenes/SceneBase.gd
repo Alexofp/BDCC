@@ -248,7 +248,7 @@ func aimCameraAndSetLocName(roomID: String):
 func getCharacter(charID: String) -> BaseCharacter:
 	return GlobalRegistry.getCharacter(charID)
 
-func getModule(modID: String) -> Module:
+func getModule(modID: String):
 	return GlobalRegistry.getModule(modID)
 
 func getDebugActions():
