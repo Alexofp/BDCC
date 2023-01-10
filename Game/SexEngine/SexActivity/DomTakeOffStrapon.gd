@@ -17,8 +17,8 @@ func getStartActions(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexS
 	var sub:BaseCharacter = _subInfo.getChar()
 	var actions = []
 	
-	var domTakeOffScore = 1.0 - getActivityScoreCustomGoals({SexGoal.StraponVaginal: 1.0, SexGoal.StraponAnal: 1.0}, _sexEngine, _domInfo, _subInfo)
-	var subTakeOffScore = 1.0 - getActivityScoreCustomGoals({SexGoal.ReceiveStraponVaginal: 1.0, SexGoal.ReceiveStraponAnal: 1.0}, _sexEngine, _domInfo, _subInfo)
+	var domTakeOffScore = 1.0 - getActivityScoreCustomGoals({SexGoal.SubWearStraponOnDom: 100.0}, _sexEngine, _domInfo, _subInfo)
+	var subTakeOffScore = 1.0 - getActivityScoreCustomGoals({SexGoal.SubWearStraponOnSub: 100.0}, _sexEngine, _domInfo, _subInfo)
 	
 	if(!_sexEngine.hasTag(_domInfo.charID, SexActivityTag.PenisUsed) && dom.isWearingStrapon()):
 		actions.append({

@@ -14,3 +14,12 @@ const ReceiveStraponVaginal = "ReceiveStraponVaginal"
 const ReceiveStraponAnal = "ReceiveStraponAnal"
 
 const TieUp = "TieUp"
+
+
+# Subgoals, these don't need classes defined
+const SubUndressSub = "SubUndressSub"
+const SubUndressDom = "SubUndressDom"
+const SubOptionalCondomOnSub = "SubOptionalCondomOnSub"
+const SubOptionalCondomOnDom = "SubOptionalCondomOnDom"
+const SubWearStraponOnSub = "SubWearStraponOnSub"
+const SubWearStraponOnDom = "SubWearStraponOnDom"

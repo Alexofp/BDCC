@@ -277,9 +277,31 @@ func generateGoals():
 
 func hasGoal(thedominfo, goal, thesubinfo):
 	for goalInfo in thedominfo.goals:
-		if(goalInfo[0] == goal && goalInfo[1] == thesubinfo.charID):
-			return true
+		if(goalInfo[1] == thesubinfo.charID):
+			if(goalInfo[0] == goal):
+				return true
+			
+			var goalObject = GlobalRegistry.getSexGoal(goalInfo[0])
+			if(goalObject != null):
+				var subgoals = goalObject.getSubGoals(self, thedominfo, thesubinfo, goalInfo[2])
+				if(subgoals != null && subgoals.has(goal)):
+					return true
+			
 	return false
+
+func hasGoalScore(thedominfo, goal, thesubinfo):
+	for goalInfo in thedominfo.goals:
+		if(goalInfo[1] == thesubinfo.charID):
+			if(goalInfo[0] == goal):
+				return 1.0
+			
+			var goalObject = GlobalRegistry.getSexGoal(goalInfo[0])
+			if(goalObject != null):
+				var subgoals = goalObject.getSubGoals(self, thedominfo, thesubinfo, goalInfo[2])
+				if(subgoals != null && subgoals.has(goal)):
+					return float(subgoals[goal])
+			
+	return 0.0
 
 func satisfyGoal(thedominfo, goalid, thesubinfo):
 	for _i in range(0, thedominfo.goals.size()):

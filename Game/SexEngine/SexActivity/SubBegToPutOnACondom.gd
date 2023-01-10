@@ -7,8 +7,7 @@ func _init():
 
 func getGoals():
 	return {
-		SexGoal.FuckAnal: 0.2,
-		SexGoal.FuckVaginal: 0.2,
+		SexGoal.SubOptionalCondomOnDom: 0.2,
 	}
 
 func getActivityBaseScore(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexSubInfo):

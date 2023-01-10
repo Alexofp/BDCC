@@ -18,8 +18,8 @@ func getStartActions(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexS
 	var actions = []
 	
 	var allStraponIds = GlobalRegistry.getItemIDsByTag(ItemTag.Strapon)
-	var putOnDomScore = getActivityScoreCustomGoals({SexGoal.StraponVaginal: 1.0, SexGoal.StraponAnal: 1.0}, _sexEngine, _domInfo, _subInfo) / float(allStraponIds.size())
-	var putOnSubScore = getActivityScoreCustomGoals({SexGoal.ReceiveStraponVaginal: 1.0, SexGoal.ReceiveStraponAnal: 1.0}, _sexEngine, _domInfo, _subInfo) / float(allStraponIds.size())
+	var putOnDomScore = getActivityScoreCustomGoals({SexGoal.SubWearStraponOnDom: 1.0}, _sexEngine, _domInfo, _subInfo) / float(allStraponIds.size())
+	var putOnSubScore = getActivityScoreCustomGoals({SexGoal.SubWearStraponOnSub: 1.0}, _sexEngine, _domInfo, _subInfo) / float(allStraponIds.size())
 	
 	if(!dom.hasPenis() && !dom.getInventory().hasSlotEquipped(InventorySlot.Strapon) && dom.getFirstItemThatCoversBodypart(BodypartSlot.Penis) == null):
 		if(dom.isPlayer()):

@@ -100,7 +100,7 @@ bind/21/pose = Transform( 0.486096, -0.873925, 4.58786e-07, -0.874017, -0.486062
 [node name="MohawkHair" instance=ExtResource( 1 )]
 
 [node name="hairmohawkpng" type="MeshInstance" parent="." index="0"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.032 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.028 )
 mesh = SubResource( 11 )
 skin = SubResource( 12 )
 material/0 = SubResource( 10 )

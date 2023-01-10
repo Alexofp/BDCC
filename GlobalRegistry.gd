@@ -190,20 +190,27 @@ func getDonationDataString():
 	return newText
 
 func _ready():
+	var start = OS.get_ticks_usec()
+	
 	startLoadingDonationData()
 	
-	registerBodypartFolder("res://Player/Bodyparts/Legs/")
-	registerBodypartFolder("res://Player/Bodyparts/Breasts/")
-	registerBodypartFolder("res://Player/Bodyparts/Hair/")
-	registerBodypartFolder("res://Player/Bodyparts/Tail/")
-	registerBodypartFolder("res://Player/Bodyparts/Body/")
-	registerBodypartFolder("res://Player/Bodyparts/Head/")
-	registerBodypartFolder("res://Player/Bodyparts/Arms/")
-	registerBodypartFolder("res://Player/Bodyparts/Ears/")
-	registerBodypartFolder("res://Player/Bodyparts/Horns/")
-	registerBodypartFolder("res://Player/Bodyparts/Penis/")
-	registerBodypartFolder("res://Player/Bodyparts/Anus/")
-	registerBodypartFolder("res://Player/Bodyparts/Vagina/")
+	if(true):
+		var start2 = OS.get_ticks_usec()
+		registerBodypartFolder("res://Player/Bodyparts/Legs/")
+		registerBodypartFolder("res://Player/Bodyparts/Breasts/")
+		registerBodypartFolder("res://Player/Bodyparts/Hair/")
+		registerBodypartFolder("res://Player/Bodyparts/Tail/")
+		registerBodypartFolder("res://Player/Bodyparts/Body/")
+		registerBodypartFolder("res://Player/Bodyparts/Head/")
+		registerBodypartFolder("res://Player/Bodyparts/Arms/")
+		registerBodypartFolder("res://Player/Bodyparts/Ears/")
+		registerBodypartFolder("res://Player/Bodyparts/Horns/")
+		registerBodypartFolder("res://Player/Bodyparts/Penis/")
+		registerBodypartFolder("res://Player/Bodyparts/Anus/")
+		registerBodypartFolder("res://Player/Bodyparts/Vagina/")
+		var end2 = OS.get_ticks_usec()
+		var worker_time2 = (end2-start2)/1000000.0
+		Log.print("BODYPARTS initialized in: %s seconds" % [worker_time2])
 	
 	registerItemFolder("res://Inventory/Items/")
 	registerItemFolder("res://Inventory/Items/Underwear/")
@@ -226,11 +233,16 @@ func _ready():
 	
 	registerEventFolder("res://Events/Event/")
 	
-	registerSceneFolder("res://Scenes/")
-	registerSceneFolder("res://Scenes/Intro/")
-	registerSceneFolder("res://Scenes/Item/")
-	registerSceneFolder("res://Scenes/Cellblock/")
-	registerSceneFolder("res://Scenes/Mineshaft/")
+	if(true):
+		var start2 = OS.get_ticks_usec()
+		registerSceneFolder("res://Scenes/")
+		registerSceneFolder("res://Scenes/Intro/")
+		registerSceneFolder("res://Scenes/Item/")
+		registerSceneFolder("res://Scenes/Cellblock/")
+		registerSceneFolder("res://Scenes/Mineshaft/")
+		var end2 = OS.get_ticks_usec()
+		var worker_time2 = (end2-start2)/1000000.0
+		Log.print("SCENES initialized in: %s seconds" % [worker_time2])
 	
 	registerCharacterFolder("res://Characters/")
 	registerCharacterFolder("res://Characters/Generic/")
@@ -256,8 +268,13 @@ func _ready():
 	
 	registerQuestFolder("res://Quests/Quest/")
 	
-	registerStageSceneFolder("res://Player/StageScene3D/Scenes/")
-	
+	if(true):
+		var start2 = OS.get_ticks_usec()
+		registerStageSceneFolder("res://Player/StageScene3D/Scenes/")
+		var end2 = OS.get_ticks_usec()
+		var worker_time2 = (end2-start2)/1000000.0
+		Log.print("STAGE SCENES initialized in: %s seconds" % [worker_time2])
+		
 	registerMapFloorFolder("res://Game/World/Floors/")
 	
 	registerImagePackFolder("res://Images/ImagePacks/")
@@ -269,6 +286,10 @@ func _ready():
 	sortFightClubFighters()
 	
 	GM.GES.registerAll()
+	
+	var end = OS.get_ticks_usec()
+	var worker_time = (end-start)/1000000.0
+	Log.print("GlobalRegistry fully initialized in: %s seconds" % [worker_time])
 	
 # The point is that it will still generate unique ids even after saving/loading
 func generateUniqueID():
@@ -827,6 +848,8 @@ func registerStageScene(path: String):
 	var itemObject = item.instance()
 	stageScenes[itemObject.id] = item
 	itemObject.queue_free()
+	
+	#stageScenes[path.get_file()] = item
 
 func registerStageSceneFolder(folder: String):
 	var dir = Directory.new()
@@ -944,6 +967,8 @@ func getLootListsByCharacter(charID: String):
 	return lootListsByCharacter[charID]
 
 func registerModulesFolder(folder: String):
+	var start = OS.get_ticks_usec()
+	
 	var dir = Directory.new()
 	if dir.open(folder) == OK:
 		dir.list_dir_begin(true)
@@ -961,6 +986,10 @@ func registerModulesFolder(folder: String):
 			file_name = dir.get_next()
 	else:
 		Log.printerr("An error occurred when trying to access the path "+folder)
+
+	var end = OS.get_ticks_usec()
+	var worker_time = (end-start)/1000000.0
+	Log.print("MODULES initialized in: %s seconds" % [worker_time])
 
 func registerFightClubFighter(path: String):
 	var item = load(path)

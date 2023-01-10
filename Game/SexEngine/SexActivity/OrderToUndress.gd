@@ -8,15 +8,7 @@ func _init():
 
 func getGoals():
 	return {
-		SexGoal.FuckAnal: 1.0,
-		SexGoal.FuckVaginal: 1.0,
-		SexGoal.ReceiveAnal: 1.0,
-		SexGoal.ReceiveVaginal: 1.0,
-		SexGoal.DoOralOnSub: 1.0,
-		SexGoal.StraponAnal: 1.0,
-		SexGoal.StraponVaginal: 1.0,
-		SexGoal.ReceiveStraponAnal: 1.0,
-		SexGoal.ReceiveStraponVaginal: 1.0,
+		SexGoal.SubUndressSub: 1.0,
 	}
 
 func getVisibleName():
