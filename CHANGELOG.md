@@ -6,6 +6,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.0.20] - 2023-01-10
+### Added
+- Sex animations! Almost every lewd scene now includes an animation for the dolls. Procedural sex included
+- Struggling out of restraints is now animated
+- Forced male chastity content. Experience what it's like to wear permanent chastity cage over 7 lewd scenes (28k words/76 pages) with Eliza and optional cameos of 5 other characters. You will have a huge choice at the end of this little storyline. Scenes trigger every 5 days
+- Strapons. Strapons can now be used inside the procedural sex by you or npcs. Strapons can be bought from The Announcer
+- Procedural npcs now drop loot (oops, I forgot that when coding them)
+- Encounter settings have been greately expanded. You can now choose the distribution of genders, species and restrict sertain activities from happening to you during procedural sex
+- You can get wounded or have your holes painfull stretched during rough activities inside the procedural sex. These status effects won't go away until you get yourself healed by Eliza or by sleeping (sleeping won't help if you got wounded twice in a row)
+- Can ask Eliza to heal you inside the cryopod
+- Buffs tab inside the skills menu. Shows what buffs your character currently has and their source (equipped item, status effect or perk). Useful to see if the perks are actually working
+- You can choose to keep the restraints on the procedural npc if you won the fight
+- Mods can extend the game's core functions with GameExtenders. GameExtenders can subscribe to some events like player's updates and run code. Should lessen the need to override the core files of the game inside mods. Still an experimental feature
+
+### Changed
+- The function that updates player's status effects shouldn't run multiple times in a row anymore. General optimization
+
 ## [0.0.19] - 2022-12-05
 ### Added
 - Random encounters overhaul! Old encounters with a few generic predefined npcs got replaced with new ones that use procedurally generated npcs. New encounters change depending on the npc's procedurally generated personality
@@ -175,7 +192,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Turn-based fighting
 - Initial player customization
 
-[Unreleased]: https://github.com/Alexofp/BDCC/compare/0.0.19...main
+[Unreleased]: https://github.com/Alexofp/BDCC/compare/0.0.20...main
+[0.0.20]: https://github.com/Alexofp/BDCC/compare/0.0.19...0.0.20
 [0.0.19]: https://github.com/Alexofp/BDCC/compare/0.0.18...0.0.19
 [0.0.18]: https://github.com/Alexofp/BDCC/compare/0.0.17...0.0.18
 [0.0.17]: https://github.com/Alexofp/BDCC/compare/0.0.16...0.0.17
