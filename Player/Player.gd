@@ -274,17 +274,18 @@ func updateNonBattleEffects():
 	else:
 		removeEffect(StatusEffect.SexEnginePersonality)
 		removeEffect(StatusEffect.SexEngineLikes)
-	
-	if(GM.main != null && getExposure() > 0.0 && !GM.main.supportsSexEngine() && !GM.main.supportsBattleTurns()):
-		addEffect(StatusEffect.Exposed)
-	else:
-		removeEffect(StatusEffect.Exposed)
 
 	GM.GES.callGameExtenders(ExtendGame.pcUpdateNonBattleEffects, [self])
 
 	emit_signal("stat_changed")
 	
 	buffsHolder.calculateBuffs()
+	
+	# Exposed status effect depends on stats that are calculated from buffs so it needs to be here
+	if(GM.main != null && getExposure() > 0.0 && !GM.main.supportsSexEngine() && !GM.main.supportsBattleTurns()):
+		addEffect(StatusEffect.Exposed)
+	else:
+		removeEffect(StatusEffect.Exposed)
 
 func processBattleTurn():
 	.processBattleTurn()
