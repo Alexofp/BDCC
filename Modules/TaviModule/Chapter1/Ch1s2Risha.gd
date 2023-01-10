@@ -10,7 +10,7 @@ func _run():
 		addCharacter("tavi")
 		
 	if(state == ""):
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc="risha", pc="tavi"})
+		playAnimation(StageScene.Duo, "stand", {npc="risha", pc="tavi"})
 		
 		# (Risha appears and tells she is not done yet, she is here to breed Tavi)
 
@@ -51,7 +51,7 @@ func _run():
 
 	if(state == "seduce"):
 		removeCharacter("tavi")
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc="risha"})
+		playAnimation(StageScene.Duo, "stand", {npc="risha"})
 		
 		saynn("You decide that just watching the scene unfold won’t bring anything and act. You step in and block the clear path to Tavi. Risha raises her brow and aims the remote at you instead.")
 
@@ -115,7 +115,10 @@ func _run():
 		
 
 	if(state == "be_fucked"):
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc="risha", npcHard=true, npcExposedBodyparts=[BodypartSlot.Penis]})
+		playAnimation(StageScene.SexStanding, "tease", {npc="pc", pc="risha",
+			bodyState={exposedCrotch=true,hard=true,},
+			npcBodyState={exposedCrotch=true,},
+		})
 		# (Risha chains and fucks pc)
 
 		# (Risha leaves and Tavi returns)
@@ -153,6 +156,11 @@ func _run():
 		addButton("Continue", "See what happens next", "continue1")
 
 	if(state == "continue1"):
+		playAnimation(StageScene.SexStanding, "sex", {npc="pc", pc="risha",
+			bodyState={exposedCrotch=true,hard=true,},
+			npcBodyState={exposedCrotch=true,},
+		})
+		
 		# (if has pussy)
 		if(GM.pc.hasVagina()):
 			saynn("You dangle around a lot, having to pretty much stand on your toes as the pipe is quite high. Risha gets herself hard and stands behind you, her strong hand catches your leg and lifts it up while the second one guides her prickly cock down your sex.")
@@ -176,6 +184,11 @@ func _run():
 		addButton("Continue", "See what happens next", "getCummedInside")
 
 	if(state == "getCummedInside"):
+		playAnimation(StageScene.SexStanding, "fast", {npc="pc", pc="risha",
+			bodyState={exposedCrotch=true,hard=true,},
+			npcBodyState={exposedCrotch=true,},
+		})
+		
 		# (if has pussy)
 		if(GM.pc.hasVagina()):
 			saynn("Risha still holds your leg lifted while proceeding to use you raw, almost pulling out her cock before thrusting deep inside. Her free paw lands on your chin and holds your jaw before forcing a few digits into your mouth. You can’t fight it, little moans escape while you begin to suck on offered fingers.")
@@ -244,6 +257,7 @@ func _run():
 
 	if(state == "continue3"):
 		removeCharacter("risha")
+		playAnimation(StageScene.Solo, "stand")
 		
 		saynn("After the lynx is done cumming inside you, she waits for her barbs to become a bit softer before pulling out, causing you to moan again.")
 
@@ -255,7 +269,7 @@ func _run():
 
 	if(state == "wait"):
 		addCharacter("tavi")
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc="tavi"})
+		playAnimation(StageScene.Duo, "stand", {npc="tavi"})
 		
 		saynn("After a bit of time you notice Tavi returning.")
 
@@ -423,6 +437,10 @@ func _run():
 
 	if(state == "draw_on_her"):
 		# (should add random words onto Risha)
+		playAnimation(StageScene.SexStart, "start", {pc="pc", npc="risha",
+			bodyState={},
+			npcBodyState={naked=true,},
+		})
 
 		saynn("You go through the guard’s equipment and find a black permanent marker. When seeing it, Risha immediately begins to squirm and try to break free but Tavi is holding her still.")
 
@@ -447,6 +465,10 @@ func _run():
 
 	if(state == "piss_on_her"):
 		# (needs piss enabled)
+		playAnimation(StageScene.SexFeetPlay, "pin", {pc="pc", npc="risha",
+			bodyState={exposedCrotch=true,hard=true,},
+			npcBodyState={naked=true,},
+		})
 
 		# (if has cock)
 		if(GM.pc.hasPenis()):
@@ -492,7 +514,7 @@ func _run():
 
 	if(state == "attack"):
 		removeCharacter("tavi")
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc="risha"})
+		playAnimation(StageScene.Duo, "stand", {npc="risha"})
 		
 		saynn("You step in and break the eye contact that Risha has on Tavi. The lynx smirks and points the remote at you instead.")
 
@@ -511,7 +533,10 @@ func _run():
 
 	if(state == "wait1"):
 		addCharacter("tavi", ["naked"])
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc="risha", pc="tavi", exposedBodyparts=[BodypartSlot.Vagina, BodypartSlot.Breasts]})
+		playAnimation(StageScene.Duo, "stand", {
+			npc="risha", pc="tavi",
+			bodyState={naked=true,},
+		})
 		
 		saynn("Maybe it's best not to do anything and see what happens, wedging between them at the current moment seems like a bad idea.")
 
@@ -554,7 +579,10 @@ func _run():
 		addButton("Continue", "See what happens next", "continue4")
 
 	if(state == "continue4"):
-		GM.main.playAnimation(StageScene.Duo, "defeat", {npc="risha", pc="tavi", exposedBodyparts=[BodypartSlot.Vagina, BodypartSlot.Breasts]})
+		playAnimation(StageScene.Duo, "defeat", {
+			npc="risha", pc="tavi",
+			bodyState={naked=true,},
+		})
 		
 		saynn("Risha checks out all of Tavi's exposed curves before proceeding to slowly step towards her while still holding the remote.")
 
@@ -578,7 +606,7 @@ func _run():
 
 	if(state == "push_her!"):
 		removeCharacter("tavi")
-		GM.main.playAnimation(StageScene.Duo, "shove", {npc="risha", npcAction="hurt"})
+		playAnimation(StageScene.Duo, "shove", {npc="risha", npcAction="hurt"})
 		
 		saynn("You rush towards the pair and shove Risha away from Tavi. That makes the lynx drop the shock remote and snarl at you before hitting the floor in her bulky riot armor. She kicks you back and reaches for her weapon before getting up.")
 

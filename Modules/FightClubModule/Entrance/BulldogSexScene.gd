@@ -6,7 +6,11 @@ func _init():
 func _run():
 	if(state == ""):
 		addCharacter("bulldog")
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc="bulldog", npcHard=true, exposedBodyparts=[BodypartSlot.Vagina, BodypartSlot.Anus], npcExposedBodyparts=[BodypartSlot.Penis]})
+		playAnimation(StageScene.SexStanding, "sex", {
+			pc="bulldog", npc="pc",
+			bodyState={exposedCrotch=true,hard=true},
+			npcBodyState={exposedCrotch=true},
+		})
 
 	if(state == ""):
 		saynn("Maybe the guy will let you through if you make him feel good. You tilt your head down and slowly close the distance, swaying your {pc.masc} thighs as you do. Your hand reaches for the bulldog’s chest and traces down with a single digit.")
@@ -84,6 +88,12 @@ func _run():
 		addButton("Cum!", "Let it happen", "cum!")
 
 	if(state == "cum!"):
+		playAnimation(StageScene.SexStanding, "fast", {
+			pc="bulldog", npc="pc",
+			bodyState={exposedCrotch=true,hard=true},
+			npcBodyState={exposedCrotch=true,hard=true},
+		})
+		
 		saynn("After a few tries, the bulldog gathers all of his strength for an even more powerful series of thrusts. At the last one your fuckhole gets force-stretched enough to let the knot slip in! The guy’s full length is inside you, it only takes you a few moments before the sensations overwhelm your body, sending a crazy amount of ecstatic pleasure spikes through you. You arch your back and let out many lewd muffled moans while drooling and passionately sucking on the fingers in your mouth.")
 
 		# (if has pussy)
@@ -121,7 +131,9 @@ func _run():
 	if(state == "afterFirstFuck"):
 		aimCameraAndSetLocName("gym_yoga")
 		addCharacter("inmateCrowd")
-		GM.main.playAnimation(StageScene.Solo, "defeat", {exposedBodyparts=[BodypartSlot.Vagina, BodypartSlot.Anus]})
+		playAnimation(StageScene.Solo, "defeat", {
+			bodyState={exposedCrotch=true},
+		})
 		
 		saynn("Bulldog tugs you by the collar back into the gym area. Oh no. You see many inmates there, minding their own business, lifting weights, doing exercises. All the while you are completely naked with cum leaking out of your used hole.")
 
@@ -409,8 +421,6 @@ func _react(_action: String, _args):
 			
 		
 		GM.pc.addLust(100)
-		
-		GM.pc.updateNonBattleEffects()
 		
 	if(_action == "inmatesFirstLoad"):
 		GM.pc.cummedOnBy("inmateMale")

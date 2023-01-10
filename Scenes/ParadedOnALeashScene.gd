@@ -26,7 +26,7 @@ func _run():
 		
 	if(state == "" || state == "leashed"):
 		if(state == "leashed"):
-			GM.main.playAnimation(StageScene.Solo, "walk")
+			playAnimation(StageScene.Solo, "walk")
 		if(path.size() > 0):
 			aimCameraAndSetLocName(path[0])
 		

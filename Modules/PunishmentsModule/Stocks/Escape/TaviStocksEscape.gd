@@ -6,7 +6,7 @@ func _init():
 func _run():
 	if(state == ""):
 		addCharacter("tavi")
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc="tavi"})
+		playAnimation(StageScene.Duo, "stand", {npc="tavi"})
 		
 		saynn("You hear a voice behind.")
 

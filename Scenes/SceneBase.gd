@@ -55,17 +55,19 @@ func run():
 	_run()
 	GM.ES.triggerRun(Trigger.SceneAndStateHook, [sceneID, state])
 	
-	GM.pc.updateEffectPanel(GM.ui.getPlayerStatusEffectsPanel())
 	if(showFightUI):
 		GM.ui.getCharactersPanel().switchToFightMode()
 	else:
 		GM.ui.getCharactersPanel().switchToNormalMode()
 		
+	GM.pc.updateNonBattleEffects()
 	for id in currentCharactersVariants:
 		var character = GlobalRegistry.getCharacter(id)
 		if(!character):
 			continue
 		character.updateNonBattleEffects()
+
+	GM.pc.updateEffectPanel(GM.ui.getPlayerStatusEffectsPanel())
 	GM.ui.updateCharactersInPanel()
 	GM.ui.setSceneCreator(getSceneCreator())
 	
@@ -220,9 +222,6 @@ func getModuleFlag(moduleID, flagID, defaultValue = null):
 func resolveCustomCharacterName(_charID):
 	return null
 
-func canSave():
-	return true
-
 func supportsBattleTurns():
 	return false
 
@@ -249,7 +248,7 @@ func aimCameraAndSetLocName(roomID: String):
 func getCharacter(charID: String) -> BaseCharacter:
 	return GlobalRegistry.getCharacter(charID)
 
-func getModule(modID: String) -> Module:
+func getModule(modID: String):
 	return GlobalRegistry.getModule(modID)
 
 func getDebugActions():
@@ -264,6 +263,10 @@ func getSceneCreator():
 	if(registryCreator != null && registryCreator != ""):
 		return str(registryCreator)
 	return null
+
+func playAnimation(theSceneID, theActionID, args = {}):
+	if(GM.main != null):
+		GM.main.playAnimation(theSceneID, theActionID, args)
 
 func saveData():
 	var data = {}

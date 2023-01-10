@@ -26,8 +26,11 @@ func doAction(_lustState: LustCombatState, _args):
 	#_lustState.getCharacter().addLust(3)
 	var pc:Player = _lustState.getCharacter()
 	
+	var cantCum = false
+	
 	var text = ""
 	if(pc.isWearingChastityCage()):
+		cantCum = true
 		if(RNG.chance(50)):
 			text += "You move your hand down to your crotch and give your {pc.cock} a little rub through the clothing. Your digits find the spot that feels the best and focus on it. Damn cage makes it impossible to stroke."
 			text += "\n\n"
@@ -81,6 +84,7 @@ func doAction(_lustState: LustCombatState, _args):
 	return {
 		text = text,
 		lust = 1,
+		cantCum = cantCum,
 	}
 
 func getLustTopics():

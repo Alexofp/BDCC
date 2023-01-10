@@ -7,7 +7,7 @@ func _init():
 
 func _run():
 	if(state == ""):
-		GM.main.playAnimation(StageScene.Duo, "walk", {npc="eliza"})
+		playAnimation(StageScene.Duo, "walk", {npc="eliza"})
 		aimCamera("intro_beforeelevator")
 		setLocationName("Intake area")
 		
@@ -23,7 +23,7 @@ func _run():
 	if(state == "sneak_up"):
 		aimCamera("intro_medicalarea")
 		setLocationName("Medical area")
-		GM.main.playAnimation(StageScene.Duo, "defeat", {npc="eliza"})
+		playAnimation(StageScene.Duo, "defeat", {npc="eliza"})
 		
 		saynn("You decide not to announce your presence and instead begin to slowly creep up to the lady, who seems to be too busy with reading something off of her tablet. You keep watching her as you make your steps as light as possible. You notice her feline ears twitching ever so slightly. As you approach the instrument table, you notice a variety of tools: syringes, clamps, retractors but most importantly, a few scalpels. Your hand hovers over one as you try to grab it. But as soon as you do, you hear a voice.")
 
@@ -90,7 +90,7 @@ func _run():
 		addButton("Sit", "Take a sit", "sit")
 
 	if(state == "sit"):
-		GM.main.playAnimation(StageScene.Duo, "sit", {npc="eliza"})
+		playAnimation(StageScene.Duo, "sit", {npc="eliza"})
 		
 		saynn("You sit on the side of a bed, it’s not the most comfy one but what can you do.")
 
@@ -156,7 +156,7 @@ func _run():
 			addButton("Fuck no", "You’re not a dog", "fuck_no")
 
 	if(state == "fuck_no"):
-		GM.main.playAnimation(StageScene.Duo, "shove", {npc="eliza"})
+		playAnimation(StageScene.Duo, "shove", {npc="eliza"})
 		
 		aimCamera("intro_beforeelevator")
 		setLocationName("Intake area")
@@ -176,7 +176,7 @@ func _run():
 		addButton("Lift", "Enter the lift", "lift")
 
 	if(state == "fine"):
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc="eliza"})
+		playAnimation(StageScene.Duo, "stand", {npc="eliza"})
 		
 		aimCamera("intro_beforeelevator")
 		setLocationName("Intake area")
@@ -216,7 +216,7 @@ func _run():
 		aimCamera("hall_elevator")
 		setLocationName("Checkpoint")
 		
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc="eliza"})
+		playAnimation(StageScene.Duo, "stand", {npc="eliza"})
 		
 		saynn("It takes a minute but the lift finally arrives. When the doors open, the first thing you see is a checkpoint with a few guards standing around.")
 
@@ -242,7 +242,7 @@ func _run():
 		addButton("Follow", "Follow the leash", "followtocell")
 
 	if(state == "followtocell"):
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc="eliza"})
+		playAnimation(StageScene.Duo, "stand", {npc="eliza"})
 		removeCharacter("tavi")
 		
 		aimCamera("cellblock_nearcells")
@@ -267,7 +267,7 @@ func _run():
 		aimCamera(GM.pc.getCellLocation())
 		GM.pc.setLocation(GM.pc.getCellLocation())
 		setLocationName("My new home")
-		GM.main.playAnimation(StageScene.Solo, "stand")
+		playAnimation(StageScene.Solo, "stand")
 		
 		saynn("You step into your cell and take a look around.")
 
@@ -316,7 +316,9 @@ func _run():
 		addButton("Obey", "Do as she says", "obeycage")
 
 	if(state == "obeycage"):
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc="eliza", exposedBodyparts=[BodypartSlot.Penis]})
+		playAnimation(StageScene.Duo, "stand", {npc="eliza",
+		bodyState={exposedCrotch=true,},
+		})
 		
 		saynn("You get off the bed as fast as your restraints allow and present yourself to Eliza. She walks up to you.")
 
@@ -426,7 +428,7 @@ func _run():
 		
 
 	if(state == "continueAfterCaged"):
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc="eliza"})
+		playAnimation(StageScene.Duo, "stand", {npc="eliza"})
 		
 		saynn("Eliza gets up and pulls your shorts up, covering up your new cage.")
 

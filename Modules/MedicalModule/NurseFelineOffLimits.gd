@@ -6,7 +6,7 @@ func _init():
 func _run():
 	if(state == ""):
 		addCharacter("nurse")
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc="nurse"})
+		playAnimation(StageScene.Duo, "stand", {npc="nurse"})
 
 	if(state == ""):
 		saynn("You stumble upon a nurse. You try to hide but it's too late.")

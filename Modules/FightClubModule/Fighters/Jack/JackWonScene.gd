@@ -9,7 +9,7 @@ func _init():
 func _run():
 	if(state == ""):
 		addCharacter("jack")
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc="jack", npcAction="kneel"})
+		playAnimation(StageScene.Duo, "stand", {npc="jack", npcAction="kneel"})
 
 	if(state == ""):
 		saynn("Jack knees before you, unable to continue fighting. The crowd gasps seeing the stud hit the floor.")
@@ -40,7 +40,11 @@ func _run():
 
 	if(state == "vaginal"):
 		# (needs pussy)
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc="jack", npcHard=true, npcAction="kneel", npcExposedBodyparts=[BodypartSlot.Penis], exposedBodyparts=[BodypartSlot.Vagina, BodypartSlot.Anus]})
+		playAnimation(StageScene.SexCowgirl, "tease", {
+			npc="pc", pc="jack", 
+			bodyState={exposedCrotch=true,hard=true},
+			npcBodyState={exposedCrotch=true,},
+		})
 
 		saynn("You tilt your head while gazing at that bulge, wondering how good it would feel to take an entire horse cock inside you. These thoughts make you horny quite quickly, you sneakily brush your hand over your slit and bite your lip as you step towards the stallion. Jack offers you a welcoming smile.")
 
@@ -66,6 +70,12 @@ func _run():
 		addButton("Go raw", "Who needs protection", "go_raw")
 
 	if(state == "condom"):
+		playAnimation(StageScene.SexCowgirl, "tease", {
+			npc="pc", pc="jack", 
+			bodyState={exposedCrotch=true,hard=true,condom=true,},
+			npcBodyState={exposedCrotch=true,},
+		})
+		
 		saynn("You decide that you’re not ready to be actually bred and pull out a packaged condom. You quickly rip it open with your teeth and start applying it onto the giant shaft. The tip is already stuffed full with Jack’s thick precum, it looks kinda lewd. The rubber becomes quite thin the more you stretch it over the full length, hopefully it will be enough..")
 
 		saynn("[say=jack]Ya sure it will hold?[/say]")
@@ -76,6 +86,12 @@ func _run():
 		addButton("Continue", "Time for fun", "go_raw")
 
 	if(state == "go_raw"):
+		playAnimation(StageScene.SexCowgirl, "sex", {
+			npc="pc", pc="jack", 
+			bodyState={exposedCrotch=true,hard=true,condom=usedCondom},
+			npcBodyState={exposedCrotch=true,},
+		})
+		
 		saynn("Jack is sitting on the floor, supporting his back with his hands and with you straddling his crotch.")
 
 		saynn("[say=jack]Whacha waitin’ for, pretty thing? I’m not gonna bite[/say]")
@@ -117,6 +133,12 @@ func _run():
 		addButton("Inside", "Let the horsie cum", "inside")
 
 	if(state == "inside"):
+		playAnimation(StageScene.SexCowgirl, "fast", {
+			npc="pc", pc="jack", 
+			bodyState={exposedCrotch=true,hard=true,condom=usedCondom},
+			npcBodyState={exposedCrotch=true,},
+		})
+		
 		saynn("You force yourself onto that shaft like there is no tomorrow and make quite a bit of progress, your pussy can now fit most of Jack’s length inside, there is a visible bump on your belly each time you lower yourself onto him. The more you do it the louder Jack’s noises are, his balls are tensing up and his cock starts throbbing until the moment he is finally pushed over the edge.")
 
 		saynn("[say=jack]Nnghh-h[/say]")
@@ -188,7 +210,11 @@ func _run():
 
 
 	if(state == "anal"):
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc="jack", npcHard=true, npcAction="kneel", npcExposedBodyparts=[BodypartSlot.Penis], exposedBodyparts=[BodypartSlot.Vagina, BodypartSlot.Anus]})
+		playAnimation(StageScene.SexCowgirl, "tease", {
+			npc="pc", pc="jack", 
+			bodyState={exposedCrotch=true,hard=true,},
+			npcBodyState={exposedCrotch=true,},
+		})
 		
 		saynn("You tilt your head while gazing at that bulge, wondering how good it would feel to take an entire horse cock inside you. These thoughts make you horny quite quickly, you sneakily brush your hand over your slit and bite your lip as you step towards the stallion. Jack offers you a welcoming smile.")
 
@@ -215,6 +241,12 @@ func _run():
 
 
 	if(state == "condom1"):
+		playAnimation(StageScene.SexCowgirl, "tease", {
+			npc="pc", pc="jack", 
+			bodyState={exposedCrotch=true,hard=true,condom=true,},
+			npcBodyState={exposedCrotch=true,},
+		})
+		
 		saynn("You decide that you’re not ready to be actually bred and pull out a packaged condom. You quickly rip it open with your teeth and start applying it onto the giant shaft. The tip is already stuffed full with Jack’s thick precum, it looks kinda lewd. The rubber becomes quite thin the more you stretch it over the full length, hopefully it will be enough..")
 
 		saynn("[say=jack]Ya sure it will hold?[/say]")
@@ -225,6 +257,12 @@ func _run():
 		addButton("Continue", "Time for fun", "go_raw1")
 
 	if(state == "go_raw1"):
+		playAnimation(StageScene.SexCowgirl, "sex", {
+			npc="pc", pc="jack", 
+			bodyState={exposedCrotch=true,hard=true,condom=usedCondom,},
+			npcBodyState={exposedCrotch=true,},
+		})
+		
 		saynn("Jack is sitting on the floor, supporting his back with his hands and with you straddling his crotch.")
 
 		saynn("[say=jack]Whacha waitin’ for, pretty thing? I’m not gonna bite[/say]")
@@ -266,6 +304,12 @@ func _run():
 		addButton("Inside", "Let the horsie cum", "inside1")
 
 	if(state == "inside1"):
+		playAnimation(StageScene.SexCowgirl, "fast", {
+			npc="pc", pc="jack", 
+			bodyState={exposedCrotch=true,hard=true,condom=usedCondom,},
+			npcBodyState={exposedCrotch=true,},
+		})
+		
 		saynn("You force yourself onto that shaft like there is no tomorrow and make quite a bit of progress, your {pc.masc} butt can now fit most of Jack’s length inside, there is a visible bump on your belly each time you lower yourself onto him. The more you do it the louder Jack’s noises are, his balls are tensing up and his cock starts throbbing until the moment he is finally pushed over the edge.")
 
 		saynn("[say=jack]Nnghh-h[/say]")

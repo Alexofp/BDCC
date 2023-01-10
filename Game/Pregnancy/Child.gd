@@ -79,7 +79,7 @@ func saveData():
 	return data
 
 func loadData(data):
-	gender = SAVE.loadVar(data, "gender", ChildGender.Male)
+	gender = SAVE.loadVar(data, "gender", NpcGender.Male)
 	species = SAVE.loadVar(data, "species", ["feline"])
 	birthDay = SAVE.loadVar(data, "birthDay", 0)
 	motherID = SAVE.loadVar(data, "motherID", "pc")

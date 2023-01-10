@@ -11,7 +11,7 @@ func _run():
 		addCharacter("gymbully3")
 		
 	if(state == ""):
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc="gymbully"})
+		playAnimation(StageScene.Duo, "stand", {npc="gymbully"})
 		
 		saynn("You walk into the bathroom and the first thing that you notice are three inmates. One of them, a girl, sits on the long counter with all the sinks. Another guy is relieving himself using one of the urinals. And the main guy just kinda standing in the middle, you can’t walk past him even if you wanted to. They all have uniforms with red colors but also red bands tied around their foreheads.")
 
@@ -129,7 +129,7 @@ func _run():
 
 	if(state == "returncredtisandattack"):
 		# (gives back 5 creds)
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc="gymbully3"})
+		playAnimation(StageScene.Duo, "stand", {npc="gymbully3"})
 
 		saynn("Instead of giving him what he wants, you steal the chip with your credits back and then kick the guy. He collapses onto the floor and grunts.")
 
@@ -147,7 +147,7 @@ func _run():
 		addButton("Fight", "Begin the fight", "startfight")
 
 	if(state == "leave1"):
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc="gymbully3"})
+		playAnimation(StageScene.Duo, "stand", {npc="gymbully3"})
 		
 		saynn("You feel that you’re done with this situation and try to leave. But the girl doesn’t let you, she holds a shiv! A makeshift sharp weapon.")
 
@@ -166,7 +166,7 @@ func _run():
 		addButton("Fight", "Begin the fight", "startfight")
 
 	if(state == "attack1"):
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc="gymbully3"})
+		playAnimation(StageScene.Duo, "stand", {npc="gymbully3"})
 		
 		# (same at attack before but without giving the player 5 credits back)
 		saynn("Instead of giving him what he wants, you kick the guy. He collapses onto the floor and grunts.")
@@ -226,7 +226,7 @@ func _run():
 		addButton("Continue", "See what happens next", "continue")
 
 	if(state == "continue"):
-		GM.main.playAnimation(StageScene.Urinal, "idle", {exposedBodyparts=[BodypartSlot.Body, BodypartSlot.Vagina, BodypartSlot.Anus, BodypartSlot.Penis, BodypartSlot.Breasts]})
+		playAnimation(StageScene.Urinal, "idle", {bodyState={naked=true}})
 		
 		# (if has clothing)
 		if(!GM.pc.isFullyNaked()):

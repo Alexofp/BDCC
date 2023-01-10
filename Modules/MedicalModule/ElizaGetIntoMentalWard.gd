@@ -73,7 +73,7 @@ func _run():
 		setLocationName("Padded cell")
 		aimCamera("medical_paddedcell_player")
 		GM.pc.setLocation("medical_paddedcell_player")
-		GM.main.playAnimation(StageScene.Solo, "kneel")
+		playAnimation(StageScene.Solo, "kneel")
 		
 		saynn("You open your eyes.. Everything is so hazy.. You’re on the floor. But the floor is.. so soft..")
 

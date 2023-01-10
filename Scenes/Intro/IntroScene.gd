@@ -14,7 +14,7 @@ func _run():
 	if(state == ""):
 		aimCamera("intro_corridor")
 		setLocationName("IBS \"Integrity\"")
-		GM.main.playAnimation(StageScene.Solo, "stand")
+		playAnimation(StageScene.Solo, "stand")
 		
 		addCharacter("intro_detective")
 		saynn("[b]You follow a tall male figure through a long corridor[/b]. You don’t see any windows, everything is lit up by industrial-looking lights. Your head hurts, you suddenly realize that [b]you forgot where you are[/b] and what you are doing here. You panic, your eyes jump form point to point, gray floor tiles, dark-blue concrete walls, an unknown person’s back, what the heck is going on here. [b]Two guys walk by[/b], you notice their blue uniform and [b]badges that say “IIPF”[/b]. You also notice holsters and belts with equipment, the guy that you’re following has these too. You look down at your hands. No, you’re not cuffed.")
@@ -30,7 +30,7 @@ func _run():
 	if(state == "take_a_sit"):
 		aimCamera("intro_interogation")
 		setLocationName("Interogation room")
-		GM.main.playAnimation(StageScene.Solo, "sit")
+		playAnimation(StageScene.Solo, "sit")
 		
 		saynn("You sit on the second chair, the one that is further from the only exit. You take a better look at the guy. He is clearly a wolf, quite tall, in his forties, gray fur, black pants and a white t-shirt.")
 
@@ -55,7 +55,7 @@ func _run():
 		
 
 	if(state == "donecreating"):
-		GM.main.playAnimation(StageScene.Solo, "sit")
+		playAnimation(StageScene.Solo, "sit")
 		saynn("Jake nods and puts the tablet away for now, he leans forward on the chair and directs his eyes at you.")
 
 		saynn("[say=intro_detective]Alright, {pc.name}. How are you feeling?[/say]")
@@ -250,7 +250,7 @@ func _run():
 		addButton("Wait", "What else is there to do", "saidwhy")
 		
 	if(state == "saidwhy"):
-		GM.main.playAnimation(StageScene.Solo, "sit")
+		playAnimation(StageScene.Solo, "sit")
 		saynn("With nothing better to do, you sit still and think about what happened. You begin to remember everything. You hold onto your face. Minutes pass, it feels like forever. The guy lied to you, you’re there for at least an hour already.")
 		
 		addButton("Wait more", "What else is there to do", "waitmore")

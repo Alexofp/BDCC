@@ -11,7 +11,7 @@ func _reactInit():
 func _run():
 	if(state == ""):
 		addCharacter("bulldog")
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc="bulldog"})
+		playAnimation(StageScene.Duo, "stand", {npc="bulldog"})
 
 	if(state == ""):
 		saynn("You stand before the guy that is basically a walking wall. He is blocking the path to some kind of special maintenance hatch.")

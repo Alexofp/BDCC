@@ -38,9 +38,33 @@ func getFlags():
 		"Nursery_AskedDatabase": flag(FlagType.Bool),
 		
 		"Medical_StoleDrugsToday": flag(FlagType.Bool),
+		"Medical_FirstTimeHealedHappened": flag(FlagType.Bool),
+		"Medical_FirstTimeHealingGelHappened": flag(FlagType.Bool),
 		
 		"PC_ReceivedPermanentCage": flag(FlagType.Bool),
 		"PC_PickedFlatPermanentCage": flag(FlagType.Bool),
+		
+		"Chastity_EventNumber": flag(FlagType.Number),
+		"Chastity_LastEventDay": flag(FlagType.Number),
+		"Chastity_Event1Choice1": flag(FlagType.Text), #How does it feel? Possible values: ["good", "awful", "why"]
+		"Chastity_Event2Choice1": flag(FlagType.Text), #How much was it already? At least ten days, right? You must be quite pent up, patient? Possible values: ["yes", "no"]
+		"Chastity_Event2Choice2": flag(FlagType.Text), #Maybe I’m wrong and I should stop now? Possible: ["everything_is_good", "ask_to_stop", "stay_silent"]
+		"Chastity_Event3Choice1": flag(FlagType.Text), # First time fuckmachine. Possible: ["clench", "let_it_in"]
+		"Chastity_Event3Choice2": flag(FlagType.Text), # Drink your own cum? Possible: ["drink", "refuse"]
+		"Chastity_FirstChosenPerson": flag(FlagType.Text), # Who will dick pc first. Possible: ["eliza", "risha", "rahi", "tavi", "nova"]
+		"Chastity_SecondChosenPerson": flag(FlagType.Text), # Who will dick pc second. Possible: ["eliza", "risha", "rahi", "tavi", "nova"]
+		"Chastity_OptionalBadBehavourCounter": flag(FlagType.Number), # How many times pc has misbehaved during the optional scenes
+		"Chastity_Event4Choice1": flag(FlagType.Text), # What did the pc do before Eliza arrived. Possible values: ["nothing", "magicwand", "horsecockdildo"]
+		"Chastity_Event4Choice2": flag(FlagType.Text), # Was it fun? ["yes", "no", "someparts"]
+		"Chastity_Event4Choice3": flag(FlagType.Text), # Did you like the cage? ["yes", "no", "toorestrictive"]
+		"Chastity_Event4Choice4": flag(FlagType.Text), # Are you obedient? ["yes", "no"]
+		"Chastity_Event4ObeyedEliza": flag(FlagType.Bool), # Did pc obey
+		"Chastity_Event4LickedPussy": flag(FlagType.Bool), # Did pc lick Eliza's pussy
+		"Chastity_Event5LockedForever": flag(FlagType.Bool), # Did pc agree to be locked forever
+		"Chastity_Event5BredEliza": flag(FlagType.Bool),
+		"Chastity_Event5GaveElizaDrug": flag(FlagType.Bool),
+		"Chastity_ExperimentWasSuccessful": flag(FlagType.Bool),
+		"Chastity_ReceivedRing": flag(FlagType.Bool),
 	}
 
 func _init():
@@ -75,6 +99,25 @@ func _init():
 		
 		"res://Modules/MedicalModule/Nursery/NurseryTalkScene.gd",
 		"res://Modules/MedicalModule/NurseCaughtOfflimitsScene.gd",
+		
+		"res://Modules/MedicalModule/ForcedChastity/ForcedChastityScene1.gd",
+		"res://Modules/MedicalModule/ForcedChastity/ForcedChastityScene2.gd",
+		"res://Modules/MedicalModule/ForcedChastity/ForcedChastityScene3.gd",
+		"res://Modules/MedicalModule/ForcedChastity/ForcedChastityScene5.gd",
+		"res://Modules/MedicalModule/ForcedChastity/ForcedChastityScene7.gd",
+		
+		"res://Modules/MedicalModule/ForcedChastity/ForcedChastityOptionalRahiScene.gd",
+		"res://Modules/MedicalModule/ForcedChastity/ForcedChastityOptionalRishaScene.gd",
+		"res://Modules/MedicalModule/ForcedChastity/ForcedChastityOptionalElizaScene.gd",
+		"res://Modules/MedicalModule/ForcedChastity/ForcedChastityOptionalTaviScene.gd",
+		"res://Modules/MedicalModule/ForcedChastity/ForcedChastityOptionalNovaScene.gd",
+		
+		"res://Modules/MedicalModule/ForcedChastity/ForcedChastityReceiveRingScene.gd",
+		"res://Modules/MedicalModule/ForcedChastity/ForcedChastityMedbayStartScene.gd",
+		
+		"res://Modules/MedicalModule/HealingScenes/MedicalHealCryopodFirstTime.gd",
+		"res://Modules/MedicalModule/HealingScenes/MedicalHealCryopodScene.gd",
+		"res://Modules/MedicalModule/HealingScenes/MedicalHealingGelScene.gd",
 		]
 	characters = [
 		"res://Modules/MedicalModule/MentalWard/LatexParasite.gd",
@@ -89,6 +132,8 @@ func _init():
 		"res://Modules/MedicalModule/Nursery/NurseryTalkEvent.gd",
 		"res://Modules/MedicalModule/StealDrugsFromMedicalEvent.gd",
 		"res://Modules/MedicalModule/NurseCaughtOfflimitsEvent.gd",
+		
+		"res://Modules/MedicalModule/ForcedChastity/ForcedChastityEvents.gd",
 	]
 
 func resetFlagsOnNewDay():

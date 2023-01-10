@@ -6,7 +6,7 @@ func _init():
 func _run():
 	if(state == ""):
 		addCharacter("rebel")
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc="rebel", npcAction="kneel"})
+		playAnimation(StageScene.Duo, "stand", {npc="rebel", npcAction="kneel"})
 
 	if(state == ""):
 		saynn("Rebel grunts and drops down to her knee while panting heavily. Her weight is now working against her, pulling her body down.")
@@ -34,7 +34,10 @@ func _run():
 		addButton("Continue", "Time to leave", "endthescene")
 
 	if(state == "fisting"):
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc="rebel", npcAction="kneel", npcExposedBodyparts=[BodypartSlot.Vagina]})
+		playAnimation(StageScene.Duo, "stand", {
+			npc="rebel", npcAction="allfours",
+			npcBodyState={exposedCrotch=true,},
+		})
 		
 		saynn("The crowd cheers louder as you put on your mean eyes and step towards the defeated opponent. Rebel’s face expression shows acceptance, she tries to cover herself but you take a running start and shove her down to the floor.")
 

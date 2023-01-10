@@ -32,7 +32,7 @@ func resolveCustomCharacterName(_charID):
 func _run():
 	if(state == ""):
 		addCharacter(npcID)
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc=npcID})
+		playAnimation(StageScene.Duo, "stand", {npc=npcID})
 
 	if(state == ""):
 		# (new guard)
@@ -173,6 +173,12 @@ func _run():
 		addButton("Offer body", "Maybe you can try to seduce them", "offer_body")
 
 	if(state == "submit"):
+		playAnimation(StageScene.SexStanding, "tease", {
+			pc=npcID,npc="pc",
+			bodyState={},
+			npcBodyState={},
+		})
+		
 		# (if subby or cowardly there is a change for her to not do anything)
 
 		# (if mean/dommy she might try to fuck you anyways)
@@ -194,6 +200,12 @@ func _run():
 		addButton("Leave", "Time to go", "endthescene")
 
 	if(state == "submit_mean"):
+		playAnimation(StageScene.SexStanding, "tease", {
+			pc=npcID,npc="pc",
+			bodyState={},
+			npcBodyState={},
+		})
+		
 		saynn("You turn and lean against the nearest wall, letting {npc.him} do what {npc.he} wants. {npc.Name} steps behind you and puts {npc.his} hands on your body, searching for anything illegal. You find {npc.his} grasp to be quite.. invasive. {npc.He} is practically groping you!")
 
 		# (if found something)
@@ -221,6 +233,7 @@ func _run():
 
 	if(state == "attack"):
 		# (if subby, can just auto-win)
+		playAnimation(StageScene.Duo, "stand", {npc=npcID})
 
 		saynn("You lash out at {npc.name}!")
 
@@ -347,7 +360,6 @@ func addWonButton():
 func _react(_action: String, _args):
 
 	if(_action == "endthescene"):
-		getCharacter(npcID).resetEquipment()
 		endScene()
 		return
 

@@ -63,13 +63,11 @@ func _react(_action: String, _args):
 		processTime(60*10)
 		GM.pc.addStamina(-30)
 		GM.pc.addEffect(StatusEffect.WorkOutLight)
-		GM.pc.updateNonBattleEffects()
 	
 	if(_action == "heavy_workout"):
 		processTime(60*20)
 		GM.pc.addStamina(-40)
 		GM.pc.addEffect(StatusEffect.WorkOut)
-		GM.pc.updateNonBattleEffects()
 	
 	if(_action == "endthescene"):
 		endScene()

@@ -9,9 +9,9 @@ func _ready():
 	#call_deferred("play", StageScene.Duo, "kneel", {npc="nova"}) # Player is created late
 	#play(StageScene.Solo, "stand")
 
-func play(sceneID, actionID, args = [], skipFade = false):
+func play(sceneID, actionID, args = {}, skipFade = false):
 	if(currentScene != null && currentScene.id == sceneID && currentScene.canTransitionTo(actionID, args)):
-		currentScene.playAnimation(actionID, args)
+		currentScene.playAnimationFinal(actionID, args)
 		return
 	
 	if(currentScene != null):
@@ -28,7 +28,7 @@ func play(sceneID, actionID, args = [], skipFade = false):
 		return
 	currentScene = newScene
 	add_child(newScene)
-	newScene.playAnimation(actionID, args)
+	newScene.playAnimationFinal(actionID, args)
 
 func updateSubAnims():
 	if(currentScene != null):

@@ -341,6 +341,9 @@ func getEquppedRestraints():
 			result.append(item)
 	return result
 
+func getEquippedRestraints():
+	return getEquppedRestraints()
+
 func hasRemovableRestraints():
 	for itemSlot in equippedItems:
 		var item = equippedItems[itemSlot]

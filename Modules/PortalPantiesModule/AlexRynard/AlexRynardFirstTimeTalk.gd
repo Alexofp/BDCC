@@ -6,7 +6,7 @@ func _init():
 func _run():
 	if(state == ""):
 		addCharacter("alexrynard")
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc="alexrynard"})
+		playAnimation(StageScene.Duo, "stand", {npc="alexrynard"})
 
 	if(state == ""):
 		saynn("The engineer was busy tinkering with his datapad when you approached him again.")
@@ -47,7 +47,7 @@ func _run():
 		addButton("Continue", "See what happens next", "continue")
 
 	if(state == "refuse"):
-		GM.main.playAnimation(StageScene.Duo, "defeat", {npc="alexrynard"})
+		playAnimation(StageScene.Duo, "defeat", {npc="alexrynard"})
 		
 		saynn("You raise the case a bit just to drop it after. The foxy sighs audibly and rolls his eyes.")
 
@@ -70,7 +70,7 @@ func _run():
 		addButton("Continue", "See what happens next", "continue")
 
 	if(state == "continue"):
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc="alexrynard"})
+		playAnimation(StageScene.Duo, "stand", {npc="alexrynard"})
 		aimCameraAndSetLocName("eng_workshop")
 		
 		saynn("You carry the case and follow the guy through some corridors. The yellow colors suggest that this area is somehow related to engineering. Indeed, you walk past the lobby and enter some kind of workshop. Lots of tables with spare parts, lots of machinery.")

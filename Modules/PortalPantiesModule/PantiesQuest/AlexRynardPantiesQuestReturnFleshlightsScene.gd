@@ -6,7 +6,7 @@ func _init():
 func _run():
 	if(state == ""):
 		addCharacter("alexrynard")
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc="alexrynard"})
+		playAnimation(StageScene.Duo, "stand", {npc="alexrynard"})
 
 	if(state == ""):
 		# (You return him the things. Foxy thanks you and gives some credits)

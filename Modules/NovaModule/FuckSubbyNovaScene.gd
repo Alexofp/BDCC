@@ -10,7 +10,11 @@ func _init():
 func _run():
 	if(state == ""):
 		addCharacter("nova", ["naked"])
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc="nova", npcHard=true, hard=true, npcAction="kneel", npcExposedBodyparts=[BodypartSlot.Vagina], exposedBodyparts=[BodypartSlot.Penis]})
+		playAnimation(StageScene.SexAllFours, "tease", {
+			pc="pc",npc="nova",
+			bodyState={exposedCrotch=true,hard=true},
+			npcBodyState={exposedCrotch=true,hard=true},
+		})
 	
 	if(state == ""):
 		saynn("You pick up her weapon and jam it into the backplate of her armor where the reactor is. You send a little shock through it and all the armor pieces disconnect and fall to the floor, exposing the guard’s skin-tight undersuit. Nova gets pinned to the floor by you as you search her belt for handcuffs. Then you wrench her hands behind her back and cuff them together. She tries to resist, to shove you off, but she is not too enthusiastic about it. You give her round ass a firm smack so she would stop.")
@@ -37,6 +41,12 @@ func _run():
 		
 
 	if(state == "fucking"):
+		playAnimation(StageScene.SexAllFours, "sex", {
+			pc="pc",npc="nova",
+			bodyState={exposedCrotch=true,hard=true,condom=usedCondom},
+			npcBodyState={exposedCrotch=true,hard=true},
+		})
+		
 		# (if no condom)
 		if(!usedCondom):
 			saynn("You decide that the rubber is not for you, that bratty slut deserves to be bred. You lick your digits and shove a few into her slit, spreading the petals open. Yes, she is wet and ready, her cock is leaking pre as you tease her.")
@@ -100,6 +110,12 @@ func _run():
 		addButton("Random", "Fifty fifty between cumming inside and outside", "do_random")
 
 	if(state == "pull_out"):
+		playAnimation(StageScene.SexAllFours, "tease", {
+			pc="pc",npc="nova",
+			bodyState={exposedCrotch=true,hard=true,condom=usedCondom},
+			npcBodyState={exposedCrotch=true,hard=true},
+		})
+		
 		saynn("You keep pushing yourself to your peak, you push your hand into her back firmly just so you can switch to slow powerful pounding. After a few seconds of such a great onslaught, her moans become more loud and passionate, her slit clenches around your shaft as she starts cumming. Her body is shaking and shivering, her red canine cock shooting a few weak lines of cum down at the floor, her pussy pulsating and squirting girlcum, her cunt is trying to milk you. That’s when you pull your throbbing {pc.cock} out, just in time for your own orgasm.")
 
 		# (if condom)
@@ -127,6 +143,12 @@ func _run():
 		addButton("Continue", "Time to run", "endthescene")
 
 	if(state == "cum_inside"):
+		playAnimation(StageScene.SexAllFours, "fast", {
+			pc="pc",npc="nova",
+			bodyState={exposedCrotch=true,hard=true,condom=usedCondom},
+			npcBodyState={exposedCrotch=true,hard=true},
+		})
+		
 		saynn("You’re not gonna stop until that slut’s pussy is fully bred, you keep pounding at her cervix at a crazy pace. Your cock throbs inside and keeps stuffing Nova with pre but that’s not the goal, you hold the cocky brat still while you focus on ravaging her needy pussy. She is squirming under you, legs shivering, each slap of your hips against her butt shifts her forward a bit but you pull her back, trying to shove your dick deeper.")
 
 		saynn("She can’t endure it for long, after a few strong thrusts Nova opens her mouth and lets out long lusty pleasure noises while her pussy walls get tight around your cock, making fucking her harder but also more pleasurable. Her body is shaking and shivering, her red canine cock shooting a few weak lines of cum down at the floor, her pussy pulsating and squirting girlcum, her cunt is trying to milk you. And you don’t stop.")

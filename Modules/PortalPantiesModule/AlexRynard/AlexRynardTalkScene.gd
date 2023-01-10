@@ -11,7 +11,7 @@ func _reactInit():
 func _run():
 	if(state == ""):
 		addCharacter("alexrynard")
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc="alexrynard"})
+		playAnimation(StageScene.Duo, "stand", {npc="alexrynard"})
 
 	if(state == ""):
 		saynn("You approach the engineer foxy. His working place includes a chair but Alex is standing, he seems to be working on something. You sit on the corner of the work table and get his attention.")

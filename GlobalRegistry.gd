@@ -2,7 +2,7 @@ extends Node
 
 var game_version_major = 0
 var game_version_minor = 0
-var game_version_revision = 19
+var game_version_revision = 20
 var game_version_suffix = ""
 
 var currentUniqueID = 0
@@ -47,6 +47,7 @@ var sexActivities: Dictionary = {}
 var sexActivitiesReferences: Dictionary = {}
 var fetishes: Dictionary = {}
 var sexGoals: Dictionary = {}
+var gameExtenders: Dictionary = {}
 
 var bodypartStorageNode
 
@@ -79,11 +80,12 @@ func loadMods():
 	
 	var modsFolder = "user://mods"
 	if(OS.get_name() == "Android"):
-		var permissions: Array = OS.get_granted_permissions() #for Godot 3 branch
-		if permissions.has("android.permission.READ_EXTERNAL_STORAGE"):
-			var externalDir:String = OS.get_system_dir(OS.SYSTEM_DIR_DOCUMENTS, true)
-			var finalDir = externalDir.plus_file("BDCCMods")
-			modsFolder = finalDir
+		#var permissions: Array = OS.get_granted_permissions() #for Godot 3 branch
+		#if permissions.has("android.permission.READ_EXTERNAL_STORAGE"):
+		var externalDir:String = OS.get_system_dir(OS.SYSTEM_DIR_DOCUMENTS)
+		var finalDir = externalDir.plus_file("BDCCMods")
+		modsFolder = finalDir
+		var _ok = Directory.new().make_dir(modsFolder)
 	
 	var dir = Directory.new()
 	if dir.open(modsFolder) == OK:
@@ -188,20 +190,27 @@ func getDonationDataString():
 	return newText
 
 func _ready():
+	var start = OS.get_ticks_usec()
+	
 	startLoadingDonationData()
 	
-	registerBodypartFolder("res://Player/Bodyparts/Legs/")
-	registerBodypartFolder("res://Player/Bodyparts/Breasts/")
-	registerBodypartFolder("res://Player/Bodyparts/Hair/")
-	registerBodypartFolder("res://Player/Bodyparts/Tail/")
-	registerBodypartFolder("res://Player/Bodyparts/Body/")
-	registerBodypartFolder("res://Player/Bodyparts/Head/")
-	registerBodypartFolder("res://Player/Bodyparts/Arms/")
-	registerBodypartFolder("res://Player/Bodyparts/Ears/")
-	registerBodypartFolder("res://Player/Bodyparts/Horns/")
-	registerBodypartFolder("res://Player/Bodyparts/Penis/")
-	registerBodypartFolder("res://Player/Bodyparts/Anus/")
-	registerBodypartFolder("res://Player/Bodyparts/Vagina/")
+	if(true):
+		var start2 = OS.get_ticks_usec()
+		registerBodypartFolder("res://Player/Bodyparts/Legs/")
+		registerBodypartFolder("res://Player/Bodyparts/Breasts/")
+		registerBodypartFolder("res://Player/Bodyparts/Hair/")
+		registerBodypartFolder("res://Player/Bodyparts/Tail/")
+		registerBodypartFolder("res://Player/Bodyparts/Body/")
+		registerBodypartFolder("res://Player/Bodyparts/Head/")
+		registerBodypartFolder("res://Player/Bodyparts/Arms/")
+		registerBodypartFolder("res://Player/Bodyparts/Ears/")
+		registerBodypartFolder("res://Player/Bodyparts/Horns/")
+		registerBodypartFolder("res://Player/Bodyparts/Penis/")
+		registerBodypartFolder("res://Player/Bodyparts/Anus/")
+		registerBodypartFolder("res://Player/Bodyparts/Vagina/")
+		var end2 = OS.get_ticks_usec()
+		var worker_time2 = (end2-start2)/1000000.0
+		Log.print("BODYPARTS initialized in: %s seconds" % [worker_time2])
 	
 	registerItemFolder("res://Inventory/Items/")
 	registerItemFolder("res://Inventory/Items/Underwear/")
@@ -224,11 +233,16 @@ func _ready():
 	
 	registerEventFolder("res://Events/Event/")
 	
-	registerSceneFolder("res://Scenes/")
-	registerSceneFolder("res://Scenes/Intro/")
-	registerSceneFolder("res://Scenes/Item/")
-	registerSceneFolder("res://Scenes/Cellblock/")
-	registerSceneFolder("res://Scenes/Mineshaft/")
+	if(true):
+		var start2 = OS.get_ticks_usec()
+		registerSceneFolder("res://Scenes/")
+		registerSceneFolder("res://Scenes/Intro/")
+		registerSceneFolder("res://Scenes/Item/")
+		registerSceneFolder("res://Scenes/Cellblock/")
+		registerSceneFolder("res://Scenes/Mineshaft/")
+		var end2 = OS.get_ticks_usec()
+		var worker_time2 = (end2-start2)/1000000.0
+		Log.print("SCENES initialized in: %s seconds" % [worker_time2])
 	
 	registerCharacterFolder("res://Characters/")
 	registerCharacterFolder("res://Characters/Generic/")
@@ -254,15 +268,28 @@ func _ready():
 	
 	registerQuestFolder("res://Quests/Quest/")
 	
-	registerStageSceneFolder("res://Player/StageScene3D/Scenes/")
-	
+	if(true):
+		var start2 = OS.get_ticks_usec()
+		registerStageSceneFolder("res://Player/StageScene3D/Scenes/")
+		var end2 = OS.get_ticks_usec()
+		var worker_time2 = (end2-start2)/1000000.0
+		Log.print("STAGE SCENES initialized in: %s seconds" % [worker_time2])
+		
 	registerMapFloorFolder("res://Game/World/Floors/")
 	
 	registerImagePackFolder("res://Images/ImagePacks/")
 	OPTIONS.checkImagePackOrder(imagePacks)
 	
+	registerGameExtenderFolder("res://Game/GameExtenders/Extenders/")
+	
 	registerModulesFolder("res://Modules/")
 	sortFightClubFighters()
+	
+	GM.GES.registerAll()
+	
+	var end = OS.get_ticks_usec()
+	var worker_time = (end-start)/1000000.0
+	Log.print("GlobalRegistry fully initialized in: %s seconds" % [worker_time])
 	
 # The point is that it will still generate unique ids even after saving/loading
 func generateUniqueID():
@@ -821,6 +848,8 @@ func registerStageScene(path: String):
 	var itemObject = item.instance()
 	stageScenes[itemObject.id] = item
 	itemObject.queue_free()
+	
+	#stageScenes[path.get_file()] = item
 
 func registerStageSceneFolder(folder: String):
 	var dir = Directory.new()
@@ -938,6 +967,8 @@ func getLootListsByCharacter(charID: String):
 	return lootListsByCharacter[charID]
 
 func registerModulesFolder(folder: String):
+	var start = OS.get_ticks_usec()
+	
 	var dir = Directory.new()
 	if dir.open(folder) == OK:
 		dir.list_dir_begin(true)
@@ -955,6 +986,10 @@ func registerModulesFolder(folder: String):
 			file_name = dir.get_next()
 	else:
 		Log.printerr("An error occurred when trying to access the path "+folder)
+
+	var end = OS.get_ticks_usec()
+	var worker_time = (end-start)/1000000.0
+	Log.print("MODULES initialized in: %s seconds" % [worker_time])
 
 func registerFightClubFighter(path: String):
 	var item = load(path)
@@ -1202,3 +1237,26 @@ func getSexGoal(id: String):
 
 func getSexGoals():
 	return sexGoals
+
+
+
+func registerGameExtender(path: String):
+	var loadedClass = load(path)
+	var object = loadedClass.new()
+	
+	gameExtenders[object.id] = object
+
+func registerGameExtenderFolder(folder: String):
+	var scripts = getScriptsInFolder(folder)
+	for scriptPath in scripts:
+		registerGameExtender(scriptPath)
+
+func getGameExtender(id: String):
+	if(gameExtenders.has(id)):
+		return gameExtenders[id]
+	else:
+		Log.printerr("ERROR: game extender with the id "+id+" wasn't found")
+		return null
+
+func getGameExtenders():
+	return gameExtenders

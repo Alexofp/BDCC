@@ -11,7 +11,7 @@ func _reactInit():
 func _run():
 	if(state == ""):
 		addCharacter("eliza")
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc="eliza", npcAction="stand"})
+		playAnimation(StageScene.Duo, "stand", {npc="eliza", npcAction="stand"})
 		
 	if(state == ""):
 		if(!GM.main.getModuleFlag("MedicalModule", "Eliza_IntroducedMedical")):
@@ -53,8 +53,48 @@ func _run():
 				addDisabledButton("Milking", "Give yourself some rest")
 		else:
 			addDisabledButton("Milking", "Talk about it with Eliza first")
+		
+		var isHurt = false
+		if(GM.pc.getPainLevel() > 0.5 || GM.pc.hasEffect(StatusEffect.Wounded) || GM.pc.hasEffect(StatusEffect.StretchedPainfullyPussy) || GM.pc.hasEffect(StatusEffect.StretchedPainfullyAnus)):
+			isHurt = true
+			
+		if(isHurt):
+			if(!getFlag("MedicalModule.Medical_FirstTimeHealedHappened")):
+				addButtonWithChecks("I'm hurt", "Ask for medical help", "firsttimecryo", [], [ButtonChecks.NotGagged])
+			else:
+				addButtonWithChecks("I'm hurt", "Ask for medical help", "healmenu", [], [ButtonChecks.NotGagged])
+		else:
+			addDisabledButton("I'm hurt", "You're not hurt enough to ask for medical help")
+			
 		addButton("Leave", "Do something else", "endthescene")
 		GM.ES.triggerRun(Trigger.TalkingToNPC, ["eliza"])
+		
+	if(state == "healmenu"):
+		saynn("[say=pc]Uh.. doc. I don’t feel too good. Can you fix me again?[/say]")
+		
+		saynn("Eliza steps from behind the counter and approaches you, doing a quick visual check.")
+		
+		saynn("[say=eliza]I can, but.. Only the first time was free I’m afraid.[/say]")
+		
+		saynn("You raise your brow.")
+		
+		saynn("[say=eliza]Yeah, it pains me too. But now I will have to take 10 credits for each use of the cryopod. Inmates were abusing free healing too much.[/say]")
+		
+		saynn("[say=pc]I see.[/say]")
+		
+		saynn("[say=eliza]But if your damage is only related to your private bits, I can do a different approach. That one only costs 5 credits.[/say]")
+		
+		if(GM.pc.getCredits() < 10):
+			saynn("Eliza takes a quick look at your records through her datapad.")
+		
+			saynn("[say=eliza]And if you don’t have enough credits still.. I have the permission to make inmate accounts go into the negatives. In case things are very bad.[/say]")
+		
+		addButton("Cryopod", "Pay 10 credits and receive a cryopod treatment that heals most wounds and damage", "cryopodsimple")
+		if(GM.pc.hasEffect(StatusEffect.StretchedPainfullyPussy) || GM.pc.hasEffect(StatusEffect.StretchedPainfullyAnus)):
+			addButtonWithChecks("Heal privates", "Pay 5 credits and receive an 'injection' of healing gel into your privates", "healinggel", [], [ButtonChecks.HasReachableAnus])
+		else:
+			addDisabledButton("Heal privates", "Your private bits didn't sustain any damage")
+		addButton("Never mind", "You're fine", "")
 		
 	if(state == "appearance"):
 		saynn("Doctor Quinn looks like your typical doctor, she is pretty tall for a feline, about 1.8 meters tall, her fur is of a pastel yellow color with some white and pink accents. Her long hair is made into a ponytail. She is wearing glasses and a white labcoat with her badge attached to it. Under it you can spot a green top and a black knee length skirt. You do spot her wearing some dark transparent tights. She seems to be carrying quite a bit of equipment in her pockets and on her belt, mostly medical stuff but also a shock remote.")
@@ -181,6 +221,15 @@ func _run():
 		#addDisabledButton("Drug testing", "Test a random drug with random effect. The paper says that these shouldn't have any long-lasting effects.")
 		addButton("Induce lactation", "She will probably use some kind of drug on you. At least it’s free", "induce_lactation")
 		addButton("Experiments", "Ask to be experimented on. This will probably include being a test subject for medical drugs that have unknown properties and also testing new prototypes (Warning, the scenes will include a lot of drug use, non-permanent transformations and mind-altering experiences)", "startexperiments")
+		
+		if(!getFlag("MedicalModule.PC_ReceivedPermanentCage")):
+			if(!GM.pc.hasReachablePenis()):
+				addDisabledButton("Obedience training", "(forced chastity content) You need a reachable penis to be able to start this program")
+			else:
+				addButton("Obedience training", "(forced chastity content) One of the booklets says that there is a new research going on that claims to improve low obedience levels of inmates", "startobedient")
+		else:
+			addDisabledButton("Obedience training", "(forced chastity content) You're already enrolled into this program")
+		
 		#addDisabledButton("Prototype testing", "Test bleeding-edge hi-tech machines or devices")
 		addButton("Back", "You're not interested", "")
 
@@ -357,12 +406,35 @@ func _react(_action: String, _args):
 		endScene()
 		return
 	
+	if(_action == "startobedient"):
+		runScene("ForcedChastityMedbayStartScene")
+		endScene()
+		return
+	
 	if(_action == "endthescene"):
 		endScene()
 		return
 		
 	if(_action == "startexperiments"):
 		runScene("ElizaGetIntoMentalWard")
+		endScene()
+		return
+	
+	if(_action == "firsttimecryo"):
+		setFlag("MedicalModule.Medical_FirstTimeHealedHappened", true)
+		runScene("MedicalHealCryopodFirstTime")
+		endScene()
+		return
+	
+	if(_action == "cryopodsimple"):
+		GM.pc.addCredits(-10)
+		runScene("MedicalHealCryopodScene")
+		endScene()
+		return
+	
+	if(_action == "healinggel"):
+		GM.pc.addCredits(-5)
+		runScene("MedicalHealingGelScene")
 		endScene()
 		return
 	

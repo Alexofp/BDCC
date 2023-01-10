@@ -5,7 +5,6 @@ const Any = "any"
 const Human = "human"
 const Feline = "feline"
 const Dragon = "dragon"
-const Wolf = "wolf"
 const Canine = "canine"
 const Equine = "equine"
 const Demon = "demon"
@@ -95,6 +94,28 @@ func getDefaultForSlot(slot, _gender):
 	
 	return null
 
+# A hackish method to tie together two gender types, sorry
+func getDefaultForSlotForNpcGender(slot, npcgender):
+	var normalGender = NpcGender.toNormalGender(npcgender)
+	
+	if(slot in [BodypartSlot.Penis]):
+		if(npcgender in [NpcGender.Peachboy]):
+			normalGender = Gender.Female
+		if(npcgender in [NpcGender.Herm, NpcGender.Shemale]):
+			normalGender = Gender.Male
+	if(slot in [BodypartSlot.Vagina]):
+		if(npcgender in [NpcGender.Peachboy, NpcGender.Herm]):
+			normalGender = Gender.Female
+		if(npcgender in [NpcGender.Shemale]):
+			normalGender = Gender.Male
+	if(slot in [BodypartSlot.Breasts]):
+		if(npcgender in [NpcGender.Shemale, NpcGender.Herm]):
+			normalGender = Gender.Female
+		if(npcgender in [NpcGender.Peachboy]):
+			normalGender = Gender.Male
+	
+	return getDefaultForSlot(slot, normalGender)
+
 # Allows to pick these bodyparts even if they're from another species. Useful for mods
 func getAllowedBodyparts():
 	return []
@@ -110,7 +131,10 @@ func getEggCellOvulationAmount():
 	]
 
 # How often is this species will show up in procedural encounters. 0 = never, 0-1 = less often, 1 = default chance, >1 = more often
-func npcGenerationWeight(_npcType):
+func npcGenerationWeight():
 	if(!isPlayable() || id == "error"):
 		return 0.0
 	return 1.0
+
+func canBeUsedForNPCType(_npcType):
+	return true

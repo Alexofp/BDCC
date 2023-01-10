@@ -5,7 +5,7 @@ func _init():
 
 func _run():
 	if(state == ""):
-		GM.main.playAnimation(StageScene.Solo, "stand", {exposedBodyparts=[BodypartSlot.Body, BodypartSlot.Breasts, BodypartSlot.Vagina, BodypartSlot.Penis, BodypartSlot.Anus]})
+		playAnimation(StageScene.Solo, "stand", {bodyState={naked=true}})
 		
 		if(GM.pc.isFullyNaked()):
 			saynn("You look around for an empty spot and go towards it")
@@ -51,7 +51,7 @@ func _run():
 		addDisabledButton("Masturbate", "Not done")
 			
 	if(state == "finish"):
-		GM.main.playAnimation(StageScene.Solo, "stand")
+		playAnimation(StageScene.Solo, "stand")
 		aimCamera(GM.pc.location)
 		
 		saynn("You turn off the water and go grab a towel to rub yourself dry")

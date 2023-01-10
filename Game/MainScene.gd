@@ -17,6 +17,7 @@ var overridenPC
 var originalPC
 var roomMemories = {}
 var rollbacker:Rollbacker
+var encounterSettings:EncounterSettings
 
 var staticCharacters = {}
 var charactersToUpdate = {}
@@ -29,6 +30,7 @@ signal saveLoadingFinished
 func _init():
 	rollbacker = Rollbacker.new()
 	flagsCache = Flag.getFlags()
+	encounterSettings = EncounterSettings.new()
 
 func overridePC():
 	if(overridenPC != null):
@@ -69,6 +71,8 @@ func connectSignalsToPC(who):
 	_s = who.connect("exchangedCumDuringRubbing", self, "_on_Player_exchangedCumDuringRubbing")
 	_s = who.connect("skillLevelChanged", self, "_on_Player_skillLevelChanged")
 	_s = who.connect("stat_changed", $GameUI, "_on_Player_stat_changed")
+	_s = who.connect("holePainfullyStretched", self, "_on_Player_holePinafullyStretched")
+	_s = who.connect("gotWoundedBy", self, "_on_Player_gotWoundedBy")
 
 func _exit_tree():
 	GM.main = null
@@ -95,7 +99,7 @@ func getCharacters():
 	return staticCharacters
 
 func addDynamicCharacter(character):
-	if(!(character is DynamicCharacter)):
+	if(!(character.isDynamicCharacter())):
 		assert(false, "addDynamicCharacter() Received a non-dynamic character")
 		
 	var newCharID = character.getID()
@@ -109,7 +113,7 @@ func addDynamicCharacter(character):
 	dynamicCharactersNode.add_child(character)
 		
 func removeDynamicCharacter(characterID):
-	if(characterID is DynamicCharacter):
+	if(!(characterID is String)):
 		characterID = characterID.getID()
 	
 	if(dynamicCharacters.has(characterID)):
@@ -119,7 +123,7 @@ func removeDynamicCharacter(characterID):
 		dynamicCharacters.erase(characterID)
 
 func addDynamicCharacterToPool(characterID, poolID:String):
-	if(characterID is DynamicCharacter):
+	if(!(characterID is String)):
 		characterID = characterID.getID()
 	
 	if(!dynamicCharacters.has(characterID)):
@@ -132,7 +136,7 @@ func addDynamicCharacterToPool(characterID, poolID:String):
 	return true
 
 func removeDynamicCharacterFromPool(characterID, poolID:String):
-	if(characterID is DynamicCharacter):
+	if(!(characterID is String)):
 		characterID = characterID.getID()
 	
 	if(!dynamicCharactersPools.has(poolID)):
@@ -144,7 +148,7 @@ func removeDynamicCharacterFromPool(characterID, poolID:String):
 	return true
 
 func removeDynamicCharacterFromAllPools(characterID):
-	if(characterID is DynamicCharacter):
+	if(!(characterID is String)):
 		characterID = characterID.getID()
 	
 	for poolID in dynamicCharactersPools:
@@ -275,6 +279,7 @@ func reRun():
 	runCurrentScene()
 
 func loadingSavefileFinished():
+	charactersToUpdate.clear()
 	for charID in getCharacters():
 		var character = getCharacter(charID)
 		character.checkOldWayOfUpdating(currentDay, timeOfDay)
@@ -300,10 +305,6 @@ func applyWorldEdit(id):
 		worldEdits[id].apply(GM.world)
 
 func canSave():
-	for scene in sceneStack:
-		if(!scene.canSave()):
-			return false
-	
 	return true
 
 func supportsBattleTurns():
@@ -333,6 +334,8 @@ func saveData():
 	data["roomMemories"] = roomMemories
 	data["world"] = GM.world.saveData()
 	data["dynamicCharactersPools"] = dynamicCharactersPools
+	data["encounterSettings"] = encounterSettings.saveData()
+	data["gameExtenders"] = GM.GES.saveData()
 	
 	data["scenes"] = []
 	for scene in sceneStack:
@@ -358,6 +361,8 @@ func loadData(data):
 	logMessages = SAVE.loadVar(data, "logMessages", [])
 	roomMemories = SAVE.loadVar(data, "roomMemories", {})
 	dynamicCharactersPools = SAVE.loadVar(data, "dynamicCharactersPools", {})
+	encounterSettings.loadData(SAVE.loadVar(data, "encounterSettings", {}))
+	GM.GES.loadData(SAVE.loadVar(data, "gameExtenders", {}))
 	
 	var scenes = SAVE.loadVar(data, "scenes", [])
 	
@@ -477,7 +482,8 @@ func hoursPassed(howMuch):
 	
 	for characterID in charactersToUpdate:
 		var character = getCharacter(characterID)
-		character.hoursPassed(howMuch)
+		if(character != null):
+			character.hoursPassed(howMuch)
 
 func processTimeUntil(newseconds):
 	if(timeOfDay >= newseconds):
@@ -659,6 +665,15 @@ func _on_Player_orificeBecomeMoreLoose(orificeName, _newvalue, _oldvalue):
 func _on_Player_exchangedCumDuringRubbing(senderName, receiverName):
 	addMessage(receiverName + " stole some cum from "+senderName+" during tribbing")
 
+func _on_Player_holePinafullyStretched(bodypart, _who):
+	if(bodypart == BodypartSlot.Vagina):
+		addMessage("OW! Your pussy [b]hurts[/b]..")
+	if(bodypart == BodypartSlot.Anus):
+		addMessage("OW! Your anus [b]hurts[/b]..")
+
+func _on_Player_gotWoundedBy(_who):
+	addMessage("OW! That [b]really[/b] hurt..")
+
 func getRandomSceneFor(sceneType):
 	var resultScenes = []
 	
@@ -695,7 +710,7 @@ func getLogMessages():
 func clearLog():
 	logMessages.clear()
 
-func playAnimation(sceneID, actionID, args = []):
+func playAnimation(sceneID, actionID, args = {}):
 	if(GM.ui != null):
 		GM.ui.getStage3d().play(sceneID, actionID, args)
 
@@ -979,8 +994,13 @@ func startUpdatingCharacter(charID):
 	if(!charactersToUpdate.has(charID)):
 		charactersToUpdate[charID] = true
 		print("BEGAN PROCESSING "+str(charID))
-		getCharacter(charID).processUntilTime(currentDay, timeOfDay)
+		var character = getCharacter(charID)
+		if(character != null):
+			character.processUntilTime(currentDay, timeOfDay)
 
 func generateCharacterID(beginPart = "dynamicnpc"):
 	var numID = GlobalRegistry.generateNPCUniqueID()
 	return beginPart+str(numID)
+
+func getEncounterSettings() -> EncounterSettings:
+	return encounterSettings

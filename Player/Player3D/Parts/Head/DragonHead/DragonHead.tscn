@@ -334,7 +334,6 @@ material/0 = SubResource( 12 )
 visible = false
 mesh = SubResource( 22 )
 skin = SubResource( 23 )
-material/0 = null
 
 [node name="PartStatePicker2" parent="." index="2" instance=ExtResource( 5 )]
 state = "mouth"
@@ -390,9 +389,8 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0374489, 0.000833988, 0.01 
 mesh = SubResource( 24 )
 skin = SubResource( 25 )
 skeleton = NodePath("../../..")
-material/0 = null
 
 [node name="AttachmentProxy" parent="." index="4" instance=ExtResource( 10 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.135938, 7.35741, 0.0560234 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.136, 7.357, 0.05 )
 boneId = "Head"
 zoneName = "blindfold"

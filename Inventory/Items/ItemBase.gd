@@ -130,7 +130,7 @@ func useInCombatWithBuffs(_attacker, _receiver):
 		if(turnBuffs.size() > 0):
 			_attacker.addTimedBuffsTurns(turnBuffs, getBuffsDurationTurns())
 			
-		_attacker.updateNonBattleEffects()
+		#_attacker.updateNonBattleEffects()
 	
 	return useInCombat(_attacker, _receiver)
 
@@ -416,3 +416,8 @@ func getItemCategory():
 		return ItemCategory.Clothes
 	
 	return ItemCategory.Generic
+
+func isRemoved():
+	if(itemState == null):
+		return false
+	return itemState.isRemoved()

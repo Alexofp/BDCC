@@ -21,18 +21,18 @@ region_enabled = true
 region_rect = Rect2( 1, 1, 1022, 62 )
 
 [node name="Chair" type="Sprite3D" parent="." index="1"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.058, 1.928, 0.069 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.558, 1.928, 0.069 )
 texture = ExtResource( 5 )
 
 [node name="Chair2" type="Sprite3D" parent="." index="2"]
-transform = Transform( -1, 0, 0, 0, 1, 0, 0, 0, 1, -3.058, 1.928, 0.069 )
+transform = Transform( -1, 0, 0, 0, 1, 0, 0, 0, 1, -2.558, 1.928, 0.069 )
 texture = ExtResource( 5 )
 
 [node name="Doll3D" parent="." index="3" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, 0 )
 
 [node name="Doll3D2" parent="." index="4" instance=ExtResource( 3 )]
-transform = Transform( -1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 0 )
+transform = Transform( -1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0, 0 )
 
 [node name="AnimationTree" type="AnimationTree" parent="." index="5"]
 tree_root = ExtResource( 6 )

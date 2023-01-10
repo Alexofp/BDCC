@@ -7,7 +7,11 @@ func _init():
 func _run():
 	if(state == ""):
 		addCharacter("tavi", ["naked"])
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc="tavi", exposedBodyparts=[BodypartSlot.Body, BodypartSlot.Penis, BodypartSlot.Breasts, BodypartSlot.Vagina, BodypartSlot.Anus], npcExposedBodyparts=[BodypartSlot.Body, BodypartSlot.Penis, BodypartSlot.Breasts, BodypartSlot.Vagina, BodypartSlot.Anus]})
+		playAnimation(StageScene.SexStanding, "tease", {
+			pc="tavi", npc="pc", 
+			bodyState={naked=true,},
+			npcBodyState={naked=true,hard=true,},
+		})
 		
 	if(state == ""):
 		saynn("You are standing under the shower, completely naked, cleaning yourself. You were about done with washing your {pc.breasts} when you felt someone hugging you from behind.")

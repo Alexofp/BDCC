@@ -1,0 +1,182 @@
+[gd_scene load_steps=38 format=2]
+
+[ext_resource path="res://Player/StageScene3D/BaseStageScene3D.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Player/Props/Stocks.png" type="Texture" id=2]
+[ext_resource path="res://Player/Player3D/Doll3D.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Player/Props/platform.png" type="Texture" id=4]
+[ext_resource path="res://Player/StageScene3D/Scenes/StocksSpitroast.gd" type="Script" id=5]
+
+[sub_resource type="AnimationNodeAnimation" id=270]
+animation = "StocksSexFast_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=126]
+animation = "StocksSexTease_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=127]
+animation = "StocksSex_1-loop"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=128]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=129]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=271]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=272]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachine" id=130]
+states/StocksSexFast_1-loop/node = SubResource( 270 )
+states/StocksSexFast_1-loop/position = Vector2( 392, 330 )
+states/StocksSexTease_1-loop/node = SubResource( 126 )
+states/StocksSexTease_1-loop/position = Vector2( 426, 134 )
+states/StocksSex_1-loop/node = SubResource( 127 )
+states/StocksSex_1-loop/position = Vector2( 410, 237 )
+transitions = [ "StocksSexTease_1-loop", "StocksSex_1-loop", SubResource( 128 ), "StocksSex_1-loop", "StocksSexTease_1-loop", SubResource( 129 ), "StocksSex_1-loop", "StocksSexFast_1-loop", SubResource( 271 ), "StocksSexFast_1-loop", "StocksSex_1-loop", SubResource( 272 ) ]
+start_node = "StocksSexTease_1-loop"
+graph_offset = Vector2( -19, 72 )
+
+[sub_resource type="AnimationNodeBlendTree" id=261]
+graph_offset = Vector2( -45.1809, 44.2537 )
+nodes/StateMachine/node = SubResource( 130 )
+nodes/StateMachine/position = Vector2( 324, 133 )
+nodes/output/position = Vector2( 680, 180 )
+node_connections = [ "output", 0, "StateMachine" ]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=132]
+
+[sub_resource type="AnimationNodeAnimation" id=3]
+animation = "CuffedArms-loop"
+
+[sub_resource type="AnimationNodeBlend2" id=4]
+filter_enabled = true
+filters = [ "Doll3D/Skeleton:Arm.L", "Doll3D/Skeleton:Arm.R", "Doll3D/Skeleton:ForeArm.L", "Doll3D/Skeleton:ForeArm.R", "Doll3D/Skeleton:Hand.L", "Doll3D/Skeleton:Hand.R" ]
+
+[sub_resource type="AnimationNodeAnimation" id=273]
+animation = "StocksSexFast_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=133]
+animation = "StocksSexTease_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=134]
+animation = "StocksSex_2-loop"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=135]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=136]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=274]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=275]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachine" id=137]
+states/StocksSexFast_2-loop/node = SubResource( 273 )
+states/StocksSexFast_2-loop/position = Vector2( 263, 266 )
+states/StocksSexTease_2-loop/node = SubResource( 133 )
+states/StocksSexTease_2-loop/position = Vector2( 282, 94 )
+states/StocksSex_2-loop/node = SubResource( 134 )
+states/StocksSex_2-loop/position = Vector2( 282, 176 )
+transitions = [ "StocksSexTease_2-loop", "StocksSex_2-loop", SubResource( 135 ), "StocksSex_2-loop", "StocksSexTease_2-loop", SubResource( 136 ), "StocksSex_2-loop", "StocksSexFast_2-loop", SubResource( 274 ), "StocksSexFast_2-loop", "StocksSex_2-loop", SubResource( 275 ) ]
+start_node = "StocksSexTease_2-loop"
+
+[sub_resource type="AnimationNodeBlendTree" id=262]
+graph_offset = Vector2( -281.532, 107.684 )
+nodes/Animation/node = SubResource( 3 )
+nodes/Animation/position = Vector2( 140, 280 )
+nodes/CuffsBlend/node = SubResource( 4 )
+nodes/CuffsBlend/position = Vector2( 440, 160 )
+nodes/StateMachine/node = SubResource( 137 )
+nodes/StateMachine/position = Vector2( 120, 140 )
+nodes/output/position = Vector2( 680, 180 )
+node_connections = [ "output", 0, "CuffsBlend", "CuffsBlend", 0, "StateMachine", "CuffsBlend", 1, "Animation" ]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=139]
+
+[sub_resource type="AnimationNodeAnimation" id=276]
+animation = "StocksSexFast_3-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=263]
+animation = "StocksSexTease_3-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=264]
+animation = "StocksSex_3-loop"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=265]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=266]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=277]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=278]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachine" id=267]
+states/StocksSexFast_3-loop/node = SubResource( 276 )
+states/StocksSexFast_3-loop/position = Vector2( 406, 227 )
+states/StocksSexTease_3-loop/node = SubResource( 263 )
+states/StocksSexTease_3-loop/position = Vector2( 415, 77 )
+states/StocksSex_3-loop/node = SubResource( 264 )
+states/StocksSex_3-loop/position = Vector2( 415, 154 )
+transitions = [ "StocksSexTease_3-loop", "StocksSex_3-loop", SubResource( 265 ), "StocksSex_3-loop", "StocksSexTease_3-loop", SubResource( 266 ), "StocksSex_3-loop", "StocksSexFast_3-loop", SubResource( 277 ), "StocksSexFast_3-loop", "StocksSex_3-loop", SubResource( 278 ) ]
+start_node = "StocksSexTease_3-loop"
+
+[sub_resource type="AnimationNodeBlendTree" id=268]
+graph_offset = Vector2( -281.532, 107.684 )
+nodes/Animation/node = SubResource( 3 )
+nodes/Animation/position = Vector2( 140, 280 )
+nodes/CuffsBlend/node = SubResource( 4 )
+nodes/CuffsBlend/position = Vector2( 440, 160 )
+nodes/StateMachine/node = SubResource( 267 )
+nodes/StateMachine/position = Vector2( 140, 160 )
+nodes/output/position = Vector2( 680, 180 )
+node_connections = [ "output", 0, "CuffsBlend", "CuffsBlend", 0, "StateMachine", "CuffsBlend", 1, "Animation" ]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=269]
+
+[node name="StocksSpitroast" instance=ExtResource( 1 )]
+script = ExtResource( 5 )
+
+[node name="Doll3D" parent="." index="0" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0 )
+
+[node name="Doll3D2" parent="." index="1" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -0.02 )
+
+[node name="Doll3D3" parent="." index="2" instance=ExtResource( 3 )]
+transform = Transform( -1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -0.02 )
+
+[node name="Sprite3D" type="Sprite3D" parent="." index="3"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.324482, -1.77462 )
+texture = ExtResource( 4 )
+region_enabled = true
+region_rect = Rect2( 1, 1, 1022, 62 )
+
+[node name="Stocks" type="Sprite3D" parent="." index="4"]
+transform = Transform( 1.06, 0, 0, 0, 1.06, 0, 0, 0, 1.06, -1.19337, 2.55677, 0.818532 )
+texture = ExtResource( 2 )
+
+[node name="AnimationTree" type="AnimationTree" parent="." index="5"]
+tree_root = SubResource( 261 )
+anim_player = NodePath("../Doll3D/DollSkeleton/AnimationPlayer")
+parameters/StateMachine/playback = SubResource( 132 )
+
+[node name="AnimationTree2" type="AnimationTree" parent="." index="6"]
+tree_root = SubResource( 262 )
+anim_player = NodePath("../Doll3D2/DollSkeleton/AnimationPlayer")
+parameters/CuffsBlend/blend_amount = 0
+parameters/StateMachine/playback = SubResource( 139 )
+
+[node name="AnimationTree3" type="AnimationTree" parent="." index="7"]
+tree_root = SubResource( 268 )
+anim_player = NodePath("../Doll3D2/DollSkeleton/AnimationPlayer")
+parameters/CuffsBlend/blend_amount = 0
+parameters/StateMachine/playback = SubResource( 269 )

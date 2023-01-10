@@ -14,7 +14,7 @@ func _init():
 
 func _run():
 	if(state == ""):
-		GM.main.playAnimation(StageScene.Solo, "stand")
+		playAnimation(StageScene.Solo, "stand")
 		
 		var lustCombatState:LustCombatState = GM.pc.getLustCombatState()
 		if(GM.pc.getLocation() == GM.pc.getCellLocation()):
@@ -143,7 +143,6 @@ func addLustActionsButtons(lustCombatState:LustCombatState, theActions):
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
 		GM.pc.getLustCombatState().resetState()
-		GM.pc.updateNonBattleEffects()
 		endScene()
 		return
 	
@@ -172,6 +171,8 @@ func _react(_action: String, _args):
 		savedActionText = result["text"]
 		if("lust" in result):
 			GM.pc.addLust(result["lust"] * 4)
+			if(GM.pc.getLustLevel() >= 1.0 && ("cantCum" in result) && result["cantCum"]):
+				GM.pc.addLust(-1)
 		if("pain" in result):
 			GM.pc.addPain(result["pain"])
 		
@@ -186,7 +187,6 @@ func _react(_action: String, _args):
 			
 		checkDanger()
 		spottedMessages()
-		GM.pc.updateNonBattleEffects()
 		
 	setState(_action)
 
@@ -309,7 +309,6 @@ func checkDanger():
 			
 			if(triggerID != null && GM.ES.triggerReact(triggerID)):
 				GM.pc.getLustCombatState().resetState()
-				GM.pc.updateNonBattleEffects()
 				endScene()
 
 func resolveCustomCharacterName(_charID):

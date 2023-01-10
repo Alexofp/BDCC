@@ -6,7 +6,7 @@ func _init():
 func _run():
 	if(state == ""):
 		addCharacter("kait")
-		GM.main.playAnimation(StageScene.Duo, "kneel", {npc="kait"})
+		playAnimation(StageScene.Duo, "kneel", {npc="kait"})
 
 	if(state == ""):
 		saynn("Defeated, you cry out a painful noise and drop to your knees. Kait quickly dashes towards you and shoves her knee into your chest, making you fly back another meter before hitting the ground. Ow. She then pounces at you and pins to the floor.")
@@ -62,7 +62,11 @@ func _run():
 
 	if(state == "get_pissed_on"):
 		# (piss version)
-		GM.main.playAnimation(StageScene.Duo, "kneel", {npc="kait", npcExposedBodyparts=[BodypartSlot.Vagina]})
+		playAnimation(StageScene.SexFeetPlay, "head", {
+			pc="kait", npc="pc", 
+			bodyState={exposedCrotch=true},
+			npcBodyState={},
+		})
 
 		saynn("You shake your head at the offered hand and try to get up yourself.")
 
@@ -99,7 +103,11 @@ func _run():
 		addButton("Continue", "Time to leave", "endthescene")
 
 	if(state == "get_marked"):
-		GM.main.playAnimation(StageScene.Duo, "kneel", {npc="kait", npcExposedBodyparts=[BodypartSlot.Vagina]})
+		playAnimation(StageScene.SexFeetPlay, "head", {
+			pc="kait", npc="pc", 
+			bodyState={exposedCrotch=true},
+			npcBodyState={},
+		})
 		
 		saynn("You shake your head at the offered hand and try to get up yourself.")
 

@@ -9,7 +9,11 @@ func _init():
 func _run():
 	if(state == ""):
 		addCharacter("rahi", ["naked"])
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc="rahi", hard=true, npcAction="stand", exposedBodyparts=[BodypartSlot.Body, BodypartSlot.Penis, BodypartSlot.Breasts, BodypartSlot.Vagina, BodypartSlot.Anus], npcExposedBodyparts=[BodypartSlot.Body, BodypartSlot.Penis, BodypartSlot.Breasts, BodypartSlot.Vagina, BodypartSlot.Anus]})
+		playAnimation(StageScene.Duo, "stand", {
+			npc="rahi", pc="pc", 
+			bodyState={naked=true,},
+			npcBodyState={naked=true},
+		})
 		
 	if(state == ""):
 		saynn("You watch the familiar kitty that is standing under the shower, completely naked. She is taking her sweet time, washing herself, her hand holding a piece of soap that she uses on her hair. Her body is directed away from you but it still presents you with a nice view. Her wet fur now shows just how slim her curves are, something that is must have for an agile kitty. She is humming some tune to herself while slowly swaying her hips.")
@@ -19,6 +23,12 @@ func _run():
 		addButton("Intervene", "Announce your presence", "intervene")
 
 	if(state == "intervene"):
+		playAnimation(StageScene.SexStanding, "tease", {
+			npc="rahi", pc="pc", 
+			bodyState={naked=true,},
+			npcBodyState={naked=true},
+		})
+		
 		saynn("You get under the shower head that is next to hers and wash yourself for a bit. Then you clear your throat loudly. The feline gasps, her ears direct themselves at you, shortly followed by her gaze.")
 
 		saynn("[say=rahi]Oh, hello there..[/say]")
@@ -109,6 +119,11 @@ func _run():
 
 	if(state == "vaginal"):
 		# (needs an exposed dick)
+		playAnimation(StageScene.SexStanding, "tease", {
+			npc="rahi", pc="pc", 
+			bodyState={naked=true,hard=true,},
+			npcBodyState={naked=true},
+		})
 
 		saynn("You begin gently moving your {pc.masc} hips back and forth, your {pc.cock} is sliding between the kitten's legs and rubbing against her cute pink slit, coating your member with her wetness that quickly gets washed away.")
 
@@ -126,6 +141,12 @@ func _run():
 		addButtonWithChecks("Use condom", "No need to risk getting her pregnant", "use_condom", [], [ButtonChecks.HasCondoms])
 
 	if(state == "fucking"):
+		playAnimation(StageScene.SexStanding, "sex", {
+			npc="rahi", pc="pc", 
+			bodyState={naked=true,hard=true,condom=usedCondom},
+			npcBodyState={naked=true},
+		})
+		
 		saynn("Suddenly you press her chest against a wall, one your hand is on the back of her neck, pinning the feline into the cold concrete while another forcibly spreads her legs, giving you full access to her pink pussy. She lets out a gasp and tests you, already trying to break free but your growling and a smack on the ass shows kitty her place.")
 
 		saynn("[say=pc]You’re gonna take it and you’re gonna love it, cat.[/say]")
@@ -160,6 +181,12 @@ func _run():
 			addButton("Cum inside", "Fill that condom up", "cum_inside")
 
 	if(state == "cum_inside"):
+		playAnimation(StageScene.SexStanding, "fast", {
+			npc="rahi", pc="pc", 
+			bodyState={naked=true,hard=true,condom=usedCondom},
+			npcBodyState={naked=true},
+		})
+		
 		saynn("Like some kind of animal, you keep ravaging her poor kitty cunt, it only takes a few more thrusts before the feline lets out a series of loud long moans, her pussy tightens around your cock and squirts with her female juices, she is cumming! Her feline body shakes and tries to squirm but your grasp is hard, you keep her body still as you keep fucking her slit even through her orgasm. Any pain she might be experiencing now just amplifies her climax instead, the contrast makes it so much more pleasurable.")
 
 		saynn("[say=rahi]Ah-h!.. Y-yes!.. D-don’t stop![/say]")
@@ -216,6 +243,12 @@ func _run():
 		addButton("Continue", "That's nice", "endthescene")
 
 	if(state == "lick_her_out"):
+		playAnimation(StageScene.SexOral, "start", {
+			pc="rahi", npc="pc", 
+			bodyState={naked=true,},
+			npcBodyState={naked=true},
+		})
+		
 		saynn("You put your hand on her shoulder and turn her around until she is facing you before embracing her again. She can’t hide her blushing face anymore, you give her lips a swift lick and she mewls back. Your hand slides down from the kitty’s shoulder and follows her slim curves, it cups her perky breasts and then explores lower, brushing over her belly and then sliding between her legs, finding the little sensitive bean that is her cilt.")
 
 		saynn("Her breathing changes to be more deep, she closes her legs around your hand, preventing you from exploring her further, her own paws are pushed into your chest. You gently bite on her ear and then whisper to her.")
@@ -243,6 +276,12 @@ func _run():
 		addButton("Crouch", "Get down to business", "crouch")
 
 	if(state == "crouch"):
+		playAnimation(StageScene.SexOral, "lick", {
+			pc="rahi", npc="pc", 
+			bodyState={naked=true,},
+			npcBodyState={naked=true},
+		})
+		
 		saynn("Seeing that the kitty is not gonna resist anymore, you grab her by the chin and force her to look at you.")
 
 		saynn("[say=pc]Don’t be quiet, I wanna hear you moan. Got it?[/say]")

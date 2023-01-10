@@ -6,7 +6,7 @@ func _init():
 func _run():
 	if(state == ""):
 		addCharacter("inmateCrowd")
-		GM.main.playAnimation(StageScene.Solo, "stand")
+		playAnimation(StageScene.Solo, "stand")
 
 	if(state == ""):
 		# (You hear noise)
@@ -90,7 +90,7 @@ func _run():
 
 	if(state == "intimidate"):
 		addCharacter("stud")
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc="stud"})
+		playAnimation(StageScene.Duo, "stand", {npc="stud"})
 		# (You say that you will fight for them)
 
 		# (Strongest person steps out?)
@@ -138,7 +138,7 @@ func _run():
 		addButton("Continue", "That was easy", "endthescene")
 
 	if(state == "if_lost"):
-		GM.main.playAnimation(StageScene.Duo, "defeat", {npc="stud"})
+		playAnimation(StageScene.Duo, "defeat", {npc="stud"})
 		# (You get punished? Maybe you are made to lick/suck yourself. And its humiliating)
 
 		# (Yeah, you can pick which one you wanna lick)
@@ -220,7 +220,11 @@ func _run():
 		addButton("Continue", "See what happens next", "continue")
 
 	if(state == "continue"):
-		GM.main.playAnimation(StageScene.Duo, "kneel", {npc="stud", npcHard=true, npcExposedBodyparts=[BodypartSlot.Penis]})
+		playAnimation(StageScene.Duo, "kneel", {
+			npc="stud", npcAction="stand", 
+			bodyState={},
+			npcBodyState={exposedCrotch=true,hard=true},
+		})
 		
 		# (if pussy)
 		if(GM.pc.hasVagina()):
@@ -294,7 +298,7 @@ func _run():
 
 	if(state == "offer_credits"):
 		removeCharacter("stud")
-		GM.main.playAnimation(StageScene.Solo, "stand")
+		playAnimation(StageScene.Solo, "stand")
 		
 		# (You ask how much credits would be enough)
 

@@ -10,6 +10,7 @@ var keyGameValue: int = 50
 var keyText = ""
 var fightMode = false
 var restraintID = ""
+var shouldPlayAnimations = true
 
 #var minigameScene = preload("res://Game/Minigames/Struggling/StrugglingGame.tscn")
 var minigameScene = preload("res://Game/Minigames/ClickAtTheRightTime/ClickAtTheRightTime.tscn")
@@ -20,6 +21,8 @@ func _init():
 func _initScene(_args = []):
 	if(_args.size() > 0):
 		fightMode = _args[0]
+	if(_args.size() > 1):
+		shouldPlayAnimations = _args[1]
 	
 	var allItems = GM.pc.getInventory().getAllEquippedItems()
 	for itemSlot in allItems:
@@ -29,6 +32,9 @@ func _initScene(_args = []):
 
 func _run():
 	if(state == ""):
+		if(shouldPlayAnimations):
+			playAnimation(StageScene.Solo, "stand")
+		
 		var isBlind = GM.pc.isBlindfolded()
 		saynn("Pick the restraint you wanna focus on. Keep in mind that some restraints will be harder to remove depending on what you have on. Crying from pain or moaning loudly from an orgasm will probably attract someone")
 		
@@ -91,6 +97,11 @@ func _run():
 	if(state == "startStruggleAgainst"):
 		var item = GM.pc.getInventory().getItemByUniqueID(restraintID)
 		var restraintData: RestraintData = item.getRestraintData()
+		
+		if(shouldPlayAnimations):
+			var animToPlay = restraintData.getResistAnimation()
+			if(animToPlay != null && animToPlay != ""):
+				playAnimation(StageScene.Solo, animToPlay)
 		
 		var game = minigameScene.instance()
 		GM.ui.addCustomControl("minigame", game)
@@ -350,6 +361,7 @@ func saveData():
 	data["keyText"] = keyText
 	data["fightMode"] = fightMode
 	data["restraintID"] = restraintID
+	data["shouldPlayAnimations"] = shouldPlayAnimations
 	
 	return data
 	
@@ -367,3 +379,4 @@ func loadData(data):
 	keyText = SAVE.loadVar(data, "keyText", "")
 	fightMode = SAVE.loadVar(data, "fightMode", false)
 	restraintID = SAVE.loadVar(data, "restraintID", "")
+	shouldPlayAnimations = SAVE.loadVar(data, "shouldPlayAnimations", true)

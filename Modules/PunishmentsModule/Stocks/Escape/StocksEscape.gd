@@ -7,7 +7,7 @@ func _init():
 func _run():
 	if(state == ""):
 		addCharacter("rahi")
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc="rahi"})
+		playAnimation(StageScene.Duo, "stand", {npc="rahi"})
 		
 		saynn("With the corner of your eye you notice some movement, a brown feline that was sitting on the bench has stood up. She is not very big and wears a general block uniform.")
 

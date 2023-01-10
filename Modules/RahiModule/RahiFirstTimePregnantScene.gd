@@ -6,7 +6,7 @@ func _init():
 func _run():
 	if(state == ""):
 		addCharacter("rahi")
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc="rahi", npcAction="stand"})
+		playAnimation(StageScene.Duo, "stand", {npc="rahi", npcAction="stand"})
 		
 	if(state == ""):
 		# (if loc == main_bench2)

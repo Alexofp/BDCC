@@ -24,7 +24,7 @@ func getCategory():
 	return ["Fuck"]
 
 func getDomTags():
-	if(state in ["blowjob", "deepthroat", "licking", "grinding"]):
+	if(state in ["blowjob", "lickingcock", "licking", "grinding"]):
 		return [SexActivityTag.MouthUsed, SexActivityTag.HavingSex]
 	return [SexActivityTag.HavingSex]
 
@@ -453,7 +453,7 @@ func doDomAction(_id, _actionInfo):
 			])
 		else:
 			text = RNG.pick([
-				"{dom.You} "+RNG.pick(["{dom.youVerb('grope')}", "{dom.youVerb('fondle')}", "{dom.youVerb('play')}"])+" with {sub.your} balls and {dom.youVerb('realize')} "+RNG.pick(["that they are full", "how heavy they are", "how much cum is stored in them"])+". They "+RNG.pick(["tense up slightly"])+" as {dom.youHe} tease them.",
+				"{dom.You} "+RNG.pick(["{dom.youVerb('grope')}", "{dom.youVerb('fondle')}", "{dom.youVerb('play')} with"])+" {sub.your} balls and {dom.youVerb('realize')} "+RNG.pick(["that they are full", "how heavy they are", "how much cum is stored in them"])+". They "+RNG.pick(["tense up slightly"])+" as {dom.youHe} tease them.",
 			])
 		cumProduction.fillPercent(0.2)
 		affectSub(subInfo.fetishScore({Fetish.OralSexReceiving: 1.0}), 0.1, -0.05, -0.01)
@@ -539,7 +539,7 @@ func doDomAction(_id, _actionInfo):
 	if(exposedThings.size() > 0):
 		genitalsText = "exposed "+Util.humanReadableList(exposedThings)
 		
-		return {text = "{dom.You} {dom.youVerb('pull')} {dom.yourHis} "+genitalsText+" away from {sub.yourHis} lips."}
+		return {text = "{dom.You} {dom.youVerb('pull')} {dom.yourHis} lips away from {sub.yourHis} "+genitalsText+"."}
 
 func getSubActions():
 	var actions = []
@@ -751,8 +751,22 @@ func doSubAction(_id, _actionInfo):
 	return
 
 func getAnimation():
-	return [StageScene.Duo, "stand", {pc=subID, npc=domID, npcAction="kneel"}]
-
+	if(state in [""]):
+		return [StageScene.SexOral, "start", {pc=subID, npc=domID}]
+	
+	if(state in ["licking", "subabouttocum"]):
+		return [StageScene.SexOral, "lick", {pc=subID, npc=domID}]
+	if(state in ["tonguefucking"]):
+		return [StageScene.SexOral, "lick", {pc=subID, npc=domID}]
+	
+	if(state in ["blowjob", "subabouttocumcock"]):
+		if(domInfo.isCloseToCumming()):
+			return [StageScene.SexOral, "fast", {pc=subID, npc=domID}]
+		return [StageScene.SexOral, "sex", {pc=subID, npc=domID}]
+	
+	if(state in ["lickingcock"]):
+		return [StageScene.SexOral, "tease", {pc=subID, npc=domID}]
+		
 func getDomOrgasmHandlePriority():
 	return -1
 

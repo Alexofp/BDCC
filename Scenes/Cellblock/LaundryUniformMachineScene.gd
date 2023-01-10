@@ -59,7 +59,6 @@ func _react(_action: String, _args):
 			var item:ItemBase = GM.pc.getInventory().getEquippedItem(InventorySlot.Body)
 			if(item!=null && item.id in ["inmateuniform", "inmateuniformHighsec", "inmateuniformSexDeviant"]):
 				item.repairDamage()
-				GM.pc.updateNonBattleEffects()
 	
 	if(_action == "printUniform"):
 		processTime(30)

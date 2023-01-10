@@ -7,7 +7,7 @@ func getVisibleName():
 	return "Guard armor"
 	
 func getDescription():
-	return "A standart armor for guards"
+	return "A standard armor for guards"
 
 func getClothingSlot():
 	return InventorySlot.Body

@@ -281,9 +281,8 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0473862, 0.0483999, 0.01 )
 mesh = SubResource( 10 )
 skin = SubResource( 12 )
 skeleton = NodePath("../../..")
-material/0 = null
 
 [node name="AttachmentProxy" parent="." index="2" instance=ExtResource( 9 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.135938, 7.35741, 0.0560234 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.136, 7.357, 0.05 )
 boneId = "Head"
 zoneName = "blindfold"

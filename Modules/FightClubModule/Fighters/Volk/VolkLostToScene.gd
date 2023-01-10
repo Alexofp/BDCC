@@ -6,7 +6,7 @@ func _init():
 func _run():
 	if(state == ""):
 		addCharacter("volk")
-		GM.main.playAnimation(StageScene.Duo, "kneel", {npc="volk"})
+		playAnimation(StageScene.Duo, "kneel", {npc="volk"})
 
 	if(state == ""):
 		saynn("Volk laughs seeing you collapse to the floor.")
@@ -25,6 +25,8 @@ func _run():
 		GM.ES.triggerRun("ArenaFighterPCLost", ["volk"])
 
 	if(state == "weapon_play"):
+		playAnimation(StageScene.SexStart, "start", {pc="volk", npc="pc"})
+		
 		saynn("[say=pc]What do you want?[/say]")
 
 		saynn("He looms over you, his muzzle dangerously close to yours, his hand fidgeting with the sharpened piece of glass near your neck.")

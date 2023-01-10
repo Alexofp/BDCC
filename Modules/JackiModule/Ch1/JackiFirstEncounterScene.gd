@@ -9,7 +9,7 @@ func _run():
 		addCharacter("jacki")
 		
 	if(state == ""):
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc="jacki", npcAction="defeat"})
+		playAnimation(StageScene.Duo, "stand", {npc="jacki", npcAction="defeat"})
 		
 		# (Happens randomly when walking through the yard area. Level must be 5 or above)
 
@@ -25,7 +25,7 @@ func _run():
 
 	if(state == "help_her_up"):
 		setFlag("JackiModule.Jacki_FirstTimeWasKind", true)
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc="jacki"})
+		playAnimation(StageScene.Duo, "stand", {npc="jacki"})
 		
 		saynn("[say=pc]Are you hurt?[/say]")
 
@@ -83,7 +83,7 @@ func _run():
 
 
 	if(state == "let_her"):
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc="jacki"})
+		playAnimation(StageScene.Duo, "stand", {npc="jacki"})
 		
 		saynn("You cross your arms and just watch her get up. The wolfy swipes the dust from her inmate uniform and mostly looks calm.")
 

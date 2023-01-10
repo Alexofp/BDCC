@@ -10,7 +10,7 @@ func _reactInit():
 
 func _run():
 	if(state == ""):
-		GM.main.playAnimation(StageScene.Stocks, "idle")
+		playAnimation(StageScene.Stocks, "idle")
 		GM.pc.setLocation("main_punishment_spot")
 		aimCamera("main_punishment_spot")
 		
@@ -135,7 +135,7 @@ func _react(_action: String, _args):
 		return
 		
 	if(_action == "struggle"):
-		runScene("StrugglingScene")
+		runScene("StrugglingScene", [false, false])
 		setState("")
 		return
 	

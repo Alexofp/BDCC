@@ -32,7 +32,7 @@ func resolveCustomCharacterName(_charID):
 func _run():
 	if(state == ""):
 		addCharacter(npcID)
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc=npcID})
+		playAnimation(StageScene.Duo, "stand", {npc=npcID})
 
 	if(state == ""):
 		saynn("While carefully stepping through the area you spot one of the guards. You caught {npc.him} at a very good moment because {npc.His} back is turned away so you can try to just sneak past.")
@@ -178,7 +178,7 @@ func _run():
 		addButton("Just leave", "Time to go", "endthescene")
 	
 	if(state == "cuff_subby"):
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc=npcID})
+		playAnimation(StageScene.Duo, "stand", {npc=npcID})
 		
 		saynn("You sneak up behind the guard and suddenly grab {npc.him} by the neck while your other hand searches through {npc.his} equipment.")
 		
@@ -236,7 +236,7 @@ func _run():
 		addButton("Fight", "Begin the fight", "startfight")
 	
 	if(state == "cuff_success"):
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc=npcID})
+		playAnimation(StageScene.Duo, "stand", {npc=npcID})
 		
 		saynn("You sneak up behind the guard and suddenly grab {npc.him} by the neck while your other hand searches through {npc.his} equipment.")
 		
@@ -313,7 +313,6 @@ func _react(_action: String, _args):
 		getCharacter(npcID).setFlag(CharacterFlag.Introduced, true)
 
 	if(_action == "endthescene"):
-		getCharacter(npcID).resetEquipment()
 		endScene()
 		return
 

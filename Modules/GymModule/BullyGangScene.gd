@@ -10,7 +10,7 @@ func _run():
 		addCharacter("gymbully")
 		addCharacter("gymbully2")
 		addCharacter("gymbully3")
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc="gymbully"})
+		playAnimation(StageScene.Duo, "stand", {npc="gymbully"})
 
 	if(state == ""):
 		# (if first time)

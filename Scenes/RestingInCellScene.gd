@@ -32,7 +32,7 @@ func _run():
 		
 		saynn("Welcome to day "+str(GM.main.getDays())+" of your sentence")
 		
-		addButton("Continue", "Time to wake up", "endthescene")
+		addButton("Continue", "Time to wake up", "endthesceneandtriggerevents")
 		
 		GM.ES.triggerRun(Trigger.WakeUpInCell)
 
@@ -58,6 +58,10 @@ func _react(_action: String, _args):
 		return
 
 	if(_action == "endthescene"):
+		endScene()
+		return
+
+	if(_action == "endthesceneandtriggerevents"):
 		GM.pc.updateAppearance()
 		
 		if(GM.ES.triggerReact(Trigger.WakeUpInCell)):

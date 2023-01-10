@@ -270,8 +270,12 @@ func doSubAction(_id, _actionInfo):
 	return
 
 func getAnimation():
-	return [StageScene.Duo, "kneel", {pc=subID, npc=domID, npcAction="kneel"}]
-
+	if(state in [""]):
+		return [StageScene.SexTribadism, "tease", {pc=domID, npc=subID}]
+	if(domInfo.isCloseToCumming()):
+		return [StageScene.SexTribadism, "fast", {pc=domID, npc=subID}]
+	return [StageScene.SexTribadism, "sex", {pc=domID, npc=subID}]
+	
 func getDomOrgasmHandlePriority():
 	return 5
 

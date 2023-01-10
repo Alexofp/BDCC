@@ -2,12 +2,17 @@ extends Spatial
 class_name BaseStageScene3D
 
 var id = "error"
+var currentAnim = ""
 
 func _init():
 	id = "error"
 
 func _ready():
 	pass
+
+func playAnimationFinal(animID, _args = {}):
+	playAnimation(animID, _args)
+	currentAnim = animID
 
 func playAnimation(animID, _args = {}):
 	print("Playing: "+str(animID))
@@ -75,6 +80,12 @@ func stateMachineTravel(thedoll, state_machine, animID):
 		thedoll.setTemporaryState("hands", "fists")
 	elif(animID == "shove"):
 		state_machine.travel("Shove")
+	elif(animID == "struggle"):
+		state_machine.travel("StruggleGeneric-loop")
+	elif(animID == "struggle_gag"):
+		state_machine.travel("StruggleGag-loop")
+	elif(animID == "struggle_legs"):
+		state_machine.travel("StruggleLegs-loop")
 	else:
 		return false
 	return true

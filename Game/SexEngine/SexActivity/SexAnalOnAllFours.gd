@@ -21,6 +21,7 @@ func _init():
 func getGoals():
 	return {
 		SexGoal.FuckAnal: 1.0,
+		SexGoal.StraponAnal: 1.0,
 	}
 
 func getVisibleName():

@@ -6,7 +6,7 @@ func _init():
 func _run():
 	if(state == ""):
 		addCharacter("nova")
-		GM.main.playAnimation(StageScene.Duo, "kneel", {npc="nova"})
+		playAnimation(StageScene.Duo, "kneel", {npc="nova"})
 
 	if(state == ""):
 		saynn("Nova watches you collapse and puts her weapon away. You lost and are unable to fight anymore, you keep panting heavily, trying to fix your breath at least.")
@@ -23,7 +23,11 @@ func _run():
 		GM.ES.triggerRun("ArenaFighterPCLost", ["nova"])
 
 	if(state == "get_fucked"):
-		GM.main.playAnimation(StageScene.Duo, "kneel", {npc="nova", hard=true, exposedBodyparts=[BodypartSlot.Vagina, BodypartSlot.Anus, BodypartSlot.Body]})
+		playAnimation(StageScene.Duo, "kneel", {
+			npc="nova", npcAction="stand", 
+			bodyState={exposedCrotch=true,hard=true},
+			npcBodyState={},
+		})
 		
 		saynn("[say=pc]I won’t call you anything, do your worst![/say]")
 
@@ -56,7 +60,9 @@ func _run():
 		addButton("Continue", "See what happens next", "continue")
 
 	if(state == "continue"):
-		GM.main.playAnimation(StageScene.Solo, "walk", {exposedBodyparts=[BodypartSlot.Vagina, BodypartSlot.Anus, BodypartSlot.Body], hard=true})
+		playAnimation(StageScene.Solo, "walk", {
+			bodyState={naked=true,},
+		})
 		
 		saynn("Suddenly everything goes completely silent. No Nova, no crowd, no room ambience. You shake your head but no, your blindfold and earplugs sit very tight. Oh no, you’re in complete isolation! All you feel is the floor underneath and your deep breathing.")
 
@@ -95,6 +101,12 @@ func _run():
 		addButton("Continue", "See what happens next..", "getused")
 
 	if(state == "getused"):
+		playAnimation(StageScene.SexStanding, "sex", {
+			pc="nova", npc="pc", 
+			bodyState={exposedCrotch=true,hard=true},
+			npcBodyState={naked=true,hard=true,},
+		})
+		
 		saynn("Complete darkness.. Complete isolation.. Heavy pants and soft moans escape into the abyss, your knees are touching together so as to not make the toy fall out.")
 
 		saynn("You swear you can feel Nova standing somewhere near. You turn to face her just to experience your {pc.breasts} being smacked. Ow! You drool profusely and moan desperately into the void.")

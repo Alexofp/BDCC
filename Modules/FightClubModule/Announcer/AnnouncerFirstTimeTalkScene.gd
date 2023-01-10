@@ -6,7 +6,7 @@ func _init():
 func _run():
 	if(state == ""):
 		addCharacter("announcer")
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc="announcer"})
+		playAnimation(StageScene.Duo, "stand", {npc="announcer"})
 
 	if(state == ""):
 		saynn("You stand near the steps that lead to the balcony where the announcer stands and decide to grab his attention by waving. You have to talk loudly since it’s a pretty crowded space.")

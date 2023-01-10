@@ -6,7 +6,7 @@ func _init():
 func _run():
 	if(state == ""):
 		addCharacter("alexrynard")
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc="alexrynard"})
+		playAnimation(StageScene.Duo, "stand", {npc="alexrynard"})
 
 	if(state == ""):
 		# (You give him the panties. Foxy starts modifying them by putting little portals inside and attaching them. He also somehow modifies them to be unremovable?)
@@ -51,7 +51,9 @@ func _run():
 		addButton("Put them on", "See what happens", "put_them_on")
 
 	if(state == "put_them_on"):
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc="alexrynard", exposedBodyparts=[BodypartSlot.Body]})
+		playAnimation(StageScene.Duo, "stand", {npc="alexrynard", 
+			bodyState={exposedCrotch=true},
+		})
 		
 		# (You put the panties on, cold metal rubs against your privates)
 

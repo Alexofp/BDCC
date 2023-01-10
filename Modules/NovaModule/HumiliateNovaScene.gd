@@ -6,6 +6,10 @@ func _init():
 func _run():
 	if(state == ""):
 		addCharacter("nova", ["naked"])
+		playAnimation(StageScene.SexStart, "start", {
+			pc="pc",npc="nova",
+			npcBodyState={exposedCrotch=true,hard=true},
+		})
 
 	if(state == ""):
 		saynn("You come up to Nova and quickly snatch her weapon so she can’t use it against you. You then straddle and pin her to the floor, your hands behind ripping the parts of her armor off.")
@@ -114,6 +118,11 @@ func _run():
 		addButton("Continue", "Time to run", "endthescene")
 
 	if(state == "turn_on_baton"):
+		playAnimation(StageScene.SexStart, "defeated", {
+			pc="pc",npc="nova",
+			npcBodyState={exposedCrotch=true,hard=true},
+		})
+		
 		saynn("Since she was so uncooperative, you decide to teach her a lesson.")
 
 		saynn("[say=pc]What if I turn it on right now~? While it’s in your bratty cunt~?[/say]")

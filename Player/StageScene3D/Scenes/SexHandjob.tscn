@@ -1,0 +1,132 @@
+[gd_scene load_steps=27 format=2]
+
+[ext_resource path="res://Player/Player3D/Doll3D.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Player/StageScene3D/BaseStageScene3D.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Player/Props/platform.png" type="Texture" id=3]
+[ext_resource path="res://Player/StageScene3D/Scenes/SexHandjob.gd" type="Script" id=4]
+
+[sub_resource type="AnimationNodeAnimation" id=3]
+animation = "CuffedArms-loop"
+
+[sub_resource type="AnimationNodeBlend2" id=4]
+filter_enabled = true
+filters = [ "Doll3D/Skeleton:Arm.L", "Doll3D/Skeleton:Arm.R", "Doll3D/Skeleton:ForeArm.L", "Doll3D/Skeleton:ForeArm.R", "Doll3D/Skeleton:Hand.L", "Doll3D/Skeleton:Hand.R" ]
+
+[sub_resource type="AnimationNodeAnimation" id=90]
+animation = "Sex_HandjobFast_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=91]
+animation = "Sex_HandjobTease_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=92]
+animation = "Sex_Handjob_1-loop"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=93]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=94]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=95]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=96]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachine" id=97]
+states/Sex_HandjobFast_1-loop/node = SubResource( 90 )
+states/Sex_HandjobFast_1-loop/position = Vector2( 443, 280 )
+states/Sex_HandjobTease_1-loop/node = SubResource( 91 )
+states/Sex_HandjobTease_1-loop/position = Vector2( 436, 127 )
+states/Sex_Handjob_1-loop/node = SubResource( 92 )
+states/Sex_Handjob_1-loop/position = Vector2( 436, 202 )
+transitions = [ "Sex_HandjobTease_1-loop", "Sex_Handjob_1-loop", SubResource( 93 ), "Sex_Handjob_1-loop", "Sex_HandjobTease_1-loop", SubResource( 94 ), "Sex_Handjob_1-loop", "Sex_HandjobFast_1-loop", SubResource( 95 ), "Sex_HandjobFast_1-loop", "Sex_Handjob_1-loop", SubResource( 96 ) ]
+start_node = "Sex_HandjobTease_1-loop"
+
+[sub_resource type="AnimationNodeBlendTree" id=88]
+graph_offset = Vector2( -159, -11 )
+nodes/Animation/node = SubResource( 3 )
+nodes/Animation/position = Vector2( 140, 280 )
+nodes/CuffsBlend/node = SubResource( 4 )
+nodes/CuffsBlend/position = Vector2( 440, 160 )
+nodes/StateMachine/node = SubResource( 97 )
+nodes/StateMachine/position = Vector2( 120, 120 )
+nodes/output/position = Vector2( 680, 180 )
+node_connections = [ "output", 0, "CuffsBlend", "CuffsBlend", 0, "StateMachine", "CuffsBlend", 1, "Animation" ]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=22]
+
+[sub_resource type="AnimationNodeAnimation" id=98]
+animation = "Sex_HandjobFast_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=99]
+animation = "Sex_HandjobTease_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=100]
+animation = "Sex_Handjob_2-loop"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=101]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=102]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=103]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=104]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachine" id=105]
+states/Sex_HandjobFast_2-loop/node = SubResource( 98 )
+states/Sex_HandjobFast_2-loop/position = Vector2( 455, 264 )
+states/Sex_HandjobTease_2-loop/node = SubResource( 99 )
+states/Sex_HandjobTease_2-loop/position = Vector2( 467, 109 )
+states/Sex_Handjob_2-loop/node = SubResource( 100 )
+states/Sex_Handjob_2-loop/position = Vector2( 460, 185 )
+transitions = [ "Sex_HandjobTease_2-loop", "Sex_Handjob_2-loop", SubResource( 101 ), "Sex_Handjob_2-loop", "Sex_HandjobTease_2-loop", SubResource( 102 ), "Sex_Handjob_2-loop", "Sex_HandjobFast_2-loop", SubResource( 103 ), "Sex_HandjobFast_2-loop", "Sex_Handjob_2-loop", SubResource( 104 ) ]
+start_node = "Sex_HandjobTease_2-loop"
+
+[sub_resource type="AnimationNodeBlendTree" id=89]
+graph_offset = Vector2( -298.532, -3.3158 )
+nodes/Animation/node = SubResource( 3 )
+nodes/Animation/position = Vector2( 140, 280 )
+nodes/CuffsBlend/node = SubResource( 4 )
+nodes/CuffsBlend/position = Vector2( 440, 160 )
+nodes/StateMachine/node = SubResource( 105 )
+nodes/StateMachine/position = Vector2( 160, 120 )
+nodes/output/position = Vector2( 680, 180 )
+node_connections = [ "output", 0, "CuffsBlend", "CuffsBlend", 0, "StateMachine", "CuffsBlend", 1, "Animation" ]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=23]
+
+[node name="SexHandjob" instance=ExtResource( 2 )]
+script = ExtResource( 4 )
+
+[node name="Sprite3D" type="Sprite3D" parent="." index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.196641, -1.77462 )
+texture = ExtResource( 3 )
+region_enabled = true
+region_rect = Rect2( 1, 1, 1022, 62 )
+
+[node name="Doll3D" parent="." index="1" instance=ExtResource( 1 )]
+
+[node name="Doll3D2" parent="." index="2" instance=ExtResource( 1 )]
+transform = Transform( -1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+
+[node name="AnimationTree" type="AnimationTree" parent="." index="3"]
+tree_root = SubResource( 88 )
+anim_player = NodePath("../Doll3D/DollSkeleton/AnimationPlayer")
+parameters/CuffsBlend/blend_amount = 0
+parameters/StateMachine/playback = SubResource( 22 )
+
+[node name="AnimationTree2" type="AnimationTree" parent="." index="4"]
+tree_root = SubResource( 89 )
+anim_player = NodePath("../Doll3D2/DollSkeleton/AnimationPlayer")
+parameters/CuffsBlend/blend_amount = 0
+parameters/StateMachine/playback = SubResource( 23 )
+
+[editable path="Doll3D"]
+[editable path="Doll3D/DollSkeleton"]
+[editable path="Doll3D2"]
+[editable path="Doll3D2/DollSkeleton"]

@@ -227,8 +227,12 @@ func _run():
 		
 		addButtonAt(14, "Submit", "Give up", "submit")
 		
-	if(state == "lost" || state == "win"):		
-		addButton("Continue", "the battle has ended", "endbattle")
+	if(state == "lost" || state == "win"):
+		if(enemyCharacter.isDynamicCharacter() && restraintIdsForcedByPC.size() > 0 && state == "win"):
+			addButton("Recover restraints", "the battle has ended", "endbattle", [true])
+			addButton("Keep restraints", "the battle has ended", "endbattle", [false])
+		else:
+			addButton("Continue", "the battle has ended", "endbattle", [true])
 		
 	if(state == "lustCombatAboutToCum"):
 		saynn(whatPlayerDid)
@@ -298,7 +302,7 @@ func _react(_action: String, _args):
 				enemyCharacter.addStamina(-10)
 				whatPlayerDid += GM.ui.processString("You try to force a restraint onto {receiver.name} but {receiver.he} avoided your attempt!")
 			
-				GM.main.playAnimation(StageScene.Duo, "", {npc=enemyID, npcAction="dodge"})
+				playAnimation(StageScene.Duo, "", {npc=enemyID, npcAction="dodge"})
 			else:
 				GM.pc.addSkillExperience(Skill.BDSM, restraintData.getLevel() * 3)
 				whatPlayerDid += GM.ui.processString(item.getForcedOnMessage(false))
@@ -307,7 +311,7 @@ func _react(_action: String, _args):
 				GM.pc.getInventory().removeItem(item)
 				enemyCharacter.getInventory().forceEquipRemoveOther(item)
 				enemyCharacter.getBuffsHolder().calculateBuffs()
-				enemyCharacter.updateNonBattleEffects()
+				#enemyCharacter.updateNonBattleEffects()
 				
 				var restraintsAmount = enemyCharacter.getInventory().getEquppedRestraints().size()
 				if(enemyCharacter.shouldReactToRestraint(restraintData.getRestraintType(), restraintsAmount, true)):
@@ -378,7 +382,7 @@ func _react(_action: String, _args):
 		var result = attack.doAttack(enemyCharacter, GM.pc)
 		result["text"] = GM.ui.processString(result["text"])
 		
-		GM.main.playAnimation(StageScene.Duo, result["receiverAnimation"], {npc=enemyID, npcAction=result["attackerAnimation"]})
+		playAnimation(StageScene.Duo, result["receiverAnimation"], {npc=enemyID, npcAction=result["attackerAnimation"]})
 		
 		whatEnemyDid += result["text"]
 		savedAIAttackID = ""
@@ -392,11 +396,11 @@ func _react(_action: String, _args):
 		setState("lost")
 		whatHappened = "You give up the fight willingly and submit to your enemy\n"
 		battleState = "lost"
-		GM.main.playAnimation(StageScene.Solo, "kneel")
+		playAnimation(StageScene.Solo, "kneel")
 		return
 	
 	if(_action == "endbattle"):
-		if(restraintIdsForcedByPC.size() > 0):
+		if(restraintIdsForcedByPC.size() > 0 && _args.size() > 0 && _args[0]):
 			#var recoverChance = GM.pc.getBuffsHolder().getCustom(BuffAttribute.RestraintRecovery) * 100.0
 			
 			for itemUniqueID in restraintIdsForcedByPC:
@@ -446,6 +450,8 @@ func _react(_action: String, _args):
 		whatPlayerDid = GM.ui.processString(result["text"]).trim_suffix("\n\n")
 		if("lust" in result):
 			GM.pc.addLust(result["lust"])
+			if(GM.pc.getLustLevel() >= 1.0 && ("cantCum" in result) && result["cantCum"]):
+				GM.pc.addLust(-1)
 		if("pain" in result):
 			GM.pc.addPain(result["pain"])
 		
@@ -552,7 +558,7 @@ func doPlayerAttack(attackData):
 	var result = attack.doAttack(GM.pc, enemyCharacter, attackData)
 	result["text"] = GM.ui.processString(result["text"])
 	
-	GM.main.playAnimation(StageScene.Duo, result["attackerAnimation"], {npc=enemyID, npcAction=result["receiverAnimation"]})
+	playAnimation(StageScene.Duo, result["attackerAnimation"], {npc=enemyID, npcAction=result["receiverAnimation"]})
 	
 	var expData = attack.getExperience()
 	for expAdd in expData:
@@ -581,6 +587,10 @@ func aiTurn():
 		var minigameStatus = 1.0
 		if(restraintData.shouldDoStruggleMinigame(enemyCharacter)):
 			minigameStatus = clamp(enemyCharacter.getRestraintStrugglingMinigameResult(), 0.0, 1.0) * 2.0 * enemyCharacter.getRestraintStrugglePower()
+		
+		var animToPlay = restraintData.getResistAnimation()
+		if(animToPlay != null && animToPlay != ""):
+			playAnimation(StageScene.Duo, "", {npc=enemyID, npcAction=animToPlay})
 		
 		var damage = 0.0
 		var addLust = 0
@@ -628,6 +638,7 @@ func aiTurn():
 				addMessage("You recovered "+item.getAStackName())
 			#elif(recoverChance > 0):
 			#	addMessage("You lost "+item.getAStackName())
+			
 		var restraintsAmount = enemyCharacter.getInventory().getEquppedRestraints().size()
 		if(enemyCharacter.shouldReactToRestraint(restraintData.getRestraintType(), restraintsAmount, false)):
 			var reaction = enemyCharacter.reactRestraint(restraintData.getRestraintType(), restraintsAmount, false)
@@ -651,7 +662,7 @@ func aiTurn():
 			var result = attack.doAttack(enemyCharacter, GM.pc)
 			result["text"] = GM.ui.processString(result["text"])
 				
-			GM.main.playAnimation(StageScene.Duo, result["receiverAnimation"], {npc=enemyID, npcAction=result["attackerAnimation"]})
+			playAnimation(StageScene.Duo, result["receiverAnimation"], {npc=enemyID, npcAction=result["attackerAnimation"]})
 			
 			enemyText += result["text"]
 		else:
@@ -734,8 +745,8 @@ func beforeTurnChecks(pcWasStruggling = false):
 func afterTurnChecks():
 	#GM.pc.processBattleTurn()
 	#enemyCharacter.processBattleTurn()
-	enemyCharacter.updateNonBattleEffects()
-	GM.pc.updateNonBattleEffects()
+	#enemyCharacter.updateNonBattleEffects()
+	#GM.pc.updateNonBattleEffects()
 	
 	var won = checkEnd()
 	if(won == "lost"):
@@ -771,7 +782,7 @@ func checkEnd():
 		whatHappened += "You succumb to pain\n"
 		battleState = "lost"
 		battleEndedHow = "pain"
-		GM.main.playAnimation(StageScene.Solo, "defeat")
+		playAnimation(StageScene.Solo, "defeat")
 		return "lost"
 	if(GM.pc.getLust() >= GM.pc.lustThreshold()):
 		if(whatHappened != ""):
@@ -779,7 +790,7 @@ func checkEnd():
 		whatHappened += "You're too aroused to continue\n"
 		battleState = "lost"
 		battleEndedHow = "lust"
-		GM.main.playAnimation(StageScene.Solo, "defeat")
+		playAnimation(StageScene.Solo, "defeat")
 		return "lost"
 	
 	return ""

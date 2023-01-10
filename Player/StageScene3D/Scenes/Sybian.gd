@@ -17,15 +17,15 @@ func updateSubAnims():
 	
 func playAnimation(animID, _args = {}):
 	print("Playing sybian: "+str(animID))
-	doll.prepareCharacter("pc")
-	
-	if(_args.has("exposedBodyparts")):
-		doll.setExposedBodyparts(_args["exposedBodyparts"])
+	if(_args.has("pc")):
+		doll.prepareCharacter(_args["pc"])
 	else:
-		doll.setExposedBodyparts([])
+		doll.prepareCharacter("pc")
 	
-	if(_args.has("hard") && _args["hard"]):
-		doll.setCockTemporaryHard()
+	if(_args.has("bodyState")):
+		doll.applyBodyState(_args["bodyState"])
+	else:
+		doll.applyBodyState({})
 	
 	updateSubAnims()
 	

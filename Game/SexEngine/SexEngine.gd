@@ -246,6 +246,10 @@ func generateGoals():
 			var goalsToAdd = dom.getFetishHolder().getGoals(self, sub)
 			if(goalsToAdd != null):
 				for goal in goalsToAdd:
+					if(subID == "pc"):
+						if(GM.main.getEncounterSettings().isGoalDisabledForSubPC(goal[0])):
+							continue
+					
 					var sexGoal:SexGoalBase = GlobalRegistry.getSexGoal(goal[0])
 					var goalData = sexGoal.generateData(self, personDomInfo, personSubInfo)
 					
@@ -273,9 +277,31 @@ func generateGoals():
 
 func hasGoal(thedominfo, goal, thesubinfo):
 	for goalInfo in thedominfo.goals:
-		if(goalInfo[0] == goal && goalInfo[1] == thesubinfo.charID):
-			return true
+		if(goalInfo[1] == thesubinfo.charID):
+			if(goalInfo[0] == goal):
+				return true
+			
+			var goalObject = GlobalRegistry.getSexGoal(goalInfo[0])
+			if(goalObject != null):
+				var subgoals = goalObject.getSubGoals(self, thedominfo, thesubinfo, goalInfo[2])
+				if(subgoals != null && subgoals.has(goal)):
+					return true
+			
 	return false
+
+func hasGoalScore(thedominfo, goal, thesubinfo):
+	for goalInfo in thedominfo.goals:
+		if(goalInfo[1] == thesubinfo.charID):
+			if(goalInfo[0] == goal):
+				return 1.0
+			
+			var goalObject = GlobalRegistry.getSexGoal(goalInfo[0])
+			if(goalObject != null):
+				var subgoals = goalObject.getSubGoals(self, thedominfo, thesubinfo, goalInfo[2])
+				if(subgoals != null && subgoals.has(goal)):
+					return float(subgoals[goal])
+			
+	return 0.0
 
 func satisfyGoal(thedominfo, goalid, thesubinfo):
 	for _i in range(0, thedominfo.goals.size()):
@@ -823,6 +849,22 @@ func endSex():
 	sexEnded = true
 	var texts = ["The sex scene has ended!"]
 	
+	if(trackedItems.has("pc")):
+		for trackedItem in trackedItems["pc"]:
+			var character:BaseCharacter = GlobalRegistry.getCharacter(trackedItem[0])
+			var item:ItemBase = character.getInventory().getItemByUniqueID(trackedItem[1])
+			if(item == null):
+				continue
+			character.getInventory().removeItem(item)
+			character.getInventory().removeEquippedItem(item)
+			var restraintData:RestraintData = item.getRestraintData()
+			if(restraintData != null):
+				restraintData.onStruggleRemoval()
+			
+			GM.pc.getInventory().addItem(item)
+			GM.main.addMessage("You recovered "+item.getAStackName())
+	trackedItems.erase("pc")
+	
 	for domID in doms:
 		var domInfo = doms[domID]
 		
@@ -842,22 +884,6 @@ func endSex():
 		if(sexEndInfo.size() > 0):
 			texts.append(subInfo.getChar().getName()+":")
 			texts.append(Util.join(sexEndInfo, "\n"))
-
-	if(trackedItems.has("pc")):
-		for trackedItem in trackedItems["pc"]:
-			var character:BaseCharacter = GlobalRegistry.getCharacter(trackedItem[0])
-			var item:ItemBase = character.getInventory().getItemByUniqueID(trackedItem[1])
-			if(item == null):
-				continue
-			character.getInventory().removeItem(item)
-			character.getInventory().removeEquippedItem(item)
-			var restraintData:RestraintData = item.getRestraintData()
-			if(restraintData != null):
-				restraintData.onStruggleRemoval()
-			
-			GM.pc.getInventory().addItem(item)
-			GM.main.addMessage("You recovered "+item.getAStackName())
-	trackedItems.erase("pc")
 
 	messages.append(Util.join(texts, "\n"))
 
@@ -886,7 +912,9 @@ func getBestAnimation():
 	if(subs.size() == 0 || doms.size() == 0):
 		return null
 	
-	return [StageScene.Duo, "stand", {pc=subs.keys()[0], npc=doms.keys()[0]}]
+	if(subs[subs.keys()[0]].isUnconscious()):
+		return [StageScene.SexStart, "defeated", {pc=doms.keys()[0], npc=subs.keys()[0]}]
+	return [StageScene.SexStart, "start", {pc=doms.keys()[0], npc=subs.keys()[0]}]
 
 func playAnimation():
 	var animInfo = getBestAnimation()
@@ -924,6 +952,15 @@ func addTrackedGear(ownerID, whoWearsItID, itemUniqueID):
 		trackedItems[ownerID] = []
 	
 	trackedItems[ownerID].append([whoWearsItID, itemUniqueID])
+
+func checkGearIsFromPC(whoWearsItID, itemUniqueID):
+	if(!trackedItems.has("pc")):
+		return false
+	
+	for trackedData in trackedItems["pc"]:
+		if(trackedData[0] == whoWearsItID && trackedData[1] == itemUniqueID):
+			return true
+	return false
 
 func getCurrentActivitiesMaxSubOrgasmHandlePriority(domID, subID):
 	var maxResult = -1

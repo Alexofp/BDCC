@@ -6,7 +6,7 @@ func _init():
 func _run():
 	if(state == ""):
 		addCharacter("maleguard_canine")
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc="maleguard_canine"})
+		playAnimation(StageScene.Duo, "stand", {npc="maleguard_canine"})
 
 	if(state == ""):
 		saynn("You hear a raspy male voice coming from the shadow behind you.")

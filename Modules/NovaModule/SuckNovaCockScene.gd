@@ -8,12 +8,15 @@ func _initScene(_args = []):
 	GM.pc.cummedOnBy("nova")
 	GM.pc.addSkillExperience(Skill.SexSlave, 10, "nova_suckcock")
 	GM.pc.gotThroatFuckedBy("nova")
-	GM.pc.updateNonBattleEffects()
 
 func _run():
 	if(state == ""):
 		addCharacter("nova")
-		GM.main.playAnimation(StageScene.Duo, "kneel", {npc="nova", npcHard=true, npcExposedBodyparts=[BodypartSlot.Penis]})
+		playAnimation(StageScene.SexOral, "sex", {
+			npc="pc", pc="nova",
+			bodyState={exposedCrotch=true,hard=true},
+			npcBodyState={},
+		})
 
 	if(state == ""):
 		saynn("You follow Nova to a more secluded place where the cameras and other people shouldn’t find you. The husky leans against the wall and pulls you down to your knees.")

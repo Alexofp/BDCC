@@ -6,7 +6,7 @@ func _init():
 func _run():
 	if(state == ""):
 		addCharacter("bulldog")
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc="bulldog"})
+		playAnimation(StageScene.Duo, "stand", {npc="bulldog"})
 
 	if(state == ""):
 		saynn("Being very curious, you decide to wander closer to the only soul nearby. The high security inmate quickly notices you, he is of a canine species with his face reminding you of a bulldog. His maw is squashed but also angry-looking with fangs clearly visible.")

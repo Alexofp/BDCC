@@ -6,7 +6,7 @@ func _init():
 func _run():
 	if(state == ""):
 		addCharacter("ferri")
-		GM.main.playAnimation(StageScene.Duo, "kneel", {npc="ferri"})
+		playAnimation(StageScene.Duo, "kneel", {npc="ferri"})
 
 	if(state == ""):
 		saynn("Unable to continue fighting, you cry out from pain and hit the floor. Ferri pounces at you and closes her muzzle around your throat, threatening to sink her fangs into it. You raise your hands, trying to avoid your neck being bitten.")

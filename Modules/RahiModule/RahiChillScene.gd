@@ -6,7 +6,7 @@ func _init():
 func _run():
 	if(state == ""):
 		addCharacter("rahi")
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc="rahi", npcAction="stand"})
+		playAnimation(StageScene.Duo, "stand", {npc="rahi", npcAction="stand"})
 		
 	if(state == ""):
 		saynn("You were heading out the cellblock when you noticed a familiar feline waiting and then slowly approaching you. Kitty seems to be acting quite shy, her gaze directed downwards as she gathers enough willpower to start a conversation.")
@@ -70,7 +70,7 @@ func _run():
 
 	if(state == "follow"):
 		aimCameraAndSetLocName("yard_firstroom")
-		GM.main.playAnimation(StageScene.Solo, "walk")
+		playAnimation(StageScene.Solo, "walk")
 		
 		saynn("She brings you up to the main hall and then walks you towards the yard. The whole yard area looks like a big garden, many stone pathways have tall greenery by each side. The air here feels quite fresh.")
 
@@ -85,7 +85,7 @@ func _run():
 	if(state == "continue"):
 		aimCameraAndSetLocName("yard_waterfall")
 		GM.pc.setLocation("yard_waterfall")
-		GM.main.playAnimation(StageScene.Solo, "sit")
+		playAnimation(StageScene.Solo, "sit")
 		
 		saynn("She brings you to the little blue pond. Around you are a few bushes, stones and a bench. A little waterfall is going down from the top floor where the greenhouses are down into the pond, making it into more of a stream. Kitty takes her spot on the bench.")
 
@@ -191,7 +191,7 @@ func _run():
 	if(state == "bring_her_home"):
 		aimCameraAndSetLocName("cellblock_orange_nearcell")
 		GM.pc.setLocation("cellblock_orange_nearcell")
-		GM.main.playAnimation(StageScene.Solo, "walk")
+		playAnimation(StageScene.Solo, "walk")
 		
 		saynn("You decide not to mess with her sleep and carefully stand up while holding her. The kitten is quite light, probably the reason why she is so agile. You bring her back to the cellblock and look for her cell. Luckily they are numbered and the number corresponds to the one she has on her uniform. You enter her cell and gently put her into bed. You hide her bottle under the pillow and then cover the feline with a blanket. She doesn’t look to be too disturbed by the change of place, still snoozing away.")
 

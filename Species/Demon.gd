@@ -41,5 +41,5 @@ func getEggCellOvulationAmount():
 		[1, 0.1],
 	]
 
-func npcGenerationWeight(_npcType):
+func npcGenerationWeight():
 	return 0.0

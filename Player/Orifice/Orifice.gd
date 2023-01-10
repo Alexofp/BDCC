@@ -45,8 +45,19 @@ func getResistance() -> float:
 		return 0.01
 	return value
 
+func setLooseness(newlooseness:float):
+	looseness = newlooseness
+
 func getLooseness() -> float:
 	return looseness
+
+func isOrificeBlockedFromRecovering() -> bool:
+	if(bodypart != null):
+		var bodypartObject = bodypart.get_ref()
+		var pc = bodypartObject.getCharacter()
+		return pc.getOrificePreventedFromRecovering(orificeType)
+	
+	return false
 
 func getMinLooseness() -> float:
 	var value = 0.0
@@ -110,7 +121,8 @@ func hoursPassed(_howmuch):
 			rem = abs(looseness - minLoose)
 			
 		if(looseness > minLoose):
-			looseness -= rem * elast
+			if(!isOrificeBlockedFromRecovering()):
+				looseness -= rem * elast
 		elif(looseness < minLoose):
 			looseness += rem / elast
 	if(looseness < 0.0):

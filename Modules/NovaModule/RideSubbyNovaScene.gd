@@ -6,7 +6,11 @@ func _init():
 func _run():
 	if(state == ""):
 		addCharacter("nova", ["naked"])
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc="nova", npcHard=true, hard=true, npcAction="kneel", npcExposedBodyparts=[BodypartSlot.Penis], exposedBodyparts=[BodypartSlot.Vagina]})
+		playAnimation(StageScene.SexCowgirl, "sex", {
+			npc="pc", pc="nova",
+			bodyState={exposedCrotch=true,hard=true},
+			npcBodyState={exposedCrotch=true,hard=true},
+		})
 		
 	if(state == ""):
 		saynn("[say=pc]Gonna have my fun with you~[/say]")
@@ -71,6 +75,12 @@ func _run():
 		addButton("Random", "Fifty fifty between cumming inside and outside in case you’re feeling risky but not too risky", "do_random")
 
 	if(state == "inside"):
+		playAnimation(StageScene.SexCowgirl, "fast", {
+			npc="pc", pc="nova",
+			bodyState={exposedCrotch=true,hard=true},
+			npcBodyState={exposedCrotch=true,hard=true},
+		})
+		
 		saynn("You don’t stop riding the herm, you feel your orgasm closing in, your body shivering, your hearts racing. Nova thrusts her hips and she is met with your own motions, you bounce hard on that cock while it’s canine shaft is wrecking your cervix each time, your stretched cunt squeezing around it.")
 
 		saynn("Only a few more seconds pass before you reach your peak and then smash it, letting out a loud passionate moan as you arch your back and impale yourself onto that cock with the last huge thrust. And as you do that, Nova mumbles a muffled moan and cums too, her cock throbbing as it stuffs your womb with waves of sticky cum, her potent semen.")
@@ -107,6 +117,12 @@ func _run():
 		addButton("Continue", "Time to run", "endthescene")
 
 	if(state == "outside"):
+		playAnimation(StageScene.SexCowgirl, "tease", {
+			npc="pc", pc="nova",
+			bodyState={exposedCrotch=true,hard=true},
+			npcBodyState={exposedCrotch=true,hard=true},
+		})
+		
 		saynn("You feel how close Nova is to the peak and decide not to try your luck, you raise yourself and pull her shaft out before pushing it into her belly again and switching to grinding your slit against it. Nova protests but she is too close to do anything, it only takes a second before she suddenly cums. The husky lets out a muffled moan as her cock starts spewing out spurt after spurt of hot jizz back at the owner, Nova is covering herself in her own cum, her breasts, her face, even the hair. All the while you push yourself to your own climax, grinding that cock until your pussy squirts all over the guard’s crotch. You moan and push through the orgasm, draining that husky’s balls without a single drop landing inside your womb, such a clean job.")
 
 		# (if has cock)
@@ -136,6 +152,12 @@ func _run():
 		
 		addButton("Continue", "Time to run", "endthescene")
 	if(state == "get_knotted"):
+		playAnimation(StageScene.SexCowgirl, "fast", {
+			npc="pc", pc="nova",
+			bodyState={exposedCrotch=true,hard=true},
+			npcBodyState={exposedCrotch=true,hard=true},
+		})
+		
 		saynn("You don’t stop riding the herm, you feel your orgasm closing in, your body shivering, your hearts racing. Nova thrusts her hips and she is met with your own motions, very strong motions. You bounce on that husky cock hard, the herm’s knot slaps against your pussy lips, trying to stretch them even more while the tip pounds at the cervix and tries to break in. You two are close.")
 
 		saynn("You decide that it’s the time for the main event and do a series of very big thrusts, putting huge power into each one, your wet cunt slowly gives way and stretches beyond its stretched size, that knot begins to enter you at each apex of your motion and, on the last thrust, it suddenly manages to slip inside completely sealing your pussy hole. You both cum that very moment, your slit squirting with female juices while the husky cock breaks into your womb and starts stuffing it with her potent cum, such a risky move. You keep moaning, loudly and passionately, your belly looks inflated, the bump on it becomes bigger as the husky cums more and more, all of it going inside with the knot preventing any leaks. Fuck that feels good, you arch your back, stick your tongue out and pant heavily, your pussy keeps squirting even now from that huge amount of stimulation that the knot provides as it shifts inside you and stretches you out more.")
@@ -186,14 +208,12 @@ func _react(_action: String, _args):
 		GM.pc.orgasmFrom("nova")
 		GM.pc.addSkillExperience(Skill.SexSlave, 30, "nova_ridecock")
 		GM.pc.gotVaginaFuckedBy("nova")
-		GM.pc.updateNonBattleEffects()
 
 	if(_action == "inside" || _action == "get_knotted"):
 		GM.pc.cummedInVaginaBy("nova")
 		GM.pc.orgasmFrom("nova")
 		GM.pc.addSkillExperience(Skill.SexSlave, 30, "nova_ridecock")
 		GM.pc.gotVaginaFuckedBy("nova")
-		GM.pc.updateNonBattleEffects()
 		
 	if(_action in ["outside", "inside", "get_knotted"]):
 		GM.main.addRoomMemoryCurrentLoc("You notice some cum stains, a sign that somebody had sex here", 1)

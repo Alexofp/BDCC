@@ -8,8 +8,8 @@ func _init():
 func _run():
 	if(state == ""):
 		addCharacter("inmateMale")
-		GM.main.playAnimation(StageScene.Solo, "stand")
-		#GM.main.playAnimation(StageScene.Duo, "stand", {npc="inmateMale"})
+		playAnimation(StageScene.Solo, "stand")
+		#playAnimation(StageScene.Duo, "stand", {npc="inmateMale"})
 
 	if(state == ""):
 		saynn("You feel somebody approaching you from behind. It was too late though, he unceremoniously grabs you by the hair by the hair and pulls you down onto your knees before shoving his knotted cock into your face. His grasp is pretty painful, you wince and let out an annoyed noise.")
@@ -179,7 +179,6 @@ func _react(_action: String, _args):
 		GM.pc.gotThroatFuckedBy("inmateMale")
 		GM.pc.cummedInMouthBy("inmateMale")
 		GM.pc.cummedOnBy("inmateMale")
-		GM.pc.updateNonBattleEffects()
 		if(_action == "cumDrugged"):
 			GM.pc.orgasmFrom("inmateMale")
 			

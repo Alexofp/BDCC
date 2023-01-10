@@ -100,6 +100,9 @@ func doDomAction(_id, _actionInfo):
 			"{dom.You} {dom.youVerb('punch', 'punches')} {sub.youHim} [b]really hard[/b].",
 		])
 		
+		if(RNG.chance(50)):
+			getSub().doWound(domID)
+		
 		return {
 			text = text,
 			domSay = domReaction(SexReaction.BeatingUpHard, 100),

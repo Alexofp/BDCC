@@ -168,7 +168,7 @@ func addEffect(effectID: String, args = []):
 	statusEffectsStorageNode.add_child(effect)
 	
 	statusEffects[effectID] = effect
-	buffsHolder.calculateBuffs()
+	#buffsHolder.calculateBuffs()
 
 func hasEffect(effectID: String):
 	return statusEffects.has(effectID)
@@ -182,7 +182,7 @@ func removeEffect(effectID: String):
 	if(statusEffects.has(effectID)):
 		statusEffects[effectID].queue_free()
 		var _wasremoved = statusEffects.erase(effectID)
-		buffsHolder.calculateBuffs()
+		#buffsHolder.calculateBuffs()
 	
 func canStandUpCombat():
 	if(!hasEffect(StatusEffect.Collapsed)):
@@ -206,6 +206,8 @@ func loadStatusEffectsData(data):
 	
 	for effectID in data:
 		var effect = GlobalRegistry.createStatusEffect(effectID)
+		if(effect == null):
+			continue
 		effect.setCharacter(self)
 		statusEffects[effectID] = effect
 		statusEffectsStorageNode.add_child(effect)
@@ -230,7 +232,7 @@ func processBattleTurn():
 		
 	skillsHolder.processBattleTurn()
 		
-	buffsHolder.calculateBuffs()
+	#buffsHolder.calculateBuffs()
 		
 func beforeFightStarted():
 	pass
@@ -269,10 +271,11 @@ func getArmor(_damageType):
 	return armor
 	
 func calculateBuffs():
-	buffsHolder.calculateBuffs()
+	#buffsHolder.calculateBuffs()
+	pass
 	
 func onEquippedItemsChange():
-	calculateBuffs()
+	#calculateBuffs()
 	updateAppearance()
 	
 func onStatChange():
@@ -540,12 +543,10 @@ func verbS(verbWithNoS, verbWithS = null):
 		return verbWithS
 
 func getPenisSizeString() -> String:
-	if(!hasBodypart(BodypartSlot.Penis)):
+	if(!hasBodypart(BodypartSlot.Penis) && !isWearingStrapon()):
 		return "ERROR:NO_PENIS"
 	
-	var penis = getBodypart(BodypartSlot.Penis)
-	var size = penis.getLength()
-	return Util.cmToString(size)
+	return Util.cmToString(getPenisSize())
 
 func getInventory() -> Inventory:
 	return inventory
@@ -646,6 +647,10 @@ func getBodypartTooltipInfo(_bodypartSlot):
 	return "error"
 
 func getPenisSize():
+	var strapon = getWornStrapon()
+	if(strapon != null):
+		return strapon.getStraponLength()
+	
 	if(!hasBodypart(BodypartSlot.Penis)):
 		return 20.0
 	
@@ -859,6 +864,12 @@ func getOrificeMinLooseness(orificeType):
 	var value = 0.0
 	value += buffsHolder.getOrificeMinLooseness(orificeType)
 	return value
+	
+func getOrificePreventedFromRecovering(orificeType):
+	if(buffsHolder.getOrificePreventedFromRecovering(orificeType)):
+		return true
+	
+	return false
 	
 func getOrificeBlocked(orificeType):
 	return buffsHolder.getOrificeBlocked(orificeType)
@@ -1580,7 +1591,7 @@ func addConsciousness(newc:float):
 	consciousness = clamp(consciousness, 0.0, 1.0)
 
 func isReadyToPenetrate() -> bool:
-	return getLustLevel() >= 0.5 || getLust() >= 50 || getArousal() >= 0.4
+	return getLustLevel() >= 0.5 || getLust() >= 50 || getArousal() >= 0.4 || isWearingStrapon()
 
 func isWearingChastityCage() -> bool:
 	# Having a chastity cage also means that you have a penis
@@ -1662,7 +1673,7 @@ func processSexTurn():
 		var effect = statusEffects[effectID]
 		effect.processSexTurn()
 		
-	buffsHolder.calculateBuffs()
+	#buffsHolder.calculateBuffs()
 
 func addTimedBuffs(buffs: Array, seconds):
 	for newbuff in buffs:
@@ -1677,7 +1688,6 @@ func addTimedBuffs(buffs: Array, seconds):
 	
 	if(seconds > timedBuffsDurationSeconds):
 		timedBuffsDurationSeconds = seconds
-	updateNonBattleEffects()
 
 func addTimedBuffsTurns(buffs: Array, turns):
 	if(!GM.main.supportsBattleTurns()):
@@ -1695,10 +1705,9 @@ func addTimedBuffsTurns(buffs: Array, turns):
 	
 	if(turns > timedBuffsDurationTurns):
 		timedBuffsDurationTurns = turns
-	updateNonBattleEffects()
 
 func updateNonBattleEffects():
-	pass
+	buffsHolder.calculateBuffs()
 
 func saveBuffsData(buffs):
 	var data = []
@@ -1771,3 +1780,22 @@ func getBodypartLewdDescriptionAndNameWithA(bodypartSlot):
 	if(!hasBodypart(bodypartSlot)):
 		return "ERROR:NO BODYPART IN SLOT " + str(bodypartSlot)
 	return getBodypart(bodypartSlot).getLewdDescriptionAndNameWithA()
+
+func isDynamicCharacter():
+	return false
+
+func isWearingStrapon():
+	return getWornStrapon() != null
+
+func getWornStrapon():
+	if(getInventory().hasSlotEquipped(InventorySlot.Strapon)):
+		var item = getInventory().getEquippedItem(InventorySlot.Strapon)
+		if(item.hasTag(ItemTag.Strapon)):
+			return item
+	return null
+
+func doPainfullyStretchHole(_bodypart, _who = "pc"):
+	pass
+
+func doWound(_who = "pc"):
+	pass

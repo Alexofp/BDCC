@@ -31,7 +31,9 @@ func _run():
 	if(state == "follow"):
 		aimCamera("med_milkingroom")
 		setLocationName("Milking heaven")
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc="eliza", hard=true, exposedBodyparts=[BodypartSlot.Penis]})
+		playAnimation(StageScene.SexHandjob, "tease", {pc="pc", npc="eliza",
+			bodyState={exposedCrotch=true,hard=true}
+		})
 		
 		saynn("She brings you to a room that can only be described as a milking heaven. You notice a huge fluid storage tank and quite a few special milking stalls, not for animals but for humans. Eliza guides into one of them, the free one. The stall itself is just some metal pipes, designed to keep the bull or the cow still, Eliza wraps your leash around one of them.")
 
@@ -70,6 +72,10 @@ func _run():
 		addButton("Get milked", "It seems you’re in good hands", "get_milked")
 
 	if(state == "get_milked"):
+		playAnimation(StageScene.SexHandjob, "sex", {pc="pc", npc="eliza",
+			bodyState={exposedCrotch=true,hard=true}
+		})
+		
 		saynn("You stand still in a stall and hold onto a metal bar, exactly like she ordered. The doctor is on her knees before you with the seed container between her legs, ready to collect. She begins to slowly stroke your {pc.penisSize} cock, going over its full length, her second hand is resting for now.")
 
 		saynn("[say=eliza]Do you like that, bull?[/say]")
@@ -113,6 +119,10 @@ func _run():
 		addButton("Give in completely", "Feels good, doesn’t it..", "give_in_completely")
 
 	if(state == "give_in_completely"):
+		playAnimation(StageScene.SexHandjob, "fast", {pc="pc", npc="eliza",
+			bodyState={exposedCrotch=true,hard=true}
+		})
+		
 		saynn("More than an hour passes, she keeps milking your cock, changing her hands when she is too tired. You came many times.. each one taking longer than the last but she was relentless, constantly reminding how she would love to be bred by you, begging for more of your cum. Eventually your mind switched off.. You just kept holding onto the stall, enjoying the feeling of your balls being emptied.. again and again..")
 
 		saynn("[say=eliza]There we go~. I think I drained you completely. Aren’t you a good bull.[/say]")
@@ -135,7 +145,7 @@ func _run():
 		aimCamera("med_nearmilking")
 		setLocationName("Corridor")
 		GM.pc.setLocation("med_nearmilking")
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc="eliza"})
+		playAnimation(StageScene.Duo, "stand", {npc="eliza"})
 		
 		saynn("You follow the doctor out of the milking room. She removes your leash and offers you a head pat.")
 

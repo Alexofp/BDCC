@@ -12,7 +12,7 @@ func _reactInit():
 func _run():
 	if(state == ""):
 		addCharacter("inmateShemale")
-		GM.main.playAnimation(StageScene.Solo, "defeat")
+		playAnimation(StageScene.Solo, "defeat")
 
 	if(state == ""):
 		saynn("You were doing lewd things with yourself when suddenly somebody pushed you. Ow! You hit the floor and feel somebody pinning you to the floor, some inmate. She keeps her knee shoved into your back while murmuring into your ear.")

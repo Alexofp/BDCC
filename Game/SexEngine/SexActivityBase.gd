@@ -91,8 +91,8 @@ func getActivityScoreCustomGoals(goalData, _sexEngine: SexEngine, _domInfo: SexD
 	var addToScore = 0.0
 	
 	for goalID in goalData:
-		if(_sexEngine.hasGoal(_domInfo, goalID, _subInfo)):
-			addToScore = max(addToScore, goalData[goalID])
+		#if(_sexEngine.hasGoal(_domInfo, goalID, _subInfo)):
+		addToScore = max(addToScore, goalData[goalID] * _sexEngine.hasGoalScore(_domInfo, goalID, _subInfo))
 
 	return (resultScore + addToScore) * getActivityScoreMult(_sexEngine, _domInfo, _subInfo)
 

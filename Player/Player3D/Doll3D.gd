@@ -17,6 +17,8 @@ var breastsLeaking = false
 var pussyLeaking = false
 var anusLeaking = false
 
+var rememberedPenisScale = 1.0
+
 export(bool) var addTestBody = false
 
 var dollAttachmentZoneScene = preload("res://Player/Player3D/Parts/DollAttachmentZone.tscn")
@@ -67,9 +69,10 @@ func testBody():
 	#addPartObject("tail", load("res://Player/Player3D/Parts/Tail/HuskyTail/HuskyTail.tscn").instance())
 	#addPartObject("penis", load("res://Player/Player3D/Parts/Penis/DragonPenis/DragonPenis.tscn").instance())
 	#addPartObject("penis", load("res://Player/Player3D/Parts/Penis/HumanPenis/HumanPenis.tscn").instance())
-	addPartObject("penis", load("res://Player/Player3D/Parts/Penis/CaninePenis/CaninePenis.tscn").instance())
-	addPartObject("hair", load("res://Player/Player3D/Parts/Hair/FerriHair/FerriHair.tscn").instance())
-	#addPartObject("hair", load("res://Player/Player3D/Parts/Hair/PonytailHair/PonytailHair.tscn").instance())
+	#addPartObject("penis", load("res://Player/Player3D/Parts/Penis/CaninePenis/CaninePenis.tscn").instance())
+	addPartObject("penis", load("res://Player/Player3D/Parts/Penis/EquinePenis/EquinePenis.tscn").instance())
+	#addPartObject("hair", load("res://Player/Player3D/Parts/Hair/FerriHair/FerriHair.tscn").instance())
+	addPartObject("hair", load("res://Player/Player3D/Parts/Hair/PonytailHair/PonytailHair.tscn").instance())
 	#addPartObject("hair", load("res://Player/Player3D/Parts/Hair/CombedBackHair/CombedBackHair.tscn").instance())
 	#addPartObject("hair", load("res://Player/Player3D/Parts/Hair/LongHair/LongHair.tscn").instance())
 	#addPartObject("hair", load("res://Player/Player3D/Parts/Hair/MessyHair/MessyHair.tscn").instance())
@@ -102,6 +105,11 @@ func setTemporaryState(stateID, value):
 	for slot in parts:
 		var part = parts[slot]
 		part.setState(stateID, value)
+
+func getState(stateID):
+	if(state.has(stateID)):
+		return state[stateID]
+	return null
 
 func getFinalState(stateID):
 	if(temporaryState.has(stateID)):
@@ -312,6 +320,11 @@ func setThighThickness(progress: float):
 
 func setPenisScale(penisScale: float):
 	setBoneScale("Penis", penisScale)
+	rememberedPenisScale = penisScale
+
+func clampPenisScale(minPenisScale: float, maxPenisScale: float):
+	rememberedPenisScale = clamp(rememberedPenisScale, minPenisScale, maxPenisScale)
+	setBoneScale("Penis", rememberedPenisScale)
 
 func setBallsScale(newScale: float):
 	var offsetScale = 0.0
@@ -484,3 +497,69 @@ func setCockTemporaryHard():
 		return
 	
 	setTemporaryState("cock", "")
+
+func setCockTemporaryCondom():
+	var currentCockState = getFinalState("cock")
+	if(currentCockState in ["caged", "condom"]):
+		return
+	
+	setTemporaryState("cock", "condom")
+
+func setCockTemporaryCaged():
+	#var currentCockState = getFinalState("cock")
+	#if(currentCockState in ["caged", "condom"]):
+	#	return
+	
+	setTemporaryState("cock", "caged")
+
+func applyBodyState(bodystate):
+	if(bodystate == null):
+		bodystate = {}
+	
+	var shouldExposeChest = bodystate.has("exposedChest") && bodystate["exposedChest"]
+	var shouldExposeCrotch = bodystate.has("exposedCrotch") && bodystate["exposedCrotch"]
+	var shouldBeNaked = bodystate.has("naked") && bodystate["naked"]
+	var shouldShowUnderwear = bodystate.has("underwear") && bodystate["underwear"]
+	var shouldBeHard = bodystate.has("hard") && bodystate["hard"]
+	var shouldBeCaged = bodystate.has("caged") && bodystate["caged"]
+	var shouldBeCondom = bodystate.has("condom") && bodystate["condom"]
+	#var shouldLookLeft = bodystate.has("lookLeft") && bodystate["lookLeft"]
+	
+	var exposeBodyparts = []
+	if(shouldExposeChest || shouldBeNaked):
+		exposeBodyparts.append_array([
+			BodypartSlot.Breasts,
+		])
+	if(shouldExposeCrotch || shouldBeNaked):
+		exposeBodyparts.append_array([
+			BodypartSlot.Penis,
+			BodypartSlot.Vagina,
+			BodypartSlot.Anus,
+		])
+	if(shouldBeNaked):
+		exposeBodyparts.append_array([
+			BodypartSlot.Body,
+			BodypartSlot.Arms,
+			BodypartSlot.Legs,
+		])
+	if(shouldShowUnderwear):
+		exposeBodyparts.append_array([
+			BodypartSlot.Body,
+		])
+	
+	setExposedBodyparts(exposeBodyparts)
+		
+	if(shouldBeHard):
+		setCockTemporaryHard()
+		
+	if(shouldBeCaged):
+		setCockTemporaryCaged()
+	
+	if(shouldBeCondom):
+		setCockTemporaryCondom()
+	
+#	if(bodystate.has("lookLeft")):
+#		if(shouldLookLeft):
+#			scale.x = abs(scale.x)
+#		else:
+#			scale.x = -abs(scale.x)

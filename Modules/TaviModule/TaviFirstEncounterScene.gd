@@ -6,7 +6,7 @@ func _init():
 func _run():
 	if(state == ""):
 		addCharacter("tavi")
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc="tavi"})
+		playAnimation(StageScene.Duo, "stand", {npc="tavi"})
 		
 	if(state == ""):
 		saynn("You were exploring the mineshafts level when your ears suddenly caught an unknown voice somewhere from behind.")
@@ -123,7 +123,7 @@ func _run():
 		addButton("Push away", "What she thinks she is doing", "push_away")
 
 	if(state == "kneel"):
-		GM.main.playAnimation(StageScene.Duo, "kneel", {npc="tavi"})
+		playAnimation(StageScene.Duo, "kneel", {npc="tavi"})
 		
 		saynn("You feel her firm grasp and decide to comply. Without much resistance, you lower yourself and get on your knees before the tall cat. She can’t help but to smile and give you a few headpats.")
 
@@ -160,7 +160,7 @@ func _run():
 		addButton("Push", "Fight the pain and try to overpower her. You will probably have to fight her.", "push")
 
 	if(state == "submit"):
-		GM.main.playAnimation(StageScene.Duo, "kneel", {npc="tavi"})
+		playAnimation(StageScene.Duo, "kneel", {npc="tavi"})
 		
 		saynn("The pain is too much so you decide to comply. You raise your hands up and cease resisting.")
 
@@ -206,7 +206,7 @@ func _run():
 	#	addButton("Lost fight", "", "lost_fight")
 
 	if(state == "lost_fight"):
-		GM.main.playAnimation(StageScene.Duo, "kneel", {npc="tavi"})
+		playAnimation(StageScene.Duo, "kneel", {npc="tavi"})
 		
 		saynn("You can’t fight anymore, the cat was too strong for you. You give up and drop to your knees, all your bruises cause you pain. Tavi is clearly looking very annoyed, you can’t see her smile anymore. She walks up to you and grabs you by the collar with the other hand threatening to strike you.")
 
@@ -228,7 +228,7 @@ func _run():
 		addButton("Continue", "Listen to the rules", "continue")
 
 	if(state == "no1"):
-		GM.main.playAnimation(StageScene.Duo, "defeat", {npc="tavi"})
+		playAnimation(StageScene.Duo, "defeat", {npc="tavi"})
 		
 		saynn("You just spit in her direction. And Tavi clearly didn’t like that answer, she growls as she pushes her leg into your chest and then kicks you away, causing you to hit the floor. That act puts a somewhat satisfied grin on her face.")
 
@@ -241,7 +241,7 @@ func _run():
 		#addButton("Won fight", "", "won_fight")
 
 	if(state == "won_fight"):
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc="tavi", npcAction="kneel"})
+		playAnimation(StageScene.Duo, "stand", {npc="tavi", npcAction="kneel"})
 		
 		saynn("Tavi loses her strength and collapses onto the floor. All her many bruises seem to be glowing green, with the color of her blood.")
 
@@ -259,7 +259,7 @@ func _run():
 		addDisabledButton("Fuck Tavi", "Not done :(")
 
 	if(state == "submit2"):
-		GM.main.playAnimation(StageScene.Duo, "kneel", {npc="tavi"})
+		playAnimation(StageScene.Duo, "kneel", {npc="tavi"})
 		
 		saynn("You crouch before Tavi and help her to get up. You swipe the dirt from her uniform and step away, tilting your head down, looking kinda sad after what you did.")
 
@@ -318,6 +318,11 @@ func _run():
 
 	if(state == "obey"):
 		addCharacter("tavi", ["naked"])
+		playAnimation(StageScene.SexFaceSitting, "sit", {
+			pc="tavi", npc="pc", 
+			bodyState={exposedCrotch=true,},
+			npcBodyState={},
+		})
 		
 		saynn("You do as she says. Your eyes are shut, arms are behind the back. You are kneeling before a tall feline that has a grab on your hair. Suddenly she starts tugging you closer, closer to herself. And you give in, leaning forward for your new Miss, until meeting with her covered crotch. She is still wearing the shorts but you still feel the warmness of her body, get her nice female scent.")
 
@@ -436,7 +441,6 @@ func _react(_action: String, _args):
 		GM.pc.cummedOnBy("tavi", BodilyFluids.FluidSource.Vagina)
 		GM.pc.cummedInMouthBy("tavi", BodilyFluids.FluidSource.Vagina)
 		GM.pc.addSkillExperience(Skill.SexSlave, 50, "tavi_firstencounter")
-		GM.pc.updateNonBattleEffects()
 		addMessage("Tavi came on you, covering your body with her female juices")
 	
 	if(_action == "fight"):

@@ -6,7 +6,7 @@ func _init():
 func _run():
 	if(state == ""):
 		addCharacter("femaleguard_feline")
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc="femaleguard_feline"})
+		playAnimation(StageScene.Duo, "stand", {npc="femaleguard_feline"})
 
 	if(state == ""):
 		saynn("You were busy sneakily teasing yourself in front of everyone when you heard a strict female voice behind you.")
@@ -35,7 +35,7 @@ func _run():
 		addButton("Attack her", "This might go pretty bad. But maybe that’s what you want", "attack_her")
 
 	if(state == "attack_her"):
-		GM.main.playAnimation(StageScene.Duo, "defeat", {npc="femaleguard_feline"})
+		playAnimation(StageScene.Duo, "defeat", {npc="femaleguard_feline"})
 		
 		saynn("You track her with your eyes and begin lowering yourself, pretending to behave. But all this time you were just preparing to dash towards her. Kitty seems to calm somewhat after seeing you obey, perfect moment to strike. You suddenly take off and sprint towards the cat, pushing away from the floor and pouncing.")
 
@@ -60,9 +60,9 @@ func _run():
 
 
 	if(state == "obey"):
-		GM.main.playAnimation(StageScene.Duo, "kneel", {npc="femaleguard_feline"})
+		playAnimation(StageScene.Duo, "kneel", {npc="femaleguard_feline"})
 		
-		saynn("[say=pc]Alright, relax. I’m obeying.[say]")
+		saynn("[say=pc]Alright, relax. I’m obeying.[/say]")
 
 		saynn("You raise your hands and put them behind your head while getting onto your knees. You tilt your head down and watch the floor while the guard kitty is approaching with something in her paw, some black piece of fabric.")
 
@@ -130,7 +130,6 @@ func _react(_action: String, _args):
 		processTime(60*6)
 		GM.pc.cummedOnBy("femaleguard_feline")
 		GM.pc.addLust(40)
-		GM.pc.updateNonBattleEffects()
 
 	if(_action == "endthescene"):
 		endScene()

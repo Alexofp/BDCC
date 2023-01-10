@@ -9,21 +9,15 @@ func makeBase(idprefix = "dynamicnpc", _args = {}):
 
 func pickGender(character:DynamicCharacter, _args = {}):
 	if(_args.has(NpcGen.Gender)):
-		character.npcGender = _args[NpcGen.Gender]
+		character.npcGeneratedGender = _args[NpcGen.Gender]
 	else:
-		var possibleGenders = [
-			[Gender.Male, 1.0],
-			[Gender.Female, 1.0],
-			[Gender.Androgynous, 0.3],
-		]
-		
-		character.npcGender = RNG.pickWeightedPairs(possibleGenders)
+		character.npcGeneratedGender = GM.main.getEncounterSettings().generateGender()
 
 func pickName(character:DynamicCharacter, _args = {}):
 	if(_args.has(NpcGen.Name)):
 		character.npcName = _args[NpcGen.Name]
 	else:
-		if(character.npcGender == Gender.Male):
+		if(character.getGender() == Gender.Male):
 			character.npcName = RNG.randomMaleName()
 		else:
 			character.npcName = RNG.randomFemaleName()
@@ -43,8 +37,10 @@ func pickSpecies(character:DynamicCharacter, _args = {}):
 	var possible = []
 	for speciesID in allSpecies:
 		var specie = allSpecies[speciesID]
+		if(!specie.canBeUsedForNPCType(speciesType)):
+			continue
 		
-		var weight = specie.npcGenerationWeight(speciesType)
+		var weight = GM.main.getEncounterSettings().getSpeciesWeight(speciesID)
 		if(weight != null && weight > 0.0):
 			possible.append([speciesID, weight])
 	
@@ -100,7 +96,7 @@ func createBodyparts(character:DynamicCharacter, _args = {}):
 		else:
 			for specie in theSpecies:
 				var speciesObject = GlobalRegistry.getSpecies(specie)
-				var bodypartID = speciesObject.getDefaultForSlot(bodypartSlot, character.npcGender)
+				var bodypartID = speciesObject.getDefaultForSlotForNpcGender(bodypartSlot, character.npcGeneratedGender)
 				if(bodypartID == null):
 					continue
 				var bodypart = GlobalRegistry.getBodypartRef(bodypartID)
@@ -115,16 +111,16 @@ func createBodyparts(character:DynamicCharacter, _args = {}):
 				bodypart.generateDataFor(character)
 
 func pickBodyAttributes(character:DynamicCharacter, _args = {}):
-	if(character.npcGender == Gender.Male):
+	if(character.getGender() == Gender.Male):
 		character.npcThickness = RNG.randi_range(0, 60)
 		character.npcFeminity = RNG.randi_range(0, 50)
-	if(character.npcGender == Gender.Female):
+	if(character.getGender() == Gender.Female):
 		character.npcThickness = RNG.randi_range(0, 110)
 		character.npcFeminity = RNG.randi_range(25, 75)
-	if(character.npcGender == Gender.Androgynous):
+	if(character.getGender() == Gender.Androgynous):
 		character.npcThickness = RNG.randi_range(0, 100)
 		character.npcFeminity = RNG.randi_range(50, 100)
-	if(character.npcGender == Gender.Other):
+	if(character.getGender() == Gender.Other):
 		character.npcThickness = RNG.randi_range(0, 100)
 		character.npcFeminity = RNG.randi_range(0, 100)
 
@@ -140,7 +136,7 @@ func pickArchetypes(character:DynamicCharacter, _args = {}):
 	print(picked)
 
 func pickFetishes(character:DynamicCharacter, _args = {}):
-	var fetishHolder:FetishHolder = character.getFetishHolder()
+	var fetishHolder = character.getFetishHolder()
 	
 	fetishHolder.clear()
 	
@@ -197,7 +193,7 @@ func pickAttacks(character:DynamicCharacter, _args = {}):
 	character.npcAttacks = baseAttacks
 
 func pickPersonality(character:DynamicCharacter, _args = {}):
-	var personality:Personality = character.getPersonality()
+	var personality = character.getPersonality()
 	
 	personality.clear()
 	for statID in PersonalityStat.getAll():
@@ -219,12 +215,7 @@ func pickSmallDescription(character:DynamicCharacter, _args = {}):
 	var thedesc = ""
 	thedesc += Util.getSpeciesName(character.npcSpecies)
 	thedesc += ". "
-	if(character.npcGender == Gender.Male):
-		thedesc += "Male."
-	if(character.npcGender == Gender.Female):
-		thedesc += "Female."
-	if(character.npcGender == Gender.Androgynous):
-		thedesc += "Androgynous."
+	thedesc += NpcGender.getVisibleName(character.npcGeneratedGender)+"."
 	
 	return thedesc
 
@@ -279,7 +270,7 @@ func applyArgs(_character:DynamicCharacter, _args = {}):
 		var stats = _args[NpcGen.PersonalityStat]
 		# Possible: { NpcGen.PersonalityStat: [PersonalityStat.Mean, 1.0] }
 		# Or: { NpcGen.PersonalityStat: [[PersonalityStat.Mean, 1.0], [PersonalityStat.Subby, 1.0]] }
-		var personality:Personality = _character.getPersonality()
+		var personality = _character.getPersonality()
 		
 		if(!Util.isArrayOfArrays(stats)):
 			stats = [stats]
@@ -288,7 +279,7 @@ func applyArgs(_character:DynamicCharacter, _args = {}):
 			
 	if(_args.has(NpcGen.Fetish)):
 		var fetishes = _args[NpcGen.Fetish]
-		var fetishHolder:FetishHolder = _character.getFetishHolder()
+		var fetishHolder = _character.getFetishHolder()
 		
 		if(!Util.isArrayOfArrays(fetishes)):
 			fetishes = [fetishes]

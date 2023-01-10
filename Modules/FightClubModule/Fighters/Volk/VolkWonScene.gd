@@ -6,7 +6,7 @@ func _init():
 func _run():
 	if(state == ""):
 		addCharacter("volk")
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc="volk", npcAction="kneel"})
+		playAnimation(StageScene.Duo, "stand", {npc="volk", npcAction="kneel"})
 
 	if(state == ""):
 		saynn("Volk drops his weapon and grunts as he hits the floor. As you approach him, his hand starts reaching for his shiv but you swiftly stop that by stepping on his palm and pinning it to the floor.")
@@ -31,6 +31,8 @@ func _run():
 		addButton("Continue", "Time to leave", "endthescene")
 
 	if(state == "weapon_play"):
+		playAnimation(StageScene.SexStart, "start", {npc="volk", pc="pc"})
+		
 		saynn("You lean down and pick up his makeshift weapon. It looks like a piece of glass with some cloth wrapped around so it can be held.")
 
 		saynn("[say=volk]Hey. That’s mine![/say]")

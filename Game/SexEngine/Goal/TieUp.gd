@@ -26,3 +26,8 @@ func isCompleted(_sexEngine, _domInfo, _subInfo, _data):
 func progressGoal(_sexEngine, _domInfo, _subInfo, _data, _args = []):
 	if(_data is Array && _data.size() > 0):
 		_data[0] -= 1
+
+func getSubGoals(_sexEngine, _domInfo, _subInfo, _data):
+	return {
+		SexGoal.SubUndressSub: 0.3,
+	}

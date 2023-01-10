@@ -6,6 +6,7 @@ func _init():
 func _run():
 	if(state == ""):
 		addCharacter("eliza")
+		playAnimation(StageScene.Duo, "stand", {npc="eliza"})
 		
 	if(state == ""):
 		saynn("Someone knocks on the little window. You look up and see Eliza standing behind the door. Intercom makes a static noise.")
@@ -53,7 +54,7 @@ func _run():
 
 	if(state == "follow"):
 		aimCamera("med_lobbyne")
-		GM.main.playAnimation(StageScene.Solo, "walk")
+		playAnimation(StageScene.Solo, "walk")
 		setLocationName("Medical lobby")
 		GM.pc.setLocation("med_lobbyne")
 		
@@ -145,7 +146,7 @@ func _run():
 
 	if(state == "run"):
 		aimCamera("med_lobbyne")
-		GM.main.playAnimation(StageScene.Solo, "walk")
+		playAnimation(StageScene.Solo, "walk")
 		setLocationName("Medical lobby")
 		GM.pc.setLocation("med_lobbyne")
 		

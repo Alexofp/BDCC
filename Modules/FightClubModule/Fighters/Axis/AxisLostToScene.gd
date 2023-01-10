@@ -6,7 +6,11 @@ func _init():
 func _run():
 	if(state == ""):
 		addCharacter("axis")
-		GM.main.playAnimation(StageScene.Duo, "kneel", {npc="axis", npcHard=true, npcExposedBodyparts=[BodypartSlot.Penis], exposedBodyparts=[BodypartSlot.Vagina, BodypartSlot.Anus]})
+		playAnimation(StageScene.Duo, "kneel", {
+			npc="axis", npcAction="stand", 
+			bodyState={exposedCrotch=true,},
+			npcBodyState={exposedCrotch=true,hard=true},
+		})
 
 	if(state == ""):
 		saynn("Unable to continue fighting, you drop to your knees. Fuck, that alpha energy was just too strong. Axis takes his time approaching you.")
@@ -23,6 +27,12 @@ func _run():
 		GM.ES.triggerRun("ArenaFighterPCLost", ["axis"])
 
 	if(state == "get_fucked"):
+		playAnimation(StageScene.SexStanding, "sex", {
+			npc="pc", pc="axis", 
+				bodyState={exposedCrotch=true,hard=true},
+				npcBodyState={exposedCrotch=true,caged=true},
+		})
+		
 		saynn("Axis pulls his shorts down, exposing his giant red cock, it must be at least {axis.penisSizeStr}. Its knot is already fat, filled with blood, and the tip is actively leaking precum, the audience is cheering loudly seeing that heavy tool. You don’t get enough time to react to that sudden introduction, the wolf grabs you by the collar and pulls your head straight towards his shaft, your nose is pressed against the wet meaty orb, making you smell his scent. It’s.. arousing.. Unusually so. As soon as you got a taste of his alpha scent, your mind got instantly attacked with his pheromones, causing you to act so subby.. and needy.")
 
 		saynn("Your eyes show desire, you eagerly stick your tongue out and drag it along the lengthy knotted cock. Then you catch the precum off of its pointy tip and swallow it, feeling even more lusty after that.")
@@ -55,6 +65,7 @@ func _run():
 
 			saynn("Oh, you feel like you should be resisting. But.. You’re so horny that you don’t even care, you actually welcome him rubbing your chastity cage a bit. It makes your member put so much pressure onto the cage.. While it’s forcing your drippy cock to stay flacid.")
 		elif(GM.pc.hasPenis()):
+			
 			saynn("He notices your erect {pc.cock} and smiles. He then pulls out something from one of his pockets. It’s a.. chastity cage.")
 
 			saynn("[say=axis]That cute dick is useless, might as well lock it away.[/say]")
@@ -130,6 +141,12 @@ func _run():
 		addButton("Continue", "See what happens next..", "continue")
 
 	if(state == "continue"):
+		playAnimation(StageScene.SexStanding, "tease", {
+			npc="pc", pc="axis", 
+				bodyState={exposedCrotch=true,hard=true},
+				npcBodyState={exposedCrotch=true,caged=true},
+		})
+		
 		# (if pussy)
 		if(GM.pc.hasVagina()):
 			saynn("After some long minutes, the guy’s knot finally deflates enough. He pulls it out, letting your used gaping pussy to gush out cum. Your legs refuse to listen so he carefully places you onto the ground, ass up so everyone can see you leaking.")

@@ -1,0 +1,99 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://addons/godot-notes/save.png" type="Texture" id=1]
+[ext_resource path="res://addons/godot-notes/refresh.png" type="Texture" id=2]
+[ext_resource path="res://addons/godot-notes/infos.png" type="Texture" id=3]
+
+[node name="Notes" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_clip_content = true
+hint_tooltip = "Godot Notes"
+
+[node name="hBoxContainer" type="HBoxContainer" parent="."]
+anchor_right = 1.0
+margin_bottom = 24.0
+
+[node name="btn_save" type="ToolButton" parent="hBoxContainer"]
+margin_right = 60.0
+margin_bottom = 24.0
+hint_tooltip = "Save modifications"
+text = "Save"
+icon = ExtResource( 1 )
+
+[node name="btn_refresh" type="ToolButton" parent="hBoxContainer"]
+margin_left = 64.0
+margin_right = 143.0
+margin_bottom = 24.0
+hint_tooltip = "Refresh/reload previously saved datas"
+text = "Refresh"
+icon = ExtResource( 2 )
+
+[node name="label" type="Label" parent="hBoxContainer"]
+modulate = Color( 1, 1, 1, 0.392157 )
+margin_left = 147.0
+margin_top = 5.0
+margin_right = 210.0
+margin_bottom = 19.0
+hint_tooltip = "Status"
+text = "All is ok..."
+align = 2
+
+[node name="sep" type="VSeparator" parent="hBoxContainer"]
+modulate = Color( 1, 1, 1, 0 )
+margin_left = 214.0
+margin_right = 218.0
+margin_bottom = 24.0
+size_flags_horizontal = 2
+
+[node name="btn_infos" type="ToolButton" parent="hBoxContainer"]
+margin_left = 1252.0
+margin_right = 1280.0
+margin_bottom = 24.0
+hint_tooltip = "About"
+icon = ExtResource( 3 )
+
+[node name="textEdit" type="TextEdit" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 29.0
+highlight_current_line = true
+breakpoint_gutter = true
+highlight_all_occurrences = true
+smooth_scrolling = true
+wrap_enabled = true
+caret_blink = true
+
+[node name="infos_dialog" type="WindowDialog" parent="."]
+visible = true
+margin_top = 25.0
+margin_right = 280.0
+margin_bottom = 180.0
+window_title = "Notes"
+
+[node name="version" type="Label" parent="infos_dialog"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 5.0
+margin_bottom = -130.0
+text = "..."
+align = 1
+
+[node name="label" type="Label" parent="infos_dialog"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 25.0
+margin_bottom = -81.0
+text = "Keep notes of your projects.
+
+Icons come from https://icones8.fr."
+align = 1
+
+[node name="btn_close" type="Button" parent="infos_dialog"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 80.0
+margin_top = 106.0
+margin_right = -80.0
+margin_bottom = -13.0
+text = "Close"

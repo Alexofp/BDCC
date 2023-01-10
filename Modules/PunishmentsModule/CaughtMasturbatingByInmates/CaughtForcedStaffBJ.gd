@@ -6,7 +6,7 @@ func _init():
 func _run():
 	if(state == ""):
 		addCharacter("guardCrowd")
-		GM.main.playAnimation(StageScene.Duo, "kneel", {npc="maleguard_canine", npcAction="stand"})
+		playAnimation(StageScene.Duo, "kneel", {npc="maleguard_canine", npcAction="stand"})
 
 	if(state == ""):
 		saynn("A few guards crowd around you, each one holding a weapon or a shock remote. You look at all the armor they are equipped with and realize that you won’t even drop a single one before your neck gets fried. Oops, seems like it’s too late to stop exposing yourself, even after covering yourself the guards don’t back off.")
@@ -168,7 +168,6 @@ func _react(_action: String, _args):
 		GM.pc.cummedInMouthBy("maleguard_canine")
 		GM.pc.cummedOnBy("maleguard_canine")
 		GM.pc.addLust(20)
-		GM.pc.updateNonBattleEffects()
 		GM.pc.addSkillExperience(Skill.SexSlave, 10, "caught_staff_forcedbj")
 		
 	if(_action in ["cum1"]):
@@ -177,7 +176,6 @@ func _react(_action: String, _args):
 		GM.pc.cummedInMouthBy("shemaleguard")
 		GM.pc.cummedOnBy("shemaleguard")
 		GM.pc.addLust(20)
-		GM.pc.updateNonBattleEffects()
 		GM.pc.addSkillExperience(Skill.SexSlave, 10, "caught_staff_forcedbj2")
 		
 	if(_action == "endthescene"):

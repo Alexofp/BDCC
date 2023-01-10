@@ -8,6 +8,7 @@ func _init():
 func _run():
 	if(state == ""):
 		addCharacter("eliza")
+		playAnimation(StageScene.Duo, "stand", {npc="eliza"})
 		
 	if(state == ""):
 		saynn("You hear a static noise as the intercom turns on.")
@@ -72,6 +73,8 @@ func _run():
 		addButton("Continue", "See what happens next", "endthescene")
 
 	if(state == "obey"):
+		playAnimation(StageScene.Duo, "kneel", {npc="eliza"})
+		
 		saynn("You lay on the floor and wiggle towards Eliza’s legs. She smirks watching you struggle with your bound hands. You prop yourself up using a nearby wall and get on your knees. You tilt your head down, showing obedience.")
 
 		saynn("[say=eliza]Very good~.[/say]")

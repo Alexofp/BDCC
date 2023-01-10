@@ -17,3 +17,6 @@ func generateData(_sexEngine, _domInfo, _subInfo):
 
 func progressGoal(_sexEngine, _domInfo, _subInfo, _data, _args = []):
 	pass
+
+func getSubGoals(_sexEngine, _domInfo, _subInfo, _data):
+	return {}

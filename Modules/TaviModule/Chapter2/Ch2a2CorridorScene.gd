@@ -9,7 +9,7 @@ func _run():
 	#	addCharacter("alexrynard")
 		
 	if(state == ""):
-		GM.main.playAnimation(StageScene.Solo, "stand")
+		playAnimation(StageScene.Solo, "stand")
 		
 		saynn("You approach the airlock that leads to some area you have no access to. But there is a little reinforced window. You peek through it and try to see anything interesting. It's just a bland corridor with a few doors and occasional engineers walking around. Not too useful.")
 
@@ -21,7 +21,7 @@ func _run():
 
 	if(state == "leave?"):
 		addCharacter("alexrynard")
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc="alexrynard"})
+		playAnimation(StageScene.Duo, "stand", {npc="alexrynard"})
 		
 		saynn("But just before you can leave you see Alex Rynard walking up to you, he seems quite angry.")
 
@@ -99,7 +99,7 @@ func _run():
 
 	if(state == "use_stun_baton"):
 		# (nees a stun baton)
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc="alexrynard", npcAction="defeat"})
+		playAnimation(StageScene.Duo, "stand", {npc="alexrynard", npcAction="defeat"})
 
 		saynn("While the foxy is busy holding your collar, your hand pulls out a contraband stun baton that you then quickly shove into the guy’s back, your digit finds the switch that makes it send out a powerful shock through the metal spine.")
 
@@ -206,7 +206,7 @@ func _run():
 			addDisabledButton("Use stun baton", "You don't have one")
 
 	if(state == "if_won"):
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc="alexrynard", npcAction="defeat"})
+		playAnimation(StageScene.Duo, "stand", {npc="alexrynard", npcAction="defeat"})
 		
 		saynn("Foxy drops to his knees, unable to continue fighting. You shove your leg into his back and overstress the motors in his spine, causing discomfort.")
 
@@ -261,13 +261,19 @@ func _run():
 
 	if(state == "if_lost"):
 		# (pretty much the same as surrender?)
-		GM.main.playAnimation(StageScene.Duo, "defeat", {npc="alexrynard"})
+		playAnimation(StageScene.Duo, "defeat", {npc="alexrynard"})
 
 		saynn("You lost the fight. Unable to continue, you can only surrender now.")
 		addButton("Surrender", "Stop resisting and see what happens", "surrender")
 
 
 	if(state == "seduce"):
+		playAnimation(StageScene.SexStanding, "tease", {
+			pc="alexrynard", npc="pc", 
+			bodyState={},
+			npcBodyState={},
+		})
+		
 		saynn("Instead of doing anything silly, you decide to go the path of less resistance and offer some value. Your hands slip under the guy’s uniform and give his strong torso some love. He doesn’t seem to be against your touches so you continue exploring his body.")
 
 		saynn("You lean into him and purr ever so slightly while rubbing your cheek into his pecs through the shirt. Your hands slip lower and unbuckle the belt before sneaking under his pants and stumbling upon his sheath.")
@@ -291,7 +297,7 @@ func _run():
 		addButton("Continue", "See what happens next", "after_seduced")
 
 	if(state == "after_seduced"):
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc="alexrynard"})
+		playAnimation(StageScene.Duo, "stand", {npc="alexrynard"})
 		
 		saynn("But instead of an answer, you feel him getting a hold of your arms and putting something on them. Zip ties! You gasp as he swiftly restraints you and then pins against the wall.")
 
@@ -321,7 +327,7 @@ func _run():
 		addButton("Follow", "See where he brings you", "follow_foxy")
 
 	if(state == "surrender"):
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc="alexrynard"})
+		playAnimation(StageScene.Duo, "stand", {npc="alexrynard"})
 		
 		saynn("You raise your hands and assume a submissive pose.")
 
@@ -355,7 +361,9 @@ func _run():
 		# (also runs a leashed scene)
 		# Sybian scene here?
 		aimCameraAndSetLocName("eng_breakroom")
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc="alexrynard", exposedBodyparts=[BodypartSlot.Penis, BodypartSlot.Vagina, BodypartSlot.Anus]})
+		playAnimation(StageScene.Duo, "stand", {npc="alexrynard",
+			bodyState={exposedCrotch=true,},
+		})
 
 		saynn("He brings you somewhere.. You’re not quite sure where since the blindfold makes it very hard to orient yourself around.")
 
@@ -380,7 +388,7 @@ func _run():
 		addButton("Shake head", "You don’t really know what answer he wants", "shake_head")
 
 	if(state == "shake_head"):
-		GM.main.playAnimation(StageScene.Sybian, "idle", {exposedBodyparts=[BodypartSlot.Penis, BodypartSlot.Vagina, BodypartSlot.Anus]})
+		playAnimation(StageScene.Sybian, "idle", {bodyState={exposedCrotch=true,}})
 		
 		# (if has pussy)
 		if(GM.pc.hasVagina()):
@@ -429,7 +437,7 @@ func _run():
 
 		# (part that’s the same)
 	if(state in ["stay_silent", "taunt_him"]):
-		GM.main.playAnimation(StageScene.Sybian, "ride", {exposedBodyparts=[BodypartSlot.Penis, BodypartSlot.Vagina, BodypartSlot.Anus]})
+		playAnimation(StageScene.Sybian, "ride", {bodyState={exposedCrotch=true,}})
 		
 		# (if has pussy)
 		if(GM.pc.hasVagina()):
@@ -522,7 +530,7 @@ func _run():
 
 
 	if(state == "sybian"):
-		GM.main.playAnimation(StageScene.Sybian, "ride", {exposedBodyparts=[BodypartSlot.Penis, BodypartSlot.Vagina, BodypartSlot.Anus]})
+		playAnimation(StageScene.Sybian, "ride", {bodyState={exposedCrotch=true,}})
 		
 		var lustLevel = GM.pc.getLustLevel()
 		# (if low lust)
@@ -593,7 +601,7 @@ func _run():
 
 
 	if(state == "escape"):
-		GM.main.playAnimation(StageScene.Solo, "stand")
+		playAnimation(StageScene.Solo, "stand")
 		
 		# (if has pussy)
 		if(GM.pc.hasVagina()):
@@ -686,7 +694,7 @@ func _run():
 		addButton("Continue", "See what happens next", "learn_code_before_stocks")
 
 	if(state == "learn_code_before_stocks"):
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc="alexrynard"})
+		playAnimation(StageScene.Duo, "stand", {npc="alexrynard"})
 		
 		saynn("He clips a leash to your collar and helps you to get up by undoing the zip ties that were holding you on the sybian before pulling you off of it. Your legs shake but you somehow get up and follow him.")
 
@@ -806,7 +814,7 @@ func _react(_action: String, _args):
 	
 	if(_action == "struggle"):
 		processTime(5*60)
-		runScene("StrugglingScene", [true], "strugglesybian")
+		runScene("StrugglingScene", [true, false], "strugglesybian")
 		setState("sybian")
 		return
 		

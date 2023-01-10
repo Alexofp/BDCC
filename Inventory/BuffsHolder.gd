@@ -19,6 +19,7 @@ var exposure = 0
 var genitalElasticity = 0.0
 var genitalResistance = 0.0
 var orificeMinLooseness = {}
+var orificesPreventedFromRecovering = {}
 var blockedOrifices = {}
 var extraFertility = 0.0
 var extraVirility = 0.0
@@ -76,6 +77,7 @@ func calculateBuffs():
 	extraCrossSpeciesCompatibility = 0.0
 	skillsExperience.clear()
 	customAttributes.clear()
+	orificesPreventedFromRecovering.clear()
 	
 	for damageType in DamageType.getAll():
 		dealDamageMult[damageType] = 0.0
@@ -169,6 +171,12 @@ func getOrificeMinLooseness(orificeType):
 		return 0.0
 	
 	return orificeMinLooseness[orificeType]
+
+func getOrificePreventedFromRecovering(orificeType):
+	if(orificesPreventedFromRecovering.has(orificeType)):
+		return true
+	
+	return false
 
 func getOrificeBlocked(orificeType):
 	if(!blockedOrifices.has(orificeType)):

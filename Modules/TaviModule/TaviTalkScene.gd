@@ -11,7 +11,7 @@ func _reactInit():
 func _run():
 	if(state == ""):
 		addCharacter("tavi")
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc="tavi"})
+		playAnimation(StageScene.Duo, "stand", {npc="tavi"})
 		
 	if(state == ""):
 		if(getModuleFlag("TaviModule", "Tavi_IsAngryAtPlayer")):

@@ -6,7 +6,7 @@ func _init():
 func _run():
 	if(state == ""):
 		addCharacter("rubi")
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc="rubi", npcAction="kneel"})
+		playAnimation(StageScene.Duo, "stand", {npc="rubi", npcAction="kneel"})
 
 	if(state == ""):
 		saynn("Rubi falls to his knees, unable to continue fighting. He pants heavily and looks at you with some kind of hope in his eyes.")
@@ -33,7 +33,11 @@ func _run():
 
 
 	if(state == "finger_him"):
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc="rubi", npcHard=true, npcAction="kneel", npcExposedBodyparts=[BodypartSlot.Anus]})
+		playAnimation(StageScene.SexStanding, "tease", {
+			npc="rubi", pc="pc", 
+			bodyState={},
+			npcBodyState={exposedCrotch=true,hard=true},
+		})
 		
 		saynn("[say=pc]Yeah, I ain’t gonna just leave such cute slut wanting~[/say]")
 
@@ -61,11 +65,15 @@ func _run():
 
 	if(state == "rail_him"):
 		# (needs cock)
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc="rubi", npcHard=true, hard=true, npcAction="kneel", npcExposedBodyparts=[BodypartSlot.Anus], exposedBodyparts=[BodypartSlot.Penis]})
+		playAnimation(StageScene.SexAllFours, "sex", {
+			npc="rubi", pc="pc", 
+			bodyState={exposedCrotch=true,hard=true},
+			npcBodyState={exposedCrotch=true,hard=true},
+		})
 
 		saynn("[say=pc]How can I leave without first using such a slut?[/say]")
 
-		saynn("You crouch before him and swiftly pull his shorts down, exposing his erect feline cock and a clean tight-looking pink pucker. You see excitement in his eyes as he is willingly spreading his legs for you.")
+		saynn("You crouch behind him and swiftly pull his shorts down, exposing his erect feline cock and a clean tight-looking pink pucker. You see excitement in his eyes as he is willingly spreading his legs for you.")
 
 		saynn("[say=pc]Good girl~[/say]")
 

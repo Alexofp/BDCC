@@ -153,6 +153,9 @@ func alwaysBreaksWhenStruggledOutOf():
 func getRestraintType():
 	return restraintType
 
+func getResistAnimation():
+	return "struggle"
+
 func saveData():
 	var data = {}
 	

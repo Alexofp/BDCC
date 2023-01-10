@@ -64,12 +64,15 @@ func beforeFightStarted():
 	lust = RNG.randi_range(0, getAmbientLust())
 	pain = RNG.randi_range(0, getAmbientPain())
 	stamina = getMaxStamina()
+	
+	GM.GES.callGameExtenders(ExtendGame.npcBeforeFightStarted, [self])
 
 func afterFightEnded():
 	.afterFightEnded()
 	#pain = 0
 	#lust = 0
 	#stamina = getMaxStamina()
+	GM.GES.callGameExtenders(ExtendGame.npcAfterFightEnded, [self])
 
 func saveData():
 	var data = {
@@ -191,15 +194,49 @@ func processTime(_secondsPassed):
 	if(menstrualCycle != null):
 		menstrualCycle.processTime(_secondsPassed)
 		
-	# Not sure if needed
-	updateNonBattleEffects()
+	GM.GES.callGameExtenders(ExtendGame.npcProcessTime, [self, _secondsPassed])
+		
+func canDoSelfCare():
+	# If character is in a scene, don't touch them
+	if(GM.main != null && GM.main.characterIsVisible(getID())):
+		return false
+	
+	return true
 		
 func hoursPassed(_howmuch):
 	for bodypart in processingBodyparts:
 		if(bodypart != null && is_instance_valid(bodypart)):
 			bodypart.hoursPassed(_howmuch)
 
+	if(canDoSelfCare()):
+		var tookShowerChance = _howmuch * 5.0
+		if(RNG.chance(tookShowerChance)):
+			removeEffect(StatusEffect.DrenchedInPiss)
+			removeEffect(StatusEffect.HasTallyMarks)
+			removeEffect(StatusEffect.HasBodyWritings)
+			removeEffect(StatusEffect.CoveredInCum)
+			
+		var removedRestraintsChance = _howmuch * 2.0
+		if(RNG.chance(removedRestraintsChance)):
+			var restraints = getInventory().getEquppedRestraints()
+			if(restraints.size() > 0):
+				for restraint in restraints:
+					if(restraint.isImportant()):
+						continue
+					
+					if(RNG.chance(removedRestraintsChance)):
+						getInventory().removeEquippedItem(restraint)
+				
+				if(getInventory().getEquppedRestraints().size() == 0):
+					resetEquipment()
+		#if(_howmuch > 240):
+		#	resetEquipment()
+
+	GM.GES.callGameExtenders(ExtendGame.npcHoursPassed, [self, _howmuch])
+
 func updateNonBattleEffects():
+	buffsHolder.calculateBuffs()
+	
 	if(timedBuffs.size() > 0):
 		addEffect(StatusEffect.TimedEffects)
 	else:
@@ -281,6 +318,10 @@ func updateNonBattleEffects():
 	else:
 		removeEffect(StatusEffect.SexEnginePersonality)
 		removeEffect(StatusEffect.SexEngineLikes)
+		
+	GM.GES.callGameExtenders(ExtendGame.npcUpdateNonBattleEffects, [self])
+	
+	buffsHolder.calculateBuffs()
 
 func onCharacterVisiblyPregnant():
 	if(getMenstrualCycle() != null):
@@ -425,3 +466,8 @@ func onStoppedProcessing():
 
 func getCharacterType():
 	return npcCharacterType
+
+func processBattleTurn():
+	.processBattleTurn()
+
+	GM.GES.callGameExtenders(ExtendGame.npcProcessBattleTurn, [self])

@@ -214,17 +214,18 @@ func stopActivities():
 func getActivitiesAsText():
 	var result = []
 	
+	# Hardcodding pc here is probably bad but there is high chance this code will never be used for npcs
 	for activity in currentActivities:
 		if(activity == LustActivity.GropingButt):
-			result.append("{attacker.name}'s hand is groping {attacker.his} butt")
+			result.append("{pc.name}'s hand is groping {pc.his} butt")
 		if(activity == LustActivity.GropingChest):
-			result.append("{attacker.name}'s hand is groping {attacker.his} tits")
+			result.append("{pc.name}'s hand is groping {pc.his} tits")
 		if(activity == LustActivity.SpreadingPussy):
-			result.append("{attacker.name}'s hand is rubbing {attacker.his} pussy")
+			result.append("{pc.name}'s hand is rubbing {pc.his} pussy")
 		if(activity == LustActivity.StrokingCock):
-			result.append("{attacker.name}'s hand is stroking {attacker.his} cock")
+			result.append("{pc.name}'s hand is stroking {pc.his} cock")
 		if(activity == LustActivity.ProddingAnal):
-			result.append("{attacker.name}'s fingers are prodding {attacker.his} anal ring")
+			result.append("{pc.name}'s fingers are prodding {pc.his} anal ring")
 			
 	return result
 

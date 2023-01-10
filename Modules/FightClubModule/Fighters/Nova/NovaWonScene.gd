@@ -6,7 +6,7 @@ func _init():
 func _run():
 	if(state == ""):
 		addCharacter("nova")
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc="nova", npcAction="kneel"})
+		playAnimation(StageScene.Duo, "stand", {npc="nova", npcAction="kneel"})
 
 	if(state == ""):
 		saynn("Nova is defeated, she lets out a soft cry before losing her weapon and dropping down to her knees, her light power armor shuts down due to the capacitors being overloaded.")
@@ -44,6 +44,8 @@ func _run():
 
 
 	if(state == "power_suit"):
+		playAnimation(StageScene.Duo, "stand", {npc="nova", npcAction="allfours"})
+		
 		saynn("You notice something. Something very interesting. Nova seems to be wearing some kind of PDA with a screen on her wrist. You approach the husky and shove her onto the ground before pinning her arm with your leg. Nova is growling and snarling at you but she can’t do anything about you taking that device off of her wrist.")
 
 		saynn("[say=nova]Hey! Bitch, that’s not for you to touch![/say]")
@@ -133,7 +135,11 @@ func _run():
 
 	if(state == "offer_pussy"):
 		# (needs pussy)
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc="nova", hard=true, npcAction="kneel", exposedBodyparts=[BodypartSlot.Vagina]})
+		playAnimation(StageScene.SexFaceSitting, "sit", {
+			pc="pc", npc="nova", 
+			bodyState={exposedCrotch=true,hard=true},
+			npcBodyState={},
+		})
 
 		saynn("Hmm. Yeah, using a desperate husky for your pleasure sounds kinda nice about now. You expose your cute pussy slit and lie down before shoving your crotch into Nova’s face. The husky quickly realizes what she needs to do and starts eagerly nuzzling your pussy. She then sticks her tongue out and starts dragging it across the sensitive petals and the clit, making you moan. All the while the suit is still denying the husky time after time, turning her more desperate and subby.")
 
@@ -163,7 +169,11 @@ func _run():
 
 	if(state == "offer_cock"):
 		# (needs cock)
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc="nova", hard=true, npcAction="kneel", exposedBodyparts=[BodypartSlot.Penis]})
+		playAnimation(StageScene.SexOral, "sex", {
+			pc="pc", npc="nova", 
+			bodyState={exposedCrotch=true,hard=true},
+			npcBodyState={},
+		})
 		
 		if(GM.pc.isWearingChastityCage()):
 			saynn("Hmm. Yeah, using a desperate husky for your pleasure sounds kinda nice about now. You expose your {pc.cock} and kneel before Nova, offering her some work. The husky quickly realizes what she needs to do and starts eagerly nuzzling your chastity cage. She then sticks her tongue out and starts trying to reach your member through it, making it feel good in the process. All the while the suit is still denying the husky time after time, turning her more desperate and subby.")

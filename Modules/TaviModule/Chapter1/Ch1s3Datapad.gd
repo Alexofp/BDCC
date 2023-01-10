@@ -11,7 +11,7 @@ func _run():
 		addCharacter("tavi")
 		
 	if(state == ""):
-		GM.main.playAnimation(StageScene.Duo, "stand", {pc="tavi"})
+		playAnimation(StageScene.Duo, "stand", {pc="tavi"})
 		
 		# (Either way Risha loses and gets bullied by you or Tavi.)
 

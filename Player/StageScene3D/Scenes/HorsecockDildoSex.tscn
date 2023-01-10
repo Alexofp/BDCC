@@ -1,0 +1,152 @@
+[gd_scene load_steps=34 format=2]
+
+[ext_resource path="res://Player/Player3D/Doll3D.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Player/StageScene3D/BaseStageScene3D.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Player/Props/platform.png" type="Texture" id=3]
+[ext_resource path="res://Player/Props/HorsecockDildo.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Player/StageScene3D/Scenes/HorsecockDildoSex.gd" type="Script" id=5]
+
+[sub_resource type="AnimationNodeAnimation" id=3]
+animation = "CuffedArms-loop"
+
+[sub_resource type="AnimationNodeBlend2" id=4]
+filter_enabled = true
+filters = [ "Doll3D/Skeleton:Arm.L", "Doll3D/Skeleton:Arm.R", "Doll3D/Skeleton:ForeArm.L", "Doll3D/Skeleton:ForeArm.R", "Doll3D/Skeleton:Hand.L", "Doll3D/Skeleton:Hand.R" ]
+
+[sub_resource type="AnimationNodeAnimation" id=38]
+animation = "HorsecockInside-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=39]
+animation = "HorsecockRide-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=40]
+animation = "HorsecockRideFast-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=41]
+animation = "HorsecockTease-loop"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=42]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=43]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=44]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=45]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=46]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=47]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachine" id=24]
+states/HorsecockInside-loop/node = SubResource( 38 )
+states/HorsecockInside-loop/position = Vector2( 311, 151 )
+states/HorsecockRide-loop/node = SubResource( 39 )
+states/HorsecockRide-loop/position = Vector2( 311, 223 )
+states/HorsecockRideFast-loop/node = SubResource( 40 )
+states/HorsecockRideFast-loop/position = Vector2( 311, 310 )
+states/HorsecockTease-loop/node = SubResource( 41 )
+states/HorsecockTease-loop/position = Vector2( 323, 81 )
+transitions = [ "HorsecockTease-loop", "HorsecockInside-loop", SubResource( 42 ), "HorsecockInside-loop", "HorsecockTease-loop", SubResource( 43 ), "HorsecockInside-loop", "HorsecockRide-loop", SubResource( 44 ), "HorsecockRide-loop", "HorsecockInside-loop", SubResource( 45 ), "HorsecockRide-loop", "HorsecockRideFast-loop", SubResource( 46 ), "HorsecockRideFast-loop", "HorsecockRide-loop", SubResource( 47 ) ]
+start_node = "HorsecockTease-loop"
+graph_offset = Vector2( -146, 58 )
+
+[sub_resource type="AnimationNodeBlendTree" id=25]
+graph_offset = Vector2( -135.96, 80.12 )
+nodes/Animation/node = SubResource( 3 )
+nodes/Animation/position = Vector2( 140, 280 )
+nodes/CuffsBlend/node = SubResource( 4 )
+nodes/CuffsBlend/position = Vector2( 440, 160 )
+nodes/StateMachine/node = SubResource( 24 )
+nodes/StateMachine/position = Vector2( 160, 120 )
+nodes/output/position = Vector2( 680, 180 )
+node_connections = [ "output", 0, "CuffsBlend", "CuffsBlend", 0, "StateMachine", "CuffsBlend", 1, "Animation" ]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=22]
+
+[sub_resource type="AnimationNodeAnimation" id=26]
+animation = "TheHorseCockInside-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=27]
+animation = "TheHorseCockRide-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=28]
+animation = "TheHorseCockRideFast-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=29]
+animation = "TheHorseCockTease-loop"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=30]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=31]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=32]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=33]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=34]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=35]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachine" id=36]
+states/TheHorseCockInside-loop/node = SubResource( 26 )
+states/TheHorseCockInside-loop/position = Vector2( 451, 157 )
+states/TheHorseCockRide-loop/node = SubResource( 27 )
+states/TheHorseCockRide-loop/position = Vector2( 434, 243 )
+states/TheHorseCockRideFast-loop/node = SubResource( 28 )
+states/TheHorseCockRideFast-loop/position = Vector2( 439, 326 )
+states/TheHorseCockTease-loop/node = SubResource( 29 )
+states/TheHorseCockTease-loop/position = Vector2( 446, 82 )
+transitions = [ "TheHorseCockTease-loop", "TheHorseCockInside-loop", SubResource( 30 ), "TheHorseCockInside-loop", "TheHorseCockTease-loop", SubResource( 31 ), "TheHorseCockInside-loop", "TheHorseCockRide-loop", SubResource( 32 ), "TheHorseCockRide-loop", "TheHorseCockInside-loop", SubResource( 33 ), "TheHorseCockRide-loop", "TheHorseCockRideFast-loop", SubResource( 34 ), "TheHorseCockRideFast-loop", "TheHorseCockRide-loop", SubResource( 35 ) ]
+start_node = "TheHorseCockTease-loop"
+graph_offset = Vector2( -81, 77 )
+
+[sub_resource type="AnimationNodeBlendTree" id=37]
+graph_offset = Vector2( -42.2919, 68.0042 )
+nodes/StateMachine/node = SubResource( 36 )
+nodes/StateMachine/position = Vector2( 340, 160 )
+nodes/output/position = Vector2( 680, 180 )
+node_connections = [ "output", 0, "StateMachine" ]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=23]
+
+[node name="HorsecockDildoSex" instance=ExtResource( 2 )]
+script = ExtResource( 5 )
+
+[node name="Sprite3D" type="Sprite3D" parent="." index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.196641, -1.77462 )
+texture = ExtResource( 3 )
+region_enabled = true
+region_rect = Rect2( 1, 1, 1022, 62 )
+
+[node name="Doll3D" parent="." index="1" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.419573, 0, 0 )
+
+[node name="HorsecockDildo" parent="." index="2" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.419573, 0, 0 )
+
+[node name="AnimationTree" type="AnimationTree" parent="." index="3"]
+tree_root = SubResource( 25 )
+anim_player = NodePath("../Doll3D/DollSkeleton/AnimationPlayer")
+parameters/CuffsBlend/blend_amount = 0
+parameters/StateMachine/playback = SubResource( 22 )
+
+[node name="AnimationTree2" type="AnimationTree" parent="." index="4"]
+tree_root = SubResource( 37 )
+anim_player = NodePath("../HorsecockDildo/AnimationPlayer")
+parameters/StateMachine/playback = SubResource( 23 )
+
+[editable path="Doll3D"]
+[editable path="Doll3D/DollSkeleton"]
+[editable path="HorsecockDildo"]

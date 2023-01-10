@@ -138,8 +138,8 @@ func processTurn():
 		if(dom.isPlayer()):
 			dom.getInventory().removeItem(item)
 		sub.getInventory().forceEquipStoreOtherUnlessRestraint(item)
-		sub.getBuffsHolder().calculateBuffs()
-		sub.updateNonBattleEffects()
+		#sub.getBuffsHolder().calculateBuffs()
+		#sub.updateNonBattleEffects()
 		
 		var text = RNG.pick([
 			"{dom.You} {dom.youVerb('were', 'was')} successful. ",

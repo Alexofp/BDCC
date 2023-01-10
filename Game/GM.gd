@@ -7,6 +7,10 @@ var world: GameWorld
 var ES: EventSystem
 var QS: QuestSystem
 var CS: ChildSystem
+var GES: GameExtenderSystem
+
+func _init():
+	GES = GameExtenderSystem.new()
 
 func _ready():
 	var directory = Directory.new( )

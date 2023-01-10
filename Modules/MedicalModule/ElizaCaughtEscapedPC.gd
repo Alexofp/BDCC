@@ -6,12 +6,11 @@ func _init():
 func _run():
 	if(state == ""):
 		addCharacter("eliza")
-		GM.main.playAnimation(StageScene.Duo, "stand", {npc="eliza", npcAction="stand"})
+		playAnimation(StageScene.Duo, "kneel", {npc="eliza", npcAction="stand"})
 		
 	if(state == ""):
 		aimCamera("medical_near_pccell")
 		GM.pc.setLocation("medical_near_pccell")
-		GM.main.playAnimation(StageScene.Solo, "kneel")
 		setLocationName("Near cells")
 		
 		saynn("Eliza holds your leash, you try to look brave even with that straitjacket on.")
@@ -81,7 +80,7 @@ func _run():
 	if(state == "sleep1"):
 		aimCamera("medical_paddedcell_player")
 		GM.pc.setLocation("medical_paddedcell_player")
-		GM.main.playAnimation(StageScene.Solo, "kneel")
+		playAnimation(StageScene.Solo, "kneel")
 		setLocationName("Padded cell")
 		
 		saynn("You wake up in your padded cell. You have a little headache, such a familiar feeling.")

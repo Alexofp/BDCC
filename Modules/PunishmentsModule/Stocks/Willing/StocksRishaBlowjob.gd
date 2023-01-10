@@ -14,6 +14,7 @@ func _reactInit():
 func _run():
 	if(state == ""):
 		addCharacter("risha")
+		playAnimation(StageScene.StocksSexOral, "tease", {npc="risha"})
 		# (if can see)
 		if(!GM.pc.isBlindfolded()):
 			saynn("A guard walks up to you, a familiar one. It’s the lynx that helped to process you here.")
@@ -43,6 +44,8 @@ func _run():
 		addButton("Continue", "It's fine", "endthescene")
 
 	if(state == "nod"):
+		playAnimation(StageScene.StocksSexOral, "sex", {npc="risha", npcBodyState={exposedCrotch=true,hard=true}})
+		
 		saynn("You nod slightly. Risha chuckles and strips the crotch piece of her heavy armor. Then she pulls down her panties and exposes her girthy cock. It’s about {risha.penisSizeStr} and is of a feline type, no knot or anything, just little barbs on its long tip.")
 
 		# (if can’t oral)
@@ -117,7 +120,6 @@ func _react(_action: String, _args):
 		GM.pc.cummedOnBy("risha")
 		GM.pc.addSkillExperience(Skill.SexSlave, 20, "risha_stocksblow")
 		GM.pc.gotThroatFuckedBy("risha")
-		GM.pc.updateNonBattleEffects()
 
 	if(_action == "endthescene"):
 		endScene()
