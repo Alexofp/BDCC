@@ -166,7 +166,8 @@ func canHandleBlindness():
 	return skillsHolder.hasPerk(Perk.BDSMBlindfold)
 	
 func calculateBuffs():
-	updateNonBattleEffects()
+	#updateNonBattleEffects()
+	pass
 
 # They may have effect on your damage in battles but they're not a 'battle' effects
 func updateNonBattleEffects():
@@ -282,10 +283,11 @@ func updateNonBattleEffects():
 	GM.GES.callGameExtenders(ExtendGame.pcUpdateNonBattleEffects, [self])
 
 	emit_signal("stat_changed")
+	
+	buffsHolder.calculateBuffs()
 
 func processBattleTurn():
 	.processBattleTurn()
-	updateNonBattleEffects()
 	skillsHolder.giveSkillExperienceBattleTurn()
 
 	GM.GES.callGameExtenders(ExtendGame.pcProcessBattleTurn, [self])
@@ -320,8 +322,6 @@ func processTime(_secondsPassed):
 		timedBuffsDurationSeconds -= _secondsPassed
 		if(timedBuffsDurationSeconds <= 0):
 			timedBuffs.clear()
-	
-	updateNonBattleEffects()
 	
 	for effectID in statusEffects:
 		var effect = statusEffects[effectID]
@@ -605,8 +605,6 @@ func afterSleeping():
 	if(isPregnant() && getPregnancyProgress() <= 0.5 && RNG.chance(30)):
 		GM.main.addLogMessage("Nausea", "You wake up and feel kinda nauseous.")
 		addEffect(StatusEffect.PregnancySickness)
-		
-	updateNonBattleEffects()
 
 func afterSleepingInBed():
 	afterSleeping()
@@ -615,7 +613,6 @@ func afterRestingInBed(seconds):
 	var _hours = floor(seconds/3600.0)
 	
 	addStamina(_hours * 10)
-	updateNonBattleEffects()
 
 func afterCryopodTreatment():
 	removeEffect(StatusEffect.Wounded)
@@ -677,20 +674,17 @@ func isInventorySlotBlocked(invslot):
 func afterEatingAtCanteen():
 	addStamina(100)
 	addPain(-20)
-	updateNonBattleEffects()
 
 func afterTakingAShower():
 	addStamina(30)
 	clearBodyFluids()
 	clearBodywritings()
 	clearTallymarks()
-	updateNonBattleEffects()
 
 func orgasmFrom(_characterID: String):
 	cumOnFloor()
 	
 	addLust(-lust)
-	updateNonBattleEffects()
 
 func cummedOnBy(characterID, sourceType = null, howMessy: int = 1):	
 	var ch = GlobalRegistry.getCharacter(characterID)
@@ -871,7 +865,6 @@ func addIntoxication(howmuch: float):
 		if(intoxicationTolerance > 1.0):
 			intoxicationTolerance = 1.0
 	
-	updateNonBattleEffects()
 
 func getIntoxicationLevel() -> float:
 	return intoxication

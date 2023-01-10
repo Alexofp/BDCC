@@ -179,7 +179,6 @@ func _react(_action: String, _args):
 		GM.pc.gotThroatFuckedBy("inmateMale")
 		GM.pc.cummedInMouthBy("inmateMale")
 		GM.pc.cummedOnBy("inmateMale")
-		GM.pc.updateNonBattleEffects()
 		if(_action == "cumDrugged"):
 			GM.pc.orgasmFrom("inmateMale")
 			

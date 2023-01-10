@@ -286,7 +286,6 @@ func _react(_action: String, _args):
 		var thebodypart = GM.pc.getBodypart(BodypartSlot.Head)
 		if(thebodypart != null):
 			thebodypart.addFluidOrifice(GM.pc.getFluidType(BodilyFluids.FluidSource.Penis), howMuchMilked, "pc")
-		GM.pc.updateNonBattleEffects()
 		
 	if(_action in ["had_no_choice", "shake_head"]):
 		increaseFlag("MedicalModule.Chastity_OptionalBadBehavourCounter")

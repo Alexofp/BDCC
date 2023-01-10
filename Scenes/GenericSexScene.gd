@@ -50,8 +50,8 @@ func _initScene(_args = []):
 	
 
 
-func _reactInit():
-	updateDomsAndSubs()
+#func _reactInit():
+#	updateDomsAndSubs()
 
 func _run():
 	if(state == ""):
@@ -110,6 +110,7 @@ func _react(_action: String, _args):
 			turns -= 1
 			sexEngine.doAction(sexEngine.getActions()[0])
 			processTime(60)
+			updateDomsAndSubs()
 		sexEngine.endSex()
 		return
 	
@@ -117,7 +118,7 @@ func _react(_action: String, _args):
 		currentCategory = []
 		sexEngine.doAction(_args[0])
 		processTime(60)
-		updateDomsAndSubs()
+		#updateDomsAndSubs()
 		setState("")
 		return
 	

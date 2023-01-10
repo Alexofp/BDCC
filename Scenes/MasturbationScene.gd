@@ -143,7 +143,6 @@ func addLustActionsButtons(lustCombatState:LustCombatState, theActions):
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
 		GM.pc.getLustCombatState().resetState()
-		GM.pc.updateNonBattleEffects()
 		endScene()
 		return
 	
@@ -188,7 +187,6 @@ func _react(_action: String, _args):
 			
 		checkDanger()
 		spottedMessages()
-		GM.pc.updateNonBattleEffects()
 		
 	setState(_action)
 
@@ -311,7 +309,6 @@ func checkDanger():
 			
 			if(triggerID != null && GM.ES.triggerReact(triggerID)):
 				GM.pc.getLustCombatState().resetState()
-				GM.pc.updateNonBattleEffects()
 				endScene()
 
 func resolveCustomCharacterName(_charID):

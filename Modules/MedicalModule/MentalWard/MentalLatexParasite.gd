@@ -219,8 +219,6 @@ func _react(_action: String, _args):
 		if(GM.pc.canBeSeedMilked()):
 			GM.pc.milkSeed()
 		
-		GM.pc.updateNonBattleEffects()
-		
 		GM.pc.addSkillExperience(Skill.SexSlave, 20)
 		MedicalModule.addPCBehavior(0.1)
 		

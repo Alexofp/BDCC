@@ -547,33 +547,28 @@ func _react(_action: String, _args):
 		getCharacter("risha").cummedInVaginaBy("pc")
 		GM.pc.orgasmFrom("risha")
 		GM.pc.addSkillExperience(Skill.SexSlave, 50, "risha_gymfuck")
-		GM.pc.updateNonBattleEffects()
 	
 	if(_action == "pull_out_on_risha"):
 		GM.pc.orgasmFrom("risha")
 		GM.pc.addSkillExperience(Skill.SexSlave, 60, "risha_gymfuck")
-		GM.pc.updateNonBattleEffects()
 	
 	if(_action == "cumAnal"):
 		GM.pc.orgasmFrom("risha")
 		GM.pc.gotAnusFuckedBy("risha")
 		GM.pc.cummedInAnusBy("risha")
 		GM.pc.addSkillExperience(Skill.SexSlave, 50, "risha_gymfuck")
-		GM.pc.updateNonBattleEffects()
 	
 	if(_action == "make_her_cum"):
 		GM.pc.gotThroatFuckedBy("risha")
 		GM.pc.cummedInMouthBy("risha")
 		GM.pc.cummedOnBy("risha")
 		GM.pc.addSkillExperience(Skill.SexSlave, 10, "risha_gymfuck")
-		GM.pc.updateNonBattleEffects()
 	
 	if(_action == "cumVaginal"):
 		GM.pc.orgasmFrom("risha")
 		GM.pc.gotVaginaFuckedBy("risha")
 		GM.pc.cummedInVaginaBy("risha")
 		GM.pc.addSkillExperience(Skill.SexSlave, 50, "risha_gymfuck")
-		GM.pc.updateNonBattleEffects()
 	
 	if(_action == "endthescene"):
 		processTime(60*60*1)

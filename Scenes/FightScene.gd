@@ -311,7 +311,7 @@ func _react(_action: String, _args):
 				GM.pc.getInventory().removeItem(item)
 				enemyCharacter.getInventory().forceEquipRemoveOther(item)
 				enemyCharacter.getBuffsHolder().calculateBuffs()
-				enemyCharacter.updateNonBattleEffects()
+				#enemyCharacter.updateNonBattleEffects()
 				
 				var restraintsAmount = enemyCharacter.getInventory().getEquppedRestraints().size()
 				if(enemyCharacter.shouldReactToRestraint(restraintData.getRestraintType(), restraintsAmount, true)):
@@ -745,8 +745,8 @@ func beforeTurnChecks(pcWasStruggling = false):
 func afterTurnChecks():
 	#GM.pc.processBattleTurn()
 	#enemyCharacter.processBattleTurn()
-	enemyCharacter.updateNonBattleEffects()
-	GM.pc.updateNonBattleEffects()
+	#enemyCharacter.updateNonBattleEffects()
+	#GM.pc.updateNonBattleEffects()
 	
 	var won = checkEnd()
 	if(won == "lost"):

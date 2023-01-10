@@ -38,7 +38,6 @@ func _react(_action: String, _args):
 		processTime(60*20)
 		GM.pc.addStamina(-20)
 		GM.pc.addEffect(StatusEffect.Yoga)
-		GM.pc.updateNonBattleEffects()
 	
 	if(_action == "endthescene"):
 		endScene()

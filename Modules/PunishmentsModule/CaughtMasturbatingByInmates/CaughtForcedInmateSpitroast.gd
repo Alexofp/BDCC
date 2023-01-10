@@ -233,7 +233,6 @@ func _react(_action: String, _args):
 		processTime(60*6)
 		GM.pc.cummedOnBy("inmateMale")
 		GM.pc.cummedOnBy("inmateMale2")
-		GM.pc.updateNonBattleEffects()
 		
 		if(RNG.chance(50)):
 			var zone = BodyWritingsZone.getRandomZone()
@@ -255,7 +254,6 @@ func _react(_action: String, _args):
 		GM.pc.cummedInMouthBy("inmateMale2")
 		GM.pc.addTallymarkFace()
 		GM.pc.cummedOnBy("inmateMale2")
-		GM.pc.updateNonBattleEffects()
 		GM.pc.addSkillExperience(Skill.SexSlave, 10, "caught_inmate_spitroast")
 		
 		addMessage("They drew some tallymarks on you")

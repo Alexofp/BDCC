@@ -196,9 +196,6 @@ func processTime(_secondsPassed):
 		
 	GM.GES.callGameExtenders(ExtendGame.npcProcessTime, [self, _secondsPassed])
 		
-	# Not sure if needed
-	updateNonBattleEffects()
-		
 func canDoSelfCare():
 	# If character is in a scene, don't touch them
 	if(GM.main != null && GM.main.characterIsVisible(getID())):
@@ -238,6 +235,8 @@ func hoursPassed(_howmuch):
 	GM.GES.callGameExtenders(ExtendGame.npcHoursPassed, [self, _howmuch])
 
 func updateNonBattleEffects():
+	buffsHolder.calculateBuffs()
+	
 	if(timedBuffs.size() > 0):
 		addEffect(StatusEffect.TimedEffects)
 	else:
@@ -321,6 +320,8 @@ func updateNonBattleEffects():
 		removeEffect(StatusEffect.SexEngineLikes)
 		
 	GM.GES.callGameExtenders(ExtendGame.npcUpdateNonBattleEffects, [self])
+	
+	buffsHolder.calculateBuffs()
 
 func onCharacterVisiblyPregnant():
 	if(getMenstrualCycle() != null):

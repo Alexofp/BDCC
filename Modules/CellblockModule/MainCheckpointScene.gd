@@ -360,12 +360,10 @@ func _react(_action: String, _args):
 	if(_action == "facial"):
 		GM.pc.cummedOnBy("cp_guard", BodilyFluids.FluidSource.Penis)
 		GM.pc.addSkillExperience(Skill.SexSlave, 20, "cpguard_suckcock")
-		GM.pc.updateNonBattleEffects()
 
 	if(_action == "mouth"):
 		GM.pc.cummedInMouthBy("cp_guard")
 		GM.pc.addSkillExperience(Skill.SexSlave, 20, "cpguard_suckcock")
-		GM.pc.updateNonBattleEffects()
 
 	if(_action == "allowFullAndendthescene"):
 		setModuleFlag("CellblockModule", "Cellblock_FreeToPassCheckpoint", true)
@@ -391,7 +389,6 @@ func _react(_action: String, _args):
 		GM.pc.cummedInAnusBy("cp_guard")
 		GM.pc.orgasmFrom("cp_guard")
 		GM.pc.addSkillExperience(Skill.SexSlave, 30, "cpguard_catchanal")
-		GM.pc.updateNonBattleEffects()
 	
 	if(_action == "startsexsubby"):
 		getCharacter("cp_guard").resetEquipment()

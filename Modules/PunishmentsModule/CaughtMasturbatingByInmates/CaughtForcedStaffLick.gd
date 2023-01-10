@@ -130,7 +130,6 @@ func _react(_action: String, _args):
 		processTime(60*6)
 		GM.pc.cummedOnBy("femaleguard_feline")
 		GM.pc.addLust(40)
-		GM.pc.updateNonBattleEffects()
 
 	if(_action == "endthescene"):
 		endScene()

@@ -130,7 +130,7 @@ func useInCombatWithBuffs(_attacker, _receiver):
 		if(turnBuffs.size() > 0):
 			_attacker.addTimedBuffsTurns(turnBuffs, getBuffsDurationTurns())
 			
-		_attacker.updateNonBattleEffects()
+		#_attacker.updateNonBattleEffects()
 	
 	return useInCombat(_attacker, _receiver)
 

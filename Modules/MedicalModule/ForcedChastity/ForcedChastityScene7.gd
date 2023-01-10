@@ -503,7 +503,6 @@ func _react(_action: String, _args):
 	if(_action == "use_heat_pill"):
 		var eliza = getCharacter("eliza")
 		eliza.forceIntoHeat()
-		eliza.updateNonBattleEffects()
 	
 	if(_action == "cum_inside"):
 		getCharacter("eliza").cummedInVaginaBy("pc")

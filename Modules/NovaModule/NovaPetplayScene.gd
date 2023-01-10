@@ -845,13 +845,11 @@ func _react(_action: String, _args):
 	if(_action == "outside"):
 		GM.pc.cummedOnBy("nova")
 		GM.pc.addSkillExperience(Skill.SexSlave, 10, "nova_petsuckcock")
-		GM.pc.updateNonBattleEffects()
 		
 	if(_action == "take_it"):
 		GM.pc.cummedInMouthBy("nova")
 		#GM.pc.cummedOnBy("nova")
 		GM.pc.addSkillExperience(Skill.SexSlave, 20, "nova_petsuckcock")
-		GM.pc.updateNonBattleEffects()
 	
 	if(_action in ["oral", "anal_fucking", "vaginalcum"]):
 		GM.main.addRoomMemoryCurrentLoc("You notice some cum stains, a sign that somebody had sex here. Meow? Bark?", 1)

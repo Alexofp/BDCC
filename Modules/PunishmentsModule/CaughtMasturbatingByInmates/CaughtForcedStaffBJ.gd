@@ -168,7 +168,6 @@ func _react(_action: String, _args):
 		GM.pc.cummedInMouthBy("maleguard_canine")
 		GM.pc.cummedOnBy("maleguard_canine")
 		GM.pc.addLust(20)
-		GM.pc.updateNonBattleEffects()
 		GM.pc.addSkillExperience(Skill.SexSlave, 10, "caught_staff_forcedbj")
 		
 	if(_action in ["cum1"]):
@@ -177,7 +176,6 @@ func _react(_action: String, _args):
 		GM.pc.cummedInMouthBy("shemaleguard")
 		GM.pc.cummedOnBy("shemaleguard")
 		GM.pc.addLust(20)
-		GM.pc.updateNonBattleEffects()
 		GM.pc.addSkillExperience(Skill.SexSlave, 10, "caught_staff_forcedbj2")
 		
 	if(_action == "endthescene"):

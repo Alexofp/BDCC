@@ -168,7 +168,7 @@ func addEffect(effectID: String, args = []):
 	statusEffectsStorageNode.add_child(effect)
 	
 	statusEffects[effectID] = effect
-	buffsHolder.calculateBuffs()
+	#buffsHolder.calculateBuffs()
 
 func hasEffect(effectID: String):
 	return statusEffects.has(effectID)
@@ -182,7 +182,7 @@ func removeEffect(effectID: String):
 	if(statusEffects.has(effectID)):
 		statusEffects[effectID].queue_free()
 		var _wasremoved = statusEffects.erase(effectID)
-		buffsHolder.calculateBuffs()
+		#buffsHolder.calculateBuffs()
 	
 func canStandUpCombat():
 	if(!hasEffect(StatusEffect.Collapsed)):
@@ -232,7 +232,7 @@ func processBattleTurn():
 		
 	skillsHolder.processBattleTurn()
 		
-	buffsHolder.calculateBuffs()
+	#buffsHolder.calculateBuffs()
 		
 func beforeFightStarted():
 	pass
@@ -271,10 +271,11 @@ func getArmor(_damageType):
 	return armor
 	
 func calculateBuffs():
-	buffsHolder.calculateBuffs()
+	#buffsHolder.calculateBuffs()
+	pass
 	
 func onEquippedItemsChange():
-	calculateBuffs()
+	#calculateBuffs()
 	updateAppearance()
 	
 func onStatChange():
@@ -1672,7 +1673,7 @@ func processSexTurn():
 		var effect = statusEffects[effectID]
 		effect.processSexTurn()
 		
-	buffsHolder.calculateBuffs()
+	#buffsHolder.calculateBuffs()
 
 func addTimedBuffs(buffs: Array, seconds):
 	for newbuff in buffs:
@@ -1687,7 +1688,6 @@ func addTimedBuffs(buffs: Array, seconds):
 	
 	if(seconds > timedBuffsDurationSeconds):
 		timedBuffsDurationSeconds = seconds
-	updateNonBattleEffects()
 
 func addTimedBuffsTurns(buffs: Array, turns):
 	if(!GM.main.supportsBattleTurns()):
@@ -1705,10 +1705,9 @@ func addTimedBuffsTurns(buffs: Array, turns):
 	
 	if(turns > timedBuffsDurationTurns):
 		timedBuffsDurationTurns = turns
-	updateNonBattleEffects()
 
 func updateNonBattleEffects():
-	pass
+	buffsHolder.calculateBuffs()
 
 func saveBuffsData(buffs):
 	var data = []

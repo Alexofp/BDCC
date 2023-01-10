@@ -422,8 +422,6 @@ func _react(_action: String, _args):
 		
 		GM.pc.addLust(100)
 		
-		GM.pc.updateNonBattleEffects()
-		
 	if(_action == "inmatesFirstLoad"):
 		GM.pc.cummedOnBy("inmateMale")
 		GM.pc.cummedOnBy("inmateMale")

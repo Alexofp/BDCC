@@ -15,7 +15,7 @@ func canUseInCombat():
 func useInCombat(_attacker, _receiver):
 	removeXOrDestroy(1)
 	_attacker.forceIntoHeat()
-	_attacker.updateNonBattleEffects()
+	#_attacker.updateNonBattleEffects()
 	return _attacker.getName() + " took the pill"
 
 func getPossibleActions():
