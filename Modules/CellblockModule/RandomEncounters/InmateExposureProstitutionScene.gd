@@ -271,7 +271,6 @@ func _react(_action: String, _args):
 		amountRequested *= RNG.randi_range(2, 4)
 
 	if(_action == "endthescene"):
-		getCharacter(npcID).resetEquipment()
 		endScene()
 		return
 

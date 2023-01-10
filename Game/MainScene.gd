@@ -279,6 +279,7 @@ func reRun():
 	runCurrentScene()
 
 func loadingSavefileFinished():
+	charactersToUpdate.clear()
 	for charID in getCharacters():
 		var character = getCharacter(charID)
 		character.checkOldWayOfUpdating(currentDay, timeOfDay)

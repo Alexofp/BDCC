@@ -227,8 +227,12 @@ func _run():
 		
 		addButtonAt(14, "Submit", "Give up", "submit")
 		
-	if(state == "lost" || state == "win"):		
-		addButton("Continue", "the battle has ended", "endbattle")
+	if(state == "lost" || state == "win"):
+		if(enemyCharacter.isDynamicCharacter() && restraintIdsForcedByPC.size() > 0 && state == "win"):
+			addButton("Recover restraints", "the battle has ended", "endbattle", [true])
+			addButton("Keep restraints", "the battle has ended", "endbattle", [false])
+		else:
+			addButton("Continue", "the battle has ended", "endbattle", [true])
 		
 	if(state == "lustCombatAboutToCum"):
 		saynn(whatPlayerDid)
@@ -396,7 +400,7 @@ func _react(_action: String, _args):
 		return
 	
 	if(_action == "endbattle"):
-		if(restraintIdsForcedByPC.size() > 0):
+		if(restraintIdsForcedByPC.size() > 0 && _args.size() > 0 && _args[0]):
 			#var recoverChance = GM.pc.getBuffsHolder().getCustom(BuffAttribute.RestraintRecovery) * 100.0
 			
 			for itemUniqueID in restraintIdsForcedByPC:

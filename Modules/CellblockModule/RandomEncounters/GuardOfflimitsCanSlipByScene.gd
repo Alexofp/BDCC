@@ -313,7 +313,6 @@ func _react(_action: String, _args):
 		getCharacter(npcID).setFlag(CharacterFlag.Introduced, true)
 
 	if(_action == "endthescene"):
-		getCharacter(npcID).resetEquipment()
 		endScene()
 		return
 

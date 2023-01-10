@@ -62,7 +62,7 @@ func _run():
 	if(state == "obey"):
 		playAnimation(StageScene.Duo, "kneel", {npc="femaleguard_feline"})
 		
-		saynn("[say=pc]Alright, relax. I’m obeying.[say]")
+		saynn("[say=pc]Alright, relax. I’m obeying.[/say]")
 
 		saynn("You raise your hands and put them behind your head while getting onto your knees. You tilt your head down and watch the floor while the guard kitty is approaching with something in her paw, some black piece of fabric.")
 

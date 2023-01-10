@@ -361,7 +361,6 @@ func addWonButton():
 func _react(_action: String, _args):
 
 	if(_action == "endthescene"):
-		getCharacter(npcID).resetEquipment()
 		endScene()
 		return
 
