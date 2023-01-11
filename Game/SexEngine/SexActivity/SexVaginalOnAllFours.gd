@@ -696,7 +696,7 @@ func doSubAction(_id, _actionInfo):
 		
 		var text = RNG.pick([
 			"{sub.You} "+moanText+" while being fucked!",
-			"{sub.You} "+moanText+" while having {dom.yourHis} "+RNG.pick(usedBodypartNames)+" used!",
+			"{sub.You} "+moanText+" while having {sub.yourHis} "+RNG.pick(usedBodypartNames)+" used!",
 			"{sub.You} "+moanText+" eagerly!",
 		])
 		domInfo.addAnger(-0.02)
@@ -717,7 +717,7 @@ func doSubAction(_id, _actionInfo):
 			
 			var text = RNG.pick([
 				"{sub.You} {sub.youVerb('try', 'tries')} to resist while being fucked!",
-				"{sub.You} {sub.youVerb('try', 'tries')} to resist while having {dom.yourHis} "+RNG.pick(usedBodypartNames)+" used!",
+				"{sub.You} {sub.youVerb('try', 'tries')} to resist while having {sub.yourHis} "+RNG.pick(usedBodypartNames)+" used!",
 				"{sub.You} {sub.youVerb('try', 'tries')} to make {dom.youHim} pull out!",
 			])
 			
