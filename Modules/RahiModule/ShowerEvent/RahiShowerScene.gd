@@ -271,7 +271,7 @@ func _run():
 
 		saynn("[say=rahi]..maybe[/say]")
 
-		saynn("You chuckle and then replace your knees with your hand, your digits land on her snatch and spread the petals open, showing how wet and juicy the kitty is inside. Your big thumb is teasing her clit again, doing little circular motions, they make the feline moan louder and try to close her legs again. But after you give her thighs another smack, she is spreading her legs open for you again and stands still.")
+		saynn("You chuckle and then replace your knee with your hand, your digits land on her snatch and spread the petals open, showing how wet and juicy the kitty is inside. Your big thumb is teasing her clit again, doing little circular motions, they make the feline moan louder and try to close her legs again. But after you give her thighs another smack, she is spreading her legs open for you again and stands still.")
 
 		addButton("Crouch", "Get down to business", "crouch")
 
