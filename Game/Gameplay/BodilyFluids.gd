@@ -19,7 +19,7 @@ class FluidType:
 		if(fl == BlackGoo):
 			return "black goo"
 		if(fl == CumLube):
-			return "cub lube"
+			return "cum lube"
 		if(fl == WhiteGoo):
 			return "white goo"
 		return "Error"
