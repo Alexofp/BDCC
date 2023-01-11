@@ -403,7 +403,7 @@ func doDomAction(_id, _actionInfo):
 			subInfo.cum()
 		else:
 			text = RNG.pick([
-				"{dom.You} {dom.youVerb('hold')} {dom.yourHis} lips wrapped around {sub.yourHis} "+RNG.pick(["cock", "dick", "shaft"])+" as it starts throbbing and [b]stuffing your mouth with "+RNG.pick(["cum", "seed", "semen"])+"[/b]."
+				"{dom.You} {dom.youVerb('hold')} {dom.yourHis} lips wrapped around {sub.yourHis} "+RNG.pick(["cock", "dick", "shaft"])+" as it starts throbbing and [b]stuffing {dom.your} mouth with "+RNG.pick(["cum", "seed", "semen"])+"[/b]."
 			])
 			
 			var condom:ItemBase = getSub().getWornCondom()
