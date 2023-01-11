@@ -66,8 +66,39 @@ func hasModSupport():
 
 func getLoadedMods():
 	return loadedMods
+	
+func getRawModList():
+	var result = []
+	
+	var modsFolder = "user://mods"
+	if(OS.get_name() == "Android"):
+		#var permissions: Array = OS.get_granted_permissions() #for Godot 3 branch
+		#if permissions.has("android.permission.READ_EXTERNAL_STORAGE"):
+		var externalDir:String = OS.get_system_dir(OS.SYSTEM_DIR_DOCUMENTS)
+		var finalDir = externalDir.plus_file("BDCCMods")
+		modsFolder = finalDir
+		var _ok = Directory.new().make_dir(modsFolder)
+	
+	var dir = Directory.new()
+	if dir.open(modsFolder) == OK:
+		dir.list_dir_begin()
+		var file_name = dir.get_next()
+		while file_name != "":
+			if dir.current_is_dir():
+				pass
+			else:
+				if(file_name.get_extension() in ["pck", "zip"]):
+					var full_path = modsFolder.plus_file(file_name)
+					#print("Registered mod: " + full_path)
+					#var _ok = ProjectSettings.load_resource_pack(full_path)
+					#if(_ok):
+					result.append(full_path)
+			file_name = dir.get_next()
+	else:
+		Log.printerr("An error occurred when trying to access the path "+modsFolder)
+	return result
 
-func loadMods():
+func checkModSupport():
 	# If we're in editor we have to do this silly thing
 	# read more here: https://github.com/godotengine/godot/issues/19815
 	if(OS.has_feature("editor")):
@@ -77,7 +108,17 @@ func loadMods():
 			return
 	else:
 		modsSupport = true
-	
+
+func loadModOrder(theModOrder):
+	for modEntry in theModOrder:
+		if(modEntry["disabled"]):
+			continue
+		
+		var _ok = ProjectSettings.load_resource_pack(modEntry["path"])
+		if(_ok):
+			loadedMods.append(modEntry["name"])
+
+func loadMods():
 	var modsFolder = "user://mods"
 	if(OS.get_name() == "Android"):
 		#var permissions: Array = OS.get_granted_permissions() #for Godot 3 branch
@@ -107,7 +148,8 @@ func loadMods():
 	
 
 func _init():
-	loadMods()
+	checkModSupport()
+	#loadMods()
 	
 	bodypartStorageNode = Node.new()
 	add_child(bodypartStorageNode)
@@ -189,7 +231,7 @@ func getDonationDataString():
 	newText += "Thank you [color=red]<3[/color][/center]"
 	return newText
 
-func _ready():
+func registerEverything():
 	var start = OS.get_ticks_usec()
 	
 	startLoadingDonationData()
@@ -306,6 +348,10 @@ func generateNPCUniqueID():
 
 func getGameVersionString():
 	return str(game_version_major)+"."+str(game_version_minor)+"."+str(game_version_revision)+str(game_version_suffix)
+
+func getGameVersionStringNoSuffix():
+	return str(game_version_major)+"."+str(game_version_minor)+"."+str(game_version_revision)
+
 
 func registerScene(path: String, creator = null):
 	var scene = load(path)

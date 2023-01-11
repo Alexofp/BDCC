@@ -380,6 +380,11 @@ _global_script_classes=[ {
 "path": "res://Player/FluidProduction/FluidProduction.gd"
 }, {
 "base": "Reference",
+"class": "GDUnzip",
+"language": "GDScript",
+"path": "res://Util/gdunzip.gd"
+}, {
+"base": "Reference",
 "class": "GameExtender",
 "language": "GDScript",
 "path": "res://Game/GameExtenders/GameExtender.gd"
@@ -1074,6 +1079,7 @@ _global_script_class_icons={
 "FlagType": "",
 "FlexGridContainer": "",
 "FluidProduction": "",
+"GDUnzip": "",
 "GameExtender": "",
 "GameExtenderSystem": "",
 "GameParser": "",
@@ -1203,7 +1209,7 @@ _global_script_class_icons={
 [application]
 
 config/name="BDCC"
-run/main_scene="res://UI/MainMenu/MainMenu.tscn"
+run/main_scene="res://UI/LaunchScreen/LaunchScreen.tscn"
 config/project_settings_override="user://override.cfg"
 boot_splash/image="res://Images/Splash/splash.png"
 boot_splash/fullsize=false
