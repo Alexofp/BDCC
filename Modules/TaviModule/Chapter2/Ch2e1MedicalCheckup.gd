@@ -307,7 +307,7 @@ func _run():
 		aimCameraAndSetLocName("med_nearlab")
 		playAnimation(StageScene.Solo, "stand")
 		
-		saynn("You enter the corridor and close the door behind you. You stole the mind-melting drugs, Tavi should be safe now.")
+		saynn("You enter the corridor and close the door behind you. You stole the mind-melting drug, Tavi should be safe now.")
 
 		# (task updated)
 

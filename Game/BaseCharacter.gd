@@ -1100,7 +1100,7 @@ func hasHorns():
 func hasNonFlatBreasts():
 	var breasts = getBodypart(BodypartSlot.Breasts)
 	
-	var size = breasts.size
+	var size = breasts.getSize()
 	
 	if(size > BreastsSize.FLAT):
 		return true
@@ -1110,7 +1110,7 @@ func hasNonFlatBreasts():
 func hasBigBreasts():
 	var breasts = getBodypart(BodypartSlot.Breasts)
 	
-	var size = breasts.size
+	var size = breasts.getSize()
 	
 	if(size > BreastsSize.B):
 		return true
