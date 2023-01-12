@@ -111,16 +111,20 @@ func addDynamicCharacter(character):
 	
 	dynamicCharacters[newCharID] = character
 	dynamicCharactersNode.add_child(character)
+	Log.print("addDynamicCharacter(): Adding "+str(newCharID)+" character "+Util.getStackFunction())
 		
 func removeDynamicCharacter(characterID):
 	if(!(characterID is String)):
 		characterID = characterID.getID()
 	
 	if(dynamicCharacters.has(characterID)):
+		Log.print("removeDynamicCharacter(): Removing "+str(characterID)+" character")
 		removeDynamicCharacterFromAllPools(characterID)
 		
 		dynamicCharacters[characterID].queue_free()
 		dynamicCharacters.erase(characterID)
+	else:
+		Log.print("removeDynamicCharacter(): Tried to remove "+str(characterID)+" character but it doesn't exist")
 
 func addDynamicCharacterToPool(characterID, poolID:String):
 	if(!(characterID is String)):
