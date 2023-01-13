@@ -107,6 +107,8 @@ func _run():
 		GM.ui.addCustomControl("minigame", game)
 		game.setDifficulty(restraintData.getLevel())
 		game.connect("minigameCompleted", self, "onMinigameCompleted")
+		if(GM.pc.hasPerk(Perk.BDSMInstantEscape) && game.has_method("instantEscapePerk")):
+			game.instantEscapePerk()
 		
 		addButton("Give up", "Give up the struggle and lose 10 stamina", "giveupstruggle")
 
@@ -182,7 +184,10 @@ func _react(_action: String, _args):
 		var item = GM.pc.getInventory().getItemByUniqueID(_args[0])
 		var restraintData: RestraintData = item.getRestraintData()
 		var minigameStatus = 1.0
+		var instantUnlock = false
 		if(_args.size() > 1):
+			if(float(_args[1]) >= 100.0):
+				instantUnlock = true
 			var minigameResult = clamp(float(_args[1]), 0.0, 1.0)
 			minigameStatus = pow(minigameResult, 1.5) * 2.0
 			if(minigameResult >= 1.0 && GM.pc.hasPerk(Perk.BDSMBetterStruggling)):
@@ -196,6 +201,8 @@ func _react(_action: String, _args):
 		var struggleData = restraintData.doStruggle(GM.pc, minigameStatus)
 		if(struggleData.has("damage")):
 			damage = struggleData["damage"] * minigameStatus
+			if(damage > 0.0 && instantUnlock):
+				damage = 1.0
 		if(struggleData.has("lust") && struggleData["lust"] > 0):
 			addLust = struggleData["lust"]
 		if(struggleData.has("pain") && struggleData["pain"] > 0):

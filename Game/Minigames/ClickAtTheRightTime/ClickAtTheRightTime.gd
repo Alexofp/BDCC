@@ -3,6 +3,7 @@ extends Control
 onready var cursor = $GameScreen/Panel/Cursor
 onready var redZone = $GameScreen/Panel/Panel
 onready var orangeZone = $GameScreen/Panel/Panel2
+onready var goldenZone = $GameScreen/Panel/Panel3
 var time = 0.0
 var cursorSpeed = 1.0
 var timer = 10.0
@@ -10,6 +11,7 @@ var timeLeft = timer
 var difficulty = 5.0
 var redPart = 0.1
 var freeze = false
+var goldenZoneVisible = false
 
 var difficultySettings = [
 	{
@@ -76,6 +78,7 @@ signal minigameCompleted(finalScore)
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	setIngame(false)
+	setGoldenZoneVisible(false)
 
 	setDifficulty(2)
 
@@ -102,6 +105,8 @@ func setCursorPosition(pos:float):
 
 func getScore():
 	var cursorPostion = getCursorPosition()
+	if(goldenZoneVisible && cursorPostion >= goldenZone.anchor_left && cursorPostion <= goldenZone.anchor_right):
+		return 10000.0
 	if(cursorPostion >= redZone.anchor_left && cursorPostion <= redZone.anchor_right):
 		return 1.0
 	if(cursorPostion >= orangeZone.anchor_left && cursorPostion <= redZone.anchor_left):
@@ -124,6 +129,9 @@ func generateZone(thedifficulty = 1.0):
 	var orangeSize = 0.3/pow(thedifficulty, 0.1)
 	
 	setZone(pos, size, orangeSize)
+	
+	#setGoldenZone(pos + RNG.randf_range(-orangeSize/2.0, orangeSize/2.0), 0.03)
+	setGoldenZone(RNG.randf_range(0.0, 1.0), 0.05)
 
 func setZone(pos, size, orangeSize):
 	redZone.anchor_left = clamp(pos-size/2.0, 0.0, 1.0)
@@ -131,6 +139,20 @@ func setZone(pos, size, orangeSize):
 	
 	orangeZone.anchor_left = clamp(pos-size/2.0-orangeSize/2.0, 0.0, 1.0)
 	orangeZone.anchor_right = clamp(pos+size/2.0+orangeSize/2.0, 0.0, 1.0)
+	
+func setGoldenZone(pos, size):
+	goldenZone.anchor_left = clamp(pos-size/2.0, 0.0, 1.0)
+	goldenZone.anchor_right = clamp(pos+size/2.0, 0.0, 1.0)
+	
+func setGoldenZoneVisible(isVis):
+	goldenZoneVisible = isVis
+	if(goldenZoneVisible):
+		goldenZone.visible = true
+	else:
+		goldenZone.visible = false
+
+func instantEscapePerk():
+	setGoldenZoneVisible(true)
 	
 func _on_Button_pressed():
 	setIngame(true)
