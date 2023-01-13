@@ -65,7 +65,7 @@ func getSmallDescription() -> String:
 	return "A male guard with wolf features and a scarred face. His arms, eyes and lower jaw are replaced with prosthetics."
 
 func getSpecies():
-	return ["wolf"]
+	return [Species.Canine]
 
 func _getAttacks():
 	return ["HeatGrenade", "ForceMuzzlePC", "stunbatonAttack", "stunbatonStrongAttack", "stunbatonOverchargeAttack", "simplekickattack", "trygetupattack"]
