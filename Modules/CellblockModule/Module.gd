@@ -7,7 +7,6 @@ func getFlags():
 		"Cellblock_FreeToPassCheckpoint": flag(FlagType.Bool),
 		"Cellblock_CheckpointVisited": flag(FlagType.Bool),
 		"Cellblock_GreenhouseLooted": flag(FlagType.Bool),
-		"Cellblock_GreenhouseFoundChip": flag(FlagType.Bool),
 	}
 
 func _init():

@@ -34,6 +34,7 @@ var stageScenes: Dictionary = {}
 var lustActions: Dictionary = {}
 var defaultLustActions: Array = []
 var orgasmLustActions: Array = []
+var lootTables: Dictionary = {}
 var lootLists: Dictionary = {}
 var lootListsByCharacter: Dictionary = {}
 var lootListsByBattle: Dictionary = {}
@@ -262,6 +263,7 @@ func registerEverything():
 	
 	registerBuffFolder("res://Inventory/Buffs/")
 	
+	registerLootTableFolder("res://Inventory/LootTable/")
 	registerLootListFolder("res://Inventory/LootLists/")
 	
 	registerStat("res://Skills/Stat/AgilityStat.gd")
@@ -1306,3 +1308,25 @@ func getGameExtender(id: String):
 
 func getGameExtenders():
 	return gameExtenders
+
+
+func registerLootTable(path: String):
+	var loadedClass = load(path)
+	var object = loadedClass.new()
+	
+	lootTables[object.id] = object
+
+func registerLootTableFolder(folder: String):
+	var scripts = getScriptsInFolder(folder)
+	for scriptPath in scripts:
+		registerLootTable(scriptPath)
+
+func getLootTable(id: String):
+	if(lootTables.has(id)):
+		return lootTables[id]
+	else:
+		Log.printerr("ERROR: loot table with the id "+id+" wasn't found")
+		return null
+
+func getLootTables():
+	return lootTables

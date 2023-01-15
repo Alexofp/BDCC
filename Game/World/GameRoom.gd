@@ -54,6 +54,13 @@ export(bool) var loctag_GuardsEncounter = false
 
 export(int, FLAGS, "Inmates", "Guards") var population = 0
 
+export(bool) var lootable = false
+export(String) var lootTableId = ""
+export(String) var lootAroundMessage = ""
+export(PoolStringArray) var lootItemIds = PoolStringArray()
+export(int) var lootCredits = 0
+export(int) var lootEveryXDays = 0
+
 var astarID
 export(PoolStringArray) var astarConnectedTo = PoolStringArray()
 

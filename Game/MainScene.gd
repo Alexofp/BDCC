@@ -16,6 +16,7 @@ var playerScene = preload("res://Player/Player.tscn")
 var overridenPC
 var originalPC
 var roomMemories = {}
+var lootedRooms = {}
 var rollbacker:Rollbacker
 var encounterSettings:EncounterSettings
 
@@ -336,6 +337,7 @@ func saveData():
 	data["ChildSystem"] = GM.CS.saveData()
 	data["logMessages"] = logMessages
 	data["roomMemories"] = roomMemories
+	data["lootedRooms"] = lootedRooms
 	data["world"] = GM.world.saveData()
 	data["dynamicCharactersPools"] = dynamicCharactersPools
 	data["encounterSettings"] = encounterSettings.saveData()
@@ -364,6 +366,7 @@ func loadData(data):
 	GM.CS.loadData(SAVE.loadVar(data, "ChildSystem", {}))
 	logMessages = SAVE.loadVar(data, "logMessages", [])
 	roomMemories = SAVE.loadVar(data, "roomMemories", {})
+	lootedRooms = SAVE.loadVar(data, "lootedRooms", {})
 	dynamicCharactersPools = SAVE.loadVar(data, "dynamicCharactersPools", {})
 	encounterSettings.loadData(SAVE.loadVar(data, "encounterSettings", {}))
 	GM.GES.loadData(SAVE.loadVar(data, "gameExtenders", {}))
@@ -1008,3 +1011,27 @@ func generateCharacterID(beginPart = "dynamicnpc"):
 
 func getEncounterSettings() -> EncounterSettings:
 	return encounterSettings
+
+func canLootRoom(roomID):
+	var room = GM.world.getRoomByID(roomID)
+	if(room == null):
+		return false
+	
+	if(!room.lootable):
+		return false
+	
+	if(isRoomLooted(roomID)):
+		if(room.lootEveryXDays > 0 && getDays() >= (lootedRooms[roomID] + room.lootEveryXDays)):
+			return true
+		
+		return false
+	return true
+
+func markRoomAsLooted(roomID):
+	if(!lootedRooms.has(roomID)):
+		lootedRooms[roomID] = getDays()
+
+func isRoomLooted(roomID):
+	if(lootedRooms.has(roomID)):
+		return true
+	return false

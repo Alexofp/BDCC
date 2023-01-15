@@ -624,6 +624,12 @@ func getLootTable(_battleName):
 
 func getLoot(_battleName):
 	var lootTable = getLootTable(_battleName)
+	if(lootTable is String):
+		lootTable = GlobalRegistry.getLootTable(lootTable)
+	
+	if(lootTable == null):
+		return {"credits": 0, "items": []}
+	
 	var generatedLoot = lootTable.generate(getID(), _battleName)
 	
 	var resultCredits = 0

@@ -374,6 +374,9 @@ roomColor = 1
 gridColor = 2
 loctag_Greenhouses = true
 population = 2
+lootable = true
+lootAroundMessage = "You notice a credit chip under one of the crates, huh."
+lootCredits = 3
 
 [node name="MainGreenhouses8" parent="." index="39" instance=ExtResource( 2 )]
 self_modulate = Color( 0.7, 1, 0.7, 1 )
@@ -692,8 +695,6 @@ roomColor = 3
 [connection signal="onReact" from="MainStairs2" to="." method="_on_MainStairs2_onReact"]
 [connection signal="onEnter" from="MainHallRoom9" to="." method="_on_MainHallRoom9_onEnter"]
 [connection signal="onReact" from="MainHallRoom9" to="." method="_on_MainHallRoom9_onReact"]
-[connection signal="onEnter" from="MainGreenhouses9" to="." method="_on_MainGreenhouses9_onEnter"]
-[connection signal="onReact" from="MainGreenhouses9" to="." method="_on_MainGreenhouses9_onReact"]
 [connection signal="onEnter" from="MainGreenhousesJumpable" to="." method="_on_MainGreenhousesJumpable_onEnter"]
 [connection signal="onReact" from="MainGreenhousesJumpable" to="." method="_on_MainGreenhousesJumpable_onReact"]
 [connection signal="onEnter" from="MainVendomatRoom" to="." method="_on_MainVendomatRoom_onEnter"]

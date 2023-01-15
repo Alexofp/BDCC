@@ -1,7 +1,7 @@
 extends Reference
 class_name LootTableBase
 
-var id = "error"
+var id = "base"
 var loot = []
 var minCredits = 0
 var maxCredits = 0
