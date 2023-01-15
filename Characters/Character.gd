@@ -146,6 +146,8 @@ func loadData(data):
 	
 	lastUpdatedDay = SAVE.loadVar(data, "lastUpdatedDay", -1)
 	lastUpdatedSecond = SAVE.loadVar(data, "lastUpdatedSecond", -1)
+	
+	updateNonBattleEffects()
 
 func getArmor(_damageType):
 	var calculatedArmor = .getArmor(_damageType)

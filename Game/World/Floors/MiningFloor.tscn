@@ -59,11 +59,13 @@ astarConnectedTo = PoolStringArray( "eng_bay_corridor" )
 self_modulate = Color( 1, 1, 0.7, 1 )
 position = Vector2( -384, 0 )
 roomName = "Engineering bay"
+roomID = "eng_firstjunction"
 roomDescription = "Just a corridor that leads to many other rooms. Walls feature a yellow trim, showing that you are in engineering
 
 You also notice an air vent here that you can't quite reach. Maybe you can search for the other end"
 roomColor = 6
 gridColor = 5
+loctag_EngineersEncounter = true
 population = 2
 
 [node name="MiningRoom12" parent="." index="6" instance=ExtResource( 2 )]
@@ -73,6 +75,7 @@ roomName = "Engineering bay"
 roomDescription = "Just a corridor that leads to many other rooms. Walls feature a yellow trim, showing that you are in engineering"
 roomColor = 6
 gridColor = 5
+loctag_EngineersEncounter = true
 population = 2
 
 [node name="MiningRoom13" parent="." index="7" instance=ExtResource( 2 )]
@@ -82,6 +85,7 @@ roomName = "Engineering bay"
 roomDescription = "Just a corridor that leads to many other rooms. Walls feature a yellow trim, showing that you are in engineering"
 roomColor = 6
 gridColor = 5
+loctag_EngineersEncounter = true
 population = 2
 
 [node name="MiningRoom16" parent="." index="8" instance=ExtResource( 2 )]
@@ -91,6 +95,7 @@ roomName = "Engineering bay"
 roomDescription = "Just a corridor that leads to many other rooms. Walls feature a yellow trim, showing that you are in engineering"
 roomColor = 6
 gridColor = 5
+loctag_EngineersEncounter = true
 population = 2
 
 [node name="MiningRoom17" parent="." index="9" instance=ExtResource( 2 )]
@@ -100,6 +105,7 @@ roomName = "Engineering bay"
 roomDescription = "Just a corridor that leads to many other rooms. Walls feature a yellow trim, showing that you are in engineering"
 roomColor = 6
 gridColor = 5
+loctag_EngineersEncounter = true
 population = 2
 
 [node name="MiningRoom18" parent="." index="10" instance=ExtResource( 2 )]
@@ -109,6 +115,7 @@ roomName = "Engineering bay"
 roomDescription = "Just a corridor that leads to many other rooms. Walls feature a yellow trim, showing that you are in engineering"
 roomColor = 6
 gridColor = 5
+loctag_EngineersEncounter = true
 population = 2
 
 [node name="MiningRoom19" parent="." index="11" instance=ExtResource( 2 )]
@@ -136,6 +143,7 @@ roomName = "Engineering bay"
 roomDescription = "Just a corridor that leads to many other rooms. Walls feature a yellow trim, showing that you are in engineering"
 roomColor = 6
 gridColor = 5
+loctag_EngineersEncounter = true
 population = 2
 
 [node name="MiningRoom28" parent="." index="14" instance=ExtResource( 2 )]
@@ -145,17 +153,20 @@ roomName = "Engineering bay"
 roomDescription = "Just a corridor that leads to many other rooms. Walls feature a yellow trim, showing that you are in engineering"
 roomColor = 6
 gridColor = 5
+loctag_EngineersEncounter = true
 population = 2
 
 [node name="MiningRoom29" parent="." index="15" instance=ExtResource( 2 )]
 self_modulate = Color( 1, 1, 0.7, 1 )
 position = Vector2( -384, 320 )
 roomName = "Engineering bay"
+roomID = "eng_airventskip"
 roomDescription = "Just a corridor that leads to many other rooms. Walls feature a yellow trim, showing that you are in engineering
 
 You also notice an air vent here that is just big enough to fit you. Maybe you can use it to come back."
 roomColor = 6
 gridColor = 5
+loctag_EngineersEncounter = true
 population = 2
 
 [node name="MiningRoom30" parent="." index="16" instance=ExtResource( 2 )]
@@ -174,6 +185,7 @@ roomName = "Engineering bay"
 roomDescription = "Just a corridor that leads to many other rooms. Walls feature a yellow trim, showing that you are in engineering"
 roomColor = 6
 gridColor = 5
+loctag_EngineersEncounter = true
 population = 2
 
 [node name="MiningRoom22" parent="." index="18" instance=ExtResource( 2 )]
@@ -183,6 +195,7 @@ roomName = "Engineering bay"
 roomDescription = "Just a corridor that leads to many other rooms. Walls feature a yellow trim, showing that you are in engineering"
 roomColor = 6
 gridColor = 5
+loctag_EngineersEncounter = true
 population = 2
 
 [node name="MiningRoom23" parent="." index="19" instance=ExtResource( 2 )]
@@ -201,6 +214,7 @@ roomName = "Engineering bay"
 roomDescription = "Just a corridor that leads to many other rooms. Walls feature a yellow trim, showing that you are in engineering"
 roomColor = 6
 gridColor = 5
+loctag_EngineersEncounter = true
 population = 2
 
 [node name="MiningRoom25" parent="." index="21" instance=ExtResource( 2 )]
@@ -210,6 +224,7 @@ roomName = "Engineering bay"
 roomDescription = "Just a corridor that leads to many other rooms. Walls feature a yellow trim, showing that you are in engineering"
 roomColor = 6
 gridColor = 5
+loctag_EngineersEncounter = true
 population = 2
 
 [node name="MiningRoom26" parent="." index="22" instance=ExtResource( 2 )]
@@ -237,9 +252,9 @@ self_modulate = Color( 1, 1, 0.7, 1 )
 position = Vector2( -384, -64 )
 roomName = "Engineering bay"
 roomDescription = "Just a corridor that leads to many other rooms. Walls feature a yellow trim, showing that you are in engineering"
-canSouth = false
 roomColor = 6
 gridColor = 5
+loctag_EngineersEncounter = true
 population = 2
 
 [node name="MiningRoom10" parent="." index="25" instance=ExtResource( 2 )]

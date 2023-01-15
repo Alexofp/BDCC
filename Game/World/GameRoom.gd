@@ -51,6 +51,7 @@ signal onReact(room, key)
 export(bool) var loctag_Greenhouses = false
 export(bool) var loctag_MentalWard = false
 export(bool) var loctag_GuardsEncounter = false
+export(bool) var loctag_EngineersEncounter = false
 
 export(int, FLAGS, "Inmates", "Guards") var population = 0
 

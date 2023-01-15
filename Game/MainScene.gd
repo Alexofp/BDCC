@@ -450,6 +450,8 @@ func stopProcessingUnusedCharacters():
 			charactersToUpdate.erase(charID)
 			if(character != null):
 				character.onStoppedProcessing()
+		elif(character != null && !characterIsVisible(charID)):
+			character.updateNonBattleEffects()
 
 func processTime(_seconds):
 	_seconds = int(round(_seconds))

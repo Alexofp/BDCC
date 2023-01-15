@@ -1,20 +1,20 @@
 extends CharacterGeneratorBase
-class_name NurseGenerator
+class_name EngineerGenerator
 
 func pickCharacterType(character:DynamicCharacter, _args = {}):
-	character.npcCharacterType = CharacterType.Nurse
+	character.npcCharacterType = CharacterType.Engineer
 
 func getAttacks():
-	return ["stunbatonAttack", "trygetupattack"]
+	return ["simplepunchattack", "trygetupattack"]
 
 func getPossibleAttacks():
-	return ["HeatGrenade", "DoubleCuffPC", "CuffPCHands", "stretchingAttack", "lickWounds", "ForceMuzzlePC", "stunbatonOverchargeAttack", "simplekickattack", "biteattack", "shoveattack"]
+	return ["BolaThrow", "HeatGrenade", "DoubleCuffPC", "CuffPCHands", "ForceGagPC", "ForceRingGagPC", "simplekickattack", "StrongPunch", "biteattack", "shoveattack"]
 
 func pickEquipment(character:DynamicCharacter, _args = {}):
 	
 	var theEquipment = []
 	
-	var randomUniform = getRandomItemIDByTag(ItemTag.NurseUniform)
+	var randomUniform = getRandomItemIDByTag(ItemTag.EngineerUniform)
 	if(randomUniform != null):
 		theEquipment.append(randomUniform)
 	
@@ -42,6 +42,6 @@ func pickEquipment(character:DynamicCharacter, _args = {}):
 	character.npcDefaultEquipment = theEquipment
 
 func pickSmallDescription(character:DynamicCharacter, _args = {}):
-	var text = "One of the nurses. "+str(.pickSmallDescription(character, _args))
+	var text = "One of the engineers. "+str(.pickSmallDescription(character, _args))
 
 	return text

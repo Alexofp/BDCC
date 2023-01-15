@@ -23,6 +23,7 @@ func _init():
 		"res://Modules/CellblockModule/RandomEncounters/InmateExposureForcedSexScene.gd",
 		"res://Modules/CellblockModule/RandomEncounters/InmateExposureFlashScene.gd",
 		"res://Modules/CellblockModule/RandomEncounters/InmateExposureProstitutionScene.gd",
+		"res://Modules/CellblockModule/RandomEncounters/EngineerCaughtOfflimitsScene.gd",
 		]
 	characters = [
 		"res://Modules/CellblockModule/CheckpointGuardCharacter.gd",
@@ -38,6 +39,8 @@ func _init():
 		"res://Modules/CellblockModule/RandomEncounters/InmateExposureForcedSexEvent.gd",
 		"res://Modules/CellblockModule/RandomEncounters/InmateExposureFlashEvent.gd",
 		"res://Modules/CellblockModule/RandomEncounters/InmateExposureProstitutionEvent.gd",
+		"res://Modules/CellblockModule/RandomEncounters/EngineerCaughtOfflimitsEvent.gd",
+		"res://Modules/CellblockModule/PrisonPathShortcutsEvent.gd",
 	]
 
 func resetFlagsOnNewDay():
