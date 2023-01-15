@@ -51,5 +51,8 @@ func getExperience():
 func getRecieverArmorScaling(_attacker, _receiver, _damageType) -> float:
 	return 0.1
 
+func getAttackerDamageMultiplierEfficiency(_attacker, _receiver, _damageType) -> float:
+	return 0.0
+
 func getRequirements():
 	return [AttackRequirement.FreeArms, AttackRequirement.FreeHands]

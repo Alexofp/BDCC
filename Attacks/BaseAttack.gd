@@ -173,15 +173,18 @@ func getRequirementsColorText(_attacker, _receiver):
 func getRecieverArmorScaling(_attacker, _receiver, _damageType) -> float:
 	return 1.0
 
+func getAttackerDamageMultiplierEfficiency(_attacker, _receiver, _damageType) -> float:
+	return 1.0
+
 func calcDamage(_attacker, _receiver, _damageType, _damage: int) -> int:
-	var damageMult = _attacker.getDamageMultiplier(_damageType)
+	var damageMult = _attacker.getDamageMultiplier(_damageType) * getAttackerDamageMultiplierEfficiency(_attacker, _receiver, _damageType)
 	if(_damage < 0):
 		damageMult = -damageMult
 		
 	return int(round(_damage * (1.0 + damageMult)))
 
 func doDamage(_attacker, _receiver, _damageType, _damage: int, _playGetHitAnimation = true):
-	var damageMult = _attacker.getDamageMultiplier(_damageType)
+	var damageMult = _attacker.getDamageMultiplier(_damageType) * getAttackerDamageMultiplierEfficiency(_attacker, _receiver, _damageType)
 	if(_damage < 0):
 		damageMult = -damageMult
 	
