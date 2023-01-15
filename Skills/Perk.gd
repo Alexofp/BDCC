@@ -19,6 +19,9 @@ const CombatBetterGetUp = "CombatBetterGetUp"
 const CombatDoubleDown = "CombatDoubleDown"
 const CombatDrunkenMaster = "CombatDrunkenMaster"
 const CombatFullStaminaBonus = "CombatFullStaminaBonus"
+const CombatBetterMeleeWeapons = "CombatBetterMeleeWeapons"
+const CombatBetterMeleeWeaponsV2 = "CombatBetterMeleeWeaponsV2"
+const CombatBetterMeleeWeaponsV3 = "CombatBetterMeleeWeaponsV3"
 
 # Cum Lover perks
 const CumBreath = "CumBreath"

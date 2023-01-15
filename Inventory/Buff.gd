@@ -5,6 +5,7 @@ const PhysicalDamageBuff = "PhysicalDamageBuff"
 const LustDamageBuff = "LustDamageBuff"
 const ReceivedLustDamageBuff = "ReceivedLustDamageBuff"
 const ReceivedPhysicalDamageBuff = "ReceivedPhysicalDamageBuff"
+const MeleeDamageBuff = "MeleeDamageBuff"
 
 const DodgeChanceBuff = "DodgeChanceBuff"
 const AccuracyBuff = "AccuracyBuff"

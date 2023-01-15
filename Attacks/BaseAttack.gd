@@ -10,6 +10,8 @@ var category = Category.Physical
 var aiCategory = AICategory.Unspecified
 var aiScoreMultiplier = 1
 
+var isWeaponAttack = false # true means the damage will be affected by the melee damage buffs
+
 func _init():
 	pass
 	
@@ -178,6 +180,8 @@ func getAttackerDamageMultiplierEfficiency(_attacker, _receiver, _damageType) ->
 
 func calcDamage(_attacker, _receiver, _damageType, _damage: int) -> int:
 	var damageMult = _attacker.getDamageMultiplier(_damageType) * getAttackerDamageMultiplierEfficiency(_attacker, _receiver, _damageType)
+	if(isWeaponAttack):
+		damageMult += GM.pc.getCustomAttribute(BuffAttribute.MeleeWeaponsDamage)
 	if(_damage < 0):
 		damageMult = -damageMult
 		
@@ -185,6 +189,8 @@ func calcDamage(_attacker, _receiver, _damageType, _damage: int) -> int:
 
 func doDamage(_attacker, _receiver, _damageType, _damage: int, _playGetHitAnimation = true):
 	var damageMult = _attacker.getDamageMultiplier(_damageType) * getAttackerDamageMultiplierEfficiency(_attacker, _receiver, _damageType)
+	if(isWeaponAttack):
+		damageMult += GM.pc.getCustomAttribute(BuffAttribute.MeleeWeaponsDamage)
 	if(_damage < 0):
 		damageMult = -damageMult
 	
@@ -285,6 +291,8 @@ func getAttackSoloAnimation():
 
 func scaledDmgStr(_damageType, _damage: int):
 	var damageMult = GM.pc.getDamageMultiplier(_damageType)
+	if(isWeaponAttack):
+		damageMult += GM.pc.getCustomAttribute(BuffAttribute.MeleeWeaponsDamage)
 	
 	var damage = round(_damage * (1.0 + damageMult))
 	
@@ -292,6 +300,8 @@ func scaledDmgStr(_damageType, _damage: int):
 
 func scaledDmgRangeStr(_damageType, min_damage: int, max_damage: int):
 	var damageMult = GM.pc.getDamageMultiplier(_damageType)
+	if(isWeaponAttack):
+		damageMult += GM.pc.getCustomAttribute(BuffAttribute.MeleeWeaponsDamage)
 	
 	var damage1 = round(min_damage * (1.0 + damageMult))
 	var damage2 = round(max_damage * (1.0 + damageMult))

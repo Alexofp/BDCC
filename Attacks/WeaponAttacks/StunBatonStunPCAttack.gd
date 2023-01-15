@@ -4,6 +4,7 @@ func _init():
 	id = "StunBatonStunPCAttack"
 	category = Category.Physical
 	aiCategory = AICategory.Offensive
+	isWeaponAttack = true
 	
 func getVisibleName(_context = {}):
 	return "Stun!"
