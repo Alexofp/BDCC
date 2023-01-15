@@ -8,7 +8,7 @@ func getVisibleName():
 	return "Force of Destruction"
 
 func getVisibleDescription():
-	return "Why use your fists when the prison is littered with all those contraband weapons. You do [b]50%[/b] more damage with melee weapons."
+	return "You love watching your foes fall before you. And knowing how to wield a weapon sure helps with that. You do [b]50%[/b] more damage with melee weapons."
 
 func getRequiredPerks():
 	return [Perk.CombatBetterMeleeWeapons, Perk.CombatBetterMeleeWeaponsV2]
