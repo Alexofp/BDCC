@@ -219,6 +219,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Game/Pregnancy/ChildSystem.gd"
 }, {
+"base": "Reference",
+"class": "ComputerBase",
+"language": "GDScript",
+"path": "res://Game/Computer/ComputerBase.gd"
+}, {
 "base": "Object",
 "class": "ContentType",
 "language": "GDScript",
@@ -1052,6 +1057,7 @@ _global_script_class_icons={
 "CharacterType": "",
 "Child": "",
 "ChildSystem": "",
+"ComputerBase": "",
 "ContentType": "",
 "CumProduction": "",
 "CycleStage": "",

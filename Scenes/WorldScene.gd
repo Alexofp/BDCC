@@ -39,6 +39,7 @@ func _run():
 	addButtonAt(13, "Tasks", "Look at your tasks", "tasks")
 	addButtonAt(14, "Inventory", "Look at your inventory", "inventory")
 	#addButtonAt(5, "Sex Test", "Sex test", "sextest")
+	addButtonAt(5, "Computer test", "Computer test", "comptest")
 	
 	_roomInfo._onPreEnter()
 	setLocationName(_roomInfo.getName())
@@ -92,3 +93,6 @@ func _react(_action: String, _args):
 		#	runScene("GenericSexScene", ["nova", "pc"])
 		#else:
 		#	runScene("GenericSexScene", ["pc", "nova"])
+	
+	if(_action == "comptest"):
+		runScene("ComputerSimScene", ["TaviEngineeringComputer"])

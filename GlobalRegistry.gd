@@ -49,6 +49,7 @@ var sexActivitiesReferences: Dictionary = {}
 var fetishes: Dictionary = {}
 var sexGoals: Dictionary = {}
 var gameExtenders: Dictionary = {}
+var computers: Dictionary = {}
 
 var bodypartStorageNode
 
@@ -325,6 +326,8 @@ func registerEverything():
 	OPTIONS.checkImagePackOrder(imagePacks)
 	
 	registerGameExtenderFolder("res://Game/GameExtenders/Extenders/")
+	
+	registerComputerFolder("res://Game/Computer/")
 	
 	registerModulesFolder("res://Modules/")
 	sortFightClubFighters()
@@ -1330,3 +1333,26 @@ func getLootTable(id: String):
 
 func getLootTables():
 	return lootTables
+
+
+
+func registerComputer(path: String):
+	var loadedClass = load(path)
+	var object = loadedClass.new()
+	
+	computers[object.id] = loadedClass
+
+func registerComputerFolder(folder: String):
+	var scripts = getScriptsInFolder(folder)
+	for scriptPath in scripts:
+		registerComputer(scriptPath)
+
+func createComputer(id: String):
+	if(computers.has(id)):
+		return computers[id].new()
+	else:
+		Log.printerr("ERROR: computer with the id "+id+" wasn't found")
+		return null
+
+func getComputers():
+	return computers

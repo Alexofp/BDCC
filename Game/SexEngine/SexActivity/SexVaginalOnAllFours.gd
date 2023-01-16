@@ -323,7 +323,7 @@ func doDomAction(_id, _actionInfo):
 			if(!RNG.chance(getSub().getPenetrateChanceBy(usedBodypart, domID))):
 				getSub().gotOrificeStretchedBy(usedBodypart, domID, 0.1)
 				var text = RNG.pick([
-					"{dom.You} {dom.youVerb('try','tries')} "+getDickName()+" stretches {sub.your} "+RNG.pick(usedBodypartNames)+" out while trying to fit inside.",
+					"{dom.Your} "+getDickName()+" stretches {sub.your} "+RNG.pick(usedBodypartNames)+" out while trying to fit inside.",
 				])
 				affectSub(subInfo.fetishScore({fetishReceiving: 1.0}), 0.05, -0.2, -0.01)
 				affectDom(domInfo.fetishScore({fetishGiving: 1.0}), 0.05*domSensetivity(), -0.01)
