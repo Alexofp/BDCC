@@ -4,6 +4,8 @@ var computer:ComputerBase
 var computerID = "error"
 var currentCommand = []
 var inputMode = "buttons" # buttons, numpad or keyboard
+var shouldPlayFancyAnimation = false
+var shouldPlayFancyAnimationForText = false
 
 func _initScene(_args = []):
 	if(_args.size() > 0):
@@ -23,7 +25,11 @@ func _run():
 	if(state == ""):
 		if(computer.getLastCommand() != ""):
 			saynn("> "+computer.getLastCommand())
-		saynn(computer.getOutput())
+		if(shouldPlayFancyAnimationForText):
+			saynn("[console speed=40]"+computer.getOutput()+"[/console]")
+			shouldPlayFancyAnimationForText = false
+		else:
+			saynn(computer.getOutput())
 		
 		if(inputMode == "keyboard"):
 			say(">")
@@ -32,7 +38,9 @@ func _run():
 			addButtonAt(14, "COMMANDS", "Switch to the commands", "buttons")
 		
 		if(inputMode == "buttons"):
-			saynn("> "+getCurrentCommandString())
+			saynn("> "+ getCurrentCommandString())
+			#for key in TextTransitionSettings.transitions:
+			#	TextTransitionSettings.transitions[key].fade_in()
 			
 			if(currentCommand.size() > 0):
 				addButtonAt(0, "SEND", "Send the command", "send")
@@ -69,10 +77,25 @@ func _run():
 
 		#addButton("Leave", "Job well done", "endthescene")
 
+	if(state == "finished"):
+		if(computer.getLastCommand() != ""):
+			saynn("> "+computer.getLastCommand())
+		if(shouldPlayFancyAnimationForText):
+			saynn("[console]"+computer.getOutput()+"[/console]")
+			shouldPlayFancyAnimationForText = false
+		else:
+			saynn(computer.getOutput())
+		
+		addButton("Continue", "End the interaction", "endthescene")
+
 func getCurrentCommandString():
 	var result = []
-	for stuff in currentCommand:
-		result.append(stuff[0])
+	for _i in range(currentCommand.size()):
+		if(_i == (currentCommand.size() - 1) && currentCommand[_i][1] == "word" && shouldPlayFancyAnimation):
+			result.append("[console]"+currentCommand[_i][0]+"[/console]")
+			shouldPlayFancyAnimation = false
+		else:
+			result.append(currentCommand[_i][0])
 	
 	return Util.join(result, " ")
 
@@ -82,11 +105,17 @@ func _react(_action: String, _args):
 		currentCommand.clear()
 		if(inputMode == "numpad"):
 			inputMode = "buttons"
+		if(computer.hasEnded()):
+			state = "finished"
+		shouldPlayFancyAnimationForText = true
 		return
 	
 	if(_action == "sendkeyboard"):
 		computer.inputCommand(getTextboxData("textcommand"))
 		currentCommand.clear()
+		if(computer.hasEnded()):
+			state = "finished"
+		shouldPlayFancyAnimationForText = true
 		return
 	
 	if(_action == "clearcommand"):
@@ -96,6 +125,9 @@ func _react(_action: String, _args):
 	if(_action == "inputfull"):
 		computer.inputCommand(_args[0])
 		currentCommand.clear()
+		if(computer.hasEnded()):
+			state = "finished"
+		shouldPlayFancyAnimationForText = true
 		return
 	
 	if(_action == "numpad"):
@@ -122,10 +154,14 @@ func _react(_action: String, _args):
 	
 	if(_action == "add"):
 		currentCommand.append([_args[0], "word"])
+		shouldPlayFancyAnimation = true
 		return
 	
 	if(_action == "endthescene"):
-		endScene()
+		if(computer.hasEnded()):
+			endScene([true, computer.getEndedArgs()])
+			return
+		endScene([false, []])
 		return
 	
 	setState(_action)

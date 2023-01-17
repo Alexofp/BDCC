@@ -7,6 +7,8 @@ var lastCommand = ""
 var introText = "AlphaOS Console [Version 0.9.7601]\n(C) AlphaCorp, All rights reserved"
 var lastOutput = ""
 var isIntro = true
+var ended = false
+var endedArgs = []
 
 func learnCommand(command):
 	if(!learnedCommands.has(command)):
@@ -33,10 +35,22 @@ func inputCommand(_commandString:String):
 		splitted.remove(0)
 	
 	lastOutput = reactToCommand(command, splitted, _commandString)
+	if(lastOutput == null):
+		lastOutput = ""
 	return lastOutput
 
 func reactToCommand(_command:String, _args:Array, _commandStringRaw:String):
 	return "Hello world"
+
+func markFinished(theargs = []):
+	ended = true
+	endedArgs = theargs
+
+func hasEnded():
+	return ended
+
+func getEndedArgs():
+	return endedArgs
 
 func saveData():
 	#var data = .saveData()
@@ -48,6 +62,8 @@ func saveData():
 		"lastOutput": lastOutput,
 		"lastCommand": lastCommand,
 		"isIntro": isIntro,
+		"ended": ended,
+		"endedArgs": endedArgs,
 	}
 	
 func loadData(_data):
@@ -55,6 +71,8 @@ func loadData(_data):
 	lastOutput = SAVE.loadVar(_data, "lastOutput", "")
 	lastCommand = SAVE.loadVar(_data, "lastCommand", "")
 	isIntro = SAVE.loadVar(_data, "isIntro", false)
+	ended = SAVE.loadVar(_data, "ended", false)
+	endedArgs = SAVE.loadVar(_data, "endedArgs", null)
 	#.loadData(data)
 	
 	#waitTimer = SAVE.loadVar(data, "waitTimer", 0)
