@@ -374,7 +374,7 @@ func _run():
 		if(GM.pc.isWearingChastityCage()):
 			saynn("Your member desperately tries to get hard but the chastity cage is being very mean to you and prevents all of that. It didn’t take long for your {pc.cock} to start leaking weak lines of {pc.cum} onto the bench and floor. She really drains you, even during your wet orgasm she pounds at your pleasure spot until there is nothing left in your balls.")
 		elif(GM.pc.hasPenis()):
-			saynn("It didn’t take long for your {pc.cock} to start shooting strong lines of {pc.cum} onto the bench and the floor. She really drains you, even during your orgasm she pounds at your pleasure spot, causing your cock to erupt with more {pc.cun} until there is nothing left in your balls.")
+			saynn("It didn’t take long for your {pc.cock} to start shooting strong lines of {pc.cum} onto the bench and the floor. She really drains you, even during your orgasm she pounds at your pleasure spot, causing your cock to erupt with more {pc.cum} until there is nothing left in your balls.")
 
 		saynn("[say=risha]Did my little fuckdoll cum already? Oh, what a shame. Now it’s my turn.[/say]")
 
