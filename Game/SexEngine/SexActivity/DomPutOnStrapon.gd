@@ -102,6 +102,7 @@ func startActivity(_args):
 		if(getDom().isPlayer()):
 			straponItem = getDom().getInventory().getItemByUniqueID(_args[1])
 			getSexEngine().addTrackedGear(domID, subID, straponItem.uniqueID)
+			getDom().getInventory().removeItem(straponItem)
 		else:
 			straponItem = GlobalRegistry.createItem(_args[1])
 		getSub().getInventory().equipItem(straponItem)
