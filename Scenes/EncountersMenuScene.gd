@@ -160,7 +160,7 @@ func _run():
 		var speciesName = speciesObject.getVisibleName()
 		saynn("The current chance for "+speciesName+" is "+str(Util.roundF(encounterSettings.getSpeciesWeight(species)*100.0, 1))+"%")
 
-		addButton("Back", "Go back to the previous menu", "gendersmenu")
+		addButton("Back", "Go back to the previous menu", "speciesmenu")
 		addButton("Default", "Set back to default chance", "setspecieschance", [species, -1.0])
 		for chance in [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0, 1.2, 1.5, 2.0, 3.0]:
 			addButton(str(Util.roundF(chance*100.0))+"%", "Pick this chance", "setspecieschance", [species, chance])
