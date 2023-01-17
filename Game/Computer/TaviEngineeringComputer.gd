@@ -38,7 +38,7 @@ func reactToCommand(_command:String, _args:Array, _commandStringRaw:String):
 				return "Error, unsupported mode. Type 'help mode' for more information"
 			else:
 				return "'mode' command expects 1 argument. Type 'help mode' for more information"
-		
+		return "Error, unknown command. Use 'help' to list all avaiable commands"
 	
 	if(connectedTo == "127.0.69"):
 		if(_command == "help"):
@@ -78,8 +78,6 @@ func reactToCommand(_command:String, _args:Array, _commandStringRaw:String):
 			else:
 				return "'cat' command expects 1 argument"
 		
-		return "Error, unknown command. Use 'help' to list all avaiable commands"
-	if(connectedTo == "127.0.10"):
 		return "Error, unknown command. Use 'help' to list all avaiable commands"
 	
 	
