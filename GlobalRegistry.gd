@@ -357,6 +357,24 @@ func getGameVersionString():
 func getGameVersionStringNoSuffix():
 	return str(game_version_major)+"."+str(game_version_minor)+"."+str(game_version_revision)
 
+func isVersionCompatible(otherversion:String):
+	otherversion = otherversion.strip_edges()
+	
+	if(otherversion == "*"):
+		return true
+	if(otherversion != getGameVersionStringNoSuffix()):
+		return false
+	return true
+
+func isVersionListHasCompatible(versionlist):
+	if(!(versionlist is String)):
+		return false
+	
+	var splitted = versionlist.split(",", false)
+	for theversion in splitted:
+		if(isVersionCompatible(theversion)):
+			return true
+	return false
 
 func registerScene(path: String, creator = null):
 	var scene = load(path)

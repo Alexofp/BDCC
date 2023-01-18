@@ -23,11 +23,17 @@ func _ready():
 	
 	var SHOW_THIS_SCREEN_ANYWAY = false # DON'T FORGET TO CHANGE TO false BEFORE SHIPPING
 	
+	if(OS.get_name() == "Android" && !SHOW_THIS_SCREEN_ANYWAY):
+		$VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/TestButton.visible = false
+	
 	if(!SHOW_THIS_SCREEN_ANYWAY):
 		if(!GlobalRegistry.hasModSupport() || rawModList.size() == 0):
 			GlobalRegistry.registerEverything()
 			var _ok = get_tree().change_scene("res://UI/MainMenu/MainMenu.tscn")
 
+	checkModOrderAndFillData(rawModList)
+
+func checkModOrderAndFillData(rawModList):
 	var loadedOrder = loadOrderFromFile()
 	
 	var finalOrder = []
@@ -179,7 +185,7 @@ func updateSelectedEntry():
 		desc += jsonResult
 	else:
 		desc += "Author: " + str(jsonResult["author"])+"\n"
-		if(GlobalRegistry.getGameVersionStringNoSuffix() != str(jsonResult["gameversion"])):
+		if(!GlobalRegistry.isVersionListHasCompatible(str(jsonResult["gameversion"]))):
 			desc += "[color=red]Game version: " + str(jsonResult["gameversion"])+" (You are running verson "+GlobalRegistry.getGameVersionString()+")[/color]\n"
 		else:
 			desc += "Game version: " + str(jsonResult["gameversion"])+"\n"
@@ -312,3 +318,67 @@ func _on_ConfirmationDialog_confirmed():
 
 func _on_RichTextLabel_meta_clicked(meta):
 	var _ok = OS.shell_open(meta)
+
+
+func _on_TestButton_pressed():
+	var packer = PCKPacker.new()
+	
+	var modsFolder = "user://mods"
+	if(OS.get_name() == "Android"):
+		#var permissions: Array = OS.get_granted_permissions() #for Godot 3 branch
+		#if permissions.has("android.permission.READ_EXTERNAL_STORAGE"):
+		var externalDir:String = OS.get_system_dir(OS.SYSTEM_DIR_DOCUMENTS)
+		var finalDir = externalDir.plus_file("BDCCMods")
+		modsFolder = finalDir
+		var _ok = Directory.new().make_dir(modsFolder)
+	
+	packer.pck_start(modsFolder.plus_file("BDCC.pck"))
+	
+	
+	fillFolder(packer, "res://")
+	#packer.add_file("res://text.txt", "text.txt")
+	packer.flush()
+	
+	checkModOrderAndFillData(GlobalRegistry.getRawModList())
+
+
+const ignorePaths = {
+	"res://.git": true,
+	"res://.github": true,
+	#"res://.import": true,
+	"res://AssetsSource": true,
+}
+
+func fillFolder(packer, folder):
+	var dir = Directory.new()
+	if dir.open(folder) == OK:
+		dir.list_dir_begin(true, false)
+		var file_name = dir.get_next()
+		while file_name != "":
+			if dir.current_is_dir():
+				var full_path = folder.plus_file(file_name)
+				if(ignorePaths.has(full_path)):
+					print("IGNORED "+full_path)
+					file_name = dir.get_next()
+					continue
+				
+				#var child1 = tree.create_item(root)
+				#child1.set_text(0, file_name)
+				#child1.collapsed = true
+				#child1.set_metadata(0, full_path)
+
+				#print("Found directory: " + file_name)
+				fillFolder(packer, full_path)
+				#if(child1.get_children() == null):
+				#	root.remove_child(child1)
+			else:
+				#if(file_name.get_extension() == "gd"):
+				var full_path:String = folder.plus_file(file_name)
+				packer.add_file(full_path, full_path)
+				#if(filter == "" || (filter in full_path)):
+				#	var child1 = tree.create_item(root)
+				#	child1.set_text(0, file_name)
+				#	child1.set_metadata(0, full_path)
+			file_name = dir.get_next()
+	else:
+		Log.printerr("An error occurred when trying to access the path "+folder)
