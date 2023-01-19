@@ -118,11 +118,13 @@ gridColor = 5
 loctag_EngineersEncounter = true
 population = 2
 
-[node name="MiningRoom19" parent="." index="11" instance=ExtResource( 2 )]
+[node name="MiningLoreComputerRoom" parent="." index="11" instance=ExtResource( 2 )]
 self_modulate = Color( 1, 1, 0.7, 1 )
 position = Vector2( -640, 0 )
-roomName = "Engineering bay"
-roomDescription = "Just a corridor that leads to many other rooms. Walls feature a yellow trim, showing that you are in engineering"
+roomName = "Office"
+roomID = "eng_lorecomputerroom"
+roomDescription = "You enter some kind of office. A pretty cramped one, with metal walls and floor, dimly lit and equipped with a computer on a cluttered desk, a swiveling chair, a monitor displaying system updates, a small window into the space, a cooling unit and a little green plant."
+roomSprite = 5
 roomColor = 6
 gridColor = 5
 population = 2

@@ -8,6 +8,7 @@ enum {
 	NotHandsBlocked,
 	NotArmsRestrained,
 	NotLegsRestrained,
+	NotBlindfolded,
 	SkillCheck,
 	StatCheck,
 	PerkCheck,
@@ -37,6 +38,8 @@ static func getReasonText(reason):
 		return "You can't do this while your arms are restrained"
 	if(reason == NotLegsRestrained):
 		return "You can't do this while your legs are restrained"
+	if(reason == NotBlindfolded):
+		return "You can't do this while blindfolded"
 	if(reason == HasCondoms):
 		return "You don't have any condoms"
 	if(reason == HasReachablePenis):
@@ -88,6 +91,8 @@ static func check(checks: Array):
 				return reason
 		if(reason == NotLegsRestrained):
 			if(GM.pc.hasBoundLegs()):
+				return reason
+			if(GM.pc.isBlindfolded()):
 				return reason
 		if(reason == SkillCheck):
 			var skill: SkillBase = GM.pc.getSkillsHolder().getSkill(args[1])
