@@ -92,6 +92,7 @@ static func check(checks: Array):
 		if(reason == NotLegsRestrained):
 			if(GM.pc.hasBoundLegs()):
 				return reason
+		if(reason == NotBlindfolded):
 			if(GM.pc.isBlindfolded()):
 				return reason
 		if(reason == SkillCheck):
