@@ -69,9 +69,7 @@ func hasModSupport():
 func getLoadedMods():
 	return loadedMods
 	
-func getRawModList():
-	var result = []
-	
+func getModsFolder():
 	var modsFolder = "user://mods"
 	if(OS.get_name() == "Android"):
 		#var permissions: Array = OS.get_granted_permissions() #for Godot 3 branch
@@ -80,6 +78,12 @@ func getRawModList():
 		var finalDir = externalDir.plus_file("BDCCMods")
 		modsFolder = finalDir
 		var _ok = Directory.new().make_dir(modsFolder)
+	return modsFolder
+	
+func getRawModList():
+	var result = []
+	
+	var modsFolder = getModsFolder()
 	
 	var dir = Directory.new()
 	if dir.open(modsFolder) == OK:

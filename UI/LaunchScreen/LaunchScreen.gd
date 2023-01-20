@@ -323,14 +323,7 @@ func _on_RichTextLabel_meta_clicked(meta):
 func _on_TestButton_pressed():
 	var packer = PCKPacker.new()
 	
-	var modsFolder = "user://mods"
-	if(OS.get_name() == "Android"):
-		#var permissions: Array = OS.get_granted_permissions() #for Godot 3 branch
-		#if permissions.has("android.permission.READ_EXTERNAL_STORAGE"):
-		var externalDir:String = OS.get_system_dir(OS.SYSTEM_DIR_DOCUMENTS)
-		var finalDir = externalDir.plus_file("BDCCMods")
-		modsFolder = finalDir
-		var _ok = Directory.new().make_dir(modsFolder)
+	var modsFolder = GlobalRegistry.getModsFolder()
 	
 	packer.pck_start(modsFolder.plus_file("BDCC.pck"))
 	
