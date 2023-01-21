@@ -165,17 +165,17 @@ roomName = "Engineering bay"
 roomID = "eng_airventskip"
 roomDescription = "Just a corridor that leads to many other rooms. Walls feature a yellow trim, showing that you are in engineering
 
-You also notice an air vent here that is just big enough to fit you. Maybe you can use it to come back."
+You also notice an air vent here that is just big enough to fit you. You can probably use it to skip back to the entrance."
 roomColor = 6
 gridColor = 5
-loctag_EngineersEncounter = true
 population = 2
 
 [node name="MiningRoom30" parent="." index="16" instance=ExtResource( 2 )]
 self_modulate = Color( 1, 1, 0.7, 1 )
 position = Vector2( -384, 384 )
-roomName = "Engineering bay"
-roomDescription = "Just a corridor that leads to many other rooms. Walls feature a yellow trim, showing that you are in engineering"
+roomName = "Control room"
+roomID = "eng_controlroom"
+roomDescription = "A room with many consoles and server racks"
 roomColor = 6
 gridColor = 5
 population = 2
@@ -281,6 +281,7 @@ population = 2
 self_modulate = Color( 1, 1, 0.7, 1 )
 position = Vector2( -448, -192 )
 roomName = "Engineering bay"
+roomID = "eng_neartransmitter"
 roomDescription = "A corridor that consist out of a catwalk going through a rocky cave. This cave seems to be isolated from space, letting you breathe.
 
 This is where the corridor ends. Before you is a giant old metal door that you can't seem to open no matter how you try. Near the door there are a few signs that tell you that there is a dangerous structure behind."
@@ -294,7 +295,7 @@ position = Vector2( -512, -192 )
 roomName = "Bluespace transmitter"
 roomID = "eng_bluespacetransmitter"
 roomDescription = "A huge round room with the bluespace transmitter. In the middle of the room there is a big bluespace crystal shining"
-canWest = false
+canEast = false
 roomSprite = 4
 roomColor = 2
 gridColor = 5

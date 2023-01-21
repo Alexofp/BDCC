@@ -16,6 +16,7 @@ enum {
 	HasReachablePenis,
 	HasReachableVagina,
 	HasReachableAnus,
+	HasReachableVaginaOrAnus,
 	HasPenis,
 	HasVagina,
 	NotStunned,
@@ -48,6 +49,8 @@ static func getReasonText(reason):
 		return "You need to have a reachable pussy"
 	if(reason == HasReachableAnus):
 		return "You need to have a reachable anus"
+	if(reason == HasReachableVaginaOrAnus):
+		return "You need to have a reachable pussy or anus"
 	if(reason == HasPenis):
 		return "You need to have a dick"
 	if(reason == HasVagina):
@@ -116,6 +119,9 @@ static func check(checks: Array):
 				return reason
 		if(reason == HasReachableAnus):
 			if(!GM.pc.hasReachableAnus()):
+				return reason
+		if(reason == HasReachableVaginaOrAnus):
+			if(!GM.pc.hasReachableAnus() && !GM.pc.hasReachableVagina()):
 				return reason
 		if(reason == HasPenis):
 			if(!GM.pc.hasPenis()):

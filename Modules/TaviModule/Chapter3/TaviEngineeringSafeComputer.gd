@@ -37,7 +37,7 @@ func reactToCommand(_command:String, _args:Array, _commandStringRaw:String):
 		
 		if(_command == "open"):
 			if(loggedAsAdmin):
-				markFinished([true])
+				markFinished()
 				return "Oppening the safe..."
 			else:
 				return "Error, Access denied!"
@@ -154,7 +154,8 @@ func reactToCommand(_command:String, _args:Array, _commandStringRaw:String):
 				if(fileIndex in ["1", "brute.exe"]):
 					return "Error, unable to display a binary file"
 				elif(fileIndex in ["2", "forum.html"]):
-					return "<message>Guys, how do I use the brute.exe program?</message>\n<message>Super simple. [cuss]Download it from the server and then run like so[/cuss] 'brute.exe SERVER_IP'. [cuss]It will try to bruteforce the password[/cuss].</message>"
+					learnCommand("wget")
+					return "<message>Guys, how do I use the brute.exe program?</message>\n<message>Super simple. [cuss]Download it from the server[/cuss] using wget [cuss]and then run like so[/cuss] 'brute.exe SERVER_IP'. [cuss]It will try to bruteforce the password[/cuss].</message>"
 				elif(loggedAsAdmin && (fileIndex in ["69", "babe.png"])):
 					return "babe.png\n\n[font=res://Fonts/smallconsolefont.tres]"+Util.readFile("res://Images/asciiporn/taviquest/babe.txt")+"[/font]"
 				elif(loggedAsAdmin && (fileIndex in ["123", "petplay.png"])):
@@ -226,7 +227,7 @@ func reactToCommand(_command:String, _args:Array, _commandStringRaw:String):
 				learnCommand("tunya")
 				return "'cat' expects 1 argument (or tunya)"
 		if(_command == "quit"):
-			markFinished([false])
+			markFinishedFail()
 			return "Shutting down.."
 		
 		if(_command == "help"):

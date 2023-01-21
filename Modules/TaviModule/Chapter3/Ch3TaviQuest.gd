@@ -1,7 +1,7 @@
 extends QuestBase
 
 func _init():
-	id = "Ch2TaviQuest"
+	id = "Ch3TaviQuest"
 
 func getVisibleName():
 	return "Tavi's Revenge"
@@ -9,10 +9,16 @@ func getVisibleName():
 func getProgress():
 	var result = []
 	
-	result.append("(( This quest is not yet completed, the story ends here for now. But go give drugs to Tavi if you didn't do it yet ))")
+	result.append("You got everything you need. Time to go talk with Tavi.")
 	
 	if(GM.QS.isCompleted("Ch2ElizaQuest") && !GM.main.getFlag("TaviModule.ch2DrugsGaveToTavi")):
 		result.append("You have the drugs. Go give them to Tavi.")
+
+	if(GM.main.getFlag("TaviModule.ch3StartedInfiltration")):
+		result.append("You need to find the control room and initiate a maintenance protocol in order to open the door to the bluespace transmitter.")
+
+	if(GM.main.getFlag("TaviModule.ch3CompletedDoorHack")):
+		result.append("You enabled the maintenance protocol. Return back to Tavi")
 
 	return result
 

@@ -8,6 +8,7 @@ var introText = "AlphaOS Console [Version 0.9.7601]\n(C) AlphaCorp, All rights r
 var lastOutput = ""
 var isIntro = true
 var ended = false
+var endedFail = false
 var endedArgs = []
 
 func learnCommand(command):
@@ -46,8 +47,18 @@ func markFinished(theargs = []):
 	ended = true
 	endedArgs = theargs
 
+func markFinishedFail(theargs = []):
+	endedFail = true
+	endedArgs = theargs
+
+func hasEndedFailed():
+	return endedFail
+
 func hasEnded():
 	return ended
+
+func hasEndedOrFailed():
+	return ended || endedFail
 
 func getEndedArgs():
 	return endedArgs
@@ -63,6 +74,7 @@ func saveData():
 		"lastCommand": lastCommand,
 		"isIntro": isIntro,
 		"ended": ended,
+		"endedFail": endedFail,
 		"endedArgs": endedArgs,
 	}
 	
@@ -72,6 +84,7 @@ func loadData(_data):
 	lastCommand = SAVE.loadVar(_data, "lastCommand", "")
 	isIntro = SAVE.loadVar(_data, "isIntro", false)
 	ended = SAVE.loadVar(_data, "ended", false)
+	endedFail = SAVE.loadVar(_data, "endedFail", false)
 	endedArgs = SAVE.loadVar(_data, "endedArgs", null)
 	#.loadData(data)
 	

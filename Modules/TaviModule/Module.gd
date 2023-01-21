@@ -50,6 +50,17 @@ func getFlags():
 		"ch2DrugsAgreedToTest": flag(FlagType.Bool),
 		"ch2DrugsPickedFuta": flag(FlagType.Bool),
 		"ch2DrugsSaidYesToDemonTavi": flag(FlagType.Bool),
+		
+		# Chapter 3
+		"ch3StartedInfiltration": flag(FlagType.Bool),
+		"ch3IntimidatedKait": flag(FlagType.Bool),
+		"ch3InterogatedTavi": flag(FlagType.Bool),
+		"ch3CompletedDoorHack": flag(FlagType.Bool),
+		"ch3CompletedSafeHack": flag(FlagType.Bool),
+		"ch3AlexHappened": flag(FlagType.Bool),
+		"ch3AlexChoice": flag(FlagType.Text), # submit, talk_failed, choked_out, fight
+		"ch3AlexDefeatedHim": flag(FlagType.Bool),
+		"ch3AlexHadSex": flag(FlagType.Bool),
 	}
 
 func _init():
@@ -79,6 +90,11 @@ func _init():
 		"res://Modules/TaviModule/Chapter2/Ch2a2CorridorScene.gd",
 		"res://Modules/TaviModule/Chapter2/Ch2e2ElizaReactionToRoughness.gd",
 		"res://Modules/TaviModule/Chapter2/Ch2t3TaviDrugsScene.gd",
+		
+		"res://Modules/TaviModule/Chapter3/Ch3s1TaviAndKaitScene.gd",
+		"res://Modules/TaviModule/Chapter3/Ch3s2ControlRoomScene.gd",
+		"res://Modules/TaviModule/Chapter3/Ch3s2AdvancedHackScene.gd",
+		"res://Modules/TaviModule/Chapter3/Ch3s3AlexScene.gd",
 		]
 	characters = []
 	items = []
@@ -100,16 +116,23 @@ func _init():
 		"res://Modules/TaviModule/Chapter2/Ch2EnterCorridorEvent.gd",
 		"res://Modules/TaviModule/Chapter2/Ch2e2ElizaReactionToRoughnessEvent.gd",
 		"res://Modules/TaviModule/Chapter2/Ch2t3TaviTalkEvent.gd",
+		"res://Modules/TaviModule/Chapter3/Ch3TaviTalkAndKaitEvent.gd",
+		"res://Modules/TaviModule/Chapter3/Ch3s2ControlRoomEvent.gd",
+		"res://Modules/TaviModule/Chapter3/Ch3s3AlexEvent.gd",
 	]
 	quests = [
 		"res://Modules/TaviModule/TaviAppleQuest.gd",
 		"res://Modules/TaviModule/Quest2/TaviQuest2.gd",
 		"res://Modules/TaviModule/Chapter2/Ch2ElizaQuest.gd",
 		"res://Modules/TaviModule/Chapter2/Ch2AlexQuest.gd",
-		"res://Modules/TaviModule/Chapter2/Ch2TaviQuest.gd",
+		"res://Modules/TaviModule/Chapter3/Ch3TaviQuest.gd",
 	]
 	worldEdits = [
 		"res://Modules/TaviModule/TaviWorldEdit.gd",
+	]
+	computers = [
+		"res://Modules/TaviModule/Chapter3/TaviEngineeringComputer.gd",
+		"res://Modules/TaviModule/Chapter3/TaviEngineeringSafeComputer.gd",
 	]
 
 func resetFlagsOnNewDay():

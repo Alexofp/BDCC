@@ -105,7 +105,7 @@ func _react(_action: String, _args):
 		currentCommand.clear()
 		if(inputMode == "numpad"):
 			inputMode = "buttons"
-		if(computer.hasEnded()):
+		if(computer.hasEndedOrFailed()):
 			state = "finished"
 		shouldPlayFancyAnimationForText = true
 		return
@@ -113,7 +113,7 @@ func _react(_action: String, _args):
 	if(_action == "sendkeyboard"):
 		computer.inputCommand(getTextboxData("textcommand"))
 		currentCommand.clear()
-		if(computer.hasEnded()):
+		if(computer.hasEndedOrFailed()):
 			state = "finished"
 		shouldPlayFancyAnimationForText = true
 		return
@@ -125,7 +125,7 @@ func _react(_action: String, _args):
 	if(_action == "inputfull"):
 		computer.inputCommand(_args[0])
 		currentCommand.clear()
-		if(computer.hasEnded()):
+		if(computer.hasEndedOrFailed()):
 			state = "finished"
 		shouldPlayFancyAnimationForText = true
 		return
@@ -160,6 +160,9 @@ func _react(_action: String, _args):
 	if(_action == "endthescene"):
 		if(computer.hasEnded()):
 			endScene([true, computer.getEndedArgs()])
+			return
+		if(computer.hasEndedFailed()):
+			endScene([false, computer.getEndedArgs()])
 			return
 		endScene([false, []])
 		return

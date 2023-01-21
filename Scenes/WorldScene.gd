@@ -39,8 +39,8 @@ func _run():
 	addButtonAt(13, "Tasks", "Look at your tasks", "tasks")
 	addButtonAt(14, "Inventory", "Look at your inventory", "inventory")
 	#addButtonAt(5, "Sex Test", "Sex test", "sextest")
-	addButtonAt(7, "Computer test", "Computer test", "comptest")
-	addButtonAt(8, "Hard Computer test", "Computer test", "comptest2")
+	#addButtonAt(7, "Computer test", "Computer test", "comptest")
+	#addButtonAt(8, "Hard Computer test", "Computer test", "comptest2")
 	
 	_roomInfo._onPreEnter()
 	setLocationName(_roomInfo.getName())
