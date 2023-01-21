@@ -11,6 +11,7 @@ func _run():
 		addCharacter("alexrynard")
 		
 	if(state == ""):
+		aimCameraAndSetLocName("eng_controlroom")
 		playAnimation(StageScene.Duo, "stand", {npc="alexrynard"})
 		
 		saynn("As you walk out of the control room you suddenly run into one of the familiar engineers. Alex Rynard blocks your path.")
