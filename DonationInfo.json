@@ -9,22 +9,22 @@
 				"nickname": "Zaxon Rapial"
 			},
 			{
-				"nickname": "Maxtacks"
+				"nickname": "Blastburn"
 			},
 			{
 				"nickname": "SuPhox"
 			},
 			{
+				"nickname": "Maxtacks"
+			},
+			{
 				"nickname": "Caliban"
 			},
 			{
-				"nickname": "Blastburn"
+				"nickname": "Kyle Oran Evans "
 			},
 			{
 				"nickname": "Zeneroth"
-			},
-			{
-				"nickname": "Kyle Oran Evans "
 			},
 			{
 				"nickname": "Shadowwall123"
@@ -68,43 +68,46 @@
 		],
 		"$10.00": [
 			{
-				"nickname": "Shadowfaux"
+				"nickname": "Tulvahni"
 			},
 			{
-				"nickname": "Meepyneepy"
+				"nickname": "Shadowfaux"
 			},
 			{
 				"nickname": "Sami"
 			},
 			{
-				"nickname": "Loch55"
+				"nickname": "Meepyneepy"
 			},
 			{
-				"nickname": "Wyvernclaw00"
+				"nickname": "Loch55"
 			},
 			{
 				"nickname": "Silver_Bloke"
 			},
 			{
-				"nickname": "User#d45e8eac"
-			},
-			{
-				"nickname": "IzzenXAZ"
+				"nickname": "Wyvernclaw00"
 			},
 			{
 				"nickname": "Masaki Akira"
 			},
 			{
+				"nickname": "IzzenXAZ"
+			},
+			{
+				"nickname": "User#d45e8eac"
+			},
+			{
 				"nickname": "User#2242146d"
+			},
+			{
+				"nickname": "LunarEquinox8"
 			},
 			{
 				"nickname": "Steied"
 			},
 			{
 				"nickname": "Runulf"
-			},
-			{
-				"nickname": "LunarEquinox8"
 			}
 		],
 		"$5.00": [
@@ -136,5 +139,5 @@
 		"$5.00",
 		"$1.00"
 	],
-	"unixTime": 1674280504
+	"unixTime": 1674319555
 }
