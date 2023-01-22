@@ -4,10 +4,10 @@ onready var animationTree = $AnimationTree
 onready var doll = $Doll3D
 
 func _init():
-	id = StageScene.Solo
+	id = StageScene.SoloEditable
 
 func _ready():
-	animationTree.active = true
+	animationTree.active = false
 	
 func updateSubAnims():
 	if(doll.getArmsCuffed()):
@@ -34,13 +34,6 @@ func playAnimation(animID, _args = {}):
 	
 	updateSubAnims()
 	
-	if(animID == "custom"):
-		animationTree.active = false
-		
-		doll.applyData(_args["anim"])
-	else:
-		animationTree.active = true
-		
-		var state_machine = animationTree["parameters/AnimationNodeStateMachine/playback"]
-		if(!stateMachineTravel(doll, state_machine, animID)):
-			Log.printerr("Action "+str(animID)+" is not found for stage "+str(id))
+	var state_machine = animationTree["parameters/AnimationNodeStateMachine/playback"]
+	if(!stateMachineTravel(doll, state_machine, animID)):
+		Log.printerr("Action "+str(animID)+" is not found for stage "+str(id))

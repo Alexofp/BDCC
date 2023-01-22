@@ -139,6 +139,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Player/Bodyparts/BodypartVagina.gd"
 }, {
+"base": "Spatial",
+"class": "BoneHandle",
+"language": "GDScript",
+"path": "res://addons/bone_editor/BoneHandle.gd"
+}, {
 "base": "ItemState",
 "class": "BraState",
 "language": "GDScript",
@@ -1041,6 +1046,7 @@ _global_script_class_icons={
 "BodypartSlot": "",
 "BodypartTail": "",
 "BodypartVagina": "",
+"BoneHandle": "",
 "BraState": "",
 "BreastsSize": "",
 "Buff": "",
@@ -1253,7 +1259,7 @@ window/stretch/aspect="expand"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/godot-notes/plugin.cfg" )
+enabled=PoolStringArray( "res://addons/bone_editor/plugin.cfg", "res://addons/godot-notes/plugin.cfg" )
 
 [gui]
 

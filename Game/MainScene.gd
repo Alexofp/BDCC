@@ -197,6 +197,7 @@ func _ready():
 	Console.addCommand("clearflag", self, "consoleClearFlag", ["flagID"], "Resets the game flag, be very careful")
 	Console.addCommand("setmoduleflag", self, "consoleSetModuleFlagBool", ["moduleID", "flagID", "trueOrFalse"], "Changes the game flag, be very careful")
 	Console.addCommand("clearmoduleflag", self, "consoleClearModuleFlag", ["moduleID", "flagID"], "Resets the game flag, be very careful")
+	Console.addCommand("ae", self, "consoleAnimationEditor", [], "Animation editor")
 	applyAllWorldEdits()
 	
 func startNewGame():
@@ -1037,3 +1038,6 @@ func isRoomLooted(roomID):
 	if(lootedRooms.has(roomID)):
 		return true
 	return false
+
+func consoleAnimationEditor():
+	playAnimation(StageScene.SoloEditable, "stand")
