@@ -193,3 +193,10 @@ func _on_DevModCreator_pressed():
 	
 	var scene = load("res://UI/ModMaker/ModMaker.tscn")
 	devSubScreen.add_child(scene.instance())
+
+
+func _on_DevSceneConverter2_pressed():
+	Util.delete_children(devSubScreen)
+	
+	var scene = load("res://Util/SceneConverter2.tscn")
+	devSubScreen.add_child(scene.instance())
