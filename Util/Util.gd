@@ -580,3 +580,9 @@ static func readFile(path):
 		content = file.get_as_text()
 	file.close()
 	return content
+
+static func writeFile(path, content):
+	var file = File.new()
+	file.open(path, File.WRITE)
+	file.store_string(content)
+	file.close()

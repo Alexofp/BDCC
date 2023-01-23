@@ -69,7 +69,7 @@ func hasModSupport():
 func getLoadedMods():
 	return loadedMods
 	
-func getModsFolder():
+func getModsFolder() -> String:
 	var modsFolder = "user://mods"
 	if(OS.get_name() == "Android"):
 		#var permissions: Array = OS.get_granted_permissions() #for Godot 3 branch

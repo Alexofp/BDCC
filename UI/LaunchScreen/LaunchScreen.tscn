@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://UI/LaunchScreen/LaunchScreen.gd" type="Script" id=1]
 [ext_resource path="res://GlobalTheme.tres" type="Theme" id=2]
 [ext_resource path="res://Game/SmartScrollContainer.gd" type="Script" id=3]
 [ext_resource path="res://UI/LaunchScreen/LaunchModEntry.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Fonts/Titillium-Regular.otf" type="DynamicFontData" id=5]
+[ext_resource path="res://UI/ModBrowser/ModBrowser.tscn" type="PackedScene" id=6]
 
 [sub_resource type="DynamicFont" id=3]
 size = 38
@@ -161,15 +162,21 @@ margin_bottom = 644.0
 rect_min_size = Vector2( 0, 50 )
 
 [node name="Control" type="Control" parent="VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
-margin_right = 310.0
+margin_right = 180.0
 margin_bottom = 50.0
 size_flags_horizontal = 3
 
 [node name="TestButton" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
-margin_left = 314.0
-margin_right = 454.0
+margin_left = 184.0
+margin_right = 324.0
 margin_bottom = 50.0
 text = "Build BDCC.pck"
+
+[node name="ModBrowserButton" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+margin_left = 328.0
+margin_right = 454.0
+margin_bottom = 50.0
+text = "Mod Browser"
 
 [node name="NoModsButton" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
 margin_left = 458.0
@@ -202,6 +209,9 @@ margin_right = 233.0
 margin_bottom = 59.0
 dialog_autowrap = true
 
+[node name="ModBrowser" parent="." instance=ExtResource( 6 )]
+visible = false
+
 [connection signal="meta_clicked" from="VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/WarningLabel" to="." method="_on_RichTextLabel_meta_clicked"]
 [connection signal="meta_clicked" from="VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/RichTextLabel" to="." method="_on_RichTextLabel_meta_clicked"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/HFlowContainer/ModDisableButton" to="." method="_on_ModDisableButton_pressed"]
@@ -209,6 +219,8 @@ dialog_autowrap = true
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/HFlowContainer/MoveDownButton" to="." method="_on_MoveDownButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/HFlowContainer/DeleteModButton" to="." method="_on_DeleteModButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/TestButton" to="." method="_on_TestButton_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/ModBrowserButton" to="." method="_on_ModBrowserButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/NoModsButton" to="." method="_on_NoModsButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/WithModsButton" to="." method="_on_WithModsButton_pressed"]
 [connection signal="confirmed" from="ConfirmationDialog" to="." method="_on_ConfirmationDialog_confirmed"]
+[connection signal="closePressed" from="ModBrowser" to="." method="_on_ModBrowser_closePressed"]

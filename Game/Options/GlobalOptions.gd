@@ -34,6 +34,8 @@ var rollbackEnabled = false
 var rollbackSlots = 5
 var rollbackSaveEvery = 1
 
+var showModdedLauncher = false
+
 func resetToDefaults():
 	fetchNewRelease = true
 	menstrualCycleLengthDays = 7
@@ -56,6 +58,7 @@ func resetToDefaults():
 	rollbackEnabled = false
 	rollbackSlots = 5
 	rollbackSaveEvery = 1
+	showModdedLauncher = false
 	
 	enabledContent.clear()
 	for contentType in ContentType.getAll():
@@ -131,8 +134,24 @@ func getRollbackSlotsAmount():
 func getRollbackSaveEveryXChoices():
 	return rollbackSaveEvery
 
+func shouldShowModdedLauncher():
+	return showModdedLauncher
+
 func getChangeableOptions():
 	var settings = [
+		{
+			"name": "Modding",
+			"id": "modding",
+			"options": [
+				{
+					"name": "Enable Modded BDCC Launcher",
+					"description": "Restart the game to see it. Allows you to manage your mods and download new ones",
+					"id": "showModdedLauncher",
+					"type": "checkbox",
+					"value": showModdedLauncher,
+				},
+			],
+		},
 		{
 			"name": "Pregnancy settings",
 			"id": "pregnancy",
@@ -381,6 +400,12 @@ func getChangeableOptions():
 	return settings
 
 func applyOption(categoryID, optionID, value):
+	if(categoryID == "modding"):
+		if(optionID == "showModdedLauncher"):
+			showModdedLauncher = value
+			if(showModdedLauncher):
+				var _ok = OS.request_permissions()
+	
 	if(categoryID == "pregnancy"):
 		if(optionID == "menstrualCycleLengthDays"):
 			menstrualCycleLengthDays = value
@@ -476,6 +501,7 @@ func saveData():
 		"rollbackEnabled": rollbackEnabled,
 		"rollbackSlots": rollbackSlots,
 		"rollbackSaveEvery": rollbackSaveEvery,
+		"showModdedLauncher": showModdedLauncher,
 	}
 	
 	return data
@@ -503,6 +529,7 @@ func loadData(data):
 	rollbackEnabled = loadVar(data, "rollbackEnabled", false)
 	rollbackSlots = loadVar(data, "rollbackSlots", 5)
 	rollbackSaveEvery = loadVar(data, "rollbackSaveEvery", 1)
+	showModdedLauncher = loadVar(data, "showModdedLauncher", false)
 
 func saveToFile():
 	var saveData = saveData()

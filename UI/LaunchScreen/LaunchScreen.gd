@@ -11,6 +11,7 @@ var selectedEntry = null
 export(Resource) var GlobalTheme
 
 const modOrderPath = "user://modOrder.json"
+const pckversionPath = "user://bdccpckversion.txt"
 var foundBDCC = false
 
 # Called when the node enters the scene tree for the first time.
@@ -18,15 +19,21 @@ func _ready():
 	if(GlobalTheme != null):
 		if(OS.has_touchscreen_ui_hint()):
 			GlobalTheme.rename_stylebox("scrollTouch", "scroll", "VScrollBar")
-	
+			
 	var rawModList = GlobalRegistry.getRawModList()
-	
+	if(GlobalRegistry.hasModSupport() && OS.get_name() == "Android" && (rawModList.size() > 0) || OPTIONS.shouldShowModdedLauncher()):
+		if(Util.readFile(pckversionPath) != GlobalRegistry.getGameVersionString()):
+			generateBDCCpckFile()
+			rawModList = GlobalRegistry.getRawModList()
+			
 	var SHOW_THIS_SCREEN_ANYWAY = false # DON'T FORGET TO CHANGE TO false BEFORE SHIPPING
 	
-	if(OS.get_name() == "Android" && !SHOW_THIS_SCREEN_ANYWAY):
+	if(OS.get_name() == "Android" || SHOW_THIS_SCREEN_ANYWAY):
+		$VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/TestButton.visible = true
+	else:
 		$VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/TestButton.visible = false
 	
-	if(!SHOW_THIS_SCREEN_ANYWAY):
+	if(!SHOW_THIS_SCREEN_ANYWAY && !OPTIONS.shouldShowModdedLauncher()):
 		if(!GlobalRegistry.hasModSupport() || rawModList.size() == 0):
 			GlobalRegistry.registerEverything()
 			var _ok = get_tree().change_scene("res://UI/MainMenu/MainMenu.tscn")
@@ -131,17 +138,6 @@ func updateModList():
 		if(modEntry == selectedEntry):
 			newEntry.makeActive()
 
-func gdunziptest():
-	var gdunzip = GDUnzip.new()
-	
-	var loaded = gdunzip.load('user://mods/TestSceneMod.zip')
-	
-	if(loaded):
-		print(gdunzip.files)
-	else:
-		print('Failed loading zip file')
-
-
 func _on_WithModsButton_pressed():
 	saveOrderIntoFile(currentModOrder)
 	
@@ -163,7 +159,7 @@ func onModEntryClicked(entry):
 
 func updateSelectedEntry():
 	if(selectedEntry == null):
-		if(OS.get_name() == "Android"):
+		if(OS.get_name() == "Android" && false):
 			if(!foundBDCC):
 				$VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/WarningLabel.bbcode_text = "[color=red]You must provide BDCC.pck file to be able to use mods. It must be from the current version! Download the most recent one [url=https://github.com/Alexofp/BDCC/releases]HERE[/url] and place into the mods folder[/color]"
 				$VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/WarningLabel.visible = true
@@ -200,6 +196,8 @@ func tryToPopulateFilesList():
 	if(selectedEntry == null):
 		return ""
 	var zipToLoad = selectedEntry["path"]
+	if(zipToLoad.get_file() == "BDCC.pck"):
+		return "This file is required for mods to function on Android version. On other platforms this file is Not required and will be disabled automatically"
 	
 	var gdunzip = GDUnzip.new()
 	
@@ -321,6 +319,10 @@ func _on_RichTextLabel_meta_clicked(meta):
 
 
 func _on_TestButton_pressed():
+	generateBDCCpckFile()
+	checkModOrderAndFillData(GlobalRegistry.getRawModList())
+	
+func generateBDCCpckFile():
 	var packer = PCKPacker.new()
 	
 	var modsFolder = GlobalRegistry.getModsFolder()
@@ -332,8 +334,7 @@ func _on_TestButton_pressed():
 	#packer.add_file("res://text.txt", "text.txt")
 	packer.flush()
 	
-	checkModOrderAndFillData(GlobalRegistry.getRawModList())
-
+	Util.writeFile(pckversionPath, GlobalRegistry.getGameVersionString())
 
 const ignorePaths = {
 	"res://.git": true,
@@ -375,3 +376,16 @@ func fillFolder(packer, folder):
 			file_name = dir.get_next()
 	else:
 		Log.printerr("An error occurred when trying to access the path "+folder)
+
+
+func _on_ModBrowserButton_pressed():
+	$VBoxContainer.visible = false
+	$ModBrowser.visible = true
+
+	saveOrderIntoFile(currentModOrder)
+
+func _on_ModBrowser_closePressed():
+	$VBoxContainer.visible = true
+	$ModBrowser.visible = false
+	
+	checkModOrderAndFillData(GlobalRegistry.getRawModList())
