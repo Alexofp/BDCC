@@ -12,7 +12,7 @@ export(bool) var canNorth = true
 export(bool) var canEast = true
 export(bool) var canSouth = true
 
-export(RoomStuff.RoomSprite) var roomSprite = RoomStuff.RoomSprite.NONE
+export(RoomStuff.RoomSprite) var roomSprite = RoomStuff.RoomSprite.NONE setget setRoomSprite
 export(RoomStuff.RoomColor) var roomColor = RoomStuff.RoomColor.White setget onRoomChangeColor
 export(RoomStuff.RoomColor) var gridColor = RoomStuff.RoomColor.White setget onGridChangeColor
 const RoomColorToColor = {
@@ -108,9 +108,14 @@ func setRoomGridColor(newColor):
 		gridColor = newColor
 		
 func setRoomSprite(newSprite):
+	if(newSprite == RoomStuff.RoomSprite.NONE):
+		roomSprite = newSprite
+		$Sprite.texture = null
+	
 	if(newSprite != roomSprite && sprites.has(newSprite)):
 		roomSprite = newSprite
-		roomSpriteObject.texture = sprites[roomSprite]
+		#roomSpriteObject.texture = sprites[roomSprite]
+		$Sprite.texture = sprites[roomSprite]
 	
 
 	

@@ -127,16 +127,20 @@ roomDescription = "You enter some kind of office. A pretty cramped one, with met
 roomSprite = 5
 roomColor = 6
 gridColor = 5
-population = 2
 
 [node name="MiningRoom20" parent="." index="12" instance=ExtResource( 2 )]
 self_modulate = Color( 1, 1, 0.7, 1 )
 position = Vector2( -576, -64 )
-roomName = "Engineering bay"
-roomDescription = "Just a corridor that leads to many other rooms. Walls feature a yellow trim, showing that you are in engineering"
+roomName = "Assembly Lab"
+roomID = "eng_assemblylab"
+roomDescription = "This room seems to be some kind of assembly lab. The first thing you notice is the eerie silence that hangs in the air. The workstations are cluttered with tools, spare parts and half-finished projects. The lighting is dim and flickering, casting long shadows across the room.
+
+You take a closer look at the projects that they are developing here. Some kind of androids? Hard to tell but you see remains of unfinished bodies, legs, heads of different species."
 roomColor = 6
 gridColor = 5
 population = 2
+lootable = true
+lootCredits = 2
 
 [node name="MiningRoom27" parent="." index="13" instance=ExtResource( 2 )]
 self_modulate = Color( 1, 1, 0.7, 1 )
@@ -178,7 +182,6 @@ roomID = "eng_controlroom"
 roomDescription = "A room with many consoles and server racks"
 roomColor = 6
 gridColor = 5
-population = 2
 
 [node name="MiningRoom21" parent="." index="17" instance=ExtResource( 2 )]
 self_modulate = Color( 1, 1, 0.7, 1 )
@@ -203,11 +206,18 @@ population = 2
 [node name="MiningRoom23" parent="." index="19" instance=ExtResource( 2 )]
 self_modulate = Color( 1, 1, 0.7, 1 )
 position = Vector2( -640, 128 )
-roomName = "Engineering bay"
-roomDescription = "Just a corridor that leads to many other rooms. Walls feature a yellow trim, showing that you are in engineering"
+roomName = "Engineering Bay Storage"
+roomID = "eng_storage"
+roomDescription = "You notice rows of metallic shelves stacked with tools and equipment. The room is dimly lit, one of the lights flickers a lot."
+roomSprite = 4
 roomColor = 6
 gridColor = 5
 population = 2
+lootable = true
+lootTableId = "engineer"
+lootItemIds = PoolStringArray( "painkillers", "painkillers", "painkillers", "EnergyDrink", "EnergyDrink", "restraintkey", "restraintkey" )
+lootCredits = 3
+lootEveryXDays = 7
 
 [node name="MiningRoom24" parent="." index="20" instance=ExtResource( 2 )]
 self_modulate = Color( 1, 1, 0.7, 1 )
@@ -223,6 +233,7 @@ population = 2
 self_modulate = Color( 1, 1, 0.7, 1 )
 position = Vector2( -512, 256 )
 roomName = "Engineering bay"
+roomID = "eng_nearnura"
 roomDescription = "Just a corridor that leads to many other rooms. Walls feature a yellow trim, showing that you are in engineering"
 roomColor = 6
 gridColor = 5
@@ -232,8 +243,10 @@ population = 2
 [node name="MiningRoom26" parent="." index="22" instance=ExtResource( 2 )]
 self_modulate = Color( 1, 1, 0.7, 1 )
 position = Vector2( -576, 256 )
-roomName = "Engineering bay"
-roomDescription = "Just a corridor that leads to many other rooms. Walls feature a yellow trim, showing that you are in engineering"
+roomName = "Robotics lab"
+roomID = "eng_robotics"
+roomDescription = "An abandoned robotics lab"
+roomSprite = 4
 roomColor = 6
 gridColor = 5
 population = 2
@@ -287,7 +300,6 @@ roomDescription = "A corridor that consist out of a catwalk going through a rock
 This is where the corridor ends. Before you is a giant old metal door that you can't seem to open no matter how you try. Near the door there are a few signs that tell you that there is a dangerous structure behind."
 roomColor = 6
 gridColor = 5
-population = 2
 
 [node name="MiningRoom15" parent="." index="28" instance=ExtResource( 2 )]
 self_modulate = Color( 1, 0.6, 0.6, 1 )

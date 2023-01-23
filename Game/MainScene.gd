@@ -99,7 +99,7 @@ func getCharacter(charID):
 func getCharacters():
 	return staticCharacters
 
-func addDynamicCharacter(character):
+func addDynamicCharacter(character, printDebug = true):
 	if(!(character.isDynamicCharacter())):
 		assert(false, "addDynamicCharacter() Received a non-dynamic character")
 		
@@ -112,14 +112,16 @@ func addDynamicCharacter(character):
 	
 	dynamicCharacters[newCharID] = character
 	dynamicCharactersNode.add_child(character)
-	Log.print("addDynamicCharacter(): Adding "+str(newCharID)+" character "+Util.getStackFunction())
+	if(printDebug):
+		Log.print("addDynamicCharacter(): Adding "+str(newCharID)+" character "+Util.getStackFunction())
 		
-func removeDynamicCharacter(characterID):
+func removeDynamicCharacter(characterID, printDebug = true):
 	if(!(characterID is String)):
 		characterID = characterID.getID()
 	
 	if(dynamicCharacters.has(characterID)):
-		Log.print("removeDynamicCharacter(): Removing "+str(characterID)+" character")
+		if(printDebug):
+			Log.print("removeDynamicCharacter(): Removing "+str(characterID)+" character")
 		removeDynamicCharacterFromAllPools(characterID)
 		
 		dynamicCharacters[characterID].queue_free()
@@ -423,7 +425,7 @@ func loadDynamicCharactersData(data):
 		if(charType == "dynamic"):
 			var newDynamicChar = DynamicCharacter.new()
 			newDynamicChar.id = characterID
-			addDynamicCharacter(newDynamicChar)
+			addDynamicCharacter(newDynamicChar, false)
 			newDynamicChar.loadData(SAVE.loadVar(charData, "data", {}))
 		else:
 			Log.printerr("loadDynamicCharactersData() Trying to load a non-dynamic character with id "+str(characterID))

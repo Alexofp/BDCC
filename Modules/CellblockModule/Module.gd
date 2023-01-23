@@ -7,6 +7,9 @@ func getFlags():
 		"Cellblock_FreeToPassCheckpoint": flag(FlagType.Bool),
 		"Cellblock_CheckpointVisited": flag(FlagType.Bool),
 		"Cellblock_GreenhouseLooted": flag(FlagType.Bool),
+		"FoundNura": flag(FlagType.Bool),
+		"NuraGaveTool": flag(FlagType.Bool),
+		"NuraFoundTool": flag(FlagType.Bool),
 	}
 
 func _init():
@@ -25,11 +28,14 @@ func _init():
 		"res://Modules/CellblockModule/RandomEncounters/InmateExposureProstitutionScene.gd",
 		"res://Modules/CellblockModule/RandomEncounters/EngineerCaughtOfflimitsScene.gd",
 		"res://Modules/CellblockModule/Fluff/EngineeringLoreComputerScene.gd",
+		"res://Modules/CellblockModule/Nura/NuraFirstTimeScene.gd",
+		"res://Modules/CellblockModule/Nura/NuraTalkScene.gd",
 		]
 	characters = [
 		"res://Modules/CellblockModule/CheckpointGuardCharacter.gd",
 		"res://Modules/CellblockModule/MaleGuardCanine.gd",
 		"res://Modules/CellblockModule/FemaleGuardFeline.gd",
+		"res://Modules/CellblockModule/Nura/Nura.gd",
 	]
 	items = []
 	events = [
@@ -43,6 +49,8 @@ func _init():
 		"res://Modules/CellblockModule/RandomEncounters/EngineerCaughtOfflimitsEvent.gd",
 		"res://Modules/CellblockModule/PrisonPathShortcutsEvent.gd",
 		"res://Modules/CellblockModule/Fluff/EngineeringLoreComputerEvent.gd",
+		"res://Modules/CellblockModule/Nura/NuraTalkEvent.gd",
+		"res://Modules/CellblockModule/Nura/NuraFindToolEvent.gd",
 	]
 
 func resetFlagsOnNewDay():
