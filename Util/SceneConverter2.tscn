@@ -29,7 +29,7 @@ Hello world, I will outputted as text
 
 ((I’m a comment, I’m invisible in-game))
 
-Example of same-line checks. Player “+(“has a penis” if GM.pc.hasPenis() else “doesn’t have a penis”)+”. Should say \\”has a penis\\” if you have one.
+Example of same-line checks. Player {{“has a penis” if GM.pc.hasPenis() else “doesn’t have a penis”}}. Should say \\”has a penis\\” if you have one.
 
 =pc: Hello, Rahi. I’m talking as player
 

@@ -172,6 +172,8 @@ func _on_Button_pressed():
 			_i += 1
 			continue
 		
+		line = line.replace("{{", '"+str(')
+		line = line.replace("}}", ')+"')
 		addToRun('saynn("'+line+'")\n')
 		_i += 1
 	
