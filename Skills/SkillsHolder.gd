@@ -240,6 +240,15 @@ func canUnlockPerk(perkID):
 		
 	return true
 	
+func canUnlockAnyPerkInSkill(skillID):
+	for perkID in GlobalRegistry.getPerksIDsBySkill(skillID):
+		if(perks.has(perkID)):
+			continue
+		
+		if(canUnlockPerk(perkID)):
+			return true
+	return false
+	
 func getPerkAttacks():
 	var extraAttacks = []
 	

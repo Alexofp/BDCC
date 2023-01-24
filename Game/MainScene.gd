@@ -664,7 +664,8 @@ func _on_Player_levelChanged():
 
 func _on_Player_skillLevelChanged(_skillID):
 	if(GM.ui):
-		GM.ui.makeSkillsButtonFlash()
+		if(GM.pc.getSkillsHolder().canUnlockAnyPerkInSkill(_skillID)):
+			GM.ui.makeSkillsButtonFlash()
 		
 		var skill: SkillBase = GM.pc.getSkillsHolder().getSkill(_skillID)
 		
