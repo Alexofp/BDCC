@@ -61,6 +61,9 @@ func getFlags():
 		"ch3AlexChoice": flag(FlagType.Text), # submit, talk_failed, choked_out, fight
 		"ch3AlexDefeatedHim": flag(FlagType.Bool),
 		"ch3AlexHadSex": flag(FlagType.Bool),
+		"ch3EnteredTransmitter": flag(FlagType.Bool),
+		"Ch3TurnedOffPower": flag(FlagType.Bool),
+		"Ch3SpikedPower": flag(FlagType.Bool),
 	}
 
 func _init():
@@ -95,6 +98,7 @@ func _init():
 		"res://Modules/TaviModule/Chapter3/Ch3s2ControlRoomScene.gd",
 		"res://Modules/TaviModule/Chapter3/Ch3s2AdvancedHackScene.gd",
 		"res://Modules/TaviModule/Chapter3/Ch3s3AlexScene.gd",
+		"res://Modules/TaviModule/Chapter3/Ch3s4TransmitterScene.gd",
 		]
 	characters = []
 	items = []
@@ -119,6 +123,7 @@ func _init():
 		"res://Modules/TaviModule/Chapter3/Ch3TaviTalkAndKaitEvent.gd",
 		"res://Modules/TaviModule/Chapter3/Ch3s2ControlRoomEvent.gd",
 		"res://Modules/TaviModule/Chapter3/Ch3s3AlexEvent.gd",
+		"res://Modules/TaviModule/Chapter3/Ch3s4TransmitterEvent.gd",
 	]
 	quests = [
 		"res://Modules/TaviModule/TaviAppleQuest.gd",
