@@ -33,7 +33,8 @@ func _run():
 		
 		if(inputMode == "keyboard"):
 			say(">")
-			addTextbox("textcommand")
+			var textBox:LineEdit = addTextbox("textcommand")
+			var _ok = textBox.connect("text_entered", self, "onTextBoxEnterPressed")
 			addButtonAt(0, "SEND", "Send the command", "sendkeyboard")
 			addButtonAt(14, "COMMANDS", "Switch to the commands", "buttons")
 		
@@ -98,6 +99,9 @@ func getCurrentCommandString():
 			result.append(currentCommand[_i][0])
 	
 	return Util.join(result, " ")
+
+func onTextBoxEnterPressed(_new_text:String):
+	GM.main.pickOption("sendkeyboard", [])
 
 func _react(_action: String, _args):
 	if(_action == "send"):

@@ -182,7 +182,7 @@ func addButtonWithChecks(text: String, tooltip: String, method: String, args, ch
 		addDisabledButton(text, ButtonChecks.getPrefix(checks) + reasonText +tooltip)
 
 func addTextbox(id):
-	GM.ui.addUITextbox(id)
+	return GM.ui.addUITextbox(id)
 
 func getTextboxData(id):
 	return GM.ui.getUIdata(id)
