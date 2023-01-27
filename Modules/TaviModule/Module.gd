@@ -64,6 +64,10 @@ func getFlags():
 		"ch3EnteredTransmitter": flag(FlagType.Bool),
 		"Ch3TurnedOffPower": flag(FlagType.Bool),
 		"Ch3SpikedPower": flag(FlagType.Bool),
+		"Ch3SurrenderedToNova": flag(FlagType.Bool),
+		"Ch3ProtectedTavi": flag(FlagType.Bool),
+		"Ch3DefeatedByGuard": flag(FlagType.Bool),
+		"Ch3DefeatedNova": flag(FlagType.Bool),
 	}
 
 func _init():
@@ -99,6 +103,7 @@ func _init():
 		"res://Modules/TaviModule/Chapter3/Ch3s2AdvancedHackScene.gd",
 		"res://Modules/TaviModule/Chapter3/Ch3s3AlexScene.gd",
 		"res://Modules/TaviModule/Chapter3/Ch3s4TransmitterScene.gd",
+		"res://Modules/TaviModule/Chapter3/Ch3s5CaptainScene.gd",
 		]
 	characters = []
 	items = []
