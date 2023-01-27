@@ -8,6 +8,8 @@ var currentRun = ""
 var tabAmount = 0
 var reacts = {}
 var sceneID = "TestScene"
+var sceneReacts = {}
+var trackedVariables = {}
 
 func reset():
 	lines = []
@@ -17,6 +19,8 @@ func reset():
 	currentRun = ""
 	tabAmount = 0
 	sceneID = "TestScene"
+	sceneReacts = {}
+	trackedVariables = {}
 
 func setCurrentRun(newcur):
 	currentRun = newcur
@@ -103,7 +107,22 @@ func _on_Button_pressed():
 			#addToRun('')
 			_i += 1
 			continue
+			
+		if(line.begins_with("%var ")):
+			var varStuff = line.substr(5)
+			var splitted = varStuff.split(" ")
+			var variableName = splitted[0]
+			splitted.remove(0)
+			var vairableValue = Util.join(splitted, " ")
+			
+			trackedVariables[variableName] = {
+				value = vairableValue,
+			}
+			_i += 1
+			continue
+			
 		
+		# Npcs saying things
 		if(line.begins_with("=")):
 			var content = line.substr(1)
 			var splittedContent = content.split(":")
@@ -116,8 +135,36 @@ func _on_Button_pressed():
 			_i += 1
 			continue
 		
+		# Code blocks
+		if(line.begins_with("[[[")):
+			var stuff = line.substr(3).strip_edges()
+			
+			var splittedStuff = stuff.split(",")
+			
+			var commandID = splittedStuff[0].strip_edges()
+			splittedStuff.remove(0)
+			
+			var theCode = []
+			_i += 1
+			while(true):
+				var reactlineA = lines[_i]
+				var reactline: String = reactlineA#.strip_edges()
+				
+				if(reactline == "]]]"):
+					_i += 1
+					break
+					
+				theCode.append(reactline)
+				_i += 1
+			
+			if(commandID in ["reactSceneEnd", "onSceneEnd"] && splittedStuff.size() > 0):
+				var theSceneId = splittedStuff[0].strip_edges()
+				sceneReacts[theSceneId] = theCode
+			
+			continue
+		
 		# actions
-		if(line.begins_with("[[")):
+		elif(line.begins_with("[[")):
 			var stuff = line.substr(2).strip_edges()
 			if(stuff.ends_with("]]")):
 				var splittedStuff = stuff.trim_suffix("]]").split(",")
@@ -180,6 +227,13 @@ func _on_Button_pressed():
 	
 	result.append("extends SceneBase")
 	result.append("")
+	
+	if(!trackedVariables.empty()):
+		for variableName in trackedVariables:
+			var varData = trackedVariables[variableName]
+			result.append("var "+str(variableName)+" = "+str(varData["value"]))
+		result.append("")
+	
 	result.append("func _init():")
 	result.append('\tsceneID = "'+sceneID+'"')
 	result.append("")
@@ -209,5 +263,37 @@ func _on_Button_pressed():
 			result.append('')
 	
 	result.append("\tsetState(_action)")
+	result.append("")
+	
+	if(!sceneReacts.empty()):
+		result.append("func _react_scene_end(_tag, _result):")
+		for sceneTag in sceneReacts:
+			result.append('\tif(_tag == "'+str(sceneTag)+'"):')
+				
+			for reactLine in sceneReacts[sceneTag]:
+				result.append('\t\t'+reactLine)
+			result.append("")
+		#result.append("")
+	
+	if(!trackedVariables.empty()):
+		result.append("func saveData():")
+		result.append("\tvar data = .saveData()")
+		result.append("")
+		
+		for variableName in trackedVariables:
+			#var varData = trackedVariables[variableName]
+			result.append("\tdata[\""+str(variableName)+"\"] = "+str(variableName))
+		result.append("")
+		result.append("\treturn data")
+		
+		result.append("")
+		result.append("func loadData(data):")
+		result.append("\t.loadData(data)")
+		result.append("")
+		
+		for variableName in trackedVariables:
+			var varData = trackedVariables[variableName]
+			result.append("\t"+str(variableName)+" = SAVE.loadVar(data, \""+str(variableName)+"\", "+str(varData["value"])+")")
+		result.append("")
 	
 	outputTextEdit.text = Util.join(result, "\n")
