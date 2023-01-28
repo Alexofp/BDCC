@@ -370,7 +370,7 @@ func _react(_action: String, _args):
 	if(_action == "startSolitary"):
 		GM.main.startNewDay()
 		GM.pc.afterSleepingInBed()
-		runScene("Ch4SolitaryScene")
+		runScene("Ch4s1SolitaryScene")
 		endScene()
 		return
 
