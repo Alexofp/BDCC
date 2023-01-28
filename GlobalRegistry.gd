@@ -10,6 +10,7 @@ var currentChildUniqueID = 0
 var currentNPCUniqueID = 0
 
 var scenes: Dictionary = {}
+var temporaryScenes: Dictionary = {}
 var sceneCreators: Dictionary = {}
 var bodyparts: Dictionary = {}
 var characterClasses: Dictionary = {}
@@ -391,16 +392,36 @@ func registerScene(path: String, creator = null):
 	if(creator != null):
 		sceneCreators[sceneObject.sceneID] = creator
 
+func registerTemporaryScene(sceneScript:Script):
+	var sceneObject = sceneScript.new()
+	
+	if(!(sceneObject is SceneBase)):
+		return null
+	
+	var theID = sceneObject.sceneID
+	temporaryScenes[theID] = sceneScript
+	sceneObject.queue_free()
+	return theID
+
+func clearTemporaryScenes():
+	#for sceneID in temporaryScenes.keys():
+	#	temporaryScenes[sceneID].queue_free()
+	temporaryScenes.clear()
+
 func getSceneCreator(id: String):
 	if(!sceneCreators.has(id)):
 		return null
 	return sceneCreators[id]
 
 func createScene(id: String):
-	if(!scenes.has(id)):
+	if(!scenes.has(id) && !temporaryScenes.has(id)):
 		Log.printerr("ERROR: scene with the id "+id+" wasn't found")
 		return null
-	var scene = scenes[id].new()
+	var scene
+	if(temporaryScenes.has(id)):
+		scene = temporaryScenes[id].new()
+	else:
+		scene = scenes[id].new()
 	scene.name = scene.sceneID
 	return scene
 

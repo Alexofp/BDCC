@@ -63,6 +63,11 @@ func setShowLoadButton(m):
 	showLoadButton = m
 	updateButtons()
 
+func setPickMode():
+	$LoadButton.text = "Pick this save"
+	$LoadButton.visible = true
+	$ExportButton.visible = false
+	$DeleteButton.visible = false
 
 func _on_ExportButton_pressed():
 	emit_signal("onExportButtonPressed", saveFile)

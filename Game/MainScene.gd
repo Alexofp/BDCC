@@ -1,4 +1,4 @@
-extends Node
+extends Control
 class_name MainScene
 
 onready var gameUI = $GameUI
@@ -19,6 +19,7 @@ var roomMemories = {}
 var lootedRooms = {}
 var rollbacker:Rollbacker
 var encounterSettings:EncounterSettings
+var currentlyTestingScene = false
 
 var staticCharacters = {}
 var charactersToUpdate = {}
@@ -250,6 +251,11 @@ func endCurrentScene():
 	var currentScene = getCurrentScene()
 	if(currentScene != null):
 		currentScene.endScene()
+
+func clearSceneStack():
+	for scene in sceneStack:
+		scene.queue_free()
+	sceneStack = []
 
 func _on_GameUI_on_option_button(method, args):
 	pickOption(method, args)
@@ -1044,3 +1050,9 @@ func isRoomLooted(roomID):
 
 func consoleAnimationEditor():
 	playAnimation(StageScene.SoloEditable, "stand")
+
+func setIsTestingScene(newtest):
+	currentlyTestingScene = newtest
+
+func isTestingScene():
+	return currentlyTestingScene

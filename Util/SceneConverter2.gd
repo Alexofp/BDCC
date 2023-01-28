@@ -11,6 +11,13 @@ var sceneID = "TestScene"
 var sceneReacts = {}
 var trackedVariables = {}
 
+var theGame:MainScene
+var testingScene = false
+var pickedSavePath = null
+
+onready var savesContainer = $SavesMenu/ScrollContainer/SavesContainer
+var saveGameElemenetScene = preload("res://UI/MainMenu/SaveGameElement.tscn")
+
 func reset():
 	lines = []
 	reacts = {}
@@ -297,3 +304,82 @@ func _on_Button_pressed():
 		result.append("")
 	
 	outputTextEdit.text = Util.join(result, "\n")
+
+
+func _on_TestButton_pressed():
+	if(testingScene):
+		return
+	
+	var newScript:GDScript = GDScript.new()
+	newScript.source_code = outputTextEdit.text
+	var _error = newScript.reload()
+	if(_error != OK):
+		$ErrorDialog.dialog_text = "There is an error in your scene's code somewhere"
+		$ErrorDialog.show()
+		return
+		
+	var newSceneID = GlobalRegistry.registerTemporaryScene(newScript)
+	if(newSceneID == null):
+		$ErrorDialog.dialog_text = "Unable to register test scene\nDoes scene inherit SceneBase?"
+		$ErrorDialog.show()
+		return
+	
+	$StopTestingButton.visible = true
+	$GameSpotControl.visible = true
+	$VBoxContainer.visible = false
+	testingScene = true
+	theGame = preload("res://Game/MainScene.tscn").instance()
+	$GameSpotControl.add_child(theGame)
+	theGame.setIsTestingScene(true)
+	if(pickedSavePath != null):
+		SAVE.loadGame(pickedSavePath)
+	theGame.clearSceneStack()
+	theGame.runScene(newSceneID)
+	theGame.runCurrentScene()
+
+
+func _on_StopTestingButton_pressed():
+	if(!testingScene):
+		return
+	
+	
+	$StopTestingButton.visible = false
+	$GameSpotControl.visible = false
+	if(theGame):
+		theGame.queue_free()
+		theGame = null
+	
+	GlobalRegistry.clearTemporaryScenes()
+	
+	$VBoxContainer.visible = true
+	testingScene = false
+
+func updateSaves():
+	Util.delete_children(savesContainer)
+	
+	var savesPaths = SAVE.getSavesSortedByDate()
+	
+	for savePath in savesPaths:
+		var saveGameElementObject = saveGameElemenetScene.instance()
+		savesContainer.add_child(saveGameElementObject)
+		saveGameElementObject.setSaveFile(savePath)
+		saveGameElementObject.connect("onLoadButtonPressed", self, "onSaveLoadButtonClicked")
+		saveGameElementObject.setDeleteMode(false)
+		saveGameElementObject.setPickMode()
+
+func onSaveLoadButtonClicked(savePath):
+	pickedSavePath = savePath
+	$SavesMenu.visible = false
+	$VBoxContainer.visible = true
+	$VBoxContainer/HBoxContainer/PickSaveButton.text = pickedSavePath.get_file()
+
+
+func _on_PickSaveButton_pressed():
+	$SavesMenu.visible = true
+	$VBoxContainer.visible = false
+	updateSaves()
+
+
+func _on_SavesBackButton_pressed():
+	$SavesMenu.visible = false
+	$VBoxContainer.visible = true
