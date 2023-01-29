@@ -401,6 +401,12 @@ func setSpecies(species: Array):
 	emit_signal("stat_changed")
 
 func resetBodypartsToDefault():
+	resetBodypartsToDefaultFor(getSpecies())
+	
+func resetBodypartsToDefaultFor(speciesIds):
+	if(speciesIds is String):
+		speciesIds = [speciesIds]
+	
 	var newgender = getGender()
 	if(newgender == Gender.Male):
 		pickedFemininity = 0
@@ -409,7 +415,7 @@ func resetBodypartsToDefault():
 	if(newgender == Gender.Androgynous || newgender == Gender.Other):
 		pickedFemininity = 50
 	
-	var speciesIds = getSpecies()
+	#var speciesIds = getSpecies()
 	var myspecies = []
 	for specieID in speciesIds:
 		myspecies.append(GlobalRegistry.getSpecies(specieID))

@@ -251,6 +251,9 @@ func afterFightEnded():
 func isPlayer():
 	return false
 
+func isOverriddenPlayer():
+	return false
+
 func _getAttacks():
 	return ["blunderAttack"]
 	
@@ -743,6 +746,10 @@ func resetSlots():
 	processingBodyparts.clear()
 
 func giveBodypart(bodypart: Bodypart, emitSignal = true):
+	if(bodypart == null):
+		Log.printerr("Trying to give a null bodypart to "+str(self))
+		return
+	
 	var slot = bodypart.getSlot()
 	if(bodyparts.has(slot) && bodyparts[slot] != null):
 		removeBodypart(slot, false)

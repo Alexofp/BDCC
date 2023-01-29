@@ -12,7 +12,8 @@ var timeOfDay = 6*60*60 # seconds since 00:00
 var flags = {}
 var flagsCache = null
 var moduleFlags = {}
-var playerScene = preload("res://Player/Player.tscn")
+var playerScene = preload("res://Player/Player.gd")
+var overriddenPlayerScene = preload("res://Player/OverriddenPlayer.gd")
 var overridenPC
 var originalPC
 var roomMemories = {}
@@ -41,7 +42,7 @@ func overridePC():
 	
 	Util.remove_all_signals(originalPC)
 			
-	var newpc = playerScene.instance()
+	var newpc = overriddenPlayerScene.new()
 	overridenPC = newpc
 	GM.pc = newpc
 	connectSignalsToPC(newpc)
@@ -182,7 +183,7 @@ func getDynamicCharactersPools():
 func _ready():
 	createStaticCharacters()
 	
-	var pc = playerScene.instance()
+	var pc = playerScene.new()
 	originalPC = pc
 	GM.pc = pc
 	connectSignalsToPC(pc)
@@ -732,6 +733,10 @@ func clearLog():
 func playAnimation(sceneID, actionID, args = {}):
 	if(GM.ui != null):
 		GM.ui.getStage3d().play(sceneID, actionID, args)
+
+func playAnimationForceReset(sceneID, actionID, args = {}):
+	if(GM.ui != null):
+		GM.ui.getStage3d().play(sceneID, actionID, args, false, true)
 
 func updateSubAnims():
 	if(GM.ui != null):

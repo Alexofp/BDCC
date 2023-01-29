@@ -654,6 +654,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Player/Orifice/OrificeType.gd"
 }, {
+"base": "Player",
+"class": "OverriddenPlayer",
+"language": "GDScript",
+"path": "res://Player/OverriddenPlayer.gd"
+}, {
 "base": "ItemState",
 "class": "PantiesState",
 "language": "GDScript",
@@ -1154,6 +1159,7 @@ _global_script_class_icons={
 "NurseGenerator": "",
 "Orifice": "",
 "OrificeType": "",
+"OverriddenPlayer": "",
 "PantiesState": "",
 "PartState": "",
 "PartStatePicker": "",

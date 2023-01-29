@@ -268,6 +268,10 @@ func playAnimation(theSceneID, theActionID, args = {}):
 	if(GM.main != null):
 		GM.main.playAnimation(theSceneID, theActionID, args)
 
+func playAnimationForceReset(theSceneID, theActionID, args = {}):
+	if(GM.main != null):
+		GM.main.playAnimationForceReset(theSceneID, theActionID, args)
+
 func saveData():
 	var data = {}
 	data["state"] = state

@@ -23,7 +23,7 @@ text = "sceneID=MeowScene
 
 ! addCharacter(“rahi”)
 ! playAnimation(StageScene.Duo, “stand”, {npc=”rahi”})
-Hello world, I will outputted as text
+Hello world, I will be outputted as text
 
 ((I’m a comment, I’m invisible in-game))
 
