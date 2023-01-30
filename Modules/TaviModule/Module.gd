@@ -105,8 +105,12 @@ func _init():
 		"res://Modules/TaviModule/Chapter3/Ch3s4TransmitterScene.gd",
 		"res://Modules/TaviModule/Chapter3/Ch3s5CaptainScene.gd",
 		"res://Modules/TaviModule/Chapter4/Ch4s1SolitaryScene.gd",
+		"res://Modules/TaviModule/Chapter4/Ch4s2TaviFlashbackIntroScene.gd",
 		]
-	characters = []
+	characters = [
+		"res://Modules/TaviModule/Chapter4/DirectorTau.gd",
+		"res://Modules/TaviModule/Chapter4/JaxonTau.gd",
+	]
 	items = []
 	events = [
 		"res://Modules/TaviModule/TaviTalkEvent.gd",

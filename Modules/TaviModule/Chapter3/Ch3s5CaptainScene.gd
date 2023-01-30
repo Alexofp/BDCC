@@ -365,6 +365,7 @@ func _react(_action: String, _args):
 
 	if(_action == "nova_fight"):
 		runScene("FightScene", ["novaArena"], "nova_fight")
+		getCharacter("novaArena").addPain(5)
 		return
 
 	if(_action == "startSolitary"):

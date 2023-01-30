@@ -1,19 +1,17 @@
 extends Character
 
 func _init():
-	id = "elena"
-	
+	id = "jaxontau"
 	npcCharacterType = CharacterType.Generic
 	
 func _getName():
-	return "E.L.E.N.A."
-	#Experimental Learning and Evolving Neural Algorithm
+	return "Jaxon"
 
 func getGender():
-	return Gender.Other
+	return Gender.Male
 	
 func getSmallDescription() -> String:
-	return "A hologram of a cute girl."
+	return "One of the guards of the research space station 'Exodus'"
 
 func getSpecies():
 	return ["human"]
@@ -22,18 +20,18 @@ func getThickness() -> int:
 	return 50
 
 func getFemininity() -> int:
-	return 50
+	return 0
 
 func createBodyparts():
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("humanhead"))
-	giveBodypartUnlessSame(GlobalRegistry.createBodypart("overeyehair2"))
+	giveBodypartUnlessSame(GlobalRegistry.createBodypart("humanears"))
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("anthrobody"))
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("anthroarms"))
-	var breasts = GlobalRegistry.createBodypart("humanbreasts")
-	breasts.size = 3
+	var breasts = GlobalRegistry.createBodypart("malebreasts")
+	breasts.size = -1
 	giveBodypartUnlessSame(breasts)
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("plantilegs"))
-	giveBodypartUnlessSame(GlobalRegistry.createBodypart("humanears"))
+	giveBodypartUnlessSame(GlobalRegistry.createBodypart("shorthair"))
 
 func createEquipment():
-	getInventory().equipItem(GlobalRegistry.createItemNoID("AndroidSuit"))
+	getInventory().equipItem(GlobalRegistry.createItemNoID("GuardArmor"))
