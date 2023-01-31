@@ -110,6 +110,7 @@ func _init():
 	characters = [
 		"res://Modules/TaviModule/Chapter4/DirectorTau.gd",
 		"res://Modules/TaviModule/Chapter4/JaxonTau.gd",
+		"res://Modules/TaviModule/Chapter4/RishaTau.gd",
 	]
 	items = []
 	events = [

@@ -229,9 +229,21 @@ func _run():
 		playAnimation(StageScene.Duo, "stand", {npc="jaxontau"})
 		saynn("[say=pc]Anything planned for today?[/say]")
 
-		saynn("[say=elena]It seems the director is coming back. Look official.[/say]")
+		saynn("[say=elena]You should start by taking your pills.[/say]")
 
-		saynn("You straighten your posture and stand in the middle of the room. Your paws quickly fix your hair to one side. Elena vanishes as soon as the airlock opens, revealing the guard and the director just behind him.")
+		saynn("The hologram produces a pill bottle and offers it to you. You grab it and fidget under Elena's strict watch.")
+
+		saynn("[say=pc]Right, pills..[/say]")
+
+		saynn("You grab one and hold it near your mouth, hesitating.")
+
+		saynn("[say=elena]It's important for you to take them every day, remember? To keep your health in check.[/say]")
+
+		saynn("You can't do anything else but to nod and put the capsule onto your tongue. Suddenly the hologram turns away from you towards the door.")
+
+		saynn("[say=elena]The director is coming back. Look official.[/say]")
+
+		saynn("You spit the pill out while Elena isn't looking. Then you straighten your posture and stand in the middle of the room. Your paws quickly fix your hair to one side. Elena vanishes as soon as the airlock opens, revealing the guard and the director just behind him.")
 
 		saynn("[say=jaxontau]Hey, Tavi. The director here wants to look at your fighting skills.[/say]")
 
@@ -239,7 +251,9 @@ func _run():
 
 		saynn("[say=jaxontau]I wanna arrange a little sparring match between you and Risha.[/say]")
 
-		saynn("[say=pc]Lead the way, Jaxon.[/say]")
+		saynn("You offer him a kind smile.")
+
+		saynn("[say=pc]Well, lead the way then, Jaxon.[/say]")
 
 		saynn("You walk out of your room. While stepping past the director you can't help but to notice him eyeing you out. Makes you clench inside.")
 
@@ -249,13 +263,13 @@ func _run():
 		aimCameraAndSetLocName("taviflashback_nearalien")
 		saynn("You don't get to leave your room very often so any opportunity like this is nice. Real world training beats VR any day of the week.")
 
-		saynn("You follow Jaxon but your focus is mostly on the director. You're not staring at him but just give him careful glances. The guy is old, his beard is about to start turning gray any year now you feel. His clothing lacks anything that can help you identify him. But your trained eye quickly spots a gun on him.")
+		saynn("You follow Jaxon but your focus is mostly on the director. You're not staring at him but just give him careful glances. The guy is old, his beard is about to start turning gray any year now you feel. His clothing lacks anything that can help you identify him. But your trained eye quickly spots a gun on him, under his belt.")
 
 		saynn("As you walk past someone else's room you get startled by a sudden attack! A liquid-like black goo pounces at the glass of its chamber, creating a loud noise. Luckily, the glass is thick enough to withstand such attacks, the alien creature is kept securely behind the reinforced window. You put a paw on your chest and start to pant.")
 
 		saynn("[say=pc]What the heck is that?[/say]")
 
-		saynn("[say=jaxontau]Oh, right. That's one of the latest experiments. It's a lab-created parasite. Seems to be almost completely self sufficient by itself, doesn't even require air. Maybe it will be useful on the battlefield, the scientists are looking into its unique properties.[/say]")
+		saynn("[say=jaxontau]Oh, right. That's one of the latest experiments. It's a lab-created parasite. Seems to be almost completely self sufficient by itself, doesn't even require air. It might be useful on the battlefield, the scientists are looking into its unique properties.[/say]")
 
 		saynn("The alien parasite continues to bash the window.")
 
@@ -268,6 +282,40 @@ func _run():
 		addButton("Continue", "See what happens next", "enter_risharoom")
 	if(state == "enter_risharoom"):
 		removeCharacter("latexParasite")
+		addCharacter("rishatau")
+		playAnimation(StageScene.Duo, "stand", {npc="rishatau"})
+		aimCameraAndSetLocName("tau_risharoom")
+		saynn("This room could have fooled you. Because it looks exactly like yours. Apart from the bed being left undone. Near it is Risha doing crunches, being all sweaty and stuff. She hears the door to her room opening and quickly gets up.")
+
+		saynn("[say=rishatau]Oh. Hi Tavi, hi Jaxon. Hello, old guy.[/say]")
+
+		saynn("You offer her a friendly wave. The director frowns slightly but quickly lets go of his feelings, just leaning against the cold glass window and watching you all.")
+
+		saynn("[say=jaxontau]That's the director, Risha. He wants to see how you two fight.[/say]")
+
+		saynn("Risha chuckles as she flexes her arms. She is wearing the same skin-tight leotard as you, it emphasizes her well-defined muscle structure. Her crotch also spots an obvious bulge but that's beside the point.")
+
+		saynn("[say=rishatau]My bad, director. You're not that old. Sure, I like a good brawl, keeps the blood flowin'.[/say]")
+
+		saynn("[say=jaxontau]Not so fast, Risha.[/say]")
+
+		saynn("Jaxon produces 2 weapons, they look like energy pistols. He tosses one of them to you and one to Risha.")
+
+		saynn("[say=jaxontau]These have their power dialed down a lot but they still gonna hurt.[/say]")
+
+		saynn("[say=rishatau]Guns, huh. I prefer a more hands-on approach. Makes it more intimate.[/say]")
+
+		saynn("[say=pc]We're not in a bedroom, Risha.[/say]")
+
+		saynn("The lynx giggles as she takes her spot near one of the walls. You take the spot opposite of hers.")
+
+		saynn("[say=rishatau]Any room can be a bedroom if you're brave enough.[/say]")
+
+		saynn("You roll your eyes while Risha winks at you.")
+
+		saynn("[say=jaxontau]Alright, we fight until one of you surrenders. Give us a good show.[/say]")
+
+		addButton("Fight", "See what happens next", "start_risha_fight")
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
@@ -293,6 +341,11 @@ func _react(_action: String, _args):
 
 	if(_action == "read_datapad"):
 		readDatapad = true
+
+	if(_action == "start_risha_fight"):
+		runScene("Ch4s3RishaFightScene")
+		endScene()
+		return
 
 	setState(_action)
 

@@ -90,6 +90,8 @@ roomSprite = 7
 
 [node name="TaviFlashRoom16" parent="." index="15" instance=ExtResource( 1 )]
 position = Vector2( -256, 0 )
+roomName = "Risha's room"
+roomID = "tau_risharoom"
 canNorth = false
 
 [node name="TaviFlashRoom17" parent="." index="16" instance=ExtResource( 1 )]
