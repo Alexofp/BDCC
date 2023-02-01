@@ -30,6 +30,7 @@ roomID = "taviroom_bed"
 [node name="TaviFlashRoom5" parent="." index="4" instance=ExtResource( 1 )]
 self_modulate = Color( 0.7, 0.7, 0.7, 1 )
 position = Vector2( -64, 0 )
+roomID = "taviroom_near"
 canEast = false
 roomColor = 8
 gridColor = 7
