@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=34 format=2]
 
 [ext_resource path="res://Player/StageScene3D/BaseStageScene3D.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Player/Props/Stocks.png" type="Texture" id=2]
@@ -8,6 +8,9 @@
 
 [sub_resource type="AnimationNodeAnimation" id=140]
 animation = "StocksSexFast_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=155]
+animation = "StocksSexTease_1-loop"
 
 [sub_resource type="AnimationNodeAnimation" id=126]
 animation = "StocksSexTease_1-loop"
@@ -27,16 +30,24 @@ xfade_time = 0.5
 [sub_resource type="AnimationNodeStateMachineTransition" id=142]
 xfade_time = 0.5
 
+[sub_resource type="AnimationNodeStateMachineTransition" id=156]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=157]
+xfade_time = 0.5
+
 [sub_resource type="AnimationNodeStateMachine" id=130]
 states/StocksSexFast_1-loop/node = SubResource( 140 )
 states/StocksSexFast_1-loop/position = Vector2( 415, 329 )
+states/StocksSexPussy_1-loop/node = SubResource( 155 )
+states/StocksSexPussy_1-loop/position = Vector2( 672, 206 )
 states/StocksSexTease_1-loop/node = SubResource( 126 )
 states/StocksSexTease_1-loop/position = Vector2( 426, 134 )
 states/StocksSex_1-loop/node = SubResource( 127 )
 states/StocksSex_1-loop/position = Vector2( 410, 237 )
-transitions = [ "StocksSexTease_1-loop", "StocksSex_1-loop", SubResource( 128 ), "StocksSex_1-loop", "StocksSexTease_1-loop", SubResource( 129 ), "StocksSex_1-loop", "StocksSexFast_1-loop", SubResource( 141 ), "StocksSexFast_1-loop", "StocksSex_1-loop", SubResource( 142 ) ]
+transitions = [ "StocksSexTease_1-loop", "StocksSex_1-loop", SubResource( 128 ), "StocksSex_1-loop", "StocksSexTease_1-loop", SubResource( 129 ), "StocksSex_1-loop", "StocksSexFast_1-loop", SubResource( 141 ), "StocksSexFast_1-loop", "StocksSex_1-loop", SubResource( 142 ), "StocksSexTease_1-loop", "StocksSexPussy_1-loop", SubResource( 156 ), "StocksSexPussy_1-loop", "StocksSexTease_1-loop", SubResource( 157 ) ]
 start_node = "StocksSexTease_1-loop"
-graph_offset = Vector2( -41, 149 )
+graph_offset = Vector2( -3, 40 )
 
 [sub_resource type="AnimationNodeBlendTree" id=131]
 graph_offset = Vector2( -52.1809, -25.7463 )
@@ -57,6 +68,9 @@ filters = [ "Doll3D/Skeleton:Arm.L", "Doll3D/Skeleton:Arm.R", "Doll3D/Skeleton:F
 [sub_resource type="AnimationNodeAnimation" id=143]
 animation = "StocksSexFast_3-loop"
 
+[sub_resource type="AnimationNodeAnimation" id=152]
+animation = "StocksSexPussy_3-loop"
+
 [sub_resource type="AnimationNodeAnimation" id=144]
 animation = "StocksSexTease_3-loop"
 
@@ -75,15 +89,24 @@ xfade_time = 0.5
 [sub_resource type="AnimationNodeStateMachineTransition" id=149]
 xfade_time = 0.5
 
+[sub_resource type="AnimationNodeStateMachineTransition" id=153]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=154]
+xfade_time = 0.5
+
 [sub_resource type="AnimationNodeStateMachine" id=150]
 states/StocksSexFast_3-loop/node = SubResource( 143 )
 states/StocksSexFast_3-loop/position = Vector2( 462, 198 )
+states/StocksSexPussy_3-loop/node = SubResource( 152 )
+states/StocksSexPussy_3-loop/position = Vector2( 730, 115 )
 states/StocksSexTease_3-loop/node = SubResource( 144 )
 states/StocksSexTease_3-loop/position = Vector2( 462, 54 )
 states/StocksSex_3-loop/node = SubResource( 145 )
 states/StocksSex_3-loop/position = Vector2( 462, 126 )
-transitions = [ "StocksSexTease_3-loop", "StocksSex_3-loop", SubResource( 146 ), "StocksSex_3-loop", "StocksSexTease_3-loop", SubResource( 147 ), "StocksSex_3-loop", "StocksSexFast_3-loop", SubResource( 148 ), "StocksSexFast_3-loop", "StocksSex_3-loop", SubResource( 149 ) ]
+transitions = [ "StocksSexTease_3-loop", "StocksSex_3-loop", SubResource( 146 ), "StocksSex_3-loop", "StocksSexTease_3-loop", SubResource( 147 ), "StocksSex_3-loop", "StocksSexFast_3-loop", SubResource( 148 ), "StocksSexFast_3-loop", "StocksSex_3-loop", SubResource( 149 ), "StocksSexTease_3-loop", "StocksSexPussy_3-loop", SubResource( 153 ), "StocksSexPussy_3-loop", "StocksSexTease_3-loop", SubResource( 154 ) ]
 start_node = "StocksSexTease_3-loop"
+graph_offset = Vector2( 2, -91 )
 
 [sub_resource type="AnimationNodeBlendTree" id=151]
 graph_offset = Vector2( -286.532, 70.6842 )

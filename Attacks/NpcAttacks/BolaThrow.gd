@@ -35,5 +35,8 @@ func _canUse(_attacker, _receiver, _context = {}):
 func getAnticipationText(_attacker, _receiver):
 	return "{attacker.name} throws a bola at {receiver.name}’s feet!"
 
+func getAttackSoloAnimation():
+	return "throw"
+
 func getRequirements():
 	return [AttackRequirement.FreeArms, AttackRequirement.FreeHands]

@@ -740,14 +740,20 @@ func getAnimation():
 	if(getSub().hasBoundArms() || subInfo.isUnconscious()):
 		if(state in [""]):
 			return [StageScene.SexAllFours, "teaseflop", {pc=domID, npc=subID}]
+		if(state in ["aftercumminginside", "knotting"]):
+			return [StageScene.SexAllFours, "insideflop", {pc=domID, npc=subID}]
 		if(domInfo.isCloseToCumming() || (isStraponSex() && subInfo.isCloseToCumming())):
 			return [StageScene.SexAllFours, "fastflop", {pc=domID, npc=subID}]
+			
 		return [StageScene.SexAllFours, "sexflop", {pc=domID, npc=subID}]
 	else:
 		if(state in [""]):
 			return [StageScene.SexAllFours, "tease", {pc=domID, npc=subID}]
+		if(state in ["aftercumminginside", "knotting"]):
+			return [StageScene.SexAllFours, "inside", {pc=domID, npc=subID}]
 		if(domInfo.isCloseToCumming() || (isStraponSex() && subInfo.isCloseToCumming())):
 			return [StageScene.SexAllFours, "fast", {pc=domID, npc=subID}]
+			
 		return [StageScene.SexAllFours, "sex", {pc=domID, npc=subID}]
 
 func getDomCondom():

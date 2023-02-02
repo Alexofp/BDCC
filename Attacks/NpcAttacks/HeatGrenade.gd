@@ -31,5 +31,8 @@ func _canUse(_attacker, _receiver, _context = {}):
 func getAnticipationText(_attacker, _receiver):
 	return "{attacker.name} pulls out some kind of grenade and pulls the pin. Then {attacker.he} throws it in your direction. You see a [b]pink smoke[/b] trail following it in the air!"
 
+func getAttackSoloAnimation():
+	return "throw"
+
 func getRequirements():
 	return [AttackRequirement.FreeArms, AttackRequirement.FreeHands]

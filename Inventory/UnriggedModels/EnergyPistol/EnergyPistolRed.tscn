@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Inventory/UnriggedModels/EnergyPistol/EnergyPistolRed.png" type="Texture" id=1]
+
+[node name="EnergyPistolBlue" type="Spatial"]
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform( -2.62268e-08, -0.6, 0, 0.6, -2.62268e-08, 0, 0, 0, 0.6, -0.0292215, -0.285868, -0.108381 )
+texture = ExtResource( 1 )

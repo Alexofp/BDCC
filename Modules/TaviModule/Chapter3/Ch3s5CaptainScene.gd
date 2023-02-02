@@ -305,7 +305,7 @@ func _run():
 		addButton("Fight", "Start the fight", "nova_fight")
 	if(state == "won_nova"):
 		setFlag("TaviModule.Ch3DefeatedNova", true)
-		playAnimation(StageScene.Duo, "defeat", {npc="captain"})
+		playAnimation(StageScene.Duo, "defeat", {npc="captain", npcAction="firepistol"})
 		saynn("Nova kneels before you. Before she can react you grab her stun stick and smack her. The armor absorbs some of the shock but not everything, the husky grunts.")
 
 		saynn("[say=pc]This is for what you did to Tavi.[/say]")

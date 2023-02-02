@@ -8,7 +8,7 @@ func _run():
 		addCharacter("rishatau")
 		addCharacter("jaxontau")
 		addCharacter("directortau")
-		playAnimation(StageScene.Duo, "stand", {npc="rishatau"})
+		playAnimation(StageScene.Duo, "holdpistol", {npc="rishatau"})
 		saynn("You stand opposite of Risha, a few meters away from her. She smiles at you. And so you smile back, tightly gripping your training energy pistol.")
 
 		saynn("Suddenly Risha lunges forward at you, like a bull, sticking her powerful shoulder forward.")
@@ -46,7 +46,7 @@ func _run():
 		addButton("Disarm her", "She stands awfully close to you", "st2_gun")
 		addButton("Make her trip", "Use your legs", "st2_trip")
 	if(state == "st2_gun"):
-		playAnimation(StageScene.Duo, "stand", {npc="rishatau"})
+		playAnimation(StageScene.Duo, "firepistol", {npc="rishatau"})
 		saynn("You expect her to shoot. And that makes it easier to react. As soon as you see Risha's finger tightening around the trigger, you dodge to the side and then reach forward, slapping her hand and stealing her gun. Only the tip of your ear got slightly scorched by her shot, leaving a slight burn mark.")
 
 		saynn("Risha growls and tries to grab you but you are faster, aiming her own gun at her and shooting the lynx right in the chest. Risha hisses and recoils away while her leotard receives a little hole.")
@@ -60,6 +60,7 @@ func _run():
 		addButton("Aim at chest", "Aim at the center of mass", "st3_aimchest")
 		addButton("Aim at legs", "Aim at Risha's legs", "st3_aimlegs")
 	if(state == "st3_aimchest"):
+		playAnimation(StageScene.Duo, "firepistol", {npc="rishatau", npcAction="shove"})
 		saynn("You aim the gun at Risha. She sees that instantly dashes towards you again while blocking with her powerful arms. You shoot once and hit one of her wrists. Sadly, that wasn't enough to stop her.")
 
 		saynn("Risha grunts but she was fast enough to grab you by the neck. She quickly tightens her grip, making breathing harder and causing you to drop your gun. She glares at you while shaking her free hand, the one that got damaged.")
@@ -103,6 +104,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "tavi_gonna_lose")
 	if(state == "st3_aimlegs"):
+		playAnimation(StageScene.Duo, "firepistol", {npc="rishatau", npcAction="defeat"})
 		saynn("You aim the gun at Risha. She sees that instantly dashes towards you again while blocking with her powerful arms. But instead of her chest, you aim for her legs. And so your first shot causes Risha to hit the floor.")
 
 		saynn("Risha grunts and rubs her little burn mark near her ankle.")
@@ -116,7 +118,7 @@ func _run():
 		addButton("Aim at her", "Make Risha regret it", "st4_shootrisha")
 		addButton("Aim at gun", "Shoot the gun away from her", "st4_shootgun")
 	if(state == "st4_shootrisha"):
-		playAnimation(StageScene.Duo, "stand", {npc="rishatau", npcAction="kneel"})
+		playAnimation(StageScene.Duo, "firepistol", {npc="rishatau", npcAction="kneel"})
 		saynn("You agree with the guy and pull the trigger a few more times. One weak energy energy blast hits Risha's arm, another one hits her back. The lynx stops trying to reach for the gun and raises her hands.")
 
 		saynn("[say=rishatau]Fine.. I give up.[/say]")
@@ -129,7 +131,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "tavi_gonna_lose")
 	if(state == "st4_shootgun"):
-		playAnimation(StageScene.Duo, "stand", {npc="rishatau", npcAction="kneel"})
+		playAnimation(StageScene.Duo, "firepistol", {npc="rishatau", npcAction="kneel"})
 		saynn("You decide to spare the lynx from more pain and instead aim for the gun. One highly-precise shot sends the gun flying away from Risha. She grumbles. And since there is nothing else she can do, Risha raises her hands.")
 
 		saynn("[say=rishatau]Fine.. I give up.[/say]")
@@ -171,7 +173,7 @@ func _run():
 		addButton("Throw gun", "Throw the gun at Risha", "st4_throwgun")
 		addButton("Kick", "Risha seems weak enough for you to just kick her", "st4_finishingkick")
 	if(state == "st4_throwgun"):
-		playAnimation(StageScene.Duo, "stand", {npc="rishatau", npcAction="defeat"})
+		playAnimation(StageScene.Duo, "throw", {npc="rishatau", npcAction="defeat"})
 		saynn("You see that the weapon needs some cooling before it can fire again. You obviously have no time for that so you just throw the thing at Risha, aiming for her head. The lynx didn't see it coming.")
 
 		saynn("Bonk.")
@@ -186,7 +188,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "tavi_gonna_lose")
 	if(state == "st4_finishingkick"):
-		playAnimation(StageScene.Duo, "stand", {npc="rishatau", npcAction="defeat"})
+		playAnimation(StageScene.Duo, "kick", {npc="rishatau", npcAction="defeat"})
 		saynn("The last shot wasn't enough. And the gun is all out of juice. But Risha also doesn't seem to be that threatening now. You get a good run-up and jump before shoving both of your legs into the lynx's chest, executing a perfect dropkick.")
 
 		saynn("Risha grunts as she recoils back and falls to her knees, seemingly defeated by your stunt. Your kick forced all the air out of her lungs, making her pant heavily. All the while you quickly get up off the floor and go find another gun.")
@@ -224,7 +226,7 @@ func _run():
 		addButton("Kick crotch", "Make it sting hard", "s4_kickcrotchtease")
 		addButton("Grab gun", "Rush for the gun while Risha is confused", "s4_grabguntease")
 	if(state == "s4_kickcrotchtease"):
-		playAnimation(StageScene.Duo, "stand", {npc="rishatau", npcAction="defeat"})
+		playAnimation(StageScene.Duo, "kick", {npc="rishatau", npcAction="defeat"})
 		saynn("Your paws slide back to Risha's breasts before catching on to her hard nips with your claws. And as soon as the lynx directs her attention back at you to complain, you shove your knee between her legs, causing a huge spike of pain for the poor cat.")
 
 		saynn("[say=rishatau]You litt-.. fuck..[/say]")
@@ -245,7 +247,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "tavi_gonna_lose")
 	if(state == "s4_grabguntease"):
-		playAnimation(StageScene.Duo, "stand", {npc="rishatau", npcAction="kneel"})
+		playAnimation(StageScene.Duo, "aimpistol", {npc="rishatau", npcAction="kneel"})
 		saynn("You take the chance and shove Risha away before diving for the energy gun on the floor. The lynx stumbles and falls onto her bed before you aim the gun at her. The cat quickly understands that she is screwed if she moves.")
 
 		saynn("[say=rishatau]Fuck. You lied. Such a buzzkill.[/say]")

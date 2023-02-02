@@ -71,6 +71,32 @@ func stateMachineTravel(thedoll, state_machine, animID):
 		else:
 			thedoll.attachTemporaryUnriggedPart("hand.R", "res://Inventory/UnriggedModels/StunBaton/StunBaton.tscn")
 		thedoll.setTemporaryState("hands", "fists")
+	elif(animID == "throw"):
+		state_machine.travel("WeaponThrow")
+		if(args.size() > 1):
+			thedoll.attachTemporaryUnriggedPart("hand.R", args[1])
+		thedoll.setTemporaryState("hands", "fists")
+	elif(animID == "holdpistol"):
+		state_machine.travel("WeaponGunHold-loop")
+		if(args.size() > 1):
+			thedoll.attachTemporaryUnriggedPart("hand.L", args[1])
+		else:
+			thedoll.attachTemporaryUnriggedPart("hand.L", "res://Inventory/UnriggedModels/EnergyPistol/EnergyPistolBlue.tscn")
+		thedoll.setTemporaryState("hands", "fists")
+	elif(animID == "aimpistol"):
+		state_machine.travel("WeaponGunAim-loop")
+		if(args.size() > 1):
+			thedoll.attachTemporaryUnriggedPart("hand.L", args[1])
+		else:
+			thedoll.attachTemporaryUnriggedPart("hand.L", "res://Inventory/UnriggedModels/EnergyPistol/EnergyPistolBlue.tscn")
+		thedoll.setTemporaryState("hands", "fists")
+	elif(animID == "firepistol"):
+		state_machine.travel("WeaponGunShoot")
+		if(args.size() > 1):
+			thedoll.attachTemporaryUnriggedPart("hand.L", args[1])
+		else:
+			thedoll.attachTemporaryUnriggedPart("hand.L", "res://Inventory/UnriggedModels/EnergyPistol/EnergyPistolBlue.tscn")
+		thedoll.setTemporaryState("hands", "fists")
 	elif(animID == "shiv"):
 		state_machine.travel("WeaponShiv")
 		if(args.size() > 1):

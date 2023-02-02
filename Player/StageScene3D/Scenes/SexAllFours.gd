@@ -64,6 +64,12 @@ func playAnimation(animID, _args = {}):
 	if(animID == "teaseflop"):
 		state_machine.travel("Sex_DoggyFlopTease_1-loop")
 		state_machine2.travel("Sex_DoggyFlopTease_2-loop")
+	if(animID == "inside"):
+		state_machine.travel("Sex_DoggyInside_1-loop")
+		state_machine2.travel("Sex_DoggyInside_2-loop")
+	if(animID == "insideflop"):
+		state_machine.travel("Sex_DoggyFlopInside_1-loop")
+		state_machine2.travel("Sex_DoggyFlopInside_2-loop")
 	if(animID == "sex"):
 		state_machine.travel("Sex_Doggy_1-loop")
 		state_machine2.travel("Sex_Doggy_2-loop")

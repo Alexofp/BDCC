@@ -684,6 +684,8 @@ func doSubAction(_id, _actionInfo):
 func getAnimation():
 	if(state in [""]):
 		return [StageScene.SexCowgirl, "tease", {pc=subID, npc=domID}]
+	if(state in ["knotting"]):
+		return [StageScene.SexCowgirl, "inside", {pc=subID, npc=domID}]
 	if(subInfo.isCloseToCumming() || (isStraponSex() && domInfo.isCloseToCumming())):
 		return [StageScene.SexCowgirl, "fast", {pc=subID, npc=domID}]
 	return [StageScene.SexCowgirl, "sex", {pc=subID, npc=domID}]

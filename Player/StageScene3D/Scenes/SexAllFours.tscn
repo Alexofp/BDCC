@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=2]
+[gd_scene load_steps=69 format=2]
 
 [ext_resource path="res://Player/Player3D/Doll3D.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Player/StageScene3D/BaseStageScene3D.tscn" type="PackedScene" id=2]
@@ -18,23 +18,23 @@ animation = "Sex_DoggyFast_1-loop"
 [sub_resource type="AnimationNodeAnimation" id=37]
 animation = "Sex_DoggyFlopFast_1-loop"
 
+[sub_resource type="AnimationNodeAnimation" id=79]
+animation = "Sex_DoggyFlopInside_1-loop"
+
 [sub_resource type="AnimationNodeAnimation" id=38]
 animation = "Sex_DoggyFlopTease_1-loop"
 
 [sub_resource type="AnimationNodeAnimation" id=39]
 animation = "Sex_DoggyFlop_1-loop"
 
+[sub_resource type="AnimationNodeAnimation" id=80]
+animation = "Sex_DoggyInside_1-loop"
+
 [sub_resource type="AnimationNodeAnimation" id=40]
 animation = "Sex_DoggyTease_1-loop"
 
 [sub_resource type="AnimationNodeAnimation" id=41]
 animation = "Sex_Doggy_1-loop"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=42]
-xfade_time = 0.5
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=43]
-xfade_time = 0.5
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=44]
 xfade_time = 0.5
@@ -60,16 +60,40 @@ xfade_time = 0.5
 [sub_resource type="AnimationNodeStateMachineTransition" id=51]
 xfade_time = 0.5
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=52]
-xfade_time = 0.5
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=53]
-xfade_time = 0.5
-
 [sub_resource type="AnimationNodeStateMachineTransition" id=54]
 xfade_time = 0.5
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=55]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=81]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=82]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=83]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=84]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=85]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=86]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=87]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=88]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=89]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=90]
 xfade_time = 0.5
 
 [sub_resource type="AnimationNodeStateMachine" id=56]
@@ -77,17 +101,21 @@ states/Sex_DoggyFast_1-loop/node = SubResource( 36 )
 states/Sex_DoggyFast_1-loop/position = Vector2( 289, 204 )
 states/Sex_DoggyFlopFast_1-loop/node = SubResource( 37 )
 states/Sex_DoggyFlopFast_1-loop/position = Vector2( 619, 204 )
+states/Sex_DoggyFlopInside_1-loop/node = SubResource( 79 )
+states/Sex_DoggyFlopInside_1-loop/position = Vector2( 643, 29 )
 states/Sex_DoggyFlopTease_1-loop/node = SubResource( 38 )
-states/Sex_DoggyFlopTease_1-loop/position = Vector2( 643, 52 )
+states/Sex_DoggyFlopTease_1-loop/position = Vector2( 654, -76 )
 states/Sex_DoggyFlop_1-loop/node = SubResource( 39 )
 states/Sex_DoggyFlop_1-loop/position = Vector2( 643, 136 )
+states/Sex_DoggyInside_1-loop/node = SubResource( 80 )
+states/Sex_DoggyInside_1-loop/position = Vector2( 320, 29 )
 states/Sex_DoggyTease_1-loop/node = SubResource( 40 )
-states/Sex_DoggyTease_1-loop/position = Vector2( 332, 52 )
+states/Sex_DoggyTease_1-loop/position = Vector2( 329, -83 )
 states/Sex_Doggy_1-loop/node = SubResource( 41 )
 states/Sex_Doggy_1-loop/position = Vector2( 313, 136 )
-transitions = [ "Sex_DoggyTease_1-loop", "Sex_Doggy_1-loop", SubResource( 42 ), "Sex_Doggy_1-loop", "Sex_DoggyTease_1-loop", SubResource( 43 ), "Sex_DoggyTease_1-loop", "Sex_DoggyFlopTease_1-loop", SubResource( 44 ), "Sex_DoggyFlopTease_1-loop", "Sex_DoggyTease_1-loop", SubResource( 45 ), "Sex_Doggy_1-loop", "Sex_DoggyFlop_1-loop", SubResource( 46 ), "Sex_DoggyFlop_1-loop", "Sex_Doggy_1-loop", SubResource( 47 ), "Sex_DoggyFast_1-loop", "Sex_DoggyFlopFast_1-loop", SubResource( 48 ), "Sex_DoggyFlopFast_1-loop", "Sex_DoggyFast_1-loop", SubResource( 49 ), "Sex_DoggyFast_1-loop", "Sex_Doggy_1-loop", SubResource( 50 ), "Sex_Doggy_1-loop", "Sex_DoggyFast_1-loop", SubResource( 51 ), "Sex_DoggyFlopTease_1-loop", "Sex_DoggyFlop_1-loop", SubResource( 52 ), "Sex_DoggyFlop_1-loop", "Sex_DoggyFlopTease_1-loop", SubResource( 53 ), "Sex_DoggyFlop_1-loop", "Sex_DoggyFlopFast_1-loop", SubResource( 54 ), "Sex_DoggyFlopFast_1-loop", "Sex_DoggyFlop_1-loop", SubResource( 55 ) ]
+transitions = [ "Sex_DoggyTease_1-loop", "Sex_DoggyFlopTease_1-loop", SubResource( 44 ), "Sex_DoggyFlopTease_1-loop", "Sex_DoggyTease_1-loop", SubResource( 45 ), "Sex_Doggy_1-loop", "Sex_DoggyFlop_1-loop", SubResource( 46 ), "Sex_DoggyFlop_1-loop", "Sex_Doggy_1-loop", SubResource( 47 ), "Sex_DoggyFast_1-loop", "Sex_DoggyFlopFast_1-loop", SubResource( 48 ), "Sex_DoggyFlopFast_1-loop", "Sex_DoggyFast_1-loop", SubResource( 49 ), "Sex_DoggyFast_1-loop", "Sex_Doggy_1-loop", SubResource( 50 ), "Sex_Doggy_1-loop", "Sex_DoggyFast_1-loop", SubResource( 51 ), "Sex_DoggyFlop_1-loop", "Sex_DoggyFlopFast_1-loop", SubResource( 54 ), "Sex_DoggyFlopFast_1-loop", "Sex_DoggyFlop_1-loop", SubResource( 55 ), "Sex_DoggyTease_1-loop", "Sex_DoggyInside_1-loop", SubResource( 81 ), "Sex_DoggyInside_1-loop", "Sex_DoggyTease_1-loop", SubResource( 82 ), "Sex_DoggyInside_1-loop", "Sex_Doggy_1-loop", SubResource( 83 ), "Sex_Doggy_1-loop", "Sex_DoggyInside_1-loop", SubResource( 84 ), "Sex_DoggyFlopTease_1-loop", "Sex_DoggyFlopInside_1-loop", SubResource( 85 ), "Sex_DoggyFlopInside_1-loop", "Sex_DoggyFlopTease_1-loop", SubResource( 86 ), "Sex_DoggyFlopInside_1-loop", "Sex_DoggyFlop_1-loop", SubResource( 87 ), "Sex_DoggyFlop_1-loop", "Sex_DoggyFlopInside_1-loop", SubResource( 88 ), "Sex_DoggyInside_1-loop", "Sex_DoggyFlopInside_1-loop", SubResource( 89 ), "Sex_DoggyFlopInside_1-loop", "Sex_DoggyInside_1-loop", SubResource( 90 ) ]
 start_node = "Sex_DoggyTease_1-loop"
-graph_offset = Vector2( -130, 18 )
+graph_offset = Vector2( -146, -176 )
 
 [sub_resource type="AnimationNodeBlendTree" id=35]
 graph_offset = Vector2( -278.821, 24.258 )
@@ -108,11 +136,17 @@ animation = "Sex_DoggyFast_2-loop"
 [sub_resource type="AnimationNodeAnimation" id=58]
 animation = "Sex_DoggyFlopFast_2-loop"
 
+[sub_resource type="AnimationNodeAnimation" id=91]
+animation = "Sex_DoggyFlopTease_2-loop"
+
 [sub_resource type="AnimationNodeAnimation" id=59]
 animation = "Sex_DoggyFlopTease_2-loop"
 
 [sub_resource type="AnimationNodeAnimation" id=60]
 animation = "Sex_DoggyFlop_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=92]
+animation = "Sex_DoggyTease_2-loop"
 
 [sub_resource type="AnimationNodeAnimation" id=61]
 animation = "Sex_DoggyTease_2-loop"
@@ -124,12 +158,6 @@ animation = "Sex_Doggy_2-loop"
 xfade_time = 0.5
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=64]
-xfade_time = 0.5
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=65]
-xfade_time = 0.5
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=66]
 xfade_time = 0.5
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=67]
@@ -144,12 +172,6 @@ xfade_time = 0.5
 [sub_resource type="AnimationNodeStateMachineTransition" id=70]
 xfade_time = 0.5
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=71]
-xfade_time = 0.5
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=72]
-xfade_time = 0.5
-
 [sub_resource type="AnimationNodeStateMachineTransition" id=73]
 xfade_time = 0.5
 
@@ -162,22 +184,56 @@ xfade_time = 0.5
 [sub_resource type="AnimationNodeStateMachineTransition" id=76]
 xfade_time = 0.5
 
+[sub_resource type="AnimationNodeStateMachineTransition" id=93]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=94]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=95]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=96]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=97]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=98]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=99]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=100]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=101]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=102]
+xfade_time = 0.5
+
 [sub_resource type="AnimationNodeStateMachine" id=77]
 states/Sex_DoggyFast_2-loop/node = SubResource( 57 )
 states/Sex_DoggyFast_2-loop/position = Vector2( 245, 180 )
 states/Sex_DoggyFlopFast_2-loop/node = SubResource( 58 )
 states/Sex_DoggyFlopFast_2-loop/position = Vector2( 534, 180 )
+states/Sex_DoggyFlopInside_2-loop/node = SubResource( 91 )
+states/Sex_DoggyFlopInside_2-loop/position = Vector2( 580, 27 )
 states/Sex_DoggyFlopTease_2-loop/node = SubResource( 59 )
-states/Sex_DoggyFlopTease_2-loop/position = Vector2( 589, 46 )
+states/Sex_DoggyFlopTease_2-loop/position = Vector2( 570, -48 )
 states/Sex_DoggyFlop_2-loop/node = SubResource( 60 )
 states/Sex_DoggyFlop_2-loop/position = Vector2( 570, 111 )
+states/Sex_DoggyInside_2-loop/node = SubResource( 92 )
+states/Sex_DoggyInside_2-loop/position = Vector2( 256, 27 )
 states/Sex_DoggyTease_2-loop/node = SubResource( 61 )
-states/Sex_DoggyTease_2-loop/position = Vector2( 261, 46 )
+states/Sex_DoggyTease_2-loop/position = Vector2( 256, -55 )
 states/Sex_Doggy_2-loop/node = SubResource( 62 )
 states/Sex_Doggy_2-loop/position = Vector2( 261, 116 )
-transitions = [ "Sex_DoggyTease_2-loop", "Sex_DoggyFlopTease_2-loop", SubResource( 63 ), "Sex_DoggyFlopTease_2-loop", "Sex_DoggyTease_2-loop", SubResource( 64 ), "Sex_DoggyTease_2-loop", "Sex_Doggy_2-loop", SubResource( 65 ), "Sex_Doggy_2-loop", "Sex_DoggyTease_2-loop", SubResource( 66 ), "Sex_Doggy_2-loop", "Sex_DoggyFast_2-loop", SubResource( 67 ), "Sex_DoggyFast_2-loop", "Sex_Doggy_2-loop", SubResource( 68 ), "Sex_Doggy_2-loop", "Sex_DoggyFlop_2-loop", SubResource( 69 ), "Sex_DoggyFlop_2-loop", "Sex_Doggy_2-loop", SubResource( 70 ), "Sex_DoggyFlopTease_2-loop", "Sex_DoggyFlop_2-loop", SubResource( 71 ), "Sex_DoggyFlop_2-loop", "Sex_DoggyFlopTease_2-loop", SubResource( 72 ), "Sex_DoggyFlop_2-loop", "Sex_DoggyFlopFast_2-loop", SubResource( 73 ), "Sex_DoggyFlopFast_2-loop", "Sex_DoggyFlop_2-loop", SubResource( 74 ), "Sex_DoggyFlopFast_2-loop", "Sex_DoggyFast_2-loop", SubResource( 75 ), "Sex_DoggyFast_2-loop", "Sex_DoggyFlopFast_2-loop", SubResource( 76 ) ]
+transitions = [ "Sex_DoggyTease_2-loop", "Sex_DoggyFlopTease_2-loop", SubResource( 63 ), "Sex_DoggyFlopTease_2-loop", "Sex_DoggyTease_2-loop", SubResource( 64 ), "Sex_Doggy_2-loop", "Sex_DoggyFast_2-loop", SubResource( 67 ), "Sex_DoggyFast_2-loop", "Sex_Doggy_2-loop", SubResource( 68 ), "Sex_Doggy_2-loop", "Sex_DoggyFlop_2-loop", SubResource( 69 ), "Sex_DoggyFlop_2-loop", "Sex_Doggy_2-loop", SubResource( 70 ), "Sex_DoggyFlop_2-loop", "Sex_DoggyFlopFast_2-loop", SubResource( 73 ), "Sex_DoggyFlopFast_2-loop", "Sex_DoggyFlop_2-loop", SubResource( 74 ), "Sex_DoggyFlopFast_2-loop", "Sex_DoggyFast_2-loop", SubResource( 75 ), "Sex_DoggyFast_2-loop", "Sex_DoggyFlopFast_2-loop", SubResource( 76 ), "Sex_DoggyInside_2-loop", "Sex_DoggyTease_2-loop", SubResource( 93 ), "Sex_DoggyTease_2-loop", "Sex_DoggyInside_2-loop", SubResource( 94 ), "Sex_DoggyInside_2-loop", "Sex_Doggy_2-loop", SubResource( 95 ), "Sex_Doggy_2-loop", "Sex_DoggyInside_2-loop", SubResource( 96 ), "Sex_DoggyFlopInside_2-loop", "Sex_DoggyFlopTease_2-loop", SubResource( 97 ), "Sex_DoggyFlopTease_2-loop", "Sex_DoggyFlopInside_2-loop", SubResource( 98 ), "Sex_DoggyFlopInside_2-loop", "Sex_DoggyFlop_2-loop", SubResource( 99 ), "Sex_DoggyFlop_2-loop", "Sex_DoggyFlopInside_2-loop", SubResource( 100 ), "Sex_DoggyInside_2-loop", "Sex_DoggyFlopInside_2-loop", SubResource( 101 ), "Sex_DoggyFlopInside_2-loop", "Sex_DoggyInside_2-loop", SubResource( 102 ) ]
 start_node = "Sex_DoggyTease_2-loop"
-graph_offset = Vector2( -93, 23 )
+graph_offset = Vector2( -229, -161 )
 
 [sub_resource type="AnimationNodeBlendTree" id=78]
 graph_offset = Vector2( -322.532, 74.6842 )
