@@ -68,6 +68,9 @@ func getFlags():
 		"Ch3ProtectedTavi": flag(FlagType.Bool),
 		"Ch3DefeatedByGuard": flag(FlagType.Bool),
 		"Ch3DefeatedNova": flag(FlagType.Bool),
+		
+		# Chapter 4
+		"TaviKilledJaxon": flag(FlagType.Bool),
 	}
 
 func _init():
@@ -112,6 +115,7 @@ func _init():
 		"res://Modules/TaviModule/Chapter4/DirectorTau.gd",
 		"res://Modules/TaviModule/Chapter4/JaxonTau.gd",
 		"res://Modules/TaviModule/Chapter4/RishaTau.gd",
+		"res://Modules/TaviModule/Chapter4/JaxonBrotherTau.gd",
 	]
 	items = []
 	events = [

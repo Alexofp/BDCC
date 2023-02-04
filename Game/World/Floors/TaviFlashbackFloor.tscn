@@ -30,6 +30,7 @@ roomID = "taviroom_bed"
 [node name="TaviFlashRoom5" parent="." index="4" instance=ExtResource( 1 )]
 self_modulate = Color( 0.7, 0.7, 0.7, 1 )
 position = Vector2( -64, 0 )
+roomName = "Corridor"
 roomID = "taviroom_near"
 canEast = false
 roomColor = 8
@@ -68,6 +69,7 @@ gridColor = 7
 [node name="TaviFlashRoom11" parent="." index="10" instance=ExtResource( 1 )]
 self_modulate = Color( 0.5, 0.5, 0.5, 1 )
 position = Vector2( -128, -64 )
+roomName = "Corridor"
 roomID = "taviflashback_nearalien"
 roomColor = 7
 gridColor = 7
@@ -98,6 +100,8 @@ canNorth = false
 [node name="TaviFlashRoom17" parent="." index="16" instance=ExtResource( 1 )]
 self_modulate = Color( 0.5, 0.5, 0.5, 1 )
 position = Vector2( -256, -64 )
+roomName = "Corridor"
+roomID = "tau_nearrisharoom"
 roomColor = 7
 gridColor = 7
 
