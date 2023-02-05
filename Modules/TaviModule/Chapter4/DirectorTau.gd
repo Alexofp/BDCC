@@ -22,6 +22,9 @@ func getThickness() -> int:
 func getFemininity() -> int:
 	return 0
 
+func getChatColor():
+	return '#BABAD6'
+
 func createBodyparts():
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("humanoldhead"))
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("combedbackhair"))

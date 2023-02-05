@@ -111,40 +111,136 @@ position = Vector2( -320, -64 )
 roomColor = 7
 gridColor = 7
 
-[node name="TaviFlashRoom25" parent="." index="18" instance=ExtResource( 1 )]
+[node name="TaviFlashRoom27" parent="." index="18" instance=ExtResource( 1 )]
+self_modulate = Color( 0.5, 0.5, 0.5, 1 )
+position = Vector2( -448, 384 )
+roomColor = 7
+gridColor = 7
+
+[node name="TaviFlashRoom28" parent="." index="19" instance=ExtResource( 1 )]
+self_modulate = Color( 0.5, 0.5, 0.5, 1 )
+position = Vector2( -384, 384 )
+roomColor = 7
+gridColor = 7
+
+[node name="TaviFlashRoom29" parent="." index="20" instance=ExtResource( 1 )]
+self_modulate = Color( 0.5, 0.5, 0.5, 1 )
+position = Vector2( -320, 384 )
+roomName = "Rich corridor"
+roomID = "tau_neardirector"
+roomColor = 7
+gridColor = 7
+
+[node name="TaviFlashRoom30" parent="." index="21" instance=ExtResource( 1 )]
+self_modulate = Color( 0.5, 0.5, 0.5, 1 )
+position = Vector2( -384, 320 )
+roomName = "Elevator"
+roomID = "tau_elevator"
+roomSprite = 3
+roomColor = 7
+gridColor = 7
+
+[node name="TaviFlashRoom31" parent="." index="22" instance=ExtResource( 1 )]
+self_modulate = Color( 0.5, 0.5, 0.5, 1 )
+position = Vector2( -448, 320 )
+canEast = false
+roomSprite = 3
+roomColor = 7
+gridColor = 7
+
+[node name="TaviFlashRoom32" parent="." index="23" instance=ExtResource( 1 )]
+self_modulate = Color( 1, 1, 0.7, 1 )
+position = Vector2( -256, 384 )
+roomName = "Director's quarters"
+roomID = "tau_directorsroom"
+roomSprite = 1
+roomColor = 6
+gridColor = 6
+
+[node name="TaviFlashRoom33" parent="." index="24" instance=ExtResource( 1 )]
+self_modulate = Color( 0.7, 0.7, 0.7, 1 )
+position = Vector2( -256, 448 )
+roomName = "AI upload room"
+roomID = "tau_airoom"
+roomSprite = 5
+roomColor = 8
+gridColor = 7
+
+[node name="TaviFlashRoom25" parent="." index="25" instance=ExtResource( 1 )]
 self_modulate = Color( 0.5, 0.5, 0.5, 1 )
 position = Vector2( -384, -64 )
 roomColor = 7
 gridColor = 7
 
-[node name="TaviFlashRoom26" parent="." index="19" instance=ExtResource( 1 )]
+[node name="TaviFlashRoom26" parent="." index="26" instance=ExtResource( 1 )]
 self_modulate = Color( 0.5, 0.5, 0.5, 1 )
 position = Vector2( -448, -64 )
 roomColor = 7
 gridColor = 7
 
-[node name="TaviFlashRoom19" parent="." index="20" instance=ExtResource( 1 )]
+[node name="TaviFlashRoom34" parent="." index="27" instance=ExtResource( 1 )]
+self_modulate = Color( 0.5, 0.5, 0.5, 1 )
+position = Vector2( -448, -128 )
+roomID = "tau_nearelevators"
+roomColor = 7
+gridColor = 7
+
+[node name="TaviFlashRoom35" parent="." index="28" instance=ExtResource( 1 )]
+self_modulate = Color( 0.5, 0.5, 0.5, 1 )
+position = Vector2( -448, -192 )
+roomColor = 7
+gridColor = 7
+
+[node name="TaviFlashRoom36" parent="." index="29" instance=ExtResource( 1 )]
+self_modulate = Color( 0.5, 0.5, 0.5, 1 )
+position = Vector2( -448, -256 )
+roomColor = 7
+gridColor = 7
+
+[node name="TaviFlashRoom39" parent="." index="30" instance=ExtResource( 1 )]
+self_modulate = Color( 0.5, 0.5, 0.5, 1 )
+position = Vector2( -448, -320 )
+roomColor = 7
+gridColor = 7
+
+[node name="TaviFlashRoom37" parent="." index="31" instance=ExtResource( 1 )]
+self_modulate = Color( 0.5, 0.5, 0.5, 1 )
+position = Vector2( -512, -256 )
+roomSprite = 3
+roomColor = 7
+gridColor = 7
+
+[node name="TaviFlashRoom38" parent="." index="32" instance=ExtResource( 1 )]
+self_modulate = Color( 0.5, 0.5, 0.5, 1 )
+position = Vector2( -512, -192 )
+roomSprite = 3
+roomColor = 7
+gridColor = 7
+
+[node name="TaviFlashRoom19" parent="." index="33" instance=ExtResource( 1 )]
 self_modulate = Color( 0.7, 0.7, 0.7, 1 )
 position = Vector2( -320, 0 )
+roomName = "Corridor"
+roomID = "tau_nearrisharoom"
 canEast = false
 roomColor = 8
 gridColor = 7
 
-[node name="TaviFlashRoom20" parent="." index="21" instance=ExtResource( 1 )]
+[node name="TaviFlashRoom20" parent="." index="34" instance=ExtResource( 1 )]
 position = Vector2( -192, -128 )
 canSouth = false
 
-[node name="TaviFlashRoom21" parent="." index="22" instance=ExtResource( 1 )]
+[node name="TaviFlashRoom21" parent="." index="35" instance=ExtResource( 1 )]
 position = Vector2( -128, -128 )
 canSouth = false
 
-[node name="TaviFlashRoom22" parent="." index="23" instance=ExtResource( 1 )]
+[node name="TaviFlashRoom22" parent="." index="36" instance=ExtResource( 1 )]
 position = Vector2( -192, -192 )
 
-[node name="TaviFlashRoom23" parent="." index="24" instance=ExtResource( 1 )]
+[node name="TaviFlashRoom23" parent="." index="37" instance=ExtResource( 1 )]
 position = Vector2( -128, -192 )
 
-[node name="TaviFlashRoom24" parent="." index="25" instance=ExtResource( 1 )]
+[node name="TaviFlashRoom24" parent="." index="38" instance=ExtResource( 1 )]
 self_modulate = Color( 0.7, 0.7, 0.7, 1 )
 position = Vector2( -64, -128 )
 canWest = false
