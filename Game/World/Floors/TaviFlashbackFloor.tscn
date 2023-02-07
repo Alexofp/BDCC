@@ -181,6 +181,7 @@ gridColor = 7
 [node name="TaviFlashRoom34" parent="." index="27" instance=ExtResource( 1 )]
 self_modulate = Color( 0.5, 0.5, 0.5, 1 )
 position = Vector2( -448, -128 )
+roomName = "Corridor"
 roomID = "tau_nearelevators"
 roomColor = 7
 gridColor = 7

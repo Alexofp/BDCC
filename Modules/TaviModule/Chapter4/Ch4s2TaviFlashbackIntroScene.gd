@@ -329,6 +329,11 @@ func _react(_action: String, _args):
 		GM.pc.setSpecies([Species.Feline])
 		GM.pc.resetBodypartsToDefault()
 		GM.pc.giveBodypart(GlobalRegistry.createBodypart("tavihair"))
+		var breasts = GlobalRegistry.createBodypart("humanbreasts")
+		breasts.size = 3
+		GM.pc.giveBodypart(breasts)
+		GM.pc.pickedThickness = 80
+		GM.pc.pickedFemininity = 90
 		GM.pc.getInventory().equipItem(GlobalRegistry.createItem("Leotard"))
 		GM.pc.updateNonBattleEffects()
 		#playAnimationForceReset(StageScene.Solo, "stand")
