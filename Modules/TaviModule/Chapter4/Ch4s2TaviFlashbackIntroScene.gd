@@ -332,7 +332,7 @@ func _react(_action: String, _args):
 		var breasts = GlobalRegistry.createBodypart("humanbreasts")
 		breasts.size = 3
 		GM.pc.giveBodypart(breasts)
-		GM.pc.pickedThickness = 80
+		GM.pc.pickedThickness = 50
 		GM.pc.pickedFemininity = 90
 		GM.pc.getInventory().equipItem(GlobalRegistry.createItem("Leotard"))
 		GM.pc.updateNonBattleEffects()
