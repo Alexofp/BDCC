@@ -603,6 +603,7 @@ population = 3
 self_modulate = Color( 0.7, 0.7, 0.7, 1 )
 position = Vector2( 128, 64 )
 roomName = "Main hall"
+roomID = "hall_ne_corner"
 roomDescription = "A very spacious hall with a huge raised platform in the middle"
 roomColor = 8
 population = 3

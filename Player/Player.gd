@@ -601,7 +601,7 @@ func getBodypartTooltipInfo(_bodypartSlot):
 
 func afterSleeping():
 	addStamina(getMaxStamina())
-	addPain(-100)
+	addPain(-getPain())
 	skillsHolder.onNewDay()
 	for item in getInventory().getEquppedRestraints():
 		item.getRestraintData().resetOnNewDay()
@@ -948,20 +948,6 @@ func damageClothes():
 
 func isWearingPortalPanties():
 	return getInventory().hasItemIDEquipped("PortalPanties")
-
-func unequipAllRestraints():
-	for item in inventory.getEquppedRestraints():
-		if(item.isImportant()):
-			continue
-		
-		inventory.unequipItem(item)
-
-func removeAllRestraints():
-	for item in inventory.getEquppedRestraints():
-		if(item.isImportant()):
-			continue
-		
-		inventory.removeEquippedItem(item)
 
 func hasTightHoles():
 	var maxLooseness = 0.0

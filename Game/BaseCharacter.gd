@@ -1812,3 +1812,17 @@ func doPainfullyStretchHole(_bodypart, _who = "pc"):
 
 func doWound(_who = "pc"):
 	pass
+
+func unequipAllRestraints():
+	for item in inventory.getEquppedRestraints():
+		if(item.isImportant()):
+			continue
+		
+		inventory.unequipItem(item)
+
+func removeAllRestraints():
+	for item in inventory.getEquppedRestraints():
+		if(item.isImportant()):
+			continue
+		
+		inventory.removeEquippedItem(item)

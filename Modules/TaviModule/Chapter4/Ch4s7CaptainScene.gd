@@ -1,5 +1,7 @@
 extends SceneBase
 
+var skar_added_blindfold = false
+
 func _init():
 	sceneID = "Ch4s7CaptainScene"
 
@@ -39,9 +41,9 @@ func _run():
 
 		saynn("[say=tavi]Because I had no other highlights, okay?![/say]")
 
-		saynn("She snarls at you. But then quickly calms down. Tavi throws her head back, staring at the ceiling.")
+		saynn("She frowned at you. But then quickly calms down. Tavi throws her head back, staring at the ceiling.")
 
-		saynn("[say=tavi]My entire life is a mess. Partly because the world is a mess. Our dreams guide us. Our choices define us. But what should you do if the world only gives you bad ones?[/say]")
+		saynn("[say=tavi]My entire life is a mess. Partly because the world is a mess. Our dreams guide us. After that our choices define us. But what should you do if the world only gives you bad ones?[/say]")
 
 		saynn("You hear quiet clapping coming from the corridor, someone is approaching.")
 
@@ -86,9 +88,9 @@ func _run():
 
 		saynn("Tavi instantly shows off her fangs, she keeps her legs shut. Even though the captain's voice seems genuine.")
 
-		saynn("[say=captain]I'm serious. Sadly, your methods do go against the AlphaCorp's laws. Which is why you're here, in my possession. I hope at least that part seems fair to you.[/say]")
+		saynn("[say=captain]I'm being serious. But, sadly, your methods do go against the AlphaCorp's laws. Which is why you're here, in my possession. I hope at least that part seems fair to you.[/say]")
 
-		saynn("[say=tavi]Eavesdropping can get you in trouble, captain.[/say]")
+		saynn("[say=tavi]Slavery used to be legal. Well, it still is, I guess. Eavesdropping can get you in trouble, captain.[/say]")
 
 		saynn("He chuckles softly.")
 
@@ -120,7 +122,7 @@ func _run():
 		playAnimation(StageScene.HangingDuo, "idle", {npc="captain", bodyState={naked=true}})
 		saynn("The captain presses the button on the projector, causing the hologram to fade away.")
 
-		saynn("[say=captain]Your little personal assistant was quite useful, she helped us to solve a lot of mysteries. We can finally update your confirmed crimes list. And I know more about you now, Tavi. I like learning more about the past lives of inmates here.[/say]")
+		saynn("[say=captain]Your little personal assistant was quite useful, she helped us to solve a lot of mysteries. We finally know everything that you. And I know more about you now. I like learning the past lives of inmates here.[/say]")
 
 		saynn("Tavi goes quiet. But you can't stay silent anymore.")
 
@@ -132,13 +134,13 @@ func _run():
 
 		saynn("He crosses his arms.")
 
-		saynn("[say=captain]Most of you can never be integrated into a normal society ever again because of your past deeds. But that doesn't mean we should give up on you. I want everyone here to understand how much bad they caused to the world. And then let them spend what time they have to try to fix their mistakes.[/say]")
+		saynn("[say=captain]Most of you can never be integrated into a normal society ever again because of your past deeds. Doesn't mean we should give up on you. But the process of redemption should start with understanding.[/say]")
 
 		saynn("[say=pc]And what if they won't understand? You will brainwash them and start from scratch? Sounds so scummy.[/say]")
 
 		saynn("Captain gets quiet for a few seconds, his canine eyes watching you and Tavi. He leans against the glass, getting closer to you.")
 
-		saynn("[say=captain]Brainwashing? Hah. Where did you get that idea from? Brainwashing is pretty similar to killing someone, their soul is dead even if their body is still alive. No. Brainwashing is too easy, my friend. I prefer to show people why they are wrong and hope that they change. I believe in second and third chances.[/say]")
+		saynn("[say=captain]Brainwashing? Hah. Where did you get that idea from? Brainwashing kills the soul. No. I prefer to show people why they are wrong and hope that they change.[/say]")
 
 		saynn("Huh? Is he lying? You look at Tavi. She rolls her eyes. You have the proof that he is lying but telling him about it would.. spoil the surprise.")
 
@@ -173,7 +175,7 @@ func _run():
 
 		saynn("The captain smiles.")
 
-		saynn("[say=captain]I.. I don't have sex with inmates or staff. I won't deny though, I got a little bit spoiled by all the inmates who beg to be my pets. There is something nice about seeing them humiliate themselves. It is fun to see how much they enjoy it too.[/say]")
+		saynn("[say=captain]I.. I don't have sex with inmates or staff. I won't deny though, I got a little bit spoiled by all the inmates who beg to be my pets. There is something nice about seeing them humiliate themselves. But only because it's fun to see them being happy.[/say]")
 
 		saynn("He scratches behind his head.")
 
@@ -189,7 +191,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "captain_explains")
 	if(state == "captain_explains"):
-		saynn("[say=captain]This prison is not a heaven and it's not trying to be. But, I think, the ability to.. have intimate moments.. balances things out. It makes staff happier, it makes inmates more obedient. And it brings value to AlphaCorp, a lot of value.[/say]")
+		saynn("[say=captain]This prison is not a heaven and it's not trying to be. But, I think, the ability to.. have intimate moments.. balances things out. And it brings value to AlphaCorp.[/say]")
 
 		saynn("[say=pc]What do you mean?[/say]")
 
@@ -199,7 +201,7 @@ func _run():
 
 		saynn("Tavi suddenly realizes something.")
 
-		saynn("[say=tavi]You're making soldiers out of kids! Doing the same fucking thing! You're ruining lives! All so your fucking war can continue for as long as possible![/say]")
+		saynn("[say=tavi]I get it. You're making soldiers out of inmate's kids. Different space station, same fucking thing.[/say]")
 
 		saynn("The captain lets Tavi yell at him. The feline growls and struggles against the chains harder. The captain continues to speak with a normal voice, even if with a slightly more cunning tone.")
 
@@ -217,7 +219,7 @@ func _run():
 
 		saynn("The captain looks at Tavi next.")
 
-		saynn("[say=captain]And if I was you, I'd really think about what I did. I'm giving you one last chance. One last chance before I move on to more.. drastic measures. Someone else in my shoes would space you a long time ago and be done with you. But for now.. For now this will do I think. You both need to be punished after all.[/say]")
+		saynn("[say=captain]I'm giving you one last chance, Tavi. After that I will have to do something with you, this can't go on like this. It might look like I'm trying to tell you to give up on your dreams. But. It's not about giving up, Tavi. It's about accepting yourself.[/say]")
 
 		saynn("Tavi glares at him. All the while the captain looks at someone you can't see and gestures to them to step closer.")
 
@@ -227,7 +229,7 @@ func _run():
 		addCharacter("skar")
 		saynn("Skar walks in while also bringing some kind of contraption. The main part of this contraption is a long.. seat.. of an uncomfortable triangular shape.")
 
-		saynn("[say=captain]A few hours on a wooden horse should make you reconsider your behavior. Skar here will ensure you understand the reasons behind your punishment. In case it isn't obvious. Right, Skar?[/say]")
+		saynn("[say=captain]A few hours on a wooden horse should make you both reconsider your behavior. Skar here will ensure you understand the reasons behind your punishment. In case it isn't obvious. Right, Skar?[/say]")
 
 		saynn("[say=skar]Yeah, sir. I can do that.[/say]")
 
@@ -273,7 +275,7 @@ func _run():
 
 		saynn("[say=skar]You destroyed an entire space station, killing everyone who worked there?[/say]")
 
-		saynn("[say=tavi]Sure. And I did it because I wanted to. I didn't follow any orders. I wasn't forced to see my squad get wiped out on the battlefield because of some old guy's mistake.[/say]")
+		saynn("[say=tavi]I stopped a soldier factory, Skar. I didn't follow any orders. And because of that, I wasn't forced to see my squad get wiped out on the battlefield because of some old guy's mistake.[/say]")
 
 		saynn("Skar's arms make a whole lotta mechanical noise as he clenches his fists.")
 
@@ -330,7 +332,7 @@ func _run():
 
 		saynn("[say=skar]Wars are unavoidable, Tavi.[/say]")
 
-		saynn("[say=tavi]They.. are.. fuck.. What happened to.. using words.. instead of weapons.. Just.. Fucking.. communicate more.. A little less stress.. maybe?..[/say]")
+		saynn("[say=tavi]They.. are.. fuck.. What happened to.. using words.. instead of weapons.. Just.. Fucking.. communicate more.. Ease it up a little.. maybe?..[/say]")
 
 		saynn("[say=skar]Some people only understand force.[/say]")
 
@@ -346,7 +348,7 @@ func _run():
 
 		saynn("She had the right idea though. You probably can escape that way but first you gotta loosen the cuffs.")
 
-		saynn("Skar is busy contemplating his life choices. Now would be the best time to escape.. Or give up completely.")
+		saynn("Skar is leaning against the wall with his hands crossed, not paying too much attention. Now would be the best time to escape.. Or give up completely.")
 
 		if (GM.pc.hasVagina()):
 			saynn("You gotta do it fast though.. Your pussy is beginning to feel irritated too.")
@@ -354,7 +356,165 @@ func _run():
 		else:
 			saynn("You gotta do it fast though.. The skin of your taint is beginning to feel irritated too.")
 
-		addButton("Continue", "See what happens next", "struggle_intro")
+		addButton("Continue", "See what happens next", "woodenhorse_loop")
+	if(state == "woodenhorse_loop"):
+		# (( 3 options. Wait, Struggle, Give up, Escape
+		# (( Wait adds lust but also adds a little bit of stamina
+		# (( Struggle opens struggle menu
+		# (( Give up - forces fail
+		# (( Escape - starts the fight with Skar. Fail = forces fail, success - you escape and can either chain him or chain him to the wooden horse
+		playAnimation(StageScene.WoodenHorseDuo, "lightstruggle", {npc="tavi", npcAction="lightstruggle", bodyState={naked=true}, npcBodyState={naked=true}})
+		var pcPain = GM.pc.getPainLevel()
+		if (pcPain <= 0.2):
+			if (GM.pc.hasVagina()):
+				saynn("You feel your weight working against you, your sensitive slit is being put under a lot of pressure, causing discomfort. At least you can still kinda endure it. But for how much longer no one knows.")
+
+			else:
+				saynn("You feel your weight working against you, your taint area is being put under a lot of pressure, causing discomfort. At least you can still kinda endure it. But for how much longer no one knows.")
+
+		elif (pcPain <= 0.4):
+			if (GM.pc.hasVagina()):
+				saynn("The discomfort is quickly rising, even the most simple motions echo back with your pussy getting more sore. You're enduring it as best as you can. Tavi is holding on too but you can hear her hissing occasionally.")
+
+			else:
+				saynn("The discomfort is quickly rising, even the most simple motions echo back with your crotch getting more sore. You're enduring it as best as you can. Tavi is holding on too but you can hear her hissing occasionally.")
+
+		elif (pcPain <= 0.6):
+			if (GM.pc.hasVagina()):
+				saynn("It might seem like your pussy is getting stimulated while you fidget back and forth on that torture device but in reality the pain and discomfort are overpowerting any pleasure by a long shot. Random noises like cries and pleading escape from your mouth. Your slit looks quite irritated.")
+
+			else:
+				saynn("It might seem like your crotch area is getting stimulated while you fidget back and forth on that torture device but in reality the pain and discomfort are overpowerting any pleasure by a long shot. Random noises like cries and pleading escape from your mouth. The skin on your taint looks quite irritated.")
+
+		elif (pcPain <= 0.8):
+			if (GM.pc.hasVagina()):
+				saynn("This is getting too much for you real fast. The constant pain that's coming from your pussy causes you to start arching your back which in turn brings more awful sensations. If you weren't begging before, you feel like you will start doing that soon. Tavi is not doing any better, her pussy slit got so irritated that it drips green glowing blood onto the frame.")
+
+			else:
+				saynn("This is getting too much for you real fast. The constant pain that's coming from your taint causes you to start arching your back which in turn brings more awful sensations. If you weren't begging before, you feel like you will start doing that soon. Tavi is not doing any better, her pussy slit got so irritated that it drips green glowing blood onto the frame.")
+
+		else:
+			if (GM.pc.hasVagina()):
+				saynn("The pain is almost unbearable, it's so bad that you can't even rest anymore. But at least you feel like it won't get any worse from now on. You grit your teeth while your pussy lips basically get cut by the sharp edge of that wooden horse. Tavi's eyes roll up while she grits her teeth too, she has given up resisting a long time ago, just counting seconds, hoping that this torture will end soon.")
+
+			else:
+				saynn("The pain is almost unbearable, it's so bad that you can't even rest anymore. But at least you feel like it won't get any worse from now on. You grit your teeth while your taint area basically gets cut by the sharp edge of that wooden horse. Tavi's eyes roll up while she grits her teeth too, she has given up resisting a long time ago, just counting seconds, hoping that this torture will end soon.")
+
+		if (pcPain < 1.0):
+			addButton("Rest", "Try to rest and get some stamina back", "do_rest")
+		else:
+			addDisabledButton("Rest", "Too painful!")
+		if (GM.pc.getStamina() > 0):
+			addButton("Struggle", "Resist your restraints", "do_struggle")
+		else:
+			addDisabledButton("Struggle", "You don't have any strength left to struggle")
+		if (!GM.pc.hasBoundArms() && !GM.pc.hasBoundLegs()):
+			addButton("Escape", "You can try to escape!", "do_escape")
+		else:
+			addDisabledButton("Escape", "Your must free your arms and legs")
+		addButton("Give up", "Accept that you won't escape", "do_giveup")
+	if(state == "do_rest"):
+		playAnimation(StageScene.WoodenHorseDuo, "idle", {npc="tavi", npcAction="lightstruggle", bodyState={naked=true}, npcBodyState={naked=true}})
+		saynn("You rest a few minutes, trying to be completely motionless. But the sharp edge of that device is a really bad seat, it keeps bringing you pain and discomfort either way.")
+
+		addButton("Continue", "See what happens next", "woodenhorse_loop")
+	if(state == "do_escape"):
+		playAnimation(StageScene.Duo, "stand", {npc="skar"})
+		saynn("You managed to loosen up the cuffs enough for you to escape them! You quickly pull yourself up using the chains and get off the damn torture machine. That's a huge relief for your body.")
+
+		saynn("You would save Tavi.. But Skar is still there, he saw what you did. And from his glare and deep breathing you can deduct that he isn't happy.")
+
+		saynn("[say=skar]Can't run forever. You will just die tired.[/say]")
+
+		saynn("[say=pc]Just let us go and you won't get hurt.[/say]")
+
+		saynn("[say=skar]No.[/say]")
+
+		saynn("Seems like it's a fight.")
+
+		addButton("Fight", "Start the fight", "fight_skar")
+	if(state == "if_lost"):
+		playAnimation(StageScene.WoodenHorseDuo, "struggle", {npc="tavi", npcAction="lightstruggle", bodyState={naked=true}, npcBodyState={naked=true}})
+		saynn("You lost the battle. Skar quickly throws you back onto the wooden horse and cuffs your arms and legs, leaving you pretty much zero room for struggling.")
+
+		saynn("[say=pc]Fuck, argh..[/say]")
+
+		saynn("And with no strength to struggle, all you can do is give up and let your crotch be tortured..")
+
+		addButton("Give up", "Oh well", "do_giveup")
+	if(state == "if_won"):
+		playAnimation(StageScene.Duo, "stand", {npc="skar", npcAction="defeat"})
+		saynn("Skar hits the floor, defeated by your hand. You instantly go to Tavi and lower the torture machine before unchaining her paws and ankles. The feline cries out from pain as her slit no longer makes any contact with the sharp edge of that seat. Her pussy looks wounded to the point of it dripping green blood onto the floor.")
+
+		saynn("[say=tavi]Ugh.. Thank you, cutie.[/say]")
+
+		saynn("Naked Tavi tackles Skar and cuffs his arms with his own restraints, rendering him helpless.")
+
+		saynn("[say=tavi]You can't stop us.[/say]")
+
+		saynn("[say=skar]The consequences will catch up with you.[/say]")
+
+		saynn("[say=tavi]Hah. You're talking like the world is fair and the whole justice system is adequate. If that'd be the case, you would still have your real arms.[/say]")
+
+		saynn("[say=skar]You just wanna watch the world burn?[/say]")
+
+		saynn("[say=tavi]World is too big. I know that you're too stubborn to change your mind, don't worry. What should we do with him, cutie?[/say]")
+
+		saynn("Tavi looks at the wooden horse. Then she looks at you and winks while smiling.")
+
+		addButton("Just leave", "No need to torture him", "just_leave")
+		addButton("Wooden horse", "Throw Skar onto the wooden horse", "torture_skar")
+	if(state == "just_leave"):
+		playAnimation(StageScene.Duo, "stand", {npc="tavi"})
+		saynn("[say=pc]We should just leave, no need to humiliate him.[/say]")
+
+		saynn("[say=tavi]Aw, if you say so. It was only fair. He is a soldier who just follows orders without taking responsibility.[/say]")
+
+		saynn("Tavi finds her uniform in one of the bins outside and proceeds to cuff Skar to her old spot.")
+
+		saynn("[say=skar]I'm not.[/say]")
+
+		saynn("Tavi caresses his cheek lightly.")
+
+		saynn("[say=tavi]Then turn your head on and start doing what your heart tells you. Hearts and minds, friend.[/say]")
+
+		saynn("Tavi gets up and grabs your hand before proceeding to find the exit out of this place.")
+
+		addButton("Continue", "See what happens next", "tavi_pc_escape")
+	if(state == "tavi_pc_escape"):
+		aimCameraAndSetLocName("hall_ne_corner")
+		GM.pc.setLocation("hall_ne_corner")
+		saynn("You and Tavi follow a series of corridors, looking for an exit out of this section of the station. Most of the doors don't open for you because you obviously lack access. After a few close ones where you almost got caught, you two stumble upon a catwalk that hangs over the main hall.")
+
+		saynn("[say=tavi]Perfect.[/say]")
+
+		saynn("[say=pc]Uh.. Isn't that a little too high?[/say]")
+
+		saynn("Yeah, it was. But Tavi seems to know her ways around. She just jumps onto one of the concrete pillars and hugs it before sliding down. You follow her and do the same, it looked scarier than it was.")
+
+		saynn("Tavi waits for you to slide down and comes to give you a tight hug.")
+
+		saynn("[say=tavi]You should stop saving me. Next time it's my turn to take one for the team. Okay, cutie?[/say]")
+
+		saynn("[say=pc]Yes, Miss Tavi.[/say]")
+
+		saynn("[say=tavi]I need to come up with the next plan. I have a task for you in the meantime..[/say]")
+
+		saynn("[say=pc]Don't you remember what the captain said? Last chance and all.[/say]")
+
+		saynn("[say=tavi]Yeah. I do. You wanna give up?[/say]")
+
+		saynn("You stay silent for a second and then shake your head. Tavi smiles.")
+
+		saynn("[say=tavi]I want you to find Kait. And I want you to teach her a lesson, your choice how. Okay, cutie?[/say]")
+
+		saynn("[say=pc]Where can I find her?[/say]")
+
+		saynn("[say=tavi]Well, she is a lilac slut. Catch her in the lilac block during the morning. And please, be rough with her subby ass.[/say]")
+
+		saynn("And just like that, you're free. Relatively speaking. Tavi scritches you under the chin before leaving and heading to her usual spot.")
+
+		addButton("Continue", "Time to go", "endthescene")
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
@@ -383,4 +543,62 @@ func _react(_action: String, _args):
 	if(_action == "skar_gets_confused"):
 		processTime(60*5)
 
+	if(_action == "do_rest"):
+		GM.pc.addPain(20)
+		GM.pc.addStamina(50)
+		processTime(5*60)
+
+	if(_action == "do_struggle"):
+		playAnimation(StageScene.WoodenHorseDuo, "struggle", {npc="tavi", npcAction="lightstruggle", bodyState={naked=true}, npcBodyState={naked=true}})
+		runScene("StrugglingScene", [true, false], "struggle")
+		return
+
+	if(_action == "do_escape"):
+		GM.pc.addPain(-GM.pc.getPain())
+
+	if(_action == "fight_skar"):
+		runScene("FightScene", ["skar"], "skarfight")
+
+	if(_action == "tavi_pc_escape"):
+		processTime(10*60)
+
 	setState(_action)
+
+func _react_scene_end(_tag, _result):
+	if(_tag == "struggle"):
+		processTime(5*60)
+		GM.pc.addPain(20)
+		if(!skar_added_blindfold && GM.pc.getPainLevel() >= 0.5):
+			skar_added_blindfold = true
+			addMessage("Skar notices you struggling against restraints and blindfolds you!")
+			GM.pc.getInventory().forceEquipStoreOtherUnlessRestraint(GlobalRegistry.createItem("blindfold"))
+		else:
+			addMessage("The wooden horse brings more pain to you")
+		setState("woodenhorse_loop")
+
+	if(_tag == "skarfight"):
+		processTime(20 * 60)
+		var battlestate = _result[0]
+		
+		if(battlestate == "win"):
+			setState("if_won")
+			addExperienceToPlayer(100)
+			getCharacter("tavi").removeAllRestraints()
+		else:
+			setState("if_lost")
+			addExperienceToPlayer(20)
+			GM.pc.removeAllRestraints()
+			GM.pc.getInventory().forceEquipStoreOtherUnlessRestraint(GlobalRegistry.createItem("inmatewristcuffs"))
+			GM.pc.getInventory().forceEquipStoreOtherUnlessRestraint(GlobalRegistry.createItem("inmateanklecuffs"))
+
+func saveData():
+	var data = .saveData()
+
+	data["skar_added_blindfold"] = skar_added_blindfold
+
+	return data
+
+func loadData(data):
+	.loadData(data)
+
+	skar_added_blindfold = SAVE.loadVar(data, "skar_added_blindfold", false)
