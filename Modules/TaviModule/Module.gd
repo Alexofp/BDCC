@@ -72,6 +72,9 @@ func getFlags():
 		# Chapter 4
 		"TaviKilledJaxon": flag(FlagType.Bool),
 		"Ch4SaidTaviIsMonster": flag(FlagType.Bool),
+		"Ch4TortureEnd": flag(FlagType.Text), #gaveup, escaped, lost
+		"Ch4TorturedSkar": flag(FlagType.Bool),
+		"Ch4ServedPunishment": flag(FlagType.Bool),
 	}
 
 func _init():

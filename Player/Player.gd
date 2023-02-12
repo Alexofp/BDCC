@@ -980,13 +980,13 @@ func getCharacterType():
 	return CharacterType.Inmate
 
 func doPainfullyStretchHole(_bodypart, _who = "pc"):
-	if(_bodypart == BodypartSlot.Vagina):
+	if(_bodypart == BodypartSlot.Vagina && hasBodypart(_bodypart)):
 		if(hasEffect(StatusEffect.LubedUp)):
 			return
 		
 		addEffect(StatusEffect.StretchedPainfullyPussy, [1])
 		emit_signal("holePainfullyStretched", _bodypart, _who)
-	if(_bodypart == BodypartSlot.Anus):
+	if(_bodypart == BodypartSlot.Anus && hasBodypart(_bodypart)):
 		if(hasEffect(StatusEffect.LubedUp)):
 			return
 		
