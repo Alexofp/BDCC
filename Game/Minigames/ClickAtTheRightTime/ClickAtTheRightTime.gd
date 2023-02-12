@@ -12,6 +12,7 @@ var difficulty = 5.0
 var redPart = 0.1
 var freeze = false
 var goldenZoneVisible = false
+var isBlindFoldedVersion = false
 
 var difficultySettings = [
 	{
@@ -81,9 +82,27 @@ func _ready():
 	setGoldenZoneVisible(false)
 
 	setDifficulty(2)
+	setIsBlindfolded(false)
+
+func setIsBlindfolded(theblindfolded):
+	isBlindFoldedVersion = theblindfolded
+	
+	if(isBlindFoldedVersion):
+		$GameScreen/Panel/Panel2.visible = false
+		$GameScreen/Panel/Panel.visible = false
+		$GameScreen/Panel/Panel3.visible = false
+		$GameScreen/Panel/BlindText.visible = true
+	else:
+		$GameScreen/Panel/Panel2.visible = true
+		$GameScreen/Panel/Panel.visible = true
+		$GameScreen/Panel/Panel3.visible = true
+		$GameScreen/Panel/BlindText.visible = false
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	if(isBlindFoldedVersion):
+		delta /= 2.0
+	
 	if(ingame && !freeze):
 		if(timeLeft > 0 && (timeLeft - delta) <= 0):
 			emit_signal("minigameCompleted", 0.0)
@@ -92,6 +111,22 @@ func _process(delta):
 		
 		setCursorPosition(getCursorPosition())
 		setTimeBar(timeLeft/timer)
+		
+		var flatStyle:StyleBoxFlat = $GameScreen/Panel.get_stylebox("panel")
+		if(isBlindFoldedVersion):
+			flatStyle.bg_color = Color.red
+			
+			var score = getScore()
+			if(score >= 1000.0):
+				flatStyle.bg_color = Color("ffe300")
+			elif(score >= 1.0):
+				flatStyle.bg_color = Color("990000")
+			elif(score > 0.0):
+				flatStyle.bg_color = Color("990000").darkened(1.1 - score)
+			else:
+				flatStyle.bg_color = Color.black
+		else:
+			flatStyle.bg_color = Color.black
 	
 func getCursorPosition():
 	return (sin(time*cursorSpeed) + 1.0)/2.0

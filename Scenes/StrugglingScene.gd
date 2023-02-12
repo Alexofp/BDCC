@@ -109,6 +109,8 @@ func _run():
 		game.connect("minigameCompleted", self, "onMinigameCompleted")
 		if(GM.pc.hasPerk(Perk.BDSMInstantEscape) && game.has_method("instantEscapePerk")):
 			game.instantEscapePerk()
+		if(GM.pc.isBlindfolded() && game.has_method("setIsBlindfolded")):
+			game.setIsBlindfolded(true)
 		
 		addButton("Give up", "Give up the struggle and lose 10 stamina", "giveupstruggle")
 
