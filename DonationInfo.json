@@ -1,12 +1,12 @@
 {
-	"dateString": "08 of Feb 2023",
+	"dateString": "13 of Feb 2023",
 	"entries": {
 		"$1.00": [
 			{
-				"nickname": "thatoneguyatthebar"
+				"nickname": "Zaxon Rapial"
 			},
 			{
-				"nickname": "Zaxon Rapial"
+				"nickname": "thatoneguyatthebar"
 			},
 			{
 				"nickname": "Maxtacks"
@@ -15,16 +15,16 @@
 				"nickname": "SuPhox"
 			},
 			{
-				"nickname": "Blastburn"
-			},
-			{
 				"nickname": "Caliban"
 			},
 			{
-				"nickname": "Zeneroth"
+				"nickname": "Blastburn"
 			},
 			{
 				"nickname": "Kyle Oran Evans "
+			},
+			{
+				"nickname": "Zeneroth"
 			},
 			{
 				"nickname": "Shadowwall123"
@@ -61,6 +61,9 @@
 			},
 			{
 				"nickname": "Jack Uki"
+			},
+			{
+				"nickname": "Magetsu88"
 			}
 		],
 		"$10.00": [
@@ -80,7 +83,13 @@
 				"nickname": "Loch55"
 			},
 			{
+				"nickname": "Silver_Bloke"
+			},
+			{
 				"nickname": "Wyvernclaw00"
+			},
+			{
+				"nickname": "Masaki Akira"
 			},
 			{
 				"nickname": "IzzenXAZ"
@@ -89,28 +98,25 @@
 				"nickname": "User#d45e8eac"
 			},
 			{
-				"nickname": "Silver_Bloke"
+				"nickname": "Steied"
 			},
 			{
 				"nickname": "User#2242146d"
 			},
 			{
-				"nickname": "Masaki Akira"
-			},
-			{
 				"nickname": "Michy <3"
-			},
-			{
-				"nickname": "User#253e76e7"
-			},
-			{
-				"nickname": "LunarEquinox8"
 			},
 			{
 				"nickname": "Runulf"
 			},
 			{
-				"nickname": "Steied"
+				"nickname": "User#253e76e7"
+			},
+			{
+				"nickname": "Blarg"
+			},
+			{
+				"nickname": "LunarEquinox8"
 			}
 		],
 		"$5.00": [
@@ -128,9 +134,6 @@
 			},
 			{
 				"nickname": "User#d74b7dcd"
-			},
-			{
-				"nickname": "Blarg"
 			}
 		]
 	},
@@ -139,5 +142,5 @@
 		"$5.00",
 		"$1.00"
 	],
-	"unixTime": 1675865904
+	"unixTime": 1676294422
 }
