@@ -74,7 +74,17 @@ func getFlags():
 		"Ch4SaidTaviIsMonster": flag(FlagType.Bool),
 		"Ch4TortureEnd": flag(FlagType.Text), #gaveup, escaped, lost
 		"Ch4TorturedSkar": flag(FlagType.Bool),
+		"Ch4TaviKnowsSkarsName": flag(FlagType.Bool),
 		"Ch4ServedPunishment": flag(FlagType.Bool),
+		"Ch4KaitSceneHappened": flag(FlagType.Bool),
+		"Ch4KaitFoundBug": flag(FlagType.Bool),
+		"Ch4KaitGotBeatenUp": flag(FlagType.Bool),
+		"Ch4LostToKait": flag(FlagType.Bool),
+		"Ch4KaitIntoStocks": flag(FlagType.Bool),
+		"Ch4KaitStocksProtected": flag(FlagType.Bool),
+		"Ch4KaitStocksUsedByOthers": flag(FlagType.Bool),
+		"Ch4KaitStocksPunishedByPC": flag(FlagType.Bool),
+		
 	}
 
 func _init():
@@ -118,6 +128,7 @@ func _init():
 		"res://Modules/TaviModule/Chapter4/Ch4s5DirectorScene.gd",
 		"res://Modules/TaviModule/Chapter4/Ch4s6EndingScene.gd",
 		"res://Modules/TaviModule/Chapter4/Ch4s7CaptainScene.gd",
+		"res://Modules/TaviModule/Chapter4/Ch4s8KaitScene.gd",
 		]
 	characters = [
 		"res://Modules/TaviModule/Chapter4/DirectorTau.gd",
@@ -148,6 +159,7 @@ func _init():
 		"res://Modules/TaviModule/Chapter3/Ch3s2ControlRoomEvent.gd",
 		"res://Modules/TaviModule/Chapter3/Ch3s3AlexEvent.gd",
 		"res://Modules/TaviModule/Chapter3/Ch3s4TransmitterEvent.gd",
+		"res://Modules/TaviModule/Chapter4/Ch4s8KaitEvent.gd",
 	]
 	quests = [
 		"res://Modules/TaviModule/TaviAppleQuest.gd",

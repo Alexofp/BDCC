@@ -527,6 +527,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "begin_skar_torture")
 	if(state == "begin_skar_torture"):
+		setFlag("TaviModule.Ch4TaviKnowsSkarsName", true)
 		playAnimation(StageScene.WoodenHorseSolo, "idle", {pc="skar", bodyState={naked=true,hard=true}})
 		saynn("With your help, Tavi manages to throw Skar onto the wooden horse. She quickly forces his hands and legs into the cuffs while you attach chains to them and tighten them up. Skar barely reaches the floor with his toes, just like you were before, he is already fidgeting uncomfortably.")
 

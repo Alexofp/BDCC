@@ -513,6 +513,16 @@ func registerCharacterFolder(folder: String):
 	else:
 		Log.printerr("An error occurred when trying to access the path "+folder)
 
+func characterExists(id:String):
+	if(id == "pc"):
+		return GM.pc != null
+	
+	if(GM.main != null):
+		var mainCharacter = GM.main.getCharacter(id)
+		if(mainCharacter != null):
+			return true
+	return false
+
 func getCharacter(id: String):
 	if(id == "pc"):
 		return GM.pc

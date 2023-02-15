@@ -378,7 +378,7 @@ func _run():
 
 		addButton("Save Risha", "Use the card on her room", "save_risha")
 	if(state == "save_risha"):
-		aimCameraAndSetLocName("tau_nearrisharoom")
+		aimCameraAndSetLocName("tau_nearrisharoomdoor")
 		addCharacter("rishatau")
 		playAnimation(StageScene.SexStart, "start", {npc="rishatau"})
 		saynn("The airlock, your paw presses the badge against its keypad panel until you hear the beep. The door starts slowly opening, letting the heavy yellow gas out in the process. Every second counts, you quickly put on the gas mask and rush inside before pulling Risha out. She is heavy as fuck but you just about manage.")

@@ -121,6 +121,8 @@ func tryImpregnate(whosCum, amountML, eggMultiplier = 1.0, virility = 1.0, ferti
 	if(!canImpregnate()):
 		return false
 	
+	if(!GlobalRegistry.characterExists(whosCum)):
+		return false
 	var father = GlobalRegistry.getCharacter(whosCum)
 	
 	var crossSpeciesMod = SpeciesCompatibility.pregnancyChanceMod(motherSpecies, father.getSpecies())

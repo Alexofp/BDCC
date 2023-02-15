@@ -86,6 +86,7 @@ position = Vector2( 0, 192 )
 roomName = "Main platform"
 roomID = "main_punishment_spot"
 roomDescription = "This is clearly the public punishment area. You see a few pillories, one-bar prisons and chain posts"
+roomSprite = 4
 population = 3
 
 [node name="MainHallRoom10" parent="." index="9" instance=ExtResource( 2 )]
