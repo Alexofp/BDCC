@@ -697,6 +697,31 @@ func extractFluidAmount(fluidSource, howmuch = 1.0):
 
 	return getFluidAmount(fluidSource)
 
+func getFluidDNA(fluidSource):
+	if(fluidSource == BodilyFluids.FluidSource.Penis):
+		var fluidDNA = FluidDNA.new()
+		fluidDNA.charID = getID()
+		fluidDNA.virility = getVirility()
+		fluidDNA.species = getSpecies()
+		
+		return fluidDNA
+	if(fluidSource == BodilyFluids.FluidSource.Vagina):
+		var fluidDNA = FluidDNA.new()
+		fluidDNA.charID = getID()
+		fluidDNA.virility = 0.0
+		fluidDNA.species = getSpecies()
+		
+		return fluidDNA
+	if(fluidSource == BodilyFluids.FluidSource.Strapon):
+		var fluidDNA = FluidDNA.new()
+		fluidDNA.charID = getID()
+		fluidDNA.virility = 0.0
+		fluidDNA.species = getSpecies()
+		
+		return fluidDNA
+		
+	return null
+
 func getFemininity() -> int:
 	return 50
 
@@ -830,7 +855,7 @@ func cummedInBodypartBy(bodypartSlot, characterID, sourceType = null):
 		sourceType = BodilyFluids.FluidSource.Penis
 	
 	var thebodypart = getBodypart(bodypartSlot)
-	thebodypart.addFluidOrifice(ch.getFluidType(sourceType), ch.extractFluidAmount(sourceType), characterID)
+	thebodypart.addFluidOrifice(ch.getFluidType(sourceType), ch.extractFluidAmount(sourceType), ch.getFluidDNA(sourceType))
 	skillsHolder.receivedCreampie(characterID)
 	if(ch != null):
 		ch.getSkillsHolder().cameInsideSomeone(getID())
@@ -1007,9 +1032,9 @@ func getCrossSpeciesCompatibility():
 	
 	return value
 
-func onFluidObsorb(orificeType, cumType, howMuch, who, virility):
+func onFluidObsorb(orificeType, cumType, howMuch, fluidDNA):
 	if(menstrualCycle != null):
-		menstrualCycle.obsorbCum(cumType, howMuch, who, orificeType, virility)
+		menstrualCycle.obsorbCum(cumType, howMuch, fluidDNA, orificeType)
 
 func getMenstrualCycle():
 	return menstrualCycle

@@ -72,9 +72,9 @@ func getAttributesText():
 func getCharCreatorData():
 	return null
 
-func addFluidOrifice(fluidType, amount: float, charID = null):
+func addFluidOrifice(fluidType, amount: float, fluidDNA = null):
 	assert(orifice != null)
-	orifice.addFluid(fluidType, amount, charID)
+	orifice.addFluid(fluidType, amount, fluidDNA)
 
 func isOrificeEmpty():
 	assert(orifice != null)

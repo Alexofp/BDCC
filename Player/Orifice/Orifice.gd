@@ -1,11 +1,7 @@
 extends Reference
 class_name Orifice
 
-# Everything is in milliliters
-
-var contents = []
-var dirtyFlag = true
-var cachedFluidsAmount: float = 0.0
+var fluids: Fluids = Fluids.new()
 
 var looseness: float = 0.0
 
@@ -152,103 +148,30 @@ func getCurrentNaturalSpill() -> float:
 		return getNaturalDrain() + getNaturalSpill()
 	
 	return getNaturalDrain()
-	
-func addFluid(fluidType, amount: float, charID = null, virility = -100.0):
-	if(amount <= 0.0):
-		return
-	
-	if(charID != null && virility < -99.0):
-		var character = GlobalRegistry.getCharacter(charID)
-		if(character != null):
-			virility = character.getVirility()
-	else:
-		virility = 1.0
-	
-	for contentData in contents:
-		if(fluidType == contentData[0] && charID == contentData[2]):
-			contentData[1] += amount
-			contentData[3] = max(contentData[3], virility)
-			dirtyFlag = true
-			return
-	
-	contents.append([fluidType, amount, charID, virility])
-	dirtyFlag = true
 
-func transferTo(otherOrifice: Orifice, fraction = 0.5, minAmount = 0.0):
-	if(minAmount > 0.0 && getFluidAmount() > 0.0):
-		fraction = max(fraction, min(1.0, minAmount/getFluidAmount()))
-	
-	var result = false
-	for contentData in contents:
-		var amountToTransfer = contentData[1] * fraction
-		contentData[1] -= amountToTransfer
-		
-		result = true
-		otherOrifice.addFluid(contentData[0], amountToTransfer, contentData[2], contentData[3])
-	removeEmptyInternalEntries()
-	dirtyFlag = true
-	return result
+func getFluids():
+	return fluids
 
-func shareFluids(otherOrifice: Orifice, fraction = 0.5):
-	var result = false
-	var ourFluids = []
-	var theirFluids = []
-	
-	for contentData in contents:
-		var amountToTransfer = contentData[1] * fraction
-		contentData[1] -= amountToTransfer
-		ourFluids.append([contentData[0], amountToTransfer, contentData[2], contentData[3]])
-		result = true
-	
-	for contentData in otherOrifice.contents:
-		var amountToTransfer = contentData[1] * fraction
-		contentData[1] -= amountToTransfer
-		theirFluids.append([contentData[0], amountToTransfer, contentData[2], contentData[3]])
-		result = true
-		
-	for fluidsToAdd in ourFluids:
-		otherOrifice.addFluid(fluidsToAdd[0], fluidsToAdd[1], fluidsToAdd[2], fluidsToAdd[3])
-	for fluidsToAdd in theirFluids:
-		addFluid(fluidsToAdd[0], fluidsToAdd[1], fluidsToAdd[2], fluidsToAdd[3])
-	removeEmptyInternalEntries()
-	otherOrifice.removeEmptyInternalEntries()
-	dirtyFlag = true
-	otherOrifice.dirtyFlag = true
-	return result
+func addFluid(fluidType, amount: float, fluidDNA = null):
+	fluids.addFluid(fluidType, amount, fluidDNA)
 
-func removeEmptyInternalEntries():
-	var newContents = []
-	for fluidData in contents:
-		if(fluidData[1] > 0):
-			newContents.append(fluidData)
+func transferTo(otherOrifice, fraction = 0.5, minAmount = 0.0):
+	return fluids.transferTo(otherOrifice, fraction, minAmount)
 
-	contents = newContents
+func shareFluids(otherOrifice, fraction = 0.5):
+	return fluids.shareFluids(otherOrifice, fraction)
 
 func hasFluidType(fluidType):
-	for fluidData in contents:
-		if(fluidData[0] == fluidType):
-			return true
-	return false
+	return fluids.hasFluidType(fluidType)
 
 func clear():
-	contents.clear()
-	dirtyFlag = true
+	fluids.clear()
 
 func isEmpty():
-	return contents.empty()
+	return fluids.isEmpty()
 
 func getFluidAmount() -> float:
-	if(!dirtyFlag):
-		return cachedFluidsAmount
-	
-	var res = 0.0
-	for fluidData in contents:
-		res += fluidData[1]
-	
-	cachedFluidsAmount = res
-	dirtyFlag = false
-	
-	return res
+	return fluids.getFluidAmount()
 
 func getStuffedLevel() -> float:
 	var fluidAmount = getFluidAmount()
@@ -280,48 +203,26 @@ func processTime(seconds: int):
 		else:
 			howMuchToDrain = overspill + getCurrentNaturalSpill() * (hoursPassed - howMuchHoursToSpillAll)
 	
-	var newContents = []
-	for fluidData in contents:
-		var share: float = fluidData[1] / fluidAmount * RNG.randf_range(0.8, 1.1)
-		var toRemove = share * howMuchToDrain
-		var toObsorb = share * howMuchGotObsorbed
-		if(fluidData[1] < 0.1):
-			toRemove = fluidData[1]
-		toRemove = clamp(toRemove, 0.0, fluidData[1])
-		
-		if(toObsorb > 0.0):
-			onObsorb(fluidData[0], toObsorb, fluidData[2], fluidData[3])
-		
-		fluidData[1] -= toRemove
-		
-		if(fluidData[1] > 0):
-			newContents.append(fluidData)
+	var obsorbResult = fluids.doDrainObsorb(howMuchToDrain, howMuchGotObsorbed)
+	for obsorbEntry in obsorbResult:
+		onObsorb(obsorbEntry)
 
-	contents = newContents
-	dirtyFlag = true
-
-func onObsorb(cumType, howMuch, who, virility):
+func onObsorb(obsorbEntry):
 	if(bodypart != null):
 		var bodypartObject = bodypart.get_ref()
 		var pc = bodypartObject.getCharacter()
 		if(pc != null && pc.has_method("onFluidObsorb")):
-			pc.onFluidObsorb(orificeType, cumType, howMuch, who, virility)
+			var fluidType = obsorbEntry["fluidType"]
+			var amount = obsorbEntry["amount"]
+			var fluidDNA = obsorbEntry["fluidDNA"]
+			
+			pc.onFluidObsorb(orificeType, fluidType, amount, fluidDNA)
 
 func getFluidList():
-	var myfluids = []
-	for fluidData in contents:
-		if(!myfluids.has(fluidData[0])):
-			myfluids.append(fluidData[0])
-	return myfluids
+	return fluids.getFluidList()
 
 func getUniqueCharactersAmount():
-	var chars = {}
-	
-	for fluidData in contents:
-		if(fluidData[2] != null):
-			chars[fluidData[2]] = true
-	
-	return chars.keys().size()
+	return fluids.getUniqueCharactersAmount()
 
 func getAttributesText():
 	return [
@@ -364,18 +265,12 @@ func generateDataFor(_dynamicCharacter):
 
 func saveData():
 	var data = {
-		"contents": contents,
+		"fluids": fluids.saveData(),
 		"looseness": looseness,
 	}
 	
 	return data
 
 func loadData(data):
-	contents = SAVE.loadVar(data, "contents", [])
-	for conData in contents:
-		# Adding virility if it's missing
-		if(conData.size() == 3):
-			conData.append(1.0)
-	
+	fluids.loadData(SAVE.loadVar(data, "fluids", {}))
 	looseness = SAVE.loadVar(data, "looseness", 0.0)
-	dirtyFlag = true

@@ -151,13 +151,10 @@ func removeEgg(egg):
 	impregnatedEggCells.erase(egg)
 	#print("EGG DIED")
 	
-func obsorbCum(cumType, amountML, whosCum, orificeType = OrificeType.Vagina, virility = 1.0):
+func obsorbCum(_cumType, amountML, fluidDNA, orificeType = OrificeType.Vagina):
 	if(!hasWombIn(orificeType)):
 		return
 	
-	if(!BodilyFluids.FluidType.canMakeYouPregnant(cumType)):
-		return
-		
 	var fertility = getCharacter().getFertility()
 	var crossSpeciesCompatibility = getCharacter().getCrossSpeciesCompatibility()
 	
@@ -165,7 +162,7 @@ func obsorbCum(cumType, amountML, whosCum, orificeType = OrificeType.Vagina, vir
 		var eggAmountMult = sqrt(float(eggCells[orificeType].size()))
 		
 		var egg = RNG.pick(eggCells[orificeType])
-		if(egg.tryImpregnate(whosCum, amountML, eggAmountMult, virility, fertility, crossSpeciesCompatibility)):
+		if(egg.tryImpregnate(fluidDNA, amountML, eggAmountMult, fertility, crossSpeciesCompatibility)):
 			eggCells[orificeType].erase(egg)
 			impregnatedEggCells.append(egg)
 

@@ -228,6 +228,8 @@ func calculateAmount(pcKids = true):
 	return amount
 
 func printChildren(pcKids = true):
+	var resultTable = "[table=5][cell]Gender[/cell][cell]Species[/cell][cell]Age[/cell][cell]Mother[/cell][cell]Father[/cell]"
+	
 	for ch in GM.CS.getChildren():
 		var child: Child = ch
 		if(pcKids && child.fatherID != "pc" && child.motherID != "pc"):
@@ -248,13 +250,14 @@ func printChildren(pcKids = true):
 		else:
 			ageStr = str(yearsOld)+" years "+ageStr
 		
-		var resultString = "[color="+NpcGender.getColorString(child.gender)+"]"+ NpcGender.getVisibleName(child.gender)+"[/color]"+" - "
-		resultString += Util.getSpeciesName(child.species)+" - "
-		resultString += ageStr+" - "
+		resultTable += "[cell]"+"[color="+NpcGender.getColorString(child.gender)+"]"+ NpcGender.getVisibleName(child.gender)+"[/color]"+"[/cell]"
+		resultTable += "[cell]"+Util.getSpeciesName(child.species)+"[/cell]"
+		resultTable += "[cell]"+ageStr+"[/cell]"
+		resultTable += "[cell]"+child.getMotherName()+"[/cell]"
+		resultTable += "[cell]"+child.getFatherName()+"[/cell]"
 		
-		resultString += "Mother: "+child.getMotherName()+", Father: "+child.getFatherName()
-		
-		sayn(resultString)
+	resultTable += "[/table]"
+	saynn(resultTable)
 
 func _react(_action: String, _args):
 	if(_action == "sleep"):
