@@ -36,7 +36,7 @@ func getProductionSpeedPerHour() -> float:
 	return getCapacity() / 10.0
 	
 func getFluidType():
-	return BodilyFluids.FluidType.Milk
+	return "Milk"
 
 func shouldProduce():
 	return true
@@ -81,7 +81,7 @@ func loadData(data):
 
 func getAttributesText():
 	return [
-		["Producing", BodilyFluids.FluidType.getName(getFluidType())],
+		["Producing", BodilyFluids.getFluidName(getFluidType())],
 		["Capacity", str(round(getFluidAmount() * 10.0)/10.0)+"/"+ str(round(getCapacity() * 10.0)/10.0)+" ml"],		
 		["Production speed", str(round(getProductionSpeedPerHour() * 10.0)/10.0)+" ml/hour"],
 		["Currently producing", str(shouldProduce())],

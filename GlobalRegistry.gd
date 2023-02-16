@@ -51,6 +51,7 @@ var fetishes: Dictionary = {}
 var sexGoals: Dictionary = {}
 var gameExtenders: Dictionary = {}
 var computers: Dictionary = {}
+var fluids: Dictionary = {}
 
 var bodypartStorageNode
 
@@ -293,6 +294,8 @@ func registerEverything():
 		var end2 = OS.get_ticks_usec()
 		var worker_time2 = (end2-start2)/1000000.0
 		Log.print("SCENES initialized in: %s seconds" % [worker_time2])
+	
+	registerFluidsFolder("res://Player/Fluids/Fluids/")
 	
 	registerCharacterFolder("res://Characters/")
 	registerCharacterFolder("res://Characters/Generic/")
@@ -1409,3 +1412,25 @@ func createComputer(id: String):
 
 func getComputers():
 	return computers
+
+
+func registerFluid(path: String):
+	var loadedClass = load(path)
+	var object = loadedClass.new()
+	
+	fluids[object.id] = object
+
+func registerFluidsFolder(folder: String):
+	var scripts = getScriptsInFolder(folder)
+	for scriptPath in scripts:
+		registerFluid(scriptPath)
+
+func getFluid(id: String):
+	if(fluids.has(id)):
+		return fluids[id]
+	else:
+		Log.printerr("ERROR: fluid with the id "+id+" wasn't found")
+		return null
+
+func getFluids():
+	return fluids

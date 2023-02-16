@@ -164,10 +164,10 @@ func _react(_action: String, _args):
 		processTime(60*10)
 		if(GM.pc.hasReachablePenis()):
 			GM.pc.orgasmFrom("tavi")
-			GM.pc.cummedOnBy("pc", BodilyFluids.FluidSource.Penis)
+			GM.pc.cummedOnBy("pc", FluidSource.Penis)
 		elif(GM.pc.hasReachableVagina()):
 			GM.pc.orgasmFrom("tavi")
-			GM.pc.cummedOnBy("pc", BodilyFluids.FluidSource.Vagina)
+			GM.pc.cummedOnBy("pc", FluidSource.Vagina)
 	
 	setState(_action)
 

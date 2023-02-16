@@ -697,9 +697,9 @@ func cummedOnBy(characterID, sourceType = null, howMessy: int = 1):
 	var ch = GlobalRegistry.getCharacter(characterID)
 	if(sourceType == null):
 		if(ch.getGender() == Gender.Female):
-			sourceType = BodilyFluids.FluidSource.Vagina
+			sourceType = FluidSource.Vagina
 		else:
-			sourceType = BodilyFluids.FluidSource.Penis
+			sourceType = FluidSource.Penis
 	
 	coverBodyWithFluid(characterID, ch.getFluidType(sourceType), howMessy)
 

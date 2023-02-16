@@ -359,7 +359,7 @@ func doDomAction(_id, _actionInfo):
 			text = RNG.pick([
 				"{dom.You} {dom.youVerb('shift')} away a bit and {dom.youVerb('let')} {sub.you} [b]cum all over {dom.yourHis} face[/b]. Lots of "+RNG.pick(["pussy juices", "juices", "femcum", "female juices"])+" land on it while {sub.yourHis} pussy squirts, leaving quite a mess!",
 			])
-			getDom().cummedOnBy(subID, BodilyFluids.FluidSource.Vagina)
+			getDom().cummedOnBy(subID, FluidSource.Vagina)
 			subInfo.cum()
 		else:
 			text = RNG.pick([
@@ -386,7 +386,7 @@ func doDomAction(_id, _actionInfo):
 					
 					return {text=text}
 			
-			getDom().cummedOnBy(subID, BodilyFluids.FluidSource.Penis)
+			getDom().cummedOnBy(subID, FluidSource.Penis)
 			subInfo.cum()
 		
 		state = ""
@@ -399,7 +399,7 @@ func doDomAction(_id, _actionInfo):
 			text = RNG.pick([
 				"{dom.You} {dom.youVerb('press', 'presses')} {dom.yourHis} lips against {sub.yourHis} "+RNG.pick(["pussy", "slit", "sensetive folds", "petals"])+" and keep lapping up the arousal until [b]{sub.you} {sub.youVerb('cum')}[/b]! {sub.YourHis} juices rush into {dom.yourHis} mouth as {sub.youHe} squirts!",
 			])
-			getDom().cummedInMouthBy(subID, BodilyFluids.FluidSource.Vagina)
+			getDom().cummedInMouthBy(subID, FluidSource.Vagina)
 			subInfo.cum()
 		else:
 			text = RNG.pick([
@@ -427,7 +427,7 @@ func doDomAction(_id, _actionInfo):
 					
 					return {text=text}
 			
-			getDom().cummedInMouthBy(subID, BodilyFluids.FluidSource.Penis)
+			getDom().cummedInMouthBy(subID, FluidSource.Penis)
 			subInfo.cum()
 		
 		state = ""
@@ -612,7 +612,7 @@ func doSubAction(_id, _actionInfo):
 			text = RNG.pick([
 				"{sub.You} {sub.youVerb('arch', 'arches')} {sub.yourHis} back while {sub.yourHis} "+RNG.pick(["pussy", "pussy slit", "kitty"])+" twitches and squirts all over {dom.your} face! {sub.YouHe} [b]came without {dom.yourHis} permission[/b]!",
 			])
-			getDom().cummedOnBy(subID, BodilyFluids.FluidSource.Vagina)
+			getDom().cummedOnBy(subID, FluidSource.Vagina)
 			subInfo.cum()
 			if(getSub().hasReachablePenis()):
 				if(getSub().isWearingChastityCage()):
@@ -658,7 +658,7 @@ func doSubAction(_id, _actionInfo):
 					
 					return {text=text}
 				
-			getDom().cummedOnBy(subID, BodilyFluids.FluidSource.Penis)
+			getDom().cummedOnBy(subID, FluidSource.Penis)
 			subInfo.cum()
 		if(state == "blowjob"):
 			text = RNG.pick([

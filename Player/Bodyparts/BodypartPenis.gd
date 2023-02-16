@@ -15,7 +15,7 @@ func getSlot():
 
 func getTooltipInfo():
 	var text = "length: " + Util.cmToString(lengthCM) + "\n"
-	text += BodilyFluids.FluidType.getName(getFluidProduction().getFluidType())+": " + str(round(getFluidProduction().getFluidAmount() * 10.0)/10.0)+"/"+ str(round(getFluidProduction().getCapacity() * 10.0)/10.0)+" ml"
+	text += BodilyFluids.getFluidName(getFluidProduction().getFluidType())+": " + str(round(getFluidProduction().getFluidAmount() * 10.0)/10.0)+"/"+ str(round(getFluidProduction().getCapacity() * 10.0)/10.0)+" ml"
 	return text
 
 func saveData():

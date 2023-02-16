@@ -689,8 +689,8 @@ func _react(_action: String, _args):
 
 	if(_action == "kait_cums_facesitting"):
 		processTime(60*10)
-		GM.pc.cummedOnBy("kait", BodilyFluids.FluidSource.Vagina)
-		GM.pc.cummedInMouthBy("kait", BodilyFluids.FluidSource.Vagina)
+		GM.pc.cummedOnBy("kait", FluidSource.Vagina)
+		GM.pc.cummedInMouthBy("kait", FluidSource.Vagina)
 		GM.pc.addSkillExperience(Skill.SexSlave, 50)
 		GM.pc.addLust(50)
 
@@ -729,8 +729,8 @@ func _react(_action: String, _args):
 
 	if(_action == "squirt_over_kaits_face"):
 		processTime(60*10)
-		getCharacter("kait").cummedInMouthBy("pc", BodilyFluids.FluidSource.Vagina)
-		getCharacter("kait").cummedOnBy("pc", BodilyFluids.FluidSource.Vagina)
+		getCharacter("kait").cummedInMouthBy("pc", FluidSource.Vagina)
+		getCharacter("kait").cummedOnBy("pc", FluidSource.Vagina)
 		GM.pc.orgasmFrom("kait")
 		GM.pc.addSkillExperience(Skill.SexSlave, 50)
 

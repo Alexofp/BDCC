@@ -8,7 +8,7 @@ func getCapacity() -> float:
 	return round(50.0 + pow(lenCM, 2.0))
 
 func getFluidType():
-	return BodilyFluids.FluidType.Cum
+	return "Cum"
 
 func getProductionSpeedPerHour() -> float:
 	if(!shouldProduce()):

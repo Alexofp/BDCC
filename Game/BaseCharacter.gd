@@ -667,30 +667,30 @@ func getPenisSize():
 	return bodypart.getLength()
 
 func getFluidType(fluidSource):
-	if(fluidSource == BodilyFluids.FluidSource.Penis):
-		return BodilyFluids.FluidType.Cum
-	if(fluidSource == BodilyFluids.FluidSource.Vagina):
-		return BodilyFluids.FluidType.GirlCum
-	if(fluidSource == BodilyFluids.FluidSource.Strapon):
-		return BodilyFluids.FluidType.CumLube
+	if(fluidSource == FluidSource.Penis):
+		return "Cum"
+	if(fluidSource == FluidSource.Vagina):
+		return "GirlCum"
+	if(fluidSource == FluidSource.Strapon):
+		return "CumLube"
 		
 	return null
 
 func getFluidAmount(fluidSource):
-	if(fluidSource == BodilyFluids.FluidSource.Penis):
+	if(fluidSource == FluidSource.Penis):
 		if(hasBodypart(BodypartSlot.Penis)):
 			var penis:BodypartPenis = getBodypart(BodypartSlot.Penis)
 			return penis.getFluidProduction().getFluidAmount()
 		return RNG.randf_range(100.0, 500.0)
-	if(fluidSource == BodilyFluids.FluidSource.Vagina):
+	if(fluidSource == FluidSource.Vagina):
 		return RNG.randf_range(50.0, 200.0)
-	if(fluidSource == BodilyFluids.FluidSource.Strapon):
+	if(fluidSource == FluidSource.Strapon):
 		return RNG.randf_range(100.0, 500.0)
 		
 	return 0.0
 
 func extractFluidAmount(fluidSource, howmuch = 1.0):
-	if(fluidSource == BodilyFluids.FluidSource.Penis):
+	if(fluidSource == FluidSource.Penis):
 		if(hasBodypart(BodypartSlot.Penis)):
 			var penis:BodypartPenis = getBodypart(BodypartSlot.Penis)
 			return penis.getFluidProduction().drain(howmuch)
@@ -698,21 +698,21 @@ func extractFluidAmount(fluidSource, howmuch = 1.0):
 	return getFluidAmount(fluidSource)
 
 func getFluidDNA(fluidSource):
-	if(fluidSource == BodilyFluids.FluidSource.Penis):
+	if(fluidSource == FluidSource.Penis):
 		var fluidDNA = FluidDNA.new()
 		fluidDNA.charID = getID()
 		fluidDNA.virility = getVirility()
 		fluidDNA.species = getSpecies()
 		
 		return fluidDNA
-	if(fluidSource == BodilyFluids.FluidSource.Vagina):
+	if(fluidSource == FluidSource.Vagina):
 		var fluidDNA = FluidDNA.new()
 		fluidDNA.charID = getID()
 		fluidDNA.virility = 0.0
 		fluidDNA.species = getSpecies()
 		
 		return fluidDNA
-	if(fluidSource == BodilyFluids.FluidSource.Strapon):
+	if(fluidSource == FluidSource.Strapon):
 		var fluidDNA = FluidDNA.new()
 		fluidDNA.charID = getID()
 		fluidDNA.virility = 0.0
@@ -852,7 +852,7 @@ func cummedInBodypartBy(bodypartSlot, characterID, sourceType = null):
 	
 	var ch = GlobalRegistry.getCharacter(characterID)
 	if(sourceType == null):
-		sourceType = BodilyFluids.FluidSource.Penis
+		sourceType = FluidSource.Penis
 	
 	var thebodypart = getBodypart(bodypartSlot)
 	thebodypart.addFluidOrifice(ch.getFluidType(sourceType), ch.extractFluidAmount(sourceType), ch.getFluidDNA(sourceType))
@@ -1659,7 +1659,7 @@ func getBodypartContentsStringList(bodypartID):
 	
 	var processedFluidNames = []
 	for fluidID in messFluids:
-		processedFluidNames.append(BodilyFluids.FluidType.getName(fluidID))
+		processedFluidNames.append(BodilyFluids.getFluidName(fluidID))
 	
 	if(processedFluidNames.size() == 1):
 		return "some "+processedFluidNames[0]

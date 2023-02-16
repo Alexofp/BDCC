@@ -1,35 +1,11 @@
 extends Object
 class_name BodilyFluids
 
-class FluidType:
-	const Cum = "cum"
-	const GirlCum = "girlcum"
-	const Milk = "milk"
-	const BlackGoo = "blackgoo"
-	const CumLube = "cumlube"
-	const WhiteGoo = "whitegoo"
-	
-	static func getName(fl):
-		if(fl == Cum):
-			return "cum"
-		if(fl == GirlCum):
-			return "girlcum"
-		if(fl == Milk):
-			return "milk"
-		if(fl == BlackGoo):
-			return "black goo"
-		if(fl == CumLube):
-			return "cum lube"
-		if(fl == WhiteGoo):
-			return "white goo"
-		return "Error"
-
-
-enum FluidSource {
-	Penis,
-	Vagina,
-	Strapon,
-}
+static func getFluidName(fluidID):
+	var fluid = GlobalRegistry.getFluid(fluidID)
+	if(fluid == null):
+		return "ERROR:BADFLUID"
+	return fluid.getVisibleName()
 
 enum MessinessLevel {
 	Clean = 0,
@@ -44,7 +20,7 @@ const MaxMessinessLevel = 5
 static func getOutsideMessinessMessage(messLevel, fluids: Array):
 	var names = []
 	for fluid in fluids:
-		names.append(FluidType.getName(fluid))
+		names.append(getFluidName(fluid))
 	var humanReadableString = Util.humanReadableList(names)
 	if(names.size() == 0):
 		humanReadableString = "nothing"

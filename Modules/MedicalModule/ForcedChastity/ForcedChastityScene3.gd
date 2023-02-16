@@ -268,7 +268,7 @@ func _react(_action: String, _args):
 	if(_action == "drink"):
 		var thebodypart = GM.pc.getBodypart(BodypartSlot.Head)
 		if(thebodypart != null):
-			thebodypart.addFluidOrifice(GM.pc.getFluidType(BodilyFluids.FluidSource.Penis), howMuchMilked, "pc")
+			thebodypart.addFluidOrifice(GM.pc.getFluidType(FluidSource.Penis), howMuchMilked, "pc")
 		
 	if(_action == "pick"):
 		setFlag("MedicalModule.Chastity_FirstChosenPerson", _args[0])

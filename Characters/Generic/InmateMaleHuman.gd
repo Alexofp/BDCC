@@ -19,7 +19,7 @@ func getPenisSize():
 	return 16.0
 
 func getFluidAmount(fluidSource):
-	if(fluidSource == BodilyFluids.FluidSource.Penis):
+	if(fluidSource == FluidSource.Penis):
 		return RNG.randf_range(60.0, 200.0)
 		
 	return .getFluidAmount(fluidSource)

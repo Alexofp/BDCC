@@ -52,7 +52,7 @@ _global_script_classes=[ {
 "base": "Object",
 "class": "BodilyFluids",
 "language": "GDScript",
-"path": "res://Player/Orifice/BodilyFluids.gd"
+"path": "res://Player/Fluids/BodilyFluids.gd"
 }, {
 "base": "Object",
 "class": "BodyWritings",
@@ -390,19 +390,29 @@ _global_script_classes=[ {
 "path": "res://UI/FlexGridContainer.gd"
 }, {
 "base": "Reference",
+"class": "FluidBase",
+"language": "GDScript",
+"path": "res://Player/Fluids/FluidBase.gd"
+}, {
+"base": "Reference",
 "class": "FluidDNA",
 "language": "GDScript",
-"path": "res://Player/Orifice/FluidDNA.gd"
+"path": "res://Player/Fluids/FluidDNA.gd"
 }, {
 "base": "Reference",
 "class": "FluidProduction",
 "language": "GDScript",
 "path": "res://Player/FluidProduction/FluidProduction.gd"
 }, {
+"base": "Object",
+"class": "FluidSource",
+"language": "GDScript",
+"path": "res://Player/Fluids/FluidSource.gd"
+}, {
 "base": "Reference",
 "class": "Fluids",
 "language": "GDScript",
-"path": "res://Player/Orifice/Fluids.gd"
+"path": "res://Player/Fluids/Fluids.gd"
 }, {
 "base": "Reference",
 "class": "GDUnzip",
@@ -1116,8 +1126,10 @@ _global_script_class_icons={
 "Flag": "",
 "FlagType": "",
 "FlexGridContainer": "",
+"FluidBase": "",
 "FluidDNA": "",
 "FluidProduction": "",
+"FluidSource": "",
 "Fluids": "",
 "GDUnzip": "",
 "GameExtender": "",
@@ -1283,7 +1295,7 @@ window/stretch/aspect="expand"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/bone_editor/plugin.cfg", "res://addons/godot-notes/plugin.cfg" )
+enabled=PoolStringArray( "res://addons/godot-notes/plugin.cfg" )
 
 [gui]
 

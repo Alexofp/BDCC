@@ -358,7 +358,7 @@ func _react(_action: String, _args):
 		GM.pc.addSkillExperience(Skill.SexSlave, 20, "cpguard_suckcock")
 
 	if(_action == "facial"):
-		GM.pc.cummedOnBy("cp_guard", BodilyFluids.FluidSource.Penis)
+		GM.pc.cummedOnBy("cp_guard", FluidSource.Penis)
 		GM.pc.addSkillExperience(Skill.SexSlave, 20, "cpguard_suckcock")
 
 	if(_action == "mouth"):

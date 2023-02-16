@@ -559,7 +559,7 @@ func doDomAction(_id, _actionInfo):
 				
 				return {text=text}
 		
-		getSub().cummedOnBy(domID, BodilyFluids.FluidSource.Penis)
+		getSub().cummedOnBy(domID, FluidSource.Penis)
 		getDom().cumOnFloor()
 		domInfo.cum()
 		satisfyGoals()
@@ -575,7 +575,7 @@ func doDomAction(_id, _actionInfo):
 				"{dom.You} {dom.youVerb('shake')} and {dom.youVerb('shiver')} while {dom.yourHis} "+RNG.pick(["pulsating", "twitching"])+" "+RNG.pick(["pussy", "pussy", "slit", "kitty"])+" [b]"+RNG.pick(["makes", "creates"])+" a wet spot on {dom.yourHis} clothing[/b]!",
 			])
 		else:
-			getSub().cummedOnBy(domID, BodilyFluids.FluidSource.Vagina)
+			getSub().cummedOnBy(domID, FluidSource.Vagina)
 		
 		if(getDom().hasReachablePenis()):
 			getDom().cumOnFloor()

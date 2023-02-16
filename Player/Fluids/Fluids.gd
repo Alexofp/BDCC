@@ -180,7 +180,7 @@ func getFluidList():
 func getFluidListNames():
 	var myfluids = []
 	for fluidData in contents:
-		var fluidName = BodilyFluids.FluidType.getName(fluidData["fluidType"])
+		var fluidName = BodilyFluids.getFluidName(fluidData["fluidType"])
 		
 		if(!myfluids.has(fluidName)):
 			myfluids.append(fluidName)

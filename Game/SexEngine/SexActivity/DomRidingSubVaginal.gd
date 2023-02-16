@@ -421,7 +421,7 @@ func doDomAction(_id, _actionInfo):
 			" {sub.You} [b]{sub.youVerb('cum')} all over {sub.yourself}[/b]! Strings of {sub.yourHis} own "+RNG.pick(["cum", "seed", "semen"])+" land on {sub.yourHis} chest, leaving a mess.",
 		])
 		
-		getSub().cummedOnBy(subID, BodilyFluids.FluidSource.Penis)
+		getSub().cummedOnBy(subID, FluidSource.Penis)
 		subInfo.cum()
 		satisfyGoals()
 
