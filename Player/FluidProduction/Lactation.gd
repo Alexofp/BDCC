@@ -96,6 +96,9 @@ func getProductionSpeedPerHour() -> float:
 		
 	return getCapacity() / 30.0 * mult
 
+func getFluidSource():
+	return FluidSource.Breasts
+
 func saveData():
 	var data = .saveData()
 	data["lactationTimer"] = lactationTimer

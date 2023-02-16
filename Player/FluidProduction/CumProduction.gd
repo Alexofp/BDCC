@@ -14,3 +14,6 @@ func getProductionSpeedPerHour() -> float:
 	if(!shouldProduce()):
 		return 0.0
 	return getCapacity() / 2.0
+
+func getFluidSource():
+	return FluidSource.Penis

@@ -719,6 +719,13 @@ func getFluidDNA(fluidSource):
 		fluidDNA.species = getSpecies()
 		
 		return fluidDNA
+	if(fluidSource == FluidSource.Breasts):
+		var fluidDNA = FluidDNA.new()
+		fluidDNA.charID = getID()
+		fluidDNA.virility = 0.0
+		fluidDNA.species = getSpecies()
+		
+		return fluidDNA
 		
 	return null
 
@@ -854,8 +861,17 @@ func cummedInBodypartBy(bodypartSlot, characterID, sourceType = null):
 	if(sourceType == null):
 		sourceType = FluidSource.Penis
 	
-	var thebodypart = getBodypart(bodypartSlot)
-	thebodypart.addFluidOrifice(ch.getFluidType(sourceType), ch.extractFluidAmount(sourceType), ch.getFluidDNA(sourceType))
+	if(sourceType == FluidSource.Penis && ch.hasBodypart(BodypartSlot.Penis)):
+		var thebodypart = getBodypart(bodypartSlot)
+		var usedBodypart = ch.getBodypart(BodypartSlot.Penis)
+		
+		var fluids = usedBodypart.getFluids()
+		
+		if(fluids != null):
+			fluids.transferTo(thebodypart, 1.0)
+	else:
+		var thebodypart = getBodypart(bodypartSlot)
+		thebodypart.addFluidOrifice(ch.getFluidType(sourceType), ch.extractFluidAmount(sourceType), ch.getFluidDNA(sourceType))
 	skillsHolder.receivedCreampie(characterID)
 	if(ch != null):
 		ch.getSkillsHolder().cameInsideSomeone(getID())

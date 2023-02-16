@@ -89,6 +89,33 @@ func transferTo(otherFluids, fraction = 0.5, minAmount = 0.0):
 	removeEmptyInternalEntries()
 	return result
 
+func transferAmountTo(otherFluids, howMuch):
+	if(howMuch <= 0.0):
+		return
+	
+	if(!otherFluids.has_method("isFluids")):
+		if(otherFluids.has_method("getFluids")):
+			otherFluids = otherFluids.getFluids()
+		else:
+			assert(false, "Bad fluids object")
+	
+	var fluidAmount = getFluidAmount()
+	if(howMuch > fluidAmount):
+		howMuch = fluidAmount
+	
+	var result = false
+	for contentData in contents:
+		var share: float = contentData["amount"] / fluidAmount
+		
+		var amountToTransfer = howMuch * share
+		contentData["amount"] -= amountToTransfer
+		
+		result = true
+		otherFluids.addFluid(contentData["fluidType"], amountToTransfer, contentData["fluidDNA"])
+	removeEmptyInternalEntries()
+	return result
+	
+
 func shareFluids(otherFluids, fraction = 0.5):
 	if(!otherFluids.has_method("isFluids")):
 		if(otherFluids.has_method("getFluids")):
@@ -170,6 +197,11 @@ func drain(howMuchToDrain: float, randMin:float = 1.0, randMax:float = 1.0):
 	if(shouldRemoveInternal):
 		removeEmptyInternalEntries()
 
+func drainPercent(factor: float):
+	var fluidAmount = getFluidAmount()
+	
+	drain(fluidAmount * factor)
+
 func getFluidList():
 	var myfluids = []
 	for fluidData in contents:
@@ -196,6 +228,38 @@ func getUniqueCharactersAmount():
 	
 	return chars.keys().size()
 
+func getContentsHumanReadableArray():
+	var result = []
+	var amountByFluidType = {}
+	
+	for fluidData in contents:
+		var fluidType = fluidData["fluidType"]
+		
+		if(!amountByFluidType.has(fluidType)):
+			amountByFluidType[fluidType] = 0.0
+		
+		amountByFluidType[fluidType] += fluidData["amount"]
+	
+	for fluidType in amountByFluidType:
+		result.append(BodilyFluids.getFluidName(fluidType)+": "+str(Util.roundF(amountByFluidType[fluidType], 1))+" ml")
+	return result
+	
+func getContentsHumanReadablePairsArray():
+	var result = []
+	var amountByFluidType = {}
+	
+	for fluidData in contents:
+		var fluidType = fluidData["fluidType"]
+		
+		if(!amountByFluidType.has(fluidType)):
+			amountByFluidType[fluidType] = 0.0
+		
+		amountByFluidType[fluidType] += fluidData["amount"]
+	
+	for fluidType in amountByFluidType:
+		result.append([BodilyFluids.getFluidName(fluidType), str(Util.roundF(amountByFluidType[fluidType], 1))+" ml"])
+	return result
+	
 func saveData():
 	var theContents = []
 	for contentData in contents:

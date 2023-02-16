@@ -224,6 +224,9 @@ func getFluidList():
 func getUniqueCharactersAmount():
 	return fluids.getUniqueCharactersAmount()
 
+func getContentsHumanReadableArray():
+	return fluids.getContentsHumanReadableArray()
+
 func getAttributesText():
 	return [
 		["Capacity", str(round(getFluidAmount() * 10.0)/10.0)+"/"+ str(round(getCapacity() * 10.0)/10.0)+" ml"],		
@@ -235,10 +238,15 @@ func getAttributesText():
 	]
 
 func getTooltipInfo():
-	var text = "capacity: " + str(round(getFluidAmount() * 10.0)/10.0)+"/"+ str(round(getCapacity() * 10.0)/10.0)+" ml\n"
-	text += "looseness level: " + str(round(getLooseness() * 10.0)/10.0)+", "+getLoosenessString() + "\n"
-	text += "comfortable insertion: " + Util.cmToString(round(getComfortableInsertion() * 10.0)/10.0)
-	return text
+	var result = []
+	
+	result.append("capacity: " + str(round(getFluidAmount() * 10.0)/10.0)+"/"+ str(round(getCapacity() * 10.0)/10.0)+" ml")
+	result.append("looseness level: " + str(round(getLooseness() * 10.0)/10.0)+", "+getLoosenessString())
+	result.append("comfortable insertion: " + Util.cmToString(round(getComfortableInsertion() * 10.0)/10.0))
+	if(!isEmpty()):
+		result.append("Contents:")
+		result.append_array(getContentsHumanReadableArray())
+	return Util.join(result, "\n")
 
 func generateDataFor(_dynamicCharacter):
 	if(bodypart == null || bodypart.get_ref().character == null):
