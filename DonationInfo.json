@@ -1,5 +1,5 @@
 {
-	"dateString": "14 of Feb 2023",
+	"dateString": "17 of Feb 2023",
 	"entries": {
 		"$1.00": [
 			{
@@ -9,16 +9,13 @@
 				"nickname": "thatoneguyatthebar"
 			},
 			{
-				"nickname": "Maxtacks"
+				"nickname": "Caliban"
 			},
 			{
 				"nickname": "SuPhox"
 			},
 			{
-				"nickname": "Caliban"
-			},
-			{
-				"nickname": "Blastburn"
+				"nickname": "Maxtacks"
 			},
 			{
 				"nickname": "Kyle Oran Evans "
@@ -27,16 +24,16 @@
 				"nickname": "Zeneroth"
 			},
 			{
-				"nickname": "Trewill"
+				"nickname": "Shadowwall123"
 			},
 			{
-				"nickname": "Shadowwall123"
+				"nickname": "Trewill"
 			},
 			{
 				"nickname": "Lichity"
 			},
 			{
-				"nickname": "VØID"
+				"nickname": "joelee29"
 			},
 			{
 				"nickname": "User#a63f196a"
@@ -45,13 +42,16 @@
 				"nickname": "Tristan Leo Roberts "
 			},
 			{
+				"nickname": "VØID"
+			},
+			{
+				"nickname": "WonderLlama2008"
+			},
+			{
 				"nickname": "User#871f7d52"
 			},
 			{
 				"nickname": "BarryRkls"
-			},
-			{
-				"nickname": "joelee29"
 			},
 			{
 				"nickname": "ghost of cum"
@@ -64,6 +64,9 @@
 			},
 			{
 				"nickname": "Magetsu88"
+			},
+			{
+				"nickname": "HANAMIアリス"
 			}
 		],
 		"$10.00": [
@@ -89,37 +92,37 @@
 				"nickname": "Wyvernclaw00"
 			},
 			{
-				"nickname": "IzzenXAZ"
+				"nickname": "Masaki Akira"
 			},
 			{
-				"nickname": "Masaki Akira"
+				"nickname": "IzzenXAZ"
 			},
 			{
 				"nickname": "User#d45e8eac"
 			},
 			{
-				"nickname": "Steied"
+				"nickname": "User#2242146d"
 			},
 			{
-				"nickname": "User#2242146d"
+				"nickname": "Steied"
 			},
 			{
 				"nickname": "Michy <3"
 			},
 			{
-				"nickname": "Draglinyue"
-			},
-			{
 				"nickname": "Runulf"
-			},
-			{
-				"nickname": "User#253e76e7"
 			},
 			{
 				"nickname": "Blarg"
 			},
 			{
 				"nickname": "LunarEquinox8"
+			},
+			{
+				"nickname": "User#253e76e7"
+			},
+			{
+				"nickname": "ProtossMan"
 			}
 		],
 		"$5.00": [
@@ -145,5 +148,5 @@
 		"$5.00",
 		"$1.00"
 	],
-	"unixTime": 1676386691
+	"unixTime": 1676625634
 }
