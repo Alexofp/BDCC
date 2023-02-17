@@ -6,4 +6,5 @@ enum {
 	Vagina,
 	Strapon,
 	Breasts,
+	Pissing,
 }

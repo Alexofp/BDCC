@@ -236,6 +236,9 @@ func _run():
 
 
 func _react(_action: String, _args):
+	if(_action == "piss_on_her"):
+		getCharacter("kait").pissedOnBy("pc")
+	
 	if(_action == "inside"):
 		getCharacter("kait").cummedInVaginaBy("pc")
 		GM.pc.orgasmFrom("kait")

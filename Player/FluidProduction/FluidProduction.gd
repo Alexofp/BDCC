@@ -29,8 +29,7 @@ func drain(howmuch = 1.0) -> float:
 	if(result > fluidAmount):
 		result = fluidAmount
 		
-	fluids.drain(result)
-	return result
+	return fluids.drain(result)
 
 func afterMilked():
 	pass
@@ -41,6 +40,12 @@ func getProductionSpeedPerHour() -> float:
 	return getCapacity() / 10.0
 	
 func getFluidType():
+	var character = getCharacter()
+	if(character != null):
+		var theFluidType = character.getFluidType(getFluidSource())
+		if(theFluidType != null):
+			return theFluidType
+	
 	return "Milk"
 
 func getFluidSource():

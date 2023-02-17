@@ -134,6 +134,7 @@ func saveData():
 	data["lustInterests"] = lustInterests.saveData()
 	if(menstrualCycle != null):
 		data["menstrualCycle"] = menstrualCycle.saveData()
+	data["bodyFluids"] = bodyFluids.saveData()
 
 	data["timedBuffs"] = saveBuffsData(timedBuffs)
 	data["timedBuffsDurationSeconds"] = timedBuffsDurationSeconds
@@ -204,6 +205,7 @@ func loadData(data):
 	inventory.loadDataNPC(SAVE.loadVar(data, "inventory", {}))
 	skillsHolder.loadData(SAVE.loadVar(data, "skills", {}))
 	lustInterests.loadData(SAVE.loadVar(data, "lustInterests", {}))
+	bodyFluids.loadData(SAVE.loadVar(data, "bodyFluids", {}))
 
 	if(menstrualCycle != null && data.has("menstrualCycle")):
 		menstrualCycle.loadData(SAVE.loadVar(data, "menstrualCycle", {}))

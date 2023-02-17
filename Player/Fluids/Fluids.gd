@@ -181,6 +181,7 @@ func drain(howMuchToDrain: float, randMin:float = 1.0, randMax:float = 1.0):
 	var fluidAmount = getFluidAmount()
 	
 	var shouldRemoveInternal = false
+	var result = 0.0
 	
 	for fluidData in contents:
 		var share: float = fluidData["amount"] / fluidAmount * RNG.randf_range(randMin, randMax)
@@ -191,16 +192,18 @@ func drain(howMuchToDrain: float, randMin:float = 1.0, randMax:float = 1.0):
 
 		fluidData["amount"] -= toRemove
 		cachedFluidsAmount -= toRemove
+		result += toRemove
 		if(fluidData["amount"] <= 0.0):
 			shouldRemoveInternal = true
 		
 	if(shouldRemoveInternal):
 		removeEmptyInternalEntries()
+	return result
 
 func drainPercent(factor: float):
 	var fluidAmount = getFluidAmount()
 	
-	drain(fluidAmount * factor)
+	return drain(fluidAmount * factor)
 
 func getFluidList():
 	var myfluids = []
@@ -218,6 +221,18 @@ func getFluidListNames():
 			myfluids.append(fluidName)
 	return myfluids
 
+func getFluidAmountByType():
+	var amountByFluidType = {}
+	
+	for fluidData in contents:
+		var fluidType = fluidData["fluidType"]
+		
+		if(!amountByFluidType.has(fluidType)):
+			amountByFluidType[fluidType] = 0.0
+		
+		amountByFluidType[fluidType] += fluidData["amount"]
+	return amountByFluidType
+
 func getUniqueCharactersAmount():
 	var chars = {}
 	
@@ -230,15 +245,7 @@ func getUniqueCharactersAmount():
 
 func getContentsHumanReadableArray():
 	var result = []
-	var amountByFluidType = {}
-	
-	for fluidData in contents:
-		var fluidType = fluidData["fluidType"]
-		
-		if(!amountByFluidType.has(fluidType)):
-			amountByFluidType[fluidType] = 0.0
-		
-		amountByFluidType[fluidType] += fluidData["amount"]
+	var amountByFluidType = getFluidAmountByType()
 	
 	for fluidType in amountByFluidType:
 		result.append(BodilyFluids.getFluidName(fluidType)+": "+str(Util.roundF(amountByFluidType[fluidType], 1))+" ml")
@@ -246,19 +253,26 @@ func getContentsHumanReadableArray():
 	
 func getContentsHumanReadablePairsArray():
 	var result = []
-	var amountByFluidType = {}
-	
-	for fluidData in contents:
-		var fluidType = fluidData["fluidType"]
-		
-		if(!amountByFluidType.has(fluidType)):
-			amountByFluidType[fluidType] = 0.0
-		
-		amountByFluidType[fluidType] += fluidData["amount"]
+	var amountByFluidType = getFluidAmountByType()
 	
 	for fluidType in amountByFluidType:
 		result.append([BodilyFluids.getFluidName(fluidType), str(Util.roundF(amountByFluidType[fluidType], 1))+" ml"])
 	return result
+	
+func getDominantFluidID():
+	if(isEmpty()):
+		return null
+	
+	var amountByFluidType = getFluidAmountByType()
+	
+	var maxAmount = 0.0
+	var maxFluid = null
+	
+	for fluidType in amountByFluidType:
+		if(amountByFluidType[fluidType] > maxAmount):
+			maxAmount = amountByFluidType[fluidType]
+			maxFluid = fluidType
+	return maxFluid
 	
 func saveData():
 	var theContents = []

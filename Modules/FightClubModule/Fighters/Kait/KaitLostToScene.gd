@@ -149,7 +149,7 @@ func _run():
 func _react(_action: String, _args):
 	
 	if(_action == "get_pissed_on"):
-		GM.pc.addEffect(StatusEffect.DrenchedInPiss)
+		GM.pc.pissedOnBy("kait")
 		GM.pc.addLust(20)
 	
 	if(_action == "get_marked"):

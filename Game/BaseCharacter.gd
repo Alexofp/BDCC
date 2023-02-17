@@ -27,6 +27,7 @@ var lustInterests: LustInterests
 var fetishHolder: FetishHolder
 var personality: Personality
 var sexVoice: SexVoice
+var bodyFluids: Fluids
 
 # Bodypart stuff
 var bodyparts: Dictionary
@@ -77,6 +78,7 @@ func _ready():
 	personality = Personality.new()
 	personality.setCharacter(self)
 	createVoice()
+	bodyFluids = Fluids.new()
 
 func getID():
 	assert(false, "Getting an ID of a baseCharacter class")
@@ -673,6 +675,10 @@ func getFluidType(fluidSource):
 		return "GirlCum"
 	if(fluidSource == FluidSource.Strapon):
 		return "CumLube"
+	if(fluidSource == FluidSource.Breasts):
+		return "Milk"
+	if(fluidSource == FluidSource.Pissing):
+		return "Piss"
 		
 	return null
 
@@ -686,48 +692,34 @@ func getFluidAmount(fluidSource):
 		return RNG.randf_range(50.0, 200.0)
 	if(fluidSource == FluidSource.Strapon):
 		return RNG.randf_range(100.0, 500.0)
+	if(fluidSource == FluidSource.Pissing):
+		return RNG.randf_range(100.0, 500.0)
+	if(fluidSource == FluidSource.Breasts):
+		if(hasBodypart(BodypartSlot.Breasts)):
+			var breasts:BodypartBreasts = getBodypart(BodypartSlot.Breasts)
+			return breasts.getFluidProduction().getFluidAmount()
+		return 0.0
 		
 	return 0.0
 
-func extractFluidAmount(fluidSource, howmuch = 1.0):
-	if(fluidSource == FluidSource.Penis):
-		if(hasBodypart(BodypartSlot.Penis)):
-			var penis:BodypartPenis = getBodypart(BodypartSlot.Penis)
-			return penis.getFluidProduction().drain(howmuch)
-
-	return getFluidAmount(fluidSource)
-
 func getFluidDNA(fluidSource):
+	var fluidDNA = FluidDNA.new()
+	fluidDNA.charID = getID()
+	fluidDNA.virility = 0.0
+	fluidDNA.species = getSpecies()
+	
+	# Fluids produced by your balls can always get someone pregnant
 	if(fluidSource == FluidSource.Penis):
-		var fluidDNA = FluidDNA.new()
-		fluidDNA.charID = getID()
 		fluidDNA.virility = getVirility()
-		fluidDNA.species = getSpecies()
-		
-		return fluidDNA
-	if(fluidSource == FluidSource.Vagina):
-		var fluidDNA = FluidDNA.new()
-		fluidDNA.charID = getID()
-		fluidDNA.virility = 0.0
-		fluidDNA.species = getSpecies()
-		
-		return fluidDNA
-	if(fluidSource == FluidSource.Strapon):
-		var fluidDNA = FluidDNA.new()
-		fluidDNA.charID = getID()
-		fluidDNA.virility = 0.0
-		fluidDNA.species = getSpecies()
-		
-		return fluidDNA
-	if(fluidSource == FluidSource.Breasts):
-		var fluidDNA = FluidDNA.new()
-		fluidDNA.charID = getID()
-		fluidDNA.virility = 0.0
-		fluidDNA.species = getSpecies()
-		
-		return fluidDNA
-		
-	return null
+	
+	# Cum can get you pregnant even if it was generated elsewhere
+	var fluidType = getFluidType(fluidSource)
+	if(fluidType != null):
+		var fluidObject = GlobalRegistry.getFluid(fluidType)
+		if(fluidObject != null && fluidObject.canImpregnate()):
+			fluidDNA.virility = getVirility()
+	
+	return fluidDNA
 
 func getFemininity() -> int:
 	return 50
@@ -871,7 +863,7 @@ func cummedInBodypartBy(bodypartSlot, characterID, sourceType = null):
 			fluids.transferTo(thebodypart, 1.0)
 	else:
 		var thebodypart = getBodypart(bodypartSlot)
-		thebodypart.addFluidOrifice(ch.getFluidType(sourceType), ch.extractFluidAmount(sourceType), ch.getFluidDNA(sourceType))
+		thebodypart.addFluidOrifice(ch.getFluidType(sourceType), ch.getFluidAmount(sourceType), ch.getFluidDNA(sourceType))
 	skillsHolder.receivedCreampie(characterID)
 	if(ch != null):
 		ch.getSkillsHolder().cameInsideSomeone(getID())
@@ -1569,10 +1561,6 @@ func cumOnFloor():
 			production.fillPercent(buffsHolder.getCustom(BuffAttribute.CumGenerationAfterOrgasm))
 			return returnValue
 
-# Should apply a temporary cummed on status probably
-func cummedOnBy(_characterID, _sourceType = null, _howMessy: int = 1):
-	pass
-
 func afterSexEnded(sexInfo):
 	if(sexInfo.getTimesCame() > 0):
 		addLust(-getLust())
@@ -1867,3 +1855,49 @@ func removeAllRestraints():
 			continue
 		
 		inventory.removeEquippedItem(item)
+
+func getFluids():
+	return bodyFluids
+
+func clearBodyFluids():
+	bodyFluids.clear()
+	
+func coverBodyWithFluid(fluidType, amount, fluidDNA = null):
+	bodyFluids.addFluid(fluidType, amount, fluidDNA)
+	
+func cummedOnBy(characterID, sourceType = null, howMuchPercent = 1.0):
+	var ch = GlobalRegistry.getCharacter(characterID)
+	if(sourceType == null):
+		if(ch.getGender() == Gender.Female):
+			sourceType = FluidSource.Vagina
+		else:
+			sourceType = FluidSource.Penis
+	
+	if(sourceType == FluidSource.Penis && ch.hasBodypart(BodypartSlot.Penis)):
+		var usedBodypart = ch.getBodypart(BodypartSlot.Penis)
+		var fluids = usedBodypart.getFluids()
+		
+		if(fluids != null):
+			fluids.transferTo(bodyFluids, howMuchPercent)
+	else:
+		coverBodyWithFluid(ch.getFluidType(sourceType), ch.getFluidAmount(sourceType)*howMuchPercent, ch.getFluidDNA(sourceType))
+
+func pissedOnBy(_characterID):
+	cummedOnBy(_characterID, FluidSource.Pissing, 1.0)
+	
+	#addEffect(StatusEffect.DrenchedInPiss)
+
+func getOutsideMessinessLevel():
+	var fluidAmount = bodyFluids.getFluidAmount()
+	if(fluidAmount <= 0.0):
+		return 0
+	elif(fluidAmount < 100.0):
+		return 1
+	elif(fluidAmount < 300.0):
+		return 2
+	elif(fluidAmount < 500.0):
+		return 3
+	elif(fluidAmount < 1000.0):
+		return 4
+	else:
+		return 5

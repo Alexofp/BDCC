@@ -34,23 +34,23 @@ var difficultySettings = [
 	{
 		timer = 6.0,
 		cursorSpeedMin = 2.2,
-		cursorSpeedMax = 3.2,
+		cursorSpeedMax = 2.5,
 		zoneDifficultyMin = 10.0,
 		zoneDifficultyMax = 15.0,
 		redPart = 0.1,
 	},
 	{
 		timer = 5.0,
-		cursorSpeedMin = 3.2,
-		cursorSpeedMax = 4.2,
+		cursorSpeedMin = 2.5,
+		cursorSpeedMax = 3.1,
 		zoneDifficultyMin = 20.0,
 		zoneDifficultyMax = 25.0,
 		redPart = 0.15,
 	},
 	{
 		timer = 4.0,
-		cursorSpeedMin = 4.2,
-		cursorSpeedMax = 5.2,
+		cursorSpeedMin = 2.9,
+		cursorSpeedMax = 3.5,
 		zoneDifficultyMin = 55.0,
 		zoneDifficultyMax = 85.0,
 		redPart = 0.1,
@@ -79,8 +79,8 @@ signal minigameCompleted(finalScore)
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	setIngame(false)
-	setGoldenZoneVisible(false)
 
+	setGoldenZoneVisible(false)
 	setDifficulty(2)
 	setIsBlindfolded(false)
 
@@ -95,7 +95,7 @@ func setIsBlindfolded(theblindfolded):
 	else:
 		$GameScreen/Panel/Panel2.visible = true
 		$GameScreen/Panel/Panel.visible = true
-		$GameScreen/Panel/Panel3.visible = true
+		$GameScreen/Panel/Panel3.visible = goldenZoneVisible
 		$GameScreen/Panel/BlindText.visible = false
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -185,6 +185,7 @@ func setGoldenZoneVisible(isVis):
 		goldenZone.visible = true
 	else:
 		goldenZone.visible = false
+		print("INVIS")
 
 func instantEscapePerk():
 	setGoldenZoneVisible(true)
