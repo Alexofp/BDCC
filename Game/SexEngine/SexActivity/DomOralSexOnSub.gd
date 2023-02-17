@@ -359,7 +359,11 @@ func doDomAction(_id, _actionInfo):
 			text = RNG.pick([
 				"{dom.You} {dom.youVerb('shift')} away a bit and {dom.youVerb('let')} {sub.you} [b]cum all over {dom.yourHis} face[/b]. Lots of "+RNG.pick(["pussy juices", "juices", "femcum", "female juices"])+" land on it while {sub.yourHis} pussy squirts, leaving quite a mess!",
 			])
-			getDom().cummedOnBy(subID, FluidSource.Vagina)
+			if(getDom().isOralBlocked()):
+				getDom().cummedOnBy(subID, FluidSource.Vagina)
+			else:
+				getDom().cummedInMouthBy(subID, FluidSource.Vagina, 0.5)
+				getDom().cummedOnBy(subID, FluidSource.Vagina, 0.5)
 			subInfo.cum()
 		else:
 			text = RNG.pick([

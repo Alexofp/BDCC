@@ -14,9 +14,27 @@ func getMessyDescription(_pc, _amount):
 
 func getMessyBuffs(_pc, _amount):
 	if(_pc.hasPerk(Perk.CumSlut)):
-		var messLevel = Util.mini(int(_amount / 100), 10)
+		var messLevel = Util.mini(int(_amount / 40), 10)
 		
 		if(messLevel > 0):
 			return [
 				buff(Buff.DodgeChanceBuff, [1 * messLevel]),
 			]
+
+func getBellyBuffs(_pc, _amount):
+	if(_pc.hasPerk(Perk.CumBreathV1)):
+		var messLevel = Util.mini(int(_amount / 40), 10)
+		
+		if(messLevel > 0):
+			return [
+				buff(Buff.MaxLustBuff, [5 * messLevel]),
+			]
+
+func onSwallow(_pc, _amount):
+	var toHeal = Util.mini(int(_amount / 20), 1000)
+	
+	if(toHeal > 0):
+		_pc.addPain(-toHeal)
+		return "Drinking girlcum relieved you of "+DamageType.getDamageColoredString(DamageType.Physical, toHeal)+"."
+	
+	return null

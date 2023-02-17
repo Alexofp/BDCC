@@ -575,7 +575,11 @@ func doDomAction(_id, _actionInfo):
 				"{dom.You} {dom.youVerb('shake')} and {dom.youVerb('shiver')} while {dom.yourHis} "+RNG.pick(["pulsating", "twitching"])+" "+RNG.pick(["pussy", "pussy", "slit", "kitty"])+" [b]"+RNG.pick(["makes", "creates"])+" a wet spot on {dom.yourHis} clothing[/b]!",
 			])
 		else:
-			getSub().cummedOnBy(domID, FluidSource.Vagina)
+			if(getSub().isOralBlocked()):
+				getSub().cummedOnBy(domID, FluidSource.Vagina)
+			else:
+				getSub().cummedInMouthBy(domID, FluidSource.Vagina, 0.5)
+				getSub().cummedOnBy(domID, FluidSource.Vagina, 0.5)
 		
 		if(getDom().hasReachablePenis()):
 			getDom().cumOnFloor()

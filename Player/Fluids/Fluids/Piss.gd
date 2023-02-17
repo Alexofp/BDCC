@@ -35,3 +35,28 @@ func getMessyBuffs(_pc, _amount):
 		buff(Buff.LustDamageBuff, [-30]),
 		buff(Buff.LustArmorBuff, [10]),
 	]
+
+func getBellyBuffs(_pc, _amount):
+	if(_pc.hasPerk(Perk.CumBreathV1)):
+		var messLevel = Util.mini(int(_amount / 100), 10)
+		
+		if(messLevel > 0):
+			return [
+				buff(Buff.ReceivedLustDamageBuff, [-2 * messLevel]),
+			]
+	else:
+		var messLevel = Util.mini(int(_amount / 100), 10)
+		
+		if(messLevel > 0):
+			return [
+				buff(Buff.MaxStaminaBuff, [-5 * messLevel]),
+			]
+
+func onSwallow(_pc, _amount):
+	var toHeal = Util.mini(int(_amount / 10), 1000)
+	
+	if(toHeal > 0):
+		_pc.addLust(-toHeal)
+		return "Drinking piss grossed you out, removing "+DamageType.getDamageColoredString(DamageType.Lust, toHeal)+"."
+	
+	return null

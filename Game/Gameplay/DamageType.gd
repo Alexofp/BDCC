@@ -39,3 +39,7 @@ static func getColor(type) -> Color:
 
 static func getColorString(type) -> String:
 	return "#"+getColor(type).to_html(false)
+
+static func getDamageColoredString(damageType, amountOfDamage):
+	return "[color="+getColorString(damageType)+"]"+str(amountOfDamage)+" "+getBattleName(damageType)+"[/color]"
+	

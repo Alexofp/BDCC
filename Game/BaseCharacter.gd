@@ -845,7 +845,7 @@ func clearOrificeFluidsCheckBlocked():
 		
 	return success
 
-func cummedInBodypartBy(bodypartSlot, characterID, sourceType = null):
+func cummedInBodypartBy(bodypartSlot, characterID, sourceType = null, amountToTransfer = 1.0):
 	if(!hasBodypart(bodypartSlot)):
 		return
 	
@@ -860,22 +860,22 @@ func cummedInBodypartBy(bodypartSlot, characterID, sourceType = null):
 		var fluids = usedBodypart.getFluids()
 		
 		if(fluids != null):
-			fluids.transferTo(thebodypart, 1.0)
+			fluids.transferTo(thebodypart, amountToTransfer)
 	else:
 		var thebodypart = getBodypart(bodypartSlot)
-		thebodypart.addFluidOrifice(ch.getFluidType(sourceType), ch.getFluidAmount(sourceType), ch.getFluidDNA(sourceType))
+		thebodypart.addFluidOrifice(ch.getFluidType(sourceType), ch.getFluidAmount(sourceType) * amountToTransfer, ch.getFluidDNA(sourceType))
 	skillsHolder.receivedCreampie(characterID)
 	if(ch != null):
 		ch.getSkillsHolder().cameInsideSomeone(getID())
 	
-func cummedInVaginaBy(characterID, sourceType = null):
-	cummedInBodypartBy(BodypartSlot.Vagina, characterID, sourceType)
+func cummedInVaginaBy(characterID, sourceType = null, amountToTransfer = 1.0):
+	cummedInBodypartBy(BodypartSlot.Vagina, characterID, sourceType, amountToTransfer)
 
-func cummedInAnusBy(characterID, sourceType = null):
-	cummedInBodypartBy(BodypartSlot.Anus, characterID, sourceType)
+func cummedInAnusBy(characterID, sourceType = null, amountToTransfer = 1.0):
+	cummedInBodypartBy(BodypartSlot.Anus, characterID, sourceType, amountToTransfer)
 
-func cummedInMouthBy(characterID, sourceType = null):
-	cummedInBodypartBy(BodypartSlot.Head, characterID, sourceType)
+func cummedInMouthBy(characterID, sourceType = null, amountToTransfer = 1.0):
+	cummedInBodypartBy(BodypartSlot.Head, characterID, sourceType, amountToTransfer)
 
 func rubsVaginasWith(characterID, chanceToStealCum = 100, showMessages = true):
 	if(!RNG.chance(chanceToStealCum) || !OPTIONS.isContentEnabled(ContentType.CumStealing)):

@@ -34,6 +34,7 @@ func getTooltipInfo():
 	var result = []
 	result.append("size: " + BreastsSize.breastSizeToString(getSize()))
 	if(getFluidProduction() != null):
+		result.append("Capacity: " + str(round(getFluidProduction().getFluidAmount() * 10.0)/10.0)+"/"+ str(round(getFluidProduction().getCapacity() * 10.0)/10.0)+" ml")
 		result.append_array(getFluidProduction().getTooltipInfo())
 	
 	return Util.join(result, "\n")

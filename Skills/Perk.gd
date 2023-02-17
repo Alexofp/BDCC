@@ -25,6 +25,7 @@ const CombatBetterMeleeWeaponsV3 = "CombatBetterMeleeWeaponsV3"
 
 # Cum Lover perks
 const CumBreath = "CumBreath"
+const CumBreathV1 = "CumBreathV1"
 const CumBreathV2 = "CumBreathV2"
 const CumSlut = "CumSlut"
 const CumSwallower = "CumSwallower"

@@ -49,6 +49,13 @@ func initScene(args = []):
 	checkSceneEnded()
 
 func run():
+	GM.pc.updateNonBattleEffects()
+	for id in currentCharactersVariants:
+		var character = GlobalRegistry.getCharacter(id)
+		if(!character):
+			continue
+		character.updateNonBattleEffects()
+	
 	GM.ui.clearText()
 	GM.ui.clearButtons()
 	GM.ui.clearUItextboxes()
@@ -60,13 +67,6 @@ func run():
 	else:
 		GM.ui.getCharactersPanel().switchToNormalMode()
 		
-	GM.pc.updateNonBattleEffects()
-	for id in currentCharactersVariants:
-		var character = GlobalRegistry.getCharacter(id)
-		if(!character):
-			continue
-		character.updateNonBattleEffects()
-
 	GM.pc.updateEffectPanel(GM.ui.getPlayerStatusEffectsPanel())
 	GM.ui.updateCharactersInPanel()
 	GM.ui.setSceneCreator(getSceneCreator())

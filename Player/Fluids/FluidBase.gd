@@ -15,6 +15,12 @@ func getMessyDescription(_pc, _amount):
 func getMessyBuffs(_pc, _amount):
 	return null
 
+func getBellyBuffs(_pc, _amount):
+	return null
+
+func onSwallow(_pc, _amount):
+	return null
+
 func getStatusEffectColor():
 	return Color("#A001A0")
 

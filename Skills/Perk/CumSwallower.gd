@@ -8,10 +8,10 @@ func getVisibleName():
 	return "Swallower"
 
 func getVisibleDescription():
-	return "You love cum so much you can lick-clean yourself during a battle and swallow it all, gaining stamina!"
+	return "You love cum so much you can lick-clean yourself during a battle and swallow it all!"
 
 func getMoreDescription():
-	return "You unlock a new ability 'Lick self clean' that you can use during fights. It removes any cum you might have on you and gives you 10 stamina for each layer that there was with the maximum being 50 stamina"
+	return "You unlock a new ability 'Lick self clean' that you can use during fights. Swallowing different fluids will provide different effects. For example, licking cum will restore some stamina back depending on the amount."
 
 func getSkillTier():
 	return 0

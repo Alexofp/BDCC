@@ -46,3 +46,25 @@ func getIconColor():
 
 func combine(_args = []):
 	pass
+
+func getBuffs():
+	if(!character.hasBodypart(BodypartSlot.Head)):
+		return []
+	
+	var fluids = character.getBodypart(BodypartSlot.Head).getFluids()
+	if(fluids == null):
+		return []
+	var messFluids = fluids.getFluidAmountByType()
+	
+	var result = []
+
+	for fluidID in messFluids:
+		var fluidObject = GlobalRegistry.getFluid(fluidID)
+		if(fluidObject == null):
+			continue
+		
+		var messBuffs = fluidObject.getBellyBuffs(character, messFluids[fluidID])
+		if(messBuffs != null):
+			result.append_array(messBuffs)
+
+	return result
