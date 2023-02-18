@@ -9,6 +9,7 @@ func _init():
 
 func _initScene(_args = []):
 	sexEngine = SexEngine.new()
+	sexEngine.setInventoryToUse(sceneSavedItemsInv)
 	
 	var tops = _args[0]
 	var bottoms = _args[1]
@@ -204,5 +205,6 @@ func loadData(data):
 	.loadData(data)
 	
 	sexEngine = SexEngine.new()
+	sexEngine.setInventoryToUse(sceneSavedItemsInv)
 	currentCategory = SAVE.loadVar(data, "currentCategory", [])
 	sexEngine.loadData(SAVE.loadVar(data, "sexEngine", {}))

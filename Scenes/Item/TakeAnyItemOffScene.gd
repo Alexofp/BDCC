@@ -21,6 +21,7 @@ func _reactInit():
 		if(GM.pc.hasBoundArms()):
 			setState("awkwardtakeoff")
 		
+		item.resetLustState()
 		GM.pc.getInventory().removeEquippedItem(item)
 		GM.pc.getInventory().addItem(item)
 		GM.pc.updateAppearance()

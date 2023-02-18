@@ -508,10 +508,12 @@ func doDomAction(_id, _actionInfo):
 					"{dom.You} filled the condom inside {sub.your} "+RNG.pick(["mouth"])+"!",
 					"{dom.You} stuffed the condom in {sub.your} "+RNG.pick(["mouth"])+" full of {dom.yourHis} "+RNG.pick(["cum", "seed", "jizz", "semen"])+"!",
 				])
-				getDom().cumOnFloor()
+				getDom().cumInItem(condom)
 				domInfo.cum()
 				satisfyGoals()
 				state = ""
+				condom.destroyMe()
+				getSexEngine().saveItemToLoot(condom)
 				text += RNG.pick([
 					" {dom.You} {dom.youVerb('pull')} out and {dom.youVerb('dispose')} of the used condom.",
 				])
@@ -552,7 +554,8 @@ func doDomAction(_id, _actionInfo):
 					"{dom.You} {dom.youVerb('pull')} out, stuffing {dom.yourHis} condom! {dom.You} {dom.youVerb('dispose')} of it.",
 				])
 				condom.destroyMe()
-				getDom().cumOnFloor()
+				getDom().cumInItem(condom)
+				getSexEngine().saveItemToLoot(condom)
 				domInfo.cum()
 				satisfyGoals()
 				state = ""

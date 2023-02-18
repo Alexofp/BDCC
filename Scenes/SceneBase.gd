@@ -16,6 +16,7 @@ var sceneTag = ""
 var sceneEndedFlag = false
 var sceneEndedArgs
 var showFightUI = false
+var sceneSavedItemsInv:LightInventory = LightInventory.new()
 
 func _run():
 	pass
@@ -80,8 +81,23 @@ func checkSceneEnded():
 		emit_signal("sceneEnded", sceneEndedArgs)
 		print("removing scene "+name)
 		
+		if(!sceneSavedItemsInv.isEmpty()):
+			var newItems = []
+			while(!sceneSavedItemsInv.isEmpty()):
+				var theItem = sceneSavedItemsInv.items.front()
+				sceneSavedItemsInv.removeItem(theItem)
+				newItems.append(theItem)
+			
+			runScene("LootingScene", [{"items": newItems}])
+			sceneSavedItemsInv.items.clear()
+		
 		queue_free()
-	
+
+func addItemToSavedItems(theItem):
+	if(sceneSavedItemsInv.hasItem(theItem)):
+		return
+	sceneSavedItemsInv.addItem(theItem)
+
 func react(_action: String, _args):
 	var result = _react(_action, _args)
 	checkSceneEnded()
@@ -279,6 +295,7 @@ func saveData():
 	data["sceneTag"] = sceneTag
 	data["sceneEndedFlag"] = sceneEndedFlag
 	data["sceneEndedArgs"] = sceneEndedArgs
+	data["sceneSavedItemsInv"] = sceneSavedItemsInv.saveData()
 	
 	return data
 
@@ -289,3 +306,4 @@ func loadData(data):
 	sceneEndedFlag = SAVE.loadVar(data, "sceneEndedFlag", false)
 	sceneEndedArgs = SAVE.loadVar(data, "sceneEndedArgs", null)
 	updateCharacter()
+	sceneSavedItemsInv.loadData(SAVE.loadVar(data, "sceneSavedItemsInv", {}))

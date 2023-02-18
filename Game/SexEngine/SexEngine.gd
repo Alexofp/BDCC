@@ -8,6 +8,7 @@ var messages:Array = []
 var doms = {}
 var subs = {}
 var trackedItems = {}
+var inventoryToSaveItemsTo:LightInventory = null
 
 var currentLastActivityID = 0
 
@@ -868,6 +869,14 @@ func endSex():
 	for domID in doms:
 		var domInfo = doms[domID]
 		
+		# Lets us loot used condoms
+		var theCondom = domInfo.getChar().getWornCondom()
+		if(theCondom != null):
+			if(theCondom.getFluids() != null):
+				if(!theCondom.getFluids().isEmpty()):
+					theCondom.destroyMe()
+					saveItemToLoot(theCondom)
+			
 		domInfo.getChar().afterSexEnded(domInfo)
 		
 		var sexEndInfo = domInfo.getSexEndInfo()
@@ -877,6 +886,14 @@ func endSex():
 
 	for subID in subs:
 		var subInfo = subs[subID]
+		
+		# Lets us loot used condoms
+		var theCondom = subInfo.getChar().getWornCondom()
+		if(theCondom != null):
+			if(theCondom.getFluids() != null):
+				if(!theCondom.getFluids().isEmpty()):
+					theCondom.destroyMe()
+					saveItemToLoot(theCondom)
 		
 		subInfo.getChar().afterSexEnded(subInfo)
 
@@ -980,17 +997,12 @@ func getCurrentActivitiesMaxDomOrgasmHandlePriority(domID, subID):
 				maxResult = thePriority
 	return maxResult
 
-#var activities:Array = []
-#var revealedBodyparts: Dictionary = {}
-#var messages:Array = []
-#
-#var doms = {}
-#var subs = {}
-#var trackedItems = {}
-#
-#var currentLastActivityID = 0
-#
-#var sexEnded = false
+func setInventoryToUse(newInv):
+	inventoryToSaveItemsTo = newInv
+
+func saveItemToLoot(theItem):
+	if(inventoryToSaveItemsTo != null):
+		inventoryToSaveItemsTo.addItem(theItem)
 
 func saveData():
 	var data = {

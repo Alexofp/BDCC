@@ -336,13 +336,14 @@ func doDomAction(_id, _actionInfo):
 					text = RNG.pick([
 						"{dom.You} {dom.youVerb('hold')} {dom.yourHis} face slightly to the side of {sub.yourHis} "+RNG.pick(["cock", "dick", "shaft"])+" as it starts throbbing and [b]filling the condom with "+RNG.pick(["cum", "seed", "semen"])+"[/b]!",
 					])
-					getSub().cumOnFloor()
+					getSub().cumInItem(condom)
 					subInfo.cum()
 					state = ""
 					text += RNG.pick([
 						" {dom.You} {dom.youVerb('dispose')} of the used condom.",
 					])
 					condom.destroyMe()
+					getSexEngine().saveItemToLoot(condom)
 					
 					return {text=text}
 			
@@ -380,13 +381,14 @@ func doDomAction(_id, _actionInfo):
 					text = RNG.pick([
 						"{dom.You} {dom.youVerb('hold')} {dom.yourHis} face near {sub.yourHis} "+RNG.pick(["cock", "dick", "shaft"])+" as it starts throbbing and [b]filling the condom with "+RNG.pick(["cum", "seed", "semen"])+"[/b]!",
 					])
-					getSub().cumOnFloor()
+					getSub().cumInItem(condom)
 					subInfo.cum()
 					state = ""
 					text += RNG.pick([
 						" {dom.You} {dom.youVerb('dispose')} of the used condom.",
 					])
 					condom.destroyMe()
+					getSexEngine().saveItemToLoot(condom)
 					
 					return {text=text}
 			
@@ -421,13 +423,14 @@ func doDomAction(_id, _actionInfo):
 					text = RNG.pick([
 						"{dom.You} {dom.youVerb('hold')} {dom.yourHis} lips wrapped around {sub.yourHis} "+RNG.pick(["cock", "dick", "shaft"])+" as it starts throbbing and [b]filling the condom inside {dom.your} mouth with "+RNG.pick(["cum", "seed", "semen"])+"[/b]!",
 					])
-					getSub().cumOnFloor()
+					getSub().cumInItem(condom)
 					subInfo.cum()
 					state = ""
 					text += RNG.pick([
 						" {dom.You} {dom.youVerb('dispose')} of the used condom.",
 					])
 					condom.destroyMe()
+					getSexEngine().saveItemToLoot(condom)
 					
 					return {text=text}
 			
@@ -647,7 +650,7 @@ func doSubAction(_id, _actionInfo):
 					text = RNG.pick([
 						"{sub.You} {sub.youVerb('grunt')} while {sub.yourHis} "+RNG.pick(["cock", "dick", "shaft"])+" throbs and suddenly starts to stuff the condom with {sub.yourHis} "+RNG.pick(["cum", "seed", "semen"])+"! {sub.You} [b]came without {dom.yourHis} permission[/b]!",
 					])
-					getSub().cumOnFloor()
+					getSub().cumInItem(condom)
 					subInfo.cum()
 					endActivity()
 					#state = ""
@@ -659,6 +662,7 @@ func doSubAction(_id, _actionInfo):
 						" {dom.You} {dom.youVerb('dispose')} of the used condom.",
 					])
 					condom.destroyMe()
+					getSexEngine().saveItemToLoot(condom)
 					
 					return {text=text}
 				
@@ -680,7 +684,7 @@ func doSubAction(_id, _actionInfo):
 					text = RNG.pick([
 						"{sub.You} {sub.youVerb('grunt')} while {sub.yourHis} "+RNG.pick(["cock", "dick", "shaft"])+" throbs and suddenly starts to stuff the condom with {sub.yourHis} "+RNG.pick(["cum", "seed", "semen"])+"! {sub.You} [b]came without {dom.yourHis} permission[/b]!",
 					])
-					getSub().cumOnFloor()
+					getSub().cumInItem(condom)
 					subInfo.cum()
 					endActivity()
 					#state = ""
@@ -692,6 +696,7 @@ func doSubAction(_id, _actionInfo):
 						" {dom.You} {dom.youVerb('dispose')} of the used condom.",
 					])
 					condom.destroyMe()
+					getSexEngine().saveItemToLoot(condom)
 					
 					return {text=text}
 			

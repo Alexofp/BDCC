@@ -226,13 +226,12 @@ func runScene(id, _args = []):
 
 func removeScene(scene, args = []):
 	if(sceneStack.has(scene)):
-		if(scene == sceneStack.back()):
+		if(scene == sceneStack.back() || true):
+			var previousSceneIndex = sceneStack.find(scene) - 1
 			var savedTag = scene.sceneTag
 			sceneStack.erase(scene)
-			if(sceneStack.size() > 0):
-				sceneStack.back().react_scene_end(savedTag, args)
-			#if(sceneStack.size() > 0):
-			#	sceneStack.back().run()
+			if(previousSceneIndex < sceneStack.size() && previousSceneIndex >= 0):
+				sceneStack[previousSceneIndex].react_scene_end(savedTag, args)
 		else:
 			sceneStack.erase(scene)
 	

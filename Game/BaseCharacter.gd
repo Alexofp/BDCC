@@ -1561,6 +1561,20 @@ func cumOnFloor():
 			production.fillPercent(buffsHolder.getCustom(BuffAttribute.CumGenerationAfterOrgasm))
 			return returnValue
 
+func cumInItem(theItem):
+	if(theItem.getFluids() == null):
+		return
+	
+	if(hasBodypart(BodypartSlot.Penis)):
+		var penis:BodypartPenis = getBodypart(BodypartSlot.Penis)
+		var production: FluidProduction = penis.getFluidProduction()
+		if(production != null):
+			if(theItem.has_method("markLastUser")):
+				theItem.markLastUser(getName())
+			var returnValue = penis.getFluids().transferTo(theItem, 1.0)
+			production.fillPercent(buffsHolder.getCustom(BuffAttribute.CumGenerationAfterOrgasm))
+			return returnValue
+
 func afterSexEnded(sexInfo):
 	if(sexInfo.getTimesCame() > 0):
 		addLust(-getLust())
@@ -1688,7 +1702,7 @@ func bodypartTransferFluidsTo(bodypartID, otherCharacterID, otherBodypartID, fra
 	if(otherOrifice == null):
 		return false
 	
-	return orifice.transferTo(otherOrifice, fraction, minAmount)
+	return orifice.transferTo(otherOrifice, fraction, minAmount) > 0.0
 
 func bodypartShareFluidsWith(bodypartID, otherCharacterID, otherBodypartID, fraction = 0.5):
 	if(!hasBodypart(bodypartID)):

@@ -428,7 +428,7 @@ func doDomAction(_id, _actionInfo):
 						"{dom.You} {dom.youVerb('manage')} to shove {dom.yourHis} knot into {sub.youHim}! ",
 					]) + text
 				
-				getDom().cumOnFloor()
+				getDom().cumInItem(condom)
 				domInfo.cum()
 				subInfo.addArousalSex(0.2)
 				satisfyGoals()
@@ -472,7 +472,8 @@ func doDomAction(_id, _actionInfo):
 					"{dom.You} {dom.youVerb('pull')} out, stuffing {dom.yourHis} condom! {dom.You} {dom.youVerb('dispose')} of it.",
 				])
 				condom.destroyMe()
-				getDom().cumOnFloor()
+				getSexEngine().saveItemToLoot(condom)
+				getDom().cumInItem(condom)
 				domInfo.cum()
 				satisfyGoals()
 				state = ""
@@ -530,6 +531,7 @@ func doDomAction(_id, _actionInfo):
 		if(condom != null):
 			text += " {dom.You} {dom.youVerb('dispose')} of {dom.yourHis} condom."
 			condom.destroyMe()
+			getSexEngine().saveItemToLoot(condom)
 		
 		return {text = text}
 	

@@ -209,10 +209,11 @@ func _run():
 			addDisabledButton("Struggle", "You don't have any restraints that you can struggle out of")
 		addButton("Wait", "Do nothing", "wait")
 		
-		if(GM.pc.getInventory().getAllCombatUsableItems().size() > 0):
-			addButton("Inventory", "Use an item fron your inventory", "inventory")
-		else:
-			addDisabledButton("Inventory", "You don't have anything you can use in combat")
+		#if(GM.pc.getInventory().getAllCombatUsableItems().size() > 0):
+		#	addButton("Inventory", "Use an item fron your inventory", "inventory")
+		#else:
+		#	addDisabledButton("Inventory", "You don't have anything you can use in combat")
+		addButton("Inventory", "Look at your inventory", "openinventory")
 		
 		if(GM.pc.hasEffect(StatusEffect.Collapsed)):
 			if(GM.pc.canStandUpCombat()):
@@ -251,6 +252,10 @@ func _run():
 func _react(_action: String, _args):
 	if(_action == "struggle"):
 		runScene("StrugglingScene", [true], "struggle_scene")
+		return
+		
+	if(_action == "openinventory"):
+		runScene("InventoryScene", [true], "inventory_scene")
 		return
 		
 	if(_action == "physattacks" || _action == "lustattacks" || _action == "specialattacks" || _action == "selfhumattacks" || _action == "humattacks" || _action == "inventory"):
@@ -859,6 +864,15 @@ func _react_scene_end(_tag, _result):
 		whatEnemyDid += aiTurn()
 
 		afterTurnChecks()
+	
+	if(_tag == "inventory_scene"):
+		setState("fighting")
+		beforeTurnChecks(true)
+		
+		whatEnemyDid += aiTurn()
+
+		afterTurnChecks()
+		
 	if(_tag == "lootingscene"):
 		endScene([battleState, battleEndedHow])
 

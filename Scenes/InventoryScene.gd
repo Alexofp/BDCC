@@ -1,9 +1,17 @@
 extends "res://Scenes/SceneBase.gd"
 
-var savedItemUniqueID
+var savedItemUniqueID = ""
+var fightMode = false
 
 func _init():
 	sceneID = "InventoryScene"
+
+func _initScene(_args = []):
+	if(_args.size() > 0):
+		fightMode = _args[0]
+		
+		if(fightMode):
+			setState("interactmenu")
 
 func _run():
 	if(state == ""):
@@ -37,6 +45,8 @@ func _run():
 	if(state == "takeoffmenu"):
 		saynn("Pick an item you wanna take off")
 		
+		addButton("Back", "Go back", "")
+		
 		say("Your equipped items:\n")
 		for slot in InventorySlot.getAll():
 			if(!GM.pc.getInventory().hasSlotEquipped(slot) && GM.pc.invCanEquipSlot(slot)):
@@ -50,10 +60,10 @@ func _run():
 			say(InventorySlot.getVisibleName(slot)+": "+item.getVisibleName()+"\n")
 			addButton(item.getVisibleName(), item.getVisisbleDescription(), "takeoff", [item.getUniqueID()])
 		
-		addButton("Back", "Go back", "")
-		
 	if(state == "putonmenu"):
 		saynn("Pick an item you wanna put on")
+		
+		addButton("Back", "Go back", "")
 		
 		say("Your equipped items:\n")
 		for slot in InventorySlot.getAll():
@@ -81,20 +91,26 @@ func _run():
 			
 			addButton(item.getVisibleName(), item.getVisisbleDescription(), "puton", [item.getUniqueID()])
 		
-		addButton("Back", "Go back", "")
 		
 	if(state == "interactmenu"):
 		saynn("Pick an item you wanna interact with")
+		if(fightMode):
+			saynn("Press back to be able to equip and unequip items in a fight.")
 		
+		addButton("Back", "Go back", "")
+		
+		var savedDisabled = []
 		var items = GM.pc.getInventory().getAllItems()
 		for item in items:
 			var actions = item.getPossibleActions()
 			if(actions.size() > 0):
 				addButton(item.getStackName(), item.getVisisbleDescription(), "lookat", [item.getUniqueID()])
 			else:
-				addDisabledButton(item.getStackName(), item.getVisisbleDescription())
+				savedDisabled.append([item.getStackName(), item.getVisisbleDescription()])
+		
+		for disabledRecord in savedDisabled:
+			addDisabledButton(disabledRecord[0], disabledRecord[1])
 			
-		addButton("Back", "Go back", "")
 
 		
 	if(state == "lookat"):
@@ -104,6 +120,9 @@ func _run():
 		saynn("What do you wanna do with "+item.getStackName())
 		
 		for action in item.getPossibleActions():
+			if(fightMode && action.has("onlyWhenCalm") && action["onlyWhenCalm"]):
+				addDisabledButton(action["name"], "(Can't do this now)\n\n"+action["description"])
+			
 			addButton(action["name"], action["description"], "doitemaction", [action["scene"]])
 		
 		addButton("Back", "Do nothing with it", "")
@@ -113,14 +132,20 @@ func _react(_action: String, _args):
 	if(_action == "takeoff"):
 		var item: ItemBase = GM.pc.getInventory().getItemByUniqueID(_args[0])
 		runScene(item.getTakeOffScene(), [_args[0]])
+		if(fightMode):
+			endScene()
 		return
 	if(_action == "puton"):
 		var item: ItemBase = GM.pc.getInventory().getItemByUniqueID(_args[0])
 		runScene(item.getPutOnScene(), [_args[0]])
+		if(fightMode):
+			endScene()
 		return
 	if(_action == "doitemaction"):
 		var sceneToRun = _args[0]
 		runScene(sceneToRun, [savedItemUniqueID])
+		if(fightMode):
+			endScene()
 		return
 	if(_action == "endthescene"):
 		endScene()
@@ -137,6 +162,7 @@ func saveData():
 	var data = .saveData()
 	
 	data["savedItemUniqueID"] = savedItemUniqueID
+	data["fightMode"] = fightMode
 	
 	return data
 	
@@ -144,3 +170,4 @@ func loadData(data):
 	.loadData(data)
 	
 	savedItemUniqueID = SAVE.loadVar(data, "savedItemUniqueID", "")
+	fightMode = SAVE.loadVar(data, "fightMode", false)

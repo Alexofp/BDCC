@@ -7,6 +7,7 @@ var amount = 1
 var currentInventory = null
 var restraintData: RestraintData = null
 var itemState: ItemState = null
+var fluids: Fluids = null
 
 func _init():
 	#if(uniqueID == null):
@@ -18,6 +19,8 @@ func _init():
 	generateItemState()
 	if(itemState != null):
 		itemState.item = weakref(self)
+	
+	generateFluids()
 
 func getVisibleName():
 	return "Bad item"
@@ -73,6 +76,16 @@ func getVisisbleDescription():
 	if(addsIntoxication() > 0.0):
 		text += "\n[color=red]Adds "+str(round(addsIntoxicationToPC()*100.0))+"% intoxication[/color]"
 	
+	if(fluids != null):
+		if(fluids.isCapacityLimited()):
+			text += "\n\nMax volume: "+str(Util.roundF(fluids.getFluidAmount()))+"/"+str(Util.roundF(fluids.getCapacity(), 1))+" ml"
+		else:
+			text += "\n"
+		if(!fluids.isEmpty()):
+			text += "\nContents:\n"+Util.join(fluids.getContentsHumanReadableArray(),"\n")
+		else:
+			text += "\nContents: Empty"
+			
 	var timedBuffs = getTimedBuffs()
 	if(timedBuffs.size() > 0):
 		var t = getBuffsDurationSeconds()
@@ -176,6 +189,9 @@ func saveData():
 	if(itemState != null):
 		data["itemState"] = itemState.saveData()
 
+	if(fluids != null):
+		data["fluids"] = fluids.saveData()
+
 	return data
 	
 func loadData(_data):
@@ -186,6 +202,9 @@ func loadData(_data):
 		
 	if(itemState != null && _data.has("itemState")):
 		itemState.loadData(SAVE.loadVar(_data, "itemState", {}))
+
+	if(fluids != null):
+		fluids.loadData(SAVE.loadVar(_data, "fluids", {}))
 
 func getClothingSlot():
 	return null
@@ -303,6 +322,12 @@ func generateItemState():
 func getItemState():
 	return itemState
 
+func generateFluids():
+	pass
+
+func getFluids():
+	return fluids
+
 func isImportant():
 	return false
 
@@ -414,6 +439,9 @@ func getItemCategory():
 		return ItemCategory.Underwear
 	elif(getClothingSlot() != null):
 		return ItemCategory.Clothes
+	
+	if(fluids != null):
+		return ItemCategory.FluidStorage
 	
 	return ItemCategory.Generic
 

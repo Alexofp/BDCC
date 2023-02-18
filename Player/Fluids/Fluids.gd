@@ -5,10 +5,29 @@ class_name Fluids
 var contents = []
 var dirtyFlag = false
 var cachedFluidsAmount: float = 0.0
+var fluidLimit: float = -1.0
+
+func isCapacityLimited():
+	if(fluidLimit < 0.0):
+		return false
+	return true
+
+func getCapacity() -> float:
+	return fluidLimit
+
+func setCapacity(newCapacity:float):
+	fluidLimit = newCapacity
 
 func addFluid(fluidType, amount: float, fluidDNA = null):
+	if(isCapacityLimited()):
+		var capacity = getCapacity()
+		if(amount > capacity):
+			amount = capacity
+	return addFluidIgnoreCapacity(fluidType, amount, fluidDNA)
+	
+func addFluidIgnoreCapacity(fluidType, amount: float, fluidDNA = null):
 	if(amount <= 0.0):
-		return
+		return 0.0
 	
 	if(fluidDNA == null):
 		fluidDNA = FluidDNA.new()
@@ -20,7 +39,7 @@ func addFluid(fluidType, amount: float, fluidDNA = null):
 		if(fluidType == contentData["fluidType"] && contentData["fluidDNA"].canCombineWith(fluidDNA)):
 			contentData["amount"] += amount
 			cachedFluidsAmount += amount
-			return
+			return amount
 	
 	contents.append({
 		"fluidType": fluidType,
@@ -28,6 +47,7 @@ func addFluid(fluidType, amount: float, fluidDNA = null):
 		"fluidDNA": fluidDNA,
 	})
 	cachedFluidsAmount += amount
+	return amount
 
 func removeEmptyInternalEntries():
 	cachedFluidsAmount = 0.0
@@ -76,22 +96,27 @@ func transferTo(otherFluids, fraction = 0.5, minAmount = 0.0):
 		else:
 			assert(false, "Bad fluids object")
 	
+	if(otherFluids == null):
+		Log.printerr("transferTo() null Fluids object encountered")
+		return 0.0
+	
 	if(minAmount > 0.0 && getFluidAmount() > 0.0):
 		fraction = max(fraction, min(1.0, minAmount/getFluidAmount()))
 	
-	var result = false
+	var result = 0.0
 	for contentData in contents:
 		var amountToTransfer = contentData["amount"] * fraction
-		contentData["amount"] -= amountToTransfer
+		var actuallyTransferred = otherFluids.addFluid(contentData["fluidType"], amountToTransfer, contentData["fluidDNA"])
+		contentData["amount"] -= actuallyTransferred
 		
-		result = true
-		otherFluids.addFluid(contentData["fluidType"], amountToTransfer, contentData["fluidDNA"])
+		result += actuallyTransferred
+		
 	removeEmptyInternalEntries()
 	return result
 
 func transferAmountTo(otherFluids, howMuch):
 	if(howMuch <= 0.0):
-		return
+		return 0.0
 	
 	if(!otherFluids.has_method("isFluids")):
 		if(otherFluids.has_method("getFluids")):
@@ -99,29 +124,37 @@ func transferAmountTo(otherFluids, howMuch):
 		else:
 			assert(false, "Bad fluids object")
 	
+	if(otherFluids == null):
+		Log.printerr("transferAmountTo() null Fluids object encountered")
+		return 0.0
+	
 	var fluidAmount = getFluidAmount()
 	if(howMuch > fluidAmount):
 		howMuch = fluidAmount
 	
-	var result = false
+	var result = 0.0
 	for contentData in contents:
 		var share: float = contentData["amount"] / fluidAmount
 		
 		var amountToTransfer = howMuch * share
-		contentData["amount"] -= amountToTransfer
+		var actuallyTransferred = otherFluids.addFluid(contentData["fluidType"], amountToTransfer, contentData["fluidDNA"])
+		contentData["amount"] -= actuallyTransferred
 		
-		result = true
-		otherFluids.addFluid(contentData["fluidType"], amountToTransfer, contentData["fluidDNA"])
+		result += actuallyTransferred
 	removeEmptyInternalEntries()
 	return result
 	
-
+# Ignores capacity, be careful
 func shareFluids(otherFluids, fraction = 0.5):
 	if(!otherFluids.has_method("isFluids")):
 		if(otherFluids.has_method("getFluids")):
 			otherFluids = otherFluids.getFluids()
 		else:
 			assert(false, "Bad fluids object")
+	
+	if(otherFluids == null):
+		Log.printerr("shareFluids() null Fluids object encountered")
+		return false
 	
 	var result = false
 	var ourFluids = []

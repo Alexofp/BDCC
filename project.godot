@@ -517,7 +517,7 @@ _global_script_classes=[ {
 "base": "Reference",
 "class": "ItemBase",
 "language": "GDScript",
-"path": "res://Inventory/Items/ItemBase.gd"
+"path": "res://Inventory/ItemBase.gd"
 }, {
 "base": "Object",
 "class": "ItemCategory",
