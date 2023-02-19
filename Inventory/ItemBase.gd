@@ -385,6 +385,14 @@ func getWearer():
 	
 	return currentInventory.getCharacter()
 
+func isWornByWearer():
+	var wearer = getWearer()
+	if(wearer == null):
+		return false
+	if(wearer.getInventory().getEquippedItem(getClothingSlot()) == self):
+		return true
+	return false
+
 func updateWearerAppearance():
 	var wearer = getWearer()
 	if(wearer != null && wearer.has_method("updateAppearance")):

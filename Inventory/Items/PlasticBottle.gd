@@ -7,10 +7,13 @@ func getVisibleName():
 	return "Plastic bottle"
 	
 func getDescription():
-	return "Just your average plastic bottle. The special lid compresses liquids inside, allowing it to store more than it could have otherwise."
+	return "Just your average plastic bottle. The special lid compresses liquids inside, allowing it to store more than it could have otherwise. Selling price depends on the contents."
 
 func getPrice():
-	return 1
+	return 5
+
+func getSellPrice():
+	return 0 + Util.maxi(0, fluids.getCost())
 
 func canSell():
 	return true
@@ -26,7 +29,6 @@ func getTags():
 func generateFluids():
 	fluids = Fluids.new()
 	fluids.setCapacity(10000.0)
-	fluids.addFluid("Cum", 1000.0)
 
 func getPossibleActions():
 	return [

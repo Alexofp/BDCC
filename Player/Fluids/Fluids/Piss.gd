@@ -60,3 +60,7 @@ func onSwallow(_pc, _amount):
 		return "Drinking piss grossed you out, removing "+DamageType.getDamageColoredString(DamageType.Lust, toHeal)+"."
 	
 	return null
+
+# Piss reduces the selling price
+func getCost(_amount) -> int:
+	return int(_amount / 100.0) * -1

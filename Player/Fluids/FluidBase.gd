@@ -27,6 +27,9 @@ func getStatusEffectColor():
 func getStatusEffectPicture():
 	return "res://Images/StatusEffects/splurt.png"
 
+func getCost(_amount) -> int:
+	return 0
+
 func buff(buffid, args = []):
 	var buff: BuffBase = GlobalRegistry.createBuff(buffid)
 	buff.initBuff(args)

@@ -134,12 +134,13 @@ func hasCharacter(id: String):
 	return false
 
 func updateCharacter():
-	GM.ui.clearCharactersPanel()
-	for id in currentCharactersVariants:
-		var character = GlobalRegistry.getCharacter(id)
-		if(!character):
-			continue
-		GM.ui.addCharacterToPanel(id, currentCharactersVariants[id])
+	if(GM.main.getCurrentScene() == self):
+		GM.ui.clearCharactersPanel()
+		for id in currentCharactersVariants:
+			var character = GlobalRegistry.getCharacter(id)
+			if(!character):
+				continue
+			GM.ui.addCharacterToPanel(id, currentCharactersVariants[id])
 
 func clearCharacter():
 	currentCharactersVariants.clear()

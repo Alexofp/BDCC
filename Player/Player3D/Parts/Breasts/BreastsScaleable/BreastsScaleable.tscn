@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Player/Player3D/Parts/Part3D.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Player/Player3D/Parts/Breasts/BreastsScaleable/breastsScaleable.png" type="Texture" id=2]
+[ext_resource path="res://Player/Player3D/Parts/AttachmentProxy.tscn" type="PackedScene" id=3]
 
 [sub_resource type="SpatialMaterial" id=7]
 resource_name = "breasts4.png"
@@ -230,9 +231,14 @@ bind/27/pose = Transform( 0.127554, -0.991832, 5.86852e-07, -0.991832, -0.127554
 visible = false
 mesh = SubResource( 8 )
 skin = SubResource( 9 )
-material/0 = null
 
 [node name="breastsScalable001" type="MeshInstance" parent="." index="1"]
 mesh = SubResource( 10 )
 skin = SubResource( 11 )
 material/0 = SubResource( 1 )
+
+[node name="AttachmentProxy" parent="." index="2" instance=ExtResource( 3 )]
+transform = Transform( 0.97113, 0.238551, 0, -0.238551, 0.97113, 0, 0, 0, 1, -0.861095, 5.77395, 0.043 )
+boneId = "Nipples"
+zoneName = "breastpump"
+scaleWithBone = false

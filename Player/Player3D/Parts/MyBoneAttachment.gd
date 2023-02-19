@@ -5,6 +5,7 @@ export(NodePath) var skeleton: NodePath
 export(String) var boneId
 var startTransform:Transform
 var correctedTransform: Transform
+var shouldScaleWithBone = true
 
 func getAllRestTransformsForBone(skeletonObject:Skeleton, boneIdx):
 	var result = []
@@ -50,5 +51,7 @@ func _process(_delta):
 		#var newt = skeletonObject.get_bone_global_pose(boneIdx)
 		var boneIdx = skeletonObject.find_bone(boneId)
 		transform = skeletonObject.get_bone_global_pose(boneIdx) * correctedTransform
+		if(!shouldScaleWithBone):
+			scale = startTransform.basis.get_scale()
 		#print(str(skeletonObject.get_bone_global_pose(boneIdx)))
 		#print(str(skeletonObject.get_bone_rest(boneIdx)))

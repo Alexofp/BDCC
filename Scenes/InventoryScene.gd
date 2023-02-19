@@ -94,12 +94,22 @@ func _run():
 		
 	if(state == "interactmenu"):
 		saynn("Pick an item you wanna interact with")
-		if(fightMode):
-			saynn("Press back to be able to equip and unequip items in a fight.")
+		#if(fightMode):
+		#	saynn("Press back to be able to equip and unequip items in a fight.")
 		
-		addButton("Back", "Go back", "")
+		if(fightMode):
+			addButton("Back", "You don't wanna use anything", "endthescene")
+		else:
+			addButton("Back", "Go back", "")
 		
 		var savedDisabled = []
+		var equippeditems = GM.pc.getInventory().getAllEquippedItems()
+		for invSlot in equippeditems:
+			var item = equippeditems[invSlot]
+			var actions = item.getPossibleActions()
+			if(actions.size() > 0):
+				addButton("(worn)"+item.getStackName(), item.getVisisbleDescription(), "lookat", [item.getUniqueID()])
+		
 		var items = GM.pc.getInventory().getAllItems()
 		for item in items:
 			var actions = item.getPossibleActions()
@@ -120,13 +130,18 @@ func _run():
 		saynn("What do you wanna do with "+item.getStackName())
 		
 		for action in item.getPossibleActions():
-			if(fightMode && action.has("onlyWhenCalm") && action["onlyWhenCalm"]):
+			if(!canDoAction(action)):
 				addDisabledButton(action["name"], "(Can't do this now)\n\n"+action["description"])
 			
 			addButton(action["name"], action["description"], "doitemaction", [action["scene"]])
 		
-		addButton("Back", "Do nothing with it", "")
+		addButton("Back", "Do nothing with it", "interactmenu")
 
+func canDoAction(action):
+	if(fightMode && action.has("onlyWhenCalm") && action["onlyWhenCalm"]):
+		return false
+		
+	return true
 
 func _react(_action: String, _args):
 	if(_action == "takeoff"):
@@ -148,10 +163,19 @@ func _react(_action: String, _args):
 			endScene()
 		return
 	if(_action == "endthescene"):
-		endScene()
+		endScene([false])
 		return
 	if(_action == "lookat"):
 		savedItemUniqueID = _args[0]
+	
+		if(fightMode):
+			var item: ItemBase = GM.pc.getInventory().getItemByUniqueID(savedItemUniqueID)
+			
+			var possibleActions = item.getPossibleActions()
+			if(possibleActions.size() == 1):
+				if(canDoAction(possibleActions[0])):
+					runScene(possibleActions[0]["scene"], [savedItemUniqueID])
+					endScene()
 	
 	setState(_action)
 

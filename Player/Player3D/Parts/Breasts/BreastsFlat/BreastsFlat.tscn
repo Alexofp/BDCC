@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Player/Player3D/Parts/Part3D.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Player/Player3D/Parts/Breasts/BreastsFlat/breastsflat.png" type="Texture" id=2]
+[ext_resource path="res://Player/Player3D/Parts/AttachmentProxy.tscn" type="PackedScene" id=3]
 
 [sub_resource type="SpatialMaterial" id=1]
 resource_name = "breastsflat.png"
@@ -103,3 +104,9 @@ bind/21/pose = Transform( 0.486096, -0.873925, 4.58786e-07, -0.874017, -0.486062
 mesh = SubResource( 2 )
 skin = SubResource( 3 )
 material/0 = SubResource( 1 )
+
+[node name="AttachmentProxy" parent="." index="1" instance=ExtResource( 3 )]
+transform = Transform( 0.974702, 0.223505, 0, -0.223505, 0.974702, 0, 0, 0, 1, -0.60085, 5.77395, 0.043 )
+boneId = "Chest"
+zoneName = "breastpump"
+scaleWithBone = false

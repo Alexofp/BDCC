@@ -38,3 +38,6 @@ func onSwallow(_pc, _amount):
 		return "Drinking milk relieved you of "+DamageType.getDamageColoredString(DamageType.Physical, toHeal)+"."
 	
 	return null
+
+func getCost(_amount) -> int:
+	return int(_amount / 1000.0) * 1

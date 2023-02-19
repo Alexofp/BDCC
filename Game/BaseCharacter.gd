@@ -1190,6 +1190,10 @@ func milk(howmuch = 1.0):
 		return 0.0
 	var howMuchMilk = production.drain(howmuch)
 	production.afterMilked()
+	if(!hasPerk(Perk.MilkNoSoreNipples) && howmuch >= 0.5):
+		addEffect(StatusEffect.SoreNipplesAfterMilking)
+	if(isPlayer()):
+		addSkillExperience(Skill.Milking, 20)
 	return howMuchMilk
 
 func stimulateLactation():
@@ -1202,6 +1206,8 @@ func stimulateLactation():
 		return false
 	if(production.has_method("stimulate")):
 		return production.stimulate()
+	if(isPlayer()):
+		addSkillExperience(Skill.Milking, 10)
 	return false
 
 func canBeSeedMilked():

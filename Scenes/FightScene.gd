@@ -858,6 +858,9 @@ func resolveCustomCharacterName(_charID):
 
 func _react_scene_end(_tag, _result):
 	if(_tag == "struggle_scene"):
+		if(_result is Array && _result.size() > 0 && _result[0] == false):
+			return
+		
 		setState("fighting")
 		beforeTurnChecks(true)
 		
@@ -866,6 +869,9 @@ func _react_scene_end(_tag, _result):
 		afterTurnChecks()
 	
 	if(_tag == "inventory_scene"):
+		if(_result is Array && _result.size() > 0 && _result[0] == false):
+			return
+		
 		setState("fighting")
 		beforeTurnChecks(true)
 		

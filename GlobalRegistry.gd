@@ -267,6 +267,7 @@ func registerEverything():
 	registerItemFolder("res://Inventory/Items/BDSM/")
 	registerItemFolder("res://Inventory/Items/StaticBDSM/")
 	registerItemFolder("res://Inventory/Items/Weapons/")
+	registerItemFolder("res://Inventory/Items/Clothes/")
 	
 	registerBuffFolder("res://Inventory/Buffs/")
 	

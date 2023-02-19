@@ -43,3 +43,6 @@ func onSwallow(_pc, _amount):
 		return "Drinking cum provided you with an energy boost, giving you "+DamageType.getDamageColoredString(DamageType.Stamina, toHeal)+" back."
 	
 	return null
+
+func getCost(_amount) -> int:
+	return int(_amount / 300.0) * 1

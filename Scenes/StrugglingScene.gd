@@ -42,7 +42,7 @@ func _run():
 			addButtonAt(13, "Use key", "Use one of your restraint keys to unlock something", "usekey")
 		else:
 			addDisabledButtonAt(13, "Use key", "You don't have any restraint keys")
-		addButtonAt(14, "Give up", "Stop struggling", "endthescene")
+		addButtonAt(14, "Give up", "Stop struggling", "endthescenedidnothing")
 		
 		for item in GM.pc.getInventory().getEquppedRestraints():
 			var restraintData: RestraintData = item.getRestraintData()
@@ -165,6 +165,10 @@ func onMinigameCompleted(result):
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
 		endScene()
+		return
+		
+	if(_action == "endthescenedidnothing"):
+		endScene([false])
 		return
 		
 	if(_action == "giveupstruggle"):

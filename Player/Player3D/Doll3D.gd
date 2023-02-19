@@ -169,6 +169,8 @@ func addPartObject(slot, part: Spatial):
 		dollAttachmentZone.setProxy(attachmentProxy)
 		dollAttachmentZone.setSkeletonPath(dollAttachmentZone.get_path_to(getDollSkeleton().getSkeleton()))
 		attachmentProxy.dollAttachmentZone = dollAttachmentZone
+		dollAttachmentZone.shouldScaleWithBone = attachmentProxy.scaleWithBone
+			
 		
 		if(!dollAttachmentZones.has(attachmentProxy.zoneName)):
 			dollAttachmentZones[attachmentProxy.zoneName] = []

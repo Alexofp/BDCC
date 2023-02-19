@@ -1,4 +1,4 @@
-extends "res://Inventory/Items/InmateUniformGeneral.gd"
+extends "res://Inventory/Items/Clothes/InmateUniformGeneral.gd"
 
 func _init():
 	id = "inmateuniformHighsec"

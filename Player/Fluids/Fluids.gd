@@ -6,6 +6,7 @@ var contents = []
 var dirtyFlag = false
 var cachedFluidsAmount: float = 0.0
 var fluidLimit: float = -1.0
+signal contentsChanged(oldAmount, newAmount)
 
 func isCapacityLimited():
 	if(fluidLimit < 0.0):
@@ -20,9 +21,9 @@ func setCapacity(newCapacity:float):
 
 func addFluid(fluidType, amount: float, fluidDNA = null):
 	if(isCapacityLimited()):
-		var capacity = getCapacity()
-		if(amount > capacity):
-			amount = capacity
+		var freeSpace = max(0.0, getCapacity() - getFluidAmount())
+		if(amount > freeSpace):
+			amount = freeSpace
 	return addFluidIgnoreCapacity(fluidType, amount, fluidDNA)
 	
 func addFluidIgnoreCapacity(fluidType, amount: float, fluidDNA = null):
@@ -39,6 +40,7 @@ func addFluidIgnoreCapacity(fluidType, amount: float, fluidDNA = null):
 		if(fluidType == contentData["fluidType"] && contentData["fluidDNA"].canCombineWith(fluidDNA)):
 			contentData["amount"] += amount
 			cachedFluidsAmount += amount
+			emit_signal("contentsChanged", cachedFluidsAmount-amount, cachedFluidsAmount)
 			return amount
 	
 	contents.append({
@@ -47,6 +49,7 @@ func addFluidIgnoreCapacity(fluidType, amount: float, fluidDNA = null):
 		"fluidDNA": fluidDNA,
 	})
 	cachedFluidsAmount += amount
+	emit_signal("contentsChanged", cachedFluidsAmount-amount, cachedFluidsAmount)
 	return amount
 
 func removeEmptyInternalEntries():
@@ -103,6 +106,7 @@ func transferTo(otherFluids, fraction = 0.5, minAmount = 0.0):
 	if(minAmount > 0.0 && getFluidAmount() > 0.0):
 		fraction = max(fraction, min(1.0, minAmount/getFluidAmount()))
 	
+	var oldFluidAmount = getFluidAmount()
 	var result = 0.0
 	for contentData in contents:
 		var amountToTransfer = contentData["amount"] * fraction
@@ -112,6 +116,7 @@ func transferTo(otherFluids, fraction = 0.5, minAmount = 0.0):
 		result += actuallyTransferred
 		
 	removeEmptyInternalEntries()
+	emit_signal("contentsChanged", oldFluidAmount, getFluidAmount())
 	return result
 
 func transferAmountTo(otherFluids, howMuch):
@@ -132,6 +137,7 @@ func transferAmountTo(otherFluids, howMuch):
 	if(howMuch > fluidAmount):
 		howMuch = fluidAmount
 	
+	var oldFluidAmount = getFluidAmount()
 	var result = 0.0
 	for contentData in contents:
 		var share: float = contentData["amount"] / fluidAmount
@@ -142,6 +148,7 @@ func transferAmountTo(otherFluids, howMuch):
 		
 		result += actuallyTransferred
 	removeEmptyInternalEntries()
+	emit_signal("contentsChanged", oldFluidAmount, getFluidAmount())
 	return result
 	
 # Ignores capacity, be careful
@@ -208,6 +215,7 @@ func doDrainObsorb(howMuchToDrain: float, howMuchGotObsorbed: float):
 		
 	if(shouldRemoveInternal):
 		removeEmptyInternalEntries()
+	emit_signal("contentsChanged", fluidAmount, getFluidAmount())
 	return result
 
 func drain(howMuchToDrain: float, randMin:float = 1.0, randMax:float = 1.0):
@@ -231,6 +239,7 @@ func drain(howMuchToDrain: float, randMin:float = 1.0, randMax:float = 1.0):
 		
 	if(shouldRemoveInternal):
 		removeEmptyInternalEntries()
+	emit_signal("contentsChanged", fluidAmount, getFluidAmount())
 	return result
 
 func drainPercent(factor: float):
@@ -306,6 +315,18 @@ func getDominantFluidID():
 			maxAmount = amountByFluidType[fluidType]
 			maxFluid = fluidType
 	return maxFluid
+	
+func getCost() -> int:
+	var amountByFluidType = getFluidAmountByType()
+	
+	var result = 0
+	for fluidType in amountByFluidType:
+		var fluidObject = GlobalRegistry.getFluid(fluidType)
+		if(fluidObject == null):
+			continue
+		
+		result += fluidObject.getCost(amountByFluidType[fluidType])
+	return result
 	
 func saveData():
 	var theContents = []

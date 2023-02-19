@@ -47,7 +47,7 @@ func _run():
 			addDisabledButton("Research", "Talk about it with Eliza first")
 		if(getModuleFlag("MedicalModule", "Med_pcKnowsAboutMilking")):
 			
-			if(!getModuleFlag("MedicalModule", "Med_wasMilkedToday", false)):
+			if(GM.pc.hasPerk(Perk.MilkNoSoreNipples) || (!getModuleFlag("MedicalModule", "Med_wasMilkedToday", false) && !GM.pc.hasEffect(StatusEffect.SoreNipplesAfterMilking))):
 				addButton("Milking", "Ask to be milked", "milking")
 			else:
 				addDisabledButton("Milking", "Give yourself some rest")
