@@ -389,3 +389,6 @@ func itemExists(_context):
 			return false
 		return true
 	return false
+
+func combineWeaponAttacks():
+	return true

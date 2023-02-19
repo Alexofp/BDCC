@@ -10,7 +10,7 @@ func getVisibleName():
 	return "Used condom"
 	
 func getDescription():
-	var theText = "A condom that was used."
+	var theText = "A condom that was used. Can be thrown if filled."
 	if(lastUser != ""):
 		theText += "\nFilled by: "+str(lastUser)
 	return theText
@@ -53,6 +53,10 @@ func updateDoll(doll: Doll3D):
 
 func generateFluids():
 	fluids = Fluids.new()
+	#fluids.addFluid("Cum", 1000.0)
+	#fluids.addFluid("Milk", 1000.0)
+	#fluids.addFluid("GirlCum", 1000.0)
+	#fluids.addFluid("Piss", 1000.0)
 
 func getPossibleActions():
 	return [
@@ -72,3 +76,8 @@ func getPossibleActions():
 			"description": "Throw out this condom",
 		},
 	]
+
+func getAttacks():
+	if(fluids.isEmpty()):
+		return []
+	return ["ThrowUsedCondomPCAttack"]

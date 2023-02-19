@@ -46,3 +46,33 @@ func onSwallow(_pc, _amount):
 
 func getCost(_amount) -> int:
 	return int(_amount / 300.0) * 1
+
+func onGettingHitWith(_pc, _amount):
+	var topicsToCheck = [InterestTopic.CoveredInCum, InterestTopic.CoveredInLotsOfCum, InterestTopic.HasCockOnly, InterestTopic.HasVaginaAndCock, InterestTopic.ExposedCock]
+	var maxInterest = -1.0
+	for theTopic in topicsToCheck:
+		maxInterest = max(maxInterest, _pc.getLustInterests().getInterestValue(theTopic))
+	
+	var likesCum = 0.5 + maxInterest
+	likesCum = clamp(likesCum, -1.0, 1.0)
+	
+	var lustToAdd = int(likesCum * sqrt(_amount) / 1.0)
+	var staminaToDrain = int(sqrt(_amount))
+	
+	var text = ""
+	if(lustToAdd < 0):
+		text += _pc.getName()+" hated getting splashed with cum!"
+	elif(lustToAdd > 0):
+		text += _pc.getName()+" "+RNG.pick(["loved", "enjoyed", "got lusty from", "liked", "got aroused from"])+" getting splashed with cum!"
+	
+	if(RNG.chance(2.0 * sqrt(_amount))):
+		if(text != ""):
+			text += " "
+		text += _pc.getName()+" got blinded by the cum!"
+		_pc.addEffect(StatusEffect.Blindness, [Util.mini(3, 1 + int(_amount/2000))])
+		
+	return {
+		text = text,
+		lust = lustToAdd,
+		stamina = staminaToDrain,
+	}

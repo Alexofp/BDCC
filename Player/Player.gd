@@ -144,8 +144,12 @@ func _getAttacks():
 		if(itemAttacks == null):
 			continue
 		for attackID in itemAttacks:
-			if(uniqueItemAttacks.has(item.id) && uniqueItemAttacks[item.id].has(attackID)):
+			var attack = GlobalRegistry.getAttack(attackID)
+			if(attack == null):
 				continue
+			if(attack.combineWeaponAttacks()):
+				if(uniqueItemAttacks.has(item.id) && uniqueItemAttacks[item.id].has(attackID)):
+					continue
 			
 			attacks.append({
 				"attackID": attackID,

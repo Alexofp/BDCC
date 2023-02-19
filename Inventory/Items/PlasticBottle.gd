@@ -42,4 +42,9 @@ func getPossibleActions():
 			"scene": "DrinkFromScene",
 			"description": "Swallow the contents of this item",
 		},
+		{
+			"name": "Collect fluids from you",
+			"scene": "CatchBodyFluidsScene",
+			"description": "Catch some of the fluids that you are covered with",
+		},
 	]

@@ -21,6 +21,9 @@ func getBellyBuffs(_pc, _amount):
 func onSwallow(_pc, _amount):
 	return null
 
+func onGettingHitWith(_pc, _amount):
+	return null
+
 func getStatusEffectColor():
 	return Color("#A001A0")
 

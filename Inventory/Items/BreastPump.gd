@@ -48,7 +48,7 @@ func getUnriggedParts(_character):
 func generateFluids():
 	fluids = Fluids.new()
 	fluids.setCapacity(2000.0)
-	fluids.addFluid("Milk", 250.0)
+	#fluids.addFluid("Milk", 250.0)
 	var _ok = fluids.connect("contentsChanged", self, "updatePcIfNeeded")
 
 func updatePcIfNeeded(_oldFluidAmount, _newFluidAmount):

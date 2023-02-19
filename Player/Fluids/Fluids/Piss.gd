@@ -64,3 +64,36 @@ func onSwallow(_pc, _amount):
 # Piss reduces the selling price
 func getCost(_amount) -> int:
 	return int(_amount / 100.0) * -1
+
+func onGettingHitWith(_pc, _amount):
+	var likesCum = -1.0
+	
+	var lustToAdd = int(likesCum * sqrt(_amount) / 1.0)
+	var staminaToDrain = int(sqrt(_amount)) * 2
+	
+	var text = ""
+	if(lustToAdd < 0):
+		text += _pc.getName()+" hated getting splashed with piss!"
+	elif(lustToAdd > 0):
+		text += _pc.getName()+" "+RNG.pick(["loved", "enjoyed", "got lusty from", "liked", "got aroused from"])+" getting splashed with piss!"
+	
+	var painToAdd = 0
+	if(RNG.chance(4.0 * sqrt(_amount)) && !_pc.hasEffect(StatusEffect.Collapsed)):
+		if(text != ""):
+			text += " "
+		text += _pc.getName()+" slipped on piss, ow!"
+		_pc.addEffect(StatusEffect.Collapsed)
+		painToAdd = 10
+	
+	if(RNG.chance(4.0 * sqrt(_amount)) && !_pc.hasEffect(StatusEffect.Weakness)):
+		if(text != ""):
+			text += " "
+		text += _pc.getName()+" got very grossed out from getting covered in piss!"
+		_pc.addEffect(StatusEffect.Weakness, [Util.mini(3, 1 + int(_amount/2000))])
+		
+	return {
+		text = text,
+		lust = lustToAdd,
+		stamina = staminaToDrain,
+		pain = painToAdd,
+	}
