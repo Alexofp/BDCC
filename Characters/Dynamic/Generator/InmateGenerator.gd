@@ -36,8 +36,9 @@ func pickEquipment(character:DynamicCharacter, _args = {}):
 				theEquipment.append(randomUniform)
 	
 	# Sometimes they have a forced chastity cage on
-	if(RNG.chance(2.0) && character.hasPenis()):
-		theEquipment.append(RNG.pick(["ChastityCagePermanentNormal", "ChastityCagePermanent"]))
+	if(!_args.has(NpcGen.NoChastity) || !_args[NpcGen.NoChastity]):
+		if(RNG.chance(2.0) && character.hasPenis()):
+			theEquipment.append(RNG.pick(["ChastityCagePermanentNormal", "ChastityCagePermanent"]))
 	
 	if(!RNG.chance(ehibit * 100.0 + 50.0)):
 		if(character.getFemininity() < 50):

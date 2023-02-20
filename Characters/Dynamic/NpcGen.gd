@@ -9,4 +9,5 @@ enum {
 	Name,
 	Flag,
 	Temporary,
+	NoChastity,
 }

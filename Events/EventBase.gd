@@ -105,6 +105,9 @@ func npcSatisfiesCondition(character:BaseCharacter, conInfo):
 	elif(conditionID == NpcCon.FlagEquals):
 		if(character.getFlag(conInfo[1]) != conInfo[2]):
 			return false
+	elif(conditionID == NpcCon.NoChastity):
+		if(character.isWearingChastityCage()):
+			return false
 	return true
 
 func grabNpcIDFromPool(poolID, _conditions = []):

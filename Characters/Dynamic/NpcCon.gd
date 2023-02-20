@@ -14,4 +14,5 @@ enum {
 	FlagEquals,
 	PersonalityStatAbove,
 	PersonalityStatBelow,
+	NoChastity,
 }

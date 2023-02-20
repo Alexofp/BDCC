@@ -707,8 +707,8 @@ func _react(_action: String, _args):
 		processTime(60*5)
 
 	if(_action == "kait_freeuse"):
-		first_npc_id = InmateGenerator.new().generate({NpcGen.Gender: RNG.pick([NpcGender.Male, NpcGender.Male, NpcGender.Shemale, NpcGender.Herm]), NpcGen.Temporary: true}).getID()
-		second_npc_id = InmateGenerator.new().generate({NpcGen.Gender: RNG.pick([NpcGender.Male, NpcGender.Male, NpcGender.Shemale, NpcGender.Herm]), NpcGen.Temporary: true}).getID()
+		first_npc_id = InmateGenerator.new().generate({NpcGen.Gender: RNG.pick([NpcGender.Male, NpcGender.Male, NpcGender.Shemale, NpcGender.Herm]), NpcGen.Temporary: true, NpcGen.NoChastity: true}).getID()
+		second_npc_id = InmateGenerator.new().generate({NpcGen.Gender: RNG.pick([NpcGender.Male, NpcGender.Male, NpcGender.Shemale, NpcGender.Herm]), NpcGen.Temporary: true, NpcGen.NoChastity: true}).getID()
 
 	if(_action == "kait_gets_bred_by_inmates"):
 		processTime(20*60)
