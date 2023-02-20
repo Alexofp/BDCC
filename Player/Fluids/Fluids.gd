@@ -16,6 +16,14 @@ func isCapacityLimited():
 func getCapacity() -> float:
 	return fluidLimit
 
+func isFull() -> bool:
+	if(!isCapacityLimited()):
+		return false
+	
+	if(getFluidAmount() >= getCapacity()):
+		return true
+	return false
+
 func setCapacity(newCapacity:float):
 	fluidLimit = newCapacity
 

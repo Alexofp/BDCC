@@ -3,6 +3,8 @@ class_name MedicalModule
 
 func getFlags():
 	return {
+		"AdvBreastPumpLastMilked": flag(FlagType.Number),
+		
 		# Medical module
 		"Eliza_IntroducedMedical": flag(FlagType.Bool),
 		"Eliza_BusyDays": flag(FlagType.Number),
@@ -134,6 +136,7 @@ func _init():
 		"res://Modules/MedicalModule/NurseCaughtOfflimitsEvent.gd",
 		
 		"res://Modules/MedicalModule/ForcedChastity/ForcedChastityEvents.gd",
+		"res://Modules/MedicalModule/Nursery/AdvancedBreastPumpEvent.gd",
 	]
 
 func resetFlagsOnNewDay():

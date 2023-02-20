@@ -547,6 +547,9 @@ func getTime():
 func getDays():
 	return currentDay
 
+func getTimeInGlobalSeconds():
+	return int(currentDay * 24 * 60 * 60) + int(timeOfDay)
+
 func setFlag(flagID, value):
 	# Handling "ModuleID.FlagID" here
 	var splitData = Util.splitOnFirst(flagID, ".")

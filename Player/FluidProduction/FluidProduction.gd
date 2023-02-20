@@ -74,7 +74,7 @@ func processTime(seconds: int):
 		fluids.addFluid(getFluidType(), productionAdded, character.getFluidDNA(getFluidSource()))
 	
 	if(productionAdded < 0.0):
-		fluids.drain(productionAdded)
+		fluids.drain(abs(productionAdded))
 
 func fillPercent(howMuch:float):
 	var character = getCharacter()
@@ -112,6 +112,7 @@ func loadData(data):
 
 func getTooltipInfo():
 	var result = []
+	result.append("Speed: "+ str(round(getProductionSpeedPerHour() * 10.0)/10.0)+" ml/hour")
 	result.append("Contents:")
 	
 	if(!fluids.isEmpty()):
