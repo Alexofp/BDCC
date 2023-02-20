@@ -232,6 +232,7 @@ func _react(_action: String, _args):
 	if(_action == "open_mouth"):
 		GM.pc.gotThroatFuckedBy("jack")
 		GM.pc.addSkillExperience(Skill.SexSlave, 20, "jack_condombj")
+		addFilledCondomToLootIfPerk(getCharacter("jack").createFilledCondom())
 	
 	if(_action == "get_bred"):
 		if(GM.pc.hasVagina()):

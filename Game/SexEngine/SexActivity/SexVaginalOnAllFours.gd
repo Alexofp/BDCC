@@ -472,7 +472,7 @@ func doDomAction(_id, _actionInfo):
 					"{dom.You} {dom.youVerb('pull')} out, stuffing {dom.yourHis} condom! {dom.You} {dom.youVerb('dispose')} of it.",
 				])
 				condom.destroyMe()
-				getSexEngine().saveItemToLoot(condom)
+				getSexEngine().saveCondomToLootIfPerk(condom)
 				getDom().cumInItem(condom)
 				domInfo.cum()
 				satisfyGoals()
@@ -531,7 +531,7 @@ func doDomAction(_id, _actionInfo):
 		if(condom != null):
 			text += " {dom.You} {dom.youVerb('dispose')} of {dom.yourHis} condom."
 			condom.destroyMe()
-			getSexEngine().saveItemToLoot(condom)
+			getSexEngine().saveCondomToLootIfPerk(condom)
 		
 		return {text = text}
 	

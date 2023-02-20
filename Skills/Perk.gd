@@ -33,6 +33,7 @@ const CumSloppySeconds = "CumSloppySeconds"
 const CumCumOnOpponent = "CumCumOnOpponent"
 const CumStud = "CumStud"
 const CumStudV2 = "CumStudV2"
+const CumKeepCondoms = "CumKeepCondoms"
 
 # Sex Slave perks
 const SexLustPassion = "SexLustPassion"

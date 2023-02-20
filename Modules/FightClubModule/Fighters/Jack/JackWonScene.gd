@@ -395,6 +395,8 @@ func _react(_action: String, _args):
 		if(!usedCondom || condomBroke):
 			GM.pc.cummedInVaginaBy("jack")
 			GM.pc.cummedOnBy("jack")
+		elif(usedCondom):
+			addFilledCondomToLootIfPerk(getCharacter("jack").createFilledCondom())
 		
 		GM.pc.orgasmFrom("jack")
 		GM.pc.addSkillExperience(Skill.SexSlave, 50, "jack_getbred")
@@ -404,6 +406,8 @@ func _react(_action: String, _args):
 		if(!usedCondom || condomBroke):
 			GM.pc.cummedInAnusBy("jack")
 			GM.pc.cummedOnBy("jack")
+		elif(usedCondom):
+			addFilledCondomToLootIfPerk(getCharacter("jack").createFilledCondom())
 		
 		GM.pc.orgasmFrom("jack")
 		GM.pc.addSkillExperience(Skill.SexSlave, 50, "jack_getbred")

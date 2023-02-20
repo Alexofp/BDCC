@@ -343,7 +343,7 @@ func doDomAction(_id, _actionInfo):
 						" {dom.You} {dom.youVerb('dispose')} of the used condom.",
 					])
 					condom.destroyMe()
-					getSexEngine().saveItemToLoot(condom)
+					getSexEngine().saveCondomToLootIfPerk(condom)
 					
 					return {text=text}
 			
@@ -388,7 +388,7 @@ func doDomAction(_id, _actionInfo):
 						" {dom.You} {dom.youVerb('dispose')} of the used condom.",
 					])
 					condom.destroyMe()
-					getSexEngine().saveItemToLoot(condom)
+					getSexEngine().saveCondomToLootIfPerk(condom)
 					
 					return {text=text}
 			
@@ -430,7 +430,7 @@ func doDomAction(_id, _actionInfo):
 						" {dom.You} {dom.youVerb('dispose')} of the used condom.",
 					])
 					condom.destroyMe()
-					getSexEngine().saveItemToLoot(condom)
+					getSexEngine().saveCondomToLootIfPerk(condom)
 					
 					return {text=text}
 			
@@ -662,7 +662,7 @@ func doSubAction(_id, _actionInfo):
 						" {dom.You} {dom.youVerb('dispose')} of the used condom.",
 					])
 					condom.destroyMe()
-					getSexEngine().saveItemToLoot(condom)
+					getSexEngine().saveCondomToLootIfPerk(condom)
 					
 					return {text=text}
 				
@@ -696,7 +696,7 @@ func doSubAction(_id, _actionInfo):
 						" {dom.You} {dom.youVerb('dispose')} of the used condom.",
 					])
 					condom.destroyMe()
-					getSexEngine().saveItemToLoot(condom)
+					getSexEngine().saveCondomToLootIfPerk(condom)
 					
 					return {text=text}
 			

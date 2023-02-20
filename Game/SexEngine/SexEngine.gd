@@ -1000,6 +1000,10 @@ func getCurrentActivitiesMaxDomOrgasmHandlePriority(domID, subID):
 func setInventoryToUse(newInv):
 	inventoryToSaveItemsTo = newInv
 
+func saveCondomToLootIfPerk(theItem):
+	if(GM.pc.hasPerk(Perk.CumKeepCondoms)):
+		saveItemToLoot(theItem)
+
 func saveItemToLoot(theItem):
 	if(inventoryToSaveItemsTo != null):
 		inventoryToSaveItemsTo.addItem(theItem)

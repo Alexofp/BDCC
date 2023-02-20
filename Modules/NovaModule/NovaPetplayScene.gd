@@ -808,6 +808,7 @@ func _react(_action: String, _args):
 			GM.pc.addSkillExperience(Skill.SexSlave, 20, "nova_petfuck")
 		else:
 			GM.pc.addSkillExperience(Skill.SexSlave, 40, "nova_petfuck")
+			addFilledCondomToLootIfPerk(getCharacter("nova").createFilledCondom())
 		
 		GM.pc.orgasmFrom("nova")
 	

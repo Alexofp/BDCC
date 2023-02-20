@@ -365,6 +365,7 @@ func _react(_action: String, _args):
 			GM.pc.addSkillExperience(Skill.SexSlave, 30, "rahi_showerfuck")
 		else:
 			GM.pc.addSkillExperience(Skill.SexSlave, 50, "rahi_showerfuck")
+			addFilledCondomToLootIfPerk(getCharacter("pc").createFilledCondom())
 		GM.pc.orgasmFrom("rahi")
 
 	if(_action == "endthescene"):

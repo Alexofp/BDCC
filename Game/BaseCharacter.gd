@@ -1581,6 +1581,11 @@ func cumInItem(theItem):
 			production.fillPercent(buffsHolder.getCustom(BuffAttribute.CumGenerationAfterOrgasm))
 			return returnValue
 
+func createFilledCondom():
+	var theCondom = GlobalRegistry.createItem("UsedCondom")
+	cumInItem(theCondom)
+	return theCondom
+
 func afterSexEnded(sexInfo):
 	if(sexInfo.getTimesCame() > 0):
 		addLust(-getLust())

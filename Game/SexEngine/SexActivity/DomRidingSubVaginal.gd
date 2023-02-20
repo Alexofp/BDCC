@@ -300,7 +300,7 @@ func doDomAction(_id, _actionInfo):
 		if(condom != null):
 			text += " {dom.You} {dom.youVerb('dispose')} of {sub.yourHis} condom."
 			condom.destroyMe()
-			getSexEngine().saveItemToLoot(condom)
+			getSexEngine().saveCondomToLootIfPerk(condom)
 		
 		return {text = text}
 
@@ -378,7 +378,7 @@ func doDomAction(_id, _actionInfo):
 				
 				if(!knotSuccess):
 					condom.destroyMe()
-					getSexEngine().saveItemToLoot(condom)
+					getSexEngine().saveCondomToLootIfPerk(condom)
 					text += RNG.pick([
 						" {dom.You} {dom.youVerb('dispose')} of the used condom.",
 					])
@@ -413,7 +413,7 @@ func doDomAction(_id, _actionInfo):
 					" {sub.You} "+RNG.pick(["{sub.youVerb('fill')}", "{sub.youVerb('stuff')}"])+" {sub.yourHis} condom! {dom.You} {dom.youVerb('dispose')} of it.",
 				])
 				condom.destroyMe()
-				getSexEngine().saveItemToLoot(condom)
+				getSexEngine().saveCondomToLootIfPerk(condom)
 				getSub().cumInItem(condom)
 				subInfo.cum()
 				satisfyGoals()

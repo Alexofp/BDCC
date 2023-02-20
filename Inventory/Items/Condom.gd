@@ -36,3 +36,19 @@ func getCondomBreakChance():
 
 func getItemCategory():
 	return ItemCategory.Medical
+
+func useInCombat(_attacker, _receiver):
+	removeXOrDestroy(1)
+	
+	_attacker.getInventory().addItem(GlobalRegistry.createItem("UsedCondom"))
+	
+	return _attacker.getName() + " takes one of the condoms out of its package and then stretches it with "+_attacker.hisHer()+" fingers."
+
+func getPossibleActions():
+	return [
+		{
+			"name": "Stretch one",
+			"scene": "UseItemLikeInCombatScene",
+			"description": "Turn one of the condoms into a used one",
+		},
+	]

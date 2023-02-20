@@ -94,9 +94,15 @@ func checkSceneEnded():
 		queue_free()
 
 func addItemToSavedItems(theItem):
+	if(theItem == null):
+		return
 	if(sceneSavedItemsInv.hasItem(theItem)):
 		return
 	sceneSavedItemsInv.addItem(theItem)
+
+func addFilledCondomToLootIfPerk(theItem):
+	if(GM.pc.hasPerk(Perk.CumKeepCondoms)):
+		addItemToSavedItems(theItem)
 
 func react(_action: String, _args):
 	var result = _react(_action, _args)

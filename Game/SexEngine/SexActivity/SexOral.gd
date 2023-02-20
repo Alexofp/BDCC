@@ -513,7 +513,7 @@ func doDomAction(_id, _actionInfo):
 				satisfyGoals()
 				state = ""
 				condom.destroyMe()
-				getSexEngine().saveItemToLoot(condom)
+				getSexEngine().saveCondomToLootIfPerk(condom)
 				text += RNG.pick([
 					" {dom.You} {dom.youVerb('pull')} out and {dom.youVerb('dispose')} of the used condom.",
 				])
@@ -555,7 +555,7 @@ func doDomAction(_id, _actionInfo):
 				])
 				condom.destroyMe()
 				getDom().cumInItem(condom)
-				getSexEngine().saveItemToLoot(condom)
+				getSexEngine().saveCondomToLootIfPerk(condom)
 				domInfo.cum()
 				satisfyGoals()
 				state = ""
