@@ -616,11 +616,21 @@ func getSubResistChance(baseChance, domAngerRemoval):
 
 func doSubAction(_id, _actionInfo):
 	if(_id == "subcum"):
+		var straponData = null
+		
 		if(isStraponSex()):
 			satisfyGoals()
+			
+			var strapon = getDom().getWornStrapon()
+			if(strapon.getFluids() != null && !strapon.getFluids().isEmpty()):
+				getSub().cummedInBodypartBy(usedBodypart, domID, FluidSource.Strapon)
+				straponData = {
+					text = "{dom.Your} strapon gets squeezed by {sub.your} "+RNG.pick(usedBodypartNames)+" enough for it to suddenly [b]release its contents inside {sub.youHim}[/b]!"
+				}
+			
 		getSub().cumOnFloor()
 		subInfo.cum()
-		return getGenericSubOrgasmData()
+		return getSexEngine().combineData(getGenericSubOrgasmData(), straponData)
 	
 	if(_id == "rub"):
 		#switchCurrentActivityTo("SexFuckTest2")

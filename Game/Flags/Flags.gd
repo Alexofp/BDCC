@@ -10,6 +10,7 @@ static func getFlags():
 		"Player_Crime_Type": flag(FlagType.Number),
 		"Trigger_CaughtOffLimitsCD": flag(FlagType.Number),
 		"ExposureEventCD": flag(FlagType.Number),
+		"LastTimePeed": flag(FlagType.Number),
 	}
 
 enum Crime_Type {Innocent, Theft, Murder, Prostitution}

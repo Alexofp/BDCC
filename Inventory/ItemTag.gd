@@ -19,6 +19,9 @@ enum {
 	GeneralInmateUniform,
 	HighSecurityInmateUniform,
 	SexualDeviantInmateUniform,
+	
+	CanPeeInto,
+	CanForceCumInto,
 }
 
 static func getName(tag):

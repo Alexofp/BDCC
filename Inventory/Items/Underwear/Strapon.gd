@@ -77,3 +77,16 @@ func getPutOnScene():
 
 func getCasualName():
 	return "strapon"
+
+func generateFluids():
+	fluids = Fluids.new()
+	fluids.setCapacity(500.0)
+
+func getPossibleActions():
+	return [
+		{
+			"name": "Transfer fluids",
+			"scene": "FluidTransferScene",
+			"description": "Transfer the fluids between fluid containers",
+		},
+	]

@@ -216,6 +216,12 @@ func processTurn():
 					" {dom.YourHis} "+RNG.pick(["cock", "dick", "member"])+" is twitching slightly.",
 				])
 		
+		if(isStraponSex()):
+			var strapon = getDom().getWornStrapon()
+			if(strapon.getFluids() != null && RNG.chance(33) && !strapon.getFluids().isEmpty()):
+				getSub().cummedInBodypartBy(BodypartSlot.Head, domID, FluidSource.Strapon)
+				text += " {dom.Your} strapon gets squeezed by {sub.your} "+RNG.pick(["throat"])+" enough for it to suddenly [b]release its contents inside {sub.yourHis} mouth[/b]!"
+		
 		return {text = text}
 	
 	if(state == "licking"):

@@ -23,3 +23,7 @@ func getCasualName():
 
 func getPrice():
 	return 15
+
+func generateFluids():
+	fluids = Fluids.new()
+	fluids.setCapacity(500.0)

@@ -861,6 +861,13 @@ func cummedInBodypartBy(bodypartSlot, characterID, sourceType = null, amountToTr
 		
 		if(fluids != null):
 			fluids.transferTo(thebodypart, amountToTransfer)
+	elif(sourceType == FluidSource.Strapon && ch.isWearingStrapon()):
+		var thebodypart = getBodypart(bodypartSlot)
+		var strapon = ch.getWornStrapon()
+		
+		var fluids = strapon.getFluids()
+		if(fluids != null):
+			fluids.transferTo(thebodypart, amountToTransfer)
 	else:
 		var thebodypart = getBodypart(bodypartSlot)
 		thebodypart.addFluidOrifice(ch.getFluidType(sourceType), ch.getFluidAmount(sourceType) * amountToTransfer, ch.getFluidDNA(sourceType))
@@ -1567,19 +1574,21 @@ func cumOnFloor():
 			production.fillPercent(buffsHolder.getCustom(BuffAttribute.CumGenerationAfterOrgasm))
 			return returnValue
 
-func cumInItem(theItem):
+func cumInItem(theItem, sourceType = FluidSource.Penis, amountToTransfer = 1.0):
 	if(theItem.getFluids() == null):
-		return
+		return 0.0
 	
-	if(hasBodypart(BodypartSlot.Penis)):
+	if(sourceType == FluidSource.Penis && hasBodypart(BodypartSlot.Penis)):
 		var penis:BodypartPenis = getBodypart(BodypartSlot.Penis)
 		var production: FluidProduction = penis.getFluidProduction()
 		if(production != null):
 			if(theItem.has_method("markLastUser")):
 				theItem.markLastUser(getName())
-			var returnValue = penis.getFluids().transferTo(theItem, 1.0)
+			var returnValue = penis.getFluids().transferTo(theItem, amountToTransfer)
 			production.fillPercent(buffsHolder.getCustom(BuffAttribute.CumGenerationAfterOrgasm))
 			return returnValue
+	else:
+		return theItem.getFluids().addFluid(getFluidType(sourceType), getFluidAmount(sourceType) * amountToTransfer, getFluidDNA(sourceType))
 
 func createFilledCondom():
 	var theCondom = GlobalRegistry.createItem("UsedCondom")

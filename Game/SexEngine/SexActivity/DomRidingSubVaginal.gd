@@ -307,9 +307,18 @@ func doDomAction(_id, _actionInfo):
 	if(_id == "domcum"):
 		getDom().cumOnFloor()
 		domInfo.cum()
+		var straponData = null
 		if(isStraponSex()):
 			satisfyGoals()
-		return getGenericDomOrgasmData()
+			
+			var strapon = getSub().getWornStrapon()
+			if(strapon.getFluids() != null && !strapon.getFluids().isEmpty()):
+				getDom().cummedInBodypartBy(usedBodypart, subID, FluidSource.Strapon)
+				straponData = {
+					text = "{sub.Your} strapon gets squeezed by {dom.your} "+RNG.pick(usedBodypartNames)+" enough for it to suddenly [b]release its contents inside {dom.youHim}[/b]!"
+				}
+			
+		return getSexEngine().combineData(getGenericDomOrgasmData(), straponData)
 	
 	if(_id in ["letsubcuminside", "letsubknotinside"]):
 		var wombText = RNG.pick([

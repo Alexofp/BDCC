@@ -24,6 +24,8 @@ func canCombine():
 func getTags():
 	return [
 		ItemTag.SoldByMedicalVendomat,
+		ItemTag.CanPeeInto,
+		ItemTag.CanForceCumInto,
 		]
 
 func generateFluids():

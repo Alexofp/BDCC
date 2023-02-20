@@ -58,6 +58,12 @@ func generateFluids():
 	#fluids.addFluid("GirlCum", 1000.0)
 	#fluids.addFluid("Piss", 1000.0)
 
+func getTags():
+	return [
+		ItemTag.CanPeeInto,
+		ItemTag.CanForceCumInto,
+		]
+
 func getPossibleActions():
 	return [
 		{
