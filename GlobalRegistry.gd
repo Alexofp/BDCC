@@ -49,6 +49,7 @@ var sexActivities: Dictionary = {}
 var sexActivitiesReferences: Dictionary = {}
 var fetishes: Dictionary = {}
 var sexGoals: Dictionary = {}
+var sexTypes: Dictionary = {}
 var gameExtenders: Dictionary = {}
 var computers: Dictionary = {}
 var fluids: Dictionary = {}
@@ -315,6 +316,7 @@ func registerEverything():
 	registerSexActivitiesFolder("res://Game/SexEngine/SexActivity/")
 	registerFetishesFolder("res://Game/SexEngine/Fetish/")
 	registerSexGoalsFolder("res://Game/SexEngine/Goal/")
+	registerSexTypeFolder("res://Game/SexEngine/SexType/")
 	
 	registerStatusEffectFolder("res://StatusEffect/")
 	
@@ -1435,3 +1437,26 @@ func getFluid(id: String):
 
 func getFluids():
 	return fluids
+
+
+
+func registerSexType(path: String):
+	var loadedClass = load(path)
+	var object = loadedClass.new()
+	
+	sexTypes[object.id] = loadedClass
+
+func registerSexTypeFolder(folder: String):
+	var scripts = getScriptsInFolder(folder)
+	for scriptPath in scripts:
+		registerSexType(scriptPath)
+
+func createSexType(id: String):
+	if(sexTypes.has(id)):
+		return sexTypes[id].new()
+	else:
+		Log.printerr("ERROR: sex type with the id "+id+" wasn't found")
+		return null
+
+func getSexTypes():
+	return sexTypes

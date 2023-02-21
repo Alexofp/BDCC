@@ -14,6 +14,20 @@ var currentLastActivityID = 0
 
 var sexEnded = false
 
+var sexType:SexTypeBase
+
+func initSexType(theSexType, args = {}):
+	if(theSexType is String):
+		theSexType = GlobalRegistry.createSexType(theSexType)
+	if(theSexType == null):
+		sexType = GlobalRegistry.createSexType(SexType.DefaultSex)
+	else:
+		sexType = theSexType
+		
+	if(sexType != null):
+		sexType.setSexEngine(self)
+		sexType.initArgs(args)
+
 func initPeople(domIDs, subIDs):
 	if(domIDs is String):
 		domIDs = [domIDs]
@@ -617,6 +631,9 @@ func doSubAction(activity, action):
 	sendProcessedData(actionResult)
 
 func start():
+	if(sexType == null):
+		initSexType(SexType.DefaultSex)
+	
 	if(!isDom("pc")):
 		processAIActions(true)
 		processAIActions(false)
@@ -925,13 +942,7 @@ func getBestAnimation():
 		else:
 			return animInfo
 	
-	#return null
-	if(subs.size() == 0 || doms.size() == 0):
-		return null
-	
-	if(subs[subs.keys()[0]].isUnconscious()):
-		return [StageScene.SexStart, "defeated", {pc=doms.keys()[0], npc=subs.keys()[0]}]
-	return [StageScene.SexStart, "start", {pc=doms.keys()[0], npc=subs.keys()[0]}]
+	return sexType.getDefaultAnimation()
 
 func playAnimation():
 	var animInfo = getBestAnimation()
@@ -1016,6 +1027,9 @@ func saveData():
 		"currentLastActivityID": currentLastActivityID,
 		"sexEnded": sexEnded,
 	}
+	if(sexType != null):
+		data["sexTypeID"] = sexType.id
+		data["sexTypeData"] = sexType.saveData()
 	
 	var domsData = {}
 	for domID in doms:
@@ -1043,6 +1057,14 @@ func loadData(data):
 	trackedItems = SAVE.loadVar(data, "trackedItems", {})
 	currentLastActivityID = SAVE.loadVar(data, "currentLastActivityID", 0)
 	sexEnded = SAVE.loadVar(data, "sexEnded", false)
+	
+	var sexTypeID = SAVE.loadVar(data, "sexTypeID", SexType.DefaultSex)
+	var theSexType = GlobalRegistry.createSexType(sexTypeID)
+	if(theSexType == null):
+		theSexType = GlobalRegistry.createSexType(SexType.DefaultSex)
+	sexType = theSexType
+	sexType.setSexEngine(self)
+	sexType.loadData(SAVE.loadVar(data, "sexTypeData", {}))
 	
 	doms.clear()
 	subs.clear()
