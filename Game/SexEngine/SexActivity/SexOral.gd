@@ -1,5 +1,6 @@
 extends SexActivityBase
 var waitTimer = 0
+var straponHumps = 0
 
 func _init():
 	id = "SexOral"
@@ -96,6 +97,11 @@ func processTurn():
 		waitTimer += 1
 		return
 	if(state == "blowjob"):
+		if(isStraponSex()):
+			straponHumps += 1
+			if(subInfo.isUnconscious() || (RNG.chance(20) && straponHumps > 5)):
+				satisfyGoals()
+			
 		affectSub(subInfo.fetishScore({Fetish.OralSexGiving: 1.0})+0.1, 0.1, -0.1, -0.01)
 		affectDom(domInfo.fetishScore({Fetish.OralSexReceiving: 0.5})+0.6, 0.1*domSensetivity(), 0.0)
 		subInfo.addArousalForeplay(0.03)
@@ -156,6 +162,11 @@ func processTurn():
 		return {text = text}
 		
 	if(state == "deepthroat"):
+		if(isStraponSex()):
+			straponHumps += 1
+			if(subInfo.isUnconscious() || (RNG.chance(20) && straponHumps > 5)):
+				satisfyGoals()
+		
 		getSub().gotOrificeStretchedBy(BodypartSlot.Head, domID, 0.1)
 		affectSub(subInfo.fetishScore({Fetish.OralSexGiving: 1.0})-0.3, 0.1, -0.1, -0.01)
 		affectDom(domInfo.fetishScore({Fetish.OralSexReceiving: 0.5})+0.6, 0.1*domSensetivity(), 0.0)
@@ -999,6 +1010,7 @@ func saveData():
 	var data = .saveData()
 	
 	data["waitTimer"] = waitTimer
+	data["straponHumps"] = straponHumps
 
 	return data
 	
@@ -1006,3 +1018,4 @@ func loadData(data):
 	.loadData(data)
 	
 	waitTimer = SAVE.loadVar(data, "waitTimer", 0)
+	straponHumps = SAVE.loadVar(data, "straponHumps", 0)
