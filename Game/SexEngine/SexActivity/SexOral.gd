@@ -185,7 +185,7 @@ func processTurn():
 		var freeRoom = getSub().getPenetrationFreeRoomBy(BodypartSlot.Head, domID)
 		if(freeRoom > 3.0):
 			text += RNG.pick([
-				" {sub.Your} throat is deep enough for {sub.yourHim} not to suffocate.",
+				" {sub.Your} throat is deep enough for {sub.youHim} not to suffocate.",
 				" {sub.You} {sub.youVerb('allow')} {dom.youHim} to fuck {sub.yourHis} throat easily.",
 				" {sub.Your} throat stretches easily to accommodate for that length.",
 				" There is a small "+RNG.pick(["bulge", "bump"])+" on {sub.yourHis} throat.",

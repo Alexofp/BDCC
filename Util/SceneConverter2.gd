@@ -10,6 +10,8 @@ var reacts = {}
 var sceneID = "TestScene"
 var sceneReacts = {}
 var trackedVariables = {}
+var initSceneLines = []
+var reactInitLines = []
 
 var theGame:MainScene
 var testingScene = false
@@ -28,6 +30,8 @@ func reset():
 	sceneID = "TestScene"
 	sceneReacts = {}
 	trackedVariables = {}
+	initSceneLines.clear()
+	reactInitLines.clear()
 
 func setCurrentRun(newcur):
 	currentRun = newcur
@@ -167,6 +171,10 @@ func _on_Button_pressed():
 			if(commandID in ["reactSceneEnd", "onSceneEnd"] && splittedStuff.size() > 0):
 				var theSceneId = splittedStuff[0].strip_edges()
 				sceneReacts[theSceneId] = theCode
+			if(commandID in ["initScene"]):
+				initSceneLines = theCode
+			if(commandID in ["reactInit"]):
+				reactInitLines = theCode
 			
 			continue
 		
@@ -244,6 +252,18 @@ func _on_Button_pressed():
 	result.append("func _init():")
 	result.append('\tsceneID = "'+sceneID+'"')
 	result.append("")
+	
+	if(initSceneLines.size() > 0):
+		result.append("func _initScene(_args = []):")
+		for theLine in initSceneLines:
+			result.append('\t'+theLine)
+		result.append("")
+	
+	if(reactInitLines.size() > 0):
+		result.append("func _reactInit():")
+		for theLine in reactInitLines:
+			result.append('\t'+theLine)
+		result.append("")
 	
 	result.append("func _run():")
 	for runID in runs:

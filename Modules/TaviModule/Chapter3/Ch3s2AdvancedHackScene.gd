@@ -22,7 +22,7 @@ func _run():
 		saynn("Success! You hear mechanical noises coming from the safe as the gears inside begin to turn against each other, slowly opening the door and revealing you the contents..")
 
 		# (scene ends)
-		addButton("Neat", "Time to go", "endthescene")
+		addButton("Look", "See what’s inside", "endthescene")
 		#addButton("Look at", "See what’s inside", "look_at")
 
 func _react(_action: String, _args):
@@ -42,7 +42,8 @@ func _react_scene_end(_tag, _result):
 		if(_result is Array):
 			if(_result[0] == true):
 				processTime(10*60)
-				addMessage("You got 50 credits!")
+				addMessage("You got 50 credits! But there is something else too..")
+				addItemToSavedItems(GlobalRegistry.createItem("HorsecockDildo"))
 				GM.pc.addCredits(50)
 				addExperienceToPlayer(100)
 				setState("after_completed")
