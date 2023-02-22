@@ -645,6 +645,11 @@ _global_script_classes=[ {
 "path": "res://Characters/Dynamic/NpcCon.gd"
 }, {
 "base": "Object",
+"class": "NpcFinder",
+"language": "GDScript",
+"path": "res://Characters/Dynamic/NpcFinder.gd"
+}, {
+"base": "Object",
 "class": "NpcGen",
 "language": "GDScript",
 "path": "res://Characters/Dynamic/NpcGen.gd"
@@ -1187,6 +1192,7 @@ _global_script_class_icons={
 "MyProjectSettings": "",
 "NovaModule": "",
 "NpcCon": "",
+"NpcFinder": "",
 "NpcGen": "",
 "NpcGender": "",
 "NpcRank": "",

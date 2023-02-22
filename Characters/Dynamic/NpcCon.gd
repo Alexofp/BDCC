@@ -15,4 +15,5 @@ enum {
 	PersonalityStatAbove,
 	PersonalityStatBelow,
 	NoChastity,
+	HasPenis,
 }
