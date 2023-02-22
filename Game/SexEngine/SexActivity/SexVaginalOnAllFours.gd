@@ -27,6 +27,15 @@ func getGoals():
 		SexGoal.StraponVaginal: 1.0,
 	}
 
+func getSupportedSexTypes():
+	return {
+		SexType.DefaultSex: true,
+		SexType.StocksSex: true,
+	}
+
+func isStocksSex():
+	return getSexEngine().getSexTypeID() == SexType.StocksSex
+
 func canStartActivity(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexSubInfo):
 	if(!_domInfo.getChar().hasReachablePenis() && !_domInfo.getChar().isWearingStrapon()):
 		return false
@@ -749,6 +758,16 @@ func doSubAction(_id, _actionInfo):
 		return {text = text, subSay=subReaction(sexReactionPullOut)}
 
 func getAnimation():
+	if(isStocksSex()):
+		if(state in [""]):
+			return [StageScene.StocksSex, "tease", {npc=domID, pc=subID}]
+		if(state in ["aftercumminginside", "knotting"]):
+			return [StageScene.StocksSex, "inside", {npc=domID, pc=subID}]
+		if(domInfo.isCloseToCumming() || (isStraponSex() && subInfo.isCloseToCumming())):
+			return [StageScene.StocksSex, "fast", {npc=domID, pc=subID}]
+			
+		return [StageScene.StocksSex, "sex", {npc=domID, pc=subID}]
+	
 	if(getSub().hasBoundArms() || subInfo.isUnconscious()):
 		if(state in [""]):
 			return [StageScene.SexAllFours, "teaseflop", {pc=domID, npc=subID}]

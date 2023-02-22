@@ -183,6 +183,7 @@ func createEquipment():
 func resetEquipment():
 	inventory.clearEquippedItems()
 	createEquipment()
+	updateNonBattleEffects()
 
 func processTime(_secondsPassed):
 	if(timedBuffsDurationSeconds > 0):

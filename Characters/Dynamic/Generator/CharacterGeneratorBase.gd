@@ -336,4 +336,5 @@ func generate(_args = {}):
 	character.resetEquipment()
 	resetStats(character, _args)
 	pickNonStaticEquipment(character, _args)
+	character.updateNonBattleEffects()
 	return character

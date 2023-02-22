@@ -10,6 +10,12 @@ func getGoals():
 		SexGoal.SubOptionalCondomOnDom: 0.2,
 	}
 
+func getSupportedSexTypes():
+	return {
+		SexType.DefaultSex: true,
+		SexType.StocksSex: true,
+	}
+
 func getActivityBaseScore(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexSubInfo):
 	return 0.0
 

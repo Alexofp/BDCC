@@ -48,7 +48,6 @@ func _initScene(_args = []):
 	#sexEngine.initPeople(top, "pc")
 	#sexEngine.initPeople(top, "rahi")
 	#sexEngine.initPeople("alexrynard", "rahi")
-	sexEngine.generateGoals()
 	
 	sexEngine.start()
 	#addCharacter(top)

@@ -9,6 +9,15 @@ func getGoals():
 	return {
 	}
 
+func getSupportedSexTypes():
+	return {
+		SexType.DefaultSex: true,
+		SexType.StocksSex: true,
+	}
+
+func isStocksSex():
+	return getSexEngine().getSexTypeID() == SexType.StocksSex
+
 func getActivityBaseScore(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexSubInfo):
 	return 0.0
 
@@ -30,7 +39,7 @@ func getStartActions(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexS
 	var resistScore = _subInfo.getResistScore() * (0.15 + _subInfo.personalityScore({PersonalityStat.Subby: -0.1, PersonalityStat.Mean: 0.1, PersonalityStat.Coward: -0.05}))
 		
 	if(!_sexEngine.hasTag(_subInfo.charID, SexActivityTag.PreventsSubViolence)):
-		if(!_subInfo.getChar().hasBoundArms()):
+		if(!_subInfo.getChar().hasBoundArms() && !isStocksSex()):
 			actions.append({
 				name = "Punch",
 				desc = "Hit them!",
@@ -168,6 +177,11 @@ func startActivity(_args):
 		var possible = [
 			"{sub.You} {sub.youVerb('tease')} {dom.youHim} with {sub.yourHis} body.",
 		]
+		if(isStocksSex()):
+			possible = [
+				"{sub.You} {sub.youVerb('tease')} {dom.youHim} with {sub.yourHis} body while still trapped in stocks.",
+				"{sub.You} {sub.youVerb('wiggle')} {sub.yourHis} lower part of the body seductively.",
+			]
 		if(getSub().isGagged()):
 			possible.append_array([
 				"{sub.You} {sub.youVerb('mumble')} something incoherent {dom.youHim}.",

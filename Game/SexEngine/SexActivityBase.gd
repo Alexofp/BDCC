@@ -45,6 +45,11 @@ func endActivity():
 func getGoals():
 	return {}
 
+func getSupportedSexTypes():
+	return {
+		SexType.DefaultSex: true,
+	}
+
 func satisfyGoals():
 	var goalData = getGoals()
 	var sexEngine = getSexEngine()

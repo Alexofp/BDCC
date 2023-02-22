@@ -10,6 +10,15 @@ func getGoals():
 		SexGoal.FuckOral: 1.0,
 	}
 
+func getSupportedSexTypes():
+	return {
+		SexType.DefaultSex: true,
+		SexType.StocksSex: true,
+	}
+
+func isStocksSex():
+	return getSexEngine().getSexTypeID() == SexType.StocksSex
+
 func canStartActivity(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexSubInfo):
 	if(!_domInfo.getChar().hasReachablePenis() && !_domInfo.getChar().hasReachableVagina() && !_domInfo.getChar().isWearingStrapon()):
 		return false
@@ -73,6 +82,10 @@ func startActivity(_args):
 	var text = RNG.pick([
 		"{dom.You} {dom.youVerb('make')} {sub.you} kneel and then "+RNG.pick(["{dom.youVerb('pull')}", "{dom.youVerb('bring')}"])+" {sub.yourHis} mouth to {dom.yourHis} "+genitalsText+".",
 	])
+	if(isStocksSex()):
+		text = RNG.pick([
+			"{dom.You} {dom.youVerb('walk')} up to {sub.your} face, trapped in stocks, and then "+RNG.pick(["{dom.youVerb('present')}", "{dom.youVerb('show')}"])+" {dom.yourHis} "+genitalsText+".",
+		])
 	
 	return {
 		text = text,
@@ -444,6 +457,11 @@ func doDomAction(_id, _actionInfo):
 		var text = RNG.pick([
 			"{dom.You} "+RNG.pick(["{dom.youVerb('pull')}", "{dom.youVerb('bring')}", "{dom.youVerb('move')}"])+" {sub.yourHis} head to {dom.yourHis} "+getDickName()+" and {dom.youVerb('make')} {sub.youHim} "+RNG.pick(["rub", "grind"])+" {sub.youHis} face against it"+throughTheClothing+"."
 		])
+		if(isStocksSex()):
+			text = RNG.pick([
+				"{dom.You} "+RNG.pick(["{dom.youVerb('move')}", "{dom.youVerb('bring')}", "{dom.youVerb('move')}"])+" {dom.yourHis} "+getDickName()+" to {sub.yourHis} head and {dom.youVerb('make')} {sub.youHim} "+RNG.pick(["rub", "grind"])+" {sub.youHis} face against it"+throughTheClothing+"."
+			])
+		
 		if(domInfo.isAngry()):
 			text = RNG.pick([
 				text,
@@ -632,6 +650,11 @@ func doDomAction(_id, _actionInfo):
 				"{dom.You} {dom.youVerb('try', 'tries')} to force {sub.you} deeper onto {dom.yourHis} "+getDickName()+" but {sub.yourHis} throat is just too tight.",
 				"{dom.You} {dom.youVerb('try', 'tries')} to make {sub.you} deepthroat {dom.yourHis} "+getDickName()+" but {sub.youHe} {sub.youAre} just too tight.",
 			])
+			if(isStocksSex()):
+				text = RNG.pick([
+				"{dom.You} {dom.youVerb('try', 'tries')} to force {dom.yourHis} "+getDickName()+" deeper but {sub.yourHis} throat is just too tight.",
+				"{dom.You} {dom.youVerb('try', 'tries')} to make {sub.you} deepthroat {dom.yourHis} "+getDickName()+" but {sub.youHe} {sub.youAre} just too tight.",
+				])
 			getSub().gotOrificeStretchedBy(BodypartSlot.Head, domID, 0.1)
 			affectSub(domInfo.fetishScore({Fetish.OralSexGiving: 1.0}), 0.1, -0.1, -0.05)
 			domInfo.addLust(0.1)
@@ -994,6 +1017,18 @@ func doSubAction(_id, _actionInfo):
 	return
 
 func getAnimation():
+	if(isStocksSex()):
+		if(state in ["", "askingtolick"]):
+			return [StageScene.StocksSexOral, "tease", {npc=domID, pc=subID}]
+		if(state in ["licking", "grinding"]):
+			return [StageScene.StocksSexOral, "pussy", {npc=domID, pc=subID}]
+		if(state in ["blowjob", "deepthroat"]):
+			if(domInfo.isCloseToCumming() || (isStraponSex() && subInfo.isCloseToCumming())):
+				return [StageScene.StocksSexOral, "sex", {npc=domID, pc=subID}]
+			return [StageScene.StocksSexOral, "fast", {npc=domID, pc=subID}]
+			
+		return [StageScene.StocksSexOral, "tease", {npc=domID, pc=subID}]
+	
 	if(state in ["", "askingtolick"]):
 		return [StageScene.SexOral, "start", {pc=domID, npc=subID}]
 	

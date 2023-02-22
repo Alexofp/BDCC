@@ -5,6 +5,7 @@ enum {
 	Illegal,
 	BDSMRestraint,
 	CanBeForcedByGuards,
+	CanBeForcedInStocks,
 	Condom,
 	SoldByGeneralVendomat,
 	SoldByMedicalVendomat,

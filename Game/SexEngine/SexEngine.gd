@@ -28,6 +28,14 @@ func initSexType(theSexType, args = {}):
 		sexType.setSexEngine(self)
 		sexType.initArgs(args)
 
+func getSexTypeID():
+	if(sexType == null):
+		return SexType.DefaultSex
+	return sexType.id
+
+func getSexType():
+	return sexType
+
 func initPeople(domIDs, subIDs):
 	if(domIDs is String):
 		domIDs = [domIDs]
@@ -265,6 +273,9 @@ func generateGoals():
 						if(GM.main.getEncounterSettings().isGoalDisabledForSubPC(goal[0])):
 							continue
 					
+					if(!checkIfThereAreAnyActivitiesThatSupportGoal(goal[0])):
+						continue
+
 					var sexGoal:SexGoalBase = GlobalRegistry.getSexGoal(goal[0])
 					var goalData = sexGoal.generateData(self, personDomInfo, personSubInfo)
 					
@@ -285,10 +296,22 @@ func generateGoals():
 		messages.append("[say="+str(RNG.pick(doms))+"]You are a lucky slut.[/say]")
 		
 	#domInfo.goals.append([SexGoal.Fuck, subID])
+
+func checkIfThereAreAnyActivitiesThatSupportGoal(goalID):
+	var allactivities = GlobalRegistry.getSexActivityReferences()
 	
-	#startActivity("SexFuckTest", domID, subID)
-	#startActivity("SexFuckTest2", domID, subID)
-	#startActivity("SexFuckExample", domID, subID)
+	for activityID in allactivities:
+		var activity = allactivities[activityID]
+		
+		var activityGoals = activity.getGoals()
+		var supportedSexTypes = activity.getSupportedSexTypes()
+		if(activityGoals.has(goalID) && activityGoals[goalID] > 0.0):
+			var sexTypesSupported = sexType.getSupportedSexActivities()
+			for sexTypeSupported in sexTypesSupported:
+				if(supportedSexTypes.has(sexTypeSupported) && supportedSexTypes[sexTypeSupported]):
+					return true
+	return false
+		
 
 func hasGoal(thedominfo, goal, thesubinfo):
 	for goalInfo in thedominfo.goals:
@@ -633,6 +656,8 @@ func doSubAction(activity, action):
 func start():
 	if(sexType == null):
 		initSexType(SexType.DefaultSex)
+	
+	generateGoals()
 	
 	if(!isDom("pc")):
 		processAIActions(true)
