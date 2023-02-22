@@ -35,7 +35,7 @@ func onSwallow(_pc, _amount):
 	
 	if(toHeal > 0):
 		_pc.addPain(-toHeal)
-		return "Drinking girlcum relieved you of "+DamageType.getDamageColoredString(DamageType.Physical, toHeal)+"."
+		return "Drinking girlcum relieved "+_pc.getName()+" of "+DamageType.getDamageColoredString(DamageType.Physical, toHeal)+"."
 	
 	return null
 

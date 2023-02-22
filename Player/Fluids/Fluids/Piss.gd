@@ -57,7 +57,7 @@ func onSwallow(_pc, _amount):
 	
 	if(toHeal > 0):
 		_pc.addLust(-toHeal)
-		return "Drinking piss grossed you out, removing "+DamageType.getDamageColoredString(DamageType.Lust, toHeal)+"."
+		return "Drinking piss grossed "+_pc.getName()+" out, removing "+DamageType.getDamageColoredString(DamageType.Lust, toHeal)+"."
 	
 	return null
 

@@ -40,7 +40,7 @@ func onSwallow(_pc, _amount):
 	
 	if(toHeal > 0):
 		_pc.addStamina(toHeal)
-		return "Drinking cum provided you with an energy boost, giving you "+DamageType.getDamageColoredString(DamageType.Stamina, toHeal)+" back."
+		return "Drinking cum provided "+_pc.getName()+" with an energy boost, giving you "+DamageType.getDamageColoredString(DamageType.Stamina, toHeal)+" back."
 	
 	return null
 

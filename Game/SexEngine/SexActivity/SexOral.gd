@@ -230,8 +230,21 @@ func processTurn():
 		if(isStraponSex()):
 			var strapon = getDom().getWornStrapon()
 			if(strapon.getFluids() != null && RNG.chance(33) && !strapon.getFluids().isEmpty()):
+				var extraMessages = []
+				var fluidByAmount = strapon.getFluids().getFluidAmountByType()
+				for fluidID in fluidByAmount:
+					var fluidObject = GlobalRegistry.getFluid(fluidID)
+					if(fluidObject == null):
+						continue
+					
+					var resultMessage = fluidObject.onSwallow(getSub(), fluidByAmount[fluidID])
+					if(resultMessage != null && resultMessage != ""):
+						extraMessages.append(resultMessage)
+				
 				getSub().cummedInBodypartBy(BodypartSlot.Head, domID, FluidSource.Strapon)
 				text += " {dom.Your} strapon gets squeezed by {sub.your} "+RNG.pick(["throat"])+" enough for it to suddenly [b]release its contents inside {sub.yourHis} mouth[/b]!"
+				if(extraMessages.size() > 0):
+					text += " "+Util.join(extraMessages, " ")
 		
 		return {text = text}
 	
