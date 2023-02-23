@@ -446,7 +446,7 @@ func doDomAction(_id, _actionInfo):
 				else:
 					state = "aftercumminginside"
 				
-				return {text=text}
+				return getSexEngine().combineData({text=text}, applyTallymarkIfNeededData(usedBodypart))
 		
 		var beingBredScore = subInfo.fetishScore({Fetish.BeingBred: 1.0})
 		if(beingBredScore < 0.0):
@@ -461,7 +461,7 @@ func doDomAction(_id, _actionInfo):
 		else:
 			state = "aftercumminginside"
 
-		return {text=text}
+		return getSexEngine().combineData({text=text}, applyTallymarkIfNeededData(usedBodypart))
 	if(_id == "cumpullout"):
 		var text = RNG.pick([
 			"{dom.You} {dom.youVerb('pull')} {dom.yourHis} "+getDickName()+" out and [b]cums all over {sub.your} butt[/b]!",
@@ -487,14 +487,14 @@ func doDomAction(_id, _actionInfo):
 				satisfyGoals()
 				state = ""
 				
-				return {text=text}
+				return getSexEngine().combineData({text=text}, applyTallymarkIfNeededData(usedBodypart))
 		
 		getSub().cummedOnBy(domID, FluidSource.Penis)
 		domInfo.cum()
 		satisfyGoals()
 		state = ""
 
-		return {text=text}
+		return getSexEngine().combineData({text=text}, applyTallymarkIfNeededData(usedBodypart))
 	if(_id == "continuefucking"):
 		gonnaCumOutside = false
 		state = "fucking"

@@ -330,6 +330,41 @@ func getGenericSubOrgasmData():
 func getGenericDomOrgasmData():
 	return getGenericOrgasmData(false)
 
+func applyTallymarkIfNeededData(bodypartSlot):
+	#if(getDom().isPlayer()):
+	#	return null
+	
+	var chanceToAdd = 0.0
+	if(getSub().hasTallymarks()):
+		chanceToAdd = 100.0
+	else:
+		chanceToAdd = (max(0.0, domInfo.fetishScore({Fetish.Bodywritings: 1.0})) + domInfo.personalityScore({PersonalityStat.Mean: 0.3})) * 100.0
+		if(!domInfo.isAngry()):
+			chanceToAdd *= 0.5
+	
+	if(!RNG.chance(chanceToAdd)):
+		return null
+	
+	var theZone = null
+	if(bodypartSlot == BodypartSlot.Head):
+		theZone = getSub().addTallymarkFace()
+	elif(bodypartSlot == BodypartSlot.Vagina):
+		theZone = getSub().addTallymarkCrotch()
+	else:
+		theZone = getSub().addTallymarkButt()
+	var zoneText = "body"
+	if(theZone != null && theZone is int):
+		zoneText = BodyWritingsZone.getZoneVisibleName(theZone)
+	
+	var text = RNG.pick([
+		"{dom.You} "+RNG.pick(["{dom.youVerb('draw')}"])+" a [b]tallymark[/b] on {sub.your} "+zoneText+".",
+		"{dom.You} "+RNG.pick(["{dom.youVerb('add')}"])+" a [b]tallymark[/b] to {sub.your} "+zoneText+".",
+	])
+	
+	return {
+		text = text,
+	}
+
 func saveData():
 	var data = {
 		"uniqueID": uniqueID,

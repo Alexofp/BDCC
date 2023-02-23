@@ -566,7 +566,7 @@ func doDomAction(_id, _actionInfo):
 					" {dom.You} {dom.youVerb('pull')} out and {dom.youVerb('dispose')} of the used condom.",
 				])
 				
-				return {text=text}
+				return getSexEngine().combineData({text=text}, applyTallymarkIfNeededData(BodypartSlot.Head))
 		var beingBredScore = subInfo.fetishScore({Fetish.OralSexGiving: 1.0})
 		if(beingBredScore < 0.0):
 			subInfo.addResistance(1.0)
@@ -582,7 +582,7 @@ func doDomAction(_id, _actionInfo):
 				" {dom.You} {dom.youVerb('pull')} out and {dom.youVerb('dispose')} of the used condom.",
 			])
 		
-		return {text = text}
+		return getSexEngine().combineData({text=text}, applyTallymarkIfNeededData(BodypartSlot.Head))
 	if(_id == "bjpullout"):
 		var text = RNG.pick([
 			"{dom.You} {dom.youVerb('pull')} {dom.yourHis} cock out and [b]cums all over {sub.your} face[/b]!",
@@ -608,7 +608,7 @@ func doDomAction(_id, _actionInfo):
 				satisfyGoals()
 				state = ""
 				
-				return {text=text}
+				return getSexEngine().combineData({text=text}, applyTallymarkIfNeededData(BodypartSlot.Head))
 		
 		getSub().cummedOnBy(domID, FluidSource.Penis)
 		getDom().cumOnFloor()
@@ -616,7 +616,7 @@ func doDomAction(_id, _actionInfo):
 		satisfyGoals()
 		state = ""
 
-		return {text=text}
+		return getSexEngine().combineData({text=text}, applyTallymarkIfNeededData(BodypartSlot.Head))
 	if(_id == "pussycum"):
 		var text = RNG.pick([
 			"{dom.You} {dom.youVerb('shake')} and {dom.youVerb('shiver')} while {dom.yourHis} "+RNG.pick(["pulsating", "twitching"])+" "+RNG.pick(["pussy", "pussy", "slit", "kitty"])+" [b]"+RNG.pick(["cums", "squirts", "orgasms", "climaxes"])+" all over {sub.your} face[/b]!",

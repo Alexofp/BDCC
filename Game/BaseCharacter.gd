@@ -1440,20 +1440,45 @@ func getSkillExperienceMult(skill):
 
 	return mult
 
+func getBestZoneForTallymark(zonelist):
+	if(zonelist is int):
+		return zonelist
+	if(zonelist.size() == 0):
+		return null
+	
+	var marks = {}
+	if(hasEffect(StatusEffect.HasTallyMarks)):
+		marks = getEffect(StatusEffect.HasTallyMarks).marks
+	
+	var possible = []
+	for zone in zonelist:
+		var zonestr = str(zone)
+		var currentAmount = 0
+		if(marks.has(zonestr)):
+			currentAmount = marks[zonestr]
+		
+		var value:float = 1.0
+		if(currentAmount >= 1 && currentAmount < 20):
+			value = 1000.0 / float(currentAmount)
+		possible.append([zone, value])
+	return RNG.pickWeightedPairs(possible)
+
 func addTallymark(zone):
 	addEffect(StatusEffect.HasTallyMarks, [zone])
 
 func addTallymarkPickBestZone(zonelist):
-	addEffect(StatusEffect.HasTallyMarks, [zonelist])
+	var bestZone = getBestZoneForTallymark(zonelist)
+	addEffect(StatusEffect.HasTallyMarks, [bestZone])
+	return bestZone
 
 func addTallymarkFace():
-	addTallymarkPickBestZone([
+	return addTallymarkPickBestZone([
 		BodyWritingsZone.CheekLeft,
 		BodyWritingsZone.CheekRight,
 	])
 
 func addTallymarkCrotch():
-	addTallymarkPickBestZone([
+	return addTallymarkPickBestZone([
 		BodyWritingsZone.LowerAbdomen,
 		BodyWritingsZone.HipLeft,
 		BodyWritingsZone.HipRight,
@@ -1464,7 +1489,7 @@ func addTallymarkCrotch():
 	])
 
 func addTallymarkButt():
-	addTallymarkCrotch()
+	return addTallymarkCrotch()
 
 func hasTallymarks():
 	return hasEffect(StatusEffect.HasTallyMarks)
