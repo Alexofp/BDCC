@@ -1635,15 +1635,7 @@ func getVoice() -> SexVoice:
 	return sexVoice
 
 func getFirstItemThatCoversBodypart(bodypartSlot):
-	for inventorySlot in InventorySlot.getAll():
-		if(!getInventory().hasSlotEquipped(inventorySlot)):
-			continue
-		
-		var item = getInventory().getEquippedItem(inventorySlot)
-		if(item.coversBodypart(bodypartSlot)):
-			return item
-	
-	return null
+	return getInventory().getFirstItemThatCoversBodypart(bodypartSlot)
 	
 func getWornCondom():
 	if(getInventory().hasSlotEquipped(InventorySlot.Penis)):

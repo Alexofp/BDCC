@@ -380,9 +380,20 @@ func forceRestraintsWithTag(tag, amount = 1):
 				return result
 	return result
 
-func getAmountOfRestraintsThatCanForce(tag):
+func getFirstItemThatCoversBodypart(bodypartSlot):
+	for inventorySlot in InventorySlot.getAll():
+		if(!hasSlotEquipped(inventorySlot)):
+			continue
+		
+		var item = getEquippedItem(inventorySlot)
+		if(item.coversBodypart(bodypartSlot)):
+			return item
+	
+	return null
+
+func getRestraintsThatCanBeForcedDuringSex(tag):
 	var itemIDs = GlobalRegistry.getItemIDsByTag(tag)
-	var result = 0
+	var result = []
 	
 	for itemID in itemIDs:
 		var potentialItem = GlobalRegistry.getItemRef(itemID)
@@ -390,14 +401,23 @@ func getAmountOfRestraintsThatCanForce(tag):
 		var slot = potentialItem.getClothingSlot()
 		if(slot == null || !canEquipSlot(slot)):
 			continue
-		
+
 		if(hasSlotEquipped(slot)):
 			var ourItem = getEquippedItem(slot)
 			if(ourItem.isRestraint()):
 				continue
 		
-		result += 1
+		var bodypartSlot = potentialItem.getRequiredBodypart()
+		var coversItem = getFirstItemThatCoversBodypart(bodypartSlot)
+		if(bodypartSlot != null && coversItem != null):
+			if(coversItem.isRestraint()):
+				continue
+		
+		result.append(itemID)
 	return result
+
+func getAmountOfRestraintsThatCanForceDuringSex(tag):
+	return getRestraintsThatCanBeForcedDuringSex(tag).size()
 
 func clearStaticRestraints():
 	for slot in InventorySlot.getStatic():

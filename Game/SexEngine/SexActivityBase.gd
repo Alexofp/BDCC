@@ -39,6 +39,13 @@ func initParticipants(theDomID, theSubID):
 	domInfo = getSexEngine().getDomInfo(domID)
 	subInfo = getSexEngine().getSubInfo(subID)
 
+func clearSexEngineRefAndParticipants():
+	sexEngineRef = null
+	domID = null
+	subID = null
+	domInfo = null
+	subInfo = null
+
 func endActivity():
 	hasEnded = true
 

@@ -499,8 +499,10 @@ func processAIActions(isDom = true):
 			var allSexActivities = GlobalRegistry.getSexActivityReferences()
 			for possibleSexActivityID in allSexActivities:
 				var newSexActivityRef = allSexActivities[possibleSexActivityID]
+				newSexActivityRef.sexEngineRef = weakref(self)
 				
 				for subID in subs:
+					newSexActivityRef.initParticipants(personID, subID)
 					var subInfo = subs[subID]
 					if(!newSexActivityRef.canBeStartedByDom()):
 						continue
@@ -524,13 +526,16 @@ func processAIActions(isDom = true):
 								priority = getSafeValueFromDict(newaction, "priority", 0),
 							})
 							actionsScores.append(score)
+				newSexActivityRef.clearSexEngineRefAndParticipants()
 		
 		if(isSub(personID)):
 			var allSexActivities = GlobalRegistry.getSexActivityReferences()
 			for possibleSexActivityID in allSexActivities:
 				var newSexActivityRef = allSexActivities[possibleSexActivityID]
+				newSexActivityRef.sexEngineRef = weakref(self)
 				
 				for domID in doms:
+					newSexActivityRef.initParticipants(domID, personID)
 					var domInfo = doms[domID]
 					if(!newSexActivityRef.canBeStartedBySub()):
 						continue
@@ -554,7 +559,7 @@ func processAIActions(isDom = true):
 								priority = getSafeValueFromDict(newaction, "priority", 0),
 							})
 							actionsScores.append(score)
-		
+				newSexActivityRef.clearSexEngineRefAndParticipants()
 		
 		for activity in activities:
 			if(activity.hasEnded):
@@ -717,6 +722,8 @@ func getActions():
 			var allSexActivities = GlobalRegistry.getSexActivityReferences()
 			for possibleSexActivityID in allSexActivities:
 				var newSexActivityRef = allSexActivities[possibleSexActivityID]
+				newSexActivityRef.sexEngineRef = weakref(self)
+				newSexActivityRef.initParticipants("pc", pctargetID)
 				
 				if(!newSexActivityRef.canBeStartedByDom()):
 					continue
@@ -740,6 +747,7 @@ func getActions():
 						desc = getSafeValueFromDict(newaction, "desc", "Start new activity"),
 						priority = getSafeValueFromDict(newaction, "priority", 0),
 					})
+				newSexActivityRef.clearSexEngineRefAndParticipants()
 					
 	if(isSub("pc") && getSubInfo("pc").canDoActions()):
 		var pctargetID = getPCTarget()
@@ -747,6 +755,8 @@ func getActions():
 			var allSexActivities = GlobalRegistry.getSexActivityReferences()
 			for possibleSexActivityID in allSexActivities:
 				var newSexActivityRef = allSexActivities[possibleSexActivityID]
+				newSexActivityRef.sexEngineRef = weakref(self)
+				newSexActivityRef.initParticipants(pctargetID, "pc")
 				
 				if(!newSexActivityRef.canBeStartedBySub()):
 					continue
@@ -770,7 +780,8 @@ func getActions():
 						desc = getSafeValueFromDict(newaction, "desc", "Start new activity"),
 						priority = getSafeValueFromDict(newaction, "priority", 0),
 					})
-	
+				newSexActivityRef.clearSexEngineRefAndParticipants()
+				
 	var importantActions = []
 	for actionInfo in result:
 		if(actionInfo.has("priority") && actionInfo["priority"] >= 1000):
@@ -917,7 +928,7 @@ func endSex():
 			if(theCondom.getFluids() != null):
 				if(!theCondom.getFluids().isEmpty()):
 					theCondom.destroyMe()
-					saveItemToLoot(theCondom)
+					saveCondomToLootIfPerk(theCondom)
 			
 		domInfo.getChar().afterSexEnded(domInfo)
 		
@@ -984,12 +995,16 @@ func getStartActivityScore(activityID, domInfo, subInfo):
 	var newSexActivityRef = GlobalRegistry.getSexActivityReference(activityID)
 	if(newSexActivityRef == null):
 		return -1.0
+	newSexActivityRef.sexEngineRef = weakref(self)
+	newSexActivityRef.initParticipants(domInfo.charID, subInfo.charID)
 	
 	if(!newSexActivityRef.canStartActivity(self, domInfo, subInfo)):
+		newSexActivityRef.clearSexEngineRefAndParticipants()
 		return -1.0
 	
 	var newpossibleActions = newSexActivityRef.getStartActions(self, domInfo, subInfo)
 	if(newpossibleActions == null):
+		newSexActivityRef.clearSexEngineRefAndParticipants()
 		return -1.0
 	
 	var maxScore = 0.0
@@ -998,6 +1013,7 @@ func getStartActivityScore(activityID, domInfo, subInfo):
 		
 		maxScore = max(maxScore, score)
 	
+	newSexActivityRef.clearSexEngineRefAndParticipants()
 	return maxScore
 
 func addTrackedGear(ownerID, whoWearsItID, itemUniqueID):
