@@ -222,6 +222,9 @@ func _react(_action: String, _args):
 	if(_action == "give_syringe"):
 		setFlag("CellblockModule.NuraGaveTool", true)
 
+	if(_action == "get_hugged"):
+		GM.pc.addStamina(10)
+
 	if(_action == "start_fake_pussyrubbing"):
 		processTime(5*60)
 		GM.pc.orgasmFrom("nura")

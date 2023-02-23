@@ -132,8 +132,8 @@ func _run():
 		for action in item.getPossibleActions():
 			if(!canDoAction(action)):
 				addDisabledButton(action["name"], "(Can't do this now)\n\n"+action["description"])
-			
-			addButton(action["name"], action["description"], "doitemaction", [action["scene"]])
+			else:
+				addButton(action["name"], action["description"], "doitemaction", [action["scene"]])
 		
 		addButton("Back", "Do nothing with it", "interactmenu")
 
