@@ -1,5 +1,5 @@
 {
-	"dateString": "17 of Feb 2023",
+	"dateString": "24 of Feb 2023",
 	"entries": {
 		"$1.00": [
 			{
@@ -9,13 +9,13 @@
 				"nickname": "thatoneguyatthebar"
 			},
 			{
+				"nickname": "Maxtacks"
+			},
+			{
 				"nickname": "Caliban"
 			},
 			{
 				"nickname": "SuPhox"
-			},
-			{
-				"nickname": "Maxtacks"
 			},
 			{
 				"nickname": "Kyle Oran Evans "
@@ -33,6 +33,9 @@
 				"nickname": "Lichity"
 			},
 			{
+				"nickname": "BarryRkls"
+			},
+			{
 				"nickname": "joelee29"
 			},
 			{
@@ -45,13 +48,7 @@
 				"nickname": "VØID"
 			},
 			{
-				"nickname": "WonderLlama2008"
-			},
-			{
 				"nickname": "User#871f7d52"
-			},
-			{
-				"nickname": "BarryRkls"
 			},
 			{
 				"nickname": "ghost of cum"
@@ -98,16 +95,10 @@
 				"nickname": "IzzenXAZ"
 			},
 			{
-				"nickname": "User#d45e8eac"
-			},
-			{
 				"nickname": "User#2242146d"
 			},
 			{
 				"nickname": "Steied"
-			},
-			{
-				"nickname": "Michy <3"
 			},
 			{
 				"nickname": "Runulf"
@@ -116,7 +107,7 @@
 				"nickname": "Blarg"
 			},
 			{
-				"nickname": "LunarEquinox8"
+				"nickname": "Michy <3"
 			},
 			{
 				"nickname": "User#253e76e7"
@@ -148,5 +139,5 @@
 		"$5.00",
 		"$1.00"
 	],
-	"unixTime": 1676625634
+	"unixTime": 1677247890
 }
