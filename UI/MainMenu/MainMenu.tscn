@@ -373,42 +373,50 @@ rect_min_size = Vector2( 0, 100 )
 columns = 5
 
 [node name="DevClose" type="Button" parent="HBoxContainer/DevToolsScreen/GridContainer"]
-margin_right = 149.0
+margin_right = 188.0
 margin_bottom = 26.0
 size_flags_horizontal = 3
 text = "Close"
 
-[node name="DevSceneConverter" type="Button" parent="HBoxContainer/DevToolsScreen/GridContainer"]
-margin_left = 153.0
-margin_right = 302.0
+[node name="DevSceneConverter2" type="Button" parent="HBoxContainer/DevToolsScreen/GridContainer"]
+margin_left = 192.0
+margin_right = 339.0
 margin_bottom = 26.0
 hint_tooltip = "Converts scenes from plain-text format into what the game can use"
 size_flags_horizontal = 3
 text = "SceneConverter"
 
 [node name="DevLikesGenerator" type="Button" parent="HBoxContainer/DevToolsScreen/GridContainer"]
-margin_left = 306.0
-margin_right = 455.0
+margin_left = 343.0
+margin_right = 478.0
 margin_bottom = 26.0
 hint_tooltip = "Panel for easy creation of npc likes/dislikes tables. Used for lust combat"
 size_flags_horizontal = 3
 text = "Npc Likes Gen."
 
 [node name="DevCharCreator" type="Button" parent="HBoxContainer/DevToolsScreen/GridContainer"]
-margin_left = 306.0
-margin_right = 455.0
+margin_left = 482.0
+margin_right = 616.0
 margin_bottom = 26.0
 hint_tooltip = "A thing to quickly design an npc"
 size_flags_horizontal = 3
 text = "Char Creator"
 
 [node name="DevModCreator" type="Button" parent="HBoxContainer/DevToolsScreen/GridContainer"]
-margin_left = 306.0
-margin_right = 455.0
+margin_left = 620.0
+margin_right = 754.0
 margin_bottom = 26.0
 hint_tooltip = "A tool to export your mod"
 size_flags_horizontal = 3
 text = "ModMaker"
+
+[node name="DevSceneConverter" type="Button" parent="HBoxContainer/DevToolsScreen/GridContainer"]
+margin_top = 30.0
+margin_right = 188.0
+margin_bottom = 56.0
+hint_tooltip = "Converts scenes from plain-text format into what the game can use"
+size_flags_horizontal = 3
+text = "SceneConverter (old)"
 
 [node name="LoadGameScreen" parent="HBoxContainer" instance=ExtResource( 4 )]
 visible = false
@@ -513,10 +521,11 @@ fit_content_height = true
 [connection signal="pressed" from="HBoxContainer/MainVBox/GridContainer/ChangelogButton" to="." method="_on_ChangelogButton_pressed"]
 [connection signal="pressed" from="HBoxContainer/MainVBox/GridContainer/ModsButton" to="." method="_on_ModsButton_pressed"]
 [connection signal="pressed" from="HBoxContainer/DevToolsScreen/GridContainer/DevClose" to="." method="_on_DevClose_pressed"]
-[connection signal="pressed" from="HBoxContainer/DevToolsScreen/GridContainer/DevSceneConverter" to="." method="_on_DevSceneConverter_pressed"]
+[connection signal="pressed" from="HBoxContainer/DevToolsScreen/GridContainer/DevSceneConverter2" to="." method="_on_DevSceneConverter2_pressed"]
 [connection signal="pressed" from="HBoxContainer/DevToolsScreen/GridContainer/DevLikesGenerator" to="." method="_on_DevLikesGenerator_pressed"]
 [connection signal="pressed" from="HBoxContainer/DevToolsScreen/GridContainer/DevCharCreator" to="." method="_on_DevCharCreator_pressed"]
 [connection signal="pressed" from="HBoxContainer/DevToolsScreen/GridContainer/DevModCreator" to="." method="_on_DevModCreator_pressed"]
+[connection signal="pressed" from="HBoxContainer/DevToolsScreen/GridContainer/DevSceneConverter" to="." method="_on_DevSceneConverter_pressed"]
 [connection signal="onClosePressed" from="HBoxContainer/LoadGameScreen" to="." method="switchToMainMenu"]
 [connection signal="onClosePressed" from="HBoxContainer/OptionsScreen" to="." method="switchToMainMenu"]
 [connection signal="onClosePressed" from="HBoxContainer/CreditsScreen" to="." method="switchToMainMenu"]

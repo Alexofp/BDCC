@@ -1,0 +1,155 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://GlobalTheme.tres" type="Theme" id=1]
+[ext_resource path="res://Util/SceneConverter2.gd" type="Script" id=2]
+[ext_resource path="res://UI/MainMenu/SaveGameElement.tscn" type="PackedScene" id=3]
+
+[node name="SceneConverter2" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 1 )
+script = ExtResource( 2 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="TextEdit" type="TextEdit" parent="VBoxContainer"]
+margin_right = 1280.0
+margin_bottom = 321.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "sceneID=MeowScene
+
+! addCharacter(“rahi”)
+! playAnimation(StageScene.Duo, “stand”, {npc=”rahi”})
+Hello world, I will be outputted as text
+
+((I’m a comment, I’m invisible in-game))
+
+Example of same-line checks. Player {{“has a penis” if GM.pc.hasPenis() else “doesn’t have a penis”}}. Should say \\”has a penis\\” if you have one.
+
+=pc: Hello, Rahi. I’m talking as player
+
+=rahi: Hello, {pc.name}! I’m Rahi!
+
+? GM.pc.getCredits() >= 10
+This text will be outputted only if you have at least 10 credits
+?!
+
+((everything after the first line is code that will be executed when picking this action))
+[[Get 1 credit, Get one credit, getCredit
+GM.pc.addCredits(1)
+if(true):
+	print(“Test test”)
+return
+]]
+
+[[Meow!, I’m a description, meow]]
+
+>MEOW!, meow
+Nyaaa!
+"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextEdit2" type="TextEdit" parent="VBoxContainer"]
+margin_top = 325.0
+margin_right = 1280.0
+margin_bottom = 646.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Output will be here
+
+(Press \"Convert\" before pressing \"Test scene\")"
+syntax_highlighting = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Button" parent="VBoxContainer"]
+margin_top = 650.0
+margin_right = 1280.0
+margin_bottom = 676.0
+text = "Convert"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 680.0
+margin_right = 1280.0
+margin_bottom = 706.0
+
+[node name="TestButton" type="Button" parent="VBoxContainer/HBoxContainer"]
+margin_right = 638.0
+margin_bottom = 26.0
+size_flags_horizontal = 3
+text = "Test scene (Might crash if errors)"
+
+[node name="PickSaveButton" type="Button" parent="VBoxContainer/HBoxContainer"]
+margin_left = 642.0
+margin_right = 1280.0
+margin_bottom = 26.0
+size_flags_horizontal = 3
+text = "Pick save to test scene with"
+
+[node name="Control" type="Control" parent="VBoxContainer"]
+margin_top = 710.0
+margin_right = 1280.0
+margin_bottom = 720.0
+rect_min_size = Vector2( 0, 10 )
+
+[node name="GameSpotControl" type="Control" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="StopTestingButton" type="Button" parent="."]
+visible = false
+margin_right = 12.0
+margin_bottom = 26.0
+text = "Stop testing"
+
+[node name="ErrorDialog" type="AcceptDialog" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -288.0
+margin_top = -64.0
+margin_right = 288.0
+margin_bottom = 64.0
+dialog_autowrap = true
+
+[node name="SavesMenu" type="VBoxContainer" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="SavesBackButton" type="Button" parent="SavesMenu"]
+margin_right = 53.0
+margin_bottom = 26.0
+text = "Back"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="SavesMenu"]
+margin_right = 1280.0
+margin_bottom = 720.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="SavesContainer" type="VBoxContainer" parent="SavesMenu/ScrollContainer"]
+margin_right = 1280.0
+margin_bottom = 720.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="SaveGameElement" parent="SavesMenu/ScrollContainer/SavesContainer" instance=ExtResource( 3 )]
+
+[node name="SaveGameElement2" parent="SavesMenu/ScrollContainer/SavesContainer" instance=ExtResource( 3 )]
+margin_top = 30.0
+margin_bottom = 56.0
+
+[connection signal="pressed" from="VBoxContainer/Button" to="." method="_on_Button_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/TestButton" to="." method="_on_TestButton_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/PickSaveButton" to="." method="_on_PickSaveButton_pressed"]
+[connection signal="pressed" from="StopTestingButton" to="." method="_on_StopTestingButton_pressed"]
+[connection signal="pressed" from="SavesMenu/SavesBackButton" to="." method="_on_SavesBackButton_pressed"]

@@ -14,9 +14,13 @@ func getSlot():
 	return BodypartSlot.Penis
 
 func getTooltipInfo():
-	var text = "length: " + Util.cmToString(lengthCM) + "\n"
-	text += BodilyFluids.FluidType.getName(getFluidProduction().getFluidType())+": " + str(round(getFluidProduction().getFluidAmount() * 10.0)/10.0)+"/"+ str(round(getFluidProduction().getCapacity() * 10.0)/10.0)+" ml"
-	return text
+	var result = []
+	result.append("length: " + Util.cmToString(lengthCM))
+	if(getFluidProduction() != null):
+		result.append("Capacity: " + str(round(getFluidProduction().getFluidAmount() * 10.0)/10.0)+"/"+ str(round(getFluidProduction().getCapacity() * 10.0)/10.0)+" ml")
+		result.append_array(getFluidProduction().getTooltipInfo())
+	
+	return Util.join(result, "\n")
 
 func saveData():
 	var data = .saveData()

@@ -13,6 +13,15 @@ func getGoals():
 		SexGoal.TieUp: 1.0,
 	}
 
+func getSupportedSexTypes():
+	return {
+		SexType.DefaultSex: true,
+		SexType.StocksSex: true,
+	}
+
+func isStocksSex():
+	return getSexEngine().getSexTypeID() == SexType.StocksSex
+
 func getActivityBaseScore(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexSubInfo):
 	var mult = 1.0
 	# Inmates don't have much bdsm gear
@@ -42,7 +51,11 @@ func getStartActions(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexS
 	if(_domInfo.getChar().isPlayer()):
 		usableItems = dom.getInventory().getAllCombatUsableRestraints()
 	else:
-		var possibleRestraints = GlobalRegistry.getItemIDsByTag(ItemTag.CanBeForcedByGuards)
+		var itemTagToUse = ItemTag.CanBeForcedByGuards
+		if(_sexEngine.getSexTypeID() == SexType.StocksSex):#(isStocksSex()):
+			itemTagToUse = ItemTag.CanBeForcedInStocks
+		
+		var possibleRestraints = sub.getInventory().getRestraintsThatCanBeForcedDuringSex(itemTagToUse)
 		
 		for possibleRestraintID in possibleRestraints:
 			var item:ItemBase = GlobalRegistry.getItemRef(possibleRestraintID)
@@ -53,6 +66,7 @@ func getStartActions(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexS
 			
 			usableItems.append(item)
 		
+	#var canActuallyPutOn = 0
 	for item in usableItems:
 		var itemSlot = item.getClothingSlot()
 		var bodypartSlot = item.getRequiredBodypart()
@@ -84,6 +98,7 @@ func getStartActions(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexS
 					desc = "Restraint level: "+str(restraintData.getLevel()) + "\n" + item.getCombatDescription(),
 				})
 			else:
+				#canActuallyPutOn += 1
 				actions.append({
 					name = item.getVisibleName(),
 					args = ["npc", item.id],
@@ -91,6 +106,9 @@ func getStartActions(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexS
 					category = getCategory(),
 					desc = "Restraint level: "+str(restraintData.getLevel()) + "\n" + item.getCombatDescription(),
 				})
+	
+	#if(!dom.isPlayer() && canActuallyPutOn == 0):
+	#	_sexEngine.satisfyGoal(_domInfo, SexGoal.TieUp, _subInfo)
 	
 	return actions
 

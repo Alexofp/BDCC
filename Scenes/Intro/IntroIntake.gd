@@ -137,7 +137,7 @@ func _run():
 		saynn("It wasn’t a fair fight at all, the guard had every single advantage. You can’t stand up anymore, the pain is too much. You can only grunt while the guard puts her baton away and cracks her knuckles. The officer crouches near you and forces you to look at him.")
 
 	if(state == "wonrisha"):
-		playAnimation(StageScene.Solo, "defeat")
+		playAnimation(StageScene.Duo, "defeat", {npc="captain", npcAction="firepistol"})
 		
 		saynn("The guard kneels before you, defeated, her hand drops the baton as she grunts from pain. You quickly pick up the weapon and turn it on.")
 

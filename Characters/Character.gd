@@ -98,6 +98,7 @@ func saveData():
 	data["lustInterests"] = lustInterests.saveData()
 	if(menstrualCycle != null):
 		data["menstrualCycle"] = menstrualCycle.saveData()
+	data["bodyFluids"] = bodyFluids.saveData()
 
 	data["timedBuffs"] = saveBuffsData(timedBuffs)
 	data["timedBuffsDurationSeconds"] = timedBuffsDurationSeconds
@@ -135,6 +136,7 @@ func loadData(data):
 	loadStatusEffectsData(SAVE.loadVar(data, "statusEffects", {}))
 	inventory.loadDataNPC(SAVE.loadVar(data, "inventory", {}))
 	lustInterests.loadData(SAVE.loadVar(data, "lustInterests", {}))
+	bodyFluids.loadData(SAVE.loadVar(data, "bodyFluids", {}))
 
 	if(menstrualCycle != null && data.has("menstrualCycle")):
 		menstrualCycle.loadData(SAVE.loadVar(data, "menstrualCycle", {}))
@@ -146,6 +148,8 @@ func loadData(data):
 	
 	lastUpdatedDay = SAVE.loadVar(data, "lastUpdatedDay", -1)
 	lastUpdatedSecond = SAVE.loadVar(data, "lastUpdatedSecond", -1)
+	
+	updateNonBattleEffects()
 
 func getArmor(_damageType):
 	var calculatedArmor = .getArmor(_damageType)
@@ -179,6 +183,7 @@ func createEquipment():
 func resetEquipment():
 	inventory.clearEquippedItems()
 	createEquipment()
+	updateNonBattleEffects()
 
 func processTime(_secondsPassed):
 	if(timedBuffsDurationSeconds > 0):
@@ -193,6 +198,9 @@ func processTime(_secondsPassed):
 		
 	if(menstrualCycle != null):
 		menstrualCycle.processTime(_secondsPassed)
+		
+	if(!bodyFluids.isEmpty()):
+		bodyFluids.drain(0.1 * _secondsPassed / 60.0)
 		
 	GM.GES.callGameExtenders(ExtendGame.npcProcessTime, [self, _secondsPassed])
 		
@@ -276,6 +284,11 @@ func updateNonBattleEffects():
 		addEffect(StatusEffect.Muzzled)
 	else:
 		removeEffect(StatusEffect.Muzzled)
+	
+	if(!bodyFluids.isEmpty()):
+		addEffect(StatusEffect.CoveredInCum)
+	else:
+		removeEffect(StatusEffect.CoveredInCum)
 	
 	if(hasBodypart(BodypartSlot.Vagina) && !getBodypart(BodypartSlot.Vagina).isOrificeEmpty()):
 		addEffect(StatusEffect.HasCumInsideVagina)

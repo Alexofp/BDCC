@@ -21,6 +21,13 @@ func playAnimation(animID, _args = {}):
 	else:
 		doll.applyBodyState({})
 	
+	if(_args.has("nopod") && _args["nopod"]):
+		$MeshInstance.visible = false
+		$MeshInstance2.visible = false
+		$CPUParticles.visible = false
+		$Sprite3D.visible = false
+	
+	
 	if(animID == "idle"):
 		animationPlayer.play("Idle")
 	else:

@@ -8,7 +8,7 @@ func getAttacks():
 	return ["stunbatonAttack", "trygetupattack"]
 
 func getPossibleAttacks():
-	return ["HeatGrenade", "DoubleCuffPC", "CuffPCHands", "ForceGagPC", "ForceMuzzlePC", "stunbatonOverchargeAttack", "simplekickattack", "biteattack", "shoveattack"]
+	return ["HeatGrenade", "DoubleCuffPC", "CuffPCHands", "stretchingAttack", "lickWounds", "ForceMuzzlePC", "stunbatonOverchargeAttack", "simplekickattack", "biteattack", "shoveattack"]
 
 func pickEquipment(character:DynamicCharacter, _args = {}):
 	

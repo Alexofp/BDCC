@@ -8,7 +8,7 @@ func getVisibleName():
 	return "Milk addict"
 
 func getVisibleDescription():
-	return "You gain the ability to self-feed yourself by squeezing milk into your mouth, restoring stamina!"
+	return "You gain the ability to self-feed yourself by squeezing milk into your mouth, relieving pain depending on the amount!"
 
 func getSkillTier():
 	return 1

@@ -100,11 +100,17 @@ func _getAttacks():
 func getFightIntro(_battleName):
 	var mes = "Kait bounces in place and stretches like all felines usually do. She then directs her attention to you while getting into a combat pose, slightly lowering herself and extending her claws out."
 	mes += "\n\n"
-	mes += "[say=kait]And who the heck are you?[/say]"
+	if(_battleName == "arenafight"):
+		mes += "[say=kait]And who the heck are you?[/say]"
+	else:
+		mes += "[say=kait]Who do you think you are?[/say]"
 	mes += "\n\n"
 	mes += "She huffs and puts on a battle face, her big fluffy tail sways behind her like it has a mind of its own."
 	mes += "\n\n"
-	mes += "[say=kait]Actually, it doesn’t matter. Just remember. If I win - I’m marking you.[/say]"
+	if(_battleName == "arenafight"):
+		mes += "[say=kait]Actually, it doesn’t matter. Just remember. If I win - I’m marking you.[/say]"
+	else:
+		mes += "[say=kait]Bring it on, doormat.[/say]"
 	return mes
 
 func getThickness() -> int:

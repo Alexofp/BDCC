@@ -336,13 +336,14 @@ func doDomAction(_id, _actionInfo):
 					text = RNG.pick([
 						"{dom.You} {dom.youVerb('hold')} {dom.yourHis} face slightly to the side of {sub.yourHis} "+RNG.pick(["cock", "dick", "shaft"])+" as it starts throbbing and [b]filling the condom with "+RNG.pick(["cum", "seed", "semen"])+"[/b]!",
 					])
-					getSub().cumOnFloor()
+					getSub().cumInItem(condom)
 					subInfo.cum()
 					state = ""
 					text += RNG.pick([
 						" {dom.You} {dom.youVerb('dispose')} of the used condom.",
 					])
 					condom.destroyMe()
+					getSexEngine().saveCondomToLootIfPerk(condom)
 					
 					return {text=text}
 			
@@ -359,7 +360,11 @@ func doDomAction(_id, _actionInfo):
 			text = RNG.pick([
 				"{dom.You} {dom.youVerb('shift')} away a bit and {dom.youVerb('let')} {sub.you} [b]cum all over {dom.yourHis} face[/b]. Lots of "+RNG.pick(["pussy juices", "juices", "femcum", "female juices"])+" land on it while {sub.yourHis} pussy squirts, leaving quite a mess!",
 			])
-			getDom().cummedOnBy(subID, BodilyFluids.FluidSource.Vagina)
+			if(getDom().isOralBlocked()):
+				getDom().cummedOnBy(subID, FluidSource.Vagina)
+			else:
+				getDom().cummedInMouthBy(subID, FluidSource.Vagina, 0.5)
+				getDom().cummedOnBy(subID, FluidSource.Vagina, 0.5)
 			subInfo.cum()
 		else:
 			text = RNG.pick([
@@ -376,17 +381,18 @@ func doDomAction(_id, _actionInfo):
 					text = RNG.pick([
 						"{dom.You} {dom.youVerb('hold')} {dom.yourHis} face near {sub.yourHis} "+RNG.pick(["cock", "dick", "shaft"])+" as it starts throbbing and [b]filling the condom with "+RNG.pick(["cum", "seed", "semen"])+"[/b]!",
 					])
-					getSub().cumOnFloor()
+					getSub().cumInItem(condom)
 					subInfo.cum()
 					state = ""
 					text += RNG.pick([
 						" {dom.You} {dom.youVerb('dispose')} of the used condom.",
 					])
 					condom.destroyMe()
+					getSexEngine().saveCondomToLootIfPerk(condom)
 					
 					return {text=text}
 			
-			getDom().cummedOnBy(subID, BodilyFluids.FluidSource.Penis)
+			getDom().cummedOnBy(subID, FluidSource.Penis)
 			subInfo.cum()
 		
 		state = ""
@@ -399,11 +405,11 @@ func doDomAction(_id, _actionInfo):
 			text = RNG.pick([
 				"{dom.You} {dom.youVerb('press', 'presses')} {dom.yourHis} lips against {sub.yourHis} "+RNG.pick(["pussy", "slit", "sensetive folds", "petals"])+" and keep lapping up the arousal until [b]{sub.you} {sub.youVerb('cum')}[/b]! {sub.YourHis} juices rush into {dom.yourHis} mouth as {sub.youHe} squirts!",
 			])
-			getDom().cummedInMouthBy(subID, BodilyFluids.FluidSource.Vagina)
+			getDom().cummedInMouthBy(subID, FluidSource.Vagina)
 			subInfo.cum()
 		else:
 			text = RNG.pick([
-				"{dom.You} {dom.youVerb('hold')} {dom.yourHis} lips wrapped around {sub.yourHis} "+RNG.pick(["cock", "dick", "shaft"])+" as it starts throbbing and [b]stuffing your mouth with "+RNG.pick(["cum", "seed", "semen"])+"[/b]."
+				"{dom.You} {dom.youVerb('hold')} {dom.yourHis} lips wrapped around {sub.yourHis} "+RNG.pick(["cock", "dick", "shaft"])+" as it starts throbbing and [b]stuffing {dom.your} mouth with "+RNG.pick(["cum", "seed", "semen"])+"[/b]."
 			])
 			
 			var condom:ItemBase = getSub().getWornCondom()
@@ -417,17 +423,18 @@ func doDomAction(_id, _actionInfo):
 					text = RNG.pick([
 						"{dom.You} {dom.youVerb('hold')} {dom.yourHis} lips wrapped around {sub.yourHis} "+RNG.pick(["cock", "dick", "shaft"])+" as it starts throbbing and [b]filling the condom inside {dom.your} mouth with "+RNG.pick(["cum", "seed", "semen"])+"[/b]!",
 					])
-					getSub().cumOnFloor()
+					getSub().cumInItem(condom)
 					subInfo.cum()
 					state = ""
 					text += RNG.pick([
 						" {dom.You} {dom.youVerb('dispose')} of the used condom.",
 					])
 					condom.destroyMe()
+					getSexEngine().saveCondomToLootIfPerk(condom)
 					
 					return {text=text}
 			
-			getDom().cummedInMouthBy(subID, BodilyFluids.FluidSource.Penis)
+			getDom().cummedInMouthBy(subID, FluidSource.Penis)
 			subInfo.cum()
 		
 		state = ""
@@ -612,7 +619,7 @@ func doSubAction(_id, _actionInfo):
 			text = RNG.pick([
 				"{sub.You} {sub.youVerb('arch', 'arches')} {sub.yourHis} back while {sub.yourHis} "+RNG.pick(["pussy", "pussy slit", "kitty"])+" twitches and squirts all over {dom.your} face! {sub.YouHe} [b]came without {dom.yourHis} permission[/b]!",
 			])
-			getDom().cummedOnBy(subID, BodilyFluids.FluidSource.Vagina)
+			getDom().cummedOnBy(subID, FluidSource.Vagina)
 			subInfo.cum()
 			if(getSub().hasReachablePenis()):
 				if(getSub().isWearingChastityCage()):
@@ -643,7 +650,7 @@ func doSubAction(_id, _actionInfo):
 					text = RNG.pick([
 						"{sub.You} {sub.youVerb('grunt')} while {sub.yourHis} "+RNG.pick(["cock", "dick", "shaft"])+" throbs and suddenly starts to stuff the condom with {sub.yourHis} "+RNG.pick(["cum", "seed", "semen"])+"! {sub.You} [b]came without {dom.yourHis} permission[/b]!",
 					])
-					getSub().cumOnFloor()
+					getSub().cumInItem(condom)
 					subInfo.cum()
 					endActivity()
 					#state = ""
@@ -655,10 +662,11 @@ func doSubAction(_id, _actionInfo):
 						" {dom.You} {dom.youVerb('dispose')} of the used condom.",
 					])
 					condom.destroyMe()
+					getSexEngine().saveCondomToLootIfPerk(condom)
 					
 					return {text=text}
 				
-			getDom().cummedOnBy(subID, BodilyFluids.FluidSource.Penis)
+			getDom().cummedOnBy(subID, FluidSource.Penis)
 			subInfo.cum()
 		if(state == "blowjob"):
 			text = RNG.pick([
@@ -676,7 +684,7 @@ func doSubAction(_id, _actionInfo):
 					text = RNG.pick([
 						"{sub.You} {sub.youVerb('grunt')} while {sub.yourHis} "+RNG.pick(["cock", "dick", "shaft"])+" throbs and suddenly starts to stuff the condom with {sub.yourHis} "+RNG.pick(["cum", "seed", "semen"])+"! {sub.You} [b]came without {dom.yourHis} permission[/b]!",
 					])
-					getSub().cumOnFloor()
+					getSub().cumInItem(condom)
 					subInfo.cum()
 					endActivity()
 					#state = ""
@@ -688,6 +696,7 @@ func doSubAction(_id, _actionInfo):
 						" {dom.You} {dom.youVerb('dispose')} of the used condom.",
 					])
 					condom.destroyMe()
+					getSexEngine().saveCondomToLootIfPerk(condom)
 					
 					return {text=text}
 			

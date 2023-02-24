@@ -9,6 +9,12 @@ func getGoals():
 	return {
 	}
 
+func getSupportedSexTypes():
+	return {
+		SexType.DefaultSex: true,
+		SexType.StocksSex: true,
+	}
+
 func getActivityBaseScore(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexSubInfo):
 	return 0.0
 
@@ -78,6 +84,26 @@ func getDomTags():
 func getSubTags():
 	return []
 
+func fuelStraponRandomly(strapon):
+	if(strapon.getFluids() == null):
+		return
+	
+	var fluids = strapon.getFluids()
+	if(RNG.chance(33)):
+		fluids.addFluid("CumLube", RNG.randi_range(3, 5)*100.0)
+	# 5% chance of there being someone's real cum
+	elif(RNG.chance(5) && OPTIONS.isContentEnabled(ContentType.CumStealing)):
+		var npcPools = CharacterPool.getPrisonPopulationPools()
+		while(npcPools.size() > 0):
+			var randomPool = RNG.grab(npcPools)
+			
+			var characterID = NpcFinder.grabNpcIDFromPool(randomPool, [[NpcCon.HasPenis]])
+			if(characterID != null):
+				var character = GlobalRegistry.getCharacter(characterID)
+				if(character != null):
+					fluids.addFluid(character.getFluidType(FluidSource.Penis), RNG.randi_range(1, 20)*10.0, character.getFluidDNA(FluidSource.Penis))
+					return
+					
 func startActivity(_args):
 	state = ""
 	
@@ -90,6 +116,7 @@ func startActivity(_args):
 			getSexEngine().addTrackedGear(domID, domID, straponItem.uniqueID)
 		else:
 			straponItem = GlobalRegistry.createItem(_args[1])
+			fuelStraponRandomly(straponItem)
 		getDom().getInventory().equipItem(straponItem)
 		
 		return {
@@ -102,8 +129,10 @@ func startActivity(_args):
 		if(getDom().isPlayer()):
 			straponItem = getDom().getInventory().getItemByUniqueID(_args[1])
 			getSexEngine().addTrackedGear(domID, subID, straponItem.uniqueID)
+			getDom().getInventory().removeItem(straponItem)
 		else:
 			straponItem = GlobalRegistry.createItem(_args[1])
+			fuelStraponRandomly(straponItem)
 		getSub().getInventory().equipItem(straponItem)
 		
 		return {

@@ -648,7 +648,7 @@ func _react(_action: String, _args):
 			risha.addBodywriting(zone, BodyWritings.getRandomWritingIDForZone(zone))
 	
 	if(_action == "piss_on_her"):
-		getCharacter("risha").addEffect(StatusEffect.DrenchedInPiss)
+		getCharacter("risha").pissedOnBy("pc")
 	
 	if(_action in ["fight_horny", "fight_normal", "fight_easier"]):
 		runScene("FightScene", ["risha"], "ch1rishafight")

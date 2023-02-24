@@ -1,0 +1,138 @@
+[gd_scene load_steps=23 format=2]
+
+[ext_resource path="res://Player/StageScene3D/BaseStageScene3D.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Player/Props/WoodenHorse.png" type="Texture" id=2]
+[ext_resource path="res://Player/Player3D/Doll3D.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Player/Props/platform.png" type="Texture" id=4]
+[ext_resource path="res://Player/StageScene3D/Scenes/WoodenHorseDuo.gd" type="Script" id=5]
+[ext_resource path="res://Player/Props/Chain.png" type="Texture" id=7]
+
+[sub_resource type="AnimationNodeAnimation" id=1]
+animation = "WoodenHorseBentIdle-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=2]
+animation = "WoodenHorseIdle-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=3]
+animation = "WoodenHorseStruggle-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=4]
+animation = "WoodenHorseStruggleLight-loop"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=5]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=6]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=7]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=8]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=9]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=10]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachine" id=11]
+states/WoodenHorseBentIdle-loop/node = SubResource( 1 )
+states/WoodenHorseBentIdle-loop/position = Vector2( 747, 208 )
+states/WoodenHorseIdle-loop/node = SubResource( 2 )
+states/WoodenHorseIdle-loop/position = Vector2( 452, 208 )
+states/WoodenHorseStruggle-loop/node = SubResource( 3 )
+states/WoodenHorseStruggle-loop/position = Vector2( 452, 359 )
+states/WoodenHorseStruggleLight-loop/node = SubResource( 4 )
+states/WoodenHorseStruggleLight-loop/position = Vector2( 452, 284 )
+transitions = [ "WoodenHorseIdle-loop", "WoodenHorseBentIdle-loop", SubResource( 5 ), "WoodenHorseBentIdle-loop", "WoodenHorseIdle-loop", SubResource( 6 ), "WoodenHorseIdle-loop", "WoodenHorseStruggleLight-loop", SubResource( 7 ), "WoodenHorseStruggleLight-loop", "WoodenHorseIdle-loop", SubResource( 8 ), "WoodenHorseStruggleLight-loop", "WoodenHorseStruggle-loop", SubResource( 9 ), "WoodenHorseStruggle-loop", "WoodenHorseStruggleLight-loop", SubResource( 10 ) ]
+start_node = "WoodenHorseIdle-loop"
+graph_offset = Vector2( -33, 41 )
+
+[sub_resource type="AnimationNodeBlendTree" id=156]
+graph_offset = Vector2( -27, -25 )
+nodes/StateMachine/node = SubResource( 11 )
+nodes/StateMachine/position = Vector2( 404, 165 )
+nodes/output/position = Vector2( 680, 180 )
+node_connections = [ "output", 0, "StateMachine" ]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=13]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=157]
+
+[sub_resource type="QuadMesh" id=14]
+size = Vector2( 11, 11 )
+
+[sub_resource type="SpatialMaterial" id=15]
+flags_transparent = true
+flags_unshaded = true
+params_cull_mode = 2
+albedo_texture = ExtResource( 2 )
+
+[node name="WoodenHorseDuo" instance=ExtResource( 1 )]
+transform = Transform( 0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0, 0 )
+script = ExtResource( 5 )
+
+[node name="Sprite3D" type="Sprite3D" parent="." index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.512775, -0.415051, -1.77462 )
+texture = ExtResource( 4 )
+region_enabled = true
+region_rect = Rect2( 1, 1, 1022, 62 )
+
+[node name="Sprite3D2" type="Sprite3D" parent="." index="1"]
+transform = Transform( 1.75337, -0.962132, 0, 0.962132, 1.75337, 0, 0, 0, 2, 0.0207624, 9.59484, -1.775 )
+texture = ExtResource( 7 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 64, 66 )
+
+[node name="Sprite3D5" type="Sprite3D" parent="." index="2"]
+transform = Transform( 1.75337, 0.962133, 0, -0.962133, 1.75337, 0, 0, 0, 2, -0.631721, 9.59484, -1.79184 )
+texture = ExtResource( 7 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 64, 66 )
+
+[node name="Sprite3D3" type="Sprite3D" parent="." index="3"]
+transform = Transform( 0.817648, -1.82523, 0, 1.82523, 0.817648, 0, 0, 0, 2, 2.074, 0.78, -0.087 )
+texture = ExtResource( 7 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 64, 80 )
+
+[node name="Sprite3D7" type="Sprite3D" parent="." index="4"]
+transform = Transform( -0.81765, -1.82523, 0, 1.82523, -0.81765, 0, 0, 0, 2, -2.52088, 0.780413, -0.0860421 )
+texture = ExtResource( 7 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 64, 80 )
+
+[node name="Sprite3D4" type="Sprite3D" parent="." index="5"]
+transform = Transform( -0.291303, -1.97867, 0, 1.97867, -0.291303, 0, 0, 0, 2, -0.969, 0.782, -0.087 )
+texture = ExtResource( 7 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 64, 230 )
+
+[node name="Sprite3D6" type="Sprite3D" parent="." index="6"]
+transform = Transform( 0.261225, -1.98286, 0, 1.98286, 0.261225, 0, 0, 0, 2, 0.564, 0.772, -0.086 )
+texture = ExtResource( 7 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 64, 240 )
+
+[node name="Doll3D" parent="." index="7" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.03716, -0.361093, 0 )
+
+[node name="Doll3D2" parent="." index="8" instance=ExtResource( 3 )]
+transform = Transform( -1, 0, 0, 0, 1, 0, 0, 0, 1, -1.61045, -0.361, -0.01 )
+
+[node name="AnimationTree" type="AnimationTree" parent="." index="9"]
+tree_root = SubResource( 156 )
+anim_player = NodePath("../Doll3D/DollSkeleton/AnimationPlayer")
+parameters/StateMachine/playback = SubResource( 13 )
+
+[node name="AnimationTree2" type="AnimationTree" parent="." index="10"]
+tree_root = SubResource( 156 )
+anim_player = NodePath("../Doll3D2/DollSkeleton/AnimationPlayer")
+parameters/StateMachine/playback = SubResource( 157 )
+
+[node name="MeshInstance" type="MeshInstance" parent="." index="11"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.170876, 5.13041, -0.100623 )
+mesh = SubResource( 14 )
+material/0 = SubResource( 15 )

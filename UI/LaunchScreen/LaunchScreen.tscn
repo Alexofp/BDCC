@@ -1,0 +1,226 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://UI/LaunchScreen/LaunchScreen.gd" type="Script" id=1]
+[ext_resource path="res://GlobalTheme.tres" type="Theme" id=2]
+[ext_resource path="res://Game/SmartScrollContainer.gd" type="Script" id=3]
+[ext_resource path="res://UI/LaunchScreen/LaunchModEntry.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Fonts/Titillium-Regular.otf" type="DynamicFontData" id=5]
+[ext_resource path="res://UI/ModBrowser/ModBrowser.tscn" type="PackedScene" id=6]
+
+[sub_resource type="DynamicFont" id=3]
+size = 38
+outline_size = 2
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 5 )
+
+[node name="LaunchScreen" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 2 )
+script = ExtResource( 1 )
+GlobalTheme = ExtResource( 2 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Control" type="Control" parent="VBoxContainer"]
+margin_right = 1280.0
+margin_bottom = 5.0
+rect_min_size = Vector2( 0, 5 )
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+margin_top = 9.0
+margin_right = 1280.0
+margin_bottom = 48.0
+custom_fonts/font = SubResource( 3 )
+text = "Modded BDCC Launcher"
+align = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 52.0
+margin_right = 1280.0
+margin_bottom = 720.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/HBoxContainer"]
+margin_right = 425.0
+margin_bottom = 668.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/PanelContainer"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 418.0
+margin_bottom = 661.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/PanelContainer/VBoxContainer"]
+margin_right = 411.0
+margin_bottom = 20.0
+text = "Mod order"
+align = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/HBoxContainer/PanelContainer/VBoxContainer"]
+margin_top = 24.0
+margin_right = 411.0
+margin_bottom = 654.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource( 3 )
+
+[node name="ModList" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/PanelContainer/VBoxContainer/ScrollContainer"]
+margin_right = 411.0
+margin_bottom = 630.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="LaunchModEntry" parent="VBoxContainer/HBoxContainer/PanelContainer/VBoxContainer/ScrollContainer/ModList" instance=ExtResource( 4 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 411.0
+margin_bottom = 50.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
+margin_left = 429.0
+margin_right = 1280.0
+margin_bottom = 668.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.0
+
+[node name="PanelContainer2" type="PanelContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
+margin_right = 851.0
+margin_bottom = 590.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 844.0
+margin_bottom = 583.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="WarningLabel" type="RichTextLabel" parent="VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer"]
+visible = false
+margin_right = 837.0
+margin_bottom = 21.0
+bbcode_enabled = true
+fit_content_height = true
+
+[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer"]
+margin_right = 837.0
+margin_bottom = 271.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+bbcode_enabled = true
+
+[node name="HFlowContainer" type="HFlowContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer"]
+margin_top = 275.0
+margin_right = 837.0
+margin_bottom = 301.0
+
+[node name="ModDisableButton" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/HFlowContainer"]
+margin_right = 74.0
+margin_bottom = 26.0
+text = "Disable"
+
+[node name="MoveUpButton" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/HFlowContainer"]
+margin_left = 78.0
+margin_right = 164.0
+margin_bottom = 26.0
+text = "Move up"
+
+[node name="MoveDownButton" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/HFlowContainer"]
+margin_left = 168.0
+margin_right = 280.0
+margin_bottom = 26.0
+text = "Move down"
+
+[node name="DeleteModButton" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/HFlowContainer"]
+margin_left = 284.0
+margin_right = 410.0
+margin_bottom = 26.0
+text = "DELETE MOD"
+
+[node name="ModFileList" type="ItemList" parent="VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer"]
+margin_top = 305.0
+margin_right = 837.0
+margin_bottom = 576.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
+margin_top = 594.0
+margin_right = 851.0
+margin_bottom = 644.0
+rect_min_size = Vector2( 0, 50 )
+
+[node name="Control" type="Control" parent="VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+margin_right = 180.0
+margin_bottom = 50.0
+size_flags_horizontal = 3
+
+[node name="TestButton" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+margin_left = 184.0
+margin_right = 324.0
+margin_bottom = 50.0
+text = "Build BDCC.pck"
+
+[node name="ModBrowserButton" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+margin_left = 328.0
+margin_right = 454.0
+margin_bottom = 50.0
+text = "Mod Browser"
+
+[node name="NoModsButton" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+margin_left = 458.0
+margin_right = 629.0
+margin_bottom = 50.0
+text = "Play without mods"
+
+[node name="WithModsButton" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+margin_left = 633.0
+margin_right = 851.0
+margin_bottom = 50.0
+text = "Launch BDCC with mods"
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
+margin_top = 648.0
+margin_right = 851.0
+margin_bottom = 668.0
+text = "This screen appeared because you have mods. If the game crashes on start, test without mods"
+align = 1
+autowrap = true
+
+[node name="ConfirmationDialog" type="ConfirmationDialog" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -233.0
+margin_top = -59.0
+margin_right = 233.0
+margin_bottom = 59.0
+dialog_autowrap = true
+
+[node name="ModBrowser" parent="." instance=ExtResource( 6 )]
+visible = false
+
+[connection signal="meta_clicked" from="VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/WarningLabel" to="." method="_on_RichTextLabel_meta_clicked"]
+[connection signal="meta_clicked" from="VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/RichTextLabel" to="." method="_on_RichTextLabel_meta_clicked"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/HFlowContainer/ModDisableButton" to="." method="_on_ModDisableButton_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/HFlowContainer/MoveUpButton" to="." method="_on_MoveUpButton_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/HFlowContainer/MoveDownButton" to="." method="_on_MoveDownButton_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/HFlowContainer/DeleteModButton" to="." method="_on_DeleteModButton_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/TestButton" to="." method="_on_TestButton_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/ModBrowserButton" to="." method="_on_ModBrowserButton_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/NoModsButton" to="." method="_on_NoModsButton_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/WithModsButton" to="." method="_on_WithModsButton_pressed"]
+[connection signal="confirmed" from="ConfirmationDialog" to="." method="_on_ConfirmationDialog_confirmed"]
+[connection signal="closePressed" from="ModBrowser" to="." method="_on_ModBrowser_closePressed"]

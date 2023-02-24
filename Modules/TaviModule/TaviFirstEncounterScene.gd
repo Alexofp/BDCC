@@ -438,8 +438,8 @@ func _react(_action: String, _args):
 	if(_action == "obey"):
 		processTime(30*60)
 		GM.pc.orgasmFrom("tavi")
-		GM.pc.cummedOnBy("tavi", BodilyFluids.FluidSource.Vagina)
-		GM.pc.cummedInMouthBy("tavi", BodilyFluids.FluidSource.Vagina)
+		GM.pc.cummedOnBy("tavi", FluidSource.Vagina)
+		GM.pc.cummedInMouthBy("tavi", FluidSource.Vagina)
 		GM.pc.addSkillExperience(Skill.SexSlave, 50, "tavi_firstencounter")
 		addMessage("Tavi came on you, covering your body with her female juices")
 	

@@ -8,4 +8,6 @@ enum {
 	Fetish,
 	Name,
 	Flag,
+	Temporary,
+	NoChastity,
 }

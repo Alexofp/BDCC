@@ -16,8 +16,8 @@ func afterMilked():
 	lactationTimer = Util.maxi(lactationTimer, 60*60*24*2)
 
 func stimulate():
-	lactationProgress += RNG.randf_range(0.01, 0.02)
-	if(lactationProgress > 0.5 && RNG.chance(lactationProgress * 10.0)):
+	lactationProgress += RNG.randf_range(0.03, 0.10)
+	if(lactationProgress > 0.3 && RNG.chance(lactationProgress * 10.0)):
 		if(!shouldProduce()):
 			induceLactation()
 			return true
@@ -67,6 +67,22 @@ func getOptimalBreastsSize():
 			return baseSize + _i
 	return baseSize + maxAdditionalSize
 
+func getFluidLevelForOptimalSize() -> float:
+	var maxSize = getBodypart().getBaseSize()
+	if(maxSize != BreastsSize.FOREVER_FLAT):
+		var pc = getCharacter()
+		if(pc != null):
+			maxSize += pc.getCustomAttribute(BuffAttribute.BreastsSize)
+			maxSize += pc.getCustomAttribute(BuffAttribute.BreastsMaxLactatingSize)
+			maxSize += 1
+	
+		
+	var capacity:float = getCapacityForSize(maxSize)
+	if(capacity < 0.01):
+		return 0.0
+	
+	return clamp(getFluidAmount() / capacity, 0.0, 1.0)
+
 func processTime(seconds: int):
 	.processTime(seconds)
 	
@@ -95,6 +111,9 @@ func getProductionSpeedPerHour() -> float:
 		mult += pc.getCustomAttribute(BuffAttribute.BreastsMilkProduction)
 		
 	return getCapacity() / 30.0 * mult
+
+func getFluidSource():
+	return FluidSource.Breasts
 
 func saveData():
 	var data = .saveData()

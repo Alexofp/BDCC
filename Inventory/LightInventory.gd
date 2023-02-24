@@ -120,6 +120,9 @@ func getItemsWithTag(tag):
 			result.append(item)
 	return result
 
+func isEmpty():
+	return items.empty()
+
 func saveData():
 	var data = {}
 	

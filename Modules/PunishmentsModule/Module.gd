@@ -30,6 +30,9 @@ func _init():
 		"res://Modules/PunishmentsModule/CaughtMasturbatingByInmates/CaughtForcedStaffLick.gd",
 		"res://Modules/PunishmentsModule/CaughtMasturbatingByInmates/CaughtFirstTimeInmate.gd",
 		"res://Modules/PunishmentsModule/CaughtMasturbatingByInmates/CaughtFirstTimeStaff.gd",
+		
+		"res://Modules/PunishmentsModule/Stocks/UnWilling/StocksUnwillingDynNpcScene.gd",
+		"res://Modules/PunishmentsModule/Stocks/Willing/StocksWillingDynNpcScene.gd",
 		]
 	characters = [
 		
@@ -50,6 +53,9 @@ func _init():
 		"res://Modules/PunishmentsModule/CaughtMasturbatingByInmates/CaughtForcedInmateSpitroastEvent.gd",
 		"res://Modules/PunishmentsModule/CaughtMasturbatingByInmates/CaughtForcedStaffLickEvent.gd",
 		"res://Modules/PunishmentsModule/CaughtMasturbatingByInmates/CaughtFirstTimeEvent.gd",
+		"res://Modules/PunishmentsModule/Stocks/UnWilling/StocksUnwillingDynNpcEvent.gd",
+		"res://Modules/PunishmentsModule/Stocks/Willing/StocksWillingDynNpcEvent.gd",
+		
 	]
 
 func registerEventTriggers():

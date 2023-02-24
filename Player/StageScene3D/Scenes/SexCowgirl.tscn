@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=33 format=2]
 
 [ext_resource path="res://Player/Player3D/Doll3D.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Player/StageScene3D/BaseStageScene3D.tscn" type="PackedScene" id=2]
@@ -15,17 +15,14 @@ filters = [ "Doll3D/Skeleton:Arm.L", "Doll3D/Skeleton:Arm.R", "Doll3D/Skeleton:F
 [sub_resource type="AnimationNodeAnimation" id=29]
 animation = "Sex_CowgirlFast_1-loop"
 
+[sub_resource type="AnimationNodeAnimation" id=35]
+animation = "Sex_CowgirlInside_1-loop"
+
 [sub_resource type="AnimationNodeAnimation" id=15]
 animation = "Sex_CowgirlTease_1-loop"
 
 [sub_resource type="AnimationNodeAnimation" id=5]
 animation = "Sex_Cowgirl_1-loop"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=16]
-xfade_time = 0.5
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=17]
-xfade_time = 0.5
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=30]
 xfade_time = 0.5
@@ -33,16 +30,30 @@ xfade_time = 0.5
 [sub_resource type="AnimationNodeStateMachineTransition" id=31]
 xfade_time = 0.5
 
+[sub_resource type="AnimationNodeStateMachineTransition" id=36]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=37]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=38]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=39]
+xfade_time = 0.5
+
 [sub_resource type="AnimationNodeStateMachine" id=9]
 states/Sex_CowgirlFast_1-loop/node = SubResource( 29 )
 states/Sex_CowgirlFast_1-loop/position = Vector2( 210, 236 )
+states/Sex_CowgirlInside_1-loop/node = SubResource( 35 )
+states/Sex_CowgirlInside_1-loop/position = Vector2( 226, 53 )
 states/Sex_CowgirlTease_1-loop/node = SubResource( 15 )
-states/Sex_CowgirlTease_1-loop/position = Vector2( 226, 45 )
+states/Sex_CowgirlTease_1-loop/position = Vector2( 219, -31 )
 states/Sex_Cowgirl_1-loop/node = SubResource( 5 )
 states/Sex_Cowgirl_1-loop/position = Vector2( 226, 144 )
-transitions = [ "Sex_CowgirlTease_1-loop", "Sex_Cowgirl_1-loop", SubResource( 16 ), "Sex_Cowgirl_1-loop", "Sex_CowgirlTease_1-loop", SubResource( 17 ), "Sex_Cowgirl_1-loop", "Sex_CowgirlFast_1-loop", SubResource( 30 ), "Sex_CowgirlFast_1-loop", "Sex_Cowgirl_1-loop", SubResource( 31 ) ]
+transitions = [ "Sex_Cowgirl_1-loop", "Sex_CowgirlFast_1-loop", SubResource( 30 ), "Sex_CowgirlFast_1-loop", "Sex_Cowgirl_1-loop", SubResource( 31 ), "Sex_CowgirlTease_1-loop", "Sex_CowgirlInside_1-loop", SubResource( 36 ), "Sex_CowgirlInside_1-loop", "Sex_CowgirlTease_1-loop", SubResource( 37 ), "Sex_Cowgirl_1-loop", "Sex_CowgirlInside_1-loop", SubResource( 38 ), "Sex_CowgirlInside_1-loop", "Sex_Cowgirl_1-loop", SubResource( 39 ) ]
 start_node = "Sex_CowgirlTease_1-loop"
-graph_offset = Vector2( -220, 42 )
+graph_offset = Vector2( -244, -138 )
 
 [sub_resource type="AnimationNodeBlendTree" id=20]
 graph_offset = Vector2( -370.299, 19.8486 )
@@ -60,17 +71,14 @@ node_connections = [ "output", 0, "CuffsBlend", "CuffsBlend", 0, "StateMachine",
 [sub_resource type="AnimationNodeAnimation" id=32]
 animation = "Sex_CowgirlFast_2-loop"
 
+[sub_resource type="AnimationNodeAnimation" id=40]
+animation = "Sex_CowgirlTease_2-loop"
+
 [sub_resource type="AnimationNodeAnimation" id=24]
 animation = "Sex_CowgirlTease_2-loop"
 
 [sub_resource type="AnimationNodeAnimation" id=25]
 animation = "Sex_Cowgirl_2-loop"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=26]
-xfade_time = 0.5
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=27]
-xfade_time = 0.5
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=33]
 xfade_time = 0.5
@@ -78,16 +86,30 @@ xfade_time = 0.5
 [sub_resource type="AnimationNodeStateMachineTransition" id=34]
 xfade_time = 0.5
 
+[sub_resource type="AnimationNodeStateMachineTransition" id=41]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=42]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=43]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=44]
+xfade_time = 0.5
+
 [sub_resource type="AnimationNodeStateMachine" id=28]
 states/Sex_CowgirlFast_2-loop/node = SubResource( 32 )
 states/Sex_CowgirlFast_2-loop/position = Vector2( 438, 282 )
+states/Sex_CowgirlInside_2-loop/node = SubResource( 40 )
+states/Sex_CowgirlInside_2-loop/position = Vector2( 461, 117 )
 states/Sex_CowgirlTease_2-loop/node = SubResource( 24 )
-states/Sex_CowgirlTease_2-loop/position = Vector2( 451, 76 )
+states/Sex_CowgirlTease_2-loop/position = Vector2( 450, 36 )
 states/Sex_Cowgirl_2-loop/node = SubResource( 25 )
 states/Sex_Cowgirl_2-loop/position = Vector2( 461, 191 )
-transitions = [ "Sex_CowgirlTease_2-loop", "Sex_Cowgirl_2-loop", SubResource( 26 ), "Sex_Cowgirl_2-loop", "Sex_CowgirlTease_2-loop", SubResource( 27 ), "Sex_Cowgirl_2-loop", "Sex_CowgirlFast_2-loop", SubResource( 33 ), "Sex_CowgirlFast_2-loop", "Sex_Cowgirl_2-loop", SubResource( 34 ) ]
+transitions = [ "Sex_Cowgirl_2-loop", "Sex_CowgirlFast_2-loop", SubResource( 33 ), "Sex_CowgirlFast_2-loop", "Sex_Cowgirl_2-loop", SubResource( 34 ), "Sex_CowgirlTease_2-loop", "Sex_CowgirlInside_2-loop", SubResource( 41 ), "Sex_CowgirlInside_2-loop", "Sex_CowgirlTease_2-loop", SubResource( 42 ), "Sex_Cowgirl_2-loop", "Sex_CowgirlInside_2-loop", SubResource( 43 ), "Sex_CowgirlInside_2-loop", "Sex_Cowgirl_2-loop", SubResource( 44 ) ]
 start_node = "Sex_CowgirlTease_2-loop"
-graph_offset = Vector2( -34, -7 )
+graph_offset = Vector2( -5, -64 )
 
 [sub_resource type="AnimationNodeBlendTree" id=21]
 graph_offset = Vector2( -322.532, 74.6842 )

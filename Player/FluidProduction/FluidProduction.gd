@@ -2,13 +2,19 @@ extends Reference
 class_name FluidProduction
 
 var bodypart: WeakRef = null
-var fluidAmount = 0.0
+var fluids: Fluids = Fluids.new()
+
+func getFluids():
+	return fluids
+
+func transferAmountTo(otherFluids, howMuch):
+	fluids.transferAmountTo(otherFluids, howMuch)
 
 func getCapacity() -> float:
 	return round(1000.0)
 
 func getFluidAmount() -> float:
-	return fluidAmount
+	return fluids.getFluidAmount()
 
 func getFluidLevel() -> float:
 	var capacity:float = getCapacity()
@@ -18,14 +24,12 @@ func getFluidLevel() -> float:
 	return clamp(getFluidAmount() / capacity, 0.0, 1.0)
 
 func drain(howmuch = 1.0) -> float:
+	var fluidAmount = getFluidAmount()
 	var result = getCapacity() * howmuch
 	if(result > fluidAmount):
 		result = fluidAmount
 		
-	fluidAmount -= result
-	if(fluidAmount < 0.001):
-		fluidAmount= 0.0
-	return result
+	return fluids.drain(result)
 
 func afterMilked():
 	pass
@@ -36,29 +40,56 @@ func getProductionSpeedPerHour() -> float:
 	return getCapacity() / 10.0
 	
 func getFluidType():
-	return BodilyFluids.FluidType.Milk
+	var character = getCharacter()
+	if(character != null):
+		var theFluidType = character.getFluidType(getFluidSource())
+		if(theFluidType != null):
+			return theFluidType
+	
+	return "Milk"
+
+func getFluidSource():
+	return FluidSource.Breasts
 
 func shouldProduce():
 	return true
 
 func processTime(seconds: int):
+	var character = getCharacter()
+	if(character == null):
+		return
+	
 	var minutesPassed: float = seconds / 60.0
 	var hoursPassed: float = minutesPassed / 60.0
 
 	var maxCapacity = getCapacity()
-	fluidAmount += getProductionSpeedPerHour() * hoursPassed
-	if(fluidAmount > maxCapacity):
-		fluidAmount = maxCapacity
-	if(fluidAmount < 0.0):
-		fluidAmount = 0.0
+	var spaceLeft = maxCapacity - getFluidAmount()
+	
+	var productionSpeedPerHour = getProductionSpeedPerHour()
+	var productionAdded = productionSpeedPerHour * hoursPassed
+	
+	if(productionAdded > 0.0):
+		if(productionAdded > spaceLeft):
+			productionAdded = spaceLeft
+		fluids.addFluid(getFluidType(), productionAdded, character.getFluidDNA(getFluidSource()))
+	
+	if(productionAdded < 0.0):
+		fluids.drain(abs(productionAdded))
 
 func fillPercent(howMuch:float):
+	var character = getCharacter()
+	if(character == null):
+		return
 	var maxCapacity = getCapacity()
-	fluidAmount += maxCapacity * howMuch
-	if(fluidAmount > maxCapacity):
-		fluidAmount = maxCapacity
-	if(fluidAmount < 0.0):
-		fluidAmount = 0.0
+	var spaceLeft = maxCapacity - getFluidAmount()
+	
+	var toAdd = maxCapacity * howMuch
+	
+	if(toAdd > spaceLeft):
+		toAdd = spaceLeft
+	if(toAdd < 0.0):
+		toAdd = 0.0
+	fluids.addFluid(getFluidType(), toAdd, character.getFluidDNA(getFluidSource()))
 
 func getBodypart():
 	return bodypart.get_ref()
@@ -71,18 +102,35 @@ func getCharacter():
 
 func saveData():
 	var data = {
-		"fluidAmount": fluidAmount,
+		"fluids": fluids.saveData(),
 	}
 	
 	return data
 
 func loadData(data):
-	fluidAmount = SAVE.loadVar(data, "fluidAmount", 0.0)
+	fluids.loadData(SAVE.loadVar(data, "fluids", {}))
+
+func getTooltipInfo():
+	var result = []
+	result.append("Speed: "+ str(round(getProductionSpeedPerHour() * 10.0)/10.0)+" ml/hour")
+	result.append("Contents:")
+	
+	if(!fluids.isEmpty()):
+		result.append_array(fluids.getContentsHumanReadableArray())
+	else:
+		result.append("- Empty")
+	return result
 
 func getAttributesText():
-	return [
-		["Producing", BodilyFluids.FluidType.getName(getFluidType())],
+	var result = [
+		["Producing", BodilyFluids.getFluidName(getFluidType())],
 		["Capacity", str(round(getFluidAmount() * 10.0)/10.0)+"/"+ str(round(getCapacity() * 10.0)/10.0)+" ml"],		
 		["Production speed", str(round(getProductionSpeedPerHour() * 10.0)/10.0)+" ml/hour"],
 		["Currently producing", str(shouldProduce())],
 	]
+
+	if(!fluids.isEmpty()):
+		result.append(["Contents", ""])
+		result.append_array(fluids.getContentsHumanReadablePairsArray())
+
+	return result

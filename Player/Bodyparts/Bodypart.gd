@@ -34,6 +34,14 @@ func getCharacterCreatorDesc():
 func getCompatibleSpecies():
 	return []
 
+func getFluids():
+	if(orifice != null):
+		return orifice.getFluids()
+	if(fluidProduction != null):
+		return fluidProduction.getFluids()
+	
+	return null
+
 # Used to make sure we don't get hybrids with human ears unless player really wants that
 func getHybridPriority():
 	return 0
@@ -72,9 +80,9 @@ func getAttributesText():
 func getCharCreatorData():
 	return null
 
-func addFluidOrifice(fluidType, amount: float, charID = null):
+func addFluidOrifice(fluidType, amount: float, fluidDNA = null):
 	assert(orifice != null)
-	orifice.addFluid(fluidType, amount, charID)
+	orifice.addFluid(fluidType, amount, fluidDNA)
 
 func isOrificeEmpty():
 	assert(orifice != null)
@@ -85,6 +93,11 @@ func isOrificeStuffed():
 
 func getOrifice():
 	return orifice
+
+func getOrificeContentsHumanReadableArray():
+	if(orifice == null):
+		return []
+	return orifice.getContentsHumanReadableArray()
 
 func getFluidProduction():
 	return fluidProduction

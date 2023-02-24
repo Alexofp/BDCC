@@ -50,6 +50,41 @@ func getFlags():
 		"ch2DrugsAgreedToTest": flag(FlagType.Bool),
 		"ch2DrugsPickedFuta": flag(FlagType.Bool),
 		"ch2DrugsSaidYesToDemonTavi": flag(FlagType.Bool),
+		
+		# Chapter 3
+		"ch3StartedInfiltration": flag(FlagType.Bool),
+		"ch3IntimidatedKait": flag(FlagType.Bool),
+		"ch3InterogatedTavi": flag(FlagType.Bool),
+		"ch3CompletedDoorHack": flag(FlagType.Bool),
+		"ch3CompletedSafeHack": flag(FlagType.Bool),
+		"ch3AlexHappened": flag(FlagType.Bool),
+		"ch3AlexChoice": flag(FlagType.Text), # submit, talk_failed, choked_out, fight
+		"ch3AlexDefeatedHim": flag(FlagType.Bool),
+		"ch3AlexHadSex": flag(FlagType.Bool),
+		"ch3EnteredTransmitter": flag(FlagType.Bool),
+		"Ch3TurnedOffPower": flag(FlagType.Bool),
+		"Ch3SpikedPower": flag(FlagType.Bool),
+		"Ch3SurrenderedToNova": flag(FlagType.Bool),
+		"Ch3ProtectedTavi": flag(FlagType.Bool),
+		"Ch3DefeatedByGuard": flag(FlagType.Bool),
+		"Ch3DefeatedNova": flag(FlagType.Bool),
+		
+		# Chapter 4
+		"TaviKilledJaxon": flag(FlagType.Bool),
+		"Ch4SaidTaviIsMonster": flag(FlagType.Bool),
+		"Ch4TortureEnd": flag(FlagType.Text), #gaveup, escaped, lost
+		"Ch4TorturedSkar": flag(FlagType.Bool),
+		"Ch4TaviKnowsSkarsName": flag(FlagType.Bool),
+		"Ch4ServedPunishment": flag(FlagType.Bool),
+		"Ch4KaitSceneHappened": flag(FlagType.Bool),
+		"Ch4KaitFoundBug": flag(FlagType.Bool),
+		"Ch4KaitGotBeatenUp": flag(FlagType.Bool),
+		"Ch4LostToKait": flag(FlagType.Bool),
+		"Ch4KaitIntoStocks": flag(FlagType.Bool),
+		"Ch4KaitStocksProtected": flag(FlagType.Bool),
+		"Ch4KaitStocksUsedByOthers": flag(FlagType.Bool),
+		"Ch4KaitStocksPunishedByPC": flag(FlagType.Bool),
+		
 	}
 
 func _init():
@@ -79,8 +114,28 @@ func _init():
 		"res://Modules/TaviModule/Chapter2/Ch2a2CorridorScene.gd",
 		"res://Modules/TaviModule/Chapter2/Ch2e2ElizaReactionToRoughness.gd",
 		"res://Modules/TaviModule/Chapter2/Ch2t3TaviDrugsScene.gd",
+		
+		"res://Modules/TaviModule/Chapter3/Ch3s1TaviAndKaitScene.gd",
+		"res://Modules/TaviModule/Chapter3/Ch3s2ControlRoomScene.gd",
+		"res://Modules/TaviModule/Chapter3/Ch3s2AdvancedHackScene.gd",
+		"res://Modules/TaviModule/Chapter3/Ch3s3AlexScene.gd",
+		"res://Modules/TaviModule/Chapter3/Ch3s4TransmitterScene.gd",
+		"res://Modules/TaviModule/Chapter3/Ch3s5CaptainScene.gd",
+		"res://Modules/TaviModule/Chapter4/Ch4s1SolitaryScene.gd",
+		"res://Modules/TaviModule/Chapter4/Ch4s2TaviFlashbackIntroScene.gd",
+		"res://Modules/TaviModule/Chapter4/Ch4s3RishaFightScene.gd",
+		"res://Modules/TaviModule/Chapter4/Ch4s4JaxonTalkScene.gd",
+		"res://Modules/TaviModule/Chapter4/Ch4s5DirectorScene.gd",
+		"res://Modules/TaviModule/Chapter4/Ch4s6EndingScene.gd",
+		"res://Modules/TaviModule/Chapter4/Ch4s7CaptainScene.gd",
+		"res://Modules/TaviModule/Chapter4/Ch4s8KaitScene.gd",
 		]
-	characters = []
+	characters = [
+		"res://Modules/TaviModule/Chapter4/DirectorTau.gd",
+		"res://Modules/TaviModule/Chapter4/JaxonTau.gd",
+		"res://Modules/TaviModule/Chapter4/RishaTau.gd",
+		"res://Modules/TaviModule/Chapter4/JaxonBrotherTau.gd",
+	]
 	items = []
 	events = [
 		"res://Modules/TaviModule/TaviTalkEvent.gd",
@@ -100,16 +155,25 @@ func _init():
 		"res://Modules/TaviModule/Chapter2/Ch2EnterCorridorEvent.gd",
 		"res://Modules/TaviModule/Chapter2/Ch2e2ElizaReactionToRoughnessEvent.gd",
 		"res://Modules/TaviModule/Chapter2/Ch2t3TaviTalkEvent.gd",
+		"res://Modules/TaviModule/Chapter3/Ch3TaviTalkAndKaitEvent.gd",
+		"res://Modules/TaviModule/Chapter3/Ch3s2ControlRoomEvent.gd",
+		"res://Modules/TaviModule/Chapter3/Ch3s3AlexEvent.gd",
+		"res://Modules/TaviModule/Chapter3/Ch3s4TransmitterEvent.gd",
+		"res://Modules/TaviModule/Chapter4/Ch4s8KaitEvent.gd",
 	]
 	quests = [
 		"res://Modules/TaviModule/TaviAppleQuest.gd",
 		"res://Modules/TaviModule/Quest2/TaviQuest2.gd",
 		"res://Modules/TaviModule/Chapter2/Ch2ElizaQuest.gd",
 		"res://Modules/TaviModule/Chapter2/Ch2AlexQuest.gd",
-		"res://Modules/TaviModule/Chapter2/Ch2TaviQuest.gd",
+		"res://Modules/TaviModule/Chapter3/Ch3TaviQuest.gd",
 	]
 	worldEdits = [
 		"res://Modules/TaviModule/TaviWorldEdit.gd",
+	]
+	computers = [
+		"res://Modules/TaviModule/Chapter3/TaviEngineeringComputer.gd",
+		"res://Modules/TaviModule/Chapter3/TaviEngineeringSafeComputer.gd",
 	]
 
 func resetFlagsOnNewDay():

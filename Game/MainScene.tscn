@@ -6,7 +6,9 @@
 [ext_resource path="res://Events/EventSystem.gd" type="Script" id=4]
 [ext_resource path="res://Quests/QuestSystem.gd" type="Script" id=5]
 
-[node name="MainScene" type="Node"]
+[node name="MainScene" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
 script = ExtResource( 3 )
 
 [node name="GameUI" parent="." instance=ExtResource( 1 )]

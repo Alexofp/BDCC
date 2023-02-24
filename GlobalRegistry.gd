@@ -2,7 +2,7 @@ extends Node
 
 var game_version_major = 0
 var game_version_minor = 0
-var game_version_revision = 20
+var game_version_revision = 21
 var game_version_suffix = ""
 
 var currentUniqueID = 0
@@ -10,6 +10,7 @@ var currentChildUniqueID = 0
 var currentNPCUniqueID = 0
 
 var scenes: Dictionary = {}
+var temporaryScenes: Dictionary = {}
 var sceneCreators: Dictionary = {}
 var bodyparts: Dictionary = {}
 var characterClasses: Dictionary = {}
@@ -34,6 +35,7 @@ var stageScenes: Dictionary = {}
 var lustActions: Dictionary = {}
 var defaultLustActions: Array = []
 var orgasmLustActions: Array = []
+var lootTables: Dictionary = {}
 var lootLists: Dictionary = {}
 var lootListsByCharacter: Dictionary = {}
 var lootListsByBattle: Dictionary = {}
@@ -47,7 +49,10 @@ var sexActivities: Dictionary = {}
 var sexActivitiesReferences: Dictionary = {}
 var fetishes: Dictionary = {}
 var sexGoals: Dictionary = {}
+var sexTypes: Dictionary = {}
 var gameExtenders: Dictionary = {}
+var computers: Dictionary = {}
+var fluids: Dictionary = {}
 
 var bodypartStorageNode
 
@@ -66,8 +71,43 @@ func hasModSupport():
 
 func getLoadedMods():
 	return loadedMods
+	
+func getModsFolder() -> String:
+	var modsFolder = "user://mods"
+	if(OS.get_name() == "Android"):
+		#var permissions: Array = OS.get_granted_permissions() #for Godot 3 branch
+		#if permissions.has("android.permission.READ_EXTERNAL_STORAGE"):
+		var externalDir:String = OS.get_system_dir(OS.SYSTEM_DIR_DOCUMENTS)
+		var finalDir = externalDir.plus_file("BDCCMods")
+		modsFolder = finalDir
+		var _ok = Directory.new().make_dir(modsFolder)
+	return modsFolder
+	
+func getRawModList():
+	var result = []
+	
+	var modsFolder = getModsFolder()
+	
+	var dir = Directory.new()
+	if dir.open(modsFolder) == OK:
+		dir.list_dir_begin()
+		var file_name = dir.get_next()
+		while file_name != "":
+			if dir.current_is_dir():
+				pass
+			else:
+				if(file_name.get_extension() in ["pck", "zip"]):
+					var full_path = modsFolder.plus_file(file_name)
+					#print("Registered mod: " + full_path)
+					#var _ok = ProjectSettings.load_resource_pack(full_path)
+					#if(_ok):
+					result.append(full_path)
+			file_name = dir.get_next()
+	else:
+		Log.printerr("An error occurred when trying to access the path "+modsFolder)
+	return result
 
-func loadMods():
+func checkModSupport():
 	# If we're in editor we have to do this silly thing
 	# read more here: https://github.com/godotengine/godot/issues/19815
 	if(OS.has_feature("editor")):
@@ -77,7 +117,17 @@ func loadMods():
 			return
 	else:
 		modsSupport = true
-	
+
+func loadModOrder(theModOrder):
+	for modEntry in theModOrder:
+		if(modEntry["disabled"]):
+			continue
+		
+		var _ok = ProjectSettings.load_resource_pack(modEntry["path"])
+		if(_ok):
+			loadedMods.append(modEntry["name"])
+
+func loadMods():
 	var modsFolder = "user://mods"
 	if(OS.get_name() == "Android"):
 		#var permissions: Array = OS.get_granted_permissions() #for Godot 3 branch
@@ -107,7 +157,8 @@ func loadMods():
 	
 
 func _init():
-	loadMods()
+	checkModSupport()
+	#loadMods()
 	
 	bodypartStorageNode = Node.new()
 	add_child(bodypartStorageNode)
@@ -189,7 +240,7 @@ func getDonationDataString():
 	newText += "Thank you [color=red]<3[/color][/center]"
 	return newText
 
-func _ready():
+func registerEverything():
 	var start = OS.get_ticks_usec()
 	
 	startLoadingDonationData()
@@ -217,9 +268,11 @@ func _ready():
 	registerItemFolder("res://Inventory/Items/BDSM/")
 	registerItemFolder("res://Inventory/Items/StaticBDSM/")
 	registerItemFolder("res://Inventory/Items/Weapons/")
+	registerItemFolder("res://Inventory/Items/Clothes/")
 	
 	registerBuffFolder("res://Inventory/Buffs/")
 	
+	registerLootTableFolder("res://Inventory/LootTable/")
 	registerLootListFolder("res://Inventory/LootLists/")
 	
 	registerStat("res://Skills/Stat/AgilityStat.gd")
@@ -244,6 +297,8 @@ func _ready():
 		var worker_time2 = (end2-start2)/1000000.0
 		Log.print("SCENES initialized in: %s seconds" % [worker_time2])
 	
+	registerFluidsFolder("res://Player/Fluids/Fluids/")
+	
 	registerCharacterFolder("res://Characters/")
 	registerCharacterFolder("res://Characters/Generic/")
 	
@@ -261,6 +316,7 @@ func _ready():
 	registerSexActivitiesFolder("res://Game/SexEngine/SexActivity/")
 	registerFetishesFolder("res://Game/SexEngine/Fetish/")
 	registerSexGoalsFolder("res://Game/SexEngine/Goal/")
+	registerSexTypeFolder("res://Game/SexEngine/SexType/")
 	
 	registerStatusEffectFolder("res://StatusEffect/")
 	
@@ -281,6 +337,8 @@ func _ready():
 	OPTIONS.checkImagePackOrder(imagePacks)
 	
 	registerGameExtenderFolder("res://Game/GameExtenders/Extenders/")
+	
+	registerComputerFolder("res://Game/Computer/")
 	
 	registerModulesFolder("res://Modules/")
 	sortFightClubFighters()
@@ -307,6 +365,28 @@ func generateNPCUniqueID():
 func getGameVersionString():
 	return str(game_version_major)+"."+str(game_version_minor)+"."+str(game_version_revision)+str(game_version_suffix)
 
+func getGameVersionStringNoSuffix():
+	return str(game_version_major)+"."+str(game_version_minor)+"."+str(game_version_revision)
+
+func isVersionCompatible(otherversion:String):
+	otherversion = otherversion.strip_edges()
+	
+	if(otherversion == "*"):
+		return true
+	if(otherversion != getGameVersionStringNoSuffix()):
+		return false
+	return true
+
+func isVersionListHasCompatible(versionlist):
+	if(!(versionlist is String)):
+		return false
+	
+	var splitted = versionlist.split(",", false)
+	for theversion in splitted:
+		if(isVersionCompatible(theversion)):
+			return true
+	return false
+
 func registerScene(path: String, creator = null):
 	var scene = load(path)
 	if(!scene):
@@ -318,16 +398,36 @@ func registerScene(path: String, creator = null):
 	if(creator != null):
 		sceneCreators[sceneObject.sceneID] = creator
 
+func registerTemporaryScene(sceneScript:Script):
+	var sceneObject = sceneScript.new()
+	
+	if(!(sceneObject is SceneBase)):
+		return null
+	
+	var theID = sceneObject.sceneID
+	temporaryScenes[theID] = sceneScript
+	sceneObject.queue_free()
+	return theID
+
+func clearTemporaryScenes():
+	#for sceneID in temporaryScenes.keys():
+	#	temporaryScenes[sceneID].queue_free()
+	temporaryScenes.clear()
+
 func getSceneCreator(id: String):
 	if(!sceneCreators.has(id)):
 		return null
 	return sceneCreators[id]
 
 func createScene(id: String):
-	if(!scenes.has(id)):
+	if(!scenes.has(id) && !temporaryScenes.has(id)):
 		Log.printerr("ERROR: scene with the id "+id+" wasn't found")
 		return null
-	var scene = scenes[id].new()
+	var scene
+	if(temporaryScenes.has(id)):
+		scene = temporaryScenes[id].new()
+	else:
+		scene = scenes[id].new()
 	scene.name = scene.sceneID
 	return scene
 
@@ -418,6 +518,16 @@ func registerCharacterFolder(folder: String):
 			file_name = dir.get_next()
 	else:
 		Log.printerr("An error occurred when trying to access the path "+folder)
+
+func characterExists(id:String):
+	if(id == "pc"):
+		return GM.pc != null
+	
+	if(GM.main != null):
+		var mainCharacter = GM.main.getCharacter(id)
+		if(mainCharacter != null):
+			return true
+	return false
 
 func getCharacter(id: String):
 	if(id == "pc"):
@@ -1260,3 +1370,93 @@ func getGameExtender(id: String):
 
 func getGameExtenders():
 	return gameExtenders
+
+
+func registerLootTable(path: String):
+	var loadedClass = load(path)
+	var object = loadedClass.new()
+	
+	lootTables[object.id] = object
+
+func registerLootTableFolder(folder: String):
+	var scripts = getScriptsInFolder(folder)
+	for scriptPath in scripts:
+		registerLootTable(scriptPath)
+
+func getLootTable(id: String):
+	if(lootTables.has(id)):
+		return lootTables[id]
+	else:
+		Log.printerr("ERROR: loot table with the id "+id+" wasn't found")
+		return null
+
+func getLootTables():
+	return lootTables
+
+
+
+func registerComputer(path: String):
+	var loadedClass = load(path)
+	var object = loadedClass.new()
+	
+	computers[object.id] = loadedClass
+
+func registerComputerFolder(folder: String):
+	var scripts = getScriptsInFolder(folder)
+	for scriptPath in scripts:
+		registerComputer(scriptPath)
+
+func createComputer(id: String):
+	if(computers.has(id)):
+		return computers[id].new()
+	else:
+		Log.printerr("ERROR: computer with the id "+id+" wasn't found")
+		return null
+
+func getComputers():
+	return computers
+
+
+func registerFluid(path: String):
+	var loadedClass = load(path)
+	var object = loadedClass.new()
+	
+	fluids[object.id] = object
+
+func registerFluidsFolder(folder: String):
+	var scripts = getScriptsInFolder(folder)
+	for scriptPath in scripts:
+		registerFluid(scriptPath)
+
+func getFluid(id: String):
+	if(fluids.has(id)):
+		return fluids[id]
+	else:
+		Log.printerr("ERROR: fluid with the id "+id+" wasn't found")
+		return null
+
+func getFluids():
+	return fluids
+
+
+
+func registerSexType(path: String):
+	var loadedClass = load(path)
+	var object = loadedClass.new()
+	
+	sexTypes[object.id] = loadedClass
+
+func registerSexTypeFolder(folder: String):
+	var scripts = getScriptsInFolder(folder)
+	for scriptPath in scripts:
+		registerSexType(scriptPath)
+
+func createSexType(id: String):
+	if(sexTypes.has(id)):
+		return sexTypes[id].new()
+	else:
+		Log.printerr("ERROR: sex type with the id "+id+" wasn't found")
+		return null
+
+func getSexTypes():
+	return sexTypes

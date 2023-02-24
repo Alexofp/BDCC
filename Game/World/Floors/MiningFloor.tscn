@@ -57,14 +57,201 @@ astarConnectedTo = PoolStringArray( "eng_bay_corridor" )
 
 [node name="MiningRoom7" parent="." index="5" instance=ExtResource( 2 )]
 self_modulate = Color( 1, 1, 0.7, 1 )
+position = Vector2( -384, 0 )
+roomName = "Engineering bay"
+roomID = "eng_firstjunction"
+roomDescription = "Just a corridor that leads to many other rooms. Walls feature a yellow trim, showing that you are in engineering
+
+You also notice an air vent here that you can't quite reach. Maybe you can search for the other end"
+roomColor = 6
+gridColor = 5
+loctag_EngineersEncounter = true
+population = 2
+
+[node name="MiningRoom12" parent="." index="6" instance=ExtResource( 2 )]
+self_modulate = Color( 1, 1, 0.7, 1 )
 position = Vector2( -320, 0 )
 roomName = "Engineering bay"
 roomDescription = "Just a corridor that leads to many other rooms. Walls feature a yellow trim, showing that you are in engineering"
 roomColor = 6
 gridColor = 5
+loctag_EngineersEncounter = true
 population = 2
 
-[node name="MiningRoom8" parent="." index="6" instance=ExtResource( 2 )]
+[node name="MiningRoom13" parent="." index="7" instance=ExtResource( 2 )]
+self_modulate = Color( 1, 1, 0.7, 1 )
+position = Vector2( -448, 0 )
+roomName = "Engineering bay"
+roomDescription = "Just a corridor that leads to many other rooms. Walls feature a yellow trim, showing that you are in engineering"
+roomColor = 6
+gridColor = 5
+loctag_EngineersEncounter = true
+population = 2
+
+[node name="MiningRoom16" parent="." index="8" instance=ExtResource( 2 )]
+self_modulate = Color( 1, 1, 0.7, 1 )
+position = Vector2( -512, 0 )
+roomName = "Engineering bay"
+roomDescription = "Just a corridor that leads to many other rooms. Walls feature a yellow trim, showing that you are in engineering"
+roomColor = 6
+gridColor = 5
+loctag_EngineersEncounter = true
+population = 2
+
+[node name="MiningRoom17" parent="." index="9" instance=ExtResource( 2 )]
+self_modulate = Color( 1, 1, 0.7, 1 )
+position = Vector2( -576, 0 )
+roomName = "Engineering bay"
+roomDescription = "Just a corridor that leads to many other rooms. Walls feature a yellow trim, showing that you are in engineering"
+roomColor = 6
+gridColor = 5
+loctag_EngineersEncounter = true
+population = 2
+
+[node name="MiningRoom18" parent="." index="10" instance=ExtResource( 2 )]
+self_modulate = Color( 1, 1, 0.7, 1 )
+position = Vector2( -512, 64 )
+roomName = "Engineering bay"
+roomDescription = "Just a corridor that leads to many other rooms. Walls feature a yellow trim, showing that you are in engineering"
+roomColor = 6
+gridColor = 5
+loctag_EngineersEncounter = true
+population = 2
+
+[node name="MiningLoreComputerRoom" parent="." index="11" instance=ExtResource( 2 )]
+self_modulate = Color( 1, 1, 0.7, 1 )
+position = Vector2( -640, 0 )
+roomName = "Office"
+roomID = "eng_lorecomputerroom"
+roomDescription = "You enter some kind of office. A pretty cramped one, with metal walls and floor, dimly lit and equipped with a computer on a cluttered desk, a swiveling chair, a monitor displaying system updates, a small window into the space, a cooling unit and a little green plant."
+roomSprite = 5
+roomColor = 6
+gridColor = 5
+
+[node name="MiningRoom20" parent="." index="12" instance=ExtResource( 2 )]
+self_modulate = Color( 1, 1, 0.7, 1 )
+position = Vector2( -576, -64 )
+roomName = "Assembly Lab"
+roomID = "eng_assemblylab"
+roomDescription = "This room seems to be some kind of assembly lab. The first thing you notice is the eerie silence that hangs in the air. The workstations are cluttered with tools, spare parts and half-finished projects. The lighting is dim and flickering, casting long shadows across the room.
+
+You take a closer look at the projects that they are developing here. Some kind of androids? Hard to tell but you see remains of unfinished bodies, legs, heads of different species."
+roomColor = 6
+gridColor = 5
+population = 2
+lootable = true
+lootCredits = 2
+
+[node name="MiningRoom27" parent="." index="13" instance=ExtResource( 2 )]
+self_modulate = Color( 1, 1, 0.7, 1 )
+position = Vector2( -512, 320 )
+roomName = "Engineering bay"
+roomDescription = "Just a corridor that leads to many other rooms. Walls feature a yellow trim, showing that you are in engineering"
+roomColor = 6
+gridColor = 5
+loctag_EngineersEncounter = true
+population = 2
+
+[node name="MiningRoom28" parent="." index="14" instance=ExtResource( 2 )]
+self_modulate = Color( 1, 1, 0.7, 1 )
+position = Vector2( -448, 320 )
+roomName = "Engineering bay"
+roomDescription = "Just a corridor that leads to many other rooms. Walls feature a yellow trim, showing that you are in engineering"
+roomColor = 6
+gridColor = 5
+loctag_EngineersEncounter = true
+population = 2
+
+[node name="MiningRoom29" parent="." index="15" instance=ExtResource( 2 )]
+self_modulate = Color( 1, 1, 0.7, 1 )
+position = Vector2( -384, 320 )
+roomName = "Engineering bay"
+roomID = "eng_airventskip"
+roomDescription = "Just a corridor that leads to many other rooms. Walls feature a yellow trim, showing that you are in engineering
+
+You also notice an air vent here that is just big enough to fit you. You can probably use it to skip back to the entrance."
+roomColor = 6
+gridColor = 5
+population = 2
+
+[node name="MiningRoom30" parent="." index="16" instance=ExtResource( 2 )]
+self_modulate = Color( 1, 1, 0.7, 1 )
+position = Vector2( -384, 384 )
+roomName = "Control room"
+roomID = "eng_controlroom"
+roomDescription = "A room with many consoles and server racks"
+roomColor = 6
+gridColor = 5
+
+[node name="MiningRoom21" parent="." index="17" instance=ExtResource( 2 )]
+self_modulate = Color( 1, 1, 0.7, 1 )
+position = Vector2( -512, 128 )
+roomName = "Engineering bay"
+roomDescription = "Just a corridor that leads to many other rooms. Walls feature a yellow trim, showing that you are in engineering"
+roomColor = 6
+gridColor = 5
+loctag_EngineersEncounter = true
+population = 2
+
+[node name="MiningRoom22" parent="." index="18" instance=ExtResource( 2 )]
+self_modulate = Color( 1, 1, 0.7, 1 )
+position = Vector2( -576, 128 )
+roomName = "Engineering bay"
+roomDescription = "Just a corridor that leads to many other rooms. Walls feature a yellow trim, showing that you are in engineering"
+roomColor = 6
+gridColor = 5
+loctag_EngineersEncounter = true
+population = 2
+
+[node name="MiningRoom23" parent="." index="19" instance=ExtResource( 2 )]
+self_modulate = Color( 1, 1, 0.7, 1 )
+position = Vector2( -640, 128 )
+roomName = "Engineering Bay Storage"
+roomID = "eng_storage"
+roomDescription = "You notice rows of metallic shelves stacked with tools and equipment. The room is dimly lit, one of the lights flickers a lot."
+roomSprite = 4
+roomColor = 6
+gridColor = 5
+population = 2
+lootable = true
+lootTableId = "engineer"
+lootItemIds = PoolStringArray( "painkillers", "painkillers", "painkillers", "EnergyDrink", "EnergyDrink", "restraintkey", "restraintkey" )
+lootCredits = 3
+lootEveryXDays = 7
+
+[node name="MiningRoom24" parent="." index="20" instance=ExtResource( 2 )]
+self_modulate = Color( 1, 1, 0.7, 1 )
+position = Vector2( -512, 192 )
+roomName = "Engineering bay"
+roomDescription = "Just a corridor that leads to many other rooms. Walls feature a yellow trim, showing that you are in engineering"
+roomColor = 6
+gridColor = 5
+loctag_EngineersEncounter = true
+population = 2
+
+[node name="MiningRoom25" parent="." index="21" instance=ExtResource( 2 )]
+self_modulate = Color( 1, 1, 0.7, 1 )
+position = Vector2( -512, 256 )
+roomName = "Engineering bay"
+roomID = "eng_nearnura"
+roomDescription = "Just a corridor that leads to many other rooms. Walls feature a yellow trim, showing that you are in engineering"
+roomColor = 6
+gridColor = 5
+loctag_EngineersEncounter = true
+population = 2
+
+[node name="MiningRoom26" parent="." index="22" instance=ExtResource( 2 )]
+self_modulate = Color( 1, 1, 0.7, 1 )
+position = Vector2( -576, 256 )
+roomName = "Robotics lab"
+roomID = "eng_robotics"
+roomDescription = "An abandoned robotics lab"
+roomSprite = 4
+roomColor = 6
+gridColor = 5
+population = 2
+
+[node name="MiningRoom8" parent="." index="23" instance=ExtResource( 2 )]
 self_modulate = Color( 1, 1, 0.7, 1 )
 position = Vector2( -256, 64 )
 roomName = "Break room"
@@ -75,35 +262,58 @@ roomColor = 6
 gridColor = 5
 population = 2
 
-[node name="MiningRoom9" parent="." index="7" instance=ExtResource( 2 )]
+[node name="MiningRoom9" parent="." index="24" instance=ExtResource( 2 )]
 self_modulate = Color( 1, 1, 0.7, 1 )
-position = Vector2( -320, -64 )
-roomName = "Engineering bay"
-roomDescription = "Just a corridor that leads to many other rooms. Walls feature a yellow trim, showing that you are in engineering"
-canSouth = false
-roomColor = 6
-gridColor = 5
-population = 2
-
-[node name="MiningRoom10" parent="." index="8" instance=ExtResource( 2 )]
-self_modulate = Color( 1, 1, 0.7, 1 )
-position = Vector2( -320, -128 )
+position = Vector2( -384, -64 )
 roomName = "Engineering bay"
 roomDescription = "Just a corridor that leads to many other rooms. Walls feature a yellow trim, showing that you are in engineering"
 roomColor = 6
 gridColor = 5
+loctag_EngineersEncounter = true
 population = 2
 
-[node name="MiningRoom11" parent="." index="9" instance=ExtResource( 2 )]
+[node name="MiningRoom10" parent="." index="25" instance=ExtResource( 2 )]
 self_modulate = Color( 1, 1, 0.7, 1 )
-position = Vector2( -320, -192 )
+position = Vector2( -384, -128 )
 roomName = "Engineering bay"
-roomDescription = "Just a corridor that leads to many other rooms. Walls feature a yellow trim, showing that you are in engineering"
+roomDescription = "A corridor that consist out of a catwalk going through a rocky cave. This cave seems to be isolated from space, letting you breathe."
 roomColor = 6
 gridColor = 5
 population = 2
 
-[node name="MiningRoom5" parent="." index="10" instance=ExtResource( 2 )]
+[node name="MiningRoom11" parent="." index="26" instance=ExtResource( 2 )]
+self_modulate = Color( 1, 1, 0.7, 1 )
+position = Vector2( -384, -192 )
+roomName = "Engineering bay"
+roomDescription = "A corridor that consist out of a catwalk going through a rocky cave. This cave seems to be isolated from space, letting you breathe."
+roomColor = 6
+gridColor = 5
+population = 2
+
+[node name="MiningRoom14" parent="." index="27" instance=ExtResource( 2 )]
+self_modulate = Color( 1, 1, 0.7, 1 )
+position = Vector2( -448, -192 )
+roomName = "Engineering bay"
+roomID = "eng_neartransmitter"
+roomDescription = "A corridor that consist out of a catwalk going through a rocky cave. This cave seems to be isolated from space, letting you breathe.
+
+This is where the corridor ends. Before you is a giant old metal door that you can't seem to open no matter how you try. Near the door there are a few signs that tell you that there is a dangerous structure behind."
+roomColor = 6
+gridColor = 5
+
+[node name="MiningRoom15" parent="." index="28" instance=ExtResource( 2 )]
+self_modulate = Color( 1, 0.6, 0.6, 1 )
+position = Vector2( -512, -192 )
+roomName = "Bluespace transmitter"
+roomID = "eng_bluespacetransmitter"
+roomDescription = "A huge round room with the bluespace transmitter. In the middle of the room there is a big bluespace crystal shining"
+canEast = false
+roomSprite = 4
+roomColor = 2
+gridColor = 5
+population = 2
+
+[node name="MiningRoom5" parent="." index="29" instance=ExtResource( 2 )]
 self_modulate = Color( 1, 1, 0.7, 1 )
 position = Vector2( -192, 64 )
 roomName = "Workshop"
@@ -114,7 +324,7 @@ Heavily monitored by security cameras"
 roomColor = 6
 population = 2
 
-[node name="MiningTaviRoom" parent="." index="11" instance=ExtResource( 2 )]
+[node name="MiningTaviRoom" parent="." index="30" instance=ExtResource( 2 )]
 self_modulate = Color( 0.7, 0.7, 0.7, 1 )
 position = Vector2( 64, 0 )
 roomName = "Mineshafts"
@@ -122,7 +332,7 @@ roomID = "mining_taviroom"
 roomDescription = "A maintenance area that has some old equipment, most of it is broken"
 roomColor = 8
 
-[node name="MiningShafts" parent="." index="12" instance=ExtResource( 2 )]
+[node name="MiningShafts" parent="." index="31" instance=ExtResource( 2 )]
 self_modulate = Color( 0.5, 0.5, 0.5, 1 )
 position = Vector2( 0, -64 )
 roomName = "Mineshafts"
@@ -134,7 +344,7 @@ roomSprite = 4
 roomColor = 7
 population = 3
 
-[node name="MiningElevator" parent="." index="13" instance=ExtResource( 2 )]
+[node name="MiningElevator" parent="." index="32" instance=ExtResource( 2 )]
 self_modulate = Color( 1, 0.6, 0.6, 1 )
 position = Vector2( 0, 64 )
 roomName = "Elevator"

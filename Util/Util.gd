@@ -572,3 +572,17 @@ static func replaceIfNotNull(thestring, whattoreplace, replacewith):
 	if(thestring == null || !(thestring is String)):
 		return thestring
 	return thestring.replace(whattoreplace, replacewith)
+
+static func readFile(path):
+	var file = File.new()
+	var content = ""
+	if file.open(path, file.READ) == OK:
+		content = file.get_as_text()
+	file.close()
+	return content
+
+static func writeFile(path, content):
+	var file = File.new()
+	file.open(path, File.WRITE)
+	file.store_string(content)
+	file.close()

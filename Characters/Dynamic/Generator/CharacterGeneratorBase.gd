@@ -4,6 +4,10 @@ class_name CharacterGeneratorBase
 func makeBase(idprefix = "dynamicnpc", _args = {}):
 	var dynamicCharacter = DynamicCharacter.new()
 	dynamicCharacter.id = GM.main.generateCharacterID(idprefix)
+	
+	if(_args.has(NpcGen.Temporary) && _args[NpcGen.Temporary]):
+		dynamicCharacter.temporaryCharacter = true
+	
 	GM.main.addDynamicCharacter(dynamicCharacter)
 	return dynamicCharacter
 
@@ -332,4 +336,5 @@ func generate(_args = {}):
 	character.resetEquipment()
 	resetStats(character, _args)
 	pickNonStaticEquipment(character, _args)
+	character.updateNonBattleEffects()
 	return character

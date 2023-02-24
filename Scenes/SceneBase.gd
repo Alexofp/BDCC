@@ -16,6 +16,7 @@ var sceneTag = ""
 var sceneEndedFlag = false
 var sceneEndedArgs
 var showFightUI = false
+var sceneSavedItemsInv:LightInventory = LightInventory.new()
 
 func _run():
 	pass
@@ -49,6 +50,13 @@ func initScene(args = []):
 	checkSceneEnded()
 
 func run():
+	GM.pc.updateNonBattleEffects()
+	for id in currentCharactersVariants:
+		var character = GlobalRegistry.getCharacter(id)
+		if(!character):
+			continue
+		character.updateNonBattleEffects()
+	
 	GM.ui.clearText()
 	GM.ui.clearButtons()
 	GM.ui.clearUItextboxes()
@@ -60,13 +68,6 @@ func run():
 	else:
 		GM.ui.getCharactersPanel().switchToNormalMode()
 		
-	GM.pc.updateNonBattleEffects()
-	for id in currentCharactersVariants:
-		var character = GlobalRegistry.getCharacter(id)
-		if(!character):
-			continue
-		character.updateNonBattleEffects()
-
 	GM.pc.updateEffectPanel(GM.ui.getPlayerStatusEffectsPanel())
 	GM.ui.updateCharactersInPanel()
 	GM.ui.setSceneCreator(getSceneCreator())
@@ -80,8 +81,29 @@ func checkSceneEnded():
 		emit_signal("sceneEnded", sceneEndedArgs)
 		print("removing scene "+name)
 		
+		if(!sceneSavedItemsInv.isEmpty()):
+			var newItems = []
+			while(!sceneSavedItemsInv.isEmpty()):
+				var theItem = sceneSavedItemsInv.items.front()
+				sceneSavedItemsInv.removeItem(theItem)
+				newItems.append(theItem)
+			
+			runScene("LootingScene", [{"items": newItems}])
+			sceneSavedItemsInv.items.clear()
+		
 		queue_free()
-	
+
+func addItemToSavedItems(theItem):
+	if(theItem == null):
+		return
+	if(sceneSavedItemsInv.hasItem(theItem)):
+		return
+	sceneSavedItemsInv.addItem(theItem)
+
+func addFilledCondomToLootIfPerk(theItem):
+	if(GM.pc.hasPerk(Perk.CumKeepCondoms)):
+		addItemToSavedItems(theItem)
+
 func react(_action: String, _args):
 	var result = _react(_action, _args)
 	checkSceneEnded()
@@ -118,12 +140,13 @@ func hasCharacter(id: String):
 	return false
 
 func updateCharacter():
-	GM.ui.clearCharactersPanel()
-	for id in currentCharactersVariants:
-		var character = GlobalRegistry.getCharacter(id)
-		if(!character):
-			continue
-		GM.ui.addCharacterToPanel(id, currentCharactersVariants[id])
+	if(GM.main.getCurrentScene() == self):
+		GM.ui.clearCharactersPanel()
+		for id in currentCharactersVariants:
+			var character = GlobalRegistry.getCharacter(id)
+			if(!character):
+				continue
+			GM.ui.addCharacterToPanel(id, currentCharactersVariants[id])
 
 func clearCharacter():
 	currentCharactersVariants.clear()
@@ -182,7 +205,7 @@ func addButtonWithChecks(text: String, tooltip: String, method: String, args, ch
 		addDisabledButton(text, ButtonChecks.getPrefix(checks) + reasonText +tooltip)
 
 func addTextbox(id):
-	GM.ui.addUITextbox(id)
+	return GM.ui.addUITextbox(id)
 
 func getTextboxData(id):
 	return GM.ui.getUIdata(id)
@@ -268,6 +291,10 @@ func playAnimation(theSceneID, theActionID, args = {}):
 	if(GM.main != null):
 		GM.main.playAnimation(theSceneID, theActionID, args)
 
+func playAnimationForceReset(theSceneID, theActionID, args = {}):
+	if(GM.main != null):
+		GM.main.playAnimationForceReset(theSceneID, theActionID, args)
+
 func saveData():
 	var data = {}
 	data["state"] = state
@@ -275,6 +302,7 @@ func saveData():
 	data["sceneTag"] = sceneTag
 	data["sceneEndedFlag"] = sceneEndedFlag
 	data["sceneEndedArgs"] = sceneEndedArgs
+	data["sceneSavedItemsInv"] = sceneSavedItemsInv.saveData()
 	
 	return data
 
@@ -285,3 +313,4 @@ func loadData(data):
 	sceneEndedFlag = SAVE.loadVar(data, "sceneEndedFlag", false)
 	sceneEndedArgs = SAVE.loadVar(data, "sceneEndedArgs", null)
 	updateCharacter()
+	sceneSavedItemsInv.loadData(SAVE.loadVar(data, "sceneSavedItemsInv", {}))

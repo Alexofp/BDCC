@@ -16,6 +16,12 @@ func addInterest(topicID, reaction):
 func customBestTopicComparison(a, b):
 	return a[2] > b[2]
 
+func getInterestValue(topicID):
+	if(interests.has(topicID)):
+		var interestLikes = interests[topicID]
+		return Interest.getValue(interestLikes)
+	return 0.0
+
 func getTopicValue(topicID, _pc):
 	var topicGroup: TopicBase = GlobalRegistry.getLustTopic(topicID)
 	

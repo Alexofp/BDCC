@@ -8,6 +8,7 @@ enum {
 	NotHandsBlocked,
 	NotArmsRestrained,
 	NotLegsRestrained,
+	NotBlindfolded,
 	SkillCheck,
 	StatCheck,
 	PerkCheck,
@@ -15,6 +16,7 @@ enum {
 	HasReachablePenis,
 	HasReachableVagina,
 	HasReachableAnus,
+	HasReachableVaginaOrAnus,
 	HasPenis,
 	HasVagina,
 	NotStunned,
@@ -37,6 +39,8 @@ static func getReasonText(reason):
 		return "You can't do this while your arms are restrained"
 	if(reason == NotLegsRestrained):
 		return "You can't do this while your legs are restrained"
+	if(reason == NotBlindfolded):
+		return "You can't do this while blindfolded"
 	if(reason == HasCondoms):
 		return "You don't have any condoms"
 	if(reason == HasReachablePenis):
@@ -45,6 +49,8 @@ static func getReasonText(reason):
 		return "You need to have a reachable pussy"
 	if(reason == HasReachableAnus):
 		return "You need to have a reachable anus"
+	if(reason == HasReachableVaginaOrAnus):
+		return "You need to have a reachable pussy or anus"
 	if(reason == HasPenis):
 		return "You need to have a dick"
 	if(reason == HasVagina):
@@ -89,6 +95,9 @@ static func check(checks: Array):
 		if(reason == NotLegsRestrained):
 			if(GM.pc.hasBoundLegs()):
 				return reason
+		if(reason == NotBlindfolded):
+			if(GM.pc.isBlindfolded()):
+				return reason
 		if(reason == SkillCheck):
 			var skill: SkillBase = GM.pc.getSkillsHolder().getSkill(args[1])
 			if(skill == null || skill.getLevel() < args[2]):
@@ -110,6 +119,9 @@ static func check(checks: Array):
 				return reason
 		if(reason == HasReachableAnus):
 			if(!GM.pc.hasReachableAnus()):
+				return reason
+		if(reason == HasReachableVaginaOrAnus):
+			if(!GM.pc.hasReachableAnus() && !GM.pc.hasReachableVagina()):
 				return reason
 		if(reason == HasPenis):
 			if(!GM.pc.hasPenis()):

@@ -416,7 +416,12 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.267793, 3.512, -0.300454 )
 boneId = "Hand.R"
 zoneName = "hand.R"
 
-[node name="PartStatePicker" parent="." index="5" instance=ExtResource( 6 )]
+[node name="AttachmentProxy4" parent="." index="5" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.168, 3.512, 0.461841 )
+boneId = "Hand.L"
+zoneName = "hand.L"
+
+[node name="PartStatePicker" parent="." index="6" instance=ExtResource( 6 )]
 state = "gloves"
 
 [node name="PartState" parent="PartStatePicker" index="0" instance=ExtResource( 7 )]

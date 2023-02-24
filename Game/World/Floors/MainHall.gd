@@ -97,21 +97,6 @@ func _on_MainGreenhousesJumpable_onReact(_room, key):
 		GM.main.reRun()
 		GM.main.addMessage("You successfully jumped over the railing")
 
-
-func _on_MainGreenhouses9_onEnter(room):
-	if(!GM.main.getModuleFlag("CellblockModule", "Cellblock_GreenhouseFoundChip", false)):
-		room.saynn("You notice a credit chip under one of the crates, huh.")
-		
-		room.addButton("Grab chip", "Ohh, whats this", "grabchip")
-
-
-func _on_MainGreenhouses9_onReact(_room, key):
-	if(key == "grabchip"):
-		GM.main.setModuleFlag("CellblockModule", "Cellblock_GreenhouseFoundChip", true)
-		GM.pc.addCredits(3)
-		GM.main.addMessage("You looted a chip with 3 work credits!")
-		GM.main.reRun()
-
 func _on_MainHallRoom9_onEnter(room):
 	room.addButton("Try stocks", "Stick your head into them out of curiosity", "stocks")
 
@@ -123,8 +108,11 @@ func _on_MainHallRoom9_onReact(room, key):
 
 func _on_MainHallRoom21_onEnter(room):
 	room.addButton("Mirror", "Change your haircut", "mirror")
+	room.addButton("Toilet", "Find an empty stall", "toilet")
 
 
 func _on_MainHallRoom21_onReact(room, key):
 	if(key == "mirror"):
 		room.runScene("ChangeHaircutScene")
+	if(key == "toilet"):
+		room.runScene("ToiletScene")

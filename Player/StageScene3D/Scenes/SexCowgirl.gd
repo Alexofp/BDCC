@@ -61,6 +61,9 @@ func playAnimation(animID, _args = {}):
 	if(animID == "tease"):
 		state_machine.travel("Sex_CowgirlTease_1-loop")
 		state_machine2.travel("Sex_CowgirlTease_2-loop")
+	if(animID == "inside"):
+		state_machine.travel("Sex_CowgirlInside_1-loop")
+		state_machine2.travel("Sex_CowgirlInside_2-loop")
 	if(animID == "sex"):
 		state_machine.travel("Sex_Cowgirl_1-loop")
 		state_machine2.travel("Sex_Cowgirl_2-loop")

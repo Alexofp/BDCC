@@ -9,6 +9,7 @@ func _init():
 
 func _initScene(_args = []):
 	sexEngine = SexEngine.new()
+	sexEngine.setInventoryToUse(sceneSavedItemsInv)
 	
 	var tops = _args[0]
 	var bottoms = _args[1]
@@ -25,6 +26,13 @@ func _initScene(_args = []):
 			addCharacter(bottom)
 	
 	sexEngine.initPeople(tops, bottoms)
+	if(_args.size() > 2):
+		var typeargs = {}
+		if(_args.size() > 3):
+			typeargs = _args[3]
+		sexEngine.initSexType(_args[2], typeargs)
+	else:
+		sexEngine.initSexType(SexType.DefaultSex)
 	
 	#sexEngine.initPeople(top, "pc")
 	#sexEngine.initPeople(top, "rahi")
@@ -40,7 +48,6 @@ func _initScene(_args = []):
 	#sexEngine.initPeople(top, "pc")
 	#sexEngine.initPeople(top, "rahi")
 	#sexEngine.initPeople("alexrynard", "rahi")
-	sexEngine.generateGoals()
 	
 	sexEngine.start()
 	#addCharacter(top)
@@ -204,5 +211,6 @@ func loadData(data):
 	.loadData(data)
 	
 	sexEngine = SexEngine.new()
+	sexEngine.setInventoryToUse(sceneSavedItemsInv)
 	currentCategory = SAVE.loadVar(data, "currentCategory", [])
 	sexEngine.loadData(SAVE.loadVar(data, "sexEngine", {}))

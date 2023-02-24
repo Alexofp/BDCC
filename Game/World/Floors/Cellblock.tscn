@@ -58,10 +58,19 @@ roomColor = 4
 position = Vector2( 0, 128 )
 roomName = "Corridor"
 roomID = "cellblock_nearcells"
-roomDescription = "From here you see three cellblocks, orange, pink and red"
+roomDescription = "From here you see three cellblocks, orange, lilac and red"
 population = 1
 
-[node name="CellblockRoom9" parent="." index="7" instance=ExtResource( 2 )]
+[node name="CellblockRoom8" parent="." index="7" instance=ExtResource( 2 )]
+self_modulate = Color( 1, 0.6, 0.6, 1 )
+position = Vector2( 512, 128 )
+roomName = "Solitary"
+roomID = "solitary_cell"
+roomDescription = "A tiny cell for very unruly inmates"
+roomColor = 2
+gridColor = 2
+
+[node name="CellblockRoom9" parent="." index="8" instance=ExtResource( 2 )]
 self_modulate = Color( 1, 0.6, 0.6, 1 )
 position = Vector2( 64, 128 )
 roomName = "High-security cellblock"
@@ -70,7 +79,7 @@ roomDescription = "This block has very little lights and the ones that are here 
 roomColor = 2
 population = 1
 
-[node name="CellblockRoom12" parent="." index="8" instance=ExtResource( 2 )]
+[node name="CellblockRoom12" parent="." index="9" instance=ExtResource( 2 )]
 self_modulate = Color( 1, 0.6, 0.6, 1 )
 position = Vector2( 128, 128 )
 roomName = "My cell"
@@ -78,7 +87,7 @@ roomID = "cellblock_red_playercell"
 roomDescription = "((This will be your potential cell))"
 roomColor = 2
 
-[node name="CellblockRoom10" parent="." index="9" instance=ExtResource( 2 )]
+[node name="CellblockRoom10" parent="." index="10" instance=ExtResource( 2 )]
 self_modulate = Color( 1, 0.8, 0.6, 1 )
 position = Vector2( -64, 128 )
 roomName = "General-security cellblock"
@@ -87,7 +96,7 @@ roomDescription = "You see a long open space with many inmate cells, each one ha
 roomColor = 5
 population = 1
 
-[node name="CellblockRoom11" parent="." index="10" instance=ExtResource( 2 )]
+[node name="CellblockRoom11" parent="." index="11" instance=ExtResource( 2 )]
 self_modulate = Color( 1, 0.8, 0.6, 1 )
 position = Vector2( -128, 128 )
 roomName = "My cell"

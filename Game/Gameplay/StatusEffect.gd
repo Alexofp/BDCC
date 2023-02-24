@@ -50,6 +50,7 @@ const DrenchedInPiss = "DrenchedInPiss"
 const BreastsFull = "BreastsFull"
 const CumInflated = "CumInflated"
 const Exposed = "Exposed"
+const SoreNipplesAfterMilking = "SoreNipplesAfterMilking"
 
 # Useful effects
 const Yoga = "Yoga"

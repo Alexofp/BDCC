@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Game/Minigames/ClickAtTheRightTime/ClickAtTheRightTime.gd" type="Script" id=1]
 [ext_resource path="res://Game/Minigames/ClickAtTheRightTime/triangle.png" type="Texture" id=2]
+[ext_resource path="res://Game/Minigames/ClickAtTheRightTime/blind.png" type="Texture" id=3]
 
 [sub_resource type="StyleBoxFlat" id=3]
 bg_color = Color( 0, 0, 0, 1 )
@@ -24,6 +25,9 @@ bg_color = Color( 1, 0.572549, 0.160784, 1 )
 
 [sub_resource type="StyleBoxFlat" id=5]
 bg_color = Color( 0.6, 0, 0, 1 )
+
+[sub_resource type="StyleBoxFlat" id=7]
+bg_color = Color( 1, 0.890196, 0, 1 )
 
 [sub_resource type="StyleBoxTexture" id=6]
 texture = ExtResource( 2 )
@@ -63,9 +67,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 
 [node name="Panel" type="Panel" parent="GameScreen"]
-anchor_left = 0.2
+anchor_left = 0.05
 anchor_top = 0.5
-anchor_right = 0.8
+anchor_right = 0.95
 anchor_bottom = 0.5
 margin_top = -40.0
 margin_bottom = 40.0
@@ -85,6 +89,12 @@ anchor_right = 0.78
 anchor_bottom = 1.0
 custom_styles/panel = SubResource( 5 )
 
+[node name="Panel3" type="Panel" parent="GameScreen/Panel"]
+anchor_left = 0.32
+anchor_right = 0.38
+anchor_bottom = 1.0
+custom_styles/panel = SubResource( 7 )
+
 [node name="Cursor" type="Panel" parent="GameScreen/Panel"]
 anchor_left = 1.0
 anchor_top = 1.0
@@ -95,6 +105,17 @@ margin_top = -49.0
 margin_right = 10.0
 margin_bottom = 12.0
 custom_styles/panel = SubResource( 6 )
+
+[node name="BlindText" type="TextureRect" parent="GameScreen/Panel"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -32.0
+margin_top = 67.0
+margin_right = 32.0
+margin_bottom = 131.0
+texture = ExtResource( 3 )
 
 [node name="ProgressBar" type="ProgressBar" parent="GameScreen"]
 anchor_left = 0.35

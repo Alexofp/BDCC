@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=34 format=2]
 
 [ext_resource path="res://Player/Player3D/Doll3D.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Player/StageScene3D/BaseStageScene3D.tscn" type="PackedScene" id=2]
@@ -9,17 +9,14 @@
 [sub_resource type="AnimationNodeAnimation" id=24]
 animation = "HangingSexFast_1-loop"
 
+[sub_resource type="AnimationNodeAnimation" id=42]
+animation = "HangingSexTease_1-loop"
+
 [sub_resource type="AnimationNodeAnimation" id=25]
 animation = "HangingSexTease_1-loop"
 
 [sub_resource type="AnimationNodeAnimation" id=26]
 animation = "HangingSex_1-loop"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=27]
-xfade_time = 0.5
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=28]
-xfade_time = 0.5
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=29]
 xfade_time = 0.5
@@ -27,18 +24,33 @@ xfade_time = 0.5
 [sub_resource type="AnimationNodeStateMachineTransition" id=30]
 xfade_time = 0.5
 
+[sub_resource type="AnimationNodeStateMachineTransition" id=43]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=44]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=45]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=46]
+xfade_time = 0.5
+
 [sub_resource type="AnimationNodeStateMachine" id=31]
 states/HangingSexFast_1-loop/node = SubResource( 24 )
 states/HangingSexFast_1-loop/position = Vector2( 442, 246 )
+states/HangingSexInside_1-loop/node = SubResource( 42 )
+states/HangingSexInside_1-loop/position = Vector2( 458, 49 )
 states/HangingSexTease_1-loop/node = SubResource( 25 )
-states/HangingSexTease_1-loop/position = Vector2( 442, 89 )
+states/HangingSexTease_1-loop/position = Vector2( 469, -44 )
 states/HangingSex_1-loop/node = SubResource( 26 )
 states/HangingSex_1-loop/position = Vector2( 430, 162 )
-transitions = [ "HangingSexTease_1-loop", "HangingSex_1-loop", SubResource( 27 ), "HangingSex_1-loop", "HangingSexTease_1-loop", SubResource( 28 ), "HangingSex_1-loop", "HangingSexFast_1-loop", SubResource( 29 ), "HangingSexFast_1-loop", "HangingSex_1-loop", SubResource( 30 ) ]
+transitions = [ "HangingSex_1-loop", "HangingSexFast_1-loop", SubResource( 29 ), "HangingSexFast_1-loop", "HangingSex_1-loop", SubResource( 30 ), "HangingSexTease_1-loop", "HangingSexInside_1-loop", SubResource( 43 ), "HangingSexInside_1-loop", "HangingSexTease_1-loop", SubResource( 44 ), "HangingSexInside_1-loop", "HangingSex_1-loop", SubResource( 45 ), "HangingSex_1-loop", "HangingSexInside_1-loop", SubResource( 46 ) ]
 start_node = "HangingSexTease_1-loop"
+graph_offset = Vector2( -102, -191 )
 
 [sub_resource type="AnimationNodeBlendTree" id=32]
-graph_offset = Vector2( -167.821, 65.258 )
+graph_offset = Vector2( -188.821, -18.742 )
 nodes/StateMachine/node = SubResource( 31 )
 nodes/StateMachine/position = Vector2( 301.179, 143.258 )
 nodes/output/position = Vector2( 680, 180 )
@@ -56,17 +68,14 @@ filters = [ "Doll3D/Skeleton:Arm.L", "Doll3D/Skeleton:Arm.R", "Doll3D/Skeleton:F
 [sub_resource type="AnimationNodeAnimation" id=33]
 animation = "HangingSexFast_2-loop"
 
+[sub_resource type="AnimationNodeAnimation" id=47]
+animation = "HangingSexInside_2-loop"
+
 [sub_resource type="AnimationNodeAnimation" id=34]
 animation = "HangingSexTease_2-loop"
 
 [sub_resource type="AnimationNodeAnimation" id=35]
 animation = "HangingSex_2-loop"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=36]
-xfade_time = 0.5
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=37]
-xfade_time = 0.5
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=38]
 xfade_time = 0.5
@@ -74,15 +83,30 @@ xfade_time = 0.5
 [sub_resource type="AnimationNodeStateMachineTransition" id=39]
 xfade_time = 0.5
 
+[sub_resource type="AnimationNodeStateMachineTransition" id=48]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=49]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=50]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=51]
+xfade_time = 0.5
+
 [sub_resource type="AnimationNodeStateMachine" id=40]
 states/HangingSexFast_2-loop/node = SubResource( 33 )
 states/HangingSexFast_2-loop/position = Vector2( 344, 203 )
+states/HangingSexInside_2-loop/node = SubResource( 47 )
+states/HangingSexInside_2-loop/position = Vector2( 324, 72 )
 states/HangingSexTease_2-loop/node = SubResource( 34 )
-states/HangingSexTease_2-loop/position = Vector2( 344, 67 )
+states/HangingSexTease_2-loop/position = Vector2( 324, -2 )
 states/HangingSex_2-loop/node = SubResource( 35 )
 states/HangingSex_2-loop/position = Vector2( 324, 137 )
-transitions = [ "HangingSexTease_2-loop", "HangingSex_2-loop", SubResource( 36 ), "HangingSex_2-loop", "HangingSexTease_2-loop", SubResource( 37 ), "HangingSex_2-loop", "HangingSexFast_2-loop", SubResource( 38 ), "HangingSexFast_2-loop", "HangingSex_2-loop", SubResource( 39 ) ]
+transitions = [ "HangingSex_2-loop", "HangingSexFast_2-loop", SubResource( 38 ), "HangingSexFast_2-loop", "HangingSex_2-loop", SubResource( 39 ), "HangingSexTease_2-loop", "HangingSexInside_2-loop", SubResource( 48 ), "HangingSexInside_2-loop", "HangingSexTease_2-loop", SubResource( 49 ), "HangingSex_2-loop", "HangingSexInside_2-loop", SubResource( 50 ), "HangingSexInside_2-loop", "HangingSex_2-loop", SubResource( 51 ) ]
 start_node = "HangingSexTease_2-loop"
+graph_offset = Vector2( -80, -150 )
 
 [sub_resource type="AnimationNodeBlendTree" id=41]
 graph_offset = Vector2( -200.863, -6.3582 )

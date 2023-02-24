@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=35 format=2]
 
 [ext_resource path="res://GlobalTheme.tres" type="Theme" id=1]
 [ext_resource path="res://Game/TooltipDisplay.tscn" type="PackedScene" id=2]
@@ -10,10 +10,16 @@
 [ext_resource path="res://Game/PlayerPanel.tscn" type="PackedScene" id=8]
 [ext_resource path="res://UI/MapAndTimePanel.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Game/SmartCharacterPanel.tscn" type="PackedScene" id=10]
+[ext_resource path="res://UI/RichTextBoxEffects/ghost_richtexteffect.tres" type="RichTextEffect" id=11]
 [ext_resource path="res://UI/MainMenu/InGameMenu.tscn" type="PackedScene" id=12]
 [ext_resource path="res://UI/SkillsUI/SkillsUI.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Game/SmartScrollContainer.gd" type="Script" id=14]
 [ext_resource path="res://UI/DebugUI/DebugPanel.tscn" type="PackedScene" id=15]
+[ext_resource path="res://UI/RichTextBoxEffects/pulse_richtexteffect.tres" type="RichTextEffect" id=16]
+[ext_resource path="res://UI/RichTextBoxEffects/matrix_richtexteffect.tres" type="RichTextEffect" id=17]
+[ext_resource path="res://UI/RichTextBoxEffects/console_richtexteffect.tres" type="RichTextEffect" id=18]
+[ext_resource path="res://UI/RichTextBoxEffects/cuss_richtexteffect.tres" type="RichTextEffect" id=19]
+[ext_resource path="res://UI/RichTextBoxEffects/corrupt_richtexteffect.tres" type="RichTextEffect" id=20]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.207843, 0.133333, 0.364706, 1 )
@@ -247,6 +253,7 @@ custom_fonts/normal_font = ExtResource( 4 )
 bbcode_enabled = true
 fit_content_height = true
 selection_enabled = true
+custom_effects = [ ExtResource( 11 ), ExtResource( 17 ), ExtResource( 16 ), ExtResource( 18 ), ExtResource( 19 ), ExtResource( 20 ) ]
 
 [node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer2"]
 margin_top = 682.0

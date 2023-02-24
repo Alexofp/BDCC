@@ -27,6 +27,15 @@ func getGoals():
 		SexGoal.StraponVaginal: 1.0,
 	}
 
+func getSupportedSexTypes():
+	return {
+		SexType.DefaultSex: true,
+		SexType.StocksSex: true,
+	}
+
+func isStocksSex():
+	return getSexEngine().getSexTypeID() == SexType.StocksSex
+
 func canStartActivity(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexSubInfo):
 	if(!_domInfo.getChar().hasReachablePenis() && !_domInfo.getChar().isWearingStrapon()):
 		return false
@@ -323,7 +332,7 @@ func doDomAction(_id, _actionInfo):
 			if(!RNG.chance(getSub().getPenetrateChanceBy(usedBodypart, domID))):
 				getSub().gotOrificeStretchedBy(usedBodypart, domID, 0.1)
 				var text = RNG.pick([
-					"{dom.You} {dom.youVerb('try','tries')} "+getDickName()+" stretches {sub.your} "+RNG.pick(usedBodypartNames)+" out while trying to fit inside.",
+					"{dom.Your} "+getDickName()+" stretches {sub.your} "+RNG.pick(usedBodypartNames)+" out while trying to fit inside.",
 				])
 				affectSub(subInfo.fetishScore({fetishReceiving: 1.0}), 0.05, -0.2, -0.01)
 				affectDom(domInfo.fetishScore({fetishGiving: 1.0}), 0.05*domSensetivity(), -0.01)
@@ -428,7 +437,7 @@ func doDomAction(_id, _actionInfo):
 						"{dom.You} {dom.youVerb('manage')} to shove {dom.yourHis} knot into {sub.youHim}! ",
 					]) + text
 				
-				getDom().cumOnFloor()
+				getDom().cumInItem(condom)
 				domInfo.cum()
 				subInfo.addArousalSex(0.2)
 				satisfyGoals()
@@ -437,7 +446,7 @@ func doDomAction(_id, _actionInfo):
 				else:
 					state = "aftercumminginside"
 				
-				return {text=text}
+				return getSexEngine().combineData({text=text}, applyTallymarkIfNeededData(usedBodypart))
 		
 		var beingBredScore = subInfo.fetishScore({Fetish.BeingBred: 1.0})
 		if(beingBredScore < 0.0):
@@ -452,7 +461,7 @@ func doDomAction(_id, _actionInfo):
 		else:
 			state = "aftercumminginside"
 
-		return {text=text}
+		return getSexEngine().combineData({text=text}, applyTallymarkIfNeededData(usedBodypart))
 	if(_id == "cumpullout"):
 		var text = RNG.pick([
 			"{dom.You} {dom.youVerb('pull')} {dom.yourHis} "+getDickName()+" out and [b]cums all over {sub.your} butt[/b]!",
@@ -472,19 +481,20 @@ func doDomAction(_id, _actionInfo):
 					"{dom.You} {dom.youVerb('pull')} out, stuffing {dom.yourHis} condom! {dom.You} {dom.youVerb('dispose')} of it.",
 				])
 				condom.destroyMe()
-				getDom().cumOnFloor()
+				getSexEngine().saveCondomToLootIfPerk(condom)
+				getDom().cumInItem(condom)
 				domInfo.cum()
 				satisfyGoals()
 				state = ""
 				
-				return {text=text}
+				return getSexEngine().combineData({text=text}, applyTallymarkIfNeededData(usedBodypart))
 		
-		getSub().cummedOnBy(domID, BodilyFluids.FluidSource.Penis)
+		getSub().cummedOnBy(domID, FluidSource.Penis)
 		domInfo.cum()
 		satisfyGoals()
 		state = ""
 
-		return {text=text}
+		return getSexEngine().combineData({text=text}, applyTallymarkIfNeededData(usedBodypart))
 	if(_id == "continuefucking"):
 		gonnaCumOutside = false
 		state = "fucking"
@@ -530,6 +540,7 @@ func doDomAction(_id, _actionInfo):
 		if(condom != null):
 			text += " {dom.You} {dom.youVerb('dispose')} of {dom.yourHis} condom."
 			condom.destroyMe()
+			getSexEngine().saveCondomToLootIfPerk(condom)
 		
 		return {text = text}
 	
@@ -614,11 +625,21 @@ func getSubResistChance(baseChance, domAngerRemoval):
 
 func doSubAction(_id, _actionInfo):
 	if(_id == "subcum"):
+		var straponData = null
+		
 		if(isStraponSex()):
 			satisfyGoals()
+			
+			var strapon = getDom().getWornStrapon()
+			if(strapon.getFluids() != null && !strapon.getFluids().isEmpty()):
+				getSub().cummedInBodypartBy(usedBodypart, domID, FluidSource.Strapon)
+				straponData = {
+					text = "{dom.Your} strapon gets squeezed by {sub.your} "+RNG.pick(usedBodypartNames)+" enough for it to suddenly [b]release its contents inside {sub.youHim}[/b]!"
+				}
+			
 		getSub().cumOnFloor()
 		subInfo.cum()
-		return getGenericSubOrgasmData()
+		return getSexEngine().combineData(getGenericSubOrgasmData(), straponData)
 	
 	if(_id == "rub"):
 		#switchCurrentActivityTo("SexFuckTest2")
@@ -696,7 +717,7 @@ func doSubAction(_id, _actionInfo):
 		
 		var text = RNG.pick([
 			"{sub.You} "+moanText+" while being fucked!",
-			"{sub.You} "+moanText+" while having {dom.yourHis} "+RNG.pick(usedBodypartNames)+" used!",
+			"{sub.You} "+moanText+" while having {sub.yourHis} "+RNG.pick(usedBodypartNames)+" used!",
 			"{sub.You} "+moanText+" eagerly!",
 		])
 		domInfo.addAnger(-0.02)
@@ -717,7 +738,7 @@ func doSubAction(_id, _actionInfo):
 			
 			var text = RNG.pick([
 				"{sub.You} {sub.youVerb('try', 'tries')} to resist while being fucked!",
-				"{sub.You} {sub.youVerb('try', 'tries')} to resist while having {dom.yourHis} "+RNG.pick(usedBodypartNames)+" used!",
+				"{sub.You} {sub.youVerb('try', 'tries')} to resist while having {sub.yourHis} "+RNG.pick(usedBodypartNames)+" used!",
 				"{sub.You} {sub.youVerb('try', 'tries')} to make {dom.youHim} pull out!",
 			])
 			
@@ -737,17 +758,33 @@ func doSubAction(_id, _actionInfo):
 		return {text = text, subSay=subReaction(sexReactionPullOut)}
 
 func getAnimation():
+	if(isStocksSex()):
+		if(state in [""]):
+			return [StageScene.StocksSex, "tease", {npc=domID, pc=subID}]
+		if(state in ["aftercumminginside", "knotting"]):
+			return [StageScene.StocksSex, "inside", {npc=domID, pc=subID}]
+		if(domInfo.isCloseToCumming() || (isStraponSex() && subInfo.isCloseToCumming())):
+			return [StageScene.StocksSex, "fast", {npc=domID, pc=subID}]
+			
+		return [StageScene.StocksSex, "sex", {npc=domID, pc=subID}]
+	
 	if(getSub().hasBoundArms() || subInfo.isUnconscious()):
 		if(state in [""]):
 			return [StageScene.SexAllFours, "teaseflop", {pc=domID, npc=subID}]
+		if(state in ["aftercumminginside", "knotting"]):
+			return [StageScene.SexAllFours, "insideflop", {pc=domID, npc=subID}]
 		if(domInfo.isCloseToCumming() || (isStraponSex() && subInfo.isCloseToCumming())):
 			return [StageScene.SexAllFours, "fastflop", {pc=domID, npc=subID}]
+			
 		return [StageScene.SexAllFours, "sexflop", {pc=domID, npc=subID}]
 	else:
 		if(state in [""]):
 			return [StageScene.SexAllFours, "tease", {pc=domID, npc=subID}]
+		if(state in ["aftercumminginside", "knotting"]):
+			return [StageScene.SexAllFours, "inside", {pc=domID, npc=subID}]
 		if(domInfo.isCloseToCumming() || (isStraponSex() && subInfo.isCloseToCumming())):
 			return [StageScene.SexAllFours, "fast", {pc=domID, npc=subID}]
+			
 		return [StageScene.SexAllFours, "sex", {pc=domID, npc=subID}]
 
 func getDomCondom():

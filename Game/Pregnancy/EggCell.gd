@@ -98,12 +98,12 @@ func canImpregnate():
 func isImpregnated():
 	return isimpregnated
 
-func impregnatedBy(newfatherID):
+func impregnatedBy(fluidDNA):
 	if(isimpregnated):
 		return
 	
 	isimpregnated = true
-	fatherID = newfatherID
+	fatherID = fluidDNA.getCharacterID()
 	
 	var father = GlobalRegistry.getCharacter(fatherID)
 	var mother = GlobalRegistry.getCharacter(motherID)
@@ -112,18 +112,21 @@ func impregnatedBy(newfatherID):
 	if(father.hasPerk(Perk.StartNoHybrids) || mother.hasPerk(Perk.StartNoHybrids)):
 		allowHybrids = false
 	
-	resultSpecies = SpeciesCompatibility.generateChildSpecies(motherSpecies, father.getSpecies(), allowHybrids)
+	resultSpecies = SpeciesCompatibility.generateChildSpecies(motherSpecies, fluidDNA.getSpecies(), allowHybrids)
 	resultGender = NpcGender.generate()
 
-	print("EGGCELL IMPREGNATED BY "+str(newfatherID)+", species: "+str(resultSpecies)+", gender: "+NpcGender.getVisibleName(resultGender))
+	print("EGGCELL IMPREGNATED BY "+str(fatherID)+", species: "+str(resultSpecies)+", gender: "+NpcGender.getVisibleName(resultGender))
 
-func tryImpregnate(whosCum, amountML, eggMultiplier = 1.0, virility = 1.0, fertility = 1.0, crossSpeciesCompatibility = 0.0):
+func tryImpregnate(fluidDNA, amountML, eggMultiplier = 1.0, fertility = 1.0, crossSpeciesCompatibility = 0.0):
 	if(!canImpregnate()):
 		return false
 	
-	var father = GlobalRegistry.getCharacter(whosCum)
+	var virility = fluidDNA.getVirility()
 	
-	var crossSpeciesMod = SpeciesCompatibility.pregnancyChanceMod(motherSpecies, father.getSpecies())
+	if(!GlobalRegistry.characterExists(fluidDNA.getCharacterID())):
+		return false
+	
+	var crossSpeciesMod = SpeciesCompatibility.pregnancyChanceMod(motherSpecies, fluidDNA.getSpecies())
 	if(crossSpeciesCompatibility > 0.0):
 		crossSpeciesMod = min(crossSpeciesCompatibility, crossSpeciesMod)
 	if(crossSpeciesCompatibility < 0.0):
@@ -136,7 +139,7 @@ func tryImpregnate(whosCum, amountML, eggMultiplier = 1.0, virility = 1.0, ferti
 	#print(finalChance)
 	
 	if(RNG.chance(finalChance)):
-		impregnatedBy(whosCum)
+		impregnatedBy(fluidDNA)
 		return true
 	return false
 

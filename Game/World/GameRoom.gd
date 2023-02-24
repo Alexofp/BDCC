@@ -12,7 +12,7 @@ export(bool) var canNorth = true
 export(bool) var canEast = true
 export(bool) var canSouth = true
 
-export(RoomStuff.RoomSprite) var roomSprite = RoomStuff.RoomSprite.NONE
+export(RoomStuff.RoomSprite) var roomSprite = RoomStuff.RoomSprite.NONE setget setRoomSprite
 export(RoomStuff.RoomColor) var roomColor = RoomStuff.RoomColor.White setget onRoomChangeColor
 export(RoomStuff.RoomColor) var gridColor = RoomStuff.RoomColor.White setget onGridChangeColor
 const RoomColorToColor = {
@@ -51,8 +51,16 @@ signal onReact(room, key)
 export(bool) var loctag_Greenhouses = false
 export(bool) var loctag_MentalWard = false
 export(bool) var loctag_GuardsEncounter = false
+export(bool) var loctag_EngineersEncounter = false
 
 export(int, FLAGS, "Inmates", "Guards") var population = 0
+
+export(bool) var lootable = false
+export(String) var lootTableId = ""
+export(String) var lootAroundMessage = ""
+export(PoolStringArray) var lootItemIds = PoolStringArray()
+export(int) var lootCredits = 0
+export(int) var lootEveryXDays = 0
 
 var astarID
 export(PoolStringArray) var astarConnectedTo = PoolStringArray()
@@ -100,9 +108,14 @@ func setRoomGridColor(newColor):
 		gridColor = newColor
 		
 func setRoomSprite(newSprite):
+	if(newSprite == RoomStuff.RoomSprite.NONE):
+		roomSprite = newSprite
+		$Sprite.texture = null
+	
 	if(newSprite != roomSprite && sprites.has(newSprite)):
 		roomSprite = newSprite
-		roomSpriteObject.texture = sprites[roomSprite]
+		#roomSpriteObject.texture = sprites[roomSprite]
+		$Sprite.texture = sprites[roomSprite]
 	
 
 	

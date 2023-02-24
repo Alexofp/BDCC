@@ -133,7 +133,7 @@ func _run():
 
 		saynn("Quiet whining can be heard from him but obeys, turning towards the crowd and putting his paws up like a good kitty would. He then starts bouncing in place like he is riding an invisible cock, his pink cock cage bobbing up and down with small delay as he does that, his trapped cock leaking so much precum. The crowd reacts by yelling ‘Such a wet slut! Get on my cock! Bend over!’.")
 
-		saynn("He looks at you pleadingly, the nothing left of the alpha that you knew. You are still holding the key to his cage, deciding what to do next.")
+		saynn("He looks at you pleadingly, nothing left of the alpha that you knew. You are still holding the key to his cage, deciding what to do next.")
 
 		addButton("Enough", "That was some great humiliation", "enough")
 		addButtonWithChecks("Breed", "Give the slutty sissy what she wants", "breed", [], [ButtonChecks.HasReachablePenis])

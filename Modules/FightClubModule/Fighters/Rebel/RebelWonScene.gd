@@ -114,7 +114,7 @@ func _run():
 
 		saynn("[say=pc]That’s right, I’m fisting your ass. And you seem to enjoy it, what a butt whore.[/say]")
 
-		saynn("After the mare gets used to having a fist up her butt, you decide to go further. Your second arm joins the first but is directed towards the girl’s neglected pussy. You turn into a fist and start trying to slide it inside. It goes in way more easily, the folds were already half-spread because of the pressure on her ass. Eventually you manage to stuff both her holes at the same time. Even just having your fists inside makes the girl drip and moan softly.")
+		saynn("After the mare gets used to having a fist up her butt, you decide to go further. Your second arm joins the first but is directed towards the girl’s neglected pussy. You clench your hand into a fist and start trying to slide it inside. It goes in way more easily, the folds were already half-spread because of the pressure on her ass. Eventually you manage to stuff both her holes at the same time. Even just having your fists inside makes the girl drip and moan softly.")
 
 		saynn("[say=rebel]F-fuck..[/say]")
 

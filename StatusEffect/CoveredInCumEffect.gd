@@ -17,45 +17,67 @@ func getEffectName():
 	return "Messy"
 
 func getEffectDesc():
-	if(!character.isPlayer()):
-		return character.getName()+" is covered with cum"
+	var fluids = character.getFluids()
 	
 	var messLevel = character.getOutsideMessinessLevel()
-	var messFluids = character.getOutsideMessinessFluidList()
+	var messFluids = fluids.getFluidAmountByType()
+	var message = BodilyFluids.getOutsideMessinessMessage(messLevel, messFluids.keys())
 	
-	var message = BodilyFluids.getOutsideMessinessMessage(messLevel, messFluids)
+	var resultMessage = [message]
+	
+	for fluidID in messFluids:
+		var fluidObject = GlobalRegistry.getFluid(fluidID)
+		if(fluidObject == null):
+			continue
+		
+		var messDesc = fluidObject.getMessyDescription(character, messFluids[fluidID])
+		if(messDesc != null && messDesc != ""):
+			resultMessage.append(messDesc)
+	
+	resultMessage.append("On your body:\n"+Util.join(fluids.getContentsHumanReadableArray(), "\n"))
 
-	return message
+	return Util.join(resultMessage, "\n\n")
 
 func getBuffs():
-	if(!character.isPlayer()):
-		return [
-			buff(Buff.LustDamageBuff, [5]),
-			buff(Buff.ReceivedLustDamageBuff, [10]),
-		]
-	
+	var fluids = character.getFluids()
 	var messLevel = character.getOutsideMessinessLevel()
-	messLevel = min(messLevel, BodilyFluids.MaxMessinessLevel)
+	var messFluids = fluids.getFluidAmountByType()
+	
+	var result = []
+	if(messLevel > 1):
+		if(!character.hasPerk(Perk.CumSlut)):
+			result.append(buff(Buff.ReceivedLustDamageBuff, [10 * messLevel]))
+		result.append(buff(Buff.ExposureBuff, [10 * messLevel]))
+	
+	for fluidID in messFluids:
+		var fluidObject = GlobalRegistry.getFluid(fluidID)
+		if(fluidObject == null):
+			continue
+		
+		var messBuffs = fluidObject.getMessyBuffs(character, messFluids[fluidID])
+		if(messBuffs != null):
+			result.append_array(messBuffs)
 
-	if(messLevel <= 1):
-		return []
-		
-	if(character.hasPerk(Perk.CumSlut)):
-		return [
-			buff(Buff.LustDamageBuff, [5 * messLevel]),
-			buff(Buff.ExposureBuff, [10 * messLevel]),
-		]
-		
-	return [
-		buff(Buff.LustDamageBuff, [5 * messLevel]),
-		buff(Buff.ReceivedLustDamageBuff, [10 * messLevel]),
-		buff(Buff.ExposureBuff, [10 * messLevel]),
-	]
+	return result
 
 func getEffectImage():
+	var fluids = character.getFluids()
+	var dominantFluidID = fluids.getDominantFluidID()
+	if(dominantFluidID != null):
+		var fluidObject = GlobalRegistry.getFluid(dominantFluidID)
+		if(fluidObject != null):
+			return fluidObject.getStatusEffectPicture()
+	
 	return "res://Images/StatusEffects/splurt.png"
 
 func getIconColor():
+	var fluids = character.getFluids()
+	var dominantFluidID = fluids.getDominantFluidID()
+	if(dominantFluidID != null):
+		var fluidObject = GlobalRegistry.getFluid(dominantFluidID)
+		if(fluidObject != null):
+			return fluidObject.getStatusEffectColor()
+	
 	return IconColorPurple
 
 func combine(_args = []):

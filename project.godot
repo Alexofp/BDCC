@@ -52,7 +52,7 @@ _global_script_classes=[ {
 "base": "Object",
 "class": "BodilyFluids",
 "language": "GDScript",
-"path": "res://Game/Gameplay/BodilyFluids.gd"
+"path": "res://Player/Fluids/BodilyFluids.gd"
 }, {
 "base": "Object",
 "class": "BodyWritings",
@@ -139,6 +139,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Player/Bodyparts/BodypartVagina.gd"
 }, {
+"base": "Spatial",
+"class": "BoneHandle",
+"language": "GDScript",
+"path": "res://addons/bone_editor/BoneHandle.gd"
+}, {
 "base": "ItemState",
 "class": "BraState",
 "language": "GDScript",
@@ -219,6 +224,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Game/Pregnancy/ChildSystem.gd"
 }, {
+"base": "Reference",
+"class": "ComputerBase",
+"language": "GDScript",
+"path": "res://Game/Computer/ComputerBase.gd"
+}, {
 "base": "Object",
 "class": "ContentType",
 "language": "GDScript",
@@ -273,6 +283,11 @@ _global_script_classes=[ {
 "class": "EncounterSettings",
 "language": "GDScript",
 "path": "res://Game/SexEngine/EncounterSettings.gd"
+}, {
+"base": "CharacterGeneratorBase",
+"class": "EngineerGenerator",
+"language": "GDScript",
+"path": "res://Characters/Dynamic/Generator/EngineerGenerator.gd"
 }, {
 "base": "LootTableBase",
 "class": "EngineerLoot",
@@ -375,9 +390,34 @@ _global_script_classes=[ {
 "path": "res://UI/FlexGridContainer.gd"
 }, {
 "base": "Reference",
+"class": "FluidBase",
+"language": "GDScript",
+"path": "res://Player/Fluids/FluidBase.gd"
+}, {
+"base": "Reference",
+"class": "FluidDNA",
+"language": "GDScript",
+"path": "res://Player/Fluids/FluidDNA.gd"
+}, {
+"base": "Reference",
 "class": "FluidProduction",
 "language": "GDScript",
 "path": "res://Player/FluidProduction/FluidProduction.gd"
+}, {
+"base": "Object",
+"class": "FluidSource",
+"language": "GDScript",
+"path": "res://Player/Fluids/FluidSource.gd"
+}, {
+"base": "Reference",
+"class": "Fluids",
+"language": "GDScript",
+"path": "res://Player/Fluids/Fluids.gd"
+}, {
+"base": "Reference",
+"class": "GDUnzip",
+"language": "GDScript",
+"path": "res://Util/gdunzip.gd"
 }, {
 "base": "Reference",
 "class": "GameExtender",
@@ -477,7 +517,7 @@ _global_script_classes=[ {
 "base": "Reference",
 "class": "ItemBase",
 "language": "GDScript",
-"path": "res://Inventory/Items/ItemBase.gd"
+"path": "res://Inventory/ItemBase.gd"
 }, {
 "base": "Object",
 "class": "ItemCategory",
@@ -549,7 +589,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Game/LustCombat/LustInterests.gd"
 }, {
-"base": "Node",
+"base": "Control",
 "class": "MainScene",
 "language": "GDScript",
 "path": "res://Game/MainScene.gd"
@@ -575,6 +615,11 @@ _global_script_classes=[ {
 "path": "res://Game/Pregnancy/MenstrualCycle.gd"
 }, {
 "base": "Reference",
+"class": "ModEntry",
+"language": "GDScript",
+"path": "res://UI/ModBrowser/ModEntry.gd"
+}, {
+"base": "Reference",
 "class": "Module",
 "language": "GDScript",
 "path": "res://Modules/Module.gd"
@@ -598,6 +643,11 @@ _global_script_classes=[ {
 "class": "NpcCon",
 "language": "GDScript",
 "path": "res://Characters/Dynamic/NpcCon.gd"
+}, {
+"base": "Object",
+"class": "NpcFinder",
+"language": "GDScript",
+"path": "res://Characters/Dynamic/NpcFinder.gd"
 }, {
 "base": "Object",
 "class": "NpcGen",
@@ -628,6 +678,11 @@ _global_script_classes=[ {
 "class": "OrificeType",
 "language": "GDScript",
 "path": "res://Player/Orifice/OrificeType.gd"
+}, {
+"base": "Player",
+"class": "OverriddenPlayer",
+"language": "GDScript",
+"path": "res://Player/OverriddenPlayer.gd"
 }, {
 "base": "ItemState",
 "class": "PantiesState",
@@ -869,6 +924,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Game/SexEngine/SexSubInfo.gd"
 }, {
+"base": "Object",
+"class": "SexType",
+"language": "GDScript",
+"path": "res://Game/SexEngine/SexType.gd"
+}, {
+"base": "Reference",
+"class": "SexTypeBase",
+"language": "GDScript",
+"path": "res://Game/SexEngine/SexTypeBase.gd"
+}, {
 "base": "Reference",
 "class": "SexVoice",
 "language": "GDScript",
@@ -1026,6 +1091,7 @@ _global_script_class_icons={
 "BodypartSlot": "",
 "BodypartTail": "",
 "BodypartVagina": "",
+"BoneHandle": "",
 "BraState": "",
 "BreastsSize": "",
 "Buff": "",
@@ -1042,6 +1108,7 @@ _global_script_class_icons={
 "CharacterType": "",
 "Child": "",
 "ChildSystem": "",
+"ComputerBase": "",
 "ContentType": "",
 "CumProduction": "",
 "CycleStage": "",
@@ -1053,6 +1120,7 @@ _global_script_class_icons={
 "DynamicCharacter": "",
 "EggCell": "",
 "EncounterSettings": "",
+"EngineerGenerator": "",
 "EngineerLoot": "",
 "EscapeQuest": "",
 "EventBase": "",
@@ -1073,7 +1141,12 @@ _global_script_class_icons={
 "Flag": "",
 "FlagType": "",
 "FlexGridContainer": "",
+"FluidBase": "",
+"FluidDNA": "",
 "FluidProduction": "",
+"FluidSource": "",
+"Fluids": "",
+"GDUnzip": "",
 "GameExtender": "",
 "GameExtenderSystem": "",
 "GameParser": "",
@@ -1113,17 +1186,20 @@ _global_script_class_icons={
 "MedicalLoot": "",
 "MedicalModule": "",
 "MenstrualCycle": "",
+"ModEntry": "",
 "Module": "",
 "MyBoneAttachment": "",
 "MyProjectSettings": "",
 "NovaModule": "",
 "NpcCon": "",
+"NpcFinder": "",
 "NpcGen": "",
 "NpcGender": "",
 "NpcRank": "",
 "NurseGenerator": "",
 "Orifice": "",
 "OrificeType": "",
+"OverriddenPlayer": "",
 "PantiesState": "",
 "PartState": "",
 "PartStatePicker": "",
@@ -1172,6 +1248,8 @@ _global_script_class_icons={
 "SexReaction": "",
 "SexStance": "",
 "SexSubInfo": "",
+"SexType": "",
+"SexTypeBase": "",
 "SexVoice": "",
 "ShirtAndShortsState": "",
 "SimpleParser": "",
@@ -1203,7 +1281,7 @@ _global_script_class_icons={
 [application]
 
 config/name="BDCC"
-run/main_scene="res://UI/MainMenu/MainMenu.tscn"
+run/main_scene="res://UI/LaunchScreen/LaunchScreen.tscn"
 config/project_settings_override="user://override.cfg"
 boot_splash/image="res://Images/Splash/splash.png"
 boot_splash/fullsize=false

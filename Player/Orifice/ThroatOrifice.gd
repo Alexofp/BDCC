@@ -16,3 +16,9 @@ func getBaseResistance() -> float:
 
 func getComfortableInsertion() -> float:
 	return 8.0 + pow(looseness, 2.0)
+
+func getNaturalDrain() -> float:
+	return 100.0
+	
+func getOverstuffedSpill() -> float:
+	return 200.0

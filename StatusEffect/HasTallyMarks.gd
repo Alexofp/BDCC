@@ -69,7 +69,7 @@ func combine(_args = []):
 func getBuffs():
 	if(character.hasPerk(Perk.BDSMTallyMarks)):
 		return [
-			buff(Buff.LustDamageBuff, [1 * totalAmount])
+			buff(Buff.LustDamageBuff, [Util.mini(1 * totalAmount, 50)])
 		]
 	return []
 

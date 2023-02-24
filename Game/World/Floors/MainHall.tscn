@@ -86,6 +86,7 @@ position = Vector2( 0, 192 )
 roomName = "Main platform"
 roomID = "main_punishment_spot"
 roomDescription = "This is clearly the public punishment area. You see a few pillories, one-bar prisons and chain posts"
+roomSprite = 4
 population = 3
 
 [node name="MainHallRoom10" parent="." index="9" instance=ExtResource( 2 )]
@@ -374,6 +375,9 @@ roomColor = 1
 gridColor = 2
 loctag_Greenhouses = true
 population = 2
+lootable = true
+lootAroundMessage = "You notice a credit chip under one of the crates, huh."
+lootCredits = 3
 
 [node name="MainGreenhouses8" parent="." index="39" instance=ExtResource( 2 )]
 self_modulate = Color( 0.7, 1, 0.7, 1 )
@@ -600,6 +604,7 @@ population = 3
 self_modulate = Color( 0.7, 0.7, 0.7, 1 )
 position = Vector2( 128, 64 )
 roomName = "Main hall"
+roomID = "hall_ne_corner"
 roomDescription = "A very spacious hall with a huge raised platform in the middle"
 roomColor = 8
 population = 3
@@ -692,8 +697,6 @@ roomColor = 3
 [connection signal="onReact" from="MainStairs2" to="." method="_on_MainStairs2_onReact"]
 [connection signal="onEnter" from="MainHallRoom9" to="." method="_on_MainHallRoom9_onEnter"]
 [connection signal="onReact" from="MainHallRoom9" to="." method="_on_MainHallRoom9_onReact"]
-[connection signal="onEnter" from="MainGreenhouses9" to="." method="_on_MainGreenhouses9_onEnter"]
-[connection signal="onReact" from="MainGreenhouses9" to="." method="_on_MainGreenhouses9_onReact"]
 [connection signal="onEnter" from="MainGreenhousesJumpable" to="." method="_on_MainGreenhousesJumpable_onEnter"]
 [connection signal="onReact" from="MainGreenhousesJumpable" to="." method="_on_MainGreenhousesJumpable_onReact"]
 [connection signal="onEnter" from="MainVendomatRoom" to="." method="_on_MainVendomatRoom_onEnter"]

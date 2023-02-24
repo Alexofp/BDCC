@@ -300,15 +300,25 @@ func doDomAction(_id, _actionInfo):
 		if(condom != null):
 			text += " {dom.You} {dom.youVerb('dispose')} of {sub.yourHis} condom."
 			condom.destroyMe()
+			getSexEngine().saveCondomToLootIfPerk(condom)
 		
 		return {text = text}
 
 	if(_id == "domcum"):
 		getDom().cumOnFloor()
 		domInfo.cum()
+		var straponData = null
 		if(isStraponSex()):
 			satisfyGoals()
-		return getGenericDomOrgasmData()
+			
+			var strapon = getSub().getWornStrapon()
+			if(strapon.getFluids() != null && !strapon.getFluids().isEmpty()):
+				getDom().cummedInBodypartBy(usedBodypart, subID, FluidSource.Strapon)
+				straponData = {
+					text = "{sub.Your} strapon gets squeezed by {dom.your} "+RNG.pick(usedBodypartNames)+" enough for it to suddenly [b]release its contents inside {dom.youHim}[/b]!"
+				}
+			
+		return getSexEngine().combineData(getGenericDomOrgasmData(), straponData)
 	
 	if(_id in ["letsubcuminside", "letsubknotinside"]):
 		var wombText = RNG.pick([
@@ -366,7 +376,7 @@ func doDomAction(_id, _actionInfo):
 					" {sub.You} {sub.youVerb('moan')} as {sub.youHe} {sub.youVerb('fill')} the condom inside {dom.your} "+RNG.pick(usedBodypartNames)+"!",
 					" {sub.You} {sub.youVerb('moan')} as {sub.youHe} {sub.youVerb('stuff')} the condom in {dom.your} "+RNG.pick(usedBodypartNames)+" full of {sub.yourHis} "+RNG.pick(["cum", "seed", "jizz", "semen"])+"!",
 				])
-				getSub().cumOnFloor()
+				getSub().cumInItem(condom)
 				subInfo.cum()
 				domInfo.addArousalSex(0.05)
 				satisfyGoals()
@@ -377,6 +387,7 @@ func doDomAction(_id, _actionInfo):
 				
 				if(!knotSuccess):
 					condom.destroyMe()
+					getSexEngine().saveCondomToLootIfPerk(condom)
 					text += RNG.pick([
 						" {dom.You} {dom.youVerb('dispose')} of the used condom.",
 					])
@@ -411,7 +422,8 @@ func doDomAction(_id, _actionInfo):
 					" {sub.You} "+RNG.pick(["{sub.youVerb('fill')}", "{sub.youVerb('stuff')}"])+" {sub.yourHis} condom! {dom.You} {dom.youVerb('dispose')} of it.",
 				])
 				condom.destroyMe()
-				getSub().cumOnFloor()
+				getSexEngine().saveCondomToLootIfPerk(condom)
+				getSub().cumInItem(condom)
 				subInfo.cum()
 				satisfyGoals()
 				
@@ -421,7 +433,7 @@ func doDomAction(_id, _actionInfo):
 			" {sub.You} [b]{sub.youVerb('cum')} all over {sub.yourself}[/b]! Strings of {sub.yourHis} own "+RNG.pick(["cum", "seed", "semen"])+" land on {sub.yourHis} chest, leaving a mess.",
 		])
 		
-		getSub().cummedOnBy(subID, BodilyFluids.FluidSource.Penis)
+		getSub().cummedOnBy(subID, FluidSource.Penis)
 		subInfo.cum()
 		satisfyGoals()
 
@@ -655,7 +667,7 @@ func doSubAction(_id, _actionInfo):
 					"{sub.You} {sub.youVerb('fill')} the condom inside {dom.your} "+RNG.pick(usedBodypartNames)+" [b]without asking for permission[/b]!",
 					"{sub.You} {sub.youVerb('stuff')} the condom in {dom.your} "+RNG.pick(usedBodypartNames)+" full of {sub.yourHis} "+RNG.pick(["cum", "seed", "jizz", "semen"])+" [b]without asking for permission[/b]!",
 				])
-				getSub().cumOnFloor()
+				getSub().cumInItem(condom)
 				subInfo.cum()
 				domInfo.addArousalSex(0.05)
 				satisfyGoals()
@@ -684,6 +696,8 @@ func doSubAction(_id, _actionInfo):
 func getAnimation():
 	if(state in [""]):
 		return [StageScene.SexCowgirl, "tease", {pc=subID, npc=domID}]
+	if(state in ["knotting"]):
+		return [StageScene.SexCowgirl, "inside", {pc=subID, npc=domID}]
 	if(subInfo.isCloseToCumming() || (isStraponSex() && domInfo.isCloseToCumming())):
 		return [StageScene.SexCowgirl, "fast", {pc=subID, npc=domID}]
 	return [StageScene.SexCowgirl, "sex", {pc=subID, npc=domID}]

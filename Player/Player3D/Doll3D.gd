@@ -169,6 +169,8 @@ func addPartObject(slot, part: Spatial):
 		dollAttachmentZone.setProxy(attachmentProxy)
 		dollAttachmentZone.setSkeletonPath(dollAttachmentZone.get_path_to(getDollSkeleton().getSkeleton()))
 		attachmentProxy.dollAttachmentZone = dollAttachmentZone
+		dollAttachmentZone.shouldScaleWithBone = attachmentProxy.scaleWithBone
+			
 		
 		if(!dollAttachmentZones.has(attachmentProxy.zoneName)):
 			dollAttachmentZones[attachmentProxy.zoneName] = []
@@ -563,3 +565,50 @@ func applyBodyState(bodystate):
 #			scale.x = abs(scale.x)
 #		else:
 #			scale.x = -abs(scale.x)
+
+func calculateDifferences():
+	var skeleton:Skeleton = getDollSkeleton().getSkeleton()
+	
+	var result = {}
+	var ini = Transform.IDENTITY
+	
+	for boneID in range(skeleton.get_bone_count()):
+		var boneName = skeleton.get_bone_name(boneID)
+		
+		var pose:Transform = skeleton.get_bone_pose(boneID)
+		if(pose != ini):
+			var stuff = {}
+			if(pose.origin != ini.origin && pose.origin.length()>0.001):
+				stuff["p"] = [Util.roundF(pose.origin.x, 2), Util.roundF(pose.origin.y, 2), Util.roundF(pose.origin.z, 2)]
+			if(pose.basis.get_rotation_quat() != ini.basis.get_rotation_quat()):
+				var euler = pose.basis.get_euler()
+				stuff["a"] = [Util.roundF(euler.x, 2), Util.roundF(euler.y, 2), Util.roundF(euler.z, 2)]
+			#print(pose)
+			result[boneName] = stuff
+	
+	return result
+
+func applyData(data):
+	var skeleton:Skeleton = getDollSkeleton().getSkeleton()
+	
+	var ini:Transform = Transform.IDENTITY
+	
+	for boneIndex in range(skeleton.get_bone_count()):
+		var theboneID = skeleton.get_bone_name(boneIndex)
+		if(data.has(theboneID)):
+			var boneData = data[theboneID]
+			var a
+			if(boneData.has("a")):
+				a = boneData["a"]
+			else:
+				a = Vector3(0.0,0.0,0.0)
+			var p
+			if(boneData.has("p")):
+				p = boneData["p"]
+			else:
+				p = Vector3(0.0,0.0,0.0)
+			var b:Basis = Basis(Vector3(a[0], a[1], a[2]))
+			var t:Transform = Transform(b, Vector3(p[0], p[1], p[2]))
+			skeleton.set_bone_pose(boneIndex, t)
+		else:
+			skeleton.set_bone_pose(boneIndex, ini)

@@ -35,14 +35,28 @@ func getVisibleName(_lustState: LustCombatState, _args):
 	return "Self-feed milk"
 
 func getVisibleDescription(_lustState: LustCombatState, _args):
-	return "Squeeze your breasts and catch some of the milk into your mouth, restoring 50 stamina"
+	return "Squeeze your breasts and catch some of the milk into your mouth, relieving pain depending on the amount"
 
 func doAction(_lustState: LustCombatState, _args):
 	#_lustState.getCharacter().addLust(3)
 	
 	var pc:Player = _lustState.getCharacter()
 	pc.stimulateLactation()
-	pc.milk(0.2)
+	#pc.milk(0.2)
+	
+	var extraMessages = []
+	var fluids:Fluids = pc.getBodypart(BodypartSlot.Breasts).getFluids()
+	var fluidByAmount = fluids.getFluidAmountByType()
+	for fluidID in fluidByAmount:
+		var fluidObject:FluidBase = GlobalRegistry.getFluid(fluidID)
+		if(fluidObject == null):
+			continue
+		
+		var resultMessage = fluidObject.onSwallow(pc, fluidByAmount[fluidID] * 0.4)
+		if(resultMessage != null && resultMessage != ""):
+			extraMessages.append(resultMessage)
+	
+	fluids.transferTo(pc.getBodypart(BodypartSlot.Head), 0.4, 100.0)
 	
 	var text = ""
 	if(pc.hasBigBreasts()):
@@ -52,7 +66,7 @@ func doAction(_lustState: LustCombatState, _args):
 		text += "After enough stimulation, your nipples suddenly shoot a strong stream of {pc.milk} that is aimed directly into your mouth. You let out a moan while tasting your own product."
 		text += "\n\n"
 		
-		pc.addStamina(50)
+		#pc.addStamina(50)
 	else:
 		text += "You quickly reach your hands to your {pc.breasts} and squeeze them very tight while guiding the nipples towards your mouth. Your tits aren't big enough for you to reach them with your lips so you just knead them harder and open your mouth."
 		text += "\n\n"
@@ -60,7 +74,9 @@ func doAction(_lustState: LustCombatState, _args):
 		text += "After enough stimulation, your nipples suddenly shoot a strong stream of {pc.milk} that is aimed directly into your mouth. You let out a moan while tasting your own product."
 		text += "\n\n"
 		
-		pc.addStamina(50)
+		#pc.addStamina(50)
+
+	text += Util.join(extraMessages, " ")+"\n\n"
 
 	return {
 		text = text,

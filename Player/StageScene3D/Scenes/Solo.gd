@@ -34,6 +34,13 @@ func playAnimation(animID, _args = {}):
 	
 	updateSubAnims()
 	
-	var state_machine = animationTree["parameters/AnimationNodeStateMachine/playback"]
-	if(!stateMachineTravel(doll, state_machine, animID)):
-		Log.printerr("Action "+str(animID)+" is not found for stage "+str(id))
+	if(animID == "custom"):
+		animationTree.active = false
+		
+		doll.applyData(_args["anim"])
+	else:
+		animationTree.active = true
+		
+		var state_machine = animationTree["parameters/AnimationNodeStateMachine/playback"]
+		if(!stateMachineTravel(doll, state_machine, animID)):
+			Log.printerr("Action "+str(animID)+" is not found for stage "+str(id))

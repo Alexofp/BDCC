@@ -49,7 +49,8 @@ func _run():
 	if(state == "askforname"):
 		say("Enter the name of your character:")
 		
-		addTextbox("player_name")
+		var textBox:LineEdit = addTextbox("player_name")
+		var _ok = textBox.connect("text_entered", self, "onTextBoxEnterPressed")
 		
 		addButton("Confirm", "Choose this name", "setname")
 		
@@ -316,6 +317,9 @@ func _run():
 		saynn("[sayMale]Don’t worry cupcake, they will give you better ones[/sayMale]")
 		
 		addButton("Look around", "Take a good look around", "endthisscene")
+
+func onTextBoxEnterPressed(_new_text:String):
+	GM.main.pickOption("setname", [])
 
 func _react(_action: String, _args):
 	if(_action == "setname"):

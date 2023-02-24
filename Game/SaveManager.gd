@@ -130,7 +130,11 @@ func isUpdatingFromSaveVersion(oldSaveVersion: int):
 
 	return false
 
-func loadVar(data: Dictionary, key, nullvalue = null):
+func loadVar(data, key, nullvalue = null):
+	if(!(data is Dictionary)):
+		Log.printerr("Warning: Loaded key "+key+" is not a dictionary. Using "+str(nullvalue)+" as default value. "+Util.getStackFunction())
+		return nullvalue
+	
 	if(!data.has(key)):
 		Log.printerr("Warning: Save doesn't have key "+key+". Using "+str(nullvalue)+" as default value. "+Util.getStackFunction())
 		return nullvalue

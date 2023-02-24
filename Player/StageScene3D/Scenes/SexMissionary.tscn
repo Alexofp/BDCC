@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=33 format=2]
 
 [ext_resource path="res://Player/Player3D/Doll3D.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Player/StageScene3D/BaseStageScene3D.tscn" type="PackedScene" id=2]
@@ -15,17 +15,14 @@ filters = [ "Doll3D/Skeleton:Arm.L", "Doll3D/Skeleton:Arm.R", "Doll3D/Skeleton:F
 [sub_resource type="AnimationNodeAnimation" id=35]
 animation = "Sex_MissionaryFast_1-loop"
 
+[sub_resource type="AnimationNodeAnimation" id=53]
+animation = "Sex_MissionaryInside_1-loop"
+
 [sub_resource type="AnimationNodeAnimation" id=36]
 animation = "Sex_MissionaryTease_1-loop"
 
 [sub_resource type="AnimationNodeAnimation" id=37]
 animation = "Sex_Missionary_1-loop"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=38]
-xfade_time = 0.5
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=39]
-xfade_time = 0.5
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=40]
 xfade_time = 0.5
@@ -33,16 +30,30 @@ xfade_time = 0.5
 [sub_resource type="AnimationNodeStateMachineTransition" id=41]
 xfade_time = 0.5
 
+[sub_resource type="AnimationNodeStateMachineTransition" id=54]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=55]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=56]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=57]
+xfade_time = 0.5
+
 [sub_resource type="AnimationNodeStateMachine" id=42]
 states/Sex_MissionaryFast_1-loop/node = SubResource( 35 )
 states/Sex_MissionaryFast_1-loop/position = Vector2( 285, 216 )
+states/Sex_MissionaryInside_1-loop/node = SubResource( 53 )
+states/Sex_MissionaryInside_1-loop/position = Vector2( 285, 72 )
 states/Sex_MissionaryTease_1-loop/node = SubResource( 36 )
-states/Sex_MissionaryTease_1-loop/position = Vector2( 285, 68 )
+states/Sex_MissionaryTease_1-loop/position = Vector2( 285, 0 )
 states/Sex_Missionary_1-loop/node = SubResource( 37 )
 states/Sex_Missionary_1-loop/position = Vector2( 285, 140 )
-transitions = [ "Sex_MissionaryTease_1-loop", "Sex_Missionary_1-loop", SubResource( 38 ), "Sex_Missionary_1-loop", "Sex_MissionaryTease_1-loop", SubResource( 39 ), "Sex_Missionary_1-loop", "Sex_MissionaryFast_1-loop", SubResource( 40 ), "Sex_MissionaryFast_1-loop", "Sex_Missionary_1-loop", SubResource( 41 ) ]
+transitions = [ "Sex_Missionary_1-loop", "Sex_MissionaryFast_1-loop", SubResource( 40 ), "Sex_MissionaryFast_1-loop", "Sex_Missionary_1-loop", SubResource( 41 ), "Sex_MissionaryTease_1-loop", "Sex_MissionaryInside_1-loop", SubResource( 54 ), "Sex_MissionaryInside_1-loop", "Sex_MissionaryTease_1-loop", SubResource( 55 ), "Sex_MissionaryInside_1-loop", "Sex_Missionary_1-loop", SubResource( 56 ), "Sex_Missionary_1-loop", "Sex_MissionaryInside_1-loop", SubResource( 57 ) ]
 start_node = "Sex_MissionaryTease_1-loop"
-graph_offset = Vector2( -97, -19 )
+graph_offset = Vector2( -90, -75 )
 
 [sub_resource type="AnimationNodeBlendTree" id=43]
 graph_offset = Vector2( -330.299, 87.8486 )
@@ -60,17 +71,14 @@ node_connections = [ "output", 0, "CuffsBlend", "CuffsBlend", 0, "StateMachine",
 [sub_resource type="AnimationNodeAnimation" id=45]
 animation = "Sex_MissionaryFast_2-loop"
 
+[sub_resource type="AnimationNodeAnimation" id=58]
+animation = "Sex_MissionaryTease_2-loop"
+
 [sub_resource type="AnimationNodeAnimation" id=46]
 animation = "Sex_MissionaryTease_2-loop"
 
 [sub_resource type="AnimationNodeAnimation" id=47]
 animation = "Sex_Missionary_2-loop"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=48]
-xfade_time = 0.5
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=49]
-xfade_time = 0.5
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=50]
 xfade_time = 0.5
@@ -78,15 +86,30 @@ xfade_time = 0.5
 [sub_resource type="AnimationNodeStateMachineTransition" id=51]
 xfade_time = 0.5
 
+[sub_resource type="AnimationNodeStateMachineTransition" id=59]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=60]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=61]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=62]
+xfade_time = 0.5
+
 [sub_resource type="AnimationNodeStateMachine" id=52]
 states/Sex_MissionaryFast_2-loop/node = SubResource( 45 )
 states/Sex_MissionaryFast_2-loop/position = Vector2( 247, 235 )
+states/Sex_MissionaryInside_2-loop/node = SubResource( 58 )
+states/Sex_MissionaryInside_2-loop/position = Vector2( 247, 98 )
 states/Sex_MissionaryTease_2-loop/node = SubResource( 46 )
-states/Sex_MissionaryTease_2-loop/position = Vector2( 247, 95 )
+states/Sex_MissionaryTease_2-loop/position = Vector2( 247, 30 )
 states/Sex_Missionary_2-loop/node = SubResource( 47 )
 states/Sex_Missionary_2-loop/position = Vector2( 247, 166 )
-transitions = [ "Sex_MissionaryTease_2-loop", "Sex_Missionary_2-loop", SubResource( 48 ), "Sex_Missionary_2-loop", "Sex_MissionaryTease_2-loop", SubResource( 49 ), "Sex_Missionary_2-loop", "Sex_MissionaryFast_2-loop", SubResource( 50 ), "Sex_MissionaryFast_2-loop", "Sex_Missionary_2-loop", SubResource( 51 ) ]
+transitions = [ "Sex_Missionary_2-loop", "Sex_MissionaryFast_2-loop", SubResource( 50 ), "Sex_MissionaryFast_2-loop", "Sex_Missionary_2-loop", SubResource( 51 ), "Sex_MissionaryTease_2-loop", "Sex_MissionaryInside_2-loop", SubResource( 59 ), "Sex_MissionaryInside_2-loop", "Sex_MissionaryTease_2-loop", SubResource( 60 ), "Sex_Missionary_2-loop", "Sex_MissionaryInside_2-loop", SubResource( 61 ), "Sex_MissionaryInside_2-loop", "Sex_Missionary_2-loop", SubResource( 62 ) ]
 start_node = "Sex_MissionaryTease_2-loop"
+graph_offset = Vector2( -186, -125 )
 
 [sub_resource type="AnimationNodeBlendTree" id=44]
 graph_offset = Vector2( -322.532, 74.6842 )
