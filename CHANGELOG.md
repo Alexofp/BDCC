@@ -6,6 +6,30 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.0.21] - 2023-02-24
+### Added
+- Tavi's route is extended. ~100 pages of text. Help her try to contact the syndicate, find out more about her backstory. And more.
+- A semi-realistic computer hacking minigame that can be encountered during Tavi's content.
+- Get an ability to experience wooden horse torture during Tavi's content
+- A little encounter with a nurse android named Nur-A
+- Cum economy update! The way fluids are handled got heavily refactored. Collect fluids using a plastic bottle, a breast pump or by keeping used condoms. You can drink them or throw at your enemies using condoms. All of the interactions will have different effects depending on the fluids involved.
+- The selling price of a plastic bottle depends on the fluids inside it.
+- Breast pump. Allows you to milk your breasts. Breast pump mk2, the advanced version, milks you passively when worn.
+- A perk that allows you to keep used condoms after procedural sex or written scenes if they were involved.
+- All strapons now can be supplied with fluids. They will automatically 'cum' using these fluids when the sub cums.
+- The strapons that npcs put on can have cum lube in it. Or real cum with a very small chance
+- Horsecock dildo toy that can bought from The Announcer or by finding it during Tavi's content. Can be supplied with fluids that will be automatically 'injected' inside you when you ride it
+- Procedural sex now supports stocks. Added a few encounters into the stocks punishment that triggers them.
+- Npcs that like bodywritings might add a tallymark on you after each load. The lust damage from the perk got capped at 50%
+- Built-in Mod manager. Can be enabled in the options. Allows you to manage your mods.
+- Mod browser. Can be opened from the mod manager. Allows you to download mods straight from the game. I curate the mod list personally
+- The BDCC.pck file now automatically gets generated and updated on Android when needed. First-time launch might be slower because of that
+- A few new perks. Melee weapons damage, instant restraint escape, fluid experimenter
+- The struggling minigame is different if you're blindfolded.
+- Scene converter got a major overhaul. You can now write branching, add code that runs when picking an action and more without leaving google docs. Scene converter can now 'preview' scenes. You can even pick which savefile you wanna preview the scene on.
+- Kait got her portrait
+- Skills button only gets 'highlighted' with \[!\] if you can unlock new perks in that skill tree
+
 ## [0.0.20] - 2023-01-10
 ### Added
 - Sex animations! Almost every lewd scene now includes an animation for the dolls. Procedural sex included
@@ -192,7 +216,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Turn-based fighting
 - Initial player customization
 
-[Unreleased]: https://github.com/Alexofp/BDCC/compare/0.0.20...main
+[Unreleased]: https://github.com/Alexofp/BDCC/compare/0.0.21...main
+[0.0.21]: https://github.com/Alexofp/BDCC/compare/0.0.20...0.0.21
 [0.0.20]: https://github.com/Alexofp/BDCC/compare/0.0.19...0.0.20
 [0.0.19]: https://github.com/Alexofp/BDCC/compare/0.0.18...0.0.19
 [0.0.18]: https://github.com/Alexofp/BDCC/compare/0.0.17...0.0.18
