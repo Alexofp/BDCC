@@ -51,13 +51,13 @@ func _run():
 
 		saynn("He turns around and approaches the window, looking at the scenery. The outer space that has no end or beginning.")
 
-		saynn("[say=directortau]A thing is worth as much as others are willing to pay for it. Your life is insignificant, Tavi.[/say]")
+		saynn("[say=directortau]A thing is worth as much as others are willing to pay for it. Your life is insignificant.[/say]")
 
 		saynn("[say=pc]What about yours?[/say]")
 
 		saynn("He suddenly punches the glass.")
 
-		saynn("[say=directortau]I made all of this. You wouldn't exist without me. I have created you.[/say]")
+		saynn("[say=directortau]I created all of this. You wouldn't exist without me. I made you possible, Tavi.[/say]")
 
 		saynn("He turns around again and looks at you.")
 

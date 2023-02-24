@@ -100,6 +100,7 @@ func _run():
 
 
 	if(state == "stay"):
+		addCharacter("kait", ["naked"])
 		playAnimation(StageScene.SexMissionary, "fast", {
 			pc = "avy",
 			npc="kait",

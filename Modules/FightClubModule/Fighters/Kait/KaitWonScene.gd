@@ -152,6 +152,7 @@ func _run():
 
 
 	if(state == "breed_her"):
+		addCharacter("kait", ["naked"])
 		# (need cock)
 		playAnimation(StageScene.SexStanding, "sex", {
 			pc="pc", npc="kait", 

@@ -429,6 +429,7 @@ func _run():
 
 		addButton("Force her", "Help Kait undress and get into the stocks", "force_kait_to_undress")
 	if(state == "force_kait_to_undress"):
+		addCharacter("kait", ["naked"])
 		playAnimation(StageScene.Stocks, "idle", {pc="kait", bodyState={naked=true}})
 		saynn("Instead of waiting for her to come around to it, you reach your hands out and pull her shorts down, forcibly exposing the cat's fluffy crotch that has a cute pink pussy slit hiding in the middle. Kait tries to close her legs and cover all her bits, her tail wags a lot.")
 
@@ -484,6 +485,7 @@ func _run():
 
 		addButton("Stocks", "Throw her into the stocks", "kait_force_rough_stocks")
 	if(state == "kait_force_rough_stocks"):
+		addCharacter("kait", ["naked"])
 		playAnimation(StageScene.Stocks, "idle", {pc="kait", bodyState={naked=true}})
 		saynn("You find a free set of stocks and bring Kait to them. She doesn't seem to be wanting to bend so you give her a little incentive by pulling on her short hair. The cat hisses but eventually gives in, aligning her neck with the opening in the stocks and placing her paws into the smaller ones. You shut the top panel on her and lock the stocks, trapping the feline in there.")
 
