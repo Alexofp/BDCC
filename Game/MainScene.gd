@@ -1023,6 +1023,7 @@ func startUpdatingCharacter(charID):
 		var character = getCharacter(charID)
 		if(character != null):
 			character.processUntilTime(currentDay, timeOfDay)
+			character.updateNonBattleEffects()
 
 func generateCharacterID(beginPart = "dynamicnpc"):
 	var numID = GlobalRegistry.generateNPCUniqueID()
@@ -1047,8 +1048,7 @@ func canLootRoom(roomID):
 	return true
 
 func markRoomAsLooted(roomID):
-	if(!lootedRooms.has(roomID)):
-		lootedRooms[roomID] = getDays()
+	lootedRooms[roomID] = getDays()
 
 func isRoomLooted(roomID):
 	if(lootedRooms.has(roomID)):
