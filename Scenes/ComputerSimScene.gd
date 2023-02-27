@@ -191,3 +191,19 @@ func loadData(data):
 	computer.loadData(SAVE.loadVar(data, "computerData", {}))
 	currentCommand = SAVE.loadVar(data, "currentCommand", [])
 	inputMode = SAVE.loadVar(data, "inputMode", "buttons")
+
+func getDebugActions():
+	return [
+		{
+			"id": "instantWin",
+			"name": "Skip computer hack",
+			"args": [
+			],
+		},
+	]
+
+func doDebugAction(_id, _args = {}):
+	if(_id == "instantWin"):
+		computer.markFinished()
+		state = "finished"
+		GM.main.reRun()
