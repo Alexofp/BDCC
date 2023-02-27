@@ -12,6 +12,7 @@ var sceneReacts = {}
 var trackedVariables = {}
 var initSceneLines = []
 var reactInitLines = []
+var npcAssocs = {}
 
 var theGame:MainScene
 var testingScene = false
@@ -32,6 +33,7 @@ func reset():
 	trackedVariables = {}
 	initSceneLines.clear()
 	reactInitLines.clear()
+	npcAssocs.clear()
 
 func setCurrentRun(newcur):
 	currentRun = newcur
@@ -132,6 +134,16 @@ func _on_Button_pressed():
 			_i += 1
 			continue
 			
+		if(line.begins_with("%assoc ")):
+			var varStuff = line.substr(7)
+			var splitted = varStuff.split(" ")
+			var variableName = splitted[0]
+			splitted.remove(0)
+			var vairableValue = Util.join(splitted, " ")
+			
+			npcAssocs[variableName] = vairableValue
+			_i += 1
+			continue
 		
 		# Npcs saying things
 		if(line.begins_with("=")):
@@ -263,6 +275,15 @@ func _on_Button_pressed():
 		result.append("func _reactInit():")
 		for theLine in reactInitLines:
 			result.append('\t'+theLine)
+		result.append("")
+	
+	if(!npcAssocs.empty()):
+		result.append("func resolveCustomCharacterName(_charID):")
+		for charID in npcAssocs:
+			var resultedCharID = npcAssocs[charID]
+			
+			result.append("\tif(_charID == \""+charID+"\"):")
+			result.append("\t\treturn "+str(resultedCharID))
 		result.append("")
 	
 	result.append("func _run():")
