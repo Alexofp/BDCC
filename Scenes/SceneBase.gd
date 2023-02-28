@@ -218,6 +218,16 @@ func addExperienceToPlayer(ex: int, showMessage: bool = true):
 		addMessage("You received "+str(ex)+" experience")
 	GM.pc.addExperience(ex)
 
+func friskPlayer():
+	var foundAnything = false
+	for item in GM.pc.getInventory().getItemsWithTag(ItemTag.Illegal):
+		addMessage(item.getStackName()+" was taken away")
+		foundAnything = true
+	for item in GM.pc.getInventory().getEquippedItemsWithTag(ItemTag.Illegal):
+		addMessage(item.getStackName()+" was taken away")
+		foundAnything = true
+	return foundAnything
+
 func processTime(seconds: int):
 	GM.main.processTime(seconds)
 
