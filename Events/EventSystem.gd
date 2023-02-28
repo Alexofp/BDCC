@@ -2,6 +2,7 @@ extends Node
 class_name EventSystem
 
 var eventTriggers = {}
+var eventChecks = {}
 
 func _ready():
 	GM.ES = self
@@ -62,6 +63,22 @@ func checkButtonInput(method, args):
 		args[0].onButton(args[1], args[2])
 		return true
 	return false
+
+func addEventCheck(event, checkID):
+	if(!eventChecks.has(checkID)):
+		eventChecks[checkID] = []
+	
+	eventChecks[checkID].append(event)
+
+func eventCheck(checkID, args = []):
+	if(!eventChecks.has(checkID)):
+		return null
+	
+	for theEventCheck in eventChecks[checkID]:
+		var eventCheckData = theEventCheck.eventCheck(checkID, args)
+		if(eventCheckData != null):
+			return eventCheckData
+	return null
 
 func saveData():
 	var data = {}

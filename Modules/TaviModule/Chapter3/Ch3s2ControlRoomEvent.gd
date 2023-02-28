@@ -5,6 +5,7 @@ func _init():
 
 func registerTriggers(es):
 	es.addTrigger(self, Trigger.EnteringRoom, "eng_controlroom")
+	es.addEventCheck(self, "TaviBusy")
 	
 func run(_triggerID, _args):
 	if(GM.QS.isActive("Ch3TaviQuest") && !getFlag("TaviModule.ch3CompletedDoorHack")):
@@ -24,3 +25,7 @@ func onButton(_method, _args):
 	if(_method == "safe"):
 		runScene("Ch3s2AdvancedHackScene")
 		#setFlag("TaviModule.ch2AlexTalkedTo", true)
+
+func eventCheck(_checkID, _args = []):
+	if(GM.QS.isActive("Ch3TaviQuest") && !getFlag("TaviModule.ch3CompletedDoorHack")):
+		return {busy=true}
