@@ -17,6 +17,14 @@ func getFlags():
 		"Rahi_NotThereToday": flag(FlagType.Bool),
 		"Rahi_FirstTimePregnantHappened": flag(FlagType.Bool),
 		"Rahi_GaveBirthTimes": flag(FlagType.Number),
+		
+		"rahi1ElizaSceneHappened": flag(FlagType.Bool),
+		"rahi1ProtectedRahi": flag(FlagType.Bool),
+		"rahi2SceneHappened": flag(FlagType.Bool),
+		"rahi2Denied": flag(FlagType.Bool),
+		"rahi2SpilledBottle": flag(FlagType.Bool),
+		"rahi2KissedRahi": flag(FlagType.Bool),
+		"rahi2WonGuard": flag(FlagType.Bool),
 	}
 
 func _init():
@@ -32,6 +40,9 @@ func _init():
 		
 		"res://Modules/RahiModule/RahiFirstTimePregnantScene.gd",
 		"res://Modules/RahiModule/RahiEmbraceScene.gd",
+		
+		"res://Modules/RahiModule/1PreSlavery/rahi1ElizaScene.gd",
+		"res://Modules/RahiModule/1PreSlavery/rahi2RahiScene.gd",
 		]
 	characters = [
 		"res://Modules/RahiModule/RahiCharacter.gd",
@@ -46,6 +57,12 @@ func _init():
 		"res://Modules/RahiModule/ShowerEvent/RahiShowerEvent.gd",
 		
 		"res://Modules/RahiModule/RahiFirstTimePregnantEvent.gd",
+		
+		"res://Modules/RahiModule/1PreSlavery/rahi1ElizaEvent.gd",
+		"res://Modules/RahiModule/1PreSlavery/rahi2RahiEvent.gd",
+	]
+	quests = [
+		"res://Modules/RahiModule/RahiSlaveryQuest.gd",
 	]
 
 func resetFlagsOnNewDay():

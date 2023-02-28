@@ -20,3 +20,6 @@ func isMainQuest():
 
 func getPriority():
 	return 0
+
+func getFlag(flagID, defaultValue = null):
+	return GM.main.getFlag(flagID, defaultValue)
