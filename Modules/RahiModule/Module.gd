@@ -25,6 +25,7 @@ func getFlags():
 		"rahi2SpilledBottle": flag(FlagType.Bool),
 		"rahi2KissedRahi": flag(FlagType.Bool),
 		"rahi2WonGuard": flag(FlagType.Bool),
+		"rahi3SceneHappened": flag(FlagType.Bool),
 	}
 
 func _init():
@@ -43,6 +44,7 @@ func _init():
 		
 		"res://Modules/RahiModule/1PreSlavery/rahi1ElizaScene.gd",
 		"res://Modules/RahiModule/1PreSlavery/rahi2RahiScene.gd",
+		"res://Modules/RahiModule/1PreSlavery/rahi3RahiPassOutScene.gd",
 		]
 	characters = [
 		"res://Modules/RahiModule/RahiCharacter.gd",
@@ -60,6 +62,7 @@ func _init():
 		
 		"res://Modules/RahiModule/1PreSlavery/rahi1ElizaEvent.gd",
 		"res://Modules/RahiModule/1PreSlavery/rahi2RahiEvent.gd",
+		"res://Modules/RahiModule/1PreSlavery/rahi3RahiPassOutEvent.gd",
 	]
 	quests = [
 		"res://Modules/RahiModule/RahiSlaveryQuest.gd",

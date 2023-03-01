@@ -11,6 +11,9 @@ func getProgress():
 	
 	result.append("Rahi seems to have problems with alcohol. You should talk with her about that.")
 
+	if(getFlag("RahiModule.rahi3SceneHappened")):
+		result.append("Rahi had a strong case of alcohol poisoning. Visit her bench the next day to see if she is okay.")
+
 	return result
 
 func isVisible():
