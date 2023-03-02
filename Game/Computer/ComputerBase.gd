@@ -18,6 +18,12 @@ func learnCommand(command):
 func getCommands():
 	return learnedCommands
 
+func getTutorial():
+	return ""
+
+func progressTutorial():
+	pass
+
 func getOutput():
 	if(isIntro):
 		return introText
@@ -38,6 +44,7 @@ func inputCommand(_commandString:String):
 	lastOutput = reactToCommand(command, splitted, _commandString)
 	if(lastOutput == null):
 		lastOutput = ""
+	progressTutorial()
 	return lastOutput
 
 func reactToCommand(_command:String, _args:Array, _commandStringRaw:String):

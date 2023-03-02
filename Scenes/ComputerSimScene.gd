@@ -31,6 +31,10 @@ func _run():
 		else:
 			saynn(computer.getOutput())
 		
+		var tutorialText = computer.getTutorial()
+		if(tutorialText != null && tutorialText != ""):
+			saynn("[i]"+tutorialText+"[/i]")
+		
 		if(inputMode == "keyboard"):
 			say(">")
 			var textBox:LineEdit = addTextbox("textcommand")
