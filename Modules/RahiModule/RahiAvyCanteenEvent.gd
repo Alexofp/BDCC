@@ -10,6 +10,9 @@ func react(_triggerID, _args):
 	if(RNG.chance(50) || !GM.main.getModuleFlag("RahiModule", "Rahi_Introduced") || GM.main.getModuleFlag("RahiModule", "Rahi_CanteenSceneHappened")):
 		return false
 	
+	if(doEventCheck("RahiBusy") != null):
+		return false
+	
 	runScene("RahiAvyCanteenScene")
 	return true
 

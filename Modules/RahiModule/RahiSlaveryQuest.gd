@@ -14,6 +14,10 @@ func getProgress():
 	if(getFlag("RahiModule.rahi3SceneHappened")):
 		result.append("Rahi had a strong case of alcohol poisoning. Visit her bench the next day to see if she is okay.")
 
+	if(getFlag("RahiModule.rahi4SceneHappened")):
+		result.append("You saved Rahi. But now you gotta help her. Visit her cell after she gets some rest.")
+
+
 	return result
 
 func isVisible():
