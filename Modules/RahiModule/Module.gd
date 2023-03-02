@@ -30,6 +30,33 @@ func getFlags():
 		"rahi4SceneHappened": flag(FlagType.Bool),
 		"rahi4DayHappened": flag(FlagType.Number),
 		"rahi4SaidFix": flag(FlagType.Bool),
+		
+		"rahiSlavStage": flag(FlagType.Number),
+		
+		# Mood stuff (can go up and down)
+		"rahiObedience": flag(FlagType.Number), # raised by d/s actions/choices
+		"rahiAffection": flag(FlagType.Number), # raised by love actions
+		"rahiAddiction": flag(FlagType.Number), # lowers if you deny Rahi from drinking
+		"rahiUnfair": flag(FlagType.Number), # raises if you punish Rahi for no reason
+		"rahiSpoiled": flag(FlagType.Number), # raises if you reward Rahi for no reason
+		"rahiTired": flag(FlagType.Number), # If tired = must let her sleep
+		
+		"rahiPunishPoints": flag(FlagType.Number),
+		"rahiRewardPoints": flag(FlagType.Number),
+		# unspent points will go to unfair or spoiled scores
+		
+		"rahiPickedSkills": flag(FlagType.Dict), # picked skills might add tasks
+		
+		"rahiSkillVaginal": flag(FlagType.Number),
+		"rahiSkillAnal": flag(FlagType.Number),
+		"rahiSkillOral": flag(FlagType.Number),
+		# Optional skills
+		"rahiSkillMasochist": flag(FlagType.Number),
+		"rahiSkillExhibit": flag(FlagType.Number),
+		"rahiSkillPetplay": flag(FlagType.Number),
+		"rahiSkillDominance": flag(FlagType.Number),
+		"rahiSkillProstitution": flag(FlagType.Number),
+		"rahiSkillWatersports": flag(FlagType.Number),
 	}
 
 func _init():
