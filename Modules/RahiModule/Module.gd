@@ -30,8 +30,11 @@ func getFlags():
 		"rahi4SceneHappened": flag(FlagType.Bool),
 		"rahi4DayHappened": flag(FlagType.Number),
 		"rahi4SaidFix": flag(FlagType.Bool),
+		"rahi5SceneHappened": flag(FlagType.Bool),
 		
-		"rahiSlavStage": flag(FlagType.Number),
+		"rahiSlaveryDidTaskToday": flag(FlagType.Bool),
+		"rahiPCName": flag(FlagType.Text),
+		"rahiSlaveryStage": flag(FlagType.Number),
 		
 		# Mood stuff (can go up and down)
 		"rahiObedience": flag(FlagType.Number), # raised by d/s actions/choices
@@ -46,6 +49,7 @@ func getFlags():
 		# unspent points will go to unfair or spoiled scores
 		
 		"rahiPickedSkills": flag(FlagType.Dict), # picked skills might add tasks
+		"rahiTalkedTopics": flag(FlagType.Dict),
 		
 		"rahiSkillVaginal": flag(FlagType.Number),
 		"rahiSkillAnal": flag(FlagType.Number),
@@ -77,6 +81,13 @@ func _init():
 		"res://Modules/RahiModule/1PreSlavery/rahi2RahiScene.gd",
 		"res://Modules/RahiModule/1PreSlavery/rahi3RahiPassOutScene.gd",
 		"res://Modules/RahiModule/1PreSlavery/rahi4BreakdownScene.gd",
+		"res://Modules/RahiModule/1PreSlavery/rahi5SlaveryStartScene.gd",
+		
+		"res://Modules/RahiModule/2Slavery/rahiSlaveryMorningScene.gd",
+		"res://Modules/RahiModule/2Slavery/rahiSlaveryPickTaskScene.gd",
+		"res://Modules/RahiModule/2Slavery/rahiSlaveryTalkScene.gd",
+		"res://Modules/RahiModule/2Slavery/rahiSlaveryTalkAnythingScene.gd",
+		"res://Modules/RahiModule/2Slavery/Tasks/rahiSlaveryCleaningTaskScene.gd",
 		]
 	characters = [
 		"res://Modules/RahiModule/RahiCharacter.gd",
@@ -96,12 +107,16 @@ func _init():
 		"res://Modules/RahiModule/1PreSlavery/rahi2RahiEvent.gd",
 		"res://Modules/RahiModule/1PreSlavery/rahi3RahiPassOutEvent.gd",
 		"res://Modules/RahiModule/1PreSlavery/rahi4BreakdownEvent.gd",
+		"res://Modules/RahiModule/2Slavery/rahiSlaveryTalkEvent.gd",
 	]
 	quests = [
 		"res://Modules/RahiModule/RahiSlaveryQuest.gd",
 	]
 
 func resetFlagsOnNewDay():
+	if(getFlag("RahiModule.rahiSlaveryDidTaskToday", false)):
+		setFlag("RahiModule.rahiSlaveryDidTaskToday", false)
+	
 	if(GM.main.getModuleFlag("RahiModule", "Rahi_NotThereToday", false)):
 		GM.main.setModuleFlag("RahiModule", "Rahi_NotThereToday", false)
 	

@@ -154,6 +154,10 @@ func _on_Button_pressed():
 			splittedContent.remove(0)
 			var whatSaid = Util.join(splittedContent, ":").strip_edges()
 			
+			whatSaid = whatSaid.replace("{{rahiMaster}}", '"+str(getFlag("RahiModule.rahiPCName", GM.pc.getName()))+"')
+			whatSaid = whatSaid.replace("{{", '"+str(')
+			whatSaid = whatSaid.replace("}}", ')+"')
+			
 			addToRun('saynn("[say='+charID+']'+whatSaid+'[/say]")\n')
 			_i += 1
 			continue
