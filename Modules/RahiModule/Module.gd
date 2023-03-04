@@ -39,13 +39,13 @@ func getFlags():
 		# Mood stuff (can go up and down)
 		"rahiObedience": flag(FlagType.Number), # raised by d/s actions/choices
 		"rahiAffection": flag(FlagType.Number), # raised by love actions
-		"rahiAddiction": flag(FlagType.Number), # lowers if you deny Rahi from drinking
-		"rahiUnfair": flag(FlagType.Number), # raises if you punish Rahi for no reason
-		"rahiSpoiled": flag(FlagType.Number), # raises if you reward Rahi for no reason
+		#"rahiAddiction": flag(FlagType.Number), # lowers if you deny Rahi from drinking
 		"rahiTired": flag(FlagType.Number), # If tired = must let her sleep
 		
-		"rahiPunishPoints": flag(FlagType.Number),
-		"rahiRewardPoints": flag(FlagType.Number),
+		"rahiNeedsPunishment": flag(FlagType.Bool),
+		"rahiNeedsReward": flag(FlagType.Bool),
+		"rahiTaskSuceeded": flag(FlagType.Bool),
+		"rahiCommentedOnTask": flag(FlagType.Bool),
 		# unspent points will go to unfair or spoiled scores
 		
 		"rahiPickedSkills": flag(FlagType.Dict), # picked skills might add tasks
@@ -87,7 +87,10 @@ func _init():
 		"res://Modules/RahiModule/2Slavery/rahiSlaveryPickTaskScene.gd",
 		"res://Modules/RahiModule/2Slavery/rahiSlaveryTalkScene.gd",
 		"res://Modules/RahiModule/2Slavery/rahiSlaveryTalkAnythingScene.gd",
+		"res://Modules/RahiModule/2Slavery/rahiTaskCommentingScene.gd",
 		"res://Modules/RahiModule/2Slavery/Tasks/rahiSlaveryCleaningTaskScene.gd",
+		"res://Modules/RahiModule/2Slavery/Rewards/rahiRewardPetScene.gd",
+		"res://Modules/RahiModule/2Slavery/Punishments/rahiPunishmentTyingUpScene.gd",
 		]
 	characters = [
 		"res://Modules/RahiModule/RahiCharacter.gd",
@@ -116,6 +119,13 @@ func _init():
 func resetFlagsOnNewDay():
 	if(getFlag("RahiModule.rahiSlaveryDidTaskToday", false)):
 		setFlag("RahiModule.rahiSlaveryDidTaskToday", false)
+	if(getFlag("RahiModule.rahiTired", 0) != 0):
+		setFlag("RahiModule.rahiTired", 0)
+	
+	if(getFlag("RahiModule.rahiNeedsPunishment", false)):
+		setFlag("RahiModule.rahiNeedsPunishment", false)
+	if(getFlag("RahiModule.rahiNeedsReward", false)):
+		setFlag("RahiModule.rahiNeedsReward", false)
 	
 	if(GM.main.getModuleFlag("RahiModule", "Rahi_NotThereToday", false)):
 		GM.main.setModuleFlag("RahiModule", "Rahi_NotThereToday", false)
@@ -133,3 +143,37 @@ func resetFlagsOnNewDay():
 
 static func trustsPC():
 	return GM.main.getModuleFlag("RahiModule", "Rahi_ShowerHappened", false)
+
+func canAdvanceStage():
+	var currentStage = getFlag("RahiModule.rahiSlaveryStage", 0)
+	
+	if(currentStage >= getMaxStage()):
+		return false
+		
+	var statLimit = getStatLimit()
+	if(getFlag("RahiModule.rahiObedience", 0) < statLimit && getFlag("RahiModule.rahiAffection", 0) < statLimit):
+		return false
+		
+	return true
+
+func getStatLimit():
+	var currentStage = getFlag("RahiModule.rahiSlaveryStage", 0)
+	
+	if(currentStage == 0):
+		return 10
+	if(currentStage == 1):
+		return 20
+	
+	return 999
+
+func getMaxStage():
+	return 1
+
+func getAdvanceStageScene():
+	var currentStage = getFlag("RahiModule.rahiSlaveryStage", 0)
+	if(currentStage == 0):
+		return "RahiEmbraceScene"
+	if(currentStage == 1):
+		return "InventoryScene"
+	
+	return null

@@ -9,7 +9,7 @@ func _init():
 	sceneID = "rahiSlaveryCleaningTaskScene"
 
 func _reactInit():
-	chanceEasy = 95
+	chanceEasy = 45
 	chanceMedium = 60
 	chanceHard = 50
 

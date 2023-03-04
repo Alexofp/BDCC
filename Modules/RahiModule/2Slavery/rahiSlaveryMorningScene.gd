@@ -1,10 +1,16 @@
 extends SceneBase
 
+var selectedRahiState = "rahi_is_sleeping"
+
 func _init():
 	sceneID = "rahiSlaveryMorningScene"
 
 func _reactInit():
-	setState("rahi_is_sleeping")
+	if(getModule("RahiModule").canAdvanceStage()):
+		setState("ask_if_advance")
+		return
+	selectedRahiState = "rahi_is_sleeping"
+	setState(selectedRahiState)
 
 func _run():
 	if(state == ""):
@@ -19,11 +25,18 @@ func _run():
 
 		saynn("[say=pc]Did you drink any alcohol while I wasn't here?[/say]")
 
-		saynn("Rahi nods subtly.")
+		saynn("Rahi shakes her head subtly.")
 
-		saynn("[say=pc]Okay, we will deal with that later.[/say]")
+		saynn("[say=pc]I trust you not to lie, kitty.[/say]")
 
 		addButton("Continue", "See what happens next", "pick_task_scene")
+	if(state == "ask_if_advance"):
+		saynn("You're ready to advance your relationship with Rahi.")
+
+		saynn("Do you wanna do that now?")
+
+		addButton("Yes", "Advance it", "advance_stage")
+		addButton("Not today", "You have things to do", "no_advance")
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
@@ -35,4 +48,37 @@ func _react(_action: String, _args):
 		runScene("rahiSlaveryPickTaskScene")
 		return
 
+	if(_action == "advance_stage"):
+		var sceneToRun = getModule("RahiModule").getAdvanceStageScene()
+		
+		if(sceneToRun == null):
+			setState("")
+			return
+		
+		endScene()
+		setFlag("RahiModule.rahiCommentedOnTask", true)
+		setFlag("RahiModule.rahiTaskSuceeded", true)
+		setFlag("RahiModule.rahiNeedsPunishment", false)
+		setFlag("RahiModule.rahiTaskSuceeded", false)
+		
+		increaseFlag("RahiModule.rahiSlaveryStage", 1)
+		runScene(sceneToRun)
+		return
+
+	if(_action == "no_advance"):
+		setState(selectedRahiState)
+		return
+
 	setState(_action)
+
+func saveData():
+	var data = .saveData()
+
+	data["selectedRahiState"] = selectedRahiState
+
+	return data
+
+func loadData(data):
+	.loadData(data)
+
+	selectedRahiState = SAVE.loadVar(data, "selectedRahiState", "rahi_is_sleeping")

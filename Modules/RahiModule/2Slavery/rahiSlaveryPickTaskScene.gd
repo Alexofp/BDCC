@@ -5,7 +5,8 @@ func _init():
 
 
 #func _reactInit():
-#	setState("rahi_is_sleeping")
+#	if(getModule("RahiModule").canAdvanceStage()):
+#		setState("ask_if_advance")
 
 func _run():
 	if(state == ""):
@@ -31,11 +32,16 @@ func _react_scene_end(_tag, _result):
 			return
 		var theresult = _result[0]
 		
+		setFlag("RahiModule.rahiCommentedOnTask", false)
 		if(theresult):
 			addExperienceToPlayer(10)
+			setFlag("RahiModule.rahiNeedsReward", true)
+			setFlag("RahiModule.rahiTaskSuceeded", true)
 			endScene()
 			runScene("rahiSlaveryTalkScene")
 		else:
 			addExperienceToPlayer(5)
+			setFlag("RahiModule.rahiNeedsPunishment", true)
+			setFlag("RahiModule.rahiTaskSuceeded", false)
 			endScene()
 			runScene("rahiSlaveryTalkScene")
