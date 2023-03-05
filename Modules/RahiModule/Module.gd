@@ -51,10 +51,11 @@ func getFlags():
 		"rahiPickedSkills": flag(FlagType.Dict), # picked skills might add tasks
 		"rahiTalkedTopics": flag(FlagType.Dict),
 		
-		"rahiSkillVaginal": flag(FlagType.Number),
-		"rahiSkillAnal": flag(FlagType.Number),
-		"rahiSkillOral": flag(FlagType.Number),
+		# Base skills
+		"rahiSkillLabor": flag(FlagType.Number),
 		# Optional skills
+		"rahiSkillSex": flag(FlagType.Number),
+		"rahiSkillAnal": flag(FlagType.Number),
 		"rahiSkillMasochist": flag(FlagType.Number),
 		"rahiSkillExhibit": flag(FlagType.Number),
 		"rahiSkillPetplay": flag(FlagType.Number),
@@ -88,6 +89,7 @@ func _init():
 		"res://Modules/RahiModule/2Slavery/rahiSlaveryTalkScene.gd",
 		"res://Modules/RahiModule/2Slavery/rahiSlaveryTalkAnythingScene.gd",
 		"res://Modules/RahiModule/2Slavery/rahiTaskCommentingScene.gd",
+		"res://Modules/RahiModule/2Slavery/rahiSlaverySkillLearnScene.gd",
 		"res://Modules/RahiModule/2Slavery/Tasks/rahiSlaveryCleaningTaskScene.gd",
 		"res://Modules/RahiModule/2Slavery/Rewards/rahiRewardPetScene.gd",
 		"res://Modules/RahiModule/2Slavery/Punishments/rahiPunishmentTyingUpScene.gd",
@@ -177,3 +179,140 @@ func getAdvanceStageScene():
 		return "InventoryScene"
 	
 	return null
+
+func getSkillsInfo():
+	return {
+		"rahiSkillLabor": {
+			"name": "Labor",
+			"desc": "How well Rahi can do tedious tasks",
+			"defaultSkill": true,
+		},
+		"rahiSkillSex": {
+			"name": "Sex",
+			"desc": "Allows you to train Rahi to do more types of sexual-activities rather than just boring vanilla sex",
+		},
+		"rahiSkillAnal": {
+			"name": "Anal",
+			"desc": "Allows you to train Rahi the secrets of anal sex",
+		},
+		"rahiSkillMasochist": {
+			"name": "Masochism",
+			"desc": "Allows you to turn Rahi into a painslut",
+		},
+		"rahiSkillExhibit": {
+			"name": "Exhibitionism",
+			"desc": "Allows you to teach Rahi to feel more confident while being nude in public",
+		},
+		"rahiSkillPetplay": {
+			"name": "Petplay",
+			"desc": "Allows you to train Rahi into a cute kitty pet",
+		},
+		"rahiSkillDominance": {
+			"name": "Dominance",
+			"desc": "Allows you to train Rahi into a domme",
+		},
+		"rahiSkillProstitution": {
+			"name": "Prostitution",
+			"desc": "Allows you to share Rahi with others, making her into a slut",
+		},
+		"rahiSkillWatersports": {
+			"name": "Watersports",
+			"desc": "Allows you to turn Rahi into a piss-slut",
+			"requiredContent": [ContentType.Watersports],
+		}
+	}
+
+func getFreeSkillPoints():
+	var pickedSkills = getFlag("RahiModule.rahiPickedSkills", {})
+	var skillsInfo:Dictionary = getSkillsInfo()
+	var currentStage = getFlag("RahiModule.rahiSlaveryStage", 0)
+	
+	var actualLearnedSkillNum = 0
+	for skillID in skillsInfo:
+		if(!pickedSkills.has(skillID)):
+			continue
+		
+		if(skillsInfo[skillID].has("defaultSkill") && skillsInfo[skillID]["defaultSkill"]):
+			continue
+		
+		actualLearnedSkillNum += 1
+	
+	var result = Util.maxi(0, currentStage - actualLearnedSkillNum)
+	return result
+
+func canLearnNewSkill():
+	if(getFreeSkillPoints() <= 0):
+		return false
+	
+	var skillsInfo:Dictionary = getSkillsInfo()
+	var pickedSkills = getFlag("RahiModule.rahiPickedSkills", {})
+	
+	for skillID in skillsInfo:
+		if(pickedSkills.has(skillID)):
+			continue
+		if(skillsInfo[skillID].has("defaultSkill") && skillsInfo[skillID]["defaultSkill"]):
+			continue
+		if(skillsInfo[skillID].has("requiredContent")):
+			var hasBadContent = false
+			for thecontent in skillsInfo[skillID]["requiredContent"]:
+				if(!OPTIONS.isContentEnabled(thecontent)):
+					hasBadContent = true
+			if(hasBadContent):
+				continue
+		
+		return true
+	return false
+
+func isSkillLearned(skillID):
+	var pickedSkills = getFlag("RahiModule.rahiPickedSkills", {})
+	var skillsInfo:Dictionary = getSkillsInfo()
+	
+	if(!skillsInfo.has(skillID)):
+		return false
+	
+	if(skillsInfo[skillID].has("defaultSkill") && skillsInfo[skillID]["defaultSkill"]):
+		return true
+	
+	return pickedSkills.has(skillID)
+	
+# F- F  E- E  D- D  C- C  B- B  A- A  S- S  S+ S++
+# 0  1  2  3  4  5  6  7  8  9  10 11 12 13 14 15
+func getSkillScore(skillID):
+	return Util.mini(Util.maxi(int(getFlag("RahiModule."+str(skillID), 0)), 0), 15)
+
+func getSkillSuccessChance(skillID, chanceWhenMinSkill, chanceWhenMaxSkill):
+	var score = float(getSkillScore(skillID))
+	
+	return chanceWhenMinSkill + (chanceWhenMaxSkill - chanceWhenMinSkill) * (score / 15.0)
+
+func learnSkill(skillID):
+	var skillsInfo:Dictionary = getSkillsInfo()
+	
+	if(!skillsInfo.has(skillID)):
+		return false
+	
+	if(skillsInfo[skillID].has("defaultSkill") && skillsInfo[skillID]["defaultSkill"]):
+		return false
+	
+	var pickedSkills = getFlag("RahiModule.rahiPickedSkills", {})
+	if(pickedSkills.has(skillID)):
+		return false
+	pickedSkills[skillID] = true
+	setFlag("RahiModule.rahiPickedSkills", pickedSkills)
+	return true
+
+func advanceSkill(skillID):
+	if(!isSkillLearned(skillID)):
+		return false
+	
+	if(getFlag("RahiModule."+str(skillID), 0) < 15):
+		increaseFlag("RahiModule."+str(skillID), 1)
+	return true
+
+func getSkillScoreText(skillID):
+	var score = getSkillScore(skillID)
+	score = Util.mini(Util.maxi(int(score), 0), 15)
+	
+	var scoreToText = ["F-", "F", "E-", "E", "D-", "D", "C-", "C", "B-", "B", "A-", "A", "S-", "S", "S+", "S++"]
+	
+	return scoreToText[score]

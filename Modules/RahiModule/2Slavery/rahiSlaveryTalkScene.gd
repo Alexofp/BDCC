@@ -7,6 +7,8 @@ func _run():
 	if(state == ""):
 		aimCameraAndSetLocName("cellblock_orange_nearcell")
 		
+		var rahiModule = getModule("RahiModule")
+		
 		var statLimit = getModule("RahiModule").getStatLimit()
 		if(getFlag("RahiModule.rahiObedience", 0) > statLimit):
 			setFlag("RahiModule.rahiObedience", statLimit)
@@ -31,6 +33,19 @@ func _run():
 		#sayn("Reward points: "+str(getFlag("RahiModule.rahiRewardPoints", 0)))
 		sayn("Needs punishment: "+str(getFlag("RahiModule.rahiNeedsPunishment", false)))
 		sayn("Needs reward: "+str(getFlag("RahiModule.rahiNeedsReward", false)))
+		sayn("")
+		
+		sayn("Rahi's skills:")
+		var skills = rahiModule.getSkillsInfo()
+		for skillID in skills:
+			var skillInfo = skills[skillID]
+			
+			if(!rahiModule.isSkillLearned(skillID)):
+				continue
+			
+			sayn(skillInfo["name"]+": "+rahiModule.getSkillScoreText(skillID))
+		if(getModule("RahiModule").canLearnNewSkill()):
+			sayn("(You can pick a new skill for Rahi to train in Relationship menu)")
 		
 		addButton("Talk", "Talk about stuff", "talk")
 		if(getFlag("RahiModule.rahiTired", 0) < 3):
@@ -77,7 +92,36 @@ func _run():
 		
 		# Unlocks from a certain stage
 		addButton("Your title", "How should kitty call you", "change_title")
+		if(getModule("RahiModule").canLearnNewSkill()):
+			if(getFlag("RahiModule.rahiTired", 0) < 3):
+				addButton("Teach new skill", "Start training kitty a new skill", "train_new_skill")
+			else:
+				addDisabledButton("Teach new skill", "Rahi is too tired for that")
 		addButton("Back", "Go back a menu", "")
+	
+	if(state == "train_new_skill"):
+		saynn("What skill do you wanna start teaching to Rahi?")
+		
+		var rahiModule = getModule("RahiModule")
+		var skills = rahiModule.getSkillsInfo()
+		for skillID in skills:
+			var skillInfo = skills[skillID]
+			
+			if(rahiModule.isSkillLearned(skillID)):
+				continue
+			
+			if(skillInfo.has("requiredContent")):
+				var hasBadContent = false
+				for thecontent in skillInfo["requiredContent"]:
+					if(!OPTIONS.isContentEnabled(thecontent)):
+						hasBadContent = true
+				if(hasBadContent):
+					continue
+			
+			sayn("- [b]"+skillInfo["name"]+"[/b]: "+skillInfo["desc"])
+			addButton(skillInfo["name"], skillInfo["desc"], "do_teach_new_skill", [skillID])
+		
+		addButton("Back", "Never mind", "relationship")
 	
 	if(state == "change_title"):
 		saynn("How do you want kitty to call you?")
@@ -148,6 +192,14 @@ func _react(_action: String, _args):
 		
 		runScene(_args[0], ["slavery"])
 		setState("")
+		return
+
+	if(_action == "do_teach_new_skill"):
+		increaseFlag("RahiModule.rahiTired", 1)
+		setState("")
+		
+		getModule("RahiModule").learnSkill(_args[0])
+		runScene("rahiSlaverySkillLearnScene", [_args[0]])
 		return
 
 	setState(_action)
