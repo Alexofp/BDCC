@@ -1952,3 +1952,9 @@ func getOutsideMessinessLevel():
 		return 4
 	else:
 		return 5
+
+func afterTakingAShower():
+	#addStamina(30)
+	clearBodyFluids()
+	clearBodywritings()
+	clearTallymarks()

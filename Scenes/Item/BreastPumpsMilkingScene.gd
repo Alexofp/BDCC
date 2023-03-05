@@ -43,7 +43,8 @@ func _reactInit():
 
 	processTime(6*60)
 	GM.pc.stimulateLactation()
-	GM.pc.addEffect(StatusEffect.SoreNipplesAfterMilking)
+	if(!GM.pc.hasPerk(Perk.MilkNoSoreNipples)):
+		GM.pc.addEffect(StatusEffect.SoreNipplesAfterMilking)
 	GM.pc.addSkillExperience(Skill.Milking, 50)
 
 	if(!GM.pc.canBeMilked()):

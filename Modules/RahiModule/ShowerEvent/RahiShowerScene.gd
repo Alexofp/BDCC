@@ -2,12 +2,25 @@ extends "res://Scenes/SceneBase.gd"
 
 var usedCondom = false
 var condomBroke = false
+var isSlavery = false
 
 func _init():
 	sceneID = "RahiShowerScene"
 
+func _initScene(_args = []):
+	if(_args != null && _args.size() > 0):
+		if(_args[0] == "slavery"):
+			isSlavery = true
+
 func _run():
 	if(state == ""):
+		if(isSlavery):
+			aimCameraAndSetLocName("main_shower1")
+			
+			saynn("You tell Rahi that it's time to take a shower. She nods and follows you to the showers.")
+			
+			saynn("The feline strips her uniform in the undressing room and gets under one of the shower heads before twisting the nob that makes the water run.")
+		
 		addCharacter("rahi", ["naked"])
 		playAnimation(StageScene.Duo, "stand", {
 			npc="rahi", pc="pc", 
@@ -30,8 +43,13 @@ func _run():
 		})
 		
 		saynn("You get under the shower head that is next to hers and wash yourself for a bit. Then you clear your throat loudly. The feline gasps, her ears direct themselves at you, shortly followed by her gaze.")
-
-		saynn("[say=rahi]Oh, hello there..[/say]")
+		
+		if(isSlavery):
+			saynn("[say=pc]I thought you hated water.[/say]")
+			
+			saynn("[say=rahi]Showers are different.. She can't drown here..")
+		else:
+			saynn("[say=rahi]Oh, hello there..[/say]")
 
 		saynn("She keeps washing herself but her hand motions are more shy. She quickly rubs her breasts and then moves on to focusing on washing her belly and lower.")
 
@@ -79,6 +97,44 @@ func _run():
 		addButton("Just kiss", "Embrace the intimacy of the moment", "just_kiss")
 		addButtonWithChecks("Vaginal", "Ask if it’s okay first (It’s gonna be rough)", "vaginal", [], [ButtonChecks.HasReachablePenis])
 		addButton("Lick her out", "Taste the kitty (Gonna be somewhat rough for her)", "lick_her_out")
+		if(isSlavery && (getCharacter("rahi").hasEffect(StatusEffect.HasCumInsideVagina) || getCharacter("rahi").hasEffect(StatusEffect.HasCumInsideAnus))):
+			addButton("Clean inside", "Remove any cum or other fluids from inside Rahi's holes", "clean_rahi_inside")
+		elif(isSlavery):
+			addDisabledButton("Clean inside", "Rahi doesn't have any cum or other fluids inside her holes")
+
+	if(state == "clean_rahi_inside"):
+		saynn("[say=pc]Let's clean you inside too, kitty.[/say]")
+
+		saynn("[say=rahi]Meow?..[/say]")
+
+		saynn("Without explaining much, you place both of your hands on the kitty's buttcheeks and grope them slightly. You can hear subtle purring coming from her while she leans back into you.")
+
+		saynn("After some caressing, you suddenly spread her butt. Kitty meows again while you put both of her pleasure holes on display. Her little pink tailhole in particular, Rahi tries to clench but she can't make it fully close while your hands are there. Her pussy looks spread too, the needy wet hole is obeying your touch.")
+
+		saynn("[say=rahi]H-hey..[/say]")
+
+		var hasCumInPussy = getCharacter("rahi").hasEffect(StatusEffect.HasCumInsideVagina)
+		var hasCumInAnus = getCharacter("rahi").hasEffect(StatusEffect.HasCumInsideAnus)
+		if (hasCumInPussy && hasCumInAnus):
+			saynn("Very soon lewd stuff begins to leak out of both of her holes. {rahi.VaginaContents} leaks out of her pussy slit, dripping down her thighs before getting washed away by the water. Her butt is dripping {rahi.anusContents} onto the floor.")
+
+		elif (hasCumInPussy):
+			saynn("Her butt doesn't seem to be stuffed but her pussy is. {rahi.VaginaContents} begins to leak out of it, dripping down her thighs before getting washed away by the water.")
+
+		else:
+			saynn("Strangely enough, her pussy isn't stuffed with anything but her butt is. Very soon her tailhole begins to leak {rahi.anusContents} onto the floor before getting washed away into the drain.")
+
+		saynn("The feline holds your hands with her paws but she doesn't try to pry them off.")
+
+		saynn("[say=rahi]This is embarrassing.. a bit..[/say]")
+
+		saynn("[say=pc]Relax, pussy cat. Well, no, you should try to push it out actually. Do it.[/say]")
+
+		saynn("The feline blushes deeply but she seems to be obeying, her body visible tensing up while more and more lewd fluids continue to leak out of her. Her raised tail brushing against your {pc.masc} chest.")
+
+		saynn("You wait until she stops dripping before letting go of her buttchecks. You give her shoulder a little kiss and prepare to leave.")
+
+		addButton("Continue", "See what happens next", "cleanholesandend")
 
 	if(state == "just_kiss"):
 		saynn("You put both your hands on the feline’s hips and gently turn her around until she is facing you. You’re getting closer and closer, your foreheads softly bump together, her paws explore your {pc.masc} body, your {pc.breasts}..")
@@ -111,8 +167,11 @@ func _run():
 		saynn("[say=pc]I don’t mind it.[/say]")
 
 		saynn("You finally stop hugging and quickly finish washing each other. You turn off the water and the kitten gives you the last little kiss on your cheek before leaving you to go get dried up and dress.")
-
-		saynn("[say=rahi]See you around..[/say]")
+		
+		if(isSlavery):
+			saynn("[say=rahi]Let's go back..[/say]")
+		else:
+			saynn("[say=rahi]See you around..[/say]")
 
 		# (scene ends)
 		addButton("Continue", "That's nice", "endthescene")
@@ -341,6 +400,10 @@ func _react(_action: String, _args):
 	if(_action in ["make_her_cum", "use_condom", "just_kiss", "no_condom"]):
 		processTime(RNG.randi_range(20, 40)*60)
 	
+	if(_action == "rub_her_back"):
+		GM.pc.afterTakingAShower()
+		getCharacter("rahi").afterTakingAShower()
+	
 	if(_action == "use_condom"):
 		usedCondom = true
 		setState("fucking")
@@ -372,6 +435,11 @@ func _react(_action: String, _args):
 		endScene()
 		return
 	
+	if(_action == "cleanholesandend"):
+		getCharacter("rahi").clearOrificeFluidsCheckBlocked()
+		endScene()
+		return
+	
 	setState(_action)
 
 func saveData():
@@ -379,6 +447,7 @@ func saveData():
 	
 	data["usedCondom"] = usedCondom
 	data["condomBroke"] = condomBroke
+	data["isSlavery"] = isSlavery
 	
 	return data
 	
@@ -387,3 +456,4 @@ func loadData(data):
 	
 	usedCondom = SAVE.loadVar(data, "usedCondom", false)
 	condomBroke = SAVE.loadVar(data, "condomBroke", false)
+	isSlavery = SAVE.loadVar(data, "isSlavery", false)

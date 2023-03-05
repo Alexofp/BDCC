@@ -5,6 +5,8 @@ func _init():
 
 func _run():
 	if(state == ""):
+		aimCameraAndSetLocName("cellblock_orange_nearcell")
+		
 		var statLimit = getModule("RahiModule").getStatLimit()
 		if(getFlag("RahiModule.rahiObedience", 0) > statLimit):
 			setFlag("RahiModule.rahiObedience", statLimit)
@@ -62,6 +64,12 @@ func _run():
 		saynn("How do you wanna punish the kitty.")
 		
 		addButton("Tie up", "Tie kitty up", "dopunish", ["rahiPunishmentTyingUpScene"])
+		addButton("Back", "Go back a menu", "")
+		
+	if(state == "activities"):
+		saynn("What do you wanna do with the kitty.")
+		
+		addButton("Shower", "Go take a shower", "doactivity", ["RahiShowerScene"])
 		addButton("Back", "Go back a menu", "")
 		
 	if(state == "relationship"):
@@ -133,6 +141,13 @@ func _react(_action: String, _args):
 		runScene(_args[0], [needsPunishment])
 		setState("")
 		setFlag("RahiModule.rahiNeedsPunishment", false)
+		return
+
+	if(_action == "doactivity"):
+		increaseFlag("RahiModule.rahiTired", 1)
+		
+		runScene(_args[0], ["slavery"])
+		setState("")
 		return
 
 	setState(_action)

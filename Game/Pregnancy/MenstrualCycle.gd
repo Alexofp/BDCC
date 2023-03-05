@@ -123,7 +123,7 @@ func processTime(seconds):
 func ovulate():
 	ovulatedThisCycle = true
 	
-	#print("OVULATED")
+	#print(getCharacter().getName() + " OVULATED")
 	
 	var motherSpecies = getCharacter().getSpecies()
 	var possibleEggAmounts = []

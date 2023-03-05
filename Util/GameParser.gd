@@ -215,4 +215,40 @@ func callObjectFuncWrapper(_obj: String, _command: String, _args: Array):
 			return "ERROR:NOTHROAT"
 		return orifice.getLoosenessString()
 	
+	if(_command in ["pussyContents", "vaginaContents"] && _args.size() == 0):
+		var bodypart:BodypartVagina = object.getBodypart(BodypartSlot.Vagina)
+		if(bodypart == null):
+			return "ERROR:NOBODYPART"
+		var orifice:Orifice = bodypart.getOrifice()
+		if(orifice == null):
+			return "ERROR:NOVAGINA"
+		var thetext = Util.humanReadableList(orifice.getFluidList())
+		if(thetext == null || thetext == ""):
+			return "nothing"
+		return thetext
+	
+	if(_command in ["buttContents", "assContents", "anusContents"] && _args.size() == 0):
+		var bodypart = object.getBodypart(BodypartSlot.Anus)
+		if(bodypart == null):
+			return "ERROR:NOBODYPART"
+		var orifice:Orifice = bodypart.getOrifice()
+		if(orifice == null):
+			return "ERROR:NOANUS"
+		var thetext = Util.humanReadableList(orifice.getFluidList())
+		if(thetext == null || thetext == ""):
+			return "nothing"
+		return thetext
+	
+	if(_command in ["throatContents"] && _args.size() == 0):
+		var bodypart = object.getBodypart(BodypartSlot.Head)
+		if(bodypart == null):
+			return "ERROR:NOBODYPART"
+		var orifice:Orifice = bodypart.getOrifice()
+		if(orifice == null):
+			return "ERROR:NOTHROAT"
+		var thetext = Util.humanReadableList(orifice.getFluidList())
+		if(thetext == null || thetext == ""):
+			return "nothing"
+		return thetext
+	
 	return "!RUNTIME ERROR NO COMMAND FOUND "+_obj+"."+_command+" "+str(_args)+"!"
