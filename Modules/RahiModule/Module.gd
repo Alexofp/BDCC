@@ -222,6 +222,9 @@ func getSkillsInfo():
 		}
 	}
 
+func getSlaveryStage():
+	return getFlag("RahiModule.rahiSlaveryStage", 0)
+
 func getFreeSkillPoints():
 	var pickedSkills = getFlag("RahiModule.rahiPickedSkills", {})
 	var skillsInfo:Dictionary = getSkillsInfo()
@@ -275,7 +278,7 @@ func isSkillLearned(skillID):
 	
 	return pickedSkills.has(skillID)
 	
-# F- F  E- E  D- D  C- C  B- B  A- A  S- S  S+ S++
+# F- F  F+ D- D  D+ C- C  B- B  A- A  S- S  S+ S++
 # 0  1  2  3  4  5  6  7  8  9  10 11 12 13 14 15
 func getSkillScore(skillID):
 	return Util.mini(Util.maxi(int(getFlag("RahiModule."+str(skillID), 0)), 0), 15)
@@ -301,11 +304,11 @@ func learnSkill(skillID):
 	setFlag("RahiModule.rahiPickedSkills", pickedSkills)
 	return true
 
-func advanceSkill(skillID):
+func advanceSkill(skillID, maxLevel = 15):
 	if(!isSkillLearned(skillID)):
 		return false
 	
-	if(getFlag("RahiModule."+str(skillID), 0) < 15):
+	if(getFlag("RahiModule."+str(skillID), 0) < maxLevel):
 		increaseFlag("RahiModule."+str(skillID), 1)
 	return true
 
@@ -313,6 +316,6 @@ func getSkillScoreText(skillID):
 	var score = getSkillScore(skillID)
 	score = Util.mini(Util.maxi(int(score), 0), 15)
 	
-	var scoreToText = ["F-", "F", "E-", "E", "D-", "D", "C-", "C", "B-", "B", "A-", "A", "S-", "S", "S+", "S++"]
+	var scoreToText = ["F-", "F", "F+", "D-", "D", "D+", "C-", "C", "B-", "B", "A-", "A", "S-", "S", "S+", "S++"]
 	
 	return scoreToText[score]

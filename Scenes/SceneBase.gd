@@ -127,8 +127,8 @@ func addCharacter(id: String, variant: Array = []):
 	if(id == ""):
 		return
 	currentCharactersVariants[id] = variant
-	GM.ui.addCharacterToPanel(id, variant)
 	GM.main.startUpdatingCharacter(id)
+	GM.ui.addCharacterToPanel(id, variant)
 
 func removeCharacter(id: String):
 	var _ok = currentCharactersVariants.erase(id)

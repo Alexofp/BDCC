@@ -5,6 +5,7 @@ func _init():
 
 func _run():
 	if(state == ""):
+		addCharacter("rahi")
 		aimCameraAndSetLocName("cellblock_orange_nearcell")
 		
 		var rahiModule = getModule("RahiModule")
@@ -91,7 +92,10 @@ func _run():
 		saynn("What do you wanna change about your relationship?")
 		
 		# Unlocks from a certain stage
-		addButton("Your title", "How should kitty call you", "change_title")
+		if(getModule("RahiModule").getSlaveryStage() >= 1):
+			addButton("Your title", "How should kitty call you", "change_title")
+		else:
+			addDisabledButton("Your title", "Advance your relationship further before you can choose your title")
 		if(getModule("RahiModule").canLearnNewSkill()):
 			if(getFlag("RahiModule.rahiTired", 0) < 3):
 				addButton("Teach new skill", "Start training kitty a new skill", "train_new_skill")
@@ -126,8 +130,23 @@ func _run():
 	if(state == "change_title"):
 		saynn("How do you want kitty to call you?")
 		var titles = [
-			GM.pc.getName(), "Master", "Mistress", "Miss", "Owner", "Trainer", "Love",
+			GM.pc.getName(), "Master", "Mistress",
 		]
+		var currentRank = getModule("RahiModule").getSlaveryStage()
+		if(currentRank >= 3):
+			titles.append_array(["Miss", "Mister", "Owner", "Trainer"])
+		if(currentRank >= 4):
+			titles.append_array(["Lady", "Goddess", "Lord", "Sir"])
+		if(currentRank >= 5):
+			titles.append_array(["Queen", "Ma’am", "King", "Prince"])
+		if(currentRank >= 6):
+			titles.append_array(["Mommy", "Madam", "Daddy", "Alpha"])
+		if(currentRank >= 7):
+			titles.append_array(["Handler", "Your Highness", "Boss", "Kitty's Keeper"])
+		
+		if(currentRank >= 8):
+			titles.append_array(["Rahi's Handler", "my love", "my Lord", "my Queen", "my Miss", "Bitch"])
+		
 		for title in titles:
 			addButton("'"+title+"'", "Make her call you like this", "set_title", [title])
 		addButton("Never mind", "You don't wanna change it", "relationship")

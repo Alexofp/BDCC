@@ -1024,6 +1024,10 @@ func startUpdatingCharacter(charID):
 		if(character != null):
 			character.processUntilTime(currentDay, timeOfDay)
 			character.updateNonBattleEffects()
+	else:
+		var character = getCharacter(charID)
+		if(character != null):
+			character.updateNonBattleEffects()
 
 func generateCharacterID(beginPart = "dynamicnpc"):
 	var numID = GlobalRegistry.generateNPCUniqueID()
