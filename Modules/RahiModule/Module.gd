@@ -225,6 +225,12 @@ func getSkillsInfo():
 func getSlaveryStage():
 	return getFlag("RahiModule.rahiSlaveryStage", 0)
 
+func getAffection():
+	return getFlag("RahiModule.rahiAffection", 0)
+
+func getObedience():
+	return getFlag("RahiModule.rahiObedience", 0)
+
 func getFreeSkillPoints():
 	var pickedSkills = getFlag("RahiModule.rahiPickedSkills", {})
 	var skillsInfo:Dictionary = getSkillsInfo()
