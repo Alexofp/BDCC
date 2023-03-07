@@ -13,7 +13,10 @@ func _run():
 		saynn("Pick what task you want Rahi to do today.")
 
 		addButton("Cleaning", "Make her clean her cell", "dotask", ["rahiSlaveryCleaningTaskScene"])
-
+		var rahiModule = getModule("RahiModule")
+		if(rahiModule.getSlaveryStage() >= 1):
+			addButton("Stealing", "Make her steal something", "dotask", ["rahiSlaveryStealingTaskScene"])
+		
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
 		endScene()

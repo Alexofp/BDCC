@@ -11,6 +11,7 @@ func _reactInit():
 		return
 	selectedRahiState = "rahi_is_sleeping"
 	setState(selectedRahiState)
+	playAnimation(StageScene.Duo, "stand", {npc="rahi"})
 
 func _run():
 	if(state == ""):

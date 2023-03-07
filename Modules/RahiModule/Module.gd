@@ -94,6 +94,7 @@ func _init():
 		"res://Modules/RahiModule/2Slavery/Rewards/rahiRewardPetScene.gd",
 		"res://Modules/RahiModule/2Slavery/Punishments/rahiPunishmentTyingUpScene.gd",
 		"res://Modules/RahiModule/2Slavery/Milestones/rahiMilestone1Scene.gd",
+		"res://Modules/RahiModule/2Slavery/Tasks/rahiSlaveryStealingTaskScene.gd",
 		]
 	characters = [
 		"res://Modules/RahiModule/RahiCharacter.gd",
@@ -294,6 +295,18 @@ func getSkillSuccessChance(skillID, chanceWhenMinSkill, chanceWhenMaxSkill):
 	var score = float(getSkillScore(skillID))
 	
 	return chanceWhenMinSkill + (chanceWhenMaxSkill - chanceWhenMinSkill) * (score / 15.0)
+
+func getSlaveryStageChance(minstage, maxstage, minchance, maxchance):
+	var currentStage = getSlaveryStage()
+	
+	if(currentStage <= minstage):
+		return minchance
+	if(currentStage >= maxstage):
+		return maxchance
+	
+	var stageProgress = (currentStage - minstage) / (maxstage - minstage)
+	
+	return minchance + stageProgress * (maxchance - minchance)
 
 func learnSkill(skillID):
 	var skillsInfo:Dictionary = getSkillsInfo()
