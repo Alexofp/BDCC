@@ -60,6 +60,7 @@ func _react(_action: String, _args):
 		setFlag("RahiModule.rahiTaskSuceeded", true)
 		setFlag("RahiModule.rahiNeedsPunishment", false)
 		setFlag("RahiModule.rahiTaskSuceeded", false)
+		setFlag("RahiModule.rahiTired", 2)
 		
 		increaseFlag("RahiModule.rahiSlaveryStage", 1)
 		runScene(sceneToRun)

@@ -93,6 +93,7 @@ func _init():
 		"res://Modules/RahiModule/2Slavery/Tasks/rahiSlaveryCleaningTaskScene.gd",
 		"res://Modules/RahiModule/2Slavery/Rewards/rahiRewardPetScene.gd",
 		"res://Modules/RahiModule/2Slavery/Punishments/rahiPunishmentTyingUpScene.gd",
+		"res://Modules/RahiModule/2Slavery/Milestones/rahiMilestone1Scene.gd",
 		]
 	characters = [
 		"res://Modules/RahiModule/RahiCharacter.gd",
@@ -174,9 +175,9 @@ func getMaxStage():
 func getAdvanceStageScene():
 	var currentStage = getFlag("RahiModule.rahiSlaveryStage", 0)
 	if(currentStage == 0):
-		return "RahiEmbraceScene"
+		return "rahiMilestone1Scene"
 	if(currentStage == 1):
-		return "InventoryScene"
+		return "RahiEmbraceScene"
 	
 	return null
 
