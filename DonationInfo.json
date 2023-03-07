@@ -1,15 +1,9 @@
 {
-	"dateString": "02 of Mar 2023",
+	"dateString": "07 of Mar 2023",
 	"entries": {
 		"$1.00": [
 			{
 				"nickname": "thatoneguyatthebar"
-			},
-			{
-				"nickname": "Zaxon Rapial"
-			},
-			{
-				"nickname": "Maxtacks"
 			},
 			{
 				"nickname": "SuPhox"
@@ -18,16 +12,25 @@
 				"nickname": "Caliban"
 			},
 			{
-				"nickname": "Kyle Oran Evans "
+				"nickname": "Maxtacks"
 			},
 			{
 				"nickname": "Zeneroth"
+			},
+			{
+				"nickname": "Kyle Oran Evans "
 			},
 			{
 				"nickname": "Shadowwall123"
 			},
 			{
 				"nickname": "Trewill"
+			},
+			{
+				"nickname": "Tristan Leo Roberts "
+			},
+			{
+				"nickname": "VØID"
 			},
 			{
 				"nickname": "Lichity"
@@ -42,19 +45,13 @@
 				"nickname": "User#a63f196a"
 			},
 			{
-				"nickname": "Tristan Leo Roberts "
-			},
-			{
-				"nickname": "VØID"
-			},
-			{
-				"nickname": "TwilightHome"
-			},
-			{
 				"nickname": "ghost of cum"
 			},
 			{
 				"nickname": "User#d7493e93"
+			},
+			{
+				"nickname": "TwilightHome"
 			},
 			{
 				"nickname": "Magetsu88"
@@ -86,31 +83,34 @@
 				"nickname": "Wyvernclaw00"
 			},
 			{
-				"nickname": "Silver_Bloke"
-			},
-			{
-				"nickname": "Masaki Akira"
-			},
-			{
 				"nickname": "IzzenXAZ"
 			},
 			{
-				"nickname": "Steied"
+				"nickname": "Silver_Bloke"
 			},
 			{
 				"nickname": "User#2242146d"
 			},
 			{
-				"nickname": "Runulf"
-			},
-			{
-				"nickname": "Blarg"
+				"nickname": "Masaki Akira"
 			},
 			{
 				"nickname": "User#253e76e7"
 			},
 			{
+				"nickname": "Blarg"
+			},
+			{
+				"nickname": "Runulf"
+			},
+			{
+				"nickname": "Steied"
+			},
+			{
 				"nickname": "Michy <3"
+			},
+			{
+				"nickname": "Rac"
 			},
 			{
 				"nickname": "ProtossMan"
@@ -139,5 +139,5 @@
 		"$5.00",
 		"$1.00"
 	],
-	"unixTime": 1677764418
+	"unixTime": 1678166014
 }
