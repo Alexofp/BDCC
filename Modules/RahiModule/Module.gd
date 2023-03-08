@@ -171,7 +171,7 @@ func getStatLimit():
 	return 999
 
 func getMaxStage():
-	return 1
+	return 2
 
 func getAdvanceStageScene():
 	var currentStage = getFlag("RahiModule.rahiSlaveryStage", 0)

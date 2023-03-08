@@ -8,7 +8,7 @@ func registerTriggers(es):
 	es.addEventCheck(self, "TaviBusy")
 	
 func run(_triggerID, _args):
-	if(GM.QS.isActive("Ch3TaviQuest") && !getFlag("TaviModule.ch3CompletedDoorHack")):
+	if(GM.QS.isActive("Ch3TaviQuest") && !getFlag("TaviModule.ch3CompletedDoorHack") && getFlag("TaviModule.ch3StartedInfiltration")):
 		addButtonWithChecks("Control panels", "You gotta find a way to turn on the maintenance protol", "start", [], [ButtonChecks.NotHandsBlocked, ButtonChecks.NotArmsRestrained, ButtonChecks.NotBlindfolded])
 	if(getFlag("TaviModule.ch3CompletedDoorHack") && !getFlag("TaviModule.ch3CompletedSafeHack")):
 		saynn("There is a safe here that you can also try to hack")

@@ -129,6 +129,8 @@ func _run():
 	
 	if(state == "change_title"):
 		saynn("How do you want kitty to call you?")
+		
+		saynn("(You will unlock more as your relationship progresses)")
 		var titles = [
 			GM.pc.getName(), "Master", "Mistress",
 		]

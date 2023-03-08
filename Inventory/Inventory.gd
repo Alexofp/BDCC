@@ -153,7 +153,9 @@ func equipItem(item):
 	var slot = item.getClothingSlot()
 	
 	if(equippedItems.has(slot)):
-		assert(false)
+		Log.printerr("Trying to equip an item to slot "+str(slot)+" when there is already an item")
+		return false
+		#assert(false)
 	
 	if(!canEquipSlot(slot)):
 		return false
