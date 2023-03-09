@@ -46,12 +46,12 @@ func _run():
 		if (getModule("RahiModule").getSlaveryStage() >= 1):
 			addButton("Vibrator", "Make that kitty squirm", "vibrator")
 		if (getModule("RahiModule").isSkillLearned("rahiSkillMasochist")):
-			addButton("Nipple clamps", "Make it painful for Rahi", "nipple_clamps")
+			addButton("Nipple clamps", "(Masochist) Make it painful for Rahi", "nipple_clamps")
 		if (getModule("RahiModule").isSkillLearned("rahiSkillSex")):
 			if (GM.pc.hasReachablePenis()):
-				addButton("Blow job", "Make her suck you off like this", "blow_job")
+				addButton("Blow job", "(Sex) Make her suck you off like this", "blow_job")
 			if (GM.pc.hasReachableVagina()):
-				addButton("Sit on face", "Sit on her face with your pussy", "pussy_sit")
+				addButton("Sit on face", "(Sex) Sit on her face with your pussy", "pussy_sit")
 		if (getModule("RahiModule").getSlaveryStage() >= 3):
 			addButton("Complete isolation", "Add even more restraints", "complete_isolation")
 	if(state == "take_a_nap"):
@@ -256,7 +256,7 @@ func _run():
 		playAnimation(StageScene.SexOral, "tease", {npc="rahi", npcBodyState={naked=true}, bodyState={exposedCrotch=true, hard=true}})
 		saynn("You decided to change your mind and punish the kitty differently. Your hand finds a ring gag and presents it to the feline.")
 
-		saynn("[say=pc]I'm gonna facefuck that little mouth of yours, understand?[/say]")
+		saynn("[say=pc]I'm gonna fuck that little mouth of yours, understand?[/say]")
 
 		saynn("Kitty slowly parts her lips for you, letting the metal ring past her fangs, forcing her maw to be open. She quickly finds herself drooling.")
 
@@ -316,6 +316,161 @@ func _run():
 		saynn("Time to untie her.")
 
 		addButton("Continue", "See what happens next", "do_untie")
+	if(state == "pussy_sit"):
+		playAnimation(StageScene.SexFaceSitting, "sit", {npc="rahi", npcBodyState={naked=true}, bodyState={exposedCrotch=true}})
+		saynn("You decided to change your mind and punish the kitty differently. Rahi lets out a meow of surprise when you expose your {pc.pussyStretch} pussy and sit on her face, your crotch hovering just above her lips.")
+
+		saynn("[say=pc]We're gonna spend some time together, with you being my pillow, mhm?[/say]")
+
+		saynn("Kitty deeply blushes while her eyes scan the contours of your {pc.masc} body, the ones that she can see from her spot. Just feeling her warm breath near your slit makes you excited already.")
+
+		saynn("You slowly lowerself onto her face until your sensitive petals collide with her lips.")
+
+		addButton("Lick!", "Make her lick you out", "pussy_start_lick")
+	if(state == "pussy_start_lick"):
+		playAnimation(StageScene.SexFaceSitting, "grind", {npc="rahi", npcBodyState={naked=true}, bodyState={exposedCrotch=true, hard=true}})
+		saynn("You get comfy on Rahi's face, idly rubbing your pussy juices into her fur. Might as well make her work too now.")
+
+		saynn("[say=pc]Lick![/say]")
+
+		var sexScore = getModule("RahiModule").getSkillScore("rahiSkillSex")
+		if (sexScore < 4):
+			saynn("Kitty hears your order and blushes harder, she swiftly rolls her tongue out and starts quickly dragging it over your petals back and forth. She clearly lacks experience so her tongue is not as pleasurable as you would hoped but she got the enthusiasm.")
+
+			saynn("You bite your lip and move your hips, meeting her tongue and helping yourself get off that way. Little moans begin to escape your lips, you lean back and push your wet pussy into that cat's face more, letting her rough tongue collect your arousal.")
+
+			saynn("It feels.. good.. Rahi's tongue is clearly getting tired from eating your pussy out, just from a lack of endurance. So you grind her face more instead, marking her with your scent. Very soon the orgasm begins to draw closer until the pleasure waves finally shoot you over the edge.")
+
+			saynn("Your muscles begin to tense up uncontrollably while your legs shake and lose strength to keep you up. Rahi keeps eagerly licking you out until she gets a warm shower that's coming from your squirting pulsating slit. You arch your back and let the orgasm waves flow through you, assisted by your personal pussy licker.")
+
+			if (GM.pc.isWearingChastityCage()):
+				saynn("The pressure in your chastity cage gets too much, your locked dick suddenly begins to shoot strings of {pc.cum} past the metal frame, creating oh quite the mess on the floor.")
+
+			elif (GM.pc.hasReachablePenis()):
+				saynn("The pressure in your {pc.penis} gets too much, it suddenly begins to shoot out strings of {pc.cum}, creating oh quite the mess on the floor.")
+
+			saynn("After the climax begins to fade, you just keep sitting on Rahi's face, letting her clean up any wetness.")
+
+			saynn("[say=pc]Good job kitty, even if you need quite some practice to be a pro at this.[/say]")
+
+			saynn("You can feel purring happening down there, the vibrations get transferred to your sensitive pussy, providing extra stimulation.")
+
+		elif (sexScore < 7 || RNG.chance(40)):
+			saynn("Kitty hears your order and blushes slightly before getting to work. She lets her tongue roll out before dragging it over your sensitive pussy lips, making them wet with her saliva. She makes sure to poke your clit too, forcing out a moan or two out of you. Rahi is clearly trying to learn the best to pleasure you, letting you just enjoy yourself.")
+
+			saynn("But your body, it begs for more, your hips begin to move slightly, meeting the cat's tongue motions. While doing that, you spread your juices all over Rahi's face, forcing your lewd scent into her fur. You lean back and just keep moaning while the feline under you keeps eating you out.")
+
+			saynn("It feels.. quite good. Rahi's tongue is slowly running out of steam but its texture still feels great. You grind her face faster and faster until the orgasm starts to draw near. A few more motions and you suddenly cum..")
+
+			saynn("Your muscles begin to tense up uncontrollably while your legs shake and lose strength to keep you up. Rahi keeps eagerly licking you out even after she gets a warm shower that's coming from your squirting pulsating slit, she makes sure to collect as much girlcum as she can in her mouth. You arch your back and let the orgasm waves flow through you, assisted by your personal pussy licker.")
+
+			if (GM.pc.isWearingChastityCage()):
+				saynn("The pressure in your chastity cage gets too much, your locked dick suddenly begins to shoot strings of {pc.cum} past the metal frame, creating oh quite the mess on the floor.")
+
+			elif (GM.pc.hasReachablePenis()):
+				saynn("The pressure in your {pc.penis} gets too much, it suddenly begins to shoot out strings of {pc.cum}, creating oh quite the mess on the floor.")
+
+			saynn("After the climax begins to fade, you just keep sitting on Rahi's face, letting her clean up any wetness.")
+
+			saynn("[say=pc]Good job kitty, you're slowly getting better.[/say]")
+
+			saynn("You can feel purring happening down there, the vibrations get transferred to your sensitive pussy, providing extra stimulation.")
+
+		elif (sexScore < 15):
+			saynn("Kitty hears your order and eagerly digs into your crotch, her rough feline tongue already doing little circles around your sensitive clit, making you so needy. Kitty is so good that you start dropping moans. Her lips are rubbing against your pussy ones, collecting arousal onto them before Rahi obediently swallows it all.")
+
+			saynn("After giving your clit the treatment it deserves, Rahi begins to grind her muzzle against your wet petals while her tongue moves down to your pussy hole and tries to penetrate it, putting more and more pressure until the tip finally slides in. The kitty under you is purring, sending vibrations through her tongue while her tongue lapping at your soft inner walls, the pleasure slowly driving you insane.")
+
+			saynn("You barely move your hips at all, just letting the kitty eat your pussy. You lean back and support yourself with your hands while she works on lapping all the lewd fluids and brushing her rough nose against your clit. You feel like you won't last long, your noises of pleasure getting more pronounced. Until her efforts finally shoot you over the edge..")
+
+			saynn("Your whole body locks up and shivers uncontrollably, your arms and legs shaking, struggling to keep you still. Your pussy twitches and pulsates, Rahi overstimulates your flower so much that you start squirting all over her face, covering her with your juices until she has to close her eyes. She tries to catch as much of your girlcum as she can, swiftly swallowing it, before returning to licking you down there.")
+
+			if (GM.pc.isWearingChastityCage()):
+				saynn("The pressure in your chastity cage gets too much, your locked dick suddenly begins to shoot strings of {pc.cum} past the metal frame, creating oh quite the mess on the floor.")
+
+			elif (GM.pc.hasReachablePenis()):
+				saynn("The pressure in your {pc.penis} gets too much, it suddenly begins to shoot out strings of {pc.cum}, creating oh quite the mess on the floor.")
+
+			saynn("After the climax begins to fade, you just keep sitting on Rahi's face, letting her clean up any wetness.")
+
+			saynn("[say=pc]Ah.. You're such a good pussy licker.[/say]")
+
+			saynn("Rahi just purrs louder at you.")
+
+		else:
+			saynn("Kitty doesn't even need to hear your order, she was already nuzzling your pussy slit and sucking on your little sensitive clit. Then she rolls her feline tongue out and proceeds to playfully rub your cherry from side to side, already making you moan and squirm above her. That really gets your going, your sensitive lady bits already getting all moist and needy. And Rahi is eager to lap all of your arousal.")
+
+			saynn("After that she moves her muzzle down slightly, letting her nose brush against your clit while her tongue gets dragged over the petals with quite some pressure, letting you feel the texture. The friction is too much, you're squirming more and more until the orgasm overwhelms you. Your pussy slit gushes juices all over the cat's face but she just gets more eager to penetrate your pussy hole and starts licking you from the inside, letting your clenching walls get tight around her tongue. She uses the whole length of it, the tip manages to quickly find your g-spot and start prodding it at a steady rate. Kitty is tongue-fucking your slit and that just drives you mad, you're moaning like a slut while your shivering body tries to arch itself more, your pulsating slit squirting girlcum again and again, even if less this time.")
+
+			saynn("You have to actively resist your body because any movement is just pushing you further into this abyss of pleasure, the tied up kitty is obediently hammering at your spot while you ride one orgasm after another. You moan so much that your voice has those desperate raspy tones to it. And that's when Rahi starts to purr loudly, not just because she enjoys it too, but to provide extra stimulation, the powerful vibrations that she is making are transferring through her tongue and echoing throughout your whole crotch, it feels so-o warm down there.")
+
+			saynn("At some point you just have to cut it by raising yourself off the Rahi's face. But even then her masterful efforts cause your pussy to twitch and squirt out what fluids are left. And because there is almost no wetness left, your legs and arms are only shaking harder.")
+
+			saynn("[say=pc]Fu-u-u-uck.. So fucking go-o-o-od..[/say]")
+
+			saynn("And Rahi is just casually licking her lips, enjoying the view.")
+
+			saynn("You really take your time, recovering your breath.")
+
+			saynn("[say=rahi]Again~?..[/say]")
+
+			saynn("Oh fuck no, that's enough for one time.")
+
+		saynn("Time to untie her.")
+
+		addButton("Continue", "See what happens next", "do_untie")
+	if(state == "complete_isolation"):
+		saynn("At the last moment you decide your mind slightly. Rahi exhales a sigh of relief as you untie her paws. But then she hears the click of cuffs that lock her paws and ankles in an even tighter pose. And as she tries to comment on this, you force a rubber ball into her mouth before swiftly shoving on the whole head muzzle too, gagging the feline.")
+
+		saynn("[say=rahi]H-hey.. T-the ropes were enough..[/say]")
+
+		saynn("Yeah, that's why you repurpose the ropes by tying them around Rahi's chest and crotch, creating a tight hardness out of them. One of the vibrators gets slotted under the crotch rope and then gets gently pushed inside the feline's slit, stretching it. Then you find a few little pink vibro-bullets that you tape to her clit and to her nipples.")
+
+		saynn("[say=rahi]Rahi is very s-sorry, "+str(getFlag("RahiModule.rahiPCName", GM.pc.getName()))+".. Do you really have to..?[/say]")
+
+		saynn("You're really getting tired of her tone, your hands tighten the gag head harness until Rahi can only make faint mumbling noises. Then you grab a blindfold and tie it around her eyes, taking away kitty's sight too.")
+
+		saynn("Kitty is not struggling too much. And that's bad. You grab some chains and run between the both sets of cuffs before pulling on it hard, forcing kitty's ankles and wrists together, hogtying the girl and making her constantly arch her back. Her tail is wagging a lot so you tie some ropes around it too before tying the other end around her ponytail, making it so kitty experiences pain if she even tries to look anywhere except forward.")
+
+		saynn("[say=rahi]huff-f-f.. mphf.. hfhf-mpr-fh..[/say]")
+
+		saynn("What? Kitty is still asking for more? Great. You grab some ear plugs and gently wear them on Rahi's ears, stealing one of the last of her senses away. Now she can't even hear you or most of her noises.")
+
+		saynn("Kitty is cuffed, tied up, chained up, blindfolded, gagged, plugged and isolated. The only thing that's left is to make her squirm hard. That's where the little remotes come in, you slowly raise the power sliders on each one, causing the toys on her nipples, clit and inside her pussy to switch on. Rahi instantly jerks to the side but that only causes the ropes to dig into her sensitive spots more, any noises that she makes are almost fully muffled thanks to the ballgag.")
+
+		saynn("Poor kitty, you already hear her breathing getting deeper. With most of her senses gone, she is forced to focus on the only feelings that are left.. pleasure and pain.. a dangerous mix of sensations.")
+
+		saynn("Rahi's nipples quickly get stiff, the toys buzzing against them provides extra stimulation that the feline probably didn't experience that much."+str(" The vibrations even cause her nips to start lactating milk, lonely drops drip down her curvy tits." if getCharacter("rahi").canBeMilked() else "")+"")
+
+		saynn("Her pussy is twitching and leaking juices while two toys work on getting all her buttons pressed there at the same time. Very fast her pussy slit starts to squirt out small amounts of her girlcum, soon followed by her body trying to squirm but failing and instead receiving some discomforting sensations.")
+
+		saynn("No matter what she does.. or if she stays still.. something is causing her to try to move. But she can't, the feline is completely helpless.")
+
+		saynn("Well, might as well take a nap while she is like this.")
+
+		addButton("Nap", "Take a good nap", "isolation_nap")
+	if(state == "isolation_nap"):
+		saynn("After a short hour of pointless dreams, you open your eyes and see.. Well, you do see Rahi.")
+
+		saynn("The feline has clearly given up any attempts at resistance a long time ago. The dildo and the little vibrators are still buzzing away at her sensitive spots, causing the feline's pussy to pulsate regularry as a new orgasm overwhelms the poor kitty.")
+
+		saynn("There is quite a sizable pool of girlcum under her, the whole cell smells of Rahi's arousal. Heck, the whole block probably.")
+
+		saynn("Desperate deep noises manage to slip past her gagged mouth. She can't say a single word but you can tell, kitty is completely spaced out, there is only one thing on her mind, constant overstimulation.")
+
+		saynn("You crotch before the kitty and raise her blindfold, letting her see. Rahi's eyes are rolled up so high that you almost can't see them.")
+
+		saynn("Well, might as well untie her now. You turn off the vibrators, letting kitty finally.. relax. She keeps panting through her nose and will probably continue doing that for a while. You start unchaining her paws, ankles, untying her tail, chest, crotch, pulling out the dildo..")
+
+		saynn("As you ungag her.. Rahi just continues to drool. You place her head on your lap and give her some scritches behind the ears. Oh right, you pull the plugs out of her ears too.")
+
+		saynn("[say=pc]You're there, kitty?[/say]")
+
+		saynn("[say=rahi]ny.. nya.. nya-a-a..[/say]")
+
+		saynn("She might have lost it. But oh well, you can continue cuddling her until she returns to her senses. Which took a while of course. But at least it was fun.")
+
+		addButton("Continue", "See what happens next", "endthescene")
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
@@ -373,7 +528,20 @@ func _react(_action: String, _args):
 		processTime(10*60)
 		getModule("RahiModule").advanceSkill("rahiSkillSex")
 		getCharacter("rahi").cummedInMouthBy("pc")
+		GM.pc.orgasmFrom("rahi")
 		GM.pc.addSkillExperience(Skill.SexSlave, 30, "rahi_facefuck")
+
+	if(_action == "pussy_start_lick"):
+		processTime(10*60)
+		getCharacter("rahi").cummedOnBy("pc", FluidSource.Vagina, 0.7)
+		getCharacter("rahi").cummedInMouthBy("pc", FluidSource.Vagina, 0.3)
+		GM.pc.orgasmFrom("rahi")
+		getModule("RahiModule").advanceSkill("rahiSkillSex")
+		GM.pc.addSkillExperience(Skill.SexSlave, 30, "rahi_grind")
+
+	if(_action == "isolation_nap"):
+		processTime(60*60)
+		getCharacter("rahi").resetEquipment()
 
 	setState(_action)
 
