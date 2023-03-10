@@ -15,8 +15,8 @@ func _run():
 
 		saynn("[say=rahi]"+RNG.pick([
 			"So.. how did she do today?..",
-			"So.. how was her performance today, "+str(getFlag("RahiModule.rahiPCName", GM.pc.getName()))+"?..",
-			"What do you think about her task, "+str(getFlag("RahiModule.rahiPCName", GM.pc.getName()))+"?..",
+			"So.. how was her performance today, {rahiMaster}?..",
+			"What do you think about her task, {rahiMaster}?..",
 		])+"[/say]")
 
 		addButton(RNG.pick(["Great", "Good", "Good job", "Amazing"]), "Say that you loved her performance today", "say_great")
@@ -42,12 +42,12 @@ func _run():
 		if (success):
 			saynn("Kitty tilts her head down. You can see her cheeks inflating slightly.")
 
-			saynn("[say=rahi]But.. But.. Sorry, "+str(getFlag("RahiModule.rahiPCName", GM.pc.getName()))+".. You're right..[/say]")
+			saynn("[say=rahi]But.. But.. Sorry, {rahiMaster}.. You're right..[/say]")
 
 		else:
 			saynn("Kitty tilts her head down.")
 
-			saynn("[say=rahi]Sorry, "+str(getFlag("RahiModule.rahiPCName", GM.pc.getName()))+".. She will try harder next time..[/say]")
+			saynn("[say=rahi]Sorry, {rahiMaster}.. She will try harder next time..[/say]")
 
 		addButton("Continue", "See what happens next", "endthescene")
 	if(state == "say_bad"):
@@ -56,12 +56,12 @@ func _run():
 		if (success):
 			saynn("Kitty tilts her head a lot, she clearly doesn't understand something.")
 
-			saynn("[say=rahi]But.. But.. "+str(getFlag("RahiModule.rahiPCName", GM.pc.getName()))+".. That's unfair..[/say]")
+			saynn("[say=rahi]But.. But.. {rahiMaster}.. That's unfair..[/say]")
 
 		else:
 			saynn("Kitty tilts her head down, her ears droop, her tail rubs between her thighs.")
 
-			saynn("[say=rahi]Sorry, "+str(getFlag("RahiModule.rahiPCName", GM.pc.getName()))+".. Your slave is very sorry for failing..[/say]")
+			saynn("[say=rahi]Sorry, {rahiMaster}.. Your slave is very sorry for failing..[/say]")
 
 		addButton("Continue", "See what happens next", "endthescene")
 

@@ -26,7 +26,7 @@ func _run():
 
 		saynn("[say=pc]I can't hear you.[/say]")
 
-		saynn("[say=rahi]Yes, "+str(getFlag("RahiModule.rahiPCName", GM.pc.getName()))+"..[/say]")
+		saynn("[say=rahi]Yes, {rahiMaster}..[/say]")
 
 		saynn("[say=pc]Good.[/say]")
 
@@ -58,7 +58,7 @@ func _run():
 
 		saynn("Rahi slowly walks up to you.")
 
-		saynn("[say=rahi]Yes, "+str(getFlag("RahiModule.rahiPCName", GM.pc.getName()))+"?..[/say]")
+		saynn("[say=rahi]Yes, {rahiMaster}?..[/say]")
 
 		saynn("Your hand suddenly delivers a good smack on the girl's butt. Kitty yelps from the impact, covering her rear with her paws.")
 
@@ -86,7 +86,7 @@ func _run():
 
 		saynn("The poor kitty deliberates a bit in her head but then finally decides to commit, pulling away her paws. And as she does that, you instantly slap her butt again, sending it to bounce even, causing Kitty to produce a stifled noise.")
 
-		saynn("[say=rahi]Y-yes, "+str(getFlag("RahiModule.rahiPCName", GM.pc.getName()))+"..[/say]")
+		saynn("[say=rahi]Y-yes, {rahiMaster}..[/say]")
 
 		addButton("Continue", "See what happens next", "endthescene")
 	if(state == "rahiSkillExhibit"):
@@ -112,7 +112,7 @@ func _run():
 
 		saynn("[say=pc]Can't hear you, slave.[/say]")
 
-		saynn("[say=rahi]Yes, "+str(getFlag("RahiModule.rahiPCName", GM.pc.getName()))+"..[/say]")
+		saynn("[say=rahi]Yes, {rahiMaster}..[/say]")
 
 		saynn("You kiss the feline's shoulder and close her shirt before stepping away, letting her quickly button up the shirt.")
 
@@ -172,7 +172,7 @@ func _run():
 
 		saynn("Rahi walks up to you and straightens herself, paws by her sides.")
 
-		saynn("[say=rahi]What is it, "+str(getFlag("RahiModule.rahiPCName", GM.pc.getName()))+"?..[/say]")
+		saynn("[say=rahi]What is it, {rahiMaster}?..[/say]")
 
 		saynn("[say=pc]I wanna try to.. profit off of you.[/say]")
 
@@ -190,7 +190,7 @@ func _run():
 
 		saynn("Kitty shakes her head slightly.")
 
-		saynn("[say=rahi]No, "+str(getFlag("RahiModule.rahiPCName", GM.pc.getName()))+".. She can try selling her body.. for credits..[/say]")
+		saynn("[say=rahi]No, {rahiMaster}.. She can try selling her body.. for credits..[/say]")
 
 		saynn("[say=pc]Great.[/say]")
 
@@ -200,7 +200,7 @@ func _run():
 
 		saynn("Rahi looks at you, slightly concerned.")
 
-		saynn("[say=rahi]Yes, "+str(getFlag("RahiModule.rahiPCName", GM.pc.getName()))+"?.. What do you wanna teach her..[/say]")
+		saynn("[say=rahi]Yes, {rahiMaster}?.. What do you wanna teach her..[/say]")
 
 		saynn("[say=pc]Swallowing urine. I want to train you into a piss toilet, kitty.[/say]")
 

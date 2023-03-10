@@ -26,6 +26,8 @@ func callFuncWrapper(_command: String, _args: Array):
 		return Util.sayPlayer(str(_args[0]))
 	if(_command == "pick"):
 		return str(RNG.pick(_args))
+	if(_command == "rahiMaster"):
+		return GM.main.getFlag("RahiModule.rahiPCName", GM.pc.getName())
 	
 	return "!RUNTIME ERROR NO COMMAND FOUND "+_command+" "+str(_args)+"!"
 	

@@ -19,7 +19,7 @@ func _run():
 		playAnimation(StageScene.Duo, "stand", {npc="rahi"})
 		saynn("Rahi stands near her bed.")
 		
-		saynn("[say=rahi]Yes, "+str(getFlag("RahiModule.rahiPCName", GM.pc.getName()))+"?..[/say]")
+		saynn("[say=rahi]Yes, {rahiMaster}?..[/say]")
 		
 		sayn("Rahi's stats:")
 		sayn("Relationship stage: "+str(getFlag("RahiModule.rahiSlaveryStage", 0)))

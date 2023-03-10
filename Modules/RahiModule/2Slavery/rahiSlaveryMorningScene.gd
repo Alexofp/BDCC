@@ -22,7 +22,7 @@ func _run():
 
 		saynn("Rahi's ears perk as she opens her eyes. The feline quickly gets up and assumes a submissive pose. Straight posture, head tilted down, arms by her sides.")
 
-		saynn("[say=rahi]Hello, "+str(getFlag("RahiModule.rahiPCName", GM.pc.getName()))+"..[/say]")
+		saynn("[say=rahi]Hello, {rahiMaster}..[/say]")
 
 		saynn("[say=pc]Did you drink any alcohol while I wasn't here?[/say]")
 

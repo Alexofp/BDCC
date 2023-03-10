@@ -35,10 +35,10 @@ func _run():
 		saynn("After being done, you get up and look at your work. You see a kitty that's tied up pretty well. Rahi tests your restraints by wiggling but apart from moving her shoulders and bending her back, she can't do much.")
 
 		if (deserved):
-			saynn("[say=rahi]Huff.. Sorry for failing you, "+str(getFlag("RahiModule.rahiPCName", GM.pc.getName()))+"..[/say]")
+			saynn("[say=rahi]Huff.. Sorry for failing you, {rahiMaster}..[/say]")
 
 		else:
-			saynn("[say=rahi]This is unfair, "+str(getFlag("RahiModule.rahiPCName", GM.pc.getName()))+"..[/say]")
+			saynn("[say=rahi]This is unfair, {rahiMaster}..[/say]")
 
 		saynn("What now.")
 
@@ -70,7 +70,7 @@ func _run():
 
 			saynn("You get up and begin to untie her.")
 
-			saynn("[say=rahi]Thank you for punishing her, "+str(getFlag("RahiModule.rahiPCName", GM.pc.getName()))+"..[/say]")
+			saynn("[say=rahi]Thank you for punishing her, {rahiMaster}..[/say]")
 
 		else:
 			saynn("Kitty's eyes show that she is upset. Her fluffy tail starts to wag when she notices that you're awake. She is pouting.")
@@ -163,12 +163,12 @@ func _run():
 		saynn("She sees them and huffs audibly. Luckily, she is tied up enough for you to do whatever you want with her.")
 
 		if (deserved):
-			saynn("[say=rahi]She is sorry, "+str(getFlag("RahiModule.rahiPCName", GM.pc.getName()))+"..[/say]")
+			saynn("[say=rahi]She is sorry, {rahiMaster}..[/say]")
 
 			saynn("[say=pc]I know.[/say]")
 
 		else:
-			saynn("[say=rahi]This is very unfair, "+str(getFlag("RahiModule.rahiPCName", GM.pc.getName()))+"..[/say]")
+			saynn("[say=rahi]This is very unfair, {rahiMaster}..[/say]")
 
 			saynn("[say=pc]Who is in charge here?[/say]")
 
@@ -210,7 +210,7 @@ func _run():
 
 			saynn("As she notices that you're awake, her gaze becomes hopeful.")
 
-			saynn("[say=rahi]P-Please, "+str(getFlag("RahiModule.rahiPCName", GM.pc.getName()))+".. Enough.. She is very-very sorry!..[/say]")
+			saynn("[say=rahi]P-Please, {rahiMaster}.. Enough.. She is very-very sorry!..[/say]")
 
 			saynn("Alright, maybe the kitty had enough for now. You reach for her clamps and carefully take them off. But even that caused the feline to suddenly arch her back and let out a painful cry. She breathes heavily while her sensitive nips look slightly red from the skin being so irritated.")
 
@@ -219,7 +219,7 @@ func _run():
 
 			saynn("As she notices you being awake, she sighs audibly.")
 
-			saynn("[say=rahi]She is sorry, "+str(getFlag("RahiModule.rahiPCName", GM.pc.getName()))+".. She hopes she can be forgiven.. Ah..[/say]")
+			saynn("[say=rahi]She is sorry, {rahiMaster}.. She hopes she can be forgiven.. Ah..[/say]")
 
 			saynn("Seems like kitty has earned some rest. You reach for the nipple clamps and carefully take them off. But the sudden new sensations made kitty hiss loudly and shiver a lot. Her pussy is dry, it seems the feline needs more practice.")
 
@@ -228,7 +228,7 @@ func _run():
 
 			saynn("She notices that you're awake and presents you her chest.")
 
-			saynn("[say=rahi]T-this.. feels so weird.. "+str(getFlag("RahiModule.rahiPCName", GM.pc.getName()))+".. So much pain.. but she can't stop.. ah~..[/say]")
+			saynn("[say=rahi]T-this.. feels so weird.. {rahiMaster}.. So much pain.. but she can't stop.. ah~..[/say]")
 
 			saynn("You look down at her crotch.. she is somewhat wet down there, rubbing her thighs together. Kitty started off strong but now she is so exhausted the pain makes her desperate and needy.")
 
@@ -241,7 +241,7 @@ func _run():
 
 			saynn("She notices that you're awake and only squirms harder.")
 
-			saynn("[say=rahi]S-she.. she loves it, "+str(getFlag("RahiModule.rahiPCName", GM.pc.getName()))+".. She wants more.. Please.. More of this.. Make your kitty suffer..[/say]")
+			saynn("[say=rahi]S-she.. she loves it, {rahiMaster}.. She wants more.. Please.. More of this.. Make your kitty suffer..[/say]")
 
 			saynn("Wow, your kitty is one hell of a painslut. You decide not to deny her request and reach your hand towards one of the nipple clamps. But instead of carefully taking it off, you begin pulling on it.. harder and harder.. until it starts slipping off. And while doing so, the area that it pinches gets smaller and smaller, causing such a huge pain spike that the feline is arching her back and letting her tongue roll out.")
 
@@ -261,7 +261,7 @@ func _run():
 		saynn("Kitty slowly parts her lips for you, letting the metal ring past her fangs, forcing her maw to be open. She quickly finds herself drooling.")
 
 		if (deserved):
-			saynn("[say=rahi]She deserves anything you want to do with her, "+str(getFlag("RahiModule.rahiPCName", GM.pc.getName()))+"..[/say]")
+			saynn("[say=rahi]She deserves anything you want to do with her, {rahiMaster}..[/say]")
 
 		else:
 			saynn("[say=rahi]She doesn't understand why she deserves it..[/say]")
@@ -426,7 +426,7 @@ func _run():
 
 		saynn("Yeah, that's why you repurpose the ropes by tying them around Rahi's chest and crotch, creating a tight hardness out of them. One of the vibrators gets slotted under the crotch rope and then gets gently pushed inside the feline's slit, stretching it. Then you find a few little pink vibro-bullets that you tape to her clit and to her nipples.")
 
-		saynn("[say=rahi]Rahi is very s-sorry, "+str(getFlag("RahiModule.rahiPCName", GM.pc.getName()))+".. Do you really have to..?[/say]")
+		saynn("[say=rahi]Rahi is very s-sorry, {rahiMaster}.. Do you really have to..?[/say]")
 
 		saynn("You're really getting tired of her tone, your hands tighten the gag head harness until Rahi can only make faint mumbling noises. Then you grab a blindfold and tie it around her eyes, taking away kitty's sight too.")
 

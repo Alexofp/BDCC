@@ -99,7 +99,7 @@ func _run():
 
 			saynn("[say=pc]So, you think you succeeded?[/say]")
 
-			saynn("[say=rahi]There is no way for her to know, "+str(getFlag("RahiModule.rahiPCName", GM.pc.getName()))+"..[/say]")
+			saynn("[say=rahi]There is no way for her to know, {rahiMaster}..[/say]")
 
 			saynn("You look around. The bed.. seems to be mostly well-made. Yeah, the blanket is tilted slightly and the pillow is hanging off the side but effort clearly went into making it as good as Rahi can. As for the dust.. Hm.. You drag your finger over the window and try to catch some. But there is none. That's nice.")
 
@@ -116,7 +116,7 @@ func _run():
 
 			saynn("She is trying to talk herself out of it? Your eyes become meaner, drilling through the sad kitty.")
 
-			saynn("[say=rahi]She couldn't do it, "+str(getFlag("RahiModule.rahiPCName", GM.pc.getName()))+".. At least she cleaned everything?..[/say]")
+			saynn("[say=rahi]She couldn't do it, {rahiMaster}.. At least she cleaned everything?..[/say]")
 
 			saynn("Yeah she did, you drag the finger on the glass surface and are unable to pick up any dust. But cleaning the cell is not why you gave her that task.")
 
@@ -162,7 +162,7 @@ func _run():
 
 			saynn("You step inside and stop the kitty. She lets out a meow of surprise.")
 
-			saynn("[say=rahi]Did she fail, "+str(getFlag("RahiModule.rahiPCName", GM.pc.getName()))+"?.. huff..[/say]")
+			saynn("[say=rahi]Did she fail, {rahiMaster}?.. huff..[/say]")
 
 			saynn("[say=pc]No. You did pretty well in fact. Good job.[/say]")
 

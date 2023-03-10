@@ -362,7 +362,7 @@ func _run():
 
 		saynn("Time for the fun part, you reach for the little slider on the remote and raise it slightly. The toy in Rahi's shorts engages and begins to buzz ever so audibly. But the feline reacts instantly, closing her legs and producing a soft moan.")
 
-		saynn("[say=rahi]H-hey.. "+str(getFlag("RahiModule.rahiPCName", GM.pc.getName()))+"..[/say]")
+		saynn("[say=rahi]H-hey.. {rahiMaster}..[/say]")
 
 		saynn("[say=pc]Enjoy it.[/say]")
 

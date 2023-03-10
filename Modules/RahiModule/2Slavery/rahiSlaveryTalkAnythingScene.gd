@@ -28,7 +28,7 @@ func _run():
 	if(state == ""):
 		saynn("You ask if Rahi has anything to talk about.")
 
-		saynn("[say=rahi]Sorry, "+str(getFlag("RahiModule.rahiPCName", GM.pc.getName()))+". She has run out of things to talk about..[/say]")
+		saynn("[say=rahi]Sorry, {rahiMaster}. She has run out of things to talk about..[/say]")
 
 		saynn("Fair enough. Maybe you can ask her again when your relationship advances.")
 

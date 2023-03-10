@@ -17,14 +17,14 @@ func _run():
 		addCharacter("rahi")
 		saynn("[say=pc]Stand still.[/say]")
 
-		saynn("[say=rahi]Yes, "+str(getFlag("RahiModule.rahiPCName", GM.pc.getName()))+"..[/say]")
+		saynn("[say=rahi]Yes, {rahiMaster}..[/say]")
 
 		saynn("Rahi tilts her head down while you reach your hand out towards her head. The feline is clearly being cautious.")
 
 		saynn("But she shouldn't have worried, you plop your hand between her ears, giving the feline a good headpat. Kitty offers you a soft smile.")
 
 		if (deserved):
-			saynn("[say=rahi]Thank you.. She wants to be the best kitty for you, "+str(getFlag("RahiModule.rahiPCName", GM.pc.getName()))+"..[/say]")
+			saynn("[say=rahi]Thank you.. She wants to be the best kitty for you, {rahiMaster}..[/say]")
 
 		else:
 			saynn("[say=rahi]Why are you.. Thank you.. She doesn't deserve it..[/say]")
@@ -64,14 +64,14 @@ func _run():
 		saynn("Rahi bleps unwillingly and leans into the scritches, her cheeks begin to blush while she continues to purr.")
 
 		if (deserved):
-			saynn("[say=rahi]You rewarded her enough, "+str(getFlag("RahiModule.rahiPCName", GM.pc.getName()))+"..[/say]")
+			saynn("[say=rahi]You rewarded her enough, {rahiMaster}..[/say]")
 
 			saynn("[say=pc]Only I choose when you're gonna stop being petted, understand?[/say]")
 
 			saynn("[say=rahi]Of course.. myaaa..[/say]")
 
 		else:
-			saynn("[say=rahi]You.. you're spoiling her, "+str(getFlag("RahiModule.rahiPCName", GM.pc.getName()))+".. meow..[/say]")
+			saynn("[say=rahi]You.. you're spoiling her, {rahiMaster}.. meow..[/say]")
 
 			saynn("[say=pc]So? Gonna try and stop me from petting the most fluffy and cute cat?[/say]")
 
@@ -108,7 +108,7 @@ func _run():
 			saynn("[say=pc]You're fine, kitty. I'm glad I could make you feel good.[/say]")
 
 		else:
-			saynn("[say=rahi]Wow.. thank you so much, "+str(getFlag("RahiModule.rahiPCName", GM.pc.getName()))+"..[/say]")
+			saynn("[say=rahi]Wow.. thank you so much, {rahiMaster}..[/say]")
 
 			saynn("[say=pc]I'm glad I could make you feel good.[/say]")
 

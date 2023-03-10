@@ -39,7 +39,7 @@ func _run():
 		if (success):
 			saynn("After some time Rahi returns and brings you the forbidden fruit!")
 
-			saynn("[say=rahi]Here you go, "+str(getFlag("RahiModule.rahiPCName", GM.pc.getName()))+".. No one saw her![/say]")
+			saynn("[say=rahi]Here you go, {rahiMaster}.. No one saw her![/say]")
 
 			saynn("You grab the apple and rub it clean against her fur.")
 
@@ -49,7 +49,7 @@ func _run():
 			playAnimation(StageScene.Duo, "stand", {npc="rahi"})
 			saynn("After some time Rahi returns. But instead of an apple, she is carrying a full list of restraints on her.")
 
-			saynn("[say=rahi]She got spotted.. many times.. Sorry, "+str(getFlag("RahiModule.rahiPCName", GM.pc.getName()))+", she couldn't do it..[/say]")
+			saynn("[say=rahi]She got spotted.. many times.. Sorry, {rahiMaster}, she couldn't do it..[/say]")
 
 			saynn("Well, Rahi failed her task. You wonder if you should even begin to untie her.")
 
@@ -64,7 +64,7 @@ func _run():
 		if (success):
 			saynn("After some time Rahi returns and brings you an item that she stole!")
 
-			saynn("[say=rahi]Here you go, "+str(getFlag("RahiModule.rahiPCName", GM.pc.getName()))+".. Not a single nurse saw her![/say]")
+			saynn("[say=rahi]Here you go, {rahiMaster}.. Not a single nurse saw her![/say]")
 
 			saynn("You grab what she brought you and nod to her.")
 
@@ -73,7 +73,7 @@ func _run():
 		else:
 			saynn("After some time Rahi returns. But instead of bringing a useful item, she steps into the room wearing a straitjacket and looking.. quite lusty.")
 
-			saynn("[say=rahi]She got spotted.. They.. injected her with something.. Sorry, "+str(getFlag("RahiModule.rahiPCName", GM.pc.getName()))+", she couldn't do it..[/say]")
+			saynn("[say=rahi]She got spotted.. They.. injected her with something.. Sorry, {rahiMaster}, she couldn't do it..[/say]")
 
 			saynn("Well, Rahi failed her task. You wonder if you should even begin to free her.")
 
@@ -88,7 +88,7 @@ func _run():
 		if (success):
 			saynn("After some time Rahi returns and brings you a chip with some credits!")
 
-			saynn("[say=rahi]Here you go, "+str(getFlag("RahiModule.rahiPCName", GM.pc.getName()))+".. They won't know it was her![/say]")
+			saynn("[say=rahi]Here you go, {rahiMaster}.. They won't know it was her![/say]")
 
 			saynn("You grab the chip and insert it into your collar, transferring the credits to your inmate account.")
 
