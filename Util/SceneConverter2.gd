@@ -216,8 +216,14 @@ func _on_Button_pressed():
 				splittedStuff.remove(0)
 				splittedStuff.remove(splittedStuff.size()-1)
 				var thedesc = Util.join(splittedStuff, ",").strip_edges()
-				addToRun('addButton("'+thename+'", "'+thedesc+'", "'+theid+'")')
 				_i += 1
+				
+				var nextLineB = lines[_i]
+				if(nextLineB.begins_with("[") && nextLineB.ends_with("]")):
+					addToRun('addButtonWithChecks("'+thename+'", "'+thedesc+'", "'+theid+'", [], '+nextLineB+')')
+					_i += 1
+				else:
+					addToRun('addButton("'+thename+'", "'+thedesc+'", "'+theid+'")')
 				
 				reacts[theid] = []
 				while(true):
