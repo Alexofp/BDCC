@@ -98,6 +98,7 @@ func _init():
 		"res://Modules/RahiModule/2Slavery/Milestones/rahiMilestone1Scene.gd",
 		"res://Modules/RahiModule/2Slavery/Tasks/rahiSlaveryStealingTaskScene.gd",
 		"res://Modules/RahiModule/2Slavery/Milestones/rahiMilestone2Scene.gd",
+		"res://Modules/RahiModule/2Slavery/Milestones/rahiMilestone3Scene.gd",
 		]
 	characters = [
 		"res://Modules/RahiModule/RahiCharacter.gd",
@@ -185,7 +186,7 @@ func getAdvanceStageScene():
 	if(currentStage == 1):
 		return "rahiMilestone2Scene"
 	if(currentStage == 2):
-		return "RahiEmbraceScene"
+		return "rahiMilestone3Scene"
 	
 	return null
 
