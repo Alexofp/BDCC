@@ -103,6 +103,10 @@ func _init():
 	characters = [
 		"res://Modules/RahiModule/RahiCharacter.gd",
 		"res://Modules/RahiModule/AvyCharacter.gd",
+		"res://Modules/RahiModule/2Slavery/FlashbackCharacters/MineOwnerCharacter.gd",
+		"res://Modules/RahiModule/2Slavery/FlashbackCharacters/PharmacistCharacter.gd",
+		"res://Modules/RahiModule/2Slavery/FlashbackCharacters/RabiCharacter.gd",
+		"res://Modules/RahiModule/2Slavery/FlashbackCharacters/SamirCharacter.gd",
 	]
 	items = []
 	events = [
