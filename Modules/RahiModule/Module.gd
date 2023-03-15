@@ -107,6 +107,8 @@ func _init():
 		"res://Modules/RahiModule/2Slavery/FlashbackCharacters/PharmacistCharacter.gd",
 		"res://Modules/RahiModule/2Slavery/FlashbackCharacters/RabiCharacter.gd",
 		"res://Modules/RahiModule/2Slavery/FlashbackCharacters/SamirCharacter.gd",
+		"res://Modules/RahiModule/2Slavery/FlashbackCharacters/AlphaCorpLadyCharacter.gd",
+		"res://Modules/RahiModule/2Slavery/FlashbackCharacters/BarGuyCharacter.gd",
 	]
 	items = []
 	events = [

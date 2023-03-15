@@ -167,6 +167,8 @@ gridColor = 8
 [node name="RahiFlashRoom29" parent="." index="29" instance=ExtResource( 1 )]
 self_modulate = Color( 0.5, 0.5, 0.5, 1 )
 position = Vector2( 512, -576 )
+roomName = "Dark alleyway"
+roomID = "rahi_alleystart"
 roomColor = 7
 gridColor = 8
 
