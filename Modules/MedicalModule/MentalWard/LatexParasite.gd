@@ -2,6 +2,7 @@ extends Character
 
 func _init():
 	id = "latexParasite"
+	disableSerialization = true
 	
 func _getName():
 	return "Latex Parasite"

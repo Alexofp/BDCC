@@ -404,12 +404,17 @@ func loadData(data):
 func saveCharactersData():
 	var data = {}
 	for characterID in staticCharacters:
-		data[characterID] = staticCharacters[characterID].saveData()
+		var character = staticCharacters[characterID]
+		if(character.disableSerialization):
+			continue
+		data[characterID] = character.saveData()
 	return data
 	
 func loadCharactersData(data):
 	for characterID in staticCharacters:
 		var character = staticCharacters[characterID]
+		if(character.disableSerialization):
+			continue
 		character.loadData(SAVE.loadVar(data, characterID, {}))
 	
 func saveDynamicCharactersData():

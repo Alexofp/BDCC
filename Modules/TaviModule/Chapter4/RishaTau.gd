@@ -8,6 +8,7 @@ func _init():
 	npcCharacterType = CharacterType.Generic
 	
 	npcHasMenstrualCycle = false
+	disableSerialization = true
 	
 func _getName():
 	return "Risha"

@@ -180,7 +180,7 @@ gridColor = 8
 self_modulate = Color( 0.5, 0.5, 0.5, 1 )
 position = Vector2( 512, -704 )
 roomName = "Dark alleyway"
-roomID = "rahi_outsidebar"
+roomID = "rahi_darkalley"
 roomColor = 7
 gridColor = 8
 
