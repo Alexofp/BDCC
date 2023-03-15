@@ -16,6 +16,9 @@ func updateSubAnims():
 		animationTree["parameters/CuffsBlend/blend_amount"] = 0.0
 	
 func playAnimation(animID, _args = {}):
+	var fullAnimID = animID
+	if(animID is Array):
+		animID = animID[0]
 	print("Playing: "+str(animID))
 	if(_args.has("pc")):
 		doll.prepareCharacter(_args["pc"])
@@ -42,5 +45,5 @@ func playAnimation(animID, _args = {}):
 		animationTree.active = true
 		
 		var state_machine = animationTree["parameters/AnimationNodeStateMachine/playback"]
-		if(!stateMachineTravel(doll, state_machine, animID)):
+		if(!stateMachineTravel(doll, state_machine, fullAnimID)):
 			Log.printerr("Action "+str(animID)+" is not found for stage "+str(id))
