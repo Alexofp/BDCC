@@ -16,6 +16,9 @@ func getSmallDescription() -> String:
 func getSpecies():
 	return ["feline"]
 	
+func getChatColor():
+	return '#FF8E5E'
+	
 func getThickness() -> int:
 	return 60
 
