@@ -1,21 +1,18 @@
 {
-	"dateString": "07 of Mar 2023",
+	"dateString": "16 of Mar 2023",
 	"entries": {
 		"$1.00": [
 			{
 				"nickname": "thatoneguyatthebar"
 			},
 			{
+				"nickname": "Maxtacks"
+			},
+			{
 				"nickname": "SuPhox"
 			},
 			{
 				"nickname": "Caliban"
-			},
-			{
-				"nickname": "Maxtacks"
-			},
-			{
-				"nickname": "Zeneroth"
 			},
 			{
 				"nickname": "Kyle Oran Evans "
@@ -27,13 +24,16 @@
 				"nickname": "Trewill"
 			},
 			{
+				"nickname": "Lichity"
+			},
+			{
+				"nickname": "User#a63f196a"
+			},
+			{
 				"nickname": "Tristan Leo Roberts "
 			},
 			{
 				"nickname": "VØID"
-			},
-			{
-				"nickname": "Lichity"
 			},
 			{
 				"nickname": "BarryRkls"
@@ -42,16 +42,13 @@
 				"nickname": "joelee29"
 			},
 			{
-				"nickname": "User#a63f196a"
+				"nickname": "TwilightHome"
 			},
 			{
 				"nickname": "ghost of cum"
 			},
 			{
 				"nickname": "User#d7493e93"
-			},
-			{
-				"nickname": "TwilightHome"
 			},
 			{
 				"nickname": "Magetsu88"
@@ -61,6 +58,9 @@
 			},
 			{
 				"nickname": "yam"
+			},
+			{
+				"nickname": "fristen"
 			}
 		],
 		"$10.00": [
@@ -80,40 +80,37 @@
 				"nickname": "Loch55"
 			},
 			{
-				"nickname": "Wyvernclaw00"
-			},
-			{
-				"nickname": "IzzenXAZ"
-			},
-			{
 				"nickname": "Silver_Bloke"
 			},
 			{
-				"nickname": "User#2242146d"
+				"nickname": "Wyvernclaw00"
 			},
 			{
 				"nickname": "Masaki Akira"
 			},
 			{
-				"nickname": "User#253e76e7"
-			},
-			{
-				"nickname": "Blarg"
-			},
-			{
-				"nickname": "Runulf"
+				"nickname": "IzzenXAZ"
 			},
 			{
 				"nickname": "Steied"
 			},
 			{
-				"nickname": "Michy <3"
+				"nickname": "User#2242146d"
 			},
 			{
-				"nickname": "Rac"
+				"nickname": "Runulf"
+			},
+			{
+				"nickname": "Blarg"
+			},
+			{
+				"nickname": "User#253e76e7"
 			},
 			{
 				"nickname": "ProtossMan"
+			},
+			{
+				"nickname": "Rac"
 			}
 		],
 		"$5.00": [
@@ -131,6 +128,9 @@
 			},
 			{
 				"nickname": "User#d74b7dcd"
+			},
+			{
+				"nickname": "lewdyaccount"
 			}
 		]
 	},
@@ -139,5 +139,5 @@
 		"$5.00",
 		"$1.00"
 	],
-	"unixTime": 1678166014
+	"unixTime": 1678967985
 }
