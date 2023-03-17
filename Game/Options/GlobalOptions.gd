@@ -331,13 +331,13 @@ func getChangeableOptions():
 					"type": "checkbox",
 					"value": showSceneCreator,
 				},
-				{
-					"name": "Show map art (WIP)",
-					"description": "(WORK IN PROGRESS) Shows props and walls on the minimap when supported",
-					"id": "showMapArt",
-					"type": "checkbox",
-					"value": showMapArt,
-				},
+#				{
+#					"name": "Show map art (WIP)",
+#					"description": "(WORK IN PROGRESS) Shows props and walls on the minimap when supported",
+#					"id": "showMapArt",
+#					"type": "checkbox",
+#					"value": showMapArt,
+#				},
 			],
 		},
 		{
