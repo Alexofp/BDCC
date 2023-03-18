@@ -106,6 +106,8 @@ func _run():
 	if(state == "train_new_skill"):
 		saynn("What skill do you wanna start teaching to Rahi?")
 		
+		saynn("(If you don't want Rahi to learn a certain skill you don't have to teach it to her, story will progress regardless)")
+		
 		var rahiModule = getModule("RahiModule")
 		var skills = rahiModule.getSkillsInfo()
 		for skillID in skills:
