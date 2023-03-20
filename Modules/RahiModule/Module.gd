@@ -102,6 +102,7 @@ func _init():
 		"res://Modules/RahiModule/2Slavery/Milestones/rahiMilestone2Scene.gd",
 		"res://Modules/RahiModule/2Slavery/Milestones/rahiMilestone3Scene.gd",
 		"res://Modules/RahiModule/2Slavery/Milestones/rahiMilestone4Scene.gd",
+		"res://Modules/RahiModule/2Slavery/Milestones/rahiMilestone5Scene.gd",
 		]
 	characters = [
 		"res://Modules/RahiModule/RahiCharacter.gd",
@@ -184,11 +185,13 @@ func getStatLimit():
 		return 30
 	if(currentStage == 3):
 		return 40
+	if(currentStage == 4):
+		return 40
 	
 	return 999
 
 func getMaxStage():
-	return 4
+	return 5
 
 func getAdvanceStageScene():
 	var currentStage = getFlag("RahiModule.rahiSlaveryStage", 0)
@@ -200,6 +203,8 @@ func getAdvanceStageScene():
 		return "rahiMilestone3Scene"
 	if(currentStage == 3):
 		return "rahiMilestone4Scene"
+	if(currentStage == 4):
+		return "rahiMilestone5Scene"
 	
 	return null
 
