@@ -35,6 +35,7 @@ func getFlags():
 		"rahiMile2Embraced": flag(FlagType.Bool),
 		"rahiMile4WasKind": flag(FlagType.Bool),
 		"rahiMile5Intervened": flag(FlagType.Bool),
+		"rahiMile6ToldBroke": flag(FlagType.Bool),
 		
 		"rahiSlaveryDidTaskToday": flag(FlagType.Bool),
 		"rahiPCName": flag(FlagType.Text),
