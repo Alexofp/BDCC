@@ -36,6 +36,8 @@ func getFlags():
 		"rahiMile4WasKind": flag(FlagType.Bool),
 		"rahiMile5Intervened": flag(FlagType.Bool),
 		"rahiMile6ToldBroke": flag(FlagType.Bool),
+		"rahiMile7Proposed": flag(FlagType.Bool),
+		"rahiMile7Enslaved": flag(FlagType.Bool),
 		
 		"rahiSlaveryDidTaskToday": flag(FlagType.Bool),
 		"rahiPCName": flag(FlagType.Text),
@@ -105,6 +107,7 @@ func _init():
 		"res://Modules/RahiModule/2Slavery/Milestones/rahiMilestone4Scene.gd",
 		"res://Modules/RahiModule/2Slavery/Milestones/rahiMilestone5Scene.gd",
 		"res://Modules/RahiModule/2Slavery/Milestones/rahiMilestone6Scene.gd",
+		"res://Modules/RahiModule/2Slavery/Milestones/rahiMilestone7Scene.gd",
 		]
 	characters = [
 		"res://Modules/RahiModule/RahiCharacter.gd",
@@ -191,11 +194,13 @@ func getStatLimit():
 		return 50
 	if(currentStage == 5):
 		return 60
+	if(currentStage == 6):
+		return 70
 	
 	return 999
 
 func getMaxStage():
-	return 6
+	return 7
 
 func getAdvanceStageScene():
 	var currentStage = getFlag("RahiModule.rahiSlaveryStage", 0)
@@ -211,6 +216,8 @@ func getAdvanceStageScene():
 		return "rahiMilestone5Scene"
 	if(currentStage == 5):
 		return "rahiMilestone6Scene"
+	if(currentStage == 6):
+		return "rahiMilestone7Scene"
 	
 	return null
 
