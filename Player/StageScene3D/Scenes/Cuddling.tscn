@@ -1,0 +1,87 @@
+[gd_scene load_steps=15 format=2]
+
+[ext_resource path="res://Player/Player3D/Doll3D.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Player/StageScene3D/BaseStageScene3D.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Player/Props/platform.png" type="Texture" id=3]
+[ext_resource path="res://Player/StageScene3D/Scenes/Cuddling.gd" type="Script" id=4]
+
+[sub_resource type="AnimationNodeAnimation" id=3]
+animation = "CuffedArms-loop"
+
+[sub_resource type="AnimationNodeBlend2" id=4]
+filter_enabled = true
+filters = [ "Doll3D/Skeleton:Arm.L", "Doll3D/Skeleton:Arm.R", "Doll3D/Skeleton:ForeArm.L", "Doll3D/Skeleton:ForeArm.R", "Doll3D/Skeleton:Hand.L", "Doll3D/Skeleton:Hand.R" ]
+
+[sub_resource type="AnimationNodeAnimation" id=40]
+animation = "CuddleSit_1-loop"
+
+[sub_resource type="AnimationNodeStateMachine" id=41]
+states/CuddleSit_1-loop/node = SubResource( 40 )
+states/CuddleSit_1-loop/position = Vector2( 554, 94 )
+start_node = "CuddleSit_1-loop"
+
+[sub_resource type="AnimationNodeBlendTree" id=42]
+graph_offset = Vector2( -329.299, 103.849 )
+nodes/Animation/node = SubResource( 3 )
+nodes/Animation/position = Vector2( 140, 280 )
+nodes/CuffsBlend/node = SubResource( 4 )
+nodes/CuffsBlend/position = Vector2( 440, 160 )
+nodes/StateMachine/node = SubResource( 41 )
+nodes/StateMachine/position = Vector2( 160, 140 )
+nodes/output/position = Vector2( 680, 180 )
+node_connections = [ "output", 0, "CuffsBlend", "CuffsBlend", 0, "StateMachine", "CuffsBlend", 1, "Animation" ]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=22]
+
+[sub_resource type="AnimationNodeAnimation" id=43]
+animation = "CuddleSit_2-loop"
+
+[sub_resource type="AnimationNodeStateMachine" id=44]
+states/CuddleSit_2-loop/node = SubResource( 43 )
+states/CuddleSit_2-loop/position = Vector2( 557, 126 )
+start_node = "CuddleSit_2-loop"
+
+[sub_resource type="AnimationNodeBlendTree" id=45]
+graph_offset = Vector2( -322.532, 74.6842 )
+nodes/Animation/node = SubResource( 3 )
+nodes/Animation/position = Vector2( 140, 280 )
+nodes/CuffsBlend/node = SubResource( 4 )
+nodes/CuffsBlend/position = Vector2( 440, 160 )
+nodes/StateMachine/node = SubResource( 44 )
+nodes/StateMachine/position = Vector2( 180, 120 )
+nodes/output/position = Vector2( 680, 180 )
+node_connections = [ "output", 0, "CuffsBlend", "CuffsBlend", 0, "StateMachine", "CuffsBlend", 1, "Animation" ]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=39]
+
+[node name="Cuddling" instance=ExtResource( 2 )]
+script = ExtResource( 4 )
+
+[node name="Sprite3D" type="Sprite3D" parent="." index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.196641, -1.77462 )
+texture = ExtResource( 3 )
+region_enabled = true
+region_rect = Rect2( 1, 1, 1022, 62 )
+
+[node name="Doll3D" parent="." index="1" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.937595, 0, 0 )
+
+[node name="Doll3D2" parent="." index="2" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.937595, 0, 0 )
+
+[node name="AnimationTree" type="AnimationTree" parent="." index="3"]
+tree_root = SubResource( 42 )
+anim_player = NodePath("../Doll3D/DollSkeleton/AnimationPlayer")
+parameters/CuffsBlend/blend_amount = 0
+parameters/StateMachine/playback = SubResource( 22 )
+
+[node name="AnimationTree2" type="AnimationTree" parent="." index="4"]
+tree_root = SubResource( 45 )
+anim_player = NodePath("../Doll3D2/DollSkeleton/AnimationPlayer")
+parameters/CuffsBlend/blend_amount = 0
+parameters/StateMachine/playback = SubResource( 39 )
+
+[editable path="Doll3D"]
+[editable path="Doll3D/DollSkeleton"]
+[editable path="Doll3D2"]
+[editable path="Doll3D2/DollSkeleton"]

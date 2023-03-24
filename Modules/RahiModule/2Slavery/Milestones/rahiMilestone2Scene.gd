@@ -106,6 +106,7 @@ func _run():
 		addButton("Embrace", "Hug the kitty and let her scratch you", "do_embrace")
 		addButton("Grab and spank", "Catch the feline and punish her for this act", "do_spank")
 	if(state == "do_embrace"):
+		playAnimation(StageScene.Cuddling, "idle", {npc="rahi"})
 		setFlag("RahiModule.rahiMile2Embraced", true)
 		saynn("Instead of trying to avoid or attack her back, you meet her with a warm tight hug, wrapping your hands around Rahi. She wasn't too amused by that, her paws leaving countless scratches and cuts on your skin. But you don't stop no matter how much she hurts you.")
 
@@ -215,7 +216,7 @@ func _run():
 		addButton("Continue", "That was something", "endthescene")
 	if(state == "do_spank"):
 		setFlag("RahiModule.rahiMile2Embraced", false)
-		playAnimation(StageScene.Duo, "stand", {npc="rahi", npcAction="defeat"})
+		playAnimation(StageScene.Spanking, "fast", {npc="rahi"})
 		saynn("You easily dodge Rahi's attack, the alcohol in her bloodstream made her motions slow and predictable. After that, you grab her by the most easily accessible part, her ponytail, and yank down, making the kitty trip and collapse. A loud painful hissing noise escapes her lips.")
 
 		saynn("The sudden uncomfortable sensations seem to snap kitty out of her state of rage. Her eyes.. They are full of fear now.")

@@ -420,6 +420,8 @@ func _run():
 
 		addButton("Continue", "See what happens next", "do_untie")
 	if(state == "complete_isolation"):
+		playAnimation(StageScene.Hogtied, "idle", {pc="rahi"})
+		
 		saynn("At the last moment you decide your mind slightly. Rahi exhales a sigh of relief as you untie her paws. But then she hears the click of cuffs that lock her paws and ankles in an even tighter pose. And as she tries to comment on this, you force a rubber ball into her mouth before swiftly shoving on the whole head muzzle too, gagging the feline.")
 
 		saynn("[say=rahi]H-hey.. T-the ropes were enough..[/say]")

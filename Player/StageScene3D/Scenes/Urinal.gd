@@ -16,7 +16,7 @@ func _ready():
 #		animationTree["parameters/CuffsBlend/blend_amount"] = 0.0
 	
 func playAnimation(animID, _args = {}):
-	print("Playing sybian: "+str(animID))
+	print("Playing urinal: "+str(animID))
 	
 	if(_args.has("pc")):
 		doll.prepareCharacter(_args["pc"])

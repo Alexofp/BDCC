@@ -1,0 +1,133 @@
+[gd_scene load_steps=27 format=2]
+
+[ext_resource path="res://Player/Player3D/Doll3D.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Player/StageScene3D/BaseStageScene3D.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Player/Props/platform.png" type="Texture" id=3]
+[ext_resource path="res://Player/StageScene3D/Scenes/Spanking.gd" type="Script" id=4]
+
+[sub_resource type="AnimationNodeAnimation" id=3]
+animation = "CuffedArms-loop"
+
+[sub_resource type="AnimationNodeBlend2" id=4]
+filter_enabled = true
+filters = [ "Doll3D/Skeleton:Arm.L", "Doll3D/Skeleton:Arm.R", "Doll3D/Skeleton:ForeArm.L", "Doll3D/Skeleton:ForeArm.R", "Doll3D/Skeleton:Hand.L", "Doll3D/Skeleton:Hand.R" ]
+
+[sub_resource type="AnimationNodeAnimation" id=40]
+animation = "SpankingFast_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=41]
+animation = "SpankingTease_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=42]
+animation = "Spanking_1-loop"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=43]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=44]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=45]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=46]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachine" id=47]
+states/SpankingFast_1-loop/node = SubResource( 40 )
+states/SpankingFast_1-loop/position = Vector2( 525, 225 )
+states/SpankingTease_1-loop/node = SubResource( 41 )
+states/SpankingTease_1-loop/position = Vector2( 525, 72 )
+states/Spanking_1-loop/node = SubResource( 42 )
+states/Spanking_1-loop/position = Vector2( 525, 151 )
+transitions = [ "SpankingTease_1-loop", "Spanking_1-loop", SubResource( 43 ), "Spanking_1-loop", "SpankingTease_1-loop", SubResource( 44 ), "Spanking_1-loop", "SpankingFast_1-loop", SubResource( 45 ), "SpankingFast_1-loop", "Spanking_1-loop", SubResource( 46 ) ]
+start_node = "SpankingTease_1-loop"
+
+[sub_resource type="AnimationNodeBlendTree" id=48]
+graph_offset = Vector2( -327.299, 57.849 )
+nodes/Animation/node = SubResource( 3 )
+nodes/Animation/position = Vector2( 140, 280 )
+nodes/CuffsBlend/node = SubResource( 4 )
+nodes/CuffsBlend/position = Vector2( 440, 160 )
+nodes/StateMachine/node = SubResource( 47 )
+nodes/StateMachine/position = Vector2( 140, 120 )
+nodes/output/position = Vector2( 680, 180 )
+node_connections = [ "output", 0, "CuffsBlend", "CuffsBlend", 0, "StateMachine", "CuffsBlend", 1, "Animation" ]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=22]
+
+[sub_resource type="AnimationNodeAnimation" id=50]
+animation = "SpankingFast_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=51]
+animation = "SpankingTease_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=52]
+animation = "Spanking_2-loop"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=53]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=54]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=55]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=56]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachine" id=57]
+states/SpankingFast_2-loop/node = SubResource( 50 )
+states/SpankingFast_2-loop/position = Vector2( 460, 228 )
+states/SpankingTease_2-loop/node = SubResource( 51 )
+states/SpankingTease_2-loop/position = Vector2( 460, 77 )
+states/Spanking_2-loop/node = SubResource( 52 )
+states/Spanking_2-loop/position = Vector2( 460, 146 )
+transitions = [ "SpankingTease_2-loop", "Spanking_2-loop", SubResource( 53 ), "Spanking_2-loop", "SpankingTease_2-loop", SubResource( 54 ), "Spanking_2-loop", "SpankingFast_2-loop", SubResource( 55 ), "SpankingFast_2-loop", "Spanking_2-loop", SubResource( 56 ) ]
+start_node = "SpankingTease_2-loop"
+
+[sub_resource type="AnimationNodeBlendTree" id=49]
+graph_offset = Vector2( -262.532, 88.6842 )
+nodes/Animation/node = SubResource( 3 )
+nodes/Animation/position = Vector2( 140, 280 )
+nodes/CuffsBlend/node = SubResource( 4 )
+nodes/CuffsBlend/position = Vector2( 440, 160 )
+nodes/StateMachine/node = SubResource( 57 )
+nodes/StateMachine/position = Vector2( 140, 120 )
+nodes/output/position = Vector2( 680, 180 )
+node_connections = [ "output", 0, "CuffsBlend", "CuffsBlend", 0, "StateMachine", "CuffsBlend", 1, "Animation" ]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=39]
+
+[node name="Spanking" instance=ExtResource( 2 )]
+script = ExtResource( 4 )
+
+[node name="Sprite3D" type="Sprite3D" parent="." index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.196641, -1.77462 )
+texture = ExtResource( 3 )
+region_enabled = true
+region_rect = Rect2( 1, 1, 1022, 62 )
+
+[node name="Doll3D" parent="." index="1" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.43632, 0, 0 )
+
+[node name="Doll3D2" parent="." index="2" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.43632, 0, 0 )
+
+[node name="AnimationTree" type="AnimationTree" parent="." index="3"]
+tree_root = SubResource( 48 )
+anim_player = NodePath("../Doll3D/DollSkeleton/AnimationPlayer")
+parameters/CuffsBlend/blend_amount = 0
+parameters/StateMachine/playback = SubResource( 22 )
+
+[node name="AnimationTree2" type="AnimationTree" parent="." index="4"]
+tree_root = SubResource( 49 )
+anim_player = NodePath("../Doll3D2/DollSkeleton/AnimationPlayer")
+parameters/CuffsBlend/blend_amount = 0
+parameters/StateMachine/playback = SubResource( 39 )
+
+[editable path="Doll3D"]
+[editable path="Doll3D/DollSkeleton"]
+[editable path="Doll3D2"]
+[editable path="Doll3D2/DollSkeleton"]
