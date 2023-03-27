@@ -17,6 +17,11 @@ func getProgress():
 	if(getFlag("RahiModule.rahi4SceneHappened")):
 		result.append("You saved Rahi. But now you gotta help her. Visit her cell after she gets some rest.")
 
+	if(getFlag("RahiModule.rahi5SceneHappened")):
+		result.append("Visit Rahi every day to give her a task.")
+
+	if(getFlag("RahiModule.rahiMile8Happened")):
+		result.append("Rahi is now happy. Good job.")
 
 	return result
 
@@ -24,7 +29,7 @@ func isVisible():
 	return getFlag("RahiModule.rahi1ElizaSceneHappened")
 
 func isCompleted():
-	return false
+	return getFlag("RahiModule.rahiMile8Happened")
 
 func isMainQuest():
 	return false
