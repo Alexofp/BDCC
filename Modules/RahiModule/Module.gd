@@ -386,3 +386,9 @@ func getSkillScoreText(skillID):
 	var scoreToText = ["F-", "F", "F+", "D-", "D", "D+", "C-", "C", "B-", "B", "A-", "A", "S-", "S", "S+", "S++"]
 	
 	return scoreToText[score]
+
+func canTalkInFirstPerson():
+	var currentStage = getFlag("RahiModule.rahiSlaveryStage", 0)
+	if(currentStage >= 7):
+		return true
+	return false

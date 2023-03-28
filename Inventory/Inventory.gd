@@ -172,7 +172,13 @@ func unequipItem(item):
 		addItem(theitem)
 		return true
 	return false
-	
+
+func clearSlot(slot):
+	var theitem = removeItemFromSlot(slot)
+	if(theitem != null):
+		return true
+	return false
+
 func unequipSlot(slot):
 	var theitem = removeItemFromSlot(slot)
 	if(theitem != null):

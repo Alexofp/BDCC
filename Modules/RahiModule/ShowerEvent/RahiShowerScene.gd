@@ -416,8 +416,10 @@ func _react(_action: String, _args):
 
 	if(_action == "make_her_cum"):
 		GM.pc.addSkillExperience(Skill.SexSlave, 30, "rahi_showerlick")
+		getModule("RahiModule").advanceSkill("rahiSkillSex")
 
 	if(_action == "cum_inside"):
+		getModule("RahiModule").advanceSkill("rahiSkillSex")
 		if(usedCondom):
 			var chance = GM.pc.useBestCondom()
 			if(chance != null && RNG.chance(chance)):

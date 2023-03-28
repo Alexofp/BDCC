@@ -52,6 +52,7 @@ func getRiggedParts(_character):
 func getHidesParts(_character):
 	return {
 		BodypartSlot.Penis: true,
+		"chastity_cage": true,
 	}
 
 func shouldBeVisibleOnDoll(_character, _doll):

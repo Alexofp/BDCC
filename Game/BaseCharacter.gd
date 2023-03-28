@@ -1877,6 +1877,15 @@ func getBodypartLewdDescriptionAndNameWithA(bodypartSlot):
 func isDynamicCharacter():
 	return false
 
+func canWearStrapon():
+	if(hasPenis() && !isWearingChastityCage()):
+		return false
+	
+	if(getInventory().hasSlotEquipped(InventorySlot.Strapon)):
+		return false
+	
+	return true
+
 func isWearingStrapon():
 	return getWornStrapon() != null
 
