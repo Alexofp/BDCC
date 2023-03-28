@@ -871,9 +871,11 @@ func cummedInBodypartBy(bodypartSlot, characterID, sourceType = null, amountToTr
 	else:
 		var thebodypart = getBodypart(bodypartSlot)
 		thebodypart.addFluidOrifice(ch.getFluidType(sourceType), ch.getFluidAmount(sourceType) * amountToTransfer, ch.getFluidDNA(sourceType))
-	skillsHolder.receivedCreampie(characterID)
-	if(ch != null):
-		ch.getSkillsHolder().cameInsideSomeone(getID())
+	
+	if(sourceType in [FluidSource.Penis, FluidSource.Strapon]):
+		skillsHolder.receivedCreampie(characterID)
+		if(ch != null):
+			ch.getSkillsHolder().cameInsideSomeone(getID())
 	
 func cummedInVaginaBy(characterID, sourceType = null, amountToTransfer = 1.0):
 	cummedInBodypartBy(BodypartSlot.Vagina, characterID, sourceType, amountToTransfer)

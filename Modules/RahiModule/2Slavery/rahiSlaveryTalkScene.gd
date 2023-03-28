@@ -71,9 +71,12 @@ func _run():
 		addButton("Back", "Go back a menu", "")
 		
 	if(state == "reward"):
+		var slaveryStage = getModule("RahiModule").getSlaveryStage()
 		saynn("How do you wanna reward the kitty.")
 		
 		addButton("Pet", "Pet that kitty", "doreward", ["rahiRewardPetScene"])
+		if(slaveryStage >= 1):
+			addButton("Give treat", "Give your kitty a treat", "doreward", ["rahiRewardTreatScene"])
 		addButton("Back", "Go back a menu", "")
 		
 	if(state == "punish"):
