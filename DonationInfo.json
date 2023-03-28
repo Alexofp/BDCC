@@ -1,18 +1,18 @@
 {
-	"dateString": "16 of Mar 2023",
+	"dateString": "28 of Mar 2023",
 	"entries": {
 		"$1.00": [
 			{
 				"nickname": "thatoneguyatthebar"
 			},
 			{
-				"nickname": "Maxtacks"
+				"nickname": "Caliban"
 			},
 			{
 				"nickname": "SuPhox"
 			},
 			{
-				"nickname": "Caliban"
+				"nickname": "Maxtacks"
 			},
 			{
 				"nickname": "Kyle Oran Evans "
@@ -27,6 +27,12 @@
 				"nickname": "Lichity"
 			},
 			{
+				"nickname": "BarryRkls"
+			},
+			{
+				"nickname": "joelee29"
+			},
+			{
 				"nickname": "User#a63f196a"
 			},
 			{
@@ -34,15 +40,6 @@
 			},
 			{
 				"nickname": "VØID"
-			},
-			{
-				"nickname": "BarryRkls"
-			},
-			{
-				"nickname": "joelee29"
-			},
-			{
-				"nickname": "TwilightHome"
 			},
 			{
 				"nickname": "ghost of cum"
@@ -57,16 +54,16 @@
 				"nickname": "HANAMIアリス"
 			},
 			{
-				"nickname": "yam"
+				"nickname": "fristen"
 			},
 			{
-				"nickname": "fristen"
+				"nickname": "User#7ac8d04c"
+			},
+			{
+				"nickname": "User#86fd5ea0"
 			}
 		],
 		"$10.00": [
-			{
-				"nickname": "Tulvahni"
-			},
 			{
 				"nickname": "Shadowfaux"
 			},
@@ -77,13 +74,10 @@
 				"nickname": "Sami"
 			},
 			{
-				"nickname": "Loch55"
+				"nickname": "Wyvernclaw00"
 			},
 			{
 				"nickname": "Silver_Bloke"
-			},
-			{
-				"nickname": "Wyvernclaw00"
 			},
 			{
 				"nickname": "Masaki Akira"
@@ -92,10 +86,10 @@
 				"nickname": "IzzenXAZ"
 			},
 			{
-				"nickname": "Steied"
+				"nickname": "User#2242146d"
 			},
 			{
-				"nickname": "User#2242146d"
+				"nickname": "Steied"
 			},
 			{
 				"nickname": "Runulf"
@@ -104,13 +98,16 @@
 				"nickname": "Blarg"
 			},
 			{
-				"nickname": "User#253e76e7"
+				"nickname": "Breeze"
 			},
 			{
 				"nickname": "ProtossMan"
 			},
 			{
 				"nickname": "Rac"
+			},
+			{
+				"nickname": "laughingluke"
 			}
 		],
 		"$5.00": [
@@ -121,10 +118,10 @@
 				"nickname": "Feltenix"
 			},
 			{
-				"nickname": "WinterTorchlight"
+				"nickname": "User#b2c4ffed"
 			},
 			{
-				"nickname": "User#b2c4ffed"
+				"nickname": "WinterTorchlight"
 			},
 			{
 				"nickname": "User#d74b7dcd"
@@ -139,5 +136,5 @@
 		"$5.00",
 		"$1.00"
 	],
-	"unixTime": 1678967985
+	"unixTime": 1680015117
 }
