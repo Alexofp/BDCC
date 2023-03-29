@@ -84,6 +84,8 @@ func _run():
 		saynn("How do you wanna punish the kitty.")
 		
 		addButton("Tie up", "Tie kitty up", "dopunish", ["rahiPunishmentTyingUpScene"])
+		if(getModule("RahiModule").isSkillLearned("rahiSkillWatersports")):
+			addButton("Piss toilet", "(Watersports) Make Rahi into a piss toilet for you", "dopunish", ["rahiPunishmentPissToiletScene"])
 		addButton("Back", "Go back a menu", "")
 		
 	if(state == "activities"):
