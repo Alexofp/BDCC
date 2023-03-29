@@ -16,6 +16,8 @@ func _run():
 		var rahiModule = getModule("RahiModule")
 		if(rahiModule.getSlaveryStage() >= 1):
 			addButton("Stealing", "Make her steal something", "dotask", ["rahiSlaveryStealingTaskScene"])
+		if(rahiModule.isSkillLearned("rahiSkillExhibit")):
+			addButton("Yoga", "(Exhibionism) Make her do yoga", "dotask", ["rahiSlaveryYogaTaskScene"])
 		
 func _react(_action: String, _args):
 	if(_action == "endthescene"):

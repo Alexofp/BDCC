@@ -64,6 +64,7 @@ func _react(_action: String, _args):
 		setFlag("RahiModule.rahiTired", 2)
 		
 		increaseFlag("RahiModule.rahiSlaveryStage", 1)
+		setFlag("RahiModule.rahiSlaveryShowNewSkill", true)
 		runScene(sceneToRun)
 		return
 

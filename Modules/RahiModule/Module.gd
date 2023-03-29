@@ -43,6 +43,7 @@ func getFlags():
 		"rahiMile8Happened": flag(FlagType.Bool),
 		
 		"rahiSlaveryDidTaskToday": flag(FlagType.Bool),
+		"rahiSlaveryShowNewSkill": flag(FlagType.Bool),
 		"rahiPCName": flag(FlagType.Text),
 		"rahiSlaveryStage": flag(FlagType.Number),
 		
@@ -106,6 +107,7 @@ func _init():
 		"res://Modules/RahiModule/2Slavery/Punishments/rahiPunishmentTyingUpScene.gd",
 		"res://Modules/RahiModule/2Slavery/Milestones/rahiMilestone1Scene.gd",
 		"res://Modules/RahiModule/2Slavery/Tasks/rahiSlaveryStealingTaskScene.gd",
+		"res://Modules/RahiModule/2Slavery/Tasks/rahiSlaveryYogaTaskScene.gd",
 		"res://Modules/RahiModule/2Slavery/Milestones/rahiMilestone2Scene.gd",
 		"res://Modules/RahiModule/2Slavery/Milestones/rahiMilestone3Scene.gd",
 		"res://Modules/RahiModule/2Slavery/Milestones/rahiMilestone4Scene.gd",
@@ -352,7 +354,7 @@ func getSlaveryStageChance(minstage, maxstage, minchance, maxchance):
 	if(currentStage >= maxstage):
 		return maxchance
 	
-	var stageProgress = (currentStage - minstage) / (maxstage - minstage)
+	var stageProgress = float(currentStage - minstage) / float(maxstage - minstage)
 	
 	return minchance + stageProgress * (maxchance - minchance)
 

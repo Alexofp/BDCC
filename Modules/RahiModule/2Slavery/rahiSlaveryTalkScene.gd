@@ -45,7 +45,8 @@ func _run():
 				continue
 			
 			sayn(skillInfo["name"]+": "+rahiModule.getSkillScoreText(skillID))
-		if(getModule("RahiModule").canLearnNewSkill()):
+		if(getModule("RahiModule").canLearnNewSkill() && getFlag("RahiModule.rahiSlaveryShowNewSkill")):
+			setFlag("RahiModule.rahiSlaveryShowNewSkill", false)
 			sayn("(You can pick a new skill for Rahi to train in Relationship menu)")
 		
 		addButton("Talk", "Talk about stuff", "talk")
@@ -229,3 +230,25 @@ func _react(_action: String, _args):
 		return
 
 	setState(_action)
+
+func getDebugActions():
+	return [
+		{
+			"id": "raiseObedience",
+			"name": "Raise obedience",
+			"args": [
+			],
+		},
+		{
+			"id": "raiseAffection",
+			"name": "Raise affection",
+			"args": [
+			],
+		},
+	]
+
+func doDebugAction(_id, _args = {}):
+	if(_id == "raiseObedience"):
+		increaseFlag("RahiModule.rahiObedience", 10)
+	if(_id == "raiseAffection"):
+		increaseFlag("RahiModule.rahiAffection", 10)

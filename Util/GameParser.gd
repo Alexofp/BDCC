@@ -28,6 +28,11 @@ func callFuncWrapper(_command: String, _args: Array):
 		return str(RNG.pick(_args))
 	if(_command == "rahiMaster"):
 		return GM.main.getFlag("RahiModule.rahiPCName", GM.pc.getName())
+	if(_command == "rahiFP" && _args.size() == 2):
+		if(GlobalRegistry.getModule("RahiModule").canTalkInFirstPerson()):
+			return _args[0]
+		else:
+			return _args[1]
 	
 	return "[color=red]!RUNTIME ERROR NO COMMAND FOUND "+_command+" "+str(_args)+"![/color]"
 	
