@@ -20,6 +20,10 @@ func _run():
 		saynn("Seems like that crate of toys also has some packaged treats if you don't possess anything edible. How convenient.")
 
 		addButton("Random treat", "Feed Rahi a random treat that you stole together", "random_treat")
+		if (GM.pc.getInventory().hasItemID("appleitem")):
+			addButton("Give apple", "Give your kitty an apple to chew on", "apple_treat")
+		else:
+			addDisabledButton("Give apple", "You don't have any apples")
 		if (getModule("RahiModule").isSkillLearned("rahiSkillPetplay")):
 			addButton("Pet bowl", "(Petplay) Fill a bowl with some kitty food for Rahi", "petplay_petbowl")
 	if(state == "random_treat"):
@@ -148,11 +152,39 @@ func _run():
 			saynn("You approach her and gently scritch her behind the ears and under the chin. Rahi leans into the touch and licks her lips while purring, happy and satisfied after completing the order with ease.")
 
 		addButton("Enough", "Enough gross stuff", "endthescene")
+	if(state == "apple_treat"):
+		saynn("You produce an apple and present it to Rahi. Any kind of fruit is forbidden for inmates to have so this is a pretty valuable reward. Kitty's eyes shine brightly when she sees it.")
+
+		if (deserved):
+			saynn("[say=rahi]It's for {rahiFP('me', 'her')}?..[/say]")
+
+		else:
+			saynn("[say=rahi]It's for {rahiFP('me', 'her')}?.. But {rahiFP('I don\\'t', 'she doesn\\'t')} deserve it..[/say]")
+
+			saynn("[say=pc]That's for me to decide.[/say]")
+
+		saynn("You hand Rahi the apple. She quickly rubs it against the sleeve of her shirt and looks at it, her mouth already getting wet with saliva.")
+
+		saynn("Rahi's sharp fangs sank effortlessly into the crisp, juicy flesh of the apple, tearing off large chunks with each bite.")
+
+		saynn("You can't help but to smile while watching her bite into that apple.")
+
+		saynn("When she was done, she licked the last drops of juice from her lips and looked up at you.")
+
+		saynn("[say=rahi]Thank you..[/say]")
+
+		saynn("Eating this apple gave the kitty some stamina back!")
+
+		addButton("Continue", "That was cute", "endthescene")
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
 		endScene()
 		return
+
+	if(_action == "apple_treat"):
+		GM.pc.getInventory().removeXOfOrDestroy("appleitem", 1)
+		increaseFlag("RahiModule.rahiTired", -2)
 
 	if(_action == "petplay_petbowl"):
 		getModule("RahiModule").advanceSkill("rahiSkillPetplay")
