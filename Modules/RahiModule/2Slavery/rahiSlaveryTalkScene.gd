@@ -239,15 +239,27 @@ func getDebugActions():
 	return [
 		{
 			"id": "raiseObedience",
-			"name": "Raise obedience",
+			"name": "Raise Obedience",
 			"args": [
 			],
 		},
 		{
 			"id": "raiseAffection",
-			"name": "Raise affection",
+			"name": "Raise Affection",
 			"args": [
 			],
+		},
+		{
+			"id": "setStage",
+			"name": "Set Slavery Stage",
+			"args": [
+				{
+					"id": "stage",
+					"name": "Stage",
+					"type": "number",
+					"value": 7,
+				},
+			]
 		},
 	]
 
@@ -256,3 +268,5 @@ func doDebugAction(_id, _args = {}):
 		increaseFlag("RahiModule.rahiObedience", 10)
 	if(_id == "raiseAffection"):
 		increaseFlag("RahiModule.rahiAffection", 10)
+	if(_id == "setStage"):
+		setFlag("RahiModule.rahiSlaveryStage", _args["stage"])

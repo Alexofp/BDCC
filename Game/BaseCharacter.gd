@@ -1944,8 +1944,8 @@ func cummedOnBy(characterID, sourceType = null, howMuchPercent = 1.0):
 	else:
 		coverBodyWithFluid(ch.getFluidType(sourceType), ch.getFluidAmount(sourceType)*howMuchPercent, ch.getFluidDNA(sourceType))
 
-func pissedOnBy(_characterID):
-	cummedOnBy(_characterID, FluidSource.Pissing, 1.0)
+func pissedOnBy(_characterID, howMuch = 1.0):
+	cummedOnBy(_characterID, FluidSource.Pissing, howMuch)
 	
 	#addEffect(StatusEffect.DrenchedInPiss)
 

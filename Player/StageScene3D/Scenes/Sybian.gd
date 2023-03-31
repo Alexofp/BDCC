@@ -27,6 +27,10 @@ func playAnimation(animID, _args = {}):
 	else:
 		doll.applyBodyState({})
 	
+	if(_args.has("nosybian") && _args["nosybian"]):
+		$Sybian.visible = false
+		$Sprite3D.transform.origin.y = -0.276
+	
 	updateSubAnims()
 	
 	var state_machine = animationTree["parameters/AnimationNodeStateMachine/playback"]

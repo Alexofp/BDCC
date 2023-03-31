@@ -559,6 +559,8 @@ func _react(_action: String, _args):
 		addExperienceToPlayer(500)
 		setFlag("RahiModule.rahiMile8Happened", true)
 		addMessage("Task completed")
+		GM.pc.getInventory().addItem(GlobalRegistry.createItem("RingRahi"))
+		addMessage("You kept the second ring")
 
 	setState(_action)
 
