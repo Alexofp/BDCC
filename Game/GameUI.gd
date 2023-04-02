@@ -45,9 +45,10 @@ func _ready():
 	
 	var fontOverride = OPTIONS.getFontSize()
 	if(fontOverride == "small"):
-		setFontSize("small")
+		setFontSize(18)
 	if(fontOverride == "big"):
-		setFontSize("big")
+		setFontSize(30)
+	#setFontSize(24)
 	
 	gameParser = GameParser.new()
 	sayParser = SayParser.new()
@@ -315,22 +316,27 @@ func _on_Player_stat_changed():
 func getStage3d() -> Stage3D:
 	return playerPanel.getStage3d()
 
-func setFontSize(newsize):
-	if(newsize == "big"):
-		textOutput.add_font_override("normal_font", load("res://UI/FontResources/Big/NormalFont.tres"))
-		textOutput.add_font_override("italics_font", load("res://UI/FontResources/Big/ItalicsFont.tres"))
-		textOutput.add_font_override("bold_italics_font", load("res://UI/FontResources/Big/BoldItalicsFont.tres"))
-		textOutput.add_font_override("bold_font", load("res://UI/FontResources/Big/BoldFont.tres"))
-	if(newsize == "normal"):
-		textOutput.add_font_override("normal_font", load("res://UI/FontResources/Normal/NormalFont.tres"))
-		textOutput.add_font_override("italics_font", load("res://UI/FontResources/Normal/ItalicsFont.tres"))
-		textOutput.add_font_override("bold_italics_font", load("res://UI/FontResources/Normal/BoldItalicsFont.tres"))
-		textOutput.add_font_override("bold_font", load("res://UI/FontResources/Normal/BoldFont.tres"))
-	if(newsize == "small"):
-		textOutput.add_font_override("normal_font", load("res://UI/FontResources/Small/NormalFont.tres"))
-		textOutput.add_font_override("italics_font", load("res://UI/FontResources/Small/ItalicsFont.tres"))
-		textOutput.add_font_override("bold_italics_font", load("res://UI/FontResources/Small/BoldItalicsFont.tres"))
-		textOutput.add_font_override("bold_font", load("res://UI/FontResources/Small/BoldFont.tres"))
+func setFontSize(_newsize):
+	var fontsToChange = ["normal_font", "bold_font", "bold_italics_font", "italics_font"]
+	
+	for fontToChange in fontsToChange:
+		var theFont = textOutput.get_font(fontToChange)
+		theFont.size = _newsize
+#	if(newsize == "big"):
+#		textOutput.add_font_override("normal_font", load("res://UI/FontResources/Big/NormalFont.tres"))
+#		textOutput.add_font_override("italics_font", load("res://UI/FontResources/Big/ItalicsFont.tres"))
+#		textOutput.add_font_override("bold_italics_font", load("res://UI/FontResources/Big/BoldItalicsFont.tres"))
+#		textOutput.add_font_override("bold_font", load("res://UI/FontResources/Big/BoldFont.tres"))
+#	if(newsize == "normal"):
+#		textOutput.add_font_override("normal_font", load("res://UI/FontResources/Normal/NormalFont.tres"))
+#		textOutput.add_font_override("italics_font", load("res://UI/FontResources/Normal/ItalicsFont.tres"))
+#		textOutput.add_font_override("bold_italics_font", load("res://UI/FontResources/Normal/BoldItalicsFont.tres"))
+#		textOutput.add_font_override("bold_font", load("res://UI/FontResources/Normal/BoldFont.tres"))
+#	if(newsize == "small"):
+#		textOutput.add_font_override("normal_font", load("res://UI/FontResources/Small/NormalFont.tres"))
+#		textOutput.add_font_override("italics_font", load("res://UI/FontResources/Small/ItalicsFont.tres"))
+#		textOutput.add_font_override("bold_italics_font", load("res://UI/FontResources/Small/BoldItalicsFont.tres"))
+#		textOutput.add_font_override("bold_font", load("res://UI/FontResources/Small/BoldFont.tres"))
 		
 func _on_DebugMenu_pressed():
 	if(!debugScreen.visible):
@@ -354,3 +360,19 @@ func recreateWorld():
 
 func _on_RollbackButton_pressed():
 	emit_signal("on_rollback_button")
+
+var currentTranslationTask = 0
+func translateText():
+	if(AutoTranslation.shouldTranslate()):
+		currentTranslationTask += 1
+		var rememberedTask = currentTranslationTask
+		var result = AutoTranslation.translate(textOutput.text)
+	
+		if(result is GDScriptFunctionState):
+			result = yield(result, "completed")
+		
+		if(rememberedTask != currentTranslationTask):
+			return
+		
+		if(result != null && result != ""):
+			textOutput.bbcode_text = result

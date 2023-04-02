@@ -454,6 +454,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Game/Gameplay/Gender.gd"
 }, {
+"base": "TranslatorBase",
+"class": "GoogleBatchTranslator",
+"language": "GDScript",
+"path": "res://Util/AutoTranslation/Translators/GoogleBatchTranslator.gd"
+}, {
 "base": "CharacterGeneratorBase",
 "class": "GuardGenerator",
 "language": "GDScript",
@@ -1035,6 +1040,16 @@ _global_script_classes=[ {
 "path": "res://Game/LustCombat/TopicBase.gd"
 }, {
 "base": "Object",
+"class": "TranslationLanguage",
+"language": "GDScript",
+"path": "res://Util/AutoTranslation/TranslationLanguage.gd"
+}, {
+"base": "Node",
+"class": "TranslatorBase",
+"language": "GDScript",
+"path": "res://Util/AutoTranslation/TranslatorBase/TranslatorBase.gd"
+}, {
+"base": "Object",
 "class": "Trigger",
 "language": "GDScript",
 "path": "res://Events/Trigger.gd"
@@ -1154,6 +1169,7 @@ _global_script_class_icons={
 "GameUI": "",
 "GameWorld": "",
 "Gender": "",
+"GoogleBatchTranslator": "",
 "GuardGenerator": "",
 "GuardLoot": "",
 "GymModule": "",
@@ -1270,6 +1286,8 @@ _global_script_class_icons={
 "TestQuest": "",
 "ThroatOrifice": "",
 "TopicBase": "",
+"TranslationLanguage": "",
+"TranslatorBase": "",
 "Trigger": "",
 "Util": "",
 "VaginaOrifice": "",
@@ -1297,6 +1315,7 @@ GlobalRegistry="*res://GlobalRegistry.gd"
 GM="*res://Game/GM.gd"
 SAVE="*res://Game/SaveManager.gd"
 GlobalTooltip="*res://UI/GlobalTooltipSystem.gd"
+AutoTranslation="*res://Util/AutoTranslation/AutoTranslation.gd"
 
 [debug]
 

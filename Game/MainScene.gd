@@ -287,6 +287,7 @@ func runCurrentScene():
 				GM.ui.say(message)
 				GM.ui.say("\n")
 			GM.ui.say("[/i][/center]\n")
+		GM.ui.translateText()
 	updateStuff()
 
 func reRun():

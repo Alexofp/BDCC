@@ -13,6 +13,7 @@ onready var devToolsScreen = $HBoxContainer/DevToolsScreen
 onready var devSubScreen = $HBoxContainer/DevToolsScreen/DevScreen
 onready var loadedModsLabel = $HBoxContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/LoadedModsLabel
 onready var modsMenu = $HBoxContainer/ModsMenu
+onready var autoTranslatorMenu = $HBoxContainer/AutoTranslatorMenu
 
 export(Resource) var GlobalTheme
 
@@ -37,6 +38,9 @@ func _ready():
 		for mod in loadedMods:
 			text += "\n"+str(mod)
 		loadedModsLabel.bbcode_text = text
+	
+	if(OS.get_name() == "HTML5"):
+		$HBoxContainer/MainVBox/GridContainer/AutoTranslatorButton.disabled = true
 
 func updateDonationData():
 	$HBoxContainer/Panel2/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer3/DonationsLabel.bbcode_text = GlobalRegistry.getDonationDataString()
@@ -54,6 +58,7 @@ func hideAllMenus():
 	modsMenu.visible = false
 	$HBoxContainer/Panel2.visible = true
 	$HBoxContainer/Panel.visible = true
+	autoTranslatorMenu.visible = false
 
 func switchToMainMenu():
 	hideAllMenus()
@@ -196,3 +201,13 @@ func _on_DevSceneConverter2_pressed():
 	
 	var scene = load("res://Util/SceneConverter2.tscn")
 	devSubScreen.add_child(scene.instance())
+
+
+func _on_AutoTranslatorMenu_onClosePressed():
+	hideAllMenus()
+	MainVBox.visible = true
+
+
+func _on_AutoTranslatorButton_pressed():
+	hideAllMenus()
+	autoTranslatorMenu.visible = true
