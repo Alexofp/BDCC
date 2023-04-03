@@ -989,10 +989,10 @@ func _run():
 		saynn("You hear another cute noise of love coming from Rahi as she.. inserts something into her pussy, the slickness makes it easier. Then she turns around, revealing.. a knotted strapon between her legs. It's double-sided with the short end being inside Rahi. She is.. smiling.")
 
 		if (!GM.pc.isFullyNaked()):
-			saynn("You don't even get a good look of it before Rahi runs up to you, grabs you by the collar and pins against the reinforced glass of her cell. Her paws quickly undress you, revealing your own {pc.pussyStretch} pussy and {pc.breasts}. You can't hide the excitement..")
+			saynn("You don't even get a good look at it before Rahi runs up to you, grabs you by the collar and pins against the reinforced glass of her cell. Her paws quickly undress you, revealing your own {pc.pussyStretch} pussy and {pc.breasts}. You can't hide the excitement..")
 
 		else:
-			saynn("You don't even get a good look of it before Rahi runs up to you, grabs you by the collar and pins against the reinforced glass of her cell. Her paws tracing over your naked curves, your {pc.pussyStretch} pussy and {pc.breasts}. You can't hide the excitement..")
+			saynn("You don't even get a good look at it before Rahi runs up to you, grabs you by the collar and pins against the reinforced glass of her cell. Her paws tracing over your naked curves, your {pc.pussyStretch} pussy and {pc.breasts}. You can't hide the excitement..")
 
 		saynn("[say=pc]H-hey..[/say]")
 
@@ -1156,6 +1156,123 @@ func _run():
 		saynn("Eventually you do have to break away though, causing that stored piss to splash onto the floor. Someone will clean that.. for sure.. Maybe you even.")
 
 		addButton("Continue", "Lewd", "endthescene")
+	if(state == "peg1_rahistraponsbutt"):
+		playAnimation(StageScene.Duo, "stand", {npc="rahi", npcBodyState={naked=true}})
+		saynn("You're in the submissive mood today and could maybe use Rahi's rough touch.. But instead of asking for it outright, you lean to look through the reinforced window while your hands slowly trace the {pc.masc} curves of your body, occasionally reaching to squeeze your {pc.thick} butt.")
+
+		saynn("It doesn't take long for Rahi to spot that, the anticipation radiating off of you in waves. Kitty's tail flicks back and forth while she approaches you and grabs by the collar. She then pulls you back to her, tilting her head slightly before looking you in the eyes.")
+
+		saynn("[say=rahi]You are hers today. And she is going to make sure you know it.[/say]")
+
+		saynn("And with that, Rahi steps back and begins to undress, unbuttoning her shirt and pulling down her shorts. You bite your lip and reach to touch Rahi's {rahi.breasts} but she catches your hand and puts the digits in her mouth, sucking on them and leaving a saliva coating before bringing them down to her pussy and making you rub her exposed clit. Kitty moans softly, her pussy gets all wet and ready. But that's the only weakness that she allowed for herself.")
+
+		saynn("Suddenly kitty goes ahead and grabs something. Something long.. You can't quite see it because she is turned away.")
+
+		addButton("Continue", "See what happens next", "peg1_rahiputsonstrapon")
+	if(state == "peg1_rahiputsonstrapon"):
+		playAnimation(StageScene.SexStanding, "tease", {npc="pc", pc="rahi", bodyState={naked=true}, npcBodyState={naked=true}})
+		saynn("You hear another cute noise of love coming from Rahi as she.. inserts something into her pussy, the slickness makes it easier. Then she turns around, revealing.. a knotted strapon between her legs. It's double-sided with the short end being inside Rahi. She is.. smiling.")
+
+		if (!GM.pc.isFullyNaked()):
+			saynn("You don't even get a good look at it before Rahi runs up to you and pins against the reinforced glass of her cell. Her paws quickly undress you, revealing your {pc.analStretch} ass and {pc.breasts}. You can't hide the excitement..")
+
+		else:
+			saynn("You don't even get a good look at it before Rahi runs up to you, grabs you by the collar and pins against the reinforced glass of her cell. Her paws tracing over your naked curves, your {pc.analStretch} ass and {pc.breasts}. You can't hide the excitement..")
+
+		saynn("[say=pc]H-hey..[/say]")
+
+		saynn("Rahi shushes you, her digits reaching your mouth and sliding past the lips, landing on your tongue. You instinctively suck on them, your tongue licking and coating them with your saliva.")
+
+		saynn("[say=rahi]You're so easy to control.. She can tell you're getting off on the humiliation.. you dirty little slut..[/say]")
+
+		saynn("After you're done licking her digits, she pulls them out and instead slides them down to your butt, spreading your tailhole with two of them while another two prod at it, forcing saliva in. All the while Rahi's strapon just brushes against your {pc.thick} thighs.")
+
+		saynn("[say=rahi]Yeah.. Like that.. All wet down there.. So eager to be fucked.[/say]")
+
+		saynn("Rahi then catches her own pussy juices and spreads them along her rubber toy, making it look very shiny. All the while you're still pinned against the window, your stiff nipples feel the cold glass, you really hope people outside won't stare.. too much..")
+
+		addButton("Get fucked", "See what happens next", "peg1_rahiinserts")
+	if(state == "peg1_rahiinserts"):
+		playAnimation(StageScene.SexStanding, "sex", {npc="pc", pc="rahi", bodyState={naked=true}, npcBodyState={naked=true, hard=true}})
+		saynn("You let out a cute noise when Rahi smacks your ass, making it bounce. She holds one paw on your neck while another quickly aligns the toy with your needy asshole. One rough thrust and Rahi spreads open your star enough to shove the strapon inside. A moan escapes your lips.")
+
+		saynn("[say=rahi]Hope you can take it rough.. Because that's how she likes it. Now take it like a good "+str("girl" if GM.pc.getGender() != Gender.Male else "boy")+".[/say]")
+
+		saynn("You can't help but to gasp and arch your back as Rahi begins to pound your butt, sliding it in and out, using her hips to generate powerful slams that rock your body each time. Your moans fill the room as Rahi continues to stretch you out from the inside, fucking you with increasing intensity. The friction is pleasurable for her too, little noises of love escape from Rahi but she tries to hide them, putting all the focus on you and your needy tailhole.")
+
+		if (GM.pc.isWearingChastityCage()):
+			saynn("Your poor caged up dick desperately tries to get hard but is unable to. All it can do is sway back and forth while leaking a lot of precum from Rahi hammering at your pleasure spot.")
+
+		elif (GM.pc.hasReachablePenis()):
+			saynn("Your {pc.penis} is hard, swaying back and forth from Rahi's thrusts. You're leaking so much precum from Rahi hammering at your pleasure spot..")
+
+		if (GM.pc.hasReachableVagina()):
+			saynn("Even though you're being buttfucked, your {pc.vaginaStretch} pussy is dripping juices profusely. The toy is stimulating your g-spot through the inner wall so well.. Your slit looks small and slightly open, sharing some of the stretching with your ass.")
+
+		saynn("Your kitty has reached a steady rhythm, the tip of her rubber dick reaching deep inside you each time she rams it in. Your orgasm slowly builds up.. kitty feels it and.. keeps it like that. Instead, Rahi puts more strength into each thrust, the rubber knot of her toy slams against your anus, trying to stretch it even wider. You're not sure it will even fit.. But you're also so close now..")
+
+		saynn("[say=pc]I-It w-won't..[/say]")
+
+		saynn("[say=rahi]Your ass belongs to her![/say]")
+
+		saynn("With that, Rahi throws her hips forward for one last time, putting all her feline strength into this one.")
+
+		addButton("Get knotted", "See what happens next", "peg1_cum")
+	if(state == "peg1_cum"):
+		playAnimation(StageScene.SexStanding, "inside", {npc="pc", pc="rahi", bodyState={naked=true}, npcBodyState={naked=true, hard=true}})
+		saynn("The rubber knot puts an immense amount of pressure on your {pc.analStretch} anal ring, stretching it to the limit.. until the orb just slips in, tying you and Rahi together.. With one swift motion Rahi drives the knot even deeper inside your bowels.")
+
+		saynn("You cry out in pleasure and pain as Rahi has her whole strapon in you. Squeezing the knot so much caused the toy to suddenly start filling you with some thick, creamy fluid.. seems like the strapon had some cum lube stored just for this occasion..")
+
+		if (GM.pc.isWearingChastityCage()):
+			saynn("Your prostate got destroyed, causing your caged up dick to burst with multiple weak waves of seed. The pressure is immense but the flow is barely enough to reach the wall and leave some sticky stains on it..")
+
+		elif (GM.pc.hasReachablePenis()):
+			saynn("Your cock, twitching and unable to endure this immense pressure anymore coming from within your prostate, bursts with many waves of seed, leaving lots of sticky stains on the wall.")
+
+		if (GM.pc.hasReachableVagina()):
+			saynn("Your moist pussy pulsates and gushes out plenty of girlcum. Even though it wasn't directly stimulated, your g-spot got rubber through the inner wall enough for you to cum hard!")
+
+		saynn("You're licking the cold grass, your body shivering around your kitty's rubber cock.. She can't pull it out anymore even if she wanted to, you're forced to endure her strapon inside you.. not that you mind..")
+
+		saynn("It seems like you're not the only one who came though, while being busy moaning and having your ass extremely stretched, you missed Rahi's cute moans and her body squirming behind you, her legs shaking, barely keeping her from falling. She leans into your back, letting you feel her breasts brushing against your skin.")
+
+		saynn("[say=rahi]Such a.. such.. little.. s-slutty..[/say]")
+
+		saynn("She is panting heavily, just like you. The whole room smells of sex. Cum lube sloshing inside your butt.. You press your cheek against the cold glass and try to cool down..")
+
+		saynn("After some time, Rahi has gathered enough courage to yank the knot out, letting some of the cum lube out.")
+
+		addButton("Enough", "That was something", "removerahistrapon")
+		if (getModule("RahiModule").isSkillLearned("rahiSkillMasochist")):
+			addButton("Knot-fucking", "(Masochist) Knot goes in and out..", "peg1_knotfuck")
+	if(state == "peg1_knotfuck"):
+		playAnimation(StageScene.SexStanding, "fast", {npc="pc", pc="rahi", bodyState={naked=true}, npcBodyState={naked=true, hard=true}})
+		saynn("After the knot got pulled out, it left a lot of empty space inside you.. Empty space that you so eagerly want to be filled.. again..")
+
+		saynn("[say=pc]More, Miss Rahi, please!..[/say]")
+
+		saynn("Rahi was about to stop when she heard that. Your words.. they make her.. so eager. She growls as she pins you against the window again and ramming her strapon inside your used fuckhole that didn't even close yet. A loud cry escapes from you as the rubber knot slips inside your ass, plugging that empty space.. Just so she can yank it out again, making your legs weak and your anus aching.")
+
+		saynn("[say=rahi]You like that, don't you? Little.. insatiable.. whore.[/say]")
+
+		saynn("Rahi repeats this motion.. over and over again, each time yanking the knot out before shoving it back in, making your anal star stretch beyond its limit. The sensations are so intense that your tailhole tries to clench around it, increasing friction and making Rahi moan too in the process.")
+
+		saynn("[say=rahi]Such a slutty little thing..[/say]")
+
+		saynn("Rahi snarls as she continues to knot-fuck your butt at an increasing pace, not giving your anus even a moment to try to close, leaving it gaping wide open so much that it starts to hurt.. The thick sticky cum lube leaks out around the edges, creating quite the mess on your legs.")
+
+		saynn("It was too much for your poor little tailhole.. But instead of begging for Rahi to stop, you moan and gasp for more, lost in this crazy mix of pleasure and pain. Your body starts to tense up as you approach another orgasm.. Rahi's thrusts became faster and more erratic..")
+
+		saynn("With a final, forceful thrust, Rahi slams the knot back inside your fuckhole, triggering an explosive orgasm for both of you. Cries of pain and pleasure can be probably heard across the whole general pop block. You desperately hold onto that window just so you wouldn't fall, your anus tightening around that knot and the whole shaft and spasming for a while. Rahi bites into your shoulder, growling, as her own orgasm makes her squirt, her pussy pulsating around her end of the toy.")
+
+		saynn("Kitty drags this intimate moment for a bit.. Before suddenly yanking her rubber toy out, finally letting you slump down onto the floor, your ruined ass gaping wide and leaking cum lube profusely.")
+
+		saynn("Both of you are left to pant heavily.")
+
+		saynn("[say=rahi]You.. satisfied her.. for the moment..[/say]")
+
+		addButton("Enough", "Wow", "removerahistrapon")
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
@@ -1190,6 +1307,13 @@ func _react(_action: String, _args):
 		if(GM.pc.hasReachableVagina()):
 			possible.append("sex3_rahistraponspussy")
 			possible.append("sex4_scissoring")
+		
+		setState(RNG.pick(possible))
+		getModule("RahiModule").advanceSkill("rahiSkillDominance")
+		return
+
+	if(_action == "random_pegging_scene"):
+		var possible = ["peg1_rahistraponsbutt"]
 		
 		setState(RNG.pick(possible))
 		getModule("RahiModule").advanceSkill("rahiSkillDominance")
@@ -1326,5 +1450,30 @@ func _react(_action: String, _args):
 		GM.pc.pissedOnBy("rahi", 0.5)
 		getCharacter("rahi").pissedOnBy("pc", 0.5)
 		getModule("RahiModule").advanceSkill("rahiSkillWatersports")
+
+	if(_action == "peg1_rahiputsonstrapon"):
+		processTime(2*60)
+		var strapon = GlobalRegistry.createItem("StraponFeeldoe")
+		var fluids = strapon.getFluids()
+		fluids.addFluid("CumLube", RNG.randi_range(3, 5)*100.0)
+		getCharacter("rahi").getInventory().equipItem(strapon)
+
+	if(_action == "peg1_rahiinserts"):
+		processTime(2*60)
+
+	if(_action == "peg1_cum"):
+		processTime(5*60)
+		GM.pc.gotAnusFuckedBy("rahi")
+		GM.pc.cummedInAnusBy("rahi", FluidSource.Strapon)
+		GM.pc.orgasmFrom("rahi")
+		GM.pc.addSkillExperience(Skill.SexSlave, 30, "rahi_strapon")
+		GM.pc.addSkillExperience(Skill.CumLover, 30, "rahi_strapon")
+
+	if(_action == "peg1_knotfuck"):
+		processTime(5*60)
+		GM.pc.gotAnusFuckedBy("rahi")
+		GM.pc.gotAnusFuckedBy("rahi")
+		GM.pc.orgasmFrom("rahi")
+		getModule("RahiModule").advanceSkill("rahiSkillMasochist")
 
 	setState(_action)
