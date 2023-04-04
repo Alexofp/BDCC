@@ -258,4 +258,41 @@ func callObjectFuncWrapper(_obj: String, _command: String, _args: Array):
 			return "nothing"
 		return thetext
 	
+	if(_command in ["privates"] && _args.size() == 0):
+		var bodypartsToCheck = [BodypartSlot.Breasts, BodypartSlot.Penis, BodypartSlot.Vagina, BodypartSlot.Anus]
+		
+		var result = []
+		for partID in bodypartsToCheck:
+			if(!object.hasBodypart(partID)):
+				continue
+			var bodypart = object.getBodypart(partID)
+			
+			if(partID == BodypartSlot.Vagina):
+				var orifice:Orifice = bodypart.getOrifice()
+				if(orifice == null):
+					continue
+				result.append(orifice.getLoosenessString()+" pussy")
+			elif(partID == BodypartSlot.Anus):
+				var orifice:Orifice = bodypart.getOrifice()
+				if(orifice == null):
+					continue
+				result.append(orifice.getLoosenessString()+" anus")
+			else:
+				result.append(object.getBodypartLewdDescriptionAndName(partID))
+		
+		return Util.humanReadableList(result)
+	
+	if(_command in ["boy", "boyGirl", "girl"] && _args.size() == 0):
+		if(object.getGender() == Gender.Male):
+			return "boy"
+		elif(object.getGender() == Gender.Female):
+			return "girl"
+		elif(object.getGender() == Gender.Other):
+			return "thing"
+		else:
+			if(object.getFemininity() >= 50):
+				return "girl"
+			else:
+				return "boy"
+	
 	return "[color=red]!RUNTIME ERROR NO COMMAND FOUND "+_obj+"."+_command+" "+str(_args)+"![/color]"
