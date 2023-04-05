@@ -1496,6 +1496,242 @@ func _run():
 		saynn("You nod back softly. You use your hand to swipe the gross fluids off of your face so you can at least open your eyes.")
 
 		addButton("Enough", "This is it. This is the end", "endthescene")
+	if(state == "submit_scene"):
+		saynn("When you approach Rahi, she immediately knows that something is different. You are.. irradiating confidence and control.. yet again. And that makes your kitty curious.")
+
+		saynn("[say=rahi]Something happened?..[/say]")
+
+		saynn("You reach your hand out and try to pat Rahi. She bares her fangs at first.. but when you actually begin headpatting her.. the mean expression goes away.. replaced with that of a cute shy kitty.. the one that you know and love.")
+
+		saynn("[say=pc]Just wanted to say that your dominance training.. is now complete![/say]")
+
+		saynn("There is a hint of pride in your voice. Rahi's face lit up with joy when she heard that.")
+
+		saynn("[say=rahi]Really? You think so?[/say]")
+
+		saynn("You nod and caress the girl's cheek.")
+
+		saynn("[say=pc]Yes. You've become an incredibly good domme, kitty. You know how to take control and make someone feel completely submissive.[/say]")
+
+		saynn("Rahi couldn't contain her excitement. She jumps up and hugs you tightly.")
+
+		saynn("[say=rahi]Thank you so much, {rahiMaster}! That means you don't need to pretend to be her.. training dummy anymore. Sorry it took so long..[/say]")
+
+		saynn("Her words confuse you. But then you realize.")
+
+		saynn("[say=pc]Pretend?.. Kitty.. I wasn't pretending to be your sub.. I was actually subbing to you.. You're a natural domme, kitty.. I loved every second of our interactions.[/say]")
+
+		saynn("You hug her back.. just as tightly. Now it's kitty turn to be.. confused.")
+
+		saynn("[say=rahi]Really?.. She was just.. Doing what you showed her to do..[/say]")
+
+		saynn("You can't help but to chuckle.")
+
+		saynn("[say=pc]Kitty. You did so much more.. More than I taught you. Now.. Accept the compliment. And there is something else I want you to accept too..[/say]")
+
+		saynn("Purring can be heard coming from Rahi. She nuzzles your cheek before finally breaking the hug.")
+
+		saynn("[say=rahi]Thank you.. For teaching.. And being there.. She is grateful for all the experiences we shared..[/say]")
+
+		saynn("You nod. Now it's time for the second part..")
+
+		addButton("Kneel", "Submit to Miss Rahi", "submit_kneel")
+	if(state == "submit_kneel"):
+		playAnimation(StageScene.Duo, "kneel", {npc="rahi"})
+		saynn("You slowly lower yourself to your knees before Rahi. Your gaze.. turning submissive.. but not fully.. your eyes still retain a bit of authority.. you hold your submissive and dominant sides.. in complete balance.")
+
+		saynn("Rahi sees that.. it's such a new thing for her that she gets surprised.. But now you pick up on her posture becoming more confident, her dominant side returning and getting stronger.. Until it balances out her submissive one. She can do it too..")
+
+		saynn("[say=pc]You have submitted to me, kitty. Willingly.. You gave me power over you. You let me order you around and control you. And now..[/say]")
+
+		saynn("You lower your head before Rahi. Your hands rest on your legs, palms directed up.. Showing that you have nothing to hide.")
+
+		saynn("[say=pc]I want to submit to you.. I want.. No.. I need you to have power over me as well.. As much as you want.. Your dominance over me is absolute.. Miss Rahi.[/say]")
+
+		saynn("A few seconds of silence.. Seconds that get dragged on for way too long.. But you keep your pose completely still.. for Rahi.")
+
+		saynn("You.. feel.. Rahi slowly walking towards you, raising your anticipation to the max. Then she leans in, tracing the lines of your face with her clawed digit. Then she whispers..")
+
+		saynn("[say=rahi]You.. are.. mine.. now..[/say]")
+
+		saynn("Your eyes widen from excitement, you feel a shiver of pleasure run down your spine. Rahi reaches with her paw and grabs your hair, pulling your head back before kissing you deeply, her rough feline tongue sliding past your lips and curling around yours, exchanging fluids.")
+
+		saynn("After a single moment.. or an eternity.. who even knows.. Rahi breaks the kiss and steps back, letting go of your hair.")
+
+		saynn("[say=rahi]I.. She.. will still be your kitty. Forever and ever. But, anytime you lose grip on her.. prepare to be dominated by Miss Rahi. I can switch instantly.[/say]")
+
+		saynn("You establish eye contact with Rahi. She sees.. complete trust in your eyes.. You see the same. You nod silently.")
+
+		saynn("[say=rahi]One more thing..[/say]")
+
+		saynn("You tilt your head, your interest is peaked.")
+
+		saynn("[say=rahi]She wants to.. leave a mark on you.. You know. To claim you. If that's okay.[/say]")
+
+		saynn("That's asking for a lot. But the idea itself.. Is quite hot. You get excited just thinking about the ways she can mark you.")
+
+		saynn("How would you like to be marked by Rahi?")
+
+		addButton("No marking", "Well. Maybe you don't need a mark from Rahi", "submit_nomark")
+		addButton("Collar", "Have Rahi scratch some words onto your collar", "submit_collar")
+		if (getModule("RahiModule").isSkillLearned("rahiSkillMasochist")):
+			addButton("A bite", "(Masochist) Have Rahi mark you by biting your shoulder", "submit_bite")
+		else:
+			addDisabledButton("A bite", "(Masochist) Rahi need to have the Masochist skill for this")
+		if (getModule("RahiModule").isSkillLearned("rahiSkillWatersports")):
+			addButton("Get peed on", "(Watersports) Rahi marks you with her pee", "submit_watersports")
+		elif (OPTIONS.isContentEnabled(ContentType.Watersports)):
+			addDisabledButton("Get peed on", "(Watersports) Rahi needs to have the Watersports skill for this")
+		if (getModule("RahiModule").isSkillLearned("rahiSkillExhibit") || getModule("RahiModule").isSkillLearned("rahiSkillPetplay")):
+			addButton("Get paraded", "(Exhibionism+Petplay) Rahi will let the whole prison know that you are her pet", "submit_parade")
+		else:
+			addButton("Get paraded", "(Exhibionism+Petplay) Rahi needs to have one of these skills for this")
+	if(state == "submit_nomark"):
+		playAnimation(StageScene.Cuddling, "idle", {npc="rahi"})
+		saynn("Maybe being marked by your kitty isn't such a good idea.")
+
+		saynn("[say=pc]You left many marks on me, kitty. My heart especially.[/say]")
+
+		saynn("You slowly get up and embrace your kitty, your hands caressing her back. The dominant side of Rahi softens up while you do that.")
+
+		saynn("[say=rahi]Yeah.. Maybe you're right..[/say]")
+
+		saynn("She kisses your cheek and purrs in your hands.")
+
+		saynn("You let the moment linger for a while longer.. maybe a few seconds.. maybe hours.. In the end you end up on the bed, cuddling.")
+
+		addButton("Continue", "That was cute", "endthescene")
+	if(state == "submit_collar"):
+		saynn("You lower your head low, exposing your collar. And that gives Rahi an idea. She circles around you, her eyes scanning that bulky metal piece around your neck. The collar marks you as an inmate but it was plain and impersonal.")
+
+		saynn("[say=rahi]Sit still.[/say]")
+
+		saynn("Her voice is low and commanding. You listen, of course. Rahi reaches her paws out and gets a hold of your collar. She traces her claws along the surface, her touch gentle and yet firm. Seeing her claws so close to your throat makes you tense up. She picks a good spot on the front of the collar, a good visible spot.")
+
+		saynn("With a sudden motion, Rahi digs her claw into the metal of the collar, carving out the letters of her name in sharp, jagged lines. She obviously can't pierce the metal itself, only scratch off the top layer. But that's enough to leave a little message on it.")
+
+		saynn("When she completes it, Rahi steps back, admiring her handiwork. Your collar now has the words \"Belongs to Miss Rahi\" roughly engraved into it for everyone to see. She rams her fingers over the metal.. and then over your cheek.. clearly pleased with how it turned out.")
+
+		saynn("[say=rahi]From now on.. You are.. Mine. And everyone will know it.[/say]")
+
+		saynn("She puts her clawed digit on your chin and invites you to get up. Then she hugs you.")
+
+		saynn("[say=pc]Thank you Miss Rahi.[/say]")
+
+		saynn("You can hear purring coming from her.")
+
+		addButton("Continue", "That was cute", "endthescene")
+	if(state == "submit_bite"):
+		saynn("You lower your head low, completely submitting. Seeing your exposed neck.. gives Rahi an idea. She circles around you, her confident eyes scanning for the best spot. Then she gets a hold of your collar and crouches before you, her free paw exposing more of your shoulder. Her eyes lock onto yours as she bares her sharp fangs, hovering just above your skin.")
+
+		saynn("[say=rahi]Ready for this?[/say]")
+
+		saynn("Rahi purrs, there is excitement in her voice. You nod and hold your breath, bracing. Fear and desire battle inside you.")
+
+		saynn("With a swift motion, Rahi sinks her teeth into your shoulder, just below your collar, until she draws blood. You gasp in pain.. but also in ecstasy.. the bond between you and Rahi grows stronger with each passing moment. Rahi uses her feline tongue to catch any blood and lick it up.")
+
+		saynn("She slowly retracts her fangs but continues to suckle on the wound, dragging her tongue over the deep bite marks that probably won't heal for at least a week. As she does that, you feel a rush of energy and power flowing through you.. making you feel alive.. and needed.")
+
+		saynn("After she is done leaving her mark on you, Rahi wraps her paws around you and hugs. While you are still panting..")
+
+		saynn("[say=rahi]Remember this moment..[/say]")
+
+		saynn("She purrs and leaves little kisses on you.")
+
+		saynn("[say=rahi]You are.. mine now. Body and soul.[/say]")
+
+		addButton("Continue", "That was cute", "endthescene")
+	if(state == "submit_watersports"):
+		playAnimation(StageScene.SexFeetPlay, "head", {pc="rahi", npc="pc", bodyState={naked=true}, npcBodyState={naked=true, hard=true}})
+		saynn("Rahi stares at you for some time. Then she bites her lip when a good idea comes up in her mind.")
+
+		saynn("[say=rahi]Lie down![/say]")
+
+		saynn("Her voice is low and commanding. You listen, of course, and get on your back. Rahi crouches and makes sure all your privates are exposed. Then she pulls down her own shorts, exposing her slightly-moist pussy for you. Your hand reaches towards it, sliding over Rahi's fluffy leg but she stops by pinning you to the ground with her foot. Her face has a smug grin on it, she moves her paw to her slit and spreads the petals open before trying to force something to happen..")
+
+		saynn("[say=rahi]Hope you.. you're.. rea.. ah!..[/say]")
+
+		saynn("Suddenly, Rahi releases a hot stream of urine onto your face and into your mouth, marking you with her scent and fluids! As you struggle to swallow and endure the humiliation, Rahi moans softly as she takes her time emptying her bladder.")
+
+		saynn("After your face receives enough of it, Rahi turns slightly and now offers a golden shower for the rest of your body, the warm liquid splattering over your chest and running down your curves. She can't help but to chuckle softly, watching you squirm under her.")
+
+		saynn("After the final drop of piss lands on you, Rahi rubs her pisshole with her digits. Then she brings them to her lips and licks them clean. All the while you just lay there.. covered in her gross-smelling urine..")
+
+		saynn("[say=rahi]There you go.. She marked you, making you her property.. Did you enjoy it?[/say]")
+
+		saynn("You nod.. feeling both humiliated and incredibly turned on at the same time.. You wouldn't have it any other way..")
+
+		saynn("[say=rahi]Well. Go get a shower then.. Or not.[/say]")
+
+		addButton("Continue", "That was cute", "endthescene")
+	if(state == "submit_parade"):
+		playAnimation(StageScene.Duo, "stand", {npc="rahi", bodyState={naked=true}})
+		saynn("Rahi looks down at you for some time, a devious idea slowly getting born in her head.")
+
+		if (!GM.pc.isFullyNaked()):
+			saynn("[say=rahi]Strip![/say]")
+
+			saynn("Rahi commands.. And you obey, taking off your clothes and putting them in a neat pile nearby.")
+
+		saynn("Suddenly the feline produces a chain leash and clips it to your collar in one smooth motion. That's.. concerning.")
+
+		saynn("[say=rahi]Get up. We're going for a walk, pet.[/say]")
+
+		saynn("Oh no. Usually the games where you submit to Rahi don't go further than her cell. But now Rahi wants to change that.. The more you deliberate, the tighter her grip is on the leash. She pulls up on it, inviting you to obey.")
+
+		saynn("[say=rahi]C'mon, she can't wait to show everyone her new pet.[/say]")
+
+		saynn("You gulp and slowly get up. Kitty steps out of the cell and tugs on the leash more..")
+
+		addButton("Follow", "See where she brings you..", "submit_parade_show")
+	if(state == "submit_parade_show"):
+		playAnimation(StageScene.Duo, "allfours", {npc="rahi", bodyState={naked=true}})
+		aimCameraAndSetLocName("main_punishment_spot")
+		saynn("Rahi exits her cell and confidently walks you through the general pop block, leash in her paw with you on the other end of it. You walk with your head bowed, face blushing from shame. Rahi's eyes shine with satisfaction as she leads you past some other inmates, their gazes are all glued to you.")
+
+		saynn("Eventually kitty brings you out into the main hall where everyone usually hangs out. She climbs the main platform that has all the benches and pillories. She turns to you.")
+
+		saynn("[say=rahi]Get on all fours.. She wants to see a happy obedient puppy.[/say]")
+
+		saynn("You deliberate.. a lot. Your {pc.privates} are all on display, no matter how much you try to hide them.")
+
+		saynn("[say=pc]Maybe let's go back instead?..[/say]")
+
+		saynn("Instead of listening to you, Rahi smiles and turns away.")
+
+		saynn("[say=rahi]Look at her pet! {pc.He} is so obedient and well-trained![/say]")
+
+		saynn("She was loud enough for everyone to hear. All the while kitty keeps tugging down on the leash.. you finally submit, slowly lowering yourself to all fours.")
+
+		saynn("All sorts of inmates crowd around you. Some pat you on the head and ruffle your hair. Some just taunt you, calling you a \"Good {pc.boy}\". It's humiliating.. but you can't deny that being patted and receiving scritches is kinda nice..")
+
+		saynn("Rahi grins, watching you squirm with embarrassment. She crouches near you and wraps the leash around her wrist many times, making it super short. Inmates around asking if they can take you for a walk or breed you.")
+
+		saynn("[say=rahi]You like that, don't you? You like being her little bitch? Her property.[/say]")
+
+		saynn("You whimper, unable to meet her gaze.")
+
+		saynn("Rahi continues to parade you through the prison, with you crawling on all fours this time. She would show you off to anyone who would look. And let them pet you of course.")
+
+		addButton("Continue", "See what happens next", "submit_parade_end")
+	if(state == "submit_parade_end"):
+		playAnimation(StageScene.Cuddling, "idle", {pc="rahi", npc="pc", npcBodyState={naked=true}})
+		aimCameraAndSetLocName("cellblock_orange_nearcell")
+		saynn("Eventually you make your way back to Rahi's cell. The feline lays down on her bed and pulls you close to her. You can feel her hot breath near your ears. She puts her paws on you and cuddles you.")
+
+		saynn("[say=rahi]Sorry if that was too much, puppy..[/say]")
+
+		saynn("You lower your head.")
+
+		saynn("[say=pc]No.. it was.. okay..[/say]")
+
+		saynn("She purrs and nuzzles your cheek.")
+
+		saynn("[say=rahi]But now everyone knows that you're.. mine. She didn't even had to bite or scratch you.[/say]")
+
+		saynn("Her paw pats you on the head. You keep cuddling for a while..")
+
+		addButton("Continue", "That was cute", "endthescene")
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
@@ -1541,6 +1777,9 @@ func _react(_action: String, _args):
 		setState(RNG.pick(possible))
 		getModule("RahiModule").advanceSkill("rahiSkillDominance")
 		return
+
+	if(_action == "submit_scene"):
+		getModule("RahiModule").advanceSkill("rahiSkillDominance")
 
 	if(_action == "cancelactivity"):
 		increaseFlag("RahiModule.rahiTired", -1)
@@ -1733,5 +1972,28 @@ func _react(_action: String, _args):
 		GM.pc.pissedOnBy("rahi")
 		getModule("RahiModule").advanceSkill("rahiSkillWatersports")
 		GM.pc.addPain(-30)
+
+	if(_action == "submit_nomark"):
+		processTime(20*60)
+
+	if(_action == "submit_bite"):
+		getModule("RahiModule").advanceSkill("rahiSkillMasochist")
+		GM.pc.addPain(20)
+		GM.pc.addStamina(50)
+
+	if(_action == "submit_watersports"):
+		getModule("RahiModule").advanceSkill("rahiSkillWatersports")
+		GM.pc.pissedOnBy("rahi")
+		GM.pc.pissedOnBy("rahi", 0.5)
+
+	if(_action == "submit_parade"):
+		getModule("RahiModule").advanceSkill("rahiSkillExhibit")
+		getModule("RahiModule").advanceSkill("rahiSkillPetplay")
+
+	if(_action == "submit_parade_show"):
+		processTime(5*60)
+
+	if(_action == "submit_parade_end"):
+		processTime(20*60)
 
 	setState(_action)
