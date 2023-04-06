@@ -94,6 +94,10 @@ func _run():
 		addButton("Shower", "Go take a shower", "doactivity", ["RahiShowerScene"])
 		if(getModule("RahiModule").isSkillLearned("rahiSkillDominance")):
 			addButton("Dominance", "Teach Rahi to be more dominant", "doactivity", ["rahiActivityDominanceScene"])
+		if(getModule("RahiModule").isSkillLearned("rahiSkillAnal")):
+			addButton("Anal training", "Train Rahi to become a buttslut", "doactivity", ["rahiActivityAnalScene"])
+
+
 		addButton("Back", "Go back a menu", "")
 		
 	if(state == "relationship"):
@@ -145,19 +149,20 @@ func _run():
 			GM.pc.getName(), "Master", "Mistress",
 		]
 		var currentRank = getModule("RahiModule").getSlaveryStage()
-		if(currentRank >= 3):
+		if(currentRank >= 2):
 			titles.append_array(["Miss", "Mister", "Owner", "Trainer"])
-		if(currentRank >= 4):
+		if(currentRank >= 3):
 			titles.append_array(["Lady", "Goddess", "Lord", "Sir"])
-		if(currentRank >= 5):
+		if(currentRank >= 4):
 			titles.append_array(["Queen", "Ma’am", "King", "Prince"])
-		if(currentRank >= 6):
+		if(currentRank >= 5):
 			titles.append_array(["Mommy", "Madam", "Daddy", "Alpha"])
-		if(currentRank >= 7):
+		if(currentRank >= 6):
 			titles.append_array(["Handler", "Your Highness", "Boss", "Kitty's Keeper"])
-		
+		if(currentRank >= 7):
+			titles.append_array(["Rahi's Handler", "Love"])
 		if(currentRank >= 8):
-			titles.append_array(["Rahi's Handler", "my love", "my Lord", "my Queen", "my Miss", "Bitch"])
+			titles.append_array(["my love", "my Lord", "my Queen", "my Miss", "Bitch"])
 		
 		for title in titles:
 			addButton("'"+title+"'", "Make her call you like this", "set_title", [title])
@@ -257,7 +262,7 @@ func getDebugActions():
 					"id": "stage",
 					"name": "Stage",
 					"type": "number",
-					"value": 7,
+					"value": 8,
 				},
 			]
 		},
