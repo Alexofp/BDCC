@@ -10,7 +10,9 @@ func _run():
 
 		var analLevel = getModule("RahiModule").getSkillScore("rahiSkillAnal")
 		if (analLevel == 0):
-			addButton("First steps", "Start training Rahi's butt", "scene1")
+			addButton("Train Rahi's butt", "Start training Rahi's butt", "scene1")
+		if (analLevel == 1):
+			addButton("Train Rahi's butt", "Do more training", "scene2")
 		addButton("Never mind", "You changed your mind", "cancelactivity")
 	if(state == "scene1"):
 		playAnimation(StageScene.Duo, "sit", {npc="rahi"})
@@ -190,6 +192,95 @@ func _run():
 		saynn("You deliver an impact on Rahi butt and let her rest.")
 
 		addButton("Continue", "That was cute", "endthescene")
+	if(state == "scene2"):
+		saynn("Rahi is sitting on her bed, waiting for you clearly. When you approach her, she greet you with a smile.")
+
+		saynn("[say=pc]Good morning, kitty. Ready for another training session?[/say]")
+
+		saynn("Rahi nods, there is a hint of excitement and determination in her eyes.")
+
+		saynn("[say=rahi]Yes, {rahiMaster}.. She doesn't mind having her butt trained more..[/say]")
+
+		saynn("You grab Rahi's paw and make her stand up.")
+
+		saynn("[say=pc]Alright then. You know what to do.[/say]")
+
+		saynn("You go ahead and grab a tube of lube while Rahi is busy preparing herself.")
+
+		addButton("Continue", "See what happens next", "scene2_start")
+	if(state == "scene2_start"):
+		playAnimation(StageScene.Spanking, "tease", {npc="rahi", npcBodyState={naked=true}})
+		saynn("Rahi takes off her uniform and leaves it under her pillow. Then she climbs her bed and positions herself on all four, wiggling her girly rear at you. Kitty sure is playful today.")
+
+		saynn("You sit near and begin by gently rubbing and massaging around her buttocks, gradually moving closer to her anus. Rahi purrs, the teasing making her fur stand up.")
+
+		saynn("[say=pc]Be a good girl and spread your butt for me.[/say]")
+
+		saynn("Rahi flops her face into the pillow and brings her paws down to her butt. She puts them on her buttcheeks and spreads them, presenting you her moist pussy and the tight-looking pretty tailhole. You pour some lube onto your digits and begin to gently rub her clenching star with them, spreading the slick substance and getting some inside too.")
+
+		saynn("After that is done, you begin to slowly insert your fingers into Rahi's ass, working them in and out in a gentle rhythm. This time it goes way better, Rahi already moans softly for you, her body responding to the stimulation.")
+
+		saynn("[say=pc]Relax and let me take care of you.[/say]")
+
+		saynn("Rahi lets out a muffled noise of agreement as you continue to stretch her out with your fingers, gradually increasing the frequency and amplitude of your motions, fingering Rahi's ass at a pretty respectable pace.")
+
+		saynn("[say=rahi]M-more..[/say]")
+
+		saynn("If she wants more, she will get more. You try to work the third finger inside her anus too. Kitty squirms and mewls into her pillow but eventually her anal ring stretches enough to take it. She purrs as you wiggle them all inside her. Rahi's pussy is dripping with juices.")
+
+		saynn("[say=rahi]F-faster.. It feels so good..[/say]")
+
+		saynn("[say=pc]Such a needy kitty.[/say]")
+
+		saynn("You pry Rahi's paws away from her buttcheeks and then spank her firmly, forcing a moan and making her anus clench tightly around your digits.")
+
+		saynn("[say=rahi]Ah!.. A-again..[/say]")
+
+		saynn("Wow. You keep sliding your digits in and out of her anus, sometimes spanking her to make her get tight. Kitty is a squirming dripping mess, her toes curl up, tail brushes against your wrist. You realize that you don't even have to lube your fingers again, Rahi's ass is lubricating them.")
+
+		saynn("[say=rahi]S-she wants to cum so badly.. But she can't!..[/say]")
+
+		saynn("The last words sounded almost desperate.")
+
+		saynn("[say=pc]I know, kitty. But remember that we're not focused on your pussy right now.[/say]")
+
+		saynn("[say=rahi]No! Cum from anal!.. Can you.. another one?..[/say]")
+
+		saynn("Her frustration slowly grows. Well, might as well test her, right?")
+
+		saynn("You try to add in the fourth finger to the bunch. Sliding it inside proves to be different, Rahi's tight anal ring is resisting your attempts. But you don't hear any complaints from her so you push ahead and keep fingering her ass while trying to shove the other finger in.")
+
+		saynn("[say=rahi]Ngh-h.. hh-huf-f..[/say]")
+
+		saynn("Rahi's pussy is aching with desire, she squirms and moans, desperate for release. Her breathing becomes ragger and her noises louder. A loud moan escapes from her when the fourth digits manages to slip in, stretching Rahi's asshole the most it ever was. So much that the ring itself receives a reddish tint to it, showing that this is probably painful for her.")
+
+		saynn("She grabs onto the bed sheets and starts to meet your fingers with the motions of her ass, making it look like you're finger-fucking her. Kitty makes all sorts of noises, lust, pleasure, pain and desperation all getting mixed up together. She can feel herself getting closer and closer to the edge.. but that feeling eventually fades.. leaving kitty frustrated.")
+
+		saynn("[say=rahi]Hhu-uff.. It hurts now.. A lot..[/say]")
+
+		saynn("Finally, you withdraw your fingers, leaving Rahi to whimper. Her stretched irritated butthole pulsates as Rahi clenches and tries to make it close.")
+
+		saynn("[say=pc]Good job, kitty. You did much better this time.[/say]")
+
+		saynn("[say=rahi]But.. she didn't..[/say]")
+
+		saynn("You pat Rahi on her butt.")
+
+		saynn("[say=pc]If you wanna become a buttslut - it will happen, sooner or later. But otherwise, we can just keep training your ass, making you take bigger and bigger things, maybe horsecocks even.[/say]")
+
+		saynn("Rahi nods softly. You feel Rahi has deserved another reward. You stand up and walk over to the crate of toys before grabbing a small buttplug out of it. Rahi watches you with great interest.")
+
+		saynn("[say=pc]I'm gonna put this into you, kitty. It will help keep you stretched and ready for our next session.[/say]")
+
+		saynn("Kitty nods again, looking quite excited. You pour some lube onto the toy and begin slowly working it into her ass, stopping when it's fully inserted and only showing a cute red gem.")
+
+		saynn("[say=rahi]N-nya..[/say]")
+
+		saynn("[say=pc]There you. You will wear that until the next time.[/say]")
+
+		saynn("Rahi wiggles her ass, feeling the weight of the plug inside her. Seems like it won't fall out. This will be a good reminder of her training.")
+
+		addButton("Enough", "That was nice", "endthescene")
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
@@ -197,6 +288,10 @@ func _react(_action: String, _args):
 		return
 
 	if(_action == "scene1"):
+		processTime(2*60)
+		getModule("RahiModule").advanceSkill("rahiSkillAnal")
+
+	if(_action == "scene2"):
 		processTime(2*60)
 		getModule("RahiModule").advanceSkill("rahiSkillAnal")
 

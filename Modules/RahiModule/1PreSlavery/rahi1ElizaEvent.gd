@@ -9,7 +9,7 @@ func registerTriggers(es):
 func react(_triggerID, _args):
 	if(getFlag("RahiModule.rahi1ElizaSceneHappened")):
 		return false
-	if(!getFlag("RahiModule.Rahi_ShowerHappened")):
+	if(!getFlag("RahiModule.Rahi_ChillHappened")):
 		return false
 	if(GM.pc.getLevel() < 3 || GM.main.getDays() < 10):
 		return false
