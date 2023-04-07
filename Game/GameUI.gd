@@ -43,6 +43,9 @@ func _ready():
 		debugPanelButton.visible = false
 		debugPanelButton.disabled = true
 	
+	if(!AutoTranslation.shouldTranslate()):
+		$HBoxContainer/VBoxContainer2/Panel/TranslateBox.visible = false
+	
 	var fontOverride = OPTIONS.getFontSize()
 	if(fontOverride == "small"):
 		setFontSize(18)
@@ -361,11 +364,17 @@ func recreateWorld():
 func _on_RollbackButton_pressed():
 	emit_signal("on_rollback_button")
 
+var savedOriginalText = ""
+var savedTranslatedText = ""
 var currentTranslationTask = 0
+onready var translateStatusLabel = $HBoxContainer/VBoxContainer2/Panel/TranslateBox/TranslateStatusLabel
+onready var showOriginalCheckbox = $HBoxContainer/VBoxContainer2/Panel/TranslateBox/ShowOriginalCheckbox
 func translateText():
 	if(AutoTranslation.shouldTranslate()):
+		translateStatusLabel.text = "Translating.."
 		currentTranslationTask += 1
 		var rememberedTask = currentTranslationTask
+		savedOriginalText = textOutput.bbcode_text
 		var result = AutoTranslation.translate(textOutput.text)
 	
 		if(result is GDScriptFunctionState):
@@ -375,4 +384,19 @@ func translateText():
 			return
 		
 		if(result != null && result != ""):
-			textOutput.bbcode_text = result
+			savedTranslatedText = result
+			if(!showOriginalCheckbox.pressed):
+				textOutput.bbcode_text = result
+			if(AutoTranslation.hadToUseFallback):
+				translateStatusLabel.text = "Used fallback translator"
+				yield(get_tree().create_timer(2.0), "timeout")
+				if(translateStatusLabel != null && translateStatusLabel.text == "Used fallback translator"):
+					translateStatusLabel.text = ""
+			else:
+				translateStatusLabel.text = ""
+
+func _on_ShowOriginalCheckbox_pressed():
+	if(showOriginalCheckbox.pressed):
+		textOutput.bbcode_text = savedOriginalText
+	else:
+		textOutput.bbcode_text = savedTranslatedText

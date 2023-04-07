@@ -249,6 +249,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Game/Gameplay/DamageType.gd"
 }, {
+"base": "TranslatorBase",
+"class": "DeepLTranslator",
+"language": "GDScript",
+"path": "res://Util/AutoTranslation/Translators/DeepLTranslator.gd"
+}, {
 "base": "Object",
 "class": "Direction",
 "language": "GDScript",
@@ -1128,6 +1133,7 @@ _global_script_class_icons={
 "CumProduction": "",
 "CycleStage": "",
 "DamageType": "",
+"DeepLTranslator": "",
 "Direction": "",
 "Doll3D": "",
 "DollAttachmentZone": "",

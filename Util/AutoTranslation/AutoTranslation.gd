@@ -5,11 +5,14 @@ var selectedTranslatorID = ""
 var shouldBeTranslating = false
 
 var translator:TranslatorBase
+var fallbackTranslator:TranslatorBase
+
+var hadToUseFallback = false
 
 func _ready():
 	loadFromFile()
 	setTargetLanguage(targetLanguage)
-	setTranslator("googlebatch")
+	setTranslator("deepl")
 	setShouldTranslate(shouldBeTranslating)
 	
 func setTargetLanguage(tl):
@@ -29,7 +32,11 @@ func setTranslator(translatorID):
 	selectedTranslatorID = translatorID
 	recreateTranslatorIfNeeded()
 
-func recreateTranslatorIfNeeded():	
+func recreateTranslatorIfNeeded():
+	if(fallbackTranslator != null && !shouldBeTranslating):
+		fallbackTranslator.queue_free()
+		fallbackTranslator = null
+	
 	if(translator != null):
 		if(translator.id != selectedTranslatorID || !shouldBeTranslating):
 			translator.queue_free()
@@ -47,6 +54,14 @@ func recreateTranslatorIfNeeded():
 	if(selectedTranslatorID == "googlebatch"):
 		translator = GoogleBatchTranslator.new()
 		add_child(translator)
+	if(selectedTranslatorID == "deepl"):
+		translator = DeepLTranslator.new()
+		add_child(translator)
+	
+	if(fallbackTranslator == null):
+		fallbackTranslator = GoogleBatchTranslator.new()
+		add_child(fallbackTranslator)
+		fallbackTranslator.setup()
 	
 	if(translator != null):
 		translator.setup()
@@ -59,22 +74,40 @@ func setShouldTranslate(newtranslate):
 	recreateTranslatorIfNeeded()
 
 func translate(inputText):
+	hadToUseFallback = false
 	if(translator == null || !shouldBeTranslating):
 		return inputText
 		
 	#var hadFails = false
 	var theResultedArray = []
 	var splittedText = splitByNewLinesAndSize(inputText, 4000)
+	var amountOfTexts = splittedText.size()
+	var _i = 0
 	for theText in splittedText:
 		var theResult = translator.translate(targetLanguage, theText)
 		if(theResult is GDScriptFunctionState):
 			theResult = yield(theResult, "completed")
 		if(theResult == null || !(theResult is Dictionary) || !(theResult.has("success")) || !theResult["success"]):
-			#hadFails = true
-			return inputText
-			#continue
+			if(fallbackTranslator == null):
+				return inputText
+				
+			hadToUseFallback = true
+			var fallbackResult = fallbackTranslator.translate(targetLanguage, theText)
+			if(fallbackResult is GDScriptFunctionState):
+				fallbackResult = yield(fallbackResult, "completed")
+			if(fallbackResult == null || !(fallbackResult is Dictionary) || !(fallbackResult.has("success")) || !fallbackResult["success"]):
+				#hadFails = true
+				#print(theResult)
+				return inputText
+				#continue
+			else:
+				theResult = fallbackResult
 		
 		theResultedArray.append(theResult["resultText"])
+		
+		_i += 1
+		if(_i < amountOfTexts):
+			yield(get_tree().create_timer(2.0), "timeout")
 	
 	if(theResultedArray.size() == 0):
 		return inputText
