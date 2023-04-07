@@ -46,6 +46,8 @@ func _ready():
 	if(!AutoTranslation.shouldTranslate()):
 		$HBoxContainer/VBoxContainer2/Panel/TranslateBox.visible = false
 	
+	manualTranslateButton.visible = false
+	
 	var fontOverride = OPTIONS.getFontSize()
 	if(fontOverride == "small"):
 		setFontSize(18)
@@ -369,8 +371,14 @@ var savedTranslatedText = ""
 var currentTranslationTask = 0
 onready var translateStatusLabel = $HBoxContainer/VBoxContainer2/Panel/TranslateBox/TranslateStatusLabel
 onready var showOriginalCheckbox = $HBoxContainer/VBoxContainer2/Panel/TranslateBox/ShowOriginalCheckbox
-func translateText():
+onready var manualTranslateButton = $HBoxContainer/VBoxContainer2/Panel/TranslateBox/ManualTranslateButton
+func translateText(manualButton = false):
 	if(AutoTranslation.shouldTranslate()):
+		showOriginalCheckbox.disabled = true
+		if(!manualButton && AutoTranslation.shouldHaveManualTranslateButton()):
+			manualTranslateButton.visible = true
+			return
+		
 		translateStatusLabel.text = "Translating.."
 		currentTranslationTask += 1
 		var rememberedTask = currentTranslationTask
@@ -394,9 +402,16 @@ func translateText():
 					translateStatusLabel.text = ""
 			else:
 				translateStatusLabel.text = ""
+				
+			showOriginalCheckbox.disabled = false
 
 func _on_ShowOriginalCheckbox_pressed():
 	if(showOriginalCheckbox.pressed):
 		textOutput.bbcode_text = savedOriginalText
 	else:
 		textOutput.bbcode_text = savedTranslatedText
+
+
+func _on_ManualTranslateButton_pressed():
+	manualTranslateButton.visible = false
+	translateText(true)

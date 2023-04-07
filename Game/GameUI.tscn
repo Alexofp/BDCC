@@ -232,15 +232,19 @@ anchor_bottom = 1.0
 
 [node name="TranslateStatusLabel" type="Label" parent="HBoxContainer/VBoxContainer2/Panel/TranslateBox"]
 margin_top = 5.0
-margin_right = 45.0
 margin_bottom = 25.0
-text = "Hello"
 
 [node name="ShowOriginalCheckbox" type="CheckBox" parent="HBoxContainer/VBoxContainer2/Panel/TranslateBox"]
-margin_left = 49.0
-margin_right = 191.0
+margin_left = 4.0
+margin_right = 146.0
 margin_bottom = 30.0
 text = "Show original"
+
+[node name="ManualTranslateButton" type="Button" parent="HBoxContainer/VBoxContainer2/Panel/TranslateBox"]
+margin_left = 150.0
+margin_right = 242.0
+margin_bottom = 30.0
+text = "Translate"
 
 [node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer/VBoxContainer2"]
 margin_top = 34.0
@@ -373,6 +377,7 @@ margin_bottom = -96.289
 [connection signal="pressed" from="HBoxContainer/Panel2/MarginContainer/VBoxContainer/HBoxContainer3/DebugMenu" to="." method="_on_DebugMenu_pressed"]
 [connection signal="pressed" from="HBoxContainer/Panel2/MarginContainer/VBoxContainer/HBoxContainer/RollbackButton" to="." method="_on_RollbackButton_pressed"]
 [connection signal="pressed" from="HBoxContainer/VBoxContainer2/Panel/TranslateBox/ShowOriginalCheckbox" to="." method="_on_ShowOriginalCheckbox_pressed"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer2/Panel/TranslateBox/ManualTranslateButton" to="." method="_on_ManualTranslateButton_pressed"]
 [connection signal="pressed" from="HBoxContainer/VBoxContainer2/HBoxContainer/PrevPageButton" to="." method="_on_PrevPageButton_pressed"]
 [connection signal="pressed" from="HBoxContainer/VBoxContainer2/HBoxContainer/NextPageButton" to="." method="_on_NextPageButton_pressed"]
 [connection signal="onResumeButtonPressed" from="HBoxContainer/InGameMenu" to="." method="showGameScreen"]

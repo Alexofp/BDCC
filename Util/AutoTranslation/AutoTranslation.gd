@@ -3,6 +3,7 @@ extends Node
 var targetLanguage = "de"
 var selectedTranslatorID = ""
 var shouldBeTranslating = false
+var manualTranslateButton = false
 
 var translator:TranslatorBase
 var fallbackTranslator:TranslatorBase
@@ -72,6 +73,12 @@ func shouldTranslate():
 func setShouldTranslate(newtranslate):
 	shouldBeTranslating = newtranslate
 	recreateTranslatorIfNeeded()
+
+func shouldHaveManualTranslateButton():
+	return manualTranslateButton
+
+func setManualTransalteButton(newb):
+	manualTranslateButton = newb
 
 func translate(inputText):
 	hadToUseFallback = false
@@ -159,11 +166,13 @@ func saveData():
 	return {
 		"targetLanguage": targetLanguage,
 		"shouldBeTranslating": shouldBeTranslating,
+		"manualTranslateButton": manualTranslateButton,
 	}
 
 func loadData(data):
 	targetLanguage = SAVE.loadVar(data, "targetLanguage", "de")
 	shouldBeTranslating = SAVE.loadVar(data, "shouldBeTranslating", false)
+	manualTranslateButton = SAVE.loadVar(data, "manualTranslateButton", false)
 	
 var configFilePath = "user://autotranslation.json"
 func saveToFile():

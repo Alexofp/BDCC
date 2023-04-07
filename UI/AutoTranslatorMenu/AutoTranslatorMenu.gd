@@ -12,7 +12,7 @@ func _ready():
 			langList.select(_i)
 		_i += 1
 	$VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer/EnableTranslationBox.pressed = AutoTranslation.shouldTranslate()
-
+	$VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer3/EnableManualTranslateButton.pressed = AutoTranslation.shouldHaveManualTranslateButton()
 
 func _on_CloseButton_pressed():
 	AutoTranslation.saveToFile()
@@ -27,3 +27,6 @@ func _on_LanguageList_item_selected(index):
 	var allLangs = TranslationLanguage.getAll().keys()
 	print(allLangs[index])
 	AutoTranslation.setTargetLanguage(allLangs[index])
+
+func _on_EnableManualTranslateButton_toggled(button_pressed):
+	AutoTranslation.setManualTransalteButton(button_pressed)
