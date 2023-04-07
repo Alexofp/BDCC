@@ -15,6 +15,12 @@ func _run():
 			addButton("Train Rahi's butt", "Do more training", "scene2")
 		if (analLevel == 2):
 			addButton("Train Rahi's butt", "Do more training", "scene3")
+		if (analLevel >= 3):
+			addButton("Anal sex", "Fuck Rahi's butt", "do_random_sex")
+			if (analLevel >= 12):
+				addButton("Fisting", "Fist Rahi's ass", "fist1")
+			else:
+				addDisabledButton("Fisting", "Rahi needs her ass trained a lot for you to fist her")
 		addButton("Never mind", "You changed your mind", "cancelactivity")
 	if(state == "scene1"):
 		playAnimation(StageScene.Duo, "sit", {npc="rahi"})
@@ -355,6 +361,137 @@ func _run():
 		saynn("You spend the next ten minutes cuddling. Rahi tells you how good the afterglow feels.")
 
 		addButton("Continue", "That was nice", "endthescene")
+	if(state == "sex1"):
+		playAnimation(StageScene.SexStanding, "tease", {npc="rahi", bodyState={naked=true, hard=true}})
+		saynn("Rahi lays on her bed, just chilling. Seeing how she seductively wiggles her rear makes you want to take her.. raw. You can feel your member getting harder just thinking about railing that ass..")
+
+		saynn("Without warning, you grab Rahi's paw and pull her off the bed before pressing her body against the wall. You quickly expose your {pc.penis} and start prodding Rahi's shorts with it, in the area under her tail. Kitty mewls softly.")
+
+		saynn("[say=pc]I want your ass, kitty.[/say]")
+
+		saynn("Rahi slowly moves her paws down to her shorts and tugs them down, exposing her cute tailhole to you. Her anal ring is quite elastic which means it doesn't look that much different from a virgin hole.. for now.")
+
+		addButton("Fuck her", "Rail that ass", "sex1_start")
+	if(state == "sex1_start"):
+		playAnimation(StageScene.SexStanding, "sex", {npc="rahi", bodyState={naked=true, hard=true}, npcBodyState={naked=true}})
+		saynn("You quickly guide your member towards Rahi's waiting asshole and get a hold of her tail before moving it out of the way. Then you use it as a leash, pulling Rahi back and making her ass take your cock.")
+
+		var analLevel = getModule("RahiModule").getSkillScore("rahiSkillAnal")
+		if (analLevel <= 8):
+			saynn("She gasps, feeling a mix of pain and pleasure as you stretch her tight hole more.")
+
+		else:
+			saynn("She moans, only feeling pleasure as you stretch her trained hole to its comfortable size. You marvel at how easily she takes you in.")
+
+		saynn("As you start thrusting into her, Rahi's body responds eagerly. Her soft inner walls slowly self-lubricate until you can feel almost no friction. More little noises of pleasure escape from your kitty, her body shaking with your every hip motion. You try to be at such an angle so your member puts pressure on a certain point, behind which would be her g-spot. There is a little visible bump on her belly each time you thrust inside.")
+
+		if (analLevel <= 8):
+			saynn("[say=rahi]Please, {rahiMaster}! It feels so good.. Having you stretching her butt..[/say]")
+
+		else:
+			saynn("[say=rahi]She is such a buttslut, {rahiMaster}!.. It feels too good..[/say]")
+
+		saynn("You continue to fuck her, harder and faster, until Rahi feels the pleasure building inside her. During the pounding, Rahi's ass got stretched enough to fit every inch of your {pc.penis} inside her. Passionate moans escape from Rahi, her neglected pussy dripping onto the floor. You keep yanking on her tail while meeting her halfway each time, your hips slapping against her ass.")
+
+		saynn("[say=rahi]She is so close..[/say]")
+
+		addButton("Cum inside", "Stuff that ass full of your seed", "sex1_cum")
+	if(state == "sex1_cum"):
+		playAnimation(StageScene.SexStanding, "inside", {npc="rahi", bodyState={naked=true, hard=true}, npcBodyState={naked=true}})
+		var analLevel = getModule("RahiModule").getSkillScore("rahiSkillAnal")
+		if (analLevel <= 8):
+			saynn("Rahi has worked so hard to get to this point. She doesn't have the most experience and her ass isn't as trained as it could be which leads to her feeling some pain. But you keep pounding her ass, your {pc.penis} rubbing her g-spot through the inner wall that separates her pussy and anus to the point of you forcing her climax to happen.")
+
+		else:
+			saynn("Rahi's ass is so trained that she can easily focus on only the pleasure that comes from her backdoor being railed. You don't even rub her g-spot with your {pc.penis} that much through the inner wall. After gaining so much experience, your kitty has rewired her brain to be able to cum just from anal. And she does..")
+
+		saynn("Rahi lets out a scream of ecstasy, her body convulsing as she cums hard. You hold her from falling by her tail and keep fucking her ass that clenches around your cock so well. Your own orgasm builds up until you can't hold back any longer.")
+
+		saynn("With a final trust, you shove your {pc.penis} as deep as Rahi can take before proceeding to pump her ass full of your seed, filling her with warmth. Rahi's inner walls basically milking your member, draining your balls. Your legs shake but you manage to stand.")
+
+		saynn("You lean towards Rahi and place your chin on her shoulder. Your kitty is purring, still with your cock up her butt.")
+
+		if (analLevel <= 8):
+			saynn("[say=pc]Such a good buttslut.[/say]")
+
+			saynn("[say=rahi]T-thank you, {rahiMaster}..[/say]")
+
+		else:
+			saynn("[say=pc]You're a true buttslut. And I couldn't be more proud of you.[/say]")
+
+			saynn("[say=rahi]T-Thank you, {rahiMaster}..[/say]")
+
+		saynn("You pull your member out, leaving Rahi's gaping used hole to leak your {pc.cum} and slowly close up. She looks back at you over her shoulder and bites her lip until her anal ring closes up completely and looks all neat and tight again..")
+
+		addButton("Enough", "That was fun", "endthescene")
+	if(state == "sex2_strapon"):
+		playAnimation(StageScene.SexStanding, "tease", {npc="rahi"})
+		saynn("Rahi lays on her bed, just chilling. Seeing how she seductively wiggles her rear makes you want to take her.. and fuck her ass with something. You can feel yourself getting more aroused just thinking about railing that ass..")
+
+		saynn("Without warning, you grab Rahi's paw and pull her off the bed before pressing her body against the wall. Your paws groping Rahi's ass and prodding her anus through the shorts. Kitty mewls softly.")
+
+		saynn("[say=pc]I want you, kitty. I want that ass.[/say]")
+
+		saynn("Rahi slowly moves her paws down to her shorts and tugs them down, exposing her cute tailhole to you. Her anal ring is quite elastic which means it doesn't look that much different from a virgin hole.. for now.")
+
+		addButton("Find a strapon", "Put on a strapon", "sex2_putonstrapon")
+	if(state == "sex2_putonstrapon"):
+		playAnimation(StageScene.SexStanding, "tease", {npc="rahi", bodyState={naked=true, hard=true}, npcBodyState={naked=true}})
+		saynn("You grab the first strapon that you find inside the crate of toys and put it on. Then you return to your needy kitty and slip your new toy between her hips, letting Rahi coat it with her juices as she grinds her wet pussy against it.")
+
+		addButton("Fuck her", "Rail that ass", "sex2_start")
+	if(state == "sex2_start"):
+		playAnimation(StageScene.SexStanding, "sex", {npc="rahi", bodyState={naked=true, hard=true}, npcBodyState={naked=true}})
+		saynn("You quickly guide your strapon towards Rahi's waiting asshole and get a hold of her tail before moving it out of the way. Then you use it as a leash, pulling Rahi back and making her ass take your rubber cock.")
+
+		var analLevel = getModule("RahiModule").getSkillScore("rahiSkillAnal")
+		if (analLevel <= 8):
+			saynn("She gasps, feeling a mix of pain and pleasure as you stretch her tight hole more.")
+
+		else:
+			saynn("She moans, only feeling pleasure as you stretch her trained hole to its comfortable size. You marvel at how easily she takes the strapon in.")
+
+		saynn("As you start thrusting into her, Rahi's body responds eagerly. Her soft inner walls slowly self-lubricate until you can feel almost no friction. More little noises of pleasure escape from your kitty, her body shaking with your every hip motion. You try to be at such an angle so your strapon dildo puts pressure on a certain point, behind which would be her g-spot. There is a little visible bump on her belly each time you thrust inside.")
+
+		if (analLevel <= 8):
+			saynn("[say=rahi]Please, {rahiMaster}! It feels so good.. Having you stretching her butt..[/say]")
+
+		else:
+			saynn("[say=rahi]She is such a buttslut, {rahiMaster}!.. It feels too good..[/say]")
+
+		saynn("You continue to fuck her, harder and faster, until Rahi feels the pleasure building inside her. During the pounding, Rahi's ass got stretched enough to fit every inch of your shiny rubber member inside her. Passionate moans escape from Rahi, her neglected pussy dripping onto the floor. You keep yanking on her tail while meeting her halfway each time, your hips slapping against her ass.")
+
+		saynn("[say=rahi]She is so close..[/say]")
+
+		addButton("Cum inside", "Stuff that ass full of your seed", "sex2_cum")
+	if(state == "sex2_cum"):
+		playAnimation(StageScene.SexStanding, "inside", {npc="rahi", bodyState={naked=true, hard=true}, npcBodyState={naked=true}})
+		var analLevel = getModule("RahiModule").getSkillScore("rahiSkillAnal")
+		if (analLevel <= 8):
+			saynn("Rahi has worked so hard to get to this point. She doesn't have the most experience and her ass isn't as trained as it could be which leads to her feeling some pain. But you keep pounding her ass, the strapon rubbing her g-spot through the inner wall that separates her pussy and anus to the point of you forcing her climax to happen.")
+
+		else:
+			saynn("Rahi's ass is so trained that she can easily focus on only the pleasure that comes from her backdoor being railed. You don't even rub her g-spot with your rubber strapon that much through the inner wall. After gaining so much experience, your kitty has rewired her brain to be able to cum just from anal. And she does..")
+
+		saynn("Rahi lets out a scream of ecstasy, her body convulsing as she cums hard. You hold her from falling by her tail and keep fucking her ass that clenches around your rubber shaft so well. You don't feel much direct stimulation but it's hard to explain how aroused you are..")
+
+		saynn("With a final trust, you shove your strapon as deep as Rahi can take. The toy has received enough friction to release its contents, it proceeds to pump Rahi's ass full of thick creamy cum lube, filling her with warmth. Rahi's inner walls are basically milking your fake member.")
+
+		saynn("You lean towards Rahi and place your chin on her shoulder. Your kitty is purring, still with your rubber strapon up her butt.")
+
+		if (analLevel <= 8):
+			saynn("[say=pc]Such a good buttslut.[/say]")
+
+			saynn("[say=rahi]T-thank you, {rahiMaster}..[/say]")
+
+		else:
+			saynn("[say=pc]You're a true buttslut. And I couldn't be more proud of you.[/say]")
+
+			saynn("[say=rahi]T-Thank you, {rahiMaster}..[/say]")
+
+		saynn("You pull the strapon out, leaving Rahi's gaping used hole to leak cum lube and slowly close up. She looks back at you over her shoulder and bites her lip until her anal ring closes up completely and looks all neat and tight again..")
+
+		addButton("Enough", "That was fun", "removestraponfrompc")
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
@@ -373,6 +510,19 @@ func _react(_action: String, _args):
 		processTime(2*60)
 		getModule("RahiModule").advanceSkill("rahiSkillAnal")
 
+	if(_action == "do_random_sex"):
+		var possible = []
+		if(GM.pc.hasReachablePenis()):
+			possible.append("sex1")
+		else:
+			possible.append("sex2_strapon")
+		getModule("RahiModule").advanceSkill("rahiSkillAnal")
+		setState(RNG.pick(possible))
+		return
+
+	if(_action == "fist1"):
+		getModule("RahiModule").advanceSkill("rahiSkillAnal")
+
 	if(_action == "cancelactivity"):
 		increaseFlag("RahiModule.rahiTired", -1)
 		endScene()
@@ -383,5 +533,37 @@ func _react(_action: String, _args):
 
 	if(_action == "scene3_bed"):
 		processTime(20*60)
+
+	if(_action == "sex1_start"):
+		processTime(5*60)
+
+	if(_action == "sex1_cum"):
+		processTime(5*60)
+		getCharacter("rahi").cummedInAnusBy("pc")
+		GM.pc.orgasmFrom("rahi")
+		GM.pc.addSkillExperience(Skill.SexSlave, 30, "rahi_anal")
+		GM.pc.addSkillExperience(Skill.CumLover, 30, "rahi_anal")
+
+	if(_action == "sex2_putonstrapon"):
+		var straponTypes = ["Strapon", "StraponCanine", "StraponDragon", "StraponFeeldoe", "StraponFeline"]
+		var strapon = GlobalRegistry.createItem(RNG.pick(straponTypes))
+		var fluids = strapon.getFluids()
+		fluids.addFluid("CumLube", RNG.randi_range(3, 5)*100.0)
+		GM.pc.getInventory().equipItem(strapon)
+
+	if(_action == "sex2_start"):
+		processTime(5*60)
+
+	if(_action == "sex2_cum"):
+		processTime(5*60)
+		getCharacter("rahi").cummedInAnusBy("pc", FluidSource.Strapon)
+		GM.pc.orgasmFrom("rahi")
+		GM.pc.addSkillExperience(Skill.SexSlave, 30, "rahi_anal")
+		GM.pc.addSkillExperience(Skill.CumLover, 30, "rahi_anal")
+
+	if(_action == "removestraponfrompc"):
+		GM.pc.getInventory().clearSlot(InventorySlot.Strapon)
+		endScene()
+		return
 
 	setState(_action)
