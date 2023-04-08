@@ -424,6 +424,38 @@ func _run():
 		saynn("You pull your member out, leaving Rahi's gaping used hole to leak your {pc.cum} and slowly close up. She looks back at you over her shoulder and bites her lip until her anal ring closes up completely and looks all neat and tight again..")
 
 		addButton("Enough", "That was fun", "endthescene")
+		if (getModule("RahiModule").isSkillLearned("rahiSkillWatersports")):
+			addButton("Piss inside", "(Watersports) Fill Rahi's ass with your piss", "sex1_pee")
+	if(state == "sex1_pee"):
+		saynn("After cumming inside Rahi.. you have a sudden urge to pee.. Huh.. And that ass looks quite spacious.")
+
+		saynn("You're still hard so you have no problems pinning Rahi into the wall again and shoving your {pc.penis} inside her used fuckhole. Rahi raises a brow as her anal ring gets forced to stretch more.")
+
+		saynn("[say=rahi]Meow!.. Again?..[/say]")
+
+		saynn("[say=pc]No. Something much better.[/say]")
+
+		saynn("Without explaining too much, you force the urge.. and begin pissing directly inside Rahi's ass. Your warm urine starts to quickly fill her bowels, mixing with the {pc.cum} that was there already..")
+
+		saynn("[say=rahi]Ah.. F-feels so.. Strange.. Are you?..[/say]")
+
+		saynn("You nod and rest your chin on her shoulder as you keep relieving yourself inside your kitty, forcing her to be your piss toilet. When Rahi realizes that, her face turns red, she tries to hide her soft moans but you can tell..")
+
+		saynn("[say=pc]Good girl.. You're such a good piss toilet, aren't you?[/say]")
+
+		saynn("Rahi huffs while her belly begins to look slightly inflated due to the piss enema. Her lips are trembling..")
+
+		saynn("When you're done doing your business, you begin to slowly pull your dick out. Some of the gross fluids leak out but Rahi quickly covers her ass, preventing most of it.")
+
+		saynn("[say=rahi]She will be right back..[/say]")
+
+		saynn("Kitty tries to run off but you grab her hand and stop her.")
+
+		saynn("[say=pc]No. You stay like this.[/say]")
+
+		saynn("Rahi huffs but obeys you. She sticks a few fingers up her butt, preventing most of the leakage.")
+
+		addButton("Enough", "That was too lewd", "endthescene")
 	if(state == "sex2_strapon"):
 		playAnimation(StageScene.SexStanding, "tease", {npc="rahi"})
 		saynn("Rahi lays on her bed, just chilling. Seeing how she seductively wiggles her rear makes you want to take her.. and fuck her ass with something. You can feel yourself getting more aroused just thinking about railing that ass..")
@@ -492,6 +524,79 @@ func _run():
 		saynn("You pull the strapon out, leaving Rahi's gaping used hole to leak cum lube and slowly close up. She looks back at you over her shoulder and bites her lip until her anal ring closes up completely and looks all neat and tight again..")
 
 		addButton("Enough", "That was fun", "removestraponfrompc")
+	if(state == "fist1"):
+		playAnimation(StageScene.Spanking, "tease", {npc="rahi", npcBodyState={naked=true}})
+		saynn("Rahi lays on the bed, just chilling. She is quite a skilled buttslut by this point. But. It's time to put her skills and her ass under a test.")
+
+		saynn("You sit nearby and put your hand on Rahi's butt, gently rubbing it for a bit before firmly squeezing one of the buttcheeks, making kitty mewl.")
+
+		saynn("[say=pc]Ready, kitty?[/say]")
+
+		saynn("Rahi nods eagerly, her eyes bright with anticipation.")
+
+		saynn("You begin by tugging on kitty's hips, urging her to get on all fours. She does so and then pulls her shorts down, exposing her fluffy butt. As she spreads her buttocks for you with her paws, her tight-looking pink asshole easily stretches open, showing how trained it is. Her being aroused triggers her butt to start self-lubricating itself. Both her holes are looking wet and needy. But you know which one you're going for today..")
+
+		saynn("You're gonna go for some extreme stuff today so better grab some normal lube too.")
+
+		addButton("Lube", "Lube her up", "fist1_lube")
+	if(state == "fist1_lube"):
+		saynn("You grab a tube of special water-based lube and pour it over your whole hand. Kitty raises a brow when you cover the whole.. palm.. in it. After that's done, you rub some into Rahi's trained tailhole, making it twitch.")
+
+		saynn("[say=pc]Let's see how much you can handle, kitty.[/say]")
+
+		saynn("You start with one finger, sliding it in and out, getting a feel for the tightness of her hole. Rahi's anal ring is quite elastic, obeying your touch.")
+
+		saynn("You add another finger. And then another. Each one stretching her anus open a little further. Rahi moans softly, her body already starting to tremble a bit.")
+
+		saynn("Fourth one goes in without much effort from your part too.. But that's when things change. Rahi whimpers as you try to insert your entire hand, her backdoor stretching wide but still struggling to accommodate the size.")
+
+		saynn("[say=rahi]That.. meee-eow.. might be too much..[/say]")
+
+		saynn("Her squished pussy drips more juices the more pressure you put on her tailhole. Using sheer force and lots of lube, you finally manage to work your fist inside her ass, feeling the heat of her body all around it. Rahi tenses up and moans like a slut, you can feel exactly how strong her inner walls clench around you.")
+
+		saynn("You begin to slowly move your fist inside her, pulling it out almost fully just to shove it back inside, creating the empty space and then filling it straight after. Rahi moans in ecstasy, the pleasure overwhelming her senses.")
+
+		saynn("[say=rahi]H-harder!..[/say]")
+
+		saynn("You feel obliged. And so you listen, switching from slow motions to pretty much slamming your fist into her ass, pounding that stretched anus so hard that it makes wet noises. It doesn't take long for her to start feeling the pressure building inside her.")
+
+		saynn("Suddenly, she convulses, her body shaking with the force of a crazy orgasm. A rush of transparent fluids gushes out of her pussy, soaking the bed beneath her. You can feel the walls of her hole clenching and releasing around your fist as you keep shoving it in.")
+
+		saynn("Even though she came, you weren't finished yet. You continue to pound her ass with your fist, driving her orgasm further, corrupting her poor feline mind. Rahi squirts again and again, her body shaking and quivering as the waves of ecstasy wash over her.")
+
+		saynn("Finally, you withdrew your hand, leaving Rahi panting and gasping for breath. The sight that opened to you is.. quite interesting.")
+
+		saynn("Rahi's once tight and neat anus got left gaping wide open after that intense fisting session. The pink, pretty flesh of her asshole now looking stretched and irritated, with small droplets of lube and other fluids still seeping out of the opening. The walls of her anus pulsed and quivered, struggling to regain their original form and close up.. With Rahi moaning each time she tries to clench.")
+
+		saynn("Her stretched hole is so open and exposed that you can see deep inside.. and marvel at the sigh of her soft inner walls. You can.. feel.. the heat radiating from her as she lays there, her body still trembling. Despite the intense stretching, there was no sign of pain on her face, only a look of pure bliss and satisfaction.")
+
+		saynn("[say=rahi]She is such a buttslut..[/say]")
+
+		saynn("The more you watch, the more you use Rahi's anus slowly starting to close up. But even after several minutes, it remains slightly stretched and gaping.")
+
+		addButton("Enough", "That was fun", "endthescene")
+		if (getModule("RahiModule").isSkillLearned("rahiSkillMasochist")):
+			addButton("Double fisting", "(Masochism) Stretch her ass even more!", "fist1_double")
+	if(state == "fist1_double"):
+		saynn("As you watch Rahi's gaping anus struggling to close up.. You can't help but wonder.. If you could push her limits even further. With a little mean grin on your face, you slowly insert your hand back into the willing gaping hole, receiving almost no resistance. But now.. you also start to insert your second fist.. making kitty whine as you're attempting to stretch her even wider than before.")
+
+		saynn("[say=pc]H-hey!.. Ah.. F-fuck..[/say]")
+
+		saynn("Rahi gasps in shock and pain as you somehow manage to work both of your hands inside her. It was quite easy to do when both of them were palms. But when you clench them both into fists.. Rahi arches her back as her anus now looks stretched almost unnaturally.")
+
+		saynn("You start moving both of your fists in and out of her, Rahi's body contorting and writhing with each thrust. It's painful for her.. but she also couldn't help but to feel an overwhelming sense of pleasure as her body was pushed to its limits.")
+
+		saynn("As you continue to pound her ass with both fists, Rahi's pussy starts to squirt again, each orgasm more intense than the last, causing her neglected slit to gush fluids out uncontrollably. Rahi screams and moans like a buttslut, her body convulsing as wave after wave of pleasure washes over her.")
+
+		saynn("Finally, after making her cum so many times that she can't even squirt anymore, Rahi collapses, her body spent and completely drained of all energy. You slowly withdraw your fists from her gaping hole, leaving her once tight anus stretched and sore. You can't help but to get a closer look at it again.")
+
+		saynn("Rahi's ass is left completely gaping and stretched after the intense double fisting. The tight anal ring is now extremely loose, pulsing and not even trying to close up. The walls of her anus are red and raw from the intense pounding, the skin there is shiny with sweat and lube.")
+
+		saynn("[say=rahi]Feels.. so.. f-fucking.. g-good..[/say]")
+
+		saynn("Rahi is drooling onto her pillow, her legs shaking slightly. Better to leave her to rest for a bit.")
+
+		addButton("Enough", "That was hard", "endthescene")
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
@@ -544,6 +649,11 @@ func _react(_action: String, _args):
 		GM.pc.addSkillExperience(Skill.SexSlave, 30, "rahi_anal")
 		GM.pc.addSkillExperience(Skill.CumLover, 30, "rahi_anal")
 
+	if(_action == "sex1_pee"):
+		processTime(5*60)
+		getCharacter("rahi").cummedInAnusBy("pc", FluidSource.Pissing)
+		getModule("RahiModule").advanceSkill("rahiSkillWatersports")
+
 	if(_action == "sex2_putonstrapon"):
 		var straponTypes = ["Strapon", "StraponCanine", "StraponDragon", "StraponFeeldoe", "StraponFeline"]
 		var strapon = GlobalRegistry.createItem(RNG.pick(straponTypes))
@@ -565,5 +675,12 @@ func _react(_action: String, _args):
 		GM.pc.getInventory().clearSlot(InventorySlot.Strapon)
 		endScene()
 		return
+
+	if(_action == "fist1_lube"):
+		processTime(3*60)
+
+	if(_action == "fist1_double"):
+		getModule("RahiModule").advanceSkill("rahiSkillMasochist")
+		processTime(20*60)
 
 	setState(_action)
