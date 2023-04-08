@@ -30,6 +30,7 @@ func _ready():
 	add_child(req)
 	var _ok = req.connect("request_completed", self, "_http_request_completed")
 
+
 func _http_request_completed(_result, _response_code, _headers, _body):
 	var jsonResult = (JSON.parse(_body.get_string_from_utf8()))
 	if(jsonResult.error != OK):
@@ -134,7 +135,8 @@ func translate(_targetLanguage, _inputText):
 		theResult["success"] = false
 		theResult["errorMessage"] = "No result in json"
 		print(translateData)
-		return theResult
+		startCooldownMinutes(10)
+		return
 	
 	var theActualResultTexts = []
 	for someTextData in translateData["result"]["texts"]:

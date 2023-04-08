@@ -464,6 +464,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Util/AutoTranslation/Translators/GoogleBatchTranslator.gd"
 }, {
+"base": "TranslatorBase",
+"class": "GoogleTranslator",
+"language": "GDScript",
+"path": "res://Util/AutoTranslation/Translators/GoogleTranslator.gd"
+}, {
 "base": "CharacterGeneratorBase",
 "class": "GuardGenerator",
 "language": "GDScript",
@@ -1176,6 +1181,7 @@ _global_script_class_icons={
 "GameWorld": "",
 "Gender": "",
 "GoogleBatchTranslator": "",
+"GoogleTranslator": "",
 "GuardGenerator": "",
 "GuardLoot": "",
 "GymModule": "",
