@@ -21,6 +21,10 @@ func _run():
 				addButton("Fisting", "Fist Rahi's ass", "fist1")
 			else:
 				addDisabledButton("Fisting", "Rahi needs her ass trained a lot for you to fist her")
+			if (analLevel >= 14):
+				addButton("Horsecock dildo", "The final challenge", "toy1")
+			else:
+				addDisabledButton("Horsecock dildo", "Rahi needs her ass fully trained to be able to take on this final challenge.")
 		addButton("Never mind", "You changed your mind", "cancelactivity")
 	if(state == "scene1"):
 		playAnimation(StageScene.Duo, "sit", {npc="rahi"})
@@ -597,6 +601,63 @@ func _run():
 		saynn("Rahi is drooling onto her pillow, her legs shaking slightly. Better to leave her to rest for a bit.")
 
 		addButton("Enough", "That was hard", "endthescene")
+	if(state == "toy1"):
+		playAnimation(StageScene.HorsecockDildoSex, "tease", {pc="rahi", bodyState={naked=true}})
+		saynn("Time for a real test. You rummage through the crate of toys and find the biggest one.. a giant horsecock dildo. Quite a realistic one, its shaft has many bumpy veins that are sure to add extra sensations. And wow is it heavy..")
+
+		saynn("As you place it in the middle of the cell, Rahi can't help but to open her mouth at its size. She looks at you.. with her pleading eyes. You nod.")
+
+		saynn("Rahi quickly drops her clothes and already positions herself above the giant toy, grinding the big flared tip with her pussy and ass.")
+
+		saynn("You decide to take a seat on her bed and just watch.")
+
+		saynn("[say=pc]Need some lube, kitty?[/say]")
+
+		saynn("[say=rahi]No..[/say]")
+
+		saynn("Rahi spreads her legs more and bends slightly, making it look like she is just resting her ass on the toy.. but in fact she tries to take it in.. You can tell how aroused she is, her nipples looking incredibly stiff, her needy pussy is getting wet.. just like her ass.")
+
+		saynn("[say=pc]Well. Show me what you learned, kitty. Do you wanna be the.. best.. anal slut?[/say]")
+
+		saynn("Rahi moans in response.. her butt grinding into that toy harder.. her tight-looking asshole stretching.. more and more.. until..")
+
+		addButton("Continue", "See what happens next", "toy1_ride")
+	if(state == "toy1_ride"):
+		playAnimation(StageScene.HorsecockDildoSex, "sex", {pc="rahi", bodyState={naked=true}})
+		saynn("Rahi manages to let the flared tip of the dildo open up her trained asshole enough to slip inside, stretching her anal ring wide and making her almost fall onto the shaft from this sudden shift.")
+
+		saynn("A deep breath escapes Rahi as she takes the horsecock's head. But now she proceeds to slowly lower herself onto it further, now stretching her inner walls too until there appears a visible bump on her belly. Surprisingly.. or not.. Rahi takes most of it.. even past the fat ring that the rubber cock has near the base. And she doesn't stop there, she starts riding the thing, raising her body just to slam back onto the toy.")
+
+		saynn("You watch in awe while Rahi conquers that huge dildo, her hips grinding back and forth as she hungrily tries to take the entire length deep inside her ass. One of her paws rests on that bump on her belly that keeps appearing at the lowest peak of each motions. Moans already escape from her lips, her face expression looks.. incredibly lusty.")
+
+		saynn("[say=pc]Wow. This makes me wanna call you.. an anal queen. Keep it up, kitty.[/say]")
+
+		saynn("Kitty only makes more pleasure noises in response, her body shivers, responding to the intense pleasure of the horsecock dildo filling her up. She moves faster and harder.. her ass slamming onto the toy with each thrust..")
+
+		saynn("Finally, Rahi lets out a scream of pleasure, her body shaking with the force of a pure anal orgasm. Her pussy squirts all over the floor. That leaking slit looks quite squished because of a huge object in her anus. Her legs give up, causing the kitty to get impaled into the rubber shaft as deep as her bowels allow.. which means.. Rahi takes the giant horsecock balls deep.")
+
+		saynn("[say=rahi]F-Fu-u-uck-!..[/say]")
+
+		saynn("Her pussy keeps gushing out girlcum and then just pulsing when there is nothing left. Rahi throws her head back and moans like a slut while her stretched inner walls desperately clench around that shaft.. So much has changed since that time the kitty couldn't even take a few fingers into her ass..")
+
+		saynn("Her tongue is out.. she is drooling.. her eyes rolled up. You can't help but to smile, admiring the view.")
+
+		saynn("[say=pc]Proud of you, kitty.[/say]")
+
+		saynn("She weakly reacts to your words, looking up at you.. and smiling back..")
+
+		addButton("Inspect", "Make Rahi show you her anus", "toy1_inspect")
+	if(state == "toy1_inspect"):
+		playAnimation(StageScene.HorsecockDildoSex, "tease", {pc="rahi", bodyState={naked=true}})
+		saynn("As you help Rahi to get up, the flared tip finally leaves her ass.. with a satisfying Plop.. leaving Rahi to gasp and her ass to gape. Her anus is visibly stretched open, the muscles around the opening are still twitching and contracting ever so slightly.")
+
+		saynn("The skin around her anus is red and raw, showing lots of signs of stretching and friction caused by that massive horsecock. Despite all of that, Rahi is smiling silly.")
+
+		saynn("Eventually her butthole begins to close up as Rahi manages to gather enough strength to clench. And wow, after her star closes, it again looks all tight and neat.. probably because of her feline elasticity.")
+
+		saynn("Rahi is officially.. an anal queen.")
+
+		addButton("Enough", "That was lewd", "endthescene")
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
@@ -626,6 +687,9 @@ func _react(_action: String, _args):
 		return
 
 	if(_action == "fist1"):
+		getModule("RahiModule").advanceSkill("rahiSkillAnal")
+
+	if(_action == "toy1"):
 		getModule("RahiModule").advanceSkill("rahiSkillAnal")
 
 	if(_action == "cancelactivity"):
@@ -682,5 +746,8 @@ func _react(_action: String, _args):
 	if(_action == "fist1_double"):
 		getModule("RahiModule").advanceSkill("rahiSkillMasochist")
 		processTime(20*60)
+
+	if(_action == "toy1_ride"):
+		processTime(10*60)
 
 	setState(_action)
