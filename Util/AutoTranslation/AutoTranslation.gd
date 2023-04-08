@@ -80,6 +80,7 @@ func translate(inputText):
 		return inputText
 		
 	#var hadFails = false
+	var usedTranslators = []
 	var theResultedArray = []
 	var splittedText = splitByNewLinesAndSize(inputText, 4000)
 	var amountOfTexts = splittedText.size()
@@ -89,6 +90,8 @@ func translate(inputText):
 		for translator in translators:
 			if(!translator.canTranslate()):
 				continue
+			if(!usedTranslators.has(translator)):
+				usedTranslators.append(translator)
 			var theResult = translator.translate(targetLanguage, theText)
 			if(theResult is GDScriptFunctionState):
 				theResult = yield(theResult, "completed")
@@ -97,9 +100,12 @@ func translate(inputText):
 			if(translator.id == "googlebatch"):
 				hadToUseFallback = true
 			theFinalResult = theResult
+			#print("Used "+translator.id)
 			break
 
 		if(theFinalResult == null):
+			for translator in usedTranslators:
+				translator.afterTranslate()
 			return inputText
 		theResultedArray.append(theFinalResult["resultText"])
 		
@@ -108,8 +114,12 @@ func translate(inputText):
 			yield(get_tree().create_timer(2.0), "timeout")
 	
 	if(theResultedArray.size() == 0):
+		for translator in usedTranslators:
+			translator.afterTranslate()
 		return inputText
 	
+	for translator in usedTranslators:
+		translator.afterTranslate()
 	return join(theResultedArray, "\n")
 
 func splitBySize(inputText:String, maxSize):

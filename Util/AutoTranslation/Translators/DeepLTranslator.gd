@@ -21,6 +21,7 @@ var headers = [
 
 func _init():
 	id = "deepl"
+	antispamSeconds = 10
 
 var randomid = 0
 func _ready():
