@@ -472,7 +472,7 @@ func _run():
 		addButton("Enough", "That was fun", "endthescene")
 		if (getModule("RahiModule").isSkillLearned("rahiSkillWatersports")):
 			addButton("Pee on me?", "(Watersports) Ask Rahi to maybe pee on you", "play1_watersports")
-		if (getModule("RahiModule").getSkillScore("rahiSkillAnal") >= 5):
+		if (getModule("RahiModule").getSkillScore("rahiSkillAnal") >= 3):
 			addButton("Rim Rahi", "(Anal) Ask to lick Rahi's asshole", "play1_rimming")
 	if(state == "play1_watersports"):
 		playAnimation(StageScene.SexFaceSitting, "sit", {pc="rahi", npc="pc", bodyState={naked=true}, npcBodyState={hard=true}})
@@ -1407,7 +1407,7 @@ func _run():
 		saynn("Suddenly Rahi smacks your ass, causing a little fountain to erupt out of your tailhole.. Lewd.")
 
 		addButton("Enough", "That was lewd", "removerahistrapon")
-		if (getModule("RahiModule").getSkillScore("rahiSkillAnal") >= 5):
+		if (getModule("RahiModule").getSkillScore("rahiSkillAnal") >= 3):
 			addButton("Lick Rahi's holes", "(Anal) Clean Rahi out with your tongue. Including her asshole", "peg2_lickrahiout")
 	if(state == "peg2_lickrahiout"):
 		playAnimation(StageScene.SexOral, "lick", {pc="rahi", npc="pc", bodyState={naked=true}, npcBodyState={naked=true, hard=true}})

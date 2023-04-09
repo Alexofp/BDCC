@@ -10,9 +10,9 @@ func _init():
 
 func _reactInit():
 	var rahiModule = getModule("RahiModule")
-	chanceEasy = rahiModule.getSlaveryStageChance(1, 5, 50, 75)
-	chanceMedium = rahiModule.getSlaveryStageChance(1, 7, 5, 75)
-	chanceHard = rahiModule.getSlaveryStageChance(1, 7, 2, 70)
+	chanceEasy = rahiModule.getSkillSuccessChance("rahiSkillLabor", 60, 95)
+	chanceMedium = rahiModule.getSkillSuccessChance("rahiSkillLabor", 10, 75)
+	chanceHard = rahiModule.getSkillSuccessChance("rahiSkillLabor", 2, 55)
 
 func _run():
 	if(state == ""):
@@ -111,14 +111,17 @@ func _react(_action: String, _args):
 	if(_action == "easy_steal"):
 		if(RNG.chance(chanceEasy)):
 			success = true
+			getModule("RahiModule").advanceSkill("rahiSkillLabor", 10)
 
 	if(_action == "medium_steal"):
 		if(RNG.chance(chanceMedium)):
 			success = true
+			getModule("RahiModule").advanceSkill("rahiSkillLabor")
 
 	if(_action == "hard_steal"):
 		if(RNG.chance(chanceHard)):
 			success = true
+			getModule("RahiModule").advanceSkill("rahiSkillLabor")
 
 	if(_action == "easy_outcome"):
 		processTime(30*60)
