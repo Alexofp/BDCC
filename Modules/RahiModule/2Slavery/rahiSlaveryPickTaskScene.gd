@@ -18,6 +18,8 @@ func _run():
 			addButton("Stealing", "Make her steal something", "dotask", ["rahiSlaveryStealingTaskScene"])
 		if(rahiModule.isSkillLearned("rahiSkillExhibit")):
 			addButton("Yoga", "(Exhibionism) Make her do yoga", "dotask", ["rahiSlaveryYogaTaskScene"])
+		if(rahiModule.isSkillLearned("rahiSkillProstitution")):
+			addButton("Kissing booth", "(Prostitution) Make Rahi earn credits by offering kisses to others and more", "dotask", ["rahiSlaveryKissingBoothTaskScene"])
 		
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
