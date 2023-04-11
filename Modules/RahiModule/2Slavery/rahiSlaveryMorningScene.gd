@@ -9,7 +9,17 @@ func _reactInit():
 	if(getModule("RahiModule").canAdvanceStage()):
 		setState("ask_if_advance")
 		return
-	selectedRahiState = "rahi_is_sleeping"
+	var possible = []
+	
+	var slaveryStage = getModule("RahiModule").getSlaveryStage()
+	
+	if(slaveryStage <= 1):
+		possible.append("rahi_is_sleeping")
+		possible.append("rahi_is_sad")
+	else:	
+		possible.append("rahi_default")
+	
+	selectedRahiState = RNG.pick(possible)
 	setState(selectedRahiState)
 	playAnimation(StageScene.Duo, "stand", {npc="rahi"})
 
@@ -29,6 +39,30 @@ func _run():
 		saynn("Rahi shakes her head subtly.")
 
 		saynn("[say=pc]I trust you not to lie, kitty.[/say]")
+
+		addButton("Continue", "See what happens next", "pick_task_scene")
+	if(state == "rahi_is_sad"):
+		saynn("As you enter Rahi's cell, you find her curled up on her bed, her ears drooping low and her tail wrapped around her body.")
+
+		saynn("You slowly approach her.")
+
+		saynn("[say=pc]Hey, kitty.[/say]")
+
+		saynn("Rahi looks up at you with her sad eyes and gives a small nod.")
+
+		saynn("[say=rahi]She is doing.. okay.[/say]")
+
+		saynn("You sit down next to her on the bed and put a hand on her shoulder, trying to cheer her up. Rahi's ears twitch slightly as she slowly gets up, getting ready to do her task.")
+
+		addButton("Continue", "See what happens next", "pick_task_scene")
+	if(state == "rahi_default"):
+		saynn("You enter Rahi's cell. She is being the usual lazy kitty, sleeping in her bed. As you carefully wake her up, she swiftly gets off her bed and straightens her posture for you.")
+
+		saynn("[say=rahi]Hello, {rahiMaster}..[/say]")
+
+		saynn("She rubs her nose and patiently awaits her task.")
+
+		saynn("[say=pc]Let's see..[/say]")
 
 		addButton("Continue", "See what happens next", "pick_task_scene")
 	if(state == "ask_if_advance"):
