@@ -252,6 +252,7 @@ func _run():
 		saynn("What do you wanna do with the kitty.")
 		
 		addButton("Shower", "Go take a shower", "doactivity", ["RahiShowerScene"])
+		addButton("Embrace", "Hug kitty and spend some time together", "doactivity", ["RahiEmbraceScene"])
 		if(getModule("RahiModule").isSkillLearned("rahiSkillDominance")):
 			addButton("Dominance", "Teach Rahi to be more dominant", "doactivity", ["rahiActivityDominanceScene"])
 		if(getModule("RahiModule").isSkillLearned("rahiSkillAnal")):

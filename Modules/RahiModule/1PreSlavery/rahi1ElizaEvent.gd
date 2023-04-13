@@ -9,16 +9,11 @@ func registerTriggers(es):
 func react(_triggerID, _args):
 	if(getFlag("RahiModule.rahi1ElizaSceneHappened")):
 		return false
-	if(!getFlag("RahiModule.Rahi_ChillHappened")):
+	if(!getFlag("RahiModule.Rahi_ShowerHappened")):
 		return false
-	if(GM.pc.getLevel() < 3 || GM.main.getDays() < 10):
-		return false
-	if(RNG.chance(50)):
-		setFlag("RahiModule.rahi1ElizaSceneHappened", true)
-		runScene("rahi1ElizaScene")
-		return true
-	
-	return false
+	setFlag("RahiModule.rahi1ElizaSceneHappened", true)
+	runScene("rahi1ElizaScene")
+	return true
 
 func getPriority():
 	return 5

@@ -6,6 +6,7 @@ func _init():
 func _run():
 	if(state == ""):
 		addCharacter("rahi")
+		playAnimation(StageScene.Cuddling, "idle", {npc="rahi"})
 		
 	if(state == ""):
 		saynn("You put your hands on the shy feline’s waist.")

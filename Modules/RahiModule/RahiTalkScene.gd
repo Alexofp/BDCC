@@ -61,6 +61,9 @@ func _run():
 					"Do you think they can give her some tuna?",
 				])+"[/say]")
 
+		if(getFlag("RahiModule.Rahi_ChillHappened") && !getFlag("RahiModule.rahi1ElizaSceneHappened")):
+			saynn("(To continue Rahi's content find her in the showers and then sleep)")
+
 		addButton("Talk", "Show a list of topics to talk about", "talk")
 		addButton("Appearance", "Take a closer look at the catgirl", "appearance")
 		

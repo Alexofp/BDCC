@@ -163,6 +163,7 @@ func _onSceneEnd():
 func endScene(result = []):
 	sceneEndedFlag = true
 	sceneEndedArgs = result
+	checkSceneEnded()
 
 func runScene(id: String, args = [], tag = ""):
 	var scene = GM.main.runScene(id, args, uniqueSceneID)

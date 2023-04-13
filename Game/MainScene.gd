@@ -266,6 +266,7 @@ func removeScene(scene, args = []):
 			
 			if(isCurrentScene && sceneStack.back() != null):
 				sceneStack.back().updateCharacter()
+				runCurrentScene()
 		else:
 			sceneStack.erase(scene)
 	
