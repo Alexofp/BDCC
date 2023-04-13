@@ -17,6 +17,8 @@ var sceneEndedFlag = false
 var sceneEndedArgs
 var showFightUI = false
 var sceneSavedItemsInv:LightInventory = LightInventory.new()
+var uniqueSceneID: int = -1
+var parentSceneUniqueID: int = -1
 
 func _run():
 	pass
@@ -127,12 +129,14 @@ func addCharacter(id: String, variant: Array = []):
 	if(id == ""):
 		return
 	currentCharactersVariants[id] = variant
-	GM.ui.addCharacterToPanel(id, variant)
 	GM.main.startUpdatingCharacter(id)
+	if(GM.main.getCurrentScene() == self):
+		GM.ui.addCharacterToPanel(id, variant)
 
 func removeCharacter(id: String):
 	var _ok = currentCharactersVariants.erase(id)
-	GM.ui.removeCharacterFromPanel(id)
+	if(GM.main.getCurrentScene() == self):
+		GM.ui.removeCharacterFromPanel(id)
 
 func hasCharacter(id: String):
 	if(currentCharactersVariants.has(id)):
@@ -150,7 +154,8 @@ func updateCharacter():
 
 func clearCharacter():
 	currentCharactersVariants.clear()
-	GM.ui.clearCharactersPanel()
+	if(GM.main.getCurrentScene() == self):
+		GM.ui.clearCharactersPanel()
 
 func _onSceneEnd():
 	pass
@@ -158,14 +163,15 @@ func _onSceneEnd():
 func endScene(result = []):
 	sceneEndedFlag = true
 	sceneEndedArgs = result
+	checkSceneEnded()
 
 func runScene(id: String, args = [], tag = ""):
-	var scene = GM.main.runScene(id, args)
+	var scene = GM.main.runScene(id, args, uniqueSceneID)
 	scene.sceneTag = tag
 
 func react_scene_end(_tag, _result):
-	print(name+": The scene before me has ended")
-	updateCharacter()
+	print(name+": My parent scene has ended")
+	#updateCharacter()
 	_react_scene_end(_tag, _result)
 	checkSceneEnded()
 
@@ -217,6 +223,16 @@ func addExperienceToPlayer(ex: int, showMessage: bool = true):
 	if(showMessage):
 		addMessage("You received "+str(ex)+" experience")
 	GM.pc.addExperience(ex)
+
+func friskPlayer():
+	var foundAnything = false
+	for item in GM.pc.getInventory().getItemsWithTag(ItemTag.Illegal):
+		addMessage(item.getStackName()+" was taken away")
+		foundAnything = true
+	for item in GM.pc.getInventory().getEquippedItemsWithTag(ItemTag.Illegal):
+		addMessage(item.getStackName()+" was taken away")
+		foundAnything = true
+	return foundAnything
 
 func processTime(seconds: int):
 	GM.main.processTime(seconds)
@@ -303,6 +319,8 @@ func saveData():
 	data["sceneEndedFlag"] = sceneEndedFlag
 	data["sceneEndedArgs"] = sceneEndedArgs
 	data["sceneSavedItemsInv"] = sceneSavedItemsInv.saveData()
+	data["uniqueSceneID"] = uniqueSceneID
+	data["parentSceneUniqueID"] = parentSceneUniqueID
 	
 	return data
 
@@ -314,3 +332,5 @@ func loadData(data):
 	sceneEndedArgs = SAVE.loadVar(data, "sceneEndedArgs", null)
 	updateCharacter()
 	sceneSavedItemsInv.loadData(SAVE.loadVar(data, "sceneSavedItemsInv", {}))
+	uniqueSceneID = SAVE.loadVar(data, "uniqueSceneID", -1)
+	parentSceneUniqueID = SAVE.loadVar(data, "parentSceneUniqueID", -1)

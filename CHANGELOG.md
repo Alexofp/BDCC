@@ -6,6 +6,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.0.22] - 2023-04-13
+### Added
+- Rahi's content got expanded into a full little story line. At least 200 pages/70k words of scenes (a novel worth of text) all about the brown kitty. It's fully completable from start to the end but the middle part is still missing some content. Since the part 1. This took all the time
+- 4 'intro' story scenes and 8 main story scenes that will reveal why Rahi is the way she is. 2 endings
+- Give Rahi tasks, reward or punish her, train Rahi's skills to make her better at various lewd activities. For now I consider the dominance and anal skills to be mostly complete but the others have some fun things to do too. This will be the focus of part 2
+- Built-in auto translator. A very experimental feature. Don't expect to work well or work at all. Doesn't translate the buttons. Doesn't work in web builds
+- Computer hacking minigame now has a built-in tutorial that explains you what to do. It will also spoil you the command if you're really stuck. Debug menu now has the option to skip this minigame
+- You can now use strapons if you have a chastity cage. The cage will be hidden because of how the skeleton works.
+
+### Fixed
+- Crash when you pick the drink options during chastity content
+
 ## [0.0.21] - 2023-02-24
 ### Added
 - Tavi's route is extended. ~100 pages of text. Help her try to contact the syndicate, find out more about her backstory. And more.
@@ -216,7 +228,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Turn-based fighting
 - Initial player customization
 
-[Unreleased]: https://github.com/Alexofp/BDCC/compare/0.0.21...main
+[Unreleased]: https://github.com/Alexofp/BDCC/compare/0.0.22...main
+[0.0.22]: https://github.com/Alexofp/BDCC/compare/0.0.21...0.0.22
 [0.0.21]: https://github.com/Alexofp/BDCC/compare/0.0.20...0.0.21
 [0.0.20]: https://github.com/Alexofp/BDCC/compare/0.0.19...0.0.20
 [0.0.19]: https://github.com/Alexofp/BDCC/compare/0.0.18...0.0.19

@@ -20,6 +20,7 @@ var npcCharacterType = CharacterType.Generic
 
 var lastUpdatedDay:int = -1
 var lastUpdatedSecond:int = -1
+var disableSerialization:bool = false # Set to true if the character doesn't need to be saved, only works for non-dynamic npcs
 
 func _ready():
 	name = id

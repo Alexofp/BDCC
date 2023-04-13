@@ -2,6 +2,7 @@ extends Character
 
 func _init():
 	id = "intro_detective"
+	disableSerialization = true
 	
 func _getName():
 	return "Jake"

@@ -31,6 +31,10 @@ func _run():
 		else:
 			saynn(computer.getOutput())
 		
+		var tutorialText = computer.getTutorial()
+		if(tutorialText != null && tutorialText != ""):
+			saynn("[i]"+tutorialText+"[/i]")
+		
 		if(inputMode == "keyboard"):
 			say(">")
 			var textBox:LineEdit = addTextbox("textcommand")
@@ -191,3 +195,19 @@ func loadData(data):
 	computer.loadData(SAVE.loadVar(data, "computerData", {}))
 	currentCommand = SAVE.loadVar(data, "currentCommand", [])
 	inputMode = SAVE.loadVar(data, "inputMode", "buttons")
+
+func getDebugActions():
+	return [
+		{
+			"id": "instantWin",
+			"name": "Skip computer hack",
+			"args": [
+			],
+		},
+	]
+
+func doDebugAction(_id, _args = {}):
+	if(_id == "instantWin"):
+		computer.markFinished()
+		state = "finished"
+		GM.main.reRun()

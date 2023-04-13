@@ -23,9 +23,9 @@ func _run():
 		GM.ES.triggerRun("ArenaFighterPCLost", ["rebel"])
 
 	if(state == "get_fisted"):
-		GM.main.playAnimation(StageScene.Duo, "allfours", {
-			npc="rebel", npcAction="stand",
-			bodyState={exposedCrotch=true,hard=true}
+		playAnimation(StageScene.Spanking, "tease", {
+			pc="rebel", npc="pc",
+			npcBodyState={exposedCrotch=true,hard=true}
 		})
 		
 		saynn("The giant buff mare directs her attention to you and puts on an evil smile. You try to brace and cover yourself with your hands but she easily picks your whole body up like it’s nothing and carries you to the middle of the arena.")

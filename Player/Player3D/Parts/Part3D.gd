@@ -23,6 +23,7 @@ func setSkeletonRecursive(childnode, skeleton):
 	if(childnode is MeshInstance):
 		childnode.skeleton = childnode.get_path_to(skeleton)
 		childnode.software_skinning_transform_normals = false # Removing this will make Software Skinning break so don't
+		childnode.sorting_offset = 0.001 # IF REMOVED WILL LEAD TO FLICKERING. FOR WHATEVER REASON THIS LINE FIXES IT
 		
 		if(childnode.mesh != null):
 			for _i in range(childnode.mesh.get_surface_count()):

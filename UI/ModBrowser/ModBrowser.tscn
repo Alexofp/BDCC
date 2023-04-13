@@ -188,3 +188,4 @@ dialog_autowrap = true
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/PanelContainer/VBoxContainer/HFlowContainer/SortNewestFirstButton" to="." method="_on_SortNewestFirstButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/PanelContainer/VBoxContainer/HFlowContainer/SortOldestFirstButton" to="." method="_on_SortOldestFirstButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/HFlowContainer/DownloadModButton" to="." method="_on_DownloadModButton_pressed"]
+[connection signal="meta_clicked" from="VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/RichTextLabel" to="." method="_on_RichTextLabel_meta_clicked"]

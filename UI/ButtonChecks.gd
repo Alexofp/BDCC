@@ -23,6 +23,7 @@ enum {
 	HasStamina,
 	HasCredits,
 	ContentEnabled,
+	CanWearStrapon,
 }
 
 static func getReasonText(reason):
@@ -69,6 +70,8 @@ static func getReasonText(reason):
 		return "You need more credits!"
 	if(reason == ContentEnabled):
 		return ""
+	if(reason == CanWearStrapon):
+		return "You can't wear strapons"
 	return "Error?"
 
 static func check(checks: Array):
@@ -140,6 +143,9 @@ static func check(checks: Array):
 				return reason
 		if(reason == ContentEnabled):
 			if(!OPTIONS.isContentEnabled(args[1])):
+				return args
+		if(reason == CanWearStrapon):
+			if(!GM.pc.canWearStrapon()):
 				return args
 	return null
 

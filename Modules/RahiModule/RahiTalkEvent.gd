@@ -7,6 +7,9 @@ func registerTriggers(es):
 	es.addTrigger(self, Trigger.EnteringRoom, "main_bench2")
 
 func run(_triggerID, _args):
+	if(checkCharacterBusy("RahiBusy", "Seems like the kitty is not here", "Rahi")):
+		return
+	
 	if(getModuleFlag("RahiModule", "Rahi_NotThereToday", false)):
 		saynn("Seems like the kitty is not here")
 		

@@ -10,6 +10,9 @@ func run(_triggerID, _args):
 	if(!getModuleFlag("RahiModule", "Rahi_ChillHappened") || getModuleFlag("RahiModule", "Rahi_Denied") || getModuleFlag("RahiModule", "Rahi_NotThereToday")):
 		return
 	
+	if(doEventCheck("RahiBusy") != null):
+		return
+	
 	saynn("You notice that the familiar kitty with brown fur is taking a shower here too.")
 	addButtonUnlessLate("Rahi", "Approach the kitty", "talk")
 

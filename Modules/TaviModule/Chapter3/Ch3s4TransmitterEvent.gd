@@ -5,6 +5,7 @@ func _init():
 
 func registerTriggers(es):
 	es.addTrigger(self, Trigger.EnteringRoom, "eng_neartransmitter")
+	es.addEventCheck(self, "TaviBusy")
 	
 func react(_triggerID, _args):
 	if(GM.QS.isActive("Ch3TaviQuest") && getFlag("TaviModule.ch3AlexHappened") && !getFlag("TaviModule.ch3EnteredTransmitter")):
@@ -15,4 +16,6 @@ func react(_triggerID, _args):
 func getPriority():
 	return 100
 
-
+func eventCheck(_checkID, _args = []):
+	if(GM.QS.isActive("Ch3TaviQuest") && getFlag("TaviModule.ch3AlexHappened") && !getFlag("TaviModule.ch3EnteredTransmitter")):
+		return {busy=true}

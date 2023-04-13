@@ -43,11 +43,17 @@ func _ready():
 		debugPanelButton.visible = false
 		debugPanelButton.disabled = true
 	
+	if(!AutoTranslation.shouldTranslate()):
+		$HBoxContainer/VBoxContainer2/Panel/TranslateBox.visible = false
+	
+	manualTranslateButton.visible = false
+	
 	var fontOverride = OPTIONS.getFontSize()
 	if(fontOverride == "small"):
-		setFontSize("small")
+		setFontSize(18)
 	if(fontOverride == "big"):
-		setFontSize("big")
+		setFontSize(30)
+	#setFontSize(24)
 	
 	gameParser = GameParser.new()
 	sayParser = SayParser.new()
@@ -315,22 +321,27 @@ func _on_Player_stat_changed():
 func getStage3d() -> Stage3D:
 	return playerPanel.getStage3d()
 
-func setFontSize(newsize):
-	if(newsize == "big"):
-		textOutput.add_font_override("normal_font", load("res://UI/FontResources/Big/NormalFont.tres"))
-		textOutput.add_font_override("italics_font", load("res://UI/FontResources/Big/ItalicsFont.tres"))
-		textOutput.add_font_override("bold_italics_font", load("res://UI/FontResources/Big/BoldItalicsFont.tres"))
-		textOutput.add_font_override("bold_font", load("res://UI/FontResources/Big/BoldFont.tres"))
-	if(newsize == "normal"):
-		textOutput.add_font_override("normal_font", load("res://UI/FontResources/Normal/NormalFont.tres"))
-		textOutput.add_font_override("italics_font", load("res://UI/FontResources/Normal/ItalicsFont.tres"))
-		textOutput.add_font_override("bold_italics_font", load("res://UI/FontResources/Normal/BoldItalicsFont.tres"))
-		textOutput.add_font_override("bold_font", load("res://UI/FontResources/Normal/BoldFont.tres"))
-	if(newsize == "small"):
-		textOutput.add_font_override("normal_font", load("res://UI/FontResources/Small/NormalFont.tres"))
-		textOutput.add_font_override("italics_font", load("res://UI/FontResources/Small/ItalicsFont.tres"))
-		textOutput.add_font_override("bold_italics_font", load("res://UI/FontResources/Small/BoldItalicsFont.tres"))
-		textOutput.add_font_override("bold_font", load("res://UI/FontResources/Small/BoldFont.tres"))
+func setFontSize(_newsize):
+	var fontsToChange = ["normal_font", "bold_font", "bold_italics_font", "italics_font"]
+	
+	for fontToChange in fontsToChange:
+		var theFont = textOutput.get_font(fontToChange)
+		theFont.size = _newsize
+#	if(newsize == "big"):
+#		textOutput.add_font_override("normal_font", load("res://UI/FontResources/Big/NormalFont.tres"))
+#		textOutput.add_font_override("italics_font", load("res://UI/FontResources/Big/ItalicsFont.tres"))
+#		textOutput.add_font_override("bold_italics_font", load("res://UI/FontResources/Big/BoldItalicsFont.tres"))
+#		textOutput.add_font_override("bold_font", load("res://UI/FontResources/Big/BoldFont.tres"))
+#	if(newsize == "normal"):
+#		textOutput.add_font_override("normal_font", load("res://UI/FontResources/Normal/NormalFont.tres"))
+#		textOutput.add_font_override("italics_font", load("res://UI/FontResources/Normal/ItalicsFont.tres"))
+#		textOutput.add_font_override("bold_italics_font", load("res://UI/FontResources/Normal/BoldItalicsFont.tres"))
+#		textOutput.add_font_override("bold_font", load("res://UI/FontResources/Normal/BoldFont.tres"))
+#	if(newsize == "small"):
+#		textOutput.add_font_override("normal_font", load("res://UI/FontResources/Small/NormalFont.tres"))
+#		textOutput.add_font_override("italics_font", load("res://UI/FontResources/Small/ItalicsFont.tres"))
+#		textOutput.add_font_override("bold_italics_font", load("res://UI/FontResources/Small/BoldItalicsFont.tres"))
+#		textOutput.add_font_override("bold_font", load("res://UI/FontResources/Small/BoldFont.tres"))
 		
 func _on_DebugMenu_pressed():
 	if(!debugScreen.visible):
@@ -354,3 +365,53 @@ func recreateWorld():
 
 func _on_RollbackButton_pressed():
 	emit_signal("on_rollback_button")
+
+var savedOriginalText = ""
+var savedTranslatedText = ""
+var currentTranslationTask = 0
+onready var translateStatusLabel = $HBoxContainer/VBoxContainer2/Panel/TranslateBox/TranslateStatusLabel
+onready var showOriginalCheckbox = $HBoxContainer/VBoxContainer2/Panel/TranslateBox/ShowOriginalCheckbox
+onready var manualTranslateButton = $HBoxContainer/VBoxContainer2/Panel/TranslateBox/ManualTranslateButton
+func translateText(manualButton = false):
+	if(AutoTranslation.shouldTranslate()):
+		showOriginalCheckbox.disabled = true
+		if(!manualButton && AutoTranslation.shouldHaveManualTranslateButton()):
+			manualTranslateButton.visible = true
+			return
+		
+		translateStatusLabel.text = "Translating.."
+		currentTranslationTask += 1
+		var rememberedTask = currentTranslationTask
+		savedOriginalText = textOutput.bbcode_text
+		var result = AutoTranslation.translate(textOutput.text)
+	
+		if(result is GDScriptFunctionState):
+			result = yield(result, "completed")
+		
+		if(rememberedTask != currentTranslationTask):
+			return
+		
+		if(result != null && result != ""):
+			savedTranslatedText = result
+			if(!showOriginalCheckbox.pressed):
+				textOutput.bbcode_text = result
+			if(AutoTranslation.hadToUseFallback):
+				translateStatusLabel.text = "Used fallback translator"
+				yield(get_tree().create_timer(2.0), "timeout")
+				if(translateStatusLabel != null && translateStatusLabel.text == "Used fallback translator"):
+					translateStatusLabel.text = ""
+			else:
+				translateStatusLabel.text = ""
+				
+			showOriginalCheckbox.disabled = false
+
+func _on_ShowOriginalCheckbox_pressed():
+	if(showOriginalCheckbox.pressed):
+		textOutput.bbcode_text = savedOriginalText
+	else:
+		textOutput.bbcode_text = savedTranslatedText
+
+
+func _on_ManualTranslateButton_pressed():
+	manualTranslateButton.visible = false
+	translateText(true)

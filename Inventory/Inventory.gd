@@ -153,7 +153,9 @@ func equipItem(item):
 	var slot = item.getClothingSlot()
 	
 	if(equippedItems.has(slot)):
-		assert(false)
+		Log.printerr("Trying to equip an item to slot "+str(slot)+" when there is already an item")
+		return false
+		#assert(false)
 	
 	if(!canEquipSlot(slot)):
 		return false
@@ -170,7 +172,13 @@ func unequipItem(item):
 		addItem(theitem)
 		return true
 	return false
-	
+
+func clearSlot(slot):
+	var theitem = removeItemFromSlot(slot)
+	if(theitem != null):
+		return true
+	return false
+
 func unequipSlot(slot):
 	var theitem = removeItemFromSlot(slot)
 	if(theitem != null):

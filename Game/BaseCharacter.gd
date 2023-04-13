@@ -871,9 +871,11 @@ func cummedInBodypartBy(bodypartSlot, characterID, sourceType = null, amountToTr
 	else:
 		var thebodypart = getBodypart(bodypartSlot)
 		thebodypart.addFluidOrifice(ch.getFluidType(sourceType), ch.getFluidAmount(sourceType) * amountToTransfer, ch.getFluidDNA(sourceType))
-	skillsHolder.receivedCreampie(characterID)
-	if(ch != null):
-		ch.getSkillsHolder().cameInsideSomeone(getID())
+	
+	if(sourceType in [FluidSource.Penis, FluidSource.Strapon]):
+		skillsHolder.receivedCreampie(characterID)
+		if(ch != null):
+			ch.getSkillsHolder().cameInsideSomeone(getID())
 	
 func cummedInVaginaBy(characterID, sourceType = null, amountToTransfer = 1.0):
 	cummedInBodypartBy(BodypartSlot.Vagina, characterID, sourceType, amountToTransfer)
@@ -1877,6 +1879,15 @@ func getBodypartLewdDescriptionAndNameWithA(bodypartSlot):
 func isDynamicCharacter():
 	return false
 
+func canWearStrapon():
+	if(hasPenis() && !isWearingChastityCage()):
+		return false
+	
+	if(getInventory().hasSlotEquipped(InventorySlot.Strapon)):
+		return false
+	
+	return true
+
 func isWearingStrapon():
 	return getWornStrapon() != null
 
@@ -1933,8 +1944,8 @@ func cummedOnBy(characterID, sourceType = null, howMuchPercent = 1.0):
 	else:
 		coverBodyWithFluid(ch.getFluidType(sourceType), ch.getFluidAmount(sourceType)*howMuchPercent, ch.getFluidDNA(sourceType))
 
-func pissedOnBy(_characterID):
-	cummedOnBy(_characterID, FluidSource.Pissing, 1.0)
+func pissedOnBy(_characterID, howMuch = 1.0):
+	cummedOnBy(_characterID, FluidSource.Pissing, howMuch)
 	
 	#addEffect(StatusEffect.DrenchedInPiss)
 
@@ -1952,3 +1963,9 @@ func getOutsideMessinessLevel():
 		return 4
 	else:
 		return 5
+
+func afterTakingAShower():
+	#addStamina(30)
+	clearBodyFluids()
+	clearBodywritings()
+	clearTallymarks()

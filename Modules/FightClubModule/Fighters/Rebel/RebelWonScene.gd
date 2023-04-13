@@ -34,9 +34,9 @@ func _run():
 		addButton("Continue", "Time to leave", "endthescene")
 
 	if(state == "fisting"):
-		playAnimation(StageScene.Duo, "stand", {
-			npc="rebel", npcAction="allfours",
-			npcBodyState={exposedCrotch=true,},
+		playAnimation(StageScene.Spanking, "tease", {
+			npc="rebel", pc="pc",
+			bodyState={exposedCrotch=true,}
 		})
 		
 		saynn("The crowd cheers louder as you put on your mean eyes and step towards the defeated opponent. Rebel’s face expression shows acceptance, she tries to cover herself but you take a running start and shove her down to the floor.")

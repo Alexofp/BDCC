@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://GlobalTheme.tres" type="Theme" id=1]
 [ext_resource path="res://Fonts/Titillium-Regular.otf" type="DynamicFontData" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://Fonts/Titillium-Bold.otf" type="DynamicFontData" id=7]
 [ext_resource path="res://UI/ModsMenu/ModsMenu.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Game/SmartScrollContainer.gd" type="Script" id=9]
+[ext_resource path="res://UI/AutoTranslatorMenu/AutoTranslatorMenu.tscn" type="PackedScene" id=10]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.207843, 0.133333, 0.364706, 1 )
@@ -351,6 +352,14 @@ hint_tooltip = "See what modules are loaded currently"
 size_flags_horizontal = 3
 text = "Mods"
 
+[node name="AutoTranslatorButton" type="Button" parent="HBoxContainer/MainVBox/GridContainer"]
+margin_top = 60.0
+margin_right = 148.0
+margin_bottom = 86.0
+hint_tooltip = "Experimental feature"
+size_flags_horizontal = 3
+text = "AutoTranslator"
+
 [node name="DevToolsScreen" type="VBoxContainer" parent="HBoxContainer"]
 visible = false
 margin_left = 273.0
@@ -450,6 +459,14 @@ margin_left = 1027.0
 margin_right = 1027.0
 margin_bottom = 720.0
 
+[node name="AutoTranslatorMenu" parent="HBoxContainer" instance=ExtResource( 10 )]
+visible = false
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 1027.0
+margin_right = 1027.0
+margin_bottom = 720.0
+
 [node name="HSplitContainer2" type="HSplitContainer" parent="HBoxContainer"]
 margin_left = 1031.0
 margin_right = 1036.0
@@ -520,6 +537,7 @@ fit_content_height = true
 [connection signal="pressed" from="HBoxContainer/MainVBox/GridContainer/DevToolsButton" to="." method="_on_DevToolsButton_pressed"]
 [connection signal="pressed" from="HBoxContainer/MainVBox/GridContainer/ChangelogButton" to="." method="_on_ChangelogButton_pressed"]
 [connection signal="pressed" from="HBoxContainer/MainVBox/GridContainer/ModsButton" to="." method="_on_ModsButton_pressed"]
+[connection signal="pressed" from="HBoxContainer/MainVBox/GridContainer/AutoTranslatorButton" to="." method="_on_AutoTranslatorButton_pressed"]
 [connection signal="pressed" from="HBoxContainer/DevToolsScreen/GridContainer/DevClose" to="." method="_on_DevClose_pressed"]
 [connection signal="pressed" from="HBoxContainer/DevToolsScreen/GridContainer/DevSceneConverter2" to="." method="_on_DevSceneConverter2_pressed"]
 [connection signal="pressed" from="HBoxContainer/DevToolsScreen/GridContainer/DevLikesGenerator" to="." method="_on_DevLikesGenerator_pressed"]
@@ -530,5 +548,6 @@ fit_content_height = true
 [connection signal="onClosePressed" from="HBoxContainer/OptionsScreen" to="." method="switchToMainMenu"]
 [connection signal="onClosePressed" from="HBoxContainer/CreditsScreen" to="." method="switchToMainMenu"]
 [connection signal="onClosePressed" from="HBoxContainer/ModsMenu" to="." method="switchToMainMenu"]
+[connection signal="onClosePressed" from="HBoxContainer/AutoTranslatorMenu" to="." method="_on_AutoTranslatorMenu_onClosePressed"]
 [connection signal="pressed" from="HBoxContainer/Panel/MarginContainer/VBoxContainer/GithubReleasesButton" to="." method="_on_GithubReleasesButton_pressed"]
 [connection signal="request_completed" from="HTTPRequest" to="." method="_on_HTTPRequest_request_completed"]

@@ -213,9 +213,31 @@ func startNewGame():
 	#runScene("FightScene", ["testchar"])
 	#runScene("FightScene", ["tavi"])
 
-func runScene(id, _args = []):
+func getNewUniqueSceneID(blockedIDS=[]) -> int:
+	var takenIDs = {}
+	for someID in blockedIDS:
+		if(someID >= 0):
+			takenIDs[someID] = true
+	
+	for scene in sceneStack:
+		if(scene.uniqueSceneID >= 0):
+			takenIDs[scene.uniqueSceneID] = true
+		if(scene.parentSceneUniqueID >= 0):
+			takenIDs[scene.parentSceneUniqueID] = true
+	
+	var result:int = 0
+	while(true):
+		if(!takenIDs.has(result)):
+			return result
+		result += 1
+	return result
+
+func runScene(id, _args = [], parentSceneUniqueID = -1):
 	var scene = GlobalRegistry.createScene(id)
-	assert(scene != null, "SCENE WITH ID "+str(id)+" IS NOT FOUND")
+	scene.uniqueSceneID = getNewUniqueSceneID([parentSceneUniqueID])
+	if(parentSceneUniqueID >= 0):
+		scene.parentSceneUniqueID = parentSceneUniqueID
+	assert(scene != null, "SCENE WITH ID "+str(id)+" IS NOT FOUND. MAKE SURE IT WAS REGISTERED INSIDE THE MODULE.")
 	add_child(scene)
 	sceneStack.append(scene)
 	print("Starting scene "+id)
@@ -226,12 +248,25 @@ func runScene(id, _args = []):
 
 func removeScene(scene, args = []):
 	if(sceneStack.has(scene)):
-		if(scene == sceneStack.back() || true):
-			var previousSceneIndex = sceneStack.find(scene) - 1
+		if(true):#scene == sceneStack.back() || true):
+			var isCurrentScene = (scene == sceneStack.back())
+			#var previousSceneIndex = sceneStack.find(scene) - 1
+			var savedParentSceneID = scene.parentSceneUniqueID
 			var savedTag = scene.sceneTag
+			
 			sceneStack.erase(scene)
-			if(previousSceneIndex < sceneStack.size() && previousSceneIndex >= 0):
-				sceneStack[previousSceneIndex].react_scene_end(savedTag, args)
+			
+			var parentScene = getSceneByUniqueID(savedParentSceneID)
+			if(parentScene != null):
+				parentScene.react_scene_end(savedTag, args)
+			#else:
+				## This is not ideal but it's required to refresh stuff like portraits (not anymore)
+				#if(previousSceneIndex < sceneStack.size() && previousSceneIndex >= 0):
+				#	sceneStack[previousSceneIndex].react_scene_end(savedTag, args)
+			
+			if(isCurrentScene && sceneStack.back() != null):
+				sceneStack.back().updateCharacter()
+				runCurrentScene()
 		else:
 			sceneStack.erase(scene)
 	
@@ -241,6 +276,14 @@ func removeScene(scene, args = []):
 		gameUI.clearButtons()
 		gameUI.say("Error: no more scenes in the scenestack. Please let the developer know")
 		return
+
+func getSceneByUniqueID(uID):
+	if(uID < 0):
+		return null
+	for scene in sceneStack:
+		if(scene.uniqueSceneID == uID):
+			return scene
+	return null
 
 func getCurrentScene():
 	if(sceneStack.size() > 0):
@@ -287,6 +330,7 @@ func runCurrentScene():
 				GM.ui.say(message)
 				GM.ui.say("\n")
 			GM.ui.say("[/i][/center]\n")
+		GM.ui.translateText()
 	updateStuff()
 
 func reRun():
@@ -397,6 +441,9 @@ func loadData(data):
 		
 		#scene.initScene(_args)
 		scene.loadData(SAVE.loadVar(sceneData, "sceneData", {}))
+		if(scene.uniqueSceneID < 0):
+			scene.uniqueSceneID = getNewUniqueSceneID()
+			scene.parentSceneUniqueID = scene.uniqueSceneID - 1 # Preserves compatability with old saves
 		
 	GM.ui.recreateWorld()
 	GM.world.loadData(SAVE.loadVar(data, "world", {}))
@@ -404,12 +451,17 @@ func loadData(data):
 func saveCharactersData():
 	var data = {}
 	for characterID in staticCharacters:
-		data[characterID] = staticCharacters[characterID].saveData()
+		var character = staticCharacters[characterID]
+		if(character.disableSerialization):
+			continue
+		data[characterID] = character.saveData()
 	return data
 	
 func loadCharactersData(data):
 	for characterID in staticCharacters:
 		var character = staticCharacters[characterID]
+		if(character.disableSerialization):
+			continue
 		character.loadData(SAVE.loadVar(data, characterID, {}))
 	
 func saveDynamicCharactersData():
@@ -1023,6 +1075,11 @@ func startUpdatingCharacter(charID):
 		var character = getCharacter(charID)
 		if(character != null):
 			character.processUntilTime(currentDay, timeOfDay)
+			character.updateNonBattleEffects()
+	else:
+		var character = getCharacter(charID)
+		if(character != null):
+			character.updateNonBattleEffects()
 
 func generateCharacterID(beginPart = "dynamicnpc"):
 	var numID = GlobalRegistry.generateNPCUniqueID()
@@ -1047,8 +1104,7 @@ func canLootRoom(roomID):
 	return true
 
 func markRoomAsLooted(roomID):
-	if(!lootedRooms.has(roomID)):
-		lootedRooms[roomID] = getDays()
+	lootedRooms[roomID] = getDays()
 
 func isRoomLooted(roomID):
 	if(lootedRooms.has(roomID)):

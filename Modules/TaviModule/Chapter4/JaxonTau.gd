@@ -3,6 +3,7 @@ extends Character
 func _init():
 	id = "jaxontau"
 	npcCharacterType = CharacterType.Generic
+	disableSerialization = true
 	
 func _getName():
 	return "Jaxon"

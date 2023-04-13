@@ -21,6 +21,26 @@ func getPriority():
 func onButton(_method, _args):
 	pass
 
+func eventCheck(_checkID, _args = []):
+	return null
+
+func doEventCheck(_checkID, _args = []):
+	if(GM.ES):
+		return GM.ES.eventCheck(_checkID, _args)
+
+func checkCharacterBusy(_checkID, messageifbusy, characterName = ""):
+	var checkData = doEventCheck(_checkID)
+	if(checkData == null):
+		return false
+	
+	if(checkData is Dictionary && checkData.has("text")):
+		saynn(checkData["text"])
+	else:
+		saynn(messageifbusy)
+	if(characterName != ""):
+		addDisabledButton(characterName, "They are not here")
+	return true
+
 func runScene(sceneid: String, args = [], tag = ""):
 	var scene = GM.main.runScene(sceneid, args)
 	scene.sceneTag = tag

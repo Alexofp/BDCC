@@ -26,8 +26,15 @@ func callFuncWrapper(_command: String, _args: Array):
 		return Util.sayPlayer(str(_args[0]))
 	if(_command == "pick"):
 		return str(RNG.pick(_args))
+	if(_command == "rahiMaster"):
+		return GM.main.getFlag("RahiModule.rahiPCName", GM.pc.getName())
+	if(_command == "rahiFP" && _args.size() == 2):
+		if(GlobalRegistry.getModule("RahiModule").canTalkInFirstPerson()):
+			return _args[0]
+		else:
+			return _args[1]
 	
-	return "!RUNTIME ERROR NO COMMAND FOUND "+_command+" "+str(_args)+"!"
+	return "[color=red]!RUNTIME ERROR NO COMMAND FOUND "+_command+" "+str(_args)+"![/color]"
 	
 func callObjectFunc(_obj: String, _command: String, _args: Array, overrides: Dictionary = {}):
 	if(overrides.has(_obj)):
@@ -56,7 +63,7 @@ func callObjectFuncWrapper(_obj: String, _command: String, _args: Array):
 		object = GlobalRegistry.getCharacter(_obj)
 		
 	if(object == null):
-		return "!RUNTIME ERROR NO CHARACTER FOUND "+_obj+"."+_command+" "+str(_args)+"!"
+		return "[color=red]!RUNTIME ERROR NO CHARACTER FOUND "+_obj+"."+_command+" "+str(_args)+"![/color]"
 	if(_command == "name" && _args.size() == 0):
 		return object.getName()		
 	if(_command == "nameS" && _args.size() == 0):
@@ -178,41 +185,114 @@ func callObjectFuncWrapper(_obj: String, _command: String, _args: Array):
 		var breasts = object.getBodypart(BodypartSlot.Breasts)
 		var milkType = breasts.getProducingFluidType()
 		if(milkType == null):
-			return "ERROR:NO_MILK"
+			return "[color=red]ERROR:NO_MILK[/color]"
 		return BodilyFluids.getFluidName(milkType)
 		
 	if(_command == "cum" && _args.size() == 0):
 		var penis = object.getBodypart(BodypartSlot.Penis)
 		var cumType = penis.getProducingFluidType()
 		if(cumType == null):
-			return "ERROR:NO_CUM"
+			return "[color=red]ERROR:NO_CUM[/color]"
 		return BodilyFluids.getFluidName(cumType)
 	
 	if(_command in ["analStretch"] && _args.size() == 0):
 		var bodypart:BodypartAnus = object.getBodypart(BodypartSlot.Anus)
 		if(bodypart == null):
-			return "ERROR:NOBODYPART"
+			return "[color=red]ERROR:NOBODYPART[/color]"
 		var orifice:Orifice = bodypart.getOrifice()
 		if(orifice == null):
-			return "ERROR:NOANUS"
+			return "[color=red]ERROR:NOANUS[/color]"
 		return orifice.getLoosenessString()
 		
 	if(_command in ["pussyStretch", "vaginaStretch"] && _args.size() == 0):
 		var bodypart:BodypartVagina = object.getBodypart(BodypartSlot.Vagina)
 		if(bodypart == null):
-			return "ERROR:NOBODYPART"
+			return "[color=red]ERROR:NOBODYPART[/color]"
 		var orifice:Orifice = bodypart.getOrifice()
 		if(orifice == null):
-			return "ERROR:NOVAGINA"
+			return "[color=red]ERROR:NOVAGINA[/color]"
 		return orifice.getLoosenessString()
 		
 	if(_command in ["throatStretch"] && _args.size() == 0):
 		var bodypart:BodypartHead = object.getBodypart(BodypartSlot.Head)
 		if(bodypart == null):
-			return "ERROR:NOBODYPART"
+			return "[color=red]ERROR:NOBODYPART[/color]"
 		var orifice:Orifice = bodypart.getOrifice()
 		if(orifice == null):
-			return "ERROR:NOTHROAT"
+			return "[color=red]ERROR:NOTHROAT[/color]"
 		return orifice.getLoosenessString()
 	
-	return "!RUNTIME ERROR NO COMMAND FOUND "+_obj+"."+_command+" "+str(_args)+"!"
+	if(_command in ["pussyContents", "vaginaContents"] && _args.size() == 0):
+		var bodypart:BodypartVagina = object.getBodypart(BodypartSlot.Vagina)
+		if(bodypart == null):
+			return "[color=red]ERROR:NOBODYPART[/color]"
+		var orifice:Orifice = bodypart.getOrifice()
+		if(orifice == null):
+			return "[color=red]ERROR:NOVAGINA[/color]"
+		var thetext = Util.humanReadableList(orifice.getFluidList())
+		if(thetext == null || thetext == ""):
+			return "nothing"
+		return thetext
+	
+	if(_command in ["buttContents", "assContents", "anusContents"] && _args.size() == 0):
+		var bodypart = object.getBodypart(BodypartSlot.Anus)
+		if(bodypart == null):
+			return "[color=red]ERROR:NOBODYPART[/color]"
+		var orifice:Orifice = bodypart.getOrifice()
+		if(orifice == null):
+			return "[color=red]ERROR:NOANUS[/color]"
+		var thetext = Util.humanReadableList(orifice.getFluidList())
+		if(thetext == null || thetext == ""):
+			return "nothing"
+		return thetext
+	
+	if(_command in ["throatContents"] && _args.size() == 0):
+		var bodypart = object.getBodypart(BodypartSlot.Head)
+		if(bodypart == null):
+			return "[color=red]ERROR:NOBODYPART[/color]"
+		var orifice:Orifice = bodypart.getOrifice()
+		if(orifice == null):
+			return "[color=red]ERROR:NOTHROAT[/color]"
+		var thetext = Util.humanReadableList(orifice.getFluidList())
+		if(thetext == null || thetext == ""):
+			return "nothing"
+		return thetext
+	
+	if(_command in ["privates"] && _args.size() == 0):
+		var bodypartsToCheck = [BodypartSlot.Breasts, BodypartSlot.Penis, BodypartSlot.Vagina, BodypartSlot.Anus]
+		
+		var result = []
+		for partID in bodypartsToCheck:
+			if(!object.hasBodypart(partID)):
+				continue
+			var bodypart = object.getBodypart(partID)
+			
+			if(partID == BodypartSlot.Vagina):
+				var orifice:Orifice = bodypart.getOrifice()
+				if(orifice == null):
+					continue
+				result.append(orifice.getLoosenessString()+" pussy")
+			elif(partID == BodypartSlot.Anus):
+				var orifice:Orifice = bodypart.getOrifice()
+				if(orifice == null):
+					continue
+				result.append(orifice.getLoosenessString()+" anus")
+			else:
+				result.append(object.getBodypartLewdDescriptionAndName(partID))
+		
+		return Util.humanReadableList(result)
+	
+	if(_command in ["boy", "boyGirl", "girl"] && _args.size() == 0):
+		if(object.getGender() == Gender.Male):
+			return "boy"
+		elif(object.getGender() == Gender.Female):
+			return "girl"
+		elif(object.getGender() == Gender.Other):
+			return "thing"
+		else:
+			if(object.getFemininity() >= 50):
+				return "girl"
+			else:
+				return "boy"
+	
+	return "[color=red]!RUNTIME ERROR NO COMMAND FOUND "+_obj+"."+_command+" "+str(_args)+"![/color]"

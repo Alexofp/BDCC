@@ -1,0 +1,254 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Game/World/GameRoom.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Game/World/SubWorld.tscn" type="PackedScene" id=2]
+
+[node name="RahiFlashbackFloor" instance=ExtResource( 2 )]
+
+[node name="RahiFlashRoom" parent="." index="0" instance=ExtResource( 1 )]
+self_modulate = Color( 0.7, 0.7, 0.7, 1 )
+roomColor = 8
+
+[node name="RahiFlashRoom2" parent="." index="1" instance=ExtResource( 1 )]
+self_modulate = Color( 0.5, 0.5, 0.5, 1 )
+position = Vector2( -64, 0 )
+roomColor = 7
+
+[node name="RahiFlashRoom3" parent="." index="2" instance=ExtResource( 1 )]
+self_modulate = Color( 0.7, 0.7, 0.7, 1 )
+position = Vector2( 0, -64 )
+roomColor = 8
+
+[node name="RahiFlashRoom4" parent="." index="3" instance=ExtResource( 1 )]
+self_modulate = Color( 0.7, 0.7, 0.7, 1 )
+position = Vector2( 0, 64 )
+roomColor = 8
+
+[node name="RahiFlashRoom5" parent="." index="4" instance=ExtResource( 1 )]
+self_modulate = Color( 0.7, 0.7, 0.7, 1 )
+position = Vector2( 0, 128 )
+roomName = "Mineshaft"
+roomID = "rahi_mineshaft"
+roomColor = 8
+
+[node name="RahiFlashRoom6" parent="." index="5" instance=ExtResource( 1 )]
+self_modulate = Color( 0.5, 0.5, 0.5, 1 )
+position = Vector2( 64, 64 )
+roomColor = 7
+
+[node name="RahiFlashRoom7" parent="." index="6" instance=ExtResource( 1 )]
+self_modulate = Color( 0.7, 0.7, 0.7, 1 )
+position = Vector2( 0, -128 )
+roomName = "Mineshaft exit"
+roomID = "rahi_mineshaftexit"
+roomColor = 8
+
+[node name="RahiFlashRoom8" parent="." index="7" instance=ExtResource( 1 )]
+position = Vector2( -64, -192 )
+gridColor = 8
+
+[node name="RahiFlashRoom9" parent="." index="8" instance=ExtResource( 1 )]
+position = Vector2( 0, -192 )
+gridColor = 8
+
+[node name="RahiFlashRoom10" parent="." index="9" instance=ExtResource( 1 )]
+self_modulate = Color( 0.5, 0.5, 0.5, 1 )
+position = Vector2( -64, -256 )
+roomName = "Administration building"
+roomID = "rahi_shaftpay"
+roomSprite = 5
+roomColor = 7
+
+[node name="RahiFlashRoom11" parent="." index="10" instance=ExtResource( 1 )]
+position = Vector2( 0, -256 )
+gridColor = 8
+
+[node name="RahiFlashRoom12" parent="." index="11" instance=ExtResource( 1 )]
+self_modulate = Color( 0.5, 0.5, 0.5, 1 )
+position = Vector2( -64, -320 )
+roomName = "Stairs"
+roomID = "rahi_shaftstairs"
+roomSprite = 3
+roomColor = 7
+
+[node name="RahiFlashRoom13" parent="." index="12" instance=ExtResource( 1 )]
+position = Vector2( -64, -384 )
+gridColor = 8
+
+[node name="RahiFlashRoom14" parent="." index="13" instance=ExtResource( 1 )]
+position = Vector2( 0, -384 )
+gridColor = 8
+
+[node name="RahiFlashRoom15" parent="." index="14" instance=ExtResource( 1 )]
+position = Vector2( 384, 0 )
+gridColor = 8
+
+[node name="RahiFlashRoom16" parent="." index="15" instance=ExtResource( 1 )]
+position = Vector2( 448, 0 )
+roomName = "Ahdomai's streets"
+roomID = "rahi_cough"
+gridColor = 8
+
+[node name="RahiFlashRoom17" parent="." index="16" instance=ExtResource( 1 )]
+position = Vector2( 512, 0 )
+roomName = "Ahdomai's streets"
+roomID = "rahi_nearstore"
+gridColor = 8
+
+[node name="RahiFlashRoom43" parent="." index="17" instance=ExtResource( 1 )]
+self_modulate = Color( 0.5, 0.5, 0.5, 1 )
+position = Vector2( 512, 192 )
+roomName = "Ahdomai's backstreets"
+roomID = "rahi_behindstore"
+roomColor = 7
+gridColor = 8
+
+[node name="RahiFlashRoom18" parent="." index="18" instance=ExtResource( 1 )]
+position = Vector2( 576, 0 )
+gridColor = 8
+
+[node name="RahiFlashRoom19" parent="." index="19" instance=ExtResource( 1 )]
+position = Vector2( 640, 0 )
+gridColor = 8
+
+[node name="RahiFlashRoom20" parent="." index="20" instance=ExtResource( 1 )]
+self_modulate = Color( 0.5, 0.5, 0.5, 1 )
+position = Vector2( 512, 64 )
+roomName = "Drug store"
+roomID = "rahi_store"
+roomColor = 7
+
+[node name="RahiFlashRoom21" parent="." index="21" instance=ExtResource( 1 )]
+self_modulate = Color( 0.5, 0.5, 0.5, 1 )
+position = Vector2( 512, 128 )
+roomName = "Drug store"
+roomID = "rahi_backstore"
+roomColor = 7
+gridColor = 2
+
+[node name="RahiFlashRoom22" parent="." index="22" instance=ExtResource( 1 )]
+self_modulate = Color( 1, 0.6, 0.8, 1 )
+position = Vector2( 576, -512 )
+roomName = "Bar"
+roomID = "rahi_bar"
+roomColor = 4
+
+[node name="RahiFlashRoom23" parent="." index="23" instance=ExtResource( 1 )]
+self_modulate = Color( 1, 0.6, 0.8, 1 )
+position = Vector2( 512, -512 )
+roomColor = 4
+
+[node name="RahiFlashRoom24" parent="." index="24" instance=ExtResource( 1 )]
+self_modulate = Color( 1, 0.6, 0.8, 1 )
+position = Vector2( 576, -448 )
+roomColor = 4
+
+[node name="RahiFlashRoom25" parent="." index="25" instance=ExtResource( 1 )]
+self_modulate = Color( 1, 0.6, 0.8, 1 )
+position = Vector2( 640, -512 )
+roomColor = 4
+
+[node name="RahiFlashRoom26" parent="." index="26" instance=ExtResource( 1 )]
+self_modulate = Color( 1, 0.6, 0.8, 1 )
+position = Vector2( 640, -448 )
+roomColor = 4
+
+[node name="RahiFlashRoom27" parent="." index="27" instance=ExtResource( 1 )]
+self_modulate = Color( 1, 0.6, 0.8, 1 )
+position = Vector2( 512, -448 )
+roomColor = 4
+
+[node name="RahiFlashRoom28" parent="." index="28" instance=ExtResource( 1 )]
+position = Vector2( 576, -384 )
+roomName = "Near bar"
+roomID = "rahi_outsidebar"
+gridColor = 8
+
+[node name="RahiFlashRoom29" parent="." index="29" instance=ExtResource( 1 )]
+self_modulate = Color( 0.5, 0.5, 0.5, 1 )
+position = Vector2( 512, -576 )
+roomName = "Dark alleyway"
+roomID = "rahi_alleystart"
+roomColor = 7
+gridColor = 8
+
+[node name="RahiFlashRoom30" parent="." index="30" instance=ExtResource( 1 )]
+self_modulate = Color( 0.5, 0.5, 0.5, 1 )
+position = Vector2( 512, -640 )
+roomColor = 7
+gridColor = 8
+
+[node name="RahiFlashRoom31" parent="." index="31" instance=ExtResource( 1 )]
+self_modulate = Color( 0.5, 0.5, 0.5, 1 )
+position = Vector2( 512, -704 )
+roomName = "Dark alleyway"
+roomID = "rahi_darkalley"
+roomColor = 7
+gridColor = 8
+
+[node name="RahiFlashRoom32" parent="." index="32" instance=ExtResource( 1 )]
+self_modulate = Color( 0.5, 0.5, 0.5, 1 )
+position = Vector2( 576, -704 )
+roomColor = 7
+gridColor = 8
+
+[node name="RahiFlashRoom33" parent="." index="33" instance=ExtResource( 1 )]
+self_modulate = Color( 0.5, 0.5, 0.5, 1 )
+position = Vector2( 576, -768 )
+roomColor = 7
+gridColor = 8
+
+[node name="RahiFlashRoom34" parent="." index="34" instance=ExtResource( 1 )]
+self_modulate = Color( 0.5, 0.5, 0.5, 1 )
+position = Vector2( 576, -832 )
+roomColor = 7
+gridColor = 8
+
+[node name="RahiFlashRoom35" parent="." index="35" instance=ExtResource( 1 )]
+self_modulate = Color( 0.7, 0.7, 1, 1 )
+position = Vector2( 1152, -128 )
+roomName = "Police station"
+roomID = "rahi_policestation"
+roomColor = 3
+
+[node name="RahiFlashRoom36" parent="." index="36" instance=ExtResource( 1 )]
+self_modulate = Color( 0.7, 0.7, 1, 1 )
+position = Vector2( 1216, -128 )
+roomColor = 3
+gridColor = 2
+
+[node name="RahiFlashRoom37" parent="." index="37" instance=ExtResource( 1 )]
+self_modulate = Color( 0.7, 0.7, 1, 1 )
+position = Vector2( 1216, -192 )
+roomColor = 3
+gridColor = 2
+
+[node name="RahiFlashRoom38" parent="." index="38" instance=ExtResource( 1 )]
+self_modulate = Color( 0.7, 0.7, 1, 1 )
+position = Vector2( 1216, -64 )
+roomColor = 3
+gridColor = 2
+
+[node name="RahiFlashRoom39" parent="." index="39" instance=ExtResource( 1 )]
+self_modulate = Color( 0.7, 0.7, 1, 1 )
+position = Vector2( 1216, 0 )
+roomColor = 3
+gridColor = 2
+
+[node name="RahiFlashRoom40" parent="." index="40" instance=ExtResource( 1 )]
+self_modulate = Color( 0.7, 0.7, 1, 1 )
+position = Vector2( 1216, -256 )
+roomColor = 3
+gridColor = 2
+
+[node name="RahiFlashRoom41" parent="." index="41" instance=ExtResource( 1 )]
+self_modulate = Color( 0.7, 0.7, 1, 1 )
+position = Vector2( 1216, -320 )
+roomColor = 3
+gridColor = 2
+
+[node name="RahiFlashRoom42" parent="." index="42" instance=ExtResource( 1 )]
+self_modulate = Color( 0.7, 0.7, 1, 1 )
+position = Vector2( 1216, 64 )
+roomColor = 3
+gridColor = 2

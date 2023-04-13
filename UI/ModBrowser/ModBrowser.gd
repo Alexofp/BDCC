@@ -194,3 +194,7 @@ func _on_SortOldestFirstButton_pressed():
 
 func _on_CloseButton_pressed():
 	emit_signal("closePressed")
+
+
+func _on_RichTextLabel_meta_clicked(meta):
+	var _ok = OS.shell_open(meta)

@@ -59,7 +59,7 @@ texture = ExtResource( 4 )
 region_enabled = true
 region_rect = Rect2( 1, 1, 1022, 62 )
 
-[node name="Stocks" type="Sprite3D" parent="." index="2"]
+[node name="Sybian" type="Sprite3D" parent="." index="2"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.17906, 1.23267, -0.0600427 )
 texture = ExtResource( 2 )
 
