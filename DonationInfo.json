@@ -1,5 +1,5 @@
 {
-	"dateString": "09 of Apr 2023",
+	"dateString": "13 of Apr 2023",
 	"entries": {
 		"$1.00": [
 			{
@@ -18,28 +18,28 @@
 				"nickname": "Kyle Oran Evans "
 			},
 			{
-				"nickname": "Trewill"
+				"nickname": "Shadowwall123"
 			},
 			{
-				"nickname": "Shadowwall123"
+				"nickname": "Trewill"
 			},
 			{
 				"nickname": "Lichity"
 			},
 			{
-				"nickname": "VØID"
-			},
-			{
 				"nickname": "Tristan Leo Roberts "
 			},
 			{
-				"nickname": "User#a63f196a"
+				"nickname": "VØID"
+			},
+			{
+				"nickname": "BarryRkls"
 			},
 			{
 				"nickname": "joelee29"
 			},
 			{
-				"nickname": "BarryRkls"
+				"nickname": "User#a63f196a"
 			},
 			{
 				"nickname": "User#d7493e93"
@@ -83,13 +83,16 @@
 				"nickname": "Silver_Bloke"
 			},
 			{
+				"nickname": "Masaki Akira"
+			},
+			{
 				"nickname": "IzzenXAZ"
 			},
 			{
-				"nickname": "User#2242146d"
+				"nickname": "Steied"
 			},
 			{
-				"nickname": "Masaki Akira"
+				"nickname": "User#2242146d"
 			},
 			{
 				"nickname": "Breeze"
@@ -101,19 +104,16 @@
 				"nickname": "Runulf"
 			},
 			{
-				"nickname": "Steied"
+				"nickname": "ProtossMan"
 			},
 			{
 				"nickname": "Rac"
 			},
 			{
-				"nickname": "ProtossMan"
+				"nickname": "laughingluke"
 			},
 			{
 				"nickname": "User#27703f4e"
-			},
-			{
-				"nickname": "laughingluke"
 			}
 		],
 		"$5.00": [
@@ -130,16 +130,19 @@
 				"nickname": "User#d74b7dcd"
 			},
 			{
-				"nickname": "Dgf"
+				"nickname": "GoatToast"
 			},
 			{
 				"nickname": "User#6575234c"
 			},
 			{
-				"nickname": "GoatToast"
+				"nickname": "Dgf"
 			},
 			{
 				"nickname": "Master Puro"
+			},
+			{
+				"nickname": "User#df1b8b36"
 			},
 			{
 				"nickname": "lewdyaccount"
@@ -151,5 +154,5 @@
 		"$5.00",
 		"$1.00"
 	],
-	"unixTime": 1681054888
+	"unixTime": 1681404989
 }
