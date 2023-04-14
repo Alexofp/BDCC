@@ -12,7 +12,9 @@ var temporaryState = {}
 var exposedBodyparts = []
 
 var armsCuffed = false
+var armsPuppy = false
 var legsCuffed = false
+var legsPuppy = false
 var breastsLeaking = false
 var pussyLeaking = false
 var anusLeaking = false
@@ -452,6 +454,18 @@ func setLegsCuffed(newcuffed):
 	
 func getLegsCuffed():
 	return legsCuffed
+
+func setArmsPuppy(newcuffed):
+	armsPuppy = newcuffed
+	
+func getArmsPuppy():
+	return armsPuppy
+	
+func setLegsPuppy(newcuffed):
+	legsPuppy = newcuffed
+	
+func getLegsPuppy():
+	return legsPuppy
 
 func getCharacterID():
 	return savedCharacterID
