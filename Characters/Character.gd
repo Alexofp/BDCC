@@ -187,15 +187,19 @@ func resetEquipment():
 	updateNonBattleEffects()
 
 func processTime(_secondsPassed):
+	for bodypart in processingBodyparts:
+		if(bodypart == null || !is_instance_valid(bodypart)):
+			continue
+		bodypart.processTime(_secondsPassed)
+	
 	if(timedBuffsDurationSeconds > 0):
 		timedBuffsDurationSeconds -= _secondsPassed
 		if(timedBuffsDurationSeconds <= 0):
 			timedBuffs.clear()
 	
-	for bodypart in processingBodyparts:
-		if(bodypart == null || !is_instance_valid(bodypart)):
-			continue
-		bodypart.processTime(_secondsPassed)
+	for effectID in statusEffects:
+		var effect = statusEffects[effectID]
+		effect.processTime(_secondsPassed)
 		
 	if(menstrualCycle != null):
 		menstrualCycle.processTime(_secondsPassed)
