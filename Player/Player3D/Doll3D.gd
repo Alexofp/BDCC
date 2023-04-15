@@ -19,6 +19,8 @@ var breastsLeaking = false
 var pussyLeaking = false
 var anusLeaking = false
 
+var temporaryRiggedParts = {}
+
 var rememberedPenisScale = 1.0
 
 export(bool) var addTestBody = false
@@ -306,7 +308,8 @@ func setBoneOffset(boneName: String, offset: Vector3):
 	skeleton.set_bone_custom_pose(boneId, newTransform)
 
 func setButtScale(buttScale: float):
-	setBoneScale("DeformButt", buttScale)
+	var buttScaleMod = 1.0 + clamp(buttScale - 1.0, 0.0, 0.2)
+	setBoneScaleAndOffset("DeformButt", buttScale*buttScaleMod, Vector3(-0.109556, -0.109556, 0.0)*clamp((buttScale-1.0)*3, 0.0, 1.0))
 	setBoneOffset("Tail1", Vector3(0.409556, 0.409556, 0.0)*max(buttScale-1.0, 0.0))
 
 func setBreastsScale(breastsScale: float):
@@ -395,12 +398,21 @@ func setParts(newparts: Dictionary):
 	for newslot in newparts:
 		addPartUnlessSame(newslot, newparts[newslot])
 		dirtyFlags[newslot] = true
+	for newslot in temporaryRiggedParts:
+		addPartUnlessSame(newslot, temporaryRiggedParts[newslot])
+		dirtyFlags[newslot] = true
 	
 	for slot in parts.keys():
 		if(!dirtyFlags[slot]):
 			removeSlot(slot)
 			
 	updateAlpha()
+
+func setCustomParts(newparts: Dictionary):
+	if(temporaryRiggedParts == newparts):
+		return
+	
+	temporaryRiggedParts = newparts
 
 func clearOverrideAlpha():
 	for slot in overridenPartHidden:

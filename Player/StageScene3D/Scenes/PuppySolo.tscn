@@ -29,7 +29,7 @@ animation = "PuppyWalk-loop"
 animation = "PuppyWalk-loop"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=11]
-xfade_time = 0.2
+xfade_time = 0.5
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=16]
 switch_mode = 2
@@ -50,7 +50,7 @@ states/PuppyWalk-loop/position = Vector2( 491, 229 )
 "states/PuppyWalk-loop 2/position" = Vector2( 275, 229 )
 transitions = [ "PuppyIdle-loop", "PuppyWalk-loop", SubResource( 11 ), "PuppyWalk-loop 2", "PuppyIdle-loop", SubResource( 16 ), "PuppyWalk-loop", "PuppyWalk-loop 2", SubResource( 17 ) ]
 start_node = "PuppyIdle-loop"
-graph_offset = Vector2( -102, 20 )
+graph_offset = Vector2( -226, 87 )
 
 [sub_resource type="AnimationNodeBlendTree" id=14]
 graph_offset = Vector2( -387.937, 14.7305 )

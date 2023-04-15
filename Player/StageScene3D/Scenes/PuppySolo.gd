@@ -18,6 +18,10 @@ func _ready():
 func playAnimation(animID, _args = {}):
 	#print("Playing hogtied: "+str(animID))
 	
+	doll.setCustomParts({
+		"PuppyGear": "res://Inventory/RiggedModels/PuppyRestraints/PuppyRestraints.tscn",
+	})
+	
 	if(_args.has("pc")):
 		doll.prepareCharacter(_args["pc"])
 	else:
@@ -28,6 +32,7 @@ func playAnimation(animID, _args = {}):
 	else:
 		doll.applyBodyState({})
 	
+
 	#updateSubAnims()
 	
 	var state_machine = animationTree["parameters/StateMachine/playback"]
