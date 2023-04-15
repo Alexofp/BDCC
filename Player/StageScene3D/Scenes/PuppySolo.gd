@@ -40,5 +40,13 @@ func playAnimation(animID, _args = {}):
 		state_machine.travel("PuppyIdle-loop")
 	if(animID == "walk"):
 		state_machine.travel("PuppyWalk-loop")
+	if(animID == "sit"):
+		state_machine.travel("PuppySit-loop")
+	if(animID == "paw"):
+		state_machine.travel("PuppySitPaw-loop")
+	if(animID == "back"):
+		state_machine.travel("PuppyOnBack-loop")
+	if(animID == "sad"):
+		state_machine.travel("PuppyIdleSad-loop")
 	else:
 		Log.printerr("Action "+str(animID)+" is not found for stage "+str(id))
