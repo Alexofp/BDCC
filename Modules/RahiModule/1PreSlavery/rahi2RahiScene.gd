@@ -17,7 +17,7 @@ func _run():
 
 		saynn("[say=pc]Hey there, kitten.[/say]")
 
-		saynn("Her perk at your voice. The feline's face lights up when she sees you.")
+		saynn("Her ears perk at your voice. The feline's face lights up when she sees you.")
 
 		saynn("[say=rahi]Oh, hi! Want something?[/say]")
 
