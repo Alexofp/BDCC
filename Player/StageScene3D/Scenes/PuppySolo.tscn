@@ -5,153 +5,153 @@
 [ext_resource path="res://Player/Player3D/Doll3D.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Player/Props/platform.png" type="Texture" id=4]
 
-[sub_resource type="AnimationNodeAnimation" id=5]
+[sub_resource type="AnimationNodeAnimation" id=192]
 animation = "PuppyLegs-loop"
 
-[sub_resource type="AnimationNodeAnimation" id=6]
+[sub_resource type="AnimationNodeAnimation" id=193]
 animation = "PuppyArms-loop"
 
-[sub_resource type="AnimationNodeBlend2" id=7]
+[sub_resource type="AnimationNodeBlend2" id=194]
 filter_enabled = true
 filters = [ "Doll3D/Skeleton:ForeArm.L", "Doll3D/Skeleton:ForeArm.R", "Doll3D/Skeleton:Hand.L", "Doll3D/Skeleton:Hand.R" ]
 
-[sub_resource type="AnimationNodeBlend2" id=8]
+[sub_resource type="AnimationNodeBlend2" id=195]
 filter_enabled = true
 filters = [ "Doll3D/Skeleton:Foot.L", "Doll3D/Skeleton:Foot.R", "Doll3D/Skeleton:LegDown.L", "Doll3D/Skeleton:LegDown.R" ]
 
-[sub_resource type="AnimationNodeAnimation" id=18]
+[sub_resource type="AnimationNodeAnimation" id=196]
 animation = "PuppyBackToSit"
 
-[sub_resource type="AnimationNodeAnimation" id=9]
+[sub_resource type="AnimationNodeAnimation" id=197]
 animation = "PuppyIdle-loop"
 
-[sub_resource type="AnimationNodeAnimation" id=35]
+[sub_resource type="AnimationNodeAnimation" id=198]
 animation = "PuppyIdleSad-loop"
 
-[sub_resource type="AnimationNodeAnimation" id=19]
+[sub_resource type="AnimationNodeAnimation" id=199]
 animation = "PuppyIdleToSit"
 
-[sub_resource type="AnimationNodeAnimation" id=20]
+[sub_resource type="AnimationNodeAnimation" id=200]
 animation = "PuppyOnBack-loop"
 
-[sub_resource type="AnimationNodeAnimation" id=21]
+[sub_resource type="AnimationNodeAnimation" id=201]
 animation = "PuppySit-loop"
 
-[sub_resource type="AnimationNodeAnimation" id=22]
+[sub_resource type="AnimationNodeAnimation" id=202]
 animation = "PuppySitPaw-loop"
 
-[sub_resource type="AnimationNodeAnimation" id=23]
+[sub_resource type="AnimationNodeAnimation" id=203]
 animation = "PuppySitToBack"
 
-[sub_resource type="AnimationNodeAnimation" id=24]
+[sub_resource type="AnimationNodeAnimation" id=204]
 animation = "PuppySitToIdle"
 
-[sub_resource type="AnimationNodeAnimation" id=15]
+[sub_resource type="AnimationNodeAnimation" id=205]
 animation = "PuppyWalk-loop"
 
-[sub_resource type="AnimationNodeAnimation" id=10]
+[sub_resource type="AnimationNodeAnimation" id=206]
 animation = "PuppyWalk-loop"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=11]
+[sub_resource type="AnimationNodeStateMachineTransition" id=207]
 xfade_time = 0.5
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=16]
+[sub_resource type="AnimationNodeStateMachineTransition" id=208]
 switch_mode = 2
 auto_advance = true
 xfade_time = 0.5
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=17]
+[sub_resource type="AnimationNodeStateMachineTransition" id=209]
 switch_mode = 2
 auto_advance = true
 xfade_time = 0.05
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=25]
+[sub_resource type="AnimationNodeStateMachineTransition" id=210]
 xfade_time = 0.1
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=26]
+[sub_resource type="AnimationNodeStateMachineTransition" id=211]
 switch_mode = 2
 auto_advance = true
 xfade_time = 0.1
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=27]
+[sub_resource type="AnimationNodeStateMachineTransition" id=212]
 xfade_time = 0.1
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=28]
+[sub_resource type="AnimationNodeStateMachineTransition" id=213]
 switch_mode = 2
 auto_advance = true
 xfade_time = 0.1
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=29]
+[sub_resource type="AnimationNodeStateMachineTransition" id=214]
 xfade_time = 1.0
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=30]
+[sub_resource type="AnimationNodeStateMachineTransition" id=215]
 xfade_time = 0.8
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=31]
+[sub_resource type="AnimationNodeStateMachineTransition" id=216]
 xfade_time = 0.1
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=32]
+[sub_resource type="AnimationNodeStateMachineTransition" id=217]
 switch_mode = 2
 auto_advance = true
 xfade_time = 0.1
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=33]
+[sub_resource type="AnimationNodeStateMachineTransition" id=218]
 xfade_time = 0.1
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=34]
+[sub_resource type="AnimationNodeStateMachineTransition" id=219]
 switch_mode = 2
 auto_advance = true
 xfade_time = 0.1
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=36]
+[sub_resource type="AnimationNodeStateMachineTransition" id=220]
 xfade_time = 0.8
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=37]
+[sub_resource type="AnimationNodeStateMachineTransition" id=221]
 xfade_time = 0.8
 
-[sub_resource type="AnimationNodeStateMachine" id=13]
-states/PuppyBackToSit/node = SubResource( 18 )
+[sub_resource type="AnimationNodeStateMachine" id=222]
+states/PuppyBackToSit/node = SubResource( 196 )
 states/PuppyBackToSit/position = Vector2( 999, 270 )
-states/PuppyIdle-loop/node = SubResource( 9 )
+states/PuppyIdle-loop/node = SubResource( 197 )
 states/PuppyIdle-loop/position = Vector2( 491, 98 )
-states/PuppyIdleSad-loop/node = SubResource( 35 )
+states/PuppyIdleSad-loop/node = SubResource( 198 )
 states/PuppyIdleSad-loop/position = Vector2( 491, -15 )
-states/PuppyIdleToSit/node = SubResource( 19 )
+states/PuppyIdleToSit/node = SubResource( 199 )
 states/PuppyIdleToSit/position = Vector2( 731, 43 )
-states/PuppyOnBack-loop/node = SubResource( 20 )
+states/PuppyOnBack-loop/node = SubResource( 200 )
 states/PuppyOnBack-loop/position = Vector2( 999, 190 )
-states/PuppySit-loop/node = SubResource( 21 )
+states/PuppySit-loop/node = SubResource( 201 )
 states/PuppySit-loop/position = Vector2( 731, 106 )
-states/PuppySitPaw-loop/node = SubResource( 22 )
+states/PuppySitPaw-loop/node = SubResource( 202 )
 states/PuppySitPaw-loop/position = Vector2( 999, -6 )
-states/PuppySitToBack/node = SubResource( 23 )
+states/PuppySitToBack/node = SubResource( 203 )
 states/PuppySitToBack/position = Vector2( 999, 112 )
-states/PuppySitToIdle/node = SubResource( 24 )
+states/PuppySitToIdle/node = SubResource( 204 )
 states/PuppySitToIdle/position = Vector2( 731, 172 )
-states/PuppyWalk-loop/node = SubResource( 10 )
+states/PuppyWalk-loop/node = SubResource( 206 )
 states/PuppyWalk-loop/position = Vector2( 491, 229 )
-"states/PuppyWalk-loop 2/node" = SubResource( 15 )
+"states/PuppyWalk-loop 2/node" = SubResource( 205 )
 "states/PuppyWalk-loop 2/position" = Vector2( 275, 229 )
-transitions = [ "PuppyIdle-loop", "PuppyWalk-loop", SubResource( 11 ), "PuppyWalk-loop 2", "PuppyIdle-loop", SubResource( 16 ), "PuppyWalk-loop", "PuppyWalk-loop 2", SubResource( 17 ), "PuppyIdle-loop", "PuppyIdleToSit", SubResource( 25 ), "PuppyIdleToSit", "PuppySit-loop", SubResource( 26 ), "PuppySit-loop", "PuppySitToIdle", SubResource( 27 ), "PuppySitToIdle", "PuppyIdle-loop", SubResource( 28 ), "PuppySit-loop", "PuppySitPaw-loop", SubResource( 29 ), "PuppySitPaw-loop", "PuppySit-loop", SubResource( 30 ), "PuppySit-loop", "PuppySitToBack", SubResource( 31 ), "PuppySitToBack", "PuppyOnBack-loop", SubResource( 32 ), "PuppyOnBack-loop", "PuppyBackToSit", SubResource( 33 ), "PuppyBackToSit", "PuppySit-loop", SubResource( 34 ), "PuppyIdle-loop", "PuppyIdleSad-loop", SubResource( 36 ), "PuppyIdleSad-loop", "PuppyIdle-loop", SubResource( 37 ) ]
+transitions = [ "PuppyIdle-loop", "PuppyWalk-loop", SubResource( 207 ), "PuppyWalk-loop 2", "PuppyIdle-loop", SubResource( 208 ), "PuppyWalk-loop", "PuppyWalk-loop 2", SubResource( 209 ), "PuppyIdle-loop", "PuppyIdleToSit", SubResource( 210 ), "PuppyIdleToSit", "PuppySit-loop", SubResource( 211 ), "PuppySit-loop", "PuppySitToIdle", SubResource( 212 ), "PuppySitToIdle", "PuppyIdle-loop", SubResource( 213 ), "PuppySit-loop", "PuppySitPaw-loop", SubResource( 214 ), "PuppySitPaw-loop", "PuppySit-loop", SubResource( 215 ), "PuppySit-loop", "PuppySitToBack", SubResource( 216 ), "PuppySitToBack", "PuppyOnBack-loop", SubResource( 217 ), "PuppyOnBack-loop", "PuppyBackToSit", SubResource( 218 ), "PuppyBackToSit", "PuppySit-loop", SubResource( 219 ), "PuppyIdle-loop", "PuppyIdleSad-loop", SubResource( 220 ), "PuppyIdleSad-loop", "PuppyIdle-loop", SubResource( 221 ) ]
 start_node = "PuppyIdle-loop"
 graph_offset = Vector2( -98, -133 )
 
-[sub_resource type="AnimationNodeBlendTree" id=14]
-graph_offset = Vector2( -310.937, 4.7305 )
-nodes/Animation/node = SubResource( 6 )
+[sub_resource type="AnimationNodeBlendTree" id=223]
+graph_offset = Vector2( -435.647, -29.6962 )
+nodes/Animation/node = SubResource( 193 )
 nodes/Animation/position = Vector2( -40, 200 )
-"nodes/Animation 2/node" = SubResource( 5 )
+"nodes/Animation 2/node" = SubResource( 192 )
 "nodes/Animation 2/position" = Vector2( 220, 260 )
-nodes/PuppyArms/node = SubResource( 7 )
+nodes/PuppyArms/node = SubResource( 194 )
 nodes/PuppyArms/position = Vector2( 220, 60 )
-nodes/PuppyLegs/node = SubResource( 8 )
+nodes/PuppyLegs/node = SubResource( 195 )
 nodes/PuppyLegs/position = Vector2( 440, 80 )
-nodes/StateMachine/node = SubResource( 13 )
+nodes/StateMachine/node = SubResource( 222 )
 nodes/StateMachine/position = Vector2( 20, 40 )
 nodes/output/position = Vector2( 660, 120 )
-node_connections = [ "PuppyLegs", 0, "PuppyArms", "PuppyLegs", 1, "Animation 2", "PuppyArms", 0, "StateMachine", "PuppyArms", 1, "Animation", "output", 0, "PuppyLegs" ]
+node_connections = [ "output", 0, "PuppyLegs", "PuppyArms", 0, "StateMachine", "PuppyArms", 1, "Animation", "PuppyLegs", 0, "PuppyArms", "PuppyLegs", 1, "Animation 2" ]
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=4]
+[sub_resource type="AnimationNodeStateMachinePlayback" id=224]
 
 [node name="PuppySolo" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
@@ -166,11 +166,7 @@ region_enabled = true
 region_rect = Rect2( 1, 1, 1022, 62 )
 
 [node name="AnimationTree" type="AnimationTree" parent="." index="2"]
-tree_root = SubResource( 14 )
-anim_player = NodePath("../Doll3D/DollSkeleton/AnimationPlayer")
+tree_root = SubResource( 223 )
 parameters/PuppyArms/blend_amount = 1.0
 parameters/PuppyLegs/blend_amount = 1.0
-parameters/StateMachine/playback = SubResource( 4 )
-
-[editable path="Doll3D"]
-[editable path="Doll3D/DollSkeleton"]
+parameters/StateMachine/playback = SubResource( 224 )
