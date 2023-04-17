@@ -13,6 +13,7 @@ var trackedVariables = {}
 var initSceneLines = []
 var reactInitLines = []
 var npcAssocs = {}
+var functions = []
 
 var theGame:MainScene
 var testingScene = false
@@ -34,6 +35,7 @@ func reset():
 	initSceneLines.clear()
 	reactInitLines.clear()
 	npcAssocs.clear()
+	functions.clear()
 
 func setCurrentRun(newcur):
 	currentRun = newcur
@@ -191,6 +193,9 @@ func _on_Button_pressed():
 				initSceneLines = theCode
 			if(commandID in ["reactInit"]):
 				reactInitLines = theCode
+			if(commandID in ["code"]):
+				functions.append_array(theCode)
+				functions.append("")
 			
 			continue
 		
@@ -304,6 +309,8 @@ func _on_Button_pressed():
 			#var toAdd = []
 			result.append(Util.join(runs[runID], "\n"))
 	
+	if(!functions.empty()):
+		result.append_array(functions)
 	result.append("")
 	
 	result.append("func _react(_action: String, _args):")

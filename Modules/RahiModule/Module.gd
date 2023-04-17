@@ -261,7 +261,7 @@ func getSkillsInfo():
 		},
 		"rahiSkillPetplay": {
 			"name": "Petplay",
-			"desc": "Allows you to train Rahi into a cute kitty pet",
+			"desc": "Allows you to train Rahi into a cute kitty/puppy pet",
 		},
 		"rahiSkillDominance": {
 			"name": "Dominance",
