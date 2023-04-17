@@ -38,7 +38,7 @@ func _run():
 		addButton("Continue", "Time to leave", "endthescene")
 
 	if(state == "petplay"):
-		playAnimation(StageScene.Duo, "stand", {npc="ferri", npcAction="allfours"})
+		playAnimation(StageScene.PuppyDuo, "stand", {npc="ferri", npcAction="stand"})
 		
 		saynn("You keep the girl pinned to the floor while she keeps resisting and growling at you. Even after using her horns to shove her head into the floor she keeps snarling. The crowd cheers, some yell ‘Break the brat! Choke her! Does anyone have a muzzle?’.")
 
