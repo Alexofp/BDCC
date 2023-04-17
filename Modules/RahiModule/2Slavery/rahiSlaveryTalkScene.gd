@@ -257,7 +257,8 @@ func _run():
 			addButton("Dominance", "Teach Rahi to be more dominant", "doactivity", ["rahiActivityDominanceScene"])
 		if(getModule("RahiModule").isSkillLearned("rahiSkillAnal")):
 			addButton("Anal training", "Train Rahi to become a buttslut", "doactivity", ["rahiActivityAnalScene"])
-
+		if(getModule("RahiModule").isSkillLearned("rahiSkillPetplay")):
+			addButton("Petplay", "Train Rahi to be a puppy/kitty", "doactivity", ["rahiActivityPetplayScene"])
 
 		addButton("Back", "Go back a menu", "")
 		
