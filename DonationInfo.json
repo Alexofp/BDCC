@@ -1,12 +1,9 @@
 {
-	"dateString": "13 of Apr 2023",
+	"dateString": "19 of Apr 2023",
 	"entries": {
 		"$1.00": [
 			{
 				"nickname": "thatoneguyatthebar"
-			},
-			{
-				"nickname": "Maxtacks"
 			},
 			{
 				"nickname": "Zaxon Rapial"
@@ -15,16 +12,25 @@
 				"nickname": "Caliban"
 			},
 			{
-				"nickname": "Kyle Oran Evans "
+				"nickname": "Maxtacks"
 			},
 			{
-				"nickname": "Shadowwall123"
+				"nickname": "Kyle Oran Evans "
 			},
 			{
 				"nickname": "Trewill"
 			},
 			{
+				"nickname": "Shadowwall123"
+			},
+			{
 				"nickname": "Lichity"
+			},
+			{
+				"nickname": "joelee29"
+			},
+			{
+				"nickname": "User#a63f196a"
 			},
 			{
 				"nickname": "Tristan Leo Roberts "
@@ -36,10 +42,10 @@
 				"nickname": "BarryRkls"
 			},
 			{
-				"nickname": "joelee29"
+				"nickname": "HANAMIアリス"
 			},
 			{
-				"nickname": "User#a63f196a"
+				"nickname": "Magetsu88"
 			},
 			{
 				"nickname": "User#d7493e93"
@@ -48,16 +54,7 @@
 				"nickname": "ghost of cum"
 			},
 			{
-				"nickname": "HANAMIアリス"
-			},
-			{
-				"nickname": "Magetsu88"
-			},
-			{
 				"nickname": "fristen"
-			},
-			{
-				"nickname": "User#7ac8d04c"
 			},
 			{
 				"nickname": "User#86fd5ea0"
@@ -71,10 +68,10 @@
 				"nickname": "Shadowfaux"
 			},
 			{
-				"nickname": "Meepyneepy"
+				"nickname": "Sami"
 			},
 			{
-				"nickname": "Sami"
+				"nickname": "Meepyneepy"
 			},
 			{
 				"nickname": "Loch55"
@@ -89,6 +86,9 @@
 				"nickname": "IzzenXAZ"
 			},
 			{
+				"nickname": "Blarg"
+			},
+			{
 				"nickname": "Steied"
 			},
 			{
@@ -98,16 +98,13 @@
 				"nickname": "Breeze"
 			},
 			{
-				"nickname": "Blarg"
-			},
-			{
 				"nickname": "Runulf"
 			},
 			{
-				"nickname": "ProtossMan"
+				"nickname": "Rac"
 			},
 			{
-				"nickname": "Rac"
+				"nickname": "ProtossMan"
 			},
 			{
 				"nickname": "laughingluke"
@@ -133,19 +130,22 @@
 				"nickname": "GoatToast"
 			},
 			{
+				"nickname": "HSiv"
+			},
+			{
+				"nickname": "Jon Guilt"
+			},
+			{
+				"nickname": "Master Puro"
+			},
+			{
 				"nickname": "User#6575234c"
 			},
 			{
 				"nickname": "Dgf"
 			},
 			{
-				"nickname": "Master Puro"
-			},
-			{
 				"nickname": "User#df1b8b36"
-			},
-			{
-				"nickname": "lewdyaccount"
 			}
 		]
 	},
@@ -154,5 +154,5 @@
 		"$5.00",
 		"$1.00"
 	],
-	"unixTime": 1681404989
+	"unixTime": 1681913178
 }
