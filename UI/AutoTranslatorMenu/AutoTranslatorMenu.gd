@@ -13,6 +13,7 @@ func _ready():
 		_i += 1
 	$VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer/EnableTranslationBox.pressed = AutoTranslation.shouldTranslate()
 	$VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer3/EnableManualTranslateButton.pressed = AutoTranslation.shouldHaveManualTranslateButton()
+	$VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer4/TranslateButtonsButton.pressed = AutoTranslation.shouldTranslateButtons
 
 func _on_CloseButton_pressed():
 	AutoTranslation.saveToFile()
@@ -30,3 +31,6 @@ func _on_LanguageList_item_selected(index):
 
 func _on_EnableManualTranslateButton_toggled(button_pressed):
 	AutoTranslation.setManualTransalteButton(button_pressed)
+
+func _on_TranslateButtonsButton_toggled(button_pressed):
+	AutoTranslation.shouldTranslateButtons = button_pressed

@@ -161,6 +161,11 @@ func updateButtons():
 		var button:Button = buttons[i]
 		button.text = option[1]
 		button.disabled = !option[0]
+		if(AutoTranslation.shouldTranslateButtons):
+			if(!button.disabled && option.size() > 5):
+				button.text = option[5]
+			if(button.disabled && option.size() > 3):
+				button.text = option[3]
 		#button.set_meta("game_option", index)
 		var _some = button.connect("pressedActually", self, "_on_option_button", [index])
 		var _some2 = button.connect("mouse_entered", self, "_on_option_button_tooltip", [index])
@@ -176,7 +181,15 @@ func _on_option_button(index):
 func _on_option_button_tooltip(index):
 	var option = options[index]
 	optionTooltip.set_is_active(true)
-	optionTooltip.set_text(option[1], option[2])
+	if(!AutoTranslation.shouldTranslateButtons):
+		optionTooltip.set_text(option[1], option[2])
+	else:
+		if(option[0] && option.size() > 6):
+			optionTooltip.set_text(option[5], option[6])
+		elif(!option[0]&& option.size() > 4):
+			optionTooltip.set_text(option[3], option[4])
+		else:
+			optionTooltip.set_text(option[1], option[2])
 
 func _on_option_button_tooltip_end():
 	optionTooltip.set_is_active(false)
@@ -379,11 +392,21 @@ func translateText(manualButton = false):
 			manualTranslateButton.visible = true
 			return
 		
+		var buttonsTexts = []
+		if(AutoTranslation.shouldTranslateButtons):
+			for optionID in options:
+				buttonsTexts.append(options[optionID][1])
+				buttonsTexts.append(options[optionID][2])
+		
 		translateStatusLabel.text = "Translating.."
 		currentTranslationTask += 1
 		var rememberedTask = currentTranslationTask
 		savedOriginalText = textOutput.bbcode_text
-		var result = AutoTranslation.translate(textOutput.text)
+		
+		var toTranslate = textOutput.text
+		if(buttonsTexts.size() > 0):
+			toTranslate += "\n"+Util.join(buttonsTexts, "\n")
+		var result = AutoTranslation.translate(toTranslate)
 	
 		if(result is GDScriptFunctionState):
 			result = yield(result, "completed")
@@ -392,6 +415,20 @@ func translateText(manualButton = false):
 			return
 		
 		if(result != null && result != ""):
+			if(buttonsTexts.size() > 0):
+				var resultSplitted = result.split("\n")
+				if(resultSplitted.size() >= buttonsTexts.size()):
+					var _i = 0
+					for optionID in options:
+						var realI = resultSplitted.size() - buttonsTexts.size() + _i*2
+						options[optionID].append(resultSplitted[realI])
+						options[optionID].append(resultSplitted[realI+1])
+						
+						_i += 1
+					resultSplitted.resize(resultSplitted.size() - buttonsTexts.size())
+					result = Util.join(resultSplitted, "\n")
+					queueUpdate()
+			
 			savedTranslatedText = result
 			if(!showOriginalCheckbox.pressed):
 				textOutput.bbcode_text = result
