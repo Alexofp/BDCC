@@ -6,6 +6,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.0.22bugfix1] - 2023-04-19
+### Added
+- A few petplay scenes with Rahi
+- Translator can now translate buttons and their descriptions
+
+### Fixed
+- The issue that made Tavi's main quest stuck after getting the drugs/door code
+- Npc's status effects are now being processed too. Fixes Rahi's sore nipples not going away
+
 ## [0.0.22] - 2023-04-13
 ### Added
 - Rahi's content got expanded into a full little story line. At least 200 pages/70k words of scenes (a novel worth of text) all about the brown kitty. It's fully completable from start to the end but the middle part is still missing some content. Since the part 1. This took all the time
@@ -228,7 +237,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Turn-based fighting
 - Initial player customization
 
-[Unreleased]: https://github.com/Alexofp/BDCC/compare/0.0.22...main
+[Unreleased]: https://github.com/Alexofp/BDCC/compare/0.0.22bugfix1...main
+[0.0.22bugfix1]: https://github.com/Alexofp/BDCC/compare/0.0.22...0.0.22bugfix1
 [0.0.22]: https://github.com/Alexofp/BDCC/compare/0.0.21...0.0.22
 [0.0.21]: https://github.com/Alexofp/BDCC/compare/0.0.20...0.0.21
 [0.0.20]: https://github.com/Alexofp/BDCC/compare/0.0.19...0.0.20
