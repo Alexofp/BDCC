@@ -27,5 +27,5 @@ func onButton(_method, _args):
 		#setFlag("TaviModule.ch2AlexTalkedTo", true)
 
 func eventCheck(_checkID, _args = []):
-	if(GM.QS.isActive("Ch3TaviQuest") && !getFlag("TaviModule.ch3CompletedDoorHack")):
+	if(GM.QS.isActive("Ch3TaviQuest") && !getFlag("TaviModule.ch3CompletedDoorHack") && getFlag("TaviModule.ch3StartedInfiltration")):
 		return {busy=true}

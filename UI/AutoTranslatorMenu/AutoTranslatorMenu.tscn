@@ -21,7 +21,7 @@ size_flags_vertical = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/ScrollContainer"]
 margin_right = 1280.0
-margin_bottom = 437.0
+margin_bottom = 465.0
 size_flags_horizontal = 3
 
 [node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer/ScrollContainer/VBoxContainer"]
@@ -102,6 +102,24 @@ margin_right = 1280.0
 margin_bottom = 24.0
 size_flags_horizontal = 3
 
+[node name="HBoxContainer4" type="HBoxContainer" parent="VBoxContainer/ScrollContainer/VBoxContainer"]
+margin_top = 441.0
+margin_right = 1280.0
+margin_bottom = 465.0
+
+[node name="Label" type="Label" parent="VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer4"]
+margin_top = 5.0
+margin_right = 638.0
+margin_bottom = 19.0
+size_flags_horizontal = 3
+text = "Translate buttons and their descriptions"
+
+[node name="TranslateButtonsButton" type="CheckBox" parent="VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer4"]
+margin_left = 642.0
+margin_right = 1280.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+
 [node name="GridContainer" type="GridContainer" parent="VBoxContainer"]
 margin_top = 620.0
 margin_right = 1280.0
@@ -118,4 +136,5 @@ text = "Save and close"
 [connection signal="toggled" from="VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer/EnableTranslationBox" to="." method="_on_EnableTranslationBox_toggled"]
 [connection signal="item_selected" from="VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer2/LanguageList" to="." method="_on_LanguageList_item_selected"]
 [connection signal="toggled" from="VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer3/EnableManualTranslateButton" to="." method="_on_EnableManualTranslateButton_toggled"]
+[connection signal="toggled" from="VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer4/TranslateButtonsButton" to="." method="_on_TranslateButtonsButton_toggled"]
 [connection signal="pressed" from="VBoxContainer/GridContainer/CloseButton" to="." method="_on_CloseButton_pressed"]

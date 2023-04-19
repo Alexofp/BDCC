@@ -3,6 +3,7 @@ extends Node
 var targetLanguage = "de"
 var shouldBeTranslating = false
 var manualTranslateButton = false
+var shouldTranslateButtons = true
 
 var translators = []
 var translatorIDS = []
@@ -168,12 +169,14 @@ func saveData():
 		"targetLanguage": targetLanguage,
 		"shouldBeTranslating": shouldBeTranslating,
 		"manualTranslateButton": manualTranslateButton,
+		"shouldTranslateButtons": shouldTranslateButtons,
 	}
 
 func loadData(data):
 	targetLanguage = SAVE.loadVar(data, "targetLanguage", "de")
 	shouldBeTranslating = SAVE.loadVar(data, "shouldBeTranslating", false)
 	manualTranslateButton = SAVE.loadVar(data, "manualTranslateButton", false)
+	shouldTranslateButtons = SAVE.loadVar(data, "shouldTranslateButtons", true)
 	
 var configFilePath = "user://autotranslation.json"
 func saveToFile():

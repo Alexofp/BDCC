@@ -14,7 +14,7 @@ states/Hogtied-loop/position = Vector2( 563, 159 )
 start_node = "Hogtied-loop"
 
 [sub_resource type="AnimationNodeBlendTree" id=3]
-graph_offset = Vector2( -191, -72 )
+graph_offset = Vector2( -237.757, -185.333 )
 nodes/StateMachine/node = SubResource( 2 )
 nodes/StateMachine/position = Vector2( 212, 126 )
 nodes/output/position = Vector2( 540, 160 )

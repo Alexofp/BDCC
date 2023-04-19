@@ -115,3 +115,29 @@ func stateMachineTravel(thedoll, state_machine, animID):
 	else:
 		return false
 	return true
+
+
+func stateMachineTravelPuppy(_thedoll, state_machine, animID):
+	#var args = []
+	if(animID is Array):
+		#args = animID
+		animID = animID[0]
+	
+	if(animID == ""):
+		pass
+	elif(animID == "stand"):
+		state_machine.travel("PuppyIdle-loop")
+	elif(animID == "walk"):
+		state_machine.travel("PuppyWalk-loop")
+	elif(animID == "sit"):
+		state_machine.travel("PuppySit-loop")
+	elif(animID == "paw"):
+		state_machine.travel("PuppySitPaw-loop")
+	elif(animID == "back"):
+		state_machine.travel("PuppyOnBack-loop")
+	elif(animID == "sad"):
+		state_machine.travel("PuppyIdleSad-loop")
+	else:
+		return false
+	
+	return true

@@ -244,6 +244,8 @@ func _run():
 		saynn("How do you wanna punish the kitty.")
 		
 		addButton("Tie up", "Tie kitty up", "dopunish", ["rahiPunishmentTyingUpScene"])
+		if(getModule("RahiModule").isSkillLearned("rahiSkillPetplay")):
+			addButton("Forced petplay", "(Petplay) Force Rahi to wear puppy equipment and give her walkies", "dopunish", ["rahiPunishmentForcedPetplayScene"])
 		if(getModule("RahiModule").isSkillLearned("rahiSkillWatersports")):
 			addButton("Piss toilet", "(Watersports) Make Rahi into a piss toilet for you", "dopunish", ["rahiPunishmentPissToiletScene"])
 		addButton("Back", "Go back a menu", "")
@@ -257,7 +259,8 @@ func _run():
 			addButton("Dominance", "Teach Rahi to be more dominant", "doactivity", ["rahiActivityDominanceScene"])
 		if(getModule("RahiModule").isSkillLearned("rahiSkillAnal")):
 			addButton("Anal training", "Train Rahi to become a buttslut", "doactivity", ["rahiActivityAnalScene"])
-
+		if(getModule("RahiModule").isSkillLearned("rahiSkillPetplay")):
+			addButton("Petplay", "Train Rahi to be a puppy/kitty", "doactivity", ["rahiActivityPetplayScene"])
 
 		addButton("Back", "Go back a menu", "")
 		

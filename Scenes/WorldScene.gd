@@ -73,6 +73,7 @@ func _react(_action: String, _args):
 	
 	if(_action == "go"):
 		playAnimation(StageScene.Solo, "walk")
+		#playAnimation(StageScene.PuppySolo, "walk")
 		#playAnimation(StageScene.Solo, "custom", {anim={"Arm.L":{"a":[-0,0,-3.02]},"Arm.R":{"a":[-0,0,2.87]},"Chest":{"a":[-0,0,0.26]},"Hips":{"a":[-0,0,2.84],"p":[0,0.52,0]},"LegDown.R":{"a":[-0,0,-1.33]},"LegUpper.L":{"a":[-0,0,0.1]},"LegUpper.R":{"a":[-0,0,0.96]},"Tail1":{"a":[-0,0,-0.33]},"Tail2":{"a":[-0,0,-0.38]},"Tail3":{"a":[-0,0,-0.39]},"Tail4":{"a":[-0,0,-0.28]},"Tail5":{"a":[-0,0,-0.34]}}  })
 		GM.pc.setLocation(GM.world.applyDirectionID(GM.pc.location, _args[0]))
 		processTime(30)

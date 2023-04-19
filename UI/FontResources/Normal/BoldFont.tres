@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Fonts/Titillium-Bold.otf" type="DynamicFontData" id=1]
 
-[sub_resource type="DynamicFontData" id=1]
+[sub_resource type="DynamicFontData" id=8]
 font_path = "res://Fonts/SourceCodePro/SourceCodePro-Bold.otf"
 
 [resource]
@@ -10,4 +10,4 @@ size = 24
 use_mipmaps = true
 use_filter = true
 font_data = ExtResource( 1 )
-fallback/0 = SubResource( 1 )
+fallback/0 = SubResource( 8 )
