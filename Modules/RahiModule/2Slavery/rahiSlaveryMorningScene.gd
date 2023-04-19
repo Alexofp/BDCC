@@ -22,6 +22,7 @@ func _reactInit():
 	selectedRahiState = RNG.pick(possible)
 	setState(selectedRahiState)
 	playAnimation(StageScene.Duo, "stand", {npc="rahi"})
+	addCharacter("rahi")
 
 func _run():
 	if(state == ""):
