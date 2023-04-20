@@ -161,7 +161,7 @@ func updateButtons():
 		var button:Button = buttons[i]
 		button.text = option[1]
 		button.disabled = !option[0]
-		if(AutoTranslation.shouldTranslateButtons):
+		if(AutoTranslation.shouldTranslateButtons && !showOriginalCheckbox.pressed):
 			if(!button.disabled && option.size() > 5):
 				button.text = option[5]
 			if(button.disabled && option.size() > 3):
@@ -181,7 +181,7 @@ func _on_option_button(index):
 func _on_option_button_tooltip(index):
 	var option = options[index]
 	optionTooltip.set_is_active(true)
-	if(!AutoTranslation.shouldTranslateButtons):
+	if(!AutoTranslation.shouldTranslateButtons || showOriginalCheckbox.pressed):
 		optionTooltip.set_text(option[1], option[2])
 	else:
 		if(option[0] && option.size() > 6):
@@ -396,7 +396,7 @@ func translateText(manualButton = false):
 		if(AutoTranslation.shouldTranslateButtons):
 			for optionID in options:
 				buttonsTexts.append(options[optionID][1])
-				buttonsTexts.append(options[optionID][2])
+				buttonsTexts.append(options[optionID][2].replace("\n", "^"))
 		
 		translateStatusLabel.text = "Translating.."
 		currentTranslationTask += 1
@@ -414,6 +414,8 @@ func translateText(manualButton = false):
 		if(rememberedTask != currentTranslationTask):
 			return
 		
+		if(result == null || result == ""):
+			translateStatusLabel.text = "Failed to translate"
 		if(result != null && result != ""):
 			if(buttonsTexts.size() > 0):
 				var resultSplitted = result.split("\n")
@@ -422,7 +424,7 @@ func translateText(manualButton = false):
 					for optionID in options:
 						var realI = resultSplitted.size() - buttonsTexts.size() + _i*2
 						options[optionID].append(resultSplitted[realI])
-						options[optionID].append(resultSplitted[realI+1])
+						options[optionID].append(resultSplitted[realI+1].replace("^", "\n"))
 						
 						_i += 1
 					resultSplitted.resize(resultSplitted.size() - buttonsTexts.size())
@@ -447,6 +449,7 @@ func _on_ShowOriginalCheckbox_pressed():
 		textOutput.bbcode_text = savedOriginalText
 	else:
 		textOutput.bbcode_text = savedTranslatedText
+	queueUpdate()
 
 
 func _on_ManualTranslateButton_pressed():
