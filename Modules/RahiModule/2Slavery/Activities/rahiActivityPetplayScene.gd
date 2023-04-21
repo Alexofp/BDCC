@@ -422,6 +422,11 @@ func _run():
 
 		addButton("Circle cell", "Give Rahi some walkies around her cell", "pup_cell")
 		addButton("Fetch", "Play fetch with Rahi", "pup_fetch")
+		if (getModule("RahiModule").isSkillLearned("rahiSkillSex")):
+			if (GM.pc.hasReachablePenis()):
+				addButton("Breed Rahi", "(Sex) Fuck your pet", "pup_breed_rahi")
+			if (GM.pc.canWearStrapon()):
+				addButton("Strapon Rahi", "(Sex) Fuck your pet with a strapon", "pup_strapon_rahi")
 	if(state == "pup_cell"):
 		playAnimation(StageScene.PuppyDuo, "stand", {npc="rahi", npcAction="walk", npcBodyState={naked=true}})
 		saynn("Might as well let Rahi get used to her restraints. You lean down to her collar and clip a leash to it.")
@@ -529,6 +534,104 @@ func _run():
 		saynn("[say=rahi]Wuf-f..[/say]")
 
 		addButton("Continue", "That was fun", "endthescene")
+	if(state == "pup_breed_rahi"):
+		playAnimation(StageScene.PuppySexAllFours, "tease", {npc="rahi", npcBodyState={naked=true}, bodyState={exposedCrotch=true, hard=true}})
+		saynn("As Rahi looks up at you with pleading eyes, you reach your hand out and grab her by the collar and pull close, causing your kitty to almost fall.")
+
+		saynn("[say=pc]Let's see how well my puppy can handle a rough touch. And a rough breeding.[/say]")
+
+		saynn("[say=rahi]Wruff?..[/say]")
+
+		saynn("You growl softly before taking a stop behind Rahi, your hands landing on her tail and pulling it out of the way, causing the pup's fur to stand.")
+
+		saynn("Rahi gasps in surprise as your palms tease her exposed pussy, your fingers exploring her wetness and playing with the little sensitive clit. Puppy squirms and moan under your touch, her body quivering as much as the leather restraints allow.")
+
+		saynn("After that small amount of teasing your pup is already all huffy and needy, her pussy producing an inviting scent of a horny feline. The scent that makes you quite aroused as well..")
+
+		saynn("[say=pc]A bitch in heat. Let me help you with that.[/say]")
+
+		addButton("Fuck her", "Do the thing", "pup_breed_fuck")
+	if(state == "pup_breed_fuck"):
+		playAnimation(StageScene.PuppySexAllFours, "sex", {npc="rahi", npcBodyState={naked=true}, bodyState={exposedCrotch=true, hard=true}})
+		saynn("One of your hands slips off Rahi's feline tail and instead grabs onto her ponytail, pulling it tight. She knows what's coming.. but she is powerless to do anything about it..")
+
+		saynn("With a sudden thrust, you enter Rahi, your {pc.penis} spreading her wet folds and sliding inside, causing kitty to produce a cry. You start pounding her slit, using your pup like a toy. The more you tug on her ponytail while thrusting into her wet and willing pussy, the more she begins to pant and moan.")
+
+		saynn("[say=pc]Such a slutty little puppy. A breeding toy for me to enjoy.[/say]")
+
+		saynn("[say=rahi]R-ruff-f..[/say]")
+
+		addButton("Faster", "Fuck her faster", "pup_breed_faster")
+	if(state == "pup_breed_faster"):
+		playAnimation(StageScene.PuppySexAllFours, "fast", {npc="rahi", npcBodyState={naked=true}, bodyState={exposedCrotch=true, hard=true}})
+		saynn("You let go of Rahi's ponytail and instead grip her tail tightly, pulling on it while slamming your hips against hers with even more force, your shaft massaging her g-spot and bringing the pup closer and closer to her peak. The slaps echo through the cell as Rahi's body trembles with each powerful thrust.")
+
+		saynn("Her tongue lolls out of her mouth as she starts panting like a dog, her eyes rolling up from this feeling of pure ecstasy. With each passing moment, you can feel Rahi getting closer to climax, her pussy walls getting tighter around your twitching member.")
+
+		addButton("Cum inside", "Breed Rahi", "pup_breed_cum")
+	if(state == "pup_breed_cum"):
+		playAnimation(StageScene.PuppySexAllFours, "inside", {npc="rahi", npcBodyState={naked=true}, bodyState={exposedCrotch=true, hard=true}})
+		saynn("Finally, with a deep groan, you shove your {pc.penis} until its tip kisses Rahi's womb entrance and cum inside her. Rahi can feel your hot seed filling her up.. she whimpers softly from pleasure and this feeling of total submission. Her pussy gripping your throbbing shaft and squeezing every last drop of {pc.cum} out of it.")
+
+		saynn("[say=pc]Ngh~.[/say]")
+
+		saynn("Rahi is panting heavily, with your shaft still inside her. You savor this feeling of Rahi's pussy for a bit longer before finally pulling out, leaving her stuffed slit empty and used.")
+
+		saynn("Seed starts dripping out of her and down her thighs, marking her as your property.")
+
+		saynn("[say=rahi]H-huuff..[/say]")
+
+		addButton("Enough", "that was lewd", "endthescene")
+	if(state == "pup_strapon_rahi"):
+		playAnimation(StageScene.PuppySexAllFours, "tease", {npc="rahi", npcBodyState={naked=true}, bodyState={exposedCrotch=true, hard=true}})
+		saynn("As Rahi looks up at you with pleading eyes, you reach your hand out and grab her by the collar and pull close, causing your kitty to almost fall.")
+
+		saynn("[say=pc]Let's see how well my puppy can handle a rough touch. And a rough fucking.[/say]")
+
+		saynn("[say=rahi]Wruff?..[/say]")
+
+		saynn("You growl softly before taking a stop behind Rahi, your hands landing on her tail and pulling it out of the way, causing the pup's fur to stand.")
+
+		saynn("Rahi gasps in surprise as your palms tease her exposed pussy, your fingers exploring her wetness and playing with the little sensitive clit. Puppy squirms and moan under your touch, her body quivering as much as the leather restraints allow.")
+
+		saynn("After that small amount of teasing your pup is already all huffy and needy, her pussy producing an inviting scent of a horny feline. The scent that makes you quite aroused as well..")
+
+		saynn("[say=pc]A bitch in heat. Let me help you with that.[/say]")
+
+		saynn("You go ahead and grab one of strapons before securing it around your waist. Kitty's eyes widen. You quickly pour some lube over it.")
+
+		addButton("Fuck her", "Do the thing", "pup_strapon_fuck")
+	if(state == "pup_strapon_fuck"):
+		playAnimation(StageScene.PuppySexAllFours, "sex", {npc="rahi", npcBodyState={naked=true}, bodyState={exposedCrotch=true, hard=true}})
+		saynn("One of your hands slips off Rahi's feline tail and instead grabs onto her ponytail, pulling it tight. She knows what's coming.. but she is powerless to do anything about it..")
+
+		saynn("With a sudden thrust, you enter Rahi, your fake rubber member spreading her wet folds and sliding inside, causing kitty to produce a cry. You start pounding her slit, using your pup like a toy. The more you tug on her ponytail while thrusting into her wet and willing pussy, the more she begins to pant and moan.")
+
+		saynn("[say=pc]Such a slutty little puppy. A breeding toy for me to enjoy.[/say]")
+
+		saynn("[say=rahi]R-ruff-f..[/say]")
+
+		addButton("Faster", "Fuck her faster", "pup_strapon_faster")
+	if(state == "pup_strapon_faster"):
+		playAnimation(StageScene.PuppySexAllFours, "fast", {npc="rahi", npcBodyState={naked=true}, bodyState={exposedCrotch=true, hard=true}})
+		saynn("You let go of Rahi's ponytail and instead grip her tail tightly, pulling on it while slamming your hips against hers with even more force, your strapon massaging her g-spot and bringing the pup closer and closer to her peak. The slaps echo through the cell as Rahi's body trembles with each powerful thrust.")
+
+		saynn("Her tongue lolls out of her mouth as she starts panting like a dog, her eyes rolling up from this feeling of pure ecstasy. With each passing moment, you can feel Rahi getting closer to climax, her pussy walls getting tighter around your shiny member. Even though it's just a strapon, the sensations that Rahi receives are quite close to a real thing, surely enough to satisfy a puppy in heat.")
+
+		addButton("Make her cum", "Might as well", "pup_strapon_cum")
+	if(state == "pup_strapon_cum"):
+		playAnimation(StageScene.PuppySexAllFours, "inside", {npc="rahi", npcBodyState={naked=true}, bodyState={exposedCrotch=true, hard=true}})
+		saynn("Finally, when you feel that Rahi is at her edge, you shove the rubber cock inside until its tip kisses Rahi's womb entrance and suddenly starts stuffing her with cum lube. Rahi can feel the slimy sticky white stuff filling her up.. she whimpers softly from pleasure and this feeling of total submission. Her pussy gripping your rubber shaft and squeezing every last drop of lube out of it.")
+
+		saynn("[say=pc]Good~.[/say]")
+
+		saynn("Rahi is panting heavily, with your rubber shaft still inside her. You let Rahi enjoy this toy inside her pussy for a bit longer before finally pulling out, leaving her stuffed slit empty and used.")
+
+		saynn("Fake cum starts dripping out of her and down her thighs, marking her as your property.")
+
+		saynn("[say=rahi]H-huuff..[/say]")
+
+		addButton("Enough", "that was lewd", "endthescene")
 func succChance(chanceMin = 40.0, chanceMax = 80.0, maxLevel = 15, minLevel = 0):
 	var petLevel = getModule("RahiModule").getSkillScore("rahiSkillPetplay")
 	var levelProg = clamp(float(petLevel - minLevel) / (maxLevel - minLevel), 0.0, 1.0)
@@ -592,9 +695,44 @@ func _react(_action: String, _args):
 	if(_action == "pup_fetch"):
 		processTime(20*60)
 
+	if(_action == "pup_breed_rahi"):
+		getModule("RahiModule").advanceSkill("rahiSkillSex")
+
+	if(_action == "pup_strapon_rahi"):
+		getModule("RahiModule").advanceSkill("rahiSkillSex")
+		var straponTypes = ["Strapon", "StraponCanine", "StraponDragon", "StraponFeeldoe", "StraponFeline"]
+		var strapon = GlobalRegistry.createItem(RNG.pick(straponTypes))
+		var fluids = strapon.getFluids()
+		fluids.addFluid("CumLube", RNG.randi_range(3, 5)*100.0)
+		GM.pc.getInventory().equipItem(strapon)
+
 	if(_action == "pup_fingerball"):
 		processTime(5*60)
 		getModule("RahiModule").advanceSkill("rahiSkillSex")
+
+	if(_action == "pup_breed_fuck"):
+		processTime(6*60)
+
+	if(_action == "pup_breed_faster"):
+		processTime(3*60)
+
+	if(_action == "pup_breed_cum"):
+		processTime(3*60)
+		getCharacter("rahi").cummedInVaginaBy("pc")
+		GM.pc.orgasmFrom("rahi")
+		GM.pc.addSkillExperience(Skill.SexSlave, 30, "rahi_breed")
+
+	if(_action == "pup_strapon_fuck"):
+		processTime(6*60)
+
+	if(_action == "pup_strapon_faster"):
+		processTime(3*60)
+
+	if(_action == "pup_strapon_cum"):
+		processTime(3*60)
+		getCharacter("rahi").cummedInVaginaBy("pc", FluidSource.Strapon)
+		GM.pc.orgasmFrom("rahi")
+		GM.pc.addSkillExperience(Skill.SexSlave, 30, "rahi_breed")
 
 	setState(_action)
 
