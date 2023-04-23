@@ -121,6 +121,7 @@ func _init():
 		"res://Modules/RahiModule/2Slavery/Activities/rahiActivityDominanceScene.gd",
 		"res://Modules/RahiModule/2Slavery/Activities/rahiActivityAnalScene.gd",
 		"res://Modules/RahiModule/2Slavery/Activities/rahiActivityPetplayScene.gd",
+		"res://Modules/RahiModule/2Slavery/Activities/rahiActivityPetplayWalkiesScene.gd",
 		]
 	characters = [
 		"res://Modules/RahiModule/RahiCharacter.gd",

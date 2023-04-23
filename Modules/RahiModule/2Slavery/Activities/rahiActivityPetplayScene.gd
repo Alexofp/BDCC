@@ -14,6 +14,10 @@ func _run():
 		addButton("Kitty training", "A simple training session for Rahi", "start_simple")
 		if (petLevel > 6):
 			addButton("Puppy training", "An advanced training session for Rahi where she is made to wear puppy restraints", "puppy_training")
+			if (petLevel > 9):
+				addButton("Walkies", "Take Rahi out on walkies", "start_walkies")
+			else:
+				addDisabledButton("Walkies", "Rahi needs to be more skilled at petplay for this")
 		else:
 			addDisabledButton("Puppy training", "Rahi needs to be more skilled at petplay for this")
 		addButton("Never mind", "You changed your mind", "cancelactivity")
@@ -792,6 +796,12 @@ func _react(_action: String, _args):
 	if(_action == "puppy_training"):
 		processTime(10*60)
 		getModule("RahiModule").advanceSkill("rahiSkillPetplay")
+
+	if(_action == "start_walkies"):
+		getModule("RahiModule").advanceSkill("rahiSkillPetplay")
+		runScene("rahiActivityPetplayWalkiesScene")
+		endScene()
+		return
 
 	if(_action == "cancelactivity"):
 		increaseFlag("RahiModule.rahiTired", -1)

@@ -140,6 +140,7 @@ population = 3
 
 [node name="MainHallRoom27" parent="." index="15" instance=ExtResource( 2 )]
 position = Vector2( 0, 384 )
+roomName = "Corridor"
 roomDescription = "A little corridor connecting the main hall and the garden"
 population = 3
 
