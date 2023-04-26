@@ -24,10 +24,10 @@ func _run():
 
 		saynn("Where do you wanna go?")
 
+		addButton("Waterfall", "Visit the waterfall area", "go_waterfall")
 		addButton("Yard", "Visit the yard area", "go_yard")
 		addButton("Canteen", "Go eat some food", "go_canteen")
 		addButton("Shower", "A good place to wash your pet", "go_shower")
-		addButton("Gym", "A place for some exercises", "go_gym")
 	if(state == "start_walkies"):
 		saynn("You and Rahi begin your journey.")
 
@@ -146,8 +146,10 @@ func _run():
 	if(state == "yard_pick"):
 		saynn("You and Rahi have arrived at the yard. What event do you want to happen?")
 
-		addButton("Random", "You don't really mind anything", "yard_random")
+		if (false):
+			addButton("Random", "You don't really mind anything", "yard_random")
 		addButton("Fetch", "Rahi finds a stick and wants to play fetch", "yard1")
+		addButton("Urge to pee", "Rahi suddenly wants to pee", "yard2")
 	if(state == "yard1"):
 		saynn("You and Rahi follow the stone pathways of the yard. The air here is always so fresh and all the greenery helps to calm your and your pet's minds.")
 
@@ -453,10 +455,162 @@ func _run():
 		saynn("The whole way back your pet is blushing, consciousness of her wet fucked slit that she can't do anything about.")
 
 		addButton("Continue", "See what happens next", "returntocellremovestrapon")
+	if(state == "yard2"):
+		playAnimation(StageScene.PuppyDuo, "stand", {npc="rahi", npcAction="sad", npcBodyState={naked=true}})
+		saynn("You take a nice walk through the prison yard. This yard is not as.. sandy.. as yards usually. There is actually a lot of greenery, tall green bushes that act like walls, separating all the stone pathways, creating fancy green corridors.")
+
+		saynn("Your leashed Rahi walks alongside you, still wearing her puppy restraints that force her to crawl on her elbows and knees.")
+
+		saynn("Suddenly, your pet stops in her tracks and starts whimpering quietly. You turn around and look down at her.")
+
+		saynn("[say=pc]What's wrong, pup?[/say]")
+
+		saynn("Rahi whines and makes all sorts of puppy noises, trying to avoid breaking out of character but at same time trying to tell you something. You look at her butt and notice that she rubs her legs against each other and looks up at you with very pleading eyes.")
+
+		saynn("[say=pc]Do you want to pee, pup?[/say]")
+
+		saynn("[say=rahi]Wruf!.. Huff-f..[/say]")
+
+		saynn("That sounded like yes. Huh.")
+
+		saynn("[say=pc]Can you hold it until we return?[/say]")
+
+		saynn("You can hear more whining from Rahi. Yeah, she is about to pee herself.")
+
+		saynn("You look around. There are some bushes there that Rahi can use. You wonder if you should control everything or let Rahi do it alone.")
+
+		addButton("Don't watch", "Just let Rahi pee alone", "yard2_alone")
+		addButton("Guard her", "Make sure everything goes smooth", "yard2_watch")
+	if(state == "yard2_alone"):
+		playAnimation(StageScene.PuppyDuo, "stand", {npc="rahi", npcAction="stand", npcBodyState={naked=true}})
+		saynn("[say=pc]Alright. Let's find a spot for you.[/say]")
+
+		saynn("Rahi's cute eyes light up with hope as she crawls eagerly alongside you. After some time, you find a good secluded area behind some bushes.")
+
+		saynn("[say=pc]That's the best you gonna get, pup.[/say]")
+
+		saynn("You walk Rahi there and stand back, letting her crawl behind the bush. She quietly does her business and returns back to you, wiggling her rear playfully.")
+
+		saynn("[say=pc]All good?[/say]")
+
+		saynn("[say=rahi]Ruff![/say]")
+
+		saynn("You give Rahi some headpats and then take her leash before resuming the walkies.")
+
+		saynn("After you explore most of the yard area, you just return back to Rahi's cell.")
+
+		addButton("Continue", "See what happens next", "returntocell")
+	if(state == "yard2_watch"):
+		saynn("[say=pc]Alright. Let's find a spot for you.[/say]")
+
+		saynn("Rahi's cute eyes light up with hope as she crawls eagerly alongside you. After some time, you find a good secluded area behind some bushes.")
+
+		saynn("[say=pc]That's the best you gonna get, pup.[/say]")
+
+		saynn("You bring your pet there and.. just stand nearby. Rahi sees your stare and blushes deeply, whining and rubbing her legs against each other more urgently.")
+
+		saynn("[say=pc]What? Pets pee in public, no one minds that. I'm guarding so no one steals you.[/say]")
+
+		saynn("But Rahi just whines louder.")
+
+		if (getModule("RahiModule").isSkillLearned("rahiSkillWatersports")):
+			saynn("Since you've been training your kitty to enjoy activities related to pee.. maybe you can.. encourage her a little?")
+
+		else:
+			saynn("Maybe you need to start training your kitty to enjoy watersports for her to feel less ashamed.")
+
+		addButton("Turn away", "Let Rahi have at least some privacy", "yard2_turnaway")
+		if (getModule("RahiModule").isSkillLearned("rahiSkillWatersports")):
+			addButton("Tickle her", "(Watersports) Help Rahi pee herself by tickling her pussy", "yard2_tickle")
+	if(state == "yard2_turnaway"):
+		playAnimation(StageScene.PuppyDuo, "stand", {npc="rahi", npcAction="stand", npcBodyState={naked=true}})
+		saynn("[say=pc]Alright, puppy. Make it quick.[/say]")
+
+		saynn("You decide to give your puppy some privacy and.. just turn away. You are still standing near her so Rahi makes some confused noises. When she tries to crawl away from you, the leash in your hand prevents her.")
+
+		saynn("[say=rahi]Huff-f..[/say]")
+
+		saynn("It seems your pet can no longer endure the urge. You can't see her doing it.. but you sure can hear the sound of her pee hitting the ground while Rahi reliefs herself.. like a dog.")
+
+		saynn("After she is done, you turn around and see a very embarrassed pet. Rahi lowers her head, unable to meet your gaze. To help ease her discomfort, you gently lift her chin and lean in to leave a little reassuring kiss on her forehead.")
+
+		saynn("[say=pc]Good girl.[/say]")
+
+		saynn("Feeling a little better, Rahi follows you as you continue your walk through the yard.")
+
+		saynn("After you explore most of the yard area, you just return back to Rahi's cell.")
+
+		addButton("Continue", "See what happens next", "returntocell")
+	if(state == "yard2_tickle"):
+		saynn("You can't watch your puppy struggle with the urge anymore, you decide to help her. Rahi lets out a surprised yelp as you gently take hold of her tail and lift it, exposing her cute fluffy butt and her private bits, including her pink pussy.")
+
+		saynn("You bring your hand to her sensitive folds.. and use two digits to spread them, revealing more of the pinkness. Rahi whines confused.")
+
+		saynn("But as soon as you begin to use the third finger to tickle her little pee hole.. she suddenly understands your intentions. Your pet starts squirming and trying to pull her butt away but you are relentless, abusing her vulnerable spot. You can hear her whine more and more.")
+
+		saynn("And before she knows it, a yellow stream emerges from her slit and hits the ground. Rahi is peeing herself in front of you, her cheeks couldn't be more red.")
+
+		saynn("[say=pc]Nothing to be ashamed of, pet. You're just like a real puppy.[/say]")
+
+		saynn("You can't help but to smile softly, admiring the view of Rahi creating a puddle behind her. Once she finished relieving herself you bring that same hand that rubbed her pussy towards her mouth.")
+
+		saynn("[say=pc]Clean after yourself.[/say]")
+
+		saynn("Rahi sniffs your fingers and huffs. But seeing your strict expression makes her part her lips and take your digits into her mouth, her feline tongue getting dragged over them, cleaning off any urine that might have landed on them.")
+
+		saynn("[say=pc]See, it wasn't so hard. You're such a good girl, I'm proud.[/say]")
+
+		saynn("After she was done licking your fingers, it was time to return back to Rahi's cell.")
+
+		addButton("Enough", "See what happens next", "returntocell")
+		if (GM.pc.hasReachablePenis() || GM.pc.hasReachableVagina() || GM.pc.isWearningChastityCage()):
+			addButton("Pee on her", "You kinda wanna pee too now..", "yard2_peeonrahi")
+	if(state == "yard2_peeonrahi"):
+		playAnimation(StageScene.PuppyPinned, "pinned", {npc="rahi", npcBodyState={naked=true}, bodyState={exposedCrotch=true, hard=true}})
+		saynn("But, the more you think about it.. the more you realize that you also wanna pee. Rahi was crawling on all fours towards the stone path but you hold the leash and prevent her. As your pet looks up at you.. she can notice a mischievous glint in your eyes..")
+
+		saynn("[say=pc]You know what, pet? I kinda have to go too.[/say]")
+
+		saynn("Before Rahi could react, you pull on the leash, causing her to collapse onto her belly. As you pin her to the ground with your foot, Rahi whines.")
+
+		saynn("[say=pc]This is for being so stubborn.[/say]")
+
+		if (GM.pc.hasReachablePenis() || GM.pc.isWearningChastityCage()):
+			saynn("You expose your {pc.penis} and begin waiting for the urge to happen. And soon enough, Rahi feels warmth spreading against her fur as a stream of yellow piss begins washing over her.")
+
+		else:
+			saynn("You quickly expose your pussy and begin waiting for the urge to happen. And soon enough, Rahi feels warmth spreading against her fur as a stream of yellow piss begins washing over her.")
+
+		saynn("[say=pc]And this is.. because you're a piss-slut.[/say]")
+
+		saynn("As this is happening, Rahi closes her eyes and her mouth, squirming while you mark her. The smell is incredibly gross, she can't help but to let out a quiet whimper as you continue to piss all over her body.. her ass and tail.. her face.")
+
+		saynn("The longer you do it, the more submissive Rahi gets. She stops resisting and just lets you force that piss scent into her fur.")
+
+		saynn("After you finally finish emptying your bladder.. Rahi opens her eyes and looks at the yellow puddle under her paws.. Some yellow drops are still dripping from her fur.")
+
+		saynn("[say=pc]Feels so much better, after marking my property.[/say]")
+
+		saynn("Rahi's eyes look very sorry, she avoids any eye contact with you.")
+
+		saynn("[say=pc]Well, let's go back now.[/say]")
+
+		saynn("You tug on the leash, making your pup get out of the secluded spot. As you continue your walkies, Rahi is constantly conscious about how she looks and smells.. But she doesn't dare to disobey.")
+
+		addButton("Continue", "See what happens next", "returntocell")
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
 		endScene()
+		return
+
+	if(_action == "go_waterfall"):
+		var startLocation = "cellblock_orange_nearcell"
+		pickedLoc = "waterfall"
+		endLocation = "yard_waterfall"
+		path = GM.world.calculatePath(startLocation, endLocation)
+		path.remove(0)
+		setState("start_walkies")
 		return
 
 	if(_action == "go_yard"):
@@ -481,7 +635,10 @@ func _react(_action: String, _args):
 		if(path.size() == 0):
 			#setState("arrived")
 			if(pickedLoc == "yard"):
-				setState("yard_pick")
+				setState("yard2")
+			if(pickedLoc == "waterfall"):
+				setState("yard1")
+		
 			return
 		
 		if(RNG.chance(30)):
@@ -591,6 +748,14 @@ func _react(_action: String, _args):
 		processTime(5*60)
 		GM.pc.orgasmFrom("rahi")
 		GM.pc.addSkillExperience(Skill.SexSlave, 30, "rahi_vaginal")
+
+	if(_action == "yard2_tickle"):
+		processTime(3*60)
+		getModule("RahiModule").advanceSkill("rahiSkillWatersports")
+
+	if(_action == "yard2_peeonrahi"):
+		processTime(5*60)
+		getCharacter("rahi").pissedOnBy("pc")
 
 	setState(_action)
 
