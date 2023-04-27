@@ -1964,6 +1964,11 @@ func getOutsideMessinessLevel():
 	else:
 		return 5
 
+func isCoveredInFluids():
+	if(bodyFluids.isEmpty()):
+		return false
+	return true
+
 func afterTakingAShower():
 	#addStamina(30)
 	clearBodyFluids()

@@ -598,6 +598,106 @@ func _run():
 		saynn("You tug on the leash, making your pup get out of the secluded spot. As you continue your walkies, Rahi is constantly conscious about how she looks and smells.. But she doesn't dare to disobey.")
 
 		addButton("Continue", "See what happens next", "returntocell")
+	if(state == "shower1"):
+		playAnimation(StageScene.PuppySexOral, "tease", {npc="rahi", npcBodyState={naked=true}, bodyState={naked=true}})
+		saynn("You walk into the dressing room and prepare, taking off any clothes until you are naked. Luckily, Rahi is already naked, so you just take her leash and walk into the space where all the showerheads are. Your pet carefully peeks her muzzle from behind the corner first, seeing if anyone is there. But luckily, everyone seems to be busy.")
+
+		saynn("You bring her under one of the showers and show Rahi a little bar of soap that you have saved just for this occasion. She barks softly at you and braces for water, shivering slightly.")
+
+		saynn("[say=pc]Let's wash you, pup.[/say]")
+
+		if (getCharacter("rahi").isCoveredInFluids()):
+			saynn("And a wash she does need indeed. The more you look at Rahi, the more you see signs of {rahi.bodyMess} on her body.")
+
+		else:
+			saynn("You can't really spot any signs of lewd fluids on your pet but after walking on all fours for so long she surely has accumulated some dirt and dust on her.")
+
+		saynn("As you turn the faucet, a stream of cold refreshing water hits you and your pet. Rahi yelps at first but after living here for so long, you kinda have to get used to that.")
+
+		saynn("You grab the bar of soap and start lathering up Rahi's short fur, mostly focusing on rubbing and massaging her body. You do it quite thoroughly though, making multiple passes. At the same time the water washes you as well. It's just that you're more focused on your pet.")
+
+		saynn("Rahi lets out little whimpers of pleasure as your {pc.masc} hands work on her, the water and soap gradually make her feel calm and remove any tension in her.")
+
+		saynn("After washing Rahi's back and her belly, you move on and soap her ponytail, your digits dividing the hair strands and gently scratch at her head. As the water slowly washes the soap off, you move down to her hind legs..")
+
+		saynn("After you slide your hands over her tail, carefully stroking it, she obediently moves it out of the way, exposing her private bits to you.")
+
+		saynn("The running water and the gentle massage arouses Rahi, she can't help but to start producing little moans of pleasure as you wash and rub her sensitive areas. You run your digits over her wet pussy and tease her clit until Rahi is panting and whimpering with desire.")
+
+		addButton("Finish up", "You've done showering", "shower1_finishup")
+		if (getCharacter("rahi").hasEffect(StatusEffect.HasCumInsideVagina) || getCharacter("rahi").hasEffect(StatusEffect.HasCumInsideAnus)):
+			addButton("Clean inside", "Remove cum or other fluids from inside Rahi's holes", "shower1_cleaninside")
+		else:
+			addDisabledButton("Clean inside", "Rahi doesn't have any cum or other fluids inside her holes")
+		if (getModule("RahiModule").isSkillLearned("rahiSkillExhibit")):
+			addButton("Feet play", "(Exhibitionism) Make Rahi cum with your foot while others are watching", "shower1_feetplay")
+	if(state == "shower1_finishup"):
+		playAnimation(StageScene.PuppyDuo, "stand", {npc="rahi", npcAction="stand", npcBodyState={naked=true}})
+		saynn("Finally, after thoroughly washing Rahi's body, you turn off the water and then use a soft towel to dry her off. While you do that, Rahi's fur stands on its ends, making her look.. adorably puffy. As you pat her head affectionately, she wags her tail in delight.")
+
+		saynn("[say=pc]Good puppy.[/say]")
+
+		saynn("[say=rahi]Ruff..[/say]")
+
+		saynn("She still seems quite aroused after your teasing. But it's time to go back. You grab her leash and proceed to walk your pet back to her cell.")
+
+		addButton("Continue", "See what happens next", "returntocell")
+	if(state == "shower1_cleaninside"):
+		playAnimation(StageScene.PuppySexAllFours, "tease", {npc="rahi", npcBodyState={naked=true}, bodyState={naked=true}})
+		saynn("You weren't done yet. You notice that some lewd stuff is leaking out of Rahi and have decided to fix that.")
+
+		saynn("[say=pc]Stay still, pup.[/say]")
+
+		saynn("With puppy restraints still on, Rahi obediently complies, before letting out a whimper as you suddenly spread her buttcheeks apart. The shower water hits Rahi's back as you examine her holes before using two fingers to widen each one and let any cum or other fluids leak out and get washed away.")
+
+		saynn("Rahi acts incredibly embarrassed by what you're doing to her private bits, blushing and squirming under your touch. A muffled moan sneaks past her lips as you continue to spread her holes, waiting.")
+
+		saynn("Once there is nothing left inside her, you stand up and grin.")
+
+		saynn("[say=pc]There, all clean and ready for more fun.[/say]")
+
+		saynn("Rahi blushes harder and covers herself with her tail. You turn off the water and grab the towel to dry Rahi's fur, making her look fluffy and puffy.")
+
+		saynn("[say=rahi]H-huff..[/say]")
+
+		saynn("After that, you just grab her leash and walk her back to her cell.")
+
+		addButton("Continue", "See what happens next", "returntocell")
+	if(state == "shower1_feetplay"):
+		playAnimation(StageScene.PuppyFeetCrotch, "crotch", {npc="rahi", npcBodyState={naked=true}, bodyState={naked=true}})
+		saynn("Seeing Rahi so aroused.. It kinda makes you want to help her get the release that she so desires. But.. at the same time.. you kinda wanna make it as humiliating for her as possible.")
+
+		saynn("You turn the water down and then grab Rahi before turning her on her back. She looks up at you with surprised eyes, her restrained paws flailing in the air helplessly.")
+
+		saynn("[say=rahi]Ruff?..[/say]")
+
+		saynn("As you place your foot on Rahi's wet pussy, a few other inmates suddenly enter the room. They see you two and tilt their heads for a second. But after that they just get on with their lives, taking showers.")
+
+		saynn("Rahi sees your foot on her crotch and looks up at you with pleading eyes, her legs close around yours. No, you're not planning to stop because someone is watching. This actually makes it better.")
+
+		saynn("You spread her legs wide apart using some force before proceeding to rub the sole of your foot against Rahi's soft, wet pussy lips. The unusual sensations make your puppy shiver, the pleasure going through her body causing her to let out a low, needy whine.")
+
+		saynn("You slowly increase the pressure, your foot working in small circles, teasing and stimulating Rahi's most sensitive areas. By this pointy you notice that other inmates are, indeed, watching you pleasure her with your foot. Rahi tries to close her legs again but you push them apart, exposing her privates to the onlookers.")
+
+		saynn("You continue to rub her clit relentlessly, forcing little moans and whimpers from Rahi. You yourself get quite aroused too but this time only Rahi gets to cum.")
+
+		saynn("Or does she? As Rahi's body slowly tenses up, approaching the orgasm, you can't help but to feel like being a little cruel. Just before reaching the peak, you stop moving your foot over her pussy, ceasing off the only source of pleasure for her.")
+
+		saynn("[say=rahi]H-huff!..[/say]")
+
+		saynn("Rahi, being so close to the edge, squirms eagerly. She doesn't even care that others are watching her, starts humping your leg, rubbing her slit against your toes and sole just so she can get her release. You don't stop her, letting your pup humiliate herself. She is so adorable.")
+
+		saynn("And finally, your pet manages to bring herself over that last hill. She cries out in pleasure, causing the sound to echo through the showers. Rahi's body is shivering, her pussy is pulsing and spreading its juices over your foot, the onlookers chuckle softly and make some lewd comments.")
+
+		saynn("After cumming in such a humiliating way, you slowly pull away your foot, letting the running water wash away any fluids.")
+
+		saynn("[say=pc]Good puppy.[/say]")
+
+		saynn("She lowers her eyes, still panting softly. But her tail wags ever so slightly.")
+
+		saynn("You both finish showering. You dry Rahi's fur with a towel, making her look all fluffy, and then just return to her cell.")
+
+		addButton("Continue", "See what happens next", "returntocell")
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
@@ -622,6 +722,15 @@ func _react(_action: String, _args):
 		setState("start_walkies")
 		return
 
+	if(_action == "go_shower"):
+		var startLocation = "cellblock_orange_nearcell"
+		pickedLoc = "shower"
+		endLocation = "main_shower1"
+		path = GM.world.calculatePath(startLocation, endLocation)
+		path.remove(0)
+		setState("start_walkies")
+		return
+
 	if(_action == "do_walkies"):
 		processTime(60)
 		var nextLoc = path[0]
@@ -638,6 +747,8 @@ func _react(_action: String, _args):
 				setState("yard2")
 			if(pickedLoc == "waterfall"):
 				setState("yard1")
+			if(pickedLoc == "shower"):
+				setState("shower1")
 		
 			return
 		
@@ -756,6 +867,23 @@ func _react(_action: String, _args):
 	if(_action == "yard2_peeonrahi"):
 		processTime(5*60)
 		getCharacter("rahi").pissedOnBy("pc")
+
+	if(_action == "shower1_finishup"):
+		processTime(10*60)
+		GM.pc.afterTakingAShower()
+		getCharacter("rahi").afterTakingAShower()
+
+	if(_action == "shower1_cleaninside"):
+		processTime(10*60)
+		GM.pc.afterTakingAShower()
+		getCharacter("rahi").afterTakingAShower()
+		getCharacter("rahi").clearOrificeFluidsCheckBlocked()
+
+	if(_action == "shower1_feetplay"):
+		processTime(10*60)
+		GM.pc.afterTakingAShower()
+		getCharacter("rahi").afterTakingAShower()
+		getModule("RahiModule").advanceSkill("rahiSkillExhibit")
 
 	setState(_action)
 

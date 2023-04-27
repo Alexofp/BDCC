@@ -222,6 +222,12 @@ func callObjectFuncWrapper(_obj: String, _command: String, _args: Array):
 			return "[color=red]ERROR:NOTHROAT[/color]"
 		return orifice.getLoosenessString()
 	
+	if(_command in ["bodyContents", "bodyMess"] && _args.size() == 0):
+		var thetext = Util.humanReadableList(object.getFluids().getFluidList())
+		if(thetext == null || thetext == ""):
+			return "nothing"
+		return thetext
+	
 	if(_command in ["pussyContents", "vaginaContents"] && _args.size() == 0):
 		var bodypart:BodypartVagina = object.getBodypart(BodypartSlot.Vagina)
 		if(bodypart == null):
