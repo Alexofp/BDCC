@@ -675,6 +675,7 @@ roomColor = 3
 self_modulate = Color( 0.7, 0.7, 1, 1 )
 position = Vector2( -192, 128 )
 roomName = "Canteen"
+roomID = "hall_canteen"
 roomDescription = "You see lots of tables around and a counter where inmates get their food"
 canWest = false
 canSouth = false

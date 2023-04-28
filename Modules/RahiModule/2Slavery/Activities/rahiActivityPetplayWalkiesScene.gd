@@ -698,6 +698,126 @@ func _run():
 		saynn("You both finish showering. You dry Rahi's fur with a towel, making her look all fluffy, and then just return to her cell.")
 
 		addButton("Continue", "See what happens next", "returntocell")
+	if(state == "canteen1"):
+		playAnimation(StageScene.PuppyDuo, "sit", {npc="rahi", npcAction="stand", npcBodyState={naked=true}})
+		saynn("You lead Rahi into the canteen, a big open space with high ceilings and lots of places to eat. One of the walls is turned into a serve counter that has two windows, one for grabbing the food and one for bringing the trays back. The inmates of all colors are standing behind a little metal fence, forming a queue and waiting for their turn to grab their food.")
+
+		saynn("You immediately get some eyes on you, people seem to be quite interested in your leashed pet. But after they get used to being with a puppy in the same room, it's just business as usual. Rahi is whimpering softly though, feeling the shame of being treated like an animal in front of a crowd.")
+
+		saynn("[say=pc]Relax, puppy. Let's get some food.[/say]")
+
+		saynn("You join the queue and obediently wait for your turn. There is no real choice here, you get what you get, which is usually just some tasteless paste created by mashing all of the vegetables together. But the person behind the counter, noticing your pet, tells the cooks something.")
+
+		saynn("And after some time, you finally get two trays of food. A normal one for you.. and a one that has a metal bowl placed on top of it that's filled with.. what you can only guess is dry dog food.. But to your eye it might be even better than what everyone else gets, there seem to be some pieces of meat and such.")
+
+		saynn("You grab them and go take a seat on the edge of one of the benches. Your tray is placed on the table while Rahi's is on the floor next to you. Your pet sees the metal pet bowl and then moves her gaze up, staring at you with her pleading eyes.")
+
+		saynn("Should you make her eat?")
+
+		addButton("Eat", "Make Rahi eat out of the pet bowl", "canteen1_eat")
+		addButton("Offer your tray", "Maybe Rahi would rather eat the paste", "canteen1_cuteeat")
+		if (getModule("RahiModule").isSkillLearned("rahiSkillExhibit")):
+			addButtonWithChecks("Offer dick", "(Exhibitionism) Maybe she'd rather get her proteins some other way?", "canteen1_suckdick", [], [ButtonChecks.HasReachablePenis])
+			addButtonWithChecks("Offer pussy", "(Exhibitionism) Maybe she'd rather eat you out instead?", "canteen1_lickpussy", [], [ButtonChecks.HasReachableVagina])
+	if(state == "canteen1_eat"):
+		playAnimation(StageScene.PuppyDuo, "sit", {npc="rahi", npcAction="stand", npcBodyState={naked=true}})
+		saynn("You notice Rahi's reluctance to approach the bowl and reach out to pet her.")
+
+		saynn("[say=pc]Come on, girl. Time to eat.[/say]")
+
+		saynn("[say=rahi]Ruff..[/say]")
+
+		saynn("With no other choice, Rahi crawls up to the pet bowl and lowers her muzzle into it, nomming the dry puppy treats. Her face burns with humiliation as she hears the snickers of the other inmates around her. She does look incredibly cute though, crunching her food like a real puppy.")
+
+		saynn("While she does that, you slowly consume your paste. It tastes as advertised, enough to keep you from starving but leaving with a thought that maybe you'd rather do that.")
+
+		saynn("Rahi finishes her meal and places her chin on your lap, her eyes full of submission and obedience.")
+
+		saynn("[say=pc]Good girl. Wasn't so bad, was it?[/say]")
+
+		saynn("Your hand lands on Rahi's head and gives her all the scritches, making her purr softly and nuzzle your palm.")
+
+		saynn("After you've finished eating as well, you return the trays and just walk your pet back to her cell, her hunger satisfied.")
+
+		addButton("Continue", "See what happens next", "returntocell")
+	if(state == "canteen1_cuteeat"):
+		playAnimation(StageScene.PuppyDuo, "sit", {npc="rahi", npcAction="stand", npcBodyState={naked=true}})
+		saynn("You notice Rahi's reluctance to approach the bowl and decide to offer her your tray, placing it on the floor near her.")
+
+		saynn("[say=pc]Maybe you wanna eat this instead, pup?[/say]")
+
+		saynn("Rahi looks at your tray.. with something gray slapped in the middle of it.. Then she looks back at her bowl.. that seems to contain actual food, even if it's food for pets.")
+
+		saynn("After some quick deliberating, she approaches her bowl and dips her muzzle inside it, nomming the dry dog food with newly-found enthusiasm. Her choice made you chuckle though, you pick up the tray and start eating your paste.")
+
+		saynn("The other inmates in the canteen seem to take notice of Rahi's behavior, making her feel somewhat embarrassed. But you're always here to protect her if someone goes too far.")
+
+		saynn("[say=pc]Don't worry, pup, you're doing so well.[/say]")
+
+		saynn("Your words offer much needed comfort to Rahi, she continues to eat her meal.. until about half is left. Then she suddenly stops and paws the pet bowl closer to you, making you confused.")
+
+		saynn("[say=pc]What's up, pet, not hungry anymore?[/say]")
+
+		saynn("Rahi shakes her head and then nosepoints towards the food in her bowl before nosepointing at you. Is she.. offering? It seems that after seeing what you have to eat, Rahi can't help but to want to share her meal with you. That's quite.. cute.")
+
+		saynn("[say=pc]Thank you, cutie. But it's for you.[/say]")
+
+		saynn("Rahi nods and returns to eagerly chowing down on the dry dog food, her tail wagging happily. After she is done, your hand lands on her head and gives her all the scritches, making her purr softly and nuzzle your palm.")
+
+		saynn("You slowly consume the rest of your paste and then return the trays back, before walking your pet back to her cell, her hunger satisfied.")
+
+		addButton("Continue", "See what happens next", "returntocell")
+	if(state == "canteen1_suckdick"):
+		playAnimation(StageScene.PuppyDuo, "sit", {npc="rahi", npcAction="sit", npcBodyState={naked=true}, bodyState={hard=true}})
+		saynn("You notice Rahi's reluctance to approach the bowl. It seems she really doesn't want to eat that dog food. You snap your fingers to catch her attention before pointing under the table. Rahi sees that and crawls to the spot, ending up roughly between your legs.")
+
+		saynn("[say=pc]If you don't want to eat that, I will satisfy your hunger some other way.[/say]")
+
+		saynn("As you say that, you stealthily expose your {pc.penis} for her. Rahi hesitates for a moment, probably feeling embarrassed and nervous about other inmates noticing her. But ultimately, she gives in to the desire and moves closer before awkwardly climbing your legs until you can feel her warm breath on your crotch.")
+
+		saynn("Rahi wraps her lips around your member and begins to lick and suck it, using her tongue to tease you and making you grow hard in her mouth. Some other inmates probably already noticed what's going on but that only makes it more hot.")
+
+		saynn("Your pet takes more of your member inside her mouth and continues to eagerly suck it, trying to focus on pleasing you, ignoring the stares. It feels.. nice.. you can barely continue to eat your food, your shaft twitching and leaking precum into Rahi's mouth that she makes sure to savor.")
+
+		saynn("As you start to feel your climax building up, you grab a hold of Rahi's hair and pull her head closer. Your pet obediently opens her mouth wider, letting your {pc.penis} to slip further into her mouth, testing how well she can control her gag reflex. Her tongue works on your shaft so well and her throat is so tight that you can only endure this for so long..")
+
+		saynn("With a quiet grunt, you grip the table with your hand and release your hot, stick load into Rahi's mouth. Your dick pulsing against her inner walls while waves of {pc.cum} flow down her throat, stuffing her belly.")
+
+		saynn("Your pet eagerly swallows everything she can and licks her lips clean as the last drop of your seed dribbles down her chin. You lean back slightly and watch Rahi's blushy face, a satisfied smirk appears on your face.")
+
+		saynn("[say=pc]Good girl.[/say]")
+
+		saynn("You pat her head before grabbing both trays and handing them away. Then you just walk your pet back to her cell, her hunger satisfied hopefully.")
+
+		addButton("Continue", "See what happens next", "returntocell")
+	if(state == "canteen1_lickpussy"):
+		saynn("You notice Rahi's reluctance to approach the bowl. It seems she really doesn't want to eat that dog food. You snap your fingers to catch her attention before pointing under the table. Rahi sees that and crawls to the spot, ending up roughly between your legs.")
+
+		saynn("[say=pc]If you don't want to eat that, you will have to eat me out instead.[/say]")
+
+		saynn("As you say that, you spread your legs and expose your {pc.pussyStretch} pussy for her. Rahi hesitates for a moment, probably feeling embarrassed and nervous about other inmates noticing her. But ultimately, she gives in to the desire and moves closer before awkwardly climbing your legs until you can feel her warm breath on your crotch.")
+
+		saynn("Rahi starts licking and leaving little kisses on your thighs, gradually reaching your flower and then flicking her tongue over your pussy. She gets you wet quite quickly, a little soft moan escapes you as your pet continues to lick and tease, only using her tongue, dragging it across your folds and lapping up any juices.")
+
+		saynn("You moans grow louder, inmates around are probably wondering why your eyes are so lusty. You keep eating the paste while your free hand lands on Rahi's head, your fingers tangling in her hair, guiding her movement and encouraging her to go faster and harder.")
+
+		saynn("Soon, your pet gets lost in the sensation of licking and sucking on your pussy. You can feel your body beginning to tense up as you start to approach your climax. Rahi can feel it too.. and so she redoubles her efforts, eager to please.")
+
+		saynn("[say=pc]I'm gonna..[/say]")
+
+		saynn("Finally, with a cry of pleasure that is almost impossible to hide, you cum.. hard. You get a tight grip on the table and Rahi's hair while your body shivers from mind-bending pleasure waves, your pussy gushing out girlcum that Rahi eagerly swallows, her tail wagging with excitement.")
+
+		saynn("[say=pc]Ngh-h..[/say]")
+
+		saynn("Even while you are cumming, your pet keeps dragging her feline tongue over your sensitive spots, slowly driving you crazy. The people around probably have noticed what's going on by now but you don't care much, it just feels so good..")
+
+		saynn("It's only when the orgasmic waves are over, you can finally catch your breath. You look down at Rahi, at her cute wet purring muzzle and give her some pats on the head.")
+
+		saynn("[say=pc]Good girl..[/say]")
+
+		saynn("You take some more time to recover before grabbing both trays and handing them away. Then you just walk your pet back to her cell. Feels so strange to catch the glances of others.")
+
+		addButton("Continue", "See what happens next", "returntocell")
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
@@ -717,6 +837,15 @@ func _react(_action: String, _args):
 		var startLocation = "cellblock_orange_nearcell"
 		pickedLoc = "yard"
 		endLocation = "yard_northCorridor"
+		path = GM.world.calculatePath(startLocation, endLocation)
+		path.remove(0)
+		setState("start_walkies")
+		return
+
+	if(_action == "go_canteen"):
+		var startLocation = "cellblock_orange_nearcell"
+		pickedLoc = "canteen"
+		endLocation = "hall_canteen"
 		path = GM.world.calculatePath(startLocation, endLocation)
 		path.remove(0)
 		setState("start_walkies")
@@ -749,6 +878,8 @@ func _react(_action: String, _args):
 				setState("yard1")
 			if(pickedLoc == "shower"):
 				setState("shower1")
+			if(pickedLoc == "canteen"):
+				setState("canteen1")
 		
 			return
 		
@@ -884,6 +1015,32 @@ func _react(_action: String, _args):
 		GM.pc.afterTakingAShower()
 		getCharacter("rahi").afterTakingAShower()
 		getModule("RahiModule").advanceSkill("rahiSkillExhibit")
+
+	if(_action == "canteen1_eat"):
+		processTime(5*60)
+		GM.pc.addStamina(100)
+		GM.pc.addPain(-30)
+
+	if(_action == "canteen1_cuteeat"):
+		processTime(5*60)
+		GM.pc.addStamina(100)
+		GM.pc.addPain(-30)
+
+	if(_action == "canteen1_suckdick"):
+		getModule("RahiModule").advanceSkill("rahiSkillExhibit")
+		processTime(10*60)
+		GM.pc.addStamina(100)
+		GM.pc.addPain(-30)
+		getCharacter("rahi").cummedInMouthBy("pc")
+		GM.pc.orgasmFrom("rahi")
+
+	if(_action == "canteen1_lickpussy"):
+		getModule("RahiModule").advanceSkill("rahiSkillExhibit")
+		processTime(10*60)
+		GM.pc.addStamina(100)
+		GM.pc.addPain(-30)
+		getCharacter("rahi").cummedInMouthBy("pc", FluidSource.Vagina)
+		GM.pc.orgasmFrom("rahi")
 
 	setState(_action)
 
