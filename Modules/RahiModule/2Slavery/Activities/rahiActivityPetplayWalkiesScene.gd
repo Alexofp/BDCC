@@ -24,10 +24,20 @@ func _run():
 
 		saynn("Where do you wanna go?")
 
+		var walkiesStage = getFlag("RahiModule.rahiPetplayWalkiesStage", 0)
 		addButton("Waterfall", "Visit the waterfall area", "go_waterfall")
-		addButton("Yard", "Visit the yard area", "go_yard")
-		addButton("Canteen", "Go eat some food", "go_canteen")
-		addButton("Shower", "A good place to wash your pet", "go_shower")
+		if (walkiesStage >= 1):
+			addButton("Canteen", "Go eat some food", "go_canteen")
+		else:
+			addDisabledButton("Canteen", "Visit other locations first")
+		if (walkiesStage >= 2):
+			addButton("Shower", "A good place to wash your pet", "go_shower")
+		else:
+			addDisabledButton("Shower", "Visit other locations first")
+		if (walkiesStage >= 3):
+			addButton("Yard", "Visit the yard area", "go_yard")
+		else:
+			addDisabledButton("Yard", "Visit other locations first")
 	if(state == "start_walkies"):
 		saynn("You and Rahi begin your journey.")
 
@@ -38,7 +48,7 @@ func _run():
 		var _roomInfo = GM.world.getRoomByID(path[0])
 		var roomName = str(_roomInfo.getName())
 		var possibleBarks = ["You are leading your leashed Rahi.", "Rahi eagerly sniffs around the "+roomName+".", "Rahi eagerly follows you, her tail wagging with excitement as she eagerly sniffs at the various objects in her path.", "Rahi lags behind, her restraints slowing her down. You tug on the leash, urging her to keep moving.", "Rahi catches up and walks beside you, her fluffy body pressed close to your leg as she leans against you for comfort.", "As you walk, Rahi occasionally tugs on the leash, prompting you to correct her behavior and keep her in line.", "Rahi wags her tail happily as you walk her around on the leash", "You hear Rahi's happy panting as she follows you obediently on the leash.", "You notice Rahi's tongue hanging out of her mouth as she pants excitedly during walkies.", "Rahi lets out a playful bark, remaining you that she's still a happy pup.", "You feel Rahi's fluffy tail brushing against your leg as she walks beside you on the leash."]
-		var rareBarks = ["You notice a group of inmates eyeing your pet hungrily and tug on the leash a little firmer.", "Rahi starts to pull on the leash, trying to chase after a nearby mouse. What a silly pet. You make sure to explain her that she is a pup and not a cat.", "Rahi gets distracted by a shiny object on the ground before you tug on her leash.", "One of the female guards gives Rahi a disapproving look as you walk by. Better behave.", "You spot a group of inmates fighting in the distance. Better avoid them.", "Rahi suddenly stops and softly barks at a passing guard. She seems to be in a playful mood.", "Rahi's ears perk up as she catches some unknown scent, causing her to strain against the leash in excitement.", "Rahi gets excited about something and starts to pull on the leash, trying to explore her surroundings."]
+		var rareBarks = ["You notice a group of inmates eyeing your pet hungrily and tug on the leash a little firmer.", "Rahi starts to pull on the leash, trying to chase after a nearby mouse. What a silly pet. You make sure to explain to her that she is a pup and not a cat.", "Rahi gets distracted by a shiny object on the ground before you tug on her leash.", "One of the female guards gives Rahi a disapproving look as you walk by. Better behave.", "You spot a group of inmates fighting in the distance. Better avoid them.", "Rahi suddenly stops and softly barks at a passing guard. She seems to be in a playful mood.", "Rahi's ears perk up as she catches some unknown scent, causing her to strain against the leash in excitement.", "Rahi gets excited about something and starts to pull on the leash, trying to explore her surroundings."]
 		if (RNG.chance(70)):
 			saynn(RNG.pick(possibleBarks))
 		else:
@@ -818,6 +828,143 @@ func _run():
 		saynn("You take some more time to recover before grabbing both trays and handing them away. Then you just walk your pet back to her cell. Feels so strange to catch the glances of others.")
 
 		addButton("Continue", "See what happens next", "returntocell")
+	if(state == "ev3"):
+		saynn("Rahi happily wags her tail as you lead her through the prison areas. She was sniffing and exploring when suddenly a group of inmates caught sight of her and began approaching her. Rahi's ears perk up, she turns to look at the group of strangers.")
+
+		saynn("[say=inmateMale]Hey, look at that little kitty.[/say]")
+
+		saynn("One of them is making kissing noises and winking at Rahi. The rest just say more suggestive things.")
+
+		addButton("Tell them off", "Be rude with them", "ev3_rude")
+		addButtonWithChecks("Punch them", "Use your raw strength", "ev3_fight", [], [[ButtonChecks.StatCheck, Stat.Strength, 7]])
+		if (getModule("RahiModule").getSkillScore("rahiSkillDominance") >= 5):
+			addButton("Rahi bites!", "(Dominance) Rahi protects herself", "ev3_rahibites")
+		else:
+			addDisabledButton("Rahi bites!", "Rahi is not dominant enough for this")
+	if(state == "ev3_rude"):
+		saynn("You tense up and step closer to Rahi, feeling protective and territorial over your pet.")
+
+		saynn("[say=pc]She is not a kitty, she is my pet.[/say]")
+
+		saynn("You growl and give the group of inmates a warning glare.")
+
+		saynn("But they just laughed and continued their suggestive behavior, making Rahi feel uncomfortable and scared. As she begins to whine softly, you just lead her away from the group.")
+
+		saynn("Eventually you reach a quieter area, allowing your pet to calm down. You give her some scritches behind the ear until she starts to purr.")
+
+		addButton("Continue", "Continue on your way", "do_continue")
+	if(state == "ev3_fight"):
+		saynn("You clench your fists, feeling anger boiling up inside you as the group makes crude comments about your pet.")
+
+		saynn("Without thinking, you pull Rahi away from them and close you, shielding her. The inmates weren't happy, one of them stepped out closer to you.")
+
+		saynn("[say=inmateMale]What the fuck is your problem?[/say]")
+
+		saynn("The guy snarls at you, his voice low and dangerous. All the while other inmates only kept giggling and making even more explicit remarks, noticing that Rahi's private bits are all on display.")
+
+		saynn("It all makes you so mad that you don't hesitate. As you throw the first punch, you hear that satisfying crunch coming from the inmate's jaw as your fist connects perfectly, staggering him back.")
+
+		saynn("[say=inmateMale]Argh![/say]")
+
+		saynn("He loses all his balance and collapses, defeated, already. The other inmates hesitate for a moment before scattering, not wanting to get caught up in this. You begin advancing on the downed inmate, ready to continue the beating. But, sadly, you are interrupted by the sound of a guard's whistle.")
+
+		saynn("Lucky asshole.")
+
+		saynn("Rahi whimpers near your feet, her ears flat against her head. You kneel down and stroke her fur.")
+
+		saynn("[say=pc]It's okay, puppy, no one will hurt you.[/say]")
+
+		saynn("You keep murmuring soothing words into her ear until she calms down.")
+
+		addButton("Continue", "Continue on your way", "do_continue")
+	if(state == "ev3_rahibites"):
+		saynn("As the group of inmates keeps making suggestive comments and gestures towards Rahi, you get a sense of worry and fear for your pet. But Rahi, feeling threatened, begins to growl and bare her teeth at the inmates.")
+
+		saynn("The inmates, unshaken by Rahi's display of aggression, continue to make advances towards her, reaching out to touch her body until your pet suddenly lashes out and bites the hand of one of the inmates, drawing blood!")
+
+		saynn("[say=rahi]Grr-r-r![/say]")
+
+		saynn("[say=inmateMale]Ow. Stupid mut.[/say]")
+
+		saynn("The inmate yelps in pain, causing the others to back away from Rahi. However, one of them circles her and tries to grab her by the tail. But Rahi was faster, she turned around and snapped at him, sinking her teeth into his arm.")
+
+		saynn("All of them quickly back away, probably realizing that it's better not to touch your pet.")
+
+		saynn("[say=pc]Wow. Good girl.[/say]")
+
+		saynn("Rahi purrs and nuzzles your leg before picking up her leash with her mouth and offering it to you.")
+
+		addButton("Continue", "Continue on your way", "do_continue")
+	if(state == "ev4"):
+		playAnimation(StageScene.PuppyDuo, "stand", {pc=npc_id, npc="rahi", npcAction="stand", npcBodyState={naked=true}})
+		saynn("As you walk Rahi through the prison grounds, one of the inmates approaches you.")
+
+		saynn("[say=npc]Hey. I saw you walking your little pet. She looks like a fun toy to play with.[/say]")
+
+		saynn("{npc.He} says that with a sly grin on {npc.his} face.")
+
+		saynn("[say=npc]I will give you.. 5 credits.. for her mouth. How about that?[/say]")
+
+		saynn("It sounds like {npc.he} wants you to whore your pet out.")
+
+		addButton("No", "You can't allow that", "ev4_nofuck")
+		if (getModule("RahiModule").isSkillLearned("rahiSkillProstitution")):
+			if (getCharacter(npc_id).hasPenis()):
+				addButton("Sure", "(Prostitution) Allow them to fuck Rahi's mouth", "ev4_facefuck")
+			else:
+				addButton("Sure", "(Prostitution) Allow them to fuck Rahi's mouth", "ev4_pussygrind")
+		else:
+			addDisabledButton("Sure", "Rahi needs to have a prostitution skill")
+	if(state == "ev4_nofuck"):
+		saynn("You shake your head and just walk past the inmate, your hand firmly grasping the leash.")
+
+		saynn("[say=npc]Pff. Your loss.[/say]")
+
+		addButton("Continue", "Continue on your way", "do_continue")
+	if(state == "ev4_facefuck"):
+		playAnimation(StageScene.PuppySexOral, "fast", {pc=npc_id, npc="rahi", npcBodyState={naked=true}, bodyState={exposedCrotch=true, hard=true}})
+		saynn("It sounds like a.. good deal. So you agree. The inmate hands you the payment before you give her Rahi's leash. Your pet was a little nervous about this. But she knows that she was just a pet, she had to do what her owner tells her.")
+
+		saynn("Without wasting much time, the inmate unzipped {npc.his} pants and pulls out {npc.his} {npc.penis}. {npc.He} grabs Rahi's head and pushes {npc.his} member into her mouth, past her sharp fangs, all the way to the back of her throat. Rahi's eyes get a little watery as she starts gagging on {npc.his} size.")
+
+		saynn("Some other inmates gather around, watching somebody using Rahi's mouth like a sex toy. The main inmate begins to thrust {npc.his} dick in and out of Rahi's drooling mouth while holding her head still with {npc.his} hands, turning this into a rough face-fuck.")
+
+		saynn("It doesn't take long for that cock to start throbbing in her mouth. Your pet can feel that the inmate was close to cum and tries to pull away, but {npc.he} prevented that attempt, instead shooting {npc.his} load into her mouth!")
+
+		saynn("As {npc.his} {npc.cum} fills Rahi's mouth, she struggles to swallow it all. Some of it spills out of her mouth and onto her chin, making your pet look quite messy.")
+
+		saynn("[say=npc]Ngh. Good slut. That was worth it.[/say]")
+
+		saynn("The other inmates cheer as the main one finishes with Rahi's mouth. She looks up at you with her submissive eyes, her mouth still full of some stranger's seed that she has to swallow..")
+
+		saynn("Seeing that there won't be more, the crowd begins to disperse. You pet your Rahi for being an obedient toy and continue on your way.")
+
+		addButton("Continue", "Continue on your way", "do_continue")
+	if(state == "ev4_pussygrind"):
+		playAnimation(StageScene.PuppySexOral, "grind", {pc=npc_id, npc="rahi", npcBodyState={naked=true}, bodyState={exposedCrotch=true, hard=true}})
+		saynn("It sounds like a.. good deal. So you agree. The inmate hands you the payment before you give her Rahi's leash. Your pet was a little nervous about this. But she knows that she was just a pet, she had to do what her owner tells her.")
+
+		saynn("[say=npc]You're such a cute little thing.[/say]")
+
+		saynn("The inmate runs {npc.his} fingers through Rahi's hair.")
+
+		saynn("[say=npc]But are you a good sex toy?[/say]")
+
+		saynn("With that, {npc.he} reveals {npc.his} pussy that was already glistening with excitement. The inmate grabs Rahi by the hair and pushes her face into {npc.his} crotch, grinding.")
+
+		saynn("Rahi was quite overwhelmed at first by the scent and taste of this inmate's sex. But soon enough, she began licking and sucking at {npc.his} folds, forcing moans of pleasure out of {npc.him}.")
+
+		saynn("Some other inmates gather around, watching somebody using Rahi's face and mouth like a sex toy. As the inmate's eagerness rose, {npc.he} began to thrust {npc.his} hips harder and faster against Rahi's face. So many juices get spread across her fur, marking it with the inmate's lewd scent.")
+
+		saynn("Finally, with a loud cry, {npc.he} came, squirting all over Rahi's muzzle and fur, leaving quite a wet mess. Rahi kept licking up the inmate's juices as they were flowing down her neck and chin.")
+
+		saynn("After the inmate's orgasm fades, {npc.he} leans down and whispers into Rahi's ear.")
+
+		saynn("[say=npc]You're a good little pet. Your owner is quite lucky.[/say]")
+
+		saynn("With that, {npc.he} hands you the leash back before walking away, leaving your pet panting and covered in juices. The crowd slowly starts to disperse as well.")
+
+		addButton("Continue", "Continue on your way", "do_continue")
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
@@ -825,6 +972,7 @@ func _react(_action: String, _args):
 		return
 
 	if(_action == "go_waterfall"):
+		setFlag("RahiModule.rahiPetplayWalkiesStage", Util.maxi(getFlag("RahiModule.rahiPetplayWalkiesStage", 0), 1))
 		var startLocation = "cellblock_orange_nearcell"
 		pickedLoc = "waterfall"
 		endLocation = "yard_waterfall"
@@ -833,16 +981,8 @@ func _react(_action: String, _args):
 		setState("start_walkies")
 		return
 
-	if(_action == "go_yard"):
-		var startLocation = "cellblock_orange_nearcell"
-		pickedLoc = "yard"
-		endLocation = "yard_northCorridor"
-		path = GM.world.calculatePath(startLocation, endLocation)
-		path.remove(0)
-		setState("start_walkies")
-		return
-
 	if(_action == "go_canteen"):
+		setFlag("RahiModule.rahiPetplayWalkiesStage", Util.maxi(getFlag("RahiModule.rahiPetplayWalkiesStage", 0), 2))
 		var startLocation = "cellblock_orange_nearcell"
 		pickedLoc = "canteen"
 		endLocation = "hall_canteen"
@@ -852,9 +992,20 @@ func _react(_action: String, _args):
 		return
 
 	if(_action == "go_shower"):
+		setFlag("RahiModule.rahiPetplayWalkiesStage", Util.maxi(getFlag("RahiModule.rahiPetplayWalkiesStage", 0), 3))
 		var startLocation = "cellblock_orange_nearcell"
 		pickedLoc = "shower"
 		endLocation = "main_shower1"
+		path = GM.world.calculatePath(startLocation, endLocation)
+		path.remove(0)
+		setState("start_walkies")
+		return
+
+	if(_action == "go_yard"):
+		setFlag("RahiModule.rahiPetplayWalkiesStage", Util.maxi(getFlag("RahiModule.rahiPetplayWalkiesStage", 0), 4))
+		var startLocation = "cellblock_orange_nearcell"
+		pickedLoc = "yard"
+		endLocation = "yard_northCorridor"
 		path = GM.world.calculatePath(startLocation, endLocation)
 		path.remove(0)
 		setState("start_walkies")
@@ -884,11 +1035,14 @@ func _react(_action: String, _args):
 			return
 		
 		if(RNG.chance(30)):
-			var possibleEvents = ["ev1", "ev2"]
+			var possibleEvents = ["ev1", "ev2", "ev3", "ev4"]
 		
 			var randEvent = RNG.pick(possibleEvents)
 			if(randEvent in ["ev2"]):
 				npc_id = NpcFinder.grabNpcIDFromPoolOrGenerate(CharacterPool.Inmates, [], InmateGenerator.new(), {NpcGen.Level: RNG.randi_range(1, 10)})
+				addCharacter(npc_id)
+			if(randEvent in ["ev4"]):
+				npc_id = NpcFinder.grabNpcIDFromPoolOrGenerate(CharacterPool.Inmates, [[NpcCon.NoChastity]], InmateGenerator.new(), {NpcGen.NoChastity: true, NpcGen.Level: RNG.randi_range(1, 10)})
 				addCharacter(npc_id)
 			setState(randEvent)
 			return
@@ -1041,6 +1195,18 @@ func _react(_action: String, _args):
 		GM.pc.addPain(-30)
 		getCharacter("rahi").cummedInMouthBy("pc", FluidSource.Vagina)
 		GM.pc.orgasmFrom("rahi")
+
+	if(_action == "ev4_facefuck"):
+		processTime(5*60)
+		getModule("RahiModule").advanceSkill("rahiSkillProstitution")
+		GM.pc.addCredits(5)
+		getCharacter("rahi").cummedInMouthBy(npc_id)
+
+	if(_action == "ev4_pussygrind"):
+		processTime(5*60)
+		getModule("RahiModule").advanceSkill("rahiSkillProstitution")
+		GM.pc.addCredits(5)
+		getCharacter("rahi").cummedInMouthBy(npc_id, FluidSource.Vagina)
 
 	setState(_action)
 

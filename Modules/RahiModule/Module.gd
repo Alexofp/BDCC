@@ -72,7 +72,10 @@ func getFlags():
 		"rahiSkillPetplay": flag(FlagType.Number),
 		"rahiSkillDominance": flag(FlagType.Number),
 		"rahiSkillProstitution": flag(FlagType.Number),
-		"rahiSkillWatersports": flag(FlagType.Number),	
+		"rahiSkillWatersports": flag(FlagType.Number),
+		
+		# skill-specific flags
+		"rahiPetplayWalkiesStage": flag(FlagType.Number),
 	}
 
 func _init():
