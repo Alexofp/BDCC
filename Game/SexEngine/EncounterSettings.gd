@@ -62,6 +62,19 @@ func generateGender():
 		return RNG.pick([NpcGender.Male, NpcGender.Female])
 	return pickedGender
 	
+func generateGenderFromAllowed(npcGenders):
+	var stuff = []
+	for gender in npcGenders:
+		var weight = getGenderWeight(gender)
+		
+		stuff.append([gender, weight])
+	var pickedGender = RNG.pickWeightedPairs(stuff)
+	if(pickedGender == null):
+		pickedGender = RNG.pick(npcGenders)
+	if(pickedGender == null):
+		return RNG.pick([NpcGender.Male, NpcGender.Female])
+	return pickedGender
+	
 func saveData():
 	var data = {
 		"preferKnownEncounters": preferKnownEncounters,

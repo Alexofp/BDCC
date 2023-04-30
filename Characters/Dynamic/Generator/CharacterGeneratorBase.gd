@@ -12,7 +12,11 @@ func makeBase(idprefix = "dynamicnpc", _args = {}):
 	return dynamicCharacter
 
 func pickGender(character:DynamicCharacter, _args = {}):
-	if(_args.has(NpcGen.Gender)):
+	if(_args.has(NpcGen.HasPenis) && _args[NpcGen.HasPenis]):
+		character.npcGeneratedGender = GM.main.getEncounterSettings().generateGenderFromAllowed(NpcGender.getAllWithPenis())
+	elif(_args.has(NpcGen.GenderList)):
+		character.npcGeneratedGender = GM.main.getEncounterSettings().generateGenderFromAllowed(_args[NpcGen.GenderList])
+	elif(_args.has(NpcGen.Gender)):
 		character.npcGeneratedGender = _args[NpcGen.Gender]
 	else:
 		character.npcGeneratedGender = GM.main.getEncounterSettings().generateGender()

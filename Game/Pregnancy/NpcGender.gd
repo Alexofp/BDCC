@@ -10,6 +10,9 @@ const Peachboy = "peachboy"
 static func getAll():
 	return [Male, Female, Shemale, Herm, Peachboy]
 
+static func getAllWithPenis():
+	return [Male, Shemale, Herm]
+
 static func getVisibleName(gender):
 	return gender.capitalize()
 
