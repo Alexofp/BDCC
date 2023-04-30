@@ -4,6 +4,8 @@ var pickedLoc = ""
 var endLocation = ""
 var path = []
 var npc_id = ""
+var eventCooldown = 0
+var lastEvent = ""
 
 func _init():
 	sceneID = "rahiActivityPetplayWalkiesScene"
@@ -59,20 +61,23 @@ func _run():
 		playAnimation(StageScene.PuppyDuo, "stand", {pc="maleguard_canine", npc="rahi", npcAction="stand", npcBodyState={naked=true}})
 		saynn("As you and your pup make your way through the prison, a guard suddenly steps in front of you, blocking the way. The guard stares down at Rahi, and then looks up at you.")
 
-		saynn("[say=maleguard_canine]Does your pet bite?[/say]")
+		var possibleLine = RNG.pick(["Does your pet bite?", "I've heard reports of some aggressive pets in the prison, can your pet be trusted not to bite?", "Is your pet aggressive? She doesn't have a muzzle on.", "Are you sure your pet is safe to be around others? Does she bite?"])
+		saynn("[say=maleguard_canine]"+str(possibleLine)+"[/say]")
 
 		saynn("The guard keeps his hand on his stun baton.")
 
-		addButton("No", "Tell the guard that Rahi is a good girl", "ev1_no")
+		addButton("No biting", "Tell the guard that Rahi is a good girl", "ev1_no")
 		addButton("Only if danger", "Tell the guard that Rahi is trained not to bite unless someone tries to attack you", "ev1_danger")
 		if (getModule("RahiModule").getSkillScore("rahiSkillMasochist") > 5):
 			addButton("Masochist", "(Masochism) Tell the guard that Rahi loves receiving pain instead of inflicting it", "ev1_masochist")
 	if(state == "ev1_no"):
-		saynn("[say=pc]No, she is a good girl. She won't hurt anyone[/say]")
+		var pcLine = RNG.pick(["No, she is a good girl. She won't hurt anyone.", "No, she's very friendly. She loves attention.", "No, she's very docile. She won't cause any trouble.", "No, she's well-trained. She knows not to bite anyone.", "No, she's never shown any aggression. She's a harmless pet.", "No, she's just a playful puppy. She's never bitten anyone."])
+		saynn("[say=pc]"+str(pcLine)+"[/say]")
 
 		saynn("The guard narrows his eyes suspiciously at your statement.")
 
-		saynn("[say=maleguard_canine]Well, I hope you're telling the truth, inmate.[/say]")
+		var guardLine = RNG.pick(["Well, I hope you're telling the truth, inmate.", "I've had a few run-ins with vicious mutts in my day.", "I've seen some nasty bites from dogs like this before.", "I hope you know what you're doing with that thing.", "You better have control over that animal, or else."])
+		saynn("[say=maleguard_canine]"+str(guardLine)+"[/say]")
 
 		saynn("He takes a step closer to Rahi and then cautiously reaches out his hand before giving Rahi some pats. Rahi wags her tail excitedly and sniffs the guard's armored palm, not even thinking about biting.")
 
@@ -1141,10 +1146,14 @@ func _react(_action: String, _args):
 		
 			return
 		
-		if(RNG.chance(30)):
+		eventCooldown = eventCooldown - 1
+		if(RNG.chance(15) && eventCooldown<=0):
+			eventCooldown = 3
 			var possibleEvents = ["ev1", "ev2", "ev3", "ev4", "ev5"]
+			possibleEvents.erase(lastEvent)
 		
 			var randEvent = RNG.pick(possibleEvents)
+			lastEvent = randEvent
 			if(randEvent in ["ev2"]):
 				npc_id = NpcFinder.grabNpcIDFromPoolOrGenerate(CharacterPool.Inmates, [], InmateGenerator.new(), {NpcGen.Level: RNG.randi_range(1, 10)})
 				addCharacter(npc_id)
@@ -1344,6 +1353,8 @@ func saveData():
 	data["endLocation"] = endLocation
 	data["path"] = path
 	data["npc_id"] = npc_id
+	data["eventCooldown"] = eventCooldown
+	data["lastEvent"] = lastEvent
 
 	return data
 
@@ -1354,3 +1365,5 @@ func loadData(data):
 	endLocation = SAVE.loadVar(data, "endLocation", "")
 	path = SAVE.loadVar(data, "path", [])
 	npc_id = SAVE.loadVar(data, "npc_id", "")
+	eventCooldown = SAVE.loadVar(data, "eventCooldown", 0)
+	lastEvent = SAVE.loadVar(data, "lastEvent", "")
