@@ -406,3 +406,38 @@ func canTalkInFirstPerson():
 	if(currentStage >= 7):
 		return true
 	return false
+
+func getSkillsCanForget():
+	var skillsInfo:Dictionary = getSkillsInfo()
+	var pickedSkills = getFlag("RahiModule.rahiPickedSkills", {})
+	
+	var result = []
+	for skillID in skillsInfo:
+		if(!pickedSkills.has(skillID)):
+			continue
+		if(skillsInfo[skillID].has("defaultSkill") && skillsInfo[skillID]["defaultSkill"]):
+			continue
+	
+		result.append(skillID)
+	return result
+
+func getSkillInfo(skillID):
+	var skillsInfo:Dictionary = getSkillsInfo()
+	return skillsInfo[skillID]
+
+func forgetSkill(skillID):
+	var skillsInfo:Dictionary = getSkillsInfo()
+	
+	if(!skillsInfo.has(skillID)):
+		return false
+	
+	if(skillsInfo[skillID].has("defaultSkill") && skillsInfo[skillID]["defaultSkill"]):
+		return false
+	
+	var pickedSkills = getFlag("RahiModule.rahiPickedSkills", {})
+	if(!pickedSkills.has(skillID)):
+		return false
+	pickedSkills.erase(skillID)
+	setFlag("RahiModule.rahiPickedSkills", pickedSkills)
+	setFlag("RahiModule."+str(skillID), 0)
+	return true
