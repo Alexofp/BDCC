@@ -271,6 +271,18 @@ func _run():
 		
 		saynn("Your kitty calls you: {rahiMaster}")
 		
+		if(getModule("RahiModule").canSleepInPlayerCell()):
+			if(getModule("RahiModule").shouldSleepInPlayerCell()):
+				saynn("Your kitty will sleep in your cell if possible.")
+			else:
+				saynn("Your kitty sleeps in her cell.")
+			
+			if(getModule("RahiModule").canSexThePlayerOnMornings()):
+				if(getModule("RahiModule").shouldSexThePlayerOnMornings()):
+					saynn("Your kitty will wake you up with sex.")
+				else:
+					saynn("Your kitty won't wake you up with sex.")
+			
 		# Unlocks from a certain stage
 		if(getModule("RahiModule").getSlaveryStage() >= 1):
 			addButton("Your title", "How should kitty call you", "change_title")
@@ -281,6 +293,15 @@ func _run():
 				addButton("Teach new skill", "Start training kitty a new skill", "train_new_skill")
 			else:
 				addDisabledButton("Teach new skill", "Rahi is too tired for that")
+		
+		if(getModule("RahiModule").canSleepInPlayerCell()):
+			addButton("Toggle sleep", "Should the kitty sleep with you in your cell or not", "toggle_sleep")
+			
+			if(getModule("RahiModule").canSexThePlayerOnMornings()):
+				addButton("Morning sex", "Should the kitty surprise you with morning sex", "toggle_morningsex")
+			else:
+				addDisabledButton("Morning sex", "(Sex) Kitty needs to be more skilled at sex to do this")
+		
 		addButton("Back", "Go back a menu", "")
 	
 	if(state == "train_new_skill"):
@@ -404,6 +425,14 @@ func _react(_action: String, _args):
 		
 		getModule("RahiModule").learnSkill(_args[0])
 		runScene("rahiSlaverySkillLearnScene", [_args[0]])
+		return
+		
+	if(_action == "toggle_sleep"):
+		setFlag("RahiModule.rahiShouldSleepWithPlayer", !getFlag("RahiModule.rahiShouldSleepWithPlayer", false))
+		return
+		
+	if(_action == "toggle_morningsex"):
+		setFlag("RahiModule.rahiShouldSexPlayerDuringSleep", !getFlag("RahiModule.rahiShouldSexPlayerDuringSleep", false))
 		return
 
 	setState(_action)

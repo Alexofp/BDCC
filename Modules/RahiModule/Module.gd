@@ -76,6 +76,8 @@ func getFlags():
 		
 		# skill-specific flags
 		"rahiPetplayWalkiesStage": flag(FlagType.Number),
+		"rahiShouldSleepWithPlayer": flag(FlagType.Bool),
+		"rahiShouldSexPlayerDuringSleep": flag(FlagType.Bool),
 	}
 
 func _init():
@@ -126,6 +128,7 @@ func _init():
 		"res://Modules/RahiModule/2Slavery/Activities/rahiActivityAnalScene.gd",
 		"res://Modules/RahiModule/2Slavery/Activities/rahiActivityPetplayScene.gd",
 		"res://Modules/RahiModule/2Slavery/Activities/rahiActivityPetplayWalkiesScene.gd",
+		"res://Modules/RahiModule/2Slavery/Sleeping/rahiSleepsInPlayerCellScene.gd",
 		]
 	characters = [
 		"res://Modules/RahiModule/RahiCharacter.gd",
@@ -152,6 +155,7 @@ func _init():
 		"res://Modules/RahiModule/1PreSlavery/rahi3RahiPassOutEvent.gd",
 		"res://Modules/RahiModule/1PreSlavery/rahi4BreakdownEvent.gd",
 		"res://Modules/RahiModule/2Slavery/rahiSlaveryTalkEvent.gd",
+		"res://Modules/RahiModule/2Slavery/Sleeping/rahiSleepingInCellEvent.gd",
 	]
 	quests = [
 		"res://Modules/RahiModule/RahiSlaveryQuest.gd",
@@ -441,3 +445,15 @@ func forgetSkill(skillID):
 	setFlag("RahiModule.rahiPickedSkills", pickedSkills)
 	setFlag("RahiModule."+str(skillID), 0)
 	return true
+
+func canSleepInPlayerCell():
+	return getSlaveryStage() >= 3
+
+func shouldSleepInPlayerCell():
+	return canSleepInPlayerCell() && getFlag("RahiModule.rahiShouldSleepWithPlayer")
+
+func canSexThePlayerOnMornings():
+	return getSkillScore("rahiSkillSex") >= 5
+
+func shouldSexThePlayerOnMornings():
+	return canSexThePlayerOnMornings() && getFlag("RahiModule.rahiShouldSexPlayerDuringSleep")

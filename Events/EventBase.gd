@@ -104,3 +104,8 @@ func generateNpcForPool(poolID, generator, _args = {}):
 func grabNpcIDFromPoolOrGenerate(poolID, _conditions, generator, _args = {}):
 	return NpcFinder.grabNpcIDFromPoolOrGenerate(poolID, _conditions, generator, _args)
 	
+func getCharacter(charID: String) -> BaseCharacter:
+	return GlobalRegistry.getCharacter(charID)
+
+func getModule(modID: String):
+	return GlobalRegistry.getModule(modID)
