@@ -1898,6 +1898,12 @@ func getWornStrapon():
 			return item
 	return null
 
+func removeStrapon():
+	var theStrapon = getWornStrapon()
+	if(theStrapon == null):
+		return null
+	return getInventory().removeEquippedItem(theStrapon)
+
 func doPainfullyStretchHole(_bodypart, _who = "pc"):
 	pass
 

@@ -166,7 +166,7 @@ func _run():
 
 		saynn("[say=kait]F-fuck off-f..[/say]")
 
-		saynn("That altitude just won’t do, you grab the girl by the shoulder and forcibly uncurl her, causing her to hiss from the pain. Then you get a hold of her shorts and yank them off, exposing her black panties and causing more discomfort as the cloth brushes against the hurt knee, this girl is just so fragile. Yeah, your cock is getting harder from the excitement. Kait is trying to kick you off but one stomp on her bruised knee and she is back to sobbing and whining.")
+		saynn("That attitude just won’t do, you grab the girl by the shoulder and forcibly uncurl her, causing her to hiss from the pain. Then you get a hold of her shorts and yank them off, exposing her black panties and causing more discomfort as the cloth brushes against the hurt knee, this girl is just so fragile. Yeah, your cock is getting harder from the excitement. Kait is trying to kick you off but one stomp on her bruised knee and she is back to sobbing and whining.")
 
 		saynn("You get a hold of her panties and try to pull them down but she holds onto them like her life depends on it. Fine, you take the other route and yank them up, forcing the cloth to dig into her slit so hard that it makes her cry out from more pain. A few yanks and the cloth starts to break until her panties get torn off completely, exposing her pink pussy that clearly saw some abuse already. Kait rolls around on the floor and swears at you until you suddenly shove what left of her panties into her mouth and forcibly close her jaw.")
 
