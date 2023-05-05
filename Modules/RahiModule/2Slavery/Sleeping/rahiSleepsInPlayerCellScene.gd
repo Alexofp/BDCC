@@ -233,6 +233,77 @@ func _run():
 		saynn("Then she just pulls her strapon out, leaves a little kiss on your cheek and runs away before you wake up and spot her.")
 
 		addButton("Continue", "That was lewd", "removerahistraponandleave")
+	if(state == "fingering"):
+		saynn("The night passes.")
+
+		saynn("Rahi is still resting on your chest, snuggling. You were sleeping soundly when you suddenly felt her paws gently sliding over your {pc.masc} curves, exploring your every inch.. You could open your eyes and stop her.. but.. why not see what she does to you.")
+
+		saynn("Your kitty tests you a little more, brushing her paws over your {pc.thick} thighs and watching your reaction. When she sees that you don't respond, she gets bolder, moving one of her paws down between your legs and resting it on your {pc.pussyStretch} pussy slit..")
+
+		saynn("After that, Rahi starts to tease your clit, moving her clawed digits in a slow, circular motion around it. Then she gently drags them over the sensitive folds as well, making you grip the bed sheets.")
+
+		saynn("As her fingers dance over your pussy, you feel your arousal growing, causing your petals to become moist. Rahi feels that and carefully spreads your pussy lips with two digits while prodding at the entrance with the other two. You don't resist at all, allowing your kitty to slip her digits inside your needy sex and start moving them in and out at a slow pace, occasionally stopping to rub your clit a little more. You can feel Rahi's breath on your chest but it's you who's panting and moaning quietly, still doing your best to pretend you're not awake.")
+
+		saynn("As the minutes pass, Rahi continues to gently finger you, slowly bringing you to the brink of orgasm. Finally, with one last stroke of your g-spot, you cum.. your body shivering and squirming under Rahi's touch while your lips produce incredibly cute noises.")
+
+		if (GM.pc.isWearingChastityCage()):
+			saynn("Even though it was a vaginal orgasm, it still triggers your locked up cock to throb and shoot weak lines of {pc.cum} through the firm metal cage, creating quite a mess..")
+
+			saynn("After your long moment of ecstatic pleasure is over, Rahi pulls her digits out and does her best to clean your cage with her wet digits before bringing them to her mouth and using her feline tongue to lick it all off.")
+
+		elif (GM.pc.hasReachablePenis()):
+			saynn("Even though it was a vaginal orgasm, it still triggers your {pc.penis} to throb and leak thick sticky {pc.cum}, creating quite a mess..")
+
+			saynn("After your long moment of ecstatic pleasure is over, Rahi pulls her digits out and does her best to clean your shaft with her wet digits before bringing them to her mouth and using her feline tongue to lick it all off.")
+
+		else:
+			saynn("After your long moment of ecstatic pleasure is over, Rahi pulls her digits out before bringing them to her mouth and using her feline tongue to lick it all off.")
+
+		saynn("That felt.. really good.. Your kitty returns to just snuggling with you after destroying any evidence.")
+
+		addButton("Continue", "That was lewd", "endthescene")
+	if(state == "pussylicking"):
+		saynn("The night passes. And it seems, someone has woken up earlier than you..")
+
+		saynn("You open your eyes when you feel someone's warm breath on your crotch. That someone is hiding under the blanket, probably unaware that you're awake. Whoever that is, the blanket hides them pretty well.. except for the brown feline tail that's clearly sticking out. Cute.. Your curiosity stops you from announcing your state..")
+
+		saynn("Your kitty gathers some courage and then begins placing gentle kisses on your inner thighs, encouraging you to spread your legs for her which you obediently do, allowing Rahi to admire your {pc.pussyStretch} pussy. You can feel her moving her mouth closer to your sensitive folds and inhaling the sweet scent. Her paws gently caress your {pc.masc} curves while she keeps landing one kiss after another, creeping closer and closer..")
+
+		saynn("You quickly become aroused and needy after so much great teasing.. Rahi feels that and, with her feline tongue out, starts to slowly lick up your wetness, tasting you for the first time tonight.. You produce a little soft moan that spooks your kitty.. but soon enough she gets bolder again, letting you feel her tongue yet again, her tail flicking with excitement.")
+
+		saynn("After giving your folds some treatment, Rahi uses the rough tip to flick at your clit, sending little pulses of pleasure through your body. She wraps her lips around that sensitive bud and starts licking and sucking on it, forcing more moans out of you. Your hips begin to buck involuntarily, making you push yourself further into Rahi's face, urging her on.")
+
+		saynn("When you get even more wet, Rahi's tongue works its way down to your pussy entrance, easily spreading the folds and pushing the tip inside as far as it could reach. The sweet taste only made her more eager to start sliding her tongue inside, lapping up your juices. That skilled tongue quickly brings you close to your climax, your body begins to tense up until you just can't take it anymore..")
+
+		saynn("With a loud cry of pleasure, you lock your legs around Rahi's head and cum hard, your pussy pulsating and squirting all over her face and into her opened mouth. Your kitty quickly swallows your juices and proceeds to lick up every drop, her tongue still working on extending your climax, adding more pleasure waves that rock your whole body.")
+
+		saynn("In the end, you're left panting and extremely satisfied. You unlock Rahi's head and use your hands to pull her up, closer to your face. That makes your kitty let out a meow of surprise.")
+
+		saynn("[say=pc]Thank you, kitty..[/say]")
+
+		saynn("The feline wanted to say something but you just kissed her, making her purr instead. You both just lay on the bed, enjoying the company of each other until it's time to actually wake up..")
+
+		addButton("Continue", "That was lewd", "endthescene")
+	if(state == "leggrind"):
+		saynn("The night passes.")
+
+		saynn("You wake up with a strange feeling.. A strange warm feeling around one of your legs. You open your eyes and notice Rahi, your kitty, still snoozing away, all cute and snuggled up to you. And that feeling is actually coming from her gently humping your leg. She is sleeping naked, just like you today.")
+
+		saynn("It seems your kitty has a burning need that she couldn't just ignore. She keeps panting softly while slowly grinding her pussy against your body. And from doing that, she gets even more lusty, her sensitive folds spreading her juices across your skin.")
+
+		saynn("You're not sure how to react. Should you wake her up? But that would ruin the moment for her. Nah, better to let her do it and see what happens..")
+
+		saynn("Adorable little moans escape from your kitty while she keeps rubbing against you. Her eyes are closed, it's like she is running in her dreams.. kinda..")
+
+		saynn("After some minutes, Rahi begins to hump you more urgently, her hips thrusting harder and faster against your leg, her sensitive slit gets more and more wet. You can feel her body tightening, the pleasure building inside her.. until she can't hold back anymore.")
+
+		saynn("With a little cute squeak, Rahi reaches the peak of her pleasure. Her whole body begins to shiver as she experiences a powerful but contained orgasm. Her paws grip onto you. Her ears, snout, whiskers, tail, all of them flick in an irregular pattern while her spasming pussy gushes girlcum onto your leg. She barely makes any sound but you can.. feel.. how much passion is coursing through her body.")
+
+		saynn("When her orgasm is over, your kitty just lays there, panting and spent but probably feeling satisfied.")
+
+		saynn("After some time, she opens her eyes.. and feels a rush of embarrassment wash over her as she realizes what happened. She quickly slips out of bed and dashes away, towards her cell, leaving you with a wide grin.")
+
+		addButton("Continue", "That was so cute", "endthescene")
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
@@ -244,6 +315,7 @@ func _react(_action: String, _args):
 			var domLevel = getModule("RahiModule").getSkillScore("rahiSkillDominance")
 		
 			var possible = []
+			possible.append("leggrind")
 		
 			if(GM.pc.hasReachablePenis()):
 				possible.append("blowjob")
@@ -252,6 +324,9 @@ func _react(_action: String, _args):
 				possible.append("chastitycum")
 			if(GM.pc.hasReachableAnus() && domLevel >= 6):
 				possible.append("pegging")
+			if(GM.pc.hasReachableVagina()):
+				possible.append("fingering")
+				possible.append("pussylicking")
 		
 			var newState = RNG.pick(possible)
 		
@@ -265,14 +340,18 @@ func _react(_action: String, _args):
 				getCharacter("rahi").cummedInMouthBy("pc")
 				GM.pc.orgasmFrom("rahi")
 			if(newState == "cowgirl"):
-				if(RNG.chance(30)):
+				if(RNG.chance(30) && OPTIONS.isContentEnabled(ContentType.RiskyCondoms)):
 					condomBroke = true
 					getCharacter("rahi").cummedInVaginaBy("pc")
 				else:
 					condomBroke = false
 					addFilledCondomToLootIfPerk(getCharacter("pc").createFilledCondom())
 				GM.pc.orgasmFrom("rahi")
-				
+			if(newState in ["fingering"]):
+				GM.pc.orgasmFrom("rahi")
+			if(newState in ["pussylicking"]):
+				getCharacter("rahi").cummedInMouthBy("pc", FluidSource.Vagina)
+				GM.pc.orgasmFrom("rahi")
 		
 			if(newState != null):
 				setState(newState)
