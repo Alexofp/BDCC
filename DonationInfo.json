@@ -1,27 +1,27 @@
 {
-	"dateString": "05 of May 2023",
+	"dateString": "06 of May 2023",
 	"entries": {
 		"$1.00": [
 			{
 				"nickname": "thatoneguyatthebar"
 			},
 			{
-				"nickname": "Zaxon Rapial"
+				"nickname": "Maxtacks"
 			},
 			{
 				"nickname": "Caliban"
 			},
 			{
-				"nickname": "Maxtacks"
+				"nickname": "Zaxon Rapial"
 			},
 			{
 				"nickname": "Kyle Oran Evans "
 			},
 			{
-				"nickname": "Trewill"
+				"nickname": "Shadowwall123"
 			},
 			{
-				"nickname": "Shadowwall123"
+				"nickname": "Trewill"
 			},
 			{
 				"nickname": "Lichity"
@@ -30,16 +30,16 @@
 				"nickname": "VØID"
 			},
 			{
-				"nickname": "BarryRkls"
-			},
-			{
-				"nickname": "joelee29"
+				"nickname": "Tristan Leo Roberts "
 			},
 			{
 				"nickname": "User#a63f196a"
 			},
 			{
-				"nickname": "Tristan Leo Roberts "
+				"nickname": "joelee29"
+			},
+			{
+				"nickname": "BarryRkls"
 			},
 			{
 				"nickname": "User#d7493e93"
@@ -48,22 +48,22 @@
 				"nickname": "ghost of cum"
 			},
 			{
-				"nickname": "HANAMIアリス"
-			},
-			{
 				"nickname": "Magetsu88"
 			},
 			{
-				"nickname": "User#86fd5ea0"
+				"nickname": "HANAMIアリス"
 			},
 			{
 				"nickname": "fristen"
 			},
 			{
-				"nickname": "Drakgeneral"
+				"nickname": "User#86fd5ea0"
 			},
 			{
 				"nickname": "fredddeh"
+			},
+			{
+				"nickname": "Drakgeneral"
 			},
 			{
 				"nickname": "Vanitas Omnia"
@@ -125,7 +125,19 @@
 				"nickname": "Rac"
 			},
 			{
+				"nickname": "Akos"
+			},
+			{
+				"nickname": "AdaraOlael"
+			},
+			{
+				"nickname": "DemonKiller156"
+			},
+			{
 				"nickname": "Christian Lewis"
+			},
+			{
+				"nickname": "Tipping Flipping"
 			}
 		],
 		"$5.00": [
@@ -142,10 +154,13 @@
 				"nickname": "User#d74b7dcd"
 			},
 			{
+				"nickname": "Master Puro"
+			},
+			{
 				"nickname": "GoatToast"
 			},
 			{
-				"nickname": "Master Puro"
+				"nickname": "Pusspuss"
 			},
 			{
 				"nickname": "Blazewolf"
@@ -160,10 +175,10 @@
 				"nickname": "User#df1b8b36"
 			},
 			{
-				"nickname": "User#6575234c"
+				"nickname": "Dgf"
 			},
 			{
-				"nickname": "Dgf"
+				"nickname": "User#6575234c"
 			}
 		]
 	},
@@ -172,5 +187,5 @@
 		"$5.00",
 		"$1.00"
 	],
-	"unixTime": 1683302678
+	"unixTime": 1683390115
 }
