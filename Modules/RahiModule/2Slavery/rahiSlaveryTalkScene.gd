@@ -238,6 +238,8 @@ func _run():
 		addButton("Pet", "Pet that kitty", "doreward", ["rahiRewardPetScene"])
 		if(slaveryStage >= 1):
 			addButton("Give treat", "Give your kitty a treat", "doreward", ["rahiRewardTreatScene"])
+		if(getModule("RahiModule").isSkillLearned("rahiSkillExhibit")):
+			addButton("Exhibitionism", "(Exhibitionism) Nudity can be rewarding..", "doreward", ["rahiRewardExhibitionismScene"])
 		addButton("Back", "Go back a menu", "")
 		
 	if(state == "punish"):
