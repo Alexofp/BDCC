@@ -18,10 +18,13 @@ func _run():
 
 		var exLevel = getModule("RahiModule").getSkillScore("rahiSkillExhibit")
 		if (exLevel <= 0):
-			addButton("Stripping", "Make Rahi to strip for a reward", "stripping1")
-		##elif (exLevel <= 2):
+			addButton("Stripping lvl1", "Make Rahi to strip for a reward", "stripping1")
+		elif (exLevel <= 1):
+			addButton("Stripping 2", "Make Rahi to strip for a reward", "stripping2")
+		elif (exLevel <= 2):
+			addButton("Stripping 3", "Make Rahi to strip for a reward", "stripping3")
 		else:
-			addButton("Stripping", "Make Rahi to strip for a reward", "stripping2")
+			addButton("Stripping", "Ask Rahi to strip for you", "stripping")
 	if(state == "stripping1"):
 		playAnimation(StageScene.Duo, "sit", {npc="rahi", npcBodyState={naked=true}})
 		saynn("Since Rahi has absolutely zero skill in exhibitionism you decide to go very easy on her today.")
@@ -118,6 +121,162 @@ func _run():
 		saynn("Your hands land on her thighs and gently caress them while your kitty is enjoying her last treat. She is one step closer to becoming confident.")
 
 		addButton("Continue", "That was nice", "endthescene")
+	if(state == "stripping3"):
+		playAnimation(StageScene.Duo, "sit", {npc="rahi", npcBodyState={naked=true}})
+		saynn("You find a chair and take a seat before pulling a little bag of treats in front of Rahi before offering her a little smile. Your kitty notices it and already knows what this is about. She is still not yet fully into the idea of being casually nude in public, her paw rubs her nose.")
+
+		saynn("You grab a single treat and present it to Rahi.")
+
+		saynn("[say=pc]Come on, Kitty, you can do it.[/say]")
+
+		saynn("The feline bites her lip and reaches for her shirt, her clawed digits slowly unbuttoning it as she catches your fascinated stare. Strangely enough, Rahi doesn't get too embarrassed, just smiling and blushing slightly. She reveals her fluffy belly and then drops the shirt completely, displaying her {rahi.breasts} to you, even crossing her arms under them, emphasizing their volume.")
+
+		saynn("[say=pc]Good kitty.[/say]")
+
+		saynn("Rahi giggles softly. You toss her a candy which she catches and eats quickly.")
+
+		saynn("Feeling more confident, Rahi grabs onto her shorts and begins to slowly pull them down her legs, slowly revealing her crotch area.. and soon her cute pink slit too. Rahi looks at you exploring her girly curves and wiggles her butt to make the shorts fall faster.")
+
+		saynn("[say=rahi]Do you like that, {rahiMaster}?..[/say]")
+
+		saynn("[say=pc]You're doing great.[/say]")
+
+		saynn("Filled with excitement, Rahi slowly walks up to you, swaying her hips widely for that feminine look. As you hold out the candy for her, she slowly leans in and grabs it off your palm with her teeth. All the while her paws are pressed against her thighs, meaning her arms are squeezing her breasts right in front of you."+str(" It doesn't take long for some milk to start coming out of them. So tasty." if getCharacter("rahi").canBeMilked() else "")+"")
+
+		saynn("Rahi purrs after consuming that treat. She straightens her posture before doing a little twirl and posing for you, showing off her naked body, her tail teasingly covering up her pussy that has gotten kinda wet..")
+
+		saynn("She continues to do this little dance for you, shaking her hips and running her paws over the curves. Your hungry gaze watches the show and explores Rahi's body which only seems to make her more eager.")
+
+		saynn("Eventually Rahi exhausts all her moves and just stands before you, panting slightly with a big smile on her face.")
+
+		saynn("[say=pc]Such a good kitty.[/say]")
+
+		saynn("[say=rahi]Thank you, meow..[/say]")
+
+		saynn("It seems your kitty begins to enjoy being an exhibitionist..")
+
+		addButton("Continue", "That was nice", "endthescene")
+	if(state == "stripping"):
+		playAnimation(StageScene.Duo, "sit", {npc="rahi", npcBodyState={naked=true}})
+		saynn("You take a seat on the chair that's in Rahi's cell and look at her with an expectant look on your face. Your kitty notices your stare and smiles, she takes a spot in the middle of the cell and presents herself. Rahi is wearing an inmate shirt and shorts, a standard uniform.")
+
+		saynn("[say=rahi]Want something, {rahiMaster}?..[/say]")
+
+		saynn("[say=pc]Yeah.[/say]")
+
+		saynn("You point at her clothes and she instantly understands the order. She begins to slowly undo the buttons of her shirt, biting her lip as she exposes more and more of her fur to your gaze, her own eyes are constantly watching yours, bathing in your attention.")
+
+		saynn("As she moves the shirt off of her shoulders and exposes her beautiful perky tits to you, it's clear that a rush of arousal rushes through her body, her pink nipples harden and there appears a dark wet spot on her shorts.")
+
+		saynn("She tosses the shirt aside and stands before you, proudly displaying you her chest while only wearing her shorts. Her paws reach out and tug on her own nips, your kitty clearly has no problem touching herself in front of you..")
+
+		saynn("[say=rahi]Nya.. She is such a.. slut..[/say]")
+
+		saynn("After teasing her nips for a bit, your kitty slides her paws down along her belly before hooking her thumbs into the waistband of her shorts and slowly dragging them down. She keeps her gaze locked on your face as she reveals her tight pink pussy, shining with wetness.. You can hear her breathing deeply as she spreads her legs slightly, giving you a better view of her folds. Her digit lands on her clit and rubs it a few times before spreading her petals, causing a string of juices to hang between them.")
+
+		saynn("[say=rahi]See.. a slut that gets wet from being naked in front of people..[/say]")
+
+		saynn("Next, Rahi turns around and bends over, her paws spreading her buttcheeks, giving you a full view of her tight little asshole. She looks back at you over the shoulder, clearly getting heated from presenting herself in such a vulnerable position. Being watched and admired makes her feel so excited..")
+
+		saynn("[say=rahi]Do you like what you see?..[/say]")
+
+		saynn("Of course, you nod eagerly, your eyes still fixed on her body, causing Rahi to feel a surge of satisfaction and pride after pleasing you. She turns around again and steps closer, her paws grabbing your hands and putting them on her chest. You cup her {rahi.breasts}, squeezing and playing with the nipples as she watches your reaction with great interest. It seems just feeling the eyes of others glued to her body is now a good enough reward for her..")
+
+		saynn("[say=rahi]Is this what you want?.. Tell her what to do and she will do it for you..[/say]")
+
+		addButton("Enough", "That was enough of lewd for one time", "stripping_enough")
+		addButton("Ask to masturbate", "Order Rahi to touch herself in front of you", "stripping_masturbate")
+		if (getModule("RahiModule").isSkillLearned("rahiSkillSex")):
+			if (GM.pc.hasReachablePenis()):
+				addButton("Rail her", "(Sex) Pin Rahi against the window and breed her pussy for being so sexy", "stripping_rail")
+	if(state == "stripping_enough"):
+		playAnimation(StageScene.Duo, "stand", {npc="rahi", npcBodyState={naked=true}})
+		saynn("[say=pc]Thank you, kitty, that was enough.[/say]")
+
+		saynn("Naked Rahi licks her lips and slides her paw over your shoulder.")
+
+		saynn("[say=rahi]Of course..[/say]")
+
+		saynn("You stand up and wrap your hands around your kitty, giving her a good hug. Rahi eeps but then leans into your hug and kisses your cheek.")
+
+		saynn("[say=rahi]She likes when you look at her, {rahiMaster}..[/say]")
+
+		addButton("Continue", "That was nice", "endthescene")
+	if(state == "stripping_masturbate"):
+		playAnimation(StageScene.Duo, "sit", {npc="rahi", npcBodyState={naked=true}})
+		saynn("[say=pc]You were touching yourself so well, kitty.[/say]")
+
+		saynn("Rahi smiles obediently and slowly slides her paw down to her crotch. She raises her leg and places the digi foot on the corner of your chair, allowing you to see her sexy moist folds in great detail.")
+
+		saynn("[say=rahi]You watching?..[/say]")
+
+		saynn("You nod softly. Your kitty starts by teasing herself, missing her pussy and instead running her clawed digits along her inner thigh. Slowly, she slides her fingers up to her wet pussy and begins to circle her clit. Your kitty does a little dance with her hips, moving them in rhythm with her fingers.")
+
+		saynn("As she continues to touch herself, her breathing becomes more deep, little moans escape from her. Her free paw lands on her tits and squeezes one tightly while a few fingers of her other paw slip inside her dripping sex, pumping in and out.")
+
+		saynn("[say=rahi]Look at her.. Your kitty is fucking her little pussy.. with her fingers.. ah-h..[/say]")
+
+		saynn("Rahi is enjoying herself way too much, her body starts to tremble, her moans grow more bold and passionate as she approaches climax. She keeps squeezing her breasts and hammering away at her pleasure spot until finally reaching it. A cry of pleasure leaves her lungs as her body tenses up, her legs shaking, her pussy squirting juices all over her paw.")
+
+		saynn("[say=pc]Good girl.[/say]")
+
+		saynn("Panting, Rahi looks down at you while biting her lip. She proudly displays her wet paw and dripping pussy, including spreading the entrance open, showing you how heated she is inside right now. All with zero shame..")
+
+		saynn("[say=rahi]Thank you..[/say]")
+
+		addButton("Continue", "That was nice", "endthescene")
+	if(state == "stripping_rail"):
+		playAnimation(StageScene.SexStanding, "fast", {npc="rahi", pc="pc", bodyState={exposedCrotch=true,hard=true}, npcBodyState={naked=true}})
+		saynn("You just.. can't resist that kitty any longer, you've been hard for way too long.")
+
+		saynn("Suddenly, you stand up from the chair and pin Rahi against her cell window that leads out into the general pop block. You can feel the heat radiating from her as you expose your {pc.penis} and press your body against hers.")
+
+		saynn("[say=rahi]Ohh.. What are you.. ah..[/say]")
+
+		saynn("With one quick motion, you guide the tip of your shaft towards her pussy lips. One rough thrust and you're inside, her wet pussy lips welcoming you and letting you slide deeper. Rahi purrs, her naked body is pinned between the cold window and you, she can see inmates walking past it..")
+
+		saynn("[say=rahi]Yes.. Please.. fuck your kitty.. your dirty slut..[/say]")
+
+		saynn("She grips that window tightly as you start moving your hips, fucking her needy cunt, her inner walls coating your shaft with juices. Moans leave Rahi's lips as your dick rubs her pleasure spot each time you ram it in. Some inmates outside take note of what's happening.. They can see Rahi's exposed breasts pressed into the window while you pound her slit.")
+
+		saynn("Rahi cries out from pleasure, after seeing so many eyes on her she already reaches her climax. Waves of ecstasy wash over her, causing her body to shiver and her toes to curl, her pussy clenching around your shaft but you push through that, forcibly extending kitty's orgasm.")
+
+		saynn("[say=rahi]Ah!.. Fuck her harder.. Everyone sees how much she loves getting fucked.. Like a dirty little slut..[/say]")
+
+		saynn("You obliged, slamming into Rahi with all your strength, your cock reaching the natural barricade inside her and smashing it each time, causing your kitty's eyes to start rolling up. Another quick orgasm hits her body, causing her legs to start shaking and her drooly tongue to roll out of her mouth. Her pussy keeps clenching tight around your member as more powerful orgasms follow soon, Rahi squirts and really wants to collapse but you don't let her, instead fucking her raw.")
+
+		saynn("[say=rahi]F-f-fu-uck..[/say]")
+
+		addButton("Cum inside", "There is no other choice", "stripping_rail_cuminside")
+	if(state == "stripping_rail_cuminside"):
+		playAnimation(StageScene.SexStanding, "inside", {npc="rahi", pc="pc", bodyState={exposedCrotch=true,hard=true}, npcBodyState={naked=true}})
+		saynn("Rahi's cunt is pulsating around your dick so hard that it doesn't take long for you to reach your peak too. With one last thrust, you ram your {pc.penis} deep inside Rahi before cumming hard, warm sticky {pc.cum} begins to flood your pet's insides. She lets out a hot moan of pleasure as she feels your seed filling her womb up. The inmates cheer and step closer, watching the action through the window but not daring to step inside.")
+
+		saynn("After Rahi's pussy milks your balls for every last drop, you slowly withdraw from her, a mix of juices and your jizz begins dripping down her thighs.")
+
+		saynn("[say=rahi]Ah.. so much.. inside.. while everyone is watching..[/say]")
+
+		addButton("Continue", "See what happens next", "stripping_rail_aftermath")
+	if(state == "stripping_rail_aftermath"):
+		playAnimation(StageScene.Duo, "sit", {npc="rahi", npcBodyState={naked=true}})
+		
+		saynn("After that incense fucking, you sit on the chair again, recovering your breath. Rahi turns around to face you, looking completely satisfied, with a smile on her face and a glint in her eye. All the while other inmates are still watching through the window. And Rahi really wants to give them a show.")
+
+		saynn("Your kitty takes a step back before spreading her legs, giving the crowd a clear view of her used pussy.")
+
+		saynn("[say=rahi]Look at what {pc.he} did to her.. She can feel it dripping out of her pussy..[/say]")
+
+		saynn("Her voice is filled with desire. She turns her fingers over her pussy lips, spreading them apart to show off the seed that's still oozing out of her. The inmates can't take their eyes off Rahi, some are rubbing their crotches.")
+
+		saynn("[say=rahi]Do you like that?.. Her slutty cunt got stuffed..[/say]")
+
+		saynn("Rahi plunges two of her digits into her pussy, coating them in your {pc.cum} before bringing them to her mouth and cleaning them off with her tongue. She grabs more and more of your seed and licks it all up. Then she shows everyone her mouth before swallowing everything she gathered and showing it again, empty this time.. Some of the audience members stroke their members so hard that they cum already, making Rahi giggle.")
+
+		saynn("Naked stuffed used Rahi returns to you and sits on your lap. She nuzzles your cheek.")
+
+		saynn("[say=rahi]This was amazing.. Thank you..[/say]")
+
+		addButton("Continue", "That was nice", "endthescene")
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
@@ -131,6 +290,27 @@ func _react(_action: String, _args):
 	if(_action == "stripping2"):
 		processTime(25*60)
 		getModule("RahiModule").advanceSkill("rahiSkillExhibit")
+
+	if(_action == "stripping3"):
+		processTime(25*60)
+		getModule("RahiModule").advanceSkill("rahiSkillExhibit")
+
+	if(_action == "stripping"):
+		processTime(25*60)
+		getModule("RahiModule").advanceSkill("rahiSkillExhibit")
+
+	if(_action == "stripping_masturbate"):
+		processTime(10*60)
+		GM.pc.addLust(20)
+
+	if(_action == "stripping_rail"):
+		getModule("RahiModule").advanceSkill("rahiSkillSex")
+		processTime(5*60)
+
+	if(_action == "stripping_rail_cuminside"):
+		processTime(3*60)
+		getCharacter("rahi").cummedInVaginaBy("pc")
+		GM.pc.orgasmFrom("rahi")
 
 	setState(_action)
 
