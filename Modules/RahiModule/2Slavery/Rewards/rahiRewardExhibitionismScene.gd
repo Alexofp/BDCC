@@ -1,6 +1,10 @@
 extends SceneBase
 
 var deserved = true
+var parConf = 0.0
+var parShame = 0.0
+var isNaked = false
+var parLastEvent = ""
 
 func _init():
 	sceneID = "rahiRewardExhibitionismScene"
@@ -25,6 +29,10 @@ func _run():
 			addButton("Stripping 3", "Make Rahi to strip for a reward", "stripping3")
 		else:
 			addButton("Stripping", "Ask Rahi to strip for you", "stripping")
+		if (exLevel >= 5):
+			addButton("Parading", "Take Rahi out and let her show off her body", "parading_start")
+		else:
+			addDisabledButton("Parading", "Rahi needs to be more confident to do this")
 	if(state == "stripping1"):
 		playAnimation(StageScene.Duo, "sit", {npc="rahi", npcBodyState={naked=true}})
 		saynn("Since Rahi has absolutely zero skill in exhibitionism you decide to go very easy on her today.")
@@ -316,6 +324,136 @@ func _run():
 		saynn("[say=rahi]Thank you.. meow..[/say]")
 
 		addButton("Continue", "That was nice", "endthescene")
+	if(state == "parading_start"):
+		aimCameraAndSetLocName("hall_mainentrance")
+		saynn("You decide that the best way to reward Rahi is to parade her around the prison for a bit. You make sure to let her know that she is free to.. showcase.. herself any way she wants to and that you will be there for her if she needs protection. You grab a chain leash..")
+
+		saynn("Rahi nods and raises her chin, giving you access to her collar. You leash your kitty and walk her out in the main hall.")
+
+		saynn("Time to see what happens.")
+
+		addButton("Continue", "See what happens next", "par_loop")
+	if(state == "par_loop"):
+		playAnimation(StageScene.Duo, "stand", {npc="rahi", npcBodyState={naked=isNaked}})
+		if (isNaked):
+			saynn("You are walking your kitty on a leash. She is so confident in herself that she is okay with not wearing any clothes, allowing any inmate or staff member to see all of her in great detail.")
+
+		else:
+			saynn("You are walking your kitty on a leash. She is still wearing her inmate shirt and shorts. She is not confident enough to strip completely.")
+
+		saynn("Rahi's confidence: "+str(Util.roundF(parConf*100.0, 1))+"%")
+
+		saynn("Rahi's embarrassment: "+str(Util.roundF(parShame*100.0, 1))+"%")
+
+		addButton("Continue!", "See what happens next", "parGenerateEncounter")
+	if(state == "pbench1"):
+		playAnimation(StageScene.Duo, "sit", {npc="rahi", npcAction="sit", npcBodyState={naked=isNaked}})
+		aimCameraAndSetLocName(RNG.pick(["main_bench1", "main_bench2", "main_bench3", "main_bench4"]))
+		if (!isNaked):
+			saynn("You see one of the benches and decide to take a seat. Rahi sits nearby and tries to rest her back against the cold metal. Rahi takes a deep breath and stretches her arms.")
+
+			saynn("As you chat about stuff, Rahi bites her lip subtly. She looks around and then gives you a sly grin.")
+
+			saynn("Without stopping the conversation, she slips her paw into her shorts and begins to casually rub her clit. You raise a brow at that but don't bring it up. Rahi's smile only gets bigger the more she touches herself, a little moan slips past her lips during one of the answers.")
+
+			saynn("You are pretty sure other inmates have taken notice of Rahi's paw being in her shorts. But Rahi doesn't let their gazes stop her, she is being bold, enjoying the sensation of her fingers on her pussy.")
+
+			if (parShame < 0.8):
+				saynn("[say=rahi]Something's wrong~?[/say]")
+
+				saynn("[say=pc]Oh? No.. all good..[/say]")
+
+				saynn("As your little conversation comes to an end, Rahi brings her paw to her mouth and carefully licks her digits.")
+
+			else:
+				saynn("[say=rahi]Is this too much?..[/say]")
+
+				saynn("[say=pc]Oh? No.. it's all good.[/say]")
+
+				saynn("[say=rahi]She feels it might be too much..[/say]")
+
+				saynn("As your little conversation comes to an end, Rahi pulls her paw out of her shorts and notices that it's wet. Her cheeks blush as she quickly dries it against her uniform.")
+
+			saynn("Time to walk around some more.")
+
+		else:
+			saynn("You see one of the benches and decide to take a seat. Naked Rahi sits nearby and tries to rest her back against the cold metal.")
+
+			saynn("As you chat about stuff, Rahi tilts her head slightly and looks at you with lusty eyes. Around you are some inmates, some of them stare at your kitty, some didn't even realize yet that she has no clothes on.")
+
+			saynn("Without stopping the conversation, Rahi slides her paw down her curves and lands it on her crotch. A soft moan escaped her lips as she began to rub her clit. She seemingly doesn't care about who sees her. But when she notices you noticing her masturbating, a little cute smile appears on her face.")
+
+			if (parShame < 0.8):
+				saynn("[say=rahi]What's up~?[/say]")
+
+				saynn("[say=pc]Oh? No.. nothing..[/say]")
+
+				saynn("You almost forget what you were talking about, your sneaky gaze keeps slipping down to spy on Rahi's paw as she casually plays with her sensitive bean, flicking it side to side.")
+
+				saynn("Others around started to take notice but Rahi paid no attention. Instead, she spreads her legs, revealing her moist pussy lips and spreads them open before sliding a few digits inside.")
+
+				saynn("[say=rahi]Yeah, she agrees. Sparklink engines are the best at traversing at super-quantum speeds.[/say]")
+
+				saynn("What? You don't even remember how you got there. As your little conversation comes to an end, Rahi brings her paw to her mouth and carefully licks her digits.")
+
+			else:
+				saynn("[say=rahi]Is this too much?..[/say]")
+
+				saynn("[say=pc]Oh? No.. it's all good.[/say]")
+
+				saynn("[say=rahi]She feels it might be too much..[/say]")
+
+				saynn("You almost forget what you were talking about, your sneaky gaze keeps slipping down to spy on Rahi's paw as she casually plays with her sensitive bean, flicking it side to side.")
+
+				saynn("Rahi notices someone's drilling gaze on her and gets somewhat shy. She suddenly feels an urge to cover her naked breasts and close her legs up. Her other paw is still gently kneading the sensitive clit though..")
+
+				saynn("As your little conversation comes to an end, Rahi pulls her paw away from her slit and notices that it's wet. Her cheeks blush as she quickly dries it against her fur.")
+
+			saynn("Time to walk around some more.")
+
+		addButton("Continue", "See what happens next", "par_good")
+	if(state == "pflash1"):
+		playAnimation(StageScene.Duo, "stand", {npc="rahi", npcAction="stand", npcBodyState={naked=isNaked}})
+		aimCameraAndSetLocName(RNG.pick(["main_hall_west", "hall_mainentrance", "yard_firstroom", "main_bench4"]))
+		saynn("As you parade Rahi through the prison grounds, she takes notice of one of the inmates who is staring at her.")
+
+		if (parShame < 0.8):
+			saynn("Without hesitation, Rahi quickly lifts her shirt, revealing her perky breasts to the inmate. His eyes widened in surprise but at the same time he couldn't look away. Rahi smirks and jiggles her breasts for them before hiding them under the shirt again.")
+
+		else:
+			saynn("She is blushing from such a stare but decides to go through with her plan anyways. She quickly lifts her shirt, revealing her perky breasts to the inmate. His eyes widened in surprise but at the same time he couldn't look away. Rahi likes his attention but at some point it gets too much and she hides them under the shirt again.")
+
+		addButton("Continue", "See what happens next", "par_good")
+	if(state == "pflash2"):
+		playAnimation(StageScene.Duo, "stand", {npc="rahi", npcAction="stand", npcBodyState={naked=isNaked}})
+		aimCameraAndSetLocName(RNG.pick(["main_hall_west", "hall_mainentrance", "yard_firstroom", "main_bench4"]))
+		saynn("As you lead Rahi through the prison on a leash, she spots a guard watching you intently.")
+
+		saynn("Without a second thought, Rahi lifts up her shirt, revealing her perky breasts and hard nipples. The guard is incredibly surprised but can't take his eyes off of her, clearly getting turned on by the unexpected sight.")
+
+		if (parShame < 0.8):
+			saynn("Rahi sticks her tongue out at him and quickly covers herself. Such a bold kitty.")
+
+		else:
+			saynn("Rahi can do it for only a few moments though, getting a little embarrassed of showing off her tits so casually. She quickly covers herself and avoids the guard's eyes.")
+
+		addButton("Continue", "See what happens next", "par_good")
+	if(state == "pflash3"):
+		playAnimation(StageScene.Duo, "stand", {npc="rahi", npcAction="stand", npcBodyState={naked=true}})
+		aimCameraAndSetLocName(RNG.pick(["main_hall_west", "hall_mainentrance", "yard_firstroom", "main_bench4"]))
+		saynn("As you parade Rahi on a leash, Rahi notices a group of inmates and has a sudden urge to give them a show.")
+
+		saynn("Without hesitation, she quickly pulls down her shorts, exposing her bare pussy to the group of strangers.")
+
+		saynn("The inmates are stunned, their eyes widening and getting lusty at the sight of her intimate parts on display. Rahi bathes in their reactions, getting visibly aroused from their hungry gazes. She keeps her shorts at her knee-level and spreads her legs as wide as they allow, giving them an even better view.")
+
+		saynn("The inmates are catcalling your kitty and explaining what lewd things they would do to her but luckily you are there to keep them from going too far. You enjoy the view too though, Rahi runs her fingers over her clit and begins to moan softly for the audience.")
+
+		saynn("The inmates are openly staring at her, their hands moving towards their own crotches. Rahi rubs her pussy faster, knowing that they were enjoying the show.")
+
+		saynn("Though, that was enough for her. She quickly pulls her shorts up and runs away with you before the inmates have completely surrounded you.")
+
+		addButton("Continue", "See what happens next", "par_good")
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
@@ -338,6 +476,9 @@ func _react(_action: String, _args):
 		processTime(25*60)
 		getModule("RahiModule").advanceSkill("rahiSkillExhibit")
 
+	if(_action == "parading_start"):
+		processTime(3*60)
+
 	if(_action == "stripping_masturbate"):
 		processTime(10*60)
 		GM.pc.addLust(20)
@@ -355,12 +496,41 @@ func _react(_action: String, _args):
 		getCharacter("rahi").cummedInVaginaBy("pc")
 		GM.pc.orgasmFrom("rahi")
 
+	if(_action == "parGenerateEncounter"):
+		processTime(1*60)
+		var possible = []
+		
+		if(!isNaked):
+			possible.append("pbench1")
+			possible.append_array(["pflash1", "pflash2", "pflash3"])
+		else:
+			possible.append("pbench1")
+		
+		possible.erase(parLastEvent)
+		
+		var selEvent = RNG.pick(possible)
+		
+		
+		setState(selEvent)
+		parLastEvent = selEvent
+		return
+
+	if(_action == "par_good"):
+		parConf = parConf + 0.1
+		parShame = parShame + RNG.randf_range(0.01, 0.2)
+		setState("par_loop")
+		return
+
 	setState(_action)
 
 func saveData():
 	var data = .saveData()
 
 	data["deserved"] = deserved
+	data["parConf"] = parConf
+	data["parShame"] = parShame
+	data["isNaked"] = isNaked
+	data["parLastEvent"] = parLastEvent
 
 	return data
 
@@ -368,3 +538,7 @@ func loadData(data):
 	.loadData(data)
 
 	deserved = SAVE.loadVar(data, "deserved", true)
+	parConf = SAVE.loadVar(data, "parConf", 0.0)
+	parShame = SAVE.loadVar(data, "parShame", 0.0)
+	isNaked = SAVE.loadVar(data, "isNaked", false)
+	parLastEvent = SAVE.loadVar(data, "parLastEvent", "")
