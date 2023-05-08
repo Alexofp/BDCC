@@ -189,6 +189,7 @@ func _run():
 		if (getModule("RahiModule").isSkillLearned("rahiSkillSex")):
 			if (GM.pc.hasReachablePenis()):
 				addButton("Rail her", "(Sex) Pin Rahi against the window and breed her pussy for being so sexy", "stripping_rail")
+			addButton("Finger her", "(Sex) Pin Rahi against the window and fuck her pussy with your digits", "stripping_fingering")
 	if(state == "stripping_enough"):
 		playAnimation(StageScene.Duo, "stand", {npc="rahi", npcBodyState={naked=true}})
 		saynn("[say=pc]Thank you, kitty, that was enough.[/say]")
@@ -259,7 +260,6 @@ func _run():
 		addButton("Continue", "See what happens next", "stripping_rail_aftermath")
 	if(state == "stripping_rail_aftermath"):
 		playAnimation(StageScene.Duo, "sit", {npc="rahi", npcBodyState={naked=true}})
-		
 		saynn("After that incense fucking, you sit on the chair again, recovering your breath. Rahi turns around to face you, looking completely satisfied, with a smile on her face and a glint in her eye. All the while other inmates are still watching through the window. And Rahi really wants to give them a show.")
 
 		saynn("Your kitty takes a step back before spreading her legs, giving the crowd a clear view of her used pussy.")
@@ -275,6 +275,45 @@ func _run():
 		saynn("Naked stuffed used Rahi returns to you and sits on your lap. She nuzzles your cheek.")
 
 		saynn("[say=rahi]This was amazing.. Thank you..[/say]")
+
+		addButton("Continue", "That was nice", "endthescene")
+	if(state == "stripping_fingering"):
+		playAnimation(StageScene.SexStanding, "tease", {npc="rahi", pc="pc", npcBodyState={naked=true}})
+		saynn("You just.. can't resist from touching that kitty any longer, she's been a tease for way too long.")
+
+		saynn("Suddenly, you stand up from the chair and pin Rahi against her cell window that leads out into the general pop block. You can feel the heat radiating from her as you press your body against hers.")
+
+		saynn("[say=rahi]Ohh.. What are you.. ah..[/say]")
+
+		saynn("Rahi lets out a small gasp, her nipples are pressed against the cold glass while you stand behind her. Your hand slides down over Rahi's hips down to her crotch, finding the little sensitive bean there and rubbing it with quick side-to-side motions. All the while your other hand squeezes between the glass and Rahi's breasts, cupping one of them."+str(" Little milk streams already emerge under your hand, leaving fancy patterns on that window." if getCharacter("rahi").canBeMilked() else "")+"")
+
+		saynn("There are inmates walking around the general pop block, Rahi gets their attention by moaning and spreading her legs slightly, inviting you to touch her more intimately. You take the invitation, sliding your hand further between her legs and rubbing her pussy, occasionally spreading the folds to check her wetness. Rahi is pretty wet, your fingers feel.. the heat.")
+
+		saynn("[say=rahi]Yes.. Please.. finger your kitty.. your dirty slut..[/say]")
+
+		saynn("She is quite bold for such a shy kitty. You smirk and force two of your digits inside her, pumping them in and out roughly while your other hand keeps groping her tits. Rahi's moans turn into cries of pleasure as she feels your fingers hit all the right spots inside her. All the while, a little crowd has gathered behind the window, inmates are watching but don't dare to walk into the cell. Some of them are visibly aroused though..")
+
+		saynn("[say=rahi]Ah!.. Harder.. Everyone sees how much she loves getting fucked.. Like a dirty little slut..[/say]")
+
+		saynn("It seems that your touch, coupled with the many eyes staring at her, brings an immense amount of pleasure to her. You can feel her orgasm building up.. her body is squirming under you, her panting gets faster, her inner walls clenching around your digits.. until there is no going back.")
+
+		saynn("As Rahi reaches the peak, she lets out a loud slutty scream, her body convulsing with pleasure. You hold your pinned into the window, still forcing your digits up her spasming pussy, overstimulating your kitty until she squirts all over your hand. Some inmates outside seem to be bringing themselves over the edge too.")
+
+		saynn("[say=rahi]Ah.. S-She is.. Nya-a.. while everyone is w-watching..[/say]")
+
+		saynn("You decide not to give your kitty any rest and keep finger-fucking her needy hole, hammering away at her sensitive spots and fighting the clenching pussy walls until she squirts again.. and again.. overstimulation causing kitty to stick her drooly tongue out and roll her eyes up, the fur on her inner thighs looking extremely wet from all the girlcum.")
+
+		saynn("[say=rahi]Fu-u-uck!..[/say]")
+
+		saynn("Only when her orgasm finally subsides, you slip your digits out and let her slump against the window. She is completely spent, her body tingling with the strong afterglow.")
+
+		saynn("You step back and admire your handiwork. Rahi's pussy still pulsates slightly and drips juices. It seems she loved every second of it.. she can't quite describe it anymore. After recovering for a bit, Rahi takes a step back and spreads her legs, showing off her glistening, dripping pussy to the inmates.")
+
+		saynn("[say=rahi]Look at what {pc.he} did to her.. To her pussy..[/say]")
+
+		saynn("After this, Rahi walks up to you and gives you a tight hug, purring loudly into your face.")
+
+		saynn("[say=rahi]Thank you.. meow..[/say]")
 
 		addButton("Continue", "That was nice", "endthescene")
 
@@ -304,6 +343,10 @@ func _react(_action: String, _args):
 		GM.pc.addLust(20)
 
 	if(_action == "stripping_rail"):
+		getModule("RahiModule").advanceSkill("rahiSkillSex")
+		processTime(5*60)
+
+	if(_action == "stripping_fingering"):
 		getModule("RahiModule").advanceSkill("rahiSkillSex")
 		processTime(5*60)
 
