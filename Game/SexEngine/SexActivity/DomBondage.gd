@@ -192,6 +192,7 @@ func getSubActions():
 func doSubAction(_id, _actionInfo):
 	if(_id == "resist"):
 		if(RNG.chance(70.0 - domInfo.getAngerScore()*60.0)):
+			progressGoal(SexGoal.TieUp)
 			domInfo.addAnger(0.3)
 			endActivity()
 			return {
