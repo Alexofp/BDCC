@@ -502,6 +502,8 @@ func _run():
 
 		saynn("You can either just enjoy the view or be bold yourself, testing your kitty.")
 
+		saynn("Success chance: "+str(getSuccChance(5, 15, 20, 90))+"%")
+
 		addButton("Touch", "Touch your kitty's boobs", "pasktotouchtits_touch")
 		addButton("Just watch", "You'd rather not spook your kitty", "pasktotouchtits_watch")
 	if(state == "pasktotouchtits_touch"):
@@ -518,7 +520,7 @@ func _run():
 
 			saynn("After he walks away, Rahi giggles and buttons up her shirt.")
 
-			addButton("Continue", "See what happens next", "par_good")
+			addButton("Continue", "See what happens next", "par_very_good")
 		else:
 			saynn("Rahi bites her lip and gets all blushy when you do that, a little moan escapes from her as you grope her round breasts and softly pinch her hard nips.")
 
@@ -565,6 +567,126 @@ func _run():
 		saynn("Rahi purrs while you scritch her behind the ears, slowly returning to her normal safe, the red blush goes away from her cheeks.")
 
 		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "pcanteen"):
+		playAnimation(StageScene.Duo, "sit", {npc="rahi", npcAction="sit", npcBodyState={naked=false}})
+		aimCameraAndSetLocName("hall_canteen")
+		saynn("You decide to enter the prison's busy canteen, taking seats on one of the benches near the corner.")
+
+		saynn("Rahi looks around, curious if anyone is watching her. After ensuring that most inmates are busy eating or standing in a queue, she slyly pulls down her shorts, just enough to reveal her aroused sex. It was a.. fascinating sight for sure, Rahi is smiling while proudly displaying her pussy lips that are quite moist and inviting.")
+
+		saynn("[say=rahi]Look at it.. and keep looking..[/say]")
+
+		saynn("Her heart is probably racing with excitement, she glances around discreetly. With a sly smile, she lends over to you, whispering.")
+
+		saynn("[say=rahi]She is so naughty, isn't she?..[/say]")
+
+		saynn("You are wondering if you could.. test your kitty a little bit.")
+
+		saynn("Success chance: "+str(getSuccChance(5, 15, 5, 90))+"%")
+
+		addButton("Touch", "Rub your kitty's pussy", "pcanteen_touch")
+		addButton("Just watch", "You'd rather not embarrass your kitty", "pcanteen_watch")
+	if(state == "pcanteen_touch"):
+		saynn("Rahi is so naughty that you just couldn't resist the temptation. Your hand slowly moves across the table before jumping onto Rahi's inner thigh and caressing it. Kitty raises a brow while you feel the.. warmth.. radiating from her exposed slit. Now it's your time to smile.")
+
+		saynn("[say=pc]Something is bugging you, kitty?[/say]")
+
+		if (success):
+			saynn("Rahi shakes her head and keeps eye contact with you even when you begin to trace the contours of her wet inviting folds with gentle strokes.")
+
+			saynn("[say=rahi]It's.. completely fine, {rahiMaster}..[/say]")
+
+			saynn("Rahi bites her lip to suppress a moan, her excitement growing by the second. All the while one of your digits is teasingly rubbing her sensitive clit. The risk of almost being caught is so..")
+
+			saynn("Suddenly, a few inmates walk up to your little secluded spot and sit on the opposite bench from yours. They drop their food plates onto the table and begin eating their tasteless paste, occasionally shooting you unaware gazes.")
+
+			saynn("You wonder if you should remove the hand now.. Rahi's smile is still wide.. so you continue. Your digits resume their teasing, dancing sensually and exploring the depth of Rahi's slick folds. The canteen noise does mask some of the soft moans that escape from Rahi's lips.. But the people on the other side are probably already wondering why you two are just sitting there with no food.. and why do Rahi's eyes look so lusty.")
+
+			saynn("But, luckily, they just finish their food and leave you two alone.")
+
+			saynn("[say=rahi]Close call.. She can feel the adrenaline.. Nya-a..[/say]")
+
+			saynn("As you pull your hand away from her crotch.. you realize that your fingers are coated in Rahi's juices. Your kitty sees that and pounces on them almost instantly, sliding your digits past her fangs where she can suck them dry.")
+
+			saynn("Time to go..")
+
+			addButton("Continue", "See what happens next", "par_very_good")
+		else:
+			saynn("Rahi shakes her head.. but looks quite nervous while you begin to trace the contours of her wet inviting folds with gentle strokes.")
+
+			saynn("[say=rahi]It's.. no..[/say]")
+
+			saynn("Rahi cheeks blush red as she fails to suppress a moan, her excitement growing by the second.. just like her fear. All the while one of your digits is teasingly rubbing her sensitive clit. The risk of almost being caught is so..")
+
+			saynn("Suddenly, a few inmates walk up to your little secluded spot and sit on the opposite bench from yours. They drop their food plates onto the table and begin eating their tasteless paste, occasionally shooting you unaware gazes.")
+
+			saynn("As soon as they come into view, Rahi shuts her legs.. hard.. trapping your hand between her girly thighs, desperate not to get caught. She tries to maintain a composed face expression.. even while feeling you wiggling your digits beneath the table.")
+
+			saynn("The canteen noise does mask some of the soft moans that escape from Rahi's lips.. But the people on the other side are probably already wondering why you two are just sitting there with no food.. and why do Rahi's cheeks are red and her eyes are so jumpy. Your hand begins to feel numb.. Each passing second feels like an eternity as she waits for the inmates to finish their meals and move on.")
+
+			saynn("Finally, as the inmates rise from their seats, Rahi finally releases your hand.. allowing the blood to flow through it again.")
+
+			saynn("[say=rahi]S-sorry.. Her heart is beating so fast..[/say]")
+
+			saynn("As you pull your hand away from her crotch.. you realize that your fingers are coated in Rahi's juices. Your kitty sees that and pounces on them almost instantly, sliding your digits past her fangs where she can suck them dry.")
+
+			saynn("Time to go..")
+
+			addButton("Continue", "See what happens next", "par_bad")
+	if(state == "pcanteen_watch"):
+		saynn("You couldn't help but to keep staring at that forbidden sight, Rahi's pink, glistening pussy is so tempting.. But you decide against doing more, allowing Rahi to stay confident.")
+
+		saynn("Other inmates begin to fill the canteen, taking seats, including on the opposite bench.. but Rahi remains unashamed.. still displaying herself for you, bathing in the attention that her private bits catch. And the risk of being caught only makes her excitement grow with every second.")
+
+		saynn("The inmates at the opposite are probably questioning themselves about why are you two sitting there without food.. and why your gaze is guided where it is. They whisper amongst themselves.. but you just can't stop looking at your slick pink contours..")
+
+		saynn("Finally, after the inmates finish their meal and leave, Rahi pulls her shorts back up.")
+
+		saynn("[say=rahi]They probably saw.. Her heart is beating so fast..[/say]")
+
+		saynn("Time to go..")
+
+		addButton("Continue", "See what happens next", "par_good")
+	if(state == "pflash4"):
+		playAnimation(StageScene.Duo, "stand", {npc="rahi", npcAction="stand", npcBodyState={naked=false}})
+		aimCameraAndSetLocName(getRandomLoc())
+		saynn("One of the guards seems to be staring at you two a little too much.. Rahi has a playful smirk on her face, you can tell that she has a plan.")
+
+		saynn("Your kitty waits until he gets distracted with some inmate before positioning herself behind him and quickly unbuttoning her inmate shirt, putting her round perky tits on full display. Kinky.")
+
+		saynn("The guard is completely unaware that Rahi is boldly flashing her tits behind him.. but the inmate that got stopped sees that in great detail, his eyes widened as he switches his attention completely.")
+
+		if (isNotShamed()):
+			saynn("Finally, the guard begins to realize that something is wrong and begins to turn. Time seems to slow down.. while Rahi just.. stands still, with her tits out, probably curious about what will happen next if she just lets it happen.")
+
+			saynn("The guard finally turns around, his gaze locking onto Rahi's exposed breasts. A quick flash of surprise flashes across his face. Rahi couldn't help but revel in the power she had over others in that moment.")
+
+			saynn("But when that flash passes, the guard's expression switches to an annoyed one. Time to make your escape! Giggling mischievously, Rahi quickly closes her shirt and grabs your hand before dashing away.")
+
+		else:
+			saynn("Finally, the guard begins to realize that something is wrong and begins to turn. Time seems to slow down.. while Rahi.. begins to have doubts about it. She is still holding her tits out.. but the shame eventually takes over..")
+
+			saynn("The guard finally turns around, his gaze locking onto Rahi. Her cheeks blush for no reason, she manages to close her shirt just in time.. but is still embarrassed about it.")
+
+			saynn("The guard tilts his head and then just shoos you away.")
+
+		addButton("Continue", "See what happens next", "par_good")
+	if(state == "pgymnaked"):
+		playAnimation(StageScene.Duo, "stand", {npc="rahi", npcAction="stand", npcBodyState={naked=true}})
+		aimCameraAndSetLocName("gym_yoga")
+		saynn("You let Rahi lead you in any direction that she wants. And so she does, bringing you into the area with lots of greenery. Rahi decides to take a leisurely stroll through the yard, letting her exposed breasts bounce freely. You were quick to follow. It seems your kitty had a certain place in mind.")
+
+		saynn("The gym.. Your naked kitty enters it and boldly presents herself and her fluffy body, probably already feeling a sense of excitement coursing through her. The gym was busy as always, lots of inmates doing weights or stretches.. but the moment Rahi walked in, most of the gazes were directed towards her.")
+
+		saynn("You take a spot slightly out of the way, looking after Rahi but letting her have fun. You see her swaying her hips seductively as she steps forward, following the inner edge of the area. Her flawless curves were on full display, enticing gazes from all directions.")
+
+		saynn("With a playful smile, Rahi runs her paws over her fur, caressing her {rahi.breasts} and trailing down over her hips. The desire in the onlookers' eyes fuels her fire, making her eager to push boundaries.. You can tell how aroused this little act makes her.")
+
+		saynn("As she walks by weightlifting stations, Rahi can't resist giving a show to the inmates who were mid-lift. She approaches them and turns around before boldly bending forward, ensuring they catch glimpses of her wet dripping pussy and the inviting tight asshole.")
+
+		saynn("And just like, after getting everyone horny, Rahi quickly makes her escape before someone could catch her.")
+
+		addButton("Continue", "See what happens next", "par_good")
 func isNotShamed():
 	if(parShame < 0.8):
 		return true
@@ -575,6 +697,9 @@ func isShamed():
 
 func getRandomLoc():
 	return RNG.pick(["main_hallroom1", "main_hallroom2", "main_hallroom3", "main_hallroom4", "main_hallroom5", "main_hallroom6", "main_hallroom7", "main_hallroom8", "main_hallroom9", "main_hallroom10", "main_hallroom11", "hall_mainentrance", "main_bench1", "main_bench2", "main_bench3", "main_bench4", "main_hall_west", "hall_ne_corner"])
+
+func getSuccChance(minlevel, maxlevel, minchance, maxchance):
+	return Util.roundF(getModule("RahiModule").getSkillSuccessChanceAdv("rahiSkillExhibit", minlevel, maxlevel, minchance, maxchance), 1)
 
 
 func _react(_action: String, _args):
@@ -634,10 +759,12 @@ func _react(_action: String, _args):
 		
 		if(!isNaked):
 			possible.append("pbench1")
-			possible.append_array(["pflash1", "pflash2", "pflash3"])
+			possible.append_array(["pflash1", "pflash2", "pflash3", "pflash4"])
 			possible.append("pasktotouchtits")
+			possible.append("pcanteen")
 		else:
 			possible.append("pbench1")
+			possible.append("pgymnaked")
 		
 		possible.erase(parLastEvent)
 		
@@ -661,16 +788,28 @@ func _react(_action: String, _args):
 		return
 
 	if(_action == "pasktotouchtits_touch"):
-		if(RNG.chance(50)):
+		if(RNG.chance(getSuccChance(5, 15, 20, 90))):
 			success = true
 		else:
 			success = false
+
+	if(_action == "par_very_good"):
+		parConf = parConf + 0.1
+		parShame = parShame + RNG.randf_range(0.01, 0.05)
+		setState("par_loop")
+		return
 
 	if(_action == "par_bad"):
 		parConf = parConf + 0.05
 		parShame = parShame + RNG.randf_range(0.1, 0.2)
 		setState("par_loop")
 		return
+
+	if(_action == "pcanteen_touch"):
+		if(RNG.chance(getSuccChance(5, 15, 5, 90))):
+			success = true
+		else:
+			success = false
 
 	setState(_action)
 

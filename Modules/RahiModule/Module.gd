@@ -362,6 +362,13 @@ func getSkillSuccessChance(skillID, chanceWhenMinSkill, chanceWhenMaxSkill):
 	
 	return chanceWhenMinSkill + (chanceWhenMaxSkill - chanceWhenMinSkill) * (score / 15.0)
 
+func getSkillSuccessChanceAdv(skillID, minlevel, maxlevel, chanceWhenMinSkill, chanceWhenMaxSkill):
+	var score = float(getSkillScore(skillID))
+	var stageProgress = float(score - minlevel) / float(maxlevel - minlevel)
+	stageProgress = clamp(stageProgress, 0.0, 1.0)
+	
+	return chanceWhenMinSkill + (chanceWhenMaxSkill - chanceWhenMinSkill) * stageProgress
+
 func getSlaveryStageChance(minstage, maxstage, minchance, maxchance):
 	var currentStage = getSlaveryStage()
 	
