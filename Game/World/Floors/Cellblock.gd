@@ -6,7 +6,7 @@ func _on_CBStairs1_onEnter(room):
 
 func _on_CBStairs1_onReact(_room, key):
 	if(key == "goup"):
-		GM.pc.setLocation("MainStairs1")
+		GM.pc.setLocation("main_stairs1")
 		GM.main.reRun()
 
 
@@ -16,7 +16,7 @@ func _on_CBStairs2_onEnter(room):
 
 func _on_CBStairs2_onReact(_room, key):
 	if(key == "goup"):
-		GM.pc.setLocation("MainStairs2")
+		GM.pc.setLocation("main_stairs2")
 		GM.main.reRun()
 
 
