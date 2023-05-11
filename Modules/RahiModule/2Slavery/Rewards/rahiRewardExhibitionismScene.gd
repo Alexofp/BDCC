@@ -687,6 +687,172 @@ func _run():
 		saynn("And just like, after getting everyone horny, Rahi quickly makes her escape before someone could catch her.")
 
 		addButton("Continue", "See what happens next", "par_good")
+	if(state == "ppee"):
+		playAnimation(StageScene.Duo, "stand", {npc="rahi", npcAction="stand", npcBodyState={naked=true}})
+		aimCameraAndSetLocName("yard_northCorridor")
+		saynn("As you parade your kitty on a leash through the prison's green yard, a mischievous thought enters Rahi's mind. She stops and tugs on the leash, inviting you to look at her.")
+
+		saynn("Your naked feline looks around and then bites her lip, her eyes spark.")
+
+		saynn("[say=rahi]She needs to pee. Right here. Right now.[/say]")
+
+		addButton("No", "You can't allow your kitty to pee in public", "ppee_no")
+		addButton("Sure", "(Watersports) Let Rahi pee here", "ppee_yes")
+		if (getModule("RahiModule").getSkillScore("rahiSkillDominance") > 5):
+			addButton("Offer mouth", "(Dominance+Watersports) Allow Rahi to pee into your mouth", "ppee_offermouth")
+	if(state == "ppee_no"):
+		aimCameraAndSetLocName("main_bathroom2")
+		saynn("You shake your head.")
+
+		saynn("[say=pc]No, kitty. The bathroom is not that far, we're going there.[/say]")
+
+		saynn("Your kitty rolls her eyes and sighs. As confident as she might be, you still have her leash, meaning you have the last word.")
+
+		saynn("[say=rahi]Fiiine.[/say]")
+
+		saynn("Rahi follows you through the gym area and towards the big bathroom room, the urge makes her do the pee dance already which gets a few chuckles out of people around.")
+
+		saynn("[say=rahi]Can she at least do it in the sink?..[/say]")
+
+		saynn("You shake your head and push Rahi into one of the cubicles with a toilet in it before closing the door, not wishing to see her do it.")
+
+		saynn("After some time, Rahi comes out of it, no longer walking funny.")
+
+		saynn("[say=rahi]Meow.. It would have been so hot if you allowed her, {rahiMaster}..[/say]")
+
+		addButton("Continue", "See what happens next", "par_bad")
+	if(state == "ppee_yes"):
+		playAnimation(StageScene.Duo, "stand", {npc="rahi", npcAction="kneel", npcBodyState={naked=true}})
+		saynn("Well.. maybe it would be a good test of her exhibitionistic tendencies. The longer you think about it, the more Rahi starts to do the pee shuffle, clearly about to wet herself.")
+
+		saynn("[say=pc]Go ahead, just not on the path.[/say]")
+
+		saynn("Your kitty nods and literally does one step away from it before slowly squatting down and spreading her legs wide, showcasing her cute tight pussy to you and anyone who would dare to walk past.")
+
+		saynn("Rahi bites her lip again and closes her eyes, her body shivering ever so slightly. Her pussy tenses up, and, after a few moments, Rahi starts peeing.")
+
+		saynn("As the golden stream pours from her pee hole, Rahi's body quivers with pleasure, she opens her eyes and looks into yours, a sensual moan escaping her lips while she relishes the sensation of warm piss cascading down from her eager pussy slit.")
+
+		if (isShamed()):
+			saynn("It's only when some random inmate walks past you, Rahi suddenly releases how vulnerable her position is and closes her legs, peeing under herself now. Her cheeks blush a little red.")
+
+		else:
+			saynn("Even when some random inmate walks past you, Rahi continues to proudly relieve herself, unashamed by anything.")
+
+		if (getModule("RahiModule").getSkillScore("rahiSkillWatersports") > 9):
+			saynn("Your kitty is so into this that she uses her paw to catch some of the golden fluid and then brings it to her maw, using her tongue to lick it all off, tasting her gross pee and loving it.")
+
+		saynn("Finally, when the last drops trickle from Rahi's slit, she gracefully rises and gets back on the path.")
+
+		saynn("[say=rahi]Much better..[/say]")
+
+		addButton("Continue", "See what happens next", "par_good")
+	if(state == "ppee_offermouth"):
+		playAnimation(StageScene.SexOral, "lick", {pc="rahi", npc="pc", bodyState={naked=true}})
+		saynn("The more you think about it.. maybe you could let Rahi.. Hmm..")
+
+		saynn("Your kitty notices your strange gaze. A gaze of a.. submissive person.")
+
+		saynn("[say=rahi]Ohh. Is someone.. feeling like a subby bitch?[/say]")
+
+		saynn("Her voice switches from soft and excited to dark and.. even more excited. You lower your head slightly. Rahi pulls you closer to her using the leash and then grabs your chin.")
+
+		saynn("[say=rahi]Because right now she could use one. So? Mm?[/say]")
+
+		saynn("[say=pc]Miss Rahi..[/say]")
+
+		saynn("Rahi's urge is getting stronger. So hearing those words was enough for her to grab you and pull you down to your knees before showing her crotch into your face, her needy pussy blocking your air.")
+
+		saynn("[say=rahi]Open. Your. Mouth.[/say]")
+
+		saynn("You shift a little, taking a deep breath, inhaling Rahi's horny scent before obeying, parting your lips and sitting still, awaiting your fate. Very soon your kitty finally unleashes a warm stream of urine directly into your mouth, a mix of surprise and arousal courses through your veins as you are forced to keep up, swallowing the gross yellow fluid without thinking about it too much.")
+
+		saynn("While using you as a piss toilet, Rahi smiles and looks down at you, little soft moans escape from her as she slowly empties her full bladder. At some points it becomes too much and you start gagging on her piss. But Rahi just slaps your cheek and presses her slit against your lips harder.")
+
+		saynn("[say=rahi]Drink it, don't make her force you to lick the ground.[/say]")
+
+		saynn("So humiliating.. And yet, it's hard to imagine yourself being even more aroused. Eventually, Rahi's stream begins to subside, allowing you to catch up and swallow the rest.. The aftertaste.. is probably even grosser than the taste itself.. But seeing Rahi's satisfied expression.. makes you realize that you're not doing it for the taste.. You clean Rahi's folds with your tongue to make sure there is no pee there anymore.")
+
+		saynn("[say=rahi]Good pet.[/say]")
+
+		saynn("After that, she offers you a paw and helps you stand up.. before giving you the other end of her leash.")
+
+		saynn("[say=rahi]Let's go, {rahiMaster}..[/say]")
+
+		addButton("Continue", "See what happens next", "par_good")
+	if(state == "finish_pick"):
+		saynn("After teasing so many people with her body, Rahi got incredibly confident and now asks to go somewhere for her last big act.")
+
+		saynn("Where do you want to go?")
+
+		addButton("Laundry", "Go check out those big washing machines", "finish_laundry")
+	if(state == "finish_laundry"):
+		playAnimation(StageScene.SexAllFours, "tease", {npc="rahi", npcBodyState={naked=true}})
+		aimCameraAndSetLocName("main_laundry")
+		saynn("You decide that giving Rahi's uniform a wash is a good idea and head to the laundry room, bringing your kitty too of course. The hum of machines and the scent of detergent filled the air. Your naked Rahi got a few glances from the inmates here but most of them are busy. And Rahi wants more, you can see the mischief shine in her eyes.")
+
+		saynn("You approach one of the empty washing machines, all of them extremely huge and bulky. Rahi fetches her uniform off of you and begins to climb into the open drum for reasons that are unknown to you at first.. but they become obvious very soon.")
+
+		saynn("[say=rahi]Oh no.. She thinks she is stuck.. Can you help her, please?[/say]")
+
+		saynn("Her voice is filled with mock distress. Rahi wiggles her body, purposely feigning frustration as if she was truly stuck. Her cute, pink pussy was on full display, just aching for attention.")
+
+		saynn("Huh. You realize that there are some good opportunities here. And the kitty is clearly asking. Or you can leave her needy.")
+
+		addButton("Free Rahi", "She is asking for help after all", "flaundry_free")
+		addButton("\"Free Rahi\"", "Grope your kitty", "flaundry_grope")
+	if(state == "flaundry_free"):
+		playAnimation(StageScene.Duo, "stand", {npc="rahi", npcAction="kneel", npcBodyState={naked=true}})
+		saynn("It seems that Rahi has gotten stuck pretty well because you meet quite a lot of resistance while trying to help her. But eventually you pull her out and see her disappointed eyes.")
+
+		saynn("[say=rahi]Huff..[/say]")
+
+		saynn("[say=pc]Something is wrong, kitty~?[/say]")
+
+		saynn("She crosses her arms and pouts while you ready the washing machine and let it work on Rahi's uniform. The inmates that are walking past you keep sneakily eyeing your kitty's private bits but that just doesn't do it for her anymore.")
+
+		saynn("[say=rahi]Nothing..[/say]")
+
+		saynn("You grab her chin and make her look at you.")
+
+		saynn("[say=pc]Are you lying to me, kitty?[/say]")
+
+		saynn("[say=rahi]No..[/say]")
+
+		saynn("The audacity of that cat..")
+
+		addButton("Spank her", "Publicly punish your kitty", "flaundry_free_spank")
+	if(state == "flaundry_free_spank"):
+		playAnimation(StageScene.Spanking, "fast", {npc="rahi", npcBodyState={naked=true}})
+		saynn("Without a word, you firmly grab Rahi's wrist before guiding her to bend forward and make her get on all fours, her round buttocks exposed and vulnerable. Rahi's breath hitched in excitement as you positioned yourself behind her, already raising your hand.")
+
+		saynn("With a swift motion, your hand comes down on Rahi's upturned rear, delivering a firm smack on her ass, the sound echoing through the whole laundry room and gathering the attention of inmates.")
+
+		saynn("[say=rahi]AH!..[/say]")
+
+		saynn("Even when a little crowd begins to gather around, you continue to spank Rahi's butt, alternating between harder and softer strikes, between her left and right buttcheek, sometimes switching to rubbing her curvy ass.. but only to prepare her for another firm smack.")
+
+		saynn("Each impact sends waves of sharp sensations through her body. You are trying to make it painful but your kitty, feeling so many hungry eyes on her, suddenly starts to moan instead, her pussy dripping juices onto the tiled floor.")
+
+		saynn("Rahi's disobedience fades into a distant memory as the punishment consumes her, her buttcheeks slowly becoming red and warm to the touch. The combination of pain and weird kind of exhibitionist pleasure surges through her, igniting her senses.. and making her into a subby mess.")
+
+		saynn("With a final, well-placed strike, rahi's body starts convulsing with pleasure. She lets out a loud slutty moan, the warm fuzzy waves make her body convulse and shiver.")
+
+		saynn("[say=pc]Never lie to me, kitty.[/say]")
+
+		saynn("Rahi rests on the cold floor while the inmates cheer, seeing a puddle of Rahi's pussy juices under her.")
+
+		saynn("[say=rahi]S-sorry.. T-thank you for disciplining her.. ah..[/say]")
+
+		saynn("When the punishment is over, the crowd begins to disperse, returning to their spots. Oh, the washing beeps, showing that it has finished washing Rahi's uniform. Just in time.")
+
+		saynn("Your kitty whines softly while you try to pull shorts onto her red butt.")
+
+		saynn("[say=rahi]Worth it..[/say]")
+
+		saynn("After that, you just return to Rahi's cell, still keeping her on a leash so she wouldn't run away and start flashing people again.")
+
+		addButton("Continue", "See what happens next", "endthescene")
 func isNotShamed():
 	if(parShame < 0.8):
 		return true
@@ -757,6 +923,10 @@ func _react(_action: String, _args):
 			setState("pundressing")
 			return
 		
+		if(parConf >= 1.0):
+			setState("finish_pick")
+			return
+		
 		if(!isNaked):
 			possible.append("pbench1")
 			possible.append_array(["pflash1", "pflash2", "pflash3", "pflash4"])
@@ -765,6 +935,8 @@ func _react(_action: String, _args):
 		else:
 			possible.append("pbench1")
 			possible.append("pgymnaked")
+			if(RNG.chance(20) && getModule("RahiModule").isSkillLearned("rahiSkillWatersports")):
+				possible.append("ppee")
 		
 		possible.erase(parLastEvent)
 		
@@ -810,6 +982,25 @@ func _react(_action: String, _args):
 			success = true
 		else:
 			success = false
+
+	if(_action == "ppee_no"):
+		processTime(3*60)
+
+	if(_action == "ppee_yes"):
+		getModule("RahiModule").advanceSkill("rahiSkillWatersports")
+		processTime(3*60)
+
+	if(_action == "ppee_offermouth"):
+		processTime(3*60)
+		GM.pc.cummedInMouthBy("rahi", FluidSource.Pissing)
+		getModule("RahiModule").advanceSkill("rahiSkillWatersports")
+		getModule("RahiModule").advanceSkill("rahiSkillDominance")
+
+	if(_action == "finish_laundry"):
+		processTime(5*60)
+
+	if(_action == "flaundry_free_spank"):
+		processTime(5*60)
 
 	setState(_action)
 
