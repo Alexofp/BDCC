@@ -853,6 +853,150 @@ func _run():
 		saynn("After that, you just return to Rahi's cell, still keeping her on a leash so she wouldn't run away and start flashing people again.")
 
 		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "flaundry_grope"):
+		saynn("You approach the stuck Rahi and crouch behind her, kitty's wiggling butt is up against your face.")
+
+		saynn("[say=pc]Let me see..[/say]")
+
+		saynn("You pretend to assess the situation, secretly enjoying the view. Rahi can't help but to feel a thrill rush through her, knowing that others can potentially catch a glimpse of her intimate bits.")
+
+		saynn("You reach your hands out to \"free\" Rahi, your fingers brush against her fluffy butt before sliding down along her inner thighs, causing shivers of excitement to go through her body. Rahi lets out a soft gasp, you can clearly see her arousal building with each touch.")
+
+		saynn("[say=rahi]She is still stuck..[/say]")
+
+		saynn("[say=pc]Oh yeah? Let me try a little harder.[/say]")
+
+		saynn("Your hand moves closer and closer to her exposed pussy, fingers lightly sliding over her sensitive areas. Rahi can't hold back any longer and parts her legs wider, giving more access to her dripping sex and uncovering her beautiful tailhole by moving the tail away. She is practically begging for you to explore her even further. You can hear a little soft moan as your digits glide over her wet folds, teasingly.")
+
+		saynn("You hold one of your hands on Rahi's fluffy butt, squeezing and keeping her in place but she still tries to grind her slit against her fingers, seeking more pleasure. The laundry room was bustling with activity, but Rahi was lost in the moment, her lust fueled further by the risk of getting caught.")
+
+		addButton("Rescue her", "That was enough lewds", "flaundry_grope_resque")
+		addButton("Eat her out", "That pussy looks awfully tasty", "flaundry_grope_lick")
+		if (getModule("RahiModule").isSkillLearned("rahiSkillSex")):
+			addButtonWithChecks("Breed her", "(Sex) Rahi is stuck in a perfect position for this", "flaundry_grope_breed", [], [ButtonChecks.HasReachablePenis])
+	if(state == "flaundry_grope_resque"):
+		playAnimation(StageScene.Duo, "stand", {npc="rahi", npcAction="stand", npcBodyState={naked=true}})
+		saynn("Finally, you decide that your kitty has had enough teasing and so you \"rescue\" her from the washing machine, freeing her from the supposed entrapment by just carefully tugging on her butt.")
+
+		saynn("Rahi gets up and turns around before leaning against the machine behind her. You can easily see how heated she still is, her chest is going up and down as she breathes deeply.")
+
+		saynn("[say=rahi]Meow.. Thank you, savior.[/say]")
+
+		saynn("You grab Rahi's inmate clothes and put them into the washing machine.. might as well get them washed.")
+
+		saynn("[say=pc]You're very welcome, kitty.[/say]")
+
+		saynn("She leans in such a way that her lower part of the body is pushed out forward. She is emphasizing her {rahi.breasts} with one arm while the other hand slowly slides down to her crotch and begins to casually rub her clit. Many random onlookers probably already spotted her but she doesn't mind, she is safe as long as you're around.")
+
+		saynn("[say=rahi]Someone could have taken advantage of such..[/say]")
+
+		saynn("Kitty spreads her legs a little and then gently grabs her pussy folds before spreading them too, showcasing the little strings of juices hanging between them.")
+
+		saynn("[say=rahi]..a slutty kitty..[/say]")
+
+		saynn("Rahi catches some of them and then licks her digits before moving them back to her sex and boldly plunging two inside and proceeding to casually finger herself in front of you. It seems she is gonna get her climax one way or another today.")
+
+		saynn("[say=rahi]..by fucking her raw..[/say]")
+
+		saynn("Her free paw is squeezing her tits firmly while the second one keeps sliding the two digits in and out of her wet needy slit, bringing the orgasm closer and closer. Many passionate moans escape from her, causing a lot more eyes to look her way rather than just you.")
+
+		if (getModule("RahiModule").getSkillScore("rahiSkillMasochist") > 5):
+			saynn("[say=rahi]..and leaving her used and abused..[/say]")
+
+		else:
+			saynn("[say=rahi]..and leaving her used..[/say]")
+
+		saynn("Rahi's panting gets faster and faster, she keeps pumping her digits inside her slit until the orgasm takes over her body, causing her to throw her head back and moan while her legs legs. Kitty's pussy walls are spasming around her girlcum-coated fingers, her eyes roll up while she produces more noises of love directed towards the ceiling.")
+
+		saynn("After this long moment of pure bliss, your kitty finally comes down from it and brings her gaze down, seeing so many inmates staring at her. And some are more than just staring..")
+
+		saynn("[say=rahi]H-hah.. Should we go now?..[/say]")
+
+		saynn("Seems like a good idea. You grab Rahi's clean uniform and lead her out of the room while you still can, leaving the inmate inside horny.")
+
+		saynn("[say=rahi]That was fun, wasn't it..[/say]")
+
+		saynn("[say=pc]Sure, kitty.[/say]")
+
+		saynn("You bring her back into her cell and watch her finally put on her uniform.")
+
+		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "flaundry_grope_lick"):
+		saynn("Unable to resist Rahi's tempting display, you lean in closer. Groping that ass feels nice.. but actually flicking your tongue against her cute little clit feels even better. You wrap your lips around it and gently suck while teasing the sensitive mound further, forcing a gasp of pleasure to come somewhere inside the washing machine. You continue to explore her with your mouth, your tongue doing gentle licks along the folds before focusing on the clit a little more and doing swirling motions around it.")
+
+		saynn("[say=rahi]Ah..[/say]")
+
+		saynn("With each stroke of your tongue, Rahi's arousal reaches new heights. She grips the round drum of that machine harder while you start prodding at the entrance, easily slipping inside her. So warm.. her pussy walls gently knead your tongue while you begin lapping away at them, catching all the juices and occasionally pulling away to swallow.")
+
+		saynn("[say=rahi]Everyone can see.. you doing this..[/say]")
+
+		saynn("As Rahi's pleasure intensifies, her body begins to tremble, legs shiver, her hips rocking against your mouth in an eager rhythm.")
+
+		saynn("[say=rahi]..to your slutty pet.. ah..[/say]")
+
+		saynn("Finally, unable to contain herself any longer, Rahi's orgasm washes over her. She arches her back and lets out a cry of ecstasy as she releases her sweet nectar onto your tongue. Her body convulsing from the intense sensations, this much stimulation causes her to squirt again and again, coating your mouth with her love juices.")
+
+		saynn("Exhausted and satisfied, Rahi slumps against the washing machine, her legs still trembling. You pull away from her pussy and lick your lips. Oh wow, everyone is staring at you two. Probably because the whole laundry room smells of sex now..")
+
+		saynn("You actually help Rahi to get out of her precarious position and land a little kiss on her lips.")
+
+		saynn("[say=rahi]Nya.. oh.. so many eyes..[/say]")
+
+		saynn("You hand her back her uniform and lead her back to the cell while you still can.")
+
+		saynn("[say=rahi]That was fun, wasn't it..[/say]")
+
+		saynn("[say=pc]Sure, kitty.[/say]")
+
+		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "flaundry_grope_breed"):
+		playAnimation(StageScene.SexAllFours, "sex", {npc="rahi", npcBodyState={naked=true}, bodyState={exposedCrotch=true, hard=true}})
+		saynn("It's a perfect setup, your kitty is in the prime position for breeding. You decide not to waste time and expose your {pc.penis} that got quite hard already just from you inhaling Rahi's scent for so long.")
+
+		saynn("As you press it against her needy entrance and spread her slick folds, Rahi lets out a surprised meow and willingly spreads her legs wider.")
+
+		saynn("[say=rahi]Are you gonna..[/say]")
+
+		saynn("With a slow but deliberate motion, you push your hips forward, allowing your member to easily stretch open Rahi's pussy slit and slide inside. A soft moan escapes her mouth while her inner walls are clenching around you, her body instinctively accepting you, craving you like she is in heat.."+str(" Because she is, in fact, in heat.." if getCharacter("rahi").isInHeat() else "")+"")
+
+		saynn("[say=rahi]Ah.. yes, you are..[/say]")
+
+		saynn("With a firm grip on Rahi's grip, you plunge your cock deep into her wetness, fucking her raw. The kitty moans, her body arching as she takes your shaft in until the tip hits her tight womb entrance.")
+
+		saynn("[say=rahi]You are fucking your slutty kitty..[/say]")
+
+		saynn("Your bodies move back and forth with Rahi's slightly lagging behind, only synchronizing when you thrust inside, your motions slowly becoming more intense and primal. Both your and her desires seem to be growing fast, consuming your every thought.")
+
+		saynn("[say=rahi]Ah.. In front of everyone.. You gonna..[/say]")
+
+		addButton("Cum inside", "Breed your kitty", "flaundry_grope_breed_inside")
+	if(state == "flaundry_grope_breed_inside"):
+		playAnimation(StageScene.SexAllFours, "inside", {npc="rahi", npcBodyState={naked=true}, bodyState={exposedCrotch=true, hard=true}})
+		saynn("Rahi's pussy is so good that you can't help but to succumb to your primal urges. You pull on her tail while ramming your {pc.penis} as deep as she can take it, making her body squirm uncontrollably under so much pressure.")
+
+		saynn("[say=rahi]C-cum inside..[/say]")
+
+		saynn("Indeed, with a loud growl, you proceed to release your load deep into Rahi's slick depths, claiming her as your own. Slutty moans escape from her lips, her body shivering as she feels your seed flooding her womb, marking you as her mate. Her pussy walls clench around your shaft, draining your balls.")
+
+		saynn("[say=rahi]Ye-es-s..[/say]")
+
+		saynn("You remain in this intimate position.. with Rahi's top part of the body still stuck inside the washing machine. While enjoying the afterglow, you suddenly notice that everyone is staring at you and your moaning kitty. At least you gave them a good show.")
+
+		saynn("As you catch your breath, you finally pull out, leaving your kitty to leak {pc.cum}. You help her get out of her predicament and hand her the uniform.")
+
+		saynn("[say=rahi]Thank you.. oh.. hello everyone..[/say]")
+
+		saynn("[say=pc]Better for us to go.[/say]")
+
+		saynn("You grab Rahi's leash and lead her out and towards her cell.")
+
+		saynn("[say=rahi]That was fun, wasn't it..[/say]")
+
+		saynn("[say=pc]Sure, kitty.[/say]")
+
+		saynn("You bring her back into her cell and watch her finally put on her uniform.")
+
+		addButton("Continue", "See what happens next", "endthescene")
 func isNotShamed():
 	if(parShame < 0.8):
 		return true
@@ -914,6 +1058,10 @@ func _react(_action: String, _args):
 		processTime(1*60)
 		var possible = []
 		
+		if(parConf >= 0.99 && isNaked):
+			setState("finish_pick")
+			return
+		
 		if(parShame >= 1.0):
 			setState("parading_end")
 			return
@@ -921,10 +1069,6 @@ func _react(_action: String, _args):
 		if(parConf >= 0.5 && !isNaked):
 			isNaked = true
 			setState("pundressing")
-			return
-		
-		if(parConf >= 1.0):
-			setState("finish_pick")
 			return
 		
 		if(!isNaked):
@@ -1001,6 +1145,20 @@ func _react(_action: String, _args):
 
 	if(_action == "flaundry_free_spank"):
 		processTime(5*60)
+
+	if(_action == "flaundry_grope_lick"):
+		processTime(6*60)
+		GM.pc.cummedInMouthBy("rahi", FluidSource.Vagina)
+
+	if(_action == "flaundry_grope_breed"):
+		processTime(5*60)
+		getModule("RahiModule").advanceSkill("rahiSkillSex")
+
+	if(_action == "flaundry_grope_breed_inside"):
+		processTime(3*60)
+		getCharacter("rahi").cummedInVaginaBy("pc")
+		GM.pc.orgasmFrom("rahi")
+		GM.pc.addSkillExperience(Skill.SexSlave, 30, "rahi_breed")
 
 	setState(_action)
 
