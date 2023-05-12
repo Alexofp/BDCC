@@ -582,7 +582,7 @@ func checkImagePackOrder(imagePacks):
 	
 	for imagePackID in imagePacks:
 		if(!newImagePackOrder.has(imagePackID)):
-			newImagePackOrder.append(imagePackID)
+			newImagePackOrder.push_front(imagePackID)
 	
 	imagePackOrder = newImagePackOrder
 	print("checkImagePackOrder DONE ",imagePackOrder)
