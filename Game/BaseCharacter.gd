@@ -1502,6 +1502,10 @@ func clearTallymarks():
 func addBodywriting(zone, writingID):
 	addEffect(StatusEffect.HasBodyWritings, [zone, writingID])
 
+func addBodywritingRandom():
+	var zone = BodyWritingsZone.getRandomZone()
+	addBodywriting(zone, BodyWritings.getRandomWritingIDForZone(zone))
+
 func hasBodywritings():
 	return hasEffect(StatusEffect.HasBodyWritings)
 

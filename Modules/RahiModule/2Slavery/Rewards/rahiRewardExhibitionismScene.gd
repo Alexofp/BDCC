@@ -476,6 +476,7 @@ func _run():
 	if(state == "pundressing"):
 		playAnimation(StageScene.Duo, "stand", {npc="rahi", npcAction="stand", npcBodyState={naked=true}})
 		aimCameraAndSetLocName(getRandomLoc())
+		addCharacter("rahi", ["naked"])
 		saynn("As you continue to parade Rahi through the prison, she becomes more and more bold and daring in her exhibitionist acts.. Finally, she decides to take it to the next level.")
 
 		saynn("Without much warning, Rahi quickly strips out of her inmate uniform and offers it to you. She stands completely naked, her body exposed to the eyes of anyone who might be watching.")
@@ -786,6 +787,7 @@ func _run():
 		saynn("Where do you want to go?")
 
 		addButton("Laundry", "Go check out those big washing machines", "finish_laundry")
+		addButton("Stocks", "Go hang around the punishment area", "finish_stocks")
 	if(state == "finish_laundry"):
 		playAnimation(StageScene.SexAllFours, "tease", {npc="rahi", npcBodyState={naked=true}})
 		aimCameraAndSetLocName("main_laundry")
@@ -997,6 +999,167 @@ func _run():
 		saynn("You bring her back into her cell and watch her finally put on her uniform.")
 
 		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "finish_stocks"):
+		playAnimation(StageScene.Stocks, "idle", {pc="rahi", bodyState={naked=true}})
+		aimCameraAndSetLocName("main_punishment_spot")
+		saynn("During your adventures, you stumble upon the big platform where most public punishments take place, a place where inmates are disciplined.. or just used and humiliated.")
+
+		saynn("There are a few types of.. contraptions here, most of which are designed to bind you into some compromised position or bring you pain. But Rahi's eyes get glued to one of the unlocked stocks.")
+
+		saynn("[say=rahi]Look, they keep the inmate on display in these..[/say]")
+
+		saynn("Stocks are nothing but a few metal parts with holes for some unlucky person's wrists and neck. But Rahi seems very curious anyways, admiring the construction and running her digits along the cold, unforgiving material.")
+
+		saynn("Feeling playful, Rahi positions herself within the stocks, placing her wrists and neck into the openings. The top part is still unlocked and opened.. but as Rahi pretends to struggle, wiggling her ass eagerly, the stocks suddenly shut around her and get locked with a satisfying click. Your kitty tries to free her paws.. but realizes that she can't, the bulky contraption doesn't budge at all.")
+
+		saynn("[say=rahi]Ohh.. oops..[/say]")
+
+		saynn("It seems your kitty \"accidentally\" got stuck. She is still naked while now also forced to bend forward, meaning her pink pussy is on full display, just like her tight asshole. She pretends to struggle more, her butt swaying is enticing and provocative.")
+
+		saynn("[say=rahi]Kitty is so clumsy, meow.. And now everyone can see her private parts in great detail.. nya-ah..[/say]")
+
+		saynn("Indeed, her ass now has your full attention.")
+
+		addButton("Unlock her", "Be a good person and help kitty", "pstocks_unlock")
+		addButton("Tease her", "It's like she is begging for it", "pstocks_tease")
+	if(state == "pstocks_unlock"):
+		saynn("You decide that this is too dangerous, trying the stocks is fine but staying in them might attract some unwanted attention. So you approach the stocks and begin trying to unlock them. They have some weird mechanism inside so it takes some time. But as you do that, Rahi suddenly baps you with her tail.")
+
+		saynn("[say=rahi]H-hey..[/say]")
+
+		saynn("[say=pc]What, kitty? I'm trying to help you.[/say]")
+
+		saynn("Your kitty pouts at you.")
+
+		saynn("[say=rahi]But.. why..[/say]")
+
+		saynn("[say=pc]So nobody gets advantage of your state.[/say]")
+
+		saynn("Kitty pouts harder, her eyes drilling you and the tail gets into your face many times, bonking you until you decide to tug on it, causing Rahi to whine.")
+
+		saynn("[say=rahi]At least.. at least draw something on her?..[/say]")
+
+		saynn("Rahi's tail points at a handy black marker that is connected on a little chain to the stocks.")
+
+		saynn("[say=rahi]Pretty please?.. Anything you want..[/say]")
+
+		saynn("Well.. your kitty has such a cute begging voice that you just can't say no, you grab the marker and begin writing various words on her short fur. While you do that, your kitty's breathing gets deeper, her body reacts to that marker's tip by tingling ever so slightly.")
+
+		saynn("[say=rahi]Is it something slutty?.. She can't really see..[/say]")
+
+		saynn("[say=pc]Probably.[/say]")
+
+		saynn("Rahi smiles and looks all content and happy. You proceed to tinker with the stocks until something clicks in them again and they get unlocked.")
+
+		saynn("Your kitty slowly straightens her posture and looks at her fur.")
+
+		saynn("[say=rahi]Yay.. Thank you, {rahiMaster}, you're the best.[/say]")
+
+		saynn("After that you just return back to Rahi's cell where she finally puts her uniform on.")
+
+		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "pstocks_tease"):
+		playAnimation(StageScene.StocksSex, "tease", {pc="rahi", npc="pc", bodyState={naked=true}})
+		saynn("Your gaze is locked onto Rahi's enticing display, your desire rising swiftly as she arches her back, accentuating the curves of her spine and putting her fluffy round ass on full display. Now it's your time to tease..")
+
+		saynn("[say=pc]Yeah, it would be a shame..[/say]")
+
+		saynn("Your hands jump on her back and let the fingers trace lights along the feminine curves down to her waist. As you brush your digits around the base of her tail, Rahi's breath quickens, her fur reacts by standing on ends.")
+
+		saynn("[say=pc]If someone would use this opportunity..[/say]")
+
+		saynn("[say=rahi]..meow..[/say]")
+
+		saynn("While Rahi is forced to stay in this compromising position, your hands slide over her ass before squeezing it tightly and forcing a moan out of your kitty. You skip the private bits for now and instead trace your digits along the fluffy curves of her inner thighs, teasingly inching closer to her wet, inviting pussy.")
+
+		saynn("[say=pc]To use you..[/say]")
+
+		saynn("[say=rahi]..yes..[/say]")
+
+		saynn("But instead of going straight for her moist folds, you put your hands on her buttcheeks again and spread them wide, making all her holes look stretched and exposed, juices dripping from her sex onto the floor. Wow, doing this reveals the view of the glistening pink depths hidden within.")
+
+		saynn("[say=pc]Like a slut that you are.[/say]")
+
+		saynn("[say=rahi]Y-yes!..[/say]")
+
+		saynn("Rahi is practically shaking from excitement, her whole body begging you to go further.. to test her.. to use her.")
+
+		addButton("Finger her", "Use nothing but your digits to pleasure Rahi", "pstocks_fingering")
+		if (getModule("RahiModule").isSkillLearned("rahiSkillSex")):
+			addButtonWithChecks("Breed her", "(Sex) Your kitty is positioned perfectly for this!", "pstocks_breed", [], [ButtonChecks.HasReachablePenis])
+	if(state == "pstocks_fingering"):
+		saynn("As you bring your hand closer to her folds, you begin to feel.. heat.. radiating from them. With gentle precision, you begin tracing little circles along the sensitive petals of her pulsating pussy. Her body responds immediately, her hips instinctively rocking against your hand, seeking.. more..")
+
+		saynn("[say=pc]Look at you, like a bitch in heat.[/say]")
+
+		saynn("The dirty talk only seems to make your kitty more wet. A little crowd already begins to gather around you two, enjoying the public show. You focus your attention on her little clit, sending jolts of pleasure through her as you rub it. The poor kitty is forced to endure your digits whenever she wants it or not.. but her moans make it obvious..")
+
+		saynn("[say=pc]Yeah.. getting off just from my fingers. So easy to handle.[/say]")
+
+		saynn("Your digits slowly slide over to her pussy entrance.. and prod it a few times.. easily slipping inside due to sheer amount of wetness. Your other hand lands on Rahi's ass and gentle gropes it while you proceed to fuck her slit with just two of your digits, curling them ever so much to add extra stimulation.")
+
+		saynn("[say=rahi]Ah-h!.. H-h.. W-wai..[/say]")
+
+		saynn("Not that long after you start finger-fucking her with your digits, Rahi's inner walls tighten around them. Pleasurable sensations quickly spread through her like wildfire, your rhythm quickly pushing her closer to the edge.. and then over it..")
+
+		saynn("[say=rahi]She is.. c-c..[/say]")
+
+		saynn("[say=pc]Do it, slut.[/say]")
+
+		saynn("Rahi's mind is getting cloudy as ecstatic waves of her orgasm begin washing over her, making her body shudder and thrash against the sturdy metal frame. But even then, you continue shoving your digits deeper inside her pulsating slit, pushing Rahi into her state of bliss so much that she squirts all over your hands.")
+
+		saynn("[say=rahi]NYAa-a-ah..[/say]")
+
+		saynn("[say=pc]That's it?[/say]")
+
+		saynn("You curl your digits in such a way that your fingertips begin hammering away at Rahi's g-spot. This was enough to prolong her pleasure until another climax ripples through her with an even stronger intensity.. causing her slit to gush out juices yet again. Your kitty's pussy is pulsating and clenching around your fingers as you push her over the edge again.. and again.. and again..")
+
+		saynn("The inmates cheer seeing Rahi losing herself in this sea of overstimulation, at some points her moans get replaced with desperate gasps, her pussy dripping the last drops of nectar rather than shooting it out.")
+
+		saynn("[say=pc]Good little slut.[/say]")
+
+		saynn("Only when the flesh of Rahi's inner walls begins to look reddish, you pull your hand away and walk up to her face. Kitty's eyes.. unfocussed.. lost.. slutty..")
+
+		saynn("[say=rahi]Nya-a-a..[/say]")
+
+		saynn("Her tongue rolls out as she says that, allowing you to just shove your wet digits past her fangs. Rahi feels something in her mouth and begins sucking on it instinctively. Cumming so much in a public place has brought her true euphoria it seems.")
+
+		saynn("After she gets some time to recover, you unlock the stocks and pull her out of them. Rahi's legs shake slightly as she tries to walk, her tail doing most of the heavy lifting, trying to balance the poor feline's body.")
+
+		saynn("After you bring her back into her cell, Rahi slowly begins to come to her senses.")
+
+		saynn("[say=rahi]That was.. fun..[/say]")
+
+		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "pstocks_breed"):
+		playAnimation(StageScene.StocksSex, "fast", {pc="rahi", npc="pc", bodyState={naked=true}, npcBodyState={exposedCrotch=true, hard=true}})
+		saynn("Rahi's helplessness.. makes you quite eager to do something bold. With a little smile on your face, you position yourself behind your kitty and expose your {pc.penis} before pressing it against her dripping pussy entrance, not yet penetrating it.")
+
+		saynn("[say=rahi]Oh..[/say]")
+
+		saynn("Rahi's body is quivering with anticipation, her pussy twitching slightly in response to you putting your hands on her fluffy butt and squeezing it. She is at your mercy.. unable to move.. completely at your whim.")
+
+		saynn("[say=pc]You're mine, kitty. I'm gonna fill you up with every inch of me. Everyone is gonna see that.[/say]")
+
+		saynn("The desire in your voice fuels Rahi's, she is getting shivers of pleasure coursing through her.")
+
+		saynn("With one rough motion, you part her folds and ram your cock deep inside, making kitty stagger slightly and lean into the stocks. A cute moan escapes her lips, her pussy clenching around your length as you pull back just to thrust deep inside again, your cock leaking precum into that warm slick love tunnel.")
+
+		saynn("[say=rahi]So rough.. Ah..[/say]")
+
+		saynn("With each powerful thrust, Rahi's pleasure rises. Due to all the teasing, she can only endure a few seconds of your onslaught before her pussy starts tightening around your shaft. A powerful climax washes over her, causing her body to convulse as she cries out in ecstasy.")
+
+		saynn("[say=rahi]F-fu-uck!..[/say]")
+
+		saynn("But you weren't even close so the powerful thrusting continues, relentless and unforgiving. You push past the resistance of her inner walls and keep pounding her needy slit, driving your kitty to new heights. Very soon the second climax crashes over her, this time it was powerful enough to make kitty squirt, her pussy trying to milk your cock but instead just bringing you closer to your own orgasm..")
+
+		saynn("[say=rahi]N-nya.. Use your slut!.. Stuff her pussy full!.. Please!..[/say]")
+
+		saynn("Well, if she is asking..")
+
+		addButton("Cum inside", "Breed the kitty", "pstocks_breed_cuminside")
+	if(state == "pstocks_breed_cuminside"):
+		playAnimation(StageScene.StocksSex, "inside", {pc="rahi", npc="pc", bodyState={naked=true}, npcBodyState={exposedCrotch=true, hard=true}})
 func isNotShamed():
 	if(parShame < 0.8):
 		return true
@@ -1143,6 +1306,9 @@ func _react(_action: String, _args):
 	if(_action == "finish_laundry"):
 		processTime(5*60)
 
+	if(_action == "finish_stocks"):
+		processTime(5*60)
+
 	if(_action == "flaundry_free_spank"):
 		processTime(5*60)
 
@@ -1155,6 +1321,28 @@ func _react(_action: String, _args):
 		getModule("RahiModule").advanceSkill("rahiSkillSex")
 
 	if(_action == "flaundry_grope_breed_inside"):
+		processTime(3*60)
+		getCharacter("rahi").cummedInVaginaBy("pc")
+		GM.pc.orgasmFrom("rahi")
+		GM.pc.addSkillExperience(Skill.SexSlave, 30, "rahi_breed")
+
+	if(_action == "pstocks_unlock"):
+		processTime(3*60)
+		getCharacter("rahi").addBodywritingRandom()
+		getCharacter("rahi").addBodywritingRandom()
+		getCharacter("rahi").addBodywritingRandom()
+
+	if(_action == "pstocks_tease"):
+		processTime(3*60)
+
+	if(_action == "pstocks_fingering"):
+		processTime(20*60)
+
+	if(_action == "pstocks_breed"):
+		processTime(5*60)
+		getModule("RahiModule").advanceSkill("rahiSkillSex")
+
+	if(_action == "pstocks_breed_cuminside"):
 		processTime(3*60)
 		getCharacter("rahi").cummedInVaginaBy("pc")
 		GM.pc.orgasmFrom("rahi")

@@ -83,6 +83,7 @@ roomID = "medical_nursery"
 roomDescription = "You enter the daycare lobby. Not much is here, just a nurse that's staring at a computer screen behind the table. You do see a closed door that leads into some other room but you have no access to it as an inmate."
 canNorth = false
 canSouth = false
+roomSprite = 5
 roomColor = 1
 population = 3
 
