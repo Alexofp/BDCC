@@ -536,6 +536,12 @@ func _run():
 			saynn("Luckily, you got away. But your kitty is still looking quite embarrassed, she didn't expect to be caught..")
 
 			addButton("Continue", "See what happens next", "par_bad")
+	if(state == "pasktotouchtits_watch"):
+		saynn("You decide to control yourself a little bit and just stare at Rahi's beautiful chest. Suddenly reaching out for it would be against the spirit of exhibitionism..")
+
+		saynn("The longer you admire her nips, the stiffer they become. Your kitty smiles widely, seeing your reaction and how tempted you are.")
+
+		addButton("Continue", "See what happens next", "par_good")
 	if(state == "parading_end"):
 		playAnimation(StageScene.Duo, "stand", {npc="rahi", npcAction="stand", npcBodyState={naked=false}})
 		aimCameraAndSetLocName("cellblock_orange_nearcell")
@@ -1087,6 +1093,7 @@ func _run():
 		addButton("Finger her", "Use nothing but your digits to pleasure Rahi", "pstocks_fingering")
 		if (getModule("RahiModule").isSkillLearned("rahiSkillSex")):
 			addButtonWithChecks("Breed her", "(Sex) Your kitty is positioned perfectly for this!", "pstocks_breed", [], [ButtonChecks.HasReachablePenis])
+			addButtonWithChecks("Strapon her", "(Sex) Your kitty is positioned perfectly for this!", "pstocks_pickstrapon", [], [ButtonChecks.HasStraponAndCanWear])
 	if(state == "pstocks_fingering"):
 		saynn("As you bring your hand closer to her folds, you begin to feel.. heat.. radiating from them. With gentle precision, you begin tracing little circles along the sensitive petals of her pulsating pussy. Her body responds immediately, her hips instinctively rocking against your hand, seeking.. more..")
 
@@ -1153,13 +1160,143 @@ func _run():
 
 		saynn("But you weren't even close so the powerful thrusting continues, relentless and unforgiving. You push past the resistance of her inner walls and keep pounding her needy slit, driving your kitty to new heights. Very soon the second climax crashes over her, this time it was powerful enough to make kitty squirt, her pussy trying to milk your cock but instead just bringing you closer to your own orgasm..")
 
-		saynn("[say=rahi]N-nya.. Use your slut!.. Stuff her pussy full!.. Please!..[/say]")
+		saynn("[say=rahi]Mya-ah.. Use your slut!.. Stuff her pussy full!.. Please!..[/say]")
 
 		saynn("Well, if she is asking..")
 
 		addButton("Cum inside", "Breed the kitty", "pstocks_breed_cuminside")
 	if(state == "pstocks_breed_cuminside"):
 		playAnimation(StageScene.StocksSex, "inside", {pc="rahi", npc="pc", bodyState={naked=true}, npcBodyState={exposedCrotch=true, hard=true}})
+		saynn("As you thrust deep into Rahi's soft slick depths, your shaft starts to pulsate with an insatiable need. Rahi's pussy clenches tightly around it, her inner walls eager to receive the impending load..")
+
+		saynn("At some point it becomes too much, another Rahi's orgasm causes her slutty holes to get tighter, causing you to go over the edge too..")
+
+		saynn("[say=pc]Ngh-h.[/say]")
+
+		saynn("With an animal roar, your explosive release starts flooding Rahi's depths with liquid desire. Multiple hot, thick streams of your seed, one after another, surges from the tip of your pulsating member, causing Rahi's belly to receive a little bump.")
+
+		saynn("[say=rahi]Ye-e-ess..[/say]")
+
+		saynn("Her pussy, pushed to its limits, quivers in response. The soft walls of her tight vaginal channel kneading your shaft with a hunger for more. There is barely any room left inside her so some of your seed, mixed together with Rahi's slick juices, begin leaking out, creating such a messy cocktail on the fur of her thighs.")
+
+		saynn("It's only when your cock strops throbbing inside her, you slowly withdraw from Rahi's shivering body, leaving her feeling both empty and full. Your {pc.cum}, thick and shiny, drips from her well-used pussy, something that anyone around can see and admire.")
+
+		saynn("Rahi is still stuck in the stocks, her body exhausted, her eyes have a spark of submissiveness in them. You decide to give her a little rest.. but why waste that time, she has a perfectly fine mouth and tongue that weren't used yet.")
+
+		addButton("Continue", "See what happens next", "pstocks_breed_cleancum")
+	if(state == "pstocks_breed_cleancum"):
+		playAnimation(StageScene.StocksSexOral, "sex", {pc="rahi", npc="pc", bodyState={naked=true}, npcBodyState={exposedCrotch=true, hard=true}})
+		saynn("[say=pc]Good little breeding stock. I need you to clean this for me.[/say]")
+
+		saynn("Saying that, you approach your kitty from the other side and offer your messy cock to her, the shaft is coated in all sorts of lewd fluids. Rahi sees it and blushes, still panting from the breeding she received.")
+
+		saynn("[say=rahi]Oh..[/say]")
+
+		saynn("She doesn't really have much of a choice anyways, her head is stuck between two metal bars, allowing you to easily position yourself in front of her face and wait, giving her a chance to do this willingly before you force her.")
+
+		saynn("But Rahi seems eager to please, she lets her feline tongue out, showing that it is definitely longer than an average human one before tracing a path around your messy shaft, guiding it towards her waiting mouth.")
+
+		saynn("Her tongue, warm and sand-papery, wraps around your member and begins to gently massage it, sliding back and forth along it, slowly gathering all the seed and her juices onto it, while her lips close around the head and begin sucking on the tip.")
+
+		saynn("After catching enough lewd fluids from the veiny surface onto her tongue, Rahi retracts it into her mouth and obediently swallows everything. She then parts her lips, inviting your dick.")
+
+		saynn("You step closer, gradually pushing your {pc.penis} down that kitty's mouth, past her fangs, until you reach the back of her throat. That's when she begins to actually clean it, her lips caressing your sensitive flesh while her tongue is swirling and dancing around it with skilled precision.")
+
+		saynn("Her mouth feels so.. heavenly.. You're hard again and can't help but to start moving your hips slightly, letting your shaft go slightly deeper into her throat each time, creating a small bump on her neck. That causes your kitty to start choking a little, her paws clenching into fists and her eyes closing as she is trying to focus..")
+
+		saynn("With each flick of her tongue and gentle suck, Rahi demonstrates her obedience to you, her desire to please.. even if there are lots of people around watching her. You allow yourself to surrender to the great sensations and move your hips faster, not even realizing that you're fucking her face now..")
+
+		saynn("Somewhat quickly, you reach another peak of your pleasure.. A powerful groan escapes from you as hot spurts of your seed begin flowing over her eager tongue and down her throat.")
+
+		saynn("[say=pc]Oh fuck..[/say]")
+
+		saynn("You ram your cock as deep as her throat allows and let the tight walls clench around your shaft, making more pleasurable noises while the kitty under you is choking and gagging, her eyes rolling up.. such a guilty pleasure.. but it's still pleasure..")
+
+		saynn("As the moment of pure bliss ends.. you pull out.. your member looks coated in her saliva.. but clean otherwise. Rahi is coughing and gasping for air, her eyes slowly focus on the dick in front of her again. She presents you her mouth full of your jizz before closing it and swallowing everything yet again.")
+
+		saynn("[say=pc]Good girl.[/say]")
+
+		saynn("Now it's you who feels quite exhausted.. You begin to slowly free your kitty, supporting and helping her to stand.")
+
+		saynn("[say=rahi]Nya-a-a..[/say]")
+
+		saynn("You find an opening in the crowd of inmates that has surrounded you and bring Rahi back to her cell. Slowly, she begins to recover, putting her paws onto her head.")
+
+		saynn("[say=rahi]She went a little bit too far, didn't she?.. Although it was.. fun..[/say]")
+
+		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "pstocks_pickstrapon"):
+		saynn("Pick what strapon you wanna use.")
+
+		addStraponButtons()
+		if (false):
+			addButton("Nope", "You shouldn't see this", "pstocks_straponwith")
+	if(state == "pstocks_straponwith"):
+		playAnimation(StageScene.StocksSex, "fast", {pc="rahi", npc="pc", bodyState={naked=true}, npcBodyState={exposedCrotch=true, hard=true}})
+		saynn("With Rahi firmly secured in the stocks, you decide to give her pussy the treatment that it deserves. You quickly secure one of the strapons around your waist and stroke it a few times like it's a real cock. Sadly you don't feel much.. but Rahi will..")
+
+		saynn("As you press your rubber cock against Rahi's wet entrance, a few shivers run through her body, her tail bonking your leg.")
+
+		saynn("[say=rahi]Oh?.. Is that still you, {rahiMaster}.. She can't really look back..[/say]")
+
+		saynn("You drag your palm over that fluffy butt before squeezing it tightly.")
+
+		saynn("[say=pc]Yeah, it's me. Just with an extra.. tool.[/say]")
+
+		saynn("Your second hand grabs the tip of your strapon and forcibly buries it into Rahi's inviting sex before you throw your {pc.masc} hips forward and thrust inside, easily shoving inside the rest of the shaft, thanks to her slick juices.")
+
+		saynn("[say=rahi]AH!..[/say]")
+
+		saynn("Moans begin to attract more inmates. It's hard to tell but you're pretty sure you're reaching Rahi's natural barricade as you thrust inside, causing a little bump to sometimes appear on her belly. It doesn't take long for the first orgasm to suddenly crash over her, making her body convulse and her inner walls drip your strapon tightly.")
+
+		saynn("[say=pc]Already? That was too quick for you, slut.[/say]")
+
+		saynn("Even though Rahi's pussy is making it difficult, you keep pushing through, roughly shoving the rubber toy in and out while the poor kitty is riding her waves of ecstasy.")
+
+		saynn("[say=rahi]Nya-a..[/say]")
+
+		saynn("It seems the increased friction led to more stimulation, not even that long after the first orgasm ended, another one began, a much intense one. Rahi's inner walls keep spasming around the firm length of the strapon while her pussy itself sends out a rush of fluids, making the fur on her thighs wet.")
+
+		saynn("[say=pc]Yeah, keep cumming while everyone watches.[/say]")
+
+		saynn("Having so many eyes surely affects Rahi's sensations, her mind gets clouded up with sheer pleasure. You don't even know when the third climax began, Rahi's body thrashes against the firm restraints almost non-stop, her pussy squirting out her female juices until there is nothing left.")
+
+		saynn("[say=rahi]Ye-e-es-s..[/say]")
+
+		saynn("You find yourself panting heavily after pushing your kitty over the edge so many times, you yourself feel quite horny too by now.. As Rahi's last orgasm subsides, you pull the rubber toy out, leaving her pussy looking gaping and empty, the weak clenching only causes her to drip the last drops of her girlcum.")
+
+		saynn("You smack Rahi's ass, forcing a quiet moan out of her.")
+
+		saynn("[say=pc]Cute.[/say]")
+
+		addButton("Continue", "See what happens next", "pstocks_strapon_clean")
+	if(state == "pstocks_strapon_clean"):
+		playAnimation(StageScene.StocksSexOral, "tease", {pc="rahi", npc="pc", bodyState={naked=true}, npcBodyState={exposedCrotch=true, hard=true}})
+		saynn("You walk around the stocks and see Rahi's spaced out eyes and open mouth. She notices your figure and purrs softly.")
+
+		saynn("[say=rahi]T-thank y-..[/say]")
+
+		saynn("You push the strapon into her face, it looks incredibly shiny because of all the pussy juices that are on it.")
+
+		saynn("[say=pc]Taste yourself, kitty.[/say]")
+
+		saynn("As you bring it closer to her mouth, Rahi lets her feline tongue roll out and wrap around the rubber shaft. She starts sliding it along the wet surface while her lips close around the tip and suck on it. Rahi's purring becomes louder, what a slut..")
+
+		saynn("[say=pc]It'd be so easy to fuck your throat right now..[/say]")
+
+		saynn("But it seems Rahi can barely stay conscious, shoving a big rubber dildo up her throat won't help with that. So you just let her obedient tongue and lips do all the work, gathering some of Rahi's fluids before you watch her swallow them.")
+
+		saynn("[say=pc]Good girl.[/say]")
+
+		saynn("Now it's you who feels quite exhausted.. You begin to slowly free your kitty, supporting and helping her to stand.")
+
+		saynn("[say=rahi]Nya-a-a..[/say]")
+
+		saynn("You find an opening in the crowd of inmates that has surrounded you and bring Rahi back to her cell. Slowly, she begins to recover, putting her paws onto her head.")
+
+		saynn("[say=rahi]She went a little bit too far, didn't she?.. Although it was.. fun..[/say]")
+
+		addButton("Continue", "See what happens next", "removestraponandend")
 func isNotShamed():
 	if(parShame < 0.8):
 		return true
@@ -1173,6 +1310,11 @@ func getRandomLoc():
 
 func getSuccChance(minlevel, maxlevel, minchance, maxchance):
 	return Util.roundF(getModule("RahiModule").getSkillSuccessChanceAdv("rahiSkillExhibit", minlevel, maxlevel, minchance, maxchance), 1)
+
+func addStraponButtons():
+	var strapons = GM.pc.getStrapons()
+	for strapon in strapons:
+		addButton(strapon.getVisibleName(), strapon.getVisibleDescription(), "pstocks_straponwith", [strapon])
 
 
 func _react(_action: String, _args):
@@ -1342,11 +1484,32 @@ func _react(_action: String, _args):
 		processTime(5*60)
 		getModule("RahiModule").advanceSkill("rahiSkillSex")
 
+	if(_action == "pstocks_pickstrapon"):
+		getModule("RahiModule").advanceSkill("rahiSkillSex")
+
 	if(_action == "pstocks_breed_cuminside"):
 		processTime(3*60)
 		getCharacter("rahi").cummedInVaginaBy("pc")
 		GM.pc.orgasmFrom("rahi")
 		GM.pc.addSkillExperience(Skill.SexSlave, 30, "rahi_breed")
+
+	if(_action == "pstocks_breed_cleancum"):
+		processTime(5*60)
+		getCharacter("rahi").cummedInMouthBy("pc")
+
+	if(_action == "pstocks_straponwith"):
+		processTime(10*60)
+		var strapon = _args[0]
+		GM.pc.getInventory().forceEquipStoreOtherUnlessRestraint(strapon)
+		getCharacter("rahi").cummedInVaginaBy("pc", FluidSource.Strapon)
+
+	if(_action == "pstocks_strapon_clean"):
+		processTime(5*60)
+
+	if(_action == "removestraponandend"):
+		GM.pc.unequipStrapon()
+		endScene()
+		return
 
 	setState(_action)
 

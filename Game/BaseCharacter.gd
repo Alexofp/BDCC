@@ -1892,6 +1892,12 @@ func canWearStrapon():
 	
 	return true
 
+func hasStrapons():
+	return getInventory().getItemsWithTag(ItemTag.Strapon).size() > 0
+
+func getStrapons():
+	return getInventory().getItemsWithTag(ItemTag.Strapon)
+
 func isWearingStrapon():
 	return getWornStrapon() != null
 
@@ -1907,6 +1913,12 @@ func removeStrapon():
 	if(theStrapon == null):
 		return null
 	return getInventory().removeEquippedItem(theStrapon)
+
+func unequipStrapon():
+	var theStrapon = getWornStrapon()
+	if(theStrapon == null):
+		return null
+	return getInventory().unequipItem(theStrapon)
 
 func doPainfullyStretchHole(_bodypart, _who = "pc"):
 	pass

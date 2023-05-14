@@ -112,6 +112,9 @@ func getVisisbleDescription():
 func getCombatDescription():
 	return getVisisbleDescription()
 
+func getVisibleDescription(): # A TYPOOO
+	return getVisisbleDescription()
+
 func getUniqueID():
 	assert(uniqueID != null)
 	
