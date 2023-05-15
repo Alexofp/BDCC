@@ -1297,8 +1297,174 @@ func _run():
 		saynn("[say=rahi]She went a little bit too far, didn't she?.. Although it was.. fun..[/say]")
 
 		addButton("Continue", "See what happens next", "removestraponandend")
+	if(state == "pdirtytalk"):
+		aimCameraAndSetLocName(getRandomLoc())
+		saynn("As you parade Rahi around the prison from one spot to another, her naked body on display for all to see, she couldn't help but to get horny from all the attention. While walking alongside you, she leans in close, her voice soft and needy.")
+
+		var randomLine = RNG.pick(["Look at her.. all exposed and vulnerable.. paraded like she is a slave.. And you're holding the leash..", "Every step she takes.. She can feel their hungry eyes on her.. But your eyes are the best..", "Being led on a leash like a submissive pet.. It awakens her inner slut.. She crave to be used..", "Her pussy is dripping wet with anticipation of what you will do to her..", "Having her pussy and tits exposed like this.. makes her feel alive.. Everyone can look.. but nobody can touch.. thanks to you..", "She can hear them whispering.. She can see their eyes on her body..", "Each time she feels the leash tugging at her collar.. It sends shivers down her spine.."])
+		saynn("[say=rahi]"+str(randomLine)+"[/say]")
+
+		if (isShamed()):
+			saynn("She is blushing red after being so bold with you, her self-consciousness slowly taking over.")
+
+			saynn("[say=rahi]She can't stop being slutty..[/say]")
+
+		else:
+			saynn("Rahi teasingly brushes her body against yours, sensual purring can be heard after her confession.")
+
+			saynn("[say=rahi]The thought of their eyes on her body only excites her more, knowing that she belongs to you, and you alone, {rahiMaster}..[/say]")
+
+		addButton("Ask to pose", "Ask Rahi to pose for you", "pdirtytalk_askpose")
+		addButton("Whisper back", "Say some dirty things to Rahi", "pdirtytalk_whisperback")
+	if(state == "pdirtytalk_askpose"):
+		saynn("Being curious, you couldn't resist the urge to push Rahi's skills under a little test.")
+
+		saynn("[say=pc]I wonder if you could.. strike a pose for me.[/say]")
+
+		if (isShamed()):
+			saynn("Rahi seems to be determined to push her boundaries today no matter what, her initial confidence is shining through as she leans against some wall and slowly spreads her legs for you, revealing the moist folds of her sex.")
+
+			saynn("However, halfway through, a sudden rush of embarrassment washes over her, causing her to hesitate. As she realizes how vulnerable she looks, her cheeks flush with a mixture of shyness and arousal. Rahi quickly pulls her legs back together.")
+
+			saynn("[say=rahi]S-sorry..[/say]")
+
+			saynn("[say=pc]It's alright, kitty. No pressure.[/say]")
+
+			addButton("Continue", "See what happens next", "par_bad")
+		else:
+			var randomPose = RNG.pick(["1", "2", "3"])
+			if (randomPose == "1"):
+				saynn("Rahi, always eager to please, feels a surge of excitement rush through her. With a little mischievous smile, she turns around and obediently bends over, presenting herself to you in the most provocative way possible. Her paw reaches down between her legs and spreads the wet folds of her needy pussy, as if inviting you.")
+
+			elif (randomPose == "2"):
+				saynn("Rahi, always eager to please, feels a surge of excitement rush through her. With a little mischievous smile, she leans against one of the walls and then lifts one of her legs up before placing her foot on a ledge, exposing the moist entrance of her pussy and her tight anus. Her paw lands on her ass and pulls on her buttcheek slightly, making both of her holes look spread open for you.")
+
+			elif (randomPose == "3"):
+				saynn("Rahi, always eager to please, feels a surge of excitement rush through her. Standing against a wall, Rahi brings her arms above her head while arching her back and thrusting her chest forward, presenting her firm breasts and stiff nipples. She then spreads her legs wide apart, also showcasing her dripping pussy and her cute clenched anus.")
+
+			saynn("After doing that, her gaze meets yours, Rahi's voice is almost purring.")
+
+			saynn("[say=rahi]Like what you see?..[/say]")
+
+			saynn("Your kitty really has no shame..")
+
+			addButton("Continue", "See what happens next", "par_very_good")
+	if(state == "pdirtytalk_whisperback"):
+		saynn("Now it's your turn to lean in closer until your lips are brushing against Rahi's ear. You switch your tone to sensual whispering.")
+
+		var randLine = RNG.pick(["Such a naughty little feline.. You love showing off, don't you? Flaunting that dripping pussy and that tight little asshole for me to see.", "You're such a naughty exhibitionist, kitty. The way you bravely display your naked body, showing off every inch to my hungry gaze.. drives me wild.", "You enjoy being on display, don't you, kitty? Knowing that I hold the leash that guides your desires..", "Seeing you show off like this, it's like a drug to me, kitty. I'm addicted to the sight of your body, the way you tease and entice with every move.", "You're such a brave exhibitionist, kitty. Letting everyone see just how much of a dirty little slut you are, how you revel in their lustful gazes.. such a turn-on."])
+		saynn("[say=pc]"+str(randLine)+"[/say]")
+
+		saynn("Your digits lightly trace the curves of her body, teasingly brushing over her fur and sensitive parts. Rahi's breath hitches, your words fueling her desire.")
+
+		saynn("And just when she thinks you will go further.. instead you pull away and keep her needy for later.")
+
+		addButton("Continue", "See what happens next", "par_good")
+	if(state == "pguardnaked"):
+		aimCameraAndSetLocName(getRandomLoc())
+		saynn("As you parade your Rahi through the prison, a sharp voice stops you.")
+
+		saynn("[say=maleguard_canine]Why is this inmate naked?[/say]")
+
+		saynn("A guard stands before you, his gaze fixed on Rahi's exposed form, his eyebrows raised in suspicion.")
+
+		saynn("You can try to let Rahi handle this, it would be a good test of her skills.")
+
+		saynn("Success chance: "+str(getSuccChance(8, 15, 5, 90))+"%")
+
+		addButton("Let Rahi try", "Let Rahi try to sweet-talk the guard", "pguardnaked_rahi")
+		addButton("Protect Rahi", "Rahi won't get a chance to tease the guard", "pguardnaked_protect")
+	if(state == "pguardnaked_rahi"):
+		saynn("You poke Rahi and let her try to handle this. Worst case, you will just both be put into stocks probably..")
+
+		if (success):
+			saynn("Rahi understands your sign and puts on a coy smile before stepping forward, proudly displaying naked self while her eyes are locked with the guard's.")
+
+			saynn("[say=rahi]Oh, you won't believe it.. She had an unfortunate accident in the laundry room. Her uniform got chewed up and stolen by the washing machine.. She had no choice but to leave naked..[/say]")
+
+			saynn("She purrs, her voice dripping with innocence.")
+
+			saynn("The guard's stern expression softens ever so slightly as Rahi expertly plays her role. She moves closer to him, her body barely brushing against his armor, her paws gently brushing his arm.")
+
+			saynn("[say=rahi]If you want, you can try to help her get her uniform back from that washing machine.. Or you can just watch her do it, that's fine too.. But last time she got stuck in the drum..[/say]")
+
+			saynn("The guard hesitates, his eyes scanning her exposed form, torn between suspicion and desire. Rahi seizes the opportunity and breathes warmly into the guard's ear, her voice dropping to a seductive whisper.")
+
+			saynn("[say=rahi]You can't believe how.. vulnerable and.. exposed.. she was.. Her pussy and ass were completely out on display.. She would be so-so grateful if you could help her.. officer..[/say]")
+
+			saynn("The guard's resolve wavered, his professionalism crumbling under Rahi's persuasive allure.")
+
+			saynn("[say=maleguard_canine]Um.. It's.. it's okay. I will let the engineers know, they will recover your uniform, miss.[/say]")
+
+			saynn("And just like that, he quickly leaves you two alone, heading in the rough direction of one of the bathrooms.")
+
+			saynn("You pet Rahi, making her purr.")
+
+			saynn("[say=pc]What would you do if he actually agreed?[/say]")
+
+			saynn("Rahi shrugs and offers you a cheeky smile.")
+
+			addButton("Continue", "See what happens next", "par_very_good")
+		else:
+			saynn("Rahi understands your sign and steps forward, trying to proudly display naked self while her eyes are locked with the guard's. But the more she does it, the more flushed her cheeks become..")
+
+			saynn("[say=rahi]She.. She had an.. It was just.. um.. an experiment?.. Of self-expression..[/say]")
+
+			saynn("The guard's expression only hardened.")
+
+			saynn("[say=maleguard_canine]Self-expression? You're in a prison, inmate, not on a nudist resort. You know the rules.[/say]")
+
+			saynn("Rahi's attempts to sway the guard with her playful flirtations failed, she bites her lip, not knowing if she should run or not.")
+
+			saynn("With a swift motion, the guard grabs Rahi's arm and suddenly gives her a few firm smacks on her ass, sending it to bounce.")
+
+			if (getModule("RahiModule").getSkillScore("rahiSkillMasochist") > 5):
+				saynn("[say=rahi]Ow!.. Harder!.. No, ignore that..[/say]")
+
+				saynn("Rahi's masochism slips through, making her look even more embarrassed..")
+
+			else:
+				saynn("[say=rahi]Ow!..[/say]")
+
+			saynn("After the brief punishment, the guard releases your kitty.")
+
+			saynn("[say=maleguard_canine]Now go get dressed properly.[/say]")
+
+			saynn("With her cheeks still flushed, Rahi noses meekly, her submissive side emerging in response to the guard's dominance.")
+
+			saynn("As you two walk away, Rahi looks at you.")
+
+			saynn("[say=rahi]Sorry..[/say]")
+
+			saynn("[say=pc]It's okay, kitty, you tried.[/say]")
+
+			addButton("Continue", "See what happens next", "par_bad")
+	if(state == "pguardnaked_protect"):
+		saynn("As the guard interrogates Rahi about her nudity, a protective instinct takes over you. Without hesitation, you step forward, positioning yourself between Rahi and the guard.")
+
+		saynn("[say=pc]I take full responsibility for my pet's current state. It was my idea to have her in this state of undress. I apologize for any inconvenience caused.[/say]")
+
+		saynn("The guard's stern gaze shifts from Rahi to you, he crosses his arms.")
+
+		saynn("[say=maleguard_canine]Why would you encourage an inmate to be naked?[/say]")
+
+		saynn("His tone just radiates authority. But you meet his gaze with determination.")
+
+		saynn("[say=pc]I understand the concern. But it was a consensual arrangement between my pet and me. My kitty likes showing off her naked body to everyone, including you. She is probably wet as fuck just from your gaze.[/say]")
+
+		saynn("The guard's expression softens slightly, his suspicion slowly getting replaced with arousement. As he eyes Rahi, she offers him an innocent smile while casually groping her perky tits.")
+
+		saynn("[say=pc]We understand the boundaries and consequences of our actions.[/say]")
+
+		saynn("[say=maleguard_canine]Sure.. Just don't complain when someone decides to do more than just watch.[/say]")
+
+		saynn("Both you and Rahi nod. The guard retreats, allowing you to continue parading her through the prison.")
+
+		saynn("[say=rahi]Thank you, {rahiMaster}..[/say]")
+
+		addButton("Continue", "See what happens next", "par_good")
 func isNotShamed():
-	if(parShame < 0.8):
+	if(parShame < 0.75):
 		return true
 	return false
 
@@ -1384,6 +1550,8 @@ func _react(_action: String, _args):
 		else:
 			possible.append("pbench1")
 			possible.append("pgymnaked")
+			possible.append("pdirtytalk")
+			possible.append("pguardnaked")
 			if(RNG.chance(20) && getModule("RahiModule").isSkillLearned("rahiSkillWatersports")):
 				possible.append("ppee")
 		
@@ -1397,8 +1565,9 @@ func _react(_action: String, _args):
 		return
 
 	if(_action == "par_good"):
-		parConf = parConf + 0.1
-		parShame = parShame + RNG.randf_range(0.01, 0.2)
+		var someValue = 1.0 - getSuccChance(5, 15, 0.0, 0.6)
+		parConf = parConf + RNG.randf_range(0.1, 0.2)
+		parShame = parShame + RNG.randf_range(someValue/5.0, someValue/3.0)
 		setState("par_loop")
 		return
 
@@ -1415,14 +1584,19 @@ func _react(_action: String, _args):
 			success = false
 
 	if(_action == "par_very_good"):
-		parConf = parConf + 0.1
-		parShame = parShame + RNG.randf_range(0.01, 0.05)
+		parConf = parConf + 0.3
+		parShame = max(0.0, parShame - RNG.randf_range(0.01, 0.05))
 		setState("par_loop")
 		return
 
 	if(_action == "par_bad"):
+		var someValue = 1.0 - getSuccChance(5, 15, 0.0, 0.6)
 		parConf = parConf + 0.05
-		parShame = parShame + RNG.randf_range(0.1, 0.2)
+		var newShame = parShame + RNG.randf_range(someValue/3.0, someValue/2.0)
+		if(parShame < 0.9 && newShame >= 0.9):
+			parShame = 0.9 + RNG.randf_range(0.01, 0.05)
+		else:
+			parShame = newShame
 		setState("par_loop")
 		return
 
@@ -1510,6 +1684,12 @@ func _react(_action: String, _args):
 		GM.pc.unequipStrapon()
 		endScene()
 		return
+
+	if(_action == "pguardnaked_rahi"):
+		if(RNG.chance(getSuccChance(8, 15, 5, 90))):
+			success = true
+		else:
+			success = false
 
 	setState(_action)
 
