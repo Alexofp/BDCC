@@ -43,18 +43,18 @@ func getLewdSizeAdjective():
 	if(size <= BreastsSize.FLAT):
 		return "flat"
 	if(size <= BreastsSize.A):
-		return RNG.pick(["tiny", "miniature", "little", "petite", "a-cup"])
-	if(size <= BreastsSize.B):
-		return RNG.pick(["small", "modest", "cute", "b-cup"])
+		return RNG.pick(["tiny", "miniature", "little", "petite", "delicate"])
 	if(size <= BreastsSize.C):
-		return RNG.pick(["perky", "generous", "average", "c-cup"])
-	if(size <= BreastsSize.D):
-		return RNG.pick(["curvy", "rounded", "huge", "big", "d-cup"])
+		return RNG.pick(["small", "modest", "cute", "average", "natural", "bouncy"])
 	if(size <= BreastsSize.DD):
-		return RNG.pick(["curvy", "rounded", "huge", "big", "dd-cup"])
-	if(size <= BreastsSize.DDD):
-		return RNG.pick(["large" , "weighty", "curvy", "heavy"])
+		return RNG.pick(["perky", "generous", "ample", "rounded", "plump", "curvy"])
+	if(size <= BreastsSize.G):
+		return RNG.pick(["curvy", "rounded", "huge", "big", "generous", "alluring"])
 	if(size <= BreastsSize.H):
+		return RNG.pick(["curvy", "rounded", "huge", "big", "lavish", "voluminous", "heavy"])
+	if(size <= BreastsSize.J):
+		return RNG.pick(["large", "weighty", "curvy", "heavy", "impressive", "voluminous"])
+	if(size <= BreastsSize.M):
 		return RNG.pick(["massive", "heavy", "enormous"]) 
 	return RNG.pick(["gigantic", "ginormous", "colossal"])
 		
@@ -67,9 +67,11 @@ func getLewdName():
 		return "breasts"
 	
 	if(size <= BreastsSize.D):
+		return RNG.pick(["breasts", "boobs", "tits"])
+	if(size <= BreastsSize.H):
 		return RNG.pick(["breasts", "boobs", "tits", "funbags"])
 	
-	return RNG.pick(["breasts", "boobs", "tits", "melons", "jugs", "milkies", "milkers"])
+	return RNG.pick(["breasts", "boobs", "tits", "melons", "jugs", "milkies", "milkers", "globes"])
 
 func getLewdDescriptionAndName():
 	var text = getLewdAdjective() + " " + getLewdSizeAdjective() + " " + getLewdName()
