@@ -32,7 +32,7 @@ func getSlot():
 
 func getTooltipInfo():
 	var result = []
-	result.append("size: " + BreastsSize.breastSizeToString(getSize()))
+	result.append("size: " + BreastsSize.breastSizeToCupString(getSize()))
 	if(getFluidProduction() != null):
 		result.append("Capacity: " + str(round(getFluidProduction().getFluidAmount() * 10.0)/10.0)+"/"+ str(round(getFluidProduction().getCapacity() * 10.0)/10.0)+" ml")
 		result.append_array(getFluidProduction().getTooltipInfo())
@@ -52,9 +52,9 @@ func getLewdSizeAdjective():
 		return RNG.pick(["curvy", "rounded", "huge", "big", "d-cup"])
 	if(size <= BreastsSize.DD):
 		return RNG.pick(["curvy", "rounded", "huge", "big", "dd-cup"])
-	if(size <= BreastsSize.E):
+	if(size <= BreastsSize.DDD):
 		return RNG.pick(["large" , "weighty", "curvy", "heavy"])
-	if(size <= BreastsSize.F):
+	if(size <= BreastsSize.H):
 		return RNG.pick(["massive", "heavy", "enormous"]) 
 	return RNG.pick(["gigantic", "ginormous", "colossal"])
 		
@@ -76,25 +76,21 @@ func getLewdDescriptionAndName():
 	return text
 
 func getPickableAttributes():
+	var breastVariants = [
+		[BreastsSize.FOREVER_FLAT, "Forever Flat", "Your breasts will never produce milk or increase in size"],
+		[BreastsSize.FLAT, "Flat", "Flat breasts"],
+	]
+	for breastSize in BreastsSize.getAll():
+		if(breastSize <= BreastsSize.FLAT || breastSize > BreastsSize.J):
+			continue
+		breastVariants.append([breastSize, BreastsSize.breastSizeToString(breastSize), BreastsSize.breastSizeToCupString(breastSize)])
+	
 	return {
 		"breastsize": {
 			"text": "Change the breast size",
 			"textButton": "Breast size",
 			"buttonDesc": "Pick the breast size",
-			"options": [
-				[BreastsSize.FOREVER_FLAT, "Forever Flat", "Your breasts will never produce milk or increase in size"],
-				[BreastsSize.FLAT, "Flat", "Flat breasts"],
-				[BreastsSize.A, "A", "A-cup breasts"],
-				[BreastsSize.B, "B", "B-cup breasts"],
-				[BreastsSize.C, "C", "C-cup breasts"],
-				[BreastsSize.D, "D", "D-cup breasts"],
-				[BreastsSize.DD, "DD", "DD-cup breasts"],
-				[BreastsSize.E, "E", "E-cup breasts"],
-				[BreastsSize.F, "F", "F-cup breasts"],
-				[BreastsSize.FF, "FF", "FF-cup breasts"],
-				[BreastsSize.G, "G", "G-cup breasts"],
-				[BreastsSize.GG, "GG", "GG-cup breasts"],
-			]
+			"options": breastVariants,
 		}
 	}
 	

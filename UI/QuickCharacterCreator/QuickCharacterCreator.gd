@@ -172,7 +172,7 @@ func updateDoll():
 
 #func createBodyparts():
 #	var mybreasts: BodypartBreasts = GlobalRegistry.createBodypart("humanbreasts")
-#	mybreasts.size = BreastsSize.EE
+#	mybreasts.size = BreastsSize.G
 #	giveBodypartUnlessSame(mybreasts)
 #	giveBodypartUnlessSame(GlobalRegistry.createBodypart("caninehead"))
 #	giveBodypartUnlessSame(GlobalRegistry.createBodypart("vagina"))

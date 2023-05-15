@@ -25,7 +25,7 @@ func getTopicValue(_topicID, _pc):
 		return linearCloseness(size, BreastsSize.C, 1.5)
 	
 	if(_topicID == InterestTopic.BigBreasts):
-		return constantIfAbove(size, BreastsSize.E, 1.0, linearCloseness(size, BreastsSize.E, 3.5))
+		return constantIfAbove(size, BreastsSize.DDD, 1.0, linearCloseness(size, BreastsSize.DDD, 3.5))
 	
 	if(_topicID == InterestTopic.LactatingBreasts):
 		if(breasts.isProducingFluid()):
