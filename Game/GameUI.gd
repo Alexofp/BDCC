@@ -3,6 +3,7 @@ class_name GameUI
 
 signal on_option_button(method, args)
 signal on_rollback_button
+signal onDevComButton
 var buttons: Array = []
 const buttonsCountPerPage: int = 15
 var optionButtonScene: PackedScene = preload("res://Game/SceneOptionButton.tscn")
@@ -28,6 +29,7 @@ onready var rollbackButton = $HBoxContainer/Panel2/MarginContainer/VBoxContainer
 var uiTextboxScene = preload("res://UI/UITextbox.tscn")
 onready var textcontainer = $HBoxContainer/VBoxContainer2/ScrollContainer/VBoxContainer
 onready var smartCharacterPanel = $HBoxContainer/Panel2/MarginContainer/VBoxContainer/SmartCharacterPanel
+onready var devCommentaryPanel = $HBoxContainer/DevCommentary
 var textboxes: Dictionary = {}
 var gameParser: GameParser
 var sayParser: SayParser
@@ -227,8 +229,8 @@ func _on_PrevPageButton_pressed():
 func setLocationName(locname: String):
 	mapAndTimePanel.setLocationName(locname)
 
-func setSceneCreator(sceneCreator):
-	mapAndTimePanel.setSceneCreator(sceneCreator)
+func setSceneCreator(sceneCreator, shouldShowDevCommentaryIcon = false):
+	mapAndTimePanel.setSceneCreator(sceneCreator, shouldShowDevCommentaryIcon)
 
 func clearCharactersPanel():
 	smartCharacterPanel.clear()
@@ -292,6 +294,7 @@ func hideAllScreens():
 	ingameMenuScreen.visible = false
 	skillsScreen.visible = false
 	debugScreen.visible = false
+	devCommentaryPanel.visible = false
 
 func _on_MenuButton_pressed():
 	if(!ingameMenuScreen.visible):
@@ -455,3 +458,21 @@ func _on_ShowOriginalCheckbox_pressed():
 func _on_ManualTranslateButton_pressed():
 	manualTranslateButton.visible = false
 	translateText(true)
+
+
+func _on_MapAndTimePanel_onDevComButton():
+	emit_signal("onDevComButton")
+	
+	
+
+onready var devComLabel = $HBoxContainer/DevCommentary/ScrollContainer/DevComLabel
+func showDevCommentary(thetext):
+	hideAllScreens()
+	devCommentaryPanel.visible = true
+	devComLabel.bbcode_text = thetext
+
+func _on_DevComLabel_meta_clicked(meta):
+	var _ok = OS.shell_open(meta)
+
+func isShowingDevCommentary():
+	return devCommentaryPanel.visible

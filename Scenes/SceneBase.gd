@@ -19,6 +19,7 @@ var showFightUI = false
 var sceneSavedItemsInv:LightInventory = LightInventory.new()
 var uniqueSceneID: int = -1
 var parentSceneUniqueID: int = -1
+var showedDeveloperCommentary = false #No need to save this one
 
 func _run():
 	pass
@@ -72,7 +73,7 @@ func run():
 		
 	GM.pc.updateEffectPanel(GM.ui.getPlayerStatusEffectsPanel())
 	GM.ui.updateCharactersInPanel()
-	GM.ui.setSceneCreator(getSceneCreator())
+	GM.ui.setSceneCreator(getSceneCreator(), shouldShowDevCommentaryIcon())
 	
 	checkSceneEnded()
 		
@@ -310,6 +311,25 @@ func playAnimation(theSceneID, theActionID, args = {}):
 func playAnimationForceReset(theSceneID, theActionID, args = {}):
 	if(GM.main != null):
 		GM.main.playAnimationForceReset(theSceneID, theActionID, args)
+
+func getDevCommentary():
+	return null
+
+func markShownDevCommentary():
+	showedDeveloperCommentary = true
+
+func hasDevCommentary():
+	var devComs = getDevCommentary()
+	if(devComs == null || devComs == ""):
+		return false
+	return true
+
+func shouldShowDevCommentaryIcon():
+	if(!OPTIONS.developerCommentaryEnabled()):
+		return false
+	if(showedDeveloperCommentary):
+		return false
+	return hasDevCommentary()
 
 func saveData():
 	var data = {}

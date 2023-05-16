@@ -14,6 +14,7 @@ var initSceneLines = []
 var reactInitLines = []
 var npcAssocs = {}
 var functions = []
+var devCommentary = []
 
 var theGame:MainScene
 var testingScene = false
@@ -36,6 +37,7 @@ func reset():
 	reactInitLines.clear()
 	npcAssocs.clear()
 	functions.clear()
+	devCommentary = []
 
 func setCurrentRun(newcur):
 	currentRun = newcur
@@ -196,6 +198,8 @@ func _on_Button_pressed():
 			if(commandID in ["code"]):
 				functions.append_array(theCode)
 				functions.append("")
+			if(commandID in ["devCom", "developerCommentary"]):
+				devCommentary = theCode
 			
 			continue
 		
@@ -359,6 +363,14 @@ func _on_Button_pressed():
 		for variableName in trackedVariables:
 			var varData = trackedVariables[variableName]
 			result.append("\t"+str(variableName)+" = SAVE.loadVar(data, \""+str(variableName)+"\", "+str(varData["value"])+")")
+		result.append("")
+	
+	if(devCommentary != null && devCommentary.size() > 0):
+		result.append("func getDevCommentary():")
+		result.append("\treturn \""+Util.join(devCommentary, "\\n")+"\"")
+		result.append("")
+		result.append("func hasDevCommentary():")
+		result.append("\treturn true")
 		result.append("")
 	
 	outputTextEdit.text = Util.join(result, "\n")

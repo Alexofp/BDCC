@@ -24,8 +24,8 @@ var showSceneCreator = true
 var measurementUnits = "metric"
 
 var debugPanel = false
-
 var showMapArt = false
+var developerCommentary = false
 
 var showCharacterArt = true
 var imagePackOrder = []
@@ -59,6 +59,7 @@ func resetToDefaults():
 	rollbackSlots = 5
 	rollbackSaveEvery = 1
 	showModdedLauncher = false
+	developerCommentary = false
 	
 	enabledContent.clear()
 	for contentType in ContentType.getAll():
@@ -136,6 +137,9 @@ func getRollbackSaveEveryXChoices():
 
 func shouldShowModdedLauncher():
 	return showModdedLauncher
+
+func developerCommentaryEnabled():
+	return developerCommentary
 
 func getChangeableOptions():
 	var settings = [
@@ -331,6 +335,13 @@ func getChangeableOptions():
 					"type": "checkbox",
 					"value": showSceneCreator,
 				},
+				{
+					"name": "Developer commentary",
+					"description": "Enables developer commentary for scenes that support it",
+					"id": "developerCommentary",
+					"type": "checkbox",
+					"value": developerCommentary,
+				},
 #				{
 #					"name": "Show map art (WIP)",
 #					"description": "(WORK IN PROGRESS) Shows props and walls on the minimap when supported",
@@ -445,6 +456,8 @@ func applyOption(categoryID, optionID, value):
 			showSceneCreator = value
 		if(optionID == "showMapArt"):
 			showMapArt = value
+		if(optionID == "developerCommentary"):
+			developerCommentary = value
 		
 	if(categoryID == "render"):
 		if(optionID == "renderer"):
@@ -502,6 +515,7 @@ func saveData():
 		"rollbackSlots": rollbackSlots,
 		"rollbackSaveEvery": rollbackSaveEvery,
 		"showModdedLauncher": showModdedLauncher,
+		"developerCommentary": developerCommentary,
 	}
 	
 	return data
@@ -530,6 +544,7 @@ func loadData(data):
 	rollbackSlots = loadVar(data, "rollbackSlots", 5)
 	rollbackSaveEvery = loadVar(data, "rollbackSaveEvery", 1)
 	showModdedLauncher = loadVar(data, "showModdedLauncher", false)
+	developerCommentary = loadVar(data, "developerCommentary", false)
 
 func saveToFile():
 	var saveData = saveData()

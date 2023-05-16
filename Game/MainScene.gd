@@ -1119,3 +1119,17 @@ func setIsTestingScene(newtest):
 
 func isTestingScene():
 	return currentlyTestingScene
+
+func _on_GameUI_onDevComButton():
+	if(GM.ui.isShowingDevCommentary()):
+		GM.ui.showGameScreen()
+		return
+	if(!OPTIONS.developerCommentaryEnabled()):
+		return
+	if(getCurrentScene() == null):
+		return
+	var devCommentary = getCurrentScene().getDevCommentary()
+	getCurrentScene().markShownDevCommentary()
+	if(devCommentary == null || devCommentary == ""):
+		return
+	GM.ui.showDevCommentary(devCommentary)

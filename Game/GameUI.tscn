@@ -321,9 +321,58 @@ margin_bottom = 720.0
 visible = false
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 984.0
-margin_right = 984.0
+margin_left = 273.0
+margin_right = 648.0
 margin_bottom = 720.0
+
+[node name="DevCommentary" type="VBoxContainer" parent="HBoxContainer"]
+visible = false
+margin_left = 273.0
+margin_right = 983.0
+margin_bottom = 720.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/DevCommentary"]
+margin_right = 710.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 0, 20 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer/DevCommentary"]
+margin_top = 24.0
+margin_right = 710.0
+margin_bottom = 616.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource( 14 )
+
+[node name="DevComLabel" type="RichTextLabel" parent="HBoxContainer/DevCommentary/ScrollContainer"]
+margin_right = 710.0
+margin_bottom = 592.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/bold_italics_font = ExtResource( 5 )
+custom_fonts/italics_font = ExtResource( 6 )
+custom_fonts/bold_font = ExtResource( 7 )
+custom_fonts/normal_font = ExtResource( 4 )
+bbcode_enabled = true
+fit_content_height = true
+
+[node name="GridContainer" type="GridContainer" parent="HBoxContainer/DevCommentary"]
+margin_top = 620.0
+margin_right = 710.0
+margin_bottom = 720.0
+rect_min_size = Vector2( 0, 100 )
+columns = 5
+
+[node name="CloseButton" type="Button" parent="HBoxContainer/DevCommentary/GridContainer"]
+margin_right = 142.0
+margin_bottom = 26.0
+size_flags_horizontal = 3
+text = "Close"
 
 [node name="DebugPanel" parent="HBoxContainer" instance=ExtResource( 15 )]
 visible = false
@@ -370,6 +419,7 @@ margin_top = -128.289
 margin_right = 280.291
 margin_bottom = -96.289
 
+[connection signal="onDevComButton" from="HBoxContainer/Panel2/MarginContainer/VBoxContainer/MapAndTimePanel" to="." method="_on_MapAndTimePanel_onDevComButton"]
 [connection signal="pressed" from="HBoxContainer/Panel2/MarginContainer/VBoxContainer/HBoxContainer2/SaveButton" to="." method="_on_SaveButton_pressed"]
 [connection signal="pressed" from="HBoxContainer/Panel2/MarginContainer/VBoxContainer/HBoxContainer2/LoadButton" to="." method="_on_LoadButton_pressed"]
 [connection signal="pressed" from="HBoxContainer/Panel2/MarginContainer/VBoxContainer/HBoxContainer3/SkillsButton" to="." method="_on_SkillsButton_pressed"]
@@ -382,3 +432,5 @@ margin_bottom = -96.289
 [connection signal="pressed" from="HBoxContainer/VBoxContainer2/HBoxContainer/NextPageButton" to="." method="_on_NextPageButton_pressed"]
 [connection signal="onResumeButtonPressed" from="HBoxContainer/InGameMenu" to="." method="showGameScreen"]
 [connection signal="onClosePressed" from="HBoxContainer/SkillsUI" to="." method="showGameScreen"]
+[connection signal="meta_clicked" from="HBoxContainer/DevCommentary/ScrollContainer/DevComLabel" to="." method="_on_DevComLabel_meta_clicked"]
+[connection signal="pressed" from="HBoxContainer/DevCommentary/GridContainer/CloseButton" to="." method="showGameScreen"]

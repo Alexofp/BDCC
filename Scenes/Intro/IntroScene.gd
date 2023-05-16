@@ -1,7 +1,5 @@
 extends "res://Scenes/SceneBase.gd"
 
-# Heavy work in progress, the text is just to get a feel for how the game is gonna start
-
 func _init():
 	sceneID = "IntroScene"
 
@@ -373,4 +371,8 @@ func _react_scene_end(_tag, _result):
 	if(_tag == "starting_perks"):
 		setState("donecreating")
 
+func getDevCommentary():
+	return "Heya, today is the 16th of May, 2023, the day that I (Rahi) added support for developer commentary ^^\n\nThis might be the first one you read.. or not.. depends on if you started a new game after turning that option on. But I will try to make these readable out of order so no worries ^^.\n\nWhy did I add this? Isn't this a waste of my time? Isn't this a waste of your time? I dunno, I just felt like adding this.. I like to ramble sometimes and, since my game brings up lots of topics, dark or not, there is a lot to talk about ^^\n\nWill this waste my time and keep you from getting more content? Ideally it shouldn't. Here is a spoiler for you, I only work on my game for a few hours a day x3, usually about 3-4 hours. So like, finishing the work day and then just spilling my thoughts out into the commentary of some scene could be a nice way to.. stay balanced.. I dunno.\n\nI just wanna.. explain some of my choices in these, you know? So expect spoilers in these, lots of them x3\n\nBut yeah. Fun fact, this whole scene was actually rewritten just before I posted the first public version. It was worse before, trust me x3.\n\nI watched a lot of JCS - Criminal Psychology videos on youtube back then and I kinda wanted the game to start with you getting interogated by seemingly a kind/understanding cop that then suddenly turns into a 'bad cop'. I think it's a good way to introduce the players to this dark world.. get them immersed.. or something."
 
+func hasDevCommentary():
+	return true
