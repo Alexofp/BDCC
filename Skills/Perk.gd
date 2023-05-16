@@ -68,6 +68,7 @@ const BDSMInstantEscape = "BDSMInstantEscape"
 const BDSMRigger = "BDSMRigger"
 const BDSMRiggerV2 = "BDSMRiggerV2"
 const BDSMRiggerV3 = "BDSMRiggerV3"
+const BDSMPerfectStreak = "BDSMPerfectStreak"
 
 # Milking perks
 const MilkSquirt = "MilkSquirt"

@@ -14,6 +14,10 @@ var freeze = false
 var goldenZoneVisible = false
 var isBlindFoldedVersion = false
 
+var hasAdvancedPerk = false
+var perfectStreak = 0
+var howMuchForPerfect = 0.25
+
 var difficultySettings = [
 	{
 		timer = 10.0,
@@ -98,6 +102,9 @@ func setIsBlindfolded(theblindfolded):
 		$GameScreen/Panel/Panel3.visible = goldenZoneVisible
 		$GameScreen/Panel/BlindText.visible = false
 
+func setHasAdvancedPerk(thehasAdvancedPerk):
+	hasAdvancedPerk = thehasAdvancedPerk
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if(isBlindFoldedVersion):
@@ -105,7 +112,7 @@ func _process(delta):
 	
 	if(ingame && !freeze):
 		if(timeLeft > 0 && (timeLeft - delta) <= 0):
-			emit_signal("minigameCompleted", 0.0)
+			emit_signal("minigameCompleted", calcFinalScore())
 		time += delta
 		timeLeft -= delta
 		
@@ -185,7 +192,7 @@ func setGoldenZoneVisible(isVis):
 		goldenZone.visible = true
 	else:
 		goldenZone.visible = false
-		print("INVIS")
+		#print("INVIS")
 
 func instantEscapePerk():
 	setGoldenZoneVisible(true)
@@ -202,13 +209,44 @@ func setIngame(newingame):
 		$StartMenu.visible = true
 		$GameScreen.visible = false
 
+func calcFinalScore(isLost = false):
+	var theScore = getScore()
+	if(isLost):
+		theScore = 0.0
+	if(hasAdvancedPerk && perfectStreak > 0):
+		var finalScore = 1.0 + howMuchForPerfect * (perfectStreak - 1) + theScore * howMuchForPerfect
+		return finalScore
+	return theScore
 
+func setStreakColor(theColor):
+	streakLabel.add_color_override("font_color", theColor)
+
+var tween
+onready var streakLabel = $GameScreen/StreakLabel
 func _on_ClickAtTheRightTime_gui_input(event):
 	if(event is InputEventMouseButton):
 		if(event.pressed && !freeze):
+			if(hasAdvancedPerk):
+				var theScore = getScore()
+				if(theScore >= 1.0 && theScore <= 2.0):
+					perfectStreak += 1
+					timeLeft += 1.0
+					timeLeft = min(timer, timeLeft)
+					streakLabel.text = "Perfect Streak: "+str(perfectStreak)+" (+"+str(Util.roundF(howMuchForPerfect*perfectStreak*100.0, 1))+"%)"
+					
+					if tween:
+						tween.kill()
+					tween = create_tween()
+					#tween.tween_method(self, "setStreakColor", Color.white, Color.red, 0.1)
+					tween.tween_method(self, "setStreakColor", Color.red, Color.white, 0.2)
+					# reset pos
+					generateZone(difficulty)
+					return
+				
+			
 			freeze = true
 			yield(get_tree().create_timer(0.5), "timeout")
 			freeze = false
 			#generateZone(RNG.randf_range(1.0, 10.0))
 			#setDifficulty(5)
-			emit_signal("minigameCompleted", getScore())
+			emit_signal("minigameCompleted", calcFinalScore())

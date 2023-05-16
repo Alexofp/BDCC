@@ -111,6 +111,8 @@ func _run():
 			game.instantEscapePerk()
 		if(GM.pc.isBlindfolded() && game.has_method("setIsBlindfolded")):
 			game.setIsBlindfolded(true)
+		if(GM.pc.hasPerk(Perk.BDSMPerfectStreak) && game.has_method("setHasAdvancedPerk")):
+			game.setHasAdvancedPerk(true)
 		
 		addButton("Give up", "Give up the struggle and lose 10 stamina", "giveupstruggle")
 
@@ -190,11 +192,16 @@ func _react(_action: String, _args):
 		var item = GM.pc.getInventory().getItemByUniqueID(_args[0])
 		var restraintData: RestraintData = item.getRestraintData()
 		var minigameStatus = 1.0
+		var finalMinigameStatus = 1.0
+		
 		var instantUnlock = false
 		if(_args.size() > 1):
+			finalMinigameStatus = float(_args[1])
+			
 			if(float(_args[1]) >= 100.0):
 				instantUnlock = true
-			var minigameResult = clamp(float(_args[1]), 0.0, 1.0)
+				finalMinigameStatus = 1.0
+			var minigameResult = float(_args[1])
 			minigameStatus = pow(minigameResult, 1.5) * 2.0
 			if(minigameResult >= 1.0 && GM.pc.hasPerk(Perk.BDSMBetterStruggling)):
 				minigameStatus *= 2.0
@@ -236,7 +243,7 @@ func _react(_action: String, _args):
 			
 		if(damage != 0.0):
 			restraintData.takeDamage(damage)
-			addMessage("You made "+str(Util.roundF(damage*100.0, 1))+"% of progress")
+			addMessage("You made "+str(Util.roundF(damage*100.0, 1))+"% of progress ("+str(Util.roundF(finalMinigameStatus*100.0, 1))+"% efficiency)")
 		if(addLust != 0):
 			addLust = GM.pc.receiveDamage(DamageType.Lust, addLust)
 			addMessage("You received "+str(addLust)+" lust")

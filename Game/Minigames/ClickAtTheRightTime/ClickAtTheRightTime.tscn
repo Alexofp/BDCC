@@ -138,6 +138,13 @@ text = "Time"
 align = 1
 valign = 1
 
+[node name="StreakLabel" type="Label" parent="GameScreen"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 10.0
+margin_bottom = -10.0
+valign = 2
+
 [node name="ClickStealer" type="Control" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
