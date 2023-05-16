@@ -12,3 +12,8 @@ func getDoll3DScene():
 
 func getCompatibleSpecies():
 	return [] # Unique npc hair
+
+func getTraits():
+	return {
+		PartTrait.HairPonytail: true,
+	}

@@ -92,6 +92,12 @@ func getLootTable(_battleName):
 		return InmateLoot.new()
 	return .getLootTable(_battleName)
 
+func getDefaultArtwork(_variant = []):
+	if(false):
+		return .getDefaultArtwork(_variant)
+	
+	return Images.getGenericCharacterArt(self, _variant)
+
 func saveData():
 	var data = {
 		"npcLevel": npcLevel,
