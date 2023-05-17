@@ -110,6 +110,7 @@ func _init():
 		"res://Modules/RahiModule/2Slavery/Rewards/rahiRewardPetScene.gd",
 		"res://Modules/RahiModule/2Slavery/Rewards/rahiRewardTreatScene.gd",
 		"res://Modules/RahiModule/2Slavery/Rewards/rahiRewardExhibitionismScene.gd",
+		"res://Modules/RahiModule/2Slavery/Rewards/rahiRewardCuddleScene.gd",
 		"res://Modules/RahiModule/2Slavery/Punishments/rahiPunishmentTyingUpScene.gd",
 		"res://Modules/RahiModule/2Slavery/Punishments/rahiPunishmentPissToiletScene.gd",
 		"res://Modules/RahiModule/2Slavery/Punishments/rahiPunishmentForcedPetplayScene.gd",

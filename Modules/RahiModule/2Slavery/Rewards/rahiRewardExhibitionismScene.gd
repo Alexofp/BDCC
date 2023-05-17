@@ -1714,3 +1714,9 @@ func loadData(data):
 	isNaked = SAVE.loadVar(data, "isNaked", false)
 	parLastEvent = SAVE.loadVar(data, "parLastEvent", "")
 	success = SAVE.loadVar(data, "success", false)
+
+func getDevCommentary():
+	return "The only reason this is a reward and not an activity is because I needed more rewards and this seemed good enough x3.\n\nThe parading stuff took sooo much time, I'm not even sure if it was worth it, there isn't even that much to do. Maybe just having a few fully scripted scenes would be better but who knows x3. But I kinda like that you have a little progression with it. The higher Rahi's skill is, the further you will get."
+
+func hasDevCommentary():
+	return true
