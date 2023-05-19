@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=2]
+[gd_scene load_steps=39 format=2]
 
 [ext_resource path="res://GlobalTheme.tres" type="Theme" id=1]
 [ext_resource path="res://Game/TooltipDisplay.tscn" type="PackedScene" id=2]
@@ -22,10 +22,18 @@
 [ext_resource path="res://UI/RichTextBoxEffects/corrupt_richtexteffect.tres" type="RichTextEffect" id=20]
 [ext_resource path="res://UI/NpcList/NpcList.tscn" type="PackedScene" id=21]
 
+[sub_resource type="StyleBoxFlat" id=29]
+bg_color = Color( 0.207843, 0.133333, 0.364706, 1 )
+
+[sub_resource type="Theme" id=30]
+/styles/normal = SubResource( 29 )
+
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.207843, 0.133333, 0.364706, 1 )
 corner_radius_top_right = 16
 corner_radius_bottom_right = 16
+
+[sub_resource type="Theme" id=31]
 
 [sub_resource type="InputEventAction" id=21]
 action = "gameui_quicksave"
@@ -86,6 +94,7 @@ margin_bottom = 720.0
 rect_min_size = Vector2( 260, 0 )
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.3
+theme = SubResource( 30 )
 custom_styles/panel = SubResource( 1 )
 
 [node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/Panel2"]
@@ -123,6 +132,7 @@ rect_min_size = Vector2( 0, 10 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.01
+theme = SubResource( 31 )
 
 [node name="MapAndTimePanel" parent="HBoxContainer/Panel2/MarginContainer/VBoxContainer" instance=ExtResource( 9 )]
 anchor_right = 0.0
@@ -251,7 +261,8 @@ anchor_bottom = 0.0
 margin_top = 34.0
 margin_right = 710.0
 margin_bottom = 354.0
-grow_horizontal = 2
+size_flags_horizontal = 11
+size_flags_vertical = 11
 
 [node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer/VBoxContainer2"]
 margin_top = 34.0

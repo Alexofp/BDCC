@@ -1,6 +1,6 @@
 extends SceneBase
 
-var pickedPoolToForget = ""
+var pickedPoolToShow = ""
 var pickedFetishToChange = ""
 var pickedPersonalityStat = ""
 var pickedGenderToChange = ""
@@ -12,6 +12,8 @@ func _init():
 func _run():
 	if(state == ""):
 		var encounterSettings:EncounterSettings = GM.main.getEncounterSettings()
+		
+		GM.ui.hideNpcList()
 		
 		saynn("This is a menu that contains info about your previous encounters.")
 		
@@ -79,7 +81,7 @@ func _run():
 		if(hasSomeoneToForget):
 			addButton("NPC list", "Shows NPCs that you encountered", "npclistmenu")
 		else:
-			addDisabledButton("Forget", "You haven't met anyone that you can forget")
+			addDisabledButton("NPC list", "You haven't met any NPCs")
 		
 		addButton("Toggle known", "Toggle between meeting only old characters and meeting both old and new", "toggleKnown")
 		addButton("Dynamic personality", "Change the way your personality changes after sex", "togglePersonalityChange")
@@ -171,45 +173,47 @@ func _run():
 
 		saynn("Select which occupation the character that you want to look for has.")
 
-		addButton("Back", "Go back a level", "")
+		addButton("Back", "Go back a level", "") 
 
 		for encounterPoolID in encounterPools:
-			addButton(str(encounterPoolID), "Pick this occupation", "forgetmenupool", [encounterPoolID])
+			addButton(str(encounterPoolID), "Pick this occupation", "occupationmenupool", [encounterPoolID])
 		
 		
-	if(state == "forgetmenupool"):
-		saynn("This is the list of the characters that you encountered.")
-		
-		saynn("You can forget any character in the list so they will never show up again. This action can not be undone.")
-		
-		saynn("Keep in mind that if this character is pregnant, their pregnancy will be forgotten too. But any kids you had together will stay.")
-		
-		addButton("Back", "Go back a level", "npclistmenu")
-		
-		var characterIDS = GM.main.getDynamicCharacterIDsFromPool(pickedPoolToForget)
-		for characterID in characterIDS:
-			var dynamicCharacter = GlobalRegistry.getCharacter(characterID)
-			if(dynamicCharacter == null):
-				continue
-				
-			var desc = dynamicCharacter.getSmallDescription()
-			if(desc == null):
-				desc = ""
+	if(state == "occupationmenupool"):
+		print(str(pickedPoolToShow))
+		setState("npclistmenu")
+		_run()
+#		saynn("This is the list of the characters that you encountered.")
+#
+#		saynn("You can forget any character in the list so they will never show up again. This action can not be undone.")
+#
+#		saynn("Keep in mind that if this character is pregnant, their pregnancy will be forgotten too. But any kids you had together will stay.")
+#
+#
+#		var characterIDS = GM.main.getDynamicCharacterIDsFromPool(pickedPoolToShow)
+#		for characterID in characterIDS:
+#			var dynamicCharacter = GlobalRegistry.getCharacter(characterID)
+#			if(dynamicCharacter == null):
+#				continue
+#
+#			var desc = dynamicCharacter.getSmallDescription()
+#			if(desc == null):
+#				desc = ""
+#
+#			var kidsAmount = GM.CS.getChildrenAmountOf(characterID)
+#			if(kidsAmount > 0):
+#				if(desc != ""):
+#					desc += "\n"
+#				desc += dynamicCharacter.getName()+" has "+str(kidsAmount)+" "+Util.multipleOrSingularEnding(kidsAmount, "kid")+"."
+#
+#			var sharedKidsAmount = GM.CS.getSharedChildrenAmount("pc", characterID)
+#			if(sharedKidsAmount > 0):
+#				if(sharedKidsAmount == kidsAmount):
+#					desc += " All of them are from you."
+#				else:
+#					desc += " "+str(sharedKidsAmount)+" of them are from you."
 			
-			var kidsAmount = GM.CS.getChildrenAmountOf(characterID)
-			if(kidsAmount > 0):
-				if(desc != ""):
-					desc += "\n"
-				desc += dynamicCharacter.getName()+" has "+str(kidsAmount)+" "+Util.multipleOrSingularEnding(kidsAmount, "kid")+"."
-			
-			var sharedKidsAmount = GM.CS.getSharedChildrenAmount("pc", characterID)
-			if(sharedKidsAmount > 0):
-				if(sharedKidsAmount == kidsAmount):
-					desc += " All of them are from you."
-				else:
-					desc += " "+str(sharedKidsAmount)+" of them are from you."
-			
-			addButton(dynamicCharacter.getName(), desc, "forget", [dynamicCharacter.getID()])
+#			addButton(dynamicCharacter.getName(), desc, "forget", [dynamicCharacter.getID()])
 	
 	if(state == "fetishmenu"):
 		var fetishHolder = GM.pc.getFetishHolder()
@@ -311,15 +315,15 @@ func _react(_action: String, _args):
 		GM.pc.dynamicPersonality = !GM.pc.dynamicPersonality
 		return 
 	
-	if(_action == "forgetmenupool"):
-		pickedPoolToForget = _args[0]
+	if(_action == "occupationmenupool"):
+		pickedPoolToShow = _args[0]
 	
 	if(_action == "forget"):
 		var dynamicCharacter = GlobalRegistry.getCharacter(_args[0])
 		addMessage("You forgot about "+str(dynamicCharacter.getName()))
 		
 		GM.main.removeDynamicCharacter(_args[0])
-		setState("forgetmenupool")
+		setState("occupationmenupool")
 		return
 	
 	if(_action == "genderchancemenu"):
@@ -345,7 +349,7 @@ func _react(_action: String, _args):
 func saveData():
 	var data = .saveData()
 	
-	data["pickedPoolToForget"] = pickedPoolToForget
+	data["pickedPoolToShow"] = pickedPoolToShow
 	data["pickedFetishToChange"] = pickedFetishToChange
 	data["pickedPersonalityStat"] = pickedPersonalityStat
 	data["pickedGenderToChange"] = pickedGenderToChange
@@ -356,7 +360,7 @@ func saveData():
 func loadData(data):
 	.loadData(data)
 	
-	pickedPoolToForget = SAVE.loadVar(data, "pickedPoolToForget", "")
+	pickedPoolToShow = SAVE.loadVar(data, "pickedPoolToShow", "")
 	pickedFetishToChange = SAVE.loadVar(data, "pickedFetishToChange", "")
 	pickedPersonalityStat = SAVE.loadVar(data, "pickedPersonalityStat", "")
 	pickedGenderToChange = SAVE.loadVar(data, "pickedGenderToChange", "")

@@ -1,8 +1,5 @@
 extends Control
 
-var statObjects = {}
-var skillTabs = []
-var openedSkillTab = null
 
 func _ready():
 	pass

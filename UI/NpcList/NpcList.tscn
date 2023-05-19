@@ -1,12 +1,28 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://GlobalTheme.tres" type="Theme" id=1]
 [ext_resource path="res://Game/SmartScrollContainer.gd" type="Script" id=2]
 [ext_resource path="res://UI/NpcList/NpcList.gd" type="Script" id=3]
+[ext_resource path="res://PanelStyle.tres" type="StyleBox" id=5]
+[ext_resource path="res://NPCListButton.tres" type="Theme" id=7]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.207843, 0.133333, 0.364706, 1 )
+
+[sub_resource type="StyleBoxFlat" id=4]
+bg_color = Color( 0.207843, 0.133333, 0.364706, 1 )
+
+[sub_resource type="Theme" id=2]
+/styles/normal = SubResource( 1 )
+ItemList/styles/bg = SubResource( 4 )
+
+[sub_resource type="Theme" id=3]
 
 [node name="NpcList" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_right = 1.0
+rect_clip_content = true
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource( 1 )
@@ -15,73 +31,246 @@ script = ExtResource( 3 )
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_right = -2.0
+size_flags_horizontal = 11
+size_flags_vertical = 11
+custom_constants/separation = -2
 
 [node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
-margin_right = 1280.0
+margin_right = 1279.0
 margin_bottom = 5.0
 rect_min_size = Vector2( 0, 5 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 3.0
+margin_right = 1279.0
+margin_bottom = 67.0
+rect_min_size = Vector2( 0, 64 )
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/HBoxContainer"]
+margin_right = 1279.0
+margin_bottom = 64.0
+rect_min_size = Vector2( 0, 64 )
+size_flags_horizontal = 3
+custom_styles/panel = ExtResource( 5 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/PanelContainer"]
+margin_right = 1279.0
+margin_bottom = 64.0
+
+[node name="Name" type="Label" parent="VBoxContainer/HBoxContainer/PanelContainer/HBoxContainer"]
+margin_top = 7.0
+margin_right = 209.0
+margin_bottom = 57.0
+rect_min_size = Vector2( 0, 50 )
+size_flags_horizontal = 11
+text = "Name:"
+align = 1
+valign = 1
+
+[node name="Gender" type="Label" parent="VBoxContainer/HBoxContainer/PanelContainer/HBoxContainer"]
+margin_left = 213.0
+margin_top = 7.0
+margin_right = 423.0
+margin_bottom = 57.0
+rect_min_size = Vector2( 0, 50 )
+size_flags_horizontal = 11
+text = "Gender:"
+align = 1
+valign = 1
+
+[node name="LastSeen" type="Label" parent="VBoxContainer/HBoxContainer/PanelContainer/HBoxContainer"]
+margin_left = 427.0
+margin_top = 7.0
+margin_right = 637.0
+margin_bottom = 57.0
+rect_min_size = Vector2( 0, 50 )
+size_flags_horizontal = 11
+text = "Personality:"
+align = 1
+valign = 1
+
+[node name="ChildrenAmount" type="Label" parent="VBoxContainer/HBoxContainer/PanelContainer/HBoxContainer"]
+margin_left = 641.0
+margin_top = 7.0
+margin_right = 851.0
+margin_bottom = 57.0
+rect_min_size = Vector2( 0, 50 )
+size_flags_horizontal = 11
+text = "Children 
+with you:"
+align = 1
+valign = 1
+
+[node name="dummy" type="Label" parent="VBoxContainer/HBoxContainer/PanelContainer/HBoxContainer"]
+margin_left = 855.0
+margin_top = 7.0
+margin_right = 1065.0
+margin_bottom = 57.0
+rect_min_size = Vector2( 0, 50 )
+size_flags_horizontal = 11
+align = 1
+valign = 1
+
+[node name="dummy2" type="Label" parent="VBoxContainer/HBoxContainer/PanelContainer/HBoxContainer"]
+margin_left = 1069.0
+margin_top = 7.0
+margin_right = 1279.0
+margin_bottom = 57.0
+rect_min_size = Vector2( 0, 50 )
+size_flags_horizontal = 11
+align = 1
+valign = 1
+
 [node name="ItemList" type="ItemList" parent="VBoxContainer"]
-margin_top = 9.0
-margin_right = 1280.0
-margin_bottom = 696.0
+margin_top = 65.0
+margin_right = 1279.0
+margin_bottom = 702.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme = SubResource( 2 )
 
 [node name="Stats" type="Control" parent="VBoxContainer/ItemList"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 4.0
-margin_top = 38.0
 margin_right = -4.0
-margin_bottom = -4.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
 [node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/ItemList/Stats"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_right = 5.0
+theme = SubResource( 3 )
 script = ExtResource( 2 )
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/ItemList/Stats/ScrollContainer"]
-margin_right = 1272.0
-margin_bottom = 66.0
+[node name="HBoxContainer" type="VBoxContainer" parent="VBoxContainer/ItemList/Stats/ScrollContainer"]
+margin_right = 1280.0
+margin_bottom = 637.0
 size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 6
 
-[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/ItemList/Stats/ScrollContainer/HBoxContainer"]
-margin_right = 1272.0
-margin_bottom = 66.0
+[node name="NPCRow" type="PanelContainer" parent="VBoxContainer/ItemList/Stats/ScrollContainer/HBoxContainer"]
+margin_right = 1280.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 0, 50 )
 mouse_filter = 1
-size_flags_horizontal = 3
-size_flags_vertical = 2
+size_flags_horizontal = 11
+size_flags_vertical = 0
+custom_styles/panel = ExtResource( 5 )
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/ItemList/Stats/ScrollContainer/HBoxContainer/PanelContainer"]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 1265.0
-margin_bottom = 59.0
+[node name="Button" type="Button" parent="VBoxContainer/ItemList/Stats/ScrollContainer/HBoxContainer/NPCRow"]
+margin_right = 1280.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 0, 50 )
+size_flags_horizontal = 11
+theme = ExtResource( 7 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/ItemList/Stats/ScrollContainer/HBoxContainer/NPCRow"]
+margin_right = 1280.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 0, 50 )
+mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
 
-[node name="Label" type="Label" parent="VBoxContainer/ItemList/Stats/ScrollContainer/HBoxContainer/PanelContainer/VBoxContainer"]
-margin_right = 1258.0
-margin_bottom = 20.0
-text = "Character info"
+[node name="Name" type="Label" parent="VBoxContainer/ItemList/Stats/ScrollContainer/HBoxContainer/NPCRow/HBoxContainer"]
+margin_right = 206.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 0, 50 )
+size_flags_horizontal = 11
+size_flags_vertical = 0
+text = "NAME:"
+align = 1
+valign = 1
 
-[node name="NameLabel" type="Label" parent="VBoxContainer/ItemList/Stats/ScrollContainer/HBoxContainer/PanelContainer/VBoxContainer"]
-margin_top = 24.0
-margin_right = 1258.0
-margin_bottom = 44.0
-text = "Rahi"
+[node name="VSeparator" type="VSeparator" parent="VBoxContainer/ItemList/Stats/ScrollContainer/HBoxContainer/NPCRow/HBoxContainer"]
+margin_left = 210.0
+margin_right = 214.0
+margin_bottom = 50.0
 
-[node name="HSeparator" type="HSeparator" parent="VBoxContainer/ItemList/Stats/ScrollContainer/HBoxContainer/PanelContainer/VBoxContainer"]
-margin_top = 48.0
-margin_right = 1258.0
-margin_bottom = 52.0
+[node name="Gender" type="Label" parent="VBoxContainer/ItemList/Stats/ScrollContainer/HBoxContainer/NPCRow/HBoxContainer"]
+margin_left = 218.0
+margin_right = 424.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 0, 50 )
+size_flags_horizontal = 11
+size_flags_vertical = 0
+text = "GENDER:"
+align = 1
+valign = 1
+
+[node name="VSeparator3" type="VSeparator" parent="VBoxContainer/ItemList/Stats/ScrollContainer/HBoxContainer/NPCRow/HBoxContainer"]
+margin_left = 428.0
+margin_right = 432.0
+margin_bottom = 50.0
+
+[node name="Personality" type="Label" parent="VBoxContainer/ItemList/Stats/ScrollContainer/HBoxContainer/NPCRow/HBoxContainer"]
+margin_left = 436.0
+margin_right = 642.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 0, 50 )
+size_flags_horizontal = 11
+size_flags_vertical = 0
+text = "PERSONALITY:"
+align = 1
+valign = 1
+
+[node name="VSeparator2" type="VSeparator" parent="VBoxContainer/ItemList/Stats/ScrollContainer/HBoxContainer/NPCRow/HBoxContainer"]
+margin_left = 646.0
+margin_right = 650.0
+margin_bottom = 50.0
+
+[node name="Children" type="Label" parent="VBoxContainer/ItemList/Stats/ScrollContainer/HBoxContainer/NPCRow/HBoxContainer"]
+margin_left = 654.0
+margin_right = 860.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 0, 50 )
+size_flags_horizontal = 11
+size_flags_vertical = 0
+text = "CHILDREN WITH YOU:"
+align = 1
+valign = 1
+
+[node name="CenterContainer2" type="CenterContainer" parent="VBoxContainer/ItemList/Stats/ScrollContainer/HBoxContainer/NPCRow/HBoxContainer"]
+margin_left = 864.0
+margin_right = 1070.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 50, 50 )
+size_flags_horizontal = 3
+
+[node name="Meet" type="Button" parent="VBoxContainer/ItemList/Stats/ScrollContainer/HBoxContainer/NPCRow/HBoxContainer/CenterContainer2"]
+margin_left = 63.0
+margin_top = 5.0
+margin_right = 143.0
+margin_bottom = 45.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_min_size = Vector2( 80, 40 )
+text = "Meet"
+
+[node name="CenterContainer" type="CenterContainer" parent="VBoxContainer/ItemList/Stats/ScrollContainer/HBoxContainer/NPCRow/HBoxContainer"]
+margin_left = 1074.0
+margin_right = 1280.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 50, 50 )
+size_flags_horizontal = 3
+
+[node name="Forget" type="Button" parent="VBoxContainer/ItemList/Stats/ScrollContainer/HBoxContainer/NPCRow/HBoxContainer/CenterContainer"]
+margin_left = 63.0
+margin_top = 5.0
+margin_right = 143.0
+margin_bottom = 45.0
+rect_min_size = Vector2( 80, 40 )
+size_flags_horizontal = 7
+text = "Forget"
 
 [node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer"]
 margin_top = 700.0
-margin_right = 1280.0
+margin_right = 1279.0
 margin_bottom = 720.0
 rect_min_size = Vector2( 0, 20 )
