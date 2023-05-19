@@ -77,7 +77,7 @@ func _run():
 		addButton("Back", "Close this menu", "endthescene")
 		
 		if(hasSomeoneToForget):
-			addButton("Forget", "Pick which character you wanna forget", "forgetmenu")
+			addButton("NPC list", "Shows NPCs that you encountered", "npclistmenu")
 		else:
 			addDisabledButton("Forget", "You haven't met anyone that you can forget")
 		
@@ -165,10 +165,11 @@ func _run():
 		for chance in [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0, 1.2, 1.5, 2.0, 3.0]:
 			addButton(str(Util.roundF(chance*100.0))+"%", "Pick this chance", "setspecieschance", [species, chance])
 
-	if(state == "forgetmenu"):
+	if(state == "npclistmenu"):
+		GM.ui.showNpcList()
 		var encounterPools = GM.main.getDynamicCharactersPools()
 
-		saynn("Select which occupation the character that you wanna forget has.")
+		saynn("Select which occupation the character that you want to look for has.")
 
 		addButton("Back", "Go back a level", "")
 
@@ -177,11 +178,13 @@ func _run():
 		
 		
 	if(state == "forgetmenupool"):
-		saynn("Pick who do you wanna forget. They will never show up again. This action can not be undone.")
+		saynn("This is the list of the characters that you encountered.")
+		
+		saynn("You can forget any character in the list so they will never show up again. This action can not be undone.")
 		
 		saynn("Keep in mind that if this character is pregnant, their pregnancy will be forgotten too. But any kids you had together will stay.")
 		
-		addButton("Back", "Go back a level", "forgetmenu")
+		addButton("Back", "Go back a level", "npclistmenu")
 		
 		var characterIDS = GM.main.getDynamicCharacterIDsFromPool(pickedPoolToForget)
 		for characterID in characterIDS:

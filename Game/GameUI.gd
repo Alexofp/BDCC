@@ -33,6 +33,7 @@ onready var devCommentaryPanel = $HBoxContainer/DevCommentary
 var textboxes: Dictionary = {}
 var gameParser: GameParser
 var sayParser: SayParser
+onready var npcListScreen = $HBoxContainer/VBoxContainer2/NpcList
 
 func _exit_tree():
 	GM.ui = null
@@ -295,6 +296,7 @@ func hideAllScreens():
 	skillsScreen.visible = false
 	debugScreen.visible = false
 	devCommentaryPanel.visible = false
+	npcListScreen.visible = false
 
 func _on_MenuButton_pressed():
 	if(!ingameMenuScreen.visible):
@@ -310,6 +312,19 @@ func showGameScreen():
 
 func getCurrentLocationName():
 	return mapAndTimePanel.getLocationName()
+
+
+func showNpcList():
+	npcListScreen.visible = true
+	scrollPanel.visible = false
+
+func hideNpcList():
+	npcListScreen.visible = false
+	scrollPanel.visible = true
+
+func _on_NpcList_visibility_changed():
+	if(npcListScreen.visible == false):
+		scrollPanel.visible = true
 
 
 func _on_SkillsButton_pressed():
@@ -476,3 +491,6 @@ func _on_DevComLabel_meta_clicked(meta):
 
 func isShowingDevCommentary():
 	return devCommentaryPanel.visible
+
+
+

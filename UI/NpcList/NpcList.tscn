@@ -1,0 +1,87 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://GlobalTheme.tres" type="Theme" id=1]
+[ext_resource path="res://Game/SmartScrollContainer.gd" type="Script" id=2]
+[ext_resource path="res://UI/NpcList/NpcList.gd" type="Script" id=3]
+
+[node name="NpcList" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 1 )
+script = ExtResource( 3 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
+margin_right = 1280.0
+margin_bottom = 5.0
+rect_min_size = Vector2( 0, 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ItemList" type="ItemList" parent="VBoxContainer"]
+margin_top = 9.0
+margin_right = 1280.0
+margin_bottom = 696.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Stats" type="Control" parent="VBoxContainer/ItemList"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 38.0
+margin_right = -4.0
+margin_bottom = -4.0
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/ItemList/Stats"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 2 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/ItemList/Stats/ScrollContainer"]
+margin_right = 1272.0
+margin_bottom = 66.0
+size_flags_horizontal = 3
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/ItemList/Stats/ScrollContainer/HBoxContainer"]
+margin_right = 1272.0
+margin_bottom = 66.0
+mouse_filter = 1
+size_flags_horizontal = 3
+size_flags_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/ItemList/Stats/ScrollContainer/HBoxContainer/PanelContainer"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 1265.0
+margin_bottom = 59.0
+size_flags_horizontal = 3
+size_flags_vertical = 0
+
+[node name="Label" type="Label" parent="VBoxContainer/ItemList/Stats/ScrollContainer/HBoxContainer/PanelContainer/VBoxContainer"]
+margin_right = 1258.0
+margin_bottom = 20.0
+text = "Character info"
+
+[node name="NameLabel" type="Label" parent="VBoxContainer/ItemList/Stats/ScrollContainer/HBoxContainer/PanelContainer/VBoxContainer"]
+margin_top = 24.0
+margin_right = 1258.0
+margin_bottom = 44.0
+text = "Rahi"
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer/ItemList/Stats/ScrollContainer/HBoxContainer/PanelContainer/VBoxContainer"]
+margin_top = 48.0
+margin_right = 1258.0
+margin_bottom = 52.0
+
+[node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer"]
+margin_top = 700.0
+margin_right = 1280.0
+margin_bottom = 720.0
+rect_min_size = Vector2( 0, 20 )
