@@ -13,6 +13,7 @@ enum {
 	SoldByTheAnnouncer,
 	ChastityCage,
 	Strapon,
+	BreastPump,
 	
 	GuardUniform,
 	NurseUniform,

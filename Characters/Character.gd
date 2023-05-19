@@ -208,6 +208,8 @@ func processTime(_secondsPassed):
 		bodyFluids.drain(0.1 * _secondsPassed / 60.0)
 		
 	GM.GES.callGameExtenders(ExtendGame.npcProcessTime, [self, _secondsPassed])
+	lastUpdatedDay = GM.main.getDays()
+	lastUpdatedSecond = GM.main.getTime()
 		
 func canDoSelfCare():
 	# If character is in a scene, don't touch them
@@ -480,7 +482,8 @@ func processUntilTime(theday:int, theseconds:int):
 	lastUpdatedSecond = theseconds
 
 func onStoppedProcessing():
-	pass
+	lastUpdatedDay = GM.main.getDays()
+	lastUpdatedSecond = GM.main.getTime()
 
 func getCharacterType():
 	return npcCharacterType

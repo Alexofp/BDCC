@@ -1,6 +1,7 @@
 extends SceneBase
 
 var deserved = true
+var breastPumpID = ""
 
 func _init():
 	sceneID = "rahiRewardCuddleScene"
@@ -40,6 +41,16 @@ func _run():
 		addButton("Hypno Massage", "Offer Rahi a sensual massage with some extra encouragement", "give_massage")
 		if (getModule("RahiModule").isSkillLearned("rahiSkillMasochist")):
 			addButton("Gentle scratches", "(Masochism) Test Rahi's pain threshold while cuddling with her", "gentle_scratches")
+		if (getCharacter("rahi").canBeMilked()):
+			if (GM.pc.getInventory().getItemsWithTag(ItemTag.BreastPump).size() > 0):
+				if (!getCharacter("rahi").hasEffect(StatusEffect.SoreNipplesAfterMilking)):
+					addButton("Breast pumps", "Use one of your breast pumps to milk Rahi's lactating breasts", "pick_breastpump")
+				else:
+					addDisabledButton("Breast pumps", "Give Rahi some rest, her nipples are sore")
+			else:
+				addDisabledButton("Breast pumps", "You don't have any unused breast pumps")
+		else:
+			addDisabledButton("Breast pumps", "Rahi is not lactating")
 	if(state == "just_rest"):
 		saynn("Lost in the intimate connection, Rahi's eyes slowly close, her ears lowering while her purrs are growing deeper. You continue to idly trace little patterns over the fur of her shoulders and belly, showering your kitty with affection.")
 
@@ -245,6 +256,48 @@ func _run():
 			saynn("After that you begin to slowly button her shirt up and just cuddle with her, helping her recover.")
 
 		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "pick_breastpump"):
+		saynn("Pick which breast pump you wanna use on Rahi.")
+
+		addPumpButtons()
+		if (false):
+			addButton("Nope", "You shouldn't see this", "milk_withpump")
+	if(state == "milk_withpump"):
+		playAnimation(StageScene.Cuddling, "idle", {npc="rahi", npcBodyState={naked=true}})
+		saynn("Your hands slide slightly up and cup Rahi's {rahi.breasts}, surprising her. And while gently squeezing them, you realize how.. heavy they are with milk, a little wet spots instantly appear roughly where her nips are.")
+
+		saynn("[say=pc]Let's milk you, kitty.[/say]")
+
+		saynn("[say=rahi]Nya..[/say]")
+
+		saynn("You go ahead and unbutton her shirt, exposing her beautiful perky nips that have little jagged lines of white milk streaming down from them. While being extremely gentle, you grab some breast pumps and position them against Rahi's lactating breasts, the soft suction cups enveloping her sensitive dark nipples. Your kitty's body shivers from the touches but she lets you continue anyway, a mixture of excitement and nervousness seems to be coursing through her.")
+
+		saynn("As you activate the pumps, a subtle suction begins, stimulating Rahi's chest and making her gasp as she feels her milk beginning to flow into the containers, drawn out by the device's rhythmic pulsations.")
+
+		saynn("[say=rahi]Feels so.. strange..[/say]")
+
+		saynn("You two continue to cuddle her on the bed, your chin resting on her shoulder while you watch her, captivated by the sight of Rahi's milk being collected. Her soft moans of pleasure begin to fill the room, mingling with the rhythmic hum of the pumps. With each pull, more of her white creamy essence was released, filling the bottles.")
+
+		addButton("Continue", "See what happens next", "do_milk")
+	if(state == "do_milk"):
+		saynn("Rahi's breathing quickened, her body responding to the unique sensations. She closes her eyes, surrendering to the pumping, her thoughts consumed by the intoxicating mix of pleasure and submission. The suction slowly grows more intense, causing her lactating nipples to look puffy while also making her needy.")
+
+		saynn("The sight is great, your hands land under the breast pumps and begin tracing little delicate patterns along Rahi's exposed skin while the palms are cupping the round forms. Each time you put some extra pressure on them, the milk flow increases and Rahi's breath hitches from a wave of pleasure washing over her.")
+
+		saynn("With a final moan of pleasure, Rahi succumbs to the intense sensations of being milked, her body shivering from blissful release. The milk flows freely out of her nips for a bit but soon enough it begins to die down. It seems.. you have milked your kitty.")
+
+		saynn("[say=pc]Good girl.. made so much milk for me..[/say]")
+
+		saynn("[say=rahi]Y-you're welcome, {rahiMaster}..[/say]")
+
+		saynn("As you turn off and disconnect the pumps, another little noise of love escapes her caused by the air pressure normalizing. Then you just land a little kiss on her cheek and cuddle her a little longer, your hands gently kneading her breasts.")
+
+		addButton("Continue", "See what happens next", "removepumpandend")
+func addPumpButtons():
+	var pumps = GM.pc.getInventory().getItemsWithTag(ItemTag.BreastPump)
+	for pump in pumps:
+		addButton(pump.getVisibleName(), pump.getVisibleDescription(), "milk_withpump", [pump])
+
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
@@ -266,12 +319,36 @@ func _react(_action: String, _args):
 		processTime(10*60)
 		getModule("RahiModule").advanceSkill("rahiSkillMasochist")
 
+	if(_action == "milk_withpump"):
+		var pump = _args[0]
+		breastPumpID = pump.getUniqueID()
+		GM.pc.getInventory().removeItem(pump)
+		getCharacter("rahi").getInventory().forceEquipStoreOther(pump)
+
+	if(_action == "do_milk"):
+		processTime(6*60)
+		var pump = getCharacter("rahi").getInventory().getItemByUniqueID(breastPumpID)
+		getCharacter("rahi").stimulateLactation()
+		var howMuchTransferred = getCharacter("rahi").getBodypart(BodypartSlot.Breasts).getFluids().transferTo(pump, 1.0)
+		addMessage("The pump managed to milk Rahi's breasts for "+str(Util.roundF(howMuchTransferred))+" ml")
+		GM.pc.addSkillExperience(Skill.Milking, 30)
+		getCharacter("rahi").addEffect(StatusEffect.SoreNipplesAfterMilking)
+		getCharacter("rahi").updateAppearance()
+
+	if(_action == "removepumpandend"):
+		var pump = getCharacter("rahi").getInventory().getItemByUniqueID(breastPumpID)
+		getCharacter("rahi").getInventory().removeEquippedItem(pump)
+		GM.pc.getInventory().addItem(pump)
+		endScene()
+		return
+
 	setState(_action)
 
 func saveData():
 	var data = .saveData()
 
 	data["deserved"] = deserved
+	data["breastPumpID"] = breastPumpID
 
 	return data
 
@@ -279,9 +356,10 @@ func loadData(data):
 	.loadData(data)
 
 	deserved = SAVE.loadVar(data, "deserved", true)
+	breastPumpID = SAVE.loadVar(data, "breastPumpID", "")
 
 func getDevCommentary():
-	return "Cuddling seemed like one of the simplest rewards that can easily lead to lots of possibilities for sex so that's why I decided to add it ^^.\n\nAnd wow, something happened to me while I began writing the hypno massage part. I wanted to just write a simple massage scene but then I thought to myself, why not add a little sensual dialogue to it x3. And then that quickly spiraled out of control into some weird hypno fetish x3. Worst part is that I kinda like it. Did I develop a new fetish while writing a scene??\n\nThe biting scene turned out to be like 1.6k words x3. Mostly because I wrote a few variations depending on how high her masochism skill is. It usually scales from Rahi receiving pain and not liking it to Rahi basically cumming from it x3. Dunno if people even notice that"
+	return "Cuddling seemed like one of the simplest rewards that can easily lead to lots of possibilities for sex so that's why I decided to add it ^^.\n\nAnd wow, something happened to me while I began writing the hypno massage part. I wanted to just write a simple massage scene but then I thought to myself, why not add a little sensual dialogue to it x3. And then that quickly spiraled out of control into some weird hypno fetish x3. Worst part is that I kinda like it. Did I develop a new fetish while writing a scene??\n\nThe biting scene turned out to be like 1.6k words x3. Mostly because I wrote a few variations depending on how high her masochism skill is. It usually scales from Rahi receiving pain and not liking it to Rahi basically cumming from it x3. Dunno if people even notice that\n\nThe milking scene was fun to write ^^. First time you can use breast pumps on someone else. It's also probably the first way to get someone else's breastmilk? Not sure x3. At least currently it is. So this scene is handy for male characters ^^"
 
 func hasDevCommentary():
 	return true

@@ -57,6 +57,7 @@ func deleteSelf():
 	GM.main.removeDynamicCharacter(getID())
 
 func onStoppedProcessing():
+	.onStoppedProcessing()
 	if(temporaryCharacter):
 		deleteSelf()
 

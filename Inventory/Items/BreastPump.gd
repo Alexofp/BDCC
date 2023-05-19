@@ -23,7 +23,7 @@ func canSell():
 	return true
 
 func getTags():
-	return [ItemTag.SoldByMedicalVendomat]
+	return [ItemTag.SoldByMedicalVendomat, ItemTag.BreastPump]
 
 func getUnriggedParts(_character):
 	var howFilled = fluids.getFluidAmount()/fluids.getCapacity()
