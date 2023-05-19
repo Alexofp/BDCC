@@ -304,6 +304,59 @@ func _run():
 		saynn("After some time, she opens her eyes.. and feels a rush of embarrassment wash over her as she realizes what happened. She quickly slips out of bed and dashes away, towards her cell, leaving you with a wide grin.")
 
 		addButton("Continue", "That was so cute", "endthescene")
+	if(state == "walkies"):
+		playAnimation(StageScene.Duo, "stand", {npc="rahi", npcAction="allfours", npcBodyState={naked=true}})
+		saynn("The night passes.")
+
+		saynn("You wake up a little earlier today from something.. jumping on you? As your eyes begin blinking open, you find.. Rahi.. right up in your face. It takes you a moment to realize that your kitty is completely naked, on all fours and with a leash clasped between her teeth. Her eyes shine with playful anticipation.")
+
+		saynn("[say=pc]Mornin' pup.. You want walkies, don't you..[/say]")
+
+		saynn("Rahi's tail wags excitedly as she hears these words. You're still a little sleepy and so you try to hide under the blanket to savor the little time that you have before the prison's busy life starts. But Rahi doesn't let you enjoy the bed's comfy embrace, she starts tugging on the blanket with her paws while you desperately fight back.")
+
+		saynn("[say=pc]Just give me five more minutes..[/say]")
+
+		saynn("But your pup is relentless, she yoinks the blanket from you and gets off your bed, still standing on all fours and watching you, now all cold and vulnerable. It seems you have no choice..")
+
+		saynn("[say=pc]Alriiight, I'm waking up.[/say]")
+
+		saynn("Rahi purrs loudly and puts the blanket onto the chair before dropping the leash at your feet, barking happily, her body rubbing against your legs.")
+
+		saynn("You pick up the leash and clip to Rahi's collar before giving her a gentle pat.")
+
+		saynn("[say=pc]Ready for walkies, pup?[/say]")
+
+		saynn("Together, you venture out of your cell, Rahi moving her bare paws and knees over the prison floor. As you stroll through the corridors, your kitty remains at your side, her leash held loosely by your hand. Such a simple act of walking around is so much more fun for Rahi as she embraces her inner puppy.")
+
+		var possibleWalk = RNG.pick(["sniff", "grass", "shiny", "guard"])
+		if (getModule("RahiModule").getSkillScore("rahiSkillWatersports") > 5 && RNG.chance(20)):
+			possibleWalk = "pee"
+		if (possibleWalk == "sniff"):
+			saynn("Rahi's tail wags with each step, putting her playful self on full display. She occasionally stops to sniff curiously at passing inmates and staff, her innocent curiosity adding some charm to this unconventional walk. You watch your pup with a smile, her energy is quite infectious.")
+
+		elif (possibleWalk == "pee"):
+			saynn("As Rahi explores the surroundings and also herself at the same time, her puppy-like nature leads her to a nearby bush. She observes it and then crouches down nearby, mimicking the posture of a puppy that's about to relieve themselves. It's kinda cute.")
+
+			saynn("Your puppy lets out a playful whimper before releasing a steady stream of warm, golden liquid onto the grass. The sight is both naughty and endearing, a reminder of how well you trained her.")
+
+		elif (possibleWalk == "grass"):
+			saynn("Rahi's tail wags fast as she spots a patch of soft, green grass. Unable to resist the temptation, she begins to roll in it, her fur becoming a little dirty in the process but she doesn't seem to mind. You can't help but to watch your pup and be amused by her joy.")
+
+		elif (possibleWalk == "shiny"):
+			saynn("Rahi's tail wags with each step, putting her playful self on full display. She occasionally darts off to investigate random shiny objects on the ground, her curious nature makes her do that. You follow patiently, chuckling softly at her eagerness.")
+
+		elif (possibleWalk == "guard"):
+			saynn("One of the guards approaches you, his stern expression softening as he sees Rahi's playful behavior. Your kitty obediently sits by your side and looks at him, proudly displaying naked self while her eyes are filled with innocent curiosity. The staff member couldn't resist reaching his hand out to give your pup a gentle pat on the head.")
+
+		saynn("It wasn't the longest walk.. but it didn't need to be. Playful gestures, gentle strokes, headpats and whispered words of encouragement create a nice kinky atmosphere and help you bond with your puppy more..")
+
+		saynn("As you return to the cell, Rahi is now looking satisfied, she slowly gets up and presents you her collar, waiting for you to unclip the leash.")
+
+		saynn("[say=pc]Good girl.[/say]")
+
+		saynn("Your kitty nuzzles you, a soft purr escaping from her chest. After that she just darts off to her cell while you are left to rest in your bed for a little longer before the actual day starts.")
+
+		addButton("Continue", "That was so cute", "endthescene")
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
@@ -327,6 +380,8 @@ func _react(_action: String, _args):
 			if(GM.pc.hasReachableVagina()):
 				possible.append("fingering")
 				possible.append("pussylicking")
+			if(getModule("RahiModule").getSkillScore("rahiSkillPetplay") > 5):
+				possible.append("walkies")
 		
 			var newState = RNG.pick(possible)
 		
@@ -410,3 +465,9 @@ func loadData(data):
 	.loadData(data)
 
 	condomBroke = SAVE.loadVar(data, "condomBroke", false)
+
+func getDevCommentary():
+	return "I added this scene because I wanted Rahi to have some.. agency? You know, so it's not always just you approaching her and starting scenes. It also means that after completing Rahi's content you will still see her every now and again ^^. The lewd scenes are also handy to reset your lust so they are kinda useful x3."
+
+func hasDevCommentary():
+	return true
