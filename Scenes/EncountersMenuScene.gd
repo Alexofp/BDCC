@@ -5,15 +5,17 @@ var pickedFetishToChange = ""
 var pickedPersonalityStat = ""
 var pickedGenderToChange = ""
 var pickedSpeciesToChange = ""
+var npclistScene = preload("res://UI/NpcList/NpcList.tscn")
+var npclist 
 
 func _init():
 	sceneID = "EncountersMenuScene"
 
 func _run():
 	if(state == ""):
-		var encounterSettings:EncounterSettings = GM.main.getEncounterSettings()
+		GM.main.playAnimation(StageScene.Solo, "stand", {npc=GM.pc}) #to reset if npc was selected in npclist
 		
-		GM.ui.hideNpcList()
+		var encounterSettings:EncounterSettings = GM.main.getEncounterSettings()
 		
 		saynn("This is a menu that contains info about your previous encounters.")
 		
@@ -79,9 +81,9 @@ func _run():
 		addButton("Back", "Close this menu", "endthescene")
 		
 		if(hasSomeoneToForget):
-			addButton("NPC list", "Shows NPCs that you encountered", "npclistmenu")
+			addButton("Characters", "Shows any randomly generated characters that you encountered", "npclistmenu")
 		else:
-			addDisabledButton("NPC list", "You haven't met any NPCs")
+			addDisabledButton("Characters", "You haven't met any randomly generated characters")
 		
 		addButton("Toggle known", "Toggle between meeting only old characters and meeting both old and new", "toggleKnown")
 		addButton("Dynamic personality", "Change the way your personality changes after sex", "togglePersonalityChange")
@@ -168,46 +170,40 @@ func _run():
 			addButton(str(Util.roundF(chance*100.0))+"%", "Pick this chance", "setspecieschance", [species, chance])
 
 	if(state == "npclistmenu"):
-		GM.ui.showNpcList()
 		var encounterPools = GM.main.getDynamicCharactersPools()
 
 		saynn("Select which occupation the character that you want to look for has.")
+		saynn("You can forget any character in the list so they will never show up again. This action can not be undone.")
+		saynn("Keep in mind that if this character is pregnant, their pregnancy will be forgotten too. But any kids you had together will stay.")
 
 		addButton("Back", "Go back a level", "") 
-
+		
 		for encounterPoolID in encounterPools:
 			addButton(str(encounterPoolID), "Pick this occupation", "occupationmenupool", [encounterPoolID])
 		
-		
 	if(state == "occupationmenupool"):
-		GM.ui.npcListScreen.clearRows()
-
+		npclist = npclistScene.instance()
+		GM.ui.addCustomControl("npclist", npclist)
+		
 		var characterIDS = GM.main.getDynamicCharacterIDsFromPool(pickedPoolToShow)
 		for characterID in characterIDS:
 			var dynamicCharacter: BaseCharacter  = GlobalRegistry.getCharacter(characterID)
 			if(dynamicCharacter == null):
 				continue
-
-#			var desc = dynamicCharacter.getSmallDescription()
-#			if(desc == null):
-#				desc = ""
-
-#			var kidsAmount = GM.CS.getChildrenAmountOf(characterID)
-#			if(kidsAmount > 0):
-#				if(desc != ""):
-#					desc += "\n"
-
 			var NPCname = dynamicCharacter.getName()
-			var gender = dynamicCharacter.npcGeneratedGender.capitalize() #accessing param like this is kinda wrong but getGender() returns number and I don't want that
+			var gender = NpcGender.getVisibleName(dynamicCharacter.npcGeneratedGender)
 			var subbyStat = dynamicCharacter.getPersonality().getStat(PersonalityStat.Subby)
-			var personality = PersonalityStat.getVisibleDesc("Subby", subbyStat)
+			var personality = PersonalityStat.getVisibleDesc(PersonalityStat.Subby, subbyStat)
 			var sharedKidsAmount = GM.CS.getSharedChildrenAmount("pc", characterID)
 
-			GM.ui.npcListScreen.addRow(NPCname, gender, personality, characterID, sharedKidsAmount)
-			
-		setState("npclistmenu")
-		_run()
-	
+			npclist.addRow(NPCname, gender, personality, characterID, sharedKidsAmount)
+		
+		addButton("Back", "Go back a level", "")
+		
+		var encounterPools = GM.main.getDynamicCharactersPools()
+		for encounterPoolID in encounterPools:
+			addButton(str(encounterPoolID), "Pick this occupation", "occupationmenupool", [encounterPoolID])
+
 	if(state == "fetishmenu"):
 		var fetishHolder = GM.pc.getFetishHolder()
 		saynn("Having a fetish for something means you will get more lust doing this activity during sex.")

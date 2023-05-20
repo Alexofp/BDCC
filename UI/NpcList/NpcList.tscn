@@ -1,9 +1,8 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://GlobalTheme.tres" type="Theme" id=1]
-[ext_resource path="res://Game/SmartScrollContainer.gd" type="Script" id=2]
 [ext_resource path="res://UI/NpcList/NpcList.gd" type="Script" id=3]
-[ext_resource path="res://PanelStyle.tres" type="StyleBox" id=5]
+[ext_resource path="res://UI/NpcList/PanelStyle.tres" type="StyleBox" id=5]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.207843, 0.133333, 0.364706, 1 )
@@ -132,21 +131,20 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = SubResource( 2 )
 
-[node name="Control" type="Control" parent="VBoxContainer/ItemList"]
+[node name="NpcListControld" type="Control" parent="VBoxContainer/ItemList"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_right = -4.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/ItemList/Control"]
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/ItemList/NpcListControld"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_right = 5.0
 theme = SubResource( 3 )
-script = ExtResource( 2 )
 
-[node name="HBoxContainer" type="VBoxContainer" parent="VBoxContainer/ItemList/Control/ScrollContainer"]
+[node name="HBoxContainer" type="VBoxContainer" parent="VBoxContainer/ItemList/NpcListControld/ScrollContainer"]
 margin_right = 1280.0
 margin_bottom = 637.0
 size_flags_horizontal = 3

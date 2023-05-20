@@ -10,9 +10,6 @@ onready var showNpc = $ShowNPC
 var _npcID: String
 
 
-#func _ready():
-
-
 func setName(name: String):
 	_npcNameLabel.text = name
 
@@ -47,7 +44,8 @@ func _on_Forget_pressed():
 	if(_npcID == null):
 		push_error("Exception: Attempt to delete null NPC in the NPC list")
 	else:
-		GM.ui.npcListScreen.forgetNPC(_npcID)
+		var npcListObj = load("res://UI/NpcList/NpcList.gd").new()
+		npcListObj.forgetNPC(_npcID)
 		queue_free()
 
 
