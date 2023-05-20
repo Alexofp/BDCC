@@ -1,30 +1,33 @@
 extends Control
 
+var npcRow = preload("res://UI/NpcList/NPCRow.tscn")
+onready var container = get_node("VBoxContainer/ItemList/Stats/ScrollContainer/HBoxContainer")
 
-func _ready():
-	pass
+
+#func _ready():
+#	pass
+
+
+func addRow(name: String, gender: String, personality: String, ID, children: int = 0):
+	var newRow = npcRow.instance()
+	container.add_child(newRow)
+	newRow.setName(name)
+	newRow.setGender(gender)
+	newRow.setPersonality(personality)
+	newRow.setNpcID(ID)
+	newRow.setChildren(children)
+
+
+
+func clearRows():
+	for child in container.get_children():
+		container.remove_child(child)
+		child.queue_free()
+
+
+func forgetNPC(ID):
+	GM.main.removeDynamicCharacter(ID)
 
 
 func updateData():
-	pass
-#	assert(GM.pc != null)
-#
-#	nameLabel.text = GM.pc.getName()
-#
-#	levelBar.setTextLeft("Level "+str(GM.pc.getSkillsHolder().getLevel()))
-#	levelBar.setText(str(GM.pc.getSkillsHolder().getExperience())+" / "+str(GM.pc.getSkillsHolder().getRequiredExperienceNextLevel())+" exp")
-#	levelBar.setProgressBarValue(GM.pc.getSkillsHolder().getLevelProgress())
-#
-#	if(openedSkillTab != null):
-#		openedSkillTab.queue_free()
-#		openedSkillTab = null
-
-
-func _on_CancelButton_pressed():
-	pass
-#	addedPoints.clear()
-
-
-
-func _on_ApplyButton_pressed():
 	pass

@@ -319,7 +319,6 @@ func showNpcList():
 	scrollPanel.visible = false
 
 func hideNpcList():
-	print("Hide Npc called")
 	if(isNpcListVisible() == true):
 		npcListScreen.visible = false
 		scrollPanel.visible = true

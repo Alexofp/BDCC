@@ -180,40 +180,41 @@ func _run():
 		
 		
 	if(state == "occupationmenupool"):
-		print(str(pickedPoolToShow))
-		setState("npclistmenu")
-		_run()
-#		saynn("This is the list of the characters that you encountered.")
-#
+		GM.ui.npcListScreen.clearRows()
+
 #		saynn("You can forget any character in the list so they will never show up again. This action can not be undone.")
 #
 #		saynn("Keep in mind that if this character is pregnant, their pregnancy will be forgotten too. But any kids you had together will stay.")
-#
-#
-#		var characterIDS = GM.main.getDynamicCharacterIDsFromPool(pickedPoolToShow)
-#		for characterID in characterIDS:
-#			var dynamicCharacter = GlobalRegistry.getCharacter(characterID)
-#			if(dynamicCharacter == null):
-#				continue
-#
+
+		var characterIDS = GM.main.getDynamicCharacterIDsFromPool(pickedPoolToShow)
+		for characterID in characterIDS:
+			var dynamicCharacter: BaseCharacter  = GlobalRegistry.getCharacter(characterID)
+			if(dynamicCharacter == null):
+				continue
+
 #			var desc = dynamicCharacter.getSmallDescription()
 #			if(desc == null):
 #				desc = ""
-#
+
 #			var kidsAmount = GM.CS.getChildrenAmountOf(characterID)
 #			if(kidsAmount > 0):
 #				if(desc != ""):
 #					desc += "\n"
-#				desc += dynamicCharacter.getName()+" has "+str(kidsAmount)+" "+Util.multipleOrSingularEnding(kidsAmount, "kid")+"."
-#
-#			var sharedKidsAmount = GM.CS.getSharedChildrenAmount("pc", characterID)
-#			if(sharedKidsAmount > 0):
-#				if(sharedKidsAmount == kidsAmount):
-#					desc += " All of them are from you."
-#				else:
-#					desc += " "+str(sharedKidsAmount)+" of them are from you."
+
+			var NPCname = dynamicCharacter.getName()
+			print(NPCname)
+			var gender = dynamicCharacter.npcGeneratedGender
+			print(gender)
+			var subbyStat = dynamicCharacter.getPersonality().getStat(PersonalityStat.Subby)
+			var personality = PersonalityStat.getVisibleDesc("Subby", subbyStat)
+			print(personality)
+			var sharedKidsAmount = GM.CS.getSharedChildrenAmount("pc", characterID)
+			print(sharedKidsAmount)
+
+			GM.ui.npcListScreen.addRow(NPCname, gender, personality, characterID, sharedKidsAmount)
 			
-#			addButton(dynamicCharacter.getName(), desc, "forget", [dynamicCharacter.getID()])
+		setState("npclistmenu")
+		_run()
 	
 	if(state == "fetishmenu"):
 		var fetishHolder = GM.pc.getFetishHolder()
@@ -317,14 +318,6 @@ func _react(_action: String, _args):
 	
 	if(_action == "occupationmenupool"):
 		pickedPoolToShow = _args[0]
-	
-	if(_action == "forget"):
-		var dynamicCharacter = GlobalRegistry.getCharacter(_args[0])
-		addMessage("You forgot about "+str(dynamicCharacter.getName()))
-		
-		GM.main.removeDynamicCharacter(_args[0])
-		setState("occupationmenupool")
-		return
 	
 	if(_action == "genderchancemenu"):
 		pickedGenderToChange = _args[0]
