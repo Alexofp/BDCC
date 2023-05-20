@@ -322,6 +322,7 @@ func hideNpcList():
 	if(isNpcListVisible() == true):
 		npcListScreen.visible = false
 		scrollPanel.visible = true
+		GM.main.playAnimation(StageScene.Solo, "stand", {npc=GM.pc})
 
 func isNpcListVisible():
 	return npcListScreen.visible

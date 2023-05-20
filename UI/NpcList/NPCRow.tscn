@@ -14,7 +14,7 @@ size_flags_vertical = 0
 custom_styles/panel = ExtResource( 2 )
 script = ExtResource( 3 )
 
-[node name="Button" type="Button" parent="."]
+[node name="ShowNPC" type="Button" parent="."]
 margin_right = 1280.0
 margin_bottom = 50.0
 rect_min_size = Vector2( 0, 50 )
@@ -38,7 +38,7 @@ rect_min_size = Vector2( 6, 50 )
 margin_left = 10.0
 margin_right = 214.0
 margin_bottom = 50.0
-rect_min_size = Vector2( 60, 50 )
+rect_min_size = Vector2( 100, 50 )
 size_flags_horizontal = 11
 size_flags_vertical = 0
 text = "NAME:"
@@ -123,4 +123,5 @@ rect_min_size = Vector2( 80, 40 )
 size_flags_horizontal = 7
 text = "Forget"
 
+[connection signal="pressed" from="ShowNPC" to="." method="_on_ShowNPC_pressed"]
 [connection signal="pressed" from="HBoxContainer/CenterContainer/Forget" to="." method="_on_Forget_pressed"]

@@ -64,7 +64,7 @@ margin_bottom = 64.0
 margin_top = 7.0
 margin_right = 209.0
 margin_bottom = 57.0
-rect_min_size = Vector2( 66, 50 )
+rect_min_size = Vector2( 106, 50 )
 size_flags_horizontal = 11
 text = "Name:"
 align = 1
@@ -132,21 +132,21 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = SubResource( 2 )
 
-[node name="Stats" type="Control" parent="VBoxContainer/ItemList"]
+[node name="Control" type="Control" parent="VBoxContainer/ItemList"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_right = -4.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/ItemList/Stats"]
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/ItemList/Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_right = 5.0
 theme = SubResource( 3 )
 script = ExtResource( 2 )
 
-[node name="HBoxContainer" type="VBoxContainer" parent="VBoxContainer/ItemList/Stats/ScrollContainer"]
+[node name="HBoxContainer" type="VBoxContainer" parent="VBoxContainer/ItemList/Control/ScrollContainer"]
 margin_right = 1280.0
 margin_bottom = 637.0
 size_flags_horizontal = 3

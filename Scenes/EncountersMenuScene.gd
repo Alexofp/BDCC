@@ -182,10 +182,6 @@ func _run():
 	if(state == "occupationmenupool"):
 		GM.ui.npcListScreen.clearRows()
 
-#		saynn("You can forget any character in the list so they will never show up again. This action can not be undone.")
-#
-#		saynn("Keep in mind that if this character is pregnant, their pregnancy will be forgotten too. But any kids you had together will stay.")
-
 		var characterIDS = GM.main.getDynamicCharacterIDsFromPool(pickedPoolToShow)
 		for characterID in characterIDS:
 			var dynamicCharacter: BaseCharacter  = GlobalRegistry.getCharacter(characterID)
@@ -202,14 +198,10 @@ func _run():
 #					desc += "\n"
 
 			var NPCname = dynamicCharacter.getName()
-			print(NPCname)
-			var gender = dynamicCharacter.npcGeneratedGender
-			print(gender)
+			var gender = dynamicCharacter.npcGeneratedGender.capitalize() #accessing param like this is kinda wrong but getGender() returns number and I don't want that
 			var subbyStat = dynamicCharacter.getPersonality().getStat(PersonalityStat.Subby)
 			var personality = PersonalityStat.getVisibleDesc("Subby", subbyStat)
-			print(personality)
 			var sharedKidsAmount = GM.CS.getSharedChildrenAmount("pc", characterID)
-			print(sharedKidsAmount)
 
 			GM.ui.npcListScreen.addRow(NPCname, gender, personality, characterID, sharedKidsAmount)
 			
