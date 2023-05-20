@@ -151,6 +151,7 @@ func saveData():
 	
 	data["lastUpdatedDay"] = lastUpdatedDay
 	data["lastUpdatedSecond"] = lastUpdatedSecond
+	data["pregnancyWaitTimer"] = pregnancyWaitTimer
 	
 	data["lustInterests"] = lustInterests.saveDataDynamicNpc()
 	data["fetishHolder"] = fetishHolder.saveData()
@@ -224,6 +225,7 @@ func loadData(data):
 	
 	lastUpdatedDay = SAVE.loadVar(data, "lastUpdatedDay", -1)
 	lastUpdatedSecond = SAVE.loadVar(data, "lastUpdatedSecond", -1)
+	pregnancyWaitTimer = SAVE.loadVar(data, "pregnancyWaitTimer", 0)
 	
 	lustInterests.loadDataDynamicNpc(SAVE.loadVar(data, "lustInterests", {}))
 	fetishHolder.loadData(SAVE.loadVar(data, "fetishHolder", {}))

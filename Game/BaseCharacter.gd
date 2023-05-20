@@ -1081,6 +1081,16 @@ func isReadyToGiveBirth():
 		return menstrualCycle.isReadyToGiveBirth()
 	return false
 
+func giveBirth():
+	if(menstrualCycle == null):
+		return []
+	
+	clearOrificeFluids()
+	var bornChildren = getMenstrualCycle().giveBirth()
+	for child in bornChildren:
+		GM.CS.addChild(child)
+	return bornChildren
+
 func forceIntoHeat():
 	if(menstrualCycle != null):
 		menstrualCycle.forceIntoHeat()
