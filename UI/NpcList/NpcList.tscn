@@ -1,6 +1,7 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://GlobalTheme.tres" type="Theme" id=1]
+[ext_resource path="res://Game/SmartScrollContainer.gd" type="Script" id=2]
 [ext_resource path="res://UI/NpcList/NpcList.gd" type="Script" id=3]
 [ext_resource path="res://UI/NpcList/PanelStyle.tres" type="StyleBox" id=5]
 
@@ -143,6 +144,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_right = 5.0
 theme = SubResource( 3 )
+script = ExtResource( 2 )
 
 [node name="HBoxContainer" type="VBoxContainer" parent="VBoxContainer/ItemList/NpcListControld/ScrollContainer"]
 margin_right = 1280.0
