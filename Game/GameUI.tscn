@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=2]
+[gd_scene load_steps=35 format=2]
 
 [ext_resource path="res://GlobalTheme.tres" type="Theme" id=1]
 [ext_resource path="res://Game/TooltipDisplay.tscn" type="PackedScene" id=2]
@@ -21,18 +21,10 @@
 [ext_resource path="res://UI/RichTextBoxEffects/cuss_richtexteffect.tres" type="RichTextEffect" id=19]
 [ext_resource path="res://UI/RichTextBoxEffects/corrupt_richtexteffect.tres" type="RichTextEffect" id=20]
 
-[sub_resource type="StyleBoxFlat" id=29]
-bg_color = Color( 0.207843, 0.133333, 0.364706, 1 )
-
-[sub_resource type="Theme" id=30]
-/styles/normal = SubResource( 29 )
-
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.207843, 0.133333, 0.364706, 1 )
 corner_radius_top_right = 16
 corner_radius_bottom_right = 16
-
-[sub_resource type="Theme" id=31]
 
 [sub_resource type="InputEventAction" id=21]
 action = "gameui_quicksave"
@@ -93,7 +85,6 @@ margin_bottom = 720.0
 rect_min_size = Vector2( 260, 0 )
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.3
-theme = SubResource( 30 )
 custom_styles/panel = SubResource( 1 )
 
 [node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/Panel2"]
@@ -105,6 +96,9 @@ margin_right = -12.0
 margin_bottom = -12.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/Panel2/MarginContainer"]
 margin_right = 236.0
@@ -131,7 +125,6 @@ rect_min_size = Vector2( 0, 10 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.01
-theme = SubResource( 31 )
 
 [node name="MapAndTimePanel" parent="HBoxContainer/Panel2/MarginContainer/VBoxContainer" instance=ExtResource( 9 )]
 anchor_right = 0.0
@@ -328,20 +321,20 @@ margin_bottom = 720.0
 visible = false
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 652.0
-margin_right = 1027.0
+margin_left = 273.0
+margin_right = 648.0
 margin_bottom = 720.0
 
 [node name="DevCommentary" type="VBoxContainer" parent="HBoxContainer"]
 visible = false
-margin_left = 652.0
-margin_right = 1027.0
+margin_left = 273.0
+margin_right = 983.0
 margin_bottom = 720.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/DevCommentary"]
-margin_right = 375.0
+margin_right = 710.0
 margin_bottom = 20.0
 rect_min_size = Vector2( 0, 20 )
 __meta__ = {
@@ -350,14 +343,14 @@ __meta__ = {
 
 [node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer/DevCommentary"]
 margin_top = 24.0
-margin_right = 375.0
+margin_right = 710.0
 margin_bottom = 616.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource( 14 )
 
 [node name="DevComLabel" type="RichTextLabel" parent="HBoxContainer/DevCommentary/ScrollContainer"]
-margin_right = 375.0
+margin_right = 710.0
 margin_bottom = 592.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -370,13 +363,13 @@ fit_content_height = true
 
 [node name="GridContainer" type="GridContainer" parent="HBoxContainer/DevCommentary"]
 margin_top = 620.0
-margin_right = 375.0
+margin_right = 710.0
 margin_bottom = 720.0
 rect_min_size = Vector2( 0, 100 )
 columns = 5
 
 [node name="CloseButton" type="Button" parent="HBoxContainer/DevCommentary/GridContainer"]
-margin_right = 75.0
+margin_right = 142.0
 margin_bottom = 26.0
 size_flags_horizontal = 3
 text = "Close"
@@ -385,8 +378,8 @@ text = "Close"
 visible = false
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 652.0
-margin_right = 1027.0
+margin_left = 984.0
+margin_right = 984.0
 margin_bottom = 720.0
 
 [node name="HSplitContainer2" type="HSplitContainer" parent="HBoxContainer"]

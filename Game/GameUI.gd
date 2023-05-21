@@ -296,7 +296,6 @@ func hideAllScreens():
 	debugScreen.visible = false
 	devCommentaryPanel.visible = false
 
-
 func _on_MenuButton_pressed():
 	if(!ingameMenuScreen.visible):
 		hideAllScreens()
@@ -311,6 +310,7 @@ func showGameScreen():
 
 func getCurrentLocationName():
 	return mapAndTimePanel.getLocationName()
+
 
 func _on_SkillsButton_pressed():
 	skillsButton.text = "Skills"
@@ -476,6 +476,3 @@ func _on_DevComLabel_meta_clicked(meta):
 
 func isShowingDevCommentary():
 	return devCommentaryPanel.visible
-
-
-
