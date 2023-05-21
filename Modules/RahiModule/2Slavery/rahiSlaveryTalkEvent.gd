@@ -23,6 +23,9 @@ func getPriority():
 
 func onButton(_method, _args):
 	if(_method == "talk"):
+		if(GM.ES.triggerReact(Trigger.TalkingToNPC, ["rahiSlavery"])):
+			return
+		
 		if(!getFlag("RahiModule.rahi5SceneHappened")):
 			setFlag("RahiModule.rahi5SceneHappened", true)
 			setFlag("RahiModule.rahiSlaveryDidTaskToday", true)
