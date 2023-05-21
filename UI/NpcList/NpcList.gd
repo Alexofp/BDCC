@@ -14,14 +14,6 @@ func addRow(name: String, gender: String, personality: String, ID, children: int
 	newRow.setChildren(children)
 
 
-func showNpcList():
-	self.visible = true
-	
-	
-func hideNpcList():
-	self.visible = false
-
-
 func clearRows():
 	if(container != null):
 		for child in container.get_children():
