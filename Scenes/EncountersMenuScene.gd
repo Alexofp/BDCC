@@ -5,8 +5,7 @@ var pickedFetishToChange = ""
 var pickedPersonalityStat = ""
 var pickedGenderToChange = ""
 var pickedSpeciesToChange = ""
-var npclistScene = preload("res://UI/NpcList/NpcList.tscn")
-var npclist 
+var npclistScene = preload("res://UI/NpcList/NpcList.tscn") 
 
 func _init():
 	sceneID = "EncountersMenuScene"
@@ -182,7 +181,7 @@ func _run():
 			addButton(str(encounterPoolID), "Pick this occupation", "occupationmenupool", [encounterPoolID])
 		
 	if(state == "occupationmenupool"):
-		npclist = npclistScene.instance()
+		var npclist = npclistScene.instance()
 		GM.ui.addCustomControl("npclist", npclist)
 		
 		var characterIDS = GM.main.getDynamicCharacterIDsFromPool(pickedPoolToShow)

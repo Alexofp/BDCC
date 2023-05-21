@@ -6,7 +6,8 @@ onready var _npcPersonalityLabel = $HBoxContainer/Personality
 onready var _amountOfChildrenLabel = $HBoxContainer/Children
 onready var meetButton = $HBoxContainer/CenterContainer2/Meet
 onready var forgetButton = $HBoxContainer/CenterContainer/Forget
-onready var showNpc = $ShowNPC
+onready var showNpcButton = $ShowNPC
+signal onForgetButtonPressed(npcID)
 var _npcID: String
 
 
@@ -22,13 +23,13 @@ func setPersonality(personality: String):
 	_npcPersonalityLabel.text = personality
 
 
-func setChildren(children):
-	_amountOfChildrenLabel.text = String(children)
+func setChildrenAmount(children):
+	_amountOfChildrenLabel.text = str(children)
 
 
 func setNpcID(ID: String):
-	if(_npcID == null):
-		push_error("Exception: Attempt to set null NPC in the NPC list")
+	if(ID == ""):
+		Log.error("Exception: attempt to set an empty character ID")
 	else:
 		_npcID = ID
 
@@ -37,17 +38,15 @@ func getNpcID():
 	if(_npcID != null):
 		return _npcID
 	else: 
-		push_error("Exception: NPCRow: NPC ID is missing")
+		Log.error("Exception: NPCRow: character ID was not set")
 
 
 func _on_Forget_pressed():
 	if(_npcID == null):
-		push_error("Exception: Attempt to delete null NPC in the NPC list")
+		Log.error("Exception: Attempt to delete null character in the NPC list")
 	else:
-		var npcListObj = load("res://UI/NpcList/NpcList.gd").new()
-		npcListObj.forgetNPC(_npcID)
+		emit_signal("onForgetButtonPressed", _npcID)
 		queue_free()
-
 
 
 func _on_ShowNPC_pressed():

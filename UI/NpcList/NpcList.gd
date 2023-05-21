@@ -1,7 +1,7 @@
 extends Control
 
 onready var npcRow = load("res://UI/NpcList/NPCRow.tscn")
-onready var container = get_node("VBoxContainer/ItemList/NpcListControld/ScrollContainer/HBoxContainer")
+onready var container = $VBoxContainer/ItemList/NpcListControld/ScrollContainer/HBoxContainer
 
 
 func addRow(name: String, gender: String, personality: String, ID, children: int = 0):
@@ -11,7 +11,8 @@ func addRow(name: String, gender: String, personality: String, ID, children: int
 	newRow.setGender(gender)
 	newRow.setPersonality(personality)
 	newRow.setNpcID(ID)
-	newRow.setChildren(children)
+	newRow.setChildrenAmount(children)
+	newRow.connect("onForgetButtonPressed", self, "forgetNPC")
 
 
 func clearRows():
