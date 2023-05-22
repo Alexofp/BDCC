@@ -4,14 +4,10 @@ onready var npcRow = load("res://UI/NpcList/NPCRow.tscn")
 onready var container = $VBoxContainer/ItemList/NpcListControld/ScrollContainer/HBoxContainer
 
 
-func addRow(name: String, gender: String, personality: String, ID, children: int = 0):
+func addRow(name: String, gender: String, personality: String, ID: String, children: int = 0):
 	var newRow = npcRow.instance()
 	container.add_child(newRow)
-	newRow.setName(name)
-	newRow.setGender(gender)
-	newRow.setPersonality(personality)
-	newRow.setNpcID(ID)
-	newRow.setChildrenAmount(children)
+	newRow.init(name, gender, personality, ID, children)
 	newRow.connect("onForgetButtonPressed", self, "forgetNPC")
 
 
@@ -25,3 +21,7 @@ func clearRows():
 func forgetNPC(ID):
 	GM.main.removeDynamicCharacter(ID)
 
+
+func _notification(what):
+	if(what == NOTIFICATION_PREDELETE && GM.main != null):
+		GM.main.playAnimation(StageScene.Solo, "stand", {npc=GM.pc})

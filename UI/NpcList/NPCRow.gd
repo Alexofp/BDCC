@@ -8,23 +8,15 @@ onready var meetButton = $HBoxContainer/CenterContainer2/Meet
 onready var forgetButton = $HBoxContainer/CenterContainer/Forget
 onready var showNpcButton = $ShowNPC
 signal onForgetButtonPressed(npcID)
-var _npcID: String
+var _npcID setget setNpcID, getNpcID
 
 
-func setName(name: String):
+func init(name, gender, personality, ID, children):
 	_npcNameLabel.text = name
-
-
-func setGender(gender: String):
-	_npcGenderLabel.text = gender
-
-
-func setPersonality(personality: String):
-	_npcPersonalityLabel.text = personality
-
-
-func setChildrenAmount(children):
-	_amountOfChildrenLabel.text = str(children)
+	_npcGenderLabel.text  = gender
+	_npcPersonalityLabel.text  = personality
+	self._npcID = ID
+	_amountOfChildrenLabel.text  = str(children)
 
 
 func setNpcID(ID: String):
