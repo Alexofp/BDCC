@@ -1,7 +1,7 @@
 extends Control
 
 onready var npcRow = load("res://UI/NpcList/NPCRow.tscn")
-onready var container = $VBoxContainer/ItemList/NpcListControld/ScrollContainer/HBoxContainer
+onready var container = $PanelContainer/VBoxC/ScrollC/VboxC2
 
 
 func addRow(name: String, gender: String, personality: String, ID: String, children: int = 0):
