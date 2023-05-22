@@ -265,7 +265,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "time_say_goodbye")
 	if(state == "time_say_goodbye"):
-		playAnimation(StageScene.Duo, "stand", {npc="rahi", npcAction="stand"})
+		playAnimation(StageScene.Duo, "kneel", {npc="rahi", npcAction="stand"})
 		saynn("Together, Rahi and you, try to enjoy this precious moment of parenthood..")
 
 		saynn("Until the nurses walk in and tell you that it's time.")

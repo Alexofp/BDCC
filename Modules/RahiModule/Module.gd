@@ -18,6 +18,7 @@ func getFlags():
 		"Rahi_FirstTimePregnantHappened": flag(FlagType.Bool),
 		"Rahi_GaveBirthTimes": flag(FlagType.Number),
 		"Rahi_FirstTimeBirthHappened": flag(FlagType.Bool),
+		"Rahi_GaveBirthsNearPC": flag(FlagType.Number),
 		
 		"rahi1ElizaSceneHappened": flag(FlagType.Bool),
 		"rahi1ProtectedRahi": flag(FlagType.Bool),
@@ -94,6 +95,7 @@ func _init():
 		
 		"res://Modules/RahiModule/RahiFirstTimePregnantScene.gd",
 		"res://Modules/RahiModule/Pregnancy/rahiGivingBirthFirstTimeScene.gd",
+		"res://Modules/RahiModule/Pregnancy/rahiGivingBirthScene.gd",
 		
 		"res://Modules/RahiModule/RahiEmbraceScene.gd",
 		
