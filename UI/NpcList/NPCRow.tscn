@@ -114,9 +114,9 @@ size_flags_horizontal = 3
 
 [node name="Meet" type="Button" parent="HBoxContainer/CenterContainer2"]
 visible = false
-margin_left = 74.0
+margin_left = 77.0
 margin_top = 5.0
-margin_right = 134.0
+margin_right = 132.0
 margin_bottom = 45.0
 grow_horizontal = 2
 grow_vertical = 2

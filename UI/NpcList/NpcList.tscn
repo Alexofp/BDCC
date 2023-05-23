@@ -194,3 +194,8 @@ margin_right = 1280.0
 margin_bottom = 606.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+
+[connection signal="pressed" from="PanelContainer/VBoxC/UpperPanel/HBoxContainer/Name" to="." method="_on_Name_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxC/UpperPanel/HBoxContainer/Gender" to="." method="_on_Gender_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxC/UpperPanel/HBoxContainer/Personality" to="." method="_on_Personality_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxC/UpperPanel/HBoxContainer/ChildrenAmount" to="." method="_on_ChildrenAmount_pressed"]
