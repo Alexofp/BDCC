@@ -19,6 +19,7 @@ func getFlags():
 		"Rahi_GaveBirthTimes": flag(FlagType.Number),
 		"Rahi_FirstTimeBirthHappened": flag(FlagType.Bool),
 		"Rahi_GaveBirthsNearPC": flag(FlagType.Number),
+		"Rahi_BirthDialogue": flag(FlagType.Number),
 		
 		"rahi1ElizaSceneHappened": flag(FlagType.Bool),
 		"rahi1ProtectedRahi": flag(FlagType.Bool),

@@ -222,6 +222,7 @@ func _run():
 
 		addButton("Praise", "Tell Rahi how good of a mommy she is", "praise_rahi")
 		addButton("Cuddle", "Offer your kitty some warm cuddles", "cuddle_rahi")
+		addButton("Story time", "Ask Rahi to tell her kid a bedtime story", "story_time")
 		if (GM.pc.canBeMilked()):
 			addButton("Breastfeed", "Breastfeed the child yourself", "breastfeed_yourself")
 		else:
@@ -236,8 +237,9 @@ func _run():
 
 		saynn("[say=pc]You're such an incredible mother, kitty.[/say]")
 
-		if (howManyBirths <= 2):
-			saynn("[say=rahi]You think so?.. It's only her second time..[/say]")
+		var birthDialogue = getFlag("RahiModule.Rahi_BirthDialogue", 0)
+		if (birthDialogue <= 1):
+			saynn("[say=rahi]You think so?.. She doesn’t really have much experience..[/say]")
 
 			saynn("[say=pc]Yeah but your love and devotion are evident in every little thing you do for your child.[/say]")
 
@@ -255,7 +257,7 @@ func _run():
 
 			saynn("[say=rahi]Meow..[/say]")
 
-		elif (howManyBirths <= 3):
+		elif (birthDialogue <= 2):
 			saynn("[say=rahi]She thinks she is beginning to.. get used to this..[/say]")
 
 			saynn("[say=pc]I'm glad you do, kitty. Breeding you brings me immense pleasure.[/say]")
@@ -268,7 +270,7 @@ func _run():
 
 			saynn("[say=rahi]Thank you.. meow..[/say]")
 
-		elif (howManyBirths <= 4):
+		elif (birthDialogue <= 3):
 			saynn("[say=rahi]Thank you.. She.. she just wants to give her kids everything they need.. She wants to be the best mother she can be.. Even if she is stuck here..[/say]")
 
 			saynn("Rahi lowers her head and looks at her child. You lean in closer and begin whispering into her ear.")
@@ -283,7 +285,7 @@ func _run():
 
 			saynn("[say=pc]Such a good girl..[/say]")
 
-		elif (howManyBirths <= 5 || RNG.chance(50)):
+		elif (birthDialogue <= 4 || (birthDialogue != 5 && RNG.chance(50))):
 			saynn("[say=rahi]Thank you.. She was hesitant before.. But now.. there is nothing more that she wants..[/say]")
 
 			saynn("Kitty blushes, unable to continue the sentence out loud. You shift closer and lean closer to her lips.")
@@ -448,6 +450,111 @@ func _run():
 		saynn("And just like that, Rahi steps towards her spot, leaving a little trail of lewd fluids behind her. Cute.")
 
 		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "cuddle_rahi"):
+		playAnimation(StageScene.Cuddling, "idle", {npc="rahi"})
+		saynn("The room is filled with a quiet ambience.. you notice colorful drawings on the white walls that you haven't seen before.. plush toys scattered across the floor.. all of it creates.. a nice atmosphere.")
+
+		saynn("Rahi looks lovingly at her baby with a smile of pure adoration. With quiet steps, you approach closer and lower yourself onto the carpet behind the kitty. Your spread legs allow her to lean back into you, her paws are still cradling her child while your hands wrap around hers, forming a.. protective embrace.")
+
+		saynn("[say=pc]Tired?[/say]")
+
+		saynn("[say=rahi]A little.. but look..[/say]")
+
+		saynn("You marvel at the tiny features of Rahi's child, her fingers lightly tracing delicate contours. The baby looks quite drowsy from being softly cradled by the kitty.")
+
+		saynn("[say=pc]Yes..[/say]")
+
+		saynn("Not many words can express what your hearts are feeling. But then again, why break the harmony. Much better to just.. enjoy the joys of parenthood while you still can, ten minutes at a time.. This soft carpet creates a sanctuary for you three.. free of any sins and wrongdoings.")
+
+		saynn("As the new newborn slumbers peacefully in Rahi's arms, you hug her tightly and nuzzle her cheek. Together, you bask in the quiet joy.. Sometimes it's good to appreciate the small moments too..")
+
+		saynn("Unfortunately, the good times can't last forever..")
+
+		addButton("Continue", "See what happens next", "rahi_last_words")
+	if(state == "breastfeed_yourself"):
+		playAnimation(StageScene.Cuddling, "idle", {pc="rahi", npc="pc", npcBodyState={naked=true}})
+		saynn("You approach Rahi with a warm smile and sit nearby.")
+
+		saynn("[say=rahi]Hey there..[/say]")
+
+		saynn("[say=pc]How are we doing, kitty?[/say]")
+
+		saynn("The feline's gaze is fixed upon her newborn in her arms that seems to be reaching towards something. Or at least trying to.")
+
+		saynn("[say=rahi]Tired.. She thinks her child is hungry..[/say]")
+
+		saynn("Rahi begins to undo the top buttons of her shirt and carefully opens it up.")
+
+		saynn("[say=pc]Can.. Can I try?[/say]")
+
+		saynn("As you expose your breasts, it becomes quite obvious that you are, in fact, lactating too..")
+
+		saynn("[say=rahi]Oh.. sure..[/say]")
+
+		saynn("She gently passes the newborn to your waiting arms, trust and affection shimmering in her gaze.")
+
+		saynn("You settle into a comfortable position and begin cradling the child against your chest. Rahi sits behind you, her chin resting on your shoulder. With gentle guidance, you encourage the baby to latch onto your nipple, providing your {pc.milk} and comfort..")
+
+		saynn("As the newborn instinctively begins to suckle, some good feelings wash over you. You can't help but to smile seeing the baby feeding on your {pc.milk}. Rahi, sitting behind you, watches the act with a mix of adoration and gratitude on her face as you nourish her child. And, for a split moment, both you and her completely forgot where you are.. Just savoring the joys of parenthood for as long as you can..")
+
+		saynn("Unfortunately, the good times can't last forever..")
+
+		addButton("Continue", "See what happens next", "rahi_last_words")
+	if(state == "story_time"):
+		playAnimation(StageScene.Duo, "kneel", {npc="rahi", npcAction="kneel"})
+		saynn("The room is filled with quiet pleasant hum coming from Rahi. She is still sitting on a soft carpet with her newborn nestled in her paws. You, drawn by the peaceful sight, approach the feline and take a seat beside her.")
+
+		saynn("Rahi's humming gives you an idea. WIth a gentle smile, you lean in and whisper into her ear.")
+
+		saynn("[say=pc]Why don't you tell your little one a story, kitty?[/say]")
+
+		saynn("The kitty tilts her head slightly, her eyes light up but her ears droop slightly.")
+
+		saynn("[say=rahi]She doesn't really know any..[/say]")
+
+		saynn("[say=pc]Come up with one. You can't go wrong, kitty.[/say]")
+
+		saynn("Rahi nods, you can see the flicker of creativity sparking within her. She adjusts her hold on the baby, making sure they are comfortable and looking at her, before beginning her tale..")
+
+		saynn("[say=rahi]Once upon a time..[/say]")
+
+		saynn("Her voice is gentle and soft.")
+
+		saynn("[say=rahi]There once was a princess named Ra.. Rary.. One day she found herself trapped in a big castle..[/say]")
+
+		saynn("Her gaze directed towards the newborn who seems to be fascinated even if they don't quite understand anything.")
+
+		saynn("[say=rahi]Magnificent fortress.. but devoid of life.. and so Rary hoped for freedom.. She hoped for a hero to come and rescue her.. someone brave and kind..[/say]")
+
+		saynn("She catches your curious gaze and gets all blushy but still continues the tale.")
+
+		saynn("[say=rahi]And one day, as if by fate.. that hero appeared at the castle's gates! They were determined to free Rary from her isolation.[/say]")
+
+		saynn("Rahi's eyes sparkle, she sees her child smiling and smiles too, eager to continue.")
+
+		saynn("[say=rahi]But you see, little one, something bad happened.. The hero, too, found themselves.. trapped within the castle's walls.. It seemed the castle held secrets and mysteries beyond what met the eye..[/say]")
+
+		saynn("Rahi sighs. You shift closer to her and put your hand on her shoulder, gently kneading.")
+
+		saynn("[say=rahi]Together, the princess and the hero embarked on a journey of exploration.. They were searching for hidden corridors, discovering many forgotten empty rooms and slowly unlocking the castle's secrets.. But alas.. No luck in getting out.. Although.. the more they were doing it.. the more something.. magical.. began happening..[/say]")
+
+		saynn("Rahi's voice becomes even softer, filled with warmth and affection. That makes the child drowsy. The cute yawn makes you two chuckles.")
+
+		saynn("[say=rahi]As they explored the depths of the castle, they shared stories, laughter, sadness and.. dreams.. The emptiness of the castle was gradually filled.. with the light of their connection, transforming it into.. their home.[/say]")
+
+		saynn("Rahi gazes lovingly at the tiny bundle of love in her arms. Her child is pretty much sleeping at this point..")
+
+		saynn("[say=rahi]And so.. Rary learned.. She doesn't need any treasures.. Wait.. Did she mention that she wanted to find a treasure?.. Doesn't matter.. The hero taught her that the real treasure in life is what we share with the ones who we love..[/say]")
+
+		saynn("The room becomes quiet.. The newborn rests peacefully in Rahi's arms. Your hand finds its way to Rahi's free paw, your fingers intertwining. Kitty looks at you, still blushing but not pulling her gaze away.")
+
+		saynn("[say=pc]Great story, kitty.[/say]")
+
+		saynn("[say=rahi]Thanks..[/say]")
+
+		saynn("You keep holding hands with her but, unfortunately, the good times can't last forever..")
+
+		addButton("Continue", "See what happens next", "rahi_last_words")
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
@@ -473,6 +580,23 @@ func _react(_action: String, _args):
 
 	if(_action == "open_inv"):
 		runScene("InventoryScene")
+
+	if(_action == "praise_rahi"):
+		processTime(5*60)
+		increaseFlag("RahiModule.Rahi_BirthDialogue")
+		getCharacter("rahi").milk(0.5)
+
+	if(_action == "cuddle_rahi"):
+		processTime(5*60)
+		GM.pc.addStamina(50)
+
+	if(_action == "story_time"):
+		processTime(5*60)
+
+	if(_action == "breastfeed_yourself"):
+		processTime(5*60)
+		GM.pc.addSkillExperience(Skill.Milking, 30)
+		GM.pc.milk(0.5)
 
 	if(_action == "rahi_last_words"):
 		processTime(3*60)
