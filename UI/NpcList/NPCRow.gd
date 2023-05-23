@@ -10,14 +10,15 @@ onready var showNpcButton = $ShowNPC
 signal onForgetButtonPressed(npcID)
 var _npcID setget setNpcID, getNpcID
 var _npcSubbyStatRaw: float
+var _amountOfChildrenRaw: int
 
-
-func init(name, gender, subbyStat, ID, children):
+func initData(name, gender, subbyStat, ID, children):
 	_npcNameLabel.text = name
 	_npcGenderLabel.text  = gender
 	_npcPersonalityLabel.text  = PersonalityStat.getVisibleDesc(PersonalityStat.Subby, subbyStat)
 	_npcSubbyStatRaw = subbyStat
 	self._npcID = ID
+	_amountOfChildrenRaw = children
 	_amountOfChildrenLabel.text  = str(children)
 
 
@@ -48,7 +49,7 @@ func getSubbyStatRaw() -> float:
 
 
 func getAmountOfChildren() -> int:
-	return int(_amountOfChildrenLabel.text)
+	return _amountOfChildrenRaw
 
 
 func _on_Forget_pressed():
