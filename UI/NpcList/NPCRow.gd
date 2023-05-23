@@ -8,23 +8,18 @@ onready var meetButton = $HBoxContainer/CenterContainer2/Meet
 onready var forgetButton = $HBoxContainer/CenterContainer/Forget
 onready var showNpcButton = $ShowNPC
 signal onForgetButtonPressed(npcID)
-var _npcID: String
+var _npcID setget setNpcID, getNpcID
+var _npcSubbyStatRaw: float
+var _amountOfChildrenRaw: int
 
-
-func setName(name: String):
+func initData(name, gender, subbyStat, ID, children):
 	_npcNameLabel.text = name
-
-
-func setGender(gender: String):
-	_npcGenderLabel.text = gender
-
-
-func setPersonality(personality: String):
-	_npcPersonalityLabel.text = personality
-
-
-func setChildrenAmount(children):
-	_amountOfChildrenLabel.text = str(children)
+	_npcGenderLabel.text  = gender
+	_npcPersonalityLabel.text  = PersonalityStat.getVisibleDesc(PersonalityStat.Subby, subbyStat)
+	_npcSubbyStatRaw = subbyStat
+	self._npcID = ID
+	_amountOfChildrenRaw = children
+	_amountOfChildrenLabel.text  = str(children)
 
 
 func setNpcID(ID: String):
@@ -39,6 +34,22 @@ func getNpcID():
 		return _npcID
 	else: 
 		Log.error("Exception: NPCRow: character ID was not set")
+
+
+func getNpcName():
+	return _npcNameLabel.text
+
+
+func getNpcGender():
+	return _npcGenderLabel.text
+
+
+func getSubbyStatRaw() -> float:
+	return _npcSubbyStatRaw
+
+
+func getAmountOfChildren() -> int:
+	return _amountOfChildrenRaw
 
 
 func _on_Forget_pressed():
