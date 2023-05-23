@@ -50,7 +50,7 @@ func initScene(args = []):
 	_initScene(args)
 	_reactInit()
 	
-	checkSceneEnded()
+	#checkSceneEnded()
 
 func run():
 	GM.pc.updateNonBattleEffects()
@@ -109,7 +109,7 @@ func addFilledCondomToLootIfPerk(theItem):
 
 func react(_action: String, _args):
 	var result = _react(_action, _args)
-	checkSceneEnded()
+	#checkSceneEnded()
 	return result
 
 func setState(newState: String):
@@ -174,7 +174,7 @@ func react_scene_end(_tag, _result):
 	print(name+": My parent scene has ended")
 	#updateCharacter()
 	_react_scene_end(_tag, _result)
-	checkSceneEnded()
+	#checkSceneEnded()
 
 func addNextButton(method: String, args = []):
 	if(GM.ui):
