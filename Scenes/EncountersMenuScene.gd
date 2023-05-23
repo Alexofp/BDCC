@@ -190,10 +190,9 @@ func _run():
 			var NPCname = dynamicCharacter.getName()
 			var gender = NpcGender.getVisibleName(dynamicCharacter.npcGeneratedGender)
 			var subbyStat = dynamicCharacter.getPersonality().getStat(PersonalityStat.Subby)
-			var personality = PersonalityStat.getVisibleDesc(PersonalityStat.Subby, subbyStat)
 			var sharedKidsAmount = GM.CS.getSharedChildrenAmount("pc", characterID)
 
-			npclist.addRow(NPCname, gender, personality, characterID, sharedKidsAmount)
+			npclist.addRow(NPCname, gender, subbyStat, characterID, sharedKidsAmount)
 		
 		addButton("Back", "Go back a level", "")
 		
