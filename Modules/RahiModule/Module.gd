@@ -17,6 +17,8 @@ func getFlags():
 		"Rahi_NotThereToday": flag(FlagType.Bool),
 		"Rahi_FirstTimePregnantHappened": flag(FlagType.Bool),
 		"Rahi_GaveBirthTimes": flag(FlagType.Number),
+		"Rahi_FirstTimeBirthHappened": flag(FlagType.Bool),
+		"Rahi_GaveBirthsNearPC": flag(FlagType.Number),
 		
 		"rahi1ElizaSceneHappened": flag(FlagType.Bool),
 		"rahi1ProtectedRahi": flag(FlagType.Bool),
@@ -92,6 +94,9 @@ func _init():
 		"res://Modules/RahiModule/ShowerEvent/RahiShowerScene.gd",
 		
 		"res://Modules/RahiModule/RahiFirstTimePregnantScene.gd",
+		"res://Modules/RahiModule/Pregnancy/rahiGivingBirthFirstTimeScene.gd",
+		"res://Modules/RahiModule/Pregnancy/rahiGivingBirthScene.gd",
+		
 		"res://Modules/RahiModule/RahiEmbraceScene.gd",
 		
 		"res://Modules/RahiModule/1PreSlavery/rahi1ElizaScene.gd",
@@ -151,6 +156,7 @@ func _init():
 		"res://Modules/RahiModule/ShowerEvent/RahiShowerEvent.gd",
 		
 		"res://Modules/RahiModule/RahiFirstTimePregnantEvent.gd",
+		"res://Modules/RahiModule/Pregnancy/rahiGivingBirthEvent.gd",
 		
 		"res://Modules/RahiModule/1PreSlavery/rahi1ElizaEvent.gd",
 		"res://Modules/RahiModule/1PreSlavery/rahi2RahiEvent.gd",
@@ -290,6 +296,9 @@ func getSkillsInfo():
 			"requiredContent": [ContentType.Watersports],
 		}
 	}
+
+func isInSlavery():
+	return getFlag("RahiModule.rahi5SceneHappened", false)
 
 func getSlaveryStage():
 	return getFlag("RahiModule.rahiSlaveryStage", 0)

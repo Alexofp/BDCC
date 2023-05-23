@@ -12,6 +12,8 @@ func _init():
 
 func _run():
 	if(state == ""):
+		GM.main.playAnimation(StageScene.Solo, "stand", {npc=GM.pc}) #to reset if npc was selected in npclist
+		
 		var encounterSettings:EncounterSettings = GM.main.getEncounterSettings()
 		
 		saynn("This is a menu that contains info about your previous encounters.")
@@ -193,7 +195,7 @@ func _run():
 			var sharedKidsAmount = GM.CS.getSharedChildrenAmount("pc", characterID)
 
 			npclist.addRow(NPCname, gender, subbyStat, characterID, sharedKidsAmount)
-		
+	
 		addButton("Back", "Go back a level", "")
 		
 		var encounterPools = GM.main.getDynamicCharactersPools()

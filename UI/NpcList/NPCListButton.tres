@@ -1,0 +1,18 @@
+[gd_resource type="Theme" load_steps=4 format=2]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.457031, 0.19281, 0.35382, 1 )
+corner_radius_top_left = 25
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0.320313, 0.152649, 0.254819, 1 )
+corner_radius_top_left = 25
+
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 0.320313, 0.152649, 0.254819, 1 )
+corner_radius_top_left = 25
+
+[resource]
+Button/styles/hover = SubResource( 1 )
+Button/styles/normal = SubResource( 2 )
+Button/styles/pressed = SubResource( 3 )

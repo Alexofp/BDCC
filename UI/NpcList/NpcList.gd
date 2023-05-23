@@ -18,7 +18,6 @@ func addRow(name: String, gender: String, subbyStat: float, ID: String, children
 	newRow.init(name, gender, subbyStat, ID, children)
 	newRow.connect("onForgetButtonPressed", self, "forgetNPC")
 
-
 # add pop-up confirmation window
 func forgetNPC(ID):
 	GM.main.removeDynamicCharacter(ID)

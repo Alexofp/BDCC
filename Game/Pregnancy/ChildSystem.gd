@@ -41,6 +41,23 @@ func getSharedChildrenAmount(firstCharID, secondCharID):
 			result += 1
 	return result
 
+func getChildBirthInfoString(childs):
+	var bornChildString = ""
+	
+	for child in childs:
+		var fatherObject = GlobalRegistry.getCharacter(child.fatherID)
+		var fatherName = "unknown"
+		if(fatherObject != null):
+			fatherName = fatherObject.getName()
+		
+		var motherObject = GlobalRegistry.getCharacter(child.motherID)
+		var motherName = "unknown"
+		if(motherObject != null):
+			motherName = motherObject.getName()
+		
+		bornChildString += "[color="+NpcGender.getColorString(child.gender)+"]"+ NpcGender.getVisibleName(child.gender)+"[/color]"+" - "+Util.getSpeciesName(child.species)+" - "+"Mother: "+motherName+" - "+"Father: "+fatherName+"\n"
+	return bornChildString
+
 func saveData():
 	var data = {}
 

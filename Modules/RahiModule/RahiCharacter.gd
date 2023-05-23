@@ -42,6 +42,9 @@ func onGivingBirth(_impregnatedEggCells: Array, _newkids: Array):
 	
 	GM.main.increaseModuleFlag("RahiModule", "Rahi_GaveBirthTimes", 1)
 
+func getBirthWaitTime():
+	return 60*60*24*2
+
 func createEquipment():
 	getInventory().equipItem(GlobalRegistry.createItemNoID("inmatecollar"))
 	getInventory().equipItem(GlobalRegistry.createItemNoID("inmateuniform"))
