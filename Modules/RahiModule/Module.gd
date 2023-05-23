@@ -125,6 +125,7 @@ func _init():
 		"res://Modules/RahiModule/2Slavery/Tasks/rahiSlaveryStealingTaskScene.gd",
 		"res://Modules/RahiModule/2Slavery/Tasks/rahiSlaveryYogaTaskScene.gd",
 		"res://Modules/RahiModule/2Slavery/Tasks/rahiSlaveryKissingBoothTaskScene.gd",
+		"res://Modules/RahiModule/2Slavery/Tasks/rahiSlaveryFreeTaskScene.gd",
 		"res://Modules/RahiModule/2Slavery/Milestones/rahiMilestone2Scene.gd",
 		"res://Modules/RahiModule/2Slavery/Milestones/rahiMilestone3Scene.gd",
 		"res://Modules/RahiModule/2Slavery/Milestones/rahiMilestone4Scene.gd",
