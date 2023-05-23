@@ -193,7 +193,7 @@ func _run():
 			var sharedKidsAmount = GM.CS.getSharedChildrenAmount("pc", characterID)
 
 			npclist.addRow(NPCname, gender, subbyStat, characterID, sharedKidsAmount)
-		
+	
 		addButton("Back", "Go back a level", "")
 		
 		var encounterPools = GM.main.getDynamicCharactersPools()

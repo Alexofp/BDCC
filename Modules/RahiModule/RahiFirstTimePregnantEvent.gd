@@ -6,12 +6,15 @@ func _init():
 func registerTriggers(es):
 	es.addTrigger(self, Trigger.EnteringRoom, "cellblock_nearcells")
 	es.addTrigger(self, Trigger.EnteringRoom, "main_bench2")
+	es.addTrigger(self, Trigger.TalkingToNPC, ["rahiSlavery"])
 
 func react(_triggerID, _args):
-	if(getModuleFlag("RahiModule", "Rahi_FirstTimePregnantHappened", false) || !GlobalRegistry.getCharacter("rahi").isVisiblyPregnantFromPlayer()):
+	if(getFlag("RahiModule.Rahi_FirstTimePregnantHappened", false) || !getCharacter("rahi").isVisiblyPregnantFromPlayer()):
+		return false
+	if(getCharacter("rahi").isReadyToGiveBirth()):
 		return false
 	
-	setModuleFlag("RahiModule", "Rahi_FirstTimePregnantHappened", true)
+	setFlag("RahiModule.Rahi_FirstTimePregnantHappened", true)
 	runScene("RahiFirstTimePregnantScene")
 	
 	return true

@@ -15,9 +15,8 @@ var _childrenBtnState: bool = true
 func addRow(name: String, gender: String, subbyStat: float, ID: String, children: int = 0):
 	var newRow = npcRow.instance()
 	container.add_child(newRow)
-	newRow.init(name, gender, subbyStat, ID, children)
+	newRow.initData(name, gender, subbyStat, ID, children)
 	newRow.connect("onForgetButtonPressed", self, "forgetNPC")
-
 
 # add pop-up confirmation window
 func forgetNPC(ID):
@@ -25,18 +24,15 @@ func forgetNPC(ID):
 
 
 func _on_Name_pressed():
+	unpressAllButtons()
 	nameButton.pressed = true
-	genderButton.pressed = false
-	personalityButton.pressed = false
-	childrenButton.pressed = false
 	
 	var nodesSortedArr = container.get_children()
 	
 	if(_nameBtnState):
 		nodesSortedArr.sort_custom(self, "sortNameAscending")
 	else:
-		nodesSortedArr.sort_custom(self, "sortNameAscending")
-		nodesSortedArr.invert()
+		nodesSortedArr.sort_custom(self, "sortNameDescending")
 		
 	for nodeNum in nodesSortedArr.size():
 		container.move_child(nodesSortedArr[nodeNum], nodeNum)
@@ -48,19 +44,20 @@ func sortNameAscending(a: Node, b: Node):
 	return a.getNpcName().naturalnocasecmp_to(b.getNpcName()) < 0
 
 
+func sortNameDescending(a: Node, b: Node):
+	return a.getNpcName().naturalnocasecmp_to(b.getNpcName()) > 0
+
+
 func _on_Gender_pressed():
-	nameButton.pressed = false
+	unpressAllButtons()
 	genderButton.pressed = true
-	personalityButton.pressed = false
-	childrenButton.pressed = false
 	
 	var nodesSortedArr = container.get_children()
 	
 	if(_genderBtnState):
 		nodesSortedArr.sort_custom(self, "sortGenderAscending")
 	else:
-		nodesSortedArr.sort_custom(self, "sortGenderAscending")
-		nodesSortedArr.invert()
+		nodesSortedArr.sort_custom(self, "sortGenderDescending")
 		
 	for nodeNum in nodesSortedArr.size():
 		container.move_child(nodesSortedArr[nodeNum], nodeNum)
@@ -70,21 +67,22 @@ func _on_Gender_pressed():
 
 func sortGenderAscending(a: Node, b: Node):
 	return a.getNpcGender().naturalnocasecmp_to(b.getNpcGender()) < 0
+	
+	
+func sortGenderDescending(a: Node, b: Node):
+	return a.getNpcGender().naturalnocasecmp_to(b.getNpcGender()) > 0
 
 
 func _on_Personality_pressed():
-	nameButton.pressed = false
-	genderButton.pressed = false
+	unpressAllButtons()
 	personalityButton.pressed = true
-	childrenButton.pressed = false
 	
 	var nodesSortedArr = container.get_children()
 	
 	if(_personalityBtnState):
 		nodesSortedArr.sort_custom(self, "sortPersonalityAscending")
 	else:
-		nodesSortedArr.sort_custom(self, "sortPersonalityAscending")
-		nodesSortedArr.invert()
+		nodesSortedArr.sort_custom(self, "sortPersonalityDescending")
 		
 	for nodeNum in nodesSortedArr.size():
 		container.move_child(nodesSortedArr[nodeNum], nodeNum)
@@ -94,12 +92,14 @@ func _on_Personality_pressed():
 
 func sortPersonalityAscending(a: Node, b: Node):
 	return a.getSubbyStatRaw() < b.getSubbyStatRaw()
+	
+	
+func sortPersonalityDescending(a: Node, b: Node):
+	return a.getSubbyStatRaw() > b.getSubbyStatRaw()
 
 
 func _on_ChildrenAmount_pressed():
-	nameButton.pressed = false
-	genderButton.pressed = false
-	personalityButton.pressed = false
+	unpressAllButtons()
 	childrenButton.pressed = true
 	
 	var nodesSortedArr = container.get_children()
@@ -107,8 +107,7 @@ func _on_ChildrenAmount_pressed():
 	if(_childrenBtnState):
 		nodesSortedArr.sort_custom(self, "sortChildrenAmountAscending")
 	else:
-		nodesSortedArr.sort_custom(self, "sortChildrenAmountAscending")
-		nodesSortedArr.invert()
+		nodesSortedArr.sort_custom(self, "sortChildrenAmountDescending")
 		
 	for nodeNum in nodesSortedArr.size():
 		container.move_child(nodesSortedArr[nodeNum], nodeNum)
@@ -118,8 +117,19 @@ func _on_ChildrenAmount_pressed():
 
 func sortChildrenAmountAscending(a: Node, b: Node):
 	return a.getAmountOfChildren() < b.getAmountOfChildren()
+	
+	
+func sortChildrenAmountDescending(a: Node, b: Node):
+	return a.getAmountOfChildren() > b.getAmountOfChildren()
 
 
-func _notification(what):
+func unpressAllButtons():
+	nameButton.pressed = false
+	genderButton.pressed = false
+	personalityButton.pressed = false
+	childrenButton.pressed = false
+
+
+func _notification(what): # Destructor, works fine do not touch
 	if(what == NOTIFICATION_PREDELETE && GM.main != null):
 		GM.main.playAnimation(StageScene.Solo, "stand", {npc=GM.pc})
