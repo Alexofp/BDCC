@@ -1,17 +1,33 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://UI/NpcList/NPCListButton.tres" type="Theme" id=1]
 [ext_resource path="res://UI/NpcList/PanelStyle.tres" type="StyleBox" id=2]
 [ext_resource path="res://UI/NpcList/NPCRow.gd" type="Script" id=3]
+
 [sub_resource type="StyleBoxFlat" id=1]
 content_margin_left = 6.0
 draw_center = false
 
 [sub_resource type="StyleBoxFlat" id=8]
 bg_color = Color( 0.784314, 0.784314, 0.784314, 0.784314 )
-border_width_left = 1
 border_width_right = 1
 corner_detail = 1
+
+[sub_resource type="StyleBoxFlat" id=12]
+bg_color = Color( 0.360288, 0.357468, 0.535156, 1 )
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+shadow_size = 2
+
+[sub_resource type="StyleBoxFlat" id=13]
+bg_color = Color( 0.247059, 0.243137, 0.490196, 1 )
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+shadow_size = 2
 
 [node name="NPCRow" type="PanelContainer"]
 margin_right = 1280.0
@@ -84,6 +100,7 @@ size_flags_horizontal = 11
 size_flags_vertical = 0
 text = "Somewhat dominant:"
 valign = 1
+
 [node name="VSeparator3" type="VSeparator" parent="HBoxContainer"]
 margin_left = 643.0
 margin_right = 651.0
@@ -111,14 +128,16 @@ rect_min_size = Vector2( 65, 50 )
 size_flags_horizontal = 3
 
 [node name="Meet" type="Button" parent="HBoxContainer/CenterContainer2"]
-visible = false
-margin_left = 77.0
+margin_left = 72.0
 margin_top = 5.0
-margin_right = 132.0
+margin_right = 137.0
 margin_bottom = 45.0
 grow_horizontal = 2
 grow_vertical = 2
-rect_min_size = Vector2( 55, 40 )
+rect_min_size = Vector2( 65, 40 )
+custom_styles/hover = SubResource( 12 )
+custom_styles/pressed = SubResource( 13 )
+custom_styles/normal = SubResource( 13 )
 text = "Meet"
 
 [node name="CenterContainer" type="CenterContainer" parent="HBoxContainer"]
@@ -129,13 +148,17 @@ rect_min_size = Vector2( 65, 50 )
 size_flags_horizontal = 3
 
 [node name="Forget" type="Button" parent="HBoxContainer/CenterContainer"]
-margin_left = 77.0
+margin_left = 72.0
 margin_top = 5.0
-margin_right = 132.0
+margin_right = 137.0
 margin_bottom = 45.0
-rect_min_size = Vector2( 55, 40 )
+rect_min_size = Vector2( 65, 40 )
 size_flags_horizontal = 7
+custom_styles/hover = SubResource( 12 )
+custom_styles/pressed = SubResource( 13 )
+custom_styles/normal = SubResource( 13 )
 text = "Forget"
 
 [connection signal="pressed" from="ShowNPC" to="." method="_on_ShowNPC_pressed"]
+[connection signal="pressed" from="HBoxContainer/CenterContainer2/Meet" to="." method="_on_Meet_pressed"]
 [connection signal="pressed" from="HBoxContainer/CenterContainer/Forget" to="." method="_on_Forget_pressed"]

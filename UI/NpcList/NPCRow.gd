@@ -7,17 +7,21 @@ onready var _amountOfChildrenLabel = $HBoxContainer/Children
 onready var meetButton = $HBoxContainer/CenterContainer2/Meet
 onready var forgetButton = $HBoxContainer/CenterContainer/Forget
 onready var showNpcButton = $ShowNPC
-signal onForgetButtonPressed(npcID)
+signal onForgetButtonPressed(npcID, name, node)
+signal onMeetButtonPressed(npcID, occupation)
 var _npcID setget setNpcID, getNpcID
+var _npcOccupation: String
 var _npcSubbyStatRaw: float
 var _amountOfChildrenRaw: int
 
-func initData(name, gender, subbyStat, ID, children):
+
+func initData(name, gender, subbyStat, ID, occupation, children):
 	_npcNameLabel.text = name
 	_npcGenderLabel.text  = gender
 	_npcPersonalityLabel.text  = PersonalityStat.getVisibleDesc(PersonalityStat.Subby, subbyStat)
 	_npcSubbyStatRaw = subbyStat
 	self._npcID = ID
+	_npcOccupation = occupation
 	_amountOfChildrenRaw = children
 	_amountOfChildrenLabel.text  = str(children)
 
@@ -56,9 +60,12 @@ func _on_Forget_pressed():
 	if(_npcID == null):
 		Log.error("Exception: Attempt to delete null character in the NPC list")
 	else:
-		emit_signal("onForgetButtonPressed", _npcID)
-		queue_free()
+		emit_signal("onForgetButtonPressed", _npcID, getNpcName(), self)
 
 
 func _on_ShowNPC_pressed():
 	GM.main.playAnimation(StageScene.Duo, "stand", {npc=_npcID})
+
+
+func _on_Meet_pressed():
+	emit_signal("onMeetButtonPressed", _npcID, _npcOccupation)

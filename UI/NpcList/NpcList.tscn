@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://GlobalTheme.tres" type="Theme" id=1]
 [ext_resource path="res://UI/NpcList/NpcList.gd" type="Script" id=3]
@@ -37,6 +37,38 @@ corner_detail = 12
 [sub_resource type="StyleBoxEmpty" id=10]
 
 [sub_resource type="Theme" id=3]
+
+[sub_resource type="StyleBoxFlat" id=11]
+bg_color = Color( 0.207843, 0.133333, 0.364706, 1 )
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color( 0.247059, 0.243137, 0.490196, 1 )
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id=12]
+bg_color = Color( 0.360288, 0.357468, 0.535156, 1 )
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+shadow_size = 2
+
+[sub_resource type="StyleBoxFlat" id=13]
+bg_color = Color( 0.247059, 0.243137, 0.490196, 1 )
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+shadow_size = 2
+
+[sub_resource type="StyleBoxEmpty" id=14]
+
+[sub_resource type="StyleBoxEmpty" id=15]
 
 [node name="NpcList" type="MarginContainer"]
 margin_top = 5.0
@@ -195,7 +227,85 @@ margin_bottom = 606.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
+[node name="CenterContainer" type="CenterContainer" parent="."]
+margin_top = 5.0
+margin_right = 1280.0
+margin_bottom = 675.0
+rect_min_size = Vector2( 300, 200 )
+mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Notification" type="PopupDialog" parent="CenterContainer"]
+margin_left = 440.0
+margin_top = 260.0
+margin_right = 840.0
+margin_bottom = 410.0
+rect_min_size = Vector2( 400, 150 )
+custom_styles/panel = SubResource( 11 )
+popup_exclusive = true
+
+[node name="HBoxC" type="HBoxContainer" parent="CenterContainer/Notification"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -40.0
+rect_min_size = Vector2( 0, 40 )
+
+[node name="Forget" type="Button" parent="CenterContainer/Notification/HBoxC"]
+visible = false
+margin_right = 400.0
+margin_bottom = 40.0
+rect_pivot_offset = Vector2( 200, 20 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/hover = SubResource( 12 )
+custom_styles/pressed = SubResource( 13 )
+custom_styles/focus = SubResource( 14 )
+custom_styles/normal = SubResource( 13 )
+text = "Forget"
+
+[node name="Ok" type="Button" parent="CenterContainer/Notification/HBoxC"]
+visible = false
+margin_left = 202.0
+margin_right = 400.0
+margin_bottom = 40.0
+rect_pivot_offset = Vector2( 200, 20 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/hover = SubResource( 12 )
+custom_styles/pressed = SubResource( 13 )
+custom_styles/normal = SubResource( 13 )
+text = "OK"
+
+[node name="Cancel" type="Button" parent="CenterContainer/Notification/HBoxC"]
+visible = false
+margin_left = 269.0
+margin_right = 400.0
+margin_bottom = 40.0
+rect_pivot_offset = Vector2( 200, 20 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/hover = SubResource( 12 )
+custom_styles/pressed = SubResource( 13 )
+custom_styles/focus = SubResource( 15 )
+custom_styles/normal = SubResource( 13 )
+text = "Cancel"
+
+[node name="NotificationLabel" type="Label" parent="CenterContainer/Notification"]
+anchor_right = 1.0
+margin_left = 15.0
+margin_top = 15.0
+margin_right = -15.0
+margin_bottom = 106.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+autowrap = true
+
 [connection signal="pressed" from="PanelContainer/VBoxC/UpperPanel/HBoxContainer/Name" to="." method="_on_Name_pressed"]
 [connection signal="pressed" from="PanelContainer/VBoxC/UpperPanel/HBoxContainer/Gender" to="." method="_on_Gender_pressed"]
 [connection signal="pressed" from="PanelContainer/VBoxC/UpperPanel/HBoxContainer/Personality" to="." method="_on_Personality_pressed"]
 [connection signal="pressed" from="PanelContainer/VBoxC/UpperPanel/HBoxContainer/ChildrenAmount" to="." method="_on_ChildrenAmount_pressed"]
+[connection signal="pressed" from="CenterContainer/Notification/HBoxC/Forget" to="." method="_on_Forget_pressed"]
+[connection signal="pressed" from="CenterContainer/Notification/HBoxC/Ok" to="." method="_on_Ok_pressed"]
+[connection signal="pressed" from="CenterContainer/Notification/HBoxC/Cancel" to="." method="_on_Cancel_pressed"]
