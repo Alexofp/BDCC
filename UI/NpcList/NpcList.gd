@@ -8,9 +8,9 @@ onready var personalityButton = $PanelContainer/VBoxC/UpperPanel/HBoxContainer/P
 onready var childrenButton = $PanelContainer/VBoxC/UpperPanel/HBoxContainer/ChildrenAmount
 onready var popupWindow = $CenterContainer/Notification
 onready var popupWindowLabel = $CenterContainer/Notification/NotificationLabel
-onready var popupForgetBtn = $CenterContainer/Notification/HBoxC/Forget
-onready var popupOkBtn = $CenterContainer/Notification/HBoxC/Ok
-onready var popupCancelBtn = $CenterContainer/Notification/HBoxC/Cancel
+onready var popupForgetButton = $CenterContainer/Notification/HBoxC/Forget
+onready var popupOkButton = $CenterContainer/Notification/HBoxC/Ok
+onready var popupCancelButton = $CenterContainer/Notification/HBoxC/Cancel
 var _nameBtnState: bool = true
 var _genderBtnState: bool = true
 var _personalityBtnState: bool = true
@@ -52,36 +52,35 @@ func meetNPC(ID, occupation):
 				GM.main.runScene("InmateExposureForcedSexScene", [ID])
 				GM.main.runCurrentScene()
 			else:
-				sendPopupMessage("There are no inmates in this location.\nTry looking elswhere")
+				sendPopupMessage("There are no inmates in this location.\nTry looking elsewhere")
 		"Guards":
 			if(WorldPopulation.Guards in GM.pc.getLocationPopulation()):
-			#if(room.loctag_GuardsEncounter || room.loctag_Greenhouses):
 				GM.main.runScene("GuardCaughtOfflimitsScene", [ID])
 				GM.main.runCurrentScene()
 			else:
-				sendPopupMessage("There are no guards in this location.\nTry looking at the checkpoint or near greenhouses")
+				sendPopupMessage("There are no guards in this location.\nTry searching at the security checkpoint or near greenhouses")
 		"Engineers":
 			if(room.loctag_EngineersEncounter):
 				GM.main.runScene("EngineerCaughtOfflimitsScene", [ID])
 				GM.main.runCurrentScene()
 			else:
-				sendPopupMessage("There are no engineers in this location.\nTry looking at the engineering bay")
+				sendPopupMessage("There are no engineers in this location.\nTry searching in the engineering bay")
 		"Nurses":
 			if(room.loctag_MentalWard):
 				GM.main.runScene("NurseCaughtOfflimitsScene", [ID])
 				GM.main.runCurrentScene()
 			else:
-				sendPopupMessage("There are no nurses in this location.\nTry looking at the restricted area of the mediacl ward")
+				sendPopupMessage("There are no nurses in this location.\nTry searching in the restricted area of the medical ward")
 
 
 func sendPopupMessage(msgText: String = "", isForgetWindow: bool = false):
 	if(isForgetWindow):
-		popupForgetBtn.visible = true
-		popupCancelBtn.visible = true
+		popupForgetButton.visible = true
+		popupCancelButton.visible = true
 		popupWindowLabel.text = msgText
 		popupWindow.popup_centered_ratio(0.3)
 	else:
-		popupOkBtn.visible = true
+		popupOkButton.visible = true
 		popupWindowLabel.text = msgText
 		popupWindow.popup_centered_ratio(0.3)
 
@@ -91,9 +90,9 @@ func _on_Ok_pressed():
 
 
 func hideNotificationButnsAndWindow():
-	popupForgetBtn.visible = false
-	popupOkBtn.visible = false
-	popupCancelBtn.visible = false
+	popupForgetButton.visible = false
+	popupOkButton.visible = false
+	popupCancelButton.visible = false
 	popupWindow.visible = false
 
 
