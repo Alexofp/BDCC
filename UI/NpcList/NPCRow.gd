@@ -7,7 +7,7 @@ onready var _amountOfChildrenLabel = $HBoxContainer/Children
 onready var meetButton = $HBoxContainer/CenterContainer2/Meet
 onready var forgetButton = $HBoxContainer/CenterContainer/Forget
 onready var showNpcButton = $ShowNPC
-signal onForgetButtonPressed(npcID)
+signal onForgetButtonPressed(npcID, name, node)
 signal onMeetButtonPressed(npcID, occupation)
 var _npcID setget setNpcID, getNpcID
 var _npcOccupation: String
@@ -60,8 +60,7 @@ func _on_Forget_pressed():
 	if(_npcID == null):
 		Log.error("Exception: Attempt to delete null character in the NPC list")
 	else:
-		emit_signal("onForgetButtonPressed", _npcID)
-		queue_free()
+		emit_signal("onForgetButtonPressed", _npcID, getNpcName(), self)
 
 
 func _on_ShowNPC_pressed():

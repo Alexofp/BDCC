@@ -6,10 +6,17 @@ onready var nameButton = $PanelContainer/VBoxC/UpperPanel/HBoxContainer/Name
 onready var genderButton = $PanelContainer/VBoxC/UpperPanel/HBoxContainer/Gender
 onready var personalityButton = $PanelContainer/VBoxC/UpperPanel/HBoxContainer/Personality
 onready var childrenButton = $PanelContainer/VBoxC/UpperPanel/HBoxContainer/ChildrenAmount
+onready var popupWindow = $CenterContainer/Notification
+onready var popupWindowLabel = $CenterContainer/Notification/NotificationLabel
+onready var popupForgetBtn = $CenterContainer/Notification/HBoxC/Forget
+onready var popupOkBtn = $CenterContainer/Notification/HBoxC/Ok
+onready var popupCancelBtn = $CenterContainer/Notification/HBoxC/Cancel
 var _nameBtnState: bool = true
 var _genderBtnState: bool = true
 var _personalityBtnState: bool = true
 var _childrenBtnState: bool = true
+var _IDtoForget
+var nodeToFree
 
 
 func addRow(name: String, gender: String, subbyStat: float, ID: String, occupation: String, children: int = 0):
@@ -19,9 +26,22 @@ func addRow(name: String, gender: String, subbyStat: float, ID: String, occupati
 	newRow.connect("onForgetButtonPressed", self, "forgetNPC")
 	newRow.connect("onMeetButtonPressed", self, "meetNPC")
 	
-# add pop-up confirmation window
-func forgetNPC(ID):
-	GM.main.removeDynamicCharacter(ID)
+
+func forgetNPC(ID, name, node):
+	_IDtoForget = ID
+	nodeToFree = node
+	sendPopupMessage("Are you sure you want to forget "+name+"? This will permanently remove "+name+" from the game. Keep in mind that if this character is pregnant, their pregnancy will be forgotten too. But any kids you had together will stay.", true)
+
+
+func _on_Forget_pressed():
+	nodeToFree.queue_free()
+	nodeToFree = null
+	GM.main.removeDynamicCharacter(_IDtoForget)
+	hideNotificationButnsAndWindow()
+
+
+func _on_Cancel_pressed():
+	hideNotificationButnsAndWindow()
 
 
 func meetNPC(ID, occupation):
@@ -29,30 +49,52 @@ func meetNPC(ID, occupation):
 	match occupation:
 		"Inmates": 
 			if(WorldPopulation.Inmates in GM.pc.getLocationPopulation()):
-			#if(!room.loctag_GuardsEncounter && !room.loctag_Greenhouses && !room.loctag_EngineersEncounter && !room.loctag_MentalWard):
 				GM.main.runScene("InmateExposureForcedSexScene", [ID])
+				GM.main.runCurrentScene()
 			else:
-				print("No inmate here")
+				sendPopupMessage("There are no inmates in this location.\nTry looking elswhere")
 		"Guards":
 			if(WorldPopulation.Guards in GM.pc.getLocationPopulation()):
 			#if(room.loctag_GuardsEncounter || room.loctag_Greenhouses):
 				GM.main.runScene("GuardCaughtOfflimitsScene", [ID])
+				GM.main.runCurrentScene()
 			else:
-				print("No guard here")
+				sendPopupMessage("There are no guards in this location.\nTry looking at the checkpoint or near greenhouses")
 		"Engineers":
 			if(room.loctag_EngineersEncounter):
-				GM.main.runScene("EngineerCaughtOfflimitsScene", ID)
+				GM.main.runScene("EngineerCaughtOfflimitsScene", [ID])
+				GM.main.runCurrentScene()
 			else:
-				print("No engi here")
+				sendPopupMessage("There are no engineers in this location.\nTry looking at the engineering bay")
 		"Nurses":
 			if(room.loctag_MentalWard):
-				GM.main.runScene("NurseCaughtOfflimitsScene", ID)
+				GM.main.runScene("NurseCaughtOfflimitsScene", [ID])
+				GM.main.runCurrentScene()
 			else:
-				print("No nurses here")
+				sendPopupMessage("There are no nurses in this location.\nTry looking at the restricted area of the mediacl ward")
 
 
-func sendPopupMessage(_msgText: String = "", _isConfirmWindow: bool = false):
-	pass
+func sendPopupMessage(msgText: String = "", isForgetWindow: bool = false):
+	if(isForgetWindow):
+		popupForgetBtn.visible = true
+		popupCancelBtn.visible = true
+		popupWindowLabel.text = msgText
+		popupWindow.popup_centered_ratio(0.3)
+	else:
+		popupOkBtn.visible = true
+		popupWindowLabel.text = msgText
+		popupWindow.popup_centered_ratio(0.3)
+
+
+func _on_Ok_pressed():
+	hideNotificationButnsAndWindow()
+
+
+func hideNotificationButnsAndWindow():
+	popupForgetBtn.visible = false
+	popupOkBtn.visible = false
+	popupCancelBtn.visible = false
+	popupWindow.visible = false
 
 
 func _on_Name_pressed():
