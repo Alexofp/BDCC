@@ -37,11 +37,11 @@ func _on_Forget_pressed():
 	nodeToFree.queue_free()
 	nodeToFree = null
 	GM.main.removeDynamicCharacter(_IDtoForget)
-	hideNotificationButnsAndWindow()
+	resetNotificationWindow()
 
 
 func _on_Cancel_pressed():
-	hideNotificationButnsAndWindow()
+	resetNotificationWindow()
 
 
 func meetNPC(ID, occupation):
@@ -86,10 +86,10 @@ func sendPopupMessage(msgText: String = "", isForgetWindow: bool = false):
 
 
 func _on_Ok_pressed():
-	hideNotificationButnsAndWindow()
+	resetNotificationWindow()
 
 
-func hideNotificationButnsAndWindow():
+func resetNotificationWindow():
 	popupForgetButton.visible = false
 	popupOkButton.visible = false
 	popupCancelButton.visible = false
