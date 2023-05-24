@@ -3,6 +3,7 @@
 [ext_resource path="res://UI/NpcList/NPCListButton.tres" type="Theme" id=1]
 [ext_resource path="res://UI/NpcList/PanelStyle.tres" type="StyleBox" id=2]
 [ext_resource path="res://UI/NpcList/NPCRow.gd" type="Script" id=3]
+
 [sub_resource type="StyleBoxFlat" id=1]
 content_margin_left = 6.0
 draw_center = false
@@ -84,6 +85,7 @@ size_flags_horizontal = 11
 size_flags_vertical = 0
 text = "Somewhat dominant:"
 valign = 1
+
 [node name="VSeparator3" type="VSeparator" parent="HBoxContainer"]
 margin_left = 643.0
 margin_right = 651.0
@@ -111,7 +113,6 @@ rect_min_size = Vector2( 65, 50 )
 size_flags_horizontal = 3
 
 [node name="Meet" type="Button" parent="HBoxContainer/CenterContainer2"]
-visible = false
 margin_left = 77.0
 margin_top = 5.0
 margin_right = 132.0
@@ -138,4 +139,5 @@ size_flags_horizontal = 7
 text = "Forget"
 
 [connection signal="pressed" from="ShowNPC" to="." method="_on_ShowNPC_pressed"]
+[connection signal="pressed" from="HBoxContainer/CenterContainer2/Meet" to="." method="_on_Meet_pressed"]
 [connection signal="pressed" from="HBoxContainer/CenterContainer/Forget" to="." method="_on_Forget_pressed"]

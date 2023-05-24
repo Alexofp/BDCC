@@ -12,15 +12,47 @@ var _personalityBtnState: bool = true
 var _childrenBtnState: bool = true
 
 
-func addRow(name: String, gender: String, subbyStat: float, ID: String, children: int = 0):
+func addRow(name: String, gender: String, subbyStat: float, ID: String, occupation: String, children: int = 0):
 	var newRow = npcRow.instance()
 	container.add_child(newRow)
-	newRow.initData(name, gender, subbyStat, ID, children)
+	newRow.initData(name, gender, subbyStat, ID, occupation, children)
 	newRow.connect("onForgetButtonPressed", self, "forgetNPC")
-
+	newRow.connect("onMeetButtonPressed", self, "meetNPC")
+	
 # add pop-up confirmation window
 func forgetNPC(ID):
 	GM.main.removeDynamicCharacter(ID)
+
+
+func meetNPC(ID, occupation):
+	var room = GM.world.getRoomByID(GM.pc.getLocation())
+	match occupation:
+		"Inmates": 
+			if(WorldPopulation.Inmates in GM.pc.getLocationPopulation()):
+			#if(!room.loctag_GuardsEncounter && !room.loctag_Greenhouses && !room.loctag_EngineersEncounter && !room.loctag_MentalWard):
+				GM.main.runScene("InmateExposureForcedSexScene", [ID])
+			else:
+				print("No inmate here")
+		"Guards":
+			if(WorldPopulation.Guards in GM.pc.getLocationPopulation()):
+			#if(room.loctag_GuardsEncounter || room.loctag_Greenhouses):
+				GM.main.runScene("GuardCaughtOfflimitsScene", [ID])
+			else:
+				print("No guard here")
+		"Engineers":
+			if(room.loctag_EngineersEncounter):
+				GM.main.runScene("EngineerCaughtOfflimitsScene", ID)
+			else:
+				print("No engi here")
+		"Nurses":
+			if(room.loctag_MentalWard):
+				GM.main.runScene("NurseCaughtOfflimitsScene", ID)
+			else:
+				print("No nurses here")
+
+
+func sendPopupMessage(_msgText: String = "", _isConfirmWindow: bool = false):
+	pass
 
 
 func _on_Name_pressed():
