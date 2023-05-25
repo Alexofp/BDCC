@@ -323,6 +323,7 @@ func _react(_action: String, _args):
 		
 	if(_action == "closenpclist"):
 		setState("")
+		GM.ui.clearCharactersPanel()
 		GM.main.playAnimation(StageScene.Solo, "stand")
 		return
 		

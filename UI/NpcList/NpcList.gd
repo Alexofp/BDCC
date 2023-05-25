@@ -84,6 +84,8 @@ func meetNPC(ID, occupation):
 					GM.main.runCurrentScene()
 			else:
 				sendPopupMessage("There are no nurses in this location.\nTry searching in the restricted area of the medical ward")
+		_:
+			Log.error("Exception: unknown occupation detected, please update NpcList.gd")
 
 
 func sendPopupMessage(msgText: String = "", isForgetWindow: bool = false):

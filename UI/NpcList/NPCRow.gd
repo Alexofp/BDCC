@@ -70,7 +70,9 @@ func _on_ShowNPC_pressed():
 	var character = GlobalRegistry.getCharacter(_npcID)
 	GM.ui.getCharactersPanel().addCharacter(_npcID)
 	character.addEffect(StatusEffect.SexEngineLikes)
+	character.addEffect(StatusEffect.SexEnginePersonality)
 	GM.ui.updateCharactersInPanel()
+
 
 func _on_Meet_pressed():
 	emit_signal("onMeetButtonPressed", _npcID, _npcOccupation)
