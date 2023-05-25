@@ -99,6 +99,9 @@ func getDefaultArtwork(_variant = []):
 	
 	return Images.getGenericCharacterArt(self, _variant)
 
+func getBirthWaitTime():
+	return 60*60*30 # Dynamic npcs wait 30 hours before giving birth
+
 func saveData():
 	var data = {
 		"npcLevel": npcLevel,

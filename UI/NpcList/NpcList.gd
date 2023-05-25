@@ -49,26 +49,38 @@ func meetNPC(ID, occupation):
 	match occupation:
 		"Inmates": 
 			if(WorldPopulation.Inmates in GM.pc.getLocationPopulation()):
-				GM.main.runScene("InmateExposureForcedSexScene", [ID])
-				GM.main.runCurrentScene()
+				if(GM.ES.triggerReact(Trigger.TalkingToDynamicNPC, [ID])):
+					GM.main.runCurrentScene()
+				else:
+					GM.main.runScene("InmateExposureForcedSexScene", [ID])
+					GM.main.runCurrentScene()
 			else:
 				sendPopupMessage("There are no inmates in this location.\nTry looking elsewhere")
 		"Guards":
 			if(WorldPopulation.Guards in GM.pc.getLocationPopulation()):
-				GM.main.runScene("GuardCaughtOfflimitsScene", [ID])
-				GM.main.runCurrentScene()
+				if(GM.ES.triggerReact(Trigger.TalkingToDynamicNPC, [ID])):
+					GM.main.runCurrentScene()
+				else:
+					GM.main.runScene("GuardCaughtOfflimitsScene", [ID])
+					GM.main.runCurrentScene()
 			else:
 				sendPopupMessage("There are no guards in this location.\nTry searching at the security checkpoint or near greenhouses")
 		"Engineers":
-			if(room.loctag_EngineersEncounter):
-				GM.main.runScene("EngineerCaughtOfflimitsScene", [ID])
-				GM.main.runCurrentScene()
+			if(room.loctag_EngineersEncounter || room.getCachedFloorID() in ["MiningFloor"]):
+				if(GM.ES.triggerReact(Trigger.TalkingToDynamicNPC, [ID])):
+					GM.main.runCurrentScene()
+				else:
+					GM.main.runScene("EngineerCaughtOfflimitsScene", [ID])
+					GM.main.runCurrentScene()
 			else:
 				sendPopupMessage("There are no engineers in this location.\nTry searching in the engineering bay")
 		"Nurses":
-			if(room.loctag_MentalWard):
-				GM.main.runScene("NurseCaughtOfflimitsScene", [ID])
-				GM.main.runCurrentScene()
+			if(room.loctag_MentalWard || room.getCachedFloorID() in ["Medical"]):
+				if(GM.ES.triggerReact(Trigger.TalkingToDynamicNPC, [ID])):
+					GM.main.runCurrentScene()
+				else:
+					GM.main.runScene("NurseCaughtOfflimitsScene", [ID])
+					GM.main.runCurrentScene()
 			else:
 				sendPopupMessage("There are no nurses in this location.\nTry searching in the restricted area of the medical ward")
 

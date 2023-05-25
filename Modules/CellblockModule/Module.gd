@@ -30,6 +30,7 @@ func _init():
 		"res://Modules/CellblockModule/Fluff/EngineeringLoreComputerScene.gd",
 		"res://Modules/CellblockModule/Nura/NuraFirstTimeScene.gd",
 		"res://Modules/CellblockModule/Nura/NuraTalkScene.gd",
+		"res://Modules/CellblockModule/Pregnancy/DynamicCharacterGivingBirthScene.gd",
 		]
 	characters = [
 		"res://Modules/CellblockModule/CheckpointGuardCharacter.gd",
@@ -51,6 +52,7 @@ func _init():
 		"res://Modules/CellblockModule/Fluff/EngineeringLoreComputerEvent.gd",
 		"res://Modules/CellblockModule/Nura/NuraTalkEvent.gd",
 		"res://Modules/CellblockModule/Nura/NuraFindToolEvent.gd",
+		"res://Modules/CellblockModule/Pregnancy/DynamicCharacterGivingBirthEvent.gd",
 	]
 
 func resetFlagsOnNewDay():
