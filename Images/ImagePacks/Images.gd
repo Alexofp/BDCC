@@ -31,3 +31,15 @@ static func getGenericCharacterArt(character, variant: Array):
 			return [imagePath, pack.getArtist()]
 		
 	return null
+
+static func getSceneArt(scene):
+	var packs = OPTIONS.getImagePackOrder()
+	
+	for packID in packs:
+		var pack = GlobalRegistry.getImagePack(packID)
+		if(pack == null):
+			continue
+		
+		var imageData = pack.getSceneImage(scene)
+		if(imageData != null):
+			return imageData

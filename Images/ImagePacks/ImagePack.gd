@@ -4,6 +4,8 @@ class_name ImagePack
 var id = "error"
 var artist = "Unknown"
 var characters = {}
+var sceneImages = {}
+var sceneImagesWithConditions = {}
 
 # path argument can be a string or an array of strings
 # string = will be used as a path to the texture
@@ -92,3 +94,43 @@ func getCharacterImage(characterID: String, variant: Array):
 
 func getArtist():
 	return artist
+
+func addSceneImage(sceneID, sceneState, imagePath, imageHeight = 300.0):
+	if(!sceneImages.has(sceneID)):
+		sceneImages[sceneID] = {}
+	sceneImages[sceneID][sceneState] = {
+		imagePath = imagePath,
+		imageHeight = imageHeight,
+		artist = getArtist(),
+		}
+
+func addSceneImageWithConditions(sceneID, sceneState, imagePath, conditions, imageHeight = 300.0):
+	if(!sceneImagesWithConditions.has(sceneID)):
+		sceneImagesWithConditions[sceneID] = {}
+	if(!sceneImagesWithConditions[sceneID].has(sceneState)):
+		sceneImagesWithConditions[sceneID][sceneState] = []
+	
+	sceneImagesWithConditions[sceneID][sceneState].append({
+		imagePath = imagePath,
+		conditions = conditions,
+		imageHeight = imageHeight,
+		artist = getArtist(),
+	})
+
+func getSceneImage(scene):
+	var sceneID = scene.sceneID
+	var sceneState = scene.getState()
+	
+	if(sceneImagesWithConditions.has(sceneID) && sceneImagesWithConditions[sceneID].has(sceneState)):
+		var variants = sceneImagesWithConditions[sceneID][sceneState]
+		for variant in variants:
+			#var imagePath = variant["imagePath"]
+			var conditions = variant["conditions"]
+			
+			if(ImageConditions.areTrue(conditions)):
+				return variant
+	
+	if(sceneImages.has(sceneID) && sceneImages[sceneID].has(sceneState)):
+		return sceneImages[sceneID][sceneState]
+	
+	return null

@@ -484,6 +484,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Modules/GymModule/Module.gd"
 }, {
+"base": "Object",
+"class": "ImageCon",
+"language": "GDScript",
+"path": "res://Images/ImagePacks/ImageCon.gd"
+}, {
+"base": "Object",
+"class": "ImageConditions",
+"language": "GDScript",
+"path": "res://Images/ImagePacks/ImageConditions.gd"
+}, {
 "base": "Reference",
 "class": "ImagePack",
 "language": "GDScript",
@@ -1190,6 +1200,8 @@ _global_script_class_icons={
 "GuardGenerator": "",
 "GuardLoot": "",
 "GymModule": "",
+"ImageCon": "",
+"ImageConditions": "",
 "ImagePack": "",
 "Images": "",
 "InmateGenerator": "",

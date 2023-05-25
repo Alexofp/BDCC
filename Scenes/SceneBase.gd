@@ -74,6 +74,8 @@ func run():
 	GM.pc.updateEffectPanel(GM.ui.getPlayerStatusEffectsPanel())
 	GM.ui.updateCharactersInPanel()
 	GM.ui.setSceneCreator(getSceneCreator(), shouldShowDevCommentaryIcon())
+	GM.ui.setSceneArtWork(Images.getSceneArt(self))
+
 	
 	checkSceneEnded()
 		
@@ -114,6 +116,9 @@ func react(_action: String, _args):
 
 func setState(newState: String):
 	state = newState
+
+func getState() -> String:
+	return state
 
 func say(_text: String):
 	if(GM.ui):

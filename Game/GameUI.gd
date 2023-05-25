@@ -30,6 +30,8 @@ var uiTextboxScene = preload("res://UI/UITextbox.tscn")
 onready var textcontainer = $HBoxContainer/VBoxContainer2/ScrollContainer/VBoxContainer
 onready var smartCharacterPanel = $HBoxContainer/Panel2/MarginContainer/VBoxContainer/SmartCharacterPanel
 onready var devCommentaryPanel = $HBoxContainer/DevCommentary
+onready var sceneArtWorkRect = $HBoxContainer/VBoxContainer2/ScrollContainer/VBoxContainer/SceneArtWorkRect
+onready var fullArtWorkRect = $FullArtworkRect
 var textboxes: Dictionary = {}
 var gameParser: GameParser
 var sayParser: SayParser
@@ -482,3 +484,22 @@ func _on_DevComLabel_meta_clicked(meta):
 
 func isShowingDevCommentary():
 	return devCommentaryPanel.visible
+
+func setSceneArtWork(imageData):
+	if(imageData == null || !(imageData is Dictionary) || !OPTIONS.shouldShowSceneArt()):
+		sceneArtWorkRect.textures = null
+		sceneArtWorkRect.visible = false
+		fullArtWorkRect.textures = null
+		$FullArtworkRect/Label.text = ""
+	else:
+		$FullArtworkRect/Label.text = "Art by "+str(imageData["artist"])
+		fullArtWorkRect.textures = imageData["imagePath"]
+		sceneArtWorkRect.textures = imageData["imagePath"]
+		sceneArtWorkRect.rect_min_size.y = imageData["imageHeight"]
+		sceneArtWorkRect.visible = true
+
+func _on_OpenFullArtWorkButton_pressed():
+	fullArtWorkRect.visible = true
+
+func _on_CloseFullArtWork_pressed():
+	fullArtWorkRect.visible = false

@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=2]
+[gd_scene load_steps=36 format=2]
 
 [ext_resource path="res://GlobalTheme.tres" type="Theme" id=1]
 [ext_resource path="res://Game/TooltipDisplay.tscn" type="PackedScene" id=2]
@@ -20,6 +20,7 @@
 [ext_resource path="res://UI/RichTextBoxEffects/console_richtexteffect.tres" type="RichTextEffect" id=18]
 [ext_resource path="res://UI/RichTextBoxEffects/cuss_richtexteffect.tres" type="RichTextEffect" id=19]
 [ext_resource path="res://UI/RichTextBoxEffects/corrupt_richtexteffect.tres" type="RichTextEffect" id=20]
+[ext_resource path="res://UI/LayeredSprite.gd" type="Script" id=21]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.207843, 0.133333, 0.364706, 1 )
@@ -260,9 +261,21 @@ margin_bottom = 644.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="RichTextLabel" type="RichTextLabel" parent="HBoxContainer/VBoxContainer2/ScrollContainer/VBoxContainer"]
+[node name="SceneArtWorkRect" type="TextureRect" parent="HBoxContainer/VBoxContainer2/ScrollContainer/VBoxContainer"]
 margin_right = 710.0
-margin_bottom = 25.0
+size_flags_horizontal = 3
+expand = true
+stretch_mode = 6
+script = ExtResource( 21 )
+
+[node name="OpenFullArtWorkButton" type="TextureButton" parent="HBoxContainer/VBoxContainer2/ScrollContainer/VBoxContainer/SceneArtWorkRect"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="HBoxContainer/VBoxContainer2/ScrollContainer/VBoxContainer"]
+margin_top = 4.0
+margin_right = 710.0
+margin_bottom = 29.0
 focus_mode = 2
 mouse_filter = 1
 size_flags_horizontal = 3
@@ -419,6 +432,33 @@ margin_top = -128.289
 margin_right = 280.291
 margin_bottom = -96.289
 
+[node name="FullArtworkRect" type="TextureRect" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+expand = true
+stretch_mode = 6
+script = ExtResource( 21 )
+
+[node name="ColorRect" type="ColorRect" parent="FullArtworkRect"]
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 0.419608 )
+
+[node name="CloseFullArtWork" type="Button" parent="FullArtworkRect"]
+margin_left = 20.0
+margin_top = 18.8284
+margin_right = 78.0
+margin_bottom = 44.8284
+text = "Close"
+
+[node name="Label" type="Label" parent="FullArtworkRect"]
+margin_left = 20.0
+margin_top = 51.8284
+margin_right = 71.0
+margin_bottom = 71.8284
+
 [connection signal="onDevComButton" from="HBoxContainer/Panel2/MarginContainer/VBoxContainer/MapAndTimePanel" to="." method="_on_MapAndTimePanel_onDevComButton"]
 [connection signal="pressed" from="HBoxContainer/Panel2/MarginContainer/VBoxContainer/HBoxContainer2/SaveButton" to="." method="_on_SaveButton_pressed"]
 [connection signal="pressed" from="HBoxContainer/Panel2/MarginContainer/VBoxContainer/HBoxContainer2/LoadButton" to="." method="_on_LoadButton_pressed"]
@@ -428,9 +468,11 @@ margin_bottom = -96.289
 [connection signal="pressed" from="HBoxContainer/Panel2/MarginContainer/VBoxContainer/HBoxContainer/RollbackButton" to="." method="_on_RollbackButton_pressed"]
 [connection signal="pressed" from="HBoxContainer/VBoxContainer2/Panel/TranslateBox/ShowOriginalCheckbox" to="." method="_on_ShowOriginalCheckbox_pressed"]
 [connection signal="pressed" from="HBoxContainer/VBoxContainer2/Panel/TranslateBox/ManualTranslateButton" to="." method="_on_ManualTranslateButton_pressed"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer2/ScrollContainer/VBoxContainer/SceneArtWorkRect/OpenFullArtWorkButton" to="." method="_on_OpenFullArtWorkButton_pressed"]
 [connection signal="pressed" from="HBoxContainer/VBoxContainer2/HBoxContainer/PrevPageButton" to="." method="_on_PrevPageButton_pressed"]
 [connection signal="pressed" from="HBoxContainer/VBoxContainer2/HBoxContainer/NextPageButton" to="." method="_on_NextPageButton_pressed"]
 [connection signal="onResumeButtonPressed" from="HBoxContainer/InGameMenu" to="." method="showGameScreen"]
 [connection signal="onClosePressed" from="HBoxContainer/SkillsUI" to="." method="showGameScreen"]
 [connection signal="meta_clicked" from="HBoxContainer/DevCommentary/ScrollContainer/DevComLabel" to="." method="_on_DevComLabel_meta_clicked"]
 [connection signal="pressed" from="HBoxContainer/DevCommentary/GridContainer/CloseButton" to="." method="showGameScreen"]
+[connection signal="pressed" from="FullArtworkRect/CloseFullArtWork" to="." method="_on_CloseFullArtWork_pressed"]

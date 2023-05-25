@@ -28,6 +28,7 @@ var showMapArt = false
 var developerCommentary = false
 
 var showCharacterArt = true
+var showSceneArt = true
 var imagePackOrder = []
 
 var rollbackEnabled = false
@@ -54,6 +55,7 @@ func resetToDefaults():
 	showMapArt = false
 	#imagePackOrder = []
 	showCharacterArt = true
+	showSceneArt = true
 	showSceneCreator = true
 	rollbackEnabled = false
 	rollbackSlots = 5
@@ -119,6 +121,9 @@ func isDebugPanelEnabled():
 
 func shouldShowCharacterArt():
 	return showCharacterArt
+
+func shouldShowSceneArt():
+	return showSceneArt
 
 func shouldShowSceneCreator():
 	return showSceneCreator
@@ -320,6 +325,13 @@ func getChangeableOptions():
 					"value": showCharacterArt,
 				},
 				{
+					"name": "Show scene art",
+					"description": "Display the art associated with the current scene (if available)",
+					"id": "showSceneArt",
+					"type": "checkbox",
+					"value": showSceneArt,
+				},
+				{
 					"name": "Image packs",
 					"description": "Choose artist priority",
 					"id": "imagePackOrder",
@@ -452,6 +464,8 @@ func applyOption(categoryID, optionID, value):
 			uiButtonSize = value
 		if(optionID == "showCharacterArt"):
 			showCharacterArt = value
+		if(optionID == "showSceneArt"):
+			showSceneArt = value
 		if(optionID == "showSceneCreator"):
 			showSceneCreator = value
 		if(optionID == "showMapArt"):
@@ -509,6 +523,7 @@ func saveData():
 		"debugPanel": debugPanel,
 		"imagePackOrder": imagePackOrder,
 		"showCharacterArt": showCharacterArt,
+		"showSceneArt": showSceneArt,
 		"showSceneCreator": showSceneCreator,
 		"showMapArt": showMapArt,
 		"rollbackEnabled": rollbackEnabled,
@@ -538,6 +553,7 @@ func loadData(data):
 	debugPanel = loadVar(data, "debugPanel", false)
 	imagePackOrder = loadVar(data, "imagePackOrder", [])
 	showCharacterArt = loadVar(data, "showCharacterArt", true)
+	showSceneArt = loadVar(data, "showSceneArt", true)
 	showSceneCreator = loadVar(data, "showSceneCreator", true)
 	showMapArt = loadVar(data, "showMapArt", false)
 	rollbackEnabled = loadVar(data, "rollbackEnabled", false)
