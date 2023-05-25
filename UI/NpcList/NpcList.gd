@@ -17,7 +17,7 @@ var _personalityBtnState: bool = true
 var _childrenBtnState: bool = true
 var _IDtoForget
 var nodeToFree
-
+signal onMeetNpcButton(ID, occupation)
 
 func addRow(name: String, gender: String, subbyStat: float, ID: String, occupation: String, children: int = 0):
 	var newRow = npcRow.instance()
@@ -46,46 +46,7 @@ func _on_Cancel_pressed():
 
 
 func meetNPC(ID, occupation):
-	var room = GM.world.getRoomByID(GM.pc.getLocation())
-	match occupation:
-		"Inmates": 
-			if(WorldPopulation.Inmates in GM.pc.getLocationPopulation()):
-				if(GM.ES.triggerReact(Trigger.TalkingToDynamicNPC, [ID])):
-					GM.main.runCurrentScene()
-				else:
-					GM.main.runScene("InmateExposureForcedSexScene", [ID])
-					GM.main.runCurrentScene()
-			else:
-				sendPopupMessage("There are no inmates in this location.\nTry looking elsewhere")
-		"Guards":
-			if(WorldPopulation.Guards in GM.pc.getLocationPopulation()):
-				if(GM.ES.triggerReact(Trigger.TalkingToDynamicNPC, [ID])):
-					GM.main.runCurrentScene()
-				else:
-					GM.main.runScene("GuardCaughtOfflimitsScene", [ID])
-					GM.main.runCurrentScene()
-			else:
-				sendPopupMessage("There are no guards in this location.\nTry searching at the security checkpoint or near greenhouses")
-		"Engineers":
-			if(room.loctag_EngineersEncounter || room.getCachedFloorID() in ["MiningFloor"]):
-				if(GM.ES.triggerReact(Trigger.TalkingToDynamicNPC, [ID])):
-					GM.main.runCurrentScene()
-				else:
-					GM.main.runScene("EngineerCaughtOfflimitsScene", [ID])
-					GM.main.runCurrentScene()
-			else:
-				sendPopupMessage("There are no engineers in this location.\nTry searching in the engineering bay")
-		"Nurses":
-			if(room.loctag_MentalWard || room.getCachedFloorID() in ["Medical"]):
-				if(GM.ES.triggerReact(Trigger.TalkingToDynamicNPC, [ID])):
-					GM.main.runCurrentScene()
-				else:
-					GM.main.runScene("NurseCaughtOfflimitsScene", [ID])
-					GM.main.runCurrentScene()
-			else:
-				sendPopupMessage("There are no nurses in this location.\nTry searching in the restricted area of the medical ward")
-		_:
-			Log.error("Exception: unknown occupation detected, please update NpcList.gd")
+	emit_signal("onMeetNpcButton", ID, occupation)
 
 
 func sendPopupMessage(msgText: String = "", isForgetWindow: bool = false):

@@ -181,6 +181,7 @@ func _run():
 	if(state == "occupationmenupool"):
 		var npclist = npclistScene.instance()
 		GM.ui.addCustomControl("npclist", npclist)
+		var _ok = npclist.connect("onMeetNpcButton", self, "doMeetNpc")
 		
 		var characterIDS = GM.main.getDynamicCharacterIDsFromPool(pickedPoolToShow)
 		for characterID in characterIDS:
@@ -259,6 +260,52 @@ func _run():
 		addButton("+1%", "Change the personality stat", "changepersonalitystatby", [0.01])
 		addButton("+5%", "Change the personality stat", "changepersonalitystatby", [0.05])
 		addButton("+15%", "Change the personality stat", "changepersonalitystatby", [0.15])
+		
+func doMeetNpc(ID, occupation):
+	var room = GM.world.getRoomByID(GM.pc.getLocation())
+	match occupation:
+		"Inmates": 
+			if(WorldPopulation.Inmates in GM.pc.getLocationPopulation()):
+				if(GM.ES.triggerReact(Trigger.TalkingToDynamicNPC, [ID])):
+					pass
+				else:
+					GM.main.runScene("InmateExposureForcedSexScene", [ID])
+				endScene([true])
+				GM.main.runCurrentScene()
+			else:
+				GM.ui.getCustomControl("npclist").sendPopupMessage("There are no inmates in this location.\nTry looking elsewhere")
+		"Guards":
+			if(WorldPopulation.Guards in GM.pc.getLocationPopulation()):
+				if(GM.ES.triggerReact(Trigger.TalkingToDynamicNPC, [ID])):
+					pass
+				else:
+					GM.main.runScene("GuardCaughtOfflimitsScene", [ID])
+				endScene([true])
+				GM.main.runCurrentScene()
+			else:
+				GM.ui.getCustomControl("npclist").sendPopupMessage("There are no guards in this location.\nTry searching at the security checkpoint or near greenhouses")
+		"Engineers":
+			if(room.loctag_EngineersEncounter || room.getCachedFloorID() in ["MiningFloor"]):
+				if(GM.ES.triggerReact(Trigger.TalkingToDynamicNPC, [ID])):
+					pass
+				else:
+					GM.main.runScene("EngineerCaughtOfflimitsScene", [ID])
+				endScene([true])
+				GM.main.runCurrentScene()
+			else:
+				GM.ui.getCustomControl("npclist").sendPopupMessage("There are no engineers in this location.\nTry searching in the engineering bay")
+		"Nurses":
+			if(room.loctag_MentalWard || room.getCachedFloorID() in ["Medical"]):
+				if(GM.ES.triggerReact(Trigger.TalkingToDynamicNPC, [ID])):
+					pass
+				else:
+					GM.main.runScene("NurseCaughtOfflimitsScene", [ID])
+				endScene([true])
+				GM.main.runCurrentScene()
+			else:
+				GM.ui.getCustomControl("npclist").sendPopupMessage("There are no nurses in this location.\nTry searching in the restricted area of the medical ward")
+		_:
+			Log.error("Exception: unknown occupation detected, please update")
 		
 func _react(_action: String, _args):
 	if(_action == "endthescene"):

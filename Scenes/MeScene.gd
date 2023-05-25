@@ -167,7 +167,7 @@ func _react(_action: String, _args):
 		return
 	
 	if(_action == "encountersMenu"):
-		runScene("EncountersMenuScene")
+		runScene("EncountersMenuScene", [], "encountersMenu")
 		return
 	
 	if(_action == "setgender"):
@@ -206,3 +206,10 @@ func _react(_action: String, _args):
 		return
 	
 	setState(_action)
+
+func _react_scene_end(_tag, _result):
+	if(_tag == "encountersMenu"):
+		# If we press the Meet npc button inside the Encounters menu, we also end this scene
+		if(_result is Array && _result.size() > 0 && _result[0]):
+			endScene()
+		

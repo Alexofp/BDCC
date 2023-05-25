@@ -259,6 +259,12 @@ func addCustomControl(id, control):
 	textcontainer.add_child(control)
 	textboxes[id] = control
 
+func getCustomControl(id):
+	if(!textboxes.has(id)):
+		return null
+	
+	return textboxes[id]
+
 func getUIdata(id):
 	assert(textboxes.has(id), "Trying to get info from bad id. Id is "+id)
 	return textboxes[id].getData()
