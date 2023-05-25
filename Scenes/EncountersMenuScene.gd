@@ -194,7 +194,7 @@ func _run():
 
 			npclist.addRow(NPCname, gender, subbyStat, characterID, pickedPoolToShow, sharedKidsAmount)
 	
-		addButton("Back", "Go back a level", "")
+		addButton("Back", "Go back a level", "closenpclist")
 		
 		var encounterPools = GM.main.getDynamicCharactersPools()
 		for encounterPoolID in encounterPools:
@@ -320,7 +320,12 @@ func _react(_action: String, _args):
 		
 		setState("speciesmenu")
 		return
-	
+		
+	if(_action == "closenpclist"):
+		setState("")
+		GM.main.playAnimation(StageScene.Solo, "stand")
+		return
+		
 	setState(_action)
 
 func saveData():

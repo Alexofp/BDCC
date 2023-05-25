@@ -70,6 +70,7 @@ margin_left = 209.0
 margin_right = 217.0
 margin_bottom = 50.0
 rect_min_size = Vector2( 2, 0 )
+mouse_filter = 2
 custom_constants/separation = 8
 custom_styles/separator = SubResource( 8 )
 
@@ -88,6 +89,7 @@ margin_left = 426.0
 margin_right = 434.0
 margin_bottom = 50.0
 rect_min_size = Vector2( 2, 0 )
+mouse_filter = 2
 custom_constants/separation = 8
 custom_styles/separator = SubResource( 8 )
 
@@ -106,6 +108,7 @@ margin_left = 643.0
 margin_right = 651.0
 margin_bottom = 50.0
 rect_min_size = Vector2( 2, 0 )
+mouse_filter = 2
 custom_constants/separation = 8
 custom_styles/separator = SubResource( 8 )
 

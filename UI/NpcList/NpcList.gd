@@ -34,6 +34,7 @@ func forgetNPC(ID, name, node):
 
 
 func _on_Forget_pressed():
+	GM.ui.clearCharactersPanel()
 	nodeToFree.queue_free()
 	nodeToFree = null
 	GM.main.removeDynamicCharacter(_IDtoForget)
@@ -213,8 +214,3 @@ func unpressAllButtons():
 	genderButton.pressed = false
 	personalityButton.pressed = false
 	childrenButton.pressed = false
-
-
-func _notification(what): # Destructor, works fine do not touch
-	if(what == NOTIFICATION_PREDELETE && GM.main != null):
-		GM.main.playAnimation(StageScene.Solo, "stand", {npc=GM.pc})

@@ -64,8 +64,13 @@ func _on_Forget_pressed():
 
 
 func _on_ShowNPC_pressed():
+	GM.ui.clearCharactersPanel()
 	GM.main.playAnimation(StageScene.Duo, "stand", {npc=_npcID})
-
+	
+	var character = GlobalRegistry.getCharacter(_npcID)
+	GM.ui.getCharactersPanel().addCharacter(_npcID)
+	character.addEffect(StatusEffect.SexEngineLikes)
+	GM.ui.updateCharactersInPanel()
 
 func _on_Meet_pressed():
 	emit_signal("onMeetButtonPressed", _npcID, _npcOccupation)
