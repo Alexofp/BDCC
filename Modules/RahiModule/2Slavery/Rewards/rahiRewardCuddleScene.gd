@@ -40,7 +40,9 @@ func _run():
 		addButton("Just rest", "Enjoy the moment..", "just_rest")
 		addButton("Hypno Massage", "Offer Rahi a sensual massage with some extra encouragement", "give_massage")
 		if (getModule("RahiModule").isSkillLearned("rahiSkillMasochist")):
-			addButton("Gentle scratches", "(Masochism) Test Rahi's pain threshold while cuddling with her", "gentle_scratches")
+			addButton("Scratching", "(Masochism) Test Rahi's pain threshold while cuddling with her", "gentle_scratches")
+		if (getModule("RahiModule").isSkillLearned("rahiSkillSex")):
+			addButtonWithChecks("Tribadism", "(Sex) This bed seems to be a good place for some kinky scissoring with Rahi..", "do_tribadism", [], [ButtonChecks.HasReachableVagina])
 		if (getCharacter("rahi").canBeMilked()):
 			if (GM.pc.getInventory().getItemsWithTag(ItemTag.BreastPump).size() > 0):
 				if (!getCharacter("rahi").hasEffect(StatusEffect.SoreNipplesAfterMilking)):
@@ -293,6 +295,94 @@ func _run():
 		saynn("As you turn off and disconnect the pumps, another little noise of love escapes her caused by the air pressure normalizing. Then you just land a little kiss on her cheek and cuddle her a little longer, your hands gently kneading her breasts.")
 
 		addButton("Continue", "See what happens next", "removepumpandend")
+	if(state == "do_tribadism"):
+		playAnimation(StageScene.SexTribadism, "sex", {npc="rahi", pc="pc", bodyState={naked=true, hard=true}, npcBodyState={naked=true}})
+		saynn("Rahi rests in your arms, both of you are enjoying the warmth and the intimacy of the embrace. Your bodies are pressed close.. you can feel the desire rising the more you gently caress Rahi's girly curves.")
+
+		saynn("[say=pc]I know a better way to cuddle..[/say]")
+
+		saynn("Kitty purrs quietly.")
+
+		saynn("[say=rahi]Oh?.. Feel free to show it, {rahiMaster}.. You are making her quite.. curious..[/say]")
+
+		saynn("Without saying much, you slowly pull Rahi's shorts down while nuzzling her cheek. She doesn't seem to mind her girly bits being exposed.. her beautiful sensitive folds. After that, you change positions, now sitting in front of her, looking at her.. You spread your legs slightly and invite Rahi to do the same.")
+
+		saynn("[say=pc]Closer, kitty..[/say]")
+
+		saynn("You offer Rahi a hand and she holds onto it while you pull her close, your bodies aligning perfectly, your pussies.. almost kissing. Your eyes remain locked on hers, noticing the obvious.. lusty stare.")
+
+		saynn("You still hold Rahi's paw, intertwining fingers and using it to support your motions.. A little moan escapes from the feline when your moist petals finally collide against each other, already exchanging juices. But you go further and begin grinding your slit against hers, moving your hips at a slow but sensual pace.")
+
+		saynn("[say=rahi]She agrees.. much better.. ah..[/say]")
+
+		saynn("Very soon the kitty gets pulled into it, also sliding her hips to meet yours, slowly ramping up the amount of pleasure that you receive. With each motion, both Rahi and you lose themselves in the intoxicating sensations, ecstatic waves flowing through you, building and intertwining, bringing you both close..")
+
+		saynn("Slowly, your movements become more urgent, more primal. Your bodies rocking against each other, wet pussies grinding with a raw passion that was evident from all the moans escaping from you. At some point the bedsheets under you become marked with your scents.. which is good..")
+
+		saynn("[say=rahi]She is gonna.. Ah..[/say]")
+
+		saynn("You can feel Rahi's body shivering as the climax is edging closer and closer..")
+
+		addButton("Continue", "See what happens next", "tribadism_cum")
+	if(state == "tribadism_cum"):
+		playAnimation(StageScene.SexTribadism, "tease", {npc="rahi", pc="pc", bodyState={naked=true, hard=true}, npcBodyState={naked=true}})
+		saynn("You keep desperately grinding your hips with Rahi's until a huge wave finally crashes over you. The kitty and you orgasm almost together, your body convulsing in blissful release as both of you throw your heads back and moan passionately at the ceiling.")
+
+		saynn("It feels so.. good.. to see Rahi's body shaking, knowing that you caused it. Her back is arched, her folds pulsating before suddenly gushing girlcum all over your pussy slit. It seems you teased her a little too much..")
+
+		saynn("As the waves of ecstasy subside, you and Rahi remain entangled, your hearts pounding in sync as you both are exhausted, this passionate sex leaving you breathless..")
+
+		saynn("Time to rest..")
+
+		addButton("Enough", "That was lewd", "endthescene")
+		if (getModule("RahiModule").isSkillLearned("rahiSkillWatersports")):
+			addButton("Pee..", "(Watersports) The bedsheets are ruined anyways..", "tribadism_pee")
+	if(state == "tribadism_pee"):
+		saynn("As you both enjoy the afterglow that came after your intense pussy rubbing session, a strong feeling of pleasure and desire still pulsed through your bodies. Your intertwined legs remained locked, your pussies gently pressed against each other, refusing to separate even for a moment.")
+
+		saynn("But.. the more you rest like that.. the more you begin to feel an unexpected sensation.. an urge to relieve yourself.")
+
+		saynn("[say=pc]I.. kinda wanna pee..[/say]")
+
+		saynn("Rahi is still panting softly, her ears lowered.")
+
+		saynn("[say=rahi]Kitty wants that too.. Let's go to the bathroom together..[/say]")
+
+		saynn("Rahi attempts to escape the leg lock but you stop her, your hand still holding her paw and so you yoink her back into the same position. A big smirk appears on your face.")
+
+		saynn("[say=pc]No~[/say]")
+
+		saynn("Rahi tilts her head, slightly confused. But you can pin-point the exact moment she gets when her cheeks blush red.")
+
+		saynn("[say=rahi]But..[/say]")
+
+		saynn("[say=pc]We're not going anywhere, kitty..[/say]")
+
+		saynn("Rahi looks at you with big kitty eyes. You decide to move your hips a little which causes your clit to rub against your kitty's pee hole, making holding back extremely hard. Rahi curls her toes. A little gasp escapes her mouth as she suddenly lets go..")
+
+		saynn("A strong current of Rahi's golden fluid hits your crotch and begins flowing down it, over your pussy. It feels.. so warm. All the while Rahi looks embarrassed beyond belief, her face shows both lust and deep shame.")
+
+		saynn("It doesn't take long for you to reach the point of no return too. Another stream of piss emerges but from your pee hole this time. It marks Rahi's fur with your gross scent and makes her squirm under you as the warm fluid washes over her folds.")
+
+		saynn("[say=rahi]Ah.. This is so..[/say]")
+
+		saynn("[say=pc]What? Wrong? But it feels nice, doesn't it?[/say]")
+
+		saynn("[say=rahi]Yes..[/say]")
+
+		saynn("In the intimate space between Rahi's and your interlocked legs, a small pool of piss begins to form. The rest is overflowing and leaving a yellow spot on the bed sheets, also marking them with a mixture of your scents.")
+
+		saynn("Rahi's sensations intensified as she finally allowed herself to fully embrace the moment. More little moans escape from her as the crossing streams keep caressing her sensitive flesh..")
+
+		saynn("As the last drops fall, you and Rahi exchange lusty glances. Slowly, you pull your legs away, letting the blushing feline escape the embrace and get up.")
+
+		saynn("[say=rahi]She.. she is gonna go get new bed sheets..[/say]")
+
+		saynn("[say=pc]Sure, kitty. You do that~[/say]")
+
+		saynn("Rahi quickly leaves her cell, still marked with your scent.")
+
+		addButton("Continue", "That was very lewd", "endthescene")
 func addPumpButtons():
 	var pumps = GM.pc.getInventory().getItemsWithTag(ItemTag.BreastPump)
 	for pump in pumps:
@@ -319,6 +409,10 @@ func _react(_action: String, _args):
 		processTime(10*60)
 		getModule("RahiModule").advanceSkill("rahiSkillMasochist")
 
+	if(_action == "do_tribadism"):
+		processTime(10*60)
+		getModule("RahiModule").advanceSkill("rahiSkillSex")
+
 	if(_action == "milk_withpump"):
 		var pump = _args[0]
 		breastPumpID = pump.getUniqueID()
@@ -341,6 +435,16 @@ func _react(_action: String, _args):
 		GM.pc.getInventory().addItem(pump)
 		endScene()
 		return
+
+	if(_action == "tribadism_cum"):
+		processTime(5*60)
+		GM.pc.rubsVaginasWith("rahi")
+		GM.pc.orgasmFrom("rahi")
+
+	if(_action == "tribadism_pee"):
+		processTime(3*60)
+		GM.pc.pissedOnBy("rahi")
+		getCharacter("rahi").pissedOnBy("pc")
 
 	setState(_action)
 
