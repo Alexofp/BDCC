@@ -104,6 +104,8 @@ func _getAttacks():
 	return ["biteattack", "simplekickattack", "stretchingAttack", "lickWounds", "shoveattack", "trygetupattack"]
 
 func getFightIntro(_battleName):
+	if(_battleName == "arenafight"):
+		return "Avy stands tall, her foxy tail swishing behind her. It seems she is waiting for you to do the first move.."
 	return "Avy stands straight, her hands slightly behind her, clawed digits spread out."
 
 func getThickness() -> int:

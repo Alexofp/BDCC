@@ -52,6 +52,8 @@ func _init():
 		
 		"res://Modules/FightClubModule/Fighters/Jack/JackLostToScene.gd",
 		"res://Modules/FightClubModule/Fighters/Jack/JackWonScene.gd",
+		
+		"res://Modules/FightClubModule/Avy/AvyFirstArenaBattleScene.gd",
 		]
 	characters = [
 		"res://Modules/FightClubModule/Entrance/Bulldog.gd",
