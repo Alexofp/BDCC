@@ -13,6 +13,7 @@ func getFlags():
 		"FightClubPCRank": flag(FlagType.Text),
 		"FightClubDefeatedFighters": flag(FlagType.Dict),
 		"FightClubFirstArenaIntroduction": flag(FlagType.Bool),
+		"AttemptedAvyFight": flag(FlagType.Bool),
 	}
 
 func _init():
@@ -66,6 +67,7 @@ func _init():
 		"res://Modules/FightClubModule/Fighters/Axis/AxisCharacter.gd",
 		"res://Modules/FightClubModule/Fighters/Kait/KaitCharacter.gd",
 		"res://Modules/FightClubModule/Fighters/Jack/JackCharacter.gd",
+		"res://Modules/FightClubModule/Fighters/Avy/AvyArenaCharacter.gd",
 	]
 	items = []
 	events = [

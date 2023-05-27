@@ -306,6 +306,7 @@ func registerEverything():
 	registerAttackFolder("res://Attacks/PlayerOnly/")
 	registerAttackFolder("res://Attacks/WeaponAttacks/")
 	registerAttackFolder("res://Attacks/NpcAttacks/")
+	registerAttackFolder("res://Attacks/NpcAttacks/Avy/")
 	
 	registerLustActionFolder("res://Game/LustCombat/LustActions/")
 	registerLustActionFolder("res://Game/LustCombat/LustActions/Perk/")
