@@ -38,6 +38,7 @@ func getFlags():
 		"Nursery_Introduced": flag(FlagType.Bool),
 		"Nursery_AskedHowWorks": flag(FlagType.Bool),
 		"Nursery_AskedDatabase": flag(FlagType.Bool),
+		"Nursery_hadFreeAppleFromPerkToday": flag(FlagType.Bool),
 		
 		"Medical_StoleDrugsToday": flag(FlagType.Bool),
 		"Medical_FirstTimeHealedHappened": flag(FlagType.Bool),
@@ -140,6 +141,7 @@ func _init():
 	]
 
 func resetFlagsOnNewDay():
+	GM.main.setModuleFlag("MedicalModule", "Nursery_hadFreeAppleFromPerkToday", false)
 	GM.main.setModuleFlag("MedicalModule", "Med_wasMilkedToday", false)
 	GM.main.setModuleFlag("MedicalModule", "Mental_CheckupHappened", false)
 	GM.main.setModuleFlag("MedicalModule", "Mental_ExperimentHappened", false)

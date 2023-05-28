@@ -38,7 +38,10 @@ func getIconColor():
 
 func getBuffs():
 	var progress = character.getPregnancyProgress()
-	
+	var modifier = 1
+	if(GM.pc.hasPerk(Perk.FertilityBroodmother)): 
+		modifier = 0.5
+		
 	if(progress <= 0.0):
 		return []
 	
@@ -48,10 +51,10 @@ func getBuffs():
 		]
 	elif(progress <= 0.66):
 		return [
-			buff(Buff.MaxStaminaBuff, [-10]),
+			buff(Buff.MaxStaminaBuff, [-10 * modifier]),
 		]
 	else:
 		return [
-			buff(Buff.MaxStaminaBuff, [-30]),
-			buff(Buff.DodgeChanceBuff, [-20]),
+			buff(Buff.MaxStaminaBuff, [-30 * modifier]),
+			buff(Buff.DodgeChanceBuff, [-20 * modifier]),
 		]

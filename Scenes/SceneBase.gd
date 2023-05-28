@@ -20,6 +20,7 @@ var sceneSavedItemsInv:LightInventory = LightInventory.new()
 var uniqueSceneID: int = -1
 var parentSceneUniqueID: int = -1
 var showedDeveloperCommentary = false #No need to save this one
+var sceneHasPC: bool = false
 
 func _run():
 	pass
@@ -50,6 +51,9 @@ func initScene(args = []):
 	_initScene(args)
 	_reactInit()
 	
+	if(args.has("pc")):
+		sceneHasPC = true
+
 	#checkSceneEnded()
 
 func run():
@@ -76,15 +80,15 @@ func run():
 	GM.ui.setSceneCreator(getSceneCreator(), shouldShowDevCommentaryIcon())
 	GM.ui.setSceneArtWork(Images.getSceneArt(self))
 
-	
 	checkSceneEnded()
-		
+
 func checkSceneEnded():
 	if(sceneEndedFlag):
 		_onSceneEnd()
 		GM.main.removeScene(self, sceneEndedArgs)
 		emit_signal("sceneEnded", sceneEndedArgs)
 		print("removing scene "+name)
+		sceneHasPC = false
 		
 		if(!sceneSavedItemsInv.isEmpty()):
 			var newItems = []
@@ -97,6 +101,9 @@ func checkSceneEnded():
 			sceneSavedItemsInv.items.clear()
 		
 		queue_free()
+
+func isSexSceneWithPC():
+	return sceneHasPC
 
 func addItemToSavedItems(theItem):
 	if(theItem == null):
@@ -312,6 +319,8 @@ func getSceneCreator():
 func playAnimation(theSceneID, theActionID, args = {}):
 	if(GM.main != null):
 		GM.main.playAnimation(theSceneID, theActionID, args)
+		if(args.has("pc")):
+			sceneHasPC = true
 
 func playAnimationForceReset(theSceneID, theActionID, args = {}):
 	if(GM.main != null):

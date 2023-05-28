@@ -23,6 +23,8 @@ var orificesPreventedFromRecovering = {}
 var blockedOrifices = {}
 var extraFertility = 0.0
 var extraVirility = 0.0
+var eggsBonusMod: float = 0.0
+var minEggsAmount: int = 0
 var extraCrossSpeciesCompatibility = 0.0
 var skillsExperience = {}
 var customAttributes = {}
@@ -74,6 +76,8 @@ func calculateBuffs():
 	genitalResistance = 0.0
 	extraFertility = 0.0
 	extraVirility = 0.0
+	eggsBonusMod = 0.0
+	minEggsAmount = 0
 	extraCrossSpeciesCompatibility = 0.0
 	skillsExperience.clear()
 	customAttributes.clear()
@@ -189,7 +193,13 @@ func getFertility():
 
 func getVirility():
 	return extraVirility
-
+	
+func getEggsBonusMod():
+	return eggsBonusMod
+	
+func getMinEggsAmount():
+	return minEggsAmount
+	
 func getCrossSpeciesCompatibility():
 	return extraCrossSpeciesCompatibility
 
