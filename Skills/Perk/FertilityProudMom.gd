@@ -18,12 +18,12 @@ func getSkillTier():
 func getPicture():
 	return "res://Images/Perks/Skill_Icon_FertilityProudMom.png"
 	
-#func runOnceWhenLearned():
-#	GM.main.setModuleFlag("MedicalModule", "Nursery_hadFreeAppleFromPerkToday", false)
+func runOnceWhenLearned():
+	GM.main.setModuleFlag("MedicalModule", "Nursery_hadFreeAppleFromPerkToday", false)
 
-#func getBuffs():
-#	if(npc.menstrualCycle.isVisiblyPregnant()):
-#		return [
-#			buff(Buff.LustArmorBuff, [20])
-#		]
-#	return []
+func getBuffs():
+	if(npc.menstrualCycle.isVisiblyPregnant()):
+		return [
+			buff(Buff.LustArmorBuff, [20])
+		]
+	return []

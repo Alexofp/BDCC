@@ -1,7 +1,5 @@
 extends PerkBase
 
-#var isVisible: bool = true
-
 func _init():
 	id = Perk.FertilityBroodmother
 	skillGroup = Skill.Fertility
@@ -21,17 +19,8 @@ func getSkillTier():
 
 func getPicture():
 	return "res://Images/Perks/Skill_Icon_FertilityBroodmother.png"
-	
-#func isVisualToggleable():
-#	return true
-#
-#func setVisibilty(val: bool) -> void:
-#	isVisible = val
-#
-#func getVisibilty() -> bool:
-#	return isVisible
 
-#func getBuffs():
-#	return [
-#		buff(Buff.CrossSpeciesCompatibilityBuff, [20])
-#	]
+func getBuffs():
+	return [
+		buff(Buff.CrossSpeciesCompatibilityBuff, [20]),
+	]

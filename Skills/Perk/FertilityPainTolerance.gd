@@ -18,8 +18,8 @@ func getSkillTier():
 func getPicture():
 	return "res://Images/Perks/Skill_Icon_FertilityPainTolerance.png"
 
-#func getBuffs():
-#	return [
-#		buff(Buff.ReceivedPhysicalDamageBuff, [-15]),
-#		buff(Buff.MaxStaminaBuff, [30.0])
-#	]
+func getBuffs():
+	return [
+		buff(Buff.ReceivedPhysicalDamageBuff, [-15]),
+		buff(Buff.MaxStaminaBuff, [30.0]),
+	]

@@ -16,10 +16,9 @@ func getSkillTier():
 func getPicture():
 	return "res://Images/Perks/Skill_Icon_FertilityBetterOvulation.png"
 
-#func getBuffs():
-#
-#	return [
-#		buff(Buff.OvulationEggsAmountBuff, [50]),
-#		buff(Buff.MinOvulationEggsAmountBuff, [3])
-#	]
+func getBuffs():
 
+	return [
+		buff(Buff.OvulationEggsAmountBuff, [50]),
+		buff(Buff.MinOvulationEggsAmountBuff, [3]),
+	]

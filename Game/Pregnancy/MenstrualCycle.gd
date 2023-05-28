@@ -134,11 +134,16 @@ func ovulate():
 	for orifice in OrificeType.getAll():
 		if(!hasWombIn(orifice)):
 			continue
-			
+		
+		var ch = getCharacter()
 		var amountOfEggs = RNG.pickWeightedPairs(possibleEggAmounts)
-		if(amountOfEggs == null):
-			amountOfEggs = 1
-		#print("AMOUNT OF EGGS: "+str(amountOfEggs))
+		amountOfEggs = max(ch.getMinEggsAmount(), int(round(amountOfEggs * ch.getEggsBonusMod())))
+		if(GM.pc.hasPerk(Perk.FertilityBetterOvulation) && amountOfEggs < 10):
+			amountOfEggs += RNG.randi_range(0, 4) #otherwise species with low base eggs like humans, won't get much bonus
+			
+		print(ch.getName(), " OVULATED WITH "+str(amountOfEggs)+" AMOUNT OF EGGS")
+		#print(ch.getName(), " Bonus eggs modifier: ", ch.getEggsBonusMod() *100, "%")
+		#print(ch.getName(), " AMOUNT OF Min eggs: ", ch.getMinEggsAmount())
 		
 		for _i in range(amountOfEggs):
 			var egg = createEggCell()
@@ -299,12 +304,15 @@ func giveBirth():
 	for egg in impregnatedEggCells:
 		var eggCell: EggCell = egg
 		
-		var newChild: Child = Child.new()
-		newChild.generateUniqueID()
-		newChild.loadFromEggCell(eggCell)
-		newChild.setBirthday(GM.main.getDays())
+		for x in eggCell.monozygotic:
+			var newChild: Child = Child.new()
+			newChild.generateUniqueID()
+			newChild.loadFromEggCell(eggCell)
+			newChild.generateName()
+			newChild.setBirthday(GM.main.getDays())
+			newChild.setBornFromMonozygoticStatus(eggCell.monozygotic)
 		
-		result.append(newChild)
+			result.append(newChild)
 	
 	if(getCharacter() != null):
 		getCharacter().onGivingBirth(impregnatedEggCells, result)

@@ -10,6 +10,8 @@ var progress = 0.0
 var motherSpecies = []
 var resultSpecies = []
 var resultGender = NpcGender.Male
+var monozygotic: int = 1
+
 
 signal readyForBirth(egg)
 
@@ -24,6 +26,26 @@ func _init():
 	lifeSpan = 60*60*optionsLifespan + RNG.randi_range(-60*60*minRange, 60*60*maxRange)
 
 var cycle = null
+
+func setMonozygotic(): #check if the egg splits
+	var chance = RNG.randf_range(0.00, 100.00)
+	if(chance > 9.00):
+		return # Egg didn't split
+	elif(chance <= 0.01):
+		monozygotic = 6 #EGG_MONOZYGOTIC_LEVEL["Sextuplets"]
+		return
+	elif(chance <= 0.1):
+		monozygotic = 5 #EGG_MONOZYGOTIC_LEVEL["Quintuplets"]
+		return
+	elif(chance <= 0.6):
+		monozygotic = 4 #EGG_MONOZYGOTIC_LEVEL["Quadruplets"]
+		return
+	elif(chance <= 2.6):
+		monozygotic = 3 #EGG_MONOZYGOTIC_LEVEL["Triplets"]
+		return
+	else:
+		monozygotic = 2 #EGG_MONOZYGOTIC_LEVEL["Twins"]
+		return
 
 func setMother(newmotherID, newmotherSpecies):
 	motherID = newmotherID
@@ -115,7 +137,7 @@ func impregnatedBy(fluidDNA):
 	resultSpecies = SpeciesCompatibility.generateChildSpecies(motherSpecies, fluidDNA.getSpecies(), allowHybrids)
 	resultGender = NpcGender.generate()
 
-	print("EGGCELL IMPREGNATED BY "+str(fatherID)+", species: "+str(resultSpecies)+", gender: "+NpcGender.getVisibleName(resultGender))
+	print("EGGCELL IMPREGNATED BY "+str(fatherID)+", species: "+str(resultSpecies)+", gender: "+NpcGender.getVisibleName(resultGender), ", division: ", monozygotic)
 
 func tryImpregnate(fluidDNA, amountML, eggMultiplier = 1.0, fertility = 1.0, crossSpeciesCompatibility = 0.0):
 	if(!canImpregnate()):
@@ -140,6 +162,7 @@ func tryImpregnate(fluidDNA, amountML, eggMultiplier = 1.0, fertility = 1.0, cro
 	
 	if(RNG.chance(finalChance)):
 		impregnatedBy(fluidDNA)
+		setMonozygotic()
 		return true
 	return false
 
@@ -154,6 +177,7 @@ func saveData():
 		"motherSpecies": motherSpecies,
 		"resultSpecies": resultSpecies,
 		"resultGender": resultGender,
+		"monozygotic": monozygotic
 	}
 	
 	return data
@@ -168,3 +192,4 @@ func loadData(data):
 	motherSpecies = SAVE.loadVar(data, "motherSpecies", ["feline"])
 	resultSpecies = SAVE.loadVar(data, "resultSpecies", [])
 	resultGender = SAVE.loadVar(data, "resultGender", NpcGender.Male)
+	monozygotic = SAVE.loadVar(data, "monozygotic", 1)

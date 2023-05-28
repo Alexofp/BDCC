@@ -35,6 +35,7 @@ onready var fullArtWorkRect = $FullArtworkRect
 var textboxes: Dictionary = {}
 var gameParser: GameParser
 var sayParser: SayParser
+onready var hornyMessage = $MessageSystem
 
 func _exit_tree():
 	GM.ui = null

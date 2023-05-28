@@ -18,10 +18,10 @@ func getSkillTier():
 func getPicture():
 	return "res://Images/Perks/Skill_Icon_FertilityDesireToBreed.png"
 
-#func getBuffs():
-#	if(!npc.menstrualCycle.isVisiblyPregnant()):
-#		return [
-#			buff(Buff.LustDamageBuff, [30]),
-#			buff(Buff.ReceivedLustDamageBuff, [20])
-#		]
-#	return []
+func getBuffs():
+	if(!npc.menstrualCycle.isVisiblyPregnant()):
+		return [
+			buff(Buff.LustDamageBuff, [30]),
+			buff(Buff.ReceivedLustDamageBuff, [20]),
+		]
+	return []

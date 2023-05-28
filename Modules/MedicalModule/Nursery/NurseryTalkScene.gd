@@ -1,6 +1,6 @@
 extends "res://Scenes/SceneBase.gd"
 
-var bornChildAmount = 0
+var bornChildAmount: int = 0
 var bornChildString = ""
 
 func _init():
@@ -39,8 +39,17 @@ func _run():
 		else:
 			saynn("You approach the nurse and try to get her attention. She drags her gaze away from the screen and looks at you.")
 
+			# (if player has the perk FertilityProudMom and didn't get an apple today)
+			if(GM.pc.hasPerk(Perk.FertilityProudMom) && !GM.main.getModuleFlag("MedicalModule", "Nursery_hadFreeAppleFromPerkToday", false)):
+				saynn("[say=nurse]Oh it's you again! I try to make sure that every mom here stays on the healthy side, take this[/say]")
+				saynn("She gives you an apple")
+				
+				GM.pc.getInventory().addItem(GlobalRegistry.createItem("appleitem"))
+				addMessage("You recieved an apple")
+				GM.main.setModuleFlag("MedicalModule", "Nursery_hadFreeAppleFromPerkToday", true)
+				
 			# (if ready to give birth)
-			if(GM.pc.isVisiblyPregnant()):
+			elif(GM.pc.isVisiblyPregnant()):
 				saynn("[say=nurse]Came to give birth?[/say]")
 
 			# (else)
@@ -228,7 +237,7 @@ func calculateAmount(pcKids = true):
 	return amount
 
 func printChildren(pcKids = true):
-	var resultTable = "[table=5][cell]Gender[/cell][cell]Species[/cell][cell]Age[/cell][cell]Mother[/cell][cell]Father[/cell]"
+	var resultTable = "[table=7][cell]Name[/cell][cell]Gender[/cell][cell]Species[/cell][cell]Age[/cell][cell]Mother[/cell][cell]Father[/cell][cell]Additional[/cell]"
 	
 	for ch in GM.CS.getChildren():
 		var child: Child = ch
@@ -250,11 +259,16 @@ func printChildren(pcKids = true):
 		else:
 			ageStr = str(yearsOld)+" years "+ageStr
 		
+		if(child.name == ""):
+			child.generateName()
+		
+		resultTable += "[cell]"+child.name+"[/cell]"
 		resultTable += "[cell]"+"[color="+NpcGender.getColorString(child.gender)+"]"+ NpcGender.getVisibleName(child.gender)+"[/color]"+"[/cell]"
 		resultTable += "[cell]"+Util.getSpeciesName(child.species)+"[/cell]"
 		resultTable += "[cell]"+ageStr+"[/cell]"
 		resultTable += "[cell]"+child.getMotherName()+"[/cell]"
 		resultTable += "[cell]"+child.getFatherName()+"[/cell]"
+		resultTable += "[cell]"+child.getMonozygotic()+"[/cell]"
 		
 	resultTable += "[/table]"
 	saynn(resultTable)
@@ -268,10 +282,19 @@ func _react(_action: String, _args):
 	
 	if(_action == "startbirth"):
 		GM.pc.clearOrificeFluids()
+		GM.pc.addSkillExperience(Skill.Fertility, 97)
 		if(GM.pc.getMenstrualCycle() != null):
 			var bornChildren = GM.pc.getMenstrualCycle().giveBirth()
 			bornChildAmount = bornChildren.size()
 			bornChildString = ""
+			
+			GM.pc.addSkillExperience(Skill.Fertility, Util.mini(90, bornChildAmount * 3)) #Bonus per child up to a limit
+			if(GM.pc.hasPerk(Perk.FertilityMotherOfTheYear)):
+				GM.pc.addEffect(StatusEffect.Invigoration)
+				var paycheck = Util.mini(20, bornChildAmount + 3)
+				GM.pc.addCredits(paycheck) #Bonus credits for chilbirth
+				GM.ui.hornyMessage.visible = true
+				GM.ui.hornyMessage.showMessageOnScreen("[center][color=#f0dd61]AlphaCorp thanks you for your compliance and hopes to continue our 'fruitful cooperation' in the future \n [b]You recieved: " +str(paycheck)+ " credits![/b][/color][/center]")
 			
 			for child in bornChildren:
 				GM.CS.addChild(child)
@@ -281,7 +304,7 @@ func _react(_action: String, _args):
 				if(fatherObject != null):
 					fatherName = fatherObject.getName()
 				
-				bornChildString += "[color="+NpcGender.getColorString(child.gender)+"]"+ NpcGender.getVisibleName(child.gender)+"[/color]"+" - "+Util.getSpeciesName(child.species)+" - "+"Father: "+fatherName+"\n"
+				bornChildString += child.name+" - "+"[color="+NpcGender.getColorString(child.gender)+"]"+ NpcGender.getVisibleName(child.gender)+"[/color]"+" - "+Util.getSpeciesName(child.species)+" - "+"Father: "+fatherName +" [color="+"#f0dd61"+"]"+child.bornFromMonozygotic+"[/color]" +"\n"
 		processTime(60*60)
 		
 	if(_action == "endthescene"):
