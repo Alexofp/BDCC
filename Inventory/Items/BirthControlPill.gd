@@ -38,9 +38,13 @@ func addsIntoxication():
 	return 0.0
 
 func getTimedBuffs():
+	var FertilityDebuffResistance = 1.0 
+	if(GM.pc.hasPerk(Perk.FertilityBroodmother)):
+		FertilityDebuffResistance = 0.3
+		
 	return [
 		#buff(Buff.ExposureBuff, [100])
-		buff(Buff.FertilityBuff, [-95]),
+		buff(Buff.FertilityBuff, [int(-95 * FertilityDebuffResistance)]),
 		buff(Buff.VirilityBuff, [-95]),
 	]
 

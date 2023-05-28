@@ -22,7 +22,7 @@ func getPicture():
 
 #func getBuffs():
 #	return [
-#		buff(Buff.OvulationEggsAmountBuff, [200]),
+#		buff(Buff.OvulationEggsAmountBuff, [100]),
 #		buff(Buff.FertilityBuff, [20])
 #	]
 
