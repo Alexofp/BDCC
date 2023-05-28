@@ -371,7 +371,7 @@ func onCharacterReadyToGiveBirth():
 	pregnancyWaitTimer = 0
 	if(getBirthWaitTime() > 0 && getMenstrualCycle() != null):
 		if(getMenstrualCycle().isPregnantFromPlayer()):
-			GM.main.addLogMessage("News", "You just received news that "+getName()+" is ready to give birth to your children and now just waits for a good moment to do it.")
+			GM.main.addLogMessage("News", "You just received news that "+getName()+" is ready to give birth to your children and now just waits for a good moment to do it. Maybe you can go check on them.")
 
 
 # How much the npc will wait before giving birth alone (in seconds)
