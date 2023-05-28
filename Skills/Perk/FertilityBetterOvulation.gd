@@ -1,8 +1,8 @@
 extends PerkBase
 
 func _init():
-	id = Perk.PregnancyBetterOvulation
-	skillGroup = Skill.Pregnancy
+	id = Perk.FertilityBetterOvulation
+	skillGroup = Skill.Fertility
 
 func getVisibleName():
 	return "Better ovulation"
@@ -14,7 +14,7 @@ func getSkillTier():
 	return 0
 
 func getPicture():
-	return "res://Images/Perks/Skill_Icon_PregnancyBetterOvulation.png"
+	return "res://Images/Perks/Skill_Icon_FertilityBetterOvulation.png"
 
 #func getBuffs():
 #

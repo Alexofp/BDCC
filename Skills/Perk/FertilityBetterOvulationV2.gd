@@ -1,8 +1,8 @@
 extends PerkBase
 
 func _init():
-	id = Perk.PregnancyBetterOvulationV2
-	skillGroup = Skill.Pregnancy
+	id = Perk.FertilityBetterOvulationV2
+	skillGroup = Skill.Fertility
 
 func getVisibleName():
 	return "Breeding overdrive"
@@ -12,13 +12,13 @@ func getVisibleDescription():
 			+ "Maximum of the egg cells you release during each ovulation phase is increased even further and fertility is improved by 20%"
 	
 func getRequiredPerks():
-	return [Perk.PregnancyBetterOvulation]
+	return [Perk.FertilityBetterOvulation]
 
 func getSkillTier():
 	return 1
 
 func getPicture():
-	return "res://Images/Perks/Skill_Icon_PregnancyBetterOvulationV2.png"
+	return "res://Images/Perks/Skill_Icon_FertilityBetterOvulationV2.png"
 
 #func getBuffs():
 #	return [

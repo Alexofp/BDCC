@@ -1,8 +1,8 @@
 extends PerkBase
 
 func _init():
-	id = Perk.PregnancyShakyLegs
-	skillGroup = Skill.Pregnancy
+	id = Perk.FertilityShakyLegs
+	skillGroup = Skill.Fertility
 
 func getVisibleName():
 	return "Shaky legs"
@@ -12,11 +12,11 @@ func getVisibleDescription():
 	return "You are wild about big hard juicy cocks and the thoughts of getting filled and knocked up by them. Seeing one, your legs become all shaky and you are forced into heat."
 
 func getRequiredPerks():
-	return [Perk.PregnancyDesireToBreed]
+	return [Perk.FertilityDesireToBreed]
 
 func getSkillTier():
 	return 1
 
 func getPicture():
-	return "res://Images/Perks/Skill_Icon_PregnancyShakyLegs.png"
+	return "res://Images/Perks/Skill_Icon_FertilityShakyLegs.png"
 

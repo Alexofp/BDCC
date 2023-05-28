@@ -1,8 +1,8 @@
 extends PerkBase
 
 func _init():
-	id = Perk.PregnancyDesireToBreed
-	skillGroup = Skill.Pregnancy
+	id = Perk.FertilityDesireToBreed
+	skillGroup = Skill.Fertility
 
 func getVisibleName():
 	return "Desire to breed"
@@ -16,7 +16,7 @@ func getSkillTier():
 	return 0
 
 func getPicture():
-	return "res://Images/Perks/Skill_Icon_PregnancyDesireToBreed.png"
+	return "res://Images/Perks/Skill_Icon_FertilityDesireToBreed.png"
 
 #func getBuffs():
 #	if(!npc.menstrualCycle.isVisiblyPregnant()):

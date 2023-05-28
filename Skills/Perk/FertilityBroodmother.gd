@@ -3,8 +3,8 @@ extends PerkBase
 #var isVisible: bool = true
 
 func _init():
-	id = Perk.PregnancyBroodmother
-	skillGroup = Skill.Pregnancy
+	id = Perk.FertilityBroodmother
+	skillGroup = Skill.Fertility
 
 func getVisibleName():
 	return "Broodmother"
@@ -20,7 +20,7 @@ func getSkillTier():
 	return 1
 
 func getPicture():
-	return "res://Images/Perks/Skill_Icon_PregnancyBroodmother.png"
+	return "res://Images/Perks/Skill_Icon_FertilityBroodmother.png"
 	
 #func isVisualToggleable():
 #	return true

@@ -10,7 +10,7 @@ const SexSlave = "SexSlave"
 const Exhibitionism = "Exhibitionism"
 const BDSM = "BDSM"
 const Milking = "Milking"
-const Pregnancy = "Pregnancy"
+const Fertility = "Fertility"
 
 static func getAll():
-	return [Combat, CumLover, Breeder, SexSlave, Exhibitionism, BDSM, Milking, Pregnancy]
+	return [Combat, CumLover, Breeder, SexSlave, Exhibitionism, BDSM, Milking, Fertility]

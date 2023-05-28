@@ -1,10 +1,10 @@
 extends SkillBase
 
 func _init():
-	id = Skill.Pregnancy
+	id = Skill.Fertility
 
 func getVisibleName():
-	return "Pregnancy"
+	return "Fertility"
 
 func getVisibleDescription():
 	return "Shows how much you are used to being bred by local inhabitants"

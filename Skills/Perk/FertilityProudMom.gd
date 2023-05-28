@@ -1,8 +1,8 @@
 extends PerkBase
 
 func _init():
-	id = Perk.PregnancyProudMom
-	skillGroup = Skill.Pregnancy
+	id = Perk.FertilityProudMom
+	skillGroup = Skill.Fertility
 
 func getVisibleName():
 	return "Proud mom"
@@ -16,7 +16,7 @@ func getSkillTier():
 	return 0
 
 func getPicture():
-	return "res://Images/Perks/Skill_Icon_PregnancyProudMom.png"
+	return "res://Images/Perks/Skill_Icon_FertilityProudMom.png"
 	
 #func runOnceWhenLearned():
 #	GM.main.setModuleFlag("MedicalModule", "Nursery_hadFreeAppleFromPerkToday", false)

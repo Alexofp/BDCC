@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Skill_Icon_PregnancyMotherOfTheYear.png-118da6b1afe87828538c2fa11d678726.stex"
+path="res://.import/Skill_Icon_FertilityPainTolerance.png-3c7b1270c414080b13ceb70e145c11b9.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Images/Perks/Skill_Icon_PregnancyMotherOfTheYear.png"
-dest_files=[ "res://.import/Skill_Icon_PregnancyMotherOfTheYear.png-118da6b1afe87828538c2fa11d678726.stex" ]
+source_file="res://Images/Perks/Skill_Icon_FertilityPainTolerance.png"
+dest_files=[ "res://.import/Skill_Icon_FertilityPainTolerance.png-3c7b1270c414080b13ceb70e145c11b9.stex" ]
 
 [params]
 

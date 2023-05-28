@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Skill_Icon_PregnancyLustfulSight.png-029de777f8ebe6143e11f89f21b1ebdb.stex"
+path="res://.import/Skill_Icon_FertilityShakyLegs.png-a46f416b3487cea68cdbc0fd2acc9d83.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Images/Perks/Skill_Icon_PregnancyLustfulSight.png"
-dest_files=[ "res://.import/Skill_Icon_PregnancyLustfulSight.png-029de777f8ebe6143e11f89f21b1ebdb.stex" ]
+source_file="res://Images/Perks/Skill_Icon_FertilityShakyLegs.png"
+dest_files=[ "res://.import/Skill_Icon_FertilityShakyLegs.png-a46f416b3487cea68cdbc0fd2acc9d83.stex" ]
 
 [params]
 

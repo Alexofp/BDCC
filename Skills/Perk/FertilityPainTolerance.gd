@@ -1,8 +1,8 @@
 extends PerkBase
 
 func _init():
-	id = Perk.PregnancyPainTolerance
-	skillGroup = Skill.Pregnancy
+	id = Perk.FertilityPainTolerance
+	skillGroup = Skill.Fertility
 
 func getVisibleName():
 	return "Pain tolerance"
@@ -16,7 +16,7 @@ func getSkillTier():
 	return 2
 
 func getPicture():
-	return "res://Images/Perks/Skill_Icon_PregnancyPainTolerance.png"
+	return "res://Images/Perks/Skill_Icon_FertilityPainTolerance.png"
 
 #func getBuffs():
 #	return [

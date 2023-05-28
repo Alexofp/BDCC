@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Skill_Icon_PregnancyPainTolerance.png-f9312d9e01dce178517668a4ce7b425e.stex"
+path="res://.import/Skill_Icon_FertilityBetterOvulationV2.png-1c97beee598508f006f74ecb920648b5.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Images/Perks/Skill_Icon_PregnancyPainTolerance.png"
-dest_files=[ "res://.import/Skill_Icon_PregnancyPainTolerance.png-f9312d9e01dce178517668a4ce7b425e.stex" ]
+source_file="res://Images/Perks/Skill_Icon_FertilityBetterOvulationV2.png"
+dest_files=[ "res://.import/Skill_Icon_FertilityBetterOvulationV2.png-1c97beee598508f006f74ecb920648b5.stex" ]
 
 [params]
 
