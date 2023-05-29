@@ -1,0 +1,202 @@
+[gd_scene load_steps=34 format=2]
+
+[ext_resource path="res://Player/Player3D/Doll3D.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Player/StageScene3D/BaseStageScene3D.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Player/Props/platform.png" type="Texture" id=3]
+[ext_resource path="res://Player/StageScene3D/Scenes/SlutwallSexOral.gd" type="Script" id=4]
+[ext_resource path="res://Player/Props/Chain.png" type="Texture" id=5]
+
+[sub_resource type="AnimationNodeAnimation" id=3]
+animation = "CuffedArms-loop"
+
+[sub_resource type="AnimationNodeBlend2" id=4]
+filter_enabled = true
+filters = [ "Doll3D/Skeleton:Arm.L", "Doll3D/Skeleton:Arm.R", "Doll3D/Skeleton:ForeArm.L", "Doll3D/Skeleton:ForeArm.R", "Doll3D/Skeleton:Hand.L", "Doll3D/Skeleton:Hand.R" ]
+
+[sub_resource type="AnimationNodeAnimation" id=93]
+animation = "SlutwallHandjob_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=94]
+animation = "SlutwallLick_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=95]
+animation = "SlutwallOralIdle_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=96]
+animation = "SlutwallOral_1-loop"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=97]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=98]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=99]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=100]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=101]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=102]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachine" id=103]
+states/SlutwallHandjob_1-loop/node = SubResource( 93 )
+states/SlutwallHandjob_1-loop/position = Vector2( 148, 142 )
+states/SlutwallLick_1-loop/node = SubResource( 94 )
+states/SlutwallLick_1-loop/position = Vector2( 658, 142 )
+states/SlutwallOralIdle_1-loop/node = SubResource( 95 )
+states/SlutwallOralIdle_1-loop/position = Vector2( 418, 59 )
+states/SlutwallOral_1-loop/node = SubResource( 96 )
+states/SlutwallOral_1-loop/position = Vector2( 418, 142 )
+transitions = [ "SlutwallOralIdle_1-loop", "SlutwallHandjob_1-loop", SubResource( 97 ), "SlutwallHandjob_1-loop", "SlutwallOralIdle_1-loop", SubResource( 98 ), "SlutwallOral_1-loop", "SlutwallOralIdle_1-loop", SubResource( 99 ), "SlutwallOralIdle_1-loop", "SlutwallOral_1-loop", SubResource( 100 ), "SlutwallOralIdle_1-loop", "SlutwallLick_1-loop", SubResource( 101 ), "SlutwallLick_1-loop", "SlutwallOralIdle_1-loop", SubResource( 102 ) ]
+start_node = "SlutwallOralIdle_1-loop"
+
+[sub_resource type="AnimationNodeBlendTree" id=104]
+graph_offset = Vector2( -199, -9 )
+nodes/Animation/node = SubResource( 3 )
+nodes/Animation/position = Vector2( 140, 280 )
+nodes/CuffsBlend/node = SubResource( 4 )
+nodes/CuffsBlend/position = Vector2( 440, 160 )
+nodes/StateMachine/node = SubResource( 103 )
+nodes/StateMachine/position = Vector2( 180, 100 )
+nodes/output/position = Vector2( 680, 180 )
+node_connections = [ "output", 0, "CuffsBlend", "CuffsBlend", 0, "StateMachine", "CuffsBlend", 1, "Animation" ]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=22]
+
+[sub_resource type="AnimationNodeAnimation" id=106]
+animation = "SlutwallHandjob_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=107]
+animation = "SlutwallLick_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=108]
+animation = "SlutwallOralIdle_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=109]
+animation = "SlutwallOral_2-loop"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=110]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=111]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=112]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=113]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=114]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=115]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachine" id=116]
+states/SlutwallHandjob_2-loop/node = SubResource( 106 )
+states/SlutwallHandjob_2-loop/position = Vector2( 179, 195 )
+states/SlutwallLick_2-loop/node = SubResource( 107 )
+states/SlutwallLick_2-loop/position = Vector2( 669, 195 )
+states/SlutwallOralIdle_2-loop/node = SubResource( 108 )
+states/SlutwallOralIdle_2-loop/position = Vector2( 437, 98 )
+states/SlutwallOral_2-loop/node = SubResource( 109 )
+states/SlutwallOral_2-loop/position = Vector2( 437, 195 )
+transitions = [ "SlutwallOralIdle_2-loop", "SlutwallHandjob_2-loop", SubResource( 110 ), "SlutwallHandjob_2-loop", "SlutwallOralIdle_2-loop", SubResource( 111 ), "SlutwallOralIdle_2-loop", "SlutwallOral_2-loop", SubResource( 112 ), "SlutwallOral_2-loop", "SlutwallOralIdle_2-loop", SubResource( 113 ), "SlutwallOralIdle_2-loop", "SlutwallLick_2-loop", SubResource( 114 ), "SlutwallLick_2-loop", "SlutwallOralIdle_2-loop", SubResource( 115 ) ]
+start_node = "SlutwallOralIdle_2-loop"
+
+[sub_resource type="AnimationNodeBlendTree" id=105]
+graph_offset = Vector2( -286.532, 58.2778 )
+nodes/Animation/node = SubResource( 3 )
+nodes/Animation/position = Vector2( 140, 280 )
+nodes/CuffsBlend/node = SubResource( 4 )
+nodes/CuffsBlend/position = Vector2( 440, 160 )
+nodes/StateMachine/node = SubResource( 116 )
+nodes/StateMachine/position = Vector2( 160, 140 )
+nodes/output/position = Vector2( 680, 180 )
+node_connections = [ "output", 0, "CuffsBlend", "CuffsBlend", 0, "StateMachine", "CuffsBlend", 1, "Animation" ]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=23]
+
+[node name="SlutwallSexOral" instance=ExtResource( 2 )]
+script = ExtResource( 4 )
+
+[node name="Sprite3D" type="Sprite3D" parent="." index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.196641, -1.77462 )
+texture = ExtResource( 3 )
+region_enabled = true
+region_rect = Rect2( 1, 1, 1022, 62 )
+
+[node name="Doll3D" parent="." index="1" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.312554, 0, 0 )
+
+[node name="Doll3D2" parent="." index="2" instance=ExtResource( 1 )]
+transform = Transform( -1, 0, 0, 0, 1, 0, 0, 0, 1, -0.312554, 0, -0.01 )
+
+[node name="AnimationTree" type="AnimationTree" parent="." index="3"]
+tree_root = SubResource( 104 )
+anim_player = NodePath("../Doll3D/DollSkeleton/AnimationPlayer")
+parameters/CuffsBlend/blend_amount = 0
+parameters/StateMachine/playback = SubResource( 22 )
+
+[node name="AnimationTree2" type="AnimationTree" parent="." index="4"]
+tree_root = SubResource( 105 )
+anim_player = NodePath("../Doll3D2/DollSkeleton/AnimationPlayer")
+parameters/CuffsBlend/blend_amount = 0
+parameters/StateMachine/playback = SubResource( 23 )
+
+[node name="Sprite3D2" type="Sprite3D" parent="." index="5"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.272446, -0.197, -1.775 )
+texture = ExtResource( 3 )
+region_enabled = true
+region_rect = Rect2( 1, 1, 1022, 62 )
+
+[node name="Sprite3D3" type="Sprite3D" parent="." index="6"]
+transform = Transform( 0.397342, 0, 0, 0, 1, 0, 0, 0, 1, 0.926414, 2.53777, -0.133934 )
+modulate = Color( 0.270588, 0.270588, 0.270588, 1 )
+texture = ExtResource( 3 )
+region_enabled = true
+region_rect = Rect2( 1, 1, 1022, 62 )
+
+[node name="Sprite3D7" type="Sprite3D" parent="." index="7"]
+transform = Transform( -1.73684e-08, 1, 0, -0.281434, -3.09605e-08, 0, 0, 0, 1, 1.71725, 1.23613, -2.12921 )
+modulate = Color( 0.270588, 0.270588, 0.270588, 1 )
+texture = ExtResource( 3 )
+region_enabled = true
+region_rect = Rect2( 1, 1, 1022, 62 )
+
+[node name="Sprite3D4" type="Sprite3D" parent="." index="8"]
+transform = Transform( -1.73684e-08, 1, 0, -0.85454, -9.40076e-08, 0, 0, 0, 1, -0.204494, 4.36235, 0.848961 )
+modulate = Color( 0.270588, 0.270588, 0.270588, 1 )
+texture = ExtResource( 3 )
+region_enabled = true
+region_rect = Rect2( 1, 1, 1022, 62 )
+
+[node name="Sprite3D5" type="Sprite3D" parent="." index="9"]
+transform = Transform( -0.0750685, -1.20982e-08, 0, 5.47215e-08, -1, 0, 0, 0, 1, -0.0886534, 0.405963, 0.886963 )
+modulate = Color( 0.270588, 0.270588, 0.270588, 1 )
+texture = ExtResource( 3 )
+region_enabled = true
+region_rect = Rect2( 1, 1, 1022, 62 )
+
+[node name="Sprite3D6" type="Sprite3D" parent="." index="10"]
+transform = Transform( 1.73085, 1.00209, 0, -1.00209, 1.73085, 0, 0, 0, 2, -0.437767, 6.07307, 1.12592 )
+texture = ExtResource( 5 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 64, 64 )
+
+[node name="Sprite3D8" type="Sprite3D" parent="." index="11"]
+transform = Transform( -1.72764, 1.00761, 0, -1.00761, -1.72764, 0, 0, 0, 2, -0.31597, 1.77537, 1.12592 )
+texture = ExtResource( 5 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 64, 50 )
+
+[editable path="Doll3D"]
+[editable path="Doll3D/DollSkeleton"]
+[editable path="Doll3D2"]
+[editable path="Doll3D2/DollSkeleton"]

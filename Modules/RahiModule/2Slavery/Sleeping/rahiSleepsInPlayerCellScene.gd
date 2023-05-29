@@ -8,6 +8,7 @@ func _init():
 func _run():
 	if(state == ""):
 		addCharacter("rahi", ["naked"])
+		playAnimation(StageScene.Sleeping, "sleep", {npc="rahi", bodyState={naked=true}, npcBodyState={naked=true}})
 		saynn("Rahi quietly walks into your cell and joins you, laying near. The bed was barely big enough for one person already but you open your arms and pull her closer, practically making her into your fluffy blanket. Rahi snuggles up against your {pc.masc} chest and quietly purrs.")
 
 		saynn("You two say your goodnights to each other and then just lay there, together, simply enjoying the warmth and closeness of each other's bodies.. before drifting off to sleep..")

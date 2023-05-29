@@ -111,7 +111,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "before_birth")
 	if(state == "before_birth"):
-		playAnimation(StageScene.SexStart, "defeated", {pc = "nurse", npc=npcID, npcBodyState={naked=true}})
+		playAnimation(StageScene.GivingBirth, "birth", {pc=npcID, bodyState={naked=true}})
 		if (npcType == "kind"):
 			saynn("You stand by {npc.name} side while {npc.he} listens to the nurse's orders. Then {npc.he} reaches {npc.his} hand to you and smiles nervously. You decide to hold it, to help {npc.him} feel calmer.")
 
@@ -139,6 +139,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "do_birth")
 	if(state == "do_birth"):
+		playAnimation(StageScene.GivingBirth, "idle", {pc=npcID, bodyState={naked=true}})
 		if (bornChildAmount == 1):
 			saynn("{npc.name} gave birth to "+str(bornChildAmount)+" kid!")
 

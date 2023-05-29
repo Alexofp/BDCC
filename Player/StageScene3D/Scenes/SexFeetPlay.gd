@@ -31,7 +31,6 @@ func playAnimation(animID, _args = {}):
 	#if(animID is Array):
 	#	animID = animID[0]
 	
-	print("Playing duo: "+str(animID))
 	var firstDoll = "pc"
 	if(_args.has("pc")):
 		firstDoll = _args["pc"]

@@ -51,7 +51,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "rahi_prepares")
 	if(state == "rahi_prepares"):
-		playAnimation(StageScene.SexStart, "defeated", {pc = "nurse", npc="rahi", npcBodyState={naked=true}})
+		playAnimation(StageScene.GivingBirth, "birth", {pc="rahi", bodyState={naked=true}})
 		addCharacter("rahi", ["naked"])
 		saynn("You and Rahi are led into a private room with a soft and warm environment that already seems to be prepared for her labor. The nurse quickly undresses Rahi and positions her on a special hospital bed.")
 
@@ -69,6 +69,8 @@ func _run():
 
 		addButton("Continue", "See what happens next", "rahi_gives_birth")
 	if(state == "rahi_gives_birth"):
+		playAnimation(StageScene.GivingBirth, "idle", {pc="rahi", bodyState={naked=true}})
+		
 		if (bornChildAmount == 1):
 			saynn("Rahi gave birth to "+str(bornChildAmount)+" kid!")
 
