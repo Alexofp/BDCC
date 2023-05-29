@@ -123,5 +123,6 @@ func _on_UnlockPerkButton_pressed():
 		return
 	
 	GM.pc.getSkillsHolder().addPerk(selectedPerkID)
+	GlobalRegistry.getPerk(selectedPerkID).runOnceWhenLearned()
 	updatePerks()
 	updatePerkText()

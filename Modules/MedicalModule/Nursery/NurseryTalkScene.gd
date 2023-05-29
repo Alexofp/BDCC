@@ -291,7 +291,7 @@ func _react(_action: String, _args):
 			GM.pc.addSkillExperience(Skill.Fertility, Util.mini(90, bornChildAmount * 3)) #Bonus per child up to a limit
 			if(GM.pc.hasPerk(Perk.FertilityMotherOfTheYear)):
 				GM.pc.addEffect(StatusEffect.Invigoration)
-				var paycheck = Util.mini(20, bornChildAmount + 3)
+				var paycheck = Util.mini(20, bornChildAmount + 2)
 				GM.pc.addCredits(paycheck) #Bonus credits for chilbirth
 				GM.ui.hornyMessage.visible = true
 				GM.ui.hornyMessage.showMessageOnScreen("[center][color=#f0dd61]AlphaCorp thanks you for your compliance and hopes to continue our 'fruitful cooperation' in the future \n [b]You recieved: " +str(paycheck)+ " credits![/b][/color][/center]")

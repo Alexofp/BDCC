@@ -95,8 +95,7 @@ func testBody():
 
 func setState(stateID, value):
 	state[stateID] = value
-	if(stateID == "cock" && (value == "condom" || value == "")):
-		helperFertilityPerkShakyLegs()
+	
 	if(temporaryState.has(stateID)):
 		return
 	
@@ -324,8 +323,7 @@ func setPregnancy(progress: float):
 		setBoneOffset("DeformBelly", Vector3(0.33244, 0.96324, 0.0)*progress)
 	else: 
 		setBoneOffset("DeformBelly", Vector3(-0.03244, 0.706324, 0.0)*progress)
-	
-	
+
 func setThighThickness(progress: float):
 	setBoneOffset("DeformThigh.L", Vector3(-0.008168, 0.386037, 0.0)*progress)
 	setBoneOffset("DeformThigh.R", Vector3(-0.008168, 0.386037, 0.0)*progress)
@@ -524,25 +522,11 @@ func _on_RandomLeakTimer_timeout():
 	
 	$RandomLeakTimer.start(RNG.randf_range(waitTime * 0.5, waitTime * 1.5))
 
-
-func helperFertilityPerkShakyLegs(): #lengthy check for when big NPC penis gets hard in scenes with PC having Perk.FertilityShakyLegs
-	if(GlobalRegistry.getCharacter(savedCharacterID) != null):
-#		print("Helper called by: ", savedCharacterID)
-		var tmpchar = GlobalRegistry.getCharacter(savedCharacterID)
-		var _benis = tmpchar.getBodypart(BodypartSlot.Penis)
-		if(savedCharacterID != "pc" && GM.pc.hasPerk(Perk.FertilityShakyLegs) && GM.main.getCurrentScene().isSexSceneWithPC() && _benis != null):
-			if(!GM.pc.hasEffect(StatusEffect.InHeat) && bool(_benis.getLength() >= 20) && !GM.pc.isBlindfolded() && !GM.pc.menstrualCycle.isPregnant()):
-				GM.ui.hornyMessage.visible = true
-				GM.ui.hornyMessage.showMessageOnScreen("[center][b][color=hotpink]Wow that's a big one...[/color][/b] You mind is clouded with the lewd thoughts about getting pregnant by that juicy dick, can't think about anything else \n\n [b][color=hotpink]You are in heat now![/color][/b][/center]")
-				GM.pc.forceIntoHeat()
-
-
-func setCockTemporaryHard():	
+func setCockTemporaryHard():
 	var currentCockState = getFinalState("cock")
 	if(currentCockState in ["caged", "condom"]):
 		return
-		
-	helperFertilityPerkShakyLegs()
+	
 	setTemporaryState("cock", "")
 
 func setCockTemporaryCondom():
@@ -550,7 +534,6 @@ func setCockTemporaryCondom():
 	if(currentCockState in ["caged", "condom"]):
 		return
 	
-	helperFertilityPerkShakyLegs()
 	setTemporaryState("cock", "condom")
 
 func setCockTemporaryCaged():
