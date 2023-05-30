@@ -14,6 +14,7 @@ func getFlags():
 		"FightClubDefeatedFighters": flag(FlagType.Dict),
 		"FightClubFirstArenaIntroduction": flag(FlagType.Bool),
 		"AttemptedAvyFight": flag(FlagType.Bool),
+		"ManagedToWinDruggedAvy": flag(FlagType.Bool),
 	}
 
 func _init():

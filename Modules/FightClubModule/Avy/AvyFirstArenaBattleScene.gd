@@ -69,7 +69,7 @@ func _run():
 
 		saynn("[say=pc]So? Can't this wait?[/say]")
 
-		saynn("[say=kait]No, it can't. Avy is.. she is cheating. I don't know how. But you won't win, no matter what you do. Trust me, I tried.[/say]")
+		saynn("[say=kait]No, it can't. Avy is.. she isn't fighting fair. I don't know.. But you won't win, no matter what you do.[/say]")
 
 		saynn("You glance over Kait's fragile-looking feline body and notice her lilac colors. She catches your judging gazes and frowns.")
 
@@ -336,7 +336,7 @@ func _run():
 		addButton("Leave", "Time to go..", "endthescene")
 	if(state == "avy_uses_drugs"):
 		playAnimation(StageScene.Duo, "stand", {npc="avy", npcAction="defeat"})
-		saynn("Avy grunts as she collapsed onto the hard arena floor, her confident demeanor shattered. Gasps and whispers can be heard echoing around the arena. The crowd seems to be confused about Avy, the supposed grand champion that is now laying in the middle of the arena, seemingly defeated.")
+		saynn("Avy grunts as she collapses onto the hard arena floor, her confident demeanor shattered. Gasps and whispers can be heard echoing around the arena. The crowd seems to be confused about Avy, the supposed grand champion that is now laying in the middle of the arena, seemingly defeated.")
 
 		saynn("As the murmurs spread, you begin to slowly approach Avy.")
 
@@ -365,7 +365,193 @@ func _run():
 
 		addButton("Fight", "Continue fighting", "start_second_fight")
 	if(state == "avy_wins_anyway"):
-		saynn("Meow meow nya")
+		playAnimation(StageScene.Duo, "stand", {npc="avy", npcAction="defeat"})
+		saynn("Impossible, huh. It seems that the cat was wrong.")
+
+		saynn("Avy The Unbeatable lays on the arena's floor, battered and beaten. The crowd is stunned, struggling to process it all.")
+
+		saynn("[say=pc]Your drugs won't help you.[/say]")
+
+		saynn("[say=announcer]Wow! Will Avy get up again or do we have a winner? So tense![/say]")
+
+		saynn("As you carefully approach Avy, a glimmer of desperation flashes in her eyes. You press your knee into her back, pinning her in place while your hands try to wrench hers behind her. Quiet growling vibrates the air. You're almost done.. But then you realize that one of her clenched fists holds another syringe!")
+
+		saynn("[say=avy]Fuck you.[/say]")
+
+		saynn("With a swift motion, she injects it into her bruised body. A surge of renewed strength courses through her veins as she easily throws you off herself and springs up to her feet.")
+
+		addButton("Continue", "See what happens next", "avy_wins_and_pins")
+	if(state == "avy_wins_and_pins"):
+		playAnimation(StageScene.SexFeetPlay, "pin", {pc="avy", npc="pc"})
+		saynn("Before you know it, Avy kicks you down and stomps on your chest, forcing all the air out of you. You gasp as she presses her feet hard into you.")
+
+		saynn("[say=announcer]Unbelievable! Avy avoids the loss once again. With a remarkable recovery, she has completely turned the tables on our challenger![/say]")
+
+		saynn("The crowd cheers. Avy stops growling and puts on her mean eyes before leaning down to you to tell you something that only you will hear.")
+
+		saynn("[say=avy]Did you really think you could beat me? You know how many tried? Hah. All of you will always be below me, pathetic.. little.. slaves..[/say]")
+
+		saynn("The crowd starts to yell various things that Avy should do to you. Listening to that.. makes her smile.. and her eyes shine.")
+
+		if (getFlag("FightClubModule.ManagedToWinDruggedAvy")):
+			saynn("[say=avy]You think you had me? Not even close. But. You know what. I'm feeling kind today. So I will give you a choice.[/say]")
+
+		else:
+			saynn("[say=avy]You know what. I'm feeling kind today. I will give you a choice.[/say]")
+
+		saynn("Avy tilts her head to the side slightly, the corners of her mouth get turned down again, making her look mean. All the while the audience just begs the foxy to breed you.")
+
+		saynn("[say=avy]I can break you. Fast and easy. A few bones there, a few bones there.. Maybe shatter your jaw.. Break the knees.. Just to show what happens when someone tries to cross me.[/say]")
+
+		saynn("Each time you try to move or escape, Avy just puts more strain on your ribs.")
+
+		saynn("[say=avy]Or we can do what the people want and turn you into some real fuckmeat. I promise.. not to be too rough on your ass.. sweetie.[/say]")
+
+		saynn("That's one hell of a kind choice.. Avy still has that drug coursing through her veins which is what makes her unbeatable.")
+
+		addButton("First option", "(Violence) You're not gonna let her fuck you..", "get_broken")
+		addButton("Second option", "(Rough sex) You really don't wanna get your bones broken..", "get_fukd")
+		addButton("Stay silent", "(Skip) You really don't want either", "get_knockedout")
+	if(state == "get_knockedout"):
+		saynn("You're not gonna play her games so you just stay completely silent. At some point the crowd begins to boo you two, clearly wishing for some action. The foxy rolls her eyes, quickly getting impatient.")
+
+		saynn("[say=avy]Huh. Too shy to pick, huh? Fine. Have it your way.[/say]")
+
+		saynn("The foxy just knocks you out with one devastating punch, square in the face.")
+
+		saynn("And then there was darkness..")
+
+		addButton("Continue", "Ouch", "got_knocked_out")
+	if(state == "get_broken"):
+		saynn("[say=pc]Fuck you..[/say]")
+
+		saynn("Avy nods understandable.. And then raises her foot before delivering a series of ruthless stomps, each landing with bone-crushing force. Sounds of your [b]ribs snapping[/b] silenced every other noise in the arena.. but then came your cry of agony, even more ear-piercing..")
+
+		saynn("The broken sharp pieces of your ribs shift inside you, some turning at uncomfortable angles and entering your lung, causing you to start coughing blood.. already.. Seeing that makes Avy stop.")
+
+		saynn("[say=avy]Tshh-h.. We only just started.. you can't die on me already, little thing..[/say]")
+
+		saynn("The crown, torn between morbid fascination and a fast-growing sense of unease, kept watching. Some cover their eyes, unable to witness the brutal display.. while others just can't tear their gaze away, captivated by the raw display of power.")
+
+		saynn("You are in agony, breathing heavily, your eyes unable to focus on anything. Avy slowly crouches before you and catches one of your arms that you try to protect yourself with. She easily puts enough strength to yank it out of its socket and then smashes it against the floor, making something inside [b]crack[/b].. Ow.. Another wave of sharp sensations floods your mind.. making you yell out something incoherent.")
+
+		saynn("[say=avy]So loud..[/say]")
+
+		saynn("Avy seems to take pleasure in your suffering, relishing every whimper and cry that escapes from your tortured lips. She waits for a good moment when your mouth is opened and sinks her sharp claws into your tongue, catching it and leaving deep bleeding wounds.")
+
+		saynn("[say=avy]But if I rip it out.. You wouldn't be able to tell everyone about me.. Sad..[/say]")
+
+		saynn("Avy retracts her claws out of your tongue, letting you taste your own blood spilling inside your mouth. Then she slowly gets up and starts looking at your unharmed limbs.")
+
+		saynn("[say=avy]Leg or arm, people?[/say]")
+
+		saynn("Some sick people yell for her to break both. And some are actually sick, barely holding their breakfast. Avy looks down at you while you are writhing in agony, your broken arm shivering and slowly becoming blue.")
+
+		saynn("[say=avy]I think they want the leg.. And since the arm was a closed fracture..[/say]")
+
+		saynn("Avy suddenly raises her leg and stomps on yours with enough force to [b]break the shin bone[/b] in half and make both parts stick out of the skin. Ow.. This was probably the worst impact yet.. Avy laughs while you are desperately wriggling around on the floor, your voice becoming raspy from screaming so much..")
+
+		saynn("Avy revels in the sadistic pleasure that surges through her as she does this. The sickening cracks of breaking bones bring her joy.")
+
+		saynn("[say=avy]Can't walk anymore, huh? Shame. Look at me, I still can.[/say]")
+
+		saynn("The foxy slowly circles you, her tail swishing behind her. Her eyes still shine brightly.")
+
+		saynn("But despite your broken body.. a flicker of determination still burned.. The pain and despair fueling your rage.. You use the rest of your strength and, with a primal roar, you lash out at her, catching Avy off guard and knocking her back momentarily.")
+
+		saynn("The crowd erupts into a mix of gasps and startled cheers, shocked by your sudden burst of resistance. It was a small moment, a glimpse of hope against the overwhelming odds. But Avy, fueled by her sadistic nature, is only chuckling before rising to her feet.")
+
+		saynn("[say=avy]Oh yeah. I love a good fight. Let's see how much more you have in you.[/say]")
+
+		saynn("She resumes her assault, raining down blow after blow upon your battered form. With calculated cruelty, she focuses on the rest of your limbs, subjecting each one to similar fates. The thuds of fractured bones echo through the arena, creating a horrifying symphony of pain. At some point you start gagging on your blood.. not a good sign..")
+
+		saynn("[say=avy]Hah. I think that was it. I broke {pc.him}. The bitch is probably dying to find out what happens next.[/say]")
+
+		saynn("Everything.. literally everything.. hurts.. Even just breathing is an agonizing experience.. You've lost so much blood that the vision becomes blurry.. unfocussed.. like you're about to pass out.. even the adrenaline pumping through your veins is not enough to keep you awake anymore.. Avy grabs your chin and forces you to look at her.")
+
+		saynn("[say=avy]No-no-no.. Stay with me, whore. I want this to be a good lesson for you. For everyone. To see what happens when they try to do something as stupid as fighting me..[/say]")
+
+		saynn("And with that, she grabs your broken body and effortlessly lifts it high above herself. The crowd's gasps of horror mix with excited cheers. Blood leaks out of your open wounds and Avy is sure to stick her tongue out and catch some of it.")
+
+		saynn("[say=avy]Good night. I won't miss you.[/say]")
+
+		saynn("In one swift, merciless motion, Avy brings you crashing down onto her knee that she raises just in time to shove into your back.. Your spine surely didn't like that.. The sound of impact reverberates through the arena.. A collective wince swept through the crowd, followed by.. silence..")
+
+		saynn("Time seems to slow down.. dragging that moment for what feels like eternity.. And then the rest of it just flashes, you smacking against the floor for the last time before passing out.. Finally.. no more pain..")
+
+		saynn("Only darkness..")
+
+		addButton("Continue", "See if you're alive or not", "got_broken_hard")
+	if(state == "get_fukd"):
+		playAnimation(StageScene.SexFullNelson, "tease", {pc="avy", npc="pc", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		saynn("[say=pc]You won't turn me into a fuckmeat..[/say]")
+
+		saynn("Avy tilts her head slightly and puts on a mean smile. Her strong paws suddenly reach out for her uniform and pull her shorts down, exposing the canine member. It's tip is already peeking out of the sheath as Avy gets horny just from the thoughts. The crowd loves the display though and tells the foxy to do it already.")
+
+		saynn("Without a word, Avy leans down to you and effortlessly picks you up, their motions calculated. Your pulse quickens as Avy's arms grabs your legs under your knees and raises them high in a V shape, exposing all your lewd parts to the public. She holds you in a very secure grip with her elbows bent and fingers interlocked behind your neck, forcing you to stare at the crowd while you are completely helpless.")
+
+		saynn("[say=avy]Watch me, slut.[/say]")
+
+		saynn("A mixture of fear and discomfort courses through your veins as you realize that she holds you in a 'full nelson' position. Any attempts to resist are met with her easily overpowering you and forcibly spreading your legs more.")
+
+		saynn("[say=pc]W-wait..[/say]")
+
+		saynn("You can feel.. heat.. radiating from Avy's crotch, her cock has fully left the sheath and is now twitching slightly, leaking precum onto the floor of the arena.")
+
+		if (GM.pc.hasReachableVagina()):
+			addButton("Continue", "See what happens next", "fukd_pussy_start")
+		else:
+			addButton("Continue", "See what happens next", "fukd_anus_start")
+	if(state == "fukd_pussy_start"):
+		playAnimation(StageScene.SexFullNelson, "sex", {pc="avy", npc="pc", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		saynn("Both of Avy's hands are busy so she just abuses her raw strength, aligning your whole frame with her hard cock before suddenly thrusting inside, forcibly penetrating your dry {pc.pussyStretch} slit and stretching wide before sliding deeper into your depths. Your body tenses up in response to such a powerful display of dominance, a mixture of pain.. and pleasure.. washing over you. The crowd cheers loudly, finally seeing some good action.")
+
+		saynn("[say=pc]Ah-h.. H-hey..[/say]")
+
+		saynn("[say=avy]Moan, whore.[/say]")
+
+		saynn("Avy's grip on your legs remains unyielding, keeping you in this extremely vulnerable position as she rams her cock deeper, relentlessly pounding your cunt, her tip already smashing your cervix and leaving it with her precum.")
+
+		if (GM.pc.isWearningChastityCage()):
+			saynn("You may deny the pleasure all you want but your body knows better.. Your locked away cock starts inflating with blood.. but the metal keeps it nicely contained in a small package. The pressure inside is slowly rising though..")
+
+		elif (GM.pc.hasReachablePenis()):
+			saynn("You may deny the pleasure all you want but your body knows better.. Your {pc.penis} starts inflating with blood and leaking pre as the shaft bounces up and down from each Avy's thrust.")
+
+		saynn("Muffled cries of pleasure begin to escape from your lips.. it seems Avy is hitting one of your pleasure spots. Her rhythm is steady but primal, little commanding growls can be heard from her..")
+
+		saynn("[say=avy]Louder, let the whole arena hear how big of a slut you are.[/say]")
+
+		saynn("You try to keep resisting but your body keeps betraying you. Your bruised stretched folds slowly become moist and needy.. Each forceful thrust sends waves of ecstasy crashing through you with pain only adding to that mix of sensations. You keep your mouth shut but little noises keep escaping when Avy's cock hits.. that.. spot..")
+
+		saynn("Fuck, you're getting close..")
+
+		addButton("Continue", "See what happens next", "fukd_pussy_faster")
+	if(state == "fukd_pussy_faster"):
+		playAnimation(StageScene.SexFullNelson, "fast", {pc="avy", npc="pc", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		saynn("Your wet bruised inner walls are kneading that intruding length and Avy feels it. She takes a better position and fastens her pace, increasing the onslaught on your poor stretched pussy.")
+
+		saynn("[say=avy]Cum, bitch.[/say]")
+
+		saynn("You make your best attempt to not let it happen.. but focusing on it.. only made it worse. Loud moans suddenly begin escaping from you. Your whole body shivering before the orgasm starts crashing down over you, waves after waves of weird but pleasurable sensations make your muscles tense up and your pussy squirt all over the arena floor, making the crowd happy. But no matter how hard you are trying to squirm, Avy always has you in a tight grip with her throbbing cock still pounding you hard.")
+
+		if (GM.pc.isWearningChastityCage()):
+			saynn("Your own cock shooting small strings of {pc.cum} through the little hole in the chastity cage which looks.. incredibly cute.")
+
+		elif (GM.pc.hasReachablePenis()):
+			saynn("Your own cock shooting strings of {pc.cum} while Avy is destroying your g-spot spot so much.")
+
+		saynn("You begin to feel the base of Avy's member inflating.. a fat meaty knot appearing.. so big that she can't just slip it inside. But who is gonna stop her from trying..")
+
+		saynn("[say=pc]Ah.. no-.. wai-..[/say]")
+
+		saynn("[say=avy]Shut up and take it.[/say]")
+
+		saynn("More little growls escape from Avy while she uses her full strength, raising you up slightly before forcibly bringing you down onto her dick, the knot slaps against your abused cunt and slowly stretches your petals even wider.")
+
+		saynn("Inch by inch, her knot spreads the folds of your slit more.. until suddenly slipping inside..")
+
+		saynn("Fuck. Full length of Avy's dick is inside.. but she doesn't stop.. instead she yanks it out again before forcing it back inside, knot-fucking your pussy while its loose enough. Almost instantly, you cum again, your whole body trying to struggle but yet again, the foxy overpowers you and makes you take her knot.. again and again.. each thrust causing more wear and tear to your sensitive flesh.")
 
 
 func _react(_action: String, _args):
@@ -425,6 +611,40 @@ func _react(_action: String, _args):
 		runScene("FightScene", ["avyArena", "arenafight"], "second_arenafight")
 		return
 
+	if(_action == "get_broken"):
+		processTime(30*60)
+		GM.pc.addPain(1000)
+		GM.pc.doWound("avy")
+		GM.pc.doWound("avy")
+		GM.pc.doWound("avy")
+
+	if(_action == "get_fukd"):
+		processTime(5*60)
+
+	if(_action == "got_knocked_out"):
+		runScene("CHANGEME")
+		endScene()
+		return
+
+	if(_action == "got_broken_hard"):
+		runScene("CHANGEME")
+		endScene()
+		return
+
+	if(_action == "fukd_pussy_start"):
+		processTime(10*60)
+		GM.pc.doPainfullyStretchHole(BodypartSlot.Vagina, "avy")
+
+	if(_action == "fukd_anus_start"):
+		processTime(10*60)
+		GM.pc.doPainfullyStretchHole(BodypartSlot.Anus, "avy")
+
+	if(_action == "fukd_pussy_faster"):
+		processTime(3*60)
+		GM.pc.doPainfullyStretchHole(BodypartSlot.Vagina, "avy")
+		GM.pc.gotVaginaFuckedBy("avy")
+		GM.pc.orgasmFrom("avy")
+
 	setState(_action)
 
 func _react_scene_end(_tag, _result):
@@ -445,7 +665,9 @@ func _react_scene_end(_tag, _result):
 		
 		if(battlestate == "win"):
 			setState("avy_wins_anyway")
+			setFlag("FightClubModule.ManagedToWinDruggedAvy", true)
 			addExperienceToPlayer(150)
 		else:
-			setState("avy_wins_second")
+			setFlag("FightClubModule.ManagedToWinDruggedAvy", false)
+			setState("avy_wins_and_pins")
 			addExperienceToPlayer(100)
