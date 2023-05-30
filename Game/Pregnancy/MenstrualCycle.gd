@@ -54,15 +54,24 @@ func getCurrentStage():
 		return CycleStage.Ovulation
 	return CycleStage.LutealPhase
 
+func isEligibleForProlongedPregnancy() -> bool:
+	if(!getCharacter().hasPerk(Perk.FertilityBetterOvulationV3)):
+		return false
+
+	for egg in impregnatedEggCells: #to prevent perpetual pregnancy. If any egg reaches 2.5 progress
+		if(egg.getProgress() >= 2.5): # no further ovulations allowed
+			return false
+	return true
+
 func isInHeat():
-	return getCurrentStage() == CycleStage.Ovulation && !isPregnant() && hasAnyWomb()
+	return getCurrentStage() == CycleStage.Ovulation && hasAnyWomb() && (!isPregnant() || isEligibleForProlongedPregnancy())
 
 func forceIntoHeat():
 	newCycle()
 	cycleProgress = 0.36
 
 func shouldOvulate():
-	if(!ovulatedThisCycle && cycleProgress >= willOvulateAt && !isPregnant()):
+	if(!ovulatedThisCycle && cycleProgress >= willOvulateAt && (!isPregnant() || isEligibleForProlongedPregnancy())):
 		return true
 	return false
 
@@ -78,6 +87,7 @@ func initCycle():
 	cycleProgress = RNG.randf_range(0.0, 1.0)
 	
 func newCycle():
+#	print(getCharacter().getName(), " Entered new cycle" )
 	willOvulateAt = RNG.randf_range(0.3, 0.6)
 	ovulatedThisCycle = false
 	
@@ -91,7 +101,8 @@ func getCycleLength() -> int:
 
 func processTime(seconds):
 	if(isPregnant()):
-		cycleProgress = 1.0
+		if(!getCharacter().hasPerk(Perk.FertilityBetterOvulationV3)):
+			cycleProgress = 1.0
 		
 		if(!noticedVisiblyPregnant && isVisiblyPregnant()):
 			noticedVisiblyPregnant = true
@@ -100,9 +111,10 @@ func processTime(seconds):
 		if(!noticedHeavyIntoPregnancy && getPregnancyProgress() > 0.66):
 			noticedHeavyIntoPregnancy = true
 			emit_signal("heavyIntoPregnancy")
-	elif(!hasAnyWomb()):
+
+	if(!hasAnyWomb()):
 		cycleProgress = 0.0	
-	else:
+	elif(!isPregnant() || getCharacter().hasPerk(Perk.FertilityBetterOvulationV3)):
 		var add = float(seconds)/float(getCycleLength())
 		
 		cycleProgress += add
@@ -113,8 +125,14 @@ func processTime(seconds):
 		if(shouldOvulate()):
 			ovulate()
 	
+	var readyFetusAmount: = 0
 	for egg in impregnatedEggCells:
 		egg.processTime(seconds)
+		if(egg.fetusIsReadyForBirth()):
+			readyFetusAmount += 1
+	
+	if(readyFetusAmount == impregnatedEggCells.size() && impregnatedEggCells.size() > 0):
+		onAllFetusReadyForBirth()
 	
 	for orificeType in eggCells:
 		for egg in eggCells[orificeType]:
@@ -195,18 +213,26 @@ func getPregnancyProgress() -> float:
 	#	print("PREGNANCY: "+str(maxProgress))
 	return maxProgress
 
-func isReadyToGiveBirth():
-	return getPregnancyProgress() >= 1.0
+func isReadyToGiveBirth() -> bool:
+	var readyFetusAmount: = 0
+	for egg in impregnatedEggCells:
+		if(egg.fetusIsReadyForBirth()):
+			readyFetusAmount += 1
+			
+	if(impregnatedEggCells.size() > 0):
+		return readyFetusAmount == impregnatedEggCells.size()
+	else:
+		return false
 
 func getTimeUntilReadyForBirth() -> int:
 	if(impregnatedEggCells.size() == 0):
 		return 0
-	var minTime = impregnatedEggCells[0].getTimeUntilReadyForBirth()
+	var maxTime = impregnatedEggCells[0].getTimeUntilReadyForBirth()
 	for egg in impregnatedEggCells:
-		var newMinTime = egg.getTimeUntilReadyForBirth()
-		if(newMinTime < minTime):
-			newMinTime = minTime
-	return minTime
+		var newMaxTime = egg.getTimeUntilReadyForBirth()
+		if(newMaxTime > maxTime):
+			maxTime = newMaxTime
+	return maxTime
 
 func isVisiblyPregnant():
 	if(getPregnancyProgress() >= 0.20):
@@ -222,7 +248,6 @@ func isVisiblyPregnantFromPlayer():
 func createEggCell():
 	var egg = EggCell.new()
 	egg.cycle = weakref(self)
-	egg.connect("readyForBirth", self, "onEggCellReadyForBirth")
 	return egg
 	
 func saveData():
@@ -281,8 +306,7 @@ func getRoughChanceOfBecomingPregnant() -> float:
 	roughChance = clamp(roughChance, 0.02, 0.95)
 	return roughChance * 100.0
 
-func onEggCellReadyForBirth(_egg):
-	#print("EGG READY TO BIRTH")
+func onAllFetusReadyForBirth():
 	emit_signal("readyToGiveBirth")
 	if(!noticedReadyToGiveBirth):
 		noticedReadyToGiveBirth = true
