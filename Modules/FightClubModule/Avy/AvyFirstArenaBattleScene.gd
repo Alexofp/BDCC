@@ -12,7 +12,7 @@ func _run():
 
 			saynn("[say=avy]Oh, you're back for more~? Ready, fuckmeat? Or whoever you are.[/say]")
 
-			addButton("Sure", "Let's prove her how wrong she is", "agree_fight")
+			addButton("Sure", "Let's prove her how wrong she is", "fight_intro")
 			addButton("No", "You changed your mind", "endthescene")
 		else:
 			saynn("Avy holds the notes where she tracks the list of the arena champions.")
@@ -43,7 +43,7 @@ func _run():
 
 			saynn("You do notice her shorts bulging where her crotch is. It seems losing would mean you will be fucked in more ways than one.")
 
-			addButton("Sure", "Let's prove her how wrong she is", "fight_intro")
+			addButton("Sure", "Let's prove her how wrong she is", "agree_fight")
 			addButton("No", "You changed your mind", "endthescene")
 	if(state == "agree_fight"):
 		saynn("[say=pc]I wonder what will break first, your ego or your body. Yes, I'm ready.[/say]")
@@ -504,7 +504,7 @@ func _run():
 			addButton("Continue", "See what happens next", "fukd_anus_start")
 	if(state == "fukd_pussy_start"):
 		playAnimation(StageScene.SexFullNelson, "sex", {pc="avy", npc="pc", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
-		saynn("Both of Avy's hands are busy so she just abuses her raw strength, aligning your whole frame with her hard cock before suddenly thrusting inside, forcibly penetrating your dry {pc.pussyStretch} slit and stretching wide before sliding deeper into your depths. Your body tenses up in response to such a powerful display of dominance, a mixture of pain.. and pleasure.. washing over you. The crowd cheers loudly, finally seeing some good action.")
+		saynn("Both of Avy's hands are busy so she just abuses her raw strength, aligning your whole frame with her hard cock before suddenly thrusting inside, forcibly penetrating your dry {pc.pussyStretch} slit and stretching it wide before sliding deeper into your depths. Your body tenses up in response to such a powerful display of dominance, a mixture of pain.. and pleasure.. washing over you. The crowd cheers loudly, finally seeing some good action.")
 
 		saynn("[say=pc]Ah-h.. H-hey..[/say]")
 
@@ -512,7 +512,7 @@ func _run():
 
 		saynn("Avy's grip on your legs remains unyielding, keeping you in this extremely vulnerable position as she rams her cock deeper, relentlessly pounding your cunt, her tip already smashing your cervix and leaving it with her precum.")
 
-		if (GM.pc.isWearningChastityCage()):
+		if (GM.pc.isWearingChastityCage()):
 			saynn("You may deny the pleasure all you want but your body knows better.. Your locked away cock starts inflating with blood.. but the metal keeps it nicely contained in a small package. The pressure inside is slowly rising though..")
 
 		elif (GM.pc.hasReachablePenis()):
@@ -535,7 +535,7 @@ func _run():
 
 		saynn("You make your best attempt to not let it happen.. but focusing on it.. only made it worse. Loud moans suddenly begin escaping from you. Your whole body shivering before the orgasm starts crashing down over you, waves after waves of weird but pleasurable sensations make your muscles tense up and your pussy squirt all over the arena floor, making the crowd happy. But no matter how hard you are trying to squirm, Avy always has you in a tight grip with her throbbing cock still pounding you hard.")
 
-		if (GM.pc.isWearningChastityCage()):
+		if (GM.pc.isWearingChastityCage()):
 			saynn("Your own cock shooting small strings of {pc.cum} through the little hole in the chastity cage which looks.. incredibly cute.")
 
 		elif (GM.pc.hasReachablePenis()):
@@ -553,17 +553,135 @@ func _run():
 
 		saynn("Fuck. Full length of Avy's dick is inside.. but she doesn't stop.. instead she yanks it out again before forcing it back inside, knot-fucking your pussy while its loose enough. Almost instantly, you cum again, your whole body trying to struggle but yet again, the foxy overpowers you and makes you take her knot.. again and again.. each thrust causing more wear and tear to your sensitive flesh.")
 
+		saynn("[say=avy]You're just a fucktoy.[/say]")
+
+		saynn("It's too much, your eyes begin to roll up, your tongue out and drooling, making you look fucked silly. Uncontrollable slutty moans escape from you while Avy is panting warmly into your neck, her cock inflates with even more blood and throbs inside you..")
+
+		addButton("Continue", "See what happens next", "fukd_pussy_cuminside")
+	if(state == "fukd_pussy_cuminside"):
+		playAnimation(StageScene.SexFullNelson, "inside", {pc="avy", npc="pc", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		saynn("Your inner walls clench around Avy's knotted cock so much that she can't hold back anymore. She establishes complete dominance over you by shoving the knot inside you for the last time and finally letting the orgasm take over, the pointy tip breaking into your womb before releasing Avy's seed directly into it.")
+
+		saynn("The power of Avy's climax echoes through you, her tight grip makes your grip on her shaft even harder. Screams of ecstasy can be heard from you while Avy just casually grunts, emptying her balls inside you and making your belly receive a cute bump.")
+
+		saynn("[say=avy]Stupid fucking bitch.. That's what you get for coming here.[/say]")
+
+		if (GM.pc.isWearingChastityCage()):
+			saynn("Your g-spot is so destroyed by this point that your caged up dick just slowly drips {pc.cum}, almost non-stop.")
+
+		elif (GM.pc.hasReachablePenis()):
+			saynn("Your g-spot is so destroyed by this point that your {pc.penis} just slowly drips {pc.cum}, almost non-stop.")
+
+		saynn("The audience cheers loudly, seeing Avy's full throbbing length inside you, knot and all. But for your mind it all becomes a blur at this point, that dick has seriously messed you up, physically and mentally..")
+
+		saynn("[say=pc]..ah-h..[/say]")
+
+		saynn("[say=avy]Think twice before coming back.[/say]")
+
+		saynn("The last thing you remember after Avy forcefully yanking her knot out of you is how the floor of the arena begins to quickly approach you..")
+
+		saynn("Something inside you cracked.. Was it your soul? Or your bones?")
+
+		saynn("And then.. just darkness.. Who cares.")
+
+		addButton("Continue", "Ouch", "got_fuckd_out")
+	if(state == "fukd_anus_start"):
+		playAnimation(StageScene.SexFullNelson, "sex", {pc="avy", npc="pc", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		saynn("Both of Avy's hands are busy so she just abuses her raw strength, aligning your whole frame with her hard cock before suddenly thrusting inside, forcibly penetrating your dry {pc.anusStretch} anal ring and stretching it wide before sliding deeper into your depths. Your body tenses up in response to such a powerful display of dominance, a mixture of pain.. and pleasure.. washing over you. The crowd cheers loudly, finally seeing some good action.")
+
+		saynn("[say=pc]Ah-h.. H-hey..[/say]")
+
+		saynn("[say=avy]Moan, whore.[/say]")
+
+		saynn("Avy's grip on your legs remains unyielding, keeping you in this extremely vulnerable position as she rams her cock deeper, relentlessly pounding your ass, her tip already reaching extremely far and lubing the inner walls up with her precum. But that's not enough to soften the pain..")
+
+		if (GM.pc.isWearingChastityCage()):
+			saynn("You may deny the pleasure all you want but your body knows better.. Your locked away cock starts inflating with blood.. but the metal keeps it nicely contained in a small package. The pressure inside is slowly rising though, the more your prostate gets massaged..")
+
+		elif (GM.pc.hasReachablePenis()):
+			saynn("You may deny the pleasure all you want but your body knows better.. Your {pc.penis} starts inflating with blood and leaking pre as the shaft bounces up and down from each Avy's thrust, she massages your prostate so well..")
+
+		saynn("Muffled cries of pleasure begin to escape from your lips.. it seems Avy is hitting one of your pleasure spots. Her rhythm is steady but primal, little commanding growls can be heard from her..")
+
+		saynn("[say=avy]Louder, let the whole arena hear how big of a slut you are.[/say]")
+
+		saynn("You try to keep resisting but your body keeps betraying you. Your bruised stretched tailhole slowly becomes slick and needy.. Each forceful thrust sends waves of ecstasy crashing through you with pain only adding to that mix of sensations. You keep your mouth shut but little noises keep escaping when Avy's cock hits.. that.. spot..")
+
+		saynn("Fuck, you're getting close..")
+
+		addButton("Continue", "See what happens next", "fukd_anus_faster")
+	if(state == "fukd_anus_faster"):
+		playAnimation(StageScene.SexFullNelson, "fast", {pc="avy", npc="pc", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		saynn("Your wet bruised inner walls are kneading that intruding length and Avy feels it. She takes a better position and fastens her pace, increasing the onslaught on your poor stretched anal ring.")
+
+		saynn("[say=avy]Cum, bitch.[/say]")
+
+		saynn("You make your best attempt to not let it happen.. but focusing on it.. only made it worse. Loud moans suddenly begin escaping from you. Your whole body shivering before the orgasm starts crashing down over you, waves after waves of weird but pleasurable sensations make your muscles tense up and your star visible clench, making the crowd happy. But no matter how hard you are trying to squirm, Avy always has you in a tight grip with her throbbing cock still pounding you hard.")
+
+		if (GM.pc.isWearingChastityCage()):
+			saynn("Your own cock shooting small strings of {pc.cum} through the little hole in the chastity cage which looks.. incredibly cute.")
+
+		elif (GM.pc.hasReachablePenis()):
+			saynn("Your own cock shooting strings of {pc.cum} while Avy is destroying your p-spot spot so much.")
+
+		saynn("You begin to feel the base of Avy's member inflating.. a fat meaty knot appearing.. so big that she can't just slip it inside. But who is gonna stop her from trying..")
+
+		saynn("[say=pc]Ah.. no-.. wai-..[/say]")
+
+		saynn("[say=avy]Shut up and take it.[/say]")
+
+		saynn("More little growls escape from Avy while she uses her full strength, raising you up slightly before forcibly bringing you down onto her dick, the knot slaps against your abused ass and slowly stretches the hole even wider.")
+
+		saynn("Inch by inch, her knot spreads your tailhole more.. until suddenly slipping inside..")
+
+		saynn("Fuck. Full length of Avy's dick is inside.. but she doesn't stop.. instead she yanks it out again before forcing it back inside, knot-fucking your anus while its loose enough. Almost instantly, you cum again, your whole body trying to struggle but yet again, the foxy overpowers you and makes you take her knot.. again and again.. each thrust causing more wear and tear to your sensitive flesh.")
+
+		saynn("[say=avy]You're just a fucktoy.[/say]")
+
+		saynn("It's too much, your eyes begin to roll up, your tongue out and drooling, making you look fucked silly. Uncontrollable slutty moans escape from you while Avy is panting warmly into your neck, her cock inflates with even more blood and throbs inside you..")
+
+		addButton("Continue", "See what happens next", "fukd_anus_cuminside")
+	if(state == "fukd_anus_cuminside"):
+		playAnimation(StageScene.SexFullNelson, "inside", {pc="avy", npc="pc", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		saynn("Your inner walls clench around Avy's knotted cock so much that she can't hold back anymore. She establishes complete dominance over you by shoving the knot inside you for the last time and finally letting the orgasm take over, the pointy tip reaching deep inside you before releasing Avy's seed, waves upon waves of it..")
+
+		saynn("The power of Avy's climax echoes through you, her tight grip makes your grip on her shaft even harder. Screams of ecstasy can be heard from you while Avy just casually grunts, emptying her balls inside you and making your belly receive a cute bump.")
+
+		saynn("[say=avy]Stupid fucking bitch.. That's what you get for coming here.[/say]")
+
+		if (GM.pc.isWearingChastityCage()):
+			saynn("Your p-spot is so destroyed by this point that your caged up dick just slowly drips {pc.cum}, almost non-stop.")
+
+		elif (GM.pc.hasReachablePenis()):
+			saynn("Your p-spot is so destroyed by this point that your {pc.penis} just slowly drips {pc.cum}, almost non-stop.")
+
+		saynn("The audience cheers loudly, seeing Avy's full throbbing length inside you, knot and all. But for your mind it all becomes a blur at this point, that dick has seriously messed you up, physically and mentally..")
+
+		saynn("[say=pc]..ah-h..[/say]")
+
+		saynn("[say=avy]Think twice before coming back.[/say]")
+
+		saynn("The last thing you remember after Avy forcefully yanking her knot out of you is how the floor of the arena begins to quickly approach you..")
+
+		saynn("Something inside you cracked.. Was it your soul? Or your bones?")
+
+		saynn("And then.. just darkness.. Who cares.")
+
+		addButton("Continue", "Ouch", "got_fuckd_out")
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
 		endScene()
 		return
 
-	if(_action == "fight_intro"):
-		processTime(60)
+	if(_action == "agree_fight"):
+		setFlag("FightClubModule.AttemptedAvyFight", true)
 
 	if(_action == "sudden_kait"):
 		processTime(2*60)
+
+	if(_action == "fight_intro"):
+		processTime(60)
 
 	if(_action == "start_first_avy_fight"):
 		runScene("FightScene", ["avy", "arenafight"], "first_arenafight")
@@ -622,12 +740,14 @@ func _react(_action: String, _args):
 		processTime(5*60)
 
 	if(_action == "got_knocked_out"):
-		runScene("CHANGEME")
+		setFlag("FightClubModule.GotKnockedOutByAvy", true)
+		runScene("WakingUpAfterFirstAvyBattleScene")
 		endScene()
 		return
 
 	if(_action == "got_broken_hard"):
-		runScene("CHANGEME")
+		setFlag("FightClubModule.GotDestroyedByAvy", true)
+		runScene("WakingUpAfterFirstAvyBattleScene")
 		endScene()
 		return
 
@@ -644,6 +764,32 @@ func _react(_action: String, _args):
 		GM.pc.doPainfullyStretchHole(BodypartSlot.Vagina, "avy")
 		GM.pc.gotVaginaFuckedBy("avy")
 		GM.pc.orgasmFrom("avy")
+
+	if(_action == "fukd_pussy_cuminside"):
+		processTime(3*60)
+		GM.pc.doPainfullyStretchHole(BodypartSlot.Vagina, "avy")
+		GM.pc.gotVaginaFuckedBy("avy")
+		GM.pc.orgasmFrom("avy")
+		GM.pc.cummedInVaginaBy("avy")
+
+	if(_action == "got_fuckd_out"):
+		setFlag("FightClubModule.GotFuckedByAvy", true)
+		runScene("WakingUpAfterFirstAvyBattleScene")
+		endScene()
+		return
+
+	if(_action == "fukd_anus_faster"):
+		processTime(3*60)
+		GM.pc.doPainfullyStretchHole(BodypartSlot.Anus, "avy")
+		GM.pc.gotVaginaAnusBy("avy")
+		GM.pc.orgasmFrom("avy")
+
+	if(_action == "fukd_anus_cuminside"):
+		processTime(3*60)
+		GM.pc.doPainfullyStretchHole(BodypartSlot.Anus, "avy")
+		GM.pc.gotAnusFuckedBy("avy")
+		GM.pc.orgasmFrom("avy")
+		GM.pc.cummedInAnusBy("avy")
 
 	setState(_action)
 
@@ -671,3 +817,9 @@ func _react_scene_end(_tag, _result):
 			setFlag("FightClubModule.ManagedToWinDruggedAvy", false)
 			setState("avy_wins_and_pins")
 			addExperienceToPlayer(100)
+
+func getDevCommentary():
+	return "This scene probably contains the most violent parts of the whole game. For now x3. If you choose to get beaten up.. let's just say I tried not to hold back ^^. Am I so fucked up I enjoy writing that? I dunno, it's just interesting to explore these themes, it's just fantasy after all. Games get away with showing gore nowadays, I'm not even being that graphic, is just text.. My whole mind was probably corrupted by reading that rainbow factory fanfic when I was young.. Taking cute characters and doing awful things with them is very powerful, who would've thought..\n\nYou can technically win Avy the second time but you will lose anyways 'in a cutscene'. Why did I do it like that? Time and drama.. I can spend time writing the alternative route where you just give up and leave the arena and then Kait tells you to ask the doctor or whatever.. Or I can make you 'meet' the doctor organically x3. I just needed a reason for you to get beaten up. And a reason to hate Avy. That way making her your bitch will feel better in the future ^^. It's like, you can't enjoy the highs without the lows. You getting destroyed is the low, it will probably make you feel something. Hopefully the payoff will be worth it for you ^^.\n\nGames are like art, they are about making you feel something. They don't have to always be fun, don't have to always be depressing, it's about the balance between the two ^^. Yes, that's how I just justified my laziness and one of the most brutal scenes in the game x3"
+
+func hasDevCommentary():
+	return true

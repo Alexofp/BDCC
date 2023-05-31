@@ -15,6 +15,9 @@ func getFlags():
 		"FightClubFirstArenaIntroduction": flag(FlagType.Bool),
 		"AttemptedAvyFight": flag(FlagType.Bool),
 		"ManagedToWinDruggedAvy": flag(FlagType.Bool),
+		"GotDestroyedByAvy": flag(FlagType.Bool),
+		"GotFuckedByAvy": flag(FlagType.Bool),
+		"GotKnockedOutByAvy": flag(FlagType.Bool),
 	}
 
 func _init():
@@ -56,6 +59,7 @@ func _init():
 		"res://Modules/FightClubModule/Fighters/Jack/JackWonScene.gd",
 		
 		"res://Modules/FightClubModule/Avy/AvyFirstArenaBattleScene.gd",
+		"res://Modules/FightClubModule/Avy/WakingUpAfterFirstAvyBattleScene.gd",
 		]
 	characters = [
 		"res://Modules/FightClubModule/Entrance/Bulldog.gd",
