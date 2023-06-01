@@ -10,7 +10,7 @@ var noticedVisiblyPregnant = false
 var noticedHeavyIntoPregnancy = false
 var noticedReadyToGiveBirth = false
 var willOvulateAt: float = 0.5
-signal readyToGiveBirth
+#signal readyToGiveBirth
 signal readyToGiveBirthOnce
 signal visiblyPregnant
 signal heavyIntoPregnancy
@@ -67,7 +67,7 @@ func isInHeat():
 	return getCurrentStage() == CycleStage.Ovulation && hasAnyWomb() && (!isPregnant() || isEligibleForProlongedPregnancy())
 
 func forceIntoHeat():
-	newCycle()
+	newCycle(false) # so eggs from the previous cycle are not cleared
 	cycleProgress = 0.36
 
 func shouldOvulate():
@@ -86,8 +86,11 @@ func getCharacter():
 func initCycle():
 	cycleProgress = RNG.randf_range(0.0, 1.0)
 	
-func newCycle():
+func newCycle(shouldClearNonPregEggs: = true):
 #	print(getCharacter().getName(), " Entered new cycle" )
+	if(shouldClearNonPregEggs):
+		for orificeType in OrificeType.getAll():
+			eggCells[orificeType] = []
 	willOvulateAt = RNG.randf_range(0.3, 0.6)
 	ovulatedThisCycle = false
 	
@@ -125,14 +128,16 @@ func processTime(seconds):
 		if(shouldOvulate()):
 			ovulate()
 	
-	var readyFetusAmount: = 0
-	for egg in impregnatedEggCells:
-		egg.processTime(seconds)
-		if(egg.fetusIsReadyForBirth()):
-			readyFetusAmount += 1
+	if(impregnatedEggCells.size() > 0):
+		var readyFetusAmount: = 0
+		for egg in impregnatedEggCells:
+			egg.processTime(seconds)
+			if(egg.fetusIsReadyForBirth()):
+				readyFetusAmount += 1
 	
-	if(readyFetusAmount == impregnatedEggCells.size() && impregnatedEggCells.size() > 0):
-		onAllFetusReadyForBirth()
+		if(readyFetusAmount == impregnatedEggCells.size() && !noticedReadyToGiveBirth):
+			noticedReadyToGiveBirth = true
+			emit_signal("readyToGiveBirthOnce")
 	
 	for orificeType in eggCells:
 		for egg in eggCells[orificeType]:
@@ -306,11 +311,11 @@ func getRoughChanceOfBecomingPregnant() -> float:
 	roughChance = clamp(roughChance, 0.02, 0.95)
 	return roughChance * 100.0
 
-func onAllFetusReadyForBirth():
-	emit_signal("readyToGiveBirth")
-	if(!noticedReadyToGiveBirth):
-		noticedReadyToGiveBirth = true
-		emit_signal("readyToGiveBirthOnce")
+#func onAllFetusReadyForBirth():
+#	emit_signal("readyToGiveBirth") #NOT USED AFTER https://github.com/Alexofp/BDCC/commit/49602bb2e9056017593462cb35af3daabadce38b
+#	if(!noticedReadyToGiveBirth):
+#		noticedReadyToGiveBirth = true
+#		emit_signal("readyToGiveBirthOnce")
 
 func speedUpPregnancy():
 	for egg in impregnatedEggCells:

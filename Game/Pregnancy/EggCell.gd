@@ -14,8 +14,6 @@ var monozygotic: int = 1
 var _fetusReadyForBirth := false
 
 
-#signal readyForBirth(egg)
-
 func _init():
 	#lifeSpan = 60*60*24*2 + RNG.randi_range(-60*60*12, 60*60*24)
 	var optionsLifespan:int = OPTIONS.getEggCellLifespanHours()

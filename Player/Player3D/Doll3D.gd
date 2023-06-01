@@ -319,10 +319,7 @@ func setBreastsScale(breastsScale: float):
 	setBoneScaleAndOffset("DeformBreasts", breastsScale, Vector3(0.18713, 0.199727, 0.0)*mul)
 
 func setPregnancy(progress: float):
-	if(GM.pc.hasPerk(Perk.FertilityBroodmother)):
-		setBoneOffset("DeformBelly", Vector3(0.33244, 0.96324, 0.0)*progress)
-	else: 
-		setBoneOffset("DeformBelly", Vector3(-0.03244, 0.706324, 0.0)*progress)
+	setBoneOffset("DeformBelly", Vector3(-0.03244, 0.706324, 0.0)*progress)
 
 func setThighThickness(progress: float):
 	setBoneOffset("DeformThigh.L", Vector3(-0.008168, 0.386037, 0.0)*progress)

@@ -35,6 +35,9 @@ func _ready():
 func setCharacter(newnpc):
 	npc = newnpc
 
+func getCharacter():
+	return npc
+
 func calculateBuffs():
 	assert(npc != null)
 	

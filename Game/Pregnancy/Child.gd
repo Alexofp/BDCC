@@ -20,11 +20,11 @@ func setBornFromMonozygoticStatus(monozygotic):
 	bornFromMonozygotic = EGG_MONOZYGOTIC_LEVEL[monozygotic]
 	
 func generateName():
-	match gender: "male", "peachboy":
+	if(gender == NpcGender.Male || gender == NpcGender.Peachboy):
 		name = RNG.randomMaleName()
-	_:
+	else:
 		name = RNG.randomFemaleName()
-	
+
 func setName(newName):
 	name = newName
 

@@ -39,7 +39,7 @@ func getIconColor():
 func getBuffs():
 	var progress = character.getPregnancyProgress()
 	var modifier = 1
-	if(GM.pc.hasPerk(Perk.FertilityBroodmother)): 
+	if(character.hasPerk(Perk.FertilityBroodmother)): 
 		modifier = 0.5
 		
 	if(progress <= 0.0):
