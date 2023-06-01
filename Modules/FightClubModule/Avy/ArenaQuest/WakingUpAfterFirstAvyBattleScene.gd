@@ -241,6 +241,8 @@ func _react(_action: String, _args):
 
 	if(_action == "ask_about_kait"):
 		processTime(3*60)
+		setFlag("FightClubModule.GotTaskToStealPlant", true)
+		addMessage("New task added!")
 
 	if(_action == "follow_eliza"):
 		runScene("ParadedOnALeashScene", ["eliza", "medical_hospitalwards", "med_lobbyne", []])

@@ -73,7 +73,21 @@ func _run():
 			addButton("Arena", "Tell her that you are ready to fight the next opponent", "fightnext")
 		else:
 			addDisabledButton("Arena", "No one left to fight :(")
-		addDisabledButton("Fight Avy", "Final arena fight not implemented yet")
+			
+		if(!getFlag("FightClubModule.GotTaskToStealPlant")):
+			if(getModule("FightClubModule").isReadyToFightAvy()):
+				addButton("Fight Avy", "Time to do this", "do_fight_avy")
+			else:
+				addDisabledButton("Fight Avy", "You must defeated all other opponents before fighting Avy")
+		else:
+			if(getFlag("FightClubModule.AvyGotRekt")):
+				addButton("Rematch Avy", "Redo the final fight", "do_fight_avy_second_time") # Maybe a choice between two fights
+			else:
+				if(getFlag("FightClubModule.ReturnedPlantToEliza")):
+					addButton("Fight Avy", "Time to do this again", "do_fight_avy_second_time")
+				else:
+					addDisabledButton("Fight Avy", "You're not ready to do this! You know you gonna lose again.")
+			
 		addButton("Rematch", "Fight one of your defeated opponents again", "rematchmenu")
 		addButton("Leave", "Gotta go", "endthescene")
 		GM.ES.triggerRun(Trigger.TalkingToNPC, ["avy"])

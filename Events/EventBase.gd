@@ -109,3 +109,11 @@ func getCharacter(charID: String) -> BaseCharacter:
 
 func getModule(modID: String):
 	return GlobalRegistry.getModule(modID)
+
+func addMessage(theMessage: String):
+	GM.main.addMessage(theMessage)
+
+func addExperienceToPlayer(ex: int, showMessage: bool = true):
+	if(showMessage):
+		addMessage("You received "+str(ex)+" experience")
+	GM.pc.addExperience(ex)

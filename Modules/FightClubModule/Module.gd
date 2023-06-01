@@ -18,6 +18,11 @@ func getFlags():
 		"GotDestroyedByAvy": flag(FlagType.Bool),
 		"GotFuckedByAvy": flag(FlagType.Bool),
 		"GotKnockedOutByAvy": flag(FlagType.Bool),
+		"GotTaskToStealPlant": flag(FlagType.Bool),
+		"StolePlantForEliza": flag(FlagType.Bool),
+		"ReturnedPlantToEliza": flag(FlagType.Bool),
+		"AvyApproachAfterRektHappened": flag(FlagType.Bool),
+		"AvyGotRekt": flag(FlagType.Bool),
 	}
 
 func _init():
@@ -58,8 +63,9 @@ func _init():
 		"res://Modules/FightClubModule/Fighters/Jack/JackLostToScene.gd",
 		"res://Modules/FightClubModule/Fighters/Jack/JackWonScene.gd",
 		
-		"res://Modules/FightClubModule/Avy/AvyFirstArenaBattleScene.gd",
-		"res://Modules/FightClubModule/Avy/WakingUpAfterFirstAvyBattleScene.gd",
+		"res://Modules/FightClubModule/Avy/ArenaQuest/AvyFirstArenaBattleScene.gd",
+		"res://Modules/FightClubModule/Avy/ArenaQuest/WakingUpAfterFirstAvyBattleScene.gd",
+		"res://Modules/FightClubModule/Avy/ArenaQuest/AvyApproachAfterRektScene.gd",
 		]
 	characters = [
 		"res://Modules/FightClubModule/Entrance/Bulldog.gd",
@@ -79,8 +85,11 @@ func _init():
 		"res://Modules/FightClubModule/Entrance/FightClubEntranceEvent.gd",
 		"res://Modules/FightClubModule/Announcer/FightClubAnnouncerTalkEvent.gd",
 		"res://Modules/FightClubModule/Avy/FightClubAvyTalkEvent.gd",
+		"res://Modules/FightClubModule/Avy/ArenaQuest/AvyApproachAfterRektEvent.gd",
+		"res://Modules/FightClubModule/Avy/ArenaQuest/AvyQuestStealDrugsEvent.gd",
 	]
 	quests = [
+		"res://Modules/FightClubModule/Avy/ArenaQuest/AvyArenaQuest.gd",
 	]
 
 func register():
@@ -145,3 +154,19 @@ static func markFighterAsDefeated(fighterID):
 	var defeated = GM.main.getFlag("FightClubModule.FightClubDefeatedFighters", {})
 	defeated[fighterID] = true
 	GM.main.setFlag("FightClubModule.FightClubDefeatedFighters", defeated)
+
+func isReadyToFightAvy():
+	var ranks = FightClubRank.getAll()
+	
+	for i in ranks.size():
+		var rankID = ranks[-i-1]
+		
+		var fighters = GlobalRegistry.getFightClubFightersIDsByRank(rankID)
+		for i2 in fighters.size():
+			var fighterID = fighters[-i2-1]
+			if(fighterID == "avy"):
+				continue
+			if(!isFighterDefeated(fighterID)):
+				return false
+				
+	return true
