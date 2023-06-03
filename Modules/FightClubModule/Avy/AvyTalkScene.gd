@@ -185,6 +185,11 @@ func _react(_action: String, _args):
 		savedFighterID = _args[0]
 		setState("fight")
 		return
+		
+	if(_action == "do_fight_avy"):
+		runScene("AvyFirstArenaBattleScene")
+		endScene()
+		return
 	
 	if(_action == "endthescene"):
 		endScene()
@@ -243,3 +248,17 @@ func _react_scene_end(_tag, _result):
 				runScene(lostScene)
 			
 			endScene()
+
+func getDebugActions():
+	return [
+		{
+			"id": "instantWin",
+			"name": "Win all fights",
+			"args": [
+			],
+		},
+	]
+
+func doDebugAction(_id, _args = {}):
+	if(_id == "instantWin"):
+		getModule("FightClubModule").forceWinEveryoneExpectAvy()

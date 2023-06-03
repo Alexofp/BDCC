@@ -67,6 +67,7 @@ func _init():
 		"res://Modules/FightClubModule/Avy/ArenaQuest/WakingUpAfterFirstAvyBattleScene.gd",
 		"res://Modules/FightClubModule/Avy/ArenaQuest/AvyApproachAfterRektScene.gd",
 		"res://Modules/FightClubModule/Avy/ArenaQuest/GivingElizaPlantForAvyFightScene.gd",
+		"res://Modules/FightClubModule/Avy/ArenaQuest/AvyArenaPittyFuckScene.gd",
 		]
 	characters = [
 		"res://Modules/FightClubModule/Entrance/Bulldog.gd",
@@ -172,3 +173,17 @@ func isReadyToFightAvy():
 				return false
 				
 	return true
+
+# For debug/cheats
+func forceWinEveryoneExpectAvy():
+	var ranks = FightClubRank.getAll()
+	
+	for i in ranks.size():
+		var rankID = ranks[-i-1]
+		
+		var fighters = GlobalRegistry.getFightClubFightersIDsByRank(rankID)
+		for i2 in fighters.size():
+			var fighterID = fighters[-i2-1]
+			if(fighterID == "avy"):
+				continue
+			markFighterAsDefeated(fighterID)
