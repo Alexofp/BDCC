@@ -187,3 +187,5 @@ func forceWinEveryoneExpectAvy():
 			if(fighterID == "avy"):
 				continue
 			markFighterAsDefeated(fighterID)
+	
+	raisePCRankTo(FightClubRank.AttentionWhore)

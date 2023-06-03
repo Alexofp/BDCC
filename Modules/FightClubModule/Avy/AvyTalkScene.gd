@@ -42,6 +42,7 @@ func _run():
 
 		var showedPC = false
 		var i = 1
+		var avyRekt = getFlag("FightClubModule.AvyGotRekt", false)
 		
 		for rankID in FightClubRank.getAll():
 			var rankName = FightClubRank.getVisibleName(rankID)
@@ -54,6 +55,8 @@ func _run():
 					sayn(str(i)+" - {pc.name}")
 					i+=1
 				
+				if(fighterID == "avy" && avyRekt):
+					continue
 				var fighter:FightClubFighter = GlobalRegistry.getFightClubFighter(fighterID)
 				
 				if(FightClubModule.isFighterDefeated(fighterID)):
@@ -65,6 +68,8 @@ func _run():
 			if(rankID == FightClubRank.FuckMeat && !showedPC):
 				sayn(str(i)+" - {pc.name}")
 				i+=1
+			if(rankID == FightClubRank.FuckMeat && avyRekt):
+				sayn(str(i)+" - Avy The Fallen Hero")
 			
 			sayn("")
 		
