@@ -18,7 +18,8 @@ var perksTierScene = preload("res://UI/SkillsUI/PerksTierContainer.tscn")
 var selectedPerkID
 
 func _ready():
-	pass
+	unlockPerkButton.visible = false
+	togglePerkButton.visible = false
 
 func setSkillID(newskillid):
 	skillID = newskillid

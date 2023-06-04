@@ -68,6 +68,7 @@ func _init():
 		"res://Modules/FightClubModule/Avy/ArenaQuest/AvyApproachAfterRektScene.gd",
 		"res://Modules/FightClubModule/Avy/ArenaQuest/GivingElizaPlantForAvyFightScene.gd",
 		"res://Modules/FightClubModule/Avy/ArenaQuest/AvyArenaPittyFuckScene.gd",
+		"res://Modules/FightClubModule/Avy/ArenaQuest/AvyFinalArenaBattleScene.gd",
 		]
 	characters = [
 		"res://Modules/FightClubModule/Entrance/Bulldog.gd",

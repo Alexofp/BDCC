@@ -195,6 +195,11 @@ func _react(_action: String, _args):
 		runScene("AvyFirstArenaBattleScene")
 		endScene()
 		return
+		
+	if(_action == "do_fight_avy_second_time"):
+		runScene("AvyFinalArenaBattleScene")
+		endScene()
+		return
 	
 	if(_action == "endthescene"):
 		endScene()
