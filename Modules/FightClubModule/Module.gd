@@ -23,6 +23,8 @@ func getFlags():
 		"ReturnedPlantToEliza": flag(FlagType.Bool),
 		"AvyApproachAfterRektHappened": flag(FlagType.Bool),
 		"AvyGotRekt": flag(FlagType.Bool),
+		"AvyGotCaged": flag(FlagType.Bool),
+		"AvyIsInSlutwall": flag(FlagType.Bool),
 	}
 
 func _init():
@@ -69,6 +71,7 @@ func _init():
 		"res://Modules/FightClubModule/Avy/ArenaQuest/GivingElizaPlantForAvyFightScene.gd",
 		"res://Modules/FightClubModule/Avy/ArenaQuest/AvyArenaPittyFuckScene.gd",
 		"res://Modules/FightClubModule/Avy/ArenaQuest/AvyFinalArenaBattleScene.gd",
+		"res://Modules/FightClubModule/Avy/ArenaQuest/AvySlutwallScene.gd",
 		]
 	characters = [
 		"res://Modules/FightClubModule/Entrance/Bulldog.gd",

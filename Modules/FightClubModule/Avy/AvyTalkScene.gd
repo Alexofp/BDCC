@@ -69,7 +69,7 @@ func _run():
 				sayn(str(i)+" - {pc.name}")
 				i+=1
 			if(rankID == FightClubRank.FuckMeat && avyRekt):
-				sayn(str(i)+" - Avy The Fallen Hero")
+				sayn(str(i)+" - Avy The Fallen Hero (defeated)")
 			
 			sayn("")
 		
