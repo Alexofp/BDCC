@@ -31,14 +31,17 @@ func getBuffColor():
 
 func saveData():
 	var data = .saveData()
+	data = {
+		"amount": amount,
+		"startAmount": startAmount
+		}
 	
-	data["amount"] = amount
-
 	return data
-	
+
 func loadData(_data):
 	.loadData(_data)
 	amount = SAVE.loadVar(_data, "amount", 0)
+	startAmount = SAVE.loadVar(_data, "startAmount", 0)
 
 func combine(_otherBuff):
 	if(_otherBuff.amount > amount):
