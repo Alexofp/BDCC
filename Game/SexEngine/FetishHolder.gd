@@ -33,6 +33,15 @@ func setCharacter(newchar):
 func setFetish(fetishID, interest):
 	fetishMap[fetishID] = interest
 
+func modifyFetishByTier(fetishID, numTiers: int = 1) -> bool:
+	var currentInterestValueNum = FetishInterest.interestToNumber(getFetishInterest(fetishID))
+	var projectedInterestValueNum = int(clamp((currentInterestValueNum + numTiers), -4, 4))
+	if(currentInterestValueNum != projectedInterestValueNum): #return true only if interest has changed
+		fetishMap[fetishID] = FetishInterest.numberToInterest(projectedInterestValueNum)
+		return true
+	else:
+		return false
+	
 func addFetish(fetishID, interest):
 	var currentInterest = getFetishInterest(fetishID)
 	var newvalue = FetishInterest.interestToNumber(currentInterest) + FetishInterest.interestToNumber(interest)

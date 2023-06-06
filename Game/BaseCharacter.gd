@@ -1676,8 +1676,8 @@ func afterSexEnded(sexInfo):
 		item.resetLustState()
 		item.onSexEnd()
 		
-	if(personalityChangesAfterSex() && personality != null):
-		var resultText = sexInfo.affectPersonality(personality)
+	if(personalityChangesAfterSex() && personality != null && fetishHolder != null):
+		var resultText = sexInfo.affectPersonality(personality, fetishHolder)
 		if(resultText != null && resultText != ""):
 			GM.main.addMessage(resultText)
 		
