@@ -32,11 +32,6 @@ func getCondomBreakChance():
 	if(!OPTIONS.isContentEnabled(ContentType.RiskyCondoms)):
 		return 0.0
 	
-	# Check to make sure if PC is fucked with his own condoms still worked with the perk
-	var wearerIsNotPC: bool = getWearer() != GM.pc || (!isWornByWearer() && getWearer() == GM.pc)
-	if(wearerIsNotPC && GM.pc.hasPerk(Perk.FertilityDesireToBreed)):
-		return 90.0
-	
 	return 20.0
 
 func getItemCategory():

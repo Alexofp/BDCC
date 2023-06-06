@@ -10,7 +10,7 @@ func getVisibleName():
 func getVisibleDescription():
 	return "Your desire to be bred is so high that new life finds its way inside you with ease. \n" \
 			+ "While not pregnant you deal +30% lust damage and become more susceptible to the lust yourself. \n" \
-			+ "Significantly increases the chances of condoms breaking inside you." #90% to break for normal, quality condoms unaffected
+			+ "Significantly increases the chances of condoms breaking inside you." #450% to break results in 90% for normal and 4.5% for quality condoms 
 
 func getSkillTier():
 	return 0

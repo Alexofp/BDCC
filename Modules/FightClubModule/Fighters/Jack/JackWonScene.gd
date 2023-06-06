@@ -385,11 +385,8 @@ func _react(_action: String, _args):
 	if(_action in ["condom", "condom1"]):
 		usedCondom = true
 		var chance = GM.pc.useBestCondom()
-		if(RNG.chance(chance)):
-			condomBroke = true
-		else:
-			condomBroke = false
-			
+		condomBroke = RNG.shouldCondomBreakWhenCumInside(GM.pc, chance)
+		
 	if(_action == "inside"):
 		GM.pc.gotVaginaFuckedBy("jack")
 		if(!usedCondom || condomBroke):

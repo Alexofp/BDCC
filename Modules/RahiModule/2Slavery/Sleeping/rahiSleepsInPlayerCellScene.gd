@@ -395,11 +395,10 @@ func _react(_action: String, _args):
 				getCharacter("rahi").cummedInMouthBy("pc")
 				GM.pc.orgasmFrom("rahi")
 			if(newState == "cowgirl"):
-				if(RNG.chance(30) && OPTIONS.isContentEnabled(ContentType.RiskyCondoms)):
-					condomBroke = true
+				condomBroke = RNG.shouldCondomBreakWhenCumInside("rahi", 30.0)
+				if(condomBroke):
 					getCharacter("rahi").cummedInVaginaBy("pc")
 				else:
-					condomBroke = false
 					addFilledCondomToLootIfPerk(getCharacter("pc").createFilledCondom())
 				GM.pc.orgasmFrom("rahi")
 			if(newState in ["fingering"]):
