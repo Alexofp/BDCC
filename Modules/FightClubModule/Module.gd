@@ -25,6 +25,7 @@ func getFlags():
 		"AvyGotRekt": flag(FlagType.Bool),
 		"AvyGotCaged": flag(FlagType.Bool),
 		"AvyIsInSlutwall": flag(FlagType.Bool),
+		"AvySlutWallBroken": flag(FlagType.Number),
 	}
 
 func _init():

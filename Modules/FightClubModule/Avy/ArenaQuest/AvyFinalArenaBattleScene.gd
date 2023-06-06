@@ -537,6 +537,7 @@ func _run():
 	if(state == "start_slutwall"):
 		setFlag("FightClubModule.AvyGotCaged", isCaged)
 		setFlag("FightClubModule.AvyIsInSlutwall", true)
+		setFlag("FightClubModule.AvySlutWallBroken", 0.0)
 		playAnimation(StageScene.Duo, "stand", {npc="avy", npcBodyState={naked=true, hard=true, caged=isCaged}})
 		aimCameraAndSetLocName("fight_neararena")
 		saynn("You think that Avy has suffered enough. You move your leg off of her and offer her a hand to help her get up.")
