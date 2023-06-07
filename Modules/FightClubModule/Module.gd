@@ -95,6 +95,7 @@ func _init():
 		"res://Modules/FightClubModule/Avy/ArenaQuest/AvyApproachAfterRektEvent.gd",
 		"res://Modules/FightClubModule/Avy/ArenaQuest/AvyQuestStealDrugsEvent.gd",
 		"res://Modules/FightClubModule/Avy/ArenaQuest/GivingElizaPlantForAvyFightEvent.gd",
+		"res://Modules/FightClubModule/Avy/ArenaQuest/AvySlutwallEvent.gd",
 	]
 	quests = [
 		"res://Modules/FightClubModule/Avy/ArenaQuest/AvyArenaQuest.gd",

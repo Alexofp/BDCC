@@ -130,6 +130,10 @@ func _run():
 		addButtonWithChecks("Fuck Avy", "Use Avy's anus for your pleasure", "use_anus", [], [ButtonChecks.HasReachablePenis])
 		addButtonWithChecks("Strapon Avy", "Put on a strapon and fuck Avy's anus", "strapon_anus_pick", [], [ButtonChecks.HasStraponAndCanWear])
 		addButton("Finger Avy", "Put some strain on that prostate", "finger_avy")
+		if (isCaged):
+			addDisabledButton("Deepthroat Avy", "You can't do this while she is caged up")
+		else:
+			addButtonWithChecks("Deepthroat Avy", "Might as well taste that cock while she is stuck in there..", "deepthroat_start", [], [ButtonChecks.NotOralBlocked])
 		addButton("Back", "Back to the previous menu", "main")
 	if(state == "strapon_anus_pick"):
 		saynn("Pick which strapon you wanna use")
@@ -412,6 +416,54 @@ func _run():
 		saynn("After having some fun with her you pull your digits out and dry them against her fur just to humiliate her a little more. You grab the condom and prepare to dispose of it. Oh, you also add a tally mark on her butt because why not.")
 
 		addButton("Continue", "That was fun", "main")
+	if(state == "deepthroat_start"):
+		playAnimation(StageScene.SlutwallSexOral, "handjob", {pc="avy", bodyState={naked=true, hard=true}})
+		saynn("Avy wouldn't really know if you allow yourself to be a little weak for that cock and suck it.. You get on your knees in front of it, your fingers begin trailing along its length, making Avy twitch a little. She is probably wondering if someone is here to abuse her.")
+
+		saynn("But no, you are being quite careful, your digits wrap around her girth and begin stroking it slowly, preparing Avy and spreading her own precum along her cock.")
+
+		if (howBroken < 0.5):
+			saynn("[say=avy]Hey, stop fucking stroking me and undo the chains already.[/say]")
+
+		else:
+			saynn("[say=avy]You gonna let me cum, right?..[/say]")
+
+		saynn("After teasing Avy for a bit, kneading her balls and rubbing the tip of her cock, you direct it towards your opened mouth..")
+
+		addButton("Suck", "Start sucking that cock", "do_deepthroat")
+	if(state == "do_deepthroat"):
+		playAnimation(StageScene.SlutwallSexOral, "blowjob", {pc="avy", bodyState={naked=true, hard=true}})
+		saynn("You let that cock past your teeth and even deeper until the tip is brushing against the back of your mouth, threatening to go down the {pc.throatStretch} throat. You can hear a few muffled moans as you begin dragging your lips over her length and sucking that cock. The tip of your tongue feels precum dripping upon it that you quickly swallow.")
+
+		saynn("Your motions are slow and sensual, your head bobbing up and down, setting a nice rhythm that keeps the foxy on her toes.. kinda. She can't even see who is sucking her cock which probably feels quite weird.")
+
+		if (howBroken < 0.5):
+			saynn("[say=avy]If you bite me I will smash your head.. somehow. Oh fuck!..[/say]")
+
+		else:
+			saynn("[say=avy]Please don't stop.. oh fuck!..[/say]")
+
+		saynn("Suddenly you decided to go deeper, accepting almost her entire length down your throat, except for the fat knot that is just slapping against your lips while you start deepthroating Avy. You keep a steady pace for a while but then your throat tightens and you start fighting your own gag reflex. You momentarily pull back, coughing softly, your hands kneading Avy's balls to offer her at least some stimulation.")
+
+		saynn("After some time, you force yourself to deepthroat her shaft yet again and just try to not focus too much on how it stretches your throat and create a little bump on your neck. Gradually, you work your way back down, inch by inch, you manage to swallow most of it again.")
+
+		saynn("Avy's muffled moans get louder which is what makes you keep going, your tongue swirling around her shaft while you continue sliding your head over her dick nice and deep. Eventually you begin to feel that knotted cock start throbbing in your mouth, Avy is trying to hump your face involuntary but the chains keep her still.")
+
+		saynn("Your eyes begin to water slightly, occasionally noises of gagging start escaping from you as your throat begins to get all tight around Avy again. But you are determined to make her cum, you take that canine cock as deep as your throat allows and stop moving, letting your clenching inner walls do the rest.")
+
+		if (howBroken < 0.5):
+			saynn("[say=avy]I'm gonna.. oh.. Fuck!..[/say]")
+
+		else:
+			saynn("[say=avy]Yes-yes, please, fu-u-uck!..[/say]")
+
+		saynn("Avy arches her back, her hot seed starts flowing directly down your throat. You eagerly swallow everything that overflows, causing even more stimulation for the foxy, you can feel her body convulsing and thrashing against the chains. Your gag reflex is real, making you choke and lose oxygen fast but the pleasure is too much.. you accept Avy's cum like a submissive cutie.. and you love it..")
+
+		saynn("Only when her cock stops twitching and throbbing, do you finally pull your head away from it. You instantly start coughing and gasping for air.")
+
+		saynn("Avy's cock is messy with your saliva and all the seed that is still coating it.. but you decide to leave it like that. Instead you just add a tally mark on her butt.. because why not.")
+
+		addButton("Continue", "See what happens next", "main")
 func addStraponButtons():
 	var strapons = GM.pc.getStrapons()
 	for strapon in strapons:
@@ -445,6 +497,9 @@ func _react(_action: String, _args):
 		processTime(5*60)
 
 	if(_action == "main"):
+		if(npcID != ""):
+			removeCharacter(npcID)
+			npcID = ""
 		setState("")
 		return
 
@@ -515,6 +570,13 @@ func _react(_action: String, _args):
 		getCharacter("avy").addTallymarkButt()
 		addBodywritingMaybe()
 		getCharacter("avy").bodypartTransferFluidsTo(BodypartSlot.Anus, "pc", BodypartSlot.Head, 0.2, 100.0)
+
+	if(_action == "do_deepthroat"):
+		processTime(3*60)
+		addBroke(0.03, 0.05)
+		GM.pc.cummedInMouthBy("avy")
+		getCharacter("avy").addTallymarkButt()
+		addBodywritingMaybe()
 
 	setState(_action)
 
