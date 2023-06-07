@@ -8,7 +8,7 @@ func getVisibleName():
 	return "Submissive and breedable"
 
 func getVisibleDescription():
-	return "You are wild about big hard juicy cocks and their dominant owners. They feel the same about breeding you. " \
+	return "Others view you as a subservient, perfect toy to please their carnal desires, most noticeably breeding. " \
 			+ "Dominant partners may go an extra round or two, and gain a breeder fetish if not having one already."
 
 func getRequiredPerks():

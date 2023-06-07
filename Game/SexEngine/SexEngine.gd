@@ -259,12 +259,14 @@ func generateGoals():
 		
 		var personDomInfo = doms[domID]
 		var possibleGoals = []
+		var additionalGoals = []
 		
 		var dom = personDomInfo.getChar()
 		
 		for subID in subs:
 			var personSubInfo = subs[subID]
 			var sub = personSubInfo.getChar()
+			var submissiveAndBreedablePerkHelper: bool = (dom.getPersonality().getStat(PersonalityStat.Subby) <= -0.25 && sub.hasPerk(Perk.FertilitySubmissiveAndBreedable))
 			
 			var goalsToAdd = dom.getFetishHolder().getGoals(self, sub)
 			if(goalsToAdd != null):
@@ -281,14 +283,21 @@ func generateGoals():
 					
 					if(sexGoal.isPossible(self, personDomInfo, personSubInfo, goalData) && !sexGoal.isCompleted(self, personDomInfo, personSubInfo, goalData)):
 						possibleGoals.append([[goal[0], sub.getID(), goalData], goal[1]])
-		
+						if((goal[0] == SexGoal.FuckAnal || goal[0] == SexGoal.FuckVaginal) && submissiveAndBreedablePerkHelper):
+							additionalGoals.append([[goal[0], sub.getID(), goalData], goal[1]])
+							
 		if(possibleGoals.size() > 0):
 			for _i in range(0, amountToGenerate):
 				var randomGoalInfo = RNG.pickWeightedPairs(possibleGoals)
 				personDomInfo.goals.append(randomGoalInfo.duplicate(true))
 				generatedAnyGoals = true
+				
+		if(additionalGoals.size() > 0):
+			for _i in range(0, RNG.randi_range(1, 2)):
+				var randomGoalInfo = RNG.pickWeightedPairs(additionalGoals)
+				personDomInfo.goals.append(randomGoalInfo.duplicate(true))
 			
-		print(personDomInfo.goals)
+		print("Goals added to NPC: ", personDomInfo.goals)
 	
 	if(!isDom("pc") && !generatedAnyGoals):
 		messages.append("Dom couldn't decide what to do with the sub, none of their fetishes apply.")

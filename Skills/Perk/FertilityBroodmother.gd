@@ -8,7 +8,7 @@ func getVisibleName():
 	return "Broodmother"
 
 func getVisibleDescription():
-	return "You can't imagine your life without your womb being constantly full of sperm or new fetus growing inside. \n"  \
+	return "Your womb is ripe for breeding, ready to bear the offspring of anyone dominant enough to claim you. \n"  \
 			+ "Pregnancy debuff penalty is reduced by half. \n" \
 			+ "Increased cross species compatibility by 20% \n" \
 			+ "Fertility reduction medication has significantly less effect on you." #by 70%
