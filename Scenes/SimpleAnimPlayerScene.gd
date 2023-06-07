@@ -5,6 +5,7 @@ var anims = {
 	StageScene.SexRimming: ["tease", "sex", "fast"],
 	StageScene.Slutwall: ["idle"],
 	StageScene.SlutwallSex: ["tease", "inside", "sex", "fast"],
+	StageScene.SlutwallRide: ["tease", "inside", "sex", "fast"],
 	StageScene.SlutwallSexOral: ["tease", "lick", "handjob", "blowjob"],
 	StageScene.Sleeping: ["sleep"],
 	StageScene.GivingBirth: ["idle", "birth"],
