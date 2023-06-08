@@ -22,6 +22,10 @@ func _run():
 
 		saynn("There is a piece of cardboard above her that says 'Avy The Fallen Hero' and also a note near her that says 'Anal - FREE, condoms not allowed, break the bitch!'.")
 
+		hasCumInside = getCharacter("avy").hasEffect(StatusEffect.HasCumInsideAnus)
+		if (hasCumInside):
+			saynn("{avy.AnusContents} leaking out of Avy's used fuckhole.")
+
 		saynn("What do you wanna do?")
 
 		if (isCaged):
@@ -129,6 +133,10 @@ func _run():
 
 		addButtonWithChecks("Fuck Avy", "Use Avy's anus for your pleasure", "use_anus", [], [ButtonChecks.HasReachablePenis])
 		addButtonWithChecks("Strapon Avy", "Put on a strapon and fuck Avy's anus", "strapon_anus_pick", [], [ButtonChecks.HasStraponAndCanWear])
+		if (isCaged):
+			addDisabledButton("Ride Avy's cock", "You can't do this while she is caged up")
+		else:
+			addButton("Ride Avy's cock", "Avy is stuck in the wall but you can be a little creative and still get what you need from her", "pick_ride_avy")
 		addButton("Finger Avy", "Put some strain on that prostate", "finger_avy")
 		if (isCaged):
 			addDisabledButton("Deepthroat Avy", "You can't do this while she is caged up")
@@ -464,6 +472,153 @@ func _run():
 		saynn("Avy's cock is messy with your saliva and all the seed that is still coating it.. but you decide to leave it like that. Instead you just add a tally mark on her butt.. because why not.")
 
 		addButton("Continue", "See what happens next", "main")
+	if(state == "pick_ride_avy"):
+		playAnimation(StageScene.SlutwallRide, "tease", {pc="avy", bodyState={naked=true, hard=true}, npcBodyState={exposedCrotch=true, hard=true}})
+		saynn("Seeing that throbbing cock.. really makes you want to somehow put it inside your hole. But it's obvious that Avy's body is positioned a little too high for that.. doesn't stop you from getting a little creative though.")
+
+		saynn("You begin by putting one of your legs on Avy's chains wrapped around her wrists and testing how sturdy of a platform it would be. It seems to be good enough so you take the plunge and climb Avy's body, your second leg landing on Avy's crotch while your hands grab onto her digi-feet that are chained to the wall, another good source of support.")
+
+		if (howBroken < 0.5):
+			saynn("[say=avy]Hey! The fuck are you doing..[/say]")
+
+		else:
+			saynn("[say=avy]Are you standing on me..[/say]")
+
+		saynn("You are standing on Avy, not the most stable position.. but that only makes you more eager to try it.. You look down and.. yes.. her cock is right there, waiting to be straddled..")
+
+		addButtonWithChecks("Vaginal", "Ride Avy with your pussy", "do_ride_vaginal", [], [ButtonChecks.HasReachableVagina])
+		addButtonWithChecks("Anal", "Ride Avy with your ass", "do_ride_anal", [], [ButtonChecks.HasReachableAnus])
+		addButton("Back", "Get off Avy", "main")
+	if(state == "do_ride_vaginal"):
+		playAnimation(StageScene.SlutwallRide, "sex", {pc="avy", bodyState={naked=true, hard=true}, npcBodyState={exposedCrotch=true, hard=true}})
+		saynn("Using Avy's chained limbs for support, you begin to lower yourself onto that member until it's pressing against your eager {pc.pussyStretch} pussy. Even just feeling how warm and veiny the texture is makes you wet and needy. You tease it a little more by grinding your sensitive folds against it before proceeding to the main event..")
+
+		saynn("Slowly, you raise yourself a bit before lowering your frame back directly onto that canine member, your pussy lips spreading wide and then guiding it towards the inviting entrance itself, your hole slowly stretching until the pointy dripping tip is inside.. A little cute moan escapes from you while Avy is probably still confused about the logistics of how this is even possible.")
+
+		saynn("In this strange adapted version of reverse cowgirl position, you begin to move your hips up and down, along that shaft, letting it penetrate you a little deeper each time. Avy's body responds to your every motion, little muffled grunts escape from her while your slick {pc.pussyStretch} inner walls are gripping that cock.")
+
+		if (howBroken < 0.5):
+			saynn("[say=avy]How did you even.. fuck.. I'm almost not complaining..[/say]")
+
+		else:
+			saynn("[say=avy]I don't understand how.. but I'm not complaining.. fuck..[/say]")
+
+		if (GM.pc.isWearingChastityCage()):
+			saynn("Your locked up cock is bobbing up and down ever so slightly while you ride Avy, that cage securing it tightly. But still, the sight of a caged up inmate riding a slutwall whore is probably quite entertaining for the people who stand in line, waiting for their turn.")
+
+		elif (GM.pc.hasReachablePenis()):
+			saynn("Your own {pc.penis} is bobbing up and down while you ride Avy, providing entertainment for inmates who stand in line, waiting for their turn.")
+
+		addButton("Faster", "That cock feels so good", "do_ride_vaginal_faster")
+	if(state == "do_ride_vaginal_faster"):
+		playAnimation(StageScene.SlutwallRide, "fast", {pc="avy", bodyState={naked=true, hard=true}, npcBodyState={exposedCrotch=true, hard=true}})
+		saynn("The reverse cowgirl position allows for deeper penetration so you take full advantage of that, bouncing on that cock faster and harder, only Avy's fat knot doesn't fit inside you yet, it just slaps against your pussy slit. Still, you keep trying.")
+
+		saynn("More little passionate moans escape from you, the fast rhythm makes your inner wall grip that member more, leading to more pleasurable friction that, in turn, fuels your desire to ride Avy even more fast..")
+
+		saynn("The foxy doesn't even know who is so brave to ride like that. And it's better to keep that a secret, Avy's ego is big enough already. You just focus on the sensations of that cock sliding inside you, hitting all the right spots and even kissing your inner barricade, causing your slick pussy walls to respond by pulsating and massaging the intruding length.")
+
+		if (howBroken < 0.5):
+			saynn("[say=avy]Bitch, I'm gonna cum if you're gonna keep.. ah..[/say]")
+
+		else:
+			saynn("[say=avy]If you keep.. I'm gonna.. ah..[/say]")
+
+		saynn("It seems Avy is close. And are you..")
+
+		addButton("Get knotted", "Force that orb inside you", "do_ride_vaginal_knot")
+	if(state == "do_ride_vaginal_knot"):
+		playAnimation(StageScene.SlutwallRide, "inside", {pc="avy", bodyState={naked=true, hard=true}, npcBodyState={exposedCrotch=true, hard=true}})
+		saynn("Time to do this. With forceful motions, you begin trying to fit Avy's whole dick inside your needy cunt, gradually applying more and more pressure. You can feel your pussy lips slowly stretching after every slap of the knot but it's still not enough.. And that cock is.. throbbing inside you already, the bitch is about to cum..")
+
+		saynn("So you do the only thing you can and raise yourself more before bringing your cunt onto that knot as hard as you can, your slit stretching extremely wide and even painful.. until the knot suddenly slips inside, locking you two together!")
+
+		if (howBroken < 0.5):
+			saynn("[say=avy]Fuck![/say]")
+
+		else:
+			saynn("[say=avy]Oh fuck..[/say]")
+
+		saynn("It seems you two cum at the same time, your bodies are shaking and convulsing together as multiple waves of pure euphoria washes over you. Your inner walls pulse and contract around that knot while Avy's cock twitches and starts shooting hot sticky cum directly into your awaiting womb.")
+
+		if (GM.pc.isWearingChastityCage()):
+			saynn("It quickly gets too much for you, your poor caged up cock is leaking {pc.cum} that flows down your cage and then drips down on Avy's tail, leaving a cute mess.")
+
+		elif (GM.pc.hasReachablePenis()):
+			saynn("It quickly gets too much for you, your own hard dick is wasting its load by shooting {pc.cum} directly forward, leaving quite a mess on the floor.")
+
+		saynn("You're lucky you didn't fall yet, your legs and arms are shaking so much.. but at least you got that extra anchor point.. Loud moans escape from you while the knot continues to provide a constant source of stimulation, prolonging and enhancing your orgasm so much that you suddenly squirt, a fountain of your juices erupts from your slit.")
+
+		saynn("As the ecstatic waves finally begin to fade, you find yourself locked together with Avy, such a precarious situation. Doesn't stop from you grabbing a marker and drawing a tally mark on her fluffy butt though, Avy was technically used by you..")
+
+		saynn("After some more time, that knot finally deflates enough for you to escape the lock, your stuffed pussy leaking cum and struggling to close after being stretched so much..")
+
+		addButton("Continue", "See what happens next", "main")
+	if(state == "do_ride_anal"):
+		playAnimation(StageScene.SlutwallRide, "sex", {pc="avy", bodyState={naked=true, hard=true}, npcBodyState={exposedCrotch=true, hard=true}})
+		saynn("Using Avy's chained limbs for support, you begin to lower yourself onto that member until it's pressing against your twitching {pc.analStretch} anal ring. Even just feeling how warm and veiny the texture is makes you lusty and needy. You tease her cock a little more by making it brush against your {pc.masc} butt before proceeding to the main event..")
+
+		saynn("Slowly, you raise yourself a bit before lowering your frame back directly onto that canine member, your buttcheeks catching the tip between them and then guiding it towards the inviting entrance itself, your hole slowly stretching until the pointy dripping head is inside.. A little cute moan escapes from you while Avy is probably still confused about the logistics of how this is even possible.")
+
+		saynn("In this strange adapted version of reverse cowgirl position, you begin to move your hips up and down, along that shaft, letting it penetrate you a little deeper each time. Avy's body responds to your every motion, little muffled grunts escape from her while your {pc.analStretch} inner walls are gripping that cock and letting it lube you up with precum.")
+
+		if (howBroken < 0.5):
+			saynn("[say=avy]How did you even.. fuck.. I'm almost not complaining..[/say]")
+
+		else:
+			saynn("[say=avy]I don't understand how.. but I'm not complaining.. fuck..[/say]")
+
+		if (GM.pc.isWearingChastityCage()):
+			saynn("You can feel pressure on your prostate, your locked up cock is bobbing up and down ever so slightly while you ride Avy, that cage securing it tightly. But still, the sight of a caged up inmate riding a slutwall whore is probably quite entertaining for the people who stand in line, waiting for their turn.")
+
+		elif (GM.pc.hasReachablePenis()):
+			saynn("You can feel pressure on your prostate, your own {pc.penis} is bobbing up and down while you ride Avy, providing entertainment for inmates who stand in line, waiting for their turn.")
+
+		addButton("Faster", "That cock feels so good", "do_ride_anal_faster")
+	if(state == "do_ride_anal_faster"):
+		playAnimation(StageScene.SlutwallRide, "fast", {pc="avy", bodyState={naked=true, hard=true}, npcBodyState={exposedCrotch=true, hard=true}})
+		saynn("The reverse cowgirl position allows for deeper penetration so you take full advantage of that, bouncing on that cock faster and harder, only Avy's fat knot doesn't fit inside you yet, it just slaps against your {pc.analStretch} star. Still, you keep trying.")
+
+		saynn("More little passionate moans escape from you, the fast rhythm makes your inner wall grip that member more, leading to more pleasurable friction that, in turn, fuels your desire to ride Avy even more fast..")
+
+		saynn("The foxy doesn't even know who is so brave to ride like that. And it's better to keep that a secret, Avy's ego is big enough already. You just focus on the sensations of that cock sliding inside you, hitting all the right spots, causing your slick walls to respond by pulsating and massaging the intruding length.")
+
+		if (howBroken < 0.5):
+			saynn("[say=avy]Bitch, I'm gonna cum if you're gonna keep.. ah..[/say]")
+
+		else:
+			saynn("[say=avy]If you keep.. I'm gonna.. ah..[/say]")
+
+		saynn("It seems Avy is close. And are you..")
+
+		addButton("Get knotted", "Force that orb inside you", "do_ride_anal_knot")
+	if(state == "do_ride_anal_knot"):
+		playAnimation(StageScene.SlutwallRide, "inside", {pc="avy", bodyState={naked=true, hard=true}, npcBodyState={exposedCrotch=true, hard=true}})
+		saynn("Time to do this. With forceful motions, you begin trying to fit Avy's whole dick inside your needy ass, gradually applying more and more pressure. You can feel your anal ring slowly stretching after every slap of the knot but it's still not enough.. And that cock is.. throbbing inside you already, the bitch is about to cum..")
+
+		saynn("So you do the only thing you can and raise yourself more before bringing your tailhole onto that knot as hard as you can, your flesh stretching extremely wide and even painful.. until the knot suddenly slips inside, locking you two together!")
+
+		if (howBroken < 0.5):
+			saynn("[say=avy]Fuck![/say]")
+
+		else:
+			saynn("[say=avy]Oh fuck..[/say]")
+
+		saynn("It seems you two cum at the same time, your bodies are shaking and convulsing together as multiple waves of pure euphoria washes over you. Your inner walls pulse and contract around that knot while Avy's cock twitches and starts shooting hot sticky cum deep inside you.")
+
+		if (GM.pc.isWearingChastityCage()):
+			saynn("Her knot puts so much pressure on your prostate that it quickly gets too much for you, your poor caged up cock is leaking {pc.cum} that flows down your cage and then drips down on Avy's tail, leaving a cute mess.")
+
+		elif (GM.pc.hasReachablePenis()):
+			saynn("Her knot puts so much pressure on your prostate that it quickly gets too much for you, your own hard dick is wasting its load by shooting {pc.cum} directly forward, leaving quite a mess on the floor.")
+
+		saynn("You're lucky you didn't fall yet, your legs and arms are shaking so much.. but at least you got that extra anchor point.. Loud moans escape from you while the knot continues to provide a constant source of stimulation, prolonging and enhancing your orgasm, making you feel like you're drugged up.")
+
+		saynn("As the ecstatic waves finally begin to fade, you find yourself locked together with Avy, such a precarious situation. Doesn't stop from you grabbing a marker and drawing a tally mark on her fluffy butt though, Avy was technically used by you..")
+
+		saynn("After some more time, that knot finally deflates enough for you to escape the lock, your stuffed ass leaking cum and your anus is struggling to close after being stretched so much..")
+
+		addButton("Continue", "See what happens next", "main")
 func addStraponButtons():
 	var strapons = GM.pc.getStrapons()
 	for strapon in strapons:
@@ -575,6 +730,36 @@ func _react(_action: String, _args):
 		processTime(3*60)
 		addBroke(0.03, 0.05)
 		GM.pc.cummedInMouthBy("avy")
+		getCharacter("avy").addTallymarkButt()
+		addBodywritingMaybe()
+
+	if(_action == "do_ride_vaginal"):
+		processTime(5*60)
+
+	if(_action == "do_ride_anal"):
+		processTime(5*60)
+
+	if(_action == "do_ride_vaginal_faster"):
+		processTime(5*60)
+
+	if(_action == "do_ride_vaginal_knot"):
+		processTime(10*60)
+		addBroke(0.05, 0.1)
+		GM.pc.cummedInVaginaBy("avy")
+		GM.pc.gotVaginaFuckedBy("avy")
+		GM.pc.orgasmFrom("avy")
+		getCharacter("avy").addTallymarkButt()
+		addBodywritingMaybe()
+
+	if(_action == "do_ride_anal_faster"):
+		processTime(5*60)
+
+	if(_action == "do_ride_anal_knot"):
+		processTime(10*60)
+		addBroke(0.05, 0.1)
+		GM.pc.cummedInAnusBy("avy")
+		GM.pc.gotAnusFuckedBy("avy")
+		GM.pc.orgasmFrom("avy")
 		getCharacter("avy").addTallymarkButt()
 		addBodywritingMaybe()
 
