@@ -31,6 +31,7 @@ func getSupportedSexTypes():
 	return {
 		SexType.DefaultSex: true,
 		SexType.StocksSex: true,
+		SexType.SlutwallSex: true,
 	}
 
 func isStocksSex():
@@ -620,6 +621,8 @@ func getSubResistChance(baseChance, domAngerRemoval):
 		theChance *= 0.5
 	if(getSub().isBlindfolded()):
 		theChance *= 0.8
+	if(isStocksSex() || getSexType() == SexType.SlutwallSex):
+		theChance *= 0.5
 	
 	return max(theChance, 5.0)
 
@@ -758,6 +761,16 @@ func doSubAction(_id, _actionInfo):
 		return {text = text, subSay=subReaction(sexReactionPullOut)}
 
 func getAnimation():
+	if(getSexType() == SexType.SlutwallSex):
+		if(state in [""]):
+			return [StageScene.SlutwallSex, "tease", {npc=domID, pc=subID}]
+		if(state in ["aftercumminginside", "knotting"]):
+			return [StageScene.SlutwallSex, "inside", {npc=domID, pc=subID}]
+		if(domInfo.isCloseToCumming() || (isStraponSex() && subInfo.isCloseToCumming())):
+			return [StageScene.SlutwallSex, "fast", {npc=domID, pc=subID}]
+			
+		return [StageScene.SlutwallSex, "sex", {npc=domID, pc=subID}]
+	
 	if(isStocksSex()):
 		if(state in [""]):
 			return [StageScene.StocksSex, "tease", {npc=domID, pc=subID}]

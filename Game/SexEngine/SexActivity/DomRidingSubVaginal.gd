@@ -25,6 +25,12 @@ func getGoals():
 		SexGoal.ReceiveStraponVaginal: 1.0,
 	}
 
+func getSupportedSexTypes():
+	return {
+		SexType.DefaultSex: true,
+		SexType.SlutwallSex: true,
+	}
+
 func canStartActivity(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexSubInfo):
 	if(!_subInfo.getChar().hasReachablePenis() && !_subInfo.getChar().isWearingStrapon()):
 		return false
@@ -81,6 +87,10 @@ func startActivity(_args):
 	var text = RNG.pick([
 		"{dom.You} {dom.youVerb('stradle')} {sub.you} and {dom.youVerb('rub')} {dom.yourHis} "+RNG.pick(usedBodypartNames)+" against {sub.yourHis} "+getDickName(RNG.pick(["dick", "penis", "cock", "member"]))+".",
 	])
+	if(getSexType() == SexType.SlutwallSex):
+		text = RNG.pick([
+			"{dom.You} {dom.youVerb('stand')} on the chains and {dom.youVerb('stradle')} {sub.you}, {dom.yourHis} "+RNG.pick(usedBodypartNames)+" is rubbing against {sub.yourHis} "+getDickName(RNG.pick(["dick", "penis", "cock", "member"]))+".",
+		])
 	
 	return {
 		text = text,
@@ -574,6 +584,8 @@ func getSubResistChance(baseChance, domAngerRemoval):
 		theChance *= 0.5
 	if(getSub().isBlindfolded()):
 		theChance *= 0.8
+	if(getSexType() == SexType.SlutwallSex):
+		theChance *= 0.5
 	
 	return max(theChance, 5.0)
 
@@ -694,6 +706,15 @@ func doSubAction(_id, _actionInfo):
 
 
 func getAnimation():
+	if(getSexType() == SexType.SlutwallSex):
+		if(state in [""]):
+			return [StageScene.SlutwallRide, "tease", {pc=subID, npc=domID}]
+		if(state in ["knotting"]):
+			return [StageScene.SlutwallRide, "inside", {pc=subID, npc=domID}]
+		if(subInfo.isCloseToCumming() || (isStraponSex() && domInfo.isCloseToCumming())):
+			return [StageScene.SlutwallRide, "fast", {pc=subID, npc=domID}]
+		return [StageScene.SlutwallRide, "sex", {pc=subID, npc=domID}]
+	
 	if(state in [""]):
 		return [StageScene.SexCowgirl, "tease", {pc=subID, npc=domID}]
 	if(state in ["knotting"]):

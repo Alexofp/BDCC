@@ -7,6 +7,8 @@ var id = "errorerror"
 var npcStats = {}
 var npcLevel = 0
 var npcLustInterests = {}
+var npcPersonality = {}
+var npcFetishes = {}
 var npcArmor = {}
 var npcBasePain = null
 var npcBaseLust = null
@@ -40,6 +42,11 @@ func _ready():
 				lustInterests.addInterest(interestID, interestData[0])
 		else:
 			lustInterests.addInterest(interestID, interestData)
+			
+	for personalityStat in npcPersonality:
+		personality.setStat(personalityStat, npcPersonality[personalityStat])
+	for fetishID in npcFetishes:
+		fetishHolder.setFetish(fetishID, npcFetishes[fetishID])
 			
 	if(npcHasMenstrualCycle):
 		menstrualCycle = MenstrualCycle.new()

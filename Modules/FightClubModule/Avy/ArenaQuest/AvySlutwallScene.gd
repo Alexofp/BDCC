@@ -36,6 +36,11 @@ func _run():
 		addButton("Watch", "Watch someone else use Avy", "do_watch")
 		addButton("Free Avy", "She had enough", "ask_free")
 		addButton("Leave", "Enough fun", "endthescene")
+	if(state == "do_watch"):
+		playAnimation(StageScene.SlutwallSex, "tease", {pc="avy", npc=npcID, bodyState={naked=true, hard=true, caged=isCaged}})
+		saynn("Someone approaches Avy and is about to use her!")
+
+		addButton("Continue", "See what happens next", "start_freeuse_npc")
 	if(state == "put_cage_on"):
 		playAnimation(StageScene.SlutwallSex, "tease", {pc="avy", bodyState={naked=true, hard=true, caged=isCaged}})
 		saynn("Looking at that free canine cock that just doesn't wanna go soft, you get a great idea. You go ahead and pay the Announcer a quick visit before asking him for a chastity cage. He gives you one for free when he hears that it's for Avy.")
@@ -651,6 +656,24 @@ func _react(_action: String, _args):
 		isCaged = true
 		processTime(5*60)
 
+	if(_action == "do_watch"):
+		var charID = NpcFinder.grabNpcIDFromPool(CharacterPool.Inmates)
+		if(charID == null || charID == ""):
+			addMessage("The queue is empty. Maybe you should look for more inmates.")
+			return
+		npcID = charID
+		addCharacter(npcID)
+		if(isCaged):
+			getCharacter("avy").getInventory().forceEquipStoreOtherUnlessRestraint(GlobalRegistry.createItem("ChastityCagePermanent"))
+
+	if(_action == "start_freeuse_npc"):
+		getCharacter("avy").lustStateFullyUndress()
+		runScene("GenericSexScene", [npcID, "avy", SexType.SlutwallSex], "generic_sex_scene_avy")
+		removeCharacter(npcID)
+		npcID = ""
+		setState("")
+		return
+
 	if(_action == "main"):
 		if(npcID != ""):
 			removeCharacter(npcID)
@@ -747,7 +770,6 @@ func _react(_action: String, _args):
 		addBroke(0.05, 0.1)
 		GM.pc.cummedInVaginaBy("avy")
 		GM.pc.gotVaginaFuckedBy("avy")
-		GM.pc.orgasmFrom("avy")
 		getCharacter("avy").addTallymarkButt()
 		addBodywritingMaybe()
 
@@ -764,6 +786,11 @@ func _react(_action: String, _args):
 		addBodywritingMaybe()
 
 	setState(_action)
+
+func _react_scene_end(_tag, _result):
+	if(_tag == "generic_sex_scene_avy"):
+		if(isCaged):
+			getCharacter("avy").getInventory().removeItemFromSlot(InventorySlot.Penis)
 
 func saveData():
 	var data = .saveData()

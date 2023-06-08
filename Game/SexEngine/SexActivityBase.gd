@@ -57,6 +57,9 @@ func getSupportedSexTypes():
 		SexType.DefaultSex: true,
 	}
 
+func getSexType():
+	return getSexEngine().getSexTypeID()
+
 func satisfyGoals():
 	var goalData = getGoals()
 	var sexEngine = getSexEngine()

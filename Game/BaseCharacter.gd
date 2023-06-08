@@ -1636,6 +1636,13 @@ func createFilledCondom():
 	cumInItem(theCondom)
 	return theCondom
 
+func lustStateFullyUndress():
+	var items = getInventory().getAllEquippedItems()
+	for itemSlot in items:
+		var lustState = items[itemSlot].getItemState()
+		if(lustState != null):
+			lustState.remove()
+
 func afterSexEnded(sexInfo):
 	if(sexInfo.getTimesCame() > 0):
 		addLust(-getLust())
