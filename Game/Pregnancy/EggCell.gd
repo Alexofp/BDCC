@@ -11,7 +11,7 @@ var motherSpecies = []
 var resultSpecies = []
 var resultGender = NpcGender.Male
 var monozygotic: int = 1
-var _fetusReadyForBirth := false
+var fetusReadyForBirth := false
 
 
 func _init():
@@ -96,14 +96,14 @@ func processTime(seconds):
 		var newProgress: float = float(seconds) / getGestationTime()
 		
 		if((progress + newProgress) >= 1.0):
-			_fetusReadyForBirth = true
+			fetusReadyForBirth = true
 		
 		progress += newProgress
 		if(progress > 2.5):
 			progress = 2.5
 
 func fetusIsReadyForBirth():
-	return _fetusReadyForBirth
+	return fetusReadyForBirth
 
 func getProgress():
 	return progress
@@ -172,7 +172,7 @@ func saveData():
 		"resultSpecies": resultSpecies,
 		"resultGender": resultGender,
 		"monozygotic": monozygotic,
-		"fetusReadyForBirth": _fetusReadyForBirth
+		"fetusReadyForBirth": fetusReadyForBirth
 	}
 	
 	return data
@@ -188,4 +188,4 @@ func loadData(data):
 	resultSpecies = SAVE.loadVar(data, "resultSpecies", [])
 	resultGender = SAVE.loadVar(data, "resultGender", NpcGender.Male)
 	monozygotic = SAVE.loadVar(data, "monozygotic", 1)
-	_fetusReadyForBirth = SAVE.loadVar(data, "fetusReadyForBirth", false)
+	fetusReadyForBirth = SAVE.loadVar(data, "fetusReadyForBirth", false)

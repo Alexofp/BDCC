@@ -156,7 +156,7 @@ func affectFetishes(theChanges, _fetishHolder):
 	
 	for fetish in toIncrease:
 		if(RNG.chance(70)):
-			if(_fetishHolder.modifyFetishByTier(fetish)):
+			if(_fetishHolder.adjustFetishInterestByTier(fetish)):
 				theChanges.append("{npc.name} became more interested in "+GlobalRegistry.getFetish(fetish).getVisibleName())
 	
 	var toDecrease = [] 
@@ -166,7 +166,7 @@ func affectFetishes(theChanges, _fetishHolder):
 	
 	for fetish in toDecrease:
 		if(RNG.chance(70)):
-			if(_fetishHolder.modifyFetishByTier(fetish, -1)):
+			if(_fetishHolder.adjustFetishInterestByTier(fetish, -1)):
 				theChanges.append("{npc.name} became less interested in "+GlobalRegistry.getFetish(fetish).getVisibleName())
 	
 	return theChanges

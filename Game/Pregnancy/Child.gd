@@ -100,6 +100,8 @@ func saveData():
 
 func loadData(data):
 	name = SAVE.loadVar(data, "name", "")
+	if(name == ""):
+		generateName()
 	bornFromMonozygotic = SAVE.loadVar(data, "bornFromMonozygotic", "")
 	gender = SAVE.loadVar(data, "gender", NpcGender.Male)
 	species = SAVE.loadVar(data, "species", ["feline"])

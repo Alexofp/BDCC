@@ -259,9 +259,6 @@ func printChildren(pcKids = true):
 		else:
 			ageStr = str(yearsOld)+" years "+ageStr
 		
-		if(child.name == ""):
-			child.generateName()
-		
 		resultTable += "[cell]"+child.name+"[/cell]"
 		resultTable += "[cell]"+"[color="+NpcGender.getColorString(child.gender)+"]"+ NpcGender.getVisibleName(child.gender)+"[/color]"+"[/cell]"
 		resultTable += "[cell]"+Util.getSpeciesName(child.species)+"[/cell]"

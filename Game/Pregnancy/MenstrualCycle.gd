@@ -10,7 +10,6 @@ var noticedVisiblyPregnant = false
 var noticedHeavyIntoPregnancy = false
 var noticedReadyToGiveBirth = false
 var willOvulateAt: float = 0.5
-#signal readyToGiveBirth
 signal readyToGiveBirthOnce
 signal visiblyPregnant
 signal heavyIntoPregnancy
@@ -160,7 +159,7 @@ func ovulate():
 		
 		var ch = getCharacter()
 		var amountOfEggs = RNG.pickWeightedPairs(possibleEggAmounts)
-		amountOfEggs = max(ch.getMinEggsAmount(), int(round(amountOfEggs * ch.getEggsBonusMod())))
+		amountOfEggs = max(ch.getMinEggsAmount(), int(ceil(amountOfEggs * ch.getEggsBonusMod())))
 		if(GM.pc.hasPerk(Perk.FertilityBetterOvulation) && amountOfEggs < 10):
 			amountOfEggs += RNG.randi_range(0, 4) #otherwise species with low base eggs like humans, won't get much bonus
 			
@@ -310,12 +309,6 @@ func getRoughChanceOfBecomingPregnant() -> float:
 		roughChance = exp(-0.5 * pow(cycleProgress - 0.45, 2) * 60.0)
 	roughChance = clamp(roughChance, 0.02, 0.95)
 	return roughChance * 100.0
-
-#func onAllFetusReadyForBirth():
-#	emit_signal("readyToGiveBirth") #NOT USED AFTER https://github.com/Alexofp/BDCC/commit/49602bb2e9056017593462cb35af3daabadce38b
-#	if(!noticedReadyToGiveBirth):
-#		noticedReadyToGiveBirth = true
-#		emit_signal("readyToGiveBirthOnce")
 
 func speedUpPregnancy():
 	for egg in impregnatedEggCells:

@@ -3,6 +3,8 @@ class_name FetishHolder
 
 var character: WeakRef
 var fetishMap: Dictionary = {}
+var maxInterest = 4
+var minInterest = -4
 
 func _init():
 	for fetishID in GlobalRegistry.getFetishes():
@@ -11,6 +13,8 @@ func _init():
 		#setFetish(fetishID, FetishInterest.Hates)
 		setFetish(fetishID, FetishInterest.Likes)
 	
+	maxInterest = FetishInterest.getMaxPossibleInterestNumber()
+	minInterest = FetishInterest.getMinPossibleInterestNumber()
 	#setFetish(Fetish.OralSexReceiving, FetishInterest.Loves)
 	#setFetish(Fetish.VaginalSexGiving, FetishInterest.Loves)
 	#setFetish(Fetish.DrugUse, FetishInterest.Loves)
@@ -33,9 +37,11 @@ func setCharacter(newchar):
 func setFetish(fetishID, interest):
 	fetishMap[fetishID] = interest
 
-func modifyFetishByTier(fetishID, numTiers: int = 1) -> bool:
+# Increase or decrease fetish by 1 or more tiers, for example if we use "numTiers = 3" on the fetish that have 
+# "SlightlyDislikes" level it will become "Likes"
+func adjustFetishInterestByTier(fetishID, numTiers: int = 1) -> bool:
 	var currentInterestValueNum = FetishInterest.interestToNumber(getFetishInterest(fetishID))
-	var projectedInterestValueNum = int(clamp((currentInterestValueNum + numTiers), -4, 4))
+	var projectedInterestValueNum = int(clamp((currentInterestValueNum + numTiers), minInterest, maxInterest))
 	if(currentInterestValueNum != projectedInterestValueNum): #return true only if interest has changed
 		fetishMap[fetishID] = FetishInterest.numberToInterest(projectedInterestValueNum)
 		return true

@@ -10,6 +10,8 @@ const SlightlyLikes = "SlightlyLikes"
 const Likes = "Likes"
 const ReallyLikes = "ReallyLikes"
 const Loves = "Loves"
+const MaxPossibleInterestNumber = 4
+const MinPossibleInterestNumber = -4
 
 static func getScore(interest):
 	match(interest):
@@ -35,6 +37,12 @@ static func getScore(interest):
 		
 static func getAll():
 	return [Hates, ReallyDislikes, Dislikes, SlightlyDislikes, Neutral, SlightlyLikes, Likes, ReallyLikes, Loves]
+
+static func getMaxPossibleInterestNumber():
+	return MaxPossibleInterestNumber
+
+static func getMinPossibleInterestNumber():
+	return MinPossibleInterestNumber
 
 static func interestToNumber(interest):
 	match(interest):
