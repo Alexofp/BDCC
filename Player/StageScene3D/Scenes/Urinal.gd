@@ -37,3 +37,6 @@ func playAnimation(animID, _args = {}):
 		state_machine.travel("UrinalIdle2-loop")
 	else:
 		Log.printerr("Action "+str(animID)+" is not found for stage "+str(id))
+
+func getSupportedStates():
+	return ["idle", "idle2"]

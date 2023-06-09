@@ -32,6 +32,7 @@ var perksObjects: Dictionary = {}
 var lustTopics: Dictionary = {}
 var lustTopicsObjects: Array = []
 var stageScenes: Dictionary = {}
+var stageScenesCachedStates: Dictionary = {}
 var lustActions: Dictionary = {}
 var defaultLustActions: Array = []
 var orgasmLustActions: Array = []
@@ -958,6 +959,9 @@ func registerStageScene(path: String):
 	var item:PackedScene = load(path)
 	var itemObject = item.instance()
 	stageScenes[itemObject.id] = item
+	var possibleStates = itemObject.getSupportedStates()
+	if(possibleStates != null && possibleStates.size() > 0):
+		stageScenesCachedStates[itemObject.id] = possibleStates
 	itemObject.queue_free()
 	
 	#stageScenes[path.get_file()] = item
@@ -985,6 +989,9 @@ func createStageScene(id: String):
 		Log.printerr("ERROR: stage scene with the id "+id+" wasn't found")
 		return null
 	return stageScenes[id].instance()
+
+func getStageScenesCachedStates():
+	return stageScenesCachedStates
 
 func instanceCached(scenePath):
 	if(sceneCache.has(scenePath)):

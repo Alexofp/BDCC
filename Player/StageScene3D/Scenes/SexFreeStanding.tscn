@@ -1,0 +1,153 @@
+[gd_scene load_steps=33 format=2]
+
+[ext_resource path="res://Player/Player3D/Doll3D.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Player/StageScene3D/BaseStageScene3D.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Player/Props/platform.png" type="Texture" id=3]
+[ext_resource path="res://Player/StageScene3D/Scenes/SexFreeStanding.gd" type="Script" id=4]
+
+[sub_resource type="AnimationNodeAnimation" id=3]
+animation = "CuffedArms-loop"
+
+[sub_resource type="AnimationNodeBlend2" id=4]
+filter_enabled = true
+filters = [ "Doll3D/Skeleton:Arm.L", "Doll3D/Skeleton:Arm.R", "Doll3D/Skeleton:ForeArm.L", "Doll3D/Skeleton:ForeArm.R", "Doll3D/Skeleton:Hand.L", "Doll3D/Skeleton:Hand.R" ]
+
+[sub_resource type="AnimationNodeAnimation" id=106]
+animation = "Sex_FreeStandingFast_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=107]
+animation = "Sex_FreeStandingInside_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=108]
+animation = "Sex_FreeStandingTease_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=109]
+animation = "Sex_FreeStanding_1-loop"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=110]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=111]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=112]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=113]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=114]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=115]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachine" id=116]
+states/Sex_FreeStandingFast_1-loop/node = SubResource( 106 )
+states/Sex_FreeStandingFast_1-loop/position = Vector2( 536, 331 )
+states/Sex_FreeStandingInside_1-loop/node = SubResource( 107 )
+states/Sex_FreeStandingInside_1-loop/position = Vector2( 536, 167 )
+states/Sex_FreeStandingTease_1-loop/node = SubResource( 108 )
+states/Sex_FreeStandingTease_1-loop/position = Vector2( 536, 82 )
+states/Sex_FreeStanding_1-loop/node = SubResource( 109 )
+states/Sex_FreeStanding_1-loop/position = Vector2( 536, 249 )
+transitions = [ "Sex_FreeStandingTease_1-loop", "Sex_FreeStandingInside_1-loop", SubResource( 110 ), "Sex_FreeStandingInside_1-loop", "Sex_FreeStandingTease_1-loop", SubResource( 111 ), "Sex_FreeStandingInside_1-loop", "Sex_FreeStanding_1-loop", SubResource( 112 ), "Sex_FreeStanding_1-loop", "Sex_FreeStandingInside_1-loop", SubResource( 113 ), "Sex_FreeStanding_1-loop", "Sex_FreeStandingFast_1-loop", SubResource( 114 ), "Sex_FreeStandingFast_1-loop", "Sex_FreeStanding_1-loop", SubResource( 115 ) ]
+start_node = "Sex_FreeStandingTease_1-loop"
+
+[sub_resource type="AnimationNodeBlendTree" id=117]
+graph_offset = Vector2( -271.821, 46.258 )
+nodes/Animation/node = SubResource( 3 )
+nodes/Animation/position = Vector2( 140, 280 )
+nodes/CuffsBlend/node = SubResource( 4 )
+nodes/CuffsBlend/position = Vector2( 440, 160 )
+nodes/StateMachine/node = SubResource( 116 )
+nodes/StateMachine/position = Vector2( 160, 120 )
+nodes/output/position = Vector2( 680, 180 )
+node_connections = [ "CuffsBlend", 0, "StateMachine", "CuffsBlend", 1, "Animation", "output", 0, "CuffsBlend" ]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=22]
+
+[sub_resource type="AnimationNodeAnimation" id=119]
+animation = "Sex_FreeStandingFast_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=120]
+animation = "Sex_FreeStandingInside_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=121]
+animation = "Sex_FreeStandingTease_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=122]
+animation = "Sex_FreeStanding_2-loop"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=123]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=124]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=125]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=126]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=127]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=128]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachine" id=129]
+states/Sex_FreeStandingFast_2-loop/node = SubResource( 119 )
+states/Sex_FreeStandingFast_2-loop/position = Vector2( 509, 339 )
+states/Sex_FreeStandingInside_2-loop/node = SubResource( 120 )
+states/Sex_FreeStandingInside_2-loop/position = Vector2( 509, 167 )
+states/Sex_FreeStandingTease_2-loop/node = SubResource( 121 )
+states/Sex_FreeStandingTease_2-loop/position = Vector2( 509, 90 )
+states/Sex_FreeStanding_2-loop/node = SubResource( 122 )
+states/Sex_FreeStanding_2-loop/position = Vector2( 509, 258 )
+transitions = [ "Sex_FreeStandingTease_2-loop", "Sex_FreeStandingInside_2-loop", SubResource( 123 ), "Sex_FreeStandingInside_2-loop", "Sex_FreeStandingTease_2-loop", SubResource( 124 ), "Sex_FreeStandingInside_2-loop", "Sex_FreeStanding_2-loop", SubResource( 125 ), "Sex_FreeStanding_2-loop", "Sex_FreeStandingInside_2-loop", SubResource( 126 ), "Sex_FreeStanding_2-loop", "Sex_FreeStandingFast_2-loop", SubResource( 127 ), "Sex_FreeStandingFast_2-loop", "Sex_FreeStanding_2-loop", SubResource( 128 ) ]
+start_node = "Sex_FreeStandingTease_2-loop"
+
+[sub_resource type="AnimationNodeBlendTree" id=118]
+graph_offset = Vector2( -322.532, 74.6842 )
+nodes/Animation/node = SubResource( 3 )
+nodes/Animation/position = Vector2( 140, 280 )
+nodes/CuffsBlend/node = SubResource( 4 )
+nodes/CuffsBlend/position = Vector2( 440, 160 )
+nodes/StateMachine/node = SubResource( 129 )
+nodes/StateMachine/position = Vector2( 160, 120 )
+nodes/output/position = Vector2( 680, 180 )
+node_connections = [ "CuffsBlend", 0, "StateMachine", "CuffsBlend", 1, "Animation", "output", 0, "CuffsBlend" ]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=23]
+
+[node name="SexFreeStanding" instance=ExtResource( 2 )]
+script = ExtResource( 4 )
+
+[node name="Sprite3D" type="Sprite3D" parent="." index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.196641, -1.77462 )
+texture = ExtResource( 3 )
+region_enabled = true
+region_rect = Rect2( 1, 1, 1022, 62 )
+
+[node name="Doll3D" parent="." index="1" instance=ExtResource( 1 )]
+
+[node name="Doll3D2" parent="." index="2" instance=ExtResource( 1 )]
+
+[node name="AnimationTree" type="AnimationTree" parent="." index="3"]
+tree_root = SubResource( 117 )
+anim_player = NodePath("../Doll3D/DollSkeleton/AnimationPlayer")
+parameters/CuffsBlend/blend_amount = 0
+parameters/StateMachine/playback = SubResource( 22 )
+
+[node name="AnimationTree2" type="AnimationTree" parent="." index="4"]
+tree_root = SubResource( 118 )
+anim_player = NodePath("../Doll3D2/DollSkeleton/AnimationPlayer")
+parameters/CuffsBlend/blend_amount = 0
+parameters/StateMachine/playback = SubResource( 23 )
+
+[editable path="Doll3D"]
+[editable path="Doll3D/DollSkeleton"]
+[editable path="Doll3D2"]
+[editable path="Doll3D2/DollSkeleton"]

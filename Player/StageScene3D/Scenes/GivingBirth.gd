@@ -36,3 +36,6 @@ func playAnimation(animID, _args = {}):
 		state_machine.travel("GivingBirth-loop")
 	else:
 		Log.printerr("Action "+str(animID)+" is not found for stage "+str(id))
+
+func getSupportedStates():
+	return ["idle", "birth"]

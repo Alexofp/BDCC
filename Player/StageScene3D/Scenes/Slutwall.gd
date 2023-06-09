@@ -34,3 +34,6 @@ func playAnimation(animID, _args = {}):
 		state_machine.travel("Slutwall_idle-loop")
 	else:
 		Log.printerr("Action "+str(animID)+" is not found for stage "+str(id))
+
+func getSupportedStates():
+	return ["idle"]

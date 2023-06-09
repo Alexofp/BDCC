@@ -82,3 +82,6 @@ func canTransitionTo(_actionID, _args = []):
 	if(doll.getCharacterID() != firstDoll || doll2.getCharacterID() != secondDoll):
 		return false
 	return true
+
+func getSupportedStates():
+	return ["tease", "inside", "sex", "fast"]
