@@ -231,7 +231,10 @@ func pickLevel(character:DynamicCharacter, _args = {}):
 	if(_args.has(NpcGen.Level)):
 		character.npcLevel = _args[NpcGen.Level]
 	else:
-		character.npcLevel = 1
+		if(GM.pc == null):
+			character.npcLevel = 1
+		else:
+			character.npcLevel = Util.maxi(GM.pc.getLevel() + RNG.randi_range(-3,3), 0)# Just some random lvl
 	character.getSkillsHolder().setLevel(character.npcLevel)
 
 func pickStats(character:DynamicCharacter, _args = {}):

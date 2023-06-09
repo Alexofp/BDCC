@@ -73,6 +73,8 @@ func _init():
 		"res://Modules/FightClubModule/Avy/ArenaQuest/AvyArenaPittyFuckScene.gd",
 		"res://Modules/FightClubModule/Avy/ArenaQuest/AvyFinalArenaBattleScene.gd",
 		"res://Modules/FightClubModule/Avy/ArenaQuest/AvySlutwallScene.gd",
+		
+		"res://Modules/FightClubModule/Slutwall/SlutwallPlayerScene.gd",
 		]
 	characters = [
 		"res://Modules/FightClubModule/Entrance/Bulldog.gd",
@@ -96,6 +98,7 @@ func _init():
 		"res://Modules/FightClubModule/Avy/ArenaQuest/AvyQuestStealDrugsEvent.gd",
 		"res://Modules/FightClubModule/Avy/ArenaQuest/GivingElizaPlantForAvyFightEvent.gd",
 		"res://Modules/FightClubModule/Avy/ArenaQuest/AvySlutwallEvent.gd",
+		"res://Modules/FightClubModule/Slutwall/SlutwallPlayerEvent.gd",
 	]
 	quests = [
 		"res://Modules/FightClubModule/Avy/ArenaQuest/AvyArenaQuest.gd",
