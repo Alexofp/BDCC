@@ -154,7 +154,7 @@ func _run():
 
 		saynn("[say=pc]Yeah, see the feline behind the glass? I wanna join her.[/say]")
 
-		if (GM.pc.getExposure() <= 0):
+		if (!GM.pc.isTooLewd()):
 			saynn("The nurse lazily turns her head, looking at Rahi. Then she looks back at you and quickly scans you with her eyes, probably looking for anything.. inappropriate.")
 
 			saynn("[say=nurse]Why?[/say]")
@@ -188,7 +188,7 @@ func _run():
 
 		saynn("The nurse lazily scans you with her eyes again.")
 
-		if (GM.pc.getExposure() <= 0):
+		if (!GM.pc.isTooLewd()):
 			saynn("[say=nurse]Sure, that's better. You have ten minutes.[/say]")
 
 			saynn("She presses a button on her computer that opens one of the locked doors.")

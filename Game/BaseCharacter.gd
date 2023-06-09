@@ -2013,3 +2013,12 @@ func afterTakingAShower():
 	clearBodyFluids()
 	clearBodywritings()
 	clearTallymarks()
+
+func isTooLewd(ignoreHeat = true):
+	var theExposure = getExposure()
+	if(ignoreHeat && hasEffect(StatusEffect.InHeat)):
+		theExposure -= 50
+	
+	if(theExposure > 0):
+		return true
+	return false
