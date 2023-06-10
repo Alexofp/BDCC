@@ -714,6 +714,7 @@ func getActions():
 						action = action,
 						name = action["name"],
 						desc = action["desc"],
+						category = getSafeValueFromDict(action, "category", []),
 						chance = getSafeValueFromDict(action, "chance"),
 						priority = getSafeValueFromDict(action, "priority", 0),
 					})
@@ -727,6 +728,7 @@ func getActions():
 						action = action,
 						name = action["name"],
 						desc = action["desc"],
+						category = getSafeValueFromDict(action, "category", []),
 						chance = getSafeValueFromDict(action, "chance"),
 						priority = getSafeValueFromDict(action, "priority", 0),
 					})

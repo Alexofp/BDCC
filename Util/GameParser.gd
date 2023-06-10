@@ -195,7 +195,7 @@ func callObjectFuncWrapper(_obj: String, _command: String, _args: Array):
 			return "[color=red]ERROR:NO_CUM[/color]"
 		return BodilyFluids.getFluidName(cumType)
 	
-	if(_command in ["analStretch"] && _args.size() == 0):
+	if(_command in ["analStretch", "anusStretch"] && _args.size() == 0):
 		var bodypart:BodypartAnus = object.getBodypart(BodypartSlot.Anus)
 		if(bodypart == null):
 			return "[color=red]ERROR:NOBODYPART[/color]"
