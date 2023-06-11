@@ -1027,6 +1027,8 @@ func getFertility():
 	
 	value += buffsHolder.getFertility()
 	
+	value *= (1.0 + buffsHolder.getCustom(BuffAttribute.FinalFertilityModifier))
+	
 	return value
 
 func getBaseVirility() -> float:
@@ -1039,6 +1041,8 @@ func getVirility():
 	var value = getBaseFertility()
 	
 	value += buffsHolder.getVirility()
+	
+	value *= (1.0 + buffsHolder.getCustom(BuffAttribute.FinalVirilityModifier))
 	
 	return value
 	
@@ -1061,6 +1065,9 @@ func getCrossSpeciesCompatibility():
 	var value = 0.0
 	
 	value += buffsHolder.getCrossSpeciesCompatibility()
+	
+	if(hasPerk(Perk.FertilityBroodmother) && value < 1.0):
+		return 1.0
 	
 	return value
 
@@ -2037,3 +2044,30 @@ func isTooLewd(ignoreHeat = true):
 	if(theExposure > 0):
 		return true
 	return false
+
+func shouldCondomBreakWhenFucking(characterPenetrated, chance: float = 20.0, showMessages = true) -> bool:
+	if(!OPTIONS.isContentEnabled(ContentType.RiskyCondoms)):
+		return false
+	
+	var character
+	if(characterPenetrated is String):
+		character = GlobalRegistry.getCharacter(characterPenetrated)
+	else:
+		character = characterPenetrated
+	
+	if(character.hasPerk(Perk.FertilityDesireToBreed)):
+		if(RNG.chance(chance)):
+			character.addPain(-20)
+			if(showMessages && character.isPlayer()):
+				GM.main.addMessage("You didn't even sabotage that condom.. but it still feels good..")
+			return true
+		
+		chance = clamp((chance * 3.0), 30, 95) #limits max chance to break to 95%
+		if(RNG.chance(chance) && !character.hasBlockedHands()):
+			character.addPain(-20)
+			if(showMessages && character.isPlayer()):
+				GM.main.addMessage("Your hands sneakily sabotage the condom.. feels good..")
+			return true
+		return false
+	
+	return RNG.chance(chance)

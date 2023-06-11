@@ -149,19 +149,3 @@ static func randomFemaleName():
 static func pickHashed(ar, thehash:int):
 	thehash = thehash % ar.size()
 	return ar[thehash]
-
-static func shouldCondomBreakWhenCumInside(characterPenetrated, chance: float = 20.0) -> bool:
-	assert(characterPenetrated != null, "Null character sent to RNG.shouldCondomBreakWhenCumInside")
-	if(!OPTIONS.isContentEnabled(ContentType.RiskyCondoms)):
-		return false
-	
-	var character
-	if(characterPenetrated is String):
-		character = GM.main.getCharacter(characterPenetrated)
-	else:
-		character = characterPenetrated
-	
-	if(character.hasPerk(Perk.FertilityDesireToBreed)):
-		return chance(clamp((chance * 4.5), 1, 95)) #limits max chance to break to 95%
-	else:
-		return chance(chance)

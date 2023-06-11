@@ -2,6 +2,7 @@ extends "res://Scenes/SceneBase.gd"
 
 var bornChildAmount: int = 0
 var bornChildString = ""
+var receivedApple = false
 
 func _init():
 	sceneID = "NurseryTalkScene"
@@ -10,6 +11,14 @@ func _reactInit():
 	if(GM.ES.triggerReact(Trigger.TalkingToNPC, ["nurse"])):
 		endScene()
 		return
+		
+	if(GM.pc.hasPerk(Perk.FertilityProudMom) && !getFlag("MedicalModule.Nursery_hadFreeAppleFromPerkToday", false)):
+		var theApple = GlobalRegistry.createItem("appleitem")
+		theApple.setIsLegal(true)
+		GM.pc.getInventory().addItem(theApple)
+		addMessage("You recieved an apple")
+		setFlag("MedicalModule.Nursery_hadFreeAppleFromPerkToday", true)
+		receivedApple = true
 
 func _run():
 	if(state == ""):
@@ -40,13 +49,9 @@ func _run():
 			saynn("You approach the nurse and try to get her attention. She drags her gaze away from the screen and looks at you.")
 
 			# (if player has the perk FertilityProudMom and didn't get an apple today)
-			if(GM.pc.hasPerk(Perk.FertilityProudMom) && !GM.main.getModuleFlag("MedicalModule", "Nursery_hadFreeAppleFromPerkToday", false)):
+			if(receivedApple):
 				saynn("[say=nurse]Oh it's you again! I try to make sure that every mom here stays on the healthy side, take this[/say]")
-				saynn("She gives you an apple")
-				
-				GM.pc.getInventory().addItem(GlobalRegistry.createItem("appleitem"))
-				addMessage("You recieved an apple")
-				GM.main.setModuleFlag("MedicalModule", "Nursery_hadFreeAppleFromPerkToday", true)
+				saynn("She gives you an apple.")
 				
 			# (if ready to give birth)
 			elif(GM.pc.isVisiblyPregnant()):
@@ -250,11 +255,13 @@ func printChildren(pcKids = true):
 		var daysPassed = GM.main.getDays() - birthDay
 		var yearsOld:int = daysPassed / 365
 		var daysOld:int = daysPassed - yearsOld * 365
-		var ageStr = str(daysOld)+" days old"
+		var ageStr = str(daysOld)+" days"
 		if(daysOld == 1):
-			ageStr = str(daysOld)+" day old"
+			ageStr = str(daysOld)+" day"
 		
-		if(yearsOld == 1):	
+		if(yearsOld < 1):
+			pass
+		elif(yearsOld == 1):	
 			ageStr = "1 year "+ageStr
 		else:
 			ageStr = str(yearsOld)+" years "+ageStr
@@ -315,6 +322,7 @@ func saveData():
 	
 	data["bornChildAmount"] = bornChildAmount
 	data["bornChildString"] = bornChildString
+	data["receivedApple"] = receivedApple
 	
 	return data
 	
@@ -323,3 +331,4 @@ func loadData(data):
 	
 	bornChildAmount = SAVE.loadVar(data, "bornChildAmount", 0)
 	bornChildString = SAVE.loadVar(data, "bornChildString", "")
+	receivedApple = SAVE.loadVar(data, "receivedApple", false)

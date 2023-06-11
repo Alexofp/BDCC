@@ -422,7 +422,7 @@ func _react(_action: String, _args):
 		getModule("RahiModule").advanceSkill("rahiSkillSex")
 		if(usedCondom):
 			var chance = GM.pc.useBestCondom()
-			condomBroke = RNG.shouldCondomBreakWhenCumInside("rahi", chance)
+			condomBroke = GM.pc.shouldCondomBreakWhenFucking("rahi", chance)
 		
 		if(!usedCondom || (usedCondom && condomBroke)):
 			getCharacter("rahi").cummedInVaginaBy("pc")

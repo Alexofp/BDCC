@@ -396,7 +396,7 @@ func _react(_action: String, _args):
 				getCharacter("rahi").cummedInMouthBy("pc")
 				GM.pc.orgasmFrom("rahi")
 			if(newState == "cowgirl"):
-				condomBroke = RNG.shouldCondomBreakWhenCumInside("rahi", 30.0)
+				condomBroke = GM.pc.shouldCondomBreakWhenFucking("rahi", 30.0)
 				if(condomBroke):
 					getCharacter("rahi").cummedInVaginaBy("pc")
 				else:

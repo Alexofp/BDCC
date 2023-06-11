@@ -7,7 +7,7 @@ func getVisibleName():
 	return "Fertility"
 
 func getVisibleDescription():
-	return "Shows how much you are used to being bred by local inhabitants"
+	return "Shows how much you are used to being impregnated by local inhabitants"
 
 func getPerkTiers():
 	return [

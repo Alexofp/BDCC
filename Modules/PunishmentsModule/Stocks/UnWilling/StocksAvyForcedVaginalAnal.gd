@@ -220,7 +220,7 @@ func _react(_action: String, _args):
 	
 	if(_action == "fucking"):
 		if(usedCondom):
-			condomBroke = RNG.shouldCondomBreakWhenCumInside(GM.pc)
+			condomBroke = getCharacter("avy").shouldCondomBreakWhenFucking(GM.pc, 50)
 		
 		GM.pc.gotVaginaFuckedBy("avy")
 		if(!usedCondom || (usedCondom && condomBroke)):

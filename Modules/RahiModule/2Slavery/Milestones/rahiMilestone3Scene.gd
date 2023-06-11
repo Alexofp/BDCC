@@ -573,7 +573,7 @@ func _react(_action: String, _args):
 	if(_action == "vaginal_condom"):
 		usedCondom = true
 		var chance = GM.pc.useBestCondom()
-		condomBroke = RNG.shouldCondomBreakWhenCumInside("rahi", chance)
+		condomBroke = GM.pc.shouldCondomBreakWhenFucking("rahi", chance)
 		setState("vaginal_start")
 		return
 

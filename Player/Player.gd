@@ -977,3 +977,9 @@ func doPainfullyStretchHole(_bodypart, _who = "pc"):
 func doWound(_who = "pc"):
 	addEffect(StatusEffect.Wounded, [1])
 	emit_signal("gotWoundedBy", _who)
+
+func getEncounterChanceModifierStaff():
+	return clamp(buffsHolder.getCustom(BuffAttribute.EncounterChanceModifierStaff) + 1.0, 0.1, 10.0)
+	
+func getEncounterChanceModifierInmates():
+	return clamp(buffsHolder.getCustom(BuffAttribute.EncounterChanceModifierInmates) + 1.0, 0.1, 10.0)

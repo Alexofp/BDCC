@@ -472,7 +472,7 @@ func doDomAction(_id, _actionInfo):
 		var condom:ItemBase = getSub().getWornCondom()
 		if(condom != null):
 			var breakChance = condom.getCondomBreakChance()
-			var condomBroke = RNG.shouldCondomBreakWhenCumInside(getDom(), breakChance)
+			var condomBroke = getSub().shouldCondomBreakWhenFucking(getDom(), breakChance)
 			if(condomBroke):
 				text = "[b]The condom broke![/b] "+text
 				condom.destroyMe()
@@ -773,7 +773,7 @@ func doSubAction(_id, _actionInfo):
 		var condom:ItemBase = getSub().getWornCondom()
 		if(condom != null):
 			var breakChance = condom.getCondomBreakChance()
-			var condomBroke = RNG.shouldCondomBreakWhenCumInside(getDom(), breakChance)
+			var condomBroke = getSub().shouldCondomBreakWhenFucking(getDom(), breakChance)
 			if(condomBroke):
 				text = "[b]The condom broke![/b] "+text
 				condom.destroyMe()

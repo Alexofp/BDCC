@@ -110,11 +110,6 @@ func getCharacter(charID: String) -> BaseCharacter:
 func getModule(modID: String):
 	return GlobalRegistry.getModule(modID)
 	
-func encounterBaseChanceMod() -> float:
-	if(GM.pc.hasPerk(Perk.FertilityProudMom) && GM.pc.menstrualCycle.isVisiblyPregnant()):
-		return 0.3
-	return 1.0
-
 func addMessage(theMessage: String):
 	GM.main.addMessage(theMessage)
 

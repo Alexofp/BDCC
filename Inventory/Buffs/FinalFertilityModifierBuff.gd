@@ -18,10 +18,7 @@ func apply(_buffHolder):
 	var modifier = 1.0
 	if(_buffHolder.getCharacter().hasPerk(Perk.FertilityBroodmother) && amount < 0):
 		modifier = 0.3
-
-	_buffHolder.extraFertility += (amount/100.0) * modifier
-	
-#	print("Character: ", _buffHolder.getCharacter(), " FinalFertility: ", _buffHolder.extraFertility)
+	_buffHolder.addCustom(BuffAttribute.FinalFertilityModifier, amount/100.0 * modifier)
 
 func getBuffColor():
 	if(amount < 0):

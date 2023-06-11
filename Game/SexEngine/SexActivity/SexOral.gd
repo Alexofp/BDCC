@@ -547,7 +547,7 @@ func doDomAction(_id, _actionInfo):
 		var condom:ItemBase = getDom().getWornCondom()
 		if(condom != null):
 			var breakChance = condom.getCondomBreakChance()
-			var condomBroke = RNG.shouldCondomBreakWhenCumInside(getSub(), breakChance)
+			var condomBroke = getDom().shouldCondomBreakWhenFucking(getSub(), breakChance)
 			if(condomBroke):
 				text = "[b]The condom broke![/b] "+text
 				condom.destroyMe()

@@ -9,7 +9,7 @@ static func printerr(text: String):
 	error(text)
 
 static func warning(text: String):
-	printerr(text)
+	print(text)
 	Console.printLine("[color=yellow]"+text+"[/color]")
 
 static func print(text: String):

@@ -9,9 +9,9 @@ func getVisibleName():
 
 func getVisibleDescription():
 	return "Your womb is ripe for breeding, ready to bear the offspring of anyone dominant enough to claim you. \n"  \
-			+ "Pregnancy debuff penalty is reduced by half. \n" \
-			+ "Increased cross species compatibility by 20% \n" \
-			+ "Fertility reduction medication has significantly less effect on you." #by 70%
+			+ "Pregnancy debuffs are reduced by 50%. \n" \
+			+ "Fertility debuffs are reduced by 70%.\n" \
+			+ "Cross-species impregnation is now just as likely for you as an impregnation from the same species!" 
 	
 func getSkillTier():
 	return 1
@@ -21,5 +21,4 @@ func getPicture():
 
 func getBuffs():
 	return [
-		buff(Buff.CrossSpeciesCompatibilityBuff, [20]),
 	]
