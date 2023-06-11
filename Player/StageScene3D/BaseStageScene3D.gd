@@ -141,3 +141,12 @@ func stateMachineTravelPuppy(_thedoll, state_machine, animID):
 		return false
 	
 	return true
+
+func getSupportedStates():
+	return []
+
+func getSupportedStatesPuppy():
+	return ["stand", "walk", "sit", "paw", "back", "sad"]
+
+func getSupportedStatesSolo():
+	return ["walk", "stand", "kneel", "defeat", "sit", "bite", "block", "dodge", "hurt", "kick", "punch", "allfours", "crawl", "stunbaton", "throw", "holdpistol", "aimpistol", "firepistol", "shiv", "shove", "struggle", "struggle_gag", "struggle_legs"]

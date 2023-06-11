@@ -7,6 +7,8 @@ var id = "errorerror"
 var npcStats = {}
 var npcLevel = 0
 var npcLustInterests = {}
+var npcPersonality = {}
+var npcFetishes = {}
 var npcArmor = {}
 var npcBasePain = null
 var npcBaseLust = null
@@ -40,6 +42,11 @@ func _ready():
 				lustInterests.addInterest(interestID, interestData[0])
 		else:
 			lustInterests.addInterest(interestID, interestData)
+			
+	for personalityStat in npcPersonality:
+		personality.setStat(personalityStat, npcPersonality[personalityStat])
+	for fetishID in npcFetishes:
+		fetishHolder.setFetish(fetishID, npcFetishes[fetishID])
 			
 	if(npcHasMenstrualCycle):
 		menstrualCycle = MenstrualCycle.new()
@@ -371,7 +378,7 @@ func onCharacterReadyToGiveBirth():
 	pregnancyWaitTimer = 0
 	if(getBirthWaitTime() > 0 && getMenstrualCycle() != null):
 		if(getMenstrualCycle().isPregnantFromPlayer()):
-			GM.main.addLogMessage("News", "You just received news that "+getName()+" is ready to give birth to your children and now just waits for a good moment to do it.")
+			GM.main.addLogMessage("News", "You just received news that "+getName()+" is ready to give birth to your children and now just waits for a good moment to do it. Maybe you can go check on them.")
 
 
 # How much the npc will wait before giving birth alone (in seconds)

@@ -31,7 +31,6 @@ func playAnimation(animID, _args = {}):
 	#if(animID is Array):
 	#	animID = animID[0]
 	
-	print("Playing duo: "+str(animID))
 	var firstDoll = "pc"
 	if(_args.has("pc")):
 		firstDoll = _args["pc"]
@@ -83,3 +82,6 @@ func canTransitionTo(_actionID, _args = []):
 	if(doll.getCharacterID() != firstDoll || doll2.getCharacterID() != secondDoll):
 		return false
 	return true
+
+func getSupportedStates():
+	return ["pin", "head", "crotch"]

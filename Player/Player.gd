@@ -875,6 +875,22 @@ func useBestCondom():
 		bestObject.removeXOrDestroy(1)
 	return bestChance
 
+func useWorstCondom():
+	var condoms = getInventory().getItemsWithTag(ItemTag.Condom)
+	if(condoms.size() <= 0):
+		return null
+	
+	var bestObject = null
+	var bestChance = 100000.0
+	for condom in condoms:
+		if(condom.getCondomBreakChance() < bestChance):
+			bestChance = condom.getCondomBreakChance()
+			bestObject = condom
+	
+	if(bestObject != null):
+		bestObject.removeXOrDestroy(1)
+	return bestChance
+
 func onPlayerVisiblyPregnant():
 	GM.main.addLogMessage("Uh oh", "You notice that your belly is more inflated that normally. You can't deny it anymore, you are pregnant..")
 

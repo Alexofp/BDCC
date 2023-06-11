@@ -42,6 +42,7 @@ func _run():
 
 		var showedPC = false
 		var i = 1
+		var avyRekt = getFlag("FightClubModule.AvyGotRekt", false)
 		
 		for rankID in FightClubRank.getAll():
 			var rankName = FightClubRank.getVisibleName(rankID)
@@ -54,6 +55,8 @@ func _run():
 					sayn(str(i)+" - {pc.name}")
 					i+=1
 				
+				if(fighterID == "avy" && avyRekt):
+					continue
 				var fighter:FightClubFighter = GlobalRegistry.getFightClubFighter(fighterID)
 				
 				if(FightClubModule.isFighterDefeated(fighterID)):
@@ -65,6 +68,8 @@ func _run():
 			if(rankID == FightClubRank.FuckMeat && !showedPC):
 				sayn(str(i)+" - {pc.name}")
 				i+=1
+			if(rankID == FightClubRank.FuckMeat && avyRekt):
+				sayn(str(i)+" - Avy The Fallen Hero (defeated)")
 			
 			sayn("")
 		
@@ -73,7 +78,21 @@ func _run():
 			addButton("Arena", "Tell her that you are ready to fight the next opponent", "fightnext")
 		else:
 			addDisabledButton("Arena", "No one left to fight :(")
-		addDisabledButton("Fight Avy", "Final arena fight not implemented yet")
+			
+		if(!getFlag("FightClubModule.GotTaskToStealPlant")):
+			if(getModule("FightClubModule").isReadyToFightAvy()):
+				addButton("Fight Avy", "Time to do this", "do_fight_avy")
+			else:
+				addDisabledButton("Fight Avy", "You must defeated all other opponents before fighting Avy")
+		else:
+			if(getFlag("FightClubModule.AvyGotRekt")):
+				addButton("Rematch Avy", "Redo the final fight", "do_fight_avy_second_time") # Maybe a choice between two fights
+			else:
+				if(getFlag("FightClubModule.ReturnedPlantToEliza")):
+					addButton("Fight Avy", "Time to do this again", "do_fight_avy_second_time")
+				else:
+					addDisabledButton("Fight Avy", "You're not ready to do this! You know you gonna lose again.")
+			
 		addButton("Rematch", "Fight one of your defeated opponents again", "rematchmenu")
 		addButton("Leave", "Gotta go", "endthescene")
 		GM.ES.triggerRun(Trigger.TalkingToNPC, ["avy"])
@@ -171,6 +190,16 @@ func _react(_action: String, _args):
 		savedFighterID = _args[0]
 		setState("fight")
 		return
+		
+	if(_action == "do_fight_avy"):
+		runScene("AvyFirstArenaBattleScene")
+		endScene()
+		return
+		
+	if(_action == "do_fight_avy_second_time"):
+		runScene("AvyFinalArenaBattleScene")
+		endScene()
+		return
 	
 	if(_action == "endthescene"):
 		endScene()
@@ -229,3 +258,17 @@ func _react_scene_end(_tag, _result):
 				runScene(lostScene)
 			
 			endScene()
+
+func getDebugActions():
+	return [
+		{
+			"id": "instantWin",
+			"name": "Win all fights",
+			"args": [
+			],
+		},
+	]
+
+func doDebugAction(_id, _args = {}):
+	if(_id == "instantWin"):
+		getModule("FightClubModule").forceWinEveryoneExpectAvy()

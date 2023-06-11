@@ -100,5 +100,24 @@ roomDescription = "Abandoned maintenance space that is now made into an arena."
 roomColor = 8
 population = 1
 
+[node name="FightClubRoom11" parent="." index="10" instance=ExtResource( 2 )]
+self_modulate = Color( 0.7, 0.7, 0.7, 1 )
+position = Vector2( 128, -128 )
+roomName = "The Underground"
+roomDescription = "Abandoned maintenance space that is now made into an arena."
+roomColor = 8
+population = 1
+
+[node name="FightClubRoom12" parent="." index="11" instance=ExtResource( 2 )]
+self_modulate = Color( 0.7, 0.7, 0.7, 1 )
+position = Vector2( 128, -192 )
+roomName = "Slutwall"
+roomID = "fight_slutwall"
+roomDescription = "Abandoned maintenance space that is now made into an arena.
+
+One of the walls here has a row of big round holes in them roughly at your waist level. There are also a few smaller holes near each big one and many chains dangling, ready to be used. Your best guess is.. pretty lewd."
+roomColor = 8
+population = 1
+
 [connection signal="onEnter" from="FightClubRoom" to="." method="_on_FightClubRoom_onEnter"]
 [connection signal="onReact" from="FightClubRoom" to="." method="_on_FightClubRoom_onReact"]

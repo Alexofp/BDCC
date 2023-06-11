@@ -8,6 +8,30 @@ func _init():
 	npcBaseLust = 90
 	npcCharacterType = CharacterType.Inmate
 	
+	npcPersonality = {
+		PersonalityStat.Brat: 1.0,
+		PersonalityStat.Mean: 1.0,
+		PersonalityStat.Subby: -1.0,
+		PersonalityStat.Impatient: -0.3,
+		PersonalityStat.Naive: -0.5,
+		PersonalityStat.Coward: 0.5,
+	}
+	npcFetishes = {
+		Fetish.AnalSexReceiving : FetishInterest.Hates,
+		Fetish.AnalSexGiving : FetishInterest.Loves,
+		Fetish.VaginalSexGiving : FetishInterest.Loves,
+		Fetish.OralSexReceiving : FetishInterest.Loves,
+		Fetish.OralSexGiving : FetishInterest.Hates,
+		Fetish.Sadism : FetishInterest.Loves,
+		Fetish.Masochism : FetishInterest.Hates,
+		Fetish.UnconsciousSex : FetishInterest.Loves,
+		Fetish.Breeding : FetishInterest.Loves,
+		Fetish.Bondage : FetishInterest.Dislikes,
+		Fetish.Condoms : FetishInterest.Hates,
+		Fetish.DrugUse : FetishInterest.Loves,
+		Fetish.Exhibitionism : FetishInterest.Likes,
+	}
+	
 	npcLustInterests = {
 		InterestTopic.TallyMarks: Interest.Loves,
 		InterestTopic.Bodywritings: Interest.Loves,
@@ -104,6 +128,8 @@ func _getAttacks():
 	return ["biteattack", "simplekickattack", "stretchingAttack", "lickWounds", "shoveattack", "trygetupattack"]
 
 func getFightIntro(_battleName):
+	if(_battleName == "arenafight"):
+		return "Avy stands tall, her foxy tail swishing behind her. It seems she is waiting for you to do the first move.."
 	return "Avy stands straight, her hands slightly behind her, clawed digits spread out."
 
 func getThickness() -> int:

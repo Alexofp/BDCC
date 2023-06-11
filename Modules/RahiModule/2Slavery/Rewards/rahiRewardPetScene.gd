@@ -35,6 +35,7 @@ func _run():
 		if (getModule("RahiModule").getAffection() >= 7):
 			addButton("Pet again", "Pet that kitty again", "pet_rahi_again")
 	if(state == "pet_rahi_again"):
+		playAnimation(StageScene.Hug, "hug", {npc="rahi"})
 		saynn("Why the heck not, Rahi looks so pettable that you can't stop yourself from giving her another headpat between the ears.")
 
 		saynn("Kitty is purring softly and leans into your hand ever so slightly.")

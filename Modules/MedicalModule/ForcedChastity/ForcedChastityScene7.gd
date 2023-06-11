@@ -227,7 +227,7 @@ func _run():
 
 	if(state == "bottom"):
 		setFlag("MedicalModule.Chastity_Event5LockedForever", true)
-		playAnimation(StageScene.Duo, "stand", {npc="eliza", bodyState={naked=true}})
+		playAnimation(StageScene.Hug, "hug", {npc="eliza", bodyState={naked=true}})
 		
 		saynn("Now it’s your time to blush. You lower your head slightly.")
 
@@ -246,6 +246,8 @@ func _run():
 		addButton("Continue", "See what happens next", "continue2")
 
 	if(state == "continue2"):
+		playAnimation(StageScene.Duo, "stand", {npc="eliza", bodyState={naked=true}})
+		
 		saynn("About a minute passes.. Time flies.. You finally stop hugging. Your hand reaches out to touch your cage.. yeah, it’s still there..")
 
 		saynn("Eliza is still smiling, she seems to be very happy about your decision. Maybe more than you are..")

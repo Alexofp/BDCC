@@ -32,3 +32,6 @@ func playAnimation(animID, _args = {}):
 		animationPlayer.play("Idle")
 	else:
 		Log.printerr("Action "+str(animID)+" is not found for stage "+str(id))
+
+func getSupportedStates():
+	return ["idle"]

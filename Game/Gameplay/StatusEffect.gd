@@ -8,6 +8,9 @@ const Weakness = "Weakness"
 const Blindness = "Blindness"
 const Collapsed = "Collapsed"
 const Stunned = "Stunned"
+const Evading = "Evading"
+const Blocking = "Blocking"
+const Defocussing = "Defocussing"
 
 # Sex engine effects
 const SexEngineLikes = "SexEngineLikes"

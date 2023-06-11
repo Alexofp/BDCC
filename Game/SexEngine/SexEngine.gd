@@ -315,12 +315,20 @@ func checkIfThereAreAnyActivitiesThatSupportGoal(goalID):
 		var activityGoals = activity.getGoals()
 		var supportedSexTypes = activity.getSupportedSexTypes()
 		if(activityGoals.has(goalID) && activityGoals[goalID] > 0.0):
-			var sexTypesSupported = sexType.getSupportedSexActivities()
-			for sexTypeSupported in sexTypesSupported:
-				if(supportedSexTypes.has(sexTypeSupported) && supportedSexTypes[sexTypeSupported]):
-					return true
+			if(areSexTypesSupported(supportedSexTypes)):
+				return true
 	return false
-		
+
+func areSexTypesSupported(supportedSexTypes):
+	var sexTypesSupported = sexType.getSupportedSexActivities()
+	for sexTypeSupported in sexTypesSupported:
+		if(supportedSexTypes.has(sexTypeSupported) && supportedSexTypes[sexTypeSupported]):
+			return true
+	return false
+
+func areSexTypesSupportedForActivity(activity):
+	var supportedSexTypes = activity.getSupportedSexTypes()
+	return areSexTypesSupported(supportedSexTypes)
 
 func hasGoal(thedominfo, goal, thesubinfo):
 	for goalInfo in thedominfo.goals:
@@ -510,6 +518,9 @@ func processAIActions(isDom = true):
 				var newSexActivityRef = allSexActivities[possibleSexActivityID]
 				newSexActivityRef.sexEngineRef = weakref(self)
 				
+				if(!areSexTypesSupportedForActivity(newSexActivityRef)):
+					continue
+				
 				for subID in subs:
 					newSexActivityRef.initParticipants(personID, subID)
 					var subInfo = subs[subID]
@@ -543,9 +554,13 @@ func processAIActions(isDom = true):
 				var newSexActivityRef = allSexActivities[possibleSexActivityID]
 				newSexActivityRef.sexEngineRef = weakref(self)
 				
+				if(!areSexTypesSupportedForActivity(newSexActivityRef)):
+					continue
+				
 				for domID in doms:
 					newSexActivityRef.initParticipants(domID, personID)
 					var domInfo = doms[domID]
+					
 					if(!newSexActivityRef.canBeStartedBySub()):
 						continue
 					
@@ -708,6 +723,7 @@ func getActions():
 						action = action,
 						name = action["name"],
 						desc = action["desc"],
+						category = getSafeValueFromDict(action, "category", []),
 						chance = getSafeValueFromDict(action, "chance"),
 						priority = getSafeValueFromDict(action, "priority", 0),
 					})
@@ -721,6 +737,7 @@ func getActions():
 						action = action,
 						name = action["name"],
 						desc = action["desc"],
+						category = getSafeValueFromDict(action, "category", []),
 						chance = getSafeValueFromDict(action, "chance"),
 						priority = getSafeValueFromDict(action, "priority", 0),
 					})
@@ -733,6 +750,9 @@ func getActions():
 				var newSexActivityRef = allSexActivities[possibleSexActivityID]
 				newSexActivityRef.sexEngineRef = weakref(self)
 				newSexActivityRef.initParticipants("pc", pctargetID)
+				
+				if(!areSexTypesSupportedForActivity(newSexActivityRef)):
+					continue
 				
 				if(!newSexActivityRef.canBeStartedByDom()):
 					continue
@@ -766,6 +786,9 @@ func getActions():
 				var newSexActivityRef = allSexActivities[possibleSexActivityID]
 				newSexActivityRef.sexEngineRef = weakref(self)
 				newSexActivityRef.initParticipants(pctargetID, "pc")
+				
+				if(!areSexTypesSupportedForActivity(newSexActivityRef)):
+					continue
 				
 				if(!newSexActivityRef.canBeStartedBySub()):
 					continue

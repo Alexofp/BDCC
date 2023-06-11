@@ -264,7 +264,7 @@ func _run():
 		addButton("Continue", "See what happens next", "rahi_is_standing")
 	if(state == "rahi_is_standing"):
 		removeCharacter("eliza")
-		playAnimation(StageScene.Duo, "stand", {npc="rahi", npcBodyState={naked=true}})
+		playAnimation(StageScene.Hug, "hug", {npc="rahi", npcBodyState={naked=true}})
 		saynn("You turn back towards Rahi and hug her again.")
 
 		saynn("[say=rahi]Kitty is not a fan of her..[/say]")

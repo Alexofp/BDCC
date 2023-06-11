@@ -365,6 +365,7 @@ func _run():
 		addButton("Hug Rahi", "Hug this precious kitty", "1_sorry_hug")
 		addButton("It better not", "Tell Rahi this", "1_sorry_betternot")
 	if(state == "1_sorry_hug"):
+		playAnimation(StageScene.Hug, "hug", {npc="rahi"})
 		saynn("Instead of saying anything you just walk up to Rahi and give her a tight hug. The feline mewls surprised and then proceeds to purr in your hands.")
 
 		addButton("Continue", "Enough talking", "endthescene")
@@ -629,6 +630,8 @@ func _run():
 		addButton("It's okay", "Tell Rahi this", "5_sorry_itsokay")
 		addButton("Got punishment", "Tell Rahi that she received a punishment for it", "5_sorry_gotpunished")
 	if(state == "5_sorry_itsokay"):
+		playAnimation(StageScene.Hug, "hug", {npc="rahi"})
+		
 		saynn("[say=pc]It's okay, kitty. You did trick me which wasn't ideal. But in the end, you did the right thing. All by yourself. Makes me think that this wasn't all for nothing.[/say]")
 
 		saynn("Rahi's eyes look watery, her lips twitch a little. You give her a short hug.")
@@ -742,12 +745,15 @@ func _run():
 
 		addButton("Continue", "Enough talking", "endthescene")
 	if(state == "7_happy"):
+		playAnimation(StageScene.Hug, "hug", {npc="rahi"})
 		saynn("[say=rahi]She doesn't have much to say. But I do. I'm such a happy kitty.[/say]")
 
 		saynn("Rahi purrs and reaches out to hug you. Aw.")
 
 		addButton("Continue", "Enough talking", "endthescene")
 	if(state == "8_thankyou"):
+		playAnimation(StageScene.Hug, "hug", {npc="rahi"})
+		
 		saynn("[say=rahi]I owe you everything, {rahiMaster}.. You made the life of this kitty so much better.. my life. I probably won't ever be the Rahi that I was before this prison.. But that's okay. I was unhappy. I was mean and grumpy at everything and everyone. Now I don't have to be. Unless you tell me to, meow.[/say]")
 
 		saynn("Rahi looks around.")

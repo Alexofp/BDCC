@@ -114,3 +114,11 @@ func encounterBaseChanceMod() -> float:
 	if(GM.pc.hasPerk(Perk.FertilityProudMom) && GM.pc.menstrualCycle.isVisiblyPregnant()):
 		return 0.3
 	return 1.0
+
+func addMessage(theMessage: String):
+	GM.main.addMessage(theMessage)
+
+func addExperienceToPlayer(ex: int, showMessage: bool = true):
+	if(showMessage):
+		addMessage("You received "+str(ex)+" experience")
+	GM.pc.addExperience(ex)

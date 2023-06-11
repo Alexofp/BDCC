@@ -40,6 +40,9 @@ static func npcSatisfiesCondition(character:BaseCharacter, conInfo):
 	elif(conditionID == NpcCon.HasPenis):
 		if(!character.hasPenis()):
 			return false
+	elif(conditionID == NpcCon.CharacterType):
+		if(character.getCharacterType() != conInfo[1]):
+			return false
 	return true
 
 static func grabNpcIDFromPool(poolID, _conditions = []):

@@ -83,7 +83,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "before_birth")
 	if(state == "before_birth"):
-		playAnimation(StageScene.SexStart, "defeated", {pc = "nurse", npc="rahi", npcBodyState={naked=true}})
+		playAnimation(StageScene.GivingBirth, "birth", {pc="rahi", bodyState={naked=true}})
 		addCharacter("rahi", ["naked"])
 		saynn("You and Rahi are led into a private room with a soft and warm environment that already seems to be prepared for her labor. The nurse quickly undresses Rahi and positions her on a special hospital bed.")
 
@@ -124,6 +124,8 @@ func _run():
 
 		addButton("Continue", "See what happens next", "rahi_gives_birth")
 	if(state == "rahi_gives_birth"):
+		playAnimation(StageScene.GivingBirth, "idle", {pc="rahi", bodyState={naked=true}})
+		
 		if (bornChildAmount == 1):
 			saynn("Rahi gave birth to "+str(bornChildAmount)+" kid!")
 
@@ -178,7 +180,7 @@ func _run():
 
 		saynn("[say=pc]Yeah, I wanna join the feline behind the window.[/say]")
 
-		if (GM.pc.getExposure() <= 0):
+		if (!GM.pc.isTooLewd()):
 			saynn("The nurse lazily turns her head, looking at Rahi. Then she looks back at you and quickly scans you with her eyes, probably looking for anything.. inappropriate.")
 
 			saynn("[say=nurse]Sure.[/say]")
@@ -200,7 +202,7 @@ func _run():
 
 		saynn("The nurse lazily scans you with her eyes again.")
 
-		if (GM.pc.getExposure() <= 0):
+		if (!GM.pc.isTooLewd()):
 			saynn("[say=nurse]Sure, that's better. You have ten minutes.[/say]")
 
 			saynn("She presses a button on her computer that opens one of the locked doors.")
@@ -336,7 +338,7 @@ func _run():
 		addButton("Continue", "See what happens next", "lewd_check")
 	if(state == "leaving"):
 		removeCharacter("nurse")
-		playAnimation(StageScene.Duo, "stand", {npc="rahi", npcAction="stand"})
+		playAnimation(StageScene.Hug, "hug", {npc="rahi", npcAction="stand"})
 		saynn("You get up too and follow Rahi back to the lobby. She turns around and gives you a tight hug.")
 
 		saynn("[say=rahi]She needs some.. rest..[/say]")

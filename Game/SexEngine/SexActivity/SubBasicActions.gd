@@ -13,6 +13,7 @@ func getSupportedSexTypes():
 	return {
 		SexType.DefaultSex: true,
 		SexType.StocksSex: true,
+		SexType.SlutwallSex: true,
 	}
 
 func isStocksSex():
@@ -39,24 +40,25 @@ func getStartActions(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexS
 	var resistScore = _subInfo.getResistScore() * (0.15 + _subInfo.personalityScore({PersonalityStat.Subby: -0.1, PersonalityStat.Mean: 0.1, PersonalityStat.Coward: -0.05}))
 		
 	if(!_sexEngine.hasTag(_subInfo.charID, SexActivityTag.PreventsSubViolence)):
-		if(!_subInfo.getChar().hasBoundArms() && !isStocksSex()):
-			actions.append({
-				name = "Punch",
-				desc = "Hit them!",
-				args = ["punch"],
-				score = resistScore,
-				category = getCategory(),
-				#chance = getApologySuccessChance(_domInfo, _subInfo),
-			})
-		elif(!_subInfo.getChar().hasBoundLegs()):
-			actions.append({
-				name = "Kick",
-				desc = "Hit them!",
-				args = ["kick"],
-				score = resistScore/1.5,
-				category = getCategory(),
-				#chance = getApologySuccessChance(_domInfo, _subInfo),
-			})
+		if(getSexType() != SexType.SlutwallSex):
+			if(!_subInfo.getChar().hasBoundArms() && !isStocksSex()):
+				actions.append({
+					name = "Punch",
+					desc = "Hit them!",
+					args = ["punch"],
+					score = resistScore,
+					category = getCategory(),
+					#chance = getApologySuccessChance(_domInfo, _subInfo),
+				})
+			elif(!_subInfo.getChar().hasBoundLegs()):
+				actions.append({
+					name = "Kick",
+					desc = "Hit them!",
+					args = ["kick"],
+					score = resistScore/1.5,
+					category = getCategory(),
+					#chance = getApologySuccessChance(_domInfo, _subInfo),
+				})
 	
 	if(sub.getInventory().hasRemovableRestraints() && sub.getStamina() > 0):
 		actions.append({
@@ -95,6 +97,8 @@ func getApologySuccessChance(_domInfo, _subInfo):
 	var theChance = 90.0 - _domInfo.personalityScore({PersonalityStat.Mean: 1.0}) * 20.0
 	if(_subInfo.getChar().isGagged()):
 		theChance *= 0.5
+	if(getSexType() == SexType.SlutwallSex):
+		theChance *= 0.6
 	return clamp(theChance, 5, 100)
 
 func startActivity(_args):
@@ -199,6 +203,16 @@ func startActivity(_args):
 			possible.append_array([
 				"{sub.You} {sub.youVerb('bounce')} slightly, making {sub.yourHis} "+RNG.pick(["tits", "breasts"])+" jiggle.",
 			])
+		if(getSexType() == SexType.SlutwallSex):
+			possible = [
+				"{sub.You} {sub.youVerb('tease')} {dom.youHim} with {sub.yourHis} body while still trapped in the slutwall.",
+				"{sub.You} {sub.youVerb('wiggle')} {sub.yourHis} lower part of the body seductively.",
+			]
+			if(getSub().bodypartHasTrait(BodypartSlot.Tail, PartTrait.TailFlexible)):
+				possible.append_array([
+					"{sub.You} {sub.youVerb('sway')} {sub.yourHis} tail seductively at {dom.youHim}.",
+				])
+			
 		var text = RNG.pick(possible)
 		
 		affectDom(1.0, 0.2, 0.0)

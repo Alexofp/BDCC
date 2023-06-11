@@ -1651,6 +1651,13 @@ func createFilledCondom():
 	cumInItem(theCondom)
 	return theCondom
 
+func lustStateFullyUndress():
+	var items = getInventory().getAllEquippedItems()
+	for itemSlot in items:
+		var lustState = items[itemSlot].getItemState()
+		if(lustState != null):
+			lustState.remove()
+
 func afterSexEnded(sexInfo):
 	if(sexInfo.getTimesCame() > 0):
 		addLust(-getLust())
@@ -2021,3 +2028,12 @@ func afterTakingAShower():
 	clearBodyFluids()
 	clearBodywritings()
 	clearTallymarks()
+
+func isTooLewd(ignoreHeat = true):
+	var theExposure = getExposure()
+	if(ignoreHeat && hasEffect(StatusEffect.InHeat)):
+		theExposure -= 50
+	
+	if(theExposure > 0):
+		return true
+	return false

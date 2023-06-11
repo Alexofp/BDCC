@@ -57,6 +57,9 @@ func getSupportedSexTypes():
 		SexType.DefaultSex: true,
 	}
 
+func getSexType():
+	return getSexEngine().getSexTypeID()
+
 func satisfyGoals():
 	var goalData = getGoals()
 	var sexEngine = getSexEngine()
@@ -335,7 +338,7 @@ func applyTallymarkIfNeededData(bodypartSlot):
 	#	return null
 	
 	var chanceToAdd = 0.0
-	if(getSub().hasTallymarks()):
+	if(getSub().hasTallymarks() || getSexType() in [SexType.SlutwallSex, SexType.StocksSex]):
 		chanceToAdd = 100.0
 	else:
 		chanceToAdd = (max(0.0, domInfo.fetishScore({Fetish.Bodywritings: 1.0})) + domInfo.personalityScore({PersonalityStat.Mean: 0.3})) * 100.0

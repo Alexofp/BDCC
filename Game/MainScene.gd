@@ -957,6 +957,10 @@ func getDebugActions():
 			"id": "openConsole",
 			"name": "Open console",
 		},
+		{
+			"id": "animBrowser",
+			"name": "Animation browser",
+		},
 	]
 
 func doDebugAction(id, args = {}):
@@ -1020,6 +1024,9 @@ func doDebugAction(id, args = {}):
 		
 	if(id == "openConsole"):
 		Console.toggleConsole()
+	
+	if(id == "animBrowser"):
+		runScene("SimpleAnimPlayerScene")
 
 func consoleSetFlagBool(flagID, valuestr):
 	var value = false

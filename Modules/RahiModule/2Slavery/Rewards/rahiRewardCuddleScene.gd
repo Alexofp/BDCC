@@ -43,6 +43,7 @@ func _run():
 			addButton("Scratching", "(Masochism) Test Rahi's pain threshold while cuddling with her", "gentle_scratches")
 		if (getModule("RahiModule").isSkillLearned("rahiSkillSex")):
 			addButtonWithChecks("Tribadism", "(Sex) This bed seems to be a good place for some kinky scissoring with Rahi..", "do_tribadism", [], [ButtonChecks.HasReachableVagina])
+			addButtonWithChecks("Reverse cowgirl", "(Sex) This bed seems to be a good place for some lewd times with Rahi..", "do_reversecowgirl", [], [ButtonChecks.HasReachablePenis])
 		if (getCharacter("rahi").canBeMilked()):
 			if (GM.pc.getInventory().getItemsWithTag(ItemTag.BreastPump).size() > 0):
 				if (!getCharacter("rahi").hasEffect(StatusEffect.SoreNipplesAfterMilking)):
@@ -383,6 +384,77 @@ func _run():
 		saynn("Rahi quickly leaves her cell, still marked with your scent.")
 
 		addButton("Continue", "That was very lewd", "endthescene")
+	if(state == "do_reversecowgirl"):
+		playAnimation(StageScene.SexReverseCowgirl, "tease", {npc="rahi", pc="pc", bodyState={naked=true, hard=true}, npcBodyState={naked=true}})
+		saynn("Rahi rests in your arms, both of you are enjoying the warmth and the intimacy of the embrace. Your bodies are pressed close.. you can feel the desire rising the more you gently caress Rahi's girly curves.")
+
+		saynn("At some point the kitty begins to feel something hard poking her.. She turns her head and glances at you.")
+
+		saynn("[say=pc]Um.. my bad.[/say]")
+
+		saynn("Rahi smiles, you notice her fingers slowly undoing the buttons of her shirt, revealing the beautiful curves of her breasts.")
+
+		saynn("[say=rahi]Is all good, {rahiMaster}, meow meow..[/say]")
+
+		saynn("It seems she is sharing your desire. With a little mischievous smile, Rahi breaks away from the embrace just so she can pull her shorts down, exposing her needy sacred sex. After that, she straddles your waist, positioning herself so her girly thighs trap your {pc.penis}.")
+
+		saynn("You can't help but to reach your hands out and caress her round slim butt, her tail pulls slightly to the side while her paws land on your member and get it fully hard and ready.. as if it wasn't already..")
+
+		addButton("Continue", "See what happens next", "reversecow_start")
+	if(state == "reversecow_start"):
+		playAnimation(StageScene.SexReverseCowgirl, "sex", {npc="rahi", pc="pc", bodyState={naked=true, hard=true}, npcBodyState={naked=true}})
+		saynn("After teasing you for a bit, Rahi finally raises your body and begins lowering herself onto your member, her paw guiding the shaft as it spreads her moist folds and prods the entrance.. before sliding inside.. A little moan escapes from her as she begins to ride you with a slow sensual rhythm, resting her paws on your chest.")
+
+		saynn("[say=rahi]Best way to cuddle.. ah..[/say]")
+
+		saynn("She feels warm and slick, her inner walls grasping your member so nicely that you can't help but to produce a little noise too. Your hands land on her hips and just hold her, letting the kitty do all the work.")
+
+		saynn("Slowly, your kitty picks up the pace, riding you faster. She raises her chin and moans louder, clearly approaching her peak.")
+
+		saynn("[say=rahi]D-do you wanna.. inside?..[/say]")
+
+		saynn("What an interesting proposition.")
+
+		addButton("Inside", "Let kitty ride you to the end", "reversecow_cuminside")
+		addButton("Pull out", "Rather not risk it", "reversecow_pullout")
+	if(state == "reversecow_cuminside"):
+		playAnimation(StageScene.SexReverseCowgirl, "inside", {npc="rahi", pc="pc", bodyState={naked=true, hard=true}, npcBodyState={naked=true}})
+		saynn("[say=pc]Yes.[/say]")
+
+		saynn("Each time she brings herself down on your {pc.penis}, her inner walls tighten around your throbbing length. At some she just can't take it anymore.. With a cute long moan, Rahi arches her back and cums, her inner muscles clench even harder, pushing you over the edge. You grunt as Rahi begins to feel the warm rush of your seed flooding her womb, claiming it..")
+
+		saynn("You both experience the climax at the same time. Rahi's body is trembling from all the euphoric waves crashing over it and yours does the same, just more controlled. The feline doesn't move anymore, just being your crotch warmer while your full dick is inside her, the last strings of your {pc.cum} panting her insides..")
+
+		saynn("[say=rahi]Nya-a-a..[/say]")
+
+		saynn("Rahi falls back into your hands, letting you cuddle her. Both of you are panting, satisfied.")
+
+		saynn("[say=rahi]Feels so good..[/say]")
+
+		saynn("You spend more time together, enjoying each other's company..")
+
+		addButton("Continue", "That was lewd", "endthescene")
+	if(state == "reversecow_pullout"):
+		playAnimation(StageScene.SexReverseCowgirl, "tease", {npc="rahi", pc="pc", bodyState={naked=true, hard=true}, npcBodyState={naked=true}})
+		saynn("[say=pc]Maybe not today.[/say]")
+
+		saynn("Rahi hears you but she still rides you fast, making you a little concerned. Each time she brings herself down on your {pc.penis}, her inner walls tighten around your throbbing length. At some she just can't take it anymore.. With a cute long moan, Rahi arches her back and cums, her inner muscles clench even harder, pushing you over the edge.")
+
+		saynn("[say=pc]Kitty!..[/say]")
+
+		saynn("And that's when she finally pulls away from your dick. Just in time for your hot sticky load to start landing on her fur, leaving quite a mess.")
+
+		saynn("You both experience the climax at the same time. Rahi's body is trembling from all the euphoric waves crashing over it and yours does the same, just more controlled. The feline doesn't move anymore, just warming your twitching member with her thighs, the last strings of your {pc.cum} landing on her legs and belly..")
+
+		saynn("[say=rahi]Nya-a-a..[/say]")
+
+		saynn("Rahi falls back into your hands, letting you cuddle her. Both of you are panting, satisfied.")
+
+		saynn("[say=rahi]Feels so good..[/say]")
+
+		saynn("You spend more time together, enjoying each other's company..")
+
+		addButton("Continue", "That was lewd", "endthescene")
 func addPumpButtons():
 	var pumps = GM.pc.getInventory().getItemsWithTag(ItemTag.BreastPump)
 	for pump in pumps:
@@ -411,6 +483,10 @@ func _react(_action: String, _args):
 
 	if(_action == "do_tribadism"):
 		processTime(10*60)
+		getModule("RahiModule").advanceSkill("rahiSkillSex")
+
+	if(_action == "do_reversecowgirl"):
+		processTime(5*60)
 		getModule("RahiModule").advanceSkill("rahiSkillSex")
 
 	if(_action == "milk_withpump"):
@@ -445,6 +521,21 @@ func _react(_action: String, _args):
 		processTime(3*60)
 		GM.pc.pissedOnBy("rahi")
 		getCharacter("rahi").pissedOnBy("pc")
+
+	if(_action == "reversecow_start"):
+		processTime(3*60)
+
+	if(_action == "reversecow_cuminside"):
+		processTime(10*60)
+		getCharacter("rahi").cummedInVaginaBy("pc")
+		GM.pc.orgasmFrom("rahi")
+		GM.pc.addSkillExperience(Skill.SexSlave, 30)
+
+	if(_action == "reversecow_pullout"):
+		processTime(10*60)
+		getCharacter("rahi").cummedOnBy("pc")
+		GM.pc.orgasmFrom("rahi")
+		GM.pc.addSkillExperience(Skill.SexSlave, 30)
 
 	setState(_action)
 

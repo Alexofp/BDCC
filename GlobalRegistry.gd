@@ -2,8 +2,8 @@ extends Node
 
 var game_version_major = 0
 var game_version_minor = 0
-var game_version_revision = 22
-var game_version_suffix = "bugfix1"
+var game_version_revision = 23
+var game_version_suffix = ""
 
 var currentUniqueID = 0
 var currentChildUniqueID = 0
@@ -32,6 +32,7 @@ var perksObjects: Dictionary = {}
 var lustTopics: Dictionary = {}
 var lustTopicsObjects: Array = []
 var stageScenes: Dictionary = {}
+var stageScenesCachedStates: Dictionary = {}
 var lustActions: Dictionary = {}
 var defaultLustActions: Array = []
 var orgasmLustActions: Array = []
@@ -306,6 +307,7 @@ func registerEverything():
 	registerAttackFolder("res://Attacks/PlayerOnly/")
 	registerAttackFolder("res://Attacks/WeaponAttacks/")
 	registerAttackFolder("res://Attacks/NpcAttacks/")
+	registerAttackFolder("res://Attacks/NpcAttacks/Avy/")
 	
 	registerLustActionFolder("res://Game/LustCombat/LustActions/")
 	registerLustActionFolder("res://Game/LustCombat/LustActions/Perk/")
@@ -957,6 +959,9 @@ func registerStageScene(path: String):
 	var item:PackedScene = load(path)
 	var itemObject = item.instance()
 	stageScenes[itemObject.id] = item
+	var possibleStates = itemObject.getSupportedStates()
+	if(possibleStates != null && possibleStates.size() > 0):
+		stageScenesCachedStates[itemObject.id] = possibleStates
 	itemObject.queue_free()
 	
 	#stageScenes[path.get_file()] = item
@@ -984,6 +989,9 @@ func createStageScene(id: String):
 		Log.printerr("ERROR: stage scene with the id "+id+" wasn't found")
 		return null
 	return stageScenes[id].instance()
+
+func getStageScenesCachedStates():
+	return stageScenesCachedStates
 
 func instanceCached(scenePath):
 	if(sceneCache.has(scenePath)):

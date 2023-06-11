@@ -167,6 +167,7 @@ func _run():
 
 		addButton("Kiss", "Might as well..", "do_kiss")
 	if(state == "do_kiss"):
+		playAnimation(StageScene.Hug, "hug", {npc="rahi"})
 		saynn("You carefully lift Rahi's veil and kiss her. She wraps her paws around you and extends it, actively kissing you back.")
 
 		saynn("Everyone in the crowd begins to clap their hands. Everyone.. expect Avy and Risha. One of them has her arms crossed and another rolls her eyes. Who cares about them though when you are embracing Rahi. She melts from the long kiss, her legs shake slightly. But you support her nicely.")
