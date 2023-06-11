@@ -260,7 +260,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "rahi_is_good")
 	if(state == "rahi_is_good"):
-		playAnimation(StageScene.Duo, "stand", {npc="rahi"})
+		playAnimation(StageScene.Hug, "hug", {npc="rahi"})
 		saynn("Wet Rahi steps out of the pod. You find a blanket and begin rubbing her fur dry.")
 
 		saynn("[say=eliza]How do you feel, Rahi?[/say]")

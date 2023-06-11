@@ -338,7 +338,7 @@ func _run():
 		addButton("Continue", "See what happens next", "lewd_check")
 	if(state == "leaving"):
 		removeCharacter("nurse")
-		playAnimation(StageScene.Duo, "stand", {npc="rahi", npcAction="stand"})
+		playAnimation(StageScene.Hug, "hug", {npc="rahi", npcAction="stand"})
 		saynn("You get up too and follow Rahi back to the lobby. She turns around and gives you a tight hug.")
 
 		saynn("[say=rahi]She needs some.. rest..[/say]")

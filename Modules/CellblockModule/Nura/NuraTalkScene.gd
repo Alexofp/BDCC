@@ -105,6 +105,7 @@ func _run():
 		addButton("Sex?", "Maybe there is a way", "ask_sex")
 		addButton("Never mind", "Ask something else", "")
 	if(state == "get_hugged"):
+		playAnimation(StageScene.Hug, "hug", {npc="nura"})
 		saynn("[say=pc]Hug me, Nur-A.[/say]")
 
 		saynn("The android spreads her arms and wraps them around you before pulling you closer. You feel how cold her frame is. Her chest is not soft at all, just like you thought. Although the gesture is nice.")

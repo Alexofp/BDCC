@@ -200,7 +200,7 @@ func _run():
 				addButton("Rail her", "(Sex) Pin Rahi against the window and breed her pussy for being so sexy", "stripping_rail")
 			addButton("Finger her", "(Sex) Pin Rahi against the window and fuck her pussy with your digits", "stripping_fingering")
 	if(state == "stripping_enough"):
-		playAnimation(StageScene.Duo, "stand", {npc="rahi", npcBodyState={naked=true}})
+		playAnimation(StageScene.Hug, "hug", {npc="rahi", npcBodyState={naked=true}})
 		saynn("[say=pc]Thank you, kitty, that was enough.[/say]")
 
 		saynn("Naked Rahi licks her lips and slides her paw over your shoulder.")

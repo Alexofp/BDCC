@@ -172,6 +172,7 @@ func _run():
 
 	if(state == "aftermatch"):
 		removeCharacter("avy")
+		playAnimation(StageScene.Hug, "hug", {npc="rahi"})
 		
 		saynn("Kitty helps you to sit on the bench and swipes the dust off.")
 
