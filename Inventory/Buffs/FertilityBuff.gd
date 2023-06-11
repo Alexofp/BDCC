@@ -1,13 +1,15 @@
 extends BuffBase
 
 var amount = 0
+var startAmount = 0
 
 func _init():
 	id = Buff.FertilityBuff
 
 func initBuff(_args):
-	amount = _args[0]
-
+	startAmount = _args[0]
+	amount = startAmount
+	
 func getVisibleDescription():
 	var text = str(amount)
 	if(amount > 0):
@@ -15,7 +17,12 @@ func getVisibleDescription():
 	return "Fertility "+text+"%"
 
 func apply(_buffHolder):
+	if(_buffHolder.getCharacter().hasPerk(Perk.FertilityBroodmother) && amount < 0):
+		amount = startAmount * 0.3
+
 	_buffHolder.extraFertility += (amount/100.0)
+	
+#	print("Character: ", _buffHolder.getCharacter(), " FinalFertility: ", _buffHolder.extraFertility)
 
 func getBuffColor():
 	if(amount < 0):
@@ -24,14 +31,17 @@ func getBuffColor():
 
 func saveData():
 	var data = .saveData()
+	data = {
+		"amount": amount,
+		"startAmount": startAmount
+		}
 	
-	data["amount"] = amount
-
 	return data
-	
+
 func loadData(_data):
 	.loadData(_data)
 	amount = SAVE.loadVar(_data, "amount", 0)
+	startAmount = SAVE.loadVar(_data, "startAmount", 0)
 
 func combine(_otherBuff):
 	if(_otherBuff.amount > amount):

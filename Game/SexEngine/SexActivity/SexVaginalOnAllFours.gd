@@ -570,8 +570,8 @@ func doDomAction(_id, _actionInfo):
 		var condom:ItemBase = getDomCondom()
 		if(condom != null):
 			var breakChance = condom.getCondomBreakChance()
-			
-			if(RNG.chance(breakChance)):
+			var condomBroke = RNG.shouldCondomBreakWhenCumInside(getSub(), breakChance)
+			if(condomBroke):
 				text = "[b]The condom broke![/b] "+text
 				condom.destroyMe()
 			else:
@@ -587,6 +587,7 @@ func doDomAction(_id, _actionInfo):
 				
 				getDom().cumInItem(condom)
 				domInfo.cum()
+				fetishesToMod()
 				subInfo.addArousalSex(0.2)
 				satisfyGoals()
 				if(knotSuccess):
@@ -602,6 +603,11 @@ func doDomAction(_id, _actionInfo):
 			subInfo.addFear(0.1)
 		getSub().cummedInBodypartBy(usedBodypart, domID)
 		domInfo.cum()
+		if(getSub().hasPerk(Perk.FertilitySubmissiveAndBreedable)):
+			domInfo.fetishesToIncreaseArr.append(Fetish.Breeding)
+			domInfo.fetishesToDecreaseArr.append(Fetish.Condoms)
+			domInfo.checkFetishes = true
+		fetishesToMod()
 		subInfo.addArousalSex(0.2)
 		satisfyGoals()
 		if(knotSuccess):
@@ -632,6 +638,7 @@ func doDomAction(_id, _actionInfo):
 				getSexEngine().saveCondomToLootIfPerk(condom)
 				getDom().cumInItem(condom)
 				domInfo.cum()
+				fetishesToMod()
 				satisfyGoals()
 				state = ""
 				
@@ -639,6 +646,7 @@ func doDomAction(_id, _actionInfo):
 		
 		getSub().cummedOnBy(domID, FluidSource.Penis)
 		domInfo.cum()
+		fetishesToMod()
 		satisfyGoals()
 		state = ""
 
@@ -983,6 +991,13 @@ func getSubOrgasmHandlePriority():
 	if(isStraponSex()):
 		return 10
 	return 5
+
+func fetishesToMod():
+	domInfo.checkFetishes = true
+	if(usedBodypart == BodypartSlot.Vagina):
+		domInfo.fetishesToIncreaseArr.append(Fetish.VaginalSexGiving)
+	else:
+		domInfo.fetishesToIncreaseArr.append(Fetish.AnalSexGiving)
 
 func saveData():
 	var data = .saveData()

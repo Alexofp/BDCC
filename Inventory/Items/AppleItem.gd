@@ -6,6 +6,9 @@ func _init():
 
 # apple is illegal only temporally as a test item
 func getVisibleName():
+	if(GM.pc != null):
+		if(GM.pc.hasPerk(Perk.FertilityProudMom) && getWearer() == GM.pc):
+			return "Tasty Apple"
 	return "Stolen Apple"
 	
 func getDescription():
@@ -39,6 +42,9 @@ func canCombine():
 	return true
 
 func getTags():
+	if(GM.pc != null):
+		if(GM.pc.hasPerk(Perk.FertilityProudMom) && getWearer() == GM.pc):
+			return []
 	return [ItemTag.Illegal]
 
 func getItemCategory():

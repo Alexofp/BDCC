@@ -46,6 +46,8 @@ const StaminaRecoverAfterSexBuff = "StaminaRecoverAfterSexBuff"
 const FertilityBuff = "FertilityBuff"
 const VirilityBuff = "VirilityBuff"
 const CrossSpeciesCompatibilityBuff = "CrossSpeciesCompatibilityBuff"
+const OvulationEggsAmountBuff = "OvulationEggsAmountBuff" 
+const MinOvulationEggsAmountBuff = "MinOvulationEggsAmountBuff"
 
 const SkillExperienceBuff = "SkillExperienceBuff"
 

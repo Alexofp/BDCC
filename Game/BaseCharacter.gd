@@ -1041,6 +1041,21 @@ func getVirility():
 	value += buffsHolder.getVirility()
 	
 	return value
+	
+func getBaseEggsMod() -> float:
+	return 1.0
+
+func getEggsBonusMod():
+	var value = getBaseEggsMod()
+	
+	value += buffsHolder.getEggsBonusMod()
+	
+	return value
+	
+func getMinEggsAmount():
+	var value = buffsHolder.getMinEggsAmount()
+	
+	return max(value, 1) 
 
 func getCrossSpeciesCompatibility():
 	var value = 0.0
@@ -1668,8 +1683,8 @@ func afterSexEnded(sexInfo):
 		item.resetLustState()
 		item.onSexEnd()
 		
-	if(personalityChangesAfterSex() && personality != null):
-		var resultText = sexInfo.affectPersonality(personality)
+	if(personalityChangesAfterSex() && personality != null && fetishHolder != null):
+		var resultText = sexInfo.affectPersonality(personality, fetishHolder)
 		if(resultText != null && resultText != ""):
 			GM.main.addMessage(resultText)
 		

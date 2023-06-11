@@ -9,6 +9,7 @@ func registerTriggers(es):
 
 func react(_triggerID, _args):
 	var isLookingForTrouble = (_triggerID == Trigger.PCLookingForTrouble)
+	var baseChance = 30 * encounterBaseChanceMod()
 	
 	if(GM.main.getFlag("Trigger_CaughtOffLimitsCD", 0) > 0 && !isLookingForTrouble):
 		return
@@ -17,7 +18,7 @@ func react(_triggerID, _args):
 	#	return false
 	
 	if(GM.world.getRoomByID(GM.pc.getLocation()).loctag_MentalWard):
-		if(RNG.chance(30 + 10.0*GM.pc.getExposure()) || isLookingForTrouble):
+		if(RNG.chance(baseChance + 10.0*GM.pc.getExposure()) || isLookingForTrouble):
 			GM.main.setFlag("Trigger_CaughtOffLimitsCD", 3)
 			
 			var encounterLevel = RNG.randi_range(0, Util.maxi(0, GM.pc.getLevel() + RNG.randi_range(-4, 1)))

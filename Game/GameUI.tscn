@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=2]
+[gd_scene load_steps=37 format=2]
 
 [ext_resource path="res://GlobalTheme.tres" type="Theme" id=1]
 [ext_resource path="res://Game/TooltipDisplay.tscn" type="PackedScene" id=2]
@@ -21,6 +21,7 @@
 [ext_resource path="res://UI/RichTextBoxEffects/cuss_richtexteffect.tres" type="RichTextEffect" id=19]
 [ext_resource path="res://UI/RichTextBoxEffects/corrupt_richtexteffect.tres" type="RichTextEffect" id=20]
 [ext_resource path="res://UI/LayeredSprite.gd" type="Script" id=21]
+[ext_resource path="res://UI/HornyMessageUI/HornyMessage.tscn" type="PackedScene" id=22]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.207843, 0.133333, 0.364706, 1 )
@@ -458,6 +459,8 @@ margin_left = 20.0
 margin_top = 51.8284
 margin_right = 71.0
 margin_bottom = 71.8284
+
+[node name="MessageSystem" parent="." instance=ExtResource( 22 )]
 
 [connection signal="onDevComButton" from="HBoxContainer/Panel2/MarginContainer/VBoxContainer/MapAndTimePanel" to="." method="_on_MapAndTimePanel_onDevComButton"]
 [connection signal="pressed" from="HBoxContainer/Panel2/MarginContainer/VBoxContainer/HBoxContainer2/SaveButton" to="." method="_on_SaveButton_pressed"]
