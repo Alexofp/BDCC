@@ -536,3 +536,9 @@ func loadData(data):
 	claimedToBeObedient = SAVE.loadVar(data, "claimedToBeObedient", false)
 	kneeledBeforeEliza = SAVE.loadVar(data, "kneeledBeforeEliza", false)
 	lickedPussy = SAVE.loadVar(data, "lickedPussy", false)
+
+func getDevCommentary():
+	return "Bottom or Breeder. I know, these two aren't the exact opposites. You can be a top but not want to breed. But why are you playing through this content then x3. That's like, the exact opposite of who it was designed for. At least I didn't go for Bottom vs Sissy choice, that'd be even more fun x3\n\nBut yeah, the breeder choice is there just so you can take off the cage and continue playing as normal. Would it be cool to able to switch between caged and not-caged when you want? Yeah, probably. But other characters can have such functions. Or Eliza's dedicated content if that's ever gets written x3.\n\nWill there be a way to remove the permanent cage in the future without save editing? Maybe. The easiest way would be through transformation. Make your dick smaller until the cage just slips off x3"
+
+func hasDevCommentary():
+	return true

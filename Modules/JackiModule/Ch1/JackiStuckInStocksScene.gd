@@ -742,3 +742,9 @@ func _react_scene_end(_tag, _result):
 			addExperienceToPlayer(50)
 		else:
 			setState("if_lost")
+
+func getDevCommentary():
+	return "Jacki is a good bean ^^. I asked her if I could use her wolfie character and she said yes ^^. Looking back at it, its kinda obvious why x3. But that's just my thoughts\n\nWhy did I add a female character who has a 'stitched-up' vagina? Well.. why not? Isn't that kind of an interesting concept x3. Males usually have prostates that can be easily stimulated. Girls don't. So if you take away that pussy, how is she gonna get her lust satisfied?\n\nI'm very busy with writing so I can't expand her content right now ;-;. But I really want to, I just need to find a good direction for her character to go in. Jacki's content would be about forced corruption. Basically, about her going from a shy kind girl into an unwilling grade A exhibionist buttslut. Kinda like Rahi but waaaay more slutty and forced. She is also still has that urethra, who knows how much a desperate girl can get that one stretched x3. But that's not for everyone, I know, I'm won't force that stuff on anyone"
+
+func hasDevCommentary():
+	return true

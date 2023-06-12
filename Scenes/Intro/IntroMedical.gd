@@ -491,3 +491,9 @@ func _react(_action: String, _args):
 
 func _react_scene_end(_tag, _result):
 	pass
+
+func getDevCommentary():
+	return "This is the scene that introduces Eliza, the cute doctor that likes to experiment on inmates x3. Why? Because she can. And because AlphaCorp wants so. She will find any reason to justify her actions ^^.\n\nOutside of that, I obviously just needed some doctor that would do all the experiments with you. Eliza does have some backstory behind her. Not that deep but it's there. I have reasons for why she acts a little crazy sometimes is what I'm saying ^^\n\nIf you chose the permanent male chastity starting perk Eliza will cage you up in this scene x3. It was fun to write. I dunno, I enjoy writing chastity content a lot. But it's obviously not for everyone. I tried not to treat the player as Sissy. Because.. well.. what if the player is not male x3. But also the world needs more chastity stuff without sissification."
+
+func hasDevCommentary():
+	return true

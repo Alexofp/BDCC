@@ -173,3 +173,8 @@ func _react(_action: String, _args):
 
 	setState(_action)
 
+func getDevCommentary():
+	return "Rahi yoga scene. I should make some yoga animations I think x3. It's hard to describe yoga poses in words. But I'm lazy. And I never did any yoga x3. But this particular Rahi would totally do yoga to keep her feline agility in check. Felines just like to stretch, you know? ^^"
+
+func hasDevCommentary():
+	return true

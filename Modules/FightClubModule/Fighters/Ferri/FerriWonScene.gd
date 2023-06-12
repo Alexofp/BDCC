@@ -130,3 +130,8 @@ func _react(_action: String, _args):
 
 	setState(_action)
 
+func getDevCommentary():
+	return "You might have noticed that for some reason only Kait, Avy and Ferri have portraits drawn by me x3. Kait and Avy make sense, they play a part in the story. But Ferri.. She is just a cute brat.\n\nWell, Ferri is one of the 'invited' characters ^^. She is not my OC but they allowed me to use her and write for her ^^.\n\nWill she get more content? I doubt it. Since the community is slowly becoming bigger, the characters are also becoming more popular. And Ferri doesn't want that. And I will respect that ^^. She is a cute little brat still ^^"
+
+func hasDevCommentary():
+	return true

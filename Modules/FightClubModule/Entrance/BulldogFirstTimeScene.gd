@@ -119,3 +119,8 @@ func _react(_action: String, _args):
 
 	setState(_action)
 
+func getDevCommentary():
+	return "Bulldog.. I just needed someone who would guard the entrance to the underground.. And bulldog is that someone x3. Some people seemed to enjoy his content enough to want more. But he is literally just a wall.\n\nIf you ever watched the Caravan Palace - Lone Digger music video, this bulldog would be the bouncer of that club x3"
+
+func hasDevCommentary():
+	return true

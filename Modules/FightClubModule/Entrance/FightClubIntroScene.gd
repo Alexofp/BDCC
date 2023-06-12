@@ -158,3 +158,9 @@ func _react_scene_end(_tag, _result):
 		else:
 			setState("if_lost")
 			#addExperienceToPlayer(5)
+
+func getDevCommentary():
+	return "I wanted the first time you visit the underground to be special. Kinda like a reward after defeating the bulldog. So I added this scene of fighting between Avy and Kait, they weren't even full characters at that point, just random extras I came up with on the spot..\n\nProbably the first scene with NTR in it? I don't even know, Kait is not a love interest currently as I'm writing this. But she very well might be later. But I was smart enough even back then to add a way to skip the scene ^^. Kait needed to suffer a little to show that she is a strong kitty. Sorry that I made it so she gets fucked, I didn't know she would be a bigger character x3. At least that makes you hate Avy more"
+
+func hasDevCommentary():
+	return true

@@ -725,3 +725,9 @@ func loadData(data):
 	gotStraponed = SAVE.loadVar(data, "gotStraponed", false)
 	didRimming = SAVE.loadVar(data, "didRimming", false)
 	usedAnsStrapon = SAVE.loadVar(data, "usedAnsStrapon", false)
+
+func getDevCommentary():
+	return "Avy's final arena battle scene.. This is what it's all about ^^. This is the payout for the whole Arena content so I had to make it good ^^. Hopefully it turned out fun. Avy doesn't just lose, she gets -destroyed- because of your actions. If you win the first battle that is x3.\n\nShould I have made Avy a herm? Nahhh, I don't see her as a herm at all. Yes, it would allow you to breed her and stuff. But in my head she is just a mean dickgirl. And making a mean dickgirl into a subby buttslut is more fun than making her into a subby mother ^^. Just how I see it. Getting buttfucked is more humiliating than getting bred basically. And this scene is all about humiliating her."
+
+func hasDevCommentary():
+	return true

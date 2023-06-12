@@ -274,3 +274,9 @@ func getDebugActions():
 func doDebugAction(_id, _args = {}):
 	if(_id == "instantWin"):
 		getModule("FightClubModule").forceWinEveryoneExpectAvy()
+
+func getDevCommentary():
+	return "Avy.. Avy, Avy, Avy.. Is that even a good name for her? x3\n\nAvy is.. a bitch. Like Risha x3. But Avy is sliiiiightly more complex than that. Avy is the only shemale static character currently ^^. Is she suffering from that somehow? Nah, this is the future where everyone just accepted -all- the genders, utopia if you will x3. And if you don't like your gender/private bits then there are ways to change that. If you look at real life, I think that's where it's all heading. At some point everyone will just.. stop giving a fuck about what's between your legs or how you identify as. Personality > Body. Hopefully ^^. People are still allowed to have preferences obviously, straight/gay/bi/pan is an entirely different thing..\n\nWhy did I write that.. Right, Avy is a dickgirl x3. Why is she a dickgirl? Because its more fun to have someone with a dick at the top of the chain. They think they will always be at the top and dick others ^^.\n\nRisha is mean because she is horny. Avy is.. more of a bully I guess? She wants power over you. What would she do with that power? She doesn't know. But she needs to see -everyone- be her sub"
+
+func hasDevCommentary():
+	return true

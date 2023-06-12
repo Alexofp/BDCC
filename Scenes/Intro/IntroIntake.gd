@@ -331,3 +331,9 @@ func _react_scene_end(_tag, _result):
 		else:
 			setState("losttorisha")
 			addExperienceToPlayer(20)
+
+func getDevCommentary():
+	return "So this is probably the earliest actual written scene if you don't count the fighting one ^^. If you ever been on RRDC, a place in second life, you will find all of this very familiar.. Because this is pretty much how intakes work in there x3. RRDC is basically a place for rp if you didn't know. I will be honest, I just wanted to turn that rp place into a game x3. Why? To tell my own stories I guess.. I only copied the prison idea itself, all the lore and characters and stories are fully written by me.\n\nBut yeah ^^. This scene introduces you to the captain, probably one of the most powerful people on the station. So of course he has to be kind ^^. But also strict and all that. He is balanced out by his bloodthirsty hornythirsty guard Risha. Risha is a bitch x3 she is clearly enjoying the power she has over inmates. Would be cool to maybe write some content for her where you somehow set her up, making it so she is caught and turned into an inmate herself. But that would require so much thinking.. I basically have to write 2 games then, where Risha is guard or inmate. And that sounds ehhhhhhh.. would be cool though"
+
+func hasDevCommentary():
+	return true
