@@ -504,3 +504,6 @@ func _on_OpenFullArtWorkButton_pressed():
 
 func _on_CloseFullArtWork_pressed():
 	fullArtWorkRect.visible = false
+
+func showHornyMessage(theMessage: String):
+	hornyMessage.showMessageOnScreen(theMessage)

@@ -4,12 +4,14 @@ onready var richTextLabel = $CanvasLayer/RichTextLabel
 onready var tween = $CanvasLayer/RichTextLabel/Tween
 
 func _ready():
-	self.visible = false
-
+	visible = false
 
 func showMessageOnScreen(msg: String) -> void: #do not spam with messages only intended to work with occasional ones for now
-	if(richTextLabel.bbcode_text == ""):
-		richTextLabel.append_bbcode(msg)	
+	visible = true
+	if(tween.is_active()):
+		richTextLabel.append_bbcode(msg)
+	else:
+		richTextLabel.append_bbcode(msg)
 		tween.interpolate_property(
 			richTextLabel, "percent_visible", 0.0, 1.0, 4.0, Tween.TRANS_LINEAR, Tween.EASE_IN)
 		tween.interpolate_property(
@@ -20,7 +22,6 @@ func showMessageOnScreen(msg: String) -> void: #do not spam with messages only i
 			richTextLabel, "modulate:a", 1, 0, 5, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT, 5)
 		tween.start()
 
-
 func _on_Tween_tween_all_completed():
 	richTextLabel.clear()
-	self.visible = false
+	visible = false

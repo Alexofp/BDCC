@@ -5,12 +5,12 @@ func _init():
 	skillGroup = Skill.Fertility
 
 func getVisibleName():
-	return "Mother of the year"
+	return "Mother of the Year"
 
 func getVisibleDescription():
-	return "AlphaCorp can't thank you enough for providing more cannon fodder for their global operations. Oh! we meant to say what a nice kids you have we always happy to help them grow and prosper, right! \n" \
-			+ "You get a stats boost buff for 2 days after giving birth. \n" \
-			+ "You get a credits payment based on the amout of children you provide (up to 20 per birth)."
+	return "The corporation has noticed your efforts and wants to reward you!\n" \
+			+ "You receive a 'Maternal Glow' status effect for 2 days after giving birth.\n" \
+			+ "AlphaCorp will transfer credits to you for each birth (up to 20 per birth)."
 	
 func getRequiredPerks():
 	return [Perk.FertilitySubmissiveAndBreedable]

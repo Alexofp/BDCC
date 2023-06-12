@@ -1,7 +1,7 @@
 extends StatusEffectBase
 
 func _init():
-	id = StatusEffect.Invigoration
+	id = StatusEffect.MaternalGlow
 	isBattleOnly = false
 	
 func initArgs(_args = []):
@@ -19,7 +19,7 @@ func processTime(_secondsPassed: int):
 		stop()
 
 func getEffectName():
-	return "Invigoration"
+	return "Maternal glow"
 
 func getEffectDesc():
 	return "Giving birth made you feel more accomplished and worthy for "+Util.getTimeStringHumanReadable(turns)

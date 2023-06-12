@@ -102,6 +102,8 @@ func _run():
 		
 		for rankID in FightClubRank.getAll():
 			for fighterID in GlobalRegistry.getFightClubFightersIDsByRank(rankID):
+				if(fighterID == "avy"):
+					continue
 				if(!FightClubModule.isFighterDefeated(fighterID)):
 					continue
 				var fighter: FightClubFighter = GlobalRegistry.getFightClubFighter(fighterID)

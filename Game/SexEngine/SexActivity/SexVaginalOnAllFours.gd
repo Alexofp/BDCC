@@ -369,11 +369,11 @@ func getDomActions():
 				condomScore = 1.0
 			
 			var scoreToCumInside = max(condomScore, domInfo.fetishScore({Fetish.Breeding: 1.0}) + 0.5 - 20.0*float(gonnaCumOutside))
+			if(getSub().hasPerk(Perk.FertilitySubmissiveAndBreedable)):
+				scoreToCumInside = 1.0
 			
 			var hasKnot = getDom().bodypartHasTrait(BodypartSlot.Penis, PartTrait.PenisKnot)
 			if(hasKnot):
-				scoreToCumInside *= 0.5
-				
 				actions.append({
 					"id": "knotinside",
 					"score": scoreToCumInside,
@@ -587,7 +587,6 @@ func doDomAction(_id, _actionInfo):
 				
 				getDom().cumInItem(condom)
 				domInfo.cum()
-				fetishesToMod()
 				subInfo.addArousalSex(0.2)
 				satisfyGoals()
 				if(knotSuccess):
@@ -603,11 +602,6 @@ func doDomAction(_id, _actionInfo):
 			subInfo.addFear(0.1)
 		getSub().cummedInBodypartBy(usedBodypart, domID)
 		domInfo.cum()
-		if(getSub().hasPerk(Perk.FertilitySubmissiveAndBreedable)):
-			domInfo.fetishesToIncreaseArr.append(Fetish.Breeding)
-			domInfo.fetishesToDecreaseArr.append(Fetish.Condoms)
-			domInfo.checkFetishes = true
-		fetishesToMod()
 		subInfo.addArousalSex(0.2)
 		satisfyGoals()
 		if(knotSuccess):
@@ -638,7 +632,6 @@ func doDomAction(_id, _actionInfo):
 				getSexEngine().saveCondomToLootIfPerk(condom)
 				getDom().cumInItem(condom)
 				domInfo.cum()
-				fetishesToMod()
 				satisfyGoals()
 				state = ""
 				
@@ -646,7 +639,6 @@ func doDomAction(_id, _actionInfo):
 		
 		getSub().cummedOnBy(domID, FluidSource.Penis)
 		domInfo.cum()
-		fetishesToMod()
 		satisfyGoals()
 		state = ""
 
@@ -991,13 +983,6 @@ func getSubOrgasmHandlePriority():
 	if(isStraponSex()):
 		return 10
 	return 5
-
-func fetishesToMod():
-	domInfo.checkFetishes = true
-	if(usedBodypart == BodypartSlot.Vagina):
-		domInfo.fetishesToIncreaseArr.append(Fetish.VaginalSexGiving)
-	else:
-		domInfo.fetishesToIncreaseArr.append(Fetish.AnalSexGiving)
 
 func saveData():
 	var data = .saveData()

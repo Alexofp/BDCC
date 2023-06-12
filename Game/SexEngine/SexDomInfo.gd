@@ -163,9 +163,6 @@ func affectPersonality(_personality:Personality, _fetishHolder:FetishHolder):
 				if(_personality.addStat(PersonalityStat.Mean, RNG.randf_range(-0.05, -0.01))):
 					theChanges.append("{npc.name} became slightly more kind after not being so angry.")
 	
-	if(checkFetishes):
-		theChanges = affectFetishes(theChanges, _fetishHolder)
-	
 	return GM.ui.processString(Util.join(theChanges, "\n"), {npc=charID})
 
 func saveData():

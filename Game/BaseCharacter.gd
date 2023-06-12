@@ -1111,6 +1111,7 @@ func giveBirth():
 	var bornChildren = getMenstrualCycle().giveBirth()
 	for child in bornChildren:
 		GM.CS.addChild(child)
+	
 	return bornChildren
 
 func forceIntoHeat():
@@ -1881,6 +1882,11 @@ func hasAnyWomb():
 	if(menstrualCycle == null):
 		return false
 	return menstrualCycle.hasAnyWomb()
+
+func hasWombIn(bodypartSlot):
+	if(!hasBodypart(bodypartSlot)):
+		return false
+	return getBodypart(bodypartSlot).hasWomb()
 
 func getDefaultArtwork(_variant = []):
 	return "res://Images/UI/GenericFace.png"

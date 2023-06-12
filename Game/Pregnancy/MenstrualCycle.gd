@@ -228,6 +228,29 @@ func isReadyToGiveBirth() -> bool:
 	else:
 		return false
 
+func getRoughLitterEstimateString():
+	var trueValue = impregnatedEggCells.size()
+	
+	var fullProgress = 0.0
+	for egg in impregnatedEggCells:
+		fullProgress += clamp(egg.getProgress(), 0.0, 1.0)
+	var averageProgress = 0.0
+	if(impregnatedEggCells.size() > 0):
+		averageProgress = fullProgress / impregnatedEggCells.size()
+	
+	var disp = 3 + int(trueValue/2)
+	var minValue = RNG.randi_range(trueValue - int(disp * (1.0 - averageProgress)), trueValue)
+	minValue = Util.maxi(0, minValue)
+	var maxValue = RNG.randi_range(trueValue + int(disp * (1.0 - averageProgress)), trueValue)
+
+	if(minValue == maxValue):
+		if(maxValue == 1):
+			return "1 kid"
+		else:
+			return str(minValue)+" kids"
+	else:
+		return str(minValue)+"-"+str(maxValue)+" kids"
+
 func getTimeUntilReadyForBirth() -> int:
 	if(impregnatedEggCells.size() == 0):
 		return 0

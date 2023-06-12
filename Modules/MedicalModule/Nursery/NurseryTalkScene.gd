@@ -201,6 +201,8 @@ func _run():
 		addButton("Continue", "Time to create life", "startbirth")
 
 	if(state == "startbirth"):
+		playAnimation(StageScene.GivingBirth, "birth", {bodyState={naked=true}})
+		
 		saynn("You enter the birthing room. It’s spacious and has a special bed in the middle, the one that is designed to keep your legs spread. You lay down and await your faith.")
 
 		saynn("The nurse prepares herself, puts on all the equipment and then walks up to you. You follow all the procedures that she is giving to you.")
@@ -216,6 +218,8 @@ func _run():
 		addButton("Continue", "See what happens", "continue1")
 
 	if(state == "continue1"):
+		playAnimation(StageScene.GivingBirth, "idle", {bodyState={naked=true}})
+		
 		var childStr = "child"
 		if(bornChildAmount > 1):
 			childStr = "children"
@@ -285,30 +289,17 @@ func _react(_action: String, _args):
 		GM.pc.afterSleepingInBed()
 	
 	if(_action == "startbirth"):
-		GM.pc.clearOrificeFluids()
-		GM.pc.addSkillExperience(Skill.Fertility, 97)
-		if(GM.pc.getMenstrualCycle() != null):
-			var bornChildren = GM.pc.getMenstrualCycle().giveBirth()
-			bornChildAmount = bornChildren.size()
-			bornChildString = ""
+		var bornChildren = GM.pc.giveBirth()
+		bornChildAmount = bornChildren.size()
+		
+		bornChildString = ""
+		for child in bornChildren:
+			var fatherObject = GlobalRegistry.getCharacter(child.fatherID)
+			var fatherName = "unknown"
+			if(fatherObject != null):
+				fatherName = fatherObject.getName()
 			
-			GM.pc.addSkillExperience(Skill.Fertility, Util.mini(90, bornChildAmount * 3)) #Bonus per child up to a limit
-			if(GM.pc.hasPerk(Perk.FertilityMotherOfTheYear)):
-				GM.pc.addEffect(StatusEffect.Invigoration)
-				var paycheck = Util.mini(20, bornChildAmount + 2)
-				GM.pc.addCredits(paycheck) #Bonus credits for chilbirth
-				GM.ui.hornyMessage.visible = true
-				GM.ui.hornyMessage.showMessageOnScreen("[center][color=#f0dd61]AlphaCorp thanks you for your compliance and hopes to continue our 'fruitful cooperation' in the future \n [b]You recieved: " +str(paycheck)+ " credits![/b][/color][/center]")
-			
-			for child in bornChildren:
-				GM.CS.addChild(child)
-				
-				var fatherObject = GlobalRegistry.getCharacter(child.fatherID)
-				var fatherName = "unknown"
-				if(fatherObject != null):
-					fatherName = fatherObject.getName()
-				
-				bornChildString += child.name+" - "+"[color="+NpcGender.getColorString(child.gender)+"]"+ NpcGender.getVisibleName(child.gender)+"[/color]"+" - "+Util.getSpeciesName(child.species)+" - "+"Father: "+fatherName +" [color="+"#f0dd61"+"]"+child.bornFromMonozygotic+"[/color]" +"\n"
+			bornChildString += child.name+" - "+"[color="+NpcGender.getColorString(child.gender)+"]"+ NpcGender.getVisibleName(child.gender)+"[/color]"+" - "+Util.getSpeciesName(child.species)+" - "+"Father: "+fatherName +" [color="+"#f0dd61"+"]"+child.bornFromMonozygotic+"[/color]" +"\n"
 		processTime(60*60)
 		
 	if(_action == "endthescene"):

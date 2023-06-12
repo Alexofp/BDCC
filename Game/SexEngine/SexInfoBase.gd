@@ -7,9 +7,6 @@ var timesCame: int = 0
 var memory:Dictionary = {}
 var tick:int = 0
 var lustFull: float = 0.0
-var checkFetishes: = false
-var fetishesToIncreaseArr: = []
-var fetishesToDecreaseArr: = []
 
 func getSexEngine():
 	if(sexEngineRef == null):
@@ -148,29 +145,6 @@ func hasTag(thetag):
 func affectPersonality(_personality:Personality, _fetishHolder:FetishHolder):
 	return ""
 
-func affectFetishes(theChanges, _fetishHolder):
-	var toIncrease = [] 
-	for f in fetishesToIncreaseArr: #clear duplicates
-		if not f in toIncrease:
-			toIncrease.append(f)
-	
-	for fetish in toIncrease:
-		if(RNG.chance(70)):
-			if(_fetishHolder.adjustFetishInterestByTier(fetish)):
-				theChanges.append("{npc.name} became more interested in "+GlobalRegistry.getFetish(fetish).getVisibleName())
-	
-	var toDecrease = [] 
-	for f in fetishesToDecreaseArr: #clear duplicates
-		if not f in toDecrease:
-			toDecrease.append(f)
-	
-	for fetish in toDecrease:
-		if(RNG.chance(70)):
-			if(_fetishHolder.adjustFetishInterestByTier(fetish, -1)):
-				theChanges.append("{npc.name} became less interested in "+GlobalRegistry.getFetish(fetish).getVisibleName())
-	
-	return theChanges
-
 func saveData():
 	var data = {
 		"charID": charID,
@@ -178,9 +152,6 @@ func saveData():
 		"memory": memory,
 		"tick": tick,
 		"lustFull": lustFull,
-		"checkFetishes": checkFetishes,
-		"fetishesToIncreaseArr": fetishesToIncreaseArr,
-		"fetishesToDecreaseArr": fetishesToDecreaseArr,
 	}
 
 	return data
@@ -191,6 +162,3 @@ func loadData(data):
 	memory = SAVE.loadVar(data, "memory", {})
 	tick = SAVE.loadVar(data, "tick", 0)
 	lustFull = SAVE.loadVar(data, "lustFull", 0.0)
-	checkFetishes = SAVE.loadVar(data, "checkFetishes", false)
-	fetishesToIncreaseArr = SAVE.loadVar(data, "fetishesToIncreaseArr", [])
-	fetishesToDecreaseArr = SAVE.loadVar(data, "fetishesToDecreaseArr", [])

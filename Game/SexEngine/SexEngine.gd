@@ -259,14 +259,17 @@ func generateGoals():
 		
 		var personDomInfo = doms[domID]
 		var possibleGoals = []
-		var additionalGoals = []
+		
+		var breedingGoalsAmount = 0
+		var breedingGoals = []
 		
 		var dom = personDomInfo.getChar()
 		
 		for subID in subs:
 			var personSubInfo = subs[subID]
 			var sub = personSubInfo.getChar()
-			var submissiveAndBreedablePerkHelper: bool = (dom.getPersonality().getStat(PersonalityStat.Subby) <= -0.25 && sub.hasPerk(Perk.FertilitySubmissiveAndBreedable))
+			if(sub.hasPerk(Perk.FertilitySubmissiveAndBreedable)):
+				breedingGoalsAmount += 1
 			
 			var goalsToAdd = dom.getFetishHolder().getGoals(self, sub)
 			if(goalsToAdd != null):
@@ -282,9 +285,12 @@ func generateGoals():
 					var goalData = sexGoal.generateData(self, personDomInfo, personSubInfo)
 					
 					if(sexGoal.isPossible(self, personDomInfo, personSubInfo, goalData) && !sexGoal.isCompleted(self, personDomInfo, personSubInfo, goalData)):
-						possibleGoals.append([[goal[0], sub.getID(), goalData], goal[1]])
-						if((goal[0] == SexGoal.FuckAnal || goal[0] == SexGoal.FuckVaginal) && submissiveAndBreedablePerkHelper):
-							additionalGoals.append([[goal[0], sub.getID(), goalData], goal[1]])
+						var goalObject = [[goal[0], sub.getID(), goalData], goal[1]]
+						
+						possibleGoals.append(goalObject)
+						
+						if(sexGoal.canLeadToSubsPregnancy(self, personDomInfo, personSubInfo, goalData)):
+							breedingGoals.append(goalObject)
 							
 		if(possibleGoals.size() > 0):
 			for _i in range(0, amountToGenerate):
@@ -292,9 +298,9 @@ func generateGoals():
 				personDomInfo.goals.append(randomGoalInfo.duplicate(true))
 				generatedAnyGoals = true
 				
-		if(additionalGoals.size() > 0):
-			for _i in range(0, RNG.randi_range(1, 2)):
-				var randomGoalInfo = RNG.pickWeightedPairs(additionalGoals)
+		if(breedingGoalsAmount > 0 && breedingGoals.size() > 0):
+			for _i in range(0, breedingGoalsAmount):
+				var randomGoalInfo = RNG.pickWeightedPairs(breedingGoals)
 				personDomInfo.goals.append(randomGoalInfo.duplicate(true))
 			
 		print("Goals added to NPC: ", personDomInfo.goals)

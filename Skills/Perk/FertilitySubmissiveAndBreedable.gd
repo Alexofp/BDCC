@@ -5,11 +5,10 @@ func _init():
 	skillGroup = Skill.Fertility
 
 func getVisibleName():
-	return "Submissive and breedable"
+	return "Submissive and Breedable"
 
 func getVisibleDescription():
-	return "Others view you as a subservient, perfect toy to please their carnal desires, most noticeably breeding. " \
-			+ "Dominant partners may go an extra round or two, and gain a breeder fetish if not having one already."
+	return "You are a famous breeding toy. Doms will fuck you longer and will never pull out of you during vaginal or anal sex."
 
 func getRequiredPerks():
 	return [Perk.FertilityDesireToBreed]

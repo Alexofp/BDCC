@@ -18,3 +18,6 @@ func getSubGoals(_sexEngine, _domInfo, _subInfo, _data):
 		SexGoal.SubUndressDom: 1.0,
 		SexGoal.SubOptionalCondomOnDom: 0.5,
 	}
+
+func canLeadToSubsPregnancy(_sexEngine, _domInfo, _subInfo, _data):
+	return true
