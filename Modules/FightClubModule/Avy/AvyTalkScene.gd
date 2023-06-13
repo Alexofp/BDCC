@@ -42,6 +42,7 @@ func _run():
 
 		var showedPC = false
 		var i = 1
+		var avyRekt = getFlag("FightClubModule.AvyGotRekt", false)
 		
 		for rankID in FightClubRank.getAll():
 			var rankName = FightClubRank.getVisibleName(rankID)
@@ -54,6 +55,8 @@ func _run():
 					sayn(str(i)+" - {pc.name}")
 					i+=1
 				
+				if(fighterID == "avy" && avyRekt):
+					continue
 				var fighter:FightClubFighter = GlobalRegistry.getFightClubFighter(fighterID)
 				
 				if(FightClubModule.isFighterDefeated(fighterID)):
@@ -65,6 +68,8 @@ func _run():
 			if(rankID == FightClubRank.FuckMeat && !showedPC):
 				sayn(str(i)+" - {pc.name}")
 				i+=1
+			if(rankID == FightClubRank.FuckMeat && avyRekt):
+				sayn(str(i)+" - Avy The Fallen Hero (defeated)")
 			
 			sayn("")
 		
@@ -73,7 +78,21 @@ func _run():
 			addButton("Arena", "Tell her that you are ready to fight the next opponent", "fightnext")
 		else:
 			addDisabledButton("Arena", "No one left to fight :(")
-		addDisabledButton("Fight Avy", "Final arena fight not implemented yet")
+			
+		if(!getFlag("FightClubModule.GotTaskToStealPlant")):
+			if(getModule("FightClubModule").isReadyToFightAvy()):
+				addButton("Fight Avy", "Time to do this", "do_fight_avy")
+			else:
+				addDisabledButton("Fight Avy", "You must defeated all other opponents before fighting Avy")
+		else:
+			if(getFlag("FightClubModule.AvyGotRekt")):
+				addButton("Rematch Avy", "Redo the final fight", "do_fight_avy_second_time") # Maybe a choice between two fights
+			else:
+				if(getFlag("FightClubModule.ReturnedPlantToEliza")):
+					addButton("Fight Avy", "Time to do this again", "do_fight_avy_second_time")
+				else:
+					addDisabledButton("Fight Avy", "You're not ready to do this! You know you gonna lose again.")
+			
 		addButton("Rematch", "Fight one of your defeated opponents again", "rematchmenu")
 		addButton("Leave", "Gotta go", "endthescene")
 		GM.ES.triggerRun(Trigger.TalkingToNPC, ["avy"])
@@ -83,6 +102,8 @@ func _run():
 		
 		for rankID in FightClubRank.getAll():
 			for fighterID in GlobalRegistry.getFightClubFightersIDsByRank(rankID):
+				if(fighterID == "avy"):
+					continue
 				if(!FightClubModule.isFighterDefeated(fighterID)):
 					continue
 				var fighter: FightClubFighter = GlobalRegistry.getFightClubFighter(fighterID)
@@ -171,6 +192,16 @@ func _react(_action: String, _args):
 		savedFighterID = _args[0]
 		setState("fight")
 		return
+		
+	if(_action == "do_fight_avy"):
+		runScene("AvyFirstArenaBattleScene")
+		endScene()
+		return
+		
+	if(_action == "do_fight_avy_second_time"):
+		runScene("AvyFinalArenaBattleScene")
+		endScene()
+		return
 	
 	if(_action == "endthescene"):
 		endScene()
@@ -229,3 +260,23 @@ func _react_scene_end(_tag, _result):
 				runScene(lostScene)
 			
 			endScene()
+
+func getDebugActions():
+	return [
+		{
+			"id": "instantWin",
+			"name": "Win all fights",
+			"args": [
+			],
+		},
+	]
+
+func doDebugAction(_id, _args = {}):
+	if(_id == "instantWin"):
+		getModule("FightClubModule").forceWinEveryoneExpectAvy()
+
+func getDevCommentary():
+	return "Avy.. Avy, Avy, Avy.. Is that even a good name for her? x3\n\nAvy is.. a bitch. Like Risha x3. But Avy is sliiiiightly more complex than that. Avy is the only shemale static character currently ^^. Is she suffering from that somehow? Nah, this is the future where everyone just accepted -all- the genders, utopia if you will x3. And if you don't like your gender/private bits then there are ways to change that. If you look at real life, I think that's where it's all heading. At some point everyone will just.. stop giving a fuck about what's between your legs or how you identify as. Personality > Body. Hopefully ^^. People are still allowed to have preferences obviously, straight/gay/bi/pan is an entirely different thing..\n\nWhy did I write that.. Right, Avy is a dickgirl x3. Why is she a dickgirl? Because its more fun to have someone with a dick at the top of the chain. They think they will always be at the top and dick others ^^.\n\nRisha is mean because she is horny. Avy is.. more of a bully I guess? She wants power over you. What would she do with that power? She doesn't know. But she needs to see -everyone- be her sub"
+
+func hasDevCommentary():
+	return true

@@ -10,14 +10,16 @@ onready var perksLabel = $ScrollContainer/VBoxContainer/PanelContainer/VBoxConta
 onready var perkNameLabel = $ScrollContainer/VBoxContainer/HBoxContainer/PanelContainer2/VBoxContainer/PerkNameLabel
 onready var perkDescLabel = $ScrollContainer/VBoxContainer/HBoxContainer/PanelContainer2/VBoxContainer/PerkDescLabel
 onready var perkRequirmentsLabel = $ScrollContainer/VBoxContainer/HBoxContainer/PanelContainer2/VBoxContainer/PerkRequirementsLabel
-onready var unlockPerkButton = $ScrollContainer/VBoxContainer/HBoxContainer/PanelContainer2/VBoxContainer/UnlockPerkButton
+onready var unlockPerkButton = $ScrollContainer/VBoxContainer/HBoxContainer/PanelContainer2/VBoxContainer/HBoxContainer/UnlockPerkButton
+onready var togglePerkButton = $ScrollContainer/VBoxContainer/HBoxContainer/PanelContainer2/VBoxContainer/HBoxContainer/TogglePerkButton
 
 var perksTierScene = preload("res://UI/SkillsUI/PerksTierContainer.tscn")
 
 var selectedPerkID
 
 func _ready():
-	pass
+	unlockPerkButton.visible = false
+	togglePerkButton.visible = false
 
 func setSkillID(newskillid):
 	skillID = newskillid
@@ -77,6 +79,8 @@ func updatePerkText():
 	perkNameLabel.text = perk.getVisibleName()
 	if(GM.pc.getSkillsHolder().hasPerk(perkID)):
 		perkNameLabel.text += " (Learned)"
+	elif(GM.pc.getSkillsHolder().isPerkDisabled(perkID)):
+		perkNameLabel.text += " (Disabled)"
 	
 	perkDescLabel.bbcode_text = perk.getVisibleDescription()
 	var extraText = perk.getMoreDescription()
@@ -108,10 +112,16 @@ func updatePerkText():
 	
 	perkRequirmentsLabel.bbcode_text = reqText
 	
-	if(GM.pc.getSkillsHolder().hasPerk(perkID) || !GM.pc.getSkillsHolder().canUnlockPerk(perkID)):
-		unlockPerkButton.disabled = true
+	if(GM.pc.getSkillsHolder().hasPerkDisabledOrNot(perkID)):
+		unlockPerkButton.visible = false
+		togglePerkButton.visible = true
 	else:
-		unlockPerkButton.disabled = false
+		unlockPerkButton.visible = true
+		togglePerkButton.visible = false
+		if(GM.pc.getSkillsHolder().canUnlockPerk(perkID)):
+			unlockPerkButton.disabled = false
+		else:
+			unlockPerkButton.disabled = true
 	
 
 func _on_UnlockPerkButton_pressed():
@@ -123,5 +133,16 @@ func _on_UnlockPerkButton_pressed():
 		return
 	
 	GM.pc.getSkillsHolder().addPerk(selectedPerkID)
+	GlobalRegistry.getPerk(selectedPerkID).runOnceWhenLearned()
+	updatePerks()
+	updatePerkText()
+
+
+func _on_TogglePerkButton_pressed():
+	GlobalTooltip.resetTooltips()
+	if(selectedPerkID == null || selectedPerkID == ""):
+		return
+	
+	GM.pc.getSkillsHolder().togglePerk(selectedPerkID)
 	updatePerks()
 	updatePerkText()

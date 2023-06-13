@@ -116,7 +116,7 @@ func getSexEndInfo():
 	
 	return texts
 
-func affectPersonality(_personality:Personality):
+func affectPersonality(_personality:Personality, _fetishHolder:FetishHolder):
 	var theChanges = []
 	
 	if(!canDoActions()):
@@ -162,7 +162,7 @@ func affectPersonality(_personality:Personality):
 			if(RNG.chance(30)):
 				if(_personality.addStat(PersonalityStat.Mean, RNG.randf_range(-0.05, -0.01))):
 					theChanges.append("{npc.name} became slightly more kind after not being so angry.")
-
+	
 	return GM.ui.processString(Util.join(theChanges, "\n"), {npc=charID})
 
 func saveData():

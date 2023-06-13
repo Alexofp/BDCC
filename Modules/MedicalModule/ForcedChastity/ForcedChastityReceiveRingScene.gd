@@ -34,3 +34,9 @@ func _react(_action: String, _args):
 		return
 	
 	setState(_action)
+
+func getDevCommentary():
+	return "If you haven't realized it yet.. the ring is made out of the broken key x3. I hinted at it in Rahi's content, Eliza gave the pieces to Alex and he melted them and created a ring for you ^^. No one mentioned that, maybe I should have been even more obvious.. or not.. dunnyo.. If you realized that before reading this - good job ^^"
+
+func hasDevCommentary():
+	return true

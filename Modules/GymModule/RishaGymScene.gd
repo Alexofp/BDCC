@@ -589,3 +589,9 @@ func loadData(data):
 	.loadData(data)
 	
 	gotPayed = SAVE.loadVar(data, "gotPayed", false)
+
+func getDevCommentary():
+	return "I needed some repeatable way to encounter Risha so this is that way. Gives you some insight into Risha. Yeah, she is a horny bitch. But maybe she is slightly more than that? Naaaah x3"
+
+func hasDevCommentary():
+	return true

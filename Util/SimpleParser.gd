@@ -17,8 +17,16 @@ func getExpressionsFromText(text: String):
 	
 	for letter in text:
 		if(escapedCharacter):
-			currentExpr += letter
+			if(inExpr):
+				currentExpr += letter
+			else:
+				currentText += letter
 			escapedCharacter = false
+			continue
+		
+		if(!escapedCharacter && !inExpr && letter == "\\"):
+			escapedCharacter = true
+			#currentExpr += letter
 			continue
 		
 		if(!inExpr && letter == '{'):

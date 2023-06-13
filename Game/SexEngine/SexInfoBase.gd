@@ -142,7 +142,7 @@ func getSexEndInfo():
 func hasTag(thetag):
 	return getSexEngine().hasTag(charID, thetag)
 
-func affectPersonality(_personality:Personality):
+func affectPersonality(_personality:Personality, _fetishHolder:FetishHolder):
 	return ""
 
 func saveData():

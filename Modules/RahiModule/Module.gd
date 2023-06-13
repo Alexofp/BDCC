@@ -17,6 +17,9 @@ func getFlags():
 		"Rahi_NotThereToday": flag(FlagType.Bool),
 		"Rahi_FirstTimePregnantHappened": flag(FlagType.Bool),
 		"Rahi_GaveBirthTimes": flag(FlagType.Number),
+		"Rahi_FirstTimeBirthHappened": flag(FlagType.Bool),
+		"Rahi_GaveBirthsNearPC": flag(FlagType.Number),
+		"Rahi_BirthDialogue": flag(FlagType.Number),
 		
 		"rahi1ElizaSceneHappened": flag(FlagType.Bool),
 		"rahi1ProtectedRahi": flag(FlagType.Bool),
@@ -72,7 +75,12 @@ func getFlags():
 		"rahiSkillPetplay": flag(FlagType.Number),
 		"rahiSkillDominance": flag(FlagType.Number),
 		"rahiSkillProstitution": flag(FlagType.Number),
-		"rahiSkillWatersports": flag(FlagType.Number),	
+		"rahiSkillWatersports": flag(FlagType.Number),
+		
+		# skill-specific flags
+		"rahiPetplayWalkiesStage": flag(FlagType.Number),
+		"rahiShouldSleepWithPlayer": flag(FlagType.Bool),
+		"rahiShouldSexPlayerDuringSleep": flag(FlagType.Bool),
 	}
 
 func _init():
@@ -87,6 +95,9 @@ func _init():
 		"res://Modules/RahiModule/ShowerEvent/RahiShowerScene.gd",
 		
 		"res://Modules/RahiModule/RahiFirstTimePregnantScene.gd",
+		"res://Modules/RahiModule/Pregnancy/rahiGivingBirthFirstTimeScene.gd",
+		"res://Modules/RahiModule/Pregnancy/rahiGivingBirthScene.gd",
+		
 		"res://Modules/RahiModule/RahiEmbraceScene.gd",
 		
 		"res://Modules/RahiModule/1PreSlavery/rahi1ElizaScene.gd",
@@ -104,13 +115,17 @@ func _init():
 		"res://Modules/RahiModule/2Slavery/Tasks/rahiSlaveryCleaningTaskScene.gd",
 		"res://Modules/RahiModule/2Slavery/Rewards/rahiRewardPetScene.gd",
 		"res://Modules/RahiModule/2Slavery/Rewards/rahiRewardTreatScene.gd",
+		"res://Modules/RahiModule/2Slavery/Rewards/rahiRewardExhibitionismScene.gd",
+		"res://Modules/RahiModule/2Slavery/Rewards/rahiRewardCuddleScene.gd",
 		"res://Modules/RahiModule/2Slavery/Punishments/rahiPunishmentTyingUpScene.gd",
 		"res://Modules/RahiModule/2Slavery/Punishments/rahiPunishmentPissToiletScene.gd",
 		"res://Modules/RahiModule/2Slavery/Punishments/rahiPunishmentForcedPetplayScene.gd",
+		"res://Modules/RahiModule/2Slavery/Punishments/rahiPunishmentChokingScene.gd",
 		"res://Modules/RahiModule/2Slavery/Milestones/rahiMilestone1Scene.gd",
 		"res://Modules/RahiModule/2Slavery/Tasks/rahiSlaveryStealingTaskScene.gd",
 		"res://Modules/RahiModule/2Slavery/Tasks/rahiSlaveryYogaTaskScene.gd",
 		"res://Modules/RahiModule/2Slavery/Tasks/rahiSlaveryKissingBoothTaskScene.gd",
+		"res://Modules/RahiModule/2Slavery/Tasks/rahiSlaveryFreeTaskScene.gd",
 		"res://Modules/RahiModule/2Slavery/Milestones/rahiMilestone2Scene.gd",
 		"res://Modules/RahiModule/2Slavery/Milestones/rahiMilestone3Scene.gd",
 		"res://Modules/RahiModule/2Slavery/Milestones/rahiMilestone4Scene.gd",
@@ -121,6 +136,8 @@ func _init():
 		"res://Modules/RahiModule/2Slavery/Activities/rahiActivityDominanceScene.gd",
 		"res://Modules/RahiModule/2Slavery/Activities/rahiActivityAnalScene.gd",
 		"res://Modules/RahiModule/2Slavery/Activities/rahiActivityPetplayScene.gd",
+		"res://Modules/RahiModule/2Slavery/Activities/rahiActivityPetplayWalkiesScene.gd",
+		"res://Modules/RahiModule/2Slavery/Sleeping/rahiSleepsInPlayerCellScene.gd",
 		]
 	characters = [
 		"res://Modules/RahiModule/RahiCharacter.gd",
@@ -141,12 +158,14 @@ func _init():
 		"res://Modules/RahiModule/ShowerEvent/RahiShowerEvent.gd",
 		
 		"res://Modules/RahiModule/RahiFirstTimePregnantEvent.gd",
+		"res://Modules/RahiModule/Pregnancy/rahiGivingBirthEvent.gd",
 		
 		"res://Modules/RahiModule/1PreSlavery/rahi1ElizaEvent.gd",
 		"res://Modules/RahiModule/1PreSlavery/rahi2RahiEvent.gd",
 		"res://Modules/RahiModule/1PreSlavery/rahi3RahiPassOutEvent.gd",
 		"res://Modules/RahiModule/1PreSlavery/rahi4BreakdownEvent.gd",
 		"res://Modules/RahiModule/2Slavery/rahiSlaveryTalkEvent.gd",
+		"res://Modules/RahiModule/2Slavery/Sleeping/rahiSleepingInCellEvent.gd",
 	]
 	quests = [
 		"res://Modules/RahiModule/RahiSlaveryQuest.gd",
@@ -280,6 +299,9 @@ func getSkillsInfo():
 		}
 	}
 
+func isInSlavery():
+	return getFlag("RahiModule.rahi5SceneHappened", false)
+
 func getSlaveryStage():
 	return getFlag("RahiModule.rahiSlaveryStage", 0)
 
@@ -352,6 +374,13 @@ func getSkillSuccessChance(skillID, chanceWhenMinSkill, chanceWhenMaxSkill):
 	
 	return chanceWhenMinSkill + (chanceWhenMaxSkill - chanceWhenMinSkill) * (score / 15.0)
 
+func getSkillSuccessChanceAdv(skillID, minlevel, maxlevel, chanceWhenMinSkill, chanceWhenMaxSkill):
+	var score = float(getSkillScore(skillID))
+	var stageProgress = float(score - minlevel) / float(maxlevel - minlevel)
+	stageProgress = clamp(stageProgress, 0.0, 1.0)
+	
+	return chanceWhenMinSkill + (chanceWhenMaxSkill - chanceWhenMinSkill) * stageProgress
+
 func getSlaveryStageChance(minstage, maxstage, minchance, maxchance):
 	var currentStage = getSlaveryStage()
 	
@@ -401,3 +430,50 @@ func canTalkInFirstPerson():
 	if(currentStage >= 7):
 		return true
 	return false
+
+func getSkillsCanForget():
+	var skillsInfo:Dictionary = getSkillsInfo()
+	var pickedSkills = getFlag("RahiModule.rahiPickedSkills", {})
+	
+	var result = []
+	for skillID in skillsInfo:
+		if(!pickedSkills.has(skillID)):
+			continue
+		if(skillsInfo[skillID].has("defaultSkill") && skillsInfo[skillID]["defaultSkill"]):
+			continue
+	
+		result.append(skillID)
+	return result
+
+func getSkillInfo(skillID):
+	var skillsInfo:Dictionary = getSkillsInfo()
+	return skillsInfo[skillID]
+
+func forgetSkill(skillID):
+	var skillsInfo:Dictionary = getSkillsInfo()
+	
+	if(!skillsInfo.has(skillID)):
+		return false
+	
+	if(skillsInfo[skillID].has("defaultSkill") && skillsInfo[skillID]["defaultSkill"]):
+		return false
+	
+	var pickedSkills = getFlag("RahiModule.rahiPickedSkills", {})
+	if(!pickedSkills.has(skillID)):
+		return false
+	pickedSkills.erase(skillID)
+	setFlag("RahiModule.rahiPickedSkills", pickedSkills)
+	setFlag("RahiModule."+str(skillID), 0)
+	return true
+
+func canSleepInPlayerCell():
+	return getSlaveryStage() >= 3
+
+func shouldSleepInPlayerCell():
+	return canSleepInPlayerCell() && getFlag("RahiModule.rahiShouldSleepWithPlayer")
+
+func canSexThePlayerOnMornings():
+	return getSkillScore("rahiSkillSex") >= 5
+
+func shouldSexThePlayerOnMornings():
+	return canSexThePlayerOnMornings() && getFlag("RahiModule.rahiShouldSexPlayerDuringSleep")

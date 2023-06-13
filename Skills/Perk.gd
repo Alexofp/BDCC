@@ -68,6 +68,7 @@ const BDSMInstantEscape = "BDSMInstantEscape"
 const BDSMRigger = "BDSMRigger"
 const BDSMRiggerV2 = "BDSMRiggerV2"
 const BDSMRiggerV3 = "BDSMRiggerV3"
+const BDSMPerfectStreak = "BDSMPerfectStreak"
 
 # Milking perks
 const MilkSquirt = "MilkSquirt"
@@ -79,3 +80,15 @@ const MilkFasterProduction = "MilkFasterProduction"
 const MilkFasterProductionV2 = "MilkFasterProductionV2"
 const MilkFasterProductionV3 = "MilkFasterProductionV3"
 const MilkNoSoreNipples = "MilkNoSoreNipples"
+
+# Fertility perks
+const FertilityBetterOvulation = "FertilityBetterOvulation"
+const FertilityDesireToBreed = "FertilityDesireToBreed"
+const FertilityProudMom = "FertilityProudMom"
+const FertilityBetterOvulationV2 = "FertilityBetterOvulationV2"
+const FertilityBroodmother = "FertilityBroodmother"
+const FertilitySubmissiveAndBreedable = "FertilitySubmissiveAndBreedable"
+const FertilityPainTolerance = "FertilityPainTolerance"
+const FertilityBetterOvulationV3 = "FertilityBetterOvulationV3"
+const FertilityMotherOfTheYear = "FertilityMotherOfTheYear"
+const FertilityBellySize = "FertilityBellySize"

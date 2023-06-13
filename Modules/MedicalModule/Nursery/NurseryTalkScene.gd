@@ -1,7 +1,8 @@
 extends "res://Scenes/SceneBase.gd"
 
-var bornChildAmount = 0
+var bornChildAmount: int = 0
 var bornChildString = ""
+var receivedApple = false
 
 func _init():
 	sceneID = "NurseryTalkScene"
@@ -10,6 +11,14 @@ func _reactInit():
 	if(GM.ES.triggerReact(Trigger.TalkingToNPC, ["nurse"])):
 		endScene()
 		return
+		
+	if(GM.pc.hasPerk(Perk.FertilityProudMom) && !getFlag("MedicalModule.Nursery_hadFreeAppleFromPerkToday", false)):
+		var theApple = GlobalRegistry.createItem("appleitem")
+		theApple.setIsLegal(true)
+		GM.pc.getInventory().addItem(theApple)
+		addMessage("You recieved an apple")
+		setFlag("MedicalModule.Nursery_hadFreeAppleFromPerkToday", true)
+		receivedApple = true
 
 func _run():
 	if(state == ""):
@@ -39,8 +48,13 @@ func _run():
 		else:
 			saynn("You approach the nurse and try to get her attention. She drags her gaze away from the screen and looks at you.")
 
+			# (if player has the perk FertilityProudMom and didn't get an apple today)
+			if(receivedApple):
+				saynn("[say=nurse]Oh it's you again! I try to make sure that every mom here stays on the healthy side, take this[/say]")
+				saynn("She gives you an apple.")
+				
 			# (if ready to give birth)
-			if(GM.pc.isVisiblyPregnant()):
+			elif(GM.pc.isVisiblyPregnant()):
 				saynn("[say=nurse]Came to give birth?[/say]")
 
 			# (else)
@@ -187,6 +201,8 @@ func _run():
 		addButton("Continue", "Time to create life", "startbirth")
 
 	if(state == "startbirth"):
+		playAnimation(StageScene.GivingBirth, "birth", {bodyState={naked=true}})
+		
 		saynn("You enter the birthing room. It’s spacious and has a special bed in the middle, the one that is designed to keep your legs spread. You lay down and await your faith.")
 
 		saynn("The nurse prepares herself, puts on all the equipment and then walks up to you. You follow all the procedures that she is giving to you.")
@@ -202,6 +218,8 @@ func _run():
 		addButton("Continue", "See what happens", "continue1")
 
 	if(state == "continue1"):
+		playAnimation(StageScene.GivingBirth, "idle", {bodyState={naked=true}})
+		
 		var childStr = "child"
 		if(bornChildAmount > 1):
 			childStr = "children"
@@ -228,7 +246,7 @@ func calculateAmount(pcKids = true):
 	return amount
 
 func printChildren(pcKids = true):
-	var resultTable = "[table=5][cell]Gender[/cell][cell]Species[/cell][cell]Age[/cell][cell]Mother[/cell][cell]Father[/cell]"
+	var resultTable = "[table=7][cell]Name[/cell][cell]Gender[/cell][cell]Species[/cell][cell]Age[/cell][cell]Mother[/cell][cell]Father[/cell][cell]Additional[/cell]"
 	
 	for ch in GM.CS.getChildren():
 		var child: Child = ch
@@ -241,20 +259,24 @@ func printChildren(pcKids = true):
 		var daysPassed = GM.main.getDays() - birthDay
 		var yearsOld:int = daysPassed / 365
 		var daysOld:int = daysPassed - yearsOld * 365
-		var ageStr = str(daysOld)+" days old"
+		var ageStr = str(daysOld)+" days"
 		if(daysOld == 1):
-			ageStr = str(daysOld)+" day old"
+			ageStr = str(daysOld)+" day"
 		
-		if(yearsOld == 1):	
+		if(yearsOld < 1):
+			pass
+		elif(yearsOld == 1):	
 			ageStr = "1 year "+ageStr
 		else:
 			ageStr = str(yearsOld)+" years "+ageStr
 		
+		resultTable += "[cell]"+child.name+"[/cell]"
 		resultTable += "[cell]"+"[color="+NpcGender.getColorString(child.gender)+"]"+ NpcGender.getVisibleName(child.gender)+"[/color]"+"[/cell]"
 		resultTable += "[cell]"+Util.getSpeciesName(child.species)+"[/cell]"
 		resultTable += "[cell]"+ageStr+"[/cell]"
 		resultTable += "[cell]"+child.getMotherName()+"[/cell]"
 		resultTable += "[cell]"+child.getFatherName()+"[/cell]"
+		resultTable += "[cell]"+child.getMonozygotic()+"[/cell]"
 		
 	resultTable += "[/table]"
 	saynn(resultTable)
@@ -267,21 +289,17 @@ func _react(_action: String, _args):
 		GM.pc.afterSleepingInBed()
 	
 	if(_action == "startbirth"):
-		GM.pc.clearOrificeFluids()
-		if(GM.pc.getMenstrualCycle() != null):
-			var bornChildren = GM.pc.getMenstrualCycle().giveBirth()
-			bornChildAmount = bornChildren.size()
-			bornChildString = ""
+		var bornChildren = GM.pc.giveBirth()
+		bornChildAmount = bornChildren.size()
+		
+		bornChildString = ""
+		for child in bornChildren:
+			var fatherObject = GlobalRegistry.getCharacter(child.fatherID)
+			var fatherName = "unknown"
+			if(fatherObject != null):
+				fatherName = fatherObject.getName()
 			
-			for child in bornChildren:
-				GM.CS.addChild(child)
-				
-				var fatherObject = GlobalRegistry.getCharacter(child.fatherID)
-				var fatherName = "unknown"
-				if(fatherObject != null):
-					fatherName = fatherObject.getName()
-				
-				bornChildString += "[color="+NpcGender.getColorString(child.gender)+"]"+ NpcGender.getVisibleName(child.gender)+"[/color]"+" - "+Util.getSpeciesName(child.species)+" - "+"Father: "+fatherName+"\n"
+			bornChildString += child.name+" - "+"[color="+NpcGender.getColorString(child.gender)+"]"+ NpcGender.getVisibleName(child.gender)+"[/color]"+" - "+Util.getSpeciesName(child.species)+" - "+"Father: "+fatherName +" [color="+"#f0dd61"+"]"+child.bornFromMonozygotic+"[/color]" +"\n"
 		processTime(60*60)
 		
 	if(_action == "endthescene"):
@@ -295,6 +313,7 @@ func saveData():
 	
 	data["bornChildAmount"] = bornChildAmount
 	data["bornChildString"] = bornChildString
+	data["receivedApple"] = receivedApple
 	
 	return data
 	
@@ -303,3 +322,4 @@ func loadData(data):
 	
 	bornChildAmount = SAVE.loadVar(data, "bornChildAmount", 0)
 	bornChildString = SAVE.loadVar(data, "bornChildString", "")
+	receivedApple = SAVE.loadVar(data, "receivedApple", false)

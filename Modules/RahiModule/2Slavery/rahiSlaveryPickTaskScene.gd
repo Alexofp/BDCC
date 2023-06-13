@@ -20,7 +20,9 @@ func _run():
 			addButton("Yoga", "(Exhibionism) Make her do yoga", "dotask", ["rahiSlaveryYogaTaskScene"])
 		if(rahiModule.isSkillLearned("rahiSkillProstitution")):
 			addButton("Kissing booth", "(Prostitution) Make Rahi earn credits by offering kisses to others and more", "dotask", ["rahiSlaveryKissingBoothTaskScene"])
-		
+		if(rahiModule.getSlaveryStage() >= 8):
+			addButton("No task", "Give Rahi a free day!", "dotask", ["rahiSlaveryFreeTaskScene"])
+				
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
 		endScene()
@@ -34,9 +36,15 @@ func _react(_action: String, _args):
 
 func _react_scene_end(_tag, _result):
 	if(_tag == "theTask"):
-		if(_result == null || _result.size() == 0):
+		if(_result == null):
 			setState("")
 			return
+		if(_result.size() == 0):
+			setFlag("RahiModule.rahiCommentedOnTask", true)
+			endScene()
+			runScene("rahiSlaveryTalkScene")
+			return
+			
 		var theresult = _result[0]
 		
 		setFlag("RahiModule.rahiCommentedOnTask", false)

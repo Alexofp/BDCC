@@ -1,6 +1,7 @@
 extends Reference
 class_name Child
 
+var name: String = ""
 var gender
 var species = []
 var birthDay: int
@@ -9,9 +10,23 @@ var fatherID: String
 var rememberedMotherName: String = "" # Required in case the character gets deleted
 var rememberedFatherName: String = ""
 var uniqueID: int
+var bornFromMonozygotic: String = ""
+const EGG_MONOZYGOTIC_LEVEL = {1: "", 2: "Twins", 3: "Triplets", 4: "Quadruplets", 5: "Quintuplets", 6: "Sextuplets"}
 
 func generateUniqueID():
 	uniqueID = GlobalRegistry.generateChildUniqueID()
+	
+func setBornFromMonozygoticStatus(monozygotic):
+	bornFromMonozygotic = EGG_MONOZYGOTIC_LEVEL[monozygotic]
+	
+func generateName():
+	if(gender == NpcGender.Male || gender == NpcGender.Peachboy):
+		name = RNG.randomMaleName()
+	else:
+		name = RNG.randomFemaleName()
+
+func setName(newName):
+	name = newName
 
 func setGender(newGender):
 	gender = newGender
@@ -41,6 +56,9 @@ func getMotherID():
 
 func getFatherID():
 	return fatherID
+	
+func getMonozygotic():
+	return bornFromMonozygotic
 
 func getMotherName():
 	var character = GlobalRegistry.getCharacter(motherID)
@@ -66,6 +84,8 @@ func loadFromEggCell(egg: EggCell):
 
 func saveData():
 	var data = {
+		"name": name,
+		"bornFromMonozygotic": bornFromMonozygotic,
 		"gender": gender,
 		"species": species,
 		"birthDay": birthDay,
@@ -79,6 +99,10 @@ func saveData():
 	return data
 
 func loadData(data):
+	name = SAVE.loadVar(data, "name", "")
+	if(name == ""):
+		generateName()
+	bornFromMonozygotic = SAVE.loadVar(data, "bornFromMonozygotic", "")
 	gender = SAVE.loadVar(data, "gender", NpcGender.Male)
 	species = SAVE.loadVar(data, "species", ["feline"])
 	birthDay = SAVE.loadVar(data, "birthDay", 0)

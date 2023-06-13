@@ -57,6 +57,7 @@ func deleteSelf():
 	GM.main.removeDynamicCharacter(getID())
 
 func onStoppedProcessing():
+	.onStoppedProcessing()
 	if(temporaryCharacter):
 		deleteSelf()
 
@@ -91,6 +92,15 @@ func getLootTable(_battleName):
 	if(npcCharacterType == CharacterType.Inmate):
 		return InmateLoot.new()
 	return .getLootTable(_battleName)
+
+func getDefaultArtwork(_variant = []):
+	if(false):
+		return .getDefaultArtwork(_variant)
+	
+	return Images.getGenericCharacterArt(self, _variant)
+
+func getBirthWaitTime():
+	return 60*60*30 # Dynamic npcs wait 30 hours before giving birth
 
 func saveData():
 	var data = {
@@ -144,6 +154,7 @@ func saveData():
 	
 	data["lastUpdatedDay"] = lastUpdatedDay
 	data["lastUpdatedSecond"] = lastUpdatedSecond
+	data["pregnancyWaitTimer"] = pregnancyWaitTimer
 	
 	data["lustInterests"] = lustInterests.saveDataDynamicNpc()
 	data["fetishHolder"] = fetishHolder.saveData()
@@ -217,6 +228,7 @@ func loadData(data):
 	
 	lastUpdatedDay = SAVE.loadVar(data, "lastUpdatedDay", -1)
 	lastUpdatedSecond = SAVE.loadVar(data, "lastUpdatedSecond", -1)
+	pregnancyWaitTimer = SAVE.loadVar(data, "pregnancyWaitTimer", 0)
 	
 	lustInterests.loadDataDynamicNpc(SAVE.loadVar(data, "lustInterests", {}))
 	fetishHolder.loadData(SAVE.loadVar(data, "fetishHolder", {}))

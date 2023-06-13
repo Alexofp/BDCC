@@ -24,10 +24,11 @@ var showSceneCreator = true
 var measurementUnits = "metric"
 
 var debugPanel = false
-
 var showMapArt = false
+var developerCommentary = false
 
 var showCharacterArt = true
+var showSceneArt = true
 var imagePackOrder = []
 
 var rollbackEnabled = false
@@ -54,11 +55,13 @@ func resetToDefaults():
 	showMapArt = false
 	#imagePackOrder = []
 	showCharacterArt = true
+	showSceneArt = true
 	showSceneCreator = true
 	rollbackEnabled = false
 	rollbackSlots = 5
 	rollbackSaveEvery = 1
 	showModdedLauncher = false
+	developerCommentary = false
 	
 	enabledContent.clear()
 	for contentType in ContentType.getAll():
@@ -119,6 +122,9 @@ func isDebugPanelEnabled():
 func shouldShowCharacterArt():
 	return showCharacterArt
 
+func shouldShowSceneArt():
+	return showSceneArt
+
 func shouldShowSceneCreator():
 	return showSceneCreator
 
@@ -136,6 +142,9 @@ func getRollbackSaveEveryXChoices():
 
 func shouldShowModdedLauncher():
 	return showModdedLauncher
+
+func developerCommentaryEnabled():
+	return developerCommentary
 
 func getChangeableOptions():
 	var settings = [
@@ -316,6 +325,13 @@ func getChangeableOptions():
 					"value": showCharacterArt,
 				},
 				{
+					"name": "Show scene art",
+					"description": "Display the art associated with the current scene (if available)",
+					"id": "showSceneArt",
+					"type": "checkbox",
+					"value": showSceneArt,
+				},
+				{
 					"name": "Image packs",
 					"description": "Choose artist priority",
 					"id": "imagePackOrder",
@@ -330,6 +346,13 @@ func getChangeableOptions():
 					"id": "showSceneCreator",
 					"type": "checkbox",
 					"value": showSceneCreator,
+				},
+				{
+					"name": "Developer commentary",
+					"description": "Enables developer commentary for scenes that support it",
+					"id": "developerCommentary",
+					"type": "checkbox",
+					"value": developerCommentary,
 				},
 #				{
 #					"name": "Show map art (WIP)",
@@ -441,10 +464,14 @@ func applyOption(categoryID, optionID, value):
 			uiButtonSize = value
 		if(optionID == "showCharacterArt"):
 			showCharacterArt = value
+		if(optionID == "showSceneArt"):
+			showSceneArt = value
 		if(optionID == "showSceneCreator"):
 			showSceneCreator = value
 		if(optionID == "showMapArt"):
 			showMapArt = value
+		if(optionID == "developerCommentary"):
+			developerCommentary = value
 		
 	if(categoryID == "render"):
 		if(optionID == "renderer"):
@@ -496,12 +523,14 @@ func saveData():
 		"debugPanel": debugPanel,
 		"imagePackOrder": imagePackOrder,
 		"showCharacterArt": showCharacterArt,
+		"showSceneArt": showSceneArt,
 		"showSceneCreator": showSceneCreator,
 		"showMapArt": showMapArt,
 		"rollbackEnabled": rollbackEnabled,
 		"rollbackSlots": rollbackSlots,
 		"rollbackSaveEvery": rollbackSaveEvery,
 		"showModdedLauncher": showModdedLauncher,
+		"developerCommentary": developerCommentary,
 	}
 	
 	return data
@@ -524,12 +553,14 @@ func loadData(data):
 	debugPanel = loadVar(data, "debugPanel", false)
 	imagePackOrder = loadVar(data, "imagePackOrder", [])
 	showCharacterArt = loadVar(data, "showCharacterArt", true)
+	showSceneArt = loadVar(data, "showSceneArt", true)
 	showSceneCreator = loadVar(data, "showSceneCreator", true)
 	showMapArt = loadVar(data, "showMapArt", false)
 	rollbackEnabled = loadVar(data, "rollbackEnabled", false)
 	rollbackSlots = loadVar(data, "rollbackSlots", 5)
 	rollbackSaveEvery = loadVar(data, "rollbackSaveEvery", 1)
 	showModdedLauncher = loadVar(data, "showModdedLauncher", false)
+	developerCommentary = loadVar(data, "developerCommentary", false)
 
 func saveToFile():
 	var saveData = saveData()
@@ -582,7 +613,7 @@ func checkImagePackOrder(imagePacks):
 	
 	for imagePackID in imagePacks:
 		if(!newImagePackOrder.has(imagePackID)):
-			newImagePackOrder.append(imagePackID)
+			newImagePackOrder.push_front(imagePackID)
 	
 	imagePackOrder = newImagePackOrder
 	print("checkImagePackOrder DONE ",imagePackOrder)

@@ -1094,3 +1094,9 @@ func loadData(data):
 	.loadData(data)
 
 	wasKind = SAVE.loadVar(data, "wasKind", false)
+
+func getDevCommentary():
+	return "Yeahhhhh.. Rahi's backstory scene.. I had an idea for this scene for a looooong time. And I'm so glad I managed to write it. I was sick through the last half of it, which is funny considering what happens in it.. Just kinda ironic that I also had a bad cough while writing it\n\nBackstory scenes are.. supposed to be pretty self-contained. They all are about telling you a little story. Yes, it's connected to your story. But it's mostly about how these characters ended up where they are. There is always some kind of climax in these backstory scenes.. makes it more interesting\n\nIf you look at the structure its basically just Rahi getting rekt by everything x3. And then she gets some rest but her own actions push her further and further into this.. dark place. It's basically a scene about Rahi getting corrupted by the world that she is in. Her father is the only bright memory.. and even that is.. I dunno if I should spoil the ending x3\n\nI did cry while writing some parts. Which usually means there are a lot of emotions packed into the words. I don't expect you to cry x3. I'm just an emotional wreck I guess. But it helps me see if the scene is good. Good writing will make you feel something."
+
+func hasDevCommentary():
+	return true

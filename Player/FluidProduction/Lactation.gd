@@ -38,7 +38,7 @@ func getCapacityForSize(size):
 	if(size == BreastsSize.FOREVER_FLAT):
 		return 0.0
 	
-	return round(0.0 + size*size*100.0)
+	return BreastsSize.breastSizeToMilkAmount(size)*100.0#round(0.0 + size*size*100.0)
 
 func getOptimalBreastsSize():
 	var baseSize = getBodypart().getBaseSize()

@@ -13,6 +13,19 @@ func getFlags():
 		"FightClubPCRank": flag(FlagType.Text),
 		"FightClubDefeatedFighters": flag(FlagType.Dict),
 		"FightClubFirstArenaIntroduction": flag(FlagType.Bool),
+		"AttemptedAvyFight": flag(FlagType.Bool),
+		"ManagedToWinDruggedAvy": flag(FlagType.Bool),
+		"GotDestroyedByAvy": flag(FlagType.Bool),
+		"GotFuckedByAvy": flag(FlagType.Bool),
+		"GotKnockedOutByAvy": flag(FlagType.Bool),
+		"GotTaskToStealPlant": flag(FlagType.Bool),
+		"StolePlantForEliza": flag(FlagType.Bool),
+		"ReturnedPlantToEliza": flag(FlagType.Bool),
+		"AvyApproachAfterRektHappened": flag(FlagType.Bool),
+		"AvyGotRekt": flag(FlagType.Bool),
+		"AvyGotCaged": flag(FlagType.Bool),
+		"AvyIsInSlutwall": flag(FlagType.Bool),
+		"AvySlutWallBroken": flag(FlagType.Number),
 	}
 
 func _init():
@@ -52,6 +65,16 @@ func _init():
 		
 		"res://Modules/FightClubModule/Fighters/Jack/JackLostToScene.gd",
 		"res://Modules/FightClubModule/Fighters/Jack/JackWonScene.gd",
+		
+		"res://Modules/FightClubModule/Avy/ArenaQuest/AvyFirstArenaBattleScene.gd",
+		"res://Modules/FightClubModule/Avy/ArenaQuest/WakingUpAfterFirstAvyBattleScene.gd",
+		"res://Modules/FightClubModule/Avy/ArenaQuest/AvyApproachAfterRektScene.gd",
+		"res://Modules/FightClubModule/Avy/ArenaQuest/GivingElizaPlantForAvyFightScene.gd",
+		"res://Modules/FightClubModule/Avy/ArenaQuest/AvyArenaPittyFuckScene.gd",
+		"res://Modules/FightClubModule/Avy/ArenaQuest/AvyFinalArenaBattleScene.gd",
+		"res://Modules/FightClubModule/Avy/ArenaQuest/AvySlutwallScene.gd",
+		
+		"res://Modules/FightClubModule/Slutwall/SlutwallPlayerScene.gd",
 		]
 	characters = [
 		"res://Modules/FightClubModule/Entrance/Bulldog.gd",
@@ -64,14 +87,21 @@ func _init():
 		"res://Modules/FightClubModule/Fighters/Axis/AxisCharacter.gd",
 		"res://Modules/FightClubModule/Fighters/Kait/KaitCharacter.gd",
 		"res://Modules/FightClubModule/Fighters/Jack/JackCharacter.gd",
+		"res://Modules/FightClubModule/Fighters/Avy/AvyArenaCharacter.gd",
 	]
 	items = []
 	events = [
 		"res://Modules/FightClubModule/Entrance/FightClubEntranceEvent.gd",
 		"res://Modules/FightClubModule/Announcer/FightClubAnnouncerTalkEvent.gd",
 		"res://Modules/FightClubModule/Avy/FightClubAvyTalkEvent.gd",
+		"res://Modules/FightClubModule/Avy/ArenaQuest/AvyApproachAfterRektEvent.gd",
+		"res://Modules/FightClubModule/Avy/ArenaQuest/AvyQuestStealDrugsEvent.gd",
+		"res://Modules/FightClubModule/Avy/ArenaQuest/GivingElizaPlantForAvyFightEvent.gd",
+		"res://Modules/FightClubModule/Avy/ArenaQuest/AvySlutwallEvent.gd",
+		"res://Modules/FightClubModule/Slutwall/SlutwallPlayerEvent.gd",
 	]
 	quests = [
+		"res://Modules/FightClubModule/Avy/ArenaQuest/AvyArenaQuest.gd",
 	]
 
 func register():
@@ -136,3 +166,35 @@ static func markFighterAsDefeated(fighterID):
 	var defeated = GM.main.getFlag("FightClubModule.FightClubDefeatedFighters", {})
 	defeated[fighterID] = true
 	GM.main.setFlag("FightClubModule.FightClubDefeatedFighters", defeated)
+
+func isReadyToFightAvy():
+	var ranks = FightClubRank.getAll()
+	
+	for i in ranks.size():
+		var rankID = ranks[-i-1]
+		
+		var fighters = GlobalRegistry.getFightClubFightersIDsByRank(rankID)
+		for i2 in fighters.size():
+			var fighterID = fighters[-i2-1]
+			if(fighterID == "avy"):
+				continue
+			if(!isFighterDefeated(fighterID)):
+				return false
+				
+	return true
+
+# For debug/cheats
+func forceWinEveryoneExpectAvy():
+	var ranks = FightClubRank.getAll()
+	
+	for i in ranks.size():
+		var rankID = ranks[-i-1]
+		
+		var fighters = GlobalRegistry.getFightClubFightersIDsByRank(rankID)
+		for i2 in fighters.size():
+			var fighterID = fighters[-i2-1]
+			if(fighterID == "avy"):
+				continue
+			markFighterAsDefeated(fighterID)
+	
+	raisePCRankTo(FightClubRank.AttentionWhore)

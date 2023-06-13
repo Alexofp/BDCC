@@ -1027,6 +1027,8 @@ func getFertility():
 	
 	value += buffsHolder.getFertility()
 	
+	value *= (1.0 + buffsHolder.getCustom(BuffAttribute.FinalFertilityModifier))
+	
 	return value
 
 func getBaseVirility() -> float:
@@ -1040,12 +1042,32 @@ func getVirility():
 	
 	value += buffsHolder.getVirility()
 	
+	value *= (1.0 + buffsHolder.getCustom(BuffAttribute.FinalVirilityModifier))
+	
 	return value
+	
+func getBaseEggsMod() -> float:
+	return 1.0
+
+func getEggsBonusMod():
+	var value = getBaseEggsMod()
+	
+	value += buffsHolder.getEggsBonusMod()
+	
+	return value
+	
+func getMinEggsAmount():
+	var value = buffsHolder.getMinEggsAmount()
+	
+	return max(value, 1) 
 
 func getCrossSpeciesCompatibility():
 	var value = 0.0
 	
 	value += buffsHolder.getCrossSpeciesCompatibility()
+	
+	if(hasPerk(Perk.FertilityBroodmother) && value < 1.0):
+		return 1.0
 	
 	return value
 
@@ -1080,6 +1102,17 @@ func isReadyToGiveBirth():
 	if(menstrualCycle != null):
 		return menstrualCycle.isReadyToGiveBirth()
 	return false
+
+func giveBirth():
+	if(menstrualCycle == null):
+		return []
+	
+	clearOrificeFluids()
+	var bornChildren = getMenstrualCycle().giveBirth()
+	for child in bornChildren:
+		GM.CS.addChild(child)
+	
+	return bornChildren
 
 func forceIntoHeat():
 	if(menstrualCycle != null):
@@ -1502,6 +1535,10 @@ func clearTallymarks():
 func addBodywriting(zone, writingID):
 	addEffect(StatusEffect.HasBodyWritings, [zone, writingID])
 
+func addBodywritingRandom():
+	var zone = BodyWritingsZone.getRandomZone()
+	addBodywriting(zone, BodyWritings.getRandomWritingIDForZone(zone))
+
 func hasBodywritings():
 	return hasEffect(StatusEffect.HasBodyWritings)
 
@@ -1622,6 +1659,13 @@ func createFilledCondom():
 	cumInItem(theCondom)
 	return theCondom
 
+func lustStateFullyUndress():
+	var items = getInventory().getAllEquippedItems()
+	for itemSlot in items:
+		var lustState = items[itemSlot].getItemState()
+		if(lustState != null):
+			lustState.remove()
+
 func afterSexEnded(sexInfo):
 	if(sexInfo.getTimesCame() > 0):
 		addLust(-getLust())
@@ -1647,8 +1691,8 @@ func afterSexEnded(sexInfo):
 		item.resetLustState()
 		item.onSexEnd()
 		
-	if(personalityChangesAfterSex() && personality != null):
-		var resultText = sexInfo.affectPersonality(personality)
+	if(personalityChangesAfterSex() && personality != null && fetishHolder != null):
+		var resultText = sexInfo.affectPersonality(personality, fetishHolder)
 		if(resultText != null && resultText != ""):
 			GM.main.addMessage(resultText)
 		
@@ -1839,6 +1883,11 @@ func hasAnyWomb():
 		return false
 	return menstrualCycle.hasAnyWomb()
 
+func hasWombIn(bodypartSlot):
+	if(!hasBodypart(bodypartSlot)):
+		return false
+	return getBodypart(bodypartSlot).hasWomb()
+
 func getDefaultArtwork(_variant = []):
 	return "res://Images/UI/GenericFace.png"
 
@@ -1888,6 +1937,12 @@ func canWearStrapon():
 	
 	return true
 
+func hasStrapons():
+	return getInventory().getItemsWithTag(ItemTag.Strapon).size() > 0
+
+func getStrapons():
+	return getInventory().getItemsWithTag(ItemTag.Strapon)
+
 func isWearingStrapon():
 	return getWornStrapon() != null
 
@@ -1897,6 +1952,18 @@ func getWornStrapon():
 		if(item.hasTag(ItemTag.Strapon)):
 			return item
 	return null
+
+func removeStrapon():
+	var theStrapon = getWornStrapon()
+	if(theStrapon == null):
+		return null
+	return getInventory().removeEquippedItem(theStrapon)
+
+func unequipStrapon():
+	var theStrapon = getWornStrapon()
+	if(theStrapon == null):
+		return null
+	return getInventory().unequipItem(theStrapon)
 
 func doPainfullyStretchHole(_bodypart, _who = "pc"):
 	pass
@@ -1964,8 +2031,49 @@ func getOutsideMessinessLevel():
 	else:
 		return 5
 
+func isCoveredInFluids():
+	if(bodyFluids.isEmpty()):
+		return false
+	return true
+
 func afterTakingAShower():
 	#addStamina(30)
 	clearBodyFluids()
 	clearBodywritings()
 	clearTallymarks()
+
+func isTooLewd(ignoreHeat = true):
+	var theExposure = getExposure()
+	if(ignoreHeat && hasEffect(StatusEffect.InHeat)):
+		theExposure -= 50
+	
+	if(theExposure > 0):
+		return true
+	return false
+
+func shouldCondomBreakWhenFucking(characterPenetrated, chance: float = 20.0, showMessages = true) -> bool:
+	if(!OPTIONS.isContentEnabled(ContentType.RiskyCondoms)):
+		return false
+	
+	var character
+	if(characterPenetrated is String):
+		character = GlobalRegistry.getCharacter(characterPenetrated)
+	else:
+		character = characterPenetrated
+	
+	if(character.hasPerk(Perk.FertilityDesireToBreed)):
+		if(RNG.chance(chance)):
+			character.addPain(-20)
+			if(showMessages && character.isPlayer()):
+				GM.main.addMessage("You didn't even sabotage that condom.. but it still feels good..")
+			return true
+		
+		chance = clamp((chance * 3.0), 30, 95) #limits max chance to break to 95%
+		if(RNG.chance(chance) && !character.hasBlockedHands()):
+			character.addPain(-20)
+			if(showMessages && character.isPlayer()):
+				GM.main.addMessage("Your hands sneakily sabotage the condom.. feels good..")
+			return true
+		return false
+	
+	return RNG.chance(chance)

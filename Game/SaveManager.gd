@@ -136,7 +136,7 @@ func loadVar(data, key, nullvalue = null):
 		return nullvalue
 	
 	if(!data.has(key)):
-		Log.printerr("Warning: Save doesn't have key "+key+". Using "+str(nullvalue)+" as default value. "+Util.getStackFunction())
+		Log.warning("Warning: Save doesn't have key "+key+". Using "+str(nullvalue)+" as default value. "+Util.getStackFunction())
 		return nullvalue
 		
 	if(nullvalue != null && typeof(data[key]) != typeof(nullvalue) && !(typeof(data[key]) == TYPE_REAL && typeof(nullvalue) == TYPE_INT)):

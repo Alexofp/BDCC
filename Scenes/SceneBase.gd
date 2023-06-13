@@ -19,6 +19,7 @@ var showFightUI = false
 var sceneSavedItemsInv:LightInventory = LightInventory.new()
 var uniqueSceneID: int = -1
 var parentSceneUniqueID: int = -1
+var showedDeveloperCommentary = false #No need to save this one
 
 func _run():
 	pass
@@ -49,7 +50,7 @@ func initScene(args = []):
 	_initScene(args)
 	_reactInit()
 	
-	checkSceneEnded()
+	#checkSceneEnded()
 
 func run():
 	GM.pc.updateNonBattleEffects()
@@ -72,7 +73,9 @@ func run():
 		
 	GM.pc.updateEffectPanel(GM.ui.getPlayerStatusEffectsPanel())
 	GM.ui.updateCharactersInPanel()
-	GM.ui.setSceneCreator(getSceneCreator())
+	GM.ui.setSceneCreator(getSceneCreator(), shouldShowDevCommentaryIcon())
+	GM.ui.setSceneArtWork(Images.getSceneArt(self))
+
 	
 	checkSceneEnded()
 		
@@ -108,11 +111,14 @@ func addFilledCondomToLootIfPerk(theItem):
 
 func react(_action: String, _args):
 	var result = _react(_action, _args)
-	checkSceneEnded()
+	#checkSceneEnded()
 	return result
 
 func setState(newState: String):
 	state = newState
+
+func getState() -> String:
+	return state
 
 func say(_text: String):
 	if(GM.ui):
@@ -173,7 +179,7 @@ func react_scene_end(_tag, _result):
 	print(name+": My parent scene has ended")
 	#updateCharacter()
 	_react_scene_end(_tag, _result)
-	checkSceneEnded()
+	#checkSceneEnded()
 
 func addNextButton(method: String, args = []):
 	if(GM.ui):
@@ -310,6 +316,25 @@ func playAnimation(theSceneID, theActionID, args = {}):
 func playAnimationForceReset(theSceneID, theActionID, args = {}):
 	if(GM.main != null):
 		GM.main.playAnimationForceReset(theSceneID, theActionID, args)
+
+func getDevCommentary():
+	return null
+
+func markShownDevCommentary():
+	showedDeveloperCommentary = true
+
+func hasDevCommentary():
+	var devComs = getDevCommentary()
+	if(devComs == null || devComs == ""):
+		return false
+	return true
+
+func shouldShowDevCommentaryIcon():
+	if(!OPTIONS.developerCommentaryEnabled()):
+		return false
+	if(showedDeveloperCommentary):
+		return false
+	return hasDevCommentary()
 
 func saveData():
 	var data = {}

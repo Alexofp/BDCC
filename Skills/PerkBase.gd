@@ -14,6 +14,9 @@ func getVisibleDescription():
 func getMoreDescription():
 	return ""
 
+func runOnceWhenLearned():
+	pass
+
 func getSkillGroup():
 	return skillGroup
 

@@ -16,6 +16,9 @@ func react(_triggerID, _args):
 	if(idToUse == null || idToUse == ""):
 		return false
 		
+	if(GM.ES.triggerReact(Trigger.TalkingToDynamicNPC, [idToUse])):
+		return true
+		
 	runScene("NurseCaughtOfflimitsScene", [idToUse])
 
 	return true

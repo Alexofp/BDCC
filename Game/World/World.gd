@@ -233,6 +233,7 @@ func registerRoom(floorid, room):
 	room.astarID = astar.get_available_point_id()
 	astar.add_point(room.astarID, pos)
 	astarIDToRoomIDMap[room.astarID] = room.roomID
+	room.floorID = floorid
 
 func switchToFloor(floorID):
 	for myfloorid in floorDict:

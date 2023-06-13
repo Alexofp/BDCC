@@ -875,6 +875,22 @@ func useBestCondom():
 		bestObject.removeXOrDestroy(1)
 	return bestChance
 
+func useWorstCondom():
+	var condoms = getInventory().getItemsWithTag(ItemTag.Condom)
+	if(condoms.size() <= 0):
+		return null
+	
+	var bestObject = null
+	var bestChance = 100000.0
+	for condom in condoms:
+		if(condom.getCondomBreakChance() < bestChance):
+			bestChance = condom.getCondomBreakChance()
+			bestObject = condom
+	
+	if(bestObject != null):
+		bestObject.removeXOrDestroy(1)
+	return bestChance
+
 func onPlayerVisiblyPregnant():
 	GM.main.addLogMessage("Uh oh", "You notice that your belly is more inflated that normally. You can't deny it anymore, you are pregnant..")
 
@@ -961,3 +977,26 @@ func doPainfullyStretchHole(_bodypart, _who = "pc"):
 func doWound(_who = "pc"):
 	addEffect(StatusEffect.Wounded, [1])
 	emit_signal("gotWoundedBy", _who)
+
+func getEncounterChanceModifierStaff():
+	return clamp(buffsHolder.getCustom(BuffAttribute.EncounterChanceModifierStaff) + 1.0, 0.1, 10.0)
+	
+func getEncounterChanceModifierInmates():
+	return clamp(buffsHolder.getCustom(BuffAttribute.EncounterChanceModifierInmates) + 1.0, 0.1, 10.0)
+
+func giveBirth():
+	var bornChildren = .giveBirth()
+	
+	var bornChildAmount = bornChildren.size()
+	addSkillExperience(Skill.Fertility, 90 + Util.mini(210, bornChildAmount * 10))
+	if(hasPerk(Perk.FertilityMotherOfTheYear)):
+		addEffect(StatusEffect.MaternalGlow)
+		
+		var paycheck = Util.mini(20, bornChildAmount * 2)
+		addCredits(paycheck)
+		
+		#if(GM.ui != null):
+		#	GM.ui.showHornyMessage("[center][color=#f0dd61]AlphaCorp thanks you for your compliance and hopes to continue our 'fruitful cooperation' in the future \n [b]You recieved: " +str(paycheck)+ " credits![/b][/color][/center]")
+		GM.main.addMessage("AlphaCorp has transferred "+str(paycheck)+" credits to you for being a good mother.")
+	
+	return bornChildren

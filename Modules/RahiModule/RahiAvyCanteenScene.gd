@@ -172,6 +172,7 @@ func _run():
 
 	if(state == "aftermatch"):
 		removeCharacter("avy")
+		playAnimation(StageScene.Hug, "hug", {npc="rahi"})
 		
 		saynn("Kitty helps you to sit on the bench and swipes the dust off.")
 
@@ -298,3 +299,9 @@ func _react_scene_end(_tag, _result):
 		else:
 			setState("lost_battle")
 			addExperienceToPlayer(50)
+
+func getDevCommentary():
+	return "I was.. very tired.. while writing this scene. That's why it's bad..\n\nIdeally you would be able to maybe humiliate Avy if you win. Or something lewd should happen if you lose. But you know.. my motivation to write anything just plummets hard when I'm out of it. So why write then? I dunno.. Should I not write when I'm not in a perfect mood? What if I'm sick? What if I'm feeling only slightly unwell?.. Yeah.. ideally I should write when I know that I can write a good scene, right? x3 How do you even know that without writing something first x3 Should I just throw out bad scenes? Eh, its not disgustingly bad though x3 Just weak.\n\nYou know how I see it? Good scenes will feel even better if sometimes you have to sit through bad ones too x3. I'm not saying almost every scene needs to be awful but.. you know.. if I balance it out well, your experience will be better ^^"
+
+func hasDevCommentary():
+	return true

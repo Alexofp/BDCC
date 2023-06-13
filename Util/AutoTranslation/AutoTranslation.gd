@@ -51,7 +51,7 @@ func addTranslator(translatorID):
 func recreateTranslatorIfNeeded():
 	if(!shouldBeTranslating && translators.size() > 0):
 		for translator in translators:
-			translators.queue_free()
+			translator.queue_free()
 		translators.clear()
 	
 	if(shouldBeTranslating && translators.size() == 0):

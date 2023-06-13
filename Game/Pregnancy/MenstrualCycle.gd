@@ -10,7 +10,6 @@ var noticedVisiblyPregnant = false
 var noticedHeavyIntoPregnancy = false
 var noticedReadyToGiveBirth = false
 var willOvulateAt: float = 0.5
-signal readyToGiveBirth
 signal readyToGiveBirthOnce
 signal visiblyPregnant
 signal heavyIntoPregnancy
@@ -54,15 +53,24 @@ func getCurrentStage():
 		return CycleStage.Ovulation
 	return CycleStage.LutealPhase
 
+func isEligibleForProlongedPregnancy() -> bool:
+	if(!getCharacter().hasPerk(Perk.FertilityBetterOvulationV3)):
+		return false
+
+	for egg in impregnatedEggCells: #to prevent perpetual pregnancy. If any egg reaches 2.5 progress
+		if(egg.getProgress() >= 2.5): # no further ovulations allowed
+			return false
+	return true
+
 func isInHeat():
-	return getCurrentStage() == CycleStage.Ovulation && !isPregnant() && hasAnyWomb()
+	return getCurrentStage() == CycleStage.Ovulation && hasAnyWomb() && (!isPregnant() || isEligibleForProlongedPregnancy())
 
 func forceIntoHeat():
-	newCycle()
+	newCycle(false) # so eggs from the previous cycle are not cleared
 	cycleProgress = 0.36
 
 func shouldOvulate():
-	if(!ovulatedThisCycle && cycleProgress >= willOvulateAt && !isPregnant()):
+	if(!ovulatedThisCycle && cycleProgress >= willOvulateAt && (!isPregnant() || isEligibleForProlongedPregnancy())):
 		return true
 	return false
 
@@ -77,7 +85,11 @@ func getCharacter():
 func initCycle():
 	cycleProgress = RNG.randf_range(0.0, 1.0)
 	
-func newCycle():
+func newCycle(shouldClearNonPregEggs: = true):
+#	print(getCharacter().getName(), " Entered new cycle" )
+	if(shouldClearNonPregEggs):
+		for orificeType in OrificeType.getAll():
+			eggCells[orificeType] = []
 	willOvulateAt = RNG.randf_range(0.3, 0.6)
 	ovulatedThisCycle = false
 	
@@ -91,7 +103,8 @@ func getCycleLength() -> int:
 
 func processTime(seconds):
 	if(isPregnant()):
-		cycleProgress = 1.0
+		if(!getCharacter().hasPerk(Perk.FertilityBetterOvulationV3)):
+			cycleProgress = 1.0
 		
 		if(!noticedVisiblyPregnant && isVisiblyPregnant()):
 			noticedVisiblyPregnant = true
@@ -100,9 +113,10 @@ func processTime(seconds):
 		if(!noticedHeavyIntoPregnancy && getPregnancyProgress() > 0.66):
 			noticedHeavyIntoPregnancy = true
 			emit_signal("heavyIntoPregnancy")
-	elif(!hasAnyWomb()):
+
+	if(!hasAnyWomb()):
 		cycleProgress = 0.0	
-	else:
+	elif(!isPregnant() || getCharacter().hasPerk(Perk.FertilityBetterOvulationV3)):
 		var add = float(seconds)/float(getCycleLength())
 		
 		cycleProgress += add
@@ -113,8 +127,16 @@ func processTime(seconds):
 		if(shouldOvulate()):
 			ovulate()
 	
-	for egg in impregnatedEggCells:
-		egg.processTime(seconds)
+	if(impregnatedEggCells.size() > 0):
+		var readyFetusAmount: = 0
+		for egg in impregnatedEggCells:
+			egg.processTime(seconds)
+			if(egg.fetusIsReadyForBirth()):
+				readyFetusAmount += 1
+	
+		if(readyFetusAmount == impregnatedEggCells.size() && !noticedReadyToGiveBirth):
+			noticedReadyToGiveBirth = true
+			emit_signal("readyToGiveBirthOnce")
 	
 	for orificeType in eggCells:
 		for egg in eggCells[orificeType]:
@@ -134,11 +156,16 @@ func ovulate():
 	for orifice in OrificeType.getAll():
 		if(!hasWombIn(orifice)):
 			continue
-			
+		
+		var ch = getCharacter()
 		var amountOfEggs = RNG.pickWeightedPairs(possibleEggAmounts)
-		if(amountOfEggs == null):
-			amountOfEggs = 1
-		#print("AMOUNT OF EGGS: "+str(amountOfEggs))
+		amountOfEggs = max(ch.getMinEggsAmount(), int(ceil(amountOfEggs * ch.getEggsBonusMod())))
+		if(ch.hasPerk(Perk.FertilityBetterOvulation) && amountOfEggs < 10):
+			amountOfEggs += RNG.randi_range(0, 4) #otherwise species with low base eggs like humans, won't get much bonus
+			
+		print(ch.getName(), " OVULATED WITH "+str(amountOfEggs)+" AMOUNT OF EGGS")
+		#print(ch.getName(), " Bonus eggs modifier: ", ch.getEggsBonusMod() *100, "%")
+		#print(ch.getName(), " AMOUNT OF Min eggs: ", ch.getMinEggsAmount())
 		
 		for _i in range(amountOfEggs):
 			var egg = createEggCell()
@@ -190,18 +217,49 @@ func getPregnancyProgress() -> float:
 	#	print("PREGNANCY: "+str(maxProgress))
 	return maxProgress
 
-func isReadyToGiveBirth():
-	return getPregnancyProgress() >= 1.0
+func isReadyToGiveBirth() -> bool:
+	var readyFetusAmount: = 0
+	for egg in impregnatedEggCells:
+		if(egg.fetusIsReadyForBirth()):
+			readyFetusAmount += 1
+			
+	if(impregnatedEggCells.size() > 0):
+		return readyFetusAmount == impregnatedEggCells.size()
+	else:
+		return false
+
+func getRoughLitterEstimateString():
+	var trueValue = impregnatedEggCells.size()
+	
+	var fullProgress = 0.0
+	for egg in impregnatedEggCells:
+		fullProgress += clamp(egg.getProgress(), 0.0, 1.0)
+	var averageProgress = 0.0
+	if(impregnatedEggCells.size() > 0):
+		averageProgress = fullProgress / impregnatedEggCells.size()
+	
+	var disp = 3 + int(trueValue/2)
+	var minValue = RNG.randi_range(trueValue - int(disp * (1.0 - averageProgress)), trueValue)
+	minValue = Util.maxi(0, minValue)
+	var maxValue = RNG.randi_range(trueValue + int(disp * (1.0 - averageProgress)), trueValue)
+
+	if(minValue == maxValue):
+		if(maxValue == 1):
+			return "1 kid"
+		else:
+			return str(minValue)+" kids"
+	else:
+		return str(minValue)+"-"+str(maxValue)+" kids"
 
 func getTimeUntilReadyForBirth() -> int:
 	if(impregnatedEggCells.size() == 0):
 		return 0
-	var minTime = impregnatedEggCells[0].getTimeUntilReadyForBirth()
+	var maxTime = impregnatedEggCells[0].getTimeUntilReadyForBirth()
 	for egg in impregnatedEggCells:
-		var newMinTime = egg.getTimeUntilReadyForBirth()
-		if(newMinTime < minTime):
-			newMinTime = minTime
-	return minTime
+		var newMaxTime = egg.getTimeUntilReadyForBirth()
+		if(newMaxTime > maxTime):
+			maxTime = newMaxTime
+	return maxTime
 
 func isVisiblyPregnant():
 	if(getPregnancyProgress() >= 0.20):
@@ -217,7 +275,6 @@ func isVisiblyPregnantFromPlayer():
 func createEggCell():
 	var egg = EggCell.new()
 	egg.cycle = weakref(self)
-	egg.connect("readyForBirth", self, "onEggCellReadyForBirth")
 	return egg
 	
 func saveData():
@@ -276,13 +333,6 @@ func getRoughChanceOfBecomingPregnant() -> float:
 	roughChance = clamp(roughChance, 0.02, 0.95)
 	return roughChance * 100.0
 
-func onEggCellReadyForBirth(_egg):
-	#print("EGG READY TO BIRTH")
-	emit_signal("readyToGiveBirth")
-	if(!noticedReadyToGiveBirth):
-		noticedReadyToGiveBirth = true
-		emit_signal("readyToGiveBirthOnce")
-
 func speedUpPregnancy():
 	for egg in impregnatedEggCells:
 		var eggCell: EggCell = egg
@@ -299,12 +349,15 @@ func giveBirth():
 	for egg in impregnatedEggCells:
 		var eggCell: EggCell = egg
 		
-		var newChild: Child = Child.new()
-		newChild.generateUniqueID()
-		newChild.loadFromEggCell(eggCell)
-		newChild.setBirthday(GM.main.getDays())
+		for x in eggCell.monozygotic:
+			var newChild: Child = Child.new()
+			newChild.generateUniqueID()
+			newChild.loadFromEggCell(eggCell)
+			newChild.generateName()
+			newChild.setBirthday(GM.main.getDays())
+			newChild.setBornFromMonozygoticStatus(eggCell.monozygotic)
 		
-		result.append(newChild)
+			result.append(newChild)
 	
 	if(getCharacter() != null):
 		getCharacter().onGivingBirth(impregnatedEggCells, result)

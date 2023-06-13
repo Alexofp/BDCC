@@ -572,10 +572,8 @@ func _react(_action: String, _args):
 
 	if(_action == "vaginal_condom"):
 		usedCondom = true
-		if(RNG.chance(GM.pc.useBestCondom())):
-			condomBroke = true
-		else:
-			condomBroke = false
+		var chance = GM.pc.useBestCondom()
+		condomBroke = GM.pc.shouldCondomBreakWhenFucking("rahi", chance)
 		setState("vaginal_start")
 		return
 
@@ -647,3 +645,9 @@ func loadData(data):
 	isTrib = SAVE.loadVar(data, "isTrib", false)
 	usedCondom = SAVE.loadVar(data, "usedCondom", false)
 	condomBroke = SAVE.loadVar(data, "condomBroke", false)
+
+func getDevCommentary():
+	return "This scene is just.. light at the end of the tunnel. It's that glimpse of hope that makes us keep going.. You can be happy even in a shitty situation.."
+
+func hasDevCommentary():
+	return true

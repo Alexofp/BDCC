@@ -11,6 +11,7 @@ func getSupportedSexTypes():
 	return {
 		SexType.DefaultSex: true,
 		SexType.StocksSex: true,
+		SexType.SlutwallSex: true,
 	}
 
 func getActivityBaseScore(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexSubInfo):
@@ -57,6 +58,15 @@ func processTurn():
 			"{dom.You} {dom.youVerb('scratch', 'scratches')} {sub.yourHis} back.",
 			"{dom.You} {dom.youVerb('pull')} on {sub.yourHis} hair.",
 		]
+		if(getSexType() == SexType.SlutwallSex):
+			texts = [
+				"{dom.You} {dom.youVerb('punch', 'punches')} {sub.youHim}.",
+				"{dom.You} {dom.youVerb('punch', 'punches')} {sub.youHim} violently.",
+				"{dom.You} {dom.youVerb('squeeze', 'squeezes')} {sub.yourHis} ass painfully.",
+				"{dom.You} {dom.youVerb('scratch', 'scratches')} {sub.youHim}.",
+				"{dom.You} {dom.youVerb('scratch', 'scratches')} {sub.youHim} helpless.",
+				"{dom.You} {dom.youVerb('scratch', 'scratches')} {sub.yourHis} thighs.",
+			]
 		
 		var text = []
 		var amount = RNG.randi_range(1, Util.mini(3, texts.size()))

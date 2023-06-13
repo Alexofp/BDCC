@@ -9,3 +9,8 @@ func _init():
 
 func getDoll3DScene():
 	return "res://Player/Player3D/Parts/Hair/ShortHair2/ShortHair2.tscn"
+
+func getTraits():
+	return {
+		PartTrait.HairShort: true,
+	}

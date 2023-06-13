@@ -76,7 +76,7 @@ func _run():
 		addButton("Obey", "Do what kitty tells you to do", "scene1_obey")
 		addButton("Disobey", "Try to be bratty with Rahi", "scene1_disobey")
 	if(state == "scene1_disobey"):
-		playAnimation(StageScene.Duo, "stand", {npc="rahi"})
+		playAnimation(StageScene.Hug, "hug", {npc="rahi"})
 		saynn("You look at Rahi and cross your arms.")
 
 		saynn("[say=pc]And what if I won't do that?[/say]")
@@ -1410,7 +1410,7 @@ func _run():
 		if (getModule("RahiModule").getSkillScore("rahiSkillAnal") >= 3):
 			addButton("Lick Rahi's holes", "(Anal) Clean Rahi out with your tongue. Including her asshole", "peg2_lickrahiout")
 	if(state == "peg2_lickrahiout"):
-		playAnimation(StageScene.SexOral, "lick", {pc="rahi", npc="pc", bodyState={naked=true}, npcBodyState={naked=true, hard=true}})
+		playAnimation(StageScene.SexRimming, "sex", {pc="rahi", npc="pc", bodyState={naked=true}, npcBodyState={naked=true, hard=true}})
 		saynn("Rahi jumped off the bed and took off her strapon, exposing her needy moist pussy slit. She leans against the nearest wall and just rests, her thighs covered in juices. But you are still in your submissive mindset.. You really wanna serve your Miss..")
 
 		saynn("You crawl off the bed and approach Rahi while still on all fours. Then you press your head between Rahi's legs and begin cleaning her pussy with your tongue, licking up all the girlcum and sweat that got accumulated there. Kitty moans softly as she feels your tongue moving over her sensitive folds. She places her paw on your head and scritches you behind your ear.")
@@ -1497,6 +1497,8 @@ func _run():
 
 		addButton("Enough", "This is it. This is the end", "endthescene")
 	if(state == "submit_scene"):
+		playAnimation(StageScene.Hug, "hug", {npc="rahi"})
+		
 		saynn("When you approach Rahi, she immediately knows that something is different. You are.. irradiating confidence and control.. yet again. And that makes your kitty curious.")
 
 		saynn("[say=rahi]Something happened?..[/say]")
@@ -1602,6 +1604,8 @@ func _run():
 
 		addButton("Continue", "That was cute", "endthescene")
 	if(state == "submit_collar"):
+		playAnimation(StageScene.Hug, "hug", {npc="rahi"})
+		
 		saynn("You lower your head low, exposing your collar. And that gives Rahi an idea. She circles around you, her eyes scanning that bulky metal piece around your neck. The collar marks you as an inmate but it was plain and impersonal.")
 
 		saynn("[say=rahi]Sit still.[/say]")
@@ -1622,6 +1626,8 @@ func _run():
 
 		addButton("Continue", "That was cute", "endthescene")
 	if(state == "submit_bite"):
+		playAnimation(StageScene.Hug, "hug", {npc="rahi"})
+		
 		saynn("You lower your head low, completely submitting. Seeing your exposed neck.. gives Rahi an idea. She circles around you, her confident eyes scanning for the best spot. Then she gets a hold of your collar and crouches before you, her free paw exposing more of your shoulder. Her eyes lock onto yours as she bares her sharp fangs, hovering just above your skin.")
 
 		saynn("[say=rahi]Ready for this?[/say]")

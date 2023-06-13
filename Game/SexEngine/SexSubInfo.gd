@@ -130,7 +130,7 @@ func getSexEndInfo():
 	
 	return texts
 
-func affectPersonality(_personality:Personality):
+func affectPersonality(_personality:Personality, _fetishHolder:FetishHolder):
 	var theChanges = []
 	
 	if(isUnconscious()):
@@ -204,7 +204,7 @@ func affectPersonality(_personality:Personality):
 			if(RNG.chance(30)):
 				if(_personality.addStat(PersonalityStat.Brat, RNG.randf_range(-0.05, -0.01))):
 					theChanges.append("{npc.name} became less bratty after so much intimidation.")
-			
+	
 	return GM.ui.processString(Util.join(theChanges, "\n"), {npc=charID})
 
 func saveData():

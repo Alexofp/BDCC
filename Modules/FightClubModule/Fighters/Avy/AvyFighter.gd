@@ -16,6 +16,8 @@ func getAnnouncerIntroduction():
 	return "You shouldn't see this"
 	
 func getRank():
+	#if(GM.main.getFlag("FightClubModule.AvyGotRekt")):
+	#	return FightClubRank.FuckMeat
 	return FightClubRank.GrandChampion
 
 func getOrder():

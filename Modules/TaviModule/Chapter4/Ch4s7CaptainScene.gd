@@ -479,7 +479,7 @@ func _run():
 	if(state == "tavi_pc_escape"):
 		aimCameraAndSetLocName("hall_ne_corner")
 		GM.pc.setLocation("hall_ne_corner")
-		playAnimation(StageScene.Duo, "stand", {npc="tavi"})
+		playAnimation(StageScene.Hug, "hug", {npc="tavi"})
 		removeCharacter("skar")
 		saynn("You and Tavi follow a series of corridors, looking for an exit out of this section of the station. Most of the doors don't open for you because you obviously lack access. After a few close ones where you almost got caught, you two stumble upon a catwalk that hangs over the main hall.")
 
@@ -699,7 +699,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "skar_lets_you_go")
 	if(state == "skar_lets_you_go"):
-		playAnimation(StageScene.Duo, "stand", {npc="tavi"})
+		playAnimation(StageScene.Hug, "hug", {npc="tavi"})
 		aimCameraAndSetLocName("hall_mainentrance")
 		GM.pc.setLocation("hall_mainentrance")
 		removeCharacter("skar")

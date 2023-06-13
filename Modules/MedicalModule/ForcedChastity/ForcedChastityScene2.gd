@@ -207,3 +207,9 @@ func _react(_action: String, _args):
 
 	
 	setState(_action)
+
+func getDevCommentary():
+	return "I dunno, there is something cool about prostate milking. Normally, males wouldn't be able to cum from anal at all. But for some reason we, humans, decided to evolve sensitive prostates that can be reached from anal penetrations.. but only for males x3. Almost like nature wanted buttsluts to exist x3 sorry x3 yeah-yeah-yeah, there is probably a good reason why its like that. But like, have you noticed that a lot of things that we evolved have multiple purposes?\n\nAnd yes, I know, girls can get off from anal too, calm down ^^"
+
+func hasDevCommentary():
+	return true

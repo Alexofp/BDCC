@@ -264,3 +264,9 @@ func _react(_action: String, _args):
 		addMessage("Task added")
 
 	setState(_action)
+
+func getDevCommentary():
+	return "This scene just shows that Rahi has problems. Basically just exposition.. But I also hint at Eliza being interested in that."
+
+func hasDevCommentary():
+	return true

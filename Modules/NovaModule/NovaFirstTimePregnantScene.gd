@@ -29,6 +29,8 @@ func _run():
 		addButton("Force", "Force Nova to calm down", "force")
 
 	if(state == "force"):
+		playAnimation(StageScene.Cuddling, "idle", {npc="nova"})
+		
 		saynn("She keeps trying to hurt you, the tantrum she threw won’t end on its own so you decide to help her. You catch her arms and forcibly wrench them behind her back, making her yelp. Then you steal the handcuffs off of her armor and cuff her hands behind her back before forcibly putting her onto your lap.")
 
 		saynn("She growls and starts to struggle but you hold her still. You growl into her ear which makes her snap out of it a bit.")
@@ -78,6 +80,8 @@ func _run():
 		addButton("Continue", "Continue on your way", "endthescene")
 
 	if(state == "talk_it_out"):
+		playAnimation(StageScene.Cuddling, "idle", {npc="nova"})
+		
 		saynn("You try to keep her claws away from your face without too much extra force.")
 
 		saynn("[say=pc]Okay, okay. Let’s talk it out.[/say]")

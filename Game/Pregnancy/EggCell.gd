@@ -10,8 +10,9 @@ var progress = 0.0
 var motherSpecies = []
 var resultSpecies = []
 var resultGender = NpcGender.Male
+var monozygotic: int = 1
+var fetusReadyForBirth := false
 
-signal readyForBirth(egg)
 
 func _init():
 	#lifeSpan = 60*60*24*2 + RNG.randi_range(-60*60*12, 60*60*24)
@@ -24,6 +25,21 @@ func _init():
 	lifeSpan = 60*60*optionsLifespan + RNG.randi_range(-60*60*minRange, 60*60*maxRange)
 
 var cycle = null
+
+func setMonozygotic(): #check if the egg splits
+	var chance = RNG.randf_range(0.00, 100.00)
+	if(chance > 9.00):
+		return # Egg didn't split
+	elif(chance <= 0.01):
+		monozygotic = 6 #EGG_MONOZYGOTIC_LEVEL["Sextuplets"]
+	elif(chance <= 0.1):
+		monozygotic = 5 #EGG_MONOZYGOTIC_LEVEL["Quintuplets"]
+	elif(chance <= 0.6):
+		monozygotic = 4 #EGG_MONOZYGOTIC_LEVEL["Quadruplets"]
+	elif(chance <= 2.6):
+		monozygotic = 3 #EGG_MONOZYGOTIC_LEVEL["Triplets"]
+	else:
+		monozygotic = 2 #EGG_MONOZYGOTIC_LEVEL["Twins"]
 
 func setMother(newmotherID, newmotherSpecies):
 	motherID = newmotherID
@@ -66,7 +82,8 @@ func getGestationTime() -> int:
 
 func getTimeUntilReadyForBirth() -> int:
 	var gestationTime = getGestationTime()
-	return int(gestationTime * (1.0 - getProgress()))
+	var currentProgress = min(1.0, getProgress())
+	return int(gestationTime * (1.0 - currentProgress))
 
 func processTime(seconds):
 	
@@ -78,16 +95,15 @@ func processTime(seconds):
 	if(isimpregnated):
 		var newProgress: float = float(seconds) / getGestationTime()
 		
-		var justReady = false
-		if(progress < 1.0 && (progress + newProgress) >= 1.0):
-			justReady = true
+		if((progress + newProgress) >= 1.0):
+			fetusReadyForBirth = true
 		
 		progress += newProgress
-		if(progress > 1.0):
-			progress = 1.0
-		
-		if(justReady):
-			emit_signal("readyForBirth", self)
+		if(progress > 2.5):
+			progress = 2.5
+
+func fetusIsReadyForBirth():
+	return fetusReadyForBirth
 
 func getProgress():
 	return progress
@@ -115,7 +131,7 @@ func impregnatedBy(fluidDNA):
 	resultSpecies = SpeciesCompatibility.generateChildSpecies(motherSpecies, fluidDNA.getSpecies(), allowHybrids)
 	resultGender = NpcGender.generate()
 
-	print("EGGCELL IMPREGNATED BY "+str(fatherID)+", species: "+str(resultSpecies)+", gender: "+NpcGender.getVisibleName(resultGender))
+	print("EGGCELL IMPREGNATED BY "+str(fatherID)+", species: "+str(resultSpecies)+", gender: "+NpcGender.getVisibleName(resultGender), ", division: ", monozygotic)
 
 func tryImpregnate(fluidDNA, amountML, eggMultiplier = 1.0, fertility = 1.0, crossSpeciesCompatibility = 0.0):
 	if(!canImpregnate()):
@@ -140,6 +156,7 @@ func tryImpregnate(fluidDNA, amountML, eggMultiplier = 1.0, fertility = 1.0, cro
 	
 	if(RNG.chance(finalChance)):
 		impregnatedBy(fluidDNA)
+		setMonozygotic()
 		return true
 	return false
 
@@ -154,6 +171,8 @@ func saveData():
 		"motherSpecies": motherSpecies,
 		"resultSpecies": resultSpecies,
 		"resultGender": resultGender,
+		"monozygotic": monozygotic,
+		"fetusReadyForBirth": fetusReadyForBirth
 	}
 	
 	return data
@@ -168,3 +187,5 @@ func loadData(data):
 	motherSpecies = SAVE.loadVar(data, "motherSpecies", ["feline"])
 	resultSpecies = SAVE.loadVar(data, "resultSpecies", [])
 	resultGender = SAVE.loadVar(data, "resultGender", NpcGender.Male)
+	monozygotic = SAVE.loadVar(data, "monozygotic", 1)
+	fetusReadyForBirth = SAVE.loadVar(data, "fetusReadyForBirth", false)

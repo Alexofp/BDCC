@@ -506,3 +506,8 @@ func _react(_action: String, _args):
 
 	setState(_action)
 
+func getDevCommentary():
+	return "I can't really display gangbangs because I lack the animations so you will have to use your imagination during these (more than usually x3). But yeah, it's probably one of the first gang-bangs.. and there are probably not that many of them?..\n\nI don't really remember anything about writing this one x3. But my usual approach is to start pulling down on the details when more than 2 characters are fucking. Otherwise.. takes too long to write, takes too long to read, etc. But it's still more than 'you got gangbanged, try harder next time, lol'. Hopefully these are hot, I don't even know, I rarely get aroused from my own writing.. Sometimes I do ^^ when the situation is just too good/hot"
+
+func hasDevCommentary():
+	return true

@@ -18,4 +18,11 @@ enum {
 	LegsDigi,
 	LegsPlanti,
 	LegsHoofs,
+	
+	# Hair
+	HairBald,
+	HairPonytail,
+	HairOvereye,
+	HairShort,
+	HairLong,
 }

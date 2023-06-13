@@ -45,7 +45,11 @@ const StaminaRecoverAfterSexBuff = "StaminaRecoverAfterSexBuff"
 
 const FertilityBuff = "FertilityBuff"
 const VirilityBuff = "VirilityBuff"
+const FinalFertilityModifierBuff = "FinalFertilityModifierBuff"
+const FinalVirilityModifierBuff = "FinalVirilityModifierBuff"
 const CrossSpeciesCompatibilityBuff = "CrossSpeciesCompatibilityBuff"
+const OvulationEggsAmountBuff = "OvulationEggsAmountBuff" 
+const MinOvulationEggsAmountBuff = "MinOvulationEggsAmountBuff"
 
 const SkillExperienceBuff = "SkillExperienceBuff"
 
@@ -60,3 +64,6 @@ const BreastsLactatingSizeLimitBuff = "BreastsLactatingSizeLimitBuff"
 const BreastsMilkProductionBuff = "BreastsMilkProductionBuff"
 const PenisCumProductionBuff = "PenisCumProductionBuff"
 const PenisCumGenerationAfterOrgasmBuff = "PenisCumGenerationAfterOrgasmBuff"
+
+const EncounterChanceModifierStaffBuff = "EncounterChanceModifierStaffBuff"
+const EncounterChanceModifierInmatesBuff = "EncounterChanceModifierInmatesBuff"

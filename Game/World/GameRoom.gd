@@ -65,6 +65,8 @@ export(int) var lootEveryXDays = 0
 var astarID
 export(PoolStringArray) var astarConnectedTo = PoolStringArray()
 
+var floorID = ""
+
 func getPopulation():
 	var result = []
 	if(Util.isBitEnabled(population, 0)):
@@ -225,6 +227,9 @@ func onGridChangeColor(newvalue):
 		$Grid.visible = true
 	
 	$Grid.self_modulate = RoomColorToColor[gridColor]
+
+func getCachedFloorID():
+	return floorID
 
 # https://github.com/godotengine/godot/issues/43491
 # This function should just start working after the issue is fixed

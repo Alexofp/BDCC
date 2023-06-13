@@ -1,0 +1,311 @@
+[gd_scene load_steps=16 format=2]
+
+[ext_resource path="res://GlobalTheme.tres" type="Theme" id=1]
+[ext_resource path="res://UI/NpcList/NpcList.gd" type="Script" id=3]
+[ext_resource path="res://UI/NpcList/PanelStyle.tres" type="StyleBox" id=5]
+
+[sub_resource type="StyleBoxFlat" id=7]
+bg_color = Color( 0.207843, 0.133333, 0.364706, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 7
+border_color = Color( 0.666667, 0.666667, 0.666667, 1 )
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
+corner_detail = 12
+
+[sub_resource type="StyleBoxFlat" id=5]
+content_margin_left = 0.0
+bg_color = Color( 0.207843, 0.133333, 0.364706, 1 )
+draw_center = false
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 7
+border_color = Color( 0.901961, 0.901961, 0.901961, 1 )
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
+corner_detail = 12
+
+[sub_resource type="StyleBoxEmpty" id=6]
+
+[sub_resource type="StyleBoxEmpty" id=8]
+
+[sub_resource type="StyleBoxEmpty" id=9]
+
+[sub_resource type="StyleBoxEmpty" id=10]
+
+[sub_resource type="Theme" id=3]
+
+[sub_resource type="StyleBoxFlat" id=11]
+bg_color = Color( 0.207843, 0.133333, 0.364706, 1 )
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color( 0.247059, 0.243137, 0.490196, 1 )
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id=12]
+bg_color = Color( 0.360288, 0.357468, 0.535156, 1 )
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+shadow_size = 2
+
+[sub_resource type="StyleBoxFlat" id=13]
+bg_color = Color( 0.247059, 0.243137, 0.490196, 1 )
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+shadow_size = 2
+
+[sub_resource type="StyleBoxEmpty" id=14]
+
+[sub_resource type="StyleBoxEmpty" id=15]
+
+[node name="NpcList" type="MarginContainer"]
+margin_top = 5.0
+margin_right = 1280.0
+margin_bottom = 700.0
+rect_min_size = Vector2( 0, 5 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 1 )
+custom_constants/margin_top = 5
+custom_constants/margin_bottom = 20
+script = ExtResource( 3 )
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+margin_top = 5.0
+margin_right = 1280.0
+margin_bottom = 675.0
+rect_min_size = Vector2( 0, 64 )
+size_flags_horizontal = 3
+custom_styles/panel = ExtResource( 5 )
+
+[node name="VBoxC" type="VBoxContainer" parent="PanelContainer"]
+margin_right = 1280.0
+margin_bottom = 670.0
+custom_constants/separation = 0
+
+[node name="UpperPanel" type="VBoxContainer" parent="PanelContainer/VBoxC"]
+margin_right = 1280.0
+margin_bottom = 64.0
+rect_min_size = Vector2( 0, 64 )
+custom_constants/separation = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxC/UpperPanel"]
+margin_right = 1280.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 0, 60 )
+custom_constants/separation = 0
+
+[node name="Name" type="Button" parent="PanelContainer/VBoxC/UpperPanel/HBoxContainer"]
+margin_right = 209.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 110, 50 )
+rect_clip_content = true
+size_flags_horizontal = 11
+custom_styles/hover = SubResource( 7 )
+custom_styles/pressed = SubResource( 5 )
+custom_styles/focus = SubResource( 6 )
+custom_styles/normal = ExtResource( 5 )
+toggle_mode = true
+text = "Name:"
+
+[node name="VSeparator" type="VSeparator" parent="PanelContainer/VBoxC/UpperPanel/HBoxContainer"]
+margin_left = 209.0
+margin_right = 217.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 2, 0 )
+custom_constants/separation = 8
+custom_styles/separator = SubResource( 8 )
+
+[node name="Gender" type="Button" parent="PanelContainer/VBoxC/UpperPanel/HBoxContainer"]
+margin_left = 217.0
+margin_right = 426.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 75, 50 )
+rect_clip_content = true
+size_flags_horizontal = 11
+custom_styles/hover = SubResource( 7 )
+custom_styles/pressed = SubResource( 5 )
+custom_styles/focus = SubResource( 6 )
+custom_styles/normal = ExtResource( 5 )
+toggle_mode = true
+text = "Gender:"
+
+[node name="VSeparator2" type="VSeparator" parent="PanelContainer/VBoxC/UpperPanel/HBoxContainer"]
+margin_left = 426.0
+margin_right = 434.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 2, 0 )
+custom_constants/separation = 8
+custom_styles/separator = SubResource( 9 )
+
+[node name="Personality" type="Button" parent="PanelContainer/VBoxC/UpperPanel/HBoxContainer"]
+margin_left = 434.0
+margin_right = 643.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 185, 50 )
+rect_clip_content = true
+size_flags_horizontal = 11
+custom_styles/hover = SubResource( 7 )
+custom_styles/pressed = SubResource( 5 )
+custom_styles/focus = SubResource( 6 )
+custom_styles/normal = ExtResource( 5 )
+toggle_mode = true
+text = "Personality:"
+
+[node name="VSeparator3" type="VSeparator" parent="PanelContainer/VBoxC/UpperPanel/HBoxContainer"]
+margin_left = 643.0
+margin_right = 651.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 2, 0 )
+custom_constants/separation = 8
+custom_styles/separator = SubResource( 10 )
+
+[node name="ChildrenAmount" type="Button" parent="PanelContainer/VBoxC/UpperPanel/HBoxContainer"]
+margin_left = 651.0
+margin_right = 861.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 160, 50 )
+rect_clip_content = true
+size_flags_horizontal = 11
+custom_styles/hover = SubResource( 7 )
+custom_styles/pressed = SubResource( 5 )
+custom_styles/focus = SubResource( 6 )
+custom_styles/normal = ExtResource( 5 )
+toggle_mode = true
+text = "Children with you:"
+
+[node name="dummy" type="Label" parent="PanelContainer/VBoxC/UpperPanel/HBoxContainer"]
+margin_left = 861.0
+margin_top = 5.0
+margin_right = 1070.0
+margin_bottom = 55.0
+rect_min_size = Vector2( 65, 50 )
+size_flags_horizontal = 11
+align = 1
+valign = 1
+
+[node name="dummy2" type="Label" parent="PanelContainer/VBoxC/UpperPanel/HBoxContainer"]
+margin_left = 1070.0
+margin_top = 5.0
+margin_right = 1280.0
+margin_bottom = 55.0
+rect_min_size = Vector2( 65, 50 )
+size_flags_horizontal = 11
+align = 1
+valign = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/VBoxC/UpperPanel"]
+margin_top = 60.0
+margin_right = 1280.0
+margin_bottom = 64.0
+rect_min_size = Vector2( 0, 4 )
+
+[node name="ScrollC" type="ScrollContainer" parent="PanelContainer/VBoxC"]
+margin_top = 64.0
+margin_right = 1280.0
+margin_bottom = 670.0
+mouse_filter = 1
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = SubResource( 3 )
+
+[node name="VboxC2" type="VBoxContainer" parent="PanelContainer/VBoxC/ScrollC"]
+margin_right = 1280.0
+margin_bottom = 606.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+margin_top = 5.0
+margin_right = 1280.0
+margin_bottom = 675.0
+rect_min_size = Vector2( 300, 200 )
+mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Notification" type="PopupDialog" parent="CenterContainer"]
+margin_left = 440.0
+margin_top = 260.0
+margin_right = 840.0
+margin_bottom = 410.0
+rect_min_size = Vector2( 400, 150 )
+custom_styles/panel = SubResource( 11 )
+popup_exclusive = true
+
+[node name="HBoxC" type="HBoxContainer" parent="CenterContainer/Notification"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -40.0
+rect_min_size = Vector2( 0, 40 )
+
+[node name="Forget" type="Button" parent="CenterContainer/Notification/HBoxC"]
+visible = false
+margin_right = 400.0
+margin_bottom = 40.0
+rect_pivot_offset = Vector2( 200, 20 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/hover = SubResource( 12 )
+custom_styles/pressed = SubResource( 13 )
+custom_styles/focus = SubResource( 14 )
+custom_styles/normal = SubResource( 13 )
+text = "Forget"
+
+[node name="Ok" type="Button" parent="CenterContainer/Notification/HBoxC"]
+visible = false
+margin_left = 202.0
+margin_right = 400.0
+margin_bottom = 40.0
+rect_pivot_offset = Vector2( 200, 20 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/hover = SubResource( 12 )
+custom_styles/pressed = SubResource( 13 )
+custom_styles/normal = SubResource( 13 )
+text = "OK"
+
+[node name="Cancel" type="Button" parent="CenterContainer/Notification/HBoxC"]
+visible = false
+margin_left = 269.0
+margin_right = 400.0
+margin_bottom = 40.0
+rect_pivot_offset = Vector2( 200, 20 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/hover = SubResource( 12 )
+custom_styles/pressed = SubResource( 13 )
+custom_styles/focus = SubResource( 15 )
+custom_styles/normal = SubResource( 13 )
+text = "Cancel"
+
+[node name="NotificationLabel" type="Label" parent="CenterContainer/Notification"]
+anchor_right = 1.0
+margin_left = 15.0
+margin_top = 15.0
+margin_right = -15.0
+margin_bottom = 106.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+autowrap = true
+
+[connection signal="pressed" from="PanelContainer/VBoxC/UpperPanel/HBoxContainer/Name" to="." method="_on_Name_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxC/UpperPanel/HBoxContainer/Gender" to="." method="_on_Gender_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxC/UpperPanel/HBoxContainer/Personality" to="." method="_on_Personality_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxC/UpperPanel/HBoxContainer/ChildrenAmount" to="." method="_on_ChildrenAmount_pressed"]
+[connection signal="pressed" from="CenterContainer/Notification/HBoxC/Forget" to="." method="_on_Forget_pressed"]
+[connection signal="pressed" from="CenterContainer/Notification/HBoxC/Ok" to="." method="_on_Ok_pressed"]
+[connection signal="pressed" from="CenterContainer/Notification/HBoxC/Cancel" to="." method="_on_Cancel_pressed"]

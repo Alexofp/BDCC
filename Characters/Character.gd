@@ -7,6 +7,8 @@ var id = "errorerror"
 var npcStats = {}
 var npcLevel = 0
 var npcLustInterests = {}
+var npcPersonality = {}
+var npcFetishes = {}
 var npcArmor = {}
 var npcBasePain = null
 var npcBaseLust = null
@@ -21,6 +23,7 @@ var npcCharacterType = CharacterType.Generic
 var lastUpdatedDay:int = -1
 var lastUpdatedSecond:int = -1
 var disableSerialization:bool = false # Set to true if the character doesn't need to be saved, only works for non-dynamic npcs
+var pregnancyWaitTimer:int = 0
 
 func _ready():
 	name = id
@@ -40,10 +43,15 @@ func _ready():
 		else:
 			lustInterests.addInterest(interestID, interestData)
 			
+	for personalityStat in npcPersonality:
+		personality.setStat(personalityStat, npcPersonality[personalityStat])
+	for fetishID in npcFetishes:
+		fetishHolder.setFetish(fetishID, npcFetishes[fetishID])
+			
 	if(npcHasMenstrualCycle):
 		menstrualCycle = MenstrualCycle.new()
 		menstrualCycle.setCharacter(self)
-		var _ok = menstrualCycle.connect("readyToGiveBirth", self, "onCharacterReadyToGiveBirth")
+		var _ok = menstrualCycle.connect("readyToGiveBirthOnce", self, "onCharacterReadyToGiveBirth")
 		var _ok2 = menstrualCycle.connect("heavyIntoPregnancy", self, "onCharacterHeavyIntoPregnancy")
 		var _ok3 = menstrualCycle.connect("visiblyPregnant", self, "onCharacterVisiblyPregnant")
 		menstrualCycle.start()
@@ -109,6 +117,7 @@ func saveData():
 	
 	data["lastUpdatedDay"] = lastUpdatedDay
 	data["lastUpdatedSecond"] = lastUpdatedSecond
+	data["pregnancyWaitTimer"] = pregnancyWaitTimer
 	
 	return data
 
@@ -149,6 +158,7 @@ func loadData(data):
 	
 	lastUpdatedDay = SAVE.loadVar(data, "lastUpdatedDay", -1)
 	lastUpdatedSecond = SAVE.loadVar(data, "lastUpdatedSecond", -1)
+	pregnancyWaitTimer = SAVE.loadVar(data, "pregnancyWaitTimer", 0)
 	
 	updateNonBattleEffects()
 
@@ -208,6 +218,19 @@ func processTime(_secondsPassed):
 		bodyFluids.drain(0.1 * _secondsPassed / 60.0)
 		
 	GM.GES.callGameExtenders(ExtendGame.npcProcessTime, [self, _secondsPassed])
+	lastUpdatedDay = GM.main.getDays()
+	lastUpdatedSecond = GM.main.getTime()
+	if(isReadyToGiveBirth()):
+		pregnancyWaitTimer += _secondsPassed
+		if(shouldGiveBirth()):
+			if(getMenstrualCycle() != null):
+				if(getMenstrualCycle().isPregnantFromPlayer()):
+					GM.main.addLogMessage("News", "You just received news that "+getName()+" gave birth to your children! You can check who in the nursery")
+				else:
+					GM.main.addLogMessage("News", "Rumors spread fast. You just received news that "+getName()+" gave birth to someone's children!")
+				
+				pregnancyWaitTimer = 0
+				giveBirth()
 		
 func canDoSelfCare():
 	# If character is in a scene, don't touch them
@@ -342,6 +365,7 @@ func updateNonBattleEffects():
 	buffsHolder.calculateBuffs()
 
 func onCharacterVisiblyPregnant():
+	pregnancyWaitTimer = 0
 	if(getMenstrualCycle() != null):
 		if(getMenstrualCycle().isPregnantFromPlayer()):
 			GM.main.addLogMessage("News", "You just received news that "+getName()+" is pregnant with your children.")
@@ -351,17 +375,24 @@ func onCharacterHeavyIntoPregnancy():
 	pass
 
 func onCharacterReadyToGiveBirth():
-	if(getMenstrualCycle() != null):
+	pregnancyWaitTimer = 0
+	if(getBirthWaitTime() > 0 && getMenstrualCycle() != null):
 		if(getMenstrualCycle().isPregnantFromPlayer()):
-			GM.main.addLogMessage("News", "You just received news that "+getName()+" gave birth to your children! You can check who in the nursery")
-		else:
-			GM.main.addLogMessage("News", "Rumors spread fast. You just received news that "+getName()+" gave birth to someone's children!")
-		
-		var bornChildren = getMenstrualCycle().giveBirth()
-		clearOrificeFluids()
-		
-		for child in bornChildren:
-			GM.CS.addChild(child)
+			GM.main.addLogMessage("News", "You just received news that "+getName()+" is ready to give birth to your children and now just waits for a good moment to do it. Maybe you can go check on them.")
+
+
+# How much the npc will wait before giving birth alone (in seconds)
+func getBirthWaitTime():
+	return 0
+
+func shouldGiveBirth():
+	if(pregnancyWaitTimer < getBirthWaitTime()):
+		return false
+	if(!isReadyToGiveBirth()):
+		return false
+	if(GM.main.characterIsVisible(getID())):
+		return false
+	return true
 
 func getAiStrategy(_battleName):
 	var basicAI = BasicAI.new()
@@ -480,7 +511,8 @@ func processUntilTime(theday:int, theseconds:int):
 	lastUpdatedSecond = theseconds
 
 func onStoppedProcessing():
-	pass
+	lastUpdatedDay = GM.main.getDays()
+	lastUpdatedSecond = GM.main.getTime()
 
 func getCharacterType():
 	return npcCharacterType

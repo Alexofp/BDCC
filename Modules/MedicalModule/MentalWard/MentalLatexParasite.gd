@@ -231,4 +231,8 @@ func _react(_action: String, _args):
 	
 	setState(_action)
 
+func getDevCommentary():
+	return "It would be really cool to have a tentacle monster animated. But I don't even know how to start with that.. Do I just need a few tentacles? Or an entire.. monster?.. I dunno. I would need to rig and animate each tentacle.. just for this one scene x3. Would it be worth it?.. Lemme know down in the comments.. smash like.."
 
+func hasDevCommentary():
+	return true

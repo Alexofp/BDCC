@@ -247,8 +247,7 @@ func _react(_action: String, _args):
 			else:
 				chance = GM.pc.useBestCondom()
 			
-			if(OPTIONS.isContentEnabled(ContentType.RiskyCondoms) && chance != null && RNG.chance(chance)):
-				condomBroke = true
+			condomBroke = GM.pc.shouldCondomBreakWhenFucking("nova", chance)
 
 		if(!usedCondom || (usedCondom && condomBroke)):
 			GM.main.addRoomMemoryCurrentLoc("You notice some cum stains, a sign that somebody had sex here", 1)

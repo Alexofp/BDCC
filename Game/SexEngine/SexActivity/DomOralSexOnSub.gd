@@ -9,6 +9,12 @@ func getGoals():
 		SexGoal.DoOralOnSub: 1.0,
 	}
 
+func getSupportedSexTypes():
+	return {
+		SexType.DefaultSex: true,
+		SexType.SlutwallSex: true,
+	}
+
 func canStartActivity(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexSubInfo):
 	if(!_subInfo.getChar().hasReachablePenis() && !_subInfo.getChar().hasReachableVagina()):
 		return false
@@ -56,6 +62,10 @@ func startActivity(_args):
 	var text = RNG.pick([
 		"{dom.You} {dom.youVerb('keep')} {sub.you} lying on the floor while bringing {dom.yourHis} mouth to {sub.yourHis} "+genitalsText+".",
 	])
+	if(getSexType() == SexType.SlutwallSex):
+		text = RNG.pick([
+			"{dom.You} {dom.youVerb('kneel')} down and {dom.youVerb('bring')} {dom.yourHis} mouth to {sub.yourHis} "+genitalsText+".",
+		])
 	
 	return {
 		text = text,
@@ -415,8 +425,8 @@ func doDomAction(_id, _actionInfo):
 			var condom:ItemBase = getSub().getWornCondom()
 			if(condom != null):
 				var breakChance = condom.getCondomBreakChance()
-				
-				if(RNG.chance(breakChance)):
+				var condomBroke = getSub().shouldCondomBreakWhenFucking(getDom(), breakChance)
+				if(condomBroke):
 					text = "[b]The condom broke![/b] "+text
 					condom.destroyMe()
 				else:
@@ -568,20 +578,29 @@ func getSubActions():
 		})
 		
 		if(subInfo.isReadyToCum() && isHandlingSubOrgasms()):
-			actions.append({
-				"id": "warndom",
-				"score": 0.5 + subInfo.getComplyScore()*0.5,
-				"name": "Warn dom",
-				"desc": "Let them know that you're about to cum",
-				"priority": 1001,
-			})
-			actions.append({
-				"id": "cumondom",
-				"score": subInfo.getResistScore(),
-				"name": "Cum!",
-				"desc": "Cum without letting the dom know",
-				"priority": 1001,
-			})
+			if(getSexType() == SexType.SlutwallSex):
+				actions.append({
+					"id": "cumondom",
+					"score": 1.0,
+					"name": "Cum!",
+					"desc": "You're about to cum and there is nothing you can do about it",
+					"priority": 1001,
+				})
+			else:
+				actions.append({
+					"id": "warndom",
+					"score": 0.5 + subInfo.getComplyScore()*0.5,
+					"name": "Warn dom",
+					"desc": "Let them know that you're about to cum",
+					"priority": 1001,
+				})
+				actions.append({
+					"id": "cumondom",
+					"score": subInfo.getResistScore(),
+					"name": "Cum!",
+					"desc": "Cum without letting the dom know",
+					"priority": 1001,
+				})
 	
 	return actions
 
@@ -593,6 +612,8 @@ func getSubResistChance(baseChance, domAngerRemoval):
 		theChance *= 0.5
 	if(getSub().isBlindfolded()):
 		theChance *= 0.8
+	if(getSexType() == SexType.SlutwallSex):
+		theChance *= 0.5
 	
 	return max(theChance, 5.0)
 
@@ -614,10 +635,16 @@ func doSubAction(_id, _actionInfo):
 	if(_id == "cumondom"):
 		satisfyGoals()
 		
+		var supposedToBeAngry = true
+		var noPermissionText = " {sub.YouHe} [b]came without {dom.yourHis} permission[/b]!"
+		if(getSexType() == SexType.SlutwallSex):
+			noPermissionText = ""
+			supposedToBeAngry = false
+		
 		var text = ""
 		if(state in ["licking", "tonguefucking"]):
 			text = RNG.pick([
-				"{sub.You} {sub.youVerb('arch', 'arches')} {sub.yourHis} back while {sub.yourHis} "+RNG.pick(["pussy", "pussy slit", "kitty"])+" twitches and squirts all over {dom.your} face! {sub.YouHe} [b]came without {dom.yourHis} permission[/b]!",
+				"{sub.You} {sub.youVerb('arch', 'arches')} {sub.yourHis} back while {sub.yourHis} "+RNG.pick(["pussy", "pussy slit", "kitty"])+" twitches and squirts all over {dom.your} face!"+noPermissionText,
 			])
 			getDom().cummedOnBy(subID, FluidSource.Vagina)
 			subInfo.cum()
@@ -632,11 +659,11 @@ func doSubAction(_id, _actionInfo):
 					])
 		if(state == "lickingcock"):
 			text = RNG.pick([
-				"{sub.You} {sub.youVerb('grunt')} while {sub.yourHis} "+RNG.pick(["cock", "dick", "shaft"])+" throbs and suddenly shoots strings of "+RNG.pick(["cum", "seed", "semen"])+" that land directly on {dom.your} face! {sub.You} [b]came without {dom.yourHis} permission[/b]!",
+				"{sub.You} {sub.youVerb('grunt')} while {sub.yourHis} "+RNG.pick(["cock", "dick", "shaft"])+" throbs and suddenly shoots strings of "+RNG.pick(["cum", "seed", "semen"])+" that land directly on {dom.your} face!"+noPermissionText,
 			])
 			if(getSub().isWearingChastityCage()):
 				text = RNG.pick([
-					"{sub.You} {sub.youVerb('grunt')} while {sub.yourHis} locked away "+RNG.pick(["cock", "dick", "shaft"])+" throbs in its tight contains and suddenly shoots a few weak strings of "+RNG.pick(["cum", "seed", "semen"])+" through the chastity cage that land on {dom.your} face! {sub.You} [b]came without {dom.yourHis} permission[/b]!",
+					"{sub.You} {sub.youVerb('grunt')} while {sub.yourHis} locked away "+RNG.pick(["cock", "dick", "shaft"])+" throbs in its tight contains and suddenly shoots a few weak strings of "+RNG.pick(["cum", "seed", "semen"])+" through the chastity cage that land on {dom.your} face!"+noPermissionText,
 				])
 				
 			var condom:ItemBase = getSub().getWornCondom()
@@ -648,16 +675,17 @@ func doSubAction(_id, _actionInfo):
 					condom.destroyMe()
 				else:
 					text = RNG.pick([
-						"{sub.You} {sub.youVerb('grunt')} while {sub.yourHis} "+RNG.pick(["cock", "dick", "shaft"])+" throbs and suddenly starts to stuff the condom with {sub.yourHis} "+RNG.pick(["cum", "seed", "semen"])+"! {sub.You} [b]came without {dom.yourHis} permission[/b]!",
+						"{sub.You} {sub.youVerb('grunt')} while {sub.yourHis} "+RNG.pick(["cock", "dick", "shaft"])+" throbs and suddenly starts to stuff the condom with {sub.yourHis} "+RNG.pick(["cum", "seed", "semen"])+"!"+noPermissionText,
 					])
 					getSub().cumInItem(condom)
 					subInfo.cum()
 					endActivity()
 					#state = ""
-					domInfo.addAnger(0.5)
-					text += RNG.pick([
-						" That made {dom.you} very angry.",
-					])
+					if(supposedToBeAngry):
+						domInfo.addAnger(0.5)
+						text += RNG.pick([
+							" That made {dom.you} very angry.",
+						])
 					text += RNG.pick([
 						" {dom.You} {dom.youVerb('dispose')} of the used condom.",
 					])
@@ -670,28 +698,29 @@ func doSubAction(_id, _actionInfo):
 			subInfo.cum()
 		if(state == "blowjob"):
 			text = RNG.pick([
-				"{sub.You} {sub.youVerb('grunt')} while {sub.yourHis} "+RNG.pick(["cock", "dick", "shaft"])+" throbs and suddenly shoots strings of "+RNG.pick(["cum", "seed", "semen"])+" directly into {dom.your} mouth! {sub.You} [b]came without {dom.yourHis} permission[/b]!",
+				"{sub.You} {sub.youVerb('grunt')} while {sub.yourHis} "+RNG.pick(["cock", "dick", "shaft"])+" throbs and suddenly shoots strings of "+RNG.pick(["cum", "seed", "semen"])+" directly into {dom.your} mouth!"+noPermissionText,
 			])
 			
 			var condom:ItemBase = getSub().getWornCondom()
 			if(condom != null):
 				var breakChance = condom.getCondomBreakChance()
-				
-				if(RNG.chance(breakChance)):
+				var condomBroke = getSub().shouldCondomBreakWhenFucking(getDom(), breakChance)
+				if(condomBroke):
 					text = "[b]The condom broke![/b] "+text
 					condom.destroyMe()
 				else:
 					text = RNG.pick([
-						"{sub.You} {sub.youVerb('grunt')} while {sub.yourHis} "+RNG.pick(["cock", "dick", "shaft"])+" throbs and suddenly starts to stuff the condom with {sub.yourHis} "+RNG.pick(["cum", "seed", "semen"])+"! {sub.You} [b]came without {dom.yourHis} permission[/b]!",
+						"{sub.You} {sub.youVerb('grunt')} while {sub.yourHis} "+RNG.pick(["cock", "dick", "shaft"])+" throbs and suddenly starts to stuff the condom with {sub.yourHis} "+RNG.pick(["cum", "seed", "semen"])+"!"+noPermissionText,
 					])
 					getSub().cumInItem(condom)
 					subInfo.cum()
 					endActivity()
 					#state = ""
-					domInfo.addAnger(0.5)
-					text += RNG.pick([
-						" That made {dom.you} very angry.",
-					])
+					if(supposedToBeAngry):
+						domInfo.addAnger(0.5)
+						text += RNG.pick([
+							" That made {dom.you} very angry.",
+						])
 					text += RNG.pick([
 						" {dom.You} {dom.youVerb('dispose')} of the used condom.",
 					])
@@ -705,10 +734,11 @@ func doSubAction(_id, _actionInfo):
 		
 		endActivity()
 		#state = ""
-		domInfo.addAnger(0.5)
-		text += RNG.pick([
-			" That made {dom.you} very angry.",
-		])
+		if(supposedToBeAngry):
+			domInfo.addAnger(0.5)
+			text += RNG.pick([
+				" That made {dom.you} very angry.",
+			])
 		return {text = text}
 	
 	if(_id == "pullaway"):
@@ -760,6 +790,24 @@ func doSubAction(_id, _actionInfo):
 	return
 
 func getAnimation():
+	if(getSexType() == SexType.SlutwallSex):
+		if(state in [""]):
+			return [StageScene.SlutwallSexOral, "tease", {pc=subID, npc=domID}]
+		
+		if(state in ["licking", "subabouttocum"]):
+			return [StageScene.SlutwallSexOral, "lick", {pc=subID, npc=domID}]
+		if(state in ["tonguefucking"]):
+			return [StageScene.SlutwallSexOral, "lick", {pc=subID, npc=domID}]
+		
+		if(state in ["blowjob", "subabouttocumcock"]):
+			if(domInfo.isCloseToCumming()):
+				return [StageScene.SlutwallSexOral, "blowjob", {pc=subID, npc=domID}]
+			return [StageScene.SlutwallSexOral, "blowjob", {pc=subID, npc=domID}]
+		
+		if(state in ["lickingcock"]):
+			return [StageScene.SlutwallSexOral, "lick", {pc=subID, npc=domID}]
+		
+	
 	if(state in [""]):
 		return [StageScene.SexOral, "start", {pc=subID, npc=domID}]
 	

@@ -105,6 +105,7 @@ func _run():
 		addButton("Sex?", "Maybe there is a way", "ask_sex")
 		addButton("Never mind", "Ask something else", "")
 	if(state == "get_hugged"):
+		playAnimation(StageScene.Hug, "hug", {npc="nura"})
 		saynn("[say=pc]Hug me, Nur-A.[/say]")
 
 		saynn("The android spreads her arms and wraps them around you before pulling you closer. You feel how cold her frame is. Her chest is not soft at all, just like you thought. Although the gesture is nice.")
@@ -234,3 +235,9 @@ func _react(_action: String, _args):
 		GM.pc.orgasmFrom("nura")
 
 	setState(_action)
+
+func getDevCommentary():
+	return "Rahi, why did you write an android that has no pussy or squishy boobs?? There is a reason x3\n\nIdeally, the way I see Nur-A's completed content is as follows:\nYou meet her and do some chatting/lewds. (this part is complete)\nYou return to Alex and tell him about Nura. He starts explaining to you how she is an incomplete prototype that was scrapped because of reasons (who needs a nurse without holes or personality or something).\nYou want Nura to be finished. Alex says that you will need parts and/or credits for that.\nYou go around looking for these parts. Each one adds something (boobs, vagina, better ass, hair, different heads/tails/ears, various dicks, maybe a synthetic womb). Where would you find these parts? I have no idea x3\nYou also find personality chips. They make Nura act subby or extremely rough or as a kind domme mommy, you know.\nMaybe there is also a hidden sub-story that reveals itself more as you upgrade Nura. Something about her past. Maybe she is a stolen prototype from Syndicate? Maybe she is actually a girl that was killed and turned into a cyborg. Maybe she was one of the inmates x3. I dunno, you can take her any direction.\nAfter you upgrade her enough, she would join Eliza in the medical wing or something. She is a nurse after all..\n\nIf you're a writer and like Nura, feel free to grab this character and write for her, I'd be happy ^^"
+
+func hasDevCommentary():
+	return true

@@ -62,6 +62,11 @@ static func getAll():
 static func getRandomZone():
 	return RNG.pick(zoneVisibleName.keys())
 
+static func getRandomZoneLowerPart():
+	return RNG.pick([
+		LowerAbdomen, HipLeft, HipRight, ButtcheekLeft, ButtcheekRight, ThighLeft, ThighRight, ShinLeft, ShinRight
+	])
+
 static func getZoneVisibleName(zoneID: int):
 	if(!zoneVisibleName.has(zoneID)):
 		return "error:BADZONE"+str(zoneID)

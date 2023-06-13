@@ -3,6 +3,7 @@ class_name GameUI
 
 signal on_option_button(method, args)
 signal on_rollback_button
+signal onDevComButton
 var buttons: Array = []
 const buttonsCountPerPage: int = 15
 var optionButtonScene: PackedScene = preload("res://Game/SceneOptionButton.tscn")
@@ -28,9 +29,13 @@ onready var rollbackButton = $HBoxContainer/Panel2/MarginContainer/VBoxContainer
 var uiTextboxScene = preload("res://UI/UITextbox.tscn")
 onready var textcontainer = $HBoxContainer/VBoxContainer2/ScrollContainer/VBoxContainer
 onready var smartCharacterPanel = $HBoxContainer/Panel2/MarginContainer/VBoxContainer/SmartCharacterPanel
+onready var devCommentaryPanel = $HBoxContainer/DevCommentary
+onready var sceneArtWorkRect = $HBoxContainer/VBoxContainer2/ScrollContainer/VBoxContainer/SceneArtWorkRect
+onready var fullArtWorkRect = $FullArtworkRect
 var textboxes: Dictionary = {}
 var gameParser: GameParser
 var sayParser: SayParser
+onready var hornyMessage = $MessageSystem
 
 func _exit_tree():
 	GM.ui = null
@@ -161,7 +166,7 @@ func updateButtons():
 		var button:Button = buttons[i]
 		button.text = option[1]
 		button.disabled = !option[0]
-		if(AutoTranslation.shouldTranslateButtons):
+		if(AutoTranslation.shouldTranslateButtons && !showOriginalCheckbox.pressed):
 			if(!button.disabled && option.size() > 5):
 				button.text = option[5]
 			if(button.disabled && option.size() > 3):
@@ -181,7 +186,7 @@ func _on_option_button(index):
 func _on_option_button_tooltip(index):
 	var option = options[index]
 	optionTooltip.set_is_active(true)
-	if(!AutoTranslation.shouldTranslateButtons):
+	if(!AutoTranslation.shouldTranslateButtons || showOriginalCheckbox.pressed):
 		optionTooltip.set_text(option[1], option[2])
 	else:
 		if(option[0] && option.size() > 6):
@@ -227,8 +232,8 @@ func _on_PrevPageButton_pressed():
 func setLocationName(locname: String):
 	mapAndTimePanel.setLocationName(locname)
 
-func setSceneCreator(sceneCreator):
-	mapAndTimePanel.setSceneCreator(sceneCreator)
+func setSceneCreator(sceneCreator, shouldShowDevCommentaryIcon = false):
+	mapAndTimePanel.setSceneCreator(sceneCreator, shouldShowDevCommentaryIcon)
 
 func clearCharactersPanel():
 	smartCharacterPanel.clear()
@@ -256,6 +261,12 @@ func addCustomControl(id, control):
 	#uitextbox.id = id
 	textcontainer.add_child(control)
 	textboxes[id] = control
+
+func getCustomControl(id):
+	if(!textboxes.has(id)):
+		return null
+	
+	return textboxes[id]
 
 func getUIdata(id):
 	assert(textboxes.has(id), "Trying to get info from bad id. Id is "+id)
@@ -292,6 +303,7 @@ func hideAllScreens():
 	ingameMenuScreen.visible = false
 	skillsScreen.visible = false
 	debugScreen.visible = false
+	devCommentaryPanel.visible = false
 
 func _on_MenuButton_pressed():
 	if(!ingameMenuScreen.visible):
@@ -396,7 +408,7 @@ func translateText(manualButton = false):
 		if(AutoTranslation.shouldTranslateButtons):
 			for optionID in options:
 				buttonsTexts.append(options[optionID][1])
-				buttonsTexts.append(options[optionID][2])
+				buttonsTexts.append(options[optionID][2].replace("\n", "^"))
 		
 		translateStatusLabel.text = "Translating.."
 		currentTranslationTask += 1
@@ -414,6 +426,8 @@ func translateText(manualButton = false):
 		if(rememberedTask != currentTranslationTask):
 			return
 		
+		if(result == null || result == ""):
+			translateStatusLabel.text = "Failed to translate"
 		if(result != null && result != ""):
 			if(buttonsTexts.size() > 0):
 				var resultSplitted = result.split("\n")
@@ -422,7 +436,7 @@ func translateText(manualButton = false):
 					for optionID in options:
 						var realI = resultSplitted.size() - buttonsTexts.size() + _i*2
 						options[optionID].append(resultSplitted[realI])
-						options[optionID].append(resultSplitted[realI+1])
+						options[optionID].append(resultSplitted[realI+1].replace("^", "\n"))
 						
 						_i += 1
 					resultSplitted.resize(resultSplitted.size() - buttonsTexts.size())
@@ -447,8 +461,49 @@ func _on_ShowOriginalCheckbox_pressed():
 		textOutput.bbcode_text = savedOriginalText
 	else:
 		textOutput.bbcode_text = savedTranslatedText
+	queueUpdate()
 
 
 func _on_ManualTranslateButton_pressed():
 	manualTranslateButton.visible = false
 	translateText(true)
+
+
+func _on_MapAndTimePanel_onDevComButton():
+	emit_signal("onDevComButton")
+	
+	
+
+onready var devComLabel = $HBoxContainer/DevCommentary/ScrollContainer/DevComLabel
+func showDevCommentary(thetext):
+	hideAllScreens()
+	devCommentaryPanel.visible = true
+	devComLabel.bbcode_text = thetext
+
+func _on_DevComLabel_meta_clicked(meta):
+	var _ok = OS.shell_open(meta)
+
+func isShowingDevCommentary():
+	return devCommentaryPanel.visible
+
+func setSceneArtWork(imageData):
+	if(imageData == null || !(imageData is Dictionary) || !OPTIONS.shouldShowSceneArt()):
+		sceneArtWorkRect.textures = null
+		sceneArtWorkRect.visible = false
+		fullArtWorkRect.textures = null
+		$FullArtworkRect/Label.text = ""
+	else:
+		$FullArtworkRect/Label.text = "Art by "+str(imageData["artist"])
+		fullArtWorkRect.textures = imageData["imagePath"]
+		sceneArtWorkRect.textures = imageData["imagePath"]
+		sceneArtWorkRect.rect_min_size.y = imageData["imageHeight"]
+		sceneArtWorkRect.visible = true
+
+func _on_OpenFullArtWorkButton_pressed():
+	fullArtWorkRect.visible = true
+
+func _on_CloseFullArtWork_pressed():
+	fullArtWorkRect.visible = false
+
+func showHornyMessage(theMessage: String):
+	hornyMessage.showMessageOnScreen(theMessage)

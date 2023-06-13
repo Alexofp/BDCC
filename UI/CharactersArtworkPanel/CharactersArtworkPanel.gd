@@ -20,9 +20,9 @@ func _ready():
 	
 func clear():
 	characters.clear()
-	textureRect.texture = null
-	textureRect2.texture = null
-	textureRect3.texture = null
+	textureRect.textures = null
+	textureRect2.textures = null
+	textureRect3.textures = null
 	currentCharacter = null
 	updateMainCharacter()
 	
@@ -47,7 +47,7 @@ func addCharacter(charID:String, variant:Array):
 			if(defaultImagePath == null):
 				imagePath = "res://Images/UI/GenericFace.png"
 			else:
-				if(defaultImagePath != "res://Images/UI/GenericFace.png"):
+				if(!(defaultImagePath is String) || (defaultImagePath != "res://Images/UI/GenericFace.png")):
 					isGenericPortrait = false
 				imagePath = defaultImagePath
 		else:
@@ -93,9 +93,9 @@ func removeCharacter(charID:String):
 		
 func updateImages():
 	if(characters.size() == 0):
-		textureRect.texture = null
-		textureRect2.texture = null
-		textureRect3.texture = null
+		textureRect.textures = null
+		textureRect2.textures = null
+		textureRect3.textures = null
 		nextCharacterButton.visible = false
 		return
 	
@@ -106,16 +106,16 @@ func updateImages():
 	
 	var index = keys.find(currentCharacter)
 	
-	textureRect.texture = load(characters[currentCharacter]["imagePath"])
+	textureRect.textures = characters[currentCharacter]["imagePath"]
 	if(characters.size() > 1):
 		var nextIndex = index + 1
 		if(nextIndex >= characters.size()):
 			nextIndex = 0
 		
-		textureRect2.texture = load(characters[keys[nextIndex]]["imagePath"])
+		textureRect2.textures = characters[keys[nextIndex]]["imagePath"]
 		nextCharacterButton.visible = true
 	else:
-		textureRect2.texture = null
+		textureRect2.textures = null
 		nextCharacterButton.visible = false
 	
 	if(characters.size() > 2):
@@ -123,9 +123,9 @@ func updateImages():
 		if(prevIndex < 0):
 			prevIndex = characters.size() - 1
 		
-		textureRect3.texture = load(characters[keys[prevIndex]]["imagePath"])
+		textureRect3.textures = characters[keys[prevIndex]]["imagePath"]
 	else:
-		textureRect3.texture = null
+		textureRect3.textures = null
 
 func updateMainCharacter():
 	if(currentCharacter == null):

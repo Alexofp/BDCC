@@ -16,6 +16,7 @@ func getSupportedSexTypes():
 	return {
 		SexType.DefaultSex: true,
 		SexType.StocksSex: true,
+		SexType.SlutwallSex: true,
 	}
 
 func getActivityBaseScore(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexSubInfo):
@@ -144,7 +145,7 @@ func getStartActions(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexS
 				desc = desc,
 			})
 		if(!sub.isOralBlocked() && (!drugInfo.has("canUseOnSub") || drugInfo["canUseOnSub"])):
-			if(!_subInfo.isUnconscious()):
+			if(!_subInfo.isUnconscious() && getSexType() != SexType.SlutwallSex):
 				actions.append({
 					name = drugInfo["name"],
 					args = ["offertosub", itemID],
@@ -190,6 +191,10 @@ func startActivity(_args):
 		var text = RNG.pick([
 			"{dom.You} {dom.youVerb('produce')} "+pcCanSeeText(drugInfo["usedName"])+" and {dom.youVerb('try', 'tries')} to force it into {sub.your} mouth!",
 		])
+		if(getSexType() == SexType.SlutwallSex):
+			text = RNG.pick([
+				"{dom.You} {dom.youVerb('produce')} "+pcCanSeeText(drugInfo["usedName"])+" and {dom.youVerb('slide')} it into {sub.your} asshole! The pill begins to dissolve inside.",
+			])
 		return {text = text, domSay=domReaction(SexReaction.ForcingDrug)}
 	
 	if(_args[0] == "useonself"):
@@ -263,6 +268,10 @@ func processTurn():
 			var text = RNG.pick([
 				"{dom.You} {dom.youVerb('force')} {sub.you} to swallow "+pcCanSeeText(drugInfo["usedName"])+"!"+pillResultText,
 			])
+			if(getSexType() == SexType.SlutwallSex):
+				text = RNG.pick([
+					"The pill dissolves inside {sub.your} butt, it was "+pcCanSeeText(drugInfo["usedName"], "an unknown one")+"!"+pillResultText,
+				])
 			return {text = text}
 		
 		if(state == "domabouttotake"):
@@ -327,7 +336,7 @@ func getSubActions():
 				"name": "Decline pill",
 				"desc": "You don't wanna eat that pill",
 			})
-	if(state == "forcing"):
+	if(state == "forcing" && getSexType() != SexType.SlutwallSex):
 		var theresistScore = 0.1 + subInfo.getResistScore()*(0.2 - subInfo.fetishScore({Fetish.DrugUse: 1.0}))
 		actions.append({
 				"id": "swallowforced",

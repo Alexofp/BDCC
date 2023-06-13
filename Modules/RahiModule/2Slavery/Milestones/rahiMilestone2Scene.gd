@@ -106,7 +106,7 @@ func _run():
 		addButton("Embrace", "Hug the kitty and let her scratch you", "do_embrace")
 		addButton("Grab and spank", "Catch the feline and punish her for this act", "do_spank")
 	if(state == "do_embrace"):
-		playAnimation(StageScene.Cuddling, "idle", {npc="rahi"})
+		playAnimation(StageScene.Hug, "hug", {npc="rahi"})
 		setFlag("RahiModule.rahiMile2Embraced", true)
 		saynn("Instead of trying to avoid or attack her back, you meet her with a warm tight hug, wrapping your hands around Rahi. She wasn't too amused by that, her paws leaving countless scratches and cuts on your skin. But you don't stop no matter how much she hurts you.")
 
@@ -327,3 +327,9 @@ func _react(_action: String, _args):
 		processTime(5*60)
 
 	setState(_action)
+
+func getDevCommentary():
+	return "You probably know that its REALLY FRICKING hard to get rid of an addiction. Addictions are poison that corrupt our every thought. You might understand it perfectly fine that Alcohol is bad for you in this condition.. But your head might still try to tell you 'but a little is fine', 'just one sip', 'it tastes so good, one gulp won't change anything'. Your brain is your worst enemy in this situation.\n\nSo.. how do you actually get rid of one? Get a better one x3. Kidding. Kinda. There are a few ways and doing something else less-harmful is one such solution, yes. Or you can somehow convince yourself that the alcohol is gross. Basically you gotta make that activity not-fun. Or focus on another activity that's more fun. Yeah, if you wanna get rid of alcohol addiction - do drugs.. KIDDING\n\nWhy am I writing this here? Basically just to explain that you can't just get rid of an addiction in one moment.. Rahi is gonna be affected by it for a looong time. But having a good company might help ^^"
+
+func hasDevCommentary():
+	return true

@@ -260,11 +260,16 @@ func generateGoals():
 		var personDomInfo = doms[domID]
 		var possibleGoals = []
 		
+		var breedingGoalsAmount = 0
+		var breedingGoals = []
+		
 		var dom = personDomInfo.getChar()
 		
 		for subID in subs:
 			var personSubInfo = subs[subID]
 			var sub = personSubInfo.getChar()
+			if(sub.hasPerk(Perk.FertilitySubmissiveAndBreedable)):
+				breedingGoalsAmount += 1
 			
 			var goalsToAdd = dom.getFetishHolder().getGoals(self, sub)
 			if(goalsToAdd != null):
@@ -280,15 +285,25 @@ func generateGoals():
 					var goalData = sexGoal.generateData(self, personDomInfo, personSubInfo)
 					
 					if(sexGoal.isPossible(self, personDomInfo, personSubInfo, goalData) && !sexGoal.isCompleted(self, personDomInfo, personSubInfo, goalData)):
-						possibleGoals.append([[goal[0], sub.getID(), goalData], goal[1]])
-		
+						var goalObject = [[goal[0], sub.getID(), goalData], goal[1]]
+						
+						possibleGoals.append(goalObject)
+						
+						if(sexGoal.canLeadToSubsPregnancy(self, personDomInfo, personSubInfo, goalData)):
+							breedingGoals.append(goalObject)
+							
 		if(possibleGoals.size() > 0):
 			for _i in range(0, amountToGenerate):
 				var randomGoalInfo = RNG.pickWeightedPairs(possibleGoals)
 				personDomInfo.goals.append(randomGoalInfo.duplicate(true))
 				generatedAnyGoals = true
+				
+		if(breedingGoalsAmount > 0 && breedingGoals.size() > 0):
+			for _i in range(0, breedingGoalsAmount):
+				var randomGoalInfo = RNG.pickWeightedPairs(breedingGoals)
+				personDomInfo.goals.append(randomGoalInfo.duplicate(true))
 			
-		print(personDomInfo.goals)
+		print("Goals added to NPC: ", personDomInfo.goals)
 	
 	if(!isDom("pc") && !generatedAnyGoals):
 		messages.append("Dom couldn't decide what to do with the sub, none of their fetishes apply.")
@@ -306,12 +321,20 @@ func checkIfThereAreAnyActivitiesThatSupportGoal(goalID):
 		var activityGoals = activity.getGoals()
 		var supportedSexTypes = activity.getSupportedSexTypes()
 		if(activityGoals.has(goalID) && activityGoals[goalID] > 0.0):
-			var sexTypesSupported = sexType.getSupportedSexActivities()
-			for sexTypeSupported in sexTypesSupported:
-				if(supportedSexTypes.has(sexTypeSupported) && supportedSexTypes[sexTypeSupported]):
-					return true
+			if(areSexTypesSupported(supportedSexTypes)):
+				return true
 	return false
-		
+
+func areSexTypesSupported(supportedSexTypes):
+	var sexTypesSupported = sexType.getSupportedSexActivities()
+	for sexTypeSupported in sexTypesSupported:
+		if(supportedSexTypes.has(sexTypeSupported) && supportedSexTypes[sexTypeSupported]):
+			return true
+	return false
+
+func areSexTypesSupportedForActivity(activity):
+	var supportedSexTypes = activity.getSupportedSexTypes()
+	return areSexTypesSupported(supportedSexTypes)
 
 func hasGoal(thedominfo, goal, thesubinfo):
 	for goalInfo in thedominfo.goals:
@@ -501,6 +524,9 @@ func processAIActions(isDom = true):
 				var newSexActivityRef = allSexActivities[possibleSexActivityID]
 				newSexActivityRef.sexEngineRef = weakref(self)
 				
+				if(!areSexTypesSupportedForActivity(newSexActivityRef)):
+					continue
+				
 				for subID in subs:
 					newSexActivityRef.initParticipants(personID, subID)
 					var subInfo = subs[subID]
@@ -534,9 +560,13 @@ func processAIActions(isDom = true):
 				var newSexActivityRef = allSexActivities[possibleSexActivityID]
 				newSexActivityRef.sexEngineRef = weakref(self)
 				
+				if(!areSexTypesSupportedForActivity(newSexActivityRef)):
+					continue
+				
 				for domID in doms:
 					newSexActivityRef.initParticipants(domID, personID)
 					var domInfo = doms[domID]
+					
 					if(!newSexActivityRef.canBeStartedBySub()):
 						continue
 					
@@ -699,6 +729,7 @@ func getActions():
 						action = action,
 						name = action["name"],
 						desc = action["desc"],
+						category = getSafeValueFromDict(action, "category", []),
 						chance = getSafeValueFromDict(action, "chance"),
 						priority = getSafeValueFromDict(action, "priority", 0),
 					})
@@ -712,6 +743,7 @@ func getActions():
 						action = action,
 						name = action["name"],
 						desc = action["desc"],
+						category = getSafeValueFromDict(action, "category", []),
 						chance = getSafeValueFromDict(action, "chance"),
 						priority = getSafeValueFromDict(action, "priority", 0),
 					})
@@ -724,6 +756,9 @@ func getActions():
 				var newSexActivityRef = allSexActivities[possibleSexActivityID]
 				newSexActivityRef.sexEngineRef = weakref(self)
 				newSexActivityRef.initParticipants("pc", pctargetID)
+				
+				if(!areSexTypesSupportedForActivity(newSexActivityRef)):
+					continue
 				
 				if(!newSexActivityRef.canBeStartedByDom()):
 					continue
@@ -757,6 +792,9 @@ func getActions():
 				var newSexActivityRef = allSexActivities[possibleSexActivityID]
 				newSexActivityRef.sexEngineRef = weakref(self)
 				newSexActivityRef.initParticipants(pctargetID, "pc")
+				
+				if(!areSexTypesSupportedForActivity(newSexActivityRef)):
+					continue
 				
 				if(!newSexActivityRef.canBeStartedBySub()):
 					continue

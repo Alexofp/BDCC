@@ -15,6 +15,7 @@ var otherHoleTag = SexActivityTag.AnusUsed
 var otherHoleFetishGiving = Fetish.AnalSexGiving
 var otherHoleFetishReceiving = Fetish.AnalSexReceiving
 var otherGoal = SexGoal.ReceiveAnal
+var currentPose = ""
 
 func _init():
 	id = "DomRidingSubVaginal"
@@ -24,6 +25,31 @@ func getGoals():
 		SexGoal.ReceiveVaginal: 1.0,
 		SexGoal.ReceiveStraponVaginal: 1.0,
 	}
+
+func getSupportedSexTypes():
+	return {
+		SexType.DefaultSex: true,
+		SexType.SlutwallSex: true,
+	}
+
+const POSE_DEFAULT = "POSE_DEFAULT"
+const POSE_COWGIRL = "POSE_COWGIRL"
+const POSE_REVERSECOWGIRL = "POSE_REVERSECOWGIRL"
+const PoseToName = {
+	POSE_DEFAULT: "Default",
+	POSE_COWGIRL: "Cowgirl",
+	POSE_REVERSECOWGIRL: "Reverse Cowgirl",
+}
+const PoseToAnimName = {
+	POSE_DEFAULT: StageScene.SexCowgirl,
+	POSE_COWGIRL: StageScene.SexCowgirl,
+	POSE_REVERSECOWGIRL: StageScene.SexReverseCowgirl,
+}
+func getAvaiablePoses():
+	if(getSexType() == SexType.DefaultSex):
+		return [POSE_COWGIRL, POSE_REVERSECOWGIRL]
+	
+	return [POSE_DEFAULT]
 
 func canStartActivity(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexSubInfo):
 	if(!_subInfo.getChar().hasReachablePenis() && !_subInfo.getChar().isWearingStrapon()):
@@ -75,12 +101,70 @@ func getDickName(dickName = null):
 		return RNG.pick(["cock", "dick", "member"])
 	return dickName
 
+func getUsedBodypartName():
+	var theName = RNG.pick(usedBodypartNames)
+	if(usedBodypart == BodypartSlot.Vagina):
+		theName = "{dom.pussyStretch} "+theName
+	if(usedBodypart == BodypartSlot.Anus):
+		theName = "{dom.anusStretch} "+theName
+	
+	if(getDom().getLustLevel() > 0.6):
+		if(usedBodypart == BodypartSlot.Vagina):
+			theName = RNG.pick(["needy", "awaiting", "inviting"])+" "+theName
+		if(usedBodypart == BodypartSlot.Anus):
+			theName = RNG.pick(["needy", "awaiting", "drippy", "inviting", "wet", "slick", "aroused"])+" "+theName
+	elif(getDom().getLustLevel() < 0.1 && RNG.chance(50)):
+		if(usedBodypart == BodypartSlot.Vagina):
+			theName = RNG.pick(["dry"])+" "+theName
+		if(usedBodypart == BodypartSlot.Anus):
+			theName = RNG.pick(["dry"])+" "+theName
+	return theName
+
+func getStartTextForPose(thePose):
+	var throughClothing = "."
+	if(domInfo.getChar().getFirstItemThatCoversBodypart(usedBodypart) != null):
+		throughClothing = " through {dom.yourHis} clothing."
+	
+	var text = ""
+	if(thePose == POSE_COWGIRL):
+		text = RNG.pick([
+			"{dom.You} {dom.youVerb('stradle')} {sub.you} and {dom.youVerb('rub')} {dom.yourHis} "+getUsedBodypartName()+" against {sub.yourHis} "+getDickName(RNG.pick(["dick", "penis", "cock", "member"]))+throughClothing,
+		])
+	elif(thePose == POSE_REVERSECOWGIRL):
+		text = RNG.pick([
+			"{dom.You} {dom.youVerb('stradle')} {sub.you} in a reverse cowgirl position and {dom.youVerb('rub')} {dom.yourHis} "+getUsedBodypartName()+" against {sub.yourHis} "+getDickName(RNG.pick(["dick", "penis", "cock", "member"]))+throughClothing,
+		])
+	else:
+		text = RNG.pick([
+			"{dom.You} {dom.youVerb('stradle')} {sub.you} and {dom.youVerb('rub')} {dom.yourHis} "+getUsedBodypartName()+" against {sub.yourHis} "+getDickName(RNG.pick(["dick", "penis", "cock", "member"]))+throughClothing,
+		])
+	return text
+	
+func getSwitchPoseTextForPose(thePose):
+	var text = ""
+	if(thePose == POSE_COWGIRL):
+		text = RNG.pick([
+			"{dom.You} {dom.youVerb('stradle')} {sub.you} in cowgirl position, {sub.your} "+getDickName(RNG.pick(["dick", "penis", "cock", "member"]))+" is still inside {dom.yourHis} "+getUsedBodypartName()+"!",
+		])
+	elif(thePose == POSE_REVERSECOWGIRL):
+		text = RNG.pick([
+			"{dom.You} {dom.youVerb('stradle')} {sub.you} in a reverse cowgirl position, {sub.your} "+getDickName(RNG.pick(["dick", "penis", "cock", "member"]))+" is still inside {dom.yourHis} "+getUsedBodypartName()+"!",
+		])
+	else:
+		text = RNG.pick([
+			"{dom.You} {dom.youVerb('stradle')} {sub.you}, {sub.your} "+getDickName(RNG.pick(["dick", "penis", "cock", "member"]))+" is still inside {dom.yourHis} "+getUsedBodypartName()+"!",
+		])
+	return text
+
 func startActivity(_args):
 	state = ""
+	currentPose = RNG.pick(getAvaiablePoses())
 	
-	var text = RNG.pick([
-		"{dom.You} {dom.youVerb('stradle')} {sub.you} and {dom.youVerb('rub')} {dom.yourHis} "+RNG.pick(usedBodypartNames)+" against {sub.yourHis} "+getDickName(RNG.pick(["dick", "penis", "cock", "member"]))+".",
-	])
+	var text = getStartTextForPose(currentPose)
+	if(getSexType() == SexType.SlutwallSex):
+		text = RNG.pick([
+			"{dom.You} {dom.youVerb('stand')} on the chains and {dom.youVerb('stradle')} {sub.you}, {dom.yourHis} "+RNG.pick(usedBodypartNames)+" is rubbing against {sub.yourHis} "+getDickName(RNG.pick(["dick", "penis", "cock", "member"]))+".",
+		])
 	
 	return {
 		text = text,
@@ -88,7 +172,7 @@ func startActivity(_args):
 	}
 
 func onSwitchFrom(_otherActivity, _args):
-	return
+	currentPose = RNG.pick(getAvaiablePoses())
 
 func processTurn():
 	if(state == "knotting"):
@@ -274,16 +358,45 @@ func getDomActions():
 			"name": "Pull out",
 			"desc": "Try to yank their knot out",
 		})
+	for pose in getAvaiablePoses():
+		if(pose == currentPose):
+			continue
+		var poseName = "error"
+		if(PoseToName.has(pose)):
+			poseName = PoseToName[pose]
+		actions.append({
+			"id": "switchpose",
+			"score": 0.0,
+			"name": poseName,
+			"desc": "Change pose",
+			"category": ["Switch pose"],
+			"args": [pose],
+		})
 			
 	return actions
 
 
 func doDomAction(_id, _actionInfo):
+	if(_id == "switchpose"):
+		#switchedPoseOnce = true
+		var newPose = _actionInfo["args"][0]
+		var isInside = true
+		if(state in [""]):
+			isInside = false
+		
+		var text = ""
+		if(isInside):
+			text = getSwitchPoseTextForPose(newPose)
+		else:
+			text = getStartTextForPose(newPose)
+		currentPose = newPose
+		return {text = text}
+	
 	if(_id == "switchhole"):
 		switchCurrentActivityTo(switchHoleActivity)
 		
 		var text = RNG.pick([
-			"{dom.You} {dom.youVerb('switch', 'switches')} holes, now rubbing {dom.yourHis} "+RNG.pick(otherHoleNames)+" agaisnt {sub.yourHis} "+getDickName()+".",
+			"{dom.You} {dom.youVerb('switch', 'switches')} holes, now rubbing {dom.yourHis} "+RNG.pick(otherHoleNames)+" against {sub.yourHis} "+getDickName()+".",
 		])
 		
 		return {text = text}
@@ -359,8 +472,8 @@ func doDomAction(_id, _actionInfo):
 		var condom:ItemBase = getSub().getWornCondom()
 		if(condom != null):
 			var breakChance = condom.getCondomBreakChance()
-			
-			if(RNG.chance(breakChance)):
+			var condomBroke = getSub().shouldCondomBreakWhenFucking(getDom(), breakChance)
+			if(condomBroke):
 				text = "[b]The condom broke![/b] "+text
 				condom.destroyMe()
 			else:
@@ -574,6 +687,8 @@ func getSubResistChance(baseChance, domAngerRemoval):
 		theChance *= 0.5
 	if(getSub().isBlindfolded()):
 		theChance *= 0.8
+	if(getSexType() == SexType.SlutwallSex):
+		theChance *= 0.5
 	
 	return max(theChance, 5.0)
 
@@ -658,8 +773,8 @@ func doSubAction(_id, _actionInfo):
 		var condom:ItemBase = getSub().getWornCondom()
 		if(condom != null):
 			var breakChance = condom.getCondomBreakChance()
-			
-			if(RNG.chance(breakChance)):
+			var condomBroke = getSub().shouldCondomBreakWhenFucking(getDom(), breakChance)
+			if(condomBroke):
 				text = "[b]The condom broke![/b] "+text
 				condom.destroyMe()
 			else:
@@ -694,13 +809,25 @@ func doSubAction(_id, _actionInfo):
 
 
 func getAnimation():
+	if(getSexType() == SexType.SlutwallSex):
+		if(state in [""]):
+			return [StageScene.SlutwallRide, "tease", {pc=subID, npc=domID}]
+		if(state in ["knotting"]):
+			return [StageScene.SlutwallRide, "inside", {pc=subID, npc=domID}]
+		if(subInfo.isCloseToCumming() || (isStraponSex() && domInfo.isCloseToCumming())):
+			return [StageScene.SlutwallRide, "fast", {pc=subID, npc=domID}]
+		return [StageScene.SlutwallRide, "sex", {pc=subID, npc=domID}]
+	
+	var animToPlay = StageScene.SexCowgirl
+	if(PoseToAnimName.has(currentPose)):
+		animToPlay = PoseToAnimName[currentPose]
 	if(state in [""]):
-		return [StageScene.SexCowgirl, "tease", {pc=subID, npc=domID}]
+		return [animToPlay, "tease", {pc=subID, npc=domID}]
 	if(state in ["knotting"]):
-		return [StageScene.SexCowgirl, "inside", {pc=subID, npc=domID}]
+		return [animToPlay, "inside", {pc=subID, npc=domID}]
 	if(subInfo.isCloseToCumming() || (isStraponSex() && domInfo.isCloseToCumming())):
-		return [StageScene.SexCowgirl, "fast", {pc=subID, npc=domID}]
-	return [StageScene.SexCowgirl, "sex", {pc=subID, npc=domID}]
+		return [animToPlay, "fast", {pc=subID, npc=domID}]
+	return [animToPlay, "sex", {pc=subID, npc=domID}]
 
 func getDomSwitchHoleChance():
 	if(domInfo.hasMemory("switchedHoles")):
@@ -724,6 +851,7 @@ func saveData():
 	var data = .saveData()
 	
 	data["waitTimer"] = waitTimer
+	data["currentPose"] = currentPose
 
 	return data
 	
@@ -731,3 +859,6 @@ func loadData(data):
 	.loadData(data)
 	
 	waitTimer = SAVE.loadVar(data, "waitTimer", 0)
+	currentPose = SAVE.loadVar(data, "currentPose", "")
+	if(currentPose == ""):
+		currentPose = RNG.pick(getAvaiablePoses())

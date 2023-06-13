@@ -5,6 +5,36 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+## [0.0.23] - 2023-06-13
+### Added
+- First accepted code contribution! The npc 'forget' menu got replaced with a fancy UI-based one that also allows you preview the npc or even meet them. ([Pull request by Firi](https://github.com/Alexofp/BDCC/pull/10))
+- Second accepted code contribution! Fertility skill with 10 new perks designed for mothers ^^. ([Pull request by Firi](https://github.com/Alexofp/BDCC/pull/14))
+- The final Arena battle against Avy is finished! It won't be that simple.. Because it's an entire quest! Will you become the new Grand Champion or will Avy The Unbeatable keep the throne to herself forever?
+- Lots of new Rahi scenes that train her skills. Below are all the new stuff, pages upon pages of it (This is probably the last time I focus on Rahi for an update x3)
+- Rahi's petplay is expanded with puppy training. Can take Rahi on walkies around the prison now
+- Choking punishment for Rahi. If you go too far - you might make Rahi forget one of her skills entirely.. allowing you to experience the content of that skill again
+- Rahi can join you in your bed when you go to sleep.
+- 8 morning scenes where Rahi wakes you up with sex. Can be toggled on or off
+- Exhibitionism skill for Rahi got a lot of scenes. From you training her to be more 'confident' to parading her around the station naked
+- Cuddle reward where you cuddle Rahi. Has a few sex scenes and also ability to collect Rahi's milk with breast pumps
+- Rahi pregnancy content. 2 scenes, one for the first time and one repeatable. Happens when you approach her when she is ready to give birth (you will be notified).
+- New perk for the BDSM skill that really rewards perfect hits during the struggling minigame
+- Learned perks can now be toggled off and on at any point
+- Slutwall. Slut. Wall.
+- The procedural sex now has more poses for the penetrative sex. Allfours/Standing/Missionary/Full-nelson for fucking someone and Cowgirl/Reverse cowgirl for riding someone. A random pose is chosen but you can switch them on the fly
+- You can now meet pregnant procedural npcs and help them give birth
+- Developer commentary for scenes. If you enable it in the options the \[DC] button will now appear for scenes that have commentary written for them. The commentary are little snippets of text that give you more insight about how I write
+- Imagepacks now support layered images, ability to define art for procedural npcs and also ability to attach art to any scene
+
+### Changed
+- If you manage to resist Npc's attempts of putting bdsm gear on you during sex, they will eventually give up
+- Names for breast sizes and also milk amount got adjusted to be slightly more realistic. Slightly.
+- New imagepacks are sorted to be first now
+
+### Fixed
+- Npcs shouldn't be able to give birth mid-scene anymore
+- Npcs shouldn't be processed twice when you meet them anymore
+- More bugs that I don't remember..
 
 ## [0.0.22bugfix1] - 2023-04-19
 ### Added
@@ -237,7 +267,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Turn-based fighting
 - Initial player customization
 
-[Unreleased]: https://github.com/Alexofp/BDCC/compare/0.0.22bugfix1...main
+[Unreleased]: https://github.com/Alexofp/BDCC/compare/0.0.23...main
+[0.0.23]: https://github.com/Alexofp/BDCC/compare/0.0.22bugfix1...0.0.23
 [0.0.22bugfix1]: https://github.com/Alexofp/BDCC/compare/0.0.22...0.0.22bugfix1
 [0.0.22]: https://github.com/Alexofp/BDCC/compare/0.0.21...0.0.22
 [0.0.21]: https://github.com/Alexofp/BDCC/compare/0.0.20...0.0.21

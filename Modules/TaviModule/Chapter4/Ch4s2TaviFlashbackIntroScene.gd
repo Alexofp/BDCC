@@ -369,3 +369,9 @@ func loadData(data):
 	tookShower = SAVE.loadVar(data, "tookShower", false)
 	lookOutOfWindow = SAVE.loadVar(data, "lookOutOfWindow", false)
 	readDatapad = SAVE.loadVar(data, "readDatapad", false)
+
+func getDevCommentary():
+	return "Tavi's flashback.. Yeahhhh its a very long scene x3. I had an idea for her backstory for a long time, it's been brewing in my head. But a lot of it came to me only while writing it, strangely enough.\n\nYes, games do have flashbacks in them sometimes. But have you seen a flashback in a porn game? You probably did, shit.. Okay, have you seen a flashback in a text-based porn game before? x3 You probably didn't! So I hope people are surprised a little to see that they suddenly play as someone else. It really gives a lot of freedom about how your character talks and reacts. Usually I have to write it very generic-ly because the player could be a mean-ass dom or a subby sub, I don't know..\n\nAnything interesting about it? I dunno.. I tried to foreshadow literally everything. Sometimes very obviously, sometimes extremely subtly. I just hope you enjoyed reading that. It's like a little movie script, with explosions, betrayals, villains, heroes, unbelievable escapes.\n\nThe latex thingie idea? I wanted to do that for a long time x3"
+
+func hasDevCommentary():
+	return true

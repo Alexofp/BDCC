@@ -19,10 +19,14 @@ func getEffectDesc():
 		addText = "First trimester. You have a slight belly, your body slowly adjusts."+timeLeftText
 	elif(progress <= 0.66):
 		addText = "Second trimester. Breasts are swollen, belly is very pronounced."+timeLeftText
-	elif(progress <= 0.99):
-		addText = "Third trimester. Lactation. You experience shortness of breath, your belly is really dragging you down."+timeLeftText
-	else:
+	elif(character.isReadyToGiveBirth()):
 		addText = "Third trimester. You experience shortness of breath, you feel like you are ready to give birth."
+	else:
+		addText = "Third trimester. Lactation. You experience shortness of breath, your belly is really dragging you down."+timeLeftText
+	
+	if(GM.pc.hasPerk(Perk.FertilityBellySize) && character.getMenstrualCycle() != null):
+		var kidAmount = character.getMenstrualCycle().getRoughLitterEstimateString()
+		addText += "\n\nYou think there are "+str(kidAmount)+" in this belly"
 	
 	return "You're visible pregnant.. "+addText
 
@@ -38,7 +42,10 @@ func getIconColor():
 
 func getBuffs():
 	var progress = character.getPregnancyProgress()
-	
+	var modifier = 1
+	if(character.hasPerk(Perk.FertilityBroodmother)): 
+		modifier = 0.5
+		
 	if(progress <= 0.0):
 		return []
 	
@@ -48,10 +55,10 @@ func getBuffs():
 		]
 	elif(progress <= 0.66):
 		return [
-			buff(Buff.MaxStaminaBuff, [-10]),
+			buff(Buff.MaxStaminaBuff, [-10 * modifier]),
 		]
 	else:
 		return [
-			buff(Buff.MaxStaminaBuff, [-30]),
-			buff(Buff.DodgeChanceBuff, [-20]),
+			buff(Buff.MaxStaminaBuff, [-30 * modifier]),
+			buff(Buff.DodgeChanceBuff, [-20 * modifier]),
 		]

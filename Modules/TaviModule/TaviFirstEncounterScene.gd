@@ -477,3 +477,9 @@ func _react_scene_end(_tag, _result):
 		else:
 			setState("lost_fight")
 			addExperienceToPlayer(10)
+
+func getDevCommentary():
+	return "A lot of people don't like Tavi (and still don't). Which is fair.. The reason is probably because she is quite obviously.. shady. And tries to dominate you at the first sight. Ehh.. I tried to write her.. intimidating, yes. She does actually need your help but she is not quite sure how to ask for it.\n\nThis is probably one of the first 'lewd' scenes that I wrote for the game. Would I do it differently now? I still can x3. I'm just lazy. But.. I dunno. Tavi is weird by design. She is like.. Joker. Even has his colors x3. I think her current introduction is fine.\n\nWhy did I made it so you must sub to her to get any story? Well, I wanted to complete a route for 'switch' people first. Switches are between doms and bottoms, they can do both, they can 'switch'. I'm a switch so it would be the easiest for me to write. What does that mean for the route? It means that you are Tavi's sidekick and sub to her but also can dominate people around the station (or sub to them too x3). And that 'Tavi's sub' is what irks people. But I can't really see her content working without that.. connection.. between you and her. Hope I make sense. Sorry dom people, I will write a route for you too x3"
+
+func hasDevCommentary():
+	return true

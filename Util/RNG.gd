@@ -145,3 +145,7 @@ static func randomMaleName():
 
 static func randomFemaleName():
 	return pick(RNGData.femaleNames)
+
+static func pickHashed(ar, thehash:int):
+	thehash = thehash % ar.size()
+	return ar[thehash]

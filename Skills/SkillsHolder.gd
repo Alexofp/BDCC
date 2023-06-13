@@ -8,6 +8,7 @@ var npc = null
 
 var skills = {}
 var perks = {}
+var disabledPerks = {}
 
 signal statChanged
 signal levelChanged
@@ -45,6 +46,7 @@ func saveData():
 		"stats": stats,
 		"level": level,
 		"experience": experience,
+		"disabledPerks": disabledPerks,
 	}
 	data["skills"] = []
 	for skillID in skills:
@@ -71,6 +73,7 @@ func loadData(data):
 	stats = SAVE.loadVar(data, "stats", {})
 	level = SAVE.loadVar(data, "level", 0)
 	experience = SAVE.loadVar(data, "experience", 0)
+	disabledPerks = SAVE.loadVar(data, "disabledPerks", {})
 	
 	var loadedSkills = SAVE.loadVar(data, "skills", [])
 	for loadedSkill in loadedSkills:
@@ -180,7 +183,48 @@ func getSkill(skillID):
 func hasPerk(perkID):
 	if(!perks.has(perkID)):
 		return false
+	if(disabledPerks.has(perkID) && disabledPerks[perkID]):
+		return false
 	return true
+
+func hasPerkDisabledOrNot(perkID):
+	if(!perks.has(perkID)):
+		return false
+	return true
+	
+func togglePerk(perkID):
+	if(!perks.has(perkID)):
+		return
+	
+	if(disabledPerks.has(perkID) && disabledPerks[perkID]):
+		# make sure all the required perks are enabled
+		var perk = perks[perkID]
+		var requiredPerks = perk.getRequiredPerks()
+		for requiredPerkID in requiredPerks:
+			if(isPerkDisabled(requiredPerkID)):
+				return
+		
+		disabledPerks.erase(perkID)
+	else:
+		disabledPerks[perkID] = true
+	
+		for childperkID in perks:
+			var perk = perks[childperkID]
+			
+			# Automatically disabling perks that depend on this perk
+			var requiredPerks = perk.getRequiredPerks()
+			for requiredPerkID in requiredPerks:
+				if(requiredPerkID == perkID):
+					disabledPerks[childperkID] = true
+					break
+
+func isPerkDisabled(perkID):
+	if(!perks.has(perkID)):
+		return false
+	
+	if(disabledPerks.has(perkID) && disabledPerks[perkID]):
+		return true
+	return false
 	
 func addPerk(perkID):
 	if(hasPerk(perkID)):
@@ -216,6 +260,9 @@ func getLearnedPerkAmount(skillID):
 	return result
 
 func canUnlockPerk(perkID):
+	if(hasPerkDisabledOrNot(perkID)):
+		return false
+	
 	var perk: PerkBase = GlobalRegistry.getPerk(perkID)
 	var perkSkill = perk.getSkillGroup()
 	if(!skills.has(perkSkill)):

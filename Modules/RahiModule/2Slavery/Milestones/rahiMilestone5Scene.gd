@@ -48,7 +48,7 @@ func _run():
 
 		addButton("Test kitty", "Test if Rahi's addiction is actually cured", "test_kitty")
 	if(state == "test_kitty"):
-		playAnimation(StageScene.Duo, "stand", {npc="rahi"})
+		playAnimation(StageScene.Hug, "hug", {npc="rahi"})
 		saynn("You pull out the bottle of whiskey that you have taken away from Rahi at some point. It's still half-full. As you present it to your kitty, her eyes.. brighten up.")
 
 		saynn("[say=pc]So you're saying you have overcome your addiction?[/say]")

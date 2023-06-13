@@ -38,10 +38,11 @@ func addsIntoxication():
 	return 0.0
 
 func getTimedBuffs():
+		
 	return [
 		#buff(Buff.ExposureBuff, [100])
-		buff(Buff.FertilityBuff, [-95]),
-		buff(Buff.VirilityBuff, [-95]),
+		buff(Buff.FinalFertilityModifierBuff, [-99]),
+		buff(Buff.FinalVirilityModifierBuff, [-99]),
 	]
 
 func getBuffsDurationSeconds():

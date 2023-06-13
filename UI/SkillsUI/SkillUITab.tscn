@@ -152,10 +152,23 @@ bbcode_text = "Requirements will be shown here"
 text = "Requirements will be shown here"
 fit_content_height = true
 
-[node name="UnlockPerkButton" type="Button" parent="ScrollContainer/VBoxContainer/HBoxContainer/PanelContainer2/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer/VBoxContainer/HBoxContainer/PanelContainer2/VBoxContainer"]
 margin_top = 74.0
 margin_right = 624.0
 margin_bottom = 94.0
+
+[node name="UnlockPerkButton" type="Button" parent="ScrollContainer/VBoxContainer/HBoxContainer/PanelContainer2/VBoxContainer/HBoxContainer"]
+margin_right = 310.0
+margin_bottom = 20.0
+size_flags_horizontal = 3
 text = "Learn"
 
-[connection signal="pressed" from="ScrollContainer/VBoxContainer/HBoxContainer/PanelContainer2/VBoxContainer/UnlockPerkButton" to="." method="_on_UnlockPerkButton_pressed"]
+[node name="TogglePerkButton" type="Button" parent="ScrollContainer/VBoxContainer/HBoxContainer/PanelContainer2/VBoxContainer/HBoxContainer"]
+margin_left = 314.0
+margin_right = 624.0
+margin_bottom = 20.0
+size_flags_horizontal = 3
+text = "Toggle perk on/off"
+
+[connection signal="pressed" from="ScrollContainer/VBoxContainer/HBoxContainer/PanelContainer2/VBoxContainer/HBoxContainer/UnlockPerkButton" to="." method="_on_UnlockPerkButton_pressed"]
+[connection signal="pressed" from="ScrollContainer/VBoxContainer/HBoxContainer/PanelContainer2/VBoxContainer/HBoxContainer/TogglePerkButton" to="." method="_on_TogglePerkButton_pressed"]

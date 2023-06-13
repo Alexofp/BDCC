@@ -77,3 +77,5 @@ func canTransitionTo(_actionID, _args = []):
 		return false
 	return true
 
+func getSupportedStates():
+	return ["idle", "lightstruggle", "struggle"]

@@ -9,3 +9,8 @@ func _init():
 
 func getDoll3DScene():
 	return "res://Player/Player3D/Parts/Hair/TaviHair/TaviHair.tscn"
+
+func getTraits():
+	return {
+		PartTrait.HairOvereye: true,
+	}

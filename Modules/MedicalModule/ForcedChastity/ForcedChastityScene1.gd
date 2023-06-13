@@ -203,3 +203,9 @@ func _react(_action: String, _args):
 
 	
 	setState(_action)
+
+func getDevCommentary():
+	return "Why did I write this? I mean.. There aren't that many games that just explore chastity play. Yes, there are games that have it. They usually also have feminization/sissification in them. I have zero problems with those kinks ^^ just wanted to write some femdom + chastity fun. These scenes also explore anal orgasms ^^. They are notoriously hard to achieve for some people so I kinda tried to show that in this content."
+
+func hasDevCommentary():
+	return true

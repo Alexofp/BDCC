@@ -16,9 +16,12 @@ func react(_triggerID, _args):
 	if(idToUse == null || idToUse == ""):
 		return false
 		
+	if(GM.ES.triggerReact(Trigger.TalkingToDynamicNPC, [idToUse])):
+		return true
+		
 	runScene("InmateExposureFlashScene", [idToUse])
 
 	return true
 
 func getPriority():
-	return 4
+	return 2

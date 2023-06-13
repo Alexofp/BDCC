@@ -429,3 +429,9 @@ func _react_scene_end(_tag, _result):
 			
 			for item in GM.pc.getInventory().forceRestraintsWithTag(ItemTag.CanBeForcedByGuards, RNG.randi_range(1, 2)):
 				addMessage(item.getForcedOnMessage())
+
+func getDevCommentary():
+	return "This checkpoint.. I dunno if its even needed x3. It's more a sandbox element. A boring one that gets in the way. That's why I made it so the scene doesn't even run unless you have something illegal (the guard would always stop you before).\n\nIs it possible to make it fun? I dunno.. Maybe the checkpoint guard should be more fleshed out into an actual character that you can dominate to make him let you pass every time. Dunno."
+
+func hasDevCommentary():
+	return true

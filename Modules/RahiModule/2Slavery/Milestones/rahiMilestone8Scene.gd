@@ -167,6 +167,7 @@ func _run():
 
 		addButton("Kiss", "Might as well..", "do_kiss")
 	if(state == "do_kiss"):
+		playAnimation(StageScene.Hug, "hug", {npc="rahi"})
 		saynn("You carefully lift Rahi's veil and kiss her. She wraps her paws around you and extends it, actively kissing you back.")
 
 		saynn("Everyone in the crowd begins to clap their hands. Everyone.. expect Avy and Risha. One of them has her arms crossed and another rolls her eyes. Who cares about them though when you are embracing Rahi. She melts from the long kiss, her legs shake slightly. But you support her nicely.")
@@ -577,3 +578,9 @@ func loadData(data):
 
 	branded = SAVE.loadVar(data, "branded", false)
 	pierced = SAVE.loadVar(data, "pierced", false)
+
+func getDevCommentary():
+	return "I'm sorry I can't really add dev commentaries to each scene. I'm writing this literally hours before the next release x3. But hopefully you liked Rahi's content. I sure did enjoy writing it. I really enjoy when I get to explore one of my characters. That is, when I have a good direction for them x3. Tavi and Rahi clicked for me. Other characters are yet to do that.\n\nWill there be more content dedicated solely to Rahi? Probably not. I already took 2 updates writing what I have. Rahi probably has more sex scenes than the rest of the game combined right now x3. But that's what passion does to you I guess. What is passion anyway..\n\nA happy ending no matter what ending you choose. Why not, I think the little brown kitty deserves it. Is her story truly over though? ^^"
+
+func hasDevCommentary():
+	return true

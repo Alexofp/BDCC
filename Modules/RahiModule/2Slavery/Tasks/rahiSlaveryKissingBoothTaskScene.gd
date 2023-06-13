@@ -76,7 +76,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "easy_someone")
 	if(state == "easy_someone"):
-		playAnimation(StageScene.Duo, "stand", {pc="rahi", npc=npc_id})
+		playAnimation(StageScene.Hug, "hug", {pc="rahi", npc=npc_id})
 		saynn("Some inmate approaches Rahi and asks her about the hand-made booth. Rahi puts on a fake kind smile and explains everything.")
 
 		saynn("[say=rahi]She is offering hugs for one credit..[/say]")
@@ -111,7 +111,7 @@ func _run():
 			addButton("Continue", "See what happens next", "stop_task")
 	if(state == "easy_outcome"):
 		removeCharacter(npc_id)
-		playAnimation(StageScene.Duo, "stand", {npc="rahi"})
+		playAnimation(StageScene.Hug, "hug", {npc="rahi"})
 		saynn("After everyone gets their hugs from Rahi, she returns to you, looking happy. She succeeded.")
 
 		saynn("She gives you a chip with your share of Rahi's earnings. And then she hugs you too.")

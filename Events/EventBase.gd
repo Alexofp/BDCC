@@ -104,3 +104,16 @@ func generateNpcForPool(poolID, generator, _args = {}):
 func grabNpcIDFromPoolOrGenerate(poolID, _conditions, generator, _args = {}):
 	return NpcFinder.grabNpcIDFromPoolOrGenerate(poolID, _conditions, generator, _args)
 	
+func getCharacter(charID: String) -> BaseCharacter:
+	return GlobalRegistry.getCharacter(charID)
+
+func getModule(modID: String):
+	return GlobalRegistry.getModule(modID)
+	
+func addMessage(theMessage: String):
+	GM.main.addMessage(theMessage)
+
+func addExperienceToPlayer(ex: int, showMessage: bool = true):
+	if(showMessage):
+		addMessage("You received "+str(ex)+" experience")
+	GM.pc.addExperience(ex)

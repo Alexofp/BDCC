@@ -20,3 +20,6 @@ func progressGoal(_sexEngine, _domInfo, _subInfo, _data, _args = []):
 
 func getSubGoals(_sexEngine, _domInfo, _subInfo, _data):
 	return {}
+
+func canLeadToSubsPregnancy(_sexEngine, _domInfo, _subInfo, _data):
+	return false

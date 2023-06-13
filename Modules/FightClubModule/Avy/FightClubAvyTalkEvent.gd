@@ -15,7 +15,10 @@ func run(_triggerID, _args):
 		if(!getFlag("FightClubModule.AvyIntroduced")):
 			addButtonUnlessLate("Avy", "Approach the dickgirl", "avyfirst")
 		else:
-			addButtonUnlessLate("Avy", "Approach the dickgirl", "avy")
+			if(getFlag("FightClubModule.AvyIsInSlutwall")):
+				addDisabledButton("Avy", "Avy is still stuck inside the slutwall")
+			else:
+				addButtonUnlessLate("Avy", "Approach the dickgirl", "avy")
 
 func getPriority():
 	return 0
