@@ -4,7 +4,7 @@ var amount = 0
 var displayAmount = 0
 
 func _init():
-	id = Buff.FertilityBuff
+	id = Buff.FinalFertilityModifierBuff
 
 func initBuff(_args):
 	amount = _args[0]
@@ -14,7 +14,7 @@ func getVisibleDescription():
 	var text = str(Util.roundF(displayAmount, 1))
 	if(amount > 0):
 		text = "+"+text
-	return "Fertility "+text+"%"
+	return "Fertility Modifier "+text+"%"
 
 func apply(_buffHolder):
 	var modifier = 1.0
