@@ -645,3 +645,9 @@ func loadData(data):
 	isTrib = SAVE.loadVar(data, "isTrib", false)
 	usedCondom = SAVE.loadVar(data, "usedCondom", false)
 	condomBroke = SAVE.loadVar(data, "condomBroke", false)
+
+func getDevCommentary():
+	return "This scene is just.. light at the end of the tunnel. It's that glimpse of hope that makes us keep going.. You can be happy even in a shitty situation.."
+
+func hasDevCommentary():
+	return true

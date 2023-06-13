@@ -348,3 +348,9 @@ func _react(_action: String, _args):
 
 	
 	setState(_action)
+
+func getDevCommentary():
+	return "Tavi is fun to write. Tavi is kinda my dominant side just concentrated in one character. With some weaknesses sprinkled on top x3. She will act smart but if she can see that she isn't fooling anyone - why embarrass yourself. Just try to get the best out of the situation you are given. That's basically Tavi."
+
+func hasDevCommentary():
+	return true

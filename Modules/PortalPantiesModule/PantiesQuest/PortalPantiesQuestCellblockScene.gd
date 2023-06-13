@@ -767,3 +767,9 @@ func _react_scene_end(_tag, _result):
 		else:
 			setState("if_lost")
 			addExperienceToPlayer(30)
+
+func getDevCommentary():
+	return "This scene is fun x3. Just because one of the options involves you fucking yourself. Why can't you do that outside of this scene?.. Because I'm lazy.. It would require me to change the logic a little.. have the fleshlight be an actual item.. or like.. one for each hole/dick?.. Just like, thinking about how I should implement it is kinda exhausting already. But if you wanna write that yourself, go ahead ^^."
+
+func hasDevCommentary():
+	return true

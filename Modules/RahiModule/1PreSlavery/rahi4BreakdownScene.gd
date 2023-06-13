@@ -353,3 +353,9 @@ func loadData(data):
 
 	visited_cell = SAVE.loadVar(data, "visited_cell", false)
 	visited_medical = SAVE.loadVar(data, "visited_medical", false)
+
+func getDevCommentary():
+	return "And this is the anti-climax of Rahi's story. Basically, if the player wasn't around.. You know.. But yeah. You might ask me. Rahi, why did you include this super dark scene in my funny non-con fetish game? Well.. Just to show Rahi at her lowest, is all.. Without the lows we can't appreciate the highs.\n\nIt was a very experimental scene, I had no idea what the reaction would be. But most seemed to care for Rahi x3. Which is nice.\n\nAnd yeah, remember, this Rahi is not me. These events are purely fictional and all that.. But we all probably had that feeling sometimes.. 'why not just end it all..'. Usually when we're depressed. And usually our brains save us from actually going through. Something usually keeps us wanting to stay in this world. For Rahi it was alcohol, the last straw. When that was taken away.. nothing was holding Rahi back anymore. Hopefully that makes some sense x3"
+
+func hasDevCommentary():
+	return true

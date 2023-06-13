@@ -511,3 +511,9 @@ func _react(_action: String, _args):
 		return
 	
 	setState(_action)
+
+func getDevCommentary():
+	return "The first scene where you get some agency. Kinda x3. It's still linear af but you do get a good dilemma. Do you accept that you maybe enjoy anal or not??\n\nIt's also a scene that I had to animate the horsecock dildo for. Just like fuckmachine, its a separate rigged object that has a skeleton and stuff. Just so I would be able to bend it and stuff x3. Otherwise it would probably look kinda stiff."
+
+func hasDevCommentary():
+	return true

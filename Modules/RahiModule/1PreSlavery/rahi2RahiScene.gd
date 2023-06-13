@@ -504,3 +504,9 @@ func loadData(data):
 	.loadData(data)
 
 	guard_id = SAVE.loadVar(data, "guard_id", "")
+
+func getDevCommentary():
+	return "This is the payoff for the other 'chill' scene x3. Ideally, this time, different thoughts should be going through your head. Thoughts like 'maybe she shouldn't do that'.\n\nBut basically I'm just speedrunning Rahi's self-destruction here, to set her up for the anti-climax.. is that even a term? x3"
+
+func hasDevCommentary():
+	return true

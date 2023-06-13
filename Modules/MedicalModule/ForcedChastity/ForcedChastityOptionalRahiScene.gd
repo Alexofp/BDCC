@@ -292,3 +292,9 @@ func _react(_action: String, _args):
 
 	
 	setState(_action)
+
+func getDevCommentary():
+	return "This is the first scene that I wrote where Rahi acts like a dom ^^. This was way before the dedicated content for Rahi was written. Kind of a test to see if people would like domme Rahi. And I think it was a success ^^\n\nJust so you know, in-game Rahi is not me, not even close. Yes, she is shy. And I'm shy too. That's about it, heh. I used to add lots of dots.. at the end of my chat messages.. people were asking if I'm sad.. I don't think I was.. x3 I still do use them in my writing when I feel like they fit. They help to slow down the scene a little without adding extra words. Like..\n\nSpace.. Stars.. Sky.. Clouds.. Trees.. Rahi.. walking home.."
+
+func hasDevCommentary():
+	return true

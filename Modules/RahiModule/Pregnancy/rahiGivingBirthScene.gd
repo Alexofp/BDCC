@@ -637,3 +637,9 @@ func loadData(data):
 	howManyBirths = SAVE.loadVar(data, "howManyBirths", 0)
 	bornString = SAVE.loadVar(data, "bornString", "")
 	bornChildAmount = SAVE.loadVar(data, "bornChildAmount", 0)
+
+func getDevCommentary():
+	return "I'm more of a 'pls breed - no preg' kind of person x3. For some reason the nature has decided that giving birth for us humans needed to be super painful. But oh well, what can you do. That's why I yada-yada most of this stuff. But some people are really into it so might as well keep some fun parts like cradling your kids..\n\nThe bedtime story is obviously referencing Rahi and you being stuck in the prison x3. I tried to put a little spin on it."
+
+func hasDevCommentary():
+	return true

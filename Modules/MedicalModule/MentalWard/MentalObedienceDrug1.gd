@@ -255,4 +255,8 @@ func _react(_action: String, _args):
 	
 	setState(_action)
 
+func getDevCommentary():
+	return "Obedience drug. Probably the most generic drug that a horny person can come up with x3. I know at least one lewd movie that has it.. well, a form of it.\n\nBut basically I tried to ground it in reality somewhat, explain why it works. Humans are simple really, we do what we wanna do and avoid doing what we don't wanna do x3. I know, shocking. But just because its obvious it doesn't mean that its wrong. So the point it.. if any action is met with pain, we will try to avoid doing that action ^^. And what if that 'action' is a 'disobey' action.. x3"
 
+func hasDevCommentary():
+	return true

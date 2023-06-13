@@ -346,3 +346,9 @@ func loadData(data):
 	isGoodGirl = SAVE.loadVar(data, "isGoodGirl", false)
 	isBadGirl = SAVE.loadVar(data, "isBadGirl", false)
 	isFuckYou = SAVE.loadVar(data, "isFuckYou", false)
+
+func getDevCommentary():
+	return "Nova's optional scene is probably the most.. sissification-like. Why? Well, why not x3. Might as well explore that concept a little bit. And Nova fits for that role pretty well."
+
+func hasDevCommentary():
+	return true

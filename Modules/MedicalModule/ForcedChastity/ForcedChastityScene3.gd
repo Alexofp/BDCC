@@ -290,3 +290,9 @@ func loadData(data):
 	.loadData(data)
 	
 	howMuchMilked = SAVE.loadVar(data, "howMuchMilked", 10.0)
+
+func getDevCommentary():
+	return "The fuckmachine was fun to animate x3. It's called a fully rigged object, that's why I can move it so fluently and even bend the tip. I want more objects like that but they do take a whiiiile to set up. I have to draw it, put it into blender, rig it up, animate it. Then there is lots of godot stuff like assigning materials, creating scenes. Yeah, takes a while. But hopefully it was worth it for these scenes ^^\n\nOh yeah, this scene also the first time you get to choose who fucks you in the next scene. Why are there no male characters there? I just didn't have the time, man.. These 5 took all the time I had x3. There is only so much time I can spend on optional scenes. It's not a smart time investment. Although I should probably just make these scenes replayable at some point.."
+
+func hasDevCommentary():
+	return true

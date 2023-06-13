@@ -262,3 +262,9 @@ func _react(_action: String, _args):
 		return
 	
 	setState(_action)
+
+func getDevCommentary():
+	return "This character's name is Rahi.. And the developer's name is Rahi.. hmmmm.. your first thought is probably.. damn self-inserts!\n\nYeah, Rahi is my fursona. Is Rahi -me- though? Not really, we share a loooot of differences. I don't talk in third person x3. Most of the time.. But that's not why people are usually upset at self-inserts.\n\nPeople usually don't like them because self-inserts tend to be the idealized copies of ourselves without any flaws or problems. Nothing ever bad happens to self-inserts, every challenge is easy for them, stuff like that.\n\nDid I deliberately tried to go against that? Nah. I just wanted to portray one of the variants of Rahi that could potentially exist.. This Rahi does have bad things happen to her but not because I wanted to prove that she isn't a self-insert. She is x3\n\nRahi does have a 'built-in' flaw that is the way she speaks. I will be honest, I made her do that because tajarans in space station 13 had to talk like that and Rahi is originally from ss13 x3. I tried to explain why she does that in her dedicated content though, hopefully its logical enough ^^\n\nI hope you get my idea. Rahi is just a shy kitty. But there are no just 'shy kitties' in one of the most secure prisons in the galaxy."
+
+func hasDevCommentary():
+	return true

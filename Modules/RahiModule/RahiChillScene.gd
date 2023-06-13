@@ -223,3 +223,9 @@ func _react(_action: String, _args):
 		return
 	
 	setState(_action)
+
+func getDevCommentary():
+	return "I didn't really know at that point where I would go with Rahi while writing this chill scene. But I'm glad I included the stealing and drinking bits, they both are kinda hinting about Rahi's problems ^^.\n\nBut yeah. The game has a lot of.. conflicts. And I just wanted something calm to happen at least once. And Rahi seemed perfect for that. But you know what they say, the good stuff never lasts long..\n\nBtw, I literally never drank alcohol a single time irl x3. I have many other addictions and problems though, so don't worry"
+
+func hasDevCommentary():
+	return true

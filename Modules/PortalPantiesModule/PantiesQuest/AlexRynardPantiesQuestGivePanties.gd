@@ -220,3 +220,8 @@ func _react(_action: String, _args):
 
 	setState(_action)
 
+func getDevCommentary():
+	return "So yeah, portal panties. I don't even know if any other game has them. I'm sure there are some now but back then this tag was pretty empty even on the e621 side x3. No, there were some great art pieces already ^^. Just not that much. They are what made me want to try my hand at writing a portal panties quest.\n\nThe idea of portal sex is pretty lewd. Someone make portal panties irl pls, you will solve so many problems x3"
+
+func hasDevCommentary():
+	return true

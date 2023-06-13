@@ -277,3 +277,9 @@ func _react(_action: String, _args):
 		increaseFlag("MedicalModule.Chastity_OptionalBadBehavourCounter")
 	
 	setState(_action)
+
+func getDevCommentary():
+	return "Writing conflicts is kinda fun. Dunno why. But if you ever saw any movie or read any book.. There is always a conflict. No, not just one conflict. Many of them. BDCC has a huge core conflict in its lore (AlphaCorp vs Syndicate). The gameplay has a big conflict too (inmates vs staff vs other inmates). And then most of the scenes also have conflicts in them x3.\n\nBasically you always gotta search for those interesting conflicts. They don't have to be obvious like characters hating each other. Silent conflicts are the beeeeest. If you can make one character say 'have a good day' but actually mean 'hope you die bitch' and the reader can pick up on that, you are golden. It's also called subtext ^^. I'm not really that good at it, my writing isn't perfect, I know that.."
+
+func hasDevCommentary():
+	return true

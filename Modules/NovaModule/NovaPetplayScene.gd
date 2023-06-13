@@ -870,3 +870,9 @@ func loadData(data):
 	isPuppy = SAVE.loadVar(data, "isPuppy", false)
 	usedCondom = SAVE.loadVar(data, "usedCondom", false)
 	condomBroke = SAVE.loadVar(data, "condomBroke", false)
+
+func getDevCommentary():
+	return "Petplay is fun. If you ever played TiTs, that game had a really fun scene where you walk one of the cuties around the station. It was pure text but still fun to read. Very lewd too. It probably what planted a seed in my head and made me enjoy that particular kink ^^. But yeah, I tried to replicate that fun in this scene. To lesser success probably.. If you want better petplay scene, try Rahi's content, I tried to go all-out in those scenes.."
+
+func hasDevCommentary():
+	return true
