@@ -333,8 +333,8 @@ func _run():
 		addButton("Follow", "See where Rahi goes now", "rahi_near_vendomat")
 	if(state == "rahi_near_vendomat"):
 		playAnimation(StageScene.Duo, "stand", {npc="rahi"})
-		aimCameraAndSetLocName("MainVendomatRoom")
-		GM.pc.setLocation("MainVendomatRoom")
+		aimCameraAndSetLocName("main_hallroom1")
+		GM.pc.setLocation("main_hallroom1")
 		saynn("You peek your head from behind the corner and see Rahi approaching the vendomat in the main hall, her paw is sneakily holding some item. The machine beeps as the feline presses that item against the same spot where you put your credits in.")
 
 		saynn("Even from a distance, you notice that the menu that is presented to her is much bigger than usual. Huh. Rahi selects one of the options and waits for the machine to dispense that item for her. To no surprise, it's alcohol, a fresh bottle of space whiskey. A bottle that she already makes some gulps out of and then quickly hides under her shirt.")
