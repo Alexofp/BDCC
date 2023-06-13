@@ -160,7 +160,7 @@ func ovulate():
 		var ch = getCharacter()
 		var amountOfEggs = RNG.pickWeightedPairs(possibleEggAmounts)
 		amountOfEggs = max(ch.getMinEggsAmount(), int(ceil(amountOfEggs * ch.getEggsBonusMod())))
-		if(GM.pc.hasPerk(Perk.FertilityBetterOvulation) && amountOfEggs < 10):
+		if(ch.hasPerk(Perk.FertilityBetterOvulation) && amountOfEggs < 10):
 			amountOfEggs += RNG.randi_range(0, 4) #otherwise species with low base eggs like humans, won't get much bonus
 			
 		print(ch.getName(), " OVULATED WITH "+str(amountOfEggs)+" AMOUNT OF EGGS")
