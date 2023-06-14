@@ -311,7 +311,7 @@ func _run():
 			saynn("Your own cock shooting small strings of {pc.cum} through the little hole in the chastity cage which looks.. incredibly cute.")
 
 		elif (GM.pc.hasReachablePenis()):
-			saynn("Your own cock shooting strings of {pc.cum} while Avy is destroying your g-spot spot so much.")
+			saynn("Your own cock shooting strings of {pc.cum} while Avy is destroying your g-spot so much.")
 
 		saynn("You begin to feel the base of Avy's member inflating.. a fat meaty knot appearing.. so big that she can't just slip it inside. But who is gonna stop her from trying..")
 
@@ -394,7 +394,7 @@ func _run():
 			saynn("Your own cock shooting small strings of {pc.cum} through the little hole in the chastity cage which looks.. incredibly cute.")
 
 		elif (GM.pc.hasReachablePenis()):
-			saynn("Your own cock shooting strings of {pc.cum} while Avy is destroying your p-spot spot so much.")
+			saynn("Your own cock shooting strings of {pc.cum} while Avy is destroying your p-spot so much.")
 
 		saynn("You begin to feel the base of Avy's member inflating.. a fat meaty knot appearing.. so big that she can't just slip it inside. But who is gonna stop her from trying..")
 
