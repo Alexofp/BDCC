@@ -55,10 +55,27 @@ func getBuffsDurationTurns():
 func getTags():
 	return [
 		ItemTag.SoldByMedicalVendomat,
+		ItemTag.SexEngineDrug,
 		]
 
 func getBuyAmount():
 	return 1
+
+func getSexEngineInfo(_sexEngine, _domInfo, _subInfo):
+	var sub:BaseCharacter = _subInfo.getChar()
+	var dom:BaseCharacter = _domInfo.getChar()
+	
+	return {
+		"name": "Anaphrodisiac pill",
+		"usedName": "an anaphrodisiac pill",
+		"desc": "Kills your libido. Use it if you want to ruin the sex for them.",
+		"scoreOnSub": 0.0,
+		"scoreOnSelf": 0.0,
+		"scoreSubScore": 0.0,
+		"canUseOnDom": !dom.hasEffect(StatusEffect.SexAnaphrodisiacDrug),
+		"canUseOnSub": !sub.hasEffect(StatusEffect.SexAnaphrodisiacDrug),
+		"maxUsesByNPC": 1,
+	}
 
 func useInSex(_receiver):
 	_receiver.addEffect(StatusEffect.SexAnaphrodisiacDrug)

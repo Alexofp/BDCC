@@ -56,10 +56,27 @@ func getBuffsDurationTurns():
 func getTags():
 	return [
 		ItemTag.SoldByMedicalVendomat,
+		ItemTag.SexEngineDrug,
 		]
 
 func getBuyAmount():
 	return 1
+
+func getSexEngineInfo(_sexEngine, _domInfo, _subInfo):
+	var sub:BaseCharacter = _subInfo.getChar()
+	var dom:BaseCharacter = _domInfo.getChar()
+	
+	return {
+		"name": "Heat pill",
+		"usedName": "a heat-inducing pill",
+		"desc": "Makes you very horny and primes for breeding by forcing heat.",
+		"scoreOnSub": _domInfo.goalsScoreMax({SexGoal.FuckVaginal: 1.0, SexGoal.FuckAnal: 0.5}, _subInfo.charID)*_domInfo.fetishScore({Fetish.Breeding: 1.0}),
+		"scoreOnSelf": _domInfo.goalsScoreMax({SexGoal.ReceiveVaginal: 1.0, SexGoal.ReceiveAnal: 0.5}, _subInfo.charID)*_domInfo.fetishScore({Fetish.BeingBred: 1.0}),
+		"scoreSubScore": _subInfo.fetishScore({Fetish.BeingBred: 1.0}),
+		"canUseOnDom": !dom.hasEffect(StatusEffect.SexHeatDrug),
+		"canUseOnSub": !sub.hasEffect(StatusEffect.SexHeatDrug),
+		"maxUsesByNPC": 1,
+	}
 
 func useInSex(_receiver):
 	_receiver.forceIntoHeat()

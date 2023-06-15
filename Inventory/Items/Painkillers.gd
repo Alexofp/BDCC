@@ -61,7 +61,24 @@ func getBuffsDurationTurns():
 func getTags():
 	return [
 		ItemTag.SoldByMedicalVendomat,
+		ItemTag.SexEngineDrug,
 		]
+
+func getSexEngineInfo(_sexEngine, _domInfo, _subInfo):
+	#var sub:BaseCharacter = _subInfo.getChar()
+	#var dom:BaseCharacter = _domInfo.getChar()
+	
+	return {
+		"name": "Painkillers",
+		"usedName": "a painkiller pill",
+		"desc": "Helps with the pain.",
+		"scoreOnSub": 0.0,
+		"scoreOnSelf": float(_domInfo.getChar().getPainLevel() >= 0.5),
+		"scoreSubScore": 1.0,
+		"canUseOnDom": true,
+		"canUseOnSub": true,
+		"maxUsesByNPC": 1,
+	}
 
 func useInSex(_receiver):
 	_receiver.addPain(-80)

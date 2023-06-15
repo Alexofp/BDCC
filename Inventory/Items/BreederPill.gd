@@ -60,10 +60,27 @@ func getBuffsDurationTurns():
 func getTags():
 	return [
 		ItemTag.SoldByMedicalVendomat,
+		ItemTag.SexEngineDrug,
 		]
 
 func getBuyAmount():
 	return 3
+
+func getSexEngineInfo(_sexEngine, _domInfo, _subInfo):
+	#var sub:BaseCharacter = _subInfo.getChar()
+	#var dom:BaseCharacter = _domInfo.getChar()
+	
+	return {
+		"name": "Breeder pill",
+		"usedName": "a breeder pill",
+		"desc": "Makes you more fertile and your cum more virile.",
+		"scoreOnSub": _domInfo.goalsScoreMax({SexGoal.ReceiveVaginal: 1.0, SexGoal.ReceiveAnal: 0.2}, _subInfo.charID)*_domInfo.fetishScore({Fetish.BeingBred: 1.0}),
+		"scoreOnSelf": _domInfo.goalsScoreMax({SexGoal.FuckVaginal: 1.0, SexGoal.FuckAnal: 0.2}, _subInfo.charID)*_domInfo.fetishScore({Fetish.Breeding: 1.0}),
+		"scoreSubScore": _subInfo.fetishScore({Fetish.Breeding: 1.0}),
+		"canUseOnDom": true,
+		"canUseOnSub": true,
+		"maxUsesByNPC": 1,
+	}
 
 func useInSex(_receiver):
 	_receiver.addTimedBuffs(getTimedBuffs(), getBuffsDurationSeconds())

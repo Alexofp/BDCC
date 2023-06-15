@@ -14,6 +14,7 @@ enum {
 	ChastityCage,
 	Strapon,
 	BreastPump,
+	SexEngineDrug,
 	
 	GuardUniform,
 	NurseUniform,
