@@ -85,6 +85,11 @@ func getFlags():
 		"Ch4KaitStocksUsedByOthers": flag(FlagType.Bool),
 		"Ch4KaitStocksPunishedByPC": flag(FlagType.Bool),
 		
+		# Character 5
+		"Ch5NewPlanSceneHappend": flag(FlagType.Bool),
+		"Ch5LastGuardLooted": flag(FlagType.Text),
+		"Ch5StoleDatapadFromNova": flag(FlagType.Bool),
+		"Ch5BlackmailedNova": flag(FlagType.Bool),
 	}
 
 func _init():
