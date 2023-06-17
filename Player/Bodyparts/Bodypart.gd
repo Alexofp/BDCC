@@ -215,3 +215,14 @@ func npcGenerationWeight(_dynamicCharacter):
 func generateDataFor(_dynamicCharacter):
 	if(orifice != null):
 		orifice.generateDataFor(_dynamicCharacter)
+
+func supportsSkin():
+	return true
+
+func getSkinData():
+	return {
+		"skin": "SkinExample",
+		"r": Color.aqua,
+		"g": Color.blueviolet,
+		"b": Color.tan,
+	}

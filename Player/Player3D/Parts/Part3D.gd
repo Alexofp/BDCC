@@ -15,6 +15,13 @@ func initPart(newDoll3d):
 #			#child.skeleton = dollSkeleton.getSkeleton().get_path()
 #			child.skeleton = child.get_path_to(dollSkeleton.getSkeleton())
 
+func setDoll3d(newDoll3d):
+	doll3D = newDoll3d
+	dollSkeleton = doll3D.getDollSkeleton()
+
+func getDoll():
+	return doll3D
+
 func onRemoved():
 	for proxy in attachProxies:
 		doll3D.removeDollAttachmentZone(proxy.dollAttachmentZone)
@@ -52,6 +59,9 @@ func setSkeletonRecursive(childnode, skeleton):
 		if(!partPickers.has(childnode.getState())):
 			partPickers[childnode.getState()] = []
 		partPickers[childnode.getState()].append(childnode)
+	if(childnode is MeshInstanceWithPattern):
+		childnode.partRef = weakref(self)
+		childnode.updateMaterial()
 	
 	for child in childnode.get_children():
 		setSkeletonRecursive(child, skeleton)

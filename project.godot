@@ -639,6 +639,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Game/Pregnancy/MenstrualCycle.gd"
 }, {
+"base": "MeshInstance",
+"class": "MeshInstanceWithPattern",
+"language": "GDScript",
+"path": "res://Player/Player3D/Parts/MeshWithPattern.gd"
+}, {
 "base": "Reference",
 "class": "ModEntry",
 "language": "GDScript",
@@ -990,6 +995,11 @@ _global_script_classes=[ {
 "path": "res://Skills/SkillsHolder.gd"
 }, {
 "base": "Reference",
+"class": "SkinBase",
+"language": "GDScript",
+"path": "res://Player/Player3D/Skins/SkinBase.gd"
+}, {
+"base": "Reference",
 "class": "Species",
 "language": "GDScript",
 "path": "res://Species/BaseSpecies.gd"
@@ -1231,6 +1241,7 @@ _global_script_class_icons={
 "MedicalLoot": "",
 "MedicalModule": "",
 "MenstrualCycle": "",
+"MeshInstanceWithPattern": "",
 "ModEntry": "",
 "Module": "",
 "MyBoneAttachment": "",
@@ -1301,6 +1312,7 @@ _global_script_class_icons={
 "Skill": "",
 "SkillBase": "",
 "SkillsHolder": "",
+"SkinBase": "",
 "Species": "",
 "SpeciesCompatibility": "",
 "Stage3D": "",

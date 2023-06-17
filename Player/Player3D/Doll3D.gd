@@ -10,6 +10,7 @@ var overridenPartHidden = {}
 var savedCharacterID: String
 var temporaryState = {}
 var exposedBodyparts = []
+var skinData = {}
 
 var armsCuffed = false
 var armsPuppy = false
@@ -161,6 +162,7 @@ func addPartObject(slot, part: Spatial):
 		parts[slot].queue_free()
 		parts.erase(slot)
 	
+	part.setDoll3d(self)
 	parts[slot] = part
 	getDollSkeleton().getSkeleton().add_child(part)
 	
@@ -638,3 +640,15 @@ func applyData(data):
 			skeleton.set_bone_pose(boneIndex, t)
 		else:
 			skeleton.set_bone_pose(boneIndex, ini)
+
+func clearSkinData():
+	skinData.clear()
+
+func setSkinData(thedata):
+	skinData = thedata
+
+func getSkinDataByID(theID):
+	if(!skinData.has(theID)):
+		return {}
+	
+	return skinData[theID]

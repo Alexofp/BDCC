@@ -1408,6 +1408,15 @@ func softUpdateDoll(doll: Doll3D):
 
 func updateDoll(doll: Doll3D):
 	
+	var skinData = {}
+	for bodypartSlot in bodyparts:
+		var bodypart = getBodypart(bodypartSlot)
+		if(bodypart == null):
+			continue
+		if(bodypart.supportsSkin()):
+			skinData[bodypartSlot] = bodypart.getSkinData()
+	doll.setSkinData(skinData)
+	
 	var parts = getDollParts()
 	
 	var newAlphas = {}
