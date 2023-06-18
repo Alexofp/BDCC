@@ -94,6 +94,11 @@ func testBody():
 	#setShapeKeyValue("Pregnant", 1.0)
 	pass 
 
+func updateMaterials():
+	for slot in parts:
+		var part = parts[slot]
+		part.updateMaterial()
+
 func setState(stateID, value):
 	state[stateID] = value
 	

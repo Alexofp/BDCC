@@ -1,7 +1,8 @@
-[gd_resource type="ShaderMaterial" load_steps=4 format=2]
+[gd_resource type="ShaderMaterial" load_steps=5 format=2]
 
 [ext_resource path="res://Player/Player3D/Parts/Body/HumanBody/body.png" type="Texture" id=1]
 [ext_resource path="res://Player/Player3D/Skins/SkinExample/SkinExample.png" type="Texture" id=2]
+[ext_resource path="res://Player/Player3D/Skins/defaultoverlay.png" type="Texture" id=3]
 
 [sub_resource type="Shader" id=19]
 code = "// NOTE: Shader automatically converted from Godot Engine 3.5.2.stable's SpatialMaterial.
@@ -11,6 +12,7 @@ render_mode async_visible,blend_mix,depth_draw_alpha_prepass,cull_disabled,diffu
 uniform vec4 albedo : hint_color;
 uniform sampler2D texture_albedo : hint_albedo;
 uniform sampler2D texture_pattern : hint_albedo;
+uniform sampler2D texture_customOverlay : hint_albedo;
 uniform float specular;
 uniform float metallic;
 uniform float roughness : hint_range(0,1);
@@ -39,9 +41,13 @@ void fragment() {
 	vec2 base_uv = UV;
 	
 	vec4 pattern_tex = texture(texture_pattern,UV_pattern);
-	vec4 pattern_color = (pattern_tex.r * pattern_red_color + pattern_tex.b * pattern_blue_color + pattern_tex.g * pattern_green_color);
+	pattern_tex.rgb = normalize(pattern_tex.rgb);
+	vec3 pattern_color = clamp(pattern_tex.r * pattern_red_color.rgb + pattern_tex.b * pattern_blue_color.rgb + pattern_tex.g * pattern_green_color.rgb, vec3(0.0), vec3(1.0));
+	
+	vec4 overlay_tex = texture(texture_customOverlay,base_uv);
 	
 	vec4 albedo_tex = texture(texture_albedo,base_uv) * vec4(pattern_color.rgb, 1.0);
+	albedo_tex = overlay_tex * overlay_tex.a + albedo_tex*(1.0 - overlay_tex.a);
 	ALBEDO = albedo.rgb * albedo_tex.rgb;
 	METALLIC = metallic;
 	ROUGHNESS = roughness;
@@ -55,8 +61,8 @@ resource_local_to_scene = true
 resource_name = "bodywide.png"
 shader = SubResource( 19 )
 shader_param/albedo = Color( 1, 1, 1, 1 )
-shader_param/specular = 0.5
-shader_param/metallic = 0.5
+shader_param/specular = 0.0
+shader_param/metallic = 0.0
 shader_param/roughness = 1.0
 shader_param/point_size = 1.0
 shader_param/uv1_scale = Vector3( 1, 1, 1 )
@@ -65,8 +71,9 @@ shader_param/uv2_scale = Vector3( 1, 1, 1 )
 shader_param/uv2_offset = Vector3( 0, 0, 0 )
 shader_param/pattern_start = Vector2( 0, 0 )
 shader_param/pattern_size = Vector2( 0.125, 0.25 )
-shader_param/pattern_red_color = Color( 1, 0, 0, 1 )
-shader_param/pattern_blue_color = Color( 0, 0, 1, 1 )
-shader_param/pattern_green_color = Color( 0, 1, 0, 1 )
+shader_param/pattern_red_color = Color( 0.898039, 0.203922, 0.203922, 1 )
+shader_param/pattern_blue_color = Color( 0.239216, 0.415686, 0.2, 1 )
+shader_param/pattern_green_color = Color( 1, 1, 1, 1 )
 shader_param/texture_albedo = ExtResource( 1 )
 shader_param/texture_pattern = ExtResource( 2 )
+shader_param/texture_customOverlay = ExtResource( 3 )

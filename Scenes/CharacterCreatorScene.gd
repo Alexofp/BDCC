@@ -6,6 +6,8 @@ var pickedAttribID = ""
 var bodyPickedAttribID = ""
 var debugMode = false
 
+var colorPickerScene = preload("res://UI/ColorPickerWidget.tscn")
+
 func _initScene(_args = []):
 	if(_args.size() > 0 && _args[0]):
 		debugMode = true
@@ -189,6 +191,13 @@ func _run():
 		var currentAttribute = attributes[pickedAttribID]
 		
 		saynn(currentAttribute["text"])
+		if(currentAttribute.has("type")):
+			var attribType = currentAttribute["type"]
+			if(attribType == "color"):
+				var colorPicker = colorPickerScene.instance()
+				GM.ui.addCustomControl("colorpicker", colorPicker)
+				if(currentAttribute.has("currentColor") && currentAttribute["currentColor"] != null):
+					colorPicker.setCurrentColor(currentAttribute["currentColor"])
 		
 		for option in currentAttribute["options"]:
 			addButton(option[1], option[2], "setAttribute", [option[0]])
@@ -225,6 +234,13 @@ func _run():
 		var currentAttribute = attributes[bodyPickedAttribID]
 		
 		saynn(currentAttribute["text"])
+		if(currentAttribute.has("type")):
+			var attribType = currentAttribute["type"]
+			if(attribType == "color"):
+				var colorPicker = colorPickerScene.instance()
+				GM.ui.addCustomControl("colorpicker", colorPicker)
+				if(currentAttribute.has("currentColor")):
+					colorPicker.setCurrentColor(currentAttribute["currentColor"])
 		
 		for option in currentAttribute["options"]:
 			addButton(option[1], option[2], "bodySetAttribute", [option[0]])
@@ -256,10 +272,16 @@ func _react(_action: String, _args):
 	if(_action == "setAttribute"):
 		var pickedValue = _args[0]
 		var bodypart = GM.pc.getBodypart(pickingBodypartType)
-		#var attributes = bodypart.getPickableAttributes()
-		#var currentAttribute = attributes[pickedAttribID]
+		var attributes = bodypart.getPickableAttributes()
+		var currentAttribute = attributes[pickedAttribID]
 		
-		bodypart.applyAttribute(pickedAttribID, pickedValue)
+		if(currentAttribute.has("type") && currentAttribute["type"] == "color" && pickedValue == 1):
+			var colorPicker = GM.ui.getCustomControl("colorpicker")
+			bodypart.applyAttribute(pickedAttribID, colorPicker.getCurrentColor())
+		else:
+			bodypart.applyAttribute(pickedAttribID, pickedValue)
+		
+		#bodypart.applyAttribute(pickedAttribID, pickedValue)
 		GM.pc.updateAppearance()
 		setState("bodypartAttributes")
 		return
@@ -270,8 +292,14 @@ func _react(_action: String, _args):
 	
 	if(_action == "bodySetAttribute"):
 		var pickedValue = _args[0]
+		var attributes = GM.pc.getPickableAttributes()
+		var currentAttribute = attributes[bodyPickedAttribID]
 		
-		GM.pc.applyAttribute(bodyPickedAttribID, pickedValue)
+		if(currentAttribute.has("type") && currentAttribute["type"] == "color" && pickedValue == 1):
+			var colorPicker = GM.ui.getCustomControl("colorpicker")
+			GM.pc.applyAttribute(bodyPickedAttribID, colorPicker.getCurrentColor())
+		else:
+			GM.pc.applyAttribute(bodyPickedAttribID, pickedValue)
 		GM.pc.updateAppearance()
 		setState("bodyAttributes")
 		return

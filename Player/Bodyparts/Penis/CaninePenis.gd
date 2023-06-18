@@ -3,6 +3,8 @@ extends BodypartPenis
 func _init():
 	visibleName = "knotted penis"
 	id = "caninepenis"
+	pickedGColor = Color.red
+	pickedBColor = Color.red
 
 func getCompatibleSpecies():
 	return [Species.Any]
@@ -17,3 +19,6 @@ func getTraits():
 	return {
 		PartTrait.PenisKnot: true,
 	}
+
+func hasCustomSkinPattern():
+	return false

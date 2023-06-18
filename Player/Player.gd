@@ -17,6 +17,11 @@ var inmateNumber = "12859"
 var pickedFemininity: int = 50
 var pickedThickness: int = 50
 var inmateType = InmateType.General
+var pickedSkin:String = "EmptySkin"
+var pickedSkinRColor:Color = Color.white
+var pickedSkinGColor:Color = Color.lightgray
+var pickedSkinBColor:Color = Color.darkgray
+
 
 # Intoxication stuff
 var intoxication: float = 0.0
@@ -466,6 +471,10 @@ func saveData():
 		"arousal": arousal,
 		"consciousness": consciousness,
 		"dynamicPersonality": dynamicPersonality,
+		"pickedSkin": pickedSkin,
+		"pickedSkinRColor": pickedSkinRColor.to_html(),
+		"pickedSkinGColor": pickedSkinGColor.to_html(),
+		"pickedSkinBColor": pickedSkinBColor.to_html(),
 	}
 	
 	data["bodyparts"] = {}
@@ -514,6 +523,10 @@ func loadData(data):
 	arousal = SAVE.loadVar(data, "arousal", 0.0)
 	consciousness = SAVE.loadVar(data, "consciousness", 1.0)
 	dynamicPersonality = SAVE.loadVar(data, "dynamicPersonality", false)
+	pickedSkin = SAVE.loadVar(data, "pickedSkin", "EmptySkin")
+	pickedSkinRColor = Color(SAVE.loadVar(data, "pickedSkinRColor", "ffffff"))
+	pickedSkinGColor = Color(SAVE.loadVar(data, "pickedSkinGColor", "cccccc"))
+	pickedSkinBColor = Color(SAVE.loadVar(data, "pickedSkinBColor", "999999"))
 	
 	resetSlots()
 	var loadedBodyparts = SAVE.loadVar(data, "bodyparts", {})
@@ -707,6 +720,11 @@ func getThickness() -> int:
 	return pickedThickness
 
 func getPickableAttributes():
+	var skinsOptions = []
+	for skinID in GlobalRegistry.getSkins():
+		var theSkin = GlobalRegistry.getSkin(skinID)
+		skinsOptions.append([skinID, theSkin.getName(), "Pick this skin"])
+	
 	return {
 		"femininity": {
 			"text": "Pick how feminine or masculine you are",
@@ -736,6 +754,36 @@ func getPickableAttributes():
 				[200, "200% thick", "Sooo thicc"],
 			]
 		},
+		"skin": {
+			"text": "Pick your base skin. All bodyparts will use this skin unless overridden.",
+			"textButton": "Skin",
+			"buttonDesc": "Change your skin type",
+			"options": skinsOptions,
+		},
+		"skinPrimaryColor": {
+			"text": "Pick your primary color.",
+			"textButton": "Primary color",
+			"buttonDesc": "Change the primary color of your skin",
+			"options": [[1, "Select", "Pick this color"]],
+			"type": "color",
+			"currentColor": pickedSkinRColor,
+		},
+		"skinSecondaryColor": {
+			"text": "Pick your secondary color.",
+			"textButton": "Secondary color",
+			"buttonDesc": "Change the secondary color of your skin",
+			"options": [[1, "Select", "Pick this color"]],
+			"type": "color",
+			"currentColor": pickedSkinGColor,
+		},
+		"skinTertiaryColor": {
+			"text": "Pick your tertiary color.",
+			"textButton": "Tertiary color",
+			"buttonDesc": "Change the tertiary color of your skin",
+			"options": [[1, "Select", "Pick this color"]],
+			"type": "color",
+			"currentColor": pickedSkinBColor,
+		},
 	}
 	
 func applyAttribute(_attrID: String, _attrValue):
@@ -743,6 +791,14 @@ func applyAttribute(_attrID: String, _attrValue):
 		pickedFemininity = _attrValue
 	if(_attrID == "thickness"):
 		pickedThickness = _attrValue
+	if(_attrID == "skin"):
+		pickedSkin = _attrValue
+	if(_attrID == "skinPrimaryColor"):
+		pickedSkinRColor = _attrValue
+	if(_attrID == "skinSecondaryColor"):
+		pickedSkinGColor = _attrValue
+	if(_attrID == "skinTertiaryColor"):
+		pickedSkinBColor = _attrValue
 
 func getAttributesText():
 	return [
@@ -1000,3 +1056,9 @@ func giveBirth():
 		GM.main.addMessage("AlphaCorp has transferred "+str(paycheck)+" credits to you for being a good mother.")
 	
 	return bornChildren
+
+func getBaseSkinID():
+	return pickedSkin
+
+func getBaseSkinColors():
+	return [pickedSkinRColor, pickedSkinGColor, pickedSkinBColor]

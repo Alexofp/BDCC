@@ -54,6 +54,7 @@ var sexTypes: Dictionary = {}
 var gameExtenders: Dictionary = {}
 var computers: Dictionary = {}
 var fluids: Dictionary = {}
+var skins: Dictionary = {}
 
 var bodypartStorageNode
 
@@ -341,6 +342,8 @@ func registerEverything():
 	registerGameExtenderFolder("res://Game/GameExtenders/Extenders/")
 	
 	registerComputerFolder("res://Game/Computer/")
+	
+	registerSkinsFolder("res://Player/Player3D/Skins/")
 	
 	registerModulesFolder("res://Modules/")
 	sortFightClubFighters()
@@ -1316,7 +1319,30 @@ func getScriptsInFolder(folder: String):
 		Log.printerr("An error occurred when trying to access the path "+folder)
 	
 	return result
+
+func getScriptsInSubFolders(folder: String):
+	var result = []
 	
+	var dir = Directory.new()
+	if dir.open(folder) == OK:
+		dir.list_dir_begin(true)
+		var file_name = dir.get_next()
+		while file_name != "":
+			if dir.current_is_dir():
+				var full_path = folder.plus_file(file_name)
+				result.append_array(getScriptsInFolder(full_path))
+				#print("Found directory: " + file_name)
+			else:
+#				if(file_name.get_extension() == "gd"):
+#					var full_path = folder.plus_file(file_name)
+#					result.append(full_path)
+				pass
+			file_name = dir.get_next()
+	else:
+		Log.printerr("An error occurred when trying to access the path "+folder)
+	
+	return result
+
 func registerFetishesFolder(folder: String):
 	var scripts = getScriptsInFolder(folder)
 	for scriptPath in scripts:
@@ -1468,3 +1494,27 @@ func createSexType(id: String):
 
 func getSexTypes():
 	return sexTypes
+
+
+
+
+func registerSkin(path: String):
+	var loadedClass = load(path)
+	var object = loadedClass.new()
+	
+	skins[object.id] = object
+
+func registerSkinsFolder(folder: String):
+	var scripts = getScriptsInSubFolders(folder)
+	for scriptPath in scripts:
+		registerSkin(scriptPath)
+
+func getSkin(id: String):
+	if(skins.has(id)):
+		return skins[id]
+	else:
+		Log.printerr("ERROR: skin with the id "+id+" wasn't found")
+		return null
+
+func getSkins():
+	return skins

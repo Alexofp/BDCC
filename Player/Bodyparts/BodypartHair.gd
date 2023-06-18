@@ -19,3 +19,6 @@ func npcGenerationWeight(_dynamicCharacter):
 	if(_dynamicCharacter.getGender() in [Gender.Female, Gender.Androgynous]):
 		return femaleWeight
 	return 1.0
+
+func hasCustomSkinPattern():
+	return true

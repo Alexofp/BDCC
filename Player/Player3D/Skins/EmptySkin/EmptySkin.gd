@@ -1,7 +1,7 @@
 extends SkinBase
 
 func _init():
-	id = "emptyskin"
+	id = "EmptySkin"
 	hasRedChannel = true
 	hasBlueChannel = true
 	hasGreenChannel = true

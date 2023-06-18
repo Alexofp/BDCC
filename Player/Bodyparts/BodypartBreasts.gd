@@ -78,6 +78,7 @@ func getLewdDescriptionAndName():
 	return text
 
 func getPickableAttributes():
+	var result = .getPickableAttributes()
 	var breastVariants = [
 		[BreastsSize.FOREVER_FLAT, "Forever Flat", "Your breasts will never produce milk or increase in size"],
 		[BreastsSize.FLAT, "Flat", "Flat breasts"],
@@ -87,16 +88,16 @@ func getPickableAttributes():
 			continue
 		breastVariants.append([breastSize, BreastsSize.breastSizeToString(breastSize), BreastsSize.breastSizeToCupString(breastSize)])
 	
-	return {
-		"breastsize": {
-			"text": "Change the breast size",
-			"textButton": "Breast size",
-			"buttonDesc": "Pick the breast size",
-			"options": breastVariants,
-		}
+	result["breastsize"]= {
+		"text": "Change the breast size",
+		"textButton": "Breast size",
+		"buttonDesc": "Pick the breast size",
+		"options": breastVariants,
 	}
+	return result
 	
 func applyAttribute(_attrID: String, _attrValue):
+	.applyAttribute(_attrID, _attrValue)
 	if(_attrID == "breastsize"):
 		size = _attrValue
 

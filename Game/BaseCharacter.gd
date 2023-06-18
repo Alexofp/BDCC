@@ -1331,6 +1331,24 @@ func updateLeaking(doll: Doll3D):
 		doll.setAnusLeaking(false)
 		
 func softUpdateDoll(doll: Doll3D):
+	var skinData = {}
+	var bodySkinData = getSkinData()
+	var fieldsToCheckSkin = ["skin", "r", "g", "b"]
+	for bodypartSlot in bodyparts:
+		var bodypart = getBodypart(bodypartSlot)
+		if(bodypart == null):
+			continue
+		if(bodypart.supportsSkin()):
+			var bodypartSkinData = bodypart.getSkinData()
+			for field in fieldsToCheckSkin:
+				if(!bodypartSkinData.has(field) || bodypartSkinData[field] == null):
+					if(bodySkinData.has(field)):
+						bodypartSkinData[field] = bodySkinData[field]
+			
+			skinData[bodypartSlot] = bodypartSkinData
+	doll.setSkinData(skinData)
+	doll.updateMaterials()
+	
 	doll.setArmsCuffed(false)
 	doll.setLegsCuffed(false)
 	doll.setState("mouth", "")
@@ -1407,15 +1425,7 @@ func softUpdateDoll(doll: Doll3D):
 		item.updateDoll(doll)
 
 func updateDoll(doll: Doll3D):
-	
-	var skinData = {}
-	for bodypartSlot in bodyparts:
-		var bodypart = getBodypart(bodypartSlot)
-		if(bodypart == null):
-			continue
-		if(bodypart.supportsSkin()):
-			skinData[bodypartSlot] = bodypart.getSkinData()
-	doll.setSkinData(skinData)
+	softUpdateDoll(doll)
 	
 	var parts = getDollParts()
 	
@@ -1475,8 +1485,6 @@ func updateDoll(doll: Doll3D):
 	doll.setParts(parts)
 	doll.setUnriggedParts(partsScenes)
 	
-	softUpdateDoll(doll)
-
 func getSkillExperienceMult(skill):
 	var mult = 0.0
 
@@ -2086,3 +2094,18 @@ func shouldCondomBreakWhenFucking(characterPenetrated, chance: float = 20.0, sho
 		return false
 	
 	return RNG.chance(chance)
+
+func getBaseSkinID():
+	return "SkinExample"
+
+func getBaseSkinColors():
+	return [Color.green, Color.yellow, Color.pink]
+
+func getSkinData():
+	var theColors = getBaseSkinColors()
+	return {
+		"skin": getBaseSkinID(),
+		"r": theColors[0],
+		"g": theColors[1],
+		"b": theColors[2],
+	}

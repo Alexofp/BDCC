@@ -30,3 +30,6 @@ func getRevealMessage():
 		return .getRevealMessage()
 	
 	return Util.capitalizeFirstLetter(orifice.getLoosenessString()) + " anus got revealed."
+
+func supportsSkin():
+	return false

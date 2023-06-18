@@ -62,48 +62,49 @@ func getLewdName():
 	return RNG.pick(["cock", "cock", "dick", "dick", "member", "shaft"])
 
 func getPickableAttributes():
-	return {
-		"cocksize": {
-			"text": "Pick your cock's length",
-			"textButton": "Length",
-			"buttonDesc": "Pick the cock's length",
-			"options": [
-				[5, Util.cmToString(5), "Pick this length"],
-				[8, Util.cmToString(8), "Pick this length"],
-				[10, Util.cmToString(10), "Pick this length"],
-				[13, Util.cmToString(13), "Pick this length"],
-				[15, Util.cmToString(15), "Pick this length"],
-				[18, Util.cmToString(18), "Pick this length"],
-				[22, Util.cmToString(22), "Pick this length"],
-				[25, Util.cmToString(25), "Pick this length"],
-				[30, Util.cmToString(30), "Pick this length"],
-				[40, Util.cmToString(40), "Pick this length"],
-				[50, Util.cmToString(50), "Pick this length"],
-			]
-		},
-		"ballsscale": {
-			"text": "Pick your balls scale",
-			"textButton": "Balls",
-			"buttonDesc": "Pick the cock's balls scale",
-			"options": [
-				[0.0, "0%", "Pick this scale"],
-				[0.3, "20%", "Pick this scale"],
-				[0.5, "50%", "Pick this scale"],
-				[0.8, "80%", "Pick this scale"],
-				[1.0, "100%", "Pick this scale"],
-				[1.2, "120%", "Pick this scale"],
-				[1.5, "150%", "Pick this scale"],
-				[1.8, "180%", "Pick this scale"],
-				[2.0, "200%", "Pick this scale"],
-				[2.5, "250%", "Pick this scale"],
-				[3.0, "300%", "Pick this scale"],
-				[4.0, "400%", "Pick this scale"],
-				[5.0, "500%", "Pick this scale"],
-			]
-		}
+	var result = .getPickableAttributes()
+	result["cocksize"] = {
+		"text": "Pick your cock's length",
+		"textButton": "Length",
+		"buttonDesc": "Pick the cock's length",
+		"options": [
+			[5, Util.cmToString(5), "Pick this length"],
+			[8, Util.cmToString(8), "Pick this length"],
+			[10, Util.cmToString(10), "Pick this length"],
+			[13, Util.cmToString(13), "Pick this length"],
+			[15, Util.cmToString(15), "Pick this length"],
+			[18, Util.cmToString(18), "Pick this length"],
+			[22, Util.cmToString(22), "Pick this length"],
+			[25, Util.cmToString(25), "Pick this length"],
+			[30, Util.cmToString(30), "Pick this length"],
+			[40, Util.cmToString(40), "Pick this length"],
+			[50, Util.cmToString(50), "Pick this length"],
+		]
 	}
+	result["ballsscale"] = {
+		"text": "Pick your balls scale",
+		"textButton": "Balls",
+		"buttonDesc": "Pick the cock's balls scale",
+		"options": [
+			[0.0, "0%", "Pick this scale"],
+			[0.3, "20%", "Pick this scale"],
+			[0.5, "50%", "Pick this scale"],
+			[0.8, "80%", "Pick this scale"],
+			[1.0, "100%", "Pick this scale"],
+			[1.2, "120%", "Pick this scale"],
+			[1.5, "150%", "Pick this scale"],
+			[1.8, "180%", "Pick this scale"],
+			[2.0, "200%", "Pick this scale"],
+			[2.5, "250%", "Pick this scale"],
+			[3.0, "300%", "Pick this scale"],
+			[4.0, "400%", "Pick this scale"],
+			[5.0, "500%", "Pick this scale"],
+		]
+	}
+	return result
 	
 func applyAttribute(_attrID: String, _attrValue):
+	.applyAttribute(_attrID, _attrValue)
 	if(_attrID == "cocksize"):
 		lengthCM = _attrValue
 	if(_attrID == "ballsscale"):
@@ -146,3 +147,6 @@ func generateDataFor(_dynamicCharacter):
 	
 	if(fluidProduction != null):
 		fluidProduction.fillPercent(min(1.0, RNG.randf_range(0.8, 1.2)))
+
+func hasCustomSkinPattern():
+	return true

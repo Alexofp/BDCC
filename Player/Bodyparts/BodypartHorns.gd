@@ -14,3 +14,6 @@ func getTraits():
 	return {
 		PartTrait.HornsGraspable: true,
 	}
+
+func hasCustomSkinPattern():
+	return true
