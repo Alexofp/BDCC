@@ -17,10 +17,6 @@ var inmateNumber = "12859"
 var pickedFemininity: int = 50
 var pickedThickness: int = 50
 var inmateType = InmateType.General
-var pickedSkin:String = "EmptySkin"
-var pickedSkinRColor:Color = Color.white
-var pickedSkinGColor:Color = Color.lightgray
-var pickedSkinBColor:Color = Color.darkgray
 
 
 # Intoxication stuff
@@ -720,11 +716,11 @@ func getThickness() -> int:
 	return pickedThickness
 
 func getPickableAttributes():
-	var skinsOptions = []
-	for skinID in GlobalRegistry.getSkins():
-		var theSkin = GlobalRegistry.getSkin(skinID)
-		skinsOptions.append([skinID, theSkin.getName(), "Pick this skin"])
-	
+#	var skinsOptions = []
+#	for skinID in GlobalRegistry.getSkins():
+#		var theSkin = GlobalRegistry.getSkin(skinID)
+#		skinsOptions.append([skinID, theSkin.getName(), "Pick this skin"])
+#
 	return {
 		"femininity": {
 			"text": "Pick how feminine or masculine you are",
@@ -754,36 +750,36 @@ func getPickableAttributes():
 				[200, "200% thick", "Sooo thicc"],
 			]
 		},
-		"skin": {
-			"text": "Pick your base skin. All bodyparts will use this skin unless overridden.",
-			"textButton": "Skin",
-			"buttonDesc": "Change your skin type",
-			"options": skinsOptions,
-		},
-		"skinPrimaryColor": {
-			"text": "Pick your primary color.",
-			"textButton": "Primary color",
-			"buttonDesc": "Change the primary color of your skin",
-			"options": [[1, "Select", "Pick this color"]],
-			"type": "color",
-			"currentColor": pickedSkinRColor,
-		},
-		"skinSecondaryColor": {
-			"text": "Pick your secondary color.",
-			"textButton": "Secondary color",
-			"buttonDesc": "Change the secondary color of your skin",
-			"options": [[1, "Select", "Pick this color"]],
-			"type": "color",
-			"currentColor": pickedSkinGColor,
-		},
-		"skinTertiaryColor": {
-			"text": "Pick your tertiary color.",
-			"textButton": "Tertiary color",
-			"buttonDesc": "Change the tertiary color of your skin",
-			"options": [[1, "Select", "Pick this color"]],
-			"type": "color",
-			"currentColor": pickedSkinBColor,
-		},
+#		"skin": {
+#			"text": "Pick your base skin. All bodyparts will use this skin unless overridden.",
+#			"textButton": "Skin",
+#			"buttonDesc": "Change your skin type",
+#			"options": skinsOptions,
+#		},
+#		"skinPrimaryColor": {
+#			"text": "Pick your primary color.",
+#			"textButton": "Primary color",
+#			"buttonDesc": "Change the primary color of your skin",
+#			"options": [[1, "Select", "Pick this color"]],
+#			"type": "color",
+#			"currentColor": pickedSkinRColor,
+#		},
+#		"skinSecondaryColor": {
+#			"text": "Pick your secondary color.",
+#			"textButton": "Secondary color",
+#			"buttonDesc": "Change the secondary color of your skin",
+#			"options": [[1, "Select", "Pick this color"]],
+#			"type": "color",
+#			"currentColor": pickedSkinGColor,
+#		},
+#		"skinTertiaryColor": {
+#			"text": "Pick your tertiary color.",
+#			"textButton": "Tertiary color",
+#			"buttonDesc": "Change the tertiary color of your skin",
+#			"options": [[1, "Select", "Pick this color"]],
+#			"type": "color",
+#			"currentColor": pickedSkinBColor,
+#		},
 	}
 	
 func applyAttribute(_attrID: String, _attrValue):
@@ -1057,8 +1053,4 @@ func giveBirth():
 	
 	return bornChildren
 
-func getBaseSkinID():
-	return pickedSkin
 
-func getBaseSkinColors():
-	return [pickedSkinRColor, pickedSkinGColor, pickedSkinBColor]

@@ -74,45 +74,45 @@ func getLewdDescriptionAndNameWithA():
 	return "a "+t
 
 func getPickableAttributes():
-	if(supportsSkin()):
-		var result = {
-			"skinPrimaryColor": {
-				"text": "Pick your primary color.",
-				"textButton": "Primary color",
-				"buttonDesc": "Change the primary color of your skin",
-				"options": [[1, "Select", "Pick this color"], [null, "Same as body", "Reset the color to body's picked color"]],
-				"type": "color",
-				"currentColor": pickedRColor,
-			},
-			"skinSecondaryColor": {
-				"text": "Pick your secondary color.",
-				"textButton": "Secondary color",
-				"buttonDesc": "Change the secondary color of your skin",
-				"options": [[1, "Select", "Pick this color"], [null, "Same as body", "Reset the color to body's picked color"]],
-				"type": "color",
-				"currentColor": pickedGColor,
-			},
-			"skinTertiaryColor": {
-				"text": "Pick your tertiary color.",
-				"textButton": "Tertiary color",
-				"buttonDesc": "Change the tertiary color of your skin",
-				"options": [[1, "Select", "Pick this color"], [null, "Same as body", "Reset the color to body's picked color"]],
-				"type": "color",
-				"currentColor": pickedBColor,
-			},
-		}
-		if(!hasCustomSkinPattern()):
-			var skinsOptions = [[null, "Same as body", "Reset the skin to the same as what the whole body uses"]]
-			for skinID in GlobalRegistry.getSkins():
-				var theSkin = GlobalRegistry.getSkin(skinID)
-				skinsOptions.append([skinID, theSkin.getName(), "Pick this skin"])
-			result["skin"] = {
-				"text": "Pick your base skin. All bodyparts will use this skin unless overridden.",
-				"textButton": "Skin",
-				"buttonDesc": "Change your skin type",
-				"options": skinsOptions,
-			}
-		return result
+#	if(supportsSkin()):
+#		var result = {
+#			"skinPrimaryColor": {
+#				"text": "Pick your primary color.",
+#				"textButton": "Primary color",
+#				"buttonDesc": "Change the primary color of your skin",
+#				"options": [[1, "Select", "Pick this color"], [null, "Same as body", "Reset the color to body's picked color"]],
+#				"type": "color",
+#				"currentColor": pickedRColor,
+#			},
+#			"skinSecondaryColor": {
+#				"text": "Pick your secondary color.",
+#				"textButton": "Secondary color",
+#				"buttonDesc": "Change the secondary color of your skin",
+#				"options": [[1, "Select", "Pick this color"], [null, "Same as body", "Reset the color to body's picked color"]],
+#				"type": "color",
+#				"currentColor": pickedGColor,
+#			},
+#			"skinTertiaryColor": {
+#				"text": "Pick your tertiary color.",
+#				"textButton": "Tertiary color",
+#				"buttonDesc": "Change the tertiary color of your skin",
+#				"options": [[1, "Select", "Pick this color"], [null, "Same as body", "Reset the color to body's picked color"]],
+#				"type": "color",
+#				"currentColor": pickedBColor,
+#			},
+#		}
+#		if(!hasCustomSkinPattern()):
+#			var skinsOptions = [[null, "Same as body", "Reset the skin to the same as what the whole body uses"]]
+#			for skinID in GlobalRegistry.getSkins():
+#				var theSkin = GlobalRegistry.getSkin(skinID)
+#				skinsOptions.append([skinID, theSkin.getName(), "Pick this skin"])
+#			result["skin"] = {
+#				"text": "Pick your base skin. All bodyparts will use this skin unless overridden.",
+#				"textButton": "Skin",
+#				"buttonDesc": "Change your skin type",
+#				"options": skinsOptions,
+#			}
+#		return result
 	return {}
 	
 func applyAttribute(_attrID: String, _attrValue):

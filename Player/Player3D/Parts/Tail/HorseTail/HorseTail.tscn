@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Player/Player3D/Parts/Part3D.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Player/Player3D/Parts/Tail/CanineTail/tailcanine.png" type="Texture" id=2]
 [ext_resource path="res://Player/Player3D/Parts/Tail/HorseTail/tailhorse.png" type="Texture" id=3]
+[ext_resource path="res://Player/Player3D/Parts/MeshWithPattern.gd" type="Script" id=4]
 
 [sub_resource type="SpatialMaterial" id=4]
 resource_name = "tailcanine.png"
@@ -113,3 +114,7 @@ albedo_texture = ExtResource( 3 )
 mesh = SubResource( 5 )
 skin = SubResource( 6 )
 material/0 = SubResource( 7 )
+script = ExtResource( 4 )
+pattern_start = Vector2( 6, 4 )
+pattern_size = Vector2( 2, 2 )
+bodypartSlot = "tail"

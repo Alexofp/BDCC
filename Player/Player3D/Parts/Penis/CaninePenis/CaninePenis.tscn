@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://Player/Player3D/Parts/Part3D.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Player/Player3D/Parts/Penis/CaninePenis/penisCanine.png" type="Texture" id=2]
@@ -9,6 +9,8 @@
 [ext_resource path="res://Player/Player3D/Parts/Penis/CaninePenis/penisCanineCondom.png" type="Texture" id=7]
 [ext_resource path="res://Player/Player3D/Parts/MeshWithPattern.gd" type="Script" id=8]
 [ext_resource path="res://Player/Player3D/Parts/Penis/CaninePenis/penisCanine_pattern.png" type="Texture" id=9]
+[ext_resource path="res://Player/Player3D/Parts/Penis/CaninePenis/penisCanineCondom_overlay.png" type="Texture" id=10]
+[ext_resource path="res://Player/Player3D/Parts/Penis/CaninePenis/penisSheath_pattern.png" type="Texture" id=11]
 
 [sub_resource type="SpatialMaterial" id=1]
 resource_name = "penisCanine.png"
@@ -104,7 +106,7 @@ bind/21/name = "Foot.R"
 bind/21/bone = -1
 bind/21/pose = Transform( 0.486096, -0.873925, 4.58786e-07, -0.874017, -0.486062, -1.14923e-08, 2.21924e-07, -3.57599e-07, -1, 0.196343, 0.375003, -0.209835 )
 
-[sub_resource type="SpatialMaterial" id=14]
+[sub_resource type="SpatialMaterial" id=22]
 resource_name = "penisDragon.png.002"
 flags_transparent = true
 vertex_color_use_as_albedo = true
@@ -121,7 +123,7 @@ surfaces/0 = {
 "blend_shape_data": [  ],
 "format": 2194903,
 "index_count": 1281,
-"material": SubResource( 14 ),
+"material": SubResource( 22 ),
 "primitive": 4,
 "skeleton_aabb": [ AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( -2.17029, 3.01941, -0.000896475, 2.2887, 1.28, 1e-05 ), AABB( -2.17029, 3.19798, -0.000896475, 1.7435, 1.10144, 1e-05 ), AABB( -2.17029, 3.39229, -0.000896475, 1.57348, 0.907125, 1e-05 ), AABB( -1.66329, 3.01941, -0.000896475, 1.7817, 1.28, 1e-05 ) ],
 "vertex_count": 807
@@ -402,13 +404,18 @@ bodypartSlot = "penis"
 customSkinPattern = ExtResource( 9 )
 
 [node name="PartState4" parent="PartStatePicker" index="1" instance=ExtResource( 5 )]
-visible = false
 stateValue = "condom"
 
 [node name="PenisRigged" type="MeshInstance" parent="PartStatePicker/PartState4" index="0"]
+visible = false
 mesh = SubResource( 15 )
 skin = SubResource( 16 )
 material/0 = SubResource( 19 )
+script = ExtResource( 8 )
+bodypartSlot = "penis"
+customOverlay = ExtResource( 10 )
+customSkinPattern = ExtResource( 9 )
+customAlbedo = ExtResource( 2 )
 
 [node name="PartState2" parent="PartStatePicker" index="2" instance=ExtResource( 5 )]
 visible = false
@@ -419,6 +426,9 @@ mesh = SubResource( 15 )
 skin = SubResource( 16 )
 skeleton = NodePath("../../PartState")
 material/0 = SubResource( 7 )
+script = ExtResource( 8 )
+bodypartSlot = "penis"
+customSkinPattern = ExtResource( 11 )
 
 [node name="PartState3" parent="PartStatePicker" index="3" instance=ExtResource( 5 )]
 visible = false
@@ -429,6 +439,9 @@ mesh = SubResource( 15 )
 skin = SubResource( 16 )
 skeleton = NodePath("../../PartState")
 material/0 = SubResource( 7 )
+script = ExtResource( 8 )
+bodypartSlot = "penis"
+customSkinPattern = ExtResource( 11 )
 
 [node name="Cage" type="MeshInstance" parent="PartStatePicker/PartState3" index="1"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.01 )

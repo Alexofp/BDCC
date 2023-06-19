@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://Player/Player3D/Parts/Part3D.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Player/Player3D/Parts/Penis/EquinePenis/penisEquineSheated.png" type="Texture" id=2]
@@ -7,6 +7,10 @@
 [ext_resource path="res://Player/Player3D/Parts/PartStatePicker.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Player/Player3D/Parts/PartState.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Player/Player3D/Parts/Penis/EquinePenis/penisEquineCondom.png" type="Texture" id=7]
+[ext_resource path="res://Player/Player3D/Parts/MeshWithPattern.gd" type="Script" id=8]
+[ext_resource path="res://Player/Player3D/Parts/Penis/EquinePenis/penisEquine_pattern.png" type="Texture" id=9]
+[ext_resource path="res://Player/Player3D/Parts/Penis/EquinePenis/penisEquineSheated_pattern.png" type="Texture" id=10]
+[ext_resource path="res://Player/Player3D/Parts/Penis/EquinePenis/penisEquineCondom_overlay.png" type="Texture" id=11]
 
 [sub_resource type="SpatialMaterial" id=4]
 resource_name = "penisEquine.png"
@@ -295,6 +299,9 @@ state = "cock"
 mesh = SubResource( 16 )
 skin = SubResource( 17 )
 material/0 = SubResource( 9 )
+script = ExtResource( 8 )
+bodypartSlot = "penis"
+customSkinPattern = ExtResource( 9 )
 
 [node name="PartState4" parent="PartStatePicker" index="1" instance=ExtResource( 6 )]
 visible = false
@@ -304,6 +311,11 @@ stateValue = "condom"
 mesh = SubResource( 16 )
 skin = SubResource( 17 )
 material/0 = SubResource( 20 )
+script = ExtResource( 8 )
+bodypartSlot = "penis"
+customOverlay = ExtResource( 11 )
+customSkinPattern = ExtResource( 9 )
+customAlbedo = ExtResource( 3 )
 
 [node name="PartState2" parent="PartStatePicker" index="2" instance=ExtResource( 6 )]
 visible = false
@@ -314,6 +326,9 @@ mesh = SubResource( 16 )
 skin = SubResource( 17 )
 skeleton = NodePath("../../PartState")
 material/0 = SubResource( 12 )
+script = ExtResource( 8 )
+bodypartSlot = "penis"
+customSkinPattern = ExtResource( 10 )
 
 [node name="PartState3" parent="PartStatePicker" index="3" instance=ExtResource( 6 )]
 visible = false
@@ -324,6 +339,9 @@ mesh = SubResource( 16 )
 skin = SubResource( 17 )
 skeleton = NodePath("../../PartState")
 material/0 = SubResource( 12 )
+script = ExtResource( 8 )
+bodypartSlot = "penis"
+customSkinPattern = ExtResource( 10 )
 
 [node name="Cage" type="MeshInstance" parent="PartStatePicker/PartState3" index="1"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.01 )

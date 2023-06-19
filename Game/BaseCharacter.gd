@@ -46,6 +46,12 @@ var timedBuffsDurationSeconds: int = 0
 var timedBuffsTurns: Array = []
 var timedBuffsDurationTurns: int = 0
 
+# Skin data
+var pickedSkin:String = "EmptySkin"
+var pickedSkinRColor:Color = Color.white
+var pickedSkinGColor:Color = Color.lightgray
+var pickedSkinBColor:Color = Color.darkgray
+
 func _init():
 	name = "BaseCharacter"
 
@@ -2096,10 +2102,10 @@ func shouldCondomBreakWhenFucking(characterPenetrated, chance: float = 20.0, sho
 	return RNG.chance(chance)
 
 func getBaseSkinID():
-	return "SkinExample"
+	return pickedSkin
 
 func getBaseSkinColors():
-	return [Color.green, Color.yellow, Color.pink]
+	return [pickedSkinRColor, pickedSkinGColor, pickedSkinBColor]
 
 func getSkinData():
 	var theColors = getBaseSkinColors()
@@ -2109,3 +2115,4 @@ func getSkinData():
 		"g": theColors[1],
 		"b": theColors[2],
 	}
+

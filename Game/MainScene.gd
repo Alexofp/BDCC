@@ -961,6 +961,18 @@ func getDebugActions():
 			"id": "animBrowser",
 			"name": "Animation browser",
 		},
+		{
+			"id": "skinEditor",
+			"name": "Skin editor",
+			"args": [
+				{
+					"id": "npcID",
+					"name": "NPC ID",
+					"type": "string",
+					"value": "pc",
+				},
+			]
+		},
 	]
 
 func doDebugAction(id, args = {}):
@@ -1027,6 +1039,9 @@ func doDebugAction(id, args = {}):
 	
 	if(id == "animBrowser"):
 		runScene("SimpleAnimPlayerScene")
+
+	if(id == "skinEditor"):
+		runScene("ChangeSkinScene", [args["npcID"], true])
 
 func consoleSetFlagBool(flagID, valuestr):
 	var value = false

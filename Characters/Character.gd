@@ -25,9 +25,12 @@ var lastUpdatedSecond:int = -1
 var disableSerialization:bool = false # Set to true if the character doesn't need to be saved, only works for non-dynamic npcs
 var pregnancyWaitTimer:int = 0
 
+var npcSkinData = {}
+
 func _ready():
 	name = id
 	createBodyparts()
+	paintBodyparts()
 	createEquipment()
 	for statID in npcStats:
 		skillsHolder.setStat(statID, npcStats[statID])
@@ -187,6 +190,23 @@ func getBaseLustThreshold() -> int:
 	
 func createBodyparts():
 	pass
+
+func paintBodyparts():
+	if(npcSkinData != null):
+		for bodypartSlot in npcSkinData:
+			if(!hasBodypart(bodypartSlot)):
+				Log.error(getID()+" doesn't have "+str(bodypartSlot)+" slot but we're trying to paint it anyway inside paintBodyparts()")
+				continue
+			var bodypart = getBodypart(bodypartSlot)
+			var bodypartSkinData = npcSkinData[bodypartSlot]
+			if(bodypartSkinData.has("skin")):
+				bodypart.pickedSkin = bodypartSkinData["skin"]
+			if(bodypartSkinData.has("r")):
+				bodypart.pickedRColor = bodypartSkinData["r"]
+			if(bodypartSkinData.has("g")):
+				bodypart.pickedGColor = bodypartSkinData["g"]
+			if(bodypartSkinData.has("b")):
+				bodypart.pickedBColor = bodypartSkinData["b"]
 
 func createEquipment():
 	pass

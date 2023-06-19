@@ -6,6 +6,7 @@ export var pattern_size:Vector2 = Vector2(1.0, 1.0)
 export(String, "head", "hair", "ears", "horns", "body", "arms", "breasts", "penis", "vagina", "anus", "tail", "legs") var bodypartSlot:String
 export(Texture) var customOverlay = null
 export(Texture) var customSkinPattern = null
+export(Texture) var customAlbedo = null
 var partRef
 var fancyMaterial
 var defaultOverlay = preload("res://Player/Player3D/Skins/defaultoverlay.png")
@@ -24,8 +25,12 @@ func getDoll():
 	return thePart.getDoll()
 
 func _ready():
-	var current_material = get_surface_material(0)
-	var albedoTexture = current_material.albedo_texture
+	var albedoTexture
+	if(customAlbedo != null):
+		albedoTexture = customAlbedo
+	else:
+		var current_material = get_surface_material(0)
+		albedoTexture = current_material.albedo_texture
 	
 	
 	fancyMaterial = materialWithSkin.duplicate()

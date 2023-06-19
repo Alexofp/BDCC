@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://Player/Player3D/Parts/Part3D.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Player/Player3D/Parts/Head/DragonHead/headdragon.png" type="Texture" id=2]
@@ -10,6 +10,9 @@
 [ext_resource path="res://Player/Player3D/Parts/Head/DragonHead/headdragonringgag.png" type="Texture" id=8]
 [ext_resource path="res://Player/Player3D/Parts/Head/DragonHead/headdragonmouth.png" type="Texture" id=9]
 [ext_resource path="res://Player/Player3D/Parts/AttachmentProxy.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Player/Player3D/Parts/MeshWithPattern.gd" type="Script" id=11]
+[ext_resource path="res://Player/Player3D/Parts/Head/DragonHead/headdragonballgag_overlay.png" type="Texture" id=12]
+[ext_resource path="res://Player/Player3D/Parts/Head/DragonHead/headdragonringgag_overlay.png" type="Texture" id=13]
 
 [sub_resource type="SpatialMaterial" id=12]
 resource_name = "headdragon.png"
@@ -345,6 +348,9 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000609875, 0, 0 )
 mesh = SubResource( 13 )
 skin = SubResource( 14 )
 material/0 = SubResource( 12 )
+script = ExtResource( 11 )
+pattern_start = Vector2( 2, 1 )
+bodypartSlot = "head"
 
 [node name="PartState2" parent="PartStatePicker2" index="1" instance=ExtResource( 6 )]
 visible = false
@@ -355,6 +361,10 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000609875, 0, 0 )
 mesh = SubResource( 13 )
 skin = SubResource( 14 )
 material/0 = SubResource( 26 )
+script = ExtResource( 11 )
+pattern_start = Vector2( 2, 1 )
+bodypartSlot = "head"
+customOverlay = ExtResource( 12 )
 
 [node name="PartState3" parent="PartStatePicker2" index="2" instance=ExtResource( 6 )]
 visible = false
@@ -365,6 +375,10 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000609875, 0, 0 )
 mesh = SubResource( 13 )
 skin = SubResource( 14 )
 material/0 = SubResource( 27 )
+script = ExtResource( 11 )
+pattern_start = Vector2( 2, 1 )
+bodypartSlot = "head"
+customOverlay = ExtResource( 13 )
 
 [node name="PartState4" parent="PartStatePicker2" index="3" instance=ExtResource( 6 )]
 visible = false
@@ -375,6 +389,9 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000609875, 0, 0 )
 mesh = SubResource( 13 )
 skin = SubResource( 14 )
 material/0 = SubResource( 28 )
+script = ExtResource( 11 )
+pattern_start = Vector2( 2, 1 )
+bodypartSlot = "head"
 
 [node name="PartStatePicker" parent="." index="3" instance=ExtResource( 5 )]
 state = "muzzle"

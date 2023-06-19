@@ -41,18 +41,21 @@ void fragment() {
 	vec2 base_uv = UV;
 	
 	vec4 pattern_tex = texture(texture_pattern,UV_pattern);
-	pattern_tex.rgb = normalize(pattern_tex.rgb);
-	vec3 pattern_color = clamp(pattern_tex.r * pattern_red_color.rgb + pattern_tex.b * pattern_blue_color.rgb + pattern_tex.g * pattern_green_color.rgb, vec3(0.0), vec3(1.0));
+	float dumbLen = max(0.001, pattern_tex.r + pattern_tex.g + pattern_tex.b);
+	pattern_tex.rgb = pattern_tex.rgb / dumbLen;
+	//pattern_tex.rgb = normalize(pattern_tex.rgb);
+	vec4 pattern_color = clamp(pattern_tex.r * pattern_red_color + pattern_tex.b * pattern_blue_color + pattern_tex.g * pattern_green_color, vec4(0.0), vec4(1.0));
 	
 	vec4 overlay_tex = texture(texture_customOverlay,base_uv);
 	
 	vec4 albedo_tex = texture(texture_albedo,base_uv) * vec4(pattern_color.rgb, 1.0);
-	albedo_tex = overlay_tex * overlay_tex.a + albedo_tex*(1.0 - overlay_tex.a);
+	albedo_tex.rgb = mix(albedo_tex.rgb, overlay_tex.rgb, overlay_tex.a);//overlay_tex.rgb * overlay_tex.a + albedo_tex.rgb*(1.0 - overlay_tex.a);
+	albedo_tex.a = max(albedo_tex.a, overlay_tex.a);
 	ALBEDO = albedo.rgb * albedo_tex.rgb;
 	METALLIC = metallic;
 	ROUGHNESS = roughness;
 	SPECULAR = specular;
-	ALPHA = albedo.a * albedo_tex.a;
+	ALPHA = albedo.a * albedo_tex.a;// * pattern_color.a;
 }
 "
 
@@ -71,9 +74,9 @@ shader_param/uv2_scale = Vector3( 1, 1, 1 )
 shader_param/uv2_offset = Vector3( 0, 0, 0 )
 shader_param/pattern_start = Vector2( 0, 0 )
 shader_param/pattern_size = Vector2( 0.125, 0.25 )
-shader_param/pattern_red_color = Color( 0.898039, 0.203922, 0.203922, 1 )
-shader_param/pattern_blue_color = Color( 0.239216, 0.415686, 0.2, 1 )
-shader_param/pattern_green_color = Color( 1, 1, 1, 1 )
+shader_param/pattern_red_color = Color( 0.0784314, 0.298039, 0.0980392, 1 )
+shader_param/pattern_blue_color = Color( 0.596078, 0.270588, 0.270588, 1 )
+shader_param/pattern_green_color = Color( 0.596078, 0.270588, 0.270588, 1 )
 shader_param/texture_albedo = ExtResource( 1 )
 shader_param/texture_pattern = ExtResource( 2 )
 shader_param/texture_customOverlay = ExtResource( 3 )
