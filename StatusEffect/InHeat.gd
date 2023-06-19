@@ -1,11 +1,22 @@
 extends StatusEffectBase
 
+var toCheck = [
+	character.hasBodypart(BodypartSlot.Penis),
+	character.hasBodypart(BodypartSlot.Vagina)
+]
+
 func _init():
 	id = StatusEffect.InHeat
 	isBattleOnly = false
 
 func getEffectName():
-	return "In Heat"
+	match toCheck:
+		[false, true]:
+			return "In Heat"
+		[true, false]:
+			return "In Rut"
+		[true, true]:
+			return "In Heat and In Rut"
 
 func getEffectDesc():
 	return "You have a huge urge to mate with someone.."
