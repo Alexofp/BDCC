@@ -1,0 +1,57 @@
+extends StatusEffectBase
+
+var _toCheck = [
+	character.hasBodypart(BodypartSlot.Penis),
+	character.hasBodypart(BodypartSlot.Vagina),
+	character.hasWombIn(BodypartSlot.Anus)
+]
+
+func _init():
+	id = StatusEffect.EverLeaking
+	isBattleOnly = false
+
+var rng = RandomNumberGenerator.new()
+func processTime(_secondsPassed: int):
+	# this should run every ten seconds
+	turns -= _secondsPassed
+	if(turns <= 0):
+		# gamble if the player goes into heat/rut or not
+		# chance would be 1 in whatever the max value is
+		if rng.randi_range(0, 100) == rng.randi_range(0, 100):
+			pass
+		
+		turns += 10
+
+func getEffectName():
+	return "Ever-Leaking"
+
+func getEffectDesc():
+	var message = "You're too horny. "
+	match _toCheck:
+		[true, false, false]: # has penis
+			message += "Your penis endlessly dribbles pre-cum."
+		[false, true, false]: # has vagina
+			message += "Your vagina endlessly oozes girl-juice."
+		[false, true, true]: # has vagina and anuswomb
+			message += "Both your vagina and anus endlessly ooze girl-juice."
+		[true, true, false]: # has penis and vagina
+			message += "Your penis endlessly dribbles pre-cum while your vagina endlessly oozes girl-juice."
+		[true, false, true]: # has penis and anuswomb
+			message += "Your penis endlessly dribbles pre-cum while your anus endlessly oozes girl-juice."
+		[true, true, true]: # has penis, vagina, and anuswomb
+			message += "Your penis endlessly dribbles pre-cum while both your vagina and anus ooze girl-juice."
+	return message
+
+func getEffectImage():
+	return "res://Images/StatusEffects/heartburn.png"
+
+func getIconColor():
+	# light pink?
+	return IconColorDarkPurple
+
+func getBuffs():
+	return [
+		buff(Buff.ReceivedLustDamageBuff, [15]),
+		buff(Buff.AmbientLustBuff, [30]),
+		buff(Buff.ExposureBuff, [30]),
+	]
