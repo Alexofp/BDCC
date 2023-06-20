@@ -404,10 +404,10 @@ bodypartSlot = "penis"
 customSkinPattern = ExtResource( 9 )
 
 [node name="PartState4" parent="PartStatePicker" index="1" instance=ExtResource( 5 )]
+visible = false
 stateValue = "condom"
 
 [node name="PenisRigged" type="MeshInstance" parent="PartStatePicker/PartState4" index="0"]
-visible = false
 mesh = SubResource( 15 )
 skin = SubResource( 16 )
 material/0 = SubResource( 19 )

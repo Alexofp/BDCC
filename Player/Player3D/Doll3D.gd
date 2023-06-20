@@ -31,11 +31,21 @@ var dollAttachmentZoneScene = preload("res://Player/Player3D/Parts/DollAttachmen
 onready var nipplesParticles = $BoneAttachments/NipplesBoneAttachment/NipplesParticles
 onready var pussyParticles = $BoneAttachments/VaginaBoneAttachment/PussyParticles
 onready var anusParticles = $BoneAttachments/VaginaBoneAttachment/AnusParticles
+onready var breastsJiggleBone = $DollSkeleton/BreastsJiggleBone
+onready var bellyJiggleBone = $DollSkeleton/BellyJiggleBone
+onready var buttJiggleBone = $DollSkeleton/ButtJiggleBone
 
 func getDollSkeleton():
 	return $DollSkeleton
 
 func _ready():
+	if(!OPTIONS.isJigglePhysicsBreastsEnabled()):
+		breastsJiggleBone.setEnabled(false)
+	if(!OPTIONS.isJigglePhysicsBellyEnabled()):
+		bellyJiggleBone.setEnabled(false)
+	if(!OPTIONS.isJigglePhysicsButtEnabled()):
+		buttJiggleBone.setEnabled(false)
+	
 	if(addTestBody):
 		testBody()
 	$RandomLeakTimer.start(RNG.randf_range(3, 20))
@@ -324,9 +334,11 @@ func setBreastsScale(breastsScale: float):
 	if(breastsScale <= 1.2):
 		mul = max(1.2 - breastsScale, 0.0)
 	setBoneScaleAndOffset("DeformBreasts", breastsScale, Vector3(0.18713, 0.199727, 0.0)*mul)
+	breastsJiggleBone.stiffness = min(1.0, 0.16 / max(0.1, breastsScale))
 
 func setPregnancy(progress: float):
 	setBoneOffset("DeformBelly", Vector3(-0.03244, 0.706324, 0.0)*progress)
+	bellyJiggleBone.stiffness = 0.1 / ((clamp(progress, 0.0, 1.0) + 0.2) / 1.2)
 
 func setThighThickness(progress: float):
 	setBoneOffset("DeformThigh.L", Vector3(-0.008168, 0.386037, 0.0)*progress)

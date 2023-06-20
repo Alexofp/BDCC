@@ -559,6 +559,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Inventory/ItemTag.gd"
 }, {
+"base": "Spatial",
+"class": "JiggleBone",
+"language": "GDScript",
+"path": "res://Player/Player3D/JiggleBone.gd"
+}, {
 "base": "FluidProduction",
 "class": "Lactation",
 "language": "GDScript",
@@ -1225,6 +1230,7 @@ _global_script_class_icons={
 "ItemCategory": "",
 "ItemState": "",
 "ItemTag": "",
+"JiggleBone": "",
 "Lactation": "",
 "LightInventory": "",
 "LimbTypes": "",
