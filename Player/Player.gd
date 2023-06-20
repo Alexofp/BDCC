@@ -172,6 +172,12 @@ func calculateBuffs():
 # They may have effect on your damage in battles but they're not a 'battle' effects
 func updateNonBattleEffects():
 	buffsHolder.calculateBuffs()
+
+	# for the everleaking statuseffect
+	if lust >= 0.85*lustThreshold():
+		addEffect(StatusEffect.EverLeaking)
+	elif (lust < 0.85*lustThreshold()) && !hasEffect(StatusEffect.InHeat):
+		removeEffect(StatusEffect.EverLeaking)
 	
 	if(getIntoxicationLevel() >= 0.01):
 		addEffect(StatusEffect.Intoxicated)
