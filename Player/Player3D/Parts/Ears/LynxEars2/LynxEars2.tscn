@@ -1,7 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Player/Player3D/Parts/Part3D.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Player/Player3D/Parts/Ears/LynxEars2/earsLynx2.png" type="Texture" id=2]
+[ext_resource path="res://Player/Player3D/Parts/MeshWithPattern.gd" type="Script" id=3]
+[ext_resource path="res://Player/Player3D/Parts/Ears/LynxEars2/earsLynx2_pattern.png" type="Texture" id=4]
 
 [sub_resource type="SpatialMaterial" id=8]
 resource_name = "earsLynx2.png"
@@ -104,3 +106,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.09937, -0.0808821, 0.0345902
 mesh = SubResource( 9 )
 skin = SubResource( 10 )
 material/0 = SubResource( 8 )
+script = ExtResource( 3 )
+bodypartSlot = "ears"
+customSkinPattern = ExtResource( 4 )

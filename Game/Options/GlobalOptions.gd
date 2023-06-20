@@ -42,6 +42,8 @@ var jigglePhysicsBellyEnabled = true
 var jigglePhysicsButtEnabled = true
 var jigglePhysicsGlobalModifier = 1.0
 
+var advancedShadersEnabled = true
+
 func resetToDefaults():
 	fetchNewRelease = true
 	menstrualCycleLengthDays = 7
@@ -71,6 +73,7 @@ func resetToDefaults():
 	jigglePhysicsBellyEnabled = true
 	jigglePhysicsButtEnabled = true
 	jigglePhysicsGlobalModifier = 1.0
+	advancedShadersEnabled = true
 	
 	enabledContent.clear()
 	for contentType in ContentType.getAll():
@@ -167,6 +170,9 @@ func isJigglePhysicsButtEnabled():
 func getJigglePhysicsGlobalModifier():
 	return jigglePhysicsGlobalModifier
 
+func shouldUseAdvancedShaders():
+	return advancedShadersEnabled
+
 func getChangeableOptions():
 	var settings = [
 		{
@@ -238,6 +244,13 @@ func getChangeableOptions():
 					"type": "checkbox",
 					"value": ProjectSettings.get_setting("rendering/quality/skinning/force_software_skinning"),
 				},
+				{
+					"name": "Skin shaders",
+					"description": "Turn this off if your game is lagging/crashing. Will disable all skins.",
+					"id": "advancedShadersEnabled",
+					"type": "checkbox",
+					"value": advancedShadersEnabled,
+				}
 			]
 		},
 		{
@@ -560,6 +573,8 @@ func applyOption(categoryID, optionID, value):
 		if(optionID == "softwareSkinning"):
 			myProjectSettings.setForceSoftwareSkinning(value)
 			myProjectSettings.save()
+		if(optionID == "advancedShadersEnabled"):
+			advancedShadersEnabled = value
 			
 	if(categoryID == "debug"):
 		if(optionID == "debugPanel"):
@@ -615,6 +630,7 @@ func saveData():
 		"jigglePhysicsBellyEnabled": jigglePhysicsBellyEnabled,
 		"jigglePhysicsButtEnabled": jigglePhysicsButtEnabled,
 		"jigglePhysicsGlobalModifier": jigglePhysicsGlobalModifier,
+		"advancedShadersEnabled": advancedShadersEnabled,
 	}
 	
 	return data
@@ -649,6 +665,7 @@ func loadData(data):
 	jigglePhysicsBellyEnabled = loadVar(data, "jigglePhysicsBellyEnabled", true)
 	jigglePhysicsButtEnabled = loadVar(data, "jigglePhysicsButtEnabled", true)
 	jigglePhysicsGlobalModifier = loadVar(data, "jigglePhysicsGlobalModifier", 1.0)
+	advancedShadersEnabled = loadVar(data, "advancedShadersEnabled", true)
 
 func saveToFile():
 	var saveData = saveData()

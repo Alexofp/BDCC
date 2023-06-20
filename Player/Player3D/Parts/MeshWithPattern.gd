@@ -26,6 +26,9 @@ func getDoll():
 	return thePart.getDoll()
 
 func _ready():
+	if(!OPTIONS.shouldUseAdvancedShaders()):
+		return
+	
 	var albedoTexture
 	if(customAlbedo != null):
 		albedoTexture = customAlbedo
@@ -50,6 +53,9 @@ func _ready():
 	set_surface_material(0, fancyMaterial)
 
 func updateMaterial():
+	if(!OPTIONS.shouldUseAdvancedShaders()):
+		return
+	
 	var theDoll = getDoll()
 	if(theDoll != null):
 		if(showCumLayer && theDoll.getCumAmount() > 0):

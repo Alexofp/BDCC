@@ -1,8 +1,11 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Player/Player3D/Parts/Part3D.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Player/Player3D/Parts/Hair/PonytailHair/ponytail.png" type="Texture" id=2]
 [ext_resource path="res://Player/Player3D/Parts/Hair/JackiHair/jackihair.png" type="Texture" id=3]
+[ext_resource path="res://Player/Player3D/Parts/MeshWithPattern.gd" type="Script" id=4]
+[ext_resource path="res://Player/Player3D/Parts/Hair/JackiHair/jackihair_clean.png" type="Texture" id=5]
+[ext_resource path="res://Player/Player3D/Parts/Hair/JackiHair/jackihair_pattern.png" type="Texture" id=6]
 
 [sub_resource type="SpatialMaterial" id=1]
 resource_name = "ponytail.png"
@@ -114,3 +117,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.028 )
 mesh = SubResource( 2 )
 skin = SubResource( 3 )
 material/0 = SubResource( 4 )
+script = ExtResource( 4 )
+bodypartSlot = "hair"
+customSkinPattern = ExtResource( 6 )
+customAlbedo = ExtResource( 5 )

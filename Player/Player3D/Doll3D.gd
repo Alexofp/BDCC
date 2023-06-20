@@ -106,6 +106,8 @@ func testBody():
 	pass 
 
 func updateMaterials():
+	if(!OPTIONS.shouldUseAdvancedShaders()):
+		return
 	for slot in parts:
 		var part = parts[slot]
 		part.updateMaterial()
