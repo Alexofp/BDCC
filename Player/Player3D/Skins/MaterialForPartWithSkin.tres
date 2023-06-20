@@ -1,8 +1,9 @@
-[gd_resource type="ShaderMaterial" load_steps=5 format=2]
+[gd_resource type="ShaderMaterial" load_steps=6 format=2]
 
 [ext_resource path="res://Player/Player3D/Parts/Body/HumanBody/body.png" type="Texture" id=1]
 [ext_resource path="res://Player/Player3D/Skins/SkinExample/SkinExample.png" type="Texture" id=2]
 [ext_resource path="res://Player/Player3D/Skins/defaultoverlay.png" type="Texture" id=3]
+[ext_resource path="res://Player/Player3D/Particles/cumlayer.png" type="Texture" id=4]
 
 [sub_resource type="Shader" id=19]
 code = "// NOTE: Shader automatically converted from Godot Engine 3.5.2.stable's SpatialMaterial.
@@ -13,6 +14,7 @@ uniform vec4 albedo : hint_color;
 uniform sampler2D texture_albedo : hint_albedo;
 uniform sampler2D texture_pattern : hint_albedo;
 uniform sampler2D texture_customOverlay : hint_albedo;
+uniform sampler2D texture_cumOverlay : hint_albedo;
 uniform float specular;
 uniform float metallic;
 uniform float roughness : hint_range(0,1);
@@ -26,6 +28,10 @@ uniform vec2 pattern_size;
 uniform vec4 pattern_red_color : hint_color;
 uniform vec4 pattern_blue_color : hint_color;
 uniform vec4 pattern_green_color : hint_color;
+uniform float random_shift;
+uniform float cum_scale;
+uniform float cum_transparency;
+uniform int cum_amount;
 
 varying vec2 UV_pattern;
 
@@ -51,6 +57,16 @@ void fragment() {
 	vec4 albedo_tex = texture(texture_albedo,base_uv) * vec4(pattern_color.rgb, 1.0);
 	albedo_tex.rgb = mix(albedo_tex.rgb, overlay_tex.rgb, overlay_tex.a);//overlay_tex.rgb * overlay_tex.a + albedo_tex.rgb*(1.0 - overlay_tex.a);
 	albedo_tex.a = max(albedo_tex.a, overlay_tex.a);
+	
+	for (int i = 0;i<cum_amount;i++)
+	{
+		float fi = float(i*i) / 10.0;
+		vec4 cum_tex = texture(texture_cumOverlay, vec2(fi, fi) + (base_uv * pattern_size) * cum_scale - vec2(random_shift, TIME + sin(TIME))/300.0);
+		albedo_tex.rgb = mix(albedo_tex.rgb, cum_tex.rgb, cum_tex.a * cum_transparency);
+	}
+
+	
+	
 	ALBEDO = albedo.rgb * albedo_tex.rgb;
 	METALLIC = metallic;
 	ROUGHNESS = roughness;
@@ -77,6 +93,11 @@ shader_param/pattern_size = Vector2( 0.125, 0.25 )
 shader_param/pattern_red_color = Color( 0.0784314, 0.298039, 0.0980392, 1 )
 shader_param/pattern_blue_color = Color( 0.596078, 0.270588, 0.270588, 1 )
 shader_param/pattern_green_color = Color( 0.596078, 0.270588, 0.270588, 1 )
+shader_param/random_shift = null
+shader_param/cum_scale = 5.0
+shader_param/cum_transparency = 0.0
+shader_param/cum_amount = 1
 shader_param/texture_albedo = ExtResource( 1 )
 shader_param/texture_pattern = ExtResource( 2 )
 shader_param/texture_customOverlay = ExtResource( 3 )
+shader_param/texture_cumOverlay = ExtResource( 4 )

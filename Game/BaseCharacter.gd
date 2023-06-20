@@ -1353,6 +1353,10 @@ func softUpdateDoll(doll: Doll3D):
 			
 			skinData[bodypartSlot] = bodypartSkinData
 	doll.setSkinData(skinData)
+	if(hasEffect(StatusEffect.CoveredInCum)):
+		doll.setCumAmount(getOutsideMessinessLevel())
+	else:
+		doll.setCumAmount(0)
 	doll.updateMaterials()
 	
 	doll.setArmsCuffed(false)

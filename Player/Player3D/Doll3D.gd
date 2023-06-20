@@ -19,6 +19,7 @@ var legsPuppy = false
 var breastsLeaking = false
 var pussyLeaking = false
 var anusLeaking = false
+var cumAmount = 0
 
 var temporaryRiggedParts = {}
 
@@ -509,6 +510,12 @@ func setPussyLeaking(newPussyLeaking):
 
 func setAnusLeaking(newAnusLeaking):
 	anusLeaking = newAnusLeaking
+
+func setCumAmount(theisOnCum):
+	cumAmount = theisOnCum
+
+func getCumAmount():
+	return cumAmount
 
 func _on_RandomLeakTimer_timeout():
 	var possible = []

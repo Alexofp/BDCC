@@ -7,6 +7,7 @@ export(String, "head", "hair", "ears", "horns", "body", "arms", "breasts", "peni
 export(Texture) var customOverlay = null
 export(Texture) var customSkinPattern = null
 export(Texture) var customAlbedo = null
+export(bool) var showCumLayer = true
 var partRef
 var fancyMaterial
 var defaultOverlay = preload("res://Player/Player3D/Skins/defaultoverlay.png")
@@ -37,17 +38,27 @@ func _ready():
 	if(customSkinPattern == null):
 		fancyMaterial.set_shader_param("pattern_start", pattern_start / 2048.0 * 256.0)
 		fancyMaterial.set_shader_param("pattern_size", pattern_size / 2048.0 * 256.0)
+		fancyMaterial.set_shader_param("cum_scale", 5.0)
 	else:
 		fancyMaterial.set_shader_param("pattern_start", pattern_start)
 		fancyMaterial.set_shader_param("pattern_size", pattern_size)
+		fancyMaterial.set_shader_param("cum_scale", 0.5)
 	fancyMaterial.set_shader_param("texture_albedo", albedoTexture)
 	if(customOverlay != null):
 		fancyMaterial.set_shader_param("texture_customOverlay", customOverlay)
+	fancyMaterial.set_shader_param("random_shift", RNG.randf_range(0.0, 1000.0))
 	set_surface_material(0, fancyMaterial)
 
 func updateMaterial():
 	var theDoll = getDoll()
 	if(theDoll != null):
+		if(showCumLayer && theDoll.getCumAmount() > 0):
+			fancyMaterial.set_shader_param("cum_transparency", 1.0)
+			fancyMaterial.set_shader_param("cum_amount", theDoll.getCumAmount())
+		else:
+			fancyMaterial.set_shader_param("cum_transparency", 0.0)
+			fancyMaterial.set_shader_param("cum_amount", 0)
+		
 		var skinData = theDoll.getSkinDataByID(bodypartSlot)
 		if(skinData != null):
 			#fancyMaterial = materialWithSkin.duplicate()
