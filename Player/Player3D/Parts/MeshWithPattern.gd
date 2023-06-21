@@ -8,6 +8,7 @@ export(Texture) var customOverlay = null
 export(Texture) var customSkinPattern = null
 export(Texture) var customAlbedo = null
 export(bool) var showCumLayer = true
+export(Vector2) var cumLayerScale = Vector2(1.0, 1.0)
 var partRef
 var fancyMaterial
 var defaultOverlay = preload("res://Player/Player3D/Skins/defaultoverlay.png")
@@ -41,11 +42,11 @@ func _ready():
 	if(customSkinPattern == null):
 		fancyMaterial.set_shader_param("pattern_start", pattern_start / 2048.0 * 256.0)
 		fancyMaterial.set_shader_param("pattern_size", pattern_size / 2048.0 * 256.0)
-		fancyMaterial.set_shader_param("cum_scale", 5.0)
+		fancyMaterial.set_shader_param("cum_scale", Vector2(5.0, 5.0) * cumLayerScale)
 	else:
 		fancyMaterial.set_shader_param("pattern_start", pattern_start)
 		fancyMaterial.set_shader_param("pattern_size", pattern_size)
-		fancyMaterial.set_shader_param("cum_scale", 0.5)
+		fancyMaterial.set_shader_param("cum_scale", Vector2(0.5, 0.5) * cumLayerScale)
 	fancyMaterial.set_shader_param("texture_albedo", albedoTexture)
 	if(customOverlay != null):
 		fancyMaterial.set_shader_param("texture_customOverlay", customOverlay)

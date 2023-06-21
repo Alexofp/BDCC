@@ -1,9 +1,6 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://Player/Player3D/Parts/Part3D.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Player/Player3D/Skins/MaterialForPartWithSkin.tres" type="Material" id=3]
-[ext_resource path="res://Player/Player3D/Parts/AttachmentProxy.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Player/Player3D/Prefabs/BodyPrefab.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Player/Player3D/Parts/Body/HumanBody/body.png" type="Texture" id=1]
 
 [sub_resource type="SpatialMaterial" id=15]
 resource_name = "bodywide.png"
@@ -116,17 +113,16 @@ bind/27/name = "DeformButt"
 bind/27/bone = -1
 bind/27/pose = Transform( 0.31345, 0.949604, -8.4791e-07, 0.949605, -0.31345, -5.59528e-08, -3.30048e-07, -7.49881e-07, -1, -4.0694, 1.33643, 3.13489e-06 )
 
-[node name="HumanBody" instance=ExtResource( 1 )]
+[sub_resource type="SpatialMaterial" id=18]
+resource_name = "bodywide.png"
+flags_transparent = true
+flags_unshaded = true
+vertex_color_use_as_albedo = true
+params_cull_mode = 2
+params_depth_draw_mode = 3
+albedo_texture = ExtResource( 1 )
 
-[node name="AttachmentProxy" parent="." index="0" instance=ExtResource( 4 )]
-transform = Transform( 0.991162, -0.132654, 0, 0.132654, 0.991162, 0, 0, 0, 1, 0.074, 6.653, 0.043 )
-boneId = "Neck"
-zoneName = "neck"
-
-[node name="bodywidepng2" parent="." index="1" instance=ExtResource( 5 )]
-
-[node name="bodywidepng4" type="MeshInstance" parent="." index="2"]
-visible = false
+[node name="BodyPrefab" type="MeshInstance"]
 mesh = SubResource( 16 )
 skin = SubResource( 17 )
-material/0 = ExtResource( 3 )
+material/0 = SubResource( 18 )

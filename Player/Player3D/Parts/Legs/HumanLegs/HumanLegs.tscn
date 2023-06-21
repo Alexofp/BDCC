@@ -322,7 +322,7 @@ mesh = SubResource( 33 )
 skin = SubResource( 31 )
 material/0 = SubResource( 23 )
 script = ExtResource( 6 )
-pattern_start = Vector2( 0, 5 )
+pattern_start = Vector2( 0.125, 5 )
 pattern_size = Vector2( 0.25, 1 )
 bodypartSlot = "legs"
 
@@ -331,7 +331,7 @@ mesh = SubResource( 34 )
 skin = SubResource( 31 )
 material/0 = SubResource( 23 )
 script = ExtResource( 6 )
-pattern_start = Vector2( 0, 5 )
+pattern_start = Vector2( 0.125, 5 )
 pattern_size = Vector2( 0.25, 1 )
 bodypartSlot = "legs"
 

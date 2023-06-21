@@ -15,21 +15,15 @@ uniform sampler2D texture_albedo : hint_albedo;
 uniform sampler2D texture_pattern : hint_albedo;
 uniform sampler2D texture_customOverlay : hint_albedo;
 uniform sampler2D texture_cumOverlay : hint_albedo;
-uniform float specular;
-uniform float metallic;
-uniform float roughness : hint_range(0,1);
-uniform float point_size : hint_range(0,128);
 uniform vec3 uv1_scale;
 uniform vec3 uv1_offset;
-uniform vec3 uv2_scale;
-uniform vec3 uv2_offset;
 uniform vec2 pattern_start;
 uniform vec2 pattern_size;
 uniform vec4 pattern_red_color : hint_color;
 uniform vec4 pattern_blue_color : hint_color;
 uniform vec4 pattern_green_color : hint_color;
 uniform float random_shift;
-uniform float cum_scale;
+uniform vec2 cum_scale;
 uniform float cum_transparency;
 uniform int cum_amount;
 
@@ -39,8 +33,6 @@ void vertex() {
 	UV=UV*uv1_scale.xy+uv1_offset.xy;
 	UV_pattern = UV*pattern_size+pattern_start;
 }
-
-
 
 
 void fragment() {
@@ -65,12 +57,7 @@ void fragment() {
 		albedo_tex.rgb = mix(albedo_tex.rgb, cum_tex.rgb, cum_tex.a * cum_transparency);
 	}
 
-	
-	
 	ALBEDO = albedo.rgb * albedo_tex.rgb;
-	METALLIC = metallic;
-	ROUGHNESS = roughness;
-	SPECULAR = specular;
 	ALPHA = albedo.a * albedo_tex.a;// * pattern_color.a;
 }
 "
@@ -80,14 +67,8 @@ resource_local_to_scene = true
 resource_name = "bodywide.png"
 shader = SubResource( 19 )
 shader_param/albedo = Color( 1, 1, 1, 1 )
-shader_param/specular = 0.0
-shader_param/metallic = 0.0
-shader_param/roughness = 1.0
-shader_param/point_size = 1.0
 shader_param/uv1_scale = Vector3( 1, 1, 1 )
 shader_param/uv1_offset = Vector3( 0, 0, 0 )
-shader_param/uv2_scale = Vector3( 1, 1, 1 )
-shader_param/uv2_offset = Vector3( 0, 0, 0 )
 shader_param/pattern_start = Vector2( 0, 0 )
 shader_param/pattern_size = Vector2( 0.125, 0.25 )
 shader_param/pattern_red_color = Color( 0.0784314, 0.298039, 0.0980392, 1 )
