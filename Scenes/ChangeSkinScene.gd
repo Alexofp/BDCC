@@ -53,6 +53,9 @@ func _run():
 		textEdit.setText(Util.join(outputText, "\n"))
 	
 	if(state == ""):
+		if(debugMode):
+			addButton("RELOAD SKINS", "Reload all custom skins from disk", "do_reload_skins")
+		
 		saynn("In this menu you can modify the skin/colors of your character!")
 		
 		saynn("Start by modifying the base skin. All bodyparts use the base skin/colors unless you override them specifically.")
@@ -260,6 +263,11 @@ func _react(_action: String, _args):
 				bodypart.pickedBColor = theColor
 		setState("bodypartmenu")
 		thePC.updateAppearance()
+		return
+		
+	if(_action == "do_reload_skins"):
+		GlobalRegistry.findCustomSkins()
+		GM.pc.updateAppearance()
 		return
 	
 	setState(_action)
