@@ -106,7 +106,7 @@ mesh = SubResource( 2 )
 skin = SubResource( 3 )
 material/0 = SubResource( 1 )
 script = ExtResource( 4 )
-pattern_start = Vector2( 0.5, 2 )
+pattern_start = Vector2( 0.625, 2 )
 pattern_size = Vector2( 0.25, 0.5 )
 bodypartSlot = "breasts"
 

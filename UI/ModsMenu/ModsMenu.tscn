@@ -100,6 +100,13 @@ margin_bottom = 20.0
 size_flags_horizontal = 3
 text = "Modding wiki"
 
+[node name="SkinsFolderButton" type="Button" parent="VBoxContainer/GridContainer"]
+margin_top = 24.0
+margin_right = 253.0
+margin_bottom = 44.0
+size_flags_horizontal = 3
+text = "Skins folder"
+
 [node name="ImportModDialog" type="FileDialog" parent="."]
 anchor_left = 0.5
 anchor_top = 0.5
@@ -156,5 +163,6 @@ margin_bottom = 57.0
 [connection signal="pressed" from="VBoxContainer/GridContainer/AddModButton" to="." method="_on_AddModButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/GridContainer/RemoveModsButton" to="." method="_on_RemoveModsButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/GridContainer/WikiButton" to="." method="_on_WikiButton_pressed"]
+[connection signal="pressed" from="VBoxContainer/GridContainer/SkinsFolderButton" to="." method="_on_SkinsFolderButton_pressed"]
 [connection signal="file_selected" from="ImportModDialog" to="." method="_on_ImportModDialog_file_selected"]
 [connection signal="confirmed" from="ConfirmationDialog" to="." method="_on_ConfirmationDialog_confirmed"]

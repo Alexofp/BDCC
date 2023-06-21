@@ -346,6 +346,7 @@ func registerEverything():
 	registerSkinsFolder("res://Player/Player3D/Skins/")
 	
 	registerModulesFolder("res://Modules/")
+	findCustomSkins()
 	sortFightClubFighters()
 	
 	GM.GES.registerAll()
@@ -1518,3 +1519,18 @@ func getSkin(id: String):
 
 func getSkins():
 	return skins
+
+func findCustomSkins():
+	var skinsFolder = "user://custom_skins"
+	if(OS.get_name() == "Android"):
+		var externalDir:String = OS.get_system_dir(OS.SYSTEM_DIR_DOCUMENTS)
+		var finalDir = externalDir.plus_file("BDCCMods/custom_skins")
+		skinsFolder = finalDir
+	
+	for skinPath in Util.getFilesInFolder(skinsFolder):
+		var customSkin = preload("res://Player/Player3D/Skins/CustomSkin.gd").new()
+		var skinName = skinPath.get_file()
+		customSkin.id = skinName
+		customSkin.customName = skinName
+		customSkin.setTexturePath(skinPath)
+		skins[customSkin.id] = customSkin
