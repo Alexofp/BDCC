@@ -220,7 +220,6 @@ mesh = SubResource( 29 )
 skin = SubResource( 30 )
 material/0 = SubResource( 31 )
 script = ExtResource( 7 )
-pattern_start = Vector2( 1, 0 )
 bodypartSlot = "head"
 customSkinPattern = ExtResource( 8 )
 

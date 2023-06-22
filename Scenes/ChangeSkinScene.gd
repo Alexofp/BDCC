@@ -18,6 +18,7 @@ func _initScene(_args = []):
 		debugMode = true
 		if(editingID != "pc"):
 			addCharacter(editingID)
+	playAnimation(StageScene.Solo, "stand", {pc=editingID, bodyState={naked=true, hard=true}})
 
 func _init():
 	sceneID = "ChangeSkinScene"
@@ -60,7 +61,7 @@ func _run():
 		
 		saynn("Start by modifying the base skin. All bodyparts use the base skin/colors unless you override them specifically.")
 		
-		playAnimation(StageScene.Solo, "stand", {pc=editingID, bodyState={naked=true,hard=true}})
+		
 		addButton("Confirm", "Job well done", "endthescene")
 		
 		addButton("Base Skin/Colors", "Choose your base skin/colors", "basemenu")
@@ -266,8 +267,9 @@ func _react(_action: String, _args):
 		return
 		
 	if(_action == "do_reload_skins"):
+		playAnimation(StageScene.Solo, "walk", {pc=editingID, bodyState={naked=true,hard=true}})
 		GlobalRegistry.findCustomSkins()
-		GM.pc.updateAppearance()
+		thePC.updateAppearance()
 		return
 	
 	setState(_action)

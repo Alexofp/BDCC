@@ -224,16 +224,20 @@ func loadData(_data):
 	if(fluidProduction != null):
 		fluidProduction.loadData(SAVE.loadVar(_data, "fluidProductionData", {}))
 	if(supportsSkin()):
-		pickedSkin = SAVE.loadVar(_data, "pickedSkin", null)
-		pickedRColor = SAVE.loadVar(_data, "pickedRColor", null)
-		if(pickedRColor is String):
-			pickedRColor = Color(pickedRColor)
-		pickedGColor = SAVE.loadVar(_data, "pickedGColor", null)
-		if(pickedGColor is String):
-			pickedGColor = Color(pickedGColor)
-		pickedBColor = SAVE.loadVar(_data, "pickedBColor", null)
-		if(pickedBColor is String):
-			pickedBColor = Color(pickedBColor)
+		if(_data.has("pickedSkin")):
+			pickedSkin = SAVE.loadVar(_data, "pickedSkin", null)
+		if(_data.has("pickedRColor")):
+			pickedRColor = SAVE.loadVar(_data, "pickedRColor", null)
+			if(pickedRColor is String):
+				pickedRColor = Color(pickedRColor)
+		if(_data.has("pickedGColor")):
+			pickedGColor = SAVE.loadVar(_data, "pickedGColor", null)
+			if(pickedGColor is String):
+				pickedGColor = Color(pickedGColor)
+		if(_data.has("pickedBColor")):
+			pickedBColor = SAVE.loadVar(_data, "pickedBColor", null)
+			if(pickedBColor is String):
+				pickedBColor = Color(pickedBColor)
 
 func saveDataNPC():
 	var result = {}

@@ -8,6 +8,14 @@ func _init():
 	npcBaseLust = 150
 	npcCharacterType = CharacterType.Inmate
 	
+	pickedSkin="TaviSkin"
+	pickedSkinRColor=Color("ff57197c")
+	pickedSkinGColor=Color("fffedaff")
+	pickedSkinBColor=Color("ff00ff1c")
+	npcSkinData={
+	"hair": {"r": Color("ff7f1b9b"),"g": Color("ff00ff0f"),"b": Color("ff631c89"),},
+	}
+	
 	npcLustInterests = {
 		InterestTopic.Gags: Interest.KindaLikes,
 		InterestTopic.Blindfolds: Interest.Hates,
@@ -84,7 +92,7 @@ func getFightIntro(_battleName):
 	return getName() + " gets into the combat stance and prepares for a fight. "+formatSay("Are you afraid of a little kitty cat~?")
 
 func getThickness() -> int:
-	return 80
+	return 60
 
 func getFemininity() -> int:
 	return 90
