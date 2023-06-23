@@ -1,7 +1,7 @@
 [gd_resource type="ShaderMaterial" load_steps=6 format=2]
 
 [ext_resource path="res://Player/Player3D/Parts/Body/HumanBody/body.png" type="Texture" id=1]
-[ext_resource path="res://Player/Player3D/Skins/SkinExample/SkinExample.png" type="Texture" id=2]
+[ext_resource path="res://Player/Player3D/Skins/SoftSpikySkin/RahiSkin.png" type="Texture" id=2]
 [ext_resource path="res://Player/Player3D/Skins/defaultoverlay.png" type="Texture" id=3]
 [ext_resource path="res://Player/Player3D/Particles/cumlayer.png" type="Texture" id=4]
 

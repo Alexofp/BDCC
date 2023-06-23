@@ -349,7 +349,7 @@ mesh = SubResource( 13 )
 skin = SubResource( 14 )
 material/0 = SubResource( 12 )
 script = ExtResource( 11 )
-pattern_start = Vector2( 2, 1 )
+pattern_start = Vector2( 1.978, 1 )
 bodypartSlot = "head"
 
 [node name="PartState2" parent="PartStatePicker2" index="1" instance=ExtResource( 6 )]
@@ -362,7 +362,7 @@ mesh = SubResource( 13 )
 skin = SubResource( 14 )
 material/0 = SubResource( 26 )
 script = ExtResource( 11 )
-pattern_start = Vector2( 2, 1 )
+pattern_start = Vector2( 1.978, 1 )
 bodypartSlot = "head"
 customOverlay = ExtResource( 12 )
 
@@ -376,7 +376,7 @@ mesh = SubResource( 13 )
 skin = SubResource( 14 )
 material/0 = SubResource( 27 )
 script = ExtResource( 11 )
-pattern_start = Vector2( 2, 1 )
+pattern_start = Vector2( 1.978, 1 )
 bodypartSlot = "head"
 customOverlay = ExtResource( 13 )
 
@@ -390,7 +390,7 @@ mesh = SubResource( 13 )
 skin = SubResource( 14 )
 material/0 = SubResource( 28 )
 script = ExtResource( 11 )
-pattern_start = Vector2( 2, 1 )
+pattern_start = Vector2( 1.978, 1 )
 bodypartSlot = "head"
 
 [node name="PartStatePicker" parent="." index="3" instance=ExtResource( 5 )]
