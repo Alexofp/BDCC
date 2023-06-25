@@ -3,6 +3,8 @@ extends BodypartPenis
 func _init():
 	visibleName = "barbed penis"
 	id = "felinepenis"
+	pickedGColor = Color.red
+	pickedBColor = Color.darkred
 
 func getCompatibleSpecies():
 	return [Species.Any]

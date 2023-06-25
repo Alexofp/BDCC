@@ -4,7 +4,7 @@ func _init():
 	visibleName = "knotted penis"
 	id = "caninepenis"
 	pickedGColor = Color.red
-	pickedBColor = Color.red
+	pickedBColor = Color.darkred
 
 func getCompatibleSpecies():
 	return [Species.Any]

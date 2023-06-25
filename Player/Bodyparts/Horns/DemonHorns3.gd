@@ -13,3 +13,9 @@ func getDoll3DScene():
 func getTraits():
 	# too small to be graspable
 	return {}
+
+func generateRandomColors(_dynamicCharacter):
+	.generateRandomColors(_dynamicCharacter)
+	
+	if(_dynamicCharacter != null):
+		pickedRColor = _dynamicCharacter.pickedSkinRColor

@@ -138,3 +138,11 @@ func npcGenerationWeight():
 
 func canBeUsedForNPCType(_npcType):
 	return true
+
+func getSkinType():
+	return SkinType.Fur
+
+func generateSkinColors():
+	return ColorUtils.generateGenericFurryColors()
+
+

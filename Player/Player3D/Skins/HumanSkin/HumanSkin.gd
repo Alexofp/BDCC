@@ -8,3 +8,8 @@ func getName():
 
 func getPatternTexture():
 	return preload("res://Player/Player3D/Skins/HumanSkin/HumanSkin.png")
+
+func getFittingSkinTypes():
+	return {
+		SkinType.Skin: 1.0,
+	}

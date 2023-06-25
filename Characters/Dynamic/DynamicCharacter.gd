@@ -102,6 +102,30 @@ func getDefaultArtwork(_variant = []):
 func getBirthWaitTime():
 	return 60*60*30 # Dynamic npcs wait 30 hours before giving birth
 
+func applyRandomSkinAndColors():
+	var species = getSpecies()
+	var possibleSkins = []
+	for speciesOne in species:
+		var theSpecies = GlobalRegistry.getSpecies(speciesOne)
+		var skinType = theSpecies.getSkinType()
+		
+		for skinID in GlobalRegistry.getSkins():
+			var theSkin = GlobalRegistry.getSkin(skinID)
+			var fittingSkinTypes = theSkin.getFittingSkinTypes()
+			if(fittingSkinTypes is Dictionary && fittingSkinTypes.has(skinType)):
+				possibleSkins.append([skinID, fittingSkinTypes[skinType]])
+		
+	var newSkin = RNG.pickWeightedPairs(possibleSkins)
+	
+	if(newSkin != null):
+		pickedSkin = newSkin
+		
+	if(species.size() > 0):
+		var skinColors = GlobalRegistry.getSpecies(RNG.pick(species)).generateSkinColors()
+		pickedSkinRColor = skinColors[0]
+		pickedSkinGColor = skinColors[1]
+		pickedSkinBColor = skinColors[2]
+
 func saveData():
 	var data = {
 		"npcLevel": npcLevel,
@@ -125,6 +149,10 @@ func saveData():
 		"flags": flags,
 		"npcDefaultEquipment": npcDefaultEquipment,
 		"npcCharacterType": npcCharacterType,
+		"pickedSkin": pickedSkin,
+		"pickedSkinRColor": pickedSkinRColor.to_html(),
+		"pickedSkinGColor": pickedSkinGColor.to_html(),
+		"pickedSkinBColor": pickedSkinBColor.to_html(),
 	}
 	
 	data["bodyparts"] = {}
@@ -192,6 +220,13 @@ func loadData(data):
 	flags = SAVE.loadVar(data, "flags", {})
 	npcDefaultEquipment = SAVE.loadVar(data, "npcDefaultEquipment", [])
 	npcCharacterType = SAVE.loadVar(data, "npcCharacterType", CharacterType.Generic)
+	if(!data.has("pickedSkin")):
+		applyRandomSkinAndColors()
+	else:
+		pickedSkin = SAVE.loadVar(data, "pickedSkin", "EmptySkin")
+		pickedSkinRColor = Color(SAVE.loadVar(data, "pickedSkinRColor", "ffffff"))
+		pickedSkinGColor = Color(SAVE.loadVar(data, "pickedSkinGColor", "cccccc"))
+		pickedSkinBColor = Color(SAVE.loadVar(data, "pickedSkinBColor", "999999"))
 	resetEquipment()
 	
 	resetSlots()

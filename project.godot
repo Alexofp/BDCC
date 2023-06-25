@@ -224,6 +224,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Game/Pregnancy/ChildSystem.gd"
 }, {
+"base": "Object",
+"class": "ColorUtils",
+"language": "GDScript",
+"path": "res://Player/Player3D/Skins/ColorUtils.gd"
+}, {
 "base": "Reference",
 "class": "ComputerBase",
 "language": "GDScript",
@@ -1004,6 +1009,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Player/Player3D/Skins/SkinBase.gd"
 }, {
+"base": "Object",
+"class": "SkinType",
+"language": "GDScript",
+"path": "res://Player/Player3D/Skins/SkinType.gd"
+}, {
 "base": "Reference",
 "class": "Species",
 "language": "GDScript",
@@ -1163,6 +1173,7 @@ _global_script_class_icons={
 "CharacterType": "",
 "Child": "",
 "ChildSystem": "",
+"ColorUtils": "",
 "ComputerBase": "",
 "ContentType": "",
 "CumProduction": "",
@@ -1319,6 +1330,7 @@ _global_script_class_icons={
 "SkillBase": "",
 "SkillsHolder": "",
 "SkinBase": "",
+"SkinType": "",
 "Species": "",
 "SpeciesCompatibility": "",
 "Stage3D": "",

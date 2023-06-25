@@ -44,3 +44,6 @@ func getEggCellOvulationAmount():
 		[4, 1.0],
 		[5, 0.4],
 	]
+
+func getSkinType():
+	return SkinType.Scales

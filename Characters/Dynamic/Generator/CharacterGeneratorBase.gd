@@ -58,6 +58,9 @@ func pickSpecies(character:DynamicCharacter, _args = {}):
 	
 	character.npcSpecies = [randomSpecies]
 
+func pickSkinAndColors(character:DynamicCharacter, _args = {}):
+	character.applyRandomSkinAndColors()
+
 func createBodyparts(character:DynamicCharacter, _args = {}):
 	var theSpecies = character.npcSpecies
 	for bodypartSlot in BodypartSlot.getAll():
@@ -328,6 +331,7 @@ func generate(_args = {}):
 	pickBodyAttributes(character, _args)
 	pickName(character, _args)
 	pickSpecies(character, _args)
+	pickSkinAndColors(character, _args)
 	pickLevel(character, _args)
 	pickStats(character, _args)
 	pickArchetypes(character, _args)

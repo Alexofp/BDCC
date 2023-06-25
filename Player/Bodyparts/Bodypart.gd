@@ -295,6 +295,7 @@ func npcGenerationWeight(_dynamicCharacter):
 func generateDataFor(_dynamicCharacter):
 	if(orifice != null):
 		orifice.generateDataFor(_dynamicCharacter)
+	generateRandomColors(_dynamicCharacter)
 
 func supportsSkin():
 	return true
@@ -310,3 +311,6 @@ func getSkinData():
 		"g": pickedGColor,
 		"b": pickedBColor,
 	}
+
+func generateRandomColors(_dynamicCharacter):
+	pass
