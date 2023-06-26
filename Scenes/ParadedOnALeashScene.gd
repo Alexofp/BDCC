@@ -5,7 +5,7 @@ var endLocation = ""
 var path = []
 var whoLeashingID = ""
 var randomChat = []
-var teleportwhenskipped = false
+var teleportwhenskipped = true
 
 func _initScene(_args = []):
 	whoLeashingID = _args[0]
@@ -96,6 +96,7 @@ func saveData():
 	data["path"] = path
 	data["whoLeashingID"] = whoLeashingID
 	data["randomChat"] = randomChat
+	data["teleportwhenskipped"] = teleportwhenskipped
 
 	return data
 	
@@ -107,6 +108,7 @@ func loadData(data):
 	path = SAVE.loadVar(data, "path", [])
 	whoLeashingID = SAVE.loadVar(data, "whoLeashingID", "")
 	randomChat = SAVE.loadVar(data, "randomChat", [])
+	teleportwhenskipped = SAVE.loadVar(data, "teleportwhenskipped", true)
 
 func resolveCustomCharacterName(_charID):
 	if(_charID == "leasher" && whoLeashingID != ""):
