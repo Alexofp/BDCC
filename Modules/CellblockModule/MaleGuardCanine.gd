@@ -3,6 +3,15 @@ extends Character
 func _init():
 	id = "maleguard_canine"
 	
+	pickedSkin="ArconSkin"
+	pickedSkinRColor=Color("ff8f6052")
+	pickedSkinGColor=Color("ff432d26")
+	pickedSkinBColor=Color("ffd5bbb4")
+	npcSkinData={
+	"hair": {"r": Color("ff9b3716"),"g": Color("ff22456f"),"b": Color("ff3056be"),},
+	"penis": {"g": Color("ffff0000"),"b": Color("ff8b0000"),},
+	}
+	
 	npcArmor = {
 		DamageType.Physical: 10,
 	}

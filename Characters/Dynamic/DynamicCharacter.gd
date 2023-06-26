@@ -102,30 +102,6 @@ func getDefaultArtwork(_variant = []):
 func getBirthWaitTime():
 	return 60*60*30 # Dynamic npcs wait 30 hours before giving birth
 
-func applyRandomSkinAndColors():
-	var species = getSpecies()
-	var possibleSkins = []
-	for speciesOne in species:
-		var theSpecies = GlobalRegistry.getSpecies(speciesOne)
-		var skinType = theSpecies.getSkinType()
-		
-		for skinID in GlobalRegistry.getSkins():
-			var theSkin = GlobalRegistry.getSkin(skinID)
-			var fittingSkinTypes = theSkin.getFittingSkinTypes()
-			if(fittingSkinTypes is Dictionary && fittingSkinTypes.has(skinType)):
-				possibleSkins.append([skinID, fittingSkinTypes[skinType]])
-		
-	var newSkin = RNG.pickWeightedPairs(possibleSkins)
-	
-	if(newSkin != null):
-		pickedSkin = newSkin
-		
-	if(species.size() > 0):
-		var skinColors = GlobalRegistry.getSpecies(RNG.pick(species)).generateSkinColors()
-		pickedSkinRColor = skinColors[0]
-		pickedSkinGColor = skinColors[1]
-		pickedSkinBColor = skinColors[2]
-
 func saveData():
 	var data = {
 		"npcLevel": npcLevel,

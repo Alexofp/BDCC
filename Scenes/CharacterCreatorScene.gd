@@ -69,6 +69,9 @@ func _run():
 	if(state == "pickedspecies"):
 		playAnimation(StageScene.Solo, "stand", {bodyState={naked=true,hard=true}})
 		
+		if(debugMode):
+			saynn("[b]Scene is running in debug mode, no bodypart restrictions are applied[/b]")
+		
 		say("You are a "+GM.pc.getSpeciesFullName())
 		say("\n----\n")
 		
@@ -152,7 +155,7 @@ func _run():
 			var bodypart = GlobalRegistry.getBodypartRef(bodypartID)
 			var supportedSpecies = bodypart.getCompatibleSpecies()
 			
-			var hasInSupported = false
+			var hasInSupported = false || debugMode
 			var hasInAllowed = false
 			
 			for supported in supportedSpecies:
@@ -212,6 +215,7 @@ func _run():
 			sayn(curAttrib[0]+": "+str(curAttrib[1]))
 		
 		addButton("Done", "You're done changing attributes", "pickedspecies")
+		addButton("Skin/Colors", "Change how you look", "startskinmenu")
 		
 		for attributeID in attributes:
 			var attribute = attributes[attributeID]
@@ -343,6 +347,10 @@ func _react(_action: String, _args):
 	
 	if(_action == "endthescene" || _action == "donecreating"):
 		endScene()
+		return
+	
+	if(_action == "startskinmenu"):
+		runScene("ChangeSkinScene")
 		return
 
 	setState(_action)

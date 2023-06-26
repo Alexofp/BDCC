@@ -19,6 +19,3 @@ func getTraits():
 	return {
 		PartTrait.PenisKnot: true,
 	}
-
-func hasCustomSkinPattern():
-	return false

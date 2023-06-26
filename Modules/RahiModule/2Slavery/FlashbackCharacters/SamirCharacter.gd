@@ -4,6 +4,14 @@ func _init():
 	id = "rahiFather"
 	disableSerialization = true
 	
+	pickedSkin="SoftSpikySkin"
+	pickedSkinRColor=Color("ffaf645a")
+	pickedSkinGColor=Color("ff9b837f")
+	pickedSkinBColor=Color("ff675353")
+	npcSkinData={
+	"hair": {"r": Color("ff776c6c"),"g": Color("ff776c6c"),"b": Color("ff776c6c"),},
+	}
+	
 func _getName():
 	return "Samir Haj'jar"
 

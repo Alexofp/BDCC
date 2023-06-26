@@ -968,8 +968,15 @@ func getDebugActions():
 				{
 					"id": "npcID",
 					"name": "NPC ID",
-					"type": "string",
 					"value": "pc",
+					"type": "smartlist",
+					"npc": true,
+				},
+				{
+					"id": "cnpcID",
+					"name": "Custom ID",
+					"value": "",
+					"type": "string",
 				},
 			]
 		},
@@ -1041,7 +1048,10 @@ func doDebugAction(id, args = {}):
 		runScene("SimpleAnimPlayerScene")
 
 	if(id == "skinEditor"):
-		runScene("ChangeSkinScene", [args["npcID"], true])
+		if(args["cnpcID"] != ""):
+			runScene("ChangeSkinScene", [args["cnpcID"], true])
+		else:
+			runScene("ChangeSkinScene", [args["npcID"], true])
 
 func consoleSetFlagBool(flagID, valuestr):
 	var value = false

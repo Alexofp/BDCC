@@ -1192,6 +1192,8 @@ func hasHorns():
 	return hasBodypart(BodypartSlot.Horns)
 
 func hasNonFlatBreasts():
+	if(!hasBodypart(BodypartSlot.Breasts)):
+		return false
 	var breasts = getBodypart(BodypartSlot.Breasts)
 	
 	var size = breasts.getSize()
@@ -1202,6 +1204,8 @@ func hasNonFlatBreasts():
 		return false
 
 func hasBigBreasts():
+	if(!hasBodypart(BodypartSlot.Breasts)):
+		return false
 	var breasts = getBodypart(BodypartSlot.Breasts)
 	
 	var size = breasts.getSize()
@@ -2120,3 +2124,30 @@ func getSkinData():
 		"b": theColors[2],
 	}
 
+func applyRandomColors():
+	var species = getSpecies()
+	if(species.size() > 0):
+		var skinColors = GlobalRegistry.getSpecies(RNG.pick(species)).generateSkinColors()
+		pickedSkinRColor = skinColors[0]
+		pickedSkinGColor = skinColors[1]
+		pickedSkinBColor = skinColors[2]
+
+func applyRandomSkinAndColors():
+	var species = getSpecies()
+	var possibleSkins = []
+	for speciesOne in species:
+		var theSpecies = GlobalRegistry.getSpecies(speciesOne)
+		var skinType = theSpecies.getSkinType()
+		
+		for skinID in GlobalRegistry.getSkins():
+			var theSkin = GlobalRegistry.getSkin(skinID)
+			var fittingSkinTypes = theSkin.getFittingSkinTypes()
+			if(fittingSkinTypes is Dictionary && fittingSkinTypes.has(skinType)):
+				possibleSkins.append([skinID, fittingSkinTypes[skinType]])
+		
+	var newSkin = RNG.pickWeightedPairs(possibleSkins)
+	
+	if(newSkin != null):
+		pickedSkin = newSkin
+		
+	applyRandomColors()

@@ -37,7 +37,37 @@ func setArgs(_args):
 			
 			allValues[category].append(itemID)
 		_on_OptionButton_item_selected(0)
+	if("npc" in _args && _args["npc"]):
+		var theValue = ""
+		if("value" in _args):
+			theValue = _args["value"]
+		for npcID in (GlobalRegistry.getCharacters().keys()+["pc"]):
+			var theNpc = GlobalRegistry.getCharacter(npcID)
+			var npcType = theNpc.getCharacterType()
+			
+			if(!allValues.has(npcType)):
+				allValues[npcType] = []
+				$VBoxContainer/OptionButton.add_item(npcType)
+				categories.append(npcType)
+			
+			allValues[npcType].append(npcID)
 			#myvalues.append([itemID, itemID])
+		if(theValue == ""):
+			_on_OptionButton_item_selected(0)
+		else:
+			var currentCategoryI = 0
+			while(currentCategoryI < categories.size()):
+				var categ = categories[currentCategoryI]
+				var currentItemI = 0
+				while(currentItemI < allValues[categ].size()):
+					if(allValues[categ][currentItemI] == theValue):
+						$VBoxContainer/OptionButton.select(currentCategoryI)
+						_on_OptionButton_item_selected(currentCategoryI)
+						$VBoxContainer/ItemList.select(currentItemI)
+						return
+					currentItemI += 1
+				
+				currentCategoryI += 1
 			
 #	if("skill" in _args && _args["skill"]):
 #		for thingID in GlobalRegistry.getSkills():

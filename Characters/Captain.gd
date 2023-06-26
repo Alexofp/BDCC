@@ -4,6 +4,15 @@ func _init():
 	id = "captain"
 	npcCharacterType = CharacterType.Generic
 	
+	pickedSkin="FerriSkin"
+	pickedSkinRColor=Color("ff404040")
+	pickedSkinGColor=Color("ff545454")
+	pickedSkinBColor=Color("ff545454")
+	npcSkinData={
+	"hair": {"r": Color("ff252525"),"g": Color("ff252525"),"b": Color("ff001384"),},
+	"ears": {"g": Color("ffe3776f"),},
+	}
+	
 func _getName():
 	return "Cpt. Wright"
 

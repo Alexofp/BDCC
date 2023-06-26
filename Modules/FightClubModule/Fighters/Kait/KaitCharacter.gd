@@ -4,6 +4,15 @@ func _init():
 	id = "kait"
 	npcHasMenstrualCycle = true
 	
+	pickedSkin="LynxSkin"
+	pickedSkinRColor=Color("ff9ea3b5")
+	pickedSkinGColor=Color("ffcdcad5")
+	pickedSkinBColor=Color("ff494c54")
+	npcSkinData={
+	"hair": {"r": Color("ff555555"),"g": Color("ff3c3c3c"),"b": Color("ff3d3d3d"),},
+	"ears": {"b": Color("ffdcdcdc"),},
+	}
+	
 	npcLevel = 15
 	npcBasePain = 130
 	npcBaseLust = 160

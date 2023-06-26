@@ -33,6 +33,9 @@ func _ready():
 	else:
 		$VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/TestButton.visible = false
 	
+	if(OS.get_name() in ["Android", "HTML5"]):
+		$VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/OpenModsFolder.visible = false
+	
 	if(!SHOW_THIS_SCREEN_ANYWAY && !OPTIONS.shouldShowModdedLauncher()):
 		if(!GlobalRegistry.hasModSupport() || rawModList.size() == 0):
 			GlobalRegistry.registerEverything()
@@ -389,3 +392,7 @@ func _on_ModBrowser_closePressed():
 	$ModBrowser.visible = false
 	
 	checkModOrderAndFillData(GlobalRegistry.getRawModList())
+
+
+func _on_OpenModsFolder_pressed():
+	var _ok = OS.shell_open(ProjectSettings.globalize_path("user://mods"))

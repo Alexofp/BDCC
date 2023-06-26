@@ -3,6 +3,16 @@ extends Character
 func _init():
 	id = "axis"
 	
+	pickedSkin="WoonaSkin"
+	pickedSkinRColor=Color("ffefefef")
+	pickedSkinGColor=Color("ffdfdfdf")
+	pickedSkinBColor=Color("ffe6e6e6")
+	npcSkinData={
+	"head": {"b": Color("ff232323"),},
+	"hair": {"r": Color("ffffffff"),"g": Color("ffd3d3d3"),"b": Color("ffa9a9a9"),},
+	"penis": {"g": Color("ffff0000"),"b": Color("ff8b0000"),},
+	}
+	
 	npcLevel = 12
 	npcBasePain = 150
 	npcBaseLust = 200

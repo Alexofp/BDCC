@@ -6,6 +6,15 @@ func _init():
 	npcBasePain = 80
 	npcCharacterType = CharacterType.Guard
 	
+	pickedSkin="FerriSkin"
+	pickedSkinRColor=Color("ff4d3b39")
+	pickedSkinGColor=Color("ff58413e")
+	pickedSkinBColor=Color("ff2f2524")
+	npcSkinData={
+	"hair": {"r": Color("ff191919"),"g": Color("ff171717"),"b": Color("ff0d0d0d"),},
+	"penis": {"g": Color("ff861818"),"b": Color("ff6c1c1c"),},
+	}
+	
 	npcArmor = {
 		DamageType.Physical: 10,
 	}

@@ -7,6 +7,16 @@ func _init():
 	npcBaseLust = 80
 	npcCharacterType = CharacterType.Guard
 	
+	pickedSkin="FerriSkin"
+	pickedSkinRColor=Color("ff007e91")
+	pickedSkinGColor=Color("ffd0e4e3")
+	pickedSkinBColor=Color("ff000000")
+	npcSkinData={
+	"hair": {"r": Color("ff003e6f"),"g": Color("ff113c5e"),"b": Color("ff00335c"),},
+	"ears": {"g": Color("ffff5858"),},
+	"penis": {"g": Color("ffc31919"),"b": Color("ffd0501e"),},
+	}
+	
 func _getName():
 	return "Risha"
 

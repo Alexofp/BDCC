@@ -3,6 +3,17 @@ extends Character
 func _init():
 	id = "avy"
 	
+	pickedSkin="WoonaSkin"
+	pickedSkinRColor=Color("ff393939")
+	pickedSkinGColor=Color("ff242424")
+	pickedSkinBColor=Color("ff1f1f1f")
+	npcSkinData={
+	"hair": {"r": Color("ff161616"),"g": Color("ffff0000"),"b": Color("ff070707"),},
+	"ears": {"g": Color("ff890000"),"b": Color("fff00000"),},
+	"breasts": {"g": Color("ff581818"),"b": Color("ff800000"),},
+	"penis": {"g": Color("ffff0000"),"b": Color("ff8b0000"),},
+	}
+	
 	npcLevel = 3
 	npcBasePain = 120
 	npcBaseLust = 90

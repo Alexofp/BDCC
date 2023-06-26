@@ -12,6 +12,14 @@ func _init():
 	npcBaseStamina = 120
 	npcCharacterType = CharacterType.Guard
 	
+	pickedSkin="TaviSkin"
+	pickedSkinRColor=Color("fff7fafe")
+	pickedSkinGColor=Color("ff1d2f50")
+	pickedSkinBColor=Color("ff99a3b6")
+	npcSkinData={
+	"hair": {"r": Color("ff0d2254"),"g": Color("ff8096bb"),"b": Color("ff8096bb"),},
+	}
+	
 	npcLustInterests = {
 		InterestTopic.TallyMarks: Interest.Hates,
 		InterestTopic.Bodywritings: Interest.Hates,

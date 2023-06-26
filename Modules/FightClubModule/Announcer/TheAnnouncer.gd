@@ -3,6 +3,15 @@ extends Character
 func _init():
 	id = "announcer"
 	
+	pickedSkin="HumanSkin"
+	pickedSkinRColor=Color("ff593737")
+	pickedSkinGColor=Color("ff3b3434")
+	pickedSkinBColor=Color("ff847a7a")
+	npcSkinData={
+	"hair": {"r": Color("ff1a1515"),"g": Color("ff4e4747"),"b": Color("ff444040"),},
+	"penis": {"g": Color("ff5e3c3c"),"b": Color("ff412a2a"),},
+	}
+	
 	npcLevel = 1
 	npcBasePain = 100
 	npcBaseLust = 100

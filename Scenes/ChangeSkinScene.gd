@@ -51,7 +51,7 @@ func _run():
 				outputText.append('"'+bodypartSlot+'": {'+changedValues+'},')
 		outputText.append("}")
 		
-		textEdit.setText(Util.join(outputText, "\n"))
+		textEdit.setText("\t"+Util.join(outputText, "\n\t"))
 	
 	if(state == ""):
 		if(debugMode):
@@ -80,6 +80,7 @@ func _run():
 		addButton("Primary color", "Change base primary color", "changebasecolormenu", [0])
 		addButton("Secondary color", "Change base secondary color", "changebasecolormenu", [1])
 		addButton("Tertiary color", "Change base tertiary color", "changebasecolormenu", [2])
+		addButton("Randomize colors", "Pick random colors", "dorandomcolors")
 
 	if(state == "changebaseskinmenu"):
 		addButton("Back", "Go back", "basemenu")
@@ -269,6 +270,11 @@ func _react(_action: String, _args):
 	if(_action == "do_reload_skins"):
 		playAnimation(StageScene.Solo, "walk", {pc=editingID, bodyState={naked=true,hard=true}})
 		GlobalRegistry.findCustomSkins()
+		thePC.updateAppearance()
+		return
+		
+	if(_action == "dorandomcolors"):
+		thePC.applyRandomColors()
 		thePC.updateAppearance()
 		return
 	

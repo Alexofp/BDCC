@@ -4,6 +4,14 @@ func _init():
 	id = "rahiPharmGirl"
 	disableSerialization = true
 	
+	pickedSkin="FerriSkin"
+	pickedSkinRColor=Color("fff6b57f")
+	pickedSkinGColor=Color("fff7f8fa")
+	pickedSkinBColor=Color("ffff8620")
+	npcSkinData={
+	"hair": {"r": Color("fff2f5f8"),"g": Color("ffe1e1e1"),"b": Color("ff959cb4"),},
+	}
+	
 func _getName():
 	return "Pharmacist girl"
 
