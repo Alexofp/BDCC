@@ -4,6 +4,15 @@ func _init():
 	id = StatusEffect.TimedEffectsTurns
 	isBattleOnly = true
 	
+	alwaysCheckedForNPCs = true
+	alwaysCheckedForPlayer = true
+	priorityDuringChecking = 100
+	
+func shouldApplyTo(_npc):
+	if(_npc.timedBuffsTurns.size() > 0):
+		return true
+	return false
+	
 func initArgs(_args = []):
 	pass
 	

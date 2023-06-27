@@ -4,6 +4,15 @@ func _init():
 	id = StatusEffect.CumInflated
 	isBattleOnly = false
 	
+	alwaysCheckedForNPCs = true
+	alwaysCheckedForPlayer = true
+	priorityDuringChecking = 88
+	
+func shouldApplyTo(_npc):
+	if(_npc.getCumInflationLevel() > 0.01):
+		return true
+	return false
+	
 func initArgs(_args = []):
 	pass
 	

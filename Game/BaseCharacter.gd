@@ -19,7 +19,6 @@ var arousal:float = 0
 var consciousness: float = 1.0
 
 var statusEffects:Dictionary = {}
-var statusEffectsStorageNode
 var inventory: Inventory
 var buffsHolder: BuffsHolder
 var skillsHolder: SkillsHolder
@@ -60,9 +59,6 @@ func _ready():
 	add_child(bodypartStorageNode)
 	bodypartStorageNode.name = "Bodyparts"
 	resetSlots()
-	statusEffectsStorageNode = Node.new()
-	add_child(statusEffectsStorageNode)
-	statusEffectsStorageNode.name = "StatusEffects"	
 	inventory = Inventory.new()
 	add_child(inventory)
 	var _con = inventory.connect("equipped_items_changed", self, "onEquippedItemsChange")
@@ -173,7 +169,6 @@ func addEffect(effectID: String, args = []):
 	var effect = GlobalRegistry.createStatusEffect(effectID)
 	effect.setCharacter(self)
 	effect.initArgs(args)
-	statusEffectsStorageNode.add_child(effect)
 	
 	statusEffects[effectID] = effect
 	#buffsHolder.calculateBuffs()
@@ -188,7 +183,7 @@ func getEffect(effectID: String):
 	
 func removeEffect(effectID: String):
 	if(statusEffects.has(effectID)):
-		statusEffects[effectID].queue_free()
+		#statusEffects[effectID].queue_free()
 		var _wasremoved = statusEffects.erase(effectID)
 		#buffsHolder.calculateBuffs()
 	
@@ -218,7 +213,6 @@ func loadStatusEffectsData(data):
 			continue
 		effect.setCharacter(self)
 		statusEffects[effectID] = effect
-		statusEffectsStorageNode.add_child(effect)
 		
 		effect.loadData(data[effectID])
 	
@@ -1596,6 +1590,9 @@ func isGagged():
 
 func isOralBlocked():
 	return buffsHolder.hasBuff(Buff.GagBuff) || buffsHolder.hasBuff(Buff.MuzzleBuff)
+
+func isMuzzled():
+	return buffsHolder.hasBuff(Buff.MuzzleBuff)
 
 func invCanEquipSlot(slot):
 	if(slot == InventorySlot.Penis && !hasPenis()):

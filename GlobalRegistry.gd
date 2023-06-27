@@ -16,6 +16,9 @@ var bodyparts: Dictionary = {}
 var characterClasses: Dictionary = {}
 var attacks: Dictionary = {}
 var statusEffects: Dictionary = {}
+var statusEffectsRefs: Dictionary = {}
+var statusEffectsCheckedForPC: Array = []
+var statusEffectsCheckedForNPC: Array = []
 var allSpecies: Dictionary = {}
 var items: Dictionary = {}
 var itemsRefs: Dictionary = {}
@@ -348,6 +351,7 @@ func registerEverything():
 	registerModulesFolder("res://Modules/")
 	findCustomSkins()
 	sortFightClubFighters()
+	sortRegisteredStatusEffectsByPriority()
 	
 	GM.GES.registerAll()
 	
@@ -592,7 +596,12 @@ func registerStatusEffect(path: String):
 	var effect = load(path)
 	var effectObject = effect.new()
 	statusEffects[effectObject.id] = effect
-	effectObject.queue_free()
+	statusEffectsRefs[effectObject.id] = effectObject
+	if(effectObject.alwaysCheckedForPlayer):
+		statusEffectsCheckedForPC.append(effectObject)
+	if(effectObject.alwaysCheckedForNPCs):
+		statusEffectsCheckedForNPC.append(effectObject)
+	#effectObject.queue_free()
 
 func registerStatusEffectFolder(folder: String):
 	var dir = Directory.new()
@@ -617,6 +626,27 @@ func createStatusEffect(id: String):
 		Log.printerr("ERROR: status effect with the id "+id+" wasn't found")
 		return null
 	return statusEffects[id].new()
+
+func getStatusEffectRef(id: String):
+	if(!statusEffectsRefs.has(id)):
+		Log.printerr("ERROR: status effect with the id "+id+" wasn't found")
+		return null
+	return statusEffectsRefs[id]
+
+func getStatusEffectsAlwaysCheckedForPC():
+	return statusEffectsCheckedForPC
+
+func getStatusEffectsAlwaysCheckedForNPC():
+	return statusEffectsCheckedForNPC
+
+static func sortRegisteredStatusEffectsByPriority_sortFunc(a, b):
+	if a.priorityDuringChecking > b.priorityDuringChecking:
+		return true
+	return false
+
+func sortRegisteredStatusEffectsByPriority():
+	statusEffectsCheckedForPC.sort_custom(self, "sortRegisteredStatusEffectsByPriority_sortFunc")
+	statusEffectsCheckedForNPC.sort_custom(self, "sortRegisteredStatusEffectsByPriority_sortFunc")
 
 
 func registerSpecies(path: String):

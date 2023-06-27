@@ -4,6 +4,15 @@ func _init():
 	id = StatusEffect.CoveredInCum
 	isBattleOnly = false
 	
+	alwaysCheckedForNPCs = true
+	alwaysCheckedForPlayer = true
+	priorityDuringChecking = 93
+	
+func shouldApplyTo(_npc):
+	if(!_npc.bodyFluids.isEmpty()):
+		return true
+	return false
+	
 func initArgs(_args = []):
 	pass
 	

@@ -4,6 +4,15 @@ func _init():
 	id = StatusEffect.Muzzled
 	isBattleOnly = false
 	
+	alwaysCheckedForNPCs = true
+	alwaysCheckedForPlayer = true
+	priorityDuringChecking = 99
+	
+func shouldApplyTo(_npc):
+	if(_npc.isMuzzled()):
+		return true
+	return false
+	
 func initArgs(_args = []):
 	pass
 	

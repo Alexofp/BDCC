@@ -4,6 +4,15 @@ func _init():
 	id = StatusEffect.BreastsFull
 	isBattleOnly = false
 
+	alwaysCheckedForNPCs = true
+	alwaysCheckedForPlayer = true
+	priorityDuringChecking = 89
+	
+func shouldApplyTo(_npc):
+	if(_npc.hasBreastsFullOfMilk()):
+		return true
+	return false
+
 func getEffectName():
 	return "Breasts full"
 

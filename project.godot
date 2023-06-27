@@ -1049,7 +1049,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Game/Gameplay/StatusEffect.gd"
 }, {
-"base": "Node",
+"base": "Reference",
 "class": "StatusEffectBase",
 "language": "GDScript",
 "path": "res://StatusEffect/StatusEffectBase.gd"

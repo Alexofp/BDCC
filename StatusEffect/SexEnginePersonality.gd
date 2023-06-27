@@ -4,6 +4,15 @@ func _init():
 	id = StatusEffect.SexEnginePersonality
 	isBattleOnly = false
 	
+	alwaysCheckedForNPCs = true
+	alwaysCheckedForPlayer = true
+	priorityDuringChecking = 49
+	
+func shouldApplyTo(_npc):
+	if(GM.main != null && GM.main.supportsSexEngine()):
+		return true
+	return false
+	
 func initArgs(_args = []):
 	pass
 	

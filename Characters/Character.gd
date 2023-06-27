@@ -293,92 +293,11 @@ func hoursPassed(_howmuch):
 func updateNonBattleEffects():
 	buffsHolder.calculateBuffs()
 	
-	if(timedBuffs.size() > 0):
-		addEffect(StatusEffect.TimedEffects)
-	else:
-		removeEffect(StatusEffect.TimedEffects)
-		
-	if(timedBuffsTurns.size() > 0):
-		addEffect(StatusEffect.TimedEffectsTurns)
-	else:
-		removeEffect(StatusEffect.TimedEffectsTurns)
-	
-	if(hasBoundArms()):
-		addEffect(StatusEffect.ArmsBound)
-	else:
-		removeEffect(StatusEffect.ArmsBound)
-		
-	if(hasBlockedHands()):
-		addEffect(StatusEffect.HandsBlocked)
-	else:
-		removeEffect(StatusEffect.HandsBlocked)
-			
-	if(hasBoundLegs()):
-		addEffect(StatusEffect.LegsBound)
-	else:
-		removeEffect(StatusEffect.LegsBound)
-			
-	if(isBlindfolded()):
-		addEffect(StatusEffect.Blindfolded)
-	else:
-		removeEffect(StatusEffect.Blindfolded)
-			
-	if(isGagged()):
-		addEffect(StatusEffect.Gagged)
-	else:
-		removeEffect(StatusEffect.Gagged)
-		
-	if(buffsHolder.hasBuff(Buff.MuzzleBuff)):
-		addEffect(StatusEffect.Muzzled)
-	else:
-		removeEffect(StatusEffect.Muzzled)
-	
-	if(!bodyFluids.isEmpty()):
-		addEffect(StatusEffect.CoveredInCum)
-	else:
-		removeEffect(StatusEffect.CoveredInCum)
-	
-	if(hasBodypart(BodypartSlot.Vagina) && !getBodypart(BodypartSlot.Vagina).isOrificeEmpty()):
-		addEffect(StatusEffect.HasCumInsideVagina)
-	else:
-		removeEffect(StatusEffect.HasCumInsideVagina)
-		
-	if(hasBodypart(BodypartSlot.Anus) && !getBodypart(BodypartSlot.Anus).isOrificeEmpty()):
-		addEffect(StatusEffect.HasCumInsideAnus)
-	else:
-		removeEffect(StatusEffect.HasCumInsideAnus)
-		
-	if(hasBodypart(BodypartSlot.Head) && !getBodypart(BodypartSlot.Head).isOrificeEmpty()):
-		addEffect(StatusEffect.HasCumInsideMouth)
-	else:
-		removeEffect(StatusEffect.HasCumInsideMouth)
-
-	if(menstrualCycle != null && menstrualCycle.isInHeat()):
-		addEffect(StatusEffect.InHeat)
-	else:
-		removeEffect(StatusEffect.InHeat)
-		
-	if(menstrualCycle != null && menstrualCycle.isVisiblyPregnant()):
-		addEffect(StatusEffect.Pregnant)
-	else:
-		removeEffect(StatusEffect.Pregnant)
-
-	if(hasBreastsFullOfMilk()):
-		addEffect(StatusEffect.BreastsFull)
-	else:
-		removeEffect(StatusEffect.BreastsFull)
-
-	if(getCumInflationLevel() > 0.01):
-		addEffect(StatusEffect.CumInflated)
-	else:
-		removeEffect(StatusEffect.CumInflated)
-	
-	if(GM.main != null && GM.main.supportsSexEngine()):
-		addEffect(StatusEffect.SexEnginePersonality)
-		addEffect(StatusEffect.SexEngineLikes)
-	else:
-		removeEffect(StatusEffect.SexEnginePersonality)
-		removeEffect(StatusEffect.SexEngineLikes)
+	for effect in GlobalRegistry.getStatusEffectsAlwaysCheckedForNPC():
+		if(effect.shouldApplyTo(self)):
+			addEffect(effect.id)
+		else:
+			removeEffect(effect.id)
 		
 	GM.GES.callGameExtenders(ExtendGame.npcUpdateNonBattleEffects, [self])
 	

@@ -4,6 +4,14 @@ func _init():
 	id = StatusEffect.Intoxicated
 	isBattleOnly = false
 	
+	alwaysCheckedForPlayer = true
+	priorityDuringChecking = 101
+	
+func shouldApplyTo(_npc):
+	if(_npc.getIntoxicationLevel() >= 0.01):
+		return true
+	return false
+	
 func initArgs(_args = []):
 	pass
 	
