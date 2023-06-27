@@ -5,6 +5,7 @@ var endLocation = ""
 var path = []
 var whoLeashingID = ""
 var randomChat = []
+var teleportwhenskipped = true
 
 func _initScene(_args = []):
 	whoLeashingID = _args[0]
@@ -12,6 +13,8 @@ func _initScene(_args = []):
 	endLocation = _args[2]
 	if(_args.size() > 3):
 		randomChat = _args[3]
+	if (_args.size() > 4):
+		teleportwhenskipped = _args[4]
 	
 	path = GM.world.calculatePath(startLocation, endLocation)
 	if(path.size() <= 0):
@@ -45,11 +48,19 @@ func _run():
 		if(randomChat.size() > 0 && RNG.chance(min(30, randomChat.size() * 10))):
 			saynn("[say=leasher]"+RNG.pick(randomChat)+"[/say]")
 		
-		addButton("Skip", "Skip the walk", "endthescene")
+		if (teleportwhenskipped):
+			addButton("Skip", "Skip the walk", "skipwalk")
+		else:
+			addButton("Skip", "Skip the walk", "endthescene")
 		addButtonAt(6, "Follow", "Follow the leash", "follow")
 		addDisabledButtonAt(10, "Leashed", "Can't escape from the leash")
 		addDisabledButtonAt(11, "Leashed", "Can't escape from the leash")
 		addDisabledButtonAt(12, "Leashed", "Can't escape from the leash")
+	if (state == "skipwalk"):
+		aimCamera(endLocation)
+		GM.pc.setLocation(endLocation)
+		
+		endScene()
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
@@ -85,6 +96,7 @@ func saveData():
 	data["path"] = path
 	data["whoLeashingID"] = whoLeashingID
 	data["randomChat"] = randomChat
+	data["teleportwhenskipped"] = teleportwhenskipped
 
 	return data
 	
@@ -96,6 +108,7 @@ func loadData(data):
 	path = SAVE.loadVar(data, "path", [])
 	whoLeashingID = SAVE.loadVar(data, "whoLeashingID", "")
 	randomChat = SAVE.loadVar(data, "randomChat", [])
+	teleportwhenskipped = SAVE.loadVar(data, "teleportwhenskipped", true)
 
 func resolveCustomCharacterName(_charID):
 	if(_charID == "leasher" && whoLeashingID != ""):
