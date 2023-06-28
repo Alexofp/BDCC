@@ -24,7 +24,7 @@ func getProgress():
 		result.append("You're free! But you gotta get your revenge on the cat who told about your plans to the captain. Find Kait in the lilac block during mornings.")
 
 	if(GM.main.getFlag("TaviModule.Ch4KaitSceneHappened")):
-		result.append("(( This is where Tavi's route ends for now ))")
+		result.append("Kait got dealt with for now. Go have some rest in your cell, Tavi needs some time to come up with a new plan.")
 
 	return result
 
@@ -32,7 +32,7 @@ func isVisible():
 	return GM.QS.isCompleted("Ch2ElizaQuest") && GM.QS.isCompleted("Ch2AlexQuest")
 
 func isCompleted():
-	return false # GM.main.getFlag("TaviModule.Ch4KaitSceneHappened")
+	return GM.main.getFlag("TaviModule.Ch5NewPlanSceneHappend")
 
 func isMainQuest():
 	return true

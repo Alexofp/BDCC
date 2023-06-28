@@ -88,6 +88,7 @@ func getFlags():
 		# Character 5
 		"Ch5NewPlanSceneHappend": flag(FlagType.Bool),
 		"Ch5LastGuardLooted": flag(FlagType.Text),
+		"Ch5StoleDatapadFromGuard": flag(FlagType.Bool),
 		"Ch5StoleDatapadFromNova": flag(FlagType.Bool),
 		"Ch5BlackmailedNova": flag(FlagType.Bool),
 	}
@@ -134,6 +135,9 @@ func _init():
 		"res://Modules/TaviModule/Chapter4/Ch4s6EndingScene.gd",
 		"res://Modules/TaviModule/Chapter4/Ch4s7CaptainScene.gd",
 		"res://Modules/TaviModule/Chapter4/Ch4s8KaitScene.gd",
+		
+		"res://Modules/TaviModule/Chapter5/Ch5s1PlanningScene.gd",
+		"res://Modules/TaviModule/Chapter5/Ch5s2NovaScene.gd",
 		]
 	characters = [
 		"res://Modules/TaviModule/Chapter4/DirectorTau.gd",
@@ -165,6 +169,10 @@ func _init():
 		"res://Modules/TaviModule/Chapter3/Ch3s3AlexEvent.gd",
 		"res://Modules/TaviModule/Chapter3/Ch3s4TransmitterEvent.gd",
 		"res://Modules/TaviModule/Chapter4/Ch4s8KaitEvent.gd",
+		
+		"res://Modules/TaviModule/Chapter5/Ch5s1PlanningEvent.gd",
+		"res://Modules/TaviModule/Chapter5/Ch5s2DefeatedGuardEvent.gd",
+		"res://Modules/TaviModule/Chapter5/Ch5s2NovaEvent.gd",
 	]
 	quests = [
 		"res://Modules/TaviModule/TaviAppleQuest.gd",
@@ -172,6 +180,7 @@ func _init():
 		"res://Modules/TaviModule/Chapter2/Ch2ElizaQuest.gd",
 		"res://Modules/TaviModule/Chapter2/Ch2AlexQuest.gd",
 		"res://Modules/TaviModule/Chapter3/Ch3TaviQuest.gd",
+		"res://Modules/TaviModule/Chapter5/Ch5TaviQuest.gd",
 	]
 	worldEdits = [
 		"res://Modules/TaviModule/TaviWorldEdit.gd",
