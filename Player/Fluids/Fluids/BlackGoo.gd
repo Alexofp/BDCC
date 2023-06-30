@@ -8,3 +8,6 @@ func getVisibleName():
 
 func getCost(_amount) -> int:
 	return int(_amount / 100.0) * 3
+
+func getCumOverlayColor():
+	return Color.black

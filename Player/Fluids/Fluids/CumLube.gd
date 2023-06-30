@@ -5,3 +5,6 @@ func _init():
 
 func getVisibleName():
 	return "Cum Lube"
+
+func getCumOverlayColor():
+	return Color.lightgray

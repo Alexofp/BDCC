@@ -62,6 +62,7 @@ func updateMaterial():
 		if(showCumLayer && theDoll.getCumAmount() > 0):
 			fancyMaterial.set_shader_param("cum_transparency", 1.0)
 			fancyMaterial.set_shader_param("cum_amount", theDoll.getCumAmount())
+			fancyMaterial.set_shader_param("cum_color", theDoll.getCumColor())
 		else:
 			fancyMaterial.set_shader_param("cum_transparency", 0.0)
 			fancyMaterial.set_shader_param("cum_amount", 0)

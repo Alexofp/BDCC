@@ -26,6 +26,7 @@ uniform float random_shift;
 uniform vec2 cum_scale;
 uniform float cum_transparency;
 uniform int cum_amount;
+uniform vec4 cum_color : hint_color;
 
 varying vec2 UV_pattern;
 
@@ -53,7 +54,7 @@ void fragment() {
 	for (int i = 0;i<cum_amount;i++)
 	{
 		float fi = float(i*i) / 10.0;
-		vec4 cum_tex = texture(texture_cumOverlay, vec2(fi, fi) + (base_uv * pattern_size) * cum_scale - vec2(random_shift, TIME + sin(TIME))/300.0);
+		vec4 cum_tex = cum_color * texture(texture_cumOverlay, vec2(fi, fi) + (base_uv * pattern_size) * cum_scale - vec2(random_shift, TIME + sin(TIME))/300.0);
 		albedo_tex.rgb = mix(albedo_tex.rgb, cum_tex.rgb, cum_tex.a * cum_transparency);
 	}
 
@@ -78,6 +79,7 @@ shader_param/random_shift = null
 shader_param/cum_scale = 5.0
 shader_param/cum_transparency = 0.0
 shader_param/cum_amount = 1
+shader_param/cum_color = Color( 1, 1, 1, 1 )
 shader_param/texture_albedo = ExtResource( 1 )
 shader_param/texture_pattern = ExtResource( 2 )
 shader_param/texture_customOverlay = ExtResource( 3 )

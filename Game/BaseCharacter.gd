@@ -1353,6 +1353,13 @@ func softUpdateDoll(doll: Doll3D):
 	doll.setSkinData(skinData)
 	if(hasEffect(StatusEffect.CoveredInCum)):
 		doll.setCumAmount(getOutsideMessinessLevel())
+		var dominantFluidID = getFluids().getDominantFluidID()
+		if(dominantFluidID != null):
+			var fluidObject = GlobalRegistry.getFluid(dominantFluidID)
+			if(fluidObject != null):
+				doll.setCumColor(fluidObject.getCumOverlayColor())
+		else:
+			doll.setCumColor(Color.white)
 	else:
 		doll.setCumAmount(0)
 	doll.updateMaterials()

@@ -20,6 +20,7 @@ var breastsLeaking = false
 var pussyLeaking = false
 var anusLeaking = false
 var cumAmount = 0
+var cumColor = Color.white
 
 var temporaryRiggedParts = {}
 
@@ -518,6 +519,12 @@ func setCumAmount(theisOnCum):
 
 func getCumAmount():
 	return cumAmount
+
+func setCumColor(theColor):
+	cumColor = theColor
+
+func getCumColor():
+	return cumColor
 
 func _on_RandomLeakTimer_timeout():
 	var possible = []
