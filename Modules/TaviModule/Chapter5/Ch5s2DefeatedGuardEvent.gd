@@ -21,8 +21,10 @@ func getPriority():
 func onButton(_method, _args):
 	if(_method == "checkdatapad"):
 		setFlag("TaviModule.Ch5LastGuardLooted", _args[0])
+		increaseFlag("TaviModule.Ch5GuardsLooted")
 		
-		if(RNG.chance(20)):
+		var amountLooted = getFlag("TaviModule.Ch5GuardsLooted", 0)
+		if((RNG.chance(10) && amountLooted > 0) || amountLooted > 3):
 			addMessage("This guard had a datapad! You took it. Task updated!")
 			addExperienceToPlayer(100)
 			setFlag("TaviModule.Ch5StoleDatapadFromGuard", true)

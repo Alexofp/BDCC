@@ -88,6 +88,7 @@ func getFlags():
 		# Character 5
 		"Ch5NewPlanSceneHappend": flag(FlagType.Bool),
 		"Ch5LastGuardLooted": flag(FlagType.Text),
+		"Ch5GuardsLooted": flag(FlagType.Number),
 		"Ch5StoleDatapadFromGuard": flag(FlagType.Bool),
 		"Ch5StoleDatapadFromNova": flag(FlagType.Bool),
 		"Ch5BlackmailedNova": flag(FlagType.Bool),
