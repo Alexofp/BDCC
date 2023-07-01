@@ -234,10 +234,10 @@ func getNewUniqueSceneID(blockedIDS=[]) -> int:
 
 func runScene(id, _args = [], parentSceneUniqueID = -1):
 	var scene = GlobalRegistry.createScene(id)
+	assert(scene != null, "SCENE WITH ID "+str(id)+" IS NOT FOUND. MAKE SURE IT WAS REGISTERED INSIDE THE MODULE.")
 	scene.uniqueSceneID = getNewUniqueSceneID([parentSceneUniqueID])
 	if(parentSceneUniqueID >= 0):
 		scene.parentSceneUniqueID = parentSceneUniqueID
-	assert(scene != null, "SCENE WITH ID "+str(id)+" IS NOT FOUND. MAKE SURE IT WAS REGISTERED INSIDE THE MODULE.")
 	add_child(scene)
 	sceneStack.append(scene)
 	print("Starting scene "+id)

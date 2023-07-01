@@ -8,6 +8,7 @@ var didFuck = false
 var didPiss = false
 var npcID = ""
 var corruption = 0.0
+var lostBathroom = false
 
 func _init():
 	sceneID = "Ch5s2NovaScene"
@@ -583,7 +584,7 @@ func _run():
 		saynn("You know well enough that there is nothing there.. But Nova is still only slightly suspicious.. How do you wanna react to her finding out the truth?")
 
 		addButton("Attack", "Try to overpower Nova in this secluded spot", "bath_agressive")
-		addButton("Seduce", "Play dumb and submit to Nova", "bath_seduce")
+		addButton("Seduce", "Play a little dumb and submit to Nova. She will probably fuck you..", "bath_seduce")
 	if(state == "bath_agressive"):
 		aimCameraAndSetLocName("main_dressing2")
 		playAnimation(StageScene.Duo, "shove", {npc="nova", npcAction="hurt"})
@@ -682,6 +683,7 @@ func _run():
 			addDisabledButton("Piss on", "You already did that with this particular piss-slut")
 		else:
 			addButtonWithChecks("Piss on", "Really humiliate that bitch", "do_piss", [], [[ButtonChecks.ContentEnabled, ContentType.Watersports]])
+		addButton("Done", "You did everything you wanted to Nova", "do_done")
 	if(state == "do_feet"):
 		playAnimation(StageScene.SexFeetPlay, "crotch", {pc="pc", npc="nova", npcBodyState={naked=true, hard=true}})
 		saynn("Since you got the husky under your feet.. why not use this opportunity to humiliate her a little.")
@@ -1237,6 +1239,221 @@ func _run():
 		saynn("[say=nova]Bleh..[/say]")
 
 		addButton("Continue", "That was even more fun", "nova_bully_menu")
+	if(state == "do_done"):
+		playAnimation(StageScene.Duo, "stand", {npc="nova", npcAction={naked=true}})
+		if (didFeet || didGang || didFuck || didPiss):
+			saynn("Nova thought she would get off the hook just by naked under your foot? Hah. You properly humiliated her and got enough.. material.. to make sure she doesn't come back. Time to announce it.")
+
+		else:
+			saynn("You decided that Nova got humiliated enough when you undressed her. And even though you didn't do anything to her, you still got some good pictures of her being nude under your foot. That should be enough.. material.")
+
+		saynn("The husky looks at you surprised when you take your foot off of her chest.")
+
+		saynn("[say=pc]You can get up.[/say]")
+
+		saynn("[say=nova]W-wha?..[/say]")
+
+		if (didPiss):
+			saynn("[say=pc]What? I would offer my hand but.. you know.. I'd rather not touch you.[/say]")
+
+		else:
+			saynn("[say=pc]What? Need a hand?[/say]")
+
+		saynn("Nova slowly gets up off the floor. Obviously the first thing she looks at is her stun baton and the shock remote that is still in her belt somewhere.")
+
+		saynn("[say=pc]Wouldn't do that if I were you.[/say]")
+
+		saynn("The naked humiliated guard tilts her head.")
+
+		saynn("[say=nova]What do you mean..[/say]")
+
+		saynn("You flip the datapad towards her. The screen displays everything that happened with her.. The many photos that you took of her in a pretty compromising position.."+str(" How you brought her to the edge with just your feet.." if didFeet else "")+""+str(" How Nova got gangbanged in this very room by many inmates.." if didGang else "")+""+str(" A recording of you fucking Nova and her moaning for you.." if didFuck else "")+""+str(" And obviously.. how you pissed all over her while she didn't even struggle that much.." if didPiss else "")+"")
+
+		saynn("[say=nova]N-no.. no.. no-no.. No!.. Give it back! Delete it!..[/say]")
+
+		saynn("You can hear desperate voice cracks.. Nova suddenly lashes out at you but you protect the datapad and shove her back.")
+
+		saynn("[say=pc]Another step towards me and I will send it all to every staff member on this station.[/say]")
+
+		saynn("Husky hears that.. She sees your finger hovering over the 'share' button.. and starts whining.. like a sorry puppy.")
+
+		saynn("[say=nova]P-please?..[/say]")
+
+		saynn("She lowers her head.. and shoulders.. assuming quite a submissive posture.")
+
+		saynn("[say=pc]If you're gonna be a good puppy then this recording might not go public. But it will stay with me.[/say]")
+
+		saynn("Husky sighs and nods.")
+
+		saynn("[say=pc]All I want is for you not to pursue me for what happened here.[/say]")
+
+		saynn("[say=nova]Sure.. whatever..[/say]")
+
+		if (didPiss):
+			saynn("You would pet the girl but you'd rather not get your own piss on your hands.")
+
+		else:
+			saynn("You reach your hand out and pet the girl.")
+
+		saynn("[say=pc]And trust me.. I know that they can wipe it remotely.. But I got into it somehow, right~?[/say]")
+
+		saynn("Nova looks down at the floor.. Her eyes are big and sorry. Seems like you shattered all her hope.. what was left of it anyway.")
+
+		saynn("[say=pc]So.. take care.[/say]")
+
+		saynn("[say=nova]..it didn't work out for Tavi..[/say]")
+
+		saynn("[say=pc]What was that?[/say]")
+
+		saynn("[say=nova]Nothing..[/say]")
+
+		saynn("And just like that, you leave the husky in the dressing room while holding her datapad! Exactly what Tavi needs.. Well.. One of the things that she needs.")
+
+		saynn("Time to go.")
+
+		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "lost_bathroom_nova"):
+		playAnimation(StageScene.SexFeetPlay, "pin", {pc="nova", npc="pc"})
+		lostBathroom = true
+		saynn("Defeated, you fall to your knees! But then Nova immediately pins you to the floor and raises her trusty weapon. You can see.. anger.. in her eyes.")
+
+		saynn("[say=nova]The only thing I hate more than this job is when someone is lying to me![/say]")
+
+		saynn("She strikes you with the painstick, sending a painful shock through your already-tired body, causing you to cry out aloud!")
+
+		saynn("[say=nova]Don't lie to me ever![/say]")
+
+		saynn("She just keeps shocking you, forcing more and more agonizing screams out of you. And just to make sure that you can't squirm your way out of this, she holds you pinned under her boot.")
+
+		saynn("[say=nova]You understand me? Or are you asking for more?![/say]")
+
+		saynn("Seconds feel like hours.. She hits you so much that her stun baton loses all its charge by the end of it. Husky is left panting and snarling for some time.")
+
+		saynn("Then her expression begins to soften up the more she sees you recoiling in pain. Husky is deliberating.. until she finally pulls her leg off of you.")
+
+		saynn("[say=nova]That was too much probably.. I can't say you didn't deserve it.. But I shouldn't have.. Here.[/say]")
+
+		saynn("She puts her weapon away and produces a little pill before offering it to you.")
+
+		saynn("[say=nova]Painkillers.[/say]")
+
+		addButton("Swallow it", "Swallow the pill and see what happens", "swallow_pill_oops")
+	if(state == "swallow_pill_oops"):
+		playAnimation(StageScene.Solo, "stand", {pc="nova"})
+		saynn("You swallow the pill.. why not.. It's not like it can make it worse.")
+
+		saynn("Luckily, the husky didn't lie. It does indeed help to soothe the aching pain in your muscles somewhat. Enough for you to sit against the wall and look at.. wait.. Who are those people?")
+
+		saynn("Behind Nova there are a few inmates standing, waiting for her to notice them. It seems your.. loud screams.. attracted them. They probably managed to sneak behind her while the husky way busy beating the hell out of you.")
+
+		saynn("Nova tilts her head seeing that your eyes aren't focused on her.")
+
+		saynn("[say=nova]Is something wrong?.. Oh.. hello there..[/say]")
+
+		saynn("She turns around and finally realizes she got surrounded. The eyes on those inmates though..")
+
+		saynn("[say=nova]Leave, inmates. While you still can.[/say]")
+
+		saynn("Nova fetches her stun baton and presses on the handle to cause some scary noises and sparks.. but none come.")
+
+		saynn("[say=nova]Oops, I forgot..[/say]")
+
+		addButton("Continue", "See what happens next", "nova_gets_rekt")
+	if(state == "nova_gets_rekt"):
+		playAnimation(StageScene.Solo, "defeat", {pc="nova", bodyState={naked=true}})
+		saynn("Nova reaches for her shock remote but the inmates aren't just standing around. They suddenly lash out at the guard and pin her against the wall near you.")
+
+		saynn("[say=nova]H-hey!.. S-stop this!..[/say]")
+
+		saynn("The inmates begin trying to take off her armor but the metallic pieces are held in place by some powerful electromagnets. Doesn't matter to them though, most of them are ripped enough to just tear off all her armored bits one by one, including the main piece that has the generator.")
+
+		saynn("Stopping them.. is not something that you can do in your current state.. But it's hard to stop a crowd of horny inmates anyway. Some of them hold Nova still while the rest start unzipping her undersuit, revealing her {nova.breasts}, her sheath that hides her {nova.penis} and her cute pussy that hides behind her ballsack.")
+
+		saynn("[say=nova]I will break you all![/say]")
+
+		saynn("Ohh, you notice the datapad after the inmates rip Nova's belt off. You grab it and unlock it the way Tavi showed you. Great, there is a camera app. You launch it and begin recording what the inmates are doing to the poor puppy.")
+
+		saynn("Nova is snarling at them but after both her sheath and neck get grabbed and squeezed tight, the husky is left whining.")
+
+		saynn("Oh wow, after that, a queue of inmates begins lining up near her! And the first one is already approaching her..")
+
+		addButton("Watch", "See what happens next", "generate_use_nova_scene")
+	if(state == "after_lost_gang"):
+		playAnimation(StageScene.SexStart, "start", {npc="nova", npcBodyState={naked=true}})
+		setFlag("TaviModule.Ch5BlackmailedNova", true)
+		setFlag("NovaModule.Nova_NotThereToday", true)
+		saynn("After the whole queue has had their fun with the husky.. she is left on the floor, panting. Her eyes barely focus on you after you try to get her attention.")
+
+		saynn("[say=nova]Nh-h..[/say]")
+
+		saynn("[say=pc]Do you believe in karma?[/say]")
+
+		saynn("[say=nova]No.. Misguided hope for weak people..[/say]")
+
+		saynn("You almost feel bad for the husky. But she did strike you many times. You show Nova her own datapad and play the recording of the gangbang session that has just happened.")
+
+		saynn("[say=nova]H-hey.. How did you..[/say]")
+
+		saynn("She tries to take it back but you don't let her, obviously.")
+
+		saynn("[say=pc]I will be taking this. And if someone else finds out, every staff member on this station will see this video. Mhm?[/say]")
+
+		saynn("Husky whines softly.")
+
+		saynn("[say=nova]F-fine..[/say]")
+
+		saynn("You offer her a pat on the head and get up. You would have some more fun with her but your muscles kinda ache. The lucky slut finally gets some rest. And you have a datapad for Tavi.")
+
+		saynn("Time to go though.")
+
+		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "bath_seduce"):
+		playAnimation(StageScene.SexStanding, "tease", {npc="pc", pc="nova"})
+		saynn("You take a step back and then raise your hands like you are surrendering. Nova tilts her head but then looks over the corner, seeing.. that there is no blood or bodies or anything strange.")
+
+		saynn("[say=nova]Um. Did you lie to me, inmate?[/say]")
+
+		saynn("Nova lashes out at you and then pins you against the wall, her hands wrenching your arms behind your back, forcing you to kiss the concrete.")
+
+		saynn("[say=pc]Ow.. ow.. yes, I did. I'm sorry.[/say]")
+
+		saynn("Powerful husky growls into your ear, sending shivers down your spine.")
+
+		saynn("[say=nova]A simple apology is not enough for liars. Why did you do that? Huh?[/say]")
+
+		saynn("The longer you don't say anything, the more pressure she puts on your arm, making it feel quite painful.. Time to come up with something..")
+
+		saynn("[say=pc]Because I wanted to be with you for a bit..[/say]")
+
+		saynn("That really catches Nova off-guard.")
+
+		saynn("[say=nova]What are you..[/say]")
+
+		saynn("[say=pc]Some alone time, you know?.. You and me..[/say]")
+
+		saynn("Nova's grip on your arms relaxes, she blinks quickly and tilts her head.")
+
+		saynn("[say=nova]Why are you saying that..[/say]")
+
+		saynn("But then she pins you into the concrete again! Ow.")
+
+		saynn("[say=nova]Oh, I know. You keep lying to me. Because you just want to be punished, huh. By a big mommy. I got something big for you.[/say]")
+
+		addButton("Continue", "See what happens next", "nova_about_to_fuck")
+	if(state == "nova_about_to_fuck"):
+		playAnimation(StageScene.SexStanding, "tease", {npc="pc", pc="nova", bodyState={naked=true,hard=true,condom=true}, npcBodyState={naked=true, hard=true}})
+		saynn("Nova switches off her armor and begins to slowly strip the metal pieces before taking off her belt and leaving it all in a neat pile. You can see the datapad right there, attached to her belt.. But she still holds you pinned to the wall.. It seems you need another plan..")
+
+		saynn("All the while Nova unzips her undersuit, exposing her sheath with the red canine cock already peeking out of it. You can feel its pointy tip already brushing up against your "+str("pussy" if GM.pc.hasReachableVagina() else "tailhole")+"..")
+
+		saynn("[say=nova]What~? You wanted to be with me, didn't you~. Unless that was a lie as well.[/say]")
+
+		saynn("Nova then produces a wrapped-up condom and quickly opens the package before applying it to her canine shaft..")
+
+		saynn("[say=nova]Taking no chances with you.[/say]")
+
+		saynn("It seems that datapad will have to wait..")
+
 func addStraponButtons():
 	var strapons = GM.pc.getStrapons()
 	for strapon in strapons:
@@ -1359,6 +1576,11 @@ func _react(_action: String, _args):
 		processTime(10*60)
 		getCharacter("nova").pissedOnBy("pc")
 
+	if(_action == "do_done"):
+		processTime(5*60)
+		setFlag("TaviModule.Ch5BlackmailedNova", true)
+		setFlag("NovaModule.Nova_NotThereToday", true)
+
 	if(_action == "do_feet_cum"):
 		processTime(3*60)
 		getCharacter("nova").cummedOnBy("nova", FluidSource.Penis, 0.8)
@@ -1394,7 +1616,10 @@ func _react(_action: String, _args):
 		return
 
 	if(_action == "stop_gangbang"):
-		setState("nova_bully_menu")
+		if(lostBathroom):
+			setState("after_lost_gang")
+		else:
+			setState("nova_bully_menu")
 		return
 
 	if(_action == "do_fuck_putcondom"):
@@ -1431,6 +1656,16 @@ func _react(_action: String, _args):
 		processTime(3*60)
 		getCharacter("nova").cummedInMouthBy("pc", FluidSource.Pissing)
 
+	if(_action == "swallow_pill_oops"):
+		processTime(6*60)
+		GM.pc.addPain(-100)
+
+	if(_action == "nova_gets_rekt"):
+		processTime(3*60)
+
+	if(_action == "nova_about_to_fuck"):
+		processTime(2*60)
+
 	setState(_action)
 
 func _react_scene_end(_tag, _result):
@@ -1452,6 +1687,8 @@ func _react_scene_end(_tag, _result):
 			setState("won_bathroom_nova")
 		else:
 			setState("lost_bathroom_nova")
+			GM.pc.addPain(300)
+			GM.pc.doWound("nova")
 
 func saveData():
 	var data = .saveData()
@@ -1464,6 +1701,7 @@ func saveData():
 	data["didPiss"] = didPiss
 	data["npcID"] = npcID
 	data["corruption"] = corruption
+	data["lostBathroom"] = lostBathroom
 
 	return data
 
@@ -1478,3 +1716,4 @@ func loadData(data):
 	didPiss = SAVE.loadVar(data, "didPiss", false)
 	npcID = SAVE.loadVar(data, "npcID", "")
 	corruption = SAVE.loadVar(data, "corruption", 0.0)
+	lostBathroom = SAVE.loadVar(data, "lostBathroom", false)
