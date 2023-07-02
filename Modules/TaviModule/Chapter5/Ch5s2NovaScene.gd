@@ -9,6 +9,7 @@ var didPiss = false
 var npcID = ""
 var corruption = 0.0
 var lostBathroom = false
+var gotFuckedByNova = false
 
 func _init():
 	sceneID = "Ch5s2NovaScene"
@@ -128,6 +129,18 @@ func _run():
 
 		addButton("Sorry mom", "Do what Nova wants you to do", "sorry_mommy")
 		addButton("No", "Anything is better than humiliating yourself like that", "no_sorry_mommy")
+	if(state == "no_sorry_mommy"):
+		saynn("[say=pc]I won't say it..[/say]")
+
+		saynn("Nova leans in closer, whispering into your ear.")
+
+		saynn("[say=nova]Everyone has it in them, sweetheart~.. It will feel good, trust me..[/say]")
+
+		saynn("After that, Nova just returns to her post.")
+
+		saynn("Seems like you will have to try again.. Or change your tactics.")
+
+		addButton("Continue", "See what happens next", "endthescene")
 	if(state == "sorry_mommy"):
 		saynn("You gather all of your courage.. All of your braveness.. You put on your mean eyes and..")
 
@@ -1240,7 +1253,7 @@ func _run():
 
 		addButton("Continue", "That was even more fun", "nova_bully_menu")
 	if(state == "do_done"):
-		playAnimation(StageScene.Duo, "stand", {npc="nova", npcAction={naked=true}})
+		playAnimation(StageScene.Duo, "stand", {npc="nova", npcBodyState={naked=true}})
 		if (didFeet || didGang || didFuck || didPiss):
 			saynn("Nova thought she would get off the hook just by naked under your foot? Hah. You properly humiliated her and got enough.. material.. to make sure she doesn't come back. Time to announce it.")
 
@@ -1441,6 +1454,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "nova_about_to_fuck")
 	if(state == "nova_about_to_fuck"):
+		addCharacter("nova", ["naked"])
 		playAnimation(StageScene.SexStanding, "tease", {npc="pc", pc="nova", bodyState={naked=true,hard=true,condom=true}, npcBodyState={naked=true, hard=true}})
 		saynn("Nova switches off her armor and begins to slowly strip the metal pieces before taking off her belt and leaving it all in a neat pile. You can see the datapad right there, attached to her belt.. But she still holds you pinned to the wall.. It seems you need another plan..")
 
@@ -1454,6 +1468,222 @@ func _run():
 
 		saynn("It seems that datapad will have to wait..")
 
+		if (GM.pc.hasReachableVagina()):
+			addButton("Get fucked", "Nova is about to fuck you", "nova_vaginal_fuck")
+		else:
+			addButton("Get fucked", "Nova is about to fuck you", "nova_anal_fuck")
+	if(state == "nova_vaginal_fuck"):
+		playAnimation(StageScene.SexStanding, "sex", {npc="pc", pc="nova", bodyState={naked=true,hard=true,condom=true}, npcBodyState={naked=true, hard=true}})
+		saynn("Nova has all the time so she acts slow, enjoying guiding her cock to brush against your sensitive folds but not quite penetrate them just yet. This makes your breath become deeper, you spread your legs a little wider while her free paw grips your {pc.masc} ass and squeezes it firmly.")
+
+		saynn("[say=nova]You don't have to lie with me, sweetheart~. Just be honest and admit that you wanted this cock.[/say]")
+
+		saynn("[say=pc]Uh..[/say]")
+
+		saynn("Nova leans in closer to your ear while the tip of her canine shaft finds the entrance itself and prods, stretching your {pc.pussyStretch} slit and pulling a little moan out of you. She certainly knows how to dominate.. without resorting to physical force..")
+
+		saynn("[say=nova]Use your words, sweetie~.[/say]")
+
+		saynn("Naked husky puts both of her paws on your hips now as her member explores you from inside, the pre-lubed condom making it easier for her to slide in and out of you..")
+
+		saynn("[say=nova]It's okay to admit that you love being fucked by mommy's cock.[/say]")
+
+		saynn("You'd rather not humiliate yourself though so you just keep producing passionate moans that echo throughout the whole bathroom and can probably be even heard outside of it.. wait..")
+
+		saynn("Nova keeps thrusting her canine cock down your willing wet slit while a strange thought comes into your head.. What if you try to attract the inmates that are outside in the gym.. Hearing your moans would probably get them quite horny.. You just gotta be loud..")
+
+		addButton("Moan louder", "Really humiliate yourself to get that datapad..", "nova_vaginal_fuck_louder")
+	if(state == "nova_vaginal_fuck_louder"):
+		playAnimation(StageScene.SexStanding, "fast", {npc="pc", pc="nova", bodyState={naked=true,hard=true,condom=true}, npcBodyState={naked=true, hard=true}})
+		saynn("You can't deny that being fucked like that feels good. Nova keeps whispering lewd things into your ear while you moan louder and louder for her.")
+
+		saynn("[say=nova]Too shy to say anything~? It's okay, mommy loves hearing your noises anyway.[/say]")
+
+		saynn("[say=pc]I.. I love your cock!..[/say]")
+
+		saynn("[say=nova]Oh-h~..[/say]")
+
+		saynn("That was good.. But you probably need more to make sure..")
+
+		saynn("[say=pc]I-I.. I love being fucked by your cock, mommy! Please, pound my little pussy harder, make me cum for you! Turn me into your public use slutty whore of a pet! Ah~!..[/say]")
+
+		saynn("You make sure to throw your head back and produce loud passionate noises between each slap of Nova's hips against your ass. She seems to be loving what you are saying though, her pace becoming faster and her knot inflating, signaling that she isn't that far..")
+
+		saynn("[say=nova]Wow, sweetie~. Didn't know you're so mouthy. I guess that's what mommy's cock does to sluts~. You will be taking my knot like a good little {pc.girl}, right sweetie?[/say]")
+
+		saynn("[say=pc]Oh god, YES! PLEASE knot your little whore! Stretch her needy pussy wide and stuff your whole length inside! Please![/say]")
+
+		saynn("You might be overdoing it by this point.. But you don't even care. You let your tongue and moan like a slut for Nova while she fucks your slit nice and fast, the meaty orb spreading your sensitive folds wider and putting more pressure on the pussy entrance.. until suddenly slipping inside..")
+
+		addButton("Cum", "It's too much..", "nova_vaginal_fuck_cum")
+	if(state == "nova_vaginal_fuck_cum"):
+		playAnimation(StageScene.SexStanding, "inside", {npc="pc", pc="nova", bodyState={naked=true,hard=true,condom=true}, npcBodyState={naked=true, hard=true}})
+		saynn("You almost scream as Nova manages to fit her whole length inside you, her knot stretching your pussy extremely wide while the tip is pressed firmly against your cervix, pushing on it so much that there is a visible bump on your belly..")
+
+		saynn("The sensations are too much, it only takes a few seconds of her cock being inside you before you cum hard, your body shaking and squirming around it, your legs wanna give but Nova supports you.. with more than just her paws..")
+
+		if (GM.pc.isWearingChastityCage()):
+			saynn("The pressure in your chastity cage becomes too much. Your poor locked away cock starts shooting little strings of {pc.cum}, leaving stains on the concrete wall before you.")
+
+		elif (GM.pc.hasReachablePenis()):
+			saynn("The stimulation on your pleasure points becomes too much. Your own {pc.penis} starts shooting thick strings of {pc.cum}, leaving stains on the concrete wall before you.")
+
+		saynn("[say=pc]Yes-s-s! Mommy is knotting her slutty whore of a pet![/say]")
+
+		saynn("You're not even sure if you're pretending at this point, your mind is too clouded up by sheer amount of intense sensations. Nova grunts too as your clenching inner walls push her over the edge as well!")
+
+		saynn("[say=nova]T-take it all then..[/say]")
+
+		if (condomBroke):
+			saynn("The husky arches her back as her throbbing canine cock starts stuffing the condom inside your pussy full of her seed.. It feels so warm and sticky inside you.. almost like it actually gets pushed into your womb.. because it is.. [b]The condom breaks, spilling all its contents inside you![/b] Oops. She probably didn't even realize that yet.")
+
+		else:
+			saynn("The husky arches her back as her throbbing canine cock starts stuffing the condom inside your pussy full of her seed.. Luckily, the rubber was strong enough to contain the size of her load.")
+
+		saynn("[say=nova]Ngh-h~..[/say]")
+
+		saynn("[say=pc]YES-S-s-s..[/say]")
+
+		saynn("When the orgasmic feelings begin to fade.. You realize that you're still locked up together by that knot..")
+
+		saynn("Some time passes. You are too busy licking the cold concrete that you don't even realize that something is happening behind you.")
+
+		saynn("[say=nova]Um.. What do you want, inmates?[/say]")
+
+		saynn("You look around.. and realize that you were too.. busy.. to notice that you have been surrounded.")
+
+		saynn("[say=nova]This is my slut, okay? Find your own.[/say]")
+
+		saynn("Some random inmate lets Nova know that they don't care about some inmate slut.. But a naked vulnerable guard.. with a pussy no less.. That's one hell of a catch..")
+
+		saynn("[say=nova]Umm..[/say]")
+
+		saynn("She tries to reach for her equipment.. But most of it was already moved away.. One of the inmates grabs the stun baton instead..")
+
+		saynn("[say=nova]H-hey.. Can we talk about this?[/say]")
+
+		addButton("Continue", "See what happens next", "nova_gets_rekt_after_fuck")
+	if(state == "nova_anal_fuck"):
+		playAnimation(StageScene.SexStanding, "sex", {npc="pc", pc="nova", bodyState={naked=true,hard=true,condom=true}, npcBodyState={naked=true, hard=true}})
+		saynn("Nova has all the time so she acts slow, enjoying guiding her cock to brush against your sensitive star but not quite penetrate it just yet. This makes your breath become deeper, you spread your legs a little wider while her free paw grips your {pc.masc} ass and squeezes it firmly.")
+
+		saynn("[say=nova]You don't have to lie with me, sweetheart~. Just be honest and admit that you wanted this cock.[/say]")
+
+		saynn("[say=pc]Uh..[/say]")
+
+		saynn("Nova leans in closer to your ear while the tip of her canine shaft finds the entrance and prods, stretching your {pc.analStretch} tailhole and pulling a little moan out of you. She certainly knows how to dominate.. without resorting to physical force..")
+
+		saynn("[say=nova]Use your words, sweetie~.[/say]")
+
+		saynn("Naked husky puts both of her paws on your hips now as her member explores you from inside, the pre-lubed condom making it easier for her to slide in and out of you..")
+
+		saynn("[say=nova]It's okay to admit that you love being fucked by mommy's cock.[/say]")
+
+		saynn("You'd rather not humiliate yourself though so you just keep producing passionate moans that echo throughout the whole bathroom and can probably be even heard outside of it.. wait..")
+
+		saynn("Nova keeps thrusting her canine cock down your willing cute asshole while a strange thought comes into your head.. What if you try to attract the inmates that are outside in the gym.. Hearing your moans would probably get them quite horny.. You just gotta be loud..")
+
+		addButton("Moan louder", "Really humiliate yourself to get that datapad..", "nova_anal_fuck_louder")
+	if(state == "nova_anal_fuck_louder"):
+		playAnimation(StageScene.SexStanding, "fast", {npc="pc", pc="nova", bodyState={naked=true,hard=true,condom=true}, npcBodyState={naked=true, hard=true}})
+		saynn("You can't deny that being fucked like that feels good. Nova keeps whispering lewd things into your ear while you moan louder and louder for her.")
+
+		saynn("[say=nova]Too shy to say anything~? It's okay, mommy loves hearing your noises anyway.[/say]")
+
+		saynn("[say=pc]I.. I love your cock!..[/say]")
+
+		saynn("[say=nova]Oh-h~..[/say]")
+
+		saynn("That was good.. But you probably need more to make sure..")
+
+		saynn("[say=pc]I-I.. I love being fucked by your cock, mommy! Please, pound my ass harder, make me cum for you! Turn me into your public use slutty whore of a pet! Ah~!..[/say]")
+
+		saynn("You make sure to throw your head back and produce loud passionate noises between each slap of Nova's hips against your ass. She seems to be loving what you are saying though, her pace becoming faster and her knot inflating, signaling that she isn't that far..")
+
+		saynn("[say=nova]Wow, sweetie~. Didn't know you're so mouthy. I guess that's what mommy's cock does to sluts~. You will be taking my knot like a good little {pc.girl}, right sweetie?[/say]")
+
+		saynn("[say=pc]Oh god, YES! PLEASE knot your little whore! Stretch her needy asshole wide and stuff your whole length inside! Please![/say]")
+
+		saynn("You might be overdoing it by this point.. But you don't even care. You let your tongue and moan like a slut for Nova while she fucks your ass nice and fast, the meaty orb spreading your ring wider and putting more pressure on it.. until suddenly slipping inside..")
+
+		addButton("Cum", "It's too much..", "nova_anal_fuck_cum")
+	if(state == "nova_anal_fuck_cum"):
+		playAnimation(StageScene.SexStanding, "inside", {npc="pc", pc="nova", bodyState={naked=true,hard=true,condom=true}, npcBodyState={naked=true, hard=true}})
+		saynn("You almost scream as Nova manages to fit her whole length inside you, her knot stretching your tailhole extremely wide while the tip is shoved deep inside your nethers, pushing on the inner walls so much that there is a visible bump on your belly..")
+
+		saynn("The sensations are too much, it only takes a few seconds of her cock being inside you before you cum hard, your body shaking and squirming around it, your legs wanna give but Nova supports you.. with more than just her paws..")
+
+		if (GM.pc.isWearingChastityCage()):
+			saynn("That knot is pushing directly on your prostate.. The pressure in your chastity cage becomes too much. Your poor locked away cock starts shooting little strings of {pc.cum}, leaving stains on the concrete wall before you.")
+
+		elif (GM.pc.hasReachablePenis()):
+			saynn("That knot is pushing directly on your prostate until it becomes too much. Your own {pc.penis} starts shooting thick strings of {pc.cum}, leaving stains on the concrete wall before you.")
+
+		saynn("[say=pc]Yes-s-s! Mommy is knotting her slutty whore of a pet![/say]")
+
+		saynn("You're not even sure if you're pretending at this point, your mind is too clouded up by sheer amount of intense sensations. Nova grunts too as your clenching inner walls push her over the edge as well!")
+
+		saynn("[say=nova]T-take it all then..[/say]")
+
+		if (condomBroke):
+			saynn("The husky arches her back as her throbbing canine cock starts stuffing the condom inside your ass full of her seed.. It feels so warm and sticky inside you.. almost like it actually gets pushed into you raw.. because it is.. [b]The condom breaks, spilling all its contents inside you![/b] Oops. She probably didn't even realize that yet.")
+
+		else:
+			saynn("The husky arches her back as her throbbing canine cock starts stuffing the condom inside your ass full of her seed.. Luckily, the rubber was strong enough to contain the size of her load.")
+
+		saynn("[say=nova]Ngh-h~..[/say]")
+
+		saynn("[say=pc]YES-S-s-s..[/say]")
+
+		saynn("When the orgasmic feelings begin to fade.. You realize that you're still locked up together by that knot..")
+
+		saynn("Some time passes. You are too busy licking the cold concrete that you don't even realize that something is happening behind you.")
+
+		saynn("[say=nova]Um.. What do you want, inmates?[/say]")
+
+		saynn("You look around.. and realize that you were too.. busy.. to notice that you have been surrounded.")
+
+		saynn("[say=nova]This is my slut, okay? Find your own.[/say]")
+
+		saynn("Some random inmate lets Nova know that they don't care about some inmate slut.. But a naked vulnerable guard.. with a pussy no less.. That's one hell of a catch..")
+
+		saynn("[say=nova]Umm..[/say]")
+
+		saynn("She tries to reach for her equipment.. But most of it was already moved away.. One of the inmates grabs the stun baton instead..")
+
+		saynn("[say=nova]H-hey.. Can we talk about this?[/say]")
+
+		addButton("Continue", "See what happens next", "nova_gets_rekt_after_fuck")
+	if(state == "nova_gets_rekt_after_fuck"):
+		playAnimation(StageScene.Solo, "defeat", {pc="nova", bodyState={naked=true}})
+		gotFuckedByNova = true
+		didGang = true
+		saynn("She tries to fight back but inmates easily overpower her and pull her away from you, causing her cock to get forcibly pulled out with a satisfying plop noise, leaving your used hole to leak her cum.")
+
+		saynn("[say=nova]H-hey!.. You can still stop!..[/say]")
+
+		saynn("They obviously won't, your moans got them really pent up. Some begin fondling her breasts, some squeeze her sheath firmly, some spread her wet inviting pussy.")
+
+		saynn("[say=nova]I will break you all![/say]")
+
+		saynn("Ohh, you notice the datapad in Nova's belt that is still on the floor. You grab it and unlock it the way Tavi showed you. Great, there is a camera app. You launch it and begin recording what the inmates are doing to the poor puppy.")
+
+		saynn("Nova is snarling at them but after both her sheath and neck get grabbed and squeezed tight, the husky is left whining.")
+
+		saynn("Oh wow, after that, a queue of inmates begins lining up near her! And the first one is already approaching her..")
+
+		addButton("Watch", "See what happens next", "generate_use_nova_scene")
+	if(state == "explain_nova_pin"):
+		playAnimation(StageScene.SexFeetPlay, "pin", {pc="pc", npc="nova", npcBodyState={naked=true}})
+		saynn("After the inmates had their fun with the husky.. She is left panting on the floor, her used pussy leaking seed. Now it's your turn!")
+
+		saynn("She shines as you suddenly pin her to the floor with your foot.")
+
+		saynn("[say=nova]H-hey.. I-I fucked you already..[/say]")
+
+		saynn("You chuckle and keep recording everything on the datapad.")
+
+		addButton("Continue", "See what happens next", "nova_bully_menu")
 func addStraponButtons():
 	var strapons = GM.pc.getStrapons()
 	for strapon in strapons:
@@ -1616,7 +1846,9 @@ func _react(_action: String, _args):
 		return
 
 	if(_action == "stop_gangbang"):
-		if(lostBathroom):
+		if(gotFuckedByNova):
+			setState("explain_nova_pin")
+		elif(lostBathroom):
 			setState("after_lost_gang")
 		else:
 			setState("nova_bully_menu")
@@ -1624,6 +1856,7 @@ func _react(_action: String, _args):
 
 	if(_action == "do_fuck_putcondom"):
 		usedCondom = true
+		condomBroke = false
 		if(GM.pc.shouldCondomBreakWhenFucking("nova", 30)):
 			condomBroke = true
 		setState("do_fuck_fuck")
@@ -1651,6 +1884,7 @@ func _react(_action: String, _args):
 	if(_action == "nostrapon_nova_bully_menu"):
 		GM.pc.unequipStrapon()
 		setState("nova_bully_menu")
+		return
 
 	if(_action == "do_piss_mouth"):
 		processTime(3*60)
@@ -1665,6 +1899,42 @@ func _react(_action: String, _args):
 
 	if(_action == "nova_about_to_fuck"):
 		processTime(2*60)
+
+	if(_action == "nova_vaginal_fuck"):
+		processTime(3*60)
+
+	if(_action == "nova_anal_fuck"):
+		processTime(3*60)
+
+	if(_action == "nova_vaginal_fuck_louder"):
+		processTime(5*60)
+
+	if(_action == "nova_vaginal_fuck_cum"):
+		processTime(10*60)
+		if(getCharacter("nova").shouldCondomBreakWhenFucking("pc", 20)):
+			condomBroke = true
+		GM.pc.gotVaginaFuckedBy("nova")
+		if(condomBroke):
+			GM.pc.cummedInVaginaBy("nova")
+		if(!condomBroke):
+			addFilledCondomToLootIfPerk(getCharacter("nova").createFilledCondom())
+		GM.pc.orgasmFrom("nova")
+		GM.pc.addSkillExperience(Skill.SexSlave, 30)
+
+	if(_action == "nova_anal_fuck_louder"):
+		processTime(5*60)
+
+	if(_action == "nova_anal_fuck_cum"):
+		processTime(10*60)
+		if(getCharacter("nova").shouldCondomBreakWhenFucking("pc", 20)):
+			condomBroke = true
+		GM.pc.gotAnusFuckedBy("nova")
+		if(condomBroke):
+			GM.pc.cummedInAnusBy("nova")
+		if(!condomBroke):
+			addFilledCondomToLootIfPerk(getCharacter("nova").createFilledCondom())
+		GM.pc.orgasmFrom("nova")
+		GM.pc.addSkillExperience(Skill.SexSlave, 30)
 
 	setState(_action)
 
@@ -1702,6 +1972,7 @@ func saveData():
 	data["npcID"] = npcID
 	data["corruption"] = corruption
 	data["lostBathroom"] = lostBathroom
+	data["gotFuckedByNova"] = gotFuckedByNova
 
 	return data
 
@@ -1717,3 +1988,4 @@ func loadData(data):
 	npcID = SAVE.loadVar(data, "npcID", "")
 	corruption = SAVE.loadVar(data, "corruption", 0.0)
 	lostBathroom = SAVE.loadVar(data, "lostBathroom", false)
+	gotFuckedByNova = SAVE.loadVar(data, "gotFuckedByNova", false)
