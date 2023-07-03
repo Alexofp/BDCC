@@ -92,6 +92,7 @@ func getFlags():
 		"Ch5StoleDatapadFromGuard": flag(FlagType.Bool),
 		"Ch5StoleDatapadFromNova": flag(FlagType.Bool),
 		"Ch5BlackmailedNova": flag(FlagType.Bool),
+		"Ch5SearchedLabFirstTime": flag(FlagType.Bool),
 	}
 
 func _init():
