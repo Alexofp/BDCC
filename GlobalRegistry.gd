@@ -15,6 +15,7 @@ var sceneCreators: Dictionary = {}
 var bodyparts: Dictionary = {}
 var characterClasses: Dictionary = {}
 var attacks: Dictionary = {}
+var playerAttacksIDS: Array = []
 var statusEffects: Dictionary = {}
 var statusEffectsRefs: Dictionary = {}
 var statusEffectsCheckedForPC: Array = []
@@ -566,6 +567,8 @@ func registerAttack(path: String):
 	var attack = load(path)
 	var attackObject = attack.new()
 	attacks[attackObject.id] = attackObject
+	if(attackObject.isPlayerAttack):
+		playerAttacksIDS.append(attackObject.id)
 	
 func registerAttackFolder(folder: String):
 	var dir = Directory.new()
@@ -591,6 +594,8 @@ func getAttack(id: String):
 		return null
 	return attacks[id]
 
+func getPlayerAttackIDs():
+	return playerAttacksIDS
 
 func registerStatusEffect(path: String):
 	var effect = load(path)

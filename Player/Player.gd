@@ -131,10 +131,17 @@ func isPlayer():
 
 func _getAttacks():
 	var attacks = [
-		"PunchPCAttack",
-		"BitePCAttack",
-		"KickPCAttack",
+		#"PunchPCAttack",
+		#"BitePCAttack",
+		#"KickPCAttack",
 	]
+	var thePlayerAttacks = GlobalRegistry.getPlayerAttackIDs()
+	for attackID in thePlayerAttacks:
+		var attack = GlobalRegistry.getAttack(attackID)
+		if(attack == null):
+			continue
+		if(attack.canBeUsedByPlayer()):
+			attacks.append(attackID)
 	
 	attacks.append_array(skillsHolder.getPerkAttacks())
 	

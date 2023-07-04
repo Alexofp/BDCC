@@ -4,6 +4,7 @@ func _init():
 	id = "BitePCAttack"
 	category = Category.Physical
 	aiCategory = AICategory.Offensive
+	isPlayerAttack = true
 	
 func getVisibleName(_context = {}):
 	return "Bite"
