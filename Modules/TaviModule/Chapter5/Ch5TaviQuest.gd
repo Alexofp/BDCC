@@ -4,7 +4,7 @@ func _init():
 	id = "Ch5TaviQuest"
 
 func getVisibleName():
-	return "Toxic Bloodline"
+	return "Toxic Blood Line"
 
 func getProgress():
 	var result = []
@@ -15,6 +15,9 @@ func getProgress():
 		result.append("You got the datapad! Great!")
 	
 	result.append("Get into the Engineering Block and find 2 things: bluespace frequency for collar and a prototype grenade.")
+	
+	if(getFlag("TaviModule.Ch5SearchedLabFirstTime")):
+		result.append("Find a way to turn the assembly lab's power on. The adjacent office might be worth checking.")
 	
 	return result
 

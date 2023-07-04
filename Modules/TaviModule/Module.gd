@@ -93,6 +93,8 @@ func getFlags():
 		"Ch5StoleDatapadFromNova": flag(FlagType.Bool),
 		"Ch5BlackmailedNova": flag(FlagType.Bool),
 		"Ch5SearchedLabFirstTime": flag(FlagType.Bool),
+		"Ch5EnabledLabPower": flag(FlagType.Bool),
+		"Ch5SentinelXHappened": flag(FlagType.Bool),
 	}
 
 func _init():
@@ -140,12 +142,15 @@ func _init():
 		
 		"res://Modules/TaviModule/Chapter5/Ch5s1PlanningScene.gd",
 		"res://Modules/TaviModule/Chapter5/Ch5s2NovaScene.gd",
+		"res://Modules/TaviModule/Chapter5/Ch5s3AssemblyFirstScene.gd",
+		"res://Modules/TaviModule/Chapter5/Ch5s4EnablePowerScene.gd",
 		]
 	characters = [
 		"res://Modules/TaviModule/Chapter4/DirectorTau.gd",
 		"res://Modules/TaviModule/Chapter4/JaxonTau.gd",
 		"res://Modules/TaviModule/Chapter4/RishaTau.gd",
 		"res://Modules/TaviModule/Chapter4/JaxonBrotherTau.gd",
+		"res://Modules/TaviModule/Chapter5/SentinelX.gd",
 	]
 	items = []
 	events = [
@@ -175,6 +180,8 @@ func _init():
 		"res://Modules/TaviModule/Chapter5/Ch5s1PlanningEvent.gd",
 		"res://Modules/TaviModule/Chapter5/Ch5s2DefeatedGuardEvent.gd",
 		"res://Modules/TaviModule/Chapter5/Ch5s2NovaEvent.gd",
+		"res://Modules/TaviModule/Chapter5/Ch5s3AssemblyFirstEvent.gd",
+		"res://Modules/TaviModule/Chapter5/Ch5s4EnablePowerEvent.gd",
 	]
 	quests = [
 		"res://Modules/TaviModule/TaviAppleQuest.gd",
