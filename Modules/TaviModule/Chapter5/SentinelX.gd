@@ -36,7 +36,7 @@ func getSpecies():
 	return [Species.Canine]
 
 func _getAttacks():
-	return ["HeatGrenade", "ForceMuzzlePC", "stunbatonAttack", "stunbatonStrongAttack", "stunbatonOverchargeAttack", "simplekickattack", "trygetupattack"]
+	return ["SentinelHeatGrenade", "SentinelLatexBarrage", "SentinelLatexStrike", "SentinelLatexSlam", "SentinelLatexRegeneration", "trygetupattack"]
 
 #func getFightIntro(_battleName):
 #	return "The guard holds his weapon tightly and waits for you to do the first move.\n\n"+formatSay("You know it’s only gonna end one way for you.")

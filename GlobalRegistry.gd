@@ -313,6 +313,7 @@ func registerEverything():
 	registerAttackFolder("res://Attacks/WeaponAttacks/")
 	registerAttackFolder("res://Attacks/NpcAttacks/")
 	registerAttackFolder("res://Attacks/NpcAttacks/Avy/")
+	registerAttackFolder("res://Attacks/NpcAttacks/SentinelX/")
 	
 	registerLustActionFolder("res://Game/LustCombat/LustActions/")
 	registerLustActionFolder("res://Game/LustCombat/LustActions/Perk/")
@@ -353,6 +354,7 @@ func registerEverything():
 	findCustomSkins()
 	sortFightClubFighters()
 	sortRegisteredStatusEffectsByPriority()
+	sortPlayerAttacks()
 	
 	GM.GES.registerAll()
 	
@@ -653,6 +655,13 @@ func sortRegisteredStatusEffectsByPriority():
 	statusEffectsCheckedForPC.sort_custom(self, "sortRegisteredStatusEffectsByPriority_sortFunc")
 	statusEffectsCheckedForNPC.sort_custom(self, "sortRegisteredStatusEffectsByPriority_sortFunc")
 
+func sortPlayerAttacks_sortFunc(a, b):
+	if getAttack(a).attackPriority > getAttack(b).attackPriority:
+		return true
+	return false
+
+func sortPlayerAttacks():
+	playerAttacksIDS.sort_custom(self, "sortPlayerAttacks_sortFunc")
 
 func registerSpecies(path: String):
 	var species = load(path)

@@ -5,6 +5,7 @@ func _init():
 	category = Category.Physical
 	aiCategory = AICategory.Offensive
 	isPlayerAttack = true
+	attackPriority = 10
 	
 func getVisibleName(_context = {}):
 	return "Kick"

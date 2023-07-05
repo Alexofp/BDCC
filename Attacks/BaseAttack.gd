@@ -12,6 +12,7 @@ var aiScoreMultiplier = 1
 
 var isWeaponAttack = false # true means the damage will be affected by the melee damage buffs
 var isPlayerAttack = false
+var attackPriority = 0
 
 func _init():
 	pass

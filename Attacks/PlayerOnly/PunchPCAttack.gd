@@ -5,6 +5,7 @@ func _init():
 	category = Category.Physical
 	aiCategory = AICategory.Offensive
 	isPlayerAttack = true
+	attackPriority = 30
 	
 func getVisibleName(_context = {}):
 	if(GM.pc.hasPerk(Perk.CombatScratching)):

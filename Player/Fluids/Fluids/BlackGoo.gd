@@ -11,3 +11,11 @@ func getCost(_amount) -> int:
 
 func getCumOverlayColor():
 	return Color.black
+
+func getMessyBuffs(_pc, _amount):
+	var messLevel = Util.mini(int(_amount / 100), 10)
+	
+	if(messLevel > 0):
+		return [
+			buff(Buff.DodgeChanceBuff, [-5 * messLevel]),
+		]
