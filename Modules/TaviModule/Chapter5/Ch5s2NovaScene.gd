@@ -1393,6 +1393,7 @@ func _run():
 		addButton("Watch", "See what happens next", "generate_use_nova_scene")
 	if(state == "after_lost_gang"):
 		playAnimation(StageScene.SexStart, "start", {npc="nova", npcBodyState={naked=true}})
+		setFlag("TaviModule.Ch5StoleDatapadFromNova", true)
 		setFlag("TaviModule.Ch5BlackmailedNova", true)
 		setFlag("NovaModule.Nova_NotThereToday", true)
 		saynn("After the whole queue has had their fun with the husky.. she is left on the floor, panting. Her eyes barely focus on you after you try to get her attention.")

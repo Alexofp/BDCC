@@ -85,7 +85,7 @@ func _run():
 
 		saynn("Description: [cuss]CLASSIFIED INFORMATION[/cuss]")
 
-		saynn("Project status: [cuss]Scrapped[/cuss]")
+		saynn("Project status: Scrapped")
 
 		saynn("-=-=-=-")
 
@@ -148,7 +148,7 @@ func _run():
 		saynn("[say=captain]Run the report by me before you send it. I might wanna make some changes.[/say]")
 
 		saynn("The voice messages end there.")
-		
+
 		addButton("Dashboard", "Take a look at it", "thedashboard")
 	if(state == "do_enable_power"):
 		setFlag("TaviModule.Ch5EnabledLabPower", true)
@@ -220,6 +220,297 @@ func _run():
 		saynn("Well.. Time to authorize yourself.")
 
 		addButton("Fight", "Start the fight", "do_fight_sentinel")
+	if(state == "won_sentinelx"):
+		playAnimation(StageScene.Duo, "stand", {npc="sentinelx", npcAction="defeat", npcBodyState={hard=true}})
+		saynn("The android falls to its knees before you, seemingly unable to continue fighting. Its protective layer doesn't look quite so shiny anymore, there is a visible.. dent.. in its chest.")
+
+		saynn("[say=sentinelx]Structural integrity compromised. Vulnerability exposed.[/say]")
+
+		saynn("You can just about make out the outlines of the prototype grenades. You can try forcing your hand in there and ripping them out but who knows what will happen to the machine.")
+
+		saynn("[say=sentinelx]Attempting to redirect intruder's attention as a last counter-measure.[/say]")
+
+		saynn("Huh. You notice that the android's sheath becomes more defined as a perfectly black canine shaft gets erected between its legs. It looks smooth and shiny with only pulsing blue veins adding more texture to it. There is already a visible black pearl-shaped drop hanging off its tip..")
+
+		addButton("Rip grenades out", "Who cares. It's just a machine.", "sentinel_ripgrenades")
+		addButton("Ride it..", "Well. Might as well", "sentinel_pickride")
+		addButton("Submit to", "Let it take control for a bit..", "sentinel_submit_to")
+	if(state == "sentinel_ripgrenades"):
+		playAnimation(StageScene.SexStart, "defeated", {npc="sentinelx"})
+		saynn("Nah, the android's dirty tricks won't work on you. After crouching before it, you press your hand against its chest.. and apply more and more pressure.. until your digits begin disappearing into its shiny layer. Black goo already starts to coat your wrist so you gotta act quick!")
+
+		saynn("[say=sentinelx]Warning. Core component is critically damaged. Estimated time before complete shutdown: 30 seconds.[/say]")
+
+		saynn("Oops. Well, what can you do? Your hand catches something that vague resembles a grenade and yanks it out! As soon as you do that, the machine.. just goes limp in your hands, its latex layer losing its tension and just dripping off, exposing the broken metal skeleton that's underneath. Blue lights in its eyes quickly fade..")
+
+		saynn("Kinda grim.")
+
+		saynn("But at least you now have what Tavi needs. Great. Time to go.")
+
+		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "sentinel_pickride"):
+		saynn("How do you wanna ride it?")
+
+		addButtonWithChecks("Pussy", "Ride the android's cock with your pussy", "sentinel_ride_pussy", [], [ButtonChecks.HasReachableVagina])
+		addButton("Ass", "Ride the android's cock with your ass", "sentinel_ride_ass")
+	if(state == "sentinel_ride_pussy"):
+		playAnimation(StageScene.SexCowgirl, "tease", {npc="pc", pc="sentinelx", bodyState={exposedCrotch=true,hard=true}, npcBodyState={naked=true, hard=true}})
+		saynn("Might as well have some fun and see what this android can do..")
+
+		saynn("As you expose your {pc.pussyStretch} pussy and straddle its frame.. your thighs already feel the cold touch of the latex teasing them.")
+
+		saynn("[say=sentinelx]Switching to service top mode. Warning, powercell is at 7% capacity.[/say]")
+
+		saynn("Better make those 7% count then. Your digits receive a thin layer of latex on them as you get a grasp on the android's cock and guide it towards your inviting pussy slit while also slowly lowering yourself onto it..")
+
+		addButton("Continue", "See what happens next", "sentinel_ride_pussy_go")
+	if(state == "sentinel_ride_pussy_go"):
+		playAnimation(StageScene.SexCowgirl, "sex", {npc="pc", pc="sentinelx", bodyState={exposedCrotch=true,hard=true}, npcBodyState={naked=true, hard=true}})
+		saynn("That black canine member.. feels cold.. but only at first. As it coats your sensitive petals with its sticky shiny precum, your pussy entrance gets spread open with ease, allowing you to bury that shaft inside you..")
+
+		saynn("You begin to ride it, allowing its cock to explore you deeper and deeper. You notice that the latex layer is slowly expanding onto you.. Feels weird.. you feel little electrical impulses piercing your sensitive flesh.. stimulating it.. almost corrupting even..")
+
+		saynn("It feels so good that moans begin escaping your lips. You place your hands on the machine's chest and feel your digits slowly phasing through and also receiving this latex layer that slowly expands further, giving your limbs a shiny new appearance.")
+
+		saynn("[say=sentinelx]Transformation protocols disallowed, powercell capacity is critically low.[/say]")
+
+		saynn("At least it won't turn you into one of itself.. Wait, it could do that?! These thoughts get forgotten instantly when you begin to feel android's knot inflating and already slapping against your folds, on the verge of being able to fit inside you..")
+
+		addButton("Ride it faster", "Might as well see how it will cum..", "sentinel_ride_pussy_cum")
+	if(state == "sentinel_ride_pussy_cum"):
+		playAnimation(StageScene.SexCowgirl, "fast", {npc="pc", pc="sentinelx", bodyState={exposedCrotch=true,hard=true}, npcBodyState={naked=true, hard=true}})
+		saynn("Even though the android can't transform you.. it can still surely try.. Almost your whole body is now coated in this black shiny latex-like goo.. That keeps stimulating you with little bursts of electricity, making you more eager to ride it. Only your womb seems to still be untouched..")
+
+		if (GM.pc.isWearingChastityCage()):
+			saynn("Weirdly enough, instead of just coating your chastity cage, the black goo chooses to construct a little.. sphere around it.. and creating such a high amount of air pressure in it that your cock just.. gets forced to be limp.")
+
+		elif (GM.pc.hasReachablePenis()):
+			saynn("Weirdly enough, instead of just coating your {pc.penis}, the black goo chooses to construct a little.. sphere around it.. and creating such a high amount of air pressure in it that your cock just.. gets forced to be limp.")
+
+		saynn("Very soon you find yourself bouncing on that cock while rubbing your body that feels so different.. Even your {pc.breasts} are all encased in this latex material that seems to.. make your nipples extremely sensitive.")
+
+		saynn("[say=sentinelx]Orgasm imminent. Nanobot assimilation sequence initialized. DNA infusion primed and commencing.[/say]")
+
+		saynn("Wait? Did it lie?! You weren't planning to become an android today.. But it feels so fucking good.. Too late to back off now..")
+
+		saynn("A loud moan escapes your lips as the android's knot slips inside you, locking you two together. Your body shivers as the android starts pumping you full of some kind of thick sticky black goo.. claiming your womb and coating its walls.. It feels like it's about to.. start changing you..")
+
+		addButton("Continue", "See what happens next", "sentinel_ride_pussy_debait")
+	if(state == "sentinel_ride_pussy_debait"):
+		playAnimation(StageScene.SexCowgirl, "inside", {npc="pc", pc="sentinelx", bodyState={exposedCrotch=true,hard=true}, npcBodyState={naked=true, hard=true}})
+		saynn("[say=sentinelx]Warning.. Powercell loses charge in 3.. 2.. 1..[/say]")
+
+		saynn("But then the machine suddenly turns off and goes limp. All the sensations that the new latex coating was giving you.. gone completely..")
+
+		saynn("In fact, this shiny rubber-like material has lost its sticky properties and begins dripping off of you.. revealing your actual self. Phew.")
+
+		saynn("As you get up, this same black goo begins dripping out of your used spread pussy.. it will probably take a while because your womb is full of it.. The android was talking about some kind of DNA infusion.. making you wonder if this substance.. is virile.")
+
+		addButton("Continue", "See what happens next", "after_sex")
+	if(state == "sentinel_ride_ass"):
+		playAnimation(StageScene.SexCowgirl, "tease", {npc="pc", pc="sentinelx", bodyState={exposedCrotch=true,hard=true}, npcBodyState={naked=true, hard=true}})
+		saynn("Might as well have some fun and see what this android can do..")
+
+		saynn("As you expose your {pc.thick} ass and straddle its frame.. your thighs already feel the cold touch of the latex teasing them.")
+
+		saynn("[say=sentinelx]Switching to service top mode. Warning, powercell is at 7% capacity.[/say]")
+
+		saynn("Better make those 7% count then. Your digits receive a thin layer of latex on them as you get a grasp on the android's cock and guide it towards your inviting asshole while also slowly lowering yourself onto it.. The black goo is usually quite sticky but the.. precum?.. that its cock is producing is slippery instead, allowing you to use it as lube.")
+
+		addButton("Continue", "See what happens next", "sentinel_ride_ass_go")
+	if(state == "sentinel_ride_ass_go"):
+		playAnimation(StageScene.SexCowgirl, "sex", {npc="pc", pc="sentinelx", bodyState={exposedCrotch=true,hard=true}, npcBodyState={naked=true, hard=true}})
+		saynn("That black canine member.. feels cold.. but only at first. As it coats your sensitive flesh with its shiny precum, your anal entrance gets spread open with ease, allowing you to bury that shaft inside you..")
+
+		saynn("You begin to ride it, allowing its cock to explore you deeper and deeper. You notice that the latex layer is slowly expanding onto you.. Feels weird.. you feel little electrical impulses piercing your sensitive flesh.. stimulating it.. almost corrupting even..")
+
+		saynn("It feels so good that moans begin escaping your lips. You place your hands on the machine's chest and feel your digits slowly phasing through and also receiving this latex layer that slowly expands further, giving your limbs a shiny new appearance.")
+
+		saynn("[say=sentinelx]Transformation protocols disallowed, powercell capacity is critically low.[/say]")
+
+		saynn("At least it won't turn you into one of itself.. Wait, it could do that?! These thoughts get forgotten instantly when you begin to feel android's knot inflating and already slapping against your ring, on the verge of being able to fit inside you..")
+
+		addButton("Ride it faster", "Might as well see how it will cum..", "sentinel_ride_ass_cum")
+	if(state == "sentinel_ride_ass_cum"):
+		playAnimation(StageScene.SexCowgirl, "fast", {npc="pc", pc="sentinelx", bodyState={exposedCrotch=true,hard=true}, npcBodyState={naked=true, hard=true}})
+		saynn("Even though the android can't transform you.. it can still surely try.. Almost your whole body is now coated in this black shiny latex-like goo.. That keeps stimulating you with little bursts of electricity, making you more eager to ride it. Only your depths seem to still be untouched..")
+
+		if (GM.pc.isWearingChastityCage()):
+			saynn("Weirdly enough, instead of just coating your chastity cage, the black goo chooses to construct a little.. sphere around it.. and creating such a high amount of air pressure in it that your cock just.. gets forced to be limp.")
+
+		elif (GM.pc.hasReachablePenis()):
+			saynn("Weirdly enough, instead of just coating your {pc.penis}, the black goo chooses to construct a little.. sphere around it.. and creating such a high amount of air pressure in it that your cock just.. gets forced to be limp.")
+
+		saynn("Very soon you find yourself bouncing on that cock while rubbing your body that feels so different.. Even your {pc.breasts} are all encased in this latex material that seems to.. make your nipples extremely sensitive.")
+
+		saynn("[say=sentinelx]Orgasm imminent. Nanobot assimilation sequence initialized. DNA infusion primed and commencing.[/say]")
+
+		saynn("Wait? Did it lie?! You weren't planning to become an android today.. But it feels so fucking good.. Too late to back off now..")
+
+		saynn("A loud moan escapes your lips as the android's knot slips inside you, locking you two together. Your body shivers as the android starts pumping you full of some kind of thick sticky black goo.. claiming your insides and coating the inner walls.. It feels like it's about to.. start changing you..")
+
+		addButton("Continue", "See what happens next", "sentinel_ride_ass_debait")
+	if(state == "sentinel_ride_ass_debait"):
+		playAnimation(StageScene.SexCowgirl, "inside", {npc="pc", pc="sentinelx", bodyState={exposedCrotch=true,hard=true}, npcBodyState={naked=true, hard=true}})
+		saynn("[say=sentinelx]Warning.. Powercell loses charge in 3.. 2.. 1..[/say]")
+
+		saynn("But then the machine suddenly turns off and goes limp. All the sensations that the new latex coating was giving you.. gone completely..")
+
+		saynn("In fact, this shiny rubber-like material has lost its sticky properties and begins dripping off of you.. revealing your actual self. Phew.")
+
+		saynn("As you get up, this same black goo begins dripping out of your used spread tailhole.. it will probably take a while because you're full of it.. The android was talking about some kind of DNA infusion.. making you wonder if this substance.. is virile.")
+
+		addButton("Continue", "See what happens next", "after_sex")
+	if(state == "sentinel_submit_to"):
+		playAnimation(StageScene.SexMissionary, "tease", {pc = "sentinelx", npc="pc", bodyState={exposedCrotch=true,hard=true}})
+		saynn("You can just retrieve what you need from the android.. but now you're kinda curious about what it would do to you..")
+
+		saynn("And so instead of doing anything to it, you just lie down on the floor and wait for it to recover.")
+
+		saynn("[say=sentinelx]Distraction successful. Intruder's status: completely submissive. Securing.[/say]")
+
+		saynn("Wow, rude. You almost change your mind but then the machine pins you to the floor, its hands grabbing yours and.. forming some kind of organic-looking handcuffs around your wrists, made entirely out of latex.")
+
+		saynn("[say=sentinelx]Administering a fitting punishment.[/say]")
+
+		saynn("Huh. You would ask the machine about the punishment but then it grabs your face.. and produces a ball made out of this same rubber material before pushing it into your mouth and securing it with some latex straps.")
+
+		saynn("You would think that this is it but then it covers your eyes and forms some kind of.. mask.. around your whole face.. a mask that blocks any vision and only lets you breathe through your nose stills. You are now completely helpless.")
+
+		saynn("[say=sentinelx]First step completed.[/say]")
+
+		saynn("That was only the first step? What's next then..")
+
+		addButtonWithChecks("Vaginal", "It will fuck your pussy..", "sentinel_submit_pussy", [], [ButtonChecks.HasReachableVagina])
+		addButton("Anal", "It will fuck your ass..", "sentinel_submit_ass")
+		if (GM.pc.hasReachableVagina()):
+			addButton("Random", "Let it pick", "sentinel_submit_random")
+	if(state == "lost_sentinelx"):
+		playAnimation(StageScene.SexMissionary, "tease", {pc = "sentinelx", npc="pc", bodyState={exposedCrotch=true,hard=true}})
+		saynn("Defeated, you fall to your knees. But then the sticky android pins you to the floor!")
+
+		saynn("[say=sentinelx]Confrontation ended successfully. Intruder's status: completely submissive. Securing.[/say]")
+
+		saynn("Wow, rude. You try to hit the android more but its hands catch yours and.. begin forming some kind of organic-looking handcuffs around your wrists, made entirely out of latex.")
+
+		saynn("[say=sentinelx]Administering a fitting punishment.[/say]")
+
+		saynn("Huh. You would ask the machine about the punishment but then it grabs your face.. and produces a ball made out of this same rubber material before pushing it into your mouth and securing it with some latex straps.")
+
+		saynn("You would think that this is it but then it covers your eyes and forms some kind of.. mask.. around your whole face.. a mask that blocks any vision and only lets you breathe through your nose stills. You are now completely helpless.")
+
+		saynn("[say=sentinelx]First step completed.[/say]")
+
+		saynn("That was only the first step? What's next then..")
+
+		addButtonWithChecks("Vaginal", "It will fuck your pussy..", "sentinel_submit_pussy", [], [ButtonChecks.HasReachableVagina])
+		addButton("Anal", "It will fuck your ass..", "sentinel_submit_ass")
+		if (GM.pc.hasReachableVagina()):
+			addButton("Random", "Let it pick", "sentinel_submit_random")
+	if(state == "sentinel_submit_pussy"):
+		playAnimation(StageScene.SexMissionary, "tease", {pc = "sentinelx", npc="pc", bodyState={exposedCrotch=true,hard=true}, npcBodyState={exposedCrotch=true,hard=true}})
+		saynn("The android positions itself between your legs, your thighs feeling the cold rubber touch.. The machine aligns its canine member against your sensitive folds and lets the tip cover your flesh with this latex material by brushing against it. Wait.. It's spreading..")
+
+		saynn("It goes both ways, up from your thighs and down from your mask, slowly coating your whole body with this shiny layer.. You can feel it because this layer sends little electrical impulses through your skin.. stimulating.. almost corrupting.")
+
+		saynn("It feels so good that you try to moan. But as you fail at that, the ballgag starts to coat your throat too..")
+
+		saynn("[say=sentinelx]Transformation protocols disallowed, powercell capacity is critically low.[/say]")
+
+		saynn("At least it won't turn you into one of itself.. Wait, it could do that?! These thoughts get forgotten instantly when you feel the android's canine cock spreading your pussy and forcing itself inside!")
+
+		addButton("Continue", "Feel what happens next", "sentinel_submit_pussy_fuck")
+	if(state == "sentinel_submit_pussy_fuck"):
+		playAnimation(StageScene.SexMissionary, "fast", {pc = "sentinelx", npc="pc", bodyState={exposedCrotch=true,hard=true}, npcBodyState={exposedCrotch=true,hard=true}})
+		saynn("Even though the android can't transform you.. it can still surely try.. Gradually, your whole body gets coated in this black shiny latex-like goo.. Which keeps stimulating you with little bursts of electricity, adding to the sensations of being fucked by an android's cock. Only your womb seems to still be untouched..")
+
+		if (GM.pc.isWearingChastityCage()):
+			saynn("Weirdly enough, instead of just coating your chastity cage, the black goo chooses to construct a little.. sphere around it.. and creating such a high amount of air pressure in it that your cock just.. gets forced to be limp.")
+
+		elif (GM.pc.hasReachablePenis()):
+			saynn("Weirdly enough, instead of just coating your {pc.penis}, the black goo chooses to construct a little.. sphere around it.. and creating such a high amount of air pressure in it that your cock just.. gets forced to be limp.")
+
+		saynn("Very soon you find yourself squirming hard while the machine holds you pinned, ramming its shaft deep inside.. The mask, gag and handcuffs make you unable to resist even if you wanted to.. but all the stimulation makes it so pleasurable, your inner walls clenching around that cock hard.. So much that its knot begins to grow and inflate..")
+
+		saynn("[say=sentinelx]Orgasm imminent. Nanobot assimilation sequence initialized. DNA infusion primed and commencing.[/say]")
+
+		saynn("Wait? Did it lie?! You weren't planning to become an android today.. But it feels so fucking good.. It's not like you can say no now anyway..")
+
+		addButton("Continue", "See what happens next", "sentinel_submit_pussy_cum")
+	if(state == "sentinel_submit_pussy_cum"):
+		playAnimation(StageScene.SexMissionary, "inside", {pc = "sentinelx", npc="pc", bodyState={exposedCrotch=true,hard=true}, npcBodyState={exposedCrotch=true,hard=true}})
+		saynn("A loud muffled noise escapes your lips as the android's knot slips inside you, locking you two together. Your body shivers as the android starts pumping you full of some kind of thick sticky black goo.. claiming your insides and stuffing your womb to the brim.. It feels like it's about to.. start changing you..")
+
+		saynn("You arch your back as best as your restraints allow and cum hard, every thought in your head is only about how good this feels. Maybe being like.. it.. won't be the worst thing that happened in your life..")
+
+		saynn("[say=sentinelx]Warning.. Powercell loses charge in 3.. 2.. 1..[/say]")
+
+		saynn("But then the machine suddenly turns off and goes limp. All the sensations that the new latex coating was giving you.. gone completely..")
+
+		saynn("In fact, this shiny rubber-like material has lost its sticky properties and begins dripping off of you.. revealing your actual self. Phew. You suddenly realize that your throat is full of this stuff and begin coughing it all out. The handcuffs around your wrist melt, allowing you to free yourself.")
+
+		saynn("That was.. wow. You're still trying to catch your breath while trying to push this machine off you.")
+
+		saynn("As you get up, this same black goo begins dripping out of your used spread pussy.. it will probably take a while because you're full of it.. The android was talking about some kind of DNA infusion.. making you wonder if this substance.. is virile.")
+
+		addButton("Continue", "See what happens next", "after_sex")
+	if(state == "sentinel_submit_ass"):
+		playAnimation(StageScene.SexMissionary, "tease", {pc = "sentinelx", npc="pc", bodyState={exposedCrotch=true,hard=true}, npcBodyState={exposedCrotch=true,hard=true}})
+		saynn("The android positions itself between your legs, your thighs feeling the cold rubber touch.. The machine aligns its canine member against your backdoor and lets the tip cover your flesh with this latex material by brushing against it. Wait.. It's spreading..")
+
+		saynn("It goes both ways, up from your thighs and down from your mask, slowly coating your whole body with this shiny layer.. You can feel it because this layer sends little electrical impulses through your skin.. stimulating.. almost corrupting.")
+
+		saynn("It feels so good that you try to moan. But as you fail at that, the ballgag starts to coat your throat too..")
+
+		saynn("[say=sentinelx]Transformation protocols disallowed, powercell capacity is critically low.[/say]")
+
+		saynn("At least it won't turn you into one of itself.. Wait, it could do that?! These thoughts get forgotten instantly when you feel the android's canine cock spreading your anal ring and forcing itself inside!")
+
+		addButton("Continue", "Feel what happens next", "sentinel_submit_ass_fuck")
+	if(state == "sentinel_submit_ass_fuck"):
+		playAnimation(StageScene.SexMissionary, "fast", {pc = "sentinelx", npc="pc", bodyState={exposedCrotch=true,hard=true}, npcBodyState={exposedCrotch=true,hard=true}})
+		saynn("Even though the android can't transform you.. it can still surely try.. Gradually, your whole body gets coated in this black shiny latex-like goo.. Which keeps stimulating you with little bursts of electricity, adding to the sensations of being fucked by an android's cock. Only your deep nethers seem to still be untouched..")
+
+		if (GM.pc.isWearingChastityCage()):
+			saynn("Weirdly enough, instead of just coating your chastity cage, the black goo chooses to construct a little.. sphere around it.. and creating such a high amount of air pressure in it that your cock just.. gets forced to be limp.")
+
+		elif (GM.pc.hasReachablePenis()):
+			saynn("Weirdly enough, instead of just coating your {pc.penis}, the black goo chooses to construct a little.. sphere around it.. and creating such a high amount of air pressure in it that your cock just.. gets forced to be limp.")
+
+		saynn("Very soon you find yourself squirming hard while the machine holds you pinned, ramming its shaft deep inside.. The mask, gag and handcuffs make you unable to resist even if you wanted to.. but all the stimulation makes it so pleasurable, your inner walls clenching around that cock hard.. So much that its knot begins to grow and inflate..")
+
+		saynn("[say=sentinelx]Orgasm imminent. Nanobot assimilation sequence initialized. DNA infusion primed and commencing.[/say]")
+
+		saynn("Wait? Did it lie?! You weren't planning to become an android today.. But it feels so fucking good.. It's not like you can say no now anyway..")
+
+		addButton("Continue", "See what happens next", "sentinel_submit_ass_cum")
+	if(state == "sentinel_submit_ass_cum"):
+		playAnimation(StageScene.SexMissionary, "inside", {pc = "sentinelx", npc="pc", bodyState={exposedCrotch=true,hard=true}, npcBodyState={exposedCrotch=true,hard=true}})
+		saynn("A loud muffled noise escapes your lips as the android's knot slips inside you, locking you two together. Your body shivers as the android starts pumping you full of some kind of thick sticky black goo.. claiming your insides and painting your guts black.. It feels like it's about to.. start changing you..")
+
+		saynn("You arch your back as best as your restraints allow and cum hard, every thought in your head is only about how good this feels. Maybe being like.. it.. won't be the worst thing that happened in your life..")
+
+		saynn("[say=sentinelx]Warning.. Powercell loses charge in 3.. 2.. 1..[/say]")
+
+		saynn("But then the machine suddenly turns off and goes limp. All the sensations that the new latex coating was giving you.. gone completely..")
+
+		saynn("In fact, this shiny rubber-like material has lost its sticky properties and begins dripping off of you.. revealing your actual self. Phew. You suddenly realize that your throat is full of this stuff and begin coughing it all out. The handcuffs around your wrist melt, allowing you to free yourself.")
+
+		saynn("That was.. wow. You're still trying to catch your breath while trying to push this machine off you.")
+
+		saynn("As you get up, this same black goo begins dripping out of your used spread tailhole.. it will probably take a while because you're full of it.. The android was talking about some kind of DNA infusion.. making you wonder if this substance.. is virile.")
+
+		addButton("Continue", "See what happens next", "after_sex")
+	if(state == "after_sex"):
+		removeCharacter("sentinelx")
+		playAnimation(StageScene.Solo, "stand")
+		saynn("You take a look at the android.. and realize that its protective layer is dripping away too, revealing the metal skeleton underneath.. and also the grenades that Tavi needed! Perfect.")
+
+		saynn("You yank some out of its chest cavity and prepare to leave. It seems this machine won't wake up anytime soon.. or ever.")
+
+		saynn("Time to go.")
+
+		addButton("Continue", "See what happens next", "endthescene")
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
@@ -235,6 +526,72 @@ func _react(_action: String, _args):
 	if(_action == "do_fight_sentinel"):
 		runScene("FightScene", ["sentinelx"], "sentinelx_fight")
 		return
+
+	if(_action == "sentinel_ripgrenades"):
+		processTime(3*60)
+		addMessage("Task updated!")
+		addExperienceToPlayer(100)
+
+	if(_action == "sentinel_ride_pussy"):
+		processTime(3*60)
+
+	if(_action == "sentinel_ride_ass"):
+		processTime(3*60)
+
+	if(_action == "sentinel_ride_pussy_go"):
+		processTime(5*60)
+
+	if(_action == "sentinel_ride_pussy_cum"):
+		GM.pc.cummedOnBy("sentinelx", FluidSource.Penis, 0.5)
+		processTime(6*60)
+		GM.pc.gotPussyFuckedBy("sentinelx")
+		GM.pc.cummedInPussyBy("sentinelx")
+		GM.pc.orgasmFrom("sentinelx")
+
+	if(_action == "sentinel_ride_pussy_debait"):
+		processTime(3*60)
+
+	if(_action == "after_sex"):
+		processTime(3*60)
+		addMessage("Task updated!")
+		addExperienceToPlayer(100)
+
+	if(_action == "sentinel_ride_ass_go"):
+		processTime(5*60)
+
+	if(_action == "sentinel_ride_ass_cum"):
+		GM.pc.cummedOnBy("sentinelx", FluidSource.Penis, 0.5)
+		processTime(6*60)
+		GM.pc.gotAnusFuckedBy("sentinelx")
+		GM.pc.cummedInAnusBy("sentinelx")
+		GM.pc.orgasmFrom("sentinelx")
+
+	if(_action == "sentinel_ride_ass_debait"):
+		processTime(3*60)
+
+	if(_action == "sentinel_submit_random"):
+		setState(RNG.pick(["sentinel_submit_pussy", "sentinel_submit_ass"]))
+		return
+
+	if(_action == "sentinel_submit_pussy_fuck"):
+		processTime(5*60)
+
+	if(_action == "sentinel_submit_pussy_cum"):
+		GM.pc.cummedOnBy("sentinelx", FluidSource.Penis, 0.5)
+		processTime(6*60)
+		GM.pc.gotPussyFuckedBy("sentinelx")
+		GM.pc.cummedInPussyBy("sentinelx")
+		GM.pc.orgasmFrom("sentinelx")
+
+	if(_action == "sentinel_submit_ass_fuck"):
+		processTime(5*60)
+
+	if(_action == "sentinel_submit_ass_cum"):
+		GM.pc.cummedOnBy("sentinelx", FluidSource.Penis, 0.5)
+		processTime(6*60)
+		GM.pc.gotAnusFuckedBy("sentinelx")
+		GM.pc.cummedInAnusBy("sentinelx")
+		GM.pc.orgasmFrom("sentinelx")
 
 	setState(_action)
 

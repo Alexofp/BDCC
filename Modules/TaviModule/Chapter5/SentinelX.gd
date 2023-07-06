@@ -69,3 +69,6 @@ func createEquipment():
 	#getInventory().equipItem(GlobalRegistry.createItemNoID("GuardArmor"))
 	#getInventory().equipItem(GlobalRegistry.createItemNoID("AndroidSuit"))
 	pass
+
+func getFluidType(_fluidSource):
+	return "BlackGoo"
