@@ -544,8 +544,8 @@ func _react(_action: String, _args):
 	if(_action == "sentinel_ride_pussy_cum"):
 		GM.pc.cummedOnBy("sentinelx", FluidSource.Penis, 0.5)
 		processTime(6*60)
-		GM.pc.gotPussyFuckedBy("sentinelx")
-		GM.pc.cummedInPussyBy("sentinelx")
+		GM.pc.gotVaginaFuckedBy("sentinelx")
+		GM.pc.cummedInVaginaBy("sentinelx")
 		GM.pc.orgasmFrom("sentinelx")
 
 	if(_action == "sentinel_ride_pussy_debait"):
@@ -579,8 +579,8 @@ func _react(_action: String, _args):
 	if(_action == "sentinel_submit_pussy_cum"):
 		GM.pc.cummedOnBy("sentinelx", FluidSource.Penis, 0.5)
 		processTime(6*60)
-		GM.pc.gotPussyFuckedBy("sentinelx")
-		GM.pc.cummedInPussyBy("sentinelx")
+		GM.pc.gotVaginaFuckedBy("sentinelx")
+		GM.pc.cummedInVaginaBy("sentinelx")
 		GM.pc.orgasmFrom("sentinelx")
 
 	if(_action == "sentinel_submit_ass_fuck"):

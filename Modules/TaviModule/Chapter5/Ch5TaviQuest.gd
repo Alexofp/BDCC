@@ -32,7 +32,7 @@ func isVisible():
 	return getFlag("TaviModule.Ch5NewPlanSceneHappend")
 
 func isCompleted():
-	return false
+	return getFlag("TaviModule.Ch5BigSceneStarted")
 
 func isMainQuest():
 	return true
