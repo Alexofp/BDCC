@@ -1,13 +1,13 @@
 extends BuffBase
 
-var skill = ""
+var statusEffect = ""
 var amount = 0
 
 func _init():
-	id = Buff.SkillExperienceBuff
+	id = Buff.StatusEffectImmunityBuff
 
 func initBuff(_args):
-	skill = _args[0]
+	statusEffect = _args[0]
 	amount = _args[1]
 
 func getVisibleDescription():
@@ -15,35 +15,35 @@ func getVisibleDescription():
 	if(amount > 0):
 		text = "+"+text
 	
-	var skillObject:SkillBase = GlobalRegistry.createSkill(skill)
+	var statusEffectObj:StatusEffectBase = GlobalRegistry.getStatusEffectRef(statusEffect)
 		
-	return skillObject.getVisibleName()+" experience "+text+"%"
+	return "'"+statusEffectObj.getEffectName()+"' immunity "+text+"%"
 
 func apply(_buffHolder):
-	if(!_buffHolder.skillsExperience.has(skill)):
-		_buffHolder.skillsExperience[skill] = 0.0
-	_buffHolder.skillsExperience[skill] += (amount/100.0)
+	if(!_buffHolder.statusEffectImmunity.has(statusEffect)):
+		_buffHolder.statusEffectImmunity[statusEffect] = 0.0
+	_buffHolder.statusEffectImmunity[statusEffect] += (amount/100.0)
 
 func getBuffColor():
 	if(amount < 0):
 		return Color.red
-	return DamageType.getColor(DamageType.Stamina)
+	return Color.greenyellow
 
 func saveData():
 	var data = .saveData()
 	
-	data["skill"] = skill
+	data["statusEffect"] = statusEffect
 	data["amount"] = amount
 
 	return data
 	
 func loadData(_data):
 	.loadData(_data)
-	skill = SAVE.loadVar(_data, "skill", "")
+	statusEffect = SAVE.loadVar(_data, "statusEffect", "")
 	amount = SAVE.loadVar(_data, "amount", 0)
 
 func canCombine(_otherBuff):
-	if(_otherBuff.skill != skill):
+	if(_otherBuff.statusEffect != statusEffect):
 		return false
 	return true
 

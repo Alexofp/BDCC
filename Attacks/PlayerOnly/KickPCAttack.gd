@@ -26,8 +26,8 @@ func _doAttack(_attacker, _receiver, _context = {}):
 	var text = RNG.pick(texts)
 	
 	if(RNG.chance(20) && !_receiver.hasEffect(StatusEffect.Collapsed)):
-		text += "\n[b]{receiver.name} loses {receiver.his} balance and collapses onto the floor[/b]."
-		_receiver.addEffect(StatusEffect.Collapsed)
+		if(_receiver.addEffect(StatusEffect.Collapsed)):
+			text += "\n[b]{receiver.name} loses {receiver.his} balance and collapses onto the floor[/b]."
 	
 	return {
 		text = text,

@@ -164,7 +164,16 @@ func getAmbientLust():
 func addEffect(effectID: String, args = []):
 	if(statusEffects.has(effectID)):
 		statusEffects[effectID].combine(args)
-		return
+		return true
+	
+	var immunity = getStatusEffectImmunity(effectID)
+	if(RNG.chance(clamp(immunity, 0.0, 1.0)*100.0) || GlobalRegistry.getStatusEffectRef(effectID).checkAvoidedBuff(self)):
+		if(GM.main != null && GM.main.characterIsVisible(getID())):
+			if(isPlayer()):
+				GM.main.addMessage("You managed to avoid the '"+GlobalRegistry.getStatusEffectRef(effectID).getEffectName()+"' status effect!")
+			else:
+				GM.main.addMessage(getName()+" managed to avoid the '"+GlobalRegistry.getStatusEffectRef(effectID).getEffectName()+"' status effect!")
+		return false
 	
 	var effect = GlobalRegistry.createStatusEffect(effectID)
 	effect.setCharacter(self)
@@ -172,6 +181,7 @@ func addEffect(effectID: String, args = []):
 	
 	statusEffects[effectID] = effect
 	#buffsHolder.calculateBuffs()
+	return true
 
 func hasEffect(effectID: String):
 	return statusEffects.has(effectID)
@@ -1853,7 +1863,7 @@ func addTimedBuffs(buffs: Array, seconds):
 	for newbuff in buffs:
 		var foundBuff = false
 		for oldbuff in timedBuffs:
-			if(newbuff.id == oldbuff.id):
+			if(newbuff.id == oldbuff.id && oldbuff.canCombine(newbuff)):
 				oldbuff.combine(newbuff)
 				foundBuff = true
 				break
@@ -1870,7 +1880,7 @@ func addTimedBuffsTurns(buffs: Array, turns):
 	for newbuff in buffs:
 		var foundBuff = false
 		for oldbuff in timedBuffsTurns:
-			if(newbuff.id == oldbuff.id):
+			if(newbuff.id == oldbuff.id && oldbuff.canCombine(newbuff)):
 				oldbuff.combine(newbuff)
 				foundBuff = true
 				break
@@ -2155,3 +2165,14 @@ func applyRandomSkinAndColors():
 		pickedSkin = newSkin
 		
 	applyRandomColors()
+
+func applyRandomSkinAndColorsAndParts():
+	applyRandomSkinAndColors()
+	
+	for bodypartID in bodyparts:
+		if(bodyparts[bodypartID] == null):
+			continue
+		bodyparts[bodypartID].generateRandomColors(self)
+
+func getStatusEffectImmunity(statusEffectID):
+	return buffsHolder.getStatusEffectImmunity(statusEffectID)

@@ -45,6 +45,9 @@ func onSleeping():
 func processTime(_secondsPassed: int):
 	pass
 
+func checkAvoidedBuff(_npc):
+	return false
+
 func getEffectName():
 	return "Error bad"
 

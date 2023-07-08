@@ -52,6 +52,7 @@ const OvulationEggsAmountBuff = "OvulationEggsAmountBuff"
 const MinOvulationEggsAmountBuff = "MinOvulationEggsAmountBuff"
 
 const SkillExperienceBuff = "SkillExperienceBuff"
+const StatusEffectImmunityBuff = "StatusEffectImmunityBuff"
 
 const ChastityPenisBuff = "ChastityPenisBuff"
 const ChastityVaginaBuff = "ChastityVaginaBuff"

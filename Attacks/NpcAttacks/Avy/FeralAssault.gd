@@ -30,8 +30,8 @@ func _doAttack(_attacker, _receiver, _context = {}):
 	var text = "{attacker.name} charges ferociously, unleashing a relentless barrage of savage strikes upon {receiver.him}, leaving {receiver.him} battered and bruised."
 	
 	if(RNG.chance(30) && !_receiver.hasEffect(StatusEffect.Collapsed)):
-		_receiver.addEffect(StatusEffect.Collapsed)
-		text += " The furious attack made {receiver.name} [b]fall[/b]."
+		if(_receiver.addEffect(StatusEffect.Collapsed)):
+			text += " The furious attack made {receiver.name} [b]fall[/b]."
 	return {
 		text = text,
 		pain = RNG.randi_range(30, 50),

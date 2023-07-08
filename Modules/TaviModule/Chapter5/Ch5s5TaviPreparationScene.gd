@@ -119,7 +119,7 @@ func _run():
 		addButton("Continue", "See what happens next", "tavi_finishes_assembling")
 	if(state == "tavi_finishes_assembling"):
 		playAnimation(StageScene.Duo, "stand", {npc="tavi"})
-		saynn("After assembling the little janky remote and dialing in the frequency that you tell to Tavi, she moves on to the grenade, just attaching a little button to it so it can actually be activated by a person.")
+		saynn("After assembling the little janky remote and dialing in the frequency that you tell to Tavi, she moves on to the grenade, attaching a little timer to it and a button so it can actually be activated by a person.")
 
 		saynn("[say=tavi]Alright.. This should be it.[/say]")
 
@@ -159,7 +159,7 @@ func _run():
 
 		saynn("She leaves a little sweet kiss on your lips..")
 
-		saynn("[say=tavi]Are you ready?.. This will be tough.[/say]")
+		saynn("[say=tavi]Are you ready?.. This won't be easy.[/say]")
 
 		addButton("Yes", "You're ready to do this", "start_big_scene")
 		addButton("Not yet", "You need more time", "not_yet_ready")
@@ -189,3 +189,9 @@ func _react(_action: String, _args):
 		return
 
 	setState(_action)
+
+func getDevCommentary():
+	return "Tavi is a hacker so it might not make the most amount of sense that she can suddenly work with electronics.. But I tried to write in a way that shows her doing her best. She obviously has some knowledge of how components work and stuff.."
+
+func hasDevCommentary():
+	return true

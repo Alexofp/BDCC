@@ -29,5 +29,8 @@ func saveData():
 func loadData(_data):
 	pass
 
+func canCombine(_otherBuff):
+	return true
+
 func combine(_otherBuff):
 	pass

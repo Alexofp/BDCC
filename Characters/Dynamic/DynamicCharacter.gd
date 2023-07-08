@@ -197,7 +197,7 @@ func loadData(data):
 	npcDefaultEquipment = SAVE.loadVar(data, "npcDefaultEquipment", [])
 	npcCharacterType = SAVE.loadVar(data, "npcCharacterType", CharacterType.Generic)
 	if(!data.has("pickedSkin")):
-		applyRandomSkinAndColors()
+		applyRandomSkinAndColorsAndParts()
 	else:
 		pickedSkin = SAVE.loadVar(data, "pickedSkin", "EmptySkin")
 		pickedSkinRColor = Color(SAVE.loadVar(data, "pickedSkinRColor", "ffffff"))

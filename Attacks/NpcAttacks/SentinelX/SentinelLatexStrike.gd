@@ -19,8 +19,7 @@ func _doAttack(_attacker, _receiver, _context = {}):
 	#	return genericDodgeMessage(_attacker, _receiver)
 	
 	var text = "{attacker.name} lunges forward, delivering a swift and forceful strike with {attacker.his} latex-covered fist, inflicting sharp pain upon impact."
-	if(RNG.chance(10)):
-		_receiver.addEffect(StatusEffect.Bleeding)
+	if(RNG.chance(10) && _receiver.addEffect(StatusEffect.Bleeding)):
 		text += " Sharp edges of {attacker.name}'s fist caused {receiver.name} to start [color=red]bleeding[/color]."
 	return {
 		text = text,

@@ -81,6 +81,7 @@ func _run():
 		addButton("Secondary color", "Change base secondary color", "changebasecolormenu", [1])
 		addButton("Tertiary color", "Change base tertiary color", "changebasecolormenu", [2])
 		addButton("Randomize colors", "Pick random colors", "dorandomcolors")
+		addButton("Randomize ALL", "Pick random skin and colors", "dorandomcolorsall")
 
 	if(state == "changebaseskinmenu"):
 		addButton("Back", "Go back", "basemenu")
@@ -275,6 +276,11 @@ func _react(_action: String, _args):
 		
 	if(_action == "dorandomcolors"):
 		thePC.applyRandomColors()
+		thePC.updateAppearance()
+		return
+	
+	if(_action == "dorandomcolorsall"):
+		thePC.applyRandomSkinAndColorsAndParts()
 		thePC.updateAppearance()
 		return
 	
