@@ -43,6 +43,13 @@ static func npcSatisfiesCondition(character:BaseCharacter, conInfo):
 	elif(conditionID == NpcCon.CharacterType):
 		if(character.getCharacterType() != conInfo[1]):
 			return false
+	elif(conditionID == NpcCon.AvoidIDs):
+		if(conInfo[1] is Array):
+			if(character.getID() in conInfo[1]):
+				return false
+		else:
+			if(character.getID() == conInfo[1]):
+				return false
 	return true
 
 static func grabNpcIDFromPool(poolID, _conditions = []):

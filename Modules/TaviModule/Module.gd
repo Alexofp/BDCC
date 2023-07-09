@@ -147,6 +147,7 @@ func _init():
 		"res://Modules/TaviModule/Chapter5/Ch5s3AssemblyFirstScene.gd",
 		"res://Modules/TaviModule/Chapter5/Ch5s4EnablePowerScene.gd",
 		"res://Modules/TaviModule/Chapter5/Ch5s5TaviPreparationScene.gd",
+		"res://Modules/TaviModule/Chapter5/Ch5s6TaviCaptainScene.gd",
 		]
 	characters = [
 		"res://Modules/TaviModule/Chapter4/DirectorTau.gd",
