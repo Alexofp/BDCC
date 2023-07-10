@@ -194,7 +194,7 @@ func _run():
 
 		addButton("Fight", "Start the fight", "start_fight_kait")
 	if(state == "kait_lost"):
-		playAnimation(StageScene.Solo, "defeat")
+		playAnimation(StageScene.Duo, "defeat", {npc="kait"})
 		saynn("Defeated, you drop down to your knees before Kait. She growls while a somewhat sizable crowd begins gathering around, curious about all the fuss.")
 
 		saynn("[say=kait]Stupid little pet.. I should have been in your place![/say]")
@@ -301,9 +301,9 @@ func _run():
 
 		saynn("Finally, guards begin rushing into the main hall. But the inmates don't plan on stopping now, they are all fighting back, creating uncontrollable chaos. The orgy has become a full blown riot instead. Even inmates that weren't affected by the gas are now fighting the guards.")
 
-		saynn("[say=pc]Are we.. the bad guys?[/say]")
+		saynn("[say=pc]Are we the bad guys?[/say]")
 
-		saynn("Tavi looks at you and chuckles softly.")
+		saynn("You ask that almost sarcastically. Tavi looks at you and chuckles softly.")
 
 		saynn("[say=tavi]If all your options are bad, might as well pick the fun one.[/say]")
 
@@ -314,14 +314,225 @@ func _run():
 		saynn("You nod.")
 
 		addButton("Follow", "See what happens next", "after_kait")
+	if(state == "after_kait"):
+		playAnimation(StageScene.Duo, "stand", {npc="tavi"})
+		aimCameraAndSetLocName("cd_elevator")
+		saynn("You wait for the elevator to arrive and enter it. Tavi uses the badge that's on her armor to get access to extra floors. As she picks the 'Command Deck', the doors close and the machine begins moving you up.")
+
+		saynn("The noises of a riot are replaced by quiet screeching of the gears.")
+
+		saynn("[say=pc]We might actually do it this time.[/say]")
+
+		saynn("Tavi pats you on the back.")
+
+		saynn("[say=tavi]We aren't out of the woods yet. But you're right.[/say]")
+
+		saynn("She sounds.. calm.. You can't see her face at all through the helmet but her body and voice help to remove some of your tension.")
+
+		saynn("[say=pc]What's now?[/say]")
+
+		saynn("[say=tavi]We improvise.[/say]")
+
+		saynn("Oh. That's it for the plan, huh.")
+
+		saynn("The doors open, revealing.. a few guards rushing towards you, all wearing riot gear. Tavi looks at you and shakes her head ever so slightly.")
+
+		addButton("Step out", "See what happens next", "after_elevator")
+	if(state == "after_elevator"):
+		aimCameraAndSetLocName("cd_near_elevator")
+		saynn("You quickly leave the elevator and step aside, watching the guards rush past you.")
+
+		saynn("The doors close, leaving you two alone yet again. Seems like they don't know yet that you're wearing stolen armor, your disguise is working.")
+
+		saynn("[say=pc]Um. Did you free those two guards that you kidnapped by the way?[/say]")
+
+		saynn("[say=tavi]Oops.. They will be fine, they got air and the company of each other. Someone will find them soon enough.[/say]")
+
+		saynn("Alright. Fair enough.")
+
+		saynn("As you step through the rich-looking corridors of the command deck, you begin to hear an authoritative voice. It's getting louder and louder..")
+
+		addButton("Continue", "See what happens next", "see_captain")
+	if(state == "see_captain"):
+		aimCameraAndSetLocName("cd_near_split")
+		addCharacter("captain")
+		addCharacter("nova")
+		addCharacter("risha")
+		addCharacter("skar")
+		playAnimation(StageScene.Duo, "stand", {npc="captain"})
+		saynn("[say=captain]Everyone got their equipment? Nova?[/say]")
+
+		saynn("[say=nova]My current armor is better, Cap.[/say]")
+
+		saynn("You notice the captain giving instructions to his guards. Most of them are there: Nova, Risha, Skar. And a few ones that you don't remember seeing.")
+
+		saynn("[say=captain]Alright. Riot shields, flashbangs, stun batons, use them. Only non-lethal force. Focus on the ones that are trying to guide the rest. Without clear leaders, the crowd is just that, a crowd. Everyone got it?[/say]")
+
+		saynn("Almost everyone is wearing riot gear so you don't stand out that much.")
+
+		saynn("Tavi listens to that and then casually joins the line. You follow, no one seems to mind. The dim lighting of the corridor helps to hide your real identities. Only Skar is watching you two a little too.. thoroughly.. The rest is busy listening.")
+
+		saynn("[say=nova]Can't we just activate all their collars? Send out a mass shock?[/say]")
+
+		saynn("Risha fetches a collapsible riot shield off her back and opens it before slamming it into the floor, her other hands holding a shock button.")
+
+		saynn("[say=risha]I like me a good brawl.[/say]")
+
+		saynn("[say=captain]We've been trying to do it. Alex says the bluespace transmitter might not survive it after the last attack. So just use your remotes if you can.[/say]")
+
+		saynn("Tavi masterfully hides her purple tail between her legs but can't quite avoid being stared at. You two just hold your chins high and hope for the best.")
+
+		saynn("[say=captain]Alright. You are my best guards, don't let me down. I need control to be established over the inmates as fast as possible. Whoever caused it is gonna have to be severely punished but we will deal with that after.[/say]")
+
+		saynn("[say=risha]You got it, cap. Please let me destroy their ass.[/say]")
+
+		saynn("[say=captain]I will think about it. Now go.[/say]")
+
+		saynn("The guards proceed to step towards the elevator. Everyone but you and Tavi. Captain notices that your armors are already somewhat damaged and points at you.")
+
+		saynn("[say=captain]You two have been there already? Follow me then, I will need you to report in my office.[/say]")
+
+		saynn("Huh, that's good. He will bring you right where you want him.")
+
+		addButton("Continue", "See what happens next", "skar_scare")
+	if(state == "skar_scare"):
+		removeCharacter("nova")
+		removeCharacter("risha")
+		playAnimation(StageScene.Duo, "stand", {npc="skar"})
+		saynn("You were almost ready to follow the captain but then Skar stops just near you and continues to.. just stare. His brows furrowed, his prosthetic jaw grinding his teeth, his prosthetic arms crossed. Tavi just tilts her head to the side and stares back.")
+
+		saynn("The captain turns around and notices the strange scene.")
+
+		saynn("[say=captain]Skar? What are you waiting for? Go handle the situation.[/say]")
+
+		saynn("The guard leans in closer and whispers to both of you.")
+
+		saynn("[say=skar]You're very lucky.[/say]")
+
+		saynn("After that he offers you both a mean gaze before joining the leaving guards. Tavi looks at you and shrugs.")
+
+		saynn("You follow the captain through the corridors of the command deck.")
+
+		addButton("Follow", "See where he brings you", "captain_walk_chat")
+	if(state == "captain_walk_chat"):
+		removeCharacter("skar")
+		playAnimation(StageScene.Duo, "stand", {npc="captain"})
+		aimCameraAndSetLocName("cd_near_captain_office")
+		saynn("Striking him now would be easy. But there are still cameras and occasional staff members around. What would you do after that? Better to just let the villain invite you into his lair.")
+
+		saynn("The captain decides to suddenly start talking while walking in front of you.")
+
+		saynn("[say=captain]I really thought I achieved a perfect balance. A world where a person has all their needs covered. A small world, sure. But do they really deserve more? Don't think so. They don't deserve even the dirt from under my boot![/say]")
+
+		saynn("The captain gets really heated at the end of that sentence. But then he quickly calms down.")
+
+		saynn("[say=captain]But I guess.. We always want more, huh? I've got all the credits in the world, more than I will ever burn through. I truly made it. I thought I could make them feel something similar by giving them unrestricted access to.. each other. Thousands of inmates, some are slaves that give their freedom away like it costs nothing, the others are slavers who happily take it and more. Everyone eventually finds their place. The truth is..[/say]")
+
+		saynn("He lets the door to his office scan his face that allows him to step inside into his rich office.")
+
+		saynn("[say=captain]Today is not gonna change anything. They are not gonna change anything.[/say]")
+
+		saynn("Bold claim, considering his two biggest enemies are behind his back.")
+
+		addButton("Enter", "Enter the office", "enter_office")
+	if(state == "enter_office"):
+		playAnimation(StageScene.Duo, "stand", {npc="captain", npcAction="sit"})
+		aimCameraAndSetLocName("cd_captain_office")
+		saynn("The captain sits in his chair and waits for you to step in.")
+
+		saynn("You and Tavi take your spots near his desk as the door takes a few seconds to close behind you. Now he is trapped here with you..")
+
+		saynn("[say=captain]Tell me what you know. How did it start?[/say]")
+
+		saynn("Tavi silently looks at you. You look back. The captain gets a little confused.")
+
+		saynn("[say=captain]What? Are you the new recruits?[/say]")
+
+		saynn("He opens his laptop and tries to login somewhere.")
+
+		saynn("[say=captain]Huh. The network is down. Something is wrong.[/say]")
+
+		saynn("Tavi looks down at her pouch. The captain traces her gaze. Then he traces your outlines.")
+
+		saynn("[say=captain]Wait.. I know what is wrong.[/say]")
+
+		saynn("He fetches his shock remote as Tavi begins to take off her helmet. That thing won't hurt her anyway.")
+
+		addButton("Continue", "See what happens next", "captain_fooled")
+	if(state == "captain_fooled"):
+		playAnimation(StageScene.Duo, "stand", {pc="tavi", npc="captain"})
+		saynn("Nothing happens when the captain presses the button on the remote, even though Tavi's collar is now in clear view.")
+
+		saynn("[say=captain]Smart.[/say]")
+
+		saynn("[say=tavi]You expected something else?[/say]")
+
+		saynn("The captain puts the remote away and closes his laptop before getting up.")
+
+		saynn("[say=captain]I expected you to learn your lesson.[/say]")
+
+		saynn("[say=tavi]I did.[/say]")
+
+		saynn("Your eyes pick up on the subtle movements of the captain's hand. He is grabbing something out of his pocket.")
+
+		saynn("[say=captain]You know. I will be honest. I always knew this was gonna happen.[/say]")
+
+		saynn("[say=tavi]I don't care about you. I just need the encryption keys.[/say]")
+
+		saynn("Captain's free hand reaches to his neck and grabs a little thumbdrive-like device that is tied on a little chain.")
+
+		saynn("[say=captain]You mean this? Good luck taking it away from me.[/say]")
+
+		saynn("The captain starts slowly stepping towards you two.")
+
+		saynn("[say=captain]It's the key to controlling you all. The key that controls the whole station.[/say]")
+
+		saynn("[say=tavi]I guess I will have to ask nicely.[/say]")
+
+		saynn("Tavi gets into a combat stance.")
+
+		saynn("[say=captain]Sure. After this.[/say]")
+
+		saynn("Suddenly, the captain pulls out a vial with a red drug out of his pocket and throws it towards Tavi. The vial shatters against Tavi's armor and then the red fumes engulf her face.")
+
+		saynn("Scary. But.. Tavi just stands still.. like nothing has happened to her. The captain tilts his head, confused by the lack of reaction.")
+
+		saynn("[say=tavi]Now it's my turn.[/say]")
+
+		addButton("Continue", "See what happens next", "tavi_tries_to_hit_captain")
+	if(state == "tavi_tries_to_hit_captain"):
+		playAnimation(StageScene.Duo, "defeat", {pc="tavi", npc="captain", npcAction="holdpistol"})
+		saynn("Tavi lashes out at him, a stun baton in her hand. She tries to strike the captain but he dodges back at the last second and then catches Tavi's hand as she was moving it back behind her, the guy clearly got some CQC skills.")
+
+		saynn("[say=captain]You won't win, Tavi. You already know this.[/say]")
+
+		saynn("Tavi hears that and growls, she tries to free her hand but the captain is first, kicking her back and then reaching for his energy pistol. Oh, now is clearly your time to stop him.")
+
+		saynn("You try to disarm him but the weapon still goes off just when it was aimed at Tavi's chest. The laser leaves a gaping scorched mark on Tavi's armor as she gasps and collapses to her knees, the riot armor is really not designed for this.")
+
+		saynn("[say=tavi]Argh..[/say]")
+
+		saynn("At least she seems to be somewhat fine for now.")
+
+		saynn("[say=captain]I know your every single weakness.[/say]")
+
+		saynn("The captain directs his attention towards you now.")
+
+		saynn("[say=captain]The Syndicate will never put its foot on this station. Not while I'm in control.[/say]")
+
+		saynn("Well, time to change that.")
+
+		saynn("Both of you ready themselves for a fight..")
+
+		addButton("Fight", "Start the fight with the captain", "fight_captain")
 var randomSexIsPlaying = false
 func playRandomSexAnim():
 	if(randomSexIsPlaying):
 		return
 
 	while(true):
-		var domID = NpcFinder.grabNpcIDFromPoolOrGenerate(CharacterPool.Inmates, [[NpcCon.NoChastity], [NpcCon.HasPenis]], InmateGenerator.new(), {NpcGen.NoChastity: true, NpcGen.HasPenis:true, NpcGen.Level: RNG.randi_range(1, 10)})
-		var subID = NpcFinder.grabNpcIDFromPoolOrGenerate(CharacterPool.Inmates, [[NpcCon.AvoidIDs, [domID ]]], InmateGenerator.new(), {NpcGen.Level: RNG.randi_range(1, 10)})
+		var domID = NpcFinder.grabNpcIDFromPoolOrGenerate(CharacterPool.Inmates, [[NpcCon.NoChastity], [NpcCon.HasPenis]], InmateGenerator.new(), {NpcGen.NoChastity: true, NpcGen.HasPenis:true, NpcGen.Level: RNG.randi_range(1, 10)}, true)
+		var subID = NpcFinder.grabNpcIDFromPoolOrGenerate(CharacterPool.Inmates, [[NpcCon.AvoidIDs, [domID ]]], InmateGenerator.new(), {NpcGen.Level: RNG.randi_range(1, 10)}, true)
 		if(domID == null || domID == "" || subID == null || subID == ""):
 			return
 		var randomSexID = RNG.pick([StageScene.SexCowgirl, StageScene.SexAllFours, StageScene.SexMissionary, StageScene.SexFreeStanding, StageScene.SexReverseCowgirl, StageScene.SexFullNelson])
@@ -376,6 +587,26 @@ func _react(_action: String, _args):
 	if(_action == "kait_won_randomsex1"):
 		processTime(5*60)
 
+	if(_action == "after_elevator"):
+		processTime(2*60)
+
+	if(_action == "see_captain"):
+		processTime(2*60)
+
+	if(_action == "captain_walk_chat"):
+		processTime(5*60)
+
+	if(_action == "enter_office"):
+		processTime(60)
+
+	if(_action == "captain_fooled"):
+		processTime(2*60)
+		getCharacter("tavi").getInventory().clearSlot(InventorySlot.Eyes)
+
+	if(_action == "fight_captain"):
+		runScene("FightScene", ["captain"], "captain_fight")
+		return
+
 	setState(_action)
 
 func _react_scene_end(_tag, _result):
@@ -400,3 +631,12 @@ func _react_scene_end(_tag, _result):
 			setState("kait_lost")
 		GM.pc.addPain(-250)
 		GM.pc.addStamina(200)
+
+	if(_tag == "captain_fight"):
+		processTime(10 * 60)
+		var battlestate = _result[0]
+		
+		if(battlestate == "win"):
+			setState("won_captain")
+		else:
+			setState("lost_captain")

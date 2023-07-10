@@ -101,8 +101,8 @@ func grabNpcIDFromPool(poolID, _conditions = []):
 func generateNpcForPool(poolID, generator, _args = {}):
 	return NpcFinder.generateNpcForPool(poolID, generator, _args)
 
-func grabNpcIDFromPoolOrGenerate(poolID, _conditions, generator, _args = {}):
-	return NpcFinder.grabNpcIDFromPoolOrGenerate(poolID, _conditions, generator, _args)
+func grabNpcIDFromPoolOrGenerate(poolID, _conditions, generator, _args = {}, preferOld = false):
+	return NpcFinder.grabNpcIDFromPoolOrGenerate(poolID, _conditions, generator, _args, preferOld)
 	
 func getCharacter(charID: String) -> BaseCharacter:
 	return GlobalRegistry.getCharacter(charID)
