@@ -9,10 +9,8 @@ func getDescription():
 func getBuffs():
 	return [
 		buff(Buff.PhysicalArmorBuff, [30]),
-		buff(Buff.StatusEffectImmunityBuff, [StatusEffect.Collapsed, 100]),
-		buff(Buff.StatusEffectImmunityBuff, [StatusEffect.Bleeding, 100]),
-		buff(Buff.StatusEffectImmunityBuff, [StatusEffect.Stunned, 100]),
-		buff(Buff.StatusEffectImmunityBuff, [StatusEffect.Weakness, 100]),
+		buff(Buff.StatusEffectImmunityBuff, [StatusEffect.Collapsed, 50]),
+		buff(Buff.StatusEffectImmunityBuff, [StatusEffect.Bleeding, 90]),
 		]
 
 func getTags():

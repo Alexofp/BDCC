@@ -11,6 +11,7 @@ const Stunned = "Stunned"
 const Evading = "Evading"
 const Blocking = "Blocking"
 const Defocussing = "Defocussing"
+const PrimedAttack = "PrimedAttack"
 
 # Sex engine effects
 const SexEngineLikes = "SexEngineLikes"

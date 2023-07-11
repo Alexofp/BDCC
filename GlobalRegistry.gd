@@ -308,12 +308,7 @@ func registerEverything():
 	registerCharacterFolder("res://Characters/")
 	registerCharacterFolder("res://Characters/Generic/")
 	
-	registerAttackFolder("res://Attacks/")
-	registerAttackFolder("res://Attacks/PlayerOnly/")
-	registerAttackFolder("res://Attacks/WeaponAttacks/")
-	registerAttackFolder("res://Attacks/NpcAttacks/")
-	registerAttackFolder("res://Attacks/NpcAttacks/Avy/")
-	registerAttackFolder("res://Attacks/NpcAttacks/SentinelX/")
+	registerAttackFolder("res://Attacks/", true)
 	
 	registerLustActionFolder("res://Game/LustCombat/LustActions/")
 	registerLustActionFolder("res://Game/LustCombat/LustActions/Perk/")
@@ -572,13 +567,15 @@ func registerAttack(path: String):
 	if(attackObject.isPlayerAttack):
 		playerAttacksIDS.append(attackObject.id)
 	
-func registerAttackFolder(folder: String):
+func registerAttackFolder(folder: String, recursive = false):
 	var dir = Directory.new()
 	if dir.open(folder) == OK:
-		dir.list_dir_begin()
+		dir.list_dir_begin(true)
 		var file_name = dir.get_next()
 		while file_name != "":
 			if dir.current_is_dir():
+				if(recursive):
+					registerAttackFolder(folder.plus_file(file_name)+"/", true)
 				pass
 				#print("Found directory: " + file_name)
 			else:
