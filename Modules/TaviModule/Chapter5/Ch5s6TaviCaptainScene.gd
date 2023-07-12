@@ -525,6 +525,302 @@ func _run():
 		saynn("Both of you ready themselves for a fight..")
 
 		addButton("Fight", "Start the fight with the captain", "fight_captain")
+	if(state == "lost_captain"):
+		playAnimation(StageScene.Duo, "kneel", {npc="captain", pc="tavi"})
+		saynn("Both of you got defeated by the captain.. He aims his pistol at you two.")
+
+		saynn("[say=captain]It would be so easy to just get rid of you. Throw you out of the airlock, no one would ever bat an eye.[/say]")
+
+		saynn("Tavi strips her destroyed armor chest piece and holds her paw on the scorch mark.")
+
+		saynn("[say=tavi]What stops you then?..[/say]")
+
+		saynn("He holsters his weapon and scratches his chin.")
+
+		saynn("[say=captain]I don't like that. There is no challenge in that.[/say]")
+
+		saynn("[say=tavi]We are not so different then.. ugh..[/say]")
+
+		saynn("The captain laughs and slowly approaches defeated Tavi, looming over her.")
+
+		saynn("[say=captain]You? You're just an unruly slave, Tavi. You can barely tame one pet. I control thousands. You lose fist fights, I help win entire wars. I stand near the stars while you constantly fall deeper into the abyss.[/say]")
+
+		saynn("Tavi bravely looks up at him, a little smirk forms on her face.")
+
+		saynn("[say=tavi]Kinda selfish~. At least I care about my pet.[/say]")
+
+		saynn("[say=captain]Selfish? I'm giving broken people a second chance![/say]")
+
+		saynn("[say=tavi]By breaking them further? Sluts and breeders, is that your vision of a second chance?[/say]")
+
+		saynn("The captain clenches his fist before grabbing Tavi by her collar and pulling her close.")
+
+		saynn("[say=captain]No one is complaining. That's what they want![/say]")
+
+		saynn("[say=tavi]That's what makes them obedient. Satisfying our most primitive desires is enough to keep us in line. You're not re-educating, you're degrading us. Just. Because. You. Can.[/say]")
+
+		saynn("Tavi sneakily looks at you and covers her mouth with her palm. Huh. But the captain is shaking, he grabs Tavi by the throat and growls while choking her out of pure anger.")
+
+		saynn("[say=captain]HOW DARE YOU![/say]")
+
+		saynn("Oh shit. Tavi gaps softly and quickly loses strength, desperately trying to pull his hands away from her throat. You try to crawl closer to her but she.. shakes her head? Wait.. She isn't trying to free herself, she uses this moment to slide the drug vial from under her collar!")
+
+		addButton("Hold breath", "Something is about to happen!", "lost_holdbreath")
+	if(state == "lost_holdbreath"):
+		playAnimation(StageScene.Solo, "hurt", {pc="captain"})
+		saynn("The captain realizes that something is wrong but it was too late, Tavi smashes the vial against the scorched chest piece of her armor, causing a thick cloud of red mist to start emitting from it.")
+
+		saynn("[say=captain]What the..[/say]")
+
+		saynn("The captain staggers back as soon as he breathes in some of it, his rage makes him pant heavily. Tavi throws the smoking armor piece away and starts gasping for air. Luckily, she didn't breathe any of it while she was choked.")
+
+		saynn("[say=captain]What's.. what is happening..[/say]")
+
+		saynn("Tavi looks at you and then at the captain's gun. You nod and quickly steal it from his holster while he still looks.. confused.")
+
+		saynn("[say=tavi]It's the drug that you tried to brainwash me with. Enjoy, fucker.[/say]")
+
+		saynn("[say=captain]Huh?.. But..[/say]")
+
+		saynn("The captain looks down at his hands.. at his clothes.. There is obvious.. fear.. in his eyes. He tugs on his wrists.. then he grabs onto his neck.. and tries to take off something.. something that's not there.")
+
+		saynn("[say=captain]It's locked.. Impossible.[/say]")
+
+		saynn("His jaw is trembling, his terrified eyes jump from one spot to another. It seems he is about to black out.."+str(" Just like you did when Tavi tested the drug on you" if getFlag("TaviModule.ch2DrugsAgreedToTest") else "")+"")
+
+		addButton("Continue", "See what happens next", "guards_storm_in")
+	if(state == "won_captain"):
+		playAnimation(StageScene.Duo, "stand", {npc="captain", pc="tavi", npcAction="defeat"})
+		saynn("Finally, the captain falls to his knees before you, his hands dropping his pistol that you instantly pick up and aim at him.")
+
+		saynn("[say=tavi]Don't.. There is a much better way.[/say]")
+
+		saynn("Fair enough. But you still make sure he doesn't do anything silly.")
+
+		saynn("[say=captain]It would have been so easy to just get rid of you. Throw you out of the airlock, no one would ever bat an eye..[/say]")
+
+		saynn("Tavi gets up and strips her destroyed armor chest piece. There is a visible burn on her fur. But she seems to be holding fine.")
+
+		saynn("[say=tavi]What stopped you then?[/say]")
+
+		saynn("Captain looks up at Tavi as she approaches him.")
+
+		saynn("[say=captain]I don't like that. There is no challenge in that.[/say]")
+
+		saynn("[say=tavi]We are not so different then. I don't pick the easy path.[/say]")
+
+		saynn("The captain laughs before the cough takes over.")
+
+		saynn("[say=captain]You? You're just an unruly slave, Tavi.. You can barely tame one pet. I control thousands. You lose fist fights, I help win entire wars. I stand near the stars while you constantly fall deeper into the abyss.[/say]")
+
+		saynn("Tavi looks down at him, a little smirk forms on her face.")
+
+		saynn("[say=tavi]Kinda selfish~. At least I care about my pet.[/say]")
+
+		saynn("[say=captain]Selfish? I'm giving broken people a second chance![/say]")
+
+		saynn("[say=tavi]By breaking them further? Sluts and breeders, is that your vision of a second chance?[/say]")
+
+		saynn("The captain clenches his fists.")
+
+		saynn("[say=captain]No one is complaining. That's what they want![/say]")
+
+		saynn("[say=tavi]That's what makes them obedient. Satisfying our most primitive desires is enough to keep us in line. You're not re-educating, you're degrading us. Just. Because. You. Can.[/say]")
+
+		saynn("[say=captain]HOW DARE YOU?[/say]")
+
+		saynn("The captain tries to close the distance by lashing out at Tavi but she sees through it and throws something at his feet.. a vial with red drug. You realize that it's better not to breathe that in..")
+
+		addButton("Hold breath", "Something is about to happen!", "won_holdbreath")
+	if(state == "won_holdbreath"):
+		playAnimation(StageScene.Solo, "hurt", {pc="captain"})
+		saynn("The captain realizes that something is wrong but it is too late, the vial shatters beautifully against the floor, causing a thick cloud of red mist to surround the captain.")
+
+		saynn("[say=captain]What the..[/say]")
+
+		saynn("The captain staggers back as soon as he breathes in some of it, his rage makes him pant heavily. Tavi covers her mouth and waits for the ventilation system to siphon it all out.")
+
+		saynn("[say=captain]What's.. what is happening..[/say]")
+
+		saynn("Tavi joins you and just watches the captain succumb to the effects.")
+
+		saynn("[say=tavi]It's the drug that you tried to brainwash me with. Enjoy, fucker.[/say]")
+
+		saynn("[say=captain]Huh?.. But..[/say]")
+
+		saynn("The captain looks down at his hands.. at his clothes.. There is obvious.. fear.. in his eyes. He tugs on his wrists.. then he grabs onto his neck.. and tries to take off something.. something that's not there.")
+
+		saynn("[say=captain]It's locked.. Impossible.[/say]")
+
+		saynn("His jaw is trembling, his terrified eyes jump from one spot to another. It seems he is about to black out.."+str(" Just like you did when Tavi tested the drug on you" if getFlag("TaviModule.ch2DrugsAgreedToTest") else "")+"")
+
+		addButton("Continue", "See what happens next", "guards_storm_in")
+	if(state == "guards_storm_in"):
+		playAnimation(StageScene.Duo, "holdpistol", {npc="captain"})
+		addCharacter("risha")
+		addCharacter("skar")
+		addCharacter("nova")
+		saynn("But then, all the guards suddenly storm into the office. Risha, Skar and Nova. They see what's happening and instantly try to shock you with their remotes. But the jammer is still working, protecting you.")
+
+		saynn("[say=risha]What the fuck is happening.[/say]")
+
+		saynn("Seeing that you're still standing, they fetch their stun batons.")
+
+		saynn("[say=tavi]Don't come any closer![/say]")
+
+		saynn("As you aim the pistol at the captain, the guards stop their advancement. Only Nova tries to continue creeping towards you.")
+
+		saynn("[say=nova]You're not gonna shoot the captain. That would be so silly. Tavi, sweetheart, listen..[/say]")
+
+		saynn("[say=tavi]Shut up. We will if we have to.[/say]")
+
+		saynn("The captain sees the scene unfolding before him and hides behind his desk, trembling in fear.")
+
+		saynn("[say=skar]Captain, are you alright? They're not gonna hurt you.[/say]")
+
+		saynn("The captain suddenly realizes something. He slowly gets up to his feet.")
+
+		saynn("[say=captain]Wait.. Captain?.. Who are you referring to?[/say]")
+
+		saynn("That's.. a strange question.")
+
+		saynn("[say=risha]You, Captain Wright. Did they hit your head or something? How bad is the bleeding?[/say]")
+
+		saynn("Suddenly, the captain starts chuckling.. and then he starts laughing even. He touches his neck and wrists again, making sure they are fine.")
+
+		saynn("[say=captain]Hah. my bad.. Got a little confused. I think.. I'm fine now. Thank you, Risha, you're so loyal. All of you.[/say]")
+
+		saynn("Did the drug.. not work on him? Both you and Tavi are now confused more than ever. The captain sees that and smiles.")
+
+		saynn("[say=captain]You really thought I was gonna brainwash you, Tavi?[/say]")
+
+		saynn("[say=tavi]Yeah, the messages said so.[/say]")
+
+		saynn("[say=captain]The messages? They just don't understand how it works. This drug.. it.. does something so much more.. interesting. Nuanced.. Saying that it brainwashes people is like saying that you can butcher an animal with a scalpel. Yes, you can if you try hard enough. But there are way better tools.[/say]")
+
+		saynn("Tavi begins to look and sound annoyed.")
+
+		saynn("[say=tavi]Then what the fuck does it do?[/say]")
+
+		saynn("The captain fixes the collar of his uniform and then rubs his wrists.")
+
+		saynn("[say=captain]It awakens our most primal feeling.. Fear. It's genius how simple it is. This drug makes you see.. your biggest fears.. like they are alive and real. This drug uses your own mind against you.. without ever destroying it. That's why I love it. I wanted to teach you a lesson, Tavi. And this drug would have.. brought you down a little.. changed your behavior for the better.. while still keeping you yourself.[/say]")
+
+		saynn("[say=tavi]And why didn't it work on you? Talk.[/say]")
+
+		saynn("The captain scratches his chin again before sitting on the corner of his desk, looking pretty comfy, even in front of a gun's barrel. You would think he would be intimidated by all this..")
+
+		saynn("[say=captain]I have conquered all my fears, Tavi. This would have never worked on me.[/say]")
+
+		saynn("[say=tavi]I don't believe you.[/say]")
+
+		saynn("The captain shrugs.")
+
+		saynn("[say=captain]And I know your fears too. Like I said, I know your weaknesses.[/say]")
+
+		saynn("Tavi furrows her brows more, she glances at the weapon in your hands, seemingly wanting to grab it.")
+
+		saynn("[say=captain]Trust me, you wanna hear me out. After that, do whatever you can. Kill me, call the Syndicate, destroy the whole station.[/say]")
+
+		saynn("[say=risha]But captain![/say]")
+
+		saynn("He gestures for the guards to stay calm.")
+
+		addButton("Continue", "See what happens next", "captain_pc_fears")
+	if(state == "captain_pc_fears"):
+		playAnimation(StageScene.Duo, "stand", {pc="tavi", npc="captain"})
+		saynn("The captain points at you first.")
+
+		saynn("[say=captain]You.. are afraid that Tavi will betray you one day. Use you and then dispose when you're no longer useful. She is a lone wolf after all. I'm surprised she even found a pet that works for her. You know, considering her.. personality.[/say]")
+
+		saynn("[say=tavi]Bullshit.[/say]")
+
+		saynn("Captain Wright shrugs while you begin to feel strange inside..")
+
+		saynn("[say=captain]And you, Tavi, are afraid of your family.[/say]")
+
+		saynn("[say=tavi]What?![/say]")
+
+		saynn("The captain is still sitting comfortable on the corner of his desk, constantly gesturing to the guards to be calm.")
+
+		saynn("[say=captain]Yes, your primary goal was always to kill everyone who created you. But then you started wondering.. Who were your parents that brought you into this world.. What would they say if they saw what terrible things you did..[/say]")
+
+		saynn("Tavi's paws shake a little.")
+
+		saynn("[say=tavi]My DNA was created in a lab. I can't possibly have parents.[/say]")
+
+		saynn("[say=captain]But someone still gave birth to you, Tavi. That thought was eating you out from the inside, wasn't it? That's why you and Nova do so well together. Your childhood was stolen from you and Nova was that mother that you always wanted but never had.[/say]")
+
+		saynn("Nova puts her hand on her chest, her eyes looking wide. That explains a few things..")
+
+		saynn("[say=tavi]Why shouldn't I just.. kill you..[/say]")
+
+		saynn("[say=nova]Tavi..[/say]")
+
+		saynn("[say=tavi]Shut up.. I mean.. quiet..[/say]")
+
+		saynn("[say=captain]What if I tell you that your DNA wasn't created in a lab? And it was never scrambled or altered in any way.[/say]")
+
+		saynn("Risha tilts her head ever so slightly, her face puzzled. Just like Tavi's.")
+
+		saynn("[say=captain]I know who your parents are, Tavi. It's funny that you don't.[/say]")
+
+		saynn("[say=tavi]Impossible! Nothing you say adds up! You're just a liar![/say]")
+
+		addButton("Continue", "See what happens next", "tavi_tries_shoot_captain")
+	if(state == "tavi_tries_shoot_captain"):
+		addCharacter("elena")
+		playAnimation(StageScene.Duo, "firepistol", {pc="tavi", npc="elena"})
+		saynn("Tavi growls and steals the gun from you before aiming it at the captain and pulling the trigger..")
+
+		saynn("But the laser gets blocked by a sudden hardlight figure appearing between the two.. The captain is holding a projector sphere in his hand that shows.. Elena..")
+
+		saynn("[say=captain]Hah. Getting dejavu yet, Tavi? How will you handle it this time?[/say]")
+
+		saynn("[say=tavi]Elena.. Step.. To the side.. Now..[/say]")
+
+		saynn("But Elena doesn't move. Tavi tries to take another shot but that only makes the hardlight hologram receive some extra cracks.")
+
+		saynn("[say=elena]I need to tell you something.. Tavi.. I am your mother..[/say]")
+
+		saynn("[say=tavi]Wha..[/say]")
+
+		saynn("The room becomes dead silent for a few seconds. Tavi.. looks shocked.")
+
+		saynn("[say=tavi]But.. You're an.. And my DNA..[/say]")
+
+		saynn("Elena tries to avoid eye contact, her hands resting on her belly.")
+
+		saynn("[say=elena]That's what we told the station's crew.. People weren't yet ready to accept.. That love between a human.. and a machine.. can exist..[/say]")
+
+		saynn("Tavi is still barely comprehending it. Just like everyone else. While the captain is fascinated beyond belief.")
+
+		saynn("[say=elena]We.. and the director.. Loved each other.. People thought it's just algorithms.. But I truly had feelings for him.. I carried you in my belly, Tavi.. Not this belly exactly.. But.. you know..[/say]")
+
+		saynn("[say=tavi]How is that..[/say]")
+
+		saynn("Tavi's paws are shaking wildly.. her whole body does.. All the while Elena makes her belly half-transparent, making her.. synthetic womb.. visible.")
+
+		saynn("[say=elena]I combined his DNA with.. a synthesized version of mine. I was mimicking different species just so the staff wouldn't get suspicious.. We quickly saw the potential.. But the technology wasn't perfect at that time.. There were flaws.. But I still loved every single child that I gave birth to.. Being unable to let them call me a mother pained me to no end..[/say]")
+
+		saynn("Tavi is probably just realizing it.. realizing what she has done.. Tears begin streaming down her cheeks. Risha looks at Tavi and thinks about it all as well..")
+
+		saynn("[say=tavi]Why didn't you tell me that?.. After I..[/say]")
+
+		saynn("The captain suddenly cuts her off.")
+
+		saynn("[say=captain]You know. I think you did the right thing, Tavi. What kind of father would abuse and even try to kill his children? We have a much better policy here.[/say]")
+
+		saynn("Elena begins crying too, her hologram tears hitting the floor and dissolving into nothing..")
+
+		saynn("[say=elena]I didn't wanna hurt you, Tavi.. I have a copy of your mother's memories.. But I'm not.. her.. So I blocked them the best I could.. Now I am telling you the full truth.. The captain made me.. I wanted to protect both of you.. But I couldn't..[/say]")
+
+		saynn("[say=captain]Hah. You're really good at software, Tavi. But Alex is the real hardware king, he pulled those memories out of her in an instant. Turns out you killed your own father and your original mother. Wonder how you feel right now, knowing that you shattered your own dreams with your own hands.[/say]")
+
+		saynn("[say=elena]Please.. Tavi.. Shoot me.. I can not be forgiven anyway.. So I must be forgotten..[/say]")
+
+		saynn("Tavi still holds her weapon aimed at the captain.. But Elena won't move because the captain is using her as a shield.. Tavi's hands shake as she starts putting more and more pressure on the trigger..")
+
 var randomSexIsPlaying = false
 func playRandomSexAnim():
 	if(randomSexIsPlaying):
@@ -606,6 +902,9 @@ func _react(_action: String, _args):
 	if(_action == "fight_captain"):
 		runScene("FightScene", ["captain"], "captain_fight")
 		return
+
+	if(_action == "captain_pc_fears"):
+		processTime(2*60)
 
 	setState(_action)
 

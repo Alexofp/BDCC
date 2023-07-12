@@ -10,7 +10,8 @@ func _init():
 	pickedSkinGColor=Color("ffbd57fd")
 	pickedSkinBColor=Color("ff2ce9ff")
 	npcSkinData={
-	"hair": {"r": Color("ffb2a0da"),"g": Color("ffb776a9"),"b": Color("ffb776a9"),},
+	"hair": {"r": Color("ffa37bfd"),"g": Color("ffe982d3"),"b": Color("ffff87e5"),},
+	"breasts": {"b": Color("ffcd91ff"),},
 	}
 	
 func _getName():
