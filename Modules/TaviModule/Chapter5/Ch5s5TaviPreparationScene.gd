@@ -163,6 +163,30 @@ func _run():
 
 		addButton("Yes", "You're ready to do this", "start_big_scene")
 		addButton("Not yet", "You need more time", "not_yet_ready")
+		addButton("Sexy time?", "How about some lewds first", "ask_lewd")
+	if(state == "ask_lewd"):
+		saynn("You run your hands over Tavi's back and knead it a little bit. She sees your advances and smirks.")
+
+		saynn("[say=pc]Maybe you would like to.. remove some tension first?[/say]")
+
+		saynn("Her paw lands on your chin as she moves it dangerously close to her lips.. Just to keep you there.")
+
+		saynn("[say=tavi]After today we will be able to have all the sex in the world. Trust me~.[/say]")
+
+		saynn("A little disappointing.. But she doesn't seem like the type that would lie to you.")
+
+		saynn("[say=pc]If you say so, Miss Tavi.[/say]")
+
+		saynn("Tavi reaches for your neck and leaves a little bite on it before whispering into your ear.")
+
+		saynn("[say=tavi]After today, everything will be different~.[/say]")
+
+		saynn("She is not wrong. If you finally escape, everything will indeed be quite different.")
+
+		saynn("[say=tavi]So is my pet ready~?[/say]")
+
+		addButton("Yes", "You're ready to do this", "start_big_scene")
+		addButton("Not yet", "You need more time", "not_yet_ready")
 	if(state == "not_yet_ready"):
 		saynn("[say=pc]I.. need some time to prepare.[/say]")
 

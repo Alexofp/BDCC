@@ -817,10 +817,184 @@ func _run():
 
 		saynn("[say=captain]Hah. You're really good at software, Tavi. But Alex is the real hardware king, he pulled those memories out of her in an instant. Turns out you killed your own father and your original mother. Wonder how you feel right now, knowing that you shattered your own dreams with your own hands.[/say]")
 
-		saynn("[say=elena]Please.. Tavi.. Shoot me.. I can not be forgiven anyway.. So I must be forgotten..[/say]")
+		saynn("[say=elena]Please.. Tavi.. Break me.. I can not be forgiven anyway.. So I must be forgotten..[/say]")
 
-		saynn("Tavi still holds her weapon aimed at the captain.. But Elena won't move because the captain is using her as a shield.. Tavi's hands shake as she starts putting more and more pressure on the trigger..")
+		saynn("Tavi still holds her weapon aimed at the captain.. But Elena won't move because the captain is using her as a shield.. Tavi's hands shake as she starts putting more and more pressure on the trigger, one of her paws is wiping her tears..")
 
+		addButton("Continue", "See what happens next", "tavi_givesup")
+	if(state == "tavi_givesup"):
+		removeCharacter("elena")
+		playAnimation(StageScene.Duo, "kneel", {npc="captain"})
+		saynn("But eventually Tavi just drops her weapon, unable to do it. The captain claps while the guards instantly grab both of you and wrench your hands behind your backs, putting you on your knees. Skar finds Tavi's hand-crafted signal jammer and turns it off.")
+
+		saynn("[say=elena]I'm sorry..[/say]")
+
+		saynn("The captain shuts the project off and puts the sphere away before approaching you.")
+
+		saynn("[say=captain]You might be right about one thing.[/say]")
+
+		saynn("He grabs Tavi's chin and makes her look up at her.")
+
+		saynn("[say=captain]I do like the sight of humiliated and degraded inmates. Inmates that still have the spark of hope in their eyes.. So they are gonna do anything to keep that spark..[/say]")
+
+		saynn("The guards watch the captain as he moves on to you. The guy crouches before you and waves his hand before your eyes.")
+
+		saynn("[say=captain]The truth is.. I just like having power over you. Credits can be easily earned. New friends and lovers can be made. But.. power.. over people.. that's a finite resource right there.. A resource that can only be acquired.. through breaking and domination.. Something that we practice here on my station.[/say]")
+
+		saynn("Tavi doesn't say a word. The guards are quiet too.")
+
+		saynn("[say=captain]Soon the AlphaCorp will start noticing how.. efficient BDCC is.. At producing high quality people. Loyal people. They will ditch their silly ideas about androids possibly replacing us. And focus their efforts on these kinds of facilities.[/say]")
+
+		saynn("Captain stands up and straightens his posture. Risha and Nova watch you and Tavi but Skar's gaze is directed somewhere else.")
+
+		saynn("[say=captain]And when that happens.. They will need someone who has experience in controlling people. That's where I step in.[/say]")
+
+		saynn("Captain Wright fetches his gun back and then sits on the corner of his desk again. Everything is quiet for a few seconds.")
+
+		saynn("[say=tavi]I will..[/say]")
+
+		saynn("[say=captain]You will kill me? Why? Because I'm selfish? Am I? My facility has reeducated so many convicts.. Gave them jobs.. Purpose.. I'm helping AlphaCorp too by helping to win this war, don't forget that. And what, I'm suddenly not allowed to profit off of it a little bit? I have dreams too, you know.[/say]")
+
+		saynn("Tavi lowers her defeated eyes.")
+
+		saynn("[say=captain]What did you do in your life, except for destroying everything in your path? Even yourself. You're broken, Tavi. And even still, I'm not gonna stop trying to fix you. I'm done playing games though. I wanna see actual change.[/say]")
+
+		saynn("Huh? The captain grabs his laptop and quickly types something on the keyboard.")
+
+		saynn("[say=captain]Eliza has prepared.. a special therapy. A very experimental one but it shouldn't break or kill anyone. What it should do is help with your behavior, shift your priorities a bit. Since you both share the blame for this little accident.. I want you to decide who is gonna..[/say]")
+
+		saynn("[say=tavi]Me. I don't even care anymore..[/say]")
+
+		saynn("The captain didn't even finish his sentence and Tavi already cut him off. You look at her and she looks back.")
+
+		saynn("[say=pc]Tavi, no..[/say]")
+
+		saynn("[say=tavi]It must happen.. trust me..[/say]")
+
+		saynn("The captain chuckles softly.")
+
+		saynn("[say=captain]That was way too easy. What do you say, {pc.name}? Would you rather accept the punishment instead of Tavi? The second person will have a lighter one.[/say]")
+
+		saynn("Nothing is ever easy with him..")
+
+		addButton("Let Tavi suffer", "She wants it to happen to her..", "punish_tavi")
+		addButton("Be punished", "Tavi doesn't understand it in her current state. You must save her", "punish_me")
+		addButton("Stay silent", "Might as well not say anything", "punish_staysilent")
+	if(state == "punish_me"):
+		playAnimation(StageScene.Duo, "stand", {npc="tavi"})
+		saynn("[say=pc]I'm not gonna let you break Tavi. Pick me.[/say]")
+
+		saynn("The captain raises a brow.")
+
+		saynn("[say=captain]Hm-m.. That was somewhat expected.[/say]")
+
+		saynn("Suddenly, Tavi breaks free. But instead of going after the captain, she just gets up and looks at you.")
+
+		saynn("[say=tavi]You did more than enough for me.. We had an agreement.. You must trust my word..[/say]")
+
+		saynn("The guards are about to grab her again but the captain stops them from doing so. He even gestures for you to be freed too. They can shock your collars at any moment now anyway..")
+
+		saynn("[say=captain]Hah. Interesting conflict we have here. I can't pick both though. Who is it gonna be?[/say]")
+
+		saynn("[say=pc]You don't understand what you're doing. Whatever he has planned, it will break you in your current state.[/say]")
+
+		saynn("Tavi sighs and then growls.")
+
+		saynn("[say=tavi]Stop this, pet. I don't care. Maybe I want to be broken.[/say]")
+
+		saynn("[say=pc]I won't let that happen.[/say]")
+
+		saynn("Tavi assumes a fighting stance and shows off her fangs.")
+
+		saynn("[say=tavi]Gonna try and stop me?[/say]")
+
+		saynn("It seems you have no choice.. You mirror her stance and prepare for a fight.. While all the guards and the captain watch.")
+
+		addButton("Fight", "Start the fight", "fight_armored_tavi")
+	if(state == "won_tavi"):
+		setFlag("TaviModule.Ch5OnlyTaviPunished", false)
+		playAnimation(StageScene.Duo, "stand", {npc="tavi", npcAction="defeat"})
+		saynn("Tavi drops to her knees, unable to fight any longer.")
+
+		saynn("[say=tavi]Argh.. No..[/say]")
+
+		saynn("The captain claps for you.")
+
+		saynn("[say=captain]Good job. You are stronger than your owner.[/say]")
+
+		saynn("Then he grabs his shock remote and points it at you.")
+
+		saynn("[say=captain]I lied though. I can pick both.[/say]")
+
+		saynn("Too late to react, a powerful shock goes through your neck as you go stiff and collapse down to the floor. He holds that button very firmly, making the simple act of living.. an agony.. The last thing you hear before blacking out..")
+
+		saynn("[say=tavi]{pc.name}!..[/say]")
+
+		saynn("And then darkness..")
+
+		saynn("Seems the captain wanted to get rid of Tavi either way..")
+
+		addButton("Continue", "See what happens next", "start_next_scene")
+	if(state == "lost_tavi"):
+		setFlag("TaviModule.Ch5OnlyTaviPunished", true)
+		playAnimation(StageScene.Duo, "defeat", {npc="tavi"})
+		saynn("You drop to your knees, unable to fight any longer. Tavi leans in closer to your ear and quickly whispers..")
+
+		saynn("[say=tavi]Trust me.. please..[/say]")
+
+		saynn("But then she suddenly collapses near you as the captain grabs his remote and presses the button, a loud hissing escapes from her as her collar sends a long painful impulse through her.")
+
+		saynn("[say=captain]You won, Tavi. Here is the reward.[/say]")
+
+		saynn("She writhes in pain until she is unable to stay conscious anymore.")
+
+		saynn("[say=captain]And here is yours.[/say]")
+
+		saynn("He does the same to you, making your collar shock you until your body can't take it anymore..")
+
+		saynn("And then darkness..")
+
+		addButton("Continue", "See what happens next", "start_next_scene")
+	if(state == "punish_tavi"):
+		playAnimation(StageScene.Solo, "defeat", {pc="tavi"})
+		saynn("You nod towards Tavi.. Hopefully she knows what she is doing.")
+
+		saynn("[say=pc]If Tavi wants this to happen, I won't stop her..[/say]")
+
+		saynn("[say=captain]That's very fair.[/say]")
+
+		saynn("Tavi suddenly collapses near you as the captain grabs his remote and presses the button, a loud hissing escapes from her as her collar sends a long painful impulse through her.")
+
+		saynn("[say=captain]Isn't having power fun?[/say]")
+
+		saynn("She writhes in pain until she is unable to stay conscious anymore.")
+
+		saynn("[say=captain]Credits can't buy you this.[/say]")
+
+		saynn("He does the same to you, making your collar shock you until your body can't take it anymore..")
+
+		saynn("And then darkness..")
+
+		addButton("Continue", "See what happens next", "start_next_scene")
+	if(state == "punish_staysilent"):
+		playAnimation(StageScene.Solo, "defeat", {pc="tavi"})
+		saynn("You're not sure what to say even. After some time, the captain runs out of patience.")
+
+		saynn("[say=captain]Fine. I will pick myself.[/say]")
+
+		saynn("Tavi suddenly collapses near you as the captain grabs his remote and presses the button, a loud hissing escapes from her as her collar sends a long painful impulse through her.")
+
+		saynn("[say=captain]Isn't having power fun?[/say]")
+
+		saynn("She writhes in pain until she is unable to stay conscious anymore.")
+
+		saynn("[say=captain]Credits can't buy you this.[/say]")
+
+		saynn("He does the same to you, making your collar shock you until your body can't take it anymore..")
+
+		saynn("And then darkness..")
+
+		addButton("Continue", "See what happens next", "start_next_scene")
 var randomSexIsPlaying = false
 func playRandomSexAnim():
 	if(randomSexIsPlaying):
@@ -906,6 +1080,26 @@ func _react(_action: String, _args):
 	if(_action == "captain_pc_fears"):
 		processTime(2*60)
 
+	if(_action == "tavi_givesup"):
+		processTime(5*60)
+
+	if(_action == "punish_tavi"):
+		setFlag("TaviModule.Ch5OnlyTaviPunished", true)
+
+	if(_action == "punish_staysilent"):
+		setFlag("TaviModule.Ch5OnlyTaviPunished", true)
+
+	if(_action == "fight_armored_tavi"):
+		GM.pc.addPain(-200)
+		GM.pc.addStamina(200)
+		runScene("FightScene", ["taviArmored"], "tavi_armored_fight")
+		return
+
+	if(_action == "start_next_scene"):
+		endScene()
+		runScene("CHANGEME")
+		return
+
 	setState(_action)
 
 func _react_scene_end(_tag, _result):
@@ -939,3 +1133,12 @@ func _react_scene_end(_tag, _result):
 			setState("won_captain")
 		else:
 			setState("lost_captain")
+
+	if(_tag == "tavi_armored_fight"):
+		processTime(3 * 60)
+		var battlestate = _result[0]
+		
+		if(battlestate == "win"):
+			setState("won_tavi")
+		else:
+			setState("lost_tavi")

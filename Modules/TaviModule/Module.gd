@@ -97,6 +97,7 @@ func getFlags():
 		"Ch5SentinelXHappened": flag(FlagType.Bool),
 		"Ch5PreparationHappened": flag(FlagType.Bool),
 		"Ch5BigSceneStarted": flag(FlagType.Bool),
+		"Ch5OnlyTaviPunished": flag(FlagType.Bool),
 	}
 
 func _init():
