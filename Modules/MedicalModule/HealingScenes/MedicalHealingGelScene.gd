@@ -23,7 +23,7 @@ func _run():
 		addButton("Follow", "See where she brings you", "follow")
 
 	if(state == "follow"):
-		playAnimation(StageScene.Duo, "kneel", {npc="eliza", npcAction="stand", bodyState={naked=true}})
+		playAnimation(StageScene.BDSMMachineFuck, "tease", {bodyState={naked=true, hard=true}})
 		aimCameraAndSetLocName("med_researchlab")
 		
 		saynn("You and the doctor enter the lab, a sterile looking space with no shortage of expensive equipment. Eliza brings you into the middle of the room where some kind of hi-tech table is placed. It has a computer attached to it and a bunch of extra hardware that you don’t even recognize.")
@@ -85,6 +85,11 @@ func _run():
 		addButton("Continue", "See what happens next", "continue")
 
 	if(state == "continue"):
+		if(GM.pc.hasReachableVagina()):
+			playAnimation(StageScene.BDSMMachineFuck, "insidedouble", {bodyState={naked=true, hard=true}})
+		else:
+			playAnimation(StageScene.BDSMMachineFuck, "inside", {bodyState={naked=true, hard=true}})
+		
 		saynn("You hear hydraulic motors working as the table brings some kind of tool out. You look down and see a sturdy metal arm with.. some kind of phallic object attached to it. Looks like a blue dildo that has a transparent tube running through it. And the tip of that tube is leaking something.. The arm is hovering between your legs.")
 
 		# (if has pussy)
