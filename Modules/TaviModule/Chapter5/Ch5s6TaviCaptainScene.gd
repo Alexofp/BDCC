@@ -1097,7 +1097,15 @@ func _react(_action: String, _args):
 
 	if(_action == "start_next_scene"):
 		endScene()
-		runScene("CHANGEME")
+		getCharacter("tavi").resetEquipment()
+		GM.pc.getInventory().clearSlot(InventorySlot.Eyes)
+		GM.pc.getInventory().clearSlot(InventorySlot.Body)
+		GM.pc.getInventory().findAndEquipInmateUniform()
+		
+		if(getFlag("TaviModule.Ch5OnlyTaviPunished")):
+			runScene("Ch5s7PlayerCellScene")
+		else:
+			runScene("Ch5s7MedicalTortureScene")
 		return
 
 	setState(_action)
@@ -1142,3 +1150,9 @@ func _react_scene_end(_tag, _result):
 			setState("won_tavi")
 		else:
 			setState("lost_tavi")
+
+func getDevCommentary():
+	return "This is probably one of the most important scenes in Tavi's route.. Huge spoilers if you haven't gone through it yet.\n\nDid I plan it all to be this way since the beginning? Yes and no x3. I think I realized that making it so Tavi is the daughter of the director and Elena is a great idea only after writing her backstory scene x3. Yeah, its mommy/daddy issues which is probably a cliche at this point but I tried to put enough spins on it? To make it feel fresh x3.\n\nThe whole android angle.. Yeah, obviously people understand that you can have a sextoy android that you like. But in this universe people didn't yet accept that one can have true love for a machine, a bunch of algorithms basically. Yeah, people did accept all genders. But genders are all.. still people. People that have soul and stuff. Having feelings for machines/objects seems like the next big step, you know? Yeah, you can meme about it and stuff but would you be okay if your president married an f36 plane with an experimental neural brain. I know you would love that x3. Would your parents be okay with that though? You get it now hopefully, it requires a new generation of people to accept new ideas.\n\nWhy doesn't the player have much agency in this whole scene?.. I don't even know how I would write this scene in a way that doesn't center around Tavi.. And then include branching paths in it?.. Just kill me x3. I kinda pushed myself into the corner when I decided to make you, the player, just be you. But making it so you play as Tavi the whole game would remove player customisation. It's a very tricky topic, you know? And I'm not an expert at writing complex branching narratives, I just wanna tell this little story I came up with.."
+
+func hasDevCommentary():
+	return true
