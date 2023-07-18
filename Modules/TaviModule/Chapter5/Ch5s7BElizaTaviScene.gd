@@ -261,9 +261,9 @@ func _run():
 
 		saynn("She is still fighting against the machine, her body straining and contorting in a desperate attempt to escape the overwhelming sensations. But very soon, she begins losing.. More and more moans start escaping from her lips as her sensitive folds become all wet and needy.")
 
-		saynn("[say=pc]You're just a slut yourself, see?[/say]")
+		saynn("[say=pc]You're just a slut. Tell me how to fix Tavi or this will quickly get worse.[/say]")
 
-		saynn("[say=eliza]I'm not!.. I'm not a slut.. Ah-h.. T-this is t-too m-much.. F-fu-uck..[/say]")
+		saynn("[say=eliza]Ahaha!.. You can't! She is already fixed! And I'm not!.. I'm not a slut.. Ah-h.. T-this is t-too m-much.. F-fu-uck..[/say]")
 
 		saynn("Tavi had to go through this. So might as well let the doctor feel the same. You find some buttons that turn on the screen and make it show some kind of hardcore porn for Eliza. If she closes her eyes or looks away, the wand instantly buzzes harder, making it painful even.")
 
@@ -302,6 +302,110 @@ func _run():
 
 		saynn("Eliza gasps as she machine thrusts that pink dildo inside, spreading her slick folds and filling her completely as it delves deep into her inviting depths. A mix of pleasure and anger escaping her lips as the machine starts fucking her relentlessly, forcing that rubber cock inside her again and again..")
 
+		saynn("Eliza's senses get overloaded as the machine pushes her closer to the edge once again. Her pulsating walls are tightening around the rubber shaft before her pussy suddenly produces a fountain of juices.")
+
+		saynn("[say=eliza]Ngh-h!..[/say]")
+
+		saynn("All this time Tavi is just catching her breath sitting on the floor. She seems quite jealous though.")
+
+		saynn("You're not done yet..")
+
+		addButton("Faster", "Make the machine fuck Eliza faster", "eliza_dildo_faster")
+	if(state == "eliza_dildo_faster"):
+		playAnimation(StageScene.BDSMMachineFuck, "fast", {pc="eliza", bodyState={naked=true}})
+		saynn("You're not walking away until Eliza has truly learned her lesson. You raise the dial that makes the dildo thrust into the doctor's pussy harder and faster. The feline is moaning passionately, making you wonder how much time you still have before someone hears all these noises and stops you.")
+
+		saynn("[say=pc]You wanted to cum. You gonna cum.[/say]")
+
+		saynn("[say=eliza]E-enough-h-h!.. Ah-h-!.. It's too mu-u-uch!..[/say]")
+
+		saynn("Her tongue is out. She is drooling actively while her body does its best to struggle against the heartless machine. But the more she tries to free her limbs, the harder the mechanical arms spread them and the deeper that dildo gets rammed down her snatch. You even notice a bump on her crotch appearing as the toy smashes into her cervix.")
+
+		saynn("Doesn't take long before Eliza arches her back yet again, her pussy squirting all over the dildo that's fucking her non-stop.")
+
+		saynn("[say=eliza]F-Fu-uck!..[/say]")
+
+		saynn("So mouthy.. You realize that the screen that Eliza is forced to watch displays the correct amount of times that she has orgasmed so far: 3. Seems kinda low.. Ohh, what this?")
+
+		addButton("Double Trouble", "Press a mysterious button", "eliza_dildo_double")
+	if(state == "eliza_dildo_double"):
+		playAnimation(StageScene.BDSMMachineFuck, "sexdouble", {pc="eliza", bodyState={naked=true}})
+		saynn("You press a button that causes the dildo to retract.. Letting Eliza rest and catch her breath for just a second.")
+
+		saynn("[say=eliza]F-Finally.. you..[/say]")
+
+		saynn("But that was just a little pause because the machine needed to transform a little. The pink rubber dildo gets rammed down her stretched wet cunt yet again.. making the feline gasp.. and at the same time, another dildo prods against her tailhole, trying to align itself.")
+
+		saynn("[say=eliza]H-hey! Not there! NO! AH!..[/say]")
+
+		saynn("Machines can't hear. The dildo forcefully stretches Eliza's tight-looking anal star and gets rammed inside. The feline tries her best to clench her ass but that only makes the servos of the machine whirl louder as it starts double-penetrating her, stuffing both of her holes with roughly the same rhythm.")
+
+		saynn("Even Tavi is a little surprised by.. how capable that feline's holes are.")
+
+		saynn("[say=eliza]F-fuck.. Fuck me.. Ah..[/say]")
+
+		saynn("Eliza is lacking the earplugs that Tavi had but even just the screen displaying porn and various praising words makes Eliza's defense melt. Her tongue is out yet again as her eyes start rolling up from the overstimulation. Very soon her holes start visible pulsating again as her pussy produces another little gush of juices. It's obvious when her orgasm happens because she starts curling her toes and trying to arch her body.")
+
+		saynn("[say=pc]You're a whore, Eliza. You'd love it if it was two actual cocks, didn't you?[/say]")
+
+		saynn("[say=eliza]NGh-h-h!.. N-n.. No-o.. H-h~..[/say]")
+
+		saynn("Really? She didn't break yet? Time to push this little experimental machine to its limits then.")
+
+		addButton("Faster", "Break Eliza", "eliza_dildo_double_fast")
+	if(state == "eliza_dildo_double_fast"):
+		playAnimation(StageScene.BDSMMachineFuck, "fastdouble", {pc="eliza", bodyState={naked=true}})
+		saynn("You raise an intensity slider to its maximum.. and see how the machine starts plunging its 2 dildos into Eliza with incredible strength. Instead of being forced inside at the same time, they alternate, making sure the feline's stretched holes are never empty.")
+
+		saynn("[say=eliza]Oh f-fu.. Nh-h-h!.. AH![/say]")
+
+		saynn("Almost instantly, Eliza cums yet again. Her tired body squirming non-stop as loud cries of pleasure escape her lips. They don't even sound like words anymore, just noises.")
+
+		saynn("[say=eliza]Nghh.. y-ye..s.. Uh.. Ah.. I c-c..can't..[/say]")
+
+		saynn("Her body succumbs to this intense fucking, her walls contract around the dildos, gripping them in a desperate attempt to find escape from this overwhelming pleasure.. But there is no escape.. Eliza is forced to endure orgasms happening one after another, ecstasy clouding her mind completely while the room starts smelling of sex..")
+
+		saynn("[say=eliza]C-can't s-stop.. c-cumming-g-g.. ngh-h~!..[/say]")
+
+		saynn("Perfect. The orgasm counter on the screen ticks up roughly every half a minute. By now it has already hit 20.. 21.")
+
+		saynn("[say=pc]That's for Tavi.[/say]")
+
+		saynn("The purple kitty is sitting on all fours near you. Is that.. leash in her mouth? She is offering for you to take it.")
+
+		saynn("[say=pc]You're alright, Miss Tavi? Where are your clothes?[/say]")
+
+		saynn("Tavi just bleps.")
+
+		saynn("[say=pc]Right.. Can you get up?[/say]")
+
+		saynn("You try to help her but her legs are still shaky after that huge amount of orgasms she received.")
+
+		saynn("[say=tavi]It's okay.. I will crawl.. Should I call you an owner, owner?[/say]")
+
+		saynn("[say=pc]I'm not your owner.. You are my owner, Tavi.[/say]")
+
+		saynn("Tavi bleps again. It seems.. you will have to be her owner for now..")
+
+		addButton("Leash her", "Put Tavi on a leash", "leash_tavi_after_eliza_fuck")
+	if(state == "leash_tavi_after_eliza_fuck"):
+		removeCharacter("eliza")
+		playAnimation(StageScene.Duo, "stand", {npc="tavi", npcAction="allfours", npcBodyState={naked=true}})
+		aimCameraAndSetLocName("med_lobbynw")
+		setFlag("TaviModule.Ch5ElizaGotTortured", true)
+		saynn("Since she wants it so much.. Sure. You grab the leash and clip to Tavi's collar, causing her to start purring. This machine sure did mess with her mind..")
+
+		saynn("You prepare to leave. Eliza is still moaning loudly, her voice starts to sound raspy by this point. Someone will surely find and help her. But she is not your problem.")
+
+		saynn("Tavi crawls near as you step in the medical lobby. All the random nurses are looking at you and your new pet.")
+
+		saynn("You ignore their eyes and walk up to the elevator doors before pressing the button to call it.")
+
+		saynn("[say=tavi]It looked fun, what you did to Miss Quinn back there.[/say]")
+
+		saynn("Miss Quinn, huh.")
+
+		addButton("Continue", "See what happens next", "tavi_in_cellblock")
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
@@ -326,6 +430,18 @@ func _react(_action: String, _args):
 
 	if(_action == "eliza_dildo_start"):
 		processTime(5*60)
+
+	if(_action == "eliza_dildo_faster"):
+		processTime(3*60)
+
+	if(_action == "eliza_dildo_double"):
+		processTime(3*60)
+
+	if(_action == "eliza_dildo_double_fast"):
+		processTime(6*60)
+
+	if(_action == "leash_tavi_after_eliza_fuck"):
+		processTime(3*60)
 
 	setState(_action)
 

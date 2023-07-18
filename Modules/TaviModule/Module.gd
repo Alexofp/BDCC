@@ -98,6 +98,7 @@ func getFlags():
 		"Ch5PreparationHappened": flag(FlagType.Bool),
 		"Ch5BigSceneStarted": flag(FlagType.Bool),
 		"Ch5OnlyTaviPunished": flag(FlagType.Bool),
+		"Ch5ElizaGotTortured": flag(FlagType.Bool),
 	}
 
 func _init():
@@ -149,6 +150,8 @@ func _init():
 		"res://Modules/TaviModule/Chapter5/Ch5s4EnablePowerScene.gd",
 		"res://Modules/TaviModule/Chapter5/Ch5s5TaviPreparationScene.gd",
 		"res://Modules/TaviModule/Chapter5/Ch5s6TaviCaptainScene.gd",
+		"res://Modules/TaviModule/Chapter5/Ch5s7PlayerCellScene.gd",
+		"res://Modules/TaviModule/Chapter5/Ch5s7BElizaTaviScene.gd",
 		]
 	characters = [
 		"res://Modules/TaviModule/Chapter4/DirectorTau.gd",
