@@ -59,6 +59,7 @@ var gameExtenders: Dictionary = {}
 var computers: Dictionary = {}
 var fluids: Dictionary = {}
 var skins: Dictionary = {}
+var partSkins: Dictionary = {}
 
 var bodypartStorageNode
 
@@ -344,6 +345,7 @@ func registerEverything():
 	registerComputerFolder("res://Game/Computer/")
 	
 	registerSkinsFolder("res://Player/Player3D/Skins/")
+	registerPartSkinsFolder("res://Player/Player3D/SkinsParts/")
 	
 	registerModulesFolder("res://Modules/")
 	findCustomSkins()
@@ -1385,6 +1387,29 @@ func getScriptsInSubFolders(folder: String):
 	
 	return result
 
+func getScriptsInFoldersRecursive(folder: String, ignoreBaseDir = false):
+	var result = []
+	
+	var dir = Directory.new()
+	if dir.open(folder) == OK:
+		dir.list_dir_begin(true)
+		var file_name = dir.get_next()
+		while file_name != "":
+			if dir.current_is_dir():
+				var full_path = folder.plus_file(file_name)
+				result.append_array(getScriptsInFoldersRecursive(full_path, false))
+				#print("Found directory: " + file_name)
+			else:
+				if(!ignoreBaseDir && file_name.get_extension() == "gd"):
+					var full_path = folder.plus_file(file_name)
+					result.append(full_path)
+				pass
+			file_name = dir.get_next()
+	else:
+		Log.printerr("An error occurred when trying to access the path "+folder)
+	
+	return result
+
 func registerFetishesFolder(folder: String):
 	var scripts = getScriptsInFolder(folder)
 	for scriptPath in scripts:
@@ -1575,3 +1600,32 @@ func findCustomSkins():
 		customSkin.customName = skinName
 		customSkin.setTexturePath(skinPath)
 		skins[customSkin.id] = customSkin
+
+
+
+func registerPartSkin(path: String):
+	var loadedClass = load(path)
+	var object = loadedClass.new()
+	
+	if(!partSkins.has(object.partID)):
+		partSkins[object.partID] = {}
+	partSkins[object.partID][object.id] = object
+
+func registerPartSkinsFolder(folder: String):
+	var scripts = getScriptsInFoldersRecursive(folder, true)
+	for scriptPath in scripts:
+		registerPartSkin(scriptPath)
+
+func getPartSkin(partID: String, id: String):
+	if(!partSkins.has(partID)):
+		return null
+	if(partSkins[partID].has(id)):
+		return partSkins[partID][id]
+	else:
+		Log.printerr("ERROR: part skin with the id "+id+" wasn't found")
+		return null
+
+func getPartSkins(partID: String):
+	if(!partSkins.has(partID)):
+		return {}
+	return partSkins[partID]

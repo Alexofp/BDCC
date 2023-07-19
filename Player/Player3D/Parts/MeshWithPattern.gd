@@ -9,6 +9,7 @@ export(Texture) var customSkinPattern = null
 export(Texture) var customAlbedo = null
 export(bool) var showCumLayer = true
 export(Vector2) var cumLayerScale = Vector2(1.0, 1.0)
+export(String) var custonSkinVariant = ""
 var partRef
 var fancyMaterial
 var defaultOverlay = preload("res://Player/Player3D/Skins/defaultoverlay.png")
@@ -70,7 +71,21 @@ func updateMaterial():
 		var skinData = theDoll.getSkinDataByID(bodypartSlot)
 		if(skinData != null):
 			#fancyMaterial = materialWithSkin.duplicate()
-			if(customSkinPattern != null):
+			if(skinData.has("partskin") && skinData.has("partid")):
+				var theSkin = GlobalRegistry.getPartSkin(skinData["partid"], skinData["partskin"])
+				if(theSkin != null):
+					var thePatternTexture = theSkin.getPatternTexture()
+					if(thePatternTexture != null):
+						if(thePatternTexture is Dictionary):
+							if(thePatternTexture.has(custonSkinVariant)):
+								fancyMaterial.set_shader_param("texture_pattern", thePatternTexture[custonSkinVariant])
+							elif(customSkinPattern != null):
+								fancyMaterial.set_shader_param("texture_pattern", customSkinPattern)
+						else:
+							fancyMaterial.set_shader_param("texture_pattern", thePatternTexture)
+					elif(customSkinPattern != null):
+						fancyMaterial.set_shader_param("texture_pattern", customSkinPattern)
+			elif(customSkinPattern != null):
 				fancyMaterial.set_shader_param("texture_pattern", customSkinPattern)
 			elif(skinData.has("skin")):
 				var theSkin = GlobalRegistry.getSkin(skinData["skin"])

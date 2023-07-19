@@ -729,6 +729,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Inventory/ItemState/PantiesState.gd"
 }, {
+"base": "Reference",
+"class": "PartSkinBase",
+"language": "GDScript",
+"path": "res://Player/Player3D/SkinsParts/PartSkinBase.gd"
+}, {
 "base": "Spatial",
 "class": "PartState",
 "language": "GDScript",
@@ -1274,6 +1279,7 @@ _global_script_class_icons={
 "OrificeType": "",
 "OverriddenPlayer": "",
 "PantiesState": "",
+"PartSkinBase": "",
 "PartState": "",
 "PartStatePicker": "",
 "PartTrait": "",

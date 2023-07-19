@@ -2173,6 +2173,7 @@ func applyRandomSkinAndColorsAndParts():
 		if(bodyparts[bodypartID] == null):
 			continue
 		bodyparts[bodypartID].generateRandomColors(self)
+		bodyparts[bodypartID].generateRandomSkinIfCan(self)
 
 func getStatusEffectImmunity(statusEffectID):
 	return buffsHolder.getStatusEffectImmunity(statusEffectID)

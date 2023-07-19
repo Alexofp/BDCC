@@ -195,7 +195,7 @@ func paintBodyparts():
 	if(npcSkinData != null):
 		for bodypartSlot in npcSkinData:
 			if(!hasBodypart(bodypartSlot)):
-				Log.error(getID()+" doesn't have "+str(bodypartSlot)+" slot but we're trying to paint it anyway inside paintBodyparts()")
+				#Log.error(getID()+" doesn't have "+str(bodypartSlot)+" slot but we're trying to paint it anyway inside paintBodyparts()")
 				continue
 			var bodypart = getBodypart(bodypartSlot)
 			var bodypartSkinData = npcSkinData[bodypartSlot]

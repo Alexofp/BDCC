@@ -296,6 +296,7 @@ func generateDataFor(_dynamicCharacter):
 	if(orifice != null):
 		orifice.generateDataFor(_dynamicCharacter)
 	generateRandomColors(_dynamicCharacter)
+	generateRandomSkinIfCan(_dynamicCharacter)
 
 func supportsSkin():
 	return true
@@ -305,12 +306,27 @@ func hasCustomSkinPattern():
 
 
 func getSkinData():
+	if(hasCustomSkinPattern() && pickedSkin != null):
+		return {
+			"partskin": pickedSkin,
+			"partid": id,
+			"skin": null,
+			"r": pickedRColor,
+			"g": pickedGColor,
+			"b": pickedBColor,
+		}
+	
 	return {
 		"skin": pickedSkin,
 		"r": pickedRColor,
 		"g": pickedGColor,
 		"b": pickedBColor,
 	}
+
+func generateRandomSkinIfCan(_dynamicCharacter):
+	if(hasCustomSkinPattern()):
+		if(!GlobalRegistry.getPartSkins(id).empty()):
+			pickedSkin = RNG.pick(GlobalRegistry.getPartSkins(id).keys() + [null])
 
 func generateRandomColors(_dynamicCharacter):
 	pass

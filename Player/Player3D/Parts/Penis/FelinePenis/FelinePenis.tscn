@@ -449,6 +449,7 @@ material/0 = SubResource( 25 )
 script = ExtResource( 8 )
 bodypartSlot = "penis"
 customSkinPattern = ExtResource( 9 )
+custonSkinVariant = "limp"
 
 [node name="PartState3" parent="PartStatePicker" index="3" instance=ExtResource( 5 )]
 visible = false
@@ -462,6 +463,7 @@ material/0 = SubResource( 25 )
 script = ExtResource( 8 )
 bodypartSlot = "penis"
 customSkinPattern = ExtResource( 9 )
+custonSkinVariant = "limp"
 
 [node name="Cage" type="MeshInstance" parent="PartStatePicker/PartState3" index="1"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.01 )

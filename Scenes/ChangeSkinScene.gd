@@ -112,17 +112,28 @@ func _run():
 		addButton("Back", "Go back", "")
 		if(!bodypart.hasCustomSkinPattern()):
 			addButton("Skin", "Change part's skin", "changepartskinmenu")
+		else:
+			if(!GlobalRegistry.getPartSkins(bodypart.id).empty() || bodypart.pickedSkin != null):
+				addButton("Skin", "Change part's skin", "changepartskinmenu")
 		addButton("Primary color", "Change part's primary color", "changepartcolormenu", [0])
 		addButton("Secondary color", "Change part's secondary color", "changepartcolormenu", [1])
 		addButton("Tertiary color", "Change part's tertiary color", "changepartcolormenu", [2])
 
 
 	if(state == "changepartskinmenu"):
+		var bodypart = thePC.getBodypart(pickedBodypartSlot)
 		addButton("Back", "Go back", "bodypartmenu")
-		addButton("Same as base", "Inherit the skin from the base", "changepartskinmenu_select", [null])
-		for skinID in GlobalRegistry.getSkins():
-			var theSkin = GlobalRegistry.getSkin(skinID)
-			addButton(theSkin.getName(), "Pick this skin", "changepartskinmenu_select", [skinID])
+		
+		if(bodypart.hasCustomSkinPattern()):
+			addButton("Default", "Use the default skin pattern", "changepartskinmenu_select", [null])
+			for skinID in GlobalRegistry.getPartSkins(bodypart.id):
+				var theSkin = GlobalRegistry.getPartSkin(bodypart.id, skinID)
+				addButton(theSkin.getName(), "Pick this skin", "changepartskinmenu_select", [skinID])
+		else:
+			addButton("Same as base", "Inherit the skin from the base", "changepartskinmenu_select", [null])
+			for skinID in GlobalRegistry.getSkins():
+				var theSkin = GlobalRegistry.getSkin(skinID)
+				addButton(theSkin.getName(), "Pick this skin", "changepartskinmenu_select", [skinID])
 
 	if(state == "changepartcolormenu"):
 		var bodypart = thePC.getBodypart(pickedBodypartSlot)

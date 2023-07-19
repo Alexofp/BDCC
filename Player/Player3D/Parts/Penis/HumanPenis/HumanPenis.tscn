@@ -330,6 +330,7 @@ material/0 = SubResource( 13 )
 script = ExtResource( 8 )
 bodypartSlot = "penis"
 customSkinPattern = ExtResource( 12 )
+custonSkinVariant = "limp"
 
 [node name="PartState3" parent="PartStatePicker" index="3" instance=ExtResource( 6 )]
 visible = false
@@ -345,3 +346,4 @@ bodypartSlot = "penis"
 customOverlay = ExtResource( 11 )
 customSkinPattern = ExtResource( 12 )
 customAlbedo = ExtResource( 4 )
+custonSkinVariant = "limp"
