@@ -172,6 +172,7 @@ func _run():
 		aimCameraAndSetLocName("cellblock_red_nearcell")
 		GM.pc.setLocation("cellblock_red_nearcell")
 		playAnimation(StageScene.Sleeping, "idle", {pc="tavi", bodyState={naked=true}})
+		setFlag("TaviModule.Ch5TaviSavedDay", GM.main.getDays())
 		saynn("You go down to the level where all the cell blocks are and enter the high security one.")
 
 		saynn("[say=pc]Where is your cell, Tavi?[/say]")

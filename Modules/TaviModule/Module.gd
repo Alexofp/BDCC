@@ -100,6 +100,11 @@ func getFlags():
 		"Ch5OnlyTaviPunished": flag(FlagType.Bool),
 		"Ch5FoundPunishedTavi": flag(FlagType.Bool),
 		"Ch5ElizaGotTortured": flag(FlagType.Bool),
+		"Ch5TaviSavedDay": flag(FlagType.Number),
+		
+		"Ch6IntroHappened": flag(FlagType.Bool),
+		"Ch6Corruption": flag(FlagType.Number),
+		"TaviIsNotVirgin": flag(FlagType.Bool),
 	}
 
 func _init():
@@ -225,3 +230,22 @@ static func getPunishmentScene():
 
 static func trustsPC():
 	return !GM.main.getModuleFlag("TaviModule", "Tavi_IsAngryAtPlayer", false) && GM.main.getModuleFlag("TaviModule", "Tavi_IntroducedTo", false)
+
+
+func isVirgin():
+	return !getFlag("TaviModule.TaviIsNotVirgin", false)
+
+func addCorruption(howMuch, showMessage = true):
+	var currentCorruption = getFlag("TaviModule.Ch6Corruption", 1.0)
+	var oldCor = currentCorruption
+	
+	currentCorruption += howMuch
+	setFlag("TaviModule.Ch6Corruption", currentCorruption)
+	
+	
+	if(showMessage):
+		var diff = currentCorruption - oldCor
+		if(diff > 0.0):
+			GM.main.addMessage("Tavi's corruption has increased to "+str(Util.roundF(currentCorruption * 100.0, 1))+"%")
+		elif(diff < 0.0):
+			GM.main.addMessage("Tavi's corruption has decreased to "+str(Util.roundF(currentCorruption * 100.0, 1))+"%")
