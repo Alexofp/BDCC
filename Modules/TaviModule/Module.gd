@@ -106,6 +106,11 @@ func getFlags():
 		"Ch6Corruption": flag(FlagType.Number),
 		"TaviIsNotVirgin": flag(FlagType.Bool),
 		"Ch6TaviSatisfied": flag(FlagType.Bool),
+		"Ch6CorruptionStage": flag(FlagType.Number), # 0 - default, 1 - horn signs, 2 - horns, 3 - womb mark
+		"Ch6PurityStage": flag(FlagType.Number), # 0 - default, 1 - talked about what happened, 2 - can somewhat control herself, 3 - pretty much old Tavi
+		
+		"taviSkillCombat": flag(FlagType.Number),
+		"taviSkillSex": flag(FlagType.Number),
 	}
 
 func _init():
@@ -223,7 +228,8 @@ func _init():
 	]
 
 func resetFlagsOnNewDay():
-	pass
+	if(getFlag("TaviModule.Ch6TaviSatisfied")):
+		setFlag("TaviModule.Ch6TaviSatisfied", false)
 
 static func makeTaviAngry():
 	GM.main.setModuleFlag("TaviModule", "Tavi_IsAngryAtPlayer", true)
@@ -237,9 +243,86 @@ static func getPunishmentScene():
 static func trustsPC():
 	return !GM.main.getModuleFlag("TaviModule", "Tavi_IsAngryAtPlayer", false) && GM.main.getModuleFlag("TaviModule", "Tavi_IntroducedTo", false)
 
+func getAllSkills():
+	return ["taviSkillCombat", "taviSkillSex"]
+
+func getSkillInfo(skillID):
+	if(skillID == "taviSkillCombat"):
+		return {
+			name = "Combat",
+			desc = "Teaching Tavi how to stand up for herself",
+			scene = "RahiChillScene",
+		}
+	if(skillID == "taviSkillSex"):
+		return {
+			name = "Sex",
+			desc = "Allowing Tavi to enjoy all the sex that she missed",
+			scene = "RahiChillScene",
+		}
+	
+	return null
+
+# F D C B A S S+ S++
+# 0 1 2 3 4 5 6  7
+func getSkillScore(skillID):
+	return Util.mini(Util.maxi(int(getFlag("TaviModule."+str(skillID), 0)), 0), 7)
+
+func advanceSkill(skillID, maxLevel = 7):
+	if(!getSkillInfo(skillID) == null):
+		return false
+	
+	if(getFlag("TaviModule."+str(skillID), 0) < maxLevel):
+		increaseFlag("TaviModule."+str(skillID), 1)
+	return true
+
+func getSkillScoreText(skillID):
+	var score = getSkillScore(skillID)
+	score = Util.mini(Util.maxi(int(score), 0), 7)
+	
+	var scoreToText = ["F", "D", "C", "B", "A", "S", "S+", "S++"]
+	
+	return scoreToText[score]
+
+func getAvaiableStoryScene():
+	var currentCorruption = getFlag("TaviModule.Ch6Corruption", 1.0)
+	var corruptionStage = getFlag("TaviModule.Ch6CorruptionStage", 0)
+	var purityStage = getFlag("TaviModule.Ch6PurityStage", 0)
+	
+	var corruptScenes = [
+		{at=1.25,stage=1,scene="RahiChillScene"},
+		{at=1.5,stage=2,scene="RahiChillScene"},
+		{at=1.75,stage=3,scene="RahiChillScene"},
+		{at=2.0,stage=4,scene="RahiChillScene"},
+	]
+	var purityScenes = [
+		{at=0.75,stage=1,scene="RahiChillScene"},
+		{at=0.5,stage=2,scene="RahiChillScene"},
+		{at=0.25,stage=3,scene="RahiChillScene"},
+		{at=0.0,stage=4,scene="RahiChillScene"},
+	]
+	for sceneData in corruptScenes:
+		if(currentCorruption >= sceneData["at"] && corruptionStage<sceneData["stage"]):
+			return sceneData
+	for sceneData in purityScenes:
+		if(currentCorruption <= sceneData["at"] && purityStage<sceneData["stage"]):
+			return sceneData
+	
+	return null
 
 func isVirgin():
 	return !getFlag("TaviModule.TaviIsNotVirgin", false)
+
+func isCorrupt():
+	var currentCorruption = getFlag("TaviModule.Ch6Corruption", 1.0)
+	if(currentCorruption >= 1.5 && getFlag("TaviModule.Ch6CorruptionStage", 0) >= 2):
+		return true
+	return false
+
+func isPure():
+	var currentCorruption = getFlag("TaviModule.Ch6Corruption", 1.0)
+	if(currentCorruption <= 0.5 && getFlag("TaviModule.Ch6PurityStage", 0) >= 2):
+		return true
+	return false
 
 func addCorruption(howMuch, showMessage = true):
 	var currentCorruption = getFlag("TaviModule.Ch6Corruption", 1.0)

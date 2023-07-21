@@ -6,11 +6,11 @@ func _init():
 	npcCharacterType = CharacterType.Inmate
 	
 	pickedSkin="SoftSpikySkin"
-	pickedSkinRColor=Color("ffaf645a")
-	pickedSkinGColor=Color("ffcb9b94")
-	pickedSkinBColor=Color("ff9e5050")
+	pickedSkinRColor=Color("ffc0705d")
+	pickedSkinGColor=Color("ffdf8b78")
+	pickedSkinBColor=Color("ffb55945")
 	npcSkinData={
-	"hair": {"r": Color("ffab3e3e"),"g": Color("ffaf3131"),"b": Color("ff2288ab"),},
+	"hair": {"r": Color("ffb05745"),"g": Color("ffb05745"),"b": Color("ff2288ab"),},
 	}
 	
 func _getName():

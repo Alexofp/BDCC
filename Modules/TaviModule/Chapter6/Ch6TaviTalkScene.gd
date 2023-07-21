@@ -4,15 +4,52 @@ func _init():
 	sceneID = "Ch6TaviTalkScene"
 
 func _run():
+	var taviModule = getModule("TaviModule")
 	if(state == ""):
 		playAnimation(StageScene.Duo, "stand", {npc="tavi"})
 		addCharacter("tavi")
 		aimCameraAndSetLocName("cellblock_red_nearcell")
 		
-		#var taviModule = getModule("TaviModule")
+		saynn("Tavi stands still near her bed. Her desires for today seem to be satisfied.")
+		
+		if(taviModule.isVirgin()):
+			saynn("Tavi still has her virginity.")
+			
+		saynn("Tavi's corruption is {taviCorruption}")
+		
+		sayn("Tavi's skills:")
+		for skillID in taviModule.getAllSkills():
+			var skillInfo = taviModule.getSkillInfo(skillID)
+			if(skillInfo == null):
+				continue
+			sayn(skillInfo["name"]+": "+str(taviModule.getSkillScoreText(skillID)))
+		sayn("")
+		
+		addDisabledButton("Final Attack", "(not implemented yet :( ) Use everything that you and Tavi learned to prepare the last attack.\n\nTavi's corruption needs to be either 0% or 200%")
+		addButton("Train", "Train one of Tavi's skills", "train_menu")
 		
 		addButton("Leave", "Enough talking", "endthescene")
 		
+	if(state == "train_menu"):
+		saynn("Which skill do you wanna train?")
+		
+		sayn("Tavi's skills:")
+		for skillID in taviModule.getAllSkills():
+			var skillInfo = taviModule.getSkillInfo(skillID)
+			if(skillInfo == null):
+				continue
+			sayn(" - "+skillInfo["name"]+": "+str(taviModule.getSkillScoreText(skillID)))
+			sayn(skillInfo["desc"])
+		sayn("")
+		
+		for skillID in taviModule.getAllSkills():
+			var skillInfo = taviModule.getSkillInfo(skillID)
+			if(skillInfo == null):
+				continue
+			
+			addButton(skillInfo["name"], skillInfo["desc"], "do_skill", [skillInfo])
+		
+		addButton("Back", "Go back", "")
 	
 		
 func _react(_action: String, _args):
@@ -20,42 +57,29 @@ func _react(_action: String, _args):
 		endScene()
 		return
 
+	if(_action == "do_skill"):
+		setState("")
+		runScene(_args[0]["scene"])
+		return
+
 	setState(_action)
 
 func getDebugActions():
-	if(true):
-		return []
 	return [
 		{
-			"id": "raiseObedience",
-			"name": "Raise Obedience",
-			"args": [
-			],
-		},
-		{
-			"id": "raiseAffection",
-			"name": "Raise Affection",
-			"args": [
-			],
-		},
-		{
-			"id": "setStage",
-			"name": "Set Slavery Stage",
+			"id": "setCorruption",
+			"name": "Set Corruption",
 			"args": [
 				{
-					"id": "stage",
-					"name": "Stage",
+					"id": "newcorruption",
+					"name": "0-200%",
 					"type": "number",
-					"value": 8,
+					"value": 100,
 				},
 			]
 		},
 	]
 
 func doDebugAction(_id, _args = {}):
-	if(_id == "raiseObedience"):
-		increaseFlag("RahiModule.rahiObedience", 10)
-	if(_id == "raiseAffection"):
-		increaseFlag("RahiModule.rahiAffection", 10)
-	if(_id == "setStage"):
-		setFlag("RahiModule.rahiSlaveryStage", _args["stage"])
+	if(_id == "setCorruption"):
+		setFlag("TaviModule.Ch6Corruption", clamp(_args["newcorruption"], 0.0, 200.0))
