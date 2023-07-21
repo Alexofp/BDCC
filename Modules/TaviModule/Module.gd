@@ -105,6 +105,7 @@ func getFlags():
 		"Ch6IntroHappened": flag(FlagType.Bool),
 		"Ch6Corruption": flag(FlagType.Number),
 		"TaviIsNotVirgin": flag(FlagType.Bool),
+		"Ch6TaviSatisfied": flag(FlagType.Bool),
 	}
 
 func _init():
@@ -159,6 +160,9 @@ func _init():
 		"res://Modules/TaviModule/Chapter5/Ch5s7PlayerCellScene.gd",
 		"res://Modules/TaviModule/Chapter5/Ch5s7BElizaTaviScene.gd",
 		"res://Modules/TaviModule/Chapter5/Ch5s7MedicalTortureScene.gd",
+		
+		"res://Modules/TaviModule/Chapter6/Ch6TaviIntroScene.gd",
+		"res://Modules/TaviModule/Chapter6/Ch6TaviTalkScene.gd",
 		]
 	characters = [
 		"res://Modules/TaviModule/Chapter4/DirectorTau.gd",
@@ -199,6 +203,8 @@ func _init():
 		"res://Modules/TaviModule/Chapter5/Ch5s4EnablePowerEvent.gd",
 		"res://Modules/TaviModule/Chapter5/Ch5s5TaviPreparationEvent.gd",
 		"res://Modules/TaviModule/Chapter5/Ch5s7BElizaTaviEvent.gd",
+		
+		"res://Modules/TaviModule/Chapter6/Ch6TaviTalkEvent.gd",
 	]
 	quests = [
 		"res://Modules/TaviModule/TaviAppleQuest.gd",
@@ -240,6 +246,11 @@ func addCorruption(howMuch, showMessage = true):
 	var oldCor = currentCorruption
 	
 	currentCorruption += howMuch
+	if(howMuch > 0.0 && currentCorruption > 2.0):
+		currentCorruption = 2.0
+	if(howMuch < 0.0 && currentCorruption < 0.0):
+		currentCorruption = 0.0
+	
 	setFlag("TaviModule.Ch6Corruption", currentCorruption)
 	
 	
