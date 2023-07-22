@@ -30,7 +30,7 @@ jobs:
           name: bdcc-windows
           path: ./build/windows/
       - name: Post to Discord
-        uses: ToppleTheNun/discord-scm-action@version
+        uses: ToppleTheNun/discord-scm-action@v1.0.2
         with:
           discordWebhookId: ${{ secrets.DISCORD_WEBHOOK_ID }}
           discordWebhookToken: ${{ secrets.DISCORD_WEBHOOK_TOKEN }}
