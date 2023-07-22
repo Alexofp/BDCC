@@ -34,7 +34,7 @@ jobs:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
         uses: Ilshidur/action-discord@0.3.2
         with:
-          args: 'The project {{ EVENT_PAYLOAD.repository.full_name }} has been deployed. Action called: {{ GITHUB_ACTION }} as {{ EVENT_PAYLOAD.pull_request.id }}. Link example: https://nightly.link/Alexofp/BDCC/workflows/godot-ci/dev'
+          args: 'The project {{ EVENT_PAYLOAD.repository.full_name }} has been deployed. Action called: {{ GITHUB_ACTION }} as {{ EVENT_PAYLOAD }}. Link example: https://nightly.link/Alexofp/BDCC/workflows/godot-ci/dev'
 
   export-linux:
     name: Linux Export
