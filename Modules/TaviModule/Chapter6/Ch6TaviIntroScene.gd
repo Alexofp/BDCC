@@ -372,11 +372,11 @@ func _react(_action: String, _args):
 
 	if(_action == "tavi_licks_juices"):
 		processTime(3*60)
-		getModule("TaviModule").addCorruption(0.01)
+		getModule("TaviModule").addCorruption(1)
 
 	if(_action == "you_lick_juices"):
 		processTime(3*60)
-		getModule("TaviModule").addCorruption(-0.01)
+		getModule("TaviModule").addCorruption(-1)
 		GM.pc.addLust(30)
 
 	if(_action == "start_talk_scene"):
@@ -395,12 +395,12 @@ func _react(_action: String, _args):
 	if(_action == "do_fuck_cum_inside"):
 		processTime(3*60)
 		getCharacter("tavi").cummedInVaginaBy("pc")
-		getModule("TaviModule").addCorruption(0.01)
+		getModule("TaviModule").addCorruption(1)
 
 	if(_action == "do_fuck_pullout"):
 		processTime(3*60)
 		getCharacter("tavi").cummedOnBy("pc")
-		getModule("TaviModule").addCorruption(-0.01)
+		getModule("TaviModule").addCorruption(-1)
 
 	if(_action == "do_fuck_strapon_inside"):
 		processTime(5*60)
@@ -411,11 +411,11 @@ func _react(_action: String, _args):
 	if(_action == "do_fuck_strapon_knot"):
 		processTime(30*60)
 		getCharacter("tavi").cummedInVaginaBy("pc", FluidSource.Strapon)
-		getModule("TaviModule").addCorruption(0.01)
+		getModule("TaviModule").addCorruption(1)
 
 	if(_action == "do_fuck_strapon_no_knot"):
 		processTime(3*60)
 		#getCharacter("tavi").cummedOnBy("pc", FluidSource.Strapon)
-		getModule("TaviModule").addCorruption(-0.01)
+		getModule("TaviModule").addCorruption(-1)
 
 	setState(_action)

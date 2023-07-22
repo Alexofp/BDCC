@@ -26,7 +26,10 @@ func _run():
 		sayn("")
 		
 		addDisabledButton("Final Attack", "(not implemented yet :( ) Use everything that you and Tavi learned to prepare the last attack.\n\nTavi's corruption needs to be either 0% or 200%")
-		addButton("Train", "Train one of Tavi's skills", "train_menu")
+		if(getFlag("TaviModule.Ch6Tiredness", 0) >= 3):
+			addDisabledButton("Train", "Tavi is too tired")
+		else:
+			addButton("Train", "Train one of Tavi's skills", "train_menu")
 		
 		addButton("Leave", "Enough talking", "endthescene")
 		
@@ -59,6 +62,7 @@ func _react(_action: String, _args):
 
 	if(_action == "do_skill"):
 		setState("")
+		increaseFlag("TaviModule.Ch6Tiredness", 1)
 		runScene(_args[0]["scene"])
 		return
 
@@ -82,4 +86,4 @@ func getDebugActions():
 
 func doDebugAction(_id, _args = {}):
 	if(_id == "setCorruption"):
-		setFlag("TaviModule.Ch6Corruption", clamp(_args["newcorruption"], 0.0, 200.0))
+		setFlag("TaviModule.Ch6Corruption", clamp(_args["newcorruption"] / 100.0, 0.0, 2.0))

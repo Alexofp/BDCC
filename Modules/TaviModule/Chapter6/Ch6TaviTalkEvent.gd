@@ -44,6 +44,10 @@ func onButton(_method, _args):
 				setFlag("TaviModule.Ch6Corruption", avaiableSceneInfo["at"])
 				runScene(avaiableSceneInfo["scene"])
 				return
+			
+			setFlag("TaviModule.Ch6TaviSatisfied", true)
+			runScene("Ch6TaviMorningScene")
+			return
 		
 		runScene("Ch6TaviTalkScene")
 

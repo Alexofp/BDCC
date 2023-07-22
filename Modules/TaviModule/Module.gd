@@ -108,6 +108,7 @@ func getFlags():
 		"Ch6TaviSatisfied": flag(FlagType.Bool),
 		"Ch6CorruptionStage": flag(FlagType.Number), # 0 - default, 1 - horn signs, 2 - horns, 3 - womb mark
 		"Ch6PurityStage": flag(FlagType.Number), # 0 - default, 1 - talked about what happened, 2 - can somewhat control herself, 3 - pretty much old Tavi
+		"Ch6Tiredness": flag(FlagType.Number),
 		
 		"taviSkillCombat": flag(FlagType.Number),
 		"taviSkillSex": flag(FlagType.Number),
@@ -168,6 +169,9 @@ func _init():
 		
 		"res://Modules/TaviModule/Chapter6/Ch6TaviIntroScene.gd",
 		"res://Modules/TaviModule/Chapter6/Ch6TaviTalkScene.gd",
+		"res://Modules/TaviModule/Chapter6/Ch6TaviMorningScene.gd",
+		
+		"res://Modules/TaviModule/Chapter6/Skills/Ch6TaviCombatSkillScene.gd",
 		]
 	characters = [
 		"res://Modules/TaviModule/Chapter4/DirectorTau.gd",
@@ -230,6 +234,8 @@ func _init():
 func resetFlagsOnNewDay():
 	if(getFlag("TaviModule.Ch6TaviSatisfied")):
 		setFlag("TaviModule.Ch6TaviSatisfied", false)
+	if(getFlag("TaviModule.Ch6Tiredness", 0) != 0):
+		setFlag("TaviModule.Ch6Tiredness", 0)
 
 static func makeTaviAngry():
 	GM.main.setModuleFlag("TaviModule", "Tavi_IsAngryAtPlayer", true)
@@ -251,7 +257,7 @@ func getSkillInfo(skillID):
 		return {
 			name = "Combat",
 			desc = "Teaching Tavi how to stand up for herself",
-			scene = "RahiChillScene",
+			scene = "Ch6TaviCombatSkillScene",
 		}
 	if(skillID == "taviSkillSex"):
 		return {
@@ -268,7 +274,7 @@ func getSkillScore(skillID):
 	return Util.mini(Util.maxi(int(getFlag("TaviModule."+str(skillID), 0)), 0), 7)
 
 func advanceSkill(skillID, maxLevel = 7):
-	if(!getSkillInfo(skillID) == null):
+	if(getSkillInfo(skillID) == null):
 		return false
 	
 	if(getFlag("TaviModule."+str(skillID), 0) < maxLevel):
@@ -324,7 +330,18 @@ func isPure():
 		return true
 	return false
 
+func hasHorns():
+	if(getFlag("TaviModule.Ch6CorruptionStage", 0) >= 2):
+		return true
+	return false
+
+func hasWombMark():
+	if(getFlag("TaviModule.Ch6CorruptionStage", 0) >= 3):
+		return true
+	return false
+
 func addCorruption(howMuch, showMessage = true):
+	howMuch /= 100.0
 	var currentCorruption = getFlag("TaviModule.Ch6Corruption", 1.0)
 	var oldCor = currentCorruption
 	
