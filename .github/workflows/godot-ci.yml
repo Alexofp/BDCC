@@ -32,10 +32,10 @@ jobs:
       - name: Discord notification
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
-        if: env.DISCORD_WEBHOOK != null
+        if: env.DISCORD_WEBHOOK != null && github.ref == 'refs/heads/dev'
         uses: Ilshidur/action-discord@0.3.2
         with:
-          args: 'The project {{ EVENT_PAYLOAD.repository.full_name }} has been complied. Ref: {{ EVENT_PAYLOAD.push.ref }}.\nDownload (always latest dev build, might crash and burn and break your saves): https://nightly.link/Alexofp/BDCC/workflows/godot-ci/dev'
+          args: 'The project {{ EVENT_PAYLOAD.repository.full_name }} has been complied (Always latest dev build, might crash and burn and break your saves)\nDownload: https://nightly.link/Alexofp/BDCC/workflows/godot-ci/dev'
 
   export-linux:
     name: Linux Export
