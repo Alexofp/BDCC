@@ -1026,8 +1026,8 @@ func _react(_action: String, _args):
 		GM.pc.getInventory().forceEquipStoreOther(GlobalRegistry.createItem("GuardHelmetRiot"))
 		
 		getCharacter("tavi").removeAllRestraints()
-		getCharacter("tavi").getInventory().forceEquipStoreOther(GlobalRegistry.createItem("GuardArmorRiot"))
-		getCharacter("tavi").getInventory().forceEquipStoreOther(GlobalRegistry.createItem("GuardHelmetRiot"))
+		getCharacter("tavi").getInventory().forceEquipRemoveOther(GlobalRegistry.createItem("GuardArmorRiot"))
+		getCharacter("tavi").getInventory().forceEquipRemoveOther(GlobalRegistry.createItem("GuardHelmetRiot"))
 		
 		GM.pc.getInventory().addItem(GlobalRegistry.createItem("StunBaton"))
 
