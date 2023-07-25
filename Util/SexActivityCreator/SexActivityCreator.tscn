@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Util/SexActivityCreator/SexActivityCreator.gd" type="Script" id=1]
 [ext_resource path="res://UI/Options/OptionIntType.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Util/SexActivityCreator/ActivityActionsList.tscn" type="PackedScene" id=3]
 
 [node name="SexActivityCreator" type="Control"]
 anchor_right = 1.0
@@ -115,6 +116,13 @@ margin_bottom = 334.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
+[node name="PerTurnActions" parent="VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/StatePropertiesList" instance=ExtResource( 3 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 1076.0
+margin_bottom = 124.0
+labelText = "Every turn actions"
+
 [node name="ActionPropertiesList" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer"]
 margin_top = 338.0
 margin_right = 1076.0
@@ -198,11 +206,82 @@ margin_right = 488.0
 margin_bottom = 66.0
 text = "Add"
 
+[node name="ActionEditingDialog" type="WindowDialog" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -501.0
+margin_top = -248.5
+margin_right = 501.0
+margin_bottom = 248.5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ActionEditingDialog"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Label" type="Label" parent="ActionEditingDialog/VBoxContainer"]
+margin_right = 1002.0
+margin_bottom = 14.0
+text = "Editing XXX"
+
+[node name="ArgsListScroll" type="ScrollContainer" parent="ActionEditingDialog/VBoxContainer"]
+margin_top = 18.0
+margin_right = 1002.0
+margin_bottom = 473.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ArgsList" type="VBoxContainer" parent="ActionEditingDialog/VBoxContainer/ArgsListScroll"]
+margin_right = 1002.0
+margin_bottom = 455.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ActionEditingDialog/VBoxContainer"]
+margin_top = 477.0
+margin_right = 1002.0
+margin_bottom = 497.0
+
+[node name="ConfirmActionEditButton" type="Button" parent="ActionEditingDialog/VBoxContainer/HBoxContainer"]
+margin_right = 62.0
+margin_bottom = 20.0
+text = "Confirm"
+
+[node name="ExportedCodeDialog" type="WindowDialog" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -453.5
+margin_top = -244.5
+margin_right = 453.5
+margin_bottom = 244.5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ExportedCodeDialog"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="TextEdit" type="TextEdit" parent="ExportedCodeDialog/VBoxContainer"]
+margin_right = 907.0
+margin_bottom = 489.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+show_line_numbers = true
+draw_tabs = true
+
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/StatesActionsList/HBoxContainer/AddStateButton" to="." method="_on_AddStateButton_pressed"]
 [connection signal="item_selected" from="VBoxContainer/HBoxContainer/StatesActionsList/StatesList" to="." method="_on_StatesList_item_selected"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/StatesActionsList/HBoxContainer2/AddDomButton" to="." method="_on_AddDomButton_pressed"]
 [connection signal="item_selected" from="VBoxContainer/HBoxContainer/StatesActionsList/DomActionsList" to="." method="_on_DomActionsList_item_selected"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/StatesActionsList/HBoxContainer3/AddSubButton" to="." method="_on_AddSubButton_pressed"]
 [connection signal="item_selected" from="VBoxContainer/HBoxContainer/StatesActionsList/SubActionsList" to="." method="_on_SubActionsList_item_selected"]
+[connection signal="onAddButton" from="VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/StatePropertiesList/PerTurnActions" to="." method="_on_PerTurnActions_onAddButton"]
+[connection signal="onDeletePressed" from="VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/StatePropertiesList/PerTurnActions" to="." method="_on_PerTurnActions_onDeletePressed"]
+[connection signal="onDownPressed" from="VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/StatePropertiesList/PerTurnActions" to="." method="_on_PerTurnActions_onDownPressed"]
+[connection signal="onEditPressed" from="VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/StatePropertiesList/PerTurnActions" to="." method="_on_PerTurnActions_onEditPressed"]
+[connection signal="onUpPressed" from="VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/StatePropertiesList/PerTurnActions" to="." method="_on_PerTurnActions_onUpPressed"]
 [connection signal="value_changed" from="VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/ActionPropertiesList/ActionPriority" to="." method="_on_StatePriority_value_changed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer2/GenerateCodeButton" to="." method="_on_GenerateCodeButton_pressed"]
 [connection signal="pressed" from="WindowDialog/VBoxContainer/WindowAddButton" to="." method="_on_WindowAddButton_pressed"]
+[connection signal="pressed" from="ActionEditingDialog/VBoxContainer/HBoxContainer/ConfirmActionEditButton" to="." method="_on_ConfirmActionEditButton_pressed"]
