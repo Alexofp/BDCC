@@ -19,6 +19,8 @@ func _run():
 			addButton("Lesson 3", "Train Tavi's fighting skills", "les3")
 		if (combat >= 3):
 			addButton("Lesson 4", "Train Tavi's fighting skills further", "les4")
+		if (combat >= 4):
+			addButton("Lesson 5", "See if Tavi has learned something", "les5")
 		addButton("Cancel", "You changed your mind", "cancel_lesson")
 	if(state == "les1"):
 		saynn("Since Tavi has.. changed a bit after that last failed attempt to escape, it might be worth checking if she is still a capable fighter.")
@@ -241,11 +243,135 @@ func _run():
 		addButton("Continue", "That was a nice lesson", "endthescene")
 	if(state == "les4"):
 		playAnimation(StageScene.Duo, "stand", {npc="tavi"})
-		saynn("Tavi won last time. But that was because she used your past experiences with her against you. To truly test her you must stay focussed this time and not let her teasing get to you. She can't hurt you anyway.")
+		saynn("Tavi won last time. But that was because she used your past experiences with her against you. This time you will try to stay focussed and not let her teasing get to you. She can't hurt you physically anyway.")
 
 		saynn("[say=pc]Let's fight, Tavi.[/say]")
 
 		saynn("You take your spot. She takes hers. You lower your head a little and frown, she smiles kindly and puts her paws on her waist, looking quite relaxed.")
+
+		saynn("As the fight begins, Tavi acts first, slowly approaching you, watching your hands while swaying her hips seductively. She purrs teasingly as she starts circling you.")
+
+		saynn("[say=tavi]You know.. Why don't you just surrender to me? I promise you will enjoy it~.[/say]")
+
+		addButton("Punch", "Try to attack Tavi", "les4_attack")
+	if(state == "les4_attack"):
+		playAnimation(StageScene.Duo, "punch", {npc="tavi", npcAction="dodge"})
+		saynn("When you expect teasing.. it has a way smaller effect on you, allowing you to reach out and throw a good punch towards Tavi.")
+
+		saynn("But, of course, she dodges out of the way at the last second. Tavi smiles softly and rubs herself against you while you recover.")
+
+		saynn("[say=tavi]Mm-m~.. Impressive. But imagine how much better it would feel to submit to me?[/say]")
+
+		saynn("You ignore her comment and push her, throwing the tall feline off-balance a bit.")
+
+		saynn("[say=pc]I'm not falling for your tricks.[/say]")
+
+		saynn("Tavi frowns a little but that emotion quickly fades away, replaced by the cheeky smile as she continues to slowly circle you, keeping enough distance to make grabbing her not worth it.")
+
+		saynn("[say=tavi]You can have me, cutie. All you have to do is.. not fight it~.[/say]")
+
+		saynn("She learned to expect a single attack. But what if you mix things up a bit..")
+
+		addButton("Punch and kick", "Do two attacks in a row", "les4_firstdamage")
+	if(state == "les4_firstdamage"):
+		playAnimation(StageScene.Duo, "kick", {npc="tavi", npcAction="block"})
+		saynn("As you throw the weak punch towards her, Tavi evades the attack with her feline grace. But instead of retaliating completely, she, again, closes the distance and tries to rub her body against you. That's when you suddenly kick her, causing Tavi to grunt painfully as she blocks the attack at the last second, her forearms sustaining most of the damage.")
+
+		saynn("[say=tavi]Argh..[/say]")
+
+		saynn("Tavi hisses as she rubs her wrists, her cheeky smile fading away.")
+
+		saynn("[say=pc]Something is wrong~?[/say]")
+
+		saynn("Tall kitty stops and looks at you, her eyes aren't so confident anymore.")
+
+		saynn("[say=tavi]I'm fine. More than fine.[/say]")
+
+		saynn("Suddenly Tavi wiggles her ass and then leaps at you, her paws trying to hug you tightly. Big mistake..")
+
+		addButton("Throw her down", "Catch Tavi and redirect her towards the floor", "les4_bigdefeat")
+	if(state == "les4_bigdefeat"):
+		playAnimation(StageScene.Duo, "shove", {npc="tavi", npcAction="defeat"})
+		saynn("Tavi's last desperate attack goes horribly wrong as you catch her and, instead of letting her hug you, throw her away and towards the floor. She yelps painfully as she hits the cold surface and collapses.")
+
+		saynn("[say=tavi]Ouch!.. Ow.. H-hey..[/say]")
+
+		saynn("She is huffing while licking her bruises and scratches, her tail wagging annoyed.")
+
+		saynn("[say=pc]Some enemies will be able to resist your teasing, Tavi. They will quickly figure out that you're all bark and no bite.[/say]")
+
+		saynn("[say=tavi]So what do I do then..[/say]")
+
+		saynn("You shrug and crouch before her.")
+
+		saynn("[say=pc]You once said that pain is a tool. Why not use it?[/say]")
+
+		saynn("Tavi lowers her head.")
+
+		saynn("[say=tavi]I can't..[/say]")
+
+		saynn("[say=pc]You know what else you said?[/say]")
+
+		saynn("Tavi listens to you carefully. But you're staying silent.")
+
+		saynn("[say=tavi]You're not gonna say it?..[/say]")
+
+		saynn("[say=pc]You know everything already, Tavi. You must reach the conclusion yourself or it won't have an effect on you.[/say]")
+
+		saynn("She is clearly trying to bring up her old memories. But it seems like her brain is fighting her, trying to hide the right ones.")
+
+		saynn("[say=tavi]I need to think about it..[/say]")
+
+		saynn("You nod and decide to end the lesson there.")
+
+		addButton("Continue", "That was an alright lesson", "endthescene")
+	if(state == "les5"):
+		playAnimation(StageScene.Duo, "stand", {npc="tavi"})
+		saynn("Tavi might never be able to hurt others but she still needs to figure out how to defend herself. You call her and offer to do another fight.")
+
+		saynn("[say=tavi]You sure?..[/say]")
+
+		saynn("You nod and watch Tavi get into her spot. Her confidence surely took a hit after the last lesson. Maybe this time she will find a way to win.. because you're not gonna give her an easy time.")
+
+		addButton("Continue", "See what happens next", "les5_naked")
+	if(state == "les5_naked"):
+		addCharacter("tavi", ["naked"])
+		playAnimation(StageScene.Duo, "stand", {npc="tavi", npcBodyState={naked=true}})
+		saynn("You were about to do your first strike when Tavi's paws begin undoing the buttons on her shirt, exposing her {tavi.breasts} with green perky nipples. Seconds later the shorts go away too, exposing Tavi's neat pussy folds.")
+
+		saynn("She smiles, seeing your confusion.")
+
+		saynn("[say=tavi]What~? Might as well.[/say]")
+
+		saynn("That will surely make focussing a little harder.. but not impossible. You just have to avoid looking at her privates and pay attention to her paws instead..")
+
+		saynn("Tavi uses the opportunity to start walking towards you, her naked hips swaying so nicely..")
+
+		addButton("Kick her", "You must win", "les5_kick")
+	if(state == "les5_kick"):
+		playAnimation(StageScene.Duo, "kick", {npc="tavi", npcAction="dodge", npcBodyState={naked=true}})
+		saynn("Not everyone is gonna be attracted to her hips, you must stay cool. When Tavi closes the distance enough, you wind up a slow kick that she dodges with ease. Oh no, her naked breasts are jiggling so much as she does it. Tavi easily closes the distance yet again and even brushes her paw against your cheek.")
+
+		saynn("[say=tavi]You like my tits, don't you? Go on, touch them~.[/say]")
+
+		saynn("As you catch Tavi's hand, she starts holding yours back, digits intertwining with yours. Kinda wholesome..")
+
+		saynn("But that means she can't step away anymore. You prepare another attack..")
+
+		addButton("Continue", "See what happens next", "les5_tavi_does_pain")
+	if(state == "les5_tavi_does_pain"):
+		playAnimation(StageScene.Duo, "hurt", {npc="tavi", npcBodyState={naked=true}})
+		saynn("You were about to attack Tavi but then her paw extends its claws and puts pressure on yours, threatening to sink them in. And as soon as you relax your grip, the tall kitty slides behind your back and uses her other hand to yank on your hair, forcing a grunt out of you.")
+
+		saynn("[say=pc]Argh..[/say]")
+
+		saynn("That was.. unexpected to say the least. Tavi holds you like this, her clawed paw gets pressed against the exposed part of your neck, putting pressure there now.")
+
+		saynn("[say=pc]How are you..[/say]")
+
+		saynn("She leans closer to your ear, growling softly.")
+
+		saynn("[say=tavi]The painful sensations in the right circumstances can be as pleasurable as the sexual one, if not more~[/say]")
 
 
 func _react(_action: String, _args):
@@ -264,6 +390,9 @@ func _react(_action: String, _args):
 
 	if(_action == "les4"):
 		getModule("TaviModule").advanceSkill("taviSkillCombat", 4)
+
+	if(_action == "les5"):
+		getModule("TaviModule").advanceSkill("taviSkillCombat", 5)
 
 	if(_action == "cancel_lesson"):
 		increaseFlag("TaviModule.Ch6Tiredness", -1)
@@ -293,5 +422,25 @@ func _react(_action: String, _args):
 	if(_action == "les3_struggle"):
 		processTime(3*60)
 		GM.pc.addLust(50)
+
+	if(_action == "les4_attack"):
+		processTime(3*60)
+
+	if(_action == "les4_firstdamage"):
+		processTime(3*60)
+
+	if(_action == "les4_bigdefeat"):
+		processTime(2*60)
+
+	if(_action == "les5_naked"):
+		processTime(3*60)
+
+	if(_action == "les5_kick"):
+		GM.pc.addLust(30)
+
+	if(_action == "les5_tavi_does_pain"):
+		processTime(3*60)
+		GM.pc.addPain(20)
+		GM.pc.addLust(20)
 
 	setState(_action)
