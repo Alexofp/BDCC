@@ -3,13 +3,13 @@ extends Control
 var dialogWhat = ""
 onready var addDialog = $WindowDialog
 
-onready var actionPriority = $VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/ActionPropertiesList/ActionPriority
-
 onready var statesList = $VBoxContainer/HBoxContainer/StatesActionsList/StatesList
 onready var domActionsList = $VBoxContainer/HBoxContainer/StatesActionsList/DomActionsList
 onready var subActionsList = $VBoxContainer/HBoxContainer/StatesActionsList/SubActionsList
 
 onready var perTurnActionsList = $VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/StatePropertiesList/PerTurnActions
+onready var actionActionsList = $VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/ActionPropertiesList/ActionActionsList
+onready var conditionsList = $VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/ActionPropertiesList/ConditionsList
 
 onready var actionEditingDialog = $ActionEditingDialog
 onready var actionEditingArgsList = $ActionEditingDialog/VBoxContainer/ArgsListScroll/ArgsList
@@ -17,6 +17,10 @@ onready var actionEditingLabel = $ActionEditingDialog/VBoxContainer/Label
 
 onready var exportedCodeDialog = $ExportedCodeDialog
 onready var exportedCodeTextEdit = $ExportedCodeDialog/VBoxContainer/TextEdit
+
+onready var stateDynamicPropertiesList = $VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/StatePropertiesList/StateDynamicPropertiestList
+onready var dynamicPropertiesList = $VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/ActionPropertiesList/DynamicPropertiestList
+onready var activityPropertiesList = $VBoxContainer/ActivitySettingsScreen/ActivityPropertiesList
 
 var states = {}
 var domActions = {}
@@ -29,14 +33,57 @@ var currentlyEditing = ""
 var registeredActions = {}
 var registeredArgScenes = {}
 
+var stateDynamicPropertiesObjects = {}
+var dynamicPropertiesObjects = {}
+var activityPropertiesObjects = {}
+
 func _ready():
-	registerAction("res://Util/SexActivityCreator/Actions/Code.gd")
-	registerAction("res://Util/SexActivityCreator/Actions/BaseAction.gd")
-	registerAction("res://Util/SexActivityCreator/Actions/IfCondition.gd")
-	registerAction("res://Util/SexActivityCreator/Actions/EndCondition.gd")
-	actionPriority.setOptionName("Priority")
+	for path in Util.getFilesInFolder("res://Util/SexActivityCreator/Actions/"):
+		registerAction(path)
+	for path in Util.getFilesInFolder("res://Util/SexActivityCreator/Conditions/"):
+		registerAction(path)
 	
-	registerArgScene("res://Util/SexActivityCreator/ActionArgScenes/BigStringCode.tscn")
+	for path in Util.getFilesInFolder("res://Util/SexActivityCreator/ActionArgScenes/"):
+		if(path.get_extension() == "tscn"):
+			registerArgScene(path)
+
+	var actionPropertiesData = getActionProperties()
+	for propertyID in actionPropertiesData:
+		var theData = actionPropertiesData[propertyID]
+		var theScene = createArgScene(theData["type"])
+		dynamicPropertiesList.add_child(theScene)
+		theScene.dataID = propertyID
+		theScene.setOptions(theData)
+		if(theData.has("text")):
+			theScene.setText(theData["text"])
+		theScene.connect("onChange", self, "onActionPropertyChange")
+		dynamicPropertiesObjects[propertyID] = theScene
+		
+	var statePropertiesData = getStateProperties()
+	for propertyID in statePropertiesData:
+		var theData = statePropertiesData[propertyID]
+		var theScene = createArgScene(theData["type"])
+		stateDynamicPropertiesList.add_child(theScene)
+		theScene.dataID = propertyID
+		theScene.setOptions(theData)
+		if(theData.has("text")):
+			theScene.setText(theData["text"])
+		theScene.connect("onChange", self, "onStatePropertyChange")
+		stateDynamicPropertiesObjects[propertyID] = theScene
+
+	var activityPropertiesData = getSexActivityProperties()
+	for propertyID in activityPropertiesData:
+		var theData = activityPropertiesData[propertyID]
+		var theScene = createArgScene(theData["type"])
+		activityPropertiesList.add_child(theScene)
+		theScene.dataID = propertyID
+		theScene.setOptions(theData)
+		if(theData.has("text")):
+			theScene.setText(theData["text"])
+		theScene.setData(sexActivityProperties[propertyID])
+		theScene.connect("onChange", self, "onActivityPropertyChange")
+		activityPropertiesObjects[propertyID] = theScene
+
 
 func registerArgScene(path):
 	var theAction = load(path)
@@ -50,10 +97,16 @@ func createArgScene(id):
 func registerAction(path):
 	var theAction = load(path)
 	var theActionObject= theAction.new()
+	if(theActionObject.id == "error"):
+		return
 	registeredActions[theActionObject.id] = theAction
 	
-	perTurnActionsList.addOption(theActionObject.id, theActionObject.getName())
-
+	if(theActionObject.isAction()):
+		perTurnActionsList.addOption(theActionObject.id, theActionObject.getName())
+		actionActionsList.addOption(theActionObject.id, theActionObject.getName())
+	if(theActionObject.isCondition()):
+		conditionsList.addOption(theActionObject.id, theActionObject.getName())
+	
 func createAction(id):
 	return registeredActions[id].new()
 
@@ -134,11 +187,13 @@ func _on_AddStateButton_pressed():
 
 func _on_AddDomButton_pressed():
 	# Check if a state is selected
-	showAddDialog("addDomAction", "Adding a new dom action")
+	if(states.has(selectedState)):
+		showAddDialog("addDomAction", "Adding a new dom action")
 
 
 func _on_AddSubButton_pressed():
-	showAddDialog("addSubAction", "Adding a new sub aciton")
+	if(states.has(selectedState)):
+		showAddDialog("addSubAction", "Adding a new sub aciton")
 
 
 func getCurrentAction():
@@ -166,12 +221,16 @@ func updateRightPanel():
 			return
 		
 		var currentState = states[selectedState]
-		perTurnActionsList.clearActions()
-		var actionIndex = 0
-		for action in currentState["turnActions"]:
-			perTurnActionsList.addAction(actionIndex, action.getVisibleText())
-			
-			actionIndex += 1
+		perTurnActionsList.actionObjects = currentState["turnActions"]
+		perTurnActionsList.updateActions()
+#		perTurnActionsList.clearActions()
+#		var actionIndex = 0
+#		for action in currentState["turnActions"]:
+#			perTurnActionsList.addAction(actionIndex, action.getVisibleText())
+#
+#			actionIndex += 1
+		for propertyID in stateDynamicPropertiesObjects:
+			stateDynamicPropertiesObjects[propertyID].setData(currentState[propertyID])
 	
 	if(currentlyEditing == "domAction"):
 		$VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/ActionPropertiesList.visible = true
@@ -187,14 +246,22 @@ func updateRightPanel():
 			return
 		
 		
-		actionPriority.setOptionValue(theAction["priority"])
+		actionActionsList.actionObjects = theAction["actions"]
+		actionActionsList.updateActions()
+		conditionsList.actionObjects = theAction["conditions"]
+		conditionsList.updateActions()
 		
+		for propertyID in dynamicPropertiesObjects:
+			dynamicPropertiesObjects[propertyID].setData(theAction[propertyID])
 
 func createNewAction():
 	return {
 		priority = 0,
 		conditions = [],
 		actions = [],
+		name = "New action",
+		desc = "Change the description",
+		score = "1.0",
 	}
 
 func createNewState():
@@ -204,12 +271,45 @@ func createNewState():
 		turnActions = [],
 	}
 
-func _on_StatePriority_value_changed(_categoryID, _id, newvalue):
-	#print(newvalue)
-	var theAction = getCurrentAction()
-	if(theAction == null):
-		return
-	theAction["priority"] = newvalue
+func getActionProperties():
+	return {
+		"priority": {
+			"text": "Priority",
+			"type": "number",
+		},
+		"name": {
+			"text": "Name",
+			"type": "string",
+		},
+		"desc": {
+			"text": "Description",
+			"type": "string",
+		},
+		"score": {
+			"text": "Score",
+			"type": "string",
+		},
+	}
+
+func getStateProperties():
+	return {
+	}
+
+var sexActivityProperties = {
+	"id": "new_sex_action",
+	"name": "New sex action",
+}
+func getSexActivityProperties():
+	return {
+		"id": {
+			"text": "ID",
+			"type": "string",
+		},
+		"name": {
+			"text": "Name",
+			"type": "string",
+		},
+	}
 
 func _on_StatesList_item_selected(index):
 	var theSelectedStateID = states.keys()[index]
@@ -256,38 +356,6 @@ func _on_PerTurnActions_onAddButton(what):
 	updateRightPanel()
 
 
-func _on_PerTurnActions_onDownPressed(id):
-	var currentState = getCurrentState()
-	if(currentState == null):
-		return
-		
-	moveValueDown(currentState["turnActions"], id)
-	updateRightPanel()
-
-func _on_PerTurnActions_onUpPressed(id):
-	var currentState = getCurrentState()
-	if(currentState == null):
-		return
-	
-	moveValueUp(currentState["turnActions"], id)
-	updateRightPanel()
-
-func moveValueUp(theArray, theIndex):
-	var thingie = theArray[theIndex]
-	theArray.remove(theIndex)
-	theIndex -= 1
-	if(theIndex < 0):
-		theIndex = 0
-	theArray.insert(theIndex, thingie)
-
-func moveValueDown(theArray, theIndex):
-	var thingie = theArray[theIndex]
-	theArray.remove(theIndex)
-	theIndex += 1
-	if(theIndex > theArray.size()):
-		theIndex = theArray.size()
-	theArray.insert(theIndex, thingie)
-
 var currentlyEditingAction = null
 var addedEditingActionArgs = {}
 func startEditingAction(theAction):
@@ -330,22 +398,13 @@ func _on_PerTurnActions_onEditPressed(id):
 		
 	startEditingAction(currentState["turnActions"][id])
 
-
-func _on_PerTurnActions_onDeletePressed(id):
-	var currentState = getCurrentState()
-	if(currentState == null):
-		return
-	currentState["turnActions"].remove(id)
-	updateRightPanel()
-
-
 func _on_GenerateCodeButton_pressed():
 	var result = []
 	
 	result.append("extends SexActivityBase")
 	result.append("")
 	result.append("func _init():")
-	result.append("\tid = \"TESTACTIVITY\"")
+	result.append("\tid = \""+sexActivityProperties["id"]+"\"")
 	result.append("")
 	result.append("func getGoals():")
 	result.append("\treturn {}")
@@ -354,7 +413,7 @@ func _on_GenerateCodeButton_pressed():
 	result.append("\treturn .canStartActivity(_sexEngine, _domInfo, _subInfo)")
 	result.append("")
 	result.append("func getVisibleName():")
-	result.append("\treturn \"CHANGE ME\"")
+	result.append("\treturn \""+sexActivityProperties["name"]+"\"")
 	result.append("")
 	result.append("func getCategory():")
 	result.append("\treturn [\"Fuck\"]")
@@ -413,6 +472,168 @@ func _on_GenerateCodeButton_pressed():
 	if(states.empty()):
 		result.append("\tpass")
 	
+	result.append("")
+	var domActionToStates = {}
+	var subActionToStates = {}
+	for stateID in states:
+		for actionID in states[stateID]["domActions"]:
+			if(!domActionToStates.has(actionID)):
+				domActionToStates[actionID] = []
+			domActionToStates[actionID].append(stateID)
+		for actionID in states[stateID]["subActions"]:
+			if(!subActionToStates.has(actionID)):
+				subActionToStates[actionID] = []
+			subActionToStates[actionID].append(stateID)
+	
+	var actionsStuff = [
+		["func getDomActions():", domActionToStates, domActions, "func doDomAction(_id, _actionInfo):"],
+		["func getSubActions():", subActionToStates, subActions, "func doSubAction(_id, _actionInfo):"],
+	]
+	
+	for actionSide in actionsStuff:
+		result.append(actionSide[0])
+		result.append("\tvar actions = []")
+		for actionID in actionSide[1]:
+			var usedStates = actionSide[1][actionID]
+			result.append("\tif(state in ["+Util.joinWithBorders(usedStates, ", ", "\"")+"]):")
+			
+			var theAction = actionSide[2][actionID]
+			var beforeTT = "\t\t"
+			if(theAction["conditions"].size() > 0):
+				var cons = []
+				for con in theAction["conditions"]:
+					cons.append(con.generateCode())
+				
+				result.append("\t\tif("+Util.joinWithDifferentBorders(cons, " && ", "(", ")")+"):")
+				beforeTT = "\t\t\t"
+			
+			result.append(beforeTT+"actions.append({")
+			result.append(beforeTT+'\t"id": "'+actionID+'",')
+			result.append(beforeTT+'\t"score": '+str(theAction["score"])+',')
+			result.append(beforeTT+'\t"name": "'+str(theAction["name"])+'",')
+			result.append(beforeTT+'\t"desc": "'+str(theAction["desc"])+'",')
+			result.append(beforeTT+'\t"priority" : '+str(theAction["priority"])+',')
+			result.append(beforeTT+"})")
+				
+		result.append("\treturn actions")
+		result.append("")
+		
+		result.append(actionSide[3])
+		if(actionSide[2].empty()):
+			result.append("\tpass")
+		
+		for actionID in actionSide[2]:
+			result.append("\tif(_id == \""+actionID+"\"):")
+			result.append("\t\tvar text = \"\"")
+			
+			var currentFlow = 0
+			
+			for everyAction in actionSide[2][actionID]["actions"]:
+				var extraTabs = ""
+				for _i in range(currentFlow):
+					extraTabs += "\t"
+				
+				var generatedCode = everyAction.generateCode()
+				if(generatedCode == null || generatedCode == ""):
+					continue
+				var genCodeAr = generatedCode.split("\n")
+				for line in genCodeAr:
+					result.append("\t\t"+extraTabs+line)
+				
+				currentFlow += everyAction.changesFlow()
+			
+			result.append("\t\treturn {text = text}")
+		
+		result.append("")
 	
 	exportedCodeDialog.show_modal()
 	exportedCodeTextEdit.text = Util.join(result, "\n")
+
+
+func _on_ActionActionsList_onAddButton(what):
+	var theCurrentAction = getCurrentAction()
+	if(theCurrentAction == null):
+		return
+	
+	var newAction = createAction(what)
+	#var actionIndex = currentState["turnActions"].size()
+	theCurrentAction["actions"].append(newAction)
+	
+	# Start editing the new action here
+	var theArgs = newAction.getArgs()
+	if(theArgs != null && theArgs != {}):
+		startEditingAction(newAction)
+	
+	updateRightPanel()
+
+
+func _on_ActionActionsList_onEditPressed(id):
+	var theCurrentAction = getCurrentAction()
+	if(theCurrentAction == null):
+		return
+		
+	startEditingAction(theCurrentAction["actions"][id])
+
+
+func _on_ConditionsList_onAddButton(what):
+	var theCurrentAction = getCurrentAction()
+	if(theCurrentAction == null):
+		return
+	
+	var newAction = createAction(what)
+	#var actionIndex = currentState["turnActions"].size()
+	theCurrentAction["conditions"].append(newAction)
+	
+	# Start editing the new action here
+	var theArgs = newAction.getArgs()
+	if(theArgs != null && theArgs != {}):
+		startEditingAction(newAction)
+	
+	updateRightPanel()
+
+
+func _on_ConditionsList_onEditPressed(id):
+	var theCurrentAction = getCurrentAction()
+	if(theCurrentAction == null):
+		return
+		
+	startEditingAction(theCurrentAction["conditions"][id])
+
+func onActionPropertyChange(id, data):
+	var theCurrentAction = getCurrentAction()
+	if(theCurrentAction == null):
+		return
+	
+	if(!theCurrentAction.has(id)):
+		assert(false, "There is no "+str(id)+" in this")
+	
+	theCurrentAction[id] = data
+
+func onStatePropertyChange(id, data):
+	var theCurrentState = getCurrentState()
+	if(theCurrentState == null):
+		return
+	
+	if(!theCurrentState.has(id)):
+		assert(false, "There is no "+str(id)+" in this")
+	
+	theCurrentState[id] = data
+
+func onActivityPropertyChange(id, data):
+	if(!sexActivityProperties.has(id)):
+		assert(false, "There is no "+str(id)+" in this")
+	
+	sexActivityProperties[id] = data
+
+
+func hideAllScreens():
+	$VBoxContainer/HBoxContainer.visible = false
+	$VBoxContainer/ActivitySettingsScreen.visible = false
+
+func _on_ActivitySettingsButton_pressed():
+	hideAllScreens()
+	$VBoxContainer/ActivitySettingsScreen.visible = true
+
+func _on_StateAndActionsSettings_pressed():
+	hideAllScreens()
+	$VBoxContainer/HBoxContainer.visible = true

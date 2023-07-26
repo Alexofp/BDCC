@@ -1,7 +1,7 @@
 extends "res://Util/SexActivityCreator/ActionArgScenes/BaseActionArg.gd"
 
 func _init():
-	id = "bigstring"
+	id = "string"
 
 func setData(_data):
 	$VBoxContainer/TextEdit.text = _data
@@ -16,5 +16,5 @@ func setOptions(_options):
 	if(_options.has("value")):
 		setData(_options["value"])
 
-func _on_TextEdit_text_changed():
+func _on_TextEdit_text_changed(_new_text):
 	emitChanged()

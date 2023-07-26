@@ -19,3 +19,9 @@ func generateCode():
 
 func changesFlow():
 	return 0
+
+func isAction():
+	return true
+
+func isCondition():
+	return false

@@ -2,6 +2,9 @@ extends Control
 
 var id = "error"
 var valueID = ""
+var dataID = ""
+
+signal onChange(dataID, data)
 
 func setData(_data):
 	pass
@@ -14,3 +17,6 @@ func setText(_newText):
 
 func setOptions(_options):
 	pass
+
+func emitChanged():
+	emit_signal("onChange", dataID, getData())

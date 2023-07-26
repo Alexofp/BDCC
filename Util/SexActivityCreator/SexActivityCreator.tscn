@@ -1,7 +1,6 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Util/SexActivityCreator/SexActivityCreator.gd" type="Script" id=1]
-[ext_resource path="res://UI/Options/OptionIntType.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Util/SexActivityCreator/ActivityActionsList.tscn" type="PackedScene" id=3]
 
 [node name="SexActivityCreator" type="Control"]
@@ -116,11 +115,16 @@ margin_bottom = 334.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
+[node name="StateDynamicPropertiestList" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/StatePropertiesList"]
+margin_right = 1076.0
+size_flags_horizontal = 3
+
 [node name="PerTurnActions" parent="VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/StatePropertiesList" instance=ExtResource( 3 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
+margin_top = 4.0
 margin_right = 1076.0
-margin_bottom = 124.0
+margin_bottom = 128.0
 labelText = "Every turn actions"
 
 [node name="ActionPropertiesList" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer"]
@@ -135,12 +139,39 @@ margin_right = 1076.0
 margin_bottom = 14.0
 text = "Editing xxx"
 
-[node name="ActionPriority" parent="VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/ActionPropertiesList" instance=ExtResource( 2 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="DynamicPropertiestList" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/ActionPropertiesList"]
 margin_top = 18.0
 margin_right = 1076.0
-margin_bottom = 42.0
+margin_bottom = 18.0
+size_flags_horizontal = 3
+
+[node name="ConditionsList" parent="VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/ActionPropertiesList" instance=ExtResource( 3 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 22.0
+margin_right = 1076.0
+margin_bottom = 146.0
+labelText = "Conditions (And)"
+
+[node name="ActionActionsList" parent="VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/ActionPropertiesList" instance=ExtResource( 3 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 150.0
+margin_right = 1076.0
+margin_bottom = 274.0
+labelText = "What happens"
+
+[node name="ActivitySettingsScreen" type="VBoxContainer" parent="VBoxContainer"]
+visible = false
+margin_top = 362.0
+margin_right = 1280.0
+margin_bottom = 696.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ActivityPropertiesList" type="VBoxContainer" parent="VBoxContainer/ActivitySettingsScreen"]
+margin_right = 1280.0
+size_flags_horizontal = 3
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
 margin_top = 700.0
@@ -169,23 +200,23 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -244.0
-margin_top = -99.5
-margin_right = 244.0
-margin_bottom = 99.5
+margin_left = -544.5
+margin_top = -239.5
+margin_right = 544.5
+margin_bottom = 239.5
 
 [node name="VBoxContainer" type="VBoxContainer" parent="WindowDialog"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 
 [node name="Label" type="Label" parent="WindowDialog/VBoxContainer"]
-margin_right = 488.0
+margin_right = 1089.0
 margin_bottom = 14.0
 text = "Adding something"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="WindowDialog/VBoxContainer"]
 margin_top = 18.0
-margin_right = 488.0
+margin_right = 1089.0
 margin_bottom = 42.0
 
 [node name="Label" type="Label" parent="WindowDialog/VBoxContainer/HBoxContainer"]
@@ -196,13 +227,15 @@ text = "ID"
 
 [node name="LineEdit" type="LineEdit" parent="WindowDialog/VBoxContainer/HBoxContainer"]
 margin_left = 19.0
-margin_right = 488.0
+margin_right = 1089.0
 margin_bottom = 24.0
 size_flags_horizontal = 3
+caret_blink = true
+caret_blink_speed = 0.5
 
 [node name="WindowAddButton" type="Button" parent="WindowDialog/VBoxContainer"]
 margin_top = 46.0
-margin_right = 488.0
+margin_right = 1089.0
 margin_bottom = 66.0
 text = "Add"
 
@@ -211,37 +244,37 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -501.0
-margin_top = -248.5
-margin_right = 501.0
-margin_bottom = 248.5
+margin_left = -564.0
+margin_top = -252.0
+margin_right = 564.0
+margin_bottom = 252.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ActionEditingDialog"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 
 [node name="Label" type="Label" parent="ActionEditingDialog/VBoxContainer"]
-margin_right = 1002.0
+margin_right = 1128.0
 margin_bottom = 14.0
 text = "Editing XXX"
 
 [node name="ArgsListScroll" type="ScrollContainer" parent="ActionEditingDialog/VBoxContainer"]
 margin_top = 18.0
-margin_right = 1002.0
-margin_bottom = 473.0
+margin_right = 1128.0
+margin_bottom = 480.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="ArgsList" type="VBoxContainer" parent="ActionEditingDialog/VBoxContainer/ArgsListScroll"]
-margin_right = 1002.0
-margin_bottom = 455.0
+margin_right = 1128.0
+margin_bottom = 462.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="HBoxContainer" type="HBoxContainer" parent="ActionEditingDialog/VBoxContainer"]
-margin_top = 477.0
-margin_right = 1002.0
-margin_bottom = 497.0
+margin_top = 484.0
+margin_right = 1128.0
+margin_bottom = 504.0
 
 [node name="ConfirmActionEditButton" type="Button" parent="ActionEditingDialog/VBoxContainer/HBoxContainer"]
 margin_right = 62.0
@@ -270,6 +303,8 @@ size_flags_vertical = 3
 show_line_numbers = true
 draw_tabs = true
 
+[connection signal="pressed" from="VBoxContainer/HBoxContainer3/ActivitySettingsButton" to="." method="_on_ActivitySettingsButton_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer3/StateAndActionsSettings" to="." method="_on_StateAndActionsSettings_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/StatesActionsList/HBoxContainer/AddStateButton" to="." method="_on_AddStateButton_pressed"]
 [connection signal="item_selected" from="VBoxContainer/HBoxContainer/StatesActionsList/StatesList" to="." method="_on_StatesList_item_selected"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/StatesActionsList/HBoxContainer2/AddDomButton" to="." method="_on_AddDomButton_pressed"]
@@ -277,11 +312,11 @@ draw_tabs = true
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/StatesActionsList/HBoxContainer3/AddSubButton" to="." method="_on_AddSubButton_pressed"]
 [connection signal="item_selected" from="VBoxContainer/HBoxContainer/StatesActionsList/SubActionsList" to="." method="_on_SubActionsList_item_selected"]
 [connection signal="onAddButton" from="VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/StatePropertiesList/PerTurnActions" to="." method="_on_PerTurnActions_onAddButton"]
-[connection signal="onDeletePressed" from="VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/StatePropertiesList/PerTurnActions" to="." method="_on_PerTurnActions_onDeletePressed"]
-[connection signal="onDownPressed" from="VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/StatePropertiesList/PerTurnActions" to="." method="_on_PerTurnActions_onDownPressed"]
 [connection signal="onEditPressed" from="VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/StatePropertiesList/PerTurnActions" to="." method="_on_PerTurnActions_onEditPressed"]
-[connection signal="onUpPressed" from="VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/StatePropertiesList/PerTurnActions" to="." method="_on_PerTurnActions_onUpPressed"]
-[connection signal="value_changed" from="VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/ActionPropertiesList/ActionPriority" to="." method="_on_StatePriority_value_changed"]
+[connection signal="onAddButton" from="VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/ActionPropertiesList/ConditionsList" to="." method="_on_ConditionsList_onAddButton"]
+[connection signal="onEditPressed" from="VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/ActionPropertiesList/ConditionsList" to="." method="_on_ConditionsList_onEditPressed"]
+[connection signal="onAddButton" from="VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/ActionPropertiesList/ActionActionsList" to="." method="_on_ActionActionsList_onAddButton"]
+[connection signal="onEditPressed" from="VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/ActionPropertiesList/ActionActionsList" to="." method="_on_ActionActionsList_onEditPressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer2/GenerateCodeButton" to="." method="_on_GenerateCodeButton_pressed"]
 [connection signal="pressed" from="WindowDialog/VBoxContainer/WindowAddButton" to="." method="_on_WindowAddButton_pressed"]
 [connection signal="pressed" from="ActionEditingDialog/VBoxContainer/HBoxContainer/ConfirmActionEditButton" to="." method="_on_ConfirmActionEditButton_pressed"]

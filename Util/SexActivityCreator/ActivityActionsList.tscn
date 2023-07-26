@@ -1,7 +1,10 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Util/SexActivityCreator/ActivityActionsList.gd" type="Script" id=1]
 [ext_resource path="res://Util/SexActivityCreator/ActivityAcitonItem.tscn" type="PackedScene" id=2]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.121569, 0.121569, 0.121569, 1 )
 
 [node name="ActivityActionsList" type="VBoxContainer"]
 anchor_right = 1.0
@@ -36,6 +39,7 @@ margin_top = 24.0
 margin_right = 1280.0
 margin_bottom = 124.0
 rect_min_size = Vector2( 0, 100 )
+custom_styles/bg = SubResource( 1 )
 
 [node name="ActionList" type="VBoxContainer" parent="ScrollContainer"]
 margin_right = 1280.0

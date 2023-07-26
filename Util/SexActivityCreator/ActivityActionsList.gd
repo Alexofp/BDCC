@@ -13,6 +13,7 @@ signal onDownPressed(id)
 signal onDeletePressed(id)
 
 var actions = []
+var actionObjects = null
 
 var actionItemScene = preload("res://Util/SexActivityCreator/ActivityAcitonItem.tscn")
 
@@ -46,6 +47,14 @@ func addAction(id, text):
 func updateActions():
 	Util.delete_children(actionList)
 	
+	if(actionObjects != null):
+		var actionIndex = 0
+		actions.clear()
+		for action in actionObjects:
+			actions.append([actionIndex, action.getVisibleText()])
+			
+			actionIndex += 1
+	
 	for action in actions:
 		var newItem = actionItemScene.instance()
 		actionList.add_child(newItem)
@@ -60,8 +69,17 @@ func updateActions():
 func onActionEditPressed(id, _data):
 	emit_signal("onEditPressed", id)
 func onActionUpPressed(id, _data):
+	if(actionObjects != null):
+		Util.moveValueUp(actionObjects, id)
+		updateActions()
 	emit_signal("onUpPressed", id)
 func onActionDownPressed(id, _data):
+	if(actionObjects != null):
+		Util.moveValueDown(actionObjects, id)
+		updateActions()
 	emit_signal("onDownPressed", id)
 func onActionDeletePressed(id, _data):
+	if(actionObjects != null):
+		actionObjects.remove(id)
+		updateActions()
 	emit_signal("onDeletePressed", id)

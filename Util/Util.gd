@@ -90,6 +90,20 @@ static func join(arr: Array, separator: String = "") -> String:
 	output = output.left( output.length() - separator.length() )
 	return output
 
+static func joinWithBorders(arr: Array, separator: String = "", border: String = "\"") -> String:
+	var output = ""
+	for s in arr:
+		output += border + str(s) + border + separator
+	output = output.left( output.length() - separator.length() )
+	return output
+
+static func joinWithDifferentBorders(arr: Array, separator: String = "", leftborder: String = "\"", rightborder: String = "\"") -> String:
+	var output = ""
+	for s in arr:
+		output += leftborder + str(s) + rightborder + separator
+	output = output.left( output.length() - separator.length() )
+	return output
+
 # input 12345
 # output "3h 25m 45s"
 static func getTimeStringHumanReadable(t):
@@ -586,3 +600,19 @@ static func writeFile(path, content):
 	file.open(path, File.WRITE)
 	file.store_string(content)
 	file.close()
+
+static func moveValueUp(theArray, theIndex):
+	var thingie = theArray[theIndex]
+	theArray.remove(theIndex)
+	theIndex -= 1
+	if(theIndex < 0):
+		theIndex = 0
+	theArray.insert(theIndex, thingie)
+
+static func moveValueDown(theArray, theIndex):
+	var thingie = theArray[theIndex]
+	theArray.remove(theIndex)
+	theIndex += 1
+	if(theIndex > theArray.size()):
+		theIndex = theArray.size()
+	theArray.insert(theIndex, thingie)
