@@ -31,6 +31,7 @@ func _initScene(_args = []):
 		battleName = _args[1]
 		
 	enemyAIStrategy = enemyCharacter.getAiStrategy(battleName)
+	enemyAIStrategy.battleName = battleName
 	enemyAIStrategy.onBattleStart(GM.pc)
 	
 	GM.pc.beforeFightStarted()
@@ -801,7 +802,7 @@ func checkEnd():
 	return ""
 
 func pcHasAnyAttacksOfCategory(category):
-	var playerAttacks = GM.pc.getAttacks()
+	var playerAttacks = GM.pc.getAttacks(battleName)
 	for attackID in playerAttacks:
 		if(attackID is Dictionary):
 			attackID = attackID["attackID"]
@@ -814,7 +815,7 @@ func pcHasAnyAttacksOfCategory(category):
 	
 
 func addAttackButtons(category):
-	var playerAttacks = GM.pc.getAttacks()
+	var playerAttacks = GM.pc.getAttacks(battleName)
 	for attackDataOrString in playerAttacks:
 		var attackID
 		var attackData : Dictionary
@@ -926,6 +927,7 @@ func loadData(data):
 	lastPlayerAttackData = SAVE.loadVar(data, "lastPlayerAttackData", null)
 	
 	enemyAIStrategy = enemyCharacter.getAiStrategy(battleName)
+	enemyAIStrategy.battleName = battleName
 	enemyAIStrategy.setCharacterID(enemyID)
 	enemyAIStrategy.loadData(SAVE.loadVar(data, "enemyStrategyData", {}))
 

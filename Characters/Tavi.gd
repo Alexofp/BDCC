@@ -85,6 +85,11 @@ func getSmallDescription() -> String:
 func getSpecies():
 	return ["feline"]
 
+func _getAttacksForBattle(_battlename):
+	if(_battlename == "tavi_lust_battle"):
+		return ["stretchingAttack", "lickWounds", "trygetupattack"]
+	return null
+
 func _getAttacks():
 	return ["biteattack", "kickToBallsAttack", "slapTitsAttack", "stretchingAttack", "lickWounds", "shoveattack", "trygetupattack"]
 

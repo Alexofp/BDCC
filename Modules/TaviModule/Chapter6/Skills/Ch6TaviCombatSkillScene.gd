@@ -21,6 +21,8 @@ func _run():
 			addButton("Lesson 4", "Train Tavi's fighting skills further", "les4")
 		if (combat >= 4):
 			addButton("Lesson 5", "See if Tavi has learned something", "les5")
+		if (combat >= 5):
+			addButton("Sparring", "Fight Tavi", "sparring")
 		addButton("Cancel", "You changed your mind", "cancel_lesson")
 	if(state == "les1"):
 		saynn("Since Tavi has.. changed a bit after that last failed attempt to escape, it might be worth checking if she is still a capable fighter.")
@@ -371,8 +373,133 @@ func _run():
 
 		saynn("She leans closer to your ear, growling softly.")
 
-		saynn("[say=tavi]The painful sensations in the right circumstances can be as pleasurable as the sexual one, if not more~[/say]")
+		saynn("[say=tavi]I realized something very important~.[/say]")
 
+		saynn("Tavi bares her fangs and gently bites your ear, sending shivers down your spine.")
+
+		saynn("[say=tavi]The painful sensations in the right circumstances can be as pleasurable as the sexual one, if not more~.[/say]")
+
+		saynn("She is not.. wrong. You can't deny that having your hair pulled by a naked tall kitty that is now rubbing against you while nibbling your ears.. provides some nice contrast.")
+
+		saynn("But you gotta resist still.")
+
+		addButton("Reist", "Try to get out of her grasp", "les5_lose")
+	if(state == "les5_lose"):
+		playAnimation(StageScene.SexFaceSitting, "sit", {pc="tavi", npc="pc", bodyState={naked=true}})
+		saynn("Tavi is behind you, holding your hair.. Best thing you can come up with is stomping on her feet.")
+
+		saynn("But as soon as you raise your leg, Tavi sees it and yanks on your hair harder, bringing you down to the floor before pinning you.. using her body.")
+
+		saynn("[say=tavi]Not so fast~.[/say]")
+
+		saynn("Wow. Your head is trapped between her thighs, your eyes gaze upon her wet pussy. Tavi is smiling softly, watching you squirm under her.")
+
+		saynn("You realize that you lost. But you don't even mind it.")
+
+		saynn("[say=pc]Um. Good job.[/say]")
+
+		saynn("[say=tavi]Uh huh~.[/say]")
+
+		addButton("Enough", "That was a pretty good fight", "les5_enough")
+		addButton("Lick Tavi out", "Get to work", "les5_lick")
+	if(state == "les5_enough"):
+		playAnimation(StageScene.Duo, "stand", {npc="tavi", npcBodyState={naked=true}})
+		saynn("You carefully spread open her legs and crawl from under her. Tavi seems a bit disappointed but she smiles anyway.")
+
+		saynn("[say=tavi]Next time you lose I won't let you go~.[/say]")
+
+		saynn("Fair enough. You pat Tavi for figuring this whole fighting thing out. All she needs now is just more practice.")
+
+		addButton("Continue", "That was a nice lesson", "endthescene")
+	if(state == "les5_lick"):
+		playAnimation(StageScene.SexFaceSitting, "grind", {pc="tavi", npc="pc", bodyState={naked=true}})
+		saynn("Without saying much after that, you grab onto Tavi's and forcibly lower them, letting the tall kitty rest her crotch on your face.")
+
+		saynn("[say=tavi]So eager.. Just like old times..[/say]")
+
+		saynn("Tavi bites her lip and moans softly as you let your tongue out and start dragging it over her moist green pussy folds. It seems being a little rough and confident also makes her horny. You use the tip of your tongue to play with her clit and that makes Tavi arch her back and press her"+str(" virgin" if getModule("TaviModule").isVirgin() else "")+" slit into your face harder.")
+
+		saynn("[say=tavi]Oh fuck~..[/say]")
+
+		saynn("You can't really talk so you focus on lapping up her juices and teasing her folds. At some point it becomes too much for Tavi and so she starts riding your face, grinding her pussy against you and spreading her juices.")
+
+		saynn("[say=tavi]I'm sorry, Owner. But it feels too good~.[/say]")
+
+		saynn("Might as well allow her to do it.. this time. You stick your tongue out more and let the feline rub her crotch against.. until her muscles begin to tense up.")
+
+		saynn("[say=tavi]Oh.. I'm gonna..[/say]")
+
+		saynn("You can feel it quite well. Tavi's thighs close around your head tighter while her pussy starts pulsating and.. even squirts a little, covering your face with transparent lewd fluids. Her whole body shivers as she is going through her powerful orgasm. Her paws land on your chest and scratch it.. but you don't mind.")
+
+		saynn("[say=tavi]Yes-s~.. I'm such a good girl, aren't I? I know I am~.[/say]")
+
+		saynn("What a brat.. Tavi gets off your face, finally allowing you to breathe fully. Then kitty leans in closer and playfully licks your cheek.")
+
+		saynn("[say=tavi]Tasty~.[/say]")
+
+		saynn("You pat Tavi for figuring this whole fighting thing out. All she needs now is just more practice.")
+
+		addButton("Continue", "That was a nice lesson", "endthescene")
+	if(state == "sparring"):
+		playAnimation(StageScene.Duo, "stand", {npc="tavi"})
+		saynn("You invite Tavi to do a little sparring match.")
+
+		saynn("She takes her spot and prepares.")
+
+		saynn("[say=tavi]Let's see how much I've learned~.[/say]")
+
+		saynn("Tavi will only get more skilled if you win.")
+
+		addButton("Fight", "Start the fight", "do_fight")
+	if(state == "sparring_lost"):
+		playAnimation(StageScene.Duo, "defeat", {npc="tavi", npcBodyState={naked=true}})
+		saynn("Defeated, you drop to your knees before Tavi.")
+
+		saynn("The feline is smiling. Wait, how is she naked already..")
+
+		addButton("Continue", "See what happens next", "spar_tavi_rides_face")
+	if(state == "spar_tavi_rides_face"):
+		playAnimation(StageScene.SexFaceSitting, "grind", {pc="tavi", npc="pc", bodyState={naked=true}})
+		saynn("Tavi suddenly tackles you and then sits on your head, shoving her pussy into your face.")
+
+		saynn("[say=tavi]You lost, fair and square~.[/say]")
+
+		saynn("She traps your head between her girly thighs and starts grinding her sensitive petals against your face features, moaning softly as the friction provides her stimulation.")
+
+		saynn("Hard to say anything when someone's pussy is pressed against your lips.. So you just accept the loss and let Tavi ride you. Her horny scent is amazing though, you can't stop yourself from flicking your tongue out for a second and tasting her. But Tavi clearly wants more..")
+
+		saynn("[say=tavi]Don't hide that tongue~.[/say]")
+
+		saynn("She drags her claws over your cheeks until you submit and let your tongue roll out. Tavi instantly starts rubbing her pussy against it, her panting mixes with the occasional noise of love.")
+
+		saynn("[say=tavi]Good {pc.boy}.. Lick that"+str(" virgin" if getModule("TaviModule").isVirgin() else "")+" pussy up..[/say]")
+
+		saynn("Tavi holds onto your head while grinding her pussy against it.. harder and harder.. until the orgasm finally makes her body lock up and start shaking. Her thighs squeezing your head tight while her pulsing slit creates a strong torrent of her transparent girlcum, marking your face with her scent.")
+
+		saynn("[say=tavi]Ngh-h~..[/say]")
+
+		saynn("As Tavi raises herself from your face, you lick your lips, swallowing some of it.")
+
+		saynn("At least you can tell yourself that it was just training..")
+
+		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "sparring_won"):
+		playAnimation(StageScene.Duo, "stand", {npc="tavi", npcAction="defeat"})
+		saynn("Tavi falls to her knees before you, unable to continue fighting.")
+
+		saynn("She has lost. But at least it feels like she got some experience out of this.")
+
+		saynn("[say=tavi]How did I do..[/say]")
+
+		addButton("Good", "Tell her that she did well", "sparring_enough")
+	if(state == "sparring_enough"):
+		saynn("You approach Tavi and pat her on the head.")
+
+		saynn("[say=pc]You did well, Tavi.[/say]")
+
+		saynn("You hear soft purring coming from her. She is not so upset anymore about losing.")
+
+		addButton("Continue", "See what happens next", "endthescene")
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
@@ -443,4 +570,33 @@ func _react(_action: String, _args):
 		GM.pc.addPain(20)
 		GM.pc.addLust(20)
 
+	if(_action == "les5_lose"):
+		processTime(6*60)
+		GM.pc.addLust(20)
+
+	if(_action == "les5_lick"):
+		processTime(10*60)
+		GM.pc.cummedOnBy("tavi")
+
+	if(_action == "do_fight"):
+		runScene("FightScene", ["tavi", "tavi_lust_battle"], "tavi_fight")
+		return
+
+	if(_action == "spar_tavi_rides_face"):
+		processTime(10*60)
+		GM.pc.cummedOnBy("tavi")
+		GM.pc.cummedInMouthBy("tavi", FluidSource.Vagina, 0.2)
+
 	setState(_action)
+
+func _react_scene_end(_tag, _result):
+	if(_tag == "tavi_fight"):
+		processTime(20 * 60)
+		var battlestate = _result[0]
+		
+		if(battlestate == "win"):
+			getModule("TaviModule").advanceSkill("taviSkillCombat")
+			setState("sparring_won")
+			addExperienceToPlayer(10)
+		else:
+			setState("sparring_lost")

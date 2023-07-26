@@ -269,7 +269,14 @@ func isOverriddenPlayer():
 func _getAttacks():
 	return ["blunderAttack"]
 	
-func getAttacks():
+func _getAttacksForBattle(_battlename):
+	return null
+	
+func getAttacks(_battlename):
+	var battleAttacks = _getAttacksForBattle(_battlename)
+	if(battleAttacks != null):
+		return battleAttacks
+	
 	return _getAttacks()
 	
 func getArmor(_damageType):

@@ -2,6 +2,7 @@ extends Reference
 class_name AIStrategyBase
 
 var charID: String = ""
+var battleName: String = ""
 
 func getCharacter():
 	if(charID == null || charID == ""):
@@ -19,7 +20,7 @@ func getBestAttackIDsWeighted(_enemy):
 	
 	var savedAttacks = []
 	
-	var attacks = character.getAttacks()
+	var attacks = character.getAttacks(battleName)
 	
 	for attackID in attacks:
 		var attack: Attack = GlobalRegistry.getAttack(attackID)
