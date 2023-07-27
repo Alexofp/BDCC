@@ -25,3 +25,9 @@ func isAction():
 
 func isCondition():
 	return false
+
+func saveData():
+	pass
+
+func loadData(_data):
+	pass

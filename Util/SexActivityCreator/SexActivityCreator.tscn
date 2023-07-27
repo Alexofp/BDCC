@@ -27,7 +27,20 @@ margin_right = 247.0
 margin_bottom = 20.0
 text = "States and actions"
 
+[node name="CustomCodeButton" type="Button" parent="VBoxContainer/HBoxContainer3"]
+margin_left = 251.0
+margin_right = 347.0
+margin_bottom = 20.0
+text = "Custom code"
+
+[node name="CustomVarsButton" type="Button" parent="VBoxContainer/HBoxContainer3"]
+margin_left = 351.0
+margin_right = 421.0
+margin_bottom = 20.0
+text = "Variables"
+
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+visible = false
 margin_top = 24.0
 margin_right = 1280.0
 margin_bottom = 696.0
@@ -118,6 +131,7 @@ size_flags_vertical = 3
 [node name="StateDynamicPropertiestList" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/StatePropertiesList"]
 margin_right = 1076.0
 size_flags_horizontal = 3
+custom_constants/separation = 5
 
 [node name="PerTurnActions" parent="VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/StatePropertiesList" instance=ExtResource( 3 )]
 anchor_right = 0.0
@@ -144,6 +158,7 @@ margin_top = 18.0
 margin_right = 1076.0
 margin_bottom = 18.0
 size_flags_horizontal = 3
+custom_constants/separation = 5
 
 [node name="ConditionsList" parent="VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/ActionPropertiesList" instance=ExtResource( 3 )]
 anchor_right = 0.0
@@ -161,17 +176,112 @@ margin_right = 1076.0
 margin_bottom = 274.0
 labelText = "What happens"
 
-[node name="ActivitySettingsScreen" type="VBoxContainer" parent="VBoxContainer"]
-visible = false
-margin_top = 362.0
+[node name="ActivitySettingsScreen" type="ScrollContainer" parent="VBoxContainer"]
+margin_top = 24.0
 margin_right = 1280.0
 margin_bottom = 696.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="ActivityPropertiesList" type="VBoxContainer" parent="VBoxContainer/ActivitySettingsScreen"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/ActivitySettingsScreen"]
+margin_right = 1280.0
+margin_bottom = 672.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ActivityPropertiesList" type="VBoxContainer" parent="VBoxContainer/ActivitySettingsScreen/VBoxContainer"]
 margin_right = 1280.0
 size_flags_horizontal = 3
+custom_constants/separation = 5
+
+[node name="StartActionsList" parent="VBoxContainer/ActivitySettingsScreen/VBoxContainer" instance=ExtResource( 3 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 4.0
+margin_right = 1280.0
+margin_bottom = 128.0
+labelText = "On start actions"
+
+[node name="CustomCodeTab" type="VBoxContainer" parent="VBoxContainer"]
+visible = false
+margin_top = 24.0
+margin_right = 1280.0
+margin_bottom = 696.0
+size_flags_vertical = 3
+
+[node name="TextEdit" type="TextEdit" parent="VBoxContainer/CustomCodeTab"]
+margin_right = 1280.0
+margin_bottom = 672.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+show_line_numbers = true
+draw_tabs = true
+
+[node name="CustomVariablesTab" type="VBoxContainer" parent="VBoxContainer"]
+visible = false
+margin_top = 24.0
+margin_right = 1280.0
+margin_bottom = 696.0
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/CustomVariablesTab"]
+margin_right = 1280.0
+margin_bottom = 76.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/CustomVariablesTab/VBoxContainer"]
+margin_right = 1280.0
+margin_bottom = 24.0
+
+[node name="Label" type="Label" parent="VBoxContainer/CustomVariablesTab/VBoxContainer/HBoxContainer"]
+margin_top = 5.0
+margin_right = 91.0
+margin_bottom = 19.0
+text = "Variable name"
+
+[node name="LineEdit" type="LineEdit" parent="VBoxContainer/CustomVariablesTab/VBoxContainer/HBoxContainer"]
+margin_left = 95.0
+margin_right = 1280.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer/CustomVariablesTab/VBoxContainer"]
+margin_top = 28.0
+margin_right = 1280.0
+margin_bottom = 52.0
+
+[node name="Label" type="Label" parent="VBoxContainer/CustomVariablesTab/VBoxContainer/HBoxContainer2"]
+margin_top = 5.0
+margin_right = 84.0
+margin_bottom = 19.0
+text = "Default value"
+
+[node name="LineEdit" type="LineEdit" parent="VBoxContainer/CustomVariablesTab/VBoxContainer/HBoxContainer2"]
+margin_left = 88.0
+margin_right = 1280.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="VBoxContainer/CustomVariablesTab/VBoxContainer"]
+margin_top = 56.0
+margin_right = 1280.0
+margin_bottom = 76.0
+
+[node name="AddVariableButton" type="Button" parent="VBoxContainer/CustomVariablesTab/VBoxContainer/HBoxContainer3"]
+margin_right = 92.0
+margin_bottom = 20.0
+text = "Add Variable"
+
+[node name="RemoveVariableButton" type="Button" parent="VBoxContainer/CustomVariablesTab/VBoxContainer/HBoxContainer3"]
+margin_left = 96.0
+margin_right = 160.0
+margin_bottom = 20.0
+text = "Remove"
+
+[node name="VariableList" type="ItemList" parent="VBoxContainer/CustomVariablesTab"]
+margin_top = 80.0
+margin_right = 1280.0
+margin_bottom = 672.0
+size_flags_vertical = 3
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
 margin_top = 700.0
@@ -303,8 +413,38 @@ size_flags_vertical = 3
 show_line_numbers = true
 draw_tabs = true
 
+[node name="LoadCodeDialog" type="WindowDialog" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -453.5
+margin_top = -244.5
+margin_right = 453.5
+margin_bottom = 244.5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="LoadCodeDialog"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="TextEdit" type="TextEdit" parent="LoadCodeDialog/VBoxContainer"]
+margin_right = 907.0
+margin_bottom = 465.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+show_line_numbers = true
+draw_tabs = true
+
+[node name="LoadEverythingButton" type="Button" parent="LoadCodeDialog/VBoxContainer"]
+margin_top = 469.0
+margin_right = 907.0
+margin_bottom = 489.0
+text = "Load"
+
 [connection signal="pressed" from="VBoxContainer/HBoxContainer3/ActivitySettingsButton" to="." method="_on_ActivitySettingsButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer3/StateAndActionsSettings" to="." method="_on_StateAndActionsSettings_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer3/CustomCodeButton" to="." method="_on_CustomCodeButton_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer3/CustomVarsButton" to="." method="_on_CustomVarsButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/StatesActionsList/HBoxContainer/AddStateButton" to="." method="_on_AddStateButton_pressed"]
 [connection signal="item_selected" from="VBoxContainer/HBoxContainer/StatesActionsList/StatesList" to="." method="_on_StatesList_item_selected"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/StatesActionsList/HBoxContainer2/AddDomButton" to="." method="_on_AddDomButton_pressed"]
@@ -317,6 +457,13 @@ draw_tabs = true
 [connection signal="onEditPressed" from="VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/ActionPropertiesList/ConditionsList" to="." method="_on_ConditionsList_onEditPressed"]
 [connection signal="onAddButton" from="VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/ActionPropertiesList/ActionActionsList" to="." method="_on_ActionActionsList_onAddButton"]
 [connection signal="onEditPressed" from="VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/ActionPropertiesList/ActionActionsList" to="." method="_on_ActionActionsList_onEditPressed"]
+[connection signal="onAddButton" from="VBoxContainer/ActivitySettingsScreen/VBoxContainer/StartActionsList" to="." method="_on_StartActionsList_onAddButton"]
+[connection signal="onEditPressed" from="VBoxContainer/ActivitySettingsScreen/VBoxContainer/StartActionsList" to="." method="_on_StartActionsList_onEditPressed"]
+[connection signal="pressed" from="VBoxContainer/CustomVariablesTab/VBoxContainer/HBoxContainer3/AddVariableButton" to="." method="_on_AddVariableButton_pressed"]
+[connection signal="pressed" from="VBoxContainer/CustomVariablesTab/VBoxContainer/HBoxContainer3/RemoveVariableButton" to="." method="_on_RemoveVariableButton_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer2/SaveButton" to="." method="_on_SaveButton_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer2/LoadButton" to="." method="_on_LoadButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer2/GenerateCodeButton" to="." method="_on_GenerateCodeButton_pressed"]
 [connection signal="pressed" from="WindowDialog/VBoxContainer/WindowAddButton" to="." method="_on_WindowAddButton_pressed"]
 [connection signal="pressed" from="ActionEditingDialog/VBoxContainer/HBoxContainer/ConfirmActionEditButton" to="." method="_on_ConfirmActionEditButton_pressed"]
+[connection signal="pressed" from="LoadCodeDialog/VBoxContainer/LoadEverythingButton" to="." method="_on_LoadEverythingButton_pressed"]

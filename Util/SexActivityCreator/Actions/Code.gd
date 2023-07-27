@@ -25,3 +25,12 @@ func applyArgs(_data):
 
 func generateCode():
 	return storedCode
+
+func saveData():
+	return {
+		storedCode = storedCode,
+	}
+
+func loadData(_data):
+	if(_data.has("storedCode")):
+		storedCode = _data["storedCode"]

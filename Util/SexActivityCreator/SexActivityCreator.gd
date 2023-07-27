@@ -20,7 +20,8 @@ onready var exportedCodeTextEdit = $ExportedCodeDialog/VBoxContainer/TextEdit
 
 onready var stateDynamicPropertiesList = $VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/StatePropertiesList/StateDynamicPropertiestList
 onready var dynamicPropertiesList = $VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/ActionPropertiesList/DynamicPropertiestList
-onready var activityPropertiesList = $VBoxContainer/ActivitySettingsScreen/ActivityPropertiesList
+onready var activityPropertiesList = $VBoxContainer/ActivitySettingsScreen/VBoxContainer/ActivityPropertiesList
+onready var startActionsList = $VBoxContainer/ActivitySettingsScreen/VBoxContainer/StartActionsList
 
 var states = {}
 var domActions = {}
@@ -37,7 +38,13 @@ var stateDynamicPropertiesObjects = {}
 var dynamicPropertiesObjects = {}
 var activityPropertiesObjects = {}
 
+var customVariables = {}
+
 func _ready():
+	GlobalRegistry.registerFetishesFolder("res://Game/SexEngine/Fetish/")
+	GlobalRegistry.registerSexGoalsFolder("res://Game/SexEngine/Goal/")
+	
+	
 	for path in Util.getFilesInFolder("res://Util/SexActivityCreator/Actions/"):
 		registerAction(path)
 	for path in Util.getFilesInFolder("res://Util/SexActivityCreator/Conditions/"):
@@ -83,6 +90,8 @@ func _ready():
 		theScene.setData(sexActivityProperties[propertyID])
 		theScene.connect("onChange", self, "onActivityPropertyChange")
 		activityPropertiesObjects[propertyID] = theScene
+		
+	updateRightPanel()
 
 
 func registerArgScene(path):
@@ -104,6 +113,7 @@ func registerAction(path):
 	if(theActionObject.isAction()):
 		perTurnActionsList.addOption(theActionObject.id, theActionObject.getName())
 		actionActionsList.addOption(theActionObject.id, theActionObject.getName())
+		startActionsList.addOption(theActionObject.id, theActionObject.getName())
 	if(theActionObject.isCondition()):
 		conditionsList.addOption(theActionObject.id, theActionObject.getName())
 	
@@ -214,6 +224,9 @@ func updateRightPanel():
 	$VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/StatePropertiesList.visible = false
 	$VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/ActionPropertiesList.visible = false
 	
+	startActionsList.actionObjects = sexActivityProperties["startActions"]
+	startActionsList.updateActions()
+	
 	if(currentlyEditing == "state"):
 		$VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/StatePropertiesList.visible = true
 	
@@ -298,6 +311,11 @@ func getStateProperties():
 var sexActivityProperties = {
 	"id": "new_sex_action",
 	"name": "New sex action",
+	"startActions": [],
+	"category": "return [\"Fuck\"]",
+	"goals": {},
+	"domTags": {},
+	"subTags": {},
 }
 func getSexActivityProperties():
 	return {
@@ -308,6 +326,25 @@ func getSexActivityProperties():
 		"name": {
 			"text": "Name",
 			"type": "string",
+		},
+		"category": {
+			"text": "Category",
+			"type": "string",
+		},
+		"goals": {
+			"text": "Goals",
+			"type": "fetishesWithNumbers",
+			"goals": true,
+		},
+		"domTags": {
+			"text": "Dom tags",
+			"type": "tags",
+			"tags": SexActivityTag.getAllStrings(),
+		},
+		"subTags": {
+			"text": "Sub tags",
+			"type": "tags",
+			"tags": SexActivityTag.getAllStrings(),
 		},
 	}
 
@@ -398,16 +435,30 @@ func _on_PerTurnActions_onEditPressed(id):
 		
 	startEditingAction(currentState["turnActions"][id])
 
+func processTags(theTags):
+	var result = []
+	for tag in theTags:
+		result.append("SexActivityTag."+tag)
+	return Util.join(result, ", ")
+
 func _on_GenerateCodeButton_pressed():
 	var result = []
 	
 	result.append("extends SexActivityBase")
+	if(!customVariables.empty()):
+		result.append("")
+		for varID in customVariables:
+			result.append("var "+varID+" = "+customVariables[varID]["default"])
+	
 	result.append("")
 	result.append("func _init():")
 	result.append("\tid = \""+sexActivityProperties["id"]+"\"")
 	result.append("")
 	result.append("func getGoals():")
-	result.append("\treturn {}")
+	result.append("\treturn {")
+	for goalID in sexActivityProperties["goals"]:
+		result.append("\t\t"+goalID+": "+sexActivityProperties["goals"][goalID]+",")
+	result.append("\t}")
 	result.append("")
 	result.append("func canStartActivity(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexSubInfo):")
 	result.append("\treturn .canStartActivity(_sexEngine, _domInfo, _subInfo)")
@@ -416,13 +467,13 @@ func _on_GenerateCodeButton_pressed():
 	result.append("\treturn \""+sexActivityProperties["name"]+"\"")
 	result.append("")
 	result.append("func getCategory():")
-	result.append("\treturn [\"Fuck\"]")
+	result.append("\t"+sexActivityProperties["category"])
 	result.append("")
 	result.append("func getDomTags():")
-	result.append("\treturn []")
+	result.append("\treturn ["+processTags(sexActivityProperties["domTags"])+"]")
 	result.append("")
 	result.append("func getSubTags():")
-	result.append("\treturn []")
+	result.append("\treturn ["+processTags(sexActivityProperties["subTags"])+"]")
 	result.append("")
 	result.append("func getDomTagsCheck():")
 	result.append("\treturn .getDomTagsCheck()")
@@ -435,6 +486,22 @@ func _on_GenerateCodeButton_pressed():
 	result.append("\tstate = \"\"")
 	result.append("\tvar text = \"\"")
 	# stuff should happen here
+	if(true):
+		var currentFlow = 0
+		
+		for everyAction in sexActivityProperties["startActions"]:
+			var extraTabs = ""
+			for _i in range(currentFlow):
+				extraTabs += "\t"
+			
+			var generatedCode = everyAction.generateCode()
+			if(generatedCode == null || generatedCode == ""):
+				continue
+			var genCodeAr = generatedCode.split("\n")
+			for line in genCodeAr:
+				result.append("\t"+extraTabs+line)
+			
+			currentFlow += everyAction.changesFlow()
 	result.append("\treturn {")
 	result.append("\t\ttext = text,")
 	result.append("\t}")
@@ -546,6 +613,28 @@ func _on_GenerateCodeButton_pressed():
 		
 		result.append("")
 	
+	var customCodeText = $VBoxContainer/CustomCodeTab/TextEdit.text
+	for line in customCodeText.split("\n"):
+		result.append(line)
+	
+	if(!customVariables.empty()):
+		result.append("")
+		
+		result.append("func saveData():")
+		result.append("\tvar data = .saveData()")
+		result.append("")
+		for varID in customVariables:
+			result.append("\tdata[\""+varID+"\"] = "+varID)
+		
+		result.append("")
+		result.append("\treturn data")
+		result.append("")
+		result.append("func loadData(_data):")
+		result.append("\t.loadData(_data)")
+		result.append("")
+		for varID in customVariables:
+			result.append("\t"+varID+" = SAVE.loadVar(_data, \""+varID+"\", "+customVariables[varID]["default"]+")")
+	
 	exportedCodeDialog.show_modal()
 	exportedCodeTextEdit.text = Util.join(result, "\n")
 
@@ -629,6 +718,8 @@ func onActivityPropertyChange(id, data):
 func hideAllScreens():
 	$VBoxContainer/HBoxContainer.visible = false
 	$VBoxContainer/ActivitySettingsScreen.visible = false
+	$VBoxContainer/CustomCodeTab.visible = false
+	$VBoxContainer/CustomVariablesTab.visible = false
 
 func _on_ActivitySettingsButton_pressed():
 	hideAllScreens()
@@ -637,3 +728,164 @@ func _on_ActivitySettingsButton_pressed():
 func _on_StateAndActionsSettings_pressed():
 	hideAllScreens()
 	$VBoxContainer/HBoxContainer.visible = true
+
+
+func _on_StartActionsList_onAddButton(what):
+	var newAction = createAction(what)
+	#var actionIndex = currentState["turnActions"].size()
+	sexActivityProperties["startActions"].append(newAction)
+	
+	# Start editing the new action here
+	var theArgs = newAction.getArgs()
+	if(theArgs != null && theArgs != {}):
+		startEditingAction(newAction)
+	
+	updateRightPanel()
+
+func _on_StartActionsList_onEditPressed(id):
+	startEditingAction(sexActivityProperties["startActions"][id])
+
+
+func _on_CustomCodeButton_pressed():
+	hideAllScreens()
+	$VBoxContainer/CustomCodeTab.visible = true
+
+
+func _on_CustomVarsButton_pressed():
+	hideAllScreens()
+	$VBoxContainer/CustomVariablesTab.visible = true
+
+func updateVariableList():
+	$VBoxContainer/CustomVariablesTab/VariableList.clear()
+	for variableID in customVariables:
+		$VBoxContainer/CustomVariablesTab/VariableList.add_item(variableID + " = "+str(customVariables[variableID]["default"]))
+		
+func _on_AddVariableButton_pressed():
+	var newVarName = $VBoxContainer/CustomVariablesTab/VBoxContainer/HBoxContainer/LineEdit.text
+	var newVarDefault = $VBoxContainer/CustomVariablesTab/VBoxContainer/HBoxContainer2/LineEdit.text
+	if(newVarName == "" || newVarDefault == ""):
+		return
+	
+	customVariables[newVarName] = {default = newVarDefault}
+	updateVariableList()
+
+func _on_RemoveVariableButton_pressed():
+	if(!$VBoxContainer/CustomVariablesTab/VariableList.is_anything_selected()):
+		return
+	
+	var selectedVarIndex = $VBoxContainer/CustomVariablesTab/VariableList.get_selected_items()[0]
+	var selectedVar = customVariables.keys()[selectedVarIndex]
+	customVariables.erase(selectedVar)
+	updateVariableList()
+
+
+#var states = {}
+#var domActions = {}
+#var subActions = {}
+#
+#var customVariables = {}
+
+func serializeActions(actionsArray):
+	var result = []
+	for action in actionsArray:
+		result.append({
+			id = action.id,
+			data = action.saveData(),
+		})
+	return result
+
+func fixActionKeys(actionOrStateArray):
+	for actionOrStateID in actionOrStateArray:
+		var actionOrState = actionOrStateArray[actionOrStateID]
+		for key in actionOrState:
+			if(actionOrState[key] is Array && actionOrState[key].size() > 0 && actionOrState[key][0] is Reference):
+				actionOrState[key] = serializeActions(actionOrState[key])
+	return actionOrStateArray
+
+func fixPropertiesKeys(actionOrState):
+	for key in actionOrState:
+		if(actionOrState[key] is Array && actionOrState[key].size() > 0 && actionOrState[key][0] is Reference):
+			actionOrState[key] = serializeActions(actionOrState[key])
+	return actionOrState
+
+func _on_SaveButton_pressed():
+	var customCodeText = $VBoxContainer/CustomCodeTab/TextEdit.text
+	
+	var data = {
+		"sexActivityProperties": fixPropertiesKeys(sexActivityProperties.duplicate(true)),
+		"states": fixActionKeys(states.duplicate(true)),
+		"domActions": fixActionKeys(domActions.duplicate(true)),
+		"subActions": fixActionKeys(subActions.duplicate(true)),
+		"customVariables": customVariables,
+		"customCodeText": customCodeText,
+	}
+	
+	var resultText = JSON.print(data, "\t")
+	exportedCodeTextEdit.text = resultText
+	exportedCodeDialog.show_modal()
+
+
+func _on_LoadButton_pressed():
+	$LoadCodeDialog.visible = true
+
+func loadOr(data, key, nullValue = null):
+	if(!data.has(key)):
+		return nullValue
+	return data[key]
+
+func convertDataToActions(dataArray):
+	var result = []
+	for oldAction in dataArray:
+		var newAction = createAction(oldAction["id"])
+		newAction.loadData(oldAction["data"])
+		result.append(newAction)
+	return result
+
+func _on_LoadEverythingButton_pressed():
+	selectedState = ""
+	selectedDomAction = ""
+	selectedSubAction = ""
+	currentlyEditing = ""
+	
+	var dataStr = $LoadCodeDialog/VBoxContainer/TextEdit.text
+	var data = JSON.parse(dataStr).result
+	var customCodeText = loadOr(data, "customCodeText", "")
+	$VBoxContainer/CustomCodeTab/TextEdit.text = customCodeText
+	
+	customVariables = loadOr(data, "customVariables", {})
+	sexActivityProperties = loadOr(data, "sexActivityProperties", {})
+	sexActivityProperties["startActions"] = convertDataToActions(sexActivityProperties["startActions"])
+
+	states = loadOr(data, "states", {})
+	for stateID in states:
+		var state = states[stateID]
+		state["turnActions"] = convertDataToActions(state["turnActions"])
+
+	domActions = loadOr(data, "domActions", {})
+	for actionID in domActions:
+		var action = domActions[actionID]
+		action["conditions"] = convertDataToActions(action["conditions"])
+		action["actions"] = convertDataToActions(action["actions"])
+
+	subActions = loadOr(data, "subActions", {})
+	for actionID in subActions:
+		var action = subActions[actionID]
+		action["conditions"] = convertDataToActions(action["conditions"])
+		action["actions"] = convertDataToActions(action["actions"])
+
+	var activityPropertiesData = getSexActivityProperties()
+	for propertyID in activityPropertiesData:
+		#var theData = activityPropertiesData[propertyID]
+		#var theScene = createArgScene(theData["type"])
+		#activityPropertiesList.add_child(theScene)
+		#theScene.dataID = propertyID
+		#theScene.setOptions(theData)
+		#if(theData.has("text")):
+		#	theScene.setText(theData["text"])
+		activityPropertiesObjects[propertyID].setData(sexActivityProperties[propertyID])
+		#theScene.connect("onChange", self, "onActivityPropertyChange")
+		#activityPropertiesObjects[propertyID] = theScene
+
+	updateLeftPanel()
+	updateRightPanel()
+	$LoadCodeDialog.hide()

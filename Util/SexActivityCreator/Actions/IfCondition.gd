@@ -28,3 +28,12 @@ func generateCode():
 
 func changesFlow():
 	return 1
+
+func saveData():
+	return {
+		storedCode = storedCode,
+	}
+
+func loadData(_data):
+	if(_data.has("storedCode")):
+		storedCode = _data["storedCode"]
