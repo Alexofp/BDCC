@@ -888,4 +888,5 @@ func _on_LoadEverythingButton_pressed():
 
 	updateLeftPanel()
 	updateRightPanel()
+	updateVariableList()
 	$LoadCodeDialog.hide()

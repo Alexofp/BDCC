@@ -87,7 +87,7 @@ func getSpecies():
 
 func _getAttacksForBattle(_battlename):
 	if(_battlename == "tavi_lust_battle"):
-		return ["stretchingAttack", "lickWounds", "trygetupattack"]
+		return ["TaviAlluringGaze", "TaviFelineGrace", "TaviSeductiveWhispers", "TaviSensualScratches", "TaviTemptingTease", "stretchingAttack", "lickWounds", "trygetupattack"]
 	return null
 
 func _getAttacks():

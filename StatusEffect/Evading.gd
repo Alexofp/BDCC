@@ -1,5 +1,7 @@
 extends StatusEffectBase
 
+var howMuchDodge = 95
+
 func _init():
 	id = StatusEffect.Evading
 	isBattleOnly = true
@@ -9,6 +11,8 @@ func initArgs(_args = []):
 		turns = _args[0]
 	else:
 		turns = 1
+	if(_args.size() > 1):
+		howMuchDodge = _args[1]
 	
 func processBattleTurn():
 	turns -= 1
@@ -32,7 +36,7 @@ func getIconColor():
 
 func getBuffs():
 	return [
-		buff(Buff.DodgeChanceBuff, [95])
+		buff(Buff.DodgeChanceBuff, [howMuchDodge])
 	]
 
 func combine(_args = []):
@@ -44,7 +48,9 @@ func combine(_args = []):
 func saveData():
 	return {
 		"turns": turns,
+		"howMuchDodge": howMuchDodge,
 	}
 	
 func loadData(_data):
 	turns = SAVE.loadVar(_data, "turns", 3)
+	howMuchDodge = SAVE.loadVar(_data, "howMuchDodge", 95)
