@@ -14,6 +14,7 @@ func _init():
 	pickedSkinBColor=Color("ff00ff1c")
 	npcSkinData={
 	"hair": {"r": Color("ff7f1b9b"),"g": Color("ff00ff0f"),"b": Color("ff631c89"),},
+	"horns": {"r": Color("ff0f2c13"),"g": Color("ff0c2d16"),},
 	}
 	
 	npcLustInterests = {
@@ -50,6 +51,7 @@ func _init():
 		InterestTopic.SmallCock: Interest.SlightlyDislikes,
 		InterestTopic.Pregnant: Interest.Hates,
 	}
+	npcHasMenstrualCycle = true
 	
 func interestVerbalReaction(interest):
 	if(interest == InterestTopic.Pregnant):
@@ -115,6 +117,22 @@ func createBodyparts():
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("anus"))
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("felinetail"))
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("digilegs"))
+
+func updateBodyparts():
+	if(GlobalRegistry.getModule("TaviModule").hasHorns()):#.hasHorns()):
+		if(giveBodypartUnlessSame(GlobalRegistry.createBodypart("demonhorns2"))):
+			paintBodyparts()
+	elif(hasBodypart(BodypartSlot.Horns)):
+		removeBodypart(BodypartSlot.Horns)
+	
+	if(!GlobalRegistry.getModule("TaviModule").hasWombMark()):
+		if(!hasPerk(Perk.StartNoHeat) || !hasPerk(Perk.StartInfertile)):
+			skillsHolder.addPerk(Perk.StartNoHeat)
+			skillsHolder.addPerk(Perk.StartInfertile)
+	else:
+		if(hasPerk(Perk.StartNoHeat) || hasPerk(Perk.StartInfertile)):
+			skillsHolder.removePerk(Perk.StartNoHeat)
+			skillsHolder.removePerk(Perk.StartInfertile)
 
 func getLootTable(_battleName):
 	return InmateLoot.new()

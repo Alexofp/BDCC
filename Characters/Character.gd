@@ -191,6 +191,10 @@ func getBaseLustThreshold() -> int:
 func createBodyparts():
 	pass
 
+# GM.main.getFlag() is allowed here
+func updateBodyparts():
+	pass
+
 func paintBodyparts():
 	if(npcSkinData != null):
 		for bodypartSlot in npcSkinData:

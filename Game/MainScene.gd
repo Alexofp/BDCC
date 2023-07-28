@@ -91,6 +91,10 @@ func createStaticCharacters():
 		staticCharacters[characterObject.id] = characterObject
 		charactersNode.add_child(characterObject)
 	
+func updateStaticCharacters():
+	for charID in staticCharacters:
+		staticCharacters[charID].updateBodyparts()
+	
 func getCharacter(charID):
 	if(staticCharacters.has(charID)):
 		return staticCharacters[charID]
@@ -182,6 +186,7 @@ func getDynamicCharactersPools():
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	createStaticCharacters()
+	call_deferred("updateStaticCharacters")
 	
 	var pc = playerScene.new()
 	originalPC = pc

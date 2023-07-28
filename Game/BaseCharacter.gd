@@ -810,8 +810,9 @@ func giveBodypartUnlessSame(bodypart: Bodypart):
 	if(bodyparts.has(slot) && bodyparts[slot] != null):
 		if(bodypart.id == bodyparts[slot].id):
 			bodypart.queue_free()
-			return
+			return false
 	giveBodypart(bodypart)
+	return true
 
 func hasBodypart(slot):
 	if(bodyparts.has(slot) && bodyparts[slot] != null):

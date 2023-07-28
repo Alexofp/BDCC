@@ -24,6 +24,8 @@ func getPriority():
 
 func onButton(_method, _args):
 	if(_method == "talk"):
+		getCharacter("tavi").updateBodyparts()
+		
 		if(GM.ES.triggerReact(Trigger.TalkingToNPC, ["taviSlavery"])):
 			return
 		
