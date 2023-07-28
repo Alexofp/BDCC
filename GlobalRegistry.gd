@@ -73,6 +73,8 @@ signal donationDataUpdated
 var modsSupport = false
 var loadedMods = []
 
+var isInitialized = false
+
 func hasModSupport():
 	return modsSupport
 
@@ -358,6 +360,7 @@ func registerEverything():
 	var end = OS.get_ticks_usec()
 	var worker_time = (end-start)/1000000.0
 	Log.print("GlobalRegistry fully initialized in: %s seconds" % [worker_time])
+	isInitialized = true
 	
 # The point is that it will still generate unique ids even after saving/loading
 func generateUniqueID():

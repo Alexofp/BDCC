@@ -21,7 +21,12 @@ onready var exportedCodeTextEdit = $ExportedCodeDialog/VBoxContainer/TextEdit
 onready var stateDynamicPropertiesList = $VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/StatePropertiesList/StateDynamicPropertiestList
 onready var dynamicPropertiesList = $VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/ActionPropertiesList/DynamicPropertiestList
 onready var activityPropertiesList = $VBoxContainer/ActivitySettingsScreen/VBoxContainer/ActivityPropertiesList
-onready var startActionsList = $VBoxContainer/ActivitySettingsScreen/VBoxContainer/StartActionsList
+onready var startActionsList = $VBoxContainer/ActivitySettingsScreen/VBoxContainer/VBoxContainer/StartActionsList
+onready var startConditionsList = $VBoxContainer/ActivitySettingsScreen/VBoxContainer/VBoxContainer/StartConditionsList
+
+onready var stateDefaultAnimPicker = $VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/StatePropertiesList/StateDefaultAnimPicker
+
+signal onClosePressed
 
 var states = {}
 var domActions = {}
@@ -40,10 +45,13 @@ var activityPropertiesObjects = {}
 
 var customVariables = {}
 
+func _init():
+	if(!GlobalRegistry.isInitialized):
+		GlobalRegistry.registerFetishesFolder("res://Game/SexEngine/Fetish/")
+		GlobalRegistry.registerSexGoalsFolder("res://Game/SexEngine/Goal/")
+		GlobalRegistry.registerStageSceneFolder("res://Player/StageScene3D/Scenes/")
+
 func _ready():
-	GlobalRegistry.registerFetishesFolder("res://Game/SexEngine/Fetish/")
-	GlobalRegistry.registerSexGoalsFolder("res://Game/SexEngine/Goal/")
-	
 	
 	for path in Util.getFilesInFolder("res://Util/SexActivityCreator/Actions/"):
 		registerAction(path)
@@ -90,9 +98,13 @@ func _ready():
 		theScene.setData(sexActivityProperties[propertyID])
 		theScene.connect("onChange", self, "onActivityPropertyChange")
 		activityPropertiesObjects[propertyID] = theScene
-		
+	
+	hideAllScreens()
+	$VBoxContainer/ActivitySettingsScreen.visible = true
+	states[""] = createNewState()
+	updateLeftPanel()
 	updateRightPanel()
-
+	
 
 func registerArgScene(path):
 	var theAction = load(path)
@@ -116,6 +128,7 @@ func registerAction(path):
 		startActionsList.addOption(theActionObject.id, theActionObject.getName())
 	if(theActionObject.isCondition()):
 		conditionsList.addOption(theActionObject.id, theActionObject.getName())
+		startConditionsList.addOption(theActionObject.id, theActionObject.getName())
 	
 func createAction(id):
 	return registeredActions[id].new()
@@ -227,6 +240,9 @@ func updateRightPanel():
 	startActionsList.actionObjects = sexActivityProperties["startActions"]
 	startActionsList.updateActions()
 	
+	startConditionsList.actionObjects = sexActivityProperties["startConditions"]
+	startConditionsList.updateActions()
+	
 	if(currentlyEditing == "state"):
 		$VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/StatePropertiesList.visible = true
 	
@@ -244,6 +260,8 @@ func updateRightPanel():
 #			actionIndex += 1
 		for propertyID in stateDynamicPropertiesObjects:
 			stateDynamicPropertiesObjects[propertyID].setData(currentState[propertyID])
+		
+		stateDefaultAnimPicker.setData(currentState["animation"])
 	
 	if(currentlyEditing == "domAction"):
 		$VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/ActionPropertiesList.visible = true
@@ -282,6 +300,12 @@ func createNewState():
 		domActions = [],
 		subActions = [],
 		turnActions = [],
+		animation = {
+			selectedStage = StageScene.SexAllFours,
+			selecedAnim = "tease",
+			selectedPC = "domID",
+			selectedNPC = "subID",
+		}
 	}
 
 func getActionProperties():
@@ -312,6 +336,7 @@ var sexActivityProperties = {
 	"id": "new_sex_action",
 	"name": "New sex action",
 	"startActions": [],
+	"startConditions": [],
 	"category": "return [\"Fuck\"]",
 	"goals": {},
 	"domTags": {},
@@ -357,14 +382,22 @@ func _on_StatesList_item_selected(index):
 
 
 func _on_DomActionsList_item_selected(index):
-	var theSelectedID = domActions.keys()[index]
+	var currentState = getCurrentState()
+	if(currentState == null):
+		return
+	
+	var theSelectedID = currentState["domActions"][index]
 	selectedDomAction = theSelectedID
 	currentlyEditing = "domAction"
 	updateRightPanel()
 
 
 func _on_SubActionsList_item_selected(index):
-	var theSelectedID = subActions.keys()[index]
+	var currentState = getCurrentState()
+	if(currentState == null):
+		return
+	
+	var theSelectedID = currentState["subActions"][index]
 	selectedSubAction = theSelectedID
 	currentlyEditing = "subAction"
 	updateRightPanel()
@@ -461,6 +494,9 @@ func _on_GenerateCodeButton_pressed():
 	result.append("\t}")
 	result.append("")
 	result.append("func canStartActivity(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexSubInfo):")
+	for condition in sexActivityProperties["startConditions"]:
+		result.append("\tif(!("+condition.generateCode()+")):")
+		result.append("\t\treturn false")
 	result.append("\treturn .canStartActivity(_sexEngine, _domInfo, _subInfo)")
 	result.append("")
 	result.append("func getVisibleName():")
@@ -634,6 +670,18 @@ func _on_GenerateCodeButton_pressed():
 		result.append("")
 		for varID in customVariables:
 			result.append("\t"+varID+" = SAVE.loadVar(_data, \""+varID+"\", "+customVariables[varID]["default"]+")")
+	
+	if(!states.empty()):
+		result.append("")
+		result.append("func getAnimation():")
+		
+		for stateID in states:
+			var state = states[stateID]
+			var anim = state["animation"]
+			
+			result.append("\tif(state == \""+stateID+"\"):")
+			result.append("\t\treturn [StageScene."+anim["selectedStage"]+", \""+anim["selecedAnim"]+"\", {pc="+anim["selectedPC"]+", npc="+anim["selectedNPC"]+"}]")
+			
 	
 	exportedCodeDialog.show_modal()
 	exportedCodeTextEdit.text = Util.join(result, "\n")
@@ -820,7 +868,7 @@ func _on_SaveButton_pressed():
 		"customCodeText": customCodeText,
 	}
 	
-	var resultText = JSON.print(data, "\t")
+	var resultText = JSON.print(data)#, "\t"
 	exportedCodeTextEdit.text = resultText
 	exportedCodeDialog.show_modal()
 
@@ -855,6 +903,7 @@ func _on_LoadEverythingButton_pressed():
 	customVariables = loadOr(data, "customVariables", {})
 	sexActivityProperties = loadOr(data, "sexActivityProperties", {})
 	sexActivityProperties["startActions"] = convertDataToActions(sexActivityProperties["startActions"])
+	sexActivityProperties["startConditions"] = convertDataToActions(sexActivityProperties["startConditions"])
 
 	states = loadOr(data, "states", {})
 	for stateID in states:
@@ -890,3 +939,90 @@ func _on_LoadEverythingButton_pressed():
 	updateRightPanel()
 	updateVariableList()
 	$LoadCodeDialog.hide()
+
+
+func _on_StartConditionsList_onAddButton(what):
+	var newAction = createAction(what)
+	#var actionIndex = currentState["turnActions"].size()
+	sexActivityProperties["startConditions"].append(newAction)
+	
+	# Start editing the new action here
+	var theArgs = newAction.getArgs()
+	if(theArgs != null && theArgs != {}):
+		startEditingAction(newAction)
+	
+	updateRightPanel()
+
+func _on_StartConditionsList_onEditPressed(id):
+	startEditingAction(sexActivityProperties["startConditions"][id])
+
+func _on_CloseButton_pressed():
+	emit_signal("onClosePressed")
+
+
+func _on_RemoveStateButton_pressed():
+	if(!$VBoxContainer/HBoxContainer/StatesActionsList/StatesList.is_anything_selected()):
+		return
+	
+	var stateIDToRemove = states.keys()[$VBoxContainer/HBoxContainer/StatesActionsList/StatesList.get_selected_items()[0]]
+	states.erase(stateIDToRemove)
+	if(selectedState == stateIDToRemove):
+		selectedState = ""
+	removeUselessActions()
+	updateLeftPanel()
+	updateRightPanel()
+
+func removeUselessActions():
+	for actionID in domActions:
+		var foundState = false
+		#var action = theActions[actionID]
+		
+		for stateID in states:
+			var state = states[stateID]
+			
+			if(actionID in state["domActions"]):
+				foundState = true
+				break
+	
+		if(!foundState):
+			print("REMOVED ACTION "+actionID+" BECAUSE ITS NOT USED ANYWHERE")
+			domActions.erase(actionID)
+		
+	for actionID in subActions:
+		var foundState = false
+		#var action = theActions[actionID]
+		
+		for stateID in states:
+			var state = states[stateID]
+			
+			if(actionID in state["subActions"]):
+				foundState = true
+				break
+	
+		if(!foundState):
+			print("REMOVED ACTION "+actionID+" BECAUSE ITS NOT USED ANYWHERE")
+			subActions.erase(actionID)
+
+
+func _on_removeDomButton_pressed():
+	var currentState = getCurrentState()
+	if(!$VBoxContainer/HBoxContainer/StatesActionsList/DomActionsList.is_anything_selected() || currentState == null):
+		return
+	
+	var index = $VBoxContainer/HBoxContainer/StatesActionsList/DomActionsList.get_selected_items()[0]
+	currentState["domActions"].remove(index)
+	removeUselessActions()
+	updateLeftPanel()
+	updateRightPanel()
+
+
+func _on_RemoveSubButton_pressed():
+	var currentState = getCurrentState()
+	if(!$VBoxContainer/HBoxContainer/StatesActionsList/SubActionsList.is_anything_selected() || currentState == null):
+		return
+	
+	var index = $VBoxContainer/HBoxContainer/StatesActionsList/SubActionsList.get_selected_items()[0]
+	currentState["subActions"].remove(index)
+	removeUselessActions()
+	updateLeftPanel()
+	updateRightPanel()

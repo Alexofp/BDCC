@@ -6,7 +6,7 @@ func getName():
 	return "Error"
 
 func getVisibleText():
-	return "MEW MEW"
+	return generateCode()
 
 func getArgs():
 	return null

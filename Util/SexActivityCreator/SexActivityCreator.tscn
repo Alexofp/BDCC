@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Util/SexActivityCreator/SexActivityCreator.gd" type="Script" id=1]
+[ext_resource path="res://Util/SexActivityCreator/StageSceneAnimPicker.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Util/SexActivityCreator/ActivityActionsList.tscn" type="PackedScene" id=3]
 
 [node name="SexActivityCreator" type="Control"]
@@ -40,7 +41,6 @@ margin_bottom = 20.0
 text = "Variables"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
-visible = false
 margin_top = 24.0
 margin_right = 1280.0
 margin_bottom = 696.0
@@ -64,6 +64,12 @@ margin_right = 73.0
 margin_bottom = 20.0
 text = "Add state"
 
+[node name="RemoveStateButton" type="Button" parent="VBoxContainer/HBoxContainer/StatesActionsList/HBoxContainer"]
+margin_left = 77.0
+margin_right = 141.0
+margin_bottom = 20.0
+text = "Remove"
+
 [node name="StatesList" type="ItemList" parent="VBoxContainer/HBoxContainer/StatesActionsList"]
 margin_top = 24.0
 margin_right = 200.0
@@ -82,6 +88,12 @@ margin_right = 115.0
 margin_bottom = 20.0
 text = "Add Dom action"
 
+[node name="removeDomButton" type="Button" parent="VBoxContainer/HBoxContainer/StatesActionsList/HBoxContainer2"]
+margin_left = 119.0
+margin_right = 183.0
+margin_bottom = 20.0
+text = "Remove"
+
 [node name="DomActionsList" type="ItemList" parent="VBoxContainer/HBoxContainer/StatesActionsList"]
 margin_top = 249.0
 margin_right = 200.0
@@ -99,6 +111,12 @@ margin_bottom = 470.0
 margin_right = 107.0
 margin_bottom = 20.0
 text = "Add Sub action"
+
+[node name="RemoveSubButton" type="Button" parent="VBoxContainer/HBoxContainer/StatesActionsList/HBoxContainer3"]
+margin_left = 111.0
+margin_right = 175.0
+margin_bottom = 20.0
+text = "Remove"
 
 [node name="SubActionsList" type="ItemList" parent="VBoxContainer/HBoxContainer/StatesActionsList"]
 margin_top = 474.0
@@ -141,6 +159,13 @@ margin_right = 1076.0
 margin_bottom = 128.0
 labelText = "Every turn actions"
 
+[node name="StateDefaultAnimPicker" parent="VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/StatePropertiesList" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 132.0
+margin_right = 1076.0
+margin_bottom = 152.0
+
 [node name="ActionPropertiesList" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer"]
 margin_top = 338.0
 margin_right = 1076.0
@@ -177,29 +202,48 @@ margin_bottom = 274.0
 labelText = "What happens"
 
 [node name="ActivitySettingsScreen" type="ScrollContainer" parent="VBoxContainer"]
+visible = false
 margin_top = 24.0
 margin_right = 1280.0
 margin_bottom = 696.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/ActivitySettingsScreen"]
+[node name="VBoxContainer" type="HBoxContainer" parent="VBoxContainer/ActivitySettingsScreen"]
 margin_right = 1280.0
 margin_bottom = 672.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="ActivityPropertiesList" type="VBoxContainer" parent="VBoxContainer/ActivitySettingsScreen/VBoxContainer"]
-margin_right = 1280.0
+margin_right = 638.0
+margin_bottom = 672.0
 size_flags_horizontal = 3
+size_flags_vertical = 3
 custom_constants/separation = 5
 
-[node name="StartActionsList" parent="VBoxContainer/ActivitySettingsScreen/VBoxContainer" instance=ExtResource( 3 )]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/ActivitySettingsScreen/VBoxContainer"]
+margin_left = 642.0
+margin_right = 1280.0
+margin_bottom = 672.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="StartConditionsList" parent="VBoxContainer/ActivitySettingsScreen/VBoxContainer/VBoxContainer" instance=ExtResource( 3 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 4.0
-margin_right = 1280.0
-margin_bottom = 128.0
+margin_right = 638.0
+margin_bottom = 124.0
+size_flags_horizontal = 3
+labelText = "Can start conditions"
+
+[node name="StartActionsList" parent="VBoxContainer/ActivitySettingsScreen/VBoxContainer/VBoxContainer" instance=ExtResource( 3 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 128.0
+margin_right = 638.0
+margin_bottom = 252.0
+size_flags_horizontal = 3
 labelText = "On start actions"
 
 [node name="CustomCodeTab" type="VBoxContainer" parent="VBoxContainer"]
@@ -446,10 +490,13 @@ text = "Load"
 [connection signal="pressed" from="VBoxContainer/HBoxContainer3/CustomCodeButton" to="." method="_on_CustomCodeButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer3/CustomVarsButton" to="." method="_on_CustomVarsButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/StatesActionsList/HBoxContainer/AddStateButton" to="." method="_on_AddStateButton_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/StatesActionsList/HBoxContainer/RemoveStateButton" to="." method="_on_RemoveStateButton_pressed"]
 [connection signal="item_selected" from="VBoxContainer/HBoxContainer/StatesActionsList/StatesList" to="." method="_on_StatesList_item_selected"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/StatesActionsList/HBoxContainer2/AddDomButton" to="." method="_on_AddDomButton_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/StatesActionsList/HBoxContainer2/removeDomButton" to="." method="_on_removeDomButton_pressed"]
 [connection signal="item_selected" from="VBoxContainer/HBoxContainer/StatesActionsList/DomActionsList" to="." method="_on_DomActionsList_item_selected"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/StatesActionsList/HBoxContainer3/AddSubButton" to="." method="_on_AddSubButton_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/StatesActionsList/HBoxContainer3/RemoveSubButton" to="." method="_on_RemoveSubButton_pressed"]
 [connection signal="item_selected" from="VBoxContainer/HBoxContainer/StatesActionsList/SubActionsList" to="." method="_on_SubActionsList_item_selected"]
 [connection signal="onAddButton" from="VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/StatePropertiesList/PerTurnActions" to="." method="_on_PerTurnActions_onAddButton"]
 [connection signal="onEditPressed" from="VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/StatePropertiesList/PerTurnActions" to="." method="_on_PerTurnActions_onEditPressed"]
@@ -457,8 +504,10 @@ text = "Load"
 [connection signal="onEditPressed" from="VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/ActionPropertiesList/ConditionsList" to="." method="_on_ConditionsList_onEditPressed"]
 [connection signal="onAddButton" from="VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/ActionPropertiesList/ActionActionsList" to="." method="_on_ActionActionsList_onAddButton"]
 [connection signal="onEditPressed" from="VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/ActionPropertiesList/ActionActionsList" to="." method="_on_ActionActionsList_onEditPressed"]
-[connection signal="onAddButton" from="VBoxContainer/ActivitySettingsScreen/VBoxContainer/StartActionsList" to="." method="_on_StartActionsList_onAddButton"]
-[connection signal="onEditPressed" from="VBoxContainer/ActivitySettingsScreen/VBoxContainer/StartActionsList" to="." method="_on_StartActionsList_onEditPressed"]
+[connection signal="onAddButton" from="VBoxContainer/ActivitySettingsScreen/VBoxContainer/VBoxContainer/StartConditionsList" to="." method="_on_StartConditionsList_onAddButton"]
+[connection signal="onEditPressed" from="VBoxContainer/ActivitySettingsScreen/VBoxContainer/VBoxContainer/StartConditionsList" to="." method="_on_StartConditionsList_onEditPressed"]
+[connection signal="onAddButton" from="VBoxContainer/ActivitySettingsScreen/VBoxContainer/VBoxContainer/StartActionsList" to="." method="_on_StartActionsList_onAddButton"]
+[connection signal="onEditPressed" from="VBoxContainer/ActivitySettingsScreen/VBoxContainer/VBoxContainer/StartActionsList" to="." method="_on_StartActionsList_onEditPressed"]
 [connection signal="pressed" from="VBoxContainer/CustomVariablesTab/VBoxContainer/HBoxContainer3/AddVariableButton" to="." method="_on_AddVariableButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/CustomVariablesTab/VBoxContainer/HBoxContainer3/RemoveVariableButton" to="." method="_on_RemoveVariableButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer2/SaveButton" to="." method="_on_SaveButton_pressed"]
