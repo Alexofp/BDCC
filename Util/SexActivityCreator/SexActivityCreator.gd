@@ -25,6 +25,7 @@ onready var startActionsList = $VBoxContainer/ActivitySettingsScreen/VBoxContain
 onready var startConditionsList = $VBoxContainer/ActivitySettingsScreen/VBoxContainer/VBoxContainer/StartConditionsList
 
 onready var stateDefaultAnimPicker = $VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/StatePropertiesList/StateDefaultAnimPicker
+onready var animsWithConditionList = $VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/StatePropertiesList/AnimsWithConditionList
 
 signal onClosePressed
 
@@ -262,6 +263,17 @@ func updateRightPanel():
 			stateDynamicPropertiesObjects[propertyID].setData(currentState[propertyID])
 		
 		stateDefaultAnimPicker.setData(currentState["animation"])
+		
+		Util.delete_children(animsWithConditionList)
+		var index = 0
+		for animWithCondition in currentState["animsWithCondition"]:
+			var newConAnimScene = preload("res://Util/SexActivityCreator/AnimPickerWithCondition.tscn").instance()
+			animsWithConditionList.add_child(newConAnimScene)
+			newConAnimScene.setData(animWithCondition)
+			newConAnimScene.id = index
+			newConAnimScene.connect("onDeletePressed", self, "onDeletingAnimWithCondition")
+			newConAnimScene.connect("onUpPressed", self, "onUpAnimWithCondition")
+			index += 1
 	
 	if(currentlyEditing == "domAction"):
 		$VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/ActionPropertiesList.visible = true
@@ -293,6 +305,7 @@ func createNewAction():
 		name = "New action",
 		desc = "Change the description",
 		score = "1.0",
+		chance = "",
 	}
 
 func createNewState():
@@ -305,7 +318,8 @@ func createNewState():
 			selecedAnim = "tease",
 			selectedPC = "domID",
 			selectedNPC = "subID",
-		}
+		},
+		animsWithCondition = [],
 	}
 
 func getActionProperties():
@@ -324,6 +338,10 @@ func getActionProperties():
 		},
 		"score": {
 			"text": "Score",
+			"type": "string",
+		},
+		"chance": {
+			"text": "Chance",
 			"type": "string",
 		},
 	}
@@ -537,6 +555,7 @@ func _on_GenerateCodeButton_pressed():
 			
 			var generatedCode = everyAction.generateCode()
 			if(generatedCode == null || generatedCode == ""):
+				currentFlow += everyAction.changesFlow()
 				continue
 			var genCodeAr = generatedCode.split("\n")
 			for line in genCodeAr:
@@ -574,6 +593,7 @@ func _on_GenerateCodeButton_pressed():
 			
 			var generatedCode = everyAction.generateCode()
 			if(generatedCode == null || generatedCode == ""):
+				currentFlow += everyAction.changesFlow()
 				continue
 			var genCodeAr = generatedCode.split("\n")
 			for line in genCodeAr:
@@ -634,6 +654,8 @@ func _on_GenerateCodeButton_pressed():
 			result.append(beforeTT+'\t"name": "'+str(theAction["name"])+'",')
 			result.append(beforeTT+'\t"desc": "'+str(theAction["desc"])+'",')
 			result.append(beforeTT+'\t"priority" : '+str(theAction["priority"])+',')
+			if(theAction["chance"] != ""):
+				result.append(beforeTT+'\t"chance" : '+str(theAction["chance"])+',')
 			result.append(beforeTT+"})")
 				
 		result.append("\treturn actions")
@@ -661,6 +683,7 @@ func _on_GenerateCodeButton_pressed():
 				
 				var generatedCode = everyAction.generateCode()
 				if(generatedCode == null || generatedCode == ""):
+					currentFlow += everyAction.changesFlow()
 					continue
 				var genCodeAr = generatedCode.split("\n")
 				for line in genCodeAr:
@@ -708,6 +731,11 @@ func _on_GenerateCodeButton_pressed():
 			var anim = state["animation"]
 			
 			result.append("\tif(state == \""+stateID+"\"):")
+			for animWithCondition in state["animsWithCondition"]:
+				var conanim = animWithCondition["animData"]
+				result.append("\t\tif("+animWithCondition["condition"]+"):")
+				result.append("\t\t\treturn [StageScene."+conanim["selectedStage"]+", \""+conanim["selecedAnim"]+"\", {pc="+conanim["selectedPC"]+", npc="+conanim["selectedNPC"]+"}]")
+			
 			result.append("\t\treturn [StageScene."+anim["selectedStage"]+", \""+anim["selecedAnim"]+"\", {pc="+anim["selectedPC"]+", npc="+anim["selectedNPC"]+"}]")
 			
 	
@@ -934,17 +962,41 @@ func _on_LoadEverythingButton_pressed():
 	sexActivityProperties["startConditions"] = convertDataToActions(sexActivityProperties["startConditions"])
 
 	states = loadOr(data, "states", {})
+	
+	for stateID in states:
+		var idealState = createNewState()
+		var state = states[stateID]
+		for key in idealState:
+			if(!state.has(key)):
+				state[key] = idealState[key]
+	
 	for stateID in states:
 		var state = states[stateID]
 		state["turnActions"] = convertDataToActions(state["turnActions"])
 
 	domActions = loadOr(data, "domActions", {})
+	
+	for actionID in domActions:
+		var idealAction = createNewAction()
+		var action = domActions[actionID]
+		for key in idealAction:
+			if(!action.has(key)):
+				action[key] = idealAction[key]
+	
 	for actionID in domActions:
 		var action = domActions[actionID]
 		action["conditions"] = convertDataToActions(action["conditions"])
 		action["actions"] = convertDataToActions(action["actions"])
 
 	subActions = loadOr(data, "subActions", {})
+	#
+	for actionID in subActions:
+		var idealAction = createNewAction()
+		var action = subActions[actionID]
+		for key in idealAction:
+			if(!action.has(key)):
+				action[key] = idealAction[key]
+	
 	for actionID in subActions:
 		var action = subActions[actionID]
 		action["conditions"] = convertDataToActions(action["conditions"])
@@ -1060,3 +1112,36 @@ func hasDomSubAction(actions):
 		if(action.shouldAddDomSubReactions()):
 			return true
 	return false
+
+
+func _on_AddAnimWithConditionButton_pressed():
+	var currentState = getCurrentState()
+	if(currentState == null):
+		return
+	
+	currentState["animsWithCondition"].append({
+		"condition": "false",
+		"animData": {
+			selectedStage = StageScene.SexAllFours,
+			selecedAnim = "tease",
+			selectedPC = "domID",
+			selectedNPC = "subID",
+		}
+	})
+	updateRightPanel()
+
+func onDeletingAnimWithCondition(index):
+	var currentState = getCurrentState()
+	if(currentState == null):
+		return
+	
+	currentState["animsWithCondition"].remove(index)
+	updateRightPanel()
+	
+func onUpAnimWithCondition(index):
+	var currentState = getCurrentState()
+	if(currentState == null):
+		return
+	
+	Util.moveValueUp(currentState["animsWithCondition"], index)
+	updateRightPanel()

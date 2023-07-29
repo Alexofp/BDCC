@@ -15,6 +15,9 @@ const ReceiveStraponAnal = "ReceiveStraponAnal"
 
 const TieUp = "TieUp"
 
+const RimSub = "RimSub"
+const RimmingReceive = "RimmingReceive"
+
 
 # Subgoals, these don't need classes defined
 const SubUndressSub = "SubUndressSub"

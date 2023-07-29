@@ -56,6 +56,8 @@ func setData(theData):
 				$HBoxContainer/OptionButton2.selected = index
 				break
 			index += 1
+		if($HBoxContainer/OptionButton2.selected >= 0):
+			data["selecedAnim"] = allAnims[$HBoxContainer/OptionButton2.selected]
 
 
 func _on_OptionButton_item_selected(index):

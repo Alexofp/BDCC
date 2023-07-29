@@ -1,6 +1,6 @@
 extends "res://Util/SexActivityCreator/Actions/BaseAction.gd"
 
-var storedTexts = []
+var storedTexts = ""
 
 func _init():
 	id = "addTextRandom"
@@ -9,12 +9,12 @@ func getName():
 	return "Add Text Random"
 
 func getVisibleText():
-	return "Pick random text: " + Util.join(storedTexts, " | ")
+	return "Pick random text: " + storedTexts
 
 func getArgs():
 	return {
 		"storedTexts": {
-			"type": "strings",
+			"type": "bigstring",
 			"value": storedTexts,
 			"text": "Texts",
 		},
@@ -24,11 +24,13 @@ func applyArgs(_data):
 	storedTexts = _data["storedTexts"]
 
 func generateCode():
-	if(storedTexts.size() == 0):
+	var theStoredTexts = storedTexts.split("\n", false)
+	
+	if(theStoredTexts.size() == 0):
 		return ""
-	if(storedTexts.size() == 1):
-		return "text += \""+storedTexts[0]+"\""
-	var text = "text += RNG.pick([\n\t"+Util.joinWithBorders(processStringArray(storedTexts), ",\n\t", "\"")+"\n])"
+	if(theStoredTexts.size() == 1):
+		return "text += \""+theStoredTexts[0]+"\""
+	var text = "text += RNG.pick([\n\t"+Util.joinWithBorders(processStringArray(theStoredTexts), ",\n\t", "\"")+"\n])"
 	return text
 
 func saveData():
@@ -38,4 +40,4 @@ func saveData():
 
 func loadData(_data):
 	if(_data.has("storedTexts")):
-		storedTexts = _data["storedTexts"]
+		storedTexts = str(_data["storedTexts"])

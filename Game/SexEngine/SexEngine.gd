@@ -169,7 +169,7 @@ func sendProcessedData(data):
 	if(data == null):
 		return
 	
-	if(data.has("text")):
+	if(data.has("text") && data["text"] != ""):
 		messages.append(data["text"])
 	if(data.has("domSay")):
 		messages.append(data["domSay"])
@@ -189,7 +189,7 @@ func combineData(firstData, secondData):
 	var subSays = []
 	
 	for data in [firstData, secondData]:
-		if(data.has("text")):
+		if(data.has("text") && data["text"] != null && data["text"] != ""):
 			texts.append(data["text"])
 		if(data.has("domSay") && data["domSay"] != null):
 			domSays.append(data["domSay"])

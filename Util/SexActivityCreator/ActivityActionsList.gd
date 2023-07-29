@@ -6,6 +6,7 @@ onready var actionList = $ScrollContainer/ActionList
 
 signal onAddButton(what)
 export var labelText = "Some text"
+export var smallContainer = false
 
 signal onEditPressed(id)
 signal onUpPressed(id)
@@ -19,6 +20,10 @@ var actionItemScene = preload("res://Util/SexActivityCreator/ActivityAcitonItem.
 
 func _ready():
 	setText(labelText)
+	if(smallContainer):
+		$ScrollContainer.rect_min_size.y = 100
+	else:
+		$ScrollContainer.rect_min_size.y = 200
 
 func addOption(id, text):
 	options.append([id, text])

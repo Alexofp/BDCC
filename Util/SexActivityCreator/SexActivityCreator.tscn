@@ -166,6 +166,17 @@ margin_top = 132.0
 margin_right = 1076.0
 margin_bottom = 152.0
 
+[node name="AddAnimWithConditionButton" type="Button" parent="VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/StatePropertiesList"]
+margin_top = 156.0
+margin_right = 1076.0
+margin_bottom = 176.0
+text = "Add anim with condition"
+
+[node name="AnimsWithConditionList" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/StatePropertiesList"]
+margin_top = 180.0
+margin_right = 1076.0
+margin_bottom = 180.0
+
 [node name="ActionPropertiesList" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer"]
 margin_top = 338.0
 margin_right = 1076.0
@@ -192,6 +203,7 @@ margin_top = 22.0
 margin_right = 1076.0
 margin_bottom = 146.0
 labelText = "Conditions (And)"
+smallContainer = true
 
 [node name="ActionActionsList" parent="VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/ActionPropertiesList" instance=ExtResource( 3 )]
 anchor_right = 0.0
@@ -236,6 +248,7 @@ margin_right = 638.0
 margin_bottom = 124.0
 size_flags_horizontal = 3
 labelText = "Can start conditions"
+smallContainer = true
 
 [node name="StartActionsList" parent="VBoxContainer/ActivitySettingsScreen/VBoxContainer/VBoxContainer" instance=ExtResource( 3 )]
 anchor_right = 0.0
@@ -500,6 +513,7 @@ text = "Load"
 [connection signal="item_selected" from="VBoxContainer/HBoxContainer/StatesActionsList/SubActionsList" to="." method="_on_SubActionsList_item_selected"]
 [connection signal="onAddButton" from="VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/StatePropertiesList/PerTurnActions" to="." method="_on_PerTurnActions_onAddButton"]
 [connection signal="onEditPressed" from="VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/StatePropertiesList/PerTurnActions" to="." method="_on_PerTurnActions_onEditPressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/StatePropertiesList/AddAnimWithConditionButton" to="." method="_on_AddAnimWithConditionButton_pressed"]
 [connection signal="onAddButton" from="VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/ActionPropertiesList/ConditionsList" to="." method="_on_ConditionsList_onAddButton"]
 [connection signal="onEditPressed" from="VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/ActionPropertiesList/ConditionsList" to="." method="_on_ConditionsList_onEditPressed"]
 [connection signal="onAddButton" from="VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/ActionPropertiesList/ActionActionsList" to="." method="_on_ActionActionsList_onAddButton"]

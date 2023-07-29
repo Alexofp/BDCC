@@ -33,6 +33,7 @@ func loadData(_data):
 	pass
 
 func processString(line):
+	line = line.replace("\"", "'")
 	line = line.replace("{{", '"+str(')
 	line = line.replace("}}", ')+"')
 	return line

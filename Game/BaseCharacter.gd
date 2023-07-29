@@ -1687,6 +1687,9 @@ func cumOnFloor():
 		var penis:BodypartPenis = getBodypart(BodypartSlot.Penis)
 		var production: FluidProduction = penis.getFluidProduction()
 		if(production != null):
+			if(getWornCondom() != null):
+				return cumInItem(getWornCondom())
+			
 			var returnValue = penis.getFluidProduction().drain()
 			production.fillPercent(buffsHolder.getCustom(BuffAttribute.CumGenerationAfterOrgasm))
 			return returnValue
