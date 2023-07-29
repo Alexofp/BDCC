@@ -16,3 +16,6 @@ func getSubGoals(_sexEngine, _domInfo, _subInfo, _data):
 	return {
 		SexGoal.SubUndressDom: 1.0,
 	}
+
+func getGoalDefaultWeight():
+	return 0.1

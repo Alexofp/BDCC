@@ -45,7 +45,7 @@ func onSwitchFrom(_otherActivity, _args):
 func processTurn():
 	if(state == ""):
 		var text = ""
-		if(getDom().getFirstItemThatCoversBodypart(BodypartSlot.Anus) != null):
+		if(getDom().getFirstItemThatCoversBodypart(BodypartSlot.Anus) == null):
 			waitTimer += 1
 		
 		if(waitTimer > 2):
@@ -141,7 +141,7 @@ func doDomAction(_id, _actionInfo):
 	if(_id == "forcerim"):
 		var text = ""
 		if(RNG.chance(30)):
-			text += "{dom.You} {dom.youVerb('force') {sub.you} to start rimming {dom.youHim}!"
+			text += "{dom.You} {dom.youVerb('force')} {sub.you} to start rimming {dom.youHim}!"
 			state = "rimming"
 		else:
 			domInfo.addAnger(0.05)
