@@ -510,17 +510,22 @@ func _on_GenerateCodeButton_pressed():
 	result.append("")
 	result.append("func getSubTags():")
 	result.append("\treturn ["+processTags(sexActivityProperties["subTags"])+"]")
-	result.append("")
-	result.append("func getDomTagsCheck():")
-	result.append("\treturn .getDomTagsCheck()")
-	result.append("")
-	result.append("func getSubTagsCheck():")
-	result.append("\treturn .getSubTagsCheck()")
+#	result.append("")
+#	result.append("func getDomTagsCheck():")
+#	result.append("\treturn .getDomTagsCheck()")
+#	result.append("")
+#	result.append("func getSubTagsCheck():")
+#	result.append("\treturn .getSubTagsCheck()")
 	result.append("")
 	
 	result.append("func startActivity(_args):")
 	result.append("\tstate = \"\"")
 	result.append("\tvar text = \"\"")
+	var hasDomSubReactions = false
+	if(hasDomSubAction(sexActivityProperties["startActions"])):
+		hasDomSubReactions = true
+		result.append("\tvar domSay = null")
+		result.append("\tvar subSay = null")
 	# stuff should happen here
 	if(true):
 		var currentFlow = 0
@@ -540,6 +545,9 @@ func _on_GenerateCodeButton_pressed():
 			currentFlow += everyAction.changesFlow()
 	result.append("\treturn {")
 	result.append("\t\ttext = text,")
+	if(hasDomSubReactions):
+		result.append("\t\tdomSay = domSay,")
+		result.append("\t\tsubSay = subSay,")
 	result.append("\t}")
 	result.append("")
 	result.append("func onSwitchFrom(_otherActivity, _args):")
@@ -551,6 +559,11 @@ func _on_GenerateCodeButton_pressed():
 		var theState = states[stateID]
 		result.append("\tif(state == \""+stateID+"\"):")
 		result.append("\t\tvar text = \"\"")
+		var hasDomSubReactionsTurn = false
+		if(hasDomSubAction(theState["turnActions"])):
+			hasDomSubReactionsTurn = true
+			result.append("\t\tvar domSay = null")
+			result.append("\t\tvar subSay = null")
 		
 		var currentFlow = 0
 		
@@ -568,7 +581,12 @@ func _on_GenerateCodeButton_pressed():
 			
 			currentFlow += everyAction.changesFlow()
 		
-		result.append("\t\treturn {text = text}")
+		result.append("\t\treturn {")
+		result.append("\t\t\ttext = text,")
+		if(hasDomSubReactionsTurn):
+			result.append("\t\t\tdomSay = domSay,")
+			result.append("\t\t\tsubSay = subSay,")
+		result.append("\t\t}")
 		
 		
 	
@@ -628,6 +646,11 @@ func _on_GenerateCodeButton_pressed():
 		for actionID in actionSide[2]:
 			result.append("\tif(_id == \""+actionID+"\"):")
 			result.append("\t\tvar text = \"\"")
+			var hasDomSubReactionsActions = false
+			if(hasDomSubAction(actionSide[2][actionID]["actions"])):
+				hasDomSubReactionsActions = true
+				result.append("\t\tvar domSay = null")
+				result.append("\t\tvar subSay = null")
 			
 			var currentFlow = 0
 			
@@ -645,7 +668,12 @@ func _on_GenerateCodeButton_pressed():
 				
 				currentFlow += everyAction.changesFlow()
 			
-			result.append("\t\treturn {text = text}")
+			result.append("\t\treturn {")
+			result.append("\t\t\ttext = text,")
+			if(hasDomSubReactionsActions):
+				result.append("\t\t\tdomSay = domSay,")
+				result.append("\t\t\tsubSay = subSay,")
+			result.append("\t\t}")
 		
 		result.append("")
 	
@@ -1026,3 +1054,9 @@ func _on_RemoveSubButton_pressed():
 	removeUselessActions()
 	updateLeftPanel()
 	updateRightPanel()
+
+func hasDomSubAction(actions):
+	for action in actions:
+		if(action.shouldAddDomSubReactions()):
+			return true
+	return false

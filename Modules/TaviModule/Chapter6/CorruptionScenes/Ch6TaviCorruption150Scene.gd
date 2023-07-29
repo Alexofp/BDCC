@@ -41,7 +41,7 @@ func _run():
 		addButton("Let her bite", "Let Tavi bite you and satisfy her need", "let_bite")
 		addButtonWithChecks("Blowjob", "Let Tavi suck the energy out of you", "let_suck", [], [ButtonChecks.HasReachablePenis])
 		addButtonWithChecks("Pussy licking", "Let Tavi lick the energy out of you", "let_lick", [], [ButtonChecks.HasReachableVagina])
-		addButtonWithChecks("Prostate milking", "Let Tavi milk the energy out of you", "let_prostate_milk", [], [ButtonChecks.HasReachablePenis])
+		addButtonWithChecks("Prostate milking", "Let Tavi milk the energy out of you", "let_prostate_milk", [], [ButtonChecks.HasPenis])
 	if(state == "let_bite"):
 		playAnimation(StageScene.Hug, "hug", {pc="tavi", npc="pc", bodyState={naked=true}})
 		saynn("You don't know if this will work for her.. but you try anyway. You tilt your head to the side slightly, exposing more of your neck to Tavi. She instantly focuses on that spot and purrs softly.")

@@ -31,3 +31,17 @@ func saveData():
 
 func loadData(_data):
 	pass
+
+func processString(line):
+	line = line.replace("{{", '"+str(')
+	line = line.replace("}}", ')+"')
+	return line
+
+func processStringArray(ar):
+	var newAr = []
+	for theString in ar:
+		newAr.append(processString(theString))
+	return newAr
+
+func shouldAddDomSubReactions():
+	return false
