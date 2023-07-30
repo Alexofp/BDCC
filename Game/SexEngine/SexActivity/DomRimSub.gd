@@ -32,13 +32,18 @@ func getSubTags():
 func startActivity(_args):
 	state = ""
 	var text = ""
+	var domSay = null
+	var subSay = null
 	text += RNG.pick([
 		"{dom.You} {dom.youVerb('kneel')} behind {sub.you} and {dom.youVerb('spread')} {sub.yourHis} buttcheeks.",
 		"{dom.You} {dom.youVerb('kneel')} behind {sub.you} and {dom.youVerb('prepare')} to rim {sub.yourHis} ass."
 	])
 	affectSub(subInfo.fetishScore({Fetish.RimmingReceiving: 1.0})+0.0, 0.1, 0.2, 0.0)
+	domSay = domReaction(SexReaction.AboutToRimSub)
 	return {
 		text = text,
+		domSay = domSay,
+		subSay = subSay,
 	}
 
 func onSwitchFrom(_otherActivity, _args):
@@ -104,6 +109,15 @@ func getDomActions():
 				"desc": "Sub is cumming!",
 				"priority" : 1001,
 			})
+	if(state in ["rimming"]):
+		if((!getDom().isBitingBlocked())):
+			actions.append({
+				"id": "bite",
+				"score": domInfo.getSadisticActionStore(),
+				"name": "Bite",
+				"desc": "Bite that asshole softly",
+				"priority" : 0,
+			})
 	return actions
 
 func doDomAction(_id, _actionInfo):
@@ -166,6 +180,18 @@ func doDomAction(_id, _actionInfo):
 		return {
 			text = text,
 		}
+	if(_id == "bite"):
+		var text = ""
+		text += RNG.pick([
+			"{dom.You} {dom.youVerb('nibble')} on {sub.your} "+str(getRandomAnusWord())+".",
+			"{dom.You} softly {dom.youVerb('bite')} {sub.your} "+str(getRandomAnusWord())+".",
+			"{dom.You} softly {dom.youVerb('bite')} {sub.your} "+str(getRandomAnusWord())+", sending shivers down {sub.yourHis} spine."
+		])
+		affectSub(subInfo.fetishScore({Fetish.Masochism: 1.0, Fetish.RimmingReceiving: 0.5})+0.0, 0.1, -0.1, -0.05)
+		subInfo.addPain(2)
+		return {
+			text = text,
+		}
 
 func getSubActions():
 	var actions = []
@@ -200,6 +226,8 @@ func getSubActions():
 func doSubAction(_id, _actionInfo):
 	if(_id == "pullaway"):
 		var text = ""
+		var domSay = null
+		var subSay = null
 		var successChance = getSubResistChance(30.0, 25.0)
 		if(RNG.chance(successChance)):
 			text = RNG.pick([
@@ -210,8 +238,17 @@ func doSubAction(_id, _actionInfo):
 				state = ""
 			else:
 				endActivity()
+		else:
+			text = RNG.pick([
+				"{sub.You} desperately {sub.youVerb('try', 'tries')} to pull away from {dom.your} face.",
+				"{sub.You} desperately {sub.youVerb('try', 'tries')} to pull {sub.yourHis} ass away from {dom.your} mouth.",
+			])
+			domInfo.addAnger(0.03)
+		subSay = subReaction(SexReaction.Resisting, 50)
 		return {
 			text = text,
+			domSay = domSay,
+			subSay = subSay,
 		}
 	if(_id == "moan"):
 		var text = ""

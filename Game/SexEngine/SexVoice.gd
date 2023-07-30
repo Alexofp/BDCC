@@ -20,6 +20,33 @@ func getDomReaction(_reactionID, _sexEngine, _domInfo, _subInfo):
 	var domIsVeryMean = _domInfo.personalityScore({PersonalityStat.Mean:1.0})>0.7
 	
 	match(_reactionID):
+		SexReaction.OrderRimming:
+			if(domIsAngry || domIsMean):
+				possible.append_array([
+					"Suck my asshole, bitch.",
+					"Hope you like licking asses.",
+					"Don't make me force you.",
+					"I need my asshole cleaned. Now.",
+				])
+		
+		SexReaction.AboutToRimSub:
+			if(domIsAngry || domIsMean):
+				possible.append_array([
+					"Enjoy it while it lasts.",
+					"I do this because I want to, okay?",
+					"Don't move or I will bite your ass.",
+					"Don't fucking move, I need your ass.",
+					"What? I wanna suck your asshole, deal with it.",
+				])
+			else:
+				possible.append_array([
+					"I can't resist exploring every part of you.",
+					"I'll be gentle, but I promise you'll love every second of it.",
+					"You'll beg for more when I'm done with you.",
+					"Let's see how that ass tastes.",
+					"I wanna eat that ass so much.",
+				])
+		
 		SexReaction.DomPutsOnACondomOnSub:
 			possible.append_array([
 				"I'm not taking any chances.",
@@ -467,6 +494,28 @@ func getSubReaction(_reactionID, _sexEngine, _domInfo, _subInfo):
 	var possible = []
 	
 	match(_reactionID):
+		SexReaction.OrderRimming:
+			if(_subInfo.fetishScore({Fetish.RimmingGiving: 1.0}) < 0.0):
+				possible.append_array([
+					"Hey, I don't wanna do this.",
+					"I'm not really into rimming.",
+					"I'm not comfortable, can we not?",
+					"Licking buts isn't something I'm interested in trying.",
+				])
+			else:
+				if(subIsResisting):
+					possible.append_array([
+						"Fuck off, I'm not doing that!",
+						"Hey, I'm not gonna do that!",
+						"I will bite your ass if you make me do this!",
+					])
+				else:
+					possible.append_array([
+						"Oh, um, you want me to.. do that?",
+						"I'm not sure about this.",
+						"It's a bit embarrassing.",
+					])
+		
 		SexReaction.OfferingACondom:
 			possible.append_array([
 				"Please, put on a condom. You can use mine.",

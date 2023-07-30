@@ -36,6 +36,7 @@ enum {
 	
 	OrderBlowjob,
 	OrderLickPussy,
+	OrderRimming,
 	
 	GrindingFaceWithPussy,
 	DomsPussyGetsLicked,
@@ -43,6 +44,7 @@ enum {
 	AboutToLickPussy,
 	AboutToSuckSubOff,
 	AboutToRubPussiesTogether,
+	AboutToRimSub,
 	
 	DomPutsOnACondom,
 	DomPutsOnACondomOnSub,
@@ -84,6 +86,7 @@ static func getAllStrings():
 		
 		"OrderBlowjob",
 		"OrderLickPussy",
+		"OrderRimming",
 		
 		"GrindingFaceWithPussy",
 		"DomsPussyGetsLicked",
@@ -91,6 +94,7 @@ static func getAllStrings():
 		"AboutToLickPussy",
 		"AboutToSuckSubOff",
 		"AboutToRubPussiesTogether",
+		"AboutToRimSub",
 		
 		"DomPutsOnACondom",
 		"DomPutsOnACondomOnSub",

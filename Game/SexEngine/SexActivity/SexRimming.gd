@@ -33,10 +33,16 @@ func getSubTags():
 func startActivity(_args):
 	state = ""
 	var text = ""
+	var domSay = null
+	var subSay = null
 	affectSub(subInfo.fetishScore({Fetish.RimmingGiving: 1.0})+0.0, 0.1, -0.1, -0.01)
 	text += "{dom.You} {dom.youVerb('force')} {sub.you} onto {sub.yourHis} knees and {dom.youVerb('position')} {dom.yourself} in front of {sub.youHim}, inviting to start licking {dom.yourHis} butt."
+	domSay = domReaction(SexReaction.OrderRimming)
+	subSay = subReaction(SexReaction.OrderRimming)
 	return {
 		text = text,
+		domSay = domSay,
+		subSay = subSay,
 	}
 
 func onSwitchFrom(_otherActivity, _args):
@@ -222,6 +228,8 @@ func getSubActions():
 func doSubAction(_id, _actionInfo):
 	if(_id == "pullaway"):
 		var text = ""
+		var domSay = null
+		var subSay = null
 		var successChance = getSubResistChance(30.0, 25.0)
 		if(RNG.chance(successChance)):
 			text = RNG.pick([
@@ -232,8 +240,17 @@ func doSubAction(_id, _actionInfo):
 				state = ""
 			else:
 				endActivity()
+		else:
+			text = RNG.pick([
+				"{sub.You} desperately {sub.youVerb('try', 'tries')} to pull away from {dom.your} butt.",
+				"{sub.You} desperately {sub.youVerb('try', 'tries')} to pull away from {dom.your} ass.",
+			])
+			domInfo.addAnger(0.03)
+		subSay = subReaction(SexReaction.Resisting, 50)
 		return {
 			text = text,
+			domSay = domSay,
+			subSay = subSay,
 		}
 	if(_id == "startrim"):
 		var text = ""
