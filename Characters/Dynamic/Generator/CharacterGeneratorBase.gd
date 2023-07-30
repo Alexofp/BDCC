@@ -156,6 +156,8 @@ func pickFetishes(character:DynamicCharacter, _args = {}):
 			fetishHolder.setFetish(fetishID, RNG.pick([FetishInterest.Dislikes, FetishInterest.SlightlyDislikes, FetishInterest.SlightlyLikes]))
 		elif(RNG.chance(5)):
 			fetishHolder.setFetish(fetishID, RNG.pick([FetishInterest.Hates, FetishInterest.Loves]))
+		else:
+			fetishHolder.setFetish(fetishID, FetishInterest.Neutral)
 		
 	for archetype in character.npcArchetypes:
 		var fetishes = CharacterArchetype.getFetishes(archetype)

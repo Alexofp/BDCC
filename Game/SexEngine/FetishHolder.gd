@@ -107,7 +107,14 @@ func loadData(data):
 	
 	# Adds missing fetishes
 	var thechar = getCharacter()
-	if(thechar != null && !thechar.isDynamicCharacter()):
-		for fetishID in GlobalRegistry.getFetishes():
-			if(!fetishMap.has(fetishID)):
-				fetishMap[fetishID] = GlobalRegistry.getFetish(fetishID).getInitialInterest(thechar)
+	if(thechar != null):
+		if(!thechar.isDynamicCharacter()):
+			for fetishID in GlobalRegistry.getFetishes():
+				if(!fetishMap.has(fetishID)):
+					fetishMap[fetishID] = GlobalRegistry.getFetish(fetishID).getInitialInterest(thechar)
+		else:
+			# A bit too random but eh
+			for fetishID in GlobalRegistry.getFetishes():
+				if(!fetishMap.has(fetishID)):
+					if(GlobalRegistry.getFetish(fetishID).isPossibleFor(thechar)):
+						fetishMap[fetishID] = RNG.pick(FetishInterest.getAll())
