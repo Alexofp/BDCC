@@ -129,10 +129,12 @@ func updateBodyparts():
 		if(!hasPerk(Perk.StartNoHeat) || !hasPerk(Perk.StartInfertile)):
 			skillsHolder.addPerk(Perk.StartNoHeat)
 			skillsHolder.addPerk(Perk.StartInfertile)
+		removeEffect(StatusEffect.TaviWombMark)
 	else:
 		if(hasPerk(Perk.StartNoHeat) || hasPerk(Perk.StartInfertile)):
 			skillsHolder.removePerk(Perk.StartNoHeat)
 			skillsHolder.removePerk(Perk.StartInfertile)
+		addEffect(StatusEffect.TaviWombMark)
 
 func getLootTable(_battleName):
 	return InmateLoot.new()

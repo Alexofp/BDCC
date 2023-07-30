@@ -61,3 +61,6 @@ const Yoga = "Yoga"
 const WorkOutLight = "WorkOutLight"
 const WorkOut = "WorkOut"
 const MaternalGlow = "MaternalGlow"
+
+# Npc specific ones
+const TaviWombMark = "TaviWombMark"

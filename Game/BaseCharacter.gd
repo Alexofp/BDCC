@@ -1136,6 +1136,10 @@ func forceIntoHeat():
 	if(menstrualCycle != null):
 		menstrualCycle.forceIntoHeat()
 
+func forceImpregnateBy(otherCharacterID):
+	if(menstrualCycle != null):
+		menstrualCycle.forceImpregnateBy(otherCharacterID)
+
 func getPregnancyProgress():
 	if(menstrualCycle != null):
 		return menstrualCycle.getPregnancyProgress()

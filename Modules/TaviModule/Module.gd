@@ -110,6 +110,7 @@ func getFlags():
 		"Ch6PurityStage": flag(FlagType.Number), # 0 - default, 1 - talked about what happened, 2 - can somewhat control herself, 3 - pretty much old Tavi
 		"Ch6Tiredness": flag(FlagType.Number),
 		"Ch6TaviReceivedHorns": flag(FlagType.Bool),
+		"Ch6TaviReceivedWombMark": flag(FlagType.Bool),
 		
 		"taviSkillCombat": flag(FlagType.Number),
 		"taviSkillSex": flag(FlagType.Number),
@@ -179,6 +180,7 @@ func _init():
 		"res://Modules/TaviModule/Chapter6/CorruptionScenes/Ch6TaviCorruption25Scene.gd",
 		"res://Modules/TaviModule/Chapter6/CorruptionScenes/Ch6TaviCorruption125Scene.gd",
 		"res://Modules/TaviModule/Chapter6/CorruptionScenes/Ch6TaviCorruption150Scene.gd",
+		"res://Modules/TaviModule/Chapter6/CorruptionScenes/Ch6TaviCorruption175Scene.gd",
 		]
 	characters = [
 		"res://Modules/TaviModule/Chapter4/DirectorTau.gd",
@@ -304,7 +306,7 @@ func getAvaiableStoryScene():
 	var corruptScenes = [
 		{at=1.25,stage=1,scene="Ch6TaviCorruption125Scene"},
 		{at=1.5,stage=2,scene="Ch6TaviCorruption150Scene"},
-		{at=1.75,stage=3,scene="RahiChillScene"},
+		{at=1.75,stage=3,scene="Ch6TaviCorruption175Scene"},
 		{at=2.0,stage=4,scene="RahiChillScene"},
 	]
 	var purityScenes = [
@@ -346,7 +348,7 @@ func hasHorns():
 	return false
 
 func hasWombMark():
-	if(getFlag("TaviModule.Ch6CorruptionStage", 0) >= 3):
+	if(getFlag("TaviModule.Ch6TaviReceivedWombMark", false)):
 		return true
 	return false
 
