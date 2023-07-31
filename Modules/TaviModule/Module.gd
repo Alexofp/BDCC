@@ -181,6 +181,7 @@ func _init():
 		"res://Modules/TaviModule/Chapter6/CorruptionScenes/Ch6TaviCorruption125Scene.gd",
 		"res://Modules/TaviModule/Chapter6/CorruptionScenes/Ch6TaviCorruption150Scene.gd",
 		"res://Modules/TaviModule/Chapter6/CorruptionScenes/Ch6TaviCorruption175Scene.gd",
+		"res://Modules/TaviModule/Chapter6/CorruptionScenes/Ch6TaviCorruption200Scene.gd",
 		]
 	characters = [
 		"res://Modules/TaviModule/Chapter4/DirectorTau.gd",
@@ -307,7 +308,7 @@ func getAvaiableStoryScene():
 		{at=1.25,stage=1,scene="Ch6TaviCorruption125Scene"},
 		{at=1.5,stage=2,scene="Ch6TaviCorruption150Scene"},
 		{at=1.75,stage=3,scene="Ch6TaviCorruption175Scene"},
-		{at=2.0,stage=4,scene="RahiChillScene"},
+		{at=2.0,stage=4,scene="Ch6TaviCorruption200Scene"},
 	]
 	var purityScenes = [
 		{at=0.75,stage=1,scene="Ch6TaviCorruption75Scene"},
