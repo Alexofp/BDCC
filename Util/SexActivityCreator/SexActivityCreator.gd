@@ -549,6 +549,7 @@ func _on_GenerateCodeButton_pressed():
 		var currentFlow = 0
 		
 		for everyAction in sexActivityProperties["startActions"]:
+			currentFlow += everyAction.preChangeFlow()
 			var extraTabs = ""
 			for _i in range(currentFlow):
 				extraTabs += "\t"
@@ -587,6 +588,7 @@ func _on_GenerateCodeButton_pressed():
 		var currentFlow = 0
 		
 		for everyAction in theState["turnActions"]:
+			currentFlow += everyAction.preChangeFlow()
 			var extraTabs = ""
 			for _i in range(currentFlow):
 				extraTabs += "\t"
@@ -677,6 +679,7 @@ func _on_GenerateCodeButton_pressed():
 			var currentFlow = 0
 			
 			for everyAction in actionSide[2][actionID]["actions"]:
+				currentFlow += everyAction.preChangeFlow()
 				var extraTabs = ""
 				for _i in range(currentFlow):
 					extraTabs += "\t"

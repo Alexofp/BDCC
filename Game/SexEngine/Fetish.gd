@@ -30,3 +30,6 @@ const Rigging = "Rigging"
 
 const RimmingGiving = "RimmingGiving"
 const RimmingReceiving = "RimmingReceiving"
+
+const FeetplayGiving = "FeetplayGiving"
+const FeetplayReceiving = "FeetplayReceiving"

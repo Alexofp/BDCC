@@ -118,6 +118,15 @@ func getDomActions():
 				"desc": "Bite that asshole softly",
 				"priority" : 0,
 			})
+	if(state in ["rimming"]):
+		if((getDom().hasEffect(StatusEffect.HasCumInsideMouth)) && (getSub().getFirstItemThatCoversBodypart(BodypartSlot.Anus) == null) && (!getDom().isOralBlocked()) && (OPTIONS.isContentEnabled(ContentType.CumStealing))):
+			actions.append({
+				"id": "spitcum",
+				"score": 0.05 + domInfo.fetishScore({Fetish.Breeding: 0.05}),
+				"name": "Spit into anus",
+				"desc": "Force some cum into their ass",
+				"priority" : 0,
+			})
 	return actions
 
 func doDomAction(_id, _actionInfo):
@@ -189,6 +198,15 @@ func doDomAction(_id, _actionInfo):
 		])
 		affectSub(subInfo.fetishScore({Fetish.Masochism: 1.0, Fetish.RimmingReceiving: 0.5})+0.0, 0.1, -0.1, -0.05)
 		subInfo.addPain(2)
+		return {
+			text = text,
+		}
+	if(_id == "spitcum"):
+		var text = ""
+		var mixtureText = getDom().getBodypartContentsStringList(BodypartSlot.Head)
+		text += "{dom.You} {dom.youVerb('press')} {dom.yourHis} lips against {sub.yourHis} {{getRandomAnusWord()}} and [b]{dom.youVerb('spit')} "+mixtureText+" into it[/b]!"
+		getDom().bodypartTransferFluidsTo(BodypartSlot.Head, subID, BodypartSlot.Anus, 0.2, 20.0)
+		affectSub(subInfo.fetishScore({Fetish.BeingBred: 1.0})-0.1, 0.02, -0.1, -0.05)
 		return {
 			text = text,
 		}

@@ -17,6 +17,9 @@ func applyArgs(_data):
 func generateCode():
 	return ""
 
+func preChangeFlow():
+	return 0
+
 func changesFlow():
 	return 0
 
