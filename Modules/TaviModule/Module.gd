@@ -178,6 +178,7 @@ func _init():
 		"res://Modules/TaviModule/Chapter6/CorruptionScenes/Ch6TaviCorruption75Scene.gd",
 		"res://Modules/TaviModule/Chapter6/CorruptionScenes/Ch6TaviCorruption50Scene.gd",
 		"res://Modules/TaviModule/Chapter6/CorruptionScenes/Ch6TaviCorruption25Scene.gd",
+		"res://Modules/TaviModule/Chapter6/CorruptionScenes/Ch6TaviCorruption0Scene.gd",
 		"res://Modules/TaviModule/Chapter6/CorruptionScenes/Ch6TaviCorruption125Scene.gd",
 		"res://Modules/TaviModule/Chapter6/CorruptionScenes/Ch6TaviCorruption150Scene.gd",
 		"res://Modules/TaviModule/Chapter6/CorruptionScenes/Ch6TaviCorruption175Scene.gd",
@@ -314,7 +315,7 @@ func getAvaiableStoryScene():
 		{at=0.75,stage=1,scene="Ch6TaviCorruption75Scene"},
 		{at=0.5,stage=2,scene="Ch6TaviCorruption50Scene"},
 		{at=0.25,stage=3,scene="Ch6TaviCorruption25Scene"},
-		{at=0.0,stage=4,scene="RahiChillScene"},
+		{at=0.0,stage=4,scene="Ch6TaviCorruption0Scene"},
 	]
 	for sceneData in corruptScenes:
 		if(currentCorruption >= sceneData["at"] && corruptionStage<sceneData["stage"]):
