@@ -174,6 +174,7 @@ func _init():
 		"res://Modules/TaviModule/Chapter6/Ch6TaviMorningScene.gd",
 		
 		"res://Modules/TaviModule/Chapter6/Skills/Ch6TaviCombatSkillScene.gd",
+		"res://Modules/TaviModule/Chapter6/Skills/Ch6TaviSexSkillScene.gd",
 		
 		"res://Modules/TaviModule/Chapter6/CorruptionScenes/Ch6TaviCorruption75Scene.gd",
 		"res://Modules/TaviModule/Chapter6/CorruptionScenes/Ch6TaviCorruption50Scene.gd",
@@ -274,7 +275,7 @@ func getSkillInfo(skillID):
 		return {
 			name = "Sex",
 			desc = "Allowing Tavi to enjoy all the sex that she missed",
-			scene = "RahiChillScene",
+			scene = "Ch6TaviSexSkillScene",
 		}
 	
 	return null
