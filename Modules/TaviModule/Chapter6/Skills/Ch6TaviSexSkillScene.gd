@@ -37,6 +37,8 @@ func _run():
 				addButton("Cowgirl", "Teach Tavi how to ride you", "cowgirl_pick")
 			else:
 				addDisabledButton("Cowgirl", "Tavi can't be a virgin for this")
+		if (sexSkill > 4):
+			addButton("First Anal", "Have anal sex with Tavi", "anal_pick")
 		addButton("Cancel", "You changed your mind", "cancel_lesson")
 	if(state == "take_virginity_pickstrapon"):
 		saynn("Pick which strapon you wanna use?")
@@ -362,7 +364,7 @@ func _run():
 		saynn("How do you wanna end this lesson?")
 
 		addButton("Facial", "Cum on Tavi's face", "firstbj_facial")
-		if (sexSkill > 3):
+		if (sexSkill > 2):
 			addButton("Mouth", "Cum in Tavi's mouth", "firstbj_mouth")
 		else:
 			addDisabledButton("Mouth", "Tavi is not skilled enough yet")
@@ -506,7 +508,7 @@ func _run():
 		saynn("How do you wanna end this lesson?")
 
 		addButton("Simple", "Just pull out", "firstbj_strapon_pull_out")
-		if (sexSkill > 3):
+		if (sexSkill > 2):
 			addButton("Deepthroat", "Make Tavi deepthroat the toy for as long as she can", "firstbj_strapon_deepthroat")
 		else:
 			addDisabledButton("Deepthroat", "Tavi is not skilled enough yet")
@@ -811,6 +813,148 @@ func _run():
 		saynn("You rest together like that. At some point the sensitivity returns to Tavi's pussy, causing her to raise herself off of your toy and showcasing her wet sex.")
 
 		addButton("Continue", "See what happens next", "endthescene_removestrapon")
+	if(state == "pussylick"):
+		playAnimation(StageScene.Duo, "stand", {npc="tavi", npcAction="kneel"})
+		saynn("Time to train Tavi's tongue game a little.. You grab her hand and lean your back against the wall while guiding her to kneel before you.")
+
+		saynn("[say=pc]On your knees, Tavi.[/say]")
+
+		saynn("She nods and obeys your touch, slowly lowering herself until her head is roughly at your belt level.")
+
+		if (GM.pc.isFullyNaked()):
+			saynn("Your exposed {pc.pussyStretch} pussy is already in her view, making her cheeks glow.")
+
+			saynn("[say=pc]Closer~.[/say]")
+
+		else:
+			saynn("[say=pc]Undress me. And then get closer~.[/say]")
+
+			saynn("Your orders make Tavi's cheeks glow. She can probably already feel the scent coming from your sex..")
+
+		addButton("Watch", "See what Tavi will do", "pussylick_watch")
+	if(state == "pussylick_watch"):
+		playAnimation(StageScene.SexOral, "tease", {npc="tavi", bodyState={exposedCrotch=true, hard=true}})
+		if (GM.pc.isFullyNaked()):
+			saynn("Tavi bites her lips and slowly brings herself closer. You spread your legs open, offering the feline a great view of your pussy"+str(" and your {pc.penis}" if GM.pc.hasPenis() else "")+".")
+
+		else:
+			saynn("Tavi bites her lips and slowly brings herself closer. Her paws tug on your clothing, exposing your private bits to her eyes. You spread your legs open, offering the feline a great view of your {pc.pussyStretch} pussy"+str(" and your {pc.penis}" if GM.pc.hasPenis() else "")+".")
+
+		saynn("[say=pc]You're gonna eat me out, Tavi. Don't worry, I will guide you.[/say]")
+
+		saynn("Her gaze meets with yours for a second. The air in the cell is charged with anticipation as she leans in even closer and lets her breath brush against your sex. Your hand lands on her hair, digits sifting between the strands, helping her focus on the task.")
+
+		saynn("[say=tavi]Of course..[/say]")
+
+		saynn("Feels strange to have your roles reversed.. Tavi probably feels it too. But she doesn't mind, she flicks her tongue out and begins to carefully use it, cautiously tracing little wet lines around your sensitive folds, to the best of her ability.")
+
+		addButton("Continue", "See what happens next", "pussylick_lick")
+	if(state == "pussylick_lick"):
+		playAnimation(StageScene.SexOral, "lick", {npc="tavi", bodyState={exposedCrotch=true, hard=true}})
+		saynn("It feels nice.. even if it's just teasing for now. You can feel your pussy becoming wet while Tavi's tongue is doing a little dance around the outer border. Your breathing gets slightly deeper.")
+
+		saynn("[say=pc]Be more brave, Tavi.[/say]")
+
+		saynn("She nods and tries to drag her tongue over the pussy, tasting your arousal in the process. Her brows get raised as she savors the strange taste. But you use your grasp on her hair to make her return to licking.")
+
+		saynn("[say=pc]Be a good girl and don't slack.[/say]")
+
+		saynn("Tavi obeys, dragging her tongue over the folds again and again, causing you to produce some soft moans. Her feline ears pick up on those and make her focus on the areas that make you moan the most. With each gasp and sigh, Tavi slowly gains confidence, licking your pussy pretty actively. Her tongue has a rough texture that provides extra stimulation.")
+
+		saynn("With a subtle tilt of your hips, you guide Tavi to focus on the specific little bump just above the folds. When Tavi's tongue finds your clit, your body starts to shiver a bit.")
+
+		saynn("[say=pc]Ah..[/say]")
+
+		saynn("Tavi blinks a few times and proceeds to rub your little bean more, flicking it left and right with her feline tongue. All the while her lips are pressed against your folds, gently sucking on them.")
+
+		saynn("As Tavi becomes bolder, your grip on her hair tightens, pulling her closer, urging to explore deeper. The intensity builds, the feline can probably feel your body tensing with impending release already..")
+
+		addButton("Cum", "Just ride those pleasure waves", "pussylick_cum")
+		if (sexSkill > 2):
+			addButton("Squirt", "Let Tavi taste your juices more", "pussylick_squirt")
+		else:
+			addDisabledButton("Squirt", "Tavi needs to be more skilled for this")
+		if (sexSkill > 5):
+			addButton("Grind", "Spread your juices all over Tavi's face", "pussylick_grind")
+		else:
+			addDisabledButton("Grind", "Tavi needs to be more skilled for this")
+	if(state == "pussylick_cum"):
+		playAnimation(StageScene.SexOral, "start", {npc="tavi", bodyState={exposedCrotch=true, hard=true}})
+		saynn("Finally, you reach your climax, your body shivering and arching from ecstasy. Tavi smiles while watching you and your pussy, knowing that she caused that.")
+
+		saynn("Your breathing is quick and ragged. Your hands pats the feline that did a pretty good job.")
+
+		saynn("[say=pc]Good girl.[/say]")
+
+		saynn("Tavi blushes and instantly avoids eye contact. You can see her licking her lips though.")
+
+		saynn("That was a pretty good lesson.")
+
+		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "pussylick_squirt"):
+		playAnimation(StageScene.SexOral, "tease", {npc="tavi", bodyState={exposedCrotch=true, hard=true}})
+		saynn("Finally, you reach your climax, your body shivering and arching from ecstasy. Tavi tries to pull away but you use your hand to keep her maw pressed firmly against your pulsing slit.")
+
+		saynn("Tavi feels the firm touch which makes her return to licking and redouble her efforts, eating you out more thoroughly.")
+
+		saynn("[say=pc]Mouth, now..[/say]")
+
+		saynn("She parts her lips more just in time for your overstimulated pussy to suddenly release a fountain of transparent juices, most of them landing on Tavi's tongue, allowing her to swallow it all.")
+
+		saynn("After that orgasm, your breathing is quick and ragged. Your hands pats the feline that did a pretty good job eating you out.")
+
+		saynn("[say=pc]Good girl.[/say]")
+
+		saynn("Tavi blushes and instantly avoids eye contact. You can see her licking her lips though.")
+
+		saynn("That was a pretty good lesson.")
+
+		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "pussylick_grind"):
+		playAnimation(StageScene.SexOral, "grind", {npc="tavi", bodyState={exposedCrotch=true, hard=true}})
+		saynn("A devious thought comes to your mind. You get a better grasp on her hair and keep her head stable as you begin to grind your pussy against her face. She gets lost at first but then returns to licking, dragging her tongue over your folds while you go back and forth across her face.")
+
+		saynn("[say=pc]Ngh-h..[/say]")
+
+		saynn("Passionate moans leave your lips as your pussy squirts, coating Tavi's fur with your juices and forcing your scent into it. The feline doesn't stop licking you, causing your body to start shaking, your muscles tensing, pushing her into your pussy harder.")
+
+		saynn("After that explosive release, you finally let Tavi pull away and start breathing again.")
+
+		saynn("[say=pc]Good pussy licker.. maybe the best one even.[/say]")
+
+		saynn("You can hear purring from her as she is licking her lips.")
+
+		saynn("[say=tavi]Thank you~.[/say]")
+
+		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "anal"):
+		playAnimation(StageScene.Duo, "stand", {npc="tavi", npcBodyState={naked=true}})
+		if (isVirgin):
+			saynn("Tavi still has her virginity so having any vaginal sex with her will cause her to lose it. But there is always another way..")
+
+		saynn("You call Tavi to get closer to you. She obeys and looks at you with her curious eyes.")
+
+		saynn("[say=pc]We're gonna try anal sex today.[/say]")
+
+		saynn("That is certainly a surprise for her. Tavi's eyes go wide.")
+
+		saynn("[say=tavi]Are you.. sure? I never really did anything like that..[/say]")
+
+		saynn("Your hands land on her butt and gently knead it while your voice tries to be reassuring.")
+
+		saynn("[say=pc]I will be very gentle. It will feel good, Tavi.[/say]")
+
+		saynn("Tavi deliberates for some time and then nods, clearly trusting you enough to do this.")
+
+		saynn("Your hands begin to undress her, slowly undoing all of the buttons of her shirt before pulling down her shorts.")
+
+		saynn("[say=pc]Get on the bed.[/say]")
+
+		saynn("Naked Tavi climbs onto her inmate bed, waiting for you to do the next move.")
+
+		addButton("Behind her", "Sit behind Tavi and prepare her", "anal_prepare")
+	if(state == "anal_prepare"):
+		playAnimation(StageScene.SexAllFours, "tease", {npc="tavi", pc="pc", bodyState={naked=true, hard=true}, npcBodyState={naked=true}})
 func taviSpeak(normalSpeak, corruptSpeak, pureSpeak):
 	if(isCorrupt):
 		return corruptSpeak
@@ -865,6 +1009,18 @@ func _react(_action: String, _args):
 			fluids.addFluid("CumLube", RNG.randi_range(3, 5)*100.0)
 			GM.pc.getInventory().equipItem(strapon)
 		return
+
+	if(_action == "anal_pick"):
+		if(GM.pc.hasReachablePenis()):
+			usedStrapon = false
+			setState("anal")
+		else:
+			usedStrapon = true
+			setState("anal_strapon")
+			var strapon = GlobalRegistry.createItem("StraponCanine")
+			var fluids = strapon.getFluids()
+			fluids.addFluid("CumLube", RNG.randi_range(3, 5)*100.0)
+			GM.pc.getInventory().equipItem(strapon)
 
 	if(_action == "cancel_lesson"):
 		increaseFlag("TaviModule.Ch6Tiredness", -1)
@@ -985,6 +1141,29 @@ func _react(_action: String, _args):
 	if(_action == "cowgirl_strapon_noknot"):
 		processTime(5*60)
 		#getCharacter("tavi").cummedOnBy("pc")
+
+	if(_action == "pussylick_watch"):
+		processTime(3*60)
+
+	if(_action == "pussylick_lick"):
+		processTime(3*60)
+
+	if(_action == "pussylick_cum"):
+		processTime(2*60)
+		GM.pc.orgasmFrom("tavi")
+
+	if(_action == "pussylick_squirt"):
+		processTime(2*60)
+		getCharacter("tavi").cummedInMouthBy("pc", FluidSource.Vagina)
+		GM.pc.orgasmFrom("tavi")
+
+	if(_action == "pussylick_grind"):
+		processTime(2*60)
+		getCharacter("tavi").cummedOnBy("pc", FluidSource.Vagina)
+		GM.pc.orgasmFrom("tavi")
+
+	if(_action == "anal_prepare"):
+		processTime(8*60)
 
 	setState(_action)
 
