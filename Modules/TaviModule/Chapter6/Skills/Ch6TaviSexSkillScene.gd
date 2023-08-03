@@ -32,6 +32,11 @@ func _run():
 		if (sexSkill > 0):
 			addButton("First Blowjob", "Teach Tavi to suck you off", "firstbj_pick")
 			addButtonWithChecks("Pussy licking", "Teach Tavi to lick you", "pussylick", [], [ButtonChecks.HasReachableVagina])
+		if (sexSkill > 1):
+			if (!isVirgin):
+				addButton("Cowgirl", "Teach Tavi how to ride you", "cowgirl_pick")
+			else:
+				addDisabledButton("Cowgirl", "Tavi can't be a virgin for this")
 		addButton("Cancel", "You changed your mind", "cancel_lesson")
 	if(state == "take_virginity_pickstrapon"):
 		saynn("Pick which strapon you wanna use?")
@@ -594,6 +599,218 @@ func _run():
 		saynn("Tavi smiles softly, keeping her chin low.")
 
 		addButton("Continue", "See what happens next", "endthescene_removestrapon")
+	if(state == "cowgirl"):
+		playAnimation(StageScene.Duo, "stand", {npc="tavi", npcBodyState={naked=true}})
+		saynn("Tension rises as you invite Tavi to follow you to her inmate bed.")
+
+		saynn("[say=pc]You're gonna practice riding me today. Got it?[/say]")
+
+		saynn("Tavi, still new to this whole sex thing, offers you a shy smile. Her eyes seem to be showing a mix of curiosity and nervousness.")
+
+		saynn("[say=tavi]I can try.[/say]")
+
+		saynn("[say=pc]I will guide you.[/say]")
+
+		saynn("She nods and lets you strip her uniform, exposing her beautiful chest and tight neat pussy. You prepare yourself as well..")
+
+		addButton("Lie down", "Position yourself on the bed", "cowgirl_lie")
+	if(state == "cowgirl_lie"):
+		playAnimation(StageScene.SexCowgirl, "tease", {npc="tavi", pc="pc", bodyState={naked=true, hard=true}, npcBodyState={naked=true}})
+		saynn("You lie down on her bed before taking Tavi's paw and helping her to settle above you. Her cheeks blush slightly when she straddles your hips, her crotch is hovering above your exposed {pc.penis}.")
+
+		saynn("[say=pc]Help me get hard, Tavi.[/say]")
+
+		saynn("She nods and teases you with her digits until blood starts flowing to your member. That's when she gets a better grasp and starts stroking it slightly. Feels nice.. but..")
+
+		saynn("[say=pc]You can use your body too, kitty.[/say]")
+
+		saynn("Tavi bites her lip, hearing that offer. She lowers her frame just a bit, enough for the tip of your member to brush against her sensitive folds. Tavi's pussy is radiating so much warmness.. She starts grinding your shaft ever so slightly, spreading her juices along the veiny surface of your cock.")
+
+		saynn("[say=tavi]Like that~?..[/say]")
+
+		saynn("You nod and let Tavi do everything at her own pace. Eventually she stops.. and raises herself again, aligning her wet slit better..")
+
+		addButton("Continue", "See what happens next", "cowgirl_ride")
+	if(state == "cowgirl_ride"):
+		playAnimation(StageScene.SexCowgirl, "sex", {npc="tavi", pc="pc", bodyState={naked=true, hard=true}, npcBodyState={naked=true}})
+		saynn("You hold your hands on Tavi's waist, offering her some support while she begins lowering herself directly onto your {pc.penis}, its tip spreading her awaiting folds wide before disappearing inside her. Oh wow, she is even more warm inside.")
+
+		saynn("Tavi continues to bring herself down onto your member.. until it hits the natural barricade that is her cervix. A little cute moan escapes her. Tavi's inner walls hug you so well..")
+
+		saynn("[say=pc]You're doing great.[/say]")
+
+		saynn("As Tavi begins to find her rhythm, you help her find the right motion by guiding her hips. Her breath quickens as she starts feeling your length sliding in and out of her, sensations making her eager to continue.")
+
+		saynn("[say=tavi]Feels nice.. And I'm on top..[/say]")
+
+		saynn("[say=pc]Let the pleasure guide your motions.[/say]")
+
+		saynn("Her pace is still teasingly slow. But your words and touches provide Tavi with confidence to start riding you faster, causing her {tavi.breasts} to bounce. Her movements become more fluid and instinctual, her pussy stretching to accommodate your size.")
+
+		saynn("[say=pc]You're a natural..[/say]")
+
+		saynn("Tavi takes the lead, finding her own pace. But your hands are still there on her hips, gripping them tightly. She smiles, proudly presenting you her jiggling chest as she rides you.")
+
+		saynn("[say=tavi]I can get used to this~. Ah~..[/say]")
+
+		saynn("As Tavi's arousal rises, you begin to feel her pussy tightening around your member, her inner walls pulsing with every descend. The friction brings both of you to the edge quite fast..")
+
+		addButton("Inside", "Let Tavi receive your seed", "cowgirl_inside")
+		addButton("Outside", "Let Tavi's body receive your seed", "cowgirl_outside")
+	if(state == "cowgirl_inside"):
+		playAnimation(StageScene.SexCowgirl, "inside", {npc="tavi", pc="pc", bodyState={naked=true, hard=true}, npcBodyState={naked=true}})
+		saynn("As your shared pleasure reaches its peak, a powerful orgasm overwhelms you and Tavi. Her body arches with ecstasy as your throbbing cock starts flooding her womb full of your seed. The choice to creampie your pet during the training might be a strange one.. but it feels right.")
+
+		saynn("[say=tavi]So much.. inside..[/say]")
+
+		saynn("You can feel her inner walls clenching around your shaft, little moans escaping from her as she stops riding you and just.. lets the pleasure waves wash over her.")
+
+		saynn("[say=pc]You are amazing.[/say]")
+
+		saynn("Tavi tries to cover her blush with her paws, still with your cock inside her.")
+
+		saynn("[say=tavi]I have a good teacher, okay?..[/say]")
+
+		saynn("[say=pc]Sure~.[/say]")
+
+		saynn("You rest together like that. At some point the sensitivity returns to Tavi's pussy, causing her to raise herself off of your dick and showcasing her drippy stuffed sex.")
+
+		saynn("[say=tavi]How am I gonna clean that..[/say]")
+
+		saynn("Maybe she just shouldn't.")
+
+		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "cowgirl_outside"):
+		playAnimation(StageScene.SexCowgirl, "tease", {npc="tavi", pc="pc", bodyState={naked=true, hard=true}, npcBodyState={naked=true}})
+		saynn("As your shared pleasure reaches its peak, a powerful orgasm overwhelms you and Tavi.")
+
+		saynn("[say=pc]Not inside.[/say]")
+
+		saynn("Tavi listens to you, quickly raising herself and just sitting on your legs, moments before your throbbing starts shooting powerful lines of seed onto her belly and crotch. Messy. But at least you didn't creampie your pet. At the same time, Tavi is shaking as the pleasure waves cause her muscles to tense up, even her pussy is contracting visibly.")
+
+		saynn("[say=tavi]Ngh-h.. Hot cum.. all over me..[/say]")
+
+		saynn("Both of you are left to pant heavily.")
+
+		saynn("[say=pc]You are amazing.[/say]")
+
+		saynn("Tavi tries to cover her blush with her paws.")
+
+		saynn("[say=tavi]I have a good teacher, okay?..[/say]")
+
+		saynn("[say=pc]Sure~.[/say]")
+
+		saynn("You proceed to rest like that for a bit. Your {pc.cum} slowly drips down her belly.")
+
+		saynn("[say=tavi]How am I gonna clean that..[/say]")
+
+		saynn("Maybe she just shouldn't.")
+
+		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "cowgirl_strapon"):
+		playAnimation(StageScene.Duo, "stand", {npc="tavi", npcBodyState={naked=true}, bodyState={naked=true}})
+		saynn("Tension rises as you invite Tavi to follow you to her inmate bed.")
+
+		saynn("[say=pc]You're gonna practice riding me today. Got it?[/say]")
+
+		saynn("Tavi, still new to this whole sex thing, offers you a shy smile. Her eyes seem to be showing a mix of curiosity and nervousness.")
+
+		saynn("[say=tavi]I can try.[/say]")
+
+		saynn("[say=pc]I will guide you.[/say]")
+
+		saynn("She nods and lets you strip her uniform, exposing her beautiful chest and tight neat pussy. You prepare yourself as well, undressing and securing a strapon around your waist, one that Tavi graciously provided..")
+
+		addButton("Lie down", "Position yourself on the bed", "cowgirl_lie_strapon")
+	if(state == "cowgirl_lie_strapon"):
+		playAnimation(StageScene.SexCowgirl, "tease", {npc="tavi", pc="pc", bodyState={naked=true, hard=true}, npcBodyState={naked=true}})
+		saynn("You lie down on her bed before taking Tavi's paw and helping her to settle above you. Her cheeks blush slightly when she straddles your hips, her crotch is hovering above your new rubber member.")
+
+		saynn("[say=pc]Help lube it up, Tavi.[/say]")
+
+		saynn("She nods and licks her digits before wrapping them around the shaft. She starts stroking it slightly. You don't feel much since it's just a toy. But still, the sight is arousing..")
+
+		saynn("[say=pc]There are better fluids than saliva that you can use, kitty.[/say]")
+
+		saynn("Tavi bites her lip, hearing that tip. She lowers her frame just a bit, enough for the tip of the strapon to brush against her sensitive folds. Tavi's pussy is radiating so much warmness.. She starts grinding the rubber shaft ever so slightly, spreading her juices along the shiny surface.")
+
+		saynn("[say=tavi]Like that~?..[/say]")
+
+		saynn("You nod and let Tavi do everything at her own pace. Eventually she stops.. and raises herself again, aligning her wet slit better..")
+
+		addButton("Continue", "See what happens next", "cowgirl_ride_strapon")
+	if(state == "cowgirl_ride_strapon"):
+		playAnimation(StageScene.SexCowgirl, "sex", {npc="tavi", pc="pc", bodyState={naked=true, hard=true}, npcBodyState={naked=true}})
+		saynn("You hold your hands on Tavi's waist, offering her some support while she begins lowering herself directly onto your rubber member, its tip spreading her awaiting folds wide before disappearing inside her. It goes pretty smoothly, thanks to Tavi's juices.")
+
+		saynn("Tavi continues to bring herself down onto the toy.. until it hits the natural barricade that is her cervix. A little cute moan escapes her. Tavi's inner walls hug you so well..")
+
+		saynn("[say=pc]You're doing great.[/say]")
+
+		saynn("As Tavi begins to find her rhythm, you help her find the right motion by guiding her hips. Her breath quickens as she starts feeling your length sliding in and out of her, sensations making her eager to continue.")
+
+		saynn("[say=tavi]Feels nice.. And I'm on top..[/say]")
+
+		saynn("[say=pc]Let the pleasure guide your motions.[/say]")
+
+		saynn("Her pace is still teasingly slow. But your words and touches provide Tavi with confidence to start riding you faster, causing her {tavi.breasts} to bounce. Her movements become more fluid and instinctual, her pussy stretching to accommodate the size of that dildo.")
+
+		saynn("[say=pc]You're a natural..[/say]")
+
+		saynn("Tavi takes the lead, finding her own pace. But your hands are still there on her hips, gripping them tightly. She smiles, proudly presenting you her jiggling chest as she rides you.")
+
+		saynn("[say=tavi]I can get used to this~. Ah~..[/say]")
+
+		saynn("As Tavi's arousal rises, you begin to feel her pussy tightening around your strapon, her inner walls pulsing with every descend. The friction brings her to the edge quite fast..")
+
+		addButton("Knot", "Pull Tavi harder onto the strapon", "cowgirl_strapon_knot")
+		addButton("No knot", "Let Tavi's enjoy it", "cowgirl_strapon_noknot")
+	if(state == "cowgirl_strapon_knot"):
+		playAnimation(StageScene.SexCowgirl, "inside", {npc="tavi", pc="pc", bodyState={naked=true, hard=true}, npcBodyState={naked=true}})
+		saynn("As Tavi's pleasure reaches its peak, you decide to test her a little more. The moment her body arches with ecstasy, you pull her lower unto your strapon.. until the rubber knot slips inside too.")
+
+		saynn("[say=tavi]H-he.. AH!..[/say]")
+
+		saynn("Her body has begun shaking, her pussy clenching the toy that's stretching her extremely wide. Tavi's tight pussy puts enough pressure on that orb to suddenly cause the strapon to force its stored cumlube directly into her womb.")
+
+		saynn("Knotting your pet during training might be a strange idea. But.. why not?")
+
+		saynn("[say=tavi]W-wha.. So much.. inside..[/say]")
+
+		saynn("You smile watching Tavi struggle to contain all the sensations. Little moans escaping from her as she is forced to be tied with you and just.. lets the pleasure waves wash over her.")
+
+		saynn("[say=pc]You are amazing.[/say]")
+
+		saynn("Tavi tries to cover her blush with her paws, still with the full length inside her.")
+
+		saynn("[say=tavi]Ngh-h..[/say]")
+
+		saynn("You rest together like that for about a minute. At some point the sensitivity returns to Tavi's pussy, causing pain to her. So you help her to escape the knot by pulling her up until the strapon gets yanked out with a satisfying plop noise. Cumlube starts streaming down Tavi's thighs.")
+
+		saynn("[say=tavi]How am I gonna clean that..[/say]")
+
+		saynn("Maybe she just shouldn't.")
+
+		addButton("Continue", "See what happens next", "endthescene_removestrapon")
+	if(state == "cowgirl_strapon_noknot"):
+		playAnimation(StageScene.SexCowgirl, "inside", {npc="tavi", pc="pc", bodyState={naked=true, hard=true}, npcBodyState={naked=true}})
+		saynn("As Tavi's pleasure reaches its peak, a powerful orgasm overwhelms her. You support Tavi while her body arches from sheer ecstasy.")
+
+		saynn("[say=tavi]So good..[/say]")
+
+		saynn("You can feel her inner walls clenching around the toy, making any motions harder. Little moans escaping from her as she stops riding you and just.. lets the pleasure waves wash over her.")
+
+		saynn("[say=pc]You are amazing.[/say]")
+
+		saynn("Tavi tries to cover her blush with her paws, still with your strapon inside her.")
+
+		saynn("[say=tavi]I have a good teacher, okay?..[/say]")
+
+		saynn("[say=pc]Sure~.[/say]")
+
+		saynn("You rest together like that. At some point the sensitivity returns to Tavi's pussy, causing her to raise herself off of your toy and showcasing her wet sex.")
+
+		addButton("Continue", "See what happens next", "endthescene_removestrapon")
 func taviSpeak(normalSpeak, corruptSpeak, pureSpeak):
 	if(isCorrupt):
 		return corruptSpeak
@@ -635,6 +852,19 @@ func _react(_action: String, _args):
 
 	if(_action == "pussylick"):
 		getModule("TaviModule").advanceSkill("taviSkillSex")
+
+	if(_action == "cowgirl_pick"):
+		if(GM.pc.hasReachablePenis()):
+			usedStrapon = false
+			setState("cowgirl")
+		else:
+			usedStrapon = true
+			setState("cowgirl_strapon")
+			var strapon = GlobalRegistry.createItem("StraponCanine")
+			var fluids = strapon.getFluids()
+			fluids.addFluid("CumLube", RNG.randi_range(3, 5)*100.0)
+			GM.pc.getInventory().equipItem(strapon)
+		return
 
 	if(_action == "cancel_lesson"):
 		increaseFlag("TaviModule.Ch6Tiredness", -1)
@@ -725,6 +955,36 @@ func _react(_action: String, _args):
 		GM.pc.removeStrapon()
 		endScene()
 		return
+
+	if(_action == "cowgirl_lie"):
+		processTime(3*60)
+
+	if(_action == "cowgirl_ride"):
+		processTime(3*60)
+
+	if(_action == "cowgirl_inside"):
+		processTime(5*60)
+		getCharacter("tavi").cummedInVaginaBy("pc")
+		GM.pc.orgasmFrom("tavi")
+
+	if(_action == "cowgirl_outside"):
+		processTime(5*60)
+		getCharacter("tavi").cummedOnBy("pc")
+		GM.pc.orgasmFrom("tavi")
+
+	if(_action == "cowgirl_lie_strapon"):
+		processTime(3*60)
+
+	if(_action == "cowgirl_ride_strapon"):
+		processTime(3*60)
+
+	if(_action == "cowgirl_strapon_knot"):
+		processTime(5*60)
+		getCharacter("tavi").cummedInVaginaBy("pc", FluidSource.Strapon)
+
+	if(_action == "cowgirl_strapon_noknot"):
+		processTime(5*60)
+		#getCharacter("tavi").cummedOnBy("pc")
 
 	setState(_action)
 
