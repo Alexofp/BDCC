@@ -2161,7 +2161,7 @@ func applyRandomColors():
 		pickedSkinGColor = skinColors[1]
 		pickedSkinBColor = skinColors[2]
 
-func applyRandomSkinAndColors():
+func applyRandomSkin():
 	var species = getSpecies()
 	var possibleSkins = []
 	for speciesOne in species:
@@ -2178,7 +2178,9 @@ func applyRandomSkinAndColors():
 	
 	if(newSkin != null):
 		pickedSkin = newSkin
-		
+
+func applyRandomSkinAndColors():
+	applyRandomSkin()
 	applyRandomColors()
 
 func applyRandomSkinAndColorsAndParts():
@@ -2192,3 +2194,28 @@ func applyRandomSkinAndColorsAndParts():
 
 func getStatusEffectImmunity(statusEffectID):
 	return buffsHolder.getStatusEffectImmunity(statusEffectID)
+
+func checkSkins(applyRandomSkinOnFail = false):
+	var theSkin = GlobalRegistry.getSkin(pickedSkin)
+	if(theSkin == null):
+		if(applyRandomSkinOnFail):
+			applyRandomSkin()
+		else:
+			pickedSkin = "EmptySkin"
+	
+	for bodypartSlot in bodyparts:
+		if(!hasBodypart(bodypartSlot)):
+			continue
+		
+		var bodypart = getBodypart(bodypartSlot)
+		if(bodypart.pickedSkin == null):
+			continue
+		
+		if(bodypart.hasCustomSkinPattern()):
+			var thePartSkin = GlobalRegistry.getPartSkin(bodypart.id, bodypart.pickedSkin)
+			if(thePartSkin == null):
+				bodypart.pickedSkin = null
+		else:
+			theSkin = GlobalRegistry.getSkin(bodypart.pickedSkin)
+			if(theSkin == null):
+				bodypart.pickedSkin = null

@@ -222,6 +222,7 @@ func loadData(data):
 			
 		bodypart.loadData(SAVE.loadVar(loadedBodyparts[slot], "data", {}))
 		giveBodypart(bodypart, false)
+	checkSkins(true)
 	
 	loadStatusEffectsData(SAVE.loadVar(data, "statusEffects", {}))
 	inventory.loadDataNPC(SAVE.loadVar(data, "inventory", {}))
