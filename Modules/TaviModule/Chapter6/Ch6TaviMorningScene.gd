@@ -4,6 +4,7 @@ var isCorrupt = false
 var isPure = false
 var isNormal = false
 var isVirgin = false
+var sexSkill = 0
 
 func _init():
 	sceneID = "Ch6TaviMorningScene"
@@ -16,6 +17,7 @@ func _run():
 		isPure = getModule("TaviModule").isPure()
 		isNormal = (!isCorrupt && !isPure)
 		isVirgin = getModule("TaviModule").isVirgin()
+		sexSkill = getModule("TaviModule").getSkillScore("taviSkillSex")
 		saynn("As you enter Tavi's cell, you find her lying on her bed, her breathing heavy and her eyes filled with the mix of desire and need.")
 
 		var randomText = RNG.pick([1, 2, 3, 4, 5, 6])
@@ -70,6 +72,11 @@ func _run():
 		if (!playedAnim):
 			playAnimation(StageScene.Sleeping, "idle", {pc="tavi", bodyState={naked=true}})
 		addButton("Finger her", "Make Tavi cum with just your fingers", "do_finger")
+		if (sexSkill > 0):
+			if (!isVirgin):
+				addButton("Fuck her", "Rail Tavi to satisfy her heat", "do_fuck_pick")
+			else:
+				addDisabledButton("Fuck her", "Tavi can't be a virgin for this")
 	if(state == "do_finger"):
 		playAnimation(StageScene.SexStanding, "tease", {npc="tavi", pc="pc", npcBodyState={naked=true}})
 		saynn("With a firm grip, you pin Tavi against the wall. Her body is already shivering with anticipation. She willingly spreads her long legs and sticks her butt out for you, her tail getting out of the way, exposing the dripping sex..")
@@ -120,6 +127,91 @@ func _run():
 		saynn("[say=tavi]So mean..[/say]")
 
 		addButton("Continue", "See what happens next", "start_talk")
+	if(state == "do_fuck1"):
+		playAnimation(StageScene.SexStanding, "fast", {npc="tavi", pc="pc", npcBodyState={naked=true}, bodyState={naked=true, hard=true}})
+		saynn("Without a word, you step forward, quickly closing the distance between you and Tavi before grabbing and pressing her against one of the cell's walls. It only takes a second for you to expose your {pc.penis} and align it with her pussy before thrusting inside!")
+
+		saynn("Tavi gasps at the sudden penetration but her wet pussy eagerly accepts you and your cock, allowing you to slide inside her quite easily, already picking up the pace.")
+
+		saynn("[say=tavi]Ngh.. F-fuck..[/say]")
+
+		saynn("The horny feline holds onto the cold wall and moans as you take her rough, Tavi's back is pressed against your chest, allowing you to growl softly into her ear.")
+
+		saynn("She anticipates each thrust with the motion of her body, meeting your cock before your hips slap against her fluffy butt. Both of you quickly approach your peaks..")
+
+		if (getModule("TaviModule").hasWombMark()):
+			saynn("[say=tavi]Breed me!.. Please!.. Make my mark shine brightly![/say]")
+
+		else:
+			saynn("[say=tavi]I can't get pregnant.. Please..[/say]")
+
+		addButton("Inside", "Cum inside Tavi", "do_fuck1_inside")
+		addButton("Pull out", "You'd rather not", "do_fuck1_pullout")
+	if(state == "do_fuck1_inside"):
+		playAnimation(StageScene.SexStanding, "inside", {npc="tavi", pc="pc", npcBodyState={naked=true}, bodyState={naked=true, hard=true}})
+		saynn("With a final thrust, you ram your {pc.penis} as deep as that pussy allows before the raw passion takes over. Your member throbs inside Tavi, filling her with your hot sticky {pc.cum} while is busy moaning and gasping, her body trembling with pleasure as she welcomes the flood of your seed.")
+
+		saynn("[say=tavi]T-thank you..[/say]")
+
+		saynn("As your orgasms begin to fade, so does Tavi's heat. As you pull out, you are presented with a great sight: Tavi holding onto the wall, her stuffed used pussy leaking your seed.")
+
+		addButton("Continue", "See what happens next", "start_talk")
+	if(state == "do_fuck1_pullout"):
+		playAnimation(StageScene.SexStanding, "tease", {npc="tavi", pc="pc", npcBodyState={naked=true}, bodyState={naked=true, hard=true}})
+		saynn("You fight the urge to breed Tavi and pull your member out as soon as you feel the orgasmic waves take over. Your {pc.penis} is throbbing and shooting {pc.cum} onto the floor while Tavi is busy shivering ever so slightly, her neat pussy wasn't stuffed this time.")
+
+		saynn("[say=tavi]H-huff..[/say]")
+
+		saynn("As your orgasm begins to fade, so does Tavi's heat. Heat that got unsatisfied.")
+
+		addButton("Continue", "See what happens next", "start_talk")
+	if(state == "do_fuck1_strapon"):
+		playAnimation(StageScene.SexStanding, "fast", {npc="tavi", pc="pc", npcBodyState={naked=true}, bodyState={naked=true, hard=true}})
+		saynn("Without a word, you step forward, quickly closing the distance between you and Tavi before grabbing and pressing her against one of the cell's walls. It only takes a few seconds for you to secure your strapon and align it with her pussy before thrusting inside!")
+
+		saynn("Tavi gasps at the sudden penetration but her wet pussy eagerly accepts you and your rubber dildo, allowing you to slide inside her quite easily, already picking up the pace.")
+
+		saynn("[say=tavi]Ngh.. F-fuck..[/say]")
+
+		saynn("The horny feline holds onto the cold wall and moans as you take her rough, Tavi's back is pressed against your chest, allowing you to growl softly into her ear.")
+
+		saynn("She anticipates each thrust with the motion of her body, meeting the rubber cock before your hips slap against her fluffy butt. She approaches her peak quite quickly..")
+
+		if (getModule("TaviModule").hasWombMark()):
+			saynn("[say=tavi]Breed me!.. Please!.. Make my mark shine brightly![/say]")
+
+		else:
+			saynn("[say=tavi]I can't get pregnant.. Please..[/say]")
+
+		saynn("You only have a toy so you can't really do it either way.. But Tavi still begs you.")
+
+		addButton("Knot", "Ram the whole strapon inside Tavi", "do_fuck1_knot_strapon")
+		addButton("Pull out", "You'd rather not", "do_fuck1_pullout_strapon")
+	if(state == "do_fuck1_knot_strapon"):
+		playAnimation(StageScene.SexStanding, "inside", {npc="tavi", pc="pc", npcBodyState={naked=true}, bodyState={naked=true, hard=true}})
+		saynn("With a final thrust, you ram the canine cock strapon as deep as that pussy allows before the knot suddenly slips in and the raw passion takes over. Your strapon throbs inside Tavi, filling her with your hot sticky cumlube while is busy moaning and gasping, her body trembling with pleasure as she welcomes the flood of cum-like substance.")
+
+		saynn("[say=tavi]T-thank you..[/say]")
+
+		saynn("As your orgasms begin to fade, so does Tavi's heat. As you pull out, you are presented with a great sight: Tavi holding onto the wall, her stuffed used pussy leaking seed.")
+
+		addButton("Continue", "See what happens next", "start_talk_removestrapon")
+	if(state == "do_fuck1_pullout_strapon"):
+		playAnimation(StageScene.SexStanding, "tease", {npc="tavi", pc="pc", npcBodyState={naked=true}, bodyState={naked=true, hard=true}})
+		saynn("You fight the urge to knot Tavi and pull the toy out as soon as you feel the orgasmic waves take over her body. The feline squirms and moans as her pussy is trying to grasp what's not there anymore.")
+
+		saynn("[say=tavi]H-huff..[/say]")
+
+		saynn("That satisfied her heat, even if not completely.")
+
+		addButton("Continue", "See what happens next", "start_talk_removestrapon")
+func taviSpeak(normalSpeak, corruptSpeak, pureSpeak):
+	if(isCorrupt):
+		return corruptSpeak
+	if(isPure):
+		return pureSpeak
+	return normalSpeak
+
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
@@ -129,13 +221,55 @@ func _react(_action: String, _args):
 	if(_action == "do_finger"):
 		processTime(3*60)
 
+	if(_action == "do_fuck_pick"):
+		setState("do_fuck1")
+		if(GM.pc.hasReachablePenis()):
+			#usedStrapon = false
+			setState("do_fuck1")
+		else:
+			#usedStrapon = true
+			setState("do_fuck1_strapon")
+			var strapon = GlobalRegistry.createItem("StraponCanine")
+			var fluids = strapon.getFluids()
+			fluids.addFluid("CumLube", RNG.randi_range(3, 5)*100.0)
+			GM.pc.getInventory().equipItem(strapon)
+		return
+
 	if(_action == "do_finger_cum"):
-		getModule("TaviModule").addCorruption(1)
+		getModule("TaviModule").addCorruption(3)
 
 	if(_action == "do_finger_deny"):
-		getModule("TaviModule").addCorruption(-1)
+		getModule("TaviModule").addCorruption(-3)
 
 	if(_action == "start_talk"):
+		endScene()
+		runScene("Ch6TaviTalkScene")
+		return
+
+	if(_action == "do_fuck1_inside"):
+		processTime(10*60)
+		getModule("TaviModule").addCorruption(5)
+		getCharacter("tavi").cummedInVaginaBy("pc")
+		GM.pc.orgasmFrom("tavi")
+
+	if(_action == "do_fuck1_pullout"):
+		processTime(10*60)
+		getModule("TaviModule").addCorruption(-5)
+		GM.pc.orgasmFrom("tavi")
+
+	if(_action == "do_fuck1_knot_strapon"):
+		processTime(10*60)
+		getModule("TaviModule").addCorruption(5)
+		getCharacter("tavi").cummedInVaginaBy("pc", FluidSource.Strapon)
+		GM.pc.orgasmFrom("tavi")
+
+	if(_action == "do_fuck1_pullout_strapon"):
+		processTime(10*60)
+		getModule("TaviModule").addCorruption(-5)
+		GM.pc.orgasmFrom("tavi")
+
+	if(_action == "start_talk_removestrapon"):
+		GM.pc.removeStrapon()
 		endScene()
 		runScene("Ch6TaviTalkScene")
 		return
@@ -149,6 +283,7 @@ func saveData():
 	data["isPure"] = isPure
 	data["isNormal"] = isNormal
 	data["isVirgin"] = isVirgin
+	data["sexSkill"] = sexSkill
 
 	return data
 
@@ -159,3 +294,4 @@ func loadData(data):
 	isPure = SAVE.loadVar(data, "isPure", false)
 	isNormal = SAVE.loadVar(data, "isNormal", false)
 	isVirgin = SAVE.loadVar(data, "isVirgin", false)
+	sexSkill = SAVE.loadVar(data, "sexSkill", 0)
