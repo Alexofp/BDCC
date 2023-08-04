@@ -37,7 +37,7 @@ func _run():
 				addButton("Cowgirl", "Teach Tavi how to ride you", "cowgirl_pick")
 			else:
 				addDisabledButton("Cowgirl", "Tavi can't be a virgin for this")
-		if (sexSkill > 4):
+		if (sexSkill > 3):
 			addButton("First Anal", "Have anal sex with Tavi", "anal_pick")
 		addButton("Cancel", "You changed your mind", "cancel_lesson")
 	if(state == "take_virginity_pickstrapon"):
@@ -955,6 +955,267 @@ func _run():
 		addButton("Behind her", "Sit behind Tavi and prepare her", "anal_prepare")
 	if(state == "anal_prepare"):
 		playAnimation(StageScene.SexAllFours, "tease", {npc="tavi", pc="pc", bodyState={naked=true, hard=true}, npcBodyState={naked=true}})
+		saynn("You take your spot behind Tavi, your hands landing on her butt and giving it some attention. Eventually, she moves her tail out of the way, exposing the little tight tailhole that was hiding behind. It's flesh-colored, which means that it's also green.")
+
+		saynn("[say=pc]Take deep breaths.[/say]")
+
+		saynn("She does that but her body is still quite tense. Gently, you spread her buttcheeks and begin tracing gentle circles around the star, coaxing Tavi to relax.")
+
+		saynn("You lick one of your fingers and begin prodding the entrance. Saliva is a bad lube so it doesn't go too well, Tavi's virgin-tight anal ring clenching hard around you.")
+
+		saynn("[say=tavi]Harder, maybe?..[/say]")
+
+		saynn("Nah, that's not the right approach. You decide to land your free hand on Tavi's neglected pussy and start giving it a few sensual rubs and strokes. Quite quickly, that begins to have an effect on her, causing her folds to get moist. You coat your digits in your juices and return to prodding her back entrance.. until one of the digits slides inside, causing Tavi to make a soft noise.")
+
+		saynn("[say=pc]There we go.[/say]")
+
+		saynn("You give her time to adjust before continuing, gently thrusting your fingers in and out.. until Tavi's body begins to yield.. her clenched muscles relaxing.")
+
+		saynn("[say=tavi]Feels nice..[/say]")
+
+		saynn("You introduce a second finger, stretching her anus gently and allowing her to accommodate the sensations. Little moans begin to fill the air, her body responding eagerly to her butt being fingered.")
+
+		saynn("[say=tavi]Please don't stop..[/say]")
+
+		saynn("[say=pc]I have a better idea.[/say]")
+
+		saynn("Your {pc.penis} has gotten quite hard while you were watching Tavi enjoying herself so much. You pull your digits away from her butt and grab some more of her arousal before coating your shaft with it. After that.. you slowly press the tip of your cock against Tavi's tight entrance.")
+
+		saynn("[say=tavi]Are you sure?..[/say]")
+
+		saynn("Your free hand returns to rubbing Tavi's butt, calming her down as you begin to try and penetrate her, the head of your member putting more and more pressure on that tailhole.. until her inner walls begin to stretch and accept it..")
+
+		addButton("Push", "Penetrate Tavi's ass", "anal_push")
+	if(state == "anal_push"):
+		playAnimation(StageScene.SexAllFours, "inside", {npc="tavi", pc="pc", bodyState={naked=true, hard=true}, npcBodyState={naked=true}})
+		saynn("With every inch that disappears inside Tavi, little gasps escape her. But no matter what, she trusts you enough to stay still on all fours. Her body is clenching around you.. but that also feels incredibly good.")
+
+		saynn("[say=tavi]Ah..[/say]")
+
+		saynn("Eventually, Tavi takes most of your length, her tail wagging a little, her cheeks blushing. You give her plenty more time to get used to her ass being full.")
+
+		saynn("You lean forward and whisper some sweet words into Tavi's ear.")
+
+		saynn("[say=pc]Good girl. Wasn't so hard, see?[/say]")
+
+		saynn("She nods subtly, clearly still feeling some discomfort but trying to hide it.")
+
+		addButton("Move", "Start to move your hips", "anal_move")
+	if(state == "anal_move"):
+		playAnimation(StageScene.SexAllFours, "sex", {npc="tavi", pc="pc", bodyState={naked=true, hard=true}, npcBodyState={naked=true}})
+		saynn("Slowly, you start to move your hips, sliding your cock inside her anus, leaving empty space just to stuff it again a few seconds later before the inner walls have the time to close. Your thrusts are measured and slow.")
+
+		saynn("[say=tavi]I'm doing anal..[/say]")
+
+		saynn("Tavi's breath becomes more uneven as her body starts to meet your motions with the opposite ones, inviting you to pick up the pace. Her pussy is dripping juices onto the bedsheets while more of those little moans escape her.")
+
+		saynn("[say=tavi]And it's not that bad.. ah..[/say]")
+
+		saynn("It feels nice for both of you. Your member is twitching while the inner walls put so much pressure onto it, which transfers to direct stimulation during your thrusts. You feel like you could cum from this very soon.. But Tavi obviously won't..")
+
+		addButton("Stop for now", "Stop before the orgasm", "anal_stop")
+		if (sexSkill >= 6):
+			addButton("Harder", "Try to make Tavi cum", "anal_harder")
+		else:
+			addDisabledButton("Harder", "Tavi needs to be more skilled at sex")
+	if(state == "anal_stop"):
+		playAnimation(StageScene.SexAllFours, "tease", {npc="tavi", pc="pc", bodyState={naked=true, hard=true}, npcBodyState={naked=true}})
+		saynn("The sensations are new and intense for Tavi. So, the more you continue, the more her discomfort begins to rise. But that's fine because it's just a training session. You decide to stop for now.")
+
+		saynn("[say=pc]You're okay, Tavi?[/say]")
+
+		saynn("[say=tavi]Y-yeah.. It's just a lot to take in.[/say]")
+
+		saynn("[say=pc]You still did great.[/say]")
+
+		saynn("As you pull out, Tavi's backdoor closes almost immediately back into a neat little star, wet from her juices. There is a somewhat visible glow to it though so it's a right call.")
+
+		addButton("Continue", "That was nice", "endthescene")
+	if(state == "anal_harder"):
+		playAnimation(StageScene.SexAllFours, "fast", {npc="tavi", pc="pc", bodyState={naked=true, hard=true}, npcBodyState={naked=true}})
+		saynn("You decide to cool down and stop your motions for a little bit, until that urge to orgasm fades away mostly. Tavi is squirming ever so slightly, trying to move her ass and enjoy your cock.")
+
+		saynn("[say=tavi]I want more..[/say]")
+
+		saynn("You feel the lust coming through her words. Good.")
+
+		saynn("Your hand reaches for her short hair and gets a good grasp on it as you shove your {pc.penis} deep inside her ass! Even that seems to be acceptable for her, a passionate noise escapes her lips while her tailhole clenches around you so nicely..")
+
+		saynn("You start thrusting inside her at a faster rhythm than before, pushing her limits.. gently but persistently. The anus has a lot of nerve endings which lets Tavi.. enjoy it. But cumming from that.. would require some extra effort.")
+
+		saynn("And so you do that, angling yourself a little so your cock would massage her g-spot through the thin barrier between her anus and pussy. A gasp escapes from her as waves of pleasure begin rippling through her body, making her more eager.")
+
+		saynn("[say=tavi]Yes-s!..[/say]")
+
+		saynn("She sounds like a real buttslut, her asscheeks bouncing as your hips slap against them during each thrust. Your hand still holds her hair, making it so she can't escape your onslaught.")
+
+		saynn("Your orgasm quickly approaches.. but Tavi is also experiencing something building up inside her.. some kind of pressure. Very soon after that, her pussy suddenly squirts out a fountain of juices, followed by her tailhole clenching hard around you!")
+
+		saynn("[say=tavi]Ff-fu-uck!.. y-yeah..[/say]")
+
+		saynn("You're gonna cum too, no way around that..")
+
+		addButton("Cum", "Stuff Tavi's ass", "anal_cuminside")
+	if(state == "anal_cuminside"):
+		playAnimation(StageScene.SexAllFours, "inside", {npc="tavi", pc="pc", bodyState={naked=true, hard=true}, npcBodyState={naked=true}})
+		saynn("Tavi's body trembles with ecstasy as her tailhole tightens around your cock, pulling you deeper into her. Feeling that sudden burst of pleasure, you can no longer hold back.")
+
+		saynn("Intoxicating orgasmic waves wash over you as your {pc.penis} starts throbbing and stuffing Tavi's tight asshole, your seed flooding her nethers full to the brim.")
+
+		saynn("[say=tavi]Ngh-h..[/say]")
+
+		saynn("She is shaking, her head hitting the pillow while her inner walls are milking you for every last drop of {pc.cum}.")
+
+		saynn("[say=pc]What a good girl.[/say]")
+
+		saynn("Moans escape from her, you notice her toes curling as Tavi tries to endure this crazy mix of feelings.")
+
+		saynn("As you both begin to come down from the euphoric high, you pull your cock out, allowing Tavi's used hole to pulsate and start leaking.")
+
+		saynn("[say=tavi]That felt great..[/say]")
+
+		saynn("This lesson went a little too far. But.. at least it was fun.")
+
+		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "anal_strapon"):
+		playAnimation(StageScene.Duo, "stand", {npc="tavi", npcBodyState={naked=true}, bodyState={naked=true}})
+		if (isVirgin):
+			saynn("Tavi still has her virginity so having any vaginal sex with her will cause her to lose it. But there is always another way..")
+
+		saynn("You call Tavi to get closer to you. She obeys and looks at you with her curious eyes.")
+
+		saynn("[say=pc]We're gonna try anal sex today.[/say]")
+
+		saynn("That is certainly a surprise for her. Tavi's eyes go wide.")
+
+		saynn("[say=tavi]Are you.. sure? I never really did anything like that..[/say]")
+
+		saynn("Your hands land on her butt and gently knead it while your voice tries to be reassuring.")
+
+		saynn("[say=pc]I will be very gentle. It will feel good, Tavi.[/say]")
+
+		saynn("Tavi deliberates for some time and then nods, clearly trusting you enough to do this.")
+
+		saynn("Your hands begin to undress her, slowly undoing all of the buttons of her shirt before pulling down her shorts.")
+
+		saynn("[say=pc]Get on the bed.[/say]")
+
+		saynn("You secure a strapon harness around your waist while naked Tavi climbs onto her inmate bed, waiting for you to do the next move.")
+
+		addButton("Behind her", "Sit behind Tavi and prepare her", "anal_prepare_strapon")
+	if(state == "anal_prepare_strapon"):
+		playAnimation(StageScene.SexAllFours, "tease", {npc="tavi", pc="pc", bodyState={naked=true, hard=true}, npcBodyState={naked=true}})
+		saynn("You take your spot behind Tavi, your hands landing on her butt and giving it some attention. Eventually, she moves her tail out of the way, exposing the little tight tailhole that was hiding behind. It's flesh-colored, which means that it's also green.")
+
+		saynn("[say=pc]Take deep breaths.[/say]")
+
+		saynn("She does that but her body is still quite tense. Gently, you spread her buttcheeks and begin tracing gentle circles around the star, coaxing Tavi to relax.")
+
+		saynn("You lick one of your fingers and begin prodding the entrance. Saliva is a bad lube so it doesn't go too well, Tavi's virgin-tight anal ring clenching hard around you.")
+
+		saynn("[say=tavi]Harder, maybe?..[/say]")
+
+		saynn("Nah, that's not the right approach. You decide to land your free hand on Tavi's neglected pussy and start giving it a few sensual rubs and strokes. Quite quickly, that begins to have an effect on her, causing her folds to get moist. You coat your digits in your juices and return to prodding her back entrance.. until one of the digits slides inside, causing Tavi to make a soft noise.")
+
+		saynn("[say=pc]There we go.[/say]")
+
+		saynn("You give her time to adjust before continuing, gently thrusting your fingers in and out.. until Tavi's body begins to yield.. her clenched muscles relaxing.")
+
+		saynn("[say=tavi]Feels nice..[/say]")
+
+		saynn("You introduce a second finger, stretching her anus gently and allowing her to accommodate the sensations. Little moans begin to fill the air, her body responding eagerly to her butt being fingered.")
+
+		saynn("[say=tavi]Please don't stop..[/say]")
+
+		saynn("[say=pc]I have a better idea.[/say]")
+
+		saynn("You pull your digits away from her butt and grab some more of her arousal before coating the strapon's shaft with it. After that.. you slowly press its tip against Tavi's tight entrance.")
+
+		saynn("[say=tavi]Are you sure?..[/say]")
+
+		saynn("Your free hand returns to rubbing Tavi's butt, calming her down as you begin to try and penetrate her, the head of your rubber member putting more and more pressure on that tailhole.. until her inner walls begin to stretch and accept it..")
+
+		addButton("Push", "Penetrate Tavi's ass", "anal_push_strapon")
+	if(state == "anal_push_strapon"):
+		playAnimation(StageScene.SexAllFours, "inside", {npc="tavi", pc="pc", bodyState={naked=true, hard=true}, npcBodyState={naked=true}})
+		saynn("With every inch that disappears inside Tavi, little gasps escape her. But no matter what, she trusts you enough to stay still on all fours. Her body is clenching around the strapon.. but you keep fighting the friction.")
+
+		saynn("[say=tavi]Ah..[/say]")
+
+		saynn("Eventually, Tavi takes most of your length, her tail wagging a little, her cheeks blushing. You give her plenty more time to get used to her ass being full.")
+
+		saynn("You lean forward and whisper some sweet words into Tavi's ear.")
+
+		saynn("[say=pc]Good girl. Wasn't so hard, see?[/say]")
+
+		saynn("She nods subtly, clearly still feeling some discomfort but trying to hide it.")
+
+		addButton("Move", "Start to move your hips", "anal_move_strapon")
+	if(state == "anal_move_strapon"):
+		playAnimation(StageScene.SexAllFours, "sex", {npc="tavi", pc="pc", bodyState={naked=true, hard=true}, npcBodyState={naked=true}})
+		saynn("Slowly, you start to move your hips, sliding the rubber strapon inside her anus, leaving empty space just to stuff it again a few seconds later before the inner walls have the time to close. Your thrusts are measured and slow.")
+
+		saynn("[say=tavi]I'm doing anal..[/say]")
+
+		saynn("Tavi's breath becomes more uneven as her body starts to meet your motions with the opposite ones, inviting you to pick up the pace. Her pussy is dripping juices onto the bedsheets while more of those little moans escape her.")
+
+		saynn("[say=tavi]And it's not that bad.. ah..[/say]")
+
+		saynn("You don't feel much apart from being aroused mentally but it probably feels good for her. It's quite exhausting though..")
+
+		addButton("Stop for now", "Stop before the orgasm", "anal_stop_strapon")
+		if (sexSkill >= 6):
+			addButton("Harder", "Try to make Tavi cum", "anal_harder_strapon")
+		else:
+			addDisabledButton("Harder", "Tavi needs to be more skilled at sex")
+	if(state == "anal_stop_strapon"):
+		playAnimation(StageScene.SexAllFours, "tease", {npc="tavi", pc="pc", bodyState={naked=true, hard=true}, npcBodyState={naked=true}})
+		saynn("The sensations are new and intense for Tavi. So, the more you continue, the more her discomfort begins to rise. But that's fine because it's just a training session. You decide to stop for now.")
+
+		saynn("[say=pc]You're okay, Tavi?[/say]")
+
+		saynn("[say=tavi]Y-yeah.. It's just a lot to take in.[/say]")
+
+		saynn("[say=pc]You still did great.[/say]")
+
+		saynn("As you pull out, Tavi's backdoor closes almost immediately back into a neat little star, wet from her juices. There is a somewhat visible glow to it though so it's a right call.")
+
+		addButton("Continue", "That was nice", "endthescene_removestrapon")
+	if(state == "anal_harder_strapon"):
+		playAnimation(StageScene.SexAllFours, "fast", {npc="tavi", pc="pc", bodyState={naked=true, hard=true}, npcBodyState={naked=true}})
+		saynn("You decide to cool down and stop your motions for a little bit, recovering your breath. Tavi is squirming ever so slightly, trying to move her ass and enjoy that rubber cock.")
+
+		saynn("[say=tavi]I want more..[/say]")
+
+		saynn("You feel the lust coming through her words. Good.")
+
+		saynn("Your hand reaches for her short hair and gets a good grasp on it as you shove your strapon deep inside her ass! Even that seems to be acceptable for her, a passionate noise escapes her lips while her tailhole clenches around you so nicely..")
+
+		saynn("You start thrusting inside her at a faster rhythm than before, pushing her limits.. gently but persistently. The anus has a lot of nerve endings which lets Tavi.. enjoy it. But cumming from that.. would require some extra effort.")
+
+		saynn("And so you do that, angling yourself a little so the toy would massage her g-spot through the thin barrier between her anus and pussy. A gasp escapes from her as waves of pleasure begin rippling through her body, making her more eager.")
+
+		saynn("[say=tavi]Yes-s!..[/say]")
+
+		saynn("She sounds like a real buttslut, her asscheeks bouncing as your hips slap against them during each thrust. Your hand still holds her hair, making it so she can't escape your onslaught.")
+
+		saynn("Tavi is also experiencing something building up inside her.. some kind of pressure. Very soon after that, her pussy suddenly squirts out a fountain of juices, followed by her tailhole clenching hard around you!")
+
+		saynn("[say=tavi]Ff-fu-uck!.. y-yeah..[/say]")
+
+		saynn("Tavi's body trembles with ecstasy as her tailhole tightens around your strapon, pulling you deeper into her. She is shaking, her head hitting the pillow while her inner walls are trying to milk that strapon.. until it suddenly releases the stored cumlube deep into her nethers.")
+
+		saynn("[say=pc]What a good girl.[/say]")
+
+		saynn("Moans escape from her, you notice her toes curling as Tavi tries to endure this crazy mix of feelings.")
+
+		saynn("As she begins to come down from the euphoric high, you pull your strapon out, allowing Tavi's used hole to pulsate and start leaking.")
+
+		saynn("[say=tavi]That felt great..[/say]")
+
+		saynn("This lesson went a little too far. But.. at least it was fun.")
+
+		addButton("Continue", "See what happens next", "endthescene_removestrapon")
 func taviSpeak(normalSpeak, corruptSpeak, pureSpeak):
 	if(isCorrupt):
 		return corruptSpeak
@@ -998,6 +1259,7 @@ func _react(_action: String, _args):
 		getModule("TaviModule").advanceSkill("taviSkillSex")
 
 	if(_action == "cowgirl_pick"):
+		getModule("TaviModule").advanceSkill("taviSkillSex")
 		if(GM.pc.hasReachablePenis()):
 			usedStrapon = false
 			setState("cowgirl")
@@ -1011,6 +1273,7 @@ func _react(_action: String, _args):
 		return
 
 	if(_action == "anal_pick"):
+		getModule("TaviModule").advanceSkill("taviSkillSex")
 		if(GM.pc.hasReachablePenis()):
 			usedStrapon = false
 			setState("anal")
@@ -1021,6 +1284,7 @@ func _react(_action: String, _args):
 			var fluids = strapon.getFluids()
 			fluids.addFluid("CumLube", RNG.randi_range(3, 5)*100.0)
 			GM.pc.getInventory().equipItem(strapon)
+		return
 
 	if(_action == "cancel_lesson"):
 		increaseFlag("TaviModule.Ch6Tiredness", -1)
@@ -1164,6 +1428,39 @@ func _react(_action: String, _args):
 
 	if(_action == "anal_prepare"):
 		processTime(8*60)
+
+	if(_action == "anal_push"):
+		processTime(4*60)
+
+	if(_action == "anal_move"):
+		processTime(3*60)
+
+	if(_action == "anal_stop"):
+		processTime(3*60)
+
+	if(_action == "anal_harder"):
+		processTime(3*60)
+
+	if(_action == "anal_cuminside"):
+		processTime(3*60)
+		getCharacter("tavi").cummedInAnusBy("pc")
+		GM.pc.orgasmFrom("tavi")
+
+	if(_action == "anal_prepare_strapon"):
+		processTime(8*60)
+
+	if(_action == "anal_push_strapon"):
+		processTime(4*60)
+
+	if(_action == "anal_move_strapon"):
+		processTime(3*60)
+
+	if(_action == "anal_stop_strapon"):
+		processTime(3*60)
+
+	if(_action == "anal_harder_strapon"):
+		processTime(3*60)
+		getCharacter("tavi").cummedInAnusBy("pc", FluidSource.Strapon)
 
 	setState(_action)
 
