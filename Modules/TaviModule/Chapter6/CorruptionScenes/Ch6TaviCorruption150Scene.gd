@@ -145,8 +145,6 @@ func _run():
 			saynn("[say=tavi]Thank you so much, owner~.[/say]")
 
 			saynn("Who would have known that corrupting Tavi would have such an effect.")
-
-			addButton("Continue", "That was fun", "start_talking")
 		else:
 			saynn("One of her paws lands on your shaft and has a grasp on it while the second sneaks between your legs and finds your cute tailhole, one of the digits already prodding it.")
 

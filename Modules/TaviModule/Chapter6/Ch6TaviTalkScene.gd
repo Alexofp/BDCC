@@ -15,7 +15,8 @@ func _run():
 		if(taviModule.isVirgin()):
 			saynn("Tavi still has her virginity.")
 			
-		saynn("Tavi's corruption is {taviCorruption}")
+		sayn("Tavi's corruption is {taviCorruption}")
+		saynn("Tavi's tiredness is "+str(getFlag("TaviModule.Ch6Tiredness", 0)))
 		
 		sayn("Tavi's skills:")
 		for skillID in taviModule.getAllSkills():
@@ -24,6 +25,8 @@ func _run():
 				continue
 			sayn(skillInfo["name"]+": "+str(taviModule.getSkillScoreText(skillID)))
 		sayn("")
+		
+		saynn("( Tavi's lewd content is not yet fully completed, sowwy )")
 		
 		addDisabledButton("Final Attack", "(not implemented yet :( ) Use everything that you and Tavi learned to prepare the last attack.\n\nTavi's corruption needs to be either 0% or 200%")
 		if(getFlag("TaviModule.Ch6Tiredness", 0) >= 3):
