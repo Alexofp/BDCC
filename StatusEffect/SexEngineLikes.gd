@@ -34,6 +34,8 @@ func getEffectDesc():
 	for fetishID in fetishHolder.getFetishes():
 		var fetish:FetishBase = GlobalRegistry.getFetish(fetishID)
 		var fetishInterest = fetishHolder.getFetishInterest(fetishID)
+		if(fetishInterest == FetishInterest.Neutral):
+			continue
 		var fetishColor = FetishInterest.getColorString(fetishInterest)
 		var fetishInterestText = FetishInterest.getVisibleName(fetishInterest)
 		
