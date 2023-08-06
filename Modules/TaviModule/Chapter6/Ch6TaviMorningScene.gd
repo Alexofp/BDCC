@@ -76,12 +76,16 @@ func _run():
 			playAnimation(StageScene.Sleeping, "idle", {pc="tavi", bodyState={naked=true}})
 		addButton("Finger her", "Make Tavi cum with just your fingers", "do_finger")
 		if (sexSkill > 0):
+			addButtonWithChecks("Lick her out", "Satisfy Tavi's heat by licking her pussy", "do_lick", [], [ButtonChecks.NotOralBlocked])
+		if (sexSkill > 1):
+			addButtonWithChecks("Tribadism", "Rub pussies with Tavi to satisfy her heat", "do_trib", [], [ButtonChecks.HasReachableVagina])
+		if (sexSkill > 1):
 			if (!isVirgin):
 				addButton("Fuck her", "Rail Tavi to satisfy her heat", "do_fuck_pick")
 			else:
 				addDisabledButton("Fuck her", "Tavi can't be a virgin for this")
-		if (sexSkill > 1):
-			addButtonWithChecks("Tribadism", "Rub pussies with Tavi to satisfy her heat", "do_trib", [], [ButtonChecks.HasReachableVagina])
+		if (sexSkill > 4):
+			addButton("Anal sex", "Try to satisfy Tavi's heat by fucking her butt", "do_anal_pick")
 	if(state == "do_finger"):
 		playAnimation(StageScene.SexStanding, "tease", {npc="tavi", pc="pc", npcBodyState={naked=true}})
 		saynn("With a firm grip, you pin Tavi against the wall. Her body is already shivering with anticipation. She willingly spreads her long legs and sticks her butt out for you, her tail getting out of the way, exposing the dripping sex..")
@@ -418,6 +422,164 @@ func _run():
 		saynn("But you just shake your head. When she tries to use her paws to help, you catch them and hold them firmly. All the while Tavi's heat slowly goes away, unsatisfied..")
 
 		addButton("Continue", "See what happens next", "start_talk")
+	if(state == "do_lick"):
+		playAnimation(StageScene.SexOral, "lick", {pc="tavi", npc="pc", bodyState={naked=true}})
+		saynn("Might as well use your tongue to satisfy Tavi. As you kneel before her, that arousing scent of her pussy already makes you eager to taste her.")
+
+		saynn("[say=pc]Stand still.[/say]")
+
+		saynn("Even though you are the one on your knees here, your authoritative voice causes Tavi to submit. With a nod, she spreads her legs slightly for you and bites her lip, your breath causing her to shiver.")
+
+		saynn("You proceed to work, your hands holding onto Tavi's legs while your tongue is exploring her sensitive folds, catching her juices while the feline is moaning softly.")
+
+		saynn("[say=tavi]Feels so nice..[/say]")
+
+		saynn("Your skilled tongue moves on to playing with the clit while your lips are pressed against her folds. Tavi can't help but to grab your head as her breath hitches, her desire growing.")
+
+		saynn("It doesn't take long for Tavi to start approaching orgasm.. the heat making her quite sensitive.")
+
+		addButton("Make her cum", "Let Tavi orgasm yet again", "do_lick_cum")
+		addButton("Deny Tavi", "You can't let her have this orgasm after so many other ones", "do_lick_deny")
+	if(state == "do_lick_cum"):
+		playAnimation(StageScene.SexOral, "grind", {pc="tavi", npc="pc", bodyState={naked=true}})
+		saynn("As you sense Tavi's climax building, you increase the pace and intensity of your tongue movements while sucking on her clit, providing an immense amount of stimulation.")
+
+		saynn("[say=tavi]I'm gonna..[/say]")
+
+		saynn("With a powerful shudder, Tavi gets pushed way past her peak, her body convulsing as her pulsing pussy suddenly squirts juices directly into your face, forcing her scent into you.")
+
+		saynn("[say=tavi]Ah-h!..[/say]")
+
+		saynn("You hold onto her legs tightly while she grinds her slit against your face features, her {tavi.breasts} jiggling, her mouth moaning.")
+
+		saynn("It's only when the orgasm starts to fade, Tavi finally lets you pull away.")
+
+		saynn("[say=tavi]That scratched an itch..[/say]")
+
+		saynn("She playfully licks your face as you get up.")
+
+		addButton("Continue", "See what happens next", "start_talk")
+	if(state == "do_lick_deny"):
+		playAnimation(StageScene.SexOral, "start", {pc="tavi", npc="pc", bodyState={naked=true}})
+		saynn("Tavi is close to her climax.. but you make a firm decision and suddenly stop licking her all together, denying her the release that she so desperately craves.")
+
+		saynn("[say=tavi]Why did you.. I was so.. Please..[/say]")
+
+		saynn("Her body is squirming as she breathes heavily. She is trying to push herself over the edge by grinding her twitching pussy against your face but you use your hands and keep her standing still.")
+
+		saynn("[say=tavi]No.. Fuck..[/say]")
+
+		saynn("The more she resists, the more her state of heat begins to fade, her arousal lowering, her body cooling down.")
+
+		saynn("[say=tavi]Huff-f-f..[/say]")
+
+		saynn("Who said that getting rid of corruption in your mind will be easy..")
+
+		addButton("Continue", "See what happens next", "start_talk")
+	if(state == "do_anal"):
+		playAnimation(StageScene.SexFreeStanding, "sex", {npc="tavi", pc="pc", npcBodyState={naked=true}, bodyState={naked=true, hard=true}})
+		saynn("You decide to try an unusual way to satisfy Tavi. Without a word, you position yourself behind her and align your {pc.penis} with her back entrance. The feline shivers a little as she feels your member prodding her butt.")
+
+		if (getModule("TaviModule").isVirgin()):
+			saynn("[say=tavi]Ow.. Are you sure?..[/say]")
+
+		else:
+			saynn("[say=tavi]Ow.. Wrong hole?..[/say]")
+
+		saynn("You make sure to use some of her arousal as lube. Then, in one fluid motion, you enter Tavi, your cock stretching her tailhole wide as a painful moan escapes her lips. You grab her wrists and pull them behind her back, making her feel helpless as you start fucking her ass, her"+str(" virgin" if getModule("TaviModule").isVirgin() else "")+" pussy only dripping juices more.")
+
+		saynn("[say=tavi]Ah.. fuck it..[/say]")
+
+		saynn("Her inner walls grip your length so well, it's hard not to start thrusting faster. The initial discomfort seems to be eventually gone, replaced by the weird pleasure of her anal ring nerves being stimulated.")
+
+		saynn("[say=tavi]Please.. More!..[/say]")
+
+		saynn("Her tight backdoor already brings you close.. but should you try to make her cum too?")
+
+		addButton("Harder", "Try to make Tavi cum", "do_anal_cum")
+		addButton("Pull out", "You'd rather just cum on her butt", "do_anal_pullout")
+	if(state == "do_anal_cum"):
+		playAnimation(StageScene.SexFreeStanding, "fast", {npc="tavi", pc="pc", npcBodyState={naked=true}, bodyState={naked=true, hard=true}})
+		saynn("You decide to increase your pace, your hips slapping against Tavi's butt as your {pc.penis} gets rammed deep inside her again and again. You angle yourself just right to hit Tavi's pleasure spot through the inner wall that divides her holes, causing her legs to tremble with pleasure.")
+
+		saynn("[say=tavi]Ah!.. That feels so good!.. Please!..[/say]")
+
+		saynn("Her neglected pussy is twitching and dripping juices non-stop. Tavi would try to rub herself to her orgasm but you keep her arms in a firm hold, only allowing her the anal stimulation.")
+
+		saynn("With one final thrust, you shove your member balls deep, causing the inner walls of that ass to start contracting around you, stimulating you back. It only takes a few seconds before you grunt and cum, at the same time as Tavi..")
+
+		saynn("[say=tavi]Yes-s-s!..[/say]")
+
+		saynn("Her body is shaking while your seed is flooding her nethers. Her pussy is twitching and pulsing around nothing, a fountain of juices hits the floor. Tavi has managed to cum from you fucking her ass.")
+
+		saynn("After that, you just stand together, your hands supporting her while your breathing returns to normal.")
+
+		saynn("[say=tavi]That was so.. strange. But t-thank you.. for using your slut's ass..[/say]")
+
+		addButton("Continue", "See what happens next", "start_talk")
+	if(state == "do_anal_pullout"):
+		playAnimation(StageScene.SexFreeStanding, "tease", {npc="tavi", pc="pc", npcBodyState={naked=true}, bodyState={naked=true, hard=true}})
+		saynn("Making her cum will certainly spoil Tavi. So, when reaching your climax, you pull out seconds before your cock releases multiple thick strings of {pc.cum}, most of them landing on Tavi's butt and thighs.")
+
+		saynn("Tavi huffs and lets out a whimper as her ass no longer feels your cock pounding it.")
+
+		saynn("[say=tavi]Huff..[/say]")
+
+		saynn("You leave a little kiss on Tavi's shoulder as her body begins to cool down, her heated state gradually going away.")
+
+		addButton("Continue", "See what happens next", "start_talk")
+	if(state == "do_anal_strapon"):
+		playAnimation(StageScene.SexFreeStanding, "sex", {npc="tavi", pc="pc", npcBodyState={naked=true}, bodyState={naked=true, hard=true}})
+		saynn("You decide to try an unusual way to satisfy Tavi. Without a word, you position yourself behind her and secure a strapon harness around your waist before aligning your new rubber cock with her back entrance. The feline shivers a little as she feels something firm prodding her butt.")
+
+		if (getModule("TaviModule").isVirgin()):
+			saynn("[say=tavi]Ow.. Are you sure?..[/say]")
+
+		else:
+			saynn("[say=tavi]Ow.. Wrong hole?..[/say]")
+
+		saynn("You make sure to use some of her arousal as lube. Then, in one fluid motion, you enter Tavi, your cock stretching her tailhole wide as a painful moan escapes her lips. You grab her wrists and pull them behind her back, making her feel helpless as you start fucking her ass, her"+str(" virgin" if getModule("TaviModule").isVirgin() else "")+" pussy only dripping juices more.")
+
+		saynn("[say=tavi]Ah.. fuck it..[/say]")
+
+		saynn("Her inner walls grip your length so well, it's hard not to start thrusting faster. The initial discomfort seems to be eventually gone, replaced by the weird pleasure of her anal ring nerves being stimulated.")
+
+		saynn("[say=tavi]Please.. More!..[/say]")
+
+		saynn("Should you try to make her cum?")
+
+		addButton("Harder", "Try to make Tavi cum", "do_anal_cum_strapon")
+		addButton("Pull out", "You'd rather just cum on her butt", "do_anal_pullout_strapon")
+	if(state == "do_anal_cum_strapon"):
+		playAnimation(StageScene.SexFreeStanding, "fast", {npc="tavi", pc="pc", npcBodyState={naked=true}, bodyState={naked=true, hard=true}})
+		saynn("You decide to increase your pace, your hips slapping against Tavi's butt as your strapon gets rammed deep inside her again and again. You angle yourself just right to hit Tavi's pleasure spot through the inner wall that divides her holes, causing her legs to tremble with pleasure.")
+
+		saynn("[say=tavi]Ah!.. That feels so good!.. Please!..[/say]")
+
+		saynn("Her neglected pussy is twitching and dripping juices non-stop. Tavi would try to rub herself to her orgasm but you keep her arms in a firm hold, only allowing her the anal stimulation.")
+
+		saynn("With one final thrust, you shove the toy in completely, knot and everything, causing the inner walls of that ass to start contracting around it, squeezing it so much that it suddenly starts throbbing. It only takes a few seconds before Tavi cums..")
+
+		saynn("[say=tavi]Yes-s-s!..[/say]")
+
+		saynn("Her body is shaking while the dildo starts stuffing her butt with cumlube. Her pussy is twitching and pulsing around nothing, a fountain of juices hits the floor. Tavi has managed to cum from you fucking her ass.")
+
+		saynn("After that, you just stand together, your hands supporting her while your breathing returns to normal.")
+
+		saynn("[say=tavi]That was so.. strange. But t-thank you.. for using your slut's ass..[/say]")
+
+		addButton("Continue", "See what happens next", "start_talk_removestrapon")
+	if(state == "do_anal_pullout_strapon"):
+		playAnimation(StageScene.SexFreeStanding, "tease", {npc="tavi", pc="pc", npcBodyState={naked=true}, bodyState={naked=true, hard=true}})
+		saynn("Making her cum will certainly spoil Tavi. So, instead of going in deeper, you just continue fucking her ass for some time before finally pulling out.")
+
+		saynn("Tavi huffs and lets out a whimper as her ass no longer feels your strapon pounding it.")
+
+		saynn("[say=tavi]Huff..[/say]")
+
+		saynn("You leave a little kiss on Tavi's shoulder as her body begins to cool down, her heated state gradually going away.")
+
+		addButton("Continue", "See what happens next", "start_talk_removestrapon")
 func taviSpeak(normalSpeak, corruptSpeak, pureSpeak):
 	if(isCorrupt):
 		return corruptSpeak
@@ -448,6 +610,19 @@ func _react(_action: String, _args):
 		else:
 			#usedStrapon = true
 			setState(RNG.pick(["do_fuck1_strapon", "do_fuck2_strapon", "do_fuck3_strapon"]))
+			var strapon = GlobalRegistry.createItem("StraponCanine")
+			var fluids = strapon.getFluids()
+			fluids.addFluid("CumLube", RNG.randi_range(3, 5)*100.0)
+			GM.pc.getInventory().equipItem(strapon)
+		return
+
+	if(_action == "do_anal_pick"):
+		if(GM.pc.hasReachablePenis()):
+			#usedStrapon = false
+			setState("do_anal")
+		else:
+			#usedStrapon = true
+			setState("do_anal_strapon")
 			var strapon = GlobalRegistry.createItem("StraponCanine")
 			var fluids = strapon.getFluids()
 			fluids.addFluid("CumLube", RNG.randi_range(3, 5)*100.0)
@@ -551,6 +726,37 @@ func _react(_action: String, _args):
 		processTime(10*60)
 		GM.pc.rubsVaginasWith("tavi")
 		getModule("TaviModule").addCorruption(-5 * sexSkillMod)
+
+	if(_action == "do_lick_cum"):
+		processTime(10*60)
+		GM.pc.cummedOnBy("tavi", FluidSource.Vagina)
+		getModule("TaviModule").addCorruption(4 * sexSkillMod)
+
+	if(_action == "do_lick_deny"):
+		processTime(10*60)
+		getModule("TaviModule").addCorruption(-4 * sexSkillMod)
+
+	if(_action == "do_anal_cum"):
+		processTime(10*60)
+		getModule("TaviModule").addCorruption(5 * sexSkillMod)
+		getCharacter("tavi").cummedInAnusBy("pc")
+		GM.pc.orgasmFrom("tavi")
+
+	if(_action == "do_anal_pullout"):
+		getModule("TaviModule").addCorruption(-5 * sexSkillMod)
+		getCharacter("tavi").cummedOnBy("pc")
+		GM.pc.orgasmFrom("tavi")
+
+	if(_action == "do_anal_cum_strapon"):
+		processTime(10*60)
+		getModule("TaviModule").addCorruption(5 * sexSkillMod)
+		getCharacter("tavi").cummedInAnusBy("pc", FluidSource.Strapon)
+		#GM.pc.orgasmFrom("tavi")
+
+	if(_action == "do_anal_pullout_strapon"):
+		getModule("TaviModule").addCorruption(-5 * sexSkillMod)
+		#getCharacter("tavi").cummedOnBy("pc")
+		#GM.pc.orgasmFrom("tavi")
 
 	setState(_action)
 
