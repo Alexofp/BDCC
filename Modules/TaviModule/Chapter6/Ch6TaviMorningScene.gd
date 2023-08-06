@@ -7,6 +7,7 @@ var isVirgin = false
 var sexSkill = 0
 var usedStrapon = false
 var sexSkillMod = 1.0
+var chillTalk = 0
 
 func _init():
 	sceneID = "Ch6TaviMorningScene"
@@ -19,6 +20,7 @@ func _run():
 		isPure = getModule("TaviModule").isPure()
 		isNormal = (!isCorrupt && !isPure)
 		isVirgin = getModule("TaviModule").isVirgin()
+		chillTalk = getFlag("TaviModule.Ch6TaviChillTalk", 0)
 		sexSkill = getModule("TaviModule").getSkillScore("taviSkillSex")
 		sexSkillMod = 1.0 + sexSkill / 3.0
 		saynn("As you enter Tavi's cell, you find her lying on her bed, her breathing heavy and her eyes filled with the mix of desire and need.")
@@ -86,6 +88,10 @@ func _run():
 				addDisabledButton("Fuck her", "Tavi can't be a virgin for this")
 		if (sexSkill > 4):
 			addButton("Anal sex", "Try to satisfy Tavi's heat by fucking her butt", "do_anal_pick")
+		if (isPure):
+			addButton("Just chill", "Spend some time together instead of fucking", "do_just_chill")
+		if (isCorrupt):
+			addButton("Submit to", "Let the demon Tavi take the reigns for a bit", "do_submit")
 	if(state == "do_finger"):
 		playAnimation(StageScene.SexStanding, "tease", {npc="tavi", pc="pc", npcBodyState={naked=true}})
 		saynn("With a firm grip, you pin Tavi against the wall. Her body is already shivering with anticipation. She willingly spreads her long legs and sticks her butt out for you, her tail getting out of the way, exposing the dripping sex..")
@@ -580,6 +586,93 @@ func _run():
 		saynn("You leave a little kiss on Tavi's shoulder as her body begins to cool down, her heated state gradually going away.")
 
 		addButton("Continue", "See what happens next", "start_talk_removestrapon")
+	if(state == "do_just_chill"):
+		playAnimation(StageScene.Cuddling, "idle", {npc="tavi"})
+		saynn("Tavi doesn't suffer from constant heat anymore so why not just cuddle instead.")
+
+		saynn("You pull your pet onto the bed and just embrace her, your chin resting on her shoulder. The feline purrs softly and rests in your hands.")
+
+		if (chillTalk <= 0):
+			saynn("[say=pc]Are you still planning to kill everyone who created you?[/say]")
+
+			saynn("Tavi is quiet. You were about to ask something else but then she cuts you off.")
+
+			saynn("[say=tavi]I don't know. I think I will only know when I see them, you know?[/say]")
+
+			saynn("Fair enough. Tavi is quiet for some time again.")
+
+			saynn("[say=tavi]But I'm gonna stop them no matter what it takes. Unless you think I should give up..[/say]")
+
+		elif (chillTalk <= 1):
+			saynn("[say=pc]Are you gonna kill the captain? If the chance arises.[/say]")
+
+			saynn("Tavi hums.")
+
+			saynn("[say=tavi]Justice needs to happen. Especially after how he fucked up my mind. But..[/say]")
+
+			saynn("She rubs into you more, her smile is all cute and bright.")
+
+			saynn("[say=tavi]I will do what you tell me to do~.[/say]")
+
+		elif (chillTalk <= 2):
+			saynn("[say=pc]Wanna talk about your.. family?[/say]")
+
+			saynn("Tavi sighs.")
+
+			saynn("[say=tavi]There is not much to say.[/say]")
+
+			saynn("[say=pc]Do you regret it?[/say]")
+
+			saynn("She shrugs.")
+
+			saynn("[say=tavi]I feel like I should. But.. I would regret dying more.[/say]")
+
+			saynn("Both options seem kinda bad. Such is life.")
+
+			saynn("[say=pc]Let's just rest.[/say]")
+
+		else:
+			saynn("There is not much to discuss anymore. So you just chat about random things.")
+
+		saynn("You spend some time like that, cuddling. And Tavi seems to enjoy it a lot.")
+
+		addButton("Continue", "See what happens next", "start_talk")
+	if(state == "cor_facesit"):
+		playAnimation(StageScene.SexFaceSitting, "grind", {pc="tavi", npc="pc", bodyState={naked=true}, npcBodyState={hard=true}})
+		saynn("Tavi's body is radiating with primal heat. As soon as an intrusive thought about letting Tavi solve her heat using your body flows through your mind, she suddenly tackles you to the ground, her eyes glowing with desire.")
+
+		saynn("[say=tavi]You're gonna serve me![/say]")
+
+		saynn("With a playful grin, the feline swiftly positions herself above your head, letting you see her dripping sex in great detail.. seconds before she lowers herself onto you, straddling your face. The scent is.. intoxicating.. irresistible..")
+
+		saynn("[say=tavi]Lick~.[/say]")
+
+		saynn("You obey, dragging your tongue over the sensitive wet folds, catching her arousal and swallowing it.. which only drives you to please her better. Her girly thighs are holding your face in place, passionate moans begin to fill the air. Your tongue is expertly tracing her"+str(" virgin" if getModule("TaviModule").isVirgin() else "")+" pussy and focusing on the clit.")
+
+		saynn("[say=tavi]Mmm~.. Good little toy. So obedient.. Makes me wanna do this..[/say]")
+
+		saynn("Tavi puts her paws on your head and begins dragging her wet sex over your face, grinding it. All the while you keep doing your best to lap at her needy slit. Very soon her moans become louder, echoing through the whole with a demonic undertone.")
+
+		saynn("[say=tavi]You can't deny me now~. Even if you wanted to~.[/say]")
+
+		saynn("She is right.. At this moment she is in charge. And it seems she is about to cum..")
+
+		addButton("Lick", "Just like her more", "cor_facesit_cum")
+	if(state == "cor_facesit_cum"):
+		playAnimation(StageScene.SexFaceSitting, "sit", {pc="tavi", npc="pc", bodyState={naked=true}, npcBodyState={hard=true}})
+		saynn("As Tavi's climax approaches, you begin to feel her muscles tense, her grip on you tightening. Her body is trembling while a series of passionate moans escape her lips.. before she finally reaches her peak.")
+
+		saynn("Tavi's sex pulses and twitches before.. an explosion of juices hits your face. Her slutty moans intervene with heavy panting while her body shivers and trembles above you.")
+
+		saynn("[say=tavi]Ah~.. Sorry owner. But I really needed this~.[/say]")
+
+		saynn("After the orgasm waves stop flowing through her, Tavi raises and takes a look at your wet face.. before giggling.")
+
+		saynn("She helps you to get up and even licks her own juices off of you.. but there is too much.")
+
+		saynn("At least her eternal heat seems to be satisfied.. for now..")
+
+		addButton("Continue", "See what happens next", "start_talk")
 func taviSpeak(normalSpeak, corruptSpeak, pureSpeak):
 	if(isCorrupt):
 		return corruptSpeak
@@ -627,6 +720,17 @@ func _react(_action: String, _args):
 			var fluids = strapon.getFluids()
 			fluids.addFluid("CumLube", RNG.randi_range(3, 5)*100.0)
 			GM.pc.getInventory().equipItem(strapon)
+		return
+
+	if(_action == "do_just_chill"):
+		processTime(20*60)
+		getModule("TaviModule").addCorruption(-10)
+		GM.pc.addStamina(50)
+		if(chillTalk < 3):
+			increaseFlag("TaviModule.Ch6TaviChillTalk")
+
+	if(_action == "do_submit"):
+		setState("cor_facesit")
 		return
 
 	if(_action == "do_finger_cum"):
@@ -758,6 +862,10 @@ func _react(_action: String, _args):
 		#getCharacter("tavi").cummedOnBy("pc")
 		#GM.pc.orgasmFrom("tavi")
 
+	if(_action == "cor_facesit_cum"):
+		getModule("TaviModule").addCorruption(10)
+		GM.pc.cummedOnBy("tavi", FluidSource.Vagina)
+
 	setState(_action)
 
 func saveData():
@@ -770,6 +878,7 @@ func saveData():
 	data["sexSkill"] = sexSkill
 	data["usedStrapon"] = usedStrapon
 	data["sexSkillMod"] = sexSkillMod
+	data["chillTalk"] = chillTalk
 
 	return data
 
@@ -783,3 +892,4 @@ func loadData(data):
 	sexSkill = SAVE.loadVar(data, "sexSkill", 0)
 	usedStrapon = SAVE.loadVar(data, "usedStrapon", false)
 	sexSkillMod = SAVE.loadVar(data, "sexSkillMod", 1.0)
+	chillTalk = SAVE.loadVar(data, "chillTalk", 0)

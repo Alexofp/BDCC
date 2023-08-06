@@ -111,6 +111,7 @@ func getFlags():
 		"Ch6Tiredness": flag(FlagType.Number),
 		"Ch6TaviReceivedHorns": flag(FlagType.Bool),
 		"Ch6TaviReceivedWombMark": flag(FlagType.Bool),
+		"Ch6TaviChillTalk": flag(FlagType.Number),
 		
 		"taviSkillCombat": flag(FlagType.Number),
 		"taviSkillSex": flag(FlagType.Number),
