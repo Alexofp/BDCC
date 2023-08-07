@@ -84,7 +84,7 @@ func _run():
 				continue
 			
 			var bodypart = bodyparts[slot]
-			say(slotName+": "+bodypart.getName().capitalize())
+			say(slotName+": "+bodypart.getCharacterCreatorName().capitalize())
 			#var extra = bodypart.getExtraInfoCreation()
 			#if(extra!=""):
 			#	say(" (" + extra + ")")
@@ -135,7 +135,7 @@ func _run():
 		if(GM.pc.hasBodypart(pickingBodypartType)):
 			var bodypart = GM.pc.getBodypart(pickingBodypartType)
 			
-			sayn("Currently selected: "+bodypart.getName())
+			sayn("Currently selected: "+bodypart.getCharacterCreatorName())
 			for curAttrib in bodypart.getAttributesText():
 				sayn(curAttrib[0]+": "+str(curAttrib[1]))
 			
@@ -178,7 +178,7 @@ func _run():
 		var bodypart = GM.pc.getBodypart(pickingBodypartType)
 		var attributes = bodypart.getPickableAttributes()
 		
-		saynn("Change the attributes of "+bodypart.getName())
+		saynn("Change the attributes of "+bodypart.getCharacterCreatorName())
 		for curAttrib in bodypart.getAttributesText():
 			sayn(curAttrib[0]+": "+str(curAttrib[1]))
 		
@@ -230,7 +230,7 @@ func _run():
 			var bodypartAttributes = bodypart.getPickableAttributes()
 			if(bodypartAttributes.size() == 0):
 				continue
-			addButton(bodypart.getName().capitalize()+" attributes", "Change the attributes of this bodypart", "openBodypartAttributes", [slot])
+			addButton(bodypart.getCharacterCreatorName().capitalize()+" attributes", "Change the attributes of this bodypart", "openBodypartAttributes", [slot])
 			
 
 	if(state == "bodyAttributeMenu"):
