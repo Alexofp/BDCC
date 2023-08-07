@@ -14,7 +14,6 @@ func _init():
 
 func _run():
 	if(state == ""):
-		addCharacter("tavi", ["naked"])
 		var playedAnim = false
 		isCorrupt = getModule("TaviModule").isCorrupt()
 		isPure = getModule("TaviModule").isPure()
@@ -23,59 +22,190 @@ func _run():
 		chillTalk = getFlag("TaviModule.Ch6TaviChillTalk", 0)
 		sexSkill = getModule("TaviModule").getSkillScore("taviSkillSex")
 		sexSkillMod = 1.0 + sexSkill / 3.0
-		saynn("As you enter Tavi's cell, you find her lying on her bed, her breathing heavy and her eyes filled with the mix of desire and need.")
+		if (isPure):
+			addCharacter("tavi")
+			var randomPureText = RNG.pick([1, 2, 3, 4])
+			if (randomPureText == 1):
+				playAnimation(StageScene.Duo, "stand", {npc="tavi"})
+				saynn("As you step into Tavi's cell, you find her doing some exercises by her bed. She notices you and smiles warmly.")
 
-		var randomText = RNG.pick([1, 2, 3, 4, 5, 6])
-		if (randomText == 1):
-			saynn("The air in the cell is filled with tension as Tavi notices you, her voice is quiet.")
+				saynn("[say=tavi]Good morning, {pc.name}.[/say]")
 
-			saynn("[say=tavi]I can't take it anymore.. I need you..[/say]")
+				saynn("Her voice is peaceful, there are no signs of her suffering from constant heat.")
 
-			saynn("She doesn't even care that she is naked and displaying her needy pussy to you. She hopes you see it even.")
+				saynn("[say=tavi]Just trying to keep myself in shape. Feline grace doesn't come for free~.[/say]")
 
-		elif (randomText == 2):
-			saynn("Tavi's gaze wanders over your {pc.masc} body, mostly lingering on your crotch. She purrs with a seductive smile.")
+				saynn("You just lean against one the walls and watch Tavi go through her morning routine, mostly consisting of squats and various stretches.")
 
-			saynn("[say=tavi]Would you help me to satisfy this heat.. I need you to fuck me..[/say]")
+				saynn("[say=tavi]Life is so much better when I can actually focus. But.. If you want.. I can pretend that I'm in heat~.[/say]")
 
-			saynn("Her paws are idly rubbing her pussy, the clawed digit gently playing with the clit. Tavi doesn't seem to mind you watching.")
+			elif (randomPureText == 2):
+				playAnimation(StageScene.Duo, "stand", {npc="tavi", npcAction="sit"})
+				saynn("As you enter Tavi's cell, you find her sitting on her bed.")
 
-		elif (randomText == 3):
-			saynn("As you approach her, Tavi shifts her body, spreading her legs slightly for you. A silent invitation.. Her soft voice trembles with urgency.")
+				saynn("[say=pc]Hey there, Tavi.[/say]")
 
-			saynn("[say=tavi]It's happening again.. Every day.. I can't.. I need to cum..[/say]")
+				saynn("Her ears perk towards your voice. Tavi looks at you and smiles.")
 
-			saynn("Her body is squirming slightly while you watch. Her pussy is incredibly wet. Seems like that experiment that Eliza did her got her hooked on pleasure.")
+				saynn("[say=tavi]Hey there~. Thank you for checking on me so often.[/say]")
 
-		elif (randomText == 4):
-			playedAnim = true
-			playAnimation(StageScene.Hug, "hug", {npc="tavi", npcBodyState={naked=true}})
-			saynn("Tavi gets up off the bed and reaches out to touch your hand before guiding it to her sensitive spot between her legs. Her body arches with pleasure just feeling the contact of your digits on her wet pussy folds. She looks at you with pleading eyes.")
+				saynn("She spreads her arms wide and arches her back before tensing all her muscles up and producing a cute moan.")
 
-			saynn("[say=tavi]Fuck me.. Use me.. Do anything to me.. Just let me cum.. I will be your submissive slut..[/say]")
+				saynn("[say=tavi]Wanna cuddle for a bit? Or.. I can still be your slut if you want. Even if I will have to fake my heat.[/say]")
 
-			saynn("You pull the hand away before Tavi starts humping it. Isn't she a needy girl..")
+			elif (randomPureText == 3):
+				playAnimation(StageScene.Duo, "stand", {npc="tavi"})
+				saynn("Tavi stands near her bed, there is a.. tasty-looking apple.. in her paw. She rubs it against her shirt and bites into it so much that the juices begin overflowing and dripping down her chin.")
 
-		elif (randomText == 5):
-			playedAnim = true
-			playAnimation(StageScene.Hug, "hug", {npc="tavi", npcBodyState={naked=true}})
-			saynn("With a soft whimper, Tavi gets up and presses her girly body against yours, her paws trailing up your {pc.masc} chest.")
+				saynn("[say=pc]Hey, Tavi. Where'd you get that?[/say]")
 
-			saynn("[say=tavi]I can't endure it any longer.. You must fuck me.. Any way you want..[/say]")
+				saynn("She finally notices you and giggles softly.")
 
-			saynn("Your pet is rubbing her crotch against your leg, spreading her pussy juices. So needy..")
+				saynn("[say=tavi]Heya. You might not believe it but I don't actually sit on my butt all day~.[/say]")
 
-		elif (randomText == 6):
-			playedAnim = true
-			playAnimation(StageScene.Duo, "stand", {npc="tavi", npcAction="kneel", npcBodyState={naked=true}})
-			saynn("Tavi notices you and gets off the bed. Her body trembles with unfulfilled desire as she kneels before you, her paws idly brushing against her curves and rubbing the sensitive spots.")
+				saynn("She slices a small chunk off with her claws of it and offers it to you.")
 
-			saynn("[say=tavi]I'm so needy.. And I'm yours to take..[/say]")
+				saynn("[say=tavi]Not suffering from constant heat helps a lot. Thank you for that. Really.[/say]")
 
-			saynn("Her voice sounds almost desperate. That kitty really wants to be fucked..")
+				saynn("The feline bites into it a few more times, trying to be less messy this time.")
 
-		if (!playedAnim):
-			playAnimation(StageScene.Sleeping, "idle", {pc="tavi", bodyState={naked=true}})
+				saynn("[say=tavi]Speaking off.. Wanna have some fun? I can still act slutty even if I'm not..[/say]")
+
+			elif (randomPureText == 4):
+				playAnimation(StageScene.Sleeping, "idle", {pc="tavi"})
+				saynn("You step in Tavi's cell.. and find her lying on her bed. Your pet seems to be sleeping, huh, her eyes are closed. You decide to approach her and take a better look.")
+
+				saynn("Tavi is sleeping on her back, not moving, her paws by her sides. If you didn't see her"+str(" pregnant" if getCharacter("tavi").isVisiblyPregnant() else "")+" belly get bigger and smaller, you'd assume she is dead.. because she is That still.")
+
+				saynn("[say=pc]Tavi?[/say]")
+
+				saynn("Her ears instantly focus on your voice, her eyes open a second later.")
+
+				saynn("[say=tavi]Oh. Hey there.[/say]")
+
+				saynn("[say=pc]You always sleep like that?[/say]")
+
+				saynn("Tavi shrugs as she sits down.")
+
+				saynn("[say=tavi]I was squirming a lot before. But now it's better.[/say]")
+
+				saynn("The feline offers you a smile.")
+
+				saynn("[say=tavi]Wanna do something? I can still pretend I'm a horny slut if you want~.[/say]")
+
+		elif (isCorrupt):
+			addCharacter("tavi", ["naked"])
+			var randomCorruptText = RNG.pick([1, 2, 3, 4])
+			if (randomCorruptText == 1):
+				playAnimation(StageScene.Sleeping, "idle", {pc="tavi", bodyState={naked=true}})
+				saynn("As you enter Tavi's cell, you find her lying on her bed, her eyes shining with desire while her body squirms sensually.")
+
+				saynn("With an alluring smile, she beckons you closer, her voice laced with a low-pitched purr.")
+
+				saynn("[say=tavi]Wouldn't you like to start your day by indulging in.. raw.. passionate.. love-making?..[/say]")
+
+				saynn("Tavi lets one leg to hang off the bed and then uses her long claws to spread her"+str(" virgin" if getModule("TaviModule").isVirgin() else "")+" pussy, showcasing her slick inviting depths.")
+
+			elif (randomCorruptText == 2):
+				playAnimation(StageScene.Duo, "stand", {npc="tavi", npcBodyState={naked=true}})
+				saynn("As you step in Tavi's cell, an intoxicating scent hits your senses. The room seems empty at first but that's because Tavi is behind you, cutting off the only exit.")
+
+				saynn("[say=tavi]Hey~.[/say]")
+
+				saynn("Her paws land on {pc.masc} body, caressing it. You can feel her hot breath on your neck.")
+
+				saynn("[say=tavi]I ache with need.. Don't make me beg..[/say]")
+
+				saynn("She bares her fangs and teasingly prods your skin.")
+
+				saynn("[say=tavi]Cause I will~..[/say]")
+
+			elif (randomCorruptText == 3):
+				playAnimation(StageScene.Duo, "stand", {npc="tavi", npcBodyState={naked=true}})
+				saynn("As you enter Tavi's cell, her lips curve into a knowing smile. She approaches you and begins stepping around, swaying her hips seductively. Her voice is like a melody, with some dark added notes to it.")
+
+				saynn("[say=tavi]Do you feel the heat that courses through my veins?[/say]")
+
+				saynn("She cups her breasts and teases her green nips with her claws, all in your clear view.")
+
+				saynn("[say=tavi]It's a fire that only you can quench~.[/say]")
+
+			elif (randomCorruptText == 4):
+				playAnimation(StageScene.Hug, "hug", {npc="tavi", npcBodyState={naked=true}})
+				saynn("Tavi embraces you as soon as you enter her cell. She is purring while rubbing her cheek against yours.")
+
+				saynn("[say=tavi]Wanna fuck me?[/say]")
+
+				if (GM.pc.hasPenis()):
+					saynn("She is quite.. bold.. Her paws explore your body, reaching down to your {pc.penis} and teasing it with some strokes.")
+
+				elif (GM.pc.hasReachableVagina()):
+					saynn("She is quite.. bold.. Her paws explore your body, reaching down to your pussy and teasing it with her some rubs.")
+
+				else:
+					saynn("She is quite.. bold.. Her paws explore your body, reaching down to your crotch and teasing it with her some rubs.")
+
+				saynn("[say=tavi]Squeeze my tits really tight? Grab my horns and force me to pleasure you~?[/say]")
+
+				saynn("The feline is smiling while rubbing her whole body against yours.")
+
+				saynn("[say=tavi]Can you see the hunger in my eyes? I want you to use me..[/say]")
+
+		else:
+			addCharacter("tavi", ["naked"])
+			saynn("As you enter Tavi's cell, you find her lying on her bed, her breathing heavy and her eyes filled with the mix of desire and need.")
+
+			var randomText = RNG.pick([1, 2, 3, 4, 5, 6])
+			if (randomText == 1):
+				saynn("The air in the cell is filled with tension as Tavi notices you, her voice is quiet.")
+
+				saynn("[say=tavi]I can't take it anymore.. I need you..[/say]")
+
+				saynn("She doesn't even care that she is naked and displaying her needy pussy to you. She hopes you see it even.")
+
+			elif (randomText == 2):
+				saynn("Tavi's gaze wanders over your {pc.masc} body, mostly lingering on your crotch. She purrs with a seductive smile.")
+
+				saynn("[say=tavi]Would you help me to satisfy this heat.. I need you to fuck me..[/say]")
+
+				saynn("Her paws are idly rubbing her pussy, the clawed digit gently playing with the clit. Tavi doesn't seem to mind you watching.")
+
+			elif (randomText == 3):
+				saynn("As you approach her, Tavi shifts her body, spreading her legs slightly for you. A silent invitation.. Her soft voice trembles with urgency.")
+
+				saynn("[say=tavi]It's happening again.. Every day.. I can't.. I need to cum..[/say]")
+
+				saynn("Her body is squirming slightly while you watch. Her pussy is incredibly wet. Seems like that experiment that Eliza did her got her hooked on pleasure.")
+
+			elif (randomText == 4):
+				playedAnim = true
+				playAnimation(StageScene.Hug, "hug", {npc="tavi", npcBodyState={naked=true}})
+				saynn("Tavi gets up off the bed and reaches out to touch your hand before guiding it to her sensitive spot between her legs. Her body arches with pleasure just feeling the contact of your digits on her wet pussy folds. She looks at you with pleading eyes.")
+
+				saynn("[say=tavi]Fuck me.. Use me.. Do anything to me.. Just let me cum.. I will be your submissive slut..[/say]")
+
+				saynn("You pull the hand away before Tavi starts humping it. Isn't she a needy girl..")
+
+			elif (randomText == 5):
+				playedAnim = true
+				playAnimation(StageScene.Hug, "hug", {npc="tavi", npcBodyState={naked=true}})
+				saynn("With a soft whimper, Tavi gets up and presses her girly body against yours, her paws trailing up your {pc.masc} chest.")
+
+				saynn("[say=tavi]I can't endure it any longer.. You must fuck me.. Any way you want..[/say]")
+
+				saynn("Your pet is rubbing her crotch against your leg, spreading her pussy juices. So needy..")
+
+			elif (randomText == 6):
+				playedAnim = true
+				playAnimation(StageScene.Duo, "stand", {npc="tavi", npcAction="kneel", npcBodyState={naked=true}})
+				saynn("Tavi notices you and gets off the bed. Her body trembles with unfulfilled desire as she kneels before you, her paws idly brushing against her curves and rubbing the sensitive spots.")
+
+				saynn("[say=tavi]I'm so needy.. And I'm yours to take..[/say]")
+
+				saynn("Her voice sounds almost desperate. That kitty really wants to be fucked..")
+
+			if (!playedAnim):
+				playAnimation(StageScene.Sleeping, "idle", {pc="tavi", bodyState={naked=true}})
 		addButton("Finger her", "Make Tavi cum with just your fingers", "do_finger")
 		if (sexSkill > 0):
 			addButtonWithChecks("Lick her out", "Satisfy Tavi's heat by licking her pussy", "do_lick", [], [ButtonChecks.NotOralBlocked])
@@ -724,7 +854,7 @@ func _react(_action: String, _args):
 
 	if(_action == "do_just_chill"):
 		processTime(20*60)
-		getModule("TaviModule").addCorruption(-10)
+		getModule("TaviModule").addCorruption(-15)
 		GM.pc.addStamina(50)
 		if(chillTalk < 3):
 			increaseFlag("TaviModule.Ch6TaviChillTalk")
@@ -863,7 +993,7 @@ func _react(_action: String, _args):
 		#GM.pc.orgasmFrom("tavi")
 
 	if(_action == "cor_facesit_cum"):
-		getModule("TaviModule").addCorruption(10)
+		getModule("TaviModule").addCorruption(15)
 		GM.pc.cummedOnBy("tavi", FluidSource.Vagina)
 
 	setState(_action)

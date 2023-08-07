@@ -196,7 +196,7 @@ func _run():
 
 			saynn("[say=tavi]Mhm~.[/say]")
 
-		saynn("After that explosive orgasm, Tavi just rests while idly rubbing pussies with you. Your hands jump onto her belly and.. rub it. Her heat seems to be satisfied. For now..")
+		saynn("After that explosive orgasm, Tavi just rests while idly rubbing pussies with you. Your hands jump onto her belly and.. rubs it. Her heat seems to be satisfied. For now..")
 
 		saynn("After some time, she leans in closer to your ear, whispering.")
 
