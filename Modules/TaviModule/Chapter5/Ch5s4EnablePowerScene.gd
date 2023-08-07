@@ -606,3 +606,9 @@ func _react_scene_end(_tag, _result):
 		else:
 			setState("lost_sentinelx")
 			addExperienceToPlayer(50)
+
+func getDevCommentary():
+	return "This encounter is pretty cool I think ^^. And the computer part is nice too, it explores many things, provides some interesting lore I think x3.\n\nHow did I come up with Sentiel-X? Well.. I needed the player to get that lust grenade from somewhere. I could have made it lootable from the guards but that'd be boring. I didn't wanna use Alex Rynard again too, I explored him enough in this route already x3. So.. Androids it is.\n\nI added the abandoned assembly and robotics labs just cause I needed to fill some space in the engineering. But I'm sooo glad that I did ^^. I managed to incorporate it into the station's lore perfectly. I think at least x3.\n\nDrones are the present. And so the androids will be the future. That's my prediction x3. What's the difference? Androids have more intelligence. Drones just run on algorithms or are controlled remotely.\n\nPeople are already falling in love with chatbots.. Imagine what happens when they will also be able to fuck them.."
+
+func hasDevCommentary():
+	return true

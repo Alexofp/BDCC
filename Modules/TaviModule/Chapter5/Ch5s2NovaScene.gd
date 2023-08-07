@@ -1990,3 +1990,9 @@ func loadData(data):
 	corruption = SAVE.loadVar(data, "corruption", 0.0)
 	lostBathroom = SAVE.loadVar(data, "lostBathroom", false)
 	gotFuckedByNova = SAVE.loadVar(data, "gotFuckedByNova", false)
+
+func getDevCommentary():
+	return "Nova is not my character so I find her tricky to write x3. She is kind and yet assertive. Playful but firm when the situation asks for it. She is also a mommy domme but no one knows about it yet cause I have to write that content..\n\nI liked how I handled Avy's final arena scene. I used that approach here. Basically a list of options that you can do with her. How is it better than doing it the normal way? Less writing that goes wasted x3. If you want, you can watch all the possible scenes without having to save-load. Or if you don't wanna bully Nova in any way, you can just do that too ^^.\n\nThere is a lot of branching in this scene btw x3. I dunno why I went so hard on it. Maybe I just enjoy bullying Nova? If you hand me your character and untie my hands, prepare to be bullied x3"
+
+func hasDevCommentary():
+	return true

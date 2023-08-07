@@ -456,3 +456,9 @@ func _react_scene_end(_tag, _result):
 			addExperienceToPlayer(50)
 		else:
 			setState("lost_eliza")
+
+func getDevCommentary():
+	return "This scene.. Why did I do that?\n\nWell.. I just wanted to show that Tavi isn't untouchable I guess. She has to suffer somehow x3\n\nAnd.. also. Tavi's route is a route for switch people. So I needed this switch to happen at some point x3"
+
+func hasDevCommentary():
+	return true

@@ -218,3 +218,9 @@ func _react(_action: String, _args):
 		return
 
 	setState(_action)
+
+func getDevCommentary():
+	return "I had to add support of adding/removing bodyparts dynamically just for Tavi x3. You might think that its a simple problem, just store their bodyparts in a save. But what I decide to change Tavi's hair for example? Your old saves wouldn't update her hair then. Yeah, there is a way to hack it by writing functions that upgrade your saves. But.. I really don't like that solution.\n\nWhat I did is basically just adding certain bodyparts if a flag is set. It's simple, requires no hacks (almost x3) and gives me power to do anything while making it future-proof.\n\nWhy did I make it so Tavi grew horns? Her fur color is purple. I rest my case. x3"
+
+func hasDevCommentary():
+	return true

@@ -240,3 +240,9 @@ func loadData(data):
 	askedDatapad = SAVE.loadVar(data, "askedDatapad", false)
 	askedFreq = SAVE.loadVar(data, "askedFreq", false)
 	askedGrenades = SAVE.loadVar(data, "askedGrenades", false)
+
+func getDevCommentary():
+	return "This scene.. It just shows that Tavi is a bit strange x3. She is not yandere no. But she doesn't exactly know how to act normal. She is doing her best though x3.\n\nWhy did Tavi make so many plans and why did all of them fail? Well, it's a complicated topic, heh. Obviously I wanted to make the game take longer than 20 minutes to complete x3. And if you actually think about it, you and Tavi do make some progress each time ^^. You learn more about the prison, the captain, the staff, Tavi, the world.\n\nIs the world that I'm showing that deep though? I mean.. I went pretty generic with it x3. Megacorporation vs evil group that tries to destroy it. The point of AlphaCorp is that all of the power is in one person's hands. Since the Alpha x3. And Syndicate.. is made out of a few families. Dictatorship vs Oligarchy basically.. Strong vision vs Strong bond. What about democracy?? We're constantly trying to make democracy work but someone always abuses it, sabotaging the voting process or eliminating other candidates. I'm not saying democracy is bad, I think it's great.. Let people choose what they want. But modern tech proved that we are fooled too easily ;-;. And that will only get worse in the future.\n\nSorry about the politics rant x3. I'm not really a political person. I just wanna be happy ;-;"
+
+func hasDevCommentary():
+	return true
