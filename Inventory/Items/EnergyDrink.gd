@@ -16,6 +16,7 @@ func canUseInCombat():
 	return true
 
 func useInCombat(_attacker, _receiver):
+	_attacker.updateNonBattleEffects()
 	_attacker.addStamina(100)
 	removeXOrDestroy(1)
 	return _attacker.getName() + " opened the soda can with a satisfied click and drank it's contents!"

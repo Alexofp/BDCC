@@ -2220,3 +2220,19 @@ func checkSkins(applyRandomSkinOnFail = false):
 			theSkin = GlobalRegistry.getSkin(bodypart.pickedSkin)
 			if(theSkin == null):
 				bodypart.pickedSkin = null
+
+func applyBodypartsSkinData(theSkinData):
+	if(theSkinData != null):
+		for bodypartSlot in theSkinData:
+			if(!hasBodypart(bodypartSlot)):
+				continue
+			var bodypart = getBodypart(bodypartSlot)
+			var bodypartSkinData = theSkinData[bodypartSlot]
+			if(bodypartSkinData.has("skin")):
+				bodypart.pickedSkin = bodypartSkinData["skin"]
+			if(bodypartSkinData.has("r")):
+				bodypart.pickedRColor = bodypartSkinData["r"]
+			if(bodypartSkinData.has("g")):
+				bodypart.pickedGColor = bodypartSkinData["g"]
+			if(bodypartSkinData.has("b")):
+				bodypart.pickedBColor = bodypartSkinData["b"]

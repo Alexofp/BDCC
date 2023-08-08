@@ -793,6 +793,7 @@ func _react(_action: String, _args):
 		addExperienceToPlayer(100)
 		addMessage("Task updated")
 		setFlag("TaviModule.Ch4ServedPunishment", true)
+		getCharacter("skar").removeAllRestraints()
 
 	if(_action == "begin_skar_torture"):
 		getCharacter("skar").getInventory().forceEquipStoreOtherUnlessRestraint(GlobalRegistry.createItem("inmatewristcuffs"))

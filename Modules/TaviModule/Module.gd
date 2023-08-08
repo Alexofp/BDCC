@@ -235,6 +235,7 @@ func _init():
 		"res://Modules/TaviModule/Chapter2/Ch2AlexQuest.gd",
 		"res://Modules/TaviModule/Chapter3/Ch3TaviQuest.gd",
 		"res://Modules/TaviModule/Chapter5/Ch5TaviQuest.gd",
+		"res://Modules/TaviModule/Chapter6/Ch6TaviQuest.gd",
 	]
 	worldEdits = [
 		"res://Modules/TaviModule/TaviWorldEdit.gd",

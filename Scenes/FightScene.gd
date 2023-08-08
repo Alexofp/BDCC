@@ -180,7 +180,7 @@ func _run():
 		else:
 			saynn(GM.ui.processString(attack.getAnticipationText(enemyCharacter, GM.pc)))
 		addButton("Do nothing", "You don't counter the attack in any way", "dodge_donothing")
-		addButtonWithChecks("Dodge", "You dodge a physical attack completely spending 30 stamina in the process", "dodge_dodge", [], [ButtonChecks.HasStamina])
+		addButtonWithChecks("Dodge", "You dodge a physical attack completely spending 30 stamina in the process", "dodge_dodge", [], [ButtonChecks.HasStamina, ButtonChecks.NotCollapsed])
 		addButtonWithChecks("Block", "You gain "+str(GM.pc.getBlockArmor())+" additional physical armor against the attack while spending 15 stamina", "dodge_block", [], [ButtonChecks.HasStamina])
 		addButtonWithChecks("Defocus", "You try to distract yourself from the fight, gaining "+str(GM.pc.getDefocusArmor())+" lust armor and spending 15 stamina", "dodge_defocus", [], [ButtonChecks.HasStamina])
 		if(GM.pc.hasPerk(Perk.CombatDoubleDown)):

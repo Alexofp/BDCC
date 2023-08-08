@@ -212,6 +212,13 @@ func paintBodyparts():
 			if(bodypartSkinData.has("b")):
 				bodypart.pickedBColor = bodypartSkinData["b"]
 
+func copySkinTo(otherNPC):
+	otherNPC.pickedSkin = pickedSkin
+	otherNPC.pickedSkinRColor = pickedSkinRColor
+	otherNPC.pickedSkinGColor = pickedSkinGColor
+	otherNPC.pickedSkinBColor = pickedSkinBColor
+	otherNPC.applyBodypartsSkinData(npcSkinData)
+
 func createEquipment():
 	pass
 

@@ -194,6 +194,8 @@ func changepartcolormenu_colorchanged(_theColor):
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
+		if(editingID == "pc"):
+			setFlag("PickedSkinAtLeastOnce", true)
 		endScene()
 		return
 	
