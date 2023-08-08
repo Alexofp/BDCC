@@ -5,6 +5,33 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+## [0.0.24] - 2023-08-08
+### Added
+- [Skins!](https://cdn.discordapp.com/attachments/1007588662009155704/1121481683095527445/image.png) White paper dolls finally got their colors and they look fancy. Can be disabled in the settings if you prefer the old look.
+- Tavi’s route is expanded! Tavi has a new foolproof plan of escape and she needs your help. 200+ pages/60k+ words of text, pretty much a novel. Next update will probably complete this route to the end, making the whole game completable! (But not done, 2 other routes planned)
+- All static npcs have a skin defined for them. All dynamic npcs have a random skin and colors.
+- [Support for custom skins! Click me to find out how to draw your own.](https://github.com/Alexofp/BDCC/wiki/Making-skins) Installing custom skins is as easy as putting them into the custom_skins folder.
+- Change your skin and colors at any time using the Mirror in the bathrooms. Useful for old saves.
+- Cum overlay. If a character is covered in any fluids, they will be visible on their doll. Changes depending on the amount of fluids.
+- Jiggle physics. Breasts, bellies and butts now jiggle slightly. Can be configured/disabled in the options.
+- The scene of having your holes healed by Eliza got an animation.
+- The scene where you encounter the latex alien during the mental ward content got an animation (A great one!)
+- 3 new procedural sex activities added: Rimming sub, Getting rimmed by the sub, Feetplay.
+- You can now choose the weight multipliers for each goal in the encounter settings. Rimming and feetplay have low weights by default, meaning NPCs will do them rarely to you.
+- Sex activity editor. A very complicated tool but useful if you know GDScript. Some examples in the AssetsSource folder
+
+### Changed
+- Gender distribution of player character’s kids now follows the distribution in the encounter settings
+- Pose doesn’t change randomly if you select the ‘continue fucking’ option during procedural sex.
+- Status effects now check if they should be added or removed instead of the BaseCharacter class, making adding new status effects through mods much easier.
+- Adding new attacks to the player’s arsenal through mods is now way easier.
+- Old dynamic npcs will randomly receive newly added fetishes now.
+
+### Fixed
+- If you skip the journey when you are leashed, you will be teleported to your destination now. ([Fix by Niel](https://github.com/Alexofp/BDCC/pull/17))
+- Fixed fetishes that require bodyparts not generating for the dynamic npcs.
+- Character creator shows the exact name of the bodypart now. (fixes the anus with womb option not being displayed visibly)
+
 ## [0.0.23] - 2023-06-13
 ### Added
 - First accepted code contribution! The npc 'forget' menu got replaced with a fancy UI-based one that also allows you preview the npc or even meet them. ([Pull request by Firi](https://github.com/Alexofp/BDCC/pull/10))
@@ -267,7 +294,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Turn-based fighting
 - Initial player customization
 
-[Unreleased]: https://github.com/Alexofp/BDCC/compare/0.0.23...main
+[Unreleased]: https://github.com/Alexofp/BDCC/compare/0.0.24...main
+[0.0.24]: https://github.com/Alexofp/BDCC/compare/0.0.23...0.0.24
 [0.0.23]: https://github.com/Alexofp/BDCC/compare/0.0.22bugfix1...0.0.23
 [0.0.22bugfix1]: https://github.com/Alexofp/BDCC/compare/0.0.22...0.0.22bugfix1
 [0.0.22]: https://github.com/Alexofp/BDCC/compare/0.0.21...0.0.22
