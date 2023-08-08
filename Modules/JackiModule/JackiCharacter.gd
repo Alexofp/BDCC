@@ -4,6 +4,19 @@ func _init():
 	id = "jacki"
 	npcCharacterType = CharacterType.Inmate
 	
+	pickedSkin="SoftSpikySkin"
+	pickedSkinRColor=Color("ff232323")
+	pickedSkinGColor=Color("ff5f5e5e")
+	pickedSkinBColor=Color("ffa9a9a9")
+	npcSkinData={
+	"hair": {"r": Color("ff212121"),"g": Color("ff890000"),"b": Color("ff7d2b2b"),},
+	"ears": {"b": Color("ff636363"),},
+	"body": {"b": Color("ff444242"),},
+	"arms": {"skin": "SoftSpikySkin","r": Color("ff473934"),"g": Color("ff2b2b2b"),"b": Color("ff502020"),},
+	"tail": {"skin": "SoftSpikySkin","g": Color("ff232323"),"b": Color("ff565656"),},
+	"legs": {"skin": "FerriSkin","b": Color("ff433837"),},
+	}
+	
 func _getName():
 	return "Jacki Northstar"
 

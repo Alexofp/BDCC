@@ -129,7 +129,10 @@ func impregnatedBy(fluidDNA):
 		allowHybrids = false
 	
 	resultSpecies = SpeciesCompatibility.generateChildSpecies(motherSpecies, fluidDNA.getSpecies(), allowHybrids)
-	resultGender = NpcGender.generate()
+	if(fatherID == "pc" || motherID == "pc"):
+		resultGender = GM.main.getEncounterSettings().generateGender()
+	else:
+		resultGender = NpcGender.generate()
 
 	print("EGGCELL IMPREGNATED BY "+str(fatherID)+", species: "+str(resultSpecies)+", gender: "+NpcGender.getVisibleName(resultGender), ", division: ", monozygotic)
 

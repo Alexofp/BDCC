@@ -29,6 +29,13 @@ jobs:
         with:
           name: bdcc-windows
           path: ./build/windows/
+      - name: Discord notification
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+        if: env.DISCORD_WEBHOOK != null && github.ref == 'refs/heads/dev'
+        uses: Ilshidur/action-discord@0.3.2
+        with:
+          args: 'The project {{ EVENT_PAYLOAD.repository.full_name }} has been complied https://nightly.link/Alexofp/BDCC/workflows/godot-ci/dev (Always latest dev build, might crash and burn and break your saves)'
 
   export-linux:
     name: Linux Export

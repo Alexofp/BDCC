@@ -4,6 +4,15 @@ func _init():
 	id = StatusEffect.Blindfolded
 	isBattleOnly = false
 	
+	alwaysCheckedForNPCs = true
+	alwaysCheckedForPlayer = true
+	priorityDuringChecking = 99
+	
+func shouldApplyTo(_npc):
+	if(_npc.isBlindfolded()):
+		return true
+	return false
+	
 func initArgs(_args = []):
 	pass
 	

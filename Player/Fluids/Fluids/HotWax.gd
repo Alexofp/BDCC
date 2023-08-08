@@ -42,3 +42,6 @@ func onGettingHitWith(_pc, _amount):
 		text = text,
 		pain = int(_amount / 100.0),
 	}
+
+func getCumOverlayColor():
+	return Color.red

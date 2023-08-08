@@ -91,6 +91,10 @@ func createStaticCharacters():
 		staticCharacters[characterObject.id] = characterObject
 		charactersNode.add_child(characterObject)
 	
+func updateStaticCharacters():
+	for charID in staticCharacters:
+		staticCharacters[charID].updateBodyparts()
+	
 func getCharacter(charID):
 	if(staticCharacters.has(charID)):
 		return staticCharacters[charID]
@@ -182,6 +186,7 @@ func getDynamicCharactersPools():
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	createStaticCharacters()
+	call_deferred("updateStaticCharacters")
 	
 	var pc = playerScene.new()
 	originalPC = pc
@@ -234,10 +239,10 @@ func getNewUniqueSceneID(blockedIDS=[]) -> int:
 
 func runScene(id, _args = [], parentSceneUniqueID = -1):
 	var scene = GlobalRegistry.createScene(id)
+	assert(scene != null, "SCENE WITH ID "+str(id)+" IS NOT FOUND. MAKE SURE IT WAS REGISTERED INSIDE THE MODULE.")
 	scene.uniqueSceneID = getNewUniqueSceneID([parentSceneUniqueID])
 	if(parentSceneUniqueID >= 0):
 		scene.parentSceneUniqueID = parentSceneUniqueID
-	assert(scene != null, "SCENE WITH ID "+str(id)+" IS NOT FOUND. MAKE SURE IT WAS REGISTERED INSIDE THE MODULE.")
 	add_child(scene)
 	sceneStack.append(scene)
 	print("Starting scene "+id)
@@ -961,6 +966,25 @@ func getDebugActions():
 			"id": "animBrowser",
 			"name": "Animation browser",
 		},
+		{
+			"id": "skinEditor",
+			"name": "Skin editor",
+			"args": [
+				{
+					"id": "npcID",
+					"name": "NPC ID",
+					"value": "pc",
+					"type": "smartlist",
+					"npc": true,
+				},
+				{
+					"id": "cnpcID",
+					"name": "Custom ID",
+					"value": "",
+					"type": "string",
+				},
+			]
+		},
 	]
 
 func doDebugAction(id, args = {}):
@@ -1027,6 +1051,12 @@ func doDebugAction(id, args = {}):
 	
 	if(id == "animBrowser"):
 		runScene("SimpleAnimPlayerScene")
+
+	if(id == "skinEditor"):
+		if(args["cnpcID"] != ""):
+			runScene("ChangeSkinScene", [args["cnpcID"], true])
+		else:
+			runScene("ChangeSkinScene", [args["npcID"], true])
 
 func consoleSetFlagBool(flagID, valuestr):
 	var value = false

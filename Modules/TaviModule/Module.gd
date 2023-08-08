@@ -85,6 +85,36 @@ func getFlags():
 		"Ch4KaitStocksUsedByOthers": flag(FlagType.Bool),
 		"Ch4KaitStocksPunishedByPC": flag(FlagType.Bool),
 		
+		# Character 5
+		"Ch5NewPlanSceneHappend": flag(FlagType.Bool),
+		"Ch5LastGuardLooted": flag(FlagType.Text),
+		"Ch5GuardsLooted": flag(FlagType.Number),
+		"Ch5StoleDatapadFromGuard": flag(FlagType.Bool),
+		"Ch5StoleDatapadFromNova": flag(FlagType.Bool),
+		"Ch5BlackmailedNova": flag(FlagType.Bool),
+		"Ch5SearchedLabFirstTime": flag(FlagType.Bool),
+		"Ch5EnabledLabPower": flag(FlagType.Bool),
+		"Ch5SentinelXHappened": flag(FlagType.Bool),
+		"Ch5PreparationHappened": flag(FlagType.Bool),
+		"Ch5BigSceneStarted": flag(FlagType.Bool),
+		"Ch5OnlyTaviPunished": flag(FlagType.Bool),
+		"Ch5FoundPunishedTavi": flag(FlagType.Bool),
+		"Ch5ElizaGotTortured": flag(FlagType.Bool),
+		"Ch5TaviSavedDay": flag(FlagType.Number),
+		
+		"Ch6IntroHappened": flag(FlagType.Bool),
+		"Ch6Corruption": flag(FlagType.Number),
+		"TaviIsNotVirgin": flag(FlagType.Bool),
+		"Ch6TaviSatisfied": flag(FlagType.Bool),
+		"Ch6CorruptionStage": flag(FlagType.Number), # 0 - default, 1 - horn signs, 2 - horns, 3 - womb mark
+		"Ch6PurityStage": flag(FlagType.Number), # 0 - default, 1 - talked about what happened, 2 - can somewhat control herself, 3 - pretty much old Tavi
+		"Ch6Tiredness": flag(FlagType.Number),
+		"Ch6TaviReceivedHorns": flag(FlagType.Bool),
+		"Ch6TaviReceivedWombMark": flag(FlagType.Bool),
+		"Ch6TaviChillTalk": flag(FlagType.Number),
+		
+		"taviSkillCombat": flag(FlagType.Number),
+		"taviSkillSex": flag(FlagType.Number),
 	}
 
 func _init():
@@ -129,12 +159,39 @@ func _init():
 		"res://Modules/TaviModule/Chapter4/Ch4s6EndingScene.gd",
 		"res://Modules/TaviModule/Chapter4/Ch4s7CaptainScene.gd",
 		"res://Modules/TaviModule/Chapter4/Ch4s8KaitScene.gd",
+		
+		"res://Modules/TaviModule/Chapter5/Ch5s1PlanningScene.gd",
+		"res://Modules/TaviModule/Chapter5/Ch5s2NovaScene.gd",
+		"res://Modules/TaviModule/Chapter5/Ch5s3AssemblyFirstScene.gd",
+		"res://Modules/TaviModule/Chapter5/Ch5s4EnablePowerScene.gd",
+		"res://Modules/TaviModule/Chapter5/Ch5s5TaviPreparationScene.gd",
+		"res://Modules/TaviModule/Chapter5/Ch5s6TaviCaptainScene.gd",
+		"res://Modules/TaviModule/Chapter5/Ch5s7PlayerCellScene.gd",
+		"res://Modules/TaviModule/Chapter5/Ch5s7BElizaTaviScene.gd",
+		"res://Modules/TaviModule/Chapter5/Ch5s7MedicalTortureScene.gd",
+		
+		"res://Modules/TaviModule/Chapter6/Ch6TaviIntroScene.gd",
+		"res://Modules/TaviModule/Chapter6/Ch6TaviTalkScene.gd",
+		"res://Modules/TaviModule/Chapter6/Ch6TaviMorningScene.gd",
+		
+		"res://Modules/TaviModule/Chapter6/Skills/Ch6TaviCombatSkillScene.gd",
+		"res://Modules/TaviModule/Chapter6/Skills/Ch6TaviSexSkillScene.gd",
+		
+		"res://Modules/TaviModule/Chapter6/CorruptionScenes/Ch6TaviCorruption75Scene.gd",
+		"res://Modules/TaviModule/Chapter6/CorruptionScenes/Ch6TaviCorruption50Scene.gd",
+		"res://Modules/TaviModule/Chapter6/CorruptionScenes/Ch6TaviCorruption25Scene.gd",
+		"res://Modules/TaviModule/Chapter6/CorruptionScenes/Ch6TaviCorruption0Scene.gd",
+		"res://Modules/TaviModule/Chapter6/CorruptionScenes/Ch6TaviCorruption125Scene.gd",
+		"res://Modules/TaviModule/Chapter6/CorruptionScenes/Ch6TaviCorruption150Scene.gd",
+		"res://Modules/TaviModule/Chapter6/CorruptionScenes/Ch6TaviCorruption175Scene.gd",
+		"res://Modules/TaviModule/Chapter6/CorruptionScenes/Ch6TaviCorruption200Scene.gd",
 		]
 	characters = [
 		"res://Modules/TaviModule/Chapter4/DirectorTau.gd",
 		"res://Modules/TaviModule/Chapter4/JaxonTau.gd",
 		"res://Modules/TaviModule/Chapter4/RishaTau.gd",
 		"res://Modules/TaviModule/Chapter4/JaxonBrotherTau.gd",
+		"res://Modules/TaviModule/Chapter5/SentinelX.gd",
 	]
 	items = []
 	events = [
@@ -160,6 +217,16 @@ func _init():
 		"res://Modules/TaviModule/Chapter3/Ch3s3AlexEvent.gd",
 		"res://Modules/TaviModule/Chapter3/Ch3s4TransmitterEvent.gd",
 		"res://Modules/TaviModule/Chapter4/Ch4s8KaitEvent.gd",
+		
+		"res://Modules/TaviModule/Chapter5/Ch5s1PlanningEvent.gd",
+		"res://Modules/TaviModule/Chapter5/Ch5s2DefeatedGuardEvent.gd",
+		"res://Modules/TaviModule/Chapter5/Ch5s2NovaEvent.gd",
+		"res://Modules/TaviModule/Chapter5/Ch5s3AssemblyFirstEvent.gd",
+		"res://Modules/TaviModule/Chapter5/Ch5s4EnablePowerEvent.gd",
+		"res://Modules/TaviModule/Chapter5/Ch5s5TaviPreparationEvent.gd",
+		"res://Modules/TaviModule/Chapter5/Ch5s7BElizaTaviEvent.gd",
+		
+		"res://Modules/TaviModule/Chapter6/Ch6TaviTalkEvent.gd",
 	]
 	quests = [
 		"res://Modules/TaviModule/TaviAppleQuest.gd",
@@ -167,6 +234,8 @@ func _init():
 		"res://Modules/TaviModule/Chapter2/Ch2ElizaQuest.gd",
 		"res://Modules/TaviModule/Chapter2/Ch2AlexQuest.gd",
 		"res://Modules/TaviModule/Chapter3/Ch3TaviQuest.gd",
+		"res://Modules/TaviModule/Chapter5/Ch5TaviQuest.gd",
+		"res://Modules/TaviModule/Chapter6/Ch6TaviQuest.gd",
 	]
 	worldEdits = [
 		"res://Modules/TaviModule/TaviWorldEdit.gd",
@@ -177,7 +246,10 @@ func _init():
 	]
 
 func resetFlagsOnNewDay():
-	pass
+	if(getFlag("TaviModule.Ch6TaviSatisfied")):
+		setFlag("TaviModule.Ch6TaviSatisfied", false)
+	if(getFlag("TaviModule.Ch6Tiredness", 0) != 0):
+		setFlag("TaviModule.Ch6Tiredness", 0)
 
 static func makeTaviAngry():
 	GM.main.setModuleFlag("TaviModule", "Tavi_IsAngryAtPlayer", true)
@@ -190,3 +262,118 @@ static func getPunishmentScene():
 
 static func trustsPC():
 	return !GM.main.getModuleFlag("TaviModule", "Tavi_IsAngryAtPlayer", false) && GM.main.getModuleFlag("TaviModule", "Tavi_IntroducedTo", false)
+
+func getAllSkills():
+	return ["taviSkillCombat", "taviSkillSex"]
+
+func getSkillInfo(skillID):
+	if(skillID == "taviSkillCombat"):
+		return {
+			name = "Combat",
+			desc = "Teaching Tavi how to stand up for herself",
+			scene = "Ch6TaviCombatSkillScene",
+		}
+	if(skillID == "taviSkillSex"):
+		return {
+			name = "Sex",
+			desc = "Allowing Tavi to enjoy all the sex that she missed",
+			scene = "Ch6TaviSexSkillScene",
+		}
+	
+	return null
+
+# F D C B A S S+ S++
+# 0 1 2 3 4 5 6  7
+func getSkillScore(skillID):
+	return Util.mini(Util.maxi(int(getFlag("TaviModule."+str(skillID), 0)), 0), 7)
+
+func advanceSkill(skillID, maxLevel = 7):
+	if(getSkillInfo(skillID) == null):
+		return false
+	
+	if(getFlag("TaviModule."+str(skillID), 0) < maxLevel):
+		increaseFlag("TaviModule."+str(skillID), 1)
+	return true
+
+func getSkillScoreText(skillID):
+	var score = getSkillScore(skillID)
+	score = Util.mini(Util.maxi(int(score), 0), 7)
+	
+	var scoreToText = ["F", "D", "C", "B", "A", "S", "S+", "S++"]
+	
+	return scoreToText[score]
+
+func getAvaiableStoryScene():
+	var currentCorruption = getFlag("TaviModule.Ch6Corruption", 1.0)
+	var corruptionStage = getFlag("TaviModule.Ch6CorruptionStage", 0)
+	var purityStage = getFlag("TaviModule.Ch6PurityStage", 0)
+	
+	var corruptScenes = [
+		{at=1.25,stage=1,scene="Ch6TaviCorruption125Scene"},
+		{at=1.5,stage=2,scene="Ch6TaviCorruption150Scene"},
+		{at=1.75,stage=3,scene="Ch6TaviCorruption175Scene"},
+		{at=2.0,stage=4,scene="Ch6TaviCorruption200Scene"},
+	]
+	var purityScenes = [
+		{at=0.75,stage=1,scene="Ch6TaviCorruption75Scene"},
+		{at=0.5,stage=2,scene="Ch6TaviCorruption50Scene"},
+		{at=0.25,stage=3,scene="Ch6TaviCorruption25Scene"},
+		{at=0.0,stage=4,scene="Ch6TaviCorruption0Scene"},
+	]
+	for sceneData in corruptScenes:
+		if(currentCorruption >= sceneData["at"] && corruptionStage<sceneData["stage"]):
+			return sceneData
+	for sceneData in purityScenes:
+		if(currentCorruption <= sceneData["at"] && purityStage<sceneData["stage"]):
+			return sceneData
+	
+	return null
+
+func isVirgin():
+	return !getFlag("TaviModule.TaviIsNotVirgin", false)
+
+func getCorruption():
+	return getFlag("TaviModule.Ch6Corruption", 1.0)
+
+func isCorrupt():
+	var currentCorruption = getFlag("TaviModule.Ch6Corruption", 1.0)
+	if(currentCorruption >= 1.5 && getFlag("TaviModule.Ch6CorruptionStage", 0) >= 2):
+		return true
+	return false
+
+func isPure():
+	var currentCorruption = getFlag("TaviModule.Ch6Corruption", 1.0)
+	if(currentCorruption <= 0.5 && getFlag("TaviModule.Ch6PurityStage", 0) >= 2):
+		return true
+	return false
+
+func hasHorns():
+	if(getFlag("TaviModule.Ch6TaviReceivedHorns", false)):
+		return true
+	return false
+
+func hasWombMark():
+	if(getFlag("TaviModule.Ch6TaviReceivedWombMark", false)):
+		return true
+	return false
+
+func addCorruption(howMuch, showMessage = true):
+	howMuch /= 100.0
+	var currentCorruption = getFlag("TaviModule.Ch6Corruption", 1.0)
+	var oldCor = currentCorruption
+	
+	currentCorruption += howMuch
+	if(howMuch > 0.0 && currentCorruption > 2.0):
+		currentCorruption = 2.0
+	if(howMuch < 0.0 && currentCorruption < 0.0):
+		currentCorruption = 0.0
+	
+	setFlag("TaviModule.Ch6Corruption", currentCorruption)
+	
+	
+	if(showMessage):
+		var diff = currentCorruption - oldCor
+		if(diff > 0.0):
+			GM.main.addMessage("Tavi's corruption has increased to "+str(Util.roundF(currentCorruption * 100.0, 1))+"%")
+		elif(diff < 0.0):
+			GM.main.addMessage("Tavi's corruption has decreased to "+str(Util.roundF(currentCorruption * 100.0, 1))+"%")

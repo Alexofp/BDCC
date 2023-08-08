@@ -647,10 +647,11 @@ func doDomAction(_id, _actionInfo):
 		gonnaCumOutside = false
 		state = "fucking"
 		var text = ""
-		var randomNewPose = RNG.pick(getAvaiablePoses())
-		if(currentPose != randomNewPose):
-			currentPose = randomNewPose
-			text = getSwitchPoseTextForPose(randomNewPose)+" "
+		if(!getDom().isPlayer()):
+			var randomNewPose = RNG.pick(getAvaiablePoses())
+			if(currentPose != randomNewPose):
+				currentPose = randomNewPose
+				text = getSwitchPoseTextForPose(randomNewPose)+" "
 		
 		text += RNG.pick([
 			"{dom.You} began moving {dom.yourHis} hips again, fucking {sub.your} "+RNG.pick(usedBodypartNames)+"!",

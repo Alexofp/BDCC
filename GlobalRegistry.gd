@@ -2,7 +2,7 @@ extends Node
 
 var game_version_major = 0
 var game_version_minor = 0
-var game_version_revision = 23
+var game_version_revision = 24
 var game_version_suffix = ""
 
 var currentUniqueID = 0
@@ -15,7 +15,11 @@ var sceneCreators: Dictionary = {}
 var bodyparts: Dictionary = {}
 var characterClasses: Dictionary = {}
 var attacks: Dictionary = {}
+var playerAttacksIDS: Array = []
 var statusEffects: Dictionary = {}
+var statusEffectsRefs: Dictionary = {}
+var statusEffectsCheckedForPC: Array = []
+var statusEffectsCheckedForNPC: Array = []
 var allSpecies: Dictionary = {}
 var items: Dictionary = {}
 var itemsRefs: Dictionary = {}
@@ -54,6 +58,8 @@ var sexTypes: Dictionary = {}
 var gameExtenders: Dictionary = {}
 var computers: Dictionary = {}
 var fluids: Dictionary = {}
+var skins: Dictionary = {}
+var partSkins: Dictionary = {}
 
 var bodypartStorageNode
 
@@ -66,6 +72,8 @@ signal donationDataUpdated
 
 var modsSupport = false
 var loadedMods = []
+
+var isInitialized = false
 
 func hasModSupport():
 	return modsSupport
@@ -303,11 +311,7 @@ func registerEverything():
 	registerCharacterFolder("res://Characters/")
 	registerCharacterFolder("res://Characters/Generic/")
 	
-	registerAttackFolder("res://Attacks/")
-	registerAttackFolder("res://Attacks/PlayerOnly/")
-	registerAttackFolder("res://Attacks/WeaponAttacks/")
-	registerAttackFolder("res://Attacks/NpcAttacks/")
-	registerAttackFolder("res://Attacks/NpcAttacks/Avy/")
+	registerAttackFolder("res://Attacks/", true)
 	
 	registerLustActionFolder("res://Game/LustCombat/LustActions/")
 	registerLustActionFolder("res://Game/LustCombat/LustActions/Perk/")
@@ -342,14 +346,21 @@ func registerEverything():
 	
 	registerComputerFolder("res://Game/Computer/")
 	
+	registerSkinsFolder("res://Player/Player3D/Skins/")
+	registerPartSkinsFolder("res://Player/Player3D/SkinsParts/")
+	
 	registerModulesFolder("res://Modules/")
+	findCustomSkins()
 	sortFightClubFighters()
+	sortRegisteredStatusEffectsByPriority()
+	sortPlayerAttacks()
 	
 	GM.GES.registerAll()
 	
 	var end = OS.get_ticks_usec()
 	var worker_time = (end-start)/1000000.0
 	Log.print("GlobalRegistry fully initialized in: %s seconds" % [worker_time])
+	isInitialized = true
 	
 # The point is that it will still generate unique ids even after saving/loading
 func generateUniqueID():
@@ -558,14 +569,18 @@ func registerAttack(path: String):
 	var attack = load(path)
 	var attackObject = attack.new()
 	attacks[attackObject.id] = attackObject
+	if(attackObject.isPlayerAttack):
+		playerAttacksIDS.append(attackObject.id)
 	
-func registerAttackFolder(folder: String):
+func registerAttackFolder(folder: String, recursive = false):
 	var dir = Directory.new()
 	if dir.open(folder) == OK:
-		dir.list_dir_begin()
+		dir.list_dir_begin(true)
 		var file_name = dir.get_next()
 		while file_name != "":
 			if dir.current_is_dir():
+				if(recursive):
+					registerAttackFolder(folder.plus_file(file_name)+"/", true)
 				pass
 				#print("Found directory: " + file_name)
 			else:
@@ -583,12 +598,19 @@ func getAttack(id: String):
 		return null
 	return attacks[id]
 
+func getPlayerAttackIDs():
+	return playerAttacksIDS
 
 func registerStatusEffect(path: String):
 	var effect = load(path)
 	var effectObject = effect.new()
 	statusEffects[effectObject.id] = effect
-	effectObject.queue_free()
+	statusEffectsRefs[effectObject.id] = effectObject
+	if(effectObject.alwaysCheckedForPlayer):
+		statusEffectsCheckedForPC.append(effectObject)
+	if(effectObject.alwaysCheckedForNPCs):
+		statusEffectsCheckedForNPC.append(effectObject)
+	#effectObject.queue_free()
 
 func registerStatusEffectFolder(folder: String):
 	var dir = Directory.new()
@@ -614,6 +636,34 @@ func createStatusEffect(id: String):
 		return null
 	return statusEffects[id].new()
 
+func getStatusEffectRef(id: String):
+	if(!statusEffectsRefs.has(id)):
+		Log.printerr("ERROR: status effect with the id "+id+" wasn't found")
+		return null
+	return statusEffectsRefs[id]
+
+func getStatusEffectsAlwaysCheckedForPC():
+	return statusEffectsCheckedForPC
+
+func getStatusEffectsAlwaysCheckedForNPC():
+	return statusEffectsCheckedForNPC
+
+static func sortRegisteredStatusEffectsByPriority_sortFunc(a, b):
+	if a.priorityDuringChecking > b.priorityDuringChecking:
+		return true
+	return false
+
+func sortRegisteredStatusEffectsByPriority():
+	statusEffectsCheckedForPC.sort_custom(self, "sortRegisteredStatusEffectsByPriority_sortFunc")
+	statusEffectsCheckedForNPC.sort_custom(self, "sortRegisteredStatusEffectsByPriority_sortFunc")
+
+func sortPlayerAttacks_sortFunc(a, b):
+	if getAttack(a).attackPriority > getAttack(b).attackPriority:
+		return true
+	return false
+
+func sortPlayerAttacks():
+	playerAttacksIDS.sort_custom(self, "sortPlayerAttacks_sortFunc")
 
 func registerSpecies(path: String):
 	var species = load(path)
@@ -1316,7 +1366,53 @@ func getScriptsInFolder(folder: String):
 		Log.printerr("An error occurred when trying to access the path "+folder)
 	
 	return result
+
+func getScriptsInSubFolders(folder: String):
+	var result = []
 	
+	var dir = Directory.new()
+	if dir.open(folder) == OK:
+		dir.list_dir_begin(true)
+		var file_name = dir.get_next()
+		while file_name != "":
+			if dir.current_is_dir():
+				var full_path = folder.plus_file(file_name)
+				result.append_array(getScriptsInFolder(full_path))
+				#print("Found directory: " + file_name)
+			else:
+#				if(file_name.get_extension() == "gd"):
+#					var full_path = folder.plus_file(file_name)
+#					result.append(full_path)
+				pass
+			file_name = dir.get_next()
+	else:
+		Log.printerr("An error occurred when trying to access the path "+folder)
+	
+	return result
+
+func getScriptsInFoldersRecursive(folder: String, ignoreBaseDir = false):
+	var result = []
+	
+	var dir = Directory.new()
+	if dir.open(folder) == OK:
+		dir.list_dir_begin(true)
+		var file_name = dir.get_next()
+		while file_name != "":
+			if dir.current_is_dir():
+				var full_path = folder.plus_file(file_name)
+				result.append_array(getScriptsInFoldersRecursive(full_path, false))
+				#print("Found directory: " + file_name)
+			else:
+				if(!ignoreBaseDir && file_name.get_extension() == "gd"):
+					var full_path = folder.plus_file(file_name)
+					result.append(full_path)
+				pass
+			file_name = dir.get_next()
+	else:
+		Log.printerr("An error occurred when trying to access the path "+folder)
+	
+	return result
+
 func registerFetishesFolder(folder: String):
 	var scripts = getScriptsInFolder(folder)
 	for scriptPath in scripts:
@@ -1468,3 +1564,71 @@ func createSexType(id: String):
 
 func getSexTypes():
 	return sexTypes
+
+
+
+
+func registerSkin(path: String):
+	var loadedClass = load(path)
+	var object = loadedClass.new()
+	
+	skins[object.id] = object
+
+func registerSkinsFolder(folder: String):
+	var scripts = getScriptsInSubFolders(folder)
+	for scriptPath in scripts:
+		registerSkin(scriptPath)
+
+func getSkin(id: String):
+	if(skins.has(id)):
+		return skins[id]
+	else:
+		Log.printerr("ERROR: skin with the id "+id+" wasn't found")
+		return null
+
+func getSkins():
+	return skins
+
+func findCustomSkins():
+	var skinsFolder = "user://custom_skins"
+	if(OS.get_name() == "Android"):
+		var externalDir:String = OS.get_system_dir(OS.SYSTEM_DIR_DOCUMENTS)
+		var finalDir = externalDir.plus_file("BDCCMods/custom_skins")
+		skinsFolder = finalDir
+	
+	for skinPath in Util.getFilesInFolder(skinsFolder):
+		var customSkin = preload("res://Player/Player3D/Skins/CustomSkin.gd").new()
+		var skinName = skinPath.get_file()
+		customSkin.id = skinName
+		customSkin.customName = skinName
+		customSkin.setTexturePath(skinPath)
+		skins[customSkin.id] = customSkin
+
+
+
+func registerPartSkin(path: String):
+	var loadedClass = load(path)
+	var object = loadedClass.new()
+	
+	if(!partSkins.has(object.partID)):
+		partSkins[object.partID] = {}
+	partSkins[object.partID][object.id] = object
+
+func registerPartSkinsFolder(folder: String):
+	var scripts = getScriptsInFoldersRecursive(folder, true)
+	for scriptPath in scripts:
+		registerPartSkin(scriptPath)
+
+func getPartSkin(partID: String, id: String):
+	if(!partSkins.has(partID)):
+		return null
+	if(partSkins[partID].has(id)):
+		return partSkins[partID][id]
+	else:
+		Log.printerr("ERROR: part skin with the id "+id+" wasn't found")
+		return null
+
+func getPartSkins(partID: String):
+	if(!partSkins.has(partID)):
+		return {}
+	return partSkins[partID]

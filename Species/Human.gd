@@ -24,3 +24,9 @@ func getEggCellOvulationAmount():
 		[2, 1.0],
 		[3, 0.3],
 	]
+
+func getSkinType():
+	return SkinType.Skin
+
+func generateSkinColors():
+	return ColorUtils.generateGenericHumanSkinColors()

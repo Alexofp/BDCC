@@ -1,7 +1,9 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Player/Player3D/Parts/Part3D.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Player/Player3D/Parts/MeshWithPattern.gd" type="Script" id=2]
 [ext_resource path="res://Player/Player3D/Parts/Ears/LynxEars/earsLynxBig.png" type="Texture" id=3]
+[ext_resource path="res://Player/Player3D/Parts/Ears/LynxEars/earsLynxBig_pattern.png" type="Texture" id=4]
 
 [sub_resource type="SpatialMaterial" id=1]
 resource_name = "hornsDragon2.png.001"
@@ -138,3 +140,6 @@ albedo_texture = ExtResource( 3 )
 mesh = SubResource( 9 )
 skin = SubResource( 10 )
 material/0 = SubResource( 11 )
+script = ExtResource( 2 )
+bodypartSlot = "ears"
+customSkinPattern = ExtResource( 4 )

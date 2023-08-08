@@ -3,6 +3,15 @@ extends Character
 func _init():
 	id = "jack"
 	
+	pickedSkin="HumanSkin"
+	pickedSkinRColor=Color("ff4d343d")
+	pickedSkinGColor=Color("ff7a4758")
+	pickedSkinBColor=Color("ff603c48")
+	npcSkinData={
+	"hair": {"r": Color("ff282828"),"g": Color("ff262626"),"b": Color("ff262626"),},
+	"penis": {"g": Color("ff900000"),"b": Color("fffb0000"),},
+	}
+	
 	npcLevel = 18
 	npcBasePain = 250
 	npcBaseLust = 200

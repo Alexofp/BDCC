@@ -4,6 +4,14 @@ func _init():
 	id = StatusEffect.Exhausted
 	isBattleOnly = false
 	
+	alwaysCheckedForPlayer = true
+	priorityDuringChecking = 94
+	
+func shouldApplyTo(_npc):
+	if(_npc.getStamina() <= 0):
+		return true
+	return false
+	
 func initArgs(_args = []):
 	pass
 	

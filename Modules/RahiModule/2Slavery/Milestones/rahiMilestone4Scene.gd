@@ -1066,6 +1066,7 @@ func _react(_action: String, _args):
 		GM.pc.getInventory().forceEquipRemoveOther(GlobalRegistry.createItem("EngineerClothes"))
 		GM.pc.getInventory().forceEquipRemoveOther(GlobalRegistry.createItem("GasMask"))
 		GM.pc.updateNonBattleEffects()
+		getCharacter("rahi").copySkinTo(GM.pc)
 
 	if(_action == "rahi_takes_shower"):
 		GM.pc.getInventory().clear()

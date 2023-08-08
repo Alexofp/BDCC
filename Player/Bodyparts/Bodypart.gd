@@ -10,6 +10,11 @@ var orifice: Orifice = null
 var fluidProduction: FluidProduction = null
 var character: WeakRef = null
 
+var pickedSkin = null
+var pickedRColor = null
+var pickedGColor = null
+var pickedBColor = null
+
 func _init():
 	pass
 
@@ -69,10 +74,56 @@ func getLewdDescriptionAndNameWithA():
 	return "a "+t
 
 func getPickableAttributes():
+#	if(supportsSkin()):
+#		var result = {
+#			"skinPrimaryColor": {
+#				"text": "Pick your primary color.",
+#				"textButton": "Primary color",
+#				"buttonDesc": "Change the primary color of your skin",
+#				"options": [[1, "Select", "Pick this color"], [null, "Same as body", "Reset the color to body's picked color"]],
+#				"type": "color",
+#				"currentColor": pickedRColor,
+#			},
+#			"skinSecondaryColor": {
+#				"text": "Pick your secondary color.",
+#				"textButton": "Secondary color",
+#				"buttonDesc": "Change the secondary color of your skin",
+#				"options": [[1, "Select", "Pick this color"], [null, "Same as body", "Reset the color to body's picked color"]],
+#				"type": "color",
+#				"currentColor": pickedGColor,
+#			},
+#			"skinTertiaryColor": {
+#				"text": "Pick your tertiary color.",
+#				"textButton": "Tertiary color",
+#				"buttonDesc": "Change the tertiary color of your skin",
+#				"options": [[1, "Select", "Pick this color"], [null, "Same as body", "Reset the color to body's picked color"]],
+#				"type": "color",
+#				"currentColor": pickedBColor,
+#			},
+#		}
+#		if(!hasCustomSkinPattern()):
+#			var skinsOptions = [[null, "Same as body", "Reset the skin to the same as what the whole body uses"]]
+#			for skinID in GlobalRegistry.getSkins():
+#				var theSkin = GlobalRegistry.getSkin(skinID)
+#				skinsOptions.append([skinID, theSkin.getName(), "Pick this skin"])
+#			result["skin"] = {
+#				"text": "Pick your base skin. All bodyparts will use this skin unless overridden.",
+#				"textButton": "Skin",
+#				"buttonDesc": "Change your skin type",
+#				"options": skinsOptions,
+#			}
+#		return result
 	return {}
 	
 func applyAttribute(_attrID: String, _attrValue):
-	pass
+	if(_attrID == "skin"):
+		pickedSkin = _attrValue
+	if(_attrID == "skinPrimaryColor"):
+		pickedRColor = _attrValue
+	if(_attrID == "skinSecondaryColor"):
+		pickedGColor = _attrValue
+	if(_attrID == "skinTertiaryColor"):
+		pickedBColor = _attrValue
 
 func getAttributesText():
 	return []
@@ -151,6 +202,20 @@ func saveData():
 		result["orificeData"] = orifice.saveData()
 	if(fluidProduction != null):
 		result["fluidProductionData"] = fluidProduction.saveData()
+	if(supportsSkin()):
+		result["pickedSkin"] = pickedSkin
+		if(pickedRColor is Color):
+			result["pickedRColor"] = pickedRColor.to_html()
+		else:
+			result["pickedRColor"] = pickedRColor
+		if(pickedGColor is Color):
+			result["pickedGColor"] = pickedGColor.to_html()
+		else:
+			result["pickedGColor"] = pickedGColor
+		if(pickedBColor is Color):
+			result["pickedBColor"] = pickedBColor.to_html()
+		else:
+			result["pickedBColor"] = pickedBColor
 	return result
 
 func loadData(_data):
@@ -158,6 +223,21 @@ func loadData(_data):
 		orifice.loadData(SAVE.loadVar(_data, "orificeData", {}))
 	if(fluidProduction != null):
 		fluidProduction.loadData(SAVE.loadVar(_data, "fluidProductionData", {}))
+	if(supportsSkin()):
+		if(_data.has("pickedSkin")):
+			pickedSkin = SAVE.loadVar(_data, "pickedSkin", null)
+		if(_data.has("pickedRColor")):
+			pickedRColor = SAVE.loadVar(_data, "pickedRColor", null)
+			if(pickedRColor is String):
+				pickedRColor = Color(pickedRColor)
+		if(_data.has("pickedGColor")):
+			pickedGColor = SAVE.loadVar(_data, "pickedGColor", null)
+			if(pickedGColor is String):
+				pickedGColor = Color(pickedGColor)
+		if(_data.has("pickedBColor")):
+			pickedBColor = SAVE.loadVar(_data, "pickedBColor", null)
+			if(pickedBColor is String):
+				pickedBColor = Color(pickedBColor)
 
 func saveDataNPC():
 	var result = {}
@@ -215,3 +295,38 @@ func npcGenerationWeight(_dynamicCharacter):
 func generateDataFor(_dynamicCharacter):
 	if(orifice != null):
 		orifice.generateDataFor(_dynamicCharacter)
+	generateRandomColors(_dynamicCharacter)
+	generateRandomSkinIfCan(_dynamicCharacter)
+
+func supportsSkin():
+	return true
+
+func hasCustomSkinPattern():
+	return false
+
+
+func getSkinData():
+	if(hasCustomSkinPattern() && pickedSkin != null):
+		return {
+			"partskin": pickedSkin,
+			"partid": id,
+			"skin": null,
+			"r": pickedRColor,
+			"g": pickedGColor,
+			"b": pickedBColor,
+		}
+	
+	return {
+		"skin": pickedSkin,
+		"r": pickedRColor,
+		"g": pickedGColor,
+		"b": pickedBColor,
+	}
+
+func generateRandomSkinIfCan(_dynamicCharacter):
+	if(hasCustomSkinPattern()):
+		if(!GlobalRegistry.getPartSkins(id).empty()):
+			pickedSkin = RNG.pick(GlobalRegistry.getPartSkins(id).keys() + [null])
+
+func generateRandomColors(_dynamicCharacter):
+	pass

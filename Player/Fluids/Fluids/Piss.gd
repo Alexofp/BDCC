@@ -97,3 +97,6 @@ func onGettingHitWith(_pc, _amount):
 		stamina = staminaToDrain,
 		pain = painToAdd,
 	}
+
+func getCumOverlayColor():
+	return Color.yellow

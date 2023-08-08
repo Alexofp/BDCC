@@ -1,0 +1,239 @@
+[gd_scene load_steps=58 format=2]
+
+[ext_resource path="res://Player/Player3D/Doll3D.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Player/StageScene3D/BaseStageScene3D.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Player/Props/platform.png" type="Texture" id=3]
+[ext_resource path="res://Player/StageScene3D/Scenes/BDSMMachineFuck.gd" type="Script" id=5]
+[ext_resource path="res://Player/Props/BDSMMachine.tscn" type="PackedScene" id=6]
+
+[sub_resource type="AnimationNodeAnimation" id=3]
+animation = "CuffedArms-loop"
+
+[sub_resource type="AnimationNodeBlend2" id=4]
+filter_enabled = true
+filters = [ "Doll3D/Skeleton:Arm.L", "Doll3D/Skeleton:Arm.R", "Doll3D/Skeleton:ForeArm.L", "Doll3D/Skeleton:ForeArm.R", "Doll3D/Skeleton:Hand.L", "Doll3D/Skeleton:Hand.R" ]
+
+[sub_resource type="AnimationNodeAnimation" id=72]
+animation = "BDSMMachineDoubleFuckFast_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=73]
+animation = "BDSMMachineDoubleFuckInside_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=74]
+animation = "BDSMMachineDoubleFuck_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=75]
+animation = "BDSMMachineFuckFast_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=76]
+animation = "BDSMMachineFuckInside_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=77]
+animation = "BDSMMachineFuck_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=78]
+animation = "BDSMMachineIdle_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=79]
+animation = "BDSMMachineWand_1-loop"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=80]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=81]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=82]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=83]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=84]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=85]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=86]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=87]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=88]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=89]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=90]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=91]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=92]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=93]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachine" id=94]
+states/BDSMMachineDoubleFuckFast_1-loop/node = SubResource( 72 )
+states/BDSMMachineDoubleFuckFast_1-loop/position = Vector2( 598, 377 )
+states/BDSMMachineDoubleFuckInside_1-loop/node = SubResource( 73 )
+states/BDSMMachineDoubleFuckInside_1-loop/position = Vector2( 593, 188 )
+states/BDSMMachineDoubleFuck_1-loop/node = SubResource( 74 )
+states/BDSMMachineDoubleFuck_1-loop/position = Vector2( 598, 281 )
+states/BDSMMachineFuckFast_1-loop/node = SubResource( 75 )
+states/BDSMMachineFuckFast_1-loop/position = Vector2( 234, 377 )
+states/BDSMMachineFuckInside_1-loop/node = SubResource( 76 )
+states/BDSMMachineFuckInside_1-loop/position = Vector2( 234, 188 )
+states/BDSMMachineFuck_1-loop/node = SubResource( 77 )
+states/BDSMMachineFuck_1-loop/position = Vector2( 234, 281 )
+states/BDSMMachineIdle_1-loop/node = SubResource( 78 )
+states/BDSMMachineIdle_1-loop/position = Vector2( 401, 63 )
+states/BDSMMachineWand_1-loop/node = SubResource( 79 )
+states/BDSMMachineWand_1-loop/position = Vector2( 698, 63 )
+transitions = [ "BDSMMachineIdle_1-loop", "BDSMMachineWand_1-loop", SubResource( 80 ), "BDSMMachineWand_1-loop", "BDSMMachineIdle_1-loop", SubResource( 81 ), "BDSMMachineIdle_1-loop", "BDSMMachineDoubleFuckInside_1-loop", SubResource( 82 ), "BDSMMachineDoubleFuckInside_1-loop", "BDSMMachineIdle_1-loop", SubResource( 83 ), "BDSMMachineIdle_1-loop", "BDSMMachineFuckInside_1-loop", SubResource( 84 ), "BDSMMachineFuckInside_1-loop", "BDSMMachineIdle_1-loop", SubResource( 85 ), "BDSMMachineDoubleFuckInside_1-loop", "BDSMMachineDoubleFuck_1-loop", SubResource( 86 ), "BDSMMachineDoubleFuck_1-loop", "BDSMMachineDoubleFuckInside_1-loop", SubResource( 87 ), "BDSMMachineDoubleFuck_1-loop", "BDSMMachineDoubleFuckFast_1-loop", SubResource( 88 ), "BDSMMachineDoubleFuckFast_1-loop", "BDSMMachineDoubleFuck_1-loop", SubResource( 89 ), "BDSMMachineFuckInside_1-loop", "BDSMMachineFuck_1-loop", SubResource( 90 ), "BDSMMachineFuck_1-loop", "BDSMMachineFuckInside_1-loop", SubResource( 91 ), "BDSMMachineFuck_1-loop", "BDSMMachineFuckFast_1-loop", SubResource( 92 ), "BDSMMachineFuckFast_1-loop", "BDSMMachineFuck_1-loop", SubResource( 93 ) ]
+start_node = "BDSMMachineIdle_1-loop"
+graph_offset = Vector2( -113, 120 )
+
+[sub_resource type="AnimationNodeBlendTree" id=95]
+graph_offset = Vector2( -135.96, 80.12 )
+nodes/Animation/node = SubResource( 3 )
+nodes/Animation/position = Vector2( 140, 280 )
+nodes/CuffsBlend/node = SubResource( 4 )
+nodes/CuffsBlend/position = Vector2( 440, 160 )
+nodes/StateMachine/node = SubResource( 94 )
+nodes/StateMachine/position = Vector2( 160, 140 )
+nodes/output/position = Vector2( 680, 180 )
+node_connections = [ "CuffsBlend", 0, "StateMachine", "CuffsBlend", 1, "Animation", "output", 0, "CuffsBlend" ]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=22]
+
+[sub_resource type="AnimationNodeAnimation" id=48]
+animation = "BDSMMachineDoubleFuckFast_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=49]
+animation = "BDSMMachineDoubleFuckInside_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=50]
+animation = "BDSMMachineDoubleFuck_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=51]
+animation = "BDSMMachineFuckFast_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=52]
+animation = "BDSMMachineFuckInside_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=53]
+animation = "BDSMMachineFuck_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=54]
+animation = "BDSMMachineIdle_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=55]
+animation = "BDSMMachineWand_2-loop"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=56]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=57]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=58]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=59]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=60]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=61]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=62]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=63]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=64]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=65]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=66]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=67]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=68]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=69]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachine" id=70]
+states/BDSMMachineDoubleFuckFast_2-loop/node = SubResource( 48 )
+states/BDSMMachineDoubleFuckFast_2-loop/position = Vector2( 613, 356 )
+states/BDSMMachineDoubleFuckInside_2-loop/node = SubResource( 49 )
+states/BDSMMachineDoubleFuckInside_2-loop/position = Vector2( 601, 184 )
+states/BDSMMachineDoubleFuck_2-loop/node = SubResource( 50 )
+states/BDSMMachineDoubleFuck_2-loop/position = Vector2( 613, 267 )
+states/BDSMMachineFuckFast_2-loop/node = SubResource( 51 )
+states/BDSMMachineFuckFast_2-loop/position = Vector2( 195, 356 )
+states/BDSMMachineFuckInside_2-loop/node = SubResource( 52 )
+states/BDSMMachineFuckInside_2-loop/position = Vector2( 187, 184 )
+states/BDSMMachineFuck_2-loop/node = SubResource( 53 )
+states/BDSMMachineFuck_2-loop/position = Vector2( 187, 260 )
+states/BDSMMachineIdle_2-loop/node = SubResource( 54 )
+states/BDSMMachineIdle_2-loop/position = Vector2( 368, 65 )
+states/BDSMMachineWand_2-loop/node = SubResource( 55 )
+states/BDSMMachineWand_2-loop/position = Vector2( 691, 65 )
+transitions = [ "BDSMMachineIdle_2-loop", "BDSMMachineWand_2-loop", SubResource( 56 ), "BDSMMachineWand_2-loop", "BDSMMachineIdle_2-loop", SubResource( 57 ), "BDSMMachineIdle_2-loop", "BDSMMachineDoubleFuckInside_2-loop", SubResource( 58 ), "BDSMMachineDoubleFuckInside_2-loop", "BDSMMachineIdle_2-loop", SubResource( 59 ), "BDSMMachineDoubleFuckInside_2-loop", "BDSMMachineDoubleFuck_2-loop", SubResource( 60 ), "BDSMMachineDoubleFuck_2-loop", "BDSMMachineDoubleFuckInside_2-loop", SubResource( 61 ), "BDSMMachineDoubleFuck_2-loop", "BDSMMachineDoubleFuckFast_2-loop", SubResource( 62 ), "BDSMMachineDoubleFuckFast_2-loop", "BDSMMachineDoubleFuck_2-loop", SubResource( 63 ), "BDSMMachineIdle_2-loop", "BDSMMachineFuckInside_2-loop", SubResource( 64 ), "BDSMMachineFuckInside_2-loop", "BDSMMachineIdle_2-loop", SubResource( 65 ), "BDSMMachineFuckInside_2-loop", "BDSMMachineFuck_2-loop", SubResource( 66 ), "BDSMMachineFuck_2-loop", "BDSMMachineFuckInside_2-loop", SubResource( 67 ), "BDSMMachineFuck_2-loop", "BDSMMachineFuckFast_2-loop", SubResource( 68 ), "BDSMMachineFuckFast_2-loop", "BDSMMachineFuck_2-loop", SubResource( 69 ) ]
+start_node = "BDSMMachineIdle_2-loop"
+graph_offset = Vector2( -247, 32 )
+
+[sub_resource type="AnimationNodeBlendTree" id=71]
+graph_offset = Vector2( -42.2919, 68.0042 )
+nodes/StateMachine/node = SubResource( 70 )
+nodes/StateMachine/position = Vector2( 280, 160 )
+nodes/output/position = Vector2( 680, 180 )
+node_connections = [ "output", 0, "StateMachine" ]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=23]
+
+[node name="BDSMMachineFuck" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.492385, 0, 0 )
+script = ExtResource( 5 )
+
+[node name="Sprite3D" type="Sprite3D" parent="." index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.196641, -1.77462 )
+texture = ExtResource( 3 )
+region_enabled = true
+region_rect = Rect2( 1, 1, 1022, 62 )
+
+[node name="Doll3D" parent="." index="1" instance=ExtResource( 1 )]
+
+[node name="BDSMMachine" parent="." index="2" instance=ExtResource( 6 )]
+
+[node name="AnimationTree" type="AnimationTree" parent="." index="3"]
+tree_root = SubResource( 95 )
+anim_player = NodePath("../Doll3D/DollSkeleton/AnimationPlayer")
+parameters/CuffsBlend/blend_amount = 0
+parameters/StateMachine/playback = SubResource( 22 )
+
+[node name="AnimationTree2" type="AnimationTree" parent="." index="4"]
+tree_root = SubResource( 71 )
+anim_player = NodePath("../BDSMMachine/AnimationPlayer")
+parameters/StateMachine/playback = SubResource( 23 )
+
+[editable path="Doll3D"]
+[editable path="Doll3D/DollSkeleton"]
+[editable path="BDSMMachine"]

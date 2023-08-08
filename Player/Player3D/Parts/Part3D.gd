@@ -4,16 +4,25 @@ var dollSkeleton: DollSkeleton
 var doll3D
 var attachProxies = []
 var partPickers = {}
+var meshesThatUpdateMaterial = []
 
 func initPart(newDoll3d):
 	doll3D = newDoll3d
 	dollSkeleton = doll3D.getDollSkeleton()
 	
+	meshesThatUpdateMaterial = []
 	for child in get_children():
 		setSkeletonRecursive(child, dollSkeleton.getSkeleton())
 #		if(child is MeshInstance):
 #			#child.skeleton = dollSkeleton.getSkeleton().get_path()
 #			child.skeleton = child.get_path_to(dollSkeleton.getSkeleton())
+
+func setDoll3d(newDoll3d):
+	doll3D = newDoll3d
+	dollSkeleton = doll3D.getDollSkeleton()
+
+func getDoll():
+	return doll3D
 
 func onRemoved():
 	for proxy in attachProxies:
@@ -52,9 +61,17 @@ func setSkeletonRecursive(childnode, skeleton):
 		if(!partPickers.has(childnode.getState())):
 			partPickers[childnode.getState()] = []
 		partPickers[childnode.getState()].append(childnode)
+	if(childnode is MeshInstanceWithPattern):
+		childnode.partRef = weakref(self)
+		childnode.updateMaterial()
+		meshesThatUpdateMaterial.append(childnode)
 	
 	for child in childnode.get_children():
 		setSkeletonRecursive(child, skeleton)
+
+func updateMaterial():
+	for themesh in meshesThatUpdateMaterial:
+		themesh.updateMaterial()
 
 func setStateRecursive(childnode, stateID, value):
 	if(childnode is PartStatePicker):

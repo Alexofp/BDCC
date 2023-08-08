@@ -21,6 +21,9 @@ static func randi_range(from: int, to: int) -> int:
 static func randf_range(from: float, to: float) -> float:
 	return rand_range(from, to)
 
+static func randf_rangeX2(from: float, to: float) -> float:
+	return (rand_range(from, to) + rand_range(from, to)) / 2.0
+
 # chance(100) will always be true
 # chance(3) will be true 3% of the time
 static func chance(ch: float) -> bool:

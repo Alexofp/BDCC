@@ -54,7 +54,7 @@ states/HorsecockTease-loop/node = SubResource( 41 )
 states/HorsecockTease-loop/position = Vector2( 323, 81 )
 transitions = [ "HorsecockTease-loop", "HorsecockInside-loop", SubResource( 42 ), "HorsecockInside-loop", "HorsecockTease-loop", SubResource( 43 ), "HorsecockInside-loop", "HorsecockRide-loop", SubResource( 44 ), "HorsecockRide-loop", "HorsecockInside-loop", SubResource( 45 ), "HorsecockRide-loop", "HorsecockRideFast-loop", SubResource( 46 ), "HorsecockRideFast-loop", "HorsecockRide-loop", SubResource( 47 ) ]
 start_node = "HorsecockTease-loop"
-graph_offset = Vector2( -146, 58 )
+graph_offset = Vector2( -157, 27 )
 
 [sub_resource type="AnimationNodeBlendTree" id=25]
 graph_offset = Vector2( -135.96, 80.12 )
@@ -65,7 +65,7 @@ nodes/CuffsBlend/position = Vector2( 440, 160 )
 nodes/StateMachine/node = SubResource( 24 )
 nodes/StateMachine/position = Vector2( 160, 120 )
 nodes/output/position = Vector2( 680, 180 )
-node_connections = [ "output", 0, "CuffsBlend", "CuffsBlend", 0, "StateMachine", "CuffsBlend", 1, "Animation" ]
+node_connections = [ "CuffsBlend", 0, "StateMachine", "CuffsBlend", 1, "Animation", "output", 0, "CuffsBlend" ]
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=22]
 
@@ -110,7 +110,7 @@ states/TheHorseCockTease-loop/node = SubResource( 29 )
 states/TheHorseCockTease-loop/position = Vector2( 446, 82 )
 transitions = [ "TheHorseCockTease-loop", "TheHorseCockInside-loop", SubResource( 30 ), "TheHorseCockInside-loop", "TheHorseCockTease-loop", SubResource( 31 ), "TheHorseCockInside-loop", "TheHorseCockRide-loop", SubResource( 32 ), "TheHorseCockRide-loop", "TheHorseCockInside-loop", SubResource( 33 ), "TheHorseCockRide-loop", "TheHorseCockRideFast-loop", SubResource( 34 ), "TheHorseCockRideFast-loop", "TheHorseCockRide-loop", SubResource( 35 ) ]
 start_node = "TheHorseCockTease-loop"
-graph_offset = Vector2( -81, 77 )
+graph_offset = Vector2( -84, 39 )
 
 [sub_resource type="AnimationNodeBlendTree" id=37]
 graph_offset = Vector2( -42.2919, 68.0042 )

@@ -18,8 +18,9 @@ func _doAttack(_attacker, _receiver, _context = {}):
 	var text = attackerName + " uses "+_attacker.hisHer()+" full strength to kick " + receiverName + ". "
 	
 	if(!_receiver.hasEffect(StatusEffect.Collapsed)):
-		text += "\n[b]"+receiverName+" loses "+_receiver.hisHer()+" balance and collapses onto the floor[/b]"
-		_receiver.addEffect(StatusEffect.Collapsed)
+		if(_receiver.addEffect(StatusEffect.Collapsed)):
+			text += "\n[b]"+receiverName+" loses "+_receiver.hisHer()+" balance and collapses onto the floor[/b]"
+		
 	
 	return {
 		text = text,

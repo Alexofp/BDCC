@@ -101,9 +101,19 @@ func getCycleLength() -> int:
 	
 	return 60*60*24*settingValue
 
+func getPregnancySpeed():
+	var theCharacter = getCharacter()
+	var pregnancySpeed = 1.0
+	if(theCharacter != null):
+		pregnancySpeed += theCharacter.getCustomAttribute(BuffAttribute.PregnancySpeed)
+	pregnancySpeed = clamp(pregnancySpeed, 0.1, 100.0)
+	return pregnancySpeed
+
 func processTime(seconds):
+	var theCharacter = getCharacter()
+	
 	if(isPregnant()):
-		if(!getCharacter().hasPerk(Perk.FertilityBetterOvulationV3)):
+		if(theCharacter != null && !theCharacter.hasPerk(Perk.FertilityBetterOvulationV3)):
 			cycleProgress = 1.0
 		
 		if(!noticedVisiblyPregnant && isVisiblyPregnant()):
@@ -116,7 +126,7 @@ func processTime(seconds):
 
 	if(!hasAnyWomb()):
 		cycleProgress = 0.0	
-	elif(!isPregnant() || getCharacter().hasPerk(Perk.FertilityBetterOvulationV3)):
+	elif(!isPregnant() || (theCharacter != null && theCharacter.hasPerk(Perk.FertilityBetterOvulationV3))):
 		var add = float(seconds)/float(getCycleLength())
 		
 		cycleProgress += add
@@ -128,9 +138,11 @@ func processTime(seconds):
 			ovulate()
 	
 	if(impregnatedEggCells.size() > 0):
+		var pregnancySpeed = getPregnancySpeed()
+		
 		var readyFetusAmount: = 0
 		for egg in impregnatedEggCells:
-			egg.processTime(seconds)
+			egg.processTime(seconds * pregnancySpeed)
 			if(egg.fetusIsReadyForBirth()):
 				readyFetusAmount += 1
 	
@@ -141,6 +153,40 @@ func processTime(seconds):
 	for orificeType in eggCells:
 		for egg in eggCells[orificeType]:
 			egg.processTime(seconds)
+
+func forceImpregnateBy(npcID):
+	var otherCharacter = GlobalRegistry.getCharacter(npcID)
+	if(otherCharacter == null):
+		return false
+	
+	if(!hasAnyWomb()):
+		return false
+	
+	var fluidDNA = otherCharacter.getFluidDNA(FluidSource.Penis)
+	if(fluidDNA == null):
+		return false
+	
+	var howMuchImpregnated = 0
+	for orificeType in eggCells:
+		for egg in eggCells[orificeType]:
+			egg.impregnatedBy(fluidDNA)
+			howMuchImpregnated += 1
+	
+	if(howMuchImpregnated <= 0):
+		ovulate()
+		for orificeType in eggCells:
+			for egg in eggCells[orificeType]:
+				egg.impregnatedBy(fluidDNA)
+				howMuchImpregnated += 1
+	
+	for orificeType in eggCells:
+		for egg in eggCells[orificeType]:
+			impregnatedEggCells.append(egg)
+		eggCells[orificeType].clear()
+	
+	if(howMuchImpregnated <= 0):
+		return false
+	return true
 
 func ovulate():
 	ovulatedThisCycle = true
@@ -259,7 +305,7 @@ func getTimeUntilReadyForBirth() -> int:
 		var newMaxTime = egg.getTimeUntilReadyForBirth()
 		if(newMaxTime > maxTime):
 			maxTime = newMaxTime
-	return maxTime
+	return maxTime / getPregnancySpeed()
 
 func isVisiblyPregnant():
 	if(getPregnancyProgress() >= 0.20):

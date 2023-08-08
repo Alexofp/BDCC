@@ -70,6 +70,7 @@ astarConnectedTo = PoolStringArray( "CBStairs1" )
 [node name="MainHallRoom7" parent="." index="6" instance=ExtResource( 2 )]
 position = Vector2( 0, 128 )
 roomName = "Stairs"
+roomID = "main_stairs_n"
 roomDescription = "You stand on the stairs that lead up to the main platform"
 population = 3
 
@@ -96,6 +97,7 @@ population = 3
 [node name="MainHallRoom10" parent="." index="9" instance=ExtResource( 2 )]
 position = Vector2( -64, 192 )
 roomName = "Stairs"
+roomID = "main_stairs_w"
 roomDescription = "You stand on the stairs that lead up to the main platform"
 population = 3
 
@@ -111,6 +113,7 @@ population = 3
 [node name="MainHallRoom53" parent="." index="11" instance=ExtResource( 2 )]
 position = Vector2( 0, 256 )
 roomName = "Stairs"
+roomID = "main_stairs_s"
 roomDescription = "You stand on the stairs that lead up to the main platform"
 population = 3
 
@@ -529,6 +532,7 @@ population = 1
 [node name="MainHallRoom11" parent="." index="51" instance=ExtResource( 2 )]
 position = Vector2( 64, 192 )
 roomName = "Stairs"
+roomID = "main_stairs_e"
 roomDescription = "You stand on the stairs that lead up to the main platform"
 population = 3
 

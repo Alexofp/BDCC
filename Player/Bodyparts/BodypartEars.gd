@@ -6,3 +6,6 @@ func _init():
 
 func getSlot():
 	return BodypartSlot.Ears
+
+func hasCustomSkinPattern():
+	return true

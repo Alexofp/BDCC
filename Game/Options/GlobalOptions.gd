@@ -37,6 +37,13 @@ var rollbackSaveEvery = 1
 
 var showModdedLauncher = false
 
+var jigglePhysicsBreastsEnabled = true
+var jigglePhysicsBellyEnabled = true
+var jigglePhysicsButtEnabled = true
+var jigglePhysicsGlobalModifier = 1.0
+
+var advancedShadersEnabled = true
+
 func resetToDefaults():
 	fetchNewRelease = true
 	menstrualCycleLengthDays = 7
@@ -62,6 +69,11 @@ func resetToDefaults():
 	rollbackSaveEvery = 1
 	showModdedLauncher = false
 	developerCommentary = false
+	jigglePhysicsBreastsEnabled = true
+	jigglePhysicsBellyEnabled = true
+	jigglePhysicsButtEnabled = true
+	jigglePhysicsGlobalModifier = 1.0
+	advancedShadersEnabled = true
 	
 	enabledContent.clear()
 	for contentType in ContentType.getAll():
@@ -146,6 +158,21 @@ func shouldShowModdedLauncher():
 func developerCommentaryEnabled():
 	return developerCommentary
 
+func isJigglePhysicsBreastsEnabled():
+	return jigglePhysicsBreastsEnabled
+
+func isJigglePhysicsBellyEnabled():
+	return jigglePhysicsBellyEnabled
+	
+func isJigglePhysicsButtEnabled():
+	return jigglePhysicsButtEnabled
+
+func getJigglePhysicsGlobalModifier():
+	return jigglePhysicsGlobalModifier
+
+func shouldUseAdvancedShaders():
+	return advancedShadersEnabled
+
 func getChangeableOptions():
 	var settings = [
 		{
@@ -216,6 +243,62 @@ func getChangeableOptions():
 					"id": "softwareSkinning",
 					"type": "checkbox",
 					"value": ProjectSettings.get_setting("rendering/quality/skinning/force_software_skinning"),
+				},
+				{
+					"name": "Skin shaders",
+					"description": "Turn this off if your game is lagging/crashing. Will disable all skins.",
+					"id": "advancedShadersEnabled",
+					"type": "checkbox",
+					"value": advancedShadersEnabled,
+				}
+			]
+		},
+		{
+			"name": "Jiggle physics",
+			"id": "jigglephysics",
+			"options": [
+				{
+					"name": "Breasts jiggle physics",
+					"description": "Should the boobs bounce?",
+					"id": "jigglePhysicsBreastsEnabled",
+					"type": "checkbox",
+					"value": jigglePhysicsBreastsEnabled,
+				},
+				{
+					"name": "Belly jiggle physics",
+					"description": "Should the belly bounce?",
+					"id": "jigglePhysicsBellyEnabled",
+					"type": "checkbox",
+					"value": jigglePhysicsBellyEnabled,
+				},
+				{
+					"name": "Butt jiggle physics",
+					"description": "Should the butt bounce?",
+					"id": "jigglePhysicsButtEnabled",
+					"type": "checkbox",
+					"value": jigglePhysicsButtEnabled,
+				},
+				{
+					"name": "Jiggle physics modifier",
+					"description": "How bouncy should everything be",
+					"id": "jigglePhysicsGlobalModifier",
+					"type": "list",
+					"value": jigglePhysicsGlobalModifier,
+					"values": [
+						[0.1, "10%"],
+						[0.25, "25%"],
+						[0.5, "50%"],
+						[0.6, "60%"],
+						[0.7, "70%"],
+						[0.8, "80%"],
+						[0.9, "90%"],
+						[1.0, "100%"],
+						[1.10, "110%"],
+						[1.2, "120%"],
+						[1.35, "135%"],
+						[1.5, "150%"],
+						[2.0, "200%"],
+					],
 				},
 			]
 		},
@@ -423,6 +506,16 @@ func getChangeableOptions():
 	return settings
 
 func applyOption(categoryID, optionID, value):
+	if(categoryID == "jigglephysics"):
+		if(optionID == "jigglePhysicsBreastsEnabled"):
+			jigglePhysicsBreastsEnabled = value
+		if(optionID == "jigglePhysicsBellyEnabled"):
+			jigglePhysicsBellyEnabled = value
+		if(optionID == "jigglePhysicsButtEnabled"):
+			jigglePhysicsButtEnabled = value
+		if(optionID == "jigglePhysicsGlobalModifier"):
+			jigglePhysicsGlobalModifier = value
+
 	if(categoryID == "modding"):
 		if(optionID == "showModdedLauncher"):
 			showModdedLauncher = value
@@ -480,6 +573,8 @@ func applyOption(categoryID, optionID, value):
 		if(optionID == "softwareSkinning"):
 			myProjectSettings.setForceSoftwareSkinning(value)
 			myProjectSettings.save()
+		if(optionID == "advancedShadersEnabled"):
+			advancedShadersEnabled = value
 			
 	if(categoryID == "debug"):
 		if(optionID == "debugPanel"):
@@ -531,6 +626,11 @@ func saveData():
 		"rollbackSaveEvery": rollbackSaveEvery,
 		"showModdedLauncher": showModdedLauncher,
 		"developerCommentary": developerCommentary,
+		"jigglePhysicsBreastsEnabled": jigglePhysicsBreastsEnabled,
+		"jigglePhysicsBellyEnabled": jigglePhysicsBellyEnabled,
+		"jigglePhysicsButtEnabled": jigglePhysicsButtEnabled,
+		"jigglePhysicsGlobalModifier": jigglePhysicsGlobalModifier,
+		"advancedShadersEnabled": advancedShadersEnabled,
 	}
 	
 	return data
@@ -561,6 +661,11 @@ func loadData(data):
 	rollbackSaveEvery = loadVar(data, "rollbackSaveEvery", 1)
 	showModdedLauncher = loadVar(data, "showModdedLauncher", false)
 	developerCommentary = loadVar(data, "developerCommentary", false)
+	jigglePhysicsBreastsEnabled = loadVar(data, "jigglePhysicsBreastsEnabled", true)
+	jigglePhysicsBellyEnabled = loadVar(data, "jigglePhysicsBellyEnabled", true)
+	jigglePhysicsButtEnabled = loadVar(data, "jigglePhysicsButtEnabled", true)
+	jigglePhysicsGlobalModifier = loadVar(data, "jigglePhysicsGlobalModifier", 1.0)
+	advancedShadersEnabled = loadVar(data, "advancedShadersEnabled", true)
 
 func saveToFile():
 	var saveData = saveData()

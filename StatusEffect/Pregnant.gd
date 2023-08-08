@@ -4,6 +4,15 @@ func _init():
 	id = StatusEffect.Pregnant
 	isBattleOnly = false
 
+	alwaysCheckedForNPCs = true
+	alwaysCheckedForPlayer = true
+	priorityDuringChecking = 90
+	
+func shouldApplyTo(_npc):
+	if(_npc.menstrualCycle != null && _npc.menstrualCycle.isVisiblyPregnant()):
+		return true
+	return false
+
 func getEffectName():
 	return "Pregnant"
 

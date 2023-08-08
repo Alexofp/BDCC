@@ -50,8 +50,10 @@ const FinalVirilityModifierBuff = "FinalVirilityModifierBuff"
 const CrossSpeciesCompatibilityBuff = "CrossSpeciesCompatibilityBuff"
 const OvulationEggsAmountBuff = "OvulationEggsAmountBuff" 
 const MinOvulationEggsAmountBuff = "MinOvulationEggsAmountBuff"
+const PregnancySpeedBuff = "PregnancySpeedBuff"
 
 const SkillExperienceBuff = "SkillExperienceBuff"
+const StatusEffectImmunityBuff = "StatusEffectImmunityBuff"
 
 const ChastityPenisBuff = "ChastityPenisBuff"
 const ChastityVaginaBuff = "ChastityVaginaBuff"

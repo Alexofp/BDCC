@@ -8,6 +8,15 @@ func _init():
 	npcBaseLust = 150
 	npcCharacterType = CharacterType.Inmate
 	
+	pickedSkin="TaviSkin"
+	pickedSkinRColor=Color("ff57197c")
+	pickedSkinGColor=Color("fffedaff")
+	pickedSkinBColor=Color("ff00ff1c")
+	npcSkinData={
+	"hair": {"r": Color("ff7f1b9b"),"g": Color("ff00ff0f"),"b": Color("ff631c89"),},
+	"horns": {"r": Color("ff0f2c13"),"g": Color("ff0c2d16"),},
+	}
+	
 	npcLustInterests = {
 		InterestTopic.Gags: Interest.KindaLikes,
 		InterestTopic.Blindfolds: Interest.Hates,
@@ -42,6 +51,7 @@ func _init():
 		InterestTopic.SmallCock: Interest.SlightlyDislikes,
 		InterestTopic.Pregnant: Interest.Hates,
 	}
+	npcHasMenstrualCycle = true
 	
 func interestVerbalReaction(interest):
 	if(interest == InterestTopic.Pregnant):
@@ -77,6 +87,11 @@ func getSmallDescription() -> String:
 func getSpecies():
 	return ["feline"]
 
+func _getAttacksForBattle(_battlename):
+	if(_battlename == "tavi_lust_battle"):
+		return ["TaviAlluringGaze", "TaviFelineGrace", "TaviSeductiveWhispers", "TaviSensualScratches", "TaviTemptingTease", "stretchingAttack", "lickWounds", "trygetupattack"]
+	return null
+
 func _getAttacks():
 	return ["biteattack", "kickToBallsAttack", "slapTitsAttack", "stretchingAttack", "lickWounds", "shoveattack", "trygetupattack"]
 
@@ -84,7 +99,7 @@ func getFightIntro(_battleName):
 	return getName() + " gets into the combat stance and prepares for a fight. "+formatSay("Are you afraid of a little kitty cat~?")
 
 func getThickness() -> int:
-	return 80
+	return 60
 
 func getFemininity() -> int:
 	return 90
@@ -102,6 +117,24 @@ func createBodyparts():
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("anus"))
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("felinetail"))
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("digilegs"))
+
+func updateBodyparts():
+	if(GlobalRegistry.getModule("TaviModule").hasHorns()):#.hasHorns()):
+		if(giveBodypartUnlessSame(GlobalRegistry.createBodypart("demonhorns2"))):
+			paintBodyparts()
+	elif(hasBodypart(BodypartSlot.Horns)):
+		removeBodypart(BodypartSlot.Horns)
+	
+	if(!GlobalRegistry.getModule("TaviModule").hasWombMark()):
+		if(!hasPerk(Perk.StartNoHeat) || !hasPerk(Perk.StartInfertile)):
+			skillsHolder.addPerk(Perk.StartNoHeat)
+			skillsHolder.addPerk(Perk.StartInfertile)
+		removeEffect(StatusEffect.TaviWombMark)
+	else:
+		if(hasPerk(Perk.StartNoHeat) || hasPerk(Perk.StartInfertile)):
+			skillsHolder.removePerk(Perk.StartNoHeat)
+			skillsHolder.removePerk(Perk.StartInfertile)
+		addEffect(StatusEffect.TaviWombMark)
 
 func getLootTable(_battleName):
 	return InmateLoot.new()

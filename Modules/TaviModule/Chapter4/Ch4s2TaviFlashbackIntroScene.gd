@@ -336,6 +336,7 @@ func _react(_action: String, _args):
 		GM.pc.pickedFemininity = 90
 		GM.pc.getInventory().equipItem(GlobalRegistry.createItem("Leotard"))
 		GM.pc.updateNonBattleEffects()
+		getCharacter("tavi").copySkinTo(GM.pc)
 		#playAnimationForceReset(StageScene.Solo, "stand")
 
 	if(_action == "take_shower"):

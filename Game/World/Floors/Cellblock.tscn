@@ -43,6 +43,7 @@ population = 1
 [node name="CellblockRoom5" parent="." index="4" instance=ExtResource( 2 )]
 position = Vector2( 0, 64 )
 roomName = "Corridor"
+roomID = "cellblock_corridor_middle"
 roomDescription = "A wide corridor that connects all the cellblocks with the stairs"
 population = 1
 

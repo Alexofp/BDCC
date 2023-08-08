@@ -20,8 +20,7 @@ func _doAttack(_attacker, _receiver, _context = {}):
 	
 	var text = "{attacker.name} kicks {receiver.name} with the power of a bucking horse."
 	
-	if(!_receiver.hasEffect(StatusEffect.Collapsed)):
-		_receiver.addEffect(StatusEffect.Collapsed)
+	if(_receiver.addEffect(StatusEffect.Collapsed)):
 		text += " {receiver.name} collapsed onto the ground."
 	return {
 		text = text,

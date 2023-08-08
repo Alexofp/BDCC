@@ -5,6 +5,14 @@ func _init():
 	npcCharacterType = CharacterType.Generic
 	disableSerialization = true
 	
+	pickedSkin="HumanSkin"
+	pickedSkinRColor=Color("ffdbb3a2")
+	pickedSkinGColor=Color("ff9c544f")
+	pickedSkinBColor=Color("ff9c544f")
+	npcSkinData={
+	"hair": {"r": Color("ffffffff"),"g": Color("ffd3d3d3"),"b": Color("ffa9a9a9"),},
+	}
+	
 func _getName():
 	return "Director"
 

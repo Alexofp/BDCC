@@ -4,6 +4,15 @@ func _init():
 	id = StatusEffect.HasCumInsideAnus
 	isBattleOnly = false
 	
+	alwaysCheckedForNPCs = true
+	alwaysCheckedForPlayer = true
+	priorityDuringChecking = 92
+	
+func shouldApplyTo(_npc):
+	if(_npc.hasBodypart(BodypartSlot.Anus) && !_npc.getBodypart(BodypartSlot.Anus).isOrificeEmpty()):
+		return true
+	return false
+	
 func initArgs(_args = []):
 	pass
 	

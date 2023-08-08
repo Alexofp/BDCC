@@ -19,6 +19,7 @@ population = 2
 
 [node name="CDRoom" parent="." index="1" instance=ExtResource( 2 )]
 roomName = "Main corridor"
+roomID = "cd_near_elevator"
 roomDescription = "Long corridor that looks very rich. There is a carpet on the floor, walls are decorated with many paintings. Sometimes you notice doors that lead to offices"
 population = 2
 
@@ -33,6 +34,7 @@ population = 2
 [node name="CDRoom3" parent="." index="3" instance=ExtResource( 2 )]
 position = Vector2( 0, -128 )
 roomName = "Main corridor"
+roomID = "cd_near_split"
 roomDescription = "Long corridor that looks very rich. There is a carpet on the floor, walls are decorated with many paintings. Sometimes you notice doors that lead to some offices"
 gridColor = 2
 loctag_GuardsEncounter = true
@@ -136,6 +138,7 @@ population = 2
 
 [node name="CDRoom16" parent="." index="16" instance=ExtResource( 2 )]
 position = Vector2( 0, -512 )
+roomName = "Main corridor"
 roomID = "cd_near_captain_office"
 roomDescription = "Long corridor that looks very rich. There is a carpet on the floor, walls are decorated with many paintings. Sometimes you notice doors that lead to some offices"
 roomSprite = 4

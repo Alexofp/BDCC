@@ -17,4 +17,5 @@ enum {
 	NoChastity,
 	HasPenis,
 	CharacterType,
+	AvoidIDs,
 }

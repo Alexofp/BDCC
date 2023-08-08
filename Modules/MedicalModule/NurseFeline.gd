@@ -3,6 +3,14 @@ extends Character
 func _init():
 	id = "nurse"
 	
+	pickedSkin="MonsterGirl"
+	pickedSkinRColor=Color("fffbfcfd")
+	pickedSkinGColor=Color("ffffb9bd")
+	pickedSkinBColor=Color("ffe48e93")
+	npcSkinData={
+	"hair": {"r": Color("ff191919"),"g": Color("ff591919"),"b": Color("ff0bc700"),},
+	}
+	
 	npcArmor = {
 	}
 	npcLevel = 3

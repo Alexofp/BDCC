@@ -183,7 +183,7 @@ func _run():
 
 		saynn("[say=eliza]It was you..[/say]")
 
-		saynn("She huffs warmly into your face, her ears turned out but the tail is wagging. You can feel.. hear.. radiating from her. Seeing you squirm from her claws makes her do it more, dragging her clawed paws over your {pc.masc} curves.")
+		saynn("She huffs warmly into your face, her ears turned out but the tail is wagging. You can feel.. heat.. radiating from her. Seeing you squirm from her claws makes her do it more, dragging her clawed paws over your {pc.masc} curves.")
 
 		saynn("[say=eliza]You hid the mask.. And turned on the table.. And then moved the lid..[/say]")
 

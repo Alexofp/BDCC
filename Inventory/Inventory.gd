@@ -449,6 +449,14 @@ func hasIllegalItems():
 			return true
 	return false
 
+func findAndEquipInmateUniform():
+	if(hasItemID("inmateuniform")):
+		forceEquipStoreOtherUnlessRestraint(getFirstOf("inmateuniform"))
+	elif(hasItemID("inmateuniformHighsec")):
+		forceEquipStoreOtherUnlessRestraint(getFirstOf("inmateuniformHighsec"))
+	elif(hasItemID("inmateuniformSexDeviant")):
+		forceEquipStoreOtherUnlessRestraint(getFirstOf("inmateuniformSexDeviant"))
+
 func saveData():
 	var data = {}
 	

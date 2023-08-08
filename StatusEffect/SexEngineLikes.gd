@@ -4,6 +4,15 @@ func _init():
 	id = StatusEffect.SexEngineLikes
 	isBattleOnly = false
 	
+	alwaysCheckedForNPCs = true
+	alwaysCheckedForPlayer = true
+	priorityDuringChecking = 50
+	
+func shouldApplyTo(_npc):
+	if(GM.main != null && GM.main.supportsSexEngine()):
+		return true
+	return false
+	
 func initArgs(_args = []):
 	pass
 	
@@ -25,6 +34,8 @@ func getEffectDesc():
 	for fetishID in fetishHolder.getFetishes():
 		var fetish:FetishBase = GlobalRegistry.getFetish(fetishID)
 		var fetishInterest = fetishHolder.getFetishInterest(fetishID)
+		if(fetishInterest == FetishInterest.Neutral):
+			continue
 		var fetishColor = FetishInterest.getColorString(fetishInterest)
 		var fetishInterestText = FetishInterest.getVisibleName(fetishInterest)
 		

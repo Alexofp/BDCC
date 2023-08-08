@@ -27,6 +27,9 @@ func onGettingHitWith(_pc, _amount):
 func getStatusEffectColor():
 	return Color("#A001A0")
 
+func getCumOverlayColor():
+	return Color.white
+
 func getStatusEffectPicture():
 	return "res://Images/StatusEffects/splurt.png"
 

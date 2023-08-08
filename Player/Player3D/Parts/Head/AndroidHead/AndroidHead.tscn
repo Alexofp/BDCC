@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Player/Player3D/Parts/Part3D.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Inventory/UnriggedModels/Muzzle/muzzleSmall.png" type="Texture" id=2]
@@ -6,6 +6,8 @@
 [ext_resource path="res://Player/Player3D/Parts/PartState.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Player/Player3D/Parts/PartStatePicker.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Player/Player3D/Parts/Head/HumanHead/head.png" type="Texture" id=6]
+[ext_resource path="res://Player/Player3D/Parts/MeshWithPattern.gd" type="Script" id=7]
+[ext_resource path="res://Player/Player3D/Parts/Head/AndroidHead/Android_Head_pattern.png" type="Texture" id=8]
 [ext_resource path="res://Player/Player3D/Parts/AttachmentProxy.tscn" type="PackedScene" id=9]
 
 [sub_resource type="SpatialMaterial" id=28]
@@ -217,6 +219,9 @@ state = "mouth"
 mesh = SubResource( 29 )
 skin = SubResource( 30 )
 material/0 = SubResource( 31 )
+script = ExtResource( 7 )
+bodypartSlot = "head"
+customSkinPattern = ExtResource( 8 )
 
 [node name="PartStatePicker" parent="." index="1" instance=ExtResource( 5 )]
 state = "muzzle"

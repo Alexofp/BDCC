@@ -240,6 +240,7 @@ func addWonButton():
 	addButton("Inventory", "Look at your inventory", "openinventory")
 	if(GM.pc.getInventory().hasRemovableRestraints()):
 		addButton("Struggle", "Struggle out of your restraints", "strugglemenu")
+	GM.ES.triggerRun(Trigger.DefeatedDynamicNPC, [npcID])
 
 func _react(_action: String, _args):
 

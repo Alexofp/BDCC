@@ -3,6 +3,16 @@ extends Character
 func _init():
 	id = "taviDemonFuta"
 	
+	pickedSkin="TaviSkin"
+	pickedSkinRColor=Color("ff57197c")
+	pickedSkinGColor=Color("fffedaff")
+	pickedSkinBColor=Color("ff00ff1c")
+	npcSkinData={
+	"hair": {"r": Color("ff7f1b9b"),"g": Color("ff00ff0f"),"b": Color("ff631c89"),},
+	"horns": {"r": Color("ff23142a"),"g": Color("ff0c2d16"),},
+	"penis": {"g": Color("ff44f45d"),"b": Color("ff0c6214"),},
+	}
+	
 func _getName():
 	return "Tavi"
 

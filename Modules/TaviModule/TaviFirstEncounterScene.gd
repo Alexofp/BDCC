@@ -180,7 +180,7 @@ func _run():
 
 		saynn("[say=pc]And you’re gonna beat me up if I don’t follow them. I see how it is..[/say]")
 
-		saynn("[say=tavi]I’m not a sadist, pain is a tool for me, sweetie. It shows you that what you’re doing is wrong. But, perhaps, you might learn to enjoy them. The painful sensations in the right circumstations can be as pleasurable as the sexual one, if not more~. Ready to listen?[/say]")
+		saynn("[say=tavi]I’m not a sadist, pain is a tool for me, sweetie. It shows you that what you’re doing is wrong. But, perhaps, you might learn to enjoy them. The painful sensations in the right circumstances can be as pleasurable as the sexual one, if not more~. Ready to listen?[/say]")
 
 		saynn("You nod subtly and tilt your head down, defocusing your glance. Tavi sees that you’re not resisting and lets go of your hair.")
 		

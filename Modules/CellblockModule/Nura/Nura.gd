@@ -5,6 +5,13 @@ func _init():
 	
 	npcCharacterType = CharacterType.Nurse
 	
+	pickedSkin="FerriSkin"
+	pickedSkinRColor=Color("ffecfffe")
+	pickedSkinGColor=Color("ffffffff")
+	pickedSkinBColor=Color("ff30dae6")
+	npcSkinData={
+	}
+	
 func _getName():
 	return "Nur-A"
 

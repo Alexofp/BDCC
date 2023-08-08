@@ -1,7 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Player/Player3D/Parts/Part3D.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Player/Player3D/Parts/Horns/DragonHorns2/hornsDragon2.png" type="Texture" id=2]
+[ext_resource path="res://Player/Player3D/Parts/Horns/DragonHorns2/hornsDragon2_pattern.png" type="Texture" id=3]
+[ext_resource path="res://Player/Player3D/Parts/MeshWithPattern.gd" type="Script" id=4]
 
 [sub_resource type="SpatialMaterial" id=10]
 resource_name = "hornsDragon2.png"
@@ -104,3 +106,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.02 )
 mesh = SubResource( 11 )
 skin = SubResource( 12 )
 material/0 = SubResource( 10 )
+script = ExtResource( 4 )
+bodypartSlot = "horns"
+customSkinPattern = ExtResource( 3 )

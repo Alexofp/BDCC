@@ -16,5 +16,5 @@ func _ready():
 	var directory = Directory.new( )
 	directory.make_dir("user://saves")
 	directory.make_dir("user://mods")
+	directory.make_dir("user://custom_skins")
 	
-

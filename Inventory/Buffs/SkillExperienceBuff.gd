@@ -42,6 +42,11 @@ func loadData(_data):
 	skill = SAVE.loadVar(_data, "skill", "")
 	amount = SAVE.loadVar(_data, "amount", 0)
 
+func canCombine(_otherBuff):
+	if(_otherBuff.skill != skill):
+		return false
+	return true
+
 func combine(_otherBuff):
 	if(_otherBuff.amount > amount):
 		amount = _otherBuff.amount

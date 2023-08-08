@@ -1,7 +1,10 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Inventory/RiggedModels/FlatCage/FlatCage.png" type="Texture" id=1]
 [ext_resource path="res://Player/Player3D/Parts/Part3D.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Inventory/RiggedModels/FlatCage/FlatCage_pattern.png" type="Texture" id=3]
+[ext_resource path="res://Inventory/RiggedModels/FlatCage/FlatCage_overlay.png" type="Texture" id=4]
+[ext_resource path="res://Player/Player3D/Parts/MeshWithPattern.gd" type="Script" id=5]
 
 [sub_resource type="SpatialMaterial" id=14]
 resource_name = "penisDragon.png.002"
@@ -138,3 +141,7 @@ albedo_texture = ExtResource( 1 )
 mesh = SubResource( 15 )
 skin = SubResource( 16 )
 material/0 = SubResource( 17 )
+script = ExtResource( 5 )
+bodypartSlot = "penis"
+customOverlay = ExtResource( 4 )
+customSkinPattern = ExtResource( 3 )

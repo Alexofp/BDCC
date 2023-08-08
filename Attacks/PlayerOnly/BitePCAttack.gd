@@ -4,6 +4,8 @@ func _init():
 	id = "BitePCAttack"
 	category = Category.Physical
 	aiCategory = AICategory.Offensive
+	isPlayerAttack = true
+	attackPriority = 20
 	
 func getVisibleName(_context = {}):
 	return "Bite"
@@ -25,11 +27,12 @@ func _doAttack(_attacker, _receiver, _context = {}):
 	var text = RNG.pick(texts)
 	
 	if(!_receiver.hasEffect(StatusEffect.Bleeding)):
-		text += " causing {receiver.him} to start [color=red]bleeding[/color]"
 		if(_attacker.hasPerk(Perk.SexBiter)):
-			_receiver.addEffect(StatusEffect.Bleeding, [5])
+			if(_receiver.addEffect(StatusEffect.Bleeding, [5])):
+				text += " causing {receiver.him} to start [color=red]bleeding[/color]"
 		else:
-			_receiver.addEffect(StatusEffect.Bleeding)
+			if(_receiver.addEffect(StatusEffect.Bleeding)):
+				text += " causing {receiver.him} to start [color=red]bleeding[/color]"
 	
 	return {
 		text = text,

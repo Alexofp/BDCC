@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://Player/Player3D/Parts/Part3D.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Player/Player3D/Parts/Head/HumanHead/head.png" type="Texture" id=2]
@@ -10,6 +10,9 @@
 [ext_resource path="res://Player/Player3D/Parts/Head/HumanOldHead/humanheadringgag.png" type="Texture" id=8]
 [ext_resource path="res://Player/Player3D/Parts/AttachmentProxy.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Player/Player3D/Parts/Head/HumanOldHead/humanheadmouth.png" type="Texture" id=10]
+[ext_resource path="res://Player/Player3D/Parts/MeshWithPattern.gd" type="Script" id=11]
+[ext_resource path="res://Player/Player3D/Parts/Head/HumanOldHead/humanheadringgag_overlay.png" type="Texture" id=12]
+[ext_resource path="res://Player/Player3D/Parts/Head/HumanOldHead/humanheadballgag_overlay.png" type="Texture" id=13]
 
 [sub_resource type="SpatialMaterial" id=28]
 resource_local_to_scene = true
@@ -250,6 +253,9 @@ state = "mouth"
 mesh = SubResource( 22 )
 skin = SubResource( 23 )
 material/0 = SubResource( 29 )
+script = ExtResource( 11 )
+pattern_start = Vector2( 1, 0 )
+bodypartSlot = "head"
 
 [node name="PartState2" parent="PartStatePicker2" index="1" instance=ExtResource( 4 )]
 visible = false
@@ -259,6 +265,10 @@ stateValue = "ballgag"
 mesh = SubResource( 22 )
 skin = SubResource( 23 )
 material/0 = SubResource( 30 )
+script = ExtResource( 11 )
+pattern_start = Vector2( 1, 0 )
+bodypartSlot = "head"
+customOverlay = ExtResource( 13 )
 
 [node name="PartState3" parent="PartStatePicker2" index="2" instance=ExtResource( 4 )]
 visible = false
@@ -268,6 +278,10 @@ stateValue = "ringgag"
 mesh = SubResource( 22 )
 skin = SubResource( 23 )
 material/0 = SubResource( 31 )
+script = ExtResource( 11 )
+pattern_start = Vector2( 1, 0 )
+bodypartSlot = "head"
+customOverlay = ExtResource( 12 )
 
 [node name="PartState4" parent="PartStatePicker2" index="3" instance=ExtResource( 4 )]
 visible = false
@@ -277,6 +291,9 @@ stateValue = "open"
 mesh = SubResource( 22 )
 skin = SubResource( 23 )
 material/0 = SubResource( 32 )
+script = ExtResource( 11 )
+pattern_start = Vector2( 1, 0 )
+bodypartSlot = "head"
 
 [node name="PartStatePicker" parent="." index="1" instance=ExtResource( 3 )]
 state = "muzzle"

@@ -224,6 +224,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Game/Pregnancy/ChildSystem.gd"
 }, {
+"base": "Object",
+"class": "ColorUtils",
+"language": "GDScript",
+"path": "res://Player/Player3D/Skins/ColorUtils.gd"
+}, {
 "base": "Reference",
 "class": "ComputerBase",
 "language": "GDScript",
@@ -559,6 +564,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Inventory/ItemTag.gd"
 }, {
+"base": "Spatial",
+"class": "JiggleBone",
+"language": "GDScript",
+"path": "res://Player/Player3D/JiggleBone.gd"
+}, {
 "base": "FluidProduction",
 "class": "Lactation",
 "language": "GDScript",
@@ -639,6 +649,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Game/Pregnancy/MenstrualCycle.gd"
 }, {
+"base": "MeshInstance",
+"class": "MeshInstanceWithPattern",
+"language": "GDScript",
+"path": "res://Player/Player3D/Parts/MeshWithPattern.gd"
+}, {
 "base": "Reference",
 "class": "ModEntry",
 "language": "GDScript",
@@ -713,6 +728,11 @@ _global_script_classes=[ {
 "class": "PantiesState",
 "language": "GDScript",
 "path": "res://Inventory/ItemState/PantiesState.gd"
+}, {
+"base": "Reference",
+"class": "PartSkinBase",
+"language": "GDScript",
+"path": "res://Player/Player3D/SkinsParts/PartSkinBase.gd"
 }, {
 "base": "Spatial",
 "class": "PartState",
@@ -990,6 +1010,16 @@ _global_script_classes=[ {
 "path": "res://Skills/SkillsHolder.gd"
 }, {
 "base": "Reference",
+"class": "SkinBase",
+"language": "GDScript",
+"path": "res://Player/Player3D/Skins/SkinBase.gd"
+}, {
+"base": "Object",
+"class": "SkinType",
+"language": "GDScript",
+"path": "res://Player/Player3D/Skins/SkinType.gd"
+}, {
+"base": "Reference",
 "class": "Species",
 "language": "GDScript",
 "path": "res://Species/BaseSpecies.gd"
@@ -1024,7 +1054,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Game/Gameplay/StatusEffect.gd"
 }, {
-"base": "Node",
+"base": "Reference",
 "class": "StatusEffectBase",
 "language": "GDScript",
 "path": "res://StatusEffect/StatusEffectBase.gd"
@@ -1148,6 +1178,7 @@ _global_script_class_icons={
 "CharacterType": "",
 "Child": "",
 "ChildSystem": "",
+"ColorUtils": "",
 "ComputerBase": "",
 "ContentType": "",
 "CumProduction": "",
@@ -1215,6 +1246,7 @@ _global_script_class_icons={
 "ItemCategory": "",
 "ItemState": "",
 "ItemTag": "",
+"JiggleBone": "",
 "Lactation": "",
 "LightInventory": "",
 "LimbTypes": "",
@@ -1231,6 +1263,7 @@ _global_script_class_icons={
 "MedicalLoot": "",
 "MedicalModule": "",
 "MenstrualCycle": "",
+"MeshInstanceWithPattern": "",
 "ModEntry": "",
 "Module": "",
 "MyBoneAttachment": "",
@@ -1246,6 +1279,7 @@ _global_script_class_icons={
 "OrificeType": "",
 "OverriddenPlayer": "",
 "PantiesState": "",
+"PartSkinBase": "",
 "PartState": "",
 "PartStatePicker": "",
 "PartTrait": "",
@@ -1301,6 +1335,8 @@ _global_script_class_icons={
 "Skill": "",
 "SkillBase": "",
 "SkillsHolder": "",
+"SkinBase": "",
+"SkinType": "",
 "Species": "",
 "SpeciesCompatibility": "",
 "Stage3D": "",

@@ -1,9 +1,14 @@
-extends Node
+extends Reference
 class_name StatusEffectBase
 
 var id = "badstatuseffect"
 var isBattleOnly = false
 var isSexEngineOnly = false
+
+var alwaysCheckedForPlayer = false
+var alwaysCheckedForNPCs = false
+var priorityDuringChecking = 0
+
 var character
 var turns = -1
 
@@ -25,6 +30,9 @@ func initArgs(_args = []):
 func setCharacter(c):
 	character = c
 	
+func shouldApplyTo(_npc):
+	return false
+	
 func processBattleTurn():
 	pass
 
@@ -36,6 +44,9 @@ func onSleeping():
 	
 func processTime(_secondsPassed: int):
 	pass
+
+func checkAvoidedBuff(_npc):
+	return false
 
 func getEffectName():
 	return "Error bad"
@@ -62,7 +73,6 @@ func combine(_newArgs = []):
 
 func stop():
 	if(!character):
-		queue_free()
 		return
 	
 	character.removeEffect(id)

@@ -4,6 +4,14 @@ func _init():
 	id = "rahiMineOwner"
 	disableSerialization = true
 	
+	pickedSkin="HumanSkin"
+	pickedSkinRColor=Color("ffe2a68f")
+	pickedSkinGColor=Color("ffbb5951")
+	pickedSkinBColor=Color("ffd4b5a6")
+	npcSkinData={
+	"hair": {"r": Color("ff4f4b4d"),"g": Color("ffccd4d1"),"b": Color("ff6b6261"),},
+	}
+	
 func _getName():
 	return "Owner"
 

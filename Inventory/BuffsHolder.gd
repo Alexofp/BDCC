@@ -27,6 +27,7 @@ var eggsBonusMod: float = 0.0
 var minEggsAmount: int = 0
 var extraCrossSpeciesCompatibility = 0.0
 var skillsExperience = {}
+var statusEffectImmunity = {}
 var customAttributes = {}
 
 func _ready():
@@ -83,6 +84,7 @@ func calculateBuffs():
 	minEggsAmount = 0
 	extraCrossSpeciesCompatibility = 0.0
 	skillsExperience.clear()
+	statusEffectImmunity.clear()
 	customAttributes.clear()
 	orificesPreventedFromRecovering.clear()
 	
@@ -211,3 +213,8 @@ func getSkillExperienceMult(skill):
 		return 0.0
 	
 	return skillsExperience[skill]
+
+func getStatusEffectImmunity(statusEffect):
+	if(!statusEffectImmunity.has(statusEffect)):
+		return 0.0
+	return statusEffectImmunity[statusEffect]

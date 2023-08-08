@@ -169,7 +169,7 @@ func sendProcessedData(data):
 	if(data == null):
 		return
 	
-	if(data.has("text")):
+	if(data.has("text") && data["text"] != ""):
 		messages.append(data["text"])
 	if(data.has("domSay")):
 		messages.append(data["domSay"])
@@ -189,7 +189,7 @@ func combineData(firstData, secondData):
 	var subSays = []
 	
 	for data in [firstData, secondData]:
-		if(data.has("text")):
+		if(data.has("text") && data["text"] != null && data["text"] != ""):
 			texts.append(data["text"])
 		if(data.has("domSay") && data["domSay"] != null):
 			domSays.append(data["domSay"])
@@ -285,7 +285,8 @@ func generateGoals():
 					var goalData = sexGoal.generateData(self, personDomInfo, personSubInfo)
 					
 					if(sexGoal.isPossible(self, personDomInfo, personSubInfo, goalData) && !sexGoal.isCompleted(self, personDomInfo, personSubInfo, goalData)):
-						var goalObject = [[goal[0], sub.getID(), goalData], goal[1]]
+						var goalWeightModifier = GM.main.getEncounterSettings().getGoalWeight(sexGoal.id, sexGoal.getGoalDefaultWeight())
+						var goalObject = [[goal[0], sub.getID(), goalData], goal[1] * goalWeightModifier]
 						
 						possibleGoals.append(goalObject)
 						

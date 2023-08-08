@@ -5,6 +5,7 @@ var pickedFetishToChange = ""
 var pickedPersonalityStat = ""
 var pickedGenderToChange = ""
 var pickedSpeciesToChange = ""
+var pickedGoalIDToChange = ""
 var npclistScene = preload("res://UI/NpcList/NpcList.tscn") 
 
 func _init():
@@ -89,7 +90,40 @@ func _run():
 		addButton("Genders", "Pick the chances of the genders of the encountered npcs", "gendersmenu")
 		addButton("Species", "Pick the chances of the species of the encountered npcs", "speciesmenu")
 		addButton("Restrictions", "Pick what things you don't want to happen to you in sex", "goalsmenu")
+		addButton("Goal weights", "Change the weights of sex goals that other characters will persue during sex", "goalweightsmenu")
 
+	if(state == "goalweightsmenu"):
+		var encounterSettings:EncounterSettings = GM.main.getEncounterSettings()
+		addButton("Back", "Close this menu", "")
+		
+		sayn("These are the current weights of all sex goals:")
+		var allGoals = GlobalRegistry.getSexGoals()
+		for goalID in allGoals:
+			var goal: SexGoalBase = GlobalRegistry.getSexGoal(goalID)
+			if(goal == null):
+				continue
+			var goalWeight = encounterSettings.getGoalWeight(goalID, goal.getGoalDefaultWeight())
+			
+			sayn(goal.getVisibleName()+": "+str(Util.roundF(goalWeight*100.0, 1))+"%")
+			addButton(goal.getVisibleName(), "Change the weight of this goal", "changegoalweightmenu", [goalID])
+		
+	if(state == "changegoalweightmenu"):
+		var encounterSettings:EncounterSettings = GM.main.getEncounterSettings()
+		addButton("Back", "Close this menu", "")
+		var pickedGoal = GlobalRegistry.getSexGoal(pickedGoalIDToChange)
+		if(pickedGoal != null):
+			var goalWeight = encounterSettings.getGoalWeight(pickedGoalIDToChange, pickedGoal.getGoalDefaultWeight())
+			saynn("The current weight for '"+pickedGoal.getVisibleName()+"' goal is "+str(Util.roundF(goalWeight*100.0, 1))+"%")
+			
+			addButton("Default", "Reset the weight to the default value", "changegoalweight", [-1])
+			
+			var possibleWeights = [0.0, 0.05, 0.1, 0.15, 0.2, 0.3, 0.4, 0.5, 0.7, 0.9, 1.0, 1.2, 1.5, 2.0, 3.0, 5.0]
+			for weight in possibleWeights:
+				var weightStr = str(Util.roundF(weight*100.0, 1))+"%"
+				
+				addButton(weightStr, "Set the weight to this value", "changegoalweight", [weight])
+			
+		
 	if(state == "goalsmenu"):
 		var encounterSettings:EncounterSettings = GM.main.getEncounterSettings()
 		addButton("Back", "Close this menu", "")
@@ -355,6 +389,9 @@ func _react(_action: String, _args):
 	
 	if(_action == "specieschancemenu"):
 		pickedSpeciesToChange = _args[0]
+		
+	if(_action == "changegoalweightmenu"):
+		pickedGoalIDToChange = _args[0]
 	
 	if(_action == "setgenderchance"):
 		GM.main.getEncounterSettings().setGenderWeight(_args[0], _args[1])
@@ -366,6 +403,14 @@ func _react(_action: String, _args):
 		GM.main.getEncounterSettings().setSpeciesWeight(_args[0], _args[1])
 		
 		setState("speciesmenu")
+		return
+		
+	if(_action == "changegoalweight"):
+		if(_args[0] < 0):
+			GM.main.getEncounterSettings().resetGoalWeight(pickedGoalIDToChange)
+		else:
+			GM.main.getEncounterSettings().setGoalWeight(pickedGoalIDToChange, _args[0])
+		setState("goalweightsmenu")
 		return
 		
 	if(_action == "closenpclist"):
@@ -384,6 +429,7 @@ func saveData():
 	data["pickedPersonalityStat"] = pickedPersonalityStat
 	data["pickedGenderToChange"] = pickedGenderToChange
 	data["pickedSpeciesToChange"] = pickedSpeciesToChange
+	data["pickedGoalIDToChange"] = pickedGoalIDToChange
 
 	return data
 	
@@ -395,3 +441,4 @@ func loadData(data):
 	pickedPersonalityStat = SAVE.loadVar(data, "pickedPersonalityStat", "")
 	pickedGenderToChange = SAVE.loadVar(data, "pickedGenderToChange", "")
 	pickedSpeciesToChange = SAVE.loadVar(data, "pickedSpeciesToChange", "")
+	pickedGoalIDToChange = SAVE.loadVar(data, "pickedGoalIDToChange", "")

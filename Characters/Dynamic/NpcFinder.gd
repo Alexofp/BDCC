@@ -43,6 +43,13 @@ static func npcSatisfiesCondition(character:BaseCharacter, conInfo):
 	elif(conditionID == NpcCon.CharacterType):
 		if(character.getCharacterType() != conInfo[1]):
 			return false
+	elif(conditionID == NpcCon.AvoidIDs):
+		if(conInfo[1] is Array):
+			if(character.getID() in conInfo[1]):
+				return false
+		else:
+			if(character.getID() == conInfo[1]):
+				return false
 	return true
 
 static func grabNpcIDFromPool(poolID, _conditions = []):
@@ -77,10 +84,10 @@ static func generateNpcForPool(poolID, generator, _args = {}):
 	GM.main.addDynamicCharacterToPool(newCharacter.id, poolID)
 	return newCharacter.id
 
-static func grabNpcIDFromPoolOrGenerate(poolID, _conditions, generator, _args = {}):
+static func grabNpcIDFromPoolOrGenerate(poolID, _conditions, generator, _args = {}, preferOld = false):
 	var poolSize = GM.main.getDynamicCharactersPoolSize(poolID)
 	var chanceToMeetOld = sqrt(float(poolSize)) * 10.0
-	if(GM.main.getEncounterSettings().doesPreferKnownEncounters()):
+	if(GM.main.getEncounterSettings().doesPreferKnownEncounters() || preferOld):
 		chanceToMeetOld = 100
 	
 	if(RNG.chance(chanceToMeetOld)):

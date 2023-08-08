@@ -23,3 +23,6 @@ func getSubGoals(_sexEngine, _domInfo, _subInfo, _data):
 
 func canLeadToSubsPregnancy(_sexEngine, _domInfo, _subInfo, _data):
 	return false
+
+func getGoalDefaultWeight():
+	return 1.0

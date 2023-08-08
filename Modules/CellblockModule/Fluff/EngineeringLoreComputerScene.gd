@@ -60,7 +60,7 @@ func _run():
 
 		sayn("- Backup Crystal Frequency: <CAPTAIN ACCESS REQUIRED>")
 
-		sayn("- Inmate Collar Frequency: 457bfe76-7618-404c")
+		saynn("- Inmate Collar Frequency: 457bfe76-7618-404c")
 
 		addButton("Documents", "Check the documents folder", "documents")
 		addButton("Leave", "Time to go", "endthescene")

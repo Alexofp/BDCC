@@ -4,6 +4,15 @@ func _init():
 	id = StatusEffect.ArmsBound
 	isBattleOnly = false
 	
+	alwaysCheckedForNPCs = true
+	alwaysCheckedForPlayer = true
+	priorityDuringChecking = 99
+	
+func shouldApplyTo(_npc):
+	if(_npc.hasBoundArms()):
+		return true
+	return false
+	
 func initArgs(_args = []):
 	pass
 	

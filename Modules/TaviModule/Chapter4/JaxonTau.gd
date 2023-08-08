@@ -5,6 +5,14 @@ func _init():
 	npcCharacterType = CharacterType.Generic
 	disableSerialization = true
 	
+	pickedSkin="HumanSkin"
+	pickedSkinRColor=Color("ffe8a894")
+	pickedSkinGColor=Color("ffd69382")
+	pickedSkinBColor=Color("fff3d7ca")
+	npcSkinData={
+	"hair": {"r": Color("ff1b222e"),"g": Color("ff7994be"),"b": Color("ff606991"),},
+	}
+	
 func _getName():
 	return "Jaxon"
 

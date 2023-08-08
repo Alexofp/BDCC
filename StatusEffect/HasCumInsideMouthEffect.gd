@@ -4,6 +4,15 @@ func _init():
 	id = StatusEffect.HasCumInsideMouth
 	isBattleOnly = false
 	
+	alwaysCheckedForNPCs = true
+	alwaysCheckedForPlayer = true
+	priorityDuringChecking = 92
+	
+func shouldApplyTo(_npc):
+	if(_npc.hasBodypart(BodypartSlot.Head) && !_npc.getBodypart(BodypartSlot.Head).isOrificeEmpty()):
+		return true
+	return false
+	
 func initArgs(_args = []):
 	pass
 	

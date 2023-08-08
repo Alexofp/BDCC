@@ -200,3 +200,11 @@ func _on_WikiButton_pressed():
 
 func _on_ModsLabel_meta_clicked(meta):
 	var _ok = OS.shell_open(meta)
+
+
+func _on_SkinsFolderButton_pressed():
+	if(OS.get_name() == "Android"):
+		$AndroidPathAlert.dialog_text = "Custom skins on android are loaded from \"Documents/BDCCMods/custom_skins\"\nCreate that folder if it doesn't exist."
+		$AndroidPathAlert.popup_centered()
+	else:
+		var _ok = OS.shell_open(ProjectSettings.globalize_path("user://custom_skins"))

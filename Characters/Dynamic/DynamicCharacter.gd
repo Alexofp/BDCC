@@ -125,6 +125,10 @@ func saveData():
 		"flags": flags,
 		"npcDefaultEquipment": npcDefaultEquipment,
 		"npcCharacterType": npcCharacterType,
+		"pickedSkin": pickedSkin,
+		"pickedSkinRColor": pickedSkinRColor.to_html(),
+		"pickedSkinGColor": pickedSkinGColor.to_html(),
+		"pickedSkinBColor": pickedSkinBColor.to_html(),
 	}
 	
 	data["bodyparts"] = {}
@@ -192,6 +196,13 @@ func loadData(data):
 	flags = SAVE.loadVar(data, "flags", {})
 	npcDefaultEquipment = SAVE.loadVar(data, "npcDefaultEquipment", [])
 	npcCharacterType = SAVE.loadVar(data, "npcCharacterType", CharacterType.Generic)
+	if(!data.has("pickedSkin")):
+		applyRandomSkinAndColorsAndParts()
+	else:
+		pickedSkin = SAVE.loadVar(data, "pickedSkin", "EmptySkin")
+		pickedSkinRColor = Color(SAVE.loadVar(data, "pickedSkinRColor", "ffffff"))
+		pickedSkinGColor = Color(SAVE.loadVar(data, "pickedSkinGColor", "cccccc"))
+		pickedSkinBColor = Color(SAVE.loadVar(data, "pickedSkinBColor", "999999"))
 	resetEquipment()
 	
 	resetSlots()
@@ -211,6 +222,7 @@ func loadData(data):
 			
 		bodypart.loadData(SAVE.loadVar(loadedBodyparts[slot], "data", {}))
 		giveBodypart(bodypart, false)
+	checkSkins(true)
 	
 	loadStatusEffectsData(SAVE.loadVar(data, "statusEffects", {}))
 	inventory.loadDataNPC(SAVE.loadVar(data, "inventory", {}))

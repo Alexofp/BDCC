@@ -9,6 +9,7 @@ enum {
 	NotArmsRestrained,
 	NotLegsRestrained,
 	NotBlindfolded,
+	NotCollapsed,
 	SkillCheck,
 	StatCheck,
 	PerkCheck,
@@ -78,6 +79,8 @@ static func getReasonText(reason):
 		return "You don't have any strapons or can't put on one"
 	if(reason == IsWearingChastityCage):
 		return "You're not wearing a chastity cage"
+	if(reason == NotCollapsed):
+		return "You can't do this while collapsed"
 	return "Error?"
 
 static func check(checks: Array):
@@ -160,6 +163,9 @@ static func check(checks: Array):
 				return args
 		if(reason == IsWearingChastityCage):
 			if(!GM.pc.isWearingChastityCage()):
+				return args
+		if(reason == NotCollapsed):
+			if(GM.pc.hasEffect(StatusEffect.Collapsed)):
 				return args
 			
 	return null

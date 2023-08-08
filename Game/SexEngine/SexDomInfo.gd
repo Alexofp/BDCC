@@ -55,6 +55,13 @@ func isSlightlyAngry():
 func isAngry():
 	return anger > (0.6 - personalityScore({PersonalityStat.Mean: 0.2}))
 
+func getSadisticActionStore():
+	var sadistScore = fetishScore({Fetish.Sadism: 1.0})
+	var angerScore = getAngerScore()
+	var meanScore = personalityScore({PersonalityStat.Mean: 1.0})
+	
+	return sadistScore / 8.0 + angerScore / 10.0 + meanScore / 10.0
+
 func getInfoString():
 	var character = getChar()
 	

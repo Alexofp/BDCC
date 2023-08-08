@@ -78,6 +78,8 @@ func _run():
 		addButton("Resist", "Try and free yourself", "resist")
 
 	if(state == "resist"):
+		playAnimation(StageScene.TentaclesSex, "tease", {bodyState={naked=true, hard=true}})
+		
 		saynn("You try to pull your leg away but the goo doesn’t let you, it keeps your foot still. Oh no. The more you do it, the more you get stuck in it, the black goo starts climbing your legs, coating them with a thick layer of black rubber-like material. Fascinated Eliza watches the process carefully.")
 
 		saynn("[say=pc]Maybe it’s time to stop?.. I can’t move.[/say]")
@@ -105,7 +107,7 @@ func _run():
 		addButton("Give in", "Maybe it will let you go sooner if you don’t resist..", "give_in")
 
 	if(state == "give_in"):
-		playAnimation(StageScene.Solo, "defeat")
+		playAnimation(StageScene.TentaclesSex, "sex", {bodyState={naked=true, hard=true}})
 		
 		saynn("While the tentacles explore you, the latex-y goo continues to envelop more and more of your body. You feel like you can’t stand anymore, you relax and try to fall but the parasite catches you and gently places you down on your knees.")
 
@@ -139,6 +141,8 @@ func _run():
 		addButton("Isolation", "And pleasure", "isolation")
 
 	if(state == "isolation"):
+		playAnimation(StageScene.TentaclesSex, "fast", {bodyState={naked=true, hard=true}})
+		
 		saynn("Even blindfolded and gagged, you have enough to worry about, the tentacle in your butt had began thrusting in and out at a steady pace, fucking you! Your {pc.analStretch} doesn’t even close fast enough before it’s stuffed again. Then a second tentacle joins, they begin pounding your butt interchangeably, stretching you out so much.")
 
 		# (if vagina)
@@ -156,6 +160,8 @@ func _run():
 		addButton("Let it happen", "Ride it to the end..", "let_it_happen")
 
 	if(state == "let_it_happen"):
+		playAnimation(StageScene.TentaclesSex, "inside", {bodyState={naked=true, hard=true}})
+		
 		saynn("Suddenly your holes are being stuffed with black liquid goo! All the tentacles increase in size, they keep pounding you while cumming inside. Cumming so much that your belly quickly becomes cuminflated, the one in your throat sends goo directly to your belly, quickly filling it. The ones in your butt do the same, stuffing your butt to the brim.")
 
 		# (if pussy)

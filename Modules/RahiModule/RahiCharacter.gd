@@ -5,6 +5,14 @@ func _init():
 	npcHasMenstrualCycle = true
 	npcCharacterType = CharacterType.Inmate
 	
+	pickedSkin="SoftSpikySkin"
+	pickedSkinRColor=Color("ffc0705d")
+	pickedSkinGColor=Color("ffdf8b78")
+	pickedSkinBColor=Color("ffb55945")
+	npcSkinData={
+	"hair": {"r": Color("ffb05745"),"g": Color("ffb05745"),"b": Color("ff2288ab"),},
+	}
+	
 func _getName():
 	return "Rahi"
 

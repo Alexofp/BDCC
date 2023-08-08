@@ -8,6 +8,17 @@ func _init():
 	npcBaseLust = 120
 	npcCharacterType = CharacterType.Inmate
 	
+	pickedSkin="SoftSpikySkin"
+	pickedSkinRColor=Color("ffeb935a")
+	pickedSkinGColor=Color("ffdcdcdc")
+	pickedSkinBColor=Color("ff7f573c")
+	npcSkinData={
+	"hair": {"r": Color("ff2c1e14"),"g": Color("ffd3d3d3"),"b": Color("ff000000"),},
+	"arms": {"skin": "WoonaSkin",},
+	"penis": {"g": Color("ffff0000"),"b": Color("ff8b0000"),},
+	"legs": {"skin": "MonsterGirl",},
+	}
+	
 	npcLustInterests = {
 		InterestTopic.TallyMarks: Interest.Dislikes,
 		InterestTopic.Bodywritings: Interest.Dislikes,

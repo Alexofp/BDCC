@@ -1,10 +1,11 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://Player/Player3D/Parts/Part3D.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Player/Player3D/Parts/Legs/HumanLegs/foot.png" type="Texture" id=2]
 [ext_resource path="res://Player/Player3D/Parts/Legs/HumanLegs/legdown.png" type="Texture" id=3]
 [ext_resource path="res://Player/Player3D/Parts/Legs/HumanLegs/legup.png" type="Texture" id=4]
 [ext_resource path="res://Player/Player3D/Parts/AttachmentProxy.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Player/Player3D/Parts/MeshWithPattern.gd" type="Script" id=6]
 
 [sub_resource type="SpatialMaterial" id=11]
 resource_name = "foot.png.003"
@@ -172,54 +173,6 @@ surfaces/0 = {
 "vertex_count": 4
 }
 
-[sub_resource type="SpatialMaterial" id=27]
-resource_name = "legup.png.003"
-flags_transparent = true
-vertex_color_use_as_albedo = true
-params_cull_mode = 2
-params_depth_draw_mode = 3
-albedo_texture = ExtResource( 4 )
-metallic = 1.0
-
-[sub_resource type="ArrayMesh" id=35]
-resource_name = "DollSkeleton_leguppng003"
-surfaces/0 = {
-"aabb": AABB( -0.484651, 1.85253, 0.255001, 1.28, 2.56, 1.00136e-05 ),
-"array_data": PoolByteArray( 37, 36, 248, 190, 200, 31, 237, 63, 138, 143, 130, 62, 0, 0, 127, 63, 0, 0, 0, 60, 10, 0, 0, 0, 255, 255, 0, 0, 0, 0, 0, 0, 2, 156, 75, 63, 200, 31, 237, 63, 138, 143, 130, 62, 0, 0, 127, 63, 0, 60, 0, 60, 10, 0, 0, 0, 255, 255, 0, 0, 0, 0, 0, 0, 2, 156, 75, 63, 119, 51, 141, 64, 138, 143, 130, 62, 0, 0, 127, 63, 0, 60, 0, 0, 10, 0, 0, 0, 255, 255, 0, 0, 0, 0, 0, 0, 37, 36, 248, 190, 119, 51, 141, 64, 138, 143, 130, 62, 0, 0, 127, 63, 0, 0, 0, 0, 10, 0, 0, 0, 255, 255, 0, 0, 0, 0, 0, 0 ),
-"array_index_data": PoolByteArray( 0, 0, 2, 0, 1, 0, 0, 0, 3, 0, 2, 0 ),
-"blend_shape_data": [  ],
-"format": 2194903,
-"index_count": 6,
-"material": SubResource( 27 ),
-"primitive": 4,
-"skeleton_aabb": [ AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( -0.484651, 1.85253, 0.255001, 1.28, 2.56, 1.00136e-05 ) ],
-"vertex_count": 4
-}
-
-[sub_resource type="SpatialMaterial" id=29]
-resource_name = "legup.png.002"
-flags_transparent = true
-vertex_color_use_as_albedo = true
-params_cull_mode = 2
-params_depth_draw_mode = 3
-albedo_texture = ExtResource( 4 )
-metallic = 1.0
-
-[sub_resource type="ArrayMesh" id=36]
-resource_name = "DollSkeleton_leguppng002"
-surfaces/0 = {
-"aabb": AABB( -0.584651, 1.85253, -0.208568, 1.28, 2.56, 9.99868e-06 ),
-"array_data": PoolByteArray( 172, 171, 21, 191, 200, 31, 237, 63, 197, 146, 85, 190, 0, 0, 127, 63, 0, 0, 0, 60, 19, 0, 0, 0, 255, 255, 0, 0, 0, 0, 0, 0, 104, 2, 50, 63, 200, 31, 237, 63, 197, 146, 85, 190, 0, 0, 127, 63, 0, 60, 0, 60, 19, 0, 0, 0, 255, 255, 0, 0, 0, 0, 0, 0, 104, 2, 50, 63, 119, 51, 141, 64, 197, 146, 85, 190, 0, 0, 127, 63, 0, 60, 0, 0, 19, 0, 0, 0, 255, 255, 0, 0, 0, 0, 0, 0, 172, 171, 21, 191, 119, 51, 141, 64, 197, 146, 85, 190, 0, 0, 127, 63, 0, 0, 0, 0, 19, 0, 0, 0, 255, 255, 0, 0, 0, 0, 0, 0 ),
-"array_index_data": PoolByteArray( 0, 0, 2, 0, 1, 0, 0, 0, 3, 0, 2, 0 ),
-"blend_shape_data": [  ],
-"format": 2194903,
-"index_count": 6,
-"material": SubResource( 29 ),
-"primitive": 4,
-"skeleton_aabb": [ AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( -0.584651, 1.85253, -0.208568, 1.28, 2.56, 9.99868e-06 ) ],
-"vertex_count": 4
-}
-
 [sub_resource type="SpatialMaterial" id=42]
 resource_name = "legup.png.001"
 flags_transparent = true
@@ -350,48 +303,62 @@ surfaces/0 = {
 mesh = SubResource( 30 )
 skin = SubResource( 31 )
 material/0 = SubResource( 11 )
+script = ExtResource( 6 )
+pattern_start = Vector2( 0, 6 )
+pattern_size = Vector2( 0.5, 0.25 )
+bodypartSlot = "legs"
 
 [node name="footpng001" type="MeshInstance" parent="." index="1"]
 mesh = SubResource( 32 )
 skin = SubResource( 31 )
 material/0 = SubResource( 11 )
+script = ExtResource( 6 )
+pattern_start = Vector2( 0, 6 )
+pattern_size = Vector2( 0.5, 0.25 )
+bodypartSlot = "legs"
 
 [node name="legdownpng" type="MeshInstance" parent="." index="2"]
 mesh = SubResource( 33 )
 skin = SubResource( 31 )
 material/0 = SubResource( 23 )
+script = ExtResource( 6 )
+pattern_start = Vector2( 0.125, 5 )
+pattern_size = Vector2( 0.25, 1 )
+bodypartSlot = "legs"
 
 [node name="legdownpng001" type="MeshInstance" parent="." index="3"]
 mesh = SubResource( 34 )
 skin = SubResource( 31 )
 material/0 = SubResource( 23 )
+script = ExtResource( 6 )
+pattern_start = Vector2( 0.125, 5 )
+pattern_size = Vector2( 0.25, 1 )
+bodypartSlot = "legs"
 
-[node name="leguppng" type="MeshInstance" parent="." index="4"]
-visible = false
-mesh = SubResource( 35 )
-skin = SubResource( 31 )
-
-[node name="leguppng001" type="MeshInstance" parent="." index="5"]
-visible = false
-mesh = SubResource( 36 )
-skin = SubResource( 31 )
-
-[node name="legupDeformable" type="MeshInstance" parent="." index="6"]
+[node name="legupDeformable" type="MeshInstance" parent="." index="4"]
 mesh = SubResource( 37 )
 skin = SubResource( 38 )
 material/0 = SubResource( 42 )
+script = ExtResource( 6 )
+pattern_start = Vector2( 0, 4 )
+pattern_size = Vector2( 0.5, 1 )
+bodypartSlot = "legs"
 
-[node name="legupDeformable001" type="MeshInstance" parent="." index="7"]
+[node name="legupDeformable001" type="MeshInstance" parent="." index="5"]
 mesh = SubResource( 39 )
 skin = SubResource( 38 )
 material/0 = SubResource( 42 )
+script = ExtResource( 6 )
+pattern_start = Vector2( 0, 4 )
+pattern_size = Vector2( 0.5, 1 )
+bodypartSlot = "legs"
 
-[node name="AttachmentProxy" parent="." index="8" instance=ExtResource( 5 )]
+[node name="AttachmentProxy" parent="." index="6" instance=ExtResource( 5 )]
 transform = Transform( 1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 0.268209, 0.568661, 0.284713 )
 boneId = "LegDown.L"
 zoneName = "ankle.L"
 
-[node name="AttachmentProxy2" parent="." index="9" instance=ExtResource( 5 )]
+[node name="AttachmentProxy2" parent="." index="7" instance=ExtResource( 5 )]
 transform = Transform( 1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 0.168, 0.569, -0.175 )
 boneId = "LegDown.R"
 zoneName = "ankle.R"

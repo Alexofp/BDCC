@@ -19,7 +19,6 @@ var arousal:float = 0
 var consciousness: float = 1.0
 
 var statusEffects:Dictionary = {}
-var statusEffectsStorageNode
 var inventory: Inventory
 var buffsHolder: BuffsHolder
 var skillsHolder: SkillsHolder
@@ -46,6 +45,12 @@ var timedBuffsDurationSeconds: int = 0
 var timedBuffsTurns: Array = []
 var timedBuffsDurationTurns: int = 0
 
+# Skin data
+var pickedSkin:String = "EmptySkin"
+var pickedSkinRColor:Color = Color.white
+var pickedSkinGColor:Color = Color.lightgray
+var pickedSkinBColor:Color = Color.darkgray
+
 func _init():
 	name = "BaseCharacter"
 
@@ -54,9 +59,6 @@ func _ready():
 	add_child(bodypartStorageNode)
 	bodypartStorageNode.name = "Bodyparts"
 	resetSlots()
-	statusEffectsStorageNode = Node.new()
-	add_child(statusEffectsStorageNode)
-	statusEffectsStorageNode.name = "StatusEffects"	
 	inventory = Inventory.new()
 	add_child(inventory)
 	var _con = inventory.connect("equipped_items_changed", self, "onEquippedItemsChange")
@@ -162,15 +164,24 @@ func getAmbientLust():
 func addEffect(effectID: String, args = []):
 	if(statusEffects.has(effectID)):
 		statusEffects[effectID].combine(args)
-		return
+		return true
+	
+	var immunity = getStatusEffectImmunity(effectID)
+	if(RNG.chance(clamp(immunity, 0.0, 1.0)*100.0) || GlobalRegistry.getStatusEffectRef(effectID).checkAvoidedBuff(self)):
+		if(GM.main != null && GM.main.characterIsVisible(getID())):
+			if(isPlayer()):
+				GM.main.addMessage("You managed to avoid the '"+GlobalRegistry.getStatusEffectRef(effectID).getEffectName()+"' status effect!")
+			else:
+				GM.main.addMessage(getName()+" managed to avoid the '"+GlobalRegistry.getStatusEffectRef(effectID).getEffectName()+"' status effect!")
+		return false
 	
 	var effect = GlobalRegistry.createStatusEffect(effectID)
 	effect.setCharacter(self)
 	effect.initArgs(args)
-	statusEffectsStorageNode.add_child(effect)
 	
 	statusEffects[effectID] = effect
 	#buffsHolder.calculateBuffs()
+	return true
 
 func hasEffect(effectID: String):
 	return statusEffects.has(effectID)
@@ -182,7 +193,7 @@ func getEffect(effectID: String):
 	
 func removeEffect(effectID: String):
 	if(statusEffects.has(effectID)):
-		statusEffects[effectID].queue_free()
+		#statusEffects[effectID].queue_free()
 		var _wasremoved = statusEffects.erase(effectID)
 		#buffsHolder.calculateBuffs()
 	
@@ -212,7 +223,6 @@ func loadStatusEffectsData(data):
 			continue
 		effect.setCharacter(self)
 		statusEffects[effectID] = effect
-		statusEffectsStorageNode.add_child(effect)
 		
 		effect.loadData(data[effectID])
 	
@@ -259,7 +269,14 @@ func isOverriddenPlayer():
 func _getAttacks():
 	return ["blunderAttack"]
 	
-func getAttacks():
+func _getAttacksForBattle(_battlename):
+	return null
+	
+func getAttacks(_battlename):
+	var battleAttacks = _getAttacksForBattle(_battlename)
+	if(battleAttacks != null):
+		return battleAttacks
+	
 	return _getAttacks()
 	
 func getArmor(_damageType):
@@ -793,8 +810,9 @@ func giveBodypartUnlessSame(bodypart: Bodypart):
 	if(bodyparts.has(slot) && bodyparts[slot] != null):
 		if(bodypart.id == bodyparts[slot].id):
 			bodypart.queue_free()
-			return
+			return false
 	giveBodypart(bodypart)
+	return true
 
 func hasBodypart(slot):
 	if(bodyparts.has(slot) && bodyparts[slot] != null):
@@ -1118,6 +1136,11 @@ func forceIntoHeat():
 	if(menstrualCycle != null):
 		menstrualCycle.forceIntoHeat()
 
+func forceImpregnateBy(otherCharacterID):
+	if(menstrualCycle != null):
+		return menstrualCycle.forceImpregnateBy(otherCharacterID)
+	return false
+
 func getPregnancyProgress():
 	if(menstrualCycle != null):
 		return menstrualCycle.getPregnancyProgress()
@@ -1186,6 +1209,8 @@ func hasHorns():
 	return hasBodypart(BodypartSlot.Horns)
 
 func hasNonFlatBreasts():
+	if(!hasBodypart(BodypartSlot.Breasts)):
+		return false
 	var breasts = getBodypart(BodypartSlot.Breasts)
 	
 	var size = breasts.getSize()
@@ -1196,6 +1221,8 @@ func hasNonFlatBreasts():
 		return false
 
 func hasBigBreasts():
+	if(!hasBodypart(BodypartSlot.Breasts)):
+		return false
 	var breasts = getBodypart(BodypartSlot.Breasts)
 	
 	var size = breasts.getSize()
@@ -1331,6 +1358,35 @@ func updateLeaking(doll: Doll3D):
 		doll.setAnusLeaking(false)
 		
 func softUpdateDoll(doll: Doll3D):
+	var skinData = {}
+	var bodySkinData = getSkinData()
+	var fieldsToCheckSkin = ["skin", "r", "g", "b"]
+	for bodypartSlot in bodyparts:
+		var bodypart = getBodypart(bodypartSlot)
+		if(bodypart == null):
+			continue
+		if(bodypart.supportsSkin()):
+			var bodypartSkinData = bodypart.getSkinData()
+			for field in fieldsToCheckSkin:
+				if(!bodypartSkinData.has(field) || bodypartSkinData[field] == null):
+					if(bodySkinData.has(field)):
+						bodypartSkinData[field] = bodySkinData[field]
+			
+			skinData[bodypartSlot] = bodypartSkinData
+	doll.setSkinData(skinData)
+	if(hasEffect(StatusEffect.CoveredInCum)):
+		doll.setCumAmount(getOutsideMessinessLevel())
+		var dominantFluidID = getFluids().getDominantFluidID()
+		if(dominantFluidID != null):
+			var fluidObject = GlobalRegistry.getFluid(dominantFluidID)
+			if(fluidObject != null):
+				doll.setCumColor(fluidObject.getCumOverlayColor())
+		else:
+			doll.setCumColor(Color.white)
+	else:
+		doll.setCumAmount(0)
+	doll.updateMaterials()
+	
 	doll.setArmsCuffed(false)
 	doll.setLegsCuffed(false)
 	doll.setState("mouth", "")
@@ -1407,6 +1463,7 @@ func softUpdateDoll(doll: Doll3D):
 		item.updateDoll(doll)
 
 func updateDoll(doll: Doll3D):
+	softUpdateDoll(doll)
 	
 	var parts = getDollParts()
 	
@@ -1466,8 +1523,6 @@ func updateDoll(doll: Doll3D):
 	doll.setParts(parts)
 	doll.setUnriggedParts(partsScenes)
 	
-	softUpdateDoll(doll)
-
 func getSkillExperienceMult(skill):
 	var mult = 0.0
 
@@ -1566,6 +1621,9 @@ func isGagged():
 func isOralBlocked():
 	return buffsHolder.hasBuff(Buff.GagBuff) || buffsHolder.hasBuff(Buff.MuzzleBuff)
 
+func isMuzzled():
+	return buffsHolder.hasBuff(Buff.MuzzleBuff)
+
 func invCanEquipSlot(slot):
 	if(slot == InventorySlot.Penis && !hasPenis()):
 		return false
@@ -1634,6 +1692,9 @@ func cumOnFloor():
 		var penis:BodypartPenis = getBodypart(BodypartSlot.Penis)
 		var production: FluidProduction = penis.getFluidProduction()
 		if(production != null):
+			if(getWornCondom() != null):
+				return cumInItem(getWornCondom())
+			
 			var returnValue = penis.getFluidProduction().drain()
 			production.fillPercent(buffsHolder.getCustom(BuffAttribute.CumGenerationAfterOrgasm))
 			return returnValue
@@ -1818,7 +1879,7 @@ func addTimedBuffs(buffs: Array, seconds):
 	for newbuff in buffs:
 		var foundBuff = false
 		for oldbuff in timedBuffs:
-			if(newbuff.id == oldbuff.id):
+			if(newbuff.id == oldbuff.id && oldbuff.canCombine(newbuff)):
 				oldbuff.combine(newbuff)
 				foundBuff = true
 				break
@@ -1835,7 +1896,7 @@ func addTimedBuffsTurns(buffs: Array, turns):
 	for newbuff in buffs:
 		var foundBuff = false
 		for oldbuff in timedBuffsTurns:
-			if(newbuff.id == oldbuff.id):
+			if(newbuff.id == oldbuff.id && oldbuff.canCombine(newbuff)):
 				oldbuff.combine(newbuff)
 				foundBuff = true
 				break
@@ -2077,3 +2138,101 @@ func shouldCondomBreakWhenFucking(characterPenetrated, chance: float = 20.0, sho
 		return false
 	
 	return RNG.chance(chance)
+
+func getBaseSkinID():
+	return pickedSkin
+
+func getBaseSkinColors():
+	return [pickedSkinRColor, pickedSkinGColor, pickedSkinBColor]
+
+func getSkinData():
+	var theColors = getBaseSkinColors()
+	return {
+		"skin": getBaseSkinID(),
+		"r": theColors[0],
+		"g": theColors[1],
+		"b": theColors[2],
+	}
+
+func applyRandomColors():
+	var species = getSpecies()
+	if(species.size() > 0):
+		var skinColors = GlobalRegistry.getSpecies(RNG.pick(species)).generateSkinColors()
+		pickedSkinRColor = skinColors[0]
+		pickedSkinGColor = skinColors[1]
+		pickedSkinBColor = skinColors[2]
+
+func applyRandomSkin():
+	var species = getSpecies()
+	var possibleSkins = []
+	for speciesOne in species:
+		var theSpecies = GlobalRegistry.getSpecies(speciesOne)
+		var skinType = theSpecies.getSkinType()
+		
+		for skinID in GlobalRegistry.getSkins():
+			var theSkin = GlobalRegistry.getSkin(skinID)
+			var fittingSkinTypes = theSkin.getFittingSkinTypes()
+			if(fittingSkinTypes is Dictionary && fittingSkinTypes.has(skinType)):
+				possibleSkins.append([skinID, fittingSkinTypes[skinType]])
+		
+	var newSkin = RNG.pickWeightedPairs(possibleSkins)
+	
+	if(newSkin != null):
+		pickedSkin = newSkin
+
+func applyRandomSkinAndColors():
+	applyRandomSkin()
+	applyRandomColors()
+
+func applyRandomSkinAndColorsAndParts():
+	applyRandomSkinAndColors()
+	
+	for bodypartID in bodyparts:
+		if(bodyparts[bodypartID] == null):
+			continue
+		bodyparts[bodypartID].generateRandomColors(self)
+		bodyparts[bodypartID].generateRandomSkinIfCan(self)
+
+func getStatusEffectImmunity(statusEffectID):
+	return buffsHolder.getStatusEffectImmunity(statusEffectID)
+
+func checkSkins(applyRandomSkinOnFail = false):
+	var theSkin = GlobalRegistry.getSkin(pickedSkin)
+	if(theSkin == null):
+		if(applyRandomSkinOnFail):
+			applyRandomSkin()
+		else:
+			pickedSkin = "EmptySkin"
+	
+	for bodypartSlot in bodyparts:
+		if(!hasBodypart(bodypartSlot)):
+			continue
+		
+		var bodypart = getBodypart(bodypartSlot)
+		if(bodypart.pickedSkin == null):
+			continue
+		
+		if(bodypart.hasCustomSkinPattern()):
+			var thePartSkin = GlobalRegistry.getPartSkin(bodypart.id, bodypart.pickedSkin)
+			if(thePartSkin == null):
+				bodypart.pickedSkin = null
+		else:
+			theSkin = GlobalRegistry.getSkin(bodypart.pickedSkin)
+			if(theSkin == null):
+				bodypart.pickedSkin = null
+
+func applyBodypartsSkinData(theSkinData):
+	if(theSkinData != null):
+		for bodypartSlot in theSkinData:
+			if(!hasBodypart(bodypartSlot)):
+				continue
+			var bodypart = getBodypart(bodypartSlot)
+			var bodypartSkinData = theSkinData[bodypartSlot]
+			if(bodypartSkinData.has("skin")):
+				bodypart.pickedSkin = bodypartSkinData["skin"]
+			if(bodypartSkinData.has("r")):
+				bodypart.pickedRColor = bodypartSkinData["r"]
+			if(bodypartSkinData.has("g")):
+				bodypart.pickedGColor = bodypartSkinData["g"]
+			if(bodypartSkinData.has("b")):
+				bodypart.pickedBColor = bodypartSkinData["b"]

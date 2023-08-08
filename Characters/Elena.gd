@@ -5,6 +5,15 @@ func _init():
 	
 	npcCharacterType = CharacterType.Generic
 	
+	pickedSkin="HumanSkin"
+	pickedSkinRColor=Color("ffff89a6")
+	pickedSkinGColor=Color("ffbd57fd")
+	pickedSkinBColor=Color("ff2ce9ff")
+	npcSkinData={
+	"hair": {"r": Color("ffa37bfd"),"g": Color("ffe982d3"),"b": Color("ffff87e5"),},
+	"breasts": {"b": Color("ffcd91ff"),},
+	}
+	
 func _getName():
 	return "E.L.E.N.A."
 	#Experimental Learning and Evolving Neural Algorithm

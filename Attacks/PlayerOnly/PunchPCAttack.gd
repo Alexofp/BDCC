@@ -4,6 +4,8 @@ func _init():
 	id = "PunchPCAttack"
 	category = Category.Physical
 	aiCategory = AICategory.Offensive
+	isPlayerAttack = true
+	attackPriority = 30
 	
 func getVisibleName(_context = {}):
 	if(GM.pc.hasPerk(Perk.CombatScratching)):
@@ -26,8 +28,7 @@ func _doAttack(_attacker, _receiver, _context = {}):
 	var text = RNG.pick(texts)
 	
 	if(RNG.chance(50)):
-		if(_attacker.getSkillsHolder().hasPerk(Perk.CombatScratching)):
-			_receiver.addEffect(StatusEffect.Bleeding)
+		if(_attacker.getSkillsHolder().hasPerk(Perk.CombatScratching) && _receiver.addEffect(StatusEffect.Bleeding)):
 			text += "Sharp claws caused {receiver.him} to start [color=red]bleeding[/color]."
 		
 	return {

@@ -55,6 +55,16 @@ func _init():
 		InterestTopic.NoCock: Interest.Likes,
 	}
 	
+	pickedSkin="FerriSkin"
+	pickedSkinRColor=Color("ff739bc3")
+	pickedSkinGColor=Color("ffddcec9")
+	pickedSkinBColor=Color("ff000b6a")
+	npcSkinData={
+	"hair": {"r": Color("ffddcec9"),"g": Color("ff002cd0"),"b": Color("ffc1c2cc"),},
+	"ears": {"g": Color("ff44feff"),"b": Color("ff0539b5"),},
+	"horns": {"r": Color("ff041080"),"g": Color("ff041080"),"b": Color("ff041080"),},
+	}
+	
 func interestVerbalReaction(interest):
 	if(interest == InterestTopic.TallyMarks):
 		return "What a whore~"
@@ -112,7 +122,7 @@ func getFemininity() -> int:
 func createBodyparts():
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("felinehead"))
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("ferrihair"))
-	giveBodypartUnlessSame(GlobalRegistry.createBodypart("felineears"))
+	giveBodypartUnlessSame(GlobalRegistry.createBodypart("lynxears"))
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("dragonhorns"))
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("anthrobody"))
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("anthroarms"))

@@ -25,9 +25,12 @@ var lastUpdatedSecond:int = -1
 var disableSerialization:bool = false # Set to true if the character doesn't need to be saved, only works for non-dynamic npcs
 var pregnancyWaitTimer:int = 0
 
+var npcSkinData = {}
+
 func _ready():
 	name = id
 	createBodyparts()
+	paintBodyparts()
 	createEquipment()
 	for statID in npcStats:
 		skillsHolder.setStat(statID, npcStats[statID])
@@ -188,6 +191,34 @@ func getBaseLustThreshold() -> int:
 func createBodyparts():
 	pass
 
+# GM.main.getFlag() is allowed here
+func updateBodyparts():
+	pass
+
+func paintBodyparts():
+	if(npcSkinData != null):
+		for bodypartSlot in npcSkinData:
+			if(!hasBodypart(bodypartSlot)):
+				#Log.error(getID()+" doesn't have "+str(bodypartSlot)+" slot but we're trying to paint it anyway inside paintBodyparts()")
+				continue
+			var bodypart = getBodypart(bodypartSlot)
+			var bodypartSkinData = npcSkinData[bodypartSlot]
+			if(bodypartSkinData.has("skin")):
+				bodypart.pickedSkin = bodypartSkinData["skin"]
+			if(bodypartSkinData.has("r")):
+				bodypart.pickedRColor = bodypartSkinData["r"]
+			if(bodypartSkinData.has("g")):
+				bodypart.pickedGColor = bodypartSkinData["g"]
+			if(bodypartSkinData.has("b")):
+				bodypart.pickedBColor = bodypartSkinData["b"]
+
+func copySkinTo(otherNPC):
+	otherNPC.pickedSkin = pickedSkin
+	otherNPC.pickedSkinRColor = pickedSkinRColor
+	otherNPC.pickedSkinGColor = pickedSkinGColor
+	otherNPC.pickedSkinBColor = pickedSkinBColor
+	otherNPC.applyBodypartsSkinData(npcSkinData)
+
 func createEquipment():
 	pass
 
@@ -273,92 +304,11 @@ func hoursPassed(_howmuch):
 func updateNonBattleEffects():
 	buffsHolder.calculateBuffs()
 	
-	if(timedBuffs.size() > 0):
-		addEffect(StatusEffect.TimedEffects)
-	else:
-		removeEffect(StatusEffect.TimedEffects)
-		
-	if(timedBuffsTurns.size() > 0):
-		addEffect(StatusEffect.TimedEffectsTurns)
-	else:
-		removeEffect(StatusEffect.TimedEffectsTurns)
-	
-	if(hasBoundArms()):
-		addEffect(StatusEffect.ArmsBound)
-	else:
-		removeEffect(StatusEffect.ArmsBound)
-		
-	if(hasBlockedHands()):
-		addEffect(StatusEffect.HandsBlocked)
-	else:
-		removeEffect(StatusEffect.HandsBlocked)
-			
-	if(hasBoundLegs()):
-		addEffect(StatusEffect.LegsBound)
-	else:
-		removeEffect(StatusEffect.LegsBound)
-			
-	if(isBlindfolded()):
-		addEffect(StatusEffect.Blindfolded)
-	else:
-		removeEffect(StatusEffect.Blindfolded)
-			
-	if(isGagged()):
-		addEffect(StatusEffect.Gagged)
-	else:
-		removeEffect(StatusEffect.Gagged)
-		
-	if(buffsHolder.hasBuff(Buff.MuzzleBuff)):
-		addEffect(StatusEffect.Muzzled)
-	else:
-		removeEffect(StatusEffect.Muzzled)
-	
-	if(!bodyFluids.isEmpty()):
-		addEffect(StatusEffect.CoveredInCum)
-	else:
-		removeEffect(StatusEffect.CoveredInCum)
-	
-	if(hasBodypart(BodypartSlot.Vagina) && !getBodypart(BodypartSlot.Vagina).isOrificeEmpty()):
-		addEffect(StatusEffect.HasCumInsideVagina)
-	else:
-		removeEffect(StatusEffect.HasCumInsideVagina)
-		
-	if(hasBodypart(BodypartSlot.Anus) && !getBodypart(BodypartSlot.Anus).isOrificeEmpty()):
-		addEffect(StatusEffect.HasCumInsideAnus)
-	else:
-		removeEffect(StatusEffect.HasCumInsideAnus)
-		
-	if(hasBodypart(BodypartSlot.Head) && !getBodypart(BodypartSlot.Head).isOrificeEmpty()):
-		addEffect(StatusEffect.HasCumInsideMouth)
-	else:
-		removeEffect(StatusEffect.HasCumInsideMouth)
-
-	if(menstrualCycle != null && menstrualCycle.isInHeat()):
-		addEffect(StatusEffect.InHeat)
-	else:
-		removeEffect(StatusEffect.InHeat)
-		
-	if(menstrualCycle != null && menstrualCycle.isVisiblyPregnant()):
-		addEffect(StatusEffect.Pregnant)
-	else:
-		removeEffect(StatusEffect.Pregnant)
-
-	if(hasBreastsFullOfMilk()):
-		addEffect(StatusEffect.BreastsFull)
-	else:
-		removeEffect(StatusEffect.BreastsFull)
-
-	if(getCumInflationLevel() > 0.01):
-		addEffect(StatusEffect.CumInflated)
-	else:
-		removeEffect(StatusEffect.CumInflated)
-	
-	if(GM.main != null && GM.main.supportsSexEngine()):
-		addEffect(StatusEffect.SexEnginePersonality)
-		addEffect(StatusEffect.SexEngineLikes)
-	else:
-		removeEffect(StatusEffect.SexEnginePersonality)
-		removeEffect(StatusEffect.SexEngineLikes)
+	for effect in GlobalRegistry.getStatusEffectsAlwaysCheckedForNPC():
+		if(effect.shouldApplyTo(self)):
+			addEffect(effect.id)
+		else:
+			removeEffect(effect.id)
 		
 	GM.GES.callGameExtenders(ExtendGame.npcUpdateNonBattleEffects, [self])
 	

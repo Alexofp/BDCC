@@ -18,6 +18,7 @@ var pickedFemininity: int = 50
 var pickedThickness: int = 50
 var inmateType = InmateType.General
 
+
 # Intoxication stuff
 var intoxication: float = 0.0
 var intoxicationTolerance: float = 0.0
@@ -130,10 +131,17 @@ func isPlayer():
 
 func _getAttacks():
 	var attacks = [
-		"PunchPCAttack",
-		"BitePCAttack",
-		"KickPCAttack",
+		#"PunchPCAttack",
+		#"BitePCAttack",
+		#"KickPCAttack",
 	]
+	var thePlayerAttacks = GlobalRegistry.getPlayerAttackIDs()
+	for attackID in thePlayerAttacks:
+		var attack = GlobalRegistry.getAttack(attackID)
+		if(attack == null):
+			continue
+		if(attack.canBeUsedByPlayer()):
+			attacks.append(attackID)
 	
 	attacks.append_array(skillsHolder.getPerkAttacks())
 	
@@ -173,107 +181,11 @@ func calculateBuffs():
 func updateNonBattleEffects():
 	buffsHolder.calculateBuffs()
 	
-	if(getIntoxicationLevel() >= 0.01):
-		addEffect(StatusEffect.Intoxicated)
-	else:
-		removeEffect(StatusEffect.Intoxicated)
-		
-	if(timedBuffs.size() > 0):
-		addEffect(StatusEffect.TimedEffects)
-	else:
-		removeEffect(StatusEffect.TimedEffects)
-		
-	if(timedBuffsTurns.size() > 0):
-		addEffect(StatusEffect.TimedEffectsTurns)
-	else:
-		removeEffect(StatusEffect.TimedEffectsTurns)
-	
-	if(hasBoundArms()):
-		addEffect(StatusEffect.ArmsBound)
-	else:
-		removeEffect(StatusEffect.ArmsBound)
-		
-	if(hasBlockedHands()):
-		addEffect(StatusEffect.HandsBlocked)
-	else:
-		removeEffect(StatusEffect.HandsBlocked)
-			
-	if(hasBoundLegs()):
-		addEffect(StatusEffect.LegsBound)
-	else:
-		removeEffect(StatusEffect.LegsBound)
-			
-	if(isBlindfolded()):
-		addEffect(StatusEffect.Blindfolded)
-	else:
-		removeEffect(StatusEffect.Blindfolded)
-			
-	if(isGagged()):
-		addEffect(StatusEffect.Gagged)
-	else:
-		removeEffect(StatusEffect.Gagged)
-		
-	if(buffsHolder.hasBuff(Buff.MuzzleBuff)):
-		addEffect(StatusEffect.Muzzled)
-	else:
-		removeEffect(StatusEffect.Muzzled)
-		
-	if(isFullyNaked() || getExposedPrivates().size() > 0):
-		addEffect(StatusEffect.Naked)
-	else:
-		removeEffect(StatusEffect.Naked)
-		
-	if(getStamina() <= 0):
-		addEffect(StatusEffect.Exhausted)
-	else:
-		removeEffect(StatusEffect.Exhausted)
-		
-	if(!bodyFluids.isEmpty()):
-		addEffect(StatusEffect.CoveredInCum)
-	else:
-		removeEffect(StatusEffect.CoveredInCum)
-
-	if(hasBodypart(BodypartSlot.Vagina) && !getBodypart(BodypartSlot.Vagina).isOrificeEmpty()):
-		addEffect(StatusEffect.HasCumInsideVagina)
-	else:
-		removeEffect(StatusEffect.HasCumInsideVagina)
-		
-	if(hasBodypart(BodypartSlot.Anus) && !getBodypart(BodypartSlot.Anus).isOrificeEmpty()):
-		addEffect(StatusEffect.HasCumInsideAnus)
-	else:
-		removeEffect(StatusEffect.HasCumInsideAnus)
-		
-	if(hasBodypart(BodypartSlot.Head) && !getBodypart(BodypartSlot.Head).isOrificeEmpty()):
-		addEffect(StatusEffect.HasCumInsideMouth)
-	else:
-		removeEffect(StatusEffect.HasCumInsideMouth)
-		
-	if(menstrualCycle != null && menstrualCycle.isInHeat() && !GM.pc.hasPerk(Perk.StartNoHeat)):
-		addEffect(StatusEffect.InHeat)
-	else:
-		removeEffect(StatusEffect.InHeat)
-		
-	if(menstrualCycle != null && menstrualCycle.isVisiblyPregnant()):
-		addEffect(StatusEffect.Pregnant)
-	else:
-		removeEffect(StatusEffect.Pregnant)
-		
-	if(hasBreastsFullOfMilk()):
-		addEffect(StatusEffect.BreastsFull)
-	else:
-		removeEffect(StatusEffect.BreastsFull)
-		
-	if(getCumInflationLevel() > 0.01):
-		addEffect(StatusEffect.CumInflated)
-	else:
-		removeEffect(StatusEffect.CumInflated)
-		
-	if(GM.main != null && GM.main.supportsSexEngine()):
-		addEffect(StatusEffect.SexEnginePersonality)
-		addEffect(StatusEffect.SexEngineLikes)
-	else:
-		removeEffect(StatusEffect.SexEnginePersonality)
-		removeEffect(StatusEffect.SexEngineLikes)
+	for effect in GlobalRegistry.getStatusEffectsAlwaysCheckedForPC():
+		if(effect.shouldApplyTo(self)):
+			addEffect(effect.id)
+		else:
+			removeEffect(effect.id)
 
 	GM.GES.callGameExtenders(ExtendGame.pcUpdateNonBattleEffects, [self])
 
@@ -466,6 +378,10 @@ func saveData():
 		"arousal": arousal,
 		"consciousness": consciousness,
 		"dynamicPersonality": dynamicPersonality,
+		"pickedSkin": pickedSkin,
+		"pickedSkinRColor": pickedSkinRColor.to_html(),
+		"pickedSkinGColor": pickedSkinGColor.to_html(),
+		"pickedSkinBColor": pickedSkinBColor.to_html(),
 	}
 	
 	data["bodyparts"] = {}
@@ -514,6 +430,10 @@ func loadData(data):
 	arousal = SAVE.loadVar(data, "arousal", 0.0)
 	consciousness = SAVE.loadVar(data, "consciousness", 1.0)
 	dynamicPersonality = SAVE.loadVar(data, "dynamicPersonality", false)
+	pickedSkin = SAVE.loadVar(data, "pickedSkin", "EmptySkin")
+	pickedSkinRColor = Color(SAVE.loadVar(data, "pickedSkinRColor", "ffffff"))
+	pickedSkinGColor = Color(SAVE.loadVar(data, "pickedSkinGColor", "cccccc"))
+	pickedSkinBColor = Color(SAVE.loadVar(data, "pickedSkinBColor", "999999"))
 	
 	resetSlots()
 	var loadedBodyparts = SAVE.loadVar(data, "bodyparts", {})
@@ -532,6 +452,7 @@ func loadData(data):
 			
 		bodypart.loadData(SAVE.loadVar(loadedBodyparts[slot], "data", {}))
 		giveBodypart(bodypart, false)
+	checkSkins()
 	
 	loadStatusEffectsData(SAVE.loadVar(data, "statusEffects", {}))
 	inventory.loadData(SAVE.loadVar(data, "inventory", {}))
@@ -707,6 +628,11 @@ func getThickness() -> int:
 	return pickedThickness
 
 func getPickableAttributes():
+#	var skinsOptions = []
+#	for skinID in GlobalRegistry.getSkins():
+#		var theSkin = GlobalRegistry.getSkin(skinID)
+#		skinsOptions.append([skinID, theSkin.getName(), "Pick this skin"])
+#
 	return {
 		"femininity": {
 			"text": "Pick how feminine or masculine you are",
@@ -736,6 +662,36 @@ func getPickableAttributes():
 				[200, "200% thick", "Sooo thicc"],
 			]
 		},
+#		"skin": {
+#			"text": "Pick your base skin. All bodyparts will use this skin unless overridden.",
+#			"textButton": "Skin",
+#			"buttonDesc": "Change your skin type",
+#			"options": skinsOptions,
+#		},
+#		"skinPrimaryColor": {
+#			"text": "Pick your primary color.",
+#			"textButton": "Primary color",
+#			"buttonDesc": "Change the primary color of your skin",
+#			"options": [[1, "Select", "Pick this color"]],
+#			"type": "color",
+#			"currentColor": pickedSkinRColor,
+#		},
+#		"skinSecondaryColor": {
+#			"text": "Pick your secondary color.",
+#			"textButton": "Secondary color",
+#			"buttonDesc": "Change the secondary color of your skin",
+#			"options": [[1, "Select", "Pick this color"]],
+#			"type": "color",
+#			"currentColor": pickedSkinGColor,
+#		},
+#		"skinTertiaryColor": {
+#			"text": "Pick your tertiary color.",
+#			"textButton": "Tertiary color",
+#			"buttonDesc": "Change the tertiary color of your skin",
+#			"options": [[1, "Select", "Pick this color"]],
+#			"type": "color",
+#			"currentColor": pickedSkinBColor,
+#		},
 	}
 	
 func applyAttribute(_attrID: String, _attrValue):
@@ -743,6 +699,14 @@ func applyAttribute(_attrID: String, _attrValue):
 		pickedFemininity = _attrValue
 	if(_attrID == "thickness"):
 		pickedThickness = _attrValue
+	if(_attrID == "skin"):
+		pickedSkin = _attrValue
+	if(_attrID == "skinPrimaryColor"):
+		pickedSkinRColor = _attrValue
+	if(_attrID == "skinSecondaryColor"):
+		pickedSkinGColor = _attrValue
+	if(_attrID == "skinTertiaryColor"):
+		pickedSkinBColor = _attrValue
 
 func getAttributesText():
 	return [
@@ -1000,3 +964,5 @@ func giveBirth():
 		GM.main.addMessage("AlphaCorp has transferred "+str(paycheck)+" credits to you for being a good mother.")
 	
 	return bornChildren
+
+

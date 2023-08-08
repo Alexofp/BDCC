@@ -211,3 +211,10 @@ func _on_AutoTranslatorMenu_onClosePressed():
 func _on_AutoTranslatorButton_pressed():
 	hideAllMenus()
 	autoTranslatorMenu.visible = true
+
+
+func _on_SexActivityCreator_pressed():
+	Util.delete_children(devSubScreen)
+	
+	var scene = load("res://Util/SexActivityCreator/SexActivityCreator.tscn")
+	devSubScreen.add_child(scene.instance())

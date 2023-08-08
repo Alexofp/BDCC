@@ -7,6 +7,16 @@ func _init():
 	npcBasePain = 120
 	npcCharacterType = CharacterType.Nurse
 	
+	pickedSkin="ArconSkin"
+	pickedSkinRColor=Color("fffee5c2")
+	pickedSkinGColor=Color("fffff4f5")
+	pickedSkinBColor=Color("ffd39666")
+	npcSkinData={
+	"head": {"skin": "LynxSkin",},
+	"hair": {"r": Color("ffd6aac7"),"g": Color("fff1c0e0"),"b": Color("ff46460d"),},
+	"ears": {"g": Color("ffdb6b74"),},
+	}
+	
 	npcLustInterests = {
 		InterestTopic.Bodywritings: Interest.Loves,
 		InterestTopic.Gags: Interest.ReallyLikes,

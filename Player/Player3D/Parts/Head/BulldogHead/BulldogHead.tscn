@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://Player/Player3D/Parts/PartState.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Player/Player3D/Parts/PartStatePicker.tscn" type="PackedScene" id=2]
@@ -10,6 +10,9 @@
 [ext_resource path="res://Player/Player3D/Parts/Head/BulldogHead/bulldog_mouth.png" type="Texture" id=8]
 [ext_resource path="res://Player/Player3D/Parts/Head/BulldogHead/bulldog_ringag.png" type="Texture" id=9]
 [ext_resource path="res://Player/Player3D/Parts/Head/BulldogHead/bulldog_ballgag.png" type="Texture" id=10]
+[ext_resource path="res://Player/Player3D/Parts/MeshWithPattern.gd" type="Script" id=11]
+[ext_resource path="res://Player/Player3D/Parts/Head/BulldogHead/bulldog_ballgag_overlay.png" type="Texture" id=12]
+[ext_resource path="res://Player/Player3D/Parts/Head/BulldogHead/bulldog_ringag_overlay.png" type="Texture" id=13]
 
 [sub_resource type="SpatialMaterial" id=6]
 resource_name = "headfox.png"
@@ -236,13 +239,7 @@ bind/21/pose = Transform( 0.486096, -0.873925, 4.58786e-07, -0.874017, -0.486062
 
 [node name="BulldogHead" instance=ExtResource( 3 )]
 
-[node name="headfoxpng" type="MeshInstance" parent="." index="0"]
-visible = false
-mesh = SubResource( 7 )
-skin = SubResource( 8 )
-material/0 = SubResource( 6 )
-
-[node name="PartStatePicker2" parent="." index="1" instance=ExtResource( 2 )]
+[node name="PartStatePicker2" parent="." index="0" instance=ExtResource( 2 )]
 state = "mouth"
 
 [node name="PartState" parent="PartStatePicker2" index="0" instance=ExtResource( 1 )]
@@ -251,6 +248,9 @@ state = "mouth"
 mesh = SubResource( 7 )
 skin = SubResource( 8 )
 material/0 = SubResource( 17 )
+script = ExtResource( 11 )
+pattern_start = Vector2( 2, 0 )
+bodypartSlot = "head"
 
 [node name="PartState2" parent="PartStatePicker2" index="1" instance=ExtResource( 1 )]
 visible = false
@@ -260,6 +260,10 @@ stateValue = "ballgag"
 mesh = SubResource( 7 )
 skin = SubResource( 8 )
 material/0 = SubResource( 18 )
+script = ExtResource( 11 )
+pattern_start = Vector2( 2, 0 )
+bodypartSlot = "head"
+customOverlay = ExtResource( 12 )
 
 [node name="PartState3" parent="PartStatePicker2" index="2" instance=ExtResource( 1 )]
 visible = false
@@ -269,6 +273,10 @@ stateValue = "ringgag"
 mesh = SubResource( 7 )
 skin = SubResource( 8 )
 material/0 = SubResource( 19 )
+script = ExtResource( 11 )
+pattern_start = Vector2( 2, 0 )
+bodypartSlot = "head"
+customOverlay = ExtResource( 13 )
 
 [node name="PartState4" parent="PartStatePicker2" index="3" instance=ExtResource( 1 )]
 visible = false
@@ -278,8 +286,11 @@ stateValue = "open"
 mesh = SubResource( 7 )
 skin = SubResource( 8 )
 material/0 = SubResource( 20 )
+script = ExtResource( 11 )
+pattern_start = Vector2( 2, 0 )
+bodypartSlot = "head"
 
-[node name="PartStatePicker" parent="." index="2" instance=ExtResource( 2 )]
+[node name="PartStatePicker" parent="." index="1" instance=ExtResource( 2 )]
 state = "muzzle"
 
 [node name="PartState" parent="PartStatePicker" index="0" instance=ExtResource( 1 )]
@@ -293,7 +304,7 @@ mesh = SubResource( 10 )
 skin = SubResource( 12 )
 skeleton = NodePath("../../..")
 
-[node name="AttachmentProxy" parent="." index="3" instance=ExtResource( 4 )]
+[node name="AttachmentProxy" parent="." index="2" instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.136, 7.357, 0.05 )
 boneId = "Head"
 zoneName = "blindfold"

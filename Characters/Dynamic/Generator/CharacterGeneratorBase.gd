@@ -58,6 +58,9 @@ func pickSpecies(character:DynamicCharacter, _args = {}):
 	
 	character.npcSpecies = [randomSpecies]
 
+func pickSkinAndColors(character:DynamicCharacter, _args = {}):
+	character.applyRandomSkinAndColors()
+
 func createBodyparts(character:DynamicCharacter, _args = {}):
 	var theSpecies = character.npcSpecies
 	for bodypartSlot in BodypartSlot.getAll():
@@ -153,6 +156,8 @@ func pickFetishes(character:DynamicCharacter, _args = {}):
 			fetishHolder.setFetish(fetishID, RNG.pick([FetishInterest.Dislikes, FetishInterest.SlightlyDislikes, FetishInterest.SlightlyLikes]))
 		elif(RNG.chance(5)):
 			fetishHolder.setFetish(fetishID, RNG.pick([FetishInterest.Hates, FetishInterest.Loves]))
+		else:
+			fetishHolder.setFetish(fetishID, FetishInterest.Neutral)
 		
 	for archetype in character.npcArchetypes:
 		var fetishes = CharacterArchetype.getFetishes(archetype)
@@ -323,21 +328,23 @@ func getRandomItemIDByTag(itemTag):
 		
 func generate(_args = {}):
 	var character = makeBase("dynamicnpc", _args)
+	# If the function relies on something, it must be below the function that generates that something!
 	pickCharacterType(character, _args)
 	pickGender(character, _args)
-	pickBodyAttributes(character, _args)
-	pickName(character, _args)
-	pickSpecies(character, _args)
+	pickBodyAttributes(character, _args) # Relies on gender
+	pickName(character, _args) # Relies on gender
+	pickSpecies(character, _args) # Relies on character type
+	pickSkinAndColors(character, _args) # Relies on species
 	pickLevel(character, _args)
-	pickStats(character, _args)
+	pickStats(character, _args) # Relies on level
 	pickArchetypes(character, _args)
-	pickFetishes(character, _args)
-	pickLustInterests(character, _args)
-	createBodyparts(character, _args)
+	createBodyparts(character, _args) # Relies on gender and species
 	pickAttacks(character, _args)
+	pickFetishes(character, _args) # Relies on bodyparts
+	pickLustInterests(character, _args)
 	pickPersonality(character, _args)
-	applyArgs(character, _args)
-	pickEquipment(character, _args)
+	applyArgs(character, _args) # Relies on fetishes and personality
+	pickEquipment(character, _args) # Relies on character type
 	character.npcSmallDescription = pickSmallDescription(character, _args)
 	
 	character.resetEquipment()

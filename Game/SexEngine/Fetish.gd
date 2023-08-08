@@ -27,3 +27,9 @@ const Exhibitionism = "Exhibitionism"
 
 const Bondage = "Bondage"
 const Rigging = "Rigging"
+
+const RimmingGiving = "RimmingGiving"
+const RimmingReceiving = "RimmingReceiving"
+
+const FeetplayGiving = "FeetplayGiving"
+const FeetplayReceiving = "FeetplayReceiving"

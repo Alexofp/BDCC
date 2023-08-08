@@ -29,8 +29,7 @@ func _doAttack(_attacker, _receiver, _context = {}):
 	
 	var text = "{attacker.name} lunges forward with lightning speed, delivering a powerful series of strikes on {receiver.name}'s body."
 	
-	if(RNG.chance(30)):
-		_receiver.addEffect(StatusEffect.Bleeding)
+	if(RNG.chance(30) && _receiver.addEffect(StatusEffect.Bleeding)):
 		text += " Sharp claws caused {receiver.name} to start [color=red]bleeding[/color]."
 	return {
 		text = text,

@@ -6,6 +6,8 @@ var pickedAttribID = ""
 var bodyPickedAttribID = ""
 var debugMode = false
 
+var colorPickerScene = preload("res://UI/ColorPickerWidget.tscn")
+
 func _initScene(_args = []):
 	if(_args.size() > 0 && _args[0]):
 		debugMode = true
@@ -67,6 +69,9 @@ func _run():
 	if(state == "pickedspecies"):
 		playAnimation(StageScene.Solo, "stand", {bodyState={naked=true,hard=true}})
 		
+		if(debugMode):
+			saynn("[b]Scene is running in debug mode, no bodypart restrictions are applied[/b]")
+		
 		say("You are a "+GM.pc.getSpeciesFullName())
 		say("\n----\n")
 		
@@ -79,7 +84,7 @@ func _run():
 				continue
 			
 			var bodypart = bodyparts[slot]
-			say(slotName+": "+bodypart.getName().capitalize())
+			say(slotName+": "+bodypart.getCharacterCreatorName().capitalize())
 			#var extra = bodypart.getExtraInfoCreation()
 			#if(extra!=""):
 			#	say(" (" + extra + ")")
@@ -130,7 +135,7 @@ func _run():
 		if(GM.pc.hasBodypart(pickingBodypartType)):
 			var bodypart = GM.pc.getBodypart(pickingBodypartType)
 			
-			sayn("Currently selected: "+bodypart.getName())
+			sayn("Currently selected: "+bodypart.getCharacterCreatorName())
 			for curAttrib in bodypart.getAttributesText():
 				sayn(curAttrib[0]+": "+str(curAttrib[1]))
 			
@@ -150,7 +155,7 @@ func _run():
 			var bodypart = GlobalRegistry.getBodypartRef(bodypartID)
 			var supportedSpecies = bodypart.getCompatibleSpecies()
 			
-			var hasInSupported = false
+			var hasInSupported = false || debugMode
 			var hasInAllowed = false
 			
 			for supported in supportedSpecies:
@@ -173,7 +178,7 @@ func _run():
 		var bodypart = GM.pc.getBodypart(pickingBodypartType)
 		var attributes = bodypart.getPickableAttributes()
 		
-		saynn("Change the attributes of "+bodypart.getName())
+		saynn("Change the attributes of "+bodypart.getCharacterCreatorName())
 		for curAttrib in bodypart.getAttributesText():
 			sayn(curAttrib[0]+": "+str(curAttrib[1]))
 		
@@ -189,6 +194,13 @@ func _run():
 		var currentAttribute = attributes[pickedAttribID]
 		
 		saynn(currentAttribute["text"])
+		if(currentAttribute.has("type")):
+			var attribType = currentAttribute["type"]
+			if(attribType == "color"):
+				var colorPicker = colorPickerScene.instance()
+				GM.ui.addCustomControl("colorpicker", colorPicker)
+				if(currentAttribute.has("currentColor") && currentAttribute["currentColor"] != null):
+					colorPicker.setCurrentColor(currentAttribute["currentColor"])
 		
 		for option in currentAttribute["options"]:
 			addButton(option[1], option[2], "setAttribute", [option[0]])
@@ -203,6 +215,7 @@ func _run():
 			sayn(curAttrib[0]+": "+str(curAttrib[1]))
 		
 		addButton("Done", "You're done changing attributes", "pickedspecies")
+		addButton("Skin/Colors", "Change how you look", "startskinmenu")
 		
 		for attributeID in attributes:
 			var attribute = attributes[attributeID]
@@ -217,7 +230,7 @@ func _run():
 			var bodypartAttributes = bodypart.getPickableAttributes()
 			if(bodypartAttributes.size() == 0):
 				continue
-			addButton(bodypart.getName().capitalize()+" attributes", "Change the attributes of this bodypart", "openBodypartAttributes", [slot])
+			addButton(bodypart.getCharacterCreatorName().capitalize()+" attributes", "Change the attributes of this bodypart", "openBodypartAttributes", [slot])
 			
 
 	if(state == "bodyAttributeMenu"):
@@ -225,6 +238,13 @@ func _run():
 		var currentAttribute = attributes[bodyPickedAttribID]
 		
 		saynn(currentAttribute["text"])
+		if(currentAttribute.has("type")):
+			var attribType = currentAttribute["type"]
+			if(attribType == "color"):
+				var colorPicker = colorPickerScene.instance()
+				GM.ui.addCustomControl("colorpicker", colorPicker)
+				if(currentAttribute.has("currentColor")):
+					colorPicker.setCurrentColor(currentAttribute["currentColor"])
 		
 		for option in currentAttribute["options"]:
 			addButton(option[1], option[2], "bodySetAttribute", [option[0]])
@@ -256,10 +276,16 @@ func _react(_action: String, _args):
 	if(_action == "setAttribute"):
 		var pickedValue = _args[0]
 		var bodypart = GM.pc.getBodypart(pickingBodypartType)
-		#var attributes = bodypart.getPickableAttributes()
-		#var currentAttribute = attributes[pickedAttribID]
+		var attributes = bodypart.getPickableAttributes()
+		var currentAttribute = attributes[pickedAttribID]
 		
-		bodypart.applyAttribute(pickedAttribID, pickedValue)
+		if(currentAttribute.has("type") && currentAttribute["type"] == "color" && pickedValue == 1):
+			var colorPicker = GM.ui.getCustomControl("colorpicker")
+			bodypart.applyAttribute(pickedAttribID, colorPicker.getCurrentColor())
+		else:
+			bodypart.applyAttribute(pickedAttribID, pickedValue)
+		
+		#bodypart.applyAttribute(pickedAttribID, pickedValue)
 		GM.pc.updateAppearance()
 		setState("bodypartAttributes")
 		return
@@ -270,8 +296,14 @@ func _react(_action: String, _args):
 	
 	if(_action == "bodySetAttribute"):
 		var pickedValue = _args[0]
+		var attributes = GM.pc.getPickableAttributes()
+		var currentAttribute = attributes[bodyPickedAttribID]
 		
-		GM.pc.applyAttribute(bodyPickedAttribID, pickedValue)
+		if(currentAttribute.has("type") && currentAttribute["type"] == "color" && pickedValue == 1):
+			var colorPicker = GM.ui.getCustomControl("colorpicker")
+			GM.pc.applyAttribute(bodyPickedAttribID, colorPicker.getCurrentColor())
+		else:
+			GM.pc.applyAttribute(bodyPickedAttribID, pickedValue)
 		GM.pc.updateAppearance()
 		setState("bodyAttributes")
 		return
@@ -315,6 +347,10 @@ func _react(_action: String, _args):
 	
 	if(_action == "endthescene" || _action == "donecreating"):
 		endScene()
+		return
+	
+	if(_action == "startskinmenu"):
+		runScene("ChangeSkinScene")
 		return
 
 	setState(_action)

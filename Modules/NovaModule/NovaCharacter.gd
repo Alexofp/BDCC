@@ -3,6 +3,16 @@ extends Character
 func _init():
 	id = "nova"
 	
+	pickedSkin="NovaSkin"
+	pickedSkinRColor=Color("ffc5c4c4")
+	pickedSkinGColor=Color("ff414241")
+	pickedSkinBColor=Color("ff747474")
+	npcSkinData={
+	"hair": {"r": Color("ffd9d9d9"),"g": Color("ff0f5fdb"),"b": Color("ff0f5fdb"),},
+	"ears": {"r": Color("ff737373"),"g": Color("ffb5b5b5"),"b": Color("ffb8b8b8"),},
+	"penis": {"g": Color("ffd12020"),"b": Color("ff8b0000"),},
+	}
+	
 	npcArmor = {
 		DamageType.Physical: 10,
 	}

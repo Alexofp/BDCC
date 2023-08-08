@@ -234,6 +234,13 @@ func addPerk(perkID):
 	newperk.setCharacter(npc)
 	perks[perkID] = newperk
 
+func removePerk(perkID):
+	if(!hasPerk(perkID)):
+		return
+	
+	perks[perkID].npc = null
+	perks.erase(perkID)
+	
 func getPerkPoints(skillID):
 	if(!skills.has(skillID)):
 		return 0

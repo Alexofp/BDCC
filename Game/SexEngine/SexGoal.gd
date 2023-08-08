@@ -7,6 +7,7 @@ const FuckOral = "FuckOral"
 const ReceiveVaginal = "ReceiveVaginal"
 const ReceiveAnal = "ReceiveAnal"
 const DoOralOnSub = "DoOralOnSub"
+const DoFeetplay = "DoFeetplay"
 const Tribadism = "Tribadism"
 const StraponVaginal = "StraponVaginal"
 const StraponAnal = "StraponAnal"
@@ -14,6 +15,9 @@ const ReceiveStraponVaginal = "ReceiveStraponVaginal"
 const ReceiveStraponAnal = "ReceiveStraponAnal"
 
 const TieUp = "TieUp"
+
+const RimSub = "RimSub"
+const RimmingReceive = "RimmingReceive"
 
 
 # Subgoals, these don't need classes defined

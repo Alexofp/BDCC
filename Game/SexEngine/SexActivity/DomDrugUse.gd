@@ -39,69 +39,11 @@ func getSubTags():
 
 func getPossibleDrugsInfo(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexSubInfo):
 	var thedrugs = {}
-	var sub:BaseCharacter = _subInfo.getChar()
-	var dom:BaseCharacter = _domInfo.getChar()
+	for itemID in GlobalRegistry.getItemIDsByTag(ItemTag.SexEngineDrug):
+		var item = GlobalRegistry.getItemRef(itemID)
+		if(item.has_method("getSexEngineInfo")):
+			thedrugs[itemID] = item.getSexEngineInfo(_sexEngine, _domInfo, _subInfo)
 	
-	thedrugs["painkillers"] = {
-		"name": "Painkillers",
-		"usedName": "a painkiller pill",
-		"desc": "Helps with the pain.",
-		"scoreOnSub": 0.0,
-		"scoreOnSelf": float(_domInfo.getChar().getPainLevel() >= 0.5),
-		"scoreSubScore": 1.0,
-		"canUseOnDom": true,
-		"canUseOnSub": true,
-		"maxUsesByNPC": 1,
-	}
-	
-	thedrugs["HeatPill"] = {
-		"name": "Heat pill",
-		"usedName": "a heat-inducing pill",
-		"desc": "Makes you very horny and primes for breeding by forcing heat.",
-		"scoreOnSub": _domInfo.goalsScoreMax({SexGoal.FuckVaginal: 1.0, SexGoal.FuckAnal: 0.5}, _subInfo.charID)*_domInfo.fetishScore({Fetish.Breeding: 1.0}),
-		"scoreOnSelf": _domInfo.goalsScoreMax({SexGoal.ReceiveVaginal: 1.0, SexGoal.ReceiveAnal: 0.5}, _subInfo.charID)*_domInfo.fetishScore({Fetish.BeingBred: 1.0}),
-		"scoreSubScore": _subInfo.fetishScore({Fetish.BeingBred: 1.0}),
-		"canUseOnDom": !dom.hasEffect(StatusEffect.SexHeatDrug),
-		"canUseOnSub": !sub.hasEffect(StatusEffect.SexHeatDrug),
-		"maxUsesByNPC": 1,
-	}
-
-	thedrugs["BreederPill"] = {
-		"name": "Breeder pill",
-		"usedName": "a breeder pill",
-		"desc": "Makes you more fertile and your cum more virile.",
-		"scoreOnSub": _domInfo.goalsScoreMax({SexGoal.ReceiveVaginal: 1.0, SexGoal.ReceiveAnal: 0.2}, _subInfo.charID)*_domInfo.fetishScore({Fetish.BeingBred: 1.0}),
-		"scoreOnSelf": _domInfo.goalsScoreMax({SexGoal.FuckVaginal: 1.0, SexGoal.FuckAnal: 0.2}, _subInfo.charID)*_domInfo.fetishScore({Fetish.Breeding: 1.0}),
-		"scoreSubScore": _subInfo.fetishScore({Fetish.Breeding: 1.0}),
-		"canUseOnDom": true,
-		"canUseOnSub": true,
-		"maxUsesByNPC": 1,
-	}
-
-	thedrugs["BirthControlPill"] = {
-		"name": "Birth control pill",
-		"usedName": "a birth control pill",
-		"desc": "Makes you mostly sterile for a while.",
-		"scoreOnSub": _domInfo.goalsScoreMax({SexGoal.FuckVaginal: 1.0, SexGoal.FuckAnal: 0.1}, _subInfo.charID)*_domInfo.fetishScore({Fetish.Breeding: -1.0}),
-		"scoreOnSelf": _domInfo.goalsScoreMax({SexGoal.ReceiveVaginal: 1.0, SexGoal.ReceiveAnal: 0.1}, _subInfo.charID)*_domInfo.fetishScore({Fetish.BeingBred: -1.0}),
-		"scoreSubScore": _subInfo.fetishScore({Fetish.BeingBred: -1.0}),
-		"canUseOnDom": true,
-		"canUseOnSub": true,
-		"maxUsesByNPC": 1,
-	}
-
-	thedrugs["AnaphrodisiacPill"] = {
-		"name": "Anaphrodisiac pill",
-		"usedName": "an anaphrodisiac pill",
-		"desc": "Kills your libido. Use it if you want to ruin the sex for them.",
-		"scoreOnSub": 0.0,
-		"scoreOnSelf": 0.0,
-		"scoreSubScore": 0.0,
-		"canUseOnDom": !dom.hasEffect(StatusEffect.SexAnaphrodisiacDrug),
-		"canUseOnSub": !sub.hasEffect(StatusEffect.SexAnaphrodisiacDrug),
-		"maxUsesByNPC": 1,
-	}
-
 	return thedrugs
 	
 func getDrugInfo(itemID):
