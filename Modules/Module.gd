@@ -16,6 +16,7 @@ var statusEffects = []
 var worldEdits = []
 var gameExtenders = []
 var computers = []
+var partSkins = []
 
 var id = "badmodule"
 var author = "no author"
@@ -66,6 +67,9 @@ func register():
 	
 	for computer in computers:
 		GlobalRegistry.registerComputer(computer)
+
+	for partSkin in partSkins:
+		GlobalRegistry.registerPartSkin(partSkin)
 
 func registerEventTriggers():
 	pass
