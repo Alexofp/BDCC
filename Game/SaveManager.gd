@@ -87,7 +87,8 @@ func saveGameRelative(_name):
 func loadGame(_path):
 	var save_game = File.new()
 	if not save_game.file_exists(_path):
-		assert(false, "Save file is not found in "+str(_path))
+		Log.error("Save file is not found in "+str(_path))
+		#assert(false, "Save file is not found in "+str(_path))
 		return # Error! We don't have a save to load.
 	
 	save_game.open(_path, File.READ)
@@ -177,6 +178,27 @@ func makeQuickSave():
 
 func loadQuickSave():
 	loadGame("user://saves/quicksave.save")
+
+var isAutoSaving = false
+func triggerAutosave():
+	if(isAutoSaving):
+		return
+	if(!OPTIONS.shouldAutosave()):
+		return
+		
+	isAutoSaving = true
+	# To make sure we're not in a middle of calculating something
+	yield(get_tree().create_timer(0.1), "timeout")
+	if(GM.main == null || GM.pc == null):
+		isAutoSaving = false
+		return
+	saveGame("user://saves/autosave_"+Util.stripBadFilenameCharacters(GM.pc.getName())+".save")
+	if(GM.ui != null):
+		GM.ui.say("\n\n")
+		GM.ui.say("[center][i]")
+		GM.ui.say("Autosave completed")
+		GM.ui.say("[/i][/center]\n")
+	isAutoSaving = false
 
 func getAllSavePaths():
 	var saves = []

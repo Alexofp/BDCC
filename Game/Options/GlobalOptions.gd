@@ -44,6 +44,8 @@ var jigglePhysicsGlobalModifier = 1.0
 
 var advancedShadersEnabled = true
 
+var autosaveEnabled = true
+
 func resetToDefaults():
 	fetchNewRelease = true
 	menstrualCycleLengthDays = 7
@@ -74,6 +76,7 @@ func resetToDefaults():
 	jigglePhysicsButtEnabled = true
 	jigglePhysicsGlobalModifier = 1.0
 	advancedShadersEnabled = true
+	autosaveEnabled = true
 	
 	enabledContent.clear()
 	for contentType in ContentType.getAll():
@@ -172,6 +175,9 @@ func getJigglePhysicsGlobalModifier():
 
 func shouldUseAdvancedShaders():
 	return advancedShadersEnabled
+
+func shouldAutosave():
+	return autosaveEnabled
 
 func getChangeableOptions():
 	var settings = [
@@ -301,6 +307,19 @@ func getChangeableOptions():
 					],
 				},
 			]
+		},
+		{
+			"name": "Saves",
+			"id": "saves",
+			"options": [
+				{
+					"name": "Autosave after sleep",
+					"description": "Should the game save automatically when you sleep",
+					"id": "autosaveEnabled",
+					"type": "checkbox",
+					"value": autosaveEnabled,
+				}
+			],
 		},
 		{
 			"name": "Other",
@@ -516,6 +535,10 @@ func applyOption(categoryID, optionID, value):
 		if(optionID == "jigglePhysicsGlobalModifier"):
 			jigglePhysicsGlobalModifier = value
 
+	if(categoryID == "saves"):
+		if(optionID == "autosaveEnabled"):
+			autosaveEnabled = value
+
 	if(categoryID == "modding"):
 		if(optionID == "showModdedLauncher"):
 			showModdedLauncher = value
@@ -631,6 +654,7 @@ func saveData():
 		"jigglePhysicsButtEnabled": jigglePhysicsButtEnabled,
 		"jigglePhysicsGlobalModifier": jigglePhysicsGlobalModifier,
 		"advancedShadersEnabled": advancedShadersEnabled,
+		"autosaveEnabled": autosaveEnabled,
 	}
 	
 	return data
@@ -666,6 +690,7 @@ func loadData(data):
 	jigglePhysicsButtEnabled = loadVar(data, "jigglePhysicsButtEnabled", true)
 	jigglePhysicsGlobalModifier = loadVar(data, "jigglePhysicsGlobalModifier", 1.0)
 	advancedShadersEnabled = loadVar(data, "advancedShadersEnabled", true)
+	autosaveEnabled = loadVar(data, "autosaveEnabled", true)
 
 func saveToFile():
 	var saveData = saveData()

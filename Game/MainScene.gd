@@ -586,6 +586,8 @@ func startNewDay():
 	
 	doTimeProcess(timediff)
 	
+	SAVE.triggerAutosave()
+	
 	return timediff
 
 func getVisibleTime():
