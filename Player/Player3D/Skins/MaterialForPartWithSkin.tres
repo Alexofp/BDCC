@@ -51,11 +51,13 @@ void fragment() {
 	albedo_tex.rgb = mix(albedo_tex.rgb, overlay_tex.rgb, overlay_tex.a);//overlay_tex.rgb * overlay_tex.a + albedo_tex.rgb*(1.0 - overlay_tex.a);
 	albedo_tex.a = max(albedo_tex.a, overlay_tex.a);
 	
-	for (int i = 0;i<cum_amount;i++)
+	for (int i = 1;i<=5;i++)
 	{
-		float fi = float(i*i) / 10.0;
-		vec4 cum_tex = cum_color * texture(texture_cumOverlay, vec2(fi, fi) + (base_uv * pattern_size) * cum_scale - vec2(random_shift, TIME + sin(TIME))/300.0);
-		albedo_tex.rgb = mix(albedo_tex.rgb, cum_tex.rgb, cum_tex.a * cum_transparency);
+		if(i <= cum_amount){
+			float fi = float(i*i) / 10.0;
+			vec4 cum_tex = cum_color * texture(texture_cumOverlay, vec2(fi, fi) + (base_uv * pattern_size) * cum_scale - vec2(random_shift, TIME + sin(TIME))/300.0);
+			albedo_tex.rgb = mix(albedo_tex.rgb, cum_tex.rgb, cum_tex.a * cum_transparency);
+		}
 	}
 
 	ALBEDO = albedo.rgb * albedo_tex.rgb;

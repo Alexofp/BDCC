@@ -1811,6 +1811,7 @@ func _react(_action: String, _args):
 		processTime(5*60)
 		setFlag("TaviModule.Ch5BlackmailedNova", true)
 		setFlag("NovaModule.Nova_NotThereToday", true)
+		setFlag("TaviModule.Ch5StoleDatapadFromNova", true)
 
 	if(_action == "do_feet_cum"):
 		processTime(3*60)
