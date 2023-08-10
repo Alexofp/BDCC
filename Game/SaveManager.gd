@@ -46,10 +46,11 @@ func loadData(data: Dictionary):
 		GM.main.overridePC()
 		GM.main.getOverriddenPC().loadData(data["player_override"])
 	
+	# I should do all of this inside GM.main.loadData()
+	GM.main.loadDynamicCharactersData(SAVE.loadVar(data, "dynamicCharacters", {}))
 	GM.main.loadData(SAVE.loadVar(data, "main", {}))
 	GM.main.updateStaticCharacters()
 	GM.main.loadCharactersData(SAVE.loadVar(data, "characters", {}))
-	GM.main.loadDynamicCharactersData(SAVE.loadVar(data, "dynamicCharacters", {}))
 	
 	# post loading refresh
 	GM.main.loadingSavefileFinished()
