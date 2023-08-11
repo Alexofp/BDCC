@@ -23,18 +23,29 @@ func _run():
 			var skillInfo = taviModule.getSkillInfo(skillID)
 			if(skillInfo == null):
 				continue
+			if(!taviModule.canTrainSkill(skillID)):
+				continue
+			
 			sayn(skillInfo["name"]+": "+str(taviModule.getSkillScoreText(skillID)))
 		sayn("")
 		
-		saynn("( Tavi's lewd content is not yet fully completed, sowwy )")
 		
 		addDisabledButton("Final Attack", "(not implemented yet :( ) Use everything that you and Tavi learned to prepare the last attack.\n\nTavi's corruption needs to be either 0% or 200%")
 		if(getFlag("TaviModule.Ch6Tiredness", 0) >= 3):
 			addDisabledButton("Train", "Tavi is too tired")
+			addDisabledButton("Activities", "Tavi is too tired")
 		else:
 			addButton("Train", "Train one of Tavi's skills", "train_menu")
+			addButton("Activities", "See what you can do with Tavi", "activities_menu")
+		
 		
 		addButton("Leave", "Enough talking", "endthescene")
+		
+	if(state == "activities_menu"):
+		saynn("What do you wanna do with Tavi?")
+		
+		addButton("Shower", "Take a shower with Tavi", "do_activity", ["Ch6TaviShowerScene"])
+		addButton("Back", "Back to the previous menu", "")
 		
 	if(state == "train_menu"):
 		saynn("Which skill do you wanna train?")
@@ -44,6 +55,8 @@ func _run():
 			var skillInfo = taviModule.getSkillInfo(skillID)
 			if(skillInfo == null):
 				continue
+			if(!taviModule.canTrainSkill(skillID)):
+				continue
 			sayn(" - "+skillInfo["name"]+": "+str(taviModule.getSkillScoreText(skillID)))
 			sayn(skillInfo["desc"])
 		sayn("")
@@ -52,7 +65,8 @@ func _run():
 			var skillInfo = taviModule.getSkillInfo(skillID)
 			if(skillInfo == null):
 				continue
-			
+			if(!taviModule.canTrainSkill(skillID)):
+				continue
 			addButton(skillInfo["name"], skillInfo["desc"], "do_skill", [skillInfo])
 		
 		addButton("Back", "Go back", "")
@@ -67,6 +81,12 @@ func _react(_action: String, _args):
 		setState("")
 		increaseFlag("TaviModule.Ch6Tiredness", 1)
 		runScene(_args[0]["scene"])
+		return
+
+	if(_action == "do_activity"):
+		setState("")
+		increaseFlag("TaviModule.Ch6Tiredness", 1)
+		runScene(_args[0])
 		return
 
 	setState(_action)

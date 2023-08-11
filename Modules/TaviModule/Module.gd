@@ -115,6 +115,7 @@ func getFlags():
 		
 		"taviSkillCombat": flag(FlagType.Number),
 		"taviSkillSex": flag(FlagType.Number),
+		"taviSkillWatersports": flag(FlagType.Number),
 	}
 
 func _init():
@@ -185,6 +186,8 @@ func _init():
 		"res://Modules/TaviModule/Chapter6/CorruptionScenes/Ch6TaviCorruption150Scene.gd",
 		"res://Modules/TaviModule/Chapter6/CorruptionScenes/Ch6TaviCorruption175Scene.gd",
 		"res://Modules/TaviModule/Chapter6/CorruptionScenes/Ch6TaviCorruption200Scene.gd",
+		
+		"res://Modules/TaviModule/Chapter6/Activities/Ch6TaviShowerScene.gd",
 		]
 	characters = [
 		"res://Modules/TaviModule/Chapter4/DirectorTau.gd",
@@ -264,7 +267,7 @@ static func trustsPC():
 	return !GM.main.getModuleFlag("TaviModule", "Tavi_IsAngryAtPlayer", false) && GM.main.getModuleFlag("TaviModule", "Tavi_IntroducedTo", false)
 
 func getAllSkills():
-	return ["taviSkillCombat", "taviSkillSex"]
+	return ["taviSkillCombat", "taviSkillSex", "taviSkillWatersports"]
 
 func getSkillInfo(skillID):
 	if(skillID == "taviSkillCombat"):
@@ -279,8 +282,21 @@ func getSkillInfo(skillID):
 			desc = "Allowing Tavi to enjoy all the sex that she missed",
 			scene = "Ch6TaviSexSkillScene",
 		}
+	if(skillID == "taviSkillWatersports"):
+		return {
+			name = "Watersports",
+			desc = "Training Tavi to enjoy pee",
+			scene = "Ch6TaviSexSkillScene",
+		}
 	
 	return null
+
+func canTrainSkill(skillID):
+	if(skillID == "taviSkillWatersports"):
+		if(!OPTIONS.isContentEnabled(ContentType.Watersports)):
+			return false
+	
+	return true
 
 # F D C B A S S+ S++
 # 0 1 2 3 4 5 6  7
