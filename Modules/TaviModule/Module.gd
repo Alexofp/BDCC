@@ -177,6 +177,8 @@ func _init():
 		
 		"res://Modules/TaviModule/Chapter6/Skills/Ch6TaviCombatSkillScene.gd",
 		"res://Modules/TaviModule/Chapter6/Skills/Ch6TaviSexSkillScene.gd",
+		"res://Modules/TaviModule/Chapter6/Skills/Ch6TaviMasochismSkillScene.gd",
+		"res://Modules/TaviModule/Chapter6/MasochismMinigame/TaviMasochismScene.gd",
 		
 		"res://Modules/TaviModule/Chapter6/CorruptionScenes/Ch6TaviCorruption75Scene.gd",
 		"res://Modules/TaviModule/Chapter6/CorruptionScenes/Ch6TaviCorruption50Scene.gd",
@@ -267,7 +269,7 @@ static func trustsPC():
 	return !GM.main.getModuleFlag("TaviModule", "Tavi_IsAngryAtPlayer", false) && GM.main.getModuleFlag("TaviModule", "Tavi_IntroducedTo", false)
 
 func getAllSkills():
-	return ["taviSkillCombat", "taviSkillSex", "taviSkillWatersports"]
+	return ["taviSkillCombat", "taviSkillSex", "taviSkillMasochism", "taviSkillWatersports"]
 
 func getSkillInfo(skillID):
 	if(skillID == "taviSkillCombat"):
@@ -281,6 +283,12 @@ func getSkillInfo(skillID):
 			name = "Sex",
 			desc = "Allowing Tavi to enjoy all the sex that she missed",
 			scene = "Ch6TaviSexSkillScene",
+		}
+	if(skillID == "taviSkillMasochism"):
+		return {
+			name = "Masochism",
+			desc = "Training Tavi to endure pain better",
+			scene = "Ch6TaviMasochismSkillScene",
 		}
 	if(skillID == "taviSkillWatersports"):
 		return {
