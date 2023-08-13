@@ -6,7 +6,6 @@ func _init():
 	sceneID = "TaviMasochismScene"
 	
 	minigame = preload("res://Modules/TaviModule/Chapter6/MasochismMinigame/MasochismMinigame.gd").new()
-	minigame.setChar("tavi")
 
 func _run():
 	if(state == ""):
@@ -15,20 +14,50 @@ func _run():
 		
 		saynn("In this minigame you need to bring Tavi's pain to the exact target value using the actions that you have.")
 		
-		saynn("The higher the difficulty, the more actions you have and the harder the minigame is gonna be.")
+		saynn("Depending on the difficulty, you're gonna have access to different actions.")
 		
 		saynn("The minigame is gonna be over after a certain amount of actions or if you hold Tavi's pain above the target pain value for more than one turn.")
 		
 		saynn("Pick the difficulty")
 		#var masochismScore = getModule("TaviModule").getSkillScore("taviSkillMasochism")
-		for _i in range(8): #masochismScore+1
-			addButton(str(_i), "Pick this difficulty", "start", [_i])
+		var difficulties = minigame.getAllDifficulties()
+		for _i in range(difficulties.size()): #masochismScore+1
+			var difficulty = difficulties[_i]
+			addButton(str(_i+1)+". "+difficulty["name"], "Pick this difficulty", "start", [_i])
+	
+	if(state == "failturns"):
+		saynn("You couldn't make Tavi reach the target pain level in the required amount of turns.")
+	if(state == "failsafeword"):
+		saynn("Tavi hisses and signals you that she is in too much pain. You stop before you actually hurt her.")
+		
+	if(state in ["failsafeword", "failturns"]):
+		addButton("Try again", "Reset the minigame", "tryagain")
+		addButton("Give up", "Not worth it", "endthescene")
 	
 	if(state == "playing"):
 		# Show the text of the previous action
+		addButtonAt(13, "Give up", "Not worth it", "")
+		addButtonAt(14, "Try again", "Reset the minigame", "tryagain")
+	
+	if(state == "youwon"):
+		saynn("Success!")
+		
+		# Replace with continue
+		addButton("Try again", "Reset the minigame", "tryagain")
+		addButton("Give up", "Not worth it", "endthescene")
+	
+	if(state in ["playing", "failturns", "failsafeword", "youwon"]):
+		saynn(minigame.getLastText())
+		
+		var animData = minigame.getAnimation()
+		if(animData.size() >= 3):
+			playAnimation(animData[0], animData[1], animData[2])
 		
 		sayn("Target pain: "+str(Util.roundF(minigame.targetPain, 1)))
-		saynn("Tavi's current pain: "+str(Util.roundF(minigame.pain, 1)))
+		sayn("Tavi's current pain: "+str(Util.roundF(minigame.pain, 1)))
+		if(minigame.air > 0):
+			sayn("Tavi's air: "+str((5 - minigame.air)*20)+"%")
+		sayn("")
 		saynn("Actions left: "+str(minigame.actionsLeft))
 		var currentEffects = minigame.getEffectsReadable()
 		if(currentEffects.size() > 0):
@@ -43,8 +72,11 @@ func _run():
 			var action = currentActions[actionID]
 			
 			sayn(action["name"]+": "+action["shortdesc"])
-			addButton(action["name"], action["desc"], "doAction", [actionID])
+			if(state == "playing"):
+				addButton(action["name"], action["desc"], "doAction", [actionID])
 		sayn("")
+	
+
 		
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
@@ -58,6 +90,36 @@ func _react(_action: String, _args):
 
 	if(_action == "doAction"):
 		minigame.doAction(_args[0])
+		if(minigame.shouldEndSuccess):
+			print("shouldEndSuccess")
+			setState("youwon")
+			return
+		if(minigame.shouldEndFail):
+			print("shouldEndFail")
+			setState("failturns")
+			return
+		if(minigame.shouldSafeWord):
+			print("shouldSafeWord")
+			setState("failsafeword")
+		return
+
+	if(_action == "tryagain"):
+		minigame.tryAgain()
+		setState("playing")
 		return
 
 	setState(_action)
+
+
+
+func saveData():
+	var data = .saveData()
+
+	data["minigame"] = minigame.saveData()
+
+	return data
+
+func loadData(data):
+	.loadData(data)
+
+	minigame.loadData(SAVE.loadVar(data, "minigame", {}))
