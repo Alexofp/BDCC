@@ -14,7 +14,9 @@ var actionsLeft = 5
 var shouldSafeWord = false
 var shouldEndSuccess = false
 var shouldEndFail = false
+var shouldEndUnconscious = false
 var isBot = false
+var isPlaying = true
 var state = ""
 var shouldPlayStateOnWin = ""
 var currentDifficulty = {}
@@ -64,8 +66,10 @@ func startDifficulty(theDiff):
 	currentDifficulty = selectedDiff
 	
 	targetPain = 0
+	isPlaying = false
 	while(targetPain <= 0):
 		targetPain = calculateTargetPain()
+	isPlaying = true
 	resetPlayData()
 	
 func resetPlayData():
@@ -135,6 +139,9 @@ func calculateTargetPain():
 		sequence.append(randomAction)
 	
 	targetPain = pain
+	if(targetPain in currentDifficulty["avoidTargets"]):
+		return 0
+	
 	if(!testSequence(sequence)):
 		return 0
 	print(sequence)
@@ -163,7 +170,7 @@ func testSequence(sequence):
 		if(actionID == "FAIL"):
 			return false
 		doAction(actionID)
-		if(shouldSafeWord):
+		if(shouldSafeWord || shouldEndUnconscious):
 			return false
 		_i += 1
 		if(shouldEndSuccess && _i != sequence.size()):
@@ -176,6 +183,8 @@ func hasEffect(effectID):
 
 func doAction(actionID):	
 	var action = allActions[actionID]
+	lastText = RNG.pick(action["messages"])
+	
 	if(!isBot && action.has("animation")):
 		lastAnimation = action["animation"]
 	
@@ -189,7 +198,8 @@ func doAction(actionID):
 		
 		air += addAir
 		if(air >= 5):
-			shouldSafeWord = true
+			#shouldSafeWord = true
+			shouldEndUnconscious = true
 			return
 	elif(air > 0 && (!action.has("noturnusage") || !action["noturnusage"])):
 		air -= 1
@@ -211,6 +221,9 @@ func doAction(actionID):
 				return
 	if(pain < 0):
 		pain = 0
+	
+	doSpecialEffect(actionID)
+	
 	if(hasEffect("highpain") && pain > targetPain):
 		currentEffects["highpain"] = 2
 	
@@ -226,12 +239,14 @@ func doAction(actionID):
 				continue
 			currentEffects[effect[0]] = effect[1]
 
+	if(!noturnuse):
+		actionsLeft -= 1
+
 	if(abs(pain-targetPain) <= 0.1 && !isBot):
 		shouldEndSuccess = true
 		return
 	
 	if(!noturnuse):
-		actionsLeft -= 1
 		if(!isBot):
 			if(actionsLeft <= 0):
 				shouldEndFail = true
@@ -254,28 +269,51 @@ func getAllDifficulties():
 			name = "Light spanks",
 			actions = ["wait", "lightspank"],
 			amountOfActions = 3,
-			winID = "simple",
+			winID = "firstspanks",
 			introText = "You prepare to do some light spanking with Tavi.",
 			isNaked = false,
 			defaultAnimation = [StageScene.Duo, "stand", {npc="tavi"}],
+			avoidTargets = [],
 		},
 		1: {
 			name = "Firm spanks",
 			actions = ["wait", "lightspank", "heavyspank"],
 			amountOfActions = 5,
-			winID = "simple",
+			winID = "firmspanks",
 			introText = "You tell Tavi that you wanna experiment with applying more strength while spanking her.",
 			isNaked = false,
 			defaultAnimation = [StageScene.Duo, "stand", {npc="tavi"}],
+			avoidTargets = [3, 5, 10, 15, 20, 6, 9],
 		},
 		2: {
 			name = "Choking",
 			actions = ["wait", "heavyspank", "startchoke"],
 			amountOfActions = 4,
-			winID = "simple",
+			winID = "afterchoking",
 			introText = "You tell Tavi that you wanna experiment with some breathplay. Gotta be careful not to make her pass out.",
 			isNaked = true,
 			defaultAnimation = [StageScene.Duo, "stand", {npc="tavi"}],
+			avoidTargets = [3, 6, 9, 12, 15, 10, 15, 20, 22, 14],
+		},
+		3: {
+			name = "Temperature play",
+			actions = ["wait", "lightspank", "pourvax", "ice"],
+			amountOfActions = 5,
+			winID = "afterwax",
+			introText = "You find some wax candles and ice cubes before telling Tavi that you wanna experiment with some temperature play. She nods and undresses for you.",
+			isNaked = true,
+			defaultAnimation = [StageScene.Duo, "stand", {npc="tavi"}],
+			avoidTargets = [3, 6, 9, 12, 5, 15, 25, 35],
+		},
+		4: {
+			name = "Everything",
+			actions = ["wait", "lightspank", "heavyspank", "startchoke", "pourvax", "ice"],
+			amountOfActions = 8,
+			winID = "finalcum",
+			introText = "You tell Tavi that it's time for the final challenge. You will use every tool in your arsenal on her.",
+			isNaked = true,
+			defaultAnimation = [StageScene.Duo, "stand", {npc="tavi"}],
+			avoidTargets = [3, 6, 9, 12, 5, 10, 20, 30, 15, 25, 35, 40, 50, 45, 55],
 		},
 	}
 
@@ -292,6 +330,9 @@ func getAllActions():
 			cantBeFirstAction = true,
 			cantBeLastAction = true,
 			animation = [StageScene.Spanking, "tease", {npc="tavi"}],
+			messages = [
+				"You let Tavi rest for a second. She recovers a bit.",
+			],
 		},
 		"lightspank": {
 			name = "Spank lightly",
@@ -299,6 +340,12 @@ func getAllActions():
 			shortdesc = "+3 Pain",
 			pain = 3,
 			animation = [StageScene.Spanking, "spank", {npc="tavi"}],
+			messages = [
+				"Tavi's breath hitches as your palm connects with her butt.",
+				"You spank Tavi gently, making her buttcheeks slightly green.",
+				"Your hand delivers a soft smack on Tavi's rear, making her butt jiggle.",
+				"Tavi's mews softly as your palm lands on her fluffy butt and spanks it.",
+			],
 		},
 		"heavyspank": {
 			name = "Spank firmly",
@@ -309,6 +356,12 @@ func getAllActions():
 				["numb", 2],
 			],
 			animation = [StageScene.Spanking, "fast", {npc="tavi"}],
+			messages = [
+				"Tavi gasps as your hand makes contact, the sting is sharp but the next one won't have as much of an effect.",
+				"A firm slap against Tavi's butt pulls a gasp from her, the sting followed by a fleeting surge of resilience to the sensation.",
+				"Your palm connects with Tavi's rear in a light spank, the sensation mingling with a subtle increase in her tolerance to pain.",
+				"Tavi lets out a gasp as your hand makes contact with her butt, making her buttcheeks look like 2 green apples.",
+			],
 		},
 		"startchoke": {
 			name = "Start choking",
@@ -320,6 +373,9 @@ func getAllActions():
 			previousCantBe = ["stopchoking"],
 			animation = [StageScene.SexStart, "start", {npc="tavi"}],
 			noturnusage = true,
+			messages = [
+				"Tavi gasps as you get a grasp on her throat and begin choking her slightly.",
+			],
 		},
 		"choke": {
 			name = "Choke more",
@@ -329,6 +385,12 @@ func getAllActions():
 			air = 1,
 			state = "choking",
 			noturnusage = true,
+			messages = [
+				"Tavi squirms and lets out silent gasps while you keep choking her.",
+				"Tavi slowly loses her strength the more you choke her.. But she also seems to get aroused more.",
+				"Tavi wiggles and holds her paws on your hands.. but doesn't stop you from choking her.",
+				"The feline holds her mouth opened, her tongue out and drooling while you choke her.",
+			],
 		},
 		"stopchoking": {
 			air = 0,
@@ -338,11 +400,50 @@ func getAllActions():
 			changestate = "",
 			state = "choking",
 			previousCantBe = ["startchoke"],
+			messages = [
+				"Tavi hungrily grabs air with her mouth when you stop choking her.",
+			],
 		},
+		"pourvax": {
+			name = "Pour wax",
+			#desc = "Deliver a firm spank on Tavi's rear, adding 10 pain",
+			shortdesc = "+5 Pain",
+			pain = 5,
+			effects = [
+				["wax", 2],
+			],
+			animation = [StageScene.SexStart, "start", {npc="tavi"}],
+			messages = [
+				"The sensation of warm wax dripping onto Tavi's body makes her squirm and moan actively.",
+				"A soft noise escapes Tavi as the wax makes contact with her inner thigh, the sensation drawing a mix of curiosity and unease.",
+				"Tavi lets out a cute moan as you tip the candle enough for the wax to drip onto her crotch.",
+				"A soft whimper escapes Tavi as the warmth of the wax makes contact with her pussy, the sensation a combination of discomfort and intrigue.",
+			],
+		},
+		"ice": {
+			name = "Ice",
+			#desc = "Deliver a firm spank on Tavi's rear, adding 10 pain",
+			shortdesc = "Halves the current pain",
+			pain = 0,
+			effects = [
+			],
+			animation = [StageScene.SexStart, "start", {npc="tavi"}],
+			cantBeFirstAction = true,
+			messages = [
+				"An ice cube landing on Tavi's back makes her gasps and squirm actively.",
+				"You teasingly press an ice cube against Tavi's nipple and hold it there until it starts melting. Tavi bites her lips and moans.",
+				"Tavi lets out a long moan as you press the ice against her sensetive clit for a second, sending a wave of cool sensations through her body.",
+				"Your hands place a few ice cubes on Tavi's thighs and hold her still while she tries to wiggle them off.",
+			],
+		}
 	}
 
 func doSpecialEffect(_actionID):
-	pass
+	if(_actionID == "ice"):
+		pain = pain * 0.5
+	if(_actionID == "pourvax"):
+		if(isPlaying):
+			GlobalRegistry.getCharacter("tavi").coverBodyWithFluid("HotWax", 0.2)
 
 func getAllStatusEffects():
 	return {
@@ -354,12 +455,19 @@ func getAllStatusEffects():
 			name = "High pain",
 			desc = "Tavi got pushed past her pain threshold. Another strike will make her [color=red]safeword[/color].",
 		},
+		"wax": {
+			name = "Hot wax",
+			desc = "[color=red]+100% more pain[/color]",
+		},
 	}
 
 func statusEffectHandleAddPain(statusID, addPain):
 	if(statusID == "numb"):
 		if(addPain > 0):
 			addPain *= 0.5
+	if(statusID == "wax"):
+		if(addPain > 0):
+			addPain *= 2.0
 	
 	return addPain
 

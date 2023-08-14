@@ -115,6 +115,7 @@ func getFlags():
 		
 		"taviSkillCombat": flag(FlagType.Number),
 		"taviSkillSex": flag(FlagType.Number),
+		"taviSkillMasochism": flag(FlagType.Number),
 		"taviSkillWatersports": flag(FlagType.Number),
 	}
 
@@ -179,6 +180,7 @@ func _init():
 		"res://Modules/TaviModule/Chapter6/Skills/Ch6TaviSexSkillScene.gd",
 		"res://Modules/TaviModule/Chapter6/Skills/Ch6TaviMasochismSkillScene.gd",
 		"res://Modules/TaviModule/Chapter6/MasochismMinigame/TaviMasochismScene.gd",
+		"res://Modules/TaviModule/Chapter6/MasochismMinigame/TaviMasochismOutcomesScene.gd",
 		
 		"res://Modules/TaviModule/Chapter6/CorruptionScenes/Ch6TaviCorruption75Scene.gd",
 		"res://Modules/TaviModule/Chapter6/CorruptionScenes/Ch6TaviCorruption50Scene.gd",

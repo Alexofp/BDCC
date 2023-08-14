@@ -23,6 +23,10 @@ func _run():
 		isVirgin = getModule("TaviModule").isVirgin()
 		painSkill = getModule("TaviModule").getSkillScore("taviSkillMasochism")
 		addButton("Intro lesson", "Introduce Tavi to masochism", "intro_lesson")
+		if (painSkill > 0):
+			addButton("Minigame", "Try to bring Tavi to an exact pain value", "start_minigame")
+		else:
+			addDisabledButton("Minigame", "Tavi needs to be introduced to masochism first")
 		addButton("Cancel", "You changed your mind", "cancel_lesson")
 	if(state == "intro_lesson"):
 		saynn("You decide that it's time to start teaching Tavi how to be a masochist. You stand in the middle of her dimly lit cell and call her closer.")
@@ -138,6 +142,11 @@ func _react(_action: String, _args):
 
 	if(_action == "intro_lesson"):
 		processTime(2*60)
+
+	if(_action == "start_minigame"):
+		runScene("TaviMasochismScene")
+		endScene()
+		return
 
 	if(_action == "cancel_lesson"):
 		increaseFlag("TaviModule.Ch6Tiredness", -1)

@@ -19,12 +19,16 @@ func _run():
 		saynn("The minigame is gonna be over after a certain amount of actions or if you hold Tavi's pain above the target pain value for more than one turn.")
 		
 		saynn("Pick the difficulty")
-		#var masochismScore = getModule("TaviModule").getSkillScore("taviSkillMasochism")
+		var masochismScore = getModule("TaviModule").getSkillScore("taviSkillMasochism")
 		var difficulties = minigame.getAllDifficulties()
 		for _i in range(difficulties.size()): #masochismScore+1
-			var difficulty = difficulties[_i]
-			addButton(str(_i+1)+". "+difficulty["name"], "Pick this difficulty", "start", [_i])
-	
+			if(masochismScore >= _i || _i == 0):
+				var difficulty = difficulties[_i]
+				addButton(str(_i+1)+". "+difficulty["name"], "Pick this difficulty", "start", [_i])
+			else:
+				var difficulty = difficulties[_i]
+				addDisabledButton(str(_i+1)+". "+difficulty["name"], "Raise Tavi's masochism skill")
+		
 	if(state == "failturns"):
 		saynn("You couldn't make Tavi reach the target pain level in the required amount of turns.")
 	if(state == "failsafeword"):
@@ -36,15 +40,16 @@ func _run():
 	
 	if(state == "playing"):
 		# Show the text of the previous action
-		addButtonAt(13, "Give up", "Not worth it", "")
+		addButtonAt(13, "Give up", "Not worth it", "endthescene")
 		addButtonAt(14, "Try again", "Reset the minigame", "tryagain")
 	
 	if(state == "youwon"):
 		saynn("Success!")
 		
 		# Replace with continue
-		addButton("Try again", "Reset the minigame", "tryagain")
-		addButton("Give up", "Not worth it", "endthescene")
+		#addButton("Try again", "Reset the minigame", "tryagain")
+		#addButton("Give up", "Not worth it", "endthescene")
+		addButton("Continue", "See what happens next", "start_outcome")
 	
 	if(state in ["playing", "failturns", "failsafeword", "youwon"]):
 		saynn(minigame.getLastText())
@@ -89,10 +94,13 @@ func _react(_action: String, _args):
 		return
 
 	if(_action == "doAction"):
+		processTime(60)
 		minigame.doAction(_args[0])
 		if(minigame.shouldEndSuccess):
 			print("shouldEndSuccess")
+			# Run scene
 			setState("youwon")
+			getModule("TaviModule").advanceSkill("taviSkillMasochism")
 			return
 		if(minigame.shouldEndFail):
 			print("shouldEndFail")
@@ -101,6 +109,17 @@ func _react(_action: String, _args):
 		if(minigame.shouldSafeWord):
 			print("shouldSafeWord")
 			setState("failsafeword")
+		if(minigame.shouldEndUnconscious):
+			print("shouldEndUnconscious")
+			# run scene
+			endScene()
+			runScene("CHANGEME_TOOOO")
+			return
+		return
+
+	if(_action == "start_outcome"):
+		runScene("TaviMasochismOutcomesScene", [minigame.shouldPlayStateOnWin])
+		endScene()
 		return
 
 	if(_action == "tryagain"):
