@@ -131,6 +131,40 @@ func _run():
 		saynn("You spend some time like that.")
 
 		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "finalcum"):
+		playAnimation(StageScene.GivingBirth, "birth", {pc="tavi", bodyState={naked=true}}) # Sorry, lul x3
+		saynn("The tipping point approaches Tavi fast. You were only bringing her pain.. and yet.. the feline is squirming on the floor like she got a vibrator pressed against her sex.")
+
+		saynn("Your last impact sets her off. With an explosive release, Tavi's body tenses and her back arches as her twitching pussy suddenly squirts, producing a rush of her transparent juices. Such a lewd sight.")
+
+		saynn("[say=tavi]AH-h!..[/say]")
+
+		saynn("In this moment of climax, her body keeps trembling, her hips bucking involuntarily. It's obvious to you that the sensations that you caused have overwhelmed her senses, made her eyes roll up and her tongue roll out.")
+
+		saynn("[say=tavi]I love t-this!..[/say]")
+
+		saynn("It seems.. you successfully made Tavi into a masochist. Her breathing is heavy, her body is bruised.. her mind is clouded.")
+
+		addButton("Cuddle", "Pull Tavi in for some cuddles", "final_cuddle")
+	if(state == "final_cuddle"):
+		playAnimation(StageScene.Cuddling, "idle", {npc="tavi", npcBodyState={naked=true}})
+		saynn("Your arms wrap around Tavi, pulling her close for a gentle embrace. Even after that orgasm has ended, the afterglow of your actions is making her moan softly.")
+
+		saynn("[say=tavi]I never saw pain.. like this..[/say]")
+
+		saynn("You rest your chin on her shoulder and leave a little kiss on it. A huge contrast to your previous actions.")
+
+		saynn("[say=tavi]"+str(taviSpeak("Never thought pain could bring such pleasure..", "I want more.. I wanna get fucked while you choke me.. Never thought pain could bring such pleasure..", "Never thought pain could bring such pleasure.. It's different.. But I like it."))+"[/say]")
+
+		saynn("[say=pc]It was a nice journey, wasn't it? And you trusted me all the way.[/say]")
+
+		saynn("She nods and rests in your hands.")
+
+		saynn("[say=tavi]Best decision of my life.[/say]")
+
+		saynn("You spend some more time cuddling.")
+
+		addButton("Continue", "See what happens next", "endthescene")
 func taviSpeak(normalSpeak, corruptSpeak, pureSpeak):
 	if(isCorrupt):
 		return corruptSpeak
@@ -149,6 +183,9 @@ func _react(_action: String, _args):
 		getCharacter("tavi").coverBodyWithFluid("HotWax", 10.0)
 
 	if(_action == "enough_wax"):
+		processTime(10*60)
+
+	if(_action == "final_cuddle"):
 		processTime(10*60)
 
 	setState(_action)

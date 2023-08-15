@@ -97,23 +97,23 @@ func _react(_action: String, _args):
 		processTime(60)
 		minigame.doAction(_args[0])
 		if(minigame.shouldEndSuccess):
-			print("shouldEndSuccess")
+			#print("shouldEndSuccess")
 			# Run scene
 			setState("youwon")
 			getModule("TaviModule").advanceSkill("taviSkillMasochism")
 			return
 		if(minigame.shouldEndFail):
-			print("shouldEndFail")
+			#print("shouldEndFail")
 			setState("failturns")
 			return
 		if(minigame.shouldSafeWord):
-			print("shouldSafeWord")
+			#print("shouldSafeWord")
 			setState("failsafeword")
 		if(minigame.shouldEndUnconscious):
-			print("shouldEndUnconscious")
+			#print("shouldEndUnconscious")
 			# run scene
 			endScene()
-			runScene("CHANGEME_TOOOO")
+			runScene("TaviMasochismUnconsciousScene")
 			return
 		return
 

@@ -181,6 +181,7 @@ func _init():
 		"res://Modules/TaviModule/Chapter6/Skills/Ch6TaviMasochismSkillScene.gd",
 		"res://Modules/TaviModule/Chapter6/MasochismMinigame/TaviMasochismScene.gd",
 		"res://Modules/TaviModule/Chapter6/MasochismMinigame/TaviMasochismOutcomesScene.gd",
+		"res://Modules/TaviModule/Chapter6/MasochismMinigame/TaviMasochismUnconsciousScene.gd",
 		
 		"res://Modules/TaviModule/Chapter6/CorruptionScenes/Ch6TaviCorruption75Scene.gd",
 		"res://Modules/TaviModule/Chapter6/CorruptionScenes/Ch6TaviCorruption50Scene.gd",

@@ -308,12 +308,12 @@ func getAllDifficulties():
 		4: {
 			name = "Everything",
 			actions = ["wait", "lightspank", "heavyspank", "startchoke", "pourvax", "ice"],
-			amountOfActions = 8,
+			amountOfActions = 4,
 			winID = "finalcum",
 			introText = "You tell Tavi that it's time for the final challenge. You will use every tool in your arsenal on her.",
 			isNaked = true,
 			defaultAnimation = [StageScene.Duo, "stand", {npc="tavi"}],
-			avoidTargets = [3, 6, 9, 12, 5, 10, 20, 30, 15, 25, 35, 40, 50, 45, 55],
+			avoidTargets = [3, 6, 9, 12, 5, 10, 20, 30, 15, 25, 35, 40, 50, 45, 55, 23],
 		},
 	}
 
