@@ -42,6 +42,7 @@ func _run():
 	#addButtonAt(7, "Computer test", "Computer test", "comptest")
 	#addButtonAt(8, "Hard Computer test", "Computer test", "comptest2")
 	#addButtonAt(8, "Pc override test", "Override test", "overridetest")
+	#addButtonAt(8, "Masochism minigame", "Test", "masochismminigame")
 	
 	_roomInfo._onPreEnter()
 	setLocationName(_roomInfo.getName())
@@ -105,3 +106,5 @@ func _react(_action: String, _args):
 		runScene("ComputerSimScene", ["TaviEngineeringSafeComputer"])
 	if(_action == "overridetest"):
 		runScene("PCOverrideExample")
+	if(_action == "masochismminigame"):
+		runScene("TaviMasochismScene")

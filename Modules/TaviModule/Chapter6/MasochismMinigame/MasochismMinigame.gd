@@ -283,7 +283,7 @@ func getAllDifficulties():
 			introText = "You tell Tavi that you wanna experiment with applying more strength while spanking her.",
 			isNaked = false,
 			defaultAnimation = [StageScene.Duo, "stand", {npc="tavi"}],
-			avoidTargets = [3, 5, 10, 15, 20, 6, 9],
+			avoidTargets = [3, 5, 10, 15, 20, 6, 9, 14],
 		},
 		2: {
 			name = "Choking",

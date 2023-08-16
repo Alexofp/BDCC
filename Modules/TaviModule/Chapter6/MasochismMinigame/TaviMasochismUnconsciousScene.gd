@@ -4,6 +4,7 @@ var isCorrupt = false
 var isPure = false
 var isNormal = false
 var isVirgin = false
+var tookVirginity = false
 
 func _init():
 	sceneID = "TaviMasochismUnconsciousScene"
@@ -116,12 +117,147 @@ func _run():
 		saynn("You spend some time together.")
 
 		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "fuck_tavi"):
+		playAnimation(StageScene.SexMissionary, "tease", {npc="tavi", bodyState={naked=true,hard=true}, npcBodyState={naked=true}})
+		saynn("You feel some guilt but seeing the opportunity makes that feeling fade away, replaced by an even more devious thought.")
+
+		saynn("While Tavi is unconscious and breathing softly, you carefully move her into a comfortable position while you take a spot between her legs, your hands gently parting her thighs. Your {pc.penis} is already rock hard just from thinking about it..")
+
+		saynn("Your eyes track her face, making sure she is still dreaming about something, while your hands guide your member to brush against her sensitive folds.. They feel nice, your length gets quickly coated in her pussy juices while you gently slide along her flower. Did she get wet just from you choking her?")
+
+		if (getModule("TaviModule").isVirgin()):
+			saynn("As you align yourself better with her slit and proceed to prod it gently, the tip of your cock quickly meets some organic barrier.. A sign of Tavi's innocence. Maybe you should think about it a bit more.. But you went so far to get to this point.. you can't stop now.. You deserve this. Yes.")
+
+		else:
+			saynn("As you align yourself better with her slit and proceed to prod the pussy hole, her sensitive folds get pushed aside, letting you stretch her sex more and more. One swift motion and you will be inside.. Maybe you should think about it a bit more.. But you went so far to get to this point.. you can't stop now.. You deserve this. Yes.")
+
+		addButton("Push", "Start fucking Tavi", "fuck_tavi_push")
+	if(state == "fuck_tavi_push"):
+		playAnimation(StageScene.SexMissionary, "sex", {npc="tavi", bodyState={naked=true,hard=true}, npcBodyState={naked=true}})
+		if (tookVirginity):
+			saynn("Your hands land on Tavi's hips and hold her still while you proceed to put more and more strain on her last line of defense. The feline is wincing and hissing softly while the tip of your cock is pushing on her hymen harder and harder.. until piercing and tearing through it, [b]stealing Tavi's virginity[/b].")
+
+			saynn("Tavi squirms and huffs while her inner pussy walls grasp their first cock.. so tight. There is some bleeding, green toxic-like blood dripping out of her not-so-virgin pussy, giving your member a fancy green glow as you proceed to explore her deeper, enjoying the pleasurable friction way too much..")
+
+			saynn("Tavi is not a girl anymore.. but a woman.. even if she lost her innocence while unconscious.. She probably wouldn't mind anyway.")
+
+		else:
+			saynn("Your hands land on Tavi's hips and hold her still while you guide yourself inside her with a slow, deliberate motion. The sensations are overwhelming already, her pussy responds to your push by softly clenching and tightening around you. She is not a virgin anymore but her pussy didn't get any looser, providing enough slick juices for you to start fucking her raw..")
+
+		saynn("With every thrust, Tavi's love tunnel eagerly embracing your length as if.. craving it. Random little moans start escaping from the feline, her noises of love. So you push forward, just as eagerly, exploring her depths, reaching her cervix but not putting pressure on it as to not to wake the feline up.")
+
+		saynn("[say=tavi]h-h.. ah..[/say]")
+
+		saynn("So wrong. But both of you were never about doing things the right way. You feel the climax approaching and so you welcome it, increasing your pace, fucking that sleeping pussy while your hands support you, your eyes watching her bouncing {tavi.breasts}.")
+
+		addButton("Cum inside", "Might as well..", "fuck_tavi_inside")
+		addButton("Pull out", "You can't leave any evidence inside her..", "fuck_tavi_pullout")
+	if(state == "fuck_tavi_inside"):
+		playAnimation(StageScene.SexMissionary, "inside", {npc="tavi", bodyState={naked=true,hard=true}, npcBodyState={naked=true}})
+		if (tookVirginity):
+			saynn("You took her virginity.. So might as well be the first one to claim her womb. Tavi whines softly in her sleep while you ram your {pc.penis} as deep as her pussy allows, pushing her over the edge while your seed begins flooding her womb.. so much of it that some spills out already.")
+
+		else:
+			saynn("You went so far.. might as well claim her womb too. Tavi whines softly in her sleep while you ram your {pc.penis} as deep as her pussy allows, pushing her over the edge while your seed begins flooding her womb.. so much of it that some spills out already.")
+
+		saynn("Tavi's body has a slight shiver to it. Her mouth lets out a prolonged quiet noise as you finally stop.")
+
+		saynn("As you pull out, you get a great view of her creamed up pussy. Hot. But she might wake up any second so you quickly put her uniform on her to cover up what you did.")
+
+		addButton("Continue", "See what happens next", "fuck_wakeup_cuddle")
+	if(state == "fuck_wakeup_cuddle"):
+		addCharacter("tavi")
+		playAnimation(StageScene.Cuddling, "idle", {npc="tavi"})
+		saynn("You pull Tavi for some cuddles and shake her slightly until she comes to her senses. The feline slowly opens her eyes and winces.")
+
+		saynn("[say=tavi]Ow.. Head..[/say]")
+
+		saynn("[say=pc]Easy there, Tavi.[/say]")
+
+		saynn("You embrace and support her while she rubs her head.")
+
+		saynn("[say=tavi]How long was I out?..[/say]")
+
+		saynn("[say=pc]Some time. My bad.[/say]")
+
+		saynn("Tavi just sighs, her paws trail over her body, probably noticing a strange source of heat coming from her crotch.")
+
+		saynn("[say=tavi]It's okay.. I had a dream at least. I don't usually have those.. Seems I got a little too heated.[/say]")
+
+		saynn("You spend some time together like that. All the while you keep wondering if she.. knows..")
+
+		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "fuck_tavi_pullout"):
+		playAnimation(StageScene.SexMissionary, "tease", {npc="tavi", bodyState={naked=true,hard=true}, npcBodyState={naked=true}})
+		if (tookVirginity):
+			saynn("Even though you took her virginity, you decide against cumming inside. Just before you reach the peak, you finally pull out. Your cock throbbing and releasing strings of thick slimy seed all over her crotch and belly, leaving quite a mess..")
+
+		else:
+			saynn("You went so far.. but you gotta stop at some point.. Just before you reach the peak, you finally pull out. Your cock throbbing and releasing strings of thick slimy seed all over her crotch and belly, leaving quite a mess..")
+
+		saynn("Tavi's body has a slight shiver to it, she is clearly orgasming. Her pussy spasms around a cock that's no longer there. Hot. But she might wake up any second so you quickly put her uniform on her to cover up what you did.")
+
+		addButton("Continue", "See what happens next", "fuck_wakeup_cuddle")
+	if(state == "strapon_tavi_pick"):
+		saynn("Pick which strapon you wanna use on Tavi.")
+
+		addStraponButtons()
+		if (false):
+			addButton("Nope", "You shouldn't see this", "strapon_tavi")
+	if(state == "strapon_tavi"):
+		playAnimation(StageScene.SexMissionary, "tease", {npc="tavi", bodyState={naked=true,hard=true}, npcBodyState={naked=true}})
+		saynn("You feel some guilt but seeing the opportunity makes that feeling fade away, replaced by an even more devious thought.")
+
+		saynn("While Tavi is unconscious and breathing softly, you carefully move her into a comfortable position while you take a spot between her legs, your hands gently parting her thighs. Then you grab one of the strapons and secure it around your waist.")
+
+		saynn("Your eyes track her face, making sure she is still dreaming about something, while your hands guide the rubber cock to brush against her sensitive folds.. Your new length gets quickly coated in her pussy juices while you gently slide along her flower. Did she get wet just from you choking her?")
+
+		if (getModule("TaviModule").isVirgin()):
+			saynn("As you align yourself better with her slit and proceed to prod it gently, the tip of your strapon quickly meets some organic barrier.. A sign of Tavi's innocence. Maybe you should think about it a bit more.. Maybe doing this with a strapon is wrong.. But.. you went so far to get to this point.. you can't stop now.. You deserve this. Yes.")
+
+		else:
+			saynn("As you align yourself better with her slit and proceed to prod the pussy hole, her sensitive folds get pushed aside, letting you stretch her sex more and more. One swift motion and you will be inside.. Maybe you should think about it a bit more.. But you went so far to get to this point.. you can't stop now.. You deserve this. Yes.")
+
+		addButton("Push", "Start fucking Tavi", "strapon_tavi_push")
+	if(state == "strapon_tavi_push"):
+		playAnimation(StageScene.SexMissionary, "sex", {npc="tavi", bodyState={naked=true,hard=true}, npcBodyState={naked=true}})
+		if (tookVirginity):
+			saynn("Your hands land on Tavi's hips and hold her still while you proceed to put more and more strain on her last line of defense. The feline is wincing and hissing softly while the tip of your rubber cock is pushing on her hymen harder and harder.. until piercing and tearing through it, [b]stealing Tavi's virginity[/b].")
+
+			saynn("Tavi squirms and huffs while her inner pussy walls grasp their first cock.. a dildo. There is some bleeding, green toxic-like blood dripping out of her not-so-virgin pussy, giving your toy a fancy green glow as you proceed to explore her deeper, enjoying the pleasurable friction way too much..")
+
+			saynn("Tavi is not a girl anymore.. but a woman.. even if she lost her innocence while unconscious.. She probably wouldn't mind anyway.")
+
+		else:
+			saynn("Your hands land on Tavi's hips and hold her still while you guide yourself inside her with a slow, deliberate motion. The sensations are overwhelming already, her pussy responds to your push by softly clenching and tightening around your toy. She is not a virgin anymore but her pussy didn't get any looser, providing enough slick juices for you to start fucking her raw..")
+
+		saynn("With every thrust, Tavi's love tunnel eagerly embracing your length as if.. craving it. Random little moans start escaping from the feline, her noises of love. So you push forward, just as eagerly, exploring her depths, reaching her cervix but not putting pressure on it as to not to wake the feline up.")
+
+		saynn("[say=tavi]h-h.. ah..[/say]")
+
+		saynn("So wrong. But both of you were never about doing things the right way. You feel her climax approaching and so you welcome it, increasing your pace, fucking that sleeping pussy while your hands support you, your eyes watching her bouncing {tavi.breasts}.")
+
+		addButton("Continue", "See what happens next", "strapon_tavi_cum")
+	if(state == "strapon_tavi_cum"):
+		playAnimation(StageScene.SexMissionary, "inside", {npc="tavi", bodyState={naked=true,hard=true}, npcBodyState={naked=true}})
+		saynn("After a few more thrusts, Tavi suddenly arches her back, her pussy gripping your toy tightly, clenching around it.")
+
+		saynn("You don't feel much yourself.. But it's still very arousing.. Seeing Tavi squirm under you.")
+
+		saynn("As you pull the strapon out, her slit is still pulsing. Hot. But she might wake up any second so you quickly put her uniform on her to cover up what you did.")
+
+		addButton("Continue", "See what happens next", "fuck_wakeup_cuddle")
 func taviSpeak(normalSpeak, corruptSpeak, pureSpeak):
 	if(isCorrupt):
 		return corruptSpeak
 	if(isPure):
 		return pureSpeak
 	return normalSpeak
+
+func addStraponButtons():
+	var strapons = GM.pc.getStrapons()
+	for strapon in strapons:
+		addButton(strapon.getVisibleName(), strapon.getVisibleDescription(), "strapon_tavi", [strapon])
 
 
 func _react(_action: String, _args):
@@ -145,6 +281,42 @@ func _react(_action: String, _args):
 	if(_action == "finger_wakeup"):
 		processTime(3*60)
 
+	if(_action == "fuck_tavi_push"):
+		processTime(3*60)
+		if(getModule("TaviModule").isVirgin()):
+			tookVirginity = true
+			setFlag("TaviModule.TaviIsNotVirgin", true)
+
+	if(_action == "fuck_tavi_inside"):
+		processTime(3*60)
+		getCharacter("tavi").cummedInVaginaBy("pc")
+		GM.pc.orgasmFrom("tavi")
+
+	if(_action == "fuck_tavi_pullout"):
+		processTime(3*60)
+		getCharacter("tavi").cummedOnBy("pc")
+		GM.pc.orgasmFrom("tavi")
+
+	if(_action == "fuck_wakeup_cuddle"):
+		processTime(3*60)
+		GM.pc.unequipStrapon()
+
+	if(_action == "strapon_tavi"):
+		processTime(3*60)
+		var strapon = _args[0]
+		GM.pc.getInventory().forceEquipStoreOtherUnlessRestraint(strapon)
+
+	if(_action == "strapon_tavi_push"):
+		processTime(3*60)
+		if(getModule("TaviModule").isVirgin()):
+			tookVirginity = true
+			setFlag("TaviModule.TaviIsNotVirgin", true)
+
+	if(_action == "strapon_tavi_cum"):
+		processTime(3*60)
+		getCharacter("tavi").cummedInVaginaBy("pc", FluidSource.Strapon)
+		GM.pc.orgasmFrom("tavi")
+
 	setState(_action)
 
 func saveData():
@@ -154,6 +326,7 @@ func saveData():
 	data["isPure"] = isPure
 	data["isNormal"] = isNormal
 	data["isVirgin"] = isVirgin
+	data["tookVirginity"] = tookVirginity
 
 	return data
 
@@ -164,3 +337,4 @@ func loadData(data):
 	isPure = SAVE.loadVar(data, "isPure", false)
 	isNormal = SAVE.loadVar(data, "isNormal", false)
 	isVirgin = SAVE.loadVar(data, "isVirgin", false)
+	tookVirginity = SAVE.loadVar(data, "tookVirginity", false)
