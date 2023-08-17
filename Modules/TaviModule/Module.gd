@@ -116,6 +116,7 @@ func getFlags():
 		"taviSkillCombat": flag(FlagType.Number),
 		"taviSkillSex": flag(FlagType.Number),
 		"taviSkillMasochism": flag(FlagType.Number),
+		"taviSkillPetplay": flag(FlagType.Number),
 		"taviSkillWatersports": flag(FlagType.Number),
 	}
 
@@ -182,6 +183,7 @@ func _init():
 		"res://Modules/TaviModule/Chapter6/MasochismMinigame/TaviMasochismScene.gd",
 		"res://Modules/TaviModule/Chapter6/MasochismMinigame/TaviMasochismOutcomesScene.gd",
 		"res://Modules/TaviModule/Chapter6/MasochismMinigame/TaviMasochismUnconsciousScene.gd",
+		"res://Modules/TaviModule/Chapter6/Skills/Ch6TaviPetplaySkillScene.gd",
 		
 		"res://Modules/TaviModule/Chapter6/CorruptionScenes/Ch6TaviCorruption75Scene.gd",
 		"res://Modules/TaviModule/Chapter6/CorruptionScenes/Ch6TaviCorruption50Scene.gd",
@@ -272,7 +274,7 @@ static func trustsPC():
 	return !GM.main.getModuleFlag("TaviModule", "Tavi_IsAngryAtPlayer", false) && GM.main.getModuleFlag("TaviModule", "Tavi_IntroducedTo", false)
 
 func getAllSkills():
-	return ["taviSkillCombat", "taviSkillSex", "taviSkillMasochism", "taviSkillWatersports"]
+	return ["taviSkillCombat", "taviSkillSex", "taviSkillMasochism", "taviSkillPetplay", "taviSkillWatersports"]
 
 func getSkillInfo(skillID):
 	if(skillID == "taviSkillCombat"):
@@ -292,6 +294,12 @@ func getSkillInfo(skillID):
 			name = "Masochism",
 			desc = "Training Tavi to endure pain better",
 			scene = "Ch6TaviMasochismSkillScene",
+		}
+	if(skillID == "taviSkillPetplay"):
+		return {
+			name = "Petplay",
+			desc = "Training Tavi to be a better pet",
+			scene = "Ch6TaviPetplaySkillScene",
 		}
 	if(skillID == "taviSkillWatersports"):
 		return {
