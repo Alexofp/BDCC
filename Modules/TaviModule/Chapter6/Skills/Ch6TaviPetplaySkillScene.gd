@@ -5,6 +5,9 @@ var isPure = false
 var isNormal = false
 var isVirgin = false
 var petSkill = 0
+var isGagged = false
+var didFetch = false
+var didVoice = false
 
 func _init():
 	sceneID = "Ch6TaviPetplaySkillScene"
@@ -27,6 +30,8 @@ func _run():
 			addButton("Lesson 2", "Give Tavi a lesson again pride", "lesson2")
 		if (petSkill > 1):
 			addButton("Lesson 3", "See if Tavi learned anything", "lesson3")
+		if (petSkill > 2):
+			addButton("Tricks", "Teach puppy Tavi some tricks", "tricks")
 		addButton("Cancel", "You changed your mind", "cancel_lesson")
 	if(state == "intro"):
 		saynn("You call Tavi and tell her to stand in the middle of the cell.")
@@ -377,6 +382,263 @@ func _run():
 		saynn("But you feel like you made a lot of progress either way.")
 
 		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "tricks"):
+		playAnimation(StageScene.Duo, "stand", {npc="tavi", npcAction="allfours", npcBodyState={naked=true}})
+		saynn("Tavi's eyes sparkle with curiosity when you call her closer and then point down at the spot just before you.")
+
+		saynn("[say=pc]"+str(RNG.pick(["Good girls get belly rubs.", "I wanna see a good puppy before me.", "I wanna teach you some tricks.", "Ready for some training, puppy?"]))+"[/say]")
+
+		saynn("Tall kitty hesitates for a second. But then she gets on her knees before her.")
+
+		saynn("[say=tavi]Pets don't wear clothes..[/say]")
+
+		saynn("Her paws unbutton her shirt and then pull down her shorts before she leans forward and stands on all fours, completely naked.")
+
+		saynn("You don't wanna hurt her arms and knees so you grab some puppy restraints that have padded inner sides and begin securing it around Tavi's limbs, one by one.. While she patiently awaits, her tail wagging ever so slightly.")
+
+		addButton("Bitchsuit", "Tie Tavi up", "tricks_bitch")
+	if(state == "tricks_bitch"):
+		playAnimation(StageScene.PuppyDuo, "stand", {npc="tavi", npcBodyState={naked=true}})
+		saynn("It took some time.. but you manage to secure the bitchsuit tightly on Tavi, turning her into such an adorable puppy.")
+
+		saynn("Well, time to train her some tricks.")
+
+		addButton("Fetch", "Order Tavi to bring a ball", "trick_fetch")
+		addButton("Lie down", "Order Tavi to lie down", "trick_liedown")
+		addButton("Sit", "Order Tavi to sit", "trick_sit")
+	if(state == "trick_fetch"):
+		playAnimation(StageScene.PuppyDuo, "throw", {npc="tavi", npcBodyState={naked=true}})
+		saynn("There aren't really any rubber balls in this prison.. But there are ballgags. You take one from Tavi's stash and disassemble it quickly, removing the leather straps until you're left with just the rubber sphere.")
+
+		saynn("[say=pc]See this?[/say]")
+
+		saynn("Tavi tilts her head and raises a brow, looking cute and silly. You make sure Tavi sees the ball as you throw it in the corner of the cell.")
+
+		saynn("[say=pc]Go-get-the-ball![/say]")
+
+		saynn("Tavi tilts her head even more.")
+
+		saynn("[say=pc]Bring the ball and you will get something.[/say]")
+
+		saynn("That's when Tavi finally begins to see the point. She turns around awkwardly and begins searching for the ball until her ears perk towards a certain direction.")
+
+		addButton("Continue", "See what happens next", "trick_fetch_walk")
+	if(state == "trick_fetch_walk"):
+		playAnimation(StageScene.PuppyDuo, "stand", {npc="tavi", npcAction="walk", npcBodyState={naked=true}})
+		saynn("Tavi crawls towards the ball on all fours, her motions are a little stiff and unnatural as she is trying to get used to the puppy restraints.")
+
+		saynn("Still, she manages to grab the ball with her mouth before bringing it back to you.")
+
+		saynn("[say=pc]Good girl. Again.[/say]")
+
+		saynn("You throw the ball in a different corner. This time, Tavi's eyes are tracking it somewhat.")
+
+		saynn("[say=pc]Go get it.[/say]")
+
+		saynn("And Tavi takes off again, crawling towards the ball before bringing it to you. Her tail is wagging happily each time you praise her.")
+
+		saynn("[say=pc]Very good. Let's do some more.[/say]")
+
+		saynn("After a few throws, Tavi begins to sway her hips more while crawling around her cell, her motions becoming more fluid and playful. Even if still heavily limited.")
+
+		saynn("After the last throw, Tavi returns the ball back to you and drops it by your feet, panting softly. Her tongue is out and drooling.")
+
+		saynn("[say=pc]Adorable. Now. For your reward..[/say]")
+
+		addButton("Headpats", "Just pat Tavi and continue training her", "tricks_fetch_pat")
+		addButton("Ballgag", "Make sure she never loses her ball..", "tricks_fetch_ballgag")
+	if(state == "tricks_fetch_pat"):
+		playAnimation(StageScene.PuppySexOral, "tease", {pc="pc", npc="tavi", npcBodyState={naked=true}})
+		saynn("You grab Tavi by the cheeks and nuzzle her face.")
+
+		saynn("[say=pc]Who's a good girl?[/say]")
+
+		saynn("Tavi blinks many times and purrs while brushing her face against yours. Your hands give her plenty of headpats and then land behind her ears, scritching and scratching.")
+
+		saynn("[say=pc]You are.[/say]")
+
+		saynn("Tavi wiggles happily, her tail wags a lot.")
+
+		saynn("[say=tavi]Woof![/say]")
+
+		addButton("Continue", "See what happens next", "tricks_stand")
+	if(state == "tricks_fetch_ballgag"):
+		playAnimation(StageScene.PuppySexOral, "tease", {pc="pc", npc="tavi", npcBodyState={naked=true}})
+		saynn("You grab the ball that Tavi dropped and put it back into her mouth.")
+
+		saynn("[say=pc]Let's fix this little problem.[/say]")
+
+		saynn("Tavi lets out a confused puppy noise as you begin attaching the leather straps back to that ball. Then you secure them tightly around her head, so tight that it makes Tavi drool.")
+
+		saynn("[say=pc]See? Now you will never lose your ball.[/say]")
+
+		saynn("Tavi tries to drop the ball but can't. It is indeed now in her mouth forever.. or until you decide to take it out.")
+
+		addButton("Continue", "See what happens next", "tricks_stand")
+	if(state == "tricks_stand"):
+		playAnimation(StageScene.PuppyDuo, "stand", {npc="tavi", npcBodyState={naked=true}})
+		saynn("Tavi stands on all fours before you, awaiting your next command patiently.")
+
+		if (isGagged):
+			saynn("She also can't stop drooling.")
+
+		if (!didFetch):
+			addButton("Fetch", "Order Tavi to bring a ball", "trick_fetch")
+		else:
+			addDisabledButton("Fetch", "You already played fetch with Tavi")
+		addButton("Lie down", "Order Tavi to lie down", "trick_liedown")
+		addButton("Sit", "Order Tavi to sit", "trick_sit")
+	if(state == "trick_liedown"):
+		playAnimation(StageScene.PuppyDuo, "stand", {npc="tavi", npcAction="sad", npcBodyState={naked=true}})
+		saynn("You point down, inviting Tavi to get even lower.")
+
+		saynn("[say=pc]Lie down.[/say]")
+
+		saynn("Her bitchsuit restricts her actions quite a bit but she just about manages to lie down. Her tail is wagging though")
+
+		addButton("Stand", "Order Tavi to get up again", "tricks_stand")
+		addButton("Roll over", "Order Tavi to roll over", "tricks_rollover")
+	if(state == "tricks_rollover"):
+		saynn("You twirl your finger, trying to tell Tavi to roll over without using words. But she just tilts her head, confused.")
+
+		saynn("[say=pc]Roll over, puppy.[/say]")
+
+		saynn("That's clearly not an easy task with all those restraints. Tavi hesitates. But your twil your finger again.")
+
+		saynn("[say=pc]C'mon, puppy. Try it.[/say]")
+
+		saynn("Tavi gathers her strength for a few seconds.. and then commits. She purposefully topples herself over, flopping on her side. Then she rolls over to her other side and tries to get up again. That's where the problem arises.")
+
+		if (petSkill < 6):
+			saynn("Tavi struggles to get enough support. Her limbs just don't bend enough to be able to do this. All she can do is awkwardly flail. At some point she gives up and starts whining.")
+
+			saynn("[say=pc]Aww.[/say]")
+
+			saynn("You're not a monster. Obviously you help her to get up. And then give her some pats for trying.")
+
+		else:
+			saynn("Tavi struggles for a bit but then she rests and lets the gravity turn her onto her belly. That's when she can start getting up, one limb at a time.")
+
+			saynn("[say=pc]Good job![/say]")
+
+			saynn("Even though she is working with a lot of restrictions, Tavi still managed to roll over!")
+
+		addButton("Continue", "See what happens next", "tricks_stand")
+	if(state == "trick_sit"):
+		playAnimation(StageScene.PuppyDuo, "stand", {npc="tavi", npcAction="sit", npcBodyState={naked=true}})
+		saynn("You gesture to your pup, trying to make her sit down.")
+
+		saynn("[say=pc]Sit![/say]")
+
+		saynn("Tavi hears the command and lowers her butt. It looks awkward so she pushes her top part of the body off the floor, sitting straight now, her {tavi.breasts} out on display.")
+
+		if (isGagged):
+			saynn("Her gag makes her drool onto her chest.")
+
+		else:
+			saynn("She pants softly after accomplishing such a trick.")
+
+		saynn("[say=pc]Nice, good job.[/say]")
+
+		addButton("Continue", "See what happens next", "tricks_sitting")
+	if(state == "tricks_sitting"):
+		playAnimation(StageScene.PuppyDuo, "stand", {npc="tavi", npcAction="sit", npcBodyState={naked=true}})
+		saynn("Tavi is sitting on her butt before you, eagerly awaiting commands.")
+
+		addButton("Voice", "Order Tavi to bark", "trick_sit_bark")
+		addButton("Give paw", "Order Tavi to give paw", "trick_sit_givepaw")
+		addButton("Sit", "Tell Tavi to sit", "trick_sit_sitdown")
+		addButton("Belly rubs!", "Give Tavi the bellyrubs that she deserves", "trick_order_back")
+	if(state == "trick_sit_bark"):
+		saynn("You decide to test Tavi's vocal activities.")
+
+		saynn("[say=pc]Voice.[/say]")
+
+		saynn("Tavi tilts her head at that command.")
+
+		saynn("[say=tavi]Uh..[/say]")
+
+		saynn("You shake your head and tap on Tavi's lips.")
+
+		saynn("[say=pc]Show me how a puppy sounds. Voice.[/say]")
+
+		if (isGagged):
+			saynn("Since she is gagged, all she can do is try to imitate the noises to the best of her ability. While also drooling actively..")
+
+			saynn("[say=tavi]Uh.. Arf.. Arhf.. Woof.. Woff-f..[/say]")
+
+			saynn("Well, at least she is trying. You give her some pats.")
+
+		else:
+			saynn("[say=tavi]Woof?[/say]")
+
+			saynn("You nod and ask her to be louder.")
+
+			saynn("[say=tavi]Woof! Woooof! Awooo![/say]")
+
+			saynn("The last bit was unnecessary. But at least she is trying. You give her some pats.")
+
+		addButton("Continue", "See what happens next", "tricks_sitting")
+	if(state == "trick_sit_givepaw"):
+		playAnimation(StageScene.PuppyDuo, "stand", {npc="tavi", npcAction="paw", npcBodyState={naked=true}})
+		saynn("You reach your hand out.")
+
+		saynn("[say=pc]Give paw, puppy.[/say]")
+
+		saynn("Tavi lets out a confused noise, trying to figure out how she can do that command if her hands are tied up firmly.")
+
+		saynn("[say=pc]C'mon, be a good puppy.[/say]")
+
+		saynn("Tavi gets all flustered and whiny, struggling to understand what you mean. But then she realizes that her elbow is actually her paw now and raises it.")
+
+		saynn("[say=tavi]Woof?..[/say]")
+
+		saynn("You shake it and give your puppy some scritches. She seems to be getting into her role now quite well.")
+
+		addButton("Continue", "See what happens next", "tricks_sitting")
+	if(state == "trick_sit_sitdown"):
+		playAnimation(StageScene.PuppyDuo, "stand", {npc="tavi", npcBodyState={naked=true}})
+		saynn("[say=pc]Sit, puppy.[/say]")
+
+		saynn("Tavi tilts her head, trying to figure out what exactly you mean by sitting.")
+
+		saynn("[say=pc]On all fours, Tavi.[/say]")
+
+		saynn("She gasps and drops down before raising her butt off the floor, her tail wiggling happily.")
+
+		addButton("Continue", "See what happens next", "tricks_stand")
+	if(state == "trick_order_back"):
+		playAnimation(StageScene.PuppyDuo, "stand", {npc="tavi", npcAction="back", npcBodyState={naked=true}})
+		saynn("You push Tavi onto her back and begin giving her bellyrubs, all of them! Tavi squirms and huffs from so much stimulation.")
+
+		saynn("[say=tavi]Woo-of!..[/say]")
+
+		saynn("[say=pc]Such a good girl.[/say]")
+
+		saynn("She seems extremely happy, her cheeks glowing green.. just like her wet needy slit between her hind legs.")
+
+		saynn("[say=pc]The best girl.[/say]")
+
+		saynn("Tavi purrs and moans softly even while you continue to rub her belly, your hands occasionally slipping towards her cute breasts and pussy, giving them some rubs too.")
+
+		saynn("[say=tavi]Woof..[/say]")
+
+		saynn("After giving Tavi all the praise, you start taking off her restraints.")
+
+		saynn("[say=pc]You can snap out of it now, Tavi.[/say]")
+
+		saynn("[say=tavi]Woof~?[/say]")
+
+		saynn("Tavi is smiling. Now it's your turn to tilt your head. She baps your nose with her paw.")
+
+		saynn("[say=tavi]Thought I forgot how to talk~? This felt really good though~..[/say]")
+
+		if (isGagged):
+			saynn("Hard to understand what she is saying with that gag. But at least she is saying actual words.. probably.")
+
+		saynn("You sigh and hug your puppy.")
+
+		addButton("Continue", "That was nice", "endthescene_resetequip")
 func taviSpeak(normalSpeak, corruptSpeak, pureSpeak):
 	if(isCorrupt):
 		return corruptSpeak
@@ -398,6 +660,9 @@ func _react(_action: String, _args):
 		getModule("TaviModule").advanceSkill("taviSkillPetplay")
 
 	if(_action == "lesson3"):
+		getModule("TaviModule").advanceSkill("taviSkillPetplay")
+
+	if(_action == "tricks"):
 		getModule("TaviModule").advanceSkill("taviSkillPetplay")
 
 	if(_action == "cancel_lesson"):
@@ -435,6 +700,39 @@ func _react(_action: String, _args):
 	if(_action == "les3_walkies"):
 		processTime(10*60)
 
+	if(_action == "tricks_bitch"):
+		processTime(10*60)
+
+	if(_action == "trick_fetch"):
+		processTime(4*60)
+		didFetch = true
+
+	if(_action == "trick_liedown"):
+		processTime(2*60)
+
+	if(_action == "trick_sit"):
+		processTime(2*60)
+
+	if(_action == "tricks_fetch_pat"):
+		processTime(3*60)
+
+	if(_action == "tricks_fetch_ballgag"):
+		processTime(3*60)
+		getCharacter("tavi").getInventory().forceEquipRemoveOther(GlobalRegistry.createItem("ballgag"))
+		isGagged = true
+
+	if(_action == "tricks_rollover"):
+		processTime(3*60)
+
+	if(_action == "trick_sit_bark"):
+		processTime(2*60)
+
+	if(_action == "trick_sit_givepaw"):
+		processTime(2*60)
+
+	if(_action == "trick_sit_sitdown"):
+		processTime(2*60)
+
 	setState(_action)
 
 func saveData():
@@ -445,6 +743,9 @@ func saveData():
 	data["isNormal"] = isNormal
 	data["isVirgin"] = isVirgin
 	data["petSkill"] = petSkill
+	data["isGagged"] = isGagged
+	data["didFetch"] = didFetch
+	data["didVoice"] = didVoice
 
 	return data
 
@@ -456,3 +757,6 @@ func loadData(data):
 	isNormal = SAVE.loadVar(data, "isNormal", false)
 	isVirgin = SAVE.loadVar(data, "isVirgin", false)
 	petSkill = SAVE.loadVar(data, "petSkill", 0)
+	isGagged = SAVE.loadVar(data, "isGagged", false)
+	didFetch = SAVE.loadVar(data, "didFetch", false)
+	didVoice = SAVE.loadVar(data, "didVoice", false)
