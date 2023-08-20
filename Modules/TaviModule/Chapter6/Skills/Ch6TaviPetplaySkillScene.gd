@@ -32,6 +32,10 @@ func _run():
 			addButton("Lesson 3", "See if Tavi learned anything", "lesson3")
 		if (petSkill > 2):
 			addButton("Tricks", "Teach puppy Tavi some tricks", "tricks")
+			if (petSkill > 3):
+				addButton("Walkies", "Give Tavi some walkies", "walkies")
+			else:
+				addDisabledButton("Walkies", "Tavi need more petplay experience")
 		addButton("Cancel", "You changed your mind", "cancel_lesson")
 	if(state == "intro"):
 		saynn("You call Tavi and tell her to stand in the middle of the cell.")
@@ -639,6 +643,149 @@ func _run():
 		saynn("You sigh and hug your puppy.")
 
 		addButton("Continue", "That was nice", "endthescene_resetequip")
+	if(state == "walkies"):
+		addCharacter("tavi", ["naked"])
+		playAnimation(StageScene.Duo, "stand", {npc="tavi", npcAction="allfours", npcBodyState={naked=true}})
+		saynn("Time for walkies. As soon as you fetch a leash, Tavi's eyes widen. She takes off her clothes and already stands on all fours near you, her tail wagging playfully.")
+
+		saynn("[say=pc]Let's get you prepared, puppy.[/say]")
+
+		saynn("After grabbing the leash, you also find the puppy restraints and begin putting them on your pet. She went through quite a journey, didn't she.")
+
+		addButton("Bitchsuit", "Put the puppy restraints on Tavi", "walkies_bitchsuit")
+	if(state == "walkies_bitchsuit"):
+		playAnimation(StageScene.PuppyDuo, "stand", {npc="tavi", npcBodyState={naked=true}})
+		saynn("You crouch near Tavi and begin putting cone-shaped restraints on her limbs that make her always crawl on her elbows and knees. Apart from that.. Tavi is not gonna wear anything today.")
+
+		saynn("[say=pc]We're going on walkies around the prison today.[/say]")
+
+		if (petSkill < 6):
+			saynn("Tavi is a little hesitant, her tail stops wagging for a bit.")
+
+			saynn("[say=pc]You're not comfortable with that, puppy? It's gonna be fun.[/say]")
+
+			saynn("Tavi listens to your words and nods before presenting her collar, allowing you to clip a leash to it.")
+
+		else:
+			saynn("Tavi bounces happily, she doesn't seem to mind being naked in public anymore.")
+
+			saynn("[say=pc]So cute.[/say]")
+
+			saynn("She purrs and gives you access to her collar, allowing you to clip a leash.")
+
+		saynn("Where do you wanna go?")
+
+		addButton("Main hall", "Play catch with Tavi in the main hall", "walkies_mainhall")
+		addButton("Yard", "Take Tavi on a walk around the green yard", "walkies_yard")
+		addButton("Meet Nova", "Show your pet to Nova", "walkies_meetnova")
+	if(state == "walkies_mainhall"):
+		playAnimation(StageScene.PuppyDuo, "stand", {npc="tavi", npcAction="walk", npcBodyState={naked=true}})
+		aimCameraAndSetLocName("main_stairs_n")
+		saynn("And so you walk out of the cell and proceed to walk towards the stairs that will get you up into the main hall. By your side is Tavi, her eyes fixed on you. You get lots of random gazes from others but the feline doesn't seem to mind, her tail wags excitedly.")
+
+		saynn("Getting your pet up the stairs is tricky but you help her with that, one stair at the time.")
+
+		saynn("As you reach the main platform, you find a relatively empty spot for you and Tavi where you have enough space for what you are about to do.")
+
+		saynn("Tavi's ears perk as you produce a red rubber ball, clearly taken from one of the ballgags. Then you crouch and quickly unclip the leash, letting Tavi wander further than usual.")
+
+		saynn("[say=pc]Ready?[/say]")
+
+		saynn("[say=tavi]Woof![/say]")
+
+		addButton("Throw the ball", "Play fetch with Tavi", "walkies_mainhall_fetch")
+	if(state == "walkies_mainhall_fetch"):
+		playAnimation(StageScene.PuppyDuo, "throw", {npc="tavi", npcAction="walk", npcBodyState={naked=true}})
+		saynn("You aim somewhere not that far and toss the ball. At the same time, Tavi springs into action, her movements constrained and yet full of enthusiasm and agility as she chases after the ball. A few inmates notice the scene and chuckle.")
+
+		saynn("Tavi grabs the ball with her mouth and brings it back to you, her eyes looking proud. You grab it and throw it again.")
+
+		saynn("[say=pc]Go get it, puppy.[/say]")
+
+		saynn("Tavi takes off after it, her tail wagging in sheer delight. More and more inmates join the crowd, watching Tavi retrieve the ball after you throw it, again and again. It seems, Tavi's flashy form combined with her commitment to the role are captivating the audience.")
+
+		saynn("Should you let the audience give your pup commands too?")
+
+		addButton("Yes", "Let other give some orders to Tavi", "walkies_mainhall_yes")
+		addButton("Nah", "Just play more fetch with Tavi", "walkies_mainhall_no")
+	if(state == "walkies_mainhall_no"):
+		playAnimation(StageScene.PuppyDuo, "throw", {npc="tavi", npcAction="walk", npcBodyState={naked=true}})
+		saynn("You decide against the idea of inmates giving commands to Tavi. She should listen only to you, she is your pet after all.")
+
+		saynn("Tavi brings the ball back to you a few more times until she starts panting heavily, clearly tired. Still, she did really well so you give her some pats and bellyrubs, making her purr too now.")
+
+		saynn("[say=pc]Let's go back.[/say]")
+
+		saynn("After such a good walkies session, Tavi is left satisfied. Who knew she would become such a good puppy.")
+
+		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "walkies_mainhall_yes"):
+		playAnimation(StageScene.PuppyDuo, "stand", {npc="tavi", npcAction="paw", npcBodyState={naked=true}})
+		saynn("You decide to let others interact with your puppy.")
+
+		saynn("'Voice', one of the inmates orders. Tavi looks back at you with a tilt of her head. You nod and so Tavi barks loudly.")
+
+		saynn("[say=tavi]Ruff![/say]")
+
+		saynn("The inmates chuckle. At the same time, someone else orders 'Lie down!'. And so Tavi immediately drops to the floor, her tail still wagging.")
+
+		saynn("It's quite wholesome, watching your pup obey the commands of the curious onlookers. The crowd begins to thicken around you two. 'Give paw', someone asks. And so, Tavi extends her paw, letting the inmate shake it and then pat her.")
+
+		saynn("And that's how a game of catch gradually evolves into an impromptu puppy training session. Tavi seems to be enjoying herself though, she does every command that doesn't require her to do anything too lewd.")
+
+		saynn("By the end of it, Tavi is left panting softly. Inmates give her all the pats and scritches before finally letting you two go back to the cell. Who knew she would become such a good puppy.")
+
+		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "walkies_yard"):
+		aimCameraAndSetLocName("main_hallroom6")
+		playAnimation(StageScene.PuppyDuo, "stand", {npc="tavi", npcAction="walk", npcBodyState={naked=true}})
+		saynn("And so you set off towards the yard area. You have to help Tavi climb the stairs because it's too steep but you just about manage.")
+
+		saynn("Lots of gazes don't seem to affect Tavi anymore. She is swaying her naked butt seductively while crawling by your side.")
+
+		addButton("Continue", "See what happens next", "walkies_yard_yard")
+	if(state == "walkies_yard_yard"):
+		playAnimation(StageScene.PuppyDuo, "stand", {npc="tavi", npcAction="walk", npcBodyState={naked=true}})
+		aimCameraAndSetLocName("yard_northCorridor")
+		saynn("You enter the area full of green bushes and pathways made out of stones. You hold Tavi's leash while following the little roads. It's certainly nothing compared to big lush planets.. but.. it's still something.")
+
+		saynn("Every now and then, Tavi's ears perk and her nose twitches as she investigates all the scents that are lingering in the air. She barks happily as she finds a little pebble that she can kick around with her paws.")
+
+		saynn("Eventually you reach a good spot to rest. There is a bench that you can sit on, perfect for some idling.")
+
+		addButton("Rest", "Rest with Tavi", "walkies_yard_rest")
+	if(state == "walkies_yard_rest"):
+		playAnimation(StageScene.PuppyDuo, "sit", {npc="tavi", npcAction="back", npcBodyState={naked=true}})
+		saynn("Time for rest. You sit on the bench and then pull Tavi onto it as well, her head resting on your lap.")
+
+		saynn("She is purring softly while you proceed to give her bellyrubs.")
+
+		saynn("[say=pc]Remember how you didn't want to do this at first~?[/say]")
+
+		saynn("Tavi blushes, her paw boops you on the nose. But you boop her back many times, making her stick her tongue.")
+
+		saynn("[say=pc]And now you're the most adorable puppy ever. Doesn't it feel good?[/say]")
+
+		saynn("You dangle the leash in front of her eyes. Tavi nods and lets out a content sigh.")
+
+		saynn("[say=pc]Good girl.[/say]")
+
+		saynn("Tavi smiles and closes her eyes, enjoying being your lap warmer. Inmates and staff members walk past you but who cares about them.")
+
+		saynn("You close your eyes as well and just take a little nap. Various thoughts go through your head. Is this prison bad or good? You have one of the most restrictive collars that have an ability to fry your neck and yet.. you still have a lot of freedom in what you can do.. A little closed-off society that has its own set of rules. A heaven?")
+
+		saynn("Nah.. Stopping now would mean all of this was for nothing. But if you're having fun, does anything else matter? Hell..")
+
+		saynn("Your hand keeps rubbing your pet's belly.. until you decide to return back to the cell.")
+
+		saynn("Looks like Tavi enjoyed that trip, her tail is wagging actively even after being exposed to so many eyes.")
+
+		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "walkies_meetnova"):
+		aimCameraAndSetLocName("main_hallroom6")
+		playAnimation(StageScene.PuppyDuo, "stand", {npc="tavi", npcAction="walk", npcBodyState={naked=true}})
+		saynn("You bring Tavi into the main hall and then head towards Nova's usual patrol route. Tavi is crawling by your side, looking happy about getting walkies.")
+
 func taviSpeak(normalSpeak, corruptSpeak, pureSpeak):
 	if(isCorrupt):
 		return corruptSpeak
@@ -663,6 +810,9 @@ func _react(_action: String, _args):
 		getModule("TaviModule").advanceSkill("taviSkillPetplay")
 
 	if(_action == "tricks"):
+		getModule("TaviModule").advanceSkill("taviSkillPetplay")
+
+	if(_action == "walkies"):
 		getModule("TaviModule").advanceSkill("taviSkillPetplay")
 
 	if(_action == "cancel_lesson"):
@@ -732,6 +882,36 @@ func _react(_action: String, _args):
 
 	if(_action == "trick_sit_sitdown"):
 		processTime(2*60)
+
+	if(_action == "walkies_bitchsuit"):
+		processTime(3*60)
+		#getCharacter("tavi").getInventory().forceEquipRemoveOther(GlobalRegistry.createItem("PuppyCorset"))
+
+	if(_action == "walkies_mainhall"):
+		processTime(3*60)
+
+	if(_action == "walkies_yard"):
+		processTime(3*60)
+
+	if(_action == "walkies_meetnova"):
+		processTime(3*60)
+
+	if(_action == "walkies_mainhall_fetch"):
+		processTime(10*60)
+
+	if(_action == "walkies_mainhall_yes"):
+		processTime(3*60)
+
+	if(_action == "walkies_mainhall_no"):
+		processTime(3*60)
+
+	if(_action == "walkies_yard_yard"):
+		processTime(3*60)
+
+	if(_action == "walkies_yard_rest"):
+		processTime(15*60)
+		GM.pc.addStamina(100)
+		GM.pc.addPain(-100)
 
 	setState(_action)
 
