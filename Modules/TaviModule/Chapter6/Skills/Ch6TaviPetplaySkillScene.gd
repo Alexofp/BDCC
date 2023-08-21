@@ -8,6 +8,8 @@ var petSkill = 0
 var isGagged = false
 var didFetch = false
 var didVoice = false
+var condomBroke = false
+var tookVirginity = false
 
 func _init():
 	sceneID = "Ch6TaviPetplaySkillScene"
@@ -784,8 +786,275 @@ func _run():
 	if(state == "walkies_meetnova"):
 		aimCameraAndSetLocName("main_hallroom6")
 		playAnimation(StageScene.PuppyDuo, "stand", {npc="tavi", npcAction="walk", npcBodyState={naked=true}})
-		saynn("You bring Tavi into the main hall and then head towards Nova's usual patrol route. Tavi is crawling by your side, looking happy about getting walkies.")
+		saynn("You bring Tavi into the main hall and begin to search for Nova. Tavi is crawling by your side, looking happy about getting walkies.")
 
+		saynn("You know that the husky guard is usually patrolling the yard area so you head there.")
+
+		addButton("Continue", "See what happens next", "walkies_meetnova_nova")
+	if(state == "walkies_meetnova_nova"):
+		aimCameraAndSetLocName("yard_novaspot")
+		addCharacter("nova")
+		playAnimation(StageScene.PuppyDuo, "stand", {pc="nova", npc="tavi", npcAction="paw", npcBodyState={naked=true}})
+		saynn("It doesn't take long for you to stumble into Nova. The guard is resting while leaning against the prison's wall.")
+
+		saynn("[say=nova]Ohh![/say]")
+
+		saynn("The moment she sees Tavi she runs up to her and starts squishing her cheeks and ruffling her fur.")
+
+		saynn("[say=nova]Such a good girl![/say]")
+
+		saynn("Tavi purrs and rubs herself against the guard, her tail wagging happily. Nova looks up at you.")
+
+		saynn("[say=nova]You did that~?[/say]")
+
+		saynn("You nod and look proud. All the while Nova gives your pet headpats and even some treats, spoiling her.")
+
+		saynn("[say=nova]You're an obedient puppy now, aren't you?[/say]")
+
+		saynn("[say=tavi]Woof![/say]")
+
+		saynn("[say=nova]Aww-w~. Give paw.[/say]")
+
+		saynn("Tavi obediently raises her front paw and rests it in Nova's palm while she shakes it.")
+
+		saynn("[say=nova]Any particular reason why you came to me?[/say]")
+
+		saynn("A somewhat devious thought comes into your mind. You could.. offer your pet.. to be bred by Nova. Maybe she would agree?")
+
+		addButton("Just showing", "Tell Nova that you are just showing her your puppy", "walkies_meetnova_justshow")
+		addButton("Offer Tavi", "Offer Nova to breed Tavi", "walkies_meetnova_offer")
+	if(state == "walkies_meetnova_justshow"):
+		playAnimation(StageScene.PuppyDuo, "kneel", {pc="nova", npc="tavi", npcAction="back", npcBodyState={naked=true}})
+		saynn("[say=pc]Just wanted to show her to you. Since you seem to have some connection.[/say]")
+
+		saynn("Nova smiles and pushes Tavi onto her back before proceeding to give her all the bellyrubs. Poor puppy is panting and squirming under the guard's relentless signs of affection.")
+
+		saynn("[say=nova]Well thank you~. You did what I couldn't. Maybe I can pick up some tips from you~.[/say]")
+
+		saynn("[say=tavi]Woof! Ruff![/say]")
+
+		saynn("Nova gropes Tavi's breasts but she doesn't seem to mind. The puppy loves it.")
+
+		saynn("[say=nova]Yeah.. at least this cutie is in good hands.[/say]")
+
+		saynn("The guard helps Tavi to get on all fours and then stands up.")
+
+		saynn("[say=nova]Well, I better get back to it. Captain wouldn't approve of me playing with inmates all day.[/say]")
+
+		saynn("Fair enough. You nod and tug on the leash, inviting your pet to follow you back to her cell.")
+
+		saynn("That was a nice walk.")
+
+		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "walkies_meetnova_offer"):
+		playAnimation(StageScene.PuppyDuo, "stand", {pc="nova", npc="tavi", npcBodyState={naked=true}})
+		saynn("[say=pc]I was thinking.. You have a dick, right?[/say]")
+
+		saynn("Nova smiles and tilts her head ever so slightly.")
+
+		saynn("[say=nova]Last time I checked, yes.[/say]")
+
+		saynn("You tug on the leash, making Tavi turn around. Then you crouch near her butt and spread it, offering Nova a great view of Tavi's wet pussy."+str(" The visible hymen makes It quite evident that she is still a virgin. Tavi gasps as you do that." if isVirgin else "")+"")
+
+		saynn("[say=pc]Do you wanna fuck my puppy? She could use a breeding or two.[/say]")
+
+		saynn("Nova raises a brow, the view certainly arouses her, making the suit under her armor tense up in her crotch region.")
+
+		if (isVirgin):
+			saynn("[say=nova]I.. I can't. I don't wanna cause her pain.[/say]")
+
+			saynn("[say=pc]But look at her. This puppy would love your canine cock inside her. Right, Tavi? It only hurts the first time.[/say]")
+
+		else:
+			saynn("[say=nova]I.. I can't. I don't wanna cause her pain.[/say]")
+
+			saynn("[say=pc]But look at her. This puppy would love your canine cock inside her. Right, Tavi? She is not a virgin anymore so you're fine.[/say]")
+
+		saynn("You smack Tavi's butt, making her gasp again.")
+
+		saynn("[say=tavi]..woof..[/say]")
+
+		saynn("[say=nova]I don't know.. Are you sure? I'd need a condom at least.. I won't go in raw.[/say]")
+
+		addButtonWithChecks("Best condom", "Give Nova your best condom", "walkies_meetnova_givebestcondom", [], [ButtonChecks.HasCondoms])
+		addButton("Worst condom", "Give Nova your worst condom", "walkies_meetnova_giveworstcondom")
+		addButton("Never mind", "It's fine", "walkies_meetnova_nofuck")
+	if(state == "walkies_meetnova_nofuck"):
+		saynn("[say=pc]Well. It's okay then, don't worry about it.[/say]")
+
+		saynn("Nova nods and pats Tavi some more.")
+
+		saynn("[say=nova]She is a good puppy though, you trained her well.[/say]")
+
+		saynn("Tavi purrs and bounces happily.")
+
+		saynn("[say=nova]Well, I better get back to it. Captain wouldn't approve of me playing with inmates all day.[/say]")
+
+		saynn("Fair enough. You nod and tug on the leash, inviting your pet to follow you back to her cell.")
+
+		saynn("That was a nice walk.")
+
+		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "walkies_meetnova_fuck"):
+		addCharacter("nova", ["naked"])
+		playAnimation(StageScene.PuppySexOral, "tease", {pc="nova", npc="tavi", npcBodyState={naked=true}, bodyState={naked=true, hard=true}})
+		saynn("You offer Nova a packaged condom. Tavi looks unsure, her tail covering her slick folds. But she doesn't say no.. Seems she trusts you.")
+
+		saynn("[say=pc]Pretty please?[/say]")
+
+		saynn("Nova hesitates about it for a second. But then decides to grab the condom after gazing at your leashed pet for a little longer.")
+
+		saynn("[say=nova]Alright. This place should be quiet enough for this.[/say]")
+
+		saynn("Nova takes off her armor pieces and stores them on some bench before unzipping her undersuit, revealing a canine sheath with a red dripping cock already peeking out. The husky crouches before the feline, her length not that far from Tavi's mouth.")
+
+		saynn("[say=nova]Would you help me get fully hard, cutie?[/say]")
+
+		saynn("Tavi goes cross-eyed while looking at the cock so close to her maw. She parts her lips and lets her tongue roll out before sliding it over Nova's length, from the knotted base to the pointy tip, catching a drop of precum in the process.")
+
+		saynn("[say=nova]Good girl.. Do you want this?[/say]")
+
+		saynn("Tavi looks at both of you from her low position.. And nods.")
+
+		saynn("[say=nova]Alright, let's have some fun..[/say]")
+
+		saynn("Nova rips the package open and then drags the elastic ring of the condom over her length.")
+
+		addButton("Watch", "See what happens next", "walkies_meetnova_startfuck")
+	if(state == "walkies_meetnova_startfuck"):
+		playAnimation(StageScene.PuppySexAllFours, "tease", {pc="nova", npc="tavi", npcBodyState={naked=true}, bodyState={naked=true, hard=true, condom=true}})
+		saynn("Nova stands up and crouches behind Tavi this time, her paws landing on her butt and caressing it, a mixture of dominance and tenderness in her touch. Tavi tries to look over her shoulder, her eyes reflecting her eagerness to please.")
+
+		saynn("[say=nova]You know what to do.[/say]")
+
+		saynn("Tavi responds with a soft whimper before her tail decides to move out of the way, offering the husky full access to her needy holes.")
+
+		saynn("[say=nova]Stay, puppy.[/say]")
+
+		saynn("Nova leans in low, her tongue darting out to taste that pussy's juices. Tavi's body reacts by swaying back and forth, following the motions of Nova's head, short noises leaving her throat.")
+
+		saynn("[say=nova]I will be gentle.[/say]")
+
+		if (isVirgin):
+			saynn("The husky starts guiding her cock towards Tavi's virgin hole, its head spreading the folds and quickly finding an organic obstacle that is her hymen. The more Nova puts pressure on it, the more Tavi whines and squirms, her legs shaking.")
+
+			saynn("Seems like it will be less painful just to ram it in.. And Nova knows it.")
+
+			saynn("[say=nova]It will hurt for some time, sweetie.. Love you.[/say]")
+
+		else:
+			saynn("The husky starts guiding her cock towards Tavi's tight hole, its head spreading the folds and already proceeding to stretch the entrance itself. The more Nova puts pressure on it, the more Tavi squirms.")
+
+			saynn("[say=nova]Love you, sweetie.[/say]")
+
+		addButton("Continue", "See what happens next", "walkies_meetnova_fucking")
+	if(state == "walkies_meetnova_fucking"):
+		playAnimation(StageScene.PuppySexAllFours, "sex", {pc="nova", npc="tavi", npcBodyState={naked=true}, bodyState={naked=true, hard=true, condom=true}})
+		if (tookVirginity):
+			saynn("Nova grips Tavi's butt firmly while gathering her strength. And then, after a final sigh, she thrusts her hips forward, her knotted cock putting enough pressure on Tavi's hymen to suddenly tear through it, [b]stealing Tavi's virginity![/b].")
+
+			saynn("Tavi gasps and jerks forward from the sudden sharp pain but Nova doesn't let her, pulling her back onto her cock. The feline is whining loudly while her inner walls clench around their first cock, her pussy dripping green toxic-like blood onto the floor.")
+
+			saynn("[say=nova]There we go. Sorry, hun. It will get better from now, promise.[/say]")
+
+			saynn("After that, Nova proceeds to slowly pick up the pace, fucking your pet while you hold her leash and watch her face. Tavi is still feeling a lot of discomfort.. but there are also quite a few pleasurable sensations too now.")
+
+		else:
+			saynn("Nova grips Tavi's butt firmly while gathering her strength. And then, after a final sigh, she thrusts her hips forward, her knotted cock stretching Tavi's sensitive folds enough to slide inside!")
+
+			saynn("Tavi gasps and jerks forward from the sudden motion but Nova doesn't let her, pulling her back onto her cock. The feline is squirming while her inner walls grip that canine length, her pussy dripping juices onto the floor.")
+
+			saynn("[say=nova]Such a tight puppy.. Are you sure you're not a virgin?[/say]")
+
+			saynn("After that, Nova proceeds to slowly pick up the pace, fucking your pet while you hold her leash and watch her face. Tavi's reluctance slowly fades away, pleasurable sensations clouding her mind.")
+
+		saynn("Little moans begin to escape from your puppy. And Nova starts to pant softly, the tightness making her more eager to increase the pace, her knot getting bigger until it starts slapping against Tavi's folds.")
+
+		saynn("[say=nova]Should I knot this little slut?..[/say]")
+
+		if (tookVirginity):
+			saynn("Getting knotted during your first sex? Sounds fun.")
+
+		addButton("Continue", "See what happens next", "walkies_meetnova_faster")
+	if(state == "walkies_meetnova_faster"):
+		playAnimation(StageScene.PuppySexAllFours, "fast", {pc="nova", npc="tavi", npcBodyState={naked=true}, bodyState={naked=true, hard=true, condom=true}})
+		saynn("Tavi answers with just a moan, her body trembling while Nova thrusts inside her needy slit. She has gotten so submissive after all the training that you did, her eyes show lust and desire.")
+
+		saynn("Soon, a loud passionate noise of love escapes from your pet, her muscles suddenly tense up, her pussy pulsing around that member.")
+
+		saynn("[say=nova]Cumming already?.. Ngh.. Such a soft cutie..[/say]")
+
+		saynn("There is no point in pulling out since she has that condom on her cock. Nova fights Tavi's clenching pussy, shoving her length inside with more force.. until the knot slips inside too.")
+
+		addButton("Continue", "See what happens next", "walkies_meetnova_knot")
+	if(state == "walkies_meetnova_knot"):
+		playAnimation(StageScene.PuppySexAllFours, "inside", {pc="nova", npc="tavi", npcBodyState={naked=true}, bodyState={naked=true, hard=true, condom=true}})
+		if (condomBroke):
+			saynn("Nova grunts as she manages to shove her full length inside Tavi, breaking into her womb. The extreme tightness of the puppy's inner walls shoots husky over the edge instantly. She arches her back as cock starts stuffing the condom inside Tavi's womb.. until something snaps.. Oops.. Seems, [b]the condom has broke, spilling all of its contents inside![/b]")
+
+			saynn("Tavi is whining as her pussy gets stretched to the extreme by that knot, her whole body shakes while another orgasm overwhelmes her senses. The amount of seed in her babymaker becomes too much, some of it starts leaking out already, making Nova looking.. quite concerned.")
+
+			saynn("[say=nova]Hey.. S-something is wrong.[/say]")
+
+			saynn("Nova tries to pull out but she is tied together with Tavi too firmly by the knot. Tugging on it only makes Tavi moan more.")
+
+			saynn("[say=nova]I think the condom broke..[/say]")
+
+			saynn("You offer Nova a little smile.")
+
+			saynn("[say=pc]It's okay~.[/say]")
+
+			saynn("Nova huffs, her cheek red. It's obvious that she still enjoyed it. You crouch before Tavi and pat her.")
+
+			saynn("[say=pc]Such a good little breeding toy.[/say]")
+
+			saynn("Tavi purrs softly..")
+
+			saynn("They spend time like this until Nova finally manages to pull her cock out. And indeed, the condom has a gaping hole in it. All of her cum.. is inside Tavi. Oh well.")
+
+		else:
+			saynn("Nova grunts as she manages to shove her full length inside Tavi, breaking into her womb. The extreme tightness of the puppy's inner walls shoots husky over the edge instantly. She arches her back as cock starts stuffing the condom inside Tavi's womb.. And luckily, it seems to be durable enough.")
+
+			saynn("Tavi is whining as her pussy gets stretched to the extreme by that knot, her whole body shakes while another orgasm overwhelmes her senses. The amount of seed in her babymaker becomes too much, creating a subtle bump on her belly.")
+
+			saynn("[say=nova]So good..[/say]")
+
+			saynn("Nova tries to pull out but she is tied together with Tavi too firmly by the knot. Tugging on it only makes Tavi moan more.")
+
+			saynn("[say=nova]I think we will be stuck like this for a while.[/say]")
+
+			saynn("You offer Nova a little smile.")
+
+			saynn("[say=pc]It's okay~.[/say]")
+
+			saynn("Nova huffs, her cheek red. It's obvious that she still enjoyed it. You crouch before Tavi and pat her.")
+
+			saynn("[say=pc]Such a good little breeding toy.[/say]")
+
+			saynn("Tavi purrs softly..")
+
+			saynn("They spend time like this until Nova finally manages to pull her cock out. She quickly ties up the filled condom and disposes of it.")
+
+		addButton("Continue", "See what happens next", "walkies_meetnova_aftercum")
+	if(state == "walkies_meetnova_aftercum"):
+		playAnimation(StageScene.PuppyDuo, "stand", {pc="nova", npc="tavi", npcBodyState={naked=true}, bodyState={naked=true, hard=true}})
+		saynn("Nova pats Tavi too and starts putting on her armor piece by piece.")
+
+		if (condomBroke):
+			saynn("[say=nova]Felt nice.. Too bad the condom snapped. Maybe you should have given me a better one.[/say]")
+
+			saynn("You shrug and offer her a kind smile. Maybe you were counting on this to happen.")
+
+		else:
+			saynn("[say=nova]Felt nice, not gonna lie.[/say]")
+
+			saynn("You offer her a kind smile.")
+
+		saynn("[say=nova]Well, see you around. You too, puppy..[/say]")
+
+		saynn("After that intense session, you tug on the leash, inviting Tavi to follow you back to her cell.")
+
+		addButton("Continue", "See what happens next", "endthescene")
 func taviSpeak(normalSpeak, corruptSpeak, pureSpeak):
 	if(isCorrupt):
 		return corruptSpeak
@@ -913,6 +1182,45 @@ func _react(_action: String, _args):
 		GM.pc.addStamina(100)
 		GM.pc.addPain(-100)
 
+	if(_action == "walkies_meetnova_nova"):
+		processTime(3*60)
+
+	if(_action == "walkies_meetnova_givebestcondom"):
+		var breakChance = GM.pc.useBestCondom()
+		if(RNG.chance(breakChance)):
+			condomBroke = true
+		setState("walkies_meetnova_fuck")
+		return
+
+	if(_action == "walkies_meetnova_giveworstcondom"):
+		var breakChance = GM.pc.useWorstCondom()
+		if(getCharacter("nova").shouldCondomBreakWhenFucking("tavi", breakChance)):
+			condomBroke = true
+		setState("walkies_meetnova_fuck")
+		return
+
+	if(_action == "walkies_meetnova_nofuck"):
+		processTime(2*60)
+
+	if(_action == "walkies_meetnova_startfuck"):
+		processTime(2*60)
+
+	if(_action == "walkies_meetnova_fucking"):
+		processTime(5*60)
+		if(isVirgin):
+			tookVirginity = true
+			setFlag("TaviModule.TaviIsNotVirgin", true)
+
+	if(_action == "walkies_meetnova_faster"):
+		processTime(3*60)
+
+	if(_action == "walkies_meetnova_knot"):
+		processTime(10*60)
+		if(condomBroke):
+			getCharacter("tavi").cummedInVaginaBy("nova")
+		else:
+			addFilledCondomToLootIfPerk(getCharacter("nova").createFilledCondom())
+
 	setState(_action)
 
 func saveData():
@@ -926,6 +1234,8 @@ func saveData():
 	data["isGagged"] = isGagged
 	data["didFetch"] = didFetch
 	data["didVoice"] = didVoice
+	data["condomBroke"] = condomBroke
+	data["tookVirginity"] = tookVirginity
 
 	return data
 
@@ -940,3 +1250,5 @@ func loadData(data):
 	isGagged = SAVE.loadVar(data, "isGagged", false)
 	didFetch = SAVE.loadVar(data, "didFetch", false)
 	didVoice = SAVE.loadVar(data, "didVoice", false)
+	condomBroke = SAVE.loadVar(data, "condomBroke", false)
+	tookVirginity = SAVE.loadVar(data, "tookVirginity", false)
