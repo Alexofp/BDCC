@@ -22,6 +22,8 @@ func _run():
 		chillTalk = getFlag("TaviModule.Ch6TaviChillTalk", 0)
 		sexSkill = getModule("TaviModule").getSkillScore("taviSkillSex")
 		sexSkillMod = 1.0 + sexSkill / 3.0
+		var petSkill = getModule("TaviModule").getSkillScore("taviSkillPetplay")
+		var painSkill = getModule("TaviModule").getSkillScore("taviSkillMasochism")
 		if (isPure):
 			addCharacter("tavi")
 			var randomPureText = RNG.pick([1, 2, 3, 4])
@@ -216,6 +218,10 @@ func _run():
 				addButton("Fuck her", "Rail Tavi to satisfy her heat", "do_fuck_pick")
 			else:
 				addDisabledButton("Fuck her", "Tavi can't be a virgin for this")
+		if (petSkill > 3):
+			addButton("Petplay fuck", "Fuck Tavi while she is wearing a bitchsuit", "do_petplay_fuck_pick")
+		if (painSkill > 5):
+			addButton("Pussy spanking", "Make Tavi cum from having her pussy smacked", "do_pussy_spank")
 		if (sexSkill > 4):
 			addButton("Anal sex", "Try to satisfy Tavi's heat by fucking her butt", "do_anal_pick")
 		if (isPure):
@@ -803,6 +809,231 @@ func _run():
 		saynn("At least her eternal heat seems to be satisfied.. for now..")
 
 		addButton("Continue", "See what happens next", "start_talk")
+	if(state == "do_petplay_fuck"):
+		playAnimation(StageScene.PuppySexOral, "tease", {npc="tavi", npcBodyState={naked=true}, bodyState={naked=true, hard=true}})
+		saynn("You are feeling kinky today so you decide to quickly grab some puppy restraints and force them on Tavi's paws and legs, making her stand on her knees and elbows.")
+
+		saynn("[say=tavi]..woof..[/say]")
+
+		saynn("She is bouncing and wiggling while panting softly, her tail wagging a lot. Tavi is already slipping into her puppy mindset.")
+
+		saynn("[say=tavi]Woof?..[/say]")
+
+		saynn("Your puppy rubs her body against you, teasingly presenting you her sex. The animal heat seems to be driving her up to the wall, making her eager to get fucked raw.")
+
+		saynn("After restraining your pet, you take a step back and expose your {pc.penis} before crouching and gesturing to Tavi to come closer. She obeys, crawling along the floor until her muzzle bumps into your crotch.")
+
+		saynn("[say=tavi]Woof..[/say]")
+
+		saynn("Without any input, she starts licking and nuzzling your balls before switching her attention to the erecting shaft.")
+
+		saynn("Might as well let her continue.")
+
+		addButton("Continue", "See what happens next", "do_petplay_fuck_bj")
+	if(state == "do_petplay_fuck_bj"):
+		playAnimation(StageScene.PuppySexOral, "sex", {npc="tavi", npcBodyState={naked=true}, bodyState={naked=true, hard=true}})
+		saynn("After getting you hard, Tavi parts her lips and grabs the tip of your cock into her mouth, sucking on it while her tongue works along the length. Her rough feline tongue feels good. And Tavi seems to be enjoying herself too, her rear is swaying a lot as she is rubbing her thighs against each other.")
+
+		saynn("If this continues, she might make you cum.. Maybe it's time for the main event.")
+
+		if (!isVirgin):
+			addButton("Fuck Tavi", "Get behind her", "do_petplay_fuck_behind")
+		else:
+			addDisabledButton("Fuck Tavi", "Tavi can't be a virgin for this")
+		addButton("Deepthroat", "Make Tavi deepthroat you instead", "do_petplay_fuck_dt")
+	if(state == "do_petplay_fuck_dt"):
+		playAnimation(StageScene.PuppySexOral, "fast", {npc="tavi", npcBodyState={naked=true}, bodyState={naked=true, hard=true}})
+		saynn("You can fuck her pussy some other time, that throat is too inviting.")
+
+		saynn("Your hands grab Tavi's "+str("horns" if getModule("TaviModule").hasHorns() else "head")+" and pull her deeper onto your length, forcibly stretching her tight throat to the point of it bulging.")
+
+		saynn("Tavi produces a silent gasp as you proceed to fuck her throat, wet noises escaping from it while your puppy struggles to keep her gag reflex under control. She has no control in fact, the restraints make her completely helpless under your rough touch.")
+
+		saynn("It feels so good you let out a few quiet moans, her inner walls clenching around your length as she gags on it. Lonely tears begin streaming down her cheeks. And yet, her eyes show unquestionable loyalty.")
+
+		saynn("The more you fuck her, the closer your peak is..")
+
+		addButton("Throatpie", "Cum deep inside Tavi's throat", "do_petplay_fuck_throatpie")
+		addButton("Pull out", "Cum on Tavi's face instead", "do_petplay_fuck_bj_pullout")
+	if(state == "do_petplay_fuck_throatpie"):
+		saynn("You keep shoving your cock deep down that throat until its tightness pushes you over the edge.")
+
+		saynn("But you don't pull out. Instead, you ram your member fully inside, stealing Tavi's ability to breathe completely! Your length starts throbbing inside her.. as the waves of thick {pc.cum} begin flowing down her walls, straight into her belly.")
+
+		saynn("Tavi's eyes roll up. Her body is getting weaker and weaker.. until she suddenly cums too, her frame shivering wildly while her pussy clenches around the cock that's not there and then squirts, spawning a fountain of transparent juices.")
+
+		saynn("It feels better than any pussy, Tavi's throat is clenching extremely tight around your cock.. But you pull out as soon as you sense her getting too weak.")
+
+		saynn("Tavi gasps and flops onto the floor. She starts coughing, sometimes coughing out {pc.cum} that probably went in the wrong pipe.")
+
+		saynn("[say=pc]Good puppy. Such a good puppy.[/say]")
+
+		saynn("Tavi is.. lying wasted on the floor, her breath extremely ragged and deep. But this seems to have satisfied her heat, strangely enough.")
+
+		addButton("Continue", "See what happens next", "start_talk")
+	if(state == "do_petplay_fuck_bj_pullout"):
+		playAnimation(StageScene.PuppySexOral, "tease", {npc="tavi", npcBodyState={naked=true}, bodyState={naked=true, hard=true}})
+		saynn("You keep shoving your cock deep down that throat until its tightness pushes you over the edge.")
+
+		saynn("But then, instead of feeding Tavi, you decide to give her a nice thick slimy facial. Your cock is throbbing in front of her face while strings of your {pc.cum} are landing on it, creating a lewd pattern and marking her fur.")
+
+		saynn("Tavi squints and closes one of her eyes when the seed covers it. Your {pc.cum} begins dripping down her cheeks and chin.")
+
+		saynn("[say=pc]Good puppy. Best puppy.[/say]")
+
+		saynn("She huffs even after your compliments. It seems she didn't get to cum. And these restraints make sure that she can't do it even if she really wanted to. Tavi is forced to wear your seed on her face while her body.. just cools down.")
+
+		addButton("Continue", "See what happens next", "start_talk")
+	if(state == "do_petplay_fuck_behind"):
+		playAnimation(StageScene.PuppySexAllFours, "fast", {npc="tavi", npcBodyState={naked=true}, bodyState={naked=true, hard=true}})
+		saynn("Enough teasing. You pull away from Tavi and move behind her, already aligning your {pc.penis} with her sex. The feline looks over her shoulder, her tail quickly getting out of the way, giving you full access to her love tunnel.")
+
+		saynn("[say=tavi]Woof..[/say]")
+
+		saynn("One thrust and you're inside. Your hands land on Tavi's hips and command them while your cock spreads open her slit and stretches the inner walls wide. Puppy purrs as she feels your length pulsing inside her.")
+
+		saynn("Your hand grabs her tail and uses it as a leash, pulling, while you are using your pet's body for your pleasure.")
+
+		saynn("[say=tavi]..Awo.. wo-..o -f..[/say]")
+
+		saynn("Tavi is trying to squirm but the restraints keep her nice and still for you. Soon enough, you feel your orgasm approaching..")
+
+		addButton("Cum inside", "Breed your pet", "do_petplay_fuck_cuminside")
+		addButton("Pull out", "Cum all over your pet's back instead", "do_petplay_fuck_pullout")
+	if(state == "do_petplay_fuck_cuminside"):
+		playAnimation(StageScene.PuppySexAllFours, "inside", {npc="tavi", npcBodyState={naked=true}, bodyState={naked=true, hard=true}})
+		saynn("One rough motion and you shove your whole length inside. Tavi's body is shivering as your thrust pushes her over the edge as well. Her pussy clenching around your throbbing {pc.penis} while strings of thick virile {pc.cum} flood her womb to the brim.")
+
+		saynn("[say=tavi]Awoo-o-of~..[/say]")
+
+		saynn("Seems Tavi approves of this, her tail wags into your hand while her slit milks you for all of your seed.")
+
+		saynn("[say=pc]Nghrh.. Good puppy.[/say]")
+
+		saynn("After her orgasm ends, Tavi just flops exhausted, letting the restraints hold her standing. Both of you got your needs satisfied it seems.")
+
+		addButton("Continue", "See what happens next", "start_talk")
+	if(state == "do_petplay_fuck_pullout"):
+		playAnimation(StageScene.PuppySexAllFours, "tease", {npc="tavi", npcBodyState={naked=true}, bodyState={naked=true, hard=true}})
+		saynn("Tavi's body is shivering, feeling the approaching climax, her pussy is clenching around your throbbing {pc.penis} so well.. But you decide to pull out at the last possible second, denying Tavi her orgasm while cumming all over her butt instead.")
+
+		saynn("Strings of thick virile {pc.cum} mark her fur. Tavi huffs and stomps a lot, her restraints not leaving her much room to protest.")
+
+		saynn("[say=tavi]Huff..[/say]")
+
+		saynn("It's cute to see her not breaking character even when she is left unsatisfied. As her body begins to cool, little quiet whines can be heard.")
+
+		addButton("Continue", "See what happens next", "start_talk")
+	if(state == "do_petplay_strapon"):
+		playAnimation(StageScene.PuppySexOral, "tease", {npc="tavi", npcBodyState={naked=true}, bodyState={naked=true, hard=true}})
+		saynn("You are feeling kinky today so you decide to quickly grab some puppy restraints and force them on Tavi's paws and legs, making her stand on her knees and elbows.")
+
+		saynn("[say=tavi]..woof..[/say]")
+
+		saynn("She is bouncing and wiggling while panting softly, her tail wagging a lot. Tavi is already slipping into her puppy mindset.")
+
+		saynn("[say=tavi]Woof?..[/say]")
+
+		saynn("Your puppy rubs her body against you, teasingly presenting you her sex. The animal heat seems to be driving her up to the wall, making her eager to get fucked. So why deny her?")
+
+		saynn("After restraining your pet, you take a step back and secure a strapon harness around your waist before crouching and gesturing to Tavi to come closer. She obeys, crawling along the floor until her muzzle bumps into your new toy.")
+
+		saynn("[say=tavi]Woof..[/say]")
+
+		saynn("Without any input, she starts licking and nuzzling the rubber length.")
+
+		saynn("Might as well let her continue.")
+
+		addButton("Continue", "See what happens next", "do_petplay_strapon_bj")
+	if(state == "do_petplay_strapon_bj"):
+		playAnimation(StageScene.PuppySexOral, "sex", {npc="tavi", npcBodyState={naked=true}, bodyState={naked=true, hard=true}})
+		saynn("After teasing your fake cock for a bit, Tavi parts her lips and grabs its tip into her mouth, sucking softly while her tongue works along the length. You don't feel it since it's just a toy but Tavi seems to be enjoying herself, her rear is swaying a lot as she is rubbing her thighs against each other.")
+
+		saynn("Maybe it's time for the main event.")
+
+		if (!isVirgin):
+			addButton("Fuck Tavi", "Get behind her", "do_petplay_strapon_behind")
+		else:
+			addDisabledButton("Fuck Tavi", "Tavi can't be a virgin for this")
+		addButton("Deepthroat", "Make Tavi deepthroat the toy instead", "do_petplay_strapon_dt")
+	if(state == "do_petplay_strapon_dt"):
+		playAnimation(StageScene.PuppySexOral, "fast", {npc="tavi", npcBodyState={naked=true}, bodyState={naked=true, hard=true}})
+		saynn("You can strapon her pussy some other time, that throat is too inviting.")
+
+		saynn("Your hands grab Tavi's "+str("horns" if getModule("TaviModule").hasHorns() else "head")+" and pull her deeper onto your rubber length, forcibly stretching her tight throat to the point of it bulging.")
+
+		saynn("Tavi produces a silent gasp as you proceed to fuck her throat, wet noises escaping from it while your puppy struggles to keep her gag reflex under control. She has no control in fact, the restraints make her completely helpless under your rough touch.")
+
+		saynn("It feels good to be in full control, her inner walls clenching around your strapon as she gags on it. Lonely tears begin streaming down her cheeks. And yet, her eyes show unquestionable loyalty.")
+
+		saynn("You can feel some sensation building in Tavi..")
+
+		addButton("Harder", "Test Tavi's limits", "do_petplay_strapon_harder")
+		addButton("Pull out", "Cum on Tavi's face instead", "do_petplay_strapon_bj_pullout")
+		saynn("You've been fucking that throat for while. Maybe it's time to stop.")
+
+		saynn("But you don't pull out. Instead, you ram the toy fully inside, aside from the knot, stealing Tavi's ability to breathe completely! She is at your complete mercy..")
+
+		saynn("Tavi's loyal eyes roll up. Her body is getting weaker and weaker.. until she suddenly cums, her frame shivering wildly while her pussy clenches around the cock that's not there and then squirts, spawning a fountain of transparent juices.")
+
+		saynn("It probably feels better than any pussy, Tavi's throat is clenching extremely tight around that rubber cock.. But you pull out as soon as you sense her getting too weak.")
+
+		saynn("Tavi gasps and flops onto the floor. She starts coughing a lot.")
+
+		saynn("[say=pc]Good puppy. Such a good puppy.[/say]")
+
+		saynn("Tavi is.. lying wasted on the floor, her breath extremely ragged and deep. But this seems to have satisfied her heat, strangely enough.")
+
+		addButton("Continue", "See what happens next", "start_talk_removestrapon")
+	if(state == "do_petplay_strapon_bj_pullout"):
+		playAnimation(StageScene.PuppySexOral, "tease", {npc="tavi", npcBodyState={naked=true}, bodyState={naked=true, hard=true}})
+		saynn("You decide not to push Tavi too far and instead just gradually slow down until you pull out the toy completely. Tavi is squirming, it seems she had something going.. But now she doesn't have the source of that stimulation.")
+
+		saynn("[say=pc]Good puppy. Best puppy.[/say]")
+
+		saynn("She huffs even after your compliments. She didn't get to cum. And these restraints make sure that she can't do it even if she really wanted to. Tavi is forced to endure her body cooling down.")
+
+		addButton("Continue", "See what happens next", "start_talk_removestrapon")
+	if(state == "do_petplay_strapon_behind"):
+		playAnimation(StageScene.PuppySexAllFours, "fast", {npc="tavi", npcBodyState={naked=true}, bodyState={naked=true, hard=true}})
+		saynn("Enough teasing. You pull away from Tavi and move behind her, already aligning your strapon with her sex. The feline looks over her shoulder, her tail quickly getting out of the way, giving you full access to her love tunnel.")
+
+		saynn("[say=tavi]Woof..[/say]")
+
+		saynn("One thrust and you're inside. Your hands land on Tavi's hips and command them while the rubber cock spreads open her slit and stretches the inner walls wide. Puppy purrs as she feels your new length inside her.")
+
+		saynn("Your hand grabs her tail and uses it as a leash, pulling, while you are throwing your hips forward.")
+
+		saynn("[say=tavi]..Awo.. wo-..o -f..[/say]")
+
+		saynn("Tavi is trying to squirm but the restraints keep her nice and still for you. It doesn't take long for Tavi's moans to start coming out faster.")
+
+		addButton("Knot Tavi", "Breed your pet", "do_petplay_strapon_cuminside")
+		addButton("Pull out", "Just pull the strapon out", "do_petplay_strapon_pullout")
+	if(state == "do_petplay_strapon_cuminside"):
+		playAnimation(StageScene.PuppySexAllFours, "inside", {npc="tavi", npcBodyState={naked=true}, bodyState={naked=true, hard=true}})
+		saynn("One rough motion and you shove your whole length inside, including the fat rubber knot. Tavi's body is shivering as your thrust pushes her over the edge as well. Her pussy clenching around your throbbing strapon while strings of cum-like substance flood her womb to the brim. It seems this strapon was loaded..")
+
+		saynn("[say=tavi]Awoo-o-of~..[/say]")
+
+		saynn("Seems Tavi approves of this, her tail wags into your hand while her slit milks the toy for all of its cumlube. Where is Tavi getting so much of it..")
+
+		saynn("[say=pc]Nghrh.. Good puppy.[/say]")
+
+		saynn("After her orgasm ends, Tavi just flops exhausted, letting the restraints hold her standing. She got her needs satisfied, it seems.")
+
+		addButton("Continue", "See what happens next", "start_talk_removestrapon")
+	if(state == "do_petplay_strapon_pullout"):
+		playAnimation(StageScene.PuppySexAllFours, "tease", {npc="tavi", npcBodyState={naked=true}, bodyState={naked=true, hard=true}})
+		saynn("Tavi's body is shivering, feeling the approaching climax, her pussy is clenching around your strapon so well.. But you decide to pull out at the last possible second, denying Tavi her orgasm.")
+
+		saynn("Tavi huffs and stomps a lot, her restraints not leaving her much room to protest. Her pussy pulsing, showing how close she was.")
+
+		saynn("[say=tavi]Huff..[/say]")
+
+		saynn("It's cute to see her not breaking character even when she is left unsatisfied. As her body begins to cool, little quiet whines can be heard.")
+
+		addButton("Continue", "See what happens next", "start_talk_removestrapon")
 func taviSpeak(normalSpeak, corruptSpeak, pureSpeak):
 	if(isCorrupt):
 		return corruptSpeak
@@ -833,6 +1064,19 @@ func _react(_action: String, _args):
 		else:
 			#usedStrapon = true
 			setState(RNG.pick(["do_fuck1_strapon", "do_fuck2_strapon", "do_fuck3_strapon"]))
+			var strapon = GlobalRegistry.createItem("StraponCanine")
+			var fluids = strapon.getFluids()
+			fluids.addFluid("CumLube", RNG.randi_range(3, 5)*100.0)
+			GM.pc.getInventory().equipItem(strapon)
+		return
+
+	if(_action == "do_petplay_fuck_pick"):
+		if(GM.pc.hasReachablePenis()):
+			#usedStrapon = false
+			setState("do_petplay_fuck")
+		else:
+			#usedStrapon = true
+			setState("do_petplay_strapon")
 			var strapon = GlobalRegistry.createItem("StraponCanine")
 			var fluids = strapon.getFluids()
 			fluids.addFluid("CumLube", RNG.randi_range(3, 5)*100.0)
@@ -995,6 +1239,88 @@ func _react(_action: String, _args):
 	if(_action == "cor_facesit_cum"):
 		getModule("TaviModule").addCorruption(15)
 		GM.pc.cummedOnBy("tavi", FluidSource.Vagina)
+
+	if(_action == "do_petplay_fuck_bj"):
+		processTime(2*60)
+
+	if(_action == "do_petplay_fuck_behind"):
+		processTime(2*60)
+
+	if(_action == "do_petplay_fuck_dt"):
+		processTime(2*60)
+
+	if(_action == "do_petplay_fuck_throatpie"):
+		processTime(2*60)
+		getCharacter("tavi").cummedInMouthBy("pc")
+		GM.pc.orgasmFrom("tavi")
+		
+		var petSkillMod = 1.0 + getModule("TaviModule").getSkillScore("taviSkillPetplay") / 3.0
+		getModule("TaviModule").addCorruption(4 * petSkillMod)
+
+	if(_action == "do_petplay_fuck_bj_pullout"):
+		processTime(2*60)
+		getCharacter("tavi").cummedOnBy("pc")
+		GM.pc.orgasmFrom("tavi")
+		
+		var petSkillMod = 1.0 + getModule("TaviModule").getSkillScore("taviSkillPetplay") / 3.0
+		getModule("TaviModule").addCorruption(-4 * petSkillMod)
+
+	if(_action == "do_petplay_fuck_cuminside"):
+		processTime(2*60)
+		getCharacter("tavi").cummedInVaginaBy("pc")
+		GM.pc.orgasmFrom("tavi")
+		
+		var petSkillMod = 1.0 + getModule("TaviModule").getSkillScore("taviSkillPetplay") / 3.0
+		getModule("TaviModule").addCorruption(5 * petSkillMod)
+
+	if(_action == "do_petplay_fuck_pullout"):
+		processTime(2*60)
+		getCharacter("tavi").cummedOnBy("pc")
+		GM.pc.orgasmFrom("tavi")
+		
+		var petSkillMod = 1.0 + getModule("TaviModule").getSkillScore("taviSkillPetplay") / 3.0
+		getModule("TaviModule").addCorruption(-5 * petSkillMod)
+
+	if(_action == "do_petplay_strapon_bj"):
+		processTime(2*60)
+
+	if(_action == "do_petplay_strapon_behind"):
+		processTime(2*60)
+
+	if(_action == "do_petplay_strapon_dt"):
+		processTime(2*60)
+
+	if(_action == "do_petplay_strapon_harder"):
+		processTime(2*60)
+		#getCharacter("tavi").cummedInMouthBy("pc")
+		#GM.pc.orgasmFrom("tavi")
+		
+		var petSkillMod = 1.0 + getModule("TaviModule").getSkillScore("taviSkillPetplay") / 3.0
+		getModule("TaviModule").addCorruption(4 * petSkillMod)
+
+	if(_action == "do_petplay_strapon_bj_pullout"):
+		processTime(2*60)
+		#getCharacter("tavi").cummedOnBy("pc")
+		#GM.pc.orgasmFrom("tavi")
+		
+		var petSkillMod = 1.0 + getModule("TaviModule").getSkillScore("taviSkillPetplay") / 3.0
+		getModule("TaviModule").addCorruption(-4 * petSkillMod)
+
+	if(_action == "do_petplay_strapon_cuminside"):
+		processTime(2*60)
+		getCharacter("tavi").cummedInVaginaBy("pc", FluidSource.Strapon)
+		GM.pc.orgasmFrom("tavi")
+		
+		var petSkillMod = 1.0 + getModule("TaviModule").getSkillScore("taviSkillPetplay") / 3.0
+		getModule("TaviModule").addCorruption(5 * petSkillMod)
+
+	if(_action == "do_petplay_strapon_pullout"):
+		processTime(2*60)
+		#getCharacter("tavi").cummedOnBy("pc")
+		GM.pc.orgasmFrom("tavi")
+		
+		var petSkillMod = 1.0 + getModule("TaviModule").getSkillScore("taviSkillPetplay") / 3.0
+		getModule("TaviModule").addCorruption(-5 * petSkillMod)
 
 	setState(_action)
 
