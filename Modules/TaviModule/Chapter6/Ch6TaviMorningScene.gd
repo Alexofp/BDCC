@@ -8,6 +8,7 @@ var sexSkill = 0
 var usedStrapon = false
 var sexSkillMod = 1.0
 var chillTalk = 0
+var tookVirginity = false
 
 func _init():
 	sceneID = "Ch6TaviMorningScene"
@@ -220,7 +221,7 @@ func _run():
 				addDisabledButton("Fuck her", "Tavi can't be a virgin for this")
 		if (petSkill > 3):
 			addButton("Petplay fuck", "Fuck Tavi while she is wearing a bitchsuit", "do_petplay_fuck_pick")
-		if (painSkill > 5):
+		if (painSkill > 4):
 			addButton("Pussy spanking", "Make Tavi cum from having her pussy smacked", "do_pussy_spank")
 		if (sexSkill > 4):
 			addButton("Anal sex", "Try to satisfy Tavi's heat by fucking her butt", "do_anal_pick")
@@ -1034,6 +1035,119 @@ func _run():
 		saynn("It's cute to see her not breaking character even when she is left unsatisfied. As her body begins to cool, little quiet whines can be heard.")
 
 		addButton("Continue", "See what happens next", "start_talk_removestrapon")
+	if(state == "do_pussy_spank"):
+		playAnimation(StageScene.GivingBirth, "birth", {pc="tavi", bodyState={naked=true}})
+		saynn("A devious thought comes into your mind. You know a great way to solve that heat problem that would also satisfy her masochistic cravings at the same time.")
+
+		saynn("You push Tavi onto the bed and part her thighs, exposing her intimate area that produces such an alluring scent. A mixture of excitement and curiosity courses through Tavi as your palm lands on her sex and proceeds to rub it softly, she is probably expecting you to make her feel good..")
+
+		saynn("[say=pc]This will be painful.[/say]")
+
+		saynn("Tavi only produces a curious hum when your hand suddenly comes down with a resounding smack, Tavi's loud cry echoing in the cell as you deliver your first spank to her sensitive wet pussy. It wasn't even that powerful of an impact but it really caught her off-guard.")
+
+		saynn("[say=tavi]Ah! F-fuck!..[/say]")
+
+		saynn("She closes her thighs instinctively.. But you don't let her get away so easily, forcibly spreading her legs again before delivering another little slap to her pussy folds, causing them to pulse and receive a green glow while the rest of her body squirms from the painful sensations.")
+
+		saynn("[say=tavi]Ow!..[/say]")
+
+		saynn("She tries to cover her glowing pussy but you slap her paws away.")
+
+		saynn("[say=pc]No. You're gonna endure it. Like a good painslut.[/say]")
+
+		saynn("The feline is panting already, her legs shivering a little. So you decide to give her a little break and adjust your approach. Your fingers land on her slick petals and gently explore them, rubbing the sensitive flesh. Tavi produces a moan of discomfort while you are teasing her irritated skin.. but you also spot a sizable wet spot forming on the bedsheets underneath her.")
+
+		saynn("[say=tavi]Y-yes.. O-okay..[/say]")
+
+		saynn("So cute to see her twitch each time your digits change direction or jump to some other spot. Tavi does not try to close her legs anymore. But she is clearly bracing.. So why make her wait?")
+
+		saynn("You pick a good moment and start spanking Tavi's pussy again, slightly raising your palm before bringing it down for a weak but stinging impact. And this time, instead of a painful cry, Tavi produces a stifled moan. The more you spank her, the louder and more passionate her noises become. Tavi is grinding her teeth, barely balancing on that scale of enjoyment vs torture.")
+
+		saynn("[say=tavi]Ah.. Ngh-h.. F-fu.. ck..[/say]")
+
+		saynn("Her body is shivering from so much pain.. or.. is she about to cum?")
+
+		addButton("Harder", "Make Tavi cum from pain", "do_pussy_spank_cum")
+		addButton("Deny", "Deny Tavi this orgasm", "do_pussy_spank_deny")
+	if(state == "do_pussy_spank_deny"):
+		playAnimation(StageScene.GivingBirth, "idle", {pc="tavi", bodyState={naked=true}})
+		saynn("Tavi is clearly expecting some big final slap.. and so you raise your palm.. just to keep it raised like that. Tavi is squinting and bracing, expecting your hand to come down sticking any second.. but it just never does.")
+
+		saynn("[say=tavi]Are you gonna do it?.. I'm so.. close..[/say]")
+
+		saynn("You smile and shake your head. Tavi sees that and starts whining. As her heat slowly goes away unsatisfied, the sensitivity of her bits returns, making pain feel that much stronger.")
+
+		saynn("[say=tavi]Ow-w..[/say]")
+
+		saynn("Each time she tries to soothe her skin with her digits, she only ends up hissing and pulling her hand away. It clearly hurts.")
+
+		saynn("[say=tavi]No-o.. I was so clo-o-ose.. Why are you so mean..[/say]")
+
+		saynn("Seems like spanking her slit wasn't mean but not letting her cum? That's the real torture!")
+
+		saynn("You leave Tavi to recover after that intense session.")
+
+		addButton("Continue", "That was nice", "start_talk")
+	if(state == "do_pussy_spank_cum"):
+		saynn("With a final, most powerful spank on Tavi's slit, her body gets pushed over the edge, a weird mix of pleasure and pain crashing over her like a tidal wave, her glowing bruises pussy producing a strong uncontrollable fountain of juices.")
+
+		saynn("[say=tavi]Fuck me-e-e..[/say]")
+
+		saynn("The two opposite feelings collide and enhance each other, intensifying her orgasm in ways she never thought were possible. Tavi's lusty eyes roll away, her body trembling and arching itself.")
+
+		saynn("Even after the last waves of her orgasm pass through her, Tavi is still squirming and twitching each time she tries to close her legs, the afterglow making her moan.")
+
+		saynn("[say=pc]Such a good pain toy.[/say]")
+
+		saynn("[say=tavi]T-thank you..[/say]")
+
+		addButton("Enough", "That was nice", "start_talk")
+		addButtonWithChecks("Breed Tavi", "Fuck that bruised pussy", "do_pussy_spank_breed_start", [], [ButtonChecks.HasReachablePenis])
+	if(state == "do_pussy_spank_breed_start"):
+		playAnimation(StageScene.SexMissionary, "tease", {npc="tavi", pc="pc", npcBodyState={naked=true}, bodyState={naked=true, hard=true}})
+		saynn("That was enough for Tavi.. but it wasn't enough for you. An even more devious thought comes into your mind as you lean in closer to your pet, your lips finding Tavi's in a deep, lingering kiss. Tavi responds with a soft whimper as you gently spread her legs wider and position yourself between them.")
+
+		saynn("Tavi's pussy is still sensitive from that series of slaps that her folds received. She jerks when she feels your {pc.penis} pressing against her"+str(" virgin" if getModule("TaviModule").isVirgin() else "")+" entrance. Her shaky eyes lock onto yours while you continue the deep kiss, making Tavi focus on it instead..")
+
+		addButton("Thrust inside", "Fuck Tavi's pussy raw", "do_pussy_spank_breed")
+	if(state == "do_pussy_spank_breed"):
+		playAnimation(StageScene.SexMissionary, "fast", {npc="tavi", pc="pc", npcBodyState={naked=true}, bodyState={naked=true, hard=true}})
+		if (tookVirginity):
+			saynn("As you slowly enter her.. you quickly encounter Tavi's organic barricade, the last sign of her innocence. Her body visibly tenses the more you put pressure on it.. Seems like this requires some force..")
+
+			saynn("And so, with one rough motion, you thrust inside! Your member tears through Tavi's hymen, [b]stealing her virginity![/b] Poor Tavi arches her back and produces a muffled cry as two kinds of pain amplify each other inside her mind, her pussy clenching extremely tightly around its first ever cock, some green glowing blood drips onto her sheets.")
+
+			saynn("And all of that while you keep kissing her, your tongues doing a little tango inside Tavi's mouth, exchanging saliva.")
+
+		else:
+			saynn("And so, with one rough motion, you thrust inside! Poor Tavi arches her back and produces a muffled cry as her irritated skin gets forcibly spread by your cock, her pussy clenching extremely tightly around it while also pulsating in time with her quick breathing.")
+
+			saynn("And all of that while you keep kissing her, your tongues doing a little tango inside Tavi's mouth, exchanging saliva.")
+
+		saynn("Quickly, you find a good rhythm, each of your thrusts sending the same kinds of sharp impulses that the pussy spanking did. Finally, you end the kiss, allowing Tavi to start producing painful noises of love, scratching your sadistic itch.")
+
+		saynn("[say=tavi]It h-hurts.. so good..[/say]")
+
+		saynn("Her paws grip onto you, claws digging into your skin as the pleasure within her builds once more. Her bruised"+str(" bleeding" if tookVirginity else "")+" pussy is pulsing around your length until.. with a passionate moan, Tavi's orgasm clouds her mind, her body starts to convulse underneath you. Feeling such tightness, your thrusts only become more urgent and rough, your own release catching up fast..")
+
+		saynn("After all this.. pulling out is not an option. As Tavi's walls keep tightening around your member, you decide to just give in to it, your body shuddering as you get pushed way past your edge, your cock is throbbing as it stuffs that awaiting womb full of your {pc.cum}. A load so big that some is already leaking out"+str(", mixing with the green blood" if tookVirginity else "")+".")
+
+		addButton("Continue", "See what happens next", "do_pussy_spank_breed_after")
+	if(state == "do_pussy_spank_breed_after"):
+		playAnimation(StageScene.SexMissionary, "inside", {npc="tavi", pc="pc", npcBodyState={naked=true}, bodyState={naked=true, hard=true}})
+		saynn("Both of you are breathing heavily. Sensitivity gradually returns to Tavi, making her hiss softly, her bruised pussy got put under a lot of stress today.."+str(" Not to mention getting her virginity stolen.. But that was gonna happen one day either way.." if tookVirginity else "")+"")
+
+		saynn("[say=tavi]Ow.. ow..[/say]")
+
+		saynn("[say=pc]You were exceptional, Tavi.[/say]")
+
+		saynn("Tavi's cheeks blush, she is trying to offer you a smile but can't really hold it, the corners of her mouth shaking a little.")
+
+		saynn("[say=tavi]T-thank you.. h-h..[/say]")
+
+		saynn("You pull out and let Tavi recover. She hisses again as your seed starts leaking out of her used bruised pussy.")
+
+		addButton("Continue", "That was nice", "start_talk")
 func taviSpeak(normalSpeak, corruptSpeak, pureSpeak):
 	if(isCorrupt):
 		return corruptSpeak
@@ -1082,6 +1196,9 @@ func _react(_action: String, _args):
 			fluids.addFluid("CumLube", RNG.randi_range(3, 5)*100.0)
 			GM.pc.getInventory().equipItem(strapon)
 		return
+
+	if(_action == "do_pussy_spank"):
+		processTime(5*60)
 
 	if(_action == "do_anal_pick"):
 		if(GM.pc.hasReachablePenis()):
@@ -1322,6 +1439,29 @@ func _react(_action: String, _args):
 		var petSkillMod = 1.0 + getModule("TaviModule").getSkillScore("taviSkillPetplay") / 3.0
 		getModule("TaviModule").addCorruption(-5 * petSkillMod)
 
+	if(_action == "do_pussy_spank_cum"):
+		processTime(2*60)
+		var painSkillMod = 1.0 + getModule("TaviModule").getSkillScore("taviSkillMasochism") / 3.0
+		getModule("TaviModule").addCorruption(4 * painSkillMod)
+
+	if(_action == "do_pussy_spank_deny"):
+		processTime(2*60)
+		var painSkillMod = 1.0 + getModule("TaviModule").getSkillScore("taviSkillMasochism") / 3.0
+		getModule("TaviModule").addCorruption(-6 * painSkillMod)
+
+	if(_action == "do_pussy_spank_breed_start"):
+		processTime(3*60)
+
+	if(_action == "do_pussy_spank_breed"):
+		processTime(3*60)
+		var painSkillMod = 1.0 + getModule("TaviModule").getSkillScore("taviSkillMasochism") / 3.0
+		getModule("TaviModule").addCorruption(3 * painSkillMod)
+		if(getModule("TaviModule").isVirgin()):
+			tookVirginity = true
+			setFlag("TaviModule.TaviIsNotVirgin", true)
+		getCharacter("tavi").cummedInVaginaBy("pc")
+		GM.pc.orgasmFrom("tavi")
+
 	setState(_action)
 
 func saveData():
@@ -1335,6 +1475,7 @@ func saveData():
 	data["usedStrapon"] = usedStrapon
 	data["sexSkillMod"] = sexSkillMod
 	data["chillTalk"] = chillTalk
+	data["tookVirginity"] = tookVirginity
 
 	return data
 
@@ -1349,3 +1490,4 @@ func loadData(data):
 	usedStrapon = SAVE.loadVar(data, "usedStrapon", false)
 	sexSkillMod = SAVE.loadVar(data, "sexSkillMod", 1.0)
 	chillTalk = SAVE.loadVar(data, "chillTalk", 0)
+	tookVirginity = SAVE.loadVar(data, "tookVirginity", false)
