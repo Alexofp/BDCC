@@ -184,6 +184,7 @@ func _init():
 		"res://Modules/TaviModule/Chapter6/MasochismMinigame/TaviMasochismOutcomesScene.gd",
 		"res://Modules/TaviModule/Chapter6/MasochismMinigame/TaviMasochismUnconsciousScene.gd",
 		"res://Modules/TaviModule/Chapter6/Skills/Ch6TaviPetplaySkillScene.gd",
+		"res://Modules/TaviModule/Chapter6/Skills/Ch6TaviWatersportsSkillScene.gd",
 		
 		"res://Modules/TaviModule/Chapter6/CorruptionScenes/Ch6TaviCorruption75Scene.gd",
 		"res://Modules/TaviModule/Chapter6/CorruptionScenes/Ch6TaviCorruption50Scene.gd",
@@ -305,7 +306,7 @@ func getSkillInfo(skillID):
 		return {
 			name = "Watersports",
 			desc = "Training Tavi to enjoy pee",
-			scene = "Ch6TaviSexSkillScene",
+			scene = "Ch6TaviWatersportsSkillScene",
 		}
 	
 	return null
