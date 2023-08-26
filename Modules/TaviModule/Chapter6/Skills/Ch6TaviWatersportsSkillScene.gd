@@ -270,6 +270,8 @@ func _run():
 			addDisabledButton("Fill container", "You don't have any items that Tavi can pee into")
 		addButton("Watch her pee", "Watch Tavi pee", "bathroom_watch_pee")
 		addButton("Golden shower", "Pee on Tavi", "bathroom_goldenshower")
+		if (waterSkill >= 7):
+			addButton("Tie to urinal", "A final challenge for Tavi", "bathroom_urinal")
 	if(state == "bathroom_fill_pick"):
 		saynn("Pick what container you want Tavi to pee into?")
 
@@ -482,8 +484,203 @@ func _run():
 		else:
 			saynn("You stand near Tavi, waiting for the urge to happen. And so, after some time, a stream of piss emerges from you!")
 
-		saynn("You begin pissing all over Tavi's body.")
+		if (waterSkill <= 5):
+			saynn("Tavi instantly closes her eyes when the first golden droplets land on her fur and then cascade down her body. You notice shivers running through her spine as the warm liquid marks her with your scent.")
 
+			saynn("She is not brave enough to taste it, just holding her mouth shut close, your piss creating fancy patterns when flowing over her glowy spots.")
+
+			saynn("[say=pc]Good girl.[/say]")
+
+			saynn("Tavi is purring quietly while you praise her. Eventually, your stream of piss begins to die down. All the while Tavi is kneeling obediently before you, her fur has a strong odor to it now..")
+
+			saynn("[say=pc]How are you feeling?[/say]")
+
+			saynn("She uses her paw to make sure her lips are clean. She opens her eyes and looks at you.")
+
+			saynn("[say=tavi]It's.. different.. Very warm though. Can I maybe take a shower now?..[/say]")
+
+		else:
+			saynn("Despite how gross the scent is, Tavi produces a cute moan when the first golden droplets land on her fur before cascading down her body. You are marking her.. and she loves it.. even tilting her head back and parting her lips, allowing some of the yellow fluid to land on her tongue.")
+
+			saynn("Tavi's paws slip down to her"+str(" virgin" if getModule("TaviModule").isVirgin() else "")+" slit and rub it idly. Her own juices are mixing up with your piss while streaming over her pussy before pooling underneath her.")
+
+			saynn("[say=tavi]Yes.. I'm your little piss-slut..[/say]")
+
+			saynn("[say=pc]Yes you are. My piss-slut.[/say]")
+
+			saynn("Tavi is purring quietly while you praise her. Your piss creates fancy patterns when flowing over her glowy spots. Eventually, your stream of piss begins to die down. All the while Tavi is kneeling obediently before you, her fur has a strong odor to it now..")
+
+			saynn("[say=pc]How are you feeling?[/say]")
+
+			saynn("She licks her lips and then looks at you. The sight is incredible.")
+
+			saynn("[say=tavi]It feels good.. Very.. to be marked by you.[/say]")
+
+		addButton("No shower", "Keep Tavi like this", "bathroom_goldenshower_noshower")
+		addButton("Shower", "Might as well let Tavi take a shower", "bathroom_goldenshower_shower")
+	if(state == "bathroom_goldenshower_noshower"):
+		playAnimation(StageScene.Duo, "stand", {npc="tavi"})
+		saynn("You decide that it's best to let Tavi keep that piss on her. You can always let her take a shower later.")
+
+		if (waterSkill <= 5):
+			saynn("[say=pc]No shower. I didn't piss on you just to wash it away instantly.[/say]")
+
+			saynn("Tavi lowers her gaze.")
+
+			saynn("[say=tavi]But.. Yeah, that makes sense.[/say]")
+
+			saynn("You approach the tall feline and try to pat her while avoiding the messy spots. She purrs softly again.")
+
+			saynn("[say=tavi]You want your pet to always have your scent.[/say]")
+
+			saynn("Tavi gets up and goes back to the dressing room before putting on her uniform over her wet fur.")
+
+			saynn("Time to go back to her cell.")
+
+		else:
+			saynn("[say=pc]No shower today. You get to keep my scent for a while longer.[/say]")
+
+			saynn("Tavi purrs happily.")
+
+			saynn("[say=tavi]Thank you~. I will proudly carry it.[/say]")
+
+			saynn("Tavi gets up and goes back to the dressing room before putting on her uniform over her wet fur.")
+
+			saynn("Time to go back to her cell.")
+
+		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "bathroom_goldenshower_shower"):
+		playAnimation(StageScene.Solo, "stand", {pc="tavi", bodyState={naked=true}})
+		saynn("You decide that it's best to wash it all off before anyone sees Tavi like this. You reach out and turn the water on. Cold water, the only type that is allowed for inmates.")
+
+		if (waterSkill <= 5):
+			saynn("Tavi produces a soft sigh of content when the piss gets washed away down the drain. She gets up, her paws brushing over her fur and wet hair.")
+
+			saynn("[say=tavi]Thank you. It feels nice but I like being clean.[/say]")
+
+			saynn("Such a cat.")
+
+			saynn("But even after showering, her fur is still carrying some of your scent. It will take more than that to get it out now.")
+
+			saynn("Tavi steps into the dressing room where she dries herself with a towel before putting on her uniform.")
+
+			saynn("Time to return back to her cell.")
+
+		else:
+			saynn("Tavi produces a soft sigh when the piss gets washed away down the drain. She gets up, her paws brushing over her fur and wet hair.")
+
+			saynn("[say=tavi]Aw. What if I liked being like that?[/say]")
+
+			saynn("But even after showering, her fur is still carrying some of your scent. It will take more than that to get it out now. Tavi smells her fur and purrs.")
+
+			saynn("[say=tavi]At least I still smell like you~.[/say]")
+
+			saynn("Tavi steps into the dressing room where she dries herself with a towel before putting on her uniform.")
+
+			saynn("Time to return back to her cell.")
+
+		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "bathroom_urinal"):
+		playAnimation(StageScene.Duo, "stand", {npc="tavi", npcBodyState={naked=true}})
+		saynn("You look around the bathroom. A set of urinals catches your eye. Maybe now is a good time to test how far Tavi has come.")
+
+		saynn("[say=pc]Hey Tavi. I wonder. Are you up for a challenge?[/say]")
+
+		saynn("Tavi crosses her arms and meets your gaze with confidence in her eyes. Then she leans closer to your face.")
+
+		saynn("[say=tavi]Try me~.[/say]")
+
+		saynn("[say=pc]What if it involves a lot of piss?[/say]")
+
+		saynn("Tavi chuckles and moves her lips to your ear.")
+
+		saynn("[say=tavi]Try. Me..[/say]")
+
+		saynn("She said. Suddenly you grab her by the collar and pull towards one of the urinals.. Tavi puts up a weak defense just for show but you easily overpower her, taking off her uniform and wrenching her arms behind her back.")
+
+		saynn("[say=pc]I don't wanna hear any complaints later.[/say]")
+
+		saynn("[say=tavi]You won't~.[/say]")
+
+		saynn("[say=pc]You're right.[/say]")
+
+		saynn("And with that, you bring a ring gag to her mouth. And that's not the last restraint that you're gonna put on her..")
+
+		addButton("Tie Tavi up", "Tie Tavi to the urinal", "bathroom_urinal_tie")
+	if(state == "bathroom_urinal_tie"):
+		playAnimation(StageScene.Urinal, "idle", {pc="tavi", bodyState={naked=true}})
+		saynn("Tavi parts her lips, allowing you to put a ring gag on her and secure it behind her head. Then you grab some cuffs and use them to chain Tavi to one of the clean urinals, one limb at a time.. until Tavi is positioned in a very compromising position, her pussy, tits and mouth are all on display.")
+
+		saynn("[say=tavi]Kinky..[/say]")
+
+		saynn("What do you wanna do with her now?")
+
+		addButton("Leave", "Leave Tavi like that for some time", "bathroom_urinal_leave")
+		addButton("Use Tavi", "Use Tavi like she is a piss toilet", "bathroom_urinal_use")
+	if(state == "bathroom_urinal_leave"):
+		playAnimation(StageScene.Solo, "stand")
+		removeCharacter("tavi")
+		saynn("Tavi eagerly awaits for you to use her. But instead of doing that, you grab a marker and write 'Piss toilet' on her body.")
+
+		saynn("[say=pc]I will be back soon.[/say]")
+
+		saynn("[say=tavi]Huh?.. When..[/say]")
+
+		saynn("You offer her a smile and pretend you didn't hear the question.")
+
+		saynn("Instead, you just step out of the bathroom and go do some random stuff.")
+
+		addButton("Continue", "See what happens next", "bathroom_urinal_leave_return")
+	if(state == "bathroom_urinal_leave_return"):
+		addCharacter("tavi", ["naked"])
+		playAnimation(StageScene.Urinal, "idle", {pc="tavi", bodyState={naked=true}})
+		saynn("After some time, you return back to Tavi and find her.. still chained to the urinal.")
+
+		saynn("But it's obvious that people have been using her.. Signs of piss everywhere, Tavi's wet fur, the smell..")
+
+		saynn("[say=tavi]You're back..[/say]")
+
+		saynn("[say=pc]Did you enjoy it?[/say]")
+
+		saynn("The corners of Tavi's mouth look raised. She is trying to smile.")
+
+		saynn("[say=pc]You don't have to answer.[/say]")
+
+		saynn("You hear a soft moan as Tavi suddenly starts peeing, all the extra liquid in her body made her want to relieve herself too. Luckily it all goes straight down the drain of the urinal.")
+
+		saynn("[say=tavi]Ah.. Much better..[/say]")
+
+		saynn("After that cute scene, you begin to unchain her and then bring her back to her cell.")
+
+		addButton("Continue", "See what happens next", "endthescene_resetequip")
+	if(state == "bathroom_urinal_use"):
+		if (GM.pc.isWearingChastityCage()):
+			saynn("After chaining Tavi to the urinal, it's time to use her. And so you expose your caged up cock and stand in front of your piss-slut. A few seconds later, a warm stream of urine began landing on Tavi's fur.")
+
+		elif (GM.pc.hasReachablePenis()):
+			saynn("After chaining Tavi to the urinal, it's time to use her. And so you expose your {pc.penis} and stand in front of your piss-slut. A few seconds later, a warm stream of urine began landing on Tavi's fur.")
+
+		elif (GM.pc.hasReachableVagina()):
+			saynn("After chaining Tavi to the urinal, it's time to use her. And so you expose your {pc.pussyStretch} pussy and stand in front of your piss-slut. A few seconds later, a warm stream of urine began landing on Tavi's fur.")
+
+		else:
+			saynn("After chaining Tavi to the urinal, it's time to use her. And so you expose your pisshole and stand in front of your piss-slut. A few seconds later, a warm stream of urine began landing on Tavi's fur.")
+
+		saynn("Tavi's breath hitches as the gross liquid begins flowing down her body, her eyes closing briefly as some of the piss lands into her opened mouth. She tugs at her restraints lightly while you focus on filling her, the ring gag makes it so she is forced to taste and swallow everything.")
+
+		saynn("Then she starts squirming when you pull away slightly and instead aim for her tits and belly, your piss following her curves with some flowing between the folds of her pussy, tickling them.")
+
+		saynn("[say=tavi]..ah..[/say]")
+
+		saynn("As the stream begins to subside, Tavi is left a wet mess, her fur smelling gross.")
+
+		saynn("[say=pc]Such a good piss-toilet.[/say]")
+
+		saynn("Tavi purrs and sticks her tongue out through the ring.")
+
+		saynn("You let most of the piss to go down the drain before unchaining Tavi and helping her get back to her cell while trying not to touch her too much..")
+
+		addButton("Continue", "See what happens next", "endthescene_resetequip")
 func taviSpeak(normalSpeak, corruptSpeak, pureSpeak):
 	if(isCorrupt):
 		return corruptSpeak
@@ -546,6 +743,9 @@ func _react(_action: String, _args):
 	if(_action == "bathroom_goldenshower"):
 		processTime(5*60)
 
+	if(_action == "bathroom_urinal"):
+		processTime(2*60)
+
 	if(_action == "bathroom_fill"):
 		processTime(5*60)
 		var item = _args[0]
@@ -570,10 +770,56 @@ func _react(_action: String, _args):
 			drankOnlyPiss = false
 		
 		fluids.transferTo(getCharacter("tavi").getBodypart(BodypartSlot.Head), 1.0)
+		getModule("TaviModule").addCorruption(3)
 
 	if(_action == "bathroom_goldenshower_pee"):
 		processTime(2*60)
 		getCharacter("tavi").pissedOnBy("pc")
+
+	if(_action == "bathroom_goldenshower_noshower"):
+		getModule("TaviModule").addCorruption(3)
+
+	if(_action == "bathroom_goldenshower_shower"):
+		processTime(3*60)
+		getCharacter("tavi").afterTakingAShower()
+		getModule("TaviModule").addCorruption(-3)
+
+	if(_action == "bathroom_urinal_tie"):
+		processTime(10*60)
+		getCharacter("tavi").getInventory().equipItem(GlobalRegistry.createItem("ringgag"))
+		#getCharacter("tavi").getInventory().equipItem(GlobalRegistry.createItem("blindfold"))
+		getCharacter("tavi").getInventory().equipItem(GlobalRegistry.createItem("inmatewristcuffs"))
+		getCharacter("tavi").getInventory().equipItem(GlobalRegistry.createItem("inmateanklecuffs"))
+
+	if(_action == "bathroom_urinal_leave"):
+		processTime(10*60)
+
+	if(_action == "bathroom_urinal_use"):
+		processTime(5*60)
+		getCharacter("tavi").pissedOnBy("pc", 0.7)
+		getCharacter("tavi").cummedInMouthBy("pc", FluidSource.Pissing, 0.3)
+
+	if(_action == "bathroom_urinal_leave_return"):
+		processTime(10*60)
+		for _i in range(RNG.randi_range(3, 5)):
+			var randEvent = RNG.pick(["on", "in", "writing"])
+			if(randEvent == "on"):
+				var charID = NpcFinder.grabNpcIDFromPool(RNG.pick([CharacterPool.Inmates, CharacterPool.Guards]))
+				if(charID != null):
+					getCharacter("tavi").pissedOnBy(charID)
+			if(randEvent == "in"):
+				var charID = NpcFinder.grabNpcIDFromPool(RNG.pick([CharacterPool.Inmates, CharacterPool.Guards]))
+				if(charID != null):
+					getCharacter("tavi").cummedInMouthBy(charID, FluidSource.Pissing, 0.5)
+					getCharacter("tavi").pissedOnBy(charID, 0.5)
+			if(randEvent == "writing"):
+				getCharacter("tavi").addBodywritingRandom()
+			
+
+	if(_action == "endthescene_resetequip"):
+		getCharacter("tavi").resetEquipment()
+		endScene()
+		return
 
 	setState(_action)
 
