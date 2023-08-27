@@ -261,6 +261,34 @@ func _run():
 		saynn("That seems to satisfy Tavi. Probably not for long.")
 
 		addButton("Continue", "See what happens next", "start_talk")
+		if (getModule("TaviModule").getSkillScore("taviSkillWatersports") > 0):
+			addButton("Tickle pisshole", "Tickle Tavi's pisshole and see what happens", "do_finger_tickle")
+	if(state == "do_finger_tickle"):
+		saynn("Tavi thinks this is it. But it was far from over. After she has cleaned your hand, you bring it down to her pussy yet again. But this time.. you focus on a very specific spot.. a little hole that's just below her clit.")
+
+		saynn("As you begin rubbing it with your digit, Tavi gasps and jerks to the side.")
+
+		saynn("[say=tavi]That's.. that's where I pee from..[/say]")
+
+		saynn("[say=pc]I know~.[/say]")
+
+		saynn("[say=tavi]You shouldn't rub that..[/say]")
+
+		saynn("She might be right. But she can't stop you. Your second hand keeps Tavi pressed into the wall while the first one proceeds to tickle her urethra instead. Whines of confusion escape the feline while her body squirms and her pussy twitches.")
+
+		saynn("But you keep tickling that little hole.. until Tavi can't hold it anymore.. A cute desperate moan escapes her as she lets go and starts peeing, a strong stream of her piss hitting the floor.")
+
+		saynn("[say=tavi]Ah-h..[/say]")
+
+		saynn("[say=pc]Good girl.[/say]")
+
+		saynn("You're praising and patting Tavi while she doesn't care anymore, instead just emptying her bladder.")
+
+		saynn("[say=tavi]F-fuck.. I w-will clean it up..[/say]")
+
+		saynn("After she is done peeing, Tavi steps out of the cell to ask for a mop and a bucket of water. Every fun moment like that requires a lot of cleaning up..")
+
+		addButton("Continue", "See what happens next", "start_talk")
 	if(state == "do_finger_deny"):
 		saynn("Tavi is so close to her orgasm, she can feel it. However, you have different plans. To her surprise, you pull your hand away from her dripping pussy, denying her the climax she so desperately craves.")
 
@@ -306,6 +334,34 @@ func _run():
 		saynn("[say=tavi]T-thank you..[/say]")
 
 		saynn("As your orgasms begin to fade, so does Tavi's heat. As you pull out, you are presented with a great sight: Tavi holding onto the wall, her stuffed used pussy leaking your seed.")
+
+		addButton("Continue", "See what happens next", "start_talk")
+		if (getModule("TaviModule").getSkillScore("taviSkillWatersports") > 0):
+			addButton("Piss inside", "It's so warm. Might as well", "do_fuck_piss")
+	if(state == "do_fuck_piss"):
+		saynn("After that orgasm you get a strong desire to pee. And so a naughty idea shows up in your mind. An idea that you decide to act upon.")
+
+		saynn("You use this moment when you're not fully soft yet and slide your cock inside Tavi's pussy once more. A soft gasp leaves her lips.")
+
+		saynn("[say=tavi]Again?..[/say]")
+
+		saynn("[say=pc]No. The bathroom is too far.[/say]")
+
+		saynn("[say=tavi]Hah?..[/say]")
+
+		saynn("Second later Tavi understands what you mean as your cock releases a stream of warm liquid deep into her, making it so your piss mixes with your seed inside Tavi's womb.")
+
+		saynn("When that happens, Tavi gasps louder and puts one of her paws on her belly, feeling warmth radiating from it.")
+
+		saynn("[say=tavi]Oh fuck..[/say]")
+
+		saynn("Tavi pants softly as you empty your bladder inside her. Some of it already leaks back but most stays inside, your {pc.cum} helping to keep it contained.")
+
+		saynn("[say=pc]Good little piss-slut.[/say]")
+
+		saynn("[say=tavi]Huff..[/say]")
+
+		saynn("That's one way to solve heat.")
 
 		addButton("Continue", "See what happens next", "start_talk")
 	if(state == "do_fuck1_pullout"):
@@ -388,6 +444,8 @@ func _run():
 		saynn("As your orgasms begin to fade, so does Tavi's heat. As you pull out, you are presented with a great sight: Tavi is on her back, her legs spread, her stuffed used pussy leaking your {pc.cum}.")
 
 		addButton("Continue", "See what happens next", "start_talk")
+		if (getModule("TaviModule").getSkillScore("taviSkillWatersports") > 0):
+			addButton("Piss inside", "It's so warm. Might as well", "do_fuck_piss")
 	if(state == "do_fuck2_pullout"):
 		playAnimation(StageScene.SexMissionary, "tease", {npc="tavi", pc="pc", npcBodyState={naked=true}, bodyState={naked=true, hard=true}})
 		saynn("You grunt as your body tenses, your cock throbbing inside Tavi from the intense wave of pleasure building within you. Sensing the impending climax, you pull out just in time, strings of your seed begin landing on Tavi's belly and crotch, making the fur look messy.")
@@ -468,6 +526,8 @@ func _run():
 		saynn("As your orgasms begin to fade, so does Tavi's heat. As you pull out, you see Tavi on all fours, her stuffed used pussy leaking your {pc.cum}, dripping onto her thighs.")
 
 		addButton("Continue", "See what happens next", "start_talk")
+		if (getModule("TaviModule").getSkillScore("taviSkillWatersports") > 0):
+			addButton("Piss inside", "It's so warm. Might as well", "do_fuck_piss")
 	if(state == "do_fuck3_pullout"):
 		playAnimation(StageScene.SexAllFours, "tease", {npc="tavi", pc="pc", npcBodyState={naked=true}, bodyState={naked=true, hard=true}})
 		saynn("You grunt as your body tenses, your cock throbbing inside Tavi from the intense wave of pleasure building within you. Sensing the impending climax, you pull out just in time, your load leaves quite a mess on her bedsheets.")
@@ -660,6 +720,21 @@ func _run():
 		saynn("[say=tavi]That was so.. strange. But t-thank you.. for using your slut's ass..[/say]")
 
 		addButton("Continue", "See what happens next", "start_talk")
+		if (getModule("TaviModule").getSkillScore("taviSkillWatersports") > 0):
+			addButton("Piss inside", "It's so warm. Might as well", "do_anal_piss")
+	if(state == "do_anal_piss"):
+		playAnimation(StageScene.SexFreeStanding, "inside", {npc="tavi", pc="pc", npcBodyState={naked=true}, bodyState={naked=true, hard=true}})
+		saynn("Her inner walls still feel so nice and inviting.. But after that orgasm you kinda wanna pee now. Hm..")
+
+		saynn("You decide not to pull out and embrace this moment instead. Tavi is still panting softly while you suddenly release a stream of your warm piss inside her, flooding her guts with your urine that quickly mixes with the seed.")
+
+		saynn("[say=tavi]Wha.. are you..[/say]")
+
+		saynn("[say=pc]Yes, I felt like doing it.[/say]")
+
+		saynn("Tavi huffs but it's too late, you empty your bladder inside her completely. This act certainly makes her feel less like a person and more like an.. object.. a piss-toilet.")
+
+		addButton("Continue", "See what happens next", "start_talk")
 	if(state == "do_anal_pullout"):
 		playAnimation(StageScene.SexFreeStanding, "tease", {npc="tavi", pc="pc", npcBodyState={naked=true}, bodyState={naked=true, hard=true}})
 		saynn("Making her cum will certainly spoil Tavi. So, when reaching your climax, you pull out seconds before your cock releases multiple thick strings of {pc.cum}, most of them landing on Tavi's butt and thighs.")
@@ -805,9 +880,30 @@ func _run():
 
 		saynn("After the orgasm waves stop flowing through her, Tavi raises and takes a look at your wet face.. before giggling.")
 
-		saynn("She helps you to get up and even licks her own juices off of you.. but there is too much.")
+		if (getModule("TaviModule").getSkillScore("taviSkillWatersports") <= 0):
+			saynn("She helps you to get up and even licks her own juices off of you.. but there is too much.")
 
 		saynn("At least her eternal heat seems to be satisfied.. for now..")
+
+		addButton("Continue", "See what happens next", "start_talk")
+		if (getModule("TaviModule").getSkillScore("taviSkillWatersports") > 0):
+			addButton("Lick pisshole", "Tickle Tavi's pisshole with your tongue", "cor_facesit_piss")
+	if(state == "cor_facesit_piss"):
+		saynn("Instead of just letting her get up, you suddenly grab onto Tavi's wide hips and pull them down towards your face again. But instead of just licking her pussy, you focus on one specific spot.. Tavi's urethra. You begin licking it specifically, trying to cause a reaction.")
+
+		saynn("[say=tavi]Mmhm~.. That tickles. I know what you're trying to do~.[/say]")
+
+		saynn("Tavi doesn't fight you. She instead sits on your face again and traps your head between her thighs. Her paws stroke your wet hair.")
+
+		saynn("[say=tavi]Be a good {pc.boy} and try to swallow it~.[/say]")
+
+		saynn("And seconds later, a moan escapes from her as she releases a stream of piss from her pisshole directly into your face. It's so warm and wet.. You open your mouth and grab as much as you can. But the sheer amount of piss makes you gag on it, causing Tavi to giggle.")
+
+		saynn("[say=tavi]Silly little piss-slut~. You can swallow better than that.[/say]")
+
+		saynn("She keeps pissing all over your face, forcing her gross scent into your skin. You do your best to swallow at least some of her urine but the taste is truly awful. Still, it feels hot to be used like this..")
+
+		saynn("[say=tavi]That's better~. Much better.[/say]")
 
 		addButton("Continue", "See what happens next", "start_talk")
 	if(state == "do_petplay_fuck"):
@@ -1235,6 +1331,10 @@ func _react(_action: String, _args):
 		runScene("Ch6TaviTalkScene")
 		return
 
+	if(_action == "do_finger_tickle"):
+		processTime(2*60)
+		getModule("TaviModule").addCorruption(3)
+
 	if(_action == "do_fuck1_inside"):
 		processTime(10*60)
 		getModule("TaviModule").addCorruption(5 * sexSkillMod)
@@ -1245,6 +1345,11 @@ func _react(_action: String, _args):
 		processTime(10*60)
 		getModule("TaviModule").addCorruption(-5 * sexSkillMod)
 		GM.pc.orgasmFrom("tavi")
+
+	if(_action == "do_fuck_piss"):
+		processTime(2*60)
+		getModule("TaviModule").addCorruption(4)
+		getCharacter("tavi").cummedInVaginaBy("pc", FluidSource.Pissing)
 
 	if(_action == "do_fuck1_knot_strapon"):
 		processTime(10*60)
@@ -1342,6 +1447,11 @@ func _react(_action: String, _args):
 		getCharacter("tavi").cummedOnBy("pc")
 		GM.pc.orgasmFrom("tavi")
 
+	if(_action == "do_anal_piss"):
+		processTime(2*60)
+		getModule("TaviModule").addCorruption(4)
+		getCharacter("tavi").cummedInAnusBy("pc", FluidSource.Pissing)
+
 	if(_action == "do_anal_cum_strapon"):
 		processTime(10*60)
 		getModule("TaviModule").addCorruption(5 * sexSkillMod)
@@ -1356,6 +1466,12 @@ func _react(_action: String, _args):
 	if(_action == "cor_facesit_cum"):
 		getModule("TaviModule").addCorruption(15)
 		GM.pc.cummedOnBy("tavi", FluidSource.Vagina)
+
+	if(_action == "cor_facesit_piss"):
+		processTime(2*60)
+		getModule("TaviModule").addCorruption(3)
+		GM.pc.pissedOnBy("tavi")
+		GM.pc.cummedInMouthBy("tavi", FluidSource.Pissing, 0.3)
 
 	if(_action == "do_petplay_fuck_bj"):
 		processTime(2*60)
