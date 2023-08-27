@@ -681,6 +681,63 @@ func _run():
 		saynn("You let most of the piss to go down the drain before unchaining Tavi and helping her get back to her cell while trying not to touch her too much..")
 
 		addButton("Continue", "See what happens next", "endthescene_resetequip")
+	if(state == "swallowing"):
+		playAnimation(StageScene.SexOral, "start", {npc="tavi"})
+		saynn("You feel like peeing. But you don't feel like going anywhere. And why would you. You have a perfectly fine Tavi.")
+
+		saynn("[say=pc]Can you do me a favor, Tavi?[/say]")
+
+		saynn("The feline walks up to you and offers you a kind smile. Your hand lands on her cheek and caresses gently.")
+
+		saynn("[say=tavi]And what is that gonna be?..[/say]")
+
+		saynn("[say=pc]I don't feel like going to the bathroom today.[/say]")
+
+		saynn("Both Tavi and you look down at your crotch. Tavi is biting her lip.")
+
+		saynn("[say=tavi]Sounds like you need a free mouth.. I might just be able to help with that~.[/say]")
+
+		saynn("And so Tavi gets on her knees before you before teasingly parting her lips and showing you the back of her mouth. All the inner walls have a green tint to them.. just like her tongue.")
+
+		saynn("[say=pc]Try to not miss a drop.[/say]")
+
+		saynn("Tavi probably understands this more than you. It's her cell on the line after all, not yours.")
+
+		addButton("Continue", "See how Tavi will serve you", "swallowing_act")
+	if(state == "swallowing_act"):
+		if (GM.pc.isWearingChastityCage() || GM.pc.hasReachablePenis()):
+			playAnimation(StageScene.SexOral, "tease", {npc="tavi", bodyState={exposedCrotch=true, hard=true}})
+		else:
+			playAnimation(StageScene.SexOral, "lick", {npc="tavi", bodyState={exposedCrotch=true, hard=true}})
+		if (GM.pc.isWearingChastityCage()):
+			saynn("And so you offer your locked member to Tavi. She sees it and smiles softly before parting her lips wider and closing them around your chastity cage, creating a somewhat tight seal. You feel her warm breathing but the metal prevents any other sensations.")
+
+			saynn("She looks up at you with her obedient eyes while her rough tongue gently tickles your pisshole through the little hole in the cage. And so, after some teasing, you arch your back slightly as a strong stream of your urine reaches Tavi's mouth. She holds onto your legs and does her best to swiftly swallow your golden load in big chunks.")
+
+		elif (GM.pc.hasReachablePenis()):
+			saynn("And so you offer your member to Tavi. She sees it and smiles softly before parting her lips wider and closing them around your cock, creating a tight seal. It feels nice and intimate.")
+
+			saynn("She looks up at you with her obedient eyes while her rough tongue gently tickles your pisshole, inviting you to unleash the torrent of fluids. And so, after some teasing, you arch your back slightly as a strong stream of your urine reaches Tavi's mouth. She holds onto your legs and does her best to swiftly swallow your golden load in big chunks.")
+
+		elif (GM.pc.hasReachableVagina()):
+			saynn("And so you offer your {pc.pussyStretch} pussy to Tavi. She sees your sensitive folds and smiles softly before parting her lips wider and pressing them against yours, creating a tight seal around the urethra. It feels.. nice.")
+
+			saynn("She looks up at you with her obedient eyes while her rough tongue gently tickles your pisshole, inviting you to unleash the torrent of fluids. And so, after some teasing, you arch your back slightly as a strong stream of your urine reaches Tavi's mouth. She holds onto your legs and does her best to swiftly swallow your golden load in big chunks.")
+
+		else:
+			saynn("And so you offer your crotch to Tavi. She smiles softly before parting her lips wider and pressing them against your crotch, creating a tight seal around the urethra. It feels.. nice.")
+
+			saynn("She looks up at you with her obedient eyes while her rough tongue gently tickles your pisshole, inviting you to unleash the torrent of fluids. And so, after some teasing, you arch your back slightly as a strong stream of your urine reaches Tavi's mouth. She holds onto your legs and does her best to swiftly swallow your golden load in big chunks.")
+
+		saynn("Such a good piss-toilet. Your hand lands on her head and gently strokes her hair while her throat is hard at work, swallowing every few seconds while her eyes are closed. Such devotion.. or maybe she just really wants her cell to stay clean?")
+
+		saynn("After you empty your bladder into your pet's throat, you pull away from her and admire the view. Tavi is panting softly with her tongue out. She swallows the last of your piss and then presents you her empty mouth.")
+
+		saynn("[say=tavi]Thank you.. For using your pet..[/say]")
+
+		saynn("So obedient. You can't help but to give Tavi pats for doing such a clean job. She truly mastered the craft.")
+
+		addButton("Continue", "See what happens next", "endthescene")
 func taviSpeak(normalSpeak, corruptSpeak, pureSpeak):
 	if(isCorrupt):
 		return corruptSpeak
@@ -820,6 +877,10 @@ func _react(_action: String, _args):
 		getCharacter("tavi").resetEquipment()
 		endScene()
 		return
+
+	if(_action == "swallowing_act"):
+		processTime(2*60)
+		getCharacter("tavi").cummedInMouthBy("pc", FluidSource.Pissing)
 
 	setState(_action)
 
