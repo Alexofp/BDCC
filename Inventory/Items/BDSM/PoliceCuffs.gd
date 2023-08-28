@@ -50,3 +50,6 @@ func getUnriggedParts(_character):
 
 func updateDoll(doll: Doll3D):
 	doll.setArmsCuffed(true)
+
+func getChains():
+	return [["short", "ankle.L", "ankle.R"]]

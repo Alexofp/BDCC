@@ -5,6 +5,7 @@
 [ext_resource path="res://Player/Player3D/Doll3D.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Player/Props/platform.png" type="Texture" id=4]
 
+
 [sub_resource type="AnimationNodeAnimation" id=1]
 animation = "Hogtied-loop"
 

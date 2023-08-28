@@ -3,6 +3,7 @@ class_name BaseStageScene3D
 
 var id = "error"
 var currentAnim = ""
+var dolls = []
 
 func _init():
 	id = "error"
@@ -150,3 +151,12 @@ func getSupportedStatesPuppy():
 
 func getSupportedStatesSolo():
 	return ["walk", "stand", "kneel", "defeat", "sit", "bite", "block", "dodge", "hurt", "kick", "punch", "allfours", "crawl", "stunbaton", "throw", "holdpistol", "aimpistol", "firepistol", "shiv", "shove", "struggle", "struggle_gag", "struggle_legs"]
+
+func addDoll(newdoll):
+	dolls.append(newdoll)
+
+func getDolls():
+	return dolls
+
+func getChainPoint(_pointID):
+	return null

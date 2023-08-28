@@ -1453,6 +1453,7 @@ func softUpdateDoll(doll: Doll3D):
 		doll.setButtScale(1.0 + (thicknessNorm - 0.5)/1.5)
 		doll.setThighThickness((thicknessNorm - 0.5))
 	
+	doll.selfChains = []
 	var wearingItems = getInventory().getAllEquippedItems()
 	for inventorySlot in wearingItems:
 		var item = wearingItems[inventorySlot]
@@ -1461,6 +1462,13 @@ func softUpdateDoll(doll: Doll3D):
 		
 		# Add a check here that the item is actually visible first?
 		item.updateDoll(doll)
+		
+		var newChains = item.getChains()
+		if(newChains != null):
+			for selfChain in newChains:
+				doll.selfChains.append([selfChain[0], selfChain[1], "npc", getID(), selfChain[2]])
+			#doll.selfChains.append_array(newChains)
+	doll.call_deferred("checkChains")
 
 func updateDoll(doll: Doll3D):
 	softUpdateDoll(doll)

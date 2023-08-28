@@ -29,7 +29,7 @@ func _run():
 		
 	if(state == "" || state == "leashed"):
 		if(state == "leashed"):
-			playAnimation(StageScene.Solo, "walk")
+			playAnimation(StageScene.Duo, "walk", {npc=whoLeashingID, npcAction="walk", flipNPC=true, bodyState={leashedBy=whoLeashingID}})
 		if(path.size() > 0):
 			aimCameraAndSetLocName(path[0])
 		

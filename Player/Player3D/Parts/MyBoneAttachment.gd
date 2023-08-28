@@ -6,6 +6,7 @@ export(String) var boneId
 var startTransform:Transform
 var correctedTransform: Transform
 var shouldScaleWithBone = true
+var chainOffset := Vector3(0,0,0)
 
 func getAllRestTransformsForBone(skeletonObject:Skeleton, boneIdx):
 	var result = []
