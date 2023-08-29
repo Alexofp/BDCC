@@ -7,7 +7,7 @@ func getVisibleName():
 	return "Feetplay"
 
 func isPossible(_sexEngine, _domInfo, _subInfo, _data):
-	if(_subInfo.getChar().hasReachablePenis() || _subInfo.getChar().isWeaingChastityCage() || _subInfo.getChar().hasReachableVagina()):
+	if(_subInfo.getChar().hasReachablePenis() || _subInfo.getChar().isWearingChastityCage() || _subInfo.getChar().hasReachableVagina()):
 		return true
 	
 	return false
