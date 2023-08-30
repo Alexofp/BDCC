@@ -97,7 +97,7 @@ func processTurn():
 				getSub().cummedOnBy(subID, FluidSource.Penis, 0.3)
 			subInfo.cum()
 			state = ""
-			text += " {sub.Your} pussy is squirting all over {sub.yourHis} thighs as {sub.youHe} {sub.youVerb('orgasms')} in such a humiliating way!"
+			text += " {sub.Your} pussy is squirting all over {sub.yourHis} thighs as {sub.youHe} {sub.youVerb('orgasm')} in such a humiliating way!"
 		return {
 			text = text,
 		}
@@ -131,7 +131,7 @@ func processTurn():
 				getSub().cummedOnBy(subID, FluidSource.Vagina, 0.3)
 			subInfo.cum()
 			state = ""
-			text += " {sub.Your} cock is shooting {sub.cum} all over {sub.yourHis} belly as {sub.youHe} {sub.youVerb('orgasms')} in such a humiliating way!"
+			text += " {sub.Your} cock is shooting {sub.cum} all over {sub.yourHis} belly as {sub.youHe} {sub.youVerb('orgasm')} in such a humiliating way!"
 		return {
 			text = text,
 		}
@@ -472,7 +472,7 @@ func doSubAction(_id, _actionInfo):
 			getSub().cummedOnBy(subID, FluidSource.Penis, 0.3)
 		subInfo.cum()
 		state = ""
-		text += "{sub.Your} pussy is squirting all over {sub.yourHis} thighs as {sub.youHe} {sub.youVerb('orgasms')} in such a humiliating way!"
+		text += "{sub.Your} pussy is squirting all over {sub.yourHis} thighs as {sub.youHe} {sub.youVerb('orgasm')} in such a humiliating way!"
 		return {
 			text = text,
 		}
@@ -484,7 +484,7 @@ func doSubAction(_id, _actionInfo):
 			getSub().cummedOnBy(subID, FluidSource.Vagina, 0.3)
 		subInfo.cum()
 		state = ""
-		text += "{sub.Your} cock is shooting {sub.cum} all over {sub.yourHis} belly as {sub.youHe} {sub.youVerb('orgasms')} in such a humiliating way!"
+		text += "{sub.Your} cock is shooting {sub.cum} all over {sub.yourHis} belly as {sub.youHe} {sub.youVerb('orgasm')} in such a humiliating way!"
 		return {
 			text = text,
 		}
