@@ -44,7 +44,7 @@ func _run():
 
 	if(state == "help"):
 		# (if agility is high?)
-		playAnimation(StageScene.Duo, "kneel", {npc="rahi", npcAction="allfours"})
+		playAnimation(StageScene.Hogtied, "idle", {pc="rahi"})
 
 		saynn("You decide to break the awkward silence and move closer to kitty’s mat. You stand near her and slide your hand over her straight back.")
 

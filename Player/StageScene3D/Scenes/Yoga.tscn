@@ -1,0 +1,63 @@
+[gd_scene load_steps=15 format=2]
+
+[ext_resource path="res://Player/StageScene3D/BaseStageScene3D.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Player/StageScene3D/Scenes/Yoga.gd" type="Script" id=2]
+[ext_resource path="res://Player/Player3D/Doll3D.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Player/Props/platform.png" type="Texture" id=4]
+
+[sub_resource type="AnimationNodeAnimation" id=5]
+animation = "YogaCamel-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=6]
+animation = "YogaCatCow-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=7]
+animation = "YogaDownwardFacingDog-loop"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=8]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=9]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=10]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=11]
+
+[sub_resource type="AnimationNodeStateMachine" id=12]
+states/YogaCamel-loop/node = SubResource( 5 )
+states/YogaCamel-loop/position = Vector2( 629, 99 )
+states/YogaCatCow-loop/node = SubResource( 6 )
+states/YogaCatCow-loop/position = Vector2( 379, 99 )
+states/YogaDownwardFacingDog-loop/node = SubResource( 7 )
+states/YogaDownwardFacingDog-loop/position = Vector2( 475, 216 )
+transitions = [ "YogaCatCow-loop", "YogaDownwardFacingDog-loop", SubResource( 8 ), "YogaDownwardFacingDog-loop", "YogaCatCow-loop", SubResource( 9 ), "YogaCatCow-loop", "YogaCamel-loop", SubResource( 10 ), "YogaCamel-loop", "YogaCatCow-loop", SubResource( 11 ) ]
+start_node = "YogaCatCow-loop"
+graph_offset = Vector2( -46, -32 )
+
+[sub_resource type="AnimationNodeBlendTree" id=13]
+graph_offset = Vector2( -185.902, 27.8396 )
+nodes/StateMachine/node = SubResource( 12 )
+nodes/StateMachine/position = Vector2( 260, 140 )
+nodes/output/position = Vector2( 540, 160 )
+node_connections = [ "output", 0, "StateMachine" ]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=4]
+
+[node name="Yoga" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+
+[node name="Doll3D" parent="." index="0" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0625687, 0, -2.74286 )
+
+[node name="Sprite3D" type="Sprite3D" parent="." index="1"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.324482, -1.77462 )
+texture = ExtResource( 4 )
+region_enabled = true
+region_rect = Rect2( 1, 1, 1022, 62 )
+
+[node name="AnimationTree" type="AnimationTree" parent="." index="2"]
+tree_root = SubResource( 13 )
+anim_player = NodePath("../Doll3D/DollSkeleton/AnimationPlayer")
+parameters/StateMachine/playback = SubResource( 4 )
+
+[editable path="Doll3D"]
+[editable path="Doll3D/DollSkeleton"]

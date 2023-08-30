@@ -1,0 +1,222 @@
+[gd_scene load_steps=51 format=2]
+
+[ext_resource path="res://Player/Player3D/Doll3D.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Player/StageScene3D/BaseStageScene3D.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Player/Props/platform.png" type="Texture" id=3]
+[ext_resource path="res://Player/StageScene3D/Scenes/Choking.gd" type="Script" id=4]
+
+[sub_resource type="AnimationNodeAnimation" id=3]
+animation = "CuffedArms-loop"
+
+[sub_resource type="AnimationNodeBlend2" id=4]
+filter_enabled = true
+filters = [ "Doll3D/Skeleton:Arm.L", "Doll3D/Skeleton:Arm.R", "Doll3D/Skeleton:ForeArm.L", "Doll3D/Skeleton:ForeArm.R", "Doll3D/Skeleton:Hand.L", "Doll3D/Skeleton:Hand.R" ]
+
+[sub_resource type="AnimationNodeAnimation" id=24]
+animation = "ChokingHard_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=25]
+animation = "ChokingSexFast_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=26]
+animation = "ChokingSexInside_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=27]
+animation = "ChokingSexTease_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=28]
+animation = "ChokingSex_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=29]
+animation = "ChokingTease_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=30]
+animation = "Choking_1-loop"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=31]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=32]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=33]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=34]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=35]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=36]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=37]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=38]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=39]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=40]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=41]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=42]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachine" id=43]
+states/ChokingHard_1-loop/node = SubResource( 24 )
+states/ChokingHard_1-loop/position = Vector2( 497, 293 )
+states/ChokingSexFast_1-loop/node = SubResource( 25 )
+states/ChokingSexFast_1-loop/position = Vector2( 790, 378 )
+states/ChokingSexInside_1-loop/node = SubResource( 26 )
+states/ChokingSexInside_1-loop/position = Vector2( 790, 201 )
+states/ChokingSexTease_1-loop/node = SubResource( 27 )
+states/ChokingSexTease_1-loop/position = Vector2( 790, 101 )
+states/ChokingSex_1-loop/node = SubResource( 28 )
+states/ChokingSex_1-loop/position = Vector2( 790, 293 )
+states/ChokingTease_1-loop/node = SubResource( 29 )
+states/ChokingTease_1-loop/position = Vector2( 497, 101 )
+states/Choking_1-loop/node = SubResource( 30 )
+states/Choking_1-loop/position = Vector2( 497, 201 )
+transitions = [ "ChokingTease_1-loop", "Choking_1-loop", SubResource( 31 ), "Choking_1-loop", "ChokingTease_1-loop", SubResource( 32 ), "Choking_1-loop", "ChokingHard_1-loop", SubResource( 33 ), "ChokingHard_1-loop", "Choking_1-loop", SubResource( 34 ), "ChokingTease_1-loop", "ChokingSexTease_1-loop", SubResource( 35 ), "ChokingSexTease_1-loop", "ChokingTease_1-loop", SubResource( 36 ), "ChokingSexTease_1-loop", "ChokingSexInside_1-loop", SubResource( 37 ), "ChokingSexInside_1-loop", "ChokingSexTease_1-loop", SubResource( 38 ), "ChokingSexInside_1-loop", "ChokingSex_1-loop", SubResource( 39 ), "ChokingSex_1-loop", "ChokingSexInside_1-loop", SubResource( 40 ), "ChokingSex_1-loop", "ChokingSexFast_1-loop", SubResource( 41 ), "ChokingSexFast_1-loop", "ChokingSex_1-loop", SubResource( 42 ) ]
+start_node = "ChokingTease_1-loop"
+graph_offset = Vector2( -14, 50 )
+
+[sub_resource type="AnimationNodeBlendTree" id=44]
+graph_offset = Vector2( -154, 7 )
+nodes/Animation/node = SubResource( 3 )
+nodes/Animation/position = Vector2( 140, 280 )
+nodes/CuffsBlend/node = SubResource( 4 )
+nodes/CuffsBlend/position = Vector2( 440, 160 )
+nodes/StateMachine/node = SubResource( 43 )
+nodes/StateMachine/position = Vector2( 231, 135 )
+nodes/output/position = Vector2( 680, 180 )
+node_connections = [ "CuffsBlend", 0, "StateMachine", "CuffsBlend", 1, "Animation", "output", 0, "CuffsBlend" ]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=22]
+
+[sub_resource type="AnimationNodeAnimation" id=47]
+animation = "ChokingHard_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=48]
+animation = "ChokingSexFast_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=49]
+animation = "ChokingSexInside_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=50]
+animation = "ChokingSexTease_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=51]
+animation = "ChokingSex_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=52]
+animation = "ChokingTease_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=53]
+animation = "Choking_2-loop"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=54]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=55]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=56]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=57]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=58]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=59]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=60]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=61]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=62]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=63]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=64]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=65]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachine" id=45]
+states/ChokingHard_2-loop/node = SubResource( 47 )
+states/ChokingHard_2-loop/position = Vector2( 438, 273 )
+states/ChokingSexFast_2-loop/node = SubResource( 48 )
+states/ChokingSexFast_2-loop/position = Vector2( 723, 354 )
+states/ChokingSexInside_2-loop/node = SubResource( 49 )
+states/ChokingSexInside_2-loop/position = Vector2( 723, 190 )
+states/ChokingSexTease_2-loop/node = SubResource( 50 )
+states/ChokingSexTease_2-loop/position = Vector2( 723, 102 )
+states/ChokingSex_2-loop/node = SubResource( 51 )
+states/ChokingSex_2-loop/position = Vector2( 723, 273 )
+states/ChokingTease_2-loop/node = SubResource( 52 )
+states/ChokingTease_2-loop/position = Vector2( 438, 102 )
+states/Choking_2-loop/node = SubResource( 53 )
+states/Choking_2-loop/position = Vector2( 438, 190 )
+transitions = [ "ChokingTease_2-loop", "Choking_2-loop", SubResource( 54 ), "Choking_2-loop", "ChokingTease_2-loop", SubResource( 55 ), "Choking_2-loop", "ChokingHard_2-loop", SubResource( 56 ), "ChokingHard_2-loop", "Choking_2-loop", SubResource( 57 ), "ChokingTease_2-loop", "ChokingSexTease_2-loop", SubResource( 58 ), "ChokingSexTease_2-loop", "ChokingTease_2-loop", SubResource( 59 ), "ChokingSexTease_2-loop", "ChokingSexInside_2-loop", SubResource( 60 ), "ChokingSexInside_2-loop", "ChokingSexTease_2-loop", SubResource( 61 ), "ChokingSexInside_2-loop", "ChokingSex_2-loop", SubResource( 62 ), "ChokingSex_2-loop", "ChokingSexInside_2-loop", SubResource( 63 ), "ChokingSex_2-loop", "ChokingSexFast_2-loop", SubResource( 64 ), "ChokingSexFast_2-loop", "ChokingSex_2-loop", SubResource( 65 ) ]
+start_node = "ChokingTease_2-loop"
+
+[sub_resource type="AnimationNodeBlendTree" id=46]
+graph_offset = Vector2( -351.532, -34.3158 )
+nodes/Animation/node = SubResource( 3 )
+nodes/Animation/position = Vector2( 140, 280 )
+nodes/CuffsBlend/node = SubResource( 4 )
+nodes/CuffsBlend/position = Vector2( 440, 160 )
+nodes/StateMachine/node = SubResource( 45 )
+nodes/StateMachine/position = Vector2( 204.468, 107.684 )
+nodes/output/position = Vector2( 680, 180 )
+node_connections = [ "CuffsBlend", 0, "StateMachine", "CuffsBlend", 1, "Animation", "output", 0, "CuffsBlend" ]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=23]
+
+[node name="Choking" instance=ExtResource( 2 )]
+script = ExtResource( 4 )
+
+[node name="Sprite3D" type="Sprite3D" parent="." index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.196641, -1.77462 )
+texture = ExtResource( 3 )
+region_enabled = true
+region_rect = Rect2( 1, 1, 1022, 62 )
+
+[node name="Doll3D" parent="." index="1" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00507566, 0, 0 )
+
+[node name="Doll3D2" parent="." index="2" instance=ExtResource( 1 )]
+transform = Transform( -1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00507566, 0, 0 )
+
+[node name="AnimationTree" type="AnimationTree" parent="." index="3"]
+tree_root = SubResource( 44 )
+anim_player = NodePath("../Doll3D/DollSkeleton/AnimationPlayer")
+parameters/CuffsBlend/blend_amount = 0
+parameters/StateMachine/playback = SubResource( 22 )
+
+[node name="AnimationTree2" type="AnimationTree" parent="." index="4"]
+tree_root = SubResource( 46 )
+anim_player = NodePath("../Doll3D2/DollSkeleton/AnimationPlayer")
+parameters/CuffsBlend/blend_amount = 0
+parameters/StateMachine/playback = SubResource( 23 )
+
+[editable path="Doll3D"]
+[editable path="Doll3D/DollSkeleton"]
+[editable path="Doll3D2"]
+[editable path="Doll3D2/DollSkeleton"]

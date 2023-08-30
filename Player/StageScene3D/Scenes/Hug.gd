@@ -58,9 +58,15 @@ func playAnimation(animID, _args = {}):
 	var state_machine = animationTree["parameters/StateMachine/playback"]
 	var state_machine2 = animationTree2["parameters/StateMachine/playback"]
 
+	if(animID == "idle"):
+		state_machine.travel("PreHug_1-loop")
+		state_machine2.travel("PreHug_2-loop")
 	if(animID == "hug"):
 		state_machine.travel("Hug_1-loop")
 		state_machine2.travel("Hug_2-loop")
+	if(animID == "kiss"):
+		state_machine.travel("Kissing")
+		state_machine2.travel("Kissing2")
 
 
 func canTransitionTo(_actionID, _args = []):
@@ -76,4 +82,4 @@ func canTransitionTo(_actionID, _args = []):
 	return true
 
 func getSupportedStates():
-	return ["hug"]
+	return ["idle", "hug", "kiss"]

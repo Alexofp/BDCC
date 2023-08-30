@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://Player/Player3D/Doll3D.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Player/StageScene3D/BaseStageScene3D.tscn" type="PackedScene" id=2]
@@ -15,13 +15,25 @@ filters = [ "Doll3D/Skeleton:Arm.L", "Doll3D/Skeleton:Arm.R", "Doll3D/Skeleton:F
 [sub_resource type="AnimationNodeAnimation" id=24]
 animation = "Sleeping-loop"
 
+[sub_resource type="AnimationNodeAnimation" id=30]
+animation = "SleepingRub-loop"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=31]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=32]
+xfade_time = 0.5
+
 [sub_resource type="AnimationNodeStateMachine" id=25]
 states/Sleeping-loop/node = SubResource( 24 )
 states/Sleeping-loop/position = Vector2( 459, 120 )
+states/SleepingRub-loop/node = SubResource( 30 )
+states/SleepingRub-loop/position = Vector2( 459, 206 )
+transitions = [ "Sleeping-loop", "SleepingRub-loop", SubResource( 31 ), "SleepingRub-loop", "Sleeping-loop", SubResource( 32 ) ]
 start_node = "Sleeping-loop"
 
 [sub_resource type="AnimationNodeBlendTree" id=26]
-graph_offset = Vector2( -154, 7 )
+graph_offset = Vector2( -18, 102 )
 nodes/Animation/node = SubResource( 3 )
 nodes/Animation/position = Vector2( 140, 280 )
 nodes/CuffsBlend/node = SubResource( 4 )
@@ -29,16 +41,28 @@ nodes/CuffsBlend/position = Vector2( 440, 160 )
 nodes/StateMachine/node = SubResource( 25 )
 nodes/StateMachine/position = Vector2( 165, 120 )
 nodes/output/position = Vector2( 680, 180 )
-node_connections = [ "output", 0, "CuffsBlend", "CuffsBlend", 0, "StateMachine", "CuffsBlend", 1, "Animation" ]
+node_connections = [ "CuffsBlend", 0, "StateMachine", "CuffsBlend", 1, "Animation", "output", 0, "CuffsBlend" ]
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=22]
+
+[sub_resource type="AnimationNodeAnimation" id=33]
+animation = "SleepingRub_2-loop"
 
 [sub_resource type="AnimationNodeAnimation" id=27]
 animation = "Sleeping_2-loop"
 
+[sub_resource type="AnimationNodeStateMachineTransition" id=34]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=35]
+xfade_time = 0.5
+
 [sub_resource type="AnimationNodeStateMachine" id=28]
+states/SleepingRub_2-loop/node = SubResource( 33 )
+states/SleepingRub_2-loop/position = Vector2( 461, 207 )
 states/Sleeping_2-loop/node = SubResource( 27 )
 states/Sleeping_2-loop/position = Vector2( 461, 129 )
+transitions = [ "Sleeping_2-loop", "SleepingRub_2-loop", SubResource( 34 ), "SleepingRub_2-loop", "Sleeping_2-loop", SubResource( 35 ) ]
 start_node = "Sleeping_2-loop"
 
 [sub_resource type="AnimationNodeBlendTree" id=29]
@@ -50,7 +74,7 @@ nodes/CuffsBlend/position = Vector2( 440, 160 )
 nodes/StateMachine/node = SubResource( 28 )
 nodes/StateMachine/position = Vector2( 160, 140 )
 nodes/output/position = Vector2( 680, 180 )
-node_connections = [ "output", 0, "CuffsBlend", "CuffsBlend", 0, "StateMachine", "CuffsBlend", 1, "Animation" ]
+node_connections = [ "CuffsBlend", 0, "StateMachine", "CuffsBlend", 1, "Animation", "output", 0, "CuffsBlend" ]
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=23]
 
