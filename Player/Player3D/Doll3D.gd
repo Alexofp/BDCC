@@ -645,6 +645,9 @@ func applyBodyState(bodystate):
 	checkChains()
 
 func checkChains():
+	if(!OPTIONS.shouldSpawnChains()):
+		return
+	
 	var finalChains = selfChains + sceneChains
 	
 	if(rememberedChains != finalChains):
@@ -672,6 +675,9 @@ func updateChains():
 	for chainObject in chainObjects:
 		chainObject.queue_free()
 	chainObjects.clear()
+
+	if(!OPTIONS.shouldSpawnChains()):
+		return
 
 	if(!get_parent().has_method("getDolls")):
 		return
