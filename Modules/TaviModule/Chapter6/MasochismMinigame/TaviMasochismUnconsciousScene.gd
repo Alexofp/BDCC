@@ -16,7 +16,7 @@ func _run():
 		isNormal = (!isCorrupt && !isPure)
 		isVirgin = getModule("TaviModule").isVirgin()
 		addCharacter("tavi", ["naked"])
-		playAnimation(StageScene.SexStart, "defeated", {npc="tavi", npcBodyState={naked=true}})
+		playAnimation(StageScene.Choking, "hard", {npc="tavi", npcBodyState={naked=true}})
 		saynn("Oops.. it seems you have choked Tavi too much. A little miscalculation caused you to keep a tight grip on her throat for too long. Tavi's feline eyes went wide in surprise before her expression faded into unconsciousness, her body going limp on you.")
 
 		saynn("[say=pc]Tavi?[/say]")
@@ -69,6 +69,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "endthescene")
 	if(state == "lewd_tavi"):
+		playAnimation(StageScene.SexStart, "defeated", {npc="tavi", npcBodyState={naked=true}})
 		saynn("You shake Tavi a little but she keeps sleeping soundly, her warm breathing tickling your skin. As you move her into a more comfortable position and notice that the fur near her crotch has gotten quite wet from this, a devious thought comes into your mind..")
 
 		saynn("You feel some guilt.. but you're also.. curious. Your hands gently part Tavi's thighs, putting her needy"+str(" untouched" if getModule("TaviModule").isVirgin() else "")+" flower out on display.")
@@ -118,7 +119,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "endthescene")
 	if(state == "fuck_tavi"):
-		playAnimation(StageScene.SexMissionary, "tease", {npc="tavi", bodyState={naked=true,hard=true}, npcBodyState={naked=true}})
+		playAnimation(StageScene.SexMissionary, "tease", {npc="tavi", uncon=true, bodyState={naked=true,hard=true}, npcBodyState={naked=true}})
 		saynn("You feel some guilt but seeing the opportunity makes that feeling fade away, replaced by an even more devious thought.")
 
 		saynn("While Tavi is unconscious and breathing softly, you carefully move her into a comfortable position while you take a spot between her legs, your hands gently parting her thighs. Your {pc.penis} is already rock hard just from thinking about it..")
@@ -133,7 +134,7 @@ func _run():
 
 		addButton("Push", "Start fucking Tavi", "fuck_tavi_push")
 	if(state == "fuck_tavi_push"):
-		playAnimation(StageScene.SexMissionary, "sex", {npc="tavi", bodyState={naked=true,hard=true}, npcBodyState={naked=true}})
+		playAnimation(StageScene.SexMissionary, "sex", {npc="tavi", uncon=true, bodyState={naked=true,hard=true}, npcBodyState={naked=true}})
 		if (tookVirginity):
 			saynn("Your hands land on Tavi's hips and hold her still while you proceed to put more and more strain on her last line of defense. The feline is wincing and hissing softly while the tip of your cock is pushing on her hymen harder and harder.. until piercing and tearing through it, [b]stealing Tavi's virginity[/b].")
 
@@ -153,7 +154,7 @@ func _run():
 		addButton("Cum inside", "Might as well..", "fuck_tavi_inside")
 		addButton("Pull out", "You can't leave any evidence inside her..", "fuck_tavi_pullout")
 	if(state == "fuck_tavi_inside"):
-		playAnimation(StageScene.SexMissionary, "inside", {npc="tavi", bodyState={naked=true,hard=true}, npcBodyState={naked=true}})
+		playAnimation(StageScene.SexMissionary, "inside", {npc="tavi", uncon=true, bodyState={naked=true,hard=true}, npcBodyState={naked=true}})
 		if (tookVirginity):
 			saynn("You took her virginity.. So might as well be the first one to claim her womb. Tavi whines softly in her sleep while you ram your {pc.penis} as deep as her pussy allows, pushing her over the edge while your seed begins flooding her womb.. so much of it that some spills out already.")
 
@@ -188,7 +189,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "endthescene")
 	if(state == "fuck_tavi_pullout"):
-		playAnimation(StageScene.SexMissionary, "tease", {npc="tavi", bodyState={naked=true,hard=true}, npcBodyState={naked=true}})
+		playAnimation(StageScene.SexMissionary, "tease", {npc="tavi", uncon=true, bodyState={naked=true,hard=true}, npcBodyState={naked=true}})
 		if (tookVirginity):
 			saynn("Even though you took her virginity, you decide against cumming inside. Just before you reach the peak, you finally pull out. Your cock throbbing and releasing strings of thick slimy seed all over her crotch and belly, leaving quite a mess..")
 
@@ -205,7 +206,7 @@ func _run():
 		if (false):
 			addButton("Nope", "You shouldn't see this", "strapon_tavi")
 	if(state == "strapon_tavi"):
-		playAnimation(StageScene.SexMissionary, "tease", {npc="tavi", bodyState={naked=true,hard=true}, npcBodyState={naked=true}})
+		playAnimation(StageScene.SexMissionary, "tease", {npc="tavi", uncon=true, bodyState={naked=true,hard=true}, npcBodyState={naked=true}})
 		saynn("You feel some guilt but seeing the opportunity makes that feeling fade away, replaced by an even more devious thought.")
 
 		saynn("While Tavi is unconscious and breathing softly, you carefully move her into a comfortable position while you take a spot between her legs, your hands gently parting her thighs. Then you grab one of the strapons and secure it around your waist.")
@@ -220,7 +221,7 @@ func _run():
 
 		addButton("Push", "Start fucking Tavi", "strapon_tavi_push")
 	if(state == "strapon_tavi_push"):
-		playAnimation(StageScene.SexMissionary, "sex", {npc="tavi", bodyState={naked=true,hard=true}, npcBodyState={naked=true}})
+		playAnimation(StageScene.SexMissionary, "sex", {npc="tavi", uncon=true, bodyState={naked=true,hard=true}, npcBodyState={naked=true}})
 		if (tookVirginity):
 			saynn("Your hands land on Tavi's hips and hold her still while you proceed to put more and more strain on her last line of defense. The feline is wincing and hissing softly while the tip of your rubber cock is pushing on her hymen harder and harder.. until piercing and tearing through it, [b]stealing Tavi's virginity[/b].")
 
@@ -239,7 +240,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "strapon_tavi_cum")
 	if(state == "strapon_tavi_cum"):
-		playAnimation(StageScene.SexMissionary, "inside", {npc="tavi", bodyState={naked=true,hard=true}, npcBodyState={naked=true}})
+		playAnimation(StageScene.SexMissionary, "inside", {npc="tavi", uncon=true, bodyState={naked=true,hard=true}, npcBodyState={naked=true}})
 		saynn("After a few more thrusts, Tavi suddenly arches her back, her pussy gripping your toy tightly, clenching around it.")
 
 		saynn("You don't feel much yourself.. But it's still very arousing.. Seeing Tavi squirm under you.")

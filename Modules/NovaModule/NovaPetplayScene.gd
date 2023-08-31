@@ -91,7 +91,7 @@ func _run():
 	if(state == "get_on_all_fours"):
 		playAnimation(StageScene.Duo, "allfours", {
 			npc="nova", npcAction="stand", 
-			bodyState={naked=true,hard=true},
+			bodyState={naked=true,hard=true, leashedBy="nova"},
 			npcBodyState={},
 		})
 		# (if puppy)
@@ -115,9 +115,9 @@ func _run():
 	if(state == "follow"):
 		aimCameraAndSetLocName("yard_northCorridor")
 		playAnimation(StageScene.Duo, "crawl", {
-			npc="nova", npcAction="stand", 
-			bodyState={naked=true,hard=true},
-			npcBodyState={lookLeft=true},
+			npc="nova", npcAction="walk", flipNPC=true, 
+			bodyState={naked=true,hard=true, leashedBy="nova"},
+			npcBodyState={},
 		})
 		
 		saynn("Nova tugs gently on the leash to make you follow her, you feel how it makes your bulky collar dig into the neck so you obey her while staying mostly quiet. Pets can’t speak after all.")
@@ -156,8 +156,8 @@ func _run():
 	if(state == "follow1"):
 		aimCameraAndSetLocName("yard_eastCorridor")
 		playAnimation(StageScene.Duo, "crawl", {
-			npc="nova", npcAction="stand", 
-			bodyState={naked=true,hard=true},
+			npc="nova", npcAction="walk", flipNPC=true, 
+			bodyState={naked=true,hard=true, leashedBy="nova"},
 			npcBodyState={},
 		})
 		
@@ -271,8 +271,8 @@ func _run():
 	if(state == "follow2"):
 		aimCameraAndSetLocName("yard_novaspot")
 		playAnimation(StageScene.Duo, "crawl", {
-			npc="nova", npcAction="stand", 
-			bodyState={naked=true,hard=true},
+			npc="nova", npcAction="walk", flipNPC=true, 
+			bodyState={naked=true,hard=true, leashedBy="nova"},
 			npcBodyState={},
 		})
 		
@@ -321,7 +321,7 @@ func _run():
 		playAnimation(StageScene.SexOral, "sex", {
 			pc="nova",npc="pc",
 			bodyState={exposedCrotch=true,hard=true},
-			npcBodyState={naked=true,hard=true},
+			npcBodyState={naked=true,hard=true, leashedBy="nova"},
 		})
 
 		saynn("You crawl up to Nova’s legs and put your paws on her thighs. She gasps as you stick your head under her skirt and press your nose against her bulge.")
@@ -363,7 +363,7 @@ func _run():
 		playAnimation(StageScene.SexOral, "fast", {
 			pc="nova",npc="pc",
 			bodyState={exposedCrotch=true,hard=true},
-			npcBodyState={naked=true,hard=true},
+			npcBodyState={naked=true,hard=true, leashedBy="nova"},
 		})
 		
 		saynn("It only takes a few more seconds before that knot inflates even more and the whole cock starts throbbing inside your maw, the walls of your tight throat clench around the shaft and try to milk it, Nova moans as she shoves her member as deep as she can before going over the peak. Your belly quickly gets stuffed with her sticky cum, the husky sticks her tongue out and lets out passionate noises as more and more waves of hot semen get pushed into you. So much that some cum finds its way back and stuffs your mouth.")
@@ -398,7 +398,7 @@ func _run():
 		playAnimation(StageScene.SexOral, "tease", {
 			pc="nova",npc="pc",
 			bodyState={exposedCrotch=true,hard=true},
-			npcBodyState={naked=true,hard=true},
+			npcBodyState={naked=true,hard=true, leashedBy="nova"},
 		})
 		
 		saynn("It only takes a few more seconds before that knot inflates even more and the whole cock starts throbbing inside your maw, the walls of your tight throat clench around the shaft. You feel like Nova is about to cum any second so you push your hands against her thighs and manage to escape her grasp.")
@@ -422,7 +422,7 @@ func _run():
 		playAnimation(StageScene.SexAllFours, "tease", {
 			pc="nova", npc="pc", 
 			bodyState={exposedCrotch=true,hard=true},
-			npcBodyState={naked=true,hard=true},
+			npcBodyState={naked=true,hard=true, leashedBy="nova"},
 		})
 
 		# (if puppy)
@@ -448,7 +448,7 @@ func _run():
 		playAnimation(StageScene.SexAllFours, "sex", {
 			pc="nova", npc="pc", 
 			bodyState={exposedCrotch=true,hard=true,condom=usedCondom},
-			npcBodyState={naked=true,hard=true},
+			npcBodyState={naked=true,hard=true, leashedBy="nova"},
 		})
 		
 		# (if condom)
@@ -499,7 +499,7 @@ func _run():
 		playAnimation(StageScene.SexAllFours, "fast", {
 			pc="nova", npc="pc", 
 			bodyState={exposedCrotch=true,hard=true,condom=usedCondom},
-			npcBodyState={naked=true,hard=true},
+			npcBodyState={naked=true,hard=true, leashedBy="nova"},
 		})
 		
 		saynn("Your whole body starts to experience orgasmic convulsions, your legs shake, body shivers, you squirm under Nova while your pussy gets tighter around her cock and starts to squirt. Your inner walls clench around the canine member, milking it while the cervix becomes less rigid and opens up more. Your passionate moans can probably be heard from a long distance so Nova decides to help you and shoves her paw into your mouth for you to suck on.")
@@ -544,7 +544,7 @@ func _run():
 		playAnimation(StageScene.SexAllFours, "tease", {
 			pc="nova", npc="pc", 
 			bodyState={exposedCrotch=true,hard=true,condom=usedCondom},
-			npcBodyState={naked=true,hard=true},
+			npcBodyState={naked=true,hard=true, leashedBy="nova"},
 		})
 		
 		saynn("You both lay down on the floor for about half an hour. Eventually you begin to feel the discomfort of being stretched so much for so long so you whine a bit. Nova pets you and caresses your body.")
@@ -610,7 +610,7 @@ func _run():
 		playAnimation(StageScene.SexAllFours, "tease", {
 			pc="nova", npc="pc", 
 			bodyState={exposedCrotch=true,hard=true,},
-			npcBodyState={naked=true,hard=true},
+			npcBodyState={naked=true,hard=true, leashedBy="nova"},
 		})
 		# (if puppy)
 		if(isPuppy):
@@ -654,7 +654,7 @@ func _run():
 		playAnimation(StageScene.SexAllFours, "sex", {
 			pc="nova", npc="pc", 
 			bodyState={exposedCrotch=true,hard=true,},
-			npcBodyState={naked=true,hard=true},
+			npcBodyState={naked=true,hard=true, leashedBy="nova"},
 		})
 		
 		# (if puppy)
@@ -715,7 +715,7 @@ func _run():
 		playAnimation(StageScene.SexAllFours, "fast", {
 			pc="nova", npc="pc", 
 			bodyState={exposedCrotch=true,hard=true,},
-			npcBodyState={naked=true,hard=true},
+			npcBodyState={naked=true,hard=true, leashedBy="nova"},
 		})
 		
 		saynn("Nova puts her hand onto your back and pins you still while she pounds your butt with slow but powerful thrusts, stretching you out even more. Eventually your ring gets stretched so much that her meaty orb slips inside, sending waves of sharp sensations throughout your body. You’re squirming and moaning like a slut, you’re so full.")
@@ -756,7 +756,7 @@ func _run():
 		playAnimation(StageScene.SexAllFours, "tease", {
 			pc="nova", npc="pc", 
 			bodyState={exposedCrotch=true,hard=true,},
-			npcBodyState={naked=true,hard=true},
+			npcBodyState={naked=true,hard=true, leashedBy="nova"},
 		})
 		
 		saynn("Eventually Nova manages to pull out her cock, causing a strong stream of cum from your used butthole, you moan again as Nova offers you her messy cock.")

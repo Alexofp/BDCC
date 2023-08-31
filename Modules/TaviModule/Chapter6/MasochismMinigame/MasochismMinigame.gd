@@ -371,7 +371,7 @@ func getAllActions():
 			air = 1,
 			changestate = "choking",
 			previousCantBe = ["stopchoking"],
-			animation = [StageScene.SexStart, "start", {npc="tavi"}],
+			animation = [StageScene.Choking, "idle", {npc="tavi"}],
 			noturnusage = true,
 			messages = [
 				"Tavi gasps as you get a grasp on her throat and begin choking her slightly.",
@@ -384,6 +384,7 @@ func getAllActions():
 			pain = 3,
 			air = 1,
 			state = "choking",
+			animation = [StageScene.Choking, "choke", {npc="tavi"}],
 			noturnusage = true,
 			messages = [
 				"Tavi squirms and lets out silent gasps while you keep choking her.",
@@ -399,6 +400,7 @@ func getAllActions():
 			shortdesc = "Stop choking",
 			changestate = "",
 			state = "choking",
+			animation = [StageScene.Choking, "idle", {npc="tavi"}],
 			previousCantBe = ["startchoke"],
 			messages = [
 				"Tavi hungrily grabs air with her mouth when you stop choking her.",
