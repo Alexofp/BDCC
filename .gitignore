@@ -9,4 +9,6 @@ doc/_build/
 .DS_Store
 logs/
 
-/Build
+/Build/
+*.exe
+*.pck
