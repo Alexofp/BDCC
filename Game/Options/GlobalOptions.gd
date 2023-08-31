@@ -46,6 +46,11 @@ var advancedShadersEnabled = true
 
 var autosaveEnabled = true
 
+var capacityBallsRatio = 1.0
+var capacityPenisRatio = 0.25
+var capacityModifier = 1.0
+var productionModifier = 2.0
+
 func resetToDefaults():
 	fetchNewRelease = true
 	menstrualCycleLengthDays = 7
@@ -77,6 +82,10 @@ func resetToDefaults():
 	jigglePhysicsGlobalModifier = 1.0
 	advancedShadersEnabled = true
 	autosaveEnabled = true
+	capacityBallsRatio = 1.0
+	capacityPenisRatio = 0.25
+	capacityModifier = 1.0
+	productionModifier = 2.0
 	
 	enabledContent.clear()
 	for contentType in ContentType.getAll():
@@ -178,6 +187,18 @@ func shouldUseAdvancedShaders():
 
 func shouldAutosave():
 	return autosaveEnabled
+
+func getCapacityBallsRatio():
+	return capacityBallsRatio
+
+func getCapacityPenisRatio():
+	return capacityPenisRatio
+
+func getCapacityModifier():
+	return capacityModifier
+
+func getProductionModifier():
+	return productionModifier
 
 func getChangeableOptions():
 	var settings = [
@@ -505,6 +526,54 @@ func getChangeableOptions():
 				},
 			]
 		},
+		{
+			"name": "Cum production settings",
+			"id": "cumProductionSettings",
+			"options": [
+				{
+					"name": "Cum capacity balls ratio",
+					"description": "Change the \"capacityBallsRatio\" value",
+					"id": "capacityBallsRatio",
+					"type": "float",
+					"value": capacityBallsRatio,
+				},
+				{
+					"name": "Cum capacity penis ratio",
+					"description": "Change the \"capacityPenisRatio\" value",
+					"id": "capacityPenisRatio",
+					"type": "float",
+					"value": capacityPenisRatio,
+				},
+				{
+					"name": "Cum capacity modifier",
+					"description": "Change the \"capacityModifier\" value",
+					"id": "capacityModifier",
+					"type": "float",
+					"value": capacityModifier,
+				},
+				{
+					"name": "Cum production modifier",
+					"description": "Change the \"productionModifier\" value",
+					"id": "productionModifier",
+					"type": "float",
+					"value": productionModifier,
+				},
+				{
+					"name": "Hover to view cum capacity formula",
+					"description": "Cum capacity = ((20.0 * (BallsScale * 10.0 * capacityBallsRatio)^2 + 20.0 * (PenisLength * capacityPenisratio)^2) * capacityModifier)",
+					#"id": "capacityModifier",
+					"type": "checkbox",
+					#"value": capacityModifier,
+				},
+				{
+					"name": "Hover to view cum production speed formula",
+					"description": "Cum production speed per hour = (cumCapacity * productionModifier)",
+					#"id": "capacityModifier",
+					"type": "checkbox",
+					#"value": capacityModifier,
+				},
+			]
+		}
 	]
 	
 	var contentSettings = []
@@ -615,6 +684,16 @@ func applyOption(categoryID, optionID, value):
 		enabledContent[optionID] = value
 	print("SETTING "+categoryID+":"+optionID+" TO "+str(value))
 
+	if(categoryID == "cumProductionSettings"):
+		if(optionID == "capacityBallsRatio"):
+			capacityBallsRatio = value
+		if(optionID == "capacityPenisRatio"):
+			capacityPenisRatio = value
+		if(optionID == "capacityModifier"):
+			capacityModifier = value
+		if(optionID == "productionModifier"):
+			productionModifier = value
+
 func applySettingsEffect():
 	if(shouldScaleUI):
 		get_tree().set_screen_stretch(SceneTree.STRETCH_MODE_2D,SceneTree.STRETCH_ASPECT_EXPAND,Vector2(1280,720), uiScaleMultiplier)
@@ -655,6 +734,10 @@ func saveData():
 		"jigglePhysicsGlobalModifier": jigglePhysicsGlobalModifier,
 		"advancedShadersEnabled": advancedShadersEnabled,
 		"autosaveEnabled": autosaveEnabled,
+		"capacityBallsRatio": capacityBallsRatio,
+		"capacityPenisRatio": capacityPenisRatio,
+		"capacityModifier": capacityModifier,
+		"productionModifier": productionModifier,
 	}
 	
 	return data
@@ -691,6 +774,10 @@ func loadData(data):
 	jigglePhysicsGlobalModifier = loadVar(data, "jigglePhysicsGlobalModifier", 1.0)
 	advancedShadersEnabled = loadVar(data, "advancedShadersEnabled", true)
 	autosaveEnabled = loadVar(data, "autosaveEnabled", true)
+	capacityBallsRatio = loadVar(data, "capacityBallsRatio", 1.0)
+	capacityPenisRatio = loadVar(data, "capacityPenisRatio", 0.25)
+	capacityModifier = loadVar(data, "capacityModifier", 1.0)
+	productionModifier = loadVar(data, "productionModifier", 2.0)
 
 func saveToFile():
 	var saveData = saveData()
