@@ -27,6 +27,12 @@ func updateSubAnims():
 	else:
 		animationTree2["parameters/CuffsBlend/blend_amount"] = 0.0
 
+	var breastScale = doll2.breastScale + doll.headLength / 2.0
+	animationTree["parameters/StateMachine/Feeding/BreastSize/blend_amount"] = breastScale
+	animationTree["parameters/StateMachine/FeedingAlt/BreastSize/blend_amount"] = breastScale
+	animationTree2["parameters/StateMachine/Feeding/BreastSize/blend_amount"] = breastScale
+	animationTree2["parameters/StateMachine/FeedingAlt/BreastSize/blend_amount"] = breastScale
+
 # StageScene.Duo, "kneel", {npc="nova", pc="pc"}
 func playAnimation(animID, _args = {}):
 	var firstDoll = "pc"

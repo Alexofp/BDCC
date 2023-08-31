@@ -15,15 +15,19 @@ func _ready():
 	animationTree2.active = true
 	
 func updateSubAnims():
-	if(doll.getArmsCuffed()):
-		animationTree["parameters/CuffsBlend/blend_amount"] = 1.0
-	else:
-		animationTree["parameters/CuffsBlend/blend_amount"] = 0.0
+	#if(doll.getArmsCuffed()):
+	#	animationTree["parameters/CuffsBlend/blend_amount"] = 1.0
+	#else:
+	#	animationTree["parameters/CuffsBlend/blend_amount"] = 0.0
 	
 	if(doll2.getArmsCuffed()):
 		animationTree2["parameters/CuffsBlend/blend_amount"] = 1.0
 	else:
 		animationTree2["parameters/CuffsBlend/blend_amount"] = 0.0
+	
+	var breastScale = doll2.breastScale
+	animationTree["parameters/StateMachine/Groping/BreastSize/blend_amount"] = breastScale
+	animationTree2["parameters/StateMachine/Groping/BreastSize/blend_amount"] = breastScale
 
 # StageScene.Duo, "kneel", {npc="nova", pc="pc"}
 func playAnimation(animID, _args = {}):

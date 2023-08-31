@@ -31,7 +31,7 @@ nodes/Animation/position = Vector2( -220, 60 )
 "nodes/Animation 2/position" = Vector2( -220, 220 )
 nodes/KissBlend/node = SubResource( 32 )
 nodes/KissBlend/position = Vector2( 60, 120 )
-node_connections = [ "KissBlend", 0, "Animation", "KissBlend", 1, "Animation 2", "output", 0, "KissBlend" ]
+node_connections = [ "output", 0, "KissBlend", "KissBlend", 0, "Animation", "KissBlend", 1, "Animation 2" ]
 
 [sub_resource type="AnimationNodeAnimation" id=34]
 animation = "PreHug_1-loop"
@@ -69,7 +69,7 @@ start_node = "PreHug_1-loop"
 graph_offset = Vector2( -196, -157 )
 
 [sub_resource type="AnimationNodeBlendTree" id=26]
-graph_offset = Vector2( -154, 7 )
+graph_offset = Vector2( -3.66083, 23.4256 )
 nodes/Animation/node = SubResource( 3 )
 nodes/Animation/position = Vector2( 140, 280 )
 nodes/CuffsBlend/node = SubResource( 4 )
@@ -77,7 +77,7 @@ nodes/CuffsBlend/position = Vector2( 440, 160 )
 nodes/StateMachine/node = SubResource( 25 )
 nodes/StateMachine/position = Vector2( 187.2, 138.24 )
 nodes/output/position = Vector2( 680, 180 )
-node_connections = [ "CuffsBlend", 0, "StateMachine", "CuffsBlend", 1, "Animation", "output", 0, "CuffsBlend" ]
+node_connections = [ "output", 0, "CuffsBlend", "CuffsBlend", 0, "StateMachine", "CuffsBlend", 1, "Animation" ]
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=22]
 
@@ -101,7 +101,7 @@ nodes/Animation/position = Vector2( 120, 80 )
 nodes/KissBlend/node = SubResource( 43 )
 nodes/KissBlend/position = Vector2( 340, 140 )
 nodes/output/position = Vector2( 560, 180 )
-node_connections = [ "KissBlend", 0, "Animation", "KissBlend", 1, "Animation 2", "output", 0, "KissBlend" ]
+node_connections = [ "output", 0, "KissBlend", "KissBlend", 0, "Animation", "KissBlend", 1, "Animation 2" ]
 
 [sub_resource type="AnimationNodeAnimation" id=45]
 animation = "PreHug_2-loop"
@@ -136,10 +136,10 @@ states/StartHug_2-loop/node = SubResource( 46 )
 states/StartHug_2-loop/position = Vector2( 288, -13 )
 transitions = [ "PreHug_2-loop", "StartHug_2-loop", SubResource( 47 ), "StartHug_2-loop", "Hug_2-loop", SubResource( 48 ), "Hug_2-loop", "PreHug_2-loop", SubResource( 49 ), "Hug_2-loop", "Kissing2", SubResource( 50 ), "Kissing2", "Hug_2-loop", SubResource( 51 ) ]
 start_node = "PreHug_2-loop"
-graph_offset = Vector2( -182, -195 )
+graph_offset = Vector2( -130, -120 )
 
 [sub_resource type="AnimationNodeBlendTree" id=29]
-graph_offset = Vector2( -351.532, -34.3158 )
+graph_offset = Vector2( -299.532, 64.6842 )
 nodes/Animation/node = SubResource( 3 )
 nodes/Animation/position = Vector2( 140, 280 )
 nodes/CuffsBlend/node = SubResource( 4 )
@@ -147,7 +147,7 @@ nodes/CuffsBlend/position = Vector2( 440, 160 )
 nodes/StateMachine/node = SubResource( 28 )
 nodes/StateMachine/position = Vector2( 160, 120 )
 nodes/output/position = Vector2( 680, 180 )
-node_connections = [ "CuffsBlend", 0, "StateMachine", "CuffsBlend", 1, "Animation", "output", 0, "CuffsBlend" ]
+node_connections = [ "output", 0, "CuffsBlend", "CuffsBlend", 0, "StateMachine", "CuffsBlend", 1, "Animation" ]
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=23]
 

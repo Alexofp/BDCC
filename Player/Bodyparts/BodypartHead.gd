@@ -21,3 +21,9 @@ func getTooltipInfo():
 	if(orifice != null):
 		text += orifice.getTooltipInfo()
 	return text
+
+# Used to adjust the kissing animation
+# 0 = Human (flat head)
+# 1 = Dragon/canine (very long muzzle)
+func getHeadLength():
+	return 0.25

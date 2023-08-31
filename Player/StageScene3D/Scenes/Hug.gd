@@ -24,6 +24,11 @@ func updateSubAnims():
 		animationTree2["parameters/CuffsBlend/blend_amount"] = 1.0
 	else:
 		animationTree2["parameters/CuffsBlend/blend_amount"] = 0.0
+	
+	var headLen = doll.headLength + doll2.headLength
+	headLen = clamp(headLen, 0.0, 1.0)
+	animationTree["parameters/StateMachine/Kissing/KissBlend/blend_amount"] = headLen
+	animationTree2["parameters/StateMachine/Kissing2/KissBlend/blend_amount"] = headLen
 
 # StageScene.Duo, "kneel", {npc="nova", pc="pc"}
 func playAnimation(animID, _args = {}):

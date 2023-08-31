@@ -34,7 +34,7 @@ nodes/Animation/position = Vector2( -180, 40 )
 "nodes/Animation 2/position" = Vector2( -200, 200 )
 nodes/BreastSize/node = SubResource( 70 )
 nodes/BreastSize/position = Vector2( 100, 100 )
-node_connections = [ "BreastSize", 0, "Animation", "BreastSize", 1, "Animation 2", "output", 0, "BreastSize" ]
+node_connections = [ "output", 0, "BreastSize", "BreastSize", 0, "Animation", "BreastSize", 1, "Animation 2" ]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=72]
 xfade_time = 0.5
@@ -66,7 +66,7 @@ start_node = "BreastGropingTease_1-loop"
 graph_offset = Vector2( -154, 8 )
 
 [sub_resource type="AnimationNodeBlendTree" id=77]
-graph_offset = Vector2( -154, 7 )
+graph_offset = Vector2( -127, 65 )
 nodes/Animation/node = SubResource( 3 )
 nodes/Animation/position = Vector2( 140, 280 )
 nodes/CuffsBlend/node = SubResource( 4 )
@@ -74,7 +74,7 @@ nodes/CuffsBlend/position = Vector2( 440, 160 )
 nodes/StateMachine/node = SubResource( 76 )
 nodes/StateMachine/position = Vector2( 222, 111 )
 nodes/output/position = Vector2( 680, 180 )
-node_connections = [ "CuffsBlend", 0, "StateMachine", "CuffsBlend", 1, "Animation", "output", 0, "CuffsBlend" ]
+node_connections = [ "output", 0, "CuffsBlend", "CuffsBlend", 0, "StateMachine", "CuffsBlend", 1, "Animation" ]
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=22]
 
@@ -101,7 +101,7 @@ nodes/Animation/position = Vector2( -40, 80 )
 nodes/BreastSize/node = SubResource( 83 )
 nodes/BreastSize/position = Vector2( 300, 140 )
 nodes/output/position = Vector2( 560, 180 )
-node_connections = [ "BreastSize", 0, "Animation", "BreastSize", 1, "Animation 2", "output", 0, "BreastSize" ]
+node_connections = [ "output", 0, "BreastSize", "BreastSize", 0, "Animation", "BreastSize", 1, "Animation 2" ]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=85]
 xfade_time = 0.5
@@ -141,7 +141,7 @@ nodes/CuffsBlend/position = Vector2( 440, 160 )
 nodes/StateMachine/node = SubResource( 89 )
 nodes/StateMachine/position = Vector2( 194.468, 86.6842 )
 nodes/output/position = Vector2( 680, 180 )
-node_connections = [ "CuffsBlend", 0, "StateMachine", "CuffsBlend", 1, "Animation", "output", 0, "CuffsBlend" ]
+node_connections = [ "output", 0, "CuffsBlend", "CuffsBlend", 0, "StateMachine", "CuffsBlend", 1, "Animation" ]
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=23]
 

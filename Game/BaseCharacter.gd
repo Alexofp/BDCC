@@ -1413,7 +1413,19 @@ func softUpdateDoll(doll: Doll3D):
 		var breasts = getBodypart(BodypartSlot.Breasts)
 		if(breasts.has_method("getBreastsScale")):
 			breastsScale = breasts.getBreastsScale()
+		doll.breastScale = breasts.getBreastsAdjustScale()
+	else:
+		doll.breastScale = 0.0
 	doll.setBreastsScale(breastsScale)
+	
+	if(hasBodypart(BodypartSlot.Head)):
+		var thehead = getBodypart(BodypartSlot.Head)
+		if(thehead.has_method("getHeadLength")):
+			doll.headLength = thehead.getHeadLength()
+		else:
+			doll.headLength = 0.0
+	else:
+		doll.headLength = 0.0
 	
 	var penisScale = 1.0
 	var ballsScale = 1.0
@@ -1466,7 +1478,7 @@ func softUpdateDoll(doll: Doll3D):
 		var newChains = item.getChains()
 		if(newChains != null):
 			for selfChain in newChains:
-				doll.selfChains.append([selfChain[0], selfChain[1], "npc", getID(), selfChain[2]])
+				doll.selfChains.append([selfChain[0], selfChain[1], "self", selfChain[2]])
 			#doll.selfChains.append_array(newChains)
 	doll.call_deferred("checkChains")
 

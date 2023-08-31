@@ -26,6 +26,11 @@ var temporaryRiggedParts = {}
 
 var rememberedPenisScale = 1.0
 
+# Info to adjust animations
+var breastScale = 0.0
+var headLength = 0.0
+
+
 var selfChains = []
 var sceneChains = []
 var chainObjects = []
@@ -689,6 +694,10 @@ func updateChains():
 					if(otherDoll.dollAttachmentZones.has(otherZoneID)):
 						targetObjects = otherDoll.dollAttachmentZones[otherZoneID]
 					break
+		if(chainType == "self"):
+			var otherZoneID = chainInfo[3]
+			if(dollAttachmentZones.has(otherZoneID)):
+				targetObjects = dollAttachmentZones[otherZoneID]
 		if(chainType == "scene"):
 			if(!get_parent().has_method("getChainPoint")):
 				continue

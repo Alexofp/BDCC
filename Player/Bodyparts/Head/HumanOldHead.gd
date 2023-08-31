@@ -14,3 +14,6 @@ func npcGenerationWeight(_dynamicCharacter):
 	if(_dynamicCharacter.getGender() in [Gender.Male]):
 		return 0.2
 	return 0.0
+
+func getHeadLength():
+	return 0.0
