@@ -1265,6 +1265,13 @@ func milk(howmuch = 1.0):
 		addSkillExperience(Skill.Milking, 20)
 	return howMuchMilk
 
+func induceLactation():
+	if(!hasBodypart(BodypartSlot.Breasts)):
+		return false
+	
+	var breasts = getBodypart(BodypartSlot.Breasts)
+	breasts.induceLactation()
+
 func stimulateLactation():
 	if(!hasBodypart(BodypartSlot.Breasts)):
 		return false

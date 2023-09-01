@@ -45,6 +45,10 @@ func _run():
 		saynn("What do you wanna do with Tavi?")
 		
 		addButton("Shower", "Take a shower with Tavi", "do_activity", ["Ch6TaviShowerScene"])
+		if(taviModule.getOverallCorruptStage() >= 1):
+			addButton("Milking", "Try to milk Tavi's breasts", "do_activity", ["Ch6TaviMilkingScene"])
+		else:
+			addDisabledButton("Milking", "Tavi is not ready for this yet")
 		addButton("Back", "Back to the previous menu", "")
 		
 	if(state == "train_menu"):

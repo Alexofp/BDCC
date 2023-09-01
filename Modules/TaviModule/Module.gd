@@ -112,6 +112,8 @@ func getFlags():
 		"Ch6TaviReceivedHorns": flag(FlagType.Bool),
 		"Ch6TaviReceivedWombMark": flag(FlagType.Bool),
 		"Ch6TaviChillTalk": flag(FlagType.Number),
+		"Ch6TaviLastGropeHow": flag(FlagType.Text),
+		"Ch6TaviLactationProgress": flag(FlagType.Number),
 		
 		"taviSkillCombat": flag(FlagType.Number),
 		"taviSkillSex": flag(FlagType.Number),
@@ -196,6 +198,7 @@ func _init():
 		"res://Modules/TaviModule/Chapter6/CorruptionScenes/Ch6TaviCorruption200Scene.gd",
 		
 		"res://Modules/TaviModule/Chapter6/Activities/Ch6TaviShowerScene.gd",
+		"res://Modules/TaviModule/Chapter6/Activities/Ch6TaviMilkingScene.gd",
 		]
 	characters = [
 		"res://Modules/TaviModule/Chapter4/DirectorTau.gd",
@@ -338,6 +341,12 @@ func getSkillScoreText(skillID):
 	var scoreToText = ["F", "D", "C", "B", "A", "S", "S+", "S++"]
 	
 	return scoreToText[score]
+
+func getOverallCorruptStage():
+	var corruptionStage = getFlag("TaviModule.Ch6CorruptionStage", 0)
+	var purityStage = getFlag("TaviModule.Ch6PurityStage", 0)
+	
+	return Util.maxi(corruptionStage, purityStage)
 
 func getAvaiableStoryScene():
 	var currentCorruption = getFlag("TaviModule.Ch6Corruption", 1.0)
