@@ -1265,6 +1265,25 @@ func milk(howmuch = 1.0):
 		addSkillExperience(Skill.Milking, 20)
 	return howMuchMilk
 
+func breastFedBy(characterID, amountToTransfer = 1.0):
+	var ch = GlobalRegistry.getCharacter(characterID)
+	
+	if(ch.hasBodypart(BodypartSlot.Breasts)):
+		var thebodypart = getBodypart(BodypartSlot.Head)
+		var usedBodypart = ch.getBodypart(BodypartSlot.Breasts)
+		
+		var fluids = usedBodypart.getFluids()
+		
+		if(fluids != null && thebodypart != null):
+			fluids.transferTo(thebodypart, amountToTransfer)
+		
+		var production: FluidProduction = usedBodypart.getFluidProduction()
+		if(production != null):
+			production.afterMilked()
+		
+	if(!ch.hasPerk(Perk.MilkNoSoreNipples) && amountToTransfer >= 0.5):
+		ch.addEffect(StatusEffect.SoreNipplesAfterMilking)
+			
 func induceLactation():
 	if(!hasBodypart(BodypartSlot.Breasts)):
 		return false
