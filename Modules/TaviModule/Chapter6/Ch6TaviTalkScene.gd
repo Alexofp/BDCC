@@ -49,6 +49,8 @@ func _run():
 			addButton("Milking", "Try to milk Tavi's breasts", "do_activity", ["Ch6TaviMilkingScene"])
 		else:
 			addDisabledButton("Milking", "Tavi is not ready for this yet")
+		if(taviModule.getOverallCorruptStage() >= 2):
+			addButton("Sleep with you", "Discuss Tavi sleeping in your cell", "do_sleepscene")
 		addButton("Back", "Back to the previous menu", "")
 		
 	if(state == "train_menu"):
@@ -91,6 +93,11 @@ func _react(_action: String, _args):
 		setState("")
 		increaseFlag("TaviModule.Ch6Tiredness", 1)
 		runScene(_args[0])
+		return
+	
+	if(_action == "do_sleepscene"):
+		setState("")
+		runScene("Ch6TaviAllowSleepInCellScene")
 		return
 
 	setState(_action)
