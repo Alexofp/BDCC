@@ -9,7 +9,7 @@ func registerTriggers(es):
 func react(_triggerID, _args):
 	if(!getFlag("TaviModule.Ch6TaviAllowedToSleepInPCCell")):
 		return false
-	if(getCharacter("tavi").isReadyToGiveBirth()): # So she can give birth 'automatically'
+	if(getCharacter("tavi").isVisiblyPregnant()):
 		return false
 	
 	runScene("Ch6TaviSleepInCellScene")
