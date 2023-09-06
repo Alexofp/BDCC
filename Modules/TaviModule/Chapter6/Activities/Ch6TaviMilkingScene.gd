@@ -185,7 +185,7 @@ func _run():
 
 		addButton("Pumps", "Switch them on", "nolact_pump_do")
 	if(state == "nolact_pump_do"):
-		playAnimation(StageScene.Cuddling, "idle", {npc="tavi", npcBodyState={naked=true}})
+		playAnimation(StageScene.Cuddling, "squirm", {npc="tavi", npcBodyState={naked=true}})
 		saynn("You switch each of the pumps on to their weak setting and just watch.")
 
 		saynn("The feline inhales deeply as the devices on her breasts begin their gentle suction, her nipples hardening immediately from the stimulation.")
@@ -433,7 +433,7 @@ func _run():
 
 		addButton("Pumps", "Turn the breast pumps on", "lact_pump_on")
 	if(state == "lact_pump_on"):
-		playAnimation(StageScene.Cuddling, "idle", {npc="tavi", npcBodyState={naked=true}})
+		playAnimation(StageScene.Cuddling, "squirm", {npc="tavi", npcBodyState={naked=true}})
 		saynn("And so you flick the switches on the pumps, making them kick into action with a quiet hum. Tavi's breath hitches when she begins to feel the rhythmic suctions. There is no milk yet but you can easily tell how much pressure the pumps put by seeing Tavi's nips get tugged on.")
 
 		saynn("She is barely standing so you pull her in for some cuddles, trying to distract her from her thoughts.")
