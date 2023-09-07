@@ -1,4 +1,4 @@
-[gd_scene load_steps=73 format=2]
+[gd_scene load_steps=82 format=2]
 
 [ext_resource path="res://Player/Player3D/Doll3D.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Player/StageScene3D/BaseStageScene3D.tscn" type="PackedScene" id=2]
@@ -21,6 +21,9 @@ animation = "ButtStackSexDOWNInside_1-loop"
 [sub_resource type="AnimationNodeAnimation" id=411]
 animation = "ButtStackSexDOWN_1-loop"
 
+[sub_resource type="AnimationNodeAnimation" id=475]
+animation = "ButtStackSexTease_1-loop"
+
 [sub_resource type="AnimationNodeAnimation" id=412]
 animation = "ButtStackSexTease_1-loop"
 
@@ -33,12 +36,6 @@ animation = "ButtStackSexUPInside_1-loop"
 [sub_resource type="AnimationNodeAnimation" id=415]
 animation = "ButtStackSexUP_1-loop"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=416]
-xfade_time = 0.5
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=417]
-xfade_time = 0.5
-
 [sub_resource type="AnimationNodeStateMachineTransition" id=418]
 xfade_time = 0.5
 
@@ -49,12 +46,6 @@ xfade_time = 0.5
 xfade_time = 0.5
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=421]
-xfade_time = 0.5
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=422]
-xfade_time = 0.5
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=423]
 xfade_time = 0.5
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=424]
@@ -69,6 +60,24 @@ xfade_time = 0.5
 [sub_resource type="AnimationNodeStateMachineTransition" id=427]
 xfade_time = 0.5
 
+[sub_resource type="AnimationNodeStateMachineTransition" id=476]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=477]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=478]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=479]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=480]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=481]
+xfade_time = 0.5
+
 [sub_resource type="AnimationNodeStateMachine" id=428]
 states/ButtStackSexDOWNFast_1-loop/node = SubResource( 409 )
 states/ButtStackSexDOWNFast_1-loop/position = Vector2( 298, 330 )
@@ -77,19 +86,21 @@ states/ButtStackSexDOWNInside_1-loop/position = Vector2( 298, 162 )
 states/ButtStackSexDOWN_1-loop/node = SubResource( 411 )
 states/ButtStackSexDOWN_1-loop/position = Vector2( 298, 245 )
 states/ButtStackSexTease_1-loop/node = SubResource( 412 )
-states/ButtStackSexTease_1-loop/position = Vector2( 469, 65 )
+states/ButtStackSexTease_1-loop/position = Vector2( 454, -126 )
+"states/ButtStackSexTease_1-loop 2/node" = SubResource( 475 )
+"states/ButtStackSexTease_1-loop 2/position" = Vector2( 454, 9 )
 states/ButtStackSexUPFast_1-loop/node = SubResource( 413 )
 states/ButtStackSexUPFast_1-loop/position = Vector2( 641, 330 )
 states/ButtStackSexUPInside_1-loop/node = SubResource( 414 )
 states/ButtStackSexUPInside_1-loop/position = Vector2( 641, 162 )
 states/ButtStackSexUP_1-loop/node = SubResource( 415 )
 states/ButtStackSexUP_1-loop/position = Vector2( 641, 245 )
-transitions = [ "ButtStackSexTease_1-loop", "ButtStackSexDOWNInside_1-loop", SubResource( 416 ), "ButtStackSexDOWNInside_1-loop", "ButtStackSexTease_1-loop", SubResource( 417 ), "ButtStackSexDOWNInside_1-loop", "ButtStackSexDOWN_1-loop", SubResource( 418 ), "ButtStackSexDOWN_1-loop", "ButtStackSexDOWNInside_1-loop", SubResource( 419 ), "ButtStackSexDOWN_1-loop", "ButtStackSexDOWNFast_1-loop", SubResource( 420 ), "ButtStackSexDOWNFast_1-loop", "ButtStackSexDOWN_1-loop", SubResource( 421 ), "ButtStackSexTease_1-loop", "ButtStackSexUPInside_1-loop", SubResource( 422 ), "ButtStackSexUPInside_1-loop", "ButtStackSexTease_1-loop", SubResource( 423 ), "ButtStackSexUPInside_1-loop", "ButtStackSexUP_1-loop", SubResource( 424 ), "ButtStackSexUP_1-loop", "ButtStackSexUPInside_1-loop", SubResource( 425 ), "ButtStackSexUP_1-loop", "ButtStackSexUPFast_1-loop", SubResource( 426 ), "ButtStackSexUPFast_1-loop", "ButtStackSexUP_1-loop", SubResource( 427 ) ]
+transitions = [ "ButtStackSexDOWNInside_1-loop", "ButtStackSexDOWN_1-loop", SubResource( 418 ), "ButtStackSexDOWN_1-loop", "ButtStackSexDOWNInside_1-loop", SubResource( 419 ), "ButtStackSexDOWN_1-loop", "ButtStackSexDOWNFast_1-loop", SubResource( 420 ), "ButtStackSexDOWNFast_1-loop", "ButtStackSexDOWN_1-loop", SubResource( 421 ), "ButtStackSexUPInside_1-loop", "ButtStackSexUP_1-loop", SubResource( 424 ), "ButtStackSexUP_1-loop", "ButtStackSexUPInside_1-loop", SubResource( 425 ), "ButtStackSexUP_1-loop", "ButtStackSexUPFast_1-loop", SubResource( 426 ), "ButtStackSexUPFast_1-loop", "ButtStackSexUP_1-loop", SubResource( 427 ), "ButtStackSexTease_1-loop", "ButtStackSexTease_1-loop 2", SubResource( 476 ), "ButtStackSexTease_1-loop 2", "ButtStackSexTease_1-loop", SubResource( 477 ), "ButtStackSexTease_1-loop 2", "ButtStackSexDOWNInside_1-loop", SubResource( 478 ), "ButtStackSexDOWNInside_1-loop", "ButtStackSexTease_1-loop 2", SubResource( 479 ), "ButtStackSexTease_1-loop 2", "ButtStackSexUPInside_1-loop", SubResource( 480 ), "ButtStackSexUPInside_1-loop", "ButtStackSexTease_1-loop 2", SubResource( 481 ) ]
 start_node = "ButtStackSexTease_1-loop"
-graph_offset = Vector2( -173, 36 )
+graph_offset = Vector2( -162, -192 )
 
 [sub_resource type="AnimationNodeBlendTree" id=429]
-graph_offset = Vector2( -294.299, 11.849 )
+graph_offset = Vector2( -38, 57 )
 nodes/Animation/node = SubResource( 3 )
 nodes/Animation/position = Vector2( 140, 280 )
 nodes/CuffsBlend/node = SubResource( 4 )
@@ -110,6 +121,9 @@ animation = "ButtStackSexDOWNInside_2-loop"
 [sub_resource type="AnimationNodeAnimation" id=435]
 animation = "ButtStackSexDOWN_2-loop"
 
+[sub_resource type="AnimationNodeAnimation" id=482]
+animation = "ButtStackSexTease_2-loop"
+
 [sub_resource type="AnimationNodeAnimation" id=436]
 animation = "ButtStackSexTease_2-loop"
 
@@ -121,18 +135,6 @@ animation = "ButtStackSexUPInside_2-loop"
 
 [sub_resource type="AnimationNodeAnimation" id=439]
 animation = "ButtStackSexUP_2-loop"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=440]
-xfade_time = 0.5
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=441]
-xfade_time = 0.5
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=442]
-xfade_time = 0.5
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=443]
-xfade_time = 0.5
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=444]
 xfade_time = 0.5
@@ -158,6 +160,24 @@ xfade_time = 0.5
 [sub_resource type="AnimationNodeStateMachineTransition" id=451]
 xfade_time = 0.5
 
+[sub_resource type="AnimationNodeStateMachineTransition" id=483]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=484]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=485]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=486]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=487]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=488]
+xfade_time = 0.5
+
 [sub_resource type="AnimationNodeStateMachine" id=452]
 states/ButtStackSexDOWNFast_2-loop/node = SubResource( 433 )
 states/ButtStackSexDOWNFast_2-loop/position = Vector2( 334, 278 )
@@ -166,19 +186,21 @@ states/ButtStackSexDOWNInside_2-loop/position = Vector2( 334, 134 )
 states/ButtStackSexDOWN_2-loop/node = SubResource( 435 )
 states/ButtStackSexDOWN_2-loop/position = Vector2( 334, 204 )
 states/ButtStackSexTease_2-loop/node = SubResource( 436 )
-states/ButtStackSexTease_2-loop/position = Vector2( 498, 40 )
+states/ButtStackSexTease_2-loop/position = Vector2( 495, -93 )
+"states/ButtStackSexTease_2-loop 2/node" = SubResource( 482 )
+"states/ButtStackSexTease_2-loop 2/position" = Vector2( 495, 12 )
 states/ButtStackSexUPFast_2-loop/node = SubResource( 437 )
 states/ButtStackSexUPFast_2-loop/position = Vector2( 649, 278 )
 states/ButtStackSexUPInside_2-loop/node = SubResource( 438 )
 states/ButtStackSexUPInside_2-loop/position = Vector2( 649, 134 )
 states/ButtStackSexUP_2-loop/node = SubResource( 439 )
 states/ButtStackSexUP_2-loop/position = Vector2( 649, 204 )
-transitions = [ "ButtStackSexTease_2-loop", "ButtStackSexDOWNInside_2-loop", SubResource( 440 ), "ButtStackSexDOWNInside_2-loop", "ButtStackSexTease_2-loop", SubResource( 441 ), "ButtStackSexTease_2-loop", "ButtStackSexUPInside_2-loop", SubResource( 442 ), "ButtStackSexUPInside_2-loop", "ButtStackSexTease_2-loop", SubResource( 443 ), "ButtStackSexUPInside_2-loop", "ButtStackSexUP_2-loop", SubResource( 444 ), "ButtStackSexUP_2-loop", "ButtStackSexUPInside_2-loop", SubResource( 445 ), "ButtStackSexUP_2-loop", "ButtStackSexUPFast_2-loop", SubResource( 446 ), "ButtStackSexUPFast_2-loop", "ButtStackSexUP_2-loop", SubResource( 447 ), "ButtStackSexDOWNInside_2-loop", "ButtStackSexDOWN_2-loop", SubResource( 448 ), "ButtStackSexDOWN_2-loop", "ButtStackSexDOWNInside_2-loop", SubResource( 449 ), "ButtStackSexDOWN_2-loop", "ButtStackSexDOWNFast_2-loop", SubResource( 450 ), "ButtStackSexDOWNFast_2-loop", "ButtStackSexDOWN_2-loop", SubResource( 451 ) ]
+transitions = [ "ButtStackSexUPInside_2-loop", "ButtStackSexUP_2-loop", SubResource( 444 ), "ButtStackSexUP_2-loop", "ButtStackSexUPInside_2-loop", SubResource( 445 ), "ButtStackSexUP_2-loop", "ButtStackSexUPFast_2-loop", SubResource( 446 ), "ButtStackSexUPFast_2-loop", "ButtStackSexUP_2-loop", SubResource( 447 ), "ButtStackSexDOWNInside_2-loop", "ButtStackSexDOWN_2-loop", SubResource( 448 ), "ButtStackSexDOWN_2-loop", "ButtStackSexDOWNInside_2-loop", SubResource( 449 ), "ButtStackSexDOWN_2-loop", "ButtStackSexDOWNFast_2-loop", SubResource( 450 ), "ButtStackSexDOWNFast_2-loop", "ButtStackSexDOWN_2-loop", SubResource( 451 ), "ButtStackSexDOWNInside_2-loop", "ButtStackSexTease_2-loop 2", SubResource( 483 ), "ButtStackSexTease_2-loop 2", "ButtStackSexDOWNInside_2-loop", SubResource( 484 ), "ButtStackSexTease_2-loop 2", "ButtStackSexUPInside_2-loop", SubResource( 485 ), "ButtStackSexUPInside_2-loop", "ButtStackSexTease_2-loop 2", SubResource( 486 ), "ButtStackSexTease_2-loop 2", "ButtStackSexTease_2-loop", SubResource( 487 ), "ButtStackSexTease_2-loop", "ButtStackSexTease_2-loop 2", SubResource( 488 ) ]
 start_node = "ButtStackSexTease_2-loop"
-graph_offset = Vector2( -5, -20 )
+graph_offset = Vector2( -85, -183 )
 
 [sub_resource type="AnimationNodeBlendTree" id=453]
-graph_offset = Vector2( -322.532, 74.6842 )
+graph_offset = Vector2( -322.532, 41 )
 nodes/Animation/node = SubResource( 3 )
 nodes/Animation/position = Vector2( 140, 280 )
 nodes/CuffsBlend/node = SubResource( 4 )
@@ -199,6 +221,9 @@ animation = "ButtStackSexDOWNInside_3-loop"
 [sub_resource type="AnimationNodeAnimation" id=456]
 animation = "ButtStackSexDOWN_3-loop"
 
+[sub_resource type="AnimationNodeAnimation" id=489]
+animation = "ButtStackSexPreInside_3-loop"
+
 [sub_resource type="AnimationNodeAnimation" id=457]
 animation = "ButtStackSexTease_3-loop"
 
@@ -210,18 +235,6 @@ animation = "ButtStackSexUPInside_3-loop"
 
 [sub_resource type="AnimationNodeAnimation" id=460]
 animation = "ButtStackSexUP_3-loop"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=461]
-xfade_time = 0.5
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=462]
-xfade_time = 0.5
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=463]
-xfade_time = 0.5
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=464]
-xfade_time = 0.5
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=465]
 xfade_time = 0.5
@@ -247,6 +260,24 @@ xfade_time = 0.5
 [sub_resource type="AnimationNodeStateMachineTransition" id=472]
 xfade_time = 0.5
 
+[sub_resource type="AnimationNodeStateMachineTransition" id=490]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=491]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=492]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=493]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=494]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=495]
+xfade_time = 0.5
+
 [sub_resource type="AnimationNodeStateMachine" id=473]
 states/ButtStackSexDOWNFast_3-loop/node = SubResource( 454 )
 states/ButtStackSexDOWNFast_3-loop/position = Vector2( 387, 309 )
@@ -254,16 +285,19 @@ states/ButtStackSexDOWNInside_3-loop/node = SubResource( 455 )
 states/ButtStackSexDOWNInside_3-loop/position = Vector2( 387, 151 )
 states/ButtStackSexDOWN_3-loop/node = SubResource( 456 )
 states/ButtStackSexDOWN_3-loop/position = Vector2( 387, 225 )
+states/ButtStackSexPreInside_3-loop/node = SubResource( 489 )
+states/ButtStackSexPreInside_3-loop/position = Vector2( 542, 45 )
 states/ButtStackSexTease_3-loop/node = SubResource( 457 )
-states/ButtStackSexTease_3-loop/position = Vector2( 545, 50 )
+states/ButtStackSexTease_3-loop/position = Vector2( 542, -52 )
 states/ButtStackSexUPFast_3-loop/node = SubResource( 458 )
 states/ButtStackSexUPFast_3-loop/position = Vector2( 690, 309 )
 states/ButtStackSexUPInside_3-loop/node = SubResource( 459 )
 states/ButtStackSexUPInside_3-loop/position = Vector2( 690, 151 )
 states/ButtStackSexUP_3-loop/node = SubResource( 460 )
 states/ButtStackSexUP_3-loop/position = Vector2( 690, 225 )
-transitions = [ "ButtStackSexTease_3-loop", "ButtStackSexDOWNInside_3-loop", SubResource( 461 ), "ButtStackSexDOWNInside_3-loop", "ButtStackSexTease_3-loop", SubResource( 462 ), "ButtStackSexTease_3-loop", "ButtStackSexUPInside_3-loop", SubResource( 463 ), "ButtStackSexUPInside_3-loop", "ButtStackSexTease_3-loop", SubResource( 464 ), "ButtStackSexUPInside_3-loop", "ButtStackSexUP_3-loop", SubResource( 465 ), "ButtStackSexUP_3-loop", "ButtStackSexUPInside_3-loop", SubResource( 466 ), "ButtStackSexUP_3-loop", "ButtStackSexUPFast_3-loop", SubResource( 467 ), "ButtStackSexUPFast_3-loop", "ButtStackSexUP_3-loop", SubResource( 468 ), "ButtStackSexDOWN_3-loop", "ButtStackSexDOWNFast_3-loop", SubResource( 469 ), "ButtStackSexDOWNFast_3-loop", "ButtStackSexDOWN_3-loop", SubResource( 470 ), "ButtStackSexDOWNInside_3-loop", "ButtStackSexDOWN_3-loop", SubResource( 471 ), "ButtStackSexDOWN_3-loop", "ButtStackSexDOWNInside_3-loop", SubResource( 472 ) ]
+transitions = [ "ButtStackSexUPInside_3-loop", "ButtStackSexUP_3-loop", SubResource( 465 ), "ButtStackSexUP_3-loop", "ButtStackSexUPInside_3-loop", SubResource( 466 ), "ButtStackSexUP_3-loop", "ButtStackSexUPFast_3-loop", SubResource( 467 ), "ButtStackSexUPFast_3-loop", "ButtStackSexUP_3-loop", SubResource( 468 ), "ButtStackSexDOWN_3-loop", "ButtStackSexDOWNFast_3-loop", SubResource( 469 ), "ButtStackSexDOWNFast_3-loop", "ButtStackSexDOWN_3-loop", SubResource( 470 ), "ButtStackSexDOWNInside_3-loop", "ButtStackSexDOWN_3-loop", SubResource( 471 ), "ButtStackSexDOWN_3-loop", "ButtStackSexDOWNInside_3-loop", SubResource( 472 ), "ButtStackSexPreInside_3-loop", "ButtStackSexDOWNInside_3-loop", SubResource( 490 ), "ButtStackSexDOWNInside_3-loop", "ButtStackSexPreInside_3-loop", SubResource( 491 ), "ButtStackSexPreInside_3-loop", "ButtStackSexUPInside_3-loop", SubResource( 492 ), "ButtStackSexUPInside_3-loop", "ButtStackSexPreInside_3-loop", SubResource( 493 ), "ButtStackSexTease_3-loop", "ButtStackSexPreInside_3-loop", SubResource( 494 ), "ButtStackSexPreInside_3-loop", "ButtStackSexTease_3-loop", SubResource( 495 ) ]
 start_node = "ButtStackSexTease_3-loop"
+graph_offset = Vector2( -30, -135 )
 
 [sub_resource type="AnimationNodeBlendTree" id=474]
 graph_offset = Vector2( -322.532, 74.6842 )
@@ -298,15 +332,18 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.583965, 0, 0 )
 
 [node name="AnimationTree" type="AnimationTree" parent="." index="4"]
 tree_root = SubResource( 429 )
+anim_player = NodePath("../Doll3D/DollSkeleton/AnimationPlayer")
 parameters/CuffsBlend/blend_amount = 0
 parameters/StateMachine/playback = SubResource( 22 )
 
 [node name="AnimationTree2" type="AnimationTree" parent="." index="5"]
 tree_root = SubResource( 453 )
+anim_player = NodePath("../Doll3D2/DollSkeleton/AnimationPlayer")
 parameters/CuffsBlend/blend_amount = 0
 parameters/StateMachine/playback = SubResource( 39 )
 
 [node name="AnimationTree3" type="AnimationTree" parent="." index="6"]
 tree_root = SubResource( 474 )
+anim_player = NodePath("../Doll3D3/DollSkeleton/AnimationPlayer")
 parameters/CuffsBlend/blend_amount = 0
 parameters/StateMachine/playback = SubResource( 432 )
