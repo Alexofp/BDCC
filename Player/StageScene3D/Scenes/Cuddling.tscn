@@ -42,7 +42,7 @@ nodes/CuffsBlend/position = Vector2( 440, 160 )
 nodes/StateMachine/node = SubResource( 41 )
 nodes/StateMachine/position = Vector2( 160, 140 )
 nodes/output/position = Vector2( 680, 180 )
-node_connections = [ "CuffsBlend", 0, "StateMachine", "CuffsBlend", 1, "Animation", "output", 0, "CuffsBlend" ]
+node_connections = [ "output", 0, "CuffsBlend", "CuffsBlend", 0, "StateMachine", "CuffsBlend", 1, "Animation" ]
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=22]
 
@@ -75,7 +75,7 @@ nodes/CuffsBlend/position = Vector2( 440, 160 )
 nodes/StateMachine/node = SubResource( 44 )
 nodes/StateMachine/position = Vector2( 180, 120 )
 nodes/output/position = Vector2( 680, 180 )
-node_connections = [ "CuffsBlend", 0, "StateMachine", "CuffsBlend", 1, "Animation", "output", 0, "CuffsBlend" ]
+node_connections = [ "output", 0, "CuffsBlend", "CuffsBlend", 0, "StateMachine", "CuffsBlend", 1, "Animation" ]
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=39]
 
@@ -105,6 +105,9 @@ tree_root = SubResource( 45 )
 anim_player = NodePath("../Doll3D2/DollSkeleton/AnimationPlayer")
 parameters/CuffsBlend/blend_amount = 0
 parameters/StateMachine/playback = SubResource( 39 )
+
+[node name="FarLeft" type="Position3D" parent="." index="5"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7.18997, 5.39323, 1.77914 )
 
 [editable path="Doll3D"]
 [editable path="Doll3D/DollSkeleton"]

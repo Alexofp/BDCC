@@ -79,3 +79,8 @@ func canTransitionTo(_actionID, _args = []):
 
 func getSupportedStates():
 	return ["idle", "squirm"]
+
+func getChainPoint(_pointID):
+	if(_pointID == "farleft"):
+		return $FarLeft
+	return .getChainPoint(_pointID)

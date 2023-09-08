@@ -117,6 +117,7 @@ func getFlags():
 		"Ch6TaviAllowedToSleepInPCCell": flag(FlagType.Bool),
 		"Ch6TaviAllowedToLewdPCDuringSleep": flag(FlagType.Bool),
 		"Ch6TaviSleepInPCCellFirstTime": flag(FlagType.Bool),
+		"Ch6TaviAndRahiStackSceneHappened": flag(FlagType.Bool),
 		
 		"taviSkillCombat": flag(FlagType.Number),
 		"taviSkillSex": flag(FlagType.Number),
@@ -204,6 +205,7 @@ func _init():
 		"res://Modules/TaviModule/Chapter6/Activities/Ch6TaviMilkingScene.gd",
 		"res://Modules/TaviModule/Chapter6/Activities/Ch6TaviAllowSleepInCellScene.gd",
 		"res://Modules/TaviModule/Chapter6/Activities/Ch6TaviSleepInCellScene.gd",
+		"res://Modules/TaviModule/Chapter6/Activities/Ch6TaviRahiButtstackScene.gd",
 		]
 	characters = [
 		"res://Modules/TaviModule/Chapter4/DirectorTau.gd",
@@ -247,6 +249,7 @@ func _init():
 		
 		"res://Modules/TaviModule/Chapter6/Ch6TaviTalkEvent.gd",
 		"res://Modules/TaviModule/Chapter6/Activities/Ch6TaviSleepInCellEvent.gd",
+		"res://Modules/TaviModule/Chapter6/Activities/Ch6TaviRahiButtstackEvent.gd",
 	]
 	quests = [
 		"res://Modules/TaviModule/TaviAppleQuest.gd",

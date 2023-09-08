@@ -51,6 +51,8 @@ func _run():
 			addDisabledButton("Milking", "Tavi is not ready for this yet")
 		if(taviModule.getOverallCorruptStage() >= 2):
 			addButton("Sleep with you", "Discuss Tavi sleeping in your cell", "do_sleepscene")
+		if(!getFlag("TaviModule.Ch6TaviAndRahiStackSceneHappened")):
+			addButton("Tavi+Rahi", "Ask Tavi to bring Rahi", "do_activity", ["Ch6TaviRahiButtstackScene"])
 		addButton("Back", "Back to the previous menu", "")
 		
 	if(state == "train_menu"):
