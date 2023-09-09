@@ -10,6 +10,8 @@ var fuckedTavi = false
 var fuckedRahi = false
 var creamed = false
 var tookVirginity = false
+var straponLoaded = false
+var straponContents = ""
 
 func _init():
 	sceneID = "Ch6TaviRahiButtstackScene"
@@ -494,12 +496,239 @@ func _run():
 	if(state == "pick_strapon"):
 		saynn("Pick what strapon you wanna use for this.")
 
+		addStraponButtons()
+		if (false):
+			addButton("Nope", "You shouldn't see this", "put_on_strapon")
+	if(state == "put_on_strapon"):
+		playAnimation(StageScene.ButtStackSex, "tease", {pc="rahi", npc="tavi", bodyState={naked=true}, npcBodyState={naked=true}, npc2="pc", npc2BodyState={exposedCrotch=true, hard=true}})
+		saynn("[say=pc]Let's have some fun first.[/say]")
+
+		saynn("You whip out one of your strapons and take your time, securing it around your waist. All the while the girls are watching you do that. Hm, might as well let them help lube it up. You present your new rubber cock to them, standing near their mouths.")
+
+		saynn("[say=pc]Little help?[/say]")
+
+		saynn("Rahi is first to reach out and use her feline tongue to start licking your rubber length. Tavi joins her soon after, helping the brown feline to coat your toy with saliva. It's not the best lube since it evaporates so quickly from friction.. but it should be enough for a start.")
+
+		saynn("[say=rahi]Ruff..[/say]")
+
+		saynn("After they prepare your strapon, you position yourself behind their beautiful fluffy butts. Tavi wiggles her behind at you, causing Rahi to follow her motions. Their tails are intertwined, rubbing against each other before pulling to the side, giving you full access to their pussy slits.."+str(" Tavi is still a virgin though, maybe you shouldn't fuck her.. Or maybe now is the time?" if isVirgin else " Both of them are slightly wet already, awaiting to be used.")+"")
+
+		saynn("Who is gonna be first?")
+
+		addButton("Rahi", "Fuck Rahi's pussy", "do_strapon_rahi")
+		addButton("Tavi", "Fuck Tavi's pussy", "do_strapon_tavi")
+	if(state == "do_strapon_tavi"):
+		playAnimation(StageScene.ButtStackSex, "sexup", {pc="rahi", npc="tavi", bodyState={naked=true}, npcBodyState={naked=true}, npc2="pc", npc2BodyState={exposedCrotch=true, hard=true}})
+		if (!fuckedRahi):
+			saynn("And so you decide to start with Tavi since she is such a playful needy pet. And Rahi is a very obedient one so she can wait for a bit.")
+
+		else:
+			saynn("After finishing fucking Rahi, you pull your toy our and switch to your other pet, Tavi. Would have been strange not to take advantage of such a kinky situation to the fullest.")
+
+		saynn("You raise yourself so your strapon is at her pussy level. One of your hands lands on her butt and gently gropes it while the second guides the rubber member to brush against her sensitive"+str(" virgin-tight" if isVirgin else "")+" folds.")
+
+		saynn("[say=tavi]Oh.. woof..[/say]")
+
+		if (tookVirginity):
+			saynn("Tavi freezes as she suddenly realizes what you're about to do. She is scared.. but she doesn't seem to be against it.")
+
+			saynn("You align yourself a little better and start putting pressure on her pussy. The petals quickly spread but then the rubber tip encounters Tavi's hymen, an organic seal, the last sign of Tavi's innocence. The more you push on it, the more Tavi starts whining and shivering. Even the bottom cat is concerned.")
+
+			saynn("[say=rahi]Is Miss Tavi okay?..[/say]")
+
+			saynn("[say=pc]Miss Tavi is about to become a real woman.[/say]")
+
+			saynn("[say=rahi]Oh..[/say]")
+
+			saynn("[say=tavi]AH!..[/say]")
+
+			saynn("And so, with one rough motion, you suddenly feel yourself getting through her barricade, your strapon finally [b]stealing Tavi's virginity[/b]. She yelps painfully as her inner walls clench around their first ever dick.. sure, it's not a real dick but it has the same shape and feel. Her pussy has begun bleeding, drops of glowing green blood dripping down on Rahi's butt.")
+
+			saynn("You let Tavi get used to these new sensations. She is still shivering, her fur standing on end, her tail spazzing out.")
+
+			saynn("[say=pc]How do you feel?[/say]")
+
+			saynn("She closes her eyes for a short second, her tail slowly calming down when Rahi's is rubbing against it.")
+
+			saynn("[say=tavi]You can.. continue..[/say]")
+
+		else:
+			saynn("You align yourself a little better and start putting pressure on her pussy. The petals quickly spread for your rubber cock. And since she isn't a virgin anymore, you freely slide inside, deeper into her pussy. She is tight though.. incredibly tight..")
+
+			if (fuckedRahi):
+				saynn("[say=rahi]Miss Tavi is getting fucked by the {rahiMaster} too now![/say]")
+
+				saynn("Tavi purrs softly, her inner walls clenching around your fake member so well.")
+
+				saynn("[say=tavi]Woof..[/say]")
+
+				saynn("[say=pc]That's right, Rahi. There is plenty to share.[/say]")
+
+			else:
+				saynn("[say=rahi]Miss Tavi got to be first..[/say]")
+
+				saynn("[say=pc]Don't be jealous, kitty. There is plenty to share.[/say]")
+
+				saynn("Tavi purrs softly, her inner walls clenching around your fake member so well.")
+
+				saynn("[say=tavi]Woof..[/say]")
+
+		saynn("You start off slow, moving your hips at a slow pace to let the tall feline adjust to your length. And quite quickly, little moans begin to escape from the top feline while the bottom one has to try to provide a stable platform.")
+
+		saynn("[say=tavi]Ah..[/say]")
+
+		saynn(""+str("So little time has passed since Tavi lost her virginity. And she is already starting to enjoy it. Her pussy is still bleeding slightly.. but it's also coating your toy with her juices." if tookVirginity else "Her pussy is coating your toy with her juices.")+" Tavi gets pushed forward on each of your thrusts, allowing you to meet her on the way back and ram your strapon deeper and deeper. You can use a better grip though..")
+
+		addButton("Faster", "Fuck Tavi faster", "do_strapon_tavi_faster")
+	if(state == "do_strapon_tavi_faster"):
+		playAnimation(StageScene.ButtStackSex, "fastup", {pc="rahi", npc="tavi", bodyState={naked=true}, npcBodyState={naked=true}, npc2="pc", npc2BodyState={exposedCrotch=true, hard=true}})
+		saynn("And a better grip you find. You reach one of your hands and get a firm grasp on Tavi's hair, allowing you to fuck her pussy faster and harder. Feeling the discomfort, Tavi is hissing softly.. but her pussy is getting even tighter while you do that, her inner walls kneading your rubber cock, making you eager.")
+
+		saynn("[say=rahi]Roughness can be fun, Miss Tavi, yes-yes..[/say]")
+
+		saynn("[say=tavi]I.. k-know.. ah-h!..[/say]")
+
+		saynn("Suddenly, her body arches more and starts shivering, her"+str(" not-so-virgin" if tookVirginity else "")+" pussy pulsing before producing a fountain of girlcum! A fountain that makes your toy and Rahi's fur all wet.")
+
+		saynn("[say=rahi]Miss Tavi is cumming.. Kitty can feel it..[/say]")
+
+		saynn("Tavi's tongue is out, she is moaning loudly while drooling and clenching around you. You don't feel much since it's just a toy.. But pulling out now would be such a waste.. You get a strong urge to just ram it in while she is still cumming..")
+
+		addButton("Shove deep", "Shove your strapon deep inside", "do_strapon_tavi_cum")
+	if(state == "do_strapon_tavi_cum"):
+		playAnimation(StageScene.ButtStackSex, "insideup", {pc="rahi", npc="tavi", bodyState={naked=true}, npcBodyState={naked=true}, npc2="pc", npc2BodyState={exposedCrotch=true, hard=true}})
+		saynn("And so you ram your strapon as deep as that pussy allows.. breaking into Tavi's womb. She moans passionately while your roughness enhances her orgasm, prolonging it and causing her pussy to squirt again!"+str(" At the same time, your strapon starts throbbing as it starts stuffing Tavi's womb full of "+straponContents+"." if straponLoaded else "")+""+str(" From virgin to a strapon enjoyer.. So quick.." if tookVirginity else "")+"")
+
+		saynn("[say=tavi]Hh-h..[/say]")
+
+		saynn("[say=rahi]Yes, breed your pets, {rahiMaster}..[/say]")
+
+		saynn("Rahi seems to be the most happy about this. "+str("She probably just got inpatient, waiting for her turn." if !fuckedRahi else "What a cute kitty.")+"")
+
+		saynn("Tavi is panting heavily, her pussy muscles still pulsing. Her pussy juices"+str(" and your strapon's contents" if straponLoaded else "")+" mess up her fur but also the fur of the pet below.")
+
+		saynn("[say=rahi]So messy..[/say]")
+
+		saynn("[say=pc]You two can lick each other now though.[/say]")
+
+		saynn("[say=rahi]That's.. that's not wrong..[/say]")
+
+		saynn("So.. what's now?")
+
+		if (!fuckedRahi):
+			addButton("Rahi", "Time to strapon Rahi too now", "do_strapon_rahi")
+		addButton("Walkies", "Take your pets out on walkies", "start_walkies")
+	if(state == "do_strapon_rahi"):
+		playAnimation(StageScene.ButtStackSex, "sexdown", {pc="rahi", npc="tavi", bodyState={naked=true}, npcBodyState={naked=true}, npc2="pc", npc2BodyState={exposedCrotch=true, hard=true}})
+		if (!fuckedTavi):
+			saynn("And so you decide to start with Rahi since she is a good kitty that didn't try to throw Tavi off, instead obeying and presenting herself to you.")
+
+			saynn("Without hesitation, you position yourself so your strapon is at Rahi's butt level. One of your hands is gently caressing the hips of the kitty who got pinned by a much taller purple feline while the second one already aligns your fake member with Rahi's sex. And then, with one careful thrust, you enter her, the rubber tip spreading Rahi's slick folds and sliding between them without much problems.")
+
+			saynn("[say=rahi]Woo-of..[/say]")
+
+			saynn("Tavi looks down at Rahi's face with a slightly jealous look.")
+
+			if (isVirgin):
+				saynn("[say=tavi]Wonder how that feels..[/say]")
+
+			else:
+				saynn("[say=tavi]Good puppy, you love getting fucked, don't you?[/say]")
+
+		elif (tookVirginity):
+			saynn("After taking Tavi's virginity.. you might as well fuck your other pet. Rahi is probably waiting for her turn for quite a while now.")
+
+			saynn("So you quickly pull your strapon out of Tavi.. and then just as quickly align it with Rahi's needy slit before thrusting inside, without even cleaning the girlcum  or the green smears. It all mixes together with Rahi's juices, allowing for easier fucking.")
+
+			saynn("[say=rahi]Woo-of..[/say]")
+
+			saynn("Tavi slowly recovers after her first vaginal sex ever..")
+
+			saynn("[say=tavi]Good p-puppy.. I know how you feel n-now..[/say]")
+
+		else:
+			saynn("Rahi is being surprisingly inpatient about this.. but how can not fuck both of your pets when they're stacked like that? So it's time to satisfy the brown kitty's desires as well.")
+
+			saynn("You quickly pull the strapon out of Tavi.. and then just as quickly align it with Rahi's needy slit before thrusting inside, without even cleaning it. Tavi's girlcum mixes with Rahi's juices, allowing for easier fucking.")
+
+			saynn("[say=rahi]Woo-of..[/say]")
+
+			saynn("Tavi slowly recovers after being first.")
+
+			saynn("[say=tavi]Good puppy..[/say]")
+
+		saynn("And so you begin to fuck Rahi, her lithe form barely withstanding an onslaught from both you and the feline on top. Moans begin to escape from her while you ram the toy inside her welcoming warmth, her inner walls clenching around the rubber shaft so well.")
+
+		saynn("[say=rahi]Ah.. ah.. Your kitty.. puppy.. loves this..[/say]")
+
+		if (fuckedTavi):
+			saynn("As you fuck Rahi, you obviously can't avoid looking at Tavi and her"+str(" stuffed" if straponLoaded else "")+" pussy. "+str("She is still leaking {pc.straponContents} onto the brown fur.. so you decide to spank that purple ass, causing her to clench." if straponLoaded else "She is still dripping juices onto the brown fur.. so you decide to spank that purple ass, causing her to clench.")+"")
+
+			saynn("[say=tavi]Ah!.. Why me?[/say]")
+
+			saynn("After that rough smack, you decide to rub her clit instead, bringing the used kitty some pleasure instead.")
+
+		else:
+			saynn("As you fuck Rahi, you obviously can't avoid looking at Tavi and her wet"+str(" virgin" if isVirgin else "")+" pussy. You free one of your hands and rub it, your digits playing with the tall kitty's clit.")
+
+			saynn("[say=tavi]Ah..[/say]")
+
+			saynn("Pleasuring both pets at the same time is fun.")
+
+		addButton("Faster", "Fuck Rahi faster", "do_strapon_rahi_fast")
+	if(state == "do_strapon_rahi_fast"):
+		playAnimation(StageScene.ButtStackSex, "fastdown", {pc="rahi", npc="tavi", bodyState={naked=true}, npcBodyState={naked=true}, npc2="pc", npc2BodyState={exposedCrotch=true, hard=true}})
+		saynn("Both Rahi and Tavi moan while you fuck one and rub the other, their combined noises sounding like a symphony of raw sex. You decide to add to it with your wet and rhythmic sounds of thrusts, your hips smacking against Rahi's butt while you fuck her faster and harder.")
+
+		saynn("[say=rahi]Ah.. She is g-gonna..[/say]")
+
+		saynn("You decide to focus on the brown feline, leaving Tavi to pant softly.."+str(" You might get to her soon anyway." if !fuckedTavi else " She got her share of the fun anyway.")+"")
+
+		saynn("As Rahi's climax approaches, her inner walls begin to hug the rubber length so well.. you can't help but to fight the friction and keep up your pace.. Until that pussy suddenly cums..")
+
+		saynn("[say=rahi]Ah-h-h!..[/say]")
+
+		saynn("She arches her back, giving the feline on top a wild ride, moaning and squirming while her pussy clenches around you tight, a fountain of girlcum gushing out of its little hole, a sign of how much you pushed her.")
+
+		saynn("Rahi is still squirming so Tavi decides to get a tighter grip on her, holding the orgasming feline still for you.")
+
+		if (fuckedTavi):
+			saynn("[say=tavi]Be rough.. Like you were with me..[/say]")
+
+		else:
+			saynn("[say=tavi]Ram it in. She clearly wants it..[/say]")
+
+		saynn("It's not like pulling out was even an option..")
+
+		addButton("Ram it in", "Be rough with Rahi", "do_strapon_rahi_cum")
+	if(state == "do_strapon_rahi_cum"):
+		playAnimation(StageScene.ButtStackSex, "insidedown", {pc="rahi", npc="tavi", bodyState={naked=true}, npcBodyState={naked=true}, npc2="pc", npc2BodyState={exposedCrotch=true, hard=true}})
+		saynn("Rahi's pussy wants to suck your strapon in.. and you welcome it.. shoving your toy as deep as that love tunnel allows.."+str(" seconds before releasing a load of "+straponContents+", flooding her womb to the brim." if straponLoaded else "")+" Poor kitty can barely endure another orgasm washing over her, her pussy clenching around your rubber cock, trying squeeze something out of it.")
+
+		saynn("[say=rahi]Nya-a-a..[/say]")
+
+		saynn("Tavi is smiling while holding Rahi in place for you to be able to strapon-breed her properly."+str(" Her own cunt leaking seed too while she does that." if fuckedTavi else "")+"")
+
+		saynn("[say=tavi]Where did you find such a cutie anyway.[/say]")
+
+		saynn("The brown feline has her tongue, panting and drooling. Tavi slips a digit into that opened mouth and Rahi obediently sucks on it.")
+
+		saynn("So.. what's now?")
+
+		if (!fuckedTavi):
+			addButton("Tavi", "Time to breed Tavi too now", "do_strapon_tavi")
+		addButton("Walkies", "Take your pets out on walkies", "start_walkies")
 func taviSpeak(normalSpeak, corruptSpeak, pureSpeak):
 	if(isCorrupt):
 		return corruptSpeak
 	if(isPure):
 		return pureSpeak
 	return normalSpeak
+
+func addStraponButtons():
+	var strapons = GM.pc.getStrapons()
+	for strapon in strapons:
+		addButton(strapon.getVisibleName(), strapon.getVisibleDescription(), "put_on_strapon", [strapon])
 
 
 func _react(_action: String, _args):
@@ -514,6 +743,9 @@ func _react(_action: String, _args):
 		processTime(3*60)
 		hadSex = true
 		creamed = true
+
+	if(_action == "start_walkies"):
+		GM.pc.unequipStrapon()
 
 	if(_action == "do_fuck_rahi"):
 		processTime(5*60)
@@ -561,6 +793,46 @@ func _react(_action: String, _args):
 	if(_action == "walkies4"):
 		processTime(20*60)
 
+	if(_action == "put_on_strapon"):
+		processTime(3*60)
+		var strapon = _args[0]
+		GM.pc.getInventory().forceEquipStoreOtherUnlessRestraint(strapon)
+
+	if(_action == "do_strapon_rahi"):
+		processTime(5*60)
+		fuckedRahi = true
+
+	if(_action == "do_strapon_tavi"):
+		processTime(5*60)
+		fuckedTavi = true
+		
+		if(isVirgin):
+			tookVirginity = true
+			#isVirgin = false
+			setFlag("TaviModule.TaviIsNotVirgin", true)
+
+	if(_action == "do_strapon_tavi_faster"):
+		processTime(5*60)
+
+	if(_action == "do_strapon_tavi_cum"):
+		processTime(6*60)
+		straponLoaded = GM.pc.isWearingLoadedStrapon()
+		straponContents = GM.pc.getStraponContentsReadableString()
+		getCharacter("tavi").cummedInVaginaBy("pc", FluidSource.Strapon, 1.0 if fuckedRahi else 0.5)
+		GM.pc.orgasmFrom("tavi")
+		GM.pc.addSkillExperience(Skill.SexSlave, 30)
+
+	if(_action == "do_strapon_rahi_fast"):
+		processTime(10*60)
+
+	if(_action == "do_strapon_rahi_cum"):
+		processTime(5*60)
+		straponLoaded = GM.pc.isWearingLoadedStrapon()
+		straponContents = GM.pc.getStraponContentsReadableString()
+		getCharacter("rahi").cummedInVaginaBy("pc", FluidSource.Strapon, 1.0 if fuckedTavi else 0.5)
+		GM.pc.orgasmFrom("rahi")
+		GM.pc.addSkillExperience(Skill.SexSlave, 30)
+
 	setState(_action)
 
 func saveData():
@@ -576,6 +848,8 @@ func saveData():
 	data["fuckedRahi"] = fuckedRahi
 	data["creamed"] = creamed
 	data["tookVirginity"] = tookVirginity
+	data["straponLoaded"] = straponLoaded
+	data["straponContents"] = straponContents
 
 	return data
 
@@ -592,3 +866,5 @@ func loadData(data):
 	fuckedRahi = SAVE.loadVar(data, "fuckedRahi", false)
 	creamed = SAVE.loadVar(data, "creamed", false)
 	tookVirginity = SAVE.loadVar(data, "tookVirginity", false)
+	straponLoaded = SAVE.loadVar(data, "straponLoaded", false)
+	straponContents = SAVE.loadVar(data, "straponContents", "")

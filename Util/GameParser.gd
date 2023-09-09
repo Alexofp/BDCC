@@ -266,6 +266,9 @@ func callObjectFuncWrapper(_obj: String, _command: String, _args: Array):
 			return "nothing"
 		return thetext
 	
+	if(_command in ["straponContents"] && _args.size() == 0):
+		return object.getStraponContentsReadableString()
+	
 	if(_command in ["privates"] && _args.size() == 0):
 		var bodypartsToCheck = [BodypartSlot.Breasts, BodypartSlot.Penis, BodypartSlot.Vagina, BodypartSlot.Anus]
 		

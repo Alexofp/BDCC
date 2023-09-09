@@ -7,7 +7,7 @@ func registerTriggers(es):
 	es.addTrigger(self, Trigger.WakeUpInCell)
 
 func react(_triggerID, _args):
-	if(!getFlag("TaviModule.Ch6TaviAndRahiStackSceneHappened")):
+	if(getFlag("TaviModule.Ch6TaviAndRahiStackSceneHappened")):
 		return false
 	if(getModule("TaviModule").getSkillScore("taviSkillPetplay") < 7 || getModule("RahiModule").getSkillScore("rahiSkillPetplay") < 15):
 		return false

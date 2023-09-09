@@ -2053,12 +2053,30 @@ func getStrapons():
 func isWearingStrapon():
 	return getWornStrapon() != null
 
+func isWearingLoadedStrapon():
+	var theStrapon = getWornStrapon()
+	if(theStrapon == null):
+		return false
+	var fluids = theStrapon.getFluids()
+	if(fluids == null):
+		return false
+	return !fluids.isEmpty()
+
 func getWornStrapon():
 	if(getInventory().hasSlotEquipped(InventorySlot.Strapon)):
 		var item = getInventory().getEquippedItem(InventorySlot.Strapon)
 		if(item.hasTag(ItemTag.Strapon)):
 			return item
 	return null
+
+func getStraponContentsReadableString():
+	var strapon = getWornStrapon()
+	if(strapon == null):
+		return "cum"
+	var fluids = strapon.getFluids()
+	if(fluids == null):
+		return false
+	return Util.humanReadableList(fluids.getFluidListNames())
 
 func removeStrapon():
 	var theStrapon = getWornStrapon()
