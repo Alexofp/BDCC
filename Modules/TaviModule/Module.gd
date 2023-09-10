@@ -118,6 +118,9 @@ func getFlags():
 		"Ch6TaviAllowedToLewdPCDuringSleep": flag(FlagType.Bool),
 		"Ch6TaviSleepInPCCellFirstTime": flag(FlagType.Bool),
 		"Ch6TaviAndRahiStackSceneHappened": flag(FlagType.Bool),
+		"Ch6TaviDemonSceneHappened": flag(FlagType.Bool),
+		"Ch6TaviShouldHaveCock": flag(FlagType.Bool),
+		"Ch6TaviRegrewHymen": flag(FlagType.Bool),
 		
 		"taviSkillCombat": flag(FlagType.Number),
 		"taviSkillSex": flag(FlagType.Number),
@@ -206,6 +209,7 @@ func _init():
 		"res://Modules/TaviModule/Chapter6/Activities/Ch6TaviAllowSleepInCellScene.gd",
 		"res://Modules/TaviModule/Chapter6/Activities/Ch6TaviSleepInCellScene.gd",
 		"res://Modules/TaviModule/Chapter6/Activities/Ch6TaviRahiButtstackScene.gd",
+		"res://Modules/TaviModule/Chapter6/Activities/Ch6TaviDemonScene.gd",
 		]
 	characters = [
 		"res://Modules/TaviModule/Chapter4/DirectorTau.gd",
@@ -330,6 +334,14 @@ func canTrainSkill(skillID):
 	
 	return true
 
+func hasAllSkillsLearnedFully():
+	for skillID in getAllSkills():
+		if(!canTrainSkill(skillID)):
+			continue
+		if(getSkillScore(skillID) < 7):
+			return false
+	return true
+
 # F D C B A S S+ S++
 # 0 1 2 3 4 5 6  7
 func getSkillScore(skillID):
@@ -408,6 +420,11 @@ func hasHorns():
 
 func hasWombMark():
 	if(getFlag("TaviModule.Ch6TaviReceivedWombMark", false)):
+		return true
+	return false
+
+func shouldHaveCock():
+	if(getFlag("TaviModule.Ch6TaviShouldHaveCock")):
 		return true
 	return false
 

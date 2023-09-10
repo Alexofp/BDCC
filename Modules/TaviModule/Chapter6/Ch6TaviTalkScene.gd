@@ -53,6 +53,12 @@ func _run():
 			addButton("Sleep with you", "Discuss Tavi sleeping in your cell", "do_sleepscene")
 		if(!getFlag("TaviModule.Ch6TaviAndRahiStackSceneHappened")):
 			addButton("Tavi+Rahi", "Ask Tavi to bring Rahi", "do_activity", ["Ch6TaviRahiButtstackScene"])
+		if(getFlag("TaviModule.Ch6CorruptionStage", 0) >= 1):
+			if(taviModule.hasAllSkillsLearnedFully() && getFlag("TaviModule.Ch6CorruptionStage", 0) >= 4):
+				addButton("Magic tricks", "Tavi's new form allows her to do some cool magic tricks..", "do_activity", ["Ch6TaviDemonScene"])
+			else:
+				addDisabledButton("Magic tricks", "Tavi needs to reach 200% corruption and be fully trained on every skill before you can do this")
+			
 		addButton("Back", "Back to the previous menu", "")
 		
 	if(state == "train_menu"):
