@@ -27,6 +27,7 @@ enum {
 	CanWearStrapon,
 	HasStraponAndCanWear,
 	IsWearingChastityCage,
+	HasChastityCageInInventory,
 }
 
 static func getReasonText(reason):
@@ -81,6 +82,8 @@ static func getReasonText(reason):
 		return "You're not wearing a chastity cage"
 	if(reason == NotCollapsed):
 		return "You can't do this while collapsed"
+	if(reason == HasChastityCageInInventory):
+		return "You don't have any chastity cages in your inventory"
 	return "Error?"
 
 static func check(checks: Array):
@@ -166,6 +169,9 @@ static func check(checks: Array):
 				return args
 		if(reason == NotCollapsed):
 			if(GM.pc.hasEffect(StatusEffect.Collapsed)):
+				return args
+		if(reason == HasChastityCageInInventory):
+			if(!GM.pc.hasChastityCages()):
 				return args
 			
 	return null

@@ -2047,6 +2047,9 @@ func canWearStrapon():
 func hasStrapons():
 	return getInventory().getItemsWithTag(ItemTag.Strapon).size() > 0
 
+func hasChastityCages():
+	return getInventory().getItemsWithTag(ItemTag.ChastityCage).size() > 0
+
 func getStrapons():
 	return getInventory().getItemsWithTag(ItemTag.Strapon)
 
