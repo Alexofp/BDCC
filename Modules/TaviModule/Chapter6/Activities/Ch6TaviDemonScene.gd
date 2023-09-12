@@ -443,6 +443,7 @@ func _run():
 
 		addButton("Offer a dildo", "Make Tavi ride a giant dildo", "chastity_dildo")
 		addButtonWithChecks("Fuck her", "Fuck Tavi's ass", "chastity_anal", [], [ButtonChecks.HasReachablePenis])
+		addButtonWithChecks("Strapon her", "Fuck Tavi's ass with a strapon", "chastity_strapon_pick", [], [ButtonChecks.HasStraponAndCanWear])
 	if(state == "chastity_dildo"):
 		playAnimation(StageScene.HorsecockDildoSex, "tease", {pc="tavi", bodyState={naked=true, caged=true}})
 		saynn("You grab a giant dildo and put it in the middle of the cell as well as a tube of lube. After that, you just cross your arms and stand aside.")
@@ -586,12 +587,219 @@ func _run():
 		saynn("[say=tavi]Next time let me fuck you..[/say]")
 
 		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "submit_vag"):
+		playAnimation(StageScene.SexFullNelson, "tease", {pc="tavi", npc="pc", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		if (GM.pc.isFullyNaked()):
+			saynn("The moment you nod, a low-pitched giggle can be heard from her before she suddenly grabs you and pretty much folds you in half, grabbing your legs under the knees and pinning them to your shoulders before reaching further and interlocking her fingers behind your neck, forcing you into this extremely vulnerable position where your "+str("fuckable holes" if GM.pc.hasReachableVagina() else "only fuckable hole")+" are on full display"+str(", just like your {pc.penis}" if GM.pc.hasReachablePenis() else "")+".")
+
+		else:
+			saynn("The moment you nod, Tavi snaps her fingers again, causing your clothes to dissolve too!")
+
+			saynn("[say=pc]How did you..[/say]")
+
+			saynn("A low-pitched giggle can be heard from her seconds before she suddenly grabs you and pretty much folds you in half, grabbing your legs under the knees and pinning them to your shoulders before reaching further and interlocking her fingers behind your neck, forcing you into this extremely vulnerable position where your "+str("fuckable holes" if GM.pc.hasReachableVagina() else "only fuckable hole")+" are on full display"+str(", just like your {pc.penis}" if GM.pc.hasReachablePenis() else "")+".")
+
+		saynn("Holding you like means.. that Tavi is.. strong.. way stronger than she usually is.")
+
+		saynn("You have two holes that she can fuck.. so she decides to start aligning her barbed dick with your {pc.pussyStretch} pussy. She whispers into your ear while you already feel the tip of her cock prodding your slit and spreading her precum along your folds.")
+
+		saynn("[say=tavi]I know you want this~. So I will be gentle.[/say]")
+
+		addButton("Continue", "See what happens next", "submit_vag_fuck")
+	if(state == "submit_vag_fuck"):
+		playAnimation(StageScene.SexFullNelson, "sex", {pc="tavi", npc="pc", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		saynn("And so she carefully lowers you onto her new juicy cock, her barbed tip putting some pressure on your folds.. until they spread for her, allowing Tavi to slide inside you, stealing your breath anyway due to her sheer size.")
+
+		saynn("[say=pc]Hh-h..[/say]")
+
+		saynn("[say=tavi]So wet and needy~. I thought I'm the slut here~.[/say]")
+
+		saynn("More little gasps escape from you as Tavi begins to move her hips while holding you still in the air, her arms trapping you into this submissive position of a fucktoy. She has a feline member between her legs but her barbs are still soft, just gently combing your slick inner walls.")
+
+		if (GM.pc.isWearingChastityCage()):
+			saynn("Even though she is fucking your pussy, your caged dick up still tries to get hard from the indirect stimulation and your aroused state. So cute to see it flapping around as she rails you.")
+
+		elif (GM.pc.hasReachablePenis()):
+			saynn("Even though she is fucking your pussy, your dick still gets hard and starts leaking precum from the indirect stimulation and your aroused state. So cute to see it flapping around as she rails you.")
+
+		saynn("Little growls escape from the feline behind you as she gradually increases the pace, pounding your pussy harder and even reaching your cervix, the inner barricade that defends your womb.")
+
+		saynn("[say=tavi]Do you like kittens~? I thought I didn't.. But breeding sluts is so fun~.[/say]")
+
+		saynn("That green barbed dick feels so good.. you just moan back, surrendering to the ecstasy of the moment. Your climax approaches like an unstoppable wave, your body shivering with anticipation.. You're about to cum..")
+
+		addButton("Continue", "See how you will orgasm", "submit_vag_cum")
+	if(state == "submit_vag_cum"):
+		playAnimation(StageScene.SexFullNelson, "inside", {pc="tavi", npc="pc", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		saynn("And just before you do, Tavi gets a better grip on your limbs before doing a last powerful thrust, shoving her cock so deep, the barbed tip breaks into your womb and begins scratching at its wall, trying to cause a reaction.")
+
+		if (GM.pc.isWearingChastityCage()):
+			saynn("Your poor locked up cock starts wasting its load, shooting little strings of seed through the hole in the chastity cage.")
+
+		elif (GM.pc.hasReachablePenis()):
+			saynn("Your {pc.penis} is twitching while wasting its load, shooting strings of seed, all of them landing on the floor. Someone will have to clean them up with their tongue..")
+
+		saynn("Your cries of pleasure fill the air, most of your muscles tensing up, including your pussy ones, squeezing Tavi's cock so much that she follows soon after.")
+
+		saynn("[say=tavi]Ngh-h~[/say]")
+
+		saynn("Her cock starts throbbing inside you, each throb accompanied by her virile seed filling your womb. So much of it that your belly receives a cute bump.")
+
+		saynn("Your tongue out as you're drooling and panting. Your body is trembling long past your peak. And Tavi is purring into your ear.")
+
+		saynn("[say=tavi]What a good {pc.boy}..[/say]")
+
+		addButton("Continue", "See what happens next", "submit_after")
+	if(state == "submit_after"):
+		playAnimation(StageScene.SexFullNelson, "tease", {pc="tavi", npc="pc", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		saynn("You almost don't feel Tavi pulling out.. because she doesn't. Her cock just kinda deflates.. until it poof completely, leaving just the clean fluffy crotch with her normal girly bits.")
+
+		saynn("[say=tavi]Well. Thank you for being my fucktoy, owner~.[/say]")
+
+		saynn("[say=pc]You're.. w-welcome..[/say]")
+
+		saynn("Tavi gets weaker and weaker as her green spots on her fur stop glowing so brightly. She carefully puts your shaky legs down on the floor and just supports you from falling.")
+
+		addButton("Continue", "That was nice", "endthescene")
+	if(state == "submit_anal"):
+		playAnimation(StageScene.SexFullNelson, "tease", {pc="tavi", npc="pc", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		if (GM.pc.isFullyNaked()):
+			saynn("The moment you nod, a low-pitched giggle can be heard from her before she suddenly grabs you and pretty much folds you in half, grabbing your legs under the knees and pinning them to your shoulders before reaching further and interlocking her fingers behind your neck, forcing you into this extremely vulnerable position where your "+str("fuckable holes" if GM.pc.hasReachableVagina() else "only fuckable hole")+" are on full display"+str(", just like your {pc.penis}" if GM.pc.hasReachablePenis() else "")+".")
+
+		else:
+			saynn("The moment you nod, Tavi snaps her fingers again, causing your clothes to dissolve too!")
+
+			saynn("[say=pc]How did you..[/say]")
+
+			saynn("A low-pitched giggle can be heard from her seconds before she suddenly grabs you and pretty much folds you in half, grabbing your legs under the knees and pinning them to your shoulders before reaching further and interlocking her fingers behind your neck, forcing you into this extremely vulnerable position where your "+str("fuckable holes" if GM.pc.hasReachableVagina() else "only fuckable hole")+" are on full display"+str(", just like your {pc.penis}" if GM.pc.hasReachablePenis() else "")+".")
+
+		saynn("Holding you like means.. that Tavi is.. strong.. way stronger than she usually is.")
+
+		saynn("Both of her arms are busy holding you.. so she just shifts your whole frame so that her barbed dick gets aligned with your {pc.anusStretch} tailhole. She whispers into your ear while you already feel the tip of her cock prodding your anal ring and spreading her precum around it.")
+
+		if (GM.pc.hasReachableVagina()):
+			saynn("[say=tavi]I know you have a pussy~. I want this one. I will be gentle~.[/say]")
+
+		else:
+			saynn("[say=tavi]I know you want this~. So I will be gentle.[/say]")
+
+		addButton("Continue", "See what happens next", "submit_anal_fuck")
+	if(state == "submit_anal_fuck"):
+		playAnimation(StageScene.SexFullNelson, "sex", {pc="tavi", npc="pc", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		saynn("And so she carefully lowers you onto her new juicy cock, her barbed tip putting some pressure on your anal ring.. until it stretches for her, allowing Tavi to slide inside you, stealing your breath anyway due to her sheer size.")
+
+		saynn("[say=pc]Hh-h..[/say]")
+
+		saynn("[say=tavi]So needy~. I thought I'm the slut here~.[/say]")
+
+		saynn("More little gasps escape from you as Tavi begins to move her hips while holding you still in the air, her arms trapping you into this submissive position of a fucktoy. She has a feline member between her legs but her barbs are still soft, just gently combing your slick inner walls.")
+
+		if (GM.pc.isWearingChastityCage()):
+			saynn("Your caged dick up desperately tries to get hard from your prostate being stimulated and your aroused state. So cute to see it flapping around as she rails you.")
+
+		elif (GM.pc.hasReachablePenis()):
+			saynn("Your dick gets hard and starts leaking precum from your prostate being stimulated and your aroused state. So cute to see it flapping around as she rails you.")
+
+		saynn("Little growls escape from the feline behind you as she gradually increases the pace, pounding your ass harder and reaching deeper and deeper, stretching your anus walls wide.")
+
+		saynn("[say=tavi]I thought I wouldn't like it.. But breeding sluts is so fun~.[/say]")
+
+		saynn("That green barbed dick feels so good.. you just moan back, surrendering to the ecstasy of the moment. Your climax approaches like an unstoppable wave, your body shivering with anticipation.. You're about to cum..")
+
+		addButton("Continue", "See how you will orgasm", "submit_anal_cum")
+	if(state == "submit_anal_cum"):
+		playAnimation(StageScene.SexFullNelson, "inside", {pc="tavi", npc="pc", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		saynn("And just before you do, Tavi gets a better grip on your limbs before doing a last powerful thrust, shoving her cock so deep, the barbed tip begins scratching at your guts.")
+
+		if (GM.pc.isWearingChastityCage()):
+			saynn("Your prostate gets absolutely destroyed, your poor locked up cock starts wasting its load, shooting little strings of seed through the hole in the chastity cage.")
+
+		elif (GM.pc.hasReachablePenis()):
+			saynn("Your prostate gets absolutely destroyed, your {pc.penis} is twitching while wasting its load, shooting strings of seed, all of them landing on the floor. Someone will have to clean them up with their tongue..")
+
+		saynn("Your cries of pleasure fill the air, most of your muscles tensing up, including your anus ones, squeezing Tavi's cock so much that she follows soon after.")
+
+		saynn("[say=tavi]Ngh-h~[/say]")
+
+		saynn("Her cock starts throbbing inside you, each throb accompanied by her virile seed filling your ass. So much of it that your belly receives a cute bump.")
+
+		saynn("Your tongue out as you're drooling and panting. Your body is trembling long past your peak. And Tavi is purring into your ear.")
+
+		saynn("[say=tavi]What a good {pc.boy}..[/say]")
+
+		addButton("Continue", "See what happens next", "submit_after")
+	if(state == "chastity_strapon_pick"):
+		saynn("Pick which strapon you want to use to fuck Tavi with.")
+
+		addStraponButtons()
+		if (false):
+			addButton("Nope", "You shouldn't see this", "chastity_strapon_anal")
+	if(state == "chastity_strapon_anal"):
+		playAnimation(StageScene.SexFreeStanding, "sex", {npc="tavi", pc="pc", npcBodyState={naked=true, caged=true}, bodyState={naked=true, hard=true}})
+		saynn("You quickly secure one of your strapons around your waist and then grab Tavi's arms before bringing them behind her back, already aligning your new rubber cock with her backdoor. Your pet produces a gasp of surprise as she feels a hard cold shaft prodding her tight anus.")
+
+		saynn("[say=tavi]That's a wrong hole.. w-wrong.. AH!..[/say]")
+
+		saynn("A single thrust and Tavi's tight anal ring gets stretched wide, allowing you to ram your length deep inside until your hips slap against her round butt. This motion has put her little pleasure bean under enough pressure for her locked dick to shoot a little string of transparent precum.")
+
+		saynn("[say=pc]No it wasn't.[/say]")
+
+		saynn("[say=tavi]F-fuck!..[/say]")
+
+		saynn("You hold her arms wrenched behind her back as you start fucking her ass, each thrust pressing on her soft prostate more and more.. until Tavi starts dripping pre almost non-stop.")
+
+		saynn("[say=tavi]Why does it feel so good.. Better than any anal..[/say]")
+
+		saynn("She starts moaning passionately, giving in to the pleasure that only people with dicks can experience. Her cock being locked behind the cage means she can focus on her ass instead. And focus she does, her inner walls clenching around your toy so well that it makes you eager to break her resistance completely.")
+
+		saynn("[say=pc]Maybe because you're secretly a buttslut~?[/say]")
+
+		saynn("[say=tavi]N-no..[/say]")
+
+		addButton("Faster", "Fuck Tavi faster", "chastity_strapon_anal_faster")
+	if(state == "chastity_strapon_anal_faster"):
+		playAnimation(StageScene.SexFreeStanding, "fast", {npc="tavi", pc="pc", npcBodyState={naked=true, caged=true}, bodyState={naked=true, hard=true}})
+		saynn("When Tavi starts to instinctively meet your strapon with her own motions, you increase the onslaught on her butt, establishing a relentless rhythm with each thrust massaging Tavi's prostate until it starts to inflate and get harder, now having a walnut-like texture.")
+
+		saynn("[say=tavi]Not so f-fast..[/say]")
+
+		saynn("Why not? It's cute to see her caged up cock throb as it sways from her ass being pounded. Soon enough you understand why though.")
+
+		saynn("[say=tavi]Nya-ah!..[/say]")
+
+		saynn("Your toy pushed on her pleasure button so much that her cock suddenly began exploding with strings of her seed shooting through the little hole in the cage. All the while she is completely soft, her shaft itself is still hidden inside the sheath.")
+
+		saynn("At the same time, her anus gets even more tight around you, inner walls kneading your toy, pulling it in. But one time was probably enough.")
+
+		addButton("Shove inside", "Breed her ass", "chastity_strapon_anal_cum")
+	if(state == "chastity_strapon_anal_cum"):
+		playAnimation(StageScene.SexFreeStanding, "inside", {npc="tavi", pc="pc", npcBodyState={naked=true, caged=true}, bodyState={naked=true, hard=true}})
+		saynn("Both of you are panting heavily after that.")
+
+		saynn("[say=tavi]If that's how it's always gonna feel.. F-fine, I'm a buttslut..[/say]")
+
+		saynn("The cell smells of sex.. You two stand together, your full rubber length still inside Tavi. And then you hear a loud ding as the chastity cage hits the floor. Huh?")
+
+		saynn("You realize that Tavi's dick is already gone so the cage just slipped off.")
+
+		saynn("[say=pc]That was interesting.[/say]")
+
+		saynn("After some time, you yank your strapon out and watch Tavi's used asshole struggling to close up, pulsing and gaping instead.")
+
+		saynn("[say=tavi]Next time let me fuck you..[/say]")
+
+		addButton("Continue", "See what happens next", "endthescene_unequipstrapon")
 func taviSpeak(normalSpeak, corruptSpeak, pureSpeak):
 	if(isCorrupt):
 		return corruptSpeak
 	if(isPure):
 		return pureSpeak
 	return normalSpeak
+
+func addStraponButtons():
+	var strapons = GM.pc.getStrapons()
+	for strapon in strapons:
+		addButton(strapon.getVisibleName(), strapon.getVisibleDescription(), "chastity_strapon_anal", [strapon])
 
 
 func _react(_action: String, _args):
@@ -698,6 +906,54 @@ func _react(_action: String, _args):
 		GM.pc.orgasmFrom("tavi")
 		setFlag("TaviModule.Ch6TaviShouldHaveCock", false)
 		getCharacter("tavi").updateBodyparts()
+
+	if(_action == "submit_vag_fuck"):
+		processTime(5*60)
+
+	if(_action == "submit_vag_cum"):
+		processTime(5*60)
+		if(Species.Feline in GM.pc.getSpecies()):
+			if(GM.pc.forceOvulate()):
+				addMessage("Tavi's barbs forced you to ovulate because of your feline genes.")
+		
+		GM.pc.gotVaginaFuckedBy("tavi")
+		GM.pc.cummedInVaginaBy("tavi")
+		GM.pc.orgasmFrom("tavi")
+
+	if(_action == "submit_after"):
+		processTime(3*60)
+		setFlag("TaviModule.Ch6TaviShouldHaveCock", false)
+		getCharacter("tavi").updateBodyparts()
+
+	if(_action == "submit_anal_fuck"):
+		processTime(5*60)
+
+	if(_action == "submit_anal_cum"):
+		processTime(5*60)
+		
+		GM.pc.gotAnusFuckedBy("tavi")
+		GM.pc.cummedInAnusBy("tavi")
+		GM.pc.orgasmFrom("tavi")
+
+	if(_action == "chastity_strapon_anal"):
+		processTime(3*60)
+		var strapon = _args[0]
+		GM.pc.getInventory().forceEquipStoreOtherUnlessRestraint(strapon)
+
+	if(_action == "chastity_strapon_anal_faster"):
+		processTime(3*60)
+		getCharacter("tavi").cummedInAnusBy("pc", FluidSource.Strapon)
+
+	if(_action == "chastity_strapon_anal_cum"):
+		processTime(3*60)
+		GM.pc.orgasmFrom("tavi")
+		setFlag("TaviModule.Ch6TaviShouldHaveCock", false)
+		getCharacter("tavi").updateBodyparts()
+
+	if(_action == "endthescene_unequipstrapon"):
+		GM.pc.unequipStrapon()
+		endScene()
+		return
 
 	setState(_action)
 

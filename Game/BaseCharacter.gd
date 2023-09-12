@@ -1132,6 +1132,11 @@ func giveBirth():
 	
 	return bornChildren
 
+func forceOvulate():
+	if(menstrualCycle != null):
+		return menstrualCycle.forceOvulate()
+	return false
+
 func forceIntoHeat():
 	if(menstrualCycle != null):
 		menstrualCycle.forceIntoHeat()
