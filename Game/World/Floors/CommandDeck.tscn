@@ -123,6 +123,7 @@ population = 2
 [node name="CDRoom14" parent="." index="14" instance=ExtResource( 2 )]
 position = Vector2( 0, -448 )
 roomName = "Main corridor"
+roomID = "cd_last_intersection"
 roomDescription = "Long corridor that looks very rich. There is a carpet on the floor, walls are decorated with many paintings. Sometimes you notice doors that lead to some offices"
 gridColor = 2
 loctag_GuardsEncounter = true
