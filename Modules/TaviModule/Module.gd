@@ -122,6 +122,9 @@ func getFlags():
 		"Ch6TaviShouldHaveCock": flag(FlagType.Bool),
 		"Ch6TaviRegrewHymen": flag(FlagType.Bool),
 		
+		"Ch7PlanningSceneHappened": flag(FlagType.Bool),
+		"Ch7TaviTookVirginityBeforeMission": flag(FlagType.Bool),
+		
 		"taviSkillCombat": flag(FlagType.Number),
 		"taviSkillSex": flag(FlagType.Number),
 		"taviSkillMasochism": flag(FlagType.Number),
@@ -213,6 +216,7 @@ func _init():
 		
 		"res://Modules/TaviModule/Chapter7/Ch7s1PlanningScene.gd",
 		"res://Modules/TaviModule/Chapter7/Ch7s2aAloneScene.gd",
+		"res://Modules/TaviModule/Chapter7/Ch7s2bTaviScene.gd",
 		]
 	characters = [
 		"res://Modules/TaviModule/Chapter4/DirectorTau.gd",

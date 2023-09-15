@@ -13,7 +13,10 @@ func _run():
 		saynn("Tavi stands still near her bed. Her desires for today seem to be satisfied.")
 		
 		if(taviModule.isVirgin()):
-			saynn("Tavi still has her virginity.")
+			if(getFlag("TaviModule.Ch6TaviRegrewHymen")):
+				saynn("Tavi still has her regrown virginity.")
+			else:
+				saynn("Tavi still has her virginity.")
 			
 		sayn("Tavi's corruption is {taviCorruption}")
 		saynn("Tavi's tiredness is "+str(getFlag("TaviModule.Ch6Tiredness", 0)))
