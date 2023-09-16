@@ -44,7 +44,7 @@ func _run():
 
 		saynn("[say=tavi]The simpler the plan, the less can go wrong~. Let's do this.[/say]")
 
-		if (isVirgin && !getFlag("TaviModule.Ch6TaviRegrewHymen, false") && GM.pc.hasReachablePenis()):
+		if (isVirgin && !getFlag("TaviModule.Ch6TaviRegrewHymen", false) && GM.pc.hasReachablePenis()):
 			if (isCorrupt):
 				saynn("Tavi was about to follow you but then she had a change of mind, her clawed paw landing on your shoulder.")
 
@@ -272,6 +272,120 @@ func _run():
 		saynn("You continue resting together for a while. The captain can wait a few hours.. He won't be able to avoid his fate forever.")
 
 		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "virginity_gentle"):
+		playAnimation(StageScene.Hug, "kiss", {npc="tavi", npcBodyState={naked=true}, bodyState={naked=true, hard=true}})
+		saynn("Tavi looks so.. soft.. and.. cute. You sigh and nod in agreement.")
+
+		saynn("[say=pc]Come here, girl..[/say]")
+
+		saynn("You two step towards each other. Your hands reach out first, pulling the feline into a warm intimate embrace. The moment calls for it, you share a long deep kiss while your hands begin to undress her and her paws begin to undress you.")
+
+		saynn("Tavi and you don't just share a physical connection.. Your actions are filled with trust, love and shared vulnerability. Every touch, every kiss, a proof of your mutual feelings.")
+
+		addButton("Bed", "Gently move to the bed", "vir_bed")
+	if(state == "vir_bed"):
+		playAnimation(StageScene.SexMissionary, "tease", {npc="tavi", bodyState={naked=true,hard=true}, npcBodyState={naked=true}})
+		saynn("Gently and with full care, you ease Tavi onto the bed, your lips meeting in another lingering kiss that conveys your deep affection. Your hands explore each other's bodies, caressing and teasing, fueling the fires inside you..")
+
+		saynn("[say=pc]Want me to use a condom?[/say]")
+
+		saynn("[say=tavi]..no.[/say]")
+
+		saynn("You nod and pretty much cover Tavi's neck and shoulders with million little kisses while her paws slide down over your {pc.masc} body, getting a feel for it. Her breath quickens with each passing moment, a mixture of excitement and nervousness coursing through her, making her heart beat faster.")
+
+		saynn("[say=pc]Do you like it?[/say]")
+
+		saynn("[say=tavi]Yes, I do.. very much..[/say]")
+
+		saynn("And so, you position yourself a little better, carefully aligning your hard {pc.penis} with Tavi's slick virgin love tunnel. For now you just let your member brush against her sensitive folds, spreading them and sending sparks of arousal through the feline.")
+
+		saynn("[say=pc]I will be gentle..[/say]")
+
+		saynn("[say=tavi]Please..[/say]")
+
+		saynn("After saying, you begin to guide your member directly towards her awaiting flower. Your tip easily sliding between her petals but quickly encountering Tavi's organic barricade.. her hymen. Putting any kind of pressure on it causes shivers to go through her spine, a mixture of pain and discomfort washing over her.")
+
+		saynn("[say=pc]Should I stop?[/say]")
+
+		saynn("[say=tavi]No.. Do it..[/say]")
+
+		saynn("And so this is the moment.. Can't go back anymore.. and proceeding forward is painful. Better make it count then..")
+
+		addButton("Thrust inside", "Take Tavi's virginity", "vir_steal")
+	if(state == "vir_steal"):
+		playAnimation(StageScene.SexMissionary, "inside", {npc="tavi", bodyState={naked=true,hard=true}, npcBodyState={naked=true}})
+		saynn("You exhale audibly and then.. with one powerful motion.. thrust inside, your member putting so much pressure on Tavi's innocence.. that it manages to tear through it, [b]taking Tavi's virginity[/b].")
+
+		saynn("[say=tavi]Hh!..[/say]")
+
+		saynn("Tavi clings to you, her claws scratching your back as she arches her back and gasps, sharp painful sensations washing over her. After tearing through her hymen, you immediately pause, offering the feline comfort and support, your lips offering her a tender kiss.")
+
+		saynn("[say=tavi]Nh-h..[/say]")
+
+		saynn("Tavi is not a girl.. but a woman now. Her pussy is bleeding slightly after the defloration.. giving your shaft a green glow. First time always hurts.. so you give Tavi every bit of care that you can.")
+
+		saynn("[say=pc]Tell me when I can..[/say]")
+
+		saynn("[say=tavi]You can.. Just.. slow..[/say]")
+
+		addButton("Slow fuck", "Start moving your hips slowly", "vir_slow")
+	if(state == "vir_slow"):
+		playAnimation(StageScene.SexMissionary, "sex", {npc="tavi", bodyState={naked=true,hard=true}, npcBodyState={naked=true}})
+		saynn("Hearing that allows you to start slowly moving your hips, your member exploring and slowly stretching Tavi's love tunnel that clenches around its first ever cock..")
+
+		saynn("The initial discomfort gradually subsides, replaced by a rising tide of pleasure. Tavi's body slowly adapts to the new sensations, your lovemaking finally becoming what it is supposed to be.. a harmonious dance of passion and intimacy.")
+
+		saynn("[say=tavi]Ah..[/say]")
+
+		saynn("Little moans begin to escape from the feline, her eyes full of feelings for you. Feelings that she didn't know she could experience. Feelings that you share with her.")
+
+		saynn("The slick inner walls draw you in deeper.. but you keep a slow pace throughout, restraining yourself to what is comfortable for Tavi. And still, the tightness of her flower quickly brings you to your peak..")
+
+		saynn("[say=pc]Where should I..[/say]")
+
+		if (getModule("TaviModule").hasWombMark()):
+			saynn("[say=tavi]Inside.. Ah.. I don't mind carrying our offspring, owner..[/say]")
+
+		else:
+			saynn("[say=tavi]Inside.. Ah.. I can't get pregnant anyway..[/say]")
+
+		saynn("And so she spoke. Hard to say if she has a clear mind at this moment, so many feelings are probably clouding up her thoughts. But you know that you two won't regret it either way..")
+
+		addButton("Cum inside", "Try to breed Tavi", "vir_cum")
+	if(state == "vir_cum"):
+		playAnimation(StageScene.SexMissionary, "inside", {npc="tavi", bodyState={naked=true,hard=true}, npcBodyState={naked=true}})
+		saynn("You chase your orgasm.. until you realize that Tavi is close too. A passionate moan escapes her lips before she clings onto your body again and lets the pleasure numb her other senses.")
+
+		saynn("[say=tavi]Ah-h..[/say]")
+
+		saynn("Pretty much instantly, your own climax catches up with you. Your {pc.penis} throbbing inside Tavi roughly once every second, pulsing and flooding her womb with your thick {pc.cum} to the brim.")
+
+		saynn("[say=tavi]F-feels so good..[/say]")
+
+		saynn("Her body is shivering, her flower clenching around your member, eagerly accepting your load.")
+
+		saynn("Both of you are panting heavily. You have stopped any movement, just enjoying how her pussy feels while she enjoys being creampied for the first time ever.")
+
+		saynn("[say=tavi]T-thank you..[/say]")
+
+		saynn("Truly one to remember forever. Almost makes you forget what's happening outside. Like it's all fake.. Only this short moment matters.. Inside this small cell.. your feelings are big.. for each other..")
+
+		addButton("Cuddle", "Give Tavi some aftercare", "vir_cuddle")
+	if(state == "vir_cuddle"):
+		playAnimation(StageScene.Sleeping, "idle", {npc="tavi", bodyState={naked=true}, npcBodyState={naked=true}})
+		saynn("And so you pull out and pull Tavi onto your chest for some cuddles. She purrs and wraps her paws around you, enjoying resting her chin on your chest.")
+
+		saynn("[say=tavi]If we die.. It was worth it.. All of this..[/say]")
+
+		saynn("You tilt your head slightly while she offers you a little soft smile.")
+
+		saynn("[say=tavi]But we won't die. We will succeed.[/say]")
+
+		saynn("You nod and just.. rest..")
+
+		saynn("Minutes pass like seconds. Makes you wonder if you really want to escape. Maybe you can be happy.. even if you're not free? Bad thoughts..")
+
+		addButton("Continue", "See what happens next", "endthescene")
 	if(state == "near_checkpoint"):
 		playAnimation(StageScene.Duo, "stand", {npc="tavi"})
 		aimCameraAndSetLocName("hall_mainentrance")
@@ -280,11 +394,59 @@ func _run():
 
 		saynn("You don't have any laser rifles or shiny armor to protect yourself. Just your fists and bodies and a strong desire to get out of this place. Or maybe you just wanna make the captain pay for what he did? Does it matter in the end? Not really.")
 
-		saynn("Will they be ready? Maybe. But it won't stop you. Tavi will help you make it clean and smooth.")
+		saynn("Will they be ready? Maybe. But it won't stop you. And Tavi will help you make it clean and smooth.")
 
 		saynn("Checkpoint.. Elevator.. Command deck.. Captain's office. Should be easy.")
 
 		addButton("Checkpoint", "Walk through the main entrance", "checkpoint_firstguard")
+	if(state == "checkpoint_firstguard"):
+		aimCameraAndSetLocName("hall_checkpoint")
+		playAnimation(StageScene.Duo, "stand", {pc="tavi", npc=npc1id})
+		saynn("You and Tavi step through the sensor array that they got going on and look at the guards.")
+
+		saynn("[say=npc1]Move it, inmates. Don't waste my time.[/say]")
+
+		saynn("Tavi gives you a silent sign and walks up to the first guard.")
+
+		saynn("[say=tavi]Hey~. I heard you all have big scary pain sticks with you. Can I see one~?[/say]")
+
+		saynn("The guard sees Tavi's red accents on her uniform and sighs.")
+
+		saynn("[say=npc1]No. That would be the last thing you see then. Move along, inmates.[/say]")
+
+		addButton("Continue", "See what happens next", "cp_first_taviwin")
+	if(state == "cp_first_taviwin"):
+		playAnimation(StageScene.Duo, "stand", {pc="tavi", npc=npc1id, bodyState={naked=true}, npcAction="defeat"})
+		saynn("Tavi smirks and suddenly drops her shorts and takes off her shirt, revealing her {tavi.breasts} and a cute"+str(" virgin" if isVirgin else "")+" pussy to them. She raises her paws like she is surrendering.")
+
+		saynn("[say=tavi]What about now~? See, I'm completely harmless, officers. Can I see your sticks~?[/say]")
+
+		saynn("That sudden stunt.. catches the two guards.. off-guard.. allowing Tavi to close distance to one of them until she is practically rubbing against their armor.")
+
+		saynn("[say=tavi]I touch your stick, you touch my boobs. Sounds fair~?[/say]")
+
+		saynn("[say=npc1]Uhh.. Yea-a.. Wait.. No. Get back, whore![/say]")
+
+		saynn("The guard pulls out {npc1.his} stun baton but that's exactly what Tavi was waiting for. Her quick paws reach for the guard's gloves and then redirect the weapon so the scary shocking part gets pressed into their neck!")
+
+		saynn("[say=npc1]ARGH![/say]")
+
+		saynn("The guard drops to {npc1.his} knees, {npc1.his} body shaking as a powerful shock goes through it!")
+
+		saynn("[say=tavi]Nice stick~.[/say]")
+
+		saynn("But the second guard was fast enough to pull out a shock remote and aim at you. {npc2.He} presses the button on it.. but nothing happens. So {npc2.he} pulls {npc2.his} baton out and shoves Tavi back before trying to strike you!")
+
+		saynn("Tavi grunts as her feline frame gets pushed. All she can do is throw her baton towards you! She was falling so she did at a weird angle, meaning you will need a lot of agility to catch it..")
+
+		addButton("Just fight", "Do not try to catch the weapon", "cp_justfight")
+		addButtonWithChecks("Catch it", "Catch the stun baton that Tavi threw at you", "cp_catchit", [], [[ButtonChecks.StatCheck, Stat.Agility, 20]])
+	if(state == "cp_justfight"):
+		playAnimation(StageScene.Duo, "stand", {npc=npc2id})
+		saynn("You didn't catch the weapon so it hits the wall and rolls off who knows where.")
+
+		saynn("The second guard is still angry with you.. so.. It's time for a fight.")
+
 func taviSpeak(corruptSpeak, pureSpeak):
 	if(isCorrupt):
 		return corruptSpeak
@@ -342,12 +504,37 @@ func _react(_action: String, _args):
 		GM.pc.addPain(-600)
 		GM.pc.addStamina(600)
 
+	if(_action == "vir_bed"):
+		processTime(5*60)
+
+	if(_action == "vir_steal"):
+		processTime(3*60)
+		setFlag("TaviModule.TaviIsNotVirgin", true)
+		setFlag("TaviModule.Ch7TaviTookVirginityBeforeMission", true)
+
+	if(_action == "vir_slow"):
+		processTime(3*60)
+
+	if(_action == "vir_cum"):
+		processTime(8*60)
+		getCharacter("tavi").cummedInVaginaBy("pc")
+		GM.pc.orgasmFrom("tavi")
+		GM.pc.addSkillExperience(Skill.SexSlave, 60)
+
+	if(_action == "vir_cuddle"):
+		processTime(60*60)
+		GM.pc.addPain(-100)
+		GM.pc.addStamina(100)
+
 	if(_action == "checkpoint_firstguard"):
 		processTime(2*60)
 		npc1id = GuardGenerator.new().generate({NpcGen.Level: 30, NpcGen.Temporary: true})
 		npc2id = GuardGenerator.new().generate({NpcGen.Level: 30, NpcGen.Temporary: true})
 		addCharacter(npc1id)
 		addCharacter(npc2id)
+
+	if(_action == "cp_first_taviwin"):
+		processTime(2*60)
 
 	setState(_action)
 
