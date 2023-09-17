@@ -447,6 +447,270 @@ func _run():
 
 		saynn("The second guard is still angry with you.. so.. It's time for a fight.")
 
+		addButton("Fight", "Start the fight", "fight2_npc")
+	if(state == "lost_fight"):
+		aimCameraAndSetLocName("hall_mainentrance")
+		GM.pc.setLocation("hall_mainentrance")
+		playAnimation(StageScene.Solo, "defeat")
+		saynn("You lost the fight.. And so you and Tavi get thrown out back into the main hall.")
+
+		saynn("[say=tavi]Ow.. Well, it was worth a try I guess.[/say]")
+
+		saynn("Seems like you gotta get stronger if you wanna do this to the end. Luckily, the guards didn't put any extra restraints on you.")
+
+		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "won_second_guard"):
+		playAnimation(StageScene.Duo, "stand", {npc=npc2id, npcAction="defeat"})
+		saynn("Both of the guards are defeated. That's a start.")
+
+		saynn("You fetch one of the badges from them. It will probably get disabled in a few minutes. But that's all you need to get access to the top floor of the prison.")
+
+		saynn("[say=risha]Going somewhere~?[/say]")
+
+		saynn("A voice stops you and Tavi.")
+
+		addButton("Turn around", "See who is there", "risha_intro")
+	if(state == "cp_catchit"):
+		playAnimation(StageScene.Duo, "stunbaton", {npc=npc2id, npcAction="defeat"})
+		saynn("That throw by Tavi wasn't perfect but you still managed to catch the sparking stun baton before striking the second guard first! {npc2.He} grunts and drops to {npc2.his} knees as the electrical shock flows through {npc2.him}.")
+
+		saynn("[say=tavi]Good job~.[/say]")
+
+		saynn("You fetch one of the badges from the defeated guards. It will probably get disabled in a few minutes. But that's all you need to get access to the top floor of the prison.")
+
+		saynn("[say=risha]Going somewhere~?[/say]")
+
+		saynn("A voice stops you and Tavi.")
+
+		addButton("Turn around", "See who is there", "risha_intro")
+	if(state == "risha_intro"):
+		addCharacter("risha")
+		playAnimation(StageScene.Duo, "stand", {npc="risha", pc="tavi", bodyState={naked=true}})
+		saynn("It's Risha. She looks at you quickly. But her gaze is mostly stolen by Tavi's.. exposed assets.")
+
+		if (getModule("TaviModule").hasHorns()):
+			saynn("[say=risha]Oh wow. Nice handlebars you got there, sister. And your ass is looking.. mm~.. Is this all for me~?[/say]")
+
+			saynn("[say=tavi]It depends.[/say]")
+
+		else:
+			saynn("[say=risha]Is this all for me, sister~?[/say]")
+
+			saynn("[say=tavi]It depends.[/say]")
+
+		saynn("She slowly approaches you. Behind you is the closed elevator. Which means.. She is cornering you.")
+
+		saynn("[say=pc]What's your problem, Risha?[/say]")
+
+		saynn("[say=risha]Cap's orders are to stop you. And I have to obey, I'm afraid. No hard feelings.[/say]")
+
+		saynn("Tavi understands where this is going. And decides to act.")
+
+		saynn("[say=tavi]Whatcha gonna do, Risha? Are you gonna pin me~? Against this wall?[/say]")
+
+		saynn("The lynx raises a brow while naked Tavi bravely steps closer, her gaze directed towards the nearest wall, away from the guard.")
+
+		saynn("[say=risha]If you're gonna resist, sure.[/say]")
+
+		saynn("[say=tavi]What are you gonna do next? I probably stole something by now already so you will have to frisk me~. And since I'm naked.. how are you gonna do this~?[/say]")
+
+		saynn("Tavi closes the distance with the guard and proceeds to step around, circling while her tail teasingly reveals the curves of her ass and"+str(" virgin" if isVirgin else "")+" pussy.")
+
+		saynn("[say=risha]I will just have to search all of your pockets. By the way, when did you become a..[/say]")
+
+		saynn("[say=tavi]A slut~? Maybe I always was.[/say]")
+
+		saynn("Tavi bites her lip and puts her paws on Risha's armor slowly stripping it, starting with her crotch piece. Her plan becomes more and more clear..")
+
+		saynn("[say=risha]What are you..[/say]")
+
+		saynn("Tavi's paws strip a few more pieces of Risha's riot armor and then pull out her barbed cock that's already quite hard.")
+
+		saynn("[say=tavi]Preparing you.. You wanna search my pockets with your cock, don't you~?[/say]")
+
+		saynn("It's probably time to step in. Because if you don't, Tavi will actually have to go through with this. And then you will still get thrown out.")
+
+		saynn("Best thing you can come up with is.. double teaming Risha. Tavi distracts her while you bring her down. But how.. Risha's stun baton is in her hands.. And she is still wearing a lot of armor. Her hair isn't protected though.. You will need a lot of strength.")
+
+		addButton("Pull lightly", "Use your strength to pull on Risha's hair", "risha_light")
+		addButtonWithChecks("Pull firmly", "Use all of your strength to pull on Risha's hair", "risha_firm", [], [[ButtonChecks.StatCheck, Stat.Strength, 20]])
+	if(state == "risha_firm"):
+		playAnimation(StageScene.SexFreeStanding, "tease", {npc="risha", npcBodyState={naked=true, hard=true}})
+		saynn("You sneak behind Risha while she is busy with Tavi and suddenly yank on her hair, putting your full strength into it.")
+
+		saynn("[say=risha]Ah~..[/say]")
+
+		saynn("But instead of collapsing, Risha arches her back and moans softly, her cock twitching from your rough act. Huh? What a slut..")
+
+		saynn("[say=tavi]Yeah, you like that, don't you~?[/say]")
+
+		saynn("Tavi sees what's happening and quickly strips the rest of Risha's armor, leaving her naked, exposed and vulnerable. She then throws you a set of Risha's handcuffs that you use to cuff the lusty guard, also making her helpless.")
+
+		saynn("[say=risha]Umm.. H-hey. What are you..[/say]")
+
+		saynn("Tavi giggles when Risha finally snaps out of it.")
+
+		saynn("[say=tavi]Sorry, sis. No time to play~. I'm sure you would love to breed me but we gotta go.[/say]")
+
+		saynn("Risha tests her own handcuffs and huffs.")
+
+		saynn("[say=risha]..bitch. Always such a tease..[/say]")
+
+		saynn("Tavi boops her sister on the nose.")
+
+		saynn("[say=tavi]Love you too.[/say]")
+
+		saynn("Your old badge doesn't seem to work anymore so you steal Risha's one.")
+
+		saynn("[say=pc]No hard feelings.[/say]")
+
+		saynn("[say=risha]None taken.[/say]")
+
+		saynn("You and Tavi head towards the elevator.")
+
+		addButton("Elevator", "Step into it", "alex_meet")
+	if(state == "risha_light"):
+		playAnimation(StageScene.Solo, "hurt", {pc="risha"})
+		saynn("You sneak behind Risha while she is busy with Tavi and suddenly yank on her hair, trying to make her collapse.")
+
+		saynn("But the strength you put in wasn't enough for that. The feline grunts painfully and throws you off.")
+
+		saynn("[say=risha]Argh.. What a bitch![/say]")
+
+		saynn("Well.. Tavi did make her lusty. And your sneaky attack brought some pain too. Which should help. But it looks like the fight is inevitable.")
+
+		addButton("Fight", "Start the fight", "fight3_risha")
+	if(state == "lost_risha"):
+		playAnimation(StageScene.Duo, "defeat", {npc="risha"})
+		GM.pc.setLocation("hall_mainentrance")
+		aimCameraAndSetLocName("hall_mainentrance")
+		saynn("You drop to your knees before Risha. It hurts.")
+
+		saynn("The feline leans closer to you.")
+
+		saynn("[say=risha]Good try. But you're clearly not ready.[/say]")
+
+		saynn("She throws you and Tavi out and walks off. At least she didn't fuck you. Why did she not fuck you?")
+
+		saynn("Seems you will need to try a little harder than that.")
+
+		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "won_risha"):
+		playAnimation(StageScene.Duo, "stand", {npc="risha", npcAction="defeat"})
+		saynn("Risha hisses as she hits the floor, her bulky armor is now weighing her down rather than protecting her.")
+
+		saynn("Your old badge doesn't seem to work anymore so you steal Risha's one.")
+
+		saynn("[say=pc]No hard feelings.[/say]")
+
+		saynn("[say=risha]None taken.[/say]")
+
+		saynn("Tavi walks up to Risha and pats her on the head.")
+
+		saynn("[say=tavi]Sorry, sis. I know you would love to breed me. But we gotta go~.[/say]")
+
+		saynn("[say=risha]..bitch. Always such a tease..[/say]")
+
+		saynn("Tavi boops her sister on the nose.")
+
+		saynn("[say=tavi]Love you too.[/say]")
+
+		saynn("You and Tavi head towards the elevator.")
+
+		addButton("Elevator", "Step into it", "alex_meet")
+	if(state == "alex_meet"):
+		removeCharacter("risha")
+		addCharacter("alexrynard")
+		aimCameraAndSetLocName("hall_elevator")
+		playAnimation(StageScene.Duo, "stand", {npc="alexrynard"})
+		saynn("As the elevator doors open, you see.. Alex. His attention was directed to some random prototype in his hands. But he puts it away and looks at you. He doesn't even seem to be surprised much by the naked feline standing by your side.")
+
+		saynn("[say=alexrynard]Gonna stand there? Step in.[/say]")
+
+		saynn("He doesn't seem to be.. hostile. So you and Tavi step inside the elevator. You press the badge against the control panel before selecting the command deck.")
+
+		saynn("[say=alexrynard]Brave.[/say]")
+
+		saynn("The doors close with an annoying screech. The elevator begins to move.")
+
+		saynn("[say=alexrynard]I should really lube these gears up, huh?[/say]")
+
+		saynn("[say=pc]You're not gonna stop us?[/say]")
+
+		saynn("The foxy shrugs.")
+
+		saynn("[say=alexrynard]It's not my job. And you seem to have made up your mind. Other guards will try to stop you though.[/say]")
+
+		saynn("[say=pc]We know.[/say]")
+
+		saynn("You three stand side by side. In silence. Only the quiet noise of the elevator moving can be heard.")
+
+		saynn("[say=tavi]I lashed out at you that one time. Sorry about that.[/say]")
+
+		saynn("[say=alexrynard]Don't worry about it. You use shit methods.. But I understand you. This prison could use some changes.[/say]")
+
+		saynn("[say=pc]Changes?[/say]")
+
+		saynn("[say=alexrynard]Improvements. Replacements. I don't know. Just don't destroy it, okay? Good people built it. Would be a shame to see all that progress go to waste.[/say]")
+
+		if (isCorrupt):
+			saynn("[say=tavi]Can't promise anything, sweetie. The guy is crazy.[/say]")
+
+			saynn("The foxy turns his head and looks at Tavi's horns.. and exposed tits.")
+
+			saynn("[say=alexrynard]Uh huh.[/say]")
+
+		else:
+			saynn("[say=tavi]We will try.[/say]")
+
+			saynn("He nods.")
+
+		saynn("Soon, the elevator doors open. The guy prefers to stay while you two step out. You finally feel like you're getting somewhere.")
+
+		addButton("Command deck", "See what happens next", "nova_meet")
+	if(state == "nova_meet"):
+		removeCharacter("alexrynard")
+		addCharacter("nova")
+		playAnimation(StageScene.Duo, "stand", {npc="nova", pc="tavi", bodyState={naked=true}})
+		aimCameraAndSetLocName("cd_near_split")
+		saynn("You step out into the rich man's corridor. Makes sense for the captain to keep himself away from inmates physically as well as mentally.")
+
+		saynn("Carpets, paintings, wooden furniture. A stark contrast to the cold, dimly lit cells that you almost grew to call home. Still, it lacks any.. passion. Nothing stands out to you.")
+
+		saynn("As you and Tavi step through the corridor, you walk into Nova. She blocks your path.")
+
+		saynn("[say=nova]Oh.. Tavi?[/say]")
+
+		saynn("The feline proudly displays herself to the husky.")
+
+		saynn("[say=tavi]Hey there, Nova~. May we pass perhaps?[/say]")
+
+		if (getModule("TaviModule").hasHorns()):
+			saynn("Nova's gaze is glued to Tavi's sexy forms.. her horns.."+str(" her womb mark.." if getModule("TaviModule").hasWombMark() else "")+" And Tavi is not ashamed in the slightest.")
+
+		else:
+			saynn("Nova's gaze is glued to Tavi's naked forms.. And Tavi is not ashamed in the slightest.")
+
+		saynn("[say=nova]Captain's orders. Sorry cutie. I have to.[/say]")
+
+		saynn("Seems like the fight is inevitable. But then Tavi suddenly starts stepping towards the husky, putting a lot of sway into her hips. She has a mean little smile on her face.. which causes Nova to stagger. Poor husky steps back, pretty much melting just from the drilling gaze.")
+
+		saynn("[say=nova]T-Tavi?..[/say]")
+
+		saynn("[say=tavi]I know that you're a good pupper. You have a kind.. and soft.. heart.[/say]")
+
+		saynn("Nova is blushing, her shaky paw reaches for the stun baton.. deliberating.")
+
+		saynn("[say=nova]Nuh.. Don't say that..[/say]")
+
+		saynn("Tavi crosses her arms under her breasts and tilts her head.")
+
+		saynn("[say=tavi]Nuh? You're a bad puppy? A slutty lil' shit?[/say]")
+
+		saynn("Nova shakes her head. Tavi has started pretty well. But you feel like she is losing Nova's subby state. You can probably help.. but you will need to use a smooth sexy voice for that..")
+
+		addButton("Attack Nova", "You'd rather just force the husky to submit", "nova_attack")
+		addButtonWithChecks("Sexy voice", "Use a sexy voice to try to make Nova submit", "nova_sexyvoice", [], [[ButtonChecks.StatCheck, Stat.Sexiness, 20]])
 func taviSpeak(corruptSpeak, pureSpeak):
 	if(isCorrupt):
 		return corruptSpeak
@@ -536,7 +800,45 @@ func _react(_action: String, _args):
 	if(_action == "cp_first_taviwin"):
 		processTime(2*60)
 
+	if(_action == "fight2_npc"):
+		runScene("FightScene", [npc2id], "fight2_npc")
+		return
+
+	if(_action == "risha_intro"):
+		removeCharacter(npc1id)
+		removeCharacter(npc2id)
+
+	if(_action == "fight3_risha"):
+		runScene("FightScene", ["risha"], "fight3_risha")
+		getCharacter("risha").addPain(40)
+		getCharacter("risha").addLust(30)
+		return
+
+	if(_action == "nova_meet"):
+		processTime(3*60)
+
 	setState(_action)
+
+func _react_scene_end(_tag, _result):
+	if(_tag == "fight2_npc"):
+		processTime(20 * 60)
+		var battlestate = _result[0]
+		
+		if(battlestate == "win"):
+			setState("won_second_guard")
+		else:
+			setState("lost_fight")
+			addExperienceToPlayer(5)
+
+	if(_tag == "fight3_risha"):
+		processTime(20 * 60)
+		var battlestate = _result[0]
+		
+		if(battlestate == "win"):
+			setState("won_risha")
+		else:
+			setState("lost_risha")
+			addExperienceToPlayer(5)
 
 func saveData():
 	var data = .saveData()

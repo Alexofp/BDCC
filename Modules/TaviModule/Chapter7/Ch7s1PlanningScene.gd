@@ -242,6 +242,8 @@ func _react(_action: String, _args):
 
 	if(_action == "checkpoint"):
 		processTime(6*60)
+		addExperienceToPlayer(100)
+		addMessage("Task updated")
 
 	setState(_action)
 

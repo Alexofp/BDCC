@@ -386,6 +386,9 @@ func _react(_action: String, _args):
 		runScene("FightScene", ["skar"], "fight5_skar")
 		return
 
+	if(_action == "tavi_joins"):
+		addExperienceToPlayer(300)
+
 	if(_action == "start_captain_scene"):
 		runScene("Ch7s3CaptainScene")
 		endScene()
