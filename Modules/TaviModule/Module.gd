@@ -130,6 +130,8 @@ func getFlags():
 		"taviSkillMasochism": flag(FlagType.Number),
 		"taviSkillPetplay": flag(FlagType.Number),
 		"taviSkillWatersports": flag(FlagType.Number),
+		
+		"Ch7CaptainSceneHappened": flag(FlagType.Bool),
 	}
 
 func _init():
@@ -261,6 +263,8 @@ func _init():
 		"res://Modules/TaviModule/Chapter6/Ch6TaviTalkEvent.gd",
 		"res://Modules/TaviModule/Chapter6/Activities/Ch6TaviSleepInCellEvent.gd",
 		"res://Modules/TaviModule/Chapter6/Activities/Ch6TaviRahiButtstackEvent.gd",
+		
+		"res://Modules/TaviModule/Chapter7/Ch7s2aAloneEvent.gd",
 	]
 	quests = [
 		"res://Modules/TaviModule/TaviAppleQuest.gd",

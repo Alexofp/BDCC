@@ -33,7 +33,18 @@ func _run():
 		sayn("")
 		
 		
-		addDisabledButton("Final Attack", "(not implemented yet :( ) Use everything that you and Tavi learned to prepare the last attack.\n\nTavi's corruption needs to be either 0% or 200%")
+		if(!getFlag("TaviModule.Ch7CaptainSceneHappened")):
+			if(getFlag("TaviModule.Ch7PlanningSceneHappened")):
+				if(taviModule.hasAllSkillsLearnedFully() && (taviModule.getCorruption() <= 0.0 || taviModule.getCorruption() >= 2.0)):
+					addButtonUnlessLate("Final Attack", "Use everything that you and Tavi learned to carry out the last attack.\n\nTo let Tavi help you during the final attack, she needs to be fully trained on all skills and her corruption needs to be either 0% or 200%", "start_final_attack")
+				else:
+					addDisabledButton("Final Attack", "To let Tavi help you during the final attack, she needs to be fully trained on all skills and her corruption needs to be either 0% or 200%")
+			else:
+				if(taviModule.getCorruption() <= 0.0 || taviModule.getCorruption() >= 2.0):
+					addButtonUnlessLate("Final Attack", "Use everything that you and Tavi learned to prepare the last attack.\n\nTavi's corruption needs to be either 0% or 200%", "start_plan_scene")
+				else:
+					addDisabledButton("Final Attack", "Use everything that you and Tavi learned to prepare the last attack.\n\nTavi's corruption needs to be either 0% or 200%")
+				
 		if(getFlag("TaviModule.Ch6Tiredness", 0) >= 3):
 			addDisabledButton("Train", "Tavi is too tired")
 			addDisabledButton("Activities", "Tavi is too tired")
@@ -109,6 +120,17 @@ func _react(_action: String, _args):
 	if(_action == "do_sleepscene"):
 		setState("")
 		runScene("Ch6TaviAllowSleepInCellScene")
+		return
+	
+	if(_action == "start_plan_scene"):
+		setFlag("TaviModule.Ch7PlanningSceneHappened", true)
+		runScene("Ch7s1PlanningScene")
+		endScene()
+		return
+		
+	if(_action == "start_final_attack"):
+		runScene("Ch7s2bTaviScene")
+		endScene()
 		return
 
 	setState(_action)

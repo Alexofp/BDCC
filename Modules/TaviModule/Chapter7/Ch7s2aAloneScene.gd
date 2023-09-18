@@ -241,7 +241,7 @@ func _run():
 
 		saynn("[say=pc]May I?[/say]")
 
-		saynn("She shakes his head slowly.")
+		saynn("He shakes his head slowly.")
 
 		saynn("[say=pc]I get it.[/say]")
 
@@ -312,7 +312,7 @@ func _run():
 		addButton("Continue", "See what happens next", "tavi_joins")
 	if(state == "tavi_joins"):
 		addCharacter("tavi")
-		playAnimation(StageScene.Duo, "stand", {npc="tavi"})
+		playAnimation(StageScene.Duo, "stand", {npc="tavi", npcBodyState={naked=isCorrupt}})
 		saynn("That's Tavi's voice. She walks up to the door and starts inspecting the access panel.")
 
 		saynn("[say=pc]How did you end up here?[/say]")
@@ -333,7 +333,11 @@ func _run():
 
 		saynn("[say=pc]Ready?[/say]")
 
-		saynn("[say=tavi]Been waiting my whole life for this~.[/say]")
+		if (isCorrupt):
+			saynn("[say=tavi]Been waiting my whole life for this~. And I won't pull any punches.[/say]")
+
+		else:
+			saynn("[say=tavi]Been waiting my whole life for this.[/say]")
 
 		addButton("Walk in", "See what's up with the captain", "start_captain_scene")
 func taviSpeak(corruptSpeak, pureSpeak):
@@ -351,8 +355,8 @@ func _react(_action: String, _args):
 
 	if(_action == "checkpoint_firstguard"):
 		processTime(2*60)
-		npc1id = GuardGenerator.new().generate({NpcGen.Level: 30, NpcGen.Temporary: true})
-		npc2id = GuardGenerator.new().generate({NpcGen.Level: 30, NpcGen.Temporary: true})
+		npc1id = GuardGenerator.new().generate({NpcGen.Level: 30, NpcGen.Temporary: true}).getID()
+		npc2id = GuardGenerator.new().generate({NpcGen.Level: 30, NpcGen.Temporary: true}).getID()
 		addCharacter(npc1id)
 		addCharacter(npc2id)
 

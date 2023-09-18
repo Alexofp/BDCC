@@ -711,6 +711,246 @@ func _run():
 
 		addButton("Attack Nova", "You'd rather just force the husky to submit", "nova_attack")
 		addButtonWithChecks("Sexy voice", "Use a sexy voice to try to make Nova submit", "nova_sexyvoice", [], [[ButtonChecks.StatCheck, Stat.Sexiness, 20]])
+	if(state == "nova_attack"):
+		playAnimation(StageScene.Duo, "hurt", {npc="nova", npcAction="shove"})
+		saynn("You hope that Tavi's humiliations were enough to distract Nova as you carefully approach her. Your hand tries to steal the guard's stun baton.. but it meets her paw instead. One accidental hand holding later and she snaps out of it, shoving both of you back.")
+
+		saynn("[say=nova]I have to stop you. I just.. have to..[/say]")
+
+		saynn("Well, looks like you will have to fight her. At least it will be easier.")
+
+		addButton("Fight", "Start the fight", "fight4_nova")
+	if(state == "lost_nova"):
+		playAnimation(StageScene.Solo, "defeat")
+		GM.pc.setLocation("hall_mainentrance")
+		aimCameraAndSetLocName("hall_mainentrance")
+		saynn("You drop to your knees, defeated by Nova. She puts her baton away and clips a leash to your collar. Tavi decides not to fight it and lets Nova clip a leash to her collar too.")
+
+		saynn("[say=nova]Not today, cutie.[/say]")
+
+		saynn("After that, she just brings you back out in the main hall. Makes you wonder why they don't punish you at all. Almost like they are tired of this, just like you and Tavi.")
+
+		saynn("Seems you will need to try a little harder than that.")
+
+		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "won_nova"):
+		playAnimation(StageScene.Duo, "stand", {npc="nova", npcAction="defeat"})
+		saynn("Nova grunts and drops to her knees, unable to continue fighting.")
+
+		saynn("[say=nova]Ow..[/say]")
+
+		saynn("No time to chat. You feel like you're very close. As you and Tavi walk past her, you only hear this.")
+
+		saynn("[say=nova]Good luck..[/say]")
+
+		saynn("Huh? You're not sure if that was sarcasm. Sounded pretty genuine.")
+
+		if (isCorrupt):
+			saynn("[say=tavi]Thanks. But we will not need it~.[/say]")
+
+		else:
+			saynn("[say=tavi]Thanks. We will probably need it.[/say]")
+
+		addButton("Continue", "See what happens next", "walk_to_skar")
+	if(state == "nova_sexyvoice"):
+		playAnimation(StageScene.Duo, "stand", {npc="nova", pc="tavi", npcAction="allfours", bodyState={naked=true}})
+		saynn("You carefully take position behind Nova, almost like you're taking her side now. You whisper to her ear but Tavi hears it too.")
+
+		saynn("[say=pc]You're not a lil' shit, Nova. You're a good husky, aren't you?[/say]")
+
+		saynn("[say=nova]Sometimes.. I'm both really.[/say]")
+
+		saynn("You point at Tavi and tap on Nova's shoulder.")
+
+		saynn("[say=pc]But you would be a good husky for her?[/say]")
+
+		saynn("Tavi hears that and smiles while taking a seductive pose, angling her hips to the side and putting her paw on her side.")
+
+		saynn("[say=nova]M-mayhaps..[/say]")
+
+		saynn("Seems like it's working. Nova blushes more and stops squeezing the handle of her weapon. You could steal her painstick right now.. But why hurt this pupper?")
+
+		saynn("[say=pc]Why don't you get on all fours for her then? Show how good of a girl you can be?[/say]")
+
+		saynn("[say=nova]Umm.. Ahm.. I d-don't.. c-can't..[/say]")
+
+		saynn("Tavi sees that the husky is deliberating and suddenly starts advancing again, stepping slowly but deliberately, still holding her paw on her side and drilling the girl with her gaze.")
+
+		saynn("Nova immediately drops to all fours and starts producing extremely cute noises that sound like little squeaks and whines.")
+
+		saynn("[say=nova]Ee-ek.. Sorr-ry.. M-Miss T-Tavi?..[/say]")
+
+		saynn("Nova is defeated.. without a single strike. Tavi leans down and pats Nova.")
+
+		saynn("[say=tavi]Good girl~. Thank you.[/say]")
+
+		saynn("The puppy whines more while her tail wags like crazy.")
+
+		saynn("[say=tavi]We're gonna go now, sorry pupper.[/say]")
+
+		saynn("[say=nova]G-Good l-luck..[/say]")
+
+		saynn("Huh? You're not sure if that was sarcasm. Sounded pretty genuine, considering her current position.")
+
+		if (isCorrupt):
+			saynn("[say=tavi]Thanks. But we will not need it~.[/say]")
+
+		else:
+			saynn("[say=tavi]Thanks. We will probably need it.[/say]")
+
+		saynn("Time to go further.")
+
+		addButton("Continue", "See what happens next", "walk_to_skar")
+	if(state == "walk_to_skar"):
+		removeCharacter("nova")
+		playAnimation(StageScene.Duo, "walk", {npc="tavi"})
+		aimCameraAndSetLocName("cd_last_intersection")
+		saynn("You walk through the soulless corridors, quickly getting closer to the source. There is no fear for some reason. Probably because you got this whole thing figured out. There are no unknowns anymore. No mysteries left to solve. All you have to do is execute.")
+
+		saynn("[say=tavi]Only one left.[/say]")
+
+		saynn("While approaching the captain's office, a familiar figure blocks your path..")
+
+		addButton("Continue", "See what happens next", "skar_block")
+	if(state == "skar_block"):
+		addCharacter("skar")
+		playAnimation(StageScene.Duo, "stand", {npc="skar", pc="tavi", bodyState={naked=true}})
+		saynn("Skar is leaning against the wall, crossing his prosthetic arms. Makes sense to keep your strongest guard near you.")
+
+		saynn("[say=tavi]May we?[/say]")
+
+		saynn("He shakes his head slowly. You decide to step in.")
+
+		saynn("[say=pc]I get it.[/say]")
+
+		saynn("[say=skar]Do you?[/say]")
+
+		saynn("[say=pc]A little bit. I understand what. I don't quite understand why. Why are you still fighting for him?[/say]")
+
+		saynn("He lowers his gaze.")
+
+		saynn("[say=skar]Stability, I guess.[/say]")
+
+		saynn("[say=pc]Stability?[/say]")
+
+		saynn("He flexes his arms and you can hear servos working in them. His prosthetic jaw has a similar quiet whirl as he talks.")
+
+		saynn("[say=skar]I've had enough.. adventures.. Wars.[/say]")
+
+		saynn("He sighs and looks at you.")
+
+		saynn("[say=skar]I just wanna live my boring life. I don't want anything to change, it's too late for that.[/say]")
+
+		saynn("Huh. Is that the true Skar? He sounds like he is.. spent.")
+
+		saynn("[say=pc]Then why did you give us a chance back then?[/say]")
+
+		saynn("He shrugs.")
+
+		saynn("[say=skar]I don't know. The captain ordered to stop the riot, not you. I don't care about you.[/say]")
+
+		saynn("Such a soldier, following orders without taking responsibility. Maybe there is a spark of hope in him though.")
+
+		saynn("[say=pc]Maybe it's time to choose for yourself then? You did it once, why not do it again? Just let me walk through.[/say]")
+
+		saynn("He shakes his head and blocks the path. That spark fades away. Seeing that you will not get anywhere, you both prepare to fight.")
+
+		saynn("Although.. it's two versus one. You can try to withstand his attacks until Tavi comes up with a plan to take him down quickly. But you would need to have a high pain ceiling to survive for enough time..")
+
+		addButton("Just fight", "Start the fight", "fight5_skar")
+		addButtonWithChecks("Let Tavi help", "Endure Skar's attacks until Tavi helps you win", "skar_tavihelp", [], [[ButtonChecks.StatCheck, Stat.Vitality, 20]])
+	if(state == "skar_lost"):
+		playAnimation(StageScene.Solo, "defeat")
+		GM.pc.setLocation("hall_mainentrance")
+		aimCameraAndSetLocName("hall_mainentrance")
+		saynn("As you get defeated, Skar grabs you and Tavi by the collar and drags you away.")
+
+		saynn("You were so close. But sadly, you failed this time.")
+
+		saynn("[say=skar]It's not worth it. You can't change anything.[/say]")
+
+		saynn("You don't even wanna describe how wrong he is.")
+
+		saynn("Seems you will need to try a little harder than that.")
+
+		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "skar_won"):
+		playAnimation(StageScene.Duo, "stand", {npc="skar", npcAction="defeat"})
+		saynn("Skar grunts as he hits the floor hard.")
+
+		saynn("[say=skar]Ugh.. It's not worth it. You can't change anything.[/say]")
+
+		saynn("[say=pc]If there were less like you, maybe it would have been easier. But I don't plan on giving up no matter what.[/say]")
+
+		saynn("The reinforced door is the last barrier before the captain's office. Tavi steals Skar's badge and tries to use it.. but the door refuses to open.")
+
+		saynn("[say=tavi]Seems like he doesn't even trust his own guards anymore.[/say]")
+
+		saynn("Well.. You're kinda stuck here.")
+
+		saynn("[say=tavi]Hold on, I know what to do~.[/say]")
+
+		addButton("Continue", "See what happens next", "tavi_hacks_door")
+	if(state == "skar_tavihelp"):
+		playAnimation(StageScene.Duo, "hurt", {npc="skar", npcAction="stunbaton"})
+		saynn("You decide not to attack the guy at all, only focusing on blocking and avoiding his attack. And oh boy, those mechanical arms he has might look a bit clunky at first.. but they never get tired, allowing Skar to keep pushing and striking.")
+
+		saynn("While you're busy with that, Tavi gets out of sight and sneaks behind him. She waits for a good moment.. Each second makes you wish you had more training.")
+
+		addButton("Continue", "See what happens next", "skar_taviwin")
+	if(state == "skar_taviwin"):
+		playAnimation(StageScene.Solo, "defeat", {pc="skar"})
+		saynn("When Skar commits to another strike, Tavi suddenly jumps on his back, catching him in the moment of recovery. She uses her weight to make him lose balance before bringing him down, his armor producing a metallic cling when it hits the floor.")
+
+		saynn("[say=skar]Ugh..[/say]")
+
+		saynn("The impact stuns the guy enough for Tavi to quickly cuff him with his own cuffs.")
+
+		saynn("[say=tavi]That's what being without a good team brings you. Instability~.[/say]")
+
+		saynn("The reinforced door is the last barrier before the captain's office. Tavi steals Skar's badge and tries to use it.. but the door refuses to open.")
+
+		saynn("[say=tavi]Seems like he doesn't even trust his own guards anymore.[/say]")
+
+		saynn("Well.. You're kinda stuck here.")
+
+		saynn("[say=tavi]Hold on, I know what to do~.[/say]")
+
+		addButton("Continue", "See what happens next", "tavi_hacks_door")
+	if(state == "tavi_hacks_door"):
+		removeCharacter("skar")
+		playAnimation(StageScene.Duo, "stand", {npc="tavi", npcBodyState={naked=isCorrupt}})
+		saynn("Tavi starts inspecting the access panel. Nothing obvious stands out but she finds a little crack that she slides her claw inside before using it to pry open the outer cover, revealing some insulated wiring.")
+
+		saynn("[say=pc]Would be a shame to stop now.[/say]")
+
+		saynn("Tavi smiles.")
+
+		saynn("[say=tavi]Never~.[/say]")
+
+		saynn("She can't quite figure what each wire means.. So she steals Skar's stun baton and shoves it into the panel, causing all sorts of sparks to start bursting from it.")
+
+		saynn("[say=tavi]Now watch.[/say]")
+
+		saynn("The door blinks non-stop. Its security bolts toggle on and off.. And then the door opens when the right wire gets an impulse sent through it.")
+
+		saynn("[say=tavi]That's why I like hacking software more. Software and people~. This isn't even a challenge.[/say]")
+
+		saynn("And now.. All you can do is walk in. You and Tavi look at each other.")
+
+		saynn("[say=pc]Ready?[/say]")
+
+		if (isCorrupt):
+			saynn("[say=tavi]Been waiting my whole life for this~. And I won't pull any punches.[/say]")
+
+		else:
+			saynn("[say=tavi]Been waiting my whole life for this. Let me just put this on.[/say]")
+
+			saynn("Tavi pulls out her inmate uniform which she had stored.. somewhere.. and wears it.")
+
+			saynn("[say=tavi]My body won't work on him anyway.[/say]")
+
+		addButton("Walk in", "See what's up with the captain", "start_captain_scene")
 func taviSpeak(corruptSpeak, pureSpeak):
 	if(isCorrupt):
 		return corruptSpeak
@@ -792,8 +1032,8 @@ func _react(_action: String, _args):
 
 	if(_action == "checkpoint_firstguard"):
 		processTime(2*60)
-		npc1id = GuardGenerator.new().generate({NpcGen.Level: 30, NpcGen.Temporary: true})
-		npc2id = GuardGenerator.new().generate({NpcGen.Level: 30, NpcGen.Temporary: true})
+		npc1id = GuardGenerator.new().generate({NpcGen.Level: 30, NpcGen.Temporary: true}).getID()
+		npc2id = GuardGenerator.new().generate({NpcGen.Level: 30, NpcGen.Temporary: true}).getID()
 		addCharacter(npc1id)
 		addCharacter(npc2id)
 
@@ -817,6 +1057,30 @@ func _react(_action: String, _args):
 	if(_action == "nova_meet"):
 		processTime(3*60)
 
+	if(_action == "fight4_nova"):
+		runScene("FightScene", ["novaArena"], "fight4_nova")
+		getCharacter("novaArena").addLust(40)
+		getCharacter("novaArena").addStamina(-60)
+		return
+
+	if(_action == "walk_to_skar"):
+		processTime(3*60)
+
+	if(_action == "fight5_skar"):
+		runScene("FightScene", ["skar"], "fight5_skar")
+		return
+
+	if(_action == "tavi_hacks_door"):
+		addExperienceToPlayer(300)
+
+	if(_action == "skar_taviwin"):
+		processTime(10*60)
+
+	if(_action == "start_captain_scene"):
+		runScene("Ch7s3CaptainScene")
+		endScene()
+		return
+
 	setState(_action)
 
 func _react_scene_end(_tag, _result):
@@ -838,6 +1102,26 @@ func _react_scene_end(_tag, _result):
 			setState("won_risha")
 		else:
 			setState("lost_risha")
+			addExperienceToPlayer(5)
+
+	if(_tag == "fight4_nova"):
+		processTime(20 * 60)
+		var battlestate = _result[0]
+		
+		if(battlestate == "win"):
+			setState("won_nova")
+		else:
+			setState("lost_nova")
+			addExperienceToPlayer(5)
+
+	if(_tag == "fight5_skar"):
+		processTime(20 * 60)
+		var battlestate = _result[0]
+		
+		if(battlestate == "win"):
+			setState("skar_won")
+		else:
+			setState("skar_lost")
 			addExperienceToPlayer(5)
 
 func saveData():
