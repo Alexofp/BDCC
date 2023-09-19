@@ -219,6 +219,7 @@ func _init():
 		"res://Modules/TaviModule/Chapter7/Ch7s1PlanningScene.gd",
 		"res://Modules/TaviModule/Chapter7/Ch7s2aAloneScene.gd",
 		"res://Modules/TaviModule/Chapter7/Ch7s2bTaviScene.gd",
+		"res://Modules/TaviModule/Chapter7/Ch7s3CaptainScene.gd",
 		]
 	characters = [
 		"res://Modules/TaviModule/Chapter4/DirectorTau.gd",

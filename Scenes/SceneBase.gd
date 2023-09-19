@@ -75,6 +75,7 @@ func run():
 	GM.ui.updateCharactersInPanel()
 	GM.ui.setSceneCreator(getSceneCreator(), shouldShowDevCommentaryIcon())
 	GM.ui.setSceneArtWork(Images.getSceneArt(self))
+	GM.ui.setBigAnswersMode(shouldDisplayBigButtons())
 
 	
 	checkSceneEnded()
@@ -335,6 +336,9 @@ func shouldShowDevCommentaryIcon():
 	if(showedDeveloperCommentary):
 		return false
 	return hasDevCommentary()
+
+func shouldDisplayBigButtons():
+	return false
 
 func saveData():
 	var data = {}

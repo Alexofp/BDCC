@@ -5,7 +5,7 @@ signal on_option_button(method, args)
 signal on_rollback_button
 signal onDevComButton
 var buttons: Array = []
-const buttonsCountPerPage: int = 15
+var buttonsCountPerPage: int = 15
 var optionButtonScene: PackedScene = preload("res://Game/SceneOptionButton.tscn")
 onready var optionButtonsContainer = $HBoxContainer/VBoxContainer2/HBoxContainer/GridContainer
 var currentPage = 0
@@ -36,6 +36,7 @@ var textboxes: Dictionary = {}
 var gameParser: GameParser
 var sayParser: SayParser
 onready var hornyMessage = $MessageSystem
+var isInBigAnswersMode = false
 
 func _exit_tree():
 	GM.ui = null
@@ -83,6 +84,7 @@ func _ready():
 		rollbackButton.visible = false
 		
 	updateButtons()
+	#setBigAnswersMode(true)
 	
 	if(OS.has_touchscreen_ui_hint()):
 		textOutput.selection_enabled = false
@@ -133,6 +135,29 @@ func queueUpdate():
 		return
 	buttonsNeedUpdating = false
 	updateButtons()
+
+func setBigAnswersMode(newmode):
+	if(!isInBigAnswersMode && newmode):
+		optionButtonsContainer.columns = 1
+		buttonsCountPerPage = 15
+		
+		for i in buttonsCountPerPage:
+			if(i <= 3):
+				continue
+			var button:Button = buttons[i]
+			button.visible = false
+		
+		buttonsCountPerPage = 4
+	elif(isInBigAnswersMode && !newmode):
+		optionButtonsContainer.columns = 5
+		buttonsCountPerPage = 15
+		
+		for i in buttonsCountPerPage:
+			#if(i <= 3):
+			#	continue
+			var button:Button = buttons[i]
+			button.visible = true
+	isInBigAnswersMode = newmode
 
 func updateButtons():
 	checkPageButtons()
