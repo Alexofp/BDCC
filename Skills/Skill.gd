@@ -13,4 +13,4 @@ const Milking = "Milking"
 const Fertility = "Fertility"
 
 static func getAll():
-	return [Combat, CumLover, Breeder, SexSlave, Exhibitionism, BDSM, Milking, Fertility]
+	return [Start, Combat, CumLover, Breeder, SexSlave, Exhibitionism, BDSM, Milking, Fertility]

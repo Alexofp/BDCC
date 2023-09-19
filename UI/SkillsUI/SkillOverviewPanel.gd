@@ -30,9 +30,15 @@ func updateInfo():
 	
 	#levelBar.setTextLeft("Level "+str(skill.getLevel()))
 	#levelBar.setText(str(skill.getExperience())+" / "+str(skill.getRequiredExperienceNextLevel())+" exp")
-	levelBar.setTextLeft(skill.getVisibleName() +" level "+str(skill.getLevel()))
-	levelBar.setText(""+str(skill.getExperience())+" / "+str(skill.getRequiredExperienceNextLevel())+" exp," +" "+str(learnedPerkCount)+"/"+str(totalPerkCount)+" perks"+", free points: "+str(GM.pc.getSkillsHolder().getFreePerkPoints(skillID)))
-	levelBar.setProgressBarValue(skill.getLevelProgress())
+	
+	if(skill.scripted()):
+		levelBar.setTextLeft(skill.getVisibleName())
+		levelBar.setText("")
+		levelBar.setProgressBarValue(0)
+	else:
+		levelBar.setTextLeft(skill.getVisibleName() +" level "+str(skill.getLevel()))
+		levelBar.setText(""+str(skill.getExperience())+" / "+str(skill.getRequiredExperienceNextLevel())+" exp," +" "+str(learnedPerkCount)+"/"+str(totalPerkCount)+" perks"+", free points: "+str(GM.pc.getSkillsHolder().getFreePerkPoints(skillID)))
+		levelBar.setProgressBarValue(skill.getLevelProgress())
 	#freePerksLabel.text = "Free perk points: "+str(GM.pc.getSkillsHolder().getFreePerkPoints(skillID))
 
 	#learnedPerksLabel.text = "Learned perks: "+str(learnedPerkCount)+"/"+str(totalPerkCount)

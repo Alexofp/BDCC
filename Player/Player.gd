@@ -62,6 +62,8 @@ func _ready():
 	#giveBodypart(GlobalRegistry.createBodypart("caninepenis"))
 	updateNonBattleEffects()
 	
+	skillsHolder.addSkillExperience(Skill.Start, 0)
+	
 	#inventory.addItem(GlobalRegistry.createItem("testitem"))
 	#inventory.addItem(GlobalRegistry.createItem("testitem"))
 	#inventory.addItem(GlobalRegistry.createItem("ballgag"))
@@ -475,6 +477,9 @@ func loadData(data):
 		
 	updateNonBattleEffects()
 	emit_signal("bodypart_changed")
+	
+	#ensure starting perks are visible for old saves
+	skillsHolder.addSkillExperience(Skill.Start, 0)
 
 func checkLocation():
 	var _roomInfo = GM.world.getRoomByID(getLocation())

@@ -10,8 +10,18 @@ func getVisibleName():
 func getVisibleDescription():
 	return "No matter what you will never be able to get pregnant"
 
+func hiddenWhenLocked() -> bool:
+	return true
+
+func toggleable() -> bool:
+	return false
+	
+func unlockable() -> bool:
+	return false
+
 func getCost():
 	return 0
+	
 func getSkillTier():
 	return 0
 

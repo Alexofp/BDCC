@@ -24,6 +24,9 @@ func getVisibleDescription():
 static func getRequiredExperience(_level) -> int:
 	return 100 + _level * 10 + int(sqrt(max(0,_level))) * 10
 
+func scripted() -> bool:
+	return false
+
 func setLevel(lvl: int):
 	if(lvl > getLevelCap()):
 		lvl = getLevelCap()
