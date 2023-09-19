@@ -10,8 +10,10 @@ var quests = []
 var attacks = []
 var bodyparts = []
 var species = []
+var skills = []
 var perks = []
 var lustActions = []
+var buffs = []
 var statusEffects = []
 var worldEdits = []
 var gameExtenders = []
@@ -50,12 +52,18 @@ func register():
 	for specie in species:
 		GlobalRegistry.registerSpecies(specie)
 		
+	for skill in skills:
+		GlobalRegistry.registerSkill(skill)
+		
 	for perk in perks:
 		GlobalRegistry.registerPerk(perk)
 	
 	for lustAction in lustActions:
 		GlobalRegistry.registerLustAction(lustAction)
 	
+	for buff in buffs:
+		GlobalRegistry.registerBuff(buff)
+		
 	for statusEffect in statusEffects:
 		GlobalRegistry.registerStatusEffect(statusEffect)
 
