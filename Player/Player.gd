@@ -62,7 +62,10 @@ func _ready():
 	#giveBodypart(GlobalRegistry.createBodypart("caninepenis"))
 	updateNonBattleEffects()
 	
-	skillsHolder.addSkillExperience(Skill.Start, 0)
+	var allSkills = GlobalRegistry.getSkills();
+	for skillID in allSkills:
+		if(allSkills[skillID].alwaysVisible()):
+			skillsHolder.ensureSkillExists(skillID)
 	
 	#inventory.addItem(GlobalRegistry.createItem("testitem"))
 	#inventory.addItem(GlobalRegistry.createItem("testitem"))
@@ -478,8 +481,11 @@ func loadData(data):
 	updateNonBattleEffects()
 	emit_signal("bodypart_changed")
 	
-	#ensure starting perks are visible for old saves
-	skillsHolder.addSkillExperience(Skill.Start, 0)
+	#ensure always-visible skills are visible for old saves
+	var allSkills = GlobalRegistry.getSkills();
+	for skillID in allSkills:
+		if(allSkills[skillID].alwaysVisible()):
+			skillsHolder.ensureSkillExists(skillID)
 
 func checkLocation():
 	var _roomInfo = GM.world.getRoomByID(getLocation())

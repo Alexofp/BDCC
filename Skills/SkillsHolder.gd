@@ -153,10 +153,16 @@ func checkNewLevel():
 	if(addedAnyLevels):
 		emit_signal("levelChanged")
 		
+		
 func addSkillExperience(skillID, amount, activityID = null):
 	if(npc == null || !npc.isPlayer()):
 		return
+		
+	ensureSkillExists(skillID)
 	
+	skills[skillID].addExperience(amount, activityID)
+	
+func ensureSkillExists(skillID):
 	if(!skills.has(skillID)):
 		var newskill = GlobalRegistry.createSkill(skillID)
 		if(newskill == null):
@@ -165,8 +171,6 @@ func addSkillExperience(skillID, amount, activityID = null):
 		newskill.setCharacter(npc)
 		skills[skillID] = newskill
 		var _ok = newskill.connect("levelChanged", self, "onSkillLevelChanged")
-	
-	skills[skillID].addExperience(amount, activityID)
 	
 func onNewDay():
 	for skillID in skills:

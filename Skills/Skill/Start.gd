@@ -9,6 +9,9 @@ func getVisibleName():
 func getVisibleDescription():
 	return "Shows your inherent perks"
 
+static func alwaysVisible() -> bool:
+	return true
+
 func scripted() -> bool:
 	return true
 
