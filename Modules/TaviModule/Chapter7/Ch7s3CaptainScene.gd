@@ -221,6 +221,164 @@ func _run():
 
 		saynn("[say=captain]That's why wars need to continue. That's why we need more soldiers and people who will serve them. Yes, that's why guards also need to sometimes lose and be beat up and even fucked. That's how we achieve progress! That's the only way.[/say]")
 
+		addButton("Wars need to stop. End of story", "say this", "3_nowars")
+		addButton("Can't we just finance the research projects more? Instead of fueling corruption", "say this", "3_research")
+		addButton("Is that why you are trying to ban androids? They don't fit in your little scheme?", "say this", "big_3_androids")
+		addButton("Oh shut up please. I'm getting sick just listening to you", "say this", "3_shutup")
+	if(state == "3_nowars"):
+		saynn("[say=pc]Wars need to stop. They're destructive and painful. No one wins in a war. End of story.[/say]")
+
+		saynn("The captain sighs and shakes his head.")
+
+		saynn("[say=captain]World without wars.. Wouldn't that be a perfect utopia? Yes. But you know why wars will never stop? I think I told you already.[/say]")
+
+		saynn("[say=pc]Anti-war people will never win any. But why not?[/say]")
+
+		saynn("The captain smiles.")
+
+		saynn("[say=captain]They would have to start a war. Starting a war is easy. Anyone with a rock can do it. Ending it.. requires people to give up something. And we really hate giving up.[/say]")
+
+		saynn("He sighs.")
+
+		saynn("[say=captain]Listen. Conflicts are all around us. They are what makes this life exciting. Conflicts are a disbalance, a contrast between two opinions. Contrast creates feelings. Without feelings.. we would be bored. Or dead. Same thing really.[/say]")
+
+		saynn("He stands up and gets into a combat stance.")
+
+		saynn("[say=captain]So let's fight, shall we. Some people only understand the language of force anyway. And you know that.[/say]")
+
+		saynn("Seems like it's a fight.")
+
+		addButton("Fight", "Start the fight", "start_fight")
+	if(state == "3_research"):
+		saynn("[say=pc]Can't we just finance the research projects more? Instead of fueling wars and corruption more. We can find answers to all the questions of our universe, we just have to work together.[/say]")
+
+		saynn("The captain looks at a window that has a great view of outer space.")
+
+		saynn("[say=captain]But why? What value do these answers hold? Will they save us? From what?[/say]")
+
+		saynn("[say=pc]Our galaxy holds all sorts of secrets. What if something special is in the center? What if we can become immortal. Rewrite time. Transcend.[/say]")
+
+		saynn("[say=captain]So.. Satisfying curiosity? What stops me from building more ships instead and destroying or enslaving your little research colony? There is a tangible value in that. Because I can sell you and your property. What you propose is.. worthless.. because the risks of finding nothing are too high.[/say]")
+
+		saynn("He sighs.")
+
+		saynn("[say=captain]Listen. The way we get motivated to do anything is extremely simple. We wanna do things that make us happy and avoid things that make us unhappy. And the second part is much more powerful.[/say]")
+
+		saynn("The captain points at the vast nothingness of space.")
+
+		saynn("[say=captain]You know why many species found a way to escape their home planets and start traveling through space? Curiosity only plays an insignificantly small role in that. Fear was the real motivator. Fear that their resources are running out. Fear that they could destroy the planet. Or that the planet will destroy them. There was a threat. A real tangible threat.[/say]")
+
+		saynn("He stands up and takes a combat stance.")
+
+		saynn("[say=captain]Threats make us get up and do things. Lack of a threat means everyone is busy fucking each other all day. And I'm sick of pointless fucking. But you clearly don't understand this. You think promises of fairy tales will motivate people to follow you? Nah, they won't.[/say]")
+
+		saynn("Seems like it's a fight.")
+
+		addButton("Fight", "Start the fight", "start_fight")
+	if(state == "3_shutup"):
+		saynn("[say=pc]Oh, shut up, please. I'm getting sick just listening to you and your crazy ramblings.[/say]")
+
+		saynn("The captain shrugs.")
+
+		saynn("[say=captain]Insulting me won't change anything. How about you listen rather than.. Oh, who am I kidding.[/say]")
+
+		saynn("He stands up and gets into a combat stance.")
+
+		saynn("[say=captain]I don't wanna waste my time any longer. It was worth a try I guess.[/say]")
+
+		saynn("Seems like it's a fight.")
+
+		addButton("Fight", "Start the fight", "start_fight")
+	if(state == "big_3_androids"):
+		saynn("[say=pc]Is that why you are trying to ban androids? They don't fit in your little scheme? Artificial intelligence can fix a lot of our problems.[/say]")
+
+		saynn("Suddenly, the captain growls and throws the beer bottle away, causing it to shatter. You have clearly struck a nerve.")
+
+		saynn("[say=captain]Artificial thoughts, artificial bodies, artificial goals. Everything about them is artificial. They're fake.[/say]")
+
+		saynn("[say=pc]Androids can serve us. They can fight wars. They can do things a million times faster than we can. Perfectly repeatable and iterable. Isn't that real progress?[/say]")
+
+		saynn("He switches from anger and suddenly starts laughing at your words.")
+
+		saynn("[say=captain]Progress? Artificial brain is only as good as the brain that created it. It can never be better than the real one at anything. And since we're not ideal, artificial brains that we create are always worse. Always! It's not progress. It's a degradation. We could just make more soldiers instead, the process of breeding is perfectly scaleable. My prison proved that![/say]")
+
+		saynn("The captain is so passionate about this.. He frowns while looking at the projector sphere in his hand.")
+
+		saynn("[say=captain]Androids are unsafe too. People are predictable. You can project yourself onto someone and figure out why they did something. With a machine.. Who knows. It might be programmed to stab you in the back the next time you turn away. But then people begin to have feelings for these things. It's so wrong. Unnatural..[/say]")
+
+		saynn("He looks.. vulnerable. Now could be the time to prove him that he is wrong.")
+
+		addButton("Androids don't have to be perfect. Being different is okay", "say this", "4_perfect")
+		addButton("Times are changing. You can't do anything to stop it. And so you're scared", "say this", "4_times")
+		addButton("I understand. You need more control since androids are a threat", "", "4_understand")
+		addButton("Nice sob story. Did a machine steal your wife and now you're angry?", "", "4_sobstory")
+	if(state == "4_perfect"):
+		saynn("[say=pc]You know.. Androids don't have to be perfect. They never claimed to be. They're different from us. And I think.. that's okay.[/say]")
+
+		saynn("The captain furrows his brows.")
+
+		saynn("[say=captain]Why are we wasting resources on them? It will never pay off.[/say]")
+
+		saynn("[say=pc]Who said that? You? It is paying off already. And that's a fact. So you're wrong there.[/say]")
+
+		saynn("You look at Tavi. She looks back at you and smiles.")
+
+		saynn("[say=pc]The only truth that I know is that nature is always changing. Adapting. Evolving. And you.[/say]")
+
+		saynn("You point at the captain.")
+
+		saynn("[say=pc]You're just afraid that you won't be able to control the androids. You know.. They follow the same rules. They get iterated upon and slowly get better and better. Just like how you.. train.. your staff and inmates here in your prison. But without forced in-fighting and breeding. Without your intervention.[/say]")
+
+		saynn("[say=captain]That's how it always was! Fighting and breeding are the staples of evolution![/say]")
+
+		saynn("[say=pc]And that makes you angry. You think that your social skills won't matter anymore, just your coding ones. And you're probably shit at coding.[/say]")
+
+		saynn("The captain growls.. but then looks away. You've read him like a book. His words made it easy. The guy is just crazy for power.")
+
+		addButton("Continue", "See what happens next", "won_word_battle")
+	if(state == "4_sobstory"):
+		saynn("[say=pc]Nice sob story. Did a machine steal your wife and now you're angry?[/say]")
+
+		saynn("The captain doesn't say anything for a while. He just looks you in the eyes, his stare drilling you.")
+
+		saynn("[say=captain]Fuck. You.[/say]")
+
+		saynn("Seems like it's a fight.")
+
+		addButton("Fight", "Start the fight", "start_fight")
+	if(state == "won_word_battle"):
+		saynn("The captain sighs and looks at you and Tavi.")
+
+		saynn("[say=captain]Listen. You two proved that you are strong and smart. Getting past all my most loyal guards.. I won't lie, it shows that you have what it takes.[/say]")
+
+		saynn("He starts stepping around his desk.")
+
+		saynn("[say=captain]I thought you two are some kind of anomaly. Some kind of problem that needs to be removed or dealt with. But no. You are a perfect synergy. You are exactly what I was looking for.[/say]")
+
+		saynn("The fuck does he mean? Tavi looks at you and shakes her head subtly.")
+
+		saynn("[say=captain]You don't get it yet? I created BDCC for a reason. There are many murderers and thieves and prostitutes here. But I'm looking for the best. I've been trying to for years. And I think my search is completed.[/say]")
+
+		saynn("He points at you and Tavi.")
+
+		saynn("[say=captain]Power isn't in numbers, not anymore. Quality is where it is at. I'm not afraid of corporations that have many spies. I'm afraid of corporations that don't.[/say]")
+
+		saynn("He boldly walks up to you, his hand still holding a gun.")
+
+		saynn("[say=captain]I need agents. Not for AlphaCorp, no. For me. Agents that can get things done. Agents like you two. The war that's happening right now wasn't started by me or you. But we can try to make the best out of the situation.[/say]")
+
+		saynn("He looks at you specifically.")
+
+		saynn("[say=captain]You want freedom? You will get it. Credits? Sure, all of them. Sluts? I don't care. I can give you everything you want.[/say]")
+
+		saynn("Then he looks at Tavi.")
+
+		saynn("[say=captain]Seeking revenge? I will help you with that. We will track every single person who was responsible for creating you and eliminate them. One by one. Any method. Isn't that your dream? I'm not against that. I'm not against letting you be with Nova and Elena either. Looks like you bonded together pretty well, they could be your family. Family that you always wanted.[/say]")
+
+		saynn("Tavi suddenly begins to look extremely puzzled.. Captain's words hit her extremely hard.")
+
+		saynn("[say=captain]All I'm asking back is loyalty. We can stop fighting, you and I. Once and for all. No more being a prisoner, no more sleeping in a cell, no more collars, no more abuse. You will be on my level. You will decide instead of being decided for. You will be my hands. And I will be your mind.[/say]")
+
 func taviSpeak(corruptSpeak, pureSpeak):
 	if(isCorrupt):
 		return corruptSpeak
@@ -244,6 +402,9 @@ func _react(_action: String, _args):
 
 	if(_action == "big_firstquestion"):
 		processTime(3*60)
+
+	if(_action == "won_word_battle"):
+		processTime(10*60)
 
 	setState(_action)
 
