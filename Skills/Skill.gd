@@ -2,6 +2,8 @@ extends Object
 class_name Skill
 
 const Start = "Start"
+const Inherent = "Inherent"
+
 const Combat = "Combat"
 
 const CumLover = "CumLover"
@@ -13,4 +15,4 @@ const Milking = "Milking"
 const Fertility = "Fertility"
 
 static func getAll():
-	return [Start, Combat, CumLover, Breeder, SexSlave, Exhibitionism, BDSM, Milking, Fertility]
+	return [Combat, CumLover, Breeder, SexSlave, Exhibitionism, BDSM, Milking, Fertility]
