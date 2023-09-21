@@ -132,6 +132,9 @@ func getFlags():
 		"taviSkillWatersports": flag(FlagType.Number),
 		
 		"Ch7CaptainSceneHappened": flag(FlagType.Bool),
+		"Ch7NoEnding": flag(FlagType.Bool),
+		"Ch7YesEnding": flag(FlagType.Bool),
+		"Ch7KillEnding": flag(FlagType.Bool),
 	}
 
 func _init():

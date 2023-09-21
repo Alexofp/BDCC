@@ -4,6 +4,7 @@ var isCorrupt = false
 var isPure = false
 var isNormal = false
 var isVirgin = false
+var wonFight = false
 
 func _init():
 	sceneID = "Ch7s3CaptainScene"
@@ -64,6 +65,115 @@ func _run():
 		saynn("Getting into a verbal fight with him.. Might be risky.. But maybe you will be able to prove him wrong instead?")
 
 		addButton("Sure", "Try to change the captain's mind", "big_firstquestion")
+		addButton("Just fight", "You didn't come here to talk", "just_came_to_fight")
+	if(state == "just_came_to_fight"):
+		saynn("[say=pc]I'd rather just get it over with.[/say]")
+
+		saynn("[say=captain]Fair. Some do prefer to stay in the dark willingly.[/say]")
+
+		saynn("The captain gets into a combat stance, his weapon in his hand.")
+
+		saynn("Looks like it's time to fight.")
+
+		addButton("Fight", "Start the fight", "start_fight")
+	if(state == "won_captain"):
+		playAnimation(StageScene.Duo, "stand", {npc="captain", npcAction="hurt"})
+		saynn("The captain staggers back and is about to collapse but his desk saves him, giving the wolf something to hold to.")
+
+		saynn("[say=captain]That was good.. Very good..[/say]")
+
+		saynn("You try to close distance with him again but the guy still holds the projector sphere at gunpoint. You might not care about it.. But Tavi does, she pulls you back.")
+
+		saynn("[say=captain]I think.. I think I'm beginning to understand something.[/say]")
+
+		saynn("[say=pc]That you are screwed?[/say]")
+
+		saynn("[say=captain]That I was wrong. About you two.[/say]")
+
+		saynn("Whatever it is he wants to say.. you kinda have to listen.")
+
+		addButton("Continue", "See what happens next", "won_word_battle")
+	if(state == "lost_captain"):
+		removeCharacter("captain")
+		removeCharacter("tavi")
+		playAnimation(StageScene.Solo, "defeat")
+		saynn("Defeated, you collapse.")
+
+		saynn("The last thing you hear is..")
+
+		saynn("[say=tavi]NO![/say]")
+
+		saynn("Before an energy blast sends you somewhere very dark..")
+
+		addButton("Night night", "Am I alive? Or dead? Or both?..", "lost_coma")
+	if(state == "lost_coma"):
+		saynn("Well-well-well. What do we have here?")
+
+		saynn("Another failed hero? Or maybe.. a defeated villain. What's the difference anyway?")
+
+		saynn("Right. At least {npc.he} has a heart. Heart that stopped beating, yes. But still a heart.")
+
+		saynn("Hearts can be restarted. Restarting a mind makes it a different mind.")
+
+		saynn("Hey, nun. Can you make me some coffee? I'm dying of exhaustion over here.")
+
+		saynn("Nun?")
+
+		saynn("Oh. I think {npc.he} is waking up.")
+
+		addButton("Open eyes", "See what's behind the dark white curtains", "wakeup_in_med")
+	if(state == "wakeup_in_med"):
+		playAnimation(StageScene.Sleeping, "idle", {bodyState={naked=true}})
+		addCharacter("eliza")
+		aimCameraAndSetLocName("medical_hospitalwards")
+		GM.pc.setLocation("med_lobby_start")
+		setFlag("TaviModule.Ch7CaptainSceneHappened", false)
+		saynn("You open your eyes.. Ow.. Being alive sucks.")
+
+		saynn("[say=eliza]Easy there.[/say]")
+
+		saynn("[say=pc]Where am I..[/say]")
+
+		saynn("[say=eliza]Heaven.[/say]")
+
+		saynn("Doctor's giggle echoes in your head, causing the headache to get worse.")
+
+		saynn("[say=pc]Feels like hell alright..[/say]")
+
+		saynn("[say=eliza]Rude. Here, eat this.[/say]")
+
+		saynn("She feeds you some painkillers and lets you drink some water. The white sterile walls make your eyes squint.")
+
+		saynn("[say=pc]Where is Tavi?[/say]")
+
+		saynn("Near your bed stands a doctor. She shrugs.")
+
+		saynn("[say=eliza]If she is not here, she is either dead or in her cell.[/say]")
+
+		saynn("That doctor quickly grabs her datapad and checks something.")
+
+		saynn("[say=eliza]And looks like she is not dead. So you're in luck~.[/say]")
+
+		saynn("Welcome to day "+str(GM.main.getDays())+" of your sentence!")
+
+		addButton("Get up", "Time to get up", "wakeup_in_med_up")
+	if(state == "wakeup_in_med_up"):
+		playAnimation(StageScene.Duo, "stand", {npc="eliza"})
+		saynn("Carefully, you get up, only hitting a few objects in the process.")
+
+		saynn("[say=pc]Can I go?[/say]")
+
+		saynn("Doctor quickly inspects you.")
+
+		saynn("[say=eliza]Go you probably can. How far you can get is another question. Try not to let that happen again~.[/say]")
+
+		saynn("[say=pc]What?[/say]")
+
+		saynn("[say=eliza]Try not to die again, patient. Although.. I do like practicing.[/say]")
+
+		saynn("Yeah.. time to go. Looks like you will have to get to the captain again.")
+
+		addButton("Leave", "See what happens next", "endthescene")
 	if(state == "big_firstquestion"):
 		saynn("[say=pc]Sure.[/say]")
 
@@ -319,7 +429,7 @@ func _run():
 
 		saynn("[say=captain]Why are we wasting resources on them? It will never pay off.[/say]")
 
-		saynn("[say=pc]Who said that? You? It is paying off already. And that's a fact. So you're wrong there.[/say]")
+		saynn("[say=pc]Who said that? You? It is paying off already. And that's a fact. Simple tasks being automated everywhere. So you're wrong there.[/say]")
 
 		saynn("You look at Tavi. She looks back at you and smiles.")
 
@@ -336,6 +446,48 @@ func _run():
 		saynn("The captain growls.. but then looks away. You've read him like a book. His words made it easy. The guy is just crazy for power.")
 
 		addButton("Continue", "See what happens next", "won_word_battle")
+	if(state == "4_times"):
+		saynn("[say=pc]Times are changing. You can't do anything to stop it. And so you're scared.[/say]")
+
+		saynn("He frowns.")
+
+		saynn("[say=captain]Scared? Me? I have no fears. You saw it yourself.[/say]")
+
+		saynn("[say=pc]I saw your fears, captain. You're afraid of losing power. You traded everything for it. Your morality, empathy, love. You're as good as one of those androids that will come and replace you.[/say]")
+
+		saynn("He avoids eye contact as his expression softens.")
+
+		saynn("[say=pc]Was it worth it? Would you do all of that again if given the chance to rollback all your time as a captain here?[/say]")
+
+		saynn("He stays silent for quite a while, probably contemplating his life choices.")
+
+		saynn("[say=captain]Yes. It was worth it. I just need a little more.[/say]")
+
+		saynn("He says that with a cold dark tone in his voice. He is either sick.. or..")
+
+		addButton("Continue", "See what happens next", "won_word_battle")
+	if(state == "4_understand"):
+		saynn("[say=pc]I understand. You need more control since androids are a threat.[/say]")
+
+		saynn("Captain raises his brows.")
+
+		saynn("[say=captain]Someone who understands. That's rare. But quite welcomed.[/say]")
+
+		saynn("[say=pc]I don't agree about everything but..[/say]")
+
+		saynn("He cuts you off.")
+
+		saynn("[say=captain]You don't have to agree with me. Millions of people can have different opinions and still live in the same society. It's called making compromises. A form of adaptation.[/say]")
+
+		saynn("He lowers his gaze, inspecting the projector sphere.")
+
+		saynn("[say=captain]Androids cheapen the work that we do. They will replace us, they already do. They disturb the balance of work versus reward. People must work for their happiness! Otherwise.. otherwise they won't value it. They won't value anything. Why would I care about my mother if I can manufacture ten of her. Sounds funny and stupid.. but that's where the world is headed.[/say]")
+
+		saynn("The captain looks out of his window at the void.")
+
+		saynn("[say=captain]And that's just one of the problems that plagues us. There are many more. But I'm only tackling the ones I can reach.. For now..[/say]")
+
+		addButton("Continue", "See what happens next", "won_word_battle")
 	if(state == "4_sobstory"):
 		saynn("[say=pc]Nice sob story. Did a machine steal your wife and now you're angry?[/say]")
 
@@ -349,7 +501,12 @@ func _run():
 	if(state == "won_word_battle"):
 		saynn("The captain sighs and looks at you and Tavi.")
 
-		saynn("[say=captain]Listen. You two proved that you are strong and smart. Getting past all my most loyal guards.. I won't lie, it shows that you have what it takes.[/say]")
+		if (!wonFight):
+			saynn("[say=captain]We can argue all day.. But your words won't change my opinion and mine won't change yours. Only actions will. So let me do the first step.[/say]")
+
+			saynn("Looks like you won and he just doesn't wanna admit to it. The captain clears his throat and holsters his gun.")
+
+		saynn("[say=captain]Listen. You two proved that you are strong and smart. Getting past all my most loyal guards.."+str(" And beating me too.." if wonFight else "")+" I won't lie, it shows that you have what it takes.[/say]")
 
 		saynn("He starts stepping around his desk.")
 
@@ -357,19 +514,19 @@ func _run():
 
 		saynn("The fuck does he mean? Tavi looks at you and shakes her head subtly.")
 
-		saynn("[say=captain]You don't get it yet? I created BDCC for a reason. There are many murderers and thieves and prostitutes here. But I'm looking for the best. I've been trying to for years. And I think my search is completed.[/say]")
+		saynn("[say=captain]I created BDCC for a reason. There are many murderers and thieves and prostitutes here, all sorts and qualities. But I'm looking for the best. I've been trying to for years. And I think my search is completed.[/say]")
 
 		saynn("He points at you and Tavi.")
 
 		saynn("[say=captain]Power isn't in numbers, not anymore. Quality is where it is at. I'm not afraid of corporations that have many spies. I'm afraid of corporations that don't.[/say]")
 
-		saynn("He boldly walks up to you, his hand still holding a gun.")
+		saynn("He boldly walks up to you, his hand carefully positioned near his holster, just in case.")
 
-		saynn("[say=captain]I need agents. Not for AlphaCorp, no. For me. Agents that can get things done. Agents like you two. The war that's happening right now wasn't started by me or you. But we can try to make the best out of the situation.[/say]")
+		saynn("[say=captain]I need agents. Not for AlphaCorp, no. For me. Agents that can get things done. Agents like you two. The war that's happening right now wasn't started by me or you. But we can try to make the best out of the situation. We can write history.[/say]")
 
 		saynn("He looks at you specifically.")
 
-		saynn("[say=captain]You want freedom? You will get it. Credits? Sure, all of them. Sluts? I don't care. I can give you everything you want.[/say]")
+		saynn("[say=captain]You want freedom? You will get it. Credits? Sure, all of them. Sluts? I don't care. I can give you everything you want. I am a man of power. And power doesn't come cheap.[/say]")
 
 		saynn("Then he looks at Tavi.")
 
@@ -379,6 +536,27 @@ func _run():
 
 		saynn("[say=captain]All I'm asking back is loyalty. We can stop fighting, you and I. Once and for all. No more being a prisoner, no more sleeping in a cell, no more collars, no more abuse. You will be on my level. You will decide instead of being decided for. You will be my hands. And I will be your mind.[/say]")
 
+		saynn("He spreads his arms, like he wants to hug you.")
+
+		saynn("[say=captain]You went through fire and hell. And now, I'm giving you a chance to dig even deeper. What do you say?[/say]")
+
+		saynn("Tavi silently looks at you.")
+
+		addButton("Continue", "See what happens next", "the_choice")
+	if(state == "the_choice"):
+		saynn("And here you are, standing before your fate. You feel like this will decide everything.")
+
+		saynn("What do you choose? Do you accept this deal? Who knows what will happen if you don't..")
+
+		if (isCorrupt):
+			addDisabledButton("No", "Tavi is too corrupt for this")
+		else:
+			addButton("No", "Pure and simple no will do it", "choice_no")
+		addButton("Yes", "Accept to be captain's personal spy", "choice_yes")
+		if (isCorrupt):
+			addButton("Kill", "Let your corrupt Tavi have a say in this", "choice_kill")
+		else:
+			addDisabledButton("Kill", "Tavi is too pure for this")
 func taviSpeak(corruptSpeak, pureSpeak):
 	if(isCorrupt):
 		return corruptSpeak
@@ -403,10 +581,62 @@ func _react(_action: String, _args):
 	if(_action == "big_firstquestion"):
 		processTime(3*60)
 
+	if(_action == "just_came_to_fight"):
+		processTime(6*60)
+		GM.pc.addPain(-500)
+		GM.pc.addLust(-500)
+		GM.pc.addStamina(500)
+
+	if(_action == "start_fight"):
+		runScene("FightScene", ["captain"], "captain_fight")
+		return
+
+	if(_action == "lost_coma"):
+		GM.main.processTimeUntil(23*60*60)
+
+	if(_action == "wakeup_in_med"):
+		GM.main.startNewDay()
+		GM.pc.afterSleepingInBed()
+		GM.pc.removeAllRestraints()
+
+	if(_action == "wakeup_in_med_up"):
+		processTime(3*60)
+
 	if(_action == "won_word_battle"):
 		processTime(10*60)
 
+	if(_action == "the_choice"):
+		processTime(2*60)
+
+	if(_action == "choice_no"):
+		setFlag("TaviModule.Ch7NoEnding", true)
+		runScene("Ch7NoEndingScene")
+		endScene()
+		return
+
+	if(_action == "choice_yes"):
+		setFlag("TaviModule.Ch7YesEnding", true)
+		runScene("Ch7YesEndingScene")
+		endScene()
+		return
+
+	if(_action == "choice_kill"):
+		setFlag("TaviModule.Ch7KillEnding", true)
+		runScene("Ch7KillEndingScene")
+		endScene()
+
 	setState(_action)
+
+func _react_scene_end(_tag, _result):
+	if(_tag == "captain_fight"):
+		processTime(20 * 60)
+		var battlestate = _result[0]
+		
+		if(battlestate == "win"):
+			wonFight = true
+			setState("won_captain")
+		else:
+			setState("lost_captain")
 
 func saveData():
 	var data = .saveData()
@@ -415,6 +645,7 @@ func saveData():
 	data["isPure"] = isPure
 	data["isNormal"] = isNormal
 	data["isVirgin"] = isVirgin
+	data["wonFight"] = wonFight
 
 	return data
 
@@ -425,3 +656,4 @@ func loadData(data):
 	isPure = SAVE.loadVar(data, "isPure", false)
 	isNormal = SAVE.loadVar(data, "isNormal", false)
 	isVirgin = SAVE.loadVar(data, "isVirgin", false)
+	wonFight = SAVE.loadVar(data, "wonFight", false)
