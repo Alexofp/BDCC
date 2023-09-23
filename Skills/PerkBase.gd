@@ -22,6 +22,18 @@ func getSkillGroup():
 
 func getSkillTier():
 	return 0
+	
+func hiddenWhenLocked() -> bool:
+	return false
+	
+func hiddenWhenUnlocked() -> bool:
+	return false
+
+func toggleable() -> bool:
+	return true
+	
+func unlockable() -> bool:
+	return true
 
 func getPicture():
 	return "res://Images/Perks/upgrade.png"

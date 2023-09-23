@@ -10,8 +10,18 @@ func getVisibleName():
 func getVisibleDescription():
 	return "You don't experience a periodic desire to be bred. Only applies if you have a womb"
 
+func hiddenWhenLocked() -> bool:
+	return true
+
+func toggleable() -> bool:
+	return false
+	
+func unlockable() -> bool:
+	return false
+
 func getCost():
 	return 0
+	
 func getSkillTier():
 	return 0
 
