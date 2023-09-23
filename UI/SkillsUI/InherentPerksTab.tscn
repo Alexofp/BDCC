@@ -143,4 +143,5 @@ margin_bottom = 20.0
 size_flags_horizontal = 3
 text = "Toggle perk on/off"
 
+[connection signal="visibility_changed" from="." to="." method="_on_InherentPerksTab_visibility_changed"]
 [connection signal="pressed" from="ScrollContainer/VBoxContainer/HBoxContainer/PanelContainer2/VBoxContainer/HBoxContainer/TogglePerkButton" to="." method="_on_TogglePerkButton_pressed"]

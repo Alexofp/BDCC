@@ -17,17 +17,11 @@ func _ready():
 func updatePerks():
 	Util.delete_children(perksFlexGrid)
 
-	var allPerks = GlobalRegistry.getPerksIDsBySkill(Skill.Start) + GlobalRegistry.getPerksIDsBySkill(Skill.Inherent)
+	var allBasePerksIDs = GM.pc.getSkillsHolder().getVisibleBasePerksIDs()
 	
-	for perkID in allPerks:
+	for perkID in allBasePerksIDs:
 		var perk: PerkBase = GlobalRegistry.getPerk(perkID)
-		if(GM.pc.getSkillsHolder().hasPerkDisabledOrNot(perk.id)):
-			if(perk.hiddenWhenUnlocked()):
-				continue
-		else:
-			if(perk.hiddenWhenLocked()):
-				continue
-		
+
 		var perkButton = perkButtonScene.instance()
 		perksFlexGrid.add_child(perkButton)
 		perkButton.setPerk(perk)
@@ -67,5 +61,10 @@ func _on_TogglePerkButton_pressed():
 	updatePerkText()
 	
 func _on_Inherent_perks_visibility_changed():
+	if(visible):
+		updatePerks()
+
+
+func _on_InherentPerksTab_visibility_changed():
 	if(visible):
 		updatePerks()
