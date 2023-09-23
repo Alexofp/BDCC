@@ -2,6 +2,8 @@ extends Object
 class_name Skill
 
 const Start = "Start"
+const Inherent = "Inherent"
+
 const Combat = "Combat"
 
 const CumLover = "CumLover"

@@ -9,9 +9,19 @@ func getVisibleName():
 
 func getVisibleDescription():
 	return "You will never give birth to a hybrid. Others that are impregnated by your cum will never give birth to a hybrid either. Hybrid is a mix of two species"
+	
+func hiddenWhenLocked() -> bool:
+	return true
 
+func toggleable() -> bool:
+	return false
+	
+func unlockable() -> bool:
+	return false
+	
 func getCost():
 	return 0
+	
 func getSkillTier():
 	return 0
 

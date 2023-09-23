@@ -35,6 +35,13 @@ func updatePerks():
 		
 		if(perk.getSkillTier() != tierIndex):
 			continue
+			
+		if(GM.pc.getSkillsHolder().hasPerkDisabledOrNot(perk.id)):
+			if(perk.hiddenWhenUnlocked()):
+				continue
+		else:
+			if(perk.hiddenWhenLocked()):
+				continue
 		
 		var perkButton = perkButtonScene.instance()
 		flexGrid.add_child(perkButton)
