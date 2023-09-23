@@ -1,5 +1,7 @@
 extends SceneBase
 
+var tookRahi = false
+
 func _init():
 	sceneID = "Ch7NoEndingScene"
 
@@ -250,6 +252,264 @@ func _run():
 
 		saynn("[say=tavi]Oh yeah.. I think I got a better idea~. Give me his laptop.[/say]")
 
+		addButton("Continue", "See what happens next", "nova_talks_with_integrity")
+	if(state == "nova_talks_with_integrity"):
+		playAnimation(StageScene.Solo, "stand", {pc="nova"})
+		saynn("Less than half an hour later..")
+
+		saynn("[sayMale]Wait. Are you implying that the captain of BDCC has gone rogue? Who even are you?[/sayMale]")
+
+		saynn("Nova is standing in front of the laptop, watching the screen that displays a feed of some higher up. You and Tavi stay out of his sight.")
+
+		saynn("[say=nova]Yes. He killed one of the guards and was about to kill more. The guy went nuts. I'm one of the guards who managed to.. pacify and restrain him.[/say]")
+
+		saynn("[sayMale]What the hell is going on there? Why did he do that?[/sayMale]")
+
+		saynn("[say=nova]I don't know, the power must have finally come to his head.[/say]")
+
+		saynn("[sayMale]Alright, we will send a patrol vessel to check it out. Assuming this is not a joke. Because that would end badly for you.[/sayMale]")
+
+		saynn("[say=nova]You know.. I think you might want to send everyone you can..[/say]")
+
+		saynn("[sayMale]Why so?[/sayMale]")
+
+		saynn("[say=nova]There is some very interesting info on this laptop.. It's related to the failed android research initiative.. Seemingly failed.. I sent you a few files. But there is so much more here.. You better come see it yourself~.[/say]")
+
+		saynn("That's when Nova ends the conversation and closes the laptop. She looks at you two and smiles.")
+
+		saynn("[say=nova]You better start preparing~. They will arrive soon. I will get this asshole to the holding cell.[/say]")
+
+		saynn("Tavi nods and hugs her.")
+
+		addButton("Continue", "See what happens next", "near_hangar")
+	if(state == "near_hangar"):
+		removeCharacter("nova")
+		addCharacter("captain")
+		addCharacter("intro_detective")
+		aimCameraAndSetLocName("intro_nearcaptain")
+		playAnimation(StageScene.Solo, "stand", {pc="captain"})
+		tookRahi = getFlag("RahiModule.rahiMile8Happened")
+		saynn("Nova didn't lie, AlphaCorp squads began arriving one after one another not that long after. The hangar suddenly became a very busy place with spaceships flying in and out at a rapid pace. All the staff get questioned, offices get searched, computers checked, inmates get put into lockdown.")
+
+		saynn("Luckily, you and Tavi found a good spot to hide in before all that happened.. Behind some crates.. but with a great view of arriving ships. You were waiting for a very specific one.. Time passes.. You almost begin to miss having that collar on.")
+
+		var pcChildAmount = GM.CS.getChildrenAmountOf("pc")
+		if (pcChildAmount > 1):
+			saynn("You also stole all your kids from the nursery while you still could have.. Yes, all "+str(pcChildAmount)+" of them.. All of them are with you.")
+
+		elif(pcChildAmount == 1):
+			saynn("You also stole your kid from the nursery while you still could have.")
+
+		if (tookRahi):
+			addCharacter("rahi")
+			saynn("Rahi is also with you.. because.. obviously. She deserves to be here after everything you went through together.")
+
+			saynn("[say=rahi]Meow.. Thank you for grabbing me..[/say]")
+
+		saynn("[say=tavi]There! That's the one.[/say]")
+
+		saynn("A big luxurious vessel docks with the station. It's so large that it doesn't even fit into the hangar. It has to extend its docking port and let people in through it.")
+
+		saynn("[say=pc]Are you sure?[/say]")
+
+		saynn("[say=tavi]Yes~[/say]")
+
+		saynn("From that spaceship, 3 people descend. Someone who looks like a.. commander.. wearing an official AlphaCorp uniform.. that is white rather than dark blue. And behind him there are 2 officers. One of them looks very familiar..")
+
+		saynn("Meeting them.. are a few guards. But also the captain.. who is chained up.. and not particularly happy about it.")
+
+		saynn("[say=captain]Uncuff me at once! I will not tolerate such treatment of the powerful person on this station![/say]")
+
+		saynn("The commander cuts him off.")
+
+		saynn("[sayMale]You.. were.. the most powerful person. But not anymore.[/sayMale]")
+
+		saynn("[say=captain]Listen, I didn't do anything wrong. You're making a mistake. I gave you the names of inmates and staff who started this. They're responsible! Uncuff me![/say]")
+
+		saynn("[sayMale]Everyone will be questioned, don't worry. Justice might not happen fast. But it will happen eventually. For you.. it will happen now. Detective? I don't think we should drag this out for long. Let's just get it over with now.[/sayMale]")
+
+		saynn("One of his people.. a wolf.. steps in closer. The same wolf..")
+
+		saynn("[say=intro_detective]Right. Given the provided evidence and the additional evidence that was acquired after the full-station search was concluded.. the Intergalactic Court of Justice has found..[/say]")
+
+		saynn("The captain suddenly starts resisting, thrashing against his chains. But the guards hold him tight.")
+
+		saynn("[say=captain]NO! This isn't a court! You can't do this! There Must Be A Trial! I Demand One! SHUT UP.[/say]")
+
+		saynn("[say=intro_detective]The Intergalactic Court of Justice has found you guilty. Guilty of treason.. And a first degree murder. Your punishment.. indefinite sentence. You will be committed to the department of corrections shortly.[/say]")
+
+		saynn("[sayMale]Yes. Right now in fact. Shall we help with the intake procedure? I think we should before a new captain gets assigned. Someone here has brought a gag by the way?[/sayMale]")
+
+		saynn("Huh. That was.. quite fast. But the captain's.. ex-captain's.. story is only starting here.")
+
+		saynn("[say=captain]You.. you will all pay.[/say]")
+
+		saynn("[sayMale]Ridiculous how one man can be so smart.. and yet so dumb.[/sayMale]")
+
+		saynn("After that, he gets gagged by one of the officers before the whole little crowd leaves the hangar, probably to process the new inmate.")
+
+		saynn("[say=tavi]Now is our time~.[/say]")
+
+		if (tookRahi):
+			saynn("[say=rahi]Poor captain.. I kinda feel bad for him.[/say]")
+
+		saynn("Tavi pokes your shoulder and then points at the ship.. the big ship.. It's not even that unreasonably huge for three people.. but its yacht-like outline means it is very clunky to fit anywhere.. meaning there aren't any other ships landing or departing.. giving you plenty of time..")
+
+		addButton("Big ship", "Try to get on it", "big_ship")
+	if(state == "big_ship"):
+		playAnimation(StageScene.Duo, "stand", {npc="tavi"})
+		aimCameraAndSetLocName("intro_arrive")
+		removeCharacter("captain")
+		removeCharacter("intro_detective")
+		addCharacter("elena")
+		saynn("And so you quietly approach the big vessel, using crates to hide from any possible eyes. The docking port wasn't locked so you just follow it.. until you stumble upon the other end of it.. which is actually locked.")
+
+		saynn("[say=tavi]Elena?[/say]")
+
+		saynn("[say=elena]On it![/say]")
+
+		saynn("Tavi brings the projector sphere to the airlock's panel.. and seconds later it gets unlocked..")
+
+		saynn("[say=elena]Done![/say]")
+
+		saynn("The door opens.. revealing a rich interior. The floor beneath your feet is a mosaic of polished marbles, cool to the touch, with some intricate patterns. You start exploring.")
+
+		saynn("Plush cream leather sofas with sapphire-blue accents are placed in the main room. A single private cabin offers a king-sized bed and a spacious shower area.")
+
+		saynn("[say=tavi]Oh yeah.. Look at that..[/say]")
+
+		saynn("[say=pc]So over the top.[/say]")
+
+		saynn("[say=tavi]Yeah, we will be redecorating all of that.[/say]")
+
+		saynn("You step to the cabin. Tavi sits in the leather pilot chair and holds onto the ship's controls.")
+
+		if (tookRahi):
+			saynn("Rahi sits on one of the sofas.. and starts stroking her tail.")
+
+		saynn("[say=tavi]Elena.. Cut this ship from the network and give me the controls. We're finally free~.[/say]")
+
+		saynn("The ship's airlock gets locked again and the docking port gets retracted. Tavi carefully starts maneuvering it away from the station.. away from this whole mess.")
+
+		saynn("[say=elena]With pleasure, Tavi! Want me to put on some classical music?[/say]")
+
+		saynn("[say=tavi]Umm.. Nah. Just order a pizza~. What should they put on it, {pc.name}?[/say]")
+
+		if (tookRahi):
+			saynn("[say=rahi]I like tuna..[/say]")
+
+		addButton("Pepperoni", "Say this", "pizza_pep")
+		addButton("Mushrooms", "Say this", "pizza_mush")
+		addButton("Fish", "Say this", "pizza_fish")
+		addButton("Cheese", "Say this", "pizza_cheese")
+		addButton("Pineapple", "Say this", "pizza_pine")
+		if (tookRahi):
+			addButton("One tuna One cheese", "Say this", "pizza_tuna")
+	if(state == "pizza_tuna"):
+		saynn("[say=pc]I say.. Let's order two. One with tuna. And one with extra cheese.[/say]")
+
+		saynn("[say=rahi]Yay..[/say]")
+
+		saynn("[say=tavi]Spoiling the kitty already~? Fine, two pizzas sounds great.[/say]")
+
+		saynn("Tavi carefully avoids all the little asteroids that litter this space.. Until the ship escapes them completely.")
+
+		saynn("The view is amazing.. It might just look like a big black void with little white dots everywhere.. But now you can actually get to each one of them.. You're finally free.. Free to turn your dreams into reality.")
+
+		saynn("[b]THE END.[/b]")
+
+		saynn("[b]Escape Ending.[/b]")
+
+		addButton("Continue..", "See what happens to everyone..", "start_epilogues")
+	if(state == "pizza_pep"):
+		saynn("[say=pc]I say.. Pepperoni. I forgot how they taste by now.[/say]")
+
+		saynn("[say=tavi]Solid choice~.[/say]")
+
+		if (tookRahi):
+			saynn("[say=rahi]Yeah, kitty doesn't mind..[/say]")
+
+		saynn("Tavi carefully avoids all the little asteroids that litter this space.. Until the ship escapes them completely.")
+
+		saynn("The view is amazing.. It might just look like a big black void with little white dots everywhere.. But now you can actually get to each one of them.. You're finally free.. Free to turn your dreams into reality.")
+
+		saynn("[b]THE END.[/b]")
+
+		saynn("[b]Escape Ending.[/b]")
+
+		addButton("Continue..", "See what happens to everyone..", "start_epilogues")
+	if(state == "pizza_mush"):
+		saynn("[say=pc]I say.. Mushrooms. I forgot how they taste by now.[/say]")
+
+		saynn("[say=tavi]Couldn't say I would agree with you. But anything is better than what we were eating.[/say]")
+
+		if (tookRahi):
+			saynn("[say=rahi]Kitty doesn't mind mushrooms..[/say]")
+
+		saynn("Tavi carefully avoids all the little asteroids that litter this space.. Until the ship escapes them completely.")
+
+		saynn("The view is amazing.. It might just look like a big black void with little white dots everywhere.. But now you can actually get to each one of them.. You're finally free.. Free to turn your dreams into reality.")
+
+		saynn("[b]THE END.[/b]")
+
+		saynn("[b]Escape Ending.[/b]")
+
+		addButton("Continue..", "See what happens to everyone..", "start_epilogues")
+	if(state == "pizza_fish"):
+		saynn("[say=pc]I say.. Fish. I'd love a seafood pizza right about now.[/say]")
+
+		saynn("[say=tavi]Oh yeah, great choice~.[/say]")
+
+		if (tookRahi):
+			saynn("[say=rahi]Kitty likes fish..[/say]")
+
+		saynn("Tavi carefully avoids all the little asteroids that litter this space.. Until the ship escapes them completely.")
+
+		saynn("The view is amazing.. It might just look like a big black void with little white dots everywhere.. But now you can actually get to each one of them.. You're finally free.. Free to turn your dreams into reality.")
+
+		saynn("[b]THE END.[/b]")
+
+		saynn("[b]Escape Ending.[/b]")
+
+		addButton("Continue..", "See what happens to everyone..", "start_epilogues")
+	if(state == "pizza_cheese"):
+		saynn("[say=pc]I say.. cheese. Extra cheese. The more cheese, the better.[/say]")
+
+		saynn("[say=tavi]Oh my~. Yeah, let's do that.[/say]")
+
+		if (tookRahi):
+			saynn("[say=rahi]I love cheese..[/say]")
+
+		saynn("Tavi carefully avoids all the little asteroids that litter this space.. Until the ship escapes them completely.")
+
+		saynn("The view is amazing.. It might just look like a big black void with little white dots everywhere.. But now you can actually get to each one of them.. You're finally free.. Free to turn your dreams into reality.")
+
+		saynn("[b]THE END.[/b]")
+
+		saynn("[b]Escape Ending.[/b]")
+
+		addButton("Continue..", "See what happens to everyone..", "start_epilogues")
+	if(state == "pizza_pine"):
+		saynn("[say=pc]I say.. pineapple. Ever tried a pizza with pineapple?[/say]")
+
+		saynn("[say=tavi]Oh my, so gross~. Let's fucking do this.[/say]")
+
+		if (tookRahi):
+			saynn("[say=rahi]I think I will pass..[/say]")
+
+			saynn("[say=tavi]Aww, kitty. We will buy you a small tuna one. How about that?[/say]")
+
+			saynn("[say=rahi]Yay..[/say]")
+
+		saynn("Tavi carefully avoids all the little asteroids that litter this space.. Until the ship escapes them completely.")
+
+		saynn("The view is amazing.. It might just look like a big black void with little white dots everywhere.. But now you can actually get to each one of them.. You're finally free.. Free to turn your dreams into reality.")
+
+		saynn("[b]THE END.[/b]")
+
+		saynn("[b]Escape Ending.[/b]")
+
+		addButton("Continue..", "See what happens to everyone..", "start_epilogues")
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
@@ -270,4 +530,28 @@ func _react(_action: String, _args):
 		getCharacter("tavi").getInventory().removeItemFromSlot(InventorySlot.Neck)
 		GM.pc.getInventory().removeItemFromSlot(InventorySlot.Neck)
 
+	if(_action == "nova_talks_with_integrity"):
+		processTime(10*60)
+
+	if(_action == "near_hangar"):
+		processTime(60*60)
+		getCharacter("captain").getInventory().forceEquipStoreOtherUnlessRestraint(GlobalRegistry.createItem("inmatewristcuffs"))
+		getCharacter("captain").getInventory().forceEquipStoreOtherUnlessRestraint(GlobalRegistry.createItem("inmateanklecuffs"))
+
+	if(_action == "big_ship"):
+		processTime(3*60)
+		getCharacter("captain").resetEquipment()
+
 	setState(_action)
+
+func saveData():
+	var data = .saveData()
+
+	data["tookRahi"] = tookRahi
+
+	return data
+
+func loadData(data):
+	.loadData(data)
+
+	tookRahi = SAVE.loadVar(data, "tookRahi", false)
