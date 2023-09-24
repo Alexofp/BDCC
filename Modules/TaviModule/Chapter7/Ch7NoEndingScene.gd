@@ -297,7 +297,7 @@ func _run():
 		if (pcChildAmount > 1):
 			saynn("You also stole all your kids from the nursery while you still could have.. Yes, all "+str(pcChildAmount)+" of them.. All of them are with you.")
 
-		elif(pcChildAmount == 1):
+		elif (pcChildAmount == 1):
 			saynn("You also stole your kid from the nursery while you still could have.")
 
 		if (tookRahi):
@@ -510,6 +510,319 @@ func _run():
 		saynn("[b]Escape Ending.[/b]")
 
 		addButton("Continue..", "See what happens to everyone..", "start_epilogues")
+	if(state == "start_epilogues"):
+		playAnimation(StageScene.Solo, "stand", {pc="captainInmate"})
+		saynn("And so.. the two brave inmates found a way to escape from one of the most secure prisons in the entire galaxy while revealing a full truth about the man who created it.")
+
+		saynn("Mr. Wright, driven by his selfish goals, lost everything and became the inmate of his own prison. His creation, BDCC, got changed forever, receiving a new captain who immediately started reforming it into something better.")
+
+		saynn("And yet.. its occupants weren't happy about that. The careful balance of power thinly spread across all inmates and staff got disturbed, leading to more and more riots. New restrictions and regulations were introduced, cementing the idea that the guards and other staff members must always be above the inmates. It made sense on paper for that to be the case..")
+
+		saynn("Turns out.. even the staff members were supporting the idea of.. occasional power exchange. And Mr. Wright was taking full advantage of that, slowly making a name for himself..")
+
+		addButton("Nova", "See what happens to Nova", "ep_nova")
+	if(state == "ep_nova"):
+		playAnimation(StageScene.Solo, "stand", {pc="nova"})
+		saynn("After the captain's accusations, Nova got questioned. The legitimacy of her past parole was put under thorough check.")
+
+		saynn("And yet, nothing incriminating was found. All the records in the BDCC's database were fully clean and authentic. They say that Nova never had any jail time to begin with.")
+
+		saynn("More than that, there were records claiming that Nova had a few uncompleted salary payments stuck in the system. Accounting to exactly.. one million three hundred thousand and sixty nine credits.. a lot of records.")
+
+		saynn("After receiving that money, Nova finally decided to quit her work at BDCC and do something else with her life. She bought a personal space biodome in one of the popular galaxies and created her own little farm called Dawfort Creamery..")
+
+		addButton("Risha", "See what happens to Risha", "ep_risha")
+	if(state == "ep_risha"):
+		playAnimation(StageScene.Solo, "stand", {pc="risha"})
+		saynn("Luckily, the captain decided not to share his and Risha's little agreement. He used it to try and blackmail her.. but at the same time he knew that imprisoning Risha would only lead to more.. interactions with her.. unpleasant ones probably.")
+
+		saynn("And so Risha stayed as a guard at BDCC. The captain and rules have changed.. but her horniness didn't. She was only getting more eager now that any breeding was banned and punishable.")
+
+		saynn("Some say that she was the sole reason for mandatory chastity belt practice.. But that initiative was eventually canceled as it only led to decreased productivity and increased depression levels between staff and inmates..")
+
+		saynn("But Risha was happy. Even if she was losing sometimes, that was just making the moments when she gets to have fun that much more enjoyable.")
+
+		addButton("Skar", "See what happened to Skar..", "ep_skar")
+	if(state == "ep_skar"):
+		playAnimation(StageScene.Sleeping, "idle", {pc="skar", bodyState={naked=true}})
+		saynn("Medical.. A few minutes after the trigger was pulled.")
+
+		saynn("A few surgeons are frantically trying to remove the metal that got fuzed with his flesh.. but that proves to be hard. They have to basically cut parts of his burned flesh out and quickly replace it with some synthetic alternative.")
+
+		saynn("At the same time, another surgeon is replacing the remains of his heart with a prosthetic one before trying to get it running.")
+
+		saynn("Alex, the engineer, is watching the process behind the reinforced glass. Eliza is standing near.")
+
+		saynn("[say=alexrynard]Think they will save him?[/say]")
+
+		saynn("[say=eliza]His body? Easily. Everything but the head can be replaced. But it doesn't matter if his brain is too damaged.[/say]")
+
+		saynn("Skar's prosthetic heart receives a powerful shock through it from a defibrillator.. And then another one.. And another.")
+
+		saynn("[say=alexrynard]So I guess.. that's a no.[/say]")
+
+		saynn("[say=eliza]Every second without oxygen.. some memory within you dies. It could be what you ate for breakfast.. or your favorite color.. or your first awkward kiss.. or it could be the information about how to make your body breathe..[/say]")
+
+		saynn("The doctors keep shocking Skar's new heart.. and yet nothing changes. Some begin to give up already.")
+
+		saynn("[say=alexrynard]That's so.. unfair.[/say]")
+
+		saynn("[say=eliza]Who are we without our memories? Just husks. Skeletons with muscles and various tissues.[/say]")
+
+		saynn("Alex starts scratching his chin after Eliza mentions skeletons. The last surgeon stops trying to save Skar..")
+
+		saynn("[say=eliza]Everything ends eventually. At least he didn't suffer.[/say]")
+
+		saynn("[say=alexrynard]Wait.. I have an idea. We gotta try it.[/say]")
+
+		saynn("[say=eliza]Hm?[/say]")
+
+		saynn("[say=alexrynard]Trust me. Keep him there. I will be right back.[/say]")
+
+		addButton("Continue", "See what happens next", "skar_gets_saved")
+	if(state == "skar_gets_saved"):
+		playAnimation(StageScene.Sleeping, "idle", {pc="sentinelx", bodyState={naked=true}})
+		saynn("Alex returns with plenty of weird prototypes.. and a metal skeleton of a dead android. He rushes into the operating room and starts setting everything up. Eliza walks in, looking quite concerned.")
+
+		saynn("[say=eliza]What are you?..[/say]")
+
+		saynn("[say=alexrynard]Put this on his head.[/say]")
+
+		saynn("Alex gives Eliza some kind.. rough contraption.. that looks like some headphones.. but with way more wires and various electrodes.")
+
+		saynn("[say=eliza]I think you're about to do something very illegal.[/say]")
+
+		saynn("[say=alexrynard]Yeah. I'm about to cheat death.[/say]")
+
+		saynn("[say=eliza]Umm.. how?[/say]")
+
+		saynn("Alex swiftly attaches some wires to the dead android's ports. And then pulls out his datapad before quickly coding something.")
+
+		saynn("[say=alexrynard]In your hands is an old mindtester that was turned into a mindsaver. But now I'm turning it into a mindprogrammer.[/say]")
+
+		saynn("[say=eliza]What?[/say]")
+
+		saynn("[say=alexrynard]Just put it on his head.[/say]")
+
+		saynn("Eliza obeys, carefully placing the weird contraption on the Skar's head before attaching all the electrodes to his skin.")
+
+		saynn("[say=alexrynard]This android has a copy of Skar's mind. It's an old copy.. but I'm coding it to only transfer bits that went necrotic in his real brain.[/say]")
+
+		saynn("[say=eliza]He might not remember everything then.[/say]")
+
+		saynn("[say=alexrynard]Mhm. Worth a try, right?[/say]")
+
+		saynn("Alex quickly finishes programming and presses a button that starts some program.. That causes the contraption on Skar's head to start humming and send various little impulses to his brain.. in a very specific order.")
+
+		saynn("[say=alexrynard]The prototype provides enough electric impulses to jump-start a regeneration in his brain. But get ready to hit his heart again when the process reaches 100%.[/say]")
+
+		saynn("Alex shows Eliza his datapad that has some kind of progress bar on it. Eliza nods and grabs a defibrillator.")
+
+		saynn("[say=eliza]Got it.[/say]")
+
+		saynn("The process is slow.. but steady. It gets scary when the progress bar gets stuck at around 80%.. but eventually it progresses further..")
+
+		saynn("85.. 87.. 90.. 93.. 96.. 99.. 99.. 99.. 100!")
+
+		addButton("Hit it", "Try to save Skar", "skar_wakesup")
+	if(state == "skar_wakesup"):
+		playAnimation(StageScene.GivingBirth, "idle", {pc="skar", bodyState={naked=true}})
+		saynn("A powerful shock goes through Skar's lifeless body.. followed by a loud gasp!")
+
+		saynn("[say=skar]HHHhh..[/say]")
+
+		saynn("The whole room is silent.")
+
+		saynn("Alex and Eliza are watching Skar's mechanical heart start beating.. his lungs working. Skar opens his eyes.")
+
+		saynn("[say=eliza]Are you.. okay?[/say]")
+
+		saynn("Skar.. slowly shakes off the silly contraption off his head.. before sitting up.")
+
+		saynn("He looks around.. watches the surprised faces of Alex and Eliza.. then he looks down at his chest cavity.. which now has more metal than real flesh..")
+
+		saynn("[say=skar]Fuck..[/say]")
+
+		addButton("Continue", "See what happens next", "skar_epilogue")
+	if(state == "skar_epilogue"):
+		playAnimation(StageScene.Solo, "stand", {pc="skar"})
+		saynn("And so, Skar, gets a second chance at life.")
+
+		saynn("He tried to change. He really did. He quit BDCC. Moved to some quiet planet. Found a job as a librarian.")
+
+		saynn("Then.. One day a beautiful lady walks into his library.. Lady that he would start a family with.. Lady that would later make him a bunch of little cute pups.")
+
+		saynn("But.. he was missing something. He always was. And so eventually, he dropped everything.. And returned back to the frontlines.. As a soldier. To serve and fight not for his future.. but for the future of others.")
+
+		addButton("Alex Rynard", "See what happens with him", "ep_alex")
+	if(state == "ep_alex"):
+		playAnimation(StageScene.Solo, "stand", {pc="alexrynard"})
+		saynn("After the captain's ban of androids gets lifted, Alex immediately restarts all of the canceled or stopped projects. At first he had some problems with the law after saving Skar's life.. but soon AlphaCorp decides to drop any charges and instead offers him pretty much unlimited resources.")
+
+		saynn("Working with the machines.. He was happy. Alex was finally working on the projects of his life. And soon he saw results..")
+
+		saynn("Androids.. Mind-preservation.. Bluespace-powered portals.. the guy made several breakthroughs.")
+
+		saynn("His tech was powering the latest killing machines that were helping on the battlefield.. helping to preserve the lives of real soldiers.")
+
+		saynn("Sadly, he never received any credit for anything that he created. It all belonged.. to AlphaCorp. But every accidental death that was caused by his androids and unfinished prototypes.. it put a huge burden on him.")
+
+		saynn("He was trying to create a perfect reality.. but only found himself becoming more broken..")
+
+		addButton("Eliza", "See what happens to Eliza", "ep_eliza")
+	if(state == "ep_eliza"):
+		playAnimation(StageScene.Solo, "stand", {pc="eliza"})
+		saynn("Eliza, seeing no love from her mother, kept delving deeper and deeper into science.. searching for a perfect drug that would solve all her problems.. but never finding one.")
+
+		saynn("After the captain became one of the inmates.. nothing really changed for her. At first.. She just kept experimenting.. even if the range of tests got limited by quite a bit. Eventually, AlphaCorp decided to cancel any experiments that involve test subjects.. And that made Eliza protest.")
+
+		saynn("But.. Finding no support.. She had to quit.")
+
+		saynn("After BDCC, Eliza's mother reached out to her and invited her to work in her lab again.. And so she agreed.. eventually throwing out any great ideas out of her head and becoming an obedient harmless daughter that her mother always wanted her to be.")
+
+		if (tookRahi):
+			addButton("Rahi", "See what happened with Rahi", "ep_rahi")
+		else:
+			addButton("Jaxon", "See what happened with Jaxon", "ep_jaxon")
+	if(state == "ep_rahi"):
+		playAnimation(StageScene.Duo, ["holdpistol", "res://Inventory/UnriggedModels/Pistol/Pistol.tscn"], {pc="rahi", npc="rahiRabi"})
+		saynn("Just as you agreed upon, you and Rahi paid her home planet, Ahdomai, a visit. To tie up the loose ends..")
+
+		saynn("Finding her brother wasn't too hard. Pretty much every junkie in the world knew him.")
+
+		saynn("It's snowing.. just like that day. Rahi breathes in the cold air.. and slowly exhales.")
+
+		saynn("As her brother turns around the corner, Rahi aims a gun at him.")
+
+		saynn("[say=rahi]Missed me, little brother?[/say]")
+
+		saynn("His eyes go big. He tries back away.. but that's when he walks into your chest.. You yoink a gun that he has behind his belt and then shove him back.")
+
+		saynn("[say=rahiRabi]Rahi? I thought you..[/say]")
+
+		saynn("[say=rahi]Went away for good? Nah. You got me into a whole lotta trouble. But I pulled through. No thanks to you.[/say]")
+
+		saynn("[say=rahiRabi]Listen.. You share part of the blame too for what happened. But we can fix everything.[/say]")
+
+		saynn("As Rahi starts slowly stepping towards her brother, Rabi starts reaching for his gun.. the gun that's not there.")
+
+		saynn("[say=rahi]And how are you planning to do that.. my little brother..[/say]")
+
+		saynn("As Rahi cocks her revolver, Rabi suddenly drops to his knees and raises his paws.")
+
+		saynn("[say=rahiRabi]W-we.. l-listen.. j-just.. don't d-do it..[/say]")
+
+		saynn("Rahi walks up to Rabi real close.. and then puts a gun up against his head..")
+
+		saynn("[say=rahi]You can start with simple things. Use your words~.[/say]")
+
+		saynn("He goes through his pockets.. and finds a credit chip. He presents it to Rahi.")
+
+		saynn("[say=rahiRabi]T-this.. fifty key creds.. fifty thousand.. Five times more than we failed to rob.. Is that gonna be e-enough?[/say]")
+
+		saynn("Rahi shows her fangs.. and then grabs Rabi by his clothes.. She leans down closer and closer.. keeping an eye contact.. Her paw squeezing that revolver real tight, pulling attention from what the other one is doing..")
+
+		saynn("Rabi starts sobbing.")
+
+		saynn("[say=rahi]You know.. I was just looking for a simple.. sorry.[/say]")
+
+		saynn("[say=rahiRabi]Y-yes! I'm sorry! I really am. I'm sorry that it happened.[/say]")
+
+		saynn("Rahi's expression softens. She pulls the gun away from her brother's head..")
+
+		saynn("[say=rahi]Thanks. Keep these creds to yourself. I'm more than wealthy now.[/say]")
+
+		saynn("Rabi nods many times.")
+
+		saynn("[say=rahiRabi]Okay.. okay.. Sorry..[/say]")
+
+		saynn("[say=rahi]Take care, brother~.[/say]")
+
+		saynn("Rahi smiles and stands up before walking past him and towards you.")
+
+		saynn("[say=rahi]Let's go~.[/say]")
+
+		saynn("[say=rahiRabi]..fucking bitch..[/say]")
+
+		saynn("Rahi pretends she didn't hear it as you two walk away.")
+
+		saynn("[say=pc]We're not really that wealthy though. Could've used those 50k.[/say]")
+
+		saynn("Rahi giggles as opens her pocket.. revealing that it's stuffed full of similar chips.. At least twenty of them.")
+
+		saynn("[say=rahi]Yes, we're wealthy now~.[/say]")
+
+		saynn("And so now you can afford all of the tuna for Rahi.. thanks to her brother.")
+
+		addButton("Jaxon", "See what happened with Jaxon", "ep_jaxon")
+	if(state == "ep_jaxon"):
+		if (!getFlag("TaviModule.TaviKilledJaxon")):
+			playAnimation(StageScene.Solo, "stand", {pc="jaxontau"})
+			saynn("Jaxon returned to his family.. family who was very happy to see him alive after what happened to the Exodus research space station.")
+
+			saynn("But Jaxon wasn't happy. He kept trying to track Tavi down, seeking revenge for his brother. Or at least.. some kind of conclusion. Something.. rather than nothing..")
+
+			saynn("After years of pointless searching.. He finally gave up.. That day is when he saw a new email in his inbox. He opened it..")
+
+			saynn("[say=tavi]Hey. It's Tavi. I don't really know how to write these.. so I will just say.. I'm sorry. I can't say anything good about your brother.. But I won't say anything bad either. I know, this will probably get you angry.. but it pains me too.. not being able to express what I feel. It's a curse. I think I should be grateful. But how can a monster be grateful? Somehow you left me alive. I won't forget that. But you should try to forget me. Try to live.. Not asking you to give up. Just.. live.. You will have to carry your scars.. Just like me.[/say]")
+
+			saynn("Jaxon sighs.. and deletes it.")
+
+		else:
+			playAnimation(StageScene.Solo, "stand", {pc="tavi"})
+			saynn("Jaxon's wife, Jill, felt destroyed when she found out what happened to him. She decided not to tell the kids and instead only carried the full grief herself.")
+
+			saynn("She knew that it's a dangerous job.. But he convinced her.. Because of the credits that it would bring.. credits that would give their kids a chance at a good future.")
+
+			saynn("Sadly the credits that she was now earning alone weren't enough. Years were passing.. She did her best to pay for her kids' education.. But she was in the negatives all the time.")
+
+			saynn("Luckily, one day, she saw some random bill came in.. Bill that, for some reason, had a negative number on it. They were billed for -123456 credits. Jill thought it was some kind of error. But the credits were actually there, on her account.")
+
+			saynn("It was enough for everything.. almost everything.")
+
+		addButton("You", "What happens to you..", "ep_you")
+	if(state == "ep_you"):
+		playAnimation(StageScene.Duo, "stand", {npc="tavi"})
+		saynn("And you.. You and Tavi became bounty hunters. Forever criminals. But always acting fair. Your own personal codex is simple.. searching for any injustices in the world.. and fixing them. One by one. Always using the right tool for the right job."+str(" And Rahi is here with you too, always keeping you on track and offering her abilities. Meow." if tookRahi else "")+"")
+
+		saynn("Eventually, you track down every single person who was responsible for creating Tavi and her alikes.")
+
+		saynn("Did you kill them? No. The ones who stopped their research were left alone. Ones who didn't.. got their friendly reminders. Ones who ignored them.. saw Tavi in person. Seeing your product effortlessly stepping into your personal apartment.. changes your perspective quite quickly.")
+
+		saynn("Tavi knows she can't stop it. Dedicating the rest of her life to this constant battle.. It's not worth it. Not while you are there with her..")
+
+		addButton("Continue", "See what happens next", "ep_end")
+	if(state == "ep_end"):
+		playAnimation(StageScene.Duo, "sit", {npc="tavi"})
+		saynn("You sit on the sofa, eating a slice of pizza."+str(" Rahi does the same.. purring while doing so." if tookRahi else "")+" All the while your ship is flying through the vast nothingness. It's.. cool.")
+
+		saynn("Tavi looks at you and smiles.")
+
+		saynn("[say=tavi]What are you thinking about?[/say]")
+
+		saynn("[say=pc]Stuff.[/say]")
+
+		saynn("[say=tavi]So many possibilities, right? I think we should get some clothes.. better furniture.. better equipment.[/say]")
+
+		saynn("[say=pc]Yeah, you do that. I think I wanna rest.. At least for a little bit.[/say]")
+
+		saynn("She chuckles and scritches you under the chin.")
+
+		saynn("[say=tavi]Food made you sleepy~? Sure, dream away. I will get us where we need to be.[/say]")
+
+		saynn("You nod and continue consuming pizza. Your eyes slowly begin to close.. You lie down.."+str(" And let Rahi cuddle up to you" if tookRahi else "")+"")
+
+		saynn("You close your eyes.. And begin dreaming.")
+
+		saynn("- - - - - - - - - - -")
+
+		saynn("Thank you for completing BDCC.")
+
+		saynn("I hope you liked it <3")
+
+		saynn("You can close the game if you want. Or you can press the button and return back to the prison.")
+
+		addButton("Dream", "Broken dreams are still dreams. Heh.", "do_dream")
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
@@ -541,6 +854,22 @@ func _react(_action: String, _args):
 	if(_action == "big_ship"):
 		processTime(3*60)
 		getCharacter("captain").resetEquipment()
+
+	if(_action == "ep_rahi"):
+		getCharacter("rahi").getInventory().clearEquippedItems()
+		getCharacter("rahi").getInventory().forceEquipRemoveOther(GlobalRegistry.createItem("LeatherJacket"))
+
+	if(_action == "ep_jaxon"):
+		getCharacter("rahi").resetEquipment()
+
+	if(_action == "do_dream"):
+		GM.main.startNewDay()
+		GM.pc.afterSleepingInBed()
+		GM.pc.getInventory().forceEquipStoreOtherUnlessRestraint(GlobalRegistry.createItem("inmatecollar"))
+		getCharacter("tavi").resetEquipment()
+		GM.pc.setLocation(GM.pc.getCellLocation())
+		endScene()
+		return
 
 	setState(_action)
 
