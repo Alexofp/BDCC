@@ -1,0 +1,187 @@
+[gd_scene load_steps=39 format=2]
+
+[ext_resource path="res://Player/Player3D/Doll3D.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Player/StageScene3D/BaseStageScene3D.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Player/Props/platform.png" type="Texture" id=3]
+[ext_resource path="res://Player/StageScene3D/Scenes/Rekt.gd" type="Script" id=4]
+
+[sub_resource type="AnimationNodeAnimation" id=3]
+animation = "CuffedArms-loop"
+
+[sub_resource type="AnimationNodeBlend2" id=4]
+filter_enabled = true
+filters = [ "Doll3D/Skeleton:Arm.L", "Doll3D/Skeleton:Arm.R", "Doll3D/Skeleton:ForeArm.L", "Doll3D/Skeleton:ForeArm.R", "Doll3D/Skeleton:Hand.L", "Doll3D/Skeleton:Hand.R" ]
+
+[sub_resource type="AnimationNodeAnimation" id=24]
+animation = "RektEndIdle_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=25]
+animation = "RektEnd_1"
+
+[sub_resource type="AnimationNodeAnimation" id=26]
+animation = "RektIdle_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=27]
+animation = "RektStartIdle_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=28]
+animation = "RektStart_1"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=29]
+xfade_time = 0.1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=30]
+xfade_time = 0.1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=31]
+switch_mode = 2
+auto_advance = true
+xfade_time = 0.1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=32]
+xfade_time = 0.1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=33]
+xfade_time = 0.1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=34]
+xfade_time = 0.1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=35]
+switch_mode = 2
+auto_advance = true
+xfade_time = 0.1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=36]
+xfade_time = 0.1
+
+[sub_resource type="AnimationNodeStateMachine" id=37]
+states/RektEndIdle_1-loop/node = SubResource( 24 )
+states/RektEndIdle_1-loop/position = Vector2( 461, 412 )
+states/RektEnd_1/node = SubResource( 25 )
+states/RektEnd_1/position = Vector2( 461, 330 )
+states/RektIdle_1-loop/node = SubResource( 26 )
+states/RektIdle_1-loop/position = Vector2( 461, 245 )
+states/RektStartIdle_1-loop/node = SubResource( 27 )
+states/RektStartIdle_1-loop/position = Vector2( 461, 79 )
+states/RektStart_1/node = SubResource( 28 )
+states/RektStart_1/position = Vector2( 461, 162 )
+transitions = [ "RektStartIdle_1-loop", "RektStart_1", SubResource( 29 ), "RektStart_1", "RektStartIdle_1-loop", SubResource( 30 ), "RektStart_1", "RektIdle_1-loop", SubResource( 31 ), "RektIdle_1-loop", "RektStart_1", SubResource( 32 ), "RektIdle_1-loop", "RektEnd_1", SubResource( 33 ), "RektEnd_1", "RektIdle_1-loop", SubResource( 34 ), "RektEnd_1", "RektEndIdle_1-loop", SubResource( 35 ), "RektEndIdle_1-loop", "RektEnd_1", SubResource( 36 ) ]
+start_node = "RektStartIdle_1-loop"
+graph_offset = Vector2( -87, 48 )
+
+[sub_resource type="AnimationNodeBlendTree" id=38]
+graph_offset = Vector2( -156, 43.44 )
+nodes/Animation/node = SubResource( 3 )
+nodes/Animation/position = Vector2( 140, 280 )
+nodes/CuffsBlend/node = SubResource( 4 )
+nodes/CuffsBlend/position = Vector2( 440, 160 )
+nodes/StateMachine/node = SubResource( 37 )
+nodes/StateMachine/position = Vector2( 160, 120 )
+nodes/output/position = Vector2( 680, 180 )
+node_connections = [ "CuffsBlend", 0, "StateMachine", "CuffsBlend", 1, "Animation", "output", 0, "CuffsBlend" ]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=22]
+
+[sub_resource type="AnimationNodeAnimation" id=39]
+animation = "RektEndIdle_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=40]
+animation = "RektEnd_2"
+
+[sub_resource type="AnimationNodeAnimation" id=41]
+animation = "RektIdle_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=42]
+animation = "RektStartIdle_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=43]
+animation = "RektStart_2"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=44]
+xfade_time = 0.1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=45]
+xfade_time = 0.1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=46]
+switch_mode = 2
+auto_advance = true
+xfade_time = 0.1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=47]
+xfade_time = 0.1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=48]
+xfade_time = 0.1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=49]
+xfade_time = 0.1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=50]
+switch_mode = 2
+auto_advance = true
+xfade_time = 0.1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=51]
+xfade_time = 0.1
+
+[sub_resource type="AnimationNodeStateMachine" id=52]
+states/RektEndIdle_2-loop/node = SubResource( 39 )
+states/RektEndIdle_2-loop/position = Vector2( 520, 426 )
+states/RektEnd_2/node = SubResource( 40 )
+states/RektEnd_2/position = Vector2( 520, 339 )
+states/RektIdle_2-loop/node = SubResource( 41 )
+states/RektIdle_2-loop/position = Vector2( 520, 256 )
+states/RektStartIdle_2-loop/node = SubResource( 42 )
+states/RektStartIdle_2-loop/position = Vector2( 520, 87 )
+states/RektStart_2/node = SubResource( 43 )
+states/RektStart_2/position = Vector2( 520, 168 )
+transitions = [ "RektStartIdle_2-loop", "RektStart_2", SubResource( 44 ), "RektStart_2", "RektStartIdle_2-loop", SubResource( 45 ), "RektStart_2", "RektIdle_2-loop", SubResource( 46 ), "RektIdle_2-loop", "RektStart_2", SubResource( 47 ), "RektIdle_2-loop", "RektEnd_2", SubResource( 48 ), "RektEnd_2", "RektIdle_2-loop", SubResource( 49 ), "RektEnd_2", "RektEndIdle_2-loop", SubResource( 50 ), "RektEndIdle_2-loop", "RektEnd_2", SubResource( 51 ) ]
+start_node = "RektStartIdle_2-loop"
+graph_offset = Vector2( -14, 90 )
+
+[sub_resource type="AnimationNodeBlendTree" id=53]
+graph_offset = Vector2( -351.532, -34.3158 )
+nodes/Animation/node = SubResource( 3 )
+nodes/Animation/position = Vector2( 140, 280 )
+nodes/CuffsBlend/node = SubResource( 4 )
+nodes/CuffsBlend/position = Vector2( 440, 160 )
+nodes/StateMachine/node = SubResource( 52 )
+nodes/StateMachine/position = Vector2( 120, 120 )
+nodes/output/position = Vector2( 680, 180 )
+node_connections = [ "CuffsBlend", 0, "StateMachine", "CuffsBlend", 1, "Animation", "output", 0, "CuffsBlend" ]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=23]
+
+[node name="Rekt" instance=ExtResource( 2 )]
+script = ExtResource( 4 )
+
+[node name="Sprite3D" type="Sprite3D" parent="." index="0"]
+transform = Transform( 3, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.196641, -1.77462 )
+texture = ExtResource( 3 )
+region_enabled = true
+region_rect = Rect2( 1, 1, 1022, 62 )
+
+[node name="Doll3D" parent="." index="1" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00507566, 0, 0 )
+
+[node name="Doll3D2" parent="." index="2" instance=ExtResource( 1 )]
+transform = Transform( -1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00507566, 0, 0 )
+
+[node name="AnimationTree" type="AnimationTree" parent="." index="3"]
+tree_root = SubResource( 38 )
+anim_player = NodePath("../Doll3D/DollSkeleton/AnimationPlayer")
+parameters/CuffsBlend/blend_amount = 0
+parameters/StateMachine/playback = SubResource( 22 )
+
+[node name="AnimationTree2" type="AnimationTree" parent="." index="4"]
+tree_root = SubResource( 53 )
+anim_player = NodePath("../Doll3D2/DollSkeleton/AnimationPlayer")
+parameters/CuffsBlend/blend_amount = 0
+parameters/StateMachine/playback = SubResource( 23 )
+
+[editable path="Doll3D"]
+[editable path="Doll3D/DollSkeleton"]
+[editable path="Doll3D2"]
+[editable path="Doll3D2/DollSkeleton"]
