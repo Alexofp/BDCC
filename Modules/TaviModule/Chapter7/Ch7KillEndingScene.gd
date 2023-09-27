@@ -235,6 +235,141 @@ func _run():
 
 		saynn("Many explosions happen outside the station.. explosions that you don't hear. But there are also the ones that you do.. they shake the floor hard. You can already hear the fighting happening throughout the whole station.")
 
+		addButton("Follow", "Follow Tavi", "syndi_appears")
+	if(state == "syndi_appears"):
+		playAnimation(StageScene.Duo, "holdpistol", {npc="syndiMale", npcAction=["holdpistol", "res://Inventory/UnriggedModels/EnergyPistol/EnergyPistolRed.tscn"]})
+		aimCameraAndSetLocName("cd_last_intersection")
+		saynn("As you and Tavi step out of the captain's office.. You hear a weird crackling noise.. before a rift opens right in the middle of the corridor, blocking your path and absolutely destroying the carpet underneath.")
+
+		saynn("Seconds later, someone walks through it.. Someone very armored. Tavi whispers to you.")
+
+		saynn("[say=tavi]That's our chance..[/say]")
+
+		saynn("Oh. As he turns around, you see his helmet illuminating the corridor with green lighting coming from its visor. When he spots you and Tavi, he immediately reaches for his blaster..")
+
+		addButton("Shoot", "Shoot to kill", "pc_kills")
+	if(state == "pc_kills"):
+		playAnimation(StageScene.Solo, "firepistol")
+		saynn("Swiftly, you aim your energy gun and instinctively pull the trigger.. A bright flash.. followed by a painful scream.. and an armored body hitting the floor.")
+
+		saynn("Looks like you just took a life. It had to happen at some point, didn't it..")
+
+		saynn("Tavi runs up to the fallen Syndicate agent.. and grabs his gun before making sure he is dead.. by shooting him again point-blank.")
+
+		saynn("[say=tavi]Wait, what's this?[/say]")
+
+		saynn("Before moving on, Tavi crouches before him and fetches something from his wrist. A watch of sorts. Its screen displays a big 'Return' button with an icon of a portal.")
+
+		saynn("[say=tavi]Is it what I think it is?[/say]")
+
+		saynn("[say=pc]It must be how they are boarding us.[/say]")
+
+		saynn("More explosions happen all around you. Screams.. gunfire.. You know that nothing good is happening in the cellblock. But you don't really care either. There are bigger problems..")
+
+		saynn("Soon, another one of those rifts opens.. followed by a full squad of armored Syndicate agents jumping out of it.")
+
+		saynn("They immediately start shooting at you, causing you and Tavi to hide behind one of the pillars. You stick just your hand out and pull the trigger a few times.. Until you hear some collapsing far away. Your kill counter is rising a little too fast for your liking..")
+
+		saynn("[say=pc]We won't be able to kill a whole army.[/say]")
+
+		saynn("[say=tavi]Then.. Let's try to escape.[/say]")
+
+		saynn("Tavi presses the button on the Syndicate watch.. And seconds later a new bluespace rift opens right in front of you. Its positioning was a little off.. which meant it ate a huge chunk of the pillar that you were hiding behind.. leaving you with no cover.")
+
+		saynn("[say=tavi]JUMP![/say]")
+
+		saynn("Tavi jumps into the rift first.. Disappearing in it..")
+
+		saynn("Lasers are flying all around you.. Either it's a certain death.. or a not so certain one..")
+
+		addButton("Rift", "Jump into it", "jump_into_syndicate_ship")
+	if(state == "jump_into_syndicate_ship"):
+		aimCameraAndSetLocName("cd_syndiship")
+		playAnimation(StageScene.Duo, "firepistol", {npc="syndiFemale", npcAction="defeat"})
+		saynn("You jump through the rift a second before it closes.. ending up somewhere else..")
+
+		saynn("Red colors everywhere.. A distinct S symbol.. Yeah, it's a Syndicate ship. You and Tavi seem to be in some kind of teleporter room. In the middle of it is a rift generator attached to a computer.")
+
+		saynn("[say=tavi]Wow. Makes sense. The watch can't teleport on its own. It just talks with this huge ass machine.[/say]")
+
+		saynn("You must have been heard because seconds later two Syndicate agents walk in from another compartment. They certainly didn't expect to see you..")
+
+		saynn("Tavi kills one.. And you snipe the other.. adding another kill to your collection.")
+
+		saynn("[say=tavi]Let's see what kind of ship this is.[/say]")
+
+		saynn("You got so used to the same prison interiors.. That this looks genuinely exciting..")
+
+		addButton("Cockpit", "Explore the ship", "cockpick_tavi")
+	if(state == "cockpick_tavi"):
+		playAnimation(StageScene.Duo, "stand", {npc="tavi", npcAction="sit", npcBodyState={naked=true}})
+		saynn("The ship seems to be some kind of.. troops transporter. There are only 3 main rooms. A teleporter, a cockpit and a room with benches and empty shelves for equipment.")
+
+		saynn("You two enter the cockpit and.. wow.. you see the damaged space station with two giant fleets fighting around it. Syndicate ships are trying their best to destroy it while AlphaCorp ones are protecting it. You can't hear a single explosion through the vacuum of space.. But the view is truly incredible.")
+
+		saynn("[say=tavi]We got them riled up, huh? Serves them right.[/say]")
+
+		saynn("Tavi sits in the pilot's seat and starts inspecting the controls.")
+
+		saynn("[say=pc]Think you can fly it?[/say]")
+
+		saynn("[say=tavi]I will have to. Not the first time for me at least.[/say]")
+
+		saynn("She starts pressing random buttons and interacting with switches. All the while you observe the surroundings, hoping that the big ships won't take notice of your small one.")
+
+		saynn("When Tavi presses a button.. the ship's engines finally engage.. Allowing Tavi to start moving the ship.")
+
+		saynn("[say=tavi]Now let's get the fuck out of here.[/say]")
+
+		saynn("You're so close.. You can feel it. Tavi starts the process of warping..")
+
+		saynn("[say=tavi]Fuck, the rift generator needs to charge. The big one.[/say]")
+
+		saynn("Of course it does.")
+
+		saynn("[say=pc]How long?[/say]")
+
+		saynn("[say=tavi]About two minutes.[/say]")
+
+		saynn("[say=pc]We should be fine.[/say]")
+
+		saynn("The ship hums as it slowly routes all its energy to the rift generator.")
+
+		saynn("At the same time.. You begin to notice something. Syndicate's main ship.. A giant battle cruiser one.. Starts to charge its big cannon again.. aiming it at the station.")
+
+		saynn("[say=pc]You see that?[/say]")
+
+		saynn("[say=tavi]I do. And I don't care. Everyone on that station might as well die..[/say]")
+
+		saynn("[say=pc]Are you.. sure? There are some good people there.[/say]")
+
+		saynn("You two silently watch as the big ship prepares to fire. AlphaCorp's chances aren't looking too good in this battle.. They're clearly losing it, their ships get destroyed left and right.")
+
+		saynn("The ship's hum becomes louder and louder.. Less than a minute left before you can escape this hell..")
+
+		saynn("Tavi growls.. and then sighs.")
+
+		saynn("[say=tavi]Fine.. I already destroyed enough space stations for one life.. But how are we gonna save it?[/say]")
+
+		saynn("Gotta think quick.. You look around.. This ship doesn't have any weapons on it.. But it does have two rift generators..")
+
+		saynn("[say=pc]What if we.. Ram it.. At the right time.[/say]")
+
+		saynn("[say=tavi]..and die? I'm not ready to be a hero.[/say]")
+
+		saynn("[say=pc]We don't have to be ones..[/say]")
+
+		saynn("Tavi raises a brow.. and then smiles.")
+
+		saynn("[say=tavi]Sounds crazy enough. Let's fucking do this.[/say]")
+
+		saynn("Tavi grabs the ship's controls.. and starts flying it directly into the main Syndicate battleship. All the while the rift generator is still charging..")
+
+		addButton("Teleporter", "Go back to the teleporter room", "back_to_teleporter")
+	if(state == "back_to_teleporter"):
+		playAnimation(StageScene.Duo, "stand", {npc="tavi", npcBodyState={naked=true}})
+		saynn("You return back to the room with the teleporter. Tavi")
+
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
@@ -251,5 +386,14 @@ func _react(_action: String, _args):
 
 	if(_action == "tavi_calls_syndi"):
 		processTime(5*60)
+
+	if(_action == "syndi_appears"):
+		processTime(3*60)
+
+	if(_action == "cockpick_tavi"):
+		processTime(5*60)
+
+	if(_action == "back_to_teleporter"):
+		processTime(2*60)
 
 	setState(_action)
