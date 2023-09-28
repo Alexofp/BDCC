@@ -1,5 +1,7 @@
 extends SceneBase
 
+var tookRahi = false
+
 func _init():
 	sceneID = "Ch7KillEndingScene"
 
@@ -368,7 +370,172 @@ func _run():
 		addButton("Teleporter", "Go back to the teleporter room", "back_to_teleporter")
 	if(state == "back_to_teleporter"):
 		playAnimation(StageScene.Duo, "stand", {npc="tavi", npcBodyState={naked=true}})
-		saynn("You return back to the room with the teleporter. Tavi")
+		saynn("You rush back to the room with the teleporter. Tavi starts hacking away at the computer that is connected to the big machine.")
+
+		saynn("[say=tavi]But I'm not returning back to the station. Fuck that.[/say]")
+
+		saynn("The ship's autopilot starts beeping angrily from another compartment. Twenty seconds before the collision..")
+
+		saynn("[say=pc]We don't really have time to choose.[/say]")
+
+		saynn("[say=tavi]Giving up on your dreams already~?[/say]")
+
+		saynn("She masterfully navigates through all the menus.. copying a bluespace frequency of some other Syndicate ship nearby.. before plugging it in as coordinates..")
+
+		saynn("[say=pc]Are you sure that will work?[/say]")
+
+		saynn("[say=tavi]Frequency is the position in bluespace.. I think.. I hope.[/say]")
+
+		saynn("Ten.. Nine.. Eight.. Seven.. Six..")
+
+		saynn("[say=tavi]Be ready.[/say]")
+
+		saynn("[say=pc]Yes, I don't care.[/say]")
+
+		addButton("Rift", "See what's behind", "tp_to_other_ship")
+	if(state == "tp_to_other_ship"):
+		playAnimation(StageScene.Duo, "firepistol", {npc="syndiMale", npcAction="defeat"})
+		saynn("As soon as the small teleporter opens a rift in bluespace.. you instantly jump inside.. And instantly shoot everyone that you see, effortlessly taking the lives of three unsuspecting agents.")
+
+		saynn("Tavi joins you seconds after.")
+
+		saynn("[say=tavi]Wow.[/say]")
+
+		saynn("At least you're not in the cold space. You can breathe. This ship looks similar to the last one, also having its own teleporter.")
+
+		addButton("Continue", "See what happens next", "big_boom")
+	if(state == "big_boom"):
+		playAnimation(StageScene.Duo, "stand", {npc="tavi", npcBodyState={naked=true}})
+		saynn("You rush into this ship's cockpit.. And see your old ship smashing into the armor of the big Syndicate battleship, barely leaving a dent in it.")
+
+		saynn("[say=tavi]Uh..[/say]")
+
+		saynn("And then, a second later, a huge bluespace rift suddenly spawns right in the middle of it, tearing the frame in half..")
+
+		saynn("[say=tavi]Oh there we go.[/say]")
+
+		saynn("A giant blue explosion covers the whole battleship.. destroying it instantly.. It's like a new sun was born for a few seconds.. illuminating the whole battlefield.. including the bathered space station.. that got caught in between all of this crazy fighting.. but is still somehow in one piece.")
+
+		saynn("And then.. some time later.. the rift closes, taking a big part of the ship with it.. leaving empty space where there used to be metal.")
+
+		saynn("[say=tavi]Fuck me.. Did we do that?[/say]")
+
+		saynn("[say=pc]I think we did..[/say]")
+
+		saynn("You look at each other.. Tavi's gaze is glued to your lips.. She is so horny.. in more ways than one. But then something attacks your ship, rocking it.")
+
+		saynn("[say=tavi]Right.. We gotta get out of here.[/say]")
+
+		saynn("Tavi sits into the pilot's seat again and starts flying the Syndicate ship away, maneuvering it between all the asteroids. Some AlphaCorp ships try to chase you down.. but after charging the bluespace teleporter, you just fly through a rift that takes you to some random point in space..")
+
+		addButton("Continue", "See what happens next", "finally_freedom")
+	if(state == "finally_freedom"):
+		playAnimation(StageScene.Hug, "kiss", {npc="tavi", npcBodyState={naked=true}})
+		saynn("You look through the cockpit's glass.. at the empty space. Around you is.. nothing. No rocks.. No space stations.. No other ships.. Just vast empty space.")
+
+		saynn("[say=tavi]We're free. Hah..[/say]")
+
+		saynn("You both just realize how much you've been panting. The sounds of your hearts beating were hidden behind some kind of white noise.. But now there is nothing.. Freedom..")
+
+		saynn("[say=pc]That was.. crazy.[/say]")
+
+		saynn("[say=tavi]Was it~? I'd do that again if I could.[/say]")
+
+		saynn("You roll your eyes. Tavi hugs you and kisses you on the lips. She is still completely naked.. allowing you to feel her hard nips poking your chest.")
+
+		saynn("[say=pc]You're excited, I can feel that.[/say]")
+
+		saynn("[say=tavi]Let's fuck~. Right the fuck now~.[/say]")
+
+		saynn("And so.. You two start fucking right on that pilot chair.")
+
+		saynn("You're finally free.. Free to turn your dreams into reality.")
+
+		saynn("[b]THE END.[/b]")
+
+		saynn("[b]Violent Escape Ending.[/b]")
+
+		tookRahi = getFlag("RahiModule.rahiMile8Happened")
+		if (tookRahi):
+			addButton("Continue..", "See what happens to everyone..", "find_rahi")
+		else:
+			addButton("Continue..", "See what happens to everyone..", "start_epilogues")
+	if(state == "find_rahi"):
+		playAnimation(StageScene.Solo, "holdpistol")
+		saynn("After a passionate fuck, you finally start flying somewhere. Tavi is behind the controls.. while you get to watch.")
+
+		saynn("Suddenly you hear a noise in the teleporter room.. Yes, the same noise of a rift opening.")
+
+		saynn("[say=tavi]Fuck, did they track us already?[/say]")
+
+		saynn("[say=pc]I will go check it out.[/say]")
+
+		saynn("You hold the energy gun and start carefully stepping towards the teleporter room.. You look from behind the corner.. And see nothing. Just the old dead bodies of the Syndicate agents that you are yet to dispose of.")
+
+		saynn("Still, you stay cautious as you start searching the room for anything unusual.. until something fluffy tickles your foot as you walk past one of the benches!")
+
+		addButton("Aim!", "Whatever it is.. take aim", "actual_rahi")
+	if(state == "actual_rahi"):
+		addCharacter("rahi")
+		playAnimation(StageScene.Duo, "stand", {npc="rahi"})
+		saynn("You aim at the bench.. and see a brown fluffy tail sticking from underneath it. For some reason that tail feels very familiar.")
+
+		saynn("[say=pc]Kitty? Is that you?[/say]")
+
+		saynn("The tail instantly starts shaking.")
+
+		saynn("[say=rahi]D-don't kill me.. please..[/say]")
+
+		saynn("[say=pc]It's me, kitty. Get out of there. I won't hurt you.[/say]")
+
+		var rahiChildAmount = GM.CS.getChildrenAmountOf("rahi")
+		if (rahiChildAmount > 1):
+			saynn("You help Rahi get from under the bench. She is still wearing her inmate uniform and a collar around her neck. But.. you also notice her holding all her kittens and other cubs in her paws.. Yes, all "+str(rahiChildAmount)+" of them.. All of them are with her.. Somehow..")
+
+		elif (rahiChildAmount == 1):
+			saynn("You help Rahi get from under the bench. She is still wearing her inmate uniform and a collar around her neck. But.. you also notice her protecting her only cub in her paws..")
+
+		else:
+			saynn("You help Rahi get from under the bench. She is still wearing her inmate uniform and a collar around her neck.")
+
+		saynn("[say=pc]How did you..[/say]")
+
+		saynn("[say=rahi]I found a watch..[/say]")
+
+		saynn("Rahi shows you her wrist that has the Syndicate watch on it. Same one that you and Tavi used.")
+
+		saynn("[say=pc]Wow. What are the chances?[/say]")
+
+		saynn("[say=rahi]I found a few.. And was peeking just my head in.. Until I found a room with no bad people in it.. No alive bad people..[/say]")
+
+		saynn("Smart approach. Rahi hugs you.. tightly.. just when Tavi walks in.")
+
+		saynn("[say=tavi]Aw. Adorable.[/say]")
+
+		saynn("The brown kitty blushes deeply when she sees a naked horny feline.")
+
+		saynn("[say=rahi]Uh..[/say]")
+
+		saynn("[say=tavi]It's okay, I only bite bad kitties~.[/say]")
+
+		saynn("Rahi nods softly.")
+
+		saynn("[say=rahi]Where are we anyway..[/say]")
+
+		saynn("Tavi puts on a cunning smile. A smile that tells Rahi that she will stay with them no matter what.")
+
+		addButton("Continue..", "See what happens to everyone else..", "start_epilogues")
+	if(state == "start_epilogues"):
+		playAnimation(StageScene.Solo, "stand", {pc="captainInmate"})
+		saynn("And so.. the "+str("three" if tookRahi else "two")+" brave inmates found a way to escape from one of the most secure prisons in the entire galaxy.. while doing so with incredible style.")
+
+		saynn("Captain Wright, driven by his selfish goals, thought he could keep a tight leash on everyone around him. But, turns out, he wasn't ready when that leash suddenly began wrapping around his neck, choking him.")
+
+		saynn("His creation, BDCC, managed to survive through one of the biggest fleet fights between AlphaCorp and Syndicate. It was close.. Too close.. But the balance of power tipped to the other side when Syndicate's biggest battleship got miraculously destroyed by an unknown force.")
+
+		saynn("The prison survived the battle.. but the captain's office wasn't so lucky. His laptop was never recovered.. His body.. never found. His lies.. never uncovered. Only two people in the world know his current status. For everyone else.. Captain Wright is Missing In Action.. Stuck between being a brave hero who saved his station by sacrificing his own life and a biggest villain who sold the location of his station to Syndicate before promptly escaping with the credits.. both sides blissfully unaware that none of them are right..")
+
+		saynn("And so, BDCC had to close down because its position was compromised. Broken Dreams Correctional Center became no more. All of the inmates and surviving staff got moved to other prisons.. Prisons that don't try to cultivate the next best spies for its captains by letting inmates and staff breed each other. Normal.. prisons.. Boring ones where staff have all the power by default.")
 
 
 func _react(_action: String, _args):
@@ -396,4 +563,19 @@ func _react(_action: String, _args):
 	if(_action == "back_to_teleporter"):
 		processTime(2*60)
 
+	if(_action == "finally_freedom"):
+		processTime(5*60)
+
 	setState(_action)
+
+func saveData():
+	var data = .saveData()
+
+	data["tookRahi"] = tookRahi
+
+	return data
+
+func loadData(data):
+	.loadData(data)
+
+	tookRahi = SAVE.loadVar(data, "tookRahi", false)
