@@ -63,7 +63,7 @@ func playAnimation(animID, _args = {}):
 	else:
 		doll2.scale.x = -abs(doll2.scale.x)
 	
-	if(animID in ["crawl", "allfours"]):
+	if(animID in ["crawl", "allfours"] || (_args.has("further") && _args["further"])):
 		doll.transform.origin.x = 2.5
 	else:
 		doll.transform.origin.x = 1.5

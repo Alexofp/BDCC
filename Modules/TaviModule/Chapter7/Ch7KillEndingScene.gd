@@ -223,7 +223,7 @@ func _run():
 
 		saynn("Almost immediately, a loud siren activates throughout the whole station and all the lighting becomes red. Everything is shaking..")
 
-		saynn("[sayMale]WARNING. WARNING. THE STATION'S HULL IS RECEIVING DAMAGE. ENGINEERING STAFF MUST PREVENT DEPRESSURIZATION AT ALL COSTS.[/sayMale]")
+		saynn("[sayOther]WARNING. WARNING. THE STATION'S HULL IS RECEIVING DAMAGE. ENGINEERING STAFF MUST PREVENT DEPRESSURIZATION AT ALL COSTS.[/sayOther]")
 
 		saynn("[say=tavi]Is that enough of a confirmation, fucker?[/say]")
 
@@ -239,7 +239,7 @@ func _run():
 
 		addButton("Follow", "Follow Tavi", "syndi_appears")
 	if(state == "syndi_appears"):
-		playAnimation(StageScene.Duo, "holdpistol", {npc="syndiMale", npcAction=["holdpistol", "res://Inventory/UnriggedModels/EnergyPistol/EnergyPistolRed.tscn"]})
+		playAnimation(StageScene.Duo, "holdpistol", {npc="syndiMale", further=true, npcAction=["holdpistol", "res://Inventory/UnriggedModels/EnergyPistol/EnergyPistolRed.tscn"]})
 		aimCameraAndSetLocName("cd_last_intersection")
 		saynn("As you and Tavi step out of the captain's office.. You hear a weird crackling noise.. before a rift opens right in the middle of the corridor, blocking your path and absolutely destroying the carpet underneath.")
 
@@ -526,17 +526,269 @@ func _run():
 
 		addButton("Continue..", "See what happens to everyone else..", "start_epilogues")
 	if(state == "start_epilogues"):
-		playAnimation(StageScene.Solo, "stand", {pc="captainInmate"})
+		playAnimation(StageScene.Solo, "stand")
 		saynn("And so.. the "+str("three" if tookRahi else "two")+" brave inmates found a way to escape from one of the most secure prisons in the entire galaxy.. while doing so with incredible style.")
 
-		saynn("Captain Wright, driven by his selfish goals, thought he could keep a tight leash on everyone around him. But, turns out, he wasn't ready when that leash suddenly began wrapping around his neck, choking him.")
+		saynn("Captain Wright, driven by his selfish goals, thought he could keep a tight leash on everyone around him. But, turns out, he wasn't ready when that leash suddenly began wrapping around his neck and choking him.")
 
-		saynn("His creation, BDCC, managed to survive through one of the biggest fleet fights between AlphaCorp and Syndicate. It was close.. Too close.. But the balance of power tipped to the other side when Syndicate's biggest battleship got miraculously destroyed by an unknown force.")
+		saynn("His creation, BDCC, managed to survive through one of the biggest fleet fights between AlphaCorp and Syndicate. It was close.. Too close.. But the balance of power tipped to the right side when Syndicate's biggest battleship got miraculously destroyed by an unknown force.")
 
 		saynn("The prison survived the battle.. but the captain's office wasn't so lucky. His laptop was never recovered.. His body.. never found. His lies.. never uncovered. Only two people in the world know his current status. For everyone else.. Captain Wright is Missing In Action.. Stuck between being a brave hero who saved his station by sacrificing his own life and a biggest villain who sold the location of his station to Syndicate before promptly escaping with the credits.. both sides blissfully unaware that none of them are right..")
 
-		saynn("And so, BDCC had to close down because its position was compromised. Broken Dreams Correctional Center became no more. All of the inmates and surviving staff got moved to other prisons.. Prisons that don't try to cultivate the next best spies for its captains by letting inmates and staff breed each other. Normal.. prisons.. Boring ones where staff have all the power by default.")
+		saynn("BDCC had to be closed down because its position was compromised. Broken Dreams Correctional Center became no more. All of the inmates and surviving staff got moved to other prisons.. Prisons that don't try to cultivate the next best spies for its captains by letting inmates and staff breed each other. Normal.. prisons.. Boring ones where staff have all the power by default.")
 
+		addButton("Nova", "See what happens to Nova", "ep_nova")
+	if(state == "ep_nova"):
+		playAnimation(StageScene.Solo, "stand", {pc="nova"})
+		saynn("Nova managed to get through Syndicate's attack mostly unscarred. Her contraband armor set was probably the only one on the whole station that was able to withstand shots from energy weapons.")
+
+		saynn("She didn't try to be a hero and just defended the medical wing with a few other guards, allowing it to function even when the rest of the prison was already captured by the Syndicate.")
+
+		saynn("And so, for that, Nova got awarded with AlphaCorp's badge of honor, one of the highest awards that a soldier can receive. Nova didn't really care about some fancy pin.. but the hefty sum of credits that came with it certainly did.")
+
+		saynn("Now that the captain is gone.. Nova's secrets are gonna stay secrets. She can finally move on and do something else with her life.")
+
+		saynn("And so she bought a personal space biodome in one of the popular galaxies and created her own little farm called Dawfort Creamery.. A perfect little oasis.. One that you and Tavi would certainly visit from time to time.")
+
+		addButton("Risha", "See what happens to Risha", "ep_risha")
+	if(state == "ep_risha"):
+		playAnimation(StageScene.Solo, "stand", {pc="risha", bodyState={naked=true, hard=true, chains=[["normal", "neck", "scene", "farleft"]]}})
+		saynn("Seeing a challenge before her.. Risha happily accepted it and charged into battle.")
+
+		saynn("Armed with only her riot gear and a stun baton, she managed to bring a whole squad of Syndicate agents down.. but eventually she got wounded and captured. Syndicate took her as a prisoner of war with intent to exchange her for one of its people sometime in the future. But.. AlphaCorp wasn't that eager to do that.")
+
+		saynn("And so Risha remains in the hands of the Syndicate for now.. enslaved by them.. serving as an unwilling sextoy.")
+
+		saynn("But even in such a dare situation, there is always some.. wiggle room. Eventually, Risha got more and more trust from the Syndicate.. Slowly, she kept climbing the ranks.. rising from her breeding bitch position up to.. a breeding stud.")
+
+		saynn("Even after all that, Risha managed to find her place in the world. She was happy. She was still getting fucked and abused occasionally. But that was just making the moments when she gets to have fun that much more enjoyable.")
+
+		addButton("Skar", "See what happened to Skar..", "ep_skar")
+	if(state == "ep_skar"):
+		playAnimation(StageScene.Solo, "stand", {pc="skar"})
+		saynn("Skar got heavily wounded during the attack.. And even then, he kept fighting until AlphaCorp troops finally arrived. Because of him, way more inmates and staff have survived this attack.")
+
+		saynn("His wounds led to even more of his body parts and internal organs replaced with prosthetics. By this point.. he became more of a machine rather than a person.")
+
+		saynn("After BDCC stopped existing.. Skar had a choice. Quitting all of this and returning to a peaceful life.. Or staying a guard. Either way.. he didn't really fit anywhere. People call him a hero.. But how can a hero live a peaceful life? How can a hero be a pacifist?")
+
+		saynn("And so he chose to return back to the frontlines. And do what he does best.. follow orders, no matter how suicidal they might be. Did he enjoy violence? Nah, the guy was sick of it. But you can't stop the wars.. if you don't fight them. And AlphaCorp was happy to supply him with an endless supply of wars.")
+
+		addButton("Alex Rynard", "See what happens with him", "ep_alex")
+	if(state == "ep_alex"):
+		playAnimation(StageScene.Solo, "stand", {pc="alexrynard"})
+		saynn("In the heat of the battle, Alex manages to get to and repair Sentinel-X.. his most powerful creation. And that is what saved the core of the station from getting destroyed by Syndicate. After that Alex guided other engineers to repair the hull of the station while he himself masterfully controlled its vents systems to make sure the surviving staff and inmates had at least something to breathe.")
+
+		saynn("He never really trusted people. He much prefers machines for their lack of ability to lie. But during these critical moments, he had to work as a team. And he was good at it..")
+
+		saynn("Sadly, being a team leader means you don't really get much credit for your deeds. Seeing the monetary rewards that come with it, others lied about their contribution to this win.. And so Alex gave up trying to convince anyone and closed up completely.")
+
+		saynn("Yeah, he still tinkered with androids from time to time. But he could never convince AlphaCorp to restart all of his canceled projects. And without resources.. The best he could do is tinker.")
+
+		saynn("He was trying to create a perfect reality.. but only found himself becoming more broken..")
+
+		addButton("Eliza", "See what happens to Eliza", "ep_eliza")
+	if(state == "ep_eliza"):
+		playAnimation(StageScene.Solo, "stand", {pc="eliza"})
+		saynn("To say the least, the medical wing was a busy place during the attack.. There were a lot more wounded than there were hands to help them. Eliza had to prioritize.. picking certain lives over others.")
+
+		saynn("She felt awful. Not because of all the death and suffering.. but because she knew that she could have been more useful.. Eliza did some much science work.. And now, when the situation was testing her, there was nothing she could do.. other than bandaging and injecting people with simple painkillers.")
+
+		saynn("Her bloody paws were shaking by the end of it.. and that shiver never quite went away. She felt like she failed.. failed at what she set out to do in the first place. And so, after BDCC collapsed, she returned back to her mother's lab.. and became an obedient harmless daughter that her mother always wanted her to be.")
+
+		if (tookRahi):
+			addButton("Rahi", "See what happened with Rahi", "ep_rahi")
+		else:
+			addButton("Jaxon", "See what happened with Jaxon", "ep_jaxon")
+	if(state == "ep_rahi"):
+		playAnimation(StageScene.Duo, ["holdpistol", "res://Inventory/UnriggedModels/Pistol/Pistol.tscn"], {pc="rahi", npc="rahiRabi"})
+		saynn("Just as you agreed upon, you and Rahi paid her home planet, Ahdomai, a visit. To tie up some loose ends..")
+
+		saynn("Finding her brother wasn't too hard. Pretty much every junkie in the world knew him.")
+
+		saynn("It's snowing.. just like that day. Rahi breathes in the cold air.. and slowly exhales. You and Tavi managed to remove the collar from her neck.. but a phantom one is still making her rub her fur occasionally..")
+
+		saynn("As her brother turns around the corner, Rahi aims a gun at him.")
+
+		saynn("[say=rahi]Missed me, little brother?[/say]")
+
+		saynn("His eyes go big. He tries back away.. but that's when he walks into your chest.. You yoink a gun that he has behind his belt and then shove him back.")
+
+		saynn("[say=rahiRabi]Rahi? I thought you..[/say]")
+
+		saynn("[say=rahi]Went away for good? Nah. You got me into a whole lotta trouble. But I pulled through. No thanks to you.[/say]")
+
+		saynn("[say=rahiRabi]Listen.. You share part of the blame too for what happened. But we can fix everything.[/say]")
+
+		saynn("As Rahi starts slowly stepping towards her brother, Rabi starts reaching for his gun.. the gun that's not there.")
+
+		saynn("[say=rahi]And how are you planning to do that.. my little brother..[/say]")
+
+		saynn("As Rahi cocks her revolver, Rabi suddenly drops to his knees and raises his paws.")
+
+		saynn("[say=rahiRabi]W-we.. l-listen.. j-just.. don't d-do it..[/say]")
+
+		saynn("Rahi walks up to Rabi real close.. and then puts a gun up against his head..")
+
+		saynn("[say=rahi]You can start with simple things. Use your words~.[/say]")
+
+		saynn("He goes through his pockets.. and finds a credit chip. He presents it to Rahi.")
+
+		saynn("[say=rahiRabi]T-this.. fifty key creds.. fifty thousand.. Five times more than we failed to rob.. Is that gonna be e-enough?[/say]")
+
+		saynn("Rahi shows her fangs.. and then grabs Rabi by his clothes.. She leans down closer and closer.. keeping an eye contact.. Her paw squeezing that revolver real tight, pulling attention from what the other one is doing..")
+
+		saynn("Rabi starts sobbing.")
+
+		saynn("[say=rahi]You know.. I was just looking for a simple.. sorry.[/say]")
+
+		saynn("[say=rahiRabi]Y-yes! I'm sorry! I really am. I'm sorry that it happened.[/say]")
+
+		saynn("Rahi's expression softens. She pulls the gun away from her brother's head..")
+
+		saynn("[say=rahi]Thanks. Keep these creds to yourself. So much death is attached to them. I don't need blood money.[/say]")
+
+		saynn("Rabi nods many times.")
+
+		saynn("[say=rahiRabi]Okay.. okay.. Sorry..[/say]")
+
+		saynn("[say=rahi]Take care, brother~.[/say]")
+
+		saynn("Rahi smiles and stands up before walking past him and towards you.")
+
+		saynn("[say=rahiRabi]..fucking bitch..[/say]")
+
+		saynn("Rahi stops and looks at you.")
+
+		saynn("[say=rahi]Hm.. Give him his gun back. We don't need it either.[/say]")
+
+		saynn("[say=pc]Are you sure?[/say]")
+
+		saynn("Rahi nods. And so walk up to Rabi and toss his gun back to him.")
+
+		saynn("[say=rahiRabi]You're not as pure as you think, sister..[/say]")
+
+		saynn("Rabi waits for you to start leaving again.. then he slowly gets up.. and aims the weapon at Rahi's back.")
+
+		addButton("Continue", "See what happens next", "rahi_kills_rabi")
+	if(state == "rahi_kills_rabi"):
+		playAnimation(StageScene.Solo, ["firepistol", "res://Inventory/UnriggedModels/Pistol/Pistol.tscn"], {pc="rahi"})
+		saynn("A gunshot.. A gasp..")
+
+		saynn("You turn around and see Rabi holding onto his chest.. before collapsing onto the cold snow.. His dark blood creates a hot puddle around him. Rahi is still aiming her gun at him.. her paw shaking ever so slightly.")
+
+		saynn("[say=pc]You never forgave him, did you?[/say]")
+
+		saynn("[say=rahi]I did not.. But now it's over.[/say]")
+
+		saynn("Rahi chuckles while watching her dead brother..")
+
+		saynn("[say=rahi]Feels like I shot myself. My other self.[/say]")
+
+		saynn("[say=pc]Is that.. good?[/say]")
+
+		saynn("Rahi shrugs and finally lowers the gun.")
+
+		saynn("[say=rahi]It's liberating..[/say]")
+
+		saynn("You carefully embrace the feline and share some of your warmth with her. For some reason you feel her pockets being full of something..")
+
+		saynn("[say=pc]C'mon, let's get out of here before the police show up.[/say]")
+
+		saynn("[say=rahi]I stole all the credits that he had in his pockets.. Should I throw them out?..[/say]")
+
+		saynn("[say=pc]Well.. What would your father say?[/say]")
+
+		saynn("Rahi looks down at herself.")
+
+		saynn("[say=rahi]I'm keeping them..[/say]")
+
+		addButton("Jaxon", "See what happened with Jaxon", "ep_jaxon")
+	if(state == "ep_jaxon"):
+		if (!getFlag("TaviModule.TaviKilledJaxon")):
+			playAnimation(StageScene.Solo, "stand", {pc="jaxontau"})
+			saynn("Jaxon returned to his family.. family who was very happy to see him alive after what happened to the Exodus research space station.")
+
+			saynn("But Jaxon wasn't happy. He kept trying to track Tavi down, seeking revenge for his brother. Or at least.. some kind of conclusion. Something.. rather than nothing..")
+
+			saynn("After years of pointless searching.. He finally gave up.. That day is when he saw a new email in his inbox. He opened it..")
+
+			saynn("[say=tavi]Hey. It's Tavi. I'm alive.. and doing better than ever. Yes, I killed your brother. And I know that you are looking for me. I still stand by everything that I did. Listen, I understand. Family is important and all that. But c'mon, you will never track me down.. without me wanting that. Understand what I mean? You will never get the revenge that you seek, only more pain. So yeah, if you want my suggestion.. nah, fuck you. Do whatever you want, dude, you're older than me. If you wanna talk - let's talk. I can try to explain my actions, you can try to explain to me why I am a bad person. Or.. we can just wait until we both end up in hell. Sounds good? Good. Take care.[/say]")
+
+			saynn("Jaxon sighs.. and deletes it.")
+
+		else:
+			playAnimation(StageScene.Solo, "stand", {pc="tavi"})
+			saynn("Jaxon's wife, Jill, felt destroyed when she found out what happened to him. She decided not to tell the kids and instead only carried the full grief herself.")
+
+			saynn("She knew that it's a dangerous job.. But he convinced her.. Because of the credits that it would bring.. credits that would give their kids a chance at a good future.")
+
+			saynn("Sadly the credits that she was now earning alone weren't enough. Years were passing.. She did her best to pay for her kids' education.. But she was in the negatives all the time.")
+
+			saynn("Luckily, one day, she saw some random bill came in.. Bill that, for some reason, had a negative number on it. They were billed for -12345 credits. Jill thought it was some kind of error. But the credits were actually there, on her account.")
+
+			saynn("It was enough for some things.. enough to continue the struggle. Struggle that makes all of us stronger.. right?")
+
+		addButton("You", "What happens to you..", "ep_you")
+	if(state == "ep_you"):
+		playAnimation(StageScene.Duo, "stand", {npc="tavi", npcBodyState={naked=true}})
+		saynn("You and Tavi tracked down every single person who was involved in creating her. You tracked them down.. and killed them.. all of them. Guards and other miscellaneous staff got off mostly easy.. but all the scientists shared the same fate.")
+
+		saynn("Why? They knew exactly what they were doing. They share the blame with the director. Only makes sense for them to share the same consequences. End of story. Yeah, they cried and begged. But you know that under the right conditions, they would do it all again. For credits or for some other reason, it doesn't matter much.")
+
+		saynn("Yeah, there will be more weapons created like Tavi. But now they will think twice before committing to it. Not because Tavi will come after them. After getting her revenge, she couldn't care less about it.. but because history tends to repeat itself.")
+
+		saynn("And so.. after tying up all your loose ends.. you and Tavi became bounty hunters. You spy, kill, steal and blackmail people. Not because someone else orders you to.. but because it's fun. And pays well.")
+
+		saynn("Making the world a better place? Good luck with that. Life will get worse for you the more you do something for others. While others will always want more.. they will expect more. It only makes sense to be selfish. And enjoy life while it's given to you by whatever forces.")
+
+		if (tookRahi):
+			saynn("Eventually Rahi became like you. She was always a greedy cat deep inside. And so your views aligned pretty much perfectly.")
+
+		addButton("Continue", "See what happens next", "ep_end")
+	if(state == "ep_end"):
+		playAnimation(StageScene.Duo, "sit", {npc="tavi", npcBodyState={naked=true}})
+		saynn("You sit on one of the uncomfortable benches, eating a slice of pizza that you bought from one of the warp-throughs that don’t care about Syndicate ships."+str(" Rahi does the same.. purring while doing so." if tookRahi else "")+" The first pizza in.. forever. All the while your ship is flying through the vast nothingness. It's.. cool.")
+
+		saynn("Tavi looks at you and smiles. She is still naked, openly showing you her sexy body.")
+
+		saynn("[say=tavi]What are you thinking about?[/say]")
+
+		saynn("[say=pc]I wonder.. You said that bluespace frequency can be translated to a position in space, right?[/say]")
+
+		saynn("[say=tavi]Maybe. Big crystals can hijack a range of frequencies while only being on one themselves. But small ones.. yeah, they map one-to-one.[/say]")
+
+		saynn("[say=pc]Don't you remember the frequency of your old ship? The one with the backup of Elena?[/say]")
+
+		saynn("Tavi's eyes go big. She blinks many times.")
+
+		saynn("[say=pc]Heh. I think I know what we will do next.[/say]")
+
+		saynn("[say=tavi]It's probably docked to one of the AlphaCorp stations.[/say]")
+
+		saynn("[say=pc]We will need to prepare for a fight, yeah~.[/say]")
+
+		saynn("Tavi smiles.")
+
+		saynn("[say=pc]I think I will rest for now though.[/say]")
+
+		saynn("She chuckles and scritches you under the chin.")
+
+		saynn("[say=tavi]Food made you sleepy~? Sure, dream away. I will get us where we need to be.[/say]")
+
+		saynn("You nod and continue consuming pizza. Your eyes slowly begin to close.. You lie down.."+str(" And let Rahi cuddle up to you" if tookRahi else "")+"")
+
+		saynn("You close your eyes.. And begin dreaming.")
+
+		saynn("- - - - - - - - - - -")
+
+		saynn("Thank you for completing BDCC.")
+
+		saynn("I hope you liked it <3")
+
+		saynn("You can close the game if you want. Or you can press the button and return back to the prison.")
+
+		addButton("Dream", "Broken dreams are still dreams. Heh.", "do_dream")
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
@@ -565,6 +817,32 @@ func _react(_action: String, _args):
 
 	if(_action == "finally_freedom"):
 		processTime(5*60)
+
+	if(_action == "ep_risha"):
+		getCharacter("risha").getInventory().forceEquipStoreOtherUnlessRestraint(GlobalRegistry.createItem("inmatewristcuffs"))
+		getCharacter("risha").getInventory().forceEquipStoreOtherUnlessRestraint(GlobalRegistry.createItem("inmateanklecuffs"))
+		getCharacter("risha").getInventory().forceEquipStoreOtherUnlessRestraint(GlobalRegistry.createItem("inmatecollar"))
+		getCharacter("risha").getInventory().forceEquipStoreOtherUnlessRestraint(GlobalRegistry.createItem("ringgag"))
+		getCharacter("risha").getInventory().forceEquipStoreOtherUnlessRestraint(GlobalRegistry.createItem("blindfold"))
+
+	if(_action == "ep_skar"):
+		getCharacter("risha").resetEquipment()
+
+	if(_action == "ep_rahi"):
+		getCharacter("rahi").getInventory().clearEquippedItems()
+		getCharacter("rahi").getInventory().forceEquipRemoveOther(GlobalRegistry.createItem("LeatherJacket"))
+
+	if(_action == "ep_jaxon"):
+		getCharacter("rahi").resetEquipment()
+
+	if(_action == "do_dream"):
+		GM.main.startNewDay()
+		GM.pc.afterSleepingInBed()
+		GM.pc.getInventory().forceEquipStoreOtherUnlessRestraint(GlobalRegistry.createItem("inmatecollar"))
+		getCharacter("tavi").resetEquipment()
+		GM.pc.setLocation(GM.pc.getCellLocation())
+		endScene()
+		return
 
 	setState(_action)
 

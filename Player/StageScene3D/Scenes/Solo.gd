@@ -59,3 +59,10 @@ func canTransitionTo(_actionID, _args = []):
 	if(doll.getCharacterID() != firstDoll):
 		return false
 	return true
+
+func getChainPoint(_pointID):
+	if(_pointID == "farleft"):
+		return $FarLeft
+	if(_pointID == "farright"):
+		return $FarRight
+	return .getChainPoint(_pointID)

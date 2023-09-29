@@ -22,7 +22,7 @@ func _react(_action: String, _args):
 
 	if(_action == "stop_task"):
 		#getCharacter("rahi").resetEquipment()
-		endScene([])
+		endScene(["free"])
 		return
 
 	setState(_action)

@@ -36,7 +36,7 @@ func doStruggle(_pc, _minigame):
 	if(_handsFree && _armsFree):
 		text = "Because {user.name}'s hands are free {user.he} manages to just untie {user.his} blindfold."
 		damage = 1.0
-	elif(_armsFree):
+	elif(_handsFree):
 		text = "{user.name}'s hands are free but they are bound together so {user.name} has to awkwardly bend to reach the blindfold."
 		damage = 1.0
 		stamina = 5

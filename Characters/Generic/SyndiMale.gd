@@ -27,6 +27,7 @@ func createBodyparts():
 	breasts.size = -1
 	giveBodypartUnlessSame(breasts)
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("digilegs"))
+	giveBodypartUnlessSame(GlobalRegistry.createBodypart("anthroarms"))
 
 func createEquipment():
 	getInventory().equipItem(GlobalRegistry.createItemNoID("SyndiHelmet"))
