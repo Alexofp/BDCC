@@ -1237,6 +1237,15 @@ func hasBigBreasts():
 	else:
 		return false
 
+func isLactating():
+	if(!hasBodypart(BodypartSlot.Breasts)):
+		return false
+	var breasts: BodypartBreasts = getBodypart(BodypartSlot.Breasts)
+	var production: FluidProduction = breasts.getFluidProduction()
+	if(production == null):
+		return false
+	return production.shouldProduce()
+	
 func canBeMilked():
 	if(!hasBodypart(BodypartSlot.Breasts)):
 		return false
@@ -2039,6 +2048,12 @@ func getBodypartLewdDescriptionAndNameWithA(bodypartSlot):
 
 func isDynamicCharacter():
 	return false
+
+func canWearBreastPump():
+	if(getInventory().hasSlotEquipped(InventorySlot.UnderwearTop)):
+		return false
+	
+	return true
 
 func canWearStrapon():
 	if(hasPenis() && !isWearingChastityCage()):

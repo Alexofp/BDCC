@@ -38,6 +38,11 @@ enum {
 	OrderLickPussy,
 	OrderRimming,
 	
+	PutBreastPumpOnSub,
+	MilkingSubWithBreastPump,
+	RemoveBreastPumpFromSub,
+	SubMoos,
+	
 	GrindingFaceWithPussy,
 	DomsPussyGetsLicked,
 	

@@ -20,6 +20,111 @@ func getDomReaction(_reactionID, _sexEngine, _domInfo, _subInfo):
 	var domIsVeryMean = _domInfo.personalityScore({PersonalityStat.Mean:1.0})>0.7
 	
 	match(_reactionID):
+		SexReaction.PutBreastPumpOnSub:
+			var _canMilk = _subInfo.getChar().canBeMilked()
+			if(domIsAngry || domIsMean):
+				possible.append_array([
+					"Give me your stupid milk, now.",
+					"I will milk you until your tits are dry.",
+					"Shut up and let me put these on your tits.",
+					"Bitch, stop fucking resisting. I just need your milk.",
+					"Shut your mouth-hole and get milked already.",
+				])
+				if(!_canMilk):
+					possible.append_array([
+						"You're not lactating? I don't give a fuck! I need milk.",
+						"Where is the fucking milk, bitch?",
+						"Your tits are not lactating? I will make them!",
+					])
+			else:
+				if(_canMilk):
+					possible.append_array([
+						"I want some of that breast milk.",
+						"Check these out. Will empty your jugs in a second.",
+						"We don't want your breasts to itch from being so full, do we?",
+						"Just looking at those makes me thirsty.",
+						"You're lactating? I want some of that.",
+					])
+				else:
+					possible.append_array([
+						"Let's stimulate your breasts a little.",
+						"Maybe some milk will come out if I stimulate your tits long enough.",
+						"You're not lactating, I know. I just wanna make you feel good.",
+						"Let's get your nipples nice and hard.",
+						"Shame that you're not lactating. But we can still try.",
+					])
+		SexReaction.RemoveBreastPumpFromSub:
+			var _canMilk = _subInfo.getChar().canBeMilked()
+			var _isLactating = _subInfo.getChar().isLactating()
+			if(domIsAngry || domIsMean):
+				if(_isLactating):
+					possible.append_array([
+						"Yeah, yeah, yeah. Shut up. Your milk is mine now.",
+						"I will enjoy drinking this, bitch.",
+						"Thank you for being a good slutty cow, you whore.",
+						"What? Your udders needed to be milked. I'm waiting for a thank you.",
+					])
+				else:
+					possible.append_array([
+						"Where is my milk, whore!?",
+						"Still not lactating? What a fucking joke of a chest you have.",
+						"How are your tits still dry?!",
+						"I give up. Someone should fucking breed you already.",
+						"Come back when you're lactating, whore.",
+					])
+			else:
+				if(_isLactating):
+					possible.append_array([
+						"Thank you for the milk.",
+						"I will be taking those back, thank you.",
+						"Nice~. Something for me to drink.",
+						"Thank you for being such a good cow.",
+						"Thanks. Your breast milk is mine now.",
+					])
+				else:
+					possible.append_array([
+						"Still not lactating? Shame.",
+						"It was worth a try.",
+						"At least your tits got stimulated.",
+						"Did you like that?",
+					])
+		SexReaction.MilkingSubWithBreastPump:
+			var _canMilk = _subInfo.getChar().canBeMilked()
+			var _isLactating = _subInfo.getChar().isLactating()
+			if(domIsAngry || domIsMean):
+				if(_isLactating):
+					possible.append_array([
+						"Start mooing, whore.",
+						"Moo like a good cowslut.",
+						"Milking sluts is so fun.",
+						"What a whore. Getting milked with pumps.",
+					])
+				else:
+					possible.append_array([
+						"Stupid bitch, start lactating already.",
+						"I don't care. I'm gonna milk you.",
+						"Still no milk? Such a greedy bitch.",
+						"Give me milk already like a good cow.",
+					])
+			else:
+				if(_isLactating):
+					possible.append_array([
+						"Moo like a good cow for me.",
+						"Doesn't that feel nice? Getting milked all day..",
+						"Feels nice to have your breasts milked, right?",
+						"Look at them pumps working. So nice.",
+						"These pumps are working on your tits so nicely.",
+						"If you moo, your milk will taste better..",
+					])
+				else:
+					possible.append_array([
+						"No milk? You can still moo for me. Maybe that will help.",
+						"Feels nice to have your breasts stimulated, right?",
+						"Look at them pumps working. So nice.",
+						"These pumps are working on your tits so nicely.",
+						"Do you like that?",
+					])
+		
 		SexReaction.OrderRimming:
 			if(domIsAngry || domIsMean):
 				possible.append_array([
@@ -494,6 +599,138 @@ func getSubReaction(_reactionID, _sexEngine, _domInfo, _subInfo):
 	var possible = []
 	
 	match(_reactionID):
+		SexReaction.PutBreastPumpOnSub:
+			var _canMilk = _subInfo.getChar().canBeMilked()
+			var _isLactating = _subInfo.getChar().isLactating()
+			if(_subInfo.fetishScore({Fetish.Lactation: 1.0}) < 0.0 && !subIsResisting):
+				possible.append_array([
+					"I don't really like milking..",
+					"Hey. Don't put this on me!",
+					"Don't milk me, I don't like it..",
+				])
+				if(_isLactating):
+					possible.append_array([
+						"I have milk but I don't like being milked..",
+						"Having milk doesn't mean I'm into being a cow..",
+					])
+			else:
+				if(subIsResisting):
+					possible.append_array([
+						"Fuck off with your breast pumps!",
+						"Hey, take these off, fucker!",
+						"Don't touch my nipples, bitch!",
+						"I will shove these up your ass!",
+						"I'm not a fucking cow, fuck off!",
+					])
+					if(_isLactating):
+						possible.append_array([
+							"Don't you fucking dare steal my milk!",
+							"My milk is not for you to steal, fucker!",
+							"Don't you dare steal my breast milk, bitch!",
+							"Fucking weirdo, my milk is not for you!",
+						])
+				else:
+					possible.append_array([
+						"Ah.. What is this.. Breast pumps?..",
+						"You wanna try to milk me?.. Like I'm a cow?..",
+						"It's a bit embarrassing..",
+						"These will milk me? Wow..",
+					])
+					if(_isLactating):
+						possible.append_array([
+							"My breasts are itching already..",
+							"I do have some milk..",
+						])
+		SexReaction.RemoveBreastPumpFromSub:
+			var _canMilk = _subInfo.getChar().canBeMilked()
+			var _isLactating = _subInfo.getChar().isLactating()
+			if(_subInfo.fetishScore({Fetish.Lactation: 1.0}) < 0.0 && !subIsResisting):
+				possible.append_array([
+					"I didn't really enjoy it.. Sorry..",
+					"Please don't do this again.",
+					"Finally..",
+				])
+				if(_isLactating):
+					possible.append_array([
+						"Finally.. You're happy with my milk?..",
+					])
+			else:
+				if(subIsResisting):
+					possible.append_array([
+						"Fucking finally..",
+					])
+					if(_isLactating):
+						possible.append_array([
+							"Fucking milk thief..",
+							"Enjoy my milk, you fucker..",
+							"Hope you choke on it..",
+						])
+				else:
+					possible.append_array([
+						"That was very embarrassing..",
+					])
+					if(_isLactating):
+						possible.append_array([
+							"What are you gonna do with my milk?..",
+							"You're not gonna give it to me?..",
+							"Enjoy the milk..",
+							"I felt like a cow..",
+						])
+		SexReaction.MilkingSubWithBreastPump:
+			var _canMilk = _subInfo.getChar().canBeMilked()
+			var _isLactating = _subInfo.getChar().isLactating()
+			if(_subInfo.fetishScore({Fetish.Lactation: 1.0}) < 0.0 && !subIsResisting):
+				possible.append_array([
+					"I don't like this..",
+					"Please turn them off..",
+					"Please take them off my chest.",
+				])
+				if(_isLactating):
+					possible.append_array([
+						"My nipple are leaking.. doesn't mean I like it..",
+						"How much longer are you gonna milk me?",
+					])
+			else:
+				if(subIsResisting):
+					possible.append_array([
+						"Take them off already!",
+						"Stop trying to milk me!",
+						"I'm not a cow!",
+						"Turn them off, now!",
+						"How do I turn them off.",
+						"I will shake them off if I have to.",
+					])
+					if(_isLactating):
+						possible.append_array([
+							"Stop stealing my milk, fucker!",
+							"It's my milk, not yours!",
+							"Milk yourself instead!",
+						])
+				else:
+					possible.append_array([
+						"This feels so strange..",
+						"I can feel the pumps tugging on my nips..",
+						"Ah.. my nips..",
+					])
+					if(_isLactating):
+						possible.append_array([
+							"I can see the milk flowing.. So strange..",
+							"My tits are being drained of all their milk..",
+							"I'm being milked like a cow..",
+						])
+		
+		
+		SexReaction.SubMoos:
+			possible.append_array([
+				"Moo..",
+				"Moo~..",
+				"Moo-o!",
+				"Moo. Moo-o..",
+				"Moo?.. Moo..",
+				"Ah.. Moo..",
+				"Moooo~..",
+			])
+		
 		SexReaction.OrderRimming:
 			if(_subInfo.fetishScore({Fetish.RimmingGiving: 1.0}) < 0.0):
 				possible.append_array([

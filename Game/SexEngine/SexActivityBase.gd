@@ -47,7 +47,14 @@ func clearSexEngineRefAndParticipants():
 	subInfo = null
 
 func endActivity():
+	if(!hasEnded):
+		hasEnded = true
+		onActivityEnd()
+	
 	hasEnded = true
+
+func onActivityEnd():
+	pass
 
 func getGoals():
 	return {}
@@ -256,6 +263,9 @@ func domReaction(reactionID, chance = 100):
 	
 	if(chance >= 100 || RNG.chance(chance)):
 		return getDom().getVoice().getDomReaction(reactionID, getSexEngine(), domInfo, subInfo)
+
+func getAnimationPriority():
+	return 10
 
 func getAnimation():
 	return null

@@ -18,6 +18,7 @@ const TieUp = "TieUp"
 
 const RimSub = "RimSub"
 const RimmingReceive = "RimmingReceive"
+const MilkWithBreastPump = "MilkWithBreastPump"
 
 
 # Subgoals, these don't need classes defined

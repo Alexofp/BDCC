@@ -933,6 +933,12 @@ func getDebugActions():
 			]
 		},
 		{
+			"id": "lactatePC",
+			"name": "Make PC lactate",
+			"args": [
+			]
+		},
+		{
 			"id": "resetPCPerks",
 			"name": "Reset picked perks",
 		},	
@@ -1059,6 +1065,10 @@ func doDebugAction(id, args = {}):
 			runScene("ChangeSkinScene", [args["cnpcID"], true])
 		else:
 			runScene("ChangeSkinScene", [args["npcID"], true])
+			
+	if(id == "lactatePC"):
+		GM.pc.induceLactation()
+		GM.pc.getBodypart(BodypartSlot.Breasts).getFluidProduction().fillPercent(1.0)
 
 func consoleSetFlagBool(flagID, valuestr):
 	var value = false

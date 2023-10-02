@@ -16,6 +16,7 @@ enum {
 	VaginaPenetrated,
 	AnusPenetrated,
 	HavingSex,
+	BreastsUsed,
 }
 
 static func getAllStrings():
@@ -34,4 +35,5 @@ static func getAllStrings():
 		"VaginaPenetrated",
 		"AnusPenetrated",
 		"HavingSex",
+		"BreastsUsed",
 	]
