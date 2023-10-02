@@ -103,7 +103,7 @@ func _run():
 		addButton("Attack Eliza", "She did this.. She must pay..", "attack_eliza")
 		addButton("Leash Tavi", "Grab Tavi's leash and leave this place..", "grab_the_leash")
 	if(state == "grab_the_leash"):
-		playAnimation(StageScene.Duo, "stand", {npc="tavi", npcAction="allfours", npcBodyState={naked=true}})
+		playAnimation(StageScene.Duo, "stand", {npc="tavi", npcAction="allfours", further=true, npcBodyState={naked=true, leashedBy="pc"}})
 		saynn("You can't really fix anything now. So might as well just go with the flow.")
 
 		saynn("As you fetch the leash from Eliza, Tavi is already crawling up to you, her snout rubbing against your {pc.masc} thigh.")
@@ -124,6 +124,7 @@ func _run():
 
 		addButton("Follow", "See where Eliza brings you", "follow_to_lobby")
 	if(state == "follow_to_lobby"):
+		playAnimation(StageScene.Duo, "walk", {npc="tavi", npcAction="crawl", flipNPC=true, npcBodyState={naked=true, leashedBy="pc"}})
 		removeCharacter("eliza")
 		aimCameraAndSetLocName("med_lobbynw")
 		saynn("Eliza brings you out into the lobby. Leashed Tavi is crawling by your side, catching many gazes from the random nurses. And she doesn't seem.. uncomfortable.")
@@ -158,6 +159,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "tavi_in_cellblock")
 	if(state == "tavi_in_cellblock"):
+		playAnimation(StageScene.Duo, "walk", {npc="tavi", npcAction="crawl", flipNPC=true, npcBodyState={naked=true, leashedBy="pc"}})
 		aimCameraAndSetLocName("hall_mainentrance")
 		saynn("You walk Tavi into the main hall. The checkpoint guard laughs when he sees her crawling past him. But hearing her hiss at him catches him off-guard. Huh.")
 
@@ -391,7 +393,7 @@ func _run():
 		addButton("Leash her", "Put Tavi on a leash", "leash_tavi_after_eliza_fuck")
 	if(state == "leash_tavi_after_eliza_fuck"):
 		removeCharacter("eliza")
-		playAnimation(StageScene.Duo, "stand", {npc="tavi", npcAction="allfours", npcBodyState={naked=true}})
+		playAnimation(StageScene.Duo, "stand", {npc="tavi", npcAction="allfours", further=true, npcBodyState={naked=true, leashedBy="pc"}})
 		aimCameraAndSetLocName("med_lobbynw")
 		setFlag("TaviModule.Ch5ElizaGotTortured", true)
 		saynn("Since she wants it so much.. Sure. You grab the leash and clip to Tavi's collar, causing her to start purring. This machine sure did mess with her mind..")
