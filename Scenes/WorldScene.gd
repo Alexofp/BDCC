@@ -98,6 +98,7 @@ func _react(_action: String, _args):
 		#runScene("GenericSexScene", ["pc", "rahi"])
 		#runScene("GenericSexScene", ["rahi", "pc"])
 		runScene("GenericSexScene", ["nova", "pc"])
+		#runScene("GenericSexScene", ["pc", "nova"])
 		#if(RNG.chance(50)):
 		#	runScene("GenericSexScene", ["nova", "pc"])
 		#else:

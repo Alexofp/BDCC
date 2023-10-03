@@ -9,8 +9,14 @@ func getVisibleName():
 func getGoals(_sexEngine, _domFetishHolder, _dom, _sub):
 	var possible = []
 	
-	if(_sub.canBeMilked()):
+	if(_sub.canBeMilked() || _sub.hasBigBreasts()):
 		possible.append(SexGoal.MilkWithBreastPump)
+	if(_sub.hasNonFlatBreasts()):
+		possible.append(SexGoal.GropeBreasts)
+	#if(_sub.canBeMilked()):
+	#	possible.append(SexGoal.BreastFeedOnSub)
+	#if(_dom.canBeMilked()):
+	#	possible.append(SexGoal.BreastFeedSub)
 	
 	return possible
 

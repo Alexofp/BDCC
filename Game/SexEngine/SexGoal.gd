@@ -22,6 +22,9 @@ const ChokeSexAnal = "ChokeSexAnal"
 const RimSub = "RimSub"
 const RimmingReceive = "RimmingReceive"
 const MilkWithBreastPump = "MilkWithBreastPump"
+const GropeBreasts = "GropeBreasts"
+const BreastFeedOnSub = "BreastFeedOnSub"
+const BreastFeedSub = "BreastFeedSub"
 
 
 # Subgoals, these don't need classes defined

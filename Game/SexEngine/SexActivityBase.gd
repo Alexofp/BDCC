@@ -300,15 +300,15 @@ func isHandlingSubOrgasms():
 func isHandlingDomOrgasms():
 	return getDomOrgasmHandlePriority() >= getSexEngine().getCurrentActivitiesMaxDomOrgasmHandlePriority(domID, subID)
 
-func getGenericOrgasmData(isSub):
+func getGenericOrgasmData(isSub, extraText = ""):
 	var character
 	if(isSub):
 		character = getSub()
 	else:
 		character = getDom()
 	var text = RNG.pick([
-		"A [b]powerful orgasm[/b] overwhelms {<ORGASMER>.your} body.",
-		"[b]{<ORGASMER>.You} {<ORGASMER>.youVerb('cum')}[/b] hard!",
+		"A [b]powerful orgasm[/b] overwhelms {<ORGASMER>.your} body"+str(extraText)+".",
+		"[b]{<ORGASMER>.You} {<ORGASMER>.youVerb('cum')}[/b] hard"+str(extraText)+"!",
 	])
 	
 	if(character.hasPenis()):
@@ -341,11 +341,11 @@ func getGenericOrgasmData(isSub):
 		text = text,
 	}
 
-func getGenericSubOrgasmData():
-	return getGenericOrgasmData(true)
+func getGenericSubOrgasmData(extraText = ""):
+	return getGenericOrgasmData(true, extraText)
 
-func getGenericDomOrgasmData():
-	return getGenericOrgasmData(false)
+func getGenericDomOrgasmData(extraText = ""):
+	return getGenericOrgasmData(false, extraText)
 
 func applyTallymarkIfNeededData(bodypartSlot):
 	#if(getDom().isPlayer()):
