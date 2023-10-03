@@ -58,6 +58,9 @@ var cumIntensityMult = 1.0
 var autosaveEnabled = true
 
 var genderNamesOverrides = {}
+var webhookURL = "https://webhook.xtoys.app/abcrandomidentifier"
+var webhookStatsEnabled = false
+var webhookPainEnabled = false
 
 func resetToDefaults():
 	fetchNewRelease = true
@@ -238,6 +241,14 @@ func getInventoryIconSize():
 	if(inventoryIconsSize == "big"):
 		return 64
 	return 32
+func getWebhookStatsEnabled():
+	return webhookStatsEnabled
+
+func getWebhookPainEnabled():
+	return webhookPainEnabled
+
+func getWebhookURL():
+	return webhookURL
 
 func getChangeableOptions():
 	var settings = [
@@ -662,6 +673,33 @@ func getChangeableOptions():
 			]
 		},
 		{
+			"name": "Webhook",
+			"id": "webhook",
+			"options": [
+				{
+					"name": "Webhook base URL",
+					"description": "The base URL of the webhook",
+					"id": "webhookURL",
+					"type": "string",
+					"value": webhookURL,
+				},
+				{
+					"name": "Stats enabled",
+					"description": "Sends POST requests with basic player character stats",
+					"id": "webhookStatsEnabled",
+					"type": "checkbox",
+					"value": webhookStatsEnabled,
+				},
+				{
+					"name": "Painful insertions enabled",
+					"description": "Sends POST requests with painful insertion information",
+					"id": "webhookPainEnabled",
+					"type": "checkbox",
+					"value": webhookPainEnabled,
+				},
+			]
+		},
+		{
 			"name": "Debug",
 			"id": "debug",
 			"options": [
@@ -816,6 +854,14 @@ func applyOption(categoryID, optionID, value):
 		if(optionID == "advancedShadersEnabled"):
 			advancedShadersEnabled = value
 			
+	if(categoryID == "webhook"):
+		if(optionID == "webhookStatsEnabled"):
+			webhookStatsEnabled = value
+		if(optionID == "webhookPainEnabled"):
+			webhookPainEnabled = value
+		if(optionID == "webhookURL"):
+			webhookURL = value
+	
 	if(categoryID == "debug"):
 		if(optionID == "debugPanel"):
 			debugPanel = value
@@ -882,6 +928,9 @@ func saveData():
 		"cumEnabled": cumEnabled,
 		"cumDependsOnBallsSize": cumDependsOnBallsSize,
 		"cumIntensityMult": cumIntensityMult,
+		"webhookStatsEnabled": webhookStatsEnabled,
+		"webhookPainEnabled": webhookStatsEnabled,
+		"webhookURL": webhookURL,
 	}
 	
 	return data
@@ -928,6 +977,9 @@ func loadData(data):
 	cumEnabled = loadVar(data, "cumEnabled", true)
 	cumDependsOnBallsSize = loadVar(data, "cumDependsOnBallsSize", true)
 	cumIntensityMult = loadVar(data, "cumIntensityMult", 1.0)
+	webhookStatsEnabled = loadVar(data, "webhookStatsEnabled", false)
+	webhookPainEnabled = loadVar(data, "webhookPainEnabled", false)
+	webhookURL = loadVar(data, "webhookURL", "https://webhook.xtoys.app/abcrandomid")
 
 func saveToFile():
 	var saveData = saveData()
