@@ -15,6 +15,7 @@ const Bodywritings = "Bodywritings"
 
 const Masochism = "Masochism"
 const Sadism = "Sadism"
+const Choking = "Choking"
 
 const UnconsciousSex = "UnconsciousSex"
 const DrugUse = "DrugUse"

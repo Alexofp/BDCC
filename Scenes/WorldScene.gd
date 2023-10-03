@@ -96,7 +96,8 @@ func _react(_action: String, _args):
 		GM.pc.getInventory().addItem(GlobalRegistry.createItem("BreastPump"))
 		GM.pc.getInventory().addItem(GlobalRegistry.createItem("BreastPumpAdvanced"))
 		#runScene("GenericSexScene", ["pc", "rahi"])
-		runScene("GenericSexScene", ["rahi", "pc"])
+		#runScene("GenericSexScene", ["rahi", "pc"])
+		runScene("GenericSexScene", ["nova", "pc"])
 		#if(RNG.chance(50)):
 		#	runScene("GenericSexScene", ["nova", "pc"])
 		#else:

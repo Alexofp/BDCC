@@ -74,6 +74,10 @@ func satisfyGoals():
 	for goalID in goalData:
 		sexEngine.satisfyGoal(domInfo, goalID, subInfo)
 
+func satisfyGoal(goalID):
+	var sexEngine = getSexEngine()
+	sexEngine.satisfyGoal(domInfo, goalID, subInfo)
+
 func replaceGoalsTo(newgoalID, replaceAll = true):
 	var goalData = getGoals()
 	var sexEngine = getSexEngine()
