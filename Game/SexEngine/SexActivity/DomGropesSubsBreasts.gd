@@ -25,7 +25,7 @@ func getVisibleName():
 	return "Grope breasts"
 
 func getCategory():
-	return ["Fuck"]
+	return ["Breasts"]
 
 func getDomTags():
 	var thetags = [SexActivityTag.HandsUsed]
@@ -126,7 +126,7 @@ func processTurn():
 			var breasts:BodypartBreasts = getSub().getBodypart(BodypartSlot.Breasts)
 			var milkProduciton:FluidProduction = breasts.getFluidProduction()
 			if(milkProduciton != null):
-				milkProduciton.fillPercent(0.2)
+				milkProduciton.fillPercent(RNG.randf_rangeX2(0.05, 0.5))
 				text += RNG.pick([
 					" The stimulation causes the breasts to get heavier.",
 					" Stimulating the breasts is making them produce more {sub.milk}.",

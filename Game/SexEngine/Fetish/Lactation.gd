@@ -13,10 +13,10 @@ func getGoals(_sexEngine, _domFetishHolder, _dom, _sub):
 		possible.append(SexGoal.MilkWithBreastPump)
 	if(_sub.hasNonFlatBreasts()):
 		possible.append(SexGoal.GropeBreasts)
-	#if(_sub.canBeMilked()):
-	#	possible.append(SexGoal.BreastFeedOnSub)
-	#if(_dom.canBeMilked()):
-	#	possible.append(SexGoal.BreastFeedSub)
+	if(_sub.canBeMilked()):
+		possible.append(SexGoal.BreastFeedOnSub)
+	if(_dom.canBeMilked()):
+		possible.append(SexGoal.BreastFeedSub)
 	
 	return possible
 

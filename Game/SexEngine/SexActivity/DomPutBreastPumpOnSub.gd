@@ -41,7 +41,7 @@ func getStartActions(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexS
 					desc = straponObject.getVisisbleDescription(),
 					args = ["sub", straponObject.uniqueID],
 					score = 0.0,
-					category = ["Wear", "Breast Pump on sub"],
+					category = ["Breasts", "Breast Pump on sub"],
 				})
 		else:
 			for pumpNewID in allPumpsIDs:
@@ -52,7 +52,7 @@ func getStartActions(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexS
 					desc = pumpObject.getVisisbleDescription(),
 					args = ["sub", pumpNewID],
 					score = getActivityScore(_sexEngine, _domInfo, _subInfo),
-					category = ["Wear", "Breast Pump on sub"],
+					category = ["Breasts", "Breast Pump on sub"],
 				})
 	
 	return actions

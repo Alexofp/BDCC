@@ -299,7 +299,7 @@ func doSubAction(_id, _actionInfo):
 			}
 
 func getAnimationPriority():
-	return 0
+	return 2
 
 func getAnimation():
 	if(getSexType() != SexType.DefaultSex):

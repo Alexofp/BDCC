@@ -1,17 +1,20 @@
 extends SexGoalBase
 
 func _init():
-	id = SexGoal.GropeBreasts
+	id = SexGoal.BreastFeedOnSub
 
 func getVisibleName():
-	return "Breast groping"
+	return "Breastfeed on sub"
 
 func isPossible(_sexEngine, _domInfo, _subInfo, _data):
+	#if(!_subInfo.getChar().canBeMilked()):
+	#	return false
+	
 	return true
 	
 func getSubGoals(_sexEngine, _domInfo, _subInfo, _data):
 	return {
-		SexGoal.SubUndressSub: 0.1,
+		SexGoal.SubUndressSub: 1.0,
 	}
 	
 func getGoalDefaultWeight():

@@ -59,7 +59,7 @@ func getStartActions(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexS
 		
 		for possibleRestraintID in possibleRestraints:
 			var item:ItemBase = GlobalRegistry.getItemRef(possibleRestraintID)
-			if(_domInfo.goalsScore({SexGoal.FuckOral: 1.0}, _subInfo.charID) > 0.0):
+			if(_domInfo.goalsScore({SexGoal.FuckOral: 1.0}, _subInfo.charID) > 0.0 || _domInfo.goalsScore({SexGoal.BreastFeedSub: 1.0}, _subInfo.charID) > 0.0 || _sexEngine.hasTag(subID, SexActivityTag.MouthUsed)):
 				if(item.getClothingSlot() == InventorySlot.Mouth):
 					if(!item.hasBuff(Buff.RingGagBuff)):
 						continue
