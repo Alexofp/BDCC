@@ -38,11 +38,6 @@ enum {
 	OrderLickPussy,
 	OrderRimming,
 	
-	PutBreastPumpOnSub,
-	MilkingSubWithBreastPump,
-	RemoveBreastPumpFromSub,
-	SubMoos,
-	
 	GrindingFaceWithPussy,
 	DomsPussyGetsLicked,
 	
@@ -53,6 +48,22 @@ enum {
 	
 	DomPutsOnACondom,
 	DomPutsOnACondomOnSub,
+	
+	PutBreastPumpOnSub,
+	MilkingSubWithBreastPump,
+	RemoveBreastPumpFromSub,
+	SubMoos,
+	
+	DomAboutToStartGropingSubsBreasts,
+	DomStartsGropingSubsBreasts,
+	DomGropesSubsBreasts,
+	
+	Choking,
+	ChokingHard,
+	
+	DomBreastfeedsSub,
+	DomBreastfeedPraise,
+	DomBreastfeedsOnSub,
 }
 
 static func getAllStrings():

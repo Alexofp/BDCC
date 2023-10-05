@@ -1232,7 +1232,19 @@ func hasBigBreasts():
 	
 	var size = breasts.getSize()
 	
-	if(size > BreastsSize.B):
+	if(size > BreastsSize.C):
+		return true
+	else:
+		return false
+
+func hasSmallBreasts():
+	if(!hasBodypart(BodypartSlot.Breasts)):
+		return true
+	var breasts = getBodypart(BodypartSlot.Breasts)
+	
+	var size = breasts.getSize()
+	
+	if(size <= BreastsSize.B):
 		return true
 	else:
 		return false

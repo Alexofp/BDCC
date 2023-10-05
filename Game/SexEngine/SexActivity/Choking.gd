@@ -83,8 +83,8 @@ func processTurn():
 		
 		return {
 			text=text,
-			domSay = domReaction(SexReaction.BeatingUp, 30),
-			subSay = subReaction(SexReaction.BeatingUp, 30),
+			#domSay = domReaction(SexReaction.Choking, 30),
+			#subSay = subReaction(SexReaction.Choking, 30),
 			}
 	
 	if(state == "choking"):
@@ -108,8 +108,8 @@ func processTurn():
 		
 		return {
 			text=text,
-			domSay = domReaction(SexReaction.BeatingUp, 30),
-			subSay = subReaction(SexReaction.BeatingUp, 30),
+			domSay = domReaction(SexReaction.Choking, 30),
+			subSay = subReaction(SexReaction.Choking, 30),
 			}
 	
 	if(state == "hardchoking"):
@@ -129,8 +129,8 @@ func processTurn():
 		
 		return {
 			text=text,
-			domSay = domReaction(SexReaction.BeatingUp, 30),
-			subSay = subReaction(SexReaction.BeatingUp, 30),
+			domSay = domReaction(SexReaction.ChokingHard, 30),
+			subSay = subReaction(SexReaction.ChokingHard, 30),
 			}
 	
 func getDomActions():
@@ -289,13 +289,13 @@ func doSubAction(_id, _actionInfo):
 			}
 		else:
 			var text = RNG.pick([
-				"{sub.You} {sub.youVerb('try')} to escape {dom.yourHis} grasp.",
-				"{sub.You} desperately {sub.youVerb('try')} to escape {dom.yourHis} grasp.",
-				"{sub.You} desperately {sub.youVerb('try')} to escape {dom.yourHis} choking.",
+				"{sub.You} {sub.youVerb('try', 'tries')} to escape {dom.yourHis} grasp.",
+				"{sub.You} desperately {sub.youVerb('try', 'tries')} to escape {dom.yourHis} grasp.",
+				"{sub.You} desperately {sub.youVerb('try', 'tries')} to escape {dom.yourHis} choking.",
 			])
 			return {
 				text = text,
-				subSay=subReaction(SexReaction.Resisting),
+				subSay=subReaction(SexReaction.ChokingHard, 30),
 			}
 
 func getAnimationPriority():

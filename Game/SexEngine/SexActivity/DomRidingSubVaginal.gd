@@ -809,6 +809,8 @@ func doSubAction(_id, _actionInfo):
 
 
 func getAnimation():
+	var shouldUncon = subInfo.isUnconscious()
+	
 	if(getSexType() == SexType.SlutwallSex):
 		if(state in [""]):
 			return [StageScene.SlutwallRide, "tease", {pc=subID, npc=domID}]
@@ -821,13 +823,16 @@ func getAnimation():
 	var animToPlay = StageScene.SexCowgirl
 	if(PoseToAnimName.has(currentPose)):
 		animToPlay = PoseToAnimName[currentPose]
+		
 	if(state in [""]):
-		return [animToPlay, "tease", {pc=subID, npc=domID}]
+		return [animToPlay, "tease", {pc=subID, npc=domID, uncon=shouldUncon}]
 	if(state in ["knotting"]):
-		return [animToPlay, "inside", {pc=subID, npc=domID}]
+		return [animToPlay, "inside", {pc=subID, npc=domID, uncon=shouldUncon}]
 	if(subInfo.isCloseToCumming() || (isStraponSex() && domInfo.isCloseToCumming())):
-		return [animToPlay, "fast", {pc=subID, npc=domID}]
-	return [animToPlay, "sex", {pc=subID, npc=domID}]
+		if(currentPose == POSE_REVERSECOWGIRL):
+			shouldUncon = false
+		return [animToPlay, "fast", {pc=subID, npc=domID, uncon=shouldUncon}]
+	return [animToPlay, "sex", {pc=subID, npc=domID, uncon=shouldUncon}]
 
 func getDomSwitchHoleChance():
 	if(domInfo.hasMemory("switchedHoles")):

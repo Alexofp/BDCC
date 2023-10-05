@@ -52,7 +52,8 @@ func startActivity(_args):
 	
 	return {
 		text = text,
-		#domSay = domReaction(SexReaction.AboutToRubPussiesTogether),
+		domSay=domReaction(SexReaction.DomAboutToStartGropingSubsBreasts, 100),
+		subSay=subReaction(SexReaction.DomAboutToStartGropingSubsBreasts, 30),
 	}
 
 func onSwitchFrom(_otherActivity, _args):
@@ -164,7 +165,11 @@ func processTurn():
 					" {dom.yourHis} is also stroking {sub.youHim} at the same time.",
 				])
 		
-		return {text = text}
+		return {
+			text = text,
+			domSay=domReaction(SexReaction.DomGropesSubsBreasts, 10),
+			subSay=subReaction(SexReaction.DomGropesSubsBreasts, 20),
+		}
 		
 	return
 	
@@ -251,7 +256,11 @@ func doDomAction(_id, _actionInfo):
 		subInfo.addArousalForeplay(0.05)
 		domInfo.addArousalForeplay(0.05)
 		
-		return {text = text}
+		return {
+			text = text,
+			domSay=domReaction(SexReaction.DomStartsGropingSubsBreasts, 100),
+			subSay=subReaction(SexReaction.DomStartsGropingSubsBreasts, 50),
+		}
 
 	if(_id == "stop"):
 		endActivity()

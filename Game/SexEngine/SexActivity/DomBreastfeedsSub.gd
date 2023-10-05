@@ -131,7 +131,10 @@ func processTurn():
 					text += RNG.pick([
 						" {dom.Your} nipples started to feel [b]sore[/b].",
 					])
-			return {text = text}
+			return {
+				text = text,
+				domSay = domReaction(SexReaction.DomBreastfeedsSub, 30),
+			}
 		else:
 			var extraMessages = []
 			var fluidByAmount = fluids.getFluidAmountByType()
@@ -156,7 +159,7 @@ func processTurn():
 						continue
 					
 					var share = fluidByAmount[fluidID] / totalAmount
-					var resultMessage = fluidObject.onSwallow(getSub(), share*howMuchCollected)
+					var resultMessage = fluidObject.onSwallow(getSub(), share*howMuchCollected*10.0)
 					if(resultMessage != null && resultMessage != ""):
 						extraMessages.append(resultMessage)
 			
@@ -185,7 +188,10 @@ func processTurn():
 						" {dom.Your} nipples started to feel [b]sore[/b] after so much feeding.",
 					])
 			
-			return {text = text}
+			return {
+				text = text,
+				domSay = domReaction(SexReaction.DomBreastfeedsSub, 30),
+			}
 		
 	return
 	
@@ -259,7 +265,10 @@ func doDomAction(_id, _actionInfo):
 		subInfo.addFear(-0.02)
 		subInfo.addLust(5)
 		domInfo.addArousalSex(0.02)
-		return {text = text}
+		return {
+			text = text,
+			domSay = domReaction(SexReaction.DomBreastfeedPraise),
+		}
 	
 	if(_id == "moan"):
 		var moanText = RNG.pick([
