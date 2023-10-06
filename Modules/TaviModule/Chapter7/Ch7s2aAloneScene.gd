@@ -394,6 +394,7 @@ func _react(_action: String, _args):
 		addExperienceToPlayer(300)
 
 	if(_action == "start_captain_scene"):
+		setFlag("TaviModule.Ch7CaptainSceneHappened", true)
 		runScene("Ch7s3CaptainScene")
 		endScene()
 		return

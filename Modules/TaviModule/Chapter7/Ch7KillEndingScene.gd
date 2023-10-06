@@ -231,7 +231,7 @@ func _run():
 
 		saynn("Tavi ends the call and looks at you. She looks dead serious. Suddenly, more of these rifts open.. but this time it's the AlphaCorp ships joining in on the fun. Almost instantly, a giant battle begins in the void. It distracts the big ship from targeting the station.. but for how long..")
 
-		saynn("[say=tavi]They will start boarding us soon. We will only have one shot at this. We must steal one of their ships and escape.[/say]")
+		saynn("[say=tavi]They will start boarding us soon. We will only have one shot at this. We must steal one of their ships.[/say]")
 
 		saynn("Sounds like you will need a weapon.. So you grab the captain's energy gun. Looks like it's set to lethal mode already. Good.")
 

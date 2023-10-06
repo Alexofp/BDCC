@@ -35,18 +35,20 @@ func onButton(_method, _args):
 			runScene("Ch6TaviIntroScene")
 			return
 		
-		if(!getFlag("TaviModule.Ch6TaviSatisfied")):
-			var avaiableSceneInfo = getModule("TaviModule").getAvaiableStoryScene()
-			if(avaiableSceneInfo != null):
-				setFlag("TaviModule.Ch6TaviSatisfied", true)
-				if(avaiableSceneInfo["at"] > 1.0):
-					setFlag("TaviModule.Ch6CorruptionStage", avaiableSceneInfo["stage"])
-				else:
-					setFlag("TaviModule.Ch6PurityStage", avaiableSceneInfo["stage"])
-				setFlag("TaviModule.Ch6Corruption", avaiableSceneInfo["at"])
-				runScene(avaiableSceneInfo["scene"])
-				return
+		
+		var avaiableSceneInfo = getModule("TaviModule").getAvaiableStoryScene()
+		if(avaiableSceneInfo != null):
+			addExperienceToPlayer(50)
+			setFlag("TaviModule.Ch6TaviSatisfied", true)
+			if(avaiableSceneInfo["at"] > 1.0):
+				setFlag("TaviModule.Ch6CorruptionStage", avaiableSceneInfo["stage"])
+			else:
+				setFlag("TaviModule.Ch6PurityStage", avaiableSceneInfo["stage"])
+			setFlag("TaviModule.Ch6Corruption", avaiableSceneInfo["at"])
+			runScene(avaiableSceneInfo["scene"])
+			return
 			
+		if(!getFlag("TaviModule.Ch6TaviSatisfied")):
 			setFlag("TaviModule.Ch6TaviSatisfied", true)
 			runScene("Ch6TaviMorningScene")
 			return

@@ -266,7 +266,7 @@ func _run():
 		if (false):
 			addButton("Nope", "You shouldn't see this", "milk_withpump")
 	if(state == "milk_withpump"):
-		playAnimation(StageScene.Cuddling, "idle", {npc="rahi", npcBodyState={naked=true}})
+		playAnimation(StageScene.Cuddling, "squirm", {npc="rahi", npcBodyState={naked=true}})
 		saynn("Your hands slide slightly up and cup Rahi's {rahi.breasts}, surprising her. And while gently squeezing them, you realize how.. heavy they are with milk, a little wet spots instantly appear roughly where her nips are.")
 
 		saynn("[say=pc]Let's milk you, kitty.[/say]")

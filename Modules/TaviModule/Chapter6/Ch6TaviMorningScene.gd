@@ -1328,6 +1328,7 @@ func _react(_action: String, _args):
 
 	if(_action == "start_talk"):
 		endScene()
+		addExperienceToPlayer(10)
 		runScene("Ch6TaviTalkScene")
 		return
 

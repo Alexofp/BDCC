@@ -111,7 +111,7 @@ func _run():
 
 		saynn("Another failed hero? Or maybe.. a defeated villain. What's the difference anyway?")
 
-		saynn("Right. At least {npc.he} has a heart. Heart that stopped beating, yes. But still a heart.")
+		saynn("Right. At least {pc.he} has a heart. Heart that stopped beating, yes. But still a heart.")
 
 		saynn("Hearts can be restarted. Restarting a mind makes it a different mind.")
 
@@ -119,7 +119,7 @@ func _run():
 
 		saynn("Nun?")
 
-		saynn("Oh. I think {npc.he} is waking up.")
+		saynn("Oh. I think {pc.he} is waking up.")
 
 		addButton("Open eyes", "See what's behind the dark white curtains", "wakeup_in_med")
 	if(state == "wakeup_in_med"):

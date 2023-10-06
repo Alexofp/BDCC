@@ -300,11 +300,14 @@ func _react(_action: String, _args):
 	if(_action == "dounlock"):
 		unlockedRestraintID = _args[0]
 		var item = GM.pc.getInventory().getItemByUniqueID(unlockedRestraintID)
-		#var restraintData: RestraintData = item.getRestraintData()
+		var restraintData: RestraintData = item.getRestraintData()
 		
 		GM.pc.getInventory().removeXOfOrDestroy("restraintkey", 1)
 		if(!GM.pc.hasBlockedHands() && !GM.pc.hasBoundArms()):
-			GM.pc.getInventory().unequipItem(item)
+			if(restraintData == null || restraintData.alwaysBreaksWhenStruggledOutOf()):
+				GM.pc.getInventory().removeEquippedItem(item)
+			else:
+				GM.pc.getInventory().unequipItem(item)
 			setState("unlockedGear")
 		else:
 			keyGameTries = 3
@@ -326,7 +329,11 @@ func _react(_action: String, _args):
 		var number = _args[0]#int(textboxText)
 		if(number == keyGameValue):
 			var item = GM.pc.getInventory().getItemByUniqueID(unlockedRestraintID)
-			GM.pc.getInventory().unequipItem(item)
+			var restraintData: RestraintData = item.getRestraintData()
+			if(restraintData == null || restraintData.alwaysBreaksWhenStruggledOutOf()):
+				GM.pc.getInventory().removeEquippedItem(item)
+			else:
+				GM.pc.getInventory().unequipItem(item)
 			setState("unlockedGear")
 			return
 		
