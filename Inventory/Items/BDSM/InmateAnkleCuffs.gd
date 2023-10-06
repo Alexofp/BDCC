@@ -44,3 +44,11 @@ func getUnriggedParts(_character):
 
 func updateDoll(doll: Doll3D):
 	doll.setLegsCuffed(true)
+
+func getChains():
+	# Extra chains if we're wearing matching wrist cuffs
+	if(isWornByWearer()):
+		if(getWearer().getInventory().hasItemIDEquipped("inmatewristcuffs")):
+			return [["short", "ankle.L", "ankle.R"], ["short", "wrist.R", "ankle.R"], ["short", "wrist.L", "ankle.L"]]
+	
+	return [["short", "ankle.L", "ankle.R"]]

@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Inventory/UnriggedModels/Cuff/cuff.png" type="Texture" id=1]
 
-[node name="CollarModel" type="Spatial"]
+[node name="CuffModel" type="Spatial"]
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0 )

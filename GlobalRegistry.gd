@@ -1,9 +1,9 @@
 extends Node
 
 var game_version_major = 0
-var game_version_minor = 0
-var game_version_revision = 24
-var game_version_suffix = "bugfix1"
+var game_version_minor = 1
+var game_version_revision = 0
+var game_version_suffix = ""
 
 var currentUniqueID = 0
 var currentChildUniqueID = 0

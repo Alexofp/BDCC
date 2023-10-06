@@ -26,6 +26,7 @@ func playAnimation(animID, _args = {}):
 		$MeshInstance2.visible = false
 		$CPUParticles.visible = false
 		$Sprite3D.visible = false
+		$Hose.visible = false
 	
 	
 	if(animID == "idle"):

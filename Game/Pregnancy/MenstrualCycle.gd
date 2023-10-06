@@ -69,6 +69,12 @@ func forceIntoHeat():
 	newCycle(false) # so eggs from the previous cycle are not cleared
 	cycleProgress = 0.36
 
+func forceOvulate():
+	if(ovulatedThisCycle || isPregnant()):
+		return false
+	ovulate()
+	return true
+
 func shouldOvulate():
 	if(!ovulatedThisCycle && cycleProgress >= willOvulateAt && (!isPregnant() || isEligibleForProlongedPregnancy())):
 		return true

@@ -43,3 +43,9 @@ parameters/CuffsBlend/blend_amount = 0
 tree_root = ExtResource( 6 )
 parameters/AnimationNodeStateMachine/playback = SubResource( 2 )
 parameters/CuffsBlend/blend_amount = 0
+
+[node name="FarLeft" type="Position3D" parent="." index="7"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7.18997, 5.39323, 1.77914 )
+
+[node name="FarRight" type="Position3D" parent="." index="8"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.19, 5.393, 1.779 )

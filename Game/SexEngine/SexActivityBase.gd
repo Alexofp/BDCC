@@ -47,7 +47,14 @@ func clearSexEngineRefAndParticipants():
 	subInfo = null
 
 func endActivity():
+	if(!hasEnded):
+		hasEnded = true
+		onActivityEnd()
+	
 	hasEnded = true
+
+func onActivityEnd():
+	pass
 
 func getGoals():
 	return {}
@@ -66,6 +73,10 @@ func satisfyGoals():
 	
 	for goalID in goalData:
 		sexEngine.satisfyGoal(domInfo, goalID, subInfo)
+
+func satisfyGoal(goalID):
+	var sexEngine = getSexEngine()
+	sexEngine.satisfyGoal(domInfo, goalID, subInfo)
 
 func replaceGoalsTo(newgoalID, replaceAll = true):
 	var goalData = getGoals()
@@ -257,6 +268,9 @@ func domReaction(reactionID, chance = 100):
 	if(chance >= 100 || RNG.chance(chance)):
 		return getDom().getVoice().getDomReaction(reactionID, getSexEngine(), domInfo, subInfo)
 
+func getAnimationPriority():
+	return 10
+
 func getAnimation():
 	return null
 
@@ -286,15 +300,15 @@ func isHandlingSubOrgasms():
 func isHandlingDomOrgasms():
 	return getDomOrgasmHandlePriority() >= getSexEngine().getCurrentActivitiesMaxDomOrgasmHandlePriority(domID, subID)
 
-func getGenericOrgasmData(isSub):
+func getGenericOrgasmData(isSub, extraText = ""):
 	var character
 	if(isSub):
 		character = getSub()
 	else:
 		character = getDom()
 	var text = RNG.pick([
-		"A [b]powerful orgasm[/b] overwhelms {<ORGASMER>.your} body.",
-		"[b]{<ORGASMER>.You} {<ORGASMER>.youVerb('cum')}[/b] hard!",
+		"A [b]powerful orgasm[/b] overwhelms {<ORGASMER>.your} body"+str(extraText)+".",
+		"[b]{<ORGASMER>.You} {<ORGASMER>.youVerb('cum')}[/b] hard"+str(extraText)+"!",
 	])
 	
 	if(character.hasPenis()):
@@ -327,11 +341,11 @@ func getGenericOrgasmData(isSub):
 		text = text,
 	}
 
-func getGenericSubOrgasmData():
-	return getGenericOrgasmData(true)
+func getGenericSubOrgasmData(extraText = ""):
+	return getGenericOrgasmData(true, extraText)
 
-func getGenericDomOrgasmData():
-	return getGenericOrgasmData(false)
+func getGenericDomOrgasmData(extraText = ""):
+	return getGenericOrgasmData(false, extraText)
 
 func applyTallymarkIfNeededData(bodypartSlot):
 	#if(getDom().isPlayer()):

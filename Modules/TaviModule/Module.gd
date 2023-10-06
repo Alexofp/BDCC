@@ -112,9 +112,29 @@ func getFlags():
 		"Ch6TaviReceivedHorns": flag(FlagType.Bool),
 		"Ch6TaviReceivedWombMark": flag(FlagType.Bool),
 		"Ch6TaviChillTalk": flag(FlagType.Number),
+		"Ch6TaviLastGropeHow": flag(FlagType.Text),
+		"Ch6TaviLactationProgress": flag(FlagType.Number),
+		"Ch6TaviAllowedToSleepInPCCell": flag(FlagType.Bool),
+		"Ch6TaviAllowedToLewdPCDuringSleep": flag(FlagType.Bool),
+		"Ch6TaviSleepInPCCellFirstTime": flag(FlagType.Bool),
+		"Ch6TaviAndRahiStackSceneHappened": flag(FlagType.Bool),
+		"Ch6TaviDemonSceneHappened": flag(FlagType.Bool),
+		"Ch6TaviShouldHaveCock": flag(FlagType.Bool),
+		"Ch6TaviRegrewHymen": flag(FlagType.Bool),
+		
+		"Ch7PlanningSceneHappened": flag(FlagType.Bool),
+		"Ch7TaviTookVirginityBeforeMission": flag(FlagType.Bool),
 		
 		"taviSkillCombat": flag(FlagType.Number),
 		"taviSkillSex": flag(FlagType.Number),
+		"taviSkillMasochism": flag(FlagType.Number),
+		"taviSkillPetplay": flag(FlagType.Number),
+		"taviSkillWatersports": flag(FlagType.Number),
+		
+		"Ch7CaptainSceneHappened": flag(FlagType.Bool),
+		"Ch7NoEnding": flag(FlagType.Bool),
+		"Ch7YesEnding": flag(FlagType.Bool),
+		"Ch7KillEnding": flag(FlagType.Bool),
 	}
 
 func _init():
@@ -176,6 +196,12 @@ func _init():
 		
 		"res://Modules/TaviModule/Chapter6/Skills/Ch6TaviCombatSkillScene.gd",
 		"res://Modules/TaviModule/Chapter6/Skills/Ch6TaviSexSkillScene.gd",
+		"res://Modules/TaviModule/Chapter6/Skills/Ch6TaviMasochismSkillScene.gd",
+		"res://Modules/TaviModule/Chapter6/MasochismMinigame/TaviMasochismScene.gd",
+		"res://Modules/TaviModule/Chapter6/MasochismMinigame/TaviMasochismOutcomesScene.gd",
+		"res://Modules/TaviModule/Chapter6/MasochismMinigame/TaviMasochismUnconsciousScene.gd",
+		"res://Modules/TaviModule/Chapter6/Skills/Ch6TaviPetplaySkillScene.gd",
+		"res://Modules/TaviModule/Chapter6/Skills/Ch6TaviWatersportsSkillScene.gd",
 		
 		"res://Modules/TaviModule/Chapter6/CorruptionScenes/Ch6TaviCorruption75Scene.gd",
 		"res://Modules/TaviModule/Chapter6/CorruptionScenes/Ch6TaviCorruption50Scene.gd",
@@ -185,6 +211,21 @@ func _init():
 		"res://Modules/TaviModule/Chapter6/CorruptionScenes/Ch6TaviCorruption150Scene.gd",
 		"res://Modules/TaviModule/Chapter6/CorruptionScenes/Ch6TaviCorruption175Scene.gd",
 		"res://Modules/TaviModule/Chapter6/CorruptionScenes/Ch6TaviCorruption200Scene.gd",
+		
+		"res://Modules/TaviModule/Chapter6/Activities/Ch6TaviShowerScene.gd",
+		"res://Modules/TaviModule/Chapter6/Activities/Ch6TaviMilkingScene.gd",
+		"res://Modules/TaviModule/Chapter6/Activities/Ch6TaviAllowSleepInCellScene.gd",
+		"res://Modules/TaviModule/Chapter6/Activities/Ch6TaviSleepInCellScene.gd",
+		"res://Modules/TaviModule/Chapter6/Activities/Ch6TaviRahiButtstackScene.gd",
+		"res://Modules/TaviModule/Chapter6/Activities/Ch6TaviDemonScene.gd",
+		
+		"res://Modules/TaviModule/Chapter7/Ch7s1PlanningScene.gd",
+		"res://Modules/TaviModule/Chapter7/Ch7s2aAloneScene.gd",
+		"res://Modules/TaviModule/Chapter7/Ch7s2bTaviScene.gd",
+		"res://Modules/TaviModule/Chapter7/Ch7s3CaptainScene.gd",
+		"res://Modules/TaviModule/Chapter7/Ch7NoEndingScene.gd",
+		"res://Modules/TaviModule/Chapter7/Ch7KillEndingScene.gd",
+		"res://Modules/TaviModule/Chapter7/Ch7YesEndingScene.gd",
 		]
 	characters = [
 		"res://Modules/TaviModule/Chapter4/DirectorTau.gd",
@@ -227,6 +268,10 @@ func _init():
 		"res://Modules/TaviModule/Chapter5/Ch5s7BElizaTaviEvent.gd",
 		
 		"res://Modules/TaviModule/Chapter6/Ch6TaviTalkEvent.gd",
+		"res://Modules/TaviModule/Chapter6/Activities/Ch6TaviSleepInCellEvent.gd",
+		"res://Modules/TaviModule/Chapter6/Activities/Ch6TaviRahiButtstackEvent.gd",
+		
+		"res://Modules/TaviModule/Chapter7/Ch7s2aAloneEvent.gd",
 	]
 	quests = [
 		"res://Modules/TaviModule/TaviAppleQuest.gd",
@@ -264,7 +309,7 @@ static func trustsPC():
 	return !GM.main.getModuleFlag("TaviModule", "Tavi_IsAngryAtPlayer", false) && GM.main.getModuleFlag("TaviModule", "Tavi_IntroducedTo", false)
 
 func getAllSkills():
-	return ["taviSkillCombat", "taviSkillSex"]
+	return ["taviSkillCombat", "taviSkillSex", "taviSkillMasochism", "taviSkillPetplay", "taviSkillWatersports"]
 
 func getSkillInfo(skillID):
 	if(skillID == "taviSkillCombat"):
@@ -279,8 +324,41 @@ func getSkillInfo(skillID):
 			desc = "Allowing Tavi to enjoy all the sex that she missed",
 			scene = "Ch6TaviSexSkillScene",
 		}
+	if(skillID == "taviSkillMasochism"):
+		return {
+			name = "Masochism",
+			desc = "Training Tavi to endure pain better",
+			scene = "Ch6TaviMasochismSkillScene",
+		}
+	if(skillID == "taviSkillPetplay"):
+		return {
+			name = "Petplay",
+			desc = "Training Tavi to be a better pet",
+			scene = "Ch6TaviPetplaySkillScene",
+		}
+	if(skillID == "taviSkillWatersports"):
+		return {
+			name = "Watersports",
+			desc = "Training Tavi to enjoy pee",
+			scene = "Ch6TaviWatersportsSkillScene",
+		}
 	
 	return null
+
+func canTrainSkill(skillID):
+	if(skillID == "taviSkillWatersports"):
+		if(!OPTIONS.isContentEnabled(ContentType.Watersports)):
+			return false
+	
+	return true
+
+func hasAllSkillsLearnedFully():
+	for skillID in getAllSkills():
+		if(!canTrainSkill(skillID)):
+			continue
+		if(getSkillScore(skillID) < 7):
+			return false
+	return true
 
 # F D C B A S S+ S++
 # 0 1 2 3 4 5 6  7
@@ -302,6 +380,12 @@ func getSkillScoreText(skillID):
 	var scoreToText = ["F", "D", "C", "B", "A", "S", "S+", "S++"]
 	
 	return scoreToText[score]
+
+func getOverallCorruptStage():
+	var corruptionStage = getFlag("TaviModule.Ch6CorruptionStage", 0)
+	var purityStage = getFlag("TaviModule.Ch6PurityStage", 0)
+	
+	return Util.maxi(corruptionStage, purityStage)
 
 func getAvaiableStoryScene():
 	var currentCorruption = getFlag("TaviModule.Ch6Corruption", 1.0)
@@ -354,6 +438,11 @@ func hasHorns():
 
 func hasWombMark():
 	if(getFlag("TaviModule.Ch6TaviReceivedWombMark", false)):
+		return true
+	return false
+
+func shouldHaveCock():
+	if(getFlag("TaviModule.Ch6TaviShouldHaveCock")):
 		return true
 	return false
 

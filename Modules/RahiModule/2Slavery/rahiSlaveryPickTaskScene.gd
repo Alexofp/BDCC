@@ -36,10 +36,11 @@ func _react(_action: String, _args):
 
 func _react_scene_end(_tag, _result):
 	if(_tag == "theTask"):
-		if(_result == null):
+		if(_result == null || _result.size() == 0):
 			setState("")
 			return
-		if(_result.size() == 0):
+			
+		if(_result == ["free"]):
 			setFlag("RahiModule.rahiCommentedOnTask", true)
 			endScene()
 			runScene("rahiSlaveryTalkScene")

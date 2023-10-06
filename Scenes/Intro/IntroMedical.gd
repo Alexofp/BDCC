@@ -156,7 +156,7 @@ func _run():
 			addButton("Fuck no", "You’re not a dog", "fuck_no")
 
 	if(state == "fuck_no"):
-		playAnimation(StageScene.Duo, "shove", {npc="eliza"})
+		playAnimation(StageScene.Duo, "shove", {npc="eliza", bodyState={leashedBy="eliza"}})
 		
 		aimCamera("intro_beforeelevator")
 		setLocationName("Intake area")
@@ -176,7 +176,7 @@ func _run():
 		addButton("Lift", "Enter the lift", "lift")
 
 	if(state == "fine"):
-		playAnimation(StageScene.Duo, "stand", {npc="eliza"})
+		playAnimation(StageScene.Duo, "stand", {npc="eliza", bodyState={leashedBy="eliza"}})
 		
 		aimCamera("intro_beforeelevator")
 		setLocationName("Intake area")
@@ -216,7 +216,7 @@ func _run():
 		aimCamera("hall_elevator")
 		setLocationName("Checkpoint")
 		
-		playAnimation(StageScene.Duo, "stand", {npc="eliza"})
+		playAnimation(StageScene.Duo, "walk", {npc="eliza", npcAction="walk", flipNPC=true, bodyState={leashedBy="eliza"}})
 		
 		saynn("It takes a minute but the lift finally arrives. When the doors open, the first thing you see is a checkpoint with a few guards standing around.")
 
@@ -242,7 +242,7 @@ func _run():
 		addButton("Follow", "Follow the leash", "followtocell")
 
 	if(state == "followtocell"):
-		playAnimation(StageScene.Duo, "stand", {npc="eliza"})
+		playAnimation(StageScene.Duo, "walk", {npc="eliza", npcAction="walk", flipNPC=true, bodyState={leashedBy="eliza"}})
 		removeCharacter("tavi")
 		
 		aimCamera("cellblock_nearcells")

@@ -17,7 +17,7 @@ func resolveCustomCharacterName(_charID):
 func _run():
 	if(state == ""):
 		addCharacter("rahi", ["naked"])
-		playAnimation(StageScene.PuppyDuo, "stand", {npc="rahi", npcBodyState={naked=true}})
+		playAnimation(StageScene.PuppyDuo, "stand", {npc="rahi", npcBodyState={naked=true, leashedBy="pc"}})
 		saynn("[say=pc]Who wants some walkies, huh?[/say]")
 
 		saynn("Walkies! Walkies, walkies, walkies. Rahi's ears perk at your offer. She eagerly crawls to you, her tail swishing excitedly behind her. The restraints are still limiting her available range of motion but your pup has learned how to walk around efficiently, her natural feline grace showing through.")
@@ -47,6 +47,8 @@ func _run():
 		if (false):
 			addButton("Walk", "You shouldn't see this", "do_walkies")
 	if(state == "walkies"):
+		playAnimation(StageScene.PuppyDuo, "walk", {npc="rahi", npcAction="walk", flipNPC=true, npcBodyState={naked=true, leashedBy="pc"}})
+		
 		var _roomInfo = GM.world.getRoomByID(path[0])
 		var roomName = str(_roomInfo.getName())
 		var possibleBarks = ["You are leading your leashed Rahi.", "Rahi eagerly sniffs around the "+roomName+".", "Rahi eagerly follows you, her tail wagging with excitement as she eagerly sniffs at the various objects in her path.", "Rahi lags behind, her restraints slowing her down. You tug on the leash, urging her to keep moving.", "Rahi catches up and walks beside you, her fluffy body pressed close to your leg as she leans against you for comfort.", "As you walk, Rahi occasionally tugs on the leash, prompting you to correct her behavior and keep her in line.", "Rahi wags her tail happily as you walk her around on the leash", "You hear Rahi's happy panting as she follows you obediently on the leash.", "You notice Rahi's tongue hanging out of her mouth as she pants excitedly during walkies.", "Rahi lets out a playful bark, remaining you that she's still a happy pup.", "You feel Rahi's fluffy tail brushing against your leg as she walks beside you on the leash."]

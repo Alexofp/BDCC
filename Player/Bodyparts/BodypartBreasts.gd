@@ -139,5 +139,15 @@ func processTime(_seconds: int):
 func getBreastsScale():
 	return 1.0
 
+# For animations
+func getBreastsAdjustScale():
+	var theSize = getSize()
+	if(theSize <= BreastsSize.FLAT):
+		return 0.0
+	if(theSize >= BreastsSize.L):
+		return 1.0
+	var aScale = BreastsSize.breastSizeToBoneScale(BreastsSize.A)
+	return (BreastsSize.breastSizeToBoneScale(theSize) - aScale) / (BreastsSize.breastSizeToBoneScale(BreastsSize.L) - aScale)
+
 func getRevealMessage():
 	return Util.capitalizeFirstLetter(getLewdDescriptionAndName()) + " got revealed."

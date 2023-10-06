@@ -26,6 +26,16 @@ var temporaryRiggedParts = {}
 
 var rememberedPenisScale = 1.0
 
+# Info to adjust animations
+var breastScale = 0.0
+var headLength = 0.0
+
+
+var selfChains = []
+var sceneChains = []
+var chainObjects = []
+var rememberedChains = []
+
 export(bool) var addTestBody = false
 
 var dollAttachmentZoneScene = preload("res://Player/Player3D/Parts/DollAttachmentZone.tscn")
@@ -41,6 +51,9 @@ func getDollSkeleton():
 	return $DollSkeleton
 
 func _ready():
+	if(get_parent().has_method("addDoll")):
+		get_parent().addDoll(self)
+	
 	if(!OPTIONS.isJigglePhysicsBreastsEnabled()):
 		breastsJiggleBone.setEnabled(false)
 	if(!OPTIONS.isJigglePhysicsBellyEnabled()):
@@ -195,6 +208,7 @@ func addPartObject(slot, part: Spatial):
 		dollAttachmentZone.setSkeletonPath(dollAttachmentZone.get_path_to(getDollSkeleton().getSkeleton()))
 		attachmentProxy.dollAttachmentZone = dollAttachmentZone
 		dollAttachmentZone.shouldScaleWithBone = attachmentProxy.scaleWithBone
+		dollAttachmentZone.chainOffset = attachmentProxy.chainOffset
 			
 		
 		if(!dollAttachmentZones.has(attachmentProxy.zoneName)):
@@ -621,11 +635,97 @@ func applyBodyState(bodystate):
 	if(shouldBeCondom):
 		setCockTemporaryCondom()
 	
-#	if(bodystate.has("lookLeft")):
-#		if(shouldLookLeft):
-#			scale.x = abs(scale.x)
-#		else:
-#			scale.x = -abs(scale.x)
+	var newChains = []
+	if(bodystate.has("chains")):
+		newChains = bodystate["chains"]
+	if(bodystate.has("leashedBy")):
+		newChains.append(["normal", "neck", "npc", bodystate["leashedBy"], "hand.L"])
+	sceneChains = newChains
+	
+	checkChains()
+
+func checkChains():
+	if(!OPTIONS.shouldSpawnChains()):
+		return
+	
+	var finalChains = selfChains + sceneChains
+	
+	if(rememberedChains != finalChains):
+		rememberedChains = finalChains
+		
+		updateChains()
+
+var normalChainScene = preload("res://Player/Player3D/Chains/NormalChain.tscn")
+var shortChainScene = preload("res://Player/Player3D/Chains/ShortChain.tscn")
+var hoseChainScene = preload("res://Player/Player3D/Chains/HoseChain.tscn")
+				
+func createChainScene(chainType:String):
+	if(chainType == "normal"):
+		return normalChainScene.instance()
+	if(chainType == "short"):
+		return shortChainScene.instance()
+	if(chainType == "hose"):
+		return hoseChainScene.instance()
+	if(chainType.ends_with(".tscn")):
+		return GlobalRegistry.instanceCached(chainType)
+	
+	return normalChainScene.instance()
+
+func updateChains():
+	for chainObject in chainObjects:
+		chainObject.queue_free()
+	chainObjects.clear()
+
+	if(!OPTIONS.shouldSpawnChains()):
+		return
+
+	if(!get_parent().has_method("getDolls")):
+		return
+	
+	for chainInfo in rememberedChains:
+		var zoneID = chainInfo[1]
+		if(!dollAttachmentZones.has(zoneID)):
+			continue
+		var attachPointObjects = dollAttachmentZones[zoneID]
+		
+		var targetObjects = []
+		
+		var chainType = chainInfo[2]
+		if(chainType == "npc"):
+			var otherDolls = get_parent().getDolls()
+			
+			for otherDoll in otherDolls:
+				if(otherDoll.savedCharacterID == chainInfo[3]):
+					var otherZoneID = chainInfo[4]
+					if(otherDoll.dollAttachmentZones.has(otherZoneID)):
+						targetObjects = otherDoll.dollAttachmentZones[otherZoneID]
+					break
+		if(chainType == "self"):
+			var otherZoneID = chainInfo[3]
+			if(dollAttachmentZones.has(otherZoneID)):
+				targetObjects = dollAttachmentZones[otherZoneID]
+		if(chainType == "scene"):
+			if(!get_parent().has_method("getChainPoint")):
+				continue
+			
+			var points = get_parent().getChainPoint(chainInfo[3])
+			if(points == null):
+				continue
+			if(!(points is Array)):
+				points = [points]
+			
+			targetObjects = points
+		
+		for attachPointObject in attachPointObjects:
+			for targetPointObject in targetObjects:
+				var newChain = createChainScene(chainInfo[0])
+				newChain.anchor = targetPointObject
+				if(targetPointObject is DollAttachmentZone):
+					newChain.anchorOffset = targetPointObject.chainOffset
+				newChain.transform.origin = attachPointObject.chainOffset
+				#newChain.offset = attachPointObject.chainOffset
+				attachPointObject.add_child(newChain)
+				chainObjects.append(newChain)
 
 func calculateDifferences():
 	var skeleton:Skeleton = getDollSkeleton().getSkeleton()

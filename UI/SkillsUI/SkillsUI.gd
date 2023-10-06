@@ -17,6 +17,7 @@ var addedPoints = {}
 var skillTabScene = preload("res://UI/SkillsUI/SkillUITab.tscn")
 var skillTabs = []
 var openedSkillTab = null
+var basePerksTabScene = preload("res://UI/SkillsUI/InherentPerksTab.tscn")
 
 func _ready():
 	pass
@@ -189,4 +190,18 @@ func _on_Skills_openPerksButton(skillID):
 	skillTab.setSkillID(skillID)
 	openedSkillTab = skillTab
 	tabContainer.set_tab_title(tabID, skillTab.getTabName())
+	tabContainer.current_tab = tabID
+
+
+func _on_Skills_openBasePerks():
+	if(openedSkillTab != null):
+		openedSkillTab.queue_free()
+		openedSkillTab = null
+	
+	var tabID = tabContainer.get_child_count()
+	var skillTab = basePerksTabScene.instance()
+	tabContainer.add_child(skillTab)
+	#skillTab.setSkillID(skillID)
+	openedSkillTab = skillTab
+	tabContainer.set_tab_title(tabID, "Base perks")
 	tabContainer.current_tab = tabID

@@ -64,6 +64,8 @@ func combineTags(tags: Array):
 		"sayShowName": true,
 		"sayMale": true,
 		"sayFemale": true,
+		"sayAndro": true,
+		"sayOther": true,
 	}
 	
 	while pos < tags.size():
@@ -162,5 +164,17 @@ func processTag(tag, arg, text, overrides: Dictionary = {}):
 			prefix = "[b]Someone[/b]: "
 			
 		return prefix+Util.sayFemale(text)
+	if(tag == "sayAndro"):
+		var prefix = ""
+		if(OPTIONS.shouldShowSpeakerName()):
+			prefix = "[b]Someone[/b]: "
+			
+		return prefix+Util.sayAndro(text)
+	if(tag == "sayOther"):
+		var prefix = ""
+		if(OPTIONS.shouldShowSpeakerName()):
+			prefix = "[b]Someone[/b]: "
+			
+		return prefix+Util.sayOther(text)
 	
 	return "!"+tag+"="+arg+":"+text+"!"

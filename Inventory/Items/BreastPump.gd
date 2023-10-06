@@ -7,7 +7,7 @@ func getVisibleName():
 	return "Breast Pump"
 	
 func getDescription():
-	return "A tool that can extract milk out of lactating breasts. This is a basic version that has some flaws."
+	return "A tool that can extract milk out of lactating breasts. This is a basic version that has some flaws.\nIf put on during sex it extracts "+str(getMilkSpeedPerMinuteMin())+"-"+str(getMilkSpeedPerMinuteMax())+" of milk per minute."
 
 func getClothingSlot():
 	return InventorySlot.UnderwearTop
@@ -22,8 +22,14 @@ func getPrice():
 func canSell():
 	return true
 
+func getMilkSpeedPerMinuteMin():
+	return 30.0
+
+func getMilkSpeedPerMinuteMax():
+	return 100.0
+
 func getTags():
-	return [ItemTag.SoldByMedicalVendomat, ItemTag.BreastPump]
+	return [ItemTag.SoldByMedicalVendomat, ItemTag.BreastPump, ItemTag.BreastPumpUsableByNPC]
 
 func getUnriggedParts(_character):
 	var howFilled = fluids.getFluidAmount()/fluids.getCapacity()

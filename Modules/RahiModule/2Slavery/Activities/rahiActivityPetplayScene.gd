@@ -232,6 +232,8 @@ func _run():
 
 		addButton("Continue", "See what happens next", "pet1_reward_check")
 	if(state == "pet1_heel"):
+		playAnimation(StageScene.Duo, "stand", {npc="rahi", flipNPC=true, npcAction="crawl", npcBodyState={leashedBy="pc"}})
+		
 		saynn("[say=pc]Ready for a little lesson?[/say]")
 
 		saynn("Rahi waits patiently near your feet, her ears perk with excitement as she meows softly.")
@@ -276,6 +278,8 @@ func _run():
 
 		addButton("Continue", "See what happens next", "pet1_reward_check")
 	if(state == "pet1_reward"):
+		playAnimation(StageScene.Duo, "stand", {npc="rahi", npcAction="allfours"})
+		
 		saynn("How do you wanna reward your kitty?")
 
 		addButton("Pat", "Just a simple pat will do", "reward1_pat")
@@ -312,6 +316,8 @@ func _run():
 
 		addButton("Continue", "That was fun", "endthescene")
 	if(state == "pet1_punish"):
+		playAnimation(StageScene.Duo, "stand", {npc="rahi", npcAction="allfours"})
+		
 		saynn("How do you wanna punish your kitty?")
 
 		addButton("Forgive her", "You don't wanna be harsh on your kitty", "punish1_forgive")

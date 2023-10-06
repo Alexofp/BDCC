@@ -37,9 +37,14 @@ func updateInfo():
 	tabName = skill.getShortName()
 	descLabel.text = skill.getVisibleDescription()
 	
-	levelBar.setTextLeft("Level "+str(skill.getLevel()))
-	levelBar.setText(str(skill.getExperience())+" / "+str(skill.getRequiredExperienceNextLevel())+" exp")
-	levelBar.setProgressBarValue(skill.getLevelProgress())
+	if(skill.scripted()):
+		levelBar.setTextLeft("")
+		levelBar.setText("")
+		levelBar.setProgressBarValue(0)
+	else:
+		levelBar.setTextLeft("Level "+str(skill.getLevel()))
+		levelBar.setText(str(skill.getExperience())+" / "+str(skill.getRequiredExperienceNextLevel())+" exp")
+		levelBar.setProgressBarValue(skill.getLevelProgress())
 	
 	updatePerks()
 
@@ -53,7 +58,10 @@ func updatePerks():
 	if(skill == null):
 		return
 	
-	perksLabel.text = "Free perk points: "+str(GM.pc.getSkillsHolder().getFreePerkPoints(skillID))
+	if(skill.scripted()):
+		perksLabel.text = ""
+	else:
+		perksLabel.text = "Free perk points: "+str(GM.pc.getSkillsHolder().getFreePerkPoints(skillID))
 	
 	var tiers = skill.getPerkTiers()
 	
@@ -87,41 +95,46 @@ func updatePerkText():
 	if(extraText!=""):
 		perkDescLabel.bbcode_text += "\n\n"+extraText
 	
-	var reqText = "Requirements:\n"
-	var perkCost = perk.getCost()
-	if(perkCost == 1):
-		if(GM.pc.getSkillsHolder().getFreePerkPoints(perk.getSkillGroup()) >= perkCost):
-			reqText += str(perkCost)+" perk point"
+	if(perk.unlockable()):
+		var reqText = "Requirements:\n"
+		var perkCost = perk.getCost()
+		if(perkCost == 1):
+			if(GM.pc.getSkillsHolder().getFreePerkPoints(perk.getSkillGroup()) >= perkCost):
+				reqText += str(perkCost)+" perk point"
+			else:
+				reqText += "[color=red]"+str(perkCost)+" perk point[/color]"
 		else:
-			reqText += "[color=red]"+str(perkCost)+" perk point[/color]"
+			if(GM.pc.getSkillsHolder().getFreePerkPoints(perk.getSkillGroup()) >= perkCost):
+				reqText += str(perkCost)+" perk points"
+			else:
+				reqText += "[color=red]"+str(perkCost)+" perk points[/color]"
+				
+		var requiredPerks = perk.getRequiredPerks()
+		for requiredPerkID in requiredPerks:
+			var requiredperk: PerkBase = GlobalRegistry.getPerk(requiredPerkID)
+			if(requiredperk == null):
+				continue
+			if(GM.pc.hasPerk(requiredPerkID)):
+				reqText += "\n"+str(requiredperk.getVisibleName())+" perk"
+			else:
+				reqText += "\n[color=red]"+str(requiredperk.getVisibleName())+" perk[/color]"
+		
+		perkRequirmentsLabel.bbcode_text = reqText
 	else:
-		if(GM.pc.getSkillsHolder().getFreePerkPoints(perk.getSkillGroup()) >= perkCost):
-			reqText += str(perkCost)+" perk points"
-		else:
-			reqText += "[color=red]"+str(perkCost)+" perk points[/color]"
-			
-	var requiredPerks = perk.getRequiredPerks()
-	for requiredPerkID in requiredPerks:
-		var requiredperk: PerkBase = GlobalRegistry.getPerk(requiredPerkID)
-		if(requiredperk == null):
-			continue
-		if(GM.pc.hasPerk(requiredPerkID)):
-			reqText += "\n"+str(requiredperk.getVisibleName())+" perk"
-		else:
-			reqText += "\n[color=red]"+str(requiredperk.getVisibleName())+" perk[/color]"
+		perkRequirmentsLabel.bbcode_text = ""
 	
-	perkRequirmentsLabel.bbcode_text = reqText
-	
+	unlockPerkButton.visible = false
+	togglePerkButton.visible = false
 	if(GM.pc.getSkillsHolder().hasPerkDisabledOrNot(perkID)):
-		unlockPerkButton.visible = false
-		togglePerkButton.visible = true
+		if(perk.toggleable()):
+			togglePerkButton.visible = true
 	else:
-		unlockPerkButton.visible = true
-		togglePerkButton.visible = false
-		if(GM.pc.getSkillsHolder().canUnlockPerk(perkID)):
-			unlockPerkButton.disabled = false
-		else:
-			unlockPerkButton.disabled = true
+		if(perk.unlockable()):
+			unlockPerkButton.visible = true
+			if(GM.pc.getSkillsHolder().canUnlockPerk(perkID)):
+				unlockPerkButton.disabled = false
+			else:
+				unlockPerkButton.disabled = true
 	
 
 func _on_UnlockPerkButton_pressed():

@@ -64,6 +64,9 @@ func playAnimation(animID, _args = {}):
 	if(animID == "sleep"):
 		state_machine.travel("Sleeping-loop")
 		state_machine2.travel("Sleeping_2-loop")
+	if(animID == "rub"):
+		state_machine.travel("SleepingRub-loop")
+		state_machine2.travel("SleepingRub_2-loop")
 
 
 func canTransitionTo(_actionID, _args = []):
@@ -79,4 +82,4 @@ func canTransitionTo(_actionID, _args = []):
 	return true
 
 func getSupportedStates():
-	return ["sleep"]
+	return ["sleep", "rub"]

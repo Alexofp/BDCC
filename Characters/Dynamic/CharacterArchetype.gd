@@ -66,6 +66,8 @@ static func getFetishes(archType):
 				Fetish.Condoms : FetishInterest.Likes,
 				Fetish.Rigging : FetishInterest.Likes,
 				Fetish.Sadism : FetishInterest.Loves,
+				Fetish.Choking : FetishInterest.Likes,
+				Fetish.FeetplayGiving : FetishInterest.SlightlyLikes,
 				
 				Fetish.Masochism : FetishInterest.Hates,
 				Fetish.Bondage : FetishInterest.Hates,
@@ -91,11 +93,13 @@ static func getFetishes(archType):
 				Fetish.Rigging : FetishInterest.Likes,
 				Fetish.Sadism : FetishInterest.Likes,
 				Fetish.DrugUse : FetishInterest.Likes,
+				Fetish.Choking : FetishInterest.Likes,
 			}
 		RopeBunny:
 			return {
 				Fetish.Masochism : FetishInterest.Likes,
 				Fetish.Bondage : FetishInterest.Loves,
+				Fetish.Lactation : FetishInterest.Likes,
 				
 				Fetish.Rigging : FetishInterest.Hates,
 			}
@@ -111,6 +115,7 @@ static func getFetishes(archType):
 				Fetish.Sadism : FetishInterest.Likes,
 				Fetish.UnconsciousSex : FetishInterest.Likes,
 				Fetish.DrugUse : FetishInterest.Loves,
+				Fetish.Lactation : FetishInterest.Likes,
 			}
 		TestSubject:
 			return {
@@ -118,6 +123,8 @@ static func getFetishes(archType):
 				Fetish.UnconsciousSex : FetishInterest.Loves,
 				Fetish.DrugUse : FetishInterest.Loves,
 				Fetish.BeingBred : FetishInterest.Likes,
+				Fetish.Choking : FetishInterest.Likes,
+				Fetish.Lactation : FetishInterest.Likes,
 			}
 		Breeder:
 			return {
@@ -126,6 +133,7 @@ static func getFetishes(archType):
 				Fetish.DrugUse : FetishInterest.Likes,
 				Fetish.VaginalSexGiving : FetishInterest.Loves,
 				Fetish.AnalSexGiving : FetishInterest.Likes,
+				Fetish.Lactation : FetishInterest.Likes,
 			}
 		BreedingStock:
 			return {
@@ -133,6 +141,7 @@ static func getFetishes(archType):
 				Fetish.Breeding : FetishInterest.Dislikes,
 				Fetish.VaginalSexReceiving : FetishInterest.Loves,
 				Fetish.AnalSexReceiving : FetishInterest.Likes,
+				Fetish.Lactation : FetishInterest.Likes,
 			}
 	
 	return {}

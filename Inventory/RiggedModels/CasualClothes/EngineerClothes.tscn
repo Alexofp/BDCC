@@ -11,6 +11,7 @@
 [ext_resource path="res://Player/Player3D/Parts/PartStatePicker.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Player/Player3D/Parts/PartState.tscn" type="PackedScene" id=10]
 
+
 [sub_resource type="SpatialMaterial" id=15]
 resource_name = "bodywide.png"
 flags_transparent = true

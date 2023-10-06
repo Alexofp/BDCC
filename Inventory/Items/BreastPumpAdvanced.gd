@@ -7,7 +7,7 @@ func getVisibleName():
 	return "Breast Pump Mk2"
 	
 func getDescription():
-	return "(Will be a reward for something)\nA tool that can extract milk out of lactating breasts. This is an advanced version that will automatically collect milk if worn over time."
+	return "(Will be a reward for something)\nA tool that can extract milk out of lactating breasts. This is an advanced version that will automatically collect milk if worn over time.\nIf put on during sex it extracts "+str(getMilkSpeedPerMinuteMin())+"-"+str(getMilkSpeedPerMinuteMax())+" of milk per minute."
 
 func getBuffs():
 	return [
@@ -19,6 +19,12 @@ func getPrice():
 
 func canSell():
 	return true
+
+func getMilkSpeedPerMinuteMin():
+	return 100.0
+
+func getMilkSpeedPerMinuteMax():
+	return 300.0
 
 func getTags():
 	return [ItemTag.SoldByMedicalVendomat, ItemTag.BreastPump]

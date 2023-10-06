@@ -14,13 +14,13 @@ func _ready():
 	animationTree2.anim_player = animationTree2.get_path_to(doll2.getAnimPlayer())
 	animationTree2.active = true
 
-func updateSubAnims():
+func updateSubAnims(overrideSecondHands = false):
 	if(doll.getArmsCuffed()):
 		animationTree["parameters/CuffsBlend/blend_amount"] = 1.0
 	else:
 		animationTree["parameters/CuffsBlend/blend_amount"] = 0.0
 	
-	if(doll2.getArmsCuffed()):
+	if(doll2.getArmsCuffed() || overrideSecondHands):
 		animationTree2["parameters/CuffsBlend/blend_amount"] = 1.0
 	else:
 		animationTree2["parameters/CuffsBlend/blend_amount"] = 0.0
@@ -53,7 +53,7 @@ func playAnimation(animID, _args = {}):
 	else:
 		doll2.applyBodyState({})
 	
-	updateSubAnims()
+	updateSubAnims((true if (_args.has("uncon") && _args["uncon"]) else false))
 	
 	var state_machine = animationTree["parameters/StateMachine/playback"]
 	var state_machine2 = animationTree2["parameters/StateMachine/playback"]

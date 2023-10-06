@@ -123,12 +123,22 @@ population = 2
 [node name="CDRoom14" parent="." index="14" instance=ExtResource( 2 )]
 position = Vector2( 0, -448 )
 roomName = "Main corridor"
+roomID = "cd_last_intersection"
 roomDescription = "Long corridor that looks very rich. There is a carpet on the floor, walls are decorated with many paintings. Sometimes you notice doors that lead to some offices"
 gridColor = 2
 loctag_GuardsEncounter = true
 population = 2
 
-[node name="CDRoom15" parent="." index="15" instance=ExtResource( 2 )]
+[node name="SyndiShip" parent="." index="15" instance=ExtResource( 2 )]
+visible = false
+position = Vector2( 384, -448 )
+roomName = "Syndicate ship"
+roomID = "cd_syndiship"
+gridColor = 2
+loctag_GuardsEncounter = true
+population = 2
+
+[node name="CDRoom15" parent="." index="16" instance=ExtResource( 2 )]
 position = Vector2( -64, -448 )
 roomName = "Main corridor"
 roomDescription = "Long corridor that looks very rich. There is a carpet on the floor, walls are decorated with many paintings. Sometimes you notice doors that lead to some offices"
@@ -136,7 +146,7 @@ gridColor = 2
 loctag_GuardsEncounter = true
 population = 2
 
-[node name="CDRoom16" parent="." index="16" instance=ExtResource( 2 )]
+[node name="CDRoom16" parent="." index="17" instance=ExtResource( 2 )]
 position = Vector2( 0, -512 )
 roomName = "Main corridor"
 roomID = "cd_near_captain_office"
@@ -145,7 +155,7 @@ roomSprite = 4
 gridColor = 2
 population = 2
 
-[node name="CDRoom17" parent="." index="17" instance=ExtResource( 2 )]
+[node name="CDRoom17" parent="." index="18" instance=ExtResource( 2 )]
 self_modulate = Color( 0.7, 0.7, 1, 1 )
 position = Vector2( 0, -576 )
 roomName = "Captain's office"
@@ -157,25 +167,25 @@ roomSprite = 1
 roomColor = 3
 population = 2
 
-[node name="CDRoom18" parent="." index="18" instance=ExtResource( 2 )]
+[node name="CDRoom18" parent="." index="19" instance=ExtResource( 2 )]
 position = Vector2( 64, -64 )
 roomName = "Office"
 roomDescription = "A huge office that belongs to some higher-up"
 population = 2
 
-[node name="CDRoom19" parent="." index="19" instance=ExtResource( 2 )]
+[node name="CDRoom19" parent="." index="20" instance=ExtResource( 2 )]
 position = Vector2( -128, -256 )
 roomName = "Office"
 roomDescription = "A huge office that belongs to some higher-up"
 population = 2
 
-[node name="CDRoom20" parent="." index="20" instance=ExtResource( 2 )]
+[node name="CDRoom20" parent="." index="21" instance=ExtResource( 2 )]
 position = Vector2( 128, -384 )
 roomName = "Office"
 roomDescription = "A huge office that belongs to some higher-up"
 population = 2
 
-[node name="CDRoom21" parent="." index="21" instance=ExtResource( 2 )]
+[node name="CDRoom21" parent="." index="22" instance=ExtResource( 2 )]
 position = Vector2( 128, -256 )
 roomName = "Office"
 roomDescription = "A huge office that belongs to some higher-up"

@@ -1,0 +1,217 @@
+[gd_scene load_steps=45 format=2]
+
+[ext_resource path="res://Player/Player3D/Doll3D.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Player/StageScene3D/BaseStageScene3D.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Player/Props/platform.png" type="Texture" id=3]
+[ext_resource path="res://Player/StageScene3D/Scenes/BreastFeeding.gd" type="Script" id=4]
+
+[sub_resource type="AnimationNodeAnimation" id=3]
+animation = "CuffedArms-loop"
+
+[sub_resource type="AnimationNodeBlend2" id=4]
+filter_enabled = true
+filters = [ "Doll3D/Skeleton:Arm.L", "Doll3D/Skeleton:Arm.R", "Doll3D/Skeleton:ForeArm.L", "Doll3D/Skeleton:ForeArm.R", "Doll3D/Skeleton:Hand.L", "Doll3D/Skeleton:Hand.R" ]
+
+[sub_resource type="AnimationNodeAnimation" id=85]
+animation = "BreastFeedingAltTease_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=68]
+animation = "BreastFeedingTease_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=69]
+animation = "BreastFeedingBig_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=70]
+animation = "BreastFeeding_1-loop"
+
+[sub_resource type="AnimationNodeBlend2" id=71]
+
+[sub_resource type="AnimationNodeBlendTree" id=72]
+graph_offset = Vector2( -536.639, 80.6667 )
+nodes/Animation/node = SubResource( 70 )
+nodes/Animation/position = Vector2( -220, 60 )
+"nodes/Animation 2/node" = SubResource( 69 )
+"nodes/Animation 2/position" = Vector2( -220, 200 )
+nodes/BreastSize/node = SubResource( 71 )
+nodes/BreastSize/position = Vector2( 60, 100 )
+node_connections = [ "output", 0, "BreastSize", "BreastSize", 0, "Animation", "BreastSize", 1, "Animation 2" ]
+
+[sub_resource type="AnimationNodeAnimation" id=86]
+animation = "BreastFeedingAltBig_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=87]
+animation = "BreastFeedingAlt_1-loop"
+
+[sub_resource type="AnimationNodeBlend2" id=88]
+
+[sub_resource type="AnimationNodeBlendTree" id=89]
+graph_offset = Vector2( -484, 50 )
+nodes/Animation/node = SubResource( 87 )
+nodes/Animation/position = Vector2( -260, 120 )
+"nodes/Animation 2/node" = SubResource( 86 )
+"nodes/Animation 2/position" = Vector2( -280, 300 )
+nodes/BreastSize/node = SubResource( 88 )
+nodes/BreastSize/position = Vector2( 78, 143 )
+node_connections = [ "output", 0, "BreastSize", "BreastSize", 0, "Animation", "BreastSize", 1, "Animation 2" ]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=73]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=74]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=90]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=91]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=92]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=93]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachine" id=75]
+states/BreastFeedingAltTease_1-loop/node = SubResource( 85 )
+states/BreastFeedingAltTease_1-loop/position = Vector2( 854, 99 )
+states/BreastFeedingTease_1-loop/node = SubResource( 68 )
+states/BreastFeedingTease_1-loop/position = Vector2( 520, 99 )
+states/Feeding/node = SubResource( 72 )
+states/Feeding/position = Vector2( 520, 196 )
+states/FeedingAlt/node = SubResource( 89 )
+states/FeedingAlt/position = Vector2( 822, 202 )
+transitions = [ "BreastFeedingTease_1-loop", "Feeding", SubResource( 73 ), "Feeding", "BreastFeedingTease_1-loop", SubResource( 74 ), "BreastFeedingTease_1-loop", "BreastFeedingAltTease_1-loop", SubResource( 90 ), "BreastFeedingAltTease_1-loop", "BreastFeedingTease_1-loop", SubResource( 91 ), "BreastFeedingAltTease_1-loop", "FeedingAlt", SubResource( 92 ), "FeedingAlt", "BreastFeedingAltTease_1-loop", SubResource( 93 ) ]
+start_node = "BreastFeedingTease_1-loop"
+graph_offset = Vector2( 160, 33 )
+
+[sub_resource type="AnimationNodeBlendTree" id=66]
+graph_offset = Vector2( -158, 73 )
+nodes/Animation/node = SubResource( 3 )
+nodes/Animation/position = Vector2( 140, 280 )
+nodes/CuffsBlend/node = SubResource( 4 )
+nodes/CuffsBlend/position = Vector2( 440, 160 )
+nodes/StateMachine/node = SubResource( 75 )
+nodes/StateMachine/position = Vector2( 175, 101 )
+nodes/output/position = Vector2( 680, 180 )
+node_connections = [ "output", 0, "CuffsBlend", "CuffsBlend", 0, "StateMachine", "CuffsBlend", 1, "Animation" ]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=22]
+
+[sub_resource type="AnimationNodeAnimation" id=94]
+animation = "BreastFeedingAltTease_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=76]
+animation = "BreastFeedingTease_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=77]
+animation = "BreastFeedingBig_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=78]
+animation = "BreastFeeding_2-loop"
+
+[sub_resource type="AnimationNodeBlend2" id=79]
+
+[sub_resource type="AnimationNodeBlendTree" id=80]
+graph_offset = Vector2( -502, -4 )
+nodes/Animation/node = SubResource( 78 )
+nodes/Animation/position = Vector2( -240, 80 )
+"nodes/Animation 2/node" = SubResource( 77 )
+"nodes/Animation 2/position" = Vector2( -240, 260 )
+nodes/BreastSize/node = SubResource( 79 )
+nodes/BreastSize/position = Vector2( 80, 120 )
+node_connections = [ "output", 0, "BreastSize", "BreastSize", 0, "Animation", "BreastSize", 1, "Animation 2" ]
+
+[sub_resource type="AnimationNodeAnimation" id=95]
+animation = "BreastFeedingAltBig_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=96]
+animation = "BreastFeedingAlt_2-loop"
+
+[sub_resource type="AnimationNodeBlend2" id=97]
+
+[sub_resource type="AnimationNodeBlendTree" id=98]
+graph_offset = Vector2( -623, 90 )
+nodes/Animation/node = SubResource( 96 )
+nodes/Animation/position = Vector2( -280, 100 )
+"nodes/Animation 2/node" = SubResource( 95 )
+"nodes/Animation 2/position" = Vector2( -300, 300 )
+nodes/BreastSize/node = SubResource( 97 )
+nodes/BreastSize/position = Vector2( 40, 140 )
+node_connections = [ "output", 0, "BreastSize", "BreastSize", 0, "Animation", "BreastSize", 1, "Animation 2" ]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=81]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=82]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=99]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=100]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=101]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=102]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachine" id=83]
+states/BreastFeedingAltTease_2-loop/node = SubResource( 94 )
+states/BreastFeedingAltTease_2-loop/position = Vector2( 848, 58 )
+states/BreastFeedingTease_2-loop/node = SubResource( 76 )
+states/BreastFeedingTease_2-loop/position = Vector2( 515, 58 )
+states/Feeding/node = SubResource( 80 )
+states/Feeding/position = Vector2( 515, 163 )
+states/FeedingAlt/node = SubResource( 98 )
+states/FeedingAlt/position = Vector2( 841, 163 )
+transitions = [ "BreastFeedingTease_2-loop", "Feeding", SubResource( 81 ), "Feeding", "BreastFeedingTease_2-loop", SubResource( 82 ), "BreastFeedingTease_2-loop", "BreastFeedingAltTease_2-loop", SubResource( 99 ), "BreastFeedingAltTease_2-loop", "BreastFeedingTease_2-loop", SubResource( 100 ), "BreastFeedingAltTease_2-loop", "FeedingAlt", SubResource( 101 ), "FeedingAlt", "BreastFeedingAltTease_2-loop", SubResource( 102 ) ]
+start_node = "BreastFeedingTease_2-loop"
+graph_offset = Vector2( 203, -75 )
+
+[sub_resource type="AnimationNodeBlendTree" id=84]
+graph_offset = Vector2( -339.532, 63.6842 )
+nodes/Animation/node = SubResource( 3 )
+nodes/Animation/position = Vector2( 140, 280 )
+nodes/CuffsBlend/node = SubResource( 4 )
+nodes/CuffsBlend/position = Vector2( 440, 160 )
+nodes/StateMachine/node = SubResource( 83 )
+nodes/StateMachine/position = Vector2( 193.468, 96.6842 )
+nodes/output/position = Vector2( 680, 180 )
+node_connections = [ "output", 0, "CuffsBlend", "CuffsBlend", 0, "StateMachine", "CuffsBlend", 1, "Animation" ]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=23]
+
+[node name="BreastFeeding" instance=ExtResource( 2 )]
+script = ExtResource( 4 )
+
+[node name="Sprite3D" type="Sprite3D" parent="." index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.196641, -1.77462 )
+texture = ExtResource( 3 )
+region_enabled = true
+region_rect = Rect2( 1, 1, 1022, 62 )
+
+[node name="Doll3D" parent="." index="1" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00507566, 0, 0 )
+
+[node name="Doll3D2" parent="." index="2" instance=ExtResource( 1 )]
+transform = Transform( -1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00507566, 0, 0 )
+
+[node name="AnimationTree" type="AnimationTree" parent="." index="3"]
+tree_root = SubResource( 66 )
+anim_player = NodePath("../Doll3D/DollSkeleton/AnimationPlayer")
+parameters/CuffsBlend/blend_amount = 0
+parameters/StateMachine/playback = SubResource( 22 )
+parameters/StateMachine/Feeding/BreastSize/blend_amount = 0.5
+parameters/StateMachine/FeedingAlt/BreastSize/blend_amount = 0.5
+
+[node name="AnimationTree2" type="AnimationTree" parent="." index="4"]
+tree_root = SubResource( 84 )
+anim_player = NodePath("../Doll3D2/DollSkeleton/AnimationPlayer")
+parameters/CuffsBlend/blend_amount = 0
+parameters/StateMachine/playback = SubResource( 23 )
+parameters/StateMachine/Feeding/BreastSize/blend_amount = 0.5
+parameters/StateMachine/FeedingAlt/BreastSize/blend_amount = 0.5
+
+[editable path="Doll3D"]
+[editable path="Doll3D/DollSkeleton"]
+[editable path="Doll3D2"]
+[editable path="Doll3D2/DollSkeleton"]

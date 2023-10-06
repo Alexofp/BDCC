@@ -19,6 +19,12 @@ func _init():
 	sexReactionPullOut = SexReaction.BeggingToPullOutAnal
 	
 func getGoals():
+	if(currentPose == POSE_CHOKEFUCK):
+		return {
+			SexGoal.ChokeSexAnal: 1.0,
+			SexGoal.FuckAnal: 1.0,
+			SexGoal.StraponAnal: 1.0,
+		}
 	return {
 		SexGoal.FuckAnal: 1.0,
 		SexGoal.StraponAnal: 1.0,

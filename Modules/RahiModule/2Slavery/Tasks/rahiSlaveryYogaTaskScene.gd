@@ -37,7 +37,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "easy_outcome")
 	if(state == "easy_outcome"):
-		playAnimation(StageScene.Solo, "allfours", {pc="rahi"})
+		playAnimation(StageScene.Yoga, "catcow", {pc="rahi"})
 		saynn("After the simple stretches, Rahi gets on all fours and starts doing some cat-cow poses, arching her back like a cat and then rounding it like a cow. Quite cute and fitting for a kitty like Rahi.")
 
 		if (success):
@@ -63,7 +63,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "medium_outcome")
 	if(state == "medium_outcome"):
-		playAnimation(StageScene.Solo, "kneel", {pc="rahi", bodyState={naked=true}})
+		playAnimation(StageScene.Yoga, "camel", {pc="rahi", bodyState={naked=true}})
 		saynn("After the simple stretches, Rahi gets on her knees before you. She makes sure to keep her shins flat on the floor while she leans back, arching her spine as far as possible and keeping her paws on her ankles, using them for support.")
 
 		saynn("[say=rahi]A camel pose..[/say]")

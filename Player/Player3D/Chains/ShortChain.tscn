@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Player/Player3D/Chains/CurveRenderer.gd" type="Script" id=1]
+[ext_resource path="res://Player/Player3D/Chains/ChainMaterial.tres" type="Material" id=2]
+
+[node name="ShortChain" type="ImmediateGeometry"]
+material_override = ExtResource( 2 )
+script = ExtResource( 1 )
+width = 0.75
+sag_static = 0.5
+expected_length = 1.0
+max_sagging_length = 1.0
+sag_from_length = 1.0

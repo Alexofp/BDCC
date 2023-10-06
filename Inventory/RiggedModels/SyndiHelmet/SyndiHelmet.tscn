@@ -1,0 +1,115 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Player/Player3D/Parts/Part3D.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Player/Player3D/Parts/Head/FelineHead/cathead.png" type="Texture" id=2]
+[ext_resource path="res://Inventory/RiggedModels/SyndiHelmet/syndihelmet.png" type="Texture" id=3]
+
+[sub_resource type="SpatialMaterial" id=1]
+resource_name = "cathead.png"
+flags_transparent = true
+flags_unshaded = true
+vertex_color_use_as_albedo = true
+params_cull_mode = 2
+params_depth_draw_mode = 3
+albedo_texture = ExtResource( 2 )
+
+[sub_resource type="ArrayMesh" id=2]
+resource_name = "Tail_catheadpng"
+surfaces/0 = {
+"aabb": AABB( -1.42377, 6.0673, 0.04, 2.56, 2.56, 9.99868e-06 ),
+"array_data": PoolByteArray( 47, 62, 182, 191, 77, 39, 194, 64, 10, 215, 35, 61, 0, 0, 127, 63, 0, 0, 0, 60, 3, 0, 0, 0, 255, 255, 0, 0, 0, 0, 0, 0, 229, 111, 145, 63, 77, 39, 194, 64, 10, 215, 35, 61, 0, 0, 127, 63, 0, 60, 0, 60, 3, 0, 0, 0, 255, 255, 0, 0, 0, 0, 0, 0, 229, 111, 145, 63, 105, 9, 10, 65, 10, 215, 35, 61, 0, 0, 127, 63, 0, 60, 0, 0, 3, 0, 0, 0, 255, 255, 0, 0, 0, 0, 0, 0, 47, 62, 182, 191, 105, 9, 10, 65, 10, 215, 35, 61, 0, 0, 127, 63, 0, 0, 0, 0, 3, 0, 0, 0, 255, 255, 0, 0, 0, 0, 0, 0 ),
+"array_index_data": PoolByteArray( 0, 0, 2, 0, 1, 0, 0, 0, 3, 0, 2, 0 ),
+"blend_shape_data": [  ],
+"format": 2194903,
+"index_count": 6,
+"material": SubResource( 1 ),
+"primitive": 4,
+"skeleton_aabb": [ AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( -1.42377, 6.0673, 0.04, 2.56, 2.56, 9.99868e-06 ) ],
+"vertex_count": 4
+}
+
+[sub_resource type="Skin" id=3]
+resource_name = "Skin"
+bind_count = 22
+bind/0/name = "Hips"
+bind/0/bone = -1
+bind/0/pose = Transform( -0.994309, -0.106533, 2.32167e-08, -0.106533, 0.994309, -3.96619e-08, -2.99965e-08, -4.15056e-09, -1, 0.52595, -4.30199, 1.9926e-08 )
+bind/1/name = "Chest"
+bind/1/bone = -1
+bind/1/pose = Transform( -0.997932, 0.0642847, -6.12767e-09, 0.0642847, 0.997931, -3.69649e-08, -7.39851e-09, 4.76596e-10, -1, -0.33469, -5.027, -3.14128e-09 )
+bind/2/name = "Neck"
+bind/2/bone = -1
+bind/2/pose = Transform( -0.985348, -0.170501, -0.0044623, -0.170503, 0.985357, -3.93484e-08, 0.00439695, 0.000760832, -0.99999, 1.21785, -6.50506, -0.00543445 )
+bind/3/name = "Head"
+bind/3/bone = -1
+bind/3/pose = Transform( -0.998473, 2.23357e-08, -0.0552458, 2.37663e-08, 1, -3.7394e-08, 0.0552458, -1.70221e-09, -0.998473, 0.0449182, -6.88278, -0.00248533 )
+bind/4/name = "Arm.L"
+bind/4/bone = -1
+bind/4/pose = Transform( 0.999108, 0.0423075, 6.14439e-09, 0.0423077, -0.999105, 3.74071e-08, -3.41576e-09, 6.45247e-10, -1, -0.431848, 6.2417, 0.38753 )
+bind/5/name = "ForeArm.L"
+bind/5/bone = -1
+bind/5/pose = Transform( 0.955304, -0.295635, -8.71781e-08, -0.295636, -0.955301, 3.27786e-08, -1.04109e-07, 3.22185e-08, -1, 1.25638, 4.81044, 0.38753 )
+bind/6/name = "Hand.L"
+bind/6/bone = -1
+bind/6/pose = Transform( 0.998911, -0.0467251, 6.04792e-09, -0.0467252, -0.998908, 3.71973e-08, -6.83402e-09, 3.19668e-10, -1, 0.30201, 3.84566, 0.38753 )
+bind/7/name = "Arm.R"
+bind/7/bone = -1
+bind/7/pose = Transform( 0.999109, 0.0423075, 6.1444e-09, 0.0423078, -0.999105, 3.74071e-08, -3.41576e-09, 6.45247e-10, -1, -0.331938, 6.24593, -0.354205 )
+bind/8/name = "ForeArm.R"
+bind/8/bone = -1
+bind/8/pose = Transform( 0.955305, -0.295635, -4.97861e-08, -0.295637, -0.955301, 3.27786e-08, -6.83888e-08, 2.11641e-08, -1, 1.35191, 4.78088, -0.354206 )
+bind/9/name = "Hand.R"
+bind/9/bone = -1
+bind/9/pose = Transform( 0.998912, -0.0467251, -1.40531e-09, -0.0467252, -0.998908, 3.71973e-08, -1.42791e-08, 6.67923e-10, -1, 0.401901, 3.84099, -0.354205 )
+bind/10/name = "LegUpper.L"
+bind/10/bone = -1
+bind/10/pose = Transform( 0.998727, 0.0523476, -8.3476e-09, 0.0523371, -0.998629, 5.65495e-08, -1.6569e-08, -1.91544e-08, -1, -0.371637, 3.98764, 0.238884 )
+bind/11/name = "LegDown.L"
+bind/11/bone = -1
+bind/11/pose = Transform( 0.999289, 0.040219, -1.27741e-08, 0.0402074, -0.999191, 2.11623e-08, -2.31058e-08, 1.60957e-08, -1, -0.346262, 2.09207, 0.238884 )
+bind/12/name = "Foot.L"
+bind/12/bone = -1
+bind/12/pose = Transform( 0.486096, -0.873925, 1.07538e-06, -0.874017, -0.486062, 8.57066e-09, 5.04056e-07, -9.06214e-07, -1, 0.147733, 0.462404, 0.238884 )
+bind/13/name = "Penis"
+bind/13/bone = -1
+bind/13/pose = Transform( 1.71363e-07, -1, -3.13916e-07, -1, -2.98023e-07, -1.11372e-08, -6.73697e-14, 3.51675e-07, -1, 3.88283, -0.256576, -1.36621e-06 )
+bind/14/name = "Tail1"
+bind/14/bone = -1
+bind/14/pose = Transform( 0.707107, 0.707107, 5.26836e-09, 0.707107, -0.707106, 3.45748e-08, 1.70362e-08, 1.70362e-08, -1, -3.49697, 2.72398, -8.49116e-08 )
+bind/15/name = "Tail2"
+bind/15/bone = -1
+bind/15/pose = Transform( 0.707107, 0.707107, -6.32203e-08, 0.707107, -0.707106, 3.45748e-08, -3.13926e-08, -3.13926e-08, -1, -3.49697, 1.55751, 1.54591e-07 )
+bind/16/name = "Tail3"
+bind/16/bone = -1
+bind/16/pose = Transform( 0.707107, 0.707107, 6.84886e-08, 0.707107, -0.707107, 3.45748e-08, 6.17396e-08, 6.17396e-08, -1, -3.49697, 0.335625, -3.05991e-07 )
+bind/17/name = "Tail4"
+bind/17/bone = -1
+bind/17/pose = Transform( 0.707107, 0.707107, 6.84887e-08, 0.707107, -0.707106, 3.45748e-08, 6.17397e-08, 6.17397e-08, -1, -3.49697, -0.901812, -3.05991e-07 )
+bind/18/name = "Tail5"
+bind/18/bone = -1
+bind/18/pose = Transform( 0.707107, 0.707107, -1.2644e-07, 0.707107, -0.707106, 3.45748e-08, -7.60961e-08, -7.60961e-08, -1, -3.49697, -2.11139, 3.7567e-07 )
+bind/19/name = "LegUpper.R"
+bind/19/bone = -1
+bind/19/pose = Transform( 0.998727, 0.0523475, -1.58019e-08, 0.0523371, -0.998629, 4.0865e-08, -2.4777e-08, -3.87699e-09, -1, -0.271764, 3.99287, -0.209835 )
+bind/20/name = "LegDown.R"
+bind/20/bone = -1
+bind/20/pose = Transform( 0.999289, 0.040219, -2.02282e-08, 0.0402074, -0.999191, 2.96705e-08, -3.01548e-08, 7.29915e-09, -1, -0.246333, 2.09609, -0.209835 )
+bind/21/name = "Foot.R"
+bind/21/bone = -1
+bind/21/pose = Transform( 0.486096, -0.873925, 4.58786e-07, -0.874017, -0.486062, -1.14923e-08, 2.21924e-07, -3.57599e-07, -1, 0.196343, 0.375003, -0.209835 )
+
+[sub_resource type="SpatialMaterial" id=4]
+resource_name = "cathead.png"
+flags_transparent = true
+flags_unshaded = true
+vertex_color_use_as_albedo = true
+params_cull_mode = 2
+params_depth_draw_mode = 3
+albedo_texture = ExtResource( 3 )
+
+[node name="SyndiHelmet" instance=ExtResource( 1 )]
+
+[node name="catheadpng" type="MeshInstance" parent="." index="0"]
+mesh = SubResource( 2 )
+skin = SubResource( 3 )
+material/0 = SubResource( 4 )

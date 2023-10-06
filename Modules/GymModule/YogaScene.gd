@@ -23,11 +23,15 @@ func _run():
 		GM.ES.triggerRun(Trigger.ApproachedYogaMats)
 
 	if(state == "simple_poses"):
+		playAnimation(StageScene.Yoga, "dog")
+		
 		saynn("No need to do anything complicated, sometimes simple is all you need.")
 
 		saynn("You stand straight with your feet together and arms at your side. You make sure to ground your feet completely, yoga requires full body awareness and balance. Then you straighten your {pc.thick} legs and tense up your thigh muscles. As you inhale, you arch your back and extend your arms high up and then out.")
 
 		saynn("Open chest, open heart.. you feel your whole being engaged. Even though it might look like you are just.. standing, all of your muscles are working hard to keep you at balance. After some time like that, you release your arms and instead position behind your back, palms connected, as you hold this new pose, again feeling your thighs and back working hard. So liberating.")
+
+		saynn("Then you switch to a downward-facing dog pose, spreading your legs and leaning forward, using your hands for support.")
 
 		saynn("You slowly exhale and let your body relax. That felt good.")
 		addButton("Leave", "Nice", "endthescene")

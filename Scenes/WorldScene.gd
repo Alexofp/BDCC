@@ -42,6 +42,7 @@ func _run():
 	#addButtonAt(7, "Computer test", "Computer test", "comptest")
 	#addButtonAt(8, "Hard Computer test", "Computer test", "comptest2")
 	#addButtonAt(8, "Pc override test", "Override test", "overridetest")
+	#addButtonAt(8, "Masochism minigame", "Test", "masochismminigame")
 	
 	_roomInfo._onPreEnter()
 	setLocationName(_roomInfo.getName())
@@ -92,8 +93,12 @@ func _react(_action: String, _args):
 		runScene("MeScene")
 	if(_action == "sextest"):
 		#runScene("GenericSexScene", ["rahi", "pc", SexType.SlutwallSex])
+		GM.pc.getInventory().addItem(GlobalRegistry.createItem("BreastPump"))
+		GM.pc.getInventory().addItem(GlobalRegistry.createItem("BreastPumpAdvanced"))
 		runScene("GenericSexScene", ["pc", "rahi"])
 		#runScene("GenericSexScene", ["rahi", "pc"])
+		#runScene("GenericSexScene", ["nova", "pc"])
+		#runScene("GenericSexScene", ["pc", "nova"])
 		#if(RNG.chance(50)):
 		#	runScene("GenericSexScene", ["nova", "pc"])
 		#else:
@@ -105,3 +110,5 @@ func _react(_action: String, _args):
 		runScene("ComputerSimScene", ["TaviEngineeringSafeComputer"])
 	if(_action == "overridetest"):
 		runScene("PCOverrideExample")
+	if(_action == "masochismminigame"):
+		runScene("TaviMasochismScene")

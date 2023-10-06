@@ -942,6 +942,9 @@ func endSex():
 	sexEnded = true
 	var texts = ["The sex scene has ended!"]
 	
+	for activity in activities:
+		activity.endActivity()
+	
 	if(trackedItems.has("pc")):
 		for trackedItem in trackedItems["pc"]:
 			var character:BaseCharacter = GlobalRegistry.getCharacter(trackedItem[0])
@@ -1000,6 +1003,9 @@ func hasSexEnded():
 	return sexEnded
 
 func getBestAnimation():
+	var foundPriority = -999
+	var foundAnimInfo = null
+	
 	var hasPlayer = false
 	if(isSub("pc") || isDom("pc")):
 		hasPlayer = true
@@ -1013,10 +1019,16 @@ func getBestAnimation():
 		
 		if(hasPlayer):
 			if(activity.subID == "pc" || activity.domID == "pc"):
-				return animInfo
+				if(activity.getAnimationPriority() > foundPriority || foundAnimInfo == null):
+					foundAnimInfo = animInfo
+					foundPriority = activity.getAnimationPriority()
 		else:
-			return animInfo
+			if(activity.getAnimationPriority() > foundPriority || foundAnimInfo == null):
+				foundAnimInfo = animInfo
+				foundPriority = activity.getAnimationPriority()
 	
+	if(foundAnimInfo != null):
+		return foundAnimInfo
 	return sexType.getDefaultAnimation()
 
 func playAnimation():

@@ -21,7 +21,7 @@ func isVisible():
 	return true
 
 func isCompleted():
-	return false
+	return getFlag("TaviModule.Ch7CaptainSceneHappened")
 
 func isMainQuest():
 	return true

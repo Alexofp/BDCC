@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=37 format=2]
 
 [ext_resource path="res://Player/Player3D/Doll3D.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Player/StageScene3D/BaseStageScene3D.tscn" type="PackedScene" id=2]
@@ -15,13 +15,61 @@ filters = [ "Doll3D/Skeleton:Arm.L", "Doll3D/Skeleton:Arm.R", "Doll3D/Skeleton:F
 [sub_resource type="AnimationNodeAnimation" id=24]
 animation = "Hug_1-loop"
 
+[sub_resource type="AnimationNodeAnimation" id=30]
+animation = "KissFar_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=31]
+animation = "Kiss_1-loop"
+
+[sub_resource type="AnimationNodeBlend2" id=32]
+
+[sub_resource type="AnimationNodeBlendTree" id=33]
+graph_offset = Vector2( -450, -57 )
+nodes/Animation/node = SubResource( 31 )
+nodes/Animation/position = Vector2( -220, 60 )
+"nodes/Animation 2/node" = SubResource( 30 )
+"nodes/Animation 2/position" = Vector2( -220, 220 )
+nodes/KissBlend/node = SubResource( 32 )
+nodes/KissBlend/position = Vector2( 60, 120 )
+node_connections = [ "output", 0, "KissBlend", "KissBlend", 0, "Animation", "KissBlend", 1, "Animation 2" ]
+
+[sub_resource type="AnimationNodeAnimation" id=34]
+animation = "PreHug_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=35]
+animation = "StartHug_1-loop"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=36]
+xfade_time = 0.1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=37]
+switch_mode = 2
+xfade_time = 0.1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=38]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=39]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=40]
+xfade_time = 0.5
+
 [sub_resource type="AnimationNodeStateMachine" id=25]
 states/Hug_1-loop/node = SubResource( 24 )
-states/Hug_1-loop/position = Vector2( 449, 129 )
-start_node = "Hug_1-loop"
+states/Hug_1-loop/position = Vector2( 438, 130 )
+states/Kissing/node = SubResource( 33 )
+states/Kissing/position = Vector2( 438, 237 )
+states/PreHug_1-loop/node = SubResource( 34 )
+states/PreHug_1-loop/position = Vector2( 438, -65 )
+states/StartHug_1-loop/node = SubResource( 35 )
+states/StartHug_1-loop/position = Vector2( 297, 41 )
+transitions = [ "PreHug_1-loop", "StartHug_1-loop", SubResource( 36 ), "StartHug_1-loop", "Hug_1-loop", SubResource( 37 ), "Hug_1-loop", "Kissing", SubResource( 38 ), "Kissing", "Hug_1-loop", SubResource( 39 ), "Hug_1-loop", "PreHug_1-loop", SubResource( 40 ) ]
+start_node = "PreHug_1-loop"
+graph_offset = Vector2( -196, -157 )
 
 [sub_resource type="AnimationNodeBlendTree" id=26]
-graph_offset = Vector2( -154, 7 )
+graph_offset = Vector2( -3.66083, 23.4256 )
 nodes/Animation/node = SubResource( 3 )
 nodes/Animation/position = Vector2( 140, 280 )
 nodes/CuffsBlend/node = SubResource( 4 )
@@ -36,13 +84,62 @@ node_connections = [ "output", 0, "CuffsBlend", "CuffsBlend", 0, "StateMachine",
 [sub_resource type="AnimationNodeAnimation" id=27]
 animation = "Hug_2-loop"
 
+[sub_resource type="AnimationNodeAnimation" id=41]
+animation = "KissFar_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=42]
+animation = "Kiss_2-loop"
+
+[sub_resource type="AnimationNodeBlend2" id=43]
+
+[sub_resource type="AnimationNodeBlendTree" id=44]
+graph_offset = Vector2( -101, -10 )
+nodes/Animation/node = SubResource( 42 )
+nodes/Animation/position = Vector2( 120, 80 )
+"nodes/Animation 2/node" = SubResource( 41 )
+"nodes/Animation 2/position" = Vector2( 100, 260 )
+nodes/KissBlend/node = SubResource( 43 )
+nodes/KissBlend/position = Vector2( 340, 140 )
+nodes/output/position = Vector2( 560, 180 )
+node_connections = [ "output", 0, "KissBlend", "KissBlend", 0, "Animation", "KissBlend", 1, "Animation 2" ]
+
+[sub_resource type="AnimationNodeAnimation" id=45]
+animation = "PreHug_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=46]
+animation = "StartHug_2-loop"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=47]
+xfade_time = 0.1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=48]
+switch_mode = 2
+xfade_time = 0.1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=49]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=50]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=51]
+xfade_time = 0.5
+
 [sub_resource type="AnimationNodeStateMachine" id=28]
 states/Hug_2-loop/node = SubResource( 27 )
 states/Hug_2-loop/position = Vector2( 447, 91 )
-start_node = "Hug_2-loop"
+states/Kissing2/node = SubResource( 44 )
+states/Kissing2/position = Vector2( 447, 199 )
+states/PreHug_2-loop/node = SubResource( 45 )
+states/PreHug_2-loop/position = Vector2( 447, -115 )
+states/StartHug_2-loop/node = SubResource( 46 )
+states/StartHug_2-loop/position = Vector2( 288, -13 )
+transitions = [ "PreHug_2-loop", "StartHug_2-loop", SubResource( 47 ), "StartHug_2-loop", "Hug_2-loop", SubResource( 48 ), "Hug_2-loop", "PreHug_2-loop", SubResource( 49 ), "Hug_2-loop", "Kissing2", SubResource( 50 ), "Kissing2", "Hug_2-loop", SubResource( 51 ) ]
+start_node = "PreHug_2-loop"
+graph_offset = Vector2( -130, -120 )
 
 [sub_resource type="AnimationNodeBlendTree" id=29]
-graph_offset = Vector2( -351.532, -34.3158 )
+graph_offset = Vector2( -299.532, 64.6842 )
 nodes/Animation/node = SubResource( 3 )
 nodes/Animation/position = Vector2( 140, 280 )
 nodes/CuffsBlend/node = SubResource( 4 )
@@ -74,12 +171,14 @@ tree_root = SubResource( 26 )
 anim_player = NodePath("../Doll3D/DollSkeleton/AnimationPlayer")
 parameters/CuffsBlend/blend_amount = 0
 parameters/StateMachine/playback = SubResource( 22 )
+parameters/StateMachine/Kissing/KissBlend/blend_amount = 0.5
 
 [node name="AnimationTree2" type="AnimationTree" parent="." index="4"]
 tree_root = SubResource( 29 )
 anim_player = NodePath("../Doll3D2/DollSkeleton/AnimationPlayer")
 parameters/CuffsBlend/blend_amount = 0
 parameters/StateMachine/playback = SubResource( 23 )
+parameters/StateMachine/Kissing2/KissBlend/blend_amount = 0.5
 
 [editable path="Doll3D"]
 [editable path="Doll3D/DollSkeleton"]

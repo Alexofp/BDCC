@@ -57,6 +57,16 @@ func playAnimation(animID, _args = {}):
 		$Chair.visible = true
 	else:
 		$Chair.visible = false
+		
+	if(_args.has("flipNPC") && _args["flipNPC"]):
+		doll2.scale.x = abs(doll2.scale.x)
+	else:
+		doll2.scale.x = -abs(doll2.scale.x)
+	
+	if(animID in ["crawl", "allfours"] || (_args.has("further") && _args["further"])):
+		doll.transform.origin.x = 2.5
+	else:
+		doll.transform.origin.x = 1.5
 	
 	updateSubAnims()
 	
@@ -95,3 +105,10 @@ func canTransitionTo(_actionID, _args = []):
 
 func getSupportedStates():
 	return getSupportedStatesSolo()
+
+func getChainPoint(_pointID):
+	if(_pointID == "farleft"):
+		return $FarLeft
+	if(_pointID == "farright"):
+		return $FarRight
+	return .getChainPoint(_pointID)

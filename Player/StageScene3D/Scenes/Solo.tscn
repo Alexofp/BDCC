@@ -30,5 +30,11 @@ region_rect = Rect2( 1, 1, 1022, 62 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.05789, 1.92807, 0.0685949 )
 texture = ExtResource( 5 )
 
+[node name="FarLeft" type="Position3D" parent="." index="4"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7.18997, 5.39323, 1.77914 )
+
+[node name="FarRight" type="Position3D" parent="." index="5"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.19, 5.393, 1.779 )
+
 [editable path="Doll3D"]
 [editable path="Doll3D/DollSkeleton"]

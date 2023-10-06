@@ -6,7 +6,8 @@ func _init():
 func _run():
 	if(state == ""):
 		addCharacter("rahi")
-		playAnimation(StageScene.Duo, "sit", {npc="rahi", npcAction="allfours"})
+		playAnimation(StageScene.Yoga, "catcow", {pc="rahi"})
+		#playAnimation(StageScene.Duo, "sit", {npc="rahi", npcAction="allfours"})
 
 	if(state == ""):
 		saynn("You decide to instead sit down on the nearest bench and watch the kitty for a bit, she seems completely unaware of you, her back is turned towards you. Kitty is wearing her general inmate uniform, she is standing still on one of the mats, her whole body motion-less, even the tail.")
@@ -22,6 +23,8 @@ func _run():
 		addButton("Grab her attention", "Announce your presence", "grab_her_attention")
 
 	if(state == "grab_her_attention"):
+		playAnimation(StageScene.Yoga, "dog", {pc="rahi"})
+		
 		saynn("[say=pc]Hi there, kitty.[/say]")
 
 		saynn("[say=rahi]Oh? Meow..[/say]")
@@ -44,7 +47,7 @@ func _run():
 
 	if(state == "help"):
 		# (if agility is high?)
-		playAnimation(StageScene.Duo, "kneel", {npc="rahi", npcAction="allfours"})
+		playAnimation(StageScene.Hogtied, "idle", {pc="rahi"})
 
 		saynn("You decide to break the awkward silence and move closer to kitty’s mat. You stand near her and slide your hand over her straight back.")
 

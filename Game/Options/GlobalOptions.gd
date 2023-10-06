@@ -43,6 +43,7 @@ var jigglePhysicsButtEnabled = true
 var jigglePhysicsGlobalModifier = 1.0
 
 var advancedShadersEnabled = true
+var chainsEnabled = true
 
 var autosaveEnabled = true
 
@@ -76,6 +77,7 @@ func resetToDefaults():
 	jigglePhysicsButtEnabled = true
 	jigglePhysicsGlobalModifier = 1.0
 	advancedShadersEnabled = true
+	chainsEnabled = true
 	autosaveEnabled = true
 	
 	enabledContent.clear()
@@ -178,6 +180,9 @@ func shouldUseAdvancedShaders():
 
 func shouldAutosave():
 	return autosaveEnabled
+
+func shouldSpawnChains():
+	return chainsEnabled
 
 func getChangeableOptions():
 	var settings = [
@@ -456,6 +461,13 @@ func getChangeableOptions():
 					"type": "checkbox",
 					"value": developerCommentary,
 				},
+				{
+					"name": "Visible chains",
+					"description": "Visible chains when your character is cuffed/leashed. Disabling might improve perfomance.",
+					"id": "chainsEnabled",
+					"type": "checkbox",
+					"value": chainsEnabled,
+				},
 #				{
 #					"name": "Show map art (WIP)",
 #					"description": "(WORK IN PROGRESS) Shows props and walls on the minimap when supported",
@@ -588,6 +600,8 @@ func applyOption(categoryID, optionID, value):
 			showMapArt = value
 		if(optionID == "developerCommentary"):
 			developerCommentary = value
+		if(optionID == "chainsEnabled"):
+			chainsEnabled = value
 		
 	if(categoryID == "render"):
 		if(optionID == "renderer"):
@@ -654,6 +668,7 @@ func saveData():
 		"jigglePhysicsButtEnabled": jigglePhysicsButtEnabled,
 		"jigglePhysicsGlobalModifier": jigglePhysicsGlobalModifier,
 		"advancedShadersEnabled": advancedShadersEnabled,
+		"chainsEnabled": chainsEnabled,
 		"autosaveEnabled": autosaveEnabled,
 	}
 	
@@ -690,6 +705,7 @@ func loadData(data):
 	jigglePhysicsButtEnabled = loadVar(data, "jigglePhysicsButtEnabled", true)
 	jigglePhysicsGlobalModifier = loadVar(data, "jigglePhysicsGlobalModifier", 1.0)
 	advancedShadersEnabled = loadVar(data, "advancedShadersEnabled", true)
+	chainsEnabled = loadVar(data, "chainsEnabled", true)
 	autosaveEnabled = loadVar(data, "autosaveEnabled", true)
 
 func saveToFile():

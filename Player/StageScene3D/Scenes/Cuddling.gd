@@ -61,6 +61,9 @@ func playAnimation(animID, _args = {}):
 	if(animID == "idle"):
 		state_machine.travel("CuddleSit_1-loop")
 		state_machine2.travel("CuddleSit_2-loop")
+	if(animID == "squirm"):
+		state_machine.travel("CuddleSquirm_1-loop")
+		state_machine2.travel("CuddleSquirm_2-loop")
 
 func canTransitionTo(_actionID, _args = []):
 	var firstDoll = "pc"
@@ -75,4 +78,9 @@ func canTransitionTo(_actionID, _args = []):
 	return true
 
 func getSupportedStates():
-	return ["idle"]
+	return ["idle", "squirm"]
+
+func getChainPoint(_pointID):
+	if(_pointID == "farleft"):
+		return $FarLeft
+	return .getChainPoint(_pointID)

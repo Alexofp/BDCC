@@ -26,7 +26,7 @@ func _run():
 		
 		saynn("[say=captain]Stand on the line. Good. You better start learning how to follow orders, a very useful skill.[/say]")
 		
-		saynn("You take a good look at the people before, the officer is a medium-sized, about 1.7 meters tall, canine with very dark, almost black, fur. He has purple eyes and a short fancy haircut, slowly swishing behind him is a black canine tail. He spots bulky shoes, tight black pants, leather belt with some pouches and a dark blue military jacket with a bright glowing trim to it, everything just screams formal. The only armor he has are the carbon shoulder pads with the same bright trim.")
+		saynn("You take a good look at the people before, the officer is a medium-sized, about 1.7 meters tall, canine with very dark, almost black, fur. He has blue eyes and a short fancy haircut, slowly swishing behind him is a black canine tail. He spots bulky shoes, tight black pants, leather belt with some pouches and a dark blue military jacket with a bright glowing trim to it, everything just screams formal. The only armor he has are the carbon shoulder pads with the same bright trim.")
 		
 		saynn("Behind the officer is a very tall guard, more than 2 meters tall. You notice her face to be feminine but considering how much heavy armor she is carrying she must be quite strong. Her fur is of a strange dark-cyan color, the face features show that she is some kind of feline, ears have tassels on them and behind her is a very short tail. You notice that she holds a weapon, something that looks like a stun baton.")
 		

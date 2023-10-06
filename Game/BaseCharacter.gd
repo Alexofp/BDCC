@@ -1132,6 +1132,11 @@ func giveBirth():
 	
 	return bornChildren
 
+func forceOvulate():
+	if(menstrualCycle != null):
+		return menstrualCycle.forceOvulate()
+	return false
+
 func forceIntoHeat():
 	if(menstrualCycle != null):
 		menstrualCycle.forceIntoHeat()
@@ -1227,11 +1232,32 @@ func hasBigBreasts():
 	
 	var size = breasts.getSize()
 	
-	if(size > BreastsSize.B):
+	if(size > BreastsSize.C):
 		return true
 	else:
 		return false
 
+func hasSmallBreasts():
+	if(!hasBodypart(BodypartSlot.Breasts)):
+		return true
+	var breasts = getBodypart(BodypartSlot.Breasts)
+	
+	var size = breasts.getSize()
+	
+	if(size <= BreastsSize.B):
+		return true
+	else:
+		return false
+
+func isLactating():
+	if(!hasBodypart(BodypartSlot.Breasts)):
+		return false
+	var breasts: BodypartBreasts = getBodypart(BodypartSlot.Breasts)
+	var production: FluidProduction = breasts.getFluidProduction()
+	if(production == null):
+		return false
+	return production.shouldProduce()
+	
 func canBeMilked():
 	if(!hasBodypart(BodypartSlot.Breasts)):
 		return false
@@ -1264,6 +1290,32 @@ func milk(howmuch = 1.0):
 	if(isPlayer()):
 		addSkillExperience(Skill.Milking, 20)
 	return howMuchMilk
+
+func breastFedBy(characterID, amountToTransfer = 1.0):
+	var ch = GlobalRegistry.getCharacter(characterID)
+	
+	if(ch.hasBodypart(BodypartSlot.Breasts)):
+		var thebodypart = getBodypart(BodypartSlot.Head)
+		var usedBodypart = ch.getBodypart(BodypartSlot.Breasts)
+		
+		var fluids = usedBodypart.getFluids()
+		
+		if(fluids != null && thebodypart != null):
+			fluids.transferTo(thebodypart, amountToTransfer)
+		
+		var production: FluidProduction = usedBodypart.getFluidProduction()
+		if(production != null):
+			production.afterMilked()
+		
+	if(!ch.hasPerk(Perk.MilkNoSoreNipples) && amountToTransfer >= 0.5):
+		ch.addEffect(StatusEffect.SoreNipplesAfterMilking)
+			
+func induceLactation():
+	if(!hasBodypart(BodypartSlot.Breasts)):
+		return false
+	
+	var breasts = getBodypart(BodypartSlot.Breasts)
+	breasts.induceLactation()
 
 func stimulateLactation():
 	if(!hasBodypart(BodypartSlot.Breasts)):
@@ -1413,7 +1465,19 @@ func softUpdateDoll(doll: Doll3D):
 		var breasts = getBodypart(BodypartSlot.Breasts)
 		if(breasts.has_method("getBreastsScale")):
 			breastsScale = breasts.getBreastsScale()
+		doll.breastScale = breasts.getBreastsAdjustScale()
+	else:
+		doll.breastScale = 0.0
 	doll.setBreastsScale(breastsScale)
+	
+	if(hasBodypart(BodypartSlot.Head)):
+		var thehead = getBodypart(BodypartSlot.Head)
+		if(thehead.has_method("getHeadLength")):
+			doll.headLength = thehead.getHeadLength()
+		else:
+			doll.headLength = 0.0
+	else:
+		doll.headLength = 0.0
 	
 	var penisScale = 1.0
 	var ballsScale = 1.0
@@ -1453,6 +1517,7 @@ func softUpdateDoll(doll: Doll3D):
 		doll.setButtScale(1.0 + (thicknessNorm - 0.5)/1.5)
 		doll.setThighThickness((thicknessNorm - 0.5))
 	
+	doll.selfChains = []
 	var wearingItems = getInventory().getAllEquippedItems()
 	for inventorySlot in wearingItems:
 		var item = wearingItems[inventorySlot]
@@ -1461,6 +1526,13 @@ func softUpdateDoll(doll: Doll3D):
 		
 		# Add a check here that the item is actually visible first?
 		item.updateDoll(doll)
+		
+		var newChains = item.getChains()
+		if(newChains != null):
+			for selfChain in newChains:
+				doll.selfChains.append([selfChain[0], selfChain[1], "self", selfChain[2]])
+			#doll.selfChains.append_array(newChains)
+	doll.call_deferred("checkChains")
 
 func updateDoll(doll: Doll3D):
 	softUpdateDoll(doll)
@@ -1989,6 +2061,12 @@ func getBodypartLewdDescriptionAndNameWithA(bodypartSlot):
 func isDynamicCharacter():
 	return false
 
+func canWearBreastPump():
+	if(getInventory().hasSlotEquipped(InventorySlot.UnderwearTop)):
+		return false
+	
+	return true
+
 func canWearStrapon():
 	if(hasPenis() && !isWearingChastityCage()):
 		return false
@@ -2001,11 +2079,23 @@ func canWearStrapon():
 func hasStrapons():
 	return getInventory().getItemsWithTag(ItemTag.Strapon).size() > 0
 
+func hasChastityCages():
+	return getInventory().getItemsWithTag(ItemTag.ChastityCage).size() > 0
+
 func getStrapons():
 	return getInventory().getItemsWithTag(ItemTag.Strapon)
 
 func isWearingStrapon():
 	return getWornStrapon() != null
+
+func isWearingLoadedStrapon():
+	var theStrapon = getWornStrapon()
+	if(theStrapon == null):
+		return false
+	var fluids = theStrapon.getFluids()
+	if(fluids == null):
+		return false
+	return !fluids.isEmpty()
 
 func getWornStrapon():
 	if(getInventory().hasSlotEquipped(InventorySlot.Strapon)):
@@ -2013,6 +2103,15 @@ func getWornStrapon():
 		if(item.hasTag(ItemTag.Strapon)):
 			return item
 	return null
+
+func getStraponContentsReadableString():
+	var strapon = getWornStrapon()
+	if(strapon == null):
+		return "cum"
+	var fluids = strapon.getFluids()
+	if(fluids == null):
+		return false
+	return Util.humanReadableList(fluids.getFluidListNames())
 
 func removeStrapon():
 	var theStrapon = getWornStrapon()

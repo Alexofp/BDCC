@@ -5,5 +5,5 @@
 [node name="CollarModel" type="Spatial"]
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
-transform = Transform( 0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, -0.0372997, 0, 0 )
+transform = Transform( 0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, -0.0372997, 0, 0.0324069 )
 texture = ExtResource( 1 )

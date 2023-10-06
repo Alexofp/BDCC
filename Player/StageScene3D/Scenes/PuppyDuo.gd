@@ -61,6 +61,11 @@ func playAnimation(animID, _args = {}):
 	else:
 		$Chair.visible = false
 	
+	if(_args.has("flipNPC") && _args["flipNPC"]):
+		doll2.scale.x = abs(doll2.scale.x)
+	else:
+		doll2.scale.x = -abs(doll2.scale.x)
+	
 	updateSubAnims()
 	
 	var state_machine = animationTree["parameters/AnimationNodeStateMachine/playback"]

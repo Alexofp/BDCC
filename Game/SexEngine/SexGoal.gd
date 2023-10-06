@@ -15,9 +15,16 @@ const ReceiveStraponVaginal = "ReceiveStraponVaginal"
 const ReceiveStraponAnal = "ReceiveStraponAnal"
 
 const TieUp = "TieUp"
+const Choke = "Choke"
+const ChokeSexVaginal = "ChokeSexVaginal"
+const ChokeSexAnal = "ChokeSexAnal"
 
 const RimSub = "RimSub"
 const RimmingReceive = "RimmingReceive"
+const MilkWithBreastPump = "MilkWithBreastPump"
+const GropeBreasts = "GropeBreasts"
+const BreastFeedOnSub = "BreastFeedOnSub"
+const BreastFeedSub = "BreastFeedSub"
 
 
 # Subgoals, these don't need classes defined
@@ -27,3 +34,4 @@ const SubOptionalCondomOnSub = "SubOptionalCondomOnSub"
 const SubOptionalCondomOnDom = "SubOptionalCondomOnDom"
 const SubWearStraponOnSub = "SubWearStraponOnSub"
 const SubWearStraponOnDom = "SubWearStraponOnDom"
+const SubChoking = "SubChoking"

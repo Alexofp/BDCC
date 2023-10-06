@@ -223,5 +223,6 @@ text = "Close"
 [connection signal="visibility_changed" from="." to="." method="_on_SkillsUI_visibility_changed"]
 [connection signal="pressed" from="VBoxContainer/TabContainer/Stats/ScrollContainer/HBoxContainer/Vbox/PanelContainer2/VBoxContainer/HBoxContainer/ApplyButton" to="." method="_on_ApplyButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/TabContainer/Stats/ScrollContainer/HBoxContainer/Vbox/PanelContainer2/VBoxContainer/HBoxContainer/CancelButton" to="." method="_on_CancelButton_pressed"]
+[connection signal="openBasePerks" from="VBoxContainer/TabContainer/Skills" to="." method="_on_Skills_openBasePerks"]
 [connection signal="openPerksButton" from="VBoxContainer/TabContainer/Skills" to="." method="_on_Skills_openPerksButton"]
 [connection signal="pressed" from="VBoxContainer/GridContainer/CloseButton" to="." method="_on_CloseButton_pressed"]

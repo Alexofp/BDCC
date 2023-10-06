@@ -50,3 +50,19 @@ func playAnimation(animID, _args = {}):
 
 func getSupportedStates():
 	return getSupportedStatesSolo()
+
+func canTransitionTo(_actionID, _args = []):
+	var firstDoll = "pc"
+	if(_args.has("pc")):
+		firstDoll = _args["pc"]
+		
+	if(doll.getCharacterID() != firstDoll):
+		return false
+	return true
+
+func getChainPoint(_pointID):
+	if(_pointID == "farleft"):
+		return $FarLeft
+	if(_pointID == "farright"):
+		return $FarRight
+	return .getChainPoint(_pointID)

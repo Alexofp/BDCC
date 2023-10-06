@@ -9,3 +9,6 @@ func getCompatibleSpecies():
 
 func getDoll3DScene():
 	return "res://Player/Player3D/Parts/Head/BulldogHead/BulldogHead.tscn"
+
+func getHeadLength():
+	return 0.2

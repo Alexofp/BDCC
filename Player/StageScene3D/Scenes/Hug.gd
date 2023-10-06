@@ -24,6 +24,11 @@ func updateSubAnims():
 		animationTree2["parameters/CuffsBlend/blend_amount"] = 1.0
 	else:
 		animationTree2["parameters/CuffsBlend/blend_amount"] = 0.0
+	
+	var headLen = doll.headLength + doll2.headLength
+	headLen = clamp(headLen, 0.0, 1.0)
+	animationTree["parameters/StateMachine/Kissing/KissBlend/blend_amount"] = headLen
+	animationTree2["parameters/StateMachine/Kissing2/KissBlend/blend_amount"] = headLen
 
 # StageScene.Duo, "kneel", {npc="nova", pc="pc"}
 func playAnimation(animID, _args = {}):
@@ -58,9 +63,15 @@ func playAnimation(animID, _args = {}):
 	var state_machine = animationTree["parameters/StateMachine/playback"]
 	var state_machine2 = animationTree2["parameters/StateMachine/playback"]
 
+	if(animID == "idle"):
+		state_machine.travel("PreHug_1-loop")
+		state_machine2.travel("PreHug_2-loop")
 	if(animID == "hug"):
 		state_machine.travel("Hug_1-loop")
 		state_machine2.travel("Hug_2-loop")
+	if(animID == "kiss"):
+		state_machine.travel("Kissing")
+		state_machine2.travel("Kissing2")
 
 
 func canTransitionTo(_actionID, _args = []):
@@ -76,4 +87,4 @@ func canTransitionTo(_actionID, _args = []):
 	return true
 
 func getSupportedStates():
-	return ["hug"]
+	return ["idle", "hug", "kiss"]

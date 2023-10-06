@@ -10,6 +10,7 @@ position = Vector2( -64, -64 )
 
 [node name="IntakeFloorRoom2" parent="." index="1" instance=ExtResource( 1 )]
 position = Vector2( 0, -64 )
+roomName = "Hangar"
 roomID = "intro_arrive"
 
 [node name="IntakeFloorRoom3" parent="." index="2" instance=ExtResource( 1 )]
@@ -22,6 +23,7 @@ roomColor = 2
 
 [node name="IntakeFloorRoom5" parent="." index="4" instance=ExtResource( 1 )]
 self_modulate = Color( 1, 0.6, 0.6, 1 )
+roomName = "Hangar"
 roomID = "intro_nearcaptain"
 roomSprite = 1
 roomColor = 2

@@ -307,8 +307,10 @@ bodypartSlot = "legs"
 transform = Transform( 1.19189, 0.519039, 0, -0.519039, 1.19189, 0, 0, 0, 1.3, 0.498434, 0.792379, 0.284713 )
 boneId = "LegDown.L"
 zoneName = "ankle.L"
+chainOffset = Vector3( -0.25, 0, -0.02 )
 
 [node name="AttachmentProxy2" parent="." index="5" instance=ExtResource( 2 )]
 transform = Transform( 1.19189, 0.519039, 0, -0.519039, 1.19189, 0, 0, 0, 1.3, 0.398, 0.792, -0.175 )
 boneId = "LegDown.R"
 zoneName = "ankle.R"
+chainOffset = Vector3( 0.25, 0, 0.02 )

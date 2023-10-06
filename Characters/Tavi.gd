@@ -15,6 +15,7 @@ func _init():
 	npcSkinData={
 	"hair": {"r": Color("ff7f1b9b"),"g": Color("ff00ff0f"),"b": Color("ff631c89"),},
 	"horns": {"r": Color("ff0f2c13"),"g": Color("ff0c2d16"),},
+	"penis": {"g": Color("ff44f45d"),"b": Color("ff0c6214"),},
 	}
 	
 	npcLustInterests = {
@@ -119,13 +120,25 @@ func createBodyparts():
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("digilegs"))
 
 func updateBodyparts():
-	if(GlobalRegistry.getModule("TaviModule").hasHorns()):#.hasHorns()):
+	var taviModule = GlobalRegistry.getModule("TaviModule")
+	
+	if(taviModule.shouldHaveCock()):
+		if(!hasBodypart(BodypartSlot.Penis)):
+			var penis = GlobalRegistry.createBodypart("felinepenis")
+			penis.lengthCM = 22
+			penis.ballsScale = 1
+			if(giveBodypartUnlessSame(penis)):
+				paintBodyparts()
+	else:
+		removeBodypart(BodypartSlot.Penis)
+	
+	if(taviModule.hasHorns()):#.hasHorns()):
 		if(giveBodypartUnlessSame(GlobalRegistry.createBodypart("demonhorns2"))):
 			paintBodyparts()
 	elif(hasBodypart(BodypartSlot.Horns)):
 		removeBodypart(BodypartSlot.Horns)
 	
-	if(!GlobalRegistry.getModule("TaviModule").hasWombMark()):
+	if(!taviModule.hasWombMark()):
 		if(!hasPerk(Perk.StartNoHeat) || !hasPerk(Perk.StartInfertile)):
 			skillsHolder.addPerk(Perk.StartNoHeat)
 			skillsHolder.addPerk(Perk.StartInfertile)

@@ -153,10 +153,16 @@ func checkNewLevel():
 	if(addedAnyLevels):
 		emit_signal("levelChanged")
 		
+		
 func addSkillExperience(skillID, amount, activityID = null):
 	if(npc == null || !npc.isPlayer()):
 		return
+		
+	ensureSkillExists(skillID)
 	
+	skills[skillID].addExperience(amount, activityID)
+	
+func ensureSkillExists(skillID):
 	if(!skills.has(skillID)):
 		var newskill = GlobalRegistry.createSkill(skillID)
 		if(newskill == null):
@@ -166,14 +172,28 @@ func addSkillExperience(skillID, amount, activityID = null):
 		skills[skillID] = newskill
 		var _ok = newskill.connect("levelChanged", self, "onSkillLevelChanged")
 	
-	skills[skillID].addExperience(amount, activityID)
-	
 func onNewDay():
 	for skillID in skills:
 		skills[skillID].onNewDay()
 	
 func getSkills():
 	return skills
+
+func getVisibleBasePerksIDs():
+	var result = []
+	var allPerks = GlobalRegistry.getPerksIDsBySkill(Skill.Start) + GlobalRegistry.getPerksIDsBySkill(Skill.Inherent)
+	
+	for perkID in allPerks:
+		var perk: PerkBase = GlobalRegistry.getPerk(perkID)
+		if(hasPerkDisabledOrNot(perk.id)):
+			if(perk.hiddenWhenUnlocked()):
+				continue
+		else:
+			if(perk.hiddenWhenLocked()):
+				continue
+		
+		result.append(perkID)
+	return result
 
 func getSkill(skillID):
 	if(!skills.has(skillID)):

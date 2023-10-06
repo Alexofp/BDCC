@@ -460,3 +460,6 @@ func isRemoved():
 	if(itemState == null):
 		return false
 	return itemState.isRemoved()
+
+func getChains():
+	return null

@@ -15,6 +15,7 @@ const Bodywritings = "Bodywritings"
 
 const Masochism = "Masochism"
 const Sadism = "Sadism"
+const Choking = "Choking"
 
 const UnconsciousSex = "UnconsciousSex"
 const DrugUse = "DrugUse"
@@ -22,6 +23,7 @@ const DrugUse = "DrugUse"
 const Breeding = "Breeding"
 const BeingBred = "BeingBred"
 const Condoms = "Condoms"
+const Lactation = "Lactation"
 
 const Exhibitionism = "Exhibitionism"
 

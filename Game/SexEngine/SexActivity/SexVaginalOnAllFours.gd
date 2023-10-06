@@ -24,6 +24,13 @@ func _init():
 	id = "SexVaginalOnAllFours"
 
 func getGoals():
+	if(currentPose == POSE_CHOKEFUCK):
+		return {
+			SexGoal.ChokeSexVaginal: 1.0,
+			SexGoal.FuckVaginal: 1.0,
+			SexGoal.StraponVaginal: 1.0,
+		}
+	
 	return {
 		SexGoal.FuckVaginal: 1.0,
 		SexGoal.StraponVaginal: 1.0,
@@ -52,6 +59,8 @@ func getPoseDescriptor():
 		return " in a missionary pose"
 	if(currentPose == POSE_STANDING):
 		return " standing"
+	if(currentPose == POSE_CHOKEFUCK):
+		return " while also choking"
 	return " [color=red]FIX DESCRIPTOR[/color]"
 
 const POSE_DEFAULT = "POSE_DEFAULT"
@@ -59,12 +68,14 @@ const POSE_ALLFOURS = "POSE_ALLFOURS"
 const POSE_STANDING = "POSE_STANDING"
 const POSE_MISSONARY = "POSE_MISSONARY"
 const POSE_FULLNELSON = "POSE_FULLNELSON"
+const POSE_CHOKEFUCK = "POSE_CHOKEFUCK"
 const PoseToName = {
 	POSE_DEFAULT: "Default",
 	POSE_ALLFOURS: "All Fours",
 	POSE_STANDING: "Standing",
 	POSE_MISSONARY: "Missonary",
 	POSE_FULLNELSON: "Full Nelson",
+	POSE_CHOKEFUCK: "Choke fuck",
 }
 const PoseToAnimName = {
 	POSE_DEFAULT: StageScene.SexAllFours,
@@ -72,8 +83,12 @@ const PoseToAnimName = {
 	POSE_STANDING: StageScene.SexFreeStanding,
 	POSE_MISSONARY: StageScene.SexMissionary,
 	POSE_FULLNELSON: StageScene.SexFullNelson,
+	POSE_CHOKEFUCK: StageScene.Choking,
 }
 func getAvaiablePoses():
+	if(currentPose == POSE_CHOKEFUCK):
+		return [POSE_CHOKEFUCK]
+	
 	if(getSexType() == SexType.DefaultSex):
 		if(subInfo.isUnconscious()):
 			return [POSE_ALLFOURS, POSE_MISSONARY, POSE_FULLNELSON]
@@ -216,9 +231,15 @@ func startActivity(_args):
 	}
 
 func onSwitchFrom(_otherActivity, _args):
+	if(_args != null && _args == ["choke"]):
+		currentPose = POSE_CHOKEFUCK
+		return
 	currentPose = RNG.pick(getAvaiablePoses())
 
 func processTurn():
+	if(currentPose == POSE_CHOKEFUCK):
+		subInfo.addConsciousness(-0.01)
+	
 	if(state == "knotting"):
 		var freeRoom = getSub().getPenetrationFreeRoomBy(usedBodypart, domID)
 		if(freeRoom > 0.0):
@@ -944,6 +965,7 @@ func getAnimation():
 	if(animToPlay == StageScene.SexAllFours):
 		supportsFlop = true
 	var shouldFlop = (getSub().hasBoundArms() || subInfo.isUnconscious()) && supportsFlop
+	var shouldUncon = subInfo.isUnconscious()
 	
 	if(shouldFlop):
 		if(state in [""]):
@@ -956,13 +978,13 @@ func getAnimation():
 		return [animToPlay, "sexflop", {pc=domID, npc=subID}]
 	else:
 		if(state in [""]):
-			return [animToPlay, "tease", {pc=domID, npc=subID}]
+			return [animToPlay, "tease", {pc=domID, npc=subID, uncon=shouldUncon}]
 		if(state in ["aftercumminginside", "knotting"]):
-			return [animToPlay, "inside", {pc=domID, npc=subID}]
+			return [animToPlay, "inside", {pc=domID, npc=subID, uncon=shouldUncon}]
 		if(domInfo.isCloseToCumming() || (isStraponSex() && subInfo.isCloseToCumming())):
-			return [animToPlay, "fast", {pc=domID, npc=subID}]
+			return [animToPlay, "fast", {pc=domID, npc=subID, uncon=shouldUncon}]
 			
-		return [animToPlay, "sex", {pc=domID, npc=subID}]
+		return [animToPlay, "sex", {pc=domID, npc=subID, uncon=shouldUncon}]
 
 func getDomCondom():
 	return getDom().getWornCondom()
