@@ -5,6 +5,27 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+## [0.1.0] - 2023-10-06
+### Added
+- Tavi's route is finished! That makes the game completable from start to the end. Will you finally escape the prison? Who knows ^^. Complete her route and find out in one of the 3 endings that are all drastically different. At least 250+ pages/80k+ words of new content in this update
+- [Visible chains!](https://github.com/Alexofp/BDCC/assets/14040378/117c5fbb-bef3-434f-a9fa-ac08bc876271) Visible chains and leashes been added in most scenes that mention them ^^. (Original mod by PeteTimesSix)
+- Masochism skill for Tavi. Includes a little puzzle-like minigame where you have to cause Tavi just enough pain. Don't choke her too much :p
+- Petplay skill for Tavi. Train Tavi to become a cute puppy.
+- Optional Watersports skill for Tavi. Lots of golden opportunities there..
+- Ability to let Tavi sleep with you. Comes with 6 lewd scenes and ability to deny her in each
+- New activities to do with Tavi: Showering and Milking. With lots of options ^^
+- Special 'magic tricks' scene that unlocks when Tavi's corruption is at 200%. Lets her grow a few things ^^
+- A unique Tavi+Rahi scene that happens if both Rahi and Tavi have their petplay skill maxxed out. Complete with very lewd unique animation.
+- A way to see your starting perks in the skills panel. ([Pull request by PeteTimesSix](https://github.com/Alexofp/BDCC/pull/27))
+- Lots of new animations. Getting on all fours got better transitions. Better hug animation
+- Choking added to procedural sex. With ability to turn it into choke-fuck (animated)
+- Ability to put breast pumps on dynamic npcs during procedural sex. They can do it to you too if you're lactating ^^
+- Breast groping and 2 versions of breast feeding (dom -> sub and vice versa) added to procedural sex. With animations that automatically adjust based on the breast size/muzzle length.
+
+### Fixed
+- Can't keep the stocks anymore if you unlock them with a restraints key
+- Typos and bugs
+
 ## [0.0.24] - 2023-08-08
 ### Added
 - [Skins!](https://cdn.discordapp.com/attachments/1007588662009155704/1121481683095527445/image.png) White paper dolls finally got their colors and they look fancy. Can be disabled in the settings if you prefer the old look.
@@ -294,7 +315,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Turn-based fighting
 - Initial player customization
 
-[Unreleased]: https://github.com/Alexofp/BDCC/compare/0.0.24...main
+[Unreleased]: https://github.com/Alexofp/BDCC/compare/0.1.0...main
+[0.1.0]: https://github.com/Alexofp/BDCC/compare/0.0.24...0.1.0
 [0.0.24]: https://github.com/Alexofp/BDCC/compare/0.0.23...0.0.24
 [0.0.23]: https://github.com/Alexofp/BDCC/compare/0.0.22bugfix1...0.0.23
 [0.0.22bugfix1]: https://github.com/Alexofp/BDCC/compare/0.0.22...0.0.22bugfix1
