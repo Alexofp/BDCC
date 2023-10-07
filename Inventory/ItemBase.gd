@@ -5,9 +5,9 @@ var id = "baditem"
 var uniqueID = null
 var amount = 1
 var currentInventory = null
-var restraintData: RestraintData = null
-var itemState: ItemState = null
-var fluids: Fluids = null
+var restraintData: RestraintData
+var itemState: ItemState
+var fluids: Fluids
 
 func _init():
 	#if(uniqueID == null):
@@ -39,6 +39,18 @@ func getStackName():
 		return ""+str(amount)+"x"+getVisibleName()
 	else:
 		return getVisibleName()
+
+func getInventoryName():
+	var theName = getStackName()
+	if(fluids != null):
+		if(fluids.isEmpty()):
+			theName += " (empty)"
+		else:
+			if(fluids.isCapacityLimited()):
+				theName += " ("+str(Util.roundF(fluids.getFluidAmount()))+"/"+str(Util.roundF(fluids.getCapacity(), 1))+" ml)"
+			else:
+				theName += " ("+str(Util.roundF(fluids.getFluidAmount()))+" ml)"
+	return theName
 
 # Hacky but good enough for most things, can always just override just function with a proper one
 func getA():

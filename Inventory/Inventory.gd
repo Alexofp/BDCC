@@ -38,6 +38,12 @@ func getItems():
 func getAllItems():
 	return items
 
+func getItemsAndEquippedItemsTogether():
+	var result = []
+	result.append_array(equippedItems.values())
+	result.append_array(items)
+	return result
+
 func getAllOf(itemID: String):
 	var result = []
 	

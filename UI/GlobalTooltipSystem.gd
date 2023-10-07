@@ -6,9 +6,9 @@ func _init():
 	tooltip = preload("res://UI/TooltipSystem.tscn").instance()
 	add_child(tooltip)
 
-func showTooltip(title: String, text: String, showBelow: bool = false):
+func showTooltip(title: String, text: String, showBelow: bool = false, delayShow: bool = false):
 	if(tooltip != null):
-		tooltip.showTooltip(title, text, showBelow)
+		tooltip.showTooltip(title, text, showBelow, delayShow)
 
 func hideTooltip():
 	if(tooltip != null):

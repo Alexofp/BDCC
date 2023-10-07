@@ -26,14 +26,20 @@ func _process(_delta: float) -> void:
 	#rect_global_position.y = clamp(rect_global_position.y, 0, ProjectSettings.get("display/window/size/height") - rect_size.y)
 
 
-func set_is_active(value: bool):
+func set_is_active(value: bool, delayShow = false):
 	is_active = value
 	set_process(is_active)
 
 	if is_active:
-		modulate = Color.white
-		_tween.stop_all()
+		if(delayShow):
+			_tween.remove_all()
+			_tween.interpolate_property(self, "modulate", Color(0.0, 0.0, 0.0, -6.0), Color.white, 0.6)
+			_tween.start()
+		else:
+			modulate = Color.white
+			_tween.remove_all()
 	else:
+		_tween.remove_all()
 		_tween.interpolate_property(self, "modulate", modulate, Color.transparent, 0.2)
 		_tween.start()
 
