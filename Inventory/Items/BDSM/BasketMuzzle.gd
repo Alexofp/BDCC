@@ -44,3 +44,6 @@ func getForcedOnMessage(isPlayer = true):
 
 func updateDoll(doll: Doll3D):
 	doll.setState("muzzle", "muzzled")
+
+func getInventoryImage():
+	return "res://Images/Items/bdsm/muzzle.png"

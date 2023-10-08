@@ -58,3 +58,6 @@ func getRiggedParts(_character):
 	return {
 		"harness": "res://Inventory/RiggedModels/RopeHarness/RopeHarness.tscn",
 	}
+
+func getInventoryImage():
+	return "res://Images/Items/bdsm/rope.png"

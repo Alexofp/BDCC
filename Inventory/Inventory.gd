@@ -44,6 +44,19 @@ func getItemsAndEquippedItemsTogether():
 	result.append_array(items)
 	return result
 
+func getItemsAndEquippedItemsTogetherGrouped():
+	var result = {}
+	for item in equippedItems.values():
+		result["%$%"+item.id] = [item]
+	
+	for item in items:
+		if(!result.has(item.id)):
+			result[item.id] = [item]
+		else:
+			result[item.id].append(item)
+	
+	return result
+
 func getAllOf(itemID: String):
 	var result = []
 	

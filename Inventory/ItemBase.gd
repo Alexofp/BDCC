@@ -50,6 +50,9 @@ func getInventoryName():
 				theName += " ("+str(Util.roundF(fluids.getFluidAmount()))+"/"+str(Util.roundF(fluids.getCapacity(), 1))+" ml)"
 			else:
 				theName += " ("+str(Util.roundF(fluids.getFluidAmount()))+" ml)"
+	elif(restraintData != null):
+		if(currentInventory != null):
+			theName += " (Level "+restraintData.getVisibleLevel(GM.pc.isBlindfolded() && !GM.pc.canHandleBlindness())+")"
 	return theName
 
 # Hacky but good enough for most things, can always just override just function with a proper one
@@ -474,4 +477,14 @@ func isRemoved():
 	return itemState.isRemoved()
 
 func getChains():
+	return null
+
+func getInventoryImage():
+	
+	if(hasTag(ItemTag.SexEngineDrug)):
+		return "res://Images/Items/medical/pill.png"
+	
+	if(hasTag(ItemTag.Condom)):
+		return "res://Images/Items/medical/condom.png"
+	
 	return null

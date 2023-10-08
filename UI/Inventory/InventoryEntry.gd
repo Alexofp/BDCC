@@ -3,6 +3,7 @@ extends Control
 signal onInteractButtonPressed(item)
 signal onItemSelected(item)
 onready var itemNameLabel = $HBoxContainer/Control/Info/Label
+onready var itemTextureRect = $HBoxContainer/Control/Info/TextureRect
 
 var item: ItemBase
 var isSelected = false
@@ -34,6 +35,12 @@ func updateInfo():
 	else:
 		itemNameLabel.text = item.getInventoryName()
 	
+	var imagePath = item.getInventoryImage()
+	if(imagePath != null):
+		var theImage = load(imagePath)
+		if(theImage != null):
+			itemTextureRect.texture = theImage
+	
 	if(isFightMode):
 		var possibleActions = item.getPossibleActions()
 		if(possibleActions.size() == 1 && canDoAction(possibleActions[0])):
@@ -58,12 +65,19 @@ func setSelected(isNewSelected):
 	isSelected = isNewSelected
 
 
+var showingTooltip = false
 func _on_SelectButton_mouse_entered():
+	showingTooltip = true
 	GlobalTooltip.showTooltip(item.getStackName(), item.getVisibleDescription(), false, true)
 
-
 func _on_SelectButton_mouse_exited():
-	GlobalTooltip.hideTooltip()
+	if(showingTooltip):
+		showingTooltip = false
+		GlobalTooltip.hideTooltip()
 
 func showUseButton(isShow):
 	$HBoxContainer/HBoxContainer.visible = isShow
+
+
+func _on_InventoryEntry_hide():
+	_on_SelectButton_mouse_exited()
