@@ -19,6 +19,14 @@ var worldEdits = []
 var gameExtenders = []
 var computers = []
 var partSkins = []
+var stageScenes = []
+var lootTables = []
+var lootLists = []
+var fetishes = []
+var sexGoals = []
+var sexActivities = []
+var sexTypes = []
+var fluids = []
 
 var id = "badmodule"
 var author = "no author"
@@ -78,6 +86,30 @@ func register():
 
 	for partSkin in partSkins:
 		GlobalRegistry.registerPartSkin(partSkin)
+		
+	for stageScene in stageScenes:
+		GlobalRegistry.registerStageScene(stageScene)
+		
+	for lootTable in lootTables:
+		GlobalRegistry.registerLootTable(lootTable)
+		
+	for lootList in lootLists:
+		GlobalRegistry.registerLootList(lootList)
+		
+	for fetish in fetishes:
+		GlobalRegistry.registerFetish(fetish)
+		
+	for sexGoal in sexGoals:
+		GlobalRegistry.registerSexGoal(sexGoal)
+		
+	for sexActivity in sexActivities:
+		GlobalRegistry.registerSexActivity(sexActivity)
+		
+	for sexType in sexTypes:
+		GlobalRegistry.registerSexType(sexType)
+		
+	for fluid in fluids:
+		GlobalRegistry.registerFluid(fluid)
 
 func registerEventTriggers():
 	pass
