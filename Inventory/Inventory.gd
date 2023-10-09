@@ -38,6 +38,13 @@ func getItems():
 func getAllItems():
 	return items
 
+func getAllSellableItems():
+	var result = []
+	for item in items:
+		if(item.canSell() && !item.isImportant()):
+			result.append(item)
+	return result
+
 func getItemsAndEquippedItemsTogether():
 	var result = []
 	result.append_array(equippedItems.values())

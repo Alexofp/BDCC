@@ -14,16 +14,25 @@ var isSelected = false
 var isFightMode = false
 var items = []
 var isCollapsed = true
+var isBuy = false
+var isSell = false
+var isLoot = false
 
 func _ready():
 	setSelected(false)
 	Util.delete_children(entryList)
 	entryMargin.visible = false
 
-func setItem(theItem:ItemBase, isFight):
-	isFightMode = isFight
+func setItem(theItem:ItemBase, theMode):
+	isFightMode = (theMode == "fight")
+	isBuy = (theMode == "buy")
+	isSell = (theMode == "sell")
+	isLoot = (theMode == "loot")
 	item = theItem
 	updateInfo()
+	
+	if(isSell):
+		$VBoxContainer/HBoxContainer/HBoxContainer/InteractButton.text = "Sell all"
 
 func addEntry(newEntry):
 	items.append(newEntry)
@@ -55,14 +64,8 @@ func updateInfo():
 		if(theImage != null):
 			itemTextureRect.texture = theImage
 	
-	if(isFightMode):
-		var possibleActions = item.getPossibleActions()
-		if(possibleActions.size() == 1 && canDoAction(possibleActions[0])):
-			showUseButton(true)
-		else:
-			showUseButton(false)
-	else:
-		showUseButton(false)
+	if(isSell):
+		showUseButton(true)
 
 func _on_InteractButton_pressed():
 	emit_signal("onInteractButtonPressed", item)

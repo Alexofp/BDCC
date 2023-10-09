@@ -8,14 +8,29 @@ onready var itemTextureRect = $HBoxContainer/Control/Info/TextureRect
 var item: ItemBase
 var isSelected = false
 var isFightMode = false
+var selectedMode = ""
+var isBuy = false
+var isSell = false
+var isLoot = false
 
 func _ready():
 	setSelected(false)
 
-func setItem(theItem:ItemBase, isFight):
-	isFightMode = isFight
+func setItem(theItem:ItemBase, theMode):
+	isFightMode = (theMode == "fight")
+	isBuy = (theMode == "buy")
+	isSell = (theMode == "sell")
+	isLoot = (theMode == "loot")
+	selectedMode = theMode
 	item = theItem
 	updateInfo()
+	
+	if(isBuy):
+		$HBoxContainer/HBoxContainer/InteractButton.text = "Buy"
+	if(isSell):
+		$HBoxContainer/HBoxContainer/InteractButton.text = "Sell"
+	if(isLoot):
+		$HBoxContainer/HBoxContainer/InteractButton.text = "Take"
 
 func getItem():
 	return item
@@ -35,6 +50,18 @@ func updateInfo():
 	else:
 		itemNameLabel.text = item.getInventoryName()
 	
+	if(isBuy):
+		var price = item.getPrice()
+		var priceStr = (str(price)+" credit") if price == 1 else (str(price)+" credits")
+		itemNameLabel.text = item.getVisibleName()+" ("+priceStr+")"
+		if(item.getBuyAmount() > 1):
+			itemNameLabel.text = str(item.getBuyAmount())+"x"+itemNameLabel.text
+	if(isSell && !item.isImportant()):
+		var sellPrice = item.getStackSellPrice()
+		var priceStr = (str(sellPrice)+" credit") if sellPrice == 1 else (str(sellPrice)+" credits")
+		itemNameLabel.text += " ("+priceStr+")"
+		
+	
 	var imagePath = item.getInventoryImage()
 	if(imagePath != null):
 		var theImage = load(imagePath)
@@ -48,7 +75,18 @@ func updateInfo():
 		else:
 			showUseButton(false)
 	else:
-		showUseButton(false)
+		if(isBuy || isSell || isLoot):
+			showUseButton(true)
+			if(isSell):
+				if(item.isImportant()):
+					showUseButton(false)
+			if(isBuy):
+				if(GM.pc.getCredits() < item.getPrice()):
+					$HBoxContainer/HBoxContainer/InteractButton.disabled = true
+				else:
+					$HBoxContainer/HBoxContainer/InteractButton.disabled = false
+		else:
+			showUseButton(false)
 
 func _on_InteractButton_pressed():
 	emit_signal("onInteractButtonPressed", item)

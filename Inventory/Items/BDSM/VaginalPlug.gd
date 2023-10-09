@@ -55,3 +55,6 @@ func getForcedOnMessage(isPlayer = true):
 		return getAStackNameCapitalize()+" was stuffed into your "+RNG.pick(["pussy", "pussy", "cunt", "slit"])+". It can accidentally start vibrating!"
 	else:
 		return getAStackNameCapitalize()+" was stuffed into {receiver.nameS} "+RNG.pick(["pussy", "pussy", "cunt", "slit"])+". It can accidentally start vibrating!"
+
+func getInventoryImage():
+	return "res://Images/Items/bdsm/plug.png"

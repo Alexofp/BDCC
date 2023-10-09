@@ -192,6 +192,9 @@ func setAmount(newamount):
 		assert(canCombine())
 	amount = newamount
 
+func getAmount():
+	return amount
+
 func getPossibleActions():
 	return [
 	]
