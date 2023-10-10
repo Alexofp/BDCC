@@ -67,45 +67,22 @@ func _run():
 		addButton("Step away", "Step away from the machine", "endthescene")
 	
 	if(state == "buymenu"):
-		if(true):
-			var inventory = inventoryScreenScene.instance()
-			GM.ui.addCustomControl("inventory", inventory)
-			inventory.setItems(finalSellingItemsObjects, "buy")
-			var _ok = inventory.connect("onItemSelected", self, "onInventoryItemSelected")
-			var _ok2 = inventory.connect("onInteractWith", self, "onInventoryItemInteracted")
-		else:
-			saynn("Machine displays a list of what it can sell you:")
-			
-			for itemID in sortedItemsIds:
-				var item = sellItemsData[itemID]
-				var itemName = item["name"]
-				if(item["amount"] > 1):
-					itemName = str(item["amount"])+"x"+itemName
-				
-				sayn(itemName+", "+str(item["price"])+" credits")
-				
-				if(GM.pc.getCredits() >= item["price"]):
-					addButton(itemName, str(item["price"]) + " credits\n" + item["desc"], "buy", [itemID])
-				else:
-					addDisabledButton(itemName, str(item["price"]) + " credits\n" + item["desc"])
-			
+		var inventory = inventoryScreenScene.instance()
+		GM.ui.addFullScreenCustomControl("inventory", inventory)
+		inventory.setItems(finalSellingItemsObjects, "buy")
+		var _ok = inventory.connect("onItemSelected", self, "onInventoryItemSelected")
+		var _ok2 = inventory.connect("onInteractWith", self, "onInventoryItemInteracted")
+
 		addButton("Back", "Don't buy anything", "")
 
 	if(state == "sellmenu"):
-		if(true):
-			var inventory = inventoryScreenScene.instance()
-			GM.ui.addCustomControl("inventory", inventory)
-			inventory.setItems(GM.pc.getInventory().getAllSellableItems(), "sell")
-			var _ok = inventory.connect("onItemSelected", self, "onInventoryItemSelected")
-			var _ok2 = inventory.connect("onInteractWith", self, "onInventoryItemInteracted")
-			var _ok3 = inventory.connect("onInteractWithGroup", self, "onInventoryItemGroupInteracted")
-		else:
-			saynn("Machine displays a list of what it can buy")
-			
-			for item in GM.pc.getInventory().getItems():
-				if(item.canSell()):
-					addButton(item.getStackName(), str(item.getSellPrice()) + " credits\n" + item.getVisisbleDescription(), "sell", [item])
-			
+		var inventory = inventoryScreenScene.instance()
+		GM.ui.addFullScreenCustomControl("inventory", inventory)
+		inventory.setItems(GM.pc.getInventory().getAllSellableItems(), "sell")
+		var _ok = inventory.connect("onItemSelected", self, "onInventoryItemSelected")
+		var _ok2 = inventory.connect("onInteractWith", self, "onInventoryItemInteracted")
+		var _ok3 = inventory.connect("onInteractWithGroup", self, "onInventoryItemGroupInteracted")
+
 		addButton("Back", "Don't sell anything", "")
 		
 func _react(_action: String, _args):

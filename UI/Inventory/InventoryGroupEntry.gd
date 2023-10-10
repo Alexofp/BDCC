@@ -17,6 +17,8 @@ var isCollapsed = true
 var isBuy = false
 var isSell = false
 var isLoot = false
+var isStash = false
+var isTake = false
 
 func _ready():
 	setSelected(false)
@@ -28,11 +30,18 @@ func setItem(theItem:ItemBase, theMode):
 	isBuy = (theMode == "buy")
 	isSell = (theMode == "sell")
 	isLoot = (theMode == "loot")
+	isStash = (theMode == "stash")
+	isTake = (theMode == "take")
 	item = theItem
 	updateInfo()
 	
 	if(isSell):
 		$VBoxContainer/HBoxContainer/HBoxContainer/InteractButton.text = "Sell all"
+
+	if(isStash):
+		$VBoxContainer/HBoxContainer/HBoxContainer/InteractButton.text = "Stash all"
+	if(isTake):
+		$VBoxContainer/HBoxContainer/HBoxContainer/InteractButton.text = "Take all"
 
 func addEntry(newEntry):
 	items.append(newEntry)
@@ -65,6 +74,8 @@ func updateInfo():
 			itemTextureRect.texture = theImage
 	
 	if(isSell):
+		showUseButton(true)
+	if(isStash || isTake):
 		showUseButton(true)
 
 func _on_InteractButton_pressed():

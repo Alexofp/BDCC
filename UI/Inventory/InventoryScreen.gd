@@ -39,6 +39,7 @@ func setItems(newItems, theMode = ""):
 	isSell = (theMode == "sell")
 	isLoot = (theMode == "loot")
 	updateInventory()
+	filterInventory()
 
 func filterInventory():
 	var textToFilter = searchInput.text.to_lower()
@@ -130,6 +131,8 @@ func updateSelectedHighlight():
 
 func updateSelectedInfo():
 	if(selectedItem == null):
+		itemNameLabel.text = "Pick an item"
+		itemDescLabel.bbcode_text = ""
 		return
 	itemNameLabel.text = selectedItem.getStackName()
 	itemDescLabel.bbcode_text = selectedItem.getVisibleDescription()

@@ -195,6 +195,25 @@ func setAmount(newamount):
 func getAmount():
 	return amount
 
+func splitAmount(howMuchTake:int):
+	if(!canCombine()):
+		return null
+	
+	if(howMuchTake <= 0):
+		return null
+	
+	if(howMuchTake >= getAmount()):
+		destroyMe()
+		return self
+	
+	var itemCopy = GlobalRegistry.createItem(id)
+	itemCopy.loadData(saveData())
+	
+	itemCopy.amount = howMuchTake
+	amount -= howMuchTake
+	
+	return itemCopy
+
 func getPossibleActions():
 	return [
 	]

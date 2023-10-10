@@ -12,6 +12,8 @@ var selectedMode = ""
 var isBuy = false
 var isSell = false
 var isLoot = false
+var isStash = false
+var isTake = false
 
 func _ready():
 	setSelected(false)
@@ -21,6 +23,8 @@ func setItem(theItem:ItemBase, theMode):
 	isBuy = (theMode == "buy")
 	isSell = (theMode == "sell")
 	isLoot = (theMode == "loot")
+	isStash = (theMode == "stash")
+	isTake = (theMode == "take")
 	selectedMode = theMode
 	item = theItem
 	updateInfo()
@@ -30,6 +34,10 @@ func setItem(theItem:ItemBase, theMode):
 	if(isSell):
 		$HBoxContainer/HBoxContainer/InteractButton.text = "Sell"
 	if(isLoot):
+		$HBoxContainer/HBoxContainer/InteractButton.text = "Take"
+	if(isStash):
+		$HBoxContainer/HBoxContainer/InteractButton.text = "Stash"
+	if(isTake):
 		$HBoxContainer/HBoxContainer/InteractButton.text = "Take"
 
 func getItem():
@@ -75,6 +83,11 @@ func updateInfo():
 		else:
 			showUseButton(false)
 	else:
+		showUseButton(false)
+		
+		if(isTake || isStash):
+			showUseButton(true)
+		
 		if(isBuy || isSell || isLoot):
 			showUseButton(true)
 			if(isSell):
@@ -85,8 +98,7 @@ func updateInfo():
 					$HBoxContainer/HBoxContainer/InteractButton.disabled = true
 				else:
 					$HBoxContainer/HBoxContainer/InteractButton.disabled = false
-		else:
-			showUseButton(false)
+			
 
 func _on_InteractButton_pressed():
 	emit_signal("onInteractButtonPressed", item)

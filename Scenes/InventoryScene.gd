@@ -19,7 +19,7 @@ func _run():
 	if(state == ""):
 		if(true):
 			var inventory = inventoryScreenScene.instance()
-			GM.ui.addCustomControl("inventory", inventory)
+			GM.ui.addFullScreenCustomControl("inventory", inventory)
 			inventory.setItems(GM.pc.getInventory().getItemsAndEquippedItemsTogetherGrouped(), ("fight" if fightMode else ""))
 			var _ok = inventory.connect("onItemSelected", self, "onInventoryItemSelected")
 			var _ok2 = inventory.connect("onInteractWith", self, "onInventoryItemInteracted")
