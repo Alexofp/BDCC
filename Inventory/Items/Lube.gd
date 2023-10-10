@@ -45,3 +45,6 @@ func getTags():
 
 func getItemCategory():
 	return ItemCategory.Medical
+
+func getInventoryImage():
+	return "res://Images/Items/medical/lubricant.png"

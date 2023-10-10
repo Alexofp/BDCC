@@ -509,4 +509,10 @@ func getInventoryImage():
 	if(hasTag(ItemTag.Condom)):
 		return "res://Images/Items/medical/condom.png"
 	
+	if(getClothingSlot() == InventorySlot.Ring):
+		return "res://Images/Items/equipment/ring.png"
+	
+	if(getClothingSlot() != null):
+		return "res://Images/Items/equipment/shirt.png"
+	
 	return null

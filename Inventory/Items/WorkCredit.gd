@@ -41,3 +41,6 @@ func canCombine():
 
 func getItemCategory():
 	return ItemCategory.Generic
+
+func getInventoryImage():
+	return "res://Images/Items/generic/chip.png"

@@ -50,3 +50,6 @@ func getPossibleActions():
 			"description": "Catch some of the fluids that you are covered with",
 		},
 	]
+
+func getInventoryImage():
+	return "res://Images/Items/medical/water-bottle.png"

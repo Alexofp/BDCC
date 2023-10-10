@@ -41,3 +41,6 @@ func getItemCategory():
 func generateFluids():
 	fluids = Fluids.new()
 	fluids.setCapacity(5000.0)
+
+func getInventoryImage():
+	return "res://Images/Items/toys/horsecockdildo.png"
