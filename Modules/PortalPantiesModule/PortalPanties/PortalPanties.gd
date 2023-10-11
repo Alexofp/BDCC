@@ -72,3 +72,6 @@ func coversBodyparts():
 
 func alwaysVisible():
 	return true
+
+func getInventoryImage():
+	return "res://Images/Items/underwear/portalpanties.png"

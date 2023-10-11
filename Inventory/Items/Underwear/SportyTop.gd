@@ -50,3 +50,6 @@ func getRiggedParts(_character):
 	return {
 		"top": "res://Inventory/RiggedModels/Bra/Bra.tscn",
 	}
+
+func getInventoryImage():
+	return "res://Images/Items/underwear/sport-bra.png"
