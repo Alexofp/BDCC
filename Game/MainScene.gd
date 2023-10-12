@@ -1002,6 +1002,10 @@ func doDebugAction(id, args = {}):
 		GM.pc.addPain(-GM.pc.painThreshold())
 		GM.pc.addLust(-GM.pc.lustThreshold())
 		GM.pc.addStamina(GM.pc.getMaxStamina())
+		
+		#for itemID in GlobalRegistry.getItemRefs():
+		#	var newItem = GlobalRegistry.createItem(itemID)
+		#	GM.pc.getInventory().addItem(newItem)
 	
 	if(id == "addPain"):
 		GM.pc.addPain(args["amount"])

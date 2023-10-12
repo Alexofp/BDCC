@@ -28,6 +28,10 @@ func getFlags():
 		"Jacki_StocksPCWonFight": flag(FlagType.Bool),
 		"Jacki_StocksPCLostFight": flag(FlagType.Bool),
 		"Jacki_StocksPCLostFightAndWatched": flag(FlagType.Bool),
+		
+		"jackiCorruption": flag(FlagType.Number),
+		"jackiAnger": flag(FlagType.Number),
+		"jackiLust": flag(FlagType.Number),
 	}
 
 func _init():
@@ -38,6 +42,8 @@ func _init():
 		"res://Modules/JackiModule/Ch1/JackiFirstEncounterScene.gd",
 		"res://Modules/JackiModule/Ch1/JackiBulliesInBathroomScene.gd",
 		"res://Modules/JackiModule/Ch1/JackiStuckInStocksScene.gd",
+		
+		"res://Modules/JackiModule/Ch2/jackiCh2s1Intro.gd",
 		]
 	characters = [
 		"res://Modules/JackiModule/JackiCharacter.gd",
