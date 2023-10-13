@@ -20,6 +20,7 @@ var showSpeakerName = true
 var fontSize = "normal"
 var showShortcuts = true
 var showSceneCreator = true
+var inventoryIconsSize = "small"
 
 var measurementUnits = "metric"
 
@@ -79,6 +80,7 @@ func resetToDefaults():
 	advancedShadersEnabled = true
 	chainsEnabled = true
 	autosaveEnabled = true
+	inventoryIconsSize = "small"
 	
 	enabledContent.clear()
 	for contentType in ContentType.getAll():
@@ -183,6 +185,15 @@ func shouldAutosave():
 
 func shouldSpawnChains():
 	return chainsEnabled
+
+func getInventoryIconSize():
+	if(inventoryIconsSize == "small"):
+		return 32
+	if(inventoryIconsSize == "normal"):
+		return 40
+	if(inventoryIconsSize == "big"):
+		return 64
+	return 32
 
 func getChangeableOptions():
 	var settings = [
@@ -406,6 +417,18 @@ func getChangeableOptions():
 					],
 				},
 				{
+					"name": "Inventory icons",
+					"description": "Changes the size of the buttons inside the main game screen",
+					"id": "inventoryIconsSize",
+					"type": "list",
+					"value": inventoryIconsSize,
+					"values": [
+						["small", "Small"],
+						["normal", "Normal"],
+						["big", "Big"],
+					],
+				},
+				{
 					"name": "Double-tap to pick option (mobile)",
 					"description": "First tap shows the description, second tap picks the option. Works only with touchscreens",
 					"id": "requireDoubleTapOnMobile",
@@ -590,6 +613,8 @@ func applyOption(categoryID, optionID, value):
 			requireDoubleTapOnMobile = value
 		if(optionID == "uiButtonSize"):
 			uiButtonSize = value
+		if(optionID == "inventoryIconsSize"):
+			inventoryIconsSize = value
 		if(optionID == "showCharacterArt"):
 			showCharacterArt = value
 		if(optionID == "showSceneArt"):
@@ -670,6 +695,7 @@ func saveData():
 		"advancedShadersEnabled": advancedShadersEnabled,
 		"chainsEnabled": chainsEnabled,
 		"autosaveEnabled": autosaveEnabled,
+		"inventoryIconsSize": inventoryIconsSize,
 	}
 	
 	return data
@@ -707,6 +733,7 @@ func loadData(data):
 	advancedShadersEnabled = loadVar(data, "advancedShadersEnabled", true)
 	chainsEnabled = loadVar(data, "chainsEnabled", true)
 	autosaveEnabled = loadVar(data, "autosaveEnabled", true)
+	inventoryIconsSize = loadVar(data, "inventoryIconsSize", "small")
 
 func saveToFile():
 	var saveData = saveData()

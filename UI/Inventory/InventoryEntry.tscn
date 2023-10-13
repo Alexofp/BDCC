@@ -77,7 +77,6 @@ size_flags_vertical = 5
 text = "Test Item"
 valign = 1
 autowrap = true
-clip_text = true
 
 [node name="SelectButton" type="TextureButton" parent="HBoxContainer/Control"]
 margin_right = 1231.0
