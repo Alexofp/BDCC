@@ -516,3 +516,7 @@ func getInventoryImage():
 		return "res://Images/Items/equipment/shirt.png"
 	
 	return null
+
+func onUnequipped():
+	if(itemState != null):
+		itemState.resetState()

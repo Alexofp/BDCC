@@ -285,6 +285,7 @@ func getAllEquippedItems():
 func removeItemFromSlot(slot):
 	if(equippedItems.has(slot)):
 		var item = equippedItems[slot]
+		item.onUnequipped()
 		equippedItems.erase(slot)
 		item.currentInventory = null
 		emit_signal("equipped_items_changed")
@@ -296,6 +297,7 @@ func removeEquippedItem(item):
 		var myitem = equippedItems[slot]
 		
 		if(myitem == item):
+			item.onUnequipped()
 			equippedItems.erase(slot)
 			item.currentInventory = null
 			emit_signal("equipped_items_changed")
