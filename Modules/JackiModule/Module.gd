@@ -32,6 +32,11 @@ func getFlags():
 		"jackiCorruption": flag(FlagType.Number),
 		"jackiAnger": flag(FlagType.Number),
 		"jackiLust": flag(FlagType.Number),
+		
+		"jackiSkillButtslut": flag(FlagType.Number),
+		"jackiSkillSounding": flag(FlagType.Number),
+		"jackiSkillWhore": flag(FlagType.Number),
+		"jackiSkillWatersports": flag(FlagType.Number),
 	}
 
 func _init():
@@ -44,6 +49,7 @@ func _init():
 		"res://Modules/JackiModule/Ch1/JackiStuckInStocksScene.gd",
 		
 		"res://Modules/JackiModule/Ch2/jackiCh2s1Intro.gd",
+		"res://Modules/JackiModule/Ch2/jackiCh2s2GymScene.gd",
 		]
 	characters = [
 		"res://Modules/JackiModule/JackiCharacter.gd",
@@ -60,3 +66,57 @@ func _init():
 func resetFlagsOnNewDay():
 	if(getFlag("JackiModule.BathroomBulliesSceneWillHappen")):
 		setFlag("JackiModule.BathroomBulliesSceneWillHappen", false)
+
+
+func addCorruption(howMuch, showMessage = true):
+	howMuch /= 100.0
+	var currentCorruption = getFlag("JackiModule.jackiCorruption", 0.0)
+	var oldCor = currentCorruption
+	
+	currentCorruption += howMuch
+	if(howMuch > 0.0 && currentCorruption > 1.0):
+		currentCorruption = 1.0
+		
+		addAnger(-howMuch/2.0, showMessage)
+	if(howMuch < 0.0 && currentCorruption < 0.0):
+		currentCorruption = 0.0
+	
+	setFlag("JackiModule.jackiCorruption", currentCorruption)
+	
+	if(showMessage):
+		var diff = currentCorruption - oldCor
+		if(diff > 0.0):
+			GM.main.addMessage("Jacki's corruption has increased to "+str(Util.roundF(currentCorruption * 100.0, 1))+"%")
+		elif(diff < 0.0):
+			GM.main.addMessage("Jacki's corruption has decreased to "+str(Util.roundF(currentCorruption * 100.0, 1))+"%")
+
+func addAnger(howMuch, showMessage = true):
+	howMuch /= 100.0
+	var currentCorruption = getFlag("JackiModule.jackiAnger", 0.0)
+	var currentActualCorruption = clamp(getFlag("JackiModule.jackiCorruption", 0.0), 0.0, 1.0)
+	var oldCor = currentCorruption
+	
+	if(howMuch > 0):
+		howMuch *= (1.0 - currentActualCorruption)
+	
+	currentCorruption += howMuch
+	if(howMuch > 0.0 && currentCorruption > 1.0):
+		currentCorruption = 1.0
+	if(howMuch < 0.0 && currentCorruption < -1.0):
+		currentCorruption = -1.0
+	
+	setFlag("JackiModule.jackiAnger", currentCorruption)
+	
+	if(showMessage):
+		var diff = currentCorruption - oldCor
+		
+		if(currentCorruption > 0.0):
+			if(diff > 0.0):
+				GM.main.addMessage("Jacki's anger has increased to "+str(Util.roundF(currentCorruption * 100.0, 1))+"%")
+			elif(diff < 0.0):
+				GM.main.addMessage("Jacki's anger has decreased to "+str(Util.roundF(currentCorruption * 100.0, 1))+"%")
+		else:
+			if(diff < 0.0):
+				GM.main.addMessage("Jacki's kindness has increased to "+str(Util.roundF(-currentCorruption * 100.0, 1))+"%")
+			elif(diff > 0.0):
+				GM.main.addMessage("Jacki's kindness has decreased to "+str(Util.roundF(-currentCorruption * 100.0, 1))+"%")
