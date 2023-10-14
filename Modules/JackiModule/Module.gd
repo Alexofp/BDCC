@@ -37,6 +37,10 @@ func getFlags():
 		"jackiSkillSounding": flag(FlagType.Number),
 		"jackiSkillWhore": flag(FlagType.Number),
 		"jackiSkillWatersports": flag(FlagType.Number),
+		
+		"jackiReceivedBra": flag(FlagType.Bool),
+		"jackiReceivedShorts": flag(FlagType.Bool),
+		"jackiReceivedHorsecockDildo": flag(FlagType.Bool),
 	}
 
 func _init():
@@ -120,3 +124,12 @@ func addAnger(howMuch, showMessage = true):
 				GM.main.addMessage("Jacki's kindness has increased to "+str(Util.roundF(-currentCorruption * 100.0, 1))+"%")
 			elif(diff > 0.0):
 				GM.main.addMessage("Jacki's kindness has decreased to "+str(Util.roundF(-currentCorruption * 100.0, 1))+"%")
+
+func shouldWearSportsBra():
+	return getFlag("JackiModule.jackiReceivedBra", false)
+
+func shouldWearSportsShorts():
+	return getFlag("JackiModule.jackiReceivedShorts", false)
+
+func shouldUnderwear():
+	return shouldWearSportsBra() && shouldWearSportsShorts()

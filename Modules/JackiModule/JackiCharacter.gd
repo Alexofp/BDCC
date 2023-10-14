@@ -56,6 +56,15 @@ func createBodyparts():
 func createEquipment():
 	getInventory().equipItem(GlobalRegistry.createItemNoID("inmatecollar"))
 	getInventory().equipItem(GlobalRegistry.createItemNoID("inmateuniform"))
-	getInventory().equipItem(GlobalRegistry.createItemNoID("sportyTop"))
-	getInventory().equipItem(GlobalRegistry.createItemNoID("sportyBriefs"))
 	getInventory().equipItem(GlobalRegistry.createItemNoID("JackiChastityPiercings"))
+
+func updateBodyparts():
+	var jackiModule = GlobalRegistry.getModule("JackiModule")
+	
+	if(jackiModule.shouldWearSportsBra() && !getInventory().hasSlotEquipped(InventorySlot.UnderwearTop)):
+		getInventory().equipItem(GlobalRegistry.createItemNoID("sportyTop"))
+	if(jackiModule.shouldWearSportsShorts() && !getInventory().hasSlotEquipped(InventorySlot.UnderwearBottom)):
+		getInventory().equipItem(GlobalRegistry.createItemNoID("sportyBriefs"))
+	if(jackiModule.shouldUnderwear() && getInventory().hasSlotEquipped(InventorySlot.Body)):
+		getInventory().removeItemFromSlot(InventorySlot.Body)
+		

@@ -15,17 +15,17 @@ func _run():
 		if (didFuck):
 			saynn("Huh. You look around and suddenly your gaze finds a familiar wolfie. The one that you.. had fun with.. before.")
 
-			saynn("Her name was.. Jacki.. wasn't it? Eh, it doesn't matter much. This time she is looking way less.. constrained.. She is just sitting on one of the yoga carpets, her eyes closed. Might as well say hi to her and see her reaction.")
+			saynn("Her name was.. Jacki.. wasn't it? Eh, it doesn't matter much. This time she is looking way less.. constrained.. She is just sitting on one of the yoga mats, her eyes closed. Might as well say hi to her and see her reaction.")
 
 		elif (didSave):
 			saynn("Huh. You look around and suddenly your gaze finds a familiar wolfie. The one that you managed to save from some hungry inmates!")
 
-			saynn("Her name was.. Jacki.. wasn't it? Yeah, it must be. She is just sitting on one of the yoga carpets, her eyes closed. Might as well check on her and see if she is alright.")
+			saynn("Her name was.. Jacki.. wasn't it? Yeah, it must be. She is just sitting on one of the yoga mats, her eyes closed. Might as well check on her and see if she is alright.")
 
 		else:
 			saynn("Huh. You look around and suddenly your gaze finds a familiar wolfie. The one that you tried to save.. but couldn't quite do it. Oh well, can't save them all, right?")
 
-			saynn("Her name was.. Jacki.. wasn't it? Yeah, it must be. She is just sitting on one of the yoga carpets, her eyes closed. Might as well check on her and see if she is alright.")
+			saynn("Her name was.. Jacki.. wasn't it? Yeah, it must be. She is just sitting on one of the yoga mats, her eyes closed. Might as well check on her and see if she is alright.")
 
 		addButton("Say Hi", "Talk with the wolfie", "say_hi")
 	if(state == "say_hi"):
@@ -217,6 +217,11 @@ func _react(_action: String, _args):
 
 	if(_action == "say_hi"):
 		processTime(3*60)
+
+	if(_action == "start_talk"):
+		runScene("jackiCh2s2GymScene")
+		endScene()
+		return
 
 	setState(_action)
 
