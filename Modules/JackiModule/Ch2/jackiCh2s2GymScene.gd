@@ -75,6 +75,7 @@ func _run():
 		else:
 			addButton("Watch", "Watch her do yoga", "kind_watch")
 			addButton("Yoga", "Do yoga with Jacki", "kind_yoga")
+			addButton("Gift", "Gift Jacki something", "pick_gift")
 			addButton("Jogging", "Offer Jacki to jog together", "kind_jog")
 		addDisabledButton("Enslave", "Jacki's corruption and lust must be at 100%")
 		addButton("Leave", "Never mind", "endthescene")
@@ -298,6 +299,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "endthescene")
 	if(state == "gift_energydrink"):
+		playAnimation(StageScene.Duo, "stand", {npc="jacki"})
 		saynn("You offer Jacki an unopened energy drink of some generic brand that everyone here drinks.")
 
 		if (anger > 0.0):
@@ -329,6 +331,263 @@ func _run():
 			saynn("What a kind wolfie.")
 
 		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "gift_5credits"):
+		playAnimation(StageScene.Duo, "stand", {npc="jacki"})
+		saynn("Everybody likes credits, right? You walk up to Jacki and offer her a chip that contains five of them.")
+
+		if (corruption > 0.5):
+			saynn("Jacki looks at it.. and frowns at first.")
+
+			saynn("[say=jacki]What is this?[/say]")
+
+			saynn("[say=pc]Credits.[/say]")
+
+			saynn("[say=jacki]I'm not a slut.. But.. How much is there?[/say]")
+
+			saynn("Oh. Huh. Did your little offer intrigued her?")
+
+			saynn("[say=pc]Enough not to work for a few days in the mines.[/say]")
+
+			saynn("She huffs and raises her chin high. But her eyes keep looking at the credits in your hand.")
+
+			saynn("[say=jacki]Gimme.[/say]")
+
+			addButton("Just give", "Give her the credits for no return", "gift_credits_free")
+			addButtonWithChecks("Hand job", "Ask for a favor first", "gift_credits_handjob", [], [ButtonChecks.HasReachablePenis])
+		elif (anger > -0.1):
+			saynn("Jacki looks at it.. and then frowns."+str(" Even though you do notice a slight hesitation at first." if corruption > 0.2 else "")+"")
+
+			saynn("[say=jacki]What is this?[/say]")
+
+			saynn("[say=pc]Credits.[/say]")
+
+			saynn("[say=jacki]Yeah, I'm not stupid. Is this some kind of bribe?[/say]")
+
+			saynn("She snarls at you.")
+
+			saynn("[say=jacki]Or are you treating me like a prostitute?[/say]")
+
+			saynn("Well, looks like giving her credits was too obvious. Or maybe she is just not corrupted enough.")
+
+			addButton("Continue", "See what happens next", "endthescene")
+		else:
+			saynn("Jacki looks at it.. and then frowns slightly."+str(" Even though you do notice a slight hesitation at first." if corruption > 0.2 else "")+"")
+
+			saynn("[say=jacki]This kinda feels like you're trying to pay me for something.[/say]")
+
+			saynn("You shrug while Jacki gets in a very defensive position, her arms crossed under her small chest.")
+
+			saynn("[say=jacki]I'm not one of those purple inmates that walk around. You know? I'm not a prostitute.[/say]")
+
+			saynn("Well, looks like Jacki is not into you being her sugar mommy/daddy.")
+
+			addButton("Continue", "See what happens next", "endthescene")
+	if(state == "gift_credits_free"):
+		saynn("You give her the credits and the wolfie happily takes them. She presses the chip against the collar, transferring them to her inmate account.")
+
+		if (corruption > 0.8):
+			saynn("After that she even kisses you on the check real fast.")
+
+		saynn("[say=jacki]But I'm not a slut, okay?[/say]")
+
+		saynn("[say=pc]Sure~.[/say]")
+
+		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "gift_credits_handjob"):
+		playAnimation(StageScene.SexHandjob, "tease", {pc="pc", npc="jacki", bodyState={naked=true, hard=true}})
+		saynn("Jacki leans to take the chip but your hand suddenly raises it high out of her reach. The wolfie pouts.")
+
+		saynn("[say=jacki]Give![/say]")
+
+		saynn("[say=pc]Not so fast. I want something back.[/say]")
+
+		saynn("[say=jacki]What?[/say]")
+
+		saynn("Your gaze moves down to your crotch."+str(" A crotch that has a visible bump, outlining your boner." if !GM.pc.isFullNaked() else "")+" Jacki follows your gaze.. and pouts more.")
+
+		saynn("[say=jacki]..fine.[/say]")
+
+		saynn("You and Jacki hide behind some tall green bushes where nobody can see you. A somewhat private spot.")
+
+		saynn("Jacki slowly lowers herself down to her knees and awkwardly pulls your {pc.penis} out. She can't hide a slight blush from the sight.. and the situation that she has found herself in.")
+
+		saynn("You wiggle the chip in front of her face.")
+
+		saynn("[say=pc]Use your mouth maybe?[/say]")
+
+		saynn("[say=jacki]No.[/say]")
+
+		saynn("The slut still has some sense of dignity left, huh.")
+
+		addButton("Continue", "See how Jacki treats you", "gift_credits_hj_do")
+	if(state == "gift_credits_hj_do"):
+		playAnimation(StageScene.SexHandjob, "sex", {pc="pc", npc="jacki", bodyState={naked=true, hard=true}})
+		saynn("And so Jacki wraps her digits around the shaft of your member, getting a feel for it. She raises a brow when she senses how your heart is pumping blood through it. Your member is only getting more hard and twitchy from that grasp.")
+
+		saynn("Jacki keeps watching it pulse as she starts stroking it with short repetitive motions. The wolfie is clearly not an expert at this.. but she is trying.")
+
+		saynn("[say=pc]You can do better than that.[/say]")
+
+		saynn("She frowns.. but then listens, stroking your cock a little faster, causing a drop of pre to hang off of its tip. Your smile makes her pout.")
+
+		saynn("[say=jacki]What?..[/say]")
+
+		saynn("[say=pc]Awfully obedient for not a slut.[/say]")
+
+		saynn("It starts to feel good real quick. Looks like teasing the wolfie makes her more eager to prove you wrong, her paw working your dick real fast now.")
+
+		saynn("[say=pc]NGh..[/say]")
+
+		saynn("[say=jacki]I just want the credits. I'm not a slut.[/say]")
+
+		saynn("[say=pc]Uh huh~. Will you agree to receive a nice facial?[/say]")
+
+		saynn("[say=jacki]Of course not.. I still need to exercise![/say]")
+
+		saynn("A little groan escapes your lips. Your legs are getting weaker as your cock starts twitching and throbbing more in her paw.")
+
+		saynn("[say=pc]What if I double those creds~?[/say]")
+
+		saynn("She instantly gets quiet. Looks like she is deliberating and just needs a little push. Just like you..")
+
+		addButtonWithChecks("Double creds", "Give her twice as much credits and see what she will do", "gift_creds_hj_double", [], [[ButtonChecks.HasCredits, 10]])
+		addButton("Just cum", "Five creds is enough", "gift_creds_hj_cum")
+	if(state == "gift_creds_hj_cum"):
+		playAnimation(StageScene.SexHandjob, "tease", {pc="pc", npc="jacki", bodyState={naked=true, hard=true}})
+		saynn("You decide not to sweeten the deal, the girl is receiving enough already. But you also decide not to warn her.")
+
+		saynn("And so, suddenly, strings of thick {pc.cum} get pushed out of your {pc.penis} as your orgasm takes over. Jacki gasps as she fails to dodge the first few, causing her to receive some onto her muzzle and hair.")
+
+		saynn("[say=jacki]H-hey!..[/say]")
+
+		saynn("Hah. Obviously she pulls away after that, avoiding the rest of your load. But it felt good either way.")
+
+		saynn("[say=jacki]You could have told me![/say]")
+
+		saynn("You shrug and smile.")
+
+		saynn("[say=pc]My bad~. Catch.[/say]")
+
+		saynn("You give the wolfie exactly zero time to react before throwing the chip at her, causing it to bounce off her snout and land into your {pc.cum} on the floor.")
+
+		saynn("[say=pc]Oops.[/say]")
+
+		saynn("[say=jacki]Grr-r-r..[/say]")
+
+		saynn("You watch her deliberate for a bit. But eventually she succumbs to the greed and picks up the chip, getting some of your seed onto her paws too.")
+
+		saynn("[say=pc]Good slut.[/say]")
+
+		saynn("[say=jacki]Huff! Now I have to go wash..[/say]")
+
+		saynn("[say=pc]It's not that much, it's fine~.[/say]")
+
+		saynn("[say=jacki]You think so? Fine..[/say]")
+
+		saynn("Jacki gets up and walks away swiftly.")
+
+		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "gift_creds_hj_double"):
+		playAnimation(StageScene.SexHandjob, "tease", {pc="pc", npc="jacki", bodyState={naked=true, hard=true}})
+		saynn("Everything has a price. You flash Jacki the second chip of the same value. And she seems to understand everything without you saying anything.")
+
+		saynn("Why? Because she positions herself right in front of your cock and raises her chin high while closing her eyes. All the while her paw keeps stroking you more and more.. Until the orgasm takes over.")
+
+		saynn("Strings of your thick {pc.cum} begin landing on Jacki's face.. and she welcomes them with a strong posture, allowing your load to leave a sticky mess on her muzzle. You grunt softly as you watch her receive it all like a champ.")
+
+		saynn("[say=pc]Good little slut.[/say]")
+
+		saynn("Some of it lands on her shoulders and clothing of course. And now she can't even open her eyes or mouth either.")
+
+		saynn("[say=jacki]Huff..[/say]")
+
+		saynn("You drop the two credit chips in front of her, causing her to start searching for them blindly.")
+
+		saynn("[say=pc]Thank you. You can always just wipe it with your paws.[/say]")
+
+		saynn("She huffs again. And just like that, you leave her be.")
+
+		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "gift_heatpill"):
+		playAnimation(StageScene.Duo, "stand", {npc="jacki"})
+		saynn("A pill can fix a lot of problems. So you decide to give Jacki one that would make all her current problems seem silly.")
+
+		if (corruption <= 0.5):
+			saynn("[say=jacki]Huh?[/say]")
+
+			saynn("She grabs the pill and looks at it.")
+
+			saynn("[say=jacki]What is it for?[/say]")
+
+			saynn("[say=pc]Can't tell. Just try it.[/say]")
+
+			saynn("Jacki tilts her head slightly. And then gives you the unknown pill back.")
+
+			saynn("[say=jacki]I'm not a test subject. Please don't use me to test your drugs.[/say]")
+
+			saynn("That's fair. Seems like she won't eat it willingly in her current state. Oh well.")
+
+			addButton("Continue", "See what happens next", "endthescene")
+		else:
+			saynn("[say=jacki]Umm..[/say]")
+
+			saynn("She grabs the pill and looks at it.")
+
+			saynn("[say=jacki]What is it for?[/say]")
+
+			saynn("[say=pc]Can't tell. Just try it.[/say]")
+
+			saynn("Jacki tilts her head slightly while looking at you.")
+
+			saynn("[say=jacki]Ah, what the hell, why not.[/say]")
+
+			saynn("And then throw the pill into her mouth.")
+
+			saynn("Nothing is different at first. But as the drug starts circulating in her bloodflood, the wolfie suddenly starts to act a little differently. She feels a need to start rubbing her body against yours while a little soft moan escapes her lips.")
+
+			saynn("[say=jacki]Thankies~.[/say]")
+
+			saynn("Looks like it worked. Maybe she is going to be more eager now.")
+
+			addButton("Continue", "See what happens next", "endthescene")
+	if(state == "gift_horsecockdildo"):
+		playAnimation(StageScene.Duo, "stand", {npc="jacki"})
+		saynn("Go big or go home. You offer Jacki a giant horsecock dildo.")
+
+		if (corruption > 0.5 || lust > 0.5):
+			saynn("Her eyes go wide.")
+
+			saynn("[say=jacki]Wow.. Why is it so fucking big.[/say]")
+
+			saynn("Huh? Her answer is a bit different from what you would expect from a kind shy wolfie.")
+
+			saynn("[say=pc]It's a gift. Do you want it?[/say]")
+
+			saynn("She blushes deeply as you catch her blatantly staring at it, drooling even.")
+
+			saynn("[say=jacki]Uhm.. Why would I? But you can leave it here on the floor if you don't need it.. Maybe somebody would like to have such a big flared horsecock shoved up their dirty asshole..[/say]")
+
+			saynn("Wow. You decide not to argue any further and just place the toy on the floor tiles.")
+
+			saynn("Jacki stands on the mat and pretends to do some exercises while looking high at the ceiling. But as soon as you leave the space, you hear someone's rear paws sprinting away.")
+
+			saynn("When you turn around.. there is no toy anymore. Or Jacki. She only returns a few minutes later and pretends like nothing has happened.")
+
+			addButton("Continue", "See what happens next", "endthescene")
+		else:
+			saynn("Her eyes instantly go wide.")
+
+			saynn("[say=jacki]Wha.. The fuck?[/say]")
+
+			saynn("[say=pc]It's a gift.[/say]")
+
+			saynn("She blushes while looking at that giant girthy shaft with a flared tip. But then shakes her head.")
+
+			saynn("[say=jacki]Listen. I appreciate the gesture. But I'm not that desperate. You know?[/say]")
+
+			saynn("Not yet she isn't.")
+
+			addButton("Continue", "See what happens next", "endthescene")
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
@@ -361,6 +620,18 @@ func _react(_action: String, _args):
 		GM.pc.getInventory().removeXOfOrDestroy("EnergyDrink", 1)
 		getModule("JackiModule").addAnger(-10)
 
+	if(_action == "gift_5credits"):
+		if(corruption <= 0.5):
+			getModule("JackiModule").addAnger(10)
+
+	if(_action == "gift_heatpill"):
+		if(corruption > 0.5):
+			GM.pc.getInventory().removeXOfOrDestroy("HeatPill", 1)
+			getModule("JackiModule").addLust(30)
+			getCharacter("jacki").forceIntoHeat()
+		else:
+			getModule("JackiModule").addAnger(10)
+
 	if(_action == "gift_horsecockdildo"):
 		if(corruption > 0.5 || lust > 0.5):
 			setFlag("JackiModule.jackiReceivedHorsecockDildo", true)
@@ -380,6 +651,30 @@ func _react(_action: String, _args):
 		setFlag("JackiModule.jackiReceivedShorts", true)
 		getCharacter("jacki").updateBodyparts()
 		getModule("JackiModule").addAnger(-20)
+
+	if(_action == "gift_credits_free"):
+		GM.pc.addCredits(-5)
+		getModule("JackiModule").addAnger(-20)
+		getModule("JackiModule").addCorruption(10)
+
+	if(_action == "gift_credits_hj_do"):
+		processTime(15*60)
+		
+
+	if(_action == "gift_creds_hj_double"):
+		processTime(10*60)
+		getModule("JackiModule").addCorruption(10)
+		GM.pc.addCredits(-10)
+		getCharacter("jacki").cummedOnBy("pc")
+		GM.pc.orgasmFrom("jacki")
+
+	if(_action == "gift_creds_hj_cum"):
+		processTime(10*60)
+		getModule("JackiModule").addAnger(5)
+		getModule("JackiModule").addCorruption(6)
+		GM.pc.addCredits(-5)
+		getCharacter("jacki").cummedOnBy("pc", FluidSource.Penis, 0.05)
+		GM.pc.orgasmFrom("jacki")
 
 	setState(_action)
 

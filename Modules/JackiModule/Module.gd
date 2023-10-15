@@ -94,6 +94,29 @@ func addCorruption(howMuch, showMessage = true):
 		elif(diff < 0.0):
 			GM.main.addMessage("Jacki's corruption has decreased to "+str(Util.roundF(currentCorruption * 100.0, 1))+"%")
 
+func addLust(howMuch, showMessage = true):
+	howMuch /= 100.0
+	var currentCorruption = getFlag("JackiModule.jackiLust", 0.0)
+	var oldCor = currentCorruption
+	
+	currentCorruption += howMuch
+	if(howMuch > 0.0 && currentCorruption > 1.0):
+		currentCorruption = 1.0
+		
+		addCorruption(-howMuch/2.0, showMessage)
+	if(howMuch < 0.0 && currentCorruption < 0.0):
+		currentCorruption = 0.0
+	
+	setFlag("JackiModule.jackiLust", currentCorruption)
+	
+	if(showMessage):
+		var diff = currentCorruption - oldCor
+		if(diff > 0.0):
+			GM.main.addMessage("Jacki's lust has increased to "+str(Util.roundF(currentCorruption * 100.0, 1))+"%")
+		elif(diff < 0.0):
+			GM.main.addMessage("Jacki's lust has decreased to "+str(Util.roundF(currentCorruption * 100.0, 1))+"%")
+
+
 func addAnger(howMuch, showMessage = true):
 	howMuch /= 100.0
 	var currentCorruption = getFlag("JackiModule.jackiAnger", 0.0)
