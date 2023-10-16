@@ -74,7 +74,6 @@ func _run():
 			addButton("Public fuck", "Fuck Jacki right here in the public", "do_publicfuck")
 		else:
 			addButton("Watch", "Watch her do yoga", "kind_watch")
-			addButton("Yoga", "Do yoga with Jacki", "kind_yoga")
 			addButton("Gift", "Gift Jacki something", "pick_gift")
 			addButton("Jogging", "Offer Jacki to jog together", "kind_jog")
 		addDisabledButton("Enslave", "Jacki's corruption and lust must be at 100%")
@@ -588,6 +587,214 @@ func _run():
 			saynn("Not yet she isn't.")
 
 			addButton("Continue", "See what happens next", "endthescene")
+	if(state == "kind_watch"):
+		saynn("You ask Jacki if you can just watch her do yoga.")
+
+		if (lust < 0.2 || RNG.chance(25)):
+			playAnimation(StageScene.Yoga, "camel", {pc="jacki"})
+			saynn("[say=jacki]Oh. Uh. Sure. Why not. I'm not the best at it.[/say]")
+
+			saynn("You sit on the nearest bench and watch Jacki go through a series of yoga poses.")
+
+			saynn("The last one interests you the most. Her lithe body gracefully arches backwards, her paws reaching for her legs. The way she stretches is quite captivating.")
+
+			saynn("[say=pc]Oh, I think you're pretty good.[/say]")
+
+			saynn("[say=jacki]You think so?.. Ah..[/say]")
+
+			saynn("The wolfie starts to pant softly the longer she holds this pose. So strong. And yet. So vulnerable.")
+
+			saynn("She keeps standing like this for some time, blushing when your gazes collide. As Jacki finally eases out of this camel pose, her breathing makes her chest rise and fall. A modest and yet still feminine chest.")
+
+			saynn("[say=jacki]Thanks for watching.. wruff..[/say]")
+
+			saynn("You just chuckle.")
+
+		elif (lust < 0.5 || RNG.chance(25)):
+			playAnimation(StageScene.Yoga, "dog", {pc="jacki"})
+			saynn("[say=jacki]Of course~. I like when you watch me, wruff.[/say]")
+
+			saynn("You sit on the nearest bench and watch the wolfie go through a series of yoga poses, warming up on simple ones before proceeding to do one special one.")
+
+			saynn("This time she decides to put the most focus on the pose called 'downward-facing dog'. Her hips rise high into the air while her hands are pressed firmly into the mat. She maintains this pose, the curves of her fit butt full on display, while gazing towards the ground.")
+
+			saynn("[say=pc]Very nice.[/say]")
+
+			saynn("[say=jacki]Thanks.. ah..[/say]")
+
+			saynn("While stretching all her limbs out like that, she can't help but to produce a soft moan. And that, combined with sticking her butt out so provocatively, makes her all blushy.")
+
+			saynn("As Jacki finally eases out of this camel pose, her breathing makes her chest rise and fall. A modest and yet still feminine chest.")
+
+			saynn("[say=jacki]Well. Hope you liked the view, wruff.[/say]")
+
+			saynn("You smile and nod.")
+
+		else:
+			playAnimation(StageScene.Yoga, "catcow", {pc="jacki", bodyState={underwear=hasUnderwear}})
+			saynn("[say=jacki]I thought you would never ask, wruff~.[/say]")
+
+			saynn("You take a comfortable seat, watching Jacki begin her yoga practice.")
+
+			saynn("She starts with some basic yoga poses, moving gracefully through her routine, starting off with simple stretching and ending at something quite.. lewd.")
+
+			saynn("Jacki stands on all fours and then bends her back low while sticking her butt provocatively, emphasizing the curves of her rear. Even her fluffy tail moves out of the way to let you see her pinched clothing hugging her crotch tightly.")
+
+			saynn("After that she bends her back in the other direction, arching it instead, completing the cat-cow pose. Little moans occasionally escape from her as she moves from one pose to another.")
+
+			saynn("[say=jacki]Always makes me feel like I'm in heat..[/say]")
+
+			saynn("A bold statement. But a welcomed one.")
+
+			saynn("[say=pc]You're doing great.[/say]")
+
+			saynn("[say=jacki]Wruff~.[/say]")
+
+		addButton("Enough", "That was cute", "endthescene")
+		if (anger < -0.3):
+			addButton("Yoga together", "Ask to do some exercises together", "kind_yoga_together")
+		else:
+			addDisabledButton("Yoga together", "Jacki needs to trust you more")
+		if (anger < -0.5):
+			addButton("Offer massage", "Offer Jacki a massage to relax her muscles", "kind_massage")
+		else:
+			addDisabledButton("Offer massage", "Jacki needs to trust you more")
+	if(state == "kind_yoga_together"):
+		playAnimation(StageScene.Solo, "allfours")
+		saynn("A little cute idea comes into your mind.")
+
+		saynn("[say=pc]Can we do something together?[/say]")
+
+		if (lust > 0.7):
+			saynn("[say=jacki]We can do many things together, wruff~.[/say]")
+
+			saynn("The wolfie is quite horny, huh.")
+
+			saynn("[say=pc]I mean.. yoga.[/say]")
+
+			saynn("[say=jacki]Oh. Sure.[/say]")
+
+		else:
+			saynn("[say=jacki]Sure. I can show you a few poses.[/say]")
+
+		saynn("Her eyes light up. Jacki invites you to the middle of the mat and shows you a few simple exercises that warm up your muscles.")
+
+		saynn("[say=jacki]Let's do the cat-cow. Get on all fours.[/say]")
+
+		saynn("A bit kinky to hear that from her. But you obey, planting your hands and knees onto the soft mat. Jacki helps you, positioning your neck and limbs to avoid any possible overstretching.")
+
+		saynn("[say=jacki]Imagine a hissy cat. They stick their backs up.[/say]")
+
+		saynn("You do just that. Jacki angles your head so you would be looking down.")
+
+		saynn("[say=jacki]Great, wruff~. Now imagine a cow who wants to moo very loudly. Lower your belly as low as you can and have your chin high.[/say]")
+
+		saynn("She is being very helpful. Makes you wonder how far she would go.")
+
+		addButton("Try your best", "Do the pose as best as you can", "kind_yoga_togehter_try")
+		addButton("Slack purposefully", "Do it badly so Jacki has to help you more", "kind_yoga_togehter_slack")
+	if(state == "kind_yoga_togehter_try"):
+		playAnimation(StageScene.Yoga, "catcow")
+		saynn("You do your best to follow the instructions, slowly transitioning from one pose to another and back, making sure to arch your back and move your head when needed.")
+
+		saynn("[say=jacki]Aw. Very good![/say]")
+
+		saynn("And looks like you are doing it correctly. Jacki only occasionally fixes your posture.")
+
+		saynn("It's exhausting.. but strangely liberating. You feel better now.")
+
+		saynn("[say=pc]Thanks.[/say]")
+
+		saynn("You're panting by the end of it. Jacki smiles kindly.")
+
+		saynn("[say=jacki]You're welcome.[/say]")
+
+		saynn("Nothing about this training session was lewd. But maybe it doesn't have to be?")
+
+		addButton("Continue", "That was nice", "endthescene")
+	if(state == "kind_yoga_togehter_slack"):
+		playAnimation(StageScene.ButtStack, "idle", {pc="pc", npc="jacki"})
+		saynn("You follow her instructions.. but not quite exactly. You don't bend and arch your back enough no matter how much Jacki points it out.")
+
+		saynn("At some point the wolfie gets too tired of you failing it.")
+
+		saynn("[say=jacki]Huff.. It's very easy. Let me show.[/say]")
+
+		saynn("She suddenly stands on top of you, lowering herself onto your back while still being on all fours.")
+
+		saynn("[say=jacki]Let's bend very low.[/say]")
+
+		if (lust < 0.5 && corruption < 0.5):
+			saynn("Jacki guides your movement, her form brushing against yours as she helps you get into the 'cow' pose. The friction of your bodies rubbing against each other creates a little intimate feeling.. A feeling that becomes evident to Jacki a bit too late.")
+
+			saynn("[say=jacki]Oh. Um..[/say]")
+
+			saynn("When she realizes how kinky it must look from the side, Jacki gets off you and clears her throat while blushing softly.")
+
+			saynn("[say=jacki]You're doing good.. much better now.. yeah..[/say]")
+
+			saynn("You can tell everything just by her voice.")
+
+			saynn("[say=pc]You mounting me helped, thank you~.[/say]")
+
+			saynn("That's when Jacki's face goes fully red.")
+
+		else:
+			saynn("Jacki guides your movement, her form brushing against yours as she helps you get into the 'cow' pose. The friction of your bodies rubbing against each other creates a little intimate feeling.. A feeling that both of you seem to welcome.")
+
+			saynn("[say=jacki]Very good.. wruff..[/say]")
+
+			saynn("Even though this is probably looking quite.. kinky.. from the side.. Jacki continues to guide you into the right pose with her own body.")
+
+			saynn("[say=jacki]Sometimes a good mounting can fix everything..[/say]")
+
+			saynn("She isn't even trying to hide it, is she. You can feel her subtly humping you, her crotch spreading the lewd scent coming from her constrained desperate flower to you.")
+
+			saynn("[say=jacki]There we go..[/say]")
+
+			saynn("Both of you pant softly while remaining intertwined in this.. weird kind of embrace.. for a while longer.")
+
+			saynn("[say=pc]Thank you, wolfie.[/say]")
+
+			saynn("She licks your ear and gets off you.")
+
+		addButton("Continue", "That was lewd", "endthescene")
+	if(state == "kind_massage"):
+		# Replace me
+		playAnimation(StageScene.Duo, "stand", {npc="jacki"})
+		saynn("After that yoga practice session the wolfie is probably feeling tensed up. So you decide to offer some help.")
+
+		saynn("[say=pc]Would you want a little massage, Jacki? To help you relax.[/say]")
+
+		saynn("[say=jacki]Oh.. That actually sounds kinda nice.[/say]")
+
+		saynn("There aren't really any spots for that.. so you just help her lie down on the mat. Then you kneel nearby and put your hands on her back.")
+
+		saynn("You begin simple, kneading the tension away from her shoulders and then doing the same to her shoulder plates and the back muscles.")
+
+		saynn("[say=jacki]You can be.. a little harder if you want.[/say]")
+
+		saynn("She likes it a little rougher huh? You listen to her and put a little more pressure into your massage.")
+
+		saynn("Jacki sighs in pleasure enjoying the sensations of your strong hands working their magic on her tense muscles. After dealing with the shoulders, your hands slide lower to her waist, your fingers lightly grazing her sides, your thumbs tracing the contours of her spine.")
+
+		saynn("[say=jacki]That feels good..[/say]")
+
+		saynn("Hm. Kneading her there has an opposite effect of growing the tension instead. The good kind of tension. It's like Jacki has a lot of.. sensual energy.. that is stored deep within her.")
+
+		saynn("She arches her back slightly as a quiet moan escapes her lips.. an invitation for you to explore further.")
+
+		saynn("Your hands continue to wander, gradually sliding lower and lower across her curves until you begin to knead and caress her firm rear. That wiggly tail moves out of the way, giving you full access to her butt.")
+
+		saynn("[say=jacki]Wruff..[/say]")
+
+		saynn("You can feel.. heat.. radiating from her crotch. But you don't dare to go there.. just caressing her thighs instead, sometimes rubbing their inner side too. More little moans can be heard as you are nearing the end of that sensual massage.")
+
+		saynn("[say=pc]Did you like it, wolfie?[/say]")
+
+		saynn("[say=jacki]Yeah.. that feels really good..[/say]")
+
+		addButton("Continue", "That was lewd", "endthescene")
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
@@ -595,8 +802,13 @@ func _react(_action: String, _args):
 		return
 
 	if(_action == "do_perv"):
-		getModule("JackiModule").addCorruption(3)
-		processTime(6*60)
+		getModule("JackiModule").addCorruption(4)
+		processTime(15*60)
+
+	if(_action == "kind_watch"):
+		processTime(15*60)
+		getModule("JackiModule").addAnger(-8)
+		getModule("JackiModule").addLust(3)
 
 	if(_action == "perv_spank"):
 		processTime(5*60)
@@ -675,6 +887,25 @@ func _react(_action: String, _args):
 		GM.pc.addCredits(-5)
 		getCharacter("jacki").cummedOnBy("pc", FluidSource.Penis, 0.05)
 		GM.pc.orgasmFrom("jacki")
+
+	if(_action == "kind_yoga_together"):
+		processTime(5*60)
+		getModule("JackiModule").addLust(6)
+
+	if(_action == "kind_massage"):
+		processTime(20*60)
+		getModule("JackiModule").addLust(7)
+		getModule("JackiModule").addAnger(-5)
+
+	if(_action == "kind_yoga_togehter_try"):
+		processTime(10*60)
+		GM.pc.addEffect(StatusEffect.Yoga)
+		GM.pc.addStamina(-30)
+		getModule("JackiModule").addAnger(-5)
+
+	if(_action == "kind_yoga_togehter_slack"):
+		processTime(10*60)
+		getModule("JackiModule").addLust(5)
 
 	setState(_action)
 
