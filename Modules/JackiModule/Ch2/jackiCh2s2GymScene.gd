@@ -4,6 +4,7 @@ var anger = 0.0
 var corruption = 0.0
 var lust = 0.0
 var hasUnderwear = false
+var buttScore = 0
 
 func _init():
 	sceneID = "jackiCh2s2GymScene"
@@ -17,6 +18,7 @@ func _run():
 		corruption = getFlag("JackiModule.jackiCorruption", 0.0)
 		lust = getFlag("JackiModule.jackiLust", 0.0)
 		hasUnderwear = getModule("JackiModule").shouldUnderwear()
+		buttScore = getModule("JackiModule").getSkillScore("jackiSkillButtslut")
 		addCharacter("jacki")
 		saynn("Jacki's anger: "+str(anger)+"")
 
@@ -75,7 +77,10 @@ func _run():
 		else:
 			addButton("Watch", "Watch her do yoga", "kind_watch")
 			addButton("Gift", "Gift Jacki something", "pick_gift")
-			addButton("Jogging", "Offer Jacki to jog together", "kind_jog")
+			if (anger < -0.3):
+				addButton("Jogging", "Offer Jacki to jog together", "kind_jog")
+			else:
+				addDisabledButton("Jogging", "Jacki doesn't trust you enough")
 		addDisabledButton("Enslave", "Jacki's corruption and lust must be at 100%")
 		addButton("Leave", "Never mind", "endthescene")
 	if(state == "do_perv"):
@@ -795,6 +800,203 @@ func _run():
 		saynn("[say=jacki]Yeah.. that feels really good..[/say]")
 
 		addButton("Continue", "That was lewd", "endthescene")
+		addButtonWithChecks("Forced anal fuck", "Betray Jacki and have have rough sex with her right there", "kind_massage_forcedfuck", [], [ButtonChecks.HasReachablePenis])
+		addButton("Forced fisting", "Betray Jacki and fist her ass right there", "kind_massage_forcedfisting")
+	if(state == "kind_massage_forcedfuck"):
+		saynn("# Replace me")
+
+		playAnimation(StageScene.Duo, "stand", {npc="jacki", bodyState={naked=true, hard=true}, npcBodyState={exposedCrotch=true}})
+		saynn("Since the wolfie is not suspecting anything.. Now is the perfect time to strike.")
+
+		saynn("With a sudden, forceful movement, you pin Jacki against the mat, pushing one hand into her back while the second is already pulling her shorts down. She yelps and instinctively arches her back, trying to look behind her as you already expose her ass. She realizes your evil intentions way too late.")
+
+		saynn("[say=jacki]What are you![/say]")
+
+		saynn("[say=pc]Shut up, whore.[/say]")
+
+		saynn("The bitch still has her cunt stitched up and hidden behind a rich red bush of pubic hair so you opt to go for her other hole.. her dirty asshole that seems to be {jackiButt}."+str(" Which gives you a good reason to stretch that ring more." if buttScore < 5 else " Which makes you wonder why is that buttslut even resisting.")+"")
+
+		saynn("[say=jacki]Somebody! Help![/say]")
+
+		saynn("You expose your {pc.penis} after pulling Jacki's shorts down and then use that free hand to force her muzzle into the floor, muffling her calls for help. All the while you give every wanna-be hero an evil glance.. which seems to calm them down. While other hungry eyes are watching you with great interest.")
+
+		saynn("After that, you quickly align yourself with her ass.. before forcing yourself inside, your cock violating her ass and stretching her anal star painfully wide, forcing a moan of discomfort out of the wolfie.")
+
+		if (buttScore < 5):
+			saynn("[say=pc]Ngh. What a tight bitch.[/say]")
+
+		else:
+			saynn("[say=pc]How many horsecocks can fit in there? More than one it feels.[/say]")
+
+		saynn("And so you start fucking her at a furious pace, your hips slapping against her fluffy buttchecks as you shove your dick in and out. This raw brutal act causes Jacki to squirm and resist out of desperation, her moans and gasps turning into pleas for mercy. The amount of roughness that you apply while pounding her ass makes her start sobbing.")
+
+		saynn("[say=jacki]Stop.. please!..[/say]")
+
+		saynn("It was so-o-o worth it to pretend to be her friend for some time. The slut is clenching so hard that you can't keep yourself from grunting. Betrayal? Pff. You're just turning Jacki into who she is supposed to be.. a cock-addicted slut.")
+
+		saynn("[say=pc]Keep clenching whore, I'm close.[/say]")
+
+		saynn("Her asshole isn't exactly lubed which leads to some wear and tear.. but who cares when you are having such a good time. If she doesn't like it.. why is her ass practically sucking your cock in?")
+
+		addButton("Cum inside", "Give that slut what she deserves", "kind_massage_forcedfuck_cum")
+	if(state == "kind_massage_forcedfuck_cum"):
+		saynn("# Replace me")
+
+		playAnimation(StageScene.Duo, "stand", {npc="jacki", bodyState={naked=true, hard=true}, npcBodyState={exposedCrotch=true}})
+		saynn("After a few last rough thrusts, that clenching ass easily pushes you over the edge. Jacki's body quivers under you as you shove your throbbing {pc.penis} deep inside and start flooding her guts full of your sticky {pc.cum}.")
+
+		saynn("When the orgasm is over, you pull out and stop pinning the wolfie. And she is just.. sobbing.. while her used {jackiButt} asshole is leaking your seed. All the accumulated trust.. shattered.. her body bruised.")
+
+		saynn("[say=jacki]H-huff..[/say]")
+
+		saynn("[say=pc]You're nothing but a buttslut.[/say]")
+
+		saynn("But not all is bad. Maybe now she will understand her real place in this prison.")
+
+		saynn("You give her some rest.")
+
+		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "kind_massage_forcedfisting"):
+		saynn("# Replace me")
+
+		playAnimation(StageScene.Duo, "stand", {npc="jacki", bodyState={naked=true, hard=true}, npcBodyState={exposedCrotch=true}})
+		saynn("Since the wolfie is not suspecting anything.. Now is the perfect time to strike.")
+
+		saynn("With a sudden, forceful movement, you pin Jacki against the mat, pushing one hand into her back while the second is already pulling her shorts down. She yelps and instinctively arches her back, trying to look behind her as you already expose her ass. She realizes your evil intentions way too late.")
+
+		saynn("[say=jacki]What are you![/say]")
+
+		saynn("[say=pc]Shut up, whore.[/say]")
+
+		saynn("The bitch still has her cunt stitched up and hidden behind a rich red bush of pubic hair so you opt to go for her other hole.. her dirty asshole that seems to be {jackiButt}."+str(" Which gives you a good reason to stretch that ring more." if buttScore < 5 else " Which makes you wonder why is that buttslut even resisting.")+"")
+
+		saynn("[say=jacki]Somebody! Help![/say]")
+
+		saynn("You didn't even do anything yet! What a whiny bitch. But it's about time. Inmates around are watching.. but one stern glance is enough to scare away any wanna-be heroes.")
+
+		saynn("You start by prodding her asshole with a few digits. She is clenching tightly.. but you are stronger, violating her ass with three fingers at once, stretching her sorry hole somewhat wide. The wolfie surely doesn't like that, she is squirming like hell.")
+
+		saynn("[say=jacki]Nghh!..[/say]")
+
+		saynn("[say=pc]Quit resisting, bitch.[/say]")
+
+		saynn("A few firm spanks makes the girl whine and sob.. but also not move as much. Which lets you start working her ass out and adding another digit.. and then another.. until your whole palm is now forcibly going into Jacki's ass.")
+
+		saynn("[say=jacki]T-too much..[/say]")
+
+		saynn("It was too much indeed, Jacki's asshole looks stretched comically wide. At the same time you also notice a little wet spot appearing on the mat underneath, creating from juices that drip from her stitched up cunt. Bitch might actually be enjoying it.")
+
+		saynn("Which is why you start moving your hand in and out, fisting that wolfie's firm butt, leaving it pretty much empty before stuffing it full seconds later.")
+
+		saynn("Jacki huffs and whines louder, her asshole struggling to keep up with your onslaught.")
+
+		saynn("[say=pc]Too much? I think it's just right for a buttslut like you.[/say]")
+
+		saynn("The most you pound her ass, the closer she gets to something.. her inner walls gripping your fist so well..")
+
+		addButton("Forced orgasm", "See what happens next", "kind_massage_forcedfisting_cum")
+	if(state == "kind_massage_forcedfisting_cum"):
+		saynn("# Replace me")
+
+		playAnimation(StageScene.Duo, "stand", {npc="jacki", bodyState={naked=true, hard=true}, npcBodyState={exposedCrotch=true}})
+		saynn("Suddenly, Jacki starts arching her back and crying out loudly as her stretched asshole is pulsing around your hand. You're not sure if this is an orgasm.. or something caused by you overstimulating her.. but it's sure a welcomed addition.")
+
+		saynn("When that is over, you pull your fist out and stop pinning the wolfie. While she is just.. sobbing.. her {jackiButt} asshole is struggling to close completely. All the accumulated trust.. shattered.. her body bruised.")
+
+		saynn("[say=jacki]H-huff..[/say]")
+
+		saynn("[say=pc]You're nothing but a buttslut.[/say]")
+
+		saynn("But not all is bad. Maybe now she will understand her real place in this prison.")
+
+		saynn("You give her some rest.")
+
+		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "kind_jog"):
+		playAnimation(StageScene.Duo, "stand", {npc="jacki"})
+		saynn("Being in a prison does limit your range of available activities a lot. But luckily jogging is something that doesn't require much, just some empty space.")
+
+		saynn("[say=pc]Wonder if you would like to jog together?[/say]")
+
+		saynn("[say=jacki]Oh. Sure.[/say]")
+
+		saynn("Jacki gets up from the mat and invites you to follow her to her usual route.")
+
+		addButton("Jog", "Jog with Jacki", "jog_do")
+	if(state == "jog_do"):
+		saynn("# Replace me")
+
+		playAnimation(StageScene.Duo, "stand", {npc="jacki"})
+		saynn("And so you two begin jogging around the only green area of the prison. The air here is nice and fresh.")
+
+		saynn("Jacki leads the way so you just jog behind her. You run past some rocks and even trees.")
+
+		saynn("The more the wolfie jogs, the more you begin to notice something. She is panting way more than you would expect her to do. The fabric of her clothes rubbing against her sensitive spots might be the reason..")
+
+		saynn("Since you're not jogging that fast, you can also try to chat.")
+
+		addButton("This is nice", "Say this", "jog_chat_nice")
+		addButton("Why is she here", "Ask how Jacki has ended up here", "jog_chat_whyprison")
+		addButton("Chastity piercings", "Ask Jacki about her chastity piercings", "jog_chat_chastitypiercings")
+	if(state == "jog_chat_nice"):
+		saynn("[say=pc]This is nice, isn't it?[/say]")
+
+		saynn("[say=jacki]Yeah, it is.. wruff.. I like that I get to do this.[/say]")
+
+		saynn("You jog past some little artificial waterfall. The sound of running water helps calm you both down.")
+
+		saynn("[say=jacki]This prison has been growing on me. As sad as that might sound.[/say]")
+
+		saynn("[say=pc]What about the fact that you got put into stocks?[/say]")
+
+		saynn("[say=jacki]Eh, it was kinda kinky.[/say]")
+
+		saynn("Huh.")
+
+		addButton("Continue", "See what happens next", "jog_afterchat")
+	if(state == "jog_chat_whyprison"):
+		saynn("[say=pc]How did you end up here, Jacki? What crime did you do?[/say]")
+
+		saynn("[say=jacki]Me? I didn't do anything. I like to think that I'm a friendly person.[/say]")
+
+		saynn("A kind friendly innocent wolfie huh.")
+
+		saynn("[say=pc]So why did AlphaCorp decide to send you into the middle of nowhere?[/say]")
+
+		saynn("She stops for a second to think. And then just shrugs and continues jogging.")
+
+		saynn("[say=jacki]Dunno. One day I wake up and there were photos on my bed of me fucking with some old guy. He had a white uniform. I honestly never saw him even once in my life.[/say]")
+
+		saynn("You think to yourself.. could be drugs.. could be image manipulation.. or maybe she actually did it.")
+
+		saynn("[say=jacki]There also was a note. It told me to come to a certain place alone or these would be posted everywhere.[/say]")
+
+		saynn("Now that sounds like.. blackmail..")
+
+		saynn("[say=pc]Did you do it?[/say]")
+
+		saynn("[say=jacki]Nah, I just went to the police. But when they saw the photos.. It made me wish that I did.[/say]")
+
+		saynn("[say=pc]Why?[/say]")
+
+		saynn("[say=jacki]I got charged with.. don't remember exactly.. I think it was.. unsolicited breeding with AlphaCorp's official.. or something like that.[/say]")
+
+		saynn("Breeding is illegal now? Looks like somebody just wanted to earn an extra star. Makes sense why she is here then and not in a normal prison.")
+
+		saynn("[say=pc]I see.[/say]")
+
+		saynn("[say=jacki]I'm not even that special. Dunno why would anyone do this to me.[/say]")
+
+		addButton("Continue", "See what happens next", "jog_afterchat")
+	if(state == "jog_chat_chastitypiercings"):
+		saynn("[say=pc]Couldn't help but to notice your unique piercings. Why do you have them?[/say]")
+
+		saynn("[say=jacki]Some doctor decided to force them on me during an intake process. Something about.. obedience training? She was kinda mean. And so I returned the favor.[/say]")
+
+		saynn("[say=pc]So did she do that randomly to you?[/say]")
+
+		saynn("[say=jacki]I don't know. She wanted to inject me with something. Said it against STDs? I wasn't planning on fucking here with anyone, you know? So I was a little rude to her, I will admit.[/say]")
+
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
@@ -809,6 +1011,9 @@ func _react(_action: String, _args):
 		processTime(15*60)
 		getModule("JackiModule").addAnger(-8)
 		getModule("JackiModule").addLust(3)
+
+	if(_action == "kind_jog"):
+		processTime(2*60)
 
 	if(_action == "perv_spank"):
 		processTime(5*60)
@@ -907,6 +1112,32 @@ func _react(_action: String, _args):
 		processTime(10*60)
 		getModule("JackiModule").addLust(5)
 
+	if(_action == "kind_massage_forcedfuck"):
+		processTime(10*60)
+		getModule("JackiModule").doBetray()
+
+	if(_action == "kind_massage_forcedfisting"):
+		processTime(10*60)
+		getModule("JackiModule").doBetray()
+
+	if(_action == "kind_massage_forcedfuck_cum"):
+		processTime(6*60)
+		getModule("JackiModule").advanceSkill("jackiSkillButtslut")
+		getModule("JackiModule").makeJackiBusy()
+		getCharacter("jacki").cummedInAnusBy("pc")
+		GM.pc.orgasmFrom("jacki")
+
+	if(_action == "kind_massage_forcedfisting_cum"):
+		processTime(6*60)
+		getModule("JackiModule").advanceSkill("jackiSkillButtslut")
+		getModule("JackiModule").makeJackiBusy()
+
+	if(_action == "jog_do"):
+		processTime(15*60)
+		getModule("JackiModule").addAnger(-5)
+		getModule("JackiModule").addLust(6)
+		GM.pc.addStamina(-10)
+
 	setState(_action)
 
 func saveData():
@@ -916,6 +1147,7 @@ func saveData():
 	data["corruption"] = corruption
 	data["lust"] = lust
 	data["hasUnderwear"] = hasUnderwear
+	data["buttScore"] = buttScore
 
 	return data
 
@@ -926,3 +1158,4 @@ func loadData(data):
 	corruption = SAVE.loadVar(data, "corruption", 0.0)
 	lust = SAVE.loadVar(data, "lust", 0.0)
 	hasUnderwear = SAVE.loadVar(data, "hasUnderwear", false)
+	buttScore = SAVE.loadVar(data, "buttScore", 0)

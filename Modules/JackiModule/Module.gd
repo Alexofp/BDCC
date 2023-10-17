@@ -156,3 +156,42 @@ func shouldWearSportsShorts():
 
 func shouldUnderwear():
 	return shouldWearSportsBra() && shouldWearSportsShorts()
+
+func doBetray():
+	var currentKind = -getFlag("JackiModule.jackiAnger", 0.0)
+	
+	if(currentKind > 0.0):
+		addCorruption(currentKind * 60)
+		addAnger(500)
+		
+		return true
+	return false
+
+func getSkillScore(skillID):
+	return Util.mini(Util.maxi(int(getFlag("JackiModule."+str(skillID), 0)), 0), 7)
+
+func advanceSkill(skillID, maxLevel = 7):
+	if(getFlag("JackiModule."+str(skillID), 0) < maxLevel):
+		increaseFlag("JackiModule."+str(skillID), 1)
+	return true
+
+func getButtTightness():
+	var buttscore = getSkillScore("jackiSkillButtslut")
+	if(buttscore <= 0):
+		return "virgin-tight"
+	if(buttscore <= 1):
+		return "extremely tight"
+	if(buttscore <= 2):
+		return "pretty tight"
+	if(buttscore <= 3):
+		return "somewhat tight"
+	if(buttscore <= 4):
+		return "slightly used"
+	if(buttscore <= 5):
+		return "pretty stretched and used"
+	if(buttscore <= 6):
+		return "extremely stretched"
+	return "gaping stretched"
+
+func makeJackiBusy():
+	pass

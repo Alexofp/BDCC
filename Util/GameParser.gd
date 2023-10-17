@@ -35,6 +35,8 @@ func callFuncWrapper(_command: String, _args: Array):
 			return _args[1]
 	if(_command == "taviCorruption"):
 		return str(Util.roundF(GM.main.getFlag("TaviModule.Ch6Corruption", 1.0)*100.0, 1))+"%"
+	if(_command == "jackiButt"):
+		return GlobalRegistry.getModule("JackiModule").getButtTightness()
 	
 	return "[color=red]!RUNTIME ERROR NO COMMAND FOUND "+_command+" "+str(_args)+"![/color]"
 	
