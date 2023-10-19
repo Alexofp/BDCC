@@ -1,0 +1,153 @@
+[gd_scene load_steps=33 format=2]
+
+[ext_resource path="res://Player/Player3D/Doll3D.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Player/StageScene3D/BaseStageScene3D.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Player/Props/platform.png" type="Texture" id=3]
+[ext_resource path="res://Player/StageScene3D/Scenes/SexFisting.gd" type="Script" id=4]
+
+[sub_resource type="AnimationNodeAnimation" id=3]
+animation = "CuffedArms-loop"
+
+[sub_resource type="AnimationNodeBlend2" id=4]
+filter_enabled = true
+filters = [ "Doll3D/Skeleton:Arm.L", "Doll3D/Skeleton:Arm.R", "Doll3D/Skeleton:ForeArm.L", "Doll3D/Skeleton:ForeArm.R", "Doll3D/Skeleton:Hand.L", "Doll3D/Skeleton:Hand.R" ]
+
+[sub_resource type="AnimationNodeAnimation" id=24]
+animation = "FistingFast_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=25]
+animation = "FistingInside_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=26]
+animation = "FistingTease_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=27]
+animation = "Fisting_1-loop"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=28]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=29]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=30]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=31]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=32]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=33]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachine" id=34]
+states/FistingFast_1-loop/node = SubResource( 24 )
+states/FistingFast_1-loop/position = Vector2( 469, 350 )
+states/FistingInside_1-loop/node = SubResource( 25 )
+states/FistingInside_1-loop/position = Vector2( 469, 188 )
+states/FistingTease_1-loop/node = SubResource( 26 )
+states/FistingTease_1-loop/position = Vector2( 469, 105 )
+states/Fisting_1-loop/node = SubResource( 27 )
+states/Fisting_1-loop/position = Vector2( 469, 270 )
+transitions = [ "FistingTease_1-loop", "FistingInside_1-loop", SubResource( 28 ), "FistingInside_1-loop", "FistingTease_1-loop", SubResource( 29 ), "FistingInside_1-loop", "Fisting_1-loop", SubResource( 30 ), "Fisting_1-loop", "FistingInside_1-loop", SubResource( 31 ), "Fisting_1-loop", "FistingFast_1-loop", SubResource( 32 ), "FistingFast_1-loop", "Fisting_1-loop", SubResource( 33 ) ]
+start_node = "FistingTease_1-loop"
+
+[sub_resource type="AnimationNodeBlendTree" id=35]
+graph_offset = Vector2( -157.661, -32.5744 )
+nodes/Animation/node = SubResource( 3 )
+nodes/Animation/position = Vector2( 140, 280 )
+nodes/CuffsBlend/node = SubResource( 4 )
+nodes/CuffsBlend/position = Vector2( 440, 160 )
+nodes/StateMachine/node = SubResource( 34 )
+nodes/StateMachine/position = Vector2( 174.339, 109.426 )
+nodes/output/position = Vector2( 680, 180 )
+node_connections = [ "CuffsBlend", 0, "StateMachine", "CuffsBlend", 1, "Animation", "output", 0, "CuffsBlend" ]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=22]
+
+[sub_resource type="AnimationNodeAnimation" id=38]
+animation = "FistingFast_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=39]
+animation = "FistingInside_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=40]
+animation = "FistingTease_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=41]
+animation = "Fisting_2-loop"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=42]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=43]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=44]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=45]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=46]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=47]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachine" id=36]
+states/FistingFast_2-loop/node = SubResource( 38 )
+states/FistingFast_2-loop/position = Vector2( 469, 355 )
+states/FistingInside_2-loop/node = SubResource( 39 )
+states/FistingInside_2-loop/position = Vector2( 469, 170 )
+states/FistingTease_2-loop/node = SubResource( 40 )
+states/FistingTease_2-loop/position = Vector2( 469, 83 )
+states/Fisting_2-loop/node = SubResource( 41 )
+states/Fisting_2-loop/position = Vector2( 469, 260 )
+transitions = [ "FistingTease_2-loop", "FistingInside_2-loop", SubResource( 42 ), "FistingInside_2-loop", "FistingTease_2-loop", SubResource( 43 ), "FistingInside_2-loop", "Fisting_2-loop", SubResource( 44 ), "Fisting_2-loop", "FistingInside_2-loop", SubResource( 45 ), "Fisting_2-loop", "FistingFast_2-loop", SubResource( 46 ), "FistingFast_2-loop", "Fisting_2-loop", SubResource( 47 ) ]
+start_node = "FistingTease_2-loop"
+
+[sub_resource type="AnimationNodeBlendTree" id=37]
+graph_offset = Vector2( -299.532, 64.6842 )
+nodes/Animation/node = SubResource( 3 )
+nodes/Animation/position = Vector2( 140, 280 )
+nodes/CuffsBlend/node = SubResource( 4 )
+nodes/CuffsBlend/position = Vector2( 440, 160 )
+nodes/StateMachine/node = SubResource( 36 )
+nodes/StateMachine/position = Vector2( 160, 140 )
+nodes/output/position = Vector2( 680, 180 )
+node_connections = [ "CuffsBlend", 0, "StateMachine", "CuffsBlend", 1, "Animation", "output", 0, "CuffsBlend" ]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=23]
+
+[node name="SexFisting" instance=ExtResource( 2 )]
+script = ExtResource( 4 )
+
+[node name="Sprite3D" type="Sprite3D" parent="." index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.196641, -1.77462 )
+texture = ExtResource( 3 )
+region_enabled = true
+region_rect = Rect2( 1, 1, 1022, 62 )
+
+[node name="Doll3D" parent="." index="1" instance=ExtResource( 1 )]
+
+[node name="Doll3D2" parent="." index="2" instance=ExtResource( 1 )]
+
+[node name="AnimationTree" type="AnimationTree" parent="." index="3"]
+tree_root = SubResource( 35 )
+anim_player = NodePath("../Doll3D/DollSkeleton/AnimationPlayer")
+parameters/CuffsBlend/blend_amount = 0
+parameters/StateMachine/playback = SubResource( 22 )
+
+[node name="AnimationTree2" type="AnimationTree" parent="." index="4"]
+tree_root = SubResource( 37 )
+anim_player = NodePath("../Doll3D2/DollSkeleton/AnimationPlayer")
+parameters/CuffsBlend/blend_amount = 0
+parameters/StateMachine/playback = SubResource( 23 )
+
+[editable path="Doll3D"]
+[editable path="Doll3D/DollSkeleton"]
+[editable path="Doll3D2"]
+[editable path="Doll3D2/DollSkeleton"]
