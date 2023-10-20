@@ -90,5 +90,6 @@ roomColor = 2
 [node name="IntakeFloorRoom19" parent="." index="18" instance=ExtResource( 1 )]
 self_modulate = Color( 0.7, 1, 0.7, 1 )
 position = Vector2( 384, 192 )
+roomName = "Medical area"
 roomID = "intro_medicalarea"
 roomColor = 1

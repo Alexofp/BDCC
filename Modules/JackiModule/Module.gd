@@ -29,6 +29,8 @@ func getFlags():
 		"Jacki_StocksPCLostFight": flag(FlagType.Bool),
 		"Jacki_StocksPCLostFightAndWatched": flag(FlagType.Bool),
 		
+		"Jacki_ch2IntroSceneHappened": flag(FlagType.Bool),
+		
 		"jackiCorruption": flag(FlagType.Number),
 		"jackiAnger": flag(FlagType.Number),
 		"jackiLust": flag(FlagType.Number),
@@ -63,6 +65,7 @@ func _init():
 		"res://Modules/JackiModule/Ch1/JackiFirstEncounterEvent.gd",
 		"res://Modules/JackiModule/Ch1/JackiBulliesInBathroomEvent.gd",
 		"res://Modules/JackiModule/Ch1/JackiStuckInStocksEvent.gd",
+		"res://Modules/JackiModule/Ch2/JackiGymTalkEvent.gd",
 	]
 	quests = [
 	]

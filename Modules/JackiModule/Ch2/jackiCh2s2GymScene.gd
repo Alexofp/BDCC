@@ -765,8 +765,7 @@ func _run():
 
 		addButton("Continue", "That was lewd", "endthescene")
 	if(state == "kind_massage"):
-		# Replace me
-		playAnimation(StageScene.Duo, "stand", {npc="jacki"})
+		playAnimation(StageScene.Massage, "back", {npc="jacki"})
 		saynn("After that yoga practice session the wolfie is probably feeling tensed up. So you decide to offer some help.")
 
 		saynn("[say=pc]Would you want a little massage, Jacki? To help you relax.[/say]")
@@ -803,9 +802,7 @@ func _run():
 		addButtonWithChecks("Forced anal fuck", "Betray Jacki and have have rough sex with her right there", "kind_massage_forcedfuck", [], [ButtonChecks.HasReachablePenis])
 		addButton("Forced fisting", "Betray Jacki and fist her ass right there", "kind_massage_forcedfisting")
 	if(state == "kind_massage_forcedfuck"):
-		saynn("# Replace me")
-
-		playAnimation(StageScene.Duo, "stand", {npc="jacki", bodyState={naked=true, hard=true}, npcBodyState={exposedCrotch=true}})
+		playAnimation(StageScene.SexBehind, "fast", {npc="jacki", bodyState={naked=true, hard=true}, npcBodyState={exposedCrotch=true}})
 		saynn("Since the wolfie is not suspecting anything.. Now is the perfect time to strike.")
 
 		saynn("With a sudden, forceful movement, you pin Jacki against the mat, pushing one hand into her back while the second is already pulling her shorts down. She yelps and instinctively arches her back, trying to look behind her as you already expose her ass. She realizes your evil intentions way too late.")
@@ -840,9 +837,7 @@ func _run():
 
 		addButton("Cum inside", "Give that slut what she deserves", "kind_massage_forcedfuck_cum")
 	if(state == "kind_massage_forcedfuck_cum"):
-		saynn("# Replace me")
-
-		playAnimation(StageScene.Duo, "stand", {npc="jacki", bodyState={naked=true, hard=true}, npcBodyState={exposedCrotch=true}})
+		playAnimation(StageScene.SexBehind, "inside", {npc="jacki", bodyState={naked=true, hard=true}, npcBodyState={exposedCrotch=true}})
 		saynn("After a few last rough thrusts, that clenching ass easily pushes you over the edge. Jacki's body quivers under you as you shove your throbbing {pc.penis} deep inside and start flooding her guts full of your sticky {pc.cum}.")
 
 		saynn("When the orgasm is over, you pull out and stop pinning the wolfie. And she is just.. sobbing.. while her used {jackiButt} asshole is leaking your seed. All the accumulated trust.. shattered.. her body bruised.")
@@ -857,9 +852,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "endthescene")
 	if(state == "kind_massage_forcedfisting"):
-		saynn("# Replace me")
-
-		playAnimation(StageScene.Duo, "stand", {npc="jacki", bodyState={naked=true, hard=true}, npcBodyState={exposedCrotch=true}})
+		playAnimation(StageScene.SexFisting, "sex", {npc="jacki", bodyState={naked=true, hard=true}, npcBodyState={exposedCrotch=true}})
 		saynn("Since the wolfie is not suspecting anything.. Now is the perfect time to strike.")
 
 		saynn("With a sudden, forceful movement, you pin Jacki against the mat, pushing one hand into her back while the second is already pulling her shorts down. She yelps and instinctively arches her back, trying to look behind her as you already expose her ass. She realizes your evil intentions way too late.")
@@ -896,9 +889,7 @@ func _run():
 
 		addButton("Forced orgasm", "See what happens next", "kind_massage_forcedfisting_cum")
 	if(state == "kind_massage_forcedfisting_cum"):
-		saynn("# Replace me")
-
-		playAnimation(StageScene.Duo, "stand", {npc="jacki", bodyState={naked=true, hard=true}, npcBodyState={exposedCrotch=true}})
+		playAnimation(StageScene.SexFisting, "tease", {npc="jacki", bodyState={naked=true, hard=true}, npcBodyState={exposedCrotch=true}})
 		saynn("Suddenly, Jacki starts arching her back and crying out loudly as her stretched asshole is pulsing around your hand. You're not sure if this is an orgasm.. or something caused by you overstimulating her.. but it's sure a welcomed addition.")
 
 		saynn("When that is over, you pull your fist out and stop pinning the wolfie. While she is just.. sobbing.. her {jackiButt} asshole is struggling to close completely. All the accumulated trust.. shattered.. her body bruised.")
@@ -924,9 +915,8 @@ func _run():
 
 		addButton("Jog", "Jog with Jacki", "jog_do")
 	if(state == "jog_do"):
-		saynn("# Replace me")
-
-		playAnimation(StageScene.Duo, "stand", {npc="jacki"})
+		aimCameraAndSetLocName("yard_eastCorridor")
+		playAnimation(StageScene.Duo, "jog", {npc="jacki", npcAction="jog", flipNPC=true})
 		saynn("And so you two begin jogging around the only green area of the prison. The air here is nice and fresh.")
 
 		saynn("Jacki leads the way so you just jog behind her. You run past some rocks and even trees.")
@@ -971,32 +961,273 @@ func _run():
 
 		saynn("[say=jacki]There also was a note. It told me to come to a certain place alone or these would be posted everywhere.[/say]")
 
-		saynn("Now that sounds like.. blackmail..")
-
-		saynn("[say=pc]Did you do it?[/say]")
+		saynn("[say=pc]Sounds like someone was trying to blackmail you. Did you do it?[/say]")
 
 		saynn("[say=jacki]Nah, I just went to the police. But when they saw the photos.. It made me wish that I did.[/say]")
 
 		saynn("[say=pc]Why?[/say]")
 
-		saynn("[say=jacki]I got charged with.. don't remember exactly.. I think it was.. unsolicited breeding with AlphaCorp's official.. or something like that.[/say]")
+		saynn("[say=jacki]I got charged with.. don't remember exactly.. I think it was.. unsolicited breeding.. or something like that. I obviously never did that.[/say]")
 
 		saynn("Breeding is illegal now? Looks like somebody just wanted to earn an extra star. Makes sense why she is here then and not in a normal prison.")
 
 		saynn("[say=pc]I see.[/say]")
 
-		saynn("[say=jacki]I'm not even that special. Dunno why would anyone do this to me.[/say]")
+		saynn("[say=jacki]I'm not even that special.[/say]")
 
 		addButton("Continue", "See what happens next", "jog_afterchat")
 	if(state == "jog_chat_chastitypiercings"):
 		saynn("[say=pc]Couldn't help but to notice your unique piercings. Why do you have them?[/say]")
 
-		saynn("[say=jacki]Some doctor decided to force them on me during an intake process. Something about.. obedience training? She was kinda mean. And so I returned the favor.[/say]")
+		saynn("[say=jacki]It's a long story..[/say]")
 
-		saynn("[say=pc]So did she do that randomly to you?[/say]")
+		saynn("You can try to ask to hear it. But obviously that story is not gonna be the prettiest..")
 
-		saynn("[say=jacki]I don't know. She wanted to inject me with something. Said it against STDs? I wasn't planning on fucking here with anyone, you know? So I was a little rude to her, I will admit.[/say]")
+		addButton("Listen to story", "(Genital torture) Ask Jacki to tell you what happened", "jog_chat_asklistenfull")
+		addButton("Short version", "You're fine with a story without much details", "jog_chat_asklistenshort")
+	if(state == "jog_chat_asklistenfull"):
+		saynn("[say=pc]I wanna hear it. The whole story.[/say]")
 
+		if (anger > -0.8):
+			saynn("[say=jacki]Sorry. It's also kinda intimate, you know?[/say]")
+
+			saynn("Looks like Jacki doesn't trust you enough yet.")
+
+			addButton("Continue", "See what happens next", "jog_afterchat")
+		else:
+			playAnimation(StageScene.Duo, "sit", {npc="jacki", npcAction="sit"})
+			saynn("Jacki stops near the closest bench and sits down.")
+
+			saynn("[say=jacki]Okay. I think I trust you enough to share it.[/say]")
+
+			saynn("You approach her and sit near. All the while Jacki is gathering courage.")
+
+			saynn("[say=jacki]It happened during my intake. There was a doctor..[/say]")
+
+			saynn("You can't help but to get immersed in her story immediately..")
+
+			addButton("See it", "See it with your own eyes", "jacki_piercing_story_start")
+	if(state == "jog_chat_asklistenshort"):
+		saynn("[say=pc]You don't have to tell me everything. Just a.. short version is fine.[/say]")
+
+		if (anger > -0.8):
+			saynn("[say=jacki]Sorry. It's also kinda intimate, you know?[/say]")
+
+			saynn("Looks like Jacki doesn't trust you enough yet.")
+
+			addButton("Continue", "See what happens next", "jog_afterchat")
+		else:
+			saynn("Jacki stops for a second and turns towards you.")
+
+			saynn("[say=jacki]I think I can tell you.[/say]")
+
+			saynn("She looks down at her body.")
+
+			saynn("[say=jacki]Some doctor chose me for some program.. Something about.. obedience training? She was kinda mean. And so I returned the favor.[/say]")
+
+			saynn("[say=pc]Did she choose you randomly?[/say]")
+
+			saynn("[say=jacki]I don't know. She wanted to inject me with something. Said it against STDs? I wasn't planning on fucking here with anyone, you know? I made that very clear.[/say]")
+
+			saynn("Jacki looks away for a second.")
+
+			saynn("[say=jacki]She said that my plans are not gonna last long. And then she stitched my pussy with those piercings.. even added a fancy little bell on a chain.[/say]")
+
+			saynn("[say=pc]I see.[/say]")
+
+			if (lust > 0.5):
+				saynn("[say=jacki]She was right.. You can't imagine how much I wanna be.. Anyway..[/say]")
+
+			else:
+				saynn("[say=jacki]So far it feels like she might be right.. Anyway..[/say]")
+
+			saynn("Makes you wonder how chastity can make someone eager to be fucked?")
+
+			saynn("After sharing that little story, she gets up and returns to jogging.")
+
+			addButton("Continue", "See what happens next", "jog_afterchat")
+	if(state == "jacki_piercing_story_start"):
+		addCharacter("eliza")
+		playAnimation(StageScene.Duo, "stand", {pc="jacki", npc="eliza"})
+		aimCameraAndSetLocName("intro_medicalarea")
+		saynn("Chained up Jacki follows the arrows on the floor that direct her towards the special little medical area. Closed drawers, lots of lights, sterile white wall and floor materials, a medical table.")
+
+		saynn("Inside she also finds a doctor, a new face for her. The loud clang of chains made that doctor aware of the inmate long ago before the wolfie even stepped into the area.")
+
+		saynn("[say=jacki]Um.. Hi?[/say]")
+
+		saynn("[say=eliza]You can call me Doctor Quinn. Take a seat, patient.[/say]")
+
+		addButton("Sit down", "Might as well obey", "jacki_piercing_story_sit")
+	if(state == "jacki_piercing_story_sit"):
+		playAnimation(StageScene.Duo, "sit", {pc="jacki", npc="eliza"})
+		saynn("Jacki awkwardly climbs onto the special sturdy-looking table and sits on it.")
+
+		saynn("[say=eliza]First, a quick visual check.[/say]")
+
+		saynn("Doctor grabs a penlight and shines it into the wolfie's eyes, testing her reflexes. Then she checks the girl's fangs to make sure they're not too sharp. She quickly trims her claws too.")
+
+		saynn("[say=eliza]Mhm. Now.. I have runned out of Spacecillin pills so an injection will have to do.[/say]")
+
+		saynn("[say=jacki]Huh?[/say]")
+
+		saynn("Doctor quickly puts on some white latex gloves and grabs a syringe full of some white drug. Jacki leans away when that sharp needle moves closer and closer to her.")
+
+		saynn("[say=jacki]I don't like drugs. What is it?[/say]")
+
+		saynn("The feline sighs, her free paw sneakily reaches for a shock remote already.")
+
+		saynn("[say=eliza]Very strong antibiotics. Works against most current STDs.[/say]")
+
+		saynn("That only confuses the wolfie more.. and makes her avoid the needle harder.")
+
+		saynn("[say=jacki]STDs? Why would I need protection against STDs in a prison? Most of them are transferred through sexual acts.[/say]")
+
+		saynn("Doctor tilts her head and looks at Jacki with very mean strict eyes.")
+
+		saynn("[say=eliza]And you think you won't have any?[/say]")
+
+		saynn("[say=jacki]Yes, obviously I don't plan to fuck with anyone here. Um.. What kind of prison is this?! Get that syringe away from me![/say]")
+
+		saynn("Doctor's mean eyes don't go away.. But the little smile is added on top.")
+
+		saynn("[say=eliza]Your plans will have to change.[/say]")
+
+		saynn("The feline gets tired of arguing with the wolfie.. and suddenly presses a button that sends a powerful shock through Jacki's collar.")
+
+		saynn("[say=jacki]ARGH!!..[/say]")
+
+		saynn("Poor wolfie cries out from extreme pain before collapsing and losing consciousness..")
+
+		addButton("Continue", "See what happens to the wolfie next", "jacki_piercing_story_table")
+	if(state == "jacki_piercing_story_table"):
+		playAnimation(StageScene.BDSMMachineFuck, "tease", {pc="jacki", bodyState={naked=true}, noDildos=true})
+		saynn("As Jacki opens her eyes.. She realizes that she is now lying on the table, her arms and legs firmly held by some mechanical arms that also keep her whole body still.")
+
+		saynn("All of the muscles hurt..")
+
+		saynn("[say=jacki]What the..[/say]")
+
+		saynn("Jacki also realizes that she is completely naked, her small tits, pussy and ass are all on display. Doctor Quinn is standing nearby.. with an empty used syringe. The feline disposes of it.")
+
+		saynn("[say=eliza]Things go so much smoother when you use a little bit of force.[/say]")
+
+		saynn("[say=jacki]You.. bitch..[/say]")
+
+		saynn("[say=eliza]What? I don't make the rules. You will get fucked in here, trust me. Maybe you will even become someone's favorite slut. That's just how this place works. Don't blame me for that.[/say]")
+
+		saynn("[say=jacki]I am not fucking with anyone here..[/say]")
+
+		saynn("Doctor grabs her datapad and pulls up some records.")
+
+		saynn("[say=eliza]Wait. Shouldn't you be a lilac? Your recorded crime is.. Unsolicited breeding with AlphaCorp's official. Wow. How many pups did you make already?[/say]")
+
+		saynn("AlphaCorp?")
+
+		saynn("[say=jacki]I never! I got blackmailed, okay? I am innocent![/say]")
+
+		saynn("[say=eliza]I see. Obviously you are~. Hm.. I think I can help you.. let's try something interesting.. Yes-s..[/say]")
+
+		saynn("Doctor Quinn goes ahead and searches through some drawers until she finds some.. tools.")
+
+		saynn("[say=jacki]What are you gonna do?[/say]")
+
+		saynn("The feline presents Jacki something that looks like a.. piercing gun.. and a bunch of little metal rings. Just looking at all that makes the wolfie shiver.")
+
+		saynn("[say=eliza]I enrolled you into the obedience training research program. I usually do it for male bits.. but we can try female ones too, right~?[/say]")
+
+		saynn("The tone of her voice.. It doesn't mean anything good for Jacki.")
+
+		saynn("[say=jacki]What the hell are you talking about?[/say]")
+
+		saynn("[say=eliza]I'm just helping you~.[/say]")
+
+		saynn("She pressed some button on the table.. that caused the mechanical arms to forcibly spread Jacki's legs further, giving the doctor full access to her unshaved crotch..")
+
+		saynn("The feline starts leaning in closer and closer, that piercing tool is being brought closer and closer to the exposed pussy..")
+
+		saynn("[say=jacki]H-hey.. No.. wait![/say]")
+
+		saynn("Doctor Quinn isn't a monster obviously.. She takes some time to disinfect the area with some alcohol wipes first.. before using her free paw to bring the girl's pussy lips together.. pressing the tool against the sensitive flesh.. and then pulling the trigger..")
+
+		addButton("Continue", "Ow", "jacki_piercing_story_piercings")
+	if(state == "jacki_piercing_story_piercings"):
+		playAnimation(StageScene.BDSMMachineFuck, "wand", {pc="jacki", bodyState={naked=true}, noDildos=true})
+		saynn("Jacki yelps loudly as the tool pierces both her labias and also inserts a little metal ring through the two new holes at the same time..")
+
+		saynn("[say=jacki]Argh! What the fuck are you doing?![/say]")
+
+		saynn("[say=eliza]What does it feel like~?[/say]")
+
+		saynn("Doctor Quinn moves the tool a little higher.. and presses the trigger again, causing it to pierce through the two layers of sensitive flesh yet again before inserting another metal ring that connects them both.")
+
+		saynn("[say=jacki]Gh-h.. Like you're ripping my cunt out!..[/say]")
+
+		saynn("[say=eliza]Hah. Nah. You didn't want to be fucked right? I'm helping you~.[/say]")
+
+		saynn("She repeats her action.. making another two new holes in Jacki's labias and forcing them closed with a little ring.")
+
+		saynn("[say=jacki]Ugh.. Helping me how exactly?![/say]")
+
+		saynn("[say=eliza]By stitching your little pussy up permanently~. Much better than those bulky chastity belts~. And sexier too.[/say]")
+
+		saynn("Permanently!? The pain becomes worse and worse.. It feels like Jacki's pussy is burning.. And yet, Doctor Quinn keeps stitching it up with more of those rings.. until her pussy looks like an.. extremely virgin slit.. but with extra fancy piercings.")
+
+		saynn("[say=jacki]Fuck me-e-e.. It hurts..[/say]")
+
+		saynn("[say=eliza]It does? Good. You always could have just done what I wanted. You would have kept your cunt then. But this is more fun arguably.[/say]")
+
+		saynn("Jacki pants heavily.. resisting those mechanical arms is impossible.. She is forced to endure it..")
+
+		saynn("[say=eliza]See? Now you won't ever be fucked~. Well, vaginally. That pussy is now reserved exclusively for that AlphaCorp higher-up~.[/say]")
+
+		saynn("[say=jacki]F-fuck.. y-you..[/say]")
+
+		saynn("[say=eliza]Oh? You want more? I can do more~.[/say]")
+
+		saynn("Jacki's eyes turn big.. The pain near her crotch region makes her whine constantly.. her pussy looking extremely irritated. And yet, the doctor goes ahead and presses the tool against the girl's sensitive clit.")
+
+		saynn("Ow.. One second later.. And Jacki arches her back before letting out a gut-wrenching scream.. Her poor tortured pussy starts pulsing and even squirting juices onto the table.")
+
+		saynn("[say=eliza]Ohh~. Are you orgasming from pain? Fascinating~.[/say]")
+
+		saynn("And now, Jacki's clit has a ring going through it too. Doctor Quinn tugs on it, causing the exhausted wolfie to squirm more.")
+
+		saynn("[say=jacki]W-Why..[/say]")
+
+		saynn("[say=eliza]Why do we do anything? To become happy. Seeing this.. makes me happy~.[/say]")
+
+		saynn("The feline goes ahead and attaches a little bell on a chain to her clit ring.. before also plugging the little urethra hole with a very small dildo-like object.. something that would normally make Jacki gasp.. but for now she doesn't even care.")
+
+		saynn("[say=eliza]Aw. Don't look so sad. I'm sure you will be happy too. When you decide to start fucking~. Too bad you will have to use your other holes now.[/say]")
+
+		saynn("Jacki is so exhausted.. her vision starts turning darker and darker.. until the world fades away..")
+
+		addButton("End of story", "That was intense", "jacki_piercing_story_end")
+	if(state == "jacki_piercing_story_end"):
+		removeCharacter("eliza")
+		playAnimation(StageScene.Duo, "sit", {npc="jacki", npcAction="sit"})
+		aimCameraAndSetLocName("yard_eastCorridor")
+		GM.pc.setLocation("yard_eastCorridor")
+		saynn("[say=jacki]So yeah. That's about it. My first experiences here weren't exactly pleasant.[/say]")
+
+		saynn("Getting your pussy stitched up like that? Obviously no one would like that.")
+
+		saynn("[say=jacki]But I'm getting used to it, you know?[/say]")
+
+		saynn("[say=pc]To the prison life?[/say]")
+
+		saynn("[say=jacki]To that too. The worst thing is that I can't even rub it out.. I have to seek.. alternative ways to.. you know.. But I can't find any..[/say]")
+
+		saynn("Seems you can try helping her with that.")
+
+		saynn("[say=jacki]Talking about it made me kinda exhausted. I will go rest, okay?[/say]")
+
+		saynn("[say=pc]Sure. Take care.[/say]")
+
+		saynn("Jacki gets up and starts jogging away.. leaving a little wet trail behind.")
+
+		addButton("Continue", "See what happens next", "endthescene")
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
@@ -1137,6 +1368,33 @@ func _react(_action: String, _args):
 		getModule("JackiModule").addAnger(-5)
 		getModule("JackiModule").addLust(6)
 		GM.pc.addStamina(-10)
+
+	if(_action == "jog_afterchat"):
+		# Change me
+		endScene()
+		return
+
+	if(_action == "jog_chat_asklistenshort"):
+		if(anger <= -0.8):
+			processTime(20*60)
+
+	if(_action == "jacki_piercing_story_start"):
+		getCharacter("jacki").resetEquipment()
+		getCharacter("jacki").getInventory().removeItemFromSlot(InventorySlot.Vagina)
+		getCharacter("jacki").getInventory().forceEquipStoreOtherUnlessRestraint(GlobalRegistry.createItem("inmatewristcuffs"))
+		getCharacter("jacki").getInventory().forceEquipStoreOtherUnlessRestraint(GlobalRegistry.createItem("inmateanklecuffs"))
+
+	if(_action == "jacki_piercing_story_table"):
+		getCharacter("jacki").resetEquipment()
+		getCharacter("jacki").getInventory().removeItemFromSlot(InventorySlot.Vagina)
+
+	if(_action == "jacki_piercing_story_piercings"):
+		getCharacter("jacki").resetEquipment()
+
+	if(_action == "jacki_piercing_story_end"):
+		processTime(30*60)
+		getCharacter("jacki").updateBodyparts()
+		getModule("JackiModule").addLust(5)
 
 	setState(_action)
 

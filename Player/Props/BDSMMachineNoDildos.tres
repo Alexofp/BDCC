@@ -1,6 +1,6 @@
 [gd_resource type="SpatialMaterial" load_steps=2 format=2]
 
-[ext_resource path="res://Player/Props/BDSMMachine.png" type="Texture" id=1]
+[ext_resource path="res://Player/Props/BDSMMachineNoDildos.png" type="Texture" id=1]
 
 [resource]
 resource_name = "BDSMMACHINE"
