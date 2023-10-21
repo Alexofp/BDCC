@@ -26,6 +26,7 @@ func getTags():
 		ItemTag.SoldByMedicalVendomat,
 		ItemTag.CanPeeInto,
 		ItemTag.CanForceCumInto,
+		ItemTag.PlasticBottle,
 		]
 
 func generateFluids():

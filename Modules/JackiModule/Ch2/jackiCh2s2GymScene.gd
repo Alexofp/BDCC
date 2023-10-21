@@ -5,6 +5,9 @@ var corruption = 0.0
 var lust = 0.0
 var hasUnderwear = false
 var buttScore = 0
+var usedItemName = ""
+var plasticBottleFluidID = ""
+var waterLevel = 0
 
 func _init():
 	sceneID = "jackiCh2s2GymScene"
@@ -267,7 +270,7 @@ func _run():
 			saynn("Jacki would still need the sporty top as well if you wanna see her wear this.")
 
 		addButton("Continue", "See what happens next", "endthescene")
-	if(state == "appleitem"):
+	if(state == "gift_apple"):
 		playAnimation(StageScene.Duo, "stand", {npc="jacki"})
 		saynn("You offer Jacki an apple as a gesture of good will.")
 
@@ -1228,6 +1231,230 @@ func _run():
 		saynn("Jacki gets up and starts jogging away.. leaving a little wet trail behind.")
 
 		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "jog_afterchat"):
+		if (lust < 0.4):
+			aimCameraAndSetLocName("yard_northCorridor")
+			GM.pc.setLocation("yard_northCorridor")
+			playAnimation(StageScene.Duo, "stand", {npc="jacki"})
+			saynn("By the end of your jogging session, Jacki is panting softly. She leans against one of the big rocks and holds her other paw on her thigh, rubbing it.")
+
+			saynn("[say=jacki]Ooh.. These can be quite exhausting, huh?[/say]")
+
+			saynn("You panting slightly too but not that much.")
+
+			saynn("[say=jacki]Fresh air is nice, isn't it? I like this place.[/say]")
+
+			saynn("She pulls out a plastic bottle filled with fresh water and raises it high above her head, catching some into her mouth while the rest streams down her fur and cools down her body. The wet fabric starts gluing to her body, emphasizing her {jacki.breasts}.")
+
+			saynn("[say=jacki]Ah.. So good.. Well. It was nice chatting with you. But I think I will return back now.[/say]")
+
+		elif (lust < 0.7):
+			saynn("WRITE ME")
+
+		elif (lust < 0.9):
+			saynn("WRITE ME")
+
+		else:
+			saynn("WRITE ME")
+
+		addButton("Nod", "Enough is enough", "jog_afterchat_nod")
+		addButton("Ask to jog more", "Ask to jog even more together", "jog_afterchat_askmore")
+	if(state == "jog_afterchat_nod"):
+		saynn("You nod.")
+
+		saynn("[say=pc]Take care.[/say]")
+
+		saynn("Jacki offers you a kind smile.")
+
+		saynn("[say=jacki]You too![/say]")
+
+		saynn("..before walking away.")
+
+		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "jog_afterchat_askmore"):
+		saynn("[say=pc]Can't we maybe jog a little more? I would really like to do it with you.[/say]")
+
+		saynn("Jacki rubs her wet muzzle and looks puzzled by your offer.")
+
+		saynn("[say=jacki]Ooh.. You planning to run a marathon or something?[/say]")
+
+		saynn("[say=pc]Pretty please?[/say]")
+
+		saynn("One eye contact is enough to make her melt.")
+
+		saynn("[say=jacki]Alright.. Let's jog some more.[/say]")
+
+		addButton("Jog", "Jog together with Jacki", "jog_afterchat_jogmore")
+	if(state == "jog_afterchat_jogmore"):
+		aimCameraAndSetLocName("yard_firstroom")
+		GM.pc.setLocation("yard_firstroom")
+		playAnimation(StageScene.Duo, "jog", {npc="jacki", npcAction="jog", flipNPC=true})
+		saynn("And so you continue jogging with Jacki. There is not much to chat about anymore so you just enjoy the scenery.")
+
+		saynn("But the wolfie is not sharing your love to the lush environment at the moment. She is busy panting and huffing as she jogs around the yard while also swaying her hips more widely.")
+
+		saynn("[say=jacki]Huff.. uff..[/say]")
+
+		saynn("[say=pc]All good Jacki?[/say]")
+
+		saynn("[say=jacki]Y-yeah.. I'm okay.[/say]")
+
+		saynn("She gives you a thumbs up and does her best to keep up with the pace.")
+
+		saynn("This jog gives you some energy back.")
+
+		addButton("Continue", "See what happens next", "jog_afterbigjog")
+	if(state == "jog_afterbigjog"):
+		playAnimation(StageScene.Duo, "stand", {npc="jacki"})
+		saynn("At some point Jacki just has to stop. She grabs onto the nearest tree and starts panting heavily.")
+
+		saynn("[say=pc]If you need something..[/say]")
+
+		saynn("[say=jacki]I'm good.. trust me.. Just have to get my breath back.[/say]")
+
+		saynn("The wolfie leans against that tree harder and looks at you with hungry eyes. But then she quickly snaps out of it and pulls out her plastic bottle.")
+
+		saynn("She does the same motion, bringing it high above her muzzle and waiting for the refreshing fluid to hit her tongue and fur.. but nothing comes out..")
+
+		saynn("[say=jacki]Aw.[/say]")
+
+		saynn("She looks at you again.")
+
+		saynn("[say=jacki]Hate to ask but. Maybe you have something to clench the thirst?[/say]")
+
+		saynn("Looks like you can give her one of your plastic bottles if you have any filled ones.")
+
+		addButton("Nah", "You won't give her anything", "jog_afterbigjog_nobottle")
+		addPlasticBottleButtons()
+		if (false):
+			addButton("Nope", "You shouldn't see this", "jog_afterbigjog_givebottle")
+	if(state == "jog_afterbigjog_nobottle"):
+		saynn("[say=pc]Nah, sorry. I've got nothing.[/say]")
+
+		saynn("She sighs and nods.")
+
+		saynn("[say=jacki]Okay.. well.. I'm gonna go refill my bottle then. Take care.[/say]")
+
+		saynn("And just like that, the exhausted wolfie walks away, her thirst unclenched.")
+
+		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "jog_afterbigjog_givebottle"):
+		playAnimation(StageScene.Duo, "stand", {npc="jacki"})
+		saynn("You give Jacki the "+str(usedItemName)+" and she quickly tries to clench her thirst with it, raising it high above her muzzle and catching the contents onto her tongue and face, her eyes closed.")
+
+		if (plasticBottleFluidID == "Milk"):
+			saynn("Even though it's not water in that bottle but breast milk.. Jacki still empties it completely and gets some onto her fur too.")
+
+			saynn("[say=jacki]Ah! So sweet and refreshing. Where did you get milk here? I love the taste.[/say]")
+
+			saynn("You decide that it's best to not tell her the origin of that milk.")
+
+			saynn("[say=jacki]Well, either way, thank you! That helped a lot! I'm gonna go now though.[/say]")
+
+			saynn("You nod and let Jacki jog away.")
+
+		elif (plasticBottleFluidID == "Piss"):
+			if (waterLevel <= 2):
+				saynn("You decided to be very naughty today and gave Jacki a bottle of piss..")
+
+				saynn("As soon as she makes the first gulp, Jacki realizes that something is wrong and tries to spew everything out. But it's too late, she even gets some of the yellow smelly fluid onto her fur.")
+
+				saynn("[say=jacki]Gross! The fuck is this? Piss?![/say]")
+
+				saynn("You pretend that it was just a mistake.")
+
+				saynn("[say=pc]Oops.. I think I gave you the wrong bottle. My bad.[/say]")
+
+				saynn("[say=jacki]Urgh.. Why do you even have that..[/say]")
+
+				saynn("She spills the rest of the contents onto the floor.. And walks away.")
+
+				saynn("Maybe you can make her get used to the taste if you try hard enough..")
+
+			elif (waterLevel <= 5):
+				saynn("You decided to be very naughty today and gave Jacki a bottle of piss..")
+
+				saynn("Jacki sighs when she makes the first gulp.. and then just keeps swallowing it.. probably just to spite you.")
+
+				saynn("[say=jacki]Gross.. I can feel that it's piss from the second I start drinking it.[/say]")
+
+				if (waterLevel  == 5):
+					saynn("[say=pc]Then why do you keep drinking it?[/say]")
+
+					saynn("The blush appears on Jacki's face.")
+
+					saynn("[say=jacki]Because.. Just because.. I'm thirsty, okay?[/say]")
+
+					saynn("Jacki covers her wet piss-marked face and walks away.")
+
+				else:
+					saynn("She growls at you.")
+
+					saynn("[say=jacki]Gave me piss instead of water again, very funny..[/say]")
+
+					saynn("Makes you wonder why she drinks it at all then. Is her thirst that strong?")
+
+			else:
+				saynn("Judging from the yellow color, It's obviously not water in that bottle.. But it's like doesn't care, she eagerly swallows the warm piss while also receiving a little golden shower in the process.")
+
+				saynn("[say=jacki]Ah~.. Refreshing..[/say]")
+
+				saynn("Surprising. Jacki notices your confused stare.")
+
+				saynn("[say=jacki]What? It's better than nothing. Thank you.[/say]")
+
+				saynn("Well, looks like you accidentally turned Jacki into a piss slut. Oh well.")
+
+				saynn("She walks away, proudly wearing that gross scent.")
+
+		elif (plasticBottleFluidID == "GirlCum"):
+			saynn("It's not water in that bottle.. but its transparency fools Jacki enough for her to empty the whole thing. Her face is now covered in girlcum..")
+
+			saynn("[say=jacki]A little salty.. but it's not bad. What was in it?[/say]")
+
+			saynn("You decide that it's best if she doesn't know what was in that bottle..")
+
+			saynn("[say=jacki]Well, either way, thank you! That helped a lot! I'm gonna go now though.[/say]")
+
+			saynn("You nod and let Jacki jog away.")
+
+		elif (plasticBottleFluidID == "Cum"):
+			saynn("Thick sticky cum starts flowing down Jacki's tongue as she gulps it all up.. She understands what it is way too late..")
+
+			saynn("[say=jacki]Salty.. Um.. Is that.. What I think it is?[/say]")
+
+			saynn("She opens her eyes and sees that she is now covered in seed.")
+
+			if (corruption > 0.7):
+				saynn("[say=jacki]You know.. I actually kinda like it.. Lots of protein. Thank you. I'm gonna go now~.[/say]")
+
+				saynn("She licks her lips and walks away proudly.")
+
+			else:
+				saynn("[say=jacki]Why did you.. Give me that.. Urgh..[/say]")
+
+				saynn("She coughs and then dashes away! Probably wasn't the best idea. But oh well.")
+
+		else:
+			saynn("It's not water in that bottle.. It's some strange fluid. Jacki starts coughing after drinking it.")
+
+			saynn("[say=jacki]That's a weird taste.. Can't even describe it.. Are you sure it's drinkable even?[/say]")
+
+			saynn("You shrug.")
+
+			saynn("[say=jacki]Oh well. Thanks I guess. I'm gonna go now though.[/say]")
+
+			saynn("You nod and let Jacki jog away.")
+
+		addButton("Continue", "See what happens next", "endthescene")
+func addPlasticBottleButtons():
+	var items = GM.pc.getInventory().getItemsWithTag(ItemTag.PlasticBottle)
+	for item in items:
+		if(item.getFluids().isEmpty()):
+			addDisabledButton(item.getStackName(), item.getVisisbleDescription())
+		else:
+			addButton(item.getStackName(), item.getVisisbleDescription(), "jog_afterbigjog_givebottle", [item])
+
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
@@ -1370,9 +1597,7 @@ func _react(_action: String, _args):
 		GM.pc.addStamina(-10)
 
 	if(_action == "jog_afterchat"):
-		# Change me
-		endScene()
-		return
+		processTime(10*60)
 
 	if(_action == "jog_chat_asklistenshort"):
 		if(anger <= -0.8):
@@ -1396,6 +1621,51 @@ func _react(_action: String, _args):
 		getCharacter("jacki").updateBodyparts()
 		getModule("JackiModule").addLust(5)
 
+	if(_action == "jog_afterchat_jogmore"):
+		processTime(10*60)
+		GM.pc.addStamina(10)
+
+	if(_action == "jog_afterbigjog"):
+		processTime(10*60)
+		getModule("JackiModule").addLust(2)
+
+	if(_action == "jog_afterbigjog_nobottle"):
+		getModule("JackiModule").addAnger(1)
+
+	if(_action == "jog_afterbigjog_givebottle"):
+		processTime(5*60)
+		var item = _args[0]
+		if(item != null):
+			usedItemName = item.getVisibleName()
+			plasticBottleFluidID = item.getFluids().getDominantFluidID()
+			if(plasticBottleFluidID == null):
+				plasticBottleFluidID = "Milk"
+			item.getFluids().transferTo(getCharacter("jacki"), 0.6)
+			item.getFluids().transferTo(getCharacter("jacki").getBodypart(BodypartSlot.Head), 1.0)
+		
+		if(plasticBottleFluidID == "Milk"):
+			getModule("JackiModule").addAnger(-2)
+		if(plasticBottleFluidID == "GirlCum"):
+			getModule("JackiModule").addAnger(-1)
+		if(plasticBottleFluidID == "Cum"):
+			if(corruption > 0.7):
+				getModule("JackiModule").addCorruption(5)
+			else:
+				getModule("JackiModule").addCorruption(5)
+				getModule("JackiModule").addAnger(50)
+		if(plasticBottleFluidID == "Piss"):
+			waterLevel = getModule("JackiModule").getSkillScore("jackiSkillWatersports")
+			getModule("JackiModule").advanceSkill("jackiSkillWatersports")
+			if(waterLevel <= 2):
+				getModule("JackiModule").addAnger(40)
+				getModule("JackiModule").addCorruption(2)
+			elif(waterLevel <= 5):
+				getModule("JackiModule").addAnger(10)
+				getModule("JackiModule").addCorruption(3)
+			else:
+				getModule("JackiModule").addAnger(-4)
+				getModule("JackiModule").addCorruption(5)
+
 	setState(_action)
 
 func saveData():
@@ -1406,6 +1676,9 @@ func saveData():
 	data["lust"] = lust
 	data["hasUnderwear"] = hasUnderwear
 	data["buttScore"] = buttScore
+	data["usedItemName"] = usedItemName
+	data["plasticBottleFluidID"] = plasticBottleFluidID
+	data["waterLevel"] = waterLevel
 
 	return data
 
@@ -1417,3 +1690,6 @@ func loadData(data):
 	lust = SAVE.loadVar(data, "lust", 0.0)
 	hasUnderwear = SAVE.loadVar(data, "hasUnderwear", false)
 	buttScore = SAVE.loadVar(data, "buttScore", 0)
+	usedItemName = SAVE.loadVar(data, "usedItemName", "")
+	plasticBottleFluidID = SAVE.loadVar(data, "plasticBottleFluidID", "")
+	waterLevel = SAVE.loadVar(data, "waterLevel", 0)

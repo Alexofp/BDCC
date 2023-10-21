@@ -9,6 +9,8 @@ func registerTriggers(es):
 func run(_triggerID, _args):
 	if(!getFlag("JackiModule.Jacki_StocksSceneHappened")):
 		return
+	if(getFlag("JackiModule.Jacki_ContentDisabled")):
+		return
 	
 	if(checkCharacterBusy("JackiBusy", "Seems like Jacki is not here", "Jacki")):
 		return
