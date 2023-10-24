@@ -5,6 +5,7 @@ var corruption = 0.0
 var lust = 0.0
 var hasUnderwear = false
 var buttScore = 0
+var soundScore = 0
 var usedItemName = ""
 var plasticBottleFluidID = ""
 var waterLevel = 0
@@ -22,6 +23,7 @@ func _run():
 		lust = getFlag("JackiModule.jackiLust", 0.0)
 		hasUnderwear = getModule("JackiModule").shouldUnderwear()
 		buttScore = getModule("JackiModule").getSkillScore("jackiSkillButtslut")
+		soundScore = getModule("JackiModule").getSkillScore("jackiSkillSounding")
 		addCharacter("jacki")
 		saynn("Jacki's anger: "+str(anger)+"")
 
@@ -1189,7 +1191,7 @@ func _run():
 		addButton("Continue", "Ow", "jacki_piercing_story_piercings")
 	if(state == "jacki_piercing_story_piercings"):
 		playAnimation(StageScene.BDSMMachineFuck, "wand", {pc="jacki", bodyState={naked=true}, noDildos=true})
-		saynn("Jacki yelps loudly as the tool pierces both her labias and also inserts a little metal ring through the two new holes at the same time..")
+		saynn("Jacki yelps loudly as the tool pierces her labia in two places and also inserts a little metal ring through the two new holes at the same time..")
 
 		saynn("[say=jacki]Argh! What the fuck are you doing?![/say]")
 
@@ -1201,7 +1203,7 @@ func _run():
 
 		saynn("[say=eliza]Hah. Nah. You didn't want to be fucked right? I'm helping you~.[/say]")
 
-		saynn("She repeats her action.. making another two new holes in Jacki's labias and forcing them closed with a little ring.")
+		saynn("She repeats her action.. making another two new holes in Jacki's labia and forcing them closed with a little ring.")
 
 		saynn("[say=jacki]Ugh.. Helping me how exactly?![/say]")
 
@@ -1541,7 +1543,7 @@ func _run():
 
 		saynn("[say=jacki]Ngh-h..[/say]")
 
-		saynn("So sensitive. Her stitched-up pussy starts dripping juices onto your nose the more you play with her bell. After it, you roll your tongue out and start dragging it over her constrained folds, trying to lick between the little metal rings that hold her labias closed")
+		saynn("So sensitive. Her stitched-up pussy starts dripping juices onto your nose the more you play with her bell. After it, you roll your tongue out and start dragging it over her constrained folds, trying to lick between the little metal rings that hold her labia closed")
 
 		saynn("Moans begin to escape from the wolfie, she spreads her legs more for you, her paws land on her small breasts and knead them while you are lapping up her juices.")
 
@@ -1782,24 +1784,6 @@ func _run():
 		saynn("You leave the messy slut alone and walk away.")
 
 		addButton("Continue", "See what happens next", "endthescene")
-		playAnimation(StageScene.SexStanding, "tease", {npc="jacki", bodyState={exposedCrotch=true, hard=true}, npcBodyState={exposedCrotch=true}})
-		saynn("No reason to pull out.. but you don't need a good reason. As your powerful thrusts continue, Jacki's body starts to tremble with overwhelming pleasure. She cums just from having her ass railed.. while you pull your cock out just before her clenching tailhole brings you over the edge.")
-
-		saynn("[say=jacki]Oh fuck-k..[/say]")
-
-		saynn("The wolfie is busy cumming while your {pc.penis} throbs and shoots your sticky seed all over her ass and back, marking her fur with your {pc.cum}.")
-
-		saynn("As your orgasm ends, you just proceed to admire Jacki's pulsing asshole struggling to close up. She is panting heavily.")
-
-		saynn("[say=jacki]You could have.. inside..[/say]")
-
-		saynn("[say=pc]I choose where to cum, slut. Enjoy.[/say]")
-
-		saynn("[say=jacki]Huff..[/say]")
-
-		saynn("You leave the messy slut alone and walk away.")
-
-		addButton("Continue", "See what happens next", "endthescene")
 	if(state == "jog_anal_strapon_pick"):
 		saynn("Pick what strapon you wanna use to rail Jacki's ass.")
 
@@ -1909,6 +1893,224 @@ func _run():
 		saynn("[say=jacki]Wruff-f-f..[/say]")
 
 		saynn("You leave the slut alone and walk away.")
+
+		addButton("Continue", "See what happens next", "endthescene_unequpstrapon")
+	if(state == "jog_sounding"):
+		playAnimation(StageScene.Duo, "stand", {npc="jacki"})
+		if (soundScore <= 0):
+			saynn("Jacki's pussy has those piercings in it that hold it shut.. but you wonder if you can still reach one of her little holes.. her urethra in particular.")
+
+			saynn("[say=pc]Have you heard of sounding?[/say]")
+
+			saynn("[say=jacki]The what?[/say]")
+
+			saynn("Huh. Jacki has absolutely zero experience in this.. So you might have to start slow.")
+
+			saynn("[say=pc]Would you be interested in that?[/say]")
+
+			saynn("[say=jacki]Anything that can make this feeling go away..[/say]")
+
+			addButton("Sounding intro", "Introduce Jacki to sounding", "jog_sounding_intro")
+		elif (soundScore <= 2):
+			saynn("Jacki has some sounding experience.. but not that much yet. Gives you a good reason to train her urethra a little.")
+
+			saynn("[say=pc]Let's do some sounding.[/say]")
+
+			saynn("[say=jacki]Oh?[/say]")
+
+		elif (soundScore <= 5):
+			saynn("Jacki is getting quite experienced in sounding. This might be a good opportunity to test her limits and play with her urethra.")
+
+			saynn("[say=pc]Let's do some sounding.[/say]")
+
+			saynn("[say=jacki]Oh, you're gonna stretch out my little hole~?[/say]")
+
+			saynn("She seems to be liking that idea.")
+
+		else:
+			saynn("Jacki is probably a total slut for sounding by now. As soon as you say..")
+
+			saynn("[say=pc]Let's do some..[/say]")
+
+			saynn("She already cuts you off with..")
+
+			saynn("[say=jacki]OH! You're gonna fuck my little pisshole~? Stretch it wide and deep~?[/say]")
+
+			saynn("The wolfie can't live without sounding anymore it seems.")
+
+		if (soundScore >= 1):
+			addButton("Dildo", "Play with the toy in her urethra", "jog_sounding_dildo")
+			if (soundScore >= 3):
+				addButton("Finger", "Try to use a finger instead", "jog_sounding_finger")
+			else:
+				addDisabledButton("Finger", "Jacki is not ready for this yet")
+		addButton("Never mind", "You changed your mind", "endthescene")
+	if(state == "jog_sounding_intro"):
+		playAnimation(StageScene.GivingBirth, "idle", {pc="jacki", bodyState={exposedCrotch=true}})
+		saynn("You and Jacki find a secluded spot behind some tall bushes. You think about it a bit and realize that a blindfold might help to keep the wolfie calm.")
+
+		saynn("[say=pc]I'm gonna blindfold you, alright?[/say]")
+
+		saynn("[say=jacki]Um.. sure.[/say]")
+
+		saynn("She didn't even ask why. But you feel like you should explain anyway.")
+
+		saynn("[say=pc]I want you to focus on how it will feel, not how it will look.[/say]")
+
+		saynn("Jacki nods, allowing you to tie a little piece of cloth around her eyes. Then you help her to get down on some stone tiles before pulling her shorts down. The first thing that you see is her red bush of pubic hair that she clearly keeps untrimmed.")
+
+		saynn("[say=pc]You're not shaving, wolfie?[/say]")
+
+		saynn("[say=jacki]I've given up, piercings make it too hard.. but I kinda like the look now. Fits the whole.. useless cunt thing..[/say]")
+
+		saynn("Looks like she is slowly getting used to that. But that's besides the point. You spread Jacki's legs more, uncovering the moist stitched up slit. As you caress Jacki's inner sides of her thighs, she starts to wiggle a little, her breath getting deeper.")
+
+		saynn("[say=pc]I'm gonna start touching.[/say]")
+
+		saynn("[say=jacki]Wruff..[/say]")
+
+		saynn("She is probably still confused about what sounding even is. Your digits land on her folds and gently part her labia as much as the metal rings allow.. which is not very much. Still, your action reveals her urethral opening.. that still seems to have a little rod stuck in it. A rod that is attached by a little chain to her clit ring. Touching it makes the wolfie squirm more.")
+
+		saynn("[say=pc]You are still wearing it in your urethra?[/say]")
+
+		saynn("[say=jacki]Um.. I can't throw it out because it's connected.. but it also makes too much noise when left out to dangle.. So.. yeah. Why?[/say]")
+
+		saynn("So Jacki does have experience. She just doesn't know it yet.")
+
+		addButton("Rod", "Focus on it", "jog_sounding_intro_rod")
+	if(state == "jog_sounding_intro_rod"):
+		playAnimation(StageScene.GivingBirth, "birth", {pc="jacki", bodyState={exposedCrotch=true}})
+		saynn("Without saying anything, you grab onto that little chain.. and begin to tug on it, gently pulling the rod out. Jacki is quick to whine.")
+
+		saynn("[say=jacki]Nhh!.. My.. hole.[/say]")
+
+		saynn("Obviously what you're doing is quite dangerous.. so you are taking it very slow.")
+
+		saynn("[say=pc]Tell me if it hurts too much.[/say]")
+
+		saynn("[say=jacki]It's.. I can certainly feel it.. moving inside.[/say]")
+
+		saynn("Plop. As you pull it out completely, you realize that the rod has the shape of a small canine dildo. It's small, smaller than your pinky finger even.. but still has a little knot at its base. Jacki is certainly quite kinky if she pulls it out each time she needs to pee.")
+
+		saynn("[say=jacki]So what are you gonna..[/say]")
+
+		saynn("You cut her off by aligning the little dildo with her urethra again and proceeding to prod her sensitive spot.")
+
+		saynn("[say=jacki]Ah..[/say]")
+
+		saynn("There is no rush, you take your time, massaging the entering with the pointy tip.. until the little hole allows it inside. Such a simple action.. and yet it makes Jacki's toes curl, her paws holding onto the stone tiles tightly.")
+
+		saynn("With small deliberate pushes, you slide that dildo deeper within Jacki's urethra. Being unable to see makes her focus on the tactile sensations more.")
+
+		saynn("Slowly, you slide inside almost the full length.. apart from the knot. But with a little extra pressure, it slips inside too, causing Jacki to arch her back a little in the process.")
+
+		saynn("[say=jacki]Aw fuck~.. Feels so different when someone else does it..[/say]")
+
+		saynn("You continue, slowly withdrawing the toy before working it back inside, each motion sending waves of weird sensations through Jacki's body.. but not the unpleasant kind. Her moans and desperate whimpers fill the space..")
+
+		saynn("[say=jacki]Please.. harder.. I so wanna..[/say]")
+
+		saynn("Despite what she says, you can already notice the skin becoming red near her urethra.. so you slide the little dildo fully inside and call it there.")
+
+		saynn("[say=pc]Not today.[/say]")
+
+		saynn("[say=jacki]Aw..[/say]")
+
+		saynn("You pat the wolfie and help her to get up, your hands untying her blindfold.")
+
+		addButton("Continue", "See what happens next", "endthescene_freejackieyes")
+	if(state == "jog_sounding_dildo"):
+		playAnimation(StageScene.GivingBirth, "idle", {pc="jacki", bodyState={exposedCrotch=true}})
+		saynn("You and Jacki find a secluded place behind some tall bushes and prepare yourself for this. Jacki pulls her shorts down and spreads her legs for you, exposing her wet pussy slit that is forced closed with some unremovable chastity piercings.")
+
+		saynn("[say=pc]So eager.[/say]")
+
+		saynn("[say=jacki]Here.. I'm usually using this.[/say]")
+
+		saynn("She hands you a little tube of water-based lube. Huh. That will certainly help. You take a spot between her legs and use your digits to carefully spread Jacki's labia as much as her piercings allow, exposing the little plugged urethra.")
+
+		saynn("You carefully pull that dildo-shaped sounding rod out and apply some lube to it. The wolfie watches intently, her anticipation growing with each passing moment.. just like the wetness of her pussy.")
+
+		addButton("Continue", "See what happens next", "jog_sounding_dildo_cum")
+	if(state == "jog_sounding_dildo_cum"):
+		playAnimation(StageScene.GivingBirth, "birth", {pc="jacki", bodyState={exposedCrotch=true}})
+		if (soundScore <= 1):
+			saynn("Jacki's little hole is still quite tight so sliding the toy in it takes some patience. You start off slow, working in just the pointy tip at first, before proceeding to slide it deeper and deeper.")
+
+		elif (soundScore <= 3):
+			saynn("Jacki's little needy hole is a bit trained by now, allowing you to slide the dildo-shaped rod inside with relative ease. Still, this hole wasn't really designed to be stretched so stretching it will take some time.")
+
+			saynn("?els")
+
+			saynn("Jacki's little needy pisshole is quite stretchy by now so sliding the dildo-shaped rod inside was quite easy, her urethra is just begging to be stretched wide.")
+
+		saynn("Jacki's body welcomes the intrusion, she lets out a cute moan, her breath becomes deep as you slide the toy further inside her.")
+
+		saynn("[say=jacki]Yeah~.[/say]")
+
+		saynn("You begin to fuck her urethra with the little dildo, creating a rhythm that stimulates her in the most unusual way. Jacki's hips are rocking in time with your actions, the sensations are causing her to start moaning again and again.")
+
+		if (lust > 0.9):
+			saynn("[say=jacki]Ah~.. Keep doing it.. keep fucking the hole that was never supposed to be fucked~.[/say]")
+
+		else:
+			saynn("[say=jacki]Ah.. Feels so good..[/say]")
+
+		saynn("Her pussy twitches more and more, her muscles tensing up as you keep pleasuring her.. arguably wrong.. hole. And yet, she is actively squirming while her orgasm is approaching her, building like a tidal wave..")
+
+		saynn("[say=jacki]Fuck-k~..[/say]")
+
+		saynn("As the climax crashes over Jacki, her body starts shaking from the immense pleasure. You use this moment to slide the full length of the toy inside, including the little knot, and holding it there. Getting so deeply stimulated makes Jacki throw her head back and grab onto the ground tightly, her urethra pulsating, probably trying to squirt something out.. but the dildo prevents it.")
+
+		saynn("[say=pc]Good girl.[/say]")
+
+		saynn("When Jacki finally comes down from her orgasmic high, you offer her some headpats")
+
+		saynn("[say=jacki]Wruff-f-f.. Thank you-u-u..[/say]")
+
+		saynn("And just like that, you leave the wolfie alone to rest and come back to senses.")
+
+		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "jog_sounding_finger"):
+		playAnimation(StageScene.GivingBirth, "idle", {pc="jacki", bodyState={exposedCrotch=true}})
+		saynn("Jacki's urethra is quite trained by now, allowing you to try something more.. kinky.")
+
+		saynn("You bring her into a secluded place and position her on the ground. Jacki pulls her shorts down and spreads her legs for you, exposing her bush and the stitched-up pussy slit. You spread her folds as much as the piercings allow and carefully withdraw the canine cock-shaped sounding rod out of her pisshole and let it dangle on its chain.")
+
+		saynn("[say=jacki]Wruff?[/say]")
+
+		saynn("No need for lube when the wolfie is so needy. You gather some of her arousal onto your digits and begin rubbing her little hole, trying to insert your index finger. It's way bigger than that toy that was in there so Jacki is suddenly squirming a lot.")
+
+		saynn("[say=jacki]Nh-h.. kinky.. Yeah.. keep stretching it..[/say]")
+
+		addButton("Continue", "See what happens next", "jog_sounding_finger_cum")
+	if(state == "jog_sounding_finger_cum"):
+		playAnimation(StageScene.GivingBirth, "birth", {pc="jacki", bodyState={exposedCrotch=true}})
+		saynn("Soon enough, you manage to work inside the tip of your digit, making that urethra look unnaturally stretched. But you don't stop there, gradually applying more pressure until you manage to slide your finger inside completely.")
+
+		saynn("[say=jacki]Nghh-h-h.. fuck me..[/say]")
+
+		saynn("And fuck her you do, wiggling that finger inside and proceeding to move it back and forth, fingering Jacki's pisshole. Her body responds by squirming and creating an arch, little moans escaping her muzzle.")
+
+		saynn("That's not what this hole is supposed to be for.. but you don't care. You keep pounding it at an increasing pace, making Jacki's pussy twitch and her anus clench. That hole is extremely sensitive.. its inner walls are clenching around your finger so tightly you have to fight the friction.")
+
+		saynn("[say=pc]Come on, slut. Cum for me.[/say]")
+
+		saynn("[say=jacki]F-fuck!.. Fuck-fuck-k..[/say]")
+
+		saynn("As Jacki reaches the peak, her body shudders with the force of her orgasm. You stimulate her so much that a burst of transparent juices pushes your finger out as Jacki squirts all over the floor. It's an explosive release that leaves her gasping for air and trembling hard.")
+
+		saynn("You continue to gently stimulate around her pisshole that is now struggling to close, pulsing instead under your touch.")
+
+		saynn("[say=jacki]That felt so good.. I wouldn't mind you tearing my little hole completely~.[/say]")
+
+		saynn("So lusty..")
+
+		saynn("[say=pc]Good little slut. I'd rather preserve your ability to hold in piss.[/say]")
+
+		saynn("[say=jacki]Aw-w.. Wruff..[/say]")
+
+		saynn("And just like that, you leave the wolfie alone to rest and come back to senses.")
 
 		addButton("Continue", "See what happens next", "endthescene")
 func addPlasticBottleButtons():
@@ -2200,6 +2402,38 @@ func _react(_action: String, _args):
 		getModule("JackiModule").addAnger(-2)
 		getModule("JackiModule").advanceSkill("jackiSkillButtslut")
 
+	if(_action == "endthescene_unequpstrapon"):
+		endScene()
+		GM.pc.unequipStrapon()
+		return
+
+	if(_action == "jog_sounding_intro"):
+		processTime(6*60)
+		getCharacter("jacki").getInventory().forceEquipStoreOtherUnlessRestraint(GlobalRegistry.createItem("blindfold"))
+
+	if(_action == "jog_sounding_dildo"):
+		processTime(5*60)
+
+	if(_action == "jog_sounding_intro_rod"):
+		processTime(13*60)
+		getModule("JackiModule").advanceSkill("jackiSkillSounding")
+		getModule("JackiModule").addCorruption(3)
+
+	if(_action == "endthescene_freejackieyes"):
+		endScene()
+		getCharacter("jacki").removeAllRestraints()
+		return
+
+	if(_action == "jog_sounding_dildo_cum"):
+		processTime(13*60)
+		getModule("JackiModule").advanceSkill("jackiSkillSounding")
+		getModule("JackiModule").addCorruption(3)
+
+	if(_action == "jog_sounding_finger_cum"):
+		processTime(13*60)
+		getModule("JackiModule").advanceSkill("jackiSkillSounding")
+		getModule("JackiModule").addCorruption(4)
+
 	setState(_action)
 
 func saveData():
@@ -2210,6 +2444,7 @@ func saveData():
 	data["lust"] = lust
 	data["hasUnderwear"] = hasUnderwear
 	data["buttScore"] = buttScore
+	data["soundScore"] = soundScore
 	data["usedItemName"] = usedItemName
 	data["plasticBottleFluidID"] = plasticBottleFluidID
 	data["waterLevel"] = waterLevel
@@ -2224,6 +2459,7 @@ func loadData(data):
 	lust = SAVE.loadVar(data, "lust", 0.0)
 	hasUnderwear = SAVE.loadVar(data, "hasUnderwear", false)
 	buttScore = SAVE.loadVar(data, "buttScore", 0)
+	soundScore = SAVE.loadVar(data, "soundScore", 0)
 	usedItemName = SAVE.loadVar(data, "usedItemName", "")
 	plasticBottleFluidID = SAVE.loadVar(data, "plasticBottleFluidID", "")
 	waterLevel = SAVE.loadVar(data, "waterLevel", 0)

@@ -123,6 +123,8 @@ func addLust(howMuch, showMessage = true):
 func addAnger(howMuch, showMessage = true):
 	howMuch /= 100.0
 	var currentCorruption = getFlag("JackiModule.jackiAnger", 0.0)
+	if(currentCorruption < -0.1 && howMuch > 0.0):
+		howMuch *= 2.0
 	var currentActualCorruption = clamp(getFlag("JackiModule.jackiCorruption", 0.0), 0.0, 1.0)
 	var oldCor = currentCorruption
 	
