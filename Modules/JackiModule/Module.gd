@@ -43,6 +43,7 @@ func getFlags():
 		"jackiReceivedBra": flag(FlagType.Bool),
 		"jackiReceivedShorts": flag(FlagType.Bool),
 		"jackiReceivedHorsecockDildo": flag(FlagType.Bool),
+		"jackiGotFollowed": flag(FlagType.Bool),
 	}
 
 func _init():

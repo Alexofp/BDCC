@@ -76,9 +76,10 @@ func _run():
 		if (anger >= -0.1):
 			addButton("Perv", "Watch her do yoga from a far", "do_perv")
 			addButton("Gift", "Offer a gift that Jacki might forgive you for. In case you want that", "pick_gift")
-			addButton("Follow", "See where Jacki usually jogs", "do_pullaway")
-			addButton("Chain up", "Chain Jacki up like she is a punching bag", "do_chainup")
-			addButton("Public fuck", "Fuck Jacki right here in the public", "do_publicfuck")
+			addButton("Follow", "See what Jacki usually does after yoga", "do_creepfollow")
+			if (false):
+				addButton("Chain up", "Chain Jacki up like she is a punching bag", "do_chainup")
+				addButton("Public fuck", "Fuck Jacki right here in the public", "do_publicfuck")
 		else:
 			addButton("Watch", "Watch her do yoga", "kind_watch")
 			addButton("Gift", "Gift Jacki something", "pick_gift")
@@ -86,7 +87,7 @@ func _run():
 				addButton("Jogging", "Offer Jacki to jog together", "kind_jog")
 			else:
 				addDisabledButton("Jogging", "Jacki doesn't trust you enough")
-		addDisabledButton("Enslave", "Jacki's corruption and lust must be at 100%")
+		addDisabledButton("Enslave", "Jacki's kindness, corruption and lust must be at 100%")
 		addButton("Leave", "Never mind", "endthescene")
 	if(state == "do_perv"):
 		saynn("You sneakily sit on one of the benches near the yoga mats which puts you in a prime position to watch Jacki do yoga.")
@@ -2113,6 +2114,166 @@ func _run():
 		saynn("And just like that, you leave the wolfie alone to rest and come back to senses.")
 
 		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "do_creepfollow"):
+		playAnimation(StageScene.Solo, "stand", {pc="jacki"})
+		saynn("You decide to wait until Jacki stops doing exercises and gets up. She quickly wipes any dirt and dust off her clothes and heads somewhere.")
+
+		if (!getFlag("JackiModule.jackiGotFollowed")):
+			saynn("You don't really know yet what Jacki usually does when she is not at the gym area.")
+
+		else:
+			saynn("You know the rough route that Jacki usually takes when she is jogging. And you can take advantage of that if you want.")
+
+		addButton("Just watch", "Observe Jacki", "do_creepfollow_follow")
+		addButton("Nevermind", "Let Jacki go whenever she wants", "endthescene")
+	if(state == "do_creepfollow_follow"):
+		playAnimation(StageScene.Solo, "jog", {pc="jacki"})
+		aimCameraAndSetLocName("yard_eastCorridor")
+		GM.pc.setLocation("yard_eastCorridor")
+		saynn("You quietly follow Jacki, trying to stay in the shadows of tall greenery when can. After leaving the gym, Jacki switches from a normal walk to a jog. Huh, looks like this is her way of staying fit.")
+
+		saynn("Or maybe this just gives her a small semblance of freedom. Either way, you step behind as fast as you can without raising suspicion.")
+
+		saynn("Jacki's lithe figure gracefully follows the stone pathways as she moves through the yard. Devious thoughts come into your mind as you watch her body move. Bad thoughts? Come on, the slut clearly wants it herself. Otherwise she wouldn't be jogging past all those secluded or isolated spots..")
+
+		if (corruption > 0.4):
+			saynn("And yeah, you do notice that Jacki is swaying her ass a little wider than usual.")
+
+		if (lust > 0.7):
+			saynn("Occasionally you notice little wet spots on the stone pathway.. clearly Jacki's.")
+
+		saynn("At some point you begin to think that Jacki senses your presence behind her back. She trusts her intuition and increases her pace, her tail flicking with a mixture of uneasy and.. curiosity.")
+
+		saynn("Well. That should be enough info to figure out her route. Jacki is going on a second lap anyway.")
+
+		if (getFlag("JackiModule.jackiReceivedHorsecockDildo")):
+			saynn("Wait. Is that moans that you hear?")
+
+		addButton("Leave", "Enough being creepy", "endthescene")
+		if (getFlag("JackiModule.jackiReceivedHorsecockDildo")):
+			addButton("Moans", "Follow them", "do_creepfollow_horsedildo")
+	if(state == "do_creepfollow_horsedildo"):
+		aimCameraAndSetLocName("yard_vaulthere")
+		GM.pc.setLocation("yard_vaulthere")
+		playAnimation(StageScene.Solo, "struggle", {pc="jacki", bodyState={exposedCrotch=true}})
+		saynn("You follow the faint noises that are coming from some secluded corner of the yard.. until you stumble upon something quite interesting.")
+
+		saynn("It's Jacki. You catch her during the moment when her shorts are pulled. She hasn't spotted you yet luckily, allowing you to see what she is doing.")
+
+		saynn("The wolfie is in the middle of fun times it seems. She is trying her best to rub her pussy but the chastity piercings make it very awkward to rub her folds.")
+
+		saynn("[say=jacki]Huff..[/say]")
+
+		saynn("And since her clit is pierced and has two little chains dangling from it, rubbing it doesn't bring that much pleasure either. Jacki is wet.. and desperate.")
+
+		saynn("After some time, she gives up and starts moving rocks around, uncovering.. a stash. A stash that has your gift in it.. the giant horsecock.")
+
+		saynn("Jacki sighs.. and places it on the floor, its wobbly tip already makes her mind rush.")
+
+		addButton("Continue", "See what happens next", "do_creepfollow_horsedildo_start")
+	if(state == "do_creepfollow_horsedildo_start"):
+		playAnimation(StageScene.HorsecockDildoSex, "tease", {pc="jacki", bodyState={exposedCrotch=true}})
+		if (buttScore <=2):
+			saynn("After placing the hefty toy on the ground, Jacki positions her body above it. At first, she lets the big flared tip brush against her pussy.. but the piercings are relentless, keeping her pussy closed no matter how hard she tries.")
+
+			saynn("[say=jacki]I guess I have to..[/say]")
+
+			saynn("And so she shifts and angles her body a bit such that now her other hole is being prodded by the giant dildo.. her {jackiButt} asshole.")
+
+			saynn("Jacki spreads her legs more.. and begins trying to lower herself onto the giant rubber shaft. It proves to be quite a challenge, her pucker is clenching tightly when Jacki is forcibly trying to stretch it so wide.")
+
+			saynn("[say=jacki]Ngh-h.. come on-n-n.. I need this..[/say]")
+
+			saynn("The girl is trying, she truly does. But each time her asshole begins to stretch to accommodate that flared tip.. the discomfort is making her whine and pull away instead.")
+
+			saynn("[say=jacki]Huff..[/say]")
+
+			saynn("Jacki gives up. Looks like she will need her butt trained first.. or a set of helping hands.")
+
+			addButton("Leave", "No need to make it worse", "endthescene")
+			addButton("Apply force", "Step in and force Jacki to take that toy", "do_creepfollow_horsedildo_force")
+		elif (buttScore <= 6):
+			saynn("After placing the hefty toy on the ground, Jacki positions her body above it. She knows well enough that she won't be able to ride it with her pussy so she aligns it with her {jackiButt} asshole.")
+
+			saynn("[say=jacki]Here goes nothing..[/say]")
+
+			saynn("She angles herself a little better.. and begins trying to lower herself onto the big ass toy. It proves to be quite a challenge, her pucker is clenching tightly when Jacki is forcibly trying to stretch it so wide. But, inch by inch, Jacki is slowly stretching herself wider..")
+
+			addButton("Continue", "See what happens next", "do_creepfollow_horsedildo_ride")
+			addButton("Apply force", "Step in and force Jacki to take that toy", "do_creepfollow_horsedildo_force")
+		else:
+			saynn("After placing the hefty toy on the ground, Jacki positions her body above it. She guides the flared tip straight to her {jackiButt} asshole, angling her body just right.")
+
+			saynn("[say=jacki]Here goes everything~.[/say]")
+
+			addButton("Continue", "See what happens next", "do_creepfollow_horsedildo_ride")
+			addButton("Apply force", "Step in and force Jacki to take that toy", "do_creepfollow_horsedildo_force")
+	if(state == "do_creepfollow_horsedildo_force"):
+		playAnimation(StageScene.HorsecockDildoSex, "inside", {pc="jacki", bodyState={exposedCrotch=true}})
+		saynn("She will never sit on it like this.. so you decide to help.")
+
+		saynn("Swiftly but silently, you approach Jacki from behind.. and slip one hand around her waist while the second one grabs her by the hair.")
+
+		saynn("[say=jacki]Eep![/say]")
+
+		saynn("Jacki jerks to the side, spooked by your sudden appearance. But you pull her back.")
+
+		saynn("[say=pc]Where do you think you're going?[/say]")
+
+		saynn("[say=jacki]H-hey!.. Let me go. What are you doing?![/say]")
+
+		saynn("[say=pc]Helping you with my gift.[/say]")
+
+		saynn("Her eyes become wide when you proceed to pull her body down, applying stretching to overcome the tightness of Jacki's {jackiButt} asshole.")
+
+		saynn("[say=jacki]Ah.. H-hey.. w-wait! It hurts.. Somebody![/say]")
+
+		saynn("A loud cry for help tries to escape from her.. but one of your hands lands on her muzzle and holds it shut.")
+
+		saynn("[say=pc]Shut up, whore. I'm only helping you.[/say]")
+
+		saynn("[say=jacki]Nh-h-h!!..[/say]")
+
+		saynn("Looks like the amount of force that you are applying isn't enough. Jacki's asshole is stretching but the flared tip is still too thick for her to take. You don't stop putting more pressure though, causing Jacki to start squirming and flailing her arms.")
+
+		saynn("And soon enough, the fat flared part pops inside. Having even just it inside Jacki makes her asshole look incredibly stretched and have a red tint, her pulsing pussy getting squished down.")
+
+		saynn("[say=pc]There we fucking go. I knew that there is a buttslut in you.[/say]")
+
+		saynn("Tears stream down Jacki's cheeks. She is whining as you keep 'helping' her take more of that giant shaft. Poor wolfie is shaking.. until her pussy suddenly squirts all over the ground, the crazy mix of sensations causing an overstimulation.")
+
+		saynn("[say=pc]Enjoy.[/say]")
+
+		saynn("And just like that, you pull your hands away, keeping Jacki sitting on the toy. It's not fully inside yet.. but at least some of it is.")
+
+		saynn("[say=jacki]Huff-f-f.. my ass.. so stretched..[/say]")
+
+		saynn("Jacki gradually pulls herself up.. until the flared tip slips out with a wet 'plop' noise, leaving her irritated asshole to gape.")
+
+		saynn("Time to go.")
+
+		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "do_creepfollow_horsedildo_ride"):
+		playAnimation(StageScene.HorsecockDildoSex, "sex", {pc="jacki", bodyState={exposedCrotch=true}})
+		saynn("A cute stifled moan escapes Jacki's lips as the horsecock dildo suddenly stretches her anal ring for her to sit on it. Her body is shaking as she is struggling to get used to this feeling of being full.")
+
+		saynn("[say=jacki]Fuck-k.. wish it was a real one..[/say]")
+
+		saynn("And so she proceeds to ride that silicon shaft with her ass, pulling herself up just to bring her body down onto it. Her pussy is looking quite squished in the process, the toy's size is taking up all the space.")
+
+		saynn("Pretty bold of her to do this in the yard where anyone can spot her. But maybe she likes the thrill that comes with that. The girl is certainly becoming quite horny and putting up an incredible show.")
+
+		saynn("More stifled moans escape from Jacki, her legs begin to shake again, her pussy pulsing.. until a shower of girlcum bursts from it.")
+
+		saynn("[say=jacki]Yes-s-s-s~..[/say]")
+
+		saynn("The wolfie throws her head back and lets her tailhole try to clench around the giant shaft, most of which is inside her.")
+
+		saynn("Only when her anal orgasm is over and her senses begin to return to her, Jacki leans her body forward, causing the toy to slip out with a 'plop' noise when it gets tilted to its side.")
+
+		saynn("Time to go before she spots you.")
+
+		addButton("Continue", "See what happens next", "endthescene")
 func addPlasticBottleButtons():
 	var items = GM.pc.getInventory().getItemsWithTag(ItemTag.PlasticBottle)
 	for item in items:
@@ -2135,6 +2296,9 @@ func _react(_action: String, _args):
 	if(_action == "do_perv"):
 		getModule("JackiModule").addCorruption(4)
 		processTime(15*60)
+
+	if(_action == "do_creepfollow"):
+		processTime(20*60)
 
 	if(_action == "kind_watch"):
 		processTime(15*60)
@@ -2173,16 +2337,16 @@ func _react(_action: String, _args):
 	if(_action == "gift_heatpill"):
 		if(corruption > 0.5):
 			GM.pc.getInventory().removeXOfOrDestroy("HeatPill", 1)
-			getModule("JackiModule").addLust(30)
+			getModule("JackiModule").addLust(10)
 			getCharacter("jacki").forceIntoHeat()
 		else:
 			getModule("JackiModule").addAnger(10)
 
 	if(_action == "gift_horsecockdildo"):
-		if(corruption > 0.5 || lust > 0.5):
+		if(corruption > 0.4 || lust > 0.4):
 			setFlag("JackiModule.jackiReceivedHorsecockDildo", true)
 			GM.pc.getInventory().removeXOfOrDestroy("HorsecockDildo", 1)
-			getModule("JackiModule").addCorruption(30)
+			getModule("JackiModule").addCorruption(10)
 		else:
 			getModule("JackiModule").addAnger(10)
 
@@ -2432,6 +2596,29 @@ func _react(_action: String, _args):
 	if(_action == "jog_sounding_finger_cum"):
 		processTime(13*60)
 		getModule("JackiModule").advanceSkill("jackiSkillSounding")
+		getModule("JackiModule").addCorruption(4)
+
+	if(_action == "do_creepfollow_follow"):
+		processTime(10*60)
+		setFlag("JackiModule.jackiGotFollowed", true)
+		getModule("JackiModule").addCorruption(4)
+
+	if(_action == "do_creepfollow_horsedildo"):
+		processTime(5*60)
+
+	if(_action == "do_creepfollow_horsedildo_start"):
+		processTime(20*60)
+		getModule("JackiModule").addLust(3)
+
+	if(_action == "do_creepfollow_horsedildo_force"):
+		processTime(10*60)
+		getModule("JackiModule").advanceSkill("jackiSkillButtslut")
+		getModule("JackiModule").addAnger(30)
+		getModule("JackiModule").addCorruption(4)
+
+	if(_action == "do_creepfollow_horsedildo_ride"):
+		processTime(10*60)
+		getModule("JackiModule").advanceSkill("jackiSkillButtslut")
 		getModule("JackiModule").addCorruption(4)
 
 	setState(_action)
