@@ -2125,6 +2125,8 @@ func _run():
 			saynn("You know the rough route that Jacki usually takes when she is jogging. And you can take advantage of that if you want.")
 
 		addButton("Just watch", "Observe Jacki", "do_creepfollow_follow")
+		if (getFlag("JackiModule.jackiGotFollowed")):
+			addButton("Block path", "Find a good spot to block Jacki's path", "do_creepfollow_block")
 		addButton("Nevermind", "Let Jacki go whenever she wants", "endthescene")
 	if(state == "do_creepfollow_follow"):
 		playAnimation(StageScene.Solo, "jog", {pc="jacki"})
@@ -2152,6 +2154,8 @@ func _run():
 		addButton("Leave", "Enough being creepy", "endthescene")
 		if (getFlag("JackiModule.jackiReceivedHorsecockDildo")):
 			addButton("Moans", "Follow them", "do_creepfollow_horsedildo")
+		else:
+			addDisabledButton("Moans", "Jacki needs to have a horsecock dildo")
 	if(state == "do_creepfollow_horsedildo"):
 		aimCameraAndSetLocName("yard_vaulthere")
 		GM.pc.setLocation("yard_vaulthere")
@@ -2272,6 +2276,208 @@ func _run():
 		saynn("Only when her anal orgasm is over and her senses begin to return to her, Jacki leans her body forward, causing the toy to slip out with a 'plop' noise when it gets tilted to its side.")
 
 		saynn("Time to go before she spots you.")
+
+		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "do_creepfollow_block"):
+		playAnimation(StageScene.Duo, "stand", {npc="jacki"})
+		aimCameraAndSetLocName("yard_vaulthere")
+		GM.pc.setLocation("yard_vaulthere")
+		saynn("You let Jacki follow her normal route while you yourself head straight for one of the secluded spots.. Spots that she usually passes. It's a dead end.. which is perfect.")
+
+		saynn("The shadow between some tall bushes is your best friend. A few minutes later you hear a familiar noise of someone's hindpaws stepping on a stonepath at a pace that's faster than normal walking. Good.")
+
+		saynn("You wait for them to rush past you before stepping out and blocking the path. Yeah, it's Jacki.")
+
+		saynn("She runs into you on her way back.")
+
+		if (corruption > 0.95):
+			saynn("[say=jacki]Oh, hey there, wruff~. I thought you would never force me again~.[/say]")
+
+			saynn("Looks like you corrupted the girl into liking this..")
+
+		elif (corruption > 0.6):
+			saynn("[say=jacki]Let's.. let's just get it over with.[/say]")
+
+			saynn("Looks like she understands what you are gonna do. Will she resist though?")
+
+		else:
+			saynn("Jacki gives you a strange look and tries to jog past.. but you are like a wall.")
+
+			if (!getFlag("JackiModule.jackiFirstTimeBlocked")):
+				setFlag("JackiModule.jackiFirstTimeBlocked", true)
+				saynn("[say=jacki]Um.. what are you doing?[/say]")
+
+				saynn("Her voice sounds frustrated.")
+
+				saynn("[say=jacki]Were you following me? Why are you so interested in where I jog?[/say]")
+
+			else:
+				saynn("[say=jacki]You.. again..[/say]")
+
+				saynn("She sounds desperate.. But she knew that this would happen again.")
+
+				saynn("[say=jacki]Can we not maybe?..[/say]")
+
+		addButton("Grab", "Grab Jacki by the neck", "do_grab")
+		addButton("Let her go", "You changed your mind", "do_grab_letgo")
+	if(state == "do_grab_letgo"):
+		playAnimation(StageScene.Solo, "jog", {pc="jacki"})
+		saynn("At the last possible moment.. you decide to change your mind and let Jacki go by stepping out of her way.")
+
+		if (corruption > 0.95):
+			saynn("[say=jacki]Aw.. You're not gonna pound my ass or stretch my pisshole?[/say]")
+
+			saynn("She sounds.. genuinely disappointed.")
+
+			saynn("[say=jacki]Not even some choking?..[/say]")
+
+			saynn("You shake your head and just invite Jacki to jog away. She sighs and obeys.")
+
+		elif (corruption > 0.3):
+			saynn("[say=jacki]Oh.. you're not gonna force me? Why not?[/say]")
+
+			saynn("She blushes when realizes what she said.")
+
+			saynn("[say=jacki]I mean.. What changed your mind?[/say]")
+
+			saynn("You're obviously not gonna explain yourself. So you just let her jog away.")
+
+		else:
+			saynn("Jacki quickly walks past and then switches to jogging.")
+
+			saynn("[say=jacki]..what a creep.[/say]")
+
+		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "do_grab"):
+		playAnimation(StageScene.Choking, "idle", {npc="jacki", npcBodyState={exposedCrotch=true}})
+		saynn("You suddenly grab Jacki by the neck, your hand squeezing her throat just above the collar. All the while she tries to pull your hands off her neck with so little strength.. that she might as well just be suggesting you.")
+
+		if (corruption > 0.95):
+			saynn("[say=jacki]Force m-me..[/say]")
+
+		elif (corruption > 0.6):
+			saynn("[say=jacki]Not t-too rough..[/say]")
+
+			saynn("It seems the wolfie knows that this won't end well. She does her best to pry your digits off her neck.")
+
+		else:
+			saynn("[say=jacki]Hey.. L-let go.. I'm gonna scream..[/say]")
+
+			saynn("Not while you choke her, she is not. She does her best to pry your digits off her neck and even uses her legs to kick you.")
+
+		saynn("While she is busy resisting, you use your other hand to forcibly pull her shorts down, exposing Jacki's red bush between her legs as well as her stitched up pussy that has a bell dangling from her clit piercing and also a little something in her urethra.")
+
+		saynn("None of this is gonna be pretty..")
+
+		addButton("Anal fisting", "Make that slut take your whole fist", "do_grab_fisting")
+		addButtonWithChecks("Anal", "Fuck Jacki's ass", "do_grab_anal", [], [ButtonChecks.HasReachablePenis])
+		addButtonWithChecks("Strapon anal", "Fuck Jacki's ass with a strapon", "do_grab_strapon_pick", [], [ButtonChecks.HasStraponAndCanWear])
+		addButton("Sounding", "Jacki has something in her pisshole..", "do_grab_sounding")
+		if (soundScore >= 4):
+			addButtonWithChecks("Urethra fuck", "There is still a way to fuck her pussy even if it's stiched up.. It just won't be pretty", "do_grab_urethra_fuck", [], [ButtonChecks.HasReachablePenis])
+		else:
+			addDisabledButton("Urethra fuck", "Jacki's needs more experience with sounding or this will kill her")
+	if(state == "do_grab_fisting"):
+		playAnimation(StageScene.SexFisting, "tease", {npc="jacki", npcBodyState={exposedCrotch=true}})
+		saynn("Enough playing around. You throw Jacki onto the ground and holds her in place with one hand.. while the second reaches for her wolf tail and yanks it high.")
+
+		saynn("The wolfie whines as you put her {jackiButt} ass on full display. Then you forcibly make her spread her legs more, giving you more access.")
+
+		if (buttScore <= 3):
+			saynn("Prodding Jacki's tailhole with a few digits makes her squirm.. She is clenching tight, preventing any penetration.")
+
+		elif (buttScore <= 6):
+			saynn("Prodding Jacki's tailhole with a few digits makes her squirm.. She is clenching tight but her asshole is somewhat used to being penetrated by now.")
+
+		else:
+			saynn("Prodding Jacki's tailhole with a few digits makes her squirm.. She is making her best attempts to clench.. but her asshole is loose you can probably fit more than one fist in there.. and it's even lubricating itself in response to the stimulation.")
+
+		if (buttScore <= 0):
+			if (corruption > 0.5):
+				saynn("[say=jacki]Ohh.. What are you gonna do to my virgin asshole..[/say]")
+
+			else:
+				saynn("[say=jacki]H-hey! I don't do butt stuff![/say]")
+
+		elif (buttScore <= 3):
+			if (corruption > 0.5):
+				saynn("[say=jacki]Are you gonna stretch my tight asshole more?[/say]")
+
+			else:
+				saynn("[say=jacki]H-hey! That's my ass![/say]")
+
+		elif (buttScore <= 6):
+			if (corruption > 0.5):
+				saynn("[say=jacki]If you keep this up I will become a buttslut..[/say]")
+
+			else:
+				saynn("[say=jacki]H-hey! Stop! My ass is trained enough already..[/say]")
+
+		else:
+			if (corruption > 0.5):
+				saynn("[say=jacki]Shove your whole fist into this buttslut![/say]")
+
+			else:
+				saynn("[say=jacki]H-hey! You already made my ass loose, what more do you want..[/say]")
+
+		if (buttScore <= 3):
+			saynn("Inserting fingers one by one? Fuck that. You quickly spit on your clenched fist and start trying to stretch Jacki's asshole with it. The anal ring is extremely tight which makes this process hard.. but you keep pushing through her resistance.. All the while Jacki is arching her back, her legs shaking, whining escapes from her muzzle.")
+
+		elif (buttScore <= 6):
+			saynn("Inserting fingers one by one? Fuck that. You quickly spit on your clenched fist and start trying to stretch Jacki's asshole with it. Her anal ring is used to small penetrations.. but a whole fist is still too much for it.. Jacki is whining while her legs are shaking")
+
+		else:
+			saynn("Inserting fingers one by one? Fuck that. You gather some of Jacki's arousal onto your fist and start trying to stretch her asshole with it. And surprisingly, you don't feel much resistance. Moans escape from Jacki as you slowly work that fist in, inch by inch..")
+
+		addButton("Continue", "See what happens next", "do_grab_fisting_fisting")
+	if(state == "do_grab_fisting_fisting"):
+		if (buttScore <= 6):
+			playAnimation(StageScene.SexFisting, "sex", {npc="jacki", npcBodyState={exposedCrotch=true}})
+		else:
+			playAnimation(StageScene.SexFisting, "fast", {npc="jacki", npcBodyState={exposedCrotch=true}})
+		if (buttScore <= 3):
+			saynn("A loud cry escapes from Jacki as her asshole gives you enough leeway to shove your whole fist and hand inside it. Poor wolfie is whining and whimpering as you proceed to puppeteer her, forcing your hand even deeper while the second one is holding her in place.")
+
+			saynn("She is clenching tight.. but you keep adding more pressure, forcing your way through her resistance.")
+
+			saynn("[say=jacki]Fu-uck-k.. you're tearing my ass..[/say]")
+
+			saynn("And yeah.. you notice some minor bleeding already. Doing this to an untrained butt will tend to do that.. Still, it's just extra lube in the end.")
+
+		elif (buttScore <= 6):
+			saynn("A loud cry escapes from Jacki as you manage to stretch her asshole enough to shove your whole fist and hand inside. Poor wolfie is whining and whimpering from the discomfort caused by your roughness. Your second hand is holding her pinned while you make her get used to this painful feeling.")
+
+			saynn("It's not as bad as it could be, training Jacki's ass did make it somewhat stretchy. She is clenching tight.. but you keep adding more pressure, forcing your way through her resistance.")
+
+			saynn("[say=jacki]Fu-uck-k.. you're tearing my ass..[/say]")
+
+		else:
+			saynn("A passionate cry escapes from Jacki as you work your whole fist into her asshole, stretching it extremely wide. Poor wolfie is whining and whimpering from the discomfort caused by your roughness. Your second hand is holding her pinned while you slide your forearm inside too.")
+
+			saynn("And wow, her trained asshole is practically sucking you in. She is trying to clench.. but you find almost no resistance.")
+
+			saynn("[say=jacki]Fuck-k~.. you're tearing my ass..[/say]")
+
+		saynn("After showing your hand inside, you begin moving it back and forth, fucking Jacki's {jackiButt} ass like that. It doesn't take long for the poor wolfie to start shivering and squirming, her noises getting louder and longer.")
+
+		saynn("It's so hot inside her at the moment. Soon enough, her useless pussy suddenly starts squirting all over the ground, her inner walls kneading your hand.")
+
+		saynn("[say=jacki]NGhGhh-h!..[/say]")
+
+		saynn("Looks like the wolfie is quickly losing touch with reality, her body about to flop before you catch her and put her chest on the floor carefully.")
+
+		addButton("Pull fist out", "Enough fisting", "do_grab_fisting_enoughfist")
+	if(state == "do_grab_fisting_enoughfist"):
+		playAnimation(StageScene.SexAllFours, "teaseflop", {npc="jacki", pc="pc", npcBodyState={exposedCrotch=true}})
+		saynn("As you pull your wet fist out of her ass, that stretched ring is left gaping wide open. Jacki moans each time she tries to close it.")
+
+		saynn("[say=jacki]Nhh-h..[/say]")
+
+		saynn("Her eyes show.. a weird kind of bliss.")
+
+		saynn("[say=pc]What a whore.[/say]")
+
+		saynn("Looks like it will take her a while to recover after that. So you leave her at that.")
 
 		addButton("Continue", "See what happens next", "endthescene")
 func addPlasticBottleButtons():
@@ -2603,6 +2809,11 @@ func _react(_action: String, _args):
 		setFlag("JackiModule.jackiGotFollowed", true)
 		getModule("JackiModule").addCorruption(4)
 
+	if(_action == "do_creepfollow_block"):
+		processTime(10*60)
+		if(corruption <= 0.6):
+			getModule("JackiModule").addAnger(10)
+
 	if(_action == "do_creepfollow_horsedildo"):
 		processTime(5*60)
 
@@ -2620,6 +2831,27 @@ func _react(_action: String, _args):
 		processTime(10*60)
 		getModule("JackiModule").advanceSkill("jackiSkillButtslut")
 		getModule("JackiModule").addCorruption(4)
+
+	if(_action == "do_grab"):
+		processTime(2*60)
+
+	if(_action == "do_grab_letgo"):
+		getModule("JackiModule").addCorruption(-10)
+		getModule("JackiModule").addLust(-10)
+		if(anger > 0.0):
+			getModule("JackiModule").addAnger(-10)
+
+	if(_action == "do_grab_fisting"):
+		processTime(10*60)
+
+	if(_action == "do_grab_fisting_fisting"):
+		processTime(6*60)
+		getModule("JackiModule").advanceSkill("jackiSkillButtslut")
+		getModule("JackiModule").makeJackiBusy()
+		getModule("JackiModule").addCorruption(5)
+
+	if(_action == "do_grab_fisting_enoughfist"):
+		processTime(3*60)
 
 	setState(_action)
 

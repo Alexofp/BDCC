@@ -217,6 +217,7 @@ population = 1
 self_modulate = Color( 0.7, 1, 0.7, 1 )
 position = Vector2( 64, 640 )
 roomName = "Prison Yard"
+roomID = "yard_deadend2"
 roomDescription = "A huge open area with lots of bushes, trees and other types of greenery. Ocasionally there is a bench to sit and relax.
 
 The ground is covered with grass, there are visible pathways made out of stone"
@@ -250,6 +251,7 @@ population = 1
 self_modulate = Color( 0.7, 1, 0.7, 1 )
 position = Vector2( -64, 640 )
 roomName = "Prison Yard"
+roomID = "yard_deadend1"
 roomDescription = "A huge open area with lots of bushes, trees and other types of greenery. Ocasionally there is a bench to sit and relax.
 
 The ground is covered with grass, there are visible pathways made out of stone"

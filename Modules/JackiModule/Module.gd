@@ -44,6 +44,7 @@ func getFlags():
 		"jackiReceivedShorts": flag(FlagType.Bool),
 		"jackiReceivedHorsecockDildo": flag(FlagType.Bool),
 		"jackiGotFollowed": flag(FlagType.Bool),
+		"jackiFirstTimeBlocked": flag(FlagType.Bool),
 	}
 
 func _init():
@@ -194,10 +195,10 @@ func getButtTightness():
 	if(buttscore <= 4):
 		return "slightly used"
 	if(buttscore <= 5):
-		return "pretty stretched and used"
+		return "very stretchy and used"
 	if(buttscore <= 6):
-		return "extremely stretched"
-	return "gaping stretched"
+		return "fully stretchy"
+	return "extremely stretchy"
 
 func makeJackiBusy():
 	pass
