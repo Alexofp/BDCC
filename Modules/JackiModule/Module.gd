@@ -45,6 +45,7 @@ func getFlags():
 		"jackiReceivedHorsecockDildo": flag(FlagType.Bool),
 		"jackiGotFollowed": flag(FlagType.Bool),
 		"jackiFirstTimeBlocked": flag(FlagType.Bool),
+		"jackiBusyUntil": flag(FlagType.Number),
 	}
 
 func _init():
@@ -200,5 +201,101 @@ func getButtTightness():
 		return "fully stretchy"
 	return "extremely stretchy"
 
-func makeJackiBusy():
-	pass
+func makeJackiBusy(howManyDays = 1):
+	setFlag("JackiModule.jackiBusyUntil", GM.main.getDays() + howManyDays)
+
+func getAngerText():
+	var currentAnger = getFlag("JackiModule.jackiAnger", 0.0)
+	
+	if(currentAnger < 0.1 && currentAnger >= -0.1):
+		return "indifferent towards you"
+	elif(currentAnger > 0.0):
+		if(currentAnger < 0.15):
+			return "annoyed slightly"
+		if(currentAnger < 0.25):
+			return "is annoyed with you"
+		if(currentAnger < 0.35):
+			return "very annoyed"
+		if(currentAnger < 0.45):
+			return "is mad at you"
+		if(currentAnger < 0.55):
+			return "is really mad at you"
+		if(currentAnger < 0.65):
+			return "despises you"
+		if(currentAnger < 0.75):
+			return "doesn't like anything about you"
+		if(currentAnger < 0.85):
+			return "would rather live on another planet away from you"
+		if(currentAnger < 0.95):
+			return "pretty much hates you"
+		return "hates you"
+	else:
+		if(currentAnger > -0.15):
+			return "doesn't mind you"
+		if(currentAnger > -0.25):
+			return "kinda likes you"
+		if(currentAnger > -0.35):
+			return "likes you"
+		if(currentAnger > -0.45):
+			return "likes you very much"
+		if(currentAnger > -0.55):
+			return "enjoys your presence"
+		if(currentAnger > -0.65):
+			return "thinks you're very nice"
+		if(currentAnger > -0.75):
+			return "adores you"
+		if(currentAnger > -0.85):
+			return "values your friendship"
+		if(currentAnger > -0.95):
+			return "values you"
+		return "likes you"
+			
+func getLustText():
+	var currentLust = getFlag("JackiModule.jackiLust", 0.0)
+	
+	if(currentLust <= 0.01):
+		return "no lust towards anything"
+	if(currentLust <= 0.1):
+		return "barely intrigued"
+	if(currentLust <= 0.2):
+		return "slight curiosity"
+	if(currentLust <= 0.3):
+		return "emerging interest towards lewd"
+	if(currentLust <= 0.4):
+		return "growing attraction towards sex"
+	if(currentLust <= 0.5):
+		return "fascination with sex"
+	if(currentLust <= 0.6):
+		return "strong desire to be fucked"
+	if(currentLust <= 0.7):
+		return "intense longing"
+	if(currentLust <= 0.8):
+		return "overpowering lust"
+	if(currentLust <= 0.9):
+		return "consuming passion"
+	return "total infatuation"
+
+func getCorruptionText():
+	var currentLust = getFlag("JackiModule.jackiCorruption", 0.0)
+	
+	if(currentLust <= 0.01):
+		return "pure"
+	if(currentLust <= 0.1):
+		return "virtually pure"
+	if(currentLust <= 0.2):
+		return "losing innocence"
+	if(currentLust <= 0.3):
+		return "inner fight"
+	if(currentLust <= 0.4):
+		return "mild degradation"
+	if(currentLust <= 0.5):
+		return "loves it rough"
+	if(currentLust <= 0.6):
+		return "heavy degradation of morals"
+	if(currentLust <= 0.7):
+		return "pretty much a slut"
+	if(currentLust <= 0.8):
+		return "curious slut"
+	if(currentLust <= 0.9):
+		return "eager slut"
+	return "total slut"

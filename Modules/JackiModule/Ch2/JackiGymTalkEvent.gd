@@ -16,9 +16,10 @@ func run(_triggerID, _args):
 		return
 	
 
-	#if(GM.main.getDays() <= getFlag("TaviModule.Ch5TaviSavedDay", 0)):
-	#	addDisabledButton("Tavi", "Give her some rest. Come back tomorrow")
-	#	return
+	if(GM.main.getDays() < getFlag("JackiModule.jackiBusyUntil", -1)):
+		saynn("Looks like Jacki is not here today.")
+		addDisabledButton("Jacki", "She is not here today. Come back some other day")
+		return
 	saynn("Looks like Jacki is doing yoga here.")
 	addButtonUnlessLate("Jacki", "Talk to the wolfie", "talk")
 
