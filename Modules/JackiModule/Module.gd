@@ -183,6 +183,13 @@ func advanceSkill(skillID, maxLevel = 7):
 		increaseFlag("JackiModule."+str(skillID), 1)
 	return true
 
+func degradeSkill(skillID, howMuchRemove = 1):
+	var currentSkill = getFlag("JackiModule."+str(skillID), 0)
+	currentSkill -= howMuchRemove
+	if(currentSkill < 0):
+		currentSkill = 0
+	setFlag("JackiModule."+str(skillID), currentSkill)
+
 func getButtTightness():
 	var buttscore = getSkillScore("jackiSkillButtslut")
 	if(buttscore <= 0):

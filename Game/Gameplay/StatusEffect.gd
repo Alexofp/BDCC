@@ -64,3 +64,4 @@ const MaternalGlow = "MaternalGlow"
 
 # Npc specific ones
 const TaviWombMark = "TaviWombMark"
+const JackiCumInUrethra = "JackiCumInUrethra"
