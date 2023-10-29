@@ -30,6 +30,10 @@ func getFlags():
 		"Jacki_StocksPCLostFightAndWatched": flag(FlagType.Bool),
 		
 		"Jacki_ch2IntroSceneHappened": flag(FlagType.Bool),
+		"Jacki_ch2GotEnslaved": flag(FlagType.Bool),
+		"Jacki_ch2SlaveText": flag(FlagType.Text),
+		"Jacki_ch2GotPussyFreed": flag(FlagType.Bool),
+		"Jacki_ch2GotExtraPiercings": flag(FlagType.Bool),
 		
 		"jackiCorruption": flag(FlagType.Number),
 		"jackiAnger": flag(FlagType.Number),

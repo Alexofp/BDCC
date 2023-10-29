@@ -77,22 +77,36 @@ func _run():
 		elif (lust > 0.2):
 			saynn("You get a slight lusty scent from Jacki.")
 
-		if (anger >= -0.1):
+		var isEnslaved = getFlag("JackiModule.Jacki_ch2GotEnslaved", false)
+		if (isEnslaved):
+			var slaveText = getFlag("JackiModule.Jacki_ch2SlaveText", "")
+			if (slaveText != ""):
+				saynn("Jacki belongs to you. And she knows it. That tattoo on her ass that says '"+str(slaveText )+"' is a constant reminder.")
+
+			else:
+				saynn("Jacki belongs to you. And she knows it.")
+
+		if (anger >= -0.1 || isEnslaved):
 			addButton("Perv", "Watch her do yoga from a far", "do_perv")
-			addButton("Gift", "Offer a gift that Jacki might forgive you for. In case you want that", "pick_gift")
+			if (!isEnslaved):
+				addButton("Gift", "Offer a gift that Jacki might forgive you for. In case you want that", "pick_gift")
 			addButton("Follow", "See what Jacki usually does after yoga", "do_creepfollow")
 			if (false):
 				addButton("Chain up", "Chain Jacki up like she is a punching bag", "do_chainup")
 				addButton("Public fuck", "Fuck Jacki right here in the public", "do_publicfuck")
-		else:
-			addButton("Watch", "Watch her do yoga", "kind_watch")
-			addButton("Gift", "Gift Jacki something", "pick_gift")
-			if (anger < -0.3):
-				addButton("Jogging", "Offer Jacki to jog together", "kind_jog")
-			else:
-				addDisabledButton("Jogging", "Jacki doesn't trust you enough")
-		addDisabledButton("Enslave", "Jacki's kindness, corruption and lust must be at 100%")
-		addButton("Leave", "Never mind", "endthescene")
+			if (anger < -0.1 || isEnslaved):
+				addButton("Watch", "Watch her do yoga", "kind_watch")
+				addButton("Gift", "Gift Jacki something", "pick_gift")
+				if (anger < -0.3):
+					addButton("Jogging", "Offer Jacki to jog together", "kind_jog")
+				else:
+					addDisabledButton("Jogging", "Jacki doesn't trust you enough")
+			if (!isEnslaved):
+				if (anger <= -1.0 && corruption >= 1.0 && lust >= 1.0):
+					addButton("Enslave", "Make that wolfie your bitch", "do_enslave_jacki")
+				else:
+					addDisabledButton("Enslave", "Jacki's kindness, corruption and lust must be at 100%")
+			addButton("Leave", "Never mind", "endthescene")
 	if(state == "do_perv"):
 		saynn("You sneakily sit on one of the benches near the yoga mats which puts you in a prime position to watch Jacki do yoga.")
 
@@ -3022,6 +3036,306 @@ func _run():
 		saynn("Time to go.")
 
 		addButton("Continue", "See what happens next", "endthescene_removeurethracum")
+	if(state == "do_enslave_jacki"):
+		playAnimation(StageScene.Duo, "stand", {npc="jacki"})
+		saynn("After everything that happened.. you feel like Jacki is finally ready. You walk up to her and catch her slutty gaze.")
+
+		saynn("[say=pc]How is this little whore doing?[/say]")
+
+		saynn("Calling her dirty words only makes her more eager to get up and turn around for you, presenting her butt. Her paws spread and the tail sways out of the way.")
+
+		saynn("[say=jacki]I'm doing good! Do you wanna use this ass? Wruff~.[/say]")
+
+		saynn("Always so eager. Almost too eager.")
+
+		saynn("[say=pc]Nah, I wanted to tell you something else.[/say]")
+
+		saynn("[say=jacki]Oh?[/say]")
+
+		saynn("Your hand reaches for her ponytail and yanks on it, causing pain to Jacki. And yet, she still somehow manages to sound slutty.")
+
+		saynn("[say=jacki]Ah-h~..[/say]")
+
+		saynn("[say=pc]I wanna make you mine.[/say]")
+
+		saynn("Jacki's pupils visibly increase, her tail starts wagging on its own.")
+
+		saynn("[say=jacki]You do? You wanna make me your personal buttslut??[/say]")
+
+		saynn("Suddenly you hear a different voice.")
+
+		saynn("[say=eliza]Oh hey. I've been looking for you.. two.[/say]")
+
+		addButton("Continue", "See what happens next", "do_enslave_eliza")
+	if(state == "do_enslave_eliza"):
+		addCharacter("eliza")
+		playAnimation(StageScene.Duo, "stand", {pc="jacki", npc="eliza"})
+		saynn("You turn your head and see a cute feline doctor. She smiles while your hand is still holding Jacki's hair tightly.")
+
+		saynn("[say=eliza]Doctor Quinn here. Did I arrive at the wrong time?[/say]")
+
+		saynn("[say=jacki]Hey, doctor. I'm being made into a personal fucktoy~.[/say]")
+
+		saynn("She said it so proudly. Absolutely zero shame.")
+
+		saynn("[say=eliza]I kinda heard that, sorry~.[/say]")
+
+		saynn("Jacki doesn't seem to be mad at the feline. Huh.")
+
+		saynn("[say=pc]Why are you here, doctor?[/say]")
+
+		saynn("Doctor Quinn looks around and shrugs.")
+
+		saynn("[say=eliza]I wanted to check something. But now I wanna help you instead~.[/say]")
+
+		saynn("The feline slowly approaches you two. She reaches her hand out and pats Jacki, causing her to bark happily.")
+
+		saynn("[say=eliza]Jacki is so much more obedient lately. I check on her occasionally. To make sure her piercings are not tampered with. Before you, I had to be.. a little forceful.[/say]")
+
+		saynn("[say=jacki]Eliza was trying to break me~. But she couldn't.[/say]")
+
+		saynn("The feline chuckles softly as she scritches the wolfie under the chin.")
+
+		saynn("[say=eliza]That's a little extreme. Nah, I was seeking a little more obedience, you know? It's an experiment.[/say]")
+
+		saynn("Doctor Quinn looks at you now.")
+
+		saynn("[say=eliza]And it looks like female chastity doesn't really work on its own. There is always gotta be someone to help.. accelerate.. the process. So.. Thank you for that~. Invaluable data right there.[/say]")
+
+		saynn("[say=pc]So.. sounds like your experiment is over. Are you gonna remove Jacki's piercings?[/say]")
+
+		saynn("Doctor Quinn raises a brow.")
+
+		saynn("[say=eliza]You know.. Let's talk about that in a different place. Follow me.[/say]")
+
+		saynn("Here's hoping she doesn't decide to do something similar to you.")
+
+		addButton("Follow", "See where she brings you", "do_enslave_follow")
+	if(state == "do_enslave_follow"):
+		aimCameraAndSetLocName("medical_confessionary")
+		saynn("You follow the feline through the whole prison until you end up in the medical wing. Doctor Quinn walks you through the staff-only doors and then invites you to enter a special room.")
+
+		saynn("It's.. dimly lit. Your feet instantly feel the soft carpet. There is a big chair, sofa, and a little dorky table. But the cozy furniture is contrasted by a few metal racks and hooks.. clearly designed for heavy bondage. If you didn't know this prison, you might as well think that it's some sort of torture room.")
+
+		saynn("[say=eliza]Alright. I will need you here, in this spot, Jacki.[/say]")
+
+		saynn("The feline points at the spot right under one of those metal hooks.")
+
+		saynn("[say=pc]What are you..[/say]")
+
+		saynn("[say=eliza]Don't worry~.[/say]")
+
+		saynn("Her saying that only makes you worry. But Jacki does exactly as told, positioning herself in the told spot.")
+
+		saynn("[say=eliza]Alright. Now..[/say]")
+
+		addButton("Continue", "See what happens next", "do_enslave_choice")
+	if(state == "do_enslave_choice"):
+		playAnimation(StageScene.HangingDuo, "idle", {npc="pc", pc="jacki", bodyState={naked=true}})
+		saynn("Doctor undresses the wolfie and then grabs two cuffs before putting them on Jacki's wrists. These cuffs already have chains that are attached to the hook at the ceiling. All the doctor has to do now is tighten them up, causing Jacki to pull her paws up and stand on her toes.")
+
+		saynn("[say=jacki]Wruff~. Kinky.[/say]")
+
+		saynn("She talks with you while doing a quick visual check of Jacki's body and her piercings.")
+
+		saynn("[say=eliza]You know.. Jacki did tell me about you. How wet she becomes the moment you appear anywhere close. Right, Jacki?[/say]")
+
+		saynn("[say=jacki]Yes.. I'm wet right now in fact..[/say]")
+
+		saynn("The feline chuckles and then looks at you.")
+
+		saynn("[say=eliza]Me and Jacki didn't really start on the right foot. But thanks to you, we are friends now~.[/say]")
+
+		saynn("[say=jacki]Wruff..[/say]")
+
+		saynn("[say=pc]So..[/say]")
+
+		saynn("She nods-nods and quickly grabs some things. Tools and such.")
+
+		saynn("[say=eliza]I wonder. Jacki. Do you want those piercings removed?[/say]")
+
+		saynn("[say=jacki]My cunt is useless and I'm totally okay with that.. I remember missing it at first.. But I got forcibly trained to be a buttslut and I love it~.[/say]")
+
+		saynn("The feline hums and grabs some extra tools. Then she returns to you.")
+
+		saynn("[say=eliza]Well.. I was thinking of not doing this. But since you helped me and Jacki so much, I wanna give you a choice.[/say]")
+
+		saynn("She presents you some kind of.. little padlocks.. and a key.")
+
+		saynn("[say=eliza]Jacki likes her piercings. So we'd rather keep them. But I can replace her current permanent ones with these. With them on, you, and only you, will be able to temporarily.. unlock.. Jacki's pussy at any time.[/say]")
+
+		saynn("Huh. That would probably mean Jacki will lose her buttslut status. After that, the doctor presents you something else.. in her paws are a piercing tool, a tattoo gun and some piercings.")
+
+		saynn("[say=eliza]Or, in case you want Jacki to keep her current piercings, I can offer you an opportunity to add some extra piercings to Jacki's body. Her nips are still not pierced and there is also a good spot for an extra one on her pussy~.[/say]")
+
+		saynn("That explains the piercings..")
+
+		saynn("[say=pc]What's the tattoo gun for?[/say]")
+
+		saynn("[say=eliza]Oh, well.. from what I've gathered, Jacki is not a fan of branding. But for you she can make an exception, right Jacki?[/say]")
+
+		saynn("[say=jacki]Anything, yes.. wruff.. I'm your slave~.[/say]")
+
+		saynn("[say=eliza]Good girl. So yeah, you can tattoo something on her butt if you want. Anything you want really. Just know that there would be no way of removing it.[/say]")
+
+		saynn("[say=pc]Can I choose both?[/say]")
+
+		saynn("The feline raises a brow and puts on a cute cunning smile.")
+
+		saynn("[say=eliza]I know you like stretching things but my gratitude can only span so long~.[/say]")
+
+		saynn("So this is it, huh. This is where you decide.")
+
+		addButton("Free pussy", "Replace her permanent chastity piercings with the unlockable ones", "do_enslave_freepussy")
+		addButton("Extra piercings", "Just add some extra piercings to Jacki's body", "do_enslave_extrapiercings")
+		addButton("Piercings+Branding", "Add extra piercings to Jacki's body and brand her as your slave", "do_enslave_brand")
+	if(state == "do_enslave_extrapiercings"):
+		saynn("Well, might as well keep Jacki as a buttslut forever.")
+
+		saynn("[say=pc]Give me the piercing tool.[/say]")
+
+		saynn("The feline smiles and hands you the tool loaded with 3 piercings.")
+
+		saynn("You walk up to Jacki and look at her small chest.")
+
+		saynn("[say=pc]Time to leave my mark on you.[/say]")
+
+		saynn("[say=jacki]Wruff.. making this whore squirm, owner..[/say]")
+
+		saynn("She is already getting into the role, huh. You bring the tool to one of her hard perky nipples.. and pull the trigger.. causing it to make a little hole in it and wire the fancy piercing through it.")
+
+		saynn("Jacki gasps and recoils away instinctively.. but it's too late. Her nipple now has a fancy little ring with a cyan gem. You move the tool to her other nipple.. and press the trigger again, adding a piercing there too.")
+
+		saynn("[say=jacki]Ah!.. F-fuck.. My nips burn~.[/say]")
+
+		saynn("[say=pc]Good.[/say]")
+
+		saynn("You look at the doctor.")
+
+		saynn("[say=pc]Where was the other good spot?[/say]")
+
+		saynn("The feline takes a spot behind Jacki.. and then points at her ass.. at that small area between her anus and her pussy.")
+
+		saynn("[say=pc]Her taint?[/say]")
+
+		saynn("Jacki gets more wet just from hearing that. She bites her lip.")
+
+		saynn("[say=pc]Alright. Tail up, slut. This is gonna hurt.[/say]")
+
+		saynn("Wolfie obediently moves the tail, giving you full access to her {jackiButt} ass.")
+
+		saynn("This requires you to be careful. You move the tool to her anal ring and angle it towards her stiched-up pussy.. As you pull the trigger, Jacki lets out a powerful cry. The tool puts a big ring right through the inner wall that divides her two holes, now looking like a little bridge between the two.")
+
+		saynn("[say=jacki]Ah, fuck-k!.. My ass..[/say]")
+
+		saynn("Now you see why the feline chained her up. Jacki is squirming actively, thrashing against her restraints.")
+
+		saynn("[say=pc]You are now my slave. Understand?[/say]")
+
+		saynn("[say=jacki]Ngh-h.. Y-yes~. I'm your personal buttslut slave. Fuck me any time you want~. As rough as you want~.[/say]")
+
+		saynn("That's the spirit. You begin to unchain the wolfie.")
+
+		addButton("Continue", "See what happens next", "do_enslave_end")
+	if(state == "do_enslave_end"):
+		aimCameraAndSetLocName("med_lobby_start")
+		GM.pc.setLocation("med_lobby_start")
+		playAnimation(StageScene.Hug, "hug", {npc="jacki"})
+		saynn("Doctor Quinn guides you back into the medical lobby after you unchain the wolfie.")
+
+		saynn("Jacki decides to suddenly hug you tightly. She seems to be happy with your choice. So you hug her back.")
+
+		saynn("[say=jacki]Wruf-f-f~. Thank you, for everything.[/say]")
+
+		saynn("[say=pc]It's nothing really.[/say]")
+
+		saynn("[say=jacki]I will be your obedient whore forever~.[/say]")
+
+		saynn("The feline giggles softly and leaves you two be.")
+
+		saynn("You spend some time like that, hugging.")
+
+		saynn("[say=jacki]I will be where I usually am if you wanna come find me~.[/say]")
+
+		saynn("[say=pc]Good.[/say]")
+
+		saynn("You end the hug and smack her ass firmly, sending her off.")
+
+		saynn("- - - - - -")
+
+		saynn("(( This is where Jacki's content ends. Thank you for playing <3 ))")
+		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "do_enslave_brand"):
+		saynn("Well, might as well keep Jacki as a buttslut forever and also brand her as your property.")
+
+		saynn("[say=pc]Give me the tools.[/say]")
+
+		saynn("The feline smiles and hands you the piercing tool loaded with 3 piercings.")
+
+		saynn("You walk up to Jacki and look at her small chest.")
+
+		saynn("[say=pc]Time to leave my mark on you.[/say]")
+
+		saynn("[say=jacki]Wruff.. making this whore squirm, owner..[/say]")
+
+		saynn("She is already getting into the role, huh. You bring the tool to one of her hard perky nipples.. and pull the trigger.. causing it to make a little hole in it and wire the fancy piercing through it.")
+
+		saynn("Jacki gasps and recoils away instinctively.. but it's too late. Her nipple now has a fancy little ring with a cyan gem. You move the tool to her other nipple.. and press the trigger again, adding a piercing there too.")
+
+		saynn("[say=jacki]Ah!.. F-fuck.. My nips burn~.[/say]")
+
+		saynn("[say=pc]Good.[/say]")
+
+		saynn("You look at the doctor.")
+
+		saynn("[say=pc]Where was the other good spot?[/say]")
+
+		saynn("The feline takes a spot behind Jacki.. and then points at her ass.. at that small area between her anus and her pussy.")
+
+		saynn("[say=pc]Her taint?[/say]")
+
+		saynn("Jacki gets more wet just from hearing that. She bites her lip.")
+
+		saynn("[say=pc]Alright. Tail up, slut. This is gonna hurt.[/say]")
+
+		saynn("Wolfie obediently moves the tail, giving you full access to her {jackiButt} ass.")
+
+		saynn("This requires you to be careful. You move the tool to her anal ring and angle it towards her stiched-up pussy.. As you pull the trigger, Jacki lets out a powerful cry. The tool puts a big ring right through the inner wall that divides her two holes, now looking like a little bridge between the two.")
+
+		saynn("[say=jacki]Ah, fuck-k!.. My ass..[/say]")
+
+		saynn("Now you see why the feline chained her up. Jacki is squirming actively, thrashing against her restraints. That's when the feline doctor offers you the tattoo gun.")
+
+		saynn("[say=eliza]What are you gonna write on her ass? I can give some suggestions~.[/say]")
+
+		addSlaveTattooNames()
+		if (false):
+			addButton("Error", "You shouldn't see this", "do_enslave_brand_pick")
+		addButton("CUSTOM", "Type in your own tattoo", "do_enslave_brand_type")
+	if(state == "do_enslave_brand_type"):
+		saynn("Type what you want to tattoo on Jacki's ass:")
+
+		addTextbox("jacki_tattoo")
+		addButton("Confirm", "You made your choice", "do_enslave_brand_dotype")
+		addButton("Back", "Never mind", "do_enslave_brand")
+	if(state == "do_enslave_brand_pick"):
+		saynn("And so, after making your choice, you bring the tattoo gun to Jacki's ass and begin to leave a tattoo on it, branding your slave.")
+
+		saynn("[say=jacki]Nhh-h-h![/say]")
+
+		saynn("Jacki whines and squirms as you slowly write '"+str(getFlag("JackiModule.Jacki_ch2SlaveText", "buttslut"))+"' on her. The feline doctor is helping you by holding the wolfie still.")
+
+		saynn("After some time, you finish the work. It looks glorious, exactly how you wished it to look. Jacki will now carry your mark forever.")
+
+		saynn("[say=pc]You are now my slave. Understand?[/say]")
+
+		saynn("Jacki is still panting softly, recovering from having new piercings and being branded.")
+
+		saynn("[say=jacki]Ngh-h.. Y-yes~. I'm your personal buttslut slave. Fuck me any time you want~. As rough as you want~.[/say]")
+
+		saynn("That's the spirit. You begin to unchain the wolfie.")
+
+		addButton("Continue", "See what happens next", "do_enslave_end")
 func addPlasticBottleButtons():
 	var items = GM.pc.getInventory().getItemsWithTag(ItemTag.PlasticBottle)
 	for item in items:
@@ -3039,6 +3353,12 @@ func addStraponButtons2():
 	var strapons = GM.pc.getStrapons()
 	for strapon in strapons:
 		addButton(strapon.getVisibleName(), strapon.getVisibleDescription(), "do_grab_strapon", [strapon])
+
+func addSlaveTattooNames():
+	var possible = ["Buttslut", str(GM.pc.getName())+"'s slut", str(GM.pc.getName())+"'s whore", str(GM.pc.getName())+"'s Slave", "Cum In My Ass", "Slave", str(GM.pc.getName())+"'s Bitch"]
+
+	for t in possible:
+		addButton(t, "Tattoo this on Jacki's ass", "do_enslave_brand_pick", [t])
 
 
 func _react(_action: String, _args):
@@ -3060,6 +3380,10 @@ func _react(_action: String, _args):
 
 	if(_action == "kind_jog"):
 		processTime(2*60)
+
+	if(_action == "do_enslave_jacki"):
+		processTime(5*60)
+		setFlag("JackiModule.Jacki_ch2GotEnslaved", true)
 
 	if(_action == "perv_spank"):
 		processTime(5*60)
@@ -3477,6 +3801,39 @@ func _react(_action: String, _args):
 	if(_action == "endthescene_removeurethracum"):
 		getCharacter("jacki").removeEffect(StatusEffect.JackiCumInUrethra)
 		endScene()
+		return
+
+	if(_action == "do_enslave_eliza"):
+		processTime(3*60)
+
+	if(_action == "do_enslave_follow"):
+		processTime(10*60)
+
+	if(_action == "do_enslave_choice"):
+		processTime(5*60)
+		getCharacter("jacki").getInventory().forceEquipStoreOtherUnlessRestraint(GlobalRegistry.createItem("inmatewristcuffs"))
+
+	if(_action == "do_enslave_freepussy"):
+		setFlag("JackiModule.Jacki_ch2GotPussyFreed", true)
+
+	if(_action == "do_enslave_extrapiercings"):
+		setFlag("JackiModule.Jacki_ch2GotExtraPiercings", true)
+
+	if(_action == "do_enslave_brand"):
+		setFlag("JackiModule.Jacki_ch2GotExtraPiercings", true)
+
+	if(_action == "do_enslave_end"):
+		getCharacter("jacki").removeAllRestraints()
+		processTime(20*60)
+
+	if(_action == "do_enslave_brand_pick"):
+		setFlag("JackiModule.Jacki_ch2SlaveText", _args[0])
+
+	if(_action == "do_enslave_brand_dotype"):
+		if(getTextboxData("jacki_tattoo") == ""):
+			return
+		setFlag("JackiModule.Jacki_ch2SlaveText", getTextboxData("jacki_tattoo"))
+		setState("do_enslave_brand_pick")
 		return
 
 	setState(_action)

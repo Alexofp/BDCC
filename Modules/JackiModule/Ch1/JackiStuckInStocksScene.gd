@@ -80,7 +80,7 @@ func _run():
 
 		saynn("You just stand nearby and watch as the guard approaches the locked up wolfy and proceeds to pull down her inmate shorts, exposing the nice ass. Wolfy proceeds to react the only way she can, by wiggling and making more muffled noises. Her tail tries to cover her again but the guard yanks on it again, surely causing some discomfort.")
 
-		saynn("The first thing you notice are.. the piercings. Quite a lot of them. In fact, the girl’s slit is pretty much stitched shut with many rows of piercing rings that have little cyan gems on them. One slightly bigger piercing ring is going through both her anus and the pussy hole. And another small one is piercing her clit and has a little chain and a dangly cyan ball toy dangling from it. The view is.. quite interesting for sure.")
+		saynn("The first thing you notice are.. the piercings. Quite a lot of them. In fact, the girl’s slit is pretty much stitched shut with many rows of piercing rings that have little cyan gems on them. One slightly bigger ring is piercing her clit and has a little chain and a dangly cyan ball toy dangling from it. The view is.. quite interesting for sure.")
 
 		saynn("[say=pc]Did you do her like that?[/say]")
 
