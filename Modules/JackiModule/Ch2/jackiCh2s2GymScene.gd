@@ -1021,6 +1021,7 @@ func _run():
 
 		saynn("Since you're not jogging that fast, you can also try to chat.")
 
+		addButton("Skip chat", "You'd rather not chat", "jog_afterchat")
 		addButton("This is nice", "Say this", "jog_chat_nice")
 		addButton("Why is she here", "Ask how Jacki has ended up here", "jog_chat_whyprison")
 		addButton("Chastity piercings", "Ask Jacki about her chastity piercings", "jog_chat_chastitypiercings")
@@ -1397,6 +1398,8 @@ func _run():
 		if (lust >= 0.9):
 			addButtonWithChecks("Rough anal", "Fuck Jacki's ass", "jog_anal_fuck", [], [ButtonChecks.HasReachablePenis])
 			addButtonWithChecks("Strapon anal", "Fuck Jacki's ass with a strapon", "jog_anal_strapon_pick", [], [ButtonChecks.HasStraponAndCanWear])
+		if (getFlag("JackiModule.Jacki_ch2GotPussyFreed")):
+			addButtonWithChecks("Breed her", "Fuck Jacki's pussy", "jog_breed_fuck", [], [ButtonChecks.HasReachablePenis])
 	if(state == "jog_afterchat_nod"):
 		saynn("You nod.")
 
@@ -1715,6 +1718,70 @@ func _run():
 		saynn("[say=jacki]Thank you-u-u-u.. ah.. wruff-f-f..[/say]")
 
 		saynn("You spank her butt for the last time and get up, leaving her to rest there.")
+
+		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "jog_breed_fuck"):
+		playAnimation(StageScene.SexAllFours, "tease", {npc="jacki", bodyState={exposedCrotch=true, hard=true}, npcBodyState={exposedCrotch=true}})
+		saynn("After you received that key to her piercings, it only makes sense to do this more. You find a secluded spot where you put Jacki on all fours. You pull her shorts down and begin to slowly unlock each padlock that holds her pussy folds together.")
+
+		saynn("[say=jacki]Fuck, I can't wait~.[/say]")
+
+		saynn("After you are finished unlocking her slit, Jacki is already dripping juices onto the ground.")
+
+		addButton("Fuck", "Start fucking her", "jog_breed_fuck_start")
+	if(state == "jog_breed_fuck_start"):
+		playAnimation(StageScene.SexAllFours, "sex", {npc="jacki", bodyState={exposedCrotch=true, hard=true}, npcBodyState={exposedCrotch=true}})
+		saynn("One of your hands reaches out and pulls on her ponytail while the other one quickly aligns your {pc.penis} with her needy cunt. One rough thrust spreads Jacki's sensitive folds and stretches her pussy hole enough for you to slide inside.")
+
+		saynn("[say=jacki]Nghh-h!..[/say]")
+
+		saynn("You smack her fluffy ass, making her clench harder while you fuck her.")
+
+		saynn("[say=pc]You like having your pussy fucked?[/say]")
+
+		saynn("[say=jacki]Y-yes! Wruff!![/say]")
+
+		saynn("You smack her butt again and pull on her hair more, making Jacki moan.")
+
+		saynn("[say=pc]More than your ass?[/say]")
+
+		saynn("[say=jacki]Oh.. Both are nice..[/say]")
+
+		saynn("Her answer makes you think like she is still a buttslut at heart. You grab her tail near the base with four digits while the big thumb is prodding her {jackiButt} asshole.")
+
+		addButton("Faster", "Fuck her faster", "jog_breed_fuck_faster")
+	if(state == "jog_breed_fuck_faster"):
+		playAnimation(StageScene.SexAllFours, "fast", {npc="jacki", bodyState={exposedCrotch=true, hard=true}, npcBodyState={exposedCrotch=true}})
+		saynn("The faster you pound her slutty pussy, the louder she moans. Fingering her tailhole at the same time makes the poor wolfie squirm and shiver, both her holes pulsing.. until she cums.")
+
+		saynn("Jacki arches her back and sticks her tongue out more, her body shuddering, her slick inner walls gripping your shaft.")
+
+		saynn("[say=jacki]Nghh-h! You're fucking my pussy rough![/say]")
+
+		saynn("The extreme tightness that her slit provides makes you eager to continue thrusting deep inside until your own orgasm begins to draw near..")
+
+		addButton("Cum inside", "Breed Jacki", "jog_breed_fuck_cuminside")
+		addButton("Pull out", "Pull your cock out just before you cum", "jog_breed_fuck_pullout")
+	if(state == "jog_breed_fuck_cuminside"):
+		playAnimation(StageScene.SexAllFours, "inside", {npc="jacki", bodyState={exposedCrotch=true, hard=true}, npcBodyState={exposedCrotch=true}})
+		saynn("You commit to it, shoving your cock as deep as that wolfie's pussy allows, breaking into her womb before cumming inside, your {pc.cum} stuffing her full to the brim. Your hands keep tugging on her hair and tail, making Jacki feel pain too as you breed her.")
+
+		saynn("[say=jacki]Ngh-h-h! I'm such a whore![/say]")
+
+		saynn("You both are left panting after that quick fuck. You pull out and let Jacki rest on the ground while her used pussy leaking your seed. You grab the key and begin to close up the padlocks, making her pussy folds look like a very tight slit again.")
+
+		saynn("Jacki seems to be satisfied. Time to go.")
+
+		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "jog_breed_fuck_pullout"):
+		playAnimation(StageScene.SexAllFours, "tease", {npc="jacki", bodyState={exposedCrotch=true, hard=true}, npcBodyState={exposedCrotch=true}})
+		saynn("You decide against breeding that wolfie and pull out just before your cock starts throbbing and covering that ass with strings of your thick {pc.cum}. One of your hands keep tugging on her hair, making Jacki feel pain too as you mark her.")
+
+		saynn("[say=jacki]Ngh-h-h! I'm such a cum whore![/say]")
+
+		saynn("You both are left panting after that quick fuck. Jacki rests on the ground while you begin to close up the padlocks, making her pussy folds look like a very tight slit again.")
+
+		saynn("Jacki seems to be satisfied. Time to go.")
 
 		addButton("Continue", "See what happens next", "endthescene")
 	if(state == "jog_anal_fuck"):
@@ -3336,6 +3403,235 @@ func _run():
 		saynn("That's the spirit. You begin to unchain the wolfie.")
 
 		addButton("Continue", "See what happens next", "do_enslave_end")
+	if(state == "do_enslave_freepussy"):
+		playAnimation(StageScene.HangingDuo, "idle", {npc="eliza", pc="jacki", bodyState={naked=true}})
+		saynn("Obviously, you'd rather help the wolfie enjoy life to its fullest.")
+
+		saynn("[say=pc]Remove her chastity piercings.[/say]")
+
+		saynn("The feline smiles and nods before grabbing some special tool that looks like pliers and approaches Jacki.")
+
+		saynn("[say=eliza]Try not to move, dear.[/say]")
+
+		saynn("[say=jacki]Wruff.[/say]")
+
+		saynn("She brings the tool to the metal rings that hold Jacki's pussy closed and begins to carefully cut through them, one ring at a time. She keeps the clit piercing, the bell and the little urethra rod untouched though. After pulling each ring out, she replaces them with small padlocks that are roughly the same size and shape but now they each have a keyhole.")
+
+		saynn("The feline makes sure each one can be unlocked with the special key.. before handing it to you.")
+
+		saynn("[say=eliza]Don't break it~.[/say]")
+
+		saynn("[say=pc]I won't.[/say]")
+
+		saynn("The feline giggles and then looks at Jacki and her chains.")
+
+		saynn("[say=eliza]Since Jacki is still chained up.. maybe you would like to try her pussy~? I can look away if you want.[/say]")
+
+		if (!GM.pc.hasReachablePenis()):
+			saynn("[say=pc]I can't really..[/say]")
+
+			saynn("The feline nods-nods and quickly grabs some strapon harness and offers it to you. This one has a knotted canine dildo installed. Jacki bites her lip when she sees it.")
+
+			saynn("[say=eliza]You can use this~.[/say]")
+
+			saynn("Looks like she is offering..")
+
+			addButton("Strapon pussy", "Strapon Jacki's pussy with the offered toy", "do_enslave_strapon")
+		else:
+			saynn("Huh. Jacki bites her lip when she hears that.")
+
+			addButton("Fuck Jacki", "Fuck Jacki's pussy while she is still chained", "do_enslave_fuck")
+		addButton("No fucking", "It's fine", "do_enslave_nofuck")
+	if(state == "do_enslave_nofuck"):
+		playAnimation(StageScene.HangingDuo, "idle", {npc="pc", pc="jacki", bodyState={naked=true}})
+		saynn("You shake your head.")
+
+		saynn("[say=pc]It's fine, really. Thank you.[/say]")
+
+		saynn("You walk up to Jacki and present the key to her pussy.")
+
+		saynn("[say=pc]You are now my slave. Understand?[/say]")
+
+		saynn("Jacki pants softly, getting heated just watching it.")
+
+		saynn("[say=jacki]Ngh-h.. Y-yes~. I'm your personal slave. You control my holes and can fuck me any time as rough as you want~.[/say]")
+
+		saynn("That's the spirit. You begin to unchain the wolfie.")
+
+		addButton("Continue", "See what happens next", "do_enslave_end")
+	if(state == "do_enslave_fuck"):
+		playAnimation(StageScene.HangingSex, "tease", {pc="jacki", npc="pc", npcBodyState={naked=true, hard=true}, bodyState={naked=true}})
+		saynn("Why not? You walk up closer to Jacki and bring the key to her pussy. As you unlock each padlock that holds her pussy folds together, little moans escape from the wolfie, her slit dripping juices onto your digits.")
+
+		saynn("[say=jacki]You wished to breed this slutty cunt for so long, didn't you~.[/say]")
+
+		saynn("Since she is so cocky, you can't help but to slap her pussy lightly. But even that small impact is enough to make Jacki arch her back and gasp.")
+
+		saynn("[say=jacki]Ah.. fuck~..[/say]")
+
+		saynn("After unlocking her pussy, you position yourself behind her and expose your {pc.penis} before thrusting it between her thighs, dangerously close to the unbound flower.")
+
+		saynn("[say=pc]You are my slave. Understand?[/say]")
+
+		saynn("[say=jacki]I don't know, am I~?[/say]")
+
+		saynn("Ohh. She is being quite brave for someone in such a vulnerable position.")
+
+		addButton("Penetrate", "Start fuckin'", "do_enslave_fuck_penetrate")
+	if(state == "do_enslave_fuck_penetrate"):
+		playAnimation(StageScene.HangingSex, "sex", {pc="jacki", npc="pc", npcBodyState={naked=true, hard=true}, bodyState={naked=true}})
+		saynn("And so you align your cock directly with her pussy hole.. and thrust inside. Jacki moans passionately while her slit finally gets penetrated after so much chastity time. Her inner walls are slick and tight, kneading their first cock in a great while.")
+
+		saynn("[say=jacki]Fuck, this is amazing~..[/say]")
+
+		saynn("Your hand lands on her ass and spreads it, giving full access to Jacki's {jackiButt} anus. You decide to prod and rub it with your thumb, letting Jacki feel some familiar sensations as you fuck her.")
+
+		saynn("Chains dangle as you go balls deep on Jacki's cunt. Her wetness allows you to easily reach her cervix and start hammering away at it, sending shivers through her spine.")
+
+		saynn("[say=jacki]Nhh-h~!..[/say]")
+
+		addButton("Faster", "Fuck her faster", "do_enslave_fuck_faster")
+	if(state == "do_enslave_fuck_faster"):
+		playAnimation(StageScene.HangingSex, "fast", {pc="jacki", npc="pc", npcBodyState={naked=true, hard=true}, bodyState={naked=true}})
+		saynn("You increase the pace, fucking that needy slit faster and harder, your hips slamming against her fluffy butt. Loud slutty moans echo around the room, Jacki's tongue is out and drooling.")
+
+		saynn("[say=jacki]I'm.. I'm.. Nh-h-h!..[/say]")
+
+		saynn("With such an onslaught, it doesn't take long for Jacki to reach her peak. She throws her head back and cries out from pleasure while her unconstrained pussy gets all tight around your cock. At the same time, her cervix does the opposite and becomes softer, allowing you to slowly stretch the little hole with each thrust.")
+
+		saynn("Stimulations are so intense that Jacki squirts, pushing the little urethra rod out of her pisshole, followed by a strong stream of transparent juices.")
+
+		saynn("[say=jacki]I'm your slave! Ah~! Your bitch, your little whore, your plaything, cocksleeve, slut~.[/say]")
+
+		saynn("Such a dirty slut. Makes you wonder if you should make her even more dirty on the inside or outside. You're close..")
+
+		addButton("Inside", "Cum inside Jacki's womb", "do_enslave_fuck_cuminside")
+		addButton("Pull out", "Cum all over her butt instead", "do_enslave_fuck_pullout")
+	if(state == "do_enslave_fuck_cuminside"):
+		playAnimation(StageScene.HangingSex, "inside", {pc="jacki", npc="pc", npcBodyState={naked=true, hard=true}, bodyState={naked=true}})
+		saynn("Why hold back now? Jacki is yours.")
+
+		saynn("Her pussy is basically milking your cock already anyway, pushing you over the edge. You welcome that, shoving your dick deep inside, breaking into Jacki's womb.")
+
+		saynn("[say=jacki]AH-Hh-h!..[/say]")
+
+		saynn("She throws her head back again and squirts while your throbbing member begins to shove its load directly into that babymaker, claiming and marking it with your {pc.cum}!")
+
+		saynn("Jacki is squirming as much as those chains allow, she moans each time your dick pulses and fills her up more.")
+
+		saynn("[say=jacki]F-fuck.. so much..[/say]")
+
+		saynn("After breeding that pussy properly, you pull out, letting it drip your seed.")
+
+		saynn("[say=pc]Good little breeding bitch.[/say]")
+
+		saynn("[say=jacki]Wruff-f..[/say]")
+
+		addButton("Continue", "See what happens next", "do_enslave_fuck_afterfuck")
+	if(state == "do_enslave_fuck_pullout"):
+		playAnimation(StageScene.HangingSex, "tease", {pc="jacki", npc="pc", npcBodyState={naked=true, hard=true}, bodyState={naked=true}})
+		saynn("There is no need to breed her. A big belly will only ruin her slim curves.")
+
+		saynn("Her pussy is basically milking your cock already anyway, pushing you over the edge. You catch that moment and pull moments before your member starts to throb and shoot thick {pc.cum} all over that fluffy ass!")
+
+		saynn("[say=jacki]Wruf-f-f~.. Yes.. Turn me into a cum dumpster~.[/say]")
+
+		saynn("You grunt while marking that fur with your seed. Jacki's pussy is still twitching after her own intense orgasm. The wolfie is panting softly.")
+
+		saynn("[say=pc]Good little fucktoy.[/say]")
+
+		saynn("[say=jacki]Thank you~.[/say]")
+
+		addButton("Continue", "See what happens next", "do_enslave_fuck_afterfuck")
+	if(state == "do_enslave_fuck_afterfuck"):
+		playAnimation(StageScene.HangingDuo, "idle", {npc="pc", pc="jacki", bodyState={naked=true}})
+		saynn("After that great fuck, you return back to the position before her.")
+
+		saynn("[say=pc]So? Who are you.[/say]")
+
+		saynn("[say=jacki]I'm.. I'm your slave~. Use me, abuse me, all you want~.[/say]")
+
+		saynn("[say=pc]Good.[/say]")
+
+		saynn("You grab the key and begin to slowly lock her pussy padlocks again, forcing her folds to stay closed together again.")
+
+		saynn("[say=pc]Your pussy is mine now.[/say]")
+
+		saynn("[say=jacki]Yes.. All my holes are..[/say]")
+
+		saynn("That's the spirit. You begin to unchain the wolfie.")
+
+		addButton("Continue", "See what happens next", "do_enslave_end")
+	if(state == "do_enslave_strapon"):
+		playAnimation(StageScene.HangingSex, "tease", {pc="jacki", npc="pc", npcBodyState={naked=true, hard=true}, bodyState={naked=true}})
+		saynn("Why not? You grab the offered strapon harness and secure it around your waist.")
+
+		saynn("Then you walk up closer to Jacki and bring the key to her pussy. As you unlock each padlock that holds her pussy folds together, little moans escape from the wolfie, her slit dripping juices onto your digits.")
+
+		saynn("[say=jacki]You wished to fuck this slutty cunt for so long, didn't you~.[/say]")
+
+		saynn("Since she is so cocky, you can't help but to slap her pussy lightly. But even that small impact is enough to make Jacki arch her back and gasp.")
+
+		saynn("[say=jacki]Ah.. fuck~..[/say]")
+
+		saynn("After unlocking her pussy, you position yourself behind her and thrust your new rubber cock between her thighs, dangerously close to the unbound flower.")
+
+		saynn("[say=pc]You are my slave. Understand?[/say]")
+
+		saynn("[say=jacki]I don't know, am I~?[/say]")
+
+		saynn("Ohh. She is being quite brave for someone in such a vulnerable position.")
+
+		addButton("Penetrate", "Start fuckin'", "do_enslave_strapon_penetrate")
+	if(state == "do_enslave_strapon_penetrate"):
+		playAnimation(StageScene.HangingSex, "sex", {pc="jacki", npc="pc", npcBodyState={naked=true, hard=true}, bodyState={naked=true}})
+		saynn("And so you align that strapon directly with her pussy hole.. and thrust inside. Jacki moans passionately while her slit finally gets penetrated after so much chastity time. Her inner walls are slick and tight, kneading their first cock in a great while. It's not exactly a real cock.. but it's good enough.")
+
+		saynn("[say=jacki]Fuck, this is amazing~..[/say]")
+
+		saynn("Your hand lands on her ass and spreads it, giving full access to Jacki's {jackiButt} anus. You decide to prod and rub it with your thumb, letting Jacki feel some familiar sensations as you fuck her.")
+
+		saynn("Chains dangle as you go balls deep on Jacki's cunt. Her wetness allows you to easily reach her cervix and start hammering away at it, sending shivers through her spine.")
+
+		saynn("[say=jacki]Nhh-h~!..[/say]")
+
+		addButton("Faster", "Fuck her faster", "do_enslave_strapon_faster")
+	if(state == "do_enslave_strapon_faster"):
+		playAnimation(StageScene.HangingSex, "fast", {pc="jacki", npc="pc", npcBodyState={naked=true, hard=true}, bodyState={naked=true}})
+		saynn("You increase the pace, fucking that needy slit faster and harder, your hips slamming against her fluffy butt. Loud slutty moans echo around the room, Jacki's tongue is out and drooling.")
+
+		saynn("[say=jacki]I'm.. I'm.. Nh-h-h!..[/say]")
+
+		saynn("With such an onslaught, it doesn't take long for Jacki to reach her peak. She throws her head back and cries out from pleasure while her unconstrained pussy gets all tight around your rubber cock. At the same time, her cervix does the opposite and becomes softer, allowing you to slowly stretch the little hole with each thrust.")
+
+		saynn("Stimulations are so intense that Jacki squirts, pushing the little urethra rod out of her pisshole, followed by a strong stream of transparent juices.")
+
+		saynn("[say=jacki]I'm your slave! Ah~! Your bitch, your little whore, your plaything, cocksleeve, slut~.[/say]")
+
+		saynn("Such a dirty slut. Makes you want to be rougher..")
+
+		addButton("Knot her", "Knot Jacki's pussy", "do_enslave_strapon_knot")
+	if(state == "do_enslave_strapon_knot"):
+		playAnimation(StageScene.HangingSex, "inside", {pc="jacki", npc="pc", npcBodyState={naked=true, hard=true}, bodyState={naked=true}})
+		saynn("Why hold back now? Jacki is yours.")
+
+		saynn("You pull that rubber cock almost fully out.. just to shove it fully inside moments later. The fat rubber orb puts a crazy amount of pressure on her slit.. until suddenly slipping inside, the tip breaking into Jacki's womb.")
+
+		saynn("[say=jacki]AH-Hh-h!..[/say]")
+
+		saynn("She throws her head back again and squirts while her slit clenches around your toy, making thrusting pretty much impossible.")
+
+		saynn("Jacki is squirming as much as those chains allow, she moans each time you try to tug your strapon out. There is a visible bump on her belly, caused by the toy.")
+
+		saynn("[say=jacki]F-fuck.. so big..[/say]")
+
+		saynn("You let that girl enjoy the feeling of being full for some time.. before finally yanking that knotted toy out.")
+
+		saynn("[say=pc]Good little bitch.[/say]")
+
+		saynn("[say=jacki]Ah! Wruff-f..[/say]")
+
+		addButton("Continue", "See what happens next", "do_enslave_fuck_afterfuck")
 func addPlasticBottleButtons():
 	var items = GM.pc.getInventory().getItemsWithTag(ItemTag.PlasticBottle)
 	for item in items:
@@ -3545,6 +3841,9 @@ func _react(_action: String, _args):
 	if(_action == "jog_anal_fuck"):
 		processTime(5*60)
 
+	if(_action == "jog_breed_fuck"):
+		processTime(5*60)
+
 	if(_action == "jog_afterchat_jogmore"):
 		processTime(10*60)
 		GM.pc.addStamina(10)
@@ -3613,6 +3912,26 @@ func _react(_action: String, _args):
 		processTime(5*60)
 		getModule("JackiModule").addCorruption(2)
 		getModule("JackiModule").addAnger(-2)
+
+	if(_action == "jog_breed_fuck_start"):
+		processTime(5*60)
+
+	if(_action == "jog_breed_fuck_faster"):
+		processTime(5*60)
+
+	if(_action == "jog_breed_fuck_cuminside"):
+		processTime(10*60)
+		getCharacter("jacki").cummedInVaginaBy("pc")
+		GM.pc.orgasmFrom("jacki")
+		getModule("JackiModule").addLust(10)
+		getModule("JackiModule").addCorruption(5)
+
+	if(_action == "jog_breed_fuck_pullout"):
+		processTime(10*60)
+		getCharacter("jacki").cummedOnBy("pc")
+		GM.pc.orgasmFrom("jacki")
+		getModule("JackiModule").addLust(5)
+		getModule("JackiModule").addCorruption(10)
 
 	if(_action == "jog_anal_fuck_inside"):
 		processTime(3*60)
@@ -3825,6 +4144,7 @@ func _react(_action: String, _args):
 	if(_action == "do_enslave_end"):
 		getCharacter("jacki").removeAllRestraints()
 		processTime(20*60)
+		addExperienceToPlayer(500)
 
 	if(_action == "do_enslave_brand_pick"):
 		setFlag("JackiModule.Jacki_ch2SlaveText", _args[0])
@@ -3835,6 +4155,46 @@ func _react(_action: String, _args):
 		setFlag("JackiModule.Jacki_ch2SlaveText", getTextboxData("jacki_tattoo"))
 		setState("do_enslave_brand_pick")
 		return
+
+	if(_action == "do_enslave_strapon"):
+		GM.pc.getInventory().forceEquipStoreOtherUnlessRestraint(GlobalRegistry.createItem("StraponCanine"))
+		processTime(3*60)
+
+	if(_action == "do_enslave_fuck"):
+		processTime(3*60)
+
+	if(_action == "do_enslave_nofuck"):
+		processTime(5*60)
+
+	if(_action == "do_enslave_fuck_penetrate"):
+		processTime(6*60)
+
+	if(_action == "do_enslave_fuck_faster"):
+		processTime(5*60)
+
+	if(_action == "do_enslave_fuck_cuminside"):
+		getCharacter("jacki").cummedInVaginaBy("pc")
+		GM.pc.orgasmFrom("jacki")
+		GM.pc.addSkillExperience(Skill.SexSlave, 50)
+
+	if(_action == "do_enslave_fuck_pullout"):
+		getCharacter("jacki").cummedOnBy("pc")
+		GM.pc.orgasmFrom("jacki")
+		GM.pc.addSkillExperience(Skill.SexSlave, 50)
+
+	if(_action == "do_enslave_fuck_afterfuck"):
+		processTime(10*60)
+		GM.pc.removeStrapon()
+
+	if(_action == "do_enslave_strapon_penetrate"):
+		processTime(6*60)
+
+	if(_action == "do_enslave_strapon_faster"):
+		processTime(5*60)
+
+	if(_action == "do_enslave_strapon_knot"):
+		GM.pc.orgasmFrom("jacki")
+		GM.pc.addSkillExperience(Skill.SexSlave, 50)
 
 	setState(_action)
 

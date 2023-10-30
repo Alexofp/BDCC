@@ -16,6 +16,7 @@ func _init():
 	"tail": {"skin": "SoftSpikySkin","g": Color("ff232323"),"b": Color("ff565656"),},
 	"legs": {"skin": "FerriSkin","b": Color("ff433837"),},
 	}
+	npcHasMenstrualCycle = true
 	
 func _getName():
 	return "Jacki Northstar"
