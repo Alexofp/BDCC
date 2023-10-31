@@ -3,6 +3,9 @@ class_name BaseCharacter
 
 #Base class that has all the functions
 signal stat_changed
+signal pain_changed(amount)
+signal lust_changed(amount)
+signal stamina_changed(amount)
 signal levelChanged
 signal skillLevelChanged(skillID)
 signal bodypart_changed
@@ -87,30 +90,39 @@ func getID():
 
 # Skips armor checks etc
 func addPain(_p: int):
+	var origPain = pain
 	pain += _p
 	if(pain > painThreshold()):
 		pain = painThreshold()
 	if(pain < 0):
 		pain = 0
 		
+	if(origPain != pain):
+		emit_signal("pain_changed", pain - origPain)
 	emit_signal("stat_changed")
 
 func addLust(_l: int):
+	var origLust = lust
 	lust += _l
 	if(lust > lustThreshold()):
 		lust = lustThreshold()
 	if(lust < 0):
 		lust = 0
 	
+	if(origLust != lust):
+		emit_signal("lust_changed", lust - origLust)
 	emit_signal("stat_changed")
 
 func addStamina(_s: int):
+	var origStamina = stamina
 	stamina += _s
 	if(stamina > getMaxStamina()):
 		stamina = getMaxStamina()
 	if(stamina < 0):
 		stamina = 0
 	
+	if(origStamina != stamina):
+		emit_signal("stamina_changed", stamina - origStamina)
 	emit_signal("stat_changed")
 
 func getPain() -> int:
