@@ -34,6 +34,7 @@ func getFlags():
 		"Jacki_ch2SlaveText": flag(FlagType.Text),
 		"Jacki_ch2GotPussyFreed": flag(FlagType.Bool),
 		"Jacki_ch2GotExtraPiercings": flag(FlagType.Bool),
+		"Jacki_punchingBagSceneHappened": flag(FlagType.Bool),
 		
 		"jackiCorruption": flag(FlagType.Number),
 		"jackiAnger": flag(FlagType.Number),
@@ -63,6 +64,7 @@ func _init():
 		
 		"res://Modules/JackiModule/Ch2/jackiCh2s1Intro.gd",
 		"res://Modules/JackiModule/Ch2/jackiCh2s2GymScene.gd",
+		"res://Modules/JackiModule/Ch2/jackiPunchingBagScene.gd",
 		]
 	characters = [
 		"res://Modules/JackiModule/JackiCharacter.gd",
