@@ -41,15 +41,7 @@ func doAttack(_attacker, _receiver, _context = {}):
 		result["text"] = "!No attack text provided!"
 	
 	result["attackerAnimation"] = getAttackSoloAnimation()
-	var receiverReactAnimation = getAttackHitReactAnimation(result)
-	var receiverAnimation = ""
-	if(_receiver.isBlocking()):
-		receiverAnimation = "block"
-	elif(_receiver.isDodging() || (result.has("dodged") && result["dodged"])):
-		receiverAnimation = "dodge"
-	elif(receiverReactAnimation != null):
-		receiverAnimation = receiverReactAnimation
-	result["receiverAnimation"] = receiverAnimation
+	result["receiverAnimation"] = getAttackHitReactAnimation(_attacker, _receiver, result)
 	
 	if(result.has("pain")):
 		result["pain"] = calcDamage(_attacker, _receiver, DamageType.Physical, result["pain"])
@@ -297,8 +289,12 @@ func checkDodged(_attacker, _receiver, _damageType, customDodgeMult = 1, minChan
 func getAttackSoloAnimation():
 	return ""
 	
-func getAttackHitReactAnimation(result):
-	if(result.has("pain") && result["pain"] > 0):
+func getAttackHitReactAnimation(_attacker, _receiver, _result):
+	if(_receiver.isBlocking()):
+		return "block"
+	elif(_receiver.isDodging() || (_result.has("dodged") && _result["dodged"])):
+		return "dodge"
+	elif(_result.has("pain") && _result["pain"] > 0):
 		return "hurt"
 	else:
 		return null
