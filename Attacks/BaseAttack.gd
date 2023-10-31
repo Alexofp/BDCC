@@ -41,13 +41,14 @@ func doAttack(_attacker, _receiver, _context = {}):
 		result["text"] = "!No attack text provided!"
 	
 	result["attackerAnimation"] = getAttackSoloAnimation()
+	var receiverReactAnimation = getAttackHitReactAnimation(result)
 	var receiverAnimation = ""
 	if(_receiver.isBlocking()):
 		receiverAnimation = "block"
 	elif(_receiver.isDodging() || (result.has("dodged") && result["dodged"])):
 		receiverAnimation = "dodge"
-	elif(result.has("pain") && result["pain"] > 0):
-		receiverAnimation = "hurt"
+	elif(receiverReactAnimation != null):
+		receiverAnimation = receiverReactAnimation
 	result["receiverAnimation"] = receiverAnimation
 	
 	if(result.has("pain")):
@@ -295,6 +296,12 @@ func checkDodged(_attacker, _receiver, _damageType, customDodgeMult = 1, minChan
 
 func getAttackSoloAnimation():
 	return ""
+	
+func getAttackHitReactAnimation(result):
+	if(result.has("pain") && result["pain"] > 0):
+		return "hurt"
+	else:
+		return null
 
 func scaledDmgStr(_damageType, _damage: int):
 	var damageMult = GM.pc.getDamageMultiplier(_damageType)
