@@ -328,6 +328,260 @@ func _run():
 			saynn("After that, Jacki nods and returns to her spot.")
 
 		addButton("Continue", "See what happens next", "endscene_removerestraints")
+	if(state == "won_risha"):
+		playAnimation(StageScene.Duo, "stand", {npc="risha", npcAction="defeat"})
+		saynn("Risha falls to her knees after being defeated. You kick her weapon away to prevent her from doing a sudden attack.")
+
+		saynn("[say=risha]Hah.. Fine, you two get to enjoy each other's companies this time.[/say]")
+
+		saynn("You could torture Risha more.. but you already got Jacki who is waiting.")
+
+		saynn("[say=pc]Get out of here.[/say]")
+
+		saynn("Risha slowly gets up and grabs her weapon before holstering it.")
+
+		saynn("[say=risha]Plenty of fish in the sea.[/say]")
+
+		saynn("[say=pc]Uh huh.[/say]")
+
+		saynn("And so Risha leaves you and Jacki alone.")
+
+		addButton("Jacki", "Look at her", "look_at_jacki")
+	if(state == "look_at_jacki"):
+		removeCharacter("risha")
+		playAnimation(StageScene.HangingDuo, "idle", {npc="pc", pc="jacki", bodyState={naked=true}})
+		saynn("Jacki is hanged by her cuffed paws, her toes can barely touch the ground. She is naked.. which puts her rich red bush between her legs out on display. A bush that hides a pussy slit. Slit that is constrained by the chastity piercings, holding its petals together.")
+
+		if (anger > -0.1):
+			saynn("[say=jacki]Don't know why you decided to save me after everything that you did. But.. thanks?[/say]")
+
+			saynn("Hmm..")
+
+		else:
+			saynn("[say=jacki]That was close.. Thank you for saving me.[/say]")
+
+			saynn("Hmm..")
+
+		addButton("Uncuff her", "Actually save Jacki", "actually_save_jacki")
+		if (anger > -0.1):
+			if (GM.pc.hasReachablePenis()):
+				addButtonWithChecks("Use her", "(Anal) Jacki is so vulnerable there. Maybe you should pick up where Risha has left off?", "do_betray_fuck", [], [ButtonChecks.HasReachablePenis])
+			else:
+				addButtonWithChecks("Use her", "(Anal) Jacki is so vulnerable there. Maybe you should pick up where Risha has left off?", "do_betray_strapon_pick", [], [ButtonChecks.HasStraponAndCanWear])
+		else:
+			if (GM.pc.hasReachablePenis()):
+				addButtonWithChecks("Betray her", "(Anal) Jacki is so vulnerable there. Maybe you should pick up where Risha has left off?", "do_betray_fuck", [], [ButtonChecks.HasReachablePenis])
+			else:
+				addButtonWithChecks("Betray her", "(Anal) Jacki is so vulnerable there. Maybe you should pick up where Risha has left off?", "do_betray_strapon_pick", [], [ButtonChecks.HasStraponAndCanWear])
+	if(state == "actually_save_jacki"):
+		playAnimation(StageScene.Duo, "stand", {npc="jacki"})
+		if (anger > -0.1):
+			saynn("You and Jacki aren't really friendly to each other.. but something made you decide to save her anyway.")
+
+		else:
+			saynn("You and Jacki are buddies so obviously you're gonna save her.")
+
+		saynn("[say=pc]Hold on.[/say]")
+
+		saynn("You wrap your arms around Jacki and pull her up, allowing her to get her cuffed paws off the hook with relative ease. Then you carefully set her back on the ground.")
+
+		saynn("Jacki instantly covers herself up and then goes ahead and puts on her dusty clothes.")
+
+		saynn("[say=jacki]Thanks again..[/say]")
+
+		if (anger > -0.1):
+			saynn("Such a kind wolfie. She covers up her blushy face and quickly walks away.")
+
+		else:
+			saynn("Such a kind wolfie. She gives you a warm hug, before covering up her blushy face and walking away.")
+
+			saynn("[say=jacki]I will be at my spot..[/say]")
+
+		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "do_betray_fuck"):
+		playAnimation(StageScene.HangingSex, "tease", {npc="pc", pc="jacki", bodyState={naked=true}, npcBodyState={naked=true, hard=true}})
+		if (anger > -0.1):
+			saynn("She thinks you did this to save her? Hah. What a silly wolfie. You silently expose your {pc.penis} and walk up behind her. Jacki quickly understands your intentions when you grab her tail and yank it high up to get access to her {jackiButt} butt.")
+
+			saynn("[say=jacki]H-hey.. Wait. I can offer you something else. Credits?[/say]")
+
+			saynn("She has offered you everything you would ever want. It's time to take it. You quickly ready your cock and align it with her clenching hole, your precum getting rubbed into her anal ring as you prod it.")
+
+			saynn("[say=jacki]That's not funny anymore.. Q-quit it.. Please?[/say]")
+
+			saynn("[say=pc]Shut up, whore.[/say]")
+
+		else:
+			saynn("Saving her would be such a heroic thing to do. But you're not a hero. You just do what you want to do. As you silently walk up behind Jacki and expose your {pc.penis}, she begins to act concerned.")
+
+			saynn("[say=jacki]Um.. What are you doing?[/say]")
+
+			saynn("She tries to look behind her but her raised arms limit that. She seems to understand your intentions when you grab her tail and yank it high up to get access to her {jackiButt} butt.")
+
+			saynn("[say=jacki]H-hey.. That's.. that's my butt.[/say]")
+
+			saynn("Indeed it is. You quickly ready your cock and align it with her clenching hole, your precum getting rubbed into her anal ring as you prod it.")
+
+			saynn("[say=jacki]That's not funny anymore.. Q-quit it.. Please?[/say]")
+
+			saynn("[say=pc]Shut up, whore.[/say]")
+
+		addButton("Stretch her", "Start fucking Jacki", "do_betray_fuck_stretch")
+	if(state == "do_betray_fuck_stretch"):
+		playAnimation(StageScene.HangingSex, "sex", {npc="pc", pc="jacki", bodyState={naked=true}, npcBodyState={naked=true, hard=true}})
+		saynn("The slut is clenching her ass tightly.. so you wrap your hand around her and pull on that red bush of pubic hair, making Jacki yowl from the pain, her tailhole pulsing enough for you to suddenly ram your cock inside, stretching her anal ring wide!")
+
+		saynn("[say=jacki]AGH!.. F-fuck.. Help! Anyone![/say]")
+
+		saynn("There are plenty of inmates around.. but they all are just watching the show. Looks like no one wants to mess with you after you have beaten that guard up. Good.")
+
+		saynn("You grab Jacki's muzzle and shut it close while you start fucking her ass, pulling your member back just to ram it deep down her unwilling hole again, your precum making her inner walls slick.")
+
+		saynn("[say=pc]No one's gonna help you. So you better get used to having your ass fucked.[/say]")
+
+		saynn("[say=jacki]Nh-h..[/say]")
+
+		saynn("The girl is still trying to resist and even bite.. but the restraints are keeping her body still for you. And biting.. is just met with you slapping her ass firmly. Each impact seems to make her asshole pulse around your cock again.. which feels great.")
+
+		addButton("Faster", "Pound her asshole raw", "do_betray_fuck_faster")
+	if(state == "do_betray_fuck_faster"):
+		playAnimation(StageScene.HangingSex, "fast", {npc="pc", pc="jacki", bodyState={naked=true}, npcBodyState={naked=true, hard=true}})
+		saynn("You pound that tailhole faster and harder while the poor wolfie is becoming desperate. Her {jackiButt} fuckhole is looking irritated from your roughness and lack of proper lube. But that's not your problem..")
+
+		saynn("[say=jacki]My ass.. T-too much.. nhh..[/say]")
+
+		saynn("Jacki throws her head back and whines loudly while her asshole starts gripping your shaft tight. Her body shivering, her tail spazzing out. The bitch is cumming it seems. And that pushes you to your own orgasm too, you grunt and growl into the ear of the wolfie that has seemingly given up resisting.")
+
+		saynn("After all this.. there is no way you're pulling out..")
+
+		addButton("Cum inside", "Stuff her ass", "do_betray_fuck_cuminside")
+	if(state == "do_betray_fuck_cuminside"):
+		playAnimation(StageScene.HangingSex, "inside", {npc="pc", pc="jacki", bodyState={naked=true}, npcBodyState={naked=true, hard=true}})
+		saynn("You shove your cock deep inside, creating a visible bump on Jacki's fit belly.. only for that bump to start becoming bigger as you cum inside her, your {pc.cum} filling her guts up and painting them white.")
+
+		saynn("[say=jacki]Ah-h.. f-fuck.. my ass.. huff..[/say]")
+
+		saynn("[say=pc]Good little slut.[/say]")
+
+		saynn("After using that girl, you pull out, letting her stuffed asshole to pulse more and leak your seed.")
+
+		saynn("[say=pc]Your ass is all you got.[/say]")
+
+		saynn("Jacki lowers her head, barely resisting.")
+
+		saynn("[say=jacki]..so rough..[/say]")
+
+		addButton("Free her", "Might as well help her now", "do_betray_afterfuck_free")
+		addButton("Just leave", "Whatever. She can get out somehow", "do_betray_afterfuck_nofree")
+	if(state == "do_betray_afterfuck_nofree"):
+		playAnimation(StageScene.Solo, "stand")
+		saynn("As you begin to walk away.. Jacki realizes that you're not planning to free her. But all you hear is a weak subby..")
+
+		saynn("[say=jacki]H-hey..[/say]")
+
+		saynn("..which is clearly not enough to change your mind.")
+
+		saynn("Fucking her was fun though.")
+
+		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "do_betray_afterfuck_free"):
+		playAnimation(StageScene.Duo, "stand", {npc="jacki"})
+		saynn("Ah, what the heck. You carefully wrap your arms around Jacki's waist and raise her enough for her to unhook her cuffed paws. Then you carefully put her on the ground.")
+
+		saynn("Jacki quickly grabs her clothes and covers herself.")
+
+		saynn("[say=jacki]I will.. go.. thanks..[/say]")
+
+		saynn("And after that, she quickly runs off. Wait. Did she really say thanks?")
+
+		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "do_betray_strapon_pick"):
+		saynn("Pick which strapon do you want to use to fuck Jacki's ass with?")
+
+		addButton("Never mind", "You changed your mind", "won_risha")
+		addStraponButtons()
+		if (false):
+			addButton("Nope", "You shouldn't see this", "do_betray_strapon")
+	if(state == "do_betray_strapon"):
+		playAnimation(StageScene.HangingSex, "tease", {npc="pc", pc="jacki", bodyState={naked=true}, npcBodyState={naked=true, hard=true}})
+		if (anger > -0.1):
+			saynn("She thinks you did this to save her? Hah. What a silly wolfie. You silently put on one of your strapons and walk up behind her. Jacki quickly understands your intentions when you grab her tail and yank it high up to get access to her {jackiButt} butt.")
+
+			saynn("[say=jacki]H-hey.. Wait. I can offer you something else. Credits?[/say]")
+
+			saynn("She has offered you everything you would ever want. It's time to take it. You quickly spit on your new rubber length and align it with her clenching hole, your saliva getting rubbed into her anal ring as the toy prods it.")
+
+			saynn("[say=jacki]That's not funny anymore.. Q-quit it.. Please?[/say]")
+
+			saynn("[say=pc]Shut up, whore.[/say]")
+
+		else:
+			saynn("Saving her would be such a heroic thing to do. But you're not a hero. You just do what you want to do. As you silently walk up behind Jacki and secure one of your strapons around your waist, she begins to act concerned.")
+
+			saynn("[say=jacki]Um.. What are you doing?[/say]")
+
+			saynn("She tries to look behind her but her raised arms limit that. She seems to understand your intentions when you grab her tail and yank it high up to get access to her {jackiButt} butt.")
+
+			saynn("[say=jacki]H-hey.. That's.. that's my butt.[/say]")
+
+			saynn("Indeed it is. You quickly spit on your new rubber length and align it with her clenching hole, your precum getting rubbed into her anal ring as you prod it.")
+
+			saynn("[say=jacki]That's not funny anymore.. Q-quit it.. Please?[/say]")
+
+			saynn("[say=pc]Shut up, whore.[/say]")
+
+		addButton("Stretch her", "Start fucking Jacki", "do_betray_strapon_stretch")
+	if(state == "do_betray_strapon_stretch"):
+		playAnimation(StageScene.HangingSex, "sex", {npc="pc", pc="jacki", bodyState={naked=true}, npcBodyState={naked=true, hard=true}})
+		saynn("The slut is clenching her ass tightly.. so you wrap your hand around her and pull on that red bush of pubic hair, making Jacki yowl from the pain, her tailhole pulsing enough for you to suddenly ram your strapon inside, stretching her anal ring wide!")
+
+		saynn("[say=jacki]AGH!.. F-fuck.. Help! Anyone![/say]")
+
+		saynn("There are plenty of inmates around.. but they all are just watching the show. Looks like no one wants to mess with you after you have beaten that guard up. Good.")
+
+		saynn("You grab Jacki's muzzle and shut it close while you start fucking her ass, pulling your fake member back just to ram it deep down her unwilling hole again, your saliva making her inner walls slick.")
+
+		saynn("[say=pc]No one's gonna help you. So you better get used to having your ass fucked.[/say]")
+
+		saynn("[say=jacki]Nh-h..[/say]")
+
+		saynn("The girl is still trying to resist and even bite.. but the restraints are keeping her body still for you. And biting.. is just met with you slapping her ass firmly. Each impact seems to make her asshole pulse around your rubber cock again..")
+
+		addButton("Faster", "Pound her asshole raw", "do_betray_strapon_faster")
+	if(state == "do_betray_strapon_faster"):
+		playAnimation(StageScene.HangingSex, "fast", {npc="pc", pc="jacki", bodyState={naked=true}, npcBodyState={naked=true, hard=true}})
+		saynn("You pound that tailhole faster and harder while the poor wolfie is becoming desperate. Her {jackiButt} fuckhole is looking irritated from your roughness and lack of proper lube. But that's not your problem..")
+
+		saynn("[say=jacki]My ass.. T-too much.. nhh..[/say]")
+
+		saynn("Jacki throws her head back and whines loudly while her asshole starts gripping your rubber shaft tight. Her body shivering, her tail spazzing out. The bitch is cumming it seems. You don't get much stimulation yourself.. but you grunt and growl anyway into the ear of the wolfie that has seemingly given up resisting.")
+
+		saynn("After all this.. there is no way you're pulling out..")
+
+		addButton("Deeper", "Stuff her ass", "do_betray_strapon_cuminside")
+	if(state == "do_betray_strapon_cuminside"):
+		playAnimation(StageScene.HangingSex, "inside", {npc="pc", pc="jacki", bodyState={naked=true}, npcBodyState={naked=true, hard=true}})
+		saynn("You shove your strapon deep inside, creating a visible bump on Jacki's fit belly.. This sudden motion makes her moan and start squirming actively, her body shivering again.")
+
+		saynn("[say=jacki]Ah-h.. f-fuck.. my ass.. huff..[/say]")
+
+		saynn("[say=pc]Good little slut.[/say]")
+
+		saynn("After straponing that girl, you finally pull out, letting her stuffed asshole to pulse.")
+
+		saynn("[say=pc]Your ass is all you got.[/say]")
+
+		saynn("Jacki lowers her head, barely resisting.")
+
+		saynn("[say=jacki]..so rough..[/say]")
+
+		addButton("Free her", "Might as well help her now", "do_betray_afterfuck_free")
+		addButton("Just leave", "Whatever. She can get out somehow", "do_betray_afterfuck_nofree")
+func addStraponButtons():
+	var strapons = GM.pc.getStrapons()
+	for strapon in strapons:
+		addButton(strapon.getVisibleName(), strapon.getVisibleDescription(), "do_betray_strapon", [strapon])
+
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
@@ -384,6 +638,59 @@ func _react(_action: String, _args):
 		processTime(10*60)
 		getModule("JackiModule").addLust(2)
 		getModule("JackiModule").addAnger(-5)
+
+	if(_action == "look_at_jacki"):
+		processTime(5*60)
+
+	if(_action == "actually_save_jacki"):
+		getModule("JackiModule").addAnger(-30)
+		getCharacter("jacki").removeAllRestraints()
+
+	if(_action == "do_betray_fuck_stretch"):
+		if(!getModule("JackiModule").doBetray()):
+			getModule("JackiModule").addAnger(40)
+		getModule("JackiModule").advanceSkill("jackiSkillButtslut")
+		getModule("JackiModule").makeJackiBusy()
+
+	if(_action == "do_betray_fuck_faster"):
+		processTime(5*60)
+
+	if(_action == "do_betray_fuck_cuminside"):
+		processTime(6*60)
+		getModule("JackiModule").addCorruption(2)
+		getCharacter("jacki").cummedInAnusBy("pc")
+		GM.pc.orgasmFrom("jacki")
+
+	if(_action == "do_betray_afterfuck_free"):
+		processTime(5*60)
+		GM.pc.unequipStrapon()
+		getCharacter("jacki").removeAllRestraints()
+		getModule("JackiModule").addAnger(-2)
+
+	if(_action == "do_betray_afterfuck_nofree"):
+		processTime(5*60)
+		GM.pc.unequipStrapon()
+		getCharacter("jacki").removeAllRestraints()
+
+	if(_action == "do_betray_strapon"):
+		processTime(5*60)
+		var strapon = _args[0]
+		GM.pc.getInventory().forceEquipStoreOtherUnlessRestraint(strapon)
+
+	if(_action == "do_betray_strapon_stretch"):
+		if(!getModule("JackiModule").doBetray()):
+			getModule("JackiModule").addAnger(40)
+		getModule("JackiModule").advanceSkill("jackiSkillButtslut")
+		getModule("JackiModule").makeJackiBusy()
+
+	if(_action == "do_betray_strapon_faster"):
+		processTime(5*60)
+
+	if(_action == "do_betray_strapon_cuminside"):
+		processTime(6*60)
+		getModule("JackiModule").addCorruption(2)
+		getCharacter("jacki").cummedInAnusBy("pc", FluidSource.Strapon)
+		GM.pc.orgasmFrom("jacki")
 
 	setState(_action)
 
