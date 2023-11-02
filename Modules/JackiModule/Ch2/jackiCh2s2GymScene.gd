@@ -4152,7 +4152,11 @@ func _react(_action: String, _args):
 	if(_action == "do_enslave_brand_dotype"):
 		if(getTextboxData("jacki_tattoo") == ""):
 			return
-		setFlag("JackiModule.Jacki_ch2SlaveText", getTextboxData("jacki_tattoo"))
+		var theText = getTextboxData("jacki_tattoo")
+		if(theText == null):
+			theText = "buttslut"
+		theText = Util.sanitizePlayerEnteredString(theText, "buttslut")
+		setFlag("JackiModule.Jacki_ch2SlaveText", theText)
 		setState("do_enslave_brand_pick")
 		return
 

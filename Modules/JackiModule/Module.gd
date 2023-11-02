@@ -65,6 +65,7 @@ func _init():
 		"res://Modules/JackiModule/Ch2/jackiCh2s1Intro.gd",
 		"res://Modules/JackiModule/Ch2/jackiCh2s2GymScene.gd",
 		"res://Modules/JackiModule/Ch2/jackiPunchingBagScene.gd",
+		"res://Modules/JackiModule/Ch2/jackiUrinalScene.gd",
 		]
 	characters = [
 		"res://Modules/JackiModule/JackiCharacter.gd",

@@ -639,3 +639,13 @@ static func _levenshtein_distance(str1:String, str2:String)->int:
 				d[i][j-1]+1),
 				d[i-1][j-1]+substitution_cost))
 	return d[-1][-1]
+
+static func sanitizePlayerEnteredString(inputStr:String, emptyStr:String=""):
+	inputStr = inputStr.replace("{", "")
+	inputStr = inputStr.replace("}", "")
+	inputStr = inputStr.replace("[", "")
+	inputStr = inputStr.replace("]", "")
+	inputStr = inputStr.replace("\"", "")
+	if(inputStr == ""):
+		return emptyStr
+	return inputStr
