@@ -7,6 +7,10 @@ var buttScore = 0
 var waterScore = 0
 var sawBefore = false
 var wasRektBefore = false
+var onlyOne = false
+var didAnything = false
+var swallowedCum = false
+var swallowedPiss = false
 
 func _init():
 	sceneID = "jackiUrinalScene"
@@ -134,10 +138,20 @@ func _run():
 		saynn("Jacki looks.. dry.. for now. Looks like nobody has used her yet.")
 
 		addButton("Intimidate", "Tell them to free Jacki right now", "intimidate")
-		addButtonWithChecks("Use Jacki", "Pay 10 credits and use Jacki", "pay10", [], [[ButtonChecks.HasCredits, 10]])
+		addButtonWithChecks("Use Jacki", "Pay 10 credits and use Jacki", "pay10", [], [[ButtonChecks.HasCredits, 10], ButtonChecks.HasReachablePenisOrVaginaOrHasStrapon])
 		addButtonWithChecks("Pay 45 creds", "Pay for Jacki's debt", "dec_payfordept", [], [[ButtonChecks.HasCredits, 45]])
 		addButton("Offer self", "Offer them to cuff you to the urinal instead", "offerself")
 		addButton("Just leave", "Whatever. It's not your problem", "just_leave")
+	if(state == "pay10"):
+		saynn("You decide to give them ten creds, enough to use Jacki once.")
+
+		saynn("[say=gymbully]Have fun.[/say]")
+
+		saynn("You approach Jacki.. Her eyes become wider as she understands that she isn't getting out of her position any time soon..")
+
+		saynn("Let's see..")
+
+		addButton("Continue", "See what happens next", "pick_what_do")
 	if(state == "just_leave"):
 		saynn("[say=pc]No. I'm good.[/say]")
 
@@ -173,6 +187,25 @@ func _run():
 		saynn("[say=gymbully]It's not over yet.[/say]")
 
 		addButton("Fight", "Start the fight", "third_fight")
+	if(state == "lost_to_bullies"):
+		playAnimation(StageScene.Solo, "defeat")
+		saynn("You lost.. unfortunately. You can't fight anymore so you drop to your knees before the 3 gang members.")
+
+		saynn("[say=gymbully]Since you are so eager to save this inmate.. We might as well free her. And put her debt on you.[/say]")
+
+		saynn("[say=gymbully3]Yeah, you're gonna be the meat toilet, bitch![/say]")
+
+		saynn("After Jacki's ring gag and cuffs are removed, she walks up to you, still naked.")
+
+		saynn("[say=jacki]You didn't have to.. I could have taken it..[/say]")
+
+		saynn("[say=pc]It's okay.[/say]")
+
+		saynn("[say=jacki]Wruff..[/say]")
+
+		saynn("Now the quiet guy approaches you, the same restraints in his hands.")
+
+		addButton("Continue", "See what happens next", "pc_gets_put_into_urinal")
 	if(state == "won_thirdfight"):
 		removeCharacter("gymbully3")
 		removeCharacter("gymbully2")
@@ -197,7 +230,7 @@ func _run():
 		saynn("She looks so vulnerable.. huh.. Makes you wonder if she gets into these situations on purpose.")
 
 		addButton("Free her", "Free the wolfie", "free_jacki_afterwin")
-		addButton("Use her", "There are a few ways to use her in her current position..", "use_jacki")
+		addButtonWithChecks("Use her", "There are a few ways to use her in her current position..", "use_jacki_afterwin", [], [ButtonChecks.HasReachablePenisOrVaginaOrHasStrapon])
 	if(state == "free_jacki_afterwin"):
 		playAnimation(StageScene.Hug, "hug", {npc="jacki", npcBodyState={naked=true}})
 		saynn("It takes you a while but you manage to remove Jacki's restraints. Then you carefully get her out of that precarious position. Her clothes are nowhere in sight though.")
@@ -428,6 +461,207 @@ func _run():
 		saynn("Oh well.. It was you or Jacki.")
 
 		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "use_jacki_afterwin"):
+		playAnimation(StageScene.UrinalPeeing, "idle", {pc="jacki", npc="pc", bodyState={naked=true}})
+		saynn("Well. Since you won.. You might as well claim your prize.. mark it, you know?")
+
+		saynn("Jacki tilts her head slightly, seeing your mischievous stare.")
+
+		saynn("[say=jacki]Oh.. You aren't planning on saving me, are you.. What kinky stuff are you gonna do to me..[/say]")
+
+		saynn("Let's see..")
+
+		addButton("Continue", "See what you can do with Jacki", "pick_what_do")
+	if(state == "pick_what_do"):
+		playAnimation(StageScene.UrinalPeeing, "idle", {pc="jacki", npc="pc", bodyState={naked=true}})
+		saynn("What do you wanna do with Jacki?")
+
+		if (onlyOne):
+			saynn("You will only be able to do one thing with her.")
+
+		addButtonWithChecks("Stroke cock", "Cum all over her face", "pick_stroke", [], [ButtonChecks.HasReachablePenis])
+		addButtonWithChecks("Rub pussy", "Squirt all over her face", "pick_rubpussy", [], [ButtonChecks.HasReachableVagina])
+		addButtonWithChecks("Fuck her ass", "It would be a little awkward.. but nothing is impossible", "pick_fuckass", [], [ButtonChecks.HasReachablePenis])
+		addButtonWithChecks("Strapon her ass", "It would be a little awkward.. but nothing is impossible", "pick_straponass_pick", [], [ButtonChecks.HasStraponAndCanWear])
+		if (!onlyOne):
+			addButton("Enough", "Enough fun", "pick_enoughfun")
+	if(state == "pick_enoughfun"):
+		if (didAnything):
+			saynn("You properly used Jacki as the meat toilet. Her mind got so corrupted by now that she doesn't even mind it.")
+
+			saynn("But.. should you free her now?")
+
+		else:
+			saynn("After seeing what you can do.. you decided you'd rather not do anything with Jacki. Fair enough.")
+
+			saynn("But.. should you free her now?")
+
+		addButton("Free Jacki", "Remove her restraints", "enough_free")
+		addButton("Walk away", "She will be fine there", "enough_justwalk")
+	if(state == "enough_justwalk"):
+		playAnimation(StageScene.Solo, "stand")
+		saynn("Whatever. You saved Jacki from bullies. But that doesn't mean you should save her from her current precarious situation. Urinals are dirty too, rather not get all that stuff on you.")
+
+		saynn("So you give Jacki a little nod and proceed to walk away.")
+
+		saynn("[say=jacki]Umm.. What about.. cuffs..[/say]")
+
+		saynn("She will find a way to escape them, she is a smart girl.")
+
+		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "enough_free"):
+		playAnimation(StageScene.Duo, "stand", {npc="jacki", npcBodyState={naked=true}})
+		saynn("It takes you some time. But you manage to remove Jacki's cuffs and gag.")
+
+		saynn("She wants to hug you at first.. but then decides against it, considering where and who she was not that long ago.")
+
+		saynn("[say=jacki]Well.. thank you. Wruff![/say]")
+
+		saynn("Thank you? After what you did?")
+
+		if (swallowedPiss):
+			saynn("[say=jacki]I still have the taste of your piss in my mouth..[/say]")
+
+			saynn("She stays silent for a few seconds.. licking her lips.")
+
+			saynn("[say=jacki]Gross~.[/say]")
+
+		elif (swallowedCum):
+			saynn("[say=jacki]I still have the taste of your.. jizz.. in my mouth..[/say]")
+
+			saynn("She stays silent for a few seconds.. licking her lips.")
+
+			saynn("[say=jacki]Salty~.[/say]")
+
+		else:
+			saynn("[say=jacki]I was getting kinda thirsty in there.. sad you didn't decide to fix that.. oh well.[/say]")
+
+		saynn("Jacki looks around. Her clothes are nowhere in sight.")
+
+		saynn("[say=jacki]I can go now, right?..[/say]")
+
+		saynn("[say=pc]Sure.[/say]")
+
+		saynn("[say=jacki]Gonna have to find my clothes.. Let's hope I won't get blackmailed~.[/say]")
+
+		saynn("And so Jacki walks away, still naked.")
+
+		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "after_once_use"):
+		playAnimation(StageScene.Duo, "stand", {npc="gymbully"})
+		saynn("Well, you used Jacki for her intended purpose. But now it's time to go.")
+
+		saynn("[say=gymbully]Tell your friends.[/say]")
+
+		saynn("[say=gymbully3]Thank you for the creds~. Baaai.[/say]")
+
+		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "pick_stroke"):
+		playAnimation(StageScene.UrinalPeeing, "stroke", {pc="jacki", npc="pc", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		saynn("You expose your {pc.penis} and quickly get it hard, rubbing it right in front of Jacki while she is forced to offer you her blushy face, her eyes directed away.")
+
+		saynn("[say=pc]Look at my cock, slut.[/say]")
+
+		saynn("She sees a drop of precum dripping off the tip of your member.. and looks away again. So you grab her by the hair and make her look at you before smacking her cheek with your member. So humiliating..")
+
+		saynn("[say=pc]Like that. Stare at it, whore.[/say]")
+
+		saynn("She nods and proceeds to carefully watch as you stroke your cock in front of her face, your hand motions getting faster and faster. The closer you are to your orgasm, the more Jacki flinches from every random motion.")
+
+		saynn("[say=pc]Take it all..[/say]")
+
+		addButton("Cum", "Leave a mess on that cute face of hers", "pick_stroke_cum")
+	if(state == "pick_stroke_cum"):
+		playAnimation(StageScene.UrinalPeeing, "stroke", {pc="jacki", npc="pc", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		saynn("You grunt as your {pc.penis} starts throbbing and shooting thick strings of {pc.cum} all over Jacki's face, leaving quite a mess. Some of your seed lands on her hair and face.. but some goes directly into her mouth, forcing her to taste you.")
+
+		saynn("[say=pc]Swallow, bitch.[/say]")
+
+		saynn("She can't really close her mouth with that metal ring.. so you see quite clearly how her throat opens to accept your slimy load.")
+
+		saynn("[say=pc]Good little cum dumpster.[/say]")
+
+		saynn("Her cheeks blush brightly.")
+
+		addButton("Continue", "See what happens next", "return_back_or_enough")
+		addButtonWithChecks("Piss on", "Use her as a piss toilet too", "pick_stroke_piss", [], [[ButtonChecks.ContentEnabled, ContentType.Watersports]])
+	if(state == "pick_stroke_piss"):
+		playAnimation(StageScene.UrinalPeeing, "pee", {pc="jacki", npc="pc", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		saynn("You're not done yet.. After that last orgasm, a different kind of urge quickly rises in your body.")
+
+		saynn("One of Jacki's eyes is closed because of the {pc.cum}.. but she can see quite clearly with the other one that you are gearing to do something else..")
+
+		saynn("And yeah, after a few seconds, a stream of your golden piss suddenly hits her face, washing all over her fur.")
+
+		saynn("[say=jacki]Nhhhh!![/say]")
+
+		saynn("She coughs as some of it lands on her tongue.. forcing her to taste your gross urine. After filling her mouth, you guide the stream to wash over her body too, giving her small tits and slim body a golden shower.")
+
+		saynn("[say=pc]Shut up, piss toilet.[/say]")
+
+		saynn("Jacki is blushing deeply as you mark her fur with your scent. She looks like such a wet mess now..")
+
+		saynn("Feels so good to just let it out though.")
+
+		addButton("Continue", "See what happens next", "return_back_or_enough")
+	if(state == "pick_rubpussy"):
+		playAnimation(StageScene.UrinalPeeing, "peefemale", {pc="jacki", npc="pc", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		saynn("You quickly expose your {pc.pussyStretch} pussy and move your body closer, making it so your pussy hovers close near Jacki's muzzle. So close that you can feel her hot breath on your sensitive flesh, making you oh so horny..")
+
+		saynn("[say=pc]Sniff it.[/say]")
+
+		saynn("Jacki guides her eyes away.. so you slap her face and make her look at your pussy.")
+
+		saynn("[say=pc]Now.[/say]")
+
+		saynn("The wolfie's nose twitches as she does as ordered, sniffing your wet cunt as you spread it.")
+
+		saynn("[say=pc]Good bitch.[/say]")
+
+		saynn("Your digits slide a little higher and begin rubbing your little clit with side-to-side motions. It feels good and Jacki's breath makes it so much more kinky. Little moans escape from you as you pleasure yourself in front of that meat toilet.")
+
+		saynn("After getting your slit sufficiently moist, you spread the folds again and slide two digits inside, stretching the pussy hole itself. You wiggle them a bit and then proceed to move them in and out, fingering yourself.")
+
+		saynn("[say=pc]Bet you wish you would be able to do that, right~? Are you desperate, slut?[/say]")
+
+		saynn("Jacki huffs at you pussy.. soon followed by you slapping her face again.")
+
+		saynn("[say=pc]What a slut~.[/say]")
+
+		saynn("Your digits keep hammering away at your pleasure spot faster and harder.. causing your slit to make wet noises. Your moans grow hotter..")
+
+		addButton("Cum", "Make that slut wet", "pick_rubpussy_squirt")
+	if(state == "pick_rubpussy_squirt"):
+		playAnimation(StageScene.UrinalPeeing, "peefemale", {pc="jacki", npc="pc", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		saynn("And so you throw your head back and let out a passionate cry as you push yourself over the edge.. and even further.. overstimulating your pussy slit to the point of it suddenly gushing out a torrent of girlcum on that wolfie's face!")
+
+		saynn("You make that slut's fur wet with your juices.. but some of it also lands onto her tongue, making her taste your lewd fluids.")
+
+		saynn("[say=pc]Good.. Such a good meat toilet.[/say]")
+
+		saynn("Your legs are shaking a little after that orgasm. Feels good..")
+
+		addButton("Continue", "See what happens next", "return_back_or_enough")
+		addButtonWithChecks("Piss on", "Use her as a piss toilet too", "pick_pussrub_piss", [], [[ButtonChecks.ContentEnabled, ContentType.Watersports]])
+	if(state == "pick_pussrub_piss"):
+		playAnimation(StageScene.UrinalPeeing, "peefemale", {pc="jacki", npc="pc", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		saynn("After that orgasm.. you still have an urge to satisfy.. a different kind of urge.")
+
+		saynn("Jacki tilts her head slightly as you don't pull your pussy away, instead just hovering it near her face for some reason, your digits holding it spread. But the reasoning quickly becomes obvious..")
+
+		saynn("A strong stream of your piss emerges from your urethra and hits Jacki's fur. It begins streaming down her hair, face, shoulders, tits, belly.. Some of it gets into Jacki's mouth, causing her to cough from the gross taste.")
+
+		saynn("[say=pc]Gulp it up, piss slut.[/say]")
+
+		saynn("Jacki tries to keep her mouth away from the stream.. but that only makes you purposely piss directly into it, forcing the wolfie to swallow at least some of it.")
+
+		saynn("[say=pc]Good toilet.[/say]")
+
+		saynn("Soon, your stream of piss begins to die down, leaving Jacki.. drenched.. in your gross smelly fluids. She is now marked by them. Good.")
+
+		saynn("Jacki looks at you with big puppy eyes after that, her cheeks still red.")
+
+		addButton("Continue", "See what happens next", "return_back_or_enough")
 var randomSexIsPlaying = false
 func playRandomSexAnim():
 	if(randomSexIsPlaying):
@@ -475,6 +709,7 @@ func _react(_action: String, _args):
 
 	if(_action == "pay10"):
 		GM.pc.addCredits(-10)
+		onlyOne = true
 
 	if(_action == "offerself"):
 		processTime(5*60)
@@ -511,6 +746,11 @@ func _react(_action: String, _args):
 		getModule("JackiModule").addAnger(-20)
 		getModule("JackiModule").addCorruption(-20)
 
+	if(_action == "use_jacki_afterwin"):
+		processTime(10*60)
+		#if(!getModule("JackiModule").doBetray()):
+		#	getModule("JackiModule").addAnger(20)
+
 	if(_action == "ask_okay_after_free"):
 		processTime(3*60)
 		getCharacter("jacki").removeAllRestraints()
@@ -542,6 +782,66 @@ func _react(_action: String, _args):
 		GM.pc.addCredits(5)
 		addMessage("You got 5 credits for being a meat toilet..")
 
+	if(_action == "pick_stroke"):
+		didAnything = true
+		swallowedCum = true
+
+	if(_action == "pick_rubpussy"):
+		didAnything = true
+		swallowedCum = true
+
+	if(_action == "pick_fuckass"):
+		didAnything = true
+
+	if(_action == "pick_straponass_pick"):
+		didAnything = true
+
+	if(_action == "enough_free"):
+		processTime(10*60)
+		getCharacter("jacki").removeAllRestraints()
+		getModule("JackiModule").addAnger(-5)
+
+	if(_action == "enough_justwalk"):
+		getModule("JackiModule").makeJackiBusy()
+		getModule("JackiModule").addAnger(10)
+		getCharacter("jacki").removeAllRestraints()
+
+	if(_action == "pick_stroke_cum"):
+		processTime(5*60)
+		getCharacter("jacki").cummedOnBy("pc", FluidSource.Penis, RNG.randf_range(0.6, 0.8))
+		getCharacter("jacki").cummedInMouthBy("pc", FluidSource.Penis)
+		GM.pc.orgasmFrom("jacki")
+		getModule("JackiModule").addCorruption(5)
+
+	if(_action == "return_back_or_enough"):
+		if(onlyOne):
+			setState("after_once_use")
+			getModule("JackiModule").makeJackiBusy()
+		else:
+			setState("pick_what_do")
+		return
+
+	if(_action == "pick_stroke_piss"):
+		processTime(5*60)
+		getCharacter("jacki").cummedOnBy("pc", FluidSource.Pissing, RNG.randf_range(0.5, 1.0))
+		getCharacter("jacki").cummedInMouthBy("pc", FluidSource.Pissing, RNG.randf_range(0.2, 0.3))
+		getModule("JackiModule").advanceSkill("jackiSkillWatersports")
+		swallowedPiss = true
+
+	if(_action == "pick_rubpussy_squirt"):
+		processTime(5*60)
+		getCharacter("jacki").cummedOnBy("pc", FluidSource.Vagina, RNG.randf_range(0.6, 0.8))
+		getCharacter("jacki").cummedInMouthBy("pc", FluidSource.Vagina, RNG.randf_range(0.2, 0.4))
+		GM.pc.orgasmFrom("jacki")
+		getModule("JackiModule").addCorruption(5)
+
+	if(_action == "pick_pussrub_piss"):
+		processTime(5*60)
+		getCharacter("jacki").cummedOnBy("pc", FluidSource.Pissing, RNG.randf_range(0.5, 1.0))
+		getCharacter("jacki").cummedInMouthBy("pc", FluidSource.Pissing, RNG.randf_range(0.2, 0.3))
+		getModule("JackiModule").advanceSkill("jackiSkillWatersports")
+		swallowedPiss = true
+
 	setState(_action)
 
 func _react_scene_end(_tag, _result):
@@ -555,6 +855,10 @@ func _react_scene_end(_tag, _result):
 		else:
 			setState("lost_to_bullies")
 			addExperienceToPlayer(5)
+			getModule("JackiModule").addAnger(-20)
+			getModule("JackiModule").addLust(-20)
+			getModule("JackiModule").addCorruption(-20)
+			getCharacter("jacki").removeAllRestraints()
 
 	if(_tag == "second_fight"):
 		processTime(10 * 60)
@@ -588,6 +892,10 @@ func saveData():
 	data["waterScore"] = waterScore
 	data["sawBefore"] = sawBefore
 	data["wasRektBefore"] = wasRektBefore
+	data["onlyOne"] = onlyOne
+	data["didAnything"] = didAnything
+	data["swallowedCum"] = swallowedCum
+	data["swallowedPiss"] = swallowedPiss
 
 	return data
 
@@ -601,3 +909,7 @@ func loadData(data):
 	waterScore = SAVE.loadVar(data, "waterScore", 0)
 	sawBefore = SAVE.loadVar(data, "sawBefore", false)
 	wasRektBefore = SAVE.loadVar(data, "wasRektBefore", false)
+	onlyOne = SAVE.loadVar(data, "onlyOne", false)
+	didAnything = SAVE.loadVar(data, "didAnything", false)
+	swallowedCum = SAVE.loadVar(data, "swallowedCum", false)
+	swallowedPiss = SAVE.loadVar(data, "swallowedPiss", false)
