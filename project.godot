@@ -1034,6 +1034,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Game/Pregnancy/SpeciesCompatibility.gd"
 }, {
+"base": "Reference",
+"class": "SpeechModifierBase",
+"language": "GDScript",
+"path": "res://Game/SpeechModifierBase.gd"
+}, {
 "base": "Spatial",
 "class": "Stage3D",
 "language": "GDScript",
@@ -1345,6 +1350,7 @@ _global_script_class_icons={
 "SkinType": "",
 "Species": "",
 "SpeciesCompatibility": "",
+"SpeechModifierBase": "",
 "Stage3D": "",
 "StageScene": "",
 "Stat": "",
