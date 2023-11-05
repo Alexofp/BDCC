@@ -170,6 +170,9 @@ func _init():
 	quests = [
 		"res://Modules/RahiModule/RahiSlaveryQuest.gd",
 	]
+	speechModifiers = [
+		"res://Modules/RahiModule/FelineSpeech.gd"
+	]
 
 func resetFlagsOnNewDay():
 	if(getFlag("RahiModule.rahiSlaveryDidTaskToday", false)):

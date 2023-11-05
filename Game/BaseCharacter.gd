@@ -469,11 +469,9 @@ func formatSay(text):
 	if(GM.ui != null):
 		text = GM.ui.processString(text)
 	
-	if(isGagged() && GM.pc.hasPerk(Perk.BDSMGagTalk)):
-		return "[color="+color+"]\""+Util.muffledSpeech(text)+"\" ("+text+")[/color]"
-	
-	if(isGagged()):
-		text = Util.muffledSpeech(text)
+	for speechModifier in GlobalRegistry.getSpeechModifiers():
+		if(speechModifier.appliesTo(self)):
+			text = speechModifier.modify(text, self)
 	
 	return "[color="+color+"]\""+text+"\"[/color]"
 
