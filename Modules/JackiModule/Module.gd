@@ -35,6 +35,7 @@ func getFlags():
 		"Jacki_ch2GotPussyFreed": flag(FlagType.Bool),
 		"Jacki_ch2GotExtraPiercings": flag(FlagType.Bool),
 		"Jacki_punchingBagSceneHappened": flag(FlagType.Bool),
+		"Jacki_urinalSceneHappened": flag(FlagType.Bool),
 		
 		"jackiCorruption": flag(FlagType.Number),
 		"jackiAnger": flag(FlagType.Number),
@@ -94,7 +95,7 @@ func addCorruption(howMuch, showMessage = true):
 	if(howMuch > 0.0 && currentCorruption > 1.0):
 		currentCorruption = 1.0
 		
-		addAnger(-howMuch/2.0, showMessage)
+		addAnger(-howMuch/2.0*100.0, showMessage)
 	if(howMuch < 0.0 && currentCorruption < 0.0):
 		currentCorruption = 0.0
 	
@@ -116,7 +117,7 @@ func addLust(howMuch, showMessage = true):
 	if(howMuch > 0.0 && currentCorruption > 1.0):
 		currentCorruption = 1.0
 		
-		addCorruption(-howMuch/2.0, showMessage)
+		addCorruption(howMuch/2.0*100.0, showMessage)
 	if(howMuch < 0.0 && currentCorruption < 0.0):
 		currentCorruption = 0.0
 	

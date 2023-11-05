@@ -727,6 +727,7 @@ func _react(_action: String, _args):
 		GM.pc.addSkillExperience(Skill.SexSlave, 10)
 	
 	if(_action == "endthescene"):
+		getCharacter("jacki").removeAllRestraints()
 		endScene()
 		return
 

@@ -662,6 +662,299 @@ func _run():
 		saynn("Jacki looks at you with big puppy eyes after that, her cheeks still red.")
 
 		addButton("Continue", "See what happens next", "return_back_or_enough")
+	if(state == "pick_fuckass"):
+		playAnimation(StageScene.UrinalSex, "teasing", {pc="jacki", npc="pc", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		saynn("You have a burning desire to fuck Jacki while she is stuck in there. She is not in the most prime position for that.. but you just about manage to reach her asshole, propping up her butt with your legs and bringing hers high.")
+
+		if (buttScore <= 0):
+			saynn("The wolfie instantly feels concerned when she feels your {pc.penis} prodding her {jackiButt} asshole. So tight that her anal ring refuses to open. But nothing stops you from trying to force yourself in.")
+
+			saynn("[say=jacki]H-Hey.. Not there.. I don't do stuff with that hole..[/say]")
+
+			saynn("[say=pc]So?[/say]")
+
+			saynn("She might not have much experience with anal sex.. but here is her chance to start.")
+
+		elif (buttScore <= 3):
+			saynn("The wolfie instantly feels concerned when she feels your {pc.penis} prodding her {jackiButt} asshole. Her anal ring is resisting your attempts at penetrating it by clenching.. but you feel like you can still force yourself in.")
+
+			saynn("[say=jacki]H-hey.. That's my asshole..[/say]")
+
+			saynn("[say=pc]Uh huh.[/say]")
+
+			saynn("She might not have enough experience to be comfortable with anal sex.. but here is her chance to get more.")
+
+		else:
+			saynn("The wolfie makes a cute noise when she feels your {pc.penis} prodding her {jackiButt} asshole. Her anal ring is trained quite well by now, stretching obediently under your onslaught.. But Jacki is still clenching.")
+
+			saynn("[say=jacki]You gonna.. Stretch my asshole wide.. here.. wruff..[/say]")
+
+			saynn("[say=pc]What a slut.[/say]")
+
+			saynn("Looks like wolfie is just begging for you to ram it in already.")
+
+		addButton("Thrust", "Start fucking Jacki's ass", "pick_fuckass_thrust")
+	if(state == "pick_fuckass_thrust"):
+		playAnimation(StageScene.UrinalSex, "sex", {pc="jacki", npc="pc", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		if (buttScore <= 0):
+			saynn("You spit on your cock to get at least some lube.. before proceeding to put more and more pressure on her clenching star. Jacki is clearly not a fan of your meat forcefully stretching her ass out, loud noises of discomfort leaving her muzzle.")
+
+			saynn("[say=jacki]Huff-f-f..[/say]")
+
+			saynn("[say=pc]Oh, you don't want it slow? Sure.[/say]")
+
+			saynn("And just like that, you pin her into the urinal more before gathering your full force and thrusting your hips forward, causing your dick to pop into her anal ring, stretching it wide.")
+
+			saynn("A loud cry escapes the poor wolfie, her whole body tensing up, just like her tailhole. But you just grunt from the extreme tightness and keep fighting it, shoving your cock deeper, proceeding to fuck that untrained ass.")
+
+			saynn("[say=jacki]You're tearing my ass.. Ah fuck!..[/say]")
+
+			saynn("[say=pc]Get used to it.[/say]")
+
+		elif (buttScore <= 3):
+			saynn("You spit on your cock to get at least some lube.. before proceeding to put more and more pressure on her clenching star. Jacki's eyes go big as you proceed to gradually force your cock inside her, some noises of discomfort leaving her muzzle. Her ass is trained to take a few fingers at most.. while you are trying to shove your dick whole.")
+
+			saynn("[say=jacki]Huff-f-f..[/say]")
+
+			saynn("[say=pc]Oh, you don't want it slow? Sure.[/say]")
+
+			saynn("And just like that, you pin her into the urinal more before gathering your full force and thrusting your hips forward, causing your dick to pop into her anal ring, stretching it wide.")
+
+			saynn("A loud cry escapes the poor wolfie, her whole body tensing up, just like her tailhole. But you just grunt from the extreme tightness and keep fighting it, shoving your cock deeper, proceeding to fuck that ass, training it further to take dicks.")
+
+			saynn("[say=jacki]My ass-s-s.. Ah fuck!..[/say]")
+
+			saynn("[say=pc]It's a great one.[/say]")
+
+		elif (buttScore <= 6):
+			saynn("You spit on your cock to get some lube.. before proceeding to put some pressure on her clenching star. And surprisingly, her asshole gives in quite easily, allowing you to penetrate it and start sliding your full length inside. Little moans escape her muzzle. Looks like you have trained her ass quite well.")
+
+			saynn("[say=jacki]Ah.. my ass..[/say]")
+
+			saynn("[say=pc]Keep clenching, buttslut.[/say]")
+
+			saynn("Your hands keep her pinned to the urinal as you thrust your hips forward again and again, making her inner walls get used to your size. Jacki does indeed keep clenching, making you more eager to fight her resistance and fuck her {jackiButt} ass harder.")
+
+		else:
+			saynn("You think about spitting on your cock as a replacement for lube.. but you don't think you even need to do that.. that slut's needy asshole is already all slick and inviting. So you just align yourself a little better and proceed to slide inside her with ease, your cock stretching her inner walls that then begin to knead your length.")
+
+			saynn("[say=jacki]Ah.. yes.. Wreck my asshole~.[/say]")
+
+			saynn("[say=pc]Keep clenching, buttslut.[/say]")
+
+			saynn("Your hands keep her pinned to the urinal as you thrust your hips forward again and again, making her inner walls get used to your size. Jacki does indeed keep clenching, making you more eager to fight her resistance and fuck her ass harder.")
+
+		addButton("Faster", "Fuck her faster", "pick_fuckass_faster")
+	if(state == "pick_fuckass_faster"):
+		playAnimation(StageScene.UrinalSex, "fast", {pc="jacki", npc="pc", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		if (buttScore <= 0):
+			saynn("Jacki's asshole begins to bleed slightly from such an onslaught. But that only makes her inner walls more slick. Poor wolfie can't even throw her head back, she is forced to look at you while you look at her small bouncing tits, your cock is wrecking her tight tailhole raw at the same time.")
+
+			saynn("[say=jacki]My.. ass.. hole.. nh-h-h!..[/say]")
+
+			saynn("She lets out a loud stifled cry as her whole body proceeds to tense up and shake, muscles flexing and relaxing uncontrollably. Even her pussy is twitching wildly, pulling on the metal rings that hold it stitched up.")
+
+		elif (buttScore <= 3):
+			saynn("Jacki's asshole is taking it mostly well, even if the sensitive flesh gets that slight red irritated tint to it from the lack of proper lubricant. Your rough pounding does bring her pain and discomfort. Poor wolfie can't even throw her head back, she is forced to look at you while you look at her small bouncing tits, your cock is wrecking her tight tailhole raw at the same time.")
+
+			saynn("[say=jacki]My.. ass.. hole.. nh-h-h!..[/say]")
+
+			saynn("She lets out a loud stifled cry as her whole body proceeds to tense up and shake, muscles flexing and relaxing uncontrollably. Even her pussy is twitching wildly, pulling on the metal rings that hold it stitched up.")
+
+		elif (buttScore <= 6):
+			saynn("Jacki's asshole is taking the forced pounding quite well, her inner walls even lubricate themselves a bit to aid with the fucking. There is a bit of discomfort from just how roughly you are taking her. But her eyes look quite horny, moans escaping from her muzzle, her small tits bouncing each time you thrust inside..")
+
+			saynn("[say=jacki]Ngh-h~!.. My ass.. AH!..[/say]")
+
+			saynn("She lets out a loud passionate noise as her whole body proceeds to tense up and shiver, muscles and relaxing uncontrollably. Even her wet dripping pussy is twitching wildly, pulling on the metal rings that hold it stitched up.")
+
+		else:
+			saynn("Jacki's ass is so trained, fucking her roughly is not even that painful for her. Inner walls are lubricating themselves, allowing you to slide deep. Her eyes look slutty, her tongue is out and drooling, moans escaping from her muzzle, her small tits bouncing up and down each time you thrust inside..")
+
+			saynn("[say=jacki]Ngh-h~!.. My stretched ass~.. Ah!..[/say]")
+
+			saynn("She lets out a loud passionate noise as her whole body proceeds to tense up and shiver, muscles and relaxing uncontrollably. Even her wet dripping pussy is twitching wildly, pulling on the metal rings that hold it stitched up, before suddenly squirting, spawning a fountain of transparent juices.")
+
+		saynn("Her anal walls are massaging your cock so well that you feel like you can't pull out anymore. Why would you though, she is a cum toilet anyway.")
+
+		addButton("Cum inside", "Stuffs that ass full of your cum", "pick_fuckass_cum")
+	if(state == "pick_fuckass_cum"):
+		playAnimation(StageScene.UrinalSex, "inside", {pc="jacki", npc="pc", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		saynn("While Jacki is still going through her climax, you shove your cock deep down her ass and let her orgamic contractions push you over the edge. You grunt as your cock starts stuffing its load deep into Jack's ass, painting her guts white.")
+
+		saynn("[say=pc]Take it, cum dumpster..[/say]")
+
+		saynn("Jacki just shivers more, her toes curling as you still keep her pinned firmly.")
+
+		saynn("[say=jacki]Nh-h..[/say]")
+
+		saynn("As you pull out, her wrecked {jackiButt} asshole starts leaking your seed directly into the urinal below. Looks quite lewd and hot.")
+
+		saynn("[say=pc]Good toilet.[/say]")
+
+		addButton("Continue", "See what happens next", "return_back_or_enough")
+		addButtonWithChecks("Piss inside", "Use her as a piss toilet too", "pick_pinfuck_piss", [], [[ButtonChecks.ContentEnabled, ContentType.Watersports]])
+	if(state == "pick_pinfuck_piss"):
+		saynn("Jacki sees your mischievous eyes and instantly understands that you're up to something. And indeed, you have another urge that she can help with.")
+
+		saynn("You shove your cock back into her {jackiButt} asshole before you get soft and just.. wait.")
+
+		saynn("[say=jacki]What are you..[/say]")
+
+		saynn("And soon enough, you start pissing. A strong stream of your urine begins flooding Jacki's guts, mixing with the {pc.cum} that's already there. Jacki's face turns bright red when she understands what's going on.")
+
+		saynn("[say=jacki]My ass.. You're pissing into me.. F-fuck..[/say]")
+
+		saynn("[say=pc]Shut up, meat toilet.[/say]")
+
+		saynn("You slap her small tits and just use her ass to hold your warm piss.")
+
+		saynn("As you pull out.. some of it begins streaming out and going down the drain.")
+
+		saynn("[say=jacki]Huff-f-f..[/say]")
+
+		saynn("So nice.")
+
+		addButton("Continue", "See what happens next", "return_back_or_enough")
+	if(state == "pick_straponass_pick"):
+		saynn("Pick which strapon you wanna use to fuck Jacki's ass with.")
+
+		addStraponButtons()
+		if (false):
+			addButton("Nope", "You shouldn't see this", "pick_straponass")
+	if(state == "pick_straponass"):
+		playAnimation(StageScene.UrinalSex, "teasing", {pc="jacki", npc="pc", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		saynn("You have a burning desire to fuck Jacki while she is stuck in there. You grab one of your strapons and secure it around your waist.")
+
+		saynn("She is not in the most prime position for that.. but you just about manage to reach her asshole, propping up her butt with your legs and bringing hers high.")
+
+		if (buttScore <= 0):
+			saynn("The wolfie instantly feels concerned when she feels your rubber toy prodding her {jackiButt} asshole. So tight that her anal ring refuses to open. But nothing stops you from trying to force yourself in.")
+
+			saynn("[say=jacki]H-Hey.. Not there.. I don't do stuff with that hole..[/say]")
+
+			saynn("[say=pc]So?[/say]")
+
+			saynn("She might not have much experience with anal sex.. but here is her chance to start.")
+
+		elif (buttScore <= 3):
+			saynn("The wolfie instantly feels concerned when she feels your rubber toy prodding her {jackiButt} asshole. Her anal ring is resisting your attempts at penetrating it by clenching.. but you feel like you can still force yourself in.")
+
+			saynn("[say=jacki]H-hey.. That's my asshole..[/say]")
+
+			saynn("[say=pc]Uh huh.[/say]")
+
+			saynn("She might not have enough experience to be comfortable with anal sex.. but here is her chance to get more.")
+
+		else:
+			saynn("The wolfie makes a cute noise when she feels your rubber toy prodding her {jackiButt} asshole. Her anal ring is trained quite well by now, stretching obediently under your onslaught.. But Jacki is still clenching.")
+
+			saynn("[say=jacki]You gonna.. Stretch my asshole wide.. here.. wruff..[/say]")
+
+			saynn("[say=pc]What a slut.[/say]")
+
+			saynn("Looks like wolfie is just begging for you to ram it in already.")
+
+		addButton("Thrust", "Start fucking Jacki's ass", "pick_straponass_thrust")
+	if(state == "pick_straponass_thrust"):
+		playAnimation(StageScene.UrinalSex, "sex", {pc="jacki", npc="pc", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		if (buttScore <= 0):
+			saynn("You spit on your strapon to get at least some lube.. before proceeding to put more and more pressure on her clenching star. Jacki is clearly not a fan of your meat forcefully stretching her ass out, loud noises of discomfort leaving her muzzle.")
+
+			saynn("[say=jacki]Huff-f-f..[/say]")
+
+			saynn("[say=pc]Oh, you don't want it slow? Sure.[/say]")
+
+			saynn("And just like that, you pin her into the urinal more before gathering your full force and thrusting your hips forward, causing that rubber dildo to pop into her anal ring, stretching it wide.")
+
+			saynn("A loud cry escapes the poor wolfie, her whole body tensing up, just like her tailhole. But you just grunt from the extreme tightness and keep fighting it, shoving your new cock deeper, proceeding to fuck that untrained ass.")
+
+			saynn("[say=jacki]You're tearing my ass.. Ah fuck!..[/say]")
+
+			saynn("[say=pc]Get used to it.[/say]")
+
+		elif (buttScore <= 3):
+			saynn("You spit on your strapon to get at least some lube.. before proceeding to put more and more pressure on her clenching star. Jacki's eyes go big as you proceed to gradually force your strapon inside her, some noises of discomfort leaving her muzzle. Her ass is trained to take a few fingers at most.. while you are trying to shove your rubber dick whole.")
+
+			saynn("[say=jacki]Huff-f-f..[/say]")
+
+			saynn("[say=pc]Oh, you don't want it slow? Sure.[/say]")
+
+			saynn("And just like that, you pin her into the urinal more before gathering your full force and thrusting your hips forward, causing that rubber dildo to pop into her anal ring, stretching it wide.")
+
+			saynn("A loud cry escapes the poor wolfie, her whole body tensing up, just like her tailhole. But you just grunt from the extreme tightness and keep fighting it, shoving your new cock deeper, proceeding to fuck that ass, training it further to take dicks.")
+
+			saynn("[say=jacki]My ass-s-s.. Ah fuck!..[/say]")
+
+			saynn("[say=pc]It's a great one.[/say]")
+
+		elif (buttScore <= 6):
+			saynn("You spit on your strapon to get some lube.. before proceeding to put some pressure on her clenching star. And surprisingly, her asshole gives in quite easily, allowing you to penetrate it and start sliding your full length inside. Little moans escape her muzzle. Looks like you have trained her ass quite well.")
+
+			saynn("[say=jacki]Ah.. my ass..[/say]")
+
+			saynn("[say=pc]Keep clenching, buttslut.[/say]")
+
+			saynn("Your hands keep her pinned to the urinal as you thrust your hips forward again and again, making her inner walls get used to the size of your rubber cock. Jacki does indeed keep clenching, making you more eager to fight her resistance and fuck her {jackiButt} ass harder.")
+
+		else:
+			saynn("You think about spitting on your strapon as a replacement for lube.. but you don't think you even need to do that.. that slut's needy asshole is already all slick and inviting. So you just align yourself a little better and proceed to slide inside her with ease, your rubber cock stretching her inner walls that then begin to knead your new length.")
+
+			saynn("[say=jacki]Ah.. yes.. Wreck my asshole~.[/say]")
+
+			saynn("[say=pc]Keep clenching, buttslut.[/say]")
+
+			saynn("Your hands keep her pinned to the urinal as you thrust your hips forward again and again, making her inner walls get used to the size of your toy. Jacki does indeed keep clenching, making you more eager to fight her resistance and fuck her ass harder.")
+
+		addButton("Faster", "Fuck her faster", "pick_straponass_faster")
+	if(state == "pick_straponass_faster"):
+		playAnimation(StageScene.UrinalSex, "fast", {pc="jacki", npc="pc", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		if (buttScore <= 0):
+			saynn("Jacki's asshole begins to bleed slightly from such an onslaught. But that only makes her inner walls more slick. Poor wolfie can't even throw her head back, she is forced to look at you while you look at her small bouncing tits, your strapon is wrecking her tight tailhole raw at the same time.")
+
+			saynn("[say=jacki]My.. ass.. hole.. nh-h-h!..[/say]")
+
+			saynn("She lets out a loud stifled cry as her whole body proceeds to tense up and shake, muscles flexing and relaxing uncontrollably. Even her pussy is twitching wildly, pulling on the metal rings that hold it stitched up.")
+
+		elif (buttScore <= 3):
+			saynn("Jacki's asshole is taking it mostly well, even if the sensitive flesh gets that slight red irritated tint to it from the lack of proper lubricant. Your rough pounding does bring her pain and discomfort. Poor wolfie can't even throw her head back, she is forced to look at you while you look at her small bouncing tits, your strapon is wrecking her tight tailhole raw at the same time.")
+
+			saynn("[say=jacki]My.. ass.. hole.. nh-h-h!..[/say]")
+
+			saynn("She lets out a loud stifled cry as her whole body proceeds to tense up and shake, muscles flexing and relaxing uncontrollably. Even her pussy is twitching wildly, pulling on the metal rings that hold it stitched up.")
+
+		elif (buttScore <= 6):
+			saynn("Jacki's asshole is taking the forced pounding quite well, her inner walls even lubricate themselves a bit to aid with the fucking. There is a bit of discomfort from just how roughly you are taking her. But her eyes look quite horny, moans escaping from her muzzle, her small tits bouncing each time you thrust inside..")
+
+			saynn("[say=jacki]Ngh-h~!.. My ass.. AH!..[/say]")
+
+			saynn("She lets out a loud passionate noise as her whole body proceeds to tense up and shiver, muscles and relaxing uncontrollably. Even her wet dripping pussy is twitching wildly, pulling on the metal rings that hold it stitched up.")
+
+		else:
+			saynn("Jacki's ass is so trained, fucking her roughly is not even that painful for her. Inner walls are lubricating themselves, allowing you to slide deep. Her eyes look slutty, her tongue is out and drooling, moans escaping from her muzzle, her small tits bouncing up and down each time you thrust inside..")
+
+			saynn("[say=jacki]Ngh-h~!.. My stretched ass~.. Ah!..[/say]")
+
+			saynn("She lets out a loud passionate noise as her whole body proceeds to tense up and shiver, muscles and relaxing uncontrollably. Even her wet dripping pussy is twitching wildly, pulling on the metal rings that hold it stitched up, before suddenly squirting, spawning a fountain of transparent juices.")
+
+		saynn("Her anal walls are massaging your toy so well that you feel like you can't pull it out anymore. Why would you though, she is a meat toilet anyway.")
+
+		addButton("Ram it in", "Stuffs that ass full", "pick_straponass_cum")
+	if(state == "pick_straponass_cum"):
+		playAnimation(StageScene.UrinalSex, "inside", {pc="jacki", npc="pc", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		saynn("While Jacki is still going through her climax, you shove your rubber toy deep down her ass and let her orgamic contractions hug your strapon tightly. You don't feel much yourself.. but it's fun to see Jacki struggle, her stitched-up pussy twitching again.")
+
+		saynn("[say=pc]Take it, buttslut..[/say]")
+
+		saynn("Jacki just shivers more, her toes curling as you still keep her pinned firmly.")
+
+		saynn("[say=jacki]Nh-h..[/say]")
+
+		saynn("As you pull out, her wrecked {jackiButt} asshole starts trying to close. But failing. Looks quite lewd and hot.")
+
+		saynn("[say=pc]Good toilet.[/say]")
+
+		addButton("Continue", "See what happens next", "return_back_or_enough")
 var randomSexIsPlaying = false
 func playRandomSexAnim():
 	if(randomSexIsPlaying):
@@ -680,6 +973,11 @@ func playRandomSexAnim():
 		if(!(state in ["after_first_two"])):
 			randomSexIsPlaying = false
 			return
+
+func addStraponButtons():
+	var strapons = GM.pc.getStrapons()
+	for strapon in strapons:
+		addButton(strapon.getVisibleName(), strapon.getVisibleDescription(), "pick_straponass", [strapon])
 
 
 func _react(_action: String, _args):
@@ -814,6 +1112,7 @@ func _react(_action: String, _args):
 		getModule("JackiModule").addCorruption(5)
 
 	if(_action == "return_back_or_enough"):
+		GM.pc.unequipStrapon()
 		if(onlyOne):
 			setState("after_once_use")
 			getModule("JackiModule").makeJackiBusy()
@@ -841,6 +1140,42 @@ func _react(_action: String, _args):
 		getCharacter("jacki").cummedInMouthBy("pc", FluidSource.Pissing, RNG.randf_range(0.2, 0.3))
 		getModule("JackiModule").advanceSkill("jackiSkillWatersports")
 		swallowedPiss = true
+
+	if(_action == "pick_fuckass_thrust"):
+		processTime(5*60)
+
+	if(_action == "pick_fuckass_faster"):
+		processTime(13*60)
+
+	if(_action == "pick_fuckass_cum"):
+		processTime(5*60)
+		getCharacter("jacki").cummedInAnusBy("pc")
+		GM.pc.orgasmFrom("jacki")
+		getModule("JackiModule").addCorruption(5)
+		getModule("JackiModule").advanceSkill("jackiSkillButtslut")
+
+	if(_action == "pick_pinfuck_piss"):
+		processTime(5*60)
+		getCharacter("jacki").cummedInAnusBy("pc", FluidSource.Pissing)
+		getModule("JackiModule").advanceSkill("jackiSkillWatersports")
+
+	if(_action == "pick_straponass"):
+		processTime(5*60)
+		var strapon = _args[0]
+		GM.pc.getInventory().forceEquipStoreOtherUnlessRestraint(strapon)
+
+	if(_action == "pick_straponass_thrust"):
+		processTime(5*60)
+
+	if(_action == "pick_straponass_faster"):
+		processTime(13*60)
+
+	if(_action == "pick_straponass_cum"):
+		processTime(5*60)
+		getCharacter("jacki").cummedInAnusBy("pc", FluidSource.Strapon)
+		GM.pc.orgasmFrom("jacki")
+		getModule("JackiModule").addCorruption(5)
+		getModule("JackiModule").advanceSkill("jackiSkillButtslut")
 
 	setState(_action)
 

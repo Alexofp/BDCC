@@ -30,10 +30,22 @@ func onButton(_method, _args):
 	if(_method == "talk"):
 		if(GM.ES.triggerReact(Trigger.TalkingToNPC, ["jacki"])):
 			return
-		
+
 		if(!getFlag("JackiModule.Jacki_ch2IntroSceneHappened")):
+			getCharacter("jacki").removeAllRestraints()
 			setFlag("JackiModule.Jacki_ch2IntroSceneHappened", true)
 			runScene("jackiCh2s1Intro")
+			return
+		
+		var jackiCorruption = getFlag("JackiModule.jackiCorruption", 0.0)
+		var jackiLust = getFlag("JackiModule.jackiLust", 0.0)
+		if(!getFlag("JackiModule.Jacki_punchingBagSceneHappened") && (jackiCorruption >= 0.4 || jackiLust >= 0.4)):
+			runScene("jackiPunchingBagScene")
+			setFlag("JackiModule.Jacki_punchingBagSceneHappened", true)
+			return
+		if(!getFlag("JackiModule.Jacki_urinalSceneHappened") && (jackiCorruption >= 1.0 || jackiLust >= 1.0)):
+			runScene("jackiUrinalScene")
+			setFlag("JackiModule.Jacki_urinalSceneHappened", true)
 			return
 		
 		runScene("jackiCh2s2GymScene")

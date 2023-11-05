@@ -86,27 +86,33 @@ func _run():
 			else:
 				saynn("Jacki belongs to you. And she knows it.")
 
-		if (anger >= -0.1 || isEnslaved):
+		if (anger >= -0.1 || isEnslaved || lust >= 1.0):
 			addButton("Perv", "Watch her do yoga from a far", "do_perv")
-			if (!isEnslaved):
+			if (!isEnslaved && lust < 1.0):
 				addButton("Gift", "Offer a gift that Jacki might forgive you for. In case you want that", "pick_gift")
 			addButton("Follow", "See what Jacki usually does after yoga", "do_creepfollow")
-			if (false):
-				addButton("Chain up", "Chain Jacki up like she is a punching bag", "do_chainup")
-				addButton("Public fuck", "Fuck Jacki right here in the public", "do_publicfuck")
-			if (anger < -0.1 || isEnslaved):
-				addButton("Watch", "Watch her do yoga", "kind_watch")
-				addButton("Gift", "Gift Jacki something", "pick_gift")
-				if (anger < -0.3):
-					addButton("Jogging", "Offer Jacki to jog together", "kind_jog")
-				else:
-					addDisabledButton("Jogging", "Jacki doesn't trust you enough")
-			if (!isEnslaved):
-				if (anger <= -1.0 && corruption >= 1.0 && lust >= 1.0):
-					addButton("Enslave", "Make that wolfie your bitch", "do_enslave_jacki")
-				else:
-					addDisabledButton("Enslave", "Jacki's kindness, corruption and lust must be at 100%")
-			addButton("Leave", "Never mind", "endthescene")
+		if (anger < -0.1 || isEnslaved):
+			addButton("Watch", "Watch her do yoga", "kind_watch")
+			addButton("Gift", "Gift Jacki something", "pick_gift")
+			if (anger < -0.3):
+				addButton("Jogging", "Offer Jacki to jog together", "kind_jog")
+			else:
+				addDisabledButton("Jogging", "Jacki doesn't trust you enough")
+		if (!isEnslaved):
+			if (anger <= -1.0 && corruption >= 1.0 && lust >= 1.0):
+				addButton("Enslave", "Make that wolfie your bitch", "do_enslave_jacki")
+			else:
+				addDisabledButton("Enslave", "Jacki's kindness, corruption and lust must be at 100%")
+		else:
+			addButton("Memories", "Replay some of the scenes", "memories_menu")
+		addButton("Leave", "Never mind", "endthescene")
+	if(state == "memories_menu"):
+		saynn("Pick which scene you wanna see again.")
+
+		addButton("Back", "Never mind", "")
+		addButton("Stocks scene", "The scene where you can fuck Jacki in stocks", "mem_stocks")
+		addButton("Punching bag", "The scene where you have to save Jacki from Risha", "mem_punch")
+		addButton("Urinal scene", "The scene where you have to save Jacki from the bullies", "mem_urinal")
 	if(state == "do_perv"):
 		saynn("You sneakily sit on one of the benches near the yoga mats which puts you in a prime position to watch Jacki do yoga.")
 
@@ -3680,6 +3686,23 @@ func _react(_action: String, _args):
 	if(_action == "do_enslave_jacki"):
 		processTime(5*60)
 		setFlag("JackiModule.Jacki_ch2GotEnslaved", true)
+
+	if(_action == "mem_stocks"):
+		aimCameraAndSetLocName("main_punishment_spot")
+		GM.pc.setLocation("main_punishment_spot")
+		runScene("JackiStuckInStocksScene")
+		endScene()
+		return
+
+	if(_action == "mem_punch"):
+		runScene("jackiPunchingBagScene")
+		endScene()
+		return
+
+	if(_action == "mem_urinal"):
+		runScene("jackiUrinalScene")
+		endScene()
+		return
 
 	if(_action == "perv_spank"):
 		processTime(5*60)
