@@ -1037,7 +1037,7 @@ _global_script_classes=[ {
 "base": "Reference",
 "class": "SpeechModifierBase",
 "language": "GDScript",
-"path": "res://Game/SpeechModifiers/SpeechModifierBase.gd"
+"path": "res://Game/SpeechModifierBase.gd"
 }, {
 "base": "Spatial",
 "class": "Stage3D",
