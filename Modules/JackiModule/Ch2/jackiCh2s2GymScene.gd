@@ -186,7 +186,7 @@ func _run():
 	if(state == "perv_spank"):
 		saynn("That ass is too enticing. You decide to walk up to her and deliver a firm smack that resonates through the whole gym area.")
 
-		if (corruption < 0.5):
+		if (corruption < 0.3):
 			saynn("Jacki gasps in surprise and breaks out of her pose. She then whips her head around until she sees you. Her eyes are flashing with pain and frustration.")
 
 			saynn("[say=jacki]What do you think you're doing?[/say]")
@@ -213,6 +213,105 @@ func _run():
 
 			addButton("Nah", "Enough spanking", "endthescene")
 			addButton("Suck her ass", "Might as well", "perv_suckass")
+			addButton("No u", "Make her suck your ass instead", "perv_makehersuckass")
+	if(state == "perv_makehersuckass"):
+		playAnimation(StageScene.SexRimming, "tease", {npc="jacki", pc="pc", bodyState={exposedCrotch=true}})
+		saynn("It is a good proposal from her. But you have decided to alter it a bit.")
+
+		saynn("[say=pc]No you.[/say]")
+
+		saynn("Jacki only manages to say..")
+
+		saynn("[say=jacki]Huh?[/say]")
+
+		saynn("..before you get a hold of her ponytail and yank her down to her knees.")
+
+		saynn("[say=jacki]Ow.. hey..[/say]")
+
+		saynn("You silence her vocal protests by pulling her muzzle closer before shoving your {pc.thick} butt directly into her face! The wolfie is.. confused to say the least.. She doesn't even know how to react.")
+
+		saynn("[say=pc]Suck.[/say]")
+
+		saynn("[say=jacki]Umm..[/say]")
+
+		saynn("You clearly need to teach her a little.")
+
+		addButton("Force", "Apply some force", "perv_makehersuckass_force")
+	if(state == "perv_makehersuckass_force"):
+		playAnimation(StageScene.SexRimming, "fast", {npc="jacki", pc="pc", bodyState={exposedCrotch=true,hard=true}})
+		saynn("You yank on her hair again, pushing her head into your {pc.masc} butt more, causing her muzzle to spread your buttcheeks and her snout to touch your {pc.analStretch} star. You can feel her warm breath on your sensitive bits.. and that makes you more eager to continue..")
+
+		if (GM.pc.isWearingChastityCage()):
+			saynn("Your poor cock is getting hard in its little cage.. well, trying to..")
+
+		elif (GM.pc.hasReachablePenis()):
+			saynn("Your {pc.penis} is quickly getting hard, a drop of precum hanging from its tip.")
+
+		elif (GM.pc.hasReachableVagina()):
+			saynn("Even though you press her muzzle against your anus, your pussy slit becomes aroused too, your folds shining wet.")
+
+		saynn("Jacki winces from pain, huffing and puffing more. She tries to pull away.. but she can't do that without losing some of her hair in the process.")
+
+		saynn("[say=pc]Need another invitation?[/say]")
+
+		saynn("You look behind you and see Jacki's red face. She finally decides to flick her tongue out and give your anus a few little licks. All the while all sorts of inmates around are doing their exercises, most of them not caring, but some eyes already have noticed you two.")
+
+		saynn("[say=pc]You can do better. Suck on it, slut.[/say]")
+
+		saynn("Jacki huffs again.. but then she presses her lips against your skin more and starts to gently suck, creating negative pressure with her mouth around your tailhole while also still prodding it with her canine tongue.")
+
+		saynn("And that starts to feel.. quite good. You use your digits to scratch her head while she keeps rimming you, switching between sucking and licking. Your tailhole reacts to the teasing by clenching and twitching.")
+
+		if (GM.pc.isWearingChastityCage()):
+			saynn("Your locked away cock is dripping pre a lot.. Without being able to stimulate it, what Jacki does feels so much better..")
+
+		elif (GM.pc.hasReachablePenis()):
+			saynn("Your hard cock is twitching too.. from just how good this feels.")
+
+		elif (GM.pc.hasReachableVagina()):
+			saynn("Your dripping pussy folds twitch too.. from just how good this feels.")
+
+		saynn("[say=pc]There we go. I knew you had it in you.[/say]")
+
+		saynn("Jacki closes her eyes from embarrassment.. and just continues, giving your asshole little kisses before prodding it with her tongue more.. until the tip slips inside. The wolfie starts to wiggle her tongue inside, exploring your inner walls.")
+
+		if (GM.pc.isWearingChastityCage()):
+			saynn("She quickly finds your swole prostate.. and begins focusing on it, kneading and rubbing it. And her doing that makes your legs shake, your poor cock putting an immense amount of pressure onto its cage.")
+
+		elif (GM.pc.hasReachablePenis()):
+			saynn("She quickly finds your swole prostate.. and begins focusing on it, kneading and rubbing it. And her doing that makes your legs shake, your cock is leaking more transparent stuff while throbbing..")
+
+		elif (GM.pc.hasReachableVagina()):
+			saynn("Her strong tongue manages to find and massage your g-spot through the inner wall, making your legs shake. Moans are escaping from you while your pussy is dripping more juices..")
+
+		saynn("Quite a few eyes are directed towards you.. but Jacki doesn't care, she keeps lapping at your inner walls, bringing you so much pleasure that you already feel close..")
+
+		saynn("[say=pc]Such a good slut..[/say]")
+
+		addButton("Cum", "Feels too good", "perv_makehersuckass_cum")
+	if(state == "perv_makehersuckass_cum"):
+		playAnimation(StageScene.SexRimming, "sex", {npc="jacki", pc="pc", bodyState={exposedCrotch=true,hard=true}})
+		saynn("You don't even have to encourage her anymore, Jacki is treating your ass so well.. that you can't hold back anymore..")
+
+		if (GM.pc.isWearingChastityCage()):
+			saynn("You arch your back and let out a cute passionate moan as your locked throbbing cock starts shooting weak lines of {pc.cum} through the little hole of the metal cage. Your hand grips Jacki's hair harder, bringing her some discomfort.. while you feel amazing..")
+
+		elif (GM.pc.hasReachablePenis()):
+			saynn("You arch your back and grunt as your {pc.penis} starts to throb and shoot thick lines of {pc.cum}, one after another. Your hand grips Jacki's hair harder, bringing her some discomfort.. while you feel amazing..")
+
+		elif (GM.pc.hasReachableVagina()):
+			saynn("You arch your back and let out a cute passionate moan while your neglected pussy releases a fountain of juices. You squirt while moaning loudly, your hand grips Jacki's hair harder, bringing her some discomfort.. while you feel amazing..")
+
+		else:
+			saynn("You arch your back and moan loudly while a powerful orgasm is overwhelming your body. Your hand grips Jacki's hair harder, bringing her some discomfort.. while you feel amazing..")
+
+		saynn("After that great time.. you finally let go of her hair.")
+
+		saynn("[say=pc]Nhh.. What a good slut.[/say]")
+
+		saynn("[say=jacki]Huff..[/say]")
+
+		addButton("Continue", "See what happens next", "endthescene")
 	if(state == "perv_suckass"):
 		playAnimation(StageScene.SexRimming, "fast", {npc="pc", pc="jacki", bodyState={exposedCrotch=true}})
 		saynn("And so you suddenly pull Jacki's shorts and force your face between her fluffy buns, spreading them wide, allowing you to whip your tongue out and start licking her tailhole.")
@@ -698,12 +797,17 @@ func _run():
 		saynn("You ask Jacki if you can just watch her do yoga.")
 
 		if (lust < 0.2 || RNG.chance(25)):
-			playAnimation(StageScene.Yoga, "camel", {pc="jacki"})
 			saynn("[say=jacki]Oh. Uh. Sure. Why not. I'm not the best at it.[/say]")
 
 			saynn("You sit on the nearest bench and watch Jacki go through a series of yoga poses.")
 
-			saynn("The last one interests you the most. Her lithe body gracefully arches backwards, her paws reaching for her legs. The way she stretches is quite captivating.")
+			if (RNG.chance(50)):
+				playAnimation(StageScene.Yoga, "camel", {pc="jacki"})
+				saynn("The last one interests you the most. Her lithe body gracefully arches backwards, her paws reaching for her legs. The way she stretches is quite captivating.")
+
+			else:
+				playAnimation(StageScene.Yoga, "warrior", {pc="jacki", bodyState={underwear=hasUnderwear}})
+				saynn("The last one interests you the most. Her lithe body gracefully arches backwards, her paws reaching high up. The way she stretches is quite captivating.")
 
 			saynn("[say=pc]Oh, I think you're pretty good.[/say]")
 
@@ -711,43 +815,59 @@ func _run():
 
 			saynn("The wolfie starts to pant softly the longer she holds this pose. So strong. And yet. So vulnerable.")
 
-			saynn("She keeps standing like this for some time, blushing when your gazes collide. As Jacki finally eases out of this camel pose, her breathing makes her chest rise and fall. A modest and yet still feminine chest.")
+			saynn("She keeps standing like this for some time, blushing when your gazes collide. As Jacki finally eases out of this pose, her breathing makes her chest rise and fall. A modest and yet still feminine chest.")
 
 			saynn("[say=jacki]Thanks for watching.. wruff..[/say]")
 
 			saynn("You just chuckle.")
 
 		elif (lust < 0.5 || RNG.chance(25)):
-			playAnimation(StageScene.Yoga, "dog", {pc="jacki"})
 			saynn("[say=jacki]Of course~. I like when you watch me, wruff.[/say]")
 
 			saynn("You sit on the nearest bench and watch the wolfie go through a series of yoga poses, warming up on simple ones before proceeding to do one special one.")
 
-			saynn("This time she decides to put the most focus on the pose called 'downward-facing dog'. Her hips rise high into the air while her hands are pressed firmly into the mat. She maintains this pose, the curves of her fit butt full on display, while gazing towards the ground.")
+			if (RNG.chance(50)):
+				playAnimation(StageScene.Yoga, "dog", {pc="jacki"})
+				saynn("This time she decides to put the most focus on the pose called 'downward-facing dog'. Her hips rise high into the air while her hands are pressed firmly into the mat. She maintains this pose, the curves of her fit butt full on display, while gazing towards the ground.")
 
-			saynn("[say=pc]Very nice.[/say]")
+				saynn("[say=pc]Very nice.[/say]")
 
-			saynn("[say=jacki]Thanks.. ah..[/say]")
+				saynn("[say=jacki]Thanks.. ah..[/say]")
 
-			saynn("While stretching all her limbs out like that, she can't help but to produce a soft moan. And that, combined with sticking her butt out so provocatively, makes her all blushy.")
+				saynn("While stretching all her limbs out like that, she can't help but to produce a soft moan. And that, combined with sticking her butt out so provocatively, makes her all blushy.")
 
-			saynn("As Jacki finally eases out of this camel pose, her breathing makes her chest rise and fall. A modest and yet still feminine chest.")
+			else:
+				playAnimation(StageScene.Yoga, "cobra", {pc="jacki"})
+				saynn("This time she decides to put the most focus on the pose called cobra. She is lying on the floor, her paws are pressed firmly into the mat as she proceeds to arch her back as much as she can. She maintains this pose, the curves of her fit butt and modest breasts are all on display.")
+
+				saynn("[say=pc]Very nice.[/say]")
+
+				saynn("[say=jacki]Thanks.. ah..[/say]")
+
+				saynn("While stretching like that, she can't help but to produce a soft moan. And that makes her all blushy.")
+
+			saynn("As Jacki finally eases out of this pose, her breathing makes her chest rise and fall. A modest and yet still feminine chest.")
 
 			saynn("[say=jacki]Well. Hope you liked the view, wruff.[/say]")
 
 			saynn("You smile and nod.")
 
 		else:
-			playAnimation(StageScene.Yoga, "catcow", {pc="jacki", bodyState={underwear=hasUnderwear}})
 			saynn("[say=jacki]I thought you would never ask, wruff~.[/say]")
 
 			saynn("You take a comfortable seat, watching Jacki begin her yoga practice.")
 
 			saynn("She starts with some basic yoga poses, moving gracefully through her routine, starting off with simple stretching and ending at something quite.. lewd.")
 
-			saynn("Jacki stands on all fours and then bends her back low while sticking her butt provocatively, emphasizing the curves of her rear. Even her fluffy tail moves out of the way to let you see her pinched clothing hugging her crotch tightly.")
+			if (RNG.chance(50)):
+				playAnimation(StageScene.Yoga, "catcow", {pc="jacki", bodyState={underwear=hasUnderwear}})
+				saynn("Jacki stands on all fours and then bends her back low while sticking her butt provocatively, emphasizing the curves of her rear. Even her fluffy tail moves out of the way to let you see her pinched clothing hugging her crotch tightly.")
 
-			saynn("After that she bends her back in the other direction, arching it instead, completing the cat-cow pose. Little moans occasionally escape from her as she moves from one pose to another.")
+				saynn("After that she bends her back in the other direction, arching it instead, completing the cat-cow pose. Little moans occasionally escape from her as she moves from one pose to another.")
+
+			else:
+				playAnimation(StageScene.Yoga, "bridge", {pc="jacki", bodyState={underwear=hasUnderwear}})
+				saynn("Jacki lies on her back before using her hind paws to raise her butt provocatively high. She arches her back as much as she can, her pose emphasizing the curves of her rear. Little moans occasionally escape from her as she tries to hold it.")
 
 			saynn("[say=jacki]Always makes me feel like I'm in heat..[/say]")
 
@@ -1397,6 +1517,7 @@ func _run():
 				saynn("So naughty.")
 
 		addButton("Nod", "Enough is enough", "jog_afterchat_nod")
+		addButton("Shower", "Offer her to go take a refreshing shower", "jog_afterchat_shower")
 		addButton("Ask to jog more", "Ask to jog even more together", "jog_afterchat_askmore")
 		if (lust >= 0.6):
 			addButton("Lick her", "Try to make Jacki cum by licking and rubbing her stiched up pussy", "jog_try_piercings")
@@ -1406,6 +1527,55 @@ func _run():
 			addButtonWithChecks("Strapon anal", "Fuck Jacki's ass with a strapon", "jog_anal_strapon_pick", [], [ButtonChecks.HasStraponAndCanWear])
 		if (getFlag("JackiModule.Jacki_ch2GotPussyFreed")):
 			addButtonWithChecks("Breed her", "Fuck Jacki's pussy", "jog_breed_fuck", [], [ButtonChecks.HasReachablePenis])
+	if(state == "jog_afterchat_shower"):
+		saynn("[say=pc]Wanna go take a shower? You know, to wash all that sweat away.[/say]")
+
+		saynn("Jacki raises her arm and suddenly sniffs her armpit.")
+
+		saynn("[say=jacki]Yeah.. I could use one. I'm still afraid of the bullies so I don't visit it often..[/say]")
+
+		saynn("Could be why she has such a.. anyway.")
+
+		saynn("You and Jacki head to the showers.")
+
+		addButton("Showers", "See what's there", "jog_afterchat_shower_do")
+	if(state == "jog_afterchat_shower_do"):
+		aimCameraAndSetLocName("main_shower2")
+		GM.pc.setLocation("main_shower2")
+		addCharacter("jacki", ["naked"])
+		saynn("You enter the dressing room.")
+
+		if (corruption < 0.4):
+			playAnimation(StageScene.Duo, "stand", {npc="jacki", bodyState={naked=true}, npcBodyState={naked=true}})
+			saynn("Jacki quickly takes off her clothes and puts them in the locker. She runs past you while covering herself up using her paws and tail. You follow.")
+
+			saynn("She doesn't seem to be eager to.. shower together. So you stand under separate shower heads and just wash yourselves in peace.")
+
+			saynn("After you both are done, Jacki waves to you and heads to the dressing room. Looks like she is not corrupted enough to do more.")
+
+		else:
+			playAnimation(StageScene.SexStanding, "tease", {npc="jacki", pc="pc", bodyState={naked=true}, npcBodyState={naked=true}})
+			saynn("Jacki takes off her clothes and waits for you to do the same, standing near. After that, you head further, entering the showering area.")
+
+			saynn("You stand under one of the shower heads.")
+
+			saynn("[say=jacki]Could you rub me a little?..[/say]")
+
+			saynn("[say=pc]Sure.[/say]")
+
+			saynn("And so she joins you, offering you her back. You gently knead it while water washing any dirt off of you two.")
+
+			saynn("[say=jacki]Wruff..[/say]")
+
+			saynn("Your hands rub her shoulders, sides, waist.. When you are done with that, her tail boops your hands towards the directions of her butt. So you proceed to knead it too, groping and squeezing her buttcheeks.")
+
+			saynn("[say=jacki]So nice.. Thank you.[/say]")
+
+			saynn("She does the same to you, kneading your back and {pc.masc} ass. In a friendly way.")
+
+			saynn("You and Jacki return to the dressing room clean and refreshed.")
+
+		addButton("Continue", "See what happens next", "endthescene")
 	if(state == "jog_afterchat_nod"):
 		saynn("You nod.")
 
@@ -1595,7 +1765,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "endthescene")
 	if(state == "jog_try_piercings"):
-		playAnimation(StageScene.SexOral, "lick", {pc="jacki", npc="pc", npcBodyState={exposedCrotch=true}})
+		playAnimation(StageScene.SexOral, "lick", {pc="jacki", npc="pc", bodyState={exposedCrotch=true}})
 		saynn("[say=pc]I can try to help you.[/say]")
 
 		saynn("[say=jacki]Wruff![/say]")
@@ -3711,7 +3881,20 @@ func _react(_action: String, _args):
 
 	if(_action == "perv_suckass"):
 		processTime(15*60)
+		getModule("JackiModule").addLust(2)
+		getModule("JackiModule").addCorruption(3)
+
+	if(_action == "perv_makehersuckass"):
+		processTime(15*60)
+		getModule("JackiModule").addAnger(5)
+
+	if(_action == "perv_makehersuckass_force"):
+		processTime(5*60)
 		getModule("JackiModule").addCorruption(5)
+
+	if(_action == "perv_makehersuckass_cum"):
+		processTime(3*60)
+		GM.pc.orgasmFrom("jacki")
 
 	if(_action == "perv_suckass_kiss"):
 		processTime(5*60)
@@ -3858,6 +4041,9 @@ func _react(_action: String, _args):
 		getCharacter("jacki").updateBodyparts()
 		getModule("JackiModule").addLust(5)
 
+	if(_action == "jog_afterchat_shower"):
+		processTime(3*60)
+
 	if(_action == "jog_try_piercings"):
 		processTime(5*60)
 
@@ -3866,6 +4052,12 @@ func _react(_action: String, _args):
 
 	if(_action == "jog_breed_fuck"):
 		processTime(5*60)
+
+	if(_action == "jog_afterchat_shower_do"):
+		processTime(10*60)
+		getCharacter("jacki").afterTakingAShower()
+		GM.pc.afterTakingAShower()
+		GM.pc.addStamina(20)
 
 	if(_action == "jog_afterchat_jogmore"):
 		processTime(10*60)

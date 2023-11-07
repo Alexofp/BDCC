@@ -7,6 +7,7 @@ var buttScore = 0
 var waterScore = 0
 var sawBefore = false
 var wasRektBefore = false
+var isMemories = false
 var onlyOne = false
 var didAnything = false
 var swallowedCum = false
@@ -27,6 +28,7 @@ func _run():
 		waterScore = getModule("JackiModule").getSkillScore("jackiSkillWatersports")
 		sawBefore = (getFlag("JackiModule.BathroomBulliesSceneHappened", false) || getFlag("GymModule.Gym_BullyGangIntroduced", false))
 		wasRektBefore = (getFlag("JackiModule.BathroomBulliesBecameCumToilet", false) || getFlag("JackiModule.BathroomBulliesBecamePissToilet", false))
+		isMemories = getFlag("JackiModule.Jacki_ch2GotEnslaved", false)
 		saynn("You thought you saw Jacki here.. but no.. her yoga mat is unoccupied.")
 
 		saynn("Is she in trouble again? That wolfie is quite unlucky, huh.")
@@ -112,7 +114,7 @@ func _run():
 		saynn("Looks like Jacki silently appreciates your braveness. Means you can't back away now.. But are you sure you're gonna win 3 fights in a row?..")
 
 		addButton("Fight", "Start a fight with all three", "dec_fight")
-		addButtonWithChecks("Pay 45 creds", "Pay for Jacki's debt", "dec_payfordept", [], [[ButtonChecks.HasCredits, 45]])
+		addButtonWithChecks("Pay 45 creds", "Pay for Jacki's debt", "dec_payfordept", [], [[ButtonChecks.HasCredits, 45 if !isMemories else 0]])
 		addButton("Just leave", "Whatever. It's not your problem", "just_leave")
 	if(state == "quesiton"):
 		saynn("[say=pc]So.. Why did you cuff her to the urinal? Just for fun?[/say]")
@@ -138,8 +140,8 @@ func _run():
 		saynn("Jacki looks.. dry.. for now. Looks like nobody has used her yet.")
 
 		addButton("Intimidate", "Tell them to free Jacki right now", "intimidate")
-		addButtonWithChecks("Use Jacki", "Pay 10 credits and use Jacki", "pay10", [], [[ButtonChecks.HasCredits, 10], ButtonChecks.HasReachablePenisOrVaginaOrHasStrapon])
-		addButtonWithChecks("Pay 45 creds", "Pay for Jacki's debt", "dec_payfordept", [], [[ButtonChecks.HasCredits, 45]])
+		addButtonWithChecks("Use Jacki", "Pay 10 credits and use Jacki", "pay10", [], [[ButtonChecks.HasCredits, 10 if !isMemories else 0], ButtonChecks.HasReachablePenisOrVaginaOrHasStrapon])
+		addButtonWithChecks("Pay 45 creds", "Pay for Jacki's debt", "dec_payfordept", [], [[ButtonChecks.HasCredits, 45 if !isMemories else 0]])
 		addButton("Offer self", "Offer them to cuff you to the urinal instead", "offerself")
 		addButton("Just leave", "Whatever. It's not your problem", "just_leave")
 	if(state == "pay10"):
@@ -171,6 +173,8 @@ func _run():
 		saynn("[say=gymbully3]So serious. Fine, let's fuck around~.[/say]")
 
 		addButton("Fight", "Start the fight", "first_fight")
+		if (isMemories):
+			addButton("Skip fight", "(Memories) Skip the fight and pretend that you won all 3 of them", "won_thirdfight")
 	if(state == "won_firstfight"):
 		playAnimation(StageScene.Duo, "stand", {npc="gymbully2"})
 		saynn("The annoying girl is down on her knees. Next is the quiet guy.")
@@ -1001,12 +1005,14 @@ func _react(_action: String, _args):
 		processTime(3*60)
 
 	if(_action == "dec_payfordept"):
-		GM.pc.addCredits(-45)
+		if(!isMemories):
+			GM.pc.addCredits(-45)
 		getModule("JackiModule").addAnger(-15)
 		getModule("JackiModule").addCorruption(-5)
 
 	if(_action == "pay10"):
-		GM.pc.addCredits(-10)
+		if(!isMemories):
+			GM.pc.addCredits(-10)
 		onlyOne = true
 
 	if(_action == "offerself"):
@@ -1227,6 +1233,7 @@ func saveData():
 	data["waterScore"] = waterScore
 	data["sawBefore"] = sawBefore
 	data["wasRektBefore"] = wasRektBefore
+	data["isMemories"] = isMemories
 	data["onlyOne"] = onlyOne
 	data["didAnything"] = didAnything
 	data["swallowedCum"] = swallowedCum
@@ -1244,6 +1251,7 @@ func loadData(data):
 	waterScore = SAVE.loadVar(data, "waterScore", 0)
 	sawBefore = SAVE.loadVar(data, "sawBefore", false)
 	wasRektBefore = SAVE.loadVar(data, "wasRektBefore", false)
+	isMemories = SAVE.loadVar(data, "isMemories", false)
 	onlyOne = SAVE.loadVar(data, "onlyOne", false)
 	didAnything = SAVE.loadVar(data, "didAnything", false)
 	swallowedCum = SAVE.loadVar(data, "swallowedCum", false)

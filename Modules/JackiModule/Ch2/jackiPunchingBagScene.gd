@@ -152,6 +152,8 @@ func _run():
 		saynn("Looks like it's a fight.")
 
 		addButton("Fight", "Start the fight", "fight_risha")
+		if (getFlag("JackiModule.Jacki_ch2GotEnslaved")):
+			addButton("Skip fight", "(Memories) Skip the fight and pretend that you won", "won_risha")
 	if(state == "lost_risha"):
 		playAnimation(StageScene.Duo, "defeat", {npc="risha"})
 		saynn("Defeated, you drop to your knees before Risha.")

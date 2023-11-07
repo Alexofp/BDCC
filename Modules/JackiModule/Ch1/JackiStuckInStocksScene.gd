@@ -432,6 +432,8 @@ func _run():
 		saynn("[say=gymbully]Well, bring it on then. We will fuck the girl when you lose. Sounds fair?[/say]")
 
 		addButton("Fight", "Begin the fight", "startfight")
+		if(getFlag("JackiModule.Jacki_ch2GotEnslaved")):
+			addButton("Skip fight", "(Memories) Skip the fight and pretend that you won", "if_won")
 
 
 
@@ -694,8 +696,9 @@ func _react(_action: String, _args):
 		processTime(20 * 60)
 	
 	if(_action in ["continue1", "continue2"]):
-		addExperienceToPlayer(50)
-		GM.pc.addCredits(1)
+		if(!getFlag("JackiModule.Jacki_ch2GotEnslaved")):
+			addExperienceToPlayer(50)
+			GM.pc.addCredits(1)
 	
 	if(_action == "cum_inside"):
 		getCharacter("jacki").cummedInAnusBy("pc")
