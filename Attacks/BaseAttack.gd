@@ -297,7 +297,7 @@ func getAttackHitReactAnimation(_attacker, _receiver, _result):
 	elif(_result.has("pain") && _result["pain"] > 0):
 		return "hurt"
 	else:
-		return null
+		return ""
 
 func scaledDmgStr(_damageType, _damage: int):
 	var damageMult = GM.pc.getDamageMultiplier(_damageType)
