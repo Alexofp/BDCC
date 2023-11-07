@@ -27,6 +27,7 @@ var sexGoals = []
 var sexActivities = []
 var sexTypes = []
 var fluids = []
+var speechModifiers = []
 
 var id = "badmodule"
 var author = "no author"
@@ -110,6 +111,9 @@ func register():
 		
 	for fluid in fluids:
 		GlobalRegistry.registerFluid(fluid)
+		
+	for speechModifier in speechModifiers:
+		GlobalRegistry.registerSpeechModifier(speechModifier)
 
 func registerEventTriggers():
 	pass

@@ -3,6 +3,9 @@ class_name BaseCharacter
 
 #Base class that has all the functions
 signal stat_changed
+signal pain_changed(newValue, oldValue)
+signal lust_changed(newValue, oldValue)
+signal stamina_changed(newValue, oldValue)
 signal levelChanged
 signal skillLevelChanged(skillID)
 signal bodypart_changed
@@ -87,30 +90,39 @@ func getID():
 
 # Skips armor checks etc
 func addPain(_p: int):
+	var initialPain = pain
 	pain += _p
 	if(pain > painThreshold()):
 		pain = painThreshold()
 	if(pain < 0):
 		pain = 0
 		
+	if(initialPain != pain):
+		emit_signal("pain_changed", pain, initialPain)
 	emit_signal("stat_changed")
 
 func addLust(_l: int):
+	var initialLust = lust
 	lust += _l
 	if(lust > lustThreshold()):
 		lust = lustThreshold()
 	if(lust < 0):
 		lust = 0
 	
+	if(initialLust != lust):
+		emit_signal("lust_changed", lust, initialLust)
 	emit_signal("stat_changed")
 
 func addStamina(_s: int):
+	var initialStamina = stamina
 	stamina += _s
 	if(stamina > getMaxStamina()):
 		stamina = getMaxStamina()
 	if(stamina < 0):
 		stamina = 0
 	
+	if(initialStamina != stamina):
+		emit_signal("stamina_changed", stamina, initialStamina)
 	emit_signal("stat_changed")
 
 func getPain() -> int:
@@ -469,11 +481,9 @@ func formatSay(text):
 	if(GM.ui != null):
 		text = GM.ui.processString(text)
 	
-	if(isGagged() && GM.pc.hasPerk(Perk.BDSMGagTalk)):
-		return "[color="+color+"]\""+Util.muffledSpeech(text)+"\" ("+text+")[/color]"
-	
-	if(isGagged()):
-		text = Util.muffledSpeech(text)
+	for speechModifier in GlobalRegistry.getSpeechModifiers():
+		if(speechModifier.appliesTo(self)):
+			text = speechModifier.modify(text, self)
 	
 	return "[color="+color+"]\""+text+"\"[/color]"
 

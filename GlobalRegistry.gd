@@ -60,6 +60,7 @@ var computers: Dictionary = {}
 var fluids: Dictionary = {}
 var skins: Dictionary = {}
 var partSkins: Dictionary = {}
+var speechModifiers: Array = []
 
 var bodypartStorageNode
 
@@ -330,6 +331,8 @@ func registerEverything():
 	
 	registerQuestFolder("res://Quests/Quest/")
 	
+	registerSpeechModifiersFolder("res://Game/SpeechModifiers/")
+	
 	if(true):
 		var start2 = OS.get_ticks_usec()
 		registerStageSceneFolder("res://Player/StageScene3D/Scenes/")
@@ -354,6 +357,7 @@ func registerEverything():
 	sortFightClubFighters()
 	sortRegisteredStatusEffectsByPriority()
 	sortPlayerAttacks()
+	sortSpeechModifiersByPriority()
 	
 	GM.GES.registerAll()
 	
@@ -1632,3 +1636,24 @@ func getPartSkins(partID: String):
 	if(!partSkins.has(partID)):
 		return {}
 	return partSkins[partID]
+	
+func registerSpeechModifier(path: String):
+	var loadedClass = load(path)
+	var object = loadedClass.new()
+	speechModifiers.append(object)
+
+func registerSpeechModifiersFolder(folder: String):
+	var scripts = getScriptsInFolder(folder)
+	for scriptPath in scripts:
+		registerSpeechModifier(scriptPath)
+
+func getSpeechModifiers():
+	return speechModifiers
+	
+static func sortSpeechModifiersByPriority_sortFunc(a, b):
+	if a.priority > b.priority:
+		return true
+	return false
+
+func sortSpeechModifiersByPriority():
+	speechModifiers.sort_custom(self, "sortSpeechModifiersByPriority_sortFunc")
