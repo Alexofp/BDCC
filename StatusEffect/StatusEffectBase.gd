@@ -102,3 +102,25 @@ func buff(buffid, args = []):
 	var buff: BuffBase = GlobalRegistry.createBuff(buffid)
 	buff.initBuff(args)
 	return buff
+
+
+func onFightStart(_contex = {}):
+	pass
+
+func processBattleTurnContex(_contex = {}):
+	pass
+
+func onFightEnd(_contex = {}):
+	pass
+
+func onSexStarted(_contex = {}):
+	pass
+
+func processSexTurnContex(_contex = {}):
+	pass
+
+func onSexEvent(_event:SexEvent):
+	pass
+
+func onSexEnded(_contex = {}):
+	pass

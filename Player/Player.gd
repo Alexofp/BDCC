@@ -622,9 +622,7 @@ func afterTakingAShower():
 	clearTallymarks()
 
 func orgasmFrom(_characterID: String):
-	cumOnFloor()
-	
-	addLust(-lust)
+	afterOrgasm()
 
 func getInmateNumber():
 	return inmateNumber

@@ -31,8 +31,6 @@ const CumSlut = "CumSlut"
 const CumSwallower = "CumSwallower"
 const CumSloppySeconds = "CumSloppySeconds"
 const CumCumOnOpponent = "CumCumOnOpponent"
-const CumStud = "CumStud"
-const CumStudV2 = "CumStudV2"
 const CumKeepCondoms = "CumKeepCondoms"
 
 # Sex Slave perks
@@ -92,3 +90,7 @@ const FertilityPainTolerance = "FertilityPainTolerance"
 const FertilityBetterOvulationV3 = "FertilityBetterOvulationV3"
 const FertilityMotherOfTheYear = "FertilityMotherOfTheYear"
 const FertilityBellySize = "FertilityBellySize"
+
+# Breeder perks
+const BreedStud = "BreedStud"
+const BreedStudV2 = "BreedStudV2"

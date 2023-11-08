@@ -949,6 +949,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Game/SexEngine/SexEngine.gd"
 }, {
+"base": "Reference",
+"class": "SexEvent",
+"language": "GDScript",
+"path": "res://Game/SexEngine/SexEvent/SexEvent.gd"
+}, {
 "base": "Object",
 "class": "SexGoal",
 "language": "GDScript",
@@ -1338,6 +1343,7 @@ _global_script_class_icons={
 "SexActivityTag": "",
 "SexDomInfo": "",
 "SexEngine": "",
+"SexEvent": "",
 "SexGoal": "",
 "SexGoalBase": "",
 "SexInfoBase": "",

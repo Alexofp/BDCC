@@ -84,6 +84,7 @@ func cum():
 	addArousal(-1.0)
 	getChar().addLust(-int(getChar().getLust()/2.0))
 	timesCame += 1
+	getChar().afterOrgasm(true)
 
 func getTimesCame():
 	return timesCame

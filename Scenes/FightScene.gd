@@ -24,7 +24,6 @@ func _init():
 func _initScene(_args = []):
 	enemyID = _args[0]
 	enemyCharacter = GlobalRegistry.getCharacter(enemyID)
-	enemyCharacter.beforeFightStarted()
 	addCharacter(enemyID)
 	
 	if(_args.size() > 1):
@@ -34,7 +33,8 @@ func _initScene(_args = []):
 	enemyAIStrategy.battleName = battleName
 	enemyAIStrategy.onBattleStart(GM.pc)
 	
-	GM.pc.beforeFightStarted()
+	enemyCharacter.onFightStart(getContexForEnemy())
+	GM.pc.onFightStart(getContexForPC())
 	if(GM.pc.getLustCombatState() != null):
 		GM.pc.getLustCombatState().setEnemyID(enemyID)
 
@@ -429,8 +429,8 @@ func _react(_action: String, _args):
 			if(enemyCharacter.has_method("resetEquipment")):
 				enemyCharacter.resetEquipment()
 		
-		enemyCharacter.afterFightEnded()
-		GM.pc.afterFightEnded()
+		enemyCharacter.onFightEnd(getContexForEnemy())
+		GM.pc.onFightEnd(getContexForPC())
 		if(battleEndedHow == ""):
 			battleEndedHow = "pain"
 		if(battleState == "win"):
@@ -689,14 +689,26 @@ func aiTurn():
 	
 	return enemyText
 
+func getContexForPC():
+	return {
+		"whoID": "pc",
+		"enemyID": enemyID,
+	}
+	
+func getContexForEnemy():
+	return {
+		"whoID": enemyID,
+		"enemyID": "pc",
+	}
+
 func beforeTurnChecks(pcWasStruggling = false):
 	whatPlayerDid = ""
 	whatEnemyDid = ""
 	whatHappened = ""
 	lastPlayerAttackData = null
 	
-	GM.pc.processBattleTurn()
-	enemyCharacter.processBattleTurn()
+	GM.pc.processBattleTurnContex(getContexForPC())
+	enemyCharacter.processBattleTurnContex(getContexForEnemy())
 	
 	if(true):
 		var turnData = GM.pc.processStruggleTurn(pcWasStruggling)

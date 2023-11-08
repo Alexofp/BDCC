@@ -422,3 +422,47 @@ func resetPickedPerks():
 
 func resetStats():
 	stats.clear()
+
+
+
+func onFightStart(_contex = {}):
+	for perkID in perks:
+		if(isPerkDisabled(perkID)):
+			continue
+		perks[perkID].onFightStart(_contex)
+
+func processBattleTurnContex(_contex = {}):
+	for perkID in perks:
+		if(isPerkDisabled(perkID)):
+			continue
+		perks[perkID].processBattleTurnContex(_contex)
+
+func onFightEnd(_contex = {}):
+	for perkID in perks:
+		if(isPerkDisabled(perkID)):
+			continue
+		perks[perkID].onFightEnd(_contex)
+
+func onSexStarted(_contex = {}):
+	for perkID in perks:
+		if(isPerkDisabled(perkID)):
+			continue
+		perks[perkID].onSexStarted(_contex)
+
+func processSexTurnContex(_contex = {}):
+	for perkID in perks:
+		if(isPerkDisabled(perkID)):
+			continue
+		perks[perkID].processSexTurnContex(_contex)
+
+func onSexEvent(_event:SexEvent):
+	for perkID in perks:
+		if(isPerkDisabled(perkID)):
+			continue
+		perks[perkID].onSexEvent(_event)
+
+func onSexEnded(_contex = {}):
+	for perkID in perks:
+		if(isPerkDisabled(perkID)):
+			continue
+		perks[perkID].onSexEnded(_contex)
