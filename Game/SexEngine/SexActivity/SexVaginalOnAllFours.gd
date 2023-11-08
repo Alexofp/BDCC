@@ -61,6 +61,8 @@ func getPoseDescriptor():
 		return " standing"
 	if(currentPose == POSE_CHOKEFUCK):
 		return " while also choking"
+	if(currentPose == POSE_BEHIND):
+		return " in a behind pose"
 	return " [color=red]FIX DESCRIPTOR[/color]"
 
 const POSE_DEFAULT = "POSE_DEFAULT"
@@ -69,6 +71,7 @@ const POSE_STANDING = "POSE_STANDING"
 const POSE_MISSONARY = "POSE_MISSONARY"
 const POSE_FULLNELSON = "POSE_FULLNELSON"
 const POSE_CHOKEFUCK = "POSE_CHOKEFUCK"
+const POSE_BEHIND = "POSE_BEHIND"
 const PoseToName = {
 	POSE_DEFAULT: "Default",
 	POSE_ALLFOURS: "All Fours",
@@ -76,6 +79,7 @@ const PoseToName = {
 	POSE_MISSONARY: "Missonary",
 	POSE_FULLNELSON: "Full Nelson",
 	POSE_CHOKEFUCK: "Choke fuck",
+	POSE_BEHIND: "Behind",
 }
 const PoseToAnimName = {
 	POSE_DEFAULT: StageScene.SexAllFours,
@@ -84,6 +88,7 @@ const PoseToAnimName = {
 	POSE_MISSONARY: StageScene.SexMissionary,
 	POSE_FULLNELSON: StageScene.SexFullNelson,
 	POSE_CHOKEFUCK: StageScene.Choking,
+	POSE_BEHIND: StageScene.SexBehind,
 }
 func getAvaiablePoses():
 	if(currentPose == POSE_CHOKEFUCK):
@@ -91,9 +96,9 @@ func getAvaiablePoses():
 	
 	if(getSexType() == SexType.DefaultSex):
 		if(subInfo.isUnconscious()):
-			return [POSE_ALLFOURS, POSE_MISSONARY, POSE_FULLNELSON]
+			return [POSE_ALLFOURS, POSE_MISSONARY, POSE_FULLNELSON, POSE_BEHIND]
 		else:
-			return [POSE_ALLFOURS, POSE_STANDING, POSE_MISSONARY, POSE_FULLNELSON]
+			return [POSE_ALLFOURS, POSE_STANDING, POSE_MISSONARY, POSE_FULLNELSON, POSE_BEHIND]
 	
 	return [POSE_DEFAULT]
 
@@ -188,6 +193,10 @@ func getStartTextForPose(thePose):
 		text = RNG.pick([
 			"{dom.You} {dom.youVerb('wrap')} {dom.yourHis} arms under {sub.your} legs and {dom.youVerb('raise', 'raises')} {sub.youHim} above the floor, {dom.yourHis} hands locking {sub.yourHis} arms in a full nelson hold. {dom.YourHis} "+getDickName()+" is pressed against {sub.yourHis} "+getUsedBodypartName()+throughClothing,
 		])
+	elif(thePose == POSE_BEHIND):
+		text = RNG.pick([
+			"{dom.You} {dom.youVerb('pin')} {sub.your} body against the floor, positioning {dom.yourself} behind. {dom.You} {dom.youVerb('align')} {dom.yourHis} "+getDickName()+" against {sub.yourHis} "+getUsedBodypartName()+".",
+		])
 	else:
 		text = RNG.pick([
 			"{dom.You} {dom.youVerb('position')} {dom.yourself} behind {sub.your} butt with {dom.yourHis} "+getDickName()+" out and presses it against {sub.yourHis} "+getUsedBodypartName()+throughClothing,
@@ -211,6 +220,10 @@ func getSwitchPoseTextForPose(thePose):
 	elif(thePose == POSE_FULLNELSON):
 		text = RNG.pick([
 			"{dom.You} {dom.youVerb('wrap')} {dom.yourHis} arms under {sub.your} legs and {dom.youVerb('raise', 'raises')} {sub.youHim} above the floor, {dom.yourHis} hands locking {sub.yourHis} arms in a full nelson hold. {dom.YourHis} "+getDickName()+" is still inside {sub.yourHis} "+getUsedBodypartName()+"!",
+		])
+	elif(thePose == POSE_BEHIND):
+		text = RNG.pick([
+			"{dom.You} {dom.youVerb('pin')} {sub.your} body against the floor, {dom.yourHis} "+getDickName()+" is still inside {sub.yourHis} "+getUsedBodypartName()+"!",
 		])
 	else:
 		text = RNG.pick([
