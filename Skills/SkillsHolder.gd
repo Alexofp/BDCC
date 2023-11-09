@@ -428,6 +428,7 @@ func resetStats():
 func onFightStart(_contex = {}):
 	for perkID in perks:
 		if(isPerkDisabled(perkID)):
+			perks[perkID].onFightStartWhenDisabled(_contex)
 			continue
 		perks[perkID].onFightStart(_contex)
 
@@ -440,12 +441,14 @@ func processBattleTurnContex(_contex = {}):
 func onFightEnd(_contex = {}):
 	for perkID in perks:
 		if(isPerkDisabled(perkID)):
+			perks[perkID].onFightEndWhenDisabled(_contex)
 			continue
 		perks[perkID].onFightEnd(_contex)
 
 func onSexStarted(_contex = {}):
 	for perkID in perks:
 		if(isPerkDisabled(perkID)):
+			perks[perkID].onSexStartedWhenDisabled(_contex)
 			continue
 		perks[perkID].onSexStarted(_contex)
 
@@ -464,5 +467,6 @@ func onSexEvent(_event:SexEvent):
 func onSexEnded(_contex = {}):
 	for perkID in perks:
 		if(isPerkDisabled(perkID)):
+			perks[perkID].onSexEndedWhenDisabled(_contex)
 			continue
 		perks[perkID].onSexEnded(_contex)

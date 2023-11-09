@@ -394,7 +394,7 @@ func sendSexEvent(type, source = "", target = "", data = {}):
 	newSexEvent.targetCharID = target
 	newSexEvent.data = data
 	newSexEvent.isSexEngine = true
-	newSexEvent.sexActivity = self
+	newSexEvent.sexEngine = getSexEngine()
 	
 	getDom().sendSexEvent(newSexEvent)
 	if(getSub() != getDom()):

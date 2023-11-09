@@ -45,7 +45,9 @@ func processTurn():
 		subInfo.addFear(0.05)
 		affectSub(subInfo.fetishScore({Fetish.Masochism: 1.0}, -0.5), 0.1, -0.2, 0.0)
 		affectDom(domInfo.fetishScore({Fetish.Sadism: 0.5}, 0.5), 0.1, 0.0)
-		subInfo.addPain(RNG.randi_range(4, 8))
+		var howMuchAddPain = RNG.randi_range(4, 8)
+		subInfo.addPain(howMuchAddPain)
+		sendSexEvent(SexEvent.PainInflicted, domID, subID, {pain=howMuchAddPain,isDefense=false,intentional=true})
 		domInfo.addAnger(-0.1)
 		
 		var texts = [
@@ -106,7 +108,9 @@ func doDomAction(_id, _actionInfo):
 	if(_id == "hithard"):
 		affectSub(subInfo.fetishScore({Fetish.Masochism: 1.0}, -0.5), 0.1, -0.05, 0.0)
 		affectDom(domInfo.fetishScore({Fetish.Sadism: 0.5}, 0.5), 0.2, 0.0)
-		subInfo.addPain(RNG.randi_range(15, 25))
+		var howMuchAddPain = RNG.randi_range(15, 25)
+		subInfo.addPain(howMuchAddPain)
+		sendSexEvent(SexEvent.PainInflicted, domID, subID, {pain=howMuchAddPain,isDefense=false,intentional=true})
 		domInfo.addAnger(-0.2)
 		subInfo.addFear(0.3)
 		

@@ -238,7 +238,9 @@ func doDomAction(_id, _actionInfo):
 		var subSay = null
 		affectSub(subInfo.fetishScore({Fetish.Masochism: 1.0})-0.5, 0.1, -0.05, 0.0)
 		affectDom(domInfo.fetishScore({Fetish.Sadism: 1.0})+0.5, 0.2, 0.0)
-		subInfo.addPain(RNG.randi_range(10, 20))
+		var howMuchAddPain = RNG.randi_range(10, 20)
+		subInfo.addPain(howMuchAddPain)
+		sendSexEvent(SexEvent.PainInflicted, domID, subID, {pain=howMuchAddPain,isDefense=false,intentional=true})
 		domInfo.addAnger(-0.1)
 		subInfo.addFear(0.2)
 		if(RNG.chance(20)):
@@ -305,7 +307,9 @@ func doDomAction(_id, _actionInfo):
 		var text = ""
 		affectDom(domInfo.fetishScore({Fetish.Sadism: 1.0})+0.0, 0.1, 0.0)
 		affectSub(subInfo.fetishScore({Fetish.Masochism: 1.0})-0.5, 0.1, -0.01, 0.0)
-		subInfo.addPain(RNG.randi_range(13, 25))
+		var howMuchAddPain = RNG.randi_range(13, 25)
+		subInfo.addPain(howMuchAddPain)
+		sendSexEvent(SexEvent.PainInflicted, domID, subID, {pain=howMuchAddPain,isDefense=false,intentional=true})
 		domInfo.addAnger(-0.1)
 		subInfo.addFear(0.3)
 		if(RNG.chance(20)):
@@ -322,7 +326,9 @@ func doDomAction(_id, _actionInfo):
 		var text = ""
 		affectDom(domInfo.fetishScore({Fetish.Sadism: 1.0})+0.0, 0.1, 0.0)
 		affectSub(subInfo.fetishScore({Fetish.Masochism: 1.0})-0.5, 0.1, -0.01, 0.0)
-		subInfo.addPain(RNG.randi_range(13, 25))
+		var howMuchAddPain = RNG.randi_range(13, 25)
+		subInfo.addPain(howMuchAddPain)
+		sendSexEvent(SexEvent.PainInflicted, domID, subID, {pain=howMuchAddPain,isDefense=false,intentional=true})
 		domInfo.addAnger(-0.1)
 		subInfo.addFear(0.3)
 		if(RNG.chance(20)):
@@ -442,6 +448,7 @@ func doSubAction(_id, _actionInfo):
 			state = ""
 			text += "{sub.You} {sub.youVerb('manage')} to bite {dom.your} foot hard!"
 			domInfo.addPain(5)
+			sendSexEvent(SexEvent.PainInflicted, subID, domID, {pain=5,isDefense=true,intentional=true})
 			domInfo.addAnger(0.3)
 		else:
 			text += "{sub.You} {sub.youVerb('try', 'tries')} to bite {dom.yourHis} foot."

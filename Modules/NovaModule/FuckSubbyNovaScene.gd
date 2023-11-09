@@ -252,7 +252,7 @@ func _react(_action: String, _args):
 		if(!usedCondom || (usedCondom && condomBroke)):
 			GM.main.addRoomMemoryCurrentLoc("You notice some cum stains, a sign that somebody had sex here", 1)
 			
-			getCharacter("nova").cummedInVaginaBy("pc")
+			getCharacter("nova").cummedInVaginaByAdvanced("pc", {condomBroke=condomBroke})
 			GM.pc.addSkillExperience(Skill.SexSlave, 20, "nova_subbyfuck")
 		else:
 			GM.pc.addSkillExperience(Skill.SexSlave, 40, "nova_subbyfuck")

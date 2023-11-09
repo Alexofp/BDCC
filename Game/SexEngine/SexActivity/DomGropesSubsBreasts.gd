@@ -122,6 +122,7 @@ func processTurn():
 		
 		if(getSub().hasEffect(StatusEffect.SoreNipplesAfterMilking)):
 			subInfo.addPain(1)
+			sendSexEvent(SexEvent.PainInflicted, domID, subID, {pain=1,isDefense=false,intentional=false})
 		
 		if(RNG.chance(10) && getSub().isLactating() && !getSub().hasEffect(StatusEffect.SoreNipplesAfterMilking)):
 			var breasts:BodypartBreasts = getSub().getBodypart(BodypartSlot.Breasts)

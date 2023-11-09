@@ -411,6 +411,7 @@ func doDomAction(_id, _actionInfo):
 	if(_id == "letsubcuminside"):
 		satisfyGoals()
 		var text = ""
+		var condomBroke = false
 		if(state in ["subabouttocum", "licking", "tonguefucking"]):
 			text = RNG.pick([
 				"{dom.You} {dom.youVerb('press', 'presses')} {dom.yourHis} lips against {sub.yourHis} "+RNG.pick(["pussy", "slit", "sensetive folds", "petals"])+" and keep lapping up the arousal until [b]{sub.you} {sub.youVerb('cum')}[/b]! {sub.YourHis} juices rush into {dom.yourHis} mouth as {sub.youHe} squirts!",
@@ -425,7 +426,7 @@ func doDomAction(_id, _actionInfo):
 			var condom:ItemBase = getSub().getWornCondom()
 			if(condom != null):
 				var breakChance = condom.getCondomBreakChance()
-				var condomBroke = getSub().shouldCondomBreakWhenFucking(getDom(), breakChance)
+				condomBroke = getSub().shouldCondomBreakWhenFucking(getDom(), breakChance)
 				if(condomBroke):
 					text = "[b]The condom broke![/b] "+text
 					condom.destroyMe()
@@ -444,7 +445,7 @@ func doDomAction(_id, _actionInfo):
 					
 					return {text=text}
 			
-			getDom().cummedInMouthBy(subID, FluidSource.Penis)
+			getDom().cummedInMouthByAdvanced(subID, {condomBroke=condomBroke}, FluidSource.Penis)
 			subInfo.cum()
 		
 		state = ""
@@ -701,10 +702,11 @@ func doSubAction(_id, _actionInfo):
 				"{sub.You} {sub.youVerb('grunt')} while {sub.yourHis} "+RNG.pick(["cock", "dick", "shaft"])+" throbs and suddenly shoots strings of "+RNG.pick(["cum", "seed", "semen"])+" directly into {dom.your} mouth!"+noPermissionText,
 			])
 			
+			var condomBroke = false
 			var condom:ItemBase = getSub().getWornCondom()
 			if(condom != null):
 				var breakChance = condom.getCondomBreakChance()
-				var condomBroke = getSub().shouldCondomBreakWhenFucking(getDom(), breakChance)
+				condomBroke = getSub().shouldCondomBreakWhenFucking(getDom(), breakChance)
 				if(condomBroke):
 					text = "[b]The condom broke![/b] "+text
 					condom.destroyMe()
@@ -729,7 +731,7 @@ func doSubAction(_id, _actionInfo):
 					
 					return {text=text}
 			
-			getDom().cummedInMouthBy(subID)
+			getDom().cummedInMouthByAdvanced(subID, {condomBroke=condomBroke})
 			subInfo.cum()
 		
 		endActivity()

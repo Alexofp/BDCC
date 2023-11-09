@@ -266,7 +266,9 @@ func processTurn():
 			var text = RNG.pick([
 				"{sub.You} {sub.youAre} trying to be a cock warmer for {dom.you} but {sub.yourHis} "+RNG.pick(usedBodypartNames)+" is too tight, it's very painful! But it sure feels good for {dom.you}.",
 			])
-			subInfo.addPain(RNG.randi_range(2, 5))
+			var howMuchPainAdd = RNG.randi_range(2, 5)
+			subInfo.addPain(howMuchPainAdd)
+			sendSexEvent(SexEvent.PainInflicted, domID, subID, {pain=howMuchPainAdd,isDefense=false,intentional=false})
 			domInfo.addLust(10)
 			domInfo.addArousalForeplay(0.1)
 			getSub().gotOrificeStretchedBy(usedBodypart, domID, 0.1)
@@ -524,7 +526,7 @@ func doDomAction(_id, _actionInfo):
 				
 				return {text = text}
 			else:
-				sendSexEvent(SexEvent.VaginalPenetration if isVag else SexEvent.AnalPenetration)
+				sendSexEvent(SexEvent.HolePenetrated, domID, subID, {hole=usedBodypart,engulfed=false})
 				gonnaCumOutside = false
 				#getSub().gotFuckedBy(usedBodypart, domID)
 				getSub().gotOrificeStretchedBy(usedBodypart, domID, 0.2)
@@ -625,7 +627,7 @@ func doDomAction(_id, _actionInfo):
 				var loadSize = getDom().cumInItem(condom)
 				domInfo.cum()
 				subInfo.addArousalSex(0.2)
-				sendSexEvent(SexEvent.VaginalFilledCondom if isVag else SexEvent.AnalFilledCondom, domID, subID, {loadSize=loadSize,knotted=knotSuccess})
+				sendSexEvent(SexEvent.FilledCondomInside, domID, subID, {hole=usedBodypart,loadSize=loadSize,knotted=knotSuccess})
 				satisfyGoals()
 				if(knotSuccess):
 					state = "knotting"
@@ -638,10 +640,9 @@ func doDomAction(_id, _actionInfo):
 		if(beingBredScore < 0.0):
 			subInfo.addResistance(1.0)
 			subInfo.addFear(0.1)
-		var loadSize = getSub().cummedInBodypartBy(usedBodypart, domID)
+		getSub().cummedInBodypartByAdvanced(usedBodypart, domID, {knotted=knotSuccess,condomBroke=condomBroke})
 		domInfo.cum()
 		subInfo.addArousalSex(0.2)
-		sendSexEvent(SexEvent.VaginalCreampie if isVag else SexEvent.AnalCreampie, domID, subID, {loadSize=loadSize,knotted=knotSuccess,condomBroke=condomBroke})
 		satisfyGoals()
 		if(knotSuccess):
 			state = "knotting"
@@ -830,8 +831,7 @@ func doSubAction(_id, _actionInfo):
 			
 			var strapon = getDom().getWornStrapon()
 			if(strapon.getFluids() != null && !strapon.getFluids().isEmpty()):
-				var loadSize = getSub().cummedInBodypartBy(usedBodypart, domID, FluidSource.Strapon)
-				sendSexEvent(SexEvent.VaginalStraponCreampie if isVag else SexEvent.AnalStraponCreampie, domID, subID, {loadSize=loadSize})
+				getSub().cummedInBodypartByAdvanced(usedBodypart, domID)
 				straponData = {
 					text = "{dom.Your} strapon gets squeezed by {sub.your} "+RNG.pick(usedBodypartNames)+" enough for it to suddenly [b]release its contents inside {sub.youHim}[/b]!"
 				}
@@ -856,7 +856,7 @@ func doSubAction(_id, _actionInfo):
 			affectDom(domInfo.fetishScore({fetishGiving: 1.0}), 0.2, -0.01)
 			return {text="{sub.You} {sub.youVerb('try', 'tries')} to envelop {dom.yourHis} "+getDickName()+" but it's too big!"}
 		
-		sendSexEvent(SexEvent.VaginalPenetration if isVag else SexEvent.AnalPenetration, domID, subID, {engulfed=true})
+		sendSexEvent(SexEvent.HolePenetrated, domID, subID, {hole=usedBodypart,engulfed=true})
 		affectSub(subInfo.fetishScore({fetishReceiving: 1.0}), 0.1, 0.0, 0.0)
 		affectDom(domInfo.fetishScore({fetishGiving: 1.0}), 0.1*domSensetivity(), -0.01)
 		subInfo.addArousalSex(0.1)
@@ -895,7 +895,9 @@ func doSubAction(_id, _actionInfo):
 			return {text = text}
 	
 	if(_id == "resist"):
-		domInfo.addPain(RNG.randi_range(2, 6))
+		var howMuchPainAdded = RNG.randi_range(2, 6)
+		domInfo.addPain(howMuchPainAdded)
+		sendSexEvent(SexEvent.PainInflicted, subID, domID, {pain=howMuchPainAdded,isDefense=true,intentional=true})
 		if(RNG.chance(getSubResistChance(30.0, 25.0))):
 			domInfo.addAnger(0.4)
 			endActivity()

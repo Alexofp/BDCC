@@ -874,14 +874,34 @@ func clearOrificeFluidsCheckBlocked():
 	return success
 
 func cummedInBodypartBy(bodypartSlot, characterID, sourceType = null, amountToTransfer = 1.0):
+	var result = cummedInBodypartByAdvanced(bodypartSlot, characterID, {}, sourceType, amountToTransfer)
+
+	return result["loadSize"]
+
+func cummedInBodypartByAdvanced(bodypartSlot, characterID, advancedData:Dictionary={}, sourceType = null, amountToTransfer = 1.0):
+	var noData = {loadSize=0.0,condomBroke=false}
 	if(!hasBodypart(bodypartSlot)):
-		return 0.0
+		return noData
 	
 	var resultAmount = 0.0
+	var condomBroke = false
 	
 	var ch = GlobalRegistry.getCharacter(characterID)
+
+	if(advancedData.has("condomBroke") && advancedData["condomBroke"]):
+		condomBroke = true
+	elif(advancedData.has("condom")):
+		var condomBreakChance = advancedData["condom"]
+		if(ch.shouldCondomBreakWhenFucking(self, condomBreakChance)):
+			condomBroke = true
+		else:
+			return noData
+	
 	if(sourceType == null):
-		sourceType = FluidSource.Penis
+		if(ch.isWearingStrapon()): # Strapons are preffered because we could be wearing one while having a chastity cage
+			sourceType = FluidSource.Strapon
+		else:
+			sourceType = FluidSource.Penis
 	
 	if(sourceType == FluidSource.Penis && ch.hasBodypart(BodypartSlot.Penis)):
 		var thebodypart = getBodypart(bodypartSlot)
@@ -908,16 +928,46 @@ func cummedInBodypartBy(bodypartSlot, characterID, sourceType = null, amountToTr
 		if(ch != null):
 			ch.getSkillsHolder().cameInsideSomeone(getID())
 	
-	return resultAmount
+	if(!advancedData.has("noEvent") || !advancedData["noEvent"]):
+		if(sourceType == FluidSource.Penis):
+			var event = SexEventHelper.create(SexEvent.HoleCreampied, characterID, getID(), {
+				hole = bodypartSlot,
+				loadSize = resultAmount,
+				knotted = (advancedData.has("knotted") && advancedData["knotted"]),
+				engulfed = (advancedData.has("engulfed") && advancedData["engulfed"]),
+				condomBroke = condomBroke,
+			})
+			ch.sendSexEvent(event)
+			sendSexEvent(event)
+		if(sourceType == FluidSource.Strapon):
+			var event = SexEventHelper.create(SexEvent.StraponCreampied, characterID, getID(), {
+				hole = bodypartSlot,
+				loadSize = resultAmount,
+				knotted = (advancedData.has("knotted") && advancedData["knotted"]),
+				engulfed = (advancedData.has("engulfed") && advancedData["engulfed"]),
+			})
+			ch.sendSexEvent(event)
+			sendSexEvent(event)
+	
+	return {loadSize=0.0,condomBroke=condomBroke}
 	
 func cummedInVaginaBy(characterID, sourceType = null, amountToTransfer = 1.0):
-	cummedInBodypartBy(BodypartSlot.Vagina, characterID, sourceType, amountToTransfer)
+	return cummedInBodypartBy(BodypartSlot.Vagina, characterID, sourceType, amountToTransfer)
 
 func cummedInAnusBy(characterID, sourceType = null, amountToTransfer = 1.0):
-	cummedInBodypartBy(BodypartSlot.Anus, characterID, sourceType, amountToTransfer)
+	return cummedInBodypartBy(BodypartSlot.Anus, characterID, sourceType, amountToTransfer)
 
 func cummedInMouthBy(characterID, sourceType = null, amountToTransfer = 1.0):
-	cummedInBodypartBy(BodypartSlot.Head, characterID, sourceType, amountToTransfer)
+	return cummedInBodypartBy(BodypartSlot.Head, characterID, sourceType, amountToTransfer)
+
+func cummedInVaginaByAdvanced(characterID, advancedData:Dictionary={}, sourceType = null, amountToTransfer = 1.0):
+	return cummedInBodypartByAdvanced(BodypartSlot.Vagina, characterID, advancedData, sourceType, amountToTransfer)
+
+func cummedInAnusByAdvanced(characterID, advancedData:Dictionary={}, sourceType = null, amountToTransfer = 1.0):
+	return cummedInBodypartByAdvanced(BodypartSlot.Anus, characterID, advancedData, sourceType, amountToTransfer)
+
+func cummedInMouthByAdvanced(characterID, advancedData:Dictionary={}, sourceType = null, amountToTransfer = 1.0):
+	return cummedInBodypartByAdvanced(BodypartSlot.Head, characterID, advancedData, sourceType, amountToTransfer)
 
 func rubsVaginasWith(characterID, chanceToStealCum = 100, showMessages = true):
 	if(!RNG.chance(chanceToStealCum) || !OPTIONS.isContentEnabled(ContentType.CumStealing)):
@@ -937,6 +987,13 @@ func rubsVaginasWith(characterID, chanceToStealCum = 100, showMessages = true):
 	var success = orifice.shareFluids(npcOrifice, RNG.randf_range(0.2, 0.4))
 	if(showMessages && success):
 		emit_signal("exchangedCumDuringRubbing", getName(), ch.getName())
+
+	if(true):
+		var event = SexEventHelper.create(SexEvent.RubbedVaginas, getID(), characterID, {
+			sharedFluids = success,
+		})
+		ch.sendSexEvent(event)
+		sendSexEvent(event)
 
 func getGenitalElasticity():
 	var value = 0.0
@@ -1025,7 +1082,7 @@ func getPenetrateChanceBy(bodypartSlot, characterID):
 	assert(ch != null)
 	return getPenetrateChance(bodypartSlot, ch.getPenisSize())
 
-func gotFuckedBy(bodypartSlot, characterID, showMessages = true):
+func gotFuckedBy(bodypartSlot, characterID, showMessages = true, fireSexEvent = true):
 	if(!hasBodypart(bodypartSlot)):
 		return
 	
@@ -1034,6 +1091,13 @@ func gotFuckedBy(bodypartSlot, characterID, showMessages = true):
 	gotOrificeStretchedWith(bodypartSlot, ch.getPenisSize(), showMessages)
 	addStamina(buffsHolder.getCustom(BuffAttribute.StaminaRecoverAfterSex))
 	ch.addStamina(ch.getBuffsHolder().getCustom(BuffAttribute.StaminaRecoverAfterSex))
+	if(fireSexEvent):
+		var event = SexEventHelper.create(SexEvent.HolePenetrated, characterID, getID(), {
+			hole = bodypartSlot,
+			engulfed = false,
+		})
+		ch.sendSexEvent(event)
+		sendSexEvent(event)
 
 func gotVaginaFuckedBy(characterID, showMessages = true):
 	return gotFuckedBy(BodypartSlot.Vagina, characterID, showMessages)
@@ -1872,6 +1936,9 @@ func getWornCondom():
 			return item
 	return null
 
+func isWearingCondom():
+	return getWornCondom() != null
+
 func getArousal() -> float:
 	return arousal
 
@@ -2179,6 +2246,8 @@ func coverBodyWithFluid(fluidType, amount, fluidDNA = null):
 	bodyFluids.addFluid(fluidType, amount, fluidDNA)
 	
 func cummedOnBy(characterID, sourceType = null, howMuchPercent = 1.0):
+	var resultAmount = 0.0
+	
 	var ch = GlobalRegistry.getCharacter(characterID)
 	if(sourceType == null):
 		if(ch.getGender() == Gender.Female):
@@ -2191,10 +2260,19 @@ func cummedOnBy(characterID, sourceType = null, howMuchPercent = 1.0):
 		var fluids = usedBodypart.getFluids()
 		
 		if(fluids != null):
-			fluids.transferTo(bodyFluids, howMuchPercent)
+			resultAmount = fluids.transferTo(bodyFluids, howMuchPercent)
 	else:
-		coverBodyWithFluid(ch.getFluidType(sourceType), ch.getFluidAmount(sourceType)*howMuchPercent, ch.getFluidDNA(sourceType))
-
+		resultAmount = ch.getFluidAmount(sourceType)*howMuchPercent
+		coverBodyWithFluid(ch.getFluidType(sourceType), resultAmount, ch.getFluidDNA(sourceType))
+	
+	if(true):
+		var event = SexEventHelper.create(SexEvent.ReceivedFluidsOnBody, characterID, getID(), {
+			fluidSource = sourceType,
+			loadSize = resultAmount,
+		})
+		ch.sendSexEvent(event)
+		sendSexEvent(event)
+	
 func pissedOnBy(_characterID, howMuch = 1.0):
 	cummedOnBy(_characterID, FluidSource.Pissing, howMuch)
 	
@@ -2364,6 +2442,9 @@ func sendSexEvent(event):
 	onSexEvent(event)
 
 func onSexEvent(_event : SexEvent):
+	if(_event == null):
+		Log.error("GOT A NULL SEX EVENT")
+		return
 	print(getID()+" GOT SEX EVENT "+str(_event.type)+" SOURCE:"+str(_event.sourceCharID)+" TARGET:"+str(_event.targetCharID)+" "+str(_event.data))
 
 	getSkillsHolder().onSexEvent(_event)

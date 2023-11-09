@@ -53,8 +53,6 @@ func addsAttacks():
 func processBattleTurn():
 	pass
 	
-# IMPLEMENT MEEEEEE
-# Also add these to the status effects
 func onFightStart(_contex = {}):
 	pass
 
@@ -74,6 +72,18 @@ func onSexEvent(_event:SexEvent):
 	pass
 
 func onSexEnded(_contex = {}):
+	pass
+	
+func onSexEndedWhenDisabled(_contex = {}):
+	pass
+	
+func onSexStartedWhenDisabled(_contex = {}):
+	pass
+	
+func onFightEndWhenDisabled(_contex = {}):
+	pass
+	
+func onFightStartWhenDisabled(_contex = {}):
 	pass
 	
 func getBuffs():

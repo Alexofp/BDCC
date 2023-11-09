@@ -80,11 +80,26 @@ func isCloseToCumming() -> bool:
 func isReadyToCum() -> bool:
 	return getArousal() >= 1.0
 	
-func cum():
+func getOpponentInfo():
+	return null
+	
+func cum(infoCaused = null):
+	if(infoCaused == null):
+		infoCaused = getOpponentInfo()
+	if(infoCaused == null):
+		infoCaused = self
+	
 	addArousal(-1.0)
 	getChar().addLust(-int(getChar().getLust()/2.0))
 	timesCame += 1
 	getChar().afterOrgasm(true)
+	
+	if(true):
+		var event = SexEventHelper.create(SexEvent.Orgasmed, infoCaused.charID, charID, {
+		})
+		getChar().sendSexEvent(event)
+		if(infoCaused != null && infoCaused != self):
+			infoCaused.getChar().sendSexEvent(event)
 
 func getTimesCame():
 	return timesCame

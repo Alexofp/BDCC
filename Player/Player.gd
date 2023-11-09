@@ -623,6 +623,15 @@ func afterTakingAShower():
 
 func orgasmFrom(_characterID: String):
 	afterOrgasm()
+	
+	if(true):
+		var event = SexEventHelper.create(SexEvent.Orgasmed, _characterID, getID(), {
+		})
+		if(_characterID != getID()):
+			var ch = GlobalRegistry.getCharacter(_characterID)
+			if(ch != null):
+				ch.sendSexEvent(event)
+		sendSexEvent(event)
 
 func getInmateNumber():
 	return inmateNumber
