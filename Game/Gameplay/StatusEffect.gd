@@ -56,6 +56,9 @@ const CumInflated = "CumInflated"
 const Exposed = "Exposed"
 const SoreNipplesAfterMilking = "SoreNipplesAfterMilking"
 
+# Perk effects
+const RapidConception = "RapidConception"
+
 # Useful effects
 const Yoga = "Yoga"
 const WorkOutLight = "WorkOutLight"

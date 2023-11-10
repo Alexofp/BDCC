@@ -66,6 +66,7 @@ const RestraintForcingSuccessBuff = "RestraintForcingSuccessBuff"
 const BreastsLactatingSizeLimitBuff = "BreastsLactatingSizeLimitBuff"
 const BreastsMilkProductionBuff = "BreastsMilkProductionBuff"
 const PenisCumProductionBuff = "PenisCumProductionBuff"
+const PenisBallsVolumeBuff = "PenisBallsVolumeBuff"
 const PenisCumGenerationAfterOrgasmBuff = "PenisCumGenerationAfterOrgasmBuff"
 
 const EncounterChanceModifierStaffBuff = "EncounterChanceModifierStaffBuff"

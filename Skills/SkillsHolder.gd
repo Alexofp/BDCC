@@ -411,7 +411,7 @@ func receivedCreampie(_charID):
 		
 func cameInsideSomeone(_charID):
 	if(npc != null && npc.isPlayer()):
-		npc.addSkillExperience(Skill.CumLover, 50)
+		npc.addSkillExperience(Skill.Breeder, 10)
 
 func resetPickedPerks():
 	for perkID in perks.keys():

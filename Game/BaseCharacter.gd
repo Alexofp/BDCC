@@ -925,7 +925,7 @@ func cummedInBodypartByAdvanced(bodypartSlot, characterID, advancedData:Dictiona
 	
 	if(sourceType in [FluidSource.Penis, FluidSource.Strapon]):
 		skillsHolder.receivedCreampie(characterID)
-		if(ch != null):
+		if(ch != null && resultAmount > 0.0):
 			ch.getSkillsHolder().cameInsideSomeone(getID())
 	
 	if(!advancedData.has("noEvent") || !advancedData["noEvent"]):

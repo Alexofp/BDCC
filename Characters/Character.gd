@@ -318,8 +318,9 @@ func onCharacterVisiblyPregnant():
 	pregnancyWaitTimer = 0
 	if(getMenstrualCycle() != null):
 		if(getMenstrualCycle().isPregnantFromPlayer()):
+			GM.pc.addSkillExperience(Skill.Breeder, 50)
 			GM.main.addLogMessage("News", "You just received news that "+getName()+" is pregnant with your children.")
-
+		
 func onCharacterHeavyIntoPregnancy():
 	#print(getName()+" is heavy into pregnancy")
 	pass
