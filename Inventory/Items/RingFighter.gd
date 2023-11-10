@@ -15,7 +15,7 @@ func getClothingSlot():
 func getBuffs():
 	return [
 		buff(Buff.ReceivedPhysicalDamageBuff, [-10]),
-		buff(Buff.MaxStaminaBuff, [50]),
+		buff(Buff.StatBuff, [Stat.Agility, 10]),
 		]
 
 func getPrice():

@@ -54,6 +54,7 @@ const PregnancySpeedBuff = "PregnancySpeedBuff"
 
 const SkillExperienceBuff = "SkillExperienceBuff"
 const StatusEffectImmunityBuff = "StatusEffectImmunityBuff"
+const StatBuff = "StatBuff"
 
 const ChastityPenisBuff = "ChastityPenisBuff"
 const ChastityVaginaBuff = "ChastityVaginaBuff"

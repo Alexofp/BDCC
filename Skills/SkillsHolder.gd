@@ -39,6 +39,8 @@ func getBaseStat(statID: String) -> int:
 	return stats[statID]
 
 func getStat(statID: String) -> int:
+	if(npc != null):
+		return getBaseStat(statID) + npc.getBuffsHolder().getExtraStat(statID)
 	return getBaseStat(statID)
 
 func saveData():

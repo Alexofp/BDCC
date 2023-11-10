@@ -18,6 +18,7 @@ func getClothingSlot():
 func getBuffs():
 	return [
 		buff(Buff.AmbientLustBuff, [10]),
+		buff(Buff.StatBuff, [Stat.Sexiness, 2]),
 		]
 
 func getPrice():
