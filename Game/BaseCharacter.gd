@@ -1077,10 +1077,15 @@ func getPenetrateChance(bodypartSlot, insertionSize):
 	
 	return max(500.0 / (5.0 + diff), 30.0)
 
-func getPenetrateChanceBy(bodypartSlot, characterID):
+func getPenetrateChanceBy(bodypartSlot, characterID, isKnotting = false):
 	var ch = GlobalRegistry.getCharacter(characterID)
 	assert(ch != null)
+	if(isKnotting && hasPerk(Perk.CumUniqueBiology)):
+		return 100.0
 	return getPenetrateChance(bodypartSlot, ch.getPenisSize())
+
+func getKnottingChanceBy(bodypartSlot, characterID):
+	return getPenetrateChanceBy(bodypartSlot, characterID, true)
 
 func gotFuckedBy(bodypartSlot, characterID, showMessages = true, fireSexEvent = true):
 	if(!hasBodypart(bodypartSlot)):

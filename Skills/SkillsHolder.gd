@@ -227,8 +227,10 @@ func togglePerk(perkID):
 				return
 		
 		disabledPerks.erase(perkID)
+		perk.onPerkToggled(true)
 	else:
 		disabledPerks[perkID] = true
+		perks[perkID].onPerkToggled(false)
 	
 		for childperkID in perks:
 			var perk = perks[childperkID]
@@ -238,6 +240,7 @@ func togglePerk(perkID):
 			for requiredPerkID in requiredPerks:
 				if(requiredPerkID == perkID):
 					disabledPerks[childperkID] = true
+					perks[childperkID].onPerkToggled(false)
 					break
 
 func isPerkDisabled(perkID):

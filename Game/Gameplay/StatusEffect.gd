@@ -58,6 +58,8 @@ const SoreNipplesAfterMilking = "SoreNipplesAfterMilking"
 
 # Perk effects
 const RapidConception = "RapidConception"
+const BreedersStreak = "BreederStreak"
+const CumWhoreStreak = "CumWhoreStreak"
 
 # Useful effects
 const Yoga = "Yoga"

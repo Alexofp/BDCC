@@ -8,7 +8,7 @@ func getVisibleName():
 	return "Rapid Conception"
 
 func getVisibleDescription():
-	return "Your seed posseses incredible properties. Cumming inside someone's pussy when your balls are full will give them a fertility boost and speed up any pregnanices!"
+	return "Your seed posseses incredible properties. Cumming inside someone's pussy when you have full stamina and your balls are [b]full[/b] will give them a fertility boost and speed up any pregnanices!"
 
 func getSkillTier():
 	return 1
@@ -23,10 +23,10 @@ func getBuffs():
 func onSexEvent(_event:SexEvent):
 	if(_event.getType() == SexEvent.HoleCreampied):
 		var hole = _event.getField("hole", BodypartSlot.Vagina)
-		if(_event.getTargetChar().hasWombIn(hole)):
+		if(_event.getSourceChar() == npc && _event.getTargetChar().hasWombIn(hole)):
 			var loadSize = _event.getField("loadSize", 0.0)
 			var sourceChar = _event.getSourceChar()
-			if(sourceChar.hasPenis()):
+			if(sourceChar.hasPenis() && sourceChar.getStaminaLevel() >= 1.0):
 				var penis = sourceChar.getBodypart(BodypartSlot.Penis)
 				var cumProduction = penis.getFluidProduction()
 				if(cumProduction != null):

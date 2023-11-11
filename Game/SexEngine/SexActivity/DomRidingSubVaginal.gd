@@ -454,7 +454,7 @@ func doDomAction(_id, _actionInfo):
 		if(_id == "letsubknotinside"):
 			#isTryingToKnot = true
 			getDom().gotOrificeStretchedBy(usedBodypart, subID, 0.5)
-			if(RNG.chance(getDom().getPenetrateChanceBy(usedBodypart, subID))):
+			if(RNG.chance(getDom().getKnottingChanceBy(usedBodypart, subID))):
 				knotSuccess = true
 			else:
 				text += RNG.pick([

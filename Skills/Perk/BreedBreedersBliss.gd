@@ -22,7 +22,7 @@ func getBuffs():
 
 func onSexEvent(_event:SexEvent):
 	if(_event.getType() == SexEvent.HoleCreampied || _event.getType() == SexEvent.StraponCreampied):
-		if(_event.getTargetChar().isInHeat()):
+		if(_event.getSourceChar() == npc && _event.getTargetChar().isInHeat()):
 			var hole = _event.getField("hole", BodypartSlot.Vagina)
 			if(_event.getTargetChar().hasWombIn(hole)):
 				_event.getSourceChar().addPain(-20)

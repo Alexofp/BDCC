@@ -86,6 +86,9 @@ func onFightEndWhenDisabled(_contex = {}):
 func onFightStartWhenDisabled(_contex = {}):
 	pass
 	
+func onPerkToggled(_isEnabledNow):
+	pass
+	
 func getBuffs():
 	return []
 

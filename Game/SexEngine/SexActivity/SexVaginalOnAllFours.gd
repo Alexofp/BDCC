@@ -413,7 +413,7 @@ func getDomActions():
 			if(hasKnot):
 				actions.append({
 					"id": "knotinside",
-					"score": scoreToCumInside,
+					"score": scoreToCumInside * (3.0 if getSub().hasPerk(Perk.CumUniqueBiology) else 1.0),
 					"name": "Knot them",
 					"desc": "Try to knot their "+RNG.pick(usedBodypartNames),
 					"priority": 1001,
@@ -584,7 +584,7 @@ func doDomAction(_id, _actionInfo):
 			
 			#isTryingToKnot = true
 			getSub().gotOrificeStretchedBy(usedBodypart, domID, 0.5)
-			if(RNG.chance(getSub().getPenetrateChanceBy(usedBodypart, domID))):
+			if(RNG.chance(getSub().getKnottingChanceBy(usedBodypart, domID))):
 				knotSuccess = true
 			else:
 				text += RNG.pick([

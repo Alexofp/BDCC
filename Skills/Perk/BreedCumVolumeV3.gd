@@ -8,7 +8,7 @@ func getVisibleName():
 	return "Champion of Breeding"
 
 func getVisibleDescription():
-	return "Your balls hold so much of quality seed, it's scary. Your balls capacity and virility are increased by 25% per each point in Vitality."
+	return "Your balls hold so much of quality seed, it's scary. Your balls capacity and virility are increased by 25% and 10% respectively per each point in Vitality."
 
 func getRequiredPerks():
 	return [Perk.BreedCumVolumeV2]
@@ -22,5 +22,5 @@ func getPicture():
 func getBuffs():
 	return [
 		buff(Buff.PenisBallsVolumeBuff, [25 * npc.getStat(Stat.Vitality)]),
-		buff(Buff.VirilityBuff, [25 * npc.getStat(Stat.Vitality)]),
+		buff(Buff.VirilityBuff, [10 * npc.getStat(Stat.Vitality)]),
 	]
