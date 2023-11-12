@@ -34,6 +34,7 @@ func _run():
 			theItems.append_array(inv.getItems())
 			
 			var inventory = inventoryScreenScene.instance()
+			inventory.shouldGrabInput = false
 			GM.ui.addFullScreenCustomControl("inventory", inventory)
 			inventory.setItems(theItems, "loot")
 			#var _ok = inventory.connect("onItemSelected", self, "onInventoryItemSelected")

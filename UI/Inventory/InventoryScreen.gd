@@ -22,8 +22,10 @@ var isBuy = false
 var isSell = false
 var isLoot = false
 
+var shouldGrabInput = true
+
 func _ready():
-	if(!OS.has_touchscreen_ui_hint()):
+	if(shouldGrabInput && !OS.has_touchscreen_ui_hint()):
 		searchInput.grab_focus()
 
 #func setInventory(inv, isFight = false):
