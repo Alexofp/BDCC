@@ -10,6 +10,7 @@ var menstrualCycleLengthDays: int
 var eggCellLifespanHours: int
 var playerPregnancyTimeDays: int
 var npcPregnancyTimeDays: int
+var impregnationChanceModifier: int
 
 var shouldScaleUI: bool = true
 var uiScaleMultiplier = 1.0
@@ -54,6 +55,7 @@ func resetToDefaults():
 	eggCellLifespanHours = 48
 	playerPregnancyTimeDays = 5
 	npcPregnancyTimeDays = 5
+	impregnationChanceModifier = 100
 	shouldScaleUI = true
 	uiScaleMultiplier = 1.0
 	showSpeakerName = true
@@ -116,6 +118,11 @@ func getPlayerPregnancyTimeDays():
 	
 func getNPCPregnancyTimeDays():
 	return npcPregnancyTimeDays
+
+func getImpregnationChanceModifier() -> float:
+	var resultValue:float = float(impregnationChanceModifier) / 100.0
+	resultValue = clamp(resultValue, 0.0, 1000.0)
+	return resultValue
 
 func shouldShowSpeakerName():
 	return showSpeakerName
@@ -241,6 +248,13 @@ func getChangeableOptions():
 					"id": "npcPregnancyTimeDays",
 					"type": "int",
 					"value": npcPregnancyTimeDays,
+				},
+				{
+					"name": "Impregnation chance modifier (%)",
+					"description": "Higher chance means impregnation is easier. Must be above zero",
+					"id": "impregnationChanceModifier",
+					"type": "int",
+					"value": impregnationChanceModifier,
 				},
 			]
 		},
@@ -589,6 +603,8 @@ func applyOption(categoryID, optionID, value):
 			playerPregnancyTimeDays = value
 		if(optionID == "npcPregnancyTimeDays"):
 			npcPregnancyTimeDays = value
+		if(optionID == "impregnationChanceModifier"):
+			impregnationChanceModifier = value
 	
 	if(categoryID == "other"):
 		if(optionID == "fetchLatestRelease"):
@@ -669,6 +685,7 @@ func saveData():
 		"eggCellLifespanHours": eggCellLifespanHours,
 		"playerPregnancyTimeDays": playerPregnancyTimeDays,
 		"npcPregnancyTimeDays": npcPregnancyTimeDays,
+		"impregnationChanceModifier": impregnationChanceModifier,
 		"shouldScaleUI": shouldScaleUI,
 		"uiScaleMultiplier": uiScaleMultiplier,
 		"uiButtonSize": uiButtonSize,
@@ -707,6 +724,7 @@ func loadData(data):
 	eggCellLifespanHours = loadVar(data, "eggCellLifespanHours", 48)
 	playerPregnancyTimeDays = loadVar(data, "playerPregnancyTimeDays", 5)
 	npcPregnancyTimeDays = loadVar(data, "npcPregnancyTimeDays", 5)
+	impregnationChanceModifier = loadVar(data, "impregnationChanceModifier", 100)
 	shouldScaleUI = loadVar(data, "shouldScaleUI", true)
 	uiScaleMultiplier = loadVar(data, "uiScaleMultiplier", 1.0)
 	uiButtonSize = loadVar(data, "uiButtonSize", 0)

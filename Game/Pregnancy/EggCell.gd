@@ -154,7 +154,7 @@ func tryImpregnate(fluidDNA, amountML, eggMultiplier = 1.0, fertility = 1.0, cro
 	virility = max(virility, 0.0)
 	fertility = max(fertility, 0.0)
 	
-	var finalChance = amountML * crossSpeciesMod * 20.0 * eggMultiplier * virility * fertility
+	var finalChance = amountML * crossSpeciesMod * 5.0 * eggMultiplier * virility * fertility * OPTIONS.getImpregnationChanceModifier()
 	#print(finalChance)
 	
 	if(RNG.chance(finalChance)):

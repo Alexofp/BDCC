@@ -126,14 +126,16 @@ func processTime(seconds):
 	var theCharacter = getCharacter()
 	
 	if(isPregnant()):
-		if(theCharacter != null && !theCharacter.hasPerk(Perk.FertilityBetterOvulationV3)):
+		var thePregnancyProgress = getPregnancyProgress()
+		
+		if(theCharacter != null && thePregnancyProgress > 0.05 && !theCharacter.hasPerk(Perk.FertilityBetterOvulationV3)):
 			cycleProgress = 1.0
 		
 		if(!noticedVisiblyPregnant && isVisiblyPregnant()):
 			noticedVisiblyPregnant = true
 			emit_signal("visiblyPregnant")
 			
-		if(!noticedHeavyIntoPregnancy && getPregnancyProgress() > 0.66):
+		if(!noticedHeavyIntoPregnancy && thePregnancyProgress > 0.66):
 			noticedHeavyIntoPregnancy = true
 			emit_signal("heavyIntoPregnancy")
 
