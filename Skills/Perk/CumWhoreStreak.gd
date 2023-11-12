@@ -14,7 +14,7 @@ func getSkillTier():
 	return 2
 
 func getPicture():
-	return "res://Images/Perks/horse.png"
+	return "res://Images/Perks/lovedice.png"
 
 func getBuffs():
 	return [

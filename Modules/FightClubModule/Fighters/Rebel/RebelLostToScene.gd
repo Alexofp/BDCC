@@ -23,7 +23,7 @@ func _run():
 		GM.ES.triggerRun("ArenaFighterPCLost", ["rebel"])
 
 	if(state == "get_fisted"):
-		playAnimation(StageScene.Spanking, "tease", {
+		playAnimation(StageScene.SexFisting, "tease", {
 			pc="rebel", npc="pc",
 			npcBodyState={exposedCrotch=true,hard=true}
 		})
@@ -67,6 +67,11 @@ func _run():
 		addButton("Continue", "See what happens next..", "continue")
 
 	if(state == "continue"):
+		playAnimation(StageScene.SexFisting, "sex", {
+			pc="rebel", npc="pc",
+			npcBodyState={exposedCrotch=true,hard=true}
+		})
+		
 		saynn("She applies more lube to her hand this time and turns it into a fist. Her actions are quick, she moves her fist to your prepared butt and starts applying pressure onto your star. The discomfort levels quickly rise, you quiver and try to struggle but she holds you pinned to the floor while trying to shove her whole hand inside you.")
 
 		saynn("[say=pc]It won’t fit! Please![/say]")

@@ -43,7 +43,7 @@ func getEffectDesc():
 	return "Your current streak: "+str(streak)+"\nTime left: "+Util.getTimeStringHumanReadable(turns)
 
 func getEffectImage():
-	return "res://Images/StatusEffects/mother.png"
+	return "res://Images/StatusEffects/lovedice.png"
 
 func getIconColor():
 	return IconColorGreen

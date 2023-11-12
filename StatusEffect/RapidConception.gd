@@ -22,7 +22,7 @@ func getEffectDesc():
 	return "You are more fertile and any pregnancies now progress faster! "+Util.getTimeStringHumanReadable(turns)
 
 func getEffectImage():
-	return "res://Images/StatusEffects/mother.png"
+	return "res://Images/StatusEffects/nested-hearts2.png"
 
 func getIconColor():
 	return IconColorGreen

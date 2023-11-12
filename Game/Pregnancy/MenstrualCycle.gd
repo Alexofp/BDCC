@@ -63,7 +63,14 @@ func isEligibleForProlongedPregnancy() -> bool:
 	return true
 
 func isInHeat():
-	return getCurrentStage() == CycleStage.Ovulation && hasAnyWomb() && (!isPregnant() || isEligibleForProlongedPregnancy())
+	if(getCurrentStage() != CycleStage.Ovulation):
+		return false
+	if(!hasAnyWomb()):
+		return false
+	if(getPregnancyProgress() > 0.05 && !isEligibleForProlongedPregnancy()):
+		return false
+	
+	return true
 
 func forceIntoHeat():
 	newCycle(false) # so eggs from the previous cycle are not cleared
