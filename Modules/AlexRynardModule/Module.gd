@@ -3,6 +3,7 @@ extends Module
 func getFlags():
 	return {
 		"ch1IntroSceneHappened": flag(FlagType.Bool),
+		"ch1HowManyTimesIdled": flag(FlagType.Number),
 	}
 
 func _init():
@@ -11,6 +12,7 @@ func _init():
 	
 	scenes = [
 		"res://Modules/AlexRynardModule/AlexS1IntroScene.gd",
+		"res://Modules/AlexRynardModule/AlexS2SittingNearScene.gd",
 		]
 	characters = [
 

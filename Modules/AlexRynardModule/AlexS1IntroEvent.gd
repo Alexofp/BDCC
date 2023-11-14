@@ -19,4 +19,5 @@ func getPriority():
 
 func onButton(_method, _args):
 	if(_method == "startIntro"):
+		GM.main.endCurrentScene()
 		runScene("AlexS1IntroScene")
