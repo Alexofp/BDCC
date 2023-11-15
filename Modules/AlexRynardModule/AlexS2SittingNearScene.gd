@@ -244,6 +244,293 @@ func _run():
 		addButton("Continue", "See what happens next", "skiphours_check")
 	if(state == "time6"):
 		playAnimation(StageScene.Duo, "sit", {npc="alexrynard", npcAction="sit"})
+		saynn("As is tradition by now, you sit near Alex.. and begin watching him work. He still sighs softly each time you join him.")
+
+		saynn("He repairs a few more datapad while you make sure no tool goes missing. None of them do, sadly. Alex seems to now carefully put them back where they belong to when he is finished using them.")
+
+		addButton("Continue", "See what happens next", "skiphours_check")
+	if(state == "time7"):
+		playAnimation(StageScene.Duo, "sit", {npc="alexrynard", npcAction="sit"})
+		saynn("Alex is fixing datapads one at the time while you sit nearby and offer him a cozy quiet company.")
+
+		saynn("This time though, things are anything but quiet.")
+
+		saynn("[sayMale]Hey there. Can you help me here? I need these two pieces welded.[/sayMale]")
+
+		saynn("Another engineer is standing near Alex, holding two metal sheets.")
+
+		saynn("[say=alexrynard]Sure.[/say]")
+
+		saynn("Foxy puts on some welding goggles and instinctively grabs his trusty welding tool.. before realizing that you are still staring.")
+
+		if (GM.pc.isBlindfolded()):
+			saynn("[say=alexrynard]Oh, you're blindfolded already. Stay that way.[/say]")
+
+			saynn("Huh?")
+
+			saynn("You realize why seconds later as you begin to see a somewhat bright flash even through the fabric of your blindfold. Alex quickly welds the two pieces together and hands them back to the other engineer.")
+
+			saynn("After.. It's work as usual. Your curiosity makes you ask something.")
+
+			saynn("[say=pc]What would you have done if I wasn't blindfolded?[/say]")
+
+			saynn("A few seconds later, you hear a chuckle.")
+
+			saynn("[say=alexrynard]I would've blindfolded you myself. I don't have any more goggles.[/say]")
+
+			saynn("Right.. Wait. So he has a blindfold then? Kinky.")
+
+			addButton("Continue", "See what happens next", "skiphours_check")
+		else:
+			saynn("[say=alexrynard]You wanna go blind? I only have one pair of goggles.[/say]")
+
+			saynn("Yeah, no.")
+
+			saynn("[say=pc]I can hold my eyes closed.[/say]")
+
+			saynn("Alex shakes his head.")
+
+			saynn("[say=alexrynard]Like I can trust you with that. Here is what we are gonna do.[/say]")
+
+			saynn("He grabs a leather blindfold from one of his pouches.")
+
+			saynn("[say=alexrynard]Stay still.[/say]")
+
+			saynn("Looks like.. he wants to blindfold you?")
+
+			addButton("Let him", "Let Alex put a blindfold over your eyes", "time7_letblindfold")
+			addButton("No blindfolds!", "What does he think he is doing?", "time7_noblindfold")
+	if(state == "time7_letblindfold"):
+		saynn("You let him do it because.. why not? It's for your own safety anyway.")
+
+		saynn("Alex carefully positions the leather blindfold over your eyes and then ties it behind your head. Not too tight but also not loose enough to slip off.")
+
+		saynn("You realize seconds later the reason behind that blindfold as you begin to see a somewhat bright flash even through its fabric. Alex welds the two pieces together and hands them back to the other engineer.")
+
+		saynn("[sayMale]Thanks, that was quick.[/sayMale]")
+
+		saynn("[say=alexrynard]Uh huh.[/say]")
+
+		saynn("After that.. he returns to fixing the datapads.. Wait..")
+
+		saynn("[say=pc]What about..[/say]")
+
+		saynn("[say=alexrynard]You can keep it.[/say]")
+
+		saynn("Looks like you have received a gift. Or maybe he just grew tired of your constant stare?")
+
+		addButton("Continue", "See what happens next", "skiphours_check")
+	if(state == "time7_noblindfold"):
+		playAnimation(StageScene.Duo, "stand", {npc="alexrynard", npcAction="sit"})
+		saynn("[say=pc]No blindfolds, you're not putting it on me.[/say]")
+
+		saynn("Alex shrugs.")
+
+		saynn("[say=alexrynard]Go for a walk then. I'm not destroying your eyes.[/say]")
+
+		saynn("Well.. fine. You get up and prepare to leave.")
+
+		saynn("Still.. the guy didn't have extra goggles but he had a blindfold? Huh.")
+
+		addButton("Leave", "Time to go", "endthescene")
+	if(state == "time8"):
+		playAnimation(StageScene.Duo, "sit", {npc="alexrynard", npcAction="sit"})
+		saynn("You sit near Alex. Looks like he is back to repairing the broken devices.")
+
+		if (GM.pc.isBlindfolded()):
+			saynn("He notices your blindfold.")
+
+			saynn("[say=alexrynard]You're still wearing it?[/say]")
+
+			saynn("[say=pc]Yeah, is that a problem?[/say]")
+
+			saynn("[say=alexrynard]It is. But not mine.[/say]")
+
+		saynn("Not much happens today. But half-way through the day some guard has arrived to drop off more of these broken datapads, making the pile bigger than it was..")
+
+		saynn("[say=alexrynard]Really? Are you using them as weapons or something?[/say]")
+
+		saynn("The guard shrugs and just walks away.")
+
+		saynn("[say=alexrynard]Right..[/say]")
+
+		saynn("[say=pc]I can..[/say]")
+
+		saynn("[say=alexrynard]No.[/say]")
+
+		saynn("Looks like he would rather die than let you help him with anything.")
+
+		saynn("After some time, Alex sighs and looks at you.")
+
+		saynn("[say=alexrynard]There is a toolbox in the staff-only room on one of the work benches. Bring it to me. I will open the door remotely.[/say]")
+
+		if (GM.pc.isBlindfolded()):
+			saynn("You can't exactly see where you are going.. but you will surely try! As this is your chance to shine.")
+
+		else:
+			saynn("Oh. Looks like this is your chance to shine!")
+
+		addButton("Toolbox", "Go grab it", "time8_toolbox")
+	if(state == "time8_toolbox"):
+		aimCameraAndSetLocName("eng_breakroom")
+		playAnimation(StageScene.Solo, "stand")
+		saynn("You get up and walk out of the workshop and into the staff-only area. Alex opens all the right doors for you, allowing you to easily find your way around.")
+
+		saynn("Oh, there is that workbench with the toolbox. You walk up to it. Your hands grab the toolbox by the handle and try to lift it..")
+
+		saynn("You suddenly realize why he made you bring it rather than grabbing it himself, the thing is fucking heavy.")
+
+		saynn("While trying to lift it off the bench.. your eyes stumble upon some schematics that are pinned to the board above it.")
+
+		saynn("Huh. These are the schematics of the datapads that Alex is repairing. Each part is labeled. Strangely enough, you recognize most of them by now. Cool.")
+
+		saynn("But, there are also some other schematics there. Like the little portal device that you saw on the portal panties.. But also some other prototypes that you have never seen.")
+
+		addButton("Bring toolbox", "Bring the heavy thing back to Alex", "time8_bringtoolbox")
+	if(state == "time8_bringtoolbox"):
+		aimCameraAndSetLocName("eng_workshop")
+		playAnimation(StageScene.Duo, "sit", {npc="alexrynard", npcAction="sit"})
+		if (GM.pc.getStat(Stat.Strength) < 10):
+			saynn("Even though the toolbox is heavy, you still manage to bring it back to Alex just fine, thanks to your high strength.")
+
+		else:
+			saynn("You don't have much strength.. so bringing Alex that toolbox turned out to be a whole journey. Your hands are shaking by the end of it.. but you just about manage.")
+
+		saynn("[say=alexrynard]Thanks.[/say]")
+
+		saynn("He grabs a few different tools from it and begins repairing the freshly-arrived datapads.")
+
+		saynn("[say=pc]Is there anything else I can do?[/say]")
+
+		saynn("[say=alexrynard]Nope.[/say]")
+
+		saynn("Aw. There goes that. You flop onto your chair and return to watching him work.")
+
+		addButton("Continue", "See what happens next", "skiphours_check")
+	if(state == "time9"):
+		playAnimation(StageScene.Duo, "sit", {npc="alexrynard", npcAction="stand"})
+		saynn("You sit on your chair, preparing to watch Alex work.")
+
+		saynn("But soon enough, some other engineer approaches him.")
+
+		saynn("[sayMale]There was an accident in the mines. I need you Alex.[/sayMale]")
+
+		saynn("[say=alexrynard]Can't it wait? I just started here.[/say]")
+
+		saynn("[sayMale]It can't.[/sayMale]")
+
+		saynn("He looks at his table with lots of broken datapads and tools. Then he looks at you.")
+
+		saynn("[say=pc]I can help maybe?[/say]")
+
+		saynn("Could be your chance for a bigger adventure.")
+
+		saynn("[say=alexrynard]No, you stay and guard this, okay? And don't touch anything.[/say]")
+
+		saynn("Yeah, that makes sense.")
+
+		saynn("[say=pc]Alright. Fine.[/say]")
+
+		saynn("Alex nods towards his college and they two walk away, leaving you alone..")
+
+		addButton("Continue", "See what happens next", "time9_boring")
+	if(state == "time9_boring"):
+		removeCharacter("alexrynard")
+		playAnimation(StageScene.Solo, "sit")
+		saynn("You sit still and guard the tools and a pile of broken devices.. Somehow this is more boring than watching Alex work.")
+
+		saynn("Some time passes.. Whatever happened in the mines, looks like it will take a while.")
+
+		saynn("Huh. The datapad that Alex was working on.. Looks like it's just missing the battery.")
+
+		saynn("Hmm..")
+
+		saynn("No, you shouldn't do this.")
+
+		saynn("He doesn't need help, he said it many times.")
+
+		addButton("Replace battery", "Might as well..", "time9_battery")
+	if(state == "time9_battery"):
+		saynn("You find a spare battery and slot it into the datapad before trying to turn it on.")
+
+		saynn("And luckily, it seems to work fine! You put the battery cover on it and place the datapad into the bin of fixed datapads.")
+
+		saynn("You catch yourself after that. You should probably stop now before it's too late..")
+
+		saynn("But that pile is so big he surely won't notice if you help a bit more, right?")
+
+		saynn("You grab the next broken datapad. This one has a cracked screen.. means you will have to replace the matrix. Shouldn't be too hard though, you saw Alex do this a million times.")
+
+		saynn("You grab the screwdriver, unscrew the panel, carefully disconnect the little wires and take out the broken screen before replacing it with a new one and doing the same actions in reverse order.")
+
+		saynn("And.. yep, it works. Yay. You put it into the bin and grab the next one!")
+
+		addButton("Continue", "See what happens next", "time9_domore")
+	if(state == "time9_domore"):
+		saynn("A few hours have passed by now. Is Alex really trusting you this much? Makes sense, considering you proved many times already that you are willing to do nothing for many hours.")
+
+		saynn("Not every datapad is repairable with your skills.. but you do your best, replacing batteries, broken buttons and cracked screens. Makes you wonder why they don't use better materials to make these things.")
+
+		saynn("You probably fixed about.. 6 pieces? Wow, and that barely put a dent into it. The pile is just.. never-ending.")
+
+		saynn("Wait, you hear someone coming. You quickly place everything back where it was.. at least, how you think it should be..")
+
+		addButton("Continue", "See what happens next", "time9_alexreturns")
+	if(state == "time9_alexreturns"):
+		addCharacter("alexrynard")
+		playAnimation(StageScene.Duo, "sit", {npc="alexrynard", npcAction="stand"})
+		saynn("Alex returns and takes his spot behind the work table.")
+
+		saynn("[say=pc]Welcome back.[/say]")
+
+		saynn("[say=alexrynard]Uh huh.[/say]")
+
+		saynn("He sounds very tired. Looks tired too. His oil-stained hand blindly reaches for one of the tools.. but finds one that it didn't expect.")
+
+		saynn("[say=alexrynard]Wait. Did you..[/say]")
+
+		saynn("Oh no. He checks the current datapad.. and that confirms his suspicions.")
+
+		saynn("[say=alexrynard]You tried to fix some, didn't you?[/say]")
+
+		saynn("No point in lying..")
+
+		saynn("[say=pc]Yeah, I repaired the ones with the obvious..[/say]")
+
+		saynn("He cuts you off, his tone growly.")
+
+		saynn("[say=alexrynard]Did I ask you to do that?[/say]")
+
+		saynn("[say=pc]But the pile..[/say]")
+
+		saynn("[say=alexrynard]Did. I. Ask?[/say]")
+
+		saynn("You shake your head.")
+
+		saynn("[say=alexrynard]So why did you do that?[/say]")
+
+		saynn("His voice makes you feel.. little. You can only shrug..")
+
+		saynn("[say=pc]What's the big deal? I just wanted to help.[/say]")
+
+		saynn("[say=alexrynard]Help? You realize that I now have to go through the whole bin to check them? Make sure you didn't fuck up any of them?[/say]")
+
+		saynn("He sighs.")
+
+		saynn("[say=alexrynard]What if they explode in someone's face? You're not an engineer, you don't have the full knowledge.[/say]")
+
+		saynn("[say=pc]You could have taught me.[/say]")
+
+		saynn("[say=alexrynard]Taught you? How can I trust you with anything? Especially now?[/say]")
+
+		saynn("He sighs again.")
+
+		saynn("[say=alexrynard]That was my mistake. I should have stopped this many days ago. I dunno why I keep doing this.[/say]")
+
+		saynn("You.. are not sure how to react. For some reason it hurts.. Alex lowers his gaze, his tone calm.. but anxious.")
+
+		saynn("[say=alexrynard]Get out of here.[/say]")
+
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
@@ -270,6 +557,33 @@ func _react(_action: String, _args):
 
 	if(_action == "time5_give_getout"):
 		processTime(60)
+
+	if(_action == "time7_letblindfold"):
+		processTime(3*60)
+		GM.pc.getInventory().forceEquipStoreOtherUnlessRestraint(GlobalRegistry.createItem("blindfold"))
+
+	if(_action == "time7_noblindfold"):
+		processTime(20*60)
+
+	if(_action == "time8_toolbox"):
+		processTime(2*60)
+
+	if(_action == "time8_bringtoolbox"):
+		processTime(10*60)
+		if(GM.pc.getStat(Stat.Strength) < 10):
+			GM.pc.addStamina(-50)
+
+	if(_action == "time9_boring"):
+		processTime(20*60)
+
+	if(_action == "time9_battery"):
+		processTime(5*60)
+
+	if(_action == "time9_domore"):
+		processTime(2*60*60)
+
+	if(_action == "time9_alexreturns"):
+		processTime(2*60)
 
 	setState(_action)
 
