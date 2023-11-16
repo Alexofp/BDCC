@@ -12,7 +12,7 @@ func _run():
 			saynn("You try to look at yourself in the mirror but then you realize that you can't see anything. Awkward. You feel around and fine a comb, scissors and a few others things around that you can use to change how your hair looks.")
 		
 		addButton("Leave", "You don't wanna change your hair", "endthescene")
-		addButton("Change Haircut", "Change your haitcut", "changehaircutmenu")
+		addButton("Change Haircut", "Change your haircut", "changehaircutmenu")
 		addButton("Change Skin!", "Change your skin and colors", "changeskin")
 
 
