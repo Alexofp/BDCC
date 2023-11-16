@@ -29,9 +29,26 @@ func _initScene(_args = []):
 		increaseFlag("AlexRynardModule.ch1HowManyTimesIdled")
 		return
 	if(howManyTimes == 5):
-		setState("time5")
+		setState("time6")
 		increaseFlag("AlexRynardModule.ch1HowManyTimesIdled")
 		return
+	if(howManyTimes == 6):
+		setState("time7")
+		increaseFlag("AlexRynardModule.ch1HowManyTimesIdled")
+		return
+	if(howManyTimes == 7):
+		setState("time8")
+		increaseFlag("AlexRynardModule.ch1HowManyTimesIdled")
+		return
+	if(howManyTimes == 8):
+		setState("time9")
+		increaseFlag("AlexRynardModule.ch1HowManyTimesIdled")
+		return
+	else:
+		setState("time9")
+		# increaseFlag("AlexRynardModule.ch1HowManyTimesIdled")
+		if(true):
+			return
 	
 	setState(RNG.pick([
 	"time2",
@@ -145,7 +162,7 @@ func _run():
 
 		saynn("It looks like he has given up, accepting your constant presence.")
 
-		saynn("[say=alexrynard]This won't make me eager to fuck you, just saying.[/say]")
+		saynn("[say=alexrynard]This won't make me eager to fuck you, just saying. Not that many things will.[/say]")
 
 		saynn("You shrug and smile.")
 
@@ -483,15 +500,15 @@ func _run():
 
 		saynn("[say=pc]Welcome back.[/say]")
 
-		saynn("[say=alexrynard]Uh huh.[/say]")
+		saynn("[say=alexrynard]Mhm.[/say]")
 
 		saynn("He sounds very tired. Looks tired too. His oil-stained hand blindly reaches for one of the tools.. but finds one that it didn't expect.")
 
-		saynn("[say=alexrynard]Wait. Did you..[/say]")
+		saynn("[say=alexrynard]Huh..[/say]")
 
 		saynn("Oh no. He checks the current datapad.. and that confirms his suspicions.")
 
-		saynn("[say=alexrynard]You tried to fix some, didn't you?[/say]")
+		saynn("[say=alexrynard]You tried to fix some?[/say]")
 
 		saynn("No point in lying..")
 
@@ -531,6 +548,9 @@ func _run():
 
 		saynn("[say=alexrynard]Get out of here.[/say]")
 
+		saynn("Looks like it's best not to touch him anymore for now.")
+
+		addButton("Leave", "Time to go", "endthescene")
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
@@ -584,6 +604,7 @@ func _react(_action: String, _args):
 
 	if(_action == "time9_alexreturns"):
 		processTime(2*60)
+		increaseFlag("PortalPantiesModule.Alex_BusyDays")
 
 	setState(_action)
 
