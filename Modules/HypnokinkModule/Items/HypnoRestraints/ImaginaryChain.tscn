@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Player/Player3D/Chains/CurveRenderer.gd" type="Script" id=1]
+[ext_resource path="res://Modules/HypnokinkModule/Items/HypnoRestraints/ImaginaryChainMaterial.tres" type="Material" id=2]
+
+[node name="ImaginaryChain" type="ImmediateGeometry"]
+material_override = ExtResource( 2 )
+script = ExtResource( 1 )
+width = 0.5
+flex = 0.1
+sag_static = 0.25
+expected_length = 1.0
+max_sagging_length = 0.5

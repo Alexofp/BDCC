@@ -68,6 +68,15 @@ func doAction(_lustState: LustCombatState, _args):
 			enemy.addEffect(StatusEffect.Weakness, [2])
 			text += "[b]Enemy is weakened by your hips![/b]"
 			text += "\n\n"
+	
+	if(_lustState.isInBattle() && pc.hasPerk(HK_Perk.HypnoticAllure) && pc.hasEffect(HK_StatusEffect.Suggestible)):
+		var stacks = HK_CharUtil.getSuggestibleStacks(pc)
+		if(RNG.chance(stacks)):
+			var enemy:BaseCharacter = _lustState.getEnemyCharacter()
+			if(enemy != null):
+				enemy.addEffect(HK_StatusEffect.Suggestible, [RNG.randi_range(5,15)])
+				text += "[b]Enemy is mesmerized by your hips![/b]"
+				text += "\n\n"
 
 	return {
 		text = text,
@@ -108,6 +117,13 @@ func isTease():
 	return true
 
 func getExperience(_lustState: LustCombatState, _args):
+	var arr = []
+	var pc:Player = _lustState.getCharacter()
+	
+	if(pc.hasPerk(HK_Perk.HypnoticAllure)):
+		arr += [[HK_Skill.HypnosisSkill, 1]]
+		
 	if(_lustState.isInPublic()):
-		return [[Skill.Exhibitionism, 1]]
-	return []
+		arr += [[Skill.Exhibitionism, 1]]
+		
+	return arr
