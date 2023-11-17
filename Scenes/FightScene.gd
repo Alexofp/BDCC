@@ -316,8 +316,8 @@ func _react(_action: String, _args):
 				restraintIdsForcedByPC.append(item.getUniqueID())
 				GM.pc.getInventory().removeItem(item)
 				enemyCharacter.getInventory().forceEquipRemoveOther(item)
-				if(item is HK_HypnoVisor):
-					item.on_forceEquip(GM.pc)
+				
+				HK_Shims.onForceEquip(item)
 					
 				enemyCharacter.getBuffsHolder().calculateBuffs()
 				#enemyCharacter.updateNonBattleEffects()

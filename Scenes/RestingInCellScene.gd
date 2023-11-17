@@ -47,11 +47,7 @@ func _react(_action: String, _args):
 		var timePassed = GM.main.processTimeUntil(newt * 60 * 60)
 		GM.pc.afterRestingInBed(timePassed)
 		
-		#done here instead of Player.gd on the grounds that this is a shorter file that is less likely to change every version
-		if(GM.pc.buffsHolder.hasBuff(HK_Buff.RestEffectivenessBuff)):
-			var _hours = floor(timePassed/3600.0)
-			var extraEffectiveness = GM.pc.buffsHolder.getCustom(HK_Buff.RestEffectivenessBuff)
-			GM.pc.addStamina(_hours * 10 * extraEffectiveness)
+		HK_Shims.restingInCell(timePassed)
 		
 		if(GM.ES.triggerReact(Trigger.Waiting, [timePassed])):
 			endScene()
