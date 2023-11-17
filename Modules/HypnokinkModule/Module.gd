@@ -147,6 +147,6 @@ func _init():
 func resetFlagsOnNewDay():
 	setFlag("HypnokinkModule.VisorXpToday", 0)
 	
-	
 func registerEventTriggers():
-	GM.ES.registerEventTrigger(HK_Trigger.HypnoEncounter, EventTriggerWeighted.new())
+							   #HK_Trigger.HypnoEncounter
+	GM.ES.registerEventTrigger("HK_HypnoEncounter", EventTriggerWeighted.new())
