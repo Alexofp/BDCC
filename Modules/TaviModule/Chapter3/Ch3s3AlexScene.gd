@@ -791,7 +791,7 @@ func _react(_action: String, _args):
 		GM.pc.getInventory().forceEquipStoreOtherUnlessRestraint(GlobalRegistry.createItem("ZiptiesWrist"))
 
 	if(_action == "attack"):
-		GM.pc.freeHandsDeleteAll()
+		GM.pc.freeArmsDeleteAll()
 
 	if(_action == "endthescene"):
 		endScene()

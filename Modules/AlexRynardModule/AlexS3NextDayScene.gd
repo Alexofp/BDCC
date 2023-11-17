@@ -118,23 +118,23 @@ func _run():
 
 		saynn("Alex looks around the workshop.")
 
-		saynn("[say=alexrynard]Because.. it's not. I like what everyone else does. But not for the same reasons.[/say]")
+		saynn("[say=alexrynard]Because.. it's not. I like the same things. But not for the same reasons.[/say]")
 
-		saynn("That's.. very confusing. He leans in closer.")
+		saynn("That's.. very confusing. He leans back in his chair, his gaze directed high.")
 
-		saynn("[say=alexrynard]I love power exchange. At least, I think I do. Just like every guard and inmate here. Collars, gags, cuffs, whips, I love it all.[/say]")
+		saynn("[say=alexrynard]Power exchange can be fun, I think. Everyone here does it.[/say]")
 
-		saynn("Kinda sounds like your typical staff member for now..")
+		saynn("Hard to say no to that.")
 
-		saynn("[say=alexrynard]But there must be feelings. There should be consent. Trust. I understand where I am. I understand that people don't have passion for each other here, they just have needs. I'm not a dominant that will bend someone's will. And those are not exactly popular here. I guess I'm too soft or something.[/say]")
+		saynn("[say=alexrynard]But I feel like nobody understands it. It's all about abuse these days. People think they're dominant if they can force someone to do what they don't want to do.[/say]")
 
-		saynn("He looks you in the eyes.")
+		saynn("He shakes his head and then looks you in the eyes.")
 
-		saynn("[say=alexrynard]I lost you, right?[/say]")
+		saynn("[say=alexrynard]Feelings don't matter anymore, it's all about being strong nowadays. Whatever, I will get over it one day.[/say]")
 
-		saynn("Looks like he is struggling a lot with that.")
+		saynn("Alex frowns.")
 
-		saynn("[say=alexrynard]Anyway. Forget all that. It doesn't matter. It's okay if you don't wanna help me.[/say]")
+		saynn("[say=alexrynard]Just forget it. Nothing matters.[/say]")
 
 		saynn("Right now it feels even more like a contract..")
 

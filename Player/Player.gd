@@ -736,6 +736,9 @@ func freeMouthDeleteAll():
 	return getInventory().removeEquippedItemsWithBuff(Buff.GagBuff)
 	
 func freeHandsDeleteAll():
+	return getInventory().removeEquippedItemsWithBuff(Buff.BlockedHandsBuff)
+	
+func freeArmsDeleteAll():
 	return getInventory().removeEquippedItemsWithBuff(Buff.RestrainedArmsBuff)
 	
 func freeLegsDeleteAll():
