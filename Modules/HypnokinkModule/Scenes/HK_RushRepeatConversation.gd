@@ -13,8 +13,8 @@ func _run():
 		addButton("Curiosity", "So what is he in for?", "backstory")
 		addButton("Offer yours", "You have an ass available", "want_dick")
 		addButton("Fight", "Stay away or there will be trouble", "fight_me")
-		addButton("DEBUG FIGHT", "Haha get sucker punched", "debug_fight")
-		addButton("DEBUG SEX", "Haha get sucker fucked", "debug_sex")
+		#addButton("DEBUG FIGHT", "Haha get sucker punched", "debug_fight")
+		#addButton("DEBUG SEX", "Haha get sucker fucked", "debug_sex")
 		addButton("Leave", "Actually you've remembered a thing at a place", "leaving")
 		
 	if(state == "backstory"):

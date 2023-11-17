@@ -32,9 +32,9 @@ func _run():
 			
 		addButton("Goodbye", "Good for now", "endthescene")
 		
-		addButton("DEBUG FIGHT", "Haha get sucker punched", "debug_fight")
-		addButton("DEBUG SEX", "Haha get sucker fucked", "debug_sex")
-		addButton("DEBUG TEXT", "text effects test", "test_effects") 
+		#addButton("DEBUG FIGHT", "Haha get sucker punched", "debug_fight")
+		#addButton("DEBUG SEX", "Haha get sucker fucked", "debug_sex")
+		#addButton("DEBUG TEXT", "text effects test", "test_effects") 
 		
 	if(state == "test_effects"):
 		saynn("Hypno text: [tornado radius=3.0 freq=2.0 connected=1][pulse color=#FF33FF height=0.0 freq=3.0]Hypnoword[/pulse][/tornado]")
