@@ -110,10 +110,16 @@ func isReadyToPenetrate() -> bool:
 func fetishScore(fetishes = {}, addscore = 0.0):
 	var fetishHolder: FetishHolder = getChar().getFetishHolder()
 	
+	var maxPossibleValue = 0.0
 	var result = addscore
 	for fetishID in fetishes:
 		var fetishValue = fetishHolder.getFetishValue(fetishID)
 		result += fetishValue * fetishes[fetishID]
+		maxPossibleValue += 1.0
+	
+	var forcedObedience = clamp(getChar().getForcedObedienceLevel(), 0.0, 1.0)
+	if(forcedObedience > 0.0):
+		result = result * (1.0 - forcedObedience) + maxPossibleValue * forcedObedience
 	
 	return result
 

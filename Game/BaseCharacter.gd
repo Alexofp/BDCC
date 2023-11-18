@@ -2514,3 +2514,6 @@ func onSexEnded(_contex = {}):
 			continue
 		var effect = statusEffects[effectID]
 		effect.onSexEnded(_contex)
+
+func getForcedObedienceLevel() -> float:
+	return buffsHolder.getCustom(BuffAttribute.ForcedObedience)

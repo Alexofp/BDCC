@@ -16,6 +16,7 @@ enum {
 	BreastPump,
 	BreastPumpUsableByNPC,
 	SexEngineDrug,
+	Hypnovisor,
 	
 	GuardUniform,
 	NurseUniform,
