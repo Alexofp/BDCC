@@ -20,7 +20,12 @@ func _reactInit():
 		setState("tooToxic")
 		return
 		
-	savedText = item.useInCombatWithBuffs(GM.pc, null)
+	var currentEnemy = null
+	var theFightScene = GM.main.getCurrentFightScene()
+	if(theFightScene != null):
+		currentEnemy = theFightScene.enemyCharacter
+		
+	savedText = item.useInCombatWithBuffs(GM.pc, currentEnemy)
 	setState("afteruse")
 
 func _run():

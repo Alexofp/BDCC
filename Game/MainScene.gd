@@ -377,6 +377,13 @@ func supportsBattleTurns():
 	
 	return false
 
+# Yeah, very hacky. Fight me
+func getCurrentFightScene():
+	for scene in sceneStack:
+		if(scene.sceneID == "FightScene"):
+			return scene
+	return null
+
 func supportsSexEngine():
 	for scene in sceneStack:
 		if(scene.supportsSexEngine()):

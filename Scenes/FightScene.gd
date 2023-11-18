@@ -278,7 +278,7 @@ func _react(_action: String, _args):
 		afterTurnChecks()
 		return
 		
-	if(_action == "useitem"):
+	if(_action == "useitem"): # UNUSED
 		setState("fighting")
 		beforeTurnChecks()
 		
