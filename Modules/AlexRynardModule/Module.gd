@@ -7,6 +7,7 @@ func getFlags():
 		"ch1StopAlexContent": flag(FlagType.Bool),
 		"ch1HowMoreIdles": flag(FlagType.Number),
 		"ch1CommentedPay": flag(FlagType.Bool),
+		"ch1HypnovisorHappened": flag(FlagType.Bool),
 	}
 
 func _init():
@@ -18,6 +19,7 @@ func _init():
 		"res://Modules/AlexRynardModule/AlexS2SittingNearScene.gd",
 		"res://Modules/AlexRynardModule/AlexS3NextDayScene.gd",
 		"res://Modules/AlexRynardModule/AlexS4FixingDatapadsScene.gd",
+		"res://Modules/AlexRynardModule/AlexS5HypnovisorIntroScene.gd",
 		]
 	characters = [
 

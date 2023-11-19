@@ -224,6 +224,80 @@ func _run():
 		saynn("And Alex also allows you to fix pretty much any datapad, maximizing your and his efficiency.")
 
 		addButton("Continue", "See what happens next", "skiphours_special_check")
+	if(state == "offer_hypno"):
+		playAnimation(StageScene.Duo, "stand", {npc="alexrynard"})
+		saynn("It's getting late.. Foxy's shift is probably about to end so you begin to put away all the tools and unfinished work.")
+
+		saynn("[say=alexrynard]Hey. Have a minute?[/say]")
+
+		saynn("This feels.. different.")
+
+		saynn("[say=pc]What's up?[/say]")
+
+		saynn("Alex scratches the back of his head.")
+
+		saynn("[say=alexrynard]I have a lot more free time lately. So, you know, thanks.[/say]")
+
+		saynn("[say=pc]Yeah, it's okay.[/say]")
+
+		saynn("He nods.")
+
+		saynn("[say=alexrynard]And since I don't have to stress about these repairs as much, I actually had some time to work on my own prototypes.[/say]")
+
+		saynn("[say=pc]Like the portal panties? That's nice.[/say]")
+
+		saynn("[say=alexrynard]Yeah, something like that. I actually wanted to show one to the captain, see what he thinks about it.[/say]")
+
+		saynn("He scratches behind his head again.")
+
+		saynn("[say=pc]Is there some problem with that?[/say]")
+
+		saynn("[say=alexrynard]Well, I kinda need to test it first. Make sure the thing works even.[/say]")
+
+		saynn("You get a sneaking suspicion about why he is telling you this.")
+
+		saynn("[say=pc]You need me to be the test subject again?[/say]")
+
+		saynn("[say=alexrynard]Well.. yeah. This particular prototype I can't test alone.[/say]")
+
+		saynn("[say=pc]What is it?[/say]")
+
+		saynn("Alex stays silent for a second.")
+
+		saynn("[say=alexrynard]You would kinda have to trust me.[/say]")
+
+		saynn("[say=pc]Could it.. kill me?[/say]")
+
+		saynn("He looks at the ceiling and rubs his chin.")
+
+		saynn("[say=alexrynard]It shouldn't. I will be nearby.[/say]")
+
+		saynn("Very inspiring. Still. Do you wanna help him?")
+
+		addButton("Agree", "Agree to test his prototype", "start_hypnoscene")
+		addButton("Not today", "You don't feel like doing it today", "hypno_nottoday")
+	if(state == "hypno_nottoday"):
+		saynn("You begin thinking about the best way to say no.")
+
+		saynn("[say=pc]Not today, I'm pretty tired.[/say]")
+
+		saynn("He nods.")
+
+		saynn("[say=alexrynard]Alright, I understand.[/say]")
+
+		saynn("Time to go.")
+
+		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "start_hypnoscene"):
+		saynn("[say=pc]Sure. Do you wanna do it now or?[/say]")
+
+		saynn("He smiles and nods.")
+
+		saynn("[say=alexrynard]Yeah, now would be nice. Follow me, inmate.[/say]")
+
+		saynn("Inmate, huh.")
+
+		addButton("Follow", "See where he brings you", "start_thehypno")
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
@@ -263,7 +337,19 @@ func _react(_action: String, _args):
 		processTime(10*60)
 
 	if(_action == "skiphours_special_check"):
-		pass
+		processTime(RNG.randi_range(6,9) * 60 * 60)
+		
+		if(GM.main.isVeryLate()):
+			setState("offer_hypno")
+		else:
+			setState("aftersomefixing")
+		return
+
+	if(_action == "start_thehypno"):
+		setFlag("AlexRynardModule.ch1HypnovisorHappened", true)
+		runScene("")
+		endScene()
+		return
 
 	setState(_action)
 
