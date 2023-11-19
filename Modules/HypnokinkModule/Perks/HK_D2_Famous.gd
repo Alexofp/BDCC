@@ -12,7 +12,7 @@ func getVisibleDescription():
 
 func getMoreDescription():
 	return 	"You can now encounter inmates that know your mind is vulnerable to suggestion (the chance inceases the more you are hypnotized)."+"\n\n"+\
-			"Keyword Fixation is now in effect whenever you are "+HK_Ico.icon(HK_Ico.Hypnod)+"Hypnotised."
+			"Keyword Fixation is now in effect whenever you are "+HK_Ico.hypnosisIcon()+"Hypnotised."
 
 func getSkillTier():
 	return 1

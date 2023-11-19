@@ -4,24 +4,33 @@ func _init():
 	id = HK_Event.HypnoEncounterStart
 
 func registerTriggers(es):
-	es.addTrigger(self, HK_Trigger.HypnoEncounter)
+	es.addTrigger(self, Trigger.EnteringRoom)
+	es.addTrigger(self, Trigger.PCLookingForTrouble)
 
 func react(_triggerID, _args):
-	var encounterLevel = RNG.randi_range(0, 5)
-	if(_args.size() > 0):
-		encounterLevel = _args[0]
+	var isLookingForTrouble = (_triggerID == Trigger.PCLookingForTrouble)
 	
-	var idToUse = grabNpcIDFromPoolOrGenerate(CharacterPool.Inmates, [], InmateGenerator.new(), {NpcGen.Level: encounterLevel})
+	if(not GM.pc.hasPerk(HK_Perk.FamousDrawback)):
+		return
 	
-	if(idToUse == null || idToUse == ""):
-		return false
+	if(GM.main.getFlag("HypnokinkModule.HypnoEncounterCooldown", 0) > 0 && !isLookingForTrouble):
+		GM.main.increaseFlag("HypnokinkModule.HypnoEncounterCooldown", -1)
+		return
+	
+	if(WorldPopulation.Inmates in GM.pc.getLocationPopulation()):
+		var baseChance = 1.0 + HK_CharUtil.getSuggestibleStacks(GM.pc) * 0.5
+		baseChance *= GM.pc.getEncounterChanceModifierInmates()
 		
-	if(GM.ES.triggerReact(Trigger.TalkingToDynamicNPC, [idToUse])):
-		return true
-		
-	runScene("HK_HypnoEncounterStart", [idToUse])
+		if(RNG.chance(baseChance) || isLookingForTrouble):
+			GM.main.setFlag("HypnokinkModule.HypnoEncounterCooldown", RNG.randi_range(5, 10))
+			
+			var encounterLevel = RNG.randi_range(0, Util.maxi(0, GM.pc.getLevel() + RNG.randi_range(-1, 1)))
+			encounterLevel = Util.maxi(encounterLevel, 0)
+			encounterLevel = Util.mini(encounterLevel, 15+RNG.randi_range(-1, 1))
+			
+			return GM.ES.triggerReact(HK_Trigger.HypnoEncounter, [encounterLevel, WorldPopulation.Inmates])
 
-	return true
+		return false
 
 func getPriority():
-	return 2
+	return -5

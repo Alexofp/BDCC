@@ -11,7 +11,7 @@ func getVisibleDescription():
 	return "You've become so accustomed to being hypnotized that a casual observer might not even be able to tell."
 
 func getMoreDescription():
-	return "Reduces the penalties of being hypnotized by an additional 30%.\n\nWhile in "+HK_Ico.icon(HK_Ico.Trance)+"Trance, you gain a 10% chance to dodge attacks."
+	return "Reduces the penalties of being hypnotized by an additional 30%.\n\nWhile in "+HK_Ico.tranceIcon()+"Trance, you gain a 10% chance to dodge attacks."
 	
 
 func getSkillTier():

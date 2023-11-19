@@ -11,9 +11,9 @@ func afterBody():
 	
 func pickAwakener():
 	var pool = []
-	if(getFlag("HypnokinkModule.VionMode") == HK_Enums.VionMode.GOOD || getFlag("HypnokinkModule.VionMode") == HK_Enums.VionMode.NEUTRAL):
+	if(getFlag("HypnokinkModule.VionMode") == HK_Consts.VionGood || getFlag("HypnokinkModule.VionMode") == HK_Consts.VionNeutral):
 		pool.append(HK_Sessions.AwakenerSimple)
-	if(getFlag("HypnokinkModule.VionMode") == HK_Enums.VionMode.EVIL):
+	if(getFlag("HypnokinkModule.VionMode") == HK_Consts.VionEvil):
 		pool.append(HK_Sessions.AwakenerFakeWake)
 		
 	var pick = RNG.pick(pool)
@@ -36,11 +36,11 @@ func debuffEffectMultiplier() -> float:
 	
 func buffDurationMultiplier() -> float:
 	var duration = 1.0
-	if(getFlag("HypnokinkModule.VionMode") == HK_Enums.VionMode.GOOD):
+	if(getFlag("HypnokinkModule.VionMode") == HK_Consts.VionGood):
 		duration = 1.25
-	if(getFlag("HypnokinkModule.VionMode") == HK_Enums.VionMode.NEUTRAL):
+	if(getFlag("HypnokinkModule.VionMode") == HK_Consts.VionNeutral):
 		duration = 1.0
-	if(getFlag("HypnokinkModule.VionMode") == HK_Enums.VionMode.EVIL):
+	if(getFlag("HypnokinkModule.VionMode") == HK_Consts.VionEvil):
 		duration = 0.65
 	if(GM.pc.hasPerk(HK_Perk.FastAsleep)):
 		duration += 0.1
@@ -48,10 +48,10 @@ func buffDurationMultiplier() -> float:
 	
 func debuffDurationMultiplier() -> float:
 	var duration
-	if(getFlag("HypnokinkModule.VionMode") == HK_Enums.VionMode.GOOD):
+	if(getFlag("HypnokinkModule.VionMode") == HK_Consts.VionGood):
 		duration = 1.0
-	if(getFlag("HypnokinkModule.VionMode") == HK_Enums.VionMode.NEUTRAL):
+	if(getFlag("HypnokinkModule.VionMode") == HK_Consts.VionNeutral):
 		duration = 1.0
-	if(getFlag("HypnokinkModule.VionMode") == HK_Enums.VionMode.EVIL):
+	if(getFlag("HypnokinkModule.VionMode") == HK_Consts.VionEvil):
 		duration = 1.25
 	return duration

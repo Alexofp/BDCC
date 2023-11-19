@@ -87,8 +87,8 @@ func _init():
 		"res://Modules/HypnokinkModule/Events/HK_RushMeetingEvent.gd",
 		"res://Modules/HypnokinkModule/Events/HK_VionMeetingEvent.gd",
 		
-		"res://Modules/HypnokinkModule/Events/HK_HypnoEncounterEvent.gd",
-		"res://Modules/HypnokinkModule/Events/HK_HypnoEncounterStartEvent.gd",
+		"res://Modules/HypnokinkModule/Events/HK_HypnoEncounterInmateEvent.gd",
+		"res://Modules/HypnokinkModule/Events/HK_HypnoEncounterStartEvent.gd"
 	]
 	quests = [
 		"res://Modules/HypnokinkModule/Quests/HK_DealingWithRush.gd"

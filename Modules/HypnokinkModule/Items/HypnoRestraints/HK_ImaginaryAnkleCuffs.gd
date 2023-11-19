@@ -27,7 +27,8 @@ func isRestraint():
 	return true
 
 func generateRestraintData():
-	restraintData = HK_HypnoRestraint.new()
+	var restraintClass = load("res://Modules/HypnokinkModule/Items/HypnoRestraints/HK_HypnoRestraint.gd")
+	restraintData = restraintClass.new()
 	restraintData.setLevel(1)
 
 func getForcedOnMessage(isPlayer = true):

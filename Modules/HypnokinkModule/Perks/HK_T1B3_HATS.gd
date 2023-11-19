@@ -11,7 +11,7 @@ func getVisibleDescription():
 	return "You have become accustomed to the subliminal messaging of hypnotic visors."
 
 func getMoreDescription():
-	return "While in "+HK_Ico.icon(HK_Ico.Trance)+"Trance, the accuracy debuff of hypnosis visors becomes a buff of equivalent value."
+	return "While in "+HK_Ico.tranceIcon()+"Trance, the accuracy debuff of hypnosis visors becomes a buff of equivalent value."
 
 func getSkillTier():
 	return 0

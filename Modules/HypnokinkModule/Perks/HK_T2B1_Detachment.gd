@@ -12,7 +12,7 @@ func getVisibleDescription():
 	
 func getMoreDescription():
 	return  "Reduces the penalties of being hypnotized by an additional 20%." + "\n\n" + \
-			"While "+HK_Ico.icon(HK_Ico.Hypnod)+"Hypnotized or in "+HK_Ico.icon(HK_Ico.Trance)+"Trance, you gain +10% resistance to pain."
+			"While "+HK_Ico.hypnosisIcon()+"Hypnotized or in "+HK_Ico.tranceIcon()+"Trance, you gain +10% resistance to pain."
 
 func getSkillTier():
 	return 1

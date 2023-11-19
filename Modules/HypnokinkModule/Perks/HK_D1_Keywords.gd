@@ -11,7 +11,7 @@ func getVisibleDescription():
 	return "You find your thoughts lingering on certain words as they are spoken."
 	
 func getMoreDescription():
-	return "While in "+HK_Ico.icon(HK_Ico.Trance)+"Trance, hearing one of the keywords slightly deepens your hypnosis and increases your [color="+DamageType.getColorString(DamageType.Lust)+"]lust[/color] and arousal by a small amount."
+	return "While in "+HK_Ico.tranceIcon()+"Trance, hearing one of the keywords slightly deepens your hypnosis and increases your [color="+DamageType.getColorString(DamageType.Lust)+"]lust[/color] and arousal by a small amount."
 
 func getSkillTier():
 	return 0

@@ -74,7 +74,8 @@ func isRestraint():
 	return true
 
 func generateRestraintData():
-	restraintData = HK_RestraintVisor.new()
+	var restraintClass = load("res://Modules/HypnokinkModule/Items/HypnoVisor/HK_RestraintVisor.gd")
+	restraintData = restraintClass.new()
 	restraintData.setLevel(RNG.randi_range(1, 2))
 	
 func programToSuppressPerk(perkId: String):
