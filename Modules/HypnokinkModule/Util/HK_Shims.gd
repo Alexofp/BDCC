@@ -13,7 +13,7 @@ static func swayHips(_lustState, pc, text):
 	return text
 	
 static func onForceEquip(item):
-	if(item is HK_HypnoVisor):
+	if(item.has_method("on_forceEquip")):
 		item.on_forceEquip(GM.pc)
 	
 static func restingInCell(timePassed):
