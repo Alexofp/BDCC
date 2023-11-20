@@ -18,12 +18,14 @@ func getBuffs():
 		]
 
 func getPrice():
-	return 10
+	return 100
 
 func canSell():
 	return true
 
 func getTags():
+	if(GM.main != null && GM.main.getFlag("AlexRynardModule.ch1HypnovisorHappened")):
+		return [ItemTag.BDSMRestraint, ItemTag.Hypnovisor, ItemTag.SoldByAlexRynard]
 	return [ItemTag.BDSMRestraint, ItemTag.Hypnovisor]
 
 func isRestraint():

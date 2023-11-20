@@ -20,6 +20,8 @@ func _run():
 
 		addButton("Talk", "Talk about stuff", "talk")
 		addButton("Appearance", "Look at the foxy", "appearance")
+		if(GlobalRegistry.getItemIDsByTagSlow(ItemTag.SoldByAlexRynard).size() > 0):
+			addButton("Buy", "See what you can buy from Alex", "buyscene")
 		addButton("Leave", "That was enough talking", "endthescene")
 		GM.ES.triggerRun(Trigger.TalkingToNPC, ["alexrynard"])
 		
@@ -119,6 +121,10 @@ func _run():
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
 		endScene()
+		
+	if(_action == "buyscene"):
+		endScene()
+		runScene("AlexBuySellScene", ["buymenu"])
 		return
 
 	setState(_action)

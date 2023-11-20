@@ -32,7 +32,7 @@ func updateSellingItems():
 	finalSellingItems.append_array(sellingItems)
 	
 	for itemTag in sellingItemsTags:
-		var itemIDs = GlobalRegistry.getItemIDsByTag(itemTag)
+		var itemIDs = GlobalRegistry.getItemIDsByTagSlow(itemTag)
 		finalSellingItems.append_array(itemIDs)
 	
 	for itemID in finalSellingItems:

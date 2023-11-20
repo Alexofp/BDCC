@@ -760,6 +760,13 @@ func getItemIDsByTag(tag):
 		return []
 	return itemsByTag[tag]
 
+func getItemIDsByTagSlow(tag):
+	var result = []
+	for itemID in itemsRefs:
+		if(itemsRefs[itemID].hasTag(tag)):
+			result.append(itemID)
+	return result
+
 func getItemRefs():
 	return itemsRefs
 

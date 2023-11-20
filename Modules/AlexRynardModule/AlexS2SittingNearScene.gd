@@ -6,6 +6,7 @@ func _init():
 	sceneID = "AlexS2SittingNearScene"
 
 func _initScene(_args = []):
+	addCharacter("alexrynard")
 	howManyTimes = getFlag("AlexRynardModule.ch1HowManyTimesIdled", 0)
 	
 	if(howManyTimes == 0):
@@ -126,6 +127,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "skiphours_check")
 	if(state == "toolate"):
+		playAnimation(StageScene.Duo, "sit", {npc="alexrynard", npcAction="stand"})
 		saynn("Time flies.. So fast in fact, that you become quite sleepy.")
 
 		saynn("You put your elbows on the table and support your head. Your drowsy eyes keep watching Alex work.. until they begin to close on their own..")
@@ -140,6 +142,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "endthescene")
 	if(state == "aftersomefixing"):
+		playAnimation(StageScene.Duo, "sit", {npc="alexrynard", npcAction="stand"})
 		saynn("Time flies. Alex is fixing the datapads one after another while you just watch. But the pile doesn't seem to get any smaller..")
 
 		saynn("[say=alexrynard]Break time. Don't touch anything.[/say]")
@@ -605,6 +608,7 @@ func _react(_action: String, _args):
 	if(_action == "time9_alexreturns"):
 		processTime(2*60)
 		increaseFlag("PortalPantiesModule.Alex_BusyDays")
+		setFlag("AlexRynardModule.ch1FirstFuckup", true)
 
 	setState(_action)
 

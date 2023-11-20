@@ -11,6 +11,7 @@ enum {
 	SoldByMedicalVendomat,
 	SoldByUnderwearVendomat,
 	SoldByTheAnnouncer,
+	SoldByAlexRynard,
 	ChastityCage,
 	Strapon,
 	BreastPump,

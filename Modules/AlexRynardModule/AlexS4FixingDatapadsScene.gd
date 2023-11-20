@@ -6,10 +6,23 @@ func _init():
 	sceneID = "AlexS4FixingDatapadsScene"
 
 func _initScene(_args = []):
+	addCharacter("alexrynard")
 	howManyTimes = getFlag("AlexRynardModule.ch1HowMoreIdles", 0)
 	
 	if(howManyTimes == 0):
 		setState("first_time")
+		increaseFlag("AlexRynardModule.ch1HowMoreIdles")
+		return
+	if(howManyTimes == 1):
+		setState("time2")
+		increaseFlag("AlexRynardModule.ch1HowMoreIdles")
+		return
+	if(howManyTimes == 2):
+		setState("time3")
+		increaseFlag("AlexRynardModule.ch1HowMoreIdles")
+		return
+	if(howManyTimes == 3 || true):
+		setState("time4")
 		increaseFlag("AlexRynardModule.ch1HowMoreIdles")
 		return
 
@@ -309,7 +322,7 @@ func _react(_action: String, _args):
 		
 		if(GM.main.isVeryLate()):
 			setState("toolate")
-			GM.pc.addCredit(1)
+			GM.pc.addCredits(1)
 			addMessage("You received 1 credit!")
 		else:
 			setState("aftersomefixing")
@@ -347,7 +360,7 @@ func _react(_action: String, _args):
 
 	if(_action == "start_thehypno"):
 		setFlag("AlexRynardModule.ch1HypnovisorHappened", true)
-		runScene("")
+		runScene("AlexS5HypnovisorIntroScene")
 		endScene()
 		return
 

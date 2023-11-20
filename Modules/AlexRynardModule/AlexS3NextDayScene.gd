@@ -100,7 +100,7 @@ func _run():
 
 		saynn("Alex is quiet while staring at the pile of broken datapads. Until he breaks that silence.")
 
-		saynn("[say=alexrynard]I don't know what you found in me.. I'm into very different stuff from anyone else around here.[/say]")
+		saynn("[say=alexrynard]I don't know why you stick around.. I'm into very different stuff from anyone else around here.[/say]")
 
 		saynn("That can explain a few things.")
 

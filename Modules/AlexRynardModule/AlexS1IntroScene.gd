@@ -109,7 +109,7 @@ func _run():
 
 		saynn("[say=pc]Okay, well.. okay.[/say]")
 
-		saynn("[say=alexrynard]I stick out, I know. But I do find the random sex with random sluts here.. boring. I already have enough things to fuck with as you can see. The backlog of tasks only seems to get bigger.[/say]")
+		saynn("[say=alexrynard]I stick out, I know. I guess I have enough things to fuck with here for now.[/say]")
 
 		saynn("Yeah, the foxy seems to be working non-stop. Makes you wonder what he actually likes then.. other than stressing out about his job.")
 
