@@ -205,24 +205,30 @@ func unequipSlotRemoveIfRestraint(slot):
 		addItem(theitem)
 		return true
 
-func forceEquipRemoveOther(item):
+func forceEquipRemoveOther(item, forcer = null):
 	var slot = item.getClothingSlot()
 	
 	if(hasSlotEquipped(slot)):
 		removeItemFromSlot(slot)
 	
-	return equipItem(item)
+	var success = equipItem(item)
+	if(success):
+		item.afterForceEquip(forcer)
+	return success
 
-func forceEquipStoreOther(item):
+func forceEquipStoreOther(item, forcer = null):
 	var slot = item.getClothingSlot()
 	
 	if(hasSlotEquipped(slot)):
 		var storedItem = removeItemFromSlot(slot)
 		addItem(storedItem)
 	
-	return equipItem(item)
+	var success = equipItem(item)
+	if(success):
+		item.afterForceEquip(forcer)
+	return success
 
-func forceEquipStoreOtherUnlessRestraint(item):
+func forceEquipStoreOtherUnlessRestraint(item, forcer = null):
 	var slot = item.getClothingSlot()
 	
 	if(hasSlotEquipped(slot)):
@@ -230,7 +236,10 @@ func forceEquipStoreOtherUnlessRestraint(item):
 		if(!storedItem.isRestraint() || storedItem.isImportant()):
 			addItem(storedItem)
 	
-	return equipItem(item)
+	var success = equipItem(item)
+	if(success):
+		item.afterForceEquip(forcer)
+	return success
 
 func hasItemIDEquipped(itemID: String):
 	for slot in equippedItems:

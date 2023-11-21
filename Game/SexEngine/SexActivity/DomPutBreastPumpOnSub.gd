@@ -83,7 +83,7 @@ func startActivity(_args):
 			pumpItem = GlobalRegistry.createItem(_args[1])
 			pumpID = pumpItem.uniqueID
 		#	fuelStraponRandomly(straponItem)
-		getSub().getInventory().forceEquipStoreOther(pumpItem)
+		getSub().getInventory().forceEquipStoreOther(pumpItem, getDom())
 		
 		state = "milkingSub"
 		affectSub(subInfo.fetishScore({Fetish.Lactation: 1.0})+0.3, 0.03, -0.1, 0.0)
