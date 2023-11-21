@@ -545,11 +545,11 @@ func _run():
 
 		saynn("He sighs again.")
 
-		saynn("[say=alexrynard]That was my mistake. I should have stopped this many days ago. I dunno why I keep doing this.[/say]")
+		saynn("[say=alexrynard]That was my mistake.[/say]")
 
 		saynn("You.. are not sure how to react. For some reason it hurts.. Alex lowers his gaze, his tone calm.. but anxious.")
 
-		saynn("[say=alexrynard]Get out of here.[/say]")
+		saynn("[say=alexrynard]Go away.[/say]")
 
 		saynn("Looks like it's best not to touch him anymore for now.")
 

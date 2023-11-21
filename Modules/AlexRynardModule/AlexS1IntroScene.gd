@@ -90,7 +90,7 @@ func _run():
 
 		saynn("[say=pc]So far most of the people here are..[/say]")
 
-		saynn("[say=alexrynard]Yeah, everyone here cares only about non-stop fucking, exactly. And that's okay, more power to them. But I'm not into that. Can I just do my job now, please?[/say]")
+		saynn("[say=alexrynard]Yeah, everyone here cares only about non-stop fucking. More power to them. Can I do my job now?[/say]")
 
 		saynn("Silence settles in again. Foxy sighs and looks at you.")
 
@@ -109,7 +109,7 @@ func _run():
 
 		saynn("[say=pc]Okay, well.. okay.[/say]")
 
-		saynn("[say=alexrynard]I stick out, I know. I guess I have enough things to fuck with here for now.[/say]")
+		saynn("[say=alexrynard]I don't want to stick out. But I have enough things to fuck with for now.[/say]")
 
 		saynn("Yeah, the foxy seems to be working non-stop. Makes you wonder what he actually likes then.. other than stressing out about his job.")
 

@@ -25,6 +25,9 @@ func run(_triggerID, _args):
 		addButtonUnlessLate("Help", "Help him repair the datapads", "helpRepair")
 		return
 	
+	# REMOVE ME WHEN MORE CONTENT
+	addMessage("(( This is it for Alex's content for now. ))")
+	
 func react(_triggerID, _args):
 	if(getFlag("AlexRynardModule.ch1FirstFuckup") && !getFlag("AlexRynardModule.ch1NextDaySceneHappened")):
 		setFlag("AlexRynardModule.ch1NextDaySceneHappened", true)

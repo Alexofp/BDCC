@@ -130,11 +130,11 @@ func _run():
 
 		saynn("He shakes his head and then looks you in the eyes.")
 
-		saynn("[say=alexrynard]Feelings don't matter anymore, it's all about being strong nowadays. Whatever, I will get over it one day.[/say]")
+		saynn("[say=alexrynard]Feelings don't matter anymore, it's all about being strong. Whatever, I will get over it one day.[/say]")
 
 		saynn("Alex frowns.")
 
-		saynn("[say=alexrynard]Just forget it. Nothing matters.[/say]")
+		saynn("[say=alexrynard]Forget what I said. Nothing matters.[/say]")
 
 		saynn("Right now it feels even more like a contract..")
 

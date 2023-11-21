@@ -608,7 +608,7 @@ func _run():
 
 		saynn("[say=jacki]What?[/say]")
 
-		saynn("Your gaze moves down to your crotch."+str(" A crotch that has a visible bump, outlining your boner." if !GM.pc.isFullNaked() else "")+" Jacki follows your gaze.. and pouts more.")
+		saynn("Your gaze moves down to your crotch."+str(" A crotch that has a visible bump, outlining your boner." if !GM.pc.isFullyNaked() else "")+" Jacki follows your gaze.. and pouts more.")
 
 		saynn("[say=jacki]..fine.[/say]")
 
@@ -2649,6 +2649,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "endthescene")
 	if(state == "do_grab"):
+		addCharacter("jacki", ["naked"])
 		playAnimation(StageScene.Choking, "idle", {npc="jacki", npcBodyState={exposedCrotch=true}})
 		saynn("You suddenly grab Jacki by the neck, your hand squeezing her throat just above the collar. All the while she tries to pull your hands off her neck with so little strength.. that she might as well just be suggesting you.")
 
@@ -3877,7 +3878,7 @@ func _react(_action: String, _args):
 	if(_action == "perv_spank"):
 		processTime(5*60)
 		getModule("JackiModule").addAnger(20)
-		getModule("JackiModule").addCorruption(5)
+		getModule("JackiModule").addCorruption(3)
 
 	if(_action == "perv_suckass"):
 		processTime(15*60)

@@ -326,6 +326,9 @@ func _react(_action: String, _args):
 			addMessage("You received 1 credit!")
 		else:
 			setState("aftersomefixing")
+			if(getFlag("AlexRynardModule.ch1CommentedPay")):
+				GM.pc.addCredits(1)
+				addMessage("You received 1 credit!")
 		return
 
 	if(_action == "time3_tie"):

@@ -95,7 +95,7 @@ func addCorruption(howMuch, showMessage = true):
 	if(howMuch > 0.0 && currentCorruption > 1.0):
 		currentCorruption = 1.0
 		
-		addAnger(-howMuch/2.0*100.0, showMessage)
+		addAnger(-howMuch*2.0*100.0, showMessage)
 	if(howMuch < 0.0 && currentCorruption < 0.0):
 		currentCorruption = 0.0
 	
