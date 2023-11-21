@@ -533,8 +533,11 @@ func getBodypartTooltipInfo(_bodypartSlot):
 	return "error"
 
 func afterSleeping():
-	addStamina(getMaxStamina())
-	addPain(-getPain())
+	var mult = max(1.0 + GM.pc.getBuffsHolder().getCustom(BuffAttribute.RestEffectiveness), 0.1) # 0.1 minimum to avoid softlock scenarios
+	var staminaChange = mult * (getMaxStamina() - getStamina())
+	var painChange = mult * getPain()
+	addStamina(staminaChange)
+	addPain(-painChange)
 	skillsHolder.onNewDay()
 	for item in getInventory().getEquppedRestraints():
 		item.getRestraintData().resetOnNewDay()
@@ -552,7 +555,7 @@ func afterSleepingInBed():
 func afterRestingInBed(seconds):
 	var _hours = floor(seconds/3600.0)
 	
-	var mult = max(0.0, 1.0 + GM.pc.getBuffsHolder().getCustom(BuffAttribute.RestEffectiveness))
+	var mult = max(1.0 + GM.pc.getBuffsHolder().getCustom(BuffAttribute.RestEffectiveness), 0.1) # 0.1 minimum to avoid softlock scenarios
 	addStamina(_hours * 10 * mult)
 
 func afterCryopodTreatment():
