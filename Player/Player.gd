@@ -552,7 +552,7 @@ func afterSleepingInBed():
 func afterRestingInBed(seconds):
 	var _hours = floor(seconds/3600.0)
 	
-	var mult = max(0.0, 1.0 + GM.pc.buffsHolder.getCustom(BuffAttribute.RestEffectiveness))
+	var mult = max(0.0, 1.0 + GM.pc.getBuffsHolder().getCustom(BuffAttribute.RestEffectiveness))
 	addStamina(_hours * 10 * mult)
 
 func afterCryopodTreatment():
