@@ -356,7 +356,7 @@ func calculateBestRestraintLevel():
 func canForceOntoNpc():
 	return isRestraint() && !isImportant()
 	
-func afterForceEquip(_forcer):
+func onEquippedBy(_otherCharacter, _forced = false):
 	pass
 
 func getUnriggedParts(_character):

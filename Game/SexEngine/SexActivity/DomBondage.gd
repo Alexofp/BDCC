@@ -155,7 +155,7 @@ func processTurn():
 		
 		if(dom.isPlayer()):
 			dom.getInventory().removeItem(item)
-		sub.getInventory().forceEquipStoreOtherUnlessRestraint(item, dom)
+		sub.getInventory().forceEquipByStoreOtherUnlessRestraint(item, dom)
 		#sub.getBuffsHolder().calculateBuffs()
 		#sub.updateNonBattleEffects()
 		

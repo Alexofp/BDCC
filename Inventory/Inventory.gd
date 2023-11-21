@@ -205,30 +205,24 @@ func unequipSlotRemoveIfRestraint(slot):
 		addItem(theitem)
 		return true
 
-func forceEquipRemoveOther(item, forcer = null):
+func forceEquipRemoveOther(item):
 	var slot = item.getClothingSlot()
 	
 	if(hasSlotEquipped(slot)):
 		removeItemFromSlot(slot)
 	
-	var success = equipItem(item)
-	if(success):
-		item.afterForceEquip(forcer)
-	return success
+	return equipItem(item)
 
-func forceEquipStoreOther(item, forcer = null):
+func forceEquipStoreOther(item):
 	var slot = item.getClothingSlot()
 	
 	if(hasSlotEquipped(slot)):
 		var storedItem = removeItemFromSlot(slot)
 		addItem(storedItem)
 	
-	var success = equipItem(item)
-	if(success):
-		item.afterForceEquip(forcer)
-	return success
+	return equipItem(item)
 
-func forceEquipStoreOtherUnlessRestraint(item, forcer = null):
+func forceEquipStoreOtherUnlessRestraint(item):
 	var slot = item.getClothingSlot()
 	
 	if(hasSlotEquipped(slot)):
@@ -236,10 +230,27 @@ func forceEquipStoreOtherUnlessRestraint(item, forcer = null):
 		if(!storedItem.isRestraint() || storedItem.isImportant()):
 			addItem(storedItem)
 	
+	return equipItem(item)
+	
+func equipItemBy(item, equipper):
 	var success = equipItem(item)
 	if(success):
-		item.afterForceEquip(forcer)
-	return success
+		item.onEquippedBy(equipper, false)
+
+func forceEquipByRemoveOther(item, forcer):
+	var success = forceEquipRemoveOther(item)
+	if(success):
+		item.onEquippedBy(forcer, true)
+		
+func forceEquipByStoreOther(item, forcer):
+	var success = forceEquipStoreOther(item)
+	if(success):
+		item.onEquippedBy(forcer, true)
+		
+func forceEquipByStoreOtherUnlessRestraint(item, forcer):
+	var success = forceEquipStoreOtherUnlessRestraint(item)
+	if(success):
+		item.onEquippedBy(forcer, true)
 
 func hasItemIDEquipped(itemID: String):
 	for slot in equippedItems:
