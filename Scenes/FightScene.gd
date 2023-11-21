@@ -16,6 +16,7 @@ var enemyAIStrategy: AIStrategyBase
 var restraintIdsForcedByPC = []
 var enemySurrendered = false
 var lastPlayerAttackData = null
+var restraintsPickedCategory = ""
 
 func _init():
 	sceneID = "FightScene"
@@ -121,10 +122,35 @@ func _run():
 		else:
 			saynn("You can't judge enemy's restraints while blind")
 		
-		
+		var isInCategory = (restraintsPickedCategory != "")
 		var usableItems = GM.pc.getInventory().getAllCombatUsableRestraints()
+		var countsByItemID = {}
+		if(isInCategory):
+			var newUsable = []
+			for item in usableItems:
+				if(item.id == restraintsPickedCategory):
+					newUsable.append(item)
+			usableItems = newUsable
+		else:
+			for item in usableItems:
+				if(!countsByItemID.has(item.id)):
+					countsByItemID[item.id] = 1
+				else:
+					countsByItemID[item.id] += 1
 		
+			for categoryID in countsByItemID:
+				if(countsByItemID[categoryID] <= 1):
+					continue
+				var itemRef:ItemBase = GlobalRegistry.getItemRef(categoryID)
+				if(itemRef == null):
+					continue
+				
+				addButton(str(countsByItemID[categoryID])+"x"+itemRef.getVisibleName(), itemRef.getCombatDescription(), "openrestraintscategory", [categoryID])
+				
 		for item in usableItems:
+			if(!isInCategory && countsByItemID.has(item.id) && countsByItemID[item.id] > 1):
+				continue
+			
 			var itemSlot = item.getClothingSlot()
 			
 			if(!enemyCharacter.invCanEquipSlot(itemSlot)):
@@ -140,10 +166,10 @@ func _run():
 				var chanceToForce = pcAccuracy
 				if(enemyCharacter.getStamina() > 0):
 					 chanceToForce *= restraintData.getFinalChanceToForceARestraint(enemyCharacter)
-					
+
 				addButton(item.getVisibleName(), "Restraint level: "+str(restraintData.getLevel()) + "\n" + "Success chance: "+ str(Util.roundF(chanceToForce*100.0, 1))+"%" + "\n\n" + item.getCombatDescription(), "forcerestraint", [item])
 			
-		addButton("Back", "Back to fighting", "return")
+		addButton("Back", "Back to fighting", "closerestraintsmenu")
 	
 	if(state == "playerMustDodge"):
 		if(whatPlayerDid != ""):
@@ -290,7 +316,19 @@ func _react(_action: String, _args):
 		afterTurnChecks()
 		return
 		
+	if(_action == "openrestraintscategory"):
+		restraintsPickedCategory = _args[0]
+		return
+	
+	if(_action == "closerestraintsmenu"):
+		if(restraintsPickedCategory != ""):
+			restraintsPickedCategory = ""
+		else:
+			setState("fighting")
+		return
+		
 	if(_action == "forcerestraint"):
+		restraintsPickedCategory = ""
 		setState("fighting")
 		beforeTurnChecks()
 		
@@ -914,6 +952,7 @@ func saveData():
 	data["restraintIdsForcedByPC"] = restraintIdsForcedByPC
 	data["enemySurrendered"] = enemySurrendered
 	data["lastPlayerAttackData"] = lastPlayerAttackData
+	data["restraintsPickedCategory"] = restraintsPickedCategory
 	
 	if(enemyAIStrategy != null):
 		data["enemyStrategyData"] = enemyAIStrategy.saveData()
@@ -937,6 +976,7 @@ func loadData(data):
 	restraintIdsForcedByPC = SAVE.loadVar(data, "restraintIdsForcedByPC", [])
 	enemySurrendered = SAVE.loadVar(data, "enemySurrendered", false)
 	lastPlayerAttackData = SAVE.loadVar(data, "lastPlayerAttackData", null)
+	restraintsPickedCategory = SAVE.loadVar(data, "restraintsPickedCategory", "")
 	
 	enemyAIStrategy = enemyCharacter.getAiStrategy(battleName)
 	enemyAIStrategy.battleName = battleName
