@@ -73,3 +73,4 @@ const EncounterChanceModifierStaffBuff = "EncounterChanceModifierStaffBuff"
 const EncounterChanceModifierInmatesBuff = "EncounterChanceModifierInmatesBuff"
 
 const ForcedObedienceBuff = "ForcedObedienceBuff"
+const RestEffectivenessBuff = "RestEffectivenessBuff"

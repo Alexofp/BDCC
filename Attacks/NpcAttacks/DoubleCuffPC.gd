@@ -19,8 +19,8 @@ func _doAttack(_attacker, _receiver, _context = {}):
 	if(checkDodged(_attacker, _receiver, DamageType.Physical)):
 		return genericDodgeMessage(_attacker, _receiver)
 	
-	_receiver.getInventory().forceEquipStoreOtherUnlessRestraint(GlobalRegistry.createItem("inmatewristcuffs"))
-	_receiver.getInventory().forceEquipStoreOtherUnlessRestraint(GlobalRegistry.createItem("inmateanklecuffs"))
+	_receiver.getInventory().forceEquipByStoreOtherUnlessRestraint(GlobalRegistry.createItem("inmatewristcuffs"), _attacker)
+	_receiver.getInventory().forceEquipByStoreOtherUnlessRestraint(GlobalRegistry.createItem("inmateanklecuffs"), _attacker)
 	_receiver.addEffect(StatusEffect.Collapsed)
 	
 	var text = "{attacker.name} manages to bring you down to the floor. Then {attacker.he} pulls two sets of cuffs and [b]restraints your arms and legs[/b]! You manage to shake {attacker.him} off but you are still on the floor."
