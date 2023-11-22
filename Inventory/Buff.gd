@@ -69,3 +69,5 @@ const PenisCumGenerationAfterOrgasmBuff = "PenisCumGenerationAfterOrgasmBuff"
 
 const EncounterChanceModifierStaffBuff = "EncounterChanceModifierStaffBuff"
 const EncounterChanceModifierInmatesBuff = "EncounterChanceModifierInmatesBuff"
+
+const RestEffectivenessBuff = "RestEffectivenessBuff"
