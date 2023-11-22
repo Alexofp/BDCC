@@ -315,7 +315,7 @@ func _react(_action: String, _args):
 				
 				restraintIdsForcedByPC.append(item.getUniqueID())
 				GM.pc.getInventory().removeItem(item)
-				enemyCharacter.getInventory().forceEquipRemoveOther(item)
+				enemyCharacter.getInventory().forceEquipByRemoveOther(item, GM.pc)
 				enemyCharacter.getBuffsHolder().calculateBuffs()
 				#enemyCharacter.updateNonBattleEffects()
 				

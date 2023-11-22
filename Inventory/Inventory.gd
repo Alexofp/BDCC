@@ -231,6 +231,26 @@ func forceEquipStoreOtherUnlessRestraint(item):
 			addItem(storedItem)
 	
 	return equipItem(item)
+	
+func equipItemBy(item, equipper):
+	var success = equipItem(item)
+	if(success):
+		item.onEquippedBy(equipper, false)
+
+func forceEquipByRemoveOther(item, forcer):
+	var success = forceEquipRemoveOther(item)
+	if(success):
+		item.onEquippedBy(forcer, true)
+		
+func forceEquipByStoreOther(item, forcer):
+	var success = forceEquipStoreOther(item)
+	if(success):
+		item.onEquippedBy(forcer, true)
+		
+func forceEquipByStoreOtherUnlessRestraint(item, forcer):
+	var success = forceEquipStoreOtherUnlessRestraint(item)
+	if(success):
+		item.onEquippedBy(forcer, true)
 
 func hasItemIDEquipped(itemID: String):
 	for slot in equippedItems:
