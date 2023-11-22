@@ -31,9 +31,9 @@ func _run():
 		else:
 			saynn("Jacki's anger: "+str(Util.roundF(anger*100.0, 1))+"% ("+str(getModule("JackiModule").getAngerText())+")")
 
-		saynn("Jacki's corruption: "+str(Util.roundF(corruption*100.0, 1))+"% ("+str(getModule("JackiModule").getCorruptionText())+")")
+		saynn("Jacki's corruption: "+str(Util.roundF(corruption*100.0, 1))+"% ("+str(getModule("JackiModule").getCorruptionText())+")"+("\nJacki is broken, her anger will now go down from mean actions." if (corruption >= 1.0 && anger >= 0.0) else ""))
 
-		saynn("Jacki's lust: "+str(Util.roundF(lust*100.0, 1))+"% ("+str(getModule("JackiModule").getLustText())+")")
+		saynn("Jacki's lust: "+str(Util.roundF(lust*100.0, 1))+"% ("+str(getModule("JackiModule").getLustText())+")"+("\nJacki is so lusty that any lewd action will now corrupt her." if (lust >= 1.0 && corruption < 1.0) else ""))
 
 		playAnimation(StageScene.Solo, "kneel", {pc="jacki", bodyState={underwear=hasUnderwear}})
 		if (anger >= 0.1):
@@ -1454,7 +1454,7 @@ func _run():
 	if(state == "jog_afterchat"):
 		aimCameraAndSetLocName("yard_northCorridor")
 		GM.pc.setLocation("yard_northCorridor")
-		if (lust < 0.3):
+		if (lust < 0.2):
 			playAnimation(StageScene.Duo, "stand", {npc="jacki"})
 			saynn("By the end of your jogging session, Jacki is panting softly. She leans against one of the big rocks and holds her other paw on her thigh, rubbing it.")
 
@@ -1468,7 +1468,7 @@ func _run():
 
 			saynn("[say=jacki]Ah.. So good.. Well. It was nice chatting with you. But I think I will return back now.[/say]")
 
-		elif (lust < 0.6):
+		elif (lust < 0.4):
 			playAnimation(StageScene.Duo, "stand", {npc="jacki"})
 			saynn("By the end of that jogging session, Jacki is clearly exhausted. She is huffing and sticking her tongue out,  her paws traveling all over her waist and sides.")
 
@@ -1484,7 +1484,7 @@ func _run():
 
 			saynn("[say=jacki]It was nice to chat with you. I will go now. Wruff.[/say]")
 
-		elif (lust < 0.9):
+		elif (lust < 0.8):
 			playAnimation(StageScene.Duo, "stand", {npc="jacki"})
 			saynn("Jacki is panting softly after that jogging session. She empties her water bottle onto herself and produces a cute moan.")
 
@@ -1519,10 +1519,10 @@ func _run():
 		addButton("Nod", "Enough is enough", "jog_afterchat_nod")
 		addButton("Shower", "Offer her to go take a refreshing shower", "jog_afterchat_shower")
 		addButton("Ask to jog more", "Ask to jog even more together", "jog_afterchat_askmore")
-		if (lust >= 0.6):
+		if (lust >= 0.4):
 			addButton("Lick her", "Try to make Jacki cum by licking and rubbing her stiched up pussy", "jog_try_piercings")
 			addButton("Sounding", "Jacki still has that little dildo in her urerthra..", "jog_sounding")
-		if (lust >= 0.9):
+		if (lust >= 0.8):
 			addButtonWithChecks("Rough anal", "Fuck Jacki's ass", "jog_anal_fuck", [], [ButtonChecks.HasReachablePenis])
 			addButtonWithChecks("Strapon anal", "Fuck Jacki's ass with a strapon", "jog_anal_strapon_pick", [], [ButtonChecks.HasStraponAndCanWear])
 		if (getFlag("JackiModule.Jacki_ch2GotPussyFreed")):

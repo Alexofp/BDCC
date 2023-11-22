@@ -18,7 +18,7 @@ func getBuffs():
 		]
 
 func getPrice():
-	return 100
+	return 60
 
 func canSell():
 	return true

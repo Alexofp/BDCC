@@ -2038,6 +2038,8 @@ func bodypartShareFluidsWith(bodypartID, otherCharacterID, otherBodypartID, frac
 
 func processSexTurn():
 	for effectID in statusEffects.keys():
+		if(!statusEffects.has(effectID)):
+			continue
 		var effect = statusEffects[effectID]
 		effect.processSexTurn()
 		
