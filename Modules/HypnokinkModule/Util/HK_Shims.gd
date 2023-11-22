@@ -11,13 +11,3 @@ static func swayHips(_lustState, pc, text):
 				text += "[b]Enemy is mesmerized by your hips![/b]"
 				text += "\n\n"
 	return text
-	
-static func onForceEquip(item):
-	if(item.has_method("on_forceEquip")):
-		item.on_forceEquip(GM.pc)
-	
-static func restingInCell(timePassed):
-	if(GM.pc.buffsHolder.hasBuff(HK_Buff.RestEffectivenessBuff)):
-		var _hours = floor(timePassed/3600.0)
-		var extraEffectiveness = GM.pc.buffsHolder.getCustom(HK_Buff.RestEffectivenessBuff)
-		GM.pc.addStamina(_hours * 10 * extraEffectiveness)

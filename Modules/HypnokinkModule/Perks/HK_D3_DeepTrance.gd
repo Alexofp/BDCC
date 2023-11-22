@@ -25,7 +25,8 @@ func unlockable() -> bool:
 	return false
 
 func toggleable() -> bool:
-	return false
+	var ch = npc if npc != null else GM.pc
+	return !(ch.getSkillsHolder().hasPerk(self.id))
 
 func hiddenWhenLocked() -> bool:
 	return true;

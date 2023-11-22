@@ -25,5 +25,5 @@ func getPicture():
 
 func getBuffs():
 	return [
-		buff(HK_Buff.RestEffectivenessBuff, [1.0]),
+		buff(Buff.RestEffectivenessBuff, [0.5]),
 	]

@@ -92,20 +92,15 @@ func saveData():
 func loadData(_data):
 	programmedToSuppressPerkId = SAVE.loadVar(_data, "programmedToSuppressPerkId", "")
 
-func on_forceEquip(_attacker):
+func onEquippedBy(_otherCharacter, _forced = false):
+	if(not _forced):
+		return
 	var wearer = getWearer()
-	var minAmount = 0
-	if(_attacker.hasPerk(HK_Perk.VisorMastery)):
-		minAmount = 50
-	elif(_attacker.hasPerk(HK_Perk.GoodAtVisors)):
-		minAmount = 30
-	if(minAmount > 0):
-		if(!wearer.hasEffect(HK_StatusEffect.Suggestible)):
-			wearer.addEffect(HK_StatusEffect.Suggestible, [minAmount])
-		else:
-			var effect:HK_Suggestible = wearer.getEffect(HK_StatusEffect.Suggestible)
-			effect.stacks = max(effect.stacks, minAmount)
-	#todo: consider abusing getForcedOnMessage instead
+	var currentAmount = HK_CharUtil.getSuggestibleStacks(wearer)
+	if(_otherCharacter.hasPerk(HK_Perk.VisorMastery) and currentAmount < 50):
+		HK_CharUtil.changeSuggestibilityBy(wearer, 50 - currentAmount)
+	elif(_otherCharacter.hasPerk(HK_Perk.GoodAtVisors) and currentAmount < 30):
+		HK_CharUtil.changeSuggestibilityBy(wearer, 30 - currentAmount)
 	
 	
 func getForcedOnMessage(isPlayer = true):

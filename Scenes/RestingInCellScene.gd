@@ -47,8 +47,6 @@ func _react(_action: String, _args):
 		var timePassed = GM.main.processTimeUntil(newt * 60 * 60)
 		GM.pc.afterRestingInBed(timePassed)
 		
-		HK_Shims.restingInCell(timePassed)
-		
 		if(GM.ES.triggerReact(Trigger.Waiting, [timePassed])):
 			endScene()
 			return

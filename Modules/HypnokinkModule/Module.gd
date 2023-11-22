@@ -103,7 +103,6 @@ func _init():
 		"res://Modules/HypnokinkModule/Skills/HK_HypnosisSkill.gd",
 	]
 	buffs = [
-		"res://Modules/HypnokinkModule/Buffs/HK_RestEffectivenessBuff.gd",
 	]
 	statusEffects = [
 		"res://Modules/HypnokinkModule/StatusEffects/HK_Suggestible.gd",
