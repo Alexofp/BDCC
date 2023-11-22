@@ -2,7 +2,7 @@ extends Node
 
 var game_version_major = 0
 var game_version_minor = 1
-var game_version_revision = 0
+var game_version_revision = 1
 var game_version_suffix = ""
 
 var currentUniqueID = 0
@@ -759,6 +759,13 @@ func getItemIDsByTag(tag):
 	if(!itemsByTag.has(tag)):
 		return []
 	return itemsByTag[tag]
+
+func getItemIDsByTagSlow(tag):
+	var result = []
+	for itemID in itemsRefs:
+		if(itemsRefs[itemID].hasTag(tag)):
+			result.append(itemID)
+	return result
 
 func getItemRefs():
 	return itemsRefs

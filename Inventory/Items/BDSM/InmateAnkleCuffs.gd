@@ -52,3 +52,6 @@ func getChains():
 			return [["short", "ankle.L", "ankle.R"], ["short", "wrist.R", "ankle.R"], ["short", "wrist.L", "ankle.L"]]
 	
 	return [["short", "ankle.L", "ankle.R"]]
+
+func getInventoryImage():
+	return "res://Images/Items/bdsm/cuff.png"

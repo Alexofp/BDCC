@@ -7,7 +7,7 @@ func getVisibleName():
 	return "Cum Lover"
 
 func getVisibleDescription():
-	return "Shows how much you are used to cumming or being cummed into"
+	return "Shows how much you like receiving creampies"
 
 func getPerkTiers():
 	return [

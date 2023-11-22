@@ -38,6 +38,32 @@ func getItems():
 func getAllItems():
 	return items
 
+func getAllSellableItems():
+	var result = []
+	for item in items:
+		if(item.canSell() && !item.isImportant()):
+			result.append(item)
+	return result
+
+func getItemsAndEquippedItemsTogether():
+	var result = []
+	result.append_array(equippedItems.values())
+	result.append_array(items)
+	return result
+
+func getItemsAndEquippedItemsTogetherGrouped():
+	var result = {}
+	for item in equippedItems.values():
+		result["%$%"+item.id] = [item]
+	
+	for item in items:
+		if(!result.has(item.id)):
+			result[item.id] = [item]
+		else:
+			result[item.id].append(item)
+	
+	return result
+
 func getAllOf(itemID: String):
 	var result = []
 	
@@ -231,6 +257,26 @@ func forceEquipStoreOtherUnlessRestraint(item):
 			addItem(storedItem)
 	
 	return equipItem(item)
+	
+func equipItemBy(item, equipper):
+	var success = equipItem(item)
+	if(success):
+		item.onEquippedBy(equipper, false)
+
+func forceEquipByRemoveOther(item, forcer):
+	var success = forceEquipRemoveOther(item)
+	if(success):
+		item.onEquippedBy(forcer, true)
+		
+func forceEquipByStoreOther(item, forcer):
+	var success = forceEquipStoreOther(item)
+	if(success):
+		item.onEquippedBy(forcer, true)
+		
+func forceEquipByStoreOtherUnlessRestraint(item, forcer):
+	var success = forceEquipStoreOtherUnlessRestraint(item)
+	if(success):
+		item.onEquippedBy(forcer, true)
 
 func hasItemIDEquipped(itemID: String):
 	for slot in equippedItems:
@@ -259,6 +305,7 @@ func getAllEquippedItems():
 func removeItemFromSlot(slot):
 	if(equippedItems.has(slot)):
 		var item = equippedItems[slot]
+		item.onUnequipped()
 		equippedItems.erase(slot)
 		item.currentInventory = null
 		emit_signal("equipped_items_changed")
@@ -270,6 +317,7 @@ func removeEquippedItem(item):
 		var myitem = equippedItems[slot]
 		
 		if(myitem == item):
+			item.onUnequipped()
 			equippedItems.erase(slot)
 			item.currentInventory = null
 			emit_signal("equipped_items_changed")

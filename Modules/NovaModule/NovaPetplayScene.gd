@@ -802,7 +802,7 @@ func _react(_action: String, _args):
 			condomBroke = getCharacter("nova").shouldCondomBreakWhenFucking(GM.pc, chance)
 
 		if(!usedCondom || (usedCondom && condomBroke)):
-			GM.pc.cummedInVaginaBy("nova")
+			GM.pc.cummedInVaginaByAdvanced("nova", {condomBroke=condomBroke, knotted=true})
 			GM.pc.addSkillExperience(Skill.SexSlave, 20, "nova_petfuck")
 		else:
 			GM.pc.addSkillExperience(Skill.SexSlave, 40, "nova_petfuck")
@@ -815,7 +815,7 @@ func _react(_action: String, _args):
 	
 	if(_action == "anal_get_knotted"):
 		GM.pc.gotAnusFuckedBy("nova")
-		GM.pc.cummedInAnusBy("nova")
+		GM.pc.cummedInAnusByAdvanced("nova", {knotted=true})
 		
 		GM.pc.addSkillExperience(Skill.SexSlave, 20, "nova_petfuck")
 		

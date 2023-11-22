@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Inventory/UnriggedModels/HypnoVisor/hypnovisor.png" type="Texture" id=2]
+
+[node name="HypnovisorModel" type="Spatial"]
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+texture = ExtResource( 2 )

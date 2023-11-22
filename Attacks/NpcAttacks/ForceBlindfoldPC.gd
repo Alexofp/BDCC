@@ -19,7 +19,7 @@ func _doAttack(_attacker, _receiver, _context = {}):
 	if(checkDodged(_attacker, _receiver, DamageType.Physical)):
 		return genericDodgeMessage(_attacker, _receiver)
 	
-	_receiver.getInventory().forceEquipStoreOtherUnlessRestraint(GlobalRegistry.createItem("blindfold"))
+	_receiver.getInventory().forceEquipByStoreOtherUnlessRestraint(GlobalRegistry.createItem("blindfold"), _attacker)
 	
 	var text = "{attacker.name} pounces at you and manages to [b]blindfold you[/b]! You shove {attacker.him} back.\n\n[say=attacker]"+RNG.pick([
 		"Lights out.",

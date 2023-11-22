@@ -27,3 +27,6 @@ func getPrice():
 func generateFluids():
 	fluids = Fluids.new()
 	fluids.setCapacity(750.0)
+
+func getInventoryImage():
+	return "res://Images/Items/strapons/dragon.png"

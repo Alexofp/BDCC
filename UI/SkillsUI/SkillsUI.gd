@@ -93,13 +93,13 @@ func updateAttribList():
 		canAddPoints = false
 	
 	for statID in statObjects:
-		var baseStat = GM.pc.getSkillsHolder().getBaseStat(statID) + getAddedStat(statID)
 		var finalStat = GM.pc.getSkillsHolder().getStat(statID) + getAddedStat(statID)
+		var extraStat = GM.pc.getBuffsHolder().getExtraStat(statID)
 		var statObject:StatBase = GlobalRegistry.getStat(statID)
 		
-		var statNumberText = str(baseStat)
-		if(baseStat != finalStat):
-			statNumberText = str(baseStat) + " ("+str(finalStat)+")"
+		var statNumberText = str(finalStat)
+		if(extraStat != 0):
+			statNumberText = str(finalStat) + " ("+(str(extraStat) if extraStat < 0 else "+"+str(extraStat))+")"
 		statObjects[statID].setStatName(statObject.getVisibleName()+": "+statNumberText)
 		statObjects[statID].setCanPressPlus(canAddPoints)
 	

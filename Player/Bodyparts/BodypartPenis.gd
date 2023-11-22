@@ -19,6 +19,9 @@ func getTooltipInfo():
 	if(getFluidProduction() != null):
 		result.append("Capacity: " + str(round(getFluidProduction().getFluidAmount() * 10.0)/10.0)+"/"+ str(round(getFluidProduction().getCapacity() * 10.0)/10.0)+" ml")
 		result.append_array(getFluidProduction().getTooltipInfo())
+	var theChar = getCharacter()
+	if(GM.pc != null && GM.pc.hasPerk(Perk.BreedExtraTooltipInfo) && theChar != null):
+		result.append("Virility: "+str(Util.roundF(theChar.getVirility()*100.0, 1))+"%")
 	
 	return Util.join(result, "\n")
 

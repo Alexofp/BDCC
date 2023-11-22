@@ -39,6 +39,8 @@ func stateMachineTravel(thedoll, state_machine, animID):
 			state_machine.travel("Walk-loop")
 		else:
 			state_machine.travel("ShacklesWalk-loop")
+	elif(animID == "jog"):
+		state_machine.travel("Jogging-loop")
 	elif(animID == "stand"):
 		state_machine.travel("Standing-loop")
 	elif(animID == "kneel"):
@@ -150,7 +152,7 @@ func getSupportedStatesPuppy():
 	return ["stand", "walk", "sit", "paw", "back", "sad"]
 
 func getSupportedStatesSolo():
-	return ["walk", "stand", "kneel", "defeat", "sit", "bite", "block", "dodge", "hurt", "kick", "punch", "allfours", "crawl", "stunbaton", "throw", "holdpistol", "aimpistol", "firepistol", "shiv", "shove", "struggle", "struggle_gag", "struggle_legs"]
+	return ["walk", "jog", "stand", "kneel", "defeat", "sit", "bite", "block", "dodge", "hurt", "kick", "punch", "allfours", "crawl", "stunbaton", "throw", "holdpistol", "aimpistol", "firepistol", "shiv", "shove", "struggle", "struggle_gag", "struggle_legs"]
 
 func addDoll(newdoll):
 	dolls.append(newdoll)

@@ -16,6 +16,7 @@ func _init():
 	otherHoleFetishReceiving = Fetish.VaginalSexReceiving
 	otherGoal = SexGoal.ReceiveVaginal
 	aboutToRideReaction = SexReaction.AboutToRideAnal
+	isVag = false
 	
 func getGoals():
 	return {

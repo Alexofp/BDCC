@@ -382,6 +382,24 @@ func applyTallymarkIfNeededData(bodypartSlot):
 		text = text,
 	}
 
+func sendSexEvent(type, source = "", target = "", data = {}):
+	if(source == "" || source == null):
+		source = domID
+	if(target == "" || target == null):
+		target = subID
+	
+	var newSexEvent:SexEvent = SexEvent.new()
+	newSexEvent.type = type
+	newSexEvent.sourceCharID = source
+	newSexEvent.targetCharID = target
+	newSexEvent.data = data
+	newSexEvent.isSexEngine = true
+	newSexEvent.sexEngine = getSexEngine()
+	
+	getDom().sendSexEvent(newSexEvent)
+	if(getSub() != getDom()):
+		getSub().sendSexEvent(newSexEvent)
+	
 func saveData():
 	var data = {
 		"uniqueID": uniqueID,

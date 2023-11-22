@@ -13,9 +13,9 @@ var hadToUseFallback = false
 func _ready():
 	loadFromFile()
 	setTargetLanguage(targetLanguage)
-	#setTranslator("deepl")
-	addTranslator("deepl")
+	#addTranslator("deepl") # Doesn't work anymore :(
 	addTranslator("google")
+	addTranslator("papago")
 	addTranslator("googlebatch")
 	setShouldTranslate(shouldBeTranslating)
 	
@@ -26,6 +26,8 @@ func createTranslator(translatorID):
 		return GoogleBatchTranslator.new()
 	if(translatorID == "deepl"):
 		return DeepLTranslator.new()
+	if(translatorID == "papago"):
+		return PapagoTranslate.new()
 	return null
 	
 func setTargetLanguage(tl):

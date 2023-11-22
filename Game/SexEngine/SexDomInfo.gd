@@ -172,6 +172,9 @@ func affectPersonality(_personality:Personality, _fetishHolder:FetishHolder):
 	
 	return GM.ui.processString(Util.join(theChanges, "\n"), {npc=charID})
 
+func getOpponentInfo():
+	return getSexEngine().subs[getSexEngine().subs.keys()[0]]
+
 func saveData():
 	var data = .saveData()
 	

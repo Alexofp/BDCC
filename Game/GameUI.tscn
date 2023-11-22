@@ -289,6 +289,14 @@ fit_content_height = true
 selection_enabled = true
 custom_effects = [ ExtResource( 11 ), ExtResource( 17 ), ExtResource( 16 ), ExtResource( 18 ), ExtResource( 19 ), ExtResource( 20 ) ]
 
+[node name="UniquePanelSpot" type="MarginContainer" parent="HBoxContainer/VBoxContainer2"]
+visible = false
+margin_top = 358.0
+margin_right = 710.0
+margin_bottom = 678.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
 [node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer2"]
 margin_top = 682.0
 margin_right = 710.0
@@ -461,6 +469,7 @@ margin_right = 71.0
 margin_bottom = 71.8284
 
 [node name="MessageSystem" parent="." instance=ExtResource( 22 )]
+visible = false
 
 [connection signal="onDevComButton" from="HBoxContainer/Panel2/MarginContainer/VBoxContainer/MapAndTimePanel" to="." method="_on_MapAndTimePanel_onDevComButton"]
 [connection signal="pressed" from="HBoxContainer/Panel2/MarginContainer/VBoxContainer/HBoxContainer2/SaveButton" to="." method="_on_SaveButton_pressed"]

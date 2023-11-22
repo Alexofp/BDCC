@@ -52,3 +52,6 @@ func getBuyAmount():
 
 func getItemCategory():
 	return ItemCategory.Medical
+
+func getInventoryImage():
+	return "res://Images/Items/medical/pregnancy-test.png"

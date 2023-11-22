@@ -1217,7 +1217,7 @@ func _react(_action: String, _args):
 	if(_action == "walkies_meetnova_knot"):
 		processTime(10*60)
 		if(condomBroke):
-			getCharacter("tavi").cummedInVaginaBy("nova")
+			getCharacter("tavi").cummedInVaginaByAdvanced("nova", {condomBroke=condomBroke,knotted=true})
 		else:
 			addFilledCondomToLootIfPerk(getCharacter("nova").createFilledCondom())
 

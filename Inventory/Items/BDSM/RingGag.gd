@@ -45,3 +45,6 @@ func getForcedOnMessage(isPlayer = true):
 
 func updateDoll(doll: Doll3D):
 	doll.setState("mouth", "ringgag")
+
+func getInventoryImage():
+	return "res://Images/Items/bdsm/ringgag.png"

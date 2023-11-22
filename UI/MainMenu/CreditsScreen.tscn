@@ -57,13 +57,13 @@ margin_bottom = 53.0
 [node name="ContentContainer" type="VBoxContainer" parent="VBoxContainer/ScrollContainer/ScrollVBox"]
 margin_top = 57.0
 margin_right = 1280.0
-margin_bottom = 550.0
+margin_bottom = 571.0
 size_flags_horizontal = 3
 custom_constants/separation = 10
 
 [node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer/ScrollContainer/ScrollVBox/ContentContainer"]
 margin_right = 1280.0
-margin_bottom = 462.0
+margin_bottom = 483.0
 custom_fonts/bold_font = SubResource( 1 )
 bbcode_enabled = true
 bbcode_text = "[center]This game is very early in its development. If you are reading this - thank you!
@@ -72,7 +72,7 @@ Project started by [color=#FF6A00]Rahi[/color] aka Alexofp on 01.08.2021
 Active development began on 28.12.2021
 
 Huge thanks to [color=#00B6FF]Ferri[/color] for playtesting the earliest versions and supporting me [color=red]<3[/color]
-Thanks to [color=#D375FF]Mekyro[/color] for creading [color=red]RRDC[/color], the inspiration of this game
+Thanks to [color=#D375FF]Mekyro[/color] for creating [color=red]RRDC[/color], the inspiration of this game
 Thanks to [url=https://www.furaffinity.net/user/bl4ckw0lf/][color=#E24646]Jacki Northstar[/color][/url] for letting me use her character
 Thanks to [color=#90A9F4]Nova Dawfort[/color] for letting me use her character ^^
 
@@ -82,7 +82,8 @@ Contributors:
 Max-Maxou (sprites)
 Firi (code, [url=https://github.com/Alexofp/BDCC/pull/10]#1[/url] [url=https://github.com/Alexofp/BDCC/pull/11]#2[/url] [url=https://github.com/Alexofp/BDCC/pull/12]#3[/url] [url=https://github.com/Alexofp/BDCC/pull/13]#4[/url] [url=https://github.com/Alexofp/BDCC/pull/14]#5[/url])
 Niel (code, [url=https://github.com/Alexofp/BDCC/pull/17]#1[/url])
-PeteTimesSix (visible chains, [url=https://github.com/Alexofp/BDCC/pull/25]#1[/url] [url=https://github.com/Alexofp/BDCC/pull/26]#2[/url] [url=https://github.com/Alexofp/BDCC/pull/27]#3[/url])
+PeteTimesSix (visible chains, [url=https://github.com/Alexofp/BDCC/pull/25]#1[/url] [url=https://github.com/Alexofp/BDCC/pull/26]#2[/url] [url=https://github.com/Alexofp/BDCC/pull/27]#3[/url] [url=https://github.com/Alexofp/BDCC/pull/29]#4[/url] [url=https://github.com/Alexofp/BDCC/pull/30]#5[/url] [url=https://github.com/Alexofp/BDCC/pull/31]#6[/url] [url=https://github.com/Alexofp/BDCC/pull/33]#7[/url] [url=https://github.com/Alexofp/BDCC/pull/35]#8[/url] [url=https://github.com/Alexofp/BDCC/pull/36]#9[/url])
+Rayforward ([url=https://github.com/Alexofp/BDCC/pull/34]#1[/url] [url=https://github.com/Alexofp/BDCC/pull/37]#2[/url])
 
 The game uses some icons from [url=https://game-icons.net/]game-icons.net[/url] and [url=https://www.flaticon.com/]flaticon.com[/url]
 
@@ -94,7 +95,7 @@ Project started by Rahi aka Alexofp on 01.08.2021
 Active development began on 28.12.2021
 
 Huge thanks to Ferri for playtesting the earliest versions and supporting me <3
-Thanks to Mekyro for creading RRDC, the inspiration of this game
+Thanks to Mekyro for creating RRDC, the inspiration of this game
 Thanks to Jacki Northstar for letting me use her character
 Thanks to Nova Dawfort for letting me use her character ^^
 
@@ -104,7 +105,8 @@ Contributors:
 Max-Maxou (sprites)
 Firi (code, #1 #2 #3 #4 #5)
 Niel (code, #1)
-PeteTimesSix (visible chains, #1 #2 #3)
+PeteTimesSix (visible chains, #1 #2 #3 #4 #5 #6 #7 #8 #9)
+Rayforward (#1 #2)
 
 The game uses some icons from game-icons.net and flaticon.com
 
@@ -113,9 +115,9 @@ Thanks to everyone else who I probably forgot..
 fit_content_height = true
 
 [node name="DonationsLabel" type="RichTextLabel" parent="VBoxContainer/ScrollContainer/ScrollVBox/ContentContainer"]
-margin_top = 472.0
+margin_top = 493.0
 margin_right = 1280.0
-margin_bottom = 493.0
+margin_bottom = 514.0
 custom_fonts/bold_font = SubResource( 1 )
 bbcode_enabled = true
 fit_content_height = true

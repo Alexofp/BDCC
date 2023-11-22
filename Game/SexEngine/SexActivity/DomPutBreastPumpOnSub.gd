@@ -83,7 +83,7 @@ func startActivity(_args):
 			pumpItem = GlobalRegistry.createItem(_args[1])
 			pumpID = pumpItem.uniqueID
 		#	fuelStraponRandomly(straponItem)
-		getSub().getInventory().forceEquipStoreOther(pumpItem)
+		getSub().getInventory().forceEquipByStoreOther(pumpItem, getDom())
 		
 		state = "milkingSub"
 		affectSub(subInfo.fetishScore({Fetish.Lactation: 1.0})+0.3, 0.03, -0.1, 0.0)
@@ -148,7 +148,9 @@ func processTurn():
 					text += " {sub.YourHis} nipples [b]got sore[/b] from so much milking!"
 		
 		if(getSub().hasEffect(StatusEffect.SoreNipplesAfterMilking)):
-			subInfo.addPain(RNG.randi_range(2, 5))
+			var howMuchPainAdd = RNG.randi_range(2, 5)
+			subInfo.addPain(howMuchPainAdd)
+			sendSexEvent(SexEvent.PainInflicted, domID, subID, {pain=howMuchPainAdd,isDefense=false,intentional=false})
 			text += RNG.pick([
 				" {sub.YourHis} sore nipples hurt!",
 				" {sub.YourHis} sore nipples hurt from being milked so much!",

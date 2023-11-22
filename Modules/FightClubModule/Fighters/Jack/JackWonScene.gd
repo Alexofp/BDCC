@@ -390,7 +390,7 @@ func _react(_action: String, _args):
 	if(_action == "inside"):
 		GM.pc.gotVaginaFuckedBy("jack")
 		if(!usedCondom || condomBroke):
-			GM.pc.cummedInVaginaBy("jack")
+			GM.pc.cummedInVaginaByAdvanced("jack", {condomBroke=condomBroke})
 			GM.pc.cummedOnBy("jack")
 		elif(usedCondom):
 			addFilledCondomToLootIfPerk(getCharacter("jack").createFilledCondom())

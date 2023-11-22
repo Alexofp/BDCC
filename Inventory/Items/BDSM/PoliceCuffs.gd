@@ -50,3 +50,6 @@ func getUnriggedParts(_character):
 
 func updateDoll(doll: Doll3D):
 	doll.setArmsCuffed(true)
+
+func getInventoryImage():
+	return "res://Images/Items/bdsm/cuff.png"

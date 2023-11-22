@@ -44,3 +44,6 @@ func shouldBeVisibleOnDoll(_character, _doll):
 	if(!_character.isBodypartCovered(BodypartSlot.Vagina) || _doll.isForcedExposed(BodypartSlot.Vagina)):
 		return true
 	return false
+
+func getInventoryImage():
+	return "res://Images/Items/bdsm/chastitypiercing.png"

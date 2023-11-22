@@ -5,9 +5,9 @@ var id = "baditem"
 var uniqueID = null
 var amount = 1
 var currentInventory = null
-var restraintData: RestraintData = null
-var itemState: ItemState = null
-var fluids: Fluids = null
+var restraintData: RestraintData
+var itemState: ItemState
+var fluids: Fluids
 
 func _init():
 	#if(uniqueID == null):
@@ -39,6 +39,21 @@ func getStackName():
 		return ""+str(amount)+"x"+getVisibleName()
 	else:
 		return getVisibleName()
+
+func getInventoryName():
+	var theName = getStackName()
+	if(fluids != null):
+		if(fluids.isEmpty()):
+			theName += " (empty)"
+		else:
+			if(fluids.isCapacityLimited()):
+				theName += " ("+str(Util.roundF(fluids.getFluidAmount()))+"/"+str(Util.roundF(fluids.getCapacity(), 1))+" ml)"
+			else:
+				theName += " ("+str(Util.roundF(fluids.getFluidAmount()))+" ml)"
+	elif(restraintData != null):
+		if(currentInventory != null):
+			theName += " (Level "+restraintData.getVisibleLevel(GM.pc.isBlindfolded() && !GM.pc.canHandleBlindness())+")"
+	return theName
 
 # Hacky but good enough for most things, can always just override just function with a proper one
 func getA():
@@ -176,6 +191,28 @@ func setAmount(newamount):
 	if(newamount > 1):
 		assert(canCombine())
 	amount = newamount
+
+func getAmount():
+	return amount
+
+func splitAmount(howMuchTake:int):
+	if(!canCombine()):
+		return null
+	
+	if(howMuchTake <= 0):
+		return null
+	
+	if(howMuchTake >= getAmount()):
+		destroyMe()
+		return self
+	
+	var itemCopy = GlobalRegistry.createItem(id)
+	itemCopy.loadData(saveData())
+	
+	itemCopy.amount = howMuchTake
+	amount -= howMuchTake
+	
+	return itemCopy
 
 func getPossibleActions():
 	return [
@@ -355,6 +392,9 @@ func calculateBestRestraintLevel():
 
 func canForceOntoNpc():
 	return isRestraint() && !isImportant()
+	
+func onEquippedBy(_otherCharacter, _forced = false):
+	pass
 
 func getUnriggedParts(_character):
 	return null
@@ -463,3 +503,23 @@ func isRemoved():
 
 func getChains():
 	return null
+
+func getInventoryImage():
+	
+	if(hasTag(ItemTag.SexEngineDrug)):
+		return "res://Images/Items/medical/pill.png"
+	
+	if(hasTag(ItemTag.Condom)):
+		return "res://Images/Items/medical/condom.png"
+	
+	if(getClothingSlot() == InventorySlot.Ring):
+		return "res://Images/Items/equipment/ring.png"
+	
+	if(getClothingSlot() != null):
+		return "res://Images/Items/equipment/shirt.png"
+	
+	return null
+
+func onUnequipped():
+	if(itemState != null):
+		itemState.resetState()

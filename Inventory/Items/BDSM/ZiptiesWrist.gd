@@ -29,3 +29,6 @@ func getForcedOnMessage(isPlayer = true):
 		return "Some zip ties were forced onto your arms"
 	else:
 		return "Some zip ties were forced onto {receiver.nameS} arms"
+
+func getInventoryImage():
+	return "res://Images/Items/bdsm/ZipTies.png"

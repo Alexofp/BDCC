@@ -1,0 +1,150 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://icon.png" type="Texture" id=1]
+[ext_resource path="res://UI/Inventory/InventoryGroupEntry.gd" type="Script" id=2]
+[ext_resource path="res://UI/Inventory/InventoryEntry.tscn" type="PackedScene" id=3]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.290196, 0.364706, 0.623529, 1 )
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+border_color = Color( 0, 0.054902, 0.286275, 1 )
+border_blend = true
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[node name="InventoryGroupEntry" type="MarginContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 2 )
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+margin_right = 1280.0
+margin_bottom = 720.0
+color = Color( 0, 0.145098, 0.301961, 1 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_right = 1280.0
+margin_bottom = 720.0
+color = Color( 0.0313726, 0, 0.172549, 1 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+margin_right = 1280.0
+margin_bottom = 720.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+margin_right = 1280.0
+margin_bottom = 584.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Control" type="MarginContainer" parent="VBoxContainer/HBoxContainer"]
+margin_right = 1280.0
+margin_bottom = 584.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Info" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/Control"]
+margin_right = 1280.0
+margin_bottom = 584.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer/Control/Info"]
+margin_right = 64.0
+margin_bottom = 584.0
+rect_min_size = Vector2( 64, 64 )
+texture = ExtResource( 1 )
+expand = true
+stretch_mode = 6
+
+[node name="Panel" type="Panel" parent="VBoxContainer/HBoxContainer/Control/Info/TextureRect"]
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_styles/panel = SubResource( 1 )
+
+[node name="VSeparator" type="VSeparator" parent="VBoxContainer/HBoxContainer/Control/Info"]
+margin_left = 68.0
+margin_right = 72.0
+margin_bottom = 584.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/Control/Info"]
+margin_left = 76.0
+margin_right = 1280.0
+margin_bottom = 584.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 0
+
+[node name="Label2" type="Label" parent="VBoxContainer/HBoxContainer/Control/Info/HBoxContainer"]
+margin_right = 8.0
+margin_bottom = 584.0
+size_flags_vertical = 5
+text = ">"
+valign = 1
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/Control/Info/HBoxContainer"]
+margin_left = 8.0
+margin_right = 1204.0
+margin_bottom = 584.0
+size_flags_horizontal = 3
+size_flags_vertical = 5
+text = "Test Item"
+valign = 1
+autowrap = true
+
+[node name="SelectButton" type="TextureButton" parent="VBoxContainer/HBoxContainer/Control"]
+margin_right = 1280.0
+margin_bottom = 584.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer"]
+visible = false
+margin_left = 1235.0
+margin_right = 1280.0
+margin_bottom = 584.0
+
+[node name="VSeparator2" type="VSeparator" parent="VBoxContainer/HBoxContainer/HBoxContainer"]
+margin_right = 4.0
+margin_bottom = 584.0
+
+[node name="InteractButton" type="Button" parent="VBoxContainer/HBoxContainer/HBoxContainer"]
+margin_left = 8.0
+margin_right = 45.0
+margin_bottom = 584.0
+text = "Use"
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
+margin_top = 588.0
+margin_right = 1280.0
+margin_bottom = 720.0
+custom_constants/margin_left = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/MarginContainer"]
+margin_left = 20.0
+margin_right = 1280.0
+margin_bottom = 132.0
+
+[node name="InventoryEntry" parent="VBoxContainer/MarginContainer/VBoxContainer" instance=ExtResource( 3 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 1260.0
+margin_bottom = 64.0
+
+[node name="InventoryEntry2" parent="VBoxContainer/MarginContainer/VBoxContainer" instance=ExtResource( 3 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 68.0
+margin_right = 1260.0
+margin_bottom = 132.0
+
+[connection signal="mouse_entered" from="VBoxContainer/HBoxContainer/Control/SelectButton" to="." method="_on_SelectButton_mouse_entered"]
+[connection signal="mouse_exited" from="VBoxContainer/HBoxContainer/Control/SelectButton" to="." method="_on_SelectButton_mouse_exited"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/Control/SelectButton" to="." method="_on_SelectButton_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/HBoxContainer/InteractButton" to="." method="_on_InteractButton_pressed"]

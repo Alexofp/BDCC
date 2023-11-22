@@ -55,3 +55,6 @@ func getHidesParts(_character):
 	return {
 		BodypartSlot.Breasts: true,
 	}
+
+func getInventoryImage():
+	return "res://Images/Items/underwear/tanktop.png"

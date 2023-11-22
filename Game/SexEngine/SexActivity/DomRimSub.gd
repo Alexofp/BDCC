@@ -198,6 +198,7 @@ func doDomAction(_id, _actionInfo):
 		])
 		affectSub(subInfo.fetishScore({Fetish.Masochism: 1.0, Fetish.RimmingReceiving: 0.5})+0.0, 0.1, -0.1, -0.05)
 		subInfo.addPain(2)
+		sendSexEvent(SexEvent.PainInflicted, domID, subID, {pain=2,isDefense=false,intentional=true})
 		return {
 			text = text,
 		}

@@ -87,3 +87,6 @@ func getAttacks():
 	if(fluids.isEmpty()):
 		return []
 	return ["ThrowUsedCondomPCAttack"]
+
+func getInventoryImage():
+	return "res://Images/Items/toys/usedcondom.png"

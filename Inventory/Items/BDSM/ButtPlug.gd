@@ -55,3 +55,6 @@ func getForcedOnMessage(isPlayer = true):
 		return getAStackNameCapitalize()+" was stuffed into your "+RNG.pick(["anus", "rear hole", "rear", "butt", "tailhole"])+". It shifts around while you move!"
 	else:
 		return getAStackNameCapitalize()+" was stuffed into {receiver.nameS} "+RNG.pick(["anus", "rear hole", "rear", "butt", "tailhole"])+". It shifts around while {receiver.he} {receiver.verbS('move')}!"
+
+func getInventoryImage():
+	return "res://Images/Items/bdsm/anal-plug.png"

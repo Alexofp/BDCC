@@ -53,6 +53,42 @@ func addsAttacks():
 func processBattleTurn():
 	pass
 	
+func onFightStart(_contex = {}):
+	pass
+
+func processBattleTurnContex(_contex = {}):
+	pass
+
+func onFightEnd(_contex = {}):
+	pass
+
+func onSexStarted(_contex = {}):
+	pass
+
+func processSexTurnContex(_contex = {}):
+	pass
+
+func onSexEvent(_event:SexEvent):
+	pass
+
+func onSexEnded(_contex = {}):
+	pass
+	
+func onSexEndedWhenDisabled(_contex = {}):
+	pass
+	
+func onSexStartedWhenDisabled(_contex = {}):
+	pass
+	
+func onFightEndWhenDisabled(_contex = {}):
+	pass
+	
+func onFightStartWhenDisabled(_contex = {}):
+	pass
+	
+func onPerkToggled(_isEnabledNow):
+	pass
+	
 func getBuffs():
 	return []
 

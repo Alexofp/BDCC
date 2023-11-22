@@ -52,3 +52,6 @@ func getUnriggedParts(_character):
 #	return {
 #		BodypartSlot.Penis: true,
 #	}
+
+func getInventoryImage():
+	return "res://Images/Items/bdsm/collar.png"

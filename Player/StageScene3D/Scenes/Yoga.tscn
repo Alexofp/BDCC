@@ -1,9 +1,12 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://Player/StageScene3D/BaseStageScene3D.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Player/StageScene3D/Scenes/Yoga.gd" type="Script" id=2]
 [ext_resource path="res://Player/Player3D/Doll3D.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Player/Props/platform.png" type="Texture" id=4]
+
+[sub_resource type="AnimationNodeAnimation" id=14]
+animation = "YogaBridge-loop"
 
 [sub_resource type="AnimationNodeAnimation" id=5]
 animation = "YogaCamel-loop"
@@ -11,8 +14,14 @@ animation = "YogaCamel-loop"
 [sub_resource type="AnimationNodeAnimation" id=6]
 animation = "YogaCatCow-loop"
 
+[sub_resource type="AnimationNodeAnimation" id=15]
+animation = "YogaCobra-loop"
+
 [sub_resource type="AnimationNodeAnimation" id=7]
 animation = "YogaDownwardFacingDog-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=16]
+animation = "YogaWarrior-loop"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=8]
 
@@ -22,19 +31,37 @@ animation = "YogaDownwardFacingDog-loop"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=11]
 
+[sub_resource type="AnimationNodeStateMachineTransition" id=17]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=18]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=19]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=20]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=21]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=22]
+
 [sub_resource type="AnimationNodeStateMachine" id=12]
+states/YogaBridge-loop/node = SubResource( 14 )
+states/YogaBridge-loop/position = Vector2( 569, -64 )
 states/YogaCamel-loop/node = SubResource( 5 )
 states/YogaCamel-loop/position = Vector2( 629, 99 )
 states/YogaCatCow-loop/node = SubResource( 6 )
 states/YogaCatCow-loop/position = Vector2( 379, 99 )
+states/YogaCobra-loop/node = SubResource( 15 )
+states/YogaCobra-loop/position = Vector2( 362, -70 )
 states/YogaDownwardFacingDog-loop/node = SubResource( 7 )
 states/YogaDownwardFacingDog-loop/position = Vector2( 475, 216 )
-transitions = [ "YogaCatCow-loop", "YogaDownwardFacingDog-loop", SubResource( 8 ), "YogaDownwardFacingDog-loop", "YogaCatCow-loop", SubResource( 9 ), "YogaCatCow-loop", "YogaCamel-loop", SubResource( 10 ), "YogaCamel-loop", "YogaCatCow-loop", SubResource( 11 ) ]
+states/YogaWarrior-loop/node = SubResource( 16 )
+states/YogaWarrior-loop/position = Vector2( 144, -64 )
+transitions = [ "YogaCatCow-loop", "YogaDownwardFacingDog-loop", SubResource( 8 ), "YogaDownwardFacingDog-loop", "YogaCatCow-loop", SubResource( 9 ), "YogaCatCow-loop", "YogaCamel-loop", SubResource( 10 ), "YogaCamel-loop", "YogaCatCow-loop", SubResource( 11 ), "YogaBridge-loop", "YogaCatCow-loop", SubResource( 17 ), "YogaCatCow-loop", "YogaBridge-loop", SubResource( 18 ), "YogaCobra-loop", "YogaCatCow-loop", SubResource( 19 ), "YogaCatCow-loop", "YogaCobra-loop", SubResource( 20 ), "YogaWarrior-loop", "YogaCatCow-loop", SubResource( 21 ), "YogaCatCow-loop", "YogaWarrior-loop", SubResource( 22 ) ]
 start_node = "YogaCatCow-loop"
-graph_offset = Vector2( -46, -32 )
+graph_offset = Vector2( -203, -189 )
 
 [sub_resource type="AnimationNodeBlendTree" id=13]
-graph_offset = Vector2( -185.902, 27.8396 )
+graph_offset = Vector2( -235.067, 42 )
 nodes/StateMachine/node = SubResource( 12 )
 nodes/StateMachine/position = Vector2( 260, 140 )
 nodes/output/position = Vector2( 540, 160 )

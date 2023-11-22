@@ -1,0 +1,136 @@
+[gd_scene load_steps=28 format=2]
+
+[ext_resource path="res://Player/Player3D/Doll3D.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Player/StageScene3D/BaseStageScene3D.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Player/Props/platform.png" type="Texture" id=3]
+[ext_resource path="res://Player/StageScene3D/Scenes/UrinalPeeing.gd" type="Script" id=4]
+[ext_resource path="res://Player/Props/urinal.png" type="Texture" id=5]
+
+[sub_resource type="AnimationNodeAnimation" id=3]
+animation = "CuffedArms-loop"
+
+[sub_resource type="AnimationNodeBlend2" id=4]
+filter_enabled = true
+filters = [ "Doll3D/Skeleton:Arm.L", "Doll3D/Skeleton:Arm.R", "Doll3D/Skeleton:ForeArm.L", "Doll3D/Skeleton:ForeArm.R", "Doll3D/Skeleton:Hand.L", "Doll3D/Skeleton:Hand.R" ]
+
+[sub_resource type="AnimationNodeAnimation" id=74]
+animation = "UrinalIdle-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=75]
+animation = "UrinalIdle2-loop"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=76]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=77]
+
+[sub_resource type="AnimationNodeStateMachine" id=78]
+states/UrinalIdle-loop/node = SubResource( 74 )
+states/UrinalIdle-loop/position = Vector2( 438, 220 )
+states/UrinalIdle2-loop/node = SubResource( 75 )
+states/UrinalIdle2-loop/position = Vector2( 438, 138 )
+transitions = [ "UrinalIdle2-loop", "UrinalIdle-loop", SubResource( 76 ), "UrinalIdle-loop", "UrinalIdle2-loop", SubResource( 77 ) ]
+start_node = "UrinalIdle2-loop"
+
+[sub_resource type="AnimationNodeBlendTree" id=72]
+graph_offset = Vector2( -157.661, -32.5744 )
+nodes/Animation/node = SubResource( 3 )
+nodes/Animation/position = Vector2( 140, 280 )
+nodes/CuffsBlend/node = SubResource( 4 )
+nodes/CuffsBlend/position = Vector2( 440, 160 )
+nodes/StateMachine/node = SubResource( 78 )
+nodes/StateMachine/position = Vector2( 140, 100 )
+nodes/output/position = Vector2( 680, 180 )
+node_connections = [ "CuffsBlend", 0, "StateMachine", "CuffsBlend", 1, "Animation", "output", 0, "CuffsBlend" ]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=22]
+
+[sub_resource type="AnimationNodeAnimation" id=79]
+animation = "UrinalPeeingFemale_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=80]
+animation = "UrinalPeeing_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=81]
+animation = "UrinalStrokingIdle_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=82]
+animation = "UrinalStroking_2-loop"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=83]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=84]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=85]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=86]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=87]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=88]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachine" id=89]
+states/UrinalPeeingFemale_2-loop/node = SubResource( 79 )
+states/UrinalPeeingFemale_2-loop/position = Vector2( 770, 237 )
+states/UrinalPeeing_2-loop/node = SubResource( 80 )
+states/UrinalPeeing_2-loop/position = Vector2( 495, 237 )
+states/UrinalStrokingIdle_2-loop/node = SubResource( 81 )
+states/UrinalStrokingIdle_2-loop/position = Vector2( 422, 127 )
+states/UrinalStroking_2-loop/node = SubResource( 82 )
+states/UrinalStroking_2-loop/position = Vector2( 247, 228 )
+transitions = [ "UrinalStrokingIdle_2-loop", "UrinalStroking_2-loop", SubResource( 83 ), "UrinalStroking_2-loop", "UrinalStrokingIdle_2-loop", SubResource( 84 ), "UrinalStrokingIdle_2-loop", "UrinalPeeing_2-loop", SubResource( 85 ), "UrinalPeeing_2-loop", "UrinalStrokingIdle_2-loop", SubResource( 86 ), "UrinalStrokingIdle_2-loop", "UrinalPeeingFemale_2-loop", SubResource( 87 ), "UrinalPeeingFemale_2-loop", "UrinalStrokingIdle_2-loop", SubResource( 88 ) ]
+start_node = "UrinalStrokingIdle_2-loop"
+
+[sub_resource type="AnimationNodeBlendTree" id=73]
+graph_offset = Vector2( -299.532, 64.6842 )
+nodes/Animation/node = SubResource( 3 )
+nodes/Animation/position = Vector2( 140, 280 )
+nodes/CuffsBlend/node = SubResource( 4 )
+nodes/CuffsBlend/position = Vector2( 440, 160 )
+nodes/StateMachine/node = SubResource( 89 )
+nodes/StateMachine/position = Vector2( 160, 120 )
+nodes/output/position = Vector2( 680, 180 )
+node_connections = [ "CuffsBlend", 0, "StateMachine", "CuffsBlend", 1, "Animation", "output", 0, "CuffsBlend" ]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=23]
+
+[node name="UrinalPeeing" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.33427, 0, 0 )
+script = ExtResource( 4 )
+
+[node name="Sprite3D" type="Sprite3D" parent="." index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.323924, -1.55279 )
+texture = ExtResource( 3 )
+region_enabled = true
+region_rect = Rect2( 1, 1, 1022, 62 )
+
+[node name="Doll3D" parent="." index="1" instance=ExtResource( 1 )]
+
+[node name="Doll3D2" parent="." index="2" instance=ExtResource( 1 )]
+transform = Transform( -1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.013 )
+
+[node name="AnimationTree" type="AnimationTree" parent="." index="3"]
+tree_root = SubResource( 72 )
+anim_player = NodePath("../Doll3D/DollSkeleton/AnimationPlayer")
+parameters/CuffsBlend/blend_amount = 0
+parameters/StateMachine/playback = SubResource( 22 )
+
+[node name="AnimationTree2" type="AnimationTree" parent="." index="4"]
+tree_root = SubResource( 73 )
+anim_player = NodePath("../Doll3D2/DollSkeleton/AnimationPlayer")
+parameters/CuffsBlend/blend_amount = 0
+parameters/StateMachine/playback = SubResource( 23 )
+
+[node name="Stocks" type="Sprite3D" parent="." index="5"]
+transform = Transform( 1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 1.3513, 3.61363, -1.60034 )
+texture = ExtResource( 5 )
+
+[editable path="Doll3D"]
+[editable path="Doll3D/DollSkeleton"]
+[editable path="Doll3D2"]
+[editable path="Doll3D2/DollSkeleton"]

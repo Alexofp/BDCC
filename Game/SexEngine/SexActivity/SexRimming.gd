@@ -284,6 +284,7 @@ func doSubAction(_id, _actionInfo):
 				"{sub.You} {sub.youVerb('bite')} {dom.your} ass! {dom.YouHe} {dom.youVerb('grunt')} painfully and {dom.youVerb('pull')} away.",
 			])
 			domInfo.addPain(5)
+			sendSexEvent(SexEvent.PainInflicted, subID, domID, {pain=10,isDefense=true,intentional=true})
 			domInfo.addAnger(1.0 - domInfo.fetishScore({Fetish.Masochism: 0.5}))
 			domInfo.addLust(-5 + 10 * domInfo.fetishScore({Fetish.Masochism: 1.0}))
 			if(state == ""):

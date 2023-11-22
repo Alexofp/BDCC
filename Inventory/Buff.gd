@@ -54,6 +54,7 @@ const PregnancySpeedBuff = "PregnancySpeedBuff"
 
 const SkillExperienceBuff = "SkillExperienceBuff"
 const StatusEffectImmunityBuff = "StatusEffectImmunityBuff"
+const StatBuff = "StatBuff"
 
 const ChastityPenisBuff = "ChastityPenisBuff"
 const ChastityVaginaBuff = "ChastityVaginaBuff"
@@ -65,7 +66,11 @@ const RestraintForcingSuccessBuff = "RestraintForcingSuccessBuff"
 const BreastsLactatingSizeLimitBuff = "BreastsLactatingSizeLimitBuff"
 const BreastsMilkProductionBuff = "BreastsMilkProductionBuff"
 const PenisCumProductionBuff = "PenisCumProductionBuff"
+const PenisBallsVolumeBuff = "PenisBallsVolumeBuff"
 const PenisCumGenerationAfterOrgasmBuff = "PenisCumGenerationAfterOrgasmBuff"
 
 const EncounterChanceModifierStaffBuff = "EncounterChanceModifierStaffBuff"
 const EncounterChanceModifierInmatesBuff = "EncounterChanceModifierInmatesBuff"
+
+const ForcedObedienceBuff = "ForcedObedienceBuff"
+const RestEffectivenessBuff = "RestEffectivenessBuff"

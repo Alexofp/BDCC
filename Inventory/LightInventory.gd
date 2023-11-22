@@ -123,6 +123,9 @@ func getItemsWithTag(tag):
 func isEmpty():
 	return items.empty()
 
+func getCharacter():
+	return null
+
 func saveData():
 	var data = {}
 	

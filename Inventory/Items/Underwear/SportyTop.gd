@@ -17,7 +17,7 @@ func getClothingSlot():
 func getBuffs():
 	return [
 		buff(Buff.PhysicalArmorBuff, [5]),
-		buff(Buff.MaxStaminaBuff, [5]),
+		buff(Buff.StatBuff, [Stat.Agility, 2]),
 		]
 
 func getTakingOffStringLong(withS):
@@ -50,3 +50,6 @@ func getRiggedParts(_character):
 	return {
 		"top": "res://Inventory/RiggedModels/Bra/Bra.tscn",
 	}
+
+func getInventoryImage():
+	return "res://Images/Items/underwear/sport-bra.png"

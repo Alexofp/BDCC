@@ -44,3 +44,6 @@ func getTags():
 
 func getItemCategory():
 	return ItemCategory.Weapons
+
+func getInventoryImage():
+	return "res://Images/Items/weapon/shiv.png"

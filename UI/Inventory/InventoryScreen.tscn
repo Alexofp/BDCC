@@ -1,0 +1,113 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://UI/Inventory/InventoryEntry.tscn" type="PackedScene" id=2]
+[ext_resource path="res://UI/Inventory/InventoryScreen.gd" type="Script" id=3]
+[ext_resource path="res://Fonts/Titillium-Regular.otf" type="DynamicFontData" id=4]
+
+[sub_resource type="DynamicFontData" id=9]
+font_path = "res://Fonts/SourceCodePro/SourceCodePro-Regular.otf"
+
+[sub_resource type="DynamicFont" id=1]
+size = 28
+outline_size = 2
+outline_color = Color( 0, 0, 0, 1 )
+use_mipmaps = true
+use_filter = true
+font_data = ExtResource( 4 )
+fallback/0 = SubResource( 9 )
+
+[node name="InventoryScreen" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 0, 500 )
+script = ExtResource( 3 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.105882, 0.0588235, 0.258824, 1 )
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/margin_right = 4
+custom_constants/margin_top = 4
+custom_constants/margin_left = 4
+custom_constants/margin_bottom = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 1276.0
+margin_bottom = 716.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+margin_right = 422.0
+margin_bottom = 712.0
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+margin_right = 422.0
+margin_bottom = 28.0
+custom_fonts/font = SubResource( 1 )
+text = "Pick an item"
+autowrap = true
+
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+margin_top = 32.0
+margin_right = 422.0
+margin_bottom = 36.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+margin_top = 40.0
+margin_right = 422.0
+margin_bottom = 712.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+bbcode_enabled = true
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+margin_left = 426.0
+margin_right = 1272.0
+margin_bottom = 712.0
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/HBoxContainer/VBoxContainer2"]
+margin_right = 846.0
+margin_bottom = 712.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer2/ScrollContainer"]
+margin_right = 846.0
+margin_bottom = 712.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="SearchLineEdit" type="LineEdit" parent="MarginContainer/HBoxContainer/VBoxContainer2/ScrollContainer/VBoxContainer2"]
+margin_right = 846.0
+margin_bottom = 24.0
+placeholder_text = "Search"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer2/ScrollContainer/VBoxContainer2"]
+margin_top = 28.0
+margin_right = 846.0
+margin_bottom = 712.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer2/ScrollContainer/VBoxContainer2/VBoxContainer" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 846.0
+margin_bottom = 64.0
+
+[node name="HBoxContainer2" parent="MarginContainer/HBoxContainer/VBoxContainer2/ScrollContainer/VBoxContainer2/VBoxContainer" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 68.0
+margin_right = 846.0
+margin_bottom = 132.0
+
+[connection signal="text_changed" from="MarginContainer/HBoxContainer/VBoxContainer2/ScrollContainer/VBoxContainer2/SearchLineEdit" to="." method="_on_SearchLineEdit_text_changed"]

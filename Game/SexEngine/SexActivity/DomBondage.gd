@@ -66,6 +66,14 @@ func getStartActions(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexS
 			
 			usableItems.append(item)
 		
+	var countsByItemID = {}
+	if(_domInfo.getChar().isPlayer()):
+		for item in usableItems:
+			if(!countsByItemID.has(item.id)):
+				countsByItemID[item.id] = 1
+			else:
+				countsByItemID[item.id] += 1
+		
 	#var canActuallyPutOn = 0
 	for item in usableItems:
 		var itemSlot = item.getClothingSlot()
@@ -94,7 +102,7 @@ func getStartActions(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexS
 					name = item.getVisibleName(),
 					args = ["pc", item.uniqueID],
 					score = getActivityScore(_sexEngine, _domInfo, _subInfo),
-					category = getCategory(),
+					category = (getCategory() if (!countsByItemID.has(item.id) || countsByItemID[item.id] <= 1) else (getCategory() + [str(countsByItemID[item.id])+"x"+item.getVisibleName()])),
 					desc = "Restraint level: "+str(restraintData.getLevel()) + "\n" + item.getCombatDescription(),
 				})
 			else:
@@ -155,7 +163,7 @@ func processTurn():
 		
 		if(dom.isPlayer()):
 			dom.getInventory().removeItem(item)
-		sub.getInventory().forceEquipStoreOtherUnlessRestraint(item)
+		sub.getInventory().forceEquipByStoreOtherUnlessRestraint(item, dom)
 		#sub.getBuffsHolder().calculateBuffs()
 		#sub.updateNonBattleEffects()
 		

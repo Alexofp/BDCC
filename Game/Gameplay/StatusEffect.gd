@@ -18,6 +18,7 @@ const SexEngineLikes = "SexEngineLikes"
 const SexEnginePersonality = "SexEnginePersonality"
 const SexHeatDrug = "SexHeatDrug"
 const SexAnaphrodisiacDrug = "SexAnaphrodisiacDrug"
+const SexEngineHypnovisor = "SexEngineHypnovisor"
 
 # Painful effects
 const StretchedPainfullyPussy = "StretchedPainfullyPussy"
@@ -56,6 +57,11 @@ const CumInflated = "CumInflated"
 const Exposed = "Exposed"
 const SoreNipplesAfterMilking = "SoreNipplesAfterMilking"
 
+# Perk effects
+const RapidConception = "RapidConception"
+const BreedersStreak = "BreederStreak"
+const CumWhoreStreak = "CumWhoreStreak"
+
 # Useful effects
 const Yoga = "Yoga"
 const WorkOutLight = "WorkOutLight"
@@ -64,3 +70,4 @@ const MaternalGlow = "MaternalGlow"
 
 # Npc specific ones
 const TaviWombMark = "TaviWombMark"
+const JackiCumInUrethra = "JackiCumInUrethra"

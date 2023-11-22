@@ -91,3 +91,6 @@ func getPossibleActions():
 			"description": "Transfer the fluids between fluid containers",
 		},
 	]
+
+func getInventoryImage():
+	return "res://Images/Items/strapons/human.png"

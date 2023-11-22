@@ -461,11 +461,11 @@ func processTurn():
 					activities.remove(i)
 			continue
 			
-		domInfo.getChar().processSexTurn()
+		domInfo.getChar().processSexTurnContex({sexEngine=self,isDom=true})
 		domInfo.processTurn()
 	for subID in subs:
 		var subInfo = subs[subID]
-		subInfo.getChar().processSexTurn()
+		subInfo.getChar().processSexTurnContex({sexEngine=self,isDom=false})
 		subInfo.processTurn()
 	
 	for activity in activities:
@@ -694,6 +694,13 @@ func start():
 		initSexType(SexType.DefaultSex)
 	
 	generateGoals()
+	
+	for domID in doms:
+		var character = GlobalRegistry.getCharacter(domID)
+		character.onSexStarted({sexEngine=self,isDom=true})
+	for subID in subs:
+		var character = GlobalRegistry.getCharacter(subID)
+		character.onSexStarted({sexEngine=self,isDom=false})
 	
 	if(!isDom("pc")):
 		processAIActions(true)
@@ -973,6 +980,7 @@ func endSex():
 					saveCondomToLootIfPerk(theCondom)
 			
 		domInfo.getChar().afterSexEnded(domInfo)
+		domInfo.getChar().onSexEnded({sexEngine=self,isDom=true})
 		
 		var sexEndInfo = domInfo.getSexEndInfo()
 		if(sexEndInfo.size() > 0):
@@ -991,6 +999,7 @@ func endSex():
 					saveItemToLoot(theCondom)
 		
 		subInfo.getChar().afterSexEnded(subInfo)
+		subInfo.getChar().onSexEnded({sexEngine=self,isDom=false})
 
 		var sexEndInfo = subInfo.getSexEndInfo()
 		if(sexEndInfo.size() > 0):

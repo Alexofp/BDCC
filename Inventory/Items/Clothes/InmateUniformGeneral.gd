@@ -79,3 +79,10 @@ func getRiggedParts(_character):
 	return {
 		"clothing": "res://Inventory/RiggedModels/InmateUniform/OrangeInmateUniform.tscn",
 	}
+
+func getInventoryImage():
+	if(inmateType == InmateType.SexDeviant):
+		return "res://Images/Items/equipment/shirtlilac.png"
+	if(inmateType == InmateType.HighSec):
+		return "res://Images/Items/equipment/shirtred.png"
+	return "res://Images/Items/equipment/shirtorange.png"

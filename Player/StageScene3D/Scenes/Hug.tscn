@@ -31,7 +31,7 @@ nodes/Animation/position = Vector2( -220, 60 )
 "nodes/Animation 2/position" = Vector2( -220, 220 )
 nodes/KissBlend/node = SubResource( 32 )
 nodes/KissBlend/position = Vector2( 60, 120 )
-node_connections = [ "output", 0, "KissBlend", "KissBlend", 0, "Animation", "KissBlend", 1, "Animation 2" ]
+node_connections = [ "KissBlend", 0, "Animation", "KissBlend", 1, "Animation 2", "output", 0, "KissBlend" ]
 
 [sub_resource type="AnimationNodeAnimation" id=34]
 animation = "PreHug_1-loop"
@@ -77,7 +77,7 @@ nodes/CuffsBlend/position = Vector2( 440, 160 )
 nodes/StateMachine/node = SubResource( 25 )
 nodes/StateMachine/position = Vector2( 187.2, 138.24 )
 nodes/output/position = Vector2( 680, 180 )
-node_connections = [ "output", 0, "CuffsBlend", "CuffsBlend", 0, "StateMachine", "CuffsBlend", 1, "Animation" ]
+node_connections = [ "CuffsBlend", 0, "StateMachine", "CuffsBlend", 1, "Animation", "output", 0, "CuffsBlend" ]
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=22]
 
@@ -101,7 +101,7 @@ nodes/Animation/position = Vector2( 120, 80 )
 nodes/KissBlend/node = SubResource( 43 )
 nodes/KissBlend/position = Vector2( 340, 140 )
 nodes/output/position = Vector2( 560, 180 )
-node_connections = [ "output", 0, "KissBlend", "KissBlend", 0, "Animation", "KissBlend", 1, "Animation 2" ]
+node_connections = [ "KissBlend", 0, "Animation", "KissBlend", 1, "Animation 2", "output", 0, "KissBlend" ]
 
 [sub_resource type="AnimationNodeAnimation" id=45]
 animation = "PreHug_2-loop"
@@ -147,7 +147,7 @@ nodes/CuffsBlend/position = Vector2( 440, 160 )
 nodes/StateMachine/node = SubResource( 28 )
 nodes/StateMachine/position = Vector2( 160, 120 )
 nodes/output/position = Vector2( 680, 180 )
-node_connections = [ "output", 0, "CuffsBlend", "CuffsBlend", 0, "StateMachine", "CuffsBlend", 1, "Animation" ]
+node_connections = [ "CuffsBlend", 0, "StateMachine", "CuffsBlend", 1, "Animation", "output", 0, "CuffsBlend" ]
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=23]
 

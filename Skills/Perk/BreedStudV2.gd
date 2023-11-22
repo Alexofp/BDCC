@@ -1,8 +1,8 @@
 extends PerkBase
 
 func _init():
-	id = Perk.CumStudV2
-	skillGroup = Skill.CumLover
+	id = Perk.BreedStudV2
+	skillGroup = Skill.Breeder
 
 func getVisibleName():
 	return "Cum stud"
@@ -11,7 +11,7 @@ func getVisibleDescription():
 	return "What a stud, your balls are always so heavy! They swiftly fill up by additional 20% after your every orgasm"
 
 func getRequiredPerks():
-	return [Perk.CumStud]
+	return [Perk.BreedStud]
 
 func getSkillTier():
 	return 2

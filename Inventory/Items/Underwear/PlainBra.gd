@@ -47,3 +47,6 @@ func getRiggedParts(_character):
 	return {
 		"bra": "res://Inventory/RiggedModels/Bra/PinkBra.tscn",
 	}
+
+func getInventoryImage():
+	return "res://Images/Items/underwear/pinkbra.png"

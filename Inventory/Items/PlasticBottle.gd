@@ -26,6 +26,7 @@ func getTags():
 		ItemTag.SoldByMedicalVendomat,
 		ItemTag.CanPeeInto,
 		ItemTag.CanForceCumInto,
+		ItemTag.PlasticBottle,
 		]
 
 func generateFluids():
@@ -50,3 +51,6 @@ func getPossibleActions():
 			"description": "Catch some of the fluids that you are covered with",
 		},
 	]
+
+func getInventoryImage():
+	return "res://Images/Items/medical/water-bottle.png"

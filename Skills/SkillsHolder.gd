@@ -39,6 +39,8 @@ func getBaseStat(statID: String) -> int:
 	return stats[statID]
 
 func getStat(statID: String) -> int:
+	if(npc != null):
+		return getBaseStat(statID) + npc.getBuffsHolder().getExtraStat(statID)
 	return getBaseStat(statID)
 
 func saveData():
@@ -225,8 +227,10 @@ func togglePerk(perkID):
 				return
 		
 		disabledPerks.erase(perkID)
+		perk.onPerkToggled(true)
 	else:
 		disabledPerks[perkID] = true
+		perks[perkID].onPerkToggled(false)
 	
 		for childperkID in perks:
 			var perk = perks[childperkID]
@@ -236,6 +240,7 @@ func togglePerk(perkID):
 			for requiredPerkID in requiredPerks:
 				if(requiredPerkID == perkID):
 					disabledPerks[childperkID] = true
+					perks[childperkID].onPerkToggled(false)
 					break
 
 func isPerkDisabled(perkID):
@@ -409,7 +414,7 @@ func receivedCreampie(_charID):
 		
 func cameInsideSomeone(_charID):
 	if(npc != null && npc.isPlayer()):
-		npc.addSkillExperience(Skill.CumLover, 50)
+		npc.addSkillExperience(Skill.Breeder, 10)
 
 func resetPickedPerks():
 	for perkID in perks.keys():
@@ -422,3 +427,51 @@ func resetPickedPerks():
 
 func resetStats():
 	stats.clear()
+
+
+
+func onFightStart(_contex = {}):
+	for perkID in perks:
+		if(isPerkDisabled(perkID)):
+			perks[perkID].onFightStartWhenDisabled(_contex)
+			continue
+		perks[perkID].onFightStart(_contex)
+
+func processBattleTurnContex(_contex = {}):
+	for perkID in perks:
+		if(isPerkDisabled(perkID)):
+			continue
+		perks[perkID].processBattleTurnContex(_contex)
+
+func onFightEnd(_contex = {}):
+	for perkID in perks:
+		if(isPerkDisabled(perkID)):
+			perks[perkID].onFightEndWhenDisabled(_contex)
+			continue
+		perks[perkID].onFightEnd(_contex)
+
+func onSexStarted(_contex = {}):
+	for perkID in perks:
+		if(isPerkDisabled(perkID)):
+			perks[perkID].onSexStartedWhenDisabled(_contex)
+			continue
+		perks[perkID].onSexStarted(_contex)
+
+func processSexTurnContex(_contex = {}):
+	for perkID in perks:
+		if(isPerkDisabled(perkID)):
+			continue
+		perks[perkID].processSexTurnContex(_contex)
+
+func onSexEvent(_event:SexEvent):
+	for perkID in perks:
+		if(isPerkDisabled(perkID)):
+			continue
+		perks[perkID].onSexEvent(_event)
+
+func onSexEnded(_contex = {}):
+	for perkID in perks:
+		if(isPerkDisabled(perkID)):
+			perks[perkID].onSexEndedWhenDisabled(_contex)
+			continue
+		perks[perkID].onSexEnded(_contex)

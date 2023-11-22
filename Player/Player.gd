@@ -533,8 +533,11 @@ func getBodypartTooltipInfo(_bodypartSlot):
 	return "error"
 
 func afterSleeping():
-	addStamina(getMaxStamina())
-	addPain(-getPain())
+	var mult = max(1.0 + GM.pc.getBuffsHolder().getCustom(BuffAttribute.RestEffectiveness), 0.1) # 0.1 minimum to avoid softlock scenarios
+	var staminaChange = mult * (getMaxStamina() - getStamina())
+	var painChange = mult * getPain()
+	addStamina(staminaChange)
+	addPain(-painChange)
 	skillsHolder.onNewDay()
 	for item in getInventory().getEquppedRestraints():
 		item.getRestraintData().resetOnNewDay()
@@ -552,7 +555,8 @@ func afterSleepingInBed():
 func afterRestingInBed(seconds):
 	var _hours = floor(seconds/3600.0)
 	
-	addStamina(_hours * 10)
+	var mult = max(1.0 + GM.pc.getBuffsHolder().getCustom(BuffAttribute.RestEffectiveness), 0.1) # 0.1 minimum to avoid softlock scenarios
+	addStamina(_hours * 10 * mult)
 
 func afterCryopodTreatment():
 	removeEffect(StatusEffect.Wounded)
@@ -622,9 +626,16 @@ func afterTakingAShower():
 	clearTallymarks()
 
 func orgasmFrom(_characterID: String):
-	cumOnFloor()
+	afterOrgasm()
 	
-	addLust(-lust)
+	if(true):
+		var event = SexEventHelper.create(SexEvent.Orgasmed, _characterID, getID(), {
+		})
+		if(_characterID != getID()):
+			var ch = GlobalRegistry.getCharacter(_characterID)
+			if(ch != null):
+				ch.sendSexEvent(event)
+		sendSexEvent(event)
 
 func getInmateNumber():
 	return inmateNumber
@@ -729,6 +740,9 @@ func freeMouthDeleteAll():
 	return getInventory().removeEquippedItemsWithBuff(Buff.GagBuff)
 	
 func freeHandsDeleteAll():
+	return getInventory().removeEquippedItemsWithBuff(Buff.BlockedHandsBuff)
+	
+func freeArmsDeleteAll():
 	return getInventory().removeEquippedItemsWithBuff(Buff.RestrainedArmsBuff)
 	
 func freeLegsDeleteAll():
