@@ -41,7 +41,7 @@ nodes/AnimationNodeStateMachine/position = Vector2( 0, 20 )
 nodes/CuffsBlend/node = SubResource( 4 )
 nodes/CuffsBlend/position = Vector2( 320, 120 )
 nodes/output/position = Vector2( 540, 160 )
-node_connections = [ "output", 0, "CuffsBlend", "CuffsBlend", 0, "AnimationNodeStateMachine", "CuffsBlend", 1, "Animation" ]
+node_connections = [ "CuffsBlend", 0, "AnimationNodeStateMachine", "CuffsBlend", 1, "Animation", "output", 0, "CuffsBlend" ]
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=15]
 

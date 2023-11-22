@@ -113,6 +113,7 @@ func processTurn():
 			
 			if(getDom().hasEffect(StatusEffect.SoreNipplesAfterMilking)):
 				domInfo.addPain(1)
+				sendSexEvent(SexEvent.PainInflicted, subID, domID, {pain=1,isDefense=false,intentional=false})
 			
 			if(RNG.chance(30) && getDom().stimulateLactation()):
 				text += RNG.pick([
@@ -175,6 +176,7 @@ func processTurn():
 			
 			if(getDom().hasEffect(StatusEffect.SoreNipplesAfterMilking)):
 				domInfo.addPain(1)
+				sendSexEvent(SexEvent.PainInflicted, subID, domID, {pain=1,isDefense=false,intentional=false})
 			
 			affectSub(subInfo.fetishScore({Fetish.Lactation: 1.0}), 0.1, -0.1, -0.01)
 			affectDom(domInfo.fetishScore({Fetish.Lactation: 1.0}), 0.1, -0.03)
@@ -406,6 +408,7 @@ func doSubAction(_id, _actionInfo):
 					])
 			if(getDom().hasEffect(StatusEffect.SoreNipplesAfterMilking)):
 				domInfo.addPain(3)
+				sendSexEvent(SexEvent.PainInflicted, subID, domID, {pain=3,isDefense=false,intentional=false})
 			
 			domInfo.addArousalSex(0.03)
 			affectSub(subInfo.fetishScore({Fetish.Lactation: 1.0}), 0.1, -0.1, -0.01)
@@ -423,6 +426,7 @@ func doSubAction(_id, _actionInfo):
 			
 			if(getDom().hasEffect(StatusEffect.SoreNipplesAfterMilking)):
 				domInfo.addPain(3)
+				sendSexEvent(SexEvent.PainInflicted, subID, domID, {pain=3,isDefense=false,intentional=false})
 			
 			if(RNG.chance(70) && getDom().stimulateLactation()):
 				text += RNG.pick([

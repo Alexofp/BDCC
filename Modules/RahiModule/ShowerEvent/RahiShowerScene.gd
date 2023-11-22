@@ -425,7 +425,7 @@ func _react(_action: String, _args):
 			condomBroke = GM.pc.shouldCondomBreakWhenFucking("rahi", chance)
 		
 		if(!usedCondom || (usedCondom && condomBroke)):
-			getCharacter("rahi").cummedInVaginaBy("pc")
+			getCharacter("rahi").cummedInVaginaByAdvanced("pc", {condomBroke=condomBroke})
 			GM.pc.addSkillExperience(Skill.SexSlave, 30, "rahi_showerfuck")
 		else:
 			GM.pc.addSkillExperience(Skill.SexSlave, 50, "rahi_showerfuck")

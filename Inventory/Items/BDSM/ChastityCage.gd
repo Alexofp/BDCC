@@ -50,3 +50,6 @@ func updateDoll(doll: Doll3D):
 
 func getAIForceItemWeight():
 	return 0.2
+
+func getInventoryImage():
+	return "res://Images/Items/bdsm/chastity_cage.png"

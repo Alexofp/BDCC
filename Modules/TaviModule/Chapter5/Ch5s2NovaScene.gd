@@ -1745,7 +1745,7 @@ func _react(_action: String, _args):
 	if(_action == "rough_sleepfuck_cum"):
 		processTime(3*60)
 		if(!usedCondom || condomBroke):
-			getCharacter("nova").cummedInVaginaBy("pc")
+			getCharacter("nova").cummedInVaginaByAdvanced("pc", {condomBroke=condomBroke})
 		if(usedCondom && !condomBroke):
 			addFilledCondomToLootIfPerk(GM.pc.createFilledCondom())
 		GM.pc.orgasmFrom("nova")
@@ -1763,7 +1763,7 @@ func _react(_action: String, _args):
 		processTime(10*60)
 		GM.pc.gotVaginaFuckedBy("nova")
 		if(!usedCondom || condomBroke):
-			GM.pc.cummedInVaginaBy("nova")
+			GM.pc.cummedInVaginaByAdvanced("nova", {condomBroke=condomBroke, knotted=true})
 		if(usedCondom && !condomBroke):
 			addFilledCondomToLootIfPerk(getCharacter("nova").createFilledCondom())
 		GM.pc.orgasmFrom("nova")
@@ -1773,7 +1773,7 @@ func _react(_action: String, _args):
 		processTime(10*60)
 		GM.pc.gotAnusFuckedBy("nova")
 		if(!usedCondom || condomBroke):
-			GM.pc.cummedInAnusBy("nova")
+			GM.pc.cummedInAnusByAdvanced("nova", {condomBroke=condomBroke, knotted=true})
 		if(usedCondom && !condomBroke):
 			addFilledCondomToLootIfPerk(getCharacter("nova").createFilledCondom())
 		GM.pc.orgasmFrom("nova")
@@ -1867,7 +1867,7 @@ func _react(_action: String, _args):
 	if(_action == "do_fuck_cum"):
 		processTime(10*60)
 		if(!usedCondom || condomBroke):
-			getCharacter("nova").cummedInVaginaBy("pc")
+			getCharacter("nova").cummedInVaginaByAdvanced("pc", {condomBroke=condomBroke})
 		if(usedCondom && !condomBroke):
 			addFilledCondomToLootIfPerk(GM.pc.createFilledCondom())
 		GM.pc.orgasmFrom("nova")
@@ -1917,7 +1917,7 @@ func _react(_action: String, _args):
 			condomBroke = true
 		GM.pc.gotVaginaFuckedBy("nova")
 		if(condomBroke):
-			GM.pc.cummedInVaginaBy("nova")
+			GM.pc.cummedInVaginaByAdvanced("nova", {condomBroke=condomBroke, knotted=true})
 		if(!condomBroke):
 			addFilledCondomToLootIfPerk(getCharacter("nova").createFilledCondom())
 		GM.pc.orgasmFrom("nova")
@@ -1932,7 +1932,7 @@ func _react(_action: String, _args):
 			condomBroke = true
 		GM.pc.gotAnusFuckedBy("nova")
 		if(condomBroke):
-			GM.pc.cummedInAnusBy("nova")
+			GM.pc.cummedInAnusByAdvanced("nova", {condomBroke=condomBroke, knotted=true})
 		if(!condomBroke):
 			addFilledCondomToLootIfPerk(getCharacter("nova").createFilledCondom())
 		GM.pc.orgasmFrom("nova")

@@ -616,3 +616,36 @@ static func moveValueDown(theArray, theIndex):
 	if(theIndex > theArray.size()):
 		theIndex = theArray.size()
 	theArray.insert(theIndex, thingie)
+
+# https://github.com/ShatReal/Search-Bar-Demo/blob/main/main.gd
+static func _levenshtein_distance(str1:String, str2:String)->int:
+	str1 = str1.to_lower()
+	str2 = str2.to_lower()
+	var m:int = len(str1)
+	var n:int = len(str2)
+	var d: Array = []
+	for i in range(1, m+1):
+		d.append([i])
+	d.insert(0, range(0, n+1))
+	for j in range(1, n+1):
+		for i in range(1, m+1):
+			var substitution_cost: int
+			if str1[i-1] == str2[j-1]:
+				substitution_cost = 0
+			else:
+				substitution_cost = 1
+			d[i].insert(j, min(min(
+				d[i-1][j]+1,
+				d[i][j-1]+1),
+				d[i-1][j-1]+substitution_cost))
+	return d[-1][-1]
+
+static func sanitizePlayerEnteredString(inputStr:String, emptyStr:String=""):
+	inputStr = inputStr.replace("{", "")
+	inputStr = inputStr.replace("}", "")
+	inputStr = inputStr.replace("[", "")
+	inputStr = inputStr.replace("]", "")
+	inputStr = inputStr.replace("\"", "")
+	if(inputStr == ""):
+		return emptyStr
+	return inputStr

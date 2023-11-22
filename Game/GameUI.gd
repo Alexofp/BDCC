@@ -32,6 +32,7 @@ onready var smartCharacterPanel = $HBoxContainer/Panel2/MarginContainer/VBoxCont
 onready var devCommentaryPanel = $HBoxContainer/DevCommentary
 onready var sceneArtWorkRect = $HBoxContainer/VBoxContainer2/ScrollContainer/VBoxContainer/SceneArtWorkRect
 onready var fullArtWorkRect = $FullArtworkRect
+onready var uniquePanelSpot = $HBoxContainer/VBoxContainer2/UniquePanelSpot
 var textboxes: Dictionary = {}
 var gameParser: GameParser
 var sayParser: SayParser
@@ -88,6 +89,8 @@ func _ready():
 	
 	if(OS.has_touchscreen_ui_hint()):
 		textOutput.selection_enabled = false
+	
+	hornyMessage.visible = true
 		
 func say(text: String):
 	textOutput.bbcode_text += gameParser.executeString(sayParser.processString(text))
@@ -269,6 +272,16 @@ func getPlayerStatusEffectsPanel():
 func getCharactersPanel():
 	return smartCharacterPanel
 
+func addFullScreenCustomControl(id, control):
+	assert(!textboxes.has(id), "Trying to add a control with the same id. Id is "+id)
+
+	#var uitextbox = uiTextboxScene.instance()
+	#uitextbox.id = id
+	uniquePanelSpot.visible = true
+	scrollPanel.visible = false
+	uniquePanelSpot.add_child(control)
+	textboxes[id] = control
+
 func addUITextbox(id):
 	assert(!textboxes.has(id), "Trying to add a textbox with the same id. Id is "+id)
 	
@@ -300,9 +313,11 @@ func getUIdata(id):
 func clearUItextboxes():
 	for id in textboxes.keys():
 		var textbox = textboxes[id]
-		textcontainer.remove_child(textbox)
+		#textcontainer.remove_child(textbox)
 		textbox.queue_free()
 	textboxes = {}
+	scrollPanel.visible = true
+	uniquePanelSpot.visible = false
 
 func loadingSavefileFinished():
 	playerPanel.loadingSavefileFinished()

@@ -81,3 +81,15 @@ func getPossibleActions():
 			"description": "Swallow the contents of this item",
 		},
 	]
+
+func getInventoryImage():
+	var howFilled = fluids.getFluidAmount()/fluids.getCapacity()
+	
+	if(howFilled <= 0.0):
+		return "res://Images/Items/breastpump/pumpEmpty.png"
+	elif(howFilled < 0.3):
+		return "res://Images/Items/breastpump/pumpLittle.png"
+	elif(howFilled < 0.75):
+		return "res://Images/Items/breastpump/pumpHalf.png"
+	else:
+		return "res://Images/Items/breastpump/pumpFull.png"

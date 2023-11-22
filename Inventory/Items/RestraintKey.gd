@@ -24,3 +24,6 @@ func getTags():
 		ItemTag.SoldByGeneralVendomat,
 		ItemTag.SoldByTheAnnouncer,
 		]
+
+func getInventoryImage():
+	return "res://Images/Items/bdsm/key.png"

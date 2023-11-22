@@ -29,6 +29,7 @@ var extraCrossSpeciesCompatibility = 0.0
 var skillsExperience = {}
 var statusEffectImmunity = {}
 var customAttributes = {}
+var extraStats = {}
 
 func _ready():
 	name = "Buffs"
@@ -87,6 +88,10 @@ func calculateBuffs():
 	statusEffectImmunity.clear()
 	customAttributes.clear()
 	orificesPreventedFromRecovering.clear()
+	extraStats.clear()
+	
+	for statID in GlobalRegistry.getStats():
+		extraStats[statID] = 0
 	
 	for damageType in DamageType.getAll():
 		dealDamageMult[damageType] = 0.0
@@ -218,3 +223,8 @@ func getStatusEffectImmunity(statusEffect):
 	if(!statusEffectImmunity.has(statusEffect)):
 		return 0.0
 	return statusEffectImmunity[statusEffect]
+
+func getExtraStat(stat) -> int:
+	if(!extraStats.has(stat)):
+		return 0
+	return extraStats[stat]

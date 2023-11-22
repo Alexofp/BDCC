@@ -37,6 +37,12 @@ func playAnimation(animID, _args = {}):
 		state_machine.travel("YogaDownwardFacingDog-loop")
 	elif(animID == "camel"):
 		state_machine.travel("YogaCamel-loop")
+	elif(animID == "warrior"):
+		state_machine.travel("YogaWarrior-loop")
+	elif(animID == "cobra"):
+		state_machine.travel("YogaCobra-loop")
+	elif(animID == "bridge"):
+		state_machine.travel("YogaBridge-loop")
 	else:
 		Log.printerr("Action "+str(animID)+" is not found for stage "+str(id))
 
@@ -52,4 +58,4 @@ func canTransitionTo(_actionID, _args = []):
 	return true
 
 func getSupportedStates():
-	return ["catcow", "dog", "camel"]
+	return ["catcow", "dog", "camel", "warrior", "cobra", "bridge"]

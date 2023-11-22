@@ -62,3 +62,6 @@ func getHidesParts(_character):
 
 #func updateDoll(doll: Doll3D):
 #	doll.setState("armalpha", "hidearms")
+
+func getInventoryImage():
+	return "res://Images/Items/equipment/guardarmor.png"

@@ -47,3 +47,6 @@ func getForcedOnMessage(isPlayer = true):
 
 func updateDoll(doll: Doll3D):
 	doll.setState("gloves", "mittens")
+
+func getInventoryImage():
+	return "res://Images/Items/bdsm/bondagemitten.png"

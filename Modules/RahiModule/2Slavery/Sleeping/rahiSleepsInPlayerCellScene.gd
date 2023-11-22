@@ -398,7 +398,7 @@ func _react(_action: String, _args):
 			if(newState == "cowgirl"):
 				condomBroke = GM.pc.shouldCondomBreakWhenFucking("rahi", 30.0)
 				if(condomBroke):
-					getCharacter("rahi").cummedInVaginaBy("pc")
+					getCharacter("rahi").cummedInVaginaByAdvanced("pc", {condomBroke=condomBroke})
 				else:
 					addFilledCondomToLootIfPerk(getCharacter("pc").createFilledCondom())
 				GM.pc.orgasmFrom("rahi")

@@ -4,8 +4,8 @@ onready var tooltip = $CanvasLayer/TooltipDisplay
 
 var tooltipS = 0
 
-func showTooltip(title: String, text: String, showBelow: bool = false):
-	tooltip.set_is_active(true)
+func showTooltip(title: String, text: String, showBelow: bool = false, delayShow: bool = false):
+	tooltip.set_is_active(true, delayShow)
 	tooltip.setShowBelow(showBelow)
 	tooltip.set_text(title, text)
 	tooltipS += 1

@@ -9,6 +9,4 @@ flags_unshaded = true
 vertex_color_use_as_albedo = true
 params_cull_mode = 2
 params_depth_draw_mode = 3
-params_use_alpha_scissor = true
-params_alpha_scissor_threshold = 0.5
 albedo_texture = ExtResource( 1 )

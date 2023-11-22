@@ -71,3 +71,6 @@ func loadData(data):
 	.loadData(data)
 	
 	isLegal = SAVE.loadVar(data, "isLegal", false)
+
+func getInventoryImage():
+	return "res://Images/Items/medical/apple.png"

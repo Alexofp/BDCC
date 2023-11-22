@@ -50,3 +50,6 @@ func getHidesParts(_character):
 	}
 	
 	return removed
+
+func getInventoryImage():
+	return "res://Images/Items/equipment/guardhelmet.png"

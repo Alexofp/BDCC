@@ -34,9 +34,9 @@ func _run():
 		addButton("Continue", "Time to leave", "endthescene")
 
 	if(state == "fisting"):
-		playAnimation(StageScene.Spanking, "tease", {
+		playAnimation(StageScene.SexFisting, "sex", {
 			npc="rebel", pc="pc",
-			bodyState={exposedCrotch=true,}
+			npcBodyState={exposedCrotch=true,}
 		})
 		
 		saynn("The crowd cheers louder as you put on your mean eyes and step towards the defeated opponent. Rebel’s face expression shows acceptance, she tries to cover herself but you take a running start and shove her down to the floor.")
@@ -84,6 +84,11 @@ func _run():
 
 
 	if(state == "leave"):
+		playAnimation(StageScene.SexFisting, "tease", {
+			npc="rebel", pc="pc",
+			npcBodyState={exposedCrotch=true,}
+		})
+		
 		saynn("You gently remove your fist out of her vagina and rub it dry against her thighs")
 
 		saynn("[say=pc]That was enough to humiliate you.[/say]")
@@ -96,6 +101,11 @@ func _run():
 		addButton("Continue", "Time to leave", "endthescene")
 
 	if(state == "double_trouble"):
+		playAnimation(StageScene.SexFisting, "fast", {
+			npc="rebel", pc="pc",
+			npcBodyState={exposedCrotch=true,}
+		})
+		
 		saynn("[say=pc]You want more, huh? I can get you more. Don’t cry about it later.[/say]")
 
 		saynn("You forcefully turn the mare around, making her lay on her belly with her buff ass sticking out. She seems intrigued more than anything but when you spread her buttcheeks open she gasps.")

@@ -39,6 +39,7 @@ func _init():
 		"res://Modules/FightClubModule/Entrance/FightClubIntroScene.gd",
 		"res://Modules/FightClubModule/Announcer/AnnouncerFirstTimeTalkScene.gd",
 		"res://Modules/FightClubModule/Announcer/AnnouncerTalkScene.gd",
+		"res://Modules/FightClubModule/Announcer/AnnouncerBuySellScene.gd",
 		"res://Modules/FightClubModule/Avy/AvyFirstTimeTalkScene.gd",
 		"res://Modules/FightClubModule/Avy/AvyTalkScene.gd",
 		

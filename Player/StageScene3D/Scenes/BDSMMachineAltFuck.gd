@@ -38,6 +38,9 @@ func playAnimation(animID, _args = {}):
 		doll.applyBodyState(_args["bodyState"])
 	else:
 		doll.applyBodyState({})
+		
+	if(_args.has("noDildos") && _args["noDildos"]):
+		$BDSMMachine.setDildosVisible(false)
 
 	updateSubAnims()
 	

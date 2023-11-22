@@ -38,3 +38,6 @@ func getRiggedParts(_character):
 	return {
 		"veil": "res://Inventory/RiggedModels/WeddingVeil/WeddingVeil.tscn",
 	}
+
+func getInventoryImage():
+	return "res://Images/Items/equipment/veil.png"

@@ -78,8 +78,10 @@ func _run():
 		sayn("[b]Stats:[/b]")
 		for statID in Stat.getAll():
 			var howmuch = GM.pc.getStat(statID)
+			var howMuchExtra = GM.pc.getBuffsHolder().getExtraStat(statID)
+			var howMuchExtraStr = (str(howMuchExtra) if howMuchExtra < 0 else "+"+str(howMuchExtra))
 			var statObject:StatBase = GlobalRegistry.getStat(statID)
-			sayn(statObject.getVisibleName()+": "+str(howmuch))
+			sayn(statObject.getVisibleName()+": "+str(howmuch)+(" ("+howMuchExtraStr+")" if howMuchExtra != 0 else ""))
 				
 		sayn("")
 		sayn("[b]Skills:[/b]")

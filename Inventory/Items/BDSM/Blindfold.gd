@@ -43,3 +43,6 @@ func getUnriggedParts(_character):
 	return {
 		"blindfold": ["res://Inventory/UnriggedModels/Blindfold/BlindfoldModel.tscn"],
 	}
+
+func getInventoryImage():
+	return "res://Images/Items/bdsm/blindfold.png"

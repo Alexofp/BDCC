@@ -586,7 +586,7 @@ func _react(_action: String, _args):
 	if(_action == "vaginal_cum_inside"):
 		processTime(5*60)
 		if(!usedCondom || condomBroke):
-			getCharacter("rahi").cummedInVaginaBy("pc")
+			getCharacter("rahi").cummedInVaginaByAdvanced("pc", {condomBroke=condomBroke})
 		else:
 			addFilledCondomToLootIfPerk(getCharacter("pc").createFilledCondom())
 		GM.pc.addSkillExperience(Skill.SexSlave, 30)

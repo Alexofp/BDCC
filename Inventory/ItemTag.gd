@@ -11,11 +11,13 @@ enum {
 	SoldByMedicalVendomat,
 	SoldByUnderwearVendomat,
 	SoldByTheAnnouncer,
+	SoldByAlexRynard,
 	ChastityCage,
 	Strapon,
 	BreastPump,
 	BreastPumpUsableByNPC,
 	SexEngineDrug,
+	Hypnovisor,
 	
 	GuardUniform,
 	NurseUniform,
@@ -26,6 +28,7 @@ enum {
 	
 	CanPeeInto,
 	CanForceCumInto,
+	PlasticBottle,
 }
 
 static func getName(tag):

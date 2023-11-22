@@ -52,3 +52,15 @@ func getUnriggedParts(_character):
 func generateFluids():
 	.generateFluids()
 	fluids.setCapacity(20000.0)
+
+func getInventoryImage():
+	var howFilled = fluids.getFluidAmount()/fluids.getCapacity()
+	
+	if(howFilled <= 0.0):
+		return "res://Images/Items/breastpump/pumpAdvEmpty.png"
+	elif(howFilled < 0.3):
+		return "res://Images/Items/breastpump/pumpAdvLittle.png"
+	elif(howFilled < 0.75):
+		return "res://Images/Items/breastpump/pumpAdvHalf.png"
+	else:
+		return "res://Images/Items/breastpump/pumpAdvFull.png"

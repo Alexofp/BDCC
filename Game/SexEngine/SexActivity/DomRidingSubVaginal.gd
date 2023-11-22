@@ -16,6 +16,7 @@ var otherHoleFetishGiving = Fetish.AnalSexGiving
 var otherHoleFetishReceiving = Fetish.AnalSexReceiving
 var otherGoal = SexGoal.ReceiveAnal
 var currentPose = ""
+var isVag = true
 
 func _init():
 	id = "DomRidingSubVaginal"
@@ -187,7 +188,9 @@ func processTurn():
 			var text = RNG.pick([
 				"{dom.You} {dom.youAre} trying to be a cock warmer for {sub.you} but {dom.yourHis} "+RNG.pick(usedBodypartNames)+" is too tight, it's very painful! But it sure feels good for {sub.you}.",
 			])
-			domInfo.addPain(RNG.randi_range(1, 2))
+			var howMuchPainAdd = RNG.randi_range(1, 2)
+			domInfo.addPain(howMuchPainAdd)
+			sendSexEvent(SexEvent.PainInflicted, subID, domID, {pain=howMuchPainAdd,isDefense=false,intentional=false})
 			subInfo.addLust(10)
 			subInfo.addArousalForeplay(0.1)
 			getDom().gotOrificeStretchedBy(usedBodypart, subID, 0.1)
@@ -426,7 +429,7 @@ func doDomAction(_id, _actionInfo):
 			
 			var strapon = getSub().getWornStrapon()
 			if(strapon.getFluids() != null && !strapon.getFluids().isEmpty()):
-				getDom().cummedInBodypartBy(usedBodypart, subID, FluidSource.Strapon)
+				getDom().cummedInBodypartByAdvanced(usedBodypart, subID)
 				straponData = {
 					text = "{sub.Your} strapon gets squeezed by {dom.your} "+RNG.pick(usedBodypartNames)+" enough for it to suddenly [b]release its contents inside {dom.youHim}[/b]!"
 				}
@@ -445,12 +448,13 @@ func doDomAction(_id, _actionInfo):
 			])
 		var text = ""
 		
+		var condomBroke = false
 		var knotSuccess = false
 		#var isTryingToKnot = false
 		if(_id == "letsubknotinside"):
 			#isTryingToKnot = true
 			getDom().gotOrificeStretchedBy(usedBodypart, subID, 0.5)
-			if(RNG.chance(getDom().getPenetrateChanceBy(usedBodypart, subID))):
+			if(RNG.chance(getDom().getKnottingChanceBy(usedBodypart, subID))):
 				knotSuccess = true
 			else:
 				text += RNG.pick([
@@ -472,7 +476,7 @@ func doDomAction(_id, _actionInfo):
 		var condom:ItemBase = getSub().getWornCondom()
 		if(condom != null):
 			var breakChance = condom.getCondomBreakChance()
-			var condomBroke = getSub().shouldCondomBreakWhenFucking(getDom(), breakChance)
+			condomBroke = getSub().shouldCondomBreakWhenFucking(getDom(), breakChance)
 			if(condomBroke):
 				text = "[b]The condom broke![/b] "+text
 				condom.destroyMe()
@@ -489,9 +493,10 @@ func doDomAction(_id, _actionInfo):
 					" {sub.You} {sub.youVerb('moan')} as {sub.youHe} {sub.youVerb('fill')} the condom inside {dom.your} "+RNG.pick(usedBodypartNames)+"!",
 					" {sub.You} {sub.youVerb('moan')} as {sub.youHe} {sub.youVerb('stuff')} the condom in {dom.your} "+RNG.pick(usedBodypartNames)+" full of {sub.yourHis} "+RNG.pick(["cum", "seed", "jizz", "semen"])+"!",
 				])
-				getSub().cumInItem(condom)
+				var loadSize = getSub().cumInItem(condom)
 				subInfo.cum()
 				domInfo.addArousalSex(0.05)
+				sendSexEvent(SexEvent.FilledCondomInside, subID, domID, {hole=usedBodypart,loadSize=loadSize,knotted=knotSuccess,engulfed=true})
 				satisfyGoals()
 				if(knotSuccess):
 					state = "knotting"
@@ -507,7 +512,7 @@ func doDomAction(_id, _actionInfo):
 				
 				return {text=text}
 		
-		getDom().cummedInBodypartBy(usedBodypart, subID)
+		getDom().cummedInBodypartByAdvanced(usedBodypart, subID, {knotted=knotSuccess,condomBroke=condomBroke,engulfed=true})
 		subInfo.cum()
 		domInfo.addArousalSex(0.05)
 		satisfyGoals()
@@ -592,6 +597,7 @@ func doDomAction(_id, _actionInfo):
 			affectDom(domInfo.fetishScore({fetishReceiving: 1.0}), 0.2, -0.01)
 			return {text="{dom.You} {dom.youVerb('try', 'tries')} to envelop {sub.yourHis} "+getDickName()+" but it's too big!"}
 		
+		sendSexEvent(SexEvent.HolePenetrated, subID, domID, {hole=usedBodypart,engulfed=true})
 		affectSub(subInfo.fetishScore({fetishGiving: 1.0}), 0.1 * subSensetivity(), 0.0, 0.0)
 		affectDom(domInfo.fetishScore({fetishReceiving: 1.0}), 0.1, -0.01)
 		subInfo.addArousalSex(0.1 * subSensetivity())
@@ -770,10 +776,11 @@ func doSubAction(_id, _actionInfo):
 				" Waves after waves of sticky "+RNG.pick(["cum", "seed", "jizz", "semen"])+" get shoved into {dom.yourHis} "+RNG.pick(["ass", "butt"])+".",
 			])
 		
+		var condomBroke = false
 		var condom:ItemBase = getSub().getWornCondom()
 		if(condom != null):
 			var breakChance = condom.getCondomBreakChance()
-			var condomBroke = getSub().shouldCondomBreakWhenFucking(getDom(), breakChance)
+			condomBroke = getSub().shouldCondomBreakWhenFucking(getDom(), breakChance)
 			if(condomBroke):
 				text = "[b]The condom broke![/b] "+text
 				condom.destroyMe()
@@ -782,9 +789,10 @@ func doSubAction(_id, _actionInfo):
 					"{sub.You} {sub.youVerb('fill')} the condom inside {dom.your} "+RNG.pick(usedBodypartNames)+" [b]without asking for permission[/b]!",
 					"{sub.You} {sub.youVerb('stuff')} the condom in {dom.your} "+RNG.pick(usedBodypartNames)+" full of {sub.yourHis} "+RNG.pick(["cum", "seed", "jizz", "semen"])+" [b]without asking for permission[/b]!",
 				])
-				getSub().cumInItem(condom)
+				var loadSize = getSub().cumInItem(condom)
 				subInfo.cum()
 				domInfo.addArousalSex(0.05)
+				sendSexEvent(SexEvent.FilledCondomInside, subID, domID, {hole=usedBodypart,loadSize=loadSize,knotted=false})
 				satisfyGoals()
 				state = ""
 				
@@ -798,7 +806,7 @@ func doSubAction(_id, _actionInfo):
 			])
 		else:
 			domInfo.addAnger(0.3)
-		getDom().cummedInBodypartBy(usedBodypart, subID)
+		getDom().cummedInBodypartByAdvanced(usedBodypart, subID, {condomBroke=condomBroke})
 		subInfo.cum()
 		domInfo.addArousalSex(0.05)
 		satisfyGoals()

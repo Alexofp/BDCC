@@ -38,3 +38,6 @@ func getRiggedParts(_character):
 	return {
 		"gasmask": "res://Inventory/RiggedModels/GasMask/GasMask.tscn",
 	}
+
+func getInventoryImage():
+	return "res://Images/Items/equipment/gas-mask.png"

@@ -1067,6 +1067,7 @@ func _run():
 
 		addButton("Harder", "Test Tavi's limits", "do_petplay_strapon_harder")
 		addButton("Pull out", "Cum on Tavi's face instead", "do_petplay_strapon_bj_pullout")
+	if(state == "do_petplay_strapon_harder"):
 		saynn("You've been fucking that throat for while. Maybe it's time to stop.")
 
 		saynn("But you don't pull out. Instead, you ram the toy fully inside, aside from the knot, stealing Tavi's ability to breathe completely! She is at your complete mercy..")

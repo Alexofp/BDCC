@@ -17,6 +17,7 @@ func _init():
 	otherGoal = SexGoal.FuckVaginal
 	aboutToPenetrateReaction = SexReaction.AboutToPenetrateAnal
 	sexReactionPullOut = SexReaction.BeggingToPullOutAnal
+	isVag = false
 	
 func getGoals():
 	if(currentPose == POSE_CHOKEFUCK):

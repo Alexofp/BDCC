@@ -63,7 +63,14 @@ func isEligibleForProlongedPregnancy() -> bool:
 	return true
 
 func isInHeat():
-	return getCurrentStage() == CycleStage.Ovulation && hasAnyWomb() && (!isPregnant() || isEligibleForProlongedPregnancy())
+	if(getCurrentStage() != CycleStage.Ovulation):
+		return false
+	if(!hasAnyWomb()):
+		return false
+	if(getPregnancyProgress() > 0.05 && !isEligibleForProlongedPregnancy()):
+		return false
+	
+	return true
 
 func forceIntoHeat():
 	newCycle(false) # so eggs from the previous cycle are not cleared
@@ -119,14 +126,16 @@ func processTime(seconds):
 	var theCharacter = getCharacter()
 	
 	if(isPregnant()):
-		if(theCharacter != null && !theCharacter.hasPerk(Perk.FertilityBetterOvulationV3)):
+		var thePregnancyProgress = getPregnancyProgress()
+		
+		if(theCharacter != null && thePregnancyProgress > 0.05 && !theCharacter.hasPerk(Perk.FertilityBetterOvulationV3)):
 			cycleProgress = 1.0
 		
 		if(!noticedVisiblyPregnant && isVisiblyPregnant()):
 			noticedVisiblyPregnant = true
 			emit_signal("visiblyPregnant")
 			
-		if(!noticedHeavyIntoPregnancy && getPregnancyProgress() > 0.66):
+		if(!noticedHeavyIntoPregnancy && thePregnancyProgress > 0.66):
 			noticedHeavyIntoPregnancy = true
 			emit_signal("heavyIntoPregnancy")
 
@@ -280,7 +289,7 @@ func isReadyToGiveBirth() -> bool:
 	else:
 		return false
 
-func getRoughLitterEstimateString():
+func getRoughLitterEstimateString(veryAccurate = false):
 	var trueValue = impregnatedEggCells.size()
 	
 	var fullProgress = 0.0
@@ -291,6 +300,8 @@ func getRoughLitterEstimateString():
 		averageProgress = fullProgress / impregnatedEggCells.size()
 	
 	var disp = 3 + int(trueValue/2)
+	if(veryAccurate):
+		disp = disp / 2
 	var minValue = RNG.randi_range(trueValue - int(disp * (1.0 - averageProgress)), trueValue)
 	minValue = Util.maxi(0, minValue)
 	var maxValue = RNG.randi_range(trueValue + int(disp * (1.0 - averageProgress)), trueValue)

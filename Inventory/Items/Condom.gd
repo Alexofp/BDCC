@@ -52,3 +52,6 @@ func getPossibleActions():
 			"description": "Turn one of the condoms into a used one",
 		},
 	]
+
+func getInventoryImage():
+	return "res://Images/Items/medical/condom.png"

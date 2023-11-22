@@ -15,6 +15,7 @@ var turns = -1
 const IconColorRed = Color(0.7, 0.1, 0.1)
 const IconColorGreen = Color(0.1, 0.7, 0.1)
 const IconColorPurple = Color("#A001A0")
+const IconColorBrightPurple = Color("#FF02FF")
 const IconColorDarkPurple = Color("#A001A0")
 const IconColorBlue = Color(0.207843, 0.227451, 0.556863)
 const IconColorWhite = Color.white
@@ -102,3 +103,25 @@ func buff(buffid, args = []):
 	var buff: BuffBase = GlobalRegistry.createBuff(buffid)
 	buff.initBuff(args)
 	return buff
+
+
+func onFightStart(_contex = {}):
+	pass
+
+func processBattleTurnContex(_contex = {}):
+	pass
+
+func onFightEnd(_contex = {}):
+	pass
+
+func onSexStarted(_contex = {}):
+	pass
+
+func processSexTurnContex(_contex = {}):
+	pass
+
+func onSexEvent(_event:SexEvent):
+	pass
+
+func onSexEnded(_contex = {}):
+	pass

@@ -52,3 +52,6 @@ func getHidesAttachments(_character):
 		"wrist.R": true,
 		"wrist.L": true,
 	}
+
+func getInventoryImage():
+	return "res://Images/Items/bdsm/jacket.png"

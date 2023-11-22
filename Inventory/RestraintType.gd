@@ -14,4 +14,5 @@ enum {
 	ButtPlug,
 	VaginalPlug,
 	ChastityCage,
+	HypnoVisor,
 }

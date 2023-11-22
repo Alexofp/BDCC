@@ -80,10 +80,26 @@ func isCloseToCumming() -> bool:
 func isReadyToCum() -> bool:
 	return getArousal() >= 1.0
 	
-func cum():
+func getOpponentInfo():
+	return null
+	
+func cum(infoCaused = null):
+	if(infoCaused == null):
+		infoCaused = getOpponentInfo()
+	if(infoCaused == null):
+		infoCaused = self
+	
 	addArousal(-1.0)
 	getChar().addLust(-int(getChar().getLust()/2.0))
 	timesCame += 1
+	getChar().afterOrgasm(true)
+	
+	if(true):
+		var event = SexEventHelper.create(SexEvent.Orgasmed, infoCaused.charID, charID, {
+		})
+		getChar().sendSexEvent(event)
+		if(infoCaused != null && infoCaused != self):
+			infoCaused.getChar().sendSexEvent(event)
 
 func getTimesCame():
 	return timesCame
@@ -94,10 +110,16 @@ func isReadyToPenetrate() -> bool:
 func fetishScore(fetishes = {}, addscore = 0.0):
 	var fetishHolder: FetishHolder = getChar().getFetishHolder()
 	
+	var maxPossibleValue = 0.0
 	var result = addscore
 	for fetishID in fetishes:
 		var fetishValue = fetishHolder.getFetishValue(fetishID)
 		result += fetishValue * fetishes[fetishID]
+		maxPossibleValue += 1.0
+	
+	var forcedObedience = clamp(getChar().getForcedObedienceLevel(), 0.0, 1.0)
+	if(forcedObedience > 0.0):
+		result = result * (1.0 - forcedObedience) + maxPossibleValue * forcedObedience
 	
 	return result
 

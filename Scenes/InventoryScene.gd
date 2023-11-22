@@ -1,5 +1,7 @@
 extends "res://Scenes/SceneBase.gd"
 
+var inventoryScreenScene = preload("res://UI/Inventory/InventoryScreen.tscn")
+
 var savedItemUniqueID = ""
 var fightMode = false
 
@@ -10,36 +12,44 @@ func _initScene(_args = []):
 	if(_args.size() > 0):
 		fightMode = _args[0]
 		
-		if(fightMode):
+		if(fightMode && false):
 			setState("interactmenu")
 
 func _run():
 	if(state == ""):
-		saynn("What do you wanna do")
-		
-		say("Your equipped items:\n")
-		for slot in InventorySlot.getAll():
-			if(!GM.pc.getInventory().hasSlotEquipped(slot) && GM.pc.invCanEquipSlot(slot)):
-				say(InventorySlot.getVisibleName(slot)+": "+"Nothing"+"\n")
-				continue
-			if(!GM.pc.invCanEquipSlot(slot)):
-				continue
+		if(true):
+			var inventory = inventoryScreenScene.instance()
+			GM.ui.addFullScreenCustomControl("inventory", inventory)
+			inventory.setItems(GM.pc.getInventory().getItemsAndEquippedItemsTogetherGrouped(), ("fight" if fightMode else ""))
+			var _ok = inventory.connect("onItemSelected", self, "onInventoryItemSelected")
+			var _ok2 = inventory.connect("onInteractWith", self, "onInventoryItemInteracted")
 			
-			var item = GM.pc.getInventory().getEquippedItem(slot)
+		else:
+			saynn("What do you wanna do")
 			
-			say(InventorySlot.getVisibleName(slot)+": "+item.getVisibleName()+"\n")
+			say("Your equipped items:\n")
+			for slot in InventorySlot.getAll():
+				if(!GM.pc.getInventory().hasSlotEquipped(slot) && GM.pc.invCanEquipSlot(slot)):
+					say(InventorySlot.getVisibleName(slot)+": "+"Nothing"+"\n")
+					continue
+				if(!GM.pc.invCanEquipSlot(slot)):
+					continue
+				
+				var item = GM.pc.getInventory().getEquippedItem(slot)
+				
+				say(InventorySlot.getVisibleName(slot)+": "+item.getVisibleName()+"\n")
+			
+			say("\n")
+			var items = GM.pc.getInventory().getAllItems()
+			var itemNames = []
+			for item in items:
+				itemNames.append(item.getStackName())
+			say("Your items:\n")
+			say(Util.join(itemNames, ", "))
 		
-		say("\n")
-		var items = GM.pc.getInventory().getAllItems()
-		var itemNames = []
-		for item in items:
-			itemNames.append(item.getStackName())
-		say("Your items:\n")
-		say(Util.join(itemNames, ", "))
-		
-		addButton("Take off", "Take off an item", "takeoffmenu")
-		addButton("Put on", "Put on an item", "putonmenu")
-		addButton("Use item", "Pick an item to use", "interactmenu")
+			addButton("Take off", "Take off an item", "takeoffmenu")
+			addButton("Put on", "Put on an item", "putonmenu")
+			addButton("Use item", "Pick an item to use", "interactmenu")
 		addButton("Close", "Close the inventory", "endthescene")
 		
 	if(state == "takeoffmenu"):
@@ -177,10 +187,51 @@ func _react(_action: String, _args):
 					runScene(possibleActions[0]["scene"], [savedItemUniqueID])
 					endScene()
 	
+	if(_action == "dofightaction"):
+		savedItemUniqueID = _args[0]
+	
+		var item: ItemBase = GM.pc.getInventory().getItemByUniqueID(savedItemUniqueID)
+			
+		var possibleActions = item.getPossibleActions()
+		if(possibleActions.size() == 1):
+			if(canDoAction(possibleActions[0])):
+				runScene(possibleActions[0]["scene"], [savedItemUniqueID])
+				endScene()
+		return
+	
 	setState(_action)
 
 func _react_scene_end(_tag, _result):
 	setState("")
+
+func onInventoryItemInteracted(item: ItemBase):
+	GM.main.pickOption("dofightaction", [item.getUniqueID()])
+
+func onInventoryItemSelected(item: ItemBase):
+	GM.ui.clearButtons()
+	addButton("Close", "Close the inventory", "endthescene")
+	
+	if(item == null):
+		return
+	savedItemUniqueID = item.getUniqueID()
+	
+	var slot = item.getClothingSlot()
+	if(slot != null && !fightMode):
+		if(GM.pc.getInventory().hasSlotEquipped(slot)):
+			if(GM.pc.getInventory().getEquippedItem(slot) == item):
+				addButton("Take off", item.getVisisbleDescription(), "takeoff", [item.getUniqueID()])
+			else:
+				addDisabledButton("Put on", "This item's slot is already occupied")
+		elif(!GM.pc.invCanEquipSlot(slot)):
+			addDisabledButton("Put on", "You can't equip this item")
+		else:
+			addButton("Put on", item.getVisisbleDescription(), "puton", [item.getUniqueID()])
+	
+	for action in item.getPossibleActions():
+		if(!canDoAction(action)):
+			addDisabledButton(action["name"], "(Can't do this now)\n\n"+action["description"])
+		else:
+			addButton(action["name"], action["description"], "doitemaction", [action["scene"]])
 
 func saveData():
 	var data = .saveData()

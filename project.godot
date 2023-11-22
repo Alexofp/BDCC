@@ -734,6 +734,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Inventory/ItemState/PantiesState.gd"
 }, {
+"base": "TranslatorBase",
+"class": "PapagoTranslate",
+"language": "GDScript",
+"path": "res://Util/AutoTranslation/Translators/PapagoTranslate.gd"
+}, {
 "base": "Reference",
 "class": "PartSkinBase",
 "language": "GDScript",
@@ -845,6 +850,11 @@ _global_script_classes=[ {
 "path": "res://Inventory/RestraintTypes/RestraintHandCuffs.gd"
 }, {
 "base": "RestraintData",
+"class": "RestraintHypnovisor",
+"language": "GDScript",
+"path": "res://Inventory/RestraintTypes/RestraintHypnovisor.gd"
+}, {
+"base": "RestraintData",
 "class": "RestraintLegCuffs",
 "language": "GDScript",
 "path": "res://Inventory/RestraintTypes/RestraintLegCuffs.gd"
@@ -943,6 +953,16 @@ _global_script_classes=[ {
 "class": "SexEngine",
 "language": "GDScript",
 "path": "res://Game/SexEngine/SexEngine.gd"
+}, {
+"base": "Reference",
+"class": "SexEvent",
+"language": "GDScript",
+"path": "res://Game/SexEngine/SexEvent/SexEvent.gd"
+}, {
+"base": "Object",
+"class": "SexEventHelper",
+"language": "GDScript",
+"path": "res://Game/SexEngine/SexEvent/SexEventHelper.gd"
 }, {
 "base": "Object",
 "class": "SexGoal",
@@ -1290,6 +1310,7 @@ _global_script_class_icons={
 "OrificeType": "",
 "OverriddenPlayer": "",
 "PantiesState": "",
+"PapagoTranslate": "",
 "PartSkinBase": "",
 "PartState": "",
 "PartStatePicker": "",
@@ -1312,6 +1333,7 @@ _global_script_class_icons={
 "RestraintChastityCage": "",
 "RestraintData": "",
 "RestraintHandCuffs": "",
+"RestraintHypnovisor": "",
 "RestraintLegCuffs": "",
 "RestraintMittens": "",
 "RestraintMuzzle": "",
@@ -1332,6 +1354,8 @@ _global_script_class_icons={
 "SexActivityTag": "",
 "SexDomInfo": "",
 "SexEngine": "",
+"SexEvent": "",
+"SexEventHelper": "",
 "SexGoal": "",
 "SexGoalBase": "",
 "SexInfoBase": "",

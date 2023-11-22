@@ -148,7 +148,9 @@ func processTurn():
 					text += " {sub.YourHis} nipples [b]got sore[/b] from so much milking!"
 		
 		if(getSub().hasEffect(StatusEffect.SoreNipplesAfterMilking)):
-			subInfo.addPain(RNG.randi_range(2, 5))
+			var howMuchPainAdd = RNG.randi_range(2, 5)
+			subInfo.addPain(howMuchPainAdd)
+			sendSexEvent(SexEvent.PainInflicted, domID, subID, {pain=howMuchPainAdd,isDefense=false,intentional=false})
 			text += RNG.pick([
 				" {sub.YourHis} sore nipples hurt!",
 				" {sub.YourHis} sore nipples hurt from being milked so much!",

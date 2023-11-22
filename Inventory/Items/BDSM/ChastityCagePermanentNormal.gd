@@ -50,3 +50,6 @@ func updateDoll(doll: Doll3D):
 
 func isImportant():
 	return true
+
+func getInventoryImage():
+	return "res://Images/Items/bdsm/chastity_cage.png"

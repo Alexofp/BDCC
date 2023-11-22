@@ -10,6 +10,7 @@ var menstrualCycleLengthDays: int
 var eggCellLifespanHours: int
 var playerPregnancyTimeDays: int
 var npcPregnancyTimeDays: int
+var impregnationChanceModifier: int
 
 var shouldScaleUI: bool = true
 var uiScaleMultiplier = 1.0
@@ -20,6 +21,7 @@ var showSpeakerName = true
 var fontSize = "normal"
 var showShortcuts = true
 var showSceneCreator = true
+var inventoryIconsSize = "small"
 
 var measurementUnits = "metric"
 
@@ -53,6 +55,7 @@ func resetToDefaults():
 	eggCellLifespanHours = 48
 	playerPregnancyTimeDays = 5
 	npcPregnancyTimeDays = 5
+	impregnationChanceModifier = 100
 	shouldScaleUI = true
 	uiScaleMultiplier = 1.0
 	showSpeakerName = true
@@ -79,6 +82,7 @@ func resetToDefaults():
 	advancedShadersEnabled = true
 	chainsEnabled = true
 	autosaveEnabled = true
+	inventoryIconsSize = "small"
 	
 	enabledContent.clear()
 	for contentType in ContentType.getAll():
@@ -114,6 +118,11 @@ func getPlayerPregnancyTimeDays():
 	
 func getNPCPregnancyTimeDays():
 	return npcPregnancyTimeDays
+
+func getImpregnationChanceModifier() -> float:
+	var resultValue:float = float(impregnationChanceModifier) / 100.0
+	resultValue = clamp(resultValue, 0.0, 1000.0)
+	return resultValue
 
 func shouldShowSpeakerName():
 	return showSpeakerName
@@ -184,6 +193,15 @@ func shouldAutosave():
 func shouldSpawnChains():
 	return chainsEnabled
 
+func getInventoryIconSize():
+	if(inventoryIconsSize == "small"):
+		return 32
+	if(inventoryIconsSize == "normal"):
+		return 40
+	if(inventoryIconsSize == "big"):
+		return 64
+	return 32
+
 func getChangeableOptions():
 	var settings = [
 		{
@@ -230,6 +248,13 @@ func getChangeableOptions():
 					"id": "npcPregnancyTimeDays",
 					"type": "int",
 					"value": npcPregnancyTimeDays,
+				},
+				{
+					"name": "Impregnation chance modifier (%)",
+					"description": "Higher chance means impregnation is easier. Must be above zero",
+					"id": "impregnationChanceModifier",
+					"type": "int",
+					"value": impregnationChanceModifier,
 				},
 			]
 		},
@@ -406,6 +431,18 @@ func getChangeableOptions():
 					],
 				},
 				{
+					"name": "Inventory icons",
+					"description": "Changes the size of the buttons inside the main game screen",
+					"id": "inventoryIconsSize",
+					"type": "list",
+					"value": inventoryIconsSize,
+					"values": [
+						["small", "Small"],
+						["normal", "Normal"],
+						["big", "Big"],
+					],
+				},
+				{
 					"name": "Double-tap to pick option (mobile)",
 					"description": "First tap shows the description, second tap picks the option. Works only with touchscreens",
 					"id": "requireDoubleTapOnMobile",
@@ -566,6 +603,8 @@ func applyOption(categoryID, optionID, value):
 			playerPregnancyTimeDays = value
 		if(optionID == "npcPregnancyTimeDays"):
 			npcPregnancyTimeDays = value
+		if(optionID == "impregnationChanceModifier"):
+			impregnationChanceModifier = value
 	
 	if(categoryID == "other"):
 		if(optionID == "fetchLatestRelease"):
@@ -590,6 +629,8 @@ func applyOption(categoryID, optionID, value):
 			requireDoubleTapOnMobile = value
 		if(optionID == "uiButtonSize"):
 			uiButtonSize = value
+		if(optionID == "inventoryIconsSize"):
+			inventoryIconsSize = value
 		if(optionID == "showCharacterArt"):
 			showCharacterArt = value
 		if(optionID == "showSceneArt"):
@@ -644,6 +685,7 @@ func saveData():
 		"eggCellLifespanHours": eggCellLifespanHours,
 		"playerPregnancyTimeDays": playerPregnancyTimeDays,
 		"npcPregnancyTimeDays": npcPregnancyTimeDays,
+		"impregnationChanceModifier": impregnationChanceModifier,
 		"shouldScaleUI": shouldScaleUI,
 		"uiScaleMultiplier": uiScaleMultiplier,
 		"uiButtonSize": uiButtonSize,
@@ -670,6 +712,7 @@ func saveData():
 		"advancedShadersEnabled": advancedShadersEnabled,
 		"chainsEnabled": chainsEnabled,
 		"autosaveEnabled": autosaveEnabled,
+		"inventoryIconsSize": inventoryIconsSize,
 	}
 	
 	return data
@@ -681,6 +724,7 @@ func loadData(data):
 	eggCellLifespanHours = loadVar(data, "eggCellLifespanHours", 48)
 	playerPregnancyTimeDays = loadVar(data, "playerPregnancyTimeDays", 5)
 	npcPregnancyTimeDays = loadVar(data, "npcPregnancyTimeDays", 5)
+	impregnationChanceModifier = loadVar(data, "impregnationChanceModifier", 100)
 	shouldScaleUI = loadVar(data, "shouldScaleUI", true)
 	uiScaleMultiplier = loadVar(data, "uiScaleMultiplier", 1.0)
 	uiButtonSize = loadVar(data, "uiButtonSize", 0)
@@ -707,6 +751,7 @@ func loadData(data):
 	advancedShadersEnabled = loadVar(data, "advancedShadersEnabled", true)
 	chainsEnabled = loadVar(data, "chainsEnabled", true)
 	autosaveEnabled = loadVar(data, "autosaveEnabled", true)
+	inventoryIconsSize = loadVar(data, "inventoryIconsSize", "small")
 
 func saveToFile():
 	var saveData = saveData()

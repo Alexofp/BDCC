@@ -74,6 +74,8 @@ func addFear(addfear):
 		addfear = addfear / max(getConsciousness(), 0.1)
 	fear += addfear * (1.0 + personalityScore({PersonalityStat.Coward: 0.5}))
 	fear = clamp(fear, 0.0, 1.0)
+	var forcedObedience = clamp(getChar().getForcedObedienceLevel(), 0.0, 1.0)
+	fear = clamp(fear, 0.0, 1.0 - forcedObedience)
 
 func addResistance(addres):
 	if(isScared()):
@@ -83,6 +85,8 @@ func addResistance(addres):
 	
 	resistance += addres * (1.0 + personalityScore({PersonalityStat.Subby: -0.2, PersonalityStat.Brat: 0.1}))
 	resistance = clamp(resistance, 0.0, 1.0)
+	var forcedObedience = clamp(getChar().getForcedObedienceLevel(), 0.0, 1.0)
+	resistance = clamp(resistance, 0.0, 1.0 - forcedObedience)
 
 func getResistScore():
 	if(isScared()):
@@ -112,9 +116,15 @@ func processTurn():
 	if(isScared()):
 		resistance = Util.moveNumberTowards(resistance, 0.0, fear / 10.0)
 	
+	var forcedObedience = clamp(getChar().getForcedObedienceLevel(), 0.0, 1.0)
+	if(forcedObedience > 0.0):
+		resistance = clamp(resistance, 0.0, 1.0 - forcedObedience)
+		fear = clamp(fear, 0.0, 1.0 - forcedObedience)
+	
 	.processTurn()
 	resistanceFull += resistance
 	fearFull += fear
+	
 
 func getAverageResistance():
 	return resistanceFull / float(Util.maxi(1, tick))
@@ -206,6 +216,9 @@ func affectPersonality(_personality:Personality, _fetishHolder:FetishHolder):
 					theChanges.append("{npc.name} became less bratty after so much intimidation.")
 	
 	return GM.ui.processString(Util.join(theChanges, "\n"), {npc=charID})
+
+func getOpponentInfo():
+	return getSexEngine().doms[getSexEngine().doms.keys()[0]]
 
 func saveData():
 	var data = .saveData()

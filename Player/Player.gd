@@ -626,9 +626,16 @@ func afterTakingAShower():
 	clearTallymarks()
 
 func orgasmFrom(_characterID: String):
-	cumOnFloor()
+	afterOrgasm()
 	
-	addLust(-lust)
+	if(true):
+		var event = SexEventHelper.create(SexEvent.Orgasmed, _characterID, getID(), {
+		})
+		if(_characterID != getID()):
+			var ch = GlobalRegistry.getCharacter(_characterID)
+			if(ch != null):
+				ch.sendSexEvent(event)
+		sendSexEvent(event)
 
 func getInmateNumber():
 	return inmateNumber
@@ -733,6 +740,9 @@ func freeMouthDeleteAll():
 	return getInventory().removeEquippedItemsWithBuff(Buff.GagBuff)
 	
 func freeHandsDeleteAll():
+	return getInventory().removeEquippedItemsWithBuff(Buff.BlockedHandsBuff)
+	
+func freeArmsDeleteAll():
 	return getInventory().removeEquippedItemsWithBuff(Buff.RestrainedArmsBuff)
 	
 func freeLegsDeleteAll():

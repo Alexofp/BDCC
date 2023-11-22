@@ -1,8 +1,8 @@
 extends PerkBase
 
 func _init():
-	id = Perk.CumStud
-	skillGroup = Skill.CumLover
+	id = Perk.BreedStud
+	skillGroup = Skill.Breeder
 
 func getVisibleName():
 	return "Stallion"

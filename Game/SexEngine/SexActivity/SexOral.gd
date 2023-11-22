@@ -254,7 +254,7 @@ func processTurn():
 					if(resultMessage != null && resultMessage != ""):
 						extraMessages.append(resultMessage)
 				
-				getSub().cummedInBodypartBy(BodypartSlot.Head, domID, FluidSource.Strapon)
+				getSub().cummedInBodypartByAdvanced(BodypartSlot.Head, domID)
 				text += " {dom.Your} strapon gets squeezed by {sub.your} "+RNG.pick(["throat"])+" enough for it to suddenly [b]release its contents inside {sub.yourHis} mouth[/b]!"
 				if(extraMessages.size() > 0):
 					text += " "+Util.join(extraMessages, " ")
@@ -544,10 +544,11 @@ func doDomAction(_id, _actionInfo):
 				"{dom.You} {dom.youVerb('ram')} {dom.yourHis} "+RNG.pick(["cock", "dick"])+" "+RNG.pick(["balls deep", "as deep as {sub.yourHis} throat allows", "deep down {sub.yourHis} throat"])+" before [b]stuffing {sub.yourHis} belly with lots of cum[/b]!",
 			])
 		
+		var condomBroke = false
 		var condom:ItemBase = getDom().getWornCondom()
 		if(condom != null):
 			var breakChance = condom.getCondomBreakChance()
-			var condomBroke = getDom().shouldCondomBreakWhenFucking(getSub(), breakChance)
+			condomBroke = getDom().shouldCondomBreakWhenFucking(getSub(), breakChance)
 			if(condomBroke):
 				text = "[b]The condom broke![/b] "+text
 				condom.destroyMe()
@@ -571,7 +572,7 @@ func doDomAction(_id, _actionInfo):
 		if(beingBredScore < 0.0):
 			subInfo.addResistance(1.0)
 			subInfo.addFear(0.1)
-		getSub().cummedInBodypartBy(BodypartSlot.Head, domID)
+		getSub().cummedInBodypartByAdvanced(BodypartSlot.Head, domID, {condomBroke=condomBroke})
 		domInfo.cum()
 		satisfyGoals()
 		state = ""
@@ -951,6 +952,7 @@ func doSubAction(_id, _actionInfo):
 				"{sub.You} {sub.youVerb('bite')} {dom.your} genitals! {dom.YouHe} {dom.youVerb('cry', 'cries')} from pain and {dom.youVerb('pull')} away.",
 			])
 			domInfo.addPain(10)
+			sendSexEvent(SexEvent.PainInflicted, subID, domID, {pain=10,isDefense=true,intentional=true})
 			domInfo.addAnger(1.0 - domInfo.fetishScore({Fetish.Masochism: 0.5}))
 			domInfo.addLust(-5 + 10 * domInfo.fetishScore({Fetish.Masochism: 1.0}))
 			endActivity()
@@ -1010,6 +1012,7 @@ func doSubAction(_id, _actionInfo):
 			])
 			if(domInfo.isAngry() && RNG.chance(50)):
 				subInfo.addPain(5)
+				sendSexEvent(SexEvent.PainInflicted, domID, subID, {pain=5,isDefense=false,intentional=true})
 				text += RNG.pick([
 					" {sub.You} {sub.youVerb('receive')} a painful slap on the cheek from {dom.youHim}.",
 				])

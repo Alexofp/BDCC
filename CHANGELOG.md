@@ -5,6 +5,27 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+## [0.1.1] - 2023-11-22
+### Added
+- Jacki's content has been greatly expanded (173 pages/44k words). You can now find her in the gym after the stocks event. Fair warning, her content is based around some heavy kinks such as anal fisting, roughness, sounding, genital torture. Not much breeding there. But you can also corrupt the wolfie using kind methods.
+- Some Alex Rynard content (45 pages/9.9k words). This is mostly an intro to his content, not much lewds there yet.
+- Hypnovisor mk1 item. Can be bought from Alex if you complete his current content. Can be used in procedural sex
+- [New inventory UI](https://github.com/Alexofp/BDCC/assets/14040378/069fc12b-41da-4765-bb72-9bcc249c5ada). Inventory and Looting/Vendomat/Stashing scenes now have a special new ui. It features icons for each item, a search bar and also item grouping to help against clutter.
+- Breeder skill. Can be trained by orgasming inside others (filled strapons also counting) and getting people pregnant. Features 14 perks (2 perks were moved from the Cum Lover skill)
+- Cum lover skill received 2 new replacement perks. Cum lover skill doesn't get trained from cumming inside others anymore.
+- New 'from behind' pose for the vaginal/anal procedural sex.
+- 4 new skins, one of them is for Jacki. [Preview](https://github.com/Alexofp/BDCC/assets/14040378/2336b53e-dc49-4d89-ab24-6b42cb9b3e3c)
+- Impregnation chance modifier added to the game's options.
+- Sex Event system that will power a lot of the future features (and is already used in the new perks)
+
+### Changed
+- Impregnation chances lowered by 75%. (Breeder skill helps to counter that)
+- Underwear and some status effects provide attribute (strength/agility/etc) buffs rather than stat buffs.
+
+### Fixed
+- Fixed your bra becoming invisible if it was unequipped by breast pumps during procedural sex.
+- Typpos
+
 ## [0.1.0] - 2023-10-06
 ### Added
 - Tavi's route is finished! That makes the game completable from start to the end. Will you finally escape the prison? Who knows ^^. Complete her route and find out in one of the 3 endings that are all drastically different. At least 250+ pages/80k+ words of new content in this update
@@ -315,7 +336,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Turn-based fighting
 - Initial player customization
 
-[Unreleased]: https://github.com/Alexofp/BDCC/compare/0.1.0...main
+[Unreleased]: https://github.com/Alexofp/BDCC/compare/0.1.1...main
+[0.1.1]: https://github.com/Alexofp/BDCC/compare/0.1.0...0.1.1
 [0.1.0]: https://github.com/Alexofp/BDCC/compare/0.0.24...0.1.0
 [0.0.24]: https://github.com/Alexofp/BDCC/compare/0.0.23...0.0.24
 [0.0.23]: https://github.com/Alexofp/BDCC/compare/0.0.22bugfix1...0.0.23

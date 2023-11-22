@@ -3,9 +3,9 @@ extends Character
 func _init():
 	id = "gymbully2"
 	
-	npcLevel = 5
-	npcBasePain = 80
-	npcBaseLust = 50
+	npcLevel = 10
+	npcBasePain = 180
+	npcBaseLust = 150
 	npcCharacterType = CharacterType.Inmate
 	
 	pickedSkin="SoftSpikySkin"
@@ -25,7 +25,7 @@ func _init():
 	}
 	
 func _getName():
-	return "Bully"
+	return "Quiet Bully"
 
 func getGender():
 	return Gender.Male
@@ -37,7 +37,7 @@ func getSpecies():
 	return ["canine"]
 	
 func _getAttacks():
-	return ["biteattack", "simplekickattack", "stretchingAttack", "lickWounds", "shoveattack", "trygetupattack"]
+	return ["biteattack", "simplekickattack", "shoveattack", "trygetupattack"]
 
 func getThickness() -> int:
 	return 60
@@ -64,3 +64,7 @@ func createBodyparts():
 
 func getLootTable(_battleName):
 	return InmateLoot.new()
+
+func createEquipment():
+	getInventory().equipItem(GlobalRegistry.createItemNoID("inmatecollar"))
+	getInventory().equipItem(GlobalRegistry.createItemNoID("inmateuniformHighsec"))

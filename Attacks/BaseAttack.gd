@@ -112,6 +112,9 @@ func checkRequirement(_attacker, _receiver, req):
 	if(reqtype == AttackRequirement.HasMilk):
 		if(_attacker.getBodypart(BodypartSlot.Breasts).getProducedFluidAmount() < req[1]):
 			return false
+	if(reqtype == AttackRequirement.HasReachablePenis):
+		if(!_attacker.hasReachablePenis()):
+			return false
 			
 	return true
 
@@ -152,6 +155,8 @@ func getRequirementText(req):
 		return "Lust must be above "+str(int(req[1]*GM.pc.lustThreshold())) +" ("+str(int(req[1]*100))+"%)"
 	if(reqtype == AttackRequirement.HasMilk):
 		return "Must have at least "+str(Util.roundF(req[1], 1))+"ml of milk stored in breasts"
+	if(reqtype == AttackRequirement.HasReachablePenis):
+		return "Needs a reachable penis"
 			
 	return "Error: bad requirement:" + reqtype
 	
@@ -297,7 +302,7 @@ func getAttackHitReactAnimation(_attacker, _receiver, _result):
 	elif(_result.has("pain") && _result["pain"] > 0):
 		return "hurt"
 	else:
-		return null
+		return ""
 
 func scaledDmgStr(_damageType, _damage: int):
 	var damageMult = GM.pc.getDamageMultiplier(_damageType)
