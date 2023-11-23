@@ -183,7 +183,7 @@ static func check(checks: Array):
 			if(!GM.pc.getInventory().hasItemID(args[1])):
 				return args
 		if(reason == HasReachablePenisOrVaginaOrHasStrapon):
-			if(!GM.pc.hasReachablePenis() && !GM.pc.hasReachableVagina() && !GM.pc.canWearStrapon() && !GM.pc.hasStrapons()):
+			if(!GM.pc.hasReachablePenis() && !GM.pc.hasReachableVagina() && !GM.pc.hasStrapons()):
 				return args
 			
 	return null
