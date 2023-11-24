@@ -949,7 +949,7 @@ func cummedInBodypartByAdvanced(bodypartSlot, characterID, advancedData:Dictiona
 			ch.sendSexEvent(event)
 			sendSexEvent(event)
 	
-	return {loadSize=0.0,condomBroke=condomBroke}
+	return {loadSize=resultAmount,condomBroke=condomBroke}
 	
 func cummedInVaginaBy(characterID, sourceType = null, amountToTransfer = 1.0):
 	return cummedInBodypartBy(BodypartSlot.Vagina, characterID, sourceType, amountToTransfer)
