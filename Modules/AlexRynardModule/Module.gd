@@ -12,6 +12,8 @@ func getFlags():
 		"ch1HypnovisorHappened": flag(FlagType.Bool),
 		
 		"ch2SceneNum": flag(FlagType.Number),
+		"ch2CanEnterEngineering": flag(FlagType.Bool),
+		"ch2StayedWhenSpineBorked": flag(FlagType.Bool),
 	}
 
 func _init():
@@ -25,7 +27,9 @@ func _init():
 		"res://Modules/AlexRynardModule/Ch1/AlexS3NextDayScene.gd",
 		"res://Modules/AlexRynardModule/Ch1/AlexS4FixingDatapadsScene.gd",
 		"res://Modules/AlexRynardModule/Ch1/AlexS5HypnovisorIntroScene.gd",
-		]
+		
+		"res://Modules/AlexRynardModule/Ch2/AlexCh2s1Scene.gd",
+	]
 	characters = [
 
 	]
