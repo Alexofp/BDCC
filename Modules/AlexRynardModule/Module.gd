@@ -29,6 +29,8 @@ func _init():
 		"res://Modules/AlexRynardModule/Ch1/AlexS5HypnovisorIntroScene.gd",
 		
 		"res://Modules/AlexRynardModule/Ch2/AlexCh2s1Scene.gd",
+		
+		"res://Modules/AlexRynardModule/Trust/AlexTrustExercise1Scene.gd",
 	]
 	characters = [
 
