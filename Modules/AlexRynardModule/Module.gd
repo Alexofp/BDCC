@@ -14,6 +14,8 @@ func getFlags():
 		"ch2SceneNum": flag(FlagType.Number),
 		"ch2CanEnterEngineering": flag(FlagType.Bool),
 		"ch2StayedWhenSpineBorked": flag(FlagType.Bool),
+		
+		"1TrustCompleted": flag(FlagType.Bool),
 	}
 
 func _init():

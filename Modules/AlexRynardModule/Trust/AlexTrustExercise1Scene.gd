@@ -13,7 +13,7 @@ func _run():
 
 		saynn("[say=pc]I wanna try to do that trust exercise with you.[/say]")
 
-		if (GM.pc.hasBoundArms() || GM.pc.hasBlockedHands() || GM.pc.hasBoundLegs() || GM.pc.isBlindfolded() || GM.pc.isGagged()):
+		if (GM.pc.hasBoundArms() || GM.pc.hasBlockedHands() || GM.pc.hasBoundLegs() || GM.pc.isBlindfolded() || GM.pc.isGagged() || GM.pc.isWearingPortalPanties()):
 			saynn("Alex notices your restraints and hums")
 
 			saynn("[say=alexrynard]Kinky. But I need your body to be fully free.[/say]")
@@ -460,6 +460,226 @@ func _run():
 		addButton("RED", "Say this", "5_red")
 	if(state == "5_undress"):
 		playAnimation(StageScene.Duo, "stand", {npc="alexrynard", bodyState={naked=true}})
+		saynn("It's not hard to understand what he wants from you. And since you belong to him.. at least for the duration of this scene.. you proceed to obey.")
+
+		saynn("[say=pc]Yes, Sir.[/say]")
+
+		saynn("You {pc.undressMessage}. Alex's gaze follows the fluid motions of your hands as you do that. When you're done, there is no clothing left on you.. just your bulky metal collar.")
+
+		saynn(""+str("Your {pc.breasts} are now on full display. You're not sure if you're allowed to cover yourself up with your hands.. probably not." if GM.pc.hasNonFlatBreasts() else "Your {pc.breasts} are now visible but that's okay.")+" "+str("Your {pc.penis} is also out, just like your {pc.pussyStretch} pussy." if (GM.pc.hasPenis() && GM.pc.hasVagina()) else "")+""+str("Your {pc.penis} is also out.." if (GM.pc.hasPenis() && !GM.pc.hasVagina()) else "")+""+str("Your {pc.pussyStretch} pussy is also not hidden anymore.." if (!GM.pc.hasPenis() && GM.pc.hasVagina()) else "")+"")
+
+		addButton("Continue", "See what happens next", "6")
+	if(state == "6"):
+		saynn("Foxy's gaze.. so possessive. Alex begins another round of closely inspecting your body. He slowly circles around you, his eyes surely checking out your {pc.thick} butt in the process.")
+
+		saynn("[say=alexrynard]Good {pc.girl}. Nothing to be ashamed of.[/say]")
+
+		saynn("Yeah.. you've been naked many times. But this feels different. Alex limits his touches to gentle caressing, his palm landing on your body and carefully tracing its curves, sending shivers throughout..")
+
+		saynn("Occasionally, his fingers pass over your"+str(" rich" if GM.pc.hasBigBreasts() else " modest")+" chest too, his claws finding your perky nips and just slightly poking them.."+str(" Until some {pc.milk} comes out.." if GM.pc.canBeMilked() else "")+"")
+
+		if (GM.pc.isWearingChastityCage()):
+			saynn("Obviously, his hands also reach out to play with your chastity cage a bit. His claws catch onto the metal frame.. and tug on it, testing how tightly it sits. One of his paws gently cups your balls.")
+
+		elif (GM.pc.hasReachablePenis()):
+			saynn("Obviously, his hands also reach out down to your crotch. His hands slide over the surface of your {pc.penis}, testing how easy it is to cause a reaction. One of his paws gently cups your balls.")
+
+		elif (GM.pc.hasReachableVagina()):
+			saynn("Obviously, his hands also reach out down to your crotch. His hands don't dare to get too close, just gently brushing over the inner side of your thighs, caressing them.")
+
+		saynn("[say=alexrynard]Do you like that?[/say]")
+
+		addButton("Rougher", "Ask why isn't he being rougher", "6_brat")
+		addButton("Yes Sir", "Say this", "6_yessir")
+		addButton("RED", "Say this", "6_red")
+	if(state == "6_yessir"):
+		saynn("[say=pc]Yes, Sir..[/say]")
+
+		saynn("You feel your sense of control gradually fading away each time you say it.. You willingly give it away to Alex.. And it feels good. Because it's not just a one-way transaction.. His hands keep exploring your body, his touch authoritative. All the while.. you just stand still.")
+
+		saynn("[say=alexrynard]Yeah. No need to worry about anything. All you have to do is.. obey my words.[/say]")
+
+		saynn("He stands to the side of you before bringing his maw close to your ear. His warm breath is making your body tingle..")
+
+		saynn("His hand finds your hair. He whispers..")
+
+		saynn("[say=alexrynard]..like a slave that you are.[/say]")
+
+		addButton("Continue", "See what happens next", "7")
+	if(state == "7"):
+		playAnimation(StageScene.Duo, "hurt", {npc="alexrynard", bodyState={naked=true}})
+		saynn("..before increasing the grip on your hair and pulling back, forcing a painful noise out of you.")
+
+		saynn("[say=pc]Agh..[/say]")
+
+		saynn("Your chin is looking high up, your whole naked body is trembling. And yet, you don't dare to resist.")
+
+		saynn("[say=alexrynard]Say it. Are you a slave?[/say]")
+
+		saynn("Is it time?.. Is this him going full out, trying to make you safeword?")
+
+		addButton("Yes Sir", "Say this", "7_yessir")
+		addButton("No u", "Say this", "7_brat")
+		addButton("RED", "Say this", "7_red")
+	if(state == "7_yessir"):
+		saynn("But you don't give up that easily.. You're gritting your teeth and standing as still as possible.")
+
+		saynn("[say=pc]H-h.. Yes, Sir![/say]")
+
+		saynn("Alex sees your braveness.. and doesn't let go too, his grip on your hair only gets tighter while his other hand lands on your neck, making you feel even more helpless.")
+
+		saynn("[say=alexrynard]Yes what? Say it fully.[/say]")
+
+		addButton("I'm a slave", "Admit that you are a slave", "8_imslave")
+		addButton("It fully!", "Say exactly what he ordered you to say", "8_brat")
+		addButton("RED", "Say this", "8_red")
+	if(state == "8_imslave"):
+		playAnimation(StageScene.Duo, "stand", {npc="alexrynard", bodyState={naked=true,hard=true}})
+		saynn("He is not gonna break you that easily.")
+
+		saynn("[say=pc]Yes, Sir! I'm a slave! I'm your slave![/say]")
+
+		saynn("You keep enduring his painful grip even if an occasional groan escapes from your mouth. You feel degraded.. but why does it feel so good to say these words then?"+str(" Your pussy is soaking wet even though he didn't touch it.." if GM.pc.hasReachableVagina() else "")+""+str(" Your {pc.penis} is rock hard, dripping precum non-stop.." if GM.pc.hasReachablePenis() else "")+"")
+
+		saynn("[say=alexrynard]That's right, you are mine to play with. Mine to order around.[/say]")
+
+		saynn("He brings his maw to your ear again.")
+
+		saynn("[say=alexrynard]Mine to humiliate.[/say]")
+
+		saynn("He lets go of your neck and hair.. before producing a little black sharpie.")
+
+		saynn("Alex flicks off the pen cap and presses it against your skin.")
+
+		addButton("Let him", "Let Alex draw something on you", "9_let")
+		addButton("Steal it!", "Steal the sharpie", "9_brat")
+		addButton("RED", "Say it", "9_red")
+	if(state == "9_let"):
+		saynn("He didn't ask you to do anything.. but you still feel like you should say it..")
+
+		saynn("[say=pc]Yes, Sir..[/say]")
+
+		saynn("And so Alex begins writing various humiliating words on you, testing how much dirty stuff can he fit before you'd safeword.")
+
+		saynn("But you don't, you stand still, your posture straight, your gaze directed forward. All the while Alex covers your body with black ink..")
+
+		saynn("After he is done, he takes a step back and admires you again.")
+
+		saynn("[say=alexrynard]Great. You know how you look right now?[/say]")
+
+		addButton("Whore", "Tell him that you look like a whore", "10_whore")
+		if (GM.pc.getFemininity() >= 50):
+			addButton("Princess", "Tell him that you look like a princess!", "10_brat")
+		else:
+			addButton("Prince", "Tell him that you look like a prince!", "10_brat")
+		addButton("RED", "Say this", "10_red")
+	if(state == "10_whore"):
+		playAnimation(StageScene.Hug, "hug", {npc="pc", pc="alexrynard", npcBodyState={naked=true}})
+		saynn("With so many dirty things written on you there is only one right answer..")
+
+		saynn("[say=pc]A whore..[/say]")
+
+		saynn("Alex smiles, seeing you blush so hard.")
+
+		saynn("[say=alexrynard]What was that? A little louder please.[/say]")
+
+		saynn("[say=pc]I look like a slut. A whore.[/say]")
+
+		saynn("He walks up close again and gives you a tight hug.")
+
+		saynn("[say=alexrynard]My whore~.[/say]")
+
+		saynn("His warm embrace makes you all fuzzy inside..")
+
+		saynn("[say=alexrynard]This will be enough for today.[/say]")
+
+		saynn("Aww..")
+
+		saynn("[say=alexrynard]But I'm not done with you yet.[/say]")
+
+		addButton("Continue", "See what happens next", "aftercare")
+	if(state == "aftercare"):
+		setFlag("AlexRynardModule.1TrustCompleted", true)
+		playAnimation(StageScene.Cuddling, "idle", {pc="alexrynard", npc="pc", npcBodyState={naked=true}})
+		saynn("Instead of just ending the scene abruptly, he pulls you onto the couch for some light cuddling, his caring hands gently kneading your muscles, calming you down. Your mind slowly recovers from what just happened..")
+
+		if (bratCounter >= 10):
+			saynn("[say=alexrynard]I was keeping notes. You were a brat.. exactly "+str(bratCounter)+" times. Wow. You don't play by the rules, do you?[/say]")
+
+			saynn("You put your cute innocent eyes on, pretending to not understand what he is talking about.")
+
+		elif (bratCounter <= 0):
+			saynn("[say=alexrynard]I was keeping notes. You were a brat.. oh wow, you didn't brat even once. Such an obedient inmate.[/say]")
+
+			saynn("You can't help but to blush again, hearing him praise you.")
+
+		else:
+			saynn("[say=alexrynard]I was keeping notes. You were a brat.. exactly "+str(bratCounter)+" times. You like being cheeky sometimes, right? But you also don't mind obeying.[/say]")
+
+			saynn("You can't help but to blush again, hearing him describe you.")
+
+		saynn("[say=alexrynard]So yeah, that's it. Scene is over, you can stop calling me sir. Did you like it?[/say]")
+
+		addButton("It was fun", "Say this", "aftercare_fun")
+		addButton("Yes Sir", "Say this", "aftercare_yessir")
+		addButton("Okay-ish", "Say this", "aftercare_okayish")
+		addButton("Rougher!", "Ask him to be rougher next time", "aftercare_rougher")
+	if(state == "aftercare_fun"):
+		saynn("[say=pc]It was fun.[/say]")
+
+		saynn("Alex smiles and gently pats you on the head.")
+
+		saynn("[say=alexrynard]I'm glad you liked it. We could try some other things in the future.[/say]")
+
+		saynn("He spends some more time with you, cuddling.")
+
+		saynn("But at some time, all good things come to an end. Alex helps you to get back to the workshop at least.")
+
+		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "aftercare_yessir"):
+		saynn("[say=pc]Yes, Sir![/say]")
+
+		saynn("Alex sighs.. but pats you on the head anyway.")
+
+		saynn("[say=alexrynard]You're not my slave or pet or sub. Don't say that.[/say]")
+
+		saynn("Aww.")
+
+		saynn("[say=alexrynard]Glad you liked it though.[/say]")
+
+		saynn("He spends some more time with you, cuddling.")
+
+		saynn("But at some time, all good things come to an end. Alex helps you to get back to the workshop at least.")
+
+		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "aftercare_okayish"):
+		saynn("You try to find the best words for this.")
+
+		saynn("[say=pc]It was okay-ish.[/say]")
+
+		saynn("Alex shrugs.")
+
+		saynn("[say=alexrynard]Fair enough. We both probably learned something today so I'm not mad.[/say]")
+
+		saynn("He spends some more time with you, cuddling.")
+
+		saynn("But at some time, all good things come to an end. Alex helps you to get back to the workshop at least.")
+
+		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "aftercare_rougher"):
+		saynn("[say=pc]You totally could have been rougher![/say]")
+
+		saynn("Alex chuckles and pats you on the head.")
+
+		saynn("[say=alexrynard]You think so? Then I guess I have to step up my game for the next time, huh.[/say]")
+
+		saynn("[say=pc]Yeah![/say]")
+
+		saynn("He spends some more time with you, cuddling.")
+
+		saynn("But at some time, all good things come to an end. Alex helps you to get back to the workshop at least.")
+
+		addButton("Continue", "See what happens next", "endthescene")
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
@@ -497,6 +717,31 @@ func _react(_action: String, _args):
 
 	if(_action == "5_turnaround"):
 		bratCounter += 1
+
+	if(_action == "6_brat"):
+		bratCounter += 1
+
+	if(_action == "7_brat"):
+		bratCounter += 1
+
+	if(_action == "8_brat"):
+		bratCounter += 1
+
+	if(_action == "9_let"):
+		for _i in range(8):
+			GM.pc.addBodywritingRandom()
+
+	if(_action == "9_brat"):
+		for _i in range(5):
+			GM.pc.addBodywritingRandom()
+		getCharacter("alexrynard").addBodywritingRandom()
+		bratCounter += 1
+
+	if(_action == "10_brat"):
+		bratCounter += 1
+
+	if(_action == "aftercare"):
+		processTime(30*60)
 
 	setState(_action)
 
