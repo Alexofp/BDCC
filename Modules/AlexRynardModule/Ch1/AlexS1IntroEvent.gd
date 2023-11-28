@@ -13,6 +13,10 @@ func run(_triggerID, _args):
 	if(getFlag("AlexRynardModule.ch1StopAlexContent")):
 		return
 	
+	if(getFlag("AlexRynardModule.ch2SceneNum", 0) >= 1):
+		addButtonUnlessLate("Trust exercises", "Check them out", "do_trust")
+	
+	
 	if(!getFlag("AlexRynardModule.ch1IntroSceneHappened")):
 		addButtonUnlessLate("Lewd?", "Ask if he would be up for some sexy stuff", "startIntro")
 		return
@@ -25,8 +29,8 @@ func run(_triggerID, _args):
 		addButtonUnlessLate("Help", "Help him repair the datapads", "helpRepair")
 		return
 	
-	# REMOVE ME WHEN MORE CONTENT
-	addMessage("(( This is it for Alex's content for now. ))")
+
+	addButtonUnlessLate("Help", "Help him repair the datapads", "helpRepair2")
 	
 func react(_triggerID, _args):
 	if(getFlag("AlexRynardModule.ch1FirstFuckup") && !getFlag("AlexRynardModule.ch1NextDaySceneHappened")):
@@ -46,6 +50,12 @@ func onButton(_method, _args):
 	if(_method == "helpRepair"):
 		GM.main.endCurrentScene()
 		runScene("AlexS4FixingDatapadsScene")
+	if(_method == "helpRepair2"):
+		GM.main.endCurrentScene()
+		runScene("AlexCh2s1Scene")
 	if(_method == "watchWork"):
 		GM.main.endCurrentScene()
 		runScene("AlexS2SittingNearScene")
+	if(_method == "do_trust"):
+		GM.main.endCurrentScene()
+		runScene("AlexTrustExercisesMenuScene")

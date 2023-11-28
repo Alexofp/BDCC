@@ -458,6 +458,116 @@ func _run():
 		addButton("Undress", "Start taking off your clothing for him", "5_undress")
 		addButton("Turn around", "He clearly wants to see you from every angle!", "5_turnaround")
 		addButton("RED", "Say this", "5_red")
+	if(state == "5_red"):
+		saynn("Asking for you to take off your clothes.. is clearly too much.")
+
+		saynn("[say=pc]RED.[/say]")
+
+		saynn("So you draw the line there.")
+
+		saynn("Alex stops and takes a step back.")
+
+		saynn("[say=alexrynard]Made you uncomfortable?[/say]")
+
+		saynn("[say=pc]Yeah..[/say]")
+
+		saynn("He nods a few times.")
+
+		saynn("[say=alexrynard]I understand. Can just watch tv for a bit if you want.[/say]")
+
+		saynn("[say=pc]TV?[/say]")
+
+		saynn("[say=alexrynard]Yeah, just to relax.[/say]")
+
+		addButton("Sure", "TV sounds good", "5_red_tv")
+		addButton("It's fine", "You'd rather leave now", "5_red_notv")
+	if(state == "5_red_notv"):
+		saynn("[say=pc]It's fine.[/say]")
+
+		saynn("Alex scratches behind his head.")
+
+		saynn("[say=alexrynard]Well. Hope it was at least somewhat fun then.[/say]")
+
+		saynn("After that, he helps you to get back to the workshop.")
+
+		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "5_red_tv"):
+		playAnimation(StageScene.Duo, "sit", {npc="alexrynard", npcAction="sit"})
+		saynn("Might as well.")
+
+		saynn("[say=pc]Sure. I hate the news though.[/say]")
+
+		saynn("Alex shrugs and pulls out a cassette from under one of the tables.")
+
+		saynn("[say=alexrynard]We can watch this.[/say]")
+
+		saynn("You sit on a couch while Alex is inserting it into the tv.")
+
+		saynn("[say=pc]What is it?[/say]")
+
+		saynn("[say=alexrynard]Galaxy at Peace.[/say]")
+
+		saynn("Huh, you never saw that.")
+
+		saynn("[say=alexrynard]I'm not a fan of the fantasy genre myself but you gotta work with what you have.[/say]")
+
+		saynn("Oh well. You just relax and turn your brain off for the next 90 minutes. Alex is sitting near, occasionally producing a sigh.")
+
+		saynn("The movie is.. honestly.. trash. There is no conflict, all the characters are sickeningly-kind and everything always works out for them. But at least there is no corporate propaganda in this one. At least you think so. Lots of empty space though.")
+
+		saynn("And yet, Alex was still invested.")
+
+		saynn("[say=pc]Why do you like it?[/say]")
+
+		saynn("He shrugs.")
+
+		saynn("[say=alexrynard]I like the ship design.[/say]")
+
+		saynn("Ship design? You can't help but to look confused. Alex sees your confusion and smiles.")
+
+		saynn("[say=alexrynard]Why do you think I became an engineer?[/say]")
+
+		saynn("One childhood movie later, it was time to go back..")
+
+		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "5_turnaround"):
+		saynn("He clearly wants to see all of you from all angles! So you do exactly what he wants and take a few steps back so you can fit in his vision cone before doing a few twirls, becoming a little dizzy in the process.")
+
+		saynn("[say=pc]There you go, sir~. You like what you see?[/say]")
+
+		saynn("Alex sighs.")
+
+		saynn("[say=alexrynard]That's not what I meant.[/say]")
+
+		saynn("[say=pc]Huh? What did you mean then?[/say]")
+
+		saynn("He starts gesturing to you to come closer.")
+
+		saynn("[say=pc]What?[/say]")
+
+		saynn("[say=alexrynard]You know what.[/say]")
+
+		saynn("You tilt your head slightly.")
+
+		saynn("[say=pc]Pussy grab move?[/say]")
+
+		saynn("Alex facepalms.. and then approaches you himself, his palm swiftly reaching your ass, spanking it! You yelp as more spanks follow soon after, forcing you to get back to the middle of the room.")
+
+		saynn("[say=pc]Ow![/say]")
+
+		saynn("[say=alexrynard]Don't tell me that's not what you wanted.[/say]")
+
+		saynn("[say=pc]What if it wasn't though?[/say]")
+
+		saynn("[say=alexrynard]Then you would have safeworded.[/say]")
+
+		saynn("Alex puts on a cheeky smile. As much as you don't wanna publicly admit it, he might be right..")
+
+		saynn("[say=alexrynard]Now, it would be nice for you to do what I wanted this time.[/say]")
+
+		saynn("Fine-e-e..")
+
+		addButton("Undress", "Start taking off your clothing for him", "5_undress")
 	if(state == "5_undress"):
 		playAnimation(StageScene.Duo, "stand", {npc="alexrynard", bodyState={naked=true}})
 		saynn("It's not hard to understand what he wants from you. And since you belong to him.. at least for the duration of this scene.. you proceed to obey.")
@@ -492,6 +602,97 @@ func _run():
 		addButton("Rougher", "Ask why isn't he being rougher", "6_brat")
 		addButton("Yes Sir", "Say this", "6_yessir")
 		addButton("RED", "Say this", "6_red")
+	if(state == "6_red"):
+		playAnimation(StageScene.Duo, "stand", {npc="alexrynard"})
+		saynn("It becomes a little too uncomfortable for you..")
+
+		saynn("[say=pc]RED.[/say]")
+
+		saynn("Alex immediately takes a step back, giving you all the space. He nods.")
+
+		saynn("[say=alexrynard]Good job.[/say]")
+
+		saynn("You grab your clothes and quickly put them back on.")
+
+		saynn("[say=pc]Good job? Why? I safeworded.[/say]")
+
+		saynn("[say=alexrynard]Exactly, you knew where your limits are. And you didn't let me push past them. As a good submissive should.[/say]")
+
+		saynn("Submissive huh.")
+
+		saynn("[say=alexrynard]Now.. Do you wanna chill maybe? You know, just rest, watch some tv maybe. No is completely fine.[/say]")
+
+		addButton("Sure", "You don't mind watching some TV", "6_red_sure")
+		addButton("Nah", "You'd rather leave now", "6_red_leave")
+	if(state == "6_red_leave"):
+		saynn("[say=pc]It's fine, I will be going now..[/say]")
+
+		saynn("He nods.")
+
+		saynn("[say=alexrynard]Okay, well. Hope it was fun.[/say]")
+
+		saynn("He guides you back to the workshop after this.")
+
+		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "6_red_sure"):
+		playAnimation(StageScene.Cuddling, "idle", {pc="alexrynard", npc="pc"})
+		saynn("Might as well.")
+
+		saynn("[say=pc]Sure. I hate the news though.[/say]")
+
+		saynn("Alex shrugs and pulls out a cassette from under one of the tables.")
+
+		saynn("[say=alexrynard]We can watch this.[/say]")
+
+		saynn("You sit on a couch while Alex is inserting it into the tv.")
+
+		saynn("[say=pc]What is it?[/say]")
+
+		saynn("[say=alexrynard]Galaxy at Peace.[/say]")
+
+		saynn("Huh, you never saw that.")
+
+		saynn("[say=alexrynard]I'm not a fan of the fantasy genre myself but you gotta work with what you have.[/say]")
+
+		saynn("Oh well. Alex is carefully pulling you in for some light cuddles. You just relax and turn your brain off for the next 90 minutes. Alex sighs occasionally.")
+
+		saynn("The movie is.. honestly.. trash. There is no conflict, all the characters are sickeningly-kind and everything always works out for them. But at least there is no corporate propaganda in this one. At least you think so. Lots of empty space though.")
+
+		saynn("And yet, Alex was still invested.")
+
+		saynn("[say=pc]Why do you like it?[/say]")
+
+		saynn("He shrugs.")
+
+		saynn("[say=alexrynard]I like the ship design.[/say]")
+
+		saynn("Ship design? You can't help but to look confused. Alex sees your confusion and smiles.")
+
+		saynn("[say=alexrynard]Why do you think I became an engineer?[/say]")
+
+		saynn("One childhood movie later, it was time to go back..")
+
+		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "6_brat"):
+		saynn("[say=pc]I'd like it more if you were rougher![/say]")
+
+		saynn("You feel your sense of control gradually fading away as Alex establishes direct eye contact.")
+
+		saynn("[say=alexrynard]I thought you would never ask.[/say]")
+
+		saynn("[say=pc]What you mean?[/say]")
+
+		saynn("You try to take one step away from him.. but his hands kindly return you back to your spot. He is holding you in place.. while being as careful as possible with you.. and that is scary.. His voice is so sly..")
+
+		saynn("[say=alexrynard]No need to worry about anything.[/say]")
+
+		saynn("He stands to the side of you before bringing his maw close to your ear. His warm breath is making your body tingle..")
+
+		saynn("His hand finds your hair. He whispers..")
+
+		saynn("[say=alexrynard]Slave.[/say]")
+
+		addButton("Continue", "See what happens next", "7")
 	if(state == "6_yessir"):
 		saynn("[say=pc]Yes, Sir..[/say]")
 
@@ -519,8 +720,18 @@ func _run():
 		saynn("Is it time?.. Is this him going full out, trying to make you safeword?")
 
 		addButton("Yes Sir", "Say this", "7_yessir")
-		addButton("No u", "Say this", "7_brat")
-		addButton("RED", "Say this", "7_red")
+		addButton("It", "Say it", "7_brat")
+		addButton("RED", "Say this", "6_red")
+	if(state == "7_brat"):
+		saynn("[say=pc]It![/say]")
+
+		saynn("Alex gets confused by you saying that. His hand is still gripping your hair tightly while his other hand lands on your neck, making you feel even more helpless.")
+
+		saynn("[say=alexrynard]What? I'm asking you to say it fully.[/say]")
+
+		addButton("I'm a slave", "Admit that you are a slave", "8_imslave")
+		addButton("It fully!", "Say exactly what he ordered you to say", "8_brat")
+		addButton("RED", "Say this", "6_red")
 	if(state == "7_yessir"):
 		saynn("But you don't give up that easily.. You're gritting your teeth and standing as still as possible.")
 
@@ -532,7 +743,34 @@ func _run():
 
 		addButton("I'm a slave", "Admit that you are a slave", "8_imslave")
 		addButton("It fully!", "Say exactly what he ordered you to say", "8_brat")
-		addButton("RED", "Say this", "8_red")
+		addButton("RED", "Say this", "6_red")
+	if(state == "8_brat"):
+		playAnimation(StageScene.Duo, "stand", {npc="alexrynard", bodyState={naked=true,hard=true}})
+		saynn("Such an easy task!")
+
+		saynn("[say=pc]It fully![/say]")
+
+		saynn("Alex quickly understands what you did. And he isn't exactly happy about it.")
+
+		saynn("[say=alexrynard]No, little brat. You're nothing but a slave. Worthless little slave that needs to be shown her place.[/say]")
+
+		saynn("You keep enduring his painful grip even if an occasional groan escapes from your mouth. You feel degraded.. but why does it feel so good to hear these words then?"+str(" Your pussy is soaking wet even though he didn't touch it.." if GM.pc.hasReachableVagina() else "")+""+str(" Your {pc.penis} is rock hard, dripping precum non-stop.." if GM.pc.hasReachablePenis() else "")+"")
+
+		saynn("[say=alexrynard]That's right, you are mine to play with. Mine to order around.[/say]")
+
+		saynn("He brings his maw to your ear again.")
+
+		saynn("[say=alexrynard]Mine to humiliate.[/say]")
+
+		saynn("He lets go of your neck and hair.. before producing a little black sharpie.")
+
+		saynn("Alex flicks off the pen cap and presses it against your skin.")
+
+		saynn("If there ever was a time to safeword.. it's probably now..")
+
+		addButton("Let him", "Let Alex draw something on you", "9_let")
+		addButton("Steal it!", "Steal the sharpie", "9_brat")
+		addButton("RED", "Say it", "6_red")
 	if(state == "8_imslave"):
 		playAnimation(StageScene.Duo, "stand", {npc="alexrynard", bodyState={naked=true,hard=true}})
 		saynn("He is not gonna break you that easily.")
@@ -553,7 +791,30 @@ func _run():
 
 		addButton("Let him", "Let Alex draw something on you", "9_let")
 		addButton("Steal it!", "Steal the sharpie", "9_brat")
-		addButton("RED", "Say it", "9_red")
+		addButton("RED", "Say it", "6_red")
+	if(state == "9_brat"):
+		saynn("Just before the sharpie starts drawing something on you, your hands manage to steal it and draw some dirty stuff on him first! Take that!")
+
+		saynn("[say=pc]Get humiliated![/say]")
+
+		saynn("You knew that this wouldn't end well. Humiliating your sir.. it was obvious that the consequences were gonna come fast.. So you better just put on an innocent smile and hope they will be fun!")
+
+		saynn("Alex sighs.. and then disarms you with one swift motion before wrenching your arm behind your back and proceeding to scribble things all over you..")
+
+		saynn("[say=pc]Ow!..[/say]")
+
+		saynn("[say=alexrynard]Indeed, ow.[/say]")
+
+		saynn("After he is done, he takes a step back and admires you again.")
+
+		saynn("[say=alexrynard]Great. You know how you look right now?[/say]")
+
+		addButton("Whore", "Tell him that you look like a whore", "10_whore")
+		if (GM.pc.getFemininity() >= 50):
+			addButton("Princess", "Tell him that you look like a princess!", "10_brat")
+		else:
+			addButton("Prince", "Tell him that you look like a prince!", "10_brat")
+		addButton("RED", "Say this", "6_red")
 	if(state == "9_let"):
 		saynn("He didn't ask you to do anything.. but you still feel like you should say it..")
 
@@ -572,7 +833,42 @@ func _run():
 			addButton("Princess", "Tell him that you look like a princess!", "10_brat")
 		else:
 			addButton("Prince", "Tell him that you look like a prince!", "10_brat")
-		addButton("RED", "Say this", "10_red")
+		addButton("RED", "Say this", "6_red")
+	if(state == "10_brat"):
+		playAnimation(StageScene.Hug, "hug", {npc="pc", pc="alexrynard", npcBodyState={naked=true}})
+		saynn("Your body says everything about who you are right now. And yet.. There is still only one correct answer..")
+
+		if (GM.pc.getFemininity() >= 50):
+			saynn("[say=pc]Bitch, I'm a princess.[/say]")
+
+		else:
+			saynn("[say=pc]Bitch, I'm a prince.[/say]")
+
+		saynn("Alex smiles, hearing your bold answer.")
+
+		saynn("[say=alexrynard]A very cute one, yeah~.[/say]")
+
+		saynn("Did he really just call you cute?!")
+
+		saynn("[say=pc]Yes, I'm.. no.. no you! I'm.. a..[/say]")
+
+		saynn("He walks up close again and gives you a tight hug.")
+
+		if (GM.pc.getFemininity() >= 50):
+			saynn("[say=alexrynard]My spoiled little princess~.[/say]")
+
+		else:
+			saynn("[say=alexrynard]My spoiled little prince~.[/say]")
+
+		saynn("His warm embrace coupled with his words make you all fuzzy inside..")
+
+		saynn("[say=alexrynard]This will be enough for today.[/say]")
+
+		saynn("Aww..")
+
+		saynn("[say=alexrynard]But I'm not done with you yet.[/say]")
+
+		addButton("Continue", "See what happens next", "aftercare")
 	if(state == "10_whore"):
 		playAnimation(StageScene.Hug, "hug", {npc="pc", pc="alexrynard", npcBodyState={naked=true}})
 		saynn("With so many dirty things written on you there is only one right answer..")
@@ -673,7 +969,25 @@ func _run():
 
 		saynn("[say=alexrynard]You think so? Then I guess I have to step up my game for the next time, huh.[/say]")
 
-		saynn("[say=pc]Yeah![/say]")
+		saynn("[say=pc]Yeah! You also said that you will push me to safeword no matter what, what's up with that?[/say]")
+
+		saynn("Alex shrugs.")
+
+		saynn("[say=alexrynard]I said that to make sure you weren't afraid to safeword.[/say]")
+
+		saynn("[say=pc]So you lied?[/say]")
+
+		saynn("[say=alexrynard]To make you feel better.[/say]")
+
+		saynn("[say=pc]It was still a lie though..[/say]")
+
+		saynn("[say=alexrynard]You feel betrayed?[/say]")
+
+		saynn("You'd say yes but his serious tone makes you want to turn down your bratiness for a bit..")
+
+		saynn("[say=pc]Not really.[/say]")
+
+		saynn("[say=alexrynard]Then.. I don't think it was a lie.[/say]")
 
 		saynn("He spends some more time with you, cuddling.")
 
@@ -728,11 +1042,11 @@ func _react(_action: String, _args):
 		bratCounter += 1
 
 	if(_action == "9_let"):
-		for _i in range(8):
+		for _i in range(5):
 			GM.pc.addBodywritingRandom()
 
 	if(_action == "9_brat"):
-		for _i in range(5):
+		for _i in range(8):
 			GM.pc.addBodywritingRandom()
 		getCharacter("alexrynard").addBodywritingRandom()
 		bratCounter += 1
