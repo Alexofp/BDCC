@@ -531,7 +531,7 @@ func _run():
 
 			saynn("You explain that it helps against excessive stretching.. which obviously happens a lot when you exercise.")
 
-			saynn("jacki: Oh. Well thank you. You're so kind.")
+			saynn("[say=jacki] Oh. Well thank you. You're so kind.[/say]")
 
 		saynn("From now on her holes should be less loose by about 50%.")
 
