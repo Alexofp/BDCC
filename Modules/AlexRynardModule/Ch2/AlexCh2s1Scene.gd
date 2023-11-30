@@ -601,6 +601,260 @@ func _run():
 
 		saynn("Why not, might as well.")
 
+		addButton("Continue", "See what happens next", "time4_showrepair")
+	if(state == "time4_showrepair"):
+		saynn("And so you listen carefully while Alex explains how these work. He shows you that most of it is just for show, underneath the sturdy case there is just a small little board that has all buttons wired to.")
+
+		saynn("He shows you that this particular one has a burned out bluespace crystal.")
+
+		saynn("[say=alexrynard]Crystal is what transfers the data. You send power through it and it starts vibrating at a very specific frequency. But sending too much current will crack it.[/say]")
+
+		saynn("[say=pc]Someone really went to town, shocking inmates.[/say]")
+
+		saynn("[say=alexrynard]Probably. They can withstand a lot of heat but they're expensive. So we use small ones.[/say]")
+
+		saynn("You nod.")
+
+		saynn("[say=alexrynard]Bluespace allows us to transport power too. But the device still needs a battery to store it.[/say]")
+
+		saynn("Time passes. Alex finishes his little lesson and lets you try fixing one.")
+
+		saynn("Right.. the battery is not leaky. No obvious visual defects too. Time to disassemble it.")
+
+		saynn("You reach the main board and see obvious corrosion. You look at Alex but he stays quiet, letting you fix it yourself.")
+
+		saynn("Well, you should probably clean it off. You grab a little alcohol wipe and start trying to remove it.")
+
+		saynn("Ouch! You accidentally short-circuit the main button, causing the board to send a signal to your collar. Your hands are shaking from the electricity that is coursing through your body!")
+
+		saynn("It's a small shock.. but since the button circuit is still complete, the board keeps sending that shock to your collar.")
+
+		saynn("Alex sees how much discomfort this brings and quickly removes the battery from the device that was still in it.")
+
+		saynn("[say=alexrynard]That's why you follow my instructions.[/say]")
+
+		saynn("Oh well. You pant softly and rub your neck.")
+
+		saynn("[say=pc]Thanks..[/say]")
+
+		saynn("[say=alexrynard]Uh huh.[/say]")
+
+		addButton("Continue", "See what happens next", "workend_check")
+	if(state == "toolate"):
+		playAnimation(StageScene.Duo, "stand", {npc="alexrynard", npcAction="sit"})
+		saynn("Many hours pass. Station's lighting begins to dim, signaling that it is very late.")
+
+		saynn("[say=alexrynard]That's the end of my shift.[/say]")
+
+		saynn("He hands you a chip.")
+
+		saynn("[say=alexrynard]Thanks. If you want, we can do something now.[/say]")
+
+		saynn("He is probably talking about the trust exercises.")
+
+		addButton("Just leave", "It's fine", "endthescene")
+		addButton("Trust exercises", "Might as well get a little bit kinky", "start_trust")
+	if(state == "aftersomefixing"):
+		playAnimation(StageScene.Duo, "stand", {npc="alexrynard", npcAction="sit"})
+		saynn("Many hours pass. The two piles of broken devices got a bit smaller. Which is great!")
+
+		saynn("[say=alexrynard]Time for a break.[/say]")
+
+		saynn("You and him put your current work away for now.")
+
+		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "time5"):
+		playAnimation(StageScene.Duo, "sit", {npc="alexrynard", npcAction="sit"})
+		saynn("Datapads and shock remotes won't fix themselves. So might as well get a few of them fixed.")
+
+		saynn("You can't help but notice that Alex looks a bit sad today. More sad than usual.")
+
+		saynn("[say=pc]Everything is okay?[/say]")
+
+		saynn("[say=alexrynard]Yeah.[/say]")
+
+		saynn("[say=pc]You don't look okay.[/say]")
+
+		saynn("[say=alexrynard]Just thinking.[/say]")
+
+		saynn("Sometimes you just can't escape those moods it seems.")
+
+		saynn("Probably better not to bug him with more questions, focussing is easier when you don't have distractions.")
+
+		addButton("Continue", "See what happens next", "workend_check")
+	if(state == "time6"):
+		playAnimation(StageScene.Duo, "sit", {npc="alexrynard", npcAction="sit"})
+		saynn("So much time has passed. So many devices were repaired. And yet, the two tiles are still huge. You feel like you begin to slip into the same state as Alex. A state where staring at a wall is more interesting than actual work.")
+
+		saynn("The initial enthusiasm is gone.. replaced by the monotony of work.. When will it end?")
+
+		saynn("[say=pc]What are the chances that these are the last of them?[/say]")
+
+		saynn("Alex shrugs.")
+
+		saynn("[say=alexrynard]Pretty low.[/say]")
+
+		saynn("[say=pc]Then.. Why are we doing this?[/say]")
+
+		saynn("[say=alexrynard]Saving costs for the station.[/say]")
+
+		saynn("[say=pc]Wouldn't working on new prototypes bring outside funding?[/say]")
+
+		saynn("He shrugs again.")
+
+		saynn("[say=alexrynard]The captain knows what to do. He knows how to manage risks.[/say]")
+
+		saynn("[say=pc]Does he?[/say]")
+
+		saynn("[say=alexrynard]Better than I do.[/say]")
+
+		saynn("[say=pc]So you trust him?[/say]")
+
+		saynn("He shrugs for the third time.")
+
+		saynn("[say=alexrynard]Gotta trust someone else if you can't trust yourself.[/say]")
+
+		saynn("Now you both have something to think about.")
+
+		addButton("Continue", "See what happens next", "workend_check")
+	if(state == "time7"):
+		playAnimation(StageScene.Duo, "sit", {npc="alexrynard", npcAction="sit"})
+		saynn("Time to test your patience again. Even though the piles of devices do decrease, you feel like you're putting in way too much effort for this. Even though you're doing everything right, it's hard not to feel like you're burning out..")
+
+		saynn("Even if you complete this batch one day, do you even know what your reward is?")
+
+		saynn("Yeah, you do.. You will get to fix more devices when they bring them in. Thrilling.")
+
+		saynn("Alex is probably feeling the same way, he is just not showing it.")
+
+		saynn("You were about to flip the table.. metaphorically.. when you suddenly hear a female voice.")
+
+		saynn("[say=eliza]Um. Hey there. Don't know exactly who to talk to here.[/say]")
+
+		addButton("Continue", "See what happens next", "time7_eliza")
+	if(state == "time7_eliza"):
+		addCharacter("eliza")
+		playAnimation(StageScene.Duo, "stand", {pc="alexrynard", npc="eliza"})
+		saynn("Alex looks up and sees a feline doctor standing near.")
+
+		saynn("[say=alexrynard]What's up?[/say]")
+
+		saynn("[say=eliza]I'm doctor Quinn. I'm not sure if we ever met.[/say]")
+
+		saynn("[say=alexrynard]Probably not.[/say]")
+
+		saynn("You cough a few times, making Alex snap out of his thinking mood.")
+
+		saynn("[say=alexrynard]Alex Rynard. What can I do for you, doctor Quinn?[/say]")
+
+		saynn("[say=eliza]Oh, we're sharing first names too, huh~. I'm Eliza. And I need.. some help.[/say]")
+
+		saynn("Alex puts his work away and stands up. You help to put his tools away too.")
+
+		saynn("[say=alexrynard]By help you mean.. repairs? Because..[/say]")
+
+		saynn("Eliza is quick to cut him off.")
+
+		saynn("[say=eliza]I know what you are gonna say. Blah-blah-blah, go through the official channels, blah.[/say]")
+
+		saynn("Alex tilts his head.")
+
+		saynn("[say=alexrynard]Yeah, that's what they are for. Create a new task and someone's gonna get it repaired.[/say]")
+
+		saynn("Eliza boldly closes the distance, her feline paws carefully fix the collar of his orange uniform.")
+
+		saynn("[say=eliza]What if we don't though.. Just hear me out.. It's probably something small and silly.. like, some nurse probably flicked a wrong switch.. I really-really-really don't wanna wait multiple weeks to get it fixed..[/say]")
+
+		saynn("Alex sighs.. and then starts to subtly shake his head.")
+
+		saynn("[say=alexrynard]Procedures are there for a reason, doctor Quinn.[/say]")
+
+		saynn("[say=eliza]Fuck the procedures. Is what you are doing really that much more interesting? If you're worrying about the reward, we can talk about it, I'm not against.. offering something.[/say]")
+
+		saynn("Eliza bites her lip playfully. But that only makes Alex sigh again. He looks at you.. he sees your eyes full of hope. You feel like you shouldn't intervene though.")
+
+		saynn("[say=alexrynard]I'm very sorry, doctor Quinn. File a new task and someone will look at it very soon. Just set the priority to high.[/say]")
+
+		saynn("Quinn pouts for a second.. and then nods before turning away, preparing to leave. Alex begins to sit back down.. Eliza looks back over her shoulder.")
+
+		saynn("[say=eliza]..I think it was your machine. RynardOS, wasn't it?[/say]")
+
+		saynn("Alex raises a brow.")
+
+		saynn("[say=alexrynard]How did you..[/say]")
+
+		saynn("Eliza turns around again and smiles.")
+
+		saynn("[say=eliza]I tapped on the AlphaCorp logo in the 'about' menu. A cute jumping foxy appears if you do that many times. That's your work, right~?[/say]")
+
+		saynn("[say=alexrynard]Yeah, I added a little easter egg.. But still, how did you..[/say]")
+
+		saynn("Eliza chuckles.")
+
+		saynn("[say=eliza]Work is so-o-o-o boring sometimes. You probably know what I'm talking about. I stumbled upon it randomly, I promise~.[/say]")
+
+		saynn("Now you're kinda curious about what that machine is..")
+
+		saynn("[say=eliza]So-o.. if you think someone else should take a look at that machine, okay..[/say]")
+
+		saynn("Now it's Alex's turn to cut Eliza off.")
+
+		saynn("[say=alexrynard]I will do it.[/say]")
+
+		saynn("Eliza smiles and nods-nods many times.")
+
+		saynn("Alex looks at you. You fully expect him to tie you up and leave you here or something.. But.. Alex nods you to follow. Ohh! Exciting!")
+
+		saynn("You quickly put away all of the unfinished work and tools.")
+
+		saynn("[say=eliza]Oh, you have an apprentice?[/say]")
+
+		saynn("[say=alexrynard]More like a helper.[/say]")
+
+		saynn("Eliza tilts her head and smiles while looking at you.")
+
+		addButton("Follow", "See where the life brings you", "time7_lift")
+	if(state == "time7_lift"):
+		aimCameraAndSetLocName("mining_elevator")
+		saynn("You follow Alex and Eliza to the lift. She presses the 'MD' button and soon the doors close followed by an annoying screech as the whole room begins moving.")
+
+		saynn("Foxy stands still.. but Eliza doesn't. She leans against one of the walls.")
+
+		saynn("[say=eliza]I think I know why you added that easter egg~.[/say]")
+
+		saynn("[say=alexrynard]A lot of developers add little hidden things like that. Just for fun.[/say]")
+
+		saynn("Eliza is so smug, she can barely control it.")
+
+		saynn("[say=eliza]Nah-h~. I think I know exactly why you did it, you little sly fox~.[/say]")
+
+		saynn("Alex looks at her, his expression is slightly confused.")
+
+		saynn("[say=alexrynard]And why?[/say]")
+
+		saynn("Eliza bites her lip.")
+
+		saynn("[say=eliza]I'm not gonna tell you~. I think you don't even realize why you did it yourself.[/say]")
+
+		saynn("[say=alexrynard]And I think you should stop tampering with expensive equipment, doctor Quinn.[/say]")
+
+		saynn("[say=eliza]Make me~.[/say]")
+
+		saynn("So bold. Eliza is so cheeky that Alex can't help but to stay quiet.")
+
+		saynn("[say=eliza]Aw. Listen, you're asking a curious cat to stop being curious. That is just not happening.[/say]")
+
+		saynn("[say=alexrynard]There are ways.[/say]")
+
+		saynn("Eliza bites her lip. A lot of biting is happening lately..")
+
+		saynn("[say=eliza]Ohh~. I trust you, sly foxy.[/say]")
+
+		saynn("The lift's doors finally open. Time to go.")
+
+		addButton("Continue", "See what happens next", "time7_nearmachine")
+	if(state == "time7_nearmachine"):
+		aimCameraAndSetLocName("med_milkingroom")
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
@@ -667,6 +921,34 @@ func _react(_action: String, _args):
 	if(_action == "time3_eavesdrop"):
 		setFlag("AlexRynardModule.ch2EavesdroppedCaptain", true)
 		increaseFlag("PortalPantiesModule.Alex_BusyDays")
+
+	if(_action == "time4_showrepair"):
+		processTime(60*60*3)
+		GM.pc.addCredits(1)
+
+	if(_action == "workend_check"):
+		processTime(RNG.randi_range(6,9) * 60 * 60)
+		GM.pc.addCredits(1)
+		
+		if(GM.main.isVeryLate()):
+			setState("toolate")
+		else:
+			setState("aftersomefixing")
+		return
+
+	if(_action == "start_trust"):
+		endScene()
+		runScene("AlexTrustExercisesMenuScene")
+		return
+
+	if(_action == "time7_eliza"):
+		processTime(10*60)
+
+	if(_action == "time7_lift"):
+		processTime(5*60)
+
+	if(_action == "time7_nearmachine"):
+		processTime(3*60)
 
 	setState(_action)
 
