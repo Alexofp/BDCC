@@ -1,6 +1,9 @@
 extends SceneBase
 
 var howManyTimes = 0
+var toldFuckoff = false
+var tookPills = false
+var didDiag = false
 
 func _init():
 	sceneID = "AlexCh2s1Scene"
@@ -852,9 +855,278 @@ func _run():
 
 		saynn("The lift's doors finally open. Time to go.")
 
-		addButton("Continue", "See what happens next", "time7_nearmachine")
+		addButton("Continue", "See what happens next", "time7_in_lobby")
+	if(state == "time7_in_lobby"):
+		aimCameraAndSetLocName("med_lobby_start")
+		addCharacter("avy")
+		playAnimation(StageScene.Duo, "stand", {npc="avy"})
+		saynn("You three enter the medical lobby. Bright lights, sterile white lights, nurses everywhere.")
+
+		saynn("Alex and Eliza walk up to the counter and begin chatting about something. You were meant to follow when..")
+
+		saynn("[say=avy]Pss-st. You.[/say]")
+
+		saynn("A foxy with a dark fur swiftly walks up to you, her voice quiet.")
+
+		saynn("[say=avy]Steal something while you're there.[/say]")
+
+		saynn("Huh?")
+
+		saynn("[say=pc]What?[/say]")
+
+		saynn("[say=avy]Anything. Meds, tools, drugs, random syringes.[/say]")
+
+		addButton("Fuck off", "Tell that foxy to fuck off", "time7_avy_fuckoff")
+		addButton("Why", "Ask why should you do it", "time7_avy_why")
+	if(state == "time7_avy_fuckoff"):
+		saynn("You're not planning to betray Alex today.")
+
+		saynn("[say=pc]Fuck off, I'm not gonna do that.[/say]")
+
+		saynn("The dark foxy rolls her eyes.")
+
+		saynn("[say=avy]Really? You would rather be their bitch? Whatever, your loss.[/say]")
+
+		saynn("Eliza finally opens the staff-only door. Better follow her.")
+
+		addButton("Follow", "See where the life brings you", "time7_nearmachine")
+	if(state == "time7_avy_why"):
+		saynn("[say=pc]And why would I do that?[/say]")
+
+		saynn("The dark foxy flashes a credits chip before your eyes.")
+
+		saynn("[say=avy]I will pay you twenty creds for something good.[/say]")
+
+		saynn("[say=pc]I will think about it.[/say]")
+
+		saynn("Eliza finally opens the staff-only door. Better follow her.")
+
+		addButton("Follow", "See where the life brings you", "time7_nearmachine")
 	if(state == "time7_nearmachine"):
 		aimCameraAndSetLocName("med_milkingroom")
+		removeCharacter("avy")
+		playAnimation(StageScene.Duo, "stand", {npc="eliza", pc="alexrynard"})
+		saynn("You follow Eliza and Alex through the clean corridor until she reaches one of the doors. When it opens up, you see a huge open space divided into multiple.. stalls.. each one having some special equipment. Equipment designed to extract various fluids from you..")
+
+		saynn("[say=alexrynard]Cozy.[/say]")
+
+		saynn("[say=eliza]You've never been here? It's a very relaxing experience, you should try it. It can help to take the edge off~.[/say]")
+
+		saynn("[say=alexrynard]I'm sure it can.[/say]")
+
+		saynn("Milking is not why you came here so Eliza brings you into one of the secluded sections.. The lighting here is way dimmer. The equipment.. quite specialized too.")
+
+		saynn("In the middle of the room there is a special table that is attached to a computer. The table also has all sorts of.. manipulators.. some being pretty lewd. Everything looks extremely clean, you can hear a quiet squeak when dragging your finger over the surfaces.")
+
+		saynn("[say=eliza]There it is. Your creation. And it doesn't turn on anymore, sadly.[/say]")
+
+		saynn("Alex nods and tries the obvious, pressing the power on button a few times. No reaction.")
+
+		saynn("[say=alexrynard]What were you doing with it when it broke?[/say]")
+
+		saynn("Eliza scratches her nose and starts to hum.")
+
+		saynn("[say=eliza]Um.. well.. we were just using it as normal.[/say]")
+
+		saynn("[say=alexrynard]Define 'normal'.[/say]")
+
+		saynn("[say=eliza]Well-l-l.. You want the whole process described? With all the.. juicy.. details~?[/say]")
+
+		saynn("Alex sighs and shakes his head. He grabs a screwdriver and looks at the panels. But before unscrewing anything, he looks at you.")
+
+		saynn("[say=alexrynard]Hey. The computer should be plugged into the wall somewhere. Check the plug, tug on it a bit, you know the drill.[/say]")
+
+		saynn("Seems easy enough.")
+
+		addButton("Plug", "Go look for it", "time7_plug")
+	if(state == "time7_plug"):
+		playAnimation(StageScene.Solo, "stand")
+		saynn("There aren't any obvious wires coming from the computer.. but that makes sense. Otherwise they would be a tripping hazard. But that also means that you have to search for that plug.")
+
+		saynn("You follow the perimeter of this little secluded space. There are drawers, tables and equipment placed around the walls so you have to move each one to see if the plug is behind it.")
+
+		saynn("Huh. Behind one of the drawers you find something interesting, a few pill bottles covered in multiple levels of dust. They must have rolled there by accident a long time ago.")
+
+		addButton("Ignore", "Better not touch them", "time7_pills_ignore")
+		addButton("Take them", "Free pills!", "time7_get_pills")
+		addButton("Let Eliza know", "Maybe these are important", "time7_let_eliza_know")
+	if(state == "time7_pills_ignore"):
+		saynn("Yeah, who knows, maybe these pills expired a few years ago and now they're poisonous. So you just put the drawer back and continue searching.")
+
+		saynn("Eventually you do find a plug! It's plugged into a unique-looking socket on the wall, wires from it instantly go under the floor tiles.")
+
+		saynn("[say=pc]I think I found it.[/say]")
+
+		saynn("[say=alexrynard]Go ahead, worst case we turn off someone's life support.[/say]")
+
+		saynn("Eliza chuckles.")
+
+		saynn("[say=eliza]It should be fine.[/say]")
+
+		saynn("And so you disconnect the plug.. wait a few seconds.. and plug it back in, making sure it's sealed tightly.")
+
+		saynn("[say=pc]Done.[/say]")
+
+		saynn("Alex tries to turn on the computer again.. but nothing happens.")
+
+		saynn("[say=alexrynard]Right. I guess I have to look at the internals.[/say]")
+
+		addButton("Continue", "See what happens next", "time7_alexfixes_the_thing")
+	if(state == "time7_get_pills"):
+		saynn("No one will miss these for sure. So why not use this opportunity.")
+
+		saynn("You sneakily grab the dusty pill bottles and store them away before putting the drawer back where it was.")
+
+		saynn("Then you just continue searching. Eventually you do find a plug! It's plugged into a unique-looking socket on the wall, wires from it instantly go under the floor tiles.")
+
+		saynn("[say=pc]I think I found it.[/say]")
+
+		saynn("[say=alexrynard]Go ahead, worst case we turn off someone's life support.[/say]")
+
+		saynn("Eliza chuckles.")
+
+		saynn("[say=eliza]It should be fine.[/say]")
+
+		saynn("And so you disconnect the plug.. wait a few seconds.. and plug it back in, making sure it's sealed tightly.")
+
+		saynn("[say=pc]Done.[/say]")
+
+		saynn("Alex tries to turn on the computer again.. but nothing happens.")
+
+		saynn("[say=alexrynard]Right. I guess I have to look at the internals.[/say]")
+
+		addButton("Continue", "See what happens next", "time7_alexfixes_the_thing")
+	if(state == "time7_let_eliza_know"):
+		saynn("Better ask the doctor, maybe these are some important pills that were missing.")
+
+		saynn("[say=pc]Uh.. There are some old pill bottles here. So old that they are covered with dust. But they still have something inside.[/say]")
+
+		saynn("Eliza hums.")
+
+		saynn("[say=eliza]Really? Nice find, thank you. Throw them into the trash bin.[/say]")
+
+		saynn("[say=pc]But why? What if they're not expired yet.[/say]")
+
+		saynn("Eliza shrugs.")
+
+		saynn("[say=eliza]I do like experimenting. But in this particular situation, better safe than sorry. They are probably written off already anyway.[/say]")
+
+		saynn("You grab them and approach the trash bin.")
+
+		addButton("Throw pills out", "Dispose of the old pills", "time7_let_eliza_know_dispose")
+		addButton("Pretend to", "Pretend that you are throwing them out but actually keep them instead", "time7_let_eliza_know_pretend")
+	if(state == "time7_let_eliza_know_dispose"):
+		if (!tookPills):
+			saynn("Oh well, better get rid of them then.")
+
+			saynn("You throw out the pill bottles and then you just continue searching.")
+
+		else:
+			saynn("You can't forgive such a wasteful approach. So instead of obeying and throwing the pills out, you just pretend to, keeping the pills to yourself.")
+
+			saynn("After that, you just continue searching.")
+
+		saynn("Eventually you do find a plug! It's plugged into a unique-looking socket on the wall, wires from it instantly go under the floor tiles.")
+
+		saynn("[say=pc]I think I found it.[/say]")
+
+		saynn("[say=alexrynard]Go ahead, worst case we turn off someone's life support.[/say]")
+
+		saynn("Eliza chuckles.")
+
+		saynn("[say=eliza]It should be fine.[/say]")
+
+		saynn("And so you disconnect the plug.. wait a few seconds.. and plug it back in, making sure it's sealed tightly.")
+
+		saynn("[say=pc]Done.[/say]")
+
+		saynn("Alex tries to turn on the computer again.. but nothing happens.")
+
+		saynn("[say=alexrynard]Right. I guess I have to look at the internals.[/say]")
+
+		addButton("Continue", "See what happens next", "time7_alexfixes_the_thing")
+	if(state == "time7_alexfixes_the_thing"):
+		playAnimation(StageScene.Solo, "kneel", {pc="alexrynard"})
+		saynn("You return to Alex and just watch him try to fix his own machine.")
+
+		saynn("He uses the screwdriver to remove one of the panels, exposing the wiring. He unplugs some of the wires, giving him access to the motherboard.")
+
+		saynn("[say=alexrynard]Why.. is this scent.[/say]")
+
+		saynn("Yeah, you can feel it too. Hard to pin-point what it smells like in there..")
+
+		saynn("Eliza suddenly begins to avoid any eye contact for some reason, she rubs her snout more and coughs a few times.")
+
+		saynn("[say=eliza]Khm.. khm..[/say]")
+
+		saynn("Alex unscrews more things.. and then takes out the whole board.")
+
+		saynn("And as he does it.. drops of some.. white fluid.. begin dripping off of it.")
+
+		saynn("[say=alexrynard]The heck is this.[/say]")
+
+		saynn("[say=eliza]Khm..[/say]")
+
+		saynn("[say=pc]It's not very thick. So it's probably.. milk?[/say]")
+
+		saynn("[say=alexrynard]Why is there milk in the computer?[/say]")
+
+		saynn("Eliza blushes softly.")
+
+		saynn("[say=eliza]Listen.. stuff gets intense sometimes, this machine is really good.[/say]")
+
+		saynn("Alex rolls his eyes and sighs.")
+
+		saynn("[say=alexrynard]I see. Well, it busted a few capacitors here and there.[/say]")
+
+		saynn("[say=eliza]Oh.. does that mean it's fully broken?..[/say]")
+
+		saynn("[say=alexrynard]Nah, I have enough spare ones. Just gotta replace them. Will take some time.[/say]")
+
+		saynn("Alex looks at you.")
+
+		saynn("[say=alexrynard]I really don't want to put this board anywhere. I hold it and you solder the capacitors, okay?[/say]")
+
+		saynn("Seems easy enough..")
+
+		addButton("Help Alex", "Help Alex with the board", "time7_alexfixes_the_thing_actually")
+	if(state == "time7_alexfixes_the_thing_actually"):
+		playAnimation(StageScene.Duo, "stand", {npc="alexrynard", npcAction="kneel"})
+		saynn("And so you grab the required tool and then begin to heat up the old busted capacitors near the base, enough to melt the metal there. Then you swiftly replace them with new ones before melting their bases too, soldering them into the right places.")
+
+		saynn("All the while Alex is just sitting on his knees, holding the wet board, his hands get covered in that milk.")
+
+		saynn("[say=eliza]Why can't you wash it..[/say]")
+
+		saynn("[say=alexrynard]The board? That will destroy even more components. There is not much.. milk.. left, better to just let it dry.[/say]")
+
+		saynn("After you're done, Alex puts the board back into the computer and connects all the writing back.")
+
+		saynn("[say=alexrynard]Alright. You can turn it on while I go wash my hands..[/say]")
+
+		addButton("Computer", "Look at the screen", "time7_computer")
+	if(state == "time7_computer"):
+		playAnimation(StageScene.Solo, "stand")
+		saynn("You stand in front of the computer screen.")
+
+		saynn("The computer doesn't seem to be turned on.")
+
+		addButton("Power button", "Turn on the computer", "time7_computer_power")
+	if(state == "time7_computer_power"):
+		saynn("You press on the power button.. and the computer actually begins to boot this time.")
+
+		saynn("[say=eliza]Yay, it works![/say]")
+
+		saynn("[say=alexrynard]Test it more.[/say]")
+
+		saynn("The screen presents you with a few options.")
+
+		addDisabledButton("Tools", "No patient is found on the table")
+		addButton("Scan for patients", "Make the machine scan for patients", "time7_computer_patients")
+		addButton("Self-Diagnostic", "Make the machine check itself", "time7_computer_doselfdiag")
+		addButton("About", "Check the about menu", "time7_computer_aboutmenu")
+		if (didDiag):
+			addButton("Enough testing", "The machine clearly works", "time7_computer_tested_works")
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
@@ -947,8 +1219,25 @@ func _react(_action: String, _args):
 	if(_action == "time7_lift"):
 		processTime(5*60)
 
+	if(_action == "time7_in_lobby"):
+		processTime(3*60)
+
+	if(_action == "time7_avy_fuckoff"):
+		toldFuckoff = true
+
 	if(_action == "time7_nearmachine"):
 		processTime(3*60)
+
+	if(_action == "time7_get_pills"):
+		tookPills = true
+
+	if(_action == "time7_let_eliza_know_pretend"):
+		tookPills = true
+		setState("time7_let_eliza_know_dispose")
+		return
+
+	if(_action == "time7_computer_doselfdiag"):
+		didDiag = true
 
 	setState(_action)
 
@@ -956,6 +1245,9 @@ func saveData():
 	var data = .saveData()
 
 	data["howManyTimes"] = howManyTimes
+	data["toldFuckoff"] = toldFuckoff
+	data["tookPills"] = tookPills
+	data["didDiag"] = didDiag
 
 	return data
 
@@ -963,3 +1255,6 @@ func loadData(data):
 	.loadData(data)
 
 	howManyTimes = SAVE.loadVar(data, "howManyTimes", 0)
+	toldFuckoff = SAVE.loadVar(data, "toldFuckoff", false)
+	tookPills = SAVE.loadVar(data, "tookPills", false)
+	didDiag = SAVE.loadVar(data, "didDiag", false)
