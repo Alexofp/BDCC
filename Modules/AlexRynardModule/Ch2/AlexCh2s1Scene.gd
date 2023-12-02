@@ -4,6 +4,7 @@ var howManyTimes = 0
 var toldFuckoff = false
 var tookPills = false
 var didDiag = false
+var logoPressed = 0
 
 func _init():
 	sceneID = "AlexCh2s1Scene"
@@ -1121,12 +1122,237 @@ func _run():
 
 		saynn("The screen presents you with a few options.")
 
-		addDisabledButton("Tools", "No patient is found on the table")
+		addDisabledButton("Procedures", "No patient is found on the table")
 		addButton("Scan for patients", "Make the machine scan for patients", "time7_computer_patients")
 		addButton("Self-Diagnostic", "Make the machine check itself", "time7_computer_doselfdiag")
 		addButton("About", "Check the about menu", "time7_computer_aboutmenu")
 		if (didDiag):
 			addButton("Enough testing", "The machine clearly works", "time7_computer_tested_works")
+	if(state == "time7_computer_doselfdiag"):
+		saynn("You press the self-diagnostic button on the screen. The machine suddenly kicks into action, all its manipulators moving and rotating, displaying their full range of motion.")
+
+		saynn("The table itself angles itself differently too. There is even a different screen above it that displays some test information.")
+
+		saynn("After some time, the computer beeps happily and displays a 'Self-Diagnostic complete, no problems found.' message.")
+
+		saynn("[say=pc]Looks like everything works.[/say]")
+
+		saynn("[say=alexrynard]Good.[/say]")
+
+		addButton("Continue", "See what happens next", "time7_computer_mainmenu")
+	if(state == "time7_computer_mainmenu"):
+		playAnimation(StageScene.Solo, "stand")
+		saynn("What button do you wanna press on the computer screen?")
+
+		addDisabledButton("Procedures", "No patient is found on the table")
+		addButton("Scan for patients", "Make the machine scan for patients", "time7_computer_patients")
+		addButton("Self-Diagnostic", "Make the machine check itself", "time7_computer_doselfdiag")
+		addButton("About", "Check the about menu", "time7_computer_aboutmenu")
+		if (didDiag):
+			addButton("Enough testing", "The machine clearly works", "time7_computer_tested_works")
+	if(state == "time7_computer_aboutmenu"):
+		saynn("You press the 'About' button.")
+
+		saynn("The screen refreshes and shows the info about this machine along with the AlphaCorp logo.")
+
+		saynn("- - - - - - -")
+
+		saynn("Multi-purpose Medical Table - Model X-9")
+
+		saynn("Running on the official AlphaOS kernel.")
+
+		saynn("The Model X-9 integrates state-of-the-art healing protocols, unparalleled bio-monitoring technologies, and big focus on safety to redefine the future of healthcare.")
+
+		saynn("Developed in-house by AlphaCorp Technologies. Any attempt to reverse engineer, replicate, or distribute AlphaCorp's proprietary medical advancements will lead to immediate legal actions.Unauthorized modifications are strictly prohibited and subject to legal action as well.")
+
+		saynn("- - - - - - -")
+
+		saynn("Seems kinda.. strange.")
+
+		addButton("Back", "Never mind", "time7_computer_mainmenu")
+		addButton("Logo", "Press on the logo", "time7_computer_presslogo")
+	if(state == "time7_computer_presslogo"):
+		saynn("You press on the AlphaCorp logo.. but nothing happened this time.")
+
+		addButton("Continue", "See what happens next", "time7_computer_mainmenu")
+	if(state == "time7_computer_easteregg"):
+		saynn("You press the AlphaCorp again.. and something happens. The screen suddenly starts displaying jumping foxies.")
+
+		saynn("[font=res://Fonts/smallconsolefont.tres]"+Util.readFile("res://Images/asciiporn/alexrynardquest/fox.txt").replace("\\","\\\\")+"[/font]")
+
+		saynn("Seems like a cute little easter egg.")
+
+		addButton("Continue", "See what happens next", "time7_computer_mainmenu")
+	if(state == "time7_computer_patients"):
+		saynn("The computer displays you a list of 'patients' that it has found nearby and can currently reach.")
+
+		addButton("Alex Rynard", "Grab this patient", "time7_computer_grab_alex")
+		addButton("Eliza Quinn", "Grab this patient", "time7_computer_grab_eliza")
+		addButton(GM.pc.getName(), "Grab this patient", "time7_computer_grab_pc")
+		addButton("Never mind", "You changed your mind", "time7_computer_mainmenu")
+	if(state == "time7_computer_grab_alex"):
+		playAnimation(StageScene.BDSMMachineFuck, "tease", {pc="alexrynard", noDildos=true})
+		saynn("The machine kicks into action as you make your selection. Its manipulators suddenly grab Alex before forcibly bringing him onto the table. He tries to get his wrists and ankles free but fails.")
+
+		saynn("[say=alexrynard]Hey! That is so not funny.[/say]")
+
+		saynn("[say=eliza]I think it is pretty funny..[/say]")
+
+		saynn("Alex sighs.")
+
+		saynn("[say=eliza]But we shouldn't torture the poor foxy.[/say]")
+
+		saynn("Oh well.")
+
+		addButton("Continue", "See what happens next", "time7_computer_mainmenu")
+	if(state == "time7_computer_grab_eliza"):
+		playAnimation(StageScene.BDSMMachineFuck, "tease", {pc="eliza", noDildos=true})
+		saynn("The machine kicks into action as you make your selection. Its manipulators suddenly grab the doctor before forcibly bringing her onto the table.")
+
+		saynn("[say=eliza]Ohh! Kinky.[/say]")
+
+		saynn("She suddenly realizes that the machine doesn't let her close her legs, putting her underwear on display.")
+
+		saynn("[say=eliza]Don't look..[/say]")
+
+		saynn("Alex sighs.")
+
+		saynn("[say=alexrynard]Put her down, we didn't come here for that.[/say]")
+
+		saynn("[say=eliza]Aw.[/say]")
+
+		addButton("Continue", "See what happens next", "time7_computer_mainmenu")
+	if(state == "time7_computer_grab_pc"):
+		playAnimation(StageScene.BDSMMachineAltFuck, "tease", {pc="pc", noDildos=true})
+		saynn("The machine kicks into action as you make your selection. Its manipulators suddenly grab YOU before forcibly bringing you onto the table.")
+
+		saynn("Oops. Now you can't even put yourself down even if you wanted to. Eliza giggles seeing you in that helpless position.")
+
+		saynn("[say=eliza]I remember getting stuck like that. Was pretty funny. At first.[/say]")
+
+		saynn("[say=alexrynard]Should we just leave {pc.him} like that? To teach a lesson.[/say]")
+
+		saynn("[say=eliza]And what would we do~?[/say]")
+
+		saynn("Alex sees the doctor's hungry stare.. and presses the button to release you.")
+
+		addButton("Continue", "See what happens next", "time7_computer_mainmenu")
+	if(state == "time7_computer_tested_works"):
+		playAnimation(StageScene.Duo, "stand", {pc="alexrynard", npc="eliza"})
+		saynn("[say=alexrynard]Looks like we're done here.[/say]")
+
+		saynn("Eliza smiles and then gasps.")
+
+		saynn("[say=eliza]I know how to reward you, hold on.[/say]")
+
+		saynn("She rushes out of the room, leaving you and Alex alone for some time.")
+
+		saynn("[say=alexrynard]Oh no.[/say]")
+
+		saynn("[say=pc]Why the oh no.[/say]")
+
+		saynn("[say=alexrynard]I have no idea what to expect from her by this point.[/say]")
+
+		saynn("You chuckle.")
+
+		saynn("[say=pc]Relax. Can't be that bad.[/say]")
+
+		saynn("Eliza soon returns, holding.. two ice-creams in her paws. She hands one to you and one to Alex.")
+
+		saynn("[say=eliza]Here, thank you so much![/say]")
+
+		saynn("[say=alexrynard]Ice-cream?[/say]")
+
+		saynn("She nods-nods and smiles.")
+
+		saynn("[say=eliza]It's super tasty, trust me![/say]")
+
+		saynn("Alex inspects the cone from up close.. and then just sighs.")
+
+		saynn("[say=alexrynard]Right. Thanks. We will be going now.[/say]")
+
+		saynn("You both understand that it's probably best not to ask too many questions now.")
+
+		saynn("[say=eliza]Oh. And if you want.. you can use this room now. It's your machine after all, Alex Rynard~.[/say]")
+
+		saynn("He hums and then gives you a glance.")
+
+		saynn("[say=alexrynard]I might just hold you to that offer, doctor Quinn.[/say]")
+
+		saynn("The feline doctor purrs softly and then proceeds to show you two the way out.")
+
+		addButton("Continue", "See what happens next", "time7_after_fix_computer")
+	if(state == "time7_after_fix_computer"):
+		removeCharacter("eliza")
+		addCharacter("avy")
+		playAnimation(StageScene.Duo, "stand", {npc="avy"})
+		aimCameraAndSetLocName("med_lobby_start")
+		saynn("You and Alex return back to the medical lobby. He presses the button that calls the lift.. which is taking its sweet time now.")
+
+		saynn("Suddenly, some inmate pulls you away from Alex so he wouldn't hear her words.")
+
+		saynn("[say=avy]So? Did you get anything?[/say]")
+
+		saynn("Alex notices your sneaky conversation. But he doesn't intervene.")
+
+		if (tookPills):
+			addButton("Give pills", "Give Avy the old pill bottles", "time7_after_give_pills")
+			addButton("No", "Lie to Avy", "time7_after_no_give_pills")
+		else:
+			addDisabledButton("Give pills", "You didn't steal anything")
+			addButton("No", "Tell Avy that you didn't take anything", "time7_after_didntstealpills")
+	if(state == "time7_after_give_pills"):
+		saynn("[say=pc]Here, now go away.[/say]")
+
+		saynn("You sneakily hand her the old pill bottles that you took.")
+
+		saynn("The dark foxy quickly checks them.. and then hands you a chip.")
+
+		saynn("[say=avy]Good {pc.boy}. This will do.[/say]")
+
+		saynn("And just like that, you return to Alex..")
+
+		addButton("Continue", "See what happens next", "time7_after_in_lift")
+	if(state == "time7_after_no_give_pills"):
+		saynn("[say=pc]No, fuck off.[/say]")
+
+		saynn("The dark foxy grabs you by the collar with a tight grip.")
+
+		saynn("[say=avy]I know that you stole something, I can fucking smell it.[/say]")
+
+		saynn("She pulls you closer.")
+
+		saynn("[say=avy]And if you don't want everyone to know, better just give me what I want.[/say]")
+
+		addButton("Give pills", "Give Avy the old pill bottles", "time7_after_give_pills")
+		addButton("Fuck off", "You're not giving her anything!", "time7_after_fuckoffwithpills")
+	if(state == "time7_after_fuckoffwithpills"):
+		playAnimation(StageScene.Duo, "shove", {npc="avy", npcAction="hurt"})
+		saynn("You shove the inmate back.")
+
+		saynn("[say=pc]I told you, fuck off.[/say]")
+
+		saynn("She squints and bares her teeth.. but then just walks away.")
+
+		saynn("[say=avy]Pathetic.[/say]")
+
+		saynn("You managed to keep the stolen pills!")
+
+		addButton("Continue", "See what happens next", "time7_after_in_lift")
+	if(state == "time7_after_didntstealpills"):
+		saynn("[say=pc]No, fuck off.[/say]")
+
+		saynn("The dark foxy leans in super close and then audibly sniffs you.")
+
+		saynn("[say=avy]Huh. Yeah. You didn't steal anything. What a staff bitch. Pathetic.[/say]")
+
+		saynn("And just like that, she leaves you alone.")
+
+		addButton("Continue", "See what happens next", "time7_after_in_lift")
+	if(state == "time7_after_in_lift"):
+		removeCharacter("avy")
+		playAnimation(StageScene.Duo, "stand", {npc="alexrynard"})
+		aimCameraAndSetLocName("med_elevator")
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
@@ -1239,6 +1465,26 @@ func _react(_action: String, _args):
 	if(_action == "time7_computer_doselfdiag"):
 		didDiag = true
 
+	if(_action == "time7_computer_tested_works"):
+		addMessage("Trust Exercise 3 is unlocked")
+
+	if(_action == "time7_computer_presslogo"):
+		logoPressed += 1
+		if(logoPressed > 4):
+			logoPressed = 0
+			setState("time7_computer_easteregg")
+			return
+
+	if(_action == "time7_after_give_pills"):
+		GM.pc.addCredits(20)
+		addMessage("You received 20 credits!")
+
+	if(_action == "time7_after_fuckoffwithpills"):
+		GM.pc.getInventory().addItem(GlobalRegistry.createItem("painkillers"))
+		GM.pc.getInventory().addItem(GlobalRegistry.createItem("painkillers"))
+		GM.pc.getInventory().addItem(GlobalRegistry.createItem("painkillers"))
+		addMessage("You managed to recover 3x painkillers")
+
 	setState(_action)
 
 func saveData():
@@ -1248,6 +1494,7 @@ func saveData():
 	data["toldFuckoff"] = toldFuckoff
 	data["tookPills"] = tookPills
 	data["didDiag"] = didDiag
+	data["logoPressed"] = logoPressed
 
 	return data
 
@@ -1258,3 +1505,4 @@ func loadData(data):
 	toldFuckoff = SAVE.loadVar(data, "toldFuckoff", false)
 	tookPills = SAVE.loadVar(data, "tookPills", false)
 	didDiag = SAVE.loadVar(data, "didDiag", false)
+	logoPressed = SAVE.loadVar(data, "logoPressed", 0)
