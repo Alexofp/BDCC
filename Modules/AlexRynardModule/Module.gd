@@ -15,6 +15,7 @@ func getFlags():
 		"ch2CanEnterEngineering": flag(FlagType.Bool),
 		"ch2StayedWhenSpineBorked": flag(FlagType.Bool),
 		"ch2EavesdroppedCaptain": flag(FlagType.Bool),
+		"ch2SkippedBackstory": flag(FlagType.Bool),
 		
 		"1TrustCompleted": flag(FlagType.Bool),
 	}
@@ -32,6 +33,7 @@ func _init():
 		"res://Modules/AlexRynardModule/Ch1/AlexS5HypnovisorIntroScene.gd",
 		
 		"res://Modules/AlexRynardModule/Ch2/AlexCh2s1Scene.gd",
+		"res://Modules/AlexRynardModule/Ch2/AlexCh2s2BackstoryScene.gd",
 		
 		"res://Modules/AlexRynardModule/Trust/AlexTrustExercisesMenuScene.gd",
 		"res://Modules/AlexRynardModule/Trust/AlexTrustExercise1Scene.gd",

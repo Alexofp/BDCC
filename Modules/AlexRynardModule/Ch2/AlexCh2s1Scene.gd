@@ -1353,6 +1353,125 @@ func _run():
 		removeCharacter("avy")
 		playAnimation(StageScene.Duo, "stand", {npc="alexrynard"})
 		aimCameraAndSetLocName("med_elevator")
+		saynn("You and Alex enter the lift. He presses the button and, with an annoying screech, the giant metal room begins to move. The ice-creams are still in your hands.")
+
+		saynn("[say=pc]Back to the work?[/say]")
+
+		saynn("[say=alexrynard]You know.. I think we earned a small rest.[/say]")
+
+		saynn("Sounds good.")
+
+		saynn("[say=alexrynard]Worst case, I tell them the task took longer than we thought.[/say]")
+
+		saynn("[say=pc]You'd dare to lie like that?[/say]")
+
+		saynn("He smiles.")
+
+		saynn("[say=alexrynard]Who cares.[/say]")
+
+		saynn("Looks like Alex is not against being mischievous occasionally. Or maybe he is just sick of the repairs like you are.")
+
+		addButton("Continue", "See what happens next", "time7_resting_near_water")
+	if(state == "time7_resting_near_water"):
+		aimCameraAndSetLocName("yard_waterfall")
+		GM.pc.setLocation("yard_waterfall")
+		playAnimation(StageScene.Duo, "sit", {npc="alexrynard", npcAction="sit"})
+		saynn("Alex brings you to a secluded spot in the yard, the one with the constantly running waterfall.")
+
+		saynn("He sits down on one of the benches and just.. relaxes.. occasionally licking the ice cream.")
+
+		saynn("You do the same, taking a seat nearby.")
+
+		saynn("[say=pc]Tired?[/say]")
+
+		saynn("[say=alexrynard]Always.[/say]")
+
+		saynn("Both of you watch the water. The noise is quite calming. Sadly, it's not enough to pull you or Alex away completely. You can just feel the anxiety coming through Alex's sighs.")
+
+		saynn("At least the ice cream tastes kinda nice.")
+
+		addButton("Continue", "See what happens next", "time7_resting_questions")
+	if(state == "time7_resting_questions"):
+		saynn("After thinking about it for some time, a little idea comes into your mind.")
+
+		saynn("[say=pc]You need parts and materials for your prototypes, right?[/say]")
+
+		saynn("Alex raises a brow at you.")
+
+		saynn("[say=alexrynard]Sure?[/say]")
+
+		saynn("[say=pc]Why don't you use the ones from the disassembled datapads and shock remotes?[/say]")
+
+		saynn("The foxy tilts his head.")
+
+		saynn("[say=alexrynard]That'd.. that'd be stealing AlphaCorp property.[/say]")
+
+		saynn("[say=pc]How about this. Who cares?[/say]")
+
+		saynn("Alex squints.")
+
+		saynn("[say=alexrynard]Listen, that's a wrong thing to do.[/say]")
+
+		saynn("[say=pc]You don't seem to be against doing wrong things for the right cause.[/say]")
+
+		saynn("He rolls his eyes.")
+
+		saynn("[say=alexrynard]Captain would be against that.[/say]")
+
+		saynn("[say=pc]The captain is probably the reason why you are depressed all the time. He gives you all that monotonous work to distract you from working on your prototypes. Haven't you noticed that already?[/say]")
+
+		saynn("Alex frowns.. and bares his sharp teeth for a second. He looks quite annoyed after your words.")
+
+		saynn("But after a few seconds, he calms down.. and sighs again.")
+
+		saynn("[say=alexrynard]Of course I noticed.. a long time ago.[/say]")
+
+		saynn("[say=pc]Then why do you keep doing it?[/say]")
+
+		saynn("Alex stares at the waterfall again.")
+
+		saynn("[say=alexrynard]Because there are reasons, okay? It's a long story.[/say]")
+
+		saynn("You look around. The whole prison.. is so quiet. Might as well try to figure out what that story is.")
+
+		saynn("[say=pc]We got time.[/say]")
+
+		saynn("Alex stays silent for some time, enjoying his ice cream. You do too.")
+
+		saynn("[say=alexrynard]..do you really wanna hear it?[/say]")
+
+		addButton("Sure", "Listen to his story", "time7_resting_start_backstory")
+		addButton("It's fine", "It's fine. He clearly doesn't want to share", "time7_resting_skip_backstory")
+	if(state == "time7_resting_skip_backstory"):
+		saynn("[say=pc]It's fine if you don't wanna share.[/say]")
+
+		saynn("He sighs.")
+
+		saynn("[say=alexrynard]One of my prototypes broke my spine. I was dumb and reckless. Cap was the one who paid for my prosthetic and the operation. Without him.. I wouldn't be here for sure.. I'd be forever glued to a wheelchair.[/say]")
+
+		saynn("He finishes eating his ice-cream.")
+
+		saynn("[say=alexrynard]That's the short story.[/say]")
+
+		saynn("Makes sense.")
+
+		saynn("[say=pc]I see..[/say]")
+
+		saynn("[say=alexrynard]You don't owe him anything, you can leave me to finish fixing the broken datapads alone. Whatever is left should be the last batch.[/say]")
+
+		saynn("[say=pc]What if it's not?[/say]")
+
+		saynn("He shrugs.")
+
+		saynn("[say=alexrynard]Then I will have to chat with the captain about that.[/say]")
+
+		saynn("Alex stands up, his posture straight.")
+
+		saynn("[say=alexrynard]I still have no idea why you decided to help me. But thank you.[/say]")
+
+		saynn("And just like that, he walks away, leaving you alone with your thoughts.")
+
+		addButton("Continue", "See what happens next", "endthescene")
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
@@ -1484,6 +1603,20 @@ func _react(_action: String, _args):
 		GM.pc.getInventory().addItem(GlobalRegistry.createItem("painkillers"))
 		GM.pc.getInventory().addItem(GlobalRegistry.createItem("painkillers"))
 		addMessage("You managed to recover 3x painkillers")
+
+	if(_action == "time7_resting_near_water"):
+		processTime(30*60)
+		GM.pc.addStamina(100)
+		GM.pc.addPain(-100)
+
+	if(_action == "time7_resting_start_backstory"):
+		endScene()
+		setFlag("AlexRynardModule.ch2SkippedBackstory", false)
+		runScene("AlexCh2s2BackstoryScene")
+		return
+
+	if(_action == "time7_resting_skip_backstory"):
+		setFlag("AlexRynardModule.ch2SkippedBackstory", true)
 
 	setState(_action)
 
