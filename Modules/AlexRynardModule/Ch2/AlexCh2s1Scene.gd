@@ -25,6 +25,22 @@ func _initScene(_args = []):
 		setState("time3")
 		increaseFlag("AlexRynardModule.ch2SceneNum")
 		return
+	if(howManyTimes == 3):
+		setState("time4")
+		increaseFlag("AlexRynardModule.ch2SceneNum")
+		return
+	if(howManyTimes == 4):
+		setState("time5")
+		increaseFlag("AlexRynardModule.ch2SceneNum")
+		return
+	if(howManyTimes == 5):
+		setState("time6")
+		increaseFlag("AlexRynardModule.ch2SceneNum")
+		return
+	if(howManyTimes == 6):
+		setState("time7")
+		increaseFlag("AlexRynardModule.ch2SceneNum")
+		return
 
 func _run():
 	if(state == ""):
