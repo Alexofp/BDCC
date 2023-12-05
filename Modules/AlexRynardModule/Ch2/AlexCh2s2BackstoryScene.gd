@@ -49,7 +49,7 @@ func _run():
 
 		saynn("[sayFemale]Oh, sure. Two coffees coming right up.[/sayFemale]")
 
-		saynn("Waitress swiftly leaves with the order. You open the lunchbox and grab a sandwich.")
+		saynn("Waitress swiftly leaves with the order. You open the lunchbox and grab a piece of pizza from it.")
 
 		saynn("[say=alexrynard]Hope you don't mind. I'm hungry as fuck.[/say]")
 
@@ -91,7 +91,7 @@ func _run():
 
 		saynn("[say=captain]I can't. My offer comes with less risks though. And work that you would enjoy. I know that words won't change your mind. But I suggest you consider it anyway.[/say]")
 
-		saynn("You quickly finish the rest of your sandwich and drink as much coffee as your mouth can endure.")
+		saynn("You quickly finish eating your pizza slice and drink as much coffee as your mouth can endure.")
 
 		saynn("[say=alexrynard]I'm working on my dream already, you won't be able to top that.[/say]")
 
@@ -130,7 +130,7 @@ func _run():
 
 		saynn("She reaches her paw and caresses your cheek, her digit then slides over your lips.")
 
-		saynn("[say=lin_alex]You got something there. Piece of a sandwich, heh.[/say]")
+		saynn("[say=lin_alex]You got something there. Some piece of meat, heh.[/say]")
 
 		saynn("[say=alexrynard]Thanks.[/say]")
 
@@ -406,9 +406,218 @@ func _run():
 
 		saynn("[say=alexrynard]No one is dying, I'm fine. But I need my engine to work properly. The Expo is only a month away, it's worth it to push yourself. Just for now.[/say]")
 
-		saynn("Lin sighs.")
+		saynn("Lin clenches her fists.")
 
 		saynn("[say=lin_alex]Then I'm staying too. You can't stop me.[/say]")
+
+		saynn("Her tone cools you down.")
+
+		saynn("[say=alexrynard]Alright.. Alright. Let's try to be efficient then.[/say]")
+
+		addButton("Continue", "See what happens next", "alex_and_lin_crunch")
+	if(state == "alex_and_lin_crunch"):
+		saynn("And so the next few days fly by like a single second. You wake up, spend the whole day trying to track down that problem, go to bed, completely exhausted.")
+
+		saynn("[say=boss_alex]Why the fuck haven't you shipped the damn thing already. Are you all really that incompetent?[/say]")
+
+		saynn("It was hard not to scream at your boss when he occasionally comes in to check on the progress. But what you were doing.. it was the right thing. There is no way you're demoing that engine while its memory might randomly corrupt itself.")
+
+		saynn("Time was running out. It feels like you rebuilt the whole engine from scratch multiple times by now. You know where every screw should be, what each wire does. The constant blue light haunts you in your dreams..")
+
+		saynn("[say=lin_alex]Um.. I think.. Could this be it?[/say]")
+
+		saynn("You climb from under the engine and rub your exhausted eyes. The black bags under them might as well be another tattoo on your cheeks by now.")
+
+		saynn("[say=alexrynard]Let's see.[/say]")
+
+		saynn("[say=lin_alex]I was replacing part of the functions with placeholders. Then, if there was no bug anymore, I divided it even further and was checking just part of the part.[/say]")
+
+		saynn("[say=alexrynard]Binary search. Smart.[/say]")
+
+		saynn("She nods and points at the screen.")
+
+		saynn("[say=lin_alex]I tracked it down to this line of code.[/say]")
+
+		saynn("You look at it. Yeah, the code had an obvious 'off by one' error, making it so the bad memory was read and modified. But only sometimes..")
+
+		saynn("[say=alexrynard]Yeah.. this is it, yeah.. fuck me.. You're smart.[/say]")
+
+		saynn("You can't believe your eyes. Your legs wanna give up so you hold onto the table.")
+
+		saynn("[say=lin_alex]I.. It was me who wrote this function.[/say]")
+
+		saynn("You look at her. You look at the reason behind so much pain and suffering..")
+
+		saynn("[say=alexrynard]That's.. okay. It happens. There was no malice. Just an honest mistake.[/say]")
+
+		saynn("You rub your face. You can't believe it.")
+
+		saynn("[say=lin_alex]I will run the tests now.[/say]")
+
+		saynn("You nod.. silently. You want to scream.. but you just have to endure it..")
+
+		saynn("And, of course, all the tests were green. And then again. You checked multiple times. And each time.. everything was working perfectly.")
+
+		saynn("[say=alexrynard]I think we can ship it now..[/say]")
+
+		saynn("[say=lin_alex]I will let the boss know..[/say]")
+
+		saynn("She looks at the clock.")
+
+		saynn("[say=lin_alex]..tomorrow.[/say]")
+
+		saynn("You tap on her shoulder.")
+
+		saynn("[say=alexrynard]Go sleep. I'd offer you to stop by my apartment for some cold pizza. But it's clearly not the time..[/say]")
+
+		saynn("You clearly could use a bed too. She offers you a little smile.")
+
+		saynn("[say=lin_alex]Oh, I love cold pizza. But I will do as you say, Al..[/say]")
+
+		saynn("Lin stands up.. and leans towards you to leave a little kiss on your lips.. before walking away.")
+
+		saynn("[say=lin_alex]See you..[/say]")
+
+		addButton("Bed", "Find it", "alex_fixed_bug_sleep")
+	if(state == "alex_fixed_bug_sleep"):
+		# (( AimCamera Here
+		playAnimation(StageScene.Sleeping, "sleep", {pc="alexrynardy", bodyState={underwear=true}})
+		removeCharacter("lin_alex")
+		addCharacter("sen_alex")
+		saynn("You find your way back to your apartment.")
+
+		saynn("[say=alexrynard]Any alerts today?..[/say]")
+
+		saynn("[say=sen_alex]Only one, Sir. It was pizza delivery. I guided them the fridge.[/say]")
+
+		saynn("[say=alexrynard]Uh huh.. Good..[/say]")
+
+		saynn("You drop onto your bed.. and turn off instantly.")
+
+		saynn("[say=sen_alex]Good night, Sir.[/say]")
+
+		addButton("Sleep", "See what the next day brings you", "alex_next_day_after_fixing_the_bug")
+	if(state == "alex_next_day_after_fixing_the_bug"):
+		# (( Aim camera here
+		playAnimation(StageScene.Solo, "stand", {pc="alexrynardy"})
+		removeCharacter("sen_alex")
+		saynn("New day. Exactly two weeks before the Expo. Your team begins to prepare the engine to be installed into the spaceship. While you just watch, making sure everything goes smoothly.. Finally.. Some rest..")
+
+		saynn("[say=boss_alex]Hey there. Good job. You pulled through.[/say]")
+
+		saynn("It's him.")
+
+		addButton("Boss", "Talk with him", "boss_asks_who")
+	if(state == "boss_asks_who"):
+		addCharacter("boss_alex")
+		playAnimation(StageScene.Duo, "stand", {pc="alexrynardy", npc="boss_alex"})
+		saynn("[say=alexrynard]Thanks.[/say]")
+
+		saynn("Your boss leans against one of the hangar walls.")
+
+		saynn("[say=boss_alex]I've received the bonus for what you did. I want you to help me spread it over the whole team. Shoot me an email when you can.[/say]")
+
+		saynn("Credits.. finally. Maybe having some actual money will help to heal all the wounds.. and make it worth it.")
+
+		saynn("[say=alexrynard]Sure, I will.[/say]")
+
+		saynn("[say=boss_alex]No rush on that one. By the way, who was responsible for that last delay? Lin didn't tell me, she said it was better if I asked you.[/say]")
+
+		saynn("He asked it so casually. But you're pretty sure he is not being casual at the moment.")
+
+		saynn("[say=alexrynard]Huh? It doesn't matter, trust me.[/say]")
+
+		saynn("[say=boss_alex]Yeah.. but.. Still. Shouldn't the boss know?[/say]")
+
+		saynn("[say=alexrynard]It was just an honest mistake. Again, you will have to trust me.[/say]")
+
+		saynn("His fake kind expression goes away.")
+
+		saynn("[say=boss_alex]Alright. If you say so. You have two weeks of rest now before the Expo, enjoy.[/say]")
+
+		saynn("And so he leaves you alone.")
+
+		addButton("Work", "Do some work", "alex_writes_good_email")
+	if(state == "alex_writes_good_email"):
+		removeCharacter("boss_alex")
+		addCharacter("lin_alex")
+		playAnimation(StageScene.Duo, "stand", {pc="alexrynardy", npc="lin_alex"})
+		saynn("You do some work. Then you spend some time writing that email. Obviously, since you're the team lead, it only makes sense that you receive slightly more.")
+
+		saynn("Lin caused that mistake.. but she also fixed it, so it shouldn't affect her pay. Apart from that, she wrote the main bulk of the engine's firmware. A very impressive feat.")
+
+		saynn("Rest of the team.. is pretty average. Some did better, some did worse. You tried to make it fair.")
+
+		saynn("You press the 'send' button.")
+
+		saynn("[say=lin_alex]Hey, Al. Feels weird to stop working at normal hours again. How are you feeling?[/say]")
+
+		saynn("Lin scratches the back of her head.")
+
+		saynn("[say=alexrynard]Better. Way better. I didn't tell the boss about you, don't worry.[/say]")
+
+		saynn("[say=lin_alex]You could have if you wanted to.. but.. thank you. I kinda need all the credits I can get at the moment.[/say]")
+
+		saynn("[say=alexrynard]Don't we all?[/say]")
+
+		saynn("She leans closer to you again.. her paw sliding up over your arm.")
+
+		saynn("[say=lin_alex]About that cold pizza..[/say]")
+
+		saynn("Her eyes stare at your lips.")
+
+		saynn("[say=lin_alex]Can I get a taste?[/say]")
+
+		addButton("Kiss Lin", "You two clearly want it", "start_passion")
+	if(state == "start_passion"):
+		# (( AimCamera
+		playAnimation(StageScene.Hug, "kiss", {pc="alexrynardy", npc="lin_alex", bodyState={underwear=true}, npcBodyState={underwear=true}})
+		saynn("The next moments become a blur of emotions. Your hands explore her body, hers explore your. Your lips brushing against each other as you exchange the many passionate kisses.")
+
+		saynn("Somehow you end up in your apartment. She unbuttons your shirt, you pull down her pants. Your lips leave many little kisses on her neck and shoulders.. little bites too. So much tension.. Too much.")
+
+		saynn("Sentinel detects what's happening.. and decides to stay quiet.. just like you coded it.")
+
+		addButton("Bed", "You two clearly want it", "start_lovemaking")
+	if(state == "start_lovemaking"):
+		playAnimation(StageScene.SexMissionary, "sex", {pc = "alexrynardy", npc="lin_alex", bodyState={naked=true,hard=true}, npcBodyState={naked=true,hard=true}})
+		saynn("What follows after a night full of passionate lovemaking. The rest of the clothing is tossed aside, naked bodies rubbing against each other. You feel her scent.. incredible.")
+
+		saynn("[say=lin_alex]Take me..[/say]")
+
+		saynn("Your hands carefully guide Lin onto the bed and then position yourself between her legs. You're already hard so all you have to do is slide inside, stealing her moan with another kiss.")
+
+		saynn("Her velvet inner walls welcome your length eagerly.. but you don't push it, allowing Lin to get used to it, instead just making out with her, taking it slow and steady.")
+
+		saynn("Lin's eyes.. are shining with trust, a permission for you to start picking up pace. Her whole body is shivering as you explore her every inch of the body, your member sliding inside that slick tunnel, kissing the natural barricade already.")
+
+		saynn("[say=lin_alex]I'm.. ah..[/say]")
+
+		saynn("It's easy to feel that an orgasm has overwhelmed her, her inner walls gripping your member tightly. You slow down a bit, letting her catch her breath.")
+
+		addButton("Continue", "See what happens next", "continue_lovemaking")
+	if(state == "continue_lovemaking"):
+		playAnimation(StageScene.SexCowgirl, "sex", {npc="lin_alex", pc="alexrynardy", bodyState={naked=true, hard=true}, npcBodyState={naked=true}})
+		saynn("The night is long.. giving the lovers plenty of time to let all their tension out.")
+
+		saynn("Lin straddles you, she carefully positions herself over your member. Your hands are holding hers, fingers intertwined, as she lowers herself, her slick flower spreading and accepting you.")
+
+		saynn("[say=lin_alex]Ah.. feels so good..[/say]")
+
+		saynn("She starts riding you.. at her comfortable pace. The view of her modest breasts bobbing up and down is incredible. Lin bites her lip and throws her head back, moaning passionately.")
+
+		saynn("Soon, the knot of your members starts to inflate with blood, making fitting that part impossible no matter how Lin tries. Her attempts sure bring you a lot of pleasure though, you feel yourself getting close..")
+
+		saynn("[say=alexrynard]Lin.. I'm..[/say]")
+
+		saynn("[say=lin_alex]Please..[/say]")
+
+		saynn("You don't need many words to understand each other. Lin keeps riding you, pushing you way past your point of no return. You grunt as your twitching member starts to throb inside her, your seed flooding her womb.")
+
+		addButton("Continue", "See what happens next", "after_sex_with_lin")
+	if(state == "after_sex_with_lin"):
+		playAnimation(StageScene.Sleeping, "sleep", {pc="alexrynardy", npc="lin_alex", bodyState={underwear=true}, npcBodyState={underwear=true}})
+		saynn("Exhausted.. but satisfied.. you both concede. The room smells of raw passionate sex while you proceed to sleep. Your bed is not the biggest.. but your body provides enough space and warmth for a comfy nap.")
 
 
 func _react(_action: String, _args):
