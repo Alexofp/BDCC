@@ -27,7 +27,7 @@ func _doAttack(_attacker, _receiver, _context = {}):
 		text += "\n[b]{receiver.name} loses {receiver.his} balance and collapses onto the floor[/b]."
 		
 	if(_receiver.addEffect(StatusEffect.Stunned, [2])):
-		text += "\n[b]{receiver.name} is stunned![/b]."
+		text += "\n[b]{receiver.name} is stunned![/b]"
 	
 	return {
 		text = text,
