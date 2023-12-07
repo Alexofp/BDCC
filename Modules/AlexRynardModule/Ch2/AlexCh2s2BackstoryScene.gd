@@ -834,9 +834,322 @@ func _run():
 
 		saynn("And then it hits ya.")
 
-		saynn("[say=alexrynard]I think I know. Show me the blueprints for the Exosuit project.[/say]")
+		saynn("[say=alexrynard]I think I know what we're gonna do. Show me the blueprints for the Exosuit project.[/say]")
 
 		saynn("[say=sen_alex]Yes, Sir![/say]")
+
+		saynn("A blue hologram of your old unfinished idea gets projected onto the table. There was never much need for one so you kinda just lost motivation while working on it. But now times are different..")
+
+		saynn("[say=alexrynard]Right. I think I was smaller back then, it would need to be scaled. We would also need to leave some space for extra electronics.[/say]")
+
+		saynn("You stare at your old project for a while longer.")
+
+		saynn("[say=alexrynard]Electronics..[/say]")
+
+		saynn("You look around and notice a tv in the corner that you barely use.")
+
+		saynn("[say=alexrynard]That's a start.[/say]")
+
+		saynn("And so you began working on it. Disassembling the tv gave you some required parts and materials.. but obviously not nearly enough. The rest you would have to buy.")
+
+		saynn("[say=alexrynard]How much are we looking at, Sentinel?[/say]")
+
+		saynn("[say=sen_alex]Based on the edits that you have proposed.. about 5 thousand credits, Sir.[/say]")
+
+		saynn("You shake your head.")
+
+		saynn("[say=alexrynard]This is gonna drain my soul and my account, huh? Alright, start taking loans. As much as the system allows.[/say]")
+
+		saynn("[say=sen_alex]May I suggest disassembling me, Sir? That might cover some of it.[/say]")
+
+		saynn("[say=alexrynard]Listen, I appreciate the self-sacrifice gesture but that's the last thing that I would do. I need you more than ever to not go insane. Take loans and get me more parts.[/say]")
+
+		saynn("[say=sen_alex]Of course. Yes, Sir.[/say]")
+
+		addButton("Continue", "See what happens next", "alex_makes_some_of_suit")
+	if(state == "alex_makes_some_of_suit"):
+		saynn("Days begin to fly past. Wake up, work for 14 hours, eat something, go back to sleep. Your efficiency was at your best when you were at your worst.")
+
+		saynn("After a few days.. you already had something. A bunch of flat metal rods that go over your arm, forearm, hand and each finger. Each piece is connected by a series of motors. Theoretically, if powered correctly, this would allow you to pick up heavier objects.")
+
+		saynn("Someone is knocking at your door..")
+
+		addButton("Door", "Check who it is", "lin_checks_on_alex")
+	if(state == "lin_checks_on_alex"):
+		addCharacter("lin_alex")
+		playAnimation(StageScene.Duo, "stand", {pc="alexrynardy", npc="lin_alex"})
+		saynn("Your hands are all greasy so you quickly wipe them against your uniform. Who cares at this point..")
+
+		saynn("You open the door.. and see Lin.")
+
+		saynn("[say=lin_alex]Hey, Al..[/say]")
+
+		saynn("[say=alexrynard]Hey Lin, what's up?[/say]")
+
+		saynn("She looks behind your shoulder and notices that your apartment now looks more than a workshop rather than a place to live in.")
+
+		saynn("[say=lin_alex]I was gonna ask if you wanted to hang out together. But looks like.. you're busy. You're gonna enter the Expo alone?[/say]")
+
+		saynn("[say=alexrynard]Yeah, that's the plan. Sorry we don't see each other much. I will have more time after the Expo, we could totally catch up then.[/say]")
+
+		saynn("She nods subtly.. and then lowers her gaze.")
+
+		saynn("[say=lin_alex]May I come in?..[/say]")
+
+		saynn("[say=alexrynard]Um.. sure. Just try not to touch anything or you will get dirty.[/say]")
+
+		saynn("You step aside, allowing Lin to step into your apartment. She looks around.. obviously noticing the lack of furniture.")
+
+		saynn("[say=lin_alex]How do you sleep?[/say]")
+
+		saynn("[say=alexrynard]On the floor. I still have the mattress and the blanket, enough for me.[/say]")
+
+		saynn("[say=lin_alex]Your back is not gonna like that..[/say]")
+
+		saynn("She looks around more. Obviously her gaze gets attracted to your current prototype sitting on the workbench. The blue hologram is still visible.")
+
+		saynn("[say=lin_alex]Looks like a.. skeleton.[/say]")
+
+		saynn("[say=alexrynard]Yeah, it's an exosuit, goes over your body, makes you stronger.[/say]")
+
+		saynn("[say=lin_alex]Think that's gonna be enough?[/say]")
+
+		saynn("[say=alexrynard]We will see. I'm not gonna ask you to sabotage the engine, don't worry. Couldn't care less about that thing anymore.[/say]")
+
+		saynn("She turns around to face you.. and then lowers her gaze again.")
+
+		saynn("[say=lin_alex]Yeah.. about that.. I think the boss wants to show it warping twice at the Expo, away and back..[/say]")
+
+		saynn("[say=alexrynard]Is he.. fucking serious? That wasn't a requirement when we were building it.[/say]")
+
+		saynn("That's annoying. The guy probably doesn't even understand how dangerous that tech is.")
+
+		saynn("[say=lin_alex]Yeah.. I tried to tell him.. But he wants to make sure we win..[/say]")
+
+		saynn("And this is your chance to make sure they don't. You promised not to sabotage the engine.. but you never promised to help either. It would be so easy to not say anything and up your chances of winning ten times..")
+
+		saynn("You rub your face and growl silently into your hands. Fuck.")
+
+		saynn("So easy.. But easy is not for you..")
+
+		saynn("[say=alexrynard]Listen. First of all, make sure the engine has cooled down for at least half a minute before each warp, add this check in code. That's still not gonna be enough to not shatter the bluespace crystal so you will have to replace the cooling system with a better one. Don't worry, it should be doable even while the engine is installed onto a spaceship, the team can get it done.[/say]")
+
+		saynn("She listens carefully to your words.. and then nods.")
+
+		saynn("[say=lin_alex]Thank you, Al.. You didn't have to do that. I'm sorry for..[/say]")
+
+		saynn("[say=alexrynard]It's okay, I understand, quit being sorry.[/say]")
+
+		saynn("She reaches her paws out to hug you carefully.. and then leaves a little kiss on your lips. You kiss her back, way longer this time, your tongues doing a little dance in her mouth.")
+
+		saynn("[say=lin_alex]I think I'm gonna.. leave you to it. If you ever need something, let me know.[/say]")
+
+		saynn("[say=alexrynard]Take care, Lin.[/say]")
+
+		saynn("She nods again.. and nuzzles your cheek more before stepping out of the room, Sentinel opening the door for her.")
+
+		saynn("Right, time to focus.")
+
+		addButton("Work", "Try to finish the prototype", "alex_tries_to_finish_the_prototype")
+	if(state == "alex_tries_to_finish_the_prototype"):
+		removeCharacter("lin_alex")
+		playAnimation(StageScene.Solo, "stand", {pc="alexrynardy"})
+		saynn("After a week of working on the project non-stop, you now have something. The whole skeleton is now mostly completed. There is even a space for the board that will do all the required calculations for the whole unit. You just need to source it somewhere.. better motors and sensors would be nice too.")
+
+		saynn("You look around the workshop. Everything that you could realistically disassemble.. got disassembled already. Even the fridge.")
+
+		saynn("[say=alexrynard]Can we order what's left for the project, Sentinel?[/say]")
+
+		saynn("[say=sen_alex]I was unable to get any more loans approved. I'm sorry, Sir.[/say]")
+
+		saynn("You're not poor.. you're way below zero now. And all you have.. a frame of a dream. This can't end like this.")
+
+		saynn("[say=sen_alex]May I suggest disassembling me again, Sir?[/say]")
+
+		saynn("Never. Your enthusiasm is long gone.. but that doesn't mean you can start sacrificing friends to achieve your goal.")
+
+		saynn("[say=alexrynard]You will play your part in this project, don't worry. Just not like an organ donor.[/say]")
+
+		saynn("[say=sen_alex]Of course, Sir. I'm afraid I'm out of options then.[/say]")
+
+		saynn("Think, Alex, think. There must be something. Maybe your mind got too intoxicated from working with tech for so long.")
+
+		saynn("[say=alexrynard]I will go on a little walk, and breathe some air.[/say]")
+
+		saynn("[say=sen_alex]Good idea, Sir.[/say]")
+
+		addButton("Walk", "Go for a walk", "alex_walks_around")
+	if(state == "alex_walks_around"):
+		# (( AimCameraHere
+		removeCharacter("sen_alex")
+		playAnimation(StageScene.Solo, "walk", {pc="alexrynardy"})
+		saynn("You exit your apartment and look around. The whole world looks so different now. But you just can't focus on anything else anymore.. only on your project.")
+
+		saynn("You follow the corridors of the station, stare at the vast open space through some windows.. but the anxiety just doesn't go away.")
+
+		saynn("Your eyes spot one of the trash bins.. No.. surely you won't lower yourself to that level. People do like to throw out broken tech though. Why repair when you can just order a new shiny one.")
+
+		saynn("You walk past it.. your eyes notice a shiny metal glint that is produced by some object in that bin.. You feel like you won't be able to sleep if you don't at least check it..")
+
+		saynn("Fuck it, you look around to make sure no one is looking and then start rummaging through it, searching for anything useful. The glint turned out to be just some packaging.. but you won't give up that easily.")
+
+		saynn("[say=captain]Hey.[/say]")
+
+		saynn("Oh shit.")
+
+		addButton("Play it cool", "Panic!", "alex_approached_by_cap_again")
+	if(state == "alex_approached_by_cap_again"):
+		addCharacter("captain")
+		playAnimation(StageScene.Duo, "stand", {pc="alexrynardy", npc="captain"})
+		saynn("It's best to pretend that you just accidentally dropped something and are now looking for it.. yes.")
+
+		saynn("[say=alexrynard]Sorry, I lost a damn..[/say]")
+
+		saynn("You turn around and realize that the figure looks quite.. familiar.")
+
+		saynn("[say=alexrynard]Wait, I remember you. Mister Wright, wasn't it?[/say]")
+
+		saynn("He nods. You pull your hands out of the trash bin and just dry them against your dirty uniform. Better get it cleaned soon.. but who cares.")
+
+		saynn("[say=captain]Life's been rough?[/say]")
+
+		saynn("[say=alexrynard]It's that obvious?[/say]")
+
+		saynn("[say=captain]My offer still stands.[/say]")
+
+		saynn("Give up everything? Now? Fuck.. Maybe it's time to give up? But something about going with this guy rubs you the wrong way.")
+
+		saynn("[say=alexrynard]Is that why are you still here? To test how much you can lowball me?[/say]")
+
+		saynn("[say=captain]I just wanted to look at the Expo. See what kind of projects people are working on. I heard that you had to quit your team?[/say]")
+
+		saynn("[say=alexrynard]And who told you that?[/say]")
+
+		saynn("You talk so aggressively without even realizing it..")
+
+		saynn("[say=captain]Some guy at the bar was happy he fired some 'beta'. Whatever that means.[/say]")
+
+		saynn("[say=alexrynard]And you instantly thought of me, huh?[/say]")
+
+		saynn("To be fair, you don't exactly look like an alpha at this moment. But he just never saw you in bed yet.")
+
+		saynn("[say=captain]I don't think he is right. The guy was.. quite dumb. Listen, I want to give you something.[/say]")
+
+		saynn("He tries to hand you a chip.. A chip with credits. A lot of credits. Enough to cover the expenses that are left. Feels too good to be true..")
+
+		saynn("[say=alexrynard]Are you buying me? I'm still too busy to work for you. Even if I wanted to. No hard feelings.[/say]")
+
+		saynn("[say=captain]Take it, no strings attached. Use these credits any way you see fit, they're yours.[/say]")
+
+		saynn("Oh fuck. If the guy wants to throw credits around, that's just not your problem anymore. You hungrily snatch the chip and quickly put it away.")
+
+		saynn("[say=alexrynard]Listen, I appreciate it, really. But even if I win, I sure as hell won't go working for you then, hope you understand that.[/say]")
+
+		saynn("[say=captain]Of course, that's okay. See you around, Alex.[/say]")
+
+		saynn("What? That's it? No gotcha? You can't believe it but the guy is indeed just leaving now.")
+
+		saynn("[say=alexrynard]Wait. Why are you doing this?[/say]")
+
+		saynn("[say=captain]I just want to see some real competition at the Expo. Other projects are nothing compared to the engine. But I think you might have a chance at beating your own creation. You just need some help.[/say]")
+
+		saynn("And just like that.. He leaves..")
+
+		saynn("You look at the chip.. your hands shake.. such a familiar feeling.")
+
+		addButton("Work", "Time to do some work", "alex_has_credits_time_to_work")
+	if(state == "alex_has_credits_time_to_work"):
+		# (( AimCameraHere
+		addCharacter("sen_alex")
+		playAnimation(StageScene.Solo, "stand", {pc="alexrynardy"})
+		saynn("You register the credits to your account and then rush back to your apartment.")
+
+		saynn("[say=alexrynard]Sentinel, order everything! I found the credits.[/say]")
+
+		saynn("[say=sen_alex]Welcome back, Sir. Right away.[/say]")
+
+		saynn("It was truly enough for everything. At some point you begin to feel like this project might actually see the light of day.. that it might actually succeed.")
+
+		saynn("Still, it was a lot of work, finishing the frame, assembling, coding. Too much work for one month. Strangely, you don't feel it weighing you down anymore. It's like you don't care.")
+
+		saynn("Your testing was just putting the thing on a few times and seeing if it even functions at all. The motors do seem to give you extra strength. Which is something. The secret ingredient is still yet to be added. But it must be added last.")
+
+		saynn("You carefully place all of the pieces of the finished exosuit onto the workbench. It's not pretty.. there is no armor that these things usually come with. But you don't need armor when you have the brains.")
+
+		saynn("You haven't slept in days.. You have lost sense of time completely.")
+
+		saynn("[say=alexrynard]When is the Expo, Sentinel?[/say]")
+
+		saynn("[say=sen_alex]Tomorrow, Sir. In exactly 12 hours.[/say]")
+
+		saynn("Time flies..")
+
+		saynn("[say=alexrynard]Set an alarm so I don't oversleep.[/say]")
+
+		saynn("[say=sen_alex]Yes, Sir.[/say]")
+
+		saynn("You hear someone knocking on the door.")
+
+		saynn("[say=sen_alex]It's Lin, Sir.[/say]")
+
+		saynn("[say=alexrynard]Just let her in.[/say]")
+
+		addButton("Lin", "See what's up with her", "lin_walksin_after_all")
+	if(state == "lin_walksin_after_all"):
+		addCharacter("lin_alex")
+		playAnimation(StageScene.Duo, "stand", {pc="alexrynardy", npc="lin_alex"})
+		saynn("The door opens and Lin slowly walks in. She looks around the room, probably still impressed by how much you managed to transform it.")
+
+		saynn("[say=lin_alex]Hey, Al, wanted to check on you..[/say]")
+
+		saynn("[say=alexrynard]I'm still alive. And I finished my Expo entry even.[/say]")
+
+		saynn("[say=lin_alex]Our team is ready too..[/say]")
+
+		saynn("She looks at the workbench, seeing your prototype.")
+
+		saynn("[say=alexrynard]Well, let the best project win, huh?[/say]")
+
+		saynn("[say=lin_alex]Yeah..[/say]")
+
+		saynn("She looks at you next.")
+
+		saynn("[say=lin_alex]Wow.. You changed so much.[/say]")
+
+		saynn("You rub your chin.")
+
+		saynn("[say=alexrynard]Yeah, I think I aged like twenty years in the last few weeks.[/say]")
+
+		saynn("[say=lin_alex]Your hair has grown so much too.. May I?[/say]")
+
+		saynn("[say=alexrynard]Sure.[/say]")
+
+		saynn("She reaches her paws out, gently caressing your cheeks and carefully bringing all the loose hair strands behind your head. Then she uses a spare rubber band to form a nice ponytail.")
+
+		addButton("Continue", "See how it looks", "alex_gets_ponytail")
+	if(state == "alex_gets_ponytail"):
+		playAnimation(StageScene.Hug, "hug", {pc="alexrynard", npc="lin_alex"})
+		saynn("Her touch still feels so nice.. makes you feel calmer.. the noise in your head clearing up just from her being near.")
+
+		saynn("[say=alexrynard]Thanks. I can actually see how pretty you are now.[/say]")
+
+		saynn("She giggles and then hugs you.")
+
+		saynn("[say=lin_alex]And you look and feel very manly~.[/say]")
+
+		saynn("Lin nuzzles your cheeks, her paws exploring your body.")
+
+		saynn("[say=alexrynard]Someone's horny, huh~?[/say]")
+
+		saynn("One of your hands slides down to her crotch.. and feels how warm it is.")
+
+		saynn("[say=lin_alex]Yes, Sir~.[/say]")
+
+		saynn("[say=alexrynard]Ohh, are you trying to be a good girl for me?[/say]")
+
+		saynn("She leans super close, your noses colliding, her lusty eyes looking directly into yours.")
+
+		saynn("[say=lin_alex]I am such a bad girl, you can't even imagine it~.[/say]")
 
 
 func _react(_action: String, _args):
