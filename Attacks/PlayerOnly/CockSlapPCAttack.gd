@@ -43,7 +43,7 @@ func _doAttack(_attacker, _receiver, _context = {}):
 		text += "\n[b]{receiver.name} loses {receiver.his} balance and collapses onto the floor[/b]."
 		
 	if(RNG.chance(min(7.0, sqrt(maxDamage))) && _receiver.addEffect(StatusEffect.Stunned, [1])):
-		text += "\n[b][color=red]CRITICAL SLAP![/color] {receiver.name} got stunned because of the weight of that thing![/b]."
+		text += "\n[b][color=red]CRITICAL SLAP![/color] {receiver.name} got stunned because of the weight of that thing![/b]"
 	
 	var lustInterests:LustInterests = _receiver.getLustInterests()
 	var likesBigCock = lustInterests.getTopicValue(InterestTopic.BigCock, _attacker)

@@ -147,11 +147,11 @@ func _run():
 
 		# (if condom breaks)
 		if(usedCondom && condomBroke):
-			saynn("She quickly closes in on her own climax before doing one last hard thrust and shoving her whole cock inside you, knot included. She grunts and growls while her cock breaks through your cervix and starts filling the condom while inside you with hot sticky cum. Your womb quickly starts to feel stuffed, she doesn’t pull out, using this chance to stretch you out more with her knot, maybe to cause you discomfort. But it only sends more warm orgasmic waves through your body, causing you to squirm and make more pleasure noises. Suddenly you feel that something is different.. The cum feels way more warm than before. [b]Oh no, the condom breaks and spills all of its contents![/b].")
+			saynn("She quickly closes in on her own climax before doing one last hard thrust and shoving her whole cock inside you, knot included. She grunts and growls while her cock breaks through your cervix and starts filling the condom while inside you with hot sticky cum. Your womb quickly starts to feel stuffed, she doesn’t pull out, using this chance to stretch you out more with her knot, maybe to cause you discomfort. But it only sends more warm orgasmic waves through your body, causing you to squirm and make more pleasure noises. Suddenly you feel that something is different.. The cum feels way more warm than before. [b]Oh no, the condom breaks and spills all of its contents![/b]")
 
 			saynn("[say=avy]Oops. You probably didn’t want that? Oh well.[/say]")
 
-		saynn("When the knot starts to deflate, Avy pulls her cock out and rubs it clean against your butt. She quickly catches her breath and then [b]grabs a black marker and draws a tally mark on your body![/b].")
+		saynn("When the knot starts to deflate, Avy pulls her cock out and rubs it clean against your butt. She quickly catches her breath and then [b]grabs a black marker and draws a tally mark on your body![/b]")
 
 		# (if condom didn’t break)
 		if(usedCondom && !condomBroke):
@@ -197,7 +197,7 @@ func _run():
 
 		saynn("[say=avy]Wow. I will make sure you find you again later, you know how to drain a girl’s balls. Hah.[/say]")
 
-		saynn("She takes the marker again and [b]draws another tally mark on you![/b].")
+		saynn("She takes the marker again and [b]draws another tally mark on you![/b]")
 
 		saynn("And, as if nothing happened, Avy leaves you and goes on her way, leaving you alone with your both holes used.")
 

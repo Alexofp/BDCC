@@ -177,7 +177,7 @@ func _run():
 
 		# (if condom broke)
 		if(usedCondom && condomBroke):
-			saynn("You just give her thighs a smack and grunt before shoving your {pc.cock} as deep as you can. Your own legs shiver while you begin stuffing the condom inside the slut’s womb full of your hot sticky {pc.cum}. Suddenly you feel that something is very different.. Oh no. [b]The condom breaks inside Nova, spilling all its contents out![/b]. There is so much {pc.cum} that Nova’s belly now looks inflated and it’s all in her womb so risky.")
+			saynn("You just give her thighs a smack and grunt before shoving your {pc.cock} as deep as you can. Your own legs shiver while you begin stuffing the condom inside the slut’s womb full of your hot sticky {pc.cum}. Suddenly you feel that something is very different.. Oh no. [b]The condom breaks inside Nova, spilling all its contents out![/b] There is so much {pc.cum} that Nova’s belly now looks inflated and it’s all in her womb so risky.")
 
 			saynn("You pull your cock out and watch a stream of {pc.cum} coming out of the guard’s used hole. Nova is breathing heavily, her canine tongue is still out. She can feel something running down her leg.")
 
