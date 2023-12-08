@@ -1151,10 +1151,287 @@ func _run():
 
 		saynn("[say=lin_alex]I am such a bad girl, you can't even imagine it~.[/say]")
 
+		saynn("[say=alexrynard]Hands behind your back, bad girl.[/say]")
+
+		saynn("Now she leans in close to your ear.")
+
+		saynn("[say=lin_alex]Make me~.[/say]")
+
+		addButton("Make her", "Sounds like an invitation", "alex_makes_lin")
+	if(state == "alex_makes_lin"):
+		playAnimation(StageScene.Duo, "stand", {pc="alexrynard", npc="lin_alex", npcBodyState={underwear=true}})
+		saynn("Lin raises her chin high as you get a grasp on her neck, her bratty eyes follow your other hand as you begin to strip her uniform.")
+
+		saynn("[say=lin_alex]I could stop you at any point..[/say]")
+
+		saynn("[say=alexrynard]And yet..[/say]")
+
+		saynn("After the clothes are on the floor, you gently wrench her arms behind her back and then tie them up together with some left-over wire.")
+
+		saynn("[say=alexrynard]..you'd rather submit to me.[/say]")
+
+		saynn("She smiles, testing your make-shift restraints.")
+
+		saynn("[say=alexrynard]On your knees, girl.[/say]")
+
+		saynn("Lin stands still, your order seems to be ignored.")
+
+		addButton("Spank", "Punish her for disobeying", "spank_lin_for_brat")
+	if(state == "spank_lin_for_brat"):
+		playAnimation(StageScene.Duo, "stand", {pc="alexrynard", npcAction="hurt", npc="lin_alex", npcBodyState={underwear=true}})
+		saynn("You wait a solid five seconds to give the brat enough time to consider her actions.. But after that.. all bets are off.")
+
+		saynn("Lin gasps softly as your hand finds her neck again before the second one delivers a smack on her cute butt, causing the foxy to stifle out a moan.")
+
+		saynn("[say=alexrynard]Either I see you sitting on the floor.. or you're not sitting at all for a while.[/say]")
+
+		saynn("[say=lin_alex]Make me.[/say]")
+
+		saynn("Her butt receives another smack, making it jiggle slightly.")
+
+		saynn("[say=lin_alex]Harder.[/say]")
+
+		saynn("Another three spanks in a row.. Lin's butt begins to glow red.")
+
+		saynn("[say=lin_alex]Nh-h.. Harder still. Make it sting like hell..[/say]")
+
+		saynn("You don't recall her being such a masochist.")
+
+		saynn("Lin sees your confused stare and offers a little smile.")
+
+		saynn("[say=lin_alex]I want you to hurt me, Sir. Like a bad girl that I am..[/say]")
+
+		saynn("It did feel kinda good to let all that stored tension out through the spanks.. She is asking for it too..")
+
+		addButton("Hurt her", "Be rough with Lin", "do_be_rough_with_lin")
+		addButton("Cuddle her", "Be very soft with Lin", "do_be_soft_with_lin")
+	if(state == "do_be_soft_with_lin"):
+		playAnimation(StageScene.Cuddling, "idle", {pc="alexrynard", npc="lin_alex", bodyState={underwear=true}, npcBodyState={underwear=true}})
+		saynn("[say=alexrynard]I'm not gonna hurt you, silly.[/say]")
+
+		saynn("Lin lowers her gaze.")
+
+		saynn("[say=lin_alex]Why not..[/say]")
+
+		saynn("You wrap your arms around her and gently pull her in for some warm cuddles instead, your cheek brushing against hers.")
+
+		saynn("[say=alexrynard]Because it feels wrong.[/say]")
+
+		saynn("[say=lin_alex]But I'm.. bad..[/say]")
+
+		saynn("Your hands gently caress her curves.")
+
+		saynn("[say=alexrynard]No you're not. You're doing what you think is the best. Sometimes you have no choice.[/say]")
+
+		saynn("[say=lin_alex]I'm just so.. tired..[/say]")
+
+		saynn("Is that tears?")
+
+		saynn("[say=alexrynard]The Expo is gonna be over soon. We will have so much time to spend together.[/say]")
+
+		saynn("You cover her neck and shoulders with kisses all around. Sadly it only makes the girl's tears stream down her cheeks more.")
+
+		saynn("[say=lin_alex]H-h.. yeah..[/say]")
+
+		saynn("You just hum a little melody into her ear and cuddle Lin.")
+
+		saynn("To be fair, you're extremely tired too. Your eyes really want to close..")
+
+		saynn("Your brain decides that it's time to sleep..")
+
+		addButton("Sleep", "Sleep while embracing Lin", "do_sleep_with_lin")
+	if(state == "do_be_rough_with_lin"):
+		playAnimation(StageScene.Choking, "tease", {pc="alexrynard", npc="lin_alex", bodyState={exposedCrotch=true,hard=true}, npcBodyState={exposedCrotch=true}})
+		saynn("[say=alexrynard]Alright, little slut. You asked for it.[/say]")
+
+		saynn("Suddenly, you pin Lin against one of the walls of your apartment, making her gasp. You steal that gasp by increasing pressure on her throat, your other hand quickly stripping your uniform and exposing your cock that is already peeking out of its sheath.")
+
+		saynn("Lin bites her lip.. the girl isn't even hiding it anymore.")
+
+		saynn("[say=alexrynard]Such a dirty whore. You're wet down there already, aren't you?[/say]")
+
+		saynn("[say=lin_alex]Yes..[/say]")
+
+		saynn("You obsessively yank her panties off her, exposing her soaking wet flower. Flower, that you are quick to slap.")
+
+		saynn("[say=lin_alex]Nh-h~.. More..[/say]")
+
+		saynn("[say=alexrynard]Shut up, I'm not doing this for your entertainment. You lost your rights when you decided to disobey me.[/say]")
+
+		saynn("Another pussy slap makes Lin arch her back and produce a painful cry of passion.")
+
+		saynn("[say=lin_alex]I'm sorry.. This slut is yours to punish..[/say]")
+
+		saynn("You grab one of her legs and raise it high, already aligning your hard cock with that bruised cunt. Feels so good to not be a beta for once.")
+
+		addButton("Fuck her", "Time for some action", "do_fuck_lin_rough")
+	if(state == "do_fuck_lin_rough"):
+		playAnimation(StageScene.Choking, "sex", {pc="alexrynard", npc="lin_alex", bodyState={exposedCrotch=true,hard=true}, npcBodyState={exposedCrotch=true}})
+		saynn("One rough motion of your hips causes your cock to spread that pussy wide. The slut instantly clenches as you ram your whole length inside.. So tight. Lin tries to moan.. but that's when your hand starts choking her for real.")
+
+		saynn("[say=lin_alex]Nh-h..[/say]")
+
+		saynn("[say=alexrynard]Stupid little bitch.[/say]")
+
+		saynn("She nods subtly, her eyes full of lust no matter how much you degrade her. And choking her only makes her pussy grip your cock more.")
+
+		saynn("You start fucking her, raw, your motions rough. Her body struggles to withstand such an onslaught, her legs shaking. Such a helpless pray she is.")
+
+		saynn("[say=alexrynard]Worthless. Completely. Just a fucktoy, nothing more.[/say]")
+
+		saynn("You're not holding back anymore.. After such a stressful month it only makes sense to let all your stored tension out on someone.. and Lin seems to want the opposite.. good for her.")
+
+		saynn("[say=lin_alex]Ah-h-h..[/say]")
+
+		saynn("Noises of your cock slapping against her bruised pussy folds are complemented by an occasional moan slipping past her lips. You're giving her some air to breathe, you're not a monster.")
+
+		saynn("The knot at the base of your cock is inflating.. making it hard to fit it inside that slutty cunt anymore.. Looks like you will have to apply more force.")
+
+		addButton("Knot Lin", "Breed that slut", "do_knot_lin_rough")
+	if(state == "do_knot_lin_rough"):
+		playAnimation(StageScene.Choking, "inside", {pc="alexrynard", npc="lin_alex", bodyState={exposedCrotch=true,hard=true}, npcBodyState={exposedCrotch=true}})
+		saynn("Just when Lin begins to get weaker from the lack of air, you wake her up by suddenly shoving your whole length down her cunt, your member breaking into her needy womb, creating a visible bump on her belly.")
+
+		saynn("[say=lin_alex]F-fu-uck-k~..[/say]")
+
+		saynn("She throws her head back and moans passionately, tears streaming down her cheeks, her whole body is shivering, your inner walls gripping your cock extremely tight.")
+
+		saynn("The bitch is so cumming so hard, your own orgasm draws near. And you welcome it, grunting manly while your throbbing cock starts filling her babymaker full of your seed.")
+
+		saynn("[say=alexrynard]Your only purpose is being a breeding bitch.[/say]")
+
+		saynn("[say=lin_alex]Yes-s..[/say]")
+
+		saynn("The knot holds your cum inside her, making the bump on her belly bigger.")
+
+		saynn("Now you're forced to stay like that for some time. The slut is clearly loving it, even if she is crying. Looks like you're not the only one with a baggage of stored emotions.")
+
+		saynn("You relax the grip on her neck, letting Lin breathe normally.")
+
+		saynn("[say=alexrynard]You're okay?[/say]")
+
+		saynn("[say=lin_alex]Thank you.. I think I am.. I don't feel any worse than I did before.[/say]")
+
+		saynn("Might as well try to get into a better position now.")
+
+		addButton("Floor", "Lie down on the floor", "do_lay_down_after_breed")
+	if(state == "do_lay_down_after_breed"):
+		playAnimation(StageScene.Sleeping, "sleep", {pc="alexrynard", npc="lin_alex", bodyState={underwear=true}, npcBodyState={exposedCrotch=true}})
+		saynn("You wait for the knot to deflate enough and then yank it out, causing Lin's used pussy to start dripping your cum onto the floor. Who cares, the whole apartment is a mess anyway.")
+
+		saynn("[say=lin_alex]Ah..[/say]")
+
+		saynn("After that, you bring her to your little sleeping spot and pull her over you, like a blanket.")
+
+		saynn("Her tears keep making you think like you did something very wrong.. but you're way too tired to reflect on that.")
+
+		addButton("Sleep", "Sleep while embracing Lin", "do_sleep_with_lin")
+	if(state == "do_sleep_with_lin"):
+		playAnimation(StageScene.Sleeping, "sleep", {pc="alexrynard", bodyState={underwear=true}})
+		removeCharacter("lin_alex")
+		saynn("[say=sen_alex]Beep beep beep beep.[/say]")
+
+		saynn("[say=alexrynard]I'm up.. up..[/say]")
+
+		saynn("The sleep has ended faster than it began. Oh shit, the Expo is in one hour.")
+
+		saynn("Lin is nowhere to be seen. Makes sense, she has to prepare too.")
+
+		addButton("Shower", "Take a quick shower", "alex_prepares_before_expo")
+	if(state == "alex_prepares_before_expo"):
+		playAnimation(StageScene.Solo, "stand", {pc="alexrynard"})
+		saynn("You take a quick shower and put on your usual uniform. It looks unusually clean, did Lin do that?")
+
+		saynn("You walk up to the bench and start preparing the prototype too.")
+
+		saynn("[say=sen_alex]Sir, there is one alarm.[/say]")
+
+		saynn("[say=alexrynard]Huh? A pizza guy? Whatever, I don't have time to eat.[/say]")
+
+		saynn("[say=sen_alex]No, Sir. It's something else.[/say]")
+
+		saynn("[say=alexrynard]Fine, tell me.[/say]")
+
+		saynn("[say=sen_alex]There is a problem with that, Sir. I'm not sure what the alarm is.[/say]")
+
+		saynn("You tilt your head at the camera that the Sentinel is seeing the world through.")
+
+		saynn("[say=alexrynard]Did the star radiation flip the wrong bit in you?[/say]")
+
+		saynn("[say=sen_alex]I'm really not sure, Sir..[/say]")
+
+		saynn("You shrug. His alarm clock module worked so he can't be that broken.")
+
+		saynn("[say=alexrynard]Whatever, we will deal with that later. Right now I need you for something else.[/say]")
+
+		saynn("[say=sen_alex]Yes, Sir.[/say]")
+
+		saynn("You quickly do the last preparations and then store your prototype in a big bag.")
+
+		saynn("Time to do this.")
+
+		addButton("Expo", "Attend the annual AlphaTech Expo", "alex_attends_expo")
+	if(state == "alex_attends_expo"):
+		# (( AimCamera here
+		removeCharacter("sen_alex")
+		addCharacter("boss_alex")
+		addCharacter("lin_alex")
+		addCharacter("captain")
+		playAnimation(StageScene.Duo, "stand", {pc="alexrynard", npc="boss_alex"})
+		saynn("The Expo is happening in a big hangar. Not the one that you used to work in, a much bigger one, giving all the participants plenty of space to showcase their contraption.")
+
+		saynn("And wow, it's getting very crowded already. People all around the galaxy seem to be interested in seeing what the young minds of this generation came up with this time.")
+
+		saynn("You quickly find your exhibition booth and prepare your showcase. You don't have any fancy fliers or ads for your project.. But hopefully a good project will beat lack of marketing.")
+
+		saynn("A man wearing an official white uniform begins to speak to the public.")
+
+		saynn("[sayMale]Welcome, ladies and gentlemen, to the annual AlphaTech Expo. I'm proud to announce that today we have more than ten beautiful projects out on display, ready to be showcased. But only one of them will go home today with the main prize: Unlimited Project funding, courtesy of AlphaCorp. That's right, AlphaCorp promises to pay any project-related expenses, helping you turn your one-off prototype into a serial production![/sayMale]")
+
+		saynn("People are clapping. You notice Mister Wright standing in the second row.")
+
+		saynn("[sayMale]We have three judges, each one will rank each project on a variety of factors. Remember that the size of a project doesn't matter, what matters are the three core principles: Efficiency, Durability, Simplicity. Innovation is good.. but what is it if your tech can't be easily replicated or costs too much to repair?[/sayMale]")
+
+		saynn("Well, that gives you at least some hope.. You look at the booth of your ex-boss.. It's huge because they had to find space for the whole spaceship. Flashy ads, big words, smug faces. Only Lin looks down at the floor.")
+
+		saynn("[sayMale]The order of projects will be decided by drawing cards with numbers. I ask our participants to approach us now. As for everyone else, feel free to explore the exhibits! The judges will start their work shortly. Thank you for being part of the AlphaTech Expo, where dreams become reality![/sayMale]")
+
+		saynn("You run into your ex-boss as you begin to approach the table with the cards.")
+
+		saynn("[say=boss_alex]Didn't think I'd see you here.[/say]")
+
+		saynn("You want to walk past but he blocks the path.")
+
+		saynn("[say=boss_alex]Is that what you came up with? Assemble your own metal cage kit?[/say]")
+
+		saynn("He points at the table with the pieces of your exosuit carefully placed on.")
+
+		saynn("[say=alexrynard]Let me through.[/say]")
+
+		saynn("[say=boss_alex]Or what? Gonna cry?[/say]")
+
+		saynn("Starting a fist-fight here is not a good idea. But in the absence of any good ones.. you decide to punch the fucker in the jaw anyway. He grunts and recoils back.")
+
+		saynn("[say=boss_alex]Argh! H-hey! You hit me! He hit me![/say]")
+
+		saynn("His own team members are pulling him away after that. At least your boys still respect you.")
+
+		saynn("You drew a number.. nine. Pretty much last. It will be hard to impress the judges after all the other projects.")
+
+		saynn("Your ex-boss drew a number.. two. Fucker is lucky, you can give him that.")
+
+		saynn("Well, all you can do is wait for your turn now.")
+
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
 		endScene()
 		return
+
+	if(_action == "alex_makes_lin"):
+		getCharacter("lin_alex").getInventory().forceEquipStoreOtherUnlessRestraint(GlobalRegistry.createItem("ZiptiesWrist"))
+
+	if(_action == "do_sleep_with_lin"):
+		getCharacter("lin_alex").removeAllRestraints()
 
 	setState(_action)
