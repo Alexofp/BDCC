@@ -753,7 +753,7 @@ func _run():
 		playAnimation(StageScene.Duo, "stand", {pc="alexrynardy", npc="lin_alex"})
 		saynn("Lin stops you before you can walk out.")
 
-		saynn("[say=lin_alex]Alex.. I'm.. sorry.[/say]")
+		saynn("[say=lin_alex]Alex.. I'm.. sorry..[/say]")
 
 		saynn("[say=alexrynard]If you want to stay - stay. I won't judge you. But I can't work here anymore.[/say]")
 
@@ -1422,6 +1422,329 @@ func _run():
 
 		saynn("Well, all you can do is wait for your turn now.")
 
+		addButton("Wait", "Wait until it's your turn to showcase the project", "engine_showcase")
+	if(state == "engine_showcase"):
+		playAnimation(StageScene.Duo, "stand", {pc="boss_alex", npc="lin_alex"})
+		saynn("Everyone's eyes and ears are glued to that spaceship though, it's hard to ignore it when it's their turn to showcase their project.")
+
+		saynn("[say=boss_alex]Welcome! As you might already know, with the discovery of Bluespace, many scientists rushed to try to find a use for it. And I'm happy to announce that me and my team successfully harnessed the power of a bluespace crystal to create an entirely new type of engine. Something that was Never done before![/say]")
+
+		saynn("The guy is a lying piece of shit. But his 'team' is not so fast to point out that you also had a huge part in it. Whatever. Lin is staying quiet too, avoiding eye contact.")
+
+		saynn("The three judges carefully inspect all the promo material. One of them has a few questions.")
+
+		saynn("[sayMale]New type of engine? How much faster is it than the current FTL-capable solutions? Don't get me wrong, it's great to explore these kinds of things. But new is not always better, hope you can understand what I mean.[/sayMale]")
+
+		saynn("[say=boss_alex]It's.. much faster! It's way faster than any FTL engine.[/say]")
+
+		saynn("You are ready to facepalm, he didn't even try to understand how it works.")
+
+		saynn("[sayMale]Faster than faster than light engines?[/sayMale]")
+
+		saynn("[say=lin_alex]It's.. it's actually instant.. Bluespace warping is instant..[/say]")
+
+		saynn("The boss is quick to grab Lin and pull her closer to the judges.")
+
+		saynn("[say=boss_alex]This is Lin, our Bluespace expert. She knows Everything about it. Thanks to her, this dream became a reality.[/say]")
+
+		saynn("[say=lin_alex]It wasn't me, it's..[/say]")
+
+		saynn("The boss is quick to cut her off.")
+
+		saynn("[say=boss_alex]Yes, it's our whole team, of course. Lin is being shy but she is right, remove any one person from our team and this project wouldn't be possible. But, thanks to my leadership skills, I'm proud to tell you all that we had zero problems developing this engine.[/say]")
+
+		saynn("You start to regret that you didn't shatter his jaw when you could have. The judges inspect the spaceship from a far. There are little fences that prevent people from getting too close to it.")
+
+		saynn("[sayMale]Very interesting. FTL warping might sometimes take hours of time. If your claims are true, this might be truly groundbreaking. But I find your words hard to believe.[/sayMale]")
+
+		saynn("[say=boss_alex]Oh, you don't have to trust my words, you can just trust your eyes. I'm a little hungry, I really could use a good pizza right now. I'm probably not alone, right?[/say]")
+
+		saynn("He smiles and then shows a thumbs up to the person who is inside the spaceship.")
+
+		saynn("Seconds later, the spaceship's little vertical-thrust engines suddenly kick in. The ship slowly takes off while the crowd gasps.")
+
+		saynn("[sayMale]What are you doing?[/sayMale]")
+
+		saynn("[say=boss_alex]It's just a demo, don't worry.[/say]")
+
+		saynn("There are plenty of reasons to worry. You did many tests.. but you never had a chance to test it mounted on a spaceship..")
+
+		saynn("The ship carefully phases through the thick hardlight barrier that keeps the air from escaping, positions itself just right.. and then starts to warp..")
+
+		saynn("Soon, the space just before the spaceship gets torn apart, spawning an incredibly-looking blue glowing rift. If you look inside it.. you just see.. waterfalls of energy.")
+
+		saynn("The ship carefully flies into it.. before disappearing completely.. and leaving people speechless. You can't help but to whisper something.")
+
+		saynn("[say=alexrynard]It's.. working. So beautiful..[/say]")
+
+		saynn("A few seconds pass. The boss nudges Lin and whispers to her.")
+
+		saynn("[say=boss_alex]That's supposed to happen, right? We're looking kinda bad right now.[/say]")
+
+		saynn("She just nods back. Both, you and her, know that it was a bad idea to try to push this engine so hard.")
+
+		saynn("And yet, exactly after thirty seconds, another bluespace rift opens in the exact same place before the same exact spaceship flies out of it, facing the other direction now.")
+
+		saynn("People are clapping furiously while the ship lands. It's pilot walks out with a pizza box in his hands. He opens it and shows it to the public.")
+
+		saynn("[say=boss_alex]See? Right out of the oven, the cheese didn't even have enough time to melt.[/say]")
+
+		saynn("He offers each judge a slice, they happily take it after they are done clapping their hands too.")
+
+		saynn("Throughout all of this.. you can't help but to think how big of a waste this is. Using such advanced technology.. just to order pizza. You probably would have done the same though, having instant pizza is kinda nice.")
+
+		saynn("That one is gonna be hard to top..")
+
+		saynn("Eventually, the judges move on to other projects. But none of them come even remotely to that one.")
+
+		saynn("Now it's your turn..")
+
+		addButton("Showcase", "Present the judges your project", "alex_showcases_project")
+	if(state == "alex_showcases_project"):
+		playAnimation(StageScene.Solo, "stand", {pc="alexrynard"})
+		saynn("All the pieces of the exosuit are still on the table. You didn't really prepare any speeches. Time to wing it.")
+
+		saynn("[say=alexrynard]Um.. welcome everyone. Gonna be honest, my project is not as big as that fancy spaceship. But I'm pretty sure mine is more useful. Hopefully by the end of my little presentation, you will see why.[/say]")
+
+		saynn("The judges look at the disassembled pieces lying on the table, most of them are confused.")
+
+		saynn("[sayMale]Well, tell us about your project.[/sayMale]")
+
+		saynn("[say=alexrynard]Right.. What you see here on the table is an exosuit. I called my project..[/say]")
+
+		saynn("Oh shit.. What would be a good name.. Right.")
+
+		saynn("[say=alexrynard]Sentinel-X mark Zero.[/say]")
+
+		saynn("[sayMale]So it's just an exosuit? Looks pretty bare for an exosuit.[/sayMale]")
+
+		saynn("[say=alexrynard]Well, let me show you how easy it is to put it on.[/say]")
+
+		addButton("Wear it", "Wear your exosuit", "alex_wears_exosuit")
+	if(state == "alex_wears_exosuit"):
+		playAnimation(StageScene.Solo, "stand", {pc="alexrynard"})
+		saynn("You grab one of the pieces off the table and then just press it against your wrist. And, seconds later, it just latches onto it, using motors and pistons to expand itself onto your whole arm before fastening itself tight.")
+
+		saynn("Some of the public is already kinda impressed.")
+
+		saynn("[say=alexrynard]As you can see, incredibly easy to put on.[/say]")
+
+		saynn("You place the second piece against your other wrist.. until it does the same, expanding itself onto your whole other arm, using metal supports that don't restrict your range of motions at all. After that, you flex your arms, causing all the little powerful motors to whirl audibly.")
+
+		saynn("[say=alexrynard]With just these two pieces, I am now the strongest person in the world.[/say]")
+
+		saynn("You didn't prepare anything heavy.. so you just lift the table by its corner.. with two fingers. It sure looks unnatural.")
+
+		saynn("[sayMale]That's interesting, for sure. But I think the market already has similar products.[/sayMale]")
+
+		saynn("[say=alexrynard]Fair. This one is completely modular though. Attaching or swapping tools, armor, and weaponry is effortless. Let me put the rest on.[/say]")
+
+		saynn("You grab the main piece and press it against your chest. Seconds later, the piece grabs onto your chest and begins constructing a rigid frame around it. Then, it finds your arm modules and connects to them, forming one whole exosuit. After it, come the leg pieces that also attach themselves to the chest piece automatically.")
+
+		saynn("[say=alexrynard]See. Less than a minute. And now I can do this.[/say]")
+
+		saynn("You jump.. super high. Higher than the heads of the judges that are watching you. And yet, your landing was incredibly soft, the motors in your leg pieces spreading the impact over a long time.")
+
+		saynn("[sayMale]Huh. I don't think soldiers jump very often.[/sayMale]")
+
+		saynn("[say=alexrynard]Planets have different gravity. My exosuit would allow you to wear better armor than you otherwise could have. Jumping is just a bonus.[/say]")
+
+		saynn("[sayMale]You didn't bring any to show us?[/sayMale]")
+
+		saynn("Wow, they're so needy.")
+
+		saynn("[say=alexrynard]I will be honest, I just didn't have any time. Due to some.. life problems.. I only had 2 weeks to make my prototype. But as you can see, it's incredibly light, uses very simple parts and materials, doesn't take long to assemble and is extremely modular while also being fairly durable.[/say]")
+
+		saynn("[sayMale]Right.. That is very fair. Anyone have any questions?[/sayMale]")
+
+		saynn("You are wondering if you should do it now or..")
+
+		saynn("But then your ex-boss takes the first row.")
+
+		saynn("[say=boss_alex]How is it powered? I bet it works for less than an hour.[/say]")
+
+		saynn("Of course he knows where to poke.")
+
+		saynn("[say=alexrynard]Just a simple battery. I didn't have access to any bluespace crystals. With them I would be able to expand this exosuit's battery time to pretty much forever.[/say]")
+
+		saynn("[sayMale]You made a lot of claims here, Mister.. Rynard. I hope you will forgive me if I don't trust everything that was said but not shown.[/sayMale]")
+
+		saynn("It's probably time..")
+
+		saynn("[say=alexrynard]Want me to show how easy it is to charge it?[/say]")
+
+		saynn("[sayMale]Um.. Sure?[/sayMale]")
+
+		saynn("Now or never.")
+
+		addButton("Continue", "See what happens next", "alex_impresses_judges")
+	if(state == "alex_impresses_judges"):
+		addCharacter("sen_alex")
+		playAnimation(StageScene.Duo, "stand", {pc="alexrynard", npc="sen_alex"})
+		saynn("You whisper something to the exosuit.. and it just kinda.. opens up, allowing you to step out of it while the frame itself continues to stand on its own.")
+
+		saynn("[sayMale]It just uses motors to freeze itself, right? Nice trick.[/sayMale]")
+
+		saynn("You smile and approach the nearest power socket. Everyone is slightly confused.")
+
+		saynn("[say=alexrynard]Come to me, Sentinel.[/say]")
+
+		saynn("[say=sen_alex]Yes, Sir![/say]")
+
+		saynn("Your exosuit says that before closing up and just casually approaching you.. while there is no one inside it.")
+
+		saynn("[say=alexrynard]I want to charge you.[/say]")
+
+		saynn("The exosuit retracts its plug and hands it to you, allowing you to insert it into the wall's socket.")
+
+		saynn("[say=sen_alex]Charge is at 69%, going up. I'm gonna be charged in 2 minutes, Sir.[/say]")
+
+		saynn("[say=alexrynard]Good. Unplug yourself when it's done.[/say]")
+
+		saynn("Everyone's jaw is.. dropped.")
+
+		saynn("[sayMale]Wait-wait-wait, it can walk on its own? And talk?[/sayMale]")
+
+		saynn("You pretend to be surprised by everyone's surprised expressions.")
+
+		saynn("[say=alexrynard]Yeah? It uses a very powerful but simple neural network that can utilize any of the exosuit's functions. Including walking and talking, yes. If the person inside is injured, it can just bring them to safety on its own. Or it can also just hold a weapon and fight completely on its own or as a squad member.[/say]")
+
+		saynn("[sayMale]Those claims would have to be tested as well.. But after seeing this.. huh. This might be the next combat tech revolution that we're seeing..[/sayMale]")
+
+		saynn("Your smile becomes even wider. Obviously, your ex-boss looks furious.. Sentinel carefully unplugs itself after he's been charged and just stands by your side.")
+
+		saynn("[say=sen_alex]I'm ready, Sir.[/say]")
+
+		saynn("The judges look truly impressed. Looks like your presentation has had the right effect.")
+
+		saynn("[say=alexrynard]Well, this is where my demo ends. If you want more..[/say]")
+
+		saynn("[say=boss_alex]Bullshit! I call bullshit![/say]")
+
+		saynn("Huh? Your ex-boss leaves the crowd and kicks your exosuit, causing it to recoil back a few meters, its light frame hitting the table and causing some sparks..")
+
+		saynn("[say=boss_alex]I bet it will break under any significant load.[/say]")
+
+		saynn("The exosuit quickly recovers after that strike. It just approaches you again and stands still like nothing happened. You wanna punch him again so much.. but you can't just do it..")
+
+		saynn("[say=alexrynard]You wanna try to fight me in it?[/say]")
+
+		saynn("The boss realizes that he might have gone a little too far..")
+
+		saynn("[say=boss_alex]Um.. Armwrestling is fine. I bet it will just snap.[/say]")
+
+		saynn("You shrug.")
+
+		saynn("[say=alexrynard]Sure, let's do it.[/say]")
+
+		saynn("Your exosuit opens up, allowing you to step into it before closing up tightly. Looks like nothing broke after that hit. Good.")
+
+		addButton("Armwrestling", "Time to teach your ex-boss a lesson", "alex_armwrestles_boss")
+	if(state == "alex_armwrestles_boss"):
+		playAnimation(StageScene.Duo, "stand", {pc="alexrynard", npc="boss_alex"})
+		saynn("And so you take the opposite spots around the table. Boss glares at you, clearly mad.")
+
+		saynn("You and him place your elbows on the solid surface.. and grab each other's hands. The public is watching with anticipation, your eyes do manage to find Mister Wright in the crowd too, looks like he is interested in this match. Only Lin is standing a fair distance away.")
+
+		saynn("[say=boss_alex]Three.. Two.. One.. Go![/say]")
+
+		saynn("You decide to play with him a little bit and just keep your arm still. Your ex-boss tries to move it.. but all he can accomplish is to make the motors in your exosuit whirl slightly louder.")
+
+		saynn("You smile. Finally the fucker is being humiliated in front of everyone.")
+
+		saynn("[say=boss_alex]C'mon! Fucking.. Shit..[/say]")
+
+		saynn("[say=alexrynard]Having trouble, boss?[/say]")
+
+		saynn("[say=boss_alex]Fuck you..[/say]")
+
+		saynn("He changes tactics and tries his best to purposely damage something in your exosuit. Such a loser.")
+
+		saynn("[say=alexrynard]Sentinel, please try not to break his arm.[/say]")
+
+		saynn("[say=sen_alex]Um.. yes, Sir.[/say]")
+
+		saynn("With one effortless motion, your exosuit helps you to bring his hand onto the table. You're not sure what the guy even thought would happen. But you're glad that it happened.")
+
+		saynn("[say=boss_alex]Argh![/say]")
+
+		addButton("Continue", "See what happens next", "bad_stuff_starts")
+	if(state == "bad_stuff_starts"):
+		playAnimation(StageScene.Solo, "stand", {pc="alexrynard"})
+		saynn("You take one step back and flex your exosuit's muscles again, making the motors whirl louder. The public seems to be amazed.")
+
+		saynn("[say=sen_alex]Um.. something is wrong, Sir..[/say]")
+
+		saynn("Sentinel is talking to you directly..")
+
+		saynn("[say=alexrynard]Huh?[/say]")
+
+		saynn("[say=sen_alex]I can't seem to.. Something is..[/say]")
+
+		saynn("You realize that the motors.. don't disengage. Shit, something is indeed broken.")
+
+		saynn("[say=alexrynard]Just lower the power, you have full control.[/say]")
+
+		saynn("[say=sen_alex]I don't.. something.. losing..[/say]")
+
+		saynn("You can't move.. can't even reach any manual controls.")
+
+		saynn("Your eyes notice Lin standing alone.. her parted lips shivering..")
+
+		saynn("[say=sen_alex]Alex.. I'm.. sorry..[/say]")
+
+		saynn("It echoes in your mind.")
+
+		saynn("[say=lin_alex]..sorry.. sorry..[/say]")
+
+		saynn("This isn't good.. There must be a way to stop this.")
+
+		saynn("Time slows down to a crawl. Moments later, you hear your own exosuit hitting your spine like a truck..")
+
+		saynn("Yes, you don't even feel it.. you just hear the motors snapping your back in half, shattering all the bones like they're made out of plastic.")
+
+		saynn("The world looks so strange upside-down..")
+
+		saynn("A gut wrenching scream finally leaves you..")
+
+		addButton("Continue", "See how you die next", "see_what_suit_does")
+	if(state == "see_what_suit_does"):
+		playAnimation(StageScene.Solo, "firepistol", {pc="sen_alex"})
+		saynn("The suit opens up, dropping your broken body onto the floor. It hurts so much.. that you don't feel it..")
+
+		saynn("[say=alexrynard]Hhh-h..[/say]")
+
+		saynn("Your exosuit continues to stand..")
+
+		saynn("[sayMale]Oh fuck! Don't just stand there, we need medics, now! We got an incident![/sayMale]")
+
+		saynn("One hell of an incident..")
+
+		saynn("What happens next is a blur.. Your exosuit suddenly closes up again and then rushes towards the nearest guard, stealing his energy gun with one swift motion. After that.. It starts shooting.")
+
+		saynn("[sayMale]Gun it down, gun it down![/sayMale]")
+
+		saynn("People are panicking.. everyone is stepping over each other's toes trying to get away from the killing machine.. killing machine that you have somehow created..")
+
+		addButton("Continue", "See what kind of madness happens next", "sentinel_kills_lin")
+	if(state == "sentinel_kills_lin"):
+		removeCharacter("lin_alex")
+		removeCharacter("sen_alex")
+		playAnimation(StageScene.GivingBirth, "idle", {pc="alexrynard"})
+		saynn("Fuck.. it's aiming at Lin.. She is in shock.. You try to yell something.. anything.. but the bone fragments of your spine have shredded your lungs.. stealing your breath and voice.")
+
+		saynn("[say=alexrynard]N-n..h-hh..[/say]")
+
+		saynn("Sentinel pulls the trigger..")
+
+		saynn("Lin gasps as the laser shot pierces her chest.. right where her heart is. She looks at you with her shaky eyes.. before looking at her wound. A few lonely tears stream down her cheeks.. before she collapses.. No, why her..")
+
+		saynn("Next, rouge Sentinel aims the gun at you.. Please.. Do it.. before getting shot by the other guards. They come closer and wreck it completely..")
+
+		saynn("Vision quickly starts getting blurry, giving you zero time to comprehend what just happened.. you can't breathe.. which means.. you're dying fast anyway..")
+
+		saynn("The world is getting darker and darker.. Eyes begin to close.")
+
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
@@ -1433,5 +1756,17 @@ func _react(_action: String, _args):
 
 	if(_action == "do_sleep_with_lin"):
 		getCharacter("lin_alex").removeAllRestraints()
+
+	if(_action == "alex_wears_exosuit"):
+		getCharacter("alexrynard").getInventory().equipItem(GlobalRegistry.createItem("alex_exosuit"))
+
+	if(_action == "alex_impresses_judges"):
+		getCharacter("alexrynard").resetEquipment()
+
+	if(_action == "alex_armwrestles_boss"):
+		getCharacter("alexrynard").getInventory().equipItem(GlobalRegistry.createItem("alex_exosuit"))
+
+	if(_action == "sentinel_kills_lin"):
+		getCharacter("alexrynard").resetEquipment()
 
 	setState(_action)
