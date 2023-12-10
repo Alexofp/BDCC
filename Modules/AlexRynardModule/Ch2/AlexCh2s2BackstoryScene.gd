@@ -19,6 +19,7 @@ func _run():
 	if(state == "start_story"):
 		removeCharacter("alexrynard")
 		addCharacter("captain")
+		aimCameraAndSetLocName("alexf_bar")
 		playAnimation(StageScene.Duo, "stand", {pc="alexrynardy", npc="captain"})
 		saynn("[say=alexrynard]Listen, the only reason why I'm here is because it's my break, Mister Wright.[/say]")
 
@@ -108,6 +109,7 @@ func _run():
 		removeCharacter("captain")
 		playAnimation(StageScene.Duo, "stand", {pc="alexrynardy", npc="lin_alex"})
 		addCharacter("lin_alex")
+		aimCameraAndSetLocName("alexf_hangar")
 		saynn("You swiftly exit the station's canteen and follow the many tight corridors back to your current workplace, an old spaceship hangar that was remodeled into a big workshop.")
 
 		saynn("In the middle of it.. it's heart.. a half-disassembled rocket engine. Around it.. your team. Everyone seems to be working. Good.")
@@ -312,7 +314,7 @@ func _run():
 
 		addButton("Go sleep", "Whatever", "alex_goes_back_home")
 	if(state == "alex_goes_back_home"):
-		# (( AimCamera here
+		aimCameraAndSetLocName("alexf_apart")
 		playAnimation(StageScene.Sleeping, "sleep", {pc="alexrynardy", bodyState={underwear=true}})
 		saynn("You're not sure how.. but you manage to get back to your apartment. A small room with a bed, tv, fridge and an access to a bathroom. Enough to not die.")
 
@@ -368,7 +370,7 @@ func _run():
 
 		addButton("Engine", "Work on your dream", "alex_starts_crunching")
 	if(state == "alex_starts_crunching"):
-		# (( AimCamera Here
+		aimCameraAndSetLocName("alexf_hangar")
 		removeCharacter("sen_alex")
 		addCharacter("lin_alex")
 		playAnimation(StageScene.Duo, "stand", {pc="alexrynardy", npcAction="sit", npc="lin_alex"})
@@ -482,7 +484,7 @@ func _run():
 
 		addButton("Bed", "Find it", "alex_fixed_bug_sleep")
 	if(state == "alex_fixed_bug_sleep"):
-		# (( AimCamera Here
+		aimCameraAndSetLocName("alexf_apart")
 		playAnimation(StageScene.Sleeping, "sleep", {pc="alexrynardy", bodyState={underwear=true}})
 		removeCharacter("lin_alex")
 		addCharacter("sen_alex")
@@ -490,7 +492,7 @@ func _run():
 
 		saynn("[say=alexrynard]Any alerts today?..[/say]")
 
-		saynn("[say=sen_alex]Only one, Sir. It was pizza delivery. I guided them the fridge.[/say]")
+		saynn("[say=sen_alex]Only one, Sir. It was pizza delivery. I guided them to the fridge.[/say]")
 
 		saynn("[say=alexrynard]Uh huh.. Good..[/say]")
 
@@ -500,7 +502,7 @@ func _run():
 
 		addButton("Sleep", "See what the next day brings you", "alex_next_day_after_fixing_the_bug")
 	if(state == "alex_next_day_after_fixing_the_bug"):
-		# (( Aim camera here
+		aimCameraAndSetLocName("alexf_hangar")
 		playAnimation(StageScene.Solo, "stand", {pc="alexrynardy"})
 		removeCharacter("sen_alex")
 		saynn("New day. Exactly two weeks before the Expo. Your team begins to prepare the engine to be installed into the spaceship. While you just watch, making sure everything goes smoothly.. Finally.. Some rest..")
@@ -572,7 +574,7 @@ func _run():
 
 		addButton("Kiss Lin", "You two clearly want it", "start_passion")
 	if(state == "start_passion"):
-		# (( AimCamera
+		aimCameraAndSetLocName("alexf_apart")
 		playAnimation(StageScene.Hug, "kiss", {pc="alexrynardy", npc="lin_alex", bodyState={underwear=true}, npcBodyState={underwear=true}})
 		saynn("The next moments become a blur of emotions. Your hands explore her body, hers explore your. Your lips brushing against each other as you exchange the many passionate kisses.")
 
@@ -698,7 +700,7 @@ func _run():
 
 		addButton("Boss", "Go have a chat", "chat_with_boss_mad")
 	if(state == "chat_with_boss_mad"):
-		# (( AimCamera here
+		aimCameraAndSetLocName("alexf_bossroom")
 		removeCharacter("sen_alex")
 		addCharacter("boss_alex")
 		playAnimation(StageScene.Duo, "stand", {pc="alexrynardy", npc="boss_alex"})
@@ -765,7 +767,7 @@ func _run():
 
 		addButton("Apartment", "Return back to your place", "in_appartment_after_rekt")
 	if(state == "in_appartment_after_rekt"):
-		# (( AimCamera here
+		aimCameraAndSetLocName("alexf_apart")
 		removeCharacter("lin_alex")
 		removeCharacter("boss_alex")
 		addCharacter("sen_alex")
@@ -834,7 +836,7 @@ func _run():
 
 		saynn("And then it hits ya.")
 
-		saynn("[say=alexrynard]I think I know what we're gonna do. Show me the blueprints for the Exosuit project.[/say]")
+		saynn("[say=alexrynard]I think I know what we're gonna do. Show me the blueprints for the Exosuit project. Hide the armor, leave just the exoskeleton.[/say]")
 
 		saynn("[say=sen_alex]Yes, Sir![/say]")
 
@@ -910,7 +912,7 @@ func _run():
 
 		saynn("[say=lin_alex]Looks like a.. skeleton.[/say]")
 
-		saynn("[say=alexrynard]Yeah, it's an exosuit, goes over your body, makes you stronger.[/say]")
+		saynn("[say=alexrynard]Yeah, it's an exoskeleton, goes over your body, makes you stronger.[/say]")
 
 		saynn("[say=lin_alex]Think that's gonna be enough?[/say]")
 
@@ -980,7 +982,7 @@ func _run():
 
 		addButton("Walk", "Go for a walk", "alex_walks_around")
 	if(state == "alex_walks_around"):
-		# (( AimCameraHere
+		aimCameraAndSetLocName("alexf_randomcor")
 		removeCharacter("sen_alex")
 		playAnimation(StageScene.Solo, "walk", {pc="alexrynardy"})
 		saynn("You exit your apartment and look around. The whole world looks so different now. But you just can't focus on anything else anymore.. only on your project.")
@@ -1059,8 +1061,9 @@ func _run():
 
 		addButton("Work", "Time to do some work", "alex_has_credits_time_to_work")
 	if(state == "alex_has_credits_time_to_work"):
-		# (( AimCameraHere
+		aimCameraAndSetLocName("alexf_apart")
 		addCharacter("sen_alex")
+		removeCharacter("captain")
 		playAnimation(StageScene.Solo, "stand", {pc="alexrynardy"})
 		saynn("You register the credits to your account and then rush back to your apartment.")
 
@@ -1074,7 +1077,7 @@ func _run():
 
 		saynn("Your testing was just putting the thing on a few times and seeing if it even functions at all. The motors do seem to give you extra strength. Which is something. The secret ingredient is still yet to be added. But it must be added last.")
 
-		saynn("You carefully place all of the pieces of the finished exosuit onto the workbench. It's not pretty.. there is no armor that these things usually come with. But you don't need armor when you have the brains.")
+		saynn("You carefully place all of the pieces of the finished exoskeleton onto the workbench. It's not pretty.. there is no armor that these things usually come with. But you don't need armor when you have the brains.")
 
 		saynn("You haven't slept in days.. You have lost sense of time completely.")
 
@@ -1372,7 +1375,7 @@ func _run():
 
 		addButton("Expo", "Attend the annual AlphaTech Expo", "alex_attends_expo")
 	if(state == "alex_attends_expo"):
-		# (( AimCamera here
+		aimCameraAndSetLocName("alexf_expo")
 		removeCharacter("sen_alex")
 		addCharacter("boss_alex")
 		addCharacter("lin_alex")
@@ -1404,7 +1407,7 @@ func _run():
 
 		saynn("[say=boss_alex]Is that what you came up with? Assemble your own metal cage kit?[/say]")
 
-		saynn("He points at the table with the pieces of your exosuit carefully placed on.")
+		saynn("He points at the table with the pieces of your exoskeleton carefully placed on.")
 
 		saynn("[say=alexrynard]Let me through.[/say]")
 
@@ -1502,7 +1505,7 @@ func _run():
 		addButton("Showcase", "Present the judges your project", "alex_showcases_project")
 	if(state == "alex_showcases_project"):
 		playAnimation(StageScene.Solo, "stand", {pc="alexrynard"})
-		saynn("All the pieces of the exosuit are still on the table. You didn't really prepare any speeches. Time to wing it.")
+		saynn("All the pieces of the exoskeleton are still on the table. You didn't really prepare any speeches. Time to wing it.")
 
 		saynn("[say=alexrynard]Um.. welcome everyone. Gonna be honest, my project is not as big as that fancy spaceship. But I'm pretty sure mine is more useful. Hopefully by the end of my little presentation, you will see why.[/say]")
 
@@ -1510,17 +1513,17 @@ func _run():
 
 		saynn("[sayMale]Well, tell us about your project.[/sayMale]")
 
-		saynn("[say=alexrynard]Right.. What you see here on the table is an exosuit. I called my project..[/say]")
+		saynn("[say=alexrynard]Right.. What you see here on the table is an exoskeleton. I called my project..[/say]")
 
 		saynn("Oh shit.. What would be a good name.. Right.")
 
 		saynn("[say=alexrynard]Sentinel-X mark Zero.[/say]")
 
-		saynn("[sayMale]So it's just an exosuit? Looks pretty bare for an exosuit.[/sayMale]")
+		saynn("[sayMale]So it's just an exoskeleton? Looks pretty bare for an exoskeleton.[/sayMale]")
 
 		saynn("[say=alexrynard]Well, let me show you how easy it is to put it on.[/say]")
 
-		addButton("Wear it", "Wear your exosuit", "alex_wears_exosuit")
+		addButton("Wear it", "Wear your exoskeleton", "alex_wears_exosuit")
 	if(state == "alex_wears_exosuit"):
 		playAnimation(StageScene.Solo, "stand", {pc="alexrynard"})
 		saynn("You grab one of the pieces off the table and then just press it against your wrist. And, seconds later, it just latches onto it, using motors and pistons to expand itself onto your whole arm before fastening itself tight.")
@@ -1547,7 +1550,7 @@ func _run():
 
 		saynn("[sayMale]Huh. I don't think soldiers jump very often.[/sayMale]")
 
-		saynn("[say=alexrynard]Planets have different gravity. My exosuit would allow you to wear better armor than you otherwise could have. Jumping is just a bonus.[/say]")
+		saynn("[say=alexrynard]Planets have different gravity. My exoskeleton would allow you to wear better armor than you otherwise could have. Jumping is just a bonus.[/say]")
 
 		saynn("[sayMale]You didn't bring any to show us?[/sayMale]")
 
@@ -1565,7 +1568,7 @@ func _run():
 
 		saynn("Of course he knows where to poke.")
 
-		saynn("[say=alexrynard]Just a simple battery. I didn't have access to any bluespace crystals. With them I would be able to expand this exosuit's battery time to pretty much forever.[/say]")
+		saynn("[say=alexrynard]Just a simple battery. I didn't have access to any bluespace crystals. With them I would be able to expand this exoskeleton's battery time to pretty much forever.[/say]")
 
 		saynn("[sayMale]You made a lot of claims here, Mister.. Rynard. I hope you will forgive me if I don't trust everything that was said but not shown.[/sayMale]")
 
@@ -1581,7 +1584,7 @@ func _run():
 	if(state == "alex_impresses_judges"):
 		addCharacter("sen_alex")
 		playAnimation(StageScene.Duo, "stand", {pc="alexrynard", npc="sen_alex"})
-		saynn("You whisper something to the exosuit.. and it just kinda.. opens up, allowing you to step out of it while the frame itself continues to stand on its own.")
+		saynn("You whisper something to the exoskeleton.. and it just kinda.. opens up, allowing you to step out of it while the frame itself continues to stand on its own.")
 
 		saynn("[sayMale]It just uses motors to freeze itself, right? Nice trick.[/sayMale]")
 
@@ -1591,11 +1594,11 @@ func _run():
 
 		saynn("[say=sen_alex]Yes, Sir![/say]")
 
-		saynn("Your exosuit says that before closing up and just casually approaching you.. while there is no one inside it.")
+		saynn("Your exoskeleton says that before closing up and just casually approaching you.. while there is no one inside it.")
 
 		saynn("[say=alexrynard]I want to charge you.[/say]")
 
-		saynn("The exosuit retracts its plug and hands it to you, allowing you to insert it into the wall's socket.")
+		saynn("The exoskeleton retracts its plug and hands it to you, allowing you to insert it into the wall's socket.")
 
 		saynn("[say=sen_alex]Charge is at 69%, going up. I'm gonna be charged in 2 minutes, Sir.[/say]")
 
@@ -1607,7 +1610,7 @@ func _run():
 
 		saynn("You pretend to be surprised by everyone's surprised expressions.")
 
-		saynn("[say=alexrynard]Yeah? It uses a very powerful but simple neural network that can utilize any of the exosuit's functions. Including walking and talking, yes. If the person inside is injured, it can just bring them to safety on its own. Or it can also just hold a weapon and fight completely on its own or as a squad member.[/say]")
+		saynn("[say=alexrynard]Yeah? It uses a very powerful but simple neural network that can utilize any of the exoskeleton's functions. Including walking and talking, yes. If the person inside is injured, it can just bring them to safety on its own. Or it can also just hold a weapon and fight completely on its own or as a squad member.[/say]")
 
 		saynn("[sayMale]Those claims would have to be tested as well.. But after seeing this.. huh. This might be the next combat tech revolution that we're seeing..[/sayMale]")
 
@@ -1621,11 +1624,11 @@ func _run():
 
 		saynn("[say=boss_alex]Bullshit! I call bullshit![/say]")
 
-		saynn("Huh? Your ex-boss leaves the crowd and kicks your exosuit, causing it to recoil back a few meters, its light frame hitting the table and causing some sparks..")
+		saynn("Huh? Your ex-boss leaves the crowd and kicks your exoskeleton, causing it to recoil back a few meters, its light frame hitting the table and causing some sparks..")
 
 		saynn("[say=boss_alex]I bet it will break under any significant load.[/say]")
 
-		saynn("The exosuit quickly recovers after that strike. It just approaches you again and stands still like nothing happened. You wanna punch him again so much.. but you can't just do it..")
+		saynn("The exoskeleton quickly recovers after that strike. It just approaches you again and stands still like nothing happened. You wanna punch him again so much.. but you can't just do it..")
 
 		saynn("[say=alexrynard]You wanna try to fight me in it?[/say]")
 
@@ -1637,7 +1640,7 @@ func _run():
 
 		saynn("[say=alexrynard]Sure, let's do it.[/say]")
 
-		saynn("Your exosuit opens up, allowing you to step into it before closing up tightly. Looks like nothing broke after that hit. Good.")
+		saynn("Your exoskeleton opens up, allowing you to step into it before closing up tightly. Looks like nothing broke after that hit. Good.")
 
 		addButton("Armwrestling", "Time to teach your ex-boss a lesson", "alex_armwrestles_boss")
 	if(state == "alex_armwrestles_boss"):
@@ -1648,7 +1651,7 @@ func _run():
 
 		saynn("[say=boss_alex]Three.. Two.. One.. Go![/say]")
 
-		saynn("You decide to play with him a little bit and just keep your arm still. Your ex-boss tries to move it.. but all he can accomplish is to make the motors in your exosuit whirl slightly louder.")
+		saynn("You decide to play with him a little bit and just keep your arm still. Your ex-boss tries to move it.. but all he can accomplish is to make the motors in your exoskeleton whirl slightly louder.")
 
 		saynn("You smile. Finally the fucker is being humiliated in front of everyone.")
 
@@ -1658,20 +1661,20 @@ func _run():
 
 		saynn("[say=boss_alex]Fuck you..[/say]")
 
-		saynn("He changes tactics and tries his best to purposely damage something in your exosuit. Such a loser.")
+		saynn("He changes tactics and tries his best to purposely damage something in your exoskeleton. Such a loser.")
 
 		saynn("[say=alexrynard]Sentinel, please try not to break his arm.[/say]")
 
 		saynn("[say=sen_alex]Um.. yes, Sir.[/say]")
 
-		saynn("With one effortless motion, your exosuit helps you to bring his hand onto the table. You're not sure what the guy even thought would happen. But you're glad that it happened.")
+		saynn("With one effortless motion, your exoskeleton helps you to bring his hand onto the table. You're not sure what the guy even thought would happen. But you're glad that it happened.")
 
 		saynn("[say=boss_alex]Argh![/say]")
 
 		addButton("Continue", "See what happens next", "bad_stuff_starts")
 	if(state == "bad_stuff_starts"):
 		playAnimation(StageScene.Solo, "stand", {pc="alexrynard"})
-		saynn("You take one step back and flex your exosuit's muscles again, making the motors whirl louder. The public seems to be amazed.")
+		saynn("You take one step back and flex your exoskeleton's muscles again, making the motors whirl louder. The public seems to be amazed.")
 
 		saynn("[say=sen_alex]Um.. something is wrong, Sir..[/say]")
 
@@ -1699,7 +1702,7 @@ func _run():
 
 		saynn("This isn't good.. There must be a way to stop this.")
 
-		saynn("Time slows down to a crawl. Moments later, you hear your own exosuit hitting your spine like a truck..")
+		saynn("Time slows down to a crawl. Moments later, you hear your own exoskeleton hitting your spine like a truck..")
 
 		saynn("Yes, you don't even feel it.. you just hear the motors snapping your back in half, shattering all the bones like they're made out of plastic.")
 
@@ -1714,13 +1717,13 @@ func _run():
 
 		saynn("[say=alexrynard]Hhh-h..[/say]")
 
-		saynn("Your exosuit continues to stand..")
+		saynn("Your exoskeleton continues to stand..")
 
 		saynn("[sayMale]Oh fuck! Don't just stand there, we need medics, now! We got an incident![/sayMale]")
 
 		saynn("One hell of an incident..")
 
-		saynn("What happens next is a blur.. Your exosuit suddenly closes up again and then rushes towards the nearest guard, stealing his energy gun with one swift motion. After that.. It starts shooting.")
+		saynn("What happens next is a blur.. Your exoskeleton suddenly closes up again and then rushes towards the nearest guard, stealing his energy gun with one swift motion. After that.. It starts shooting.")
 
 		saynn("[sayMale]Gun it down, gun it down![/sayMale]")
 
@@ -1745,6 +1748,237 @@ func _run():
 
 		saynn("The world is getting darker and darker.. Eyes begin to close.")
 
+		addButton("Continue", "Time to see what's waiting outside..", "alex_gets_saved")
+	if(state == "alex_gets_saved"):
+		removeCharacter("captain")
+		removeCharacter("boss_alex")
+		aimCameraAndSetLocName("alexf_medical")
+		playAnimation(StageScene.Sleeping, "sleep", {pc="alexrynard", bodyState={naked=true}})
+		saynn("It hurts so much.. everything but the body. You hear beeping.. so familiar..")
+
+		saynn("You slowly open your eyes.. the bright sterile light hits your eyes. You're in a medical bed, connected to some equipment, including a pulse monitor.. beep.. beep..")
+
+		saynn("You seem to be alive.. even if not exactly happy about it. Maybe Lin survived too? Lin!")
+
+		saynn("You try to sit down.. but it proves to be quite tricky.. It's like your muscles are not listening to you.. wait.. That can't be right.")
+
+		saynn("You.. don't feel your legs at all.. Beep. Beep. Beep. You try to pinch them.. nope. Can't move them, can't feel them, nothing.")
+
+		saynn("[say=alexrynard]Fuck..[/say]")
+
+		saynn("BEep. BeEP. Beeep.")
+
+		saynn("In fact, you don't feel anything below your chest. You begin to realize what happened..")
+
+		saynn("[say=alexrynard]No.. NO! FUCK![/say]")
+
+		saynn("BEEP. BEEP. BEEP.")
+
+		saynn("You don't believe it. That can't be right.")
+
+		saynn("You try to get off the bed.. but quickly realize that one of your wrists is cuffed to the bed.. with police cuffs.. fuck..")
+
+		saynn("The nurse rushes in after hearing you rattling the chain and being angry. She instantly presses you back into the pillow.")
+
+		saynn("[sayFemale]Don't move. Try to calm down. Please.[/sayFemale]")
+
+		saynn("[say=alexrynard]LIN! Where is she? IS SHE OKAY?![/say]")
+
+		saynn("[sayFemale]Calm down! Try to breathe! We will tell you everything.[/sayFemale]")
+
+		saynn("BEEP-BE-BEEP-BE-BE-BEEP!")
+
+		saynn("No-no-no, fuck all of you. Where is Lin? You keep resisting so much that the nurse has no other option but to stab your shoulder with some syringe.")
+
+		saynn("BEEP-BEEP. BEEP. BEep.. BeEP.. Beep. Beep.. Beep..")
+
+		saynn("Your brain receives lots of chemicals that calm it down fast.. You just stop caring about it all.. Yeah, who cares.")
+
+		saynn("Nurse takes a step back.. while you just look at her.")
+
+		saynn("[sayFemale]You've been in a medical coma for ten days. The surgeon had to rebuild your whole spine piece by piece, stitch your organs. Unfortunately, your spinal cord nerves have suffered extreme damage and won't be able to heal on their own.[/sayFemale]")
+
+		saynn("Great.. Just.. Perfect..")
+
+		saynn("[sayFemale]Not all is lost. There is a possibility of installing a prosthetic spinal cord.. But.. unfortunately, that is not covered by the AMI. Best we can offer for now is a.. wheelchair.[/sayFemale]")
+
+		saynn("Considering how much loans you have.. You already know that you're fucked..")
+
+		saynn("You try as hard as you can to say something but only manage to produce a single word.")
+
+		saynn("[say=alexrynard]Lin?[/say]")
+
+		saynn("The nurse lowers her gaze.")
+
+		saynn("[sayFemale]Unfortunately..[/sayFemale]")
+
+		saynn("No..")
+
+		saynn("The nurse is saying something but you don't hear anything anymore. All you hear is.. noise.")
+
+		saynn("Your gaze defocuses. You drop your head onto the pillow and just stare at the same spot.")
+
+		saynn("Nothing..")
+
+		saynn("You feel nothing..")
+
+		saynn("Can't think about anything..")
+
+		saynn("You just keep staring at the ceiling.")
+
+		saynn("No..")
+
+		saynn("No..")
+
+		saynn("No..")
+
+		addButton("Continue", "Who cares..", "jack_comesin")
+	if(state == "jack_comesin"):
+		addCharacter("intro_detective")
+		saynn("At least an eternity passes.. or maybe just a few hours.. who cares..")
+
+		saynn("A person walks into your room. A wolf that is wearing some black pants and white shirt, clearly not a nurse.")
+
+		saynn("He grabs one of the chairs and sits near your bed.")
+
+		saynn("[say=intro_detective]Hello, Alex. Name is Jake, IIPF, threat assessment division. If you want something, let me know.[/say]")
+
+		saynn("You don't react in any way. But Jake waits for a few seconds, just in case.")
+
+		saynn("[say=intro_detective]You probably noticed the cuffs by now. They're there to keep you safe. May I ask some questions?[/say]")
+
+		saynn("He stares at you, his eyes kind. Yours are empty.")
+
+		saynn("[say=intro_detective]Can you help me try to figure out what happened on that day? We can start unraveling this from any point, as brief or as detailed as you want.[/say]")
+
+		saynn("No words leave your mouth. Your muscles don't even think about flexing. Jake sighs.")
+
+		saynn("[say=intro_detective]I know, it's a lot. I really want to help you. But I can't do that without you. All you have to do is say something.[/say]")
+
+		saynn("Suddenly, you look him straight into the eyes.")
+
+		saynn("[say=alexrynard]Do you have a gun?[/say]")
+
+		saynn("He tilts his head slightly. His fake kind expression goes away, replaced by an annoyed one.")
+
+		saynn("Jake steps out of your room and starts talking with some nurse about committing you somewhere..")
+
+		saynn("After that, you're alone.")
+
+		saynn("The drug's effect has disappeared by now. But nothing changed.")
+
+		addButton("Continue", "See what happens next..", "captain_arrives_to_alex")
+	if(state == "captain_arrives_to_alex"):
+		removeCharacter("intro_detective")
+		addCharacter("captain")
+		playAnimation(StageScene.Solo, "stand", {pc="captain"})
+		saynn("Some time has passed.")
+
+		saynn("A nurse walks into your room. Followed by.. Mister Wright.")
+
+		saynn("[sayFemale]There he is. He doesn't talk much.. at all.[/sayFemale]")
+
+		saynn("[say=captain]Thank you, means a lot.[/say]")
+
+		saynn("He sits near your bed. The nurse leaves.")
+
+		saynn("Did he come to collect your debt to him too?")
+
+		saynn("He doesn't say anything to you. Which means you don't have to answer.")
+
+		saynn("Looks like that's where your story ends.. and another one starts.")
+
+		addButton("Snap out of it", "Start looking at the world through your own eyes again", "story_end")
+	if(state == "story_end"):
+		removeCharacter("captain")
+		addCharacter("alexrynard")
+		playAnimation(StageScene.Duo, "sit", {npc="alexrynard", npcAction="sit"})
+		aimCameraAndSetLocName("yard_waterfall")
+		GM.pc.setLocation("yard_waterfall")
+		saynn("You blink many times.. and suddenly see the prison again.")
+
+		saynn("[say=alexrynard]That's kind of it.. He paid for my prosthetic spine. Gave me a job. Now I'm here. It's not that bad.[/say]")
+
+		saynn("He rubs his neck.")
+
+		saynn("[say=alexrynard]I was wearing a collar for a few years.. you know.. since I'm still a convict myself. The thing was awful, I helped to make it at least somewhat tolerable, added a soft inner trim.[/say]")
+
+		saynn("He looks at you. His eyes.. still as empty.")
+
+		saynn("[say=alexrynard]Life is a strange thing, huh? Hard to predict what will happen next.[/say]")
+
+		addButton("Yes", "Life is weird", "after_yes")
+		addButton("No", "Everything has a reason", "after_no")
+		addButton("Not your fault", "Tell Alex that all of that wasn't his fault", "after_notyour")
+	if(state == "after_yes"):
+		playAnimation(StageScene.Duo, "sit", {npc="alexrynard"})
+		saynn("[say=pc]Yeah, life will find ways to screw us over no matter what. We can only do our best and hope.[/say]")
+
+		saynn("[say=alexrynard]I thought I did my best. But I was at my worst.[/say]")
+
+		saynn("He sighs.")
+
+		saynn("[say=alexrynard]You can leave me to finish fixing the broken datapads alone. Whatever is left should be the last batch.[/say]")
+
+		saynn("[say=pc]What if it's not?[/say]")
+
+		saynn("He shrugs.")
+
+		saynn("[say=alexrynard]Then I will have to chat with the captain about that.[/say]")
+
+		saynn("Alex stands up, his posture straight.")
+
+		saynn("[say=alexrynard]Sorry about the long story, didn't think it'd be that long, it's just a single flash in my head. I still have no idea why you decided to help me. But thank you.[/say]")
+
+		saynn("And just like that, he walks away, leaving you alone with your thoughts.")
+
+		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "after_no"):
+		playAnimation(StageScene.Duo, "sit", {npc="alexrynard"})
+		saynn("[say=pc]Everything that happens usually has a reason. Maybe it had to happen that way.[/say]")
+
+		saynn("[say=alexrynard]Maybe.. Everything makes sense in a hindsight, that is true.[/say]")
+
+		saynn("Hard to find reasons for why life would break this foxy.. Even in a hindsight.")
+
+		saynn("[say=alexrynard]You can leave me to finish fixing the broken datapads alone. Whatever is left should be the last batch.[/say]")
+
+		saynn("[say=pc]What if it's not?[/say]")
+
+		saynn("He shrugs.")
+
+		saynn("[say=alexrynard]Then I will have to chat with the captain about that.[/say]")
+
+		saynn("Alex stands up, his posture straight.")
+
+		saynn("[say=alexrynard]Sorry about the long story, didn't think it'd be that long, it's just a single flash in my head. I still have no idea why you decided to help me. But thank you.[/say]")
+
+		saynn("And just like that, he walks away, leaving you alone with your thoughts.")
+
+		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "after_notyour"):
+		playAnimation(StageScene.Duo, "sit", {npc="alexrynard"})
+		saynn("[say=pc]Whatever happened back then, it wasn't your fault.[/say]")
+
+		saynn("[say=alexrynard]I moved on, don't worry about it. There are no tears left to cry. I gotta be strong.[/say]")
+
+		saynn("He sighs.")
+
+		saynn("[say=alexrynard]You can leave me to finish fixing the broken datapads alone. Whatever is left should be the last batch.[/say]")
+
+		saynn("[say=pc]What if it's not?[/say]")
+
+		saynn("He shrugs.")
+
+		saynn("[say=alexrynard]Then I will have to chat with the captain about that.[/say]")
+
+		saynn("Alex stands up, his posture straight.")
+
+		saynn("[say=alexrynard]Sorry about the long story, didn't think it'd be that long, it's just a single flash in my head. I still have no idea why you decided to help me. But thank you.[/say]")
+
+		saynn("And just like that, he walks away, leaving you alone with your thoughts.")
+
+		addButton("Continue", "See what happens next", "endthescene")
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
@@ -1758,13 +1992,13 @@ func _react(_action: String, _args):
 		getCharacter("lin_alex").removeAllRestraints()
 
 	if(_action == "alex_wears_exosuit"):
-		getCharacter("alexrynard").getInventory().equipItem(GlobalRegistry.createItem("alex_exosuit"))
+		getCharacter("alexrynard").getInventory().equipItem(GlobalRegistry.createItem("AlexExoskeleton"))
 
 	if(_action == "alex_impresses_judges"):
 		getCharacter("alexrynard").resetEquipment()
 
 	if(_action == "alex_armwrestles_boss"):
-		getCharacter("alexrynard").getInventory().equipItem(GlobalRegistry.createItem("alex_exosuit"))
+		getCharacter("alexrynard").getInventory().equipItem(GlobalRegistry.createItem("AlexExoskeleton"))
 
 	if(_action == "sentinel_kills_lin"):
 		getCharacter("alexrynard").resetEquipment()

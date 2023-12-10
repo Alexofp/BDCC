@@ -39,7 +39,10 @@ func _init():
 		"res://Modules/AlexRynardModule/Trust/AlexTrustExercise1Scene.gd",
 	]
 	characters = [
-
+		"res://Modules/AlexRynardModule/Ch2/BackstoryChars/AlexRynardYoung.gd",
+		"res://Modules/AlexRynardModule/Ch2/BackstoryChars/LinAlex.gd",
+		"res://Modules/AlexRynardModule/Ch2/BackstoryChars/SentinelAlex.gd",
+		"res://Modules/AlexRynardModule/Ch2/BackstoryChars/BossAlex.gd",
 	]
 	items = []
 	events = [
