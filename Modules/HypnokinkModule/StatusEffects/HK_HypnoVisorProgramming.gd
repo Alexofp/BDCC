@@ -11,11 +11,11 @@ func _init():
 	priorityDuringChecking = 50
 
 func findProgrammedVisor(_npc: BaseCharacter) -> ItemBase:
-	var visors = _npc.inventory.getEquippedItemsWithTag("HK_HypnoVisor")
+	var visors = _npc.inventory.getEquippedItemsWithTag(ItemTag.Hypnovisor)
 	if(len(visors) < 1):
 		return null
 	for candidate in visors:
-		if(candidate.programmedToSuppressPerk() != ""):
+		if(candidate.has_method("programmedToSuppressPerk") and candidate.programmedToSuppressPerk() != ""):
 			return candidate
 	return null
 	

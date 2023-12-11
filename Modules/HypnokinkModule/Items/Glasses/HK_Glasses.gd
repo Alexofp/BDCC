@@ -1,8 +1,6 @@
 extends ItemBase
 class_name HK_Glasses
 
-var programmedToSuppressPerkId: String = ""
-
 func _init():
 	id = HK_Item.Glasses
 
