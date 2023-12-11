@@ -49,6 +49,9 @@ func _init():
 		"res://Modules/HypnokinkModule/Attacks/HK_TriggerStun.gd",
 		"res://Modules/HypnokinkModule/Attacks/HK_TriggerTiredness.gd",
 	]
+	computers = [
+		"res://Modules/HypnokinkModule/Scenes/HK_DatapadHackComputer.gd"
+	]
 	scenes = [
 		"res://Modules/HypnokinkModule/Scenes/Items/HK_HypnoCuffs.gd",
 		"res://Modules/HypnokinkModule/Scenes/Items/HK_ProgramVisor.gd",

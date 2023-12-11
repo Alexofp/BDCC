@@ -12,8 +12,7 @@ func _run():
 		saynn("[say=pc]That's a surprise~[/say]")
 		saynn("Alex said he'd manage in an hour without these tools. Surely you can match that time with them?")
 
-		addButton("no Hack", "DEBUG", "hack_fail")
-		addButton("Hack", "How hard could it be?", "hack_succeed")
+		addButton("Hack", "How hard could it be?", "hack_cage")
 		
 	if(state == "hack_fail"):
 		saynn("With a frustrated snort, you decide to abandon your efforts for now.")
@@ -21,7 +20,7 @@ func _run():
 		saynn("[say=pc]Yeah, no, I'm fine. It's just a bit harder than I expected.[/say]")
 		saynn("[say=HK_Vion]Well, whatever you're up to I'm sure you'll figure it out.[/say]")
 		
-		addButton("Leave", "This seems like your exit cue.", "hack_fail_after")
+		addButton("Leave", "You'll get it right next time.", "hack_fail_after")
 
 	if(state == "hack_succeed"):
 		saynn("Well that wasn't too bad. You click the confirm button with a flourish.")
@@ -102,7 +101,17 @@ func _run():
 		saynn("You slowly untangle yourself from Vion's arms. As your thoughts slowly surface, you remember to collect Vion's cage. He's certainly not going to miss it. It's only after you stumble out of his cell that you consider that you should probably dress yourself.")
 		addButton("Leave", "", "endthescene")
 
+func _react_scene_end(_tag, _result):
+	if(_tag == "computerhack"):
+		if(_result[0] == true):
+			setState("hack_succeed")
+		else:
+			setState("hack_fail")
+		
 func _react(_action: String, _args):
+	if(_action == "hack_cage"):
+		runScene("ComputerSimScene", ["HK_DatapadHackComputer"], "computerhack")
+	
 	if(_action == "hack_succeed"):
 		setFlag("HypnokinkModule.Vion_FreedFromCage", true)
 	

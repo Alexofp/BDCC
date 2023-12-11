@@ -242,8 +242,7 @@ func _run():
 		saynn("[say=HK_Vion]Rush passed by again recently. Sorry, until he's dealt with, I have to ask for my regular price.[/say]")
 		
 		addButton("Back", "", "")
-			
-
+		
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
 		endScene()
