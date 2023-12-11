@@ -5,6 +5,11 @@ func _init():
 	npcDodgeDifficultyMod = 10.0
 	restraintType = "HK_HypnoRestraint"
 
+func resetOnNewDay():
+	var item = getItem()
+	if(item.isWornByWearer()):
+		item.getWearer().getInventory().removeEquippedItem(item)
+
 func canInspectWhileBlindfolded():
 	return true
 

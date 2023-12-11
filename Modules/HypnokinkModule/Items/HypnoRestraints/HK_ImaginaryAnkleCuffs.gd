@@ -43,6 +43,9 @@ func getUnriggedParts(_character):
 		"ankle.R": ["res://Modules/HypnokinkModule/Items/HypnoRestraints/HypnoCuffModel.tscn"],
 	}
 
+func getInventoryImage():
+	return "res://Modules/HypnokinkModule/Items/HypnoRestraints/imaginaryCuff.png"
+	
 func updateDoll(doll: Doll3D):
 	doll.setLegsCuffed(true)
 

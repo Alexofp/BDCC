@@ -18,7 +18,6 @@ const SexEngineLikes = "SexEngineLikes"
 const SexEnginePersonality = "SexEnginePersonality"
 const SexHeatDrug = "SexHeatDrug"
 const SexAnaphrodisiacDrug = "SexAnaphrodisiacDrug"
-const SexEngineHypnovisor = "SexEngineHypnovisor"
 
 # Painful effects
 const StretchedPainfullyPussy = "StretchedPainfullyPussy"

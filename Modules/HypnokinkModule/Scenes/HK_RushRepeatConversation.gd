@@ -220,9 +220,14 @@ func _run():
 		
 		saynn("[say=HK_Rush]Ya got me good. Deal's a deal. Tell four-eyes he's good. Until I need more credits.[/say]")
 		
-		saynn("You decide to quit while you're ahead and leave to report the good news.")
+		addButton("Done here", "Good enough for now", "leave_victorious")
+		if(getFlag("HypnokinkModule.RushDealStruckAtLeastOnce")):
+			saynn("A thought occurs to you. If you were to knock Rush out, there might be a more permanent solution to this problem.")
+			if(GM.pc.getInventory().hasItemID("inmatewristcuffs") and GM.pc.getInventory().hasItemID("inmateanklecuffs")):
+				addButton("Solution", "Keep fighting", "put_em_up_again")
+			else:
+				addDisabledButton("Solution", "Keep fighting\n\nYou'll need a set of wrist and ankle cuffs for this")
 		
-		addButton("Oof", "", "endthescene")
 	if(state == "if_lost"):
 		playAnimation(StageScene.Duo, "defeat", {npc="HK_Rush"})
 		saynn("With one last mighty kick, Rush sends you sprawling on the floor.")
@@ -244,6 +249,55 @@ func _run():
 		saynn("You decide to cut your losses and slink off to lick your wounds elsewhere.")
 		
 		addButton("Ow", "", "endthescene")
+		
+	if(state == "leave_victorious"):
+		saynn("You decide to quit while you're ahead and leave to report the good news.")
+		
+		addButton("Leave", "", "endthescene")
+		
+	if(state == "if_won_serious"):
+		
+		addButton("Heave", "Better get moving", "drag_rush")
+		
+	if(state == "if_lost_serious"):
+		playAnimation(StageScene.Rekt, "kill", {pc="HK_Rush", npc="pc"})
+		saynn("You stumble back, and only have time to wince before Rush throttles your neck and slams you into the wall. Your vision swims.")
+		
+		saynn("[say=HK_Rush]Ya fuckin' stupid-[/say]")
+		
+		saynn("[b]*WHAM*[/b]")
+		
+		saynn("He slams you into the wall again. Through the daze, you wonder if you heard your skull crack.")
+		
+		saynn("[say=HK_Rush]-don't fuckin' [i]ever[/i]-[/say]")
+		
+		saynn("[b]*WHAM*[/b]")
+		
+		saynn("Again, you head makes impact with the metal wall behind you. This time you're sure you heard something important snap, and it begins to dawn on you that you might actually be about to die.")
+		
+		addButton("Oh shit", "Better say something while you still can", "if_lost_serious_2")
+	if(state == "if_lost_serious_2"):
+		playAnimation(StageScene.Rekt, "end", {pc="HK_Rush", npc="pc"})
+		saynn("[say=pc]Wa- wait, I-[/say]")
+		
+		saynn("[say=HK_Rush]SHUT the FUCK up![/say]")
+		
+		saynn("[b]*WHAM*[/b]")
+		
+		saynn("The following impact effectively silences you as you narrowly avoid biting off your tongue. In lieu of speaking again, you cough up blood instead.")
+		
+		saynn("Rush notices your blood on his hand. He lets go with it, rearing up for the punch that ends your life. Then, with the other, he sends you tumbling and skidding across the floor.")
+		
+		saynn("[b]*WHAM*[/b]")
+		
+		saynn("Managing to look up, you see Rush has left a fist shaped imprint in the wall where your head used to be.")
+		
+		saynn("[say=HK_Rush]Don't ever do tha' again. Get th' fuck out.[/say]")
+		
+		saynn("You crawl away before you manage to make Rush lose whatever tenuous grasp on his temper he's managed to regain.")
+		
+		addButton("Ow", "", "endthescene")
+		
 	if(state == "leaving"):
 		playAnimation(StageScene.Duo, "stand", {npc="HK_Rush"})
 		saynn("He does raise a valid point. Or maybe you just don't want your body parts, external [i]or[/i] internal, rearranged. Either way, you leave before he does something you regret.")
@@ -258,6 +312,10 @@ func _run():
 func _react(_action: String, _args):
 	if(_action == "put_em_up"):
 		runScene("FightScene", ["HK_Rush"], "boxing")
+		return
+		
+	if(_action == "put_em_up_again"):
+		runScene("FightScene", ["HK_Rush", "boxing_serious"], "boxing_serious")
 		return
 		
 	if(_action == "get_fucked_check"):
@@ -287,6 +345,20 @@ func _react(_action: String, _args):
 		runScene("GenericSexScene", ["pc", "HK_Rush"], "domsex")
 		return
 		
+	if(_action == "leave_victorious"):
+		setFlag("HypnokinkModule.RushDealStruckAtLeastOnce", true)
+		setFlag("HypnokinkModule.OnTheHouseSessions", RNG.randi_range(1,3))
+		
+	if(_action == "drag_rush"):
+		endScene()
+		GM.pc.setLocation("cellblock_lilac_nearcell")
+		aimCamera("cellblock_lilac_nearcell")
+		runScene("HK_VionSolvesRush")
+		return
+		
+	if(_action == "if_lost_serious_2"):
+		GM.pc.addEffect(StatusEffect.Wounded)
+		
 	if(_action == "endthescene"):
 		endScene()
 		return
@@ -301,7 +373,16 @@ func _react_scene_end(_tag, _result):
 		if(battlestate == "win"):
 			setState("if_won")
 			addExperienceToPlayer(50)
+		else:
+			setState("if_lost")
+	if(_tag == "boxing_serious"):
+		var battlestate = _result[0]
+		
+		if(battlestate == "win"):
+			setState("if_won_serious")
+			addExperienceToPlayer(50)
 			setFlag("HypnokinkModule.RushDealStruckAtLeastOnce", true)
 			setFlag("HypnokinkModule.OnTheHouseSessions", RNG.randi_range(1,3))
 		else:
-			setState("if_lost")
+			setState("if_lost_serious")
+		

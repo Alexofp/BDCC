@@ -73,12 +73,17 @@ func getEffectImage():
 	if(!isHypnotized()):
 		return "res://Modules/HypnokinkModule/Icons/StatusEffects/hypno1.png"
 	elif(!isInTrance()):
-		return "res://Modules/HypnokinkModule/Icons/StatusEffects/hypno2.png"
+		return "res://Images/StatusEffects/hypnosissmall.png"
 	else:
-		return "res://Modules/HypnokinkModule/Icons/StatusEffects/hypno3.png"
+		return "res://Images/StatusEffects/hypnosis.png"
 
 func getIconColor():
-	return IconColorDarkPurple
+	if(isInTrance()):
+		return IconColorBrightPurple
+	elif(isHypnotized()):
+		return IconColorDarkPurple
+	else:
+		return IconColorRed
 
 func getBuffs():
 	var mult = 1.0
@@ -90,9 +95,11 @@ func getBuffs():
 		mult -= 0.3
 	var buffs = []
 	if(stacks > 20):
-		buffs.append(buff(Buff.PhysicalDamageBuff, [mult * -(min(stacks - 20, 80))]))
+		buffs.append(buff(Buff.PhysicalDamageBuff, [round(mult * -(min(stacks - 20, 80)))]))
+	if(stacks > 25):
+		buffs.append(buff(Buff.ForcedObedienceBuff, [round(mult * (min((stacks - 25) * (1 / 0.75), 100)))]))
 	if(stacks > 40):
-		buffs.append(buff(Buff.ReceivedLustDamageBuff, [mult * +(min((stacks - 40) * 0.5, 30))]))
+		buffs.append(buff(Buff.ReceivedLustDamageBuff, [round(mult * +(min((stacks - 40) * 0.5, 30)))]))
 	return buffs
 	
 

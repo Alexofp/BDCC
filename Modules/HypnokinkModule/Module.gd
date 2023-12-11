@@ -3,6 +3,7 @@ extends Module
 func getFlags():
 	return {
 		"VisorXpToday": flag(FlagType.Number),
+		"TalkedToAlexAboutVisors": flag(FlagType.Bool),
 		
 		"GotEngineeringFreebieVisor": flag(FlagType.Bool),
 		
@@ -12,8 +13,13 @@ func getFlags():
 		"VionTopicKnown_Backstory": flag(FlagType.Bool),
 		"VionTopicKnown_Services": flag(FlagType.Bool),
 		"VionTopicKnown_Hypnotist": flag(FlagType.Bool),
+		"VionTopicKnown_Chastity": flag(FlagType.Bool),
+		
+		"Vion_HaveDatapad": flag(FlagType.Bool),
+		"Vion_HaveCage": flag(FlagType.Bool),
 		
 		"VionMode": flag(FlagType.Number),
+		"Vion_FreedFromCage": flag(FlagType.Bool),
 		
 		"DidSessionZero": flag(FlagType.Bool),
 		
@@ -49,12 +55,16 @@ func _init():
 		
 		"res://Modules/HypnokinkModule/Scenes/HK_GetEngineeringFreebieVisor.gd",
 		
+		"res://Modules/HypnokinkModule/Scenes/HK_Alex_TalkAboutVion.gd",
+		
 		"res://Modules/HypnokinkModule/Scenes/HK_RushIntroduction.gd",
 		"res://Modules/HypnokinkModule/Scenes/HK_RushRepeatConversation.gd",
+		"res://Modules/HypnokinkModule/Scenes/HK_VionSolvesRush.gd",
 		
 		"res://Modules/HypnokinkModule/Scenes/HK_VionIntroduction.gd",
 		"res://Modules/HypnokinkModule/Scenes/HK_VionRepeatConversation.gd",
 		"res://Modules/HypnokinkModule/Scenes/HK_VionSessionSelect.gd",
+		"res://Modules/HypnokinkModule/Scenes/HK_VionFreed.gd",
 		
 		"res://Modules/HypnokinkModule/Scenes/Sessions/Inductions/HK_Induction_AlreadyHypnotized.gd",
 		"res://Modules/HypnokinkModule/Scenes/Sessions/Inductions/HK_Induction_FirstTime.gd",
@@ -66,6 +76,7 @@ func _init():
 		"res://Modules/HypnokinkModule/Scenes/Sessions/Bodies/HK_Body_DodgeBuff.gd",
 		"res://Modules/HypnokinkModule/Scenes/Sessions/Bodies/HK_Body_MaxPainBuff.gd",
 		"res://Modules/HypnokinkModule/Scenes/Sessions/Bodies/HK_Body_StaminaRestore.gd",
+		"res://Modules/HypnokinkModule/Scenes/Sessions/Bodies/HK_Body_Bondage.gd",
 		
 		"res://Modules/HypnokinkModule/Scenes/Sessions/Awakeners/HK_Awakener_Simple.gd",
 		"res://Modules/HypnokinkModule/Scenes/Sessions/Awakeners/HK_Awakener_FakeWake.gd",
@@ -88,6 +99,8 @@ func _init():
 		"res://Modules/HypnokinkModule/Items/HypnoRestraints/HK_ImaginaryAnkleCuffs.gd",
 	]
 	events = [
+		"res://Modules/HypnokinkModule/Events/HK_AlexDealEvent.gd",
+		
 		"res://Modules/HypnokinkModule/Events/HK_RushMeetingEvent.gd",
 		"res://Modules/HypnokinkModule/Events/HK_VionMeetingEvent.gd",
 		
@@ -145,6 +158,7 @@ func _init():
 	stageScenes = [
 		"res://Modules/HypnokinkModule/StageScenes/HK_ArmsRaisedDuo.tscn",
 		"res://Modules/HypnokinkModule/StageScenes/HK_ArmsRaisedSex.tscn",
+		"res://Modules/HypnokinkModule/StageScenes/HK_DuoHypnoTied.tscn"
 	]
 	speechModifiers = [
 		"res://Modules/HypnokinkModule/Speech/HK_HypnoSpeech.gd"

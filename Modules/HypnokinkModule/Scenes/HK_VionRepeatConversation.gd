@@ -30,6 +30,10 @@ func _run():
 		else:
 			addButton("Discount", "Ask about session prices", "discount_rush_reminder")
 			
+		if(getFlag("HypnokinkModule.Vion_HaveDatapad", false)):
+			addButton("Use datapad", "See if you can hack it as a hacker", "use_alex_datapad")
+			
+			
 		addButton("Goodbye", "Good for now", "endthescene")
 		
 		#addButton("DEBUG FIGHT", "Haha get sucker punched", "debug_fight")
@@ -61,17 +65,20 @@ func _run():
 			addDisabledButton("Services", "Learn more for this topic")
 		addButton("Sex?", "Up for a fuck?", "ask_sex")
 		
-		if(getFlag("HypnokinkModule.VionTopicKnown_NoSex")):
-			addButton("No sex?", "Unusual for a lilac", "ask_sex2")
-		else:
-			addDisabledButton("No sex?", "Learn more for this topic")
+		if(not getFlag("HypnokinkModule.Vion_FreedFromCage")):
+			if(getFlag("HypnokinkModule.VionTopicKnown_NoSex")):
+				addButton("No sex?", "Unusual for a lilac", "ask_sex2")
+			else:
+				addDisabledButton("No sex?", "Learn more for this topic")
 			
 		if(getFlag("HypnokinkModule.VionTopicKnown_Backstory")):
 			addButton("Long story", "You have plenty of time", "ask_background")
-			addButton("Chastity", "Ask about the cage", "ask_chastity")
+			if(not getFlag("HypnokinkModule.Vion_FreedFromCage")):
+				addButton("Chastity", "Ask about the cage", "ask_chastity")
 		else:
 			addDisabledButton("Long story", "Learn more for this topic")
-			addDisabledButton("Chastity", "Learn more for this topic")
+			if(not getFlag("HypnokinkModule.Vion_FreedFromCage")):
+				addDisabledButton("Chastity", "Learn more for this topic")
 		
 		addButton("Done", "No more questions", "")
 		
@@ -118,17 +125,16 @@ func _run():
 		
 		addButton("Back", "", "questions")
 	if(state == "ask_sex" || state == "ask_sex_fromMain"):
-		saynn("You figure there's no reason to beat around the bush with a lilac.")
-
-		saynn("[say=pc]You up for a fuck?[/say]")
-
-		saynn("He closes his eyes for a moment and sighs.")
-
-		saynn("[say=HK_Vion]I am empathically [i]not[/i].[/say]")
-
-		saynn("Well, that was unexpected.")
-		
-		setFlag("HypnokinkModule.VionTopicKnown_NoSex", true)
+		if(not getFlag("HypnokinkModule.Vion_FreedFromCage")):
+			saynn("You figure there's no reason to beat around the bush with a lilac.")
+			saynn("[say=pc]You up for a fuck?[/say]")
+			saynn("He closes his eyes for a moment and sighs.")
+			saynn("[say=HK_Vion]I am empathically [i]not[/i].[/say]")
+			saynn("Well, that was unexpected.")
+			setFlag("HypnokinkModule.VionTopicKnown_NoSex", true)
+		else:
+			saynn("[say=pc]You up for a fuck?[/say]")
+			saynn("[say=HK_Vion]Not at the moment, no.[/say]")
 
 		addButton("Back", "", "questions" if state == "ask_sex" else "")
 	if(state == "ask_sex2"):
@@ -186,16 +192,17 @@ func _run():
 
 		saynn("You gesture in the direction of his crotch. He chuckles.")
 
-		saynn("[say=HK_Vion]Hah, I wish. Then I might be able to [i]do something[/i] about it. No, this is one last gift from my ex. One of the most premium cages on the market, actually. I don't have access to a device to input the password on, and anyway the one I know will have expired by now![/say]")
+		saynn("[say=HK_Vion]Hah, I wish. Then I might be able to [i]do something[/i] about it. No, this is one last gift from my ex. One of the most premium cages on the market, actually, a DeLoxe S3-Karat model. I don't have access to a device to input the password on, and anyway the one I know will have expired by now![/say]")
 		
 		saynn("He huffs.")
 		
-		saynn("[say=HK_Vion]Nothing short of of a submolecular saw is getting this off without castrating me in the process. And for some inexplicable reason, cutting tools are in very short supply in a high-security prison facility.[/say]")
+		saynn("[say=HK_Vion]Nothing short of of a sub-molecular disassembler is getting this off without castrating me in the process. And for some inexplicable reason, cutting tools are in very short supply in a high-security prison facility.[/say]")
 
 		saynn("[say=HK_Vion]Funny how the usually ever so diligent guards seemed to overlook it during the intake process, isn't it?[/say]")
 
 		saynn("He idly kicks at the chair, making it rattle across the floor. You suspect {HK_Vion.name} does [i]not[/i] find the joke very funny.")
 
+		setFlag("HypnokinkModule.VionTopicKnown_Chastity", true)
 		addButton("Back", "", "questions")
 	if(state == "discount_rush_intro"):
 		saynn("[say=pc]Your skills don't exactly come cheap.[/say]")
@@ -247,12 +254,20 @@ func _react(_action: String, _args):
 		return
 		
 	if(_action == "discount_rush_intro"):
-		GM.main.setFlag("HypnokinkModule.KnowAboutRush", true)
+		setFlag("HypnokinkModule.KnowAboutRush", true)
+		
+	if(_action == "discount_rush_reminder"):
+		if(getFlag("HypnokinkModule.RushDealStruckAtLeastOnce", false)):
+			setFlag("HypnokinkModule.RushCausingMoreTrouble", true)
+		
+	if(_action == "use_alex_datapad"):
+		endScene()
+		runScene("HK_VionFreed")
+		return
 		
 	if(_action == "debug_fight"):
 		runScene("FightScene", ["HK_Vion"], "guardfight")
 		return
-		
 	if(_action == "debug_sex"):
 		runScene("GenericSexScene", ["pc", "HK_Vion"], "domsex")
 		return

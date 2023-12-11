@@ -7,16 +7,31 @@ func getVisibleName():
 	return "Hypnovisor Mk1"
 	
 func getDescription():
-	return "Special prototype goggles that are supposed to make you happy. What the heck is 'YOT'?"
+	return "Special prototype goggles that are supposed to make you happy. What the heck is a 'YOT'?"
 
 func getClothingSlot():
 	return InventorySlot.Eyes
-
+	
+func getTakeOffScene():
+	return "RestraintTakeOffNopeScene"
+	
+func isHatsPerkActive():
+	var wearer = getWearer()
+	if(wearer == null):
+		return false
+	if(wearer.hasPerk(HK_Perk.GoodAtVisors) && isWornByWearer()):
+		if(HK_CharUtil.isInTrance(wearer)):
+			return true
+		elif(wearer.hasPerk(HK_Perk.VisorMastery) and HK_CharUtil.isHypnotized(wearer)):
+			return true
+	return false	
+	
 func getBuffs():
-	return [
-		buff(Buff.AmbientLustBuff, [300]),
-		]
-
+	if(isHatsPerkActive()):
+		return [buff(Buff.AmbientLustBuff, [300]), buff(Buff.AccuracyBuff, [25])]
+	else:
+		return [buff(Buff.AmbientLustBuff, [300]), buff(Buff.AccuracyBuff, [-25])]
+	
 func getPrice():
 	return 60
 
@@ -41,6 +56,17 @@ func getForcedOnMessage(isPlayer = true):
 	else:
 		return getAStackNameCapitalize()+" was forced over {receiver.nameS} eyes!"
 
+func onEquippedBy(_otherCharacter, _forced = false):
+	if(not _forced):
+		return
+	var wearer = getWearer()
+	var currentAmount = HK_CharUtil.getSuggestibleStacks(wearer)
+	if(_otherCharacter.hasPerk(HK_Perk.VisorMastery) and currentAmount < 50):
+		HK_CharUtil.changeSuggestibilityBy(wearer, 50 - currentAmount)
+	elif(_otherCharacter.hasPerk(HK_Perk.GoodAtVisors) and currentAmount < 30):
+		HK_CharUtil.changeSuggestibilityBy(wearer, 30 - currentAmount)
+	
+
 func getUnriggedParts(_character):
 	return {
 		"blindfold": ["res://Inventory/UnriggedModels/HypnoVisor/HypnoVisor.tscn"],
@@ -48,6 +74,3 @@ func getUnriggedParts(_character):
 
 func getInventoryImage():
 	return "res://Images/Items/bdsm/hypnovisor.png"
-
-func getTakeOffScene():
-	return "RestraintTakeOffNopeScene"

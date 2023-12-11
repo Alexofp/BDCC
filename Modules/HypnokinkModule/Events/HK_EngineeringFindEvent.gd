@@ -15,7 +15,5 @@ func getPriority():
 
 func onButton(_method, _args):
 	if(_method == "take_freebie"):
-		setFlag("HypnokinkModule.DidRushIntroduction", true)
+		setFlag("HypnokinkModule.GotEngineeringFreebieVisor", true)
 		runScene("HK_GetEngineeringFreebieVisor")
-			
-			

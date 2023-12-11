@@ -564,11 +564,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Modules/HypnokinkModule/StandIns/HK_Quest.gd"
 }, {
-"base": "RestraintData",
-"class": "HK_RestraintVisor",
-"language": "GDScript",
-"path": "res://Modules/HypnokinkModule/Items/HypnoVisor/HK_RestraintVisor.gd"
-}, {
 "base": "SceneBase",
 "class": "HK_SessionAwakenerBase",
 "language": "GDScript",
@@ -1416,7 +1411,6 @@ _global_script_class_icons={
 "HK_Item": "",
 "HK_Perk": "",
 "HK_Quest": "",
-"HK_RestraintVisor": "",
 "HK_SessionAwakenerBase": "",
 "HK_SessionBodyBase": "",
 "HK_SessionInductionBase": "",

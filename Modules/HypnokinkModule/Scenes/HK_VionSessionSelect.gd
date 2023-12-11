@@ -1,7 +1,14 @@
 extends SceneBase
 
 const SessionCooldownTime = 8*60*60
-const SessionCreditCost = 3
+
+const SessionCostMap = {
+	HK_Sessions.BodySessionZero: 1,
+	HK_Sessions.BodyStaminaRestore: 3,
+	HK_Sessions.BodyDodgeBuff: 3,
+	HK_Sessions.BodyMaxPainBuff: 3,
+	HK_Sessions.BodyBondage: 5
+	}
 
 func _init():
 	sceneID = "HK_VionSessionSelect"
@@ -19,9 +26,10 @@ func _run():
 			saynn("[say=HK_Vion]What did you have in mind?[/say]")
 		
 		addSessionButton("Session zero", "An introductory session", HK_Sessions.BodySessionZero)
-		addSessionButton("Relaxation", "Drift in peace for a while", HK_Sessions.StaminaRestore)
+		addSessionButton("Relaxation", "Drift in peace for a while", HK_Sessions.BodyStaminaRestore)
 		addSessionButton("Tension relief", "Relieve tension and become more flexible", HK_Sessions.BodyDodgeBuff)
 		addSessionButton("Pain tolerance", "Increase your pain tolerance", HK_Sessions.BodyMaxPainBuff)
+		addSessionButton("Bondage", "Experience a bondage scenario in the safety of your own mind", HK_Sessions.BodyBondage)
 
 		addButton("Nevermind", "Changed your mind about changing your mind", "endthescene")
 		# (scene ends)
@@ -43,14 +51,17 @@ func addSessionButton(name: String, desc: String, sessionId: String):
 	if(GM.pc.isGagged()):
 		addDisabledButton(name, desc + "\n\nYou can't participate while gagged")
 		return
+	if(GM.pc.hasBoundArms() or GM.pc.hasBoundLegs()):
+		addDisabledButton(name, desc + "\n\nYou can't participate while restrained")
+		return
 	if(getFlag("HypnokinkModule.DidSessionZero") || sessionId == HK_Sessions.BodySessionZero):
 		if(onCooldown()):
 			addDisabledButton(name, desc + "\n\nIt's too soon since the last session")
 			return
-		if(!canAfford()):
-			addDisabledButton(name, desc + "\n\n" + getCostString())
+		if(!canAfford(sessionId)):
+			addDisabledButton(name, desc + "\n\n" + getCostString(sessionId))
 			return
-		addButton(name, desc+ "\n\n" + getCostString(), sessionId)
+		addButton(name, desc+ "\n\n" + getCostString(sessionId), sessionId)
 		return
 	else:
 		addDisabledButton(name, "Do Session Zero first")
@@ -59,7 +70,7 @@ func addSessionButton(name: String, desc: String, sessionId: String):
 func onCooldown() -> bool:
 	return (getFlag("HypnokinkModule.LastSessionTime", -24*60*60) + SessionCooldownTime) > (GM.main.timeOfDay + (GM.main.currentDay * 24*60*60))
 
-func getCostString() -> String:
+func getCostString(bodyId: String) -> String:
 	if(getFlag("HypnokinkModule.FreebieSessionSample", true)):
 		return "First one is free"
 	elif(getFlag("HypnokinkModule.RushSubdued", false)):
@@ -68,9 +79,9 @@ func getCostString() -> String:
 		var freebies = getFlag("HypnokinkModule.OnTheHouseSessions")
 		return "You have "+str(freebies)+" free " + ("sessions" if freebies > 1 else "session") + " remaining"
 	else:
-		return str(SessionCreditCost) + " credits" 
+		return str(SessionCostMap[bodyId]) + (" credits" if SessionCostMap[bodyId] != 1 else " credit")
 
-func purchase():
+func purchase(bodyId: String):
 	if(getFlag("HypnokinkModule.RushSubdued", false)):
 		return
 	if(getFlag("HypnokinkModule.FreebieSessionSample", true)):
@@ -80,22 +91,22 @@ func purchase():
 		setFlag("HypnokinkModule.OnTheHouseSessions", getFlag("HypnokinkModule.OnTheHouseSessions") - 1)
 		return
 	else:
-		GM.pc.addCredits(-SessionCreditCost)
+		GM.pc.addCredits(-SessionCostMap[bodyId])
 		return
 
-func canAfford() -> bool:
+func canAfford(bodyId: String) -> bool:
 	if(getFlag("HypnokinkModule.FreebieSessionSample", true)):
 		return true
 	elif(getFlag("HypnokinkModule.OnTheHouseSessions", 0) > 0):
 		return true
-	elif(GM.pc.getCredits() >= SessionCreditCost):
+	elif(GM.pc.getCredits() >= SessionCostMap[bodyId]):
 		return true
 	return false
 	
-func runSessionScene(bodyId: String):
-	purchase()
+func runSessionScene(sessionId: String):
+	purchase(sessionId)
 	endScene()
-	runScene(pickInduction(), [bodyId])
+	runScene(pickInduction(), [sessionId])
 	
 func pickInduction():
 	if(!getFlag("HypnokinkModule.DidSessionZero")):

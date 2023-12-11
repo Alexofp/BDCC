@@ -1,7 +1,7 @@
 extends HK_SessionBodyBase
 
 func _init():
-	sceneID = HK_Sessions.StaminaRestore
+	sceneID = HK_Sessions.BodyStaminaRestore
 	
 func _initScene(_args = []):
 	onBody()

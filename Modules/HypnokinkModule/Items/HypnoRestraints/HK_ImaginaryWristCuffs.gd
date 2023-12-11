@@ -42,6 +42,9 @@ func getUnriggedParts(_character):
 		"wrist.L": ["res://Modules/HypnokinkModule/Items/HypnoRestraints/HypnoCuffModel.tscn"],
 		"wrist.R": ["res://Modules/HypnokinkModule/Items/HypnoRestraints/HypnoCuffModel.tscn"],
 	}
+	
+func getInventoryImage():
+	return "res://Modules/HypnokinkModule/Items/HypnoRestraints/imaginaryCuff.png"
 
 func updateDoll(doll: Doll3D):
 	doll.setArmsCuffed(true)

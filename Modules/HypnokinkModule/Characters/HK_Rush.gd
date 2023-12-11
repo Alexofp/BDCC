@@ -102,6 +102,9 @@ func _getName():
 
 func getGender():
 	return Gender.Male
+
+func getChatColor():
+	return '#F46670'
 	
 func getSmallDescription() -> String:
 	return "A towering stallion."
@@ -137,7 +140,10 @@ func createBodyparts():
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("dragontail"))
 	
 func getLootTable(_battleName):
-	return InmateLoot.new()
+	if(_battleName == "boxing_serious"):
+		return InmateLoot.new()
+	else:
+		return null
 
 func createEquipment():
 	getInventory().equipItem(GlobalRegistry.createItemNoID("inmatecollar"))

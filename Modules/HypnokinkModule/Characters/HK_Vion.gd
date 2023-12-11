@@ -90,8 +90,11 @@ func _getName():
 func getGender():
 	return Gender.Male
 	
+func getChatColor():
+	return "#E866f4"
+	
 func getSmallDescription() -> String:
-	return "Lilac inmate."
+	return "A lilac dragon inmate. Supposedly a licensed hypnotherapist"
 
 func getSpecies():
 	return ["dragon"]
@@ -115,7 +118,7 @@ func createBodyparts():
 	breasts.size = -1
 	giveBodypartUnlessSame(breasts)
 	var penis = GlobalRegistry.createBodypart("dragonpenis")
-	penis.lengthCM = 13
+	penis.lengthCM = 11
 	penis.ballsScale = 0.5
 	giveBodypartUnlessSame(penis)
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("anus"))
