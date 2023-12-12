@@ -7,6 +7,10 @@ func registerTriggers(es):
 	es.addTrigger(self, Trigger.TalkingToNPC, "alexrynard")
 	
 func run(_triggerID, _args):
+	if(getFlag("HypnokinkModule.Vion_HaveCage")):
+		addButtonUnlessLate("Return datapad", "Give Alex back his datapad and Vion's cage", "finish_deal")
+		return
+	
 	if(not getFlag("HypnokinkModule.VionTopicKnown_Chastity") or getFlag("HypnokinkModule.Vion_HaveDatapad") or getFlag("HypnokinkModule.Vion_FreedFromCage")):
 		return
 		
@@ -22,3 +26,6 @@ func onButton(_method, _args):
 	if(_method == "make_deal"):
 		GM.main.endCurrentScene()
 		runScene("HK_Alex_TalkAboutVion")
+	if(_method == "finish_deal"):
+		GM.main.endCurrentScene()
+		runScene("HK_Alex_GiveCage")

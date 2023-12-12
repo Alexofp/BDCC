@@ -105,15 +105,14 @@ func _react_scene_end(_tag, _result):
 	if(_tag == "computerhack"):
 		if(_result[0] == true):
 			setState("hack_succeed")
+			setFlag("HypnokinkModule.Vion_FreedFromCage", true)
+			setFlag("HypnokinkModule.VionTopicKnown_Backstory", true) # in case didnt see this yet somehow
 		else:
 			setState("hack_fail")
 		
 func _react(_action: String, _args):
 	if(_action == "hack_cage"):
 		runScene("ComputerSimScene", ["HK_DatapadHackComputer"], "computerhack")
-	
-	if(_action == "hack_succeed"):
-		setFlag("HypnokinkModule.Vion_FreedFromCage", true)
 	
 	if(_action == "ride_it_out"):
 		GM.pc.addLust(100)

@@ -13,6 +13,9 @@ func forgetCommand(command):
 		learnedCommands.remove(command)
 
 func reactToCommand(_command:String, _args:Array, _commandStringRaw:String):
+	if(_command == "skiptut"):
+		currentTutorialStep = 9999
+		return "Tutorial skipped."
 	if(connectedTo == ""):
 		return reactToCommandLocalhost(_command, _args, _commandStringRaw)
 	elif(connectedTo == "deloxekarat_default"):
@@ -24,14 +27,16 @@ func reactToCommandLocalhost(_command: String, _args:Array, _commandStringRaw:St
 	if(_command == "connect"):
 		if(_args.size() == 1):
 			var device = _args[0]
-			if(device in ["grd_radio_3511", "grd_radio_1447"]):
-				return "Connecting to "+device+"...\nCredentials not found. Connection aborted.\n[Nice try, but no. - Alex]"
+			if(device in ["grd_radio_3511", "1"]):
+				return "Connecting to grd_radio_3511...\nCredentials not found. Connection aborted.\n[Nice try, but no. - Alex]"
+			if(device in ["grd_radio_1447", "2"]):
+				return "Connecting to grd_radio_1447...\nCredentials not found. Connection aborted.\n[Nice try, but no. - Alex]"
 			elif(device in ["deloxekarat_default", "3"]):
 				connectedTo = "deloxekarat_default"
-				return "Connecting to "+device+"...\nConnected using default login and password for manufacturer/device."
+				return "Connecting to deloxekarat_default...\nConnected using default login and password for manufacturer/device."
 			elif(device in ["viplug_m_default", "4"]):
 				connectedTo = "viplug_m_default"
-				return "Connecting to "+device+"...\nConnected using default login and password for manufacturer/device."
+				return "Connecting to viplug_m_default...\nConnected using default login and password for manufacturer/device."
 			else:
 				return "Connecting to "+device+"...\nDevice not found."
 		else:
@@ -191,7 +196,7 @@ func reactToCommandPlug(_command: String, _args:Array, _commandStringRaw:String)
 	return "Error, unknown command. Use 'help' to list all available commands"
 
 var tutorialData = [
-	["*", "Follow the short tutorial to figure out how to work this utility.", "Type anything"],
+	["*", "Figure out how to work this utility, or use 'skiptut' to skip this tutorial.", "Type anything"],
 	["help", "Start by getting the list of commands.", "Select 'help' and then press Send"],
 	["help probe", "You learned new commands. Use the help command to figure out the 'probe' command", "Select 'help', then select 'probe' and then press Send"],
 	["probe", "Now try to execute this command.", "Select 'probe' and press Send"],

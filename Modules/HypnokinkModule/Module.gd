@@ -59,6 +59,7 @@ func _init():
 		"res://Modules/HypnokinkModule/Scenes/HK_GetEngineeringFreebieVisor.gd",
 		
 		"res://Modules/HypnokinkModule/Scenes/HK_Alex_TalkAboutVion.gd",
+		"res://Modules/HypnokinkModule/Scenes/HK_Alex_GiveCage.gd",
 		
 		"res://Modules/HypnokinkModule/Scenes/HK_RushIntroduction.gd",
 		"res://Modules/HypnokinkModule/Scenes/HK_RushRepeatConversation.gd",
