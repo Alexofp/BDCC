@@ -1,11 +1,10 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://Player/StageScene3D/BaseStageScene3D.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Player/Props/sybian.png" type="Texture" id=2]
 [ext_resource path="res://Player/Player3D/Doll3D.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Player/Props/platform.png" type="Texture" id=4]
 [ext_resource path="res://Player/StageScene3D/Scenes/Sybian.gd" type="Script" id=5]
-
 
 [sub_resource type="AnimationNodeAnimation" id=3]
 animation = "CuffedArms-loop"
@@ -16,10 +15,37 @@ animation = "SybianIdle-loop"
 [sub_resource type="AnimationNodeAnimation" id=6]
 animation = "SybianRide-loop"
 
+[sub_resource type="AnimationNodeAnimation" id=12]
+animation = "SybianHump-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=13]
+animation = "SybianHumpFast-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=14]
+animation = "SybianIntense-loop"
+
 [sub_resource type="AnimationNodeStateMachineTransition" id=7]
 xfade_time = 0.5
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=8]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=15]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=16]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=17]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=18]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=19]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=20]
 xfade_time = 0.5
 
 [sub_resource type="AnimationNodeStateMachine" id=9]
@@ -27,16 +53,22 @@ states/Idle/node = SubResource( 5 )
 states/Idle/position = Vector2( 310, 138 )
 states/Ride/node = SubResource( 6 )
 states/Ride/position = Vector2( 577, 138 )
-transitions = [ "Idle", "Ride", SubResource( 7 ), "Ride", "Idle", SubResource( 8 ) ]
+states/SybianHump-loop/node = SubResource( 12 )
+states/SybianHump-loop/position = Vector2( 461, 296 )
+states/SybianHumpFast-loop/node = SubResource( 13 )
+states/SybianHumpFast-loop/position = Vector2( 461, 381 )
+states/SybianIntense-loop/node = SubResource( 14 )
+states/SybianIntense-loop/position = Vector2( 221, 296 )
+transitions = [ "Idle", "Ride", SubResource( 7 ), "Ride", "Idle", SubResource( 8 ), "Idle", "SybianIntense-loop", SubResource( 15 ), "SybianIntense-loop", "Idle", SubResource( 16 ), "Idle", "SybianHump-loop", SubResource( 17 ), "SybianHump-loop", "Idle", SubResource( 18 ), "SybianHump-loop", "SybianHumpFast-loop", SubResource( 19 ), "SybianHumpFast-loop", "SybianHump-loop", SubResource( 20 ) ]
 start_node = "Idle"
-graph_offset = Vector2( -111, -51 )
+graph_offset = Vector2( -92, -3 )
 
 [sub_resource type="AnimationNodeBlend2" id=4]
 filter_enabled = true
 filters = [ "Doll3D/Skeleton:Arm.L", "Doll3D/Skeleton:Arm.R", "Doll3D/Skeleton:ForeArm.L", "Doll3D/Skeleton:ForeArm.R", "Doll3D/Skeleton:Hand.L", "Doll3D/Skeleton:Hand.R" ]
 
 [sub_resource type="AnimationNodeBlendTree" id=10]
-graph_offset = Vector2( -173.025, 41.6948 )
+graph_offset = Vector2( -289.973, -48.1648 )
 nodes/Animation/node = SubResource( 3 )
 nodes/Animation/position = Vector2( 60, 260 )
 nodes/AnimationNodeStateMachine/node = SubResource( 9 )
@@ -44,7 +76,7 @@ nodes/AnimationNodeStateMachine/position = Vector2( 40, 60 )
 nodes/CuffsBlend/node = SubResource( 4 )
 nodes/CuffsBlend/position = Vector2( 320, 120 )
 nodes/output/position = Vector2( 540, 160 )
-node_connections = [ "output", 0, "CuffsBlend", "CuffsBlend", 0, "AnimationNodeStateMachine", "CuffsBlend", 1, "Animation" ]
+node_connections = [ "CuffsBlend", 0, "AnimationNodeStateMachine", "CuffsBlend", 1, "Animation", "output", 0, "CuffsBlend" ]
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=11]
 
