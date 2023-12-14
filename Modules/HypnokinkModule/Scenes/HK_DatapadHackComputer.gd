@@ -8,10 +8,6 @@ func _init():
 	id = "HK_DatapadHackComputer"
 	introText = "ProbY v1.21 localnet device RMI utility\nInformation wants to be free!"
 
-func forgetCommand(command):
-	if(learnedCommands.has(command)):
-		learnedCommands.remove(command)
-
 func reactToCommand(_command:String, _args:Array, _commandStringRaw:String):
 	if(_command == "skiptut"):
 		currentTutorialStep = 9999
@@ -80,37 +76,48 @@ func reactToCommandLocalhost(_command: String, _args:Array, _commandStringRaw:St
 	return "Error, unknown command. Use 'help' to list all available commands"
 	
 const memPosMap = {
-			"unlock": "[9,1]",
-			"disconnect": "[15,0]",
-			"monitor": "[5,4]",
-			"help": "[1,26]",
+			"unlock": "[6,8] (6 bytes read)",
+			"disconnect": "[4,16] (11 bytes read)",
+			"monitor": "[8,0] (171 bytes read)",
+			"help": "[17,4] (79 bytes read)",
 		}
-			
+
+const NI = "[color=#FFFF00]0[/color]"
+const CR = "[color=#FFAAAA]¬[/color]"
+
 func reactToCommandCage(_command: String, _args:Array, _commandStringRaw:String):
 	if(_command == "disconnect"):
 		lastCageCmd = _command
 		connectedTo = ""
-		return "Disconnected."
+		return "Disconnecting...\nConnection closed by the remote host."
 	elif(_command == "monitor"):
-		var lastMem = memPosMap[lastCageCmd]
-		var lastCmdStored = lastCageCmd
-		lastCageCmd = _command
-		return \
-			"Days locked: "+str(GM.main.getDays() + 47)+"\n"+\
-			"Electromagnet lock strength: "+str(stepify(rand_range(3200, 3600),0.1))+" N\n"+\
-			"Battery charge: "+str(stepify(rand_range(1400, 1500),0.1))+" mAh\n"+\
-			"Bioreactor: Operating\n"+\
-			"Last command: "+lastCmdStored+"\n"+\
-			"Last memory read at: "+lastMem+"\n"+\
-			"First page memdump (zero-indexed): \n[font=res://Fonts/smallconsolefont.tres]"+\
-			"LGOFFHtQ QTh1KVnD\n"+\
-			"ZtLEPVXP BbdRYAoi\n"+\
-			"gBAPqedl ElP8e8ks\n"+\
-			"______10  obUqU1c\n"+\
-			"DEBBLLMC yc5 4Zbo\n"+\
-			"alaiaaeS dk2RgXTn\n"+\
-			"yetossmB Y 4ZY3Cn\n"+\
-			"sctrttd  pzmewTve\n[/font]"
+		if(_args.size() == 0):
+			var lastMem = memPosMap[lastCageCmd]
+			var lastCmdStored = lastCageCmd
+			lastCageCmd = _command
+			return \
+				"Status: locked\n"+\
+				"Days locked: "+str(GM.main.getDays() + 47)+"\n"+\
+				"Electromagnet lock strength: "+str(stepify(rand_range(3200, 3600),0.1))+" N\n"+\
+				"Battery charge: "+str(stepify(rand_range(1400, 1500),0.1))+" mAh\n"+\
+				"Bioreactor: Operating\n"+\
+				"Last memory access at: "+lastMem+" by '"+lastCmdStored+"'\n"+\
+				"Memory dump (first page): \n[font=res://Fonts/smallconsolefont.tres]"+\
+				"[color=#AAFFAA]   0        8        16       24      [/color]\n"+\
+				"[color=#AAFFAA] 0 [/color]BEEFBEA7 DeLoxe S 3-Karat  v1.0.7"+NI+"_\n"+\
+				"[color=#AAFFAA] 1 [/color]00010017 SEGFAULT  at: %s"+NI+" Eo2ZiE93\n"+\
+				"[color=#AAFFAA] 2 [/color]Vion"+NI+"___ b1Un374k J0sTIBXF locked"+NI+"_\n"+\
+				"[color=#AAFFAA] 3 [/color]unlocked "+NI+"___Oper ating "+NI+"_ Inactive\n"+\
+				"[color=#AAFFAA] 4 [/color]"+NI+"___sAxz 38VsDvXT Disconne cting... \n"+\
+				"[color=#AAFFAA] 5 [/color]"+NI+"___Read y."+NI+"_DwyM UNz6v4ML B1jowhGw\n"+\
+				"[color=#AAFFAA] 6 [/color]default"+NI+" block"+NI+"__ ____over ride"+NI+"hl|\n"+\
+				"[color=#AAFFAA] 7 [/color]Code "+NI+"__ valid."+NI+"_ invalid. "+NI+"___6521\n"+\
+				"[color=#AAFFAA] 8 [/color]Status:  %s"+CR+"Days  locked:  %d"+CR+"Elect\n"+\
+				"[color=#AAFFAA] 9 [/color]romagnet  lock st rength:  %fN"+CR+"Batt\n"+\
+				"[color=#AAFFAA]10 [/color]erycharg e: %f mA h"+CR+"Biorea ctor:%s"+CR+"\n"+\
+				"[color=#AAFFAA]11 [/color]Last mem ory acce ss at: [ %d,%d] (\n[/font]"
+		else:
+			return "This command expects 0 arguments"
 	elif(_command == "unlock"):
 		lastCageCmd = _command
 		if(_args.size() == 1):
@@ -165,9 +172,7 @@ func reactToCommandPlug(_command: String, _args:Array, _commandStringRaw:String)
 			return "Invoking...\nReturn code 00000: Success"
 	elif(_command == "disconnect"):
 		connectedTo = ""
-		forgetCommand("set_speed")
-		forgetCommand("get_speed")
-		return "Disconnected."
+		return "Disconnecting...\nConnection closed by the remote host."
 	elif(_command == "help"):
 		if(_args.size() == 1):
 			var tolearn = _args[0]
