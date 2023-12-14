@@ -6,7 +6,7 @@ onready var doll = $Doll3D
 onready var doll2 = $Doll3D2
 
 func _init():
-	id = HK_StageScene.ArmsRaisedSex
+	id = StageScene.ArmsRaisedSex
 
 func _ready():
 	animationTree.anim_player = animationTree.get_path_to(doll.getAnimPlayer())

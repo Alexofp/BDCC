@@ -1,7 +1,7 @@
 extends Attack
 
 func _init():
-	id = HK_Attack.TriggerStun
+	id = "HypnoTriggerStun"
 	category = Category.Special
 	aiCategory = AICategory.Offensive
 	
@@ -20,7 +20,7 @@ func _doAttack(_attacker, _receiver, _context = {}):
 	if(_receiver.addEffect(StatusEffect.Stunned, [RNG.randi_range(1,2)])):
 		text += "\n[b]{receiver.name} is briefly too disoriented to act![/b]"
 	
-	_receiver.addEffect(HK_StatusEffect.PosthypnoticTriggerUsedUp)
+	_receiver.addEffect(StatusEffect.PosthypnoticTriggerUsedUp)
 	
 	return {
 		text = text,
@@ -30,7 +30,7 @@ func _canUse(_attacker, _receiver, _context = {}):
 	if(_attacker.hasBlockedHands()):
 		return false
 		
-	if(_receiver.statusEffects.has(HK_StatusEffect.ImplantedPosthypnoticTrigger) && !_receiver.statusEffects.has(HK_StatusEffect.PosthypnoticTriggerUsedUp)):
+	if(_receiver.statusEffects.has(StatusEffect.ImplantedPosthypnoticTrigger) && !_receiver.statusEffects.has(StatusEffect.PosthypnoticTriggerUsedUp)):
 		return true
 		
 	return false
@@ -45,7 +45,7 @@ func getRequirements():
 	return [AttackRequirement.FreeHands, AttackRequirement.CanTalk]
 
 func getExperience():
-	return [[HK_Skill.HypnosisSkill, 10]]
+	return [[Skill.Hypnosis, 10]]
 
 func getRecieverArmorScaling(_attacker, _receiver, _damageType) -> float:
 	return 0.0

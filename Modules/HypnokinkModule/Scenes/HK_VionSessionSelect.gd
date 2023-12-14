@@ -112,7 +112,7 @@ func pickInduction():
 	if(!getFlag("HypnokinkModule.DidSessionZero")):
 		return HK_Sessions.InductionFirstTime
 		
-	if(HK_CharUtil.isHypnotized(GM.pc)):
+	if(HK_Utils.isHypnotized(GM.pc)):
 		return HK_Sessions.InductionAlreadyHypnotized
 	
 	var pool = [
@@ -120,7 +120,7 @@ func pickInduction():
 		HK_Sessions.InductionPendulum
 	]	
 	
-	if(GM.pc.getSkillLevel(HK_Skill.HypnosisSkill) >= 2):
+	if(GM.pc.getSkillLevel(Skill.Hypnosis) >= 2):
 		pool.append(HK_Sessions.InductionRapid)
 	
 	var pick = RNG.pick(pool)

@@ -2,7 +2,7 @@ extends ItemBase
 class_name HK_Glasses
 
 func _init():
-	id = HK_Item.Glasses
+	id = "VionGlasses"
 
 func getVisibleName():
 	return "Glasses"

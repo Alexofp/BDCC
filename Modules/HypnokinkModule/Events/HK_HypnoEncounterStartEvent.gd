@@ -1,7 +1,7 @@
 extends EventBase
 
 func _init():
-	id = HK_Event.HypnoEncounterStart
+	id = "HK_HypnoEncounterStartEvent"
 
 func registerTriggers(es):
 	es.addTrigger(self, Trigger.EnteringRoom)
@@ -10,7 +10,7 @@ func registerTriggers(es):
 func react(_triggerID, _args):
 	var isLookingForTrouble = (_triggerID == Trigger.PCLookingForTrouble)
 	
-	if(not GM.pc.hasPerk(HK_Perk.FamousDrawback)):
+	if(not GM.pc.hasPerk(Perk.FamousDrawback)):
 		return
 	
 	if(GM.main.getFlag("HypnokinkModule.HypnoEncounterCooldown", 0) > 0 && !isLookingForTrouble):
@@ -18,7 +18,7 @@ func react(_triggerID, _args):
 		return
 	
 	if(WorldPopulation.Inmates in GM.pc.getLocationPopulation()):
-		var baseChance = 1.0 + HK_CharUtil.getSuggestibleStacks(GM.pc) * 0.5
+		var baseChance = 1.0 + HK_Utils.getSuggestibleStacks(GM.pc) * 0.5
 		baseChance *= GM.pc.getEncounterChanceModifierInmates()
 		
 		if(RNG.chance(baseChance) || isLookingForTrouble):
@@ -28,7 +28,7 @@ func react(_triggerID, _args):
 			encounterLevel = Util.maxi(encounterLevel, 0)
 			encounterLevel = Util.mini(encounterLevel, 15+RNG.randi_range(-1, 1))
 			
-			return GM.ES.triggerReact(HK_Trigger.HypnoEncounter, [encounterLevel, WorldPopulation.Inmates])
+			return GM.ES.triggerReact(Trigger.HypnoEncounter, [encounterLevel, WorldPopulation.Inmates])
 
 		return false
 

@@ -119,18 +119,18 @@ func _react(_action: String, _args):
 		
 	if(_action == "sex_1"):
 		GM.pc.addArousal(0.25)
-		HK_CharUtil.raiseSuggestibilityTo(GM.pc, 75)
+		HK_Utils.raiseSuggestibilityTo(GM.pc, 75)
 		
 	if(_action == "sex_2"):
 		GM.pc.addArousal(0.5)
-		HK_CharUtil.raiseSuggestibilityTo(GM.pc, 75)
+		HK_Utils.raiseSuggestibilityTo(GM.pc, 75)
 		processTime(30 * 60)
 		GM.pc.cummedInMouthBy("HK_Vion")
 		
 	if(_action == "sex_3"):
 		GM.pc.orgasmFrom("HK_Vion")
 		GM.pc.addLust(100)
-		HK_CharUtil.raiseSuggestibilityTo(GM.pc, 75)
+		HK_Utils.raiseSuggestibilityTo(GM.pc, 75)
 		processTime(30 * 60)
 		if(GM.pc.hasReachableAnus()):
 			GM.pc.cummedInAnusBy("HK_Vion")
@@ -143,7 +143,7 @@ func _react(_action: String, _args):
 		GM.pc.addArousal(0.25)
 		GM.pc.orgasmFrom("HK_Vion")
 		GM.pc.addLust(100)
-		HK_CharUtil.raiseSuggestibilityTo(GM.pc, 75)
+		HK_Utils.raiseSuggestibilityTo(GM.pc, 75)
 		processTime(30 * 60)
 		if(GM.pc.hasReachableVagina()):
 			GM.pc.cummedInVaginaBy("HK_Vion")
@@ -155,13 +155,13 @@ func _react(_action: String, _args):
 	if(_action == "sex_after"):
 		GM.pc.addLust(-80)
 		GM.pc.addArousal(-75)
-		HK_CharUtil.raiseSuggestibilityTo(GM.pc, 75)
+		HK_Utils.raiseSuggestibilityTo(GM.pc, 75)
 		processTime(30 * 60)
 		GM.pc.cummedOnBy("HK_Vion")
 		
 	if(_action == "get_up"):
-		HK_CharUtil.changeSuggestibilityBy(GM.pc, -125)
-		HK_CharUtil.raiseSuggestibilityTo(GM.pc, 30)
+		HK_Utils.changeSuggestibilityBy(GM.pc, -125)
+		HK_Utils.raiseSuggestibilityTo(GM.pc, 30)
 		
 	if(_action == "hack_fail_after"):
 		runScene("HK_VionRepeatConversation")

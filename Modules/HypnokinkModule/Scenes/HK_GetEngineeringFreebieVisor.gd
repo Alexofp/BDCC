@@ -14,7 +14,7 @@ func _run():
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
-		GM.pc.getInventory().addItem(GlobalRegistry.createItem(HK_Item.Visor))
+		GM.pc.getInventory().addItem(GlobalRegistry.createItem("HypnovisorMk0"))
 		endScene()
 		return
 		

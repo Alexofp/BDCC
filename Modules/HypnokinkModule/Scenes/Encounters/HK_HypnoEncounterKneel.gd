@@ -112,7 +112,7 @@ func _run():
 		# there is no subby version
 			
 		saynn("You don't [i]have[/i] to obey. You should probably just stand up, but you want to follow {npc.his} order and...")
-		HK_Util.addHypnoButtons(self, "kneel", "resist", ["Kneel", "Remain", "Stay", "Not move"], ["Get up", "Resist", "Stand"])
+		HypnokinkModule.addHypnoButtons(self, "kneel", "resist", ["Kneel", "Remain", "Stay", "Not move"], ["Get up", "Resist", "Stand"])
 			
 		
 	if(state == "kneel"):
@@ -135,7 +135,7 @@ func _run():
 				"You really should just...",
 			]))
 			
-		HK_Util.addHypnoButtons(self, "kneel", "resist", ["Kneel", "Remain", "Stay", "Not move"], ["Get up", "Resist", "Stand"])
+		HK_Utils.addHypnoButtons(self, "kneel", "resist", ["Kneel", "Remain", "Stay", "Not move"], ["Get up", "Resist", "Stand"])
 	
 	if(state == "kneeled_enough"):
 		addCharacter(npcID)
@@ -162,14 +162,14 @@ func _run():
 				saynn("{npc.He} {npc.verb('grab')} you by the jaw.")
 				saynn("[say=npc]Open up.[/say]")
 				saynn("Maybe you could still stop, but you only want to be good for {npc.him}, and so you...")
-				HK_Util.addUnresistableHypnoButtons(self, "get_gagged", ["Open", "Open up"])
+				HK_Utils.addUnresistableHypnoButtons(self, "get_gagged", ["Open", "Open up"])
 			else:
 				saynn("{npc.He} {npc.verb('look')} you over.")
 				saynn("[say=npc]Had to take care of something. But now I've got plenty of time for my pet.[/say]")
 				saynn("{npc.He} {npc.verb('grab')} you by the jaw.")
 				saynn("[say=npc]I'm gonna make good use of your mouth.[/say]")
 				saynn("Maybe you could still stop, but you only want to be good for {npc.him}, and so you...")
-				HK_Util.addUnresistableHypnoButtons(self, "get_fucked_oral_1", ["Whimper", "Get ready", "Gulp"])
+				HK_Utils.addUnresistableHypnoButtons(self, "get_fucked_oral_1", ["Whimper", "Get ready", "Gulp"])
 			
 		# (mean version)
 		if(npcVariation == "mean"):
@@ -189,14 +189,14 @@ func _run():
 				saynn("{npc.He} {npc.verb('grab')} you by the jaw, clearly intent on forcing it open.")
 				saynn("[say=npc]Open up or I'll make you.[/say]")
 				saynn("You would try to resist, but {npc.nameS} demeanor is so commanding that you just...")
-				HK_Util.addUnresistableHypnoButtons(self, "get_gagged", ["Open", "Open up"])
+				HK_Utils.addUnresistableHypnoButtons(self, "get_gagged", ["Open", "Open up"])
 			else:
 				saynn("{npc.He} {npc.verb('look')} you over.")
 				saynn("[say=npc]Made sure we won't be interrupted. Now...[/say]")
 				saynn("{npc.He} {npc.verb('grab')} you by the jaw.")
 				saynn("[say=npc]I'm gonna use your throat until you choke.[/say]")
 				saynn("At this point, you only want to open up your mouth for {npc.him} and taste {npc.his} "+dickWord+". You stick out your tongue for {npc.him} and...")
-				HK_Util.addUnresistableHypnoButtons(self, "get_fucked_oral_1", ["Whimper", "Get ready", "Gulp"])
+				HK_Utils.addUnresistableHypnoButtons(self, "get_fucked_oral_1", ["Whimper", "Get ready", "Gulp"])
 				
 		# (kind version)
 		if(npcVariation == "kind"):
@@ -216,7 +216,7 @@ func _run():
 			saynn("[say=npc]Now lets put that mouth of yours to use, hm?[/say]")
 			
 			saynn("You know you could stop this anytime, but you just don't [i]want[/i] to. What you really want is to just open your mouth and...")
-			HK_Util.addUnresistableHypnoButtons(self, "get_fucked_oral_1", ["Nod", "Get ready", "Gulp"])
+			HK_Utils.addUnresistableHypnoButtons(self, "get_fucked_oral_1", ["Nod", "Get ready", "Gulp"])
 			
 		# (subby version)
 		# there is no subby version
@@ -248,7 +248,7 @@ func _run():
 		# (subby version)
 		# there is no subby version
 		
-		HK_Util.addUnresistableHypnoButtons(self, "get_fucked_oral_1", ["Whimper", "Get ready", "Gulp"])
+		HK_Utils.addUnresistableHypnoButtons(self, "get_fucked_oral_1", ["Whimper", "Get ready", "Gulp"])
 		
 	if(state == "get_fucked_oral_1"):
 		var sucking = true
@@ -311,10 +311,10 @@ func _run():
 		
 		if(sucking):
 			playAnimation(StageScene.SexOral, "sex", {pc= npcID, npc="pc", bodyState={exposedCrotch=true, hard=true}})
-			HK_Util.addUnresistableHypnoButtons(self, "get_fucked_oral_2", ["Take it", "Gag", "Get fucked", "Suck"])
+			HK_Utils.addUnresistableHypnoButtons(self, "get_fucked_oral_2", ["Take it", "Gag", "Get fucked", "Suck"])
 		else:
 			playAnimation(StageScene.SexOral, "lick", {pc= npcID, npc="pc", bodyState={exposedCrotch=true, hard=true}})
-			HK_Util.addUnresistableHypnoButtons(self, "get_fucked_oral_2", ["Lick"])
+			HK_Utils.addUnresistableHypnoButtons(self, "get_fucked_oral_2", ["Lick"])
 		
 	if(state == "get_fucked_oral_2"):
 		var sucking = true
@@ -376,10 +376,10 @@ func _run():
 		
 		if(sucking):
 			playAnimation(StageScene.SexOral, "fast", {pc= npcID, npc="pc", bodyState={exposedCrotch=true, hard=true}})
-			HK_Util.addUnresistableHypnoButtons(self, "get_fucked_oral_3", ["Take it", "Gag", "Get fucked", "Suck", "Swallow"])
+			HK_Utils.addUnresistableHypnoButtons(self, "get_fucked_oral_3", ["Take it", "Gag", "Get fucked", "Suck", "Swallow"])
 		else:
 			playAnimation(StageScene.SexOral, "grind", {pc= npcID, npc="pc", bodyState={exposedCrotch=true, hard=true}})
-			HK_Util.addUnresistableHypnoButtons(self, "get_fucked_oral_3", ["Lick"])
+			HK_Utils.addUnresistableHypnoButtons(self, "get_fucked_oral_3", ["Lick"])
 		
 	if(state == "get_fucked_oral_3"):
 		
@@ -439,7 +439,7 @@ func _run():
 		# there is no subby version	
 		
 		playAnimation(StageScene.SexOral, "start", {pc= npcID, npc="pc", bodyState={exposedCrotch=true, hard=true}})
-		HK_Util.addUnresistableHypnoButtons(self, "oral_afterward")
+		HK_Utils.addUnresistableHypnoButtons(self, "oral_afterward")
 		
 	if(state == "oral_afterward"):
 		playAnimation(StageScene.Duo, "kneel", {npc=npcID})
@@ -489,7 +489,7 @@ func _run():
 			])+"[/say]")
 		
 		saynn("But now that you know you [i]can[/i] leave, you really should just...")
-		HK_Util.addHypnoButtons(self, "kneel", "resist_2", ["Kneel", "Remain", "Stay", "Not move"], ["Get up", "Resist", "Stand"])
+		HK_Utils.addHypnoButtons(self, "kneel", "resist_2", ["Kneel", "Remain", "Stay", "Not move"], ["Get up", "Resist", "Stand"])
 	if(state == "resist_2"):
 		removeCharacter(npcID)
 		playAnimation(StageScene.Solo, "stand")
@@ -507,7 +507,7 @@ func _react(_action: String, _args):
 		return
 
 	if(_action == "kneel"):
-		HK_CharUtil.changeSuggestibilityBy(GM.pc, RNG.randi_range(2,6))
+		HK_Utils.changeSuggestibilityBy(GM.pc, RNG.randi_range(2,6))
 		processTime(5 * 60)
 		if(doneWhenIterations == -1):
 			doneWhenIterations = RNG.randi_range(3,6)
@@ -517,7 +517,7 @@ func _react(_action: String, _args):
 			return
 			
 	if(_action == "get_gagged"):
-		HK_CharUtil.changeSuggestibilityBy(GM.pc, RNG.randi_range(2,6))
+		HK_Utils.changeSuggestibilityBy(GM.pc, RNG.randi_range(2,6))
 		processTime(1 * 60)
 		GM.pc.addLust(RNG.randi_range(2,6))
 		if(GM.pc.getInventory().hasSlotEquipped(InventorySlot.Mouth)):
@@ -548,7 +548,7 @@ func _react(_action: String, _args):
 				GM.pc.cummedInMouthBy(npcID, FluidSource.Vagina)
 				
 	if(_action == "oral_afterward"):
-		HK_CharUtil.changeSuggestibilityBy(GM.pc, RNG.randi_range(20,30))
+		HK_Utils.changeSuggestibilityBy(GM.pc, RNG.randi_range(20,30))
 		processTime(10 * 60)
 		if(removedOtherGag != ""):
 			GM.pc.getInventory().removeEquippedItemsWithBuff(Buff.RingGagBuff)
@@ -558,7 +558,7 @@ func _react(_action: String, _args):
 				GM.pc.getInventory().removeEquippedItemsWithBuff(Buff.RingGagBuff)		
 		if(npcVariation == "kind"):
 			GM.pc.addCredits(1)
-		GM.pc.addSkillExperience(HK_Skill.HypnosisSkill, 10)
+		GM.pc.addSkillExperience(Skill.Hypnosis, 10)
 		
 		
 	if(_action == "resist"):

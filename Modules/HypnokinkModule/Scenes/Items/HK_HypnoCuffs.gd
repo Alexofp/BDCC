@@ -11,7 +11,7 @@ func _initScene(_args = []):
 
 func _run():
 	if(state == ""):
-		if(HK_CharUtil.isHypnotized(GM.pc)):
+		if(HK_Utils.isHypnotized(GM.pc)):
 			saynn("You can't possibly hope to remove these very real cuffs.")
 			addButton("Continue", "Nothing you can do", "endthescene")
 		else:

@@ -43,8 +43,8 @@ func _init():
 		Fetish.Condoms : FetishInterest.Neutral,
 		Fetish.DrugUse : FetishInterest.Dislikes,
 		Fetish.Exhibitionism : FetishInterest.Neutral,
-		HK_Fetish.HypnosisHypnotist : FetishInterest.Loves,
-		HK_Fetish.HypnosisSubject : FetishInterest.SlightlyLikes
+		Fetish.HypnosisHypnotist : FetishInterest.Loves,
+		Fetish.HypnosisSubject : FetishInterest.SlightlyLikes
 	}
 	
 	npcLustInterests = {
@@ -132,4 +132,4 @@ func getLootTable(_battleName):
 func createEquipment():
 	getInventory().equipItem(GlobalRegistry.createItemNoID("inmatecollar"))
 	getInventory().equipItem(GlobalRegistry.createItemNoID("inmateuniformSexDeviant"))
-	getInventory().equipItem(GlobalRegistry.createItemNoID(HK_Item.Glasses))
+	getInventory().equipItem(GlobalRegistry.createItemNoID("VionGlasses"))

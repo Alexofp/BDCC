@@ -12,11 +12,11 @@ func _initScene(_args = []):
 
 func _run():
 	if(state == ""):
-		if(GM.pc.hasPerk(HK_Perk.KeywordsDrawback)):
+		if(GM.pc.hasPerk(Perk.KeywordsDrawback)):
 			addButton("Keywords", "Program the visor to suppress your keyword fixation", "keywords")
-		if(GM.pc.hasPerk(HK_Perk.FamousDrawback)):
+		if(GM.pc.hasPerk(Perk.FamousDrawback)):
 			addButton("Famous", "Program the visor to suppress your triggers.", "famous")
-		if(GM.pc.hasPerk(HK_Perk.DeepTranceDrawback)):
+		if(GM.pc.hasPerk(Perk.DeepTranceDrawback)):
 			addButton("Deep trance", "Program the visor to reduce your vulnerability to hypnosis", "deep_trance")
 		
 	if(state == "post_program"):
@@ -31,17 +31,17 @@ func _react(_action: String, _args):
 	
 	if(_action == "keywords"):
 		var visor: HK_HypnoVisor = GM.pc.getInventory().getItemByUniqueID(uniqueItemID)
-		visor.programToSuppressPerk(HK_Perk.KeywordsDrawback)
+		visor.programToSuppressPerk(Perk.KeywordsDrawback)
 		setState("post_program")
 		return
 	if(_action == "famous"):
 		var visor: HK_HypnoVisor = GM.pc.getInventory().getItemByUniqueID(uniqueItemID)
-		visor.programToSuppressPerk(HK_Perk.FamousDrawback)
+		visor.programToSuppressPerk(Perk.FamousDrawback)
 		setState("post_program")
 		return
 	if(_action == "deep_trance"):
 		var visor: HK_HypnoVisor = GM.pc.getInventory().getItemByUniqueID(uniqueItemID)
-		visor.programToSuppressPerk(HK_Perk.DeepTranceDrawback)
+		visor.programToSuppressPerk(Perk.DeepTranceDrawback)
 		setState("post_program")
 		return
 	

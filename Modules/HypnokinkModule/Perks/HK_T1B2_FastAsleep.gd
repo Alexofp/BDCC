@@ -1,8 +1,8 @@
 extends PerkBase
 
 func _init():
-	id = HK_Perk.FastAsleep
-	skillGroup = HK_Skill.HypnosisSkill
+	id = Perk.FastAsleep
+	skillGroup = Skill.Hypnosis
 
 func getVisibleName():
 	return "Fast Asleep"

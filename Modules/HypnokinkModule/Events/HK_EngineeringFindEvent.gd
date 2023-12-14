@@ -1,7 +1,7 @@
 extends EventBase
 
 func _init():
-	id = HK_Event.EngineeringFind
+	id = "HK_EngineeringFindVisor"
 
 func registerTriggers(es):
 	es.addTrigger(self, Trigger.EnteringRoom, "eng_workshop")

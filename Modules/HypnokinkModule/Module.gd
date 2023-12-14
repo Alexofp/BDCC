@@ -1,4 +1,5 @@
 extends Module
+class_name HypnokinkModule
 
 func getFlags():
 	return {
@@ -97,7 +98,7 @@ func _init():
 	items = [
 		"res://Modules/HypnokinkModule/Items/Glasses/HK_Glasses.gd",
 		
-		"res://Modules/HypnokinkModule/Items/HypnoVisor/HK_Visor.gd",
+		"res://Modules/HypnokinkModule/Items/HypnoVisor/HK_HypnovisorMk0.gd",
 		
 		"res://Modules/HypnokinkModule/Items/HypnoRestraints/HK_ImaginaryWristCuffs.gd",
 		"res://Modules/HypnokinkModule/Items/HypnoRestraints/HK_ImaginaryAnkleCuffs.gd",
@@ -167,9 +168,9 @@ func _init():
 	speechModifiers = [
 		"res://Modules/HypnokinkModule/Speech/HK_HypnoSpeech.gd"
 	]
+	
 func resetFlagsOnNewDay():
 	setFlag("HypnokinkModule.VisorXpToday", 0)
 	
 func registerEventTriggers():
-							   #HK_Trigger.HypnoEncounter
 	GM.ES.registerEventTrigger("HK_HypnoEncounter", EventTriggerWeighted.new())

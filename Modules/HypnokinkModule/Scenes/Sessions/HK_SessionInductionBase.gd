@@ -4,8 +4,8 @@ class_name HK_SessionInductionBase
 var bodyId: String
 
 func onInduction(_args = []):
-	GM.pc.addEffect(HK_StatusEffect.UnderHypnosis)
-	GM.pc.addEffect(HK_StatusEffect.Suggestible, [30])
+	GM.pc.addEffect(StatusEffect.UnderHypnosis)
+	GM.pc.addEffect(StatusEffect.Suggestible, [30])
 	processTime(10*60)
 	bodyId = _args[0]
 	

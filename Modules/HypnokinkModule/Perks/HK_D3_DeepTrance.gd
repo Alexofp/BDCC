@@ -1,8 +1,8 @@
 extends PerkBase
 
 func _init():
-	id = HK_Perk.DeepTranceDrawback
-	skillGroup = HK_Skill.HypnosisSkill
+	id = Perk.DeepTranceDrawback
+	skillGroup = Skill.Hypnosis
 
 func getVisibleName():
 	return "Deep Trance"

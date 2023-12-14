@@ -60,7 +60,7 @@ func _run():
 
 		addButton("Continue", "", "after_anchoring")
 	if(state == "after_anchoring"):
-		playAnimation(HK_StageScene.DuoHypnoTied, "sit", {pc="HK_Vion", npc="pc", npcAction="kneel", flipNPC=true})
+		playAnimation(StageScene.DuoHypnoTied, "sit", {pc="HK_Vion", npc="pc", npcAction="kneel", flipNPC=true})
 		saynn("You helplessly stare ahead, shivering as Vion circles behind you.")
 		
 		if(GM.pc.hasTail()):
@@ -75,7 +75,7 @@ func _run():
 		
 		
 	if(state == "wait"):
-		playAnimation(HK_StageScene.DuoHypnoTied, "stand", {pc="HK_Vion", npc="pc", npcAction="kneel"})
+		playAnimation(StageScene.DuoHypnoTied, "stand", {pc="HK_Vion", npc="pc", npcAction="kneel"})
 		
 		saynn("You kneel there, restrained by your own desires.")
 
@@ -103,10 +103,10 @@ func _run():
 
 func _react(_action: String, _args):
 	if(_action == "after_intro"):
-		var cuff = GlobalRegistry.createItem(HK_Item.ImaginaryWristCuffs)
+		var cuff = GlobalRegistry.createItem("ImaginaryWristCuffs")
 		GM.pc.getInventory().forceEquipStoreOther(cuff)
 	if(_action == "after_wrist_cuffs"):
-		var cuff = GlobalRegistry.createItem(HK_Item.ImaginaryAnkleCuffs)
+		var cuff = GlobalRegistry.createItem("ImaginaryAnkleCuffs")
 		GM.pc.getInventory().forceEquipStoreOther(cuff)
 	if(_action == "after_ankle_cuffs"):
 		pass

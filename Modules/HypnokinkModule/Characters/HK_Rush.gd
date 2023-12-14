@@ -47,8 +47,8 @@ func _init():
 		Fetish.Condoms : FetishInterest.Neutral,
 		Fetish.DrugUse : FetishInterest.SlightlyDislikes,
 		Fetish.Exhibitionism : FetishInterest.Dislikes,
-		HK_Fetish.HypnosisHypnotist : FetishInterest.Dislikes,
-		HK_Fetish.HypnosisSubject : FetishInterest.Loves
+		Fetish.HypnosisHypnotist : FetishInterest.Dislikes,
+		Fetish.HypnosisSubject : FetishInterest.Loves
 	}
 	
 	npcLustInterests = {

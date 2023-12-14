@@ -1,7 +1,7 @@
 extends StatusEffectBase
 
 func _init():
-	id = HK_StatusEffect.MantraUsed
+	id = StatusEffect.MantraUsed
 	isBattleOnly = true
 	
 func initArgs(_args = []):

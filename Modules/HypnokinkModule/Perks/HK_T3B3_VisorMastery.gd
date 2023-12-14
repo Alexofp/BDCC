@@ -1,8 +1,8 @@
 extends PerkBase
 
 func _init():
-	id = HK_Perk.VisorMastery
-	skillGroup = HK_Skill.HypnosisSkill
+	id = Perk.VisorMastery
+	skillGroup = Skill.Hypnosis
 
 func getVisibleName():
 	return "M1nd H4X"
@@ -21,7 +21,7 @@ func getCost():
 	return 3
 	
 func getRequiredPerks():
-	return [HK_Perk.GoodAtVisors]
+	return [Perk.GoodAtVisors]
 
 func getPicture():
 	return "res://Modules/HypnokinkModule/Icons/Perks/visor3.png"

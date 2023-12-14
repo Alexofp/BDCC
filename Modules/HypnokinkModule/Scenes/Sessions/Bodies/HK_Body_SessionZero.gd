@@ -107,13 +107,13 @@ func _run():
 func _react(_action: String, _args):
 
 	if(_action == "good"):
-		setFlag("HypnokinkModule.VionMode", HK_Consts.VionGood)
+		setFlag("HypnokinkModule.VionMode", HK_Utils.VionGood)
 		
 	if(_action == "neutral"):
-		setFlag("HypnokinkModule.VionMode", HK_Consts.VionNeutral)
+		setFlag("HypnokinkModule.VionMode", HK_Utils.VionNeutral)
 		
 	if(_action == "evil"):
-		setFlag("HypnokinkModule.VionMode", HK_Consts.VionEvil)
+		setFlag("HypnokinkModule.VionMode", HK_Utils.VionEvil)
 		
 	if(_action == "endthescene"):
 		setFlag("HypnokinkModule.DidSessionZero", true)

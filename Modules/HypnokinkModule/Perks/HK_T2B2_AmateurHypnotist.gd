@@ -1,8 +1,8 @@
 extends PerkBase
 
 func _init():
-	id = HK_Perk.AmateurHypnotist
-	skillGroup = HK_Skill.HypnosisSkill
+	id = Perk.AmateurHypnotist
+	skillGroup = Skill.Hypnosis
 
 func getVisibleName():
 	return "Amateur Hypnotist"
@@ -27,10 +27,11 @@ func getCost():
 func getPicture():
 	return "res://Modules/HypnokinkModule/Icons/Perks/watch.png"
 
+#maybe this should be one randomized attack?
 func addsAttacks():
 	return [
-		HK_Attack.TriggerPleasure,
-		HK_Attack.TriggerTiredness,
-		HK_Attack.TriggerKneel,
-		HK_Attack.TriggerStun
+		"HypnoTriggerPleasure",
+		"HypnoTriggerTiredness",
+		"HypnoTriggerKneel",
+		"HypnoTriggerStun"
 	]

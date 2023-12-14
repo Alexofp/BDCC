@@ -1,7 +1,7 @@
 extends StatusEffectBase
 
 func _init():
-	id = HK_StatusEffect.UnderHypnosis
+	id = StatusEffect.UnderHypnosis
 	isBattleOnly = false
 	
 	alwaysCheckedForNPCs = false

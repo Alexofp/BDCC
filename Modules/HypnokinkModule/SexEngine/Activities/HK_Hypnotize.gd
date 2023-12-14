@@ -5,7 +5,7 @@ func _init():
 
 func getGoals():
 	return {
-		HK_SexGoal.Hypnotize: 1.0,
+		SexGoal.Hypnotize: 1.0,
 	}
 
 func canStartActivity(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexSubInfo):
@@ -17,7 +17,7 @@ func canStartActivity(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: Sex
 		return false
 	if(_domInfo.getChar().isGagged()):
 		return false
-	if(_domInfo.getChar() != GM.pc || !_domInfo.getChar().hasPerk(HK_Perk.AmateurHypnotist)):
+	if(_domInfo.getChar() != GM.pc || !_domInfo.getChar().hasPerk(Perk.AmateurHypnotist)):
 		return false
 	return .canStartActivity(_sexEngine, _domInfo, _subInfo)
 
@@ -47,8 +47,8 @@ func processTurn():
 	if(state == ""):
 		var text = ""
 		text += "{dom.You} {dom.youVerb('stare')} deeply into {sub.yourHis} eyes."
-		affectDom(domInfo.fetishScore({HK_Fetish.HypnosisHypnotist: 1.0})+0.0, 0.1, 0.0)
-		affectSub(subInfo.fetishScore({HK_Fetish.HypnosisSubject: 1.0})+0.0, 0.1, -0.02, 0.0)
+		affectDom(domInfo.fetishScore({Fetish.HypnosisHypnotist: 1.0})+0.0, 0.1, 0.0)
+		affectSub(subInfo.fetishScore({Fetish.HypnosisSubject: 1.0})+0.0, 0.1, -0.02, 0.0)
 		return {
 			text = text,
 		}
@@ -64,7 +64,7 @@ func getDomActions():
 			"priority" : 0,
 		})
 	if(state in [""]):
-		if((getDom() == GM.pc) && (isSubInTrance()) && (!(getSub().hasEffect(HK_StatusEffect.ImplantedPosthypnoticTrigger)))):
+		if((getDom() == GM.pc) && (isSubInTrance()) && (!(getSub().hasEffect(StatusEffect.ImplantedPosthypnoticTrigger)))):
 			actions.append({
 				"id": "implant_posthypno",
 				"score": 1.0,
@@ -88,7 +88,7 @@ func doDomAction(_id, _actionInfo):
 	if(_id == "implant_posthypno"):
 		var text = ""
 		var domSay = ""
-		getSub().addEffect(HK_StatusEffect.ImplantedPosthypnoticTrigger)
+		getSub().addEffect(StatusEffect.ImplantedPosthypnoticTrigger)
 		domSay = "Whenever I snap my fingers, you will..."
 		text += "{dom.You} {dom.youVerb('whisper')} into {sub.your} ear."
 		return {
@@ -123,7 +123,7 @@ func doSubAction(_id, _actionInfo):
 		var subSay = null
 		# dummy react, to ensure domSay and subSay are generated
 		domSay = domReaction(SexReaction.Teasing, 0)
-		subInfo.getChar().addEffect(HK_StatusEffect.Suggestible, [RNG.randi_range(4,16)])
+		subInfo.getChar().addEffect(StatusEffect.Suggestible, [RNG.randi_range(4,16)])
 		
 		if(isSubInTrance()):
 			if(RNG.chance(75)):
@@ -164,10 +164,10 @@ func doSubAction(_id, _actionInfo):
 		}
 
 func isSubHypnotized():
-	return HK_CharUtil.isHypnotized(getSub())
+	return HK_Utils.isHypnotized(getSub())
 
 func isSubInTrance():
-	return HK_CharUtil.isInTrance(getSub())
+	return HK_Utils.isInTrance(getSub())
 	
 func getAnimationPriority():
 	return 0

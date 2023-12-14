@@ -1,7 +1,7 @@
 extends StatusEffectBase
 
 func _init():
-	id = HK_StatusEffect.HypnoVisorActive
+	id = StatusEffect.HypnoVisorActive
 	isBattleOnly = false
 	
 	alwaysCheckedForNPCs = true
@@ -25,7 +25,7 @@ func initArgs(_args = []):
 	pass
 	
 func processBattleTurn():
-	HK_CharUtil.changeSuggestibilityBy(character, 1)
+	HK_Utils.changeSuggestibilityBy(character, 1)
 	
 func processTime(seconds: int):
 	var visor = findVisor(character)
@@ -39,23 +39,23 @@ func processTime(seconds: int):
 		minutes /= 10
 	
 	var ceiling = 125
-	if(visor.id == HK_Item.Visor):
+	if(visor.id == "HypnovisorMk0"):
 		ceiling = 70
 	elif(visor.id == "HypnovisorMk1"):
 		ceiling = 125
 		
-	var diff = ceiling - HK_CharUtil.getSuggestibleStacks(character)
+	var diff = ceiling - HK_Utils.getSuggestibleStacks(character)
 	var change = min(diff, 2 * minutes)
 	if(change > 0):
-		HK_CharUtil.changeSuggestibilityBy(character, change)
+		HypnokinkModule.changeSuggestibilityBy(character, change)
 		if(character.isPlayer()):
 			var xpToday = GM.main.getFlag("HypnokinkModule.VisorXpToday", 0)
 			#gain max one level per day
-			var maxXp = SkillBase.getRequiredExperience(character.getSkillLevel(HK_Skill.HypnosisSkill))
+			var maxXp = SkillBase.getRequiredExperience(character.getSkillLevel(Skill.Hypnosis))
 			var gainableXp = maxXp - xpToday
 			var xpToGain = min(gainableXp, minutes)
 			if(xpToGain > 0):
-				character.addSkillExperience(HK_Skill.HypnosisSkill, xpToGain)
+				character.addSkillExperience(Skill.Hypnosis, xpToGain)
 				GM.main.setFlag("HypnokinkModule.VisorXpToday", xpToday + xpToGain)
 			
 

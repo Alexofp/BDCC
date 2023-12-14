@@ -4,19 +4,19 @@ class_name HK_HypnoVisor
 var programmedToSuppressPerkId: String = ""
 
 func _init():
-	id = HK_Item.Visor
+	id = "HypnovisorMk0"
 
 func getVisibleName():
 	if(GM.main.getFlag("HypnokinkModule.TalkedToAlexAboutVisors", false)):
 		return "Hypnovisor Mk0"
 	else:
-		return "Hypnovisor"
+		return "AR Visor"
 	
 func getDescription():
 	if(isWornByWearer()):
-		if(HK_CharUtil.isInTrance(getWearer())):
+		if(HK_Utils.isInTrance(getWearer())):
 			return "A very important visor that helps you focus on the important things."
-		if(HK_CharUtil.isHypnotized(getWearer())):
+		if(HK_Utils.isHypnotized(getWearer())):
 			return "A helpful visor that keeps you safe."		
 	return "An old model of a rugged AR safety visor.\nModified to display an endlessly spinning spiral, with words and images occasionally flashing too fast to consciously observe."
 
@@ -26,7 +26,7 @@ func getClothingSlot():
 func getPossibleActions():
 	if(isWornByWearer()):
 		var wearer = getWearer()
-		if(wearer.hasPerk(HK_Perk.VisorMastery)):
+		if(wearer.hasPerk(Perk.VisorMastery)):
 			return [{
 					"name": "Program",
 					"scene": "HK_ProgramVisorScene",
@@ -42,10 +42,10 @@ func isHatsPerkActive():
 	var wearer = getWearer()
 	if(wearer == null):
 		return false
-	if(wearer.hasPerk(HK_Perk.GoodAtVisors) && isWornByWearer()):
-		if(HK_CharUtil.isInTrance(wearer)):
+	if(wearer.hasPerk(Perk.GoodAtVisors) && isWornByWearer()):
+		if(HK_Utils.isInTrance(wearer)):
 			return true
-		elif(wearer.hasPerk(HK_Perk.VisorMastery) and HK_CharUtil.isHypnotized(wearer)):
+		elif(wearer.hasPerk(Perk.VisorMastery) and HK_Utils.isHypnotized(wearer)):
 			return true
 	return false
 
@@ -89,11 +89,11 @@ func onEquippedBy(_otherCharacter, _forced = false):
 	if(not _forced):
 		return
 	var wearer = getWearer()
-	var currentAmount = HK_CharUtil.getSuggestibleStacks(wearer)
-	if(_otherCharacter.hasPerk(HK_Perk.VisorMastery) and currentAmount < 50):
-		HK_CharUtil.changeSuggestibilityBy(wearer, 50 - currentAmount)
-	elif(_otherCharacter.hasPerk(HK_Perk.GoodAtVisors) and currentAmount < 30):
-		HK_CharUtil.changeSuggestibilityBy(wearer, 30 - currentAmount)
+	var currentAmount = HK_Utils.getSuggestibleStacks(wearer)
+	if(_otherCharacter.hasPerk(Perk.VisorMastery) and currentAmount < 50):
+		HK_Utils.changeSuggestibilityBy(wearer, 50 - currentAmount)
+	elif(_otherCharacter.hasPerk(Perk.GoodAtVisors) and currentAmount < 30):
+		HK_Utils.changeSuggestibilityBy(wearer, 30 - currentAmount)
 	
 	
 func getForcedOnMessage(isPlayer = true):

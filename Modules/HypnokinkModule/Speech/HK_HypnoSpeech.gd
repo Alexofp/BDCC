@@ -28,12 +28,12 @@ var hypnoHighlightsUnused := []
 var lastReset := -1
 
 func appliesTo(_speaker: BaseCharacter) -> bool:
-	if(GM.pc != _speaker and GM.pc.hasPerk(HK_Perk.KeywordsDrawback)):
-		if(GM.pc.hasPerk(HK_Perk.DeepTranceDrawback)):
+	if(GM.pc != _speaker and GM.pc.hasPerk(Perk.KeywordsDrawback)):
+		if(GM.pc.hasPerk(Perk.DeepTranceDrawback)):
 			return true
-		elif(HK_CharUtil.isHypnotized(GM.pc) and GM.pc.hasPerk(HK_Perk.FamousDrawback)):
+		elif(HK_Utils.isHypnotized(GM.pc) and GM.pc.hasPerk(Perk.FamousDrawback)):
 			return true
-		elif(HK_CharUtil.isInTrance(GM.pc)):
+		elif(HK_Utils.isInTrance(GM.pc)):
 			return true
 	return false
 	
@@ -64,7 +64,7 @@ func modify(_text: String, _speaker: BaseCharacter) -> String:
 				if(word_base in hypnoHighlightsUnused):
 					#avoid firing more than once per word in the same instance of time
 					hypnoHighlightsUnused.erase(word_base)
-					GM.pc.addEffect(HK_StatusEffect.Suggestible, [RNG.randi_range(1,4)]) #add a little hypnosis
+					GM.pc.addEffect(StatusEffect.Suggestible, [RNG.randi_range(1,4)]) #add a little hypnosis
 					GM.pc.addLust(RNG.randi_range(1,5)) #a little bit of lust
 					GM.pc.addArousal(RNG.randf_range(0.0,0.03)) #and a bit less arousal
 			else:

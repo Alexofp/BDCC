@@ -28,7 +28,7 @@ func canStruggle():
 		return true
 		
 	var wearer = getItem().getWearer()
-	if(HK_CharUtil.isHypnotized(wearer)):
+	if(HK_Utils.isHypnotized(wearer)):
 		return false
 	else:
 		return true
@@ -43,7 +43,7 @@ func doStruggle(_pc, _minigame):
 	var damage = 0
 	var stamina = 0
 	
-	if(HK_CharUtil.isHypnotized(_pc)):
+	if(HK_Utils.isHypnotized(_pc)):
 		text = "{user.Name} can't seem to take these cuffs off."
 		damage = 0.0
 	else:

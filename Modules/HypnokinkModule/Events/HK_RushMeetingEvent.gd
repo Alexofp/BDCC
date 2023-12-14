@@ -1,7 +1,7 @@
 extends EventBase
 
 func _init():
-	id = HK_Event.RushMeeting
+	id = "HK_RushMeetingEvent"
 
 func registerTriggers(es):
 	es.addTrigger(self, Trigger.EnteringRoom, "cellblock_red_nearcell")

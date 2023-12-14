@@ -1,7 +1,7 @@
 extends FetishBase
 
 func _init():
-	id = HK_Fetish.HypnosisHypnotist
+	id = Fetish.HypnosisHypnotist
 
 func getVisibleName():
 	return "Hypnosis (hypnotist)"

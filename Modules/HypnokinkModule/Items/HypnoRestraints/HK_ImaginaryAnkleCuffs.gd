@@ -1,7 +1,7 @@
 extends ItemBase
 
 func _init():
-	id = HK_Item.ImaginaryAnkleCuffs
+	id = "ImaginaryAnkleCuffs"
 
 func getVisibleName():
 	return "Real ankle cuffs"

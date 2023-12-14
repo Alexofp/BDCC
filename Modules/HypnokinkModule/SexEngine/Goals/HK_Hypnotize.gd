@@ -20,7 +20,7 @@ func isPossible(_sexEngine, _domInfo, _subInfo, _data):
 	return true
 
 func isCompleted(_sexEngine, _domInfo, _subInfo, _data):
-	if(HK_CharUtil.isInTrance(_subInfo.getChar())):
+	if(HK_Utils.isInTrance(_subInfo.getChar())):
 		return true
 			
 	return false

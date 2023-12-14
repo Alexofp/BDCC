@@ -3,7 +3,7 @@ extends StatusEffectBase
 var progress = 0
 
 func _init():
-	id = HK_StatusEffect.HypnoVisorProgramming
+	id = StatusEffect.HypnoVisorProgramming
 	isBattleOnly = false
 	
 	alwaysCheckedForNPCs = false
@@ -47,12 +47,12 @@ func checkDone():
 		
 	var skills: SkillsHolder = character.skillsHolder
 	#ensure perks are enabled
-	if(skills.hasPerkDisabledOrNot(HK_Perk.KeywordsDrawback) && skills.isPerkDisabled(HK_Perk.KeywordsDrawback)):
-		skills.togglePerk(HK_Perk.KeywordsDrawback)
-	if(skills.hasPerkDisabledOrNot(HK_Perk.FamousDrawback) && skills.isPerkDisabled(HK_Perk.FamousDrawback)):
-		skills.togglePerk(HK_Perk.FamousDrawback)
-	if(skills.hasPerkDisabledOrNot(HK_Perk.DeepTranceDrawback) && skills.isPerkDisabled(HK_Perk.DeepTranceDrawback)):
-		skills.togglePerk(HK_Perk.DeepTranceDrawback)
+	if(skills.hasPerkDisabledOrNot(Perk.KeywordsDrawback) && skills.isPerkDisabled(Perk.KeywordsDrawback)):
+		skills.togglePerk(Perk.KeywordsDrawback)
+	if(skills.hasPerkDisabledOrNot(Perk.FamousDrawback) && skills.isPerkDisabled(Perk.FamousDrawback)):
+		skills.togglePerk(Perk.FamousDrawback)
+	if(skills.hasPerkDisabledOrNot(Perk.DeepTranceDrawback) && skills.isPerkDisabled(Perk.DeepTranceDrawback)):
+		skills.togglePerk(Perk.DeepTranceDrawback)
 		
 		
 	var targetPerkId = visor.programmedToSuppressPerk()

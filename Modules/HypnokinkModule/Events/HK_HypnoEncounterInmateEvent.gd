@@ -1,10 +1,10 @@
 extends EventBase
 
 func _init():
-	id = HK_Event.HypnoEncounterInmate
+	id = "HK_HypnoEncounterInmateEvent"
 
 func registerTriggers(es):
-	es.addTrigger(self, HK_Trigger.HypnoEncounter)
+	es.addTrigger(self, Trigger.HypnoEncounter)
 
 func react(_triggerID, _args):
 	var encounterLevel = RNG.randi_range(0, 5)

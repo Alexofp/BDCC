@@ -1,8 +1,8 @@
 extends PerkBase
 
 func _init():
-	id = HK_Perk.MantraMinded
-	skillGroup = HK_Skill.HypnosisSkill
+	id = Perk.MantraMinded
+	skillGroup = Skill.Hypnosis
 
 func getVisibleName():
 	return "Mantra Minded"
@@ -23,4 +23,4 @@ func getPicture():
 	return "res://Modules/HypnokinkModule/Icons/Perks/peace.png"
 
 func addsAttacks():
-	return ["HK_ReciteMantra"]
+	return ["ReciteMantra"]

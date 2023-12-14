@@ -7,7 +7,7 @@ class_name HK_Suggestible
 var stacks := 0.0
 
 func _init():
-	id = HK_StatusEffect.Suggestible
+	id = StatusEffect.Suggestible
 	isBattleOnly = false
 	isSexEngineOnly = false
 	
@@ -27,7 +27,7 @@ func processBattleTurn():
 	
 func processTime(_seconds: int):
 	#active hypnosis prevents natural falloff
-	if(!(character.hasEffect(HK_StatusEffect.UnderHypnosis) || character.hasEffect(HK_StatusEffect.HypnoVisorActive))):
+	if(!(character.hasEffect(StatusEffect.UnderHypnosis) || character.hasEffect(StatusEffect.HypnoVisorActive))):
 		var minutes = (_seconds / 60.0)
 		if(minutes > 1): #this is cheating, but I want walking around to generate visible amounts without longer times just filling up to max immediately
 			minutes /= 10
@@ -39,7 +39,7 @@ func _on_pain_changed(after, before):
 	if(amount <= 0):
 		return
 	var mult = 1.5
-	if(character.hasPerk(HK_Perk.DeepTranceDrawback)):
+	if(character.hasPerk(Perk.DeepTranceDrawback)):
 		mult = 0.25
 	stacks -= amount * mult #pain multiplier
 	clampOrRemove()
@@ -87,11 +87,11 @@ func getIconColor():
 
 func getBuffs():
 	var mult = 1.0
-	if(character.hasPerk(HK_Perk.MantraMinded)):
+	if(character.hasPerk(Perk.MantraMinded)):
 		mult -= 0.1
-	if(character.hasPerk(HK_Perk.Detachment)):
+	if(character.hasPerk(Perk.Detachment)):
 		mult -= 0.2
-	if(character.hasPerk(HK_Perk.LucidTrance)):
+	if(character.hasPerk(Perk.LucidTrance)):
 		mult -= 0.3
 	var buffs = []
 	if(stacks > 20):
@@ -117,7 +117,7 @@ func loadData(_data):
 	
 func clampOrRemove():
 	var maximum = 100.0
-	if(character.hasPerk(HK_Perk.DeepTranceDrawback)):
+	if(character.hasPerk(Perk.DeepTranceDrawback)):
 		maximum += 25.0
 	if(stacks > maximum): 
 		stacks = maximum

@@ -15,9 +15,9 @@ func getLevelDamage():
 	return .getLevelDamage() * 0.5
 
 func shouldDoStruggleMinigame(_pc):
-	if(HK_CharUtil.isInTrance(_pc) && !_pc.hasPerk(HK_Perk.GoodAtVisors)):
+	if(HK_Utils.isInTrance(_pc) && !_pc.hasPerk(Perk.GoodAtVisors)):
 		return false #cannot succeed
-	if(HK_CharUtil.isHypnotized(_pc)):
+	if(HK_Utils.isHypnotized(_pc)):
 		return true
 	if(_pc.hasBoundArms() || _pc.hasBlockedHands()):
 		return true
@@ -37,9 +37,9 @@ func doStruggle(_pc, _minigame):
 	var damage = 0
 	var stamina = 0
 	
-	var inTrance = HK_CharUtil.isInTrance(_pc)
+	var inTrance = HK_Utils.isInTrance(_pc)
 	
-	if(inTrance and not _pc.hasPerk(HK_Perk.GoodAtVisors)):
+	if(inTrance and not _pc.hasPerk(Perk.GoodAtVisors)):
 		text = "{user.name} tries to... to... \n\nDo what? Must have not been important."
 		damage = 0.0
 		return {"text": text, "damage": damage, "lust": lust, "pain": pain, "stamina": stamina}
@@ -64,7 +64,7 @@ func getResistAnimation():
 
 func processStruggleTurn(_pc, _isActivelyStruggling):
 	var text = "ERROR! For some reason did not pick hypnovisor restraint text"
-	if(getItem().id == HK_Item.Visor):
+	if(getItem().id == "HypnovisorMk0"):
 		text = RNG.pick([
 			"Pretty spiral..",
 			"Need to be useful..",

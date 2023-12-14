@@ -61,7 +61,7 @@ func _run():
 				
 			saynn("Not that you have to, but your hypnotic experiences urge you to give in. You should...")
 				
-			HK_Util.addHypnoButtons(self, "submit", "decline", [], ["Decline"])
+			HK_Utils.addHypnoButtons(self, "submit", "decline", [], ["Decline"])
 			
 		# (mean version)
 		if(npcVariation == "mean"):
@@ -79,7 +79,7 @@ func _run():
 
 			saynn("Not that you have to, but your hypnotic experiences urge you to give in. You should...")
 			
-			HK_Util.addHypnoButtons(self, "submit", "attack", [], ["Fight"])
+			HK_Utils.addHypnoButtons(self, "submit", "attack", [], ["Fight"])
 
 		# (kind version)
 		if(npcVariation == "kind"):
@@ -105,7 +105,7 @@ func _run():
 				
 			saynn("Not that you have to, but your hypnotic experiences urge you to give in. You should...")
 			
-			HK_Util.addHypnoButtons(self, "submit", "decline", [], ["Decline"])
+			HK_Utils.addHypnoButtons(self, "submit", "decline", [], ["Decline"])
 			
 		# (subby version)
 		if(npcVariation == "subby"):
@@ -131,7 +131,7 @@ func _run():
 				
 			saynn("Not that you have to, but your hypnotic experiences urge you to give in. You should...")
 
-			HK_Util.addHypnoButtons(self, "submit", "decline", [], ["Decline"])
+			HK_Utils.addHypnoButtons(self, "submit", "decline", [], ["Decline"])
 			
 			# (OPTIONS ARE)
 			# (if normal = Play along, resist nonviolently)
@@ -216,7 +216,7 @@ func _react(_action: String, _args):
 		
 		
 	if(_action == "submit"):
-		HK_CharUtil.changeSuggestibilityBy(GM.pc, RNG.randi_range(15,30))
+		HK_Utils.changeSuggestibilityBy(GM.pc, RNG.randi_range(15,30))
 		endScene()
 		
 		var options= []
@@ -230,11 +230,11 @@ func _react(_action: String, _args):
 		return
 
 	if(_action == "decline"):
-		HK_CharUtil.changeSuggestibilityBy(GM.pc, RNG.randi_range(2,6))
+		HK_Utils.changeSuggestibilityBy(GM.pc, RNG.randi_range(2,6))
 		pass
 		
 	if(_action == "startfight"):
-		HK_CharUtil.changeSuggestibilityBy(GM.pc, RNG.randi_range(1,3))
+		HK_Utils.changeSuggestibilityBy(GM.pc, RNG.randi_range(1,3))
 		runScene("FightScene", [npcID], "guardfight")
 		
 

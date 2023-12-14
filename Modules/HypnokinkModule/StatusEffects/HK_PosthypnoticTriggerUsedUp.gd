@@ -1,7 +1,7 @@
 extends StatusEffectBase
 
 func _init():
-	id = HK_StatusEffect.PosthypnoticTriggerUsedUp
+	id = StatusEffect.PosthypnoticTriggerUsedUp
 	isBattleOnly = true
 	
 func initArgs(_args = []):
