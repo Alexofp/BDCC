@@ -3154,7 +3154,8 @@ func _run():
 
 			saynn("[say=pc]Slut.[/say]")
 
-		elif (soundScore <= 4):
+		else:
+		#elif (soundScore <= 4):
 			saynn("You spread Jacki's cunt and see that the little dildo-rod is still shoved into her pussy. She shivers as you tug on it.")
 
 			saynn("[say=jacki]Hey.. ah.. you stretched that hole enough already..[/say]")
