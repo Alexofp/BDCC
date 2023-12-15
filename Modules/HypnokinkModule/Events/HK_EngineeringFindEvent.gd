@@ -1,7 +1,7 @@
 extends EventBase
 
 func _init():
-	id = "HK_EngineeringFindVisor"
+	id = "EngineeringFindVisor"
 
 func registerTriggers(es):
 	es.addTrigger(self, Trigger.EnteringRoom, "eng_workshop")
@@ -16,4 +16,4 @@ func getPriority():
 func onButton(_method, _args):
 	if(_method == "take_freebie"):
 		setFlag("HypnokinkModule.GotEngineeringFreebieVisor", true)
-		runScene("HK_GetEngineeringFreebieVisor")
+		runScene("GetEngineeringFreebieVisor")

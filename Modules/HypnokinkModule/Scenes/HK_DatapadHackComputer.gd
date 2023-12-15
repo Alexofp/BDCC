@@ -5,7 +5,7 @@ var plugSpeed = 0
 var lastCageCmd = "disconnect"
 
 func _init():
-	id = "HK_DatapadHackComputer"
+	id = "DatapadHackComputer"
 	introText = "ProbY v1.21 localnet device RMI utility\nInformation wants to be free!"
 
 func reactToCommand(_command:String, _args:Array, _commandStringRaw:String):

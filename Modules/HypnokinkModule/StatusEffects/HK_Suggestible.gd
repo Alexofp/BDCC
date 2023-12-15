@@ -39,7 +39,7 @@ func _on_pain_changed(after, before):
 	if(amount <= 0):
 		return
 	var mult = 1.5
-	if(character.hasPerk(Perk.DeepTranceDrawback)):
+	if(character.hasPerk(Perk.HypnosisDeepTranceDrawback)):
 		mult = 0.25
 	stacks -= amount * mult #pain multiplier
 	clampOrRemove()
@@ -87,11 +87,11 @@ func getIconColor():
 
 func getBuffs():
 	var mult = 1.0
-	if(character.hasPerk(Perk.MantraMinded)):
+	if(character.hasPerk(Perk.HypnosisMantraMinded)):
 		mult -= 0.1
-	if(character.hasPerk(Perk.Detachment)):
+	if(character.hasPerk(Perk.HypnosisDetachment)):
 		mult -= 0.2
-	if(character.hasPerk(Perk.LucidTrance)):
+	if(character.hasPerk(Perk.HypnosisLucidTrance)):
 		mult -= 0.3
 	var buffs = []
 	if(stacks > 20):
@@ -117,7 +117,7 @@ func loadData(_data):
 	
 func clampOrRemove():
 	var maximum = 100.0
-	if(character.hasPerk(Perk.DeepTranceDrawback)):
+	if(character.hasPerk(Perk.HypnosisDeepTranceDrawback)):
 		maximum += 25.0
 	if(stacks > maximum): 
 		stacks = maximum

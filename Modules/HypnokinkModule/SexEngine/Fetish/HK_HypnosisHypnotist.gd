@@ -9,7 +9,7 @@ func getVisibleName():
 func getGoals(_sexEngine, _domFetishHolder, _dom, _sub):
 	var possible = []
 	
-	possible.append("HK_Hypnotize")
+	possible.append("Hypnotize")
 	
 	return possible
 

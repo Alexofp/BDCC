@@ -11,9 +11,9 @@ func afterBody():
 	
 func pickAwakener():
 	var pool = []
-	if(getFlag("HypnokinkModule.VionMode") == HK_Utils.VionGood || getFlag("HypnokinkModule.VionMode") == HK_Utils.VionNeutral):
+	if(getFlag("HypnokinkModule.VionMode") == HypnokinkUtil.VionGood || getFlag("HypnokinkModule.VionMode") == HypnokinkUtil.VionNeutral):
 		pool.append(HK_Sessions.AwakenerSimple)
-	if(getFlag("HypnokinkModule.VionMode") == HK_Utils.VionEvil):
+	if(getFlag("HypnokinkModule.VionMode") == HypnokinkUtil.VionEvil):
 		pool.append(HK_Sessions.AwakenerFakeWake)
 		
 	var pick = RNG.pick(pool)
@@ -25,7 +25,7 @@ func buff(buffid, args = []):
 	return buff
 	
 func betterBuffs() -> bool:
-	if(GM.pc.hasPerk(Perk.FastAsleep)):
+	if(GM.pc.hasPerk(Perk.HypnosisFastAsleep)):
 		return true
 	else:
 		return false
@@ -36,22 +36,22 @@ func debuffEffectMultiplier() -> float:
 	
 func buffDurationMultiplier() -> float:
 	var duration = 1.0
-	if(getFlag("HypnokinkModule.VionMode") == HK_Utils.VionGood):
+	if(getFlag("HypnokinkModule.VionMode") == HypnokinkUtil.VionGood):
 		duration = 1.25
-	if(getFlag("HypnokinkModule.VionMode") == HK_Utils.VionNeutral):
+	if(getFlag("HypnokinkModule.VionMode") == HypnokinkUtil.VionNeutral):
 		duration = 1.0
-	if(getFlag("HypnokinkModule.VionMode") == HK_Utils.VionEvil):
+	if(getFlag("HypnokinkModule.VionMode") == HypnokinkUtil.VionEvil):
 		duration = 0.65
-	if(GM.pc.hasPerk(Perk.FastAsleep)):
+	if(GM.pc.hasPerk(Perk.HypnosisFastAsleep)):
 		duration += 0.1
 	return duration
 	
 func debuffDurationMultiplier() -> float:
 	var duration
-	if(getFlag("HypnokinkModule.VionMode") == HK_Utils.VionGood):
+	if(getFlag("HypnokinkModule.VionMode") == HypnokinkUtil.VionGood):
 		duration = 1.0
-	if(getFlag("HypnokinkModule.VionMode") == HK_Utils.VionNeutral):
+	if(getFlag("HypnokinkModule.VionMode") == HypnokinkUtil.VionNeutral):
 		duration = 1.0
-	if(getFlag("HypnokinkModule.VionMode") == HK_Utils.VionEvil):
+	if(getFlag("HypnokinkModule.VionMode") == HypnokinkUtil.VionEvil):
 		duration = 1.25
 	return duration

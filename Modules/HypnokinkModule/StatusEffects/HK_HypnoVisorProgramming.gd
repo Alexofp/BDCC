@@ -47,12 +47,12 @@ func checkDone():
 		
 	var skills: SkillsHolder = character.skillsHolder
 	#ensure perks are enabled
-	if(skills.hasPerkDisabledOrNot(Perk.KeywordsDrawback) && skills.isPerkDisabled(Perk.KeywordsDrawback)):
-		skills.togglePerk(Perk.KeywordsDrawback)
-	if(skills.hasPerkDisabledOrNot(Perk.FamousDrawback) && skills.isPerkDisabled(Perk.FamousDrawback)):
-		skills.togglePerk(Perk.FamousDrawback)
-	if(skills.hasPerkDisabledOrNot(Perk.DeepTranceDrawback) && skills.isPerkDisabled(Perk.DeepTranceDrawback)):
-		skills.togglePerk(Perk.DeepTranceDrawback)
+	if(skills.hasPerkDisabledOrNot(Perk.HypnosisKeywordsDrawback) && skills.isPerkDisabled(Perk.HypnosisKeywordsDrawback)):
+		skills.togglePerk(Perk.HypnosisKeywordsDrawback)
+	if(skills.hasPerkDisabledOrNot(Perk.HypnosisFamousDrawback) && skills.isPerkDisabled(Perk.HypnosisFamousDrawback)):
+		skills.togglePerk(Perk.HypnosisFamousDrawback)
+	if(skills.hasPerkDisabledOrNot(Perk.HypnosisDeepTranceDrawback) && skills.isPerkDisabled(Perk.HypnosisDeepTranceDrawback)):
+		skills.togglePerk(Perk.HypnosisDeepTranceDrawback)
 		
 		
 	var targetPerkId = visor.programmedToSuppressPerk()

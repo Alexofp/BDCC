@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Icons_Perks.svg-ae2270c847ea89911fcd95ff822e7ab8.stex"
+path="res://.import/Icons_Perks.svg-7e58c4e56484cad02fc8f87f39cd266f.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Modules/HypnokinkModule/ArtSrc/Icons_Perks.svg"
-dest_files=[ "res://.import/Icons_Perks.svg-ae2270c847ea89911fcd95ff822e7ab8.stex" ]
+source_file="res://AssetsSource/hypnokink/Icons_Perks.svg"
+dest_files=[ "res://.import/Icons_Perks.svg-7e58c4e56484cad02fc8f87f39cd266f.stex" ]
 
 [params]
 

@@ -3,7 +3,7 @@ extends SceneBase
 var uniqueItemID
 
 func _init():
-	sceneID = "HK_HypnoCuffsScene"
+	sceneID = "HypnoCuffsScene"
 	
 func _initScene(_args = []):
 	if(_args.size() > 0):
@@ -11,7 +11,7 @@ func _initScene(_args = []):
 
 func _run():
 	if(state == ""):
-		if(HK_Utils.isHypnotized(GM.pc)):
+		if(HypnokinkUtil.isHypnotized(GM.pc)):
 			saynn("You can't possibly hope to remove these very real cuffs.")
 			addButton("Continue", "Nothing you can do", "endthescene")
 		else:

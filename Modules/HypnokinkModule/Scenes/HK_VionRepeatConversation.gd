@@ -1,13 +1,13 @@
 extends SceneBase
 
 func _init():
-	sceneID = "HK_VionRepeatConversation"
+	sceneID = "VionRepeatConversation"
 
 func _run():
 	if(state == ""):
-		addCharacter("HK_Vion")
-		playAnimation(StageScene.Duo, "stand", {npc="HK_Vion"})
-		saynn("You are standing in {HK_Vion.name}'s cell.")
+		addCharacter("Vion")
+		playAnimation(StageScene.Duo, "stand", {npc="Vion"})
+		saynn("You are standing in {Vion.name}'s cell.")
 
 		if(!getFlag("HypnokinkModule.VionTopicKnown_NoSex")):
 			addButton("Sex?", "Up for a fuck?", "ask_sex_fromMain")
@@ -55,7 +55,7 @@ func _run():
 		addButton("Goodbye", "Good for now", "endthescene")
 		
 	if(state == "questions"):
-		saynn("[say=HK_Vion]Ask away.[/say]")
+		saynn("[say=Vion]Ask away.[/say]")
 
 		addButton("Sofa", "Ask about the sofa", "ask_sofa")
 		
@@ -87,11 +87,11 @@ func _run():
 
 		saynn("[say=pc]This thing looks heavy. Dragging it in here, you must be stronger than you look.[/say]")
 
-		saynn("[say=HK_Vion]If only. I had help from some fellow inmates who appreciate my services.[/say]")
+		saynn("[say=Vion]If only. I had help from some fellow inmates who appreciate my services.[/say]")
 
 		saynn("[say=pc]And the guards just let you get away with it?[/say]")
 
-		saynn("[say=HK_Vion]Well, if they dont they might have to explain why they never disposed of the thing properly like they were supposed to. Can't blame them for not wanting to bother - you ever try to carry a sofa into an elevator?[/say]")
+		saynn("[say=Vion]Well, if they dont they might have to explain why they never disposed of the thing properly like they were supposed to. Can't blame them for not wanting to bother - you ever try to carry a sofa into an elevator?[/say]")
 
 		saynn("Fair point.")
 		
@@ -101,25 +101,25 @@ func _run():
 	if(state == "ask_job"):
 		saynn("[say=pc]So when you say services...[/say]")
 		
-		saynn("{HK_Vion.name} holds up a hand to stop you.")
+		saynn("{Vion.name} holds up a hand to stop you.")
 		
-		saynn("[say=HK_Vion]Not what you're thinking of, I assure you.[/say]")
+		saynn("[say=Vion]Not what you're thinking of, I assure you.[/say]")
 		
-		saynn("[say=HK_Vion]Actually, my occupational skillset happens to remain somewhat useful even in a prison. I am... hm. I [i]was[/i] a licensed hypnotist.[/say]")
+		saynn("[say=Vion]Actually, my occupational skillset happens to remain somewhat useful even in a prison. I am... hm. I [i]was[/i] a licensed hypnotist.[/say]")
 
-		saynn("Skepticism must have shown on your face, because {HK_Vion.name} quickly follows up:")
+		saynn("Skepticism must have shown on your face, because {Vion.name} quickly follows up:")
 		
-		saynn("[say=HK_Vion]Not the kind you'd find in cheap movies or adult-only novellas. I don't promise miracles and can't make people think they're frogs or anything like that. Think of it more as guided relaxation and basic therapy.[/say]")
+		saynn("[say=Vion]Not the kind you'd find in cheap movies or adult-only novellas. I don't promise miracles and can't make people think they're frogs or anything like that. Think of it more as guided relaxation and basic therapy.[/say]")
 		
 		saynn("[say=pc]And you get a lot of use out of that, do you?[/say]")
 		
-		saynn("[say=HK_Vion]Is that surprising? Plenty of people in a prison like this that could use some escapism. Plenty more that want to be able to better control their less desirable impulses.[/say]")
+		saynn("[say=Vion]Is that surprising? Plenty of people in a prison like this that could use some escapism. Plenty more that want to be able to better control their less desirable impulses.[/say]")
 
 		saynn("You consider that for a moment. Put like that, it does sound like there's some merit to the idea.")
 		
 		saynn("He winks at you and adds:")
 		
-		saynn("[say=HK_Vion]If you're doubtful, you can always give it a try yourself. The first one's free![/say]")
+		saynn("[say=Vion]If you're doubtful, you can always give it a try yourself. The first one's free![/say]")
 		
 		setFlag("HypnokinkModule.VionTopicKnown_Hypnotist", true)
 		
@@ -129,28 +129,28 @@ func _run():
 			saynn("You figure there's no reason to beat around the bush with a lilac.")
 			saynn("[say=pc]You up for a fuck?[/say]")
 			saynn("He closes his eyes for a moment and sighs.")
-			saynn("[say=HK_Vion]I am empathically [i]not[/i].[/say]")
+			saynn("[say=Vion]I am empathically [i]not[/i].[/say]")
 			saynn("Well, that was unexpected.")
 			setFlag("HypnokinkModule.VionTopicKnown_NoSex", true)
 		else:
 			saynn("[say=pc]You up for a fuck?[/say]")
-			saynn("[say=HK_Vion]Not at the moment, no.[/say]")
+			saynn("[say=Vion]Not at the moment, no.[/say]")
 
 		addButton("Back", "", "questions" if state == "ask_sex" else "")
 	if(state == "ask_sex2"):
 		saynn("Your eyes linger on the color of his uniform.")
 
-		saynn("[say=HK_Vion]...well go on, ask.[/say]")
+		saynn("[say=Vion]...well go on, ask.[/say]")
 
 		saynn("[say=pc]Alright. Usually lilacs are a little more...[/say]")
 
-		saynn("[say=HK_Vion]Slutty?[/say]")
+		saynn("[say=Vion]Slutty?[/say]")
 
 		saynn("[say=pc]Yeah.[/say]")
 
 		saynn("He shrugs.")
 
-		saynn("[say=HK_Vion]Long story short, I prefer my amorous adventures to be a little less [i]casual[/i]. Besides that, my preferred position is not currently an option.[/say]")
+		saynn("[say=Vion]Long story short, I prefer my amorous adventures to be a little less [i]casual[/i]. Besides that, my preferred position is not currently an option.[/say]")
 
 		saynn("He pulls aside his shorts for a moment, allowing you to catch a glimpse of metal in between his legs. Oof. That must be frustrating.")
 
@@ -160,31 +160,31 @@ func _run():
 	if(state == "ask_background"):
 		saynn("[say=pc]I've got time. What's the long story?[/say]")
 
-		saynn("[say=HK_Vion]If you say so.[/say]")
+		saynn("[say=Vion]If you say so.[/say]")
 
 		saynn("He leans back.")
 
-		saynn("[say=HK_Vion]The usual lilac here? Got caught selling their body on the wrong street corner, or with the kind of videos in their datapads that society's decided are not acceptable. Want to know how I ended up here?[/say]")
+		saynn("[say=Vion]The usual lilac here? Got caught selling their body on the wrong street corner, or with the kind of videos in their datapads that society's decided are not acceptable. Want to know how I ended up here?[/say]")
 
 		saynn("You gesture for him to continue.")
 
-		saynn("[say=HK_Vion]Turns out, when your boyfriend has some worrying possessive tendencies, you should make sure said tendencies were not inherited from his father. And, indeed, that said father is not the CTO of a major technological conglomerate.[/say]")
+		saynn("[say=Vion]Turns out, when your boyfriend has some worrying possessive tendencies, you should make sure said tendencies were not inherited from his father. And, indeed, that said father is not the CTO of a major technological conglomerate.[/say]")
 
 		saynn("He stands up and begins pacing around the room.")
 
-		saynn("[say=HK_Vion]One night, I wake up to a half dozen goons breaking down my door. Before I can even manage to protest, they throw a bag over my head and drag me off. Two hours of shivering in a cold dark cell later, I get tossed straight into a courtroom![/say]")
+		saynn("[say=Vion]One night, I wake up to a half dozen goons breaking down my door. Before I can even manage to protest, they throw a bag over my head and drag me off. Two hours of shivering in a cold dark cell later, I get tossed straight into a courtroom![/say]")
 
-		saynn("[say=HK_Vion]From what I gathered during that sham trial, Daddy Dearest seemed to think I was trying to brainwash his precious offspring into a sex slave. Though personally, I suspect my bank account simply didn't have enough zeroes in it for his liking.[/say]")
+		saynn("[say=Vion]From what I gathered during that sham trial, Daddy Dearest seemed to think I was trying to brainwash his precious offspring into a sex slave. Though personally, I suspect my bank account simply didn't have enough zeroes in it for his liking.[/say]")
 
 		saynn("He pauses.")
 
-		saynn("[say=HK_Vion]I have to give the old man credit though. An actual kangagoo for a judge, that was inspired.[/say]")
+		saynn("[say=Vion]I have to give the old man credit though. An actual kangagoo for a judge, that was inspired.[/say]")
 
-		saynn("[say=HK_Vion]Either way, after ten minutes without me getting a word in I get a guilty verdict, get tossed back in that cell and the very next day I'm shipped off to a questionably-legal space prison facility in the middle of nowhere.[/say]")
+		saynn("[say=Vion]Either way, after ten minutes without me getting a word in I get a guilty verdict, get tossed back in that cell and the very next day I'm shipped off to a questionably-legal space prison facility in the middle of nowhere.[/say]")
 
 		saynn("He leans against the wall and crosses his arms.")
 
-		saynn("[say=HK_Vion]So yes, not your usual lilac.[/say]")
+		saynn("[say=Vion]So yes, not your usual lilac.[/say]")
 
 		addButton("Back", "", "questions")
 	if(state == "ask_chastity"):
@@ -192,54 +192,54 @@ func _run():
 
 		saynn("You gesture in the direction of his crotch. He chuckles.")
 
-		saynn("[say=HK_Vion]Hah, I wish. Then I might be able to [i]do something[/i] about it. No, this is one last gift from my ex. One of the most premium cages on the market, actually, a DeLoxe S3-Karat model. I don't have access to a device to input the password on, and anyway the one I know will have expired by now![/say]")
+		saynn("[say=Vion]Hah, I wish. Then I might be able to [i]do something[/i] about it. No, this is one last gift from my ex. One of the most premium cages on the market, actually, a DeLoxe S3-Karat model. I don't have access to a device to input the password on, and anyway the one I know will have expired by now![/say]")
 		
 		saynn("He huffs.")
 		
-		saynn("[say=HK_Vion]Nothing short of of a sub-molecular disassembler is getting this off without castrating me in the process. And for some inexplicable reason, cutting tools are in very short supply in a high-security prison facility.[/say]")
+		saynn("[say=Vion]Nothing short of of a sub-molecular disassembler is getting this off without castrating me in the process. And for some inexplicable reason, cutting tools are in very short supply in a high-security prison facility.[/say]")
 
-		saynn("[say=HK_Vion]Funny how the usually ever so diligent guards seemed to overlook it during the intake process, isn't it?[/say]")
+		saynn("[say=Vion]Funny how the usually ever so diligent guards seemed to overlook it during the intake process, isn't it?[/say]")
 
-		saynn("He idly kicks at the chair, making it rattle across the floor. You suspect {HK_Vion.name} does [i]not[/i] find the joke very funny.")
+		saynn("He idly kicks at the chair, making it rattle across the floor. You suspect {Vion.name} does [i]not[/i] find the joke very funny.")
 
 		setFlag("HypnokinkModule.VionTopicKnown_Chastity", true)
 		addButton("Back", "", "questions")
 	if(state == "discount_rush_intro"):
 		saynn("[say=pc]Your skills don't exactly come cheap.[/say]")
 
-		saynn("[say=HK_Vion]Yes, I'm aware. The truth is, I would prefer to price my sessions more conservatively, but I'm rather pressed for credits.[/say]")
+		saynn("[say=Vion]Yes, I'm aware. The truth is, I would prefer to price my sessions more conservatively, but I'm rather pressed for credits.[/say]")
 
 		saynn("[say=pc]Why? It isn't like you have to pay rent in here, at least.[/say]")
 
-		saynn("[say=HK_Vion]Yes, well, there's a certain individual that has made it his business to make certain demands of me. So far I've been able to pay him off instead, but the asking price's been going up over time. I do have my suspicions about his motives, but given that it's [i]literally[/i] my ass on the line, I'd rather not wager on a hunch.[/say]")
+		saynn("[say=Vion]Yes, well, there's a certain individual that has made it his business to make certain demands of me. So far I've been able to pay him off instead, but the asking price's been going up over time. I do have my suspicions about his motives, but given that it's [i]literally[/i] my ass on the line, I'd rather not wager on a hunch.[/say]")
 
 		saynn("[say=pc]What's he like? Maybe I can deal with him for you.[/say]")
 
-		saynn("[say=HK_Vion]Are you sure? Not the kind of person you want to make angry. He's... well... he's big.[/say]")
+		saynn("[say=Vion]Are you sure? Not the kind of person you want to make angry. He's... well... he's big.[/say]")
 
 		saynn("Vion's eyes unfocus for a moment as he stares at nothing, presumably experiencing a vivid memory of unusual size.")
 
 		saynn("[say=pc]Big?[/say]")
 
-		saynn("[say=HK_Vion]Trust me, when you see him you'll agree its an accurate descriptor. Anyway, he's a hybrid of equine and dragon. Neon blue hair in a mohawk, dark furred. High sec inmate, goes by the name of Rush. When he's not wandering around and harrasing me, you can usually find him in the gym or the high security cellblock.[/say]")
+		saynn("[say=Vion]Trust me, when you see him you'll agree its an accurate descriptor. Anyway, he's a hybrid of equine and dragon. Neon blue hair in a mohawk, dark furred. High sec inmate, goes by the name of Rush. When he's not wandering around and harrasing me, you can usually find him in the gym or the high security cellblock.[/say]")
 
 		saynn("[say=pc]Okay, I'll see what I can do.[/say]")
 
-		saynn("[say=HK_Vion]Just... be careful. I don't want a broken spine on my conscience. Maybe consider pursuing, well, alternate methods of diplomacy?[/say]")
+		saynn("[say=Vion]Just... be careful. I don't want a broken spine on my conscience. Maybe consider pursuing, well, alternate methods of diplomacy?[/say]")
 
 		addButton("Back", "", "")
 		
 	if(state == "discount_onthehouse"):
 		saynn("[say=pc]How much will this cost me?[/say]")
 		
-		saynn("[say=HK_Vion]For you? Sessions are on the house.[/say]")
+		saynn("[say=Vion]For you? Sessions are on the house.[/say]")
 		
 		addButton("Back", "", "")
 		
 	if(state == "discount_rush_reminder"):
 		saynn("[say=pc]How are things on the price front?[/say]")
 
-		saynn("[say=HK_Vion]Rush passed by again recently. Sorry, until he's dealt with, I have to ask for my regular price.[/say]")
+		saynn("[say=Vion]Rush passed by again recently. Sorry, until he's dealt with, I have to ask for my regular price.[/say]")
 		
 		addButton("Back", "", "")
 		
@@ -249,7 +249,7 @@ func _react(_action: String, _args):
 		return
 		
 	if(_action == "sessions"):
-		runScene("HK_VionSessionSelect")
+		runScene("VionSessionSelect")
 		return
 		
 	if(_action == "discount_rush_intro"):
@@ -261,14 +261,14 @@ func _react(_action: String, _args):
 		
 	if(_action == "use_alex_datapad"):
 		endScene()
-		runScene("HK_VionFreed")
+		runScene("VionFreed")
 		return
 		
 	if(_action == "debug_fight"):
-		runScene("FightScene", ["HK_Vion"], "guardfight")
+		runScene("FightScene", ["Vion"], "guardfight")
 		return
 	if(_action == "debug_sex"):
-		runScene("GenericSexScene", ["pc", "HK_Vion"], "domsex")
+		runScene("GenericSexScene", ["pc", "Vion"], "domsex")
 		return
 
 	setState(_action)

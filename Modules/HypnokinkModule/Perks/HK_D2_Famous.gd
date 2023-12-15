@@ -1,7 +1,7 @@
 extends PerkBase
 
 func _init():
-	id = Perk.FamousDrawback
+	id = Perk.HypnosisFamousDrawback
 	skillGroup = Skill.Hypnosis
 
 func getVisibleName():
@@ -12,7 +12,7 @@ func getVisibleDescription():
 
 func getMoreDescription():
 	return 	"You can now encounter inmates that know your mind is vulnerable to suggestion (the chance inceases the more you are hypnotized)."+"\n\n"+\
-			"Keyword Fixation is now in effect whenever you are "+HK_Utils.hypnosisIcon()+"Hypnotised."
+			"Keyword Fixation is now in effect whenever you are "+HypnokinkUtil.hypnosisIcon()+"Hypnotised."
 
 func getSkillTier():
 	return 1

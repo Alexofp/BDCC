@@ -5,7 +5,7 @@ var sawBefore = false
 var npcVariation = ""
 
 func _init():
-	sceneID = "HK_HypnoEncounterStart"
+	sceneID = "HypnoEncounterStart"
 
 func _initScene(_args = []):
 	npcID = _args[0]
@@ -61,7 +61,7 @@ func _run():
 				
 			saynn("Not that you have to, but your hypnotic experiences urge you to give in. You should...")
 				
-			HK_Utils.addHypnoButtons(self, "submit", "decline", [], ["Decline"])
+			HypnokinkUtil.addHypnoButtons(self, "submit", "decline", [], ["Decline"])
 			
 		# (mean version)
 		if(npcVariation == "mean"):
@@ -79,7 +79,7 @@ func _run():
 
 			saynn("Not that you have to, but your hypnotic experiences urge you to give in. You should...")
 			
-			HK_Utils.addHypnoButtons(self, "submit", "attack", [], ["Fight"])
+			HypnokinkUtil.addHypnoButtons(self, "submit", "attack", [], ["Fight"])
 
 		# (kind version)
 		if(npcVariation == "kind"):
@@ -105,7 +105,7 @@ func _run():
 				
 			saynn("Not that you have to, but your hypnotic experiences urge you to give in. You should...")
 			
-			HK_Utils.addHypnoButtons(self, "submit", "decline", [], ["Decline"])
+			HypnokinkUtil.addHypnoButtons(self, "submit", "decline", [], ["Decline"])
 			
 		# (subby version)
 		if(npcVariation == "subby"):
@@ -131,7 +131,7 @@ func _run():
 				
 			saynn("Not that you have to, but your hypnotic experiences urge you to give in. You should...")
 
-			HK_Utils.addHypnoButtons(self, "submit", "decline", [], ["Decline"])
+			HypnokinkUtil.addHypnoButtons(self, "submit", "decline", [], ["Decline"])
 			
 			# (OPTIONS ARE)
 			# (if normal = Play along, resist nonviolently)
@@ -216,25 +216,25 @@ func _react(_action: String, _args):
 		
 		
 	if(_action == "submit"):
-		HK_Utils.changeSuggestibilityBy(GM.pc, RNG.randi_range(15,30))
+		HypnokinkUtil.changeSuggestibilityBy(GM.pc, RNG.randi_range(15,30))
 		endScene()
 		
 		var options= []
-		options.append("HK_HypnoEncounterDoll")
-		options.append("HK_HypnoEncounterFetch")
+		options.append("HypnoEncounterDoll")
+		options.append("HypnoEncounterFetch")
 		if(npcVariation != "subby"):
-			options.append("HK_HypnoEncounterKneel")
+			options.append("HypnoEncounterKneel")
 			
 		var pick = RNG.pick(options)
 		runScene(pick,  [npcID])
 		return
 
 	if(_action == "decline"):
-		HK_Utils.changeSuggestibilityBy(GM.pc, RNG.randi_range(2,6))
+		HypnokinkUtil.changeSuggestibilityBy(GM.pc, RNG.randi_range(2,6))
 		pass
 		
 	if(_action == "startfight"):
-		HK_Utils.changeSuggestibilityBy(GM.pc, RNG.randi_range(1,3))
+		HypnokinkUtil.changeSuggestibilityBy(GM.pc, RNG.randi_range(1,3))
 		runScene("FightScene", [npcID], "guardfight")
 		
 

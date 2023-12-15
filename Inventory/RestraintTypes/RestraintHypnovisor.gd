@@ -15,9 +15,9 @@ func getLevelDamage():
 	return .getLevelDamage() * 0.5
 
 func shouldDoStruggleMinigame(_pc):
-	if(HK_Utils.isInTrance(_pc) && !_pc.hasPerk(Perk.GoodAtVisors)):
+	if(HypnokinkUtil.isInTrance(_pc) && !_pc.hasPerk(Perk.HypnosisGoodAtVisors)):
 		return false #cannot succeed
-	if(HK_Utils.isHypnotized(_pc)):
+	if(HypnokinkUtil.isHypnotized(_pc)):
 		return true
 	if(_pc.hasBoundArms() || _pc.hasBlockedHands()):
 		return true
@@ -37,10 +37,10 @@ func doStruggle(_pc, _minigame):
 	var damage = 0
 	var stamina = 0
 	
-	var inTrance = HK_Utils.isInTrance(_pc)
-	var hypnotized = HK_Utils.isHypnotized(_pc)
+	var inTrance = HypnokinkUtil.isInTrance(_pc)
+	var hypnotized = HypnokinkUtil.isHypnotized(_pc)
 	
-	if(inTrance and not _pc.hasPerk(Perk.GoodAtVisors)):
+	if(inTrance and not _pc.hasPerk(Perk.HypnosisGoodAtVisors)):
 		text = "{user.name} tries to... to... \n\nDo what? Must have not been important."
 		damage = 0.0
 		return {"text": text, "damage": damage, "lust": lust, "pain": pain, "stamina": stamina}

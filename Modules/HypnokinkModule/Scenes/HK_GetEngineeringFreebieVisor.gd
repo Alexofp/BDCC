@@ -1,7 +1,7 @@
 extends SceneBase
 
 func _init():
-	sceneID = "HK_GetEngineeringFreebieVisor"
+	sceneID = "GetEngineeringFreebieVisor"
 	
 func _initScene(_args = []):
 	pass

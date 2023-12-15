@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/inventory_visor.svg-3be4be31a99f7fad086212c58c72b4e9.stex"
+path="res://.import/glasses.svg-1cc5947e85667f944d480c7c9683a4fa.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Modules/HypnokinkModule/AssetSrc/inventory_visor.svg"
-dest_files=[ "res://.import/inventory_visor.svg-3be4be31a99f7fad086212c58c72b4e9.stex" ]
+source_file="res://AssetsSource/hypnokink/glasses.svg"
+dest_files=[ "res://.import/glasses.svg-1cc5947e85667f944d480c7c9683a4fa.stex" ]
 
 [params]
 

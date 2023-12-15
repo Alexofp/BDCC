@@ -1,7 +1,7 @@
 extends PerkBase
 
 func _init():
-	id = Perk.HypnoticAllure
+	id = Perk.HypnosisHypnoticAllure
 	skillGroup = Skill.Hypnosis
 
 func getVisibleName():

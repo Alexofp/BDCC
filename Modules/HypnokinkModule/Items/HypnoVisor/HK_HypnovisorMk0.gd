@@ -14,9 +14,9 @@ func getVisibleName():
 	
 func getDescription():
 	if(isWornByWearer()):
-		if(HK_Utils.isInTrance(getWearer())):
+		if(HypnokinkUtil.isInTrance(getWearer())):
 			return "A very important visor that helps you focus on the important things."
-		if(HK_Utils.isHypnotized(getWearer())):
+		if(HypnokinkUtil.isHypnotized(getWearer())):
 			return "A helpful visor that keeps you safe."		
 	return "An old model of a rugged AR safety visor.\nModified to display an endlessly spinning spiral, with words and images occasionally flashing too fast to consciously observe."
 
@@ -26,10 +26,10 @@ func getClothingSlot():
 func getPossibleActions():
 	if(isWornByWearer()):
 		var wearer = getWearer()
-		if(wearer.hasPerk(Perk.VisorMastery)):
+		if(wearer.hasPerk(Perk.HypnosisVisorMastery)):
 			return [{
 					"name": "Program",
-					"scene": "HK_ProgramVisorScene",
+					"scene": "ProgramVisorScene",
 					"description": "Program the visor to suppress one of your drawback perks",
 					"onlyWhenCalm": true
 				}]
@@ -43,8 +43,8 @@ func isHatsPerkActive():
 	if(wearer == null):
 		return false
 	if(wearer.hasPerk(Perk.HATS) && isWornByWearer()):
-		if(HK_Utils.isInTrance(wearer)):
-			return true.gd
+		if(HypnokinkUtil.isInTrance(wearer)):
+			return true
 	return false
 
 func getBuffs():	
@@ -87,11 +87,11 @@ func onEquippedBy(_otherCharacter, _forced = false):
 	if(not _forced):
 		return
 	var wearer = getWearer()
-	var currentAmount = HK_Utils.getSuggestibleStacks(wearer)
-	if(_otherCharacter.hasPerk(Perk.VisorMastery) and currentAmount < 50):
-		HK_Utils.changeSuggestibilityBy(wearer, 50 - currentAmount)
-	elif(_otherCharacter.hasPerk(Perk.GoodAtVisors) and currentAmount < 30):
-		HK_Utils.changeSuggestibilityBy(wearer, 30 - currentAmount)
+	var currentAmount = HypnokinkUtil.getSuggestibleStacks(wearer)
+	if(_otherCharacter.hasPerk(Perk.HypnosisVisorMastery) and currentAmount < 50):
+		HypnokinkUtil.changeSuggestibilityBy(wearer, 50 - currentAmount)
+	elif(_otherCharacter.hasPerk(Perk.HypnosisGoodAtVisors) and currentAmount < 30):
+		HypnokinkUtil.changeSuggestibilityBy(wearer, 30 - currentAmount)
 	
 	
 func getForcedOnMessage(isPlayer = true):

@@ -1,7 +1,7 @@
 extends EventBase
 
 func _init():
-	id = "HK_RushMeetingEvent"
+	id = "RushMeetingEvent"
 
 func registerTriggers(es):
 	es.addTrigger(self, Trigger.EnteringRoom, "cellblock_red_nearcell")
@@ -16,9 +16,9 @@ func getPriority():
 func onButton(_method, _args):
 	if(_method == "find_rush"):
 		if(!getFlag("HypnokinkModule.DidRushIntroduction")):
-			runScene("HK_RushIntroduction")
+			runScene("RushIntroduction")
 			setFlag("HypnokinkModule.DidRushIntroduction", true)
 		else:
-			runScene("HK_RushRepeatConversation")
+			runScene("RushRepeatConversation")
 			
 			

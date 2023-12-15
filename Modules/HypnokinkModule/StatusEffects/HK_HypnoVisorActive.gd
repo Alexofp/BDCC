@@ -25,7 +25,7 @@ func initArgs(_args = []):
 	pass
 	
 func processBattleTurn():
-	HK_Utils.changeSuggestibilityBy(character, 1)
+	HypnokinkUtil.changeSuggestibilityBy(character, 1)
 	
 func processTime(seconds: int):
 	var visor = findVisor(character)
@@ -44,10 +44,10 @@ func processTime(seconds: int):
 	elif(visor.id == "HypnovisorMk1"):
 		ceiling = 125
 		
-	var diff = ceiling - HK_Utils.getSuggestibleStacks(character)
+	var diff = ceiling - HypnokinkUtil.getSuggestibleStacks(character)
 	var change = min(diff, 2 * minutes)
 	if(change > 0):
-		HypnokinkModule.changeSuggestibilityBy(character, change)
+		HypnokinkUtil.changeSuggestibilityBy(character, change)
 		if(character.isPlayer()):
 			var xpToday = GM.main.getFlag("HypnokinkModule.VisorXpToday", 0)
 			#gain max one level per day

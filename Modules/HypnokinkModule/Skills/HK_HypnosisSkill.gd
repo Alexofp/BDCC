@@ -17,7 +17,7 @@ func getPerkTiers():
 		[2],
 		[5],
 	]
-	
+
 func _on_experienceChanged():
 	checkDrawbacks()
 
@@ -25,24 +25,24 @@ func _on_levelChanged(idParam, _levelParam):
 	if(id != idParam):
 		return
 	checkDrawbacks()
-
-	func checkDrawbacks():
-		if(npc == null):
-			return
-		if(not GM.main.getFlag("HypnokinkModule.SoftOptIn", false)):
-			return
-	if(levelParam >= 1):
-		if(!npc.hasPerk(Perk.KeywordsDrawback)):
-			npc.skillsHolder.addPerk(Perk.KeywordsDrawback)
-			flashDrawbackMessage(GlobalRegistry.getPerk(Perk.KeywordsDrawback))
-	if(levelParam >= 3):
-		if(!npc.hasPerk(Perk.FamousDrawback)):
-			npc.skillsHolder.addPerk(Perk.FamousDrawback)
-			flashDrawbackMessage(GlobalRegistry.getPerk(Perk.FamousDrawback))
-	if(levelParam >= 5):
-		if(!npc.hasPerk(Perk.DeepTranceDrawback)):
-			npc.skillsHolder.addPerk(Perk.DeepTranceDrawback)
-			flashDrawbackMessage(GlobalRegistry.getPerk(Perk.DeepTranceDrawback))
+		
+func checkDrawbacks():
+	if(npc == null):
+		return
+	if(not GM.main.getFlag("HypnokinkModule.SoftOptIn", false)):
+		return
+	if(level >= 1):
+		if(!npc.hasPerk(Perk.HypnosisKeywordsDrawback)):
+			npc.skillsHolder.addPerk(Perk.HypnosisKeywordsDrawback)
+			flashDrawbackMessage(GlobalRegistry.getPerk(Perk.HypnosisKeywordsDrawback))
+	if(level >= 3):
+		if(!npc.hasPerk(Perk.HypnosisFamousDrawback)):
+			npc.skillsHolder.addPerk(Perk.HypnosisFamousDrawback)
+			flashDrawbackMessage(GlobalRegistry.getPerk(Perk.HypnosisFamousDrawback))
+	if(level >= 5):
+		if(!npc.hasPerk(Perk.HypnosisDeepTranceDrawback)):
+			npc.skillsHolder.addPerk(Perk.HypnosisDeepTranceDrawback)
+			flashDrawbackMessage(GlobalRegistry.getPerk(Perk.HypnosisDeepTranceDrawback))
 			
 func flashDrawbackMessage(drawbackPerk: PerkBase):
 	if(npc != GM.pc):

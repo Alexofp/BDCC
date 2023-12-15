@@ -1,7 +1,7 @@
 extends PerkBase
 
 func _init():
-	id = Perk.LucidTrance
+	id = Perk.HypnosisLucidTrance
 	skillGroup = Skill.Hypnosis
 
 func getVisibleName():
@@ -11,7 +11,7 @@ func getVisibleDescription():
 	return "You've become so accustomed to being hypnotized that a casual observer might not even be able to tell."
 
 func getMoreDescription():
-	return "Reduces the penalties of being hypnotized by an additional 30%.\n\nWhile in "+HK_Utils.tranceIcon()+"Trance, you gain a 10% chance to dodge attacks."
+	return "Reduces the penalties of being hypnotized by an additional 30%.\n\nWhile in "+HypnokinkUtil.tranceIcon()+"Trance, you gain a 10% chance to dodge attacks."
 	
 
 func getSkillTier():
@@ -21,13 +21,13 @@ func getCost():
 	return 3
 	
 func getRequiredPerks():
-	return [Perk.Detachment]
+	return [Perk.HypnosisDetachment]
 
 func getPicture():
 	return "res://Modules/HypnokinkModule/Icons/Perks/mask.png"
 	
 func getBuffs():
-	if(HK_Utils.isInTrance(npc)):
+	if(HypnokinkUtil.isInTrance(npc)):
 		return [
 			buff(Buff.DodgeChanceBuff, [10]),
 		]

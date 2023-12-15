@@ -1,7 +1,7 @@
 extends SexGoalBase
 
 func _init():
-	id = "HK_Hypnotize"
+	id = "Hypnotize"
 
 func getVisibleName():
 	return "Hypnotize"
@@ -20,7 +20,7 @@ func isPossible(_sexEngine, _domInfo, _subInfo, _data):
 	return true
 
 func isCompleted(_sexEngine, _domInfo, _subInfo, _data):
-	if(HK_Utils.isInTrance(_subInfo.getChar())):
+	if(HypnokinkUtil.isInTrance(_subInfo.getChar())):
 		return true
 			
 	return false

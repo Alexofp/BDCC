@@ -11,7 +11,7 @@ var lastBodywritingZone = ""
 var lastBodywritingID = ""
 
 func _init():
-	sceneID = "HK_HypnoEncounterDoll"
+	sceneID = "HypnoEncounterDoll"
 	
 func _initScene(_args = []):
 	npcID = _args[0]
@@ -79,7 +79,7 @@ func _run():
 			])+"[/say]")
 			
 		saynn("In no time at all your clothes are coming off as you...")
-		HK_Utils.addHypnoButtons(self, "stripped", "resist", ["Strip", "Remove"])
+		HypnokinkUtil.addHypnoButtons(self, "stripped", "resist", ["Strip", "Remove"])
 		
 	if(state == "stripped"):
 		playAnimation(StageScene.Duo, "stand", {npc=npcID})
@@ -120,7 +120,7 @@ func _run():
 			])+"[/say]")
 			
 		saynn("As your arms mechanically start to rise without any real conscious decision on your part, you...")
-		HK_Utils.addHypnoButtons(self, "pick_subscene", "resist", ["Raise"])
+		HypnokinkUtil.addHypnoButtons(self, "pick_subscene", "resist", ["Raise"])
 	
 	if(state == "cuffs_wrists" || state == "cuffs_ankles"):
 		playAnimation(StageScene.ArmsRaisedDuo, "idle", {npc=npcID})
@@ -159,7 +159,7 @@ func _run():
 			])+"[/say]")
 			
 		saynn("Struggling to offer any resistance, you...")
-		HK_Utils.addHypnoButtons(self, "cuffs_"+limb+"_post", "resist", ["Hold still", "Wince", "Whine"])
+		HypnokinkUtil.addHypnoButtons(self, "cuffs_"+limb+"_post", "resist", ["Hold still", "Wince", "Whine"])
 		
 	if(state == "bodywriting"):
 		playAnimation(StageScene.ArmsRaisedDuo, "idle", {npc=npcID})
@@ -198,7 +198,7 @@ func _run():
 			])+"[/say]")
 		
 		saynn("Still as you can be, you...")
-		HK_Utils.addHypnoButtons(self, "bodywriting_2", "resist", ["Hold still", "Wince", "Whine"])
+		HypnokinkUtil.addHypnoButtons(self, "bodywriting_2", "resist", ["Hold still", "Wince", "Whine"])
 		
 	if(state == "bodywriting_2"):
 		playAnimation(StageScene.ArmsRaisedDuo, "idle", {npc=npcID})
@@ -211,7 +211,7 @@ func _run():
 		])+"[/say]")
 		
 		saynn("Unable to offer any resistance, you...")
-		HK_Utils.addHypnoButtons(self, "pick_subscene", "resist", ["Hold still", "Wait", "Whine"])
+		HypnokinkUtil.addHypnoButtons(self, "pick_subscene", "resist", ["Hold still", "Wait", "Whine"])
 		
 	if(state == "kneel"):
 		#only subby version
@@ -225,7 +225,7 @@ func _run():
 			])+"[/say]")
 		
 		saynn("{npc.He} continues to kneel in front of you, nakedly ogling your body. Embarrased by the attentive desire, you...")
-		HK_Utils.addHypnoButtons(self, "kneel_2", "resist", ["Blush", "Pose"])
+		HypnokinkUtil.addHypnoButtons(self, "kneel_2", "resist", ["Blush", "Pose"])
 		
 	if(state == "kneel_2"):
 		var toOgle = "crotch"
@@ -241,7 +241,7 @@ func _run():
 			])+"[/say]")
 			
 		saynn("{npc.He} eventually {npc.verb('rise')} back on {npc.his} feet, deciding to keep playing for now. Still flustered, you...")
-		HK_Utils.addHypnoButtons(self, "pick_subscene", "resist", ["Blush"])
+		HypnokinkUtil.addHypnoButtons(self, "pick_subscene", "resist", ["Blush"])
 
 
 	if(state == "punch"):
@@ -255,7 +255,7 @@ func _run():
 			])+"[/say]")
 		
 		saynn("Wincing with pain, you...")
-		HK_Utils.addHypnoButtons(self, "punch_2", "resist", ["Hold still"])
+		HypnokinkUtil.addHypnoButtons(self, "punch_2", "resist", ["Hold still"])
 	
 	if(state == "punch_2"):
 		playAnimation(StageScene.ArmsRaisedDuo, "idle", {npc=npcID, npcAction="punch"})
@@ -268,7 +268,7 @@ func _run():
 			])+"[/say]")
 		
 		saynn("Bruised, you...")
-		HK_Utils.addHypnoButtons(self, "pick_subscene", "resist", ["Suffer", "Endure"])
+		HypnokinkUtil.addHypnoButtons(self, "pick_subscene", "resist", ["Suffer", "Endure"])
 		
 	if(state == "hug"):
 		playAnimation(StageScene.Hug, "hug", {npc=npcID})
@@ -301,7 +301,7 @@ func _run():
 			])+"[/say]")
 		
 		saynn("After a while {npc.he} {npc.verb('let')} go. You obediently raise your arms back up without even having to be told, and...")
-		HK_Utils.addHypnoButtons(self, "pick_subscene", "resist", [])
+		HypnokinkUtil.addHypnoButtons(self, "pick_subscene", "resist", [])
 		
 	if(state == "tease"):
 		playAnimation(StageScene.ArmsRaisedSex, "tease", {npc=npcID})
@@ -337,7 +337,7 @@ func _run():
 		# (no subby version)
 		
 		saynn("As {npc.he} {npc.verb('continue')} to whisper in your ear, you...")
-		HK_Utils.addHypnoButtons(self, "tease_2", "resist", ["Shiver", "Whine"])
+		HypnokinkUtil.addHypnoButtons(self, "tease_2", "resist", ["Shiver", "Whine"])
 		
 	if(state == "tease_2"):
 		playAnimation(StageScene.ArmsRaisedSex, "inside", {npc=npcID})
@@ -373,7 +373,7 @@ func _run():
 		saynn("{npc.His} breath as well as {npc.his} words dancing past your ear sends a hot, exciting shiver down your spine.")
 		
 		saynn("{npc.He} {npc.verb('let')} go, circling back in front of you, eyes locked on yours. You can only...")
-		HK_Utils.addHypnoButtons(self, "pick_subscene", "resist", ["Shiver", "Whine", "Gulp"])
+		HypnokinkUtil.addHypnoButtons(self, "pick_subscene", "resist", ["Shiver", "Whine", "Gulp"])
 		
 	if(state == "hands_free_orgasm"):
 		playAnimation(StageScene.SexFreeStanding, "tease", {pc=npcID, npc="pc"})
@@ -423,7 +423,7 @@ func _run():
 			])+"[/say]")
 			saynn("As {npc.he} {npc.verb('continue')} to express {npc.his} lustful desires, you can't help but...")
 			
-		HK_Utils.addHypnoButtons(self, "hands_free_orgasm_2", "resist", ["Tense up", "Squirm"])
+		HypnokinkUtil.addHypnoButtons(self, "hands_free_orgasm_2", "resist", ["Tense up", "Squirm"])
 		
 	if(state == "hands_free_orgasm_2"):
 		playAnimation(StageScene.SexFreeStanding, "inside", {pc=npcID, npc="pc"})
@@ -469,7 +469,7 @@ func _run():
 			saynn("[say=npc]Okay, are you ready? You must be so close~ Feel the pleasure build, and build... [b]Cum[/b]![/say]")
 			saynn("Already so close, the command makes you...")
 		
-		HK_Utils.addHypnoButtons(self, "hands_free_orgasm_3", "hands_free_orgasm_3_selfdeny", ["Cum", "Orgasm", "Explode"], ["Resist", "Deny", "Stop"])
+		HypnokinkUtil.addHypnoButtons(self, "hands_free_orgasm_3", "hands_free_orgasm_3_selfdeny", ["Cum", "Orgasm", "Explode"], ["Resist", "Deny", "Stop"])
 		
 	if(state == "hands_free_orgasm_3"):
 		playAnimation(StageScene.SexFreeStanding, "tease", {pc=npcID, npc="pc"})
@@ -538,7 +538,7 @@ func _run():
 			
 		saynn("{npc.Name} lets go of your wrists. Your arms shakily raise back above your head, and you...")
 			
-		HK_Utils.addHypnoButtons(self, "pick_subscene", "resist", ["Calm down", "Relax"])
+		HypnokinkUtil.addHypnoButtons(self, "pick_subscene", "resist", ["Calm down", "Relax"])
 	if(state == "hands_free_orgasm_3_selfdeny"):
 		playAnimation(StageScene.SexFreeStanding, "tease", {pc=npcID, npc="pc"})
 		saynn("Even with spikes of pleasures threatening to push you over the edge, you somehow manage to find the willpower to deny yourself the sweet release of orgasm. Instead, desperate and horny, you stay on the edge as your body fakes going through the physical signs that'd usually accompany one.")	
@@ -579,7 +579,7 @@ func _run():
 			
 		saynn("{npc.Name} lets go of your wrists. Your arms shakily raise back above your head, and you...")
 			
-		HK_Utils.addHypnoButtons(self, "pick_subscene", "resist", ["Calm down", "Relax"])
+		HypnokinkUtil.addHypnoButtons(self, "pick_subscene", "resist", ["Calm down", "Relax"])
 		
 	if(state == "finale"):
 		playAnimation(StageScene.Duo, "stand", {npc=npcID})
@@ -663,7 +663,7 @@ func _run():
 				])+"[/say]")
 			
 		saynn("You've interrupted {npc.nameS} current plan of action. Now that you did, you really should just...")
-		HK_Utils.addHypnoButtons(self, "pick_subscene", "resist_2", [], ["Escape", "Get away", "Resist", "Break away"])
+		HypnokinkUtil.addHypnoButtons(self, "pick_subscene", "resist_2", [], ["Escape", "Get away", "Resist", "Break away"])
 		
 	if(state == "resist_2"):
 		playAnimation(StageScene.Solo, "walk")
@@ -719,12 +719,12 @@ func _react(_action: String, _args):
 		return
 		
 	if(_action == ""):
-		HK_Utils.changeSuggestibilityBy(GM.pc, RNG.randi_range(2,6))
+		HypnokinkUtil.changeSuggestibilityBy(GM.pc, RNG.randi_range(2,6))
 		GM.pc.addLust(RNG.randi_range(3,6))
 		processTime(1 * 60)
 			
 	if(_action == "stripped"):
-		HK_Utils.changeSuggestibilityBy(GM.pc, RNG.randi_range(2,6))
+		HypnokinkUtil.changeSuggestibilityBy(GM.pc, RNG.randi_range(2,6))
 		GM.pc.addLust(RNG.randi_range(3,6))
 		processTime(1 * 60)
 		strippedItemID = pcInventory.getEquippedItem(InventorySlot.Body).id
@@ -732,7 +732,7 @@ func _react(_action: String, _args):
 		gotStripped = true
 
 	if(_action == "cuffs_wrists_post"):
-		HK_Utils.changeSuggestibilityBy(GM.pc, RNG.randi_range(2,6))
+		HypnokinkUtil.changeSuggestibilityBy(GM.pc, RNG.randi_range(2,6))
 		GM.pc.addLust(RNG.randi_range(3,6))
 		processTime(1 * 60)
 		var cuff
@@ -746,7 +746,7 @@ func _react(_action: String, _args):
 		_action = pickSubscene()
 		
 	if(_action == "cuffs_ankles_post"):
-		HK_Utils.changeSuggestibilityBy(GM.pc, RNG.randi_range(2,6))
+		HypnokinkUtil.changeSuggestibilityBy(GM.pc, RNG.randi_range(2,6))
 		GM.pc.addLust(RNG.randi_range(3,6))
 		processTime(1 * 60)
 		var cuff
@@ -763,7 +763,7 @@ func _react(_action: String, _args):
 		GM.pc.addLust(RNG.randi_range(3,6))
 		
 	if(_action == "bodywriting_2"):
-		HK_Utils.changeSuggestibilityBy(GM.pc, RNG.randi_range(5,10))
+		HypnokinkUtil.changeSuggestibilityBy(GM.pc, RNG.randi_range(5,10))
 		GM.pc.addLust(RNG.randi_range(5,10))
 		processTime(1 * 60)
 		lastBodywritingZone = BodyWritingsZone.getRandomZone()
@@ -781,7 +781,7 @@ func _react(_action: String, _args):
 		GM.pc.addLust(RNG.randi_range(5,10))
 		
 	if(_action == "kneel_2"):
-		HK_Utils.changeSuggestibilityBy(GM.pc, RNG.randi_range(5,10))
+		HypnokinkUtil.changeSuggestibilityBy(GM.pc, RNG.randi_range(5,10))
 		GM.pc.addLust(RNG.randi_range(5,10))
 		processTime(1 * 60)
 		
@@ -790,7 +790,7 @@ func _react(_action: String, _args):
 		GM.pc.addPain(RNG.randi_range(4,10))
 		
 	if(_action == "punch_2"):
-		HK_Utils.changeSuggestibilityBy(GM.pc, RNG.randi_range(5,10))
+		HypnokinkUtil.changeSuggestibilityBy(GM.pc, RNG.randi_range(5,10))
 		GM.pc.addLust(RNG.randi_range(3,6))
 		GM.pc.addPain(RNG.randi_range(12,25))
 		processTime(1 * 60)
@@ -799,7 +799,7 @@ func _react(_action: String, _args):
 		GM.pc.addLust(RNG.randi_range(5,10))
 		
 	if(_action == "tease_2"):
-		HK_Utils.changeSuggestibilityBy(GM.pc, RNG.randi_range(5,10))
+		HypnokinkUtil.changeSuggestibilityBy(GM.pc, RNG.randi_range(5,10))
 		GM.pc.addLust(RNG.randi_range(5,10))
 		processTime(1 * 60)
 
@@ -810,19 +810,19 @@ func _react(_action: String, _args):
 		GM.pc.addLust(RNG.randi_range(15,20))
 		
 	if(_action == "hands_free_orgasm_3"):
-		HK_Utils.changeSuggestibilityBy(GM.pc, RNG.randi_range(20,30))
+		HypnokinkUtil.changeSuggestibilityBy(GM.pc, RNG.randi_range(20,30))
 		GM.pc.cumOnFloor()
 		GM.pc.addArousal(-1.0)
 		GM.pc.addLust(-int(GM.pc.getLust()/2.0))
 		processTime(2 * 60)
 		
 	if(_action == "hands_free_orgasm_3_selfdeny"):
-		HK_Utils.changeSuggestibilityBy(GM.pc, RNG.randi_range(10,20))
+		HypnokinkUtil.changeSuggestibilityBy(GM.pc, RNG.randi_range(10,20))
 		GM.pc.addArousal(-0.1)
 		GM.pc.addLust(-10)
 	
 	if(_action == "finale"):
-		HK_Utils.changeSuggestibilityBy(GM.pc, RNG.randi_range(2,6))
+		HypnokinkUtil.changeSuggestibilityBy(GM.pc, RNG.randi_range(2,6))
 		processTime(2 * 60)
 		if(gotStripped and npcVariation != "mean"):
 			var item = pcInventory.getFirstOf(strippedItemID)

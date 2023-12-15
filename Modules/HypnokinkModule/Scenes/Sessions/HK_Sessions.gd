@@ -1,17 +1,17 @@
 extends Object
 class_name HK_Sessions
 
-const InductionFirstTime = "HK_Induction_FirstTime"
-const InductionAlreadyHypnotized = "HK_Induction_AlreadyHypnotized"
-const InductionFlashlight = "HK_Induction_Flashlight"
-const InductionRapid = "HK_Induction_Rapid"
-const InductionPendulum = "HK_Induction_Pendulum"
+const InductionFirstTime = "Induction_FirstTime"
+const InductionAlreadyHypnotized = "Induction_AlreadyHypnotized"
+const InductionFlashlight = "Induction_Flashlight"
+const InductionRapid = "Induction_Rapid"
+const InductionPendulum = "Induction_Pendulum"
 
-const BodySessionZero = "HK_Body_SessionZero"
-const BodyStaminaRestore = "HK_Body_StaminaRestore"
-const BodyDodgeBuff = "HK_Body_DodgeBuff"
-const BodyMaxPainBuff = "HK_Body_MaxPainBuff"
-const BodyBondage = "HK_Body_Bondage"
+const BodySessionZero = "Body_SessionZero"
+const BodyStaminaRestore = "Body_StaminaRestore"
+const BodyDodgeBuff = "Body_DodgeBuff"
+const BodyMaxPainBuff = "Body_MaxPainBuff"
+const BodyBondage = "Body_Bondage"
 
-const AwakenerSimple = "HK_Awakener_Simple"
-const AwakenerFakeWake = "HK_Awakener_FakeWake"
+const AwakenerSimple = "Awakener_Simple"
+const AwakenerFakeWake = "Awakener_FakeWake"

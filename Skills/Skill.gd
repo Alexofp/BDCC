@@ -13,7 +13,7 @@ const Exhibitionism = "Exhibitionism"
 const BDSM = "BDSM"
 const Milking = "Milking"
 const Fertility = "Fertility"
-const Hypnosis = "HK_HypnosisSkill"
+const Hypnosis = "Hypnosis"
 
 static func getAll():
 	return [Combat, CumLover, Breeder, SexSlave, Exhibitionism, BDSM, Milking, Fertility, Hypnosis]

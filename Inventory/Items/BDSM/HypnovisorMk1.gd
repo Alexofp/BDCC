@@ -20,7 +20,7 @@ func isHatsPerkActive():
 	if(wearer == null):
 		return false
 	if(wearer.hasPerk(Perk.HATS) && isWornByWearer()):
-		if(HK_Utils.isInTrance(wearer)):
+		if(HypnokinkUtil.isInTrance(wearer)):
 			return true
 	return false	
 	
@@ -58,11 +58,11 @@ func onEquippedBy(_otherCharacter, _forced = false):
 	if(not _forced):
 		return
 	var wearer = getWearer()
-	var currentAmount = HK_Utils.getSuggestibleStacks(wearer)
-	if(_otherCharacter.hasPerk(Perk.VisorMastery) and currentAmount < 50):
-		HK_Utils.changeSuggestibilityBy(wearer, 50 - currentAmount)
-	elif(_otherCharacter.hasPerk(Perk.GoodAtVisors) and currentAmount < 30):
-		HK_Utils.changeSuggestibilityBy(wearer, 30 - currentAmount)
+	var currentAmount = HypnokinkUtil.getSuggestibleStacks(wearer)
+	if(_otherCharacter.hasPerk(Perk.HypnosisVisorMastery) and currentAmount < 50):
+		HypnokinkUtil.changeSuggestibilityBy(wearer, 50 - currentAmount)
+	elif(_otherCharacter.hasPerk(Perk.HypnosisGoodAtVisors) and currentAmount < 30):
+		HypnokinkUtil.changeSuggestibilityBy(wearer, 30 - currentAmount)
 	
 
 func getUnriggedParts(_character):

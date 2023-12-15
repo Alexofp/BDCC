@@ -1,7 +1,7 @@
 extends PerkBase
 
 func _init():
-	id = Perk.HATS
+	id = Perk.HypnosisHATS
 	skillGroup = Skill.Hypnosis
 
 func getVisibleName():
@@ -11,7 +11,7 @@ func getVisibleDescription():
 	return "You have become accustomed to the subliminal messaging of hypnotic visors."
 
 func getMoreDescription():
-	return "While in "+HK_Utils.tranceIcon()+"Trance, the accuracy debuff of hypnosis visors becomes a buff of equivalent value."
+	return "While in "+HypnokinkUtil.tranceIcon()+"Trance, the accuracy debuff of hypnosis visors becomes a buff of equivalent value."
 
 func getSkillTier():
 	return 0

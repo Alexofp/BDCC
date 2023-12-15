@@ -57,13 +57,13 @@ const Exposed = "Exposed"
 const SoreNipplesAfterMilking = "SoreNipplesAfterMilking"
 
 # Hypnosis effects
-const Suggestible = "HK_Suggestible"
-const UnderHypnosis = "HK_UnderHypnosis"
-const HypnoVisorActive = "HK_HypnoVisorActive"
-const HypnoVisorProgramming = "HK_HypnoVisorProgramming"
-const ImplantedPosthypnoticTrigger = "HK_ImplantedPosthypnoticTrigger"
-const MantraUsed = "HK_MantraUsed"
-const PosthypnoticTriggerUsedUp = "HK_PosthypnoticTriggerUsedUp"
+const Suggestible = "Suggestible"
+const UnderHypnosis = "UnderHypnosis"
+const HypnoVisorActive = "HypnoVisorActive"
+const HypnoVisorProgramming = "HypnoVisorProgramming"
+const ImplantedPosthypnoticTrigger = "ImplantedPosthypnoticTrigger"
+const MantraUsed = "MantraUsed"
+const PosthypnoticTriggerUsedUp = "PosthypnoticTriggerUsedUp"
 
 # Perk effects
 const RapidConception = "RapidConception"

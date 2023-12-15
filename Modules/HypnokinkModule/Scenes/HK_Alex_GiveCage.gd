@@ -1,7 +1,7 @@
 extends SceneBase
 
 func _init():
-	sceneID = "HK_Alex_GiveCage"
+	sceneID = "Alex_GiveCage"
 
 func _run():
 	if(state == ""):

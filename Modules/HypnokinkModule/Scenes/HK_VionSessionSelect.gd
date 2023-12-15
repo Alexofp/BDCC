@@ -11,19 +11,19 @@ const SessionCostMap = {
 	}
 
 func _init():
-	sceneID = "HK_VionSessionSelect"
+	sceneID = "VionSessionSelect"
 
 func _run():
 	if(state == ""):
-		addCharacter("HK_Vion")
-		playAnimation(StageScene.Duo, "stand", {npc="HK_Vion"})
+		addCharacter("Vion")
+		playAnimation(StageScene.Duo, "stand", {npc="Vion"})
 		
 		saynn("[say=pc]I'm up for a session.[/say]")
 		
 		if(onCooldown()):
-			saynn("[say=HK_Vion]Not yet you aren't. Give your head some time to settle.[/say]")
+			saynn("[say=Vion]Not yet you aren't. Give your head some time to settle.[/say]")
 		else:
-			saynn("[say=HK_Vion]What did you have in mind?[/say]")
+			saynn("[say=Vion]What did you have in mind?[/say]")
 		
 		addSessionButton("Session zero", "An introductory session", HK_Sessions.BodySessionZero)
 		addSessionButton("Relaxation", "Drift in peace for a while", HK_Sessions.BodyStaminaRestore)
@@ -112,7 +112,7 @@ func pickInduction():
 	if(!getFlag("HypnokinkModule.DidSessionZero")):
 		return HK_Sessions.InductionFirstTime
 		
-	if(HK_Utils.isHypnotized(GM.pc)):
+	if(HypnokinkUtil.isHypnotized(GM.pc)):
 		return HK_Sessions.InductionAlreadyHypnotized
 	
 	var pool = [

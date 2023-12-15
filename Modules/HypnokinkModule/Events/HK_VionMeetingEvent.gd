@@ -1,7 +1,7 @@
 extends EventBase
 
 func _init():
-	id = "HK_VionMeetingEvent"
+	id = "VionMeetingEvent"
 
 func registerTriggers(es):
 	es.addTrigger(self, Trigger.EnteringRoom, "cellblock_lilac_nearcell")
@@ -18,8 +18,8 @@ func getPriority():
 func onButton(_method, _args):
 	if(_method == "enter_cell"):
 		if(!getFlag("HypnokinkModule.DidVionIntroduction")):
-			runScene("HK_VionIntroduction")
+			runScene("VionIntroduction")
 			setFlag("HypnokinkModule.DidVionIntroduction", true)
 		else:
-			runScene("HK_VionRepeatConversation")
+			runScene("VionRepeatConversation")
 			

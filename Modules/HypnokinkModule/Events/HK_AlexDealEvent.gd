@@ -1,7 +1,7 @@
 extends EventBase
 
 func _init():
-	id = "HK_AlexDealEvent"
+	id = "AlexVionDealEvent"
 
 func registerTriggers(es):
 	es.addTrigger(self, Trigger.TalkingToNPC, "alexrynard")
@@ -25,7 +25,7 @@ func getPriority():
 func onButton(_method, _args):
 	if(_method == "make_deal"):
 		GM.main.endCurrentScene()
-		runScene("HK_Alex_TalkAboutVion")
+		runScene("Alex_TalkAboutVion")
 	if(_method == "finish_deal"):
 		GM.main.endCurrentScene()
-		runScene("HK_Alex_GiveCage")
+		runScene("Alex_GiveCage")

@@ -535,14 +535,9 @@ _global_script_classes=[ {
 "path": "res://Modules/HypnokinkModule/StatusEffects/HK_Suggestible.gd"
 }, {
 "base": "Object",
-"class": "HK_Utils",
+"class": "HypnokinkUtil",
 "language": "GDScript",
-"path": "res://Modules/HypnokinkModule/Util/HK_Utils.gd"
-}, {
-"base": "Module",
-"class": "HypnokinkModule",
-"language": "GDScript",
-"path": "res://Modules/HypnokinkModule/Module.gd"
+"path": "res://Modules/HypnokinkModule/Util/HypnokinkUtil.gd"
 }, {
 "base": "Object",
 "class": "ImageCon",
@@ -1320,8 +1315,7 @@ _global_script_class_icons={
 "HK_SessionInductionBase": "",
 "HK_Sessions": "",
 "HK_Suggestible": "",
-"HK_Utils": "",
-"HypnokinkModule": "",
+"HypnokinkUtil": "",
 "ImageCon": "",
 "ImageConditions": "",
 "ImagePack": "",

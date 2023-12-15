@@ -41,7 +41,7 @@ const descriptionsDemanding = {
 }
 	
 func _init():
-	sceneID = "HK_HypnoEncounterFetch"
+	sceneID = "HypnoEncounterFetch"
 	
 func _initScene(_args = []):
 	npcID = _args[0]
@@ -126,7 +126,7 @@ func _run():
 				saynn("[say=npc]"+descriptionsDemanding[endLocation]+"[/say]")
 		
 		saynn("Compelled to obey, you...")
-		HK_Utils.addUnresistableHypnoButtons(self, "moving_towards", ["Head out", "Get moving", "Fetch"])
+		HypnokinkUtil.addUnresistableHypnoButtons(self, "moving_towards", ["Head out", "Get moving", "Fetch"])
 	
 	if(state == "moving_towards" || state == "moving_back"):
 		removeCharacter(npcID)
@@ -148,7 +148,7 @@ func _run():
 				saynn(_roomInfo.getDescription())
 				
 		addButton("Skip", "Fade into trance", "skip_towards")
-		HK_Utils.addHypnoButtons(self, "moving_towards", "resist", ["Fetch", "Move"], ["Stop", "Resist"], 1)
+		HypnokinkUtil.addHypnoButtons(self, "moving_towards", "resist", ["Fetch", "Move"], ["Stop", "Resist"], 1)
 		
 	if (state == "arrive"):
 		saynn("You retrieve what you came for.")
@@ -212,7 +212,7 @@ func _run():
 			])+"[/say]")
 		
 		saynn("Now that you've established you [i]can[/i] stop, you really should just...")
-		HK_Utils.addHypnoButtons(self, "moving_towards", "resist_2", ["Fetch", "Move"], ["Stop", "Resist"], 1)
+		HypnokinkUtil.addHypnoButtons(self, "moving_towards", "resist_2", ["Fetch", "Move"], ["Stop", "Resist"], 1)
 	if (state == "resist_2"):
 		removeCharacter(npcID)
 		playAnimation(StageScene.Solo, "stand")
@@ -230,14 +230,14 @@ func _react(_action: String, _args):
 		
 	if(_action == "skip_towards"):
 		while path.size() > 0:
-			HK_Utils.changeSuggestibilityBy(GM.pc, RNG.randi_range(1,3))
+			HypnokinkUtil.changeSuggestibilityBy(GM.pc, RNG.randi_range(1,3))
 			processTime(1 * 60)
 			path.remove(0)
 		setState("arrive")
 		return
 	
 	if(_action == "moving_towards"):
-		HK_Utils.changeSuggestibilityBy(GM.pc, RNG.randi_range(1,3))
+		HypnokinkUtil.changeSuggestibilityBy(GM.pc, RNG.randi_range(1,3))
 		processTime(1 * 60)
 		var nextLoc = path[0]
 		path.remove(0)

@@ -1,7 +1,7 @@
 extends EventBase
 
 func _init():
-	id = "HK_HypnoEncounterInmateEvent"
+	id = "HypnoEncounterInmateEvent"
 
 func registerTriggers(es):
 	es.addTrigger(self, Trigger.HypnoEncounter)
@@ -19,7 +19,7 @@ func react(_triggerID, _args):
 	if(GM.ES.triggerReact(Trigger.TalkingToDynamicNPC, [idToUse])):
 		return true
 		
-	runScene("HK_HypnoEncounterStart", [idToUse])
+	runScene("HypnoEncounterStart", [idToUse])
 
 	return true
 

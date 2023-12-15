@@ -1,5 +1,5 @@
 extends Object
-class_name HK_Utils
+class_name HypnokinkUtil
 
 const VionGood = 1
 const VionNeutral = 2

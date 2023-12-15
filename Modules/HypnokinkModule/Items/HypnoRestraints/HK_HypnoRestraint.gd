@@ -3,7 +3,7 @@ class_name HK_HypnoRestraint
 
 func _init():
 	npcDodgeDifficultyMod = 10.0
-	restraintType = "HK_HypnoRestraint"
+	restraintType = "HypnoRestraint"
 
 func resetOnNewDay():
 	var item = getItem()
@@ -28,7 +28,7 @@ func canStruggle():
 		return true
 		
 	var wearer = getItem().getWearer()
-	if(HK_Utils.isHypnotized(wearer)):
+	if(HypnokinkUtil.isHypnotized(wearer)):
 		return false
 	else:
 		return true
@@ -43,7 +43,7 @@ func doStruggle(_pc, _minigame):
 	var damage = 0
 	var stamina = 0
 	
-	if(HK_Utils.isHypnotized(_pc)):
+	if(HypnokinkUtil.isHypnotized(_pc)):
 		text = "{user.Name} can't seem to take these cuffs off."
 		damage = 0.0
 	else:

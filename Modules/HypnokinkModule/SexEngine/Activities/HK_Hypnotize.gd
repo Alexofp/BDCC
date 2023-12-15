@@ -1,7 +1,7 @@
 extends SexActivityBase
 
 func _init():
-	id = "HK_Hypnotize"
+	id = "Hypnotize"
 
 func getGoals():
 	return {
@@ -17,7 +17,7 @@ func canStartActivity(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: Sex
 		return false
 	if(_domInfo.getChar().isGagged()):
 		return false
-	if(_domInfo.getChar() != GM.pc || !_domInfo.getChar().hasPerk(Perk.AmateurHypnotist)):
+	if(_domInfo.getChar() != GM.pc || !_domInfo.getChar().hasPerk(Perk.HypnosisAmateurHypnotist)):
 		return false
 	return .canStartActivity(_sexEngine, _domInfo, _subInfo)
 
@@ -164,10 +164,10 @@ func doSubAction(_id, _actionInfo):
 		}
 
 func isSubHypnotized():
-	return HK_Utils.isHypnotized(getSub())
+	return HypnokinkUtil.isHypnotized(getSub())
 
 func isSubInTrance():
-	return HK_Utils.isInTrance(getSub())
+	return HypnokinkUtil.isInTrance(getSub())
 	
 func getAnimationPriority():
 	return 0

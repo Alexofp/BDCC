@@ -28,12 +28,12 @@ var hypnoHighlightsUnused := []
 var lastReset := -1
 
 func appliesTo(_speaker: BaseCharacter) -> bool:
-	if(GM.pc != _speaker and GM.pc.hasPerk(Perk.KeywordsDrawback)):
-		if(GM.pc.hasPerk(Perk.DeepTranceDrawback)):
+	if(GM.pc != _speaker and GM.pc.hasPerk(Perk.HypnosisKeywordsDrawback)):
+		if(GM.pc.hasPerk(Perk.HypnosisDeepTranceDrawback)):
 			return true
-		elif(HK_Utils.isHypnotized(GM.pc) and GM.pc.hasPerk(Perk.FamousDrawback)):
+		elif(HypnokinkUtil.isHypnotized(GM.pc) and GM.pc.hasPerk(Perk.HypnosisFamousDrawback)):
 			return true
-		elif(HK_Utils.isInTrance(GM.pc)):
+		elif(HypnokinkUtil.isInTrance(GM.pc)):
 			return true
 	return false
 	

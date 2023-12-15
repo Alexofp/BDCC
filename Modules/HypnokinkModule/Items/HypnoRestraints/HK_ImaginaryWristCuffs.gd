@@ -21,7 +21,7 @@ func getTags():
 	return [ItemTag.BDSMRestraint]
 	
 func getTakeOffScene():
-	return "HK_HypnoCuffsScene"
+	return "HypnoCuffsScene"
 
 func isRestraint():
 	return true

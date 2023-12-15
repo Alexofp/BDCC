@@ -8,28 +8,28 @@ func _initScene(_args = []):
 	
 func _run():
 	if(state == ""):
-		addCharacter("HK_Vion")
-		playAnimation(StageScene.Duo, "stand", {npc="HK_Vion", npcAction="stand"})
+		addCharacter("Vion")
+		playAnimation(StageScene.Duo, "stand", {npc="Vion", npcAction="stand"})
 
-		saynn("[say=HK_Vion]Now that that's taken care of...[/say]")
+		saynn("[say=Vion]Now that that's taken care of...[/say]")
 
 		saynn("Vion hooks a claw under your collar.")
 
-		saynn("[say=HK_Vion]Stand up. Nice and slow. On your feet.[/say]")
+		saynn("[say=Vion]Stand up. Nice and slow. On your feet.[/say]")
 
 		saynn("You rise, Vion guiding you up by dragging your collar.")
 
-		saynn("[say=HK_Vion]I should probably wake you up, but...[/say]")
+		saynn("[say=Vion]I should probably wake you up, but...[/say]")
 
 		saynn("[say=pc]Mmh?[/say]")
 
 		saynn("You stand there, gently swaying side to side as he contemplates.")
 
-		saynn("[say=HK_Vion]I think it'd be more fun for you if I were to not bother, hmm? Open your eyes, but stay in trance as you do so~[/say]")
+		saynn("[say=Vion]I think it'd be more fun for you if I were to not bother, hmm? Open your eyes, but stay in trance as you do so~[/say]")
 
 		saynn("Your eyelids flutter open, and you stare in Vion's commanding eyes.")
 
-		saynn("[say=HK_Vion]That's right. From the outside, you will just look tired, maybe like you've been having too much [i]fun[/i]. But on the inside... your mind will remain the comfortable, thoughtless mush it is right now. Feels nice, doesn't it? Nod for me.[/say]")
+		saynn("[say=Vion]That's right. From the outside, you will just look tired, maybe like you've been having too much [i]fun[/i]. But on the inside... your mind will remain the comfortable, thoughtless mush it is right now. Feels nice, doesn't it? Nod for me.[/say]")
 
 		saynn("You nod...")
 		

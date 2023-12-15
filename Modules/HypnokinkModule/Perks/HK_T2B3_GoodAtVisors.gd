@@ -1,7 +1,7 @@
 extends PerkBase
 
 func _init():
-	id = Perk.GoodAtVisors
+	id = Perk.HypnosisGoodAtVisors
 	skillGroup = Skill.Hypnosis
 
 func getVisibleName():
@@ -11,7 +11,7 @@ func getVisibleDescription():
 	return "You have become intimately familiar with what wearing a hypnotic visor is like."
 	
 func getMoreDescription():
-	return 	"You can attempt to remove hypnotic visors even in "+HK_Utils.tranceIcon()+"Trance."+"\n\n"+\
+	return 	"You can attempt to remove hypnotic visors even in "+HypnokinkUtil.tranceIcon()+"Trance."+"\n\n"+\
 			"When forcing an opponent to wear a hypnotic visor, their hypnosis level will immediately rise to 30% if it is lower."
 
 func getSkillTier():

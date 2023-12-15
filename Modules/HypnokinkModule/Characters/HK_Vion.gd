@@ -1,7 +1,7 @@
 extends Character
 
 func _init():
-	id = "HK_Vion"
+	id = "Vion"
 	
 	npcLevel = 3
 	npcBasePain = 50

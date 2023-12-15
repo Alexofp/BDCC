@@ -26,7 +26,7 @@ const GropeBreasts = "GropeBreasts"
 const BreastFeedOnSub = "BreastFeedOnSub"
 const BreastFeedSub = "BreastFeedSub"
 
-const Hypnotize = "HK_Hypnotize"
+const Hypnotize = "Hypnotize"
 
 # Subgoals, these don't need classes defined
 const SubUndressSub = "SubUndressSub"

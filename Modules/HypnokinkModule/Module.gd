@@ -1,5 +1,4 @@
 extends Module
-class_name HypnokinkModule
 
 func getFlags():
 	return {
@@ -175,4 +174,4 @@ func resetFlagsOnNewDay():
 	setFlag("HypnokinkModule.VisorXpToday", 0)
 	
 func registerEventTriggers():
-	GM.ES.registerEventTrigger("HK_HypnoEncounter", EventTriggerWeighted.new())
+	GM.ES.registerEventTrigger("HypnoEncounter", EventTriggerWeighted.new())

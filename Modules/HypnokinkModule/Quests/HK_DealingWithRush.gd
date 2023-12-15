@@ -1,7 +1,7 @@
 extends QuestBase
 
 func _init():
-	id = "HK_DealingWithRush"
+	id = "DealingWithRush"
 
 func getVisibleName():
 	return "Stallion for time"

@@ -8,34 +8,34 @@ func _initScene(_args = []):
 
 func _run():
 	if(state == ""):
-		addCharacter("HK_Vion")
-		playAnimation(StageScene.Duo, "sit", {npc="HK_Vion", npcAction="sit"})
+		addCharacter("Vion")
+		playAnimation(StageScene.Duo, "sit", {npc="Vion", npcAction="sit"})
 
-		saynn("[say=HK_Vion]I think you've had enough practice by now, {pc.name}. Let's try shortcut this time. Sit down, lean back and close your eyes please.[/say]")
+		saynn("[say=Vion]I think you've had enough practice by now, {pc.name}. Let's try shortcut this time. Sit down, lean back and close your eyes please.[/say]")
 
-		saynn("{HK_Vion.name} sits opposite you as usual. You close your eyes as instructed.")
+		saynn("{Vion.name} sits opposite you as usual. You close your eyes as instructed.")
 
-		saynn("[say=HK_Vion]Good. Relax, get comfortable. Take a deep breath.[/say]")
+		saynn("[say=Vion]Good. Relax, get comfortable. Take a deep breath.[/say]")
 
 		saynn("You breathe in.")
 
-		saynn("[say=HK_Vion]Now slowly breathe out.[/say]")
+		saynn("[say=Vion]Now slowly breathe out.[/say]")
 
 		saynn("You breathe out.")
 
-		saynn("[say=HK_Vion]Now another deep breath in...[/say]")
+		saynn("[say=Vion]Now another deep breath in...[/say]")
 
 		saynn("You breathe in...")
 
-		saynn("[say=HK_Vion]And as you exhale...[/say]")
+		saynn("[say=Vion]And as you exhale...[/say]")
 
-		saynn("[say=HK_Vion][b]Sleep.[/b][/say]")
+		saynn("[say=Vion][b]Sleep.[/b][/say]")
 
-		saynn("[say=HK_Vion]That's it. [b]Sleep.[/b] Fall deep into hypnosis. [b]Sleep.[/b] Go deeper for me. [b]Sleep.[/b] Even deeper. Let the calm mindlessness wash over you. [b]Sleep.[/b][/say]")
+		saynn("[say=Vion]That's it. [b]Sleep.[/b] Fall deep into hypnosis. [b]Sleep.[/b] Go deeper for me. [b]Sleep.[/b] Even deeper. Let the calm mindlessness wash over you. [b]Sleep.[/b][/say]")
 
 		saynn("Sleep...")
 
-		saynn("[say=HK_Vion][b]Sleep.[/b][/say]")
+		saynn("[say=Vion][b]Sleep.[/b][/say]")
 		
 		addButton("Sleep", "", "endthescene")
 
