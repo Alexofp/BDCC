@@ -2,6 +2,7 @@ extends SkillBase
 			
 func _init():
 	id = HK_Skill.HypnosisSkill
+	var _e = connect("experienceChanged", self, "_on_experienceChanged")
 	var _s = connect("levelChanged", self, "_on_levelChanged")
 
 func getVisibleName():
@@ -16,19 +17,28 @@ func getPerkTiers():
 		[2],
 		[5],
 	]
+func _on_experienceChanged():
+	checkDrawbacks()
 
-func _on_levelChanged(idParam, levelParam):
-	if(id != idParam || npc == null):
+func _on_levelChanged(idParam, _levelParam):
+	if(id != idParam):
 		return
-	if(levelParam >= 1):
+	checkDrawbacks()
+	
+func checkDrawbacks():
+	if(npc == null):
+		return
+	if(not GM.main.getFlag("HypnokinkModule.SoftOptIn", false)):
+		return
+	if(level >= 1):
 		if(!npc.hasPerk(HK_Perk.KeywordsDrawback)):
 			npc.skillsHolder.addPerk(HK_Perk.KeywordsDrawback)
 			flashDrawbackMessage(GlobalRegistry.getPerk(HK_Perk.KeywordsDrawback))
-	if(levelParam >= 3):
+	if(level >= 3):
 		if(!npc.hasPerk(HK_Perk.FamousDrawback)):
 			npc.skillsHolder.addPerk(HK_Perk.FamousDrawback)
 			flashDrawbackMessage(GlobalRegistry.getPerk(HK_Perk.FamousDrawback))
-	if(levelParam >= 5):
+	if(level >= 5):
 		if(!npc.hasPerk(HK_Perk.DeepTranceDrawback)):
 			npc.skillsHolder.addPerk(HK_Perk.DeepTranceDrawback)
 			flashDrawbackMessage(GlobalRegistry.getPerk(HK_Perk.DeepTranceDrawback))

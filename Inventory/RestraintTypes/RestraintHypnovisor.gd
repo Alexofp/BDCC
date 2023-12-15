@@ -38,23 +38,28 @@ func doStruggle(_pc, _minigame):
 	var stamina = 0
 	
 	var inTrance = HK_CharUtil.isInTrance(_pc)
+	var hypnotized = HK_CharUtil.isHypnotized(_pc)
 	
 	if(inTrance and not _pc.hasPerk(HK_Perk.GoodAtVisors)):
 		text = "{user.name} tries to... to... \n\nDo what? Must have not been important."
 		damage = 0.0
 		return {"text": text, "damage": damage, "lust": lust, "pain": pain, "stamina": stamina}
 	
+	var damageMult = 1
+	if(not hypnotized):
+		damageMult = 5
+	
 	if(_handsFree and _armsFree):
 		text = "{user.name} reaches up, trying to focus on removing {user.his} " + getItem().getVisibleName() + "."
-		damage = calcDamage(_pc)
-		stamina = 5
+		damage = calcDamage(_pc, damageMult)
+		stamina = 2
 	elif(_handsFree):
 		text = "{user.name}'s hands are free but they are bound together so {user.name} has to awkwardly bend to reach {user.his} " + getItem().getVisibleName() + "."
-		damage = calcDamage(_pc, 0.3)
+		damage = calcDamage(_pc, damageMult * 0.3)
 		stamina = 5
 	else:
 		text = "{user.name} shakes {user.his} head, trying to dislodge {user.his} " + getItem().getVisibleName() + "."
-		damage = calcDamage(_pc, 0.1)
+		damage = calcDamage(_pc, damageMult * 0.1)
 		stamina = 10
 	
 	return {"text": text, "damage": damage, "lust": lust, "pain": pain, "stamina": stamina}

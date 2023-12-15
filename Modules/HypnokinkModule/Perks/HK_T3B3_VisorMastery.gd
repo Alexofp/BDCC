@@ -25,3 +25,6 @@ func getRequiredPerks():
 
 func getPicture():
 	return "res://Modules/HypnokinkModule/Icons/Perks/visor3.png"
+	
+func runOnceWhenLearned():
+	GM.main.setFlag("HypnokinkModule.SoftOptIn", true)

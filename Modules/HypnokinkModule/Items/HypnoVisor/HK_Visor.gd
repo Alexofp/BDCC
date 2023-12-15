@@ -10,7 +10,7 @@ func getVisibleName():
 	if(GM.main.getFlag("HypnokinkModule.TalkedToAlexAboutVisors", false)):
 		return "Hypnovisor Mk0"
 	else:
-		return "Hypnovisor"
+		return "AR Visor"
 	
 func getDescription():
 	if(isWornByWearer()):

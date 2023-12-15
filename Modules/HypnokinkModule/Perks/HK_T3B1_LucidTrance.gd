@@ -33,3 +33,6 @@ func getBuffs():
 		]
 	else:
 		return []
+	
+func runOnceWhenLearned():
+	GM.main.setFlag("HypnokinkModule.SoftOptIn", true)

@@ -40,7 +40,7 @@ func processTime(seconds: int):
 	
 	var ceiling = 125
 	if(visor.id == HK_Item.Visor):
-		ceiling = 70
+		ceiling = 75
 	elif(visor.id == "HypnovisorMk1"):
 		ceiling = 125
 		

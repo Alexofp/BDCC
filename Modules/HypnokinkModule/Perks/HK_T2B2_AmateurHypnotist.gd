@@ -34,3 +34,6 @@ func addsAttacks():
 		HK_Attack.TriggerKneel,
 		HK_Attack.TriggerStun
 	]
+	
+func runOnceWhenLearned():
+	GM.main.setFlag("HypnokinkModule.SoftOptIn", true)

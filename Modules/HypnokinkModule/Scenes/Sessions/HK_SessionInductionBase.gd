@@ -3,7 +3,8 @@ class_name HK_SessionInductionBase
 
 var bodyId: String
 
-func onInduction(_args = []):
+func onInduction(_args = []):	
+	GM.main.setFlag("HypnokinkModule.SoftOptIn", true)
 	GM.pc.addEffect(HK_StatusEffect.UnderHypnosis)
 	GM.pc.addEffect(HK_StatusEffect.Suggestible, [30])
 	processTime(10*60)
