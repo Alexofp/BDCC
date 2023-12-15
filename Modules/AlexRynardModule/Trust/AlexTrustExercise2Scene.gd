@@ -213,10 +213,36 @@ func _run():
 		addButton("TIE ME UP!", "Demand it", "4_brat")
 		addButton("RED", "Say this", "4_red")
 	if(state == "4_brat"):
-		# (( Fine you get a blindfold
 		playAnimation(StageScene.SybianOral, "idle", {npc="alexrynard", bodyState={naked=true}})
 		saynn("[say=pc]Nuh! Tie me up right now![/say]")
 
+		saynn("He sighs and deliberates for a second.")
+
+		saynn("After that single second.. a blindfold gets forced over your eyes.")
+
+		saynn("[say=alexrynard]This will do.[/say]")
+
+		saynn("Aww, now you can't see his smug face.")
+
+		saynn("[say=pc]That's not tying me up![/say]")
+
+		saynn("[say=alexrynard]Fight me.[/say]")
+
+		saynn("[say=pc]I will![/say]")
+
+		if (GM.pc.hasReachableVagina()):
+			saynn("But before you can do that, the machine under you begins to hum quietly, the little dildo starts vibrating inside your pussy at a low frequency.. enough to reconsider your approach. It feels.. quite pleasantly.. nothing insane but you can for sure feel it.")
+
+		else:
+			saynn("But before you can do that, the machine under you begins to hum quietly, the little dildo starts vibrating inside you at a low frequency.. enough to reconsider your approach. It feels.. quite pleasantly.. nothing insane but you can for sure feel it.")
+
+		saynn("He has the remote so it's obviously him twisting the strength knob on it. You exhale audibly and just sit still, your head directed towards where you think Alex is.. But his voice ends up reaching you from a completely different position.")
+
+		saynn("[say=alexrynard]So quiet all of the sudden. Tell me how it feels.[/say]")
+
+		addButton("Like nothing", "Say this", "5_brat")
+		addButton("Feels nice", "Say this", "5_nice")
+		addButton("RED", "Say this", "5_red")
 	if(state == "4_yessir"):
 		playAnimation(StageScene.SybianOral, "idle", {npc="alexrynard", bodyState={naked=true}})
 		saynn("[say=pc]Yes, Sir..[/say]")
@@ -224,10 +250,10 @@ func _run():
 		saynn("Alex holds the remote with one hand while the second one twists one of the knobs by one notch.")
 
 		if (GM.pc.hasReachableVagina()):
-			saynn("The machine under you begins to hum quietly, the little dildo is vibrating inside your pussy with a low frequency. It feels.. quite pleasantly.. nothing insane but you can for sure feel it.")
+			saynn("The machine under you begins to hum quietly, the little dildo is vibrating inside your pussy at a low frequency. It feels.. quite pleasantly.. nothing insane but you can for sure feel it.")
 
 		else:
-			saynn("The machine under you begins to hum quietly, the little dildo is vibrating inside you with a low frequency. It feels.. quite pleasantly.. nothing insane but you can for sure feel it.")
+			saynn("The machine under you begins to hum quietly, the little dildo is vibrating inside you at a low frequency. It feels.. quite pleasantly.. nothing insane but you can for sure feel it.")
 
 		saynn("You exhale audibly and just sit still, your gaze directed straight forward.")
 
@@ -238,7 +264,60 @@ func _run():
 		addButton("RED", "Say this", "5_red")
 	if(state == "5_brat"):
 		# (( He spikes the power and says that it would numb you fast
-		pass
+		playAnimation(StageScene.SybianOral, "idle", {npc="alexrynard", bodyState={naked=true, hard=true}})
+		saynn("[say=pc]I don't feel anything![/say]")
+
+		saynn("He hums.")
+
+		saynn("[say=alexrynard]Oh really?[/say]")
+
+		if (GM.pc.hasReachableVagina()):
+			saynn("Alex twists the knob to its maximum setting! Suddenly, an earthquake starts happening between your legs. You gasp as the dildo in your pussy starts vibrating relentlessly against the inner walls and your little pleasure spot.")
+
+			saynn("[say=pc]Oh fuck! OW![/say]")
+
+			saynn("You arch your back.. but it actually hurts more than it brings you pleasure, it feels like ten cocks are fucking your pussy at the same time..")
+
+		else:
+			saynn("Alex twists the knob to its maximum setting! Suddenly, an earthquake starts happening between your legs. You gasp as the dildo in your ass starts vibrating relentlessly against the inner walls and your little pleasure spot.")
+
+			saynn("[say=pc]Oh fuck! OW![/say]")
+
+			saynn("You arch your back.. but it actually hurts more than it brings you pleasure, it feels like ten cocks are fucking your asshole at the same time..")
+
+		saynn("After a few seconds of this intense rodeo, Alex dials down the strength to an acceptable level.. and the pain goes away.")
+
+		saynn("[say=alexrynard]I guess you were lying, huh. Brave.[/say]")
+
+		saynn("[say=pc]Listen..[/say]")
+
+		saynn("[say=alexrynard]No you. I don't want to numb you out so we're doing it slow. Relax and let me bring you through this journey. Little brat.[/say]")
+
+		saynn("Who's more bratty here..")
+
+		saynn("He wasn't lying though, it starts to feel quite nice when you focus on the vibrations..")
+
+		if (GM.pc.hasReachableVagina()):
+			saynn("The little ridged platform that your clit is resting on is now shifting back and forth, providing some stimulation. You can't help but to produce your first little moan, your petals getting more wet every second.")
+
+		else:
+			saynn("The little ridged platform that your taint area is resting on is now shifting back and forth, providing some stimulation to your sensitive zone. You can't help but to produce your first little moan.")
+
+		saynn("[say=pc]Ah..[/say]")
+
+		if (GM.pc.isWearingChastityCage()):
+			saynn("Your caged up member begins to drip pre through the chastity as the dildo starts vibrating harder against your pleasure spot.")
+
+		elif (GM.pc.hasReachablePenis()):
+			saynn("Your cock gets fully hard and starts dripping pre as the dildo starts vibrating harder against your pleasure spot.")
+
+		saynn("Alex is just standing near, his eyes watching you with great interest.")
+
+		saynn("[say=alexrynard]Yeah, see. Looks like you're ready for more.[/say]")
+
+		addButton("Cry!", "Start crying", "6_brat")
+		addButton("Brace", "Prepare for what's to come", "6_brace")
+		addButton("RED", "Say this", "6_red")
 	if(state == "5_nice"):
 		playAnimation(StageScene.SybianOral, "idle", {npc="alexrynard", bodyState={naked=true, hard=true}})
 		saynn("[say=pc]Feels nice, Sir..[/say]")
@@ -263,9 +342,54 @@ func _run():
 
 		saynn("[say=alexrynard]Yeah, I can tell by now. Looks like you're ready for more.[/say]")
 
-		addButton("Cry!", "Shed a tear", "6_brat")
+		addButton("Cry!", "Start crying", "6_brat")
 		addButton("Brace", "Prepare for what's to come", "6_brace")
 		addButton("RED", "Say this", "6_red")
+	if(state == "6_brat"):
+		playAnimation(StageScene.SybianOral, "ride", {npc="alexrynard", bodyState={naked=true, hard=true}})
+		if (GM.pc.isBlindfolded()):
+			saynn("Just before he raises the strength, you purposefully start crying. Why? To throw him off, of course! Alex notices your wet blindfold.")
+
+			saynn("[say=alexrynard]Hey, are you okay?[/say]")
+
+			saynn("He sounds so concerned.. which is so funny. You just sit still and shed a few more tears. After some seconds of silence, Alex finally decides to peek under your blindfold.. just to find your smug eyes.")
+
+			saynn("[say=alexrynard]You're gonna scare me like that? Bad {pc.boy}.[/say]")
+
+		else:
+			saynn("Just before he raises the strength, you purposefully start crying. Why? To throw him off, of course! Alex notices your wet cheeks.")
+
+			saynn("[say=alexrynard]Hey, are you okay?[/say]")
+
+			saynn("He sounds so concerned.. which is so funny. You just sit still and shed a few more tears. After some seconds of silence, Alex walks up closer and stares you into the eyes.. just to realize how smug your expression actually is.")
+
+			saynn("[say=alexrynard]You're gonna scare me like that? Bad {pc.boy}.[/say]")
+
+		saynn("You stick your tongue out at him.. which means that you weren't prepared for what's about to happen. Alex raises the power to the medium setting..")
+
+		saynn("Almost instantly, you arch your back. The dildo vibrates inside you so hard that you can't help but to start squirming.")
+
+		if (GM.pc.hasReachableVagina()):
+			saynn("You avoid some of it by raising your body slightly.. but Alex notices and pushes you back down.. forcing you to sit on the sybian while it brings immense pleasure to you and your pussy.")
+
+		else:
+			saynn("You avoid some of it by raising your body slightly.. but Alex notices and pushes you back down.. forcing you to sit on the sybian while it brings immense pleasure to you.")
+
+		saynn("[say=pc]Ah-h..[/say]")
+
+		if (GM.pc.isWearingChastityCage()):
+			saynn("Your cock is pushing more against the chastity cage but the metal is too strong.")
+
+		elif (GM.pc.hasReachablePenis()):
+			saynn("Your cock twitches wildly, more precum dripping from it.")
+
+		saynn("Alex seems to be quite intrigued by the noises that you make.")
+
+		saynn("[say=alexrynard]I don't hear the safeword, you must be loving it. Don't hold back, feel free to moan for me.[/say]")
+
+		addButton("Moan", "Let it all out", "7_moan")
+		addButton("Hold them", "Stay quiet for as long as you can", "7_brat")
+		addButton("RED!", "Say this", "7_red")
 	if(state == "6_brace"):
 		playAnimation(StageScene.SybianOral, "ride", {npc="alexrynard", bodyState={naked=true, hard=true}})
 		saynn("Seems like something is gonna happen.. so you brace, all your muscles tense up.")
@@ -295,6 +419,34 @@ func _run():
 		addButton("Moan", "Let it all out", "7_moan")
 		addButton("Hold them", "Stay quiet for as long as you can", "7_brat")
 		addButton("RED!", "Say this", "7_red")
+	if(state == "7_brat"):
+		saynn("You're not gonna give him the satisfaction of hearing you moan! Or seeing you squirm and drool. No way. You do your best, trying to focus on something else.. On how cute Alex is!")
+
+		saynn("[say=pc]H-..[/say]")
+
+		saynn("Fuck, that thought was a bad one, only made you hornier. You focus on just breathing instead.. On your deep warm breaths.. on how cute your panting sounds while that..")
+
+		saynn("[say=pc]Nh..[/say]")
+
+		if (GM.pc.hasReachableVagina()):
+			saynn("Fuck. The sybian is relentless, its vibrating parts pushing you further and further into the abyss of pleasure, your pussy dripping juices onto the seat.")
+
+		else:
+			saynn("Fuck. The sybian is relentless, its vibrating parts pushing you further and further into the abyss of pleasure, your tailhole clenching around the small dildo.")
+
+		saynn("[say=alexrynard]You're trying so hard but it's so easy to tell. If you're gonna cum, I want you to ask permission first.[/say]")
+
+		saynn("What is he talking about, obviously you're not planning to cum anytime soon.. Even though.. it would be kinda nice. Fuck, you feel it too now. You can't, your body is betraying you, your muscles tensing up, your lips trembling.")
+
+		if (GM.pc.isWearingChastityCage()):
+			saynn("Your locked up cock is desperately pushing against its metal cage, you're so close..")
+
+		elif (GM.pc.hasReachablePenis()):
+			saynn("Your balls are tensing up, your cock is leaking pre hard, you're so close..")
+
+		addButton("Just cum!", "You're not gonna let him humiliate you!", "8_brat")
+		addButton("Beg for it", "Humiliate yourself!", "8_beg")
+		addButton("RED!", "Say it", "8_red")
 	if(state == "7_moan"):
 		saynn("And so you focus on these vibrations, forgetting about anything else.. and that elevates the perceived sensations to a whole new level..")
 
@@ -320,8 +472,86 @@ func _run():
 		addButton("Beg for it", "Humiliate yourself!", "8_beg")
 		addButton("RED!", "Say it", "8_red")
 	if(state == "8_brat"):
-		# (( You don't get to cum so you have to hump it
 		playAnimation(StageScene.SybianOral, "hold", {npc="alexrynard", bodyState={naked=true, hard=true}})
+		saynn("No, you're not gonna humiliate yourself by begging, you will just cum without telling him!")
+
+		saynn("You close your eyes and enjoy riding the sybian.. your peak creeping closer and closer.. your noises become more and more passionate..")
+
+		saynn("[say=alexrynard]I don't hear you.[/say]")
+
+		if (GM.pc.hasReachableVagina()):
+			saynn("Your pussy is twitching and dripping juices a lot.. just a few more seconds and you're gonna.. yes-s..")
+
+		else:
+			saynn("Your tailhole is twitching a lot.. just a few more seconds and you're gonna.. yes-s..")
+
+		saynn("[say=alexrynard]I see.[/say]")
+
+		saynn("Suddenly, Alex lowers the sybian's power to its lowest setting.. denying you the orgasm that you so desperately want!")
+
+		saynn("[say=pc]No!.. Let me cum![/say]")
+
+		saynn("He grabs you by the collar and makes you look at him.")
+
+		saynn("[say=alexrynard]If you want me to help you cum, you better ask for it.[/say]")
+
+		saynn("[say=pc]Please?..[/say]")
+
+		saynn("He shakes his head.. while your orgasm slowly begins to fade.. no.. you can't let that happen.")
+
+		saynn("[say=alexrynard]You're on your own.[/say]")
+
+		addButton("Hump it!", "Hump the living hell out of that sybian", "8_brat_hump")
+	if(state == "8_brat_hump"):
+		playAnimation(StageScene.SybianOral, "hump", {npc="alexrynard", bodyState={naked=true, hard=true}})
+		saynn("Looks like he won't help you.. but he also won't stop you.")
+
+		if (GM.pc.hasReachableVagina()):
+			saynn("So you do the next best thing.. and begin humping that dildo with your pussy, trying to push yourself a little further. Desperate noises escape from you.. while Alex is just smiling.")
+
+		else:
+			saynn("So you do the next best thing.. and begin humping that dildo with your ass, trying to push yourself a little further. Desperate noises escape from you.. while Alex is just smiling.")
+
+		saynn("[say=alexrynard]Huh. This is way more fun than just denying you.[/say]")
+
+		saynn("What a sly fox..")
+
+		saynn("The seat under you is still vibrating, helping you to get at least some extra stimulation.. You start to feel that ecstatic feeling coming back.. You're so close.")
+
+		addButton("Faster", "Hump it even faster", "8_brat_cum")
+	if(state == "8_brat_cum"):
+		playAnimation(StageScene.SybianOral, "humpfast", {npc="alexrynard", bodyState={naked=true, hard=true}})
+		if (GM.pc.hasReachableVagina()):
+			saynn("Who even cares anymore about how it looks, you're too desperate to stop now. You hump that dildo like your life depends on it.. and soon enough.. your mind gets overwhelmed with a tidal wave of pleasure, your body getting pushed over the edge, your pussy gripping that vibrating dildo and producing a strong fountain of juices.")
+
+			if (GM.pc.isWearingChastityCage()):
+				saynn("Even though it's your lady bits that got overstimulated, your poor locked cock is still shooting a few weak spurts of your {pc.cum} through the little hole in the chastity cage, creating a cute mess on the floor.")
+
+			elif (GM.pc.hasReachablePenis()):
+				saynn("Even though it's your lady bits that got overstimulated, your {pc.penis} is still throbbing and shooting a few strong spurts of your {pc.cum}, creating a mess on the floor.")
+
+		else:
+			saynn("Who even cares anymore about how it looks, you're too desperate to stop now. You hump that dildo like your life depends on it.. and soon enough.. your mind gets overwhelmed with a tidal wave of pleasure, your body getting pushed over the edge, your ass gripping that vibrating dildo, your pulsing inner walls clenching around it.")
+
+			if (GM.pc.isWearingChastityCage()):
+				saynn("The dildo of that sybian isn't the biggest.. but it's actually the perfect length to overstimulate your prostate, your poor locked cock is throbbing and shooting a few weak spurts of your {pc.cum} through the little hole in the chastity cage, creating a cute mess on the floor.")
+
+			elif (GM.pc.hasReachablePenis()):
+				saynn("The dildo of that sybian isn't the biggest.. but it's actually the perfect length to overstimulate your prostate, your {pc.penis} is throbbing and shooting a few strong spurts of your {pc.cum}, creating a mess on the floor.")
+
+		saynn("[say=pc]Nh-h-h!.. Ahh!.. Yes-s-s![/say]")
+
+		saynn("Putting so much effort into this.. was totally worth it. Your body just wants to arch itself while all sorts of cute noises leave your mouth. You're panting heavily while your tongue is out, your lusty eyes shaking a little.")
+
+		saynn("[say=alexrynard]Wow. Good job. You gave me such a good show.[/say]")
+
+		saynn("[say=pc]H-hh.. ah.. Fuck.. you..[/say]")
+
+		saynn("He chuckles.")
+
+		saynn("Waves of warmth wash all over you. Feels so fucking good..")
+
+		addButton("Continue", "See what happens next", "9_rest")
 	if(state == "8_beg"):
 		playAnimation(StageScene.SybianOral, "intense", {npc="alexrynard", bodyState={naked=true, hard=true}})
 		saynn("[say=pc]May I.. cum?[/say]")
@@ -789,6 +1019,9 @@ func _react(_action: String, _args):
 	if(_action == "5_brat"):
 		bratCounter += 1
 
+	if(_action == "6_brat"):
+		bratCounter += 1
+
 	if(_action == "7_brat"):
 		bratCounter += 1
 
@@ -796,6 +1029,9 @@ func _react(_action: String, _args):
 		bratCounter += 1
 
 	if(_action == "8_beg"):
+		GM.pc.orgasmFrom("alexrynard")
+
+	if(_action == "8_brat_cum"):
 		GM.pc.orgasmFrom("alexrynard")
 
 	if(_action == "10_end"):
