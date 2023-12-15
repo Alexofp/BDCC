@@ -102,7 +102,7 @@ func reactToCommandCage(_command: String, _args:Array, _commandStringRaw:String)
 				"Battery charge: "+str(stepify(rand_range(1400, 1500),0.1))+" mAh\n"+\
 				"Bioreactor: Operating\n"+\
 				"Last memory access at: "+lastMem+" by '"+lastCmdStored+"'\n"+\
-				"Memory dump (first page): \n[font=res://Fonts/smallconsolefont.tres]"+\
+				"Memory dump (first page): \n[b][font=res://Fonts/smallconsolefont.tres]"+\
 				"[color=#AAFFAA]   0        8        16       24      [/color]\n"+\
 				"[color=#AAFFAA] 0 [/color]BEEFBEA7 DeLoxe S 3-Karat  v1.0.7"+NI+"_\n"+\
 				"[color=#AAFFAA] 1 [/color]00010017 SEGFAULT  at: %s"+NI+" Eo2ZiE93\n"+\
@@ -115,7 +115,7 @@ func reactToCommandCage(_command: String, _args:Array, _commandStringRaw:String)
 				"[color=#AAFFAA] 8 [/color]Status:  %s"+CR+"Days  locked:  %d"+CR+"Elect\n"+\
 				"[color=#AAFFAA] 9 [/color]romagnet  lock st rength:  %fN"+CR+"Batt\n"+\
 				"[color=#AAFFAA]10 [/color]erycharg e: %f mA h"+CR+"Biorea ctor:%s"+CR+"\n"+\
-				"[color=#AAFFAA]11 [/color]Last mem ory acce ss at: [ %d,%d] (\n[/font]"
+				"[color=#AAFFAA]11 [/color]Last mem ory acce ss at: [ %d,%d] (\n[/font][/b]"
 		else:
 			return "This command expects 0 arguments"
 	elif(_command == "unlock"):

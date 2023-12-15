@@ -24,3 +24,6 @@ func getPicture():
 
 func addsAttacks():
 	return ["ReciteMantra"]
+	
+func runOnceWhenLearned():
+	GM.main.setFlag("HypnokinkModule.SoftOptIn", true)

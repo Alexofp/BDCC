@@ -2,6 +2,7 @@ extends SkillBase
 			
 func _init():
 	id = Skill.Hypnosis
+	var _e = connect("experienceChanged", self, "_on_experienceChanged")
 	var _s = connect("levelChanged", self, "_on_levelChanged")
 
 func getVisibleName():
@@ -16,10 +17,20 @@ func getPerkTiers():
 		[2],
 		[5],
 	]
+	
+func _on_experienceChanged():
+	checkDrawbacks()
 
-func _on_levelChanged(idParam, levelParam):
-	if(id != idParam || npc == null):
+func _on_levelChanged(idParam, _levelParam):
+	if(id != idParam):
 		return
+	checkDrawbacks()
+
+	func checkDrawbacks():
+		if(npc == null):
+			return
+		if(not GM.main.getFlag("HypnokinkModule.SoftOptIn", false)):
+			return
 	if(levelParam >= 1):
 		if(!npc.hasPerk(Perk.KeywordsDrawback)):
 			npc.skillsHolder.addPerk(Perk.KeywordsDrawback)

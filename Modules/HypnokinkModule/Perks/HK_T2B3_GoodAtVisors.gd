@@ -22,4 +22,6 @@ func getCost():
 
 func getPicture():
 	return "res://Modules/HypnokinkModule/Icons/Perks/visor2.png"
-
+	
+func runOnceWhenLearned():
+	GM.main.setFlag("HypnokinkModule.SoftOptIn", true)

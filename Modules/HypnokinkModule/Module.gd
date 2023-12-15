@@ -3,6 +3,8 @@ class_name HypnokinkModule
 
 func getFlags():
 	return {
+		"SoftOptIn": flag(FlagType.Bool),
+		
 		"VisorXpToday": flag(FlagType.Number),
 		"TalkedToAlexAboutVisors": flag(FlagType.Bool),
 		

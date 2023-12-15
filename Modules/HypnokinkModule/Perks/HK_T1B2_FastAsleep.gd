@@ -27,3 +27,6 @@ func getBuffs():
 	return [
 		buff(Buff.RestEffectivenessBuff, [0.5]),
 	]
+	
+func runOnceWhenLearned():
+	GM.main.setFlag("HypnokinkModule.SoftOptIn", true)
