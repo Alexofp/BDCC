@@ -19,10 +19,8 @@ func isHatsPerkActive():
 	var wearer = getWearer()
 	if(wearer == null):
 		return false
-	if(wearer.hasPerk(HK_Perk.GoodAtVisors) && isWornByWearer()):
+	if(wearer.hasPerk(HK_Perk.HATS) && isWornByWearer()):
 		if(HK_CharUtil.isInTrance(wearer)):
-			return true
-		elif(wearer.hasPerk(HK_Perk.VisorMastery) and HK_CharUtil.isHypnotized(wearer)):
 			return true
 	return false	
 	
