@@ -112,6 +112,28 @@ func _run():
 		addButton("Undress", "Do as he orders", "2_undress")
 		addButton("Make me", "Be a brat about it", "2_brat")
 		addButton("RED", "Say this", "2_red")
+	if(state == "2_red"):
+		saynn("[say=pc]Red.[/say]")
+
+		saynn("[say=alexrynard]Aw. Was I asking too much?[/say]")
+
+		saynn("You nod.")
+
+		saynn("[say=alexrynard]Well.. Sorry. This scene might not be for you then.[/say]")
+
+		saynn("Scene? What the heck is he talking about?")
+
+		saynn("Alex notices your confusion.")
+
+		saynn("[say=alexrynard]By scene I mean session. BDSM is not really a.. therapy.. so the word scene makes more sense I feel like.[/say]")
+
+		saynn("Fair enough.")
+
+		saynn("[say=alexrynard]Thank you for stopping me. Let me show you the way out.[/say]")
+
+		saynn("Alex guides you back to the workshop.")
+
+		addButton("Continue", "See what happens next", "endthescene")
 	if(state == "2_brat"):
 		saynn("[say=pc]Make me~.[/say]")
 
@@ -152,9 +174,8 @@ func _run():
 
 		addButton("Stand on it", "Hop on", "3_brat")
 		addButton("Sit on it", "Sit on the sybian", "3_syb")
-		addButton("RED", "Say this", "3_red")
+		addButton("RED", "Say this", "2_red")
 	if(state == "3_brat"):
-		# (( Aw, it's not a footrest?
 		playAnimation(StageScene.SybianOral, "idle", {npc="alexrynard", bodyState={naked=true}})
 		saynn("Rather than sitting.. you stand on top of it! Alex facepalms. He said to hop on, that's his problem.")
 
@@ -188,7 +209,7 @@ func _run():
 
 		addButton("Yes Sir", "Say this", "4_yessir")
 		addButton("TIE ME UP!", "Demand it", "4_brat")
-		addButton("RED", "Say this", "4_red")
+		addButton("RED", "Say this", "2_red")
 	if(state == "3_syb"):
 		playAnimation(StageScene.SybianOral, "idle", {npc="alexrynard", bodyState={naked=true}})
 		saynn("[say=pc]Yes, Sir..[/say]")
@@ -211,7 +232,7 @@ func _run():
 
 		addButton("Yes Sir", "Say this", "4_yessir")
 		addButton("TIE ME UP!", "Demand it", "4_brat")
-		addButton("RED", "Say this", "4_red")
+		addButton("RED", "Say this", "2_red")
 	if(state == "4_brat"):
 		playAnimation(StageScene.SybianOral, "idle", {npc="alexrynard", bodyState={naked=true}})
 		saynn("[say=pc]Nuh! Tie me up right now![/say]")
@@ -262,8 +283,62 @@ func _run():
 		addButton("Like nothing", "Say this", "5_brat")
 		addButton("Feels nice", "Say this", "5_nice")
 		addButton("RED", "Say this", "5_red")
+	if(state == "5_red"):
+		playAnimation(StageScene.Duo, "stand", {npc="alexrynard"})
+		saynn("[say=pc]RED![/say]")
+
+		saynn("Alex instantly turns off the vibrating seat under you and helps you to get up.")
+
+		saynn("[say=alexrynard]Aw. I pushed you too much?[/say]")
+
+		saynn("[say=pc]A little..[/say]")
+
+		saynn("[say=alexrynard]Sorry, these things aren't for everyone, I understand. Thank you for telling me.[/say]")
+
+		saynn("You nod and slowly put your clothes back on.")
+
+		saynn("[say=alexrynard]Wanna cuddle? Just to.. calm down.[/say]")
+
+		addButton("Sure", "Do some casual cuddling", "5_red_cuddle")
+		addButton("Nah", "You'd rather just go", "5_red_go")
+	if(state == "5_red_go"):
+		saynn("[say=pc]I'd rather just go.[/say]")
+
+		saynn("[say=alexrynard]Fair enough, don't let me hold you.[/say]")
+
+		saynn("He guides you back to the workshop.")
+
+		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "5_red_cuddle"):
+		playAnimation(StageScene.Cuddling, "idle", {pc="alexrynard", npc="pc"})
+		saynn("Sure, why the heck not. You agree and Alex pulls you onto the couch to watch some random news on the TV.")
+
+		saynn("[say=alexrynard]Crazy how television has survived for so long, huh?[/say]")
+
+		saynn("[say=pc]So far all I saw was propaganda.[/say]")
+
+		saynn("Alex tilts his head slightly.")
+
+		saynn("[say=alexrynard]Some don't watch it. Some watch it without realizing how manipulative it is. The worst kind is.. people who buy into the fantasy and watch it even though they know the reality..[/say]")
+
+		saynn("[say=pc]Reality is often not pretty.[/say]")
+
+		saynn("[say=alexrynard]Living in your dreams won't get you far.[/say]")
+
+		saynn("[say=pc]Living in reality will get you depressed.[/say]")
+
+		saynn("He hums.")
+
+		saynn("[say=alexrynard]Fair point. There is no real answer then.[/say]")
+
+		saynn("[say=pc]We're screwed no matter what.[/say]")
+
+		saynn("And just like that.. you continue to mindlessly watch the news. Sometimes it's nice to turn off your head and just.. watch.")
+
+		saynn("After that session, Alex brings you back to the workshop.")
+
+		addButton("Continue", "See what happens next", "endthescene")
 	if(state == "5_brat"):
-		# (( He spikes the power and says that it would numb you fast
 		playAnimation(StageScene.SybianOral, "idle", {npc="alexrynard", bodyState={naked=true, hard=true}})
 		saynn("[say=pc]I don't feel anything![/say]")
 
@@ -317,7 +392,7 @@ func _run():
 
 		addButton("Cry!", "Start crying", "6_brat")
 		addButton("Brace", "Prepare for what's to come", "6_brace")
-		addButton("RED", "Say this", "6_red")
+		addButton("RED", "Say this", "5_red")
 	if(state == "5_nice"):
 		playAnimation(StageScene.SybianOral, "idle", {npc="alexrynard", bodyState={naked=true, hard=true}})
 		saynn("[say=pc]Feels nice, Sir..[/say]")
@@ -344,7 +419,7 @@ func _run():
 
 		addButton("Cry!", "Start crying", "6_brat")
 		addButton("Brace", "Prepare for what's to come", "6_brace")
-		addButton("RED", "Say this", "6_red")
+		addButton("RED", "Say this", "5_red")
 	if(state == "6_brat"):
 		playAnimation(StageScene.SybianOral, "ride", {npc="alexrynard", bodyState={naked=true, hard=true}})
 		if (GM.pc.isBlindfolded()):
@@ -389,7 +464,7 @@ func _run():
 
 		addButton("Moan", "Let it all out", "7_moan")
 		addButton("Hold them", "Stay quiet for as long as you can", "7_brat")
-		addButton("RED!", "Say this", "7_red")
+		addButton("RED!", "Say this", "5_red")
 	if(state == "6_brace"):
 		playAnimation(StageScene.SybianOral, "ride", {npc="alexrynard", bodyState={naked=true, hard=true}})
 		saynn("Seems like something is gonna happen.. so you brace, all your muscles tense up.")
@@ -418,7 +493,7 @@ func _run():
 
 		addButton("Moan", "Let it all out", "7_moan")
 		addButton("Hold them", "Stay quiet for as long as you can", "7_brat")
-		addButton("RED!", "Say this", "7_red")
+		addButton("RED!", "Say this", "5_red")
 	if(state == "7_brat"):
 		saynn("You're not gonna give him the satisfaction of hearing you moan! Or seeing you squirm and drool. No way. You do your best, trying to focus on something else.. On how cute Alex is!")
 
@@ -471,6 +546,38 @@ func _run():
 		addButton("Just cum!", "You're not gonna let him humiliate you!", "8_brat")
 		addButton("Beg for it", "Humiliate yourself!", "8_beg")
 		addButton("RED!", "Say it", "8_red")
+	if(state == "8_red"):
+		playAnimation(StageScene.SybianOral, "idle", {npc="alexrynard", bodyState={naked=true, hard=true}})
+		saynn("[say=pc]..R-Rred..[/say]")
+
+		saynn("Alex instantly turns off the machine as soon as he hears that.")
+
+		saynn("[say=alexrynard]Sorry, that might have been too much. Humiliation is a tricky topic.[/say]")
+
+		saynn("Your orgasm starts to slowly fade away.. but at least you didn't have to beg.")
+
+		saynn("[say=alexrynard]We're cuddling though, okay? I'm not leaving you while you're feeling down.[/say]")
+
+		addButton("Continue", "See what happens next", "8_red_cuddle")
+	if(state == "8_red_cuddle"):
+		playAnimation(StageScene.Cuddling, "idle", {pc="alexrynard", npc="pc", npcBodyState={naked=true}})
+		saynn("And so he pulls you onto the sofa to watch some random news on the TV.")
+
+		saynn("[say=alexrynard]There you go. Just relax.[/say]")
+
+		saynn("You nod and just try your best to calm down.")
+
+		saynn("[say=alexrynard]We're all different. And that's okay. Life is a coop game, we should respect each other.[/say]")
+
+		saynn("Sometimes it feels like someone switched the game mode to deathmatch though..")
+
+		saynn("[say=alexrynard]Just know that I'm not humiliating or degrading out of malice. I'm just.. pulling on strings.. you know?[/say]")
+
+		saynn("Fair enough. You both stay quiet from that point, just enjoying the mindless activity.")
+
+		saynn("Feels nice to reset your brain. He helps you to get back to the workshop after that.")
+
+		addButton("Continue", "See what happens next", "endthescene")
 	if(state == "8_brat"):
 		playAnimation(StageScene.SybianOral, "hold", {npc="alexrynard", bodyState={naked=true, hard=true}})
 		saynn("No, you're not gonna humiliate yourself by begging, you will just cum without telling him!")
@@ -614,6 +721,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "9_rest")
 	if(state == "9_rest"):
+		setFlag("AlexRynardModule.2TrustCompleted", true)
 		playAnimation(StageScene.SybianOral, "idle", {npc="alexrynard", bodyState={naked=true, hard=true}})
 		saynn("Alex gradually turns off the sybian, giving you a chance to catch your breath.")
 
@@ -1019,6 +1127,9 @@ func _react(_action: String, _args):
 	if(_action == "5_brat"):
 		bratCounter += 1
 
+	if(_action == "5_red_cuddle"):
+		processTime(10*60)
+
 	if(_action == "6_brat"):
 		bratCounter += 1
 
@@ -1030,6 +1141,9 @@ func _react(_action: String, _args):
 
 	if(_action == "8_beg"):
 		GM.pc.orgasmFrom("alexrynard")
+
+	if(_action == "8_red_cuddle"):
+		processTime(10*60)
 
 	if(_action == "8_brat_cum"):
 		GM.pc.orgasmFrom("alexrynard")

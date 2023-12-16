@@ -18,6 +18,9 @@ func getFlags():
 		"ch2SkippedBackstory": flag(FlagType.Bool),
 		
 		"1TrustCompleted": flag(FlagType.Bool),
+		"2TrustCompleted": flag(FlagType.Bool),
+		"3TrustCompleted": flag(FlagType.Bool),
+		"4TrustCompleted": flag(FlagType.Bool),
 	}
 
 func _init():

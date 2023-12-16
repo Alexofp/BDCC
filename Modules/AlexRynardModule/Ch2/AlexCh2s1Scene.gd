@@ -1190,11 +1190,11 @@ func _run():
 	if(state == "time7_computer_presslogo"):
 		saynn("You press on the AlphaCorp logo.. but nothing happened this time.")
 
-		addButton("Continue", "See what happens next", "time7_computer_mainmenu")
+		addButton("Continue", "See what happens next", "time7_computer_aboutmenu")
 	if(state == "time7_computer_easteregg"):
-		saynn("You press the AlphaCorp again.. and something happens. The screen suddenly starts displaying jumping foxies.")
+		saynn("You press on the AlphaCorp logo again.. and something happens. The screen suddenly starts displaying jumping foxies.")
 
-		saynn("[font=res://Fonts/smallconsolefont.tres]"+Util.readFile("res://Images/asciiporn/alexrynardquest/fox.txt").replace("\\","\\\\")+"[/font]")
+		saynn("[console speed=10][font=res://Fonts/smallconsolefont.tres]"+Util.readFile("res://Images/asciiporn/alexrynardquest/fox.txt").replace("\\","\\\\")+"[/font][/console]")
 
 		saynn("Seems like a cute little easter egg.")
 
@@ -1496,7 +1496,6 @@ func _react(_action: String, _args):
 
 	if(_action == "time1_notcrazy"):
 		processTime(30*60)
-		addMessage("Trust Exercise 1 is now available")
 
 	if(_action == "time1_useme"):
 		processTime(30*60)
@@ -1507,6 +1506,9 @@ func _react(_action: String, _args):
 		addMessage("1 credit added to you")
 
 	if(_action == "time1_agreetoit"):
+		addMessage("Trust Exercise 1 is now available")
+
+	if(_action == "time1_notsosure"):
 		addMessage("Trust Exercise 1 is now available")
 
 	if(_action == "time2_alexfalls"):
