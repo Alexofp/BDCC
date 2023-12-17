@@ -23,8 +23,10 @@ func _run():
 			addDisabledButton("Discount", "Learn more for this topic")
 		elif(getFlag("HypnokinkModule.FreebieSessionSample", false)):
 			addDisabledButton("Discount", "The first one is free")
-		elif(getFlag("HypnokinkModule.OnTheHouseSessions", 0) > 0):
+		elif(getFlag("HypnokinkModule.RushSubdued", false)):
 			addButton("Discount", "Ask about session prices", "discount_onthehouse")
+		elif(getFlag("HypnokinkModule.OnTheHouseSessions", 0) > 0):
+			addButton("Discount", "Ask about session prices", "discount_onthehouse_temporary")
 		elif(not getFlag("HypnokinkModule.KnowAboutRush", false)):
 			addButton("Discount", "Ask about session prices", "discount_rush_intro")
 		else:
@@ -233,6 +235,12 @@ func _run():
 		saynn("[say=pc]How much will this cost me?[/say]")
 		
 		saynn("[say=Vion]For you? Sessions are on the house.[/say]")
+		
+		addButton("Back", "", "")
+	if(state == "discount_onthehouse_temporary"):
+		saynn("[say=pc]How much will this cost me?[/say]")
+		
+		saynn("[say=HK_Vion]For you? Sessions are on the house, at least until Rush bothers me again.[/say]")
 		
 		addButton("Back", "", "")
 		

@@ -11,7 +11,7 @@ func getVisibleDescription():
 	return "You've learned a set of short, relaxing mantras."
 	
 func getMoreDescription():
-	return "Reduces the penalties of being hypnotized by 10%.\n\nYou gain an ability to regain stamina up to half of your hypnosis level.\nUsable once per combat."
+	return "Reduces the penalties of being hypnotized by 10%.\n\nYou gain an ability to regain an amount of stamina depending on how hypnotized you currently are.\nUsable once per combat."
 
 func getSkillTier():
 	return 0

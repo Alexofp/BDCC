@@ -233,7 +233,14 @@ func _react(_action: String, _args):
 			HypnokinkUtil.changeSuggestibilityBy(GM.pc, RNG.randi_range(1,3))
 			processTime(1 * 60)
 			path.remove(0)
-		setState("arrive")
+		if(!headingBack):
+			setState("arrive")
+			aimCamera(endLocation)
+			GM.pc.setLocation(endLocation)
+		else:
+			setState("return")
+			aimCamera(startLocation)
+			GM.pc.setLocation(startLocation)
 		return
 	
 	if(_action == "moving_towards"):

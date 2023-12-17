@@ -76,13 +76,13 @@ func reactToCommandLocalhost(_command: String, _args:Array, _commandStringRaw:St
 	return "Error, unknown command. Use 'help' to list all available commands"
 	
 const memPosMap = {
-			"unlock": "[6,8] (6 bytes read)",
-			"disconnect": "[4,16] (11 bytes read)",
-			"monitor": "[8,0] (171 bytes read)",
-			"help": "[17,4] (79 bytes read)",
+			"unlock": "[6,8] (5+1 bytes read)",
+			"disconnect": "[4,16] (10+1 bytes read)",
+			"monitor": "[8,0] (170+1 bytes read)",
+			"help": "[17,4] (78+1 bytes read)",
 		}
 
-const NI = "[color=#FFFF00]0[/color]"
+const NI = "[color=#FFFF00]|[/color]"
 const CR = "[color=#FFAAAA]¬[/color]"
 
 func reactToCommandCage(_command: String, _args:Array, _commandStringRaw:String):

@@ -256,8 +256,10 @@ func _run():
 		addButton("Leave", "", "endthescene")
 		
 	if(state == "if_won_serious"):
+		saynn("Rush finally goes down. For a second, it looks like he might manage to drag himself up again, but then his hands go out from under him and he collapses, out like a light. You waste no time clamping your cuffs on him.")
 		
-		addButton("Heave", "Better get moving", "drag_rush")
+		addButton("Drag him", "Better get moving", "drag_rush")
+		addButton("Leave", "Actually, maybe not", "endthescene")
 		
 	if(state == "if_lost_serious"):
 		playAnimation(StageScene.Rekt, "kill", {pc="Rush", npc="pc"})
