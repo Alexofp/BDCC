@@ -9,6 +9,7 @@ func getFlags():
 		
 		"GotEngineeringFreebieVisor": flag(FlagType.Bool),
 		
+		"DidVionGlance": flag(FlagType.Bool),
 		"DidVionIntroduction": flag(FlagType.Bool),
 		
 		"VionTopicKnown_NoSex": flag(FlagType.Bool),
@@ -67,6 +68,7 @@ func _init():
 		"res://Modules/HypnokinkModule/Scenes/HK_RushRepeatConversation.gd",
 		"res://Modules/HypnokinkModule/Scenes/HK_VionSolvesRush.gd",
 		
+		"res://Modules/HypnokinkModule/Scenes/HK_VionGlance.gd",
 		"res://Modules/HypnokinkModule/Scenes/HK_VionIntroduction.gd",
 		"res://Modules/HypnokinkModule/Scenes/HK_VionRepeatConversation.gd",
 		"res://Modules/HypnokinkModule/Scenes/HK_VionSessionSelect.gd",
@@ -113,7 +115,8 @@ func _init():
 		"res://Modules/HypnokinkModule/Events/HK_HypnoEncounterInmateEvent.gd",
 		"res://Modules/HypnokinkModule/Events/HK_HypnoEncounterStartEvent.gd",
 		
-		"res://Modules/HypnokinkModule/Events/HK_EngineeringFindEvent.gd"
+		"res://Modules/HypnokinkModule/Events/HK_EngineeringFindEvent.gd",
+		"res://Modules/HypnokinkModule/Events/HK_VionGlanceEvent.gd"
 	]
 	quests = [
 		"res://Modules/HypnokinkModule/Quests/HK_DealingWithRush.gd"

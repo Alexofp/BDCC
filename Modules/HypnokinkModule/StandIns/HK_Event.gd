@@ -8,3 +8,5 @@ const HypnoEncounterInmate = "HK_HypnoEncounterInmateEvent"
 const HypnoEncounterStart = "HK_HypnoEncounterStartEvent"
 
 const EngineeringFind = "HK_EngineeringFind"
+
+const VionGlanceEvent = "HK_VionGlanceEvent"
