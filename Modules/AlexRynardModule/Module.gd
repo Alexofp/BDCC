@@ -41,6 +41,7 @@ func _init():
 		"res://Modules/AlexRynardModule/Trust/AlexTrustExercisesMenuScene.gd",
 		"res://Modules/AlexRynardModule/Trust/AlexTrustExercise1Scene.gd",
 		"res://Modules/AlexRynardModule/Trust/AlexTrustExercise2Scene.gd",
+		"res://Modules/AlexRynardModule/Trust/AlexTrustExercise3Scene.gd",
 	]
 	characters = [
 		"res://Modules/AlexRynardModule/Ch2/BackstoryChars/AlexRynardYoung.gd",
