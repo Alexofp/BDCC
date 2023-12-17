@@ -42,7 +42,7 @@ func isHatsPerkActive():
 	var wearer = getWearer()
 	if(wearer == null):
 		return false
-	if(wearer.hasPerk(Perk.HATS) && isWornByWearer()):
+	if(wearer.hasPerk(Perk.HypnosisHATS) && isWornByWearer()):
 		if(HypnokinkUtil.isInTrance(wearer)):
 			return true
 	return false
