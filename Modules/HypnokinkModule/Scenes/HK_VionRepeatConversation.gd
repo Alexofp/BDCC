@@ -240,7 +240,7 @@ func _run():
 	if(state == "discount_onthehouse_temporary"):
 		saynn("[say=pc]How much will this cost me?[/say]")
 		
-		saynn("[say=HK_Vion]For you? Sessions are on the house, at least until Rush bothers me again.[/say]")
+		saynn("[say=Vion]For you? Sessions are on the house, at least until Rush bothers me again.[/say]")
 		
 		addButton("Back", "", "")
 		

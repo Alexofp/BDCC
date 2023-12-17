@@ -1,15 +1,15 @@
 extends SceneBase
 
 func _init():
-	sceneID = "HK_VionGlance"
+	sceneID = "VionGlance"
 
 func _run():
 	if(state == ""):
-		addCharacter("HK_Vion")
+		addCharacter("Vion")
 		playAnimation(StageScene.Duo, "stand", {npc="HK_Vion", npcAction="walk", flipNPC= true, further=true})
 		saynn("Out the corner of your eye, a glint of light catches your attention. You look around for its source, and spot a lilac inmate wearing a pair of old-fashioned glasses that must have reflected the ceiling lights. Who wears glasses anymore? He's talking to another inmate about something.")
 
-		saynn("[say=HK_Vion]...and if you want a refresher, do not hesitate to visit. I spend as much time as possible in my cell these days anyway, and I won't mind the company.[/say]")
+		saynn("[say=Vion]...and if you want a refresher, do not hesitate to visit. I spend as much time as possible in my cell these days anyway, and I won't mind the company.[/say]")
 		
 		saynn("True to his word, now that his business is concluded he makes haste in the direction of the cellblocks.")
 

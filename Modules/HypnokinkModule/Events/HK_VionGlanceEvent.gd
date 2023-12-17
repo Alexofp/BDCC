@@ -1,7 +1,7 @@
 extends EventBase
 
 func _init():
-	id = HK_Event.VionGlanceEvent
+	id = "VionGlanceEvent"
 
 func registerTriggers(es):
 	es.addTrigger(self, Trigger.EnteringRoom)
@@ -16,7 +16,7 @@ func react(_triggerID, _args):
 		var baseChance = 5
 		
 		if(RNG.chance(baseChance)):
-			runScene("HK_VionGlance")
+			runScene("VionGlance")
 
 		return false
 
