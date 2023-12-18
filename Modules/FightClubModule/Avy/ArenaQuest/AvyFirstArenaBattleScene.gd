@@ -515,7 +515,7 @@ func _react(_action: String, _args):
 	if(_action == "fukd_anus_faster"):
 		processTime(3*60)
 		GM.pc.doPainfullyStretchHole(BodypartSlot.Anus, "avy")
-		GM.pc.gotVaginaAnusBy("avy")
+		GM.pc.gotAnusFuckedBy("avy")
 		GM.pc.orgasmFrom("avy")
 
 	if(_action == "fukd_anus_cuminside"):
