@@ -192,9 +192,32 @@ func _run():
 
 		addButton("Continue", "See what happens next", "endthescene")
 	if(state == "1_brat"):
-		# ((Alex makes the machine take off your clothes with its manipulators
-		saynn("asd")
+		playAnimation(StageScene.Duo, "stand", {npc="alexrynard", bodyState={naked=true}})
+		saynn("[say=pc]Make me~.[/say]")
 
+		saynn("You refuse to undress, wondering what he would do then.")
+
+		saynn("[say=alexrynard]Why would I make you..[/say]")
+
+		saynn("Aww, is he surrendering already?")
+
+		saynn("[say=alexrynard]When I can just do this.[/say]")
+
+		saynn("He pressed some buttons on the computer, causing the table's manipulators to suddenly reach out for your clothes! They {pc.undressMessage}, leaving you completely naked for him!")
+
+		saynn("[say=pc]HEY! Not fair! Give it back![/say]")
+
+		saynn("He chuckles. You try to free your belongings from the mechanical claws.. but with such grip you can only tear your clothes apart.")
+
+		saynn("[say=alexrynard]Make me.[/say]")
+
+		saynn("You pout and cover yourself.")
+
+		saynn("[say=alexrynard]Now.. just stand still.[/say]")
+
+		addButton("RUN!", "You're never gonna listen to what he says", "2_brat")
+		addButton("Stay still", "Do as he says", "2_stay")
+		addButton("RED", "Say this", "2_red")
 	if(state == "1_yessir"):
 		playAnimation(StageScene.Duo, "stand", {npc="alexrynard", bodyState={naked=true}})
 		saynn("[say=pc]Yes, Sir.[/say]")
@@ -213,10 +236,42 @@ func _run():
 		addButton("Stay still", "Do as he says", "2_stay")
 		addButton("RED", "Say this", "2_red")
 	if(state == "2_brat"):
-		saynn("(Machine grabs you")
+		playAnimation(StageScene.BDSMMachineFuck, "tease", {bodyState={naked=true}})
+		saynn("Of course you're not gonna listen to him! The first thing you do when he tells you to stay still is RUN!")
 
-		saynn("asd")
+		saynn("But as you try to escape, you feel something grabbing you by the collar and yanking back! Ow! You gasp as the mechanical grip chokes your throat, pulling you back to the machine.")
 
+		saynn("[say=pc]H-h-hh!..[/say]")
+
+		saynn("[say=alexrynard]Nope, not so fast.[/say]")
+
+		saynn("He smiles as you get pulled past him.")
+
+		saynn("[say=pc]Bitch..[/say]")
+
+		saynn("[say=alexrynard]Don't tell me you expected something else.[/say]")
+
+		saynn("[say=pc]Maybe I expected more![/say]")
+
+		saynn("[say=alexrynard]More choking? Wow, I didn't know you're so slutty.[/say]")
+
+		saynn("As you try to flail and reach him, more manipulators suddenly catch your limbs and use them to lift your {pc.masc} body off the floor. They carefully bring you onto the table and spread your legs, putting your {pc.privates} out on display.. Kinky..")
+
+		saynn("[say=pc]H-hey![/say]")
+
+		saynn("[say=alexrynard]My old inverse kinematics code still works, nice. Not too tight, is it?[/say]")
+
+		saynn("You try to pull against the manipulators.. but they don't give. All you're doing is making the motors whirl louder to counteract your efforts. Makes you feel.. so much less in control.. kinda nice.")
+
+		saynn("[say=pc]I can't move a limb..[/say]")
+
+		saynn("[say=alexrynard]Good. Now.. how mean should I be with you..[/say]")
+
+		saynn("You look down.. and see a machine with a variety of 'tools' sticking out.")
+
+		addButton("His choice", "It's for him to decide", "3_hischoice")
+		addButton("Extra mean!", "Do your worst!", "3_brat")
+		addButton("RED", "Say this", "3_red")
 	if(state == "2_stay"):
 		playAnimation(StageScene.BDSMMachineFuck, "tease", {bodyState={naked=true}})
 		saynn("You do as he says. Which is.. nothing.")
@@ -243,8 +298,86 @@ func _run():
 		addButton("Extra mean!", "Do your worst!", "3_brat")
 		addButton("RED", "Say this", "3_red")
 	if(state == "3_brat"):
-		saynn("(The machine edges you and then denies you")
+		playAnimation(StageScene.BDSMMachineFuck, "wand", {bodyState={naked=true, hard=true}})
+		saynn("[say=pc]As mean as you can! I doubt it's that much, you soft fox.[/say]")
 
+		saynn("He doesn't say anything back, he just puts on a cunning smirk.")
+
+		if (GM.pc.hasReachableVagina()):
+			saynn("He presses a button on the screen.. and the machine starts extending one of its tools.. a wand. Its soft sphere finds your dry {pc.pussyStretch} pussy lips.. before proceeding to vibrate against them!")
+
+		else:
+			saynn("He presses a button on the screen.. and the machine starts extending one of its tools.. a wand. Its soft sphere finds a certain area above the anus.. your taint.. before proceeding to vibrate against it! You wouldn't think so but that exact spot turns out to be quite sensitive..")
+
+		saynn("[say=pc]Ah..[/say]")
+
+		if (GM.pc.isWearingChastityCage()):
+			saynn("Even though it's not directly pressed against your cage, your balls do get stimulated from the vibrations.. which causes your cock to start growing.. Well, try to.")
+
+		elif (GM.pc.hasReachablePenis()):
+			saynn("Even though it's not directly pressed against your cock, your balls do get stimulated from the vibrations.. which causes your member to start getting harder..")
+
+		if (GM.pc.hasReachableVagina()):
+			saynn("It feels nice.. but you can't even squirm much.. you're completely helpless against this machine. The vibrations are causing your pussy to quickly start getting wet and drippy, your clit being stimulated makes you moan and pant.")
+
+			saynn("Quite soon, you already begin to feel your peak approaching.. Your wet drippy pussy is twitching fast.. But just before you can cum, the wand suddenly slows down to a crawl, denying you that orgasm.")
+
+			saynn("[say=pc]Hey-y-y..[/say]")
+
+			saynn("Your body cools down.. and the wand starts vibrating faster against your pussy again, bringing you lots of pleasure. Cute moans escape from you.. but just when you were about to cum, the wand denies you the pleasure again!")
+
+			saynn("[say=pc]F-fuck.. Let me.. already..[/say]")
+
+			saynn("Alex smiles wide, clearly enjoying this.. You can't let him do this..")
+
+			saynn("When the wand starts to vibrate again, you do your best to try to cover up how aroused you are.. You close your mouth and keep all the moans inside, just humming instead. Yes, it seems to work, the orgasm is so close..")
+
+			saynn("It's so.. it's right there, you can feel it.. you can feel the edge.. Please.. Your body is shivering and squirming hard against the manipulators, your pussy twitching more and more.. but no orgasm comes.. The machine keeps edging you, making you oh so desperate..")
+
+			saynn("[say=alexrynard]Am I soft?[/say]")
+
+			saynn("[say=pc]You.. Fox!.. Not..[/say]")
+
+			saynn("[say=alexrynard]Not what?[/say]")
+
+			saynn("[say=pc]Ple-e-e-ease.. You're not soft! You're not![/say]")
+
+			saynn("Every nerve in your body wants to cum.. but you can't.. the mean foxy is keeping you nice and horny for quite some time.. while your mind is being assaulted by an ungodly amount of pleasure..")
+
+		else:
+			saynn("It feels nice.. but you can't even squirm much.. you're completely helpless against this machine. The vibrations are causing your cute asshole to start clenching around nothing, your taint being stimulated makes you moan and pant.")
+
+			saynn("Quite soon, you already begin to feel your peak approaching.. Your needy asshole is twitching fast.. But just before you can cum, the wand suddenly slows down to a crawl, denying you that orgasm.")
+
+			saynn("[say=pc]Hey-y-y..[/say]")
+
+			saynn("Your body cools down.. and the wand starts vibrating faster against your taint again, bringing you lots of pleasure. Cute moans escape from you.. but just when you were about to cum, the wand denies you the pleasure again!")
+
+			saynn("[say=pc]F-fuck.. Let me.. already..[/say]")
+
+			saynn("Alex smiles wide, clearly enjoying this.. You can't let him do this..")
+
+			saynn("When the wand starts to vibrate again, you do your best to try to cover up how aroused you are.. You close your mouth and keep all the moans inside, just humming instead. Yes, it seems to work, the orgasm is so close..")
+
+			saynn("It's so.. it's right there, you can feel it.. you can feel the edge.. Please.. Your body is shivering and squirming hard against the manipulators, your tailhole twitching more and more.. but no orgasm comes.. The machine keeps edging you, making you oh so desperate..")
+
+			saynn("[say=alexrynard]Am I soft?[/say]")
+
+			saynn("[say=pc]You.. Fox!.. Not..[/say]")
+
+			saynn("[say=alexrynard]Not what?[/say]")
+
+			saynn("[say=pc]Ple-e-e-ease.. You're not soft! You're not![/say]")
+
+			saynn("Every nerve in your body wants to cum.. but you can't.. the mean foxy is keeping you nice and horny for quite some time.. while your mind is being assaulted by an ungodly amount of pleasure..")
+
+		saynn("[say=pc]Ah.. Ah-h..[/say]")
+
+		saynn("[say=alexrynard]So needy. Let's do something else.[/say]")
+
+		saynn("The wand between your legs starts to slow down, stealing the desired orgasm.. so rude..")
+
+		addButton("Continue", "See what happens next", "4")
 	if(state == "3_hischoice"):
 		playAnimation(StageScene.BDSMMachineFuck, "wand", {bodyState={naked=true, hard=true}})
 		saynn("[say=pc]It's your choice, Sir..[/say]")
@@ -297,6 +430,49 @@ func _run():
 		addButton("Aa-ah", "Say it", "4_aah")
 		addButton("Stay silent!", "Not say anything", "4_brat")
 		addButton("RED", "Say this", "4_red")
+	if(state == "4_brat"):
+		playAnimation(StageScene.BDSMMachineAltFuck, "tease", {bodyState={naked=true, hard=true}})
+		saynn("Nope, you're not saying anything! You hold your lips closed shut and Alex notices that.")
+
+		saynn("[say=alexrynard]C'mon, it's just some rubber.[/say]")
+
+		saynn("He approaches you, his hand lands on your cheek and gently caresses it.")
+
+		saynn("[say=alexrynard]No?[/say]")
+
+		saynn("You shake your head.")
+
+		saynn("[say=alexrynard]Your slutty moans are gonna alert all the nurses. Do you want that?[/say]")
+
+		saynn("Now you're definitely not obeying his words.. Alex smirks and starts caressing the curves of your back instead, gently kneading your shoulders and shoulder-plates. His digits slowly slowly lower.. until suddenly smacking your ass hard!")
+
+		saynn("[say=pc]AGH![/say]")
+
+		saynn("As soon as this cry escapes your lips, a shiny red ball slides past your lips, sealing them. Alex quickly secures the rest of the head harness around your head.")
+
+		saynn("[say=alexrynard]Got you~.[/say]")
+
+		saynn("You.. glare.. at him.. while drooling actively.")
+
+		saynn("[say=alexrynard]Obviously, you can't talk anymore  so we will have to come up with a new safeword.[/say]")
+
+		saynn("He also produces a leather blindfold and secures it around your eyes, stealing your sense of sight.")
+
+		saynn("[say=alexrynard]I want you to focus. This will help.[/say]")
+
+		saynn("There is not much to focus on at the moment.. but you feel like this will change very soon.")
+
+		saynn("[say=alexrynard]For your new safeword.. huh.. you can't move your arms either.[/say]")
+
+		saynn("His palm lands on your back again, casually sliding over your curves.. going from your shoulders down and over your {pc.thick} butt.. threatening to spank you again but never actually doing it.")
+
+		saynn("[say=alexrynard]Right, you can still use your fingers at least. Let's say.. If I see a Peace sign, I stop everything. Ready?[/say]")
+
+		saynn("Peace sign.. why peace sign..")
+
+		addButton("Thumbs up", "Show Alex the thumbs up", "5_thumbsup")
+		addButton("Middle finger", "Show Alex the middle finger", "5_brat")
+		addButton("Peace sign", "Show Alex the peace sign", "5_red")
 	if(state == "4_aah"):
 		playAnimation(StageScene.BDSMMachineAltFuck, "tease", {bodyState={naked=true, hard=true}})
 		saynn("[say=pc]Aa-a..[/say]")
@@ -322,6 +498,40 @@ func _run():
 		addButton("Thumbs up", "Show Alex the thumbs up", "5_thumbsup")
 		addButton("Middle finger", "Show Alex the middle finger", "5_brat")
 		addButton("Peace sign", "Show Alex the peace sign", "5_red")
+	if(state == "5_brat"):
+		playAnimation(StageScene.BDSMMachineAltFuck, "inside", {bodyState={naked=true, hard=true}})
+		saynn("You don't exactly know where Alex is right now.. so you show your middle finger to the whole room.")
+
+		saynn("[say=alexrynard]Hah. Be careful what you wish for.[/say]")
+
+		saynn("And then he is silent.. It's so scary.. not knowing what will happen next.")
+
+		if (GM.pc.hasReachableVagina()):
+			saynn("Suddenly you hear a beep.. and then a mechanical noise behind you. One of the.. tools.. finds your butt.. and starts prodding your holes!")
+
+			saynn("[say=pc]Ah..[/say]")
+
+			saynn("Eventually it settles on your pussy, the round pre-lubed tip carefully spreading your petals.. before sliding inside fast! So cold! But also.. so full.")
+
+		else:
+			saynn("Suddenly you hear a beep.. and then a mechanical noise behind you. One of the.. tools.. finds your butt.. and starts prodding it in various spots!")
+
+			saynn("[say=pc]Ah..[/say]")
+
+			saynn("Eventually it stumbles upon your {pc.analStretch} tailhole, the round pre-lubed tip carefully spreading your star.. before sliding inside fast! So cold! But also.. so full.")
+
+		if (GM.pc.isWearingChastityCage()):
+			saynn("The tool easily finds your "+str("g-spot" if GM.pc.hasReachableVagina() else "prostate")+" and puts pressure on it, causing your locked up cock to react instantly, getting hard in its cage.")
+
+		elif (GM.pc.hasReachablePenis()):
+			saynn("The tool easily finds your "+str("g-spot" if GM.pc.hasReachableVagina() else "prostate")+" and puts pressure on it, causing your {pc.penis} to react instantly, getting hard and leaking pre.")
+
+		saynn("[say=alexrynard]I will be quiet. I will let you enjoy this. But I'm still looking at your hands.[/say]")
+
+		saynn("So nice of him..")
+
+		addButton("Continue", "See what happens next", "6")
+		addButton("Peace sign", "Show a peace sign with your hand", "5_red")
 	if(state == "5_thumbsup"):
 		playAnimation(StageScene.BDSMMachineAltFuck, "inside", {bodyState={naked=true, hard=true}})
 		saynn("You don't exactly know where Alex is anymore.. so you just show a thumbs up to darkness.")
@@ -465,6 +675,149 @@ func _run():
 		saynn("After that, Alex helps you to get back to the medical lobby..")
 
 		addButton("Continue", "See what happens next", "gobacktolobby")
+	if(state == "8_brat"):
+		playAnimation(StageScene.BDSMMachineAltFuck, "tease", {bodyState={naked=true, hard=true}})
+		saynn("You decide to show a middle finger to the darkness instead.. That will end right?")
+
+		saynn("[say=alexrynard]Right. Still got some fight in you?[/say]")
+
+		saynn("Alex presses something that causes the machine to retract the dildo-shaped tool from your "+str("pussy" if GM.pc.hasReachableVagina() else "ass")+".. Did you win? That was easy.")
+
+		saynn("Wait, why did the mechanical noise behind you doubled..")
+
+		addButton("Continue", "See what happens next", "9")
+	if(state == "9"):
+		playAnimation(StageScene.BDSMMachineAltFuck, "sexdouble", {bodyState={naked=true, hard=true}})
+		if (GM.pc.hasReachableVagina()):
+			saynn("You gasp when the same dildo finds your pussy again and brushes itself against your sensitive lips.. but at the same time.. a second one aligns itself with your {pc.analStretch} ass, prodding it!")
+
+			saynn("You hear a beep and then produce a muffled cry of passion as both of them penetrate your holes at the same time! They don't stop there, the dildos get almost pulled out before a new thrust makes you moan again, your body squeezing the both intruding objects tightly..")
+
+			saynn("[say=alexrynard]Wow, look at you.[/say]")
+
+			saynn("[say=pc]MHHmh-H!..[/say]")
+
+			saynn("You can't.. you can't do anything while your holes are being fucked at a robotic pace, their pre-lubed surface allows them to ram themselves deep inside, pushing on all your buttons.")
+
+			if (GM.pc.isWearingChastityCage()):
+				saynn("Both, your g-spot and your prostate are being stimulated, causing your poor caged up cock to leak a steady stream of your {pc.cum}, your body being milked of all of its fluids.")
+
+			elif (GM.pc.hasReachablePenis()):
+				saynn("Both, your g-spot and your prostate are being stimulated, causing your {pc.penis} to start leaking a steady stream of your {pc.cum}, your body being milked of all of its fluids.")
+
+			saynn("Soon, the next orgasm overwhelms you, your body thrashing against the unmovable manipulators, your muffled moans mixing with the load whirling of many motors working to keep your body still and double-penetrated at all times.")
+
+		else:
+			saynn("You gasp when the same dildo finds your ass again and brushes itself against your stuffed star.. but at the same time.. a second one aligns itself with the same hole.. oh no..")
+
+			saynn("You hear a beep and then produce a muffled cry of passion as both of them penetrate your {pc.analStretch} asshole at the same time! They don't stop there, the dildos get almost pulled out before a new thrust makes you moan again, your body squeezing the both intruding objects tightly, your anal ring stretched beyond what looks natural..")
+
+			saynn("[say=alexrynard]Wow, look at you.[/say]")
+
+			saynn("[say=pc]MHHmh-H!..[/say]")
+
+			saynn("You can't.. you can't do anything while your hole is being fucked at a robotic pace, their pre-lubed surface allows them to ram themselves deep inside, pushing on all your buttons.")
+
+			if (GM.pc.isWearingChastityCage()):
+				saynn("Your prostate is being stimulated hard, causing your poor caged up cock to leak a steady stream of your {pc.cum}, your body being milked of all of its fluids.")
+
+			elif (GM.pc.hasReachablePenis()):
+				saynn("Your prostate is being stimulated hard, causing your {pc.penis} to start leaking a steady stream of your {pc.cum}, your body being milked of all of its fluids.")
+
+			saynn("Soon, the next orgasm overwhelms you, your body thrashing against the unmovable manipulators, your muffled moans mixing with the load whirling of many motors working to keep your body still and double-penetrated at all times.")
+
+		saynn("All your muscles seize up.. meaning you can't even show a peace sign anymore.. oh no..")
+
+		addButton("Continue", "See what happens next", "9_fast")
+	if(state == "9_fast"):
+		playAnimation(StageScene.BDSMMachineAltFuck, "fastdouble", {bodyState={naked=true, hard=true}})
+		if (GM.pc.hasReachableVagina()):
+			saynn("They didn't stop after your orgasm, no, the two dildos only began to fuck your holes faster, their relentless rhythm is quickly overstimulating your pussy to start gushing fluids all over the table again, your anus clenching around the second one at the same time.")
+
+			saynn("[say=pc]MHH-hh-hH!.. Mh-h..[/say]")
+
+			saynn("[say=alexrynard]I hear a happy brat.[/say]")
+
+			saynn("He is not wrong.. and yet.. your mind is flooded with immense amounts of pleasure, your gagged mouth is drooling, your lusty eyes are shaky under the blindfold.")
+
+			if (GM.pc.hasPenis()):
+				saynn("The dildos just keep fucking your holes.. forcing one orgasm after another.. Your {pc.penis} doesn't even shoot its seed anymore, just occasional little dribbles.. while the balls are tensing up non-stop.")
+
+			else:
+				saynn("The dildos just keep fucking your holes.. forcing one orgasm after another.. giving you exactly zero time to recover.")
+
+			saynn("At some point your mind starts to slip.. Each new wave of ecstasy combining in with the previous one, corrupting all your thoughts.. A passionate muffled moan escapes from you when the dildos start pumping your cunt and your ass full of that healing gel, quickly causing your belly to start looking bumpy.")
+
+		else:
+			saynn("They didn't stop after your orgasm, no, the two dildos only began to fuck your tailhole, their relentless rhythm is quickly overstimulating you to the point of your tailhole twitching and clenching with each pulse.")
+
+			saynn("[say=pc]MHH-hh-hH!.. Mh-h..[/say]")
+
+			saynn("[say=alexrynard]I hear a happy brat.[/say]")
+
+			saynn("He is not wrong.. and yet.. your mind is flooded with immense amounts of pleasure, your gagged mouth is drooling, your lusty eyes are shaky under the blindfold.")
+
+			if (GM.pc.hasPenis()):
+				saynn("The dildos just keep fucking your fuckhole.. forcing one orgasm after another.. Your {pc.penis} doesn't even shoot its seed anymore, just occasional little dribbles.. while the balls are tensing up non-stop.")
+
+			else:
+				saynn("The dildos just keep fucking your fuckhole.. forcing one orgasm after another.. giving you exactly zero time to recover.")
+
+			saynn("At some point your mind starts to slip.. Each new wave of ecstasy combining in with the previous one, corrupting all your thoughts.. A passionate muffled moan escapes from you when the dildos start pumping your ass full of that healing gel, quickly causing your belly to start looking all bumpy.")
+
+		saynn("Your eyes roll up, your tongue drooly, the digits on your both hands forming peace signs on their own..")
+
+		addButton("Continue", "See what happens next", "9_after_brat")
+	if(state == "9_after_brat"):
+		playAnimation(StageScene.BDSMMachineAltFuck, "tease", {bodyState={naked=true, hard=true}})
+		saynn("Alex sees the peace sign and finally turns off the machine, both dildos stop while deep inside you, still putting pressure onto your spots.")
+
+		saynn("[say=alexrynard]I'm surprised you endured it for so long.[/say]")
+
+		saynn("You're panting like crazy, muffled noises still keep escaping from you. He peeks under the blindfold.. and sees your mindless stare.")
+
+		saynn("[say=alexrynard]Wow, you got fucked silly.[/say]")
+
+		saynn("[say=pc]Nh-h-h..[/say]")
+
+		saynn("[say=alexrynard]Let's get you freed.[/say]")
+
+		addButton("Continue", "See what happens next", "9_after_brat_cuddle")
+	if(state == "9_after_brat_cuddle"):
+		playAnimation(StageScene.Cuddling, "idle", {pc="alexrynard", npc="pc", npcBodyState={naked=true}})
+		saynn("Alex takes off your gag and the blindfold, causing the bright sterile light to make you squint. Then he turns off the machine causing the manipulators to let go of your limbs.")
+
+		saynn("[say=alexrynard]Let's rest.[/say]")
+
+		saynn("He pulls you in for some cuddles on that medical table. Your breathing is still all over the place, your thoughts all scrambled.")
+
+		saynn("[say=alexrynard]You're such a good {pc.boy}, providing so much warmth for me.[/say]")
+
+		saynn("Aw, you don't mind being a blanket.. Being blanket is good..")
+
+		saynn("Time passes while you cuddle like that. At some point your head starts to clear up.")
+
+		saynn("[say=pc]Ah.. So much..[/say]")
+
+		saynn("[say=alexrynard]Hey, at least you don't have any internal damage for sure now, heh.[/say]")
+
+		saynn("That's fair.")
+
+		saynn("[say=pc]Nice.. piece of tech.. you made there..[/say]")
+
+		saynn("[say=alexrynard]It's.. fine. There are some obvious flaws with it but I just can't be bothered. Also, never ask me how I tested this machine.[/say]")
+
+		saynn("[say=pc]Pff-f.. With your butt of course![/say]")
+
+		saynn("He sighs and bites your shoulder playfully.")
+
+		saynn("[say=pc]Ow..[/say]")
+
+		saynn("[say=alexrynard]Brat.[/say]")
+
+		saynn("After this cozy aftercare session, Alex helps you get dressed and get to the medical lobby.")
+
+		addButton("Continue", "See what happens next", "endthescene")
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
@@ -532,6 +885,36 @@ func _react(_action: String, _args):
 		GM.pc.setLocation("med_lobbynw")
 		endScene()
 		return
+
+	if(_action == "9"):
+		GM.pc.orgasmFrom("alexrynard")
+		if(GM.pc.hasReachableVagina()):
+			GM.pc.gotOrificeStretchedWith(BodypartSlot.Vagina, 30)
+			GM.pc.gotOrificeStretchedWith(BodypartSlot.Anus, 30)
+		else:
+			GM.pc.gotOrificeStretchedWith(BodypartSlot.Anus, 30)
+			GM.pc.gotOrificeStretchedWith(BodypartSlot.Anus, 30)
+
+	if(_action == "9_fast"):
+		processTime(20*60)
+		GM.pc.orgasmFrom("alexrynard")
+		if(GM.pc.hasReachableVagina()):
+			var thebodypart = GM.pc.getBodypart(BodypartSlot.Vagina)
+			if(thebodypart != null):
+				thebodypart.addFluidOrifice("HealingGel", RNG.randf_range(250.0, 350.0), null)
+			var thebodypart2 = GM.pc.getBodypart(BodypartSlot.Anus)
+			if(thebodypart2 != null):
+				thebodypart2.addFluidOrifice("HealingGel", RNG.randf_range(250.0, 350.0), null)
+		else:
+			var thebodypart = GM.pc.getBodypart(BodypartSlot.Anus)
+			if(thebodypart != null):
+				thebodypart.addFluidOrifice("HealingGel", 2.0*RNG.randf_range(250.0, 350.0), null)
+
+	if(_action == "9_after_brat_cuddle"):
+		processTime(20*60)
+		GM.pc.freeEyesDeleteAll()
+		GM.pc.freeMouthDeleteAll()
+		GM.pc.setLocation("med_lobbynw")
 
 	setState(_action)
 
