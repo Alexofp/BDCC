@@ -90,6 +90,7 @@ func _run():
 	if(state == "eliza_brings_to_milking_room"):
 		playAnimation(StageScene.Duo, "stand", {npc="pc", pc="eliza"})
 		aimCameraAndSetLocName("med_milkingroom")
+		GM.pc.setLocation("med_lobbynw")
 		saynn("A few white corridors later, you end up in the special little secluded room where the advanced table is positioned.")
 
 		saynn("[say=eliza]There we are. Want me to show you how to use it~?[/say]")
@@ -218,6 +219,21 @@ func _run():
 		addButton("RUN!", "You're never gonna listen to what he says", "2_brat")
 		addButton("Stay still", "Do as he says", "2_stay")
 		addButton("RED", "Say this", "2_red")
+	if(state == "2_red"):
+		playAnimation(StageScene.Duo, "stand", {npc="alexrynard"})
+		saynn("[say=pc]RED.[/say]")
+
+		saynn("Alex tilts his head slightly.")
+
+		saynn("[say=alexrynard]A little too much for you?[/say]")
+
+		saynn("You nod softly.")
+
+		saynn("[say=alexrynard]Well, my bad. Don't think aftercare is required here.. since we didn't really do anything.[/say]")
+
+		saynn("Fair enough. He guides you back to the medical lobby.")
+
+		addButton("Continue", "See what happens next", "endthescene")
 	if(state == "1_yessir"):
 		playAnimation(StageScene.Duo, "stand", {npc="alexrynard", bodyState={naked=true}})
 		saynn("[say=pc]Yes, Sir.[/say]")
@@ -272,6 +288,53 @@ func _run():
 		addButton("His choice", "It's for him to decide", "3_hischoice")
 		addButton("Extra mean!", "Do your worst!", "3_brat")
 		addButton("RED", "Say this", "3_red")
+	if(state == "3_red"):
+		playAnimation(StageScene.Duo, "stand", {npc="alexrynard"})
+		saynn("[say=pc]RED.[/say]")
+
+		saynn("Alex hears that and presses the button that carefully puts your feet on the ground and releases you.")
+
+		saynn("[say=alexrynard]That was a little too much?[/say]")
+
+		saynn("You nod softly.")
+
+		saynn("[say=alexrynard]Sorry. None of this would have harmed you if you're curious. Wanna cuddle maybe?[/say]")
+
+		addButton("Sure", "Cuddle with Alex for some time", "3_red_cuddle")
+		addButton("Nah", "Just leave", "3_red_just_leave")
+	if(state == "3_red_just_leave"):
+		saynn("[say=pc]Nah, it's fine.[/say]")
+
+		saynn("[say=alexrynard]Well, let me show you the way out then.[/say]")
+
+		saynn("Alex guides you out into the white corridor and then shows you the way towards the medical lobby.")
+
+		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "3_red_cuddle"):
+		playAnimation(StageScene.Cuddling, "idle", {pc="alexrynard", npc="pc"})
+		saynn("[say=pc]Sure, that won't hurt.[/say]")
+
+		saynn("Alex carefully embraces you and pulls in for some casual cuddles on the floor. It's made out of sterile materials anyway..")
+
+		saynn("[say=alexrynard]For some reason..[/say]")
+
+		saynn("He looks at the medical table while his hands idly rest on your waist.")
+
+		saynn("[say=alexrynard]..we like to push ourselves. I think it's okay to do that, don't get me wrong. You gotta know where your limits lie.[/say]")
+
+		saynn("He rests his chin on your shoulder.")
+
+		saynn("[say=alexrynard]But for some reason we want to see others being pushed further, past their limits. I think that sacrificing our limits for something.. means sacrificing who you are.[/say]")
+
+		saynn("[say=pc]You're saying that we are our limits?[/say]")
+
+		saynn("[say=alexrynard]I don't know. Maybe. Maybe we are defined by our limits? Eh. Don't worry about it.[/say]")
+
+		saynn("Looks like the foxy gets all philosophical sometimes.")
+
+		saynn("You spend some time together like that before it becomes time to return to the medical lobby.")
+
+		addButton("Continue", "See what happens next", "endthescene")
 	if(state == "2_stay"):
 		playAnimation(StageScene.BDSMMachineFuck, "tease", {bodyState={naked=true}})
 		saynn("You do as he says. Which is.. nothing.")
@@ -429,7 +492,7 @@ func _run():
 
 		addButton("Aa-ah", "Say it", "4_aah")
 		addButton("Stay silent!", "Not say anything", "4_brat")
-		addButton("RED", "Say this", "4_red")
+		addButton("RED", "Say this", "3_red")
 	if(state == "4_brat"):
 		playAnimation(StageScene.BDSMMachineAltFuck, "tease", {bodyState={naked=true, hard=true}})
 		saynn("Nope, you're not saying anything! You hold your lips closed shut and Alex notices that.")
@@ -473,6 +536,27 @@ func _run():
 		addButton("Thumbs up", "Show Alex the thumbs up", "5_thumbsup")
 		addButton("Middle finger", "Show Alex the middle finger", "5_brat")
 		addButton("Peace sign", "Show Alex the peace sign", "5_red")
+	if(state == "5_red"):
+		saynn("You show Alex a peace sign with your hand.")
+
+		saynn("[say=alexrynard]Um.. do you actually want to stop?[/say]")
+
+		addButton("Peace sign", "Continue showing it", "5_red_red")
+		addButton("Middle finger", "Show Alex the middle finger", "5_brat")
+	if(state == "5_red_red"):
+		playAnimation(StageScene.Duo, "stand", {npc="alexrynard"})
+		saynn("You continue showing him the peace sign and so Alex finally presses a button that makes the machine carefully put you on your feet and release you.")
+
+		saynn("Alex swiftly removes the ballgag and the blindfold from you.")
+
+		saynn("[say=alexrynard]That was a little too much?[/say]")
+
+		saynn("You nod softly.")
+
+		saynn("[say=alexrynard]Sorry. None of this would have harmed you if you're curious. Wanna cuddle maybe?[/say]")
+
+		addButton("Sure", "Cuddle with Alex for some time", "3_red_cuddle")
+		addButton("Nah", "Just leave", "3_red_just_leave")
 	if(state == "4_aah"):
 		playAnimation(StageScene.BDSMMachineAltFuck, "tease", {bodyState={naked=true, hard=true}})
 		saynn("[say=pc]Aa-a..[/say]")
@@ -607,7 +691,28 @@ func _run():
 			saynn("The room is filled with your muffled noises and the repetitive piston sound.. You can't see anything.. You can't say anything.. Can't move anything.. Just forced to endure the relentless onslaught on your ass, your orgasm already drawing close..")
 
 		addButton("Continue", "See what happens next", "8")
-		addButton("Peace sign", "Show a peace sign with your hand", "5_red")
+		addButton("Peace sign", "Show a peace sign with your hand", "8_red")
+	if(state == "8_red"):
+		playAnimation(StageScene.BDSMMachineAltFuck, "tease", {bodyState={naked=true, hard=true}})
+		saynn("This clearly went too far, who knows what the machine will do next to you.. so you show a peace sign to the darkness.")
+
+		saynn("Alex notices your gesture.. and swiftly stops the machine. You were pretty close.. but now the orgasm begins to slowly fade.")
+
+		saynn("[say=alexrynard]Right.. I guess it was too much. Let's get you out of there.[/say]")
+
+		addButton("Continue", "See what happens next", "8_red_free")
+	if(state == "8_red_free"):
+		playAnimation(StageScene.Duo, "stand", {npc="alexrynard"})
+		saynn("He presses a button that slowly puts your feet onto the floor. Your legs are still a little shaky so Alex supports you. He, of course, removes your gag and blindfold.")
+
+		saynn("[say=alexrynard]Good job, you did really well.[/say]")
+
+		saynn("You put on your clothes..")
+
+		saynn("[say=alexrynard]Want to relax together?[/say]")
+
+		addButton("Sure", "Cuddle with Alex for some time", "3_red_cuddle")
+		addButton("Nah", "Just leave", "3_red_just_leave")
 	if(state == "8"):
 		playAnimation(StageScene.BDSMMachineAltFuck, "inside", {bodyState={naked=true, hard=true}})
 		saynn("With the lack of your important sense.. you are forced to focus on that silicon dildo.. it's mechanical motions brings you over the edge with ease.")
@@ -841,6 +946,9 @@ func _react(_action: String, _args):
 	if(_action == "2_brat"):
 		bratCounter =+ 1
 
+	if(_action == "3_red_cuddle"):
+		processTime(10*60)
+
 	if(_action == "3_brat"):
 		bratCounter += 1
 
@@ -853,10 +961,15 @@ func _react(_action: String, _args):
 		GM.pc.getInventory().forceEquipStoreOtherUnlessRestraint(GlobalRegistry.createItem("blindfold"))
 		GM.pc.getInventory().forceEquipStoreOtherUnlessRestraint(GlobalRegistry.createItem("ballgag"))
 
+	if(_action == "5_red_red"):
+		GM.pc.freeEyesDeleteAll()
+		GM.pc.freeMouthDeleteAll()
+
 	if(_action == "5_brat"):
 		bratCounter += 1
 
 	if(_action == "8"):
+		setFlag("AlexRynardModule.3TrustCompleted", true)
 		GM.pc.orgasmFrom("alexrynard")
 		if(GM.pc.hasReachableVagina()):
 			GM.pc.afterHealingGelTreatment()
@@ -872,6 +985,10 @@ func _react(_action: String, _args):
 				thebodypart.addFluidOrifice("HealingGel", RNG.randf_range(250.0, 350.0), null)
 		GM.pc.addPain(-200)
 		GM.pc.addStamina(100)
+
+	if(_action == "8_red_free"):
+		GM.pc.freeEyesDeleteAll()
+		GM.pc.freeMouthDeleteAll()
 
 	if(_action == "8_end"):
 		processTime(30*60)
