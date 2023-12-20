@@ -1,6 +1,4 @@
 extends SceneBase
-class_name HK_SessionBodyBase
-
 
 func onBody():
 	GM.pc.addEffect(StatusEffect.Suggestible, [30])

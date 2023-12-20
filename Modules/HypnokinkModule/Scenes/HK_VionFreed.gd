@@ -115,15 +115,17 @@ func _react(_action: String, _args):
 		runScene("ComputerSimScene", ["DatapadHackComputer"], "computerhack")
 	
 	if(_action == "ride_it_out"):
-		GM.pc.addLust(100)
+		GM.pc.addLust(80)
 		
 	if(_action == "sex_1"):
-		GM.pc.addArousal(0.25)
+		GM.pc.addLust(20)
 		HypnokinkUtil.raiseSuggestibilityTo(GM.pc, 75)
 		
 	if(_action == "sex_2"):
-		GM.pc.addArousal(0.5)
 		HypnokinkUtil.raiseSuggestibilityTo(GM.pc, 75)
+		
+	if(_action == "sex_2"):
+		HK_CharUtil.raiseSuggestibilityTo(GM.pc, 75)
 		processTime(30 * 60)
 		GM.pc.cummedInMouthBy("Vion")
 		
@@ -140,7 +142,6 @@ func _react(_action: String, _args):
 			GM.pc.cummedOnBy("Vion")
 			
 	if(_action == "sex_4"):
-		GM.pc.addArousal(0.25)
 		GM.pc.orgasmFrom("Vion")
 		GM.pc.addLust(100)
 		HypnokinkUtil.raiseSuggestibilityTo(GM.pc, 75)
@@ -154,7 +155,6 @@ func _react(_action: String, _args):
 		
 	if(_action == "sex_after"):
 		GM.pc.addLust(-80)
-		GM.pc.addArousal(-75)
 		HypnokinkUtil.raiseSuggestibilityTo(GM.pc, 75)
 		processTime(30 * 60)
 		GM.pc.cummedOnBy("Vion")
