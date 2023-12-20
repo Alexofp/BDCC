@@ -123,7 +123,7 @@ func doSubAction(_id, _actionInfo):
 		var subSay = null
 		# dummy react, to ensure domSay and subSay are generated
 		domSay = domReaction(SexReaction.Teasing, 0)
-		subInfo.getChar().addEffect(HK_StatusEffect.Suggestible, [RNG.randi_range(4,16)])
+		HK_CharUtil.changeSuggestibilityBy(subInfo.getChar(), RNG.randi_range(4,16))
 		
 		if(isSubInTrance()):
 			if(RNG.chance(75)):
@@ -144,7 +144,7 @@ func doSubAction(_id, _actionInfo):
 					"Wh-what are you...",
 					"What is this?",
 					"What's happening?",
-					"N-no..."	
+					"I don't..."	
 				])
 		return {
 			text = text,
@@ -156,7 +156,35 @@ func doSubAction(_id, _actionInfo):
 		var domSay = null
 		var subSay = null
 		domInfo.addAnger(0.04)
-		subSay = subReaction(SexReaction.Resisting, 100)
+		
+		if(isSubInTrance()):
+			HK_CharUtil.changeSuggestibilityBy(subInfo.getChar(), RNG.randi_range(4,16))
+			if(RNG.chance(75)):
+				subSay = RNG.pick([
+					"Nnh...", 
+					"Please...", 
+					"Can't...",
+				])
+		elif(isSubHypnotized()):
+			HK_CharUtil.changeSuggestibilityBy(subInfo.getChar(), RNG.randi_range(-4,2))
+			if(RNG.chance(75)):
+				subSay = RNG.pick([
+					"I don't...",
+					"I'd better...",
+					"I won't...",
+					"No...",
+					"I can't..."
+				])
+		else:
+			HK_CharUtil.changeSuggestibilityBy(subInfo.getChar(), RNG.randi_range(-4,-16))
+			if(RNG.chance(75)):
+				subSay = RNG.pick([
+					"What are you doing?",
+					"What is this?",
+					"What's happening?",
+					"No!",
+					"Stop it!"
+				])
 		return {
 			text = text,
 			domSay = domSay,

@@ -1,5 +1,7 @@
 extends ItemBase
 
+var programmedToSuppressPerkId: String = ""
+
 func _init():
 	id = "HypnovisorMk1"
 
@@ -15,20 +17,23 @@ func getClothingSlot():
 func getTakeOffScene():
 	return "RestraintTakeOffNopeScene"
 	
-func isHatsPerkActive():
-	var wearer = getWearer()
-	if(wearer == null):
-		return false
-	if(wearer.hasPerk(HK_Perk.HATS) && isWornByWearer()):
-		if(HK_CharUtil.isInTrance(wearer)):
-			return true
-	return false	
-	
 func getBuffs():
-	if(isHatsPerkActive()):
+	if(isWornByWearer() and getWearer().hasPerk(HK_Perk.HATS) and HK_CharUtil.isInTrance(getWearer())):
 		return [buff(Buff.AmbientLustBuff, [300]), buff(Buff.AccuracyBuff, [25])]
 	else:
 		return [buff(Buff.AmbientLustBuff, [300]), buff(Buff.AccuracyBuff, [-25])]
+	
+func getPossibleActions():
+	if(isWornByWearer()):
+		var wearer = getWearer()
+		if(wearer.hasPerk(HK_Perk.VisorMastery)):
+			return [{
+					"name": "Program",
+					"scene": "HK_ProgramVisorScene",
+					"description": "Program the visor to suppress one of your drawback perks",
+					"onlyWhenCalm": true
+				}]
+	return []
 	
 func getPrice():
 	return 60
@@ -64,6 +69,19 @@ func onEquippedBy(_otherCharacter, _forced = false):
 	elif(_otherCharacter.hasPerk(HK_Perk.GoodAtVisors) and currentAmount < 30):
 		HK_CharUtil.changeSuggestibilityBy(wearer, 30 - currentAmount)
 	
+func programToSuppressPerk(perkId: String):
+	programmedToSuppressPerkId = perkId
+	
+func programmedToSuppressPerk() -> String:
+	return programmedToSuppressPerkId
+	
+func saveData():
+	return {
+		"programmedToSuppressPerkId": programmedToSuppressPerkId,
+	}
+	
+func loadData(_data):
+	programmedToSuppressPerkId = SAVE.loadVar(_data, "programmedToSuppressPerkId", "")
 
 func getUnriggedParts(_character):
 	return {

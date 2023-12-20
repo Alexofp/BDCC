@@ -1,5 +1,4 @@
 extends SceneBase
-class_name HK_SessionInductionBase
 
 var bodyId: String
 

@@ -31,16 +31,16 @@ func checkDrawbacks():
 	if(not GM.main.getFlag("HypnokinkModule.SoftOptIn", false)):
 		return
 	if(level >= 1):
-		if(!npc.hasPerk(HK_Perk.KeywordsDrawback)):
-			npc.skillsHolder.addPerk(HK_Perk.KeywordsDrawback)
+		if(!npc.getSkillsHolder().hasPerkDisabledOrNot(HK_Perk.KeywordsDrawback)):
+			npc.getSkillsHolder().addPerk(HK_Perk.KeywordsDrawback)
 			flashDrawbackMessage(GlobalRegistry.getPerk(HK_Perk.KeywordsDrawback))
 	if(level >= 3):
-		if(!npc.hasPerk(HK_Perk.FamousDrawback)):
-			npc.skillsHolder.addPerk(HK_Perk.FamousDrawback)
+		if(!npc.getSkillsHolder().hasPerkDisabledOrNot(HK_Perk.FamousDrawback)):
+			npc.getSkillsHolder().addPerk(HK_Perk.FamousDrawback)
 			flashDrawbackMessage(GlobalRegistry.getPerk(HK_Perk.FamousDrawback))
 	if(level >= 5):
-		if(!npc.hasPerk(HK_Perk.DeepTranceDrawback)):
-			npc.skillsHolder.addPerk(HK_Perk.DeepTranceDrawback)
+		if(!npc.getSkillsHolder().hasPerkDisabledOrNot(HK_Perk.DeepTranceDrawback)):
+			npc.getSkillsHolder().addPerk(HK_Perk.DeepTranceDrawback)
 			flashDrawbackMessage(GlobalRegistry.getPerk(HK_Perk.DeepTranceDrawback))
 			
 func flashDrawbackMessage(drawbackPerk: PerkBase):

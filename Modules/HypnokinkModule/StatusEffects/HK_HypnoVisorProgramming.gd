@@ -11,7 +11,7 @@ func _init():
 	priorityDuringChecking = 50
 
 func findProgrammedVisor(_npc: BaseCharacter) -> ItemBase:
-	var visors = _npc.inventory.getEquippedItemsWithTag(ItemTag.Hypnovisor)
+	var visors = _npc.getInventory().getEquippedItemsWithTag(ItemTag.Hypnovisor)
 	if(len(visors) < 1):
 		return null
 	for candidate in visors:
@@ -39,24 +39,27 @@ func processTime(seconds: int):
 	progress += 5 * minutes
 	checkDone()
 	
+func getRequiredProgressMult():
+	var skills: SkillsHolder = character.getSkillsHolder()
+	var mult = 1
+	if(skills.hasPerkDisabledOrNot(HK_Perk.KeywordsDrawback) && skills.isPerkDisabled(HK_Perk.KeywordsDrawback)):
+		mult *= 2
+	if(skills.hasPerkDisabledOrNot(HK_Perk.FamousDrawback) && skills.isPerkDisabled(HK_Perk.FamousDrawback)):
+		mult *= 2
+	if(skills.hasPerkDisabledOrNot(HK_Perk.DeepTranceDrawback) && skills.isPerkDisabled(HK_Perk.DeepTranceDrawback)):
+		mult *= 2
+	return mult
+	
 func checkDone():
 	var visor = findProgrammedVisor(character)
 	if(visor == null):
 		stop()
 		return
 		
-	var skills: SkillsHolder = character.skillsHolder
-	#ensure perks are enabled
-	if(skills.hasPerkDisabledOrNot(HK_Perk.KeywordsDrawback) && skills.isPerkDisabled(HK_Perk.KeywordsDrawback)):
-		skills.togglePerk(HK_Perk.KeywordsDrawback)
-	if(skills.hasPerkDisabledOrNot(HK_Perk.FamousDrawback) && skills.isPerkDisabled(HK_Perk.FamousDrawback)):
-		skills.togglePerk(HK_Perk.FamousDrawback)
-	if(skills.hasPerkDisabledOrNot(HK_Perk.DeepTranceDrawback) && skills.isPerkDisabled(HK_Perk.DeepTranceDrawback)):
-		skills.togglePerk(HK_Perk.DeepTranceDrawback)
-		
-		
+	var skills: SkillsHolder = character.getSkillsHolder()
+	
 	var targetPerkId = visor.programmedToSuppressPerk()
-	if(progress >= 100):
+	if(progress >= getRequiredProgressMult() * 100):
 		if(skills.hasPerkDisabledOrNot(targetPerkId) && !skills.isPerkDisabled(targetPerkId)):
 			skills.togglePerk(targetPerkId)
 		visor.programToSuppressPerk("")
@@ -71,7 +74,7 @@ func getEffectDesc():
 	if(visor == null):
 		return "ERROR: This status effect should have dissapeared!"
 	var targetPerk: PerkBase = GlobalRegistry.getPerk(visor.programmedToSuppressPerk())
-	return "Your visor is suppressing your "+targetPerk.getVisibleName()+" drawback.\n\nProgress: "+str(progress)+"%"
+	return "Your visor is suppressing your "+targetPerk.getVisibleName()+" drawback.\n\nProgress: "+str(progress / getRequiredProgressMult())+"%"
 
 func getEffectImage():
 	return "res://Modules/HypnokinkModule/Icons/Perks/visor3.png"
