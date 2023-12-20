@@ -504,11 +504,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Modules/HypnokinkModule/Items/HypnoRestraints/HK_HypnoRestraint.gd"
 }, {
-"base": "ItemBase",
-"class": "HK_HypnoVisor",
-"language": "GDScript",
-"path": "res://Modules/HypnokinkModule/Items/HypnoVisor/HK_HypnovisorMk0.gd"
-}, {
 "base": "Object",
 "class": "HK_Sessions",
 "language": "GDScript",
@@ -1294,10 +1289,6 @@ _global_script_class_icons={
 "GymModule": "",
 "HK_Glasses": "",
 "HK_HypnoRestraint": "",
-"HK_HypnoVisor": "",
-"HK_SessionAwakenerBase": "",
-"HK_SessionBodyBase": "",
-"HK_SessionInductionBase": "",
 "HK_Sessions": "",
 "HK_Suggestible": "",
 "HypnokinkUtil": "",

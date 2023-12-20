@@ -31,7 +31,10 @@ func getPrice():
 
 func getTags():
 	return [ItemTag.BDSMRestraint, ItemTag.CanBeForcedByGuards, ItemTag.CanBeForcedInStocks, ItemTag.Hypnovisor]
-
+	
+func maxHypnosisStacks() -> int:
+	return 75
+	
 func getUnriggedParts(_character):
 	return {
 		"blindfold": ["res://Modules/HypnokinkModule/Items/HypnoVisor/HypnoVisorNorm_Model.tscn"]

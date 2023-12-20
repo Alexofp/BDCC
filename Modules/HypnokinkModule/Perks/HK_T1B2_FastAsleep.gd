@@ -30,3 +30,4 @@ func getBuffs():
 	
 func runOnceWhenLearned():
 	GM.main.setFlag("HypnokinkModule.SoftOptIn", true)
+	GM.pc.getSkillsHolder().getSkill(Skill.Hypnosis).checkDrawbacks()

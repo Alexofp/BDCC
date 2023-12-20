@@ -125,7 +125,7 @@ func _react(_action: String, _args):
 		HypnokinkUtil.raiseSuggestibilityTo(GM.pc, 75)
 		
 	if(_action == "sex_2"):
-		HK_CharUtil.raiseSuggestibilityTo(GM.pc, 75)
+		HypnokinkUtil.raiseSuggestibilityTo(GM.pc, 75)
 		processTime(30 * 60)
 		GM.pc.cummedInMouthBy("Vion")
 		

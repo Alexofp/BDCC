@@ -29,7 +29,7 @@ func getPossibleActions():
 		if(wearer.hasPerk(Perk.HypnosisVisorMastery)):
 			return [{
 					"name": "Program",
-					"scene": "HK_ProgramVisorScene",
+					"scene": "ProgramVisorScene",
 					"description": "Program the visor to suppress one of your drawback perks",
 					"onlyWhenCalm": true
 				}]
@@ -74,6 +74,9 @@ func programToSuppressPerk(perkId: String):
 	
 func programmedToSuppressPerk() -> String:
 	return programmedToSuppressPerkId
+	
+func maxHypnosisStacks() -> int:
+	return 125
 	
 func saveData():
 	return {
