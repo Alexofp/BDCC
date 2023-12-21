@@ -1603,6 +1603,7 @@ func _react(_action: String, _args):
 		didDiag = true
 
 	if(_action == "time7_computer_tested_works"):
+		addExperienceToPlayer(300)
 		addMessage("Trust Exercise 3 is unlocked")
 
 	if(_action == "time7_computer_presslogo"):
