@@ -1187,7 +1187,7 @@ func _react(_action: String, _args):
 
 	if(_action == "walkies_meetnova_givebestcondom"):
 		var breakChance = GM.pc.useBestCondom()
-		if(RNG.chance(breakChance)):
+		if(getCharacter("nova").shouldCondomBreakWhenFucking("tavi", breakChance)):
 			condomBroke = true
 		setState("walkies_meetnova_fuck")
 		return

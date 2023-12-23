@@ -1,6 +1,9 @@
 extends SceneBase
 
 var howManyTimes = 0
+var usedCondom = false
+var condomBroke = false
+var breakChance = 0.0
 
 func _init():
 	sceneID = "AlexCh2s3Scene"
@@ -332,11 +335,250 @@ func _run():
 
 		saynn("Should you put a condom on him?")
 
-		addButton("Best condom", "Put your best condom on his cock", "time3_lap_bestcondom")
-		addButton("Worst condom", "Put your worst condom on his cock", "time3_lap_worstcondom")
+		addButtonWithChecks("Best condom", "Put your best condom on his cock", "time3_lap_bestcondom", [], [ButtonChecks.HasCondoms])
+		addButtonWithChecks("Worst condom", "Put your worst condom on his cock", "time3_lap_worstcondom", [], [ButtonChecks.HasCondoms])
 		addButton("No condom", "Raw will feel the best", "time3_lap_nocondom")
-		addButton("Cowgirl (Vag)", "Ride him with your pussy", "time3_lap_ridepussy")
+	if(state == "time3_lap_usedcondom"):
+		playAnimation(StageScene.SexCowgirl, "tease", {npc="pc", pc="alexrynard", bodyState={naked=true, hard=true, condom=usedCondom}, npcBodyState={naked=true}})
+		saynn("There is no reason for this to get messy.. so you grab one of your condoms, quickly rip off the packaging, and begin to carefully apply it onto Alex's member. You can feel his girth pulsing slightly in your hands as you do it.")
+
+		saynn("[say=alexrynard]Good {pc.boy}..[/say]")
+
+		saynn("Pff, you are supposed to be in charge here.")
+
+		saynn("[say=pc]Don't make me change my mind, sly fox.[/say]")
+
+		saynn("He smirks.")
+
+		saynn("[say=alexrynard]My bad, I should have seen this coming.[/say]")
+
+		saynn("What a brat.. The blindfold hides his eyes but you can just feel the smug aura coming off from him.")
+
+		saynn("[say=pc]If you keep this up, you might not be coming at all today.[/say]")
+
+		saynn("[say=alexrynard]I feel like you need it a lot more than I do~.[/say]")
+
+		saynn("Wow. He's not wrong though.. You push him into the sofa and position yourself above his member.. The movie keeps playing but exactly zero people care about it currently.")
+
+		addButtonWithChecks("Cowgirl (Vag)", "Ride him with your pussy", "time3_lap_ridepussy", [], [ButtonChecks.HasReachableVagina])
 		addButton("Cowgirl (Anal)", "Ride him with your ass", "time3_lap_rideanal")
+	if(state == "time3_lap_nocondom"):
+		playAnimation(StageScene.SexCowgirl, "tease", {npc="pc", pc="alexrynard", bodyState={naked=true, hard=true, condom=usedCondom}, npcBodyState={naked=true}})
+		saynn("It's much more fun without any condoms. So you decide to do it raw.. There aren't that many chances to get all of the foxy to yourself anyway.")
+
+		saynn("Your hands slide over his member more, getting it fully hard and spreading his own precum all over the veiny surface, preparing for what's next..")
+
+		saynn("[say=alexrynard]No rubber? I hope you know I can't really pull out like this~.[/say]")
+
+		saynn("Who said anything about pulling out..")
+
+		saynn("[say=pc]I'm in charge here, sly fox. You're just along for the ride~.[/say]")
+
+		saynn("He smirks.")
+
+		saynn("[say=alexrynard]My bad, I should have seen this coming.[/say]")
+
+		saynn("What a brat.. The blindfold hides his eyes but you can just feel the smug aura coming off from him.")
+
+		saynn("[say=pc]If you keep this up, you might not be coming at all today.[/say]")
+
+		saynn("[say=alexrynard]I feel like you need it a lot more than I do~.[/say]")
+
+		saynn("Wow. He's not wrong though.. You push him into the sofa and position yourself above his member.. The movie keeps playing but exactly zero people care about it currently.")
+
+		addButtonWithChecks("Cowgirl (Vag)", "Ride him with your pussy", "time3_lap_ridepussy", [], [ButtonChecks.HasReachableVagina])
+		addButton("Cowgirl (Anal)", "Ride him with your ass", "time3_lap_rideanal")
+	if(state == "time3_lap_ridepussy"):
+		playAnimation(StageScene.SexCowgirl, "sex", {npc="pc", pc="alexrynard", bodyState={naked=true, hard=true, condom=usedCondom}, npcBodyState={naked=true, hard=true}})
+		saynn("Time for games is over, now comes the real action. You carefully align his blood-colored length with your {pc.pussyStretch} pussy slit and proceed to lower yourself, your petals being spread by the pointy tip of a canine cock.")
+
+		saynn("Alex is completely helpless with all the restraints.. but looks like he doesn't mind much. You can see his chest moving slower as you start to accept his member inside you, the tip spreading the slick inner walls and quickly passing your pleasure spot.")
+
+		if (GM.pc.isWearingChastityCage()):
+			saynn("Your member reacts instantly by getting hard.. well, trying to. There is pressure slowly building in your chastity cage now..")
+
+		elif (GM.pc.hasReachablePenis()):
+			saynn("Your own {pc.penis} reacts instantly by getting hard, a lonely tip of your precum shining on its tip.")
+
+		saynn("[say=pc]Yeah.. I can do whatever I want with you, sly fox..[/say]")
+
+		saynn("[say=alexrynard]You're just lucky I allowed you to cuff me.[/say]")
+
+		saynn("Huh. You catch him off-guard by letting your pussy take the rest of his cock in one motion, your buttcheeks slapping against his hips.")
+
+		saynn("[say=alexrynard]Nh..[/say]")
+
+		saynn("[say=pc]Is that so? You had every chance to stop me, sly foxy.[/say]")
+
+		saynn("You don't just sit on him, you proceed to slowly grind his lap before switching to riding, raising your body before bringing it back down, his length fully inside you"+str(", the condom providing enough lube to allow for that" if usedCondom else ", his precum mixing with your juices, lowering friction")+".")
+
+		saynn("[say=alexrynard]Perhaps I wanted to see what would happen.[/say]")
+
+		saynn("[say=pc]Such a shame that I blindfolded you then, huh~?[/say]")
+
+		saynn("You keep riding him while having this little chat, your hands resting on his pecs, your digits digging into his short orange fur.")
+
+		saynn("[say=alexrynard]I feel enough, don't worry.[/say]")
+
+		addButton("Faster", "Ride him faster", "time3_lap_ridepussy_faster")
+	if(state == "time3_lap_ridepussy_faster"):
+		playAnimation(StageScene.SexCowgirl, "fast", {npc="pc", pc="alexrynard", bodyState={naked=true, hard=true, condom=usedCondom}, npcBodyState={naked=true, hard=true}})
+		saynn("Gradually, you increase the pace, bringing yourself onto his member faster and harder. You can feel his knot getting bigger inside you.. at some point it becomes too big to fit inside, just slapping against your wet drippy pussy instead. Occasional moans escape from you..")
+
+		saynn("[say=pc]How much do you trust me, foxy~? Mh-h..[/say]")
+
+		saynn("[say=alexrynard]What do you think?[/say]")
+
+		saynn("Suddenly, you stop moving your hips, letting his cock just rest inside you. One of your hands slides up to his neck.. your digits putting some slight amount of pressure on it, just to feel him less in control.")
+
+		saynn("[say=pc]I'm the one asking questions here, foxy.[/say]")
+
+		saynn("[say=alexrynard]Well, I didn't safeword yet.[/say]")
+
+		saynn("[say=pc]Is that a challenge? Ah..[/say]")
+
+		saynn("You return to riding him, his knot continuing to inflate with blood until it reaches its maximum size. He should be close, you can feel his length twitching ever so slightly inside you.. makes you want to get his knot inside so much..")
+
+		saynn("[say=alexrynard]You already have one~.[/say]")
+
+		saynn("You're quite close too.")
+
+		addButton("Get knotted", "Try to force his knot inside you", "time3_lap_ridepussy_knotcum")
+		addButton("Pull out", "Stop riding him at the last possible second", "time3_lap_ridepussy_pullout")
+	if(state == "time3_lap_ridepussy_knotcum"):
+		playAnimation(StageScene.SexCowgirl, "inside", {npc="pc", pc="alexrynard", bodyState={naked=true, hard=true, condom=usedCondom}, npcBodyState={naked=true, hard=true}})
+		saynn("Yep, his knot is a challenge alright.. but you keep trying to force it inside, bringing yourself down onto his cock hard. The tip keeps pushing on your cervix while the knot stretches your pussy wider and wider.. until finally slipping inside!")
+
+		saynn("[say=alexrynard]Oh fuck..[/say]")
+
+		if (usedCondom && condomBroke):
+			saynn("Alex grunts, a shiver makes his spine whirl, his member is throbbing inside you, filling the condom up with his seed.. And yet.. Something feels off. You feel warmness in your womb.. Oh no.. [b]The condom has broken, spilling its contents inside you[/b]. You don't even realize it yet, your own orgasm hides this..")
+
+		elif (usedCondom):
+			saynn("Alex grunts, a shiver makes his spine whirl, his member is throbbing inside you while filling the condom up with his seed. And.. looks like.. the condom managed to contain it all just fine. Your own orgasm makes it hard to focus on that though..")
+
+		else:
+			saynn("Alex grunts, a shiver makes his spine whirl, his member is throbbing inside you, filling your womb up with his seed.. all of it. His balls are tensing up during each twitch, stuffing more warmness into you.. Your own orgasm makes it hard to focus on that though..")
+
+		saynn("You throw your head back and produce a long noise of passion, your clenching pussy housing Alex's full length, knot included. The sensations are so strong, you can't stop yourself from gushing transparent fluids all over his chest..")
+
+		if (GM.pc.isWearingChastityCage()):
+			saynn("Your caged up cock is throbbing too, shooting weak lines of {pc.cum} through the little hole of the cage..")
+
+		elif (GM.pc.hasReachablePenis()):
+			saynn("Your own cock is throbbing too, shooting strong thick lines of {pc.cum}, your balls quickly getting milked for all their seed..")
+
+		saynn("[say=pc]Ahh-h..[/say]")
+
+		saynn("You two are stuck together, the knot preventing any leakage.. You can't get up even if you wanted to though, your legs are so shaky..")
+
+		saynn("[say=alexrynard]That feels.. so good.. so tight..[/say]")
+
+		saynn("[say=pc]Hah-h.. Why don't you do it more often then, silly fox.. fuck..[/say]")
+
+		saynn("[say=alexrynard]I hate how good it feels..[/say]")
+
+		saynn("That.. doesn't make much sense.. but oh well.")
+
+		saynn("Both of you are panting heavily.. and stuck together.")
+
+		saynn("[say=pc]Looks like we're watching the movie now..[/say]")
+
+		saynn("It's ending already anyway. Explosions are happening on screen while two lovers are kissing in front of them. You haven't watched the whole movie but somehow you can just guess that the love just magically fixed everything.")
+
+		saynn("Eventually the credits begin to roll. Maybe it's time to try to free yourself.")
+
+		addButton("Free yourself", "Try to yank his knot out of your pussy", "time3_lap_ridepussy_afterknot")
+	if(state == "time3_lap_ridepussy_afterknot"):
+		playAnimation(StageScene.Cuddling, "idle", {pc="alexrynard", npc="pc", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		if (usedCondom && condomBroke):
+			saynn("Finally, after the knot has deflated enough, you manage to pull your pussy away from his cock.. just to realize that the condom has broken.. oops.. Your stuffed slit is leaking his seed..")
+
+			saynn("[say=alexrynard]Is everything okay?[/say]")
+
+			saynn("Alex tries to figure out why you are so quiet.")
+
+			saynn("[say=pc]Um.. yeah.[/say]")
+
+			saynn("You quickly remove any obvious signs of what happened and just snug up to Alex, rubbing against his manly body.")
+
+			saynn("[say=pc]Let's just rest..[/say]")
+
+			saynn("[say=alexrynard]Sure.. Rest sounds good now.[/say]")
+
+		elif (usedCondom):
+			saynn("Finally, after the knot has deflated enough, you manage to pull your pussy away from his cock. You carefully tie the used condom up and dispose of it safely. All mess is avoided, nice.")
+
+			saynn("After that, you just snug up to Alex, rubbing against his manly body.")
+
+			saynn("[say=pc]Let's just rest..[/say]")
+
+			saynn("[say=alexrynard]Sure.. Rest sounds good now.[/say]")
+
+		else:
+			saynn("Finally, after the knot has deflated enough, you manage to pull your pussy away from his cock. Your stuffed pussy is leaking his seed a lot so you cover it with your hand.. preventing some of the mess.")
+
+			saynn("After that, you just snug up to Alex, rubbing against his manly body.")
+
+			saynn("[say=pc]Let's just rest..[/say]")
+
+			saynn("[say=alexrynard]Sure.. Rest sounds good now.[/say]")
+
+		saynn("Cuddling together feels nice. After some time you decide to uncuff Alex and remove his blindfold. It's probably best for you both to head to bed now.")
+
+		saynn("[say=alexrynard]Take care.[/say]")
+
+		saynn("[say=pc]You too.[/say]")
+
+		addButton("Continue", "See what happens next", "endthescene_removecuffs")
+	if(state == "time3_lap_ridepussy_pullout"):
+		playAnimation(StageScene.SexCowgirl, "tease", {npc="pc", pc="alexrynard", bodyState={naked=true, hard=true, condom=usedCondom}, npcBodyState={naked=true, hard=true}})
+		if (usedCondom):
+			saynn("Nope, you will go against that challenge on purpose! You wait for when the point of no return happens for Alex.. before raising your body, letting his cock to slip out.")
+
+			saynn("The foxy grunts while his throbbing cock is filling the condom up.. while not inside you.")
+
+			saynn("At the same time, you were also pushed past your peak, your pussy's muscles are contracting around nothing.. but it still feels good.")
+
+			saynn("[say=alexrynard]Ah.. hah.. brat.[/say]")
+
+			saynn("[say=pc]No you. Looks like you needed it.[/say]")
+
+			saynn("[say=alexrynard]More than you can imagine..[/say]")
+
+			saynn("You carefully tie the used condom up and safely dispose of it. Might as well cuddle now..")
+
+		else:
+			saynn("Nope, you will go against that challenge on purpose! You wait for when the point of no return happens for Alex.. before raising your body, letting his cock to slip out.")
+
+			saynn("The foxy grunts while his throbbing cock releases its load.. directly onto his stomach, creating quite a mess.")
+
+			saynn("At the same time, you were also pushed past your peak, your pussy's muscles are contracting around nothing.. but it still feels good.")
+
+			saynn("[say=alexrynard]Ah.. hah.. brat.[/say]")
+
+			saynn("[say=pc]No you. Looks like you needed it.[/say]")
+
+			saynn("[say=alexrynard]More than you can imagine..[/say]")
+
+			saynn("Might as well cuddle now.. Just gotta be careful and avoid getting his mess onto yourself too..")
+
+		addButton("Cuddle", "Rest together", "time3_lap_ridepussy_pullout_cuddle")
+	if(state == "time3_lap_ridepussy_pullout_cuddle"):
+		playAnimation(StageScene.Cuddling, "idle", {pc="alexrynard", npc="pc", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		saynn("You turn around and snug up to Alex, your back pressed against his manly body.")
+
+		saynn("[say=pc]Let's just rest..[/say]")
+
+		saynn("[say=alexrynard]Sure.. Rest sounds good now.[/say]")
+
+		saynn("Cuddling together feels nice. After some time you decide to uncuff Alex and remove his blindfold. It's probably best for you both to head to bed now.")
+
+		saynn("[say=alexrynard]Take care.[/say]")
+
+		saynn("[say=pc]You too.[/say]")
+
+		addButton("Continue", "See what happens next", "endthescene_removecuffs")
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
@@ -383,12 +625,54 @@ func _react(_action: String, _args):
 		getCharacter("alexrynard").getInventory().forceEquipStoreOtherUnlessRestraint(GlobalRegistry.createItem("blindfold"))
 		getCharacter("alexrynard").getInventory().forceEquipStoreOtherUnlessRestraint(GlobalRegistry.createItem("inmatewristcuffs"))
 
+	if(_action == "time3_lap_bestcondom"):
+		breakChance = GM.pc.useBestCondom()
+		usedCondom = true
+		setState("time3_lap_usedcondom")
+		return
+
+	if(_action == "time3_lap_worstcondom"):
+		breakChance = GM.pc.useWorstCondom()
+		usedCondom = true
+		setState("time3_lap_usedcondom")
+		return
+
+	if(_action == "time3_lap_ridepussy_faster"):
+		GM.pc.gotVaginaFuckedBy("alexrynard")
+
+	if(_action == "time3_lap_ridepussy_knotcum"):
+		GM.pc.orgasmFrom("alexrynard")
+		GM.pc.gotVaginaFuckedBy("alexrynard")
+		if(usedCondom):
+			condomBroke = getCharacter("alexrynard").shouldCondomBreakWhenFucking(GM.pc, breakChance)
+			if(condomBroke):
+				GM.pc.cummedInVaginaByAdvanced("alexrynard", {knotted=true,condomBroke=condomBroke,engulfed=true})
+			else:
+				addFilledCondomToLootIfPerk(getCharacter("alexrynard").createFilledCondom())
+		else:
+			GM.pc.cummedInVaginaByAdvanced("alexrynard", {knotted=true,engulfed=true})
+
+	if(_action == "time3_lap_ridepussy_pullout"):
+		if(usedCondom):
+			addFilledCondomToLootIfPerk(getCharacter("alexrynard").createFilledCondom())
+		else:
+			getCharacter("alexrynard").cummedOnBy("alexrynard")
+		GM.pc.orgasmFrom("alexrynard")
+
+	if(_action == "endthescene_removecuffs"):
+		getCharacter("alexrynard").removeAllRestraints()
+		endScene()
+		return
+
 	setState(_action)
 
 func saveData():
 	var data = .saveData()
 
 	data["howManyTimes"] = howManyTimes
+	data["usedCondom"] = usedCondom
+	data["condomBroke"] = condomBroke
+	data["breakChance"] = breakChance
 
 	return data
 
@@ -396,3 +680,6 @@ func loadData(data):
 	.loadData(data)
 
 	howManyTimes = SAVE.loadVar(data, "howManyTimes", 0)
+	usedCondom = SAVE.loadVar(data, "usedCondom", false)
+	condomBroke = SAVE.loadVar(data, "condomBroke", false)
+	breakChance = SAVE.loadVar(data, "breakChance", 0.0)
