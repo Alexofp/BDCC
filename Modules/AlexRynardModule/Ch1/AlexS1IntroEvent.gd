@@ -29,8 +29,9 @@ func run(_triggerID, _args):
 		addButtonUnlessLate("Help", "Help him repair the datapads", "helpRepair")
 		return
 	
-
-	addButtonUnlessLate("Help", "Help him repair the datapads", "helpRepair2")
+	if(getFlag("AlexRynardModule.ch2SceneNum") <= 6):
+		addButtonUnlessLate("Help", "Help him repair the datapads", "helpRepair2")
+	addButtonUnlessLate("Help", "Help him repair the datapads", "helpRepair3")
 	
 func react(_triggerID, _args):
 	if(getFlag("AlexRynardModule.ch1FirstFuckup") && !getFlag("AlexRynardModule.ch1NextDaySceneHappened")):
@@ -53,6 +54,9 @@ func onButton(_method, _args):
 	if(_method == "helpRepair2"):
 		GM.main.endCurrentScene()
 		runScene("AlexCh2s1Scene")
+	if(_method == "helpRepair3"):
+		GM.main.endCurrentScene()
+		runScene("AlexCh2s3Scene")
 	if(_method == "watchWork"):
 		GM.main.endCurrentScene()
 		runScene("AlexS2SittingNearScene")

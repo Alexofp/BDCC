@@ -16,6 +16,18 @@ func _initScene(_args = []):
 		setState("time1")
 		increaseFlag("AlexRynardModule.ch2s3SceneNum")
 		return
+	if(howManyTimes == 1):
+		setState("time2")
+		increaseFlag("AlexRynardModule.ch2s3SceneNum")
+		return
+	if(howManyTimes == 2):
+		setState("time3")
+		increaseFlag("AlexRynardModule.ch2s3SceneNum")
+		return
+	if(howManyTimes == 3):
+		setState("time4")
+		increaseFlag("AlexRynardModule.ch2s3SceneNum")
+		return
 
 func _run():
 	if(state == ""):
@@ -152,6 +164,26 @@ func _run():
 
 		addButton("Sure", "Just do it", "time3_rest_sure")
 		addButton("Yes Sir", "Say this", "time3_rest_yessir")
+	if(state == "time3_rest_yessir"):
+		saynn("[say=pc]Yes, Sir.[/say]")
+
+		saynn("Alex raises a brow.. but then just smiles when you smile.")
+
+		saynn("[say=alexrynard]You don't really have to say it outside of..[/say]")
+
+		saynn("[say=pc]I know.[/say]")
+
+		saynn("Your smile only becomes wider.")
+
+		saynn("[say=pc]What, you're gonna stop me~?[/say]")
+
+		saynn("The foxy tilts his head, his hand reaching for your collar, tugging you closer to the sofa.")
+
+		saynn("[say=alexrynard]Sit, like a good {pc.boy}.[/say]")
+
+		saynn("[say=pc]Yes, Sir.[/say]")
+
+		addButton("Sit", "Do it", "time3_rest_sure")
 	if(state == "time3_rest_sure"):
 		playAnimation(StageScene.Duo, "sit", {npc="alexrynard"})
 		saynn("You take a seat on a sofa that has no right to be this soft. Maybe you're just too used to the inmate furniture being extremely stiff by now..")
@@ -579,6 +611,470 @@ func _run():
 		saynn("[say=pc]You too.[/say]")
 
 		addButton("Continue", "See what happens next", "endthescene_removecuffs")
+	if(state == "time3_lap_rideanal"):
+		playAnimation(StageScene.SexCowgirl, "sex", {npc="pc", pc="alexrynard", bodyState={naked=true, hard=true, condom=usedCondom}, npcBodyState={naked=true, hard=true}})
+		saynn("Time for games is over, now comes the real action. You carefully align his blood-colored length with your {pc.analStretch} tailhole and proceed to lower yourself, your cute star being spread by the pointy tip of a canine cock.")
+
+		saynn("Alex is completely helpless with all the restraints.. but looks like he doesn't mind much. You can see his chest moving slower as you start to accept his member inside you, the tip spreading the slick inner walls and quickly passing your pleasure spot.")
+
+		if (GM.pc.isWearingChastityCage()):
+			saynn("Your member reacts instantly by getting hard.. well, trying to. There is pressure slowly building in your chastity cage now as your prostate is being massaged..")
+
+		elif (GM.pc.hasReachablePenis()):
+			saynn("Your own {pc.penis} reacts instantly by getting hard as your prostate is being massaged, a lonely tip of your precum shining on the tip of your member.")
+
+		saynn("[say=pc]Yeah.. I can do whatever I want with you, sly fox..[/say]")
+
+		saynn("[say=alexrynard]You're just lucky I allowed you to cuff me.[/say]")
+
+		saynn("Huh. You catch him off-guard by letting your ass take the rest of his cock in one motion, your buttcheeks slapping against his hips.")
+
+		saynn("[say=alexrynard]Nh..[/say]")
+
+		saynn("[say=pc]Is that so? You had every chance to stop me, sly foxy.[/say]")
+
+		saynn("You don't just sit on him, you proceed to slowly grind his lap before switching to riding, raising your body before bringing it back down, his length fully inside you"+str(", the condom providing enough lube to allow for that" if usedCondom else ", his precum lowering friction")+".")
+
+		saynn("[say=alexrynard]Perhaps I wanted to see what would happen.[/say]")
+
+		saynn("[say=pc]Such a shame that I blindfolded you then, huh~?[/say]")
+
+		saynn("You keep riding him while having this little chat, your hands resting on his pecs, your digits digging into his short orange fur.")
+
+		saynn("[say=alexrynard]I feel enough, don't worry.[/say]")
+
+		addButton("Faster", "Ride him faster", "time3_lap_rideanal_faster")
+	if(state == "time3_lap_rideanal_faster"):
+		playAnimation(StageScene.SexCowgirl, "fast", {npc="pc", pc="alexrynard", bodyState={naked=true, hard=true, condom=usedCondom}, npcBodyState={naked=true, hard=true}})
+		saynn("Gradually, you increase the pace, bringing yourself onto his member faster and harder. You can feel his knot getting bigger inside you.. at some point it becomes too big to fit inside, just slapping against your needy fuckhole instead. Occasional moans escape from you..")
+
+		saynn("[say=pc]How much do you trust me, foxy~? Mh-h..[/say]")
+
+		saynn("[say=alexrynard]What do you think?[/say]")
+
+		saynn("Suddenly, you stop moving your hips, letting his cock just rest inside you. One of your hands slides up to his neck.. your digits putting some slight amount of pressure on it, just to feel him less in control.")
+
+		saynn("[say=pc]I'm the one asking questions here, foxy.[/say]")
+
+		saynn("[say=alexrynard]Well, I didn't safeword yet.[/say]")
+
+		saynn("[say=pc]Is that a challenge? Ah..[/say]")
+
+		saynn("You return to riding him, his knot continuing to inflate with blood until it reaches its maximum size. He should be close, you can feel his length twitching ever so slightly inside you.. makes you want to get his knot inside so much..")
+
+		saynn("[say=alexrynard]You already have one~.[/say]")
+
+		saynn("You're quite close too.")
+
+		addButton("Get knotted", "Try to force his knot inside you", "time3_lap_rideanal_knotcum")
+		addButton("Pull out", "Stop riding him at the last possible second", "time3_lap_rideanal_pullout")
+	if(state == "time3_lap_rideanal_knotcum"):
+		playAnimation(StageScene.SexCowgirl, "inside", {npc="pc", pc="alexrynard", bodyState={naked=true, hard=true, condom=usedCondom}, npcBodyState={naked=true, hard=true}})
+		saynn("Yep, his knot is a challenge alright.. but you keep trying to force it inside, bringing yourself down onto his cock hard. The tip keeps pushing on your pleasure spot while the knot stretches your tailhole wider and wider.. until finally slipping inside!")
+
+		saynn("[say=alexrynard]Oh fuck..[/say]")
+
+		if (usedCondom && condomBroke):
+			saynn("Alex grunts, a shiver makes his spine whirl, his member is throbbing inside you, filling the condom up with his seed.. And yet.. Something feels off. You feel warmness spreading.. Oh no.. [b]The condom has broken, spilling its contents inside you[/b]. You don't even realize it yet, your own orgasm hides this..")
+
+		elif (usedCondom):
+			saynn("Alex grunts, a shiver makes his spine whirl, his member is throbbing inside you while filling the condom up with his seed. And.. looks like.. the condom managed to contain it all just fine. Your own orgasm makes it hard to focus on that though..")
+
+		else:
+			saynn("Alex grunts, a shiver makes his spine whirl, his member is throbbing inside you, filling your butt up with his seed.. all of it. His balls are tensing up during each twitch, stuffing more warmness into you.. Your own orgasm makes it hard to focus on that though..")
+
+		saynn("You throw your head back and produce a long noise of passion, your clenching ass housing Alex's full length, knot included. The sensations are so strong, you can't stop yourself from squirming around his cock..")
+
+		if (GM.pc.isWearingChastityCage()):
+			saynn("Your caged up cock is throbbing too, shooting weak lines of {pc.cum} through the little hole of the cage, your prostate beyond stimulated..")
+
+		elif (GM.pc.hasReachablePenis()):
+			saynn("Your own cock is throbbing too, shooting strong thick lines of {pc.cum}, your balls quickly getting milked for all their seed, your prostate beyond stimulated..")
+
+		saynn("[say=pc]Ahh-h..[/say]")
+
+		saynn("You two are stuck together, the knot preventing any leakage.. You can't get up even if you wanted to though, your legs are so shaky..")
+
+		saynn("[say=alexrynard]That feels.. so good.. so tight..[/say]")
+
+		saynn("[say=pc]Hah-h.. Why don't you do it more often then, silly fox.. fuck..[/say]")
+
+		saynn("[say=alexrynard]I hate how good it feels..[/say]")
+
+		saynn("That.. doesn't make much sense.. but oh well.")
+
+		saynn("Both of you are panting heavily.. and stuck together.")
+
+		saynn("[say=pc]Looks like we're watching the movie now..[/say]")
+
+		saynn("It's ending already anyway. Explosions are happening on screen while two lovers are kissing in front of them. You haven't watched the whole movie but somehow you can just guess that the love just magically fixed everything.")
+
+		saynn("Eventually the credits begin to roll. Maybe it's time to try to free yourself.")
+
+		addButton("Free yourself", "Try to yank his knot out of your ass", "time3_lap_rideanal_afterknot")
+	if(state == "time3_lap_rideanal_afterknot"):
+		playAnimation(StageScene.Cuddling, "idle", {pc="alexrynard", npc="pc", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		if (usedCondom && condomBroke):
+			saynn("Finally, after the knot has deflated enough, you manage to pull your ass away from his cock.. just to realize that the condom has broken.. oops.. Your stuffed fuckhole is leaking his seed..")
+
+			saynn("[say=alexrynard]Is everything okay?[/say]")
+
+			saynn("Alex tries to figure out why you are so quiet.")
+
+			saynn("[say=pc]Um.. yeah.[/say]")
+
+			saynn("You quickly remove any obvious signs of what happened and just snug up to Alex, rubbing against his manly body.")
+
+			saynn("[say=pc]Let's just rest..[/say]")
+
+			saynn("[say=alexrynard]Sure.. Rest sounds good now.[/say]")
+
+		elif (usedCondom):
+			saynn("Finally, after the knot has deflated enough, you manage to pull your ass away from his cock. You carefully tie the used condom up and dispose of it safely. All mess is avoided, nice.")
+
+			saynn("After that, you just snug up to Alex, rubbing against his manly body.")
+
+			saynn("[say=pc]Let's just rest..[/say]")
+
+			saynn("[say=alexrynard]Sure.. Rest sounds good now.[/say]")
+
+		else:
+			saynn("Finally, after the knot has deflated enough, you manage to pull your ass away from his cock. Your stuffed fuckhole is leaking his seed a lot so you cover it with your hand.. preventing some of the mess.")
+
+			saynn("After that, you just snug up to Alex, rubbing against his manly body.")
+
+			saynn("[say=pc]Let's just rest..[/say]")
+
+			saynn("[say=alexrynard]Sure.. Rest sounds good now.[/say]")
+
+		saynn("Cuddling together feels nice. After some time you decide to uncuff Alex and remove his blindfold. It's probably best for you both to head to bed now.")
+
+		saynn("[say=alexrynard]Take care.[/say]")
+
+		saynn("[say=pc]You too.[/say]")
+
+		addButton("Continue", "See what happens next", "endthescene_removecuffs")
+	if(state == "time3_lap_rideanal_pullout"):
+		playAnimation(StageScene.SexCowgirl, "tease", {npc="pc", pc="alexrynard", bodyState={naked=true, hard=true, condom=usedCondom}, npcBodyState={naked=true, hard=true}})
+		if (usedCondom):
+			saynn("Nope, you will go against that challenge on purpose! You wait for when the point of no return happens for Alex.. before raising your body, letting his cock to slip out.")
+
+			saynn("The foxy grunts while his throbbing cock is filling the condom up.. while not inside you.")
+
+			saynn("At the same time, you were also pushed past your peak, your asshole's muscles are contracting around nothing.. but it still feels good.")
+
+			saynn("[say=alexrynard]Ah.. hah.. brat.[/say]")
+
+			saynn("[say=pc]No you. Looks like you needed it.[/say]")
+
+			saynn("[say=alexrynard]More than you can imagine..[/say]")
+
+			saynn("You carefully tie the used condom up and safely dispose of it. Might as well cuddle now..")
+
+		else:
+			saynn("Nope, you will go against that challenge on purpose! You wait for when the point of no return happens for Alex.. before raising your body, letting his cock to slip out.")
+
+			saynn("The foxy grunts while his throbbing cock releases its load.. directly onto his stomach, creating quite a mess.")
+
+			saynn("At the same time, you were also pushed past your peak, your asshole's muscles are contracting around nothing.. but it still feels good.")
+
+			saynn("[say=alexrynard]Ah.. hah.. brat.[/say]")
+
+			saynn("[say=pc]No you. Looks like you needed it.[/say]")
+
+			saynn("[say=alexrynard]More than you can imagine..[/say]")
+
+			saynn("Might as well cuddle now.. Just gotta be careful and avoid getting his mess onto yourself too..")
+
+		addButton("Cuddle", "Rest together", "time3_lap_rideanal_pullout_cuddle")
+	if(state == "time3_lap_rideanal_pullout_cuddle"):
+		playAnimation(StageScene.Cuddling, "idle", {pc="alexrynard", npc="pc", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		saynn("You turn around and snug up to Alex, your back pressed against his manly body.")
+
+		saynn("[say=pc]Let's just rest..[/say]")
+
+		saynn("[say=alexrynard]Sure.. Rest sounds good now.[/say]")
+
+		saynn("Cuddling together feels nice. After some time you decide to uncuff Alex and remove his blindfold. It's probably best for you both to head to bed now.")
+
+		saynn("[say=alexrynard]Take care.[/say]")
+
+		saynn("[say=pc]You too.[/say]")
+
+		addButton("Continue", "See what happens next", "endthescene_removecuffs")
+	if(state == "time5"):
+		playAnimation(StageScene.Duo, "stand", {npc="alexrynard"})
+		saynn("You two are standing near Alex's normal workplace, near his bench. All the tools are neatly stashed away, no broken device in sight.")
+
+		saynn("[say=alexrynard]Feels weird, huh?[/say]")
+
+		saynn("You nod.")
+
+		saynn("[say=pc]What are you gonna do?[/say]")
+
+		saynn("[say=alexrynard]Well, I still don't have parts that I need.. I guess I will just brainstorm new ideas. And obviously do my duties as a station's engineer.[/say]")
+
+		saynn("That doesn't leave much space for you, huh?")
+
+		saynn("[say=pc]Can I help somehow?[/say]")
+
+		saynn("Alex rubs the back of his head, looking a bit guilty.")
+
+		saynn("[say=alexrynard]I.. don't know.[/say]")
+
+		saynn("Sudden male voice.")
+
+		saynn("[sayMale]Rynard? Here is something for you.[/sayMale]")
+
+		saynn("One of the engineers brings a huge cardboard box and places it on the table.")
+
+		saynn("[say=alexrynard]What do you mean, for me?[/say]")
+
+		saynn("[sayMale]I dunno, logistics says it's for you, I gotta go.[/sayMale]")
+
+		saynn("After that, the guy just walks away, leaving you alone with the anxiety.")
+
+		saynn("Looks like that vacation is posponed.. Alex's eyes are so sad.")
+
+		saynn("[say=alexrynard]I don't want to open it..[/say]")
+
+		saynn("[say=pc]What if it's.. something good?[/say]")
+
+		saynn("He sighs.")
+
+		saynn("[say=alexrynard]You will never find a million credits in your room randomly.. but you may find rats.[/say]")
+
+		saynn("So pessimistic.")
+
+		addButton("Open it", "See what's inside", "time5_rekt")
+	if(state == "time5_rekt"):
+		saynn("Since Alex is hesitating, you just open the box yourself.")
+
+		saynn("Inside.. about what you would expect..")
+
+		saynn("Alex stares at the contents.. intently.")
+
+		saynn("[say=alexrynard]About two weeks of new work.[/say]")
+
+		saynn("[say=pc]You.. definitely need my help now.[/say]")
+
+		saynn("Alex shrugs.")
+
+		saynn("[say=alexrynard]You might be right. But not for the right reason.[/say]")
+
+		saynn("Huh? You give Alex a look of confusion.")
+
+		saynn("[say=alexrynard]I'm so sick of this. I'm not touching another broken datapad ever.[/say]")
+
+		saynn("[say=pc]But.. What are you gonna do then?[/say]")
+
+		saynn("[say=alexrynard]Let's pay the captain a visit.[/say]")
+
+		saynn("That sounds better than doing this.. but it also sounds scarier.")
+
+		saynn("[say=alexrynard]You don't have to say anything, I will do most of the talking.[/say]")
+
+		saynn("Seems like a no-brainer..")
+
+		addButton("Follow", "See where Alex brings you", "time5_nearlift")
+	if(state == "time5_nearlift"):
+		aimCameraAndSetLocName("cd_near_elevator")
+		GM.pc.setLocation("hall_mainentrance")
+		saynn("You and Alex enter the lift. He uses his badge to get access to more floors before selecting the command deck.")
+
+		saynn("[say=pc]Do you really need me though?[/say]")
+
+		saynn("[say=alexrynard]Yeah.[/say]")
+
+		saynn("The lift screeches as it starts ascending to a higher floor.")
+
+		saynn("[say=alexrynard]So old. And yet, it will probably serve another century at least. People knew what they were doing back then.[/say]")
+
+		saynn("[say=pc]Don't you know what you're doing?[/say]")
+
+		saynn("[say=alexrynard]I just pretend to.[/say]")
+
+		saynn("He smiles.")
+
+		saynn("The doors open.. revealing a few guards. Guards that don't seem to be happy about seeing an unrestrained inmate here.")
+
+		saynn("[say=alexrynard]Right.. It is a high-security floor, huh.[/say]")
+
+		saynn("He turns towards you, his hands producing some cuffs.")
+
+		saynn("[say=alexrynard]You have to be restrained first, inmate.[/say]")
+
+		saynn("Fair enough.. He talks so differently when guards are nearby.")
+
+		addButton("Continue", "See what happens next", "time5_cuffup")
+	if(state == "time5_cuffup"):
+		playAnimation(StageScene.Duo, "stand", {npc="alexrynard", bodyState={leashedBy="alexrynard"}})
+		saynn("Alex carefully brings your arms behind your back and cuffs them.. before also cuffing your ankles together.")
+
+		saynn("[say=alexrynard]No scratch, no kick..[/say]")
+
+		saynn("Next, he produces a muzzle.. and proceeds to secure it around your head.")
+
+		saynn("[say=alexrynard]..and no bite.[/say]")
+
+		saynn("He turns towards the guards.. but they still don't seem happy about how you look.")
+
+		saynn("[say=alexrynard]Right, I don't do this very often, okay?[/say]")
+
+		saynn("Alex produces a leash and clips it to your collar.")
+
+		saynn("[say=alexrynard]Happy?[/say]")
+
+		saynn("The guards finally seem to give way.")
+
+		addButton("Follow", "See where Alex brings you", "time5_nearcaptain")
+	if(state == "time5_nearcaptain"):
+		aimCameraAndSetLocName("cd_near_captain_office")
+		playAnimation(StageScene.Duo, "walk", {npc="alexrynard", npcAction="walk", flipNPC=true, bodyState={leashedBy="alexrynard"}})
+		saynn("You and Alex walk through the rich-looking corridors. Your feet feel the soft carpet as you awkwardly hop around, your eyes feast upon the many paintings that are hanging on the walls.")
+
+		saynn("[say=alexrynard]Even makes me feel small. And I'm not the one cuffed here.[/say]")
+
+		saynn("You approach the captain's office. It seems to be guarded by one of the special guards, one that has his lower jaw replaced with a scary-looking prosthetic one.")
+
+		saynn("[say=alexrynard]I need to see the captain.[/say]")
+
+		saynn("[say=skar]Why?[/say]")
+
+		saynn("[say=alexrynard]Because.[/say]")
+
+		saynn("[say=skar]Why the inmate?[/say]")
+
+		saynn("[say=alexrynard]I need to talk, okay? {pc.He} {pc.isAre} important to the matter.[/say]")
+
+		saynn("The big guard talks into his headset for some time.. before letting you through.")
+
+		addButton("Captain's office", "See what happens next", "time5_captain")
+	if(state == "time5_captain"):
+		addCharacter("captain")
+		playAnimation(StageScene.Duo, "stand", {pc="alexrynard", npc="captain", npcAction="sit"})
+		aimCameraAndSetLocName("cd_captain_office")
+		saynn("Alex steps into the captain's office, you follow after.")
+
+		saynn("The captain seems to be sitting behind his table, working on something on his laptop. He closes it down and looks at you two.")
+
+		saynn("[say=captain]Welcome.[/say]")
+
+		saynn("He looks at Alex specifically.")
+
+		saynn("[say=captain]Coffee? Whiskey? I have just water too.[/say]")
+
+		saynn("[say=alexrynard]I'm good, I'm not gonna take much of your time.[/say]")
+
+		saynn("The captain nods. Alex stands in the middle of the room.. you take a spot behind him.")
+
+		saynn("[say=captain]Alright. What's eating you?[/say]")
+
+		saynn("Alex sighs and lowers his gaze for a second.")
+
+		saynn("[say=alexrynard]Why?[/say]")
+
+		saynn("The captain tilts his head slightly.")
+
+		saynn("[say=captain]Why what?[/say]")
+
+		saynn("[say=alexrynard]You know what.[/say]")
+
+		saynn("[say=captain]Enlighten me, I really don't.[/say]")
+
+		saynn("[say=alexrynard]Why do you make me do useless crap?[/say]")
+
+		saynn("Wow, Alex sounds quite annoyed. While the captain stays unphased, his voice is neutral.")
+
+		saynn("[say=captain]You mean.. repairs? Could you please remind me of who you are?[/say]")
+
+		saynn("[say=alexrynard]Me? I'm a station's engineer, why the stupid question.[/say]")
+
+		saynn("The captain tilts his head more, his strict gaze direct towards Alex's eyes.")
+
+		saynn("[say=captain]I'm asking because I feel like you forgot who you are, Rynard.[/say]")
+
+		saynn("[say=alexrynard]I didn't forget anything. But this can't continue like this. I demand an answer. Why? Why do I feel like I'm being punished.[/say]")
+
+		saynn("The captain rubs his chin.")
+
+		saynn("[say=captain]Right..[/say]")
+
+		addButton("Continue", "See what happens next", "time5_captainapproaches")
+	if(state == "time5_captainapproaches"):
+		playAnimation(StageScene.Duo, "stand", {pc="alexrynard", npc="captain"})
+		saynn("The captain stands up and approaches Alex, their gazes are at the same level now.")
+
+		saynn("[say=captain]I guess there was a misunderstanding between us. I'm not punishing you, Alex. I'm just.. trying to hold you back a little.[/say]")
+
+		saynn("Alex raises a brow.")
+
+		saynn("[say=alexrynard]Hold me back? But why?[/say]")
+
+		saynn("The captain looks at you for a second. His deep stare sends shivers down your spine.")
+
+		saynn("[say=captain]Like I said before.. Big things await us in the future, Alex. But for now.. I need you to do what I'm saying. I just don't want you to.. burn out.. with tech.[/say]")
+
+		saynn("Confusing..")
+
+		saynn("[say=alexrynard]Burn out?[/say]")
+
+		saynn("[say=captain]Yeah. You have great potential, Alex. I'm afraid that you might accidentally.. break yourself.. more than you already did.[/say]")
+
+		saynn("The captain directs his attention to Alex's chest.. the whirling of his back becoming obvious.")
+
+		saynn("[say=captain]I hope you can understand this, you're a smart guy. But no one is perfect. And that's fine. But that means that our creations aren't perfect either. They can hurt us.. bad.[/say]")
+
+		saynn("[say=alexrynard]I.. I..[/say]")
+
+		saynn("Alex starts lowering his gaze, he seems to be struggling with something. The captain taps on his shoulder a few times.")
+
+		saynn("[say=captain]I want you to be happy, I really do. All these repairs.. they're just to keep your mind sharp, you know? I can't offer you much more with what resources the station currently has, I'm sorry.[/say]")
+
+		addButton("Continue", "See what happens next", "time5_captain_looksatplayer")
+	if(state == "time5_captain_looksatplayer"):
+		playAnimation(StageScene.Duo, "stand", {npc="captain"})
+		saynn("[say=captain]I put my full trust into you. I just hope you can do the same for me. There are a lot of bad people in the world, you know that better than me.[/say]")
+
+		saynn("The captain approaches you next.. while still talking with Alex.")
+
+		saynn("[say=captain]I just really don't want you to.. make a mistake.[/say]")
+
+		saynn("The captain tugs on your muzzle a bit, checking how well secured it is.")
+
+		saynn("Alex, even more confused, looks at the captain. Something clicks in him..")
+
+		saynn("[say=alexrynard]Mistake? What do you mean by mistake?[/say]")
+
+		saynn("[say=captain]Exactly what it sounds like.[/say]")
+
+		saynn("[say=alexrynard]You mean.. {pc.him}?[/say]")
+
+		saynn("[say=captain]I really didn't want to forbid you from interacting with inmates. But you gotta understand that they are convicted criminals, you can't trust them. Especially when any kind of new technology is involved.[/say]")
+
+		saynn("Alex hums.")
+
+		saynn("[say=alexrynard]So that's what it's about? You're jealous?[/say]")
+
+		saynn("Alex gently tugs on the leash, pulling you away from the captain.")
+
+		addButton("Continue", "See what happens next", "time5_captain_morecaptain")
+	if(state == "time5_captain_morecaptain"):
+		playAnimation(StageScene.Duo, "stand", {pc="alexrynard", npc="captain"})
+		saynn("[say=captain]Jealous is a very strong word, Rynard. I'm protecting the station. But I'm also protecting you. This is for your own good.[/say]")
+
+		saynn("[say=alexrynard]Uh huh.[/say]")
+
+		saynn("Captain frowns.")
+
+		saynn("[say=captain]Are you forgetting what I did for you? I saved you.[/say]")
+
+		saynn("[say=alexrynard]And now you think that you own me? Hah.[/say]")
+
+		saynn("[say=captain]You know what.. I want you to think about it. Thoroughly. Alone. Without any other mind influencing you. We will talk later.[/say]")
+
+		saynn("[say=alexrynard]We're not gonna talk later. I quit.[/say]")
+
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
@@ -663,6 +1159,39 @@ func _react(_action: String, _args):
 		getCharacter("alexrynard").removeAllRestraints()
 		endScene()
 		return
+
+	if(_action == "time3_lap_rideanal_faster"):
+		GM.pc.gotAnusFuckedBy("alexrynard")
+
+	if(_action == "time3_lap_rideanal_knotcum"):
+		GM.pc.orgasmFrom("alexrynard")
+		GM.pc.gotAnusFuckedBy("alexrynard")
+		if(usedCondom):
+			condomBroke = getCharacter("alexrynard").shouldCondomBreakWhenFucking(GM.pc, breakChance)
+			if(condomBroke):
+				GM.pc.cummedInAnusByAdvanced("alexrynard", {knotted=true,condomBroke=condomBroke,engulfed=true})
+			else:
+				addFilledCondomToLootIfPerk(getCharacter("alexrynard").createFilledCondom())
+		else:
+			GM.pc.cummedInAnusByAdvanced("alexrynard", {knotted=true,engulfed=true})
+
+	if(_action == "time3_lap_rideanal_pullout"):
+		if(usedCondom):
+			addFilledCondomToLootIfPerk(getCharacter("alexrynard").createFilledCondom())
+		else:
+			getCharacter("alexrynard").cummedOnBy("alexrynard")
+		GM.pc.orgasmFrom("alexrynard")
+
+	if(_action == "time5_nearlift"):
+		processTime(3*60)
+
+	if(_action == "time5_cuffup"):
+		GM.pc.getInventory().forceEquipStoreOtherUnlessRestraint(GlobalRegistry.createItem("inmatewristcuffs"))
+		GM.pc.getInventory().forceEquipStoreOtherUnlessRestraint(GlobalRegistry.createItem("inmateanklecuffs"))
+		GM.pc.getInventory().forceEquipStoreOtherUnlessRestraint(GlobalRegistry.createItem("basketmuzzle"))
+
+	if(_action == "time5_nearcaptain"):
+		processTime(5*60)
 
 	setState(_action)
 
