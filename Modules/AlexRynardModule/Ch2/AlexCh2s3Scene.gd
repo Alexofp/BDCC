@@ -28,6 +28,10 @@ func _initScene(_args = []):
 		setState("time4")
 		increaseFlag("AlexRynardModule.ch2s3SceneNum")
 		return
+	if(howManyTimes == 4):
+		setState("time5")
+		increaseFlag("AlexRynardModule.ch2s3SceneNum")
+		return
 
 func _run():
 	if(state == ""):
@@ -1048,13 +1052,13 @@ func _run():
 
 		saynn("[say=captain]Exactly what it sounds like.[/say]")
 
-		saynn("[say=alexrynard]You mean.. {pc.him}?[/say]")
+		saynn("[say=alexrynard]You mean {pc.him}, don't you?[/say]")
 
 		saynn("[say=captain]I really didn't want to forbid you from interacting with inmates. But you gotta understand that they are convicted criminals, you can't trust them. Especially when any kind of new technology is involved.[/say]")
 
 		saynn("Alex hums.")
 
-		saynn("[say=alexrynard]So that's what it's about? You're jealous?[/say]")
+		saynn("[say=alexrynard]So that's what it's about? You sound jealous, cap.[/say]")
 
 		saynn("Alex gently tugs on the leash, pulling you away from the captain.")
 
@@ -1067,13 +1071,221 @@ func _run():
 
 		saynn("Captain frowns.")
 
-		saynn("[say=captain]Are you forgetting what I did for you? I saved you.[/say]")
+		saynn("[say=captain]Are you forgetting what I did for you? I saved you. Where would you be without me?[/say]")
 
 		saynn("[say=alexrynard]And now you think that you own me? Hah.[/say]")
 
 		saynn("[say=captain]You know what.. I want you to think about it. Thoroughly. Alone. Without any other mind influencing you. We will talk later.[/say]")
 
 		saynn("[say=alexrynard]We're not gonna talk later. I quit.[/say]")
+
+		saynn("That bombshell catches the captain off-guard.")
+
+		saynn("[say=captain]Huh? Wha.. You can't, we have a contract.[/say]")
+
+		saynn("[say=alexrynard]It will run out soon. And I will be out.[/say]")
+
+		saynn("Captain stays quiet for some time. And he is not happy even if his expression says otherwise, he can not pull his gaze away from Alex.")
+
+		saynn("[say=captain]You're gonna break our trust like that? After everything that..[/say]")
+
+		saynn("Alex cuts him off, making one step forward.")
+
+		saynn("[say=alexrynard]Shut up about the trust already, it was never about trust. Do you think I'm not grateful that you pulled me out of my hell? I am. But everything has a limit. I draw mine here.[/say]")
+
+		saynn("Captain stays quiet for some more time.")
+
+		saynn("[say=captain]Your spine..[/say]")
+
+		saynn("[say=alexrynard]Rip it out, I don't care. I will pay for the wheelchair. And then I will be rolling the fuck out of here.[/say]")
+
+		saynn("Wow, Alex is ready to put his everything for this..")
+
+		saynn("Captain rubs his chin, his strict focussed eyes staring at Alex for at least half a minute.")
+
+		saynn("[say=captain]Right. How about.. we will allocate some funding to your prototypes, we will find a good number. And obviously then there wouldn't be a need for keeping you busy with simple repairs. I want to make it right by you, I'm not a monster.[/say]")
+
+		saynn("It feels like the captain is forcing himself to say these words.")
+
+		saynn("[say=alexrynard]I want full ownership of my prototypes. They're mine, not AlphaCorp's.[/say]")
+
+		saynn("[say=captain]Huh.. That might be possible to arrange. But then I want some control of what you are creating. I can't let you create an atomic bomb here, I hope you can understand that.[/say]")
+
+		saynn("[say=alexrynard]That's fair.[/say]")
+
+		saynn("The captain reaches his hand out for a handshake.")
+
+		saynn("[say=captain]We have a deal?[/say]")
+
+		saynn("Alex quickly glances over his shoulder at you.")
+
+		saynn("[say=alexrynard]I also want this inmate to be assigned as my apprentice. I taught {pc.him} a lot already.[/say]")
+
+		saynn("[say=captain]{pc.He} {pc.isAre} an inmate.[/say]")
+
+		saynn("[say=alexrynard]I once had a collar around my neck. Did you forget already?[/say]")
+
+		saynn("Captain's hand tenses up a little.")
+
+		saynn("[say=captain]Alright, {pc.he} can be your assistant. Within reason.[/say]")
+
+		saynn("Alex nods and shakes the captain's hand.")
+
+		saynn("[say=alexrynard]I'm glad we could talk it out, cap. Better than us keeping hidden anger for each other.[/say]")
+
+		saynn("[say=captain]Of course.[/say]")
+
+		saynn("One of them surely got a much better deal out of this. They exchange smiles before Alex leaves the office, bringing you along on a leash. The captain gives you a cold goodbye stare.")
+
+		addButton("Continue", "See what happens next", "time5_returningback")
+	if(state == "time5_returningback"):
+		removeCharacter("captain")
+		aimCameraAndSetLocName("cd_last_intersection")
+		playAnimation(StageScene.Duo, "walk", {npc="alexrynard", npcAction="walk", flipNPC=true, bodyState={leashedBy="alexrynard"}})
+		saynn("You and Alex walk through the rich corridor back to the lift.")
+
+		saynn("[say=alexrynard]Went better than expected, huh?[/say]")
+
+		saynn("Could be your chance to ask something.")
+
+		addButton("No questions", "Just follow him", "time5_returnback")
+		addButton("Why me", "Ask why did he brought you", "time5_whyme")
+		addButton("How", "How did Alex manage to persuade him", "time5_how")
+		addButton("Apprentice?", "What does that mean", "time5_apprentice")
+	if(state == "time5_whyme"):
+		saynn("[say=pc]Was I needed? I didn't really do anything.[/say]")
+
+		saynn("Alex chuckles.")
+
+		saynn("[say=alexrynard]You did more than you realize.[/say]")
+
+		saynn("Alex turns towards you.")
+
+		saynn("[say=alexrynard]Everyone is using each other. I thought that this is the norm, how the world works. You proved me wrong. I can't do everything, I was very close to giving up. But with you, I feel like I can do anything. Because you got my back.[/say]")
+
+		saynn("He smiles and pats you on the head. Huh. If you could have kicked him for that pun, you probably would have.")
+
+		addButton("Enough questions", "Just follow him", "time5_returnback")
+		addButton("How", "How did Alex manage to persuade him", "time5_how")
+		addButton("Apprentice?", "What does that mean", "time5_apprentice")
+	if(state == "time5_how"):
+		saynn("[say=pc]How did you manage to change his mind? What if he just let you quit.[/say]")
+
+		saynn("Alex shrugs.")
+
+		saynn("[say=alexrynard]He needs me a lot more than I need him. Either way, I'm not planning on staying here forever. I did more than enough for him already.[/say]")
+
+		saynn("[say=pc]What are you gonna do?[/say]")
+
+		saynn("[say=alexrynard]After BDCC? Not sure yet. And I have you here. I don't have anyone on the outside. So I wasn't planning on quitting now either way.[/say]")
+
+		saynn("Looks like his gamble paid off.")
+
+		addButton("Enough questions", "Just follow him", "time5_returnback")
+		addButton("Why me", "Ask why did he brought you", "time5_whyme")
+		addButton("Apprentice?", "What does that mean", "time5_apprentice")
+	if(state == "time5_apprentice"):
+		saynn("[say=pc]I'm your apprentice now? What does that mean?[/say]")
+
+		saynn("He smiles.")
+
+		saynn("[say=alexrynard]Nothing really changes. It's just that you're now allowed to help me legally rather than.. under the table, you know?[/say]")
+
+		saynn("[say=pc]That means you could have been punished back then when we were helping Eliza?[/say]")
+
+		saynn("Alex hums.")
+
+		saynn("[say=alexrynard]If I always did the 'right' thing, I'd be the captain's slave forever, doing what he wants me to do because he saved me back then. Fuck that, I'd rather do what I want and suffer the consequences.[/say]")
+
+		saynn("Fair enough.")
+
+		addButton("Enough questions", "Just follow him", "time5_returnback")
+		addButton("Why me", "Ask why did he brought you", "time5_whyme")
+		addButton("How", "How did Alex manage to persuade him", "time5_how")
+	if(state == "time5_returnback"):
+		aimCameraAndSetLocName("mining_nearentrance")
+		GM.pc.setLocation("mining_nearentrance")
+		playAnimation(StageScene.Duo, "walk", {npc="alexrynard", npcAction="walk", flipNPC=true, bodyState={leashedBy="alexrynard"}})
+		saynn("Alex brings you back to the lowest level of the station. And yet, you still feel like you won.")
+
+		saynn("[say=alexrynard]There we go. Let's get you uncuffed.[/say]")
+
+		saynn("[say=pc]What if he breaks his promise and gives you more things to fix?[/say]")
+
+		saynn("[say=alexrynard]I will start stealing the parts then. He won't. And obviously there is still the whole station to fix, I'm still an engineer.[/say]")
+
+		addButton("Cuffs", "Get them removed", "time5_nocuffs")
+	if(state == "time5_nocuffs"):
+		playAnimation(StageScene.Duo, "stand", {npc="alexrynard"})
+		saynn("He removes the cuffs, the attached leash and the muzzle.")
+
+		saynn("[say=alexrynard]The collar stays, heh.[/say]")
+
+		saynn("[say=pc]Is there really no way to take it off? Just curious.[/say]")
+
+		saynn("Alex smirks.")
+
+		saynn("[say=alexrynard]I know what you feel. There is no way to create a truly impenetrable system, these collars do have some flaws. But none of them can be exploited by inmates which makes them secure.[/say]")
+
+		saynn("You nod.")
+
+		saynn("[say=alexrynard]Take care. Thank you.[/say]")
+
+		saynn("Alex leaves you alone.")
+
+		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "time6"):
+		playAnimation(StageScene.Duo, "stand", {npc="alexrynard"})
+		saynn("You approach Alex as his new apprentice!")
+
+		saynn("[say=pc]Hey there.[/say]")
+
+		saynn("He seems to be just working on something. Something that's not a broken datapad, nice!")
+
+		saynn("[say=alexrynard]Yeah, hi. The captain didn't lie, no more devices to fix.[/say]")
+
+		saynn("[say=pc]But.. What are we gonna do then?[/say]")
+
+		saynn("[say=alexrynard]Well, you know, I'm still a station engineer. We could just do general maintenance.[/say]")
+
+		saynn("It's monotonous work too.. but anything is better than repairing the same things over and over.")
+
+		saynn("Something beeps in Alex's pocket. He pulls his datapad out and goes through some menus.")
+
+		saynn("[say=alexrynard]Oh, speaking of. The generator in the mines has stopped working, let's go check it out.[/say]")
+
+		saynn("Yay, your first task.")
+
+		addButton("Mineshaft", "Head there with Alex", "time6_mine")
+	if(state == "time6_mine"):
+		aimCameraAndSetLocName("mining_shafts_entering")
+		saynn("It's dark.. obviously.. none of the lights work so Alex has to use his datapad as a torch.")
+
+		saynn("You and him carefully tread through the mineshaft, following the wires that are attached to the rocks.")
+
+		saynn("[say=pc]Kinda creepy.[/say]")
+
+		saynn("[say=alexrynard]It's fine, we just have to find the damn thing.[/say]")
+
+		saynn("Either your mind is playing with you.. or not.. for some reason you keep noticing movement in your peripheral vision. Hard to tell, everything is so dark.")
+
+		saynn("[say=alexrynard]There it is.[/say]")
+
+		saynn("The generator.. It looks like a big metal box. And it clearly suffered some damage, its top panel is bent under the weight of a huge boulder.")
+
+		saynn("[say=alexrynard]Huh, we will have to investigate the supports later, don't want the mineshaft to collapse completely.[/say]")
+
+		saynn("Sounds dangerous.. Alex hands you the datapad and starts trying to push the boulder off.")
+
+		saynn("[say=pc]Need some help?[/say]")
+
+		saynn("He is panting heavily, the motors in his spine working hard.")
+
+		saynn("[say=alexrynard]I got.. it.. Just hold the light for me.[/say]")
+
+		saynn("He finally manages to roll it off. He unscrews one of the panels, exposing the wiring and internal parts.")
+
+		saynn("[say=alexrynard]Yeah, some capacitors got damaged. Shouldn't take too long to fix.[/say]")
 
 
 func _react(_action: String, _args):
@@ -1192,6 +1404,17 @@ func _react(_action: String, _args):
 
 	if(_action == "time5_nearcaptain"):
 		processTime(5*60)
+
+	if(_action == "time5_returningback"):
+		processTime(10*60)
+
+	if(_action == "time5_nocuffs"):
+		GM.pc.freeMouthDeleteAll()
+		GM.pc.freeArmsDeleteAll()
+		GM.pc.freeLegsDeleteAll()
+
+	if(_action == "time6_mine"):
+		processTime(10*60)
 
 	setState(_action)
 
