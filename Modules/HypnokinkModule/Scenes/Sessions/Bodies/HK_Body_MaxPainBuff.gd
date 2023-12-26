@@ -8,8 +8,8 @@ func _initScene(_args = []):
 
 func _run():
 	if(state == ""):
-		addCharacter("Vion")
-		playAnimation(StageScene.Duo, "sit", {npc="Vion", npcAction="sit"})
+		addCharacter("vion")
+		playAnimation(StageScene.Duo, "sit", {npc="vion", npcAction="sit"})
 		
 		saynn("[say=Vion]Now, onto the subject of this session. Pain.[/say]")
 

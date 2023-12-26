@@ -15,8 +15,8 @@ func _init():
 
 func _run():
 	if(state == ""):
-		addCharacter("Vion")
-		playAnimation(StageScene.Duo, "stand", {npc="Vion"})
+		addCharacter("vion")
+		playAnimation(StageScene.Duo, "stand", {npc="vion"})
 		
 		saynn("[say=pc]I'm up for a session.[/say]")
 		

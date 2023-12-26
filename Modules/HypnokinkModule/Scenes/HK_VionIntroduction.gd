@@ -5,8 +5,8 @@ func _init():
 
 func _run():
 	if(state == ""):
-		addCharacter("Vion")
-		playAnimation(StageScene.Duo, "stand", {npc="Vion"})
+		addCharacter("vion")
+		playAnimation(StageScene.Duo, "stand", {npc="vion"})
 		saynn("You peek inside a random cell. In addition to the standard uncomfortable bed and cheap chair, someone seems to have gone trough the effort of dragging one of the cellblocks ever-present sofas inside. As you look closer, it becomes clear its seen better days - mysterious stains and ripped cushions make up the bulk of its surface.")
 
 		saynn("[say=Vion]If you want one of your own, you'll have to wait until the next time the guards can't be bothered dragging one off for disposal.[/say]")

@@ -1,7 +1,7 @@
 extends Character
 
 func _init():
-	id = "Rush"
+	id = "rush"
 	
 	npcLevel = 10
 	npcBasePain = 150
@@ -98,7 +98,7 @@ func _init():
 	}
 	
 func _getName():
-	return "Rush"
+	return "rush"
 
 func getGender():
 	return Gender.Male

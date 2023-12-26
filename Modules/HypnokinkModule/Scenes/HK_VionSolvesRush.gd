@@ -5,9 +5,9 @@ func _init():
 
 func _run():
 	if(state == ""):
-		addCharacter("Vion")
-		addCharacter("Rush")
-		playAnimation(StageScene.Duo, "stand", {npc="Vion"})
+		addCharacter("vion")
+		addCharacter("rush")
+		playAnimation(StageScene.Duo, "stand", {npc="vion"})
 		
 		saynn("Thankfully, the sight of Rush's beaten body is enough of a deterrent that no one bothers you as you laboriously drag him out one cellblock and into another. His weight alone gives you enough trouble, especially once you reach the stairs, but after a bit of time you reach Vion's cell.")
 		saynn("[say=Vion]What is this!? What did you do?[/say]")
@@ -25,7 +25,7 @@ func _run():
 		addButton("Get ready", "Prepare", "observe")
 		
 	if(state == "observe"):
-		playAnimation(StageScene.Duo, "sit", {pc="Rush", npc="Vion", npcAction="stand"})
+		playAnimation(StageScene.Duo, "sit", {pc="rush", npc="vion", npcAction="stand"})
 
 		saynn("By the time Rush wakes up, Vion is standing over him, his dramatic looming skills on full display, and you've taken up position behind him, ready to hold him down should he struggle.")
 		saynn("[say=Rush]Wh'... Wha' happened? Where am I?[/say]")
@@ -42,7 +42,7 @@ func _run():
 		addButton("Observe", "", "observe_2")
 
 	if(state == "observe_2"):
-		playAnimation(StageScene.Duo, "sit", {pc="Rush", npc="Vion", npcAction="stand"})
+		playAnimation(StageScene.Duo, "sit", {pc="rush", npc="vion", npcAction="stand"})
 		
 		saynn("[say=Vion]Here's the thing, Rush. I can't help but wonder, why is it you focus on me exclusively? If you just wanted to tap an ass, there's plenty of willing sluts around. If you were in it for the credits, you'd be extorting more people, not just me. And if you [i]actually[/i] wanted someone who's [i]not[/i] interested, a few paltry credits a week would not have dissuaded you.[/say]")
 		saynn("[say=Rush]What, a guy can't have a type? Ya ain't givin' that butt o' yours enough credit![/say]")
@@ -59,7 +59,7 @@ func _run():
 		addButton("Hold him", "Hold your horses", "hold_him")
 
 	if(state == "hold_him"):
-		playAnimation(StageScene.Duo, "sit", {pc="Rush", npc="Vion", npcAction="stand"})
+		playAnimation(StageScene.Duo, "sit", {pc="rush", npc="vion", npcAction="stand"})
 
 		saynn("You place your hands on his shoulders, forcing him back down.")
 		saynn("[say=Rush]Lemme go, before I do somethin' ya gonna regret![/say]")
@@ -73,7 +73,7 @@ func _run():
 		addButton("Gag him", "It's no bridle, but it will do", "gag_him")
 
 	if(state == "gag_him"):
-		playAnimation(StageScene.Duo, "sit", {pc="Rush", npc="Vion", npcAction="stand"})
+		playAnimation(StageScene.Duo, "sit", {pc="rush", npc="vion", npcAction="stand"})
 
 		saynn("You force a ballgag between his teeth, strapping it down tightly while he sputters in surprise.")
 		saynn("[say=Rush]Ya gotta be fuckin' kiddin' me! Get this off me![/say]")
@@ -87,7 +87,7 @@ func _run():
 		addButton("...", "", "timeskip")
 		
 	if(state == "timeskip"):
-		playAnimation(StageScene.Duo, "stand", {pc="Rush", npc="Vion", npcAction="stand"})
+		playAnimation(StageScene.Duo, "stand", {pc="rush", npc="vion", npcAction="stand"})
 		
 		saynn("It goes on like that for some time. Gradually, Rush's struggling weakens, then ceases. His protestations reduce to grumbling, then mumbling, then silence.")
 		saynn("Unrelenting, Vion continues directing quiet assurances and commands at Rush. Rush begins to nod when commanded. You take your hands off his shoulders, but he does not stir.")
@@ -102,7 +102,7 @@ func _run():
 		addButton("Speak to Vion", "Seems things worked out", "finalize")
 		
 	if(state == "finalize"):
-		playAnimation(StageScene.Duo, "stand", {pc="pc", npc="Vion", npcAction="stand"})
+		playAnimation(StageScene.Duo, "stand", {pc="pc", npc="vion", npcAction="stand"})
 		saynn("Vion sighs, exhaling a breath he's been holding for a long time.")
 		saynn("[say=Vion]That could have gotten ugly.[/say]")
 		saynn("[say=pc]But it didn't. That should take care of things, right?[/say]")
@@ -114,7 +114,7 @@ func _run():
 		addButton("Leave", "", "endthescene")
 
 func _react(_action: String, _args):
-	var rush = getCharacter("Rush")
+	var rush = getCharacter("rush")
 	if(_action == "observe"):
 		rush.getInventory().forceEquipStoreOtherUnlessRestraint(GlobalRegistry.createItem("inmatewristcuffs"))
 		rush.getInventory().forceEquipStoreOtherUnlessRestraint(GlobalRegistry.createItem("inmateanklecuffs"))

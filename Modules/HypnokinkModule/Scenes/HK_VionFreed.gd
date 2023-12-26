@@ -5,8 +5,8 @@ func _init():
 
 func _run():
 	if(state == ""):
-		addCharacter("Vion")
-		playAnimation(StageScene.Duo, "stand", {npc="Vion"})
+		addCharacter("vion")
+		playAnimation(StageScene.Duo, "stand", {npc="vion"})
 		saynn("You pull out the foxy's datapad and tap through the diagnostic tools he'd preinstalled.")
 		saynn("[say=Vion]What are you up to?[/say]")
 		saynn("[say=pc]That's a surprise~[/say]")
@@ -55,35 +55,35 @@ func _run():
 		addButton("Kneel", "", "sex_1")
 
 	if(state == "sex_1"):
-		playAnimation(StageScene.SexOral, "fast", {npc="pc", pc="Vion", bodyState={exposedCrotch=true, hard=true}})
+		playAnimation(StageScene.SexOral, "fast", {npc="pc", pc="vion", bodyState={exposedCrotch=true, hard=true}})
 		saynn("You sink to your knees before him, silenced and obedient, your vision a blur.")
 		saynn("You are subdued, lost in a hazy fog, only distantly aware of what's happening.")
 		
 		addButton("Submit", "", "sex_2")
 
 	if(state == "sex_2"):
-		playAnimation(StageScene.SexStanding, "fast", {npc="pc", pc="Vion", bodyState={naked=true, hard=true}, npcBodyState={exposedCrotch=true}})	
+		playAnimation(StageScene.SexStanding, "fast", {npc="pc", pc="vion", bodyState={naked=true, hard=true}, npcBodyState={exposedCrotch=true}})	
 		saynn("At some point your clothes come off.")
 		saynn("Vion does his best to make up for lost time, your body serving as the tool of his relief. Your mind is only along for the ride.")
 
 		addButton("Obey", "", "sex_3")
 		
 	if(state == "sex_3"):
-		playAnimation(StageScene.SexMissionary, "sex", {npc="pc", pc="Vion", bodyState={naked=true, hard=true}, npcBodyState={exposedCrotch=true}})
+		playAnimation(StageScene.SexMissionary, "sex", {npc="pc", pc="vion", bodyState={naked=true, hard=true}, npcBodyState={exposedCrotch=true}})
 		saynn("Your body experiences pure, distilled pleasure and bliss.")
 		saynn("You mind drifts in a hazy, mindless, submissive trance, your thoughts silent, your will subdued.")
 		
 		addButton("Serve", "", "sex_4")
 
 	if(state == "sex_4"):
-		playAnimation(StageScene.SexAllFours, "fastflop", {npc="pc", pc="Vion", bodyState={naked=true, hard=true}, npcBodyState={exposedCrotch=true}})
+		playAnimation(StageScene.SexAllFours, "fastflop", {npc="pc", pc="vion", bodyState={naked=true, hard=true}, npcBodyState={exposedCrotch=true}})
 		saynn("Details are lost to time, your focus too dedicated to pleasure to remember anything else.")
 		saynn("The one thought you do manage to think is... [i]Totally[/i] worth it.")	
 		
 		addButton("...", "", "sex_after")
 
 	if(state == "sex_after"):
-		playAnimation(StageScene.Sleeping, "sleep", {npc="Vion", pc="pc", bodyState={naked=true}, npcBodyState={naked=true}})
+		playAnimation(StageScene.Sleeping, "sleep", {npc="vion", pc="pc", bodyState={naked=true}, npcBodyState={naked=true}})
 		saynn("A few hours later...")
 		
 		saynn("[say=Vion]Hey. Hey {pc.name}.[/say]")
@@ -127,37 +127,37 @@ func _react(_action: String, _args):
 	if(_action == "sex_2"):
 		HypnokinkUtil.raiseSuggestibilityTo(GM.pc, 75)
 		processTime(30 * 60)
-		GM.pc.cummedInMouthBy("Vion")
+		GM.pc.cummedInMouthBy("vion")
 		
 	if(_action == "sex_3"):
-		GM.pc.orgasmFrom("Vion")
+		GM.pc.orgasmFrom("vion")
 		GM.pc.addLust(100)
 		HypnokinkUtil.raiseSuggestibilityTo(GM.pc, 75)
 		processTime(30 * 60)
 		if(GM.pc.hasReachableAnus()):
-			GM.pc.cummedInAnusBy("Vion")
+			GM.pc.cummedInAnusBy("vion")
 		elif(GM.pc.hasReachableVagina()):
-			GM.pc.cummedInVaginaBy("Vion")
+			GM.pc.cummedInVaginaBy("vion")
 		else:
-			GM.pc.cummedOnBy("Vion")
+			GM.pc.cummedOnBy("vion")
 			
 	if(_action == "sex_4"):
-		GM.pc.orgasmFrom("Vion")
+		GM.pc.orgasmFrom("vion")
 		GM.pc.addLust(100)
 		HypnokinkUtil.raiseSuggestibilityTo(GM.pc, 75)
 		processTime(30 * 60)
 		if(GM.pc.hasReachableVagina()):
-			GM.pc.cummedInVaginaBy("Vion")
+			GM.pc.cummedInVaginaBy("vion")
 		elif(GM.pc.hasReachableAnus()):
-			GM.pc.cummedInAnusBy("Vion")
+			GM.pc.cummedInAnusBy("vion")
 		else:
-			GM.pc.cummedOnBy("Vion")
+			GM.pc.cummedOnBy("vion")
 		
 	if(_action == "sex_after"):
 		GM.pc.addLust(-80)
 		HypnokinkUtil.raiseSuggestibilityTo(GM.pc, 75)
 		processTime(30 * 60)
-		GM.pc.cummedOnBy("Vion")
+		GM.pc.cummedOnBy("vion")
 		
 	if(_action == "get_up"):
 		HypnokinkUtil.changeSuggestibilityBy(GM.pc, -125)

@@ -4,8 +4,8 @@ func _init():
 	sceneID = "RushIntroduction"
 
 func _run():
-	addCharacter("Rush")
-	playAnimation(StageScene.Duo, "stand", {npc="Rush"})
+	addCharacter("rush")
+	playAnimation(StageScene.Duo, "stand", {npc="rush"})
 	if(state == ""):
 		saynn("After a few minutes of searching, taking care not to let your gaze linger on anyone lest they take it as a personal slight worth stabbing over, you spot a tall stallion matching Vion's description. It would seem he's currently... using a solid wall as a boxing bag? You approach him, mustering up confidence as you go. Noticing your approach, he stops to take a breather.")
 

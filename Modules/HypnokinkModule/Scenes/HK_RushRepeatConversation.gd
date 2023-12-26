@@ -4,9 +4,9 @@ func _init():
 	sceneID = "RushRepeatConversation"
 
 func _run():
-	addCharacter("Rush")
+	addCharacter("rush")
 	if(state == ""):
-		playAnimation(StageScene.Duo, "stand", {npc="Rush"})
+		playAnimation(StageScene.Duo, "stand", {npc="rush"})
 		saynn("Rush towers over you, arms crossed.")
 		saynn("[say=Rush]So what is it, pipsqueak? Think ya can take me?[/say]")
 		
@@ -18,7 +18,7 @@ func _run():
 		addButton("Leave", "Actually you've remembered a thing at a place", "leaving")
 		
 	if(state == "backstory"):
-		playAnimation(StageScene.Duo, "stand", {npc="Rush"})
+		playAnimation(StageScene.Duo, "stand", {npc="rush"})
 		saynn("[say=Rush]Crushed a bitch's skull against th' pavement. Anger issues. Had it comin'.[/say]")
 
 		saynn("[say=pc]Oh.[/say]")
@@ -34,7 +34,7 @@ func _run():
 		addButton("Back", "", "")
 		
 	if(state == "want_dick"):
-		playAnimation(StageScene.Duo, "stand", {npc="Rush"})
+		playAnimation(StageScene.Duo, "stand", {npc="rush"})
 		saynn("You fail to provide an answer. You are too busy being mesmerized by the size of his enormous bulge... You might be drooling a little.")
 
 		saynn("Rush follows your gaze, then chuckles.")
@@ -53,7 +53,7 @@ func _run():
 		addButton("Actually no", "Functional internal organs are important", "nah_dick")
 	if(state == "need_dick"):
 		playAnimation(StageScene.SexStanding, "tease", {
-			pc="Rush", npc="pc",
+			pc="rush", npc="pc",
 			bodyState={exposedCrotch=true,hard=true},
 			npcBodyState={exposedCrotch=true,hard=true},
 		})
@@ -83,7 +83,7 @@ func _run():
 			
 	if(state == "get_fucked_pass"):
 		playAnimation(StageScene.SexStanding, "sex", {
-			pc="Rush", npc="pc",
+			pc="rush", npc="pc",
 			bodyState={exposedCrotch=true,hard=true},
 			npcBodyState={exposedCrotch=true,hard=true},
 		})
@@ -104,7 +104,7 @@ func _run():
 		addButton("Deeper", "", "get_fucked_2")
 	if(state == "get_fucked_2"):
 		playAnimation(StageScene.SexStanding, "fast", {
-			pc="Rush", npc="pc",
+			pc="rush", npc="pc",
 			bodyState={exposedCrotch=true,hard=true},
 			npcBodyState={exposedCrotch=true,hard=true},
 		})
@@ -120,7 +120,7 @@ func _run():
 		
 	if(state == "get_fucked_orgasm"):
 		playAnimation(StageScene.SexStanding, "inside", {
-			pc="Rush", npc="pc",
+			pc="rush", npc="pc",
 			bodyState={exposedCrotch=true,hard=true},
 			npcBodyState={exposedCrotch=true,hard=true},
 		})
@@ -174,14 +174,14 @@ func _run():
 
 		addButton("Leave", "", "endthescene")
 	if(state == "nah_dick"):
-		playAnimation(StageScene.Duo, "stand", {npc="Rush"})
+		playAnimation(StageScene.Duo, "stand", {npc="rush"})
 		saynn("You regain your senses enough to shake your head. Rush pats his enormous, massive bulge. You watch as it bounces, eventually managing to break your gaze.")
 
 		saynn("[say=Rush]Yeh, tha's about right. Not many a cocksleeve tha' can handle [i]this[/i] bad boy.[/say]")
 
 		addButton("Back", "", "")
 	if(state == "fight_me"):
-		playAnimation(StageScene.Duo, "stand", {npc="Rush"})
+		playAnimation(StageScene.Duo, "stand", {npc="rush"})
 		saynn("He guffaws.")
 
 		saynn("[say=Rush]Hah! Haha, tha's hilarious! Yer funny, pipsqueak![/say]")
@@ -195,7 +195,7 @@ func _run():
 		addButton("Deal", "This will hurt", "deal")
 		addButton("No deal", "You don't like your chances", "no_deal")
 	if(state == "deal"):
-		playAnimation(StageScene.Duo, "stand", {npc="Rush"})
+		playAnimation(StageScene.Duo, "stand", {npc="rush"})
 		saynn("His attitude sobers. He flexes, and enters a classic boxing stance.")
 
 		saynn("[say=Rush]Alrigh', but don' go sayin' I didn't warn ya. Put 'em up.[/say]")
@@ -204,14 +204,14 @@ func _run():
 
 		addButton("Put 'em up", "You weren't using all those ribs anyway", "put_em_up")
 	if(state == "no_deal"):
-		playAnimation(StageScene.Duo, "stand", {npc="Rush"})
+		playAnimation(StageScene.Duo, "stand", {npc="rush"})
 		saynn("He claps you on the back, sending you stumbling into the wall.")
 
 		saynn("[say=Rush]Yeh tha's right. Good on ya, broken bones ain't no fun for no one.[/say]")
 		
 		addButton("Back", "", "")
 	if(state == "if_won"):
-		playAnimation(StageScene.Duo, "stand", {npc="Rush", npcAction="defeat"})
+		playAnimation(StageScene.Duo, "stand", {npc="rush", npcAction="defeat"})
 		saynn("Rush stumbles and falls to one knee.")
 		
 		saynn("[say=Rush]Whoo. Ya got a mean kick to ye, pipsqueak.[/say]")
@@ -229,7 +229,7 @@ func _run():
 				addDisabledButton("Solution", "Keep fighting\n\nYou'll need a set of wrist and ankle cuffs for this")
 		
 	if(state == "if_lost"):
-		playAnimation(StageScene.Duo, "defeat", {npc="Rush"})
+		playAnimation(StageScene.Duo, "defeat", {npc="rush"})
 		saynn("With one last mighty kick, Rush sends you sprawling on the floor.")
 		
 		saynn("[say=Rush]Hah! Tha's right![/say]")
@@ -262,7 +262,7 @@ func _run():
 		addButton("Leave", "Actually, maybe not", "endthescene")
 		
 	if(state == "if_lost_serious"):
-		playAnimation(StageScene.Rekt, "kill", {pc="Rush", npc="pc"})
+		playAnimation(StageScene.Rekt, "kill", {pc="rush", npc="pc"})
 		saynn("You stumble back, and only have time to wince before Rush throttles your neck and slams you into the wall. Your vision swims.")
 		
 		saynn("[say=Rush]Ya fuckin' stupid-[/say]")
@@ -279,7 +279,7 @@ func _run():
 		
 		addButton("Oh shit", "Better say something while you still can", "if_lost_serious_2")
 	if(state == "if_lost_serious_2"):
-		playAnimation(StageScene.Rekt, "end", {pc="Rush", npc="pc"})
+		playAnimation(StageScene.Rekt, "end", {pc="rush", npc="pc"})
 		saynn("[say=pc]Wa- wait, I-[/say]")
 		
 		saynn("[say=Rush]SHUT the FUCK up![/say]")
@@ -301,7 +301,7 @@ func _run():
 		addButton("Ow", "", "endthescene")
 		
 	if(state == "leaving"):
-		playAnimation(StageScene.Duo, "stand", {npc="Rush"})
+		playAnimation(StageScene.Duo, "stand", {npc="rush"})
 		saynn("He does raise a valid point. Or maybe you just don't want your body parts, external [i]or[/i] internal, rearranged. Either way, you leave before he does something you regret.")
 		
 		saynn("[say=Rush]Alrigh', well see ya around pipsqueak! Y'know where t' find me![/say]")
@@ -313,11 +313,11 @@ func _run():
 
 func _react(_action: String, _args):
 	if(_action == "put_em_up"):
-		runScene("FightScene", ["Rush"], "boxing")
+		runScene("FightScene", ["rush"], "boxing")
 		return
 		
 	if(_action == "put_em_up_again"):
-		runScene("FightScene", ["Rush", "boxing_serious"], "boxing_serious")
+		runScene("FightScene", ["rush", "boxing_serious"], "boxing_serious")
 		return
 		
 	if(_action == "get_fucked_check"):
@@ -330,9 +330,9 @@ func _react(_action: String, _args):
 			_action = "get_fucked_fail"
 			
 	if(_action == "get_fucked_orgasm"):
-		GM.pc.gotAnusFuckedBy("Rush")
-		GM.pc.cummedInAnusBy("Rush")
-		GM.pc.orgasmFrom("Rush")
+		GM.pc.gotAnusFuckedBy("rush")
+		GM.pc.cummedInAnusBy("rush")
+		GM.pc.orgasmFrom("rush")
 		GM.pc.addSkillExperience(Skill.SexSlave, 50)
 		
 	if(_action == "get_fucked_after"):
@@ -340,11 +340,11 @@ func _react(_action: String, _args):
 		setFlag("HypnokinkModule.OnTheHouseSessions", RNG.randi_range(1,3))
 		
 	if(_action == "debug_fight"):
-		runScene("FightScene", ["Rush"], "guardfight")
+		runScene("FightScene", ["rush"], "guardfight")
 		return
 		
 	if(_action == "debug_sex"):
-		runScene("GenericSexScene", ["pc", "Rush"], "domsex")
+		runScene("GenericSexScene", ["pc", "rush"], "domsex")
 		return
 		
 	if(_action == "leave_victorious"):

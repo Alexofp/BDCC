@@ -8,8 +8,8 @@ func _initScene(_args = []):
 
 func _run():
 	if(state == ""):
-		addCharacter("Vion")
-		playAnimation(StageScene.Duo, "sit", {npc="Vion", npcAction="sit"})
+		addCharacter("vion")
+		playAnimation(StageScene.Duo, "sit", {npc="vion", npcAction="sit"})
 
 		saynn("[say=Vion]Bondage is such an interesting, multifaceted topic. What is it about it that interests you? Is it the feeling of restriction, of vulnerability, of powerlessness? Or is it the snug restraints that allow you not to be in control, to simply submit?[/say]")
 
@@ -17,7 +17,7 @@ func _run():
 		
 		addButton("Continue", "", "after_intro")
 	if(state == "after_intro"):
-		playAnimation(StageScene.Duo, "sit", {npc="Vion", npcAction="sit"})
+		playAnimation(StageScene.Duo, "sit", {npc="vion", npcAction="sit"})
 		saynn("[say=Vion]I'll start by locking these special cuffs on you. Until I say otherwise, you won't be able to take them off, no matter what you do. Understand?[/say]")
 
 		saynn("You nod as he lets go of your right wrist, grabbing your left instead. He squeezes again, repeating the motions of fastening a cuff around it.")
@@ -32,7 +32,7 @@ func _run():
 		addButton("Continue", "", "after_wrist_cuffs")
 
 	if(state == "after_wrist_cuffs"):
-		playAnimation(StageScene.Duo, "sit", {npc="Vion", npcAction="sit"})
+		playAnimation(StageScene.Duo, "sit", {npc="vion", npcAction="sit"})
 		saynn("[say=Vion]Now let's take care of your legs. Keep nice and still now...[/say]")
 
 		saynn("You can't help but shiver as you feel Vion wrap his hands around first your left, then your right ankle, feeling the tension as he twists his hands around them.")
@@ -43,7 +43,7 @@ func _run():
 		addButton("Continue", "", "after_ankle_cuffs")
 		
 	if(state == "after_ankle_cuffs"):
-		playAnimation(StageScene.Duo, "kneel", {npc="Vion", npcAction="sit"})
+		playAnimation(StageScene.Duo, "kneel", {npc="vion", npcAction="sit"})
 		saynn("[say=Vion]The best part about being restrained by the power of your own mind, though? Its how convenient it can be. [b]Kneel[/b] for me.[/say]")
 
 		saynn("The restraining strength of Vion's hypnotic command abates for just a moment, allowing you to get down on your knees, only to return immediately afterwards, even stronger than before.")
@@ -60,7 +60,7 @@ func _run():
 
 		addButton("Continue", "", "after_anchoring")
 	if(state == "after_anchoring"):
-		playAnimation(StageScene.DuoHypnoTied, "sit", {pc="Vion", npc="pc", npcAction="kneel", flipNPC=true})
+		playAnimation(StageScene.DuoHypnoTied, "sit", {pc="vion", npc="pc", npcAction="kneel", flipNPC=true})
 		saynn("You helplessly stare ahead, shivering as Vion circles behind you.")
 		
 		if(GM.pc.hasTail()):
@@ -75,7 +75,7 @@ func _run():
 		
 		
 	if(state == "wait"):
-		playAnimation(StageScene.DuoHypnoTied, "stand", {pc="Vion", npc="pc", npcAction="kneel"})
+		playAnimation(StageScene.DuoHypnoTied, "stand", {pc="vion", npc="pc", npcAction="kneel"})
 		
 		saynn("You kneel there, restrained by your own desires.")
 

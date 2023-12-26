@@ -5,8 +5,8 @@ func _init():
 
 func _run():
 	if(state == ""):
-		addCharacter("Vion")
-		playAnimation(StageScene.Duo, "stand", {npc="Vion"})
+		addCharacter("vion")
+		playAnimation(StageScene.Duo, "stand", {npc="vion"})
 		saynn("You are standing in {Vion.name}'s cell.")
 
 		if(!getFlag("HypnokinkModule.VionTopicKnown_NoSex")):
@@ -273,10 +273,10 @@ func _react(_action: String, _args):
 		return
 		
 	if(_action == "debug_fight"):
-		runScene("FightScene", ["Vion"], "guardfight")
+		runScene("FightScene", ["vion"], "guardfight")
 		return
 	if(_action == "debug_sex"):
-		runScene("GenericSexScene", ["pc", "Vion"], "domsex")
+		runScene("GenericSexScene", ["pc", "vion"], "domsex")
 		return
 
 	setState(_action)

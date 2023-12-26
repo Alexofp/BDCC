@@ -8,8 +8,8 @@ func _initScene(_args = []):
 
 func _run():
 	if(state == ""):
-		addCharacter("Vion")
-		playAnimation(StageScene.Duo, "sit", {npc="Vion", npcAction="sit"})
+		addCharacter("vion")
+		playAnimation(StageScene.Duo, "sit", {npc="vion", npcAction="sit"})
 		
 		saynn("[say=Vion]Forget for a moment where you are. Let your physical body fade from your thoughts. Disassociate from the present. As your current surroundings fade from your thoughts, instead imagine yourself in a worn, yet well maintained airlock. There is a pleasant scent in the air, familiar but not distracting.[/say]")
 
