@@ -13,11 +13,11 @@ func _run():
 		
 		saynn("[say=Vion]Now where did I put that...[/say]")
 
-		saynn("{Vion.name} looks around, searches under his pillow of his bed, then behind one of the sofa's cushions, before finally bending down and rooting under the sofa. He victoriously emerges with a small flashlight in his grasp. You recognize it as the type that comes with some of the mining gear.")
+		saynn("{vion.name} looks around, searches under his pillow of his bed, then behind one of the sofa's cushions, before finally bending down and rooting under the sofa. He victoriously emerges with a small flashlight in his grasp. You recognize it as the type that comes with some of the mining gear.")
 
 		saynn("[say=Vion]Sit down on the sofa, if you'd please.[/say]")
 		
-		saynn("You do so. {Vion.name} brings the chair over and seats himself directly opposite of you.")
+		saynn("You do so. {vion.name} brings the chair over and seats himself directly opposite of you.")
 
 		saynn("[say=Vion]Now this is very simple. All you have to do is follow the light, alright?[/say]")
 
@@ -30,7 +30,7 @@ func _run():
 		saynn("[say=Vion]Ah, no, keep your head still please. Follow it with just your eyes.[/say]")
 		saynn("[say=Vion]Relax your shoulders. Lean into the cushions. No need to be so stiff.[/say]")
 
-		saynn("You try your best to relax as your eyes follow the circle as {Vion.name} traces it in the air in front of you.")
+		saynn("You try your best to relax as your eyes follow the circle as {vion.name} traces it in the air in front of you.")
 
 		saynn("[say=Vion]Focus on the light. Let the world fade into the background. Round and round it goes...[/say]")
 
@@ -42,7 +42,7 @@ func _run():
 
 		saynn("[say=Vion]In a moment, the light will stop circling. Continue watching it, focusing on it.[/say]")
 
-		saynn("{Vion.name} stops the light, holding in steady and still, right in front of your eyes. Then he slowly brings it closer and closer, until your eyes begin to cross...")
+		saynn("{vion.name} stops the light, holding in steady and still, right in front of your eyes. Then he slowly brings it closer and closer, until your eyes begin to cross...")
 
 		saynn("[say=Vion]Excellent, you're doing very well...[/say]")
 

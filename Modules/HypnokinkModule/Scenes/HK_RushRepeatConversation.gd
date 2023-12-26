@@ -69,7 +69,7 @@ func _run():
 
 		saynn("[say=Rush]Lean against th' wall. Ya gonna want some support for this.[/say]")
 		
-		saynn("Valid suggestion. You lean against the wall, taking the opportunity to spread your legs wide. Rush steps behind you, slapping his {Rush.cockDesc} "+RNG.pick(["cock", "dick", "member"])+" against your back. A cold sense of dread spreads down your spine as you feel its flared tip rest between your shoulder blades. Rush forces his fingers deeper into you, continuing to methodically lubricate your passage.")
+		saynn("Valid suggestion. You lean against the wall, taking the opportunity to spread your legs wide. Rush steps behind you, slapping his {rush.cockDesc} "+RNG.pick(["cock", "dick", "member"])+" against your back. A cold sense of dread spreads down your spine as you feel its flared tip rest between your shoulder blades. Rush forces his fingers deeper into you, continuing to methodically lubricate your passage.")
 		
 		saynn("[say=pc]Mmh...[/say]")
 		
@@ -77,7 +77,7 @@ func _run():
 		
 		saynn("[say=Rush]Time for th' main event. Ya ready, pipsqueak?[/say]")
 		
-		saynn("Continuing with his unexpectedly careful approach, he positions his {Rush.cockDesc}"+RNG.pick(["cock", "dick", "member"])+" at the opening of your needy tailhole, it’s flared head prodding against your {pc.analStretch} entrance. Then, slowly but firmly, he begins to push against it.")
+		saynn("Continuing with his unexpectedly careful approach, he positions his {rush.cockDesc}"+RNG.pick(["cock", "dick", "member"])+" at the opening of your needy tailhole, it’s flared head prodding against your {pc.analStretch} entrance. Then, slowly but firmly, he begins to push against it.")
 
 		addButton("Take it", "This is gonna be a stretch", "get_fucked_check")
 			
@@ -87,7 +87,7 @@ func _run():
 			bodyState={exposedCrotch=true,hard=true},
 			npcBodyState={exposedCrotch=true,hard=true},
 		})
-		saynn("It takes Rush several attempts before he manages to push his {Rush.cockDesc}"+RNG.pick(["cock", "dick", "member"])+" into you, even with the stretching earlier. When it finally slips in, it feels a lot like being impaled by a tree trunk.")
+		saynn("It takes Rush several attempts before he manages to push his {rush.cockDesc}"+RNG.pick(["cock", "dick", "member"])+" into you, even with the stretching earlier. When it finally slips in, it feels a lot like being impaled by a tree trunk.")
 
 		saynn("[say=pc]F-fuuuck okay okay it's in![/say]")
 		
@@ -99,7 +99,7 @@ func _run():
 		
 		saynn("[say=pc]Nnnh no I'm good! K-keep going![/say]")
 		
-		saynn("Rush snorts and picks up the pace, now pistoning ever deeper. His {Rush.cockDesc}"+RNG.pick(["cock", "dick", "member"])+" continues to rub along your insides, thankfully sufficiently lubricated.")
+		saynn("Rush snorts and picks up the pace, now pistoning ever deeper. His {rush.cockDesc}"+RNG.pick(["cock", "dick", "member"])+" continues to rub along your insides, thankfully sufficiently lubricated.")
 		
 		addButton("Deeper", "", "get_fucked_2")
 	if(state == "get_fucked_2"):
@@ -108,7 +108,7 @@ func _run():
 			bodyState={exposedCrotch=true,hard=true},
 			npcBodyState={exposedCrotch=true,hard=true},
 		})
-		saynn("Relentless, Rush continues to pound your ass. Your pleasure builds as he picks up more and more speed, pushing deeper into you with every shove of his {Rush.cockDesc}"+RNG.pick(["cock", "dick", "member"])+" Your legs start uncontrollably shaking so much you're not sure you could stay standing if it weren't for the cock in you acting as support.")
+		saynn("Relentless, Rush continues to pound your ass. Your pleasure builds as he picks up more and more speed, pushing deeper into you with every shove of his {rush.cockDesc}"+RNG.pick(["cock", "dick", "member"])+" Your legs start uncontrollably shaking so much you're not sure you could stay standing if it weren't for the cock in you acting as support.")
 		
 		saynn("[say=Rush]You're taking it so fuckin' good, pipsqueak. Not long now, ya hear?[/say]")
 		
@@ -160,7 +160,7 @@ func _run():
 		addButton("Oof", "", "endthescene")
 		
 	if(state == "get_fucked_fail"):
-		saynn("Rush makes several attempts to push his {Rush.cockDesc}"+RNG.pick(["cock", "dick", "member"])+" into you, but despite the stretching earlier it refuses to fit. Soon enough pleasure gives way to frustration.")
+		saynn("Rush makes several attempts to push his {rush.cockDesc}"+RNG.pick(["cock", "dick", "member"])+" into you, but despite the stretching earlier it refuses to fit. Soon enough pleasure gives way to frustration.")
 
 		saynn("[say=Rush]Looks like yer all talk, pipsqueak. Ain't gettin' it in without rippin' ya in two.[/say]")
 		

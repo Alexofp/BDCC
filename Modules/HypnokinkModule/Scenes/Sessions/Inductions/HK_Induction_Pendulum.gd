@@ -13,7 +13,7 @@ func _run():
 		
 		saynn("[say=Vion]Sit down on the sofa, if you'd please.[/say]")
 		
-		saynn("You do so. {Vion.name} brings the chair over and seats himself directly opposite of you.")
+		saynn("You do so. {vion.name} brings the chair over and seats himself directly opposite of you.")
 		
 		saynn("[say=Vion]Let's go with a classic, shall we?[/say]")
 

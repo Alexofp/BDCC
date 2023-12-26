@@ -7,7 +7,7 @@ func _run():
 	if(state == ""):
 		addCharacter("vion")
 		playAnimation(StageScene.Duo, "stand", {npc="vion"})
-		saynn("You are standing in {Vion.name}'s cell.")
+		saynn("You are standing in {vion.name}'s cell.")
 
 		if(!getFlag("HypnokinkModule.VionTopicKnown_NoSex")):
 			addButton("Sex?", "Up for a fuck?", "ask_sex_fromMain")
@@ -103,13 +103,13 @@ func _run():
 	if(state == "ask_job"):
 		saynn("[say=pc]So when you say services...[/say]")
 		
-		saynn("{Vion.name} holds up a hand to stop you.")
+		saynn("{vion.name} holds up a hand to stop you.")
 		
 		saynn("[say=Vion]Not what you're thinking of, I assure you.[/say]")
 		
 		saynn("[say=Vion]Actually, my occupational skillset happens to remain somewhat useful even in a prison. I am... hm. I [i]was[/i] a licensed hypnotist.[/say]")
 
-		saynn("Skepticism must have shown on your face, because {Vion.name} quickly follows up:")
+		saynn("Skepticism must have shown on your face, because {vion.name} quickly follows up:")
 		
 		saynn("[say=Vion]Not the kind you'd find in cheap movies or adult-only novellas. I don't promise miracles and can't make people think they're frogs or anything like that. Think of it more as guided relaxation and basic therapy.[/say]")
 		
@@ -202,7 +202,7 @@ func _run():
 
 		saynn("[say=Vion]Funny how the usually ever so diligent guards seemed to overlook it during the intake process, isn't it?[/say]")
 
-		saynn("He idly kicks at the chair, making it rattle across the floor. You suspect {Vion.name} does [i]not[/i] find the joke very funny.")
+		saynn("He idly kicks at the chair, making it rattle across the floor. You suspect {vion.name} does [i]not[/i] find the joke very funny.")
 
 		setFlag("HypnokinkModule.VionTopicKnown_Chastity", true)
 		addButton("Back", "", "questions")

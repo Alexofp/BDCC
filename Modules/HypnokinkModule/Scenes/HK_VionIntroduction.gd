@@ -28,7 +28,7 @@ func _run():
 	if(state == "introduction"):
 		saynn("[say=pc]My name's {pc.name}. I don't believe we've met?[/say]")
 
-		saynn("[say=Vion]I go by {Vion.name}. Pleasure. Now, care to clear the door and let me into my parlor?[/say]")
+		saynn("[say=Vion]I go by {vion.name}. Pleasure. Now, care to clear the door and let me into my parlor?[/say]")
 
 		saynn("You do seem to be blocking the doorway.")
 
@@ -36,7 +36,7 @@ func _run():
 	if(state == "gang_way"):
 		saynn("[say=pc]Oh. Lemme get out of your way.[/say]")
 
-		saynn("You step aside and watch as {Vion.name} walks inside, then plops down on the bed.")
+		saynn("You step aside and watch as {vion.name} walks inside, then plops down on the bed.")
 		
 		saynn("[say=Vion]So {pc.name}, do you need anything?[/say]")
 

@@ -53,15 +53,15 @@ func _run():
 
 		addButton("Decide", "Think about it", "meta_desc")
 	if(state == "meta_desc"):
-		saynn("Make a choice of how {Vion.name} will approach your sessions.")
+		saynn("Make a choice of how {vion.name} will approach your sessions.")
 
-		saynn("A caring approach will result in slower Hypnosis skill xp gain, but {Vion.name} will always make sure to snap you out of hypnosis and the buffs gained will last longer.")
+		saynn("A caring approach will result in slower Hypnosis skill xp gain, but {vion.name} will always make sure to snap you out of hypnosis and the buffs gained will last longer.")
 
 		saynn("A mean approach will result in rapid Hypnosis skill xp gain, but you will be left in a vulnerable mental state after your sessions, with your buffs expiring quickly to encourage frequent returns.")
 
 		saynn("The professional approach offers a healthy balance.")
 
-		saynn("While the content of specific sessions will always depend primarily on that session's topic, {Vion.name} may be more (or less) likely to use specific phrasing depending on your choice.")
+		saynn("While the content of specific sessions will always depend primarily on that session's topic, {vion.name} may be more (or less) likely to use specific phrasing depending on your choice.")
 
 		saynn("Your choice can be changed later by repeating Session Zero.")
 

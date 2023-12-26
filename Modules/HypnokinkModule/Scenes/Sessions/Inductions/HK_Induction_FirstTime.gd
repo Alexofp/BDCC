@@ -25,7 +25,7 @@ func _run():
 
 		saynn("[say=Vion]Better. Understand, at its core hypnosis, or trance, or flow, whatever you want to call it, is simply a heightened state of focus. Ever caught yourself staring out a window for ten minutes straight, just watching the wind blow? It's the same principle.[/say]")
 
-		saynn("{Vion.name} crosses his fingers below his chin and leans a bit closer.")
+		saynn("{vion.name} crosses his fingers below his chin and leans a bit closer.")
 
 		saynn("[say=Vion]What we're going to be doing today is building an association between a word and a specific mental state. Like any skill, being a good hypnosis subject takes practice and time. Through repetition, this association will become stronger and stronger over time.[/say]")
 

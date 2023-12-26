@@ -13,7 +13,7 @@ func _run():
 
 		saynn("[say=Vion]I think you've had enough practice by now, {pc.name}. Let's try shortcut this time. Sit down, lean back and close your eyes please.[/say]")
 
-		saynn("{Vion.name} sits opposite you as usual. You close your eyes as instructed.")
+		saynn("{vion.name} sits opposite you as usual. You close your eyes as instructed.")
 
 		saynn("[say=Vion]Good. Relax, get comfortable. Take a deep breath.[/say]")
 
