@@ -1285,7 +1285,178 @@ func _run():
 
 		saynn("He finally manages to roll it off. He unscrews one of the panels, exposing the wiring and internal parts.")
 
-		saynn("[say=alexrynard]Yeah, some capacitors got damaged. Shouldn't take too long to fix.[/say]")
+		saynn("[say=alexrynard]Yeah, some capacitors got crushed. Shouldn't take too long to fix.[/say]")
+
+		saynn("And so you keep the light on him while he proceeds to carefully remove the busted components and replace them.")
+
+		saynn("[say=alexrynard]Strange that the rock fell exactly on it.[/say]")
+
+		saynn("[say=pc]What if it wasn't a coincidence?[/say]")
+
+		saynn("[say=alexrynard]You'd need a lot of strength to lift one big enough to break this generator. They're armored as you can see.[/say]")
+
+		saynn("Click.. and the generator kicks into action. The lights around you flicker a lot.. until the current normalizes.")
+
+		saynn("[say=alexrynard]Voila.[/say]")
+
+		saynn("That was easy. But nothing in the world is ever that easy..")
+
+		saynn("[say=avy]Look who's we got here.[/say]")
+
+		saynn("A familiar voice behind you..")
+
+		addButton("Look around", "See what's up", "time6_avy_and_gang")
+	if(state == "time6_avy_and_gang"):
+		addCharacter("avy")
+		addCharacter("stud")
+		addCharacter("volk")
+		playAnimation(StageScene.Duo, "stand", {pc="alexrynard", npc="avy"})
+		saynn("You look around and see a group of three inmates surrounding you.. A black fox with a cheeky smile, a brown horse with a strong hand holding a pickaxe and a gray wolf with a crazy stare. None of them seem to be particularly friendly..")
+
+		saynn("[say=alexrynard]Generator is fixed, get back to your jobs.[/say]")
+
+		saynn("They're blocking the way back to the station. Alex is reaching for his shock remote already..")
+
+		saynn("[say=alexrynard]I'm warning you.[/say]")
+
+		saynn("[say=avy]Relax, pretty boy. If I get what I want, no one will get hurt.[/say]")
+
+		saynn("Yeah, they are probably responsible for breaking that generator..")
+
+		saynn("[say=alexrynard]Yeah, no.[/say]")
+
+		saynn("Alex whips the shock remote and aims it at the gang of inmates.. He presses the red button, dropping one of the inmates.")
+
+		saynn("[say=volk]SUKA! MY NECK![/say]")
+
+		saynn("But before the remote can recharge, the buff horse suddenly throws his pickaxe at him.")
+
+		saynn("[say=alexrynard]What the..[/say]")
+
+		saynn("The dull part of the tool hits Alex's chest, causing him to drop what he was holding. And before Alex can pick it up, the black fox swiftly closes the distance and crushes the dropped remote with her foot, stealing any hope of an easy victory..")
+
+		saynn("[say=avy]Wow, you don't even want to hear me out first? We didn't even start dating and you have already broken my trust.[/say]")
+
+		saynn("[say=alexrynard]If you touch us, you're gonna regret it.[/say]")
+
+		saynn("The black foxy chuckles.")
+
+		saynn("[say=avy]Empty threats, so predictable. Either way.. I only want you to help take off our collars. And we all gonna go on our merry ways, completely unharmed and with all bones intact.[/say]")
+
+		saynn("[say=alexrynard]What? That's the point of the collars, no one can remove them.[/say]")
+
+		saynn("The black foxy steps forward and barks..")
+
+		saynn("[say=avy]Don't bullshit me, boy. I know that you designed them. Which means you know how to take them off.[/say]")
+
+		saynn("Alex tilts his head, deeply confused.")
+
+		saynn("[say=alexrynard]How the fuck do you know that?[/say]")
+
+		saynn("Avy directs her stare at you.. Her silent nod is deafening.")
+
+		saynn("[say=alexrynard]What? There is no way..[/say]")
+
+		addButton("She is lying!", "You didn't tell her that!", "time6_sheislying")
+	if(state == "time6_sheislying"):
+		playAnimation(StageScene.Duo, "hurt", {npc="stud", npcAction="shove"})
+		saynn("You're pretty sure you never told anyone that Alex was involved with creating the collars..")
+
+		saynn("[say=pc]She is lying! I never told her anything.[/say]")
+
+		saynn("The dark foxy chuckles.")
+
+		saynn("[say=avy]Really? You want to keep both the credits and your new boyfriend? Something has to give~.[/say]")
+
+		saynn("Alex, looking even more confused and unsure now..")
+
+		saynn("[say=alexrynard]I..[/say]")
+
+		saynn("[say=pc]What the fuck are you talking about.[/say]")
+
+		saynn("[say=alexrynard]We will deal with that later.. Right now..[/say]")
+
+		saynn("[say=avy]Right now it's time to take our collars off, boy~.[/say]")
+
+		saynn("Avy and the other two inmates start approaching Alex, one at the time. You try to stay close to him but the buff horse shoves you away.")
+
+		saynn("[say=stud]Go the fuck away if you want to live.[/say]")
+
+		saynn("Alex and the dark foxy are exchanging the first punches behind this mountain of muscles.. You can't leave him like this..")
+
+		addButton("Fight!", "Start the fight", "time6_into_first_fight")
+		addButton("Shock remote", "Look at it", "time6_lookatshockremote")
+	if(state == "time6_into_first_fight"):
+		playAnimation(StageScene.Duo, "dodge", {npc="volk", npcAction="shiv"})
+		saynn("[say=pc]You're gonna pay for this, you fuckers.[/say]")
+
+		saynn("You were ready to fight the buff horse but the gray wolf steps in and pulls a shiv out, before trying to stab you with it!")
+
+		saynn("[say=volk]Wanna see the world red, suka. Gonna make you leak.[/say]")
+
+		saynn("Luckily you manage to avoid his first swing..")
+
+		saynn("It's time to fight.")
+
+		addButton("Fight", "Start the first fight", "time6_first_fight")
+	if(state == "time6_lost_fight"):
+		playAnimation(StageScene.Solo, "defeat")
+		saynn("You lost the fight.. Ow.. The bruises hurt badly.")
+
+		saynn("Alex is being beat up in the background.. You have to stop them or they're gonna kill him..")
+
+		saynn("Think..")
+
+		addButton("Shock remote", "Try to use it", "time6_lost_fight_useremote")
+	if(state == "time6_second_fight"):
+		playAnimation(StageScene.Duo, "stand", {npc="stud"})
+		saynn("You managed to beat the gray wolf. He hisses loudly as he hits the floor, his hand dropping the shiv.")
+
+		saynn("[say=volk]I WILL CUT YOU-U..[/say]")
+
+		saynn("The horse is still blocking your path though.")
+
+		saynn("[say=avy]Fuck.[/say]")
+
+		saynn("You look behind the stud and notice that Alex has managed to bring the dark foxy down.. But not for long, she injects something into herself and rushes back into the fight.")
+
+		saynn("[say=stud]I will crush you, stupid whore.[/say]")
+
+		saynn("Can't avoid this one.. Time to fight..")
+
+		addButton("Fight", "Start the first fight", "time6_do_second_fight")
+	if(state == "time6_third_fight"):
+		playAnimation(StageScene.Duo, "defeat", {pc="alexrynard", npc="avy"})
+		saynn("[say=alexrynard]Fuck!..[/say]")
+
+		saynn("Alex drops to his knees, defeated. Avy grabs him by the throat, her claws putting pressure on his skin.")
+
+		saynn("[say=avy]Ready to tell me, failed hero? I really don't want to kill you.[/say]")
+
+		saynn("[say=pc]Hey! Let him go and fight me, you bitch.[/say]")
+
+		saynn("Alex just growls back and tries to free himself, his spine whirring loudly. Avy just stares him into the eyes.")
+
+		saynn("[say=avy]Aww, why are you SUCH A BETA.[/say]")
+
+		saynn("Avy suddenly throws Alex down to the cold floor.. before [b]stomping[/b] on his back hard, [b]crushing his prosthetic spine[/b].. Sparks bursting out of it as Alex lets out a gut-wrenching cry.")
+
+		saynn("[say=alexrynard]A-ARGH!..[/say]")
+
+		saynn("[say=avy]We will talk later, pretty boy. Don't go anywhere, I need to deal with your little wife~.[/say]")
+
+		saynn("Alex is in too much pain to respond..")
+
+		saynn("Avy looks at you next.")
+
+		saynn("[say=avy]Come here, bitch.[/say]")
+
+		saynn("She is still clearly under the influence of something.. Who knows when it will run out. Time to fight..")
+
+		addButton("Fight", "Start the first fight", "time6_do_third_fight")
+	if(state == "time6_won_avy"):
+		playAnimation(StageScene.Duo, "stand", {npc="avy", npcAction="defeat"})
+		saynn("Avy drops to her knees, defeated.")
 
 
 func _react(_action: String, _args):
@@ -1416,7 +1587,60 @@ func _react(_action: String, _args):
 	if(_action == "time6_mine"):
 		processTime(10*60)
 
+	if(_action == "time6_avy_and_gang"):
+		processTime(5*60)
+
+	if(_action == "time6_first_fight"):
+		runScene("FightScene", ["volk"], "time6_fight_1")
+		return
+
+	if(_action == "time6_do_second_fight"):
+		runScene("FightScene", ["stud"], "time6_fight_2")
+		return
+
+	if(_action == "time6_do_third_fight"):
+		runScene("FightScene", ["avy"], "time6_fight_3")
+		getCharacter("avy").addEffect(StatusEffect.DrugStrong, [6])
+		return
+
 	setState(_action)
+
+func _react_scene_end(_tag, _result):
+	if(_tag == "time6_fight_1"):
+		processTime(5 * 60)
+		var battlestate = _result[0]
+		
+		if(battlestate == "win"):
+			setState("time6_second_fight")
+			addExperienceToPlayer(10)
+		else:
+			setState("time6_lost_fight")
+			addExperienceToPlayer(5)
+			endScene()
+
+	if(_tag == "time6_fight_2"):
+		processTime(5 * 60)
+		var battlestate = _result[0]
+		
+		if(battlestate == "win"):
+			setState("time6_third_fight")
+			addExperienceToPlayer(20)
+		else:
+			setState("time6_lost_fight")
+			addExperienceToPlayer(5)
+			endScene()
+
+	if(_tag == "time6_fight_3"):
+		processTime(5 * 60)
+		var battlestate = _result[0]
+		
+		if(battlestate == "win"):
+			setState("time6_won_avy")
+			addExperienceToPlayer(50)
+		else:
+			setState("time6_lost_fight")
+			addExperienceToPlayer(10)
+			endScene()
 
 func saveData():
 	var data = .saveData()
