@@ -11,15 +11,15 @@ func _run():
 		addCharacter("vion")
 		playAnimation(StageScene.Duo, "sit", {npc="vion", npcAction="sit"})
 		
-		saynn("[say=Vion]Not much point in an induction if you're going to come to me already hypnotized, is there?[/say]")
+		saynn("[say=vion]Not much point in an induction if you're going to come to me already hypnotized, is there?[/say]")
 		
 		saynn("{vion.He} sighs and guides you over to the sofa.")
 		
-		saynn("[say=Vion]Sit.[/say]")
+		saynn("[say=vion]Sit.[/say]")
 		
 		saynn("You sit down. {vion.name} brings the chair over and seats himself directly opposite of you.")
 		
-		saynn("[say=Vion]And just to make sure... [b]Sleep.[/b][/say]")
+		saynn("[say=vion]And just to make sure... [b]Sleep.[/b][/say]")
 		
 		addButton("Sleep", "", "endthescene")
 

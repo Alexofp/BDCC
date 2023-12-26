@@ -8,7 +8,7 @@ func _run():
 		addCharacter("vion")
 		playAnimation(StageScene.Duo, "stand", {npc="vion"})
 		saynn("You pull out the foxy's datapad and tap through the diagnostic tools he'd preinstalled.")
-		saynn("[say=Vion]What are you up to?[/say]")
+		saynn("[say=vion]What are you up to?[/say]")
 		saynn("[say=pc]That's a surprise~[/say]")
 		saynn("Alex said he'd manage in an hour without these tools. Surely you can match that time with them?")
 
@@ -16,9 +16,9 @@ func _run():
 		
 	if(state == "hack_fail"):
 		saynn("With a frustrated snort, you decide to abandon your efforts for now.")
-		saynn("[say=Vion]Everything okay?[/say]")
+		saynn("[say=vion]Everything okay?[/say]")
 		saynn("[say=pc]Yeah, no, I'm fine. It's just a bit harder than I expected.[/say]")
-		saynn("[say=Vion]Well, whatever you're up to I'm sure you'll figure it out.[/say]")
+		saynn("[say=vion]Well, whatever you're up to I'm sure you'll figure it out.[/say]")
 		
 		addButton("Leave", "You'll get it right next time.", "hack_fail_after")
 
@@ -26,21 +26,21 @@ func _run():
 		saynn("Well that wasn't too bad. You click the confirm button with a flourish.")
 		saynn("*click*")
 		saynn("Both your and Vion's eyes are magnetized to his crotch. Its only a hearbeat later that a tent starts to form.")
-		saynn("[say=Vion]Did you just-[/say]")
+		saynn("[say=vion]Did you just-[/say]")
 		saynn("[say=pc]Yup. You can thank me later.[/say]")
-		saynn("[say=Vion]...I can thank you [i]now[/i].[/say]")
+		saynn("[say=vion]...I can thank you [i]now[/i].[/say]")
 		saynn("The almost animalistic fierceness of that statement catches you somewhat off guard.")
-		saynn("[say=Vion]Unless you aren't interested, in which case I'd suggest you vacate this cell for the next few hours.[/say]")
+		saynn("[say=vion]Unless you aren't interested, in which case I'd suggest you vacate this cell for the next few hours.[/say]")
 
 		addButton("Bail", "This seems like your exit cue.", "bail")
 		addButton("Ride it out", "What, and miss out on the price?", "ride_it_out")
 
 	if(state == "bail"):
 		saynn("[say=pc]I'll leave you to it. Have fun![/say]")
-		saynn("[say=Vion]Oh, I will.[/say]")
+		saynn("[say=vion]Oh, I will.[/say]")
 
 		saynn("Making sure to scoop up the cage first, you let yourself out, Vion hot on your heels. He leans out and flags down a passing lynx.")
-		saynn("[say=Vion]Hey! You up for a fuck?[/say]")
+		saynn("[say=vion]Hey! You up for a fuck?[/say]")
 		saynn("The lynx barely has time to voice an affirmative before Vion drags him inside by his collar. You decide to give the two some privacy and make a hasty exit, though not fast enough to hear some quite excited noises behind you as you go.")
 
 		addButton("Leave", "", "endthescene")
@@ -48,9 +48,9 @@ func _run():
 	if(state == "ride_it_out"):
 		saynn("[say=pc]No, I'm up for it. So should we-[/say]")
 		saynn("You're interrupted by Vion roughly grabbing you by the collar and pulling you close. Noses nearly touching, he stares you down.")
-		saynn("[say=Vion][b]Sleep.[/b][/say]")
+		saynn("[say=vion][b]Sleep.[/b][/say]")
 		saynn("The authority in the command is irrefutable. Your thoughts shatter into a million pieces, your knees go weak, and you [i]drop[/i].")
-		saynn("[say=Vion]And [b]kneel.[/b][/say]")
+		saynn("[say=vion]And [b]kneel.[/b][/say]")
 		
 		addButton("Kneel", "", "sex_1")
 
@@ -86,12 +86,12 @@ func _run():
 		playAnimation(StageScene.Sleeping, "sleep", {npc="vion", pc="pc", bodyState={naked=true}, npcBodyState={naked=true}})
 		saynn("A few hours later...")
 		
-		saynn("[say=Vion]Hey. Hey {pc.name}.[/say]")
+		saynn("[say=vion]Hey. Hey {pc.name}.[/say]")
 		saynn("[say=pc]Mmh?[/say]")
-		saynn("[say=Vion]That wasn't too intense, I hope? Are you still with me?[/say]")
+		saynn("[say=vion]That wasn't too intense, I hope? Are you still with me?[/say]")
 		saynn("You manage to slur out a response.")
 		saynn("[say=pc]Nnh. I'm... I'm fi-ine.[/say]")
-		saynn("[say=Vion]Well. That's good. Hope you don't mind, but I'm going to nap for a while.[/say]")
+		saynn("[say=vion]Well. That's good. Hope you don't mind, but I'm going to nap for a while.[/say]")
 		saynn("[say=pc]Nnnah tha's... all good.[/say]")
 		
 		addButton("Get up", "", "get_up")

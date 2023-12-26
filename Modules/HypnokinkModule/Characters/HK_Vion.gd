@@ -85,7 +85,7 @@ func _init():
 	}
 	
 func _getName():
-	return "vion"
+	return "Vion"
 
 func getGender():
 	return Gender.Male

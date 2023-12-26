@@ -21,9 +21,9 @@ func _run():
 		saynn("[say=pc]I'm up for a session.[/say]")
 		
 		if(onCooldown()):
-			saynn("[say=Vion]Not yet you aren't. Give your head some time to settle.[/say]")
+			saynn("[say=vion]Not yet you aren't. Give your head some time to settle.[/say]")
 		else:
-			saynn("[say=Vion]What did you have in mind?[/say]")
+			saynn("[say=vion]What did you have in mind?[/say]")
 		
 		addSessionButton("Session zero", "An introductory session", HK_Sessions.BodySessionZero)
 		addSessionButton("Relaxation", "Drift in peace for a while", HK_Sessions.BodyStaminaRestore)

@@ -98,7 +98,7 @@ func _init():
 	}
 	
 func _getName():
-	return "rush"
+	return "Rush"
 
 func getGender():
 	return Gender.Male
