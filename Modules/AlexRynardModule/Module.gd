@@ -20,6 +20,8 @@ func getFlags():
 		"ch2s3SceneNum": flag(FlagType.Number),
 		"ch2PickedRomanticMovie": flag(FlagType.Bool),
 		"ch2MovieHadSex": flag(FlagType.Bool),
+		"ch2CBTAvy": flag(FlagType.Bool),
+		"ch2KnockedAlexOut": flag(FlagType.Bool),
 		
 		"1TrustCompleted": flag(FlagType.Bool),
 		"2TrustCompleted": flag(FlagType.Bool),

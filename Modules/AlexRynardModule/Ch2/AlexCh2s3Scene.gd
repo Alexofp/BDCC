@@ -4,6 +4,7 @@ var howManyTimes = 0
 var usedCondom = false
 var condomBroke = false
 var breakChance = 0.0
+var didCBT = false
 
 func _init():
 	sceneID = "AlexCh2s3Scene"
@@ -1408,6 +1409,9 @@ func _run():
 		saynn("Think..")
 
 		addButton("Shock remote", "Try to use it", "time6_lost_fight_useremote")
+	if(state == "time6_lost_fight_useremote"):
+		saynn("The remote! Or.. whatever is left of it. You quickly crawl to it and start inspecting while Alex is being beaten up in the background by all three of the inmates..")
+
 	if(state == "time6_second_fight"):
 		playAnimation(StageScene.Duo, "stand", {npc="stud"})
 		saynn("You managed to beat the gray wolf. He hisses loudly as he hits the floor, his hand dropping the shiv.")
@@ -1443,9 +1447,9 @@ func _run():
 
 		saynn("[say=alexrynard]A-ARGH!..[/say]")
 
-		saynn("[say=avy]We will talk later, pretty boy. Don't go anywhere, I need to deal with your little wife~.[/say]")
+		saynn("[say=avy]Don't go anywhere, spineless, I need to deal with your little wife~.[/say]")
 
-		saynn("Alex is in too much pain to respond..")
+		saynn("Alex is in too much pain to respond, his broken prosthetic is making his whole body twitch in an uncontrollable agony..")
 
 		saynn("Avy looks at you next.")
 
@@ -1457,6 +1461,174 @@ func _run():
 	if(state == "time6_won_avy"):
 		playAnimation(StageScene.Duo, "stand", {npc="avy", npcAction="defeat"})
 		saynn("Avy drops to her knees, defeated.")
+
+		saynn("[say=avy]Stupid bitch..[/say]")
+
+		saynn("You slowly approach her. It'd probably be fitting to break something of hers in return.. At least a few bones.")
+
+		saynn("[say=alexrynard]Agh-h.. h..[/say]")
+
+		saynn("Alex's painful cries make your dark thoughts poof. You turn your head and see him coughing blood.. This isn't good..")
+
+		saynn("Avy smirks.")
+
+		saynn("[say=avy]Go on, save your broken toy.[/say]")
+
+		addButton("Alex!", "Forget about Avy", "time6_won_savealex")
+		addButton("Kick crotch", "(CBT) Kick Avy's crotch first", "time6_won_kickavy")
+	if(state == "time6_won_kickavy"):
+		playAnimation(StageScene.SexFeetPlay, "crotch", {pc="pc", npc="avy"})
+		saynn("Nope, she is not getting away that easy. Time is critical but you just can't stop yourself from quickly raising your leg and stomping on Avy's crotch [b]hard[/b].")
+
+		saynn("[say=avy]Wai-.. AGH! F-FUCK! FUCK-FUCK-Fuck![/say]")
+
+		saynn("This girl is clearly packing.. was. Your mean stomp makes her whole body tense up, the poor foxy grabs onto her crotch and starts rolling around on the floor, painful cries escaping her maw.")
+
+		saynn("[say=pc]You're the one with the broken toy now, stupid bitch.[/say]")
+
+		saynn("[say=avy]F-Fuck y-you!..[/say]")
+
+		saynn("Avy's friends quickly pull her away from you. Right, Alex is still coughing..")
+
+		addButton("Alex!", "Forget about them", "time6_won_savealex")
+	if(state == "time6_won_savealex"):
+		removeCharacter("avy")
+		removeCharacter("stud")
+		removeCharacter("volk")
+		playAnimation(StageScene.GivingBirth, "birth", {pc="alexrynard"})
+		saynn("You rush to Alex and crouch near him.")
+
+		saynn("Avy and her friends use this moment to escape. They clearly won't get what they want from Alex while he is in this state anyway..")
+
+		saynn("[say=pc]Alex![/say]")
+
+		saynn("[say=alexrynard]Gh-h-h..[/say]")
+
+		saynn("He is grinding his teeth, hissing loudly, his whole body is still twitching. Each few seconds something in his back sparks, causing him to drop one painful cry after another.")
+
+		saynn("[say=alexrynard]F-fuck.. AGH!..[/say]")
+
+		saynn("[say=pc]I have to help you now.[/say]")
+
+		saynn("You reach your hands to his clothing.. but he suddenly slaps them away.")
+
+		saynn("[say=alexrynard]N-No! C-call.. help.. Kgh..[/say]")
+
+		saynn("He is coughing blood while his own spine is sending shocks through him constantly, the guy clearly won't survive another minute unless you do something now..")
+
+		saynn("You get a glimpse of his eyes.. they're full of fear.. animal fear..")
+
+		addButton("His spine", "You have to try to reach it", "time6_won_reachspine")
+	if(state == "time6_won_reachspine"):
+		playAnimation(StageScene.GivingBirth, "birth", {pc="alexrynard", bodyState={naked=true}})
+		saynn("His uniform is in the way so you can't even examine his prosthetic spine, you have to take off his clothes.")
+
+		saynn("But each time you try to pull off his shirt, Alex grunts painfully and shoves you back.")
+
+		saynn("[say=alexrynard]ARGH! N-NO![/say]")
+
+		saynn("He is not thinking straight, you have to do something fast..")
+
+		saynn("It doesn't get easier, his spine spews some oil out.. and then sparks again.. causing an instant fire! So much for the fucking first task as an apprentice!")
+
+		saynn("While Alex is busy.. burning.. you manage to take off his toolbelt. You find some wire cutters that you quickly use to cut through the cloth of his shirt, tossing the burning pieces away.")
+
+		saynn("Now you have to find a way to.. turn off.. his spine. But Alex is still resisting you.")
+
+		saynn("[say=alexrynard]D-DON'T! YOU GONNA.. K-KILL ME.[/say]")
+
+		saynn("Well maybe he should have let you practice fixing his spine when he had the chance..")
+
+		addButton("Talk to him", "Try to persuade him into not resisting", "time6_alex_trytalkfirst")
+		addButton("Knock him out", "There is no time for talking. Time for quick solutions", "time6_alex_knockout")
+	if(state == "time6_alex_knockout"):
+		playAnimation(StageScene.Duo, "defeated", {npc="pc", pc="alexrynard", bodyState={naked=true}})
+		saynn("The way he resists.. leaves you no choice.")
+
+		saynn("[say=pc]I'm sorry Alex..[/say]")
+
+		saynn("Carefully but strictly, you wrap your arms around him, the inner side of your elbows pressed firmly against his throat. You have no idea how to do this correctly.. so you just start to push on his neck, trying to knock him out.")
+
+		saynn("[say=alexrynard]Y-you're.. k-killing.. I'm g-gonna.. d-die..[/say]")
+
+		saynn("[say=pc]I have to.. I'm sorry..[/say]")
+
+		saynn("You keep him in this choke-hold as still as you can. All the while Alex is desperately trying to pry your arms off.. even now.. when he is getting weaker and weaker..")
+
+		saynn("Sparks hit your skin.. leaving little dark dots of burned flesh on it. You have to..")
+
+		saynn("Eventually Alex stops resisting.. Instantly, you stop choking him and check on his pulse.. extremely faint one.")
+
+		saynn("His own spine is still shocking him every few seconds, threatening to stop his heart any second.. You have to.. turn the power off somehow. Hopefully you can just cut through some wires..")
+
+		saynn("You carefully turn Alex onto his belly and get a better look at his back.. Fuck.. So much blood here too. Blood and burned fur. Is that his.. original spine poking through.. gross, it's all broken.. No wonder he is coughing blood.")
+
+		saynn("You slip your wire cutters into that mess of metal, bones and flesh.. and start cutting through the wiring.. One wrong motion causes the sparks to hit all over your face, blinding you for a second and making Alex's body jerk.")
+
+		saynn("You keep cutting through.. anything you can get to really. Eventually, the sparks stop coming out.. Good.")
+
+		saynn("You carefully put Alex onto the floor. He is still breathing heavily and coughing occasionally.. But at least his own spine isn't killing him anymore..")
+
+		saynn("Now it should be relatively safe to find someone.")
+
+		addButton("Get help", "Find somebody to help you", "time6_alex_blur")
+	if(state == "time6_alex_trytalkfirst"):
+		saynn("You put your hands on the foxy and try to make him understand.")
+
+		saynn("[say=pc]Alex, listen to me! You have to tell me how to disable your spine. And you have to actually let me. Please![/say]")
+
+		saynn("Alex looks at you with his scared shaky eyes.. and keeps shaking his head.. while coughing up blood.. The shocks make him grab onto his heart more and more..")
+
+		saynn("He is getting weaker.. Why doesn't he trust you..")
+
+		addButton("Talk more", "Keep trying to persuade him while you can..", "time6_alex_moretalk")
+		addButton("Knock him out", "There is no time for talking. Time for quick solutions", "time6_alex_knockout")
+	if(state == "time6_alex_moretalk"):
+		playAnimation(StageScene.GivingBirth, "idle", {pc="alexrynard", bodyState={naked=true}})
+		saynn("[say=pc]Alex, please. You might not want to trust me. But right now you have to. You hear me? Just this time.[/say]")
+
+		saynn("Alex is grunting heavily.. he nods a few times.. and does his best to keep himself still.")
+
+		saynn("[say=alexrynard]W-wires.. F-fuck.. Kgh.. C-cut.[/say]")
+
+		saynn("Right, cut through all of the wires.. Should be easy enough. You just have to avoid panicking..")
+
+		saynn("You carefully turn Alex onto his belly and get a better look at his back.. Fuck.. So much blood here too. Blood and burned fur. Is that his.. original spine poking through.. gross, it's all broken.. No wonder he is coughing blood.")
+
+		saynn("You slip your wire cutters into that mess of metal, bones and flesh.. and start cutting through the wiring.. One wrong motion causes the sparks to hit all over your face, blinding you for a second and making Alex jerk.")
+
+		saynn("[say=alexrynard]I'm g-gonna die.. Argh.. It hurts.. e-everything..[/say]")
+
+		saynn("[say=pc]No, Alex, stay with me.[/say]")
+
+		addButton("Continue", "See what happens next", "time6_alex_talk_final")
+	if(state == "time6_alex_talk_final"):
+		playAnimation(StageScene.Duo, "defeated", {npc="pc", pc="alexrynard", bodyState={naked=true}})
+		saynn("You keep cutting through.. anything you can get to really. Alex is grunting heavily.. until his legs finally 'turn off'. The pain goes away.. just like every other feeling.")
+
+		saynn("You carefully put Alex onto the floor. He is still breathing heavily and coughing occasionally.. But at least his own spine isn't killing him anymore..")
+
+		saynn("[say=pc]I.. I will go get help now. Everything will be okay, trust me.[/say]")
+
+		saynn("He doesn't say anything back.")
+
+		addButton("Get help", "Find somebody to help you", "time6_alex_blur")
+	if(state == "time6_alex_blur"):
+		removeCharacter("alexrynard")
+		playAnimation(StageScene.Solo, "sit")
+		aimCameraAndSetLocName("med_lobbyse")
+		GM.pc.setLocation("med_lobbymain")
+		saynn("Next few moments become a blur.. You rush out of the mineshaft and find the first staff member that you can.. You quickly tell them everything that happened.. After that.. You just don't remember it anymore.")
+
+		saynn("You snap out of it only about an hour later. You find yourself sitting on one of the benches in the medical lobby.. You faintly remember the moment when three nurses rushed past you, pushing an emergency medical stretcher past you with unconscious Alex on it..")
+
+		saynn("You did everything you could.. Now you can only wait.")
+
+		saynn("[say=eliza]Wanna wash your hands?[/say]")
+
+		saynn("[say=pc]Huh?[/say]")
+
+		saynn("You look at your hands.. They're covered in blood.. How did you not notice that..")
 
 
 func _react(_action: String, _args):
@@ -1603,6 +1775,19 @@ func _react(_action: String, _args):
 		getCharacter("avy").addEffect(StatusEffect.DrugStrong, [6])
 		return
 
+	if(_action == "time6_won_kickavy"):
+		setFlag("AlexRynardModule.ch2CBTAvy", true)
+		didCBT = true
+
+	if(_action == "time6_alex_knockout"):
+		setFlag("AlexRynardModule.ch2KnockedAlexOut", true)
+
+	if(_action == "time6_alex_talk_final"):
+		processTime(10*60)
+
+	if(_action == "time6_alex_blur"):
+		processTime(60*60)
+
 	setState(_action)
 
 func _react_scene_end(_tag, _result):
@@ -1649,6 +1834,7 @@ func saveData():
 	data["usedCondom"] = usedCondom
 	data["condomBroke"] = condomBroke
 	data["breakChance"] = breakChance
+	data["didCBT"] = didCBT
 
 	return data
 
@@ -1659,3 +1845,4 @@ func loadData(data):
 	usedCondom = SAVE.loadVar(data, "usedCondom", false)
 	condomBroke = SAVE.loadVar(data, "condomBroke", false)
 	breakChance = SAVE.loadVar(data, "breakChance", 0.0)
+	didCBT = SAVE.loadVar(data, "didCBT", false)
