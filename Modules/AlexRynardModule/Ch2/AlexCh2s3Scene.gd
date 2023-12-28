@@ -1387,6 +1387,60 @@ func _run():
 
 		addButton("Fight!", "Start the fight", "time6_into_first_fight")
 		addButton("Shock remote", "Look at it", "time6_lookatshockremote")
+	if(state == "time6_lookatshockremote"):
+		saynn("You quickly rush to the shock remote.. Sadly, its frame is crushed to bits. Can't use it.")
+
+		saynn("Alex won't be able to endure the fight against three inmates for much longer..")
+
+		addButton("Fight!", "Start the fight", "time6_into_first_fight")
+		addButton("Shock remote", "Maybe you can salvage it", "time6_lookatshockactually")
+	if(state == "time6_lookatshockactually"):
+		playAnimation(StageScene.Solo, "kneel")
+		saynn("You try to use the shock remote again.. but it doesn't work.")
+
+		saynn("Alex yelps as he collapses, unable to fight any longer.. Fuck..")
+
+		saynn("[say=avy]Ready to talk, failed hero? I really don't want to kill you. Just tell me how to unlock the collars and I will be out of your way~.[/say]")
+
+		saynn("Wait.. Who cares if the frame is smashed, you just need to trigger the remote. You use your knowledge to disassemble it. Now you just need to short-circuit one of the pins with something metal..")
+
+		saynn("Alex growls back and tries to free himself, his spine whirring loudly. Avy just stares him into the eyes.")
+
+		saynn("[say=avy]Aww, you think you're strong?[/say]")
+
+		saynn("Avy suddenly throws Alex down to the cold floor.. before [b]stomping[/b] on his back hard, [b]crushing his prosthetic spine[/b].. Sparks bursting out of it as Alex lets out a gut-wrenching cry.")
+
+		saynn("[say=alexrynard]A-ARGH!..[/say]")
+
+		saynn("[say=pc]NO! YOU BITCH![/say]")
+
+		saynn("[say=avy]But you're just a spineless beta. Don't go anywhere, I need to deal with your little wife~.[/say]")
+
+		saynn("Alex is in too much pain to respond, his broken prosthetic is making his whole body twitch in an uncontrollable agony..")
+
+		saynn("Avy looks at you next.")
+
+		saynn("[say=avy]What was that, little slut?[/say]")
+
+		saynn("She starts walking towards you. Your hands are shaking.. you manage to find a little metal piece and jam it into the board..")
+
+		saynn("Moments later, all four nearby collars activate..")
+
+		saynn("[say=avy]ARGH![/say]")
+
+		saynn("[say=stud]NGH.[/say]")
+
+		saynn("[say=volk]SUKAAA![/say]")
+
+		saynn("A similar cry leaves your mouth too.. the pain is almost comparable to what Alex probably feels right now..")
+
+		saynn("After a few seconds of unbearable agony, the bluespace crystal attached to the board overheats.. and cracks.. finally ending the broadcast.")
+
+		saynn("Avy is furious, even after being downed, she starts crawling towards you, her eyes full of rage. Her friends quickly pull her away from you luckily.")
+
+		saynn("You hear Alex coughing..")
+
+		addButton("Alex!", "Forget about them", "time6_won_savealex")
 	if(state == "time6_into_first_fight"):
 		playAnimation(StageScene.Duo, "dodge", {npc="volk", npcAction="shiv"})
 		saynn("[say=pc]You're gonna pay for this, you fuckers.[/say]")
@@ -1410,8 +1464,52 @@ func _run():
 
 		addButton("Shock remote", "Try to use it", "time6_lost_fight_useremote")
 	if(state == "time6_lost_fight_useremote"):
-		saynn("The remote! Or.. whatever is left of it. You quickly crawl to it and start inspecting while Alex is being beaten up in the background by all three of the inmates..")
+		playAnimation(StageScene.Solo, "kneel")
+		saynn("The remote! Or.. whatever is left of it. You sneakily crawl to it and start inspecting while Alex is being beaten up in the background by all three of the inmates..")
 
+		saynn("[say=avy]Ready to talk, failed hero? I really don't want to kill you. Just tell me how to unlock the collars and I will be out of your way~.[/say]")
+
+		saynn("Alex yelps as he collapses, unable to fight any longer..")
+
+		saynn("You reach the shock remote.. fuck.. It's smashed to bits. Wait.. Who cares if it's smashed, you just need to trigger it. You use your knowledge to disassemble it. Now you just need to short-circuit one of the pins with something metal..")
+
+		saynn("Alex growls back and tries to free himself, his spine whirring loudly. Avy just stares him into the eyes.")
+
+		saynn("[say=avy]Aww, you think you're strong?[/say]")
+
+		saynn("Avy suddenly throws Alex down to the cold floor.. before [b]stomping[/b] on his back hard, [b]crushing his prosthetic spine[/b].. Sparks bursting out of it as Alex lets out a gut-wrenching cry.")
+
+		saynn("[say=alexrynard]A-ARGH!..[/say]")
+
+		saynn("[say=pc]NO! YOU BITCH![/say]")
+
+		saynn("[say=avy]But you're just a spineless beta. Don't go anywhere, I need to deal with your little wife~.[/say]")
+
+		saynn("Alex is in too much pain to respond, his broken prosthetic is making his whole body twitch in an uncontrollable agony..")
+
+		saynn("Avy looks at you next.")
+
+		saynn("[say=avy]What was that, little slut?[/say]")
+
+		saynn("She starts walking towards you. Your hands are shaking.. you manage to find a little metal piece and jam it into the board..")
+
+		saynn("Moments later, all four nearby collars activate..")
+
+		saynn("[say=avy]ARGH![/say]")
+
+		saynn("[say=stud]NGH.[/say]")
+
+		saynn("[say=volk]SUKAAA![/say]")
+
+		saynn("A similar cry leaves your mouth too.. the pain is almost comparable to what Alex probably feels right now..")
+
+		saynn("After a few seconds of unbearable agony, the bluespace crystal attached to the board overheats.. and cracks.. finally ending the broadcast.")
+
+		saynn("Avy is furious, even after being downed, she starts crawling towards you, her eyes full of rage. Her friends quickly pull her away from you luckily.")
+
+		saynn("You hear Alex coughing..")
+
+		addButton("Alex!", "Forget about them", "time6_won_savealex")
 	if(state == "time6_second_fight"):
 		playAnimation(StageScene.Duo, "stand", {npc="stud"})
 		saynn("You managed to beat the gray wolf. He hisses loudly as he hits the floor, his hand dropping the shiv.")
@@ -1435,19 +1533,19 @@ func _run():
 
 		saynn("Alex drops to his knees, defeated. Avy grabs him by the throat, her claws putting pressure on his skin.")
 
-		saynn("[say=avy]Ready to tell me, failed hero? I really don't want to kill you.[/say]")
+		saynn("[say=avy]Ready to talk, failed hero? I really don't want to kill you. Just tell me how to unlock the collars and I will be out of your way~.[/say]")
 
 		saynn("[say=pc]Hey! Let him go and fight me, you bitch.[/say]")
 
 		saynn("Alex just growls back and tries to free himself, his spine whirring loudly. Avy just stares him into the eyes.")
 
-		saynn("[say=avy]Aww, why are you SUCH A BETA.[/say]")
+		saynn("[say=avy]Aww, you think you're strong?[/say]")
 
 		saynn("Avy suddenly throws Alex down to the cold floor.. before [b]stomping[/b] on his back hard, [b]crushing his prosthetic spine[/b].. Sparks bursting out of it as Alex lets out a gut-wrenching cry.")
 
 		saynn("[say=alexrynard]A-ARGH!..[/say]")
 
-		saynn("[say=avy]Don't go anywhere, spineless, I need to deal with your little wife~.[/say]")
+		saynn("[say=avy]But you're just a spineless beta. Don't go anywhere, I need to deal with your little wife~.[/say]")
 
 		saynn("Alex is in too much pain to respond, his broken prosthetic is making his whole body twitch in an uncontrollable agony..")
 
@@ -1458,6 +1556,45 @@ func _run():
 		saynn("She is still clearly under the influence of something.. Who knows when it will run out. Time to fight..")
 
 		addButton("Fight", "Start the first fight", "time6_do_third_fight")
+	if(state == "time6_lost_avy"):
+		playAnimation(StageScene.Solo, "defeat")
+		saynn("You drop to your knees, defeated..")
+
+		saynn("[say=avy]That's what you get.[/say]")
+
+		saynn("Avy turns towards Alex who is coughing and grunts as something in his back sparks..")
+
+		saynn("[say=avy]I'm not done with you.[/say]")
+
+		saynn("Fuck, she is gonna kill him. You have to stop her..")
+
+		saynn("Think..")
+
+		addButton("Shock remote", "Try to use it", "time6_lost_avy_remote")
+	if(state == "time6_lost_avy_remote"):
+		saynn("The remote! Or.. whatever is left of it. You sneakily crawl to it and start inspecting while Alex is being surrounded by all three inmates..")
+
+		saynn("[say=avy]Wanna talk? Silence costs a lot these days, you know.[/say]")
+
+		saynn("You reach the shock remote.. fuck.. It's smashed to bits. Wait.. Who cares if it's smashed, you just need to trigger it. You use your knowledge to disassemble it. Then you take a metallic piece and short-circuit one of the pins..")
+
+		saynn("Moments later, all four nearby collars activate..")
+
+		saynn("[say=avy]ARGH![/say]")
+
+		saynn("[say=stud]NGH.[/say]")
+
+		saynn("[say=volk]SUKAAA![/say]")
+
+		saynn("A similar cry leaves your mouth too.. the pain is almost comparable to what Alex probably feels right now..")
+
+		saynn("After a few seconds of unbearable agony, the bluespace crystal attached to the board overheats.. and cracks.. finally ending the broadcast.")
+
+		saynn("Avy is furious, even after being downed, she starts crawling towards you, her eyes full of rage. Her friends quickly pull her away from you luckily.")
+
+		saynn("You hear Alex coughing..")
+
+		addButton("Alex!", "Forget about them", "time6_won_savealex")
 	if(state == "time6_won_avy"):
 		playAnimation(StageScene.Duo, "stand", {npc="avy", npcAction="defeat"})
 		saynn("Avy drops to her knees, defeated.")
@@ -1514,9 +1651,9 @@ func _run():
 
 		saynn("[say=alexrynard]N-No! C-call.. help.. Kgh..[/say]")
 
-		saynn("He is coughing blood while his own spine is sending shocks through him constantly, the guy clearly won't survive another minute unless you do something now..")
+		saynn("He is coughing blood while his own spine is sending shocks through his heart constantly, the guy clearly won't survive another minute unless you do something now..")
 
-		saynn("You get a glimpse of his eyes.. they're full of fear.. animal fear..")
+		saynn("You get a glimpse of his eyes.. they're full of fear.. raw animal fear..")
 
 		addButton("His spine", "You have to try to reach it", "time6_won_reachspine")
 	if(state == "time6_won_reachspine"):
@@ -1624,12 +1761,48 @@ func _run():
 
 		saynn("You did everything you could.. Now you can only wait.")
 
+		saynn("Your first task didn't go exactly as planned, huh..")
+
+		addButton("Continue", "See what happens next", "time6_eliza_approaches")
+	if(state == "time6_eliza_approaches"):
+		addCharacter("eliza")
+		playAnimation(StageScene.Duo, "stand", {npc="eliza"})
 		saynn("[say=eliza]Wanna wash your hands?[/say]")
 
 		saynn("[say=pc]Huh?[/say]")
 
 		saynn("You look at your hands.. They're covered in blood.. How did you not notice that..")
 
+		saynn("[say=pc]Yeah.[/say]")
+
+		saynn("[say=eliza]Follow me.[/say]")
+
+		addButton("Follow", "See where Eliza brings you", "time6_eliza_follow")
+	if(state == "time6_eliza_follow"):
+		aimCameraAndSetLocName("med_researchlab")
+		setFlag("AlexRynardModule.ch2GotRektHappened", true)
+		setFlag("AlexRynardModule.ch2GotRektDay", GM.main.getDays())
+		saynn("She brings you into one of the labs and points at the sink. You start washing your hands and your face.")
+
+		saynn("[say=eliza]Looks like you and Alex had a very rough day..[/say]")
+
+		saynn("[say=pc]How is he?[/say]")
+
+		saynn("Eliza stays quiet for some time.")
+
+		saynn("[say=eliza]Alive. Barely. Surgeons are fighting for his life. His injuries are.. better not talk about it.[/say]")
+
+		saynn("You sigh.")
+
+		saynn("[say=eliza]Yeah.. I feel you.. I wish I had something better to say. Come back tomorrow, you look like you need rest.[/say]")
+
+		saynn("You nod. Eliza guides you back to the medical lobby and pats you on the back.")
+
+		saynn("[say=eliza]He is strong, he will pull through.[/say]")
+
+		saynn("Time to go..")
+
+		addButton("Continue", "See what happens next", "endthescene")
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
@@ -1762,6 +1935,9 @@ func _react(_action: String, _args):
 	if(_action == "time6_avy_and_gang"):
 		processTime(5*60)
 
+	if(_action == "time6_lookatshockremote"):
+		addExperienceToPlayer(100)
+
 	if(_action == "time6_first_fight"):
 		runScene("FightScene", ["volk"], "time6_fight_1")
 		return
@@ -1809,7 +1985,7 @@ func _react_scene_end(_tag, _result):
 		
 		if(battlestate == "win"):
 			setState("time6_third_fight")
-			addExperienceToPlayer(20)
+			addExperienceToPlayer(100)
 		else:
 			setState("time6_lost_fight")
 			addExperienceToPlayer(5)
@@ -1823,7 +1999,7 @@ func _react_scene_end(_tag, _result):
 			setState("time6_won_avy")
 			addExperienceToPlayer(50)
 		else:
-			setState("time6_lost_fight")
+			setState("time6_lost_avy")
 			addExperienceToPlayer(10)
 			endScene()
 
