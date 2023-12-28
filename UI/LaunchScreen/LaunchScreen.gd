@@ -38,8 +38,8 @@ func _ready():
 	
 	if(!SHOW_THIS_SCREEN_ANYWAY && !OPTIONS.shouldShowModdedLauncher()):
 		if(!GlobalRegistry.hasModSupport() || rawModList.size() == 0):
-			GlobalRegistry.registerEverything()
-			var _ok = get_tree().change_scene("res://UI/MainMenu/MainMenu.tscn")
+			#GlobalRegistry.registerEverything()
+			var _ok = get_tree().change_scene("res://UI/LoadingScreen.tscn")#"res://UI/MainMenu/MainMenu.tscn"
 
 	checkModOrderAndFillData(rawModList)
 
@@ -145,15 +145,15 @@ func _on_WithModsButton_pressed():
 	saveOrderIntoFile(currentModOrder)
 	
 	GlobalRegistry.loadModOrder(currentModOrder)
-	GlobalRegistry.registerEverything()
-	var _ok = get_tree().change_scene("res://UI/MainMenu/MainMenu.tscn")
+	#GlobalRegistry.registerEverything()
+	var _ok = get_tree().change_scene("res://UI/LoadingScreen.tscn")#"res://UI/MainMenu/MainMenu.tscn"
 
 func _on_NoModsButton_pressed():
 	saveOrderIntoFile(currentModOrder)
 	
 	#GlobalRegistry.loadModOrder(currentModOrder)
-	GlobalRegistry.registerEverything()
-	var _ok = get_tree().change_scene("res://UI/MainMenu/MainMenu.tscn")
+	#GlobalRegistry.registerEverything()
+	var _ok = get_tree().change_scene("res://UI/LoadingScreen.tscn")#"res://UI/MainMenu/MainMenu.tscn"
 
 func onModEntryClicked(entry):
 	selectedEntry = entry
