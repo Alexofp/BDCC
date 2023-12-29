@@ -24,6 +24,7 @@ func getFlags():
 		"ch2KnockedAlexOut": flag(FlagType.Bool),
 		"ch2GotRektHappened": flag(FlagType.Bool),
 		"ch2GotRektDay": flag(FlagType.Number),
+		"ch2CheckAlexSceneHappened": flag(FlagType.Number),
 		
 		"1TrustCompleted": flag(FlagType.Bool),
 		"2TrustCompleted": flag(FlagType.Bool),
@@ -46,6 +47,7 @@ func _init():
 		"res://Modules/AlexRynardModule/Ch2/AlexCh2s1Scene.gd",
 		"res://Modules/AlexRynardModule/Ch2/AlexCh2s2BackstoryScene.gd",
 		"res://Modules/AlexRynardModule/Ch2/AlexCh2s3Scene.gd",
+		"res://Modules/AlexRynardModule/Ch2/AlexCh2s4ElizaScene.gd",
 		
 		"res://Modules/AlexRynardModule/Trust/AlexTrustExercisesMenuScene.gd",
 		"res://Modules/AlexRynardModule/Trust/AlexTrustExercise1Scene.gd",
