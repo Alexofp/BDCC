@@ -5,6 +5,7 @@ func _init():
 
 func registerTriggers(es):
 	es.addTrigger(self, Trigger.TalkingToNPC, "alexrynard")
+	es.addEventCheck(self, "AlexRynardBusy")
 	
 func run(_triggerID, _args):
 	# Must finish portal panties quest first
@@ -31,7 +32,9 @@ func run(_triggerID, _args):
 	
 	if(getFlag("AlexRynardModule.ch2SceneNum") <= 6):
 		addButtonUnlessLate("Help", "Help him repair the datapads", "helpRepair2")
-	addButtonUnlessLate("Help", "Help him repair the datapads", "helpRepair3")
+		
+	if(!getFlag("AlexRynardModule.ch2GotRektHappened")):
+		addButtonUnlessLate("Help", "Help him repair the datapads", "helpRepair3")
 	
 func react(_triggerID, _args):
 	if(getFlag("AlexRynardModule.ch1FirstFuckup") && !getFlag("AlexRynardModule.ch1NextDaySceneHappened")):
@@ -63,3 +66,7 @@ func onButton(_method, _args):
 	if(_method == "do_trust"):
 		GM.main.endCurrentScene()
 		runScene("AlexTrustExercisesMenuScene")
+
+func eventCheck(_checkID, _args = []):
+	if(getFlag("AlexRynardModule.ch2GotRektHappened") && !getFlag("AlexRynardModule.ch2FinalSceneHappened")):
+		return {busy=true}

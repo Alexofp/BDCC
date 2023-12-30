@@ -24,7 +24,11 @@ func getFlags():
 		"ch2KnockedAlexOut": flag(FlagType.Bool),
 		"ch2GotRektHappened": flag(FlagType.Bool),
 		"ch2GotRektDay": flag(FlagType.Number),
-		"ch2CheckAlexSceneHappened": flag(FlagType.Number),
+		"ch2CheckAlexSceneHappened": flag(FlagType.Bool),
+		"ch2FoundParts": flag(FlagType.Number),
+		"ch2StolePartsStorageDay": flag(FlagType.Number),
+		"ch2LastCheckedNPC": flag(FlagType.Text),
+		"ch2FinalSceneHappened": flag(FlagType.Number),
 		
 		"1TrustCompleted": flag(FlagType.Bool),
 		"2TrustCompleted": flag(FlagType.Bool),
@@ -63,8 +67,11 @@ func _init():
 	items = []
 	events = [
 		"res://Modules/AlexRynardModule/Ch1/AlexS1IntroEvent.gd",
+		"res://Modules/AlexRynardModule/Ch2/AlexCh2s4ElizaEvent.gd",
+		"res://Modules/AlexRynardModule/Ch2/AlexCh2S4CollectPartsEvent.gd",
 	]
 	quests = [
+		"res://Modules/AlexRynardModule/Ch2/SaveAlexQuest.gd",
 	]
 
 func resetFlagsOnNewDay():

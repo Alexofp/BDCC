@@ -33,6 +33,10 @@ func _initScene(_args = []):
 		setState("time5")
 		increaseFlag("AlexRynardModule.ch2s3SceneNum")
 		return
+	if(howManyTimes == 5):
+		setState("time6")
+		increaseFlag("AlexRynardModule.ch2s3SceneNum")
+		return
 
 func _run():
 	if(state == ""):
@@ -1679,7 +1683,7 @@ func _run():
 		addButton("Talk to him", "Try to persuade him into not resisting", "time6_alex_trytalkfirst")
 		addButton("Knock him out", "There is no time for talking. Time for quick solutions", "time6_alex_knockout")
 	if(state == "time6_alex_knockout"):
-		playAnimation(StageScene.Duo, "defeated", {npc="pc", pc="alexrynard", bodyState={naked=true}})
+		playAnimation(StageScene.Solo, "stand")
 		saynn("The way he resists.. leaves you no choice.")
 
 		saynn("[say=pc]I'm sorry Alex..[/say]")
@@ -1740,7 +1744,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "time6_alex_talk_final")
 	if(state == "time6_alex_talk_final"):
-		playAnimation(StageScene.Duo, "defeated", {npc="pc", pc="alexrynard", bodyState={naked=true}})
+		playAnimation(StageScene.Solo, "stand")
 		saynn("You keep cutting through.. anything you can get to really. Alex is grunting heavily.. until his legs finally 'turn off'. The pain goes away.. just like every other feeling.")
 
 		saynn("You carefully put Alex onto the floor. He is still breathing heavily and coughing occasionally.. But at least his own spine isn't killing him anymore..")
