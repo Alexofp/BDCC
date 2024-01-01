@@ -1,6 +1,10 @@
 extends SceneBase
 
 var tellChoice = ""
+var didAny = false
+var didPunishAvy = false
+var didPunchedCap = false
+var didHugEliza = false
 
 func _init():
 	sceneID = "AlexCh2s5FinalScene"
@@ -237,6 +241,228 @@ func _run():
 		aimCameraAndSetLocName(GM.pc.getCellLocation())
 		GM.pc.setLocation(GM.pc.getCellLocation())
 		playAnimation(StageScene.Sleeping, "sleep")
+		saynn("Somehow, you manage to reach your inmate cell and drop your tired body onto the bed. The whole trip felt like a dream.")
+
+		saynn("The lights go out.. You close your eyes.. Nothing matters..")
+
+		addButton("Continue", "See what happens next", "next_day_alex")
+	if(state == "next_day_alex"):
+		playAnimation(StageScene.Solo, "stand")
+		saynn("Less than a second later, you open your eyes. Ow, the bright lights of the prison make you squint a lot. How long have you been sleeping..")
+
+		saynn("You get up and quickly make your bed. Better go check if..")
+
+		saynn("[say=alexrynard]Hey..[/say]")
+
+		saynn("Huh? It's his voice.. Are you still dreaming?")
+
+		addButton("Turn around", "See who it is", "alex_comes_in")
+	if(state == "alex_comes_in"):
+		addCharacter("alexrynard")
+		playAnimation(StageScene.Duo, "stand", {npc="alexrynard"})
+		saynn("You turn around and see Alex near the entrance of your cell.. standing like nothing happened. You rub your eyes.. he is still there.")
+
+		saynn("[say=pc]Am I going insane..[/say]")
+
+		saynn("Alex smiles seeing your confusion.")
+
+		saynn("[say=alexrynard]Cryopod helped with the recovery. It's me..[/say]")
+
+		saynn("Both of you are standing motionless.. It suddenly became so quiet that you can hear the motors in his spine working.")
+
+		addButton("Continue", "See what happens next", "alex_hugs_pc")
+	if(state == "alex_hugs_pc"):
+		playAnimation(StageScene.Hugging, "hug", {npc="alexrynard"})
+		saynn("Suddenly, Alex rushes up to you and wraps his hands around your body, hugging you as tightly as he can without breaking your ribs.")
+
+		saynn("[say=alexrynard]Thank you.. I was close to giving up on everything.. In fact, I did give up.. I just wasn't strong enough to end it.[/say]")
+
+		saynn("Tears start streaming down his cheeks, the foxy is nuzzling your face..")
+
+		saynn("[say=alexrynard]You pulled me out of that hell. I'm sorry for what I said.[/say]")
+
+		saynn("You never saw him so.. emotional. The guy usually keeps everything inside him.")
+
+		addButton("Hug back", "Hug the foxy back", "alex_hug_back")
+		addButton("Kiss", "Kiss the foxy", "alex_kiss_back")
+		addButton("Kneel before", "Kneel before the foxy", "alex_kneel_before")
+	if(state == "alex_kneel_before"):
+		playAnimation(StageScene.Duo, "kneel", {npc="alexrynard"})
+		saynn("You escape his embrace and kneel before the foxy instead. His tears.. only stream more.")
+
+		saynn("[say=pc]I would do this again if I had to, Sir.[/say]")
+
+		saynn("He reaches his hand out to pat you and gently scritch behind the ears.")
+
+		saynn("[say=alexrynard]Let's hope you won't ever have to.. Good {pc.boy}..[/say]")
+
+		saynn("You nuzzle his hand and smile, your gaze directed up at him.")
+
+		saynn("[say=pc]Thank you, Sir. Hope the prosthetic works fine.[/say]")
+
+		saynn("[say=alexrynard]It does.. Better than it ever did.. Can't thank you enough.[/say]")
+
+		saynn("[say=pc]Just keep calling me a good {pc.boy}..[/say]")
+
+		saynn("He chuckles through tears.. and pats you more.")
+
+		saynn("[say=alexrynard]Get up, good {pc.boy}.[/say]")
+
+		saynn("(( This is where Alex's content officially ends, thank you for playing <3 ))")
+		addButton("Continue", "See what happens next", "alex_after_hug")
+	if(state == "alex_kiss_back"):
+		playAnimation(StageScene.Hugging, "kiss", {npc="alexrynard"})
+		saynn("Rather than hugging the foxy back, you carefully remove the tears from his cheeks.. before kissing him.. deeply.")
+
+		saynn("[say=alexrynard]Wow..[/say]")
+
+		saynn("[say=pc]Shush..[/say]")
+
+		saynn("He indeed shuts up and starts trading kisses with you, his hands sliding over your back.. while yours feel his metal one.")
+
+		saynn("After a series of passionate kisses, you just continue hugging, your foreheads touching.")
+
+		saynn("[say=pc]Glad you're okay, foxy.[/say]")
+
+		saynn("[say=alexrynard]Thanks to you..[/say]")
+
+		saynn("[say=pc]Did I teach myself how to fix things~?[/say]")
+
+		saynn("[say=alexrynard]I guess I helped a little.. But you did everything.[/say]")
+
+		saynn("[say=pc]I will bap you.[/say]")
+
+		saynn("You probably should stop hugging each other before you get glued. It just feels too good to see him kinda happy.")
+
+		saynn("(( This is where Alex's content officially ends, thank you for playing <3 ))")
+		addButton("Continue", "See what happens next", "alex_after_hug")
+	if(state == "alex_hug_back"):
+		saynn("You wrap your arms around the foxy and hug him back, resting your chin on his shoulder.")
+
+		saynn("[say=pc]I'm glad you're okay. Don't know what I would do without you.[/say]")
+
+		saynn("He chuckles through the tears.")
+
+		saynn("[say=alexrynard]Your life would just continue, I didn't contribute that much.[/say]")
+
+		saynn("[say=pc]Pretty sure you're wrong, silly fox.[/say]")
+
+		saynn("[say=alexrynard]Excuse you, I think you meant sly.[/say]")
+
+		saynn("[say=pc]I meant what I meant~.[/say]")
+
+		saynn("You probably should stop hugging each other before you get glued. It just feels too good to see him kinda happy.")
+
+		saynn("(( This is where Alex's content officially ends, thank you for playing <3 ))")
+		addButton("Continue", "See what happens next", "alex_after_hug")
+	if(state == "alex_after_hug"):
+		playAnimation(StageScene.Duo, "stand", {npc="alexrynard"})
+		saynn("After that nice gesture.. It's time to figure out what to do next.")
+
+		saynn("[say=pc]What.. now..[/say]")
+
+		saynn("[say=alexrynard]I thought about leaving this station for good this time. But nah, I'd rather be close to the people that I like.[/say]")
+
+		saynn("He pats you on the shoulder.")
+
+		saynn("[say=alexrynard]You're still my apprentice.. but also a best friend.[/say]")
+
+		saynn("[say=pc]I can still work with you?[/say]")
+
+		saynn("[say=alexrynard]I don't think they will assign any big tasks to me for a while.[/say]")
+
+		saynn("Alex rubs his chin.")
+
+		saynn("[say=alexrynard]But I think we got some.. unfinished business.. to attend to. What should we do?[/say]")
+
+		saynn("Looks like you can do everything one after another or neither.")
+
+		addButton("Punish Avy", "Track down Avy and punish her!", "punish_avy")
+		addButton("Punch captain", "Go punch the captain for no obvious reason", "punch_captain")
+		addButton("Hug Eliza", "Go hug Eliza for everything that she did", "hug_eliza")
+		addButton("No business", "It's fine", "enough_bus")
+	if(state == "pickWhatDo"):
+		saynn("What should you do next?")
+
+		if (!didPunishAvy):
+			addButton("Punish Avy", "Track down Avy and punish her!", "punish_avy")
+		else:
+			addDisabledButton("Punish Avy", "You already did this")
+		if (!didPunchedCap):
+			addButton("Punch captain", "Go punch the captain for no obvious reason", "punch_captain")
+		else:
+			addDisabledButton("Punch captain", "You already did this")
+		if (!didHugEliza):
+			addButton("Hug Eliza", "Go hug Eliza for everything that she did", "hug_eliza")
+		else:
+			addDisabledButton("Hug Eliza", "You already did this")
+		addButton("Enough", "This is enough loose ends tied up", "enough_bus")
+	if(state == "punish_avy"):
+		playAnimation(StageScene.Duo, "stand", {npc="alexrynard"})
+		saynn("[say=pc]Can we punish that dark fox who attacked us?[/say]")
+
+		saynn("Alex hums and quickly checks his datapad.")
+
+		saynn("[say=alexrynard]Yeah, let's go track her down.[/say]")
+
+		addButton("Follow", "See where Alex brings you", "avy_find")
+	if(state == "avy_find"):
+		addCharacter("avy")
+		playAnimation(StageScene.Duo, "stand", {pc="alexrynard", npc="avy"})
+		aimCameraAndSetLocName("yard_westCorridor")
+		saynn("It didn't take long, you catch Avy while she is heading towards the gym area for whatever reason.")
+
+		saynn("You block her path. She stops as your gazes collide.")
+
+		saynn("[say=avy]Huh.[/say]")
+
+		saynn("[say=alexrynard]Surprised?[/say]")
+
+		saynn("[say=avy]Disappointed. I should have stepped on you harder.[/say]")
+
+		saynn("Avy raises one of her fists.. while the second starts sneakily reaching for something..")
+
+		saynn("[say=alexrynard]You tried.[/say]")
+
+		saynn("Avy pulls out a syringe.. at the same time as Alex pulls out his shock remote.")
+
+		addButton("Continue", "See what happens next", "avy_drops")
+	if(state == "avy_drops"):
+		playAnimation(StageScene.Duo, "stand", {pc="alexrynard", npcAction="defeat", npc="avy"})
+		saynn("Avy drops to her knees as a powerful shock rocks through her body, causing her to drop the syringe.")
+
+		saynn("Alex keeps holding the button down while slowly approaching Avy.")
+
+		saynn("[say=avy]RGH-hH!..[/say]")
+
+		saynn("Her hands are gripping onto her collar, desperately trying to take it off while the shocks drain her stamina in an instant.")
+
+		saynn("Alex picks up the syringe with a strange drug and finally lifts the finger.")
+
+		saynn("[say=alexrynard]Where are you getting this anyway?[/say]")
+
+		saynn("[say=avy]Ghr-r-r.. Fuck you, spineless.[/say]")
+
+		saynn("Alex cuffs Avy's hands and then clips a leash to her collar.")
+
+		saynn("[say=alexrynard]Uh huh.[/say]")
+
+		addButton("Continue", "See what happens next", "avy_woodenhorse")
+	if(state == "avy_woodenhorse"):
+		playAnimation(StageScene.WoodenHorseSolo, "lightstruggle", {pc="avy", bodyState={naked=true, hard=true}})
+		aimCameraAndSetLocName("main_punishment_spot")
+		saynn("Avy growls and pulls on the leash.. but Alex easily overpowers her and brings her to the main platform with all the stocks and such. He undresses her with your help and throws her onto the wooden horse.")
+
+		saynn("Alex slowly lowers her until her ass and her cock start feeling the sharp edge being pressed against them.")
+
+		saynn("[say=avy]You t-think this will break me?[/say]")
+
+		saynn("Alex shrugs while watching Avy squirm from the pain, dragging her butt back and forth.")
+
+		saynn("[say=alexrynard]It sure won't help with your reputation, little pain slut.[/say]")
+
+		saynn("Avy realizes that her cock is looking quite hard from the friction.. all the while the little crowd is already gathering around her.")
+
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
@@ -262,12 +488,39 @@ func _react(_action: String, _args):
 	if(_action == "go_sleep"):
 		GM.main.processTimeUntil(23*60*60)
 
+	if(_action == "next_day_alex"):
+		GM.main.startNewDay()
+		GM.pc.afterSleepingInBed()
+		processTime(5*60*60)
+
+	if(_action == "alex_after_hug"):
+		processTime(3*60)
+
+	if(_action == "punish_avy"):
+		didPunishAvy = true
+		didAny = true
+
+	if(_action == "punch_captain"):
+		didPunchedCap = true
+		didAny = true
+
+	if(_action == "hug_eliza"):
+		didHugEliza = true
+		didAny = true
+
+	if(_action == "avy_find"):
+		processTime(10*60)
+
 	setState(_action)
 
 func saveData():
 	var data = .saveData()
 
 	data["tellChoice"] = tellChoice
+	data["didAny"] = didAny
+	data["didPunishAvy"] = didPunishAvy
+	data["didPunchedCap"] = didPunchedCap
+	data["didHugEliza"] = didHugEliza
 
 	return data
 
@@ -275,3 +528,7 @@ func loadData(data):
 	.loadData(data)
 
 	tellChoice = SAVE.loadVar(data, "tellChoice", "")
+	didAny = SAVE.loadVar(data, "didAny", false)
+	didPunishAvy = SAVE.loadVar(data, "didPunishAvy", false)
+	didPunchedCap = SAVE.loadVar(data, "didPunchedCap", false)
+	didHugEliza = SAVE.loadVar(data, "didHugEliza", false)
