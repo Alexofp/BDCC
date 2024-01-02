@@ -1861,6 +1861,10 @@ func cumOnFloor():
 		if(production != null):
 			if(getWornCondom() != null):
 				return cumInItem(getWornCondom())
+			if(getWornPenisPump() != null):
+				var result = cumInItem(getWornPenisPump()) # Collect some into the penis pump
+				var returnValue = penis.getFluidProduction().drain() # Waste the rest
+				return result + returnValue
 			
 			var returnValue = penis.getFluidProduction().drain()
 			return returnValue
@@ -1938,6 +1942,13 @@ func getWornCondom():
 	if(getInventory().hasSlotEquipped(InventorySlot.Penis)):
 		var item = getInventory().getEquippedItem(InventorySlot.Penis)
 		if(item.id == "UsedCondom"):
+			return item
+	return null
+
+func getWornPenisPump():
+	if(getInventory().hasSlotEquipped(InventorySlot.Penis)):
+		var item = getInventory().getEquippedItem(InventorySlot.Penis)
+		if(item.hasTag(ItemTag.PenisPump)):
 			return item
 	return null
 

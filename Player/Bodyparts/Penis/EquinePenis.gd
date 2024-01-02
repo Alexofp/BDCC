@@ -60,3 +60,6 @@ func generateRandomColors(_dynamicCharacter):
 		pickedGColor = Color.from_hsv(theHue, RNG.randf_range(0.3, 0.6), RNG.randf_rangeX2(0.1, 0.3))
 		pickedBColor.v = RNG.randf_rangeX2(0.7, 0.95)
 		pickedBColor.s = RNG.randf_rangeX2(0.7, 0.95)
+
+func shouldUseBigPump():
+	return true

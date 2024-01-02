@@ -4,19 +4,20 @@ var pumpID = ""
 var timesMilked = 0
 
 func _init():
-	id = "DomPutBreastPumpOnSub"
+	id = "DomPutPenisPumpOnSub"
 	startedByDom = true
 	startedBySub = false
 
 func getGoals():
 	return {
-		SexGoal.MilkWithBreastPump: 1.0,
+		SexGoal.MilkWithPenisPump: 1.0,
 	}
 
 func getSupportedSexTypes():
 	return {
 		SexType.DefaultSex: true,
 		SexType.StocksSex: true,
+		SexType.SlutwallSex: true,
 	}
 
 func getActivityBaseScore(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexSubInfo):
@@ -27,21 +28,21 @@ func getStartActions(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexS
 	var sub:BaseCharacter = _subInfo.getChar()
 	var actions = []
 	
-	var allPumpsIDs = GlobalRegistry.getItemIDsByTag(ItemTag.BreastPumpUsableByNPC)
+	var allPumpsIDs = GlobalRegistry.getItemIDsByTag(ItemTag.PenisPumpUsableByNPC)
 	
 	#var putOnDomScore = getActivityScoreCustomGoals({SexGoal.SubWearStraponOnDom: 1.0}, _sexEngine, _domInfo, _subInfo) / float(allStraponIds.size())
 	#var putOnSubScore = getActivityScoreCustomGoals({SexGoal.SubWearStraponOnSub: 1.0}, _sexEngine, _domInfo, _subInfo) / float(allStraponIds.size())
 	
 	#sub.canWearBreastPump() && 
-	if(sub.getFirstItemThatCoversBodypart(BodypartSlot.Breasts) == null):
+	if(sub.getFirstItemThatCoversBodypart(BodypartSlot.Penis) == null):
 		if(dom.isPlayer()):
-			for straponObject in dom.getInventory().getItemsWithTag(ItemTag.BreastPump):
+			for straponObject in dom.getInventory().getItemsWithTag(ItemTag.PenisPump):
 				actions.append({
 					name = straponObject.getVisibleName(),
 					desc = straponObject.getVisisbleDescription(),
 					args = ["sub", straponObject.uniqueID],
 					score = 0.0,
-					category = ["Breasts", "Breast Pump on sub"],
+					category = ["Wear", "Penis pump on sub"],
 				})
 		else:
 			for pumpNewID in allPumpsIDs:
@@ -52,13 +53,13 @@ func getStartActions(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexS
 					desc = pumpObject.getVisisbleDescription(),
 					args = ["sub", pumpNewID],
 					score = getActivityScore(_sexEngine, _domInfo, _subInfo),
-					category = ["Breasts", "Breast Pump on sub"],
+					category = ["Wear", "Penis pump on sub"],
 				})
 	
 	return actions
 
 func getVisibleName():
-	return "Wear breast pump on sub"
+	return "Wear penis pump on sub"
 
 func getCategory():
 	return ["Wear"]
@@ -67,7 +68,7 @@ func getDomTags():
 	return []
 
 func getSubTags():
-	return [SexActivityTag.BreastsUsed]
+	return [SexActivityTag.PenisUsed, SexActivityTag.PenisInside]
 	
 func startActivity(_args):
 	state = ""
@@ -95,8 +96,8 @@ func startActivity(_args):
 		
 		return {
 			text = text,
-			domSay=domReaction(SexReaction.PutBreastPumpOnSub),
-			subSay=subReaction(SexReaction.PutBreastPumpOnSub),
+			#domSay=domReaction(SexReaction.PutBreastPumpOnSub),
+			#subSay=subReaction(SexReaction.PutBreastPumpOnSub),
 		}
 
 func processTurn():
@@ -106,67 +107,24 @@ func processTurn():
 			endActivity()
 			return
 		
-		affectSub(subInfo.fetishScore({Fetish.Lactation: 1.0})+0.3, 0.1, -0.02, 0.0)
-		subInfo.addArousalForeplay(max(0.0, subInfo.fetishScore({Fetish.Lactation: 0.1})))
+		affectSub(subInfo.fetishScore({Fetish.SeedMilking: 1.0})+0.3, 0.03, -0.01, 0.0)
+		subInfo.addArousal(max(0.1, subInfo.fetishScore({Fetish.SeedMilking: 0.2})))
 		
 		timesMilked += 1
 		var text = ""
-		if(getSub().canBeMilked()):
-			var howMuchToExtract = 10.0
-			if(pumpItem.has_method("getMilkSpeedPerMinuteMin")):
-				howMuchToExtract = RNG.randf_range(pumpItem.getMilkSpeedPerMinuteMin(), pumpItem.getMilkSpeedPerMinuteMax())
-			
-			var howMuchCollected = getSub().getBodypart(BodypartSlot.Breasts).getFluids().transferAmountTo(pumpItem, howMuchToExtract)
-			
-			var howMuchCollectedStr = str(Util.roundF(howMuchCollected, 1))+" ml"
-					
-			text += RNG.pick([
-				"The breast pump milks {sub.your} {sub.breasts} for "+howMuchCollectedStr+" of {sub.milk}.",
-				"The breast pump milks {sub.your} {sub.breasts} for "+howMuchCollectedStr+" of {sub.milk}.",
-			])
-			
-			if(pumpItem.getFluids().isFull()):
-				text += " The pump is full!"
-			elif(RNG.chance(20)):
-				var howMuchInPump = pumpItem.getFluids().getFluidAmount()
-				
-				text += " The pump now has "+str(Util.roundF(howMuchInPump, 1))+" ml in it."
-		else:
-			text += RNG.pick([
-				"The breast pump stimulates {sub.your} {sub.breasts}.",
-				"The breast pump stimulates {sub.your} {sub.breasts} but doesn't draw any milk out.",
-				"The breast pump tries to milk {sub.your} {sub.breasts} but {sub.youHe} is not lactating.",
-			])
-			if(getSub().stimulateLactation()):
-				text += RNG.pick([
-					" {sub.You} suddenly [b]began lactating[/b]! {sub.Milk} is leaking from {sub.yourHis} nipples.",
-				])
-		
-		if(timesMilked > 5 && !getSub().hasEffect(StatusEffect.SoreNipplesAfterMilking)):
-			if(RNG.chance(10) && !getSub().hasPerk(Perk.MilkNoSoreNipples)):
-				if(getSub().addEffect(StatusEffect.SoreNipplesAfterMilking)):
-					text += " {sub.YourHis} nipples [b]got sore[/b] from so much milking!"
-		
-		if(getSub().hasEffect(StatusEffect.SoreNipplesAfterMilking)):
-			var howMuchPainAdd = RNG.randi_range(2, 5)
-			subInfo.addPain(howMuchPainAdd)
-			sendSexEvent(SexEvent.PainInflicted, domID, subID, {pain=howMuchPainAdd,isDefense=false,intentional=false})
-			text += RNG.pick([
-				" {sub.YourHis} sore nipples hurt!",
-				" {sub.YourHis} sore nipples hurt from being milked so much!",
-				" {sub.YourHis} nipples are sore!",
-			])
-		elif(RNG.chance(30)):
-			text += RNG.pick([
-				" {sub.YourHis} nipples itch.",
-				" {sub.YourHis} nipples get tugged on.",
-				" {sub.YourHis} nipples tingle.",
-			])
+		text += RNG.pick([
+			"The penis pump stimulates {sub.your} {sub.penis}.",
+			"The penis pump stimulates {sub.your} {sub.penis}.",
+			"The penis pump strokes {sub.your} {sub.penis}.",
+			"The penis pump strokes {sub.your} {sub.penis}.",
+			"The penis pump pleasures {sub.your} {sub.penis}.",
+			"Pleasure ring of the penis pump strokes {sub.your} {sub.penis}.",
+		])
 		
 		return {
 			text = text,
-			domSay=domReaction(SexReaction.MilkingSubWithBreastPump, 10),
-			subSay=subReaction(SexReaction.MilkingSubWithBreastPump, 5),
+			#domSay=domReaction(SexReaction.MilkingSubWithBreastPump, 10),
+			#subSay=subReaction(SexReaction.MilkingSubWithBreastPump, 5),
 		}
 
 
@@ -175,9 +133,9 @@ func getDomActions():
 	if(state in ["milkingSub"]):
 		actions.append({
 			"id": "stopMilking",
-			"score": (0.1 if timesMilked > 3 else 0.0),
-			"name": "Stop milking sub",
-			"desc": "Take off the breast pumps from them",
+			"score": (0.1 if timesMilked > 15 else 0.0),
+			"name": "Stop seed-milking sub",
+			"desc": "Take off the penis pump from them",
 			"priority" : 0,
 		})
 	return actions
@@ -185,7 +143,7 @@ func getDomActions():
 func doDomAction(_id, _actionInfo):
 	if(_id == "stopMilking"):
 		var text = ""
-		text += "{dom.You} {dom.youVerb('take')} off the breast pumps from {sub.your} tits!"
+		text += "{dom.You} {dom.youVerb('take')} off the pump from {sub.your} cock!"
 		
 		var pumpItem = getSub().getInventory().getEquippedItemByUniqueID(pumpID)
 		if(pumpItem != null):
@@ -198,8 +156,8 @@ func doDomAction(_id, _actionInfo):
 		endActivity()
 		return {
 			text = text,
-			domSay=domReaction(SexReaction.RemoveBreastPumpFromSub),
-			subSay=subReaction(SexReaction.RemoveBreastPumpFromSub, 30),
+			#domSay=domReaction(SexReaction.RemoveBreastPumpFromSub),
+			#subSay=subReaction(SexReaction.RemoveBreastPumpFromSub, 30),
 		}
 
 func getSubActions():
@@ -211,9 +169,24 @@ func getSubActions():
 		"desc": "Do the cute noise",
 		"priority" : 0,
 	})
+	if(subInfo.isReadyToCum() && isHandlingSubOrgasms()):
+		actions.append({
+			"id": "cum",
+			"score": 1.0,
+			"name": "Cum!",
+			"desc": "You gonna cum.",
+			"priority": 1001,
+		})
 	return actions
 
 func doSubAction(_id, _actionInfo):
+	if(_id == "cum"):
+		getSub().cumOnFloor()
+		subInfo.cum()
+		
+		satisfyGoals()
+		
+		return getGenericSubOrgasmData()
 	if(_id == "moo"):
 		var text = ""
 		var muffled = ""
@@ -222,8 +195,8 @@ func doSubAction(_id, _actionInfo):
 		text += RNG.pick([
 			"{sub.You} {sub.youVerb('produce')} a cute"+muffled+" moo noise.",
 			"{sub.You} {sub.youVerb('imitate')} a cute"+muffled+" cow moo.",
-			"{sub.You} {sub.youVerb('moo')} while {sub.yourHis} {sub.breasts} are being milked.",
-			"{sub.You} {sub.youVerb('moo')} while breast pumps work on {sub.yourHis} breasts.."
+			"{sub.You} {sub.youVerb('moo')} while {sub.yourHis} {sub.penis} is being milked.",
+			"{sub.You} {sub.youVerb('moo')} while a penis pump strokes {sub.yourHis} cock.."
 		])
 		domInfo.addAnger(-0.05)
 		domInfo.addLust(5)
@@ -242,13 +215,10 @@ func onActivityEnd():
 		if(getDom().isPlayer()):
 			getDom().getInventory().addItem(pumpItem)
 
-func getAnimationPriority():
-	return 0
+func getSubOrgasmHandlePriority():
+	return 3
 
-func getAnimation():
-	if(getSexType() != SexType.DefaultSex):
-		return null
-	return [StageScene.Cuddling, "squirm", {pc=domID, npc=subID}]
+
 
 func saveData():
 	var data = .saveData()

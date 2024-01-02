@@ -25,6 +25,7 @@ const MilkWithBreastPump = "MilkWithBreastPump"
 const GropeBreasts = "GropeBreasts"
 const BreastFeedOnSub = "BreastFeedOnSub"
 const BreastFeedSub = "BreastFeedSub"
+const MilkWithPenisPump = "MilkWithPenisPump"
 
 
 # Subgoals, these don't need classes defined

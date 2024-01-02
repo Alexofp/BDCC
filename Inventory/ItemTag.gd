@@ -16,6 +16,8 @@ enum {
 	Strapon,
 	BreastPump,
 	BreastPumpUsableByNPC,
+	PenisPump,
+	PenisPumpUsableByNPC,
 	SexEngineDrug,
 	Hypnovisor,
 	

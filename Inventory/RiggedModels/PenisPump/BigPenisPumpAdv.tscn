@@ -1,0 +1,74 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://Inventory/RiggedModels/PenisPump/BigPenisPump.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Inventory/RiggedModels/PenisPump/BigPumpAdv.png" type="Texture" id=2]
+[ext_resource path="res://Inventory/RiggedModels/PenisPump/BigPleasureRingBack.png" type="Texture" id=3]
+[ext_resource path="res://Inventory/RiggedModels/PenisPump/BigPleasureRing.png" type="Texture" id=4]
+
+[sub_resource type="SpatialMaterial" id=1]
+resource_name = "penisDragon.png.002"
+flags_transparent = true
+flags_unshaded = true
+vertex_color_use_as_albedo = true
+params_cull_mode = 2
+params_depth_draw_mode = 3
+albedo_texture = ExtResource( 2 )
+
+[sub_resource type="SpatialMaterial" id=2]
+resource_local_to_scene = true
+resource_name = "penisDragon.png.002"
+flags_transparent = true
+flags_unshaded = true
+vertex_color_use_as_albedo = true
+params_cull_mode = 2
+params_depth_draw_mode = 3
+albedo_texture = ExtResource( 4 )
+
+[sub_resource type="SpatialMaterial" id=3]
+resource_local_to_scene = true
+resource_name = "penisDragon.png.002"
+flags_transparent = true
+flags_unshaded = true
+vertex_color_use_as_albedo = true
+params_cull_mode = 2
+params_depth_draw_mode = 3
+albedo_texture = ExtResource( 3 )
+
+[sub_resource type="SpatialMaterial" id=4]
+resource_local_to_scene = true
+resource_name = "penisDragon.png.002"
+flags_transparent = true
+flags_unshaded = true
+vertex_color_use_as_albedo = true
+params_cull_mode = 2
+params_depth_draw_mode = 3
+albedo_texture = ExtResource( 4 )
+uv1_offset = Vector3( -0.373, 0, 0 )
+
+[sub_resource type="SpatialMaterial" id=5]
+resource_local_to_scene = true
+resource_name = "penisDragon.png.002"
+flags_transparent = true
+flags_unshaded = true
+vertex_color_use_as_albedo = true
+params_cull_mode = 2
+params_depth_draw_mode = 3
+albedo_texture = ExtResource( 3 )
+uv1_offset = Vector3( 0.0477867, 0, 0 )
+
+[node name="BigPenisPumpAdv" instance=ExtResource( 1 )]
+
+[node name="penisEquinepng2" parent="." index="0"]
+material/0 = SubResource( 1 )
+
+[node name="penisEquinepng3" parent="." index="2"]
+material/0 = SubResource( 2 )
+
+[node name="penisEquinepng4" parent="." index="3"]
+material/0 = SubResource( 3 )
+
+[node name="penisEquinepng5" parent="." index="4"]
+material/0 = SubResource( 4 )
+
+[node name="penisEquinepng6" parent="." index="5"]
+material/0 = SubResource( 5 )
