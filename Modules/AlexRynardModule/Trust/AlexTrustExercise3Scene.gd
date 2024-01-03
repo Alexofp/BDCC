@@ -1,6 +1,13 @@
 extends SceneBase
 
 var bratCounter = 0
+var breastPumpID = ""
+var penisPumpID = ""
+var hasPenisPump = false
+var isLact = false
+var totalMilk = 0.0
+var totalSeed = 0.0
+var inducedLact = false
 
 func _init():
 	sceneID = "AlexTrustExercise3Scene"
@@ -441,6 +448,10 @@ func _run():
 		saynn("The wand between your legs starts to slow down, stealing the desired orgasm.. so rude..")
 
 		addButton("Continue", "See what happens next", "4")
+		if (getFlag("AlexRynardModule.3TrustCompleted")):
+			addButton("Milk me!", "There is some milking equipment lying around..", "4_milkme")
+		else:
+			addDisabledButton("Milk me!", "Maybe some other time, this would be too much for you")
 	if(state == "3_hischoice"):
 		playAnimation(StageScene.BDSMMachineFuck, "wand", {bodyState={naked=true, hard=true}})
 		saynn("[say=pc]It's your choice, Sir..[/say]")
@@ -471,7 +482,244 @@ func _run():
 
 		saynn("[say=alexrynard]So needy. Should be ready for more I think.[/say]")
 
-		addButton("Continue", "See what happens next", "4")
+		addButton("Nod", "See what happens next", "4")
+		if (getFlag("AlexRynardModule.3TrustCompleted")):
+			addButton("Milk me!", "There is some milking equipment lying around..", "4_milkme")
+		else:
+			addDisabledButton("Milk me!", "Maybe some other time, this would be too much for you")
+	if(state == "4_milkme"):
+		playAnimation(StageScene.BDSMMachineFuck, "tease", {bodyState={naked=true, hard=true}})
+		saynn("He presses a button and the machine retracts its wand, stealing all of the pleasure.. But you want more.. And you notice that this room has some unattended milking equipment lying around..")
+
+		saynn("[say=pc]Milk me![/say]")
+
+		saynn("Alex tilts his head slightly.. while you offer him a cute little smile.")
+
+		saynn("[say=pc]Please?..[/say]")
+
+		saynn("[say=alexrynard]I don't think we should be using this equipment, it's not..[/say]")
+
+		saynn("[say=pc]Ple-ease?[/say]")
+
+		saynn("[say=alexrynard]Fine-e. Just don't complain later.[/say]")
+
+		saynn("Yay. Your body is shivering from excitement as Alex goes ahead and grabs some special equipment.")
+
+		addButton("Continue", "See what happens next", "milk_putonstuff")
+	if(state == "milk_putonstuff"):
+		playAnimation(StageScene.BDSMMachineFuck, "tease", {bodyState={naked=true,chains=[["hose", "penisPump", "scene", "milkIntake"],["hose", "breastpump", "scene", "milkIntake"]]}})
+		if (GM.pc.hasSmallBreasts()):
+			saynn("Alex carefully secures a set of breast pumps around your {pc.breasts}. Your chest is not the most.. rich.. one.. but you're doing it for the sensations rather than milk..")
+
+		else:
+			saynn("Alex carefully secures a set of breast pumps around your {pc.breasts}. He makes sure the cups are properly attached and are creating a negative pressure inside.. You can't wait already..")
+
+		if (hasPenisPump):
+			saynn("After the breast pumps, Alex grabs a fitting penis one too. After that last.. stimulation.. your cock is still hard.. meaning Alex had no problem securing the pump around it.")
+
+		elif (GM.pc.isWearingChastityCage()):
+			saynn("Sadly there is no way to install the penis pump while you're wearing a chastity cage.. and Alex is obviously not gonna bother unlocking it just for this.")
+
+		saynn("[say=alexrynard]There we go, should be it.[/say]")
+
+		saynn("Alex also attaches a transparent bendy tube to each pump.. tube that leads to some liquid storage tanks.. kinky.")
+
+		saynn("[say=pc]Moo?[/say]")
+
+		saynn("Alex rolls his eyes.")
+
+		saynn("[say=alexrynard]If you moo again, I will gag you.[/say]")
+
+		saynn("That is what you're counting on..")
+
+		addButton("Continue", "See what happens next", "milk_start")
+	if(state == "milk_start"):
+		playAnimation(StageScene.BDSMMachineFuck, "wand", {bodyState={naked=true,chains=[["hose", "penisPump", "scene", "milkIntake"],["hose", "breastpump", "scene", "milkIntake"]]}})
+		if (hasPenisPump):
+			saynn("And so, Alex flicks a switch that causes all three pumps to engage.. The two attached to your nips do short rhythmic pumps while the penis one slides its pleasure ring over your shaft, making it feel like you're fucking some very tight fuckhole..")
+
+		else:
+			saynn("And so, Alex flicks a switch that causes the pumps to engage. They start off nice and easy, doing short rhythmic pumps on your nips, trying to pull something out..")
+
+		if (GM.pc.hasReachableVagina()):
+			saynn("At the same time, Alex also presses a button that causes the machine to start stimulating your pussy again with its magic wand tool. No matter how much you squirm.. the algorithms perfectly track your body, making any kind of resistance pointless.. and that's great..")
+
+		else:
+			saynn("At the same time, Alex also presses a button that causes the machine to start stimulating your taint area again with its magic wand tool. No matter how much you squirm.. the algorithms perfectly track your body, making any kind of resistance pointless.. and that's great..")
+
+		saynn("[say=pc]Ah.. So good..[/say]")
+
+		if (inducedLact):
+			saynn("Room is filled with your moans and the mechanical noises of the pumps working. You don't remember yourself lactating so obviously their efforts are kinda fruitless.. and yet.. and does feel amazing.")
+
+			saynn("You roll your eyes high up and just moan passionately, the stimulation of your nips coupled with reading the words that appear on the screen before your eyes.. wow.. So good that you almost feel like you're leaking something.. wait..")
+
+			saynn("[say=pc]Am I..[/say]")
+
+			saynn("Alex checks the data.. and sure enough..")
+
+			saynn("[say=alexrynard]Yep, the machine has collected a few ml.[/say]")
+
+			saynn("The pumps have caused a natural reaction in your body.. Your breasts are actually producing {pc.milk} now.. This tech is something else.")
+
+		else:
+			saynn("Room is filled with your moans and the mechanical noises of the pumps working. At first their efforts are kinda fruitless.. but soon enough.. little squirts start appearing in random spots of your nips and areolas.. drops of your {pc.milk} begin to travel up the transparent tubes, getting collected by the machine.")
+
+		if (hasPenisPump):
+			saynn("The penis pump only adds to the sensations.. You didn't cum yet so all it can collect is your precum.. but you feel yourself extremely close, the pleasure ring sliding over your cock back and forth is edging you hard..")
+
+		saynn("Watching the screen in front of you.. You really want to moo for some reason..")
+
+		addButton("Moo", "You have to", "milk_afterfirst")
+	if(state == "milk_afterfirst"):
+		playAnimation(StageScene.BDSMMachineFuck, "tease", {bodyState={naked=true,chains=[["hose", "penisPump", "scene", "milkIntake"],["hose", "breastpump", "scene", "milkIntake"]]}})
+		saynn("[say=pc]Moo-o~..[/say]")
+
+		saynn("Instantly, Alex stops the pumps and the machine.")
+
+		saynn("[say=pc]Aw.. That's it?[/say]")
+
+		saynn("[say=alexrynard]If you want to be a moo, let's make you a proper moo.[/say]")
+
+		saynn("Alex produces a ball gag and a blindfold.. and already begins to secure them on you..")
+
+		saynn("Oh no..")
+
+		addButton("Continue", "See what happens next", "milk_gagged")
+	if(state == "milk_gagged"):
+		playAnimation(StageScene.BDSMMachineFuck, "fuck", {bodyState={naked=true,chains=[["hose", "penisPump", "scene", "milkIntake"],["hose", "breastpump", "scene", "milkIntake"]]}})
+		saynn("After gagging and blindfolding you.. Alex turns everything on again.. but you can hear the machine switching tools..")
+
+		if (GM.pc.hasReachableVagina()):
+			saynn("Instead of using a wand, a rubber pre-lubed dildo finds your pussy.. before spreading the petal with ease and sliding inside! All the while your pumps start tugging on your nips"+str(" and stimulating your cock" if hasPenisPump else "")+" harder. Oh fuck..")
+
+		else:
+			saynn("Instead of using a wand, a rubber pre-lubed dildo finds your tailhole.. before spreading the {pc.analStretch} star with ease and sliding inside! All the while your pumps start tugging on your nips"+str(" and stimulating your cock" if hasPenisPump else "")+" harder. Oh fuck..")
+
+		saynn("More and more milk starts flowing through the transparent bendy tubes.. more and more moans start to escape your mouth.. all of them muffled. You're being milked while you're fucked.. why does this feel so good.")
+
+		saynn("[say=alexrynard]You know what gesture to show me if you want me to stop.[/say]")
+
+		saynn("Huh? You missed what he said completely.. and who cares.. you're so close..")
+
+		addButton("Continue", "See what happens next", "milk_firstcum")
+	if(state == "milk_firstcum"):
+		playAnimation(StageScene.BDSMMachineFuck, "fast", {bodyState={naked=true,chains=[["hose", "penisPump", "scene", "milkIntake"],["hose", "breastpump", "scene", "milkIntake"]]}})
+		saynn("It hits you hard, a powerful orgasm rocks through your entire body.. You squirm and arch your back as much as the mechanical grips allow while the pumps start doing the suctions with increased frequency.")
+
+		if (hasPenisPump):
+			saynn("Your {pc.penis} is throbbing and twitching, multiple spurts of your {pc.cum} finally erupting, one after another.. And the pump doesn't stop, its pleasure ring is stroking your cock to the point of overstimulating, your balls tensing up while they're being drained so much..")
+
+		if (GM.pc.hasReachableVagina()):
+			saynn("Your pussy squirts while continuously fucked by the rubber dildo, your g-spot being hammered hard! Shame that there is no pump attached to your urethra because right now it would be collecting all of the girlcum in the world..")
+
+		else:
+			saynn("Your tailhole clenches tightly around the rubber dildo that's fucking it, your "+str("prostate" if GM.pc.hasPenis() else "sensitive spot")+" being hammered hard!")
+
+		saynn("Your {pc.breasts} release a strong flow of {pc.milk} during your peak, your hard nips tingling from all the stimulation.")
+
+		saynn("[say=alexrynard]Not bad.. Let's see..[/say]")
+
+		saynn("He looks at the display.")
+
+		if (hasPenisPump):
+			saynn("[say=alexrynard]"+str(Util.roundF(totalSeed, 0))+" ml of seed and "+str(Util.roundF(totalMilk, 0))+" ml of milk so far.[/say]")
+
+		else:
+			saynn("[say=alexrynard]"+str(Util.roundF(totalMilk, 0))+" ml of milk so far.[/say]")
+
+		saynn("Wait.. did he say 'so far'? This isn't it, is it.. Your brain is too deep in this milking thing to stop now anyway though..")
+
+		addButton("Continue", "See what happens next", "milk_secondwave")
+	if(state == "milk_secondwave"):
+		playAnimation(StageScene.BDSMMachineFuck, "sexdouble", {bodyState={naked=true,chains=[["hose", "penisPump", "scene", "milkIntake"],["hose", "breastpump", "scene", "milkIntake"]]}})
+		if (GM.pc.hasReachableVagina()):
+			saynn("Alex presses a button, causing the machine to extend a second dildo! This one aligns itself with your other hole and.. after prodding it for a bit.. thrusts inside, in sync with the other one!")
+
+			saynn("[say=pc]MH-h-h!..[/say]")
+
+			saynn("Muffled noises escape from you while both of your holes are now getting fucked by the machine.. while the pumps keep collecting milk"+str(" and seed" if hasPenisPump else "")+" from you..")
+
+		else:
+			saynn("Alex presses a button, causing the machine to extend a second dildo! This one aligns itself with your same hole that is already stretched by another dildo.. after prodding it for a bit.. suddenly thrusts inside, in sync with the other one!")
+
+			saynn("[say=pc]MH-h-h!..[/say]")
+
+			saynn("Muffled noises escape from you while your poor tailhole is now stretched wide by the machine that is double-penetrating you.. while the pumps keep collecting milk"+str(" and seed" if hasPenisPump else "")+" from you..")
+
+		saynn("Your old orgasm has faded by now.. but the next one is already approaching, your body is shivering from the fucking and constant milking, your mind slipping into the bottomless abyss of pleasure..")
+
+		addButton("Milking..", "A lot milking..", "milk_afterhours")
+	if(state == "milk_afterhours"):
+		playAnimation(StageScene.BDSMMachineFuck, "fastdouble", {bodyState={naked=true,chains=[["hose", "penisPump", "scene", "milkIntake"],["hose", "breastpump", "scene", "milkIntake"]]}})
+		saynn("What follows are hours of non-stop orgasms.. one after one.. each one causing your breasts to release some more milk.. all of it collected by the machine.")
+
+		if (hasPenisPump):
+			saynn("Each time your balls produce some seed, the cock pump is fast to drain them dry again. There is no point in time where your cock isn't dripping something..")
+
+		saynn("By the end of it.. you're spent.. truly.. and yet, you feel.. free.")
+
+		saynn("[say=alexrynard]Alright.. I think this is enough for you. Been standing here for hours.[/say]")
+
+		saynn("Poor guy.")
+
+		saynn("[say=alexrynard]Watching the numbers go up was kinda fun.[/say]")
+
+		saynn("He turns off the pumps.. and begins to take them off of you.")
+
+		if (hasPenisPump):
+			saynn("[say=alexrynard]Speaking of.. "+str(Util.roundF(totalSeed, 0))+" ml of seed and "+str(Util.roundF(totalMilk, 0))+" ml of milk. That's how much you made.[/say]")
+
+		else:
+			saynn("[say=alexrynard]Speaking of.. "+str(Util.roundF(totalMilk, 0))+" ml of milk. That's how much you made[/say]")
+
+		saynn("What are numbers anyway.. All you want is moo..")
+
+		addButton("Continue", "See what happens next", "milk_takeoffeverything")
+	if(state == "milk_takeoffeverything"):
+		playAnimation(StageScene.BDSMMachineFuck, "tease", {bodyState={naked=true}})
+		saynn("You produce a muffled moan as Alex carefully removes the breast pumps one after another with satisfying 'plop' noise."+str(" He also then removes the pump connected to your dick, just as carefully." if hasPenisPump else "")+"")
+
+		if (GM.pc.hasReachableVagina()):
+			saynn("The dildos leave your holes gaping after retracting out of them.. your pussy juices dripping freely onto the floor.")
+
+		else:
+			saynn("The dildos leave your hole gaping after retracting out of it.. your tailhole visible pulsing every few seconds.")
+
+		saynn("[say=pc]Ah.. hah..[/say]")
+
+		saynn("[say=alexrynard]Not so keen to moo now, huh?[/say]")
+
+		saynn("You so want to do it.. Fuck it!")
+
+		saynn("[say=pc]M-mo..[/say]")
+
+		saynn("But Alex suddenly plugs your mouth with his digits.. that you of course begin drooling on.")
+
+		saynn("[say=alexrynard]What a brat.. Let's get you off.[/say]")
+
+		saynn("Cuddles!")
+
+		addButton("Cuddle", "Rest with Alex", "milk_cuddle")
+	if(state == "milk_cuddle"):
+		playAnimation(StageScene.Cuddling, "idle", {pc="alexrynard", npc="pc", npcBodyState={naked=true}})
+		saynn("Alex presses the button that carefully places you on the floor. Your legs are shaky but Alex is quick to catch you, before carefully embracing you.")
+
+		saynn("[say=alexrynard]There we go. Hope you had fun.[/say]")
+
+		saynn("You nod and rest in his hands.")
+
+		saynn("[say=alexrynard]Good job. You're a good.. moo.. whatever that means.[/say]")
+
+		saynn("So cute to hear him say that. Your mind is slowly returning back to its normal state..")
+
+		saynn("[say=alexrynard]I'm not a huge fan of lactation and stuff. Looks like you enjoyed it though. Good.[/say]")
+
+		saynn("You stay together like that, cuddling and chatting.")
+
+		saynn("After that, Alex helps you to get back to the medical lobby..")
+
+		addButton("Continue", "See what happens next", "gobacktolobby")
 	if(state == "4"):
 		playAnimation(StageScene.BDSMMachineAltFuck, "tease", {bodyState={naked=true, hard=true}})
 		saynn("[say=alexrynard]There are so many options for milking.. Let's pick something simpler.[/say]")
@@ -952,6 +1200,66 @@ func _react(_action: String, _args):
 	if(_action == "3_brat"):
 		bratCounter += 1
 
+	if(_action == "milk_putonstuff"):
+		isLact = GM.pc.canBeMilked()
+		var breastPump = GlobalRegistry.createItem("BreastPump")
+		breastPumpID = breastPump.uniqueID
+		GM.pc.getInventory().forceEquipStoreOtherUnlessRestraint(breastPump)
+		if(GM.pc.hasReachablePenis()):
+			hasPenisPump = true
+			var penisPump = GlobalRegistry.createItem("PenisPump")
+			penisPumpID = penisPump.uniqueID
+			GM.pc.getInventory().forceEquipStoreOtherUnlessRestraint(penisPump)
+
+	if(_action == "milk_start"):
+		if(!isLact):
+			inducedLact = true
+			GM.pc.induceLactation()
+		else:
+			GM.pc.stimulateLactation()
+		processTime(20*60)
+
+	if(_action == "milk_afterfirst"):
+		processTime(3*60)
+
+	if(_action == "milk_gagged"):
+		processTime(10*60)
+		GM.pc.getInventory().forceEquipStoreOtherUnlessRestraint(GlobalRegistry.createItem("blindfold"))
+		GM.pc.getInventory().forceEquipStoreOtherUnlessRestraint(GlobalRegistry.createItem("ballgag"))
+
+	if(_action == "milk_firstcum"):
+		processTime(10*60)
+		var howMuchMilked = GM.pc.milk()
+		totalMilk += howMuchMilked
+		if(hasPenisPump):
+			totalSeed += GM.pc.milkSeed()
+		GM.pc.orgasmFrom("alexrynard")
+
+	if(_action == "milk_secondwave"):
+		processTime(60*60)
+		if(GM.pc.hasReachableVagina()):
+			GM.pc.gotOrificeStretchedWith(BodypartSlot.Vagina, 30)
+			GM.pc.gotOrificeStretchedWith(BodypartSlot.Anus, 30)
+		else:
+			GM.pc.gotOrificeStretchedWith(BodypartSlot.Anus, 30)
+			GM.pc.gotOrificeStretchedWith(BodypartSlot.Anus, 30)
+
+	if(_action == "milk_afterhours"):
+		processTime(60*60*3)
+		var howMuchMilked = GM.pc.milk()
+		totalMilk += howMuchMilked
+		if(hasPenisPump):
+			totalSeed += GM.pc.milkSeed()
+		GM.pc.orgasmFrom("alexrynard")
+
+	if(_action == "milk_takeoffeverything"):
+		processTime(3*60)
+		GM.pc.freeEyesDeleteAll()
+		GM.pc.freeMouthDeleteAll()
+		GM.pc.getInventory().removeItemFromSlot(InventorySlot.UnderwearTop)
+		if(hasPenisPump):
+			GM.pc.getInventory().removeItemFromSlot(InventorySlot.Penis)
+
 	if(_action == "4_aah"):
 		GM.pc.getInventory().forceEquipStoreOtherUnlessRestraint(GlobalRegistry.createItem("blindfold"))
 		GM.pc.getInventory().forceEquipStoreOtherUnlessRestraint(GlobalRegistry.createItem("ballgag"))
@@ -1039,6 +1347,13 @@ func saveData():
 	var data = .saveData()
 
 	data["bratCounter"] = bratCounter
+	data["breastPumpID"] = breastPumpID
+	data["penisPumpID"] = penisPumpID
+	data["hasPenisPump"] = hasPenisPump
+	data["isLact"] = isLact
+	data["totalMilk"] = totalMilk
+	data["totalSeed"] = totalSeed
+	data["inducedLact"] = inducedLact
 
 	return data
 
@@ -1046,3 +1361,10 @@ func loadData(data):
 	.loadData(data)
 
 	bratCounter = SAVE.loadVar(data, "bratCounter", 0)
+	breastPumpID = SAVE.loadVar(data, "breastPumpID", "")
+	penisPumpID = SAVE.loadVar(data, "penisPumpID", "")
+	hasPenisPump = SAVE.loadVar(data, "hasPenisPump", false)
+	isLact = SAVE.loadVar(data, "isLact", false)
+	totalMilk = SAVE.loadVar(data, "totalMilk", 0.0)
+	totalSeed = SAVE.loadVar(data, "totalSeed", 0.0)
+	inducedLact = SAVE.loadVar(data, "inducedLact", false)

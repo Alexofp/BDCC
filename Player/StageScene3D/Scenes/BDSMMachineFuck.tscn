@@ -234,6 +234,9 @@ tree_root = SubResource( 71 )
 anim_player = NodePath("../BDSMMachine/AnimationPlayer")
 parameters/StateMachine/playback = SubResource( 23 )
 
+[node name="MilkIntake" type="Position3D" parent="." index="5"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.846375, 11.2418, 0.0936075 )
+
 [editable path="Doll3D"]
 [editable path="Doll3D/DollSkeleton"]
 [editable path="BDSMMachine"]

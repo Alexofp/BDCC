@@ -115,3 +115,10 @@ transform = Transform( 0.974702, 0.223505, 0, -0.223505, 0.974702, 0, 0, 0, 1, -
 boneId = "Chest"
 zoneName = "breastpump"
 scaleWithBone = false
+chainOffset = Vector3( -0.3, 0, 0 )
+
+[node name="AttachmentProxy2" parent="." index="2" instance=ExtResource( 3 )]
+transform = Transform( 0.999999, 0, 0, 0, 0.999999, 0, 0, 0, 1, -0.505803, 5.77395, 0.043 )
+boneId = "Chest"
+zoneName = "nipples"
+scaleWithBone = false
