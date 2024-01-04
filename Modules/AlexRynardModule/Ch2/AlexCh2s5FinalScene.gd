@@ -272,7 +272,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "alex_hugs_pc")
 	if(state == "alex_hugs_pc"):
-		playAnimation(StageScene.Hugging, "hug", {npc="alexrynard"})
+		playAnimation(StageScene.Hug, "hug", {npc="alexrynard"})
 		saynn("Suddenly, Alex rushes up to you and wraps his hands around your body, hugging you as tightly as he can without breaking your ribs.")
 
 		saynn("[say=alexrynard]Thank you.. I was close to giving up on everything.. In fact, I did give up.. I just wasn't strong enough to end it.[/say]")
@@ -311,7 +311,7 @@ func _run():
 		saynn("(( This is where Alex's content officially ends, thank you for playing <3 ))")
 		addButton("Continue", "See what happens next", "alex_after_hug")
 	if(state == "alex_kiss_back"):
-		playAnimation(StageScene.Hugging, "kiss", {npc="alexrynard"})
+		playAnimation(StageScene.Hug, "kiss", {npc="alexrynard"})
 		saynn("Rather than hugging the foxy back, you carefully remove the tears from his cheeks.. before kissing him.. deeply.")
 
 		saynn("[say=alexrynard]Wow..[/say]")
@@ -379,9 +379,10 @@ func _run():
 
 		addButton("Punish Avy", "Track down Avy and punish her!", "punish_avy")
 		addButton("Punch captain", "Go punch the captain for no obvious reason", "punch_captain")
-		addButton("Hug Eliza", "Go hug Eliza for everything that she did", "hug_eliza")
+		addButton("Eliza", "Go thank Eliza for everything that she did", "hug_eliza")
 		addButton("No business", "It's fine", "enough_bus")
 	if(state == "pickWhatDo"):
+		playAnimation(StageScene.Duo, "stand", {npc="alexrynard"})
 		saynn("What should you do next?")
 
 		if (!didPunishAvy):
@@ -393,9 +394,9 @@ func _run():
 		else:
 			addDisabledButton("Punch captain", "You already did this")
 		if (!didHugEliza):
-			addButton("Hug Eliza", "Go hug Eliza for everything that she did", "hug_eliza")
+			addButton("Eliza", "Go thank Eliza for everything that she did", "hug_eliza")
 		else:
-			addDisabledButton("Hug Eliza", "You already did this")
+			addDisabledButton("Eliza", "You already did this")
 		addButton("Enough", "This is enough loose ends tied up", "enough_bus")
 	if(state == "punish_avy"):
 		playAnimation(StageScene.Duo, "stand", {npc="alexrynard"})
@@ -449,20 +450,372 @@ func _run():
 
 		addButton("Continue", "See what happens next", "avy_woodenhorse")
 	if(state == "avy_woodenhorse"):
+		addCharacter("avy", ["naked"])
 		playAnimation(StageScene.WoodenHorseSolo, "lightstruggle", {pc="avy", bodyState={naked=true, hard=true}})
 		aimCameraAndSetLocName("main_punishment_spot")
-		saynn("Avy growls and pulls on the leash.. but Alex easily overpowers her and brings her to the main platform with all the stocks and such. He undresses her with your help and throws her onto the wooden horse.")
+		saynn("Avy growls and pulls on the leash.. but together you can easily overpower her. You bring her to the main platform with all the stocks and such. Alex undresses her with your help and throws her onto the wooden horse.")
 
-		saynn("Alex slowly lowers her until her ass and her cock start feeling the sharp edge being pressed against them.")
+		saynn("Alex slowly lowers her until her ass and her cock start feeling the sharp edge of the horse being pressed against them.")
 
 		saynn("[say=avy]You t-think this will break me?[/say]")
 
-		saynn("Alex shrugs while watching Avy squirm from the pain, dragging her butt back and forth.")
+		saynn("Alex shrugs and just loosens the chains more, causing Avy to start squirming from the pain and dragging her butt back and forth.")
 
 		saynn("[say=alexrynard]It sure won't help with your reputation, little pain slut.[/say]")
 
 		saynn("Avy realizes that her cock is looking quite hard from the friction.. all the while the little crowd is already gathering around her.")
 
+		saynn("[say=avy]You fucker..[/say]")
+
+		saynn("And so the crowd cheered while watching Avy ride the torture device. The more time was passing, the less enthusiastic her resistance was, the sharp edge pushing on her taint bringing her quite a bit of discomfort.")
+
+		saynn("After some time.. her crotch receives some bruising.. but the dark foxy is still not breaking.")
+
+		saynn("Alex looks at you.")
+
+		saynn("[say=alexrynard]I think we should test a few of my prototypes on her. What do you think?[/say]")
+
+		saynn("[say=pc]Sounds fun.[/say]")
+
+		saynn("And so you two bring Avy onto the floor again, a leash gets clipped to her collar.. No clothing though. Alex hands you the leash.")
+
+		addButton("Medical", "Bring Avy to the place with the milking machine", "bring_avy_medical")
+	if(state == "bring_avy_medical"):
+		aimCameraAndSetLocName("med_lobbymain")
+		playAnimation(StageScene.Duo, "walk", {pc="avy", npc="pc", npcAction="walk", flipNPC=true, bodyState={naked=true, hard=true, leashedBy="pc"}})
+		saynn("Avy doesn't dare to resist as much, the wooden horse has drained most of her will to push back, allowing you to easily parade her around the station on a leash.")
+
+		saynn("You, Alex and Avy enter the medical lobby. Avy asks Eliza if you can use the milking.. And of course Eliza gives the go-ahead.")
+
+		saynn("Time to make that slut useful.")
+
+		addButton("Milking machine", "Go to the room with the milking machine", "avy_milk_secure")
+	if(state == "avy_milk_secure"):
+		playAnimation(StageScene.BDSMMachineFuck, "tease", {pc="avy", noDildos=true, bodyState={naked=true,chains=[["hose", "penisPump", "scene", "milkIntake"],["hose", "breastpump", "scene", "milkIntake"]]}})
+		aimCameraAndSetLocName("med_milkingroom")
+		saynn("Avy is confused when she sees all sorts of milking equipment around.")
+
+		saynn("[say=avy]Hey.. what the fuck.. Where are you bringing me?[/say]")
+
+		saynn("Alex turns on his machine.. and presses a button that suddenly grabs Avy and brings her to the advanced medical table, holding her wrists and ankles tightly.")
+
+		saynn("[say=avy]Hey..[/say]")
+
+		saynn("Without saying a word, you and Alex secure some things on her.. a set of breast pumps and a penis one as well, all of them connected to some fluid storage tanks with bendy tubes.")
+
+		saynn("[say=avy]Don't you dare. You will regret it, trust me![/say]")
+
+		saynn("[say=alexrynard]I don't trust you, save your energy.[/say]")
+
+		saynn("The pumps engage, breast ones tugging on Avy's nips, making them hard and perky, while the penis one uses its soft pleasure ring to start stroking her length.")
+
+		saynn("[say=avy]Nh-h![/say]")
+
+		saynn("Instantly, the dark foxy arches her back, her cock twitching from the stimulation.")
+
+		saynn("[say=avy]Fuck you..[/say]")
+
+		saynn("She doesn't seem to be a fan of it though.")
+
+		saynn("[say=alexrynard]We could milk her forcefully.. but I think there is a better solution.[/say]")
+
+		saynn("Alex produces one of his prototypes.. a special visor.")
+
+		saynn("[say=avy]Huh?[/say]")
+
+		addButton("Continue", "See what happens next", "avy_receives_hypno")
+	if(state == "avy_receives_hypno"):
+		playAnimation(StageScene.BDSMMachineFuck, "wand", {pc="avy", noDildos=true, bodyState={naked=true,chains=[["hose", "penisPump", "scene", "milkIntake"],["hose", "breastpump", "scene", "milkIntake"]]}})
+		saynn("It's hard to resist when all your limbs are held by mechanical manipulators. Alex puts his prototype on Avy's face and turns it on. The glass lights up with a warm yellow glow as the device begins to work..")
+
+		saynn("[say=avy]Nh.. Nice reading glasses you got there, grandpa.[/say]")
+
+		saynn("The pumps are still working on stimulating Avy's bits.. but so far nothing was collected.")
+
+		saynn("[say=alexrynard]Doesn't it feel good though?[/say]")
+
+		saynn("[say=avy]Good? You know what will feel good? Breaking your every bone, one by one.. Seeing you bleed and squirm under my foot as I stand.. as I.. on your.. on my.. knees.. sit.. Huh.. What was I..[/say]")
+
+		saynn("The visor has warmed up and is now displaying some colorful patterns to Avy, her gaze gradually defocussing.")
+
+		saynn("[say=avy]What is this.. Turn it off.. It's making me.. Fuck.. dizzy.. Turn it.. Turn who? Turn me?.. Into who..[/say]")
+
+		saynn("She is trying to close her eyes.. but it's too late. Avy is mesmerized by all the colors that are crafted specifically to mess with her brain.")
+
+		saynn("[say=pc]Looks like it's working.[/say]")
+
+		saynn("Words begin to appear on the visor. You can't really read them as they appear flipped for you. But it's something about being a good pet and a good cow.")
+
+		saynn("[say=avy]Fuck.. y-y.. m-me.. Please.. Yes.. M-milk?..[/say]")
+
+		saynn("[say=alexrynard]You want to be milked?[/say]")
+
+		saynn("Little moans escape from Avy, her body actively squirming while the pumps keep working on her breasts and cock relentlessly..")
+
+		saynn("[say=avy]N.. n-.. Yes? Please? I want to be a good.. milky.. pet..[/say]")
+
+		saynn("[say=alexrynard]Eh, this visor might have been a mistake.[/say]")
+
+		saynn("[say=pc]But it works well.[/say]")
+
+		saynn("[say=alexrynard]Too well.. I wanted to cure depression, not find a way to eliminate someone's will.[/say]")
+
+		saynn("So easy to destroy our inner balance. Eliminate our negative feelings.. and you will never be able to say no.. you will never be able to control yourself.")
+
+		saynn("[say=pc]Good punishment though, they will remember this.[/say]")
+
+		saynn("[say=alexrynard]Can't deny that.[/say]")
+
+		saynn("Suddenly, Avy produces a long passionate moan, her body arching again as her perky nips squirt out some milk.. and then again.")
+
+		saynn("[say=avy]Nh-h-h!.. Fuck me! Milk me! Please! Drain my balls and tits![/say]")
+
+		saynn("[say=alexrynard]Well.. if you so desire.[/say]")
+
+		addButton("Continue", "See what happens next", "avy_gets_milked_hard")
+	if(state == "avy_gets_milked_hard"):
+		playAnimation(StageScene.BDSMMachineAltFuck, "fast", {pc="avy", bodyState={naked=true,chains=[["hose", "penisPump", "scene", "milkIntake"],["hose", "breastpump", "scene", "milkIntake"]]}})
+		saynn("Alex presses a button that causes the machine to flip Avy onto her belly. Then.. moments later.. a rubber pre-lubed dildo aligns itself with her tight-looking puckered hole.. before penetrating it with one swift thrust, stretching her star wide.")
+
+		saynn("[say=avy]AH! Yes!..[/say]")
+
+		saynn("The machine starts fucking Avy's ass, destroying her prostate. And, soon enough, Avy's cock starts throbbing and shooting cum, the pump milking her hard during these moments, her balls tensing up again and again.")
+
+		saynn("[say=avy]Fuck yeah!.. Milk me dry!..[/say]")
+
+		saynn("[say=pc]See, she is happy?[/say]")
+
+		saynn("[say=alexrynard]How little do we need..[/say]")
+
+		saynn("During that orgasm, the breast pumps also manage to create a steady flow of Avy's milk, all of it quickly collected and sorted into the right fluid tank.")
+
+		saynn("[say=avy]Nh-h! I'm such a fucking cow! My prostate is being abused and it feels so good![/say]")
+
+		saynn("[say=alexrynard]I don't know if I would classify that as happy. She is clearly under the influence.[/say]")
+
+		saynn("[say=pc]Does it matter? We are always under the influence of some chemicals in our brain.[/say]")
+
+		saynn("[say=alexrynard]I guess you're right.[/say]")
+
+		saynn("Orgasm after orgasm.. soon the machine manages to start milking Avy non-stop, her cock twitching and dripping cum at a slow but constant rate.")
+
+		saynn("[say=alexrynard]Let's go.[/say]")
+
+		saynn("[say=pc]Huh?[/say]")
+
+		saynn("Alex finds some nurse and tells her to keep an eye on Avy. The nurse nods.")
+
+		saynn("[say=alexrynard]They will milk Avy until she is dry. We can go.[/say]")
+
+		addButton("Continue", "See what happens next", "after_avy_abuse")
+	if(state == "punch_captain"):
+		aimCameraAndSetLocName("eng_workshop")
+		saynn("[say=pc]I think.. you should punch the captain?[/say]")
+
+		saynn("Alex tilts his head.")
+
+		saynn("[say=alexrynard]Huh? Why?[/say]")
+
+		saynn("[say=pc]Why not.[/say]")
+
+		saynn("Alex, after contemplating for a bit, decides to grab his datapad and press a few buttons on it.")
+
+		addButton("Continue", "See what happens next", "cap_gets_punched")
+	if(state == "cap_gets_punched"):
+		addCharacter("captain")
+		playAnimation(StageScene.Duo, "punch", {pc="alexrynard", npc="captain", npcAction="hurt"})
+		saynn("A few minutes later, the captain walks into the room, his guards following just after.")
+
+		saynn("[say=captain]Hey there. First time I see you after the operation, your fast recovery is most impressive. What did you want to discuss?[/say]")
+
+		saynn("Alex, without even saying anything back, just throws a right hook, punching the captain so hard, he recoils back.")
+
+		saynn("The captain grunts and grabs onto his jaw.")
+
+		saynn("[say=captain]Fuck, my jaw..[/say]")
+
+		saynn("[say=alexrynard]That will be it.[/say]")
+
+		saynn("The guards are confused.. because the captain is just standing still, rubbing his bruised chin.")
+
+		saynn("[say=captain]Alright.[/say]")
+
+		saynn("And just like that, he and his guards leave.")
+
+		saynn("All things considered, he got off easy.")
+
+		addButton("Continue", "See what happens next", "after_cap_punch")
+	if(state == "hug_eliza"):
+		saynn("[say=pc]Let's go check on Eliza![/say]")
+
+		saynn("[say=alexrynard]Sounds good.[/say]")
+
+		saynn("You and Alex proceed to walk towards the medical wing.")
+
+		addButton("Continue", "See what happens next", "hug_eliza_meet")
+	if(state == "hug_eliza_meet"):
+		addCharacter("eliza")
+		playAnimation(StageScene.Duo, "stand", {pc="alexrynard", npc="eliza"})
+		aimCameraAndSetLocName("med_lobbymain")
+		saynn("Eliza is doing the usual things, sitting behind the counter, drinking coffee.")
+
+		saynn("When she notices you two, she quickly gets up and joins you.")
+
+		saynn("[say=eliza]Heya! How are you two doing?[/say]")
+
+		saynn("[say=alexrynard]Well enough, thank you.[/say]")
+
+		saynn("[say=eliza]How is your back, foxy?[/say]")
+
+		saynn("Alex scratches behind his head.")
+
+		saynn("[say=alexrynard]Much better than before.[/say]")
+
+		saynn("[say=eliza]Almost like you should have allowed your apprentice to help you maintain it~.[/say]")
+
+		saynn("Eliza winks to you.")
+
+		saynn("[say=alexrynard]Listen.. I know. I thought I could just ignore it. Live a normal life, you know?[/say]")
+
+		saynn("Normal life? Madness.")
+
+		saynn("[say=eliza]Speaking of. I think I know how to make your life better~.[/say]")
+
+		saynn("Alex whispers to you..")
+
+		saynn("[say=alexrynard]Oh no, what is it gonna be this time..[/say]")
+
+		saynn("[say=eliza]Do you have an interest in bioengineering?[/say]")
+
+		saynn("[say=alexrynard]I don't mind it. But everything I create seems to only hurt people rather than help them. Hurt or.. pleasure.. to the point of pain.[/say]")
+
+		saynn("Eliza giggles and tilts her head.")
+
+		saynn("[say=eliza]You might be pushing yourself too much, foxy~. I have a small project idea for you and me. A perfect synergy of tech and biology.[/say]")
+
+		saynn("[say=alexrynard]Uh..[/say]")
+
+		saynn("If you let him hesitate, he might say no!")
+
+		addButton("Say Yes", "Make the choice for him", "eliza_sayyes")
+		addButton("Push Alex", "Shove Alex towards Eliza and see what happens", "eliza_push")
+	if(state == "eliza_push"):
+		playAnimation(StageScene.Hug, "hug", {pc="alexrynard", npc="eliza"})
+		saynn("Very carefully, you step behind Alex.. and 'accidentally' push him towards Eliza.")
+
+		saynn("[say=alexrynard]Eep![/say]")
+
+		saynn("He trips forward.. grabbing onto Eliza's waist to avoid collapsing. Eliza catches him and hugs him back..")
+
+		saynn("[say=alexrynard]I'm sorry, I..[/say]")
+
+		saynn("[say=eliza]All good foxy, I got you~.[/say]")
+
+		saynn("Her paws are resting on his back, preventing him from backing off.")
+
+		saynn("[say=eliza]What do you say though~?[/say]")
+
+		saynn("[say=alexrynard]Uh.. Sure. What is it about even..[/say]")
+
+		saynn("Eliza smiles, seeing Alex so unsure.")
+
+		saynn("[say=eliza]Oh, that's a secret~. Too many ears. But I will send you some info soon.[/say]")
+
+		saynn("[say=alexrynard]Right..[/say]")
+
+		saynn("Looks like you won't know about what it is until much later..")
+
+		saynn("[say=alexrynard]I guess we will go now.[/say]")
+
+		saynn("Eliza nods.. but doesn't let go yet.")
+
+		saynn("[say=eliza]If something hurts, don't be afraid to ask, foxy.[/say]")
+
+		saynn("[say=alexrynard]I will.[/say]")
+
+		saynn("[say=eliza]Promise~?[/say]")
+
+		saynn("Alex chuckles.")
+
+		saynn("[say=alexrynard]Sure. And if your coffee machine breaks..[/say]")
+
+		saynn("Eliza closes the distance even more, her lips extremely close to Alex's.. such a tease.")
+
+		saynn("[say=eliza]You will be the first one to know..[/say]")
+
+		saynn("You tug on Alex's arm, pulling him away from the hungry feline.")
+
+		saynn("Time to go.")
+
+		addButton("Continue", "See what happens next", "after_eliza_talk")
+	if(state == "eliza_sayyes"):
+		saynn("[say=pc]Yes! That would be a great opportunity for Alex.[/say]")
+
+		saynn("He gives you a stern look.")
+
+		saynn("[say=eliza]Is that so, huh~? What does Alex think?[/say]")
+
+		saynn("[say=alexrynard]Uh.. Sure. What is it about even..[/say]")
+
+		saynn("That catches him off-guard.")
+
+		saynn("[say=eliza]Oh, that's a secret~. Too many ears. But I will send you some info soon.[/say]")
+
+		saynn("[say=alexrynard]Right..[/say]")
+
+		saynn("Looks like you won't know about what it is until much later..")
+
+		saynn("[say=alexrynard]I guess we will go now.[/say]")
+
+		saynn("Eliza nods.")
+
+		saynn("[say=eliza]If something hurts, don't be afraid to ask, foxy.[/say]")
+
+		saynn("[say=alexrynard]I will.[/say]")
+
+		saynn("[say=eliza]Promise~?[/say]")
+
+		saynn("Alex chuckles.")
+
+		saynn("[say=alexrynard]Sure. And if your coffee machine breaks..[/say]")
+
+		saynn("Eliza closes the distance and slides her paw over Alex's cheek.")
+
+		saynn("[say=eliza]You will be the first one to know..[/say]")
+
+		saynn("You tug on Alex's arm, pulling him away from the hungry feline.")
+
+		saynn("Time to go.")
+
+		addButton("Continue", "See what happens next", "after_eliza_talk")
+	if(state == "enough_bus"):
+		aimCameraAndSetLocName("cellblock_nearcells")
+		GM.pc.setLocation("cellblock_nearcells")
+		if (didAny):
+			saynn("After tying up most of the loose ends, you and Alex return to the cellblock..")
+
+		else:
+			saynn("It's fine, you decide not to tie any loose ends and just return to the cellblock with Alex.")
+
+		saynn("[say=alexrynard]I guess this is it..[/say]")
+
+		saynn("[say=pc]Is it?[/say]")
+
+		saynn("[say=alexrynard]I'm not going anywhere, yeah. But this is it for now.[/say]")
+
+		saynn("You offer him a kind smile.")
+
+		saynn("[say=pc]You go and recover, foxy.[/say]")
+
+		saynn("He nods.")
+
+		saynn("[say=alexrynard]Thank you. For everything. See you around.[/say]")
+
+		saynn("He pats you on the head.. and then turns around and starts walking away.")
+
+		saynn("Feels.. nice.. like you no longer want to sigh.")
+
+		addButton("Continue", "See what happens next", "endthescene")
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
@@ -508,8 +861,49 @@ func _react(_action: String, _args):
 		didHugEliza = true
 		didAny = true
 
+	if(_action == "enough_bus"):
+		addMessage("Task completed!")
+		addExperienceToPlayer(500)
+
 	if(_action == "avy_find"):
 		processTime(10*60)
+
+	if(_action == "avy_woodenhorse"):
+		getCharacter("avy").getInventory().forceEquipStoreOtherUnlessRestraint(GlobalRegistry.createItem("inmatewristcuffs"))
+		getCharacter("avy").getInventory().forceEquipStoreOtherUnlessRestraint(GlobalRegistry.createItem("inmateanklecuffs"))
+
+	if(_action == "bring_avy_medical"):
+		processTime(5*60)
+
+	if(_action == "avy_milk_secure"):
+		getCharacter("avy").removeAllRestraints()
+		getCharacter("avy").getInventory().forceEquipStoreOtherUnlessRestraint(GlobalRegistry.createItem("BreastPump"))
+		getCharacter("avy").getInventory().forceEquipStoreOtherUnlessRestraint(GlobalRegistry.createItem("PenisPump"))
+
+	if(_action == "avy_receives_hypno"):
+		getCharacter("avy").getInventory().forceEquipStoreOtherUnlessRestraint(GlobalRegistry.createItem("HypnovisorMk1"))
+
+	if(_action == "after_avy_abuse"):
+		getCharacter("avy").resetEquipment()
+		setState("pickWhatDo")
+		removeCharacter("avy")
+		return
+
+	if(_action == "cap_gets_punched"):
+		processTime(10*60)
+
+	if(_action == "after_cap_punch"):
+		removeCharacter("captain")
+		setState("pickWhatDo")
+		return
+
+	if(_action == "hug_eliza_meet"):
+		processTime(10*60)
+
+	if(_action == "after_eliza_talk"):
+		removeCharacter("eliza")
+		setState("pickWhatDo")
+		return
 
 	setState(_action)
 
