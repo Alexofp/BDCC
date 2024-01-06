@@ -17,4 +17,4 @@ func getSubGoals(_sexEngine, _domInfo, _subInfo, _data):
 	}
 
 func getGoalDefaultWeight():
-	return 10.1
+	return 0.1

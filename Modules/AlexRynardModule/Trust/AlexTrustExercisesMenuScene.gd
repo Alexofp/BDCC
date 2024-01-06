@@ -15,6 +15,8 @@ func _run():
 			addButton("Trust exercise 2", "Do the second one", "do_second")
 		if (howManyCh2 >= 7):
 			addButton("Trust exercise 3", "Do the third one", "do_third")
+		if (getFlag("AlexRynardModule.ch2FinalSceneHappened")):
+			addButton("Trust exercise 4", "Do the last one", "do_fourth")
 		addButton("Never mind", "You changed your mind", "endthescene")
 
 func _react(_action: String, _args):
@@ -35,6 +37,11 @@ func _react(_action: String, _args):
 	if(_action == "do_third"):
 		endScene()
 		runScene("AlexTrustExercise3Scene")
+		return
+
+	if(_action == "do_fourth"):
+		endScene()
+		runScene("AlexTrustExercise4Scene")
 		return
 
 	setState(_action)

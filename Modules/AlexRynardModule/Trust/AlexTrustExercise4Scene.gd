@@ -1,6 +1,7 @@
 extends SceneBase
 
 var bratCounter = 0
+var usedCondom = true
 
 func _init():
 	sceneID = "AlexTrustExercise4Scene"
@@ -244,7 +245,7 @@ func _run():
 
 		saynn("Alex presses some button on the hypnovisor.. causing words to start appearing on the screen..")
 
-		saynn("[rainbow freq=0.05 sat=0.2 val=1.0]Sex.. Toy.. Sextoy.. Toy.. for sex..[/rainbow]")
+		saynn("[rainbow freq=0.05 sat=0.2 val=1.0]Sex.. Toy.. Pleasure.. Sextoy.. Serve..[/rainbow]")
 
 		if (GM.pc.isWearingChastityCage()):
 			saynn("Instantly, your caged up cock began twitching in its little cage, pressure building up inside of it.")
@@ -252,6 +253,176 @@ func _run():
 		elif (GM.pc.hasReachablePenis()):
 			saynn("Instantly, your cock has begun twitching and leaking drops of pre onto the floor, pressuring building up inside of it.")
 
+		saynn("All your thoughts become corrupted by those words.. Sex.. Toy.. Serve..")
+
+		if (GM.pc.hasReachableVagina()):
+			saynn("Your breathing becomes deeper, waves of warmth spread through your whole body, hitting all your sensitive zones. Heat.. start to irradiate from your pussy.. your wet juices dripping onto the floor.")
+
+		else:
+			saynn("Your breathing becomes deeper, waves of warmth spread through your whole body, hitting all your sensitive zones. Heat.. start to irradiate from your tailhole.. your star clenching around an imaginary cock.")
+
+		saynn("[say=pc]Sir.. You may fuck me if you want..[/say]")
+
+		saynn("Words escape from your mouth on their own. Your own voice sounds so unfamiliar to you all of the sudden.. You're lacking any kind of control of your body and mind.. and it feels great..")
+
+		saynn("[say=alexrynard]Can I really?[/say]")
+
+		saynn("[say=pc]Yes.. please..[/say]")
+
+		saynn("Two of his digits land on your tongue.. digits that you are quick to start sucking on.")
+
+		saynn("[rainbow freq=0.05 sat=0.2 val=1.0]Sex.. Sex.. Sex..[/rainbow]")
+
+		saynn("He leans in closer to your ear.")
+
+		saynn("[say=alexrynard]I'm fucking you because I want to. Turn. Around. Slave.[/say]")
+
+		saynn("Yes.. Yes! Anything for him.")
+
+		if (GM.pc.hasReachableVagina()):
+			addButton("Turn around", "Present Alex your pussy", "4_pussyfuck")
+		else:
+			addButton("Turn around", "Present Alex your butt", "4_analfuck")
+	if(state == "4_pussyfuck"):
+		playAnimation(StageScene.SexFreeStanding, "tease", {pc="alexrynard", npc="pc", bodyState={naked=true,hard=true,condom=usedCondom}, npcBodyState={naked=true,hard=true,leashedBy="alexrynard"}})
+		saynn("After thoroughly covering Alex's digits with your saliva, you turn around and stick your butt out, your hands land on your butt and spread it wide. You proudly show both your needy holes to the foxy.")
+
+		saynn("[rainbow freq=0.05 sat=0.2 val=1.0]Sex slave.. Fucktoy.. Breed.. Fuck.. Cum..[/rainbow]")
+
+		saynn("[say=pc]Use your slave for your pleasure.. That is what I am for..[/say]")
+
+		saynn("[say=alexrynard]Very.. enticing. It's good that you learned your place so quickly.[/say]")
+
+		saynn("You can't tell if he is being serious or if this is just a scene.. but deep inside you know that it's safe to put your trust in him.")
+
+		saynn("Alex exposes his juicy canine cock.. and starts to apply a nice-looking condom over its length. One that looks like it won't break no matter what.")
+
+		saynn("After that, he takes his spot behind you, already aligning himself with your wet love tunnel.. your pussy..")
+
+		addButton("Continue", "See what happens next", "4_pussyfuck_fuck")
+		if (!getFlag("AlexRynardModule.4TrustCompleted")):
+			addButton("Pull condom off", "You'd rather have him not use it", "4_pussyfuck_fail_pull_condom")
+		else:
+			addButton("Pull condom off", "You'd rather have him not use it", "4_pussyfuck_pull_condom_off")
+	if(state == "4_pussyfuck_fail_pull_condom"):
+		saynn("What little control you still have.. you spend wisely. Just before Alex aligns himself with your pussy slit, you reach your hand out and try to pull his condom off.")
+
+		saynn("[say=pc]Breed.. Please..[/say]")
+
+		saynn("But Alex just catches both of your wrists and moves them back.")
+
+		saynn("[say=alexrynard]No, little eager slave.[/say]")
+
+		saynn("[say=pc]Why not, Sir..[/say]")
+
+		saynn("Is he really that afraid of knocking you up.."+str(" You're obviously pregnant already anyway.." if GM.pc.isVisiblyPregnant() else "")+"")
+
+		saynn("[say=alexrynard]Not while you're in this state.[/say]")
+
+		saynn("So he does still care.. Maybe you can try this again some other time..")
+
+		saynn("But for now.. the condom stays.")
+
+		addButton("Continue", "See what happens next", "4_pussyfuck_fuck")
+	if(state == "4_pussyfuck_fuck"):
+		playAnimation(StageScene.SexFreeStanding, "fast", {pc="alexrynard", npc="pc", bodyState={naked=true,hard=true,condom=usedCondom}, npcBodyState={naked=true,hard=true,leashedBy="alexrynard"}})
+		if (!usedCondom):
+			saynn("What little control you still have.. you spend wisely. Just before Alex aligns himself with your pussy slit, you reach your hand out and try to pull his condom off.")
+
+			saynn("[say=pc]I want this.. Trust me..[/say]")
+
+			saynn("Alex looked skeptical at first.. but in the end he allows you to pull the rubber off of his dick. Going in raw is so much more fun..")
+
+		saynn("Seconds later.. you feel him grabbing your wrists and bringing them behind you.. while thrusting his hips forward, his member finding your needy hole and spreading the petals wide.")
+
+		saynn("[say=pc]Ah![/say]")
+
+		saynn("In one swift motion, his cock is sliding between your inner walls and smashes into your cervix, pushing you forward.. just for his arms to pull you back moments later.")
+
+		saynn("[say=pc]Yes![/say]")
+
+		saynn("His thighs are slapping against your butt with each rough motion. Alex is fast and deliberate, fucking you like you are his sextoy.. his property..")
+
+		saynn("[rainbow freq=0.05 sat=0.2 val=1.0]Fucktoy.. Cocksleeve.. Sex slave..[/rainbow]")
+
+		if (GM.pc.isWearingChastityCage()):
+			saynn("Your own locked away cock is dripping through the little hole in its cage, the way his dick is pushing on your buttons, coupled with the dirty thoughts flashing through your mind.. pure ecstasy..")
+
+		elif (GM.pc.hasReachablePenis()):
+			saynn("Your own {pc.penis} is dripping pre at a steady rate, the way his dick is pushing on your buttons, coupled with the dirty thoughts flashing through your mind.. pure ecstasy..")
+
+		saynn("[say=alexrynard]Moan like you mean it, toy.[/say]")
+
+		saynn("Loud noises of passion instantly burst out of your mouth.. combined with the heavy panting. The way he is fucking you.. sends shivers through your body. Your pussy walls are gripping his cock tightly.")
+
+		saynn("[say=alexrynard]Cum, now.[/say]")
+
+		saynn("His order.. your mind can't say no..")
+
+		addButton("Continue", "See what happens next", "4_pussyfuck_fuck_cum")
+	if(state == "4_pussyfuck_fuck_cum"):
+		playAnimation(StageScene.SexFreeStanding, "inside", {pc="alexrynard", npc="pc", bodyState={naked=true,hard=true,condom=usedCondom}, npcBodyState={naked=true,hard=true,leashedBy="alexrynard"}})
+		saynn("Your own mind is forcing your body to cum.. Waves of sudden extra pleasure rocking through you, causing you to throw your head back and moan like a slut while your pussy is sucking that cock deeper and kneading it with every muscle..")
+
+		saynn("[say=pc]NHHh-hH!.. AH!..[/say]")
+
+		saynn("[say=alexrynard]Hah.. Take it all.[/say]")
+
+		if (usedCondom):
+			saynn("Alex welcomes your orgasm with his own, thrusting as deep as your pussy allows, his cock breaking into your womb.. and stuffing the condom full of his thick cum inside it.. so much that your belly starts looking a little rounder..")
+
+		else:
+			saynn("Alex welcomes your orgasm with his own, thrusting as deep as your pussy allows, his cock breaking into your womb.. and stuffing it full of his virile seed.. so much that your belly starts looking a little rounder..")
+
+		if (GM.pc.isWearingChastityCage()):
+			saynn("During the orgasm, your locked away cock is throbbing at the same rate as Alex's.. releasing little spurts of spunk through the cage.")
+
+		elif (GM.pc.hasReachablePenis()):
+			saynn("During the orgasm, your own cock is throbbing at the same rate as Alex's.. releasing long spurts of spunk, creating a mess underneath.")
+
+		saynn("Yes-s! Your whole body is shaking, your legs want to give but Alex helps you not to collapse, your pussy releasing a fountain of juices onto the floor, the hypnovisor rewarding you with warm glowing colors.")
+
+		if (usedCondom):
+			saynn("Alex keeps you as his cockwarmer for some time.. before finally pulling out. The condom seems to be completely fine so Alex carefully ties it up and disposes of it, avoiding most of the mess.")
+
+		else:
+			saynn("Alex keeps you as his cockwarmer for some time.. before finally pulling out. Your twitching used pussy instantly spawns a flow of his cum, creating a lewd view.. and also some extra mess.")
+
+		saynn("[say=alexrynard]And now we rest.[/say]")
+
+		addButton("Continue", "See what happens next", "after_cuddle")
+	if(state == "after_cuddle"):
+		playAnimation(StageScene.Cuddling, "squirm", {pc="alexrynard", npc="pc", bodyState={naked=true}, npcBodyState={naked=true, hard=true}})
+		saynn("Alex pulls you onto the sofa for some cuddles.. while the visor is still messing with your mind.")
+
+		saynn("[say=alexrynard]Still horny, huh.[/say]")
+
+		saynn("[rainbow freq=0.05 sat=0.2 val=1.0]Sex.. Toy..[/rainbow]")
+
+		saynn("[say=pc]Yes-s-s..[/say]")
+
+		saynn("[say=alexrynard]Let's get that visor off.[/say]")
+
+		addButton("Continue", "See what happens next", "novisor")
+	if(state == "novisor"):
+		playAnimation(StageScene.Cuddling, "idle", {pc="alexrynard", npc="pc", bodyState={naked=true}, npcBodyState={naked=true}})
+		saynn("The pleasant glow disappears.. and all the negative feelings begin to return to you.. making you cry a bit even.")
+
+		saynn("[say=alexrynard]It's probably addictive, shouldn't use it for so long.[/say]")
+
+		saynn("He carefully wipes your tears off.")
+
+		saynn("[say=alexrynard]Hope it was fun.[/say]")
+
+		saynn("[say=pc]Yeah.. and for you?[/say]")
+
+		saynn("He nods and kisses your shoulder.")
+
+		saynn("[say=alexrynard]Too fun.[/say]")
+
+		saynn("And so you spend some time together like that, enjoying each other's company.. until it's time to go.")
+
+		addButton("Leave", "Time to go", "endthescene")
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
@@ -277,12 +448,38 @@ func _react(_action: String, _args):
 	if(_action == "3"):
 		processTime(5*60)
 
+	if(_action == "4_pussyfuck_fuck"):
+		processTime(10*60)
+
+	if(_action == "4_pussyfuck_pull_condom_off"):
+		usedCondom = false
+		setState("4_pussyfuck_fuck")
+		return
+
+	if(_action == "4_pussyfuck_fuck_cum"):
+		processTime(10*60)
+		GM.pc.orgasmFrom("alexrynard")
+		GM.pc.gotVaginaFuckedBy("alexrynard")
+		if(usedCondom):
+			addFilledCondomToLootIfPerk(getCharacter("alexrynard").createFilledCondom())
+		else:
+			GM.pc.cummedInVaginaBy("alexrynard")
+
+	if(_action == "after_cuddle"):
+		processTime(10*60)
+		setFlag("AlexRynardModule.4TrustCompleted", true)
+
+	if(_action == "novisor"):
+		GM.pc.getInventory().clearSlot(InventorySlot.Eyes)
+		processTime(20*60)
+
 	setState(_action)
 
 func saveData():
 	var data = .saveData()
 
 	data["bratCounter"] = bratCounter
+	data["usedCondom"] = usedCondom
 
 	return data
 
@@ -290,3 +487,4 @@ func loadData(data):
 	.loadData(data)
 
 	bratCounter = SAVE.loadVar(data, "bratCounter", 0)
+	usedCondom = SAVE.loadVar(data, "usedCondom", true)
