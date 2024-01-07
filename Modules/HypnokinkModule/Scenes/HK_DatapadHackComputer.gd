@@ -149,7 +149,8 @@ func reactToCommandCage(_command: String, _args:Array, _commandStringRaw:String)
 			learnCommand("monitor")
 			learnCommand("unlock")
 			learnCommand("disconnect")
-			return "Available commands are: \ndisconnect\nmonitor\nunlock\nhelp\nTo learn more about a command type 'help <COMMAND>'"
+			return "Available commands are: \ndisconnect\nmonitor\nunlock\nhelp\nTo learn more about a command type 'help <COMMAND>'\n\n"+\
+				"[Amateur firmware. The password's stored in plaintext, directly in memory. Dont waste time trying every option, remember that the unlock function has to access the password to check if it's been given a valid one. - Alex]"
 		else:
 			learnCommand("help")
 			return "'help' expects 0 or 1 arguments"
