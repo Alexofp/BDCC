@@ -29,6 +29,7 @@ func getFlags():
 		"ch2StolePartsStorageDay": flag(FlagType.Number),
 		"ch2LastCheckedNPC": flag(FlagType.Text),
 		"ch2FinalSceneHappened": flag(FlagType.Bool),
+		"ch2DidChastityWith": flag(FlagType.Bool),
 		
 		"1TrustCompleted": flag(FlagType.Bool),
 		"2TrustCompleted": flag(FlagType.Bool),

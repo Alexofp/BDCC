@@ -149,10 +149,7 @@ func _run():
 
 		addButton("Yes Sir", "Agree to it", "1")
 		addButton("Red", "Safeword out of it", "red")
-		if (getFlag("AlexRynardModule.4TrustCompleted")):
-			addButton("Turn tables", "Offer him to put the visor on and surrender full control to you", "1_turntables")
-		else:
-			addDisabledButton("Turn tables", "A bit too early for that")
+		addButton("Turn tables", "Offer him to put the visor on and surrender full control to you", "1_turntables")
 	if(state == "red"):
 		saynn("[say=pc]Red..[/say]")
 
@@ -883,6 +880,178 @@ func _run():
 		saynn("But after that, it's back to normal. You hand him his prototype and let him guide you back to the workshop.")
 
 		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "hyp_mindgasm"):
+		playAnimation(StageScene.BreastGroping, "tease", {pc="pc", npc="alexrynard", npcBodyState={naked=true, hard=true}})
+		saynn("You notice the bulge growing in his shorts. Makes you wonder how horny you can make him.. how far can you push him.")
+
+		saynn("[say=pc]Your name is Alex, sure. But at this very time you are my toy to play with. I wanna see my toy fully.[/say]")
+
+		saynn("Your hands reach out to unbutton his shirt.. but he is doing it already himself, one button at a time. What a good foxy. You breathe warmly into his ear as he takes off his shirt, exposing his manly chest.")
+
+		saynn("[say=pc]Fully~.[/say]")
+
+		saynn("[say=alexrynard]Of course..[/say]")
+
+		saynn("Alex nods and starts pulling his shorts down, the cloth catching on the tip of his cock and becoming wet from all the precum that already accumulated there. Seems like just the fact of obeying.. makes him feel good.")
+
+		saynn("Eventually the shorts get taken off too, leaving the foxy naked and ready for you.")
+
+		saynn("[say=pc]We're gonna do a little experiment. Don't worry. All you have to do is obey. But I'm gonna put this on you~.[/say]")
+
+		saynn("Your hands pull out a metal chastity cage and show it to Alex. His mesmerized gaze is full of.. curiosity.")
+
+		saynn("[say=alexrynard]As you wish, {pc.name}.. My body is for you to play with..[/say]")
+
+		saynn("Submission is irritating from him, such a good foxy.")
+
+		addButton("Lock him up", "Put a chastity cage on Alex", "hyp_put_on_chastity")
+	if(state == "hyp_put_on_chastity"):
+		playAnimation(StageScene.BreastGroping, "tease", {pc="pc", npc="alexrynard", npcBodyState={naked=true, caged=true}})
+		saynn("The cage consists of the two parts, the cock ring and the piece that blocks the erection. The ring is easy enough to put on and push Alex's balls through.. the other one will require some effort.")
+
+		saynn("[say=pc]Don't you dare to cum now, foxy.[/say]")
+
+		saynn("You press the second piece against the tip of his cock.. and begin trying to bring it to the other one, putting more and more pressure, fighting his hard shaft.")
+
+		saynn("[say=alexrynard]Nh-h..[/say]")
+
+		saynn("Alex is squirming and throbbing in your hands, his cock leaking precum profusely.. Could have you just ordered him to become soft? Probably.. But this is way more fun.")
+
+		saynn("His member keeps pulsing.. but you push through its resistance, slowly winning inch by inch.. until the two parts collide. You lock them together with a key.. and that's it.. Foxy's cock is now trapped in a tight cage.")
+
+		saynn("[say=pc]There we go. Do you like it, foxy?[/say]")
+
+		saynn("[say=alexrynard]Hh-h.. so much pressure.[/say]")
+
+		saynn("[say=pc]Good. I want you to focus on it and my voice.[/say]")
+
+		saynn("The hypnovisor is still creating a nice warm glow in front of his eyes.. taking away any negative thoughts.")
+
+		saynn("[say=pc]Feel the warmth building within you, a gentle fire.. Fire that's growing with every word that I say.[/say]")
+
+		saynn("Alex parts his lips and exhales audibly. All the while you're just sitting behind him, breathing warmly into his ear, whispering.")
+
+		saynn("[say=alexrynard]I feel it.. inside..[/say]")
+
+		saynn("[say=pc]Imagine each word as a caress, a touch that intensifies the sensations.. Can you feel it, foxy?[/say]")
+
+		saynn("Alex's breath quickens, his body shivering, his locked away member is twitching behind the metal cage, more precum dripping onto the floor.")
+
+		saynn("[say=alexrynard]Yes, I.. It's like.. like you're touching me..[/say]")
+
+		saynn("[say=pc]That's right~. Your mind is a canvas and I'm painting with various feelings on it. I want you to imagine please, foxy. I want you to imagine it growing..[/say]")
+
+		saynn("The shiver in him becomes stronger, his back keeps brushing against your chest.")
+
+		saynn("[say=alexrynard]Pleasure.. growing..[/say]")
+
+		saynn("Little moans start escaping from him, sounds of passion. His poor caged up cock is clearly desperate for release, his balls tensing up slightly.")
+
+		saynn("[say=alexrynard]Ah-h.. h-hh..[/say]")
+
+		saynn("The foxy is on edge already, the only thing that's keeping him from crossing it.. your word.")
+
+		saynn("[say=pc]Such a good boy, obeying me so well, making such nice noises. What would you want more, to cum or to obey me forever?[/say]")
+
+		saynn("Such a tricky question.")
+
+		saynn("[say=alexrynard]Nh.. ah.. there is nothing more I would love.. ngh-h.. than to serve you forever.. ah..[/say]")
+
+		saynn("Wow, impressive words for someone who is a dominant. It's true, most of it could be explained by the hypnovisor.. which makes this tool pretty dangerous.. but dangerous things are fun to play with sometimes.")
+
+		saynn("[say=pc]Okay, foxy.. When you hear me say 'Mindgasm' the next time, I want you to let the waves of ecstasy crash over you. I want you to let it become reality in your mind.[/say]")
+
+		saynn("[say=alexrynard]Mindgasm.. Ecstasy.. yes..[/say]")
+
+		saynn("He is panting so heavily, his chest raising high, his perky nips looking quite hard.. makes you want to tease at least them..")
+
+		saynn("It's time.")
+
+		addButton("Mindgasm", "Say it", "hyp_say_mindgasm")
+	if(state == "hyp_say_mindgasm"):
+		playAnimation(StageScene.BreastGroping, "grope", {pc="pc", npc="alexrynard", npcBodyState={naked=true, caged=true}})
+		saynn("[say=pc]Feel the climax, foxy. Let the mindgasm consume you. Embrace it.[/say]")
+
+		saynn("Alex throws his head back and lets out a loud long moan, his body arching his back, his locked cock throbbing hard.. before shooting a strong rope of thick cum through the little hole in the chastity cage.. and then again.. and again.. Alex is cumming just from your word alone..")
+
+		saynn("[say=alexrynard]Oh.. Ah!.. F-f.. ah.. F-fa..[/say]")
+
+		saynn("The poor foxy can barely contain himself so you wrap your arms around him, your hands land on his chest and tease his nips while he just.. keeps cumming and cumming, his balls tensing up hard.")
+
+		saynn("[say=pc]Good foxy.. Such a good foxy..[/say]")
+
+		saynn("The room is filled with his moans, his body shaking even while you're holding him. His orgasm starts to fade but his chastity cage keeps dripping seed onto the floor.")
+
+		saynn("[say=alexrynard]That feels good.. It feels too good.. ah..[/say]")
+
+		saynn("[say=pc]I'm glad it does~. You can start calming down.[/say]")
+
+		saynn("Alex nods.. and leans into you more, his head swaying lazily.")
+
+		saynn("[say=pc]Let's cuddle.[/say]")
+
+		saynn("Probably best to take off the visor and let him see the mess that he made.")
+
+		addButton("Cuddle", "Provide some aftercare", "hyp_chastity_after")
+	if(state == "hyp_chastity_after"):
+		playAnimation(StageScene.BreastGroping, "tease", {pc="pc", npc="alexrynard", npcBodyState={naked=true, caged=true}})
+		saynn("You turn off the visor, making the glow before his eyes go away. Alex starts to blink a lot while still panting heavily.")
+
+		saynn("[say=alexrynard]Wha.. h-ha..[/say]")
+
+		saynn("[say=pc]Welcome back.[/say]")
+
+		saynn("He looks down at his caged up cock.. at the long strings of seed that are covering the floor before him.")
+
+		saynn("[say=alexrynard]Fuck.. ah..[/say]")
+
+		saynn("[say=pc]Felt good, huh?[/say]")
+
+		saynn("[say=alexrynard]I.. I don't know.. how it happened..[/say]")
+
+		saynn("[say=pc]It's okay, foxy. Relax. You don't have to explain anything, your mind did exactly what I asked it to do.[/say]")
+
+		saynn("Alex nods softly.. and nuzzles you.")
+
+		saynn("[say=alexrynard]The cage hurts..[/say]")
+
+		saynn("[say=pc]Aw, you don't want it to stay? You'd make such a good boy.. or girl.[/say]")
+
+		saynn("Alex squints at you. His stare alone is enough for you to reconsider.")
+
+		addButton("Take cage off", "It's better that way anyway", "hyp_take_off_cage")
+	if(state == "hyp_take_off_cage"):
+		playAnimation(StageScene.BreastGroping, "tease", {pc="pc", npc="alexrynard", npcBodyState={naked=true}})
+		setFlag("AlexRynardModule.ch2DidChastityWith", true)
+		saynn("You use the key to unlock the chastity cage.. and carefully take it off. Wow, his cock has some marks on it that the metal left. Hopefully, they will go away soon.")
+
+		saynn("[say=pc]It was an interesting experience though, wasn't it?[/say]")
+
+		saynn("[say=alexrynard]It was.. Thank you.[/say]")
+
+		saynn("He yoinks the cage from your hands for a second.")
+
+		saynn("[say=alexrynard]That.. can be picked even with a condom wrapper I'm pretty sure.[/say]")
+
+		saynn("[say=pc]It held you locked pretty well.[/say]")
+
+		saynn("[say=alexrynard]Uh huh. Don't forget that I have access to metal saws too.[/say]")
+
+		saynn("[say=pc]Yeah, just don't cut through the wrong thing. You think you could make a better one?[/say]")
+
+		saynn("Alex looks at the thing from every angle.")
+
+		saynn("[say=alexrynard]I might. It would be somewhat easy to add extra protection against vandalism.[/say]")
+
+		saynn("You chuckle.")
+
+		saynn("[say=pc]You'd be the one testing it then.[/say]")
+
+		saynn("Alex smiles and hands you the cage back.")
+
+		saynn("You spend the rest of the time cuddling together. After that Alex brings you back to the workshop.")
+
+		addButton("Continue", "See what happens next", "endthescene")
 func addPumpButtons():
 	var pumps = GM.pc.getInventory().getItemsWithTag(ItemTag.PenisPump)
 	for pump in pumps:
@@ -987,6 +1156,20 @@ func _react(_action: String, _args):
 			getCharacter("alexrynard").getInventory().removeEquippedItem(pump)
 			GM.pc.getInventory().addItem(pump)
 		getCharacter("alexrynard").resetEquipment()
+
+	if(_action == "hyp_put_on_chastity"):
+		processTime(5*60)
+
+	if(_action == "hyp_say_mindgasm"):
+		processTime(6*60)
+
+	if(_action == "hyp_chastity_after"):
+		getCharacter("alexrynard").resetEquipment()
+		processTime(10*60)
+
+	if(_action == "hyp_take_off_cage"):
+		processTime(5*60)
+		addMessage("You can now buy an advanced chastity cage.")
 
 	setState(_action)
 

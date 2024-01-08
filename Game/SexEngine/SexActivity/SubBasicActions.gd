@@ -148,6 +148,7 @@ func startActivity(_args):
 			subInfo.addLust(struggleData["lust"])
 		if(struggleData.has("pain") && struggleData["pain"] > 0):
 			subInfo.addPain(struggleData["pain"])
+			subInfo.addFear(struggleData["pain"]/100.0)
 		if(struggleData.has("stamina") && struggleData["stamina"] != 0):
 			sub.addStamina(-struggleData["stamina"])
 		
