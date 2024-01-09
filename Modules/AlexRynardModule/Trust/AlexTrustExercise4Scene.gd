@@ -1052,10 +1052,440 @@ func _run():
 		saynn("You spend the rest of the time cuddling together. After that Alex brings you back to the workshop.")
 
 		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "hyp_fuck"):
+		playAnimation(StageScene.BreastGroping, "tease", {pc="pc", npc="alexrynard"})
+		saynn("The guy is still so cheeky.. makes you want to see how well he can handle getting fucked.")
+
+		saynn("You lean closer to his ear to whisper some words while your hand lands on his neck to make him feel even more powerless.")
+
+		saynn("[say=pc]Tell me, foxy, do you experience anal often?[/say]")
+
+		saynn("Alex raises his chin slightly.")
+
+		saynn("[say=alexrynard]No..[/say]")
+
+		saynn("[say=pc]Do you wish to do it more?[/say]")
+
+		saynn("He stays quiet for some time, his parted lips trembling.")
+
+		saynn("[say=alexrynard]Of course.. Anything for you.[/say]")
+
+		saynn("So sweet. You notice some movement in his shorts already.")
+
+		saynn("[say=pc]Why don't you undress then.[/say]")
+
+		addButton("Continue", "See what happens next", "hyp_fuck_undress")
+	if(state == "hyp_fuck_undress"):
+		playAnimation(StageScene.BreastGroping, "tease", {pc="pc", npc="alexrynard", npcBodyState={naked=true, hard=true}})
+		addCharacter("alexrynard", ["naked"])
+		saynn("Alex nods and proceeds to slowly unbutton his shirt and take it off. Your hand stops gripping his throat and instead slides down over his chest, brushing over his pecs. So much tension..")
+
+		saynn("[say=pc]Fully.[/say]")
+
+		saynn("He puts his digits under the ribbon of his shorts and pulls him down, revealing his red cock that is already twitching from excitement, a lonely drop of pre sliding down from its pointy tip.")
+
+		saynn("[say=pc]Good boy.[/say]")
+
+		saynn("A packaged condom falls out of his pocket as his shorts hit the floor. Hmm.. You could use that for something.")
+
+		addButton("Continue", "See what happens next", "hyp_fuck_cowgirl")
+	if(state == "hyp_fuck_cowgirl"):
+		playAnimation(StageScene.SexCowgirl, "tease", {pc="pc", npc="alexrynard", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true, condom=true}})
+		saynn("You quickly undress as well and then lie down on the floor. Your hands tap on your lap as you smile.")
+
+		saynn("[say=pc]Come here.[/say]")
+
+		saynn("Alex nods and crawls up to you.. before stradling your hips, your cocks brushing against each other's.")
+
+		saynn("[say=alexrynard]Yes..[/say]")
+
+		saynn("You catch some of his precum onto your digits.. and then spread it along your length.. not the best lube, but it will do.")
+
+		saynn("Foxy watches you with his hazy lusty eyes as you grab the packaged condom, quickly rip it open.. and begin applying it.. no, not to your cock.. but his.")
+
+		saynn("[say=alexrynard]Huh?..[/say]")
+
+		saynn("[say=pc]So you don't make a mess on me, foxy.[/say]")
+
+		saynn("[say=alexrynard]Of course..[/say]")
+
+		saynn("After all that.. It's time.")
+
+		saynn("[say=pc]I want you to ride me.[/say]")
+
+		saynn("Alex lowers his gaze to your {pc.penis}.. and nods.")
+
+		saynn("[say=alexrynard]With pleasure..[/say]")
+
+		saynn("He raises himself a bit.. and uses his hand to guide your member towards his tailhole as he starts lowering himself onto you..")
+
+		saynn("So tight.. you can feel his star resisting as your shaft is prodding it.. and yet, Alex keeps trying, little quiet noises begin escaping him.")
+
+		saynn("[say=pc]Don't hold back.[/say]")
+
+		addButton("Continue", "See what happens next", "hyp_fuck_ride")
+	if(state == "hyp_fuck_ride"):
+		playAnimation(StageScene.SexCowgirl, "sex", {pc="pc", npc="alexrynard", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true, condom=true}})
+		saynn("The quiet noises quickly grow until they become small moans, Alex focuses on the hypnovisor glow.. allowing him to relax enough to take some of your cock inside.")
+
+		saynn("[say=alexrynard]Ah..[/say]")
+
+		saynn("It's great, all you have to do is watch how Alex starts grinding himself against your crotch, his tight anal slowly stretching to accommodate your size.")
+
+		saynn("[say=pc]Such a good boy..[/say]")
+
+		saynn("Saying that only made him clench more.. making your breathing deeper as well.")
+
+		saynn("Eventually, the foxy is able to comfortably take most of you, his thighs slapping against yours with a soft thump.")
+
+		saynn("[say=alexrynard]Nh-h.. ah..[/say]")
+
+		saynn("It seems, your cock is pushing on all the right buttons, the tip of the condom becomes a little heavy from some transparent fluids in it.")
+
+		saynn("Alex is doing exactly as told, riding you, rising himself before bringing his body down onto your length.")
+
+		saynn("[say=pc]Do you like it?[/say]")
+
+		saynn("[say=alexrynard]Yes.. ah..[/say]")
+
+		saynn("His eyes don't lie.")
+
+		addButton("Continue", "See what happens next", "hyp_fuck_ride_faster")
+	if(state == "hyp_fuck_ride_faster"):
+		playAnimation(StageScene.SexCowgirl, "fast", {pc="pc", npc="alexrynard", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true, condom=true}})
+		saynn("Alex is picking up the pace himself, riding you faster and harder, his own cock bobbing up and down, the condom collecting more pre.")
+
+		saynn("[say=pc]Such an eager foxy. Think you can cum like this?[/say]")
+
+		saynn("All you get back is more moans, Alex's mouth is opened, tongue out and drooling, his eyes keep rolling up.")
+
+		saynn("[say=alexrynard]Nh-h.. ye-.. -ah.. h-h..[/say]")
+
+		saynn("His slick inner walls gripping your dick so well.. while yours is smashing into his little pleasure button each time he brings himself down on you.")
+
+		saynn("[say=pc]Well show me then~.[/say]")
+
+		saynn("He is so adorable, making cute lusty noises.. riding your cock like it's the most fun attraction in the park. The way he clenches each time you tell him something.. brings you to your peak quite fast..")
+
+		saynn("The knot at the base of Alex's cock inflates with blood, signaling that he is about to cum. There is no way you're pulling out..")
+
+		addButton("Cum", "Breed that foxy raw", "hyp_ride_fuck_cum")
+	if(state == "hyp_ride_fuck_cum"):
+		playAnimation(StageScene.SexCowgirl, "inside", {pc="pc", npc="alexrynard", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true, condom=true}})
+		saynn("Alex brings himself down onto your cock with one last big motion.. before arching his back and letting out a passionate moan, his cock starts throbbing and filling the condom with its load, making the tip sag lower and lower.. but luckily the condom seems to hold.")
+
+		saynn("[say=alexrynard]Ah-h-h!.. ah.. h-hh..[/say]")
+
+		saynn("His ass is just sucking you in, his inner walls kneading your {pc.penis} so much that you can't hold any longer. You grunt as your cock starts stuffing his tailhole full of your {pc.cum}, wave after wave of it.")
+
+		saynn("He throws his head back and just keeps moaning and grinding you, trying to drain your balls.")
+
+		saynn("[say=pc]Ah.. wow, you're one hungry fox.[/say]")
+
+		saynn("[say=alexrynard]Yes.. yes-s.. hah..[/say]")
+
+		addButton("Enough", "Just pull him in for cuddles", "hyp_ride_fuck_enough")
+		addButton("Pin him down", "Give him what he wants", "hyp_ride_fuck_pin")
+	if(state == "hyp_ride_fuck_pin"):
+		playAnimation(StageScene.SexMissionary, "fast", {pc="pc", npc="alexrynard", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true, condom=true}})
+		saynn("He clearly wants more.. so why not give him more.")
+
+		saynn("Since you have been saving all your strength up to this point, you easily push yourself off the floor and pin foxy to the floor, your cock is still inside him.")
+
+		saynn("[say=alexrynard]Ah??..[/say]")
+
+		saynn("Without even explaining anything, you start hammering away at his asshole, fucking it fast and rough.")
+
+		saynn("Alex is still not fully recovered from the last orgasm.. but now his hard prostate is being put under a lot of pressure again, his cock is twitching and dripping into the condom.")
+
+		saynn("[say=alexrynard]Oh.. Ah.. fuck..[/say]")
+
+		saynn("Passionate moans begin to escape from him again, his body shivering under you.. so cute.")
+
+		saynn("[say=pc]Such a slutty boy. Are you sure you're not a cocksleeve?[/say]")
+
+		saynn("[say=alexrynard]I am.. a fucktoy.. a dirty cocksleeve.. a slave.[/say]")
+
+		saynn("You thrust into the mouthy foxy with great power, pounding his stretchy fuckhole with full force. At some point the knot on his cock starts inflating again..")
+
+		addButton("Cum inside", "Breed the foxy again", "hyp_ride_fuck_pin_cum")
+	if(state == "hyp_ride_fuck_pin_cum"):
+		playAnimation(StageScene.SexMissionary, "inside", {pc="pc", npc="alexrynard", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true, condom=true}})
+		saynn("His used clenching tailhole feels so great that you can only endure this pleasure for so long.")
+
+		saynn("You pull back a little.. just to shove your {pc.penis} as deep as that hungry ass can handle.")
+
+		saynn("You grunt heavily as your second load starts flooding his nethers, Alex is squirming heavily around your cock, his own is filling that condom with more of his seed.")
+
+		saynn("[say=alexrynard]Ah-h.. my.. ah.. I'm.. a-again..[/say]")
+
+		saynn("By this point his belly receives a cute bump.")
+
+		saynn("[say=pc]Good boy, keep clenching..[/say]")
+
+		saynn("And he does, his ass draining your balls until there is no {pc.cum} left.")
+
+		saynn("Both of you are breathing heavily.")
+
+		saynn("After breeding him thoroughly and destroying his prostate.. It's time to rest.")
+
+		addButton("Rest", "Time for some cuddles", "hyp_ride_fuck_enough")
+	if(state == "hyp_ride_fuck_enough"):
+		playAnimation(StageScene.Cuddling, "idle", {npc="alexrynard", pc="pc", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true, condom=true}})
+		saynn("You pull your cock out, leaving Alex's used tailhole to pulse and leak your seed. After that, you just pull him in for some cuddles.")
+
+		saynn("[say=pc]There we go.[/say]")
+
+		saynn("He is still seeing the warm glowy colors.. his mind probably overwhelmed.")
+
+		saynn("[say=alexrynard]..hah..[/say]")
+
+		saynn("[say=pc]Was it fun?[/say]")
+
+		saynn("[say=alexrynard]Yes-s..[/say]")
+
+		saynn("He is still squirming in your hands.. so you try to calm him down, your hands hugging him. You also carefully tie the condom up and safely dispose of it.")
+
+		saynn("Probably time to turn that visor off.")
+
+		addButton("Visor", "Turn it off", "hyp_fuck_turnoff_visor")
+	if(state == "hyp_fuck_turnoff_visor"):
+		playAnimation(StageScene.Cuddling, "idle", {npc="alexrynard", pc="pc", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		saynn("The glow goes away. Alex blinks many times.. slowly coming back to his senses.")
+
+		saynn("[say=alexrynard]Ow.. ah..[/say]")
+
+		saynn("You hug him tighter to help when all the bad feelings start flooding his mind again.")
+
+		saynn("[say=pc]How do you feel?[/say]")
+
+		saynn("[say=alexrynard]My ass hurts, hah..[/say]")
+
+		saynn("Well.. duh..")
+
+		saynn("[say=pc]Did you like it though?[/say]")
+
+		saynn("Alex stays quiet, resting in your tight embrace.")
+
+		saynn("[say=alexrynard]I won't confirm or deny anything..[/say]")
+
+		saynn("Hah. What a sly fox.")
+
+		saynn("And so you just rest together like this, enjoying the company of each other.")
+
+		saynn("After some time, you help him to get up and dress. You can't help but to chuckle when you see him walking a little funny. Alex guides you back to the workshop.")
+
+		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "hyp_strapon_pick"):
+		saynn("Pick what strapon you wanna use to fuck Alex's butt.")
+
+		addStraponButtons()
+		if (false):
+			addButton("Nope", "You shouldn't see this", "hyp_strapon")
+	if(state == "hyp_strapon"):
+		playAnimation(StageScene.BreastGroping, "tease", {pc="pc", npc="alexrynard"})
+		saynn("The guy is still so cheeky.. makes you want to see how well he can handle getting fucked.")
+
+		saynn("You lean closer to his ear to whisper some words while your hand lands on his neck to make him feel even more powerless.")
+
+		saynn("[say=pc]Tell me, foxy, do you experience anal often?[/say]")
+
+		saynn("Alex raises his chin slightly.")
+
+		saynn("[say=alexrynard]No..[/say]")
+
+		saynn("[say=pc]Do you wish to do it more?[/say]")
+
+		saynn("He stays quiet for some time, his parted lips trembling.")
+
+		saynn("[say=alexrynard]Of course.. Anything for you.[/say]")
+
+		saynn("So sweet. You notice some movement in his shorts already.")
+
+		saynn("[say=pc]Why don't you undress then. I have just the thing we can use..[/say]")
+
+		addButton("Continue", "See what happens next", "hyp_strapon_undress")
+	if(state == "hyp_strapon_undress"):
+		playAnimation(StageScene.BreastGroping, "tease", {pc="pc", npc="alexrynard", npcBodyState={naked=true, hard=true}})
+		addCharacter("alexrynard", ["naked"])
+		saynn("Alex nods and proceeds to slowly unbutton his shirt and take it off. Your hand stops gripping his throat and instead slides down over his chest, brushing over his pecs. So much tension..")
+
+		saynn("[say=pc]Fully.[/say]")
+
+		saynn("He puts his digits under the ribbon of his shorts and pulls him down, revealing his red cock that is already twitching from excitement, a lonely drop of pre sliding down from its pointy tip.")
+
+		saynn("[say=pc]Good boy.[/say]")
+
+		saynn("A packaged condom falls out of his pocket as his shorts hit the floor. Hmm.. You could use that for something.")
+
+		addButton("Continue", "See what happens next", "hyp_strapon_cowgirl")
+	if(state == "hyp_strapon_cowgirl"):
+		playAnimation(StageScene.SexCowgirl, "tease", {pc="pc", npc="alexrynard", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true, condom=true}})
+		saynn("You undress and pull out the toy that you're gonna use this time.. a strapon. You secure it around your waist and then lie down on the floor. Your hands tap on your lap as you smile.")
+
+		saynn("[say=pc]Come here.[/say]")
+
+		saynn("Alex nods and crawls up to you.. before stradling your hips, his cock brushing against your rubber one.")
+
+		saynn("[say=alexrynard]Yes..[/say]")
+
+		saynn("You catch some of his precum onto your digits.. and then spread it along your new length.. not the best lube, but it will do.")
+
+		saynn("Foxy watches you with his hazy lusty eyes as you grab the packaged condom, quickly rip it open.. and begin applying it.. no, not to your cock.. but his.")
+
+		saynn("[say=alexrynard]Huh?..[/say]")
+
+		saynn("[say=pc]So you don't make a mess on me, foxy.[/say]")
+
+		saynn("[say=alexrynard]Of course..[/say]")
+
+		saynn("After all that.. It's time.")
+
+		saynn("[say=pc]I want you to ride me.[/say]")
+
+		saynn("Alex lowers his gaze to your toy.. and nods.")
+
+		saynn("[say=alexrynard]With pleasure..[/say]")
+
+		saynn("He raises himself a bit.. and uses his hand to guide your rubber member towards his tailhole as he starts lowering himself onto you..")
+
+		saynn("So tight.. you can feel his star resisting because the strapon starts putting pressure on your crotch.. and yet, Alex keeps trying, little quiet noises begin escaping him.")
+
+		saynn("[say=pc]Don't hold back.[/say]")
+
+		addButton("Continue", "See what happens next", "hyp_strapon_ride")
+	if(state == "hyp_strapon_ride"):
+		playAnimation(StageScene.SexCowgirl, "sex", {pc="pc", npc="alexrynard", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true, condom=true}})
+		saynn("The quiet noises quickly grow until they become small moans, Alex focuses on the hypnovisor glow.. allowing him to relax enough to take some of that strapon inside.")
+
+		saynn("[say=alexrynard]Ah..[/say]")
+
+		saynn("It's great, all you have to do is watch how Alex starts grinding himself against your crotch, his tight anal slowly stretching to accommodate the size of that toy.")
+
+		saynn("[say=pc]Such a good boy..[/say]")
+
+		saynn("Saying that only made him clench more.. increasing the friction and making your breathing deeper as well.")
+
+		saynn("Eventually, the foxy is able to comfortably take most of that rubber cock, his thighs slapping against yours with a soft thump.")
+
+		saynn("[say=alexrynard]Nh-h.. ah..[/say]")
+
+		saynn("It seems, the toy is pushing on all the right buttons, making it so the tip of the condom becomes a little heavy from some transparent fluids in it.")
+
+		saynn("Alex is doing exactly as told, riding you, rising himself before bringing his body down onto your length.")
+
+		saynn("[say=pc]Do you like it?[/say]")
+
+		saynn("[say=alexrynard]Yes.. ah..[/say]")
+
+		saynn("His eyes don't lie.")
+
+		addButton("Continue", "See what happens next", "hyp_strapon_ride_faster")
+	if(state == "hyp_strapon_ride_faster"):
+		playAnimation(StageScene.SexCowgirl, "fast", {pc="pc", npc="alexrynard", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true, condom=true}})
+		saynn("Alex is picking up the pace himself, riding you faster and harder, his own cock bobbing up and down, the condom collecting more pre.")
+
+		saynn("[say=pc]Such an eager foxy. Think you can cum like this?[/say]")
+
+		saynn("All you get back is more moans, Alex's mouth is opened, tongue out and drooling, his eyes keep rolling up.")
+
+		saynn("[say=alexrynard]Nh-h.. ye-.. -ah.. h-h..[/say]")
+
+		saynn("His slick inner walls gripping your strapon so well.. while it is smashing into his little pleasure button each time he brings himself down on you.")
+
+		saynn("[say=pc]Well show me then~.[/say]")
+
+		saynn("He is so adorable, making cute lusty noises.. riding your fake cock like it's the most fun attraction in the park. The way he clenches each time you tell him something.. so nice.")
+
+		saynn("The knot at the base of Alex's cock inflates with blood, signaling that he is about to cum. Good..")
+
+		addButton("Orgasm", "Make that foxy squirm", "hyp_ride_strapon_cum")
+	if(state == "hyp_ride_strapon_cum"):
+		playAnimation(StageScene.SexCowgirl, "inside", {pc="pc", npc="alexrynard", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true, condom=true}})
+		saynn("Alex brings himself down onto your strapon with one last big motion.. before arching his back and letting out a passionate moan, his cock starts throbbing and filling the condom with its load, making the tip sag lower and lower.. but luckily the condom seems to hold.")
+
+		saynn("[say=alexrynard]Ah-h-h!.. ah.. h-hh..[/say]")
+
+		saynn("His ass is just sucking you in, his inner walls kneading your rubber cock, desperate for any cum. You moan too softly, the pressure on your crotch feels really good..")
+
+		saynn("He throws his head back and just keeps moaning and grinding you, enjoying his anal orgasm.")
+
+		saynn("[say=pc]Ah.. wow, you're one hungry fox.[/say]")
+
+		saynn("[say=alexrynard]Yes.. yes-s.. hah..[/say]")
+
+		addButton("Enough", "Just pull him in for cuddles", "hyp_ride_strapon_enough")
+		addButton("Pin him down", "Give him what he wants", "hyp_ride_strapon_pin")
+	if(state == "hyp_ride_strapon_pin"):
+		playAnimation(StageScene.SexMissionary, "fast", {pc="pc", npc="alexrynard", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true, condom=true}})
+		saynn("He clearly wants more.. so why not give him more.")
+
+		saynn("Since you have been saving all your strength up to this point, you easily push yourself off the floor and pin foxy to the floor, your strapon is still inside him.")
+
+		saynn("[say=alexrynard]Ah??..[/say]")
+
+		saynn("Without even explaining anything, you start hammering away at his asshole, fucking it fast and rough.")
+
+		saynn("Alex is still not fully recovered from the last orgasm.. but now his hard prostate is being put under a lot of pressure again, his cock is twitching and dripping into the condom.")
+
+		saynn("[say=alexrynard]Oh.. Ah.. fuck..[/say]")
+
+		saynn("Passionate moans begin to escape from him again, his body shivering under you.. so cute.")
+
+		saynn("[say=pc]Such a slutty boy. Are you sure you're not a cocksleeve?[/say]")
+
+		saynn("[say=alexrynard]I am.. a fucktoy.. a dirty cocksleeve.. a slave.[/say]")
+
+		saynn("You thrust into the mouthy foxy with great power, pounding his stretchy fuckhole with full force. At some point the knot on his cock starts inflating again..")
+
+		addButton("Another orgasm", "Make the foxy feel good", "hyp_ride_strapon_pin_cum")
+	if(state == "hyp_ride_strapon_pin_cum"):
+		playAnimation(StageScene.SexMissionary, "inside", {pc="pc", npc="alexrynard", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true, condom=true}})
+		saynn("You pull back a little.. just to shove your strapon as deep as that hungry ass can handle.")
+
+		saynn("Alex is squirming heavily around your toy, his cock is filling that condom with more of his seed.")
+
+		saynn("[say=alexrynard]Ah-h.. my.. ah.. I'm.. a-again..[/say]")
+
+		saynn("By this point his belly receives a cute bump.")
+
+		saynn("[say=pc]Good boy, keep clenching..[/say]")
+
+		saynn("And he does, his ass gripping your fake cock like it's a real one, trying to milk it dry.")
+
+		saynn("Both of you are breathing heavily.")
+
+		saynn("After breeding him thoroughly and destroying his prostate.. It's time to rest.")
+
+		addButton("Rest", "Time for some cuddles", "hyp_ride_strapon_enough")
+	if(state == "hyp_ride_strapon_enough"):
+		playAnimation(StageScene.Cuddling, "idle", {npc="alexrynard", pc="pc", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true, condom=true}})
+		saynn("You pull your strapon out, leaving Alex's used tailhole to pulse and gape. After that, you just take off the harness and pull him in for some cuddles.")
+
+		saynn("[say=pc]There we go.[/say]")
+
+		saynn("He is still seeing the warm glowy colors.. his mind probably overwhelmed.")
+
+		saynn("[say=alexrynard]..hah..[/say]")
+
+		saynn("[say=pc]Was it fun?[/say]")
+
+		saynn("[say=alexrynard]Yes-s..[/say]")
+
+		saynn("He is still squirming in your hands.. so you try to calm him down, your hands hugging him. You also carefully tie the condom up and safely dispose of it.")
+
+		saynn("Probably time to turn that visor off.")
+
+		addButton("Visor", "Turn it off", "hyp_fuck_turnoff_visor")
 func addPumpButtons():
 	var pumps = GM.pc.getInventory().getItemsWithTag(ItemTag.PenisPump)
 	for pump in pumps:
 		addButton(pump.getVisibleName(), pump.getVisibleDescription(), "hyp_penispump", [pump])
+
+func addStraponButtons():
+	var strapons = GM.pc.getStrapons()
+	for strapon in strapons:
+		addButton(strapon.getVisibleName(), strapon.getVisibleDescription(), "hyp_strapon", [strapon])
 
 
 func _react(_action: String, _args):
@@ -1170,6 +1600,68 @@ func _react(_action: String, _args):
 	if(_action == "hyp_take_off_cage"):
 		processTime(5*60)
 		addMessage("You can now buy an advanced chastity cage.")
+
+	if(_action == "hyp_fuck_undress"):
+		processTime(5*60)
+
+	if(_action == "hyp_fuck_ride"):
+		processTime(10*60)
+
+	if(_action == "hyp_fuck_ride_faster"):
+		processTime(5*60)
+
+	if(_action == "hyp_ride_fuck_cum"):
+		processTime(5*60)
+		GM.pc.addSkillExperience(Skill.SexSlave, 30, "alex_anal")
+		getCharacter("alexrynard").cummedInAnusBy("pc")
+		addFilledCondomToLootIfPerk(getCharacter("alexrynard").createFilledCondom())
+		GM.pc.orgasmFrom("alexrynard")
+
+	if(_action == "hyp_ride_fuck_pin"):
+		processTime(16*60)
+
+	if(_action == "hyp_ride_fuck_pin_cum"):
+		processTime(5*60)
+		GM.pc.addSkillExperience(Skill.SexSlave, 30, "alex_anal2")
+		getCharacter("alexrynard").cummedInAnusBy("pc")
+		GM.pc.orgasmFrom("alexrynard")
+
+	if(_action == "hyp_fuck_turnoff_visor"):
+		processTime(20*60)
+		getCharacter("alexrynard").resetEquipment()
+
+	if(_action == "hyp_strapon"):
+		processTime(3*60)
+		var strapon = _args[0]
+		GM.pc.getInventory().forceEquipStoreOtherUnlessRestraint(strapon)
+
+	if(_action == "hyp_strapon_undress"):
+		processTime(5*60)
+
+	if(_action == "hyp_strapon_ride"):
+		processTime(10*60)
+
+	if(_action == "hyp_strapon_ride_faster"):
+		processTime(5*60)
+
+	if(_action == "hyp_ride_strapon_cum"):
+		processTime(5*60)
+		GM.pc.addSkillExperience(Skill.SexSlave, 30, "alex_anal")
+		getCharacter("alexrynard").cummedInAnusBy("pc", FluidSource.Strapon)
+		addFilledCondomToLootIfPerk(getCharacter("alexrynard").createFilledCondom())
+		GM.pc.orgasmFrom("alexrynard")
+
+	if(_action == "hyp_ride_strapon_pin"):
+		processTime(16*60)
+
+	if(_action == "hyp_ride_strapon_pin_cum"):
+		processTime(5*60)
+		GM.pc.addSkillExperience(Skill.SexSlave, 30, "alex_anal2")
+		getCharacter("alexrynard").cummedInAnusBy("pc", FluidSource.Strapon)
+		GM.pc.orgasmFrom("alexrynard")
+
+	if(_action == "hyp_ride_strapon_enough"):
+		GM.pc.unequipStrapon()
 
 	setState(_action)
 
