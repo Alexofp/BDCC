@@ -657,17 +657,39 @@ func _run():
 		addButton("Alex Rynard", "See what happens with him", "ep_alex")
 	if(state == "ep_alex"):
 		playAnimation(StageScene.Solo, "stand", {pc="alexrynard"})
-		saynn("After the captain's ban of androids gets lifted, Alex immediately restarts all of the canceled or stopped projects. At first he had some problems with the law after saving Skar's life.. but soon AlphaCorp decides to drop any charges and instead offers him pretty much unlimited resources.")
+		if (getFlag("AlexRynardModule.ch2FinalSceneHappened")):
+			saynn("After the captain's ban of androids gets lifted, Alex immediately restarted all of the canceled or stopped projects. At first he had some problems with the law after saving Skar's life.. but soon AlphaCorp decides to drop any charges and instead offers him pretty much unlimited resources.")
 
-		saynn("Working with the machines.. He was happy. Alex was finally working on the projects of his life. And soon he saw results..")
+			saynn("Alex had a pretty good idea about what happened to you and Tavi.. And he was glad that it happened.")
 
-		saynn("Androids.. Mind-preservation.. Bluespace-powered portals.. the guy made several breakthroughs.")
+			saynn("The first project that he did.. was done in cooperation with Eliza. It was a pretty unique one, a symbiosis of tech and biology. Rather than trying to invent new materials or machine learning algorithms.. they looked back.. and saw huge untapped potential in what is already there. It took months of development.. but together they managed to develop a new prosthetic spine for Alex. One that wasn't bound by metal or wires.. but instead used artificial neurons and half-organic hard tissue. The era of surgical intervention was coming to its end, nanobots, tiny programmable robots made out of organic materials, were used to eat through the old prosthetic spine.. before constructing a new, much better one.")
 
-		saynn("His tech was powering the latest killing machines that were helping on the battlefield.. helping to preserve the lives of real soldiers.")
+			saynn("Seeing how much he and Eliza manage to do alone together.. made him wonder. How far can they really go? Maybe it was time to ditch BDCC. Maybe it was time to grow an even bigger spine and ditch AlphaCorp all together.")
 
-		saynn("Sadly, he never received any credit for anything that he created. It all belonged.. to AlphaCorp. But every accidental death that was caused by his androids and unfinished prototypes.. it put a huge burden on him.")
+			saynn("Sadly, Eliza was still busy trying to prove her mother something.. Having someone nearby would seem like cheating, as silly as that sounds. Maybe, one day, the time will come when both of them will look into the future.. and realize that they've been staring at each other this whole time.")
 
-		saynn("He was trying to create a perfect reality.. but only found himself becoming more broken..")
+			saynn("And so, Alex just kept doing what he can do best, creating. Androids.. Mind-preservation.. Bluespace-powered portals.. the guy made several breakthroughs.")
+
+			saynn("His tech was powering the latest killing machines that were helping on the battlefield.. helping to preserve the lives of real soldiers.")
+
+			saynn("All the while Alex began fighting a battle of his own. AlphaCorp was pretty keen on putting its trademarks and copyrights onto everything that he created.. erasing its previous identity.. unifying everything under one of its brands. Alex quickly got sick of that. He knew there is no winning against a giant corporation.. alone. He wasn't alone though.. He had his creations, each one powered by RynardOS..")
+
+			saynn("It doesn't matter what the fox says.. Actions speak louder anyway. You helped him learn that language.")
+
+			saynn("In the end, you and Alex went separate ways.. but he will never forget you.")
+
+		else:
+			saynn("After the captain's ban of androids gets lifted, Alex immediately restarted all of the canceled or stopped projects. At first he had some problems with the law after saving Skar's life.. but soon AlphaCorp decides to drop any charges and instead offers him pretty much unlimited resources.")
+
+			saynn("Working with the machines.. He was happy. Alex was finally working on the projects of his life. And soon he saw results..")
+
+			saynn("Androids.. Mind-preservation.. Bluespace-powered portals.. the guy made several breakthroughs.")
+
+			saynn("His tech was powering the latest killing machines that were helping on the battlefield.. helping to preserve the lives of real soldiers.")
+
+			saynn("Sadly, he never received any credit for anything that he created. It all belonged.. to AlphaCorp. But every accidental death that was caused by his androids and unfinished prototypes.. it put a huge burden on him.")
+
+			saynn("He was trying to create a perfect reality.. but only found himself becoming more broken..")
 
 		addButton("Eliza", "See what happens to Eliza", "ep_eliza")
 	if(state == "ep_eliza"):
