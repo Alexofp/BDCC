@@ -523,3 +523,6 @@ func getInventoryImage():
 func onUnequipped():
 	if(itemState != null):
 		itemState.resetState()
+
+func isPersistent():
+	return false

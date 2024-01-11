@@ -325,22 +325,38 @@ func removeEquippedItem(item):
 	return null
 
 func clear():
+	var persistentItems = []
+	var persistentEquipped = {}
 	for item in items:
-		item.currentInventory = null
+		if(item.isPersistent()):
+			persistentItems.append(item)
+		else:
+			item.currentInventory = null
 		#item.queue_free()
 	items.clear()
+	items = persistentItems
+	
 	
 	for itemSlot in equippedItems.keys():
 		#equippedItems[itemSlot].queue_free()
-		equippedItems[itemSlot].currentInventory = null
+		if(equippedItems[itemSlot].isPersistent()):
+			persistentEquipped[itemSlot] = equippedItems[itemSlot]
+		else:
+			equippedItems[itemSlot].currentInventory = null
 	equippedItems.clear()
+	equippedItems = persistentEquipped
 	emit_signal("equipped_items_changed")
 
 func clearEquippedItems():
+	var persistent = {}
 	for itemSlot in equippedItems.keys():
 		#equippedItems[itemSlot].queue_free()
-		equippedItems[itemSlot].currentInventory = null
+		if(equippedItems[itemSlot].isPersistent()):
+			persistent[itemSlot] = equippedItems[itemSlot]
+		else:
+			equippedItems[itemSlot].currentInventory = null
 	equippedItems.clear()
+	equippedItems = persistent
 	emit_signal("equipped_items_changed")
 
 func getEquippedItemsWithBuff(buffID):
