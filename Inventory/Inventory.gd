@@ -338,6 +338,13 @@ func clear():
 	emit_signal("equipped_items_changed")
 
 func clearEquippedItems():
+	for itemSlot in equippedItems.keys():
+		#equippedItems[itemSlot].queue_free()
+		equippedItems[itemSlot].currentInventory = null
+	equippedItems.clear()
+	emit_signal("equipped_items_changed")
+	
+func clearEquippedItemsKeepPersistent():
 	var persistent = {}
 	for itemSlot in equippedItems.keys():
 		#equippedItems[itemSlot].queue_free()
