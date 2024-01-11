@@ -958,14 +958,15 @@ func endSex():
 			var item:ItemBase = character.getInventory().getItemByUniqueID(trackedItem[1])
 			if(item == null):
 				continue
-			character.getInventory().removeItem(item)
-			character.getInventory().removeEquippedItem(item)
-			var restraintData:RestraintData = item.getRestraintData()
-			if(restraintData != null):
-				restraintData.onStruggleRemoval()
+			if(!item.isPersistent()):
+				character.getInventory().removeItem(item)
+				character.getInventory().removeEquippedItem(item)
+				var restraintData:RestraintData = item.getRestraintData()
+				if(restraintData != null):
+					restraintData.onStruggleRemoval()
 			
-			GM.pc.getInventory().addItem(item)
-			GM.main.addMessage("You recovered "+item.getAStackName())
+				GM.pc.getInventory().addItem(item)
+				GM.main.addMessage("You recovered "+item.getAStackName())
 	trackedItems.erase("pc")
 	
 	for domID in doms:

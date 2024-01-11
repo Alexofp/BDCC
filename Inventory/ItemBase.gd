@@ -468,6 +468,12 @@ func alwaysVisible():
 func shouldBeVisibleOnDoll(_character, _doll):
 	return true
 
+func onSexStarted(_contex = {}):
+	pass
+
+func onSexEnded(_contex = {}):
+	pass
+
 func onSexEnd():
 	pass
 

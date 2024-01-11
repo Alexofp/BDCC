@@ -2498,7 +2498,10 @@ func onSexStarted(_contex = {}):
 			continue
 		var effect = statusEffects[effectID]
 		effect.onSexStarted(_contex)
-
+	var items = getInventory().getItemsAndEquippedItemsTogether()
+	for item in items:
+		item.onSexStarted(_contex)
+	
 func processSexTurnContex(_contex = {}):
 	processSexTurn() # Legacy
 	
@@ -2516,6 +2519,9 @@ func onSexEnded(_contex = {}):
 			continue
 		var effect = statusEffects[effectID]
 		effect.onSexEnded(_contex)
-
+	var items = getInventory().getItemsAndEquippedItemsTogether()
+	for item in items:
+		item.onSexEnded(_contex)
+		
 func getForcedObedienceLevel() -> float:
 	return buffsHolder.getCustom(BuffAttribute.ForcedObedience)
