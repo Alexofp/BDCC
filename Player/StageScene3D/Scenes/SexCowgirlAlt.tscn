@@ -1,0 +1,151 @@
+[gd_scene load_steps=33 format=2]
+
+[ext_resource path="res://Player/Player3D/Doll3D.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Player/StageScene3D/BaseStageScene3D.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Player/Props/platform.png" type="Texture" id=3]
+[ext_resource path="res://Player/StageScene3D/Scenes/SexCowgirlAlt.gd" type="Script" id=4]
+
+[sub_resource type="AnimationNodeAnimation" id=446]
+animation = "CuffedArms-loop"
+
+[sub_resource type="AnimationNodeBlend2" id=447]
+filter_enabled = true
+filters = [ "Doll3D/Skeleton:Arm.L", "Doll3D/Skeleton:Arm.R", "Doll3D/Skeleton:ForeArm.L", "Doll3D/Skeleton:ForeArm.R", "Doll3D/Skeleton:Hand.L", "Doll3D/Skeleton:Hand.R" ]
+
+[sub_resource type="AnimationNodeAnimation" id=448]
+animation = "Sex_CowgirlAltFast_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=449]
+animation = "Sex_CowgirlAltInside_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=450]
+animation = "Sex_CowgirlAltTease_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=451]
+animation = "Sex_CowgirlAlt_1-loop"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=452]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=453]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=454]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=455]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=456]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=457]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachine" id=458]
+states/Sex_CowgirlAltFast_1-loop/node = SubResource( 448 )
+states/Sex_CowgirlAltFast_1-loop/position = Vector2( 413, 368 )
+states/Sex_CowgirlAltInside_1-loop/node = SubResource( 449 )
+states/Sex_CowgirlAltInside_1-loop/position = Vector2( 413, 182 )
+states/Sex_CowgirlAltTease_1-loop/node = SubResource( 450 )
+states/Sex_CowgirlAltTease_1-loop/position = Vector2( 413, 80 )
+states/Sex_CowgirlAlt_1-loop/node = SubResource( 451 )
+states/Sex_CowgirlAlt_1-loop/position = Vector2( 413, 273 )
+transitions = [ "Sex_CowgirlAltTease_1-loop", "Sex_CowgirlAltInside_1-loop", SubResource( 452 ), "Sex_CowgirlAltInside_1-loop", "Sex_CowgirlAltTease_1-loop", SubResource( 453 ), "Sex_CowgirlAltInside_1-loop", "Sex_CowgirlAlt_1-loop", SubResource( 454 ), "Sex_CowgirlAlt_1-loop", "Sex_CowgirlAltInside_1-loop", SubResource( 455 ), "Sex_CowgirlAlt_1-loop", "Sex_CowgirlAltFast_1-loop", SubResource( 456 ), "Sex_CowgirlAltFast_1-loop", "Sex_CowgirlAlt_1-loop", SubResource( 457 ) ]
+start_node = "Sex_CowgirlAltTease_1-loop"
+graph_offset = Vector2( -9, 34 )
+
+[sub_resource type="AnimationNodeBlendTree" id=459]
+graph_offset = Vector2( -399.69, 0.95549 )
+nodes/Animation/node = SubResource( 446 )
+nodes/Animation/position = Vector2( 140, 280 )
+nodes/CuffsBlend/node = SubResource( 447 )
+nodes/CuffsBlend/position = Vector2( 440, 160 )
+nodes/StateMachine/node = SubResource( 458 )
+nodes/StateMachine/position = Vector2( 160, 100 )
+nodes/output/position = Vector2( 680, 180 )
+node_connections = [ "CuffsBlend", 0, "StateMachine", "CuffsBlend", 1, "Animation", "output", 0, "CuffsBlend" ]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=460]
+
+[sub_resource type="AnimationNodeAnimation" id=461]
+animation = "Sex_CowgirlAltFast_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=462]
+animation = "Sex_CowgirlAltInside_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=463]
+animation = "Sex_CowgirlAltTease_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=464]
+animation = "Sex_CowgirlAlt_2-loop"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=465]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=466]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=467]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=468]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=469]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=470]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachine" id=471]
+states/Sex_CowgirlAltFast_2-loop/node = SubResource( 461 )
+states/Sex_CowgirlAltFast_2-loop/position = Vector2( 497, 352 )
+states/Sex_CowgirlAltInside_2-loop/node = SubResource( 462 )
+states/Sex_CowgirlAltInside_2-loop/position = Vector2( 497, 188 )
+states/Sex_CowgirlAltTease_2-loop/node = SubResource( 463 )
+states/Sex_CowgirlAltTease_2-loop/position = Vector2( 497, 105 )
+states/Sex_CowgirlAlt_2-loop/node = SubResource( 464 )
+states/Sex_CowgirlAlt_2-loop/position = Vector2( 497, 265 )
+transitions = [ "Sex_CowgirlAltTease_2-loop", "Sex_CowgirlAltInside_2-loop", SubResource( 465 ), "Sex_CowgirlAltInside_2-loop", "Sex_CowgirlAltTease_2-loop", SubResource( 466 ), "Sex_CowgirlAltInside_2-loop", "Sex_CowgirlAlt_2-loop", SubResource( 467 ), "Sex_CowgirlAlt_2-loop", "Sex_CowgirlAltInside_2-loop", SubResource( 468 ), "Sex_CowgirlAlt_2-loop", "Sex_CowgirlAltFast_2-loop", SubResource( 469 ), "Sex_CowgirlAltFast_2-loop", "Sex_CowgirlAlt_2-loop", SubResource( 470 ) ]
+start_node = "Sex_CowgirlAltTease_2-loop"
+
+[sub_resource type="AnimationNodeBlendTree" id=472]
+graph_offset = Vector2( -322.532, 74.6842 )
+nodes/Animation/node = SubResource( 446 )
+nodes/Animation/position = Vector2( 140, 280 )
+nodes/CuffsBlend/node = SubResource( 447 )
+nodes/CuffsBlend/position = Vector2( 440, 160 )
+nodes/StateMachine/node = SubResource( 471 )
+nodes/StateMachine/position = Vector2( 160, 140 )
+nodes/output/position = Vector2( 680, 180 )
+node_connections = [ "CuffsBlend", 0, "StateMachine", "CuffsBlend", 1, "Animation", "output", 0, "CuffsBlend" ]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=473]
+
+[node name="SexCowgirlAlt" instance=ExtResource( 2 )]
+script = ExtResource( 4 )
+
+[node name="Sprite3D" type="Sprite3D" parent="." index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.196641, -1.77462 )
+texture = ExtResource( 3 )
+region_enabled = true
+region_rect = Rect2( 1, 1, 1022, 62 )
+
+[node name="Doll3D" parent="." index="1" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.40621, 0, 0 )
+
+[node name="Doll3D2" parent="." index="2" instance=ExtResource( 1 )]
+transform = Transform( -1, 0, 0, 0, 1, 0, 0, 0, 1, -1.40621, 0, 0 )
+
+[node name="AnimationTree" type="AnimationTree" parent="." index="3"]
+tree_root = SubResource( 459 )
+anim_player = NodePath("../Doll3D/DollSkeleton/AnimationPlayer")
+parameters/CuffsBlend/blend_amount = 0
+parameters/StateMachine/playback = SubResource( 460 )
+
+[node name="AnimationTree2" type="AnimationTree" parent="." index="4"]
+tree_root = SubResource( 472 )
+anim_player = NodePath("../Doll3D2/DollSkeleton/AnimationPlayer")
+parameters/CuffsBlend/blend_amount = 0
+parameters/StateMachine/playback = SubResource( 473 )

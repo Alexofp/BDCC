@@ -1492,7 +1492,7 @@ func updateLeaking(doll: Doll3D):
 		doll.setAnusLeaking(true)
 	else:
 		doll.setAnusLeaking(false)
-		
+
 func softUpdateDoll(doll: Doll3D):
 	var skinData = {}
 	var bodySkinData = getSkinData()
