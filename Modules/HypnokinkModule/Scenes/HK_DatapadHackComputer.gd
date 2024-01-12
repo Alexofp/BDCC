@@ -76,10 +76,10 @@ func reactToCommandLocalhost(_command: String, _args:Array, _commandStringRaw:St
 	return "Error, unknown command. Use 'help' to list all available commands"
 	
 const memPosMap = {
-			"unlock": "[6,8] (5+1 bytes read)",
-			"disconnect": "[4,16] (10+1 bytes read)",
-			"monitor": "[8,0] (170+1 bytes read)",
-			"help": "[17,4] (78+1 bytes read)",
+			"unlock": "[color=#88FF88][6,8][/color] (5+1 bytes read)",
+			"disconnect": "[color=#88FF88][4,16][/color] (10+1 bytes read)",
+			"monitor": "[color=#88FF88][8,0][/color] (170+1 bytes read)",
+			"help": "[color=#FF8888][17,4][/color] (78+1 bytes read)",
 		}
 
 const NI = "[color=#FFFF00]|[/color]"
@@ -101,7 +101,7 @@ func reactToCommandCage(_command: String, _args:Array, _commandStringRaw:String)
 				"Electromagnet lock strength: "+str(stepify(rand_range(3200, 3600),0.1))+" N\n"+\
 				"Battery charge: "+str(stepify(rand_range(1400, 1500),0.1))+" mAh\n"+\
 				"Bioreactor: Operating\n"+\
-				"Last memory access at: "+lastMem+" by '"+lastCmdStored+"'\n"+\
+				"Last memory access at: "+lastMem+" by '[color=#EE88FF]"+lastCmdStored+"[/color]'\n"+\
 				"Memory dump (first page): \n[b][font=res://Fonts/smallconsolefont.tres]"+\
 				"[color=#AAFFAA]   0        8        16       24      [/color]\n"+\
 				"[color=#AAFFAA] 0 [/color]BEEFBEA7 DeLoxe S 3-Karat  v1.0.7"+NI+"_\n"+\
