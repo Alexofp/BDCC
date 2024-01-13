@@ -50,7 +50,10 @@ func playAnimation(animID, _args = {}):
 	if(_args.has("npc")):
 		secondDoll = _args["npc"]
 	doll2.prepareCharacter(secondDoll)
-	doll3.prepareCharacter(secondDoll)
+	var thirdDoll = secondDoll
+	if(_args.has("npc2")):
+		thirdDoll = _args["npc2"]
+	doll3.prepareCharacter(thirdDoll)
 	
 	#doll.forceSlotToBeVisible(BodypartSlot.Penis)
 	
@@ -61,10 +64,16 @@ func playAnimation(animID, _args = {}):
 	
 	if(_args.has("npcBodyState")):
 		doll2.applyBodyState(_args["npcBodyState"])
-		doll3.applyBodyState(_args["npcBodyState"])
+		if(_args.has("npc2BodyState")):
+			doll3.applyBodyState(_args["npc2BodyState"])
+		else:
+			doll3.applyBodyState(_args["npcBodyState"])
 	else:
 		doll2.applyBodyState({})
-		doll3.applyBodyState({})
+		if(_args.has("npc2BodyState")):
+			doll3.applyBodyState(_args["npc2BodyState"])
+		else:
+			doll3.applyBodyState({})
 	
 	updateSubAnims()
 	
