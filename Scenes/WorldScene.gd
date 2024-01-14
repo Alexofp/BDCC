@@ -93,8 +93,8 @@ func _react(_action: String, _args):
 		runScene("MeScene")
 	if(_action == "sextest"):
 		#runScene("GenericSexScene", ["rahi", "pc", SexType.SlutwallSex])
-		GM.pc.getInventory().addItem(GlobalRegistry.createItem("BreastPump"))
-		GM.pc.getInventory().addItem(GlobalRegistry.createItem("BreastPumpAdvanced"))
+		#GM.pc.getInventory().addItem(GlobalRegistry.createItem("BreastPump"))
+		#GM.pc.getInventory().addItem(GlobalRegistry.createItem("BreastPumpAdvanced"))
 		runScene("GenericSexScene", ["pc", "rahi"])
 		#runScene("GenericSexScene", ["rahi", "pc"])
 		#runScene("GenericSexScene", ["nova", "pc"])

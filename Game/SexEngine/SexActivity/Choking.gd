@@ -8,6 +8,8 @@ func getGoals():
 		SexGoal.Choke: 1.0,
 		SexGoal.ChokeSexVaginal: 1.0,
 		SexGoal.ChokeSexAnal: 1.0,
+		SexGoal.ChokeReceiveVaginal: 1.0,
+		SexGoal.ChokeReceiveAnal: 1.0,
 	}
 
 func getSupportedSexTypes():
@@ -144,13 +146,17 @@ func getDomActions():
 			})
 			
 	var stopChokeScore = 1.0 - domInfo.getIsAngryScore() + subInfo.getAboutToPassOutScore() * domInfo.fetishScore({Fetish.UnconsciousSex: 1.0}, 0.5)
-	if(domInfo.goalsScoreMax({SexGoal.Choke: 1.0}, subID)):
+	if(domInfo.goalsScoreMax({SexGoal.Choke: 1.0}, subID) > 0.0):
 		stopChokeScore = subInfo.getAboutToPassOutScore() * domInfo.fetishScore({Fetish.UnconsciousSex: 1.0}, 0.5)
 		if(subInfo.isUnconscious()):
 			stopChokeScore = 0.5
 	
-	if(domInfo.goalsScoreMax({SexGoal.ChokeSexVaginal: 1.0, SexGoal.ChokeSexAnal: 1.0}, subID)):
+	if(domInfo.goalsScoreMax({SexGoal.ChokeSexVaginal: 1.0, SexGoal.ChokeSexAnal: 1.0}, subID) > 0.0):
 		if(getDom().hasReachablePenis() || getDom().isWearingStrapon()):
+			stopChokeScore = 0.0
+	
+	if(domInfo.goalsScoreMax({SexGoal.ChokeReceiveVaginal: 1.0, SexGoal.ChokeReceiveAnal: 1.0}, subID) > 0.0):
+		if(getSub().hasReachablePenis() || getSub().isWearingStrapon()):
 			stopChokeScore = 0.0
 	
 	if(state in ["choking", "hardchoking"] && !subInfo.isUnconscious()):
@@ -172,7 +178,7 @@ func getDomActions():
 		actions.append({
 				"id": "startvag",
 				"score": domInfo.goalsScore({SexGoal.ChokeSexVaginal: 0.3}, subID),
-				"name": "Choke + Vaginal",
+				"name": "+ Fuck Vaginal",
 				"desc": "Start fucking their pussy at the same time",
 				"category": ["Fuck"],
 			})
@@ -180,19 +186,54 @@ func getDomActions():
 		actions.append({
 				"id": "startanal",
 				"score": domInfo.goalsScore({SexGoal.ChokeSexAnal: 0.3}, subID),
-				"name": "Choke + Anal",
+				"name": "+ Fuck Anal",
 				"desc": "Start fucking their ass at the same time",
+				"category": ["Fuck"],
+			})
+			
+	if(getDom().hasReachableVagina() && (getSub().hasReachablePenis() || getSub().isWearingStrapon())):
+		actions.append({
+				"id": "startridevag",
+				"score": domInfo.goalsScore({SexGoal.ChokeReceiveVaginal: 0.3}, subID),
+				"name": "+ Ride Vaginal",
+				"desc": "Ride their cock with your pussy at the same time",
+				"category": ["Fuck"],
+			})
+	if(getDom().hasReachableAnus() && (getSub().hasReachablePenis() || getSub().isWearingStrapon())):
+		actions.append({
+				"id": "startrideanal",
+				"score": domInfo.goalsScore({SexGoal.ChokeReceiveAnal: 0.3}, subID),
+				"name": "+ Ride Anal",
+				"desc": "Ride their cock with your ass at the same time",
 				"category": ["Fuck"],
 			})
 			
 	return actions
 
 func doDomAction(_id, _actionInfo):
+	if(_id == "startridevag"):
+		switchCurrentActivityTo("DomRidingSubVaginal", ["choke"])
+	
+		var text = RNG.pick([
+			"{dom.You} {dom.youVerb('pin')} {sub.you} to the floor, about to ride {sub.yourHis} {cock} with {dom.yourHis} {pussy}.",
+		])
+		
+		return {text = text}
+	
+	if(_id == "startrideanal"):
+		switchCurrentActivityTo("DomRidingSubAnal", ["choke"])
+	
+		var text = RNG.pick([
+			"{dom.You} {dom.youVerb('pin')} {sub.you} to the floor, about to ride {sub.yourHis} {cock} with {dom.yourHis} {ass}.",
+		])
+		
+		return {text = text}
+	
 	if(_id == "startvag"):
 		switchCurrentActivityTo("SexVaginalOnAllFours", ["choke"])
 	
 		var text = RNG.pick([
-			"{dom.You} {dom.youVerb('raise')} {sub.yourHis} leg, preparing to fuck {sub.yourHis} pussy.",
+			"{dom.You} {dom.youVerb('raise')} {sub.yourHis} leg, preparing to fuck {sub.yourHis} {pussy}.",
 		])
 		
 		return {text = text}
@@ -200,7 +241,7 @@ func doDomAction(_id, _actionInfo):
 		switchCurrentActivityTo("SexAnalOnAllFours", ["choke"])
 	
 		var text = RNG.pick([
-			"{dom.You} {dom.youVerb('raise')} {sub.yourHis} leg, preparing to fuck {sub.yourHis} anus.",
+			"{dom.You} {dom.youVerb('raise')} {sub.yourHis} leg, preparing to fuck {sub.yourHis} {anus}.",
 		])
 		
 		return {text = text}

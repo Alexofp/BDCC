@@ -384,7 +384,7 @@ func setBallsScale(newScale: float):
 
 
 func _on_Doll3DTooltip_mouseEntered(bodypartID):
-	if(savedCharacterID != "" && bodypartID != ""):
+	if(savedCharacterID != "" && bodypartID != "" && is_visible_in_tree()):
 		var character = GlobalRegistry.getCharacter(savedCharacterID)
 		if(character == null):
 			return
@@ -570,7 +570,7 @@ func _on_RandomLeakTimer_timeout():
 		possible.append(2)
 	
 	var randomPicked = RNG.pick(possible)
-	if(randomPicked != null):
+	if(randomPicked != null && !isOnlyPenis):
 		if(randomPicked == 0):
 			nipplesParticles.emitting = true
 		if(randomPicked == 1):

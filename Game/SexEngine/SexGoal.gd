@@ -18,6 +18,8 @@ const TieUp = "TieUp"
 const Choke = "Choke"
 const ChokeSexVaginal = "ChokeSexVaginal"
 const ChokeSexAnal = "ChokeSexAnal"
+const ChokeReceiveVaginal = "ChokeReceiveVaginal"
+const ChokeReceiveAnal = "ChokeReceiveAnal"
 
 const RimSub = "RimSub"
 const RimmingReceive = "RimmingReceive"

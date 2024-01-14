@@ -1090,7 +1090,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "hyp_fuck_cowgirl")
 	if(state == "hyp_fuck_cowgirl"):
-		playAnimation(StageScene.SexCowgirl, "tease", {pc="pc", npc="alexrynard", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true, condom=true}})
+		playAnimation(StageScene.SexCowgirlAlt, "tease", {pc="pc", npc="alexrynard", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true, condom=true}})
 		saynn("You quickly undress as well and then lie down on the floor. Your hands tap on your lap as you smile.")
 
 		saynn("[say=pc]Come here.[/say]")
@@ -1125,7 +1125,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "hyp_fuck_ride")
 	if(state == "hyp_fuck_ride"):
-		playAnimation(StageScene.SexCowgirl, "sex", {pc="pc", npc="alexrynard", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true, condom=true}})
+		playAnimation(StageScene.SexCowgirlAlt, "sex", {pc="pc", npc="alexrynard", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true, condom=true}})
 		saynn("The quiet noises quickly grow until they become small moans, Alex focuses on the hypnovisor glow.. allowing him to relax enough to take some of your cock inside.")
 
 		saynn("[say=alexrynard]Ah..[/say]")
@@ -1152,7 +1152,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "hyp_fuck_ride_faster")
 	if(state == "hyp_fuck_ride_faster"):
-		playAnimation(StageScene.SexCowgirl, "fast", {pc="pc", npc="alexrynard", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true, condom=true}})
+		playAnimation(StageScene.SexCowgirlAlt, "fast", {pc="pc", npc="alexrynard", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true, condom=true}})
 		saynn("Alex is picking up the pace himself, riding you faster and harder, his own cock bobbing up and down, the condom collecting more pre.")
 
 		saynn("[say=pc]Such an eager foxy. Think you can cum like this?[/say]")
@@ -1171,7 +1171,7 @@ func _run():
 
 		addButton("Cum", "Breed that foxy raw", "hyp_ride_fuck_cum")
 	if(state == "hyp_ride_fuck_cum"):
-		playAnimation(StageScene.SexCowgirl, "inside", {pc="pc", npc="alexrynard", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true, condom=true}})
+		playAnimation(StageScene.SexCowgirlAlt, "inside", {pc="pc", npc="alexrynard", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true, condom=true}})
 		saynn("Alex brings himself down onto your cock with one last big motion.. before arching his back and letting out a passionate moan, his cock starts throbbing and filling the condom with its load, making the tip sag lower and lower.. but luckily the condom seems to hold.")
 
 		saynn("[say=alexrynard]Ah-h-h!.. ah.. h-hh..[/say]")
@@ -1320,7 +1320,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "hyp_strapon_cowgirl")
 	if(state == "hyp_strapon_cowgirl"):
-		playAnimation(StageScene.SexCowgirl, "tease", {pc="pc", npc="alexrynard", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true, condom=true}})
+		playAnimation(StageScene.SexCowgirlAlt, "tease", {pc="pc", npc="alexrynard", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true, condom=true}})
 		saynn("You undress and pull out the toy that you're gonna use this time.. a strapon. You secure it around your waist and then lie down on the floor. Your hands tap on your lap as you smile.")
 
 		saynn("[say=pc]Come here.[/say]")
@@ -1355,7 +1355,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "hyp_strapon_ride")
 	if(state == "hyp_strapon_ride"):
-		playAnimation(StageScene.SexCowgirl, "sex", {pc="pc", npc="alexrynard", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true, condom=true}})
+		playAnimation(StageScene.SexCowgirlAlt, "sex", {pc="pc", npc="alexrynard", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true, condom=true}})
 		saynn("The quiet noises quickly grow until they become small moans, Alex focuses on the hypnovisor glow.. allowing him to relax enough to take some of that strapon inside.")
 
 		saynn("[say=alexrynard]Ah..[/say]")
@@ -1382,7 +1382,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "hyp_strapon_ride_faster")
 	if(state == "hyp_strapon_ride_faster"):
-		playAnimation(StageScene.SexCowgirl, "fast", {pc="pc", npc="alexrynard", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true, condom=true}})
+		playAnimation(StageScene.SexCowgirlAlt, "fast", {pc="pc", npc="alexrynard", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true, condom=true}})
 		saynn("Alex is picking up the pace himself, riding you faster and harder, his own cock bobbing up and down, the condom collecting more pre.")
 
 		saynn("[say=pc]Such an eager foxy. Think you can cum like this?[/say]")
@@ -1401,7 +1401,7 @@ func _run():
 
 		addButton("Orgasm", "Make that foxy squirm", "hyp_ride_strapon_cum")
 	if(state == "hyp_ride_strapon_cum"):
-		playAnimation(StageScene.SexCowgirl, "inside", {pc="pc", npc="alexrynard", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true, condom=true}})
+		playAnimation(StageScene.SexCowgirlAlt, "inside", {pc="pc", npc="alexrynard", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true, condom=true}})
 		saynn("Alex brings himself down onto your strapon with one last big motion.. before arching his back and letting out a passionate moan, his cock starts throbbing and filling the condom with its load, making the tip sag lower and lower.. but luckily the condom seems to hold.")
 
 		saynn("[say=alexrynard]Ah-h-h!.. ah.. h-hh..[/say]")
