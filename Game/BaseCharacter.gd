@@ -242,7 +242,7 @@ func updateEffectPanel(panel: StatusEffectsPanel):
 	panel.clearBattleEffects()
 	for effectID in statusEffects.keys():
 		var effect = statusEffects[effectID]
-		panel.addBattleEffect(effect.getIconColor(), effect.getEffectName(), effect.getVisisbleDescription(), effect.getEffectImage())
+		panel.addBattleEffect(effect.getIconColor(), effect.getEffectName(), effect.getVisisbleDescription(), effect.getEffectImage(), effect.shouldHaveWideTooltip())
 
 func processBattleTurn():
 	if(timedBuffsDurationTurns > 0):
@@ -1636,7 +1636,7 @@ func updateDoll(doll: Doll3D):
 			continue
 		
 		var blocksBodyparts = item.coversBodyparts()
-		if(!item.alwaysVisible() && exposedBodyparts!=null && exposedBodyparts.size() > 0 && blocksBodyparts != null):
+		if(!(item.alwaysVisible() && !doll.isOnlyPenis) && exposedBodyparts!=null && exposedBodyparts.size() > 0 && blocksBodyparts != null):
 			var shouldBeSkipped = false
 			for exposedBodypart in exposedBodyparts:
 				if(blocksBodyparts.has(exposedBodypart)):

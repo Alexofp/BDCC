@@ -13,9 +13,10 @@ onready var flexContainer = $FlexGridContainer
 func _ready():
 	clearStatusEffects()
 
-func addEffect(col, text, desc, texture = null):
+func addEffect(col, text, desc, texture = null, isWide = false):
 	var block = uiblockScene.instance()
 	block.setColor(col)
+	block.tooltipShouldBeWide = isWide
 #	if(type == EffectType.Green):
 #		block.makeGreen()
 #	if(type == EffectType.Red):
@@ -32,18 +33,18 @@ func addEffect(col, text, desc, texture = null):
 	flexContainer.add_child(block)
 	return block
 
-func addBattleEffect(type, text, desc, texture = null):
-	var block = addEffect(type, text, desc, texture)
+func addBattleEffect(type, text, desc, texture = null, isWideTooltip = false):
+	var block = addEffect(type, text, desc, texture, isWideTooltip)
 	flexContainer.move_child(block, 0)
 	battleEffects.append(block)
 	
-func addStatusEffect(type, text, desc, texture = null):
-	var block = addEffect(type, text, desc, texture)
+func addStatusEffect(type, text, desc, texture = null, isWideTooltip = false):
+	var block = addEffect(type, text, desc, texture, isWideTooltip)
 	#flexContainer.move_child(block, 0)
 	statusEffects.append(block)
 
 func onBlockMouseEntered(block):
-	GlobalTooltip.showTooltip(block.effectName, block.effectDesc, showTooltipBelow)
+	GlobalTooltip.showTooltip(block.effectName, block.effectDesc, showTooltipBelow, false, block.tooltipShouldBeWide)
 
 func onBlockMouseExited():
 	GlobalTooltip.hideTooltip()

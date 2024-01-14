@@ -104,6 +104,8 @@ func buff(buffid, args = []):
 	buff.initBuff(args)
 	return buff
 
+func shouldHaveWideTooltip():
+	return false
 
 func onFightStart(_contex = {}):
 	pass
