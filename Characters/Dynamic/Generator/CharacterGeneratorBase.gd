@@ -12,7 +12,9 @@ func makeBase(idprefix = "dynamicnpc", _args = {}):
 	return dynamicCharacter
 
 func pickGender(character:DynamicCharacter, _args = {}):
-	if(_args.has(NpcGen.HasPenis) && _args[NpcGen.HasPenis]):
+	if(_args.has(NpcGen.HasVagina) && _args[NpcGen.HasVagina]):
+		character.npcGeneratedGender = GM.main.getEncounterSettings().generateGenderFromAllowed(NpcGender.getAllWithVagina())
+	elif(_args.has(NpcGen.HasPenis) && _args[NpcGen.HasPenis]):
 		character.npcGeneratedGender = GM.main.getEncounterSettings().generateGenderFromAllowed(NpcGender.getAllWithPenis())
 	elif(_args.has(NpcGen.GenderList)):
 		character.npcGeneratedGender = GM.main.getEncounterSettings().generateGenderFromAllowed(_args[NpcGen.GenderList])
@@ -40,6 +42,10 @@ func pickedSpeciesType(_args = {}):
 	return "guard"
 
 func pickSpecies(character:DynamicCharacter, _args = {}):
+	if(_args.has(NpcGen.Species)):
+		character.npcSpecies = [_args[NpcGen.Species]]
+		return
+	
 	var speciesType = pickedSpeciesType(_args)
 	var allSpecies = GlobalRegistry.getAllSpecies()
 	var possible = []

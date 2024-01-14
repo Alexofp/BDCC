@@ -75,6 +75,26 @@ func playAnimation(animID, _args = {}):
 		else:
 			doll3.applyBodyState({})
 	
+	var doll3Vis = true
+	if(_args.has("onlyLeft") && _args["onlyLeft"]):
+		doll.visible = false
+		doll2.visible = true
+		doll3Vis = false
+		$Sprite3D3.visible = false
+		transform.origin.x = 1.662
+	elif(_args.has("onlyRight") && _args["onlyRight"]):
+		doll.visible = true
+		doll2.visible = false
+		doll3Vis = true
+		$Sprite3D3.visible = false
+		transform.origin.x = -1.662
+	else:
+		doll.visible = true
+		doll2.visible = true
+		doll3Vis = true
+		$Sprite3D3.visible = true
+		transform.origin.x = 0.0
+	
 	updateSubAnims()
 	
 	var state_machine = animationTree["parameters/StateMachine/playback"]
@@ -100,19 +120,19 @@ func playAnimation(animID, _args = {}):
 		state_machine2.travel("PortalSexSquirmFast_2-loop")
 		state_machine3.travel("Nothing 3")
 	if(animID == "hold"):
-		doll3.visible = true
+		doll3.visible = doll3Vis
 		state_machine.travel("PortalSexOralHold_1-loop")
 		state_machine2.travel("PortalSexInside_2-loop 2")
 		state_machine3.travel("PortalSexSuckHold_3-loop")
 	if(animID == "suck"):
-		doll3.visible = true
+		doll3.visible = doll3Vis
 		state_machine.travel("PortalSexSuck_1-loop")
 		state_machine2.travel("PortalSexSquirm_2-loop 2")
 		state_machine3.travel("PortalSexSuck_3-loop")
 		if(doll.getState("mouth") in ["", null]):
 			doll.setTemporaryState("mouth", "open")
 	if(animID == "suckfast"):
-		doll3.visible = true
+		doll3.visible = doll3Vis
 		state_machine.travel("PortalSexSuckFast_1-loop")
 		state_machine2.travel("PortalSexSquirmFast_2-loop 2")
 		state_machine3.travel("PortalSexSuckFast_3-loop")

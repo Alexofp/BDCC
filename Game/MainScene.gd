@@ -1128,6 +1128,12 @@ func characterIsVisible(charID):
 	
 	return false
 
+func updateCharacterUntilNow(charID):
+	var character = getCharacter(charID)
+	if(character != null):
+		character.processUntilTime(currentDay, timeOfDay)
+		character.updateNonBattleEffects()
+
 func startUpdatingCharacter(charID):
 	if(!charactersToUpdate.has(charID)):
 		charactersToUpdate[charID] = true

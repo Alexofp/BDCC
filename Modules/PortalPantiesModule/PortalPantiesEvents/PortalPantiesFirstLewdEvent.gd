@@ -7,9 +7,11 @@ func registerTriggers(es):
 	es.addTrigger(self, "PortalPantiesEvent")
 	
 func react(_triggerID, _args):
-	if(getFlag("PortalPantiesModule.Panties_TestAmmount", 0) < 5):
+	var questIsCompleted = GM.QS.isCompleted("PortalPantiesQuest")
+	
+	if(getFlag("PortalPantiesModule.Panties_TestAmmount", 0) < 5 && !questIsCompleted):
 		return false
-	if(getFlag("PortalPantiesModule.Panties_FleshlightsGotStolen")):
+	if(getFlag("PortalPantiesModule.Panties_FleshlightsGotStolen") && !questIsCompleted):
 		return false
 	
 	if(RNG.chance(40) && GM.QS.isActive("PortalPantiesQuest")):

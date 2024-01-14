@@ -12,4 +12,6 @@ enum {
 	Temporary,
 	NoChastity,
 	HasPenis,
+	Species,
+	HasVagina,
 }

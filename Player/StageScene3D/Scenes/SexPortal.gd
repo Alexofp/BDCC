@@ -54,6 +54,25 @@ func playAnimation(animID, _args = {}):
 	else:
 		doll2.applyBodyState({})
 	
+	if(_args.has("onlyLeft") && _args["onlyLeft"]):
+		doll.visible = false
+		doll2.visible = true
+		if(animID == "fast"):
+			$Sprite3D3.visible = true
+		else:
+			$Sprite3D3.visible = false
+		transform.origin.x = 1.662
+	elif(_args.has("onlyRight") && _args["onlyRight"]):
+		doll.visible = true
+		doll2.visible = false
+		$Sprite3D3.visible = false
+		transform.origin.x = -1.662
+	else:
+		doll.visible = true
+		doll2.visible = true
+		$Sprite3D3.visible = true
+		transform.origin.x = 0.0
+	
 	updateSubAnims()
 	
 	var state_machine = animationTree["parameters/StateMachine/playback"]

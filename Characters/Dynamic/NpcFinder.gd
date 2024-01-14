@@ -50,6 +50,21 @@ static func npcSatisfiesCondition(character:BaseCharacter, conInfo):
 		else:
 			if(character.getID() == conInfo[1]):
 				return false
+	elif(conditionID == NpcCon.Species):
+		if(!(conInfo[1] in character.getSpecies())):
+			return false
+	elif(conditionID == NpcCon.HasVagina):
+		if(!character.hasVagina()):
+			return false
+	elif(conditionID == NpcCon.HasReachableVagina):
+		if(!character.hasReachableVagina()):
+			return false
+	elif(conditionID == NpcCon.HasReachablePenis):
+		if(!character.hasReachablePenis()):
+			return false
+	elif(conditionID == NpcCon.HasReachableAnus):
+		if(!character.hasReachableAnus()):
+			return false
 	return true
 
 static func grabNpcIDFromPool(poolID, _conditions = []):
