@@ -223,7 +223,7 @@ func createEquipment():
 	pass
 
 func resetEquipment():
-	inventory.clearEquippedItems()
+	inventory.clearEquippedItemsKeepPersistent()
 	createEquipment()
 	updateNonBattleEffects()
 

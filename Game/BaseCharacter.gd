@@ -2509,7 +2509,7 @@ func onSexStarted(_contex = {}):
 			continue
 		var effect = statusEffects[effectID]
 		effect.onSexStarted(_contex)
-
+	
 func processSexTurnContex(_contex = {}):
 	processSexTurn() # Legacy
 	
@@ -2527,6 +2527,6 @@ func onSexEnded(_contex = {}):
 			continue
 		var effect = statusEffects[effectID]
 		effect.onSexEnded(_contex)
-
+		
 func getForcedObedienceLevel() -> float:
 	return buffsHolder.getCustom(BuffAttribute.ForcedObedience)
