@@ -19,7 +19,6 @@ const SexEngineLikes = "SexEngineLikes"
 const SexEnginePersonality = "SexEnginePersonality"
 const SexHeatDrug = "SexHeatDrug"
 const SexAnaphrodisiacDrug = "SexAnaphrodisiacDrug"
-const SexEngineHypnovisor = "SexEngineHypnovisor"
 
 # Painful effects
 const StretchedPainfullyPussy = "StretchedPainfullyPussy"
@@ -57,6 +56,15 @@ const BreastsFull = "BreastsFull"
 const CumInflated = "CumInflated"
 const Exposed = "Exposed"
 const SoreNipplesAfterMilking = "SoreNipplesAfterMilking"
+
+# Hypnosis effects
+const Suggestible = "Suggestible"
+const UnderHypnosis = "UnderHypnosis"
+const HypnoVisorActive = "HypnoVisorActive"
+const HypnoVisorProgramming = "HypnoVisorProgramming"
+const ImplantedPosthypnoticTrigger = "ImplantedPosthypnoticTrigger"
+const MantraUsed = "MantraUsed"
+const PosthypnoticTriggerUsedUp = "PosthypnoticTriggerUsedUp"
 
 # Perk effects
 const RapidConception = "RapidConception"

@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Modules/HypnokinkModule/Items/HypnoRestraints/lock.png" type="Texture" id=1]
+[ext_resource path="res://Modules/HypnokinkModule/Items/HypnoRestraints/IconSpinner.gd" type="Script" id=2]
+[ext_resource path="res://Modules/HypnokinkModule/Items/HypnoRestraints/imaginaryCuff.png" type="Texture" id=3]
+
+[node name="CuffModel" type="Spatial"]
+
+[node name="LockIcon" type="Sprite3D" parent="."]
+transform = Transform( 0.35, 0, 0, 0, 0.35, 0, 0, 0, 0.35, 0, 0.185, 0.075 )
+opacity = 0.5
+texture = ExtResource( 1 )
+script = ExtResource( 2 )
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.25, 0, 0, 0, 0.5, 0, 0, -0.05 )
+texture = ExtResource( 3 )
+
+[node name="Sprite3D2" type="Sprite3D" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.25, 0, 0, 0, 0.5, 0, 0, 0.05 )
+texture = ExtResource( 3 )

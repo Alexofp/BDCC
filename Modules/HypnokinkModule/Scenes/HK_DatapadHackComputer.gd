@@ -1,0 +1,263 @@
+extends ComputerBase
+
+var connectedTo = ""
+var plugSpeed = 0
+var lastCageCmd = "disconnect"
+
+func _init():
+	id = "DatapadHackComputer"
+	introText = "ProbY v1.21 localnet device RMI utility\nInformation wants to be free!"
+
+func reactToCommand(_command:String, _args:Array, _commandStringRaw:String):
+	if(_command == "skiptut"):
+		currentTutorialStep = 9999
+		return "Tutorial skipped."
+	if(connectedTo == ""):
+		return reactToCommandLocalhost(_command, _args, _commandStringRaw)
+	elif(connectedTo == "deloxekarat_default"):
+		return reactToCommandCage(_command, _args, _commandStringRaw)
+	elif(connectedTo == "viplug_m_default"):
+		return reactToCommandPlug(_command, _args, _commandStringRaw)
+	
+func reactToCommandLocalhost(_command: String, _args:Array, _commandStringRaw:String):
+	if(_command == "connect"):
+		if(_args.size() == 1):
+			var device = _args[0]
+			if(device in ["grd_radio_3511", "1"]):
+				return "Connecting to grd_radio_3511...\nCredentials not found. Connection aborted.\n[Nice try, but no. - Alex]"
+			if(device in ["grd_radio_1447", "2"]):
+				return "Connecting to grd_radio_1447...\nCredentials not found. Connection aborted.\n[Nice try, but no. - Alex]"
+			elif(device in ["deloxekarat_default", "3"]):
+				connectedTo = "deloxekarat_default"
+				return "Connecting to deloxekarat_default...\nConnected using default login and password for manufacturer/device."
+			elif(device in ["viplug_m_default", "4"]):
+				connectedTo = "viplug_m_default"
+				return "Connecting to viplug_m_default...\nConnected using default login and password for manufacturer/device."
+			else:
+				return "Connecting to "+device+"...\nDevice not found."
+		else:
+			return "This command expects 1 argument"
+	
+	if(_command == "probe"):
+		if(_args.size() == 0):
+			return "Scanning...\nDone. Found 4 devices.\n1 - grd_radio_3511\n2 - grd_radio_1447\n3 - deloxekarat_default\n4 - viplug_m_default"
+		else:
+			return "This command expects 0 arguments"
+			
+	if(_command == "exit"):
+		markFinishedFail()
+		return "Goodbye, and have a well connected day!"
+		
+	if(_command == "help"):
+		if(_args.size() == 1):
+			var tolearn = _args[0]
+			if(tolearn == "help"):
+				return "This command outputs all other commands and can also provide help for certain command by typing 'help <COMMAND>'."
+			elif(tolearn == "probe"):
+				return "This command scans for locally available BT devices."
+			elif(tolearn == "exit"):
+				return "This command exits the program."
+			elif(tolearn == "connect"):
+				return "This command lets you connect to a remote wireless device by using its BT identifier.\nSyntax 'connect <BT>'"
+			else:
+				return "Couldn't find command '"+str(tolearn)+"'. To see all the available commands type 'help'."
+			
+		elif(_args.size() == 0):
+			learnCommand("help")
+			learnCommand("probe")
+			learnCommand("connect")
+			learnCommand("exit")
+			return "Available commands are: \nconnect\nprobe\nexit\nhelp\nTo learn more about a command type 'help <COMMAND>'"
+		else:
+			learnCommand("help")
+			return "'help' expects 0 or 1 arguments"
+			
+	learnCommand("help")
+	return "Error, unknown command. Use 'help' to list all available commands"
+	
+const memPosMap = {
+			"unlock": "[color=#88FF88][6,8][/color] (5+1 bytes read)",
+			"disconnect": "[color=#88FF88][4,16][/color] (10+1 bytes read)",
+			"monitor": "[color=#88FF88][8,0][/color] (170+1 bytes read)",
+			"help": "[color=#FF8888][17,4][/color] (78+1 bytes read)",
+		}
+
+const NI = "[color=#FFFF00]|[/color]"
+const CR = "[color=#FFAAAA]¬[/color]"
+
+func reactToCommandCage(_command: String, _args:Array, _commandStringRaw:String):
+	if(_command == "disconnect"):
+		lastCageCmd = _command
+		connectedTo = ""
+		return "Disconnecting...\nConnection closed by the remote host."
+	elif(_command == "monitor"):
+		if(_args.size() == 0):
+			var lastMem = memPosMap[lastCageCmd]
+			var lastCmdStored = lastCageCmd
+			lastCageCmd = _command
+			return \
+				"Status: locked\n"+\
+				"Days locked: "+str(GM.main.getDays() + 47)+"\n"+\
+				"Electromagnet lock strength: "+str(stepify(rand_range(3200, 3600),0.1))+" N\n"+\
+				"Battery charge: "+str(stepify(rand_range(1400, 1500),0.1))+" mAh\n"+\
+				"Bioreactor: Operating\n"+\
+				"Last memory access at: "+lastMem+" by '[color=#EE88FF]"+lastCmdStored+"[/color]'\n"+\
+				"Memory dump (first page): \n[b][font=res://Fonts/smallconsolefont.tres]"+\
+				"[color=#AAFFAA]   0        8        16       24      [/color]\n"+\
+				"[color=#AAFFAA] 0 [/color]BEEFBEA7 DeLoxe S 3-Karat  v1.0.7"+NI+"_\n"+\
+				"[color=#AAFFAA] 1 [/color]00010017 SEGFAULT  at: %s"+NI+" Eo2ZiE93\n"+\
+				"[color=#AAFFAA] 2 [/color]Vion"+NI+"___ b1Un374k J0sTIBXF locked"+NI+"_\n"+\
+				"[color=#AAFFAA] 3 [/color]unlocked "+NI+"___Oper ating "+NI+"_ Inactive\n"+\
+				"[color=#AAFFAA] 4 [/color]"+NI+"___sAxz 38VsDvXT Disconne cting... \n"+\
+				"[color=#AAFFAA] 5 [/color]"+NI+"___Read y."+NI+"_DwyM UNz6v4ML B1jowhGw\n"+\
+				"[color=#AAFFAA] 6 [/color]default"+NI+" block"+NI+"__ ____over ride"+NI+"hl|\n"+\
+				"[color=#AAFFAA] 7 [/color]Code "+NI+"__ valid."+NI+"_ invalid. "+NI+"___6521\n"+\
+				"[color=#AAFFAA] 8 [/color]Status:  %s"+CR+"Days  locked:  %d"+CR+"Elect\n"+\
+				"[color=#AAFFAA] 9 [/color]romagnet  lock st rength:  %fN"+CR+"Batt\n"+\
+				"[color=#AAFFAA]10 [/color]erycharg e: %f mA h"+CR+"Biorea ctor:%s"+CR+"\n"+\
+				"[color=#AAFFAA]11 [/color]Last mem ory acce ss at: [ %d,%d] (\n[/font][/b]"
+		else:
+			return "This command expects 0 arguments"
+	elif(_command == "unlock"):
+		lastCageCmd = _command
+		if(_args.size() == 1):
+			var unlockcode = _args[0]
+			if(unlockcode in ["block"]):
+				markFinished()
+				return "Code valid. Unlocking..."
+			else:
+				return "Code invalid."
+		else:
+			return "This command expects 1 argument"
+	elif(_command == "help"):
+		lastCageCmd = _command
+		if(_args.size() == 1):
+			var tolearn = _args[0]
+			if(tolearn == "help"):
+				return "This command outputs all other commands and can also provide help for certain command by typing 'help <COMMAND>'."
+			elif(tolearn == "disconnect"):
+				return "This command disconnects you from the remote host."
+			elif(tolearn == "monitor"):
+				return "This command lists hardware diagnostics."
+			elif(tolearn == "unlock"):
+				return "This command unlocks the electromagnetic lock.\nSyntax 'unlock <unlock code>'"
+			else:
+				return "Couldn't find command '"+str(tolearn)+"'. To see all the available commands type 'help'."
+			
+		elif(_args.size() == 0):
+			learnCommand("help")
+			learnCommand("monitor")
+			learnCommand("unlock")
+			learnCommand("disconnect")
+			return "Available commands are: \ndisconnect\nmonitor\nunlock\nhelp\nTo learn more about a command type 'help <COMMAND>'\n\n"+\
+				"[Amateur firmware. The password's stored in plaintext, directly in memory. Dont waste time trying every option, remember that the unlock function has to access the password to check if it's been given a valid one. - Alex]"
+		else:
+			learnCommand("help")
+			return "'help' expects 0 or 1 arguments"
+						
+	learnCommand("help")
+	return "Error, unknown command. Use 'help' to list all available commands"
+	
+func reactToCommandPlug(_command: String, _args:Array, _commandStringRaw:String):
+	if(_command == "get_speed"):
+		return "Invoking...\nReturn value: "+str(plugSpeed)
+	elif(_command == "set_speed"):
+		var value = 0
+		if(_args.size() >= 1):
+			value = int(_args[0])
+		value = clamp(value, 0, 100)
+		plugSpeed = value
+		if(value >= 25):
+			return "Invoking...\nReturn code 00041: Success, Increased heart rate detected"
+		else:
+			return "Invoking...\nReturn code 00000: Success"
+	elif(_command == "disconnect"):
+		connectedTo = ""
+		return "Disconnecting...\nConnection closed by the remote host."
+	elif(_command == "help"):
+		if(_args.size() == 1):
+			var tolearn = _args[0]
+			if(tolearn == "help"):
+				return "This command outputs all other commands and can also provide help for certain command by typing 'help <COMMAND>'."
+			elif(tolearn == "disconnect"):
+				return "This command disconnects you from the remote host."
+			elif(tolearn == "get_speed"):
+				return "Returns current speed setting of the vibration motor."
+			elif(tolearn == "set_speed"):
+				return "Sets the current speed setting of the vibration motor. \nSyntax 'set_speed <value [0 - 100]>'"
+			else:
+				return "Couldn't find command '"+str(tolearn)+"'. To see all the available commands type 'help'."
+			
+		elif(_args.size() == 0):
+			learnCommand("help")
+			learnCommand("get_speed")
+			learnCommand("set_speed")
+			learnCommand("disconnect")
+			return "Available commands are: \ndisconnect\nget_speed\nset_speed\nhelp\nTo learn more about a command type 'help <COMMAND>'"
+		else:
+			learnCommand("help")
+			return "'help' expects 0 or 1 arguments"
+						
+	learnCommand("help")
+	return "Error, unknown command. Use 'help' to list all available commands"
+
+var tutorialData = [
+	["*", "Figure out how to work this utility, or use 'skiptut' to skip this tutorial.", "Type anything"],
+	["help", "Start by getting the list of commands.", "Select 'help' and then press Send"],
+	["help probe", "You learned new commands. Use the help command to figure out the 'probe' command", "Select 'help', then select 'probe' and then press Send"],
+	["probe", "Now try to execute this command.", "Select 'probe' and press Send"],
+	["help connect", "Now try to figure out how to use the connect command.", "Select 'help', then select 'connect' and press Send"],
+	["connect 4", "Connect to the mystery device to test things out.", "Select 'connect', then switch to the numpad and select '4' before pressing Send"],
+	["help", "You connected to a device. Figure out what it can do.", "Select 'help' and press Send"],
+	["help get_speed", "Figure out what get_speed does.", "Select 'help', then select 'get_speed' and press Send"],
+	["get_speed", "Run the get_speed command.", "Select 'get_speed' and press Send"],
+	["disconnect", "When you're done here, disconnect from this device.", "Select 'disconnect' and press Send"],
+]
+var currentTutorialStep = 0
+var shouldSpoilHint = false
+
+func getTutorial():
+	if(currentTutorialStep >= tutorialData.size()):
+		return
+	
+	var currentTutStep = tutorialData[currentTutorialStep]
+	
+	var currentText = currentTutStep[1]
+	#var currentExpectedCommand = currentTutStep[0]
+	if(shouldSpoilHint && currentTutStep.size() > 2):
+		currentText += " ("+currentTutStep[2]+")"
+
+	return currentText
+
+func progressTutorial():
+	if(currentTutorialStep >= tutorialData.size()):
+		return
+	var currentTutStep = tutorialData[currentTutorialStep]
+	var currentExpectedCommand = currentTutStep[0]
+	
+	if(lastCommand != ""):
+		if(lastCommand == currentExpectedCommand || currentExpectedCommand == "*"):
+			currentTutorialStep += 1
+			shouldSpoilHint = false
+		else:
+			shouldSpoilHint = true
+
+func saveData():
+	var data = .saveData()
+	
+	data["connectedTo"] = connectedTo
+	data["plugSpeed"] = plugSpeed
+	data["lastCageCmd"] = lastCageCmd
+	data["currentTutorialStep"] = currentTutorialStep
+	data["shouldSpoilHint"] = currentTutorialStep
+	
+	return data
+	
+func loadData(data):
+	.loadData(data)
+	
+	connectedTo = SAVE.loadVar(data, "connectedTo", "")
+	plugSpeed = SAVE.loadVar(data, "plugSpeed", 0)
+	lastCageCmd = SAVE.loadVar(data, "lastCageCmd", "disconnect")
+	currentTutorialStep = SAVE.loadVar(data, "currentTutorialStep", 0)
+	shouldSpoilHint = SAVE.loadVar(data, "shouldSpoilHint", false)
