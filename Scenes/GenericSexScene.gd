@@ -80,7 +80,8 @@ func _run():
 				var subInfo = sexEngine.getSubInfo(subID)
 				sayn(subInfo.getInfoString())
 
-			for actionInfo in sexEngine.getActions():
+			var theActions = sexEngine.getActions()
+			for actionInfo in theActions:
 				var actionCategory = []
 				if("category" in actionInfo):
 					actionCategory = actionInfo["category"]
@@ -93,7 +94,7 @@ func _run():
 						desc = "Success chance: "+str(Util.roundF(actionInfo["chance"], 1))+"%\n"+desc
 					addButton(actionInfo["name"], desc, "doAction", [actionInfo])
 			
-			addCategoryButtons()
+			addCategoryButtons(theActions)
 			
 			#addButton("Process", "Process", "processTurn")
 			
@@ -155,9 +156,9 @@ func updateDomsAndSubs():
 	for subID in sexEngine.subs:
 		getCharacter(subID).updateNonBattleEffects()
 
-func addCategoryButtons():
+func addCategoryButtons(theActions):
 	var categoryButtons = {}
-	for actionInfo in sexEngine.getActions():
+	for actionInfo in theActions:
 		var actionCategory = []
 		if("category" in actionInfo):
 			actionCategory = actionInfo["category"]

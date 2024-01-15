@@ -499,7 +499,7 @@ func hasAnyAcitivites(charID):
 			return true
 	return false
 	
-func processAIActions(isDom = true):
+func processAIActions(isDom = true, playerIsHypnotized = false):
 	if(sexEnded):
 		return
 	
@@ -512,7 +512,7 @@ func processAIActions(isDom = true):
 	
 	for personID in peopleToCheck:
 		var theinfo = peopleToCheck[personID]
-		if(personID == "pc"):
+		if(personID == "pc" && !playerIsHypnotized):
 			continue
 		
 		var possibleActions = []
@@ -717,6 +717,18 @@ func getFinalText():
 
 func getActions():
 	var result = []
+	
+	if(isSub("pc")):
+		var forcedObedienceLevel = GM.pc.getForcedObedienceLevel()
+		if(RNG.chance(forcedObedienceLevel*100.0)):
+			result.append({
+				id = "obey",
+				name = "OBEY",
+				desc = "You have lost control of your body..",
+				priority = 999,
+			})
+			return result
+	
 	result.append({
 		id = "continue",
 		name = "Continue",
@@ -872,6 +884,11 @@ func processScene():
 	processAIActions(false)
 
 func doAction(_actionInfo):
+	if(_actionInfo["id"] == "obey"):
+		messages.clear()
+		processAIActions(true, true)
+		processTurn()
+		processAIActions(false, true)
 	if(_actionInfo["id"] == "continue"):
 		messages.clear()
 		processAIActions(true)
