@@ -1,5 +1,8 @@
 extends "res://Scenes/SceneBase.gd"
 
+var npcsToUse = []
+var femaleNpcID = ""
+
 func _init():
 	sceneID = "PortalPantiesQuestCellblockScene"
 
@@ -164,6 +167,7 @@ func _run():
 
 
 	if(state == "lick_pussy"):
+		playAnimation(StageScene.SexPortalOral, "lick", {onlyRight=true})
 		# (needs pussy)
 		saynn("You decide that playing with your own pussy is the best choice in the current position. You bring your head closer to the fleshlight with your {pc.pussyStretch} sex sticking out and take a good look first. You have never seen your folds from so close, you notice all the miniscule twitching and how soft the sensitive flesh is.")
 
@@ -180,6 +184,8 @@ func _run():
 		addButton("Continue", "See what happens next", "continue")
 
 	if(state == "lick_anus"):
+		playAnimation(StageScene.SexPortalOral, "lick", {onlyRight=true})
+		
 		saynn("You decide that playing with your own butt is the best choice in the current position. You bring your head closer to the fleshlight with your {pc.analStretch} tailhole sticking out and take a good look first. You have never seen your pucker from so close, you notice all the miniscule twitching and how soft the sensitive flesh is.")
 
 		saynn("Inmates greedily watch you as you take your time. You see some exposing their cocks and idly stroking themselves. You let your tongue roll out and reach for your anal ring before giving it a little lick. It feels.. strange. Your own butthole reacts by clenching slightly.")
@@ -198,6 +204,7 @@ func _run():
 
 	if(state == "suck_dick"):
 		# (needs dick)
+		playAnimation(StageScene.SexPortalOral, "suckfast", {onlyRight=true, npcBodyState={hard=true}})
 
 		saynn("You decide that blowing yourself is the best choice in the current position. You bring your head closer to the fleshlight with your {pc.cock} sticking out and take a good look first. You have never seen your dick from so close, you notice all the miniscule twitching and how veiny the texture is.")
 
@@ -220,11 +227,7 @@ func _run():
 		addButton("Continue", "See what happens next", "continue")
 
 	if(state == "continue"):
-		playAnimation(StageScene.Duo, "kneel", {
-			npc="stud", npcAction="stand", 
-			bodyState={},
-			npcBodyState={exposedCrotch=true,hard=true},
-		})
+		playAnimation(StageScene.SexPortal, "fast", {pc="stud", npc="pc", bodyState={exposedCrotch=true, hard=true}})
 		
 		# (if pussy)
 		if(GM.pc.hasVagina()):
@@ -261,6 +264,8 @@ func _run():
 		addButton("Creampie!", "He is gonna cum", "creampie!")
 
 	if(state == "creampie!"):
+		playAnimation(StageScene.SexPortal, "inside", {pc="stud", npc="pc", bodyState={exposedCrotch=true, hard=true}})
+		
 		# (if pussy)
 		if(GM.pc.hasVagina()):
 			saynn("The stud feels the tightness and only gets eager, he slides your pussy over his cock fast and rough until the peak. He lets out a wild horse noise while his cock starts stuffing your womb full of his virile thick seed. Your belly receives an even bigger bump from such a big load. Your eyes roll up from the immense amount of pleasure.")
@@ -280,6 +285,8 @@ func _run():
 		addButton("Continue", "See what happens next", "continue1")
 
 	if(state == "continue1"):
+		playAnimation(StageScene.SexPortal, "tease", {pc="stud", npc="pc", bodyState={exposedCrotch=true, hard=true}})
+
 		saynn("And as the other inmates creep in, wanting to take a turn at breeding you, the stud stops them.")
 
 		saynn("[say=stud]Fuck off, limp dick losers. That was my hole to breed.[/say]")
@@ -289,6 +296,8 @@ func _run():
 		addButton("Leave!", "Gotta run before he changed his mind", "leave!")
 
 	if(state == "leave!"):
+		playAnimation(StageScene.Solo, "stand")
+		
 		saynn("You hold your fleshlights and make your escape!")
 
 		# (scene ends)
@@ -354,6 +363,8 @@ func _run():
 
 
 	if(state == "just_watch"):
+		playAnimation(StageScene.SexFreeStanding, "tease", {pc=getSomeoneWithDick(), npc="pc", npcBodyState={naked=true}})
+		
 		# (You don’t do anything and watch your holes getting teased)
 
 		# (They start fucking your holes in your view)
@@ -516,6 +527,8 @@ func _run():
 
 	if(state == "self-fuck"):
 		# (needs cock)
+		randomSexShouldStop = true
+		playAnimation(StageScene.SexPortalProxy, "fast", {pc=femaleNpcID, npc="pc", npcBodyState={hard=true, naked=true}})
 
 		# (if pussy)
 		if(GM.pc.hasVagina()):
@@ -564,6 +577,9 @@ func _run():
 		addButton("Cum!", "Cum inside yourself", "cum_inside_self")
 
 	if(state == "cum_inside_self"):
+		playAnimation(StageScene.SexPortalProxy, "inside", {pc=femaleNpcID, npc="pc", npcBodyState={hard=true, naked=true}})
+
+		
 		# (if pussy)
 		if(GM.pc.hasVagina()):
 			saynn("The girl starts sliding the pussy fleshlight faster, causing it to make wet noises as your {pc.cock} is hammering at your pleasure point while keeping the folds stretched open.")
@@ -602,6 +618,8 @@ func _run():
 		addButton("Continue", "See what happens next", "continue4")
 
 	if(state == "continue4"):
+		playAnimation(StageScene.Solo, "stand")
+		randomSexShouldStop = true
 		saynn("After all the inmates were mostly satisfied, they just started scattering, leaving a messy you on the floor.")
 
 		saynn("But hey, at least they left all the fleshlights to you. They’re all covered in cum so that’s probably why nobody wants to touch them anymore.")
@@ -612,6 +630,37 @@ func _run():
 
 		addButton("Continue", "That was fun", "endthescene")
 
+var randomSexIsPlaying = false
+var randomSexShouldStop = false
+func playRandomSexAnim():
+	if(randomSexIsPlaying):
+		return
+	randomSexShouldStop = false
+
+	while(true):
+		if(npcsToUse.size() > 0):
+			var randNPC = RNG.pick(npcsToUse)
+			playAnimation(StageScene.SexPortal, RNG.pick(["sex", "fast"]), {pc=randNPC, npc="pc", npcBodyState={naked=true}, bodyState={exposedCrotch=true,hard=true}})
+		
+		randomSexIsPlaying = true
+		yield(get_tree().create_timer(4.0 + RNG.randf_range(0.0, 4.0)/Util.maxi(1, npcsToUse.size())), "timeout")
+		if(randomSexShouldStop):
+			randomSexIsPlaying = false
+			return
+
+func getSomeoneWithDick():
+	var thenpc = NpcFinder.grabNpcIDFromPoolOrGenerate(CharacterPool.Inmates, [[NpcCon.HasPenis], [NpcCon.NoChastity]], InmateGenerator.new(), {NpcGen.HasPenis: true, NpcGen.NoChastity: true})
+	if(thenpc == null || thenpc == ""):
+		return "inmateMaleCanine"
+	GM.main.updateCharacterUntilNow(thenpc)
+	return thenpc
+
+func getAFemale():
+	var thenpc = NpcFinder.grabNpcIDFromPoolOrGenerate(CharacterPool.Inmates, [[NpcCon.Gender, Gender.Female], [NpcCon.HasReachableVagina]], InmateGenerator.new(), {NpcGen.HasVagina: true})
+	if(thenpc == null || thenpc == ""):
+		return "inmateMaleCanine"
+	GM.main.updateCharacterUntilNow(thenpc)
+	return thenpc
 
 func _react(_action: String, _args):
 	if(_action == "fight"):
@@ -629,19 +678,13 @@ func _react(_action: String, _args):
 		GM.pc.addSkillExperience(Skill.SexSlave, 10, "portalpanties_studfuck")
 		
 	if(_action == "continue2"):
-		var randomInmate = [
-			"inmateMaleCanine",
-			"inmateMaleDragon",
-			"inmateMaleEquine",
-			"inmateMaleFeline",
-			"inmateMaleHuman",
-		]
+		var pickedInmate = getSomeoneWithDick()
+		var pickedInmate2 = getSomeoneWithDick()
+		npcsToUse = [pickedInmate, pickedInmate2]
+		playRandomSexAnim()
 		
-		GM.pc.cummedOnBy(RNG.pick(randomInmate))
+		GM.pc.cummedOnBy(RNG.pick(npcsToUse))
 		if(GM.pc.hasVagina()):
-			var pickedInmate = RNG.pick(randomInmate)
-			var pickedInmate2 = RNG.pick(randomInmate)
-			
 			GM.pc.gotVaginaFuckedBy(pickedInmate)
 			GM.pc.cummedInVaginaBy(pickedInmate)
 			GM.pc.gotAnusFuckedBy(pickedInmate2)
@@ -650,11 +693,12 @@ func _react(_action: String, _args):
 			GM.pc.addTallymarkCrotch()
 			GM.pc.addTallymarkButt()
 		else:
-			var pickedInmate = RNG.pick(randomInmate)
-			
 			GM.pc.gotAnusFuckedBy(pickedInmate)
 			GM.pc.cummedInAnusBy(pickedInmate)
+			GM.pc.gotAnusFuckedBy(pickedInmate2)
+			GM.pc.cummedInAnusBy(pickedInmate2)
 			GM.pc.orgasmFrom(pickedInmate)
+			GM.pc.addTallymarkButt()
 			GM.pc.addTallymarkButt()
 			
 		GM.pc.addSkillExperience(Skill.SexSlave, 10, "portalpanties_gangfuck")
@@ -664,20 +708,14 @@ func _react(_action: String, _args):
 		addMessage("Someone also left a memento on your "+BodyWritingsZone.getZoneVisibleName(zone)+"..")
 	
 	if(_action == "continue3"):
-		var randomInmate = [
-			"inmateMaleCanine",
-			"inmateMaleDragon",
-			"inmateMaleEquine",
-			"inmateMaleFeline",
-			"inmateMaleHuman",
-		]
+		var pickedInmate = getSomeoneWithDick()
+		var pickedInmate2 = getSomeoneWithDick()
+		npcsToUse.append_array([pickedInmate, pickedInmate2])
+		playRandomSexAnim()
 		
-		GM.pc.cummedOnBy(RNG.pick(randomInmate))
-		GM.pc.cummedOnBy(RNG.pick(randomInmate))
+		GM.pc.cummedOnBy(RNG.pick(npcsToUse))
+		GM.pc.cummedOnBy(RNG.pick(npcsToUse))
 		if(GM.pc.hasVagina()):
-			var pickedInmate = RNG.pick(randomInmate)
-			var pickedInmate2 = RNG.pick(randomInmate)
-			
 			GM.pc.gotVaginaFuckedBy(pickedInmate)
 			GM.pc.cummedInVaginaBy(pickedInmate)
 			GM.pc.gotAnusFuckedBy(pickedInmate2)
@@ -686,9 +724,6 @@ func _react(_action: String, _args):
 			GM.pc.addTallymarkCrotch()
 			GM.pc.addTallymarkButt()
 		else:
-			var pickedInmate = RNG.pick(randomInmate)
-			var pickedInmate2 = RNG.pick(randomInmate)
-			
 			GM.pc.gotAnusFuckedBy(pickedInmate)
 			GM.pc.cummedInAnusBy(pickedInmate)
 			GM.pc.gotAnusFuckedBy(pickedInmate2)
@@ -702,35 +737,31 @@ func _react(_action: String, _args):
 		addMessage("Someone also left a memento on your "+BodyWritingsZone.getZoneVisibleName(zone)+"..")
 	
 	if(_action == "more"):
-		var randomInmate = [
-			"inmateMaleCanine",
-			"inmateMaleDragon",
-			"inmateMaleEquine",
-			"inmateMaleFeline",
-			"inmateMaleHuman",
-		]
 		for _i in range(RNG.randi_range(3,5)):
 			var randValue = RNG.randi_range(0, 100)
 			if(randValue < 40 && GM.pc.hasVagina()):
-				var pickedInmate = RNG.pick(randomInmate)
+				var pickedInmate = getSomeoneWithDick()
+				npcsToUse.append(pickedInmate)
 				
 				GM.pc.gotVaginaFuckedBy(pickedInmate)
 				GM.pc.cummedInVaginaBy(pickedInmate)
 				GM.pc.addTallymarkCrotch()
 			elif(randValue < 80):
-				var pickedInmate = RNG.pick(randomInmate)
+				var pickedInmate = getSomeoneWithDick()
+				npcsToUse.append(pickedInmate)
 				
 				GM.pc.gotAnusFuckedBy(pickedInmate)
 				GM.pc.cummedInAnusBy(pickedInmate)
 				GM.pc.addTallymarkButt()
 			else:
-				GM.pc.cummedOnBy(RNG.pick(randomInmate))
+				GM.pc.cummedOnBy(RNG.pick(npcsToUse))
 				
 				var zone = BodyWritingsZone.getRandomZone()
 				GM.pc.addBodywriting(zone, BodyWritings.getRandomWritingIDForZone(zone))
 				addMessage("Someone left a memento on your "+BodyWritingsZone.getZoneVisibleName(zone)+"..")
 	
 	if(_action == "cum_inside_self"):
+		randomSexShouldStop = true
 		if(GM.pc.hasVagina()):
 			GM.pc.gotVaginaFuckedBy("pc")
 			GM.pc.cummedInVaginaBy("pc")
@@ -740,6 +771,9 @@ func _react(_action: String, _args):
 			GM.pc.cummedInAnusBy("pc")
 			GM.pc.addTallymarkButt()
 		GM.pc.orgasmFrom("pc")
+	
+	if(_action == "self-fuck"):
+		femaleNpcID = getAFemale()
 	
 	if(_action in ["continue4", "leave!", "offer_20_creds"]):
 		addMessage("Task was updated")
@@ -773,3 +807,17 @@ func getDevCommentary():
 
 func hasDevCommentary():
 	return true
+
+func saveData():
+	var data = .saveData()
+	
+	data["npcsToUse"] = npcsToUse
+	data["femaleNpcID"] = femaleNpcID
+	
+	return data
+	
+func loadData(data):
+	.loadData(data)
+	
+	npcsToUse = SAVE.loadVar(data, "npcsToUse", [])
+	femaleNpcID = SAVE.loadVar(data, "femaleNpcID", "inmateMaleCanine")
