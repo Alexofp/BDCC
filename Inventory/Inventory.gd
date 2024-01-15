@@ -330,6 +330,7 @@ func clear():
 		#item.queue_free()
 	items.clear()
 	
+	
 	for itemSlot in equippedItems.keys():
 		#equippedItems[itemSlot].queue_free()
 		equippedItems[itemSlot].currentInventory = null
@@ -341,6 +342,18 @@ func clearEquippedItems():
 		#equippedItems[itemSlot].queue_free()
 		equippedItems[itemSlot].currentInventory = null
 	equippedItems.clear()
+	emit_signal("equipped_items_changed")
+	
+func clearEquippedItemsKeepPersistent():
+	var persistent = {}
+	for itemSlot in equippedItems.keys():
+		#equippedItems[itemSlot].queue_free()
+		if(equippedItems[itemSlot].isPersistent()):
+			persistent[itemSlot] = equippedItems[itemSlot]
+		else:
+			equippedItems[itemSlot].currentInventory = null
+	equippedItems.clear()
+	equippedItems = persistent
 	emit_signal("equipped_items_changed")
 
 func getEquippedItemsWithBuff(buffID):
