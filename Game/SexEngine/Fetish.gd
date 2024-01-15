@@ -35,3 +35,6 @@ const RimmingReceiving = "RimmingReceiving"
 
 const FeetplayGiving = "FeetplayGiving"
 const FeetplayReceiving = "FeetplayReceiving"
+
+const HypnosisHypnotist = "HypnosisHypnotist"
+const HypnosisSubject = "HypnosisSubject"

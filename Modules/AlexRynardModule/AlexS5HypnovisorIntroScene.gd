@@ -97,6 +97,28 @@ func _run():
 
 		addButton("Yes", "Start the experiment", "do_start")
 		addButton("RED", "Say it", "do_prestart_red")
+		addButton("Other visors", "You've seen similar gadgets before", "mark_zeros")
+	if(state == "mark_zeros"):
+		saynn("[say=pc]You know, I've seen a similar piece of kit already.[/say]")
+
+		saynn("You describe the visors you've ran into, but find yourself downplaying their effects. Even so, Alex frowns at the description.")
+
+		saynn("[say=alexrynard]I did start off by modifying the software in some old AR goggles meant for assisting with disassembly, but I never got very far before the whole box went missing. And besides, it became obvious very quickly they'd never be good enough for my purposes.[/say]")
+
+		saynn("The foxy chuckles.")
+		
+		saynn("[say=alexrynard]Frankly, I throught the night shift nicked them to watch porn or something like that.[/say]")
+		
+		saynn("[say=pc]That [i]would[/i] be a reasonable explanation.[/say]")
+		
+		saynn("[say=alexrynard]No great loss, mind you. They were basically useless for their intended purpose - the blueprints were out of date and in a proprietary data format.[/say]")
+		
+		saynn("He adjusts the visor on your head to sit a little better.")
+		
+		saynn("[say=alexrynard]So, you ready?[/say]")
+		
+		addButton("Yes", "Start the experiment", "do_start")
+		addButton("RED", "Say it", "do_prestart_red")
 	if(state == "do_prestart_red"):
 		saynn("You don't know why but you have a strong desire to say it now..")
 
@@ -459,6 +481,9 @@ func _react(_action: String, _args):
 
 	if(_action == "stand_in_middle"):
 		processTime(5*60)
+
+	if(_action == "mark_zeros"):
+		setFlag("HypnokinkModule.TalkedToAlexAboutVisors", true)
 
 	if(_action == "wear_disabled_goggles"):
 		processTime(3*60)
