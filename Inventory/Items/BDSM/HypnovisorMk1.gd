@@ -9,7 +9,7 @@ func getVisibleName():
 	return "Hypnovisor Mk1"
 	
 func getDescription():
-	return "Special prototype goggles that are supposed to make you happy. What the heck is a 'YOT'?"
+	return "Special prototype goggles that were developed by Alex Rynard to help cure depression. What the heck is a 'YOT'?"
 
 func getClothingSlot():
 	return InventorySlot.Eyes

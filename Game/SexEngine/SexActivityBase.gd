@@ -74,6 +74,9 @@ func satisfyGoals():
 	for goalID in goalData:
 		sexEngine.satisfyGoal(domInfo, goalID, subInfo)
 
+func failGoals():
+	satisfyGoals()
+
 func satisfyGoal(goalID):
 	var sexEngine = getSexEngine()
 	sexEngine.satisfyGoal(domInfo, goalID, subInfo)
