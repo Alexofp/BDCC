@@ -200,12 +200,10 @@ func triggerAutosave():
 		GM.ui.say("[/i][/center]\n")
 	isAutoSaving = false
 
-func getAllSavePaths():
+func getAllSavePathsInFolder(path = "user://saves/"):
 	var saves = []
-	var path = "user://saves/"
 	
 	var dir = Directory.new()
-	dir.open(path)
 	var hasHolder = dir.open(path)
 	if(hasHolder != OK):
 		return []
@@ -221,6 +219,14 @@ func getAllSavePaths():
 			saves.append(path.plus_file(subpath))
 		subpath = dir.get_next()
 	dir.list_dir_end()
+	return saves
+
+func getAllSavePaths():
+	var saves = getAllSavePathsInFolder("user://saves/")
+	if(OS.get_name() == "Android"):
+		var externalDir:String = OS.get_system_dir(OS.SYSTEM_DIR_DOCUMENTS)
+		var androidSavesDir = externalDir.plus_file("BDCCSaves")
+		saves.append_array(getAllSavePathsInFolder(androidSavesDir))
 	return saves
 
 func canResumeGame():
