@@ -51,11 +51,19 @@ func createBodyparts():
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("caninetail"))
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("digilegs"))
 
-
-func createEquipment():
-	getInventory().equipItem(GlobalRegistry.createItemNoID("inmatecollar"))
-	getInventory().equipItem(GlobalRegistry.createItemNoID("inmateuniform"))
-	getInventory().equipItem(GlobalRegistry.createItemNoID("JackiChastityPiercings"))
+func getDefaultEquipment():
+	var jackiModule = GlobalRegistry.getModule("JackiModule")
+	
+	var defaultStuff = ["inmatecollar", "JackiChastityPiercings"]
+	
+	if(jackiModule.shouldWearSportsBra()):
+		defaultStuff.append("sportyTop")
+	if(jackiModule.shouldWearSportsShorts()):
+		defaultStuff.append("sportyBriefs")
+	if(!jackiModule.shouldUnderwear()):
+		defaultStuff.append("inmateuniform")
+	
+	return defaultStuff
 
 func updateBodyparts():
 	var jackiModule = GlobalRegistry.getModule("JackiModule")

@@ -27,5 +27,5 @@ func getFemininity() -> int:
 func createBodyparts():
 	pass
 
-func createEquipment():
-	getInventory().equipItem(GlobalRegistry.createItemNoID("AlexExoskeleton"))
+func getDefaultEquipment():
+	return ["AlexExoskeleton"]

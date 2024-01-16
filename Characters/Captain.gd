@@ -107,11 +107,8 @@ func createBodyparts():
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("caninehead"))
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("combedbackhair"))
 
-func createEquipment():
-	getInventory().equipItem(GlobalRegistry.createItemNoID("OfficialClothes"))
-
-
-
+func getDefaultEquipment():
+	return ["OfficialClothes"]
 
 func reactRestraint(restraintType, restraintAmount, isGettingForced):
 	if(!isGettingForced):

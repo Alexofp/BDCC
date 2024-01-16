@@ -94,3 +94,6 @@ func getPossibleActions():
 
 func getInventoryImage():
 	return "res://Images/Items/strapons/human.png"
+
+func alwaysRecoveredAfterSex():
+	return true

@@ -7,10 +7,12 @@ func getVisibleName():
 	return "Ride+Choke (Anal)"
 
 func isPossible(_sexEngine, _domInfo, _subInfo, _data):
-	if(_domInfo.getChar().hasReachableAnus() && _subInfo.getChar().hasReachablePenis()):
-		return true
+	if(!_domInfo.getChar().hasReachableAnus() || !_subInfo.getChar().hasReachablePenis()):
+		return false
+	if(_domInfo.getChar().hasBoundArms() || _domInfo.getChar().hasBlockedHands()):
+		return false
 	
-	return false
+	return true
 
 func getSubGoals(_sexEngine, _domInfo, _subInfo, _data):
 	return {

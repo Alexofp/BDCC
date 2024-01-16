@@ -135,9 +135,8 @@ func createBodyparts():
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("foxtail"))
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("digilegs"))
 
-func createEquipment():
-	getInventory().equipItem(GlobalRegistry.createItemNoID("EngineerClothes"))
-	getInventory().equipItem(GlobalRegistry.createItemNoID("plainBriefs"))
+func getDefaultEquipment():
+	return ["EngineerClothes", "plainBriefs"]
 
 func _getAttacks():
 	return ["NpcScratch", "StrongBite", "simplekickattack", "HeatGrenade", "BolaThrow", "ForceBlindfoldPC", "trygetupattack"]

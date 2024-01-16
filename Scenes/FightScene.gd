@@ -464,7 +464,7 @@ func _react(_action: String, _args):
 					addMessage("You recovered "+item.getAStackName())
 				else:
 					addMessage("You lost "+item.getAStackName())
-			if(enemyCharacter.has_method("resetEquipment")):
+			if(!enemyCharacter.isDynamicCharacter()):
 				enemyCharacter.resetEquipment()
 		
 		enemyCharacter.onFightEnd(getContexForEnemy())

@@ -65,10 +65,8 @@ func createBodyparts():
 	giveBodypartUnlessSame(penis)
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("caninetail"))
 
-func createEquipment():
-	#getInventory().equipItem(GlobalRegistry.createItemNoID("GuardArmor"))
-	#getInventory().equipItem(GlobalRegistry.createItemNoID("AndroidSuit"))
-	pass
+func getDefaultEquipment():
+	return []
 
 func getFluidType(_fluidSource):
 	return "BlackGoo"

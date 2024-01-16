@@ -39,5 +39,5 @@ func createBodyparts():
 	breasts.size = 2
 	giveBodypartUnlessSame(breasts)
 
-func createEquipment():
-	getInventory().equipItem(GlobalRegistry.createItemNoID("AndroidSuit"))
+func getDefaultEquipment():
+	return ["AndroidSuit"]

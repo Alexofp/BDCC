@@ -98,3 +98,6 @@ func updateDoll(doll: Doll3D):
 
 func getInventoryImage():
 	return "res://Images/Items/breastpump/penisPump.png"
+
+func alwaysRecoveredAfterSex():
+	return true

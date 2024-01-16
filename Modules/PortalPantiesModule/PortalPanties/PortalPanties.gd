@@ -34,6 +34,9 @@ func isRestraint():
 func isImportant():
 	return true
 
+func canForceOntoNpc():
+	return false
+
 func generateRestraintData():
 	restraintData = load("res://Modules/PortalPantiesModule/PortalPanties/RestraintPortalPanties.gd").new()
 	restraintData.setLevel(calculateBestRestraintLevel())

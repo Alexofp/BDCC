@@ -96,5 +96,5 @@ func getLootTable(_battleName):
 func getParentCharacterID():
 	return "nova"
 
-func createEquipment():
-	getInventory().equipItem(GlobalRegistry.createItemNoID("GuardArmor"))
+func getDefaultEquipment():
+	return ["GuardArmor"]

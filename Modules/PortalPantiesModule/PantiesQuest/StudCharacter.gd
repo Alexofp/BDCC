@@ -108,9 +108,8 @@ func createBodyparts():
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("hoofs"))
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("longhair"))
 
-func createEquipment():
-	getInventory().equipItem(GlobalRegistry.createItemNoID("inmatecollar"))
-	getInventory().equipItem(GlobalRegistry.createItemNoID("inmateuniformHighsec"))
+func getDefaultEquipment():
+	return ["inmatecollar", "inmateuniformHighsec"]
 
 func getLootTable(_battleName):
 	return InmateLoot.new()

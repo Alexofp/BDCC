@@ -34,38 +34,12 @@ func _initScene(_args = []):
 	else:
 		sexEngine.initSexType(SexType.DefaultSex)
 	
-	#sexEngine.initPeople(top, "pc")
-	#sexEngine.initPeople(top, "rahi")
-	
-
-	#sexEngine.initPeople("pc", top)
-	
-	#if(RNG.chance(50)):
-	#	sexEngine.initPeople(newCharacter.id, "pc")
-	#else:
-	#	sexEngine.initPeople("pc", newCharacter.id)
-	
-	#sexEngine.initPeople(top, "pc")
-	#sexEngine.initPeople(top, "rahi")
-	#sexEngine.initPeople("alexrynard", "rahi")
-	
 	sexEngine.start()
-	#addCharacter(top)
-	#addCharacter("alexrynard")
-	#addCharacter("rahi")
-	#runScene("FightScene", [newCharacter.id])
-	
-
-
-#func _reactInit():
-#	updateDomsAndSubs()
 
 func _run():
 	if(state == ""):
 		sexEngine.playAnimation()
-		#saynn(whatHappened)
 		saynn(sexEngine.getFinalText())
-		
 		
 		if(sexEngine.hasSexEnded()):
 			pass
@@ -99,7 +73,18 @@ func _run():
 			#addButton("Process", "Process", "processTurn")
 			
 		if(sexEngine.hasSexEnded()):
-			addButton("LEAVE", "The sex has ended", "endthescene")
+			if(sexEngine.canKeepItemsAfterSex()):
+				var itemNames = []
+				var itemsCanRecover = sexEngine.getRecovarableItemsAfterSex()
+				for item in itemsCanRecover:
+					itemNames.append(item.getVisibleName())
+				
+				saynn("There are some items that you can recover ("+Util.join(itemNames, ", ")+"). Otherwise, they will stay where they are.")
+				
+				addButton("Recover items", "Recover the items", "recoverandleave")
+				addButton("LEAVE", "Just leave", "endthescene")
+			else:
+				addButton("LEAVE", "The sex has ended", "endthescene")
 		else:
 			if(sexEngine.isDom("pc")):
 				addButtonAt(14, "END SEX", "Enough fun for now", "stopsex")
@@ -110,6 +95,11 @@ func _run():
 func _react(_action: String, _args):
 	if(_action == "stopsex"):
 		sexEngine.endSex()
+		return
+	
+	if(_action == "recoverandleave"):
+		sexEngine.keepItemsAfterSex()
+		endScene()
 		return
 	
 	if(_action == "simulatesex"):

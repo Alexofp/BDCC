@@ -192,7 +192,5 @@ func reactRestraint(restraintType, restraintAmount, isGettingForced):
 		])
 	return null
 
-func createEquipment():
-	getInventory().equipItem(GlobalRegistry.createItemNoID("NurseClothes"))
-	getInventory().equipItem(GlobalRegistry.createItemNoID("LaceBra"))
-	getInventory().equipItem(GlobalRegistry.createItemNoID("LacePanties"))
+func getDefaultEquipment():
+	return ["NurseClothes", "LaceBra", "LacePanties"]

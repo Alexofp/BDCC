@@ -185,6 +185,7 @@ func getDynamicCharactersPools():
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	GM.main = self
 	createStaticCharacters()
 	call_deferred("updateStaticCharacters")
 	
@@ -195,8 +196,7 @@ func _ready():
 	add_child(pc)
 	
 	randomize()
-	GM.main = self
-
+	
 	startNewGame()
 	
 	runCurrentScene()

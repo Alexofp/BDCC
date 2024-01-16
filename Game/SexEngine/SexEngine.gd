@@ -959,6 +959,44 @@ func sexShouldEnd():
 	return true
 	#return false
 
+func getRecovarableItemsAfterSex():
+	var result = []
+	if(trackedItems.has("pc")):
+		for trackedItem in trackedItems["pc"]:
+			var character:BaseCharacter = GlobalRegistry.getCharacter(trackedItem[0])
+			var item:ItemBase = character.getInventory().getItemByUniqueID(trackedItem[1])
+			if(item == null):
+				continue
+			if(!item.isPersistent() && !item.alwaysRecoveredAfterSex()):
+				result.append(item)
+	return result
+
+func canKeepItemsAfterSex():
+	return getRecovarableItemsAfterSex().size() > 0
+
+func keepItemsAfterSex(onlyAlwaysKept = false):
+	if(trackedItems.has("pc")):
+		var newPCTracked = []
+		
+		for trackedItem in trackedItems["pc"]:
+			var character:BaseCharacter = GlobalRegistry.getCharacter(trackedItem[0])
+			var item:ItemBase = character.getInventory().getItemByUniqueID(trackedItem[1])
+			if(item == null):
+				continue
+			if(!item.isPersistent() && (!onlyAlwaysKept || (onlyAlwaysKept && item.alwaysRecoveredAfterSex()))):
+				character.getInventory().removeItem(item)
+				character.getInventory().removeEquippedItem(item)
+				var restraintData:RestraintData = item.getRestraintData()
+				if(restraintData != null):
+					restraintData.onStruggleRemoval()
+			
+				GM.pc.getInventory().addItem(item)
+				GM.main.addMessage("You recovered "+item.getAStackName())
+			else:
+				newPCTracked.append(trackedItem)
+				
+		trackedItems["pc"] = newPCTracked
+
 func endSex():
 	if(sexEnded):
 		return
@@ -969,22 +1007,7 @@ func endSex():
 	for activity in activities:
 		activity.endActivity()
 	
-	if(trackedItems.has("pc")):
-		for trackedItem in trackedItems["pc"]:
-			var character:BaseCharacter = GlobalRegistry.getCharacter(trackedItem[0])
-			var item:ItemBase = character.getInventory().getItemByUniqueID(trackedItem[1])
-			if(item == null):
-				continue
-			if(!item.isPersistent()):
-				character.getInventory().removeItem(item)
-				character.getInventory().removeEquippedItem(item)
-				var restraintData:RestraintData = item.getRestraintData()
-				if(restraintData != null):
-					restraintData.onStruggleRemoval()
-			
-				GM.pc.getInventory().addItem(item)
-				GM.main.addMessage("You recovered "+item.getAStackName())
-	trackedItems.erase("pc")
+	keepItemsAfterSex(true)
 	
 	for domID in doms:
 		var domInfo = doms[domID]
