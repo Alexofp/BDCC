@@ -105,6 +105,9 @@ func getCharacter(charID):
 func getCharacters():
 	return staticCharacters
 
+func getDynamicCharacters():
+	return dynamicCharacters
+
 func addDynamicCharacter(character, printDebug = true):
 	if(!(character.isDynamicCharacter())):
 		assert(false, "addDynamicCharacter() Received a non-dynamic character")

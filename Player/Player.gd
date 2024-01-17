@@ -918,9 +918,6 @@ func damageClothes():
 				return true
 	return false
 
-func isWearingPortalPanties():
-	return getInventory().hasItemIDEquipped("PortalPanties")
-
 func hasTightHoles():
 	var maxLooseness = 0.0
 	var bodypartsToCheck = [BodypartSlot.Vagina, BodypartSlot.Anus]
