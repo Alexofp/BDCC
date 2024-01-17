@@ -388,8 +388,9 @@ func hoursPassed(_howmuch):
 		else:
 			# Npcs occasionally check if they have all the items that they should have
 			var checkEquipmentRandomlyChance = sqrt(_howmuch * 10.0)
-			if(RNG.chance(checkEquipmentRandomlyChance)):
-				restockEquipmentChance(100)
+			if(RNG.chance(checkEquipmentRandomlyChance) && !hasBlockedHands() && !hasBoundArms()):
+				#restockEquipmentChance(100)
+				resetEquipment()
 
 	GM.GES.callGameExtenders(ExtendGame.npcHoursPassed, [self, _howmuch])
 

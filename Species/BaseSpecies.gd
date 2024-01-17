@@ -2,6 +2,7 @@ extends Reference
 class_name Species
 
 const Any = "any"
+const AnyNPC = "anynpc" # Dynamic npcs can generate with bodyparts that are tagged with this
 const Human = "human"
 const Feline = "feline"
 const Dragon = "dragon"
@@ -145,4 +146,15 @@ func getSkinType():
 func generateSkinColors():
 	return ColorUtils.generateGenericFurryColors()
 
-
+func onDynamicNpcCreation(_npc, _args):
+	# Some examples of what you can do here
+	
+	## Will make every generated npc bald if uncommented
+	#_npc.giveBodypartUnlessSame(GlobalRegistry.createBodypart("baldhair"))
+	
+	## Will make the npc pink and have an empty skin if uncommented
+	#_npc.pickedSkinRColor = Color.pink
+	#_npc.pickedSkinGColor = Color.pink
+	#_npc.pickedSkinBColor = Color.pink
+	#_npc.pickedSkin = "EmptySkin"
+	pass
