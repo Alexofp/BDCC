@@ -6,8 +6,8 @@ func canUnlockWithKey():
 func alwaysSavedWhenStruggledOutOf():
 	return true
 
-func getLevelDamage():
-	return .getLevelDamage() * 0.2
+#func getLevelDamage():
+#	return .getLevelDamage() * 0.2
 
 func doStruggle(_pc, _minigame):
 	var _handsFree = !_pc.hasBlockedHands()
@@ -22,10 +22,10 @@ func doStruggle(_pc, _minigame):
 	var damage = 0
 	var stamina = 0
 	
-	if(failChance(_pc, 10) || (_minigame < 0.99)):
+	if(failChance(_pc, 10) || (_minigame < 0.7)):
 		text = "{user.name}'s chastity cage BEEPS.. And then suddenly [b]shocks[/b] {user.his} {user.penis}!"
-		stamina = 25
-		pain = 20
+		stamina = 0
+		pain = RNG.randi_range(10, 20)
 	else:
 		if(_handsFree && _armsFree):
 			text = "{user.name} tugs on {user.his} chastity cage, trying to take it off."

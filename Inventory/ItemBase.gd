@@ -392,7 +392,12 @@ func calculateBestRestraintLevel():
 
 func canForceOntoNpc():
 	return isRestraint()
-	
+
+func canBeEasilyRemovedByDom():
+	if(restraintData != null):
+		return restraintData.canBeEasilyRemovedByDom()
+	return false
+
 func onEquippedBy(_otherCharacter, _forced = false):
 	pass
 

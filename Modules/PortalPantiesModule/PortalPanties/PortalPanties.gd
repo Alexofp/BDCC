@@ -20,7 +20,7 @@ func getBuffs():
 		]
 
 func getPrice():
-	return 20
+	return 30
 
 func canSell():
 	return false
@@ -35,11 +35,14 @@ func isImportant():
 	return true
 
 func canForceOntoNpc():
-	return false
+	return true
+
+func canBeEasilyRemovedByDom():
+	return true
 
 func generateRestraintData():
 	restraintData = load("res://Modules/PortalPantiesModule/PortalPanties/RestraintPortalPanties.gd").new()
-	restraintData.setLevel(calculateBestRestraintLevel())
+	restraintData.setLevel(10)
 
 func getTakingOffStringLong(withS):
 	if(withS):

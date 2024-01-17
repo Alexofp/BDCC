@@ -1121,7 +1121,21 @@ func addTrackedGear(ownerID, whoWearsItID, itemUniqueID):
 	if(!trackedItems.has(ownerID)):
 		trackedItems[ownerID] = []
 	
+	for entry in trackedItems[ownerID]:
+		if(entry[1] == itemUniqueID && entry[0] == whoWearsItID):
+			return
+	
 	trackedItems[ownerID].append([whoWearsItID, itemUniqueID])
+
+func removeTrackedGear(ownerID, whoWearsItID, itemUniqueID):
+	if(!trackedItems.has(ownerID)):
+		return false
+	
+	for entry in trackedItems[ownerID]:
+		if(entry[1] == itemUniqueID && entry[0] == whoWearsItID):
+			trackedItems[ownerID].erase(entry)
+			return true
+	return false
 
 func checkGearIsFromPC(whoWearsItID, itemUniqueID):
 	if(!trackedItems.has("pc")):
