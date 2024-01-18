@@ -116,4 +116,4 @@ func saveData():
 func loadData(data):
 	.loadData(data)
 	
-	coversPenis = SAVE.loadVar(data, "coversPenis", 2)
+	coversPenis = SAVE.loadVar(data, "coversPenis", true)

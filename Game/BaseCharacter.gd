@@ -1962,6 +1962,9 @@ func addArousal(adda:float):
 	arousal += adda
 	arousal = clamp(arousal, 0.0, 1.0)
 
+func setArousal(newa:float):
+	arousal = clamp(newa, 0.0, 1.0)
+
 func getConsciousness() -> float:
 	return consciousness
 

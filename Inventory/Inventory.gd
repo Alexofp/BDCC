@@ -131,6 +131,13 @@ func getAmountOf(itemID):
 		return 0
 	return item.amount
 
+func getUniqueAmountOf(itemID):
+	var result = 0
+	for item in items:
+		if(item.id == itemID):
+			result += 1
+	return result
+
 func hasXOf(itemID, amount):
 	var item = getFirstOf(itemID)
 	if(item == null):
