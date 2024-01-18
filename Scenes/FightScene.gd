@@ -123,7 +123,11 @@ func _run():
 			saynn("You can't judge enemy's restraints while blind")
 		
 		var isInCategory = (restraintsPickedCategory != "")
-		var usableItems = GM.pc.getInventory().getAllCombatUsableRestraints()
+		var usableItems
+		if(enemyCharacter.isDynamicCharacter()):
+			usableItems = GM.pc.getInventory().getAllCombatUsableRestraints()
+		else:
+			usableItems = GM.pc.getInventory().getAllCombatUsableRestraintsForStaticNpc()
 		var countsByItemID = {}
 		if(isInCategory):
 			var newUsable = []

@@ -49,7 +49,10 @@ func getStartActions(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexS
 	var usableItems = []
 	
 	if(_domInfo.getChar().isPlayer()):
-		usableItems = dom.getInventory().getAllCombatUsableRestraints()
+		if(_subInfo.getChar().isDynamicCharacter()):
+			usableItems = dom.getInventory().getAllCombatUsableRestraints()
+		else:
+			usableItems = dom.getInventory().getAllCombatUsableRestraintsForStaticNpc()
 	else:
 		var itemTagToUse = ItemTag.CanBeForcedByGuards
 		if(_sexEngine.getSexTypeID() == SexType.StocksSex):#(isStocksSex()):

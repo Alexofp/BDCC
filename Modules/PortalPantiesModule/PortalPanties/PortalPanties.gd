@@ -51,6 +51,9 @@ func isImportant():
 func canForceOntoNpc():
 	return true
 
+func canForceOntoStaticNpc(): # Messes with the content of static npcs
+	return false
+
 func canBeEasilyRemovedByDom():
 	return true
 

@@ -393,6 +393,9 @@ func calculateBestRestraintLevel():
 func canForceOntoNpc():
 	return isRestraint()
 
+func canForceOntoStaticNpc():
+	return canForceOntoNpc()
+
 func canBeEasilyRemovedByDom():
 	if(restraintData != null):
 		return restraintData.canBeEasilyRemovedByDom()
