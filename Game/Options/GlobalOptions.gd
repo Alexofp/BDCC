@@ -12,6 +12,10 @@ var playerPregnancyTimeDays: int
 var npcPregnancyTimeDays: int
 var impregnationChanceModifier: int
 
+# Bondage options
+var hardStruggleEnabled: bool = false
+var maximumBondageLevel = 5
+
 var shouldScaleUI: bool = true
 var uiScaleMultiplier = 1.0
 var requireDoubleTapOnMobile = false
@@ -56,6 +60,8 @@ func resetToDefaults():
 	playerPregnancyTimeDays = 5
 	npcPregnancyTimeDays = 5
 	impregnationChanceModifier = 100
+	hardStruggleEnabled = false
+	maximumBondageLevel = 5
 	shouldScaleUI = true
 	uiScaleMultiplier = 1.0
 	showSpeakerName = true
@@ -123,6 +129,12 @@ func getImpregnationChanceModifier() -> float:
 	var resultValue:float = float(impregnationChanceModifier) / 100.0
 	resultValue = clamp(resultValue, 0.0, 1000.0)
 	return resultValue
+
+func isHardStruggleEnabled():
+	return hardStruggleEnabled
+
+func getMaximumBondageLevel():
+	return maximumBondageLevel
 
 func shouldShowSpeakerName():
 	return showSpeakerName
@@ -255,6 +267,30 @@ func getChangeableOptions():
 					"id": "impregnationChanceModifier",
 					"type": "int",
 					"value": impregnationChanceModifier,
+				},
+			]
+		},
+		{
+			"name": "Bondage settings",
+			"id": "bondage",
+			"options": [
+				{
+					"name": "Hard Struggle",
+					"description": "If you feel like Houdini turn this option on. No instant escape and longer struggle at higher levels.",
+					"id": "hardStruggleEnabled",
+					"type": "checkbox",
+					"value": hardStruggleEnabled
+				},
+				{
+					"name": "Maximum bondage level",
+					"description": "Maximum level of normal bondage stuff, default is 5, reasonable values are up to 10",
+					"id": "maximumBondageLevel",
+					"type": "int",
+					"value": maximumBondageLevel,
+					"range": {
+						"min": 5,
+						"max": 20
+					}
 				},
 			]
 		},
@@ -606,6 +642,12 @@ func applyOption(categoryID, optionID, value):
 		if(optionID == "impregnationChanceModifier"):
 			impregnationChanceModifier = value
 	
+	if categoryID == "bondage":
+		if optionID == "hardStruggleEnabled":
+			hardStruggleEnabled = value
+		if optionID == "maximumBondageLevel":
+			maximumBondageLevel = value
+	
 	if(categoryID == "other"):
 		if(optionID == "fetchLatestRelease"):
 			fetchNewRelease = value
@@ -686,6 +728,8 @@ func saveData():
 		"playerPregnancyTimeDays": playerPregnancyTimeDays,
 		"npcPregnancyTimeDays": npcPregnancyTimeDays,
 		"impregnationChanceModifier": impregnationChanceModifier,
+		"hardStruggleEnabled": hardStruggleEnabled,
+		"maximumBondageLevel": maximumBondageLevel,
 		"shouldScaleUI": shouldScaleUI,
 		"uiScaleMultiplier": uiScaleMultiplier,
 		"uiButtonSize": uiButtonSize,
@@ -725,6 +769,8 @@ func loadData(data):
 	playerPregnancyTimeDays = loadVar(data, "playerPregnancyTimeDays", 5)
 	npcPregnancyTimeDays = loadVar(data, "npcPregnancyTimeDays", 5)
 	impregnationChanceModifier = loadVar(data, "impregnationChanceModifier", 100)
+	hardStruggleEnabled = loadVar(data, "hardStruggleEnabled", false)
+	maximumBondageLevel = loadVar(data, "maximumBondageLevel", 5)
 	shouldScaleUI = loadVar(data, "shouldScaleUI", true)
 	uiScaleMultiplier = loadVar(data, "uiScaleMultiplier", 1.0)
 	uiButtonSize = loadVar(data, "uiButtonSize", 0)
