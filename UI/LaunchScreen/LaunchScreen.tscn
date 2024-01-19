@@ -73,8 +73,8 @@ size_flags_vertical = 3
 script = ExtResource( 3 )
 
 [node name="ModList" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/PanelContainer/VBoxContainer/ScrollContainer"]
-margin_right = 1.0
-margin_bottom = 50.0
+margin_right = 411.0
+margin_bottom = 630.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
