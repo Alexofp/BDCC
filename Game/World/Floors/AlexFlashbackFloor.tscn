@@ -1,0 +1,339 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Game/World/GameRoom.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Game/World/SubWorld.tscn" type="PackedScene" id=2]
+
+[node name="AlexFlashbackFloor" instance=ExtResource( 2 )]
+
+[node name="AlexFlashRoom" parent="." index="0" instance=ExtResource( 1 )]
+self_modulate = Color( 0.7, 0.7, 0.7, 1 )
+roomName = "Alex's Apartment"
+roomID = "alexf_apart"
+canWest = false
+canEast = false
+roomColor = 8
+
+[node name="AlexFlashRoom2" parent="." index="1" instance=ExtResource( 1 )]
+self_modulate = Color( 0.7, 0.7, 0.7, 1 )
+position = Vector2( 64, 0 )
+canWest = false
+canEast = false
+roomColor = 8
+
+[node name="AlexFlashRoom36" parent="." index="2" instance=ExtResource( 1 )]
+self_modulate = Color( 0.7, 0.7, 0.7, 1 )
+position = Vector2( -192, 64 )
+canNorth = false
+canSouth = false
+roomColor = 8
+
+[node name="AlexFlashRoom37" parent="." index="3" instance=ExtResource( 1 )]
+self_modulate = Color( 0.7, 0.7, 0.7, 1 )
+position = Vector2( -192, 128 )
+canNorth = false
+canSouth = false
+roomColor = 8
+
+[node name="AlexFlashRoom38" parent="." index="4" instance=ExtResource( 1 )]
+self_modulate = Color( 0.7, 0.7, 0.7, 1 )
+position = Vector2( -64, 128 )
+canNorth = false
+canSouth = false
+roomColor = 8
+
+[node name="AlexFlashRoom39" parent="." index="5" instance=ExtResource( 1 )]
+self_modulate = Color( 0.7, 0.7, 0.7, 1 )
+position = Vector2( -64, 64 )
+canNorth = false
+canSouth = false
+roomColor = 8
+
+[node name="AlexFlashRoom40" parent="." index="6" instance=ExtResource( 1 )]
+self_modulate = Color( 0.7, 0.7, 0.7, 1 )
+position = Vector2( 128, -128 )
+canWest = false
+canEast = false
+roomColor = 8
+
+[node name="AlexFlashRoom41" parent="." index="7" instance=ExtResource( 1 )]
+self_modulate = Color( 0.7, 0.7, 0.7, 1 )
+position = Vector2( 192, -128 )
+canWest = false
+canEast = false
+roomColor = 8
+
+[node name="AlexFlashRoom42" parent="." index="8" instance=ExtResource( 1 )]
+self_modulate = Color( 0.7, 0.7, 0.7, 1 )
+position = Vector2( 256, -128 )
+canWest = false
+canEast = false
+roomColor = 8
+
+[node name="AlexFlashRoom43" parent="." index="9" instance=ExtResource( 1 )]
+self_modulate = Color( 0.7, 0.7, 1, 1 )
+position = Vector2( -128, -192 )
+roomName = "Canteen"
+roomID = "alexf_bar"
+roomSprite = 2
+roomColor = 3
+
+[node name="AlexFlashRoom44" parent="." index="10" instance=ExtResource( 1 )]
+position = Vector2( -384, -64 )
+scale = Vector2( 1, 1 )
+roomName = "Hangar"
+roomID = "alexf_hangar"
+canWest = false
+canNorth = false
+canEast = false
+canSouth = false
+gridColor = 5
+
+[node name="AlexFlashRoom49" parent="." index="11" instance=ExtResource( 1 )]
+self_modulate = Color( 0.7, 0.7, 1, 1 )
+position = Vector2( 512, 128 )
+scale = Vector2( 1, 1 )
+roomName = "Expo Hangar"
+roomID = "alexf_expo"
+canWest = false
+canNorth = false
+canEast = false
+canSouth = false
+roomColor = 3
+gridColor = 7
+
+[node name="AlexFlashRoom45" parent="." index="12" instance=ExtResource( 1 )]
+position = Vector2( -384, 0 )
+scale = Vector2( 1, 1 )
+roomName = "Hangar"
+canWest = false
+canNorth = false
+canEast = false
+canSouth = false
+gridColor = 5
+
+[node name="AlexFlashRoom46" parent="." index="13" instance=ExtResource( 1 )]
+position = Vector2( -384, 64 )
+scale = Vector2( 1, 1 )
+roomName = "Hangar"
+canWest = false
+canNorth = false
+canEast = false
+canSouth = false
+gridColor = 5
+
+[node name="AlexFlashRoom4" parent="." index="14" instance=ExtResource( 1 )]
+self_modulate = Color( 0.5, 0.5, 0.5, 1 )
+position = Vector2( 0, -64 )
+roomColor = 7
+
+[node name="AlexFlashRoom5" parent="." index="15" instance=ExtResource( 1 )]
+self_modulate = Color( 0.5, 0.5, 0.5, 1 )
+position = Vector2( -64, -64 )
+roomColor = 7
+gridColor = 8
+
+[node name="AlexFlashRoom6" parent="." index="16" instance=ExtResource( 1 )]
+self_modulate = Color( 0.5, 0.5, 0.5, 1 )
+position = Vector2( -64, -128 )
+roomName = "Station's Corridor"
+roomID = "alexf_randomcor"
+roomColor = 7
+
+[node name="AlexFlashRoom7" parent="." index="17" instance=ExtResource( 1 )]
+self_modulate = Color( 0.5, 0.5, 0.5, 1 )
+position = Vector2( -64, -192 )
+roomColor = 7
+
+[node name="AlexFlashRoom8" parent="." index="18" instance=ExtResource( 1 )]
+self_modulate = Color( 0.5, 0.5, 0.5, 1 )
+position = Vector2( 0, -192 )
+roomColor = 7
+
+[node name="AlexFlashRoom9" parent="." index="19" instance=ExtResource( 1 )]
+self_modulate = Color( 0.5, 0.5, 0.5, 1 )
+position = Vector2( 64, -192 )
+roomColor = 7
+
+[node name="AlexFlashRoom10" parent="." index="20" instance=ExtResource( 1 )]
+self_modulate = Color( 0.5, 0.5, 0.5, 1 )
+position = Vector2( 64, -64 )
+roomColor = 7
+
+[node name="AlexFlashRoom11" parent="." index="21" instance=ExtResource( 1 )]
+self_modulate = Color( 0.5, 0.5, 0.5, 1 )
+position = Vector2( 128, -64 )
+roomColor = 7
+
+[node name="AlexFlashRoom12" parent="." index="22" instance=ExtResource( 1 )]
+self_modulate = Color( 0.5, 0.5, 0.5, 1 )
+position = Vector2( 192, -64 )
+roomColor = 7
+
+[node name="AlexFlashRoom13" parent="." index="23" instance=ExtResource( 1 )]
+self_modulate = Color( 0.5, 0.5, 0.5, 1 )
+position = Vector2( 256, -64 )
+roomColor = 7
+
+[node name="AlexFlashRoom14" parent="." index="24" instance=ExtResource( 1 )]
+self_modulate = Color( 0.5, 0.5, 0.5, 1 )
+position = Vector2( -128, -64 )
+roomColor = 7
+
+[node name="AlexFlashRoom15" parent="." index="25" instance=ExtResource( 1 )]
+self_modulate = Color( 0.5, 0.5, 0.5, 1 )
+position = Vector2( -128, 0 )
+roomColor = 7
+
+[node name="AlexFlashRoom16" parent="." index="26" instance=ExtResource( 1 )]
+self_modulate = Color( 0.5, 0.5, 0.5, 1 )
+position = Vector2( -192, -64 )
+roomColor = 7
+
+[node name="AlexFlashRoom17" parent="." index="27" instance=ExtResource( 1 )]
+self_modulate = Color( 0.5, 0.5, 0.5, 1 )
+position = Vector2( -256, -64 )
+roomColor = 7
+
+[node name="AlexFlashRoom18" parent="." index="28" instance=ExtResource( 1 )]
+position = Vector2( -256, -128 )
+roomName = "Boss's room"
+roomID = "alexf_bossroom"
+roomSprite = 1
+
+[node name="AlexFlashRoom19" parent="." index="29" instance=ExtResource( 1 )]
+self_modulate = Color( 0.5, 0.5, 0.5, 1 )
+position = Vector2( -320, -64 )
+roomColor = 7
+gridColor = 5
+
+[node name="AlexFlashRoom47" parent="." index="30" instance=ExtResource( 1 )]
+self_modulate = Color( 0.5, 0.5, 0.5, 1 )
+position = Vector2( -320, 0 )
+roomColor = 7
+gridColor = 5
+
+[node name="AlexFlashRoom48" parent="." index="31" instance=ExtResource( 1 )]
+self_modulate = Color( 0.5, 0.5, 0.5, 1 )
+position = Vector2( -320, 64 )
+roomColor = 7
+gridColor = 5
+
+[node name="AlexFlashRoom20" parent="." index="32" instance=ExtResource( 1 )]
+self_modulate = Color( 0.5, 0.5, 0.5, 1 )
+position = Vector2( -128, 64 )
+roomColor = 7
+
+[node name="AlexFlashRoom21" parent="." index="33" instance=ExtResource( 1 )]
+self_modulate = Color( 0.5, 0.5, 0.5, 1 )
+position = Vector2( -128, 128 )
+roomColor = 7
+
+[node name="AlexFlashRoom22" parent="." index="34" instance=ExtResource( 1 )]
+self_modulate = Color( 0.5, 0.5, 0.5, 1 )
+position = Vector2( 320, -64 )
+roomColor = 7
+gridColor = 8
+
+[node name="AlexFlashRoom23" parent="." index="35" instance=ExtResource( 1 )]
+self_modulate = Color( 0.5, 0.5, 0.5, 1 )
+position = Vector2( 384, -64 )
+roomColor = 7
+
+[node name="AlexFlashRoom24" parent="." index="36" instance=ExtResource( 1 )]
+self_modulate = Color( 0.5, 0.5, 0.5, 1 )
+position = Vector2( 320, -128 )
+roomColor = 7
+
+[node name="AlexFlashRoom25" parent="." index="37" instance=ExtResource( 1 )]
+self_modulate = Color( 0.5, 0.5, 0.5, 1 )
+position = Vector2( 320, -192 )
+roomColor = 7
+
+[node name="AlexFlashRoom26" parent="." index="38" instance=ExtResource( 1 )]
+self_modulate = Color( 0.5, 0.5, 0.5, 1 )
+position = Vector2( 320, -256 )
+roomColor = 7
+
+[node name="AlexFlashRoom27" parent="." index="39" instance=ExtResource( 1 )]
+self_modulate = Color( 0.5, 0.5, 0.5, 1 )
+position = Vector2( 320, -320 )
+roomColor = 7
+
+[node name="AlexFlashRoom55" parent="." index="40" instance=ExtResource( 1 )]
+position = Vector2( 384, -320 )
+roomName = "Medical"
+roomID = "alexf_medical"
+gridColor = 3
+
+[node name="AlexFlashRoom28" parent="." index="41" instance=ExtResource( 1 )]
+self_modulate = Color( 0.5, 0.5, 0.5, 1 )
+position = Vector2( 448, -64 )
+roomColor = 7
+gridColor = 8
+
+[node name="AlexFlashRoom29" parent="." index="42" instance=ExtResource( 1 )]
+self_modulate = Color( 0.5, 0.5, 0.5, 1 )
+position = Vector2( 448, 0 )
+roomColor = 7
+
+[node name="AlexFlashRoom30" parent="." index="43" instance=ExtResource( 1 )]
+self_modulate = Color( 0.5, 0.5, 0.5, 1 )
+position = Vector2( 448, 64 )
+roomColor = 7
+
+[node name="AlexFlashRoom50" parent="." index="44" instance=ExtResource( 1 )]
+self_modulate = Color( 0.5, 0.5, 0.5, 1 )
+position = Vector2( 512, 64 )
+roomColor = 7
+
+[node name="AlexFlashRoom51" parent="." index="45" instance=ExtResource( 1 )]
+self_modulate = Color( 0.5, 0.5, 0.5, 1 )
+position = Vector2( 512, 192 )
+roomColor = 7
+
+[node name="AlexFlashRoom52" parent="." index="46" instance=ExtResource( 1 )]
+self_modulate = Color( 0.5, 0.5, 0.5, 1 )
+position = Vector2( 576, 192 )
+roomColor = 7
+
+[node name="AlexFlashRoom53" parent="." index="47" instance=ExtResource( 1 )]
+self_modulate = Color( 0.5, 0.5, 0.5, 1 )
+position = Vector2( 576, 128 )
+roomColor = 7
+
+[node name="AlexFlashRoom54" parent="." index="48" instance=ExtResource( 1 )]
+self_modulate = Color( 0.5, 0.5, 0.5, 1 )
+position = Vector2( 576, 64 )
+roomColor = 7
+
+[node name="AlexFlashRoom31" parent="." index="49" instance=ExtResource( 1 )]
+self_modulate = Color( 0.5, 0.5, 0.5, 1 )
+position = Vector2( 448, 128 )
+roomColor = 7
+
+[node name="AlexFlashRoom32" parent="." index="50" instance=ExtResource( 1 )]
+self_modulate = Color( 0.5, 0.5, 0.5, 1 )
+position = Vector2( 448, 192 )
+roomColor = 7
+
+[node name="AlexFlashRoom33" parent="." index="51" instance=ExtResource( 1 )]
+self_modulate = Color( 0.5, 0.5, 0.5, 1 )
+position = Vector2( 512, -64 )
+roomColor = 7
+
+[node name="AlexFlashRoom34" parent="." index="52" instance=ExtResource( 1 )]
+self_modulate = Color( 0.5, 0.5, 0.5, 1 )
+position = Vector2( 576, -64 )
+roomColor = 7
+
+[node name="AlexFlashRoom35" parent="." index="53" instance=ExtResource( 1 )]
+self_modulate = Color( 0.5, 0.5, 0.5, 1 )
+position = Vector2( 576, -128 )
+roomColor = 7
+
+[node name="AlexFlashRoom3" parent="." index="54" instance=ExtResource( 1 )]
+self_modulate = Color( 0.7, 0.7, 0.7, 1 )
+position = Vector2( 128, 0 )
+canWest = false
+canEast = false
+roomColor = 8

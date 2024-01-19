@@ -129,7 +129,9 @@ func startActivity(_args):
 			minigameStatus = 1.0
 		elif(possible.size() > 0):
 			pickedItem = RNG.pick(possible)
-			minigameStatus = RNG.randf_range(0.6, 0.8)
+			minigameStatus = min(RNG.randf_range(0.6, 1.1), 1.0)
+			if(subInfo.isScared()): # The subs fuck up more if scared
+				minigameStatus = min(minigameStatus, min(1.0, RNG.randf_range(0.6, 1.1)))
 		else:
 			return
 		
@@ -148,6 +150,7 @@ func startActivity(_args):
 			subInfo.addLust(struggleData["lust"])
 		if(struggleData.has("pain") && struggleData["pain"] > 0):
 			subInfo.addPain(struggleData["pain"])
+			subInfo.addFear(struggleData["pain"]/40.0)
 		if(struggleData.has("stamina") && struggleData["stamina"] != 0):
 			sub.addStamina(-struggleData["stamina"])
 		

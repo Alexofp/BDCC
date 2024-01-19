@@ -38,8 +38,14 @@ func playAnimation(animID, _args = {}):
 		state_machine.travel("Idle")
 	elif(animID == "ride"):
 		state_machine.travel("Ride")
+	elif(animID == "intense"):
+		state_machine.travel("SybianIntense-loop")
+	elif(animID == "hump"):
+		state_machine.travel("SybianHump-loop")
+	elif(animID == "humpfast"):
+		state_machine.travel("SybianHumpFast-loop")
 	else:
 		Log.printerr("Action "+str(animID)+" is not found for stage "+str(id))
 
 func getSupportedStates():
-	return ["idle", "ride"]
+	return ["idle", "ride", "intense", "hump", "humpfast"]

@@ -115,5 +115,5 @@ func createBodyparts():
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("mohawkhair"))
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("canineears"))
 
-func createEquipment():
-	getInventory().equipItem(GlobalRegistry.createItemNoID("GuardArmor"))
+func getDefaultEquipment():
+	return ["GuardArmor"]

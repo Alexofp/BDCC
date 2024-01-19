@@ -1,0 +1,158 @@
+[gd_scene load_steps=33 format=2]
+
+[ext_resource path="res://Player/Player3D/Doll3D.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Player/StageScene3D/BaseStageScene3D.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Player/Props/platform.png" type="Texture" id=3]
+[ext_resource path="res://Player/StageScene3D/Scenes/SexPortal.gd" type="Script" id=4]
+
+[sub_resource type="AnimationNodeAnimation" id=446]
+animation = "CuffedArms-loop"
+
+[sub_resource type="AnimationNodeBlend2" id=447]
+filter_enabled = true
+filters = [ "Doll3D/Skeleton:Arm.L", "Doll3D/Skeleton:Arm.R", "Doll3D/Skeleton:ForeArm.L", "Doll3D/Skeleton:ForeArm.R", "Doll3D/Skeleton:Hand.L", "Doll3D/Skeleton:Hand.R" ]
+
+[sub_resource type="AnimationNodeAnimation" id=458]
+animation = "PortalSexFast_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=459]
+animation = "PortalSexInside_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=460]
+animation = "PortalSexTease_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=448]
+animation = "PortalSex_1-loop"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=461]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=462]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=463]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=464]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=465]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=466]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachine" id=449]
+states/PortalSexFast_1-loop/node = SubResource( 458 )
+states/PortalSexFast_1-loop/position = Vector2( 435, 458 )
+states/PortalSexInside_1-loop/node = SubResource( 459 )
+states/PortalSexInside_1-loop/position = Vector2( 435, 268 )
+states/PortalSexTease_1-loop/node = SubResource( 460 )
+states/PortalSexTease_1-loop/position = Vector2( 435, 173 )
+states/PortalSex_1-loop/node = SubResource( 448 )
+states/PortalSex_1-loop/position = Vector2( 435, 363 )
+transitions = [ "PortalSexTease_1-loop", "PortalSexInside_1-loop", SubResource( 461 ), "PortalSexInside_1-loop", "PortalSexTease_1-loop", SubResource( 462 ), "PortalSexInside_1-loop", "PortalSex_1-loop", SubResource( 463 ), "PortalSex_1-loop", "PortalSexInside_1-loop", SubResource( 464 ), "PortalSex_1-loop", "PortalSexFast_1-loop", SubResource( 465 ), "PortalSexFast_1-loop", "PortalSex_1-loop", SubResource( 466 ) ]
+start_node = "PortalSexTease_1-loop"
+graph_offset = Vector2( -12, 107 )
+
+[sub_resource type="AnimationNodeBlendTree" id=456]
+graph_offset = Vector2( -329.299, 103.849 )
+nodes/Animation/node = SubResource( 446 )
+nodes/Animation/position = Vector2( 140, 280 )
+nodes/CuffsBlend/node = SubResource( 447 )
+nodes/CuffsBlend/position = Vector2( 440, 160 )
+nodes/StateMachine/node = SubResource( 449 )
+nodes/StateMachine/position = Vector2( 144.701, 144.849 )
+nodes/output/position = Vector2( 680, 180 )
+node_connections = [ "CuffsBlend", 0, "StateMachine", "CuffsBlend", 1, "Animation", "output", 0, "CuffsBlend" ]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=451]
+
+[sub_resource type="AnimationNodeAnimation" id=467]
+animation = "PortalSexFast_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=468]
+animation = "PortalSexInside_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=469]
+animation = "PortalSexTease_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=452]
+animation = "PortalSex_2-loop"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=470]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=471]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=472]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=473]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=474]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=475]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachine" id=453]
+states/PortalSexFast_2-loop/node = SubResource( 467 )
+states/PortalSexFast_2-loop/position = Vector2( 414, 307 )
+states/PortalSexInside_2-loop/node = SubResource( 468 )
+states/PortalSexInside_2-loop/position = Vector2( 414, 146 )
+states/PortalSexTease_2-loop/node = SubResource( 469 )
+states/PortalSexTease_2-loop/position = Vector2( 414, 68 )
+states/PortalSex_2-loop/node = SubResource( 452 )
+states/PortalSex_2-loop/position = Vector2( 414, 224 )
+transitions = [ "PortalSexTease_2-loop", "PortalSexInside_2-loop", SubResource( 470 ), "PortalSexInside_2-loop", "PortalSexTease_2-loop", SubResource( 471 ), "PortalSexInside_2-loop", "PortalSex_2-loop", SubResource( 472 ), "PortalSex_2-loop", "PortalSexInside_2-loop", SubResource( 473 ), "PortalSex_2-loop", "PortalSexFast_2-loop", SubResource( 474 ), "PortalSexFast_2-loop", "PortalSex_2-loop", SubResource( 475 ) ]
+start_node = "PortalSexTease_2-loop"
+
+[sub_resource type="AnimationNodeBlendTree" id=457]
+graph_offset = Vector2( -322.532, 74.6842 )
+nodes/Animation/node = SubResource( 446 )
+nodes/Animation/position = Vector2( 140, 280 )
+nodes/CuffsBlend/node = SubResource( 447 )
+nodes/CuffsBlend/position = Vector2( 440, 160 )
+nodes/StateMachine/node = SubResource( 453 )
+nodes/StateMachine/position = Vector2( 170.468, 139.684 )
+nodes/output/position = Vector2( 680, 180 )
+node_connections = [ "CuffsBlend", 0, "StateMachine", "CuffsBlend", 1, "Animation", "output", 0, "CuffsBlend" ]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=455]
+
+[node name="SexPortal" instance=ExtResource( 2 )]
+script = ExtResource( 4 )
+
+[node name="Sprite3D" type="Sprite3D" parent="." index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.318976, -1.77462 )
+texture = ExtResource( 3 )
+region_enabled = true
+region_rect = Rect2( 1, 1, 1022, 62 )
+
+[node name="Sprite3D3" type="Sprite3D" parent="." index="1"]
+transform = Transform( -0.198176, -0.424581, 0, 1.55845, -0.053991, 0, 0, 0, 1, -0.115423, 4.393, 0.695 )
+modulate = Color( 0.2, 0.133333, 0.388235, 1 )
+texture = ExtResource( 3 )
+region_enabled = true
+region_rect = Rect2( 1, 1, 1022, 62 )
+
+[node name="Doll3D" parent="." index="2" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.161, 0, 0 )
+
+[node name="Doll3D2" parent="." index="3" instance=ExtResource( 1 )]
+transform = Transform( -1, 0, 0, 0, 1, 0, 0, 0, 1, 1.16065, 0, 0 )
+
+[node name="AnimationTree" type="AnimationTree" parent="." index="4"]
+tree_root = SubResource( 456 )
+anim_player = NodePath("../Doll3D/DollSkeleton/AnimationPlayer")
+parameters/CuffsBlend/blend_amount = 0
+parameters/StateMachine/playback = SubResource( 451 )
+
+[node name="AnimationTree2" type="AnimationTree" parent="." index="5"]
+tree_root = SubResource( 457 )
+anim_player = NodePath("../Doll3D2/DollSkeleton/AnimationPlayer")
+parameters/CuffsBlend/blend_amount = 0
+parameters/StateMachine/playback = SubResource( 455 )

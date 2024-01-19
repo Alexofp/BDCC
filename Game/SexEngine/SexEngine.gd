@@ -499,7 +499,7 @@ func hasAnyAcitivites(charID):
 			return true
 	return false
 	
-func processAIActions(isDom = true):
+func processAIActions(isDom = true, playerIsHypnotized = false):
 	if(sexEnded):
 		return
 	
@@ -512,7 +512,7 @@ func processAIActions(isDom = true):
 	
 	for personID in peopleToCheck:
 		var theinfo = peopleToCheck[personID]
-		if(personID == "pc"):
+		if(personID == "pc" && !playerIsHypnotized):
 			continue
 		
 		var possibleActions = []
@@ -717,6 +717,18 @@ func getFinalText():
 
 func getActions():
 	var result = []
+	
+	if(isSub("pc")):
+		var forcedObedienceLevel = GM.pc.getForcedObedienceLevel()
+		if(RNG.chance(forcedObedienceLevel*100.0)):
+			result.append({
+				id = "obey",
+				name = "OBEY",
+				desc = "You have lost control of your body..",
+				priority = 999,
+			})
+			return result
+	
 	result.append({
 		id = "continue",
 		name = "Continue",
@@ -872,6 +884,11 @@ func processScene():
 	processAIActions(false)
 
 func doAction(_actionInfo):
+	if(_actionInfo["id"] == "obey"):
+		messages.clear()
+		processAIActions(true, true)
+		processTurn()
+		processAIActions(false, true)
 	if(_actionInfo["id"] == "continue"):
 		messages.clear()
 		processAIActions(true)
@@ -942,6 +959,44 @@ func sexShouldEnd():
 	return true
 	#return false
 
+func getRecovarableItemsAfterSex():
+	var result = []
+	if(trackedItems.has("pc")):
+		for trackedItem in trackedItems["pc"]:
+			var character:BaseCharacter = GlobalRegistry.getCharacter(trackedItem[0])
+			var item:ItemBase = character.getInventory().getItemByUniqueID(trackedItem[1])
+			if(item == null):
+				continue
+			if(!item.isPersistent() && !item.alwaysRecoveredAfterSex()):
+				result.append(item)
+	return result
+
+func canKeepItemsAfterSex():
+	return getRecovarableItemsAfterSex().size() > 0
+
+func keepItemsAfterSex(onlyAlwaysKept = false):
+	if(trackedItems.has("pc")):
+		var newPCTracked = []
+		
+		for trackedItem in trackedItems["pc"]:
+			var character:BaseCharacter = GlobalRegistry.getCharacter(trackedItem[0])
+			var item:ItemBase = character.getInventory().getItemByUniqueID(trackedItem[1])
+			if(item == null):
+				continue
+			if(!item.isPersistent() && (!onlyAlwaysKept || (onlyAlwaysKept && item.alwaysRecoveredAfterSex()))):
+				character.getInventory().removeItem(item)
+				character.getInventory().removeEquippedItem(item)
+				var restraintData:RestraintData = item.getRestraintData()
+				if(restraintData != null):
+					restraintData.onStruggleRemoval()
+			
+				GM.pc.getInventory().addItem(item)
+				GM.main.addMessage("You recovered "+item.getAStackName())
+			else:
+				newPCTracked.append(trackedItem)
+				
+		trackedItems["pc"] = newPCTracked
+
 func endSex():
 	if(sexEnded):
 		return
@@ -952,22 +1007,7 @@ func endSex():
 	for activity in activities:
 		activity.endActivity()
 	
-	if(trackedItems.has("pc")):
-		for trackedItem in trackedItems["pc"]:
-			var character:BaseCharacter = GlobalRegistry.getCharacter(trackedItem[0])
-			var item:ItemBase = character.getInventory().getItemByUniqueID(trackedItem[1])
-			if(item == null):
-				continue
-			if(!item.isPersistent()):
-				character.getInventory().removeItem(item)
-				character.getInventory().removeEquippedItem(item)
-				var restraintData:RestraintData = item.getRestraintData()
-				if(restraintData != null):
-					restraintData.onStruggleRemoval()
-			
-				GM.pc.getInventory().addItem(item)
-				GM.main.addMessage("You recovered "+item.getAStackName())
-	trackedItems.erase("pc")
+	keepItemsAfterSex(true)
 	
 	for domID in doms:
 		var domInfo = doms[domID]
@@ -1081,7 +1121,21 @@ func addTrackedGear(ownerID, whoWearsItID, itemUniqueID):
 	if(!trackedItems.has(ownerID)):
 		trackedItems[ownerID] = []
 	
+	for entry in trackedItems[ownerID]:
+		if(entry[1] == itemUniqueID && entry[0] == whoWearsItID):
+			return
+	
 	trackedItems[ownerID].append([whoWearsItID, itemUniqueID])
+
+func removeTrackedGear(ownerID, whoWearsItID, itemUniqueID):
+	if(!trackedItems.has(ownerID)):
+		return false
+	
+	for entry in trackedItems[ownerID]:
+		if(entry[1] == itemUniqueID && entry[0] == whoWearsItID):
+			trackedItems[ownerID].erase(entry)
+			return true
+	return false
 
 func checkGearIsFromPC(whoWearsItID, itemUniqueID):
 	if(!trackedItems.has("pc")):

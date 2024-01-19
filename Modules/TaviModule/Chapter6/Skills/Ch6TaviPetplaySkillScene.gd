@@ -951,7 +951,7 @@ func _run():
 	if(state == "walkies_meetnova_fucking"):
 		playAnimation(StageScene.PuppySexAllFours, "sex", {pc="nova", npc="tavi", npcBodyState={naked=true}, bodyState={naked=true, hard=true, condom=true}})
 		if (tookVirginity):
-			saynn("Nova grips Tavi's butt firmly while gathering her strength. And then, after a final sigh, she thrusts her hips forward, her knotted cock putting enough pressure on Tavi's hymen to suddenly tear through it, [b]stealing Tavi's virginity![/b].")
+			saynn("Nova grips Tavi's butt firmly while gathering her strength. And then, after a final sigh, she thrusts her hips forward, her knotted cock putting enough pressure on Tavi's hymen to suddenly tear through it, [b]stealing Tavi's virginity![/b]")
 
 			saynn("Tavi gasps and jerks forward from the sudden sharp pain but Nova doesn't let her, pulling her back onto her cock. The feline is whining loudly while her inner walls clench around their first cock, her pussy dripping green toxic-like blood onto the floor.")
 
@@ -1187,7 +1187,7 @@ func _react(_action: String, _args):
 
 	if(_action == "walkies_meetnova_givebestcondom"):
 		var breakChance = GM.pc.useBestCondom()
-		if(RNG.chance(breakChance)):
+		if(getCharacter("nova").shouldCondomBreakWhenFucking("tavi", breakChance)):
 			condomBroke = true
 		setState("walkies_meetnova_fuck")
 		return

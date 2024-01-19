@@ -178,17 +178,37 @@ func _run():
 		addButton("Alex & Eliza", "See what happens with them", "ep_alex_eliza")
 	if(state == "ep_alex_eliza"):
 		playAnimation(StageScene.Duo, "stand", {pc="alexrynard", npc="eliza"})
-		saynn("The captain knew how much potential there is in Alex and Eliza. He was purposefully holding them back, limiting them, creating impossible roadblocks.. but they just kept finding their way around.")
+		if (getFlag("AlexRynardModule.ch2FinalSceneHappened")):
+			saynn("The captain knew how much potential there is in Alex and Eliza. With you and Tavi out of the picture, he began to purposefully hold them back, limiting them, creating impossible roadblocks.. but they just kept finding their way around.")
 
-		saynn("The captain was doing this for a very specific reason. When the time became right, they suddenly got the resources and extra knowledge that they needed.")
+			saynn("In secret, they managed to do a project together. A project that they promised to each other. It was a pretty unique one, a symbiosis of tech and biology. Rather than trying to invent new materials or machine learning algorithms.. they looked back.. and saw huge untapped potential in what is already there. It took months of development.. but together they managed to develop a new prosthetic spine for Alex. One that wasn't bound by metal or wires.. but instead used artificial neurons and half-organic hard tissue. The era of surgical intervention was coming to its end, nanobots, tiny programmable robots made out of organic materials, were used to eat through the old prosthetic spine.. before constructing a new, much better one.")
 
-		saynn("Alex was of course banned from creating any androids.. but instead he was tasked with creating new weaponry.. new kinds of armor.. exosuits.. He began finding uses for bluespace that no one ever thought about. The guy was truly happy when his first spaceship left its docks.")
+			saynn("Alex, seeing how much he and Eliza manage to do alone together.. made him wonder. How far can they really go? Maybe it was time to ditch BDCC. Maybe it was time to grow an even bigger spine and ditch AlphaCorp all together.")
 
-		saynn("All the while Eliza got a go-ahead to create the best possible drugs that would give the captain's soldiers just the edge that they needed. Painkillers, muscle and reflex stimulants, quick wound fixers. She also found a way to improve a soldier's performance with some hypnotism.. switching their focus to what truly matters during a war.")
+			saynn("Sadly, Eliza was still busy trying to prove her mother something.. Having someone nearby would seem like cheating, as silly as that sounds. Maybe, one day, the time will come when both of them will look into the future.. and realize that they've been staring at each other this whole time.")
 
-		saynn("They never really got to work together on something. Alex and Eliza were from completely different fields. Only makes you wonder what would happen if biology and mechanical engineering was somehow.. combined.")
+			saynn("And so, they began spending less and less time together. When the time became right for the captain, he focussed their efforts on a different task.")
 
-		saynn("If you and Tavi were the captain's hands.. Alex and Eliza were his legs. Legs without which he would never jump so high.")
+			saynn("Alex was of course banned from creating any androids.. but instead he was tasked with creating new weaponry.. new kinds of armor.. exosuits.. He began finding uses for bluespace that no one ever thought about. The guy was happy when his first spaceship left its docks.")
+
+			saynn("He never was truly happy though.. Alex didn't know what happened to you but he just hoped that you managed to find a way to escape. You were the main reason why he is still standing after all.. and he won't forget that.")
+
+			saynn("Eliza got a go-ahead to create the best possible drugs that would give the captain's soldiers just the edge that they needed. Painkillers, muscle and reflex stimulants, quick wound fixers. She also found a way to improve a soldier's performance with some hypnotism.. switching their focus to what truly matters during a war.")
+
+			saynn("If you and Tavi were the captain's hands.. Alex and Eliza were his legs. Legs without which he would never jump so high.")
+
+		else:
+			saynn("The captain knew how much potential there is in Alex and Eliza. He was purposefully holding them back, limiting them, creating impossible roadblocks.. but they just kept finding their way around.")
+
+			saynn("The captain was doing this for a very specific reason. When the time became right, they suddenly got the resources and extra knowledge that they needed.")
+
+			saynn("Alex was of course banned from creating any androids.. but instead he was tasked with creating new weaponry.. new kinds of armor.. exosuits.. He began finding uses for bluespace that no one ever thought about. The guy was truly happy when his first spaceship left its docks.")
+
+			saynn("All the while Eliza got a go-ahead to create the best possible drugs that would give the captain's soldiers just the edge that they needed. Painkillers, muscle and reflex stimulants, quick wound fixers. She also found a way to improve a soldier's performance with some hypnotism.. switching their focus to what truly matters during a war.")
+
+			saynn("They never really got to work together on something. Alex and Eliza were from completely different fields. Only makes you wonder what would happen if biology and mechanical engineering was somehow.. combined.")
+
+			saynn("If you and Tavi were the captain's hands.. Alex and Eliza were his legs. Legs without which he would never jump so high.")
 
 		tookRahi = getFlag("RahiModule.rahiMile8Happened")
 		if (tookRahi):

@@ -201,5 +201,5 @@ func reactRestraint(restraintType, restraintAmount, isGettingForced):
 		])
 	return null
 
-func createEquipment():
-	getInventory().equipItem(GlobalRegistry.createItemNoID("GuardArmor"))
+func getDefaultEquipment():
+	return ["GuardArmor"]

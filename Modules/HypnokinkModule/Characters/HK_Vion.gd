@@ -129,7 +129,5 @@ func createBodyparts():
 func getLootTable(_battleName):
 	return InmateLoot.new()
 
-func createEquipment():
-	getInventory().equipItem(GlobalRegistry.createItemNoID("inmatecollar"))
-	getInventory().equipItem(GlobalRegistry.createItemNoID("inmateuniformSexDeviant"))
-	getInventory().equipItem(GlobalRegistry.createItemNoID("VionGlasses"))
+func getDefaultEquipment():
+	return ["inmatecollar", "inmateuniformSexDeviant", "VionGlasses"]

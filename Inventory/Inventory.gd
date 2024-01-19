@@ -38,6 +38,9 @@ func getItems():
 func getAllItems():
 	return items
 
+func getEquippedItems():
+	return equippedItems
+
 func getAllSellableItems():
 	var result = []
 	for item in items:
@@ -128,6 +131,13 @@ func getAmountOf(itemID):
 		return 0
 	return item.amount
 
+func getUniqueAmountOf(itemID):
+	var result = 0
+	for item in items:
+		if(item.id == itemID):
+			result += 1
+	return result
+
 func hasXOf(itemID, amount):
 	var item = getFirstOf(itemID)
 	if(item == null):
@@ -158,6 +168,15 @@ func getAllCombatUsableRestraints():
 	
 	for item in items:
 		if(item.canForceOntoNpc()):
+			result.append(item)
+		
+	return result
+		
+func getAllCombatUsableRestraintsForStaticNpc():
+	var result = []
+	
+	for item in items:
+		if(item.canForceOntoStaticNpc()):
 			result.append(item)
 		
 	return result
@@ -547,6 +566,7 @@ func saveData():
 	
 func loadData(data):
 	clear()
+	
 	var loadedItems = SAVE.loadVar(data, "items", [])
 	
 	for loadedItem in loadedItems:
@@ -558,6 +578,8 @@ func loadData(data):
 		if(newItem == null):
 			Log.printerr("ITEM WITH ID "+str(id)+" WASN'T FOUND IN REGISTRY")
 			continue
+		if(uniqueID == null || uniqueID == ""):
+			uniqueID = "item"+str(GlobalRegistry.generateUniqueID())
 		newItem.uniqueID = uniqueID
 		newItem.loadData(itemLoadedData)
 		addItem(newItem)
@@ -566,18 +588,27 @@ func loadData(data):
 	for loadedSlot in loadedEquippedItems:
 		var loadedItem = loadedEquippedItems[loadedSlot]
 		var id = SAVE.loadVar(loadedItem, "id", "")
-		var uniqueID = SAVE.loadVar(loadedItem, "uniqueID", "")
+		var uniqueID = SAVE.loadVar(loadedItem, "uniqueID", null)
 		var itemLoadedData = SAVE.loadVar(loadedItem, "data", {})
 		
 		var newItem: ItemBase = GlobalRegistry.createItem(id, false)
 		if(newItem == null):
 			Log.printerr("ITEM WITH ID "+str(id)+" WASN'T FOUND IN REGISTRY")
 			continue
+		if(uniqueID == null || uniqueID == ""):
+			uniqueID = "item"+str(GlobalRegistry.generateUniqueID())
 		newItem.uniqueID = uniqueID
 		newItem.loadData(itemLoadedData)
 		equipItem(newItem)
 
-func loadDataNPC(data):
+func loadDataNPC(data, npc):
+	if(true):
+		var hasAnyInvData = data.has("equipped_items")
+		loadData(data)
+		if(!hasAnyInvData):
+			npc.resetEquipmentHard() # Recreates all the equipped items because we need fresh uniqueIDs for the items
+		return
+	
 	for item in items:
 		item.currentInventory = null
 	items.clear()

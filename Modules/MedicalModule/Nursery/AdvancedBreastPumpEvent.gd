@@ -13,7 +13,7 @@ func react(_triggerID, _args):
 	var currentTime = GM.main.getTimeInGlobalSeconds()
 	var lastTimeMilked = getFlag("MedicalModule.AdvBreastPumpLastMilked", 0)
 	
-	# Means this event runs every 4 hours basically
+	# Means this event runs every 30 minutes basically
 	if(currentTime >= (lastTimeMilked + 60*30) || _triggerID == Trigger.WakeUpInCell):
 		setFlag("MedicalModule.AdvBreastPumpLastMilked", currentTime)
 	else:

@@ -1,13 +1,7 @@
 extends "res://Scenes/SceneBase.gd"
 
 var cockType = "canine"
-var cockTypeToInmateID = {
-	"canine": "inmateMaleCanine",
-	"feline": "inmateMaleFeline",
-	"dragon": "inmateMaleDragon",
-	"equine": "inmateMaleEquine",
-	"human": "inmateMaleHuman",
-}
+var npcID = ""
 
 func _init():
 	sceneID = "PortalPantiesLewdsScene"
@@ -18,7 +12,7 @@ func _reactInit():
 		"feline",
 		"dragon",
 		"equine",
-		"human",
+		"generic",
 	])
 
 	var possible = [
@@ -27,6 +21,7 @@ func _reactInit():
 	if(GM.pc.hasVagina()):
 		possible.append("vaginal")
 	if(GM.pc.hasPenis() && !GM.pc.isWearingChastityCage()):
+		possible.append("cock")
 		possible.append("cock")
 
 	setState(RNG.pick(possible))
@@ -41,12 +36,41 @@ func _reactInit():
 			"cockStroking",
 			"cockWarming",
 		]))
+	
+	if(state in ["anal", "vaginal"]):
+		npcID = NpcFinder.grabNpcIDFromPoolOrGenerate(CharacterPool.Inmates, [[NpcCon.HasPenis], [NpcCon.NoChastity]], InmateGenerator.new(), {NpcGen.HasPenis: true, NpcGen.NoChastity: true})
+	elif(state in ["cockTeaseThighs", "cockVaginal", "cockCondom"]):
+		npcID = NpcFinder.grabNpcIDFromPoolOrGenerate(CharacterPool.Inmates, [[NpcCon.HasReachableVagina]], InmateGenerator.new(), {NpcGen.HasVagina: true})
+	else:
+		npcID = NpcFinder.grabNpcIDFromPoolOrGenerate(CharacterPool.Inmates, [], InmateGenerator.new(), {})
+	if(npcID == null || npcID == ""):
+		npcID = "inmateMaleCanine"
+	GM.main.updateCharacterUntilNow(npcID)
+	
+	var theChar:BaseCharacter = getCharacter(npcID)
+	if(theChar != null):
+		if(theChar.bodypartHasTrait(BodypartSlot.Penis, PartTrait.PenisRidges)):
+			cockType = "dragon"
+		elif(theChar.bodypartHasTrait(BodypartSlot.Penis, PartTrait.PenisFlare)):
+			cockType = "equine"
+		elif(theChar.bodypartHasTrait(BodypartSlot.Penis, PartTrait.PenisBarbs)):
+			cockType = "feline"
+		elif(theChar.bodypartHasTrait(BodypartSlot.Penis, PartTrait.PenisKnot)):
+			cockType = "canine"
+		else:
+			cockType = "generic"
 		
 	GM.pc.addCredits(1)
+
+func resolveCustomCharacterName(_charID):
+	if(_charID == "npc"):
+		return npcID
 
 func _run():
 
 	if(state == "vaginal"):
+		playAnimation(StageScene.SexPortal, RNG.pick(["sex", "fast"]), {pc=npcID, npc="pc", bodyState={exposedCrotch=true,hard=true}})
+		
 		# (if has pussy)
 		if(cockType == "canine"):
 			saynn(RNG.pick([
@@ -72,10 +96,10 @@ func _run():
 				"A huge horse cock is brushing its flared head against your slit before suddenly forcibly spreading the petals aside and proceeding to fuck you through the portal panties!",
 				"Someone has picked up the fleshlight and is now teasing your pussy with their horse cock. The flared head is leaking pre all over your folds before sinking in and stretching your slit  enough to start pounding it.",
 			]))
-		if(cockType == "human"):
+		if(cockType == "generic"):
 			saynn(RNG.pick([
-				"A human cock is rubbing against your sex, making the folds moist before sliding inside and proceeding to fuck you through the portal panties!",
-				"You feel that the fleshlight with your pussy sticking out was picked up by someone! A human cock is then pressed against your sensitive folds, spreading them open before sliding in and fucking you!",
+				"A {npc.penis} is rubbing against your sex, making the folds moist before sliding inside and proceeding to fuck you through the portal panties!",
+				"You feel that the fleshlight with your pussy sticking out was picked up by someone! A {npc.penis} is then pressed against your sensitive folds, spreading them open before sliding in and fucking you!",
 				"Someone’s hard cock suddenly gets shoved deep into your pussy through your portal panties!",
 			]))
 			
@@ -105,6 +129,8 @@ func _run():
 		addButton("Continue", "You’re getting fucked!", "vaginal_cum")
 		
 	if(state == "vaginal_cum"):
+		playAnimation(StageScene.SexPortal, RNG.pick(["inside", "fast"]), {pc=npcID, npc="pc", bodyState={exposedCrotch=true,hard=true}})
+		
 		saynn(RNG.pick([
 			"The cock gradually picks up the pace, fucking your sex through the portal panties while you can’t do anything about it. Your pussy becomes slick with your juices, allowing your sex to be pounded nice and rough!",
 			"You can’t do anything to stop them even if you wanted to, their eager cock is using your slit as if it's a real fleshlight, delivering you all the pleasure in the process.",
@@ -134,16 +160,18 @@ func _run():
 				"The horse cock is pounding at your cervix and smashes your pleasure point each time it slides in. You feel like you won’t be able to endure it for long, your pussy walls start clenching around the fat flared shaft as you both cum! The stranger starts emptying their balls inside you, quickly stuffing your womb to the brim and causing your belly to suddenly look very bumpy. And it feels good, you let your tongue out and drool while some stud is breeding you rough.",
 				"The flared tip of the cock is pounding your cervix, causing a huge spike of pleasure. Your poor {pc.pussyStretch} pussy is stretched open wide for that stallion cock while it slides in and out. You hide your face from everyone and start moaning lustfully as your sex squirts from overstimulation. And a second later you feel the horse cock inflating even more as it starts shooting its sticky virile seed directly into your womb, claiming it. Your legs shake and really want to give up, you’re being bred by someone you can’t see! And just as quick, the flared cock is pulled out of your used fuckhole, leaving the fleshlight to leak cum.",
 			]))
-		if(cockType == "human"):
+		if(cockType == "generic"):
 			saynn(RNG.pick([
-				"The human cock ravages your slit nice and fast, the tip is brushing against your natural barricade while also rubbing your pleasure point. You put a palm on your belly and feel it move inside you. You can’t stop the moans from escaping your lips, the orgasm creeps closer until finally overwhelming your body, making you squirm and shiver. The cock cums inside you soon after, stuffing your womb with its seed. Someone just used you as a cum dump.",
-				"You can’t endure it for long, the human cock quickly pushes you over the edge and causes your climax to overwhelm you. Your legs shiver and shake while your pussy gets tight around the shaft, causing it to cum soon after, stuffing your womb full of its seed. Then it just gets pulled out, leaving your {pc.pussyStretch} slit to slowly tighten up and leak jizz.",
+				"The {npc.penis} ravages your slit nice and fast, the tip is brushing against your natural barricade while also rubbing your pleasure point. You put a palm on your belly and feel it move inside you. You can’t stop the moans from escaping your lips, the orgasm creeps closer until finally overwhelming your body, making you squirm and shiver. The cock cums inside you soon after, stuffing your womb with its seed. Someone just used you as a cum dump.",
+				"You can’t endure it for long, the {npc.penis} quickly pushes you over the edge and causes your climax to overwhelm you. Your legs shiver and shake while your pussy gets tight around the shaft, causing it to cum soon after, stuffing your womb full of its seed. Then it just gets pulled out, leaving your {pc.pussyStretch} slit to slowly tighten up and leak jizz.",
 			]))
 		
 		addButton("Continue", "So much cum..", "endthescene")
 
 
 	if(state == "anal"):
+		playAnimation(StageScene.SexPortal, RNG.pick(["sex", "fast"]), {pc=npcID, npc="pc", bodyState={exposedCrotch=true,hard=true}})
+		
 		if(cockType == "canine"):
 			saynn(RNG.pick([
 				"You grab onto your panties when you realize that someone’s cock has found the portal with your {pc.analStretch} tailhole sticking out. Its canine pointy head is prodding at your sensitive flesh and then applies enough pressure to slide in and start fucking you!",
@@ -168,10 +196,10 @@ func _run():
 				"A bulky horse cock is brushing its flared head against your anus before forcibly spreading it wide open and fucking you through the portal in your panties!",
 				"You feel a warm string of pre landing on your butthole a few seconds before someone's horse cock is forcing itself inside, stretching your star wide open.",
 			]))
-		if(cockType == "human"):
+		if(cockType == "generic"):
 			saynn(RNG.pick([
-				"Someone’s human cock is rubbing against your backdoor, making it moist from precum before sliding inside and proceeding to fuck you through the portal panties!",
-				"A human cock is pressed against your tailhole, spreading it open before sliding in and proceeding to rail you!",
+				"Someone’s {npc.penis} is rubbing against your backdoor, making it moist from precum before sliding inside and proceeding to fuck you through the portal panties!",
+				"A {npc.penis} is pressed against your tailhole, spreading it open before sliding in and proceeding to rail you!",
 				"A hard cock suddenly gets shoved deep into your butthole through your portal panties!",
 			]))
 			
@@ -201,6 +229,8 @@ func _run():
 		addButton("Continue", "You’re getting fucked!", "anal_cum")
 
 	if(state == "anal_cum"):
+		playAnimation(StageScene.SexPortal, RNG.pick(["inside", "fast"]), {pc=npcID, npc="pc", bodyState={exposedCrotch=true,hard=true}})
+		
 		saynn(RNG.pick([
 			"The cock gradually picks up the pace, fucking your sex through the portal panties while you can’t do anything about it. Your inner walls become slick with all the precum, allowing your sex to be pounded nice and rough!",
 			"You can’t do anything to stop them even if you wanted to, their eager cock is using your tailhole as if it's attached to a real fleshlight, delivering you all the pleasure in the process.",
@@ -230,9 +260,9 @@ func _run():
 				"The horse cock gets rammed deep down your fuckhole, stretching the inner walls so much as it slides inside. The flared fat head is brushing against your pleasure point, making you whine from pleasure. Suddenly you feel its glands inflate even more as it starts cumming inside, stuffing your tailhole full to the brim with its seed. Then, just as the quick, the cock gets pulled out, leaving you to gape and leak through the portal panties.",
 				"The flared tip of the cock is pounding your ass, providing you with so much pleasure as it smashes your pleasure point. Your poor {pc.analStretch} tailhole is stretched open wide for that stud cock as it rails you. And a second later you feel the horse cock shooting its sticky virile seed deep inside you. Your legs shake and really want to give up, you’re being bred by someone you can’t see! The flared cock is then pulled out of your used fuckhole, leaving the fleshlight to leak cum. Your belly is now way more bumpy than it was.",
 			]))
-		if(cockType == "human"):
+		if(cockType == "generic"):
 			saynn(RNG.pick([
-				"The human cock picks up the pace and fucks you at a crazy speed, sliding in and out and not even giving your insides enough time to tighten up before they are spread wide open again. You drop a few rouge moans as you cum from so much stimulation on your pleasure point. The inner walls clench around the shaft as it starts shooting its load deep inside you. You both came at roughly the same moment!",
+				"The {npc.penis} picks up the pace and fucks you at a crazy speed, sliding in and out and not even giving your insides enough time to tighten up before they are spread wide open again. You drop a few rouge moans as you cum from so much stimulation on your pleasure point. The inner walls clench around the shaft as it starts shooting its load deep inside you. You both came at roughly the same moment!",
 				"The hard cock throbs and twitches as it fucks you, a few thrusts later it starts to fill your bowels full of its seed. It was too much for you, your body squirms hard while your tailhole clenches around the shaft, milking it.",
 			]))
 		
@@ -241,6 +271,8 @@ func _run():
 		
 		
 	if(state == "cockSuck"):
+		playAnimation(StageScene.SexPortalOral, RNG.pick(["suck", "suckfast"]), {pc=npcID, npc="pc", npcBodyState={hard=true}})
+		
 		saynn("You almost forgot that you were wearing these portal panties. But you get reminded of them when you suddenly feel someone’s lips wrapping around the tip of your {pc.cock} and gently sucking on it.")
 		
 		saynn("Such teasing makes you hard and eager. You look around and hope that nobody is watching. The lips seem to notice your shaft inflating with blood and give it a little kiss before opening wide to let your dick past the teeth. You feel the warm slick walls of someone’s mouth closing around your member and their tongue licking it.")
@@ -250,6 +282,8 @@ func _run():
 		addButton("Cum!", "You can’t really control any of this", "cockSuckCum")
 		
 	if(state == "cockSuckCum"):
+		playAnimation(StageScene.SexPortalOral, RNG.pick(["hold", "suck", "suckfast"]), {pc=npcID, npc="pc", npcBodyState={hard=true}})
+		
 		saynn("You try to stay calm but the little noises of pleasure come out on their own when the lips suddenly go super deep and meet with the base of your cock, deep throating it. Your toes curl up at the feeling of tight throat walls milking your cock. That quickly pushes you over the edge, your {pc.cock} shoots its load deep down into someone’s throat as you arch your back and let out more muffled noises.")
 		
 		saynn(RNG.pick([
@@ -264,6 +298,8 @@ func _run():
 
 
 	if(state == "cockTeaseThighs"):
+		playAnimation(StageScene.SexPortalMasturbation, RNG.pick(["tease"]), {pc=npcID, npc="pc", npcBodyState={hard=true}, bodyState={exposedCrotch=true, hard=true}})
+		
 		saynn("Someone’s digits brush over the surface of your {pc.cock}. They then focus on rubbing the tip, quickly making you hard and lusty, you feel the digits catching your precum and spreading it along the shaft.")
 		
 		saynn("After teasing you like that, the digits get pulled away, replaced with something quite more soft. You feel your dick trapped between someone’s thighs that then begin sliding back and forth along it, making you feel so good. They grind your cock with their pussy, the sensitive petals are coating your dick with juices, making your shaft more slick. You feel like you won’t endure this for long, your cock is already throbbing, ready to waste its load.")
@@ -274,6 +310,8 @@ func _run():
 			addButton("Cum!", "It's just too much", "cockTeaseThighsCumOutside")
 		
 	if(state == "cockTeaseThighsCumInside"):
+		playAnimation(StageScene.SexPortalMasturbation, RNG.pick(["sex", "fast", "inside"]), {pc=npcID, npc="pc", npcBodyState={hard=true}, bodyState={exposedCrotch=true, hard=true}})
+		
 		saynn("The thighs still brush against your cock. But just when you’re about to cum, you feel their pussy shifting position and pressing against your cock, the sudden move was enough for you to penetrate their pussy folds and slide into their sex. The wet soft inner walls engulf your cock, forcing you to let out a moan as you cum hard, your {pc.cock} starts shooting waves of {pc.cum} directly into their babymaker, stuffing it full. Makes you wonder if they expected a creampie from a random cock attached to a fleshlight today.")
 		
 		saynn("The pussy walls milk your cock hard, extracting every last drop. But as their orgasm fades, they just pull your cock out of their stuffed slit and leave you somewhere.")
@@ -281,6 +319,8 @@ func _run():
 		addButton("Continue", "Fun times", "endthescene")
 		
 	if(state == "cockTeaseThighsCumOutside"):
+		playAnimation(StageScene.SexPortalMasturbation, RNG.pick(["tease"]), {pc=npcID, npc="pc", npcBodyState={hard=true}, bodyState={exposedCrotch=true, hard=true}})
+		
 		saynn("The thighs brush against your cock harder, you feel the pussy squirting all over your length as the stranger on the other end starts to cum. And that’s when you reach your peak and cum too, your {pc.cock} starts shooting strings of {pc.cum} somewhere you can’t see, probably messing up the floor and making whoever uses the toy surprised.")
 		
 		saynn("As your orgasm fades, you feel the fleshlight with your cock just placed somewhere.")
@@ -289,6 +329,8 @@ func _run():
 	
 	
 	if(state == "cockVaginal"):
+		playAnimation(StageScene.SexPortalRide, RNG.pick(["sex", "fast"]), {pc=npcID, npc="pc", npcBodyState={hard=true}, bodyState={exposedCrotch=true, hard=true}})
+		
 		saynn("A little noise escapes from you as you feel someone’s tongue suddenly licking your {pc.cock} through the portal panties. Blood quickly starts flowing towards your member, preparing and making it bigger.")
 		
 		saynn("Then you feel your cock pressed against a pussy! Wet needy folds are being spread by your dick as you feel somebody lowering themselves onto the fleshlight with your member sticking out. Huh, they seem very eager to get their pussy stuffed.")
@@ -300,6 +342,8 @@ func _run():
 		addButton("Cum inside", "It’s not like you have a choice", "cockVaginalCum")
 	
 	if(state == "cockVaginalCum"):
+		playAnimation(StageScene.SexPortalRide, RNG.pick(["inside", "fast", "tease"]), {pc=npcID, npc="pc", npcBodyState={hard=true}, bodyState={exposedCrotch=true, hard=true}})
+		
 		saynn("Whoever they are, they don’t seem to care about the possibility of getting creampied. Or maybe they don’t expect a randomly found toy to impregnate them so they keep riding you as your cock starts throbbing and shooting {pc.cum} directly into their womb, stuffing it full. You close your mouth and struggle to keep still as your balls are being drained by the twitching pussy.")
 		
 		saynn("Then they just pull your cock out of their used hole and leave the fleshlight be.")
@@ -308,6 +352,8 @@ func _run():
 		
 	
 	if(state == "cockAnal"):
+		playAnimation(StageScene.SexPortalMasturbation, RNG.pick(["sex", "fast"]), {pc=npcID, npc="pc", npcBodyState={hard=true}, bodyState={exposedCrotch=true, hard=true}})
+		
 		saynn("You stop as you feel somebody grabbing the fleshlight with your cock sticking out and groping your balls. Then they use their tongue to get you hard and make you leak precum just so they can shove your member up their butt a second later.")
 		
 		saynn("You let out a little moan as your {pc.cock} is stretching their tight ring and sliding deeper. The hand starts shoving your dick in and out, making it so your shaft is pounding their butt rough and fast, smashing their pleasure spot.")
@@ -315,12 +361,16 @@ func _run():
 		addButton("Cum!", "You can’t endure this very long", "cockAnalCum")
 	
 	if(state == "cockAnalCum"):
+		playAnimation(StageScene.SexPortalMasturbation, RNG.pick(["tease", "inside", "fast"]), {pc=npcID, npc="pc", npcBodyState={hard=true}, bodyState={exposedCrotch=true, hard=true}})
+		
 		saynn("The inner walls of that anus start clenching around your cock in a very irregular pattern, you feel them cumming! And soon after, the frictions and the feeling of tightness sends you over the edge too, your member shoots its load inside someone’s nethers, stuffing their butt full of your {pc.cum}.")
 		
 		addButton("Continue", "Fun times", "endthescene")
 		
 		
 	if(state == "cockCondom"):
+		playAnimation(StageScene.SexPortalMasturbation, RNG.pick(["sex", "fast"]), {pc=npcID, npc="pc", npcBodyState={hard=true, condom=true}, bodyState={exposedCrotch=true, hard=true}})
+		
 		saynn("You suddenly feel some kind of rubber object brushing against your cock. Is someone putting a condom on you? Yeah, seems so, the digits stretch-drag the rubber over your whole length before giving your shaft a few strokes and rubs. The teasing does its work, gradually making you harder.")
 		
 		saynn("Then the stranger grabs the fleshlight and starts using your cock as a dildo, shoving into their pussy and sliding it in and out. Their tight slit feels so pleasurable and the condom is coated in lube, meaning it's so easy for them to use your cock for their pleasure.")
@@ -331,17 +381,23 @@ func _run():
 			addButton("Cum!", "Stuff that condom", "cockCondomCumNoBreak")
 		
 	if(state == "cockCondomCumBreak"):
+		playAnimation(StageScene.SexPortalMasturbation, RNG.pick(["inside", "tease"]), {pc=npcID, npc="pc", npcBodyState={hard=true, condom=true}, bodyState={exposedCrotch=true, hard=true}})
+		
 		saynn("You can only endure this for so long before you cum, your {pc.cock} is throbbing as it fills the condom with your {pc.cum} while it's inside someone. Their pussy walls get even tighter as the orgasm overwhelms them too, and that extra stimulation is enough to extend your climax, your cock keeps stuffing the condom until it [b]suddenly breaks, spilling all of its contents[/b]. Oops, seems like you might have knocked them up by accident. Hopefully they don’t mind.")
 		
 		addButton("Continue", "Fun times", "endthescene")
 		
 	if(state == "cockCondomCumNoBreak"):
+		playAnimation(StageScene.SexPortalMasturbation, RNG.pick(["inside", "fast"]), {pc=npcID, npc="pc", npcBodyState={hard=true, condom=true}, bodyState={exposedCrotch=true, hard=true}})
+		
 		saynn("You can only endure this for so long before you cum, your {pc.cock} is throbbing as it fills the condom with your {pc.cum} while it's inside someone. Their pussy walls get even tighter as the orgasm overwhelms them too, at least you won’t knock them up.")
 		
 		addButton("Continue", "Fun times", "endthescene")
 
 
 	if(state == "cockStroking"):
+		playAnimation(StageScene.SexPortalOral, RNG.pick(["hold"]), {pc=npcID, npc="pc", npcBodyState={hard=true}})
+		
 		saynn("Someone’s digits suddenly wrap around your shaft and give it a gentle stroke, to test maybe. Their grasp is quite soft, you can’t help yourself but to slowly get harder as they caress your {pc.cock}. One of the fingers finds the tip and starts rubbing it while another hand joins to play with your balls, making you curl your toes from pleasure.")
 		
 		saynn("Then the palm notices your reaction and tightens its grip around your cock before proceeding to teasingly jack you off. The stroking is too much, you try to hump the hand but there is nothing you can do about it, you have zero control over what happens to you. You’re leaking more precum and the hand then spreads it over your length before gradually picking up the pace, finally getting you closer to your peak.")
@@ -349,12 +405,16 @@ func _run():
 		addButton("Cum!", "Hopefully they don’t plan on denying you", "cockStrokingCum")
 
 	if(state == "cockStrokingCum"):
+		playAnimation(StageScene.SexPortalOral, RNG.pick(["hold"]), {pc=npcID, npc="pc", npcBodyState={hard=true}})
+		
 		saynn("You the feeling of pressure rising, you don’t care that you’re not fucking someone, one hand is enough to make you feel very good. Your {pc.cock} starts twitching more and more before suddenly shooting a strong thick string of {pc.cum} into the air followed by a few smaller ones after. You moan and squirm slightly while the hand milks your balls dry.")
 		
 		addButton("Continue", "Fun times", "endthescene")
 		
 	
 	if(state == "cockWarming"):
+		playAnimation(StageScene.SexPortalMasturbation, RNG.pick(["inside"]), {pc=npcID, npc="pc", npcBodyState={hard=true}, bodyState={exposedCrotch=true}})
+		
 		saynn("Huh? You feel someone grabbing the fleshlight with your cock and brushing it against their ass. That causes your member to gradually get harder. The stranger then rubs your rod between their buttcheeks, stroking it that way and causing you to moan quietly. Having your cock hotdogged like that just feels too good, you leak precum all over their butt.")
 		
 		saynn("And then they just shove your {pc.cock} up their butt and let it stay there. No movement, no fucking, they just use their tight butt to warm your cock, maybe they were just looking for a good buttplug. Their inner walls clench around your shaft sometimes, making you keep your erection, it seems they’re gonna be your cock warmer for a while.")
@@ -365,21 +425,41 @@ func _run():
 func _react(_action: String, _args):
 
 	if(_action in ["vaginal_cum"]):
-		if(cockType in cockTypeToInmateID):
-			var inmateID = cockTypeToInmateID[cockType]
-			GM.pc.gotVaginaFuckedBy(inmateID)
-			GM.pc.cummedInVaginaBy(inmateID)
-			GM.pc.orgasmFrom(inmateID)
+		GM.pc.gotVaginaFuckedBy(npcID)
+		GM.pc.cummedInVaginaBy(npcID)
+		GM.pc.orgasmFrom(npcID)
 	
 	if(_action in ["anal_cum"]):
-		if(cockType in cockTypeToInmateID):
-			var inmateID = cockTypeToInmateID[cockType]
-			GM.pc.gotAnusFuckedBy(inmateID)
-			GM.pc.cummedInAnusBy(inmateID)
-			GM.pc.orgasmFrom(inmateID)
+		GM.pc.gotAnusFuckedBy(npcID)
+		GM.pc.cummedInAnusBy(npcID)
+		GM.pc.orgasmFrom(npcID)
+	
+	if(_action == "cockSuckCum"):
+		getCharacter(npcID).gotThroatFuckedBy("pc", false)
+		getCharacter(npcID).cummedInMouthBy("pc")
+	
+	if(_action == "cockCondomCumBreak"):
+		getCharacter(npcID).gotVaginaFuckedBy("pc", false)
+		getCharacter(npcID).cummedInVaginaBy("pc")
+	
+	if(_action == "cockAnalCum"):
+		getCharacter(npcID).gotAnusFuckedBy("pc", false)
+		getCharacter(npcID).cummedInAnusBy("pc")
+	
+	if(_action == "cockVaginalCum"):
+		getCharacter(npcID).gotVaginaFuckedBy("pc", false)
+		getCharacter(npcID).cummedInVaginaBy("pc")
+	
+	if(_action == "cockTeaseThighsCumInside"):
+		getCharacter(npcID).gotVaginaFuckedBy("pc", false)
+		getCharacter(npcID).cummedInVaginaBy("pc")
+	
+	if(_action == "cockTeaseThighsCumOutside"):
+		getCharacter(npcID).cummedOnBy("pc")
 	
 	if(_action in ["cockSuckCum", "cockStrokingCum", "cockCondomCumNoBreak", "cockCondomCumBreak", "cockAnalCum", "cockVaginalCum", "cockTeaseThighsCumInside", "cockTeaseThighsCumOutside"]):
-		GM.pc.orgasmFrom("pc")
+		GM.pc.orgasmFrom(npcID)
+	
 	
 	if(_action == "endthescene"):
 		endScene()
@@ -391,6 +471,7 @@ func saveData():
 	var data = .saveData()
 	
 	data["cockType"] = cockType
+	data["npcID"] = npcID
 	
 	return data
 	
@@ -398,3 +479,4 @@ func loadData(data):
 	.loadData(data)
 	
 	cockType = SAVE.loadVar(data, "cockType", "canine")
+	npcID = SAVE.loadVar(data, "npcID", "inmateMaleCanine")

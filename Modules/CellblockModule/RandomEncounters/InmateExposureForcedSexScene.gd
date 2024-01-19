@@ -298,7 +298,7 @@ func _react(_action: String, _args):
 		runScene("FightScene", [npcID], "guardfight")
 	
 	if(_action == "startsexsubby"):
-		getCharacter(npcID).resetEquipment()
+		getCharacter(npcID).prepareForSexAsDom()
 		GlobalRegistry.getCharacter(npcID).addPain(-50)
 		runScene("GenericSexScene", [npcID, "pc"], "subbysex")
 	

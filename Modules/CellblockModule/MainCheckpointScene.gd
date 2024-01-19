@@ -391,7 +391,7 @@ func _react(_action: String, _args):
 		GM.pc.addSkillExperience(Skill.SexSlave, 30, "cpguard_catchanal")
 	
 	if(_action == "startsexsubby"):
-		getCharacter("cp_guard").resetEquipment()
+		getCharacter("cp_guard").prepareForSexAsDom()
 		GlobalRegistry.getCharacter("cp_guard").addPain(-50)
 		runScene("GenericSexScene", ["cp_guard", "pc"], "subbysex")
 	

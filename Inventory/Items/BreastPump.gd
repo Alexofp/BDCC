@@ -93,3 +93,6 @@ func getInventoryImage():
 		return "res://Images/Items/breastpump/pumpHalf.png"
 	else:
 		return "res://Images/Items/breastpump/pumpFull.png"
+
+func alwaysRecoveredAfterSex():
+	return true

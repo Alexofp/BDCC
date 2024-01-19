@@ -1,0 +1,315 @@
+[gd_scene load_steps=76 format=2]
+
+[ext_resource path="res://Player/StageScene3D/BaseStageScene3D.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Player/Props/sybian.png" type="Texture" id=2]
+[ext_resource path="res://Player/Player3D/Doll3D.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Player/Props/platform.png" type="Texture" id=4]
+[ext_resource path="res://Player/StageScene3D/Scenes/SybianOral.gd" type="Script" id=5]
+
+[sub_resource type="AnimationNodeAnimation" id=3]
+animation = "CuffedArms-loop"
+
+[sub_resource type="AnimationNodeBlend2" id=4]
+filter_enabled = true
+filters = [ "Doll3D/Skeleton:Arm.L", "Doll3D/Skeleton:Arm.R", "Doll3D/Skeleton:ForeArm.L", "Doll3D/Skeleton:ForeArm.R", "Doll3D/Skeleton:Hand.L", "Doll3D/Skeleton:Hand.R" ]
+
+[sub_resource type="AnimationNodeAnimation" id=444]
+animation = "SybianBJFast_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=445]
+animation = "SybianBJ_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=446]
+animation = "SybianHump-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=447]
+animation = "SybianHumpFast-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=448]
+animation = "SybianIdle-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=449]
+animation = "SybianIntense-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=450]
+animation = "SybianIntense-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=451]
+animation = "SybianIntense-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=452]
+animation = "SybianLickFast_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=453]
+animation = "SybianLick_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=454]
+animation = "SybianRide-loop"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=455]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=456]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=457]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=458]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=459]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=460]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=461]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=462]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=463]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=464]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=465]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=466]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=471]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=472]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=473]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=474]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=479]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=480]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=481]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=482]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachine" id=475]
+states/SybianBJFast_1-loop/node = SubResource( 444 )
+states/SybianBJFast_1-loop/position = Vector2( -158, 266 )
+states/SybianBJ_1-loop/node = SubResource( 445 )
+states/SybianBJ_1-loop/position = Vector2( 87, 266 )
+states/SybianHump-loop/node = SubResource( 446 )
+states/SybianHump-loop/position = Vector2( 663, 210 )
+states/SybianHumpFast-loop/node = SubResource( 447 )
+states/SybianHumpFast-loop/position = Vector2( 692, 292 )
+states/SybianIdle-loop/node = SubResource( 448 )
+states/SybianIdle-loop/position = Vector2( 401, 82 )
+states/SybianIntense-loop/node = SubResource( 451 )
+states/SybianIntense-loop/position = Vector2( 416, 210 )
+"states/SybianIntense-loop 2/node" = SubResource( 449 )
+"states/SybianIntense-loop 2/position" = Vector2( 70, 42 )
+"states/SybianIntense-loop 3/node" = SubResource( 450 )
+"states/SybianIntense-loop 3/position" = Vector2( 70, 119 )
+states/SybianLickFast_1-loop/node = SubResource( 452 )
+states/SybianLickFast_1-loop/position = Vector2( -158, 351 )
+states/SybianLick_1-loop/node = SubResource( 453 )
+states/SybianLick_1-loop/position = Vector2( 87, 351 )
+states/SybianRide-loop/node = SubResource( 454 )
+states/SybianRide-loop/position = Vector2( 663, 82 )
+transitions = [ "SybianIdle-loop", "SybianIntense-loop 2", SubResource( 455 ), "SybianIntense-loop 2", "SybianIdle-loop", SubResource( 456 ), "SybianIdle-loop", "SybianIntense-loop 3", SubResource( 457 ), "SybianIntense-loop 3", "SybianIdle-loop", SubResource( 458 ), "SybianIdle-loop", "SybianIntense-loop", SubResource( 459 ), "SybianIntense-loop", "SybianIdle-loop", SubResource( 460 ), "SybianIdle-loop", "SybianRide-loop", SubResource( 461 ), "SybianRide-loop", "SybianIdle-loop", SubResource( 462 ), "SybianIdle-loop", "SybianHump-loop", SubResource( 463 ), "SybianHump-loop", "SybianIdle-loop", SubResource( 464 ), "SybianHump-loop", "SybianHumpFast-loop", SubResource( 465 ), "SybianHumpFast-loop", "SybianHump-loop", SubResource( 466 ), "SybianBJ_1-loop", "SybianBJFast_1-loop", SubResource( 471 ), "SybianBJFast_1-loop", "SybianBJ_1-loop", SubResource( 472 ), "SybianLick_1-loop", "SybianLickFast_1-loop", SubResource( 473 ), "SybianLickFast_1-loop", "SybianLick_1-loop", SubResource( 474 ), "SybianIdle-loop", "SybianBJ_1-loop", SubResource( 479 ), "SybianBJ_1-loop", "SybianIdle-loop", SubResource( 480 ), "SybianIdle-loop", "SybianLick_1-loop", SubResource( 481 ), "SybianLick_1-loop", "SybianIdle-loop", SubResource( 482 ) ]
+start_node = "SybianIdle-loop"
+graph_offset = Vector2( -283.722, 43.7934 )
+
+[sub_resource type="AnimationNodeBlendTree" id=476]
+graph_offset = Vector2( -301.279, -68.9426 )
+nodes/Animation/node = SubResource( 3 )
+nodes/Animation/position = Vector2( 60, 260 )
+nodes/CuffsBlend/node = SubResource( 4 )
+nodes/CuffsBlend/position = Vector2( 320, 120 )
+nodes/StateMachine/node = SubResource( 475 )
+nodes/StateMachine/position = Vector2( 77.7214, 36.0574 )
+nodes/output/position = Vector2( 540, 160 )
+node_connections = [ "CuffsBlend", 0, "StateMachine", "CuffsBlend", 1, "Animation", "output", 0, "CuffsBlend" ]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=477]
+
+[sub_resource type="AnimationNodeAnimation" id=483]
+animation = "SybianBJFast_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=484]
+animation = "SybianBJHold_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=485]
+animation = "SybianBJStroke_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=486]
+animation = "SybianBJTease_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=487]
+animation = "SybianBJTease_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=488]
+animation = "SybianBJTease_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=489]
+animation = "SybianBJTease_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=490]
+animation = "SybianBJTease_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=491]
+animation = "SybianBJ_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=492]
+animation = "SybianLickFast_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=493]
+animation = "SybianLick_2-loop"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=494]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=495]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=496]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=497]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=498]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=499]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=500]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=501]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=502]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=503]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=504]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=505]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=506]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=507]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=508]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=509]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=510]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=511]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=512]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=513]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachine" id=514]
+states/SybianBJFast_2-loop/node = SubResource( 483 )
+states/SybianBJFast_2-loop/position = Vector2( -96, 247 )
+states/SybianBJHold_2-loop/node = SubResource( 484 )
+states/SybianBJHold_2-loop/position = Vector2( 240, 68 )
+states/SybianBJStroke_2-loop/node = SubResource( 485 )
+states/SybianBJStroke_2-loop/position = Vector2( 240, 139 )
+states/SybianBJTease_2-loop/node = SubResource( 490 )
+states/SybianBJTease_2-loop/position = Vector2( 532, 113 )
+"states/SybianBJTease_2-loop 2/node" = SubResource( 486 )
+"states/SybianBJTease_2-loop 2/position" = Vector2( 532, 203 )
+"states/SybianBJTease_2-loop 3/node" = SubResource( 487 )
+"states/SybianBJTease_2-loop 3/position" = Vector2( 810, 113 )
+"states/SybianBJTease_2-loop 4/node" = SubResource( 488 )
+"states/SybianBJTease_2-loop 4/position" = Vector2( 810, 203 )
+"states/SybianBJTease_2-loop 5/node" = SubResource( 489 )
+"states/SybianBJTease_2-loop 5/position" = Vector2( 810, 284 )
+states/SybianBJ_2-loop/node = SubResource( 491 )
+states/SybianBJ_2-loop/position = Vector2( 155, 247 )
+states/SybianLickFast_2-loop/node = SubResource( 492 )
+states/SybianLickFast_2-loop/position = Vector2( -96, 329 )
+states/SybianLick_2-loop/node = SubResource( 493 )
+states/SybianLick_2-loop/position = Vector2( 155, 329 )
+transitions = [ "SybianBJTease_2-loop", "SybianBJTease_2-loop 2", SubResource( 494 ), "SybianBJTease_2-loop 2", "SybianBJTease_2-loop", SubResource( 495 ), "SybianBJTease_2-loop", "SybianBJTease_2-loop 3", SubResource( 496 ), "SybianBJTease_2-loop 3", "SybianBJTease_2-loop", SubResource( 497 ), "SybianBJTease_2-loop", "SybianBJTease_2-loop 4", SubResource( 498 ), "SybianBJTease_2-loop 4", "SybianBJTease_2-loop", SubResource( 499 ), "SybianBJTease_2-loop 4", "SybianBJTease_2-loop 5", SubResource( 500 ), "SybianBJTease_2-loop 5", "SybianBJTease_2-loop 4", SubResource( 501 ), "SybianBJTease_2-loop", "SybianBJ_2-loop", SubResource( 502 ), "SybianBJ_2-loop", "SybianBJTease_2-loop", SubResource( 503 ), "SybianBJTease_2-loop", "SybianLick_2-loop", SubResource( 504 ), "SybianLick_2-loop", "SybianBJTease_2-loop", SubResource( 505 ), "SybianBJ_2-loop", "SybianBJFast_2-loop", SubResource( 506 ), "SybianBJFast_2-loop", "SybianBJ_2-loop", SubResource( 507 ), "SybianLickFast_2-loop", "SybianLick_2-loop", SubResource( 508 ), "SybianLick_2-loop", "SybianLickFast_2-loop", SubResource( 509 ), "SybianBJHold_2-loop", "SybianBJTease_2-loop", SubResource( 510 ), "SybianBJTease_2-loop", "SybianBJHold_2-loop", SubResource( 511 ), "SybianBJStroke_2-loop", "SybianBJTease_2-loop", SubResource( 512 ), "SybianBJTease_2-loop", "SybianBJStroke_2-loop", SubResource( 513 ) ]
+start_node = "SybianBJTease_2-loop"
+graph_offset = Vector2( -120, 23.5869 )
+
+[sub_resource type="AnimationNodeBlendTree" id=515]
+graph_offset = Vector2( -244.722, -46.4392 )
+nodes/Animation/node = SubResource( 3 )
+nodes/Animation/position = Vector2( 60, 260 )
+nodes/CuffsBlend/node = SubResource( 4 )
+nodes/CuffsBlend/position = Vector2( 320, 120 )
+nodes/StateMachine/node = SubResource( 514 )
+nodes/StateMachine/position = Vector2( 40, 40 )
+nodes/output/position = Vector2( 540, 160 )
+node_connections = [ "CuffsBlend", 0, "StateMachine", "CuffsBlend", 1, "Animation", "output", 0, "CuffsBlend" ]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=516]
+
+[node name="SybianOral" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.47078, 0, 0 )
+script = ExtResource( 5 )
+
+[node name="Doll3D" parent="." index="0" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.161258, 0, 0 )
+
+[node name="Doll3D2" parent="." index="1" instance=ExtResource( 3 )]
+transform = Transform( -1, 0, 0, 0, 1, 0, 0, 0, 1, 0.161258, 0, 0 )
+
+[node name="Sprite3D" type="Sprite3D" parent="." index="2"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.324482, -1.77462 )
+texture = ExtResource( 4 )
+region_enabled = true
+region_rect = Rect2( 1, 1, 1022, 62 )
+
+[node name="Sybian" type="Sprite3D" parent="." index="3"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.17906, 1.23267, -0.0600427 )
+texture = ExtResource( 2 )
+
+[node name="AnimationTree" type="AnimationTree" parent="." index="4"]
+tree_root = SubResource( 476 )
+anim_player = NodePath("../Doll3D/DollSkeleton/AnimationPlayer")
+parameters/CuffsBlend/blend_amount = 0.0
+parameters/StateMachine/playback = SubResource( 477 )
+
+[node name="AnimationTree2" type="AnimationTree" parent="." index="5"]
+tree_root = SubResource( 515 )
+anim_player = NodePath("../Doll3D2/DollSkeleton/AnimationPlayer")
+parameters/CuffsBlend/blend_amount = 0.0
+parameters/StateMachine/playback = SubResource( 516 )
+
+[editable path="Doll3D"]
+[editable path="Doll3D/DollSkeleton"]

@@ -577,15 +577,31 @@ func _run():
 		addButton("Alex Rynard", "See what happens with him", "ep_alex")
 	if(state == "ep_alex"):
 		playAnimation(StageScene.Solo, "stand", {pc="alexrynard"})
-		saynn("In the heat of the battle, Alex manages to get to and repair Sentinel-X.. his most powerful creation. And that is what saved the core of the station from getting destroyed by Syndicate. After that Alex guided other engineers to repair the hull of the station while he himself masterfully controlled its vents systems to make sure the surviving staff and inmates had at least something to breathe.")
+		if (getFlag("AlexRynardModule.ch2FinalSceneHappened")):
+			saynn("In the heat of the battle, Alex manages to get to and repair Sentinel-X.. his most powerful creation. And that is what saved the core of the station from getting destroyed by Syndicate. After that Alex guided other engineers to repair the hull of the station while he himself masterfully controlled its vents systems to make sure the surviving staff and inmates had at least something to breathe.")
 
-		saynn("He never really trusted people. He much prefers machines for their lack of ability to lie. But during these critical moments, he had to work as a team. And he was good at it..")
+			saynn("He never really trusted people, he still doesn't. He much prefers machines for their lack of ability to lie. But during these critical moments, he had to work as a team. And he was good at it..")
 
-		saynn("Sadly, being a team leader means you don't really get much credit for your deeds. Seeing the monetary rewards that come with it, others lied about their contribution to this win.. And so Alex gave up trying to convince anyone and closed up completely.")
+			saynn("Others were quick to claim credit for saving the station though. He didn't care though, he just said his word and that was it. There was nothing to gain anyway.")
 
-		saynn("Yeah, he still tinkered with androids from time to time. But he could never convince AlphaCorp to restart all of his canceled projects. And without resources.. The best he could do is tinker.")
+			saynn("Why not fight for it? Alex knew that you were responsible for this, one way or another. Putting so many people under danger just to escape this place.. is understandable.. but unforgivable. Alex began losing his grip again, closing up from everyone and everything. Who is there left to trust anyway? People? Hah, what a funny joke. Machines? Put too much trust into them and they will break you too.")
 
-		saynn("He was trying to create a perfect reality.. but only found himself becoming more broken..")
+			saynn("Eliza found him when he was at his lowest. It took a lot.. force.. to pull Alex up, make him trust at least her. Together, they managed to develop a new prosthetic spine for him. One that wasn't bound by metal or wires.. but instead used artificial neurons and half-organic hard tissue. The era of surgical intervention was coming to its end, nanobots, tiny programmable robots made out of organic materials, were used to eat through the old prosthetic spine.. before constructing a new, much better one.")
+
+			saynn("Eliza helped Alex grow a new spine. But, sadly, she had plenty of problems in her life too. Problems that Alex couldn't help her with.")
+
+			saynn("At least he could start living again. Maybe it's a good day to start your life from scratch, for the third time.. Alex wiped Sentinel's memory clean.. and stripped him of all the functionality, other than listening, watching and talking. Alex sat near him.. and began tinkering with his prototypes.. just like old times.")
+
+		else:
+			saynn("In the heat of the battle, Alex manages to get to and repair Sentinel-X.. his most powerful creation. And that is what saved the core of the station from getting destroyed by Syndicate. After that Alex guided other engineers to repair the hull of the station while he himself masterfully controlled its vents systems to make sure the surviving staff and inmates had at least something to breathe.")
+
+			saynn("He never really trusted people. He much prefers machines for their lack of ability to lie. But during these critical moments, he had to work as a team. And he was good at it..")
+
+			saynn("Sadly, being a team leader means you don't really get much credit for your deeds. Seeing the monetary rewards that come with it, others lied about their contribution to this win.. And so Alex gave up trying to convince anyone and closed up completely.")
+
+			saynn("Yeah, he still tinkered with androids from time to time. But he could never convince AlphaCorp to restart all of his canceled projects. And without resources.. The best he could do is tinker.")
+
+			saynn("He was trying to create a perfect reality.. but only found himself becoming more broken..")
 
 		addButton("Eliza", "See what happens to Eliza", "ep_eliza")
 	if(state == "ep_eliza"):

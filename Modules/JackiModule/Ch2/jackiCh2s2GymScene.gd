@@ -14,7 +14,7 @@ func _init():
 	sceneID = "jackiCh2s2GymScene"
 
 func _reactInit():
-	getCharacter("jacki").updateBodyparts()
+	getCharacter("jacki").resetEquipment()
 
 func _run():
 	if(state == ""):
@@ -3154,7 +3154,8 @@ func _run():
 
 			saynn("[say=pc]Slut.[/say]")
 
-		elif (soundScore <= 4):
+		else:
+		#elif (soundScore <= 4):
 			saynn("You spread Jacki's cunt and see that the little dildo-rod is still shoved into her pussy. She shivers as you tug on it.")
 
 			saynn("[say=jacki]Hey.. ah.. you stretched that hole enough already..[/say]")
@@ -3939,13 +3940,13 @@ func _react(_action: String, _args):
 	if(_action == "gift_sportybra"):
 		GM.pc.getInventory().removeXOfOrDestroy("sportyTop", 1)
 		setFlag("JackiModule.jackiReceivedBra", true)
-		getCharacter("jacki").updateBodyparts()
+		getCharacter("jacki").resetEquipment()
 		getModule("JackiModule").addAnger(-20)
 
 	if(_action == "gift_sportyshorts"):
 		GM.pc.getInventory().removeXOfOrDestroy("sportyBriefs", 1)
 		setFlag("JackiModule.jackiReceivedShorts", true)
-		getCharacter("jacki").updateBodyparts()
+		getCharacter("jacki").resetEquipment()
 		getModule("JackiModule").addAnger(-20)
 
 	if(_action == "gift_credits_free"):
@@ -4039,7 +4040,7 @@ func _react(_action: String, _args):
 
 	if(_action == "jacki_piercing_story_end"):
 		processTime(30*60)
-		getCharacter("jacki").updateBodyparts()
+		getCharacter("jacki").resetEquipment()
 		getModule("JackiModule").addLust(5)
 
 	if(_action == "jog_afterchat_shower"):

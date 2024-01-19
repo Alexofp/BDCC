@@ -3,6 +3,7 @@ extends Panel
 
 var effectName
 var effectDesc
+var tooltipShouldBeWide = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

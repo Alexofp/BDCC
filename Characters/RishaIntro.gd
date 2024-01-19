@@ -65,5 +65,5 @@ func createBodyparts():
 func getParentCharacterID():
 	return "risha"
 
-func createEquipment():
-	getInventory().equipItem(GlobalRegistry.createItemNoID("GuardArmor"))
+func getDefaultEquipment():
+	return ["GuardArmor"]

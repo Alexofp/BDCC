@@ -195,7 +195,7 @@ func _run():
 
 		saynn("Tavi shrugs, it seems like the question caught her off guard.")
 
-		saynn("[say=tavi]I don’t like crowds. I always worked alone. And you better spot asking those silly questions[/say]")
+		saynn("[say=tavi]I don’t like crowds. I always worked alone. And you better stop asking those silly questions[/say]")
 
 		saynn("She gives your butt a soft smack.")
 

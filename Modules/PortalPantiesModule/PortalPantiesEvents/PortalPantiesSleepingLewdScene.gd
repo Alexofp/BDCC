@@ -1,5 +1,7 @@
 extends "res://Scenes/SceneBase.gd"
 
+var npcID = ""
+
 func _init():
 	sceneID = "PortalPantiesSleepingLewdScene"
 
@@ -57,6 +59,8 @@ func _run():
 
 
 	if(state == "wake_up!"):
+		playAnimation(StageScene.SexAllFours, RNG.pick(["sex", "fast", "sexflop", "fastflop"]), {onlySub=true, npc="pc", npcBodyState={naked=true}})
+		
 		# (if pussy)
 		if(GM.pc.hasVagina()):
 			saynn("You open your eyes and realize that nothing of it was a dream, you indeed feel a cock rubbing against your pussy through the portal panties before suddenly penetrating your sex!")
@@ -85,18 +89,16 @@ func _run():
 
 		addButton("Continue", "Can't even sleep without getting used", "endthescene")
 
+func resolveCustomCharacterName(_charID):
+	if(_charID == "npc"):
+		return npcID
 
 func _react(_action: String, _args):
 	if(_action in ["keep_sleeping", "wake_up!"]):
-		# Needs a better system but whatever, will do for now
-		var randomInmate = [
-			"inmateMaleCanine",
-			"inmateMaleDragon",
-			"inmateMaleEquine",
-			"inmateMaleFeline",
-			"inmateMaleHuman",
-		]
-		var pickedInmate = RNG.pick(randomInmate)
+		var pickedInmate = NpcFinder.grabNpcIDFromPoolOrGenerate(CharacterPool.Inmates, [[NpcCon.HasPenis], [NpcCon.NoChastity]], InmateGenerator.new(), {NpcGen.HasPenis: true, NpcGen.NoChastity: true})
+		if(pickedInmate == "" || pickedInmate == null):
+			pickedInmate = "inmateMaleCanine"
+		npcID = pickedInmate
 		
 		if(GM.pc.hasVagina()):
 			GM.pc.gotVaginaFuckedBy(pickedInmate)
@@ -112,3 +114,14 @@ func _react(_action: String, _args):
 
 	setState(_action)
 
+func saveData():
+	var data = .saveData()
+	
+	data["npcID"] = npcID
+	
+	return data
+	
+func loadData(data):
+	.loadData(data)
+	
+	npcID = SAVE.loadVar(data, "npcID", "inmateMaleCanine")

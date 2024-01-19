@@ -5,6 +5,8 @@ func _init():
 
 func _run():
 	if(state == ""):
+		playAnimation(StageScene.SexStanding, RNG.pick(["sex", "fast"]), {onlySub=true, npc="pc", npcBodyState={naked=true}})
+		
 		saynn("You’re wearing portal panties even while taking a shower, hopefully that won’t break them.")
 
 		# (if pussy)
@@ -32,6 +34,8 @@ func _run():
 		addButton("Cum", "Can’t push it away any longer", "cum")
 
 	if(state == "cum"):
+		playAnimation(StageScene.SexStanding, RNG.pick(["inside", "fast"]), {onlySub=true, npc="pc", npcBodyState={naked=true}})
+		
 		# (if pussy)
 		if(GM.pc.hasVagina()):
 			saynn("There is simply too much stimulation, the fingers keep fucking your slit until it starts pulsating and twitching around them and also showring them in your juices.")
@@ -52,15 +56,9 @@ func _run():
 
 func _react(_action: String, _args):
 	if(_action in ["cum"]):
-		# Needs a better system but whatever, will do for now
-		var randomInmate = [
-			"inmateMaleCanine",
-			"inmateMaleDragon",
-			"inmateMaleEquine",
-			"inmateMaleFeline",
-			"inmateMaleHuman",
-		]
-		var pickedInmate = RNG.pick(randomInmate)
+		var pickedInmate = NpcFinder.grabNpcIDFromPoolOrGenerate(CharacterPool.Inmates, [[NpcCon.HasPenis], [NpcCon.NoChastity]], InmateGenerator.new(), {NpcGen.HasPenis: true, NpcGen.NoChastity: true})
+		if(pickedInmate == "" || pickedInmate == null):
+			pickedInmate = "inmateMaleCanine"
 
 		GM.pc.orgasmFrom(pickedInmate)
 	

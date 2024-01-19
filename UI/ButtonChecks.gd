@@ -30,6 +30,8 @@ enum {
 	HasChastityCageInInventory,
 	HasItemID,
 	HasReachablePenisOrVaginaOrHasStrapon,
+	HasBreastPump,
+	HasPenisPump,
 }
 
 static func getReasonText(reason):
@@ -90,6 +92,10 @@ static func getReasonText(reason):
 		return "You don't have the required item"
 	if(reason == HasReachablePenisOrVaginaOrHasStrapon):
 		return "Need a reachable penis, vagina or a strapon in inventory"
+	if(reason == HasBreastPump):
+		return "You don't have any breast pumps in your inventory"
+	if(reason == HasPenisPump):
+		return "You don't have any penis pumps in your inventory"
 	return "Error?"
 
 static func check(checks: Array):
@@ -183,7 +189,13 @@ static func check(checks: Array):
 			if(!GM.pc.getInventory().hasItemID(args[1])):
 				return args
 		if(reason == HasReachablePenisOrVaginaOrHasStrapon):
-			if(!GM.pc.hasReachablePenis() && !GM.pc.hasReachableVagina() && !GM.pc.canWearStrapon() && !GM.pc.hasStrapons()):
+			if(!GM.pc.hasReachablePenis() && !GM.pc.hasReachableVagina() && !GM.pc.hasStrapons()):
+				return args
+		if(reason == HasBreastPump):
+			if(GM.pc.getInventory().getItemsWithTag(ItemTag.BreastPump).size() <= 0):
+				return args
+		if(reason == HasPenisPump):
+			if(GM.pc.getInventory().getItemsWithTag(ItemTag.PenisPump).size() <= 0):
 				return args
 			
 	return null

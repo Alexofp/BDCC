@@ -12,7 +12,9 @@ func makeBase(idprefix = "dynamicnpc", _args = {}):
 	return dynamicCharacter
 
 func pickGender(character:DynamicCharacter, _args = {}):
-	if(_args.has(NpcGen.HasPenis) && _args[NpcGen.HasPenis]):
+	if(_args.has(NpcGen.HasVagina) && _args[NpcGen.HasVagina]):
+		character.npcGeneratedGender = GM.main.getEncounterSettings().generateGenderFromAllowed(NpcGender.getAllWithVagina())
+	elif(_args.has(NpcGen.HasPenis) && _args[NpcGen.HasPenis]):
 		character.npcGeneratedGender = GM.main.getEncounterSettings().generateGenderFromAllowed(NpcGender.getAllWithPenis())
 	elif(_args.has(NpcGen.GenderList)):
 		character.npcGeneratedGender = GM.main.getEncounterSettings().generateGenderFromAllowed(_args[NpcGen.GenderList])
@@ -40,6 +42,10 @@ func pickedSpeciesType(_args = {}):
 	return "guard"
 
 func pickSpecies(character:DynamicCharacter, _args = {}):
+	if(_args.has(NpcGen.Species)):
+		character.npcSpecies = [_args[NpcGen.Species]]
+		return
+	
 	var speciesType = pickedSpeciesType(_args)
 	var allSpecies = GlobalRegistry.getAllSpecies()
 	var possible = []
@@ -78,7 +84,7 @@ func createBodyparts(character:DynamicCharacter, _args = {}):
 			var hasInAllowed = false
 			
 			for supported in supportedSpecies:
-				if(supported in theSpecies): # || supported == Species.Any
+				if((supported in theSpecies) || supported == Species.AnyNPC): # || supported == Species.Any
 					hasInSupported = true
 					break
 				
@@ -88,33 +94,38 @@ func createBodyparts(character:DynamicCharacter, _args = {}):
 					hasInAllowed = true
 					break
 			
-			if(hasInSupported || hasInAllowed || bodypartSlot == BodypartSlot.Hair):
+			if(hasInSupported || hasInAllowed):
 				var weight = bodypart.npcGenerationWeight(character)
 				if(weight != null && weight > 0.0):
 					possible.append([bodypartID, weight])
 					fullWeight += weight
 
-		
+		# Adding the default bodypart of this species into the mix
+		for specie in theSpecies:
+			var speciesObject = GlobalRegistry.getSpecies(specie)
+			var bodypartID = speciesObject.getDefaultForSlotForNpcGender(bodypartSlot, character.npcGeneratedGender)
+			var alreadyHasInPossible = false
+			for possibleEntry in possible:
+				if(possibleEntry[0] == bodypartID):
+					alreadyHasInPossible = true
+					break
+			if(alreadyHasInPossible):
+				continue
+			if(bodypartID == null):
+				possible.append([null, 1.0])
+				fullWeight += 1.0
+				continue
+			var bodypart = GlobalRegistry.getBodypartRef(bodypartID)
+			var weight = bodypart.npcGenerationWeight(character)
+			if(weight != null && weight > 0.0):
+				possible.append([bodypartID, weight])
+				fullWeight += weight
+
+		#print(bodypartSlot, " ", possible) # Uncomment for debug
 		if(possible.size() > 0):
 			if(!RNG.chance(fullWeight * 100.0)):
 				continue
 			
-			var bodypartID = RNG.pickWeightedPairs(possible)
-			if(bodypartID != null):
-				var bodypart = GlobalRegistry.createBodypart(bodypartID)
-				character.giveBodypartUnlessSame(bodypart)
-				bodypart.generateDataFor(character)
-		else:
-			for specie in theSpecies:
-				var speciesObject = GlobalRegistry.getSpecies(specie)
-				var bodypartID = speciesObject.getDefaultForSlotForNpcGender(bodypartSlot, character.npcGeneratedGender)
-				if(bodypartID == null):
-					continue
-				var bodypart = GlobalRegistry.getBodypartRef(bodypartID)
-				var weight = bodypart.npcGenerationWeight(character)
-				if(weight != null && weight > 0.0):
-					possible.append([bodypartID, weight])
-				
 			var bodypartID = RNG.pickWeightedPairs(possible)
 			if(bodypartID != null):
 				var bodypart = GlobalRegistry.createBodypart(bodypartID)
@@ -350,5 +361,12 @@ func generate(_args = {}):
 	character.resetEquipment()
 	resetStats(character, _args)
 	pickNonStaticEquipment(character, _args)
+	
+	# Letting the species object tweak the character
+	for species in character.getSpecies():
+		var speciesObject = GlobalRegistry.getSpecies(species)
+		if(speciesObject != null):
+			speciesObject.onDynamicNpcCreation(character, _args)
+	
 	character.updateNonBattleEffects()
 	return character

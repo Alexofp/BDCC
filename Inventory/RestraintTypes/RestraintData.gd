@@ -38,6 +38,9 @@ func getVisibleLevel(isBlind = false):
 func canInspectWhileBlindfolded():
 	return false
 
+func canBeEasilyRemovedByDom():
+	return canStruggle()
+
 func getDodgeDifficulty():
 	return 1.0 * level * npcDodgeDifficultyMod
 

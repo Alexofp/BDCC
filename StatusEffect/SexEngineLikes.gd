@@ -39,8 +39,8 @@ func getEffectDesc():
 		var fetishColor = FetishInterest.getColorString(fetishInterest)
 		var fetishInterestText = FetishInterest.getVisibleName(fetishInterest)
 		
-		texts.append(fetish.getVisibleName()+": "+"[color="+fetishColor+"]"+fetishInterestText+"[/color]")
-	return Util.join(texts, "\n")
+		texts.append("[cell]"+fetish.getVisibleName()+": "+"[color="+fetishColor+"]"+fetishInterestText+"[/color][/cell]")
+	return "[table=2]"+Util.join(texts, "")+"[/table]"
 
 func getEffectImage():
 	return "res://Images/StatusEffects/opposite-hearts.png"
@@ -53,3 +53,6 @@ func combine(_args = []):
 
 func getBuffs():
 	return []
+
+func shouldHaveWideTooltip():
+	return true

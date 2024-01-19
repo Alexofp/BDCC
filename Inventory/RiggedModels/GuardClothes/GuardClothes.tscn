@@ -517,7 +517,7 @@ params_depth_draw_mode = 3
 albedo_color = Color( 0, 0.0745098, 0.498039, 1 )
 albedo_texture = ExtResource( 6 )
 
-[sub_resource type="SpatialMaterial" id=54]
+[sub_resource type="SpatialMaterial" id=61]
 resource_name = "forearm.png.001"
 flags_transparent = true
 flags_unshaded = true
@@ -535,7 +535,7 @@ surfaces/0 = {
 "blend_shape_data": [  ],
 "format": 2194903,
 "index_count": 6,
-"material": SubResource( 54 ),
+"material": SubResource( 61 ),
 "primitive": 4,
 "skeleton_aabb": [ AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( -0.572433, 3.17222, 0.395528, 1.28, 2.56, 1.00136e-05 ) ],
 "vertex_count": 4
@@ -630,13 +630,13 @@ surfaces/0 = {
 "blend_shape_data": [  ],
 "format": 2194903,
 "index_count": 6,
-"material": SubResource( 54 ),
+"material": SubResource( 61 ),
 "primitive": 4,
 "skeleton_aabb": [ AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( -0.672433, 3.17222, -0.359544, 1.28, 2.56, 1.00136e-05 ) ],
 "vertex_count": 4
 }
 
-[sub_resource type="SpatialMaterial" id=59]
+[sub_resource type="SpatialMaterial" id=66]
 resource_name = "digileg.png"
 flags_transparent = true
 flags_unshaded = true
@@ -654,14 +654,13 @@ surfaces/0 = {
 "blend_shape_data": [  ],
 "format": 2194903,
 "index_count": 720,
-"material": SubResource( 59 ),
+"material": SubResource( 66 ),
 "primitive": 4,
 "skeleton_aabb": [ AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( -0.273374, -0.13041, 0.205011, 1.16464, 2.5398, 9.99868e-06 ), AABB( -0.361842, -0.144812, 0.205011, 1.14969, 1.12859, 9.99868e-06 ) ],
 "vertex_count": 493
 }
 
-[sub_resource type="Skin" id=61]
-resource_name = "Skin"
+[sub_resource type="Skin" id=86]
 bind_count = 22
 bind/0/name = "Hips"
 bind/0/bone = -1
@@ -1195,13 +1194,13 @@ visible = false
 
 [node name="digilegpng" type="MeshInstance" parent="PartStatePicker2/PartState" index="0"]
 mesh = SubResource( 60 )
-skin = SubResource( 61 )
+skin = SubResource( 86 )
 skeleton = NodePath("../../..")
 material/0 = SubResource( 76 )
 
 [node name="digilegpng001" type="MeshInstance" parent="PartStatePicker2/PartState" index="1"]
 mesh = SubResource( 63 )
-skin = SubResource( 61 )
+skin = SubResource( 86 )
 skeleton = NodePath("../../..")
 material/0 = SubResource( 76 )
 

@@ -11,7 +11,7 @@ func _init():
 	sceneID = "jackiPunchingBagScene"
 
 func _reactInit():
-	getCharacter("jacki").updateBodyparts()
+	getCharacter("jacki").resetEquipment()
 
 func _run():
 	if(state == ""):

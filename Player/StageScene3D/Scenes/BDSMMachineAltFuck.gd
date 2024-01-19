@@ -80,3 +80,8 @@ func canTransitionTo(_actionID, _args = []):
 
 func getSupportedStates():
 	return ["tease", "inside", "sex", "fast", "insidedouble", "sexdouble", "fastdouble"]
+
+func getChainPoint(_pointID):
+	if(_pointID == "milkIntake"):
+		return $MilkIntake
+	return .getChainPoint(_pointID)

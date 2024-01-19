@@ -26,6 +26,14 @@ func callFuncWrapper(_command: String, _args: Array):
 		return Util.sayPlayer(str(_args[0]))
 	if(_command == "pick"):
 		return str(RNG.pick(_args))
+	if(_command in ["penis", "cock", "dick"]):
+		return RNG.pick(["cock", "dick", "member"])
+	if(_command in ["vagina", "pussy"]):
+		return RNG.pick(["pussy", "cunt", "vagina"])
+	if(_command in ["ass", "butt"]):
+		return RNG.pick(["ass", "butt"])
+	if(_command in ["asshole", "tailhole", "butthole", "anus"]):
+		return RNG.pick(["asshole", "tailhole", "anus"])
 	if(_command == "rahiMaster"):
 		return GM.main.getFlag("RahiModule.rahiPCName", GM.pc.getName())
 	if(_command == "rahiFP" && _args.size() == 2):

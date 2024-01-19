@@ -737,7 +737,9 @@ func getAttributesText():
 	]
 
 func freeMouthDeleteAll():
-	return getInventory().removeEquippedItemsWithBuff(Buff.GagBuff)
+	var r1 = getInventory().removeEquippedItemsWithBuff(Buff.GagBuff)
+	var r2 = getInventory().removeEquippedItemsWithBuff(Buff.MuzzleBuff)
+	return r1 || r2
 	
 func freeHandsDeleteAll():
 	return getInventory().removeEquippedItemsWithBuff(Buff.BlockedHandsBuff)
@@ -915,9 +917,6 @@ func damageClothes():
 				item.receiveDamage()
 				return true
 	return false
-
-func isWearingPortalPanties():
-	return getInventory().hasItemIDEquipped("PortalPanties")
 
 func hasTightHoles():
 	var maxLooseness = 0.0

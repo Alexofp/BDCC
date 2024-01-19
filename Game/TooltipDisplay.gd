@@ -25,6 +25,11 @@ func _process(_delta: float) -> void:
 	#rect_global_position.x = clamp(rect_global_position.x, 0, ProjectSettings.get("display/window/size/width") - rect_size.x)
 	#rect_global_position.y = clamp(rect_global_position.y, 0, ProjectSettings.get("display/window/size/height") - rect_size.y)
 
+func setIsWide(newWide: bool):
+	if(newWide):
+		rect_min_size.x = 500
+	else:
+		rect_min_size.x = 250
 
 func set_is_active(value: bool, delayShow = false):
 	is_active = value

@@ -18,4 +18,9 @@ enum {
 	HasPenis,
 	CharacterType,
 	AvoidIDs,
+	Species,
+	HasVagina,
+	HasReachableVagina,
+	HasReachablePenis,
+	HasReachableAnus,
 }

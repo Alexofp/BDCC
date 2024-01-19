@@ -5,7 +5,6 @@ func getFlags():
 		"SoftOptIn": flag(FlagType.Bool),
 		
 		"VisorXpToday": flag(FlagType.Number),
-		"TalkedToAlexAboutVisors": flag(FlagType.Bool),
 		
 		"GotEngineeringFreebieVisor": flag(FlagType.Bool),
 		

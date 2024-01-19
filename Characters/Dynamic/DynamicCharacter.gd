@@ -45,10 +45,6 @@ func createBodyparts():
 func getDefaultEquipment():
 	return npcDefaultEquipment
 
-func createEquipment():
-	for itemID in getDefaultEquipment():
-		getInventory().equipItem(GlobalRegistry.createItemNoID(itemID))
-
 func _getAttacks():
 	return npcAttacks
 
@@ -225,7 +221,7 @@ func loadData(data):
 	checkSkins(true)
 	
 	loadStatusEffectsData(SAVE.loadVar(data, "statusEffects", {}))
-	inventory.loadDataNPC(SAVE.loadVar(data, "inventory", {}))
+	inventory.loadDataNPC(SAVE.loadVar(data, "inventory", {}), self)
 	skillsHolder.loadData(SAVE.loadVar(data, "skills", {}))
 	lustInterests.loadData(SAVE.loadVar(data, "lustInterests", {}))
 	bodyFluids.loadData(SAVE.loadVar(data, "bodyFluids", {}))

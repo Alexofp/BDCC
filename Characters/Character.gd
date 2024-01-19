@@ -147,7 +147,7 @@ func loadData(data):
 		bodypart.loadDataNPC(bodypartData)
 	
 	loadStatusEffectsData(SAVE.loadVar(data, "statusEffects", {}))
-	inventory.loadDataNPC(SAVE.loadVar(data, "inventory", {}))
+	inventory.loadDataNPC(SAVE.loadVar(data, "inventory", {}), self)
 	lustInterests.loadData(SAVE.loadVar(data, "lustInterests", {}))
 	bodyFluids.loadData(SAVE.loadVar(data, "bodyFluids", {}))
 
@@ -219,13 +219,91 @@ func copySkinTo(otherNPC):
 	otherNPC.pickedSkinBColor = pickedSkinBColor
 	otherNPC.applyBodypartsSkinData(npcSkinData)
 
-func createEquipment():
-	pass
+# ["collar", "inmateuniform", {id="asd", data={}}]
+func getDefaultEquipment():
+	return []
 
-func resetEquipment():
-	inventory.clearEquippedItemsKeepPersistent()
+func equipDefaultEquipmentEntrySafely(equipEntry):
+	var itemID = equipEntry
+	if(equipEntry is Dictionary):
+		itemID = equipEntry["id"]
+		
+	var itemRef = GlobalRegistry.getItemRef(itemID)
+	if(itemRef == null):
+		return false
+	
+	var itemSlot = itemRef.getClothingSlot()
+	if(itemSlot == null):
+		return false
+	
+	if(getInventory().hasSlotEquipped(itemSlot)):
+		return false
+	
+	var theItem
+	if(!disableSerialization):
+		theItem = GlobalRegistry.createItem(itemID)
+	else:
+		theItem = GlobalRegistry.createItemNoID(itemID)
+	
+	if(equipEntry is Dictionary):
+		theItem.loadData(equipEntry["data"])
+	
+	return getInventory().equipItem(theItem)
+
+func createEquipment():
+	var theEquip = getDefaultEquipment()
+	
+	for equipEntry in theEquip:
+		equipDefaultEquipmentEntrySafely(equipEntry)
+
+func restockEquipmentChance(chanceToEquip):
+	var theEquip = getDefaultEquipment()
+	
+	for equipEntry in theEquip:
+		if(RNG.chance(chanceToEquip)):
+			equipDefaultEquipmentEntrySafely(equipEntry)
+
+# Restraints that we forced onto the npc for example, anything that is not their default equipment
+func getWrongEquippedItems():
+	var result = []
+	
+	var theEquip = getDefaultEquipment()
+	var theEquipChecker = {}
+	for equipEntry in theEquip:
+		if(equipEntry is String):
+			theEquipChecker[equipEntry] = true
+		elif(equipEntry is Dictionary):
+			theEquipChecker[equipEntry["id"]] = true
+	
+	for item in getInventory().getEquippedItems().values():
+		if(item == null):
+			continue
+		if(!theEquipChecker.has(item.id)):
+			result.append(item)
+	
+	return result
+
+func resetEquipment(keepPersistent = true, keepImportant = true):
+	var badItems = getWrongEquippedItems()
+	for item in badItems:
+		if(keepPersistent && item.isPersistent()):
+			continue
+		if(keepImportant && item.isImportant()):
+			continue
+		getInventory().removeEquippedItem(item)
+	
+	restockEquipmentChance(100)
+
+func resetEquipmentHard(keepPersistent = true):
+	if(keepPersistent):
+		inventory.clearEquippedItemsKeepPersistent()
+	else:
+		inventory.clearEquippedItems()
 	createEquipment()
-	updateNonBattleEffects()
+
+func prepareForSexAsDom():
+	#resetEquipment()
+	pass
 
 func processTime(_secondsPassed):
 	for bodypart in processingBodyparts:
@@ -276,28 +354,43 @@ func hoursPassed(_howmuch):
 			bodypart.hoursPassed(_howmuch)
 
 	if(canDoSelfCare()):
-		var tookShowerChance = _howmuch * 5.0
+		var tookShowerChance = sqrt(_howmuch * 30.0)
 		if(RNG.chance(tookShowerChance)):
 			removeEffect(StatusEffect.DrenchedInPiss)
 			removeEffect(StatusEffect.HasTallyMarks)
 			removeEffect(StatusEffect.HasBodyWritings)
 			removeEffect(StatusEffect.CoveredInCum)
 			
-		var removedRestraintsChance = _howmuch * 2.0
+		var removedRestraintsChance = sqrt(_howmuch * 20.0)
 		if(RNG.chance(removedRestraintsChance)):
 			var restraints = getInventory().getEquppedRestraints()
+			var restraintAmount = restraints.size()
+			var removedAtLeastOne = false
 			if(restraints.size() > 0):
 				for restraint in restraints:
-					if(restraint.isImportant()):
+					if(restraint.isImportant() || restraint.isPersistent()):
+						restraintAmount -= 1
 						continue
 					
-					if(RNG.chance(removedRestraintsChance)):
+					var chanceModifier = 1.0
+					var restraintData:RestraintData = restraint.getRestraintData()
+					if(restraintData != null):
+						chanceModifier /= restraintData.getLevel()
+					
+					if(RNG.chance(removedRestraintsChance * chanceModifier)):
 						getInventory().removeEquippedItem(restraint)
+						restraintAmount -= 1
+						removedAtLeastOne = true
 				
-				if(getInventory().getEquppedRestraints().size() == 0):
-					resetEquipment()
-		#if(_howmuch > 240):
-		#	resetEquipment()
+				# We removed all our restraints, time to dress up!
+				if(restraintAmount == 0 && removedAtLeastOne):
+					restockEquipmentChance(100)
+		else:
+			# Npcs occasionally check if they have all the items that they should have
+			var checkEquipmentRandomlyChance = sqrt(_howmuch * 10.0)
+			if(RNG.chance(checkEquipmentRandomlyChance) && !hasBlockedHands() && !hasBoundArms()):
+				#restockEquipmentChance(100)
+				resetEquipment()
 
 	GM.GES.callGameExtenders(ExtendGame.npcHoursPassed, [self, _howmuch])
 

@@ -22,6 +22,13 @@ func _init():
 	id = "DomRidingSubVaginal"
 
 func getGoals():
+	if(currentPose == POSE_COWGIRLCHOKE):
+		return {
+			SexGoal.ChokeReceiveVaginal: 1.0,
+			SexGoal.ReceiveVaginal: 1.0,
+			SexGoal.ReceiveStraponVaginal: 1.0,
+		}
+	
 	return {
 		SexGoal.ReceiveVaginal: 1.0,
 		SexGoal.ReceiveStraponVaginal: 1.0,
@@ -36,19 +43,28 @@ func getSupportedSexTypes():
 const POSE_DEFAULT = "POSE_DEFAULT"
 const POSE_COWGIRL = "POSE_COWGIRL"
 const POSE_REVERSECOWGIRL = "POSE_REVERSECOWGIRL"
+const POSE_COWGIRLALT = "POSE_COWGIRLALT"
+const POSE_COWGIRLCHOKE = "POSE_COWGIRLCHOKE"
 const PoseToName = {
 	POSE_DEFAULT: "Default",
 	POSE_COWGIRL: "Cowgirl",
 	POSE_REVERSECOWGIRL: "Reverse Cowgirl",
+	POSE_COWGIRLALT: "Cowgirl Alternative",
+	POSE_COWGIRLCHOKE: "Cowgirl Choking",
 }
 const PoseToAnimName = {
 	POSE_DEFAULT: StageScene.SexCowgirl,
 	POSE_COWGIRL: StageScene.SexCowgirl,
 	POSE_REVERSECOWGIRL: StageScene.SexReverseCowgirl,
+	POSE_COWGIRLALT: StageScene.SexCowgirlAlt,
+	POSE_COWGIRLCHOKE: StageScene.SexCowgirlChoke,
 }
 func getAvaiablePoses():
+	if(currentPose == POSE_COWGIRLCHOKE):
+		return [POSE_COWGIRLCHOKE]
+	
 	if(getSexType() == SexType.DefaultSex):
-		return [POSE_COWGIRL, POSE_REVERSECOWGIRL]
+		return [POSE_COWGIRL, POSE_REVERSECOWGIRL, POSE_COWGIRLALT]
 	
 	return [POSE_DEFAULT]
 
@@ -135,6 +151,10 @@ func getStartTextForPose(thePose):
 		text = RNG.pick([
 			"{dom.You} {dom.youVerb('stradle')} {sub.you} in a reverse cowgirl position and {dom.youVerb('rub')} {dom.yourHis} "+getUsedBodypartName()+" against {sub.yourHis} "+getDickName(RNG.pick(["dick", "penis", "cock", "member"]))+throughClothing,
 		])
+	elif(thePose == POSE_COWGIRLALT):
+		text = RNG.pick([
+			"{dom.You} {dom.youVerb('stradle')} {sub.you} and {dom.youVerb('tilt')} {dom.yourHis} body back while rubbing {dom.yourHis} "+getUsedBodypartName()+" against {sub.yourHis} "+getDickName(RNG.pick(["dick", "penis", "cock", "member"]))+throughClothing,
+		])
 	else:
 		text = RNG.pick([
 			"{dom.You} {dom.youVerb('stradle')} {sub.you} and {dom.youVerb('rub')} {dom.yourHis} "+getUsedBodypartName()+" against {sub.yourHis} "+getDickName(RNG.pick(["dick", "penis", "cock", "member"]))+throughClothing,
@@ -150,6 +170,10 @@ func getSwitchPoseTextForPose(thePose):
 	elif(thePose == POSE_REVERSECOWGIRL):
 		text = RNG.pick([
 			"{dom.You} {dom.youVerb('stradle')} {sub.you} in a reverse cowgirl position, {sub.your} "+getDickName(RNG.pick(["dick", "penis", "cock", "member"]))+" is still inside {dom.yourHis} "+getUsedBodypartName()+"!",
+		])
+	elif(thePose == POSE_COWGIRLALT):
+		text = RNG.pick([
+			"{dom.You} {dom.youVerb('stradle')} {sub.you} and {dom.youVerb('tilt')} {dom.yourHis} body back, {sub.your} "+getDickName(RNG.pick(["dick", "penis", "cock", "member"]))+" is still inside {dom.yourHis} "+getUsedBodypartName()+"!",
 		])
 	else:
 		text = RNG.pick([
@@ -173,9 +197,15 @@ func startActivity(_args):
 	}
 
 func onSwitchFrom(_otherActivity, _args):
+	if(_args != null && _args == ["choke"]):
+		currentPose = POSE_COWGIRLCHOKE
+		return
 	currentPose = RNG.pick(getAvaiablePoses())
 
 func processTurn():
+	if(currentPose == POSE_COWGIRLCHOKE):
+		subInfo.addConsciousness(-0.01)
+	
 	if(state == "knotting"):
 		var freeRoom = getDom().getPenetrationFreeRoomBy(usedBodypart, subID)
 		if(freeRoom > 0.0):
@@ -250,7 +280,7 @@ func processTurn():
 				])
 			elif(subInfo.isCloseToCumming()):
 				text += RNG.pick([
-					" {sub.You} pants eagerly.",
+					" {sub.You} {sub.youVerb('pant')} eagerly.",
 					" {sub.You} closes in on {sub.yourHis} orgasm.",
 					" {sub.You} {sub.youAre} gonna cum soon.",
 				])
@@ -265,7 +295,7 @@ func processTurn():
 				])
 			elif(subInfo.isCloseToCumming()):
 				text += RNG.pick([
-					" {sub.You} pants eagerly.",
+					" {sub.You} {sub.youVerb('pant')} eagerly.",
 					" {sub.You} closes in on {sub.yourHis} orgasm.",
 					" {sub.You} {sub.youAre} gonna cum soon.",
 					" {sub.Your} "+RNG.pick(["cock", "dick", "member"])+" is throbbing.",

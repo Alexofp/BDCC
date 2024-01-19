@@ -105,6 +105,9 @@ func getCharacter(charID):
 func getCharacters():
 	return staticCharacters
 
+func getDynamicCharacters():
+	return dynamicCharacters
+
 func addDynamicCharacter(character, printDebug = true):
 	if(!(character.isDynamicCharacter())):
 		assert(false, "addDynamicCharacter() Received a non-dynamic character")
@@ -185,6 +188,7 @@ func getDynamicCharactersPools():
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	GM.main = self
 	createStaticCharacters()
 	call_deferred("updateStaticCharacters")
 	
@@ -195,8 +199,7 @@ func _ready():
 	add_child(pc)
 	
 	randomize()
-	GM.main = self
-
+	
 	startNewGame()
 	
 	runCurrentScene()
@@ -1127,6 +1130,12 @@ func characterIsVisible(charID):
 			return true
 	
 	return false
+
+func updateCharacterUntilNow(charID):
+	var character = getCharacter(charID)
+	if(character != null):
+		character.processUntilTime(currentDay, timeOfDay)
+		character.updateNonBattleEffects()
 
 func startUpdatingCharacter(charID):
 	if(!charactersToUpdate.has(charID)):
