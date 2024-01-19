@@ -99,6 +99,9 @@ func _run():
 		addButtonWithChecks("Lick it!", "Lick the pussy", "vagina_lick", [], [[ButtonChecks.NotOralBlocked]])
 		if(GM.pc.hasEffect(StatusEffect.HasCumInsideMouth)):
 			addButtonWithChecks("Spit inside", "Spit whatever your have in your mouth into that pussy", "vagina_lick_spit", [], [[ButtonChecks.NotOralBlocked], [ButtonChecks.ContentEnabled, ContentType.CumStealing]])
+		else:
+			addDisabledButton("Spit inside", "You don't have anything in your mouth")
+		addButtonWithChecks("Fuck it!", "Use your cock to fuck this hole", "vagina_fuck", [], [[ButtonChecks.HasReachablePenis]])
 		
 	if(state == "vagina_lick"):
 		showFightUI = true
@@ -204,6 +207,9 @@ func _run():
 		addButtonWithChecks("Lick it!", "Lick the tailhole", "anus_lick", [], [[ButtonChecks.NotOralBlocked]])
 		if(GM.pc.hasEffect(StatusEffect.HasCumInsideMouth)):
 			addButtonWithChecks("Spit inside", "Spit whatever your have in your mouth into that ass", "anus_lick_spit", [], [[ButtonChecks.NotOralBlocked], [ButtonChecks.ContentEnabled, ContentType.CumStealing]])
+		else:
+			addDisabledButton("Spit inside", "You don't have anything in your mouth")
+		addButtonWithChecks("Fuck it!", "Use your cock to fuck this hole", "anus_fuck", [], [[ButtonChecks.HasReachablePenis]])
 		
 	if(state == "anus_lick"):
 		showFightUI = true
@@ -426,9 +432,421 @@ func _run():
 			addButton("Vagina", "Use the cock to fuck their pussy", "penis_proxyfuck_vagina", ["vagina"])
 		addButton("Anus", "Use the cock to fuck their anus", "penis_proxyfuck_anus", ["anus"])
 
-func calcArousalBasedOnKink(_theKink):
-	var connectedChar = GlobalRegistry.getCharacter(portalCharID)
-	return (0.1 + connectedChar.getLustLevel()*0.1)
+	if(state == "penis_proxyfuck_vagina"):
+		showFightUI = true
+		var connectedChar = GlobalRegistry.getCharacter(portalCharID)
+		#var subConnectedChar = GlobalRegistry.getCharacter(secondPortalCharID)
+		
+		var animName = ("sex" if connectedChar.getArousal() <= 0.7 else "fast")
+		if(!isRepeat):
+			animName = "inside"
+		if(secondPortalCharID == "pc" && portalCharID == "pc"):
+			playAnimation(StageScene.SexPortalProxy, animName, {onlyRight=true})
+		else:
+			playAnimation(StageScene.SexPortalProxy, animName, {onlyRight=(secondPortalCharID=="pc"), npc=secondPortalCharID, npc2=portalCharID})
+		
+		if(!isRepeat):
+			if(secondPortalCharID == "pc" && portalCharID == "pc"):
+				# You fuck yourself
+				saynn(RNG.pick([
+					"You press the fleshlights together, causing your own {penis} to penetrate your own pussy.. Moans escape you as your moist inner walls clench around your shaft..",
+				]))
+			elif(secondPortalCharID == "pc"):
+				# You are being fucked
+				saynn(RNG.pick([
+					"You press the fleshlights together, causing someone's {penis} to penetrate your pussy.. Moans escape you as your moist inner walls clench around that hard shaft..",
+				]))
+			elif(isPCPortal()):
+				# You fuck someone else
+				saynn(RNG.pick([
+					"You press the fleshlights together, causing your {penis} to penetrate someone's {pussy} with ease! Let's hope that they are ready because you don't plan on stopping there..",
+				]))
+			elif(secondPortalCharID == portalCharID):
+				# Someone else fucks themselves
+				saynn(RNG.pick([
+					"You press the fleshlights together, making someone's {penis} go up their own {pussy}! Hopefully they are ready because you're gonna make them fuck themselves!",
+				]))
+			else:
+				# 2 different npcs fuck
+				saynn(RNG.pick([
+					"You press the fleshlights together, making someone's {penis} penetrate someone else's {pussy}! Hopefully they are both ready because you don't plan on stopping there..",
+				]))
+		else:	
+			if(secondPortalCharID == "pc" && portalCharID == "pc"):
+				# You fuck yourself
+				saynn(RNG.pick([
+					"You move the fleshlights against each other, moaning as your own {penis} is fucking your {npc2.vaginaStretch} {pussy}!",
+					"Your body squirms.. while you are fucking yourself in the most weird way possible.",
+					"You can hear your pussy making wet noises as you shove your own {penis} in and out.. Feels so good.",
+					"Each time you slide the fleshlight with your {pussy} along your own {penis}, it spreads your wet inner walls and hammers away at your g-spot.. You know exactly how to make yourself feel good.",
+					"You’re pounding your own {pussy} with your {pc.penis} fast and hard! A slight bump appears on your belly as your {penis} is reaching your cervix each time.",
+				]))
+			elif(secondPortalCharID == "pc"):
+				# You are being fucked
+				saynn(RNG.pick([
+					"You move the fleshlights against each other, moaning as someone’s {penis} is fucking your {npc2.vaginaStretch} {pussy}!",
+					"Your body squirms.. while you are making someone fuck you in the most weird way possible.",
+					"You can hear your pussy making wet noises as you shove someone’s {penis} in and out.. Feels so good.",
+					"Each time you slide the fleshlight with your {pussy} along your that {penis}, it spreads your wet inner walls and hammers away at your g-spot.. You know exactly how to make yourself feel good.",
+					"You’re pounding your {pussy} with someone’s {npc.penis} fast and hard like it’s a dildo! A slight bump appears on your belly as that {penis} is reaching your cervix each time.",
+				]))
+			elif(isPCPortal()):
+				# You fuck someone else
+				saynn(RNG.pick([
+					"You move the fleshlights against each other, panting softly as your {penis} is fucking someone’s {npc2.vaginaStretch} {pussy}!",
+					"Your body squirms a bit.. while you are fucking someone in the most weird way possible.",
+					"You can hear that {pussy} making wet noises as you shove your {penis} in and out.. Yeah, take that, slut.",
+					"Each time you slide the fleshlight with that {pussy} along your {penis}, it spreads their wet inner walls and hammers away at their g-spot.. Makes that pussy feel so tight..",
+					"You’re pounding that {pussy} with your {npc.penis} fast and hard, having your member disconnected from your body makes it so much easier to fuck someone!",
+				]))
+			elif(secondPortalCharID == portalCharID):
+				# Someone else fucks themselves
+				saynn(RNG.pick([
+					"You move the fleshlights against each other, making it so someone’s {penis} is fucking their own {npc2.vaginaStretch} {pussy}!",
+					"Your eyes watch with great interest.. while you are making someone fuck themselves in the most weird way possible.",
+					"You can hear that pussy making wet noises as you shove their own {penis} in and out.. Should feel good for them, it’s double the stimulation after all.",
+					"Each time you slide the fleshlight with someone’s {pussy} along their {penis}, it spreads their wet inner walls and hammers away at their g-spot.. You can spot the muscles twitching since you’re watching the action from up so close.",
+					"You’re pounding someone’s {pussy} with their own {npc.penis} fast and hard! That pussy is dripping juices all over the other fleshlight.",
+				]))
+			else:
+				# 2 different npcs fuck
+				saynn(RNG.pick([
+					"You move the fleshlights against each other, making it so someone’s {penis} is fucking that {npc2.vaginaStretch} {pussy}! They probably don’t even realize that you are making them fuck each other.",
+					"Your eyes watch with great interest.. while you are making someone fuck someone else in the most weird way possible.",
+					"You can hear that pussy making wet noises as you shove someone {penis} in and out.. Feels strange to see a fleshlight work like the real thing.. but it is also quite fun.",
+					"Each time you slide the fleshlight with someone’s {pussy} along someone else’s {penis}, it spreads their wet inner walls and hammers away at their g-spot.. You can spot the muscles twitching since you’re watching the action from up so close.",
+					"You’re pounding someone’s {pussy} with a stranger’s {npc.penis} fast and hard! That pussy is dripping juices all over the other fleshlight.",
+				]))
+			
+		if(extraText != ""):
+			saynn(extraText)
+			extraText = ""
+		
+		if(connectedChar.getArousal() >= 1.0):
+			saynn("That cock is about to cum!")
+			
+			addButton("Orgasm", "See what happens", "penis_proxyfuck_vagina_orgasm")
+		else:
+			addButton("More", "Keeps those toys moving against each other", "penis_proxyfuck_vagina")
+		
+		isRepeat = true
+
+	if(state == "penis_proxyfuck_vagina_orgasm"):
+		showFightUI = true
+		#var connectedChar = GlobalRegistry.getCharacter(portalCharID)
+		
+		if(secondPortalCharID == "pc" && portalCharID == "pc"):
+			playAnimation(StageScene.SexPortalProxy, "inside", {onlyRight=true})
+		else:
+			playAnimation(StageScene.SexPortalProxy, "inside", {onlyRight=(secondPortalCharID=="pc"), npc=secondPortalCharID, npc2=portalCharID})
+	
+		if(secondPortalCharID == "pc" && portalCharID == "pc"):
+			# You fuck yourself
+			saynn(RNG.pick([
+				"You let out some passionate stifled noises as your {npc.penis} is throbbing inside your {pussy}.. before stuffing your womb to the brim with your seed. You curl your toes and squirm a lot, your hands shaking, making your cock rub against your pussy walls more..",
+			]))
+		elif(secondPortalCharID == "pc"):
+			# You are being fucked
+			saynn(RNG.pick([
+				"You let out some passionate stifled noises as someone’s {npc.penis} is throbbing inside your {pussy}.. before stuffing your womb to the brim with its seed. You curl your toes and squirm a lot, your hands shaking, making that cock rub against your pussy walls more..",
+			]))
+		elif(isPCPortal()):
+			# You fuck someone else
+			saynn(RNG.pick([
+				"You grunt softly as your {npc.penis} is throbbing inside that clenching {pussy}.. before stuffing its womb to the brim with your seed. Remote breeding, fuck yeah.",
+			]))
+		elif(secondPortalCharID == portalCharID):
+			# Someone else fucks themselves
+			saynn(RNG.pick([
+				"You can’t help but to grin while watching that throbbing {npc.penis} cum inside the {pussy} that belongs to the same person. What if you just made them knock themselves up?",
+			]))
+		else:
+			# 2 different npcs fuck
+			saynn(RNG.pick([
+				"You can’t help but to smile while watching that throbbing {npc.penis} cum inside the helpless twitching {pussy}. You just made two complete strangers breed. Nice.",
+			]))
+	
+		addButton("Continue", "See what happens next", "choose_penis")
+
+
+
+
+	if(state == "penis_proxyfuck_anus"):
+		showFightUI = true
+		var connectedChar = GlobalRegistry.getCharacter(portalCharID)
+		#var subConnectedChar = GlobalRegistry.getCharacter(secondPortalCharID)
+		
+		var animName = ("sex" if connectedChar.getArousal() <= 0.7 else "fast")
+		if(!isRepeat):
+			animName = "inside"
+		if(secondPortalCharID == "pc" && portalCharID == "pc"):
+			playAnimation(StageScene.SexPortalProxy, animName, {onlyRight=true})
+		else:
+			playAnimation(StageScene.SexPortalProxy, animName, {onlyRight=(secondPortalCharID=="pc"), npc=secondPortalCharID, npc2=portalCharID})
+		
+		if(!isRepeat):
+			if(secondPortalCharID == "pc" && portalCharID == "pc"):
+				# You fuck yourself
+				saynn(RNG.pick([
+					"You press the fleshlights together, causing your own {penis} to penetrate your own {anus}.. Moans escape you as your moist inner walls clench around your shaft..",
+				]))
+			elif(secondPortalCharID == "pc"):
+				# You are being fucked
+				saynn(RNG.pick([
+					"You press the fleshlights together, causing someone's {penis} to penetrate your ass.. Moans escape you as your needy inner walls clench around that hard shaft..",
+				]))
+			elif(isPCPortal()):
+				# You fuck someone else
+				saynn(RNG.pick([
+					"You press the fleshlights together, causing your {penis} to penetrate someone's {anus} with ease! Let's hope that they are ready because you don't plan on stopping there..",
+				]))
+			elif(secondPortalCharID == portalCharID):
+				# Someone else fucks themselves
+				saynn(RNG.pick([
+					"You press the fleshlights together, making someone's {penis} go up their own {ass}! Hopefully they are ready because you're gonna make them fuck themselves!",
+				]))
+			else:
+				# 2 different npcs fuck
+				saynn(RNG.pick([
+					"You press the fleshlights together, making someone's {penis} penetrate someone else's {anus}! Hopefully they are both ready because you don't plan on stopping there..",
+				]))
+		else:	
+			if(secondPortalCharID == "pc" && portalCharID == "pc"):
+				# You fuck yourself
+				saynn(RNG.pick([
+					"You move the fleshlights against each other, moaning as your own {penis} is fucking your {npc2.anusStretch} {anus}!",
+					"Your body squirms.. while you are fucking yourself in the most weird way possible.",
+					"You can hear your {anus} making wet noises as you shove your own {penis} in and out.. Feels so good.",
+					"Each time you slide the fleshlight with your {anus} along your own {penis}, it spreads your wet inner walls wide and hammers away at your prostate.. You know exactly how to make yourself feel good.",
+					"You’re pounding your own {anus} with your {npc.penis} fast and hard! A slight bump appears on your belly as your {penis} is reaching deep and putting pressure on your inner walls.",
+				]))
+			elif(secondPortalCharID == "pc"):
+				# You are being fucked
+				saynn(RNG.pick([
+					"You move the fleshlights against each other, moaning as someone’s {penis} is fucking your {npc2.anusStretch} {anus}!",
+					"Your body squirms.. while you are making someone fuck you in the most weird way possible.",
+					"You can hear your {anus} making wet noises as you shove someone’s {penis} in and out.. Feels so good.",
+					"Each time you slide the fleshlight with your {anus} along your that {penis}, it spreads your wet inner walls and hammers away at your pleasure spot.. You know exactly how to make yourself feel good.",
+					"You’re pounding your {anus} with someone’s {npc.penis} fast and hard like it’s a dildo! A slight bump appears on your belly as that {penis} is reaching deep and putting pressure on all your buttons.",
+				]))
+			elif(isPCPortal()):
+				# You fuck someone else
+				saynn(RNG.pick([
+					"You move the fleshlights against each other, panting softly as your {penis} is fucking someone’s {npc2.anusStretch} {anus}!",
+					"Your body squirms a bit.. while you are fucking someone in the most weird way possible.",
+					"You can hear that {anus} making wet noises as you shove your {penis} in and out.. Yeah, take that, slut.",
+					"Each time you slide the fleshlight with that {anus} along your {penis}, it spreads their wet inner walls and hammers away at all their buttons.. Makes that ass feel so tight..",
+					"You’re pounding that {anus} with your {npc.penis} fast and hard, having your member disconnected from your body makes it so much easier to fuck someone!",
+				]))
+			elif(secondPortalCharID == portalCharID):
+				# Someone else fucks themselves
+				saynn(RNG.pick([
+					"You move the fleshlights against each other, making it so someone’s {penis} is fucking their own {npc2.anusStretch} {anus}!",
+					"Your eyes watch with great interest.. while you are making someone fuck themselves in the most weird way possible.",
+					"You can hear that {anus} making wet noises as you shove their own {penis} in and out.. Should feel good for them, it’s double the stimulation after all.",
+					"Each time you slide the fleshlight with someone’s {anus} along their {penis}, it spreads their wet inner walls and hammers away at their prostate.. You can spot the muscles twitching since you’re watching the action from up so close.",
+					"You’re pounding someone’s {anus} with their own {npc.penis} fast and hard! That slut is clenching tight around its own cock!",
+				]))
+			else:
+				# 2 different npcs fuck
+				saynn(RNG.pick([
+					"You move the fleshlights against each other, making it so someone’s {penis} is fucking that {npc2.anusStretch} {anus}! They probably don’t even realize that you are making them fuck each other.",
+					"Your eyes watch with great interest.. while you are making someone fuck someone else in the most weird way possible.",
+					"You can hear that {anus} making wet noises as you shove someone {penis} in and out.. Feels strange to see a fleshlight work like the real thing.. but it is also quite fun.",
+					"Each time you slide the fleshlight with someone’s {anus} along someone else’s {penis}, it spreads their wet inner walls and hammers away at all their buttons.. You can spot the muscles twitching since you’re watching the action from up so close.",
+					"You’re pounding someone’s {anus} with a stranger’s {npc.penis} fast and hard! That slut is clenching tight around some stranger’s cock!",
+				]))
+			
+		if(extraText != ""):
+			saynn(extraText)
+			extraText = ""
+		
+		if(connectedChar.getArousal() >= 1.0):
+			saynn("That cock is about to cum!")
+			
+			addButton("Orgasm", "See what happens", "penis_proxyfuck_anus_orgasm")
+		else:
+			addButton("More", "Keeps those toys moving against each other", "penis_proxyfuck_anus")
+		
+		isRepeat = true
+
+	if(state == "penis_proxyfuck_anus_orgasm"):
+		showFightUI = true
+		#var connectedChar = GlobalRegistry.getCharacter(portalCharID)
+		
+		if(secondPortalCharID == "pc" && portalCharID == "pc"):
+			playAnimation(StageScene.SexPortalProxy, "inside", {onlyRight=true})
+		else:
+			playAnimation(StageScene.SexPortalProxy, "inside", {onlyRight=(secondPortalCharID=="pc"), npc=secondPortalCharID, npc2=portalCharID})
+	
+		if(secondPortalCharID == "pc" && portalCharID == "pc"):
+			# You fuck yourself
+			saynn(RNG.pick([
+				"You let out some passionate stifled noises as your {npc.penis} is throbbing inside your {anus}.. before stuffing it to the brim with your seed. You curl your toes and squirm a lot, your hands shaking, making your cock rub against your prostate more..",
+			]))
+		elif(secondPortalCharID == "pc"):
+			# You are being fucked
+			saynn(RNG.pick([
+				"You let out some passionate stifled noises as someone’s {npc.penis} is throbbing inside your {anus}.. before stuffing it to the brim with its seed. You curl your toes and squirm a lot, your hands shaking, making that cock rub against your inner walls more..",
+			]))
+		elif(isPCPortal()):
+			# You fuck someone else
+			saynn(RNG.pick([
+				"You grunt softly as your {npc.penis} is throbbing inside that clenching {anus}.. before stuffing it to the brim with your seed. Remote pounding, fuck yeah.",
+			]))
+		elif(secondPortalCharID == portalCharID):
+			# Someone else fucks themselves
+			saynn(RNG.pick([
+				"You can’t help but to grin while watching that throbbing {npc.penis} cum inside the {anus} that belongs to the same person. Their prostate is probably aching so must right now..",
+			]))
+		else:
+			# 2 different npcs fuck
+			saynn(RNG.pick([
+				"You can’t help but to smile while watching that throbbing {npc.penis} cum inside the helpless twitching {anus}. You just made two complete strangers fuck. Nice.",
+			]))
+	
+		addButton("Continue", "See what happens next", "choose_penis")
+
+
+
+
+
+	if(state == "vagina_fuck"):
+		showFightUI = true
+		var connectedChar = GlobalRegistry.getCharacter(portalCharID)
+		
+		playAnimation(StageScene.SexPortal, ("sex" if connectedChar.getArousal() <= 0.7 else "fast"), {onlyRight=isPCPortal(), npc=portalCharID, bodyState={hard=true, exposedCrotch=true}, npcBodyState={hard=true}})
+		
+		if(!isRepeat):
+			if(isPCPortal()):
+				saynn(RNG.pick([
+					"You move the fleshlight with your wet {npc.vaginaStretch} {pussy} closer to your {pc.penis}.. and then penetrate yourself, your own member sliding up your pussy slit. Feels nice..",
+					"You grab the fleshlight with your wet {npc.vaginaStretch} {pussy} on it and wear it onto your {pc.penis} like it's a sextoy. Feels good..",
+				]))
+			else:
+				saynn(RNG.pick([
+					"You move the fleshlight with someone’s {npc.vaginaStretch} {pussy} closer to your {pc.penis}.. and then penetrate it, your member sliding up that pussy slit. They are clenching, probably not expecting this. But that only makes you more eager to fuck them.",
+					"You grab the fleshlight with someone’s {npc.vaginaStretch} {pussy} on it and wear it onto your {pc.penis} like it's a sextoy. Their pussy feels nice and warm..",
+				]))
+		else:	
+			if(isPCPortal()):
+				saynn(RNG.pick([
+					"You moan and shudder as you fuck your own {npc.vaginaStretch} {pussy}!",
+					"You shiver.. while fucking yourself, using your own {pussy} for your pleasure.",
+					"You fuck your own pussy so eagerly that it starts making wet noises.. Feels so good.",
+					"You angle that fleshlight a bit, making it so your {penis} is hammering away at your g-spot as you pound your {pussy}. You know exactly how to make yourself feel good.",
+					"You’re pounding your own {pussy} with your {npc.penis} fast and hard! A slight bump appears on your belly as your {peins} is reaching your cervix each time.",
+				]))
+			else:
+				saynn(RNG.pick([
+					"You pant softly as you fuck that eager {npc.vaginaStretch} {pussy}! Feels so much better than sextoy.",
+					"You smile while fucking someone, using their {pussy} for your pleasure remotely.",
+					"You fuck that {pussy} so eagerly that it starts making wet noises.. The way its inner walls grip your length.. so good.",
+					"You shove your {penis} deep, hammering away at that slit’s pleasure spot. Whoever they are, they are dripping like a whore.",
+					"You’re pounding someone’s {pussy} with your {npc.penis} fast and hard! So hard that your {penis} is reaching their cervix each time, probably creating a small bump on their belly.",
+				]))
+		
+		if(extraText != ""):
+			saynn(extraText)
+			extraText = ""
+		
+		if(GM.pc.getArousal() >= 1.0):
+			saynn("You're about to cum!")
+			
+			addButton("Cum inside", "Cum inside them", "vagina_fuck_inside")
+		else:
+			addButton("Fuck more", "Really fuck that hole", "vagina_fuck")
+		
+		isRepeat = true
+	
+	if(state == "vagina_fuck_inside"):
+		showFightUI = true
+		#var connectedChar = GlobalRegistry.getCharacter(portalCharID)
+		
+		playAnimation(StageScene.SexPortal, "inside", {onlyRight=isPCPortal(), npc=portalCharID, bodyState={hard=true, exposedCrotch=true}})
+		
+		if(isPCPortal()):
+			saynn(RNG.pick([
+				"You let out some passionate stifled noises as your {npc.penis} is throbbing inside your {pussy}.. before stuffing your womb to the brim with your seed. You curl your toes and squirm a lot, your hands shaking, making your cock rub against your pussy walls more..",
+			]))
+		else:
+			saynn(RNG.pick([
+				"You grunt softly as your {npc.penis} is throbbing inside that clenching {pussy}.. before stuffing its womb to the brim with your seed. Remote breeding, fuck yeah.",
+			]))
+		
+		addButton("Continue", "See what happens next", "choose_vagina")
+
+
+
+	if(state == "anus_fuck"):
+		showFightUI = true
+		var connectedChar = GlobalRegistry.getCharacter(portalCharID)
+		
+		playAnimation(StageScene.SexPortal, ("sex" if connectedChar.getArousal() <= 0.7 else "fast"), {onlyRight=isPCPortal(), npc=portalCharID, bodyState={hard=true, exposedCrotch=true}, npcBodyState={hard=true}})
+		
+		if(!isRepeat):
+			if(isPCPortal()):
+				saynn(RNG.pick([
+					"You move the fleshlight with your {npc.anusStretch} {anus} closer to your {pc.penis}.. and then penetrate yourself, your own member sliding up your own butt. Feels nice..",
+					"You grab the fleshlight with your {npc.anusStretch} {anus} on it and wear it onto your {pc.penis} like it's a sextoy. Feels good..",
+				]))
+			else:
+				saynn(RNG.pick([
+					"You move the fleshlight with someone’s {npc.anusStretch} {anus} closer to your {pc.penis}.. and then penetrate it, your member sliding deep inside. They are clenching, probably not expecting this. But that only makes you more eager to fuck them.",
+					"You grab the fleshlight with someone’s {npc.anusStretch} {anus} on it and wear it onto your {pc.penis} like it's a sextoy. Feels nice and warm..",
+				]))
+		else:	
+			if(isPCPortal()):
+				saynn(RNG.pick([
+					"You moan and shudder as you fuck your own {npc.anusStretch} {ass}!",
+					"You shiver.. while fucking yourself, using your own {asshole} for your pleasure.",
+					"You fuck your own {asshole} so eagerly that it starts making wet noises.. Feels so good.",
+					"You angle that fleshlight a bit, making it so your {penis} is hammering away at your prostate as you pound yourself. You know exactly how to make yourself feel good.",
+					"You’re pounding your own {ass} with your {npc.penis} fast and hard! A slight bump appears on your belly as your {peins} is reaching deep and putting pressure on the inner wall.",
+				]))
+			else:
+				saynn(RNG.pick([
+					"You pant softly as you fuck that eager {npc.anusStretch} {ass}! Feels so much better than any sextoy.",
+					"You smile while fucking someone, using their {ass} for your pleasure remotely.",
+					"You fuck that {asshole} so eagerly that it starts making wet noises.. The way its inner walls grip your length.. so good.",
+					"You shove your {penis} deep, hammering away at that {asshole}. Whoever they are, they are clenching like a whore.",
+					"You’re pounding someone’s {ass} with your {npc.penis} fast and hard! So hard that your {penis} is reaching deep inside and putting pressure on their inner wall, probably creating a small bump on their belly.",
+				]))
+		
+		if(extraText != ""):
+			saynn(extraText)
+			extraText = ""
+		
+		if(GM.pc.getArousal() >= 1.0):
+			saynn("You're about to cum!")
+			
+			addButton("Cum inside", "Cum inside them", "anus_fuck_inside")
+		else:
+			addButton("Fuck more", "Really fuck that hole", "anus_fuck")
+		
+		isRepeat = true
+	
+	if(state == "anus_fuck_inside"):
+		showFightUI = true
+		#var connectedChar = GlobalRegistry.getCharacter(portalCharID)
+		
+		playAnimation(StageScene.SexPortal, "inside", {onlyRight=isPCPortal(), npc=portalCharID, bodyState={hard=true, exposedCrotch=true}})
+		
+		if(isPCPortal()):
+			saynn(RNG.pick([
+				"You let out some passionate stifled noises as your {npc.penis} is throbbing inside your {anus}.. before stuffing it to the brim with your seed. You curl your toes and squirm a lot, your hands shaking, making your cock rub against your prostate more..",
+			]))
+		else:
+			saynn(RNG.pick([
+				"You grunt softly as your {npc.penis} is throbbing inside that clenching {anus}.. before stuffing it to the brim with your seed. Remote pounding, fuck yeah.",
+			]))
+		
+		addButton("Continue", "See what happens next", "choose_anus")
+
+
+
+func calcArousalBasedOnKink(_char, _theKink):
+	return (0.1 + _char.getLustLevel()*0.1)
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
@@ -436,15 +854,135 @@ func _react(_action: String, _args):
 		endScene()
 		return
 	
+	
+	
+	if(_action == "anus_fuck"):
+		processTime(60)
+		var sameMult = 1.0
+		if(portalCharID == "pc"):
+			sameMult = 0.6
+		var connectedChar = GlobalRegistry.getCharacter(portalCharID)
+		connectedChar.addLust(10)
+		connectedChar.addArousal(calcArousalBasedOnKink(connectedChar, Fetish.AnalSexReceiving) * sameMult)
+		GM.pc.addLust(10)
+		GM.pc.addArousal(calcArousalBasedOnKink(GM.pc, Fetish.AnalSexGiving) * sameMult)
+		if(connectedChar.getArousal() >= 1.0 && portalCharID != "pc"):
+			extraText = "{npc.You} {npc.youVerb('orgasm')} hard, {npc.yourHis} {anus} pulsing a lot!"
+			connectedChar.orgasmFrom("pc")
+			connectedChar.setArousal(0.0)
+	
+	if(_action == "anus_fuck_inside"):
+		processTime(60*2)
+		getCharacter(portalCharID).gotAnusFuckedBy("pc")
+		getCharacter(portalCharID).cummedInAnusBy("pc")
+		GM.pc.orgasmFrom(portalCharID)
+		GM.pc.setArousal(0.0)
+		if(portalCharID != "pc"):
+			var connectedChar = GlobalRegistry.getCharacter(portalCharID)
+			connectedChar.orgasmFrom("pc")
+			connectedChar.setArousal(0.0)
+	
+	
+	if(_action == "vagina_fuck"):
+		processTime(60)
+		var sameMult = 1.0
+		if(portalCharID == "pc"):
+			sameMult = 0.6
+		var connectedChar = GlobalRegistry.getCharacter(portalCharID)
+		connectedChar.addLust(10)
+		connectedChar.addArousal(calcArousalBasedOnKink(connectedChar, Fetish.VaginalSexReceiving) * sameMult)
+		GM.pc.addLust(10)
+		GM.pc.addArousal(calcArousalBasedOnKink(GM.pc, Fetish.VaginalSexGiving) * sameMult)
+		if(connectedChar.getArousal() >= 1.0 && portalCharID != "pc"):
+			extraText = "{npc.You} {npc.youVerb('orgasm')} hard, {npc.yourHis} {pussy} pulsing a lot!"
+			connectedChar.orgasmFrom("pc")
+			connectedChar.setArousal(0.0)
+	
+	if(_action == "vagina_fuck_inside"):
+		processTime(60*2)
+		getCharacter(portalCharID).gotVaginaFuckedBy("pc")
+		getCharacter(portalCharID).cummedInVaginaBy("pc")
+		GM.pc.orgasmFrom(portalCharID)
+		GM.pc.setArousal(0.0)
+		if(portalCharID != "pc"):
+			var connectedChar = GlobalRegistry.getCharacter(portalCharID)
+			connectedChar.orgasmFrom("pc")
+			connectedChar.setArousal(0.0)
+	
+	
+	
+	if(_action == "penis_proxyfuck_anus"):
+		processTime(60)
+		var sameMult = 1.0
+		if(portalCharID == secondPortalCharID):
+			sameMult = 0.6
+		var connectedChar = GlobalRegistry.getCharacter(portalCharID)
+		connectedChar.addLust(10)
+		connectedChar.addArousal(calcArousalBasedOnKink(connectedChar, Fetish.AnalSexGiving) * sameMult)
+		var connectedChar2 = GlobalRegistry.getCharacter(secondPortalCharID)
+		connectedChar2.addLust(10)
+		connectedChar2.addArousal(calcArousalBasedOnKink(connectedChar2, Fetish.AnalSexReceiving) * sameMult)
+		if(connectedChar2.getArousal() >= 1.0 && portalCharID != secondPortalCharID):
+			extraText = "{npc2.You} {npc2.youVerb('orgasm')} hard, {npc2.yourHis} {anus} pulsing a lot!"
+			connectedChar2.orgasmFrom(portalCharID)
+			connectedChar2.setArousal(0.0)
+	
+	if(_action == "penis_proxyfuck_anus_orgasm"):
+		processTime(60*2)
+		getCharacter(secondPortalCharID).gotAnusFuckedBy(portalCharID)
+		getCharacter(secondPortalCharID).cummedInAnusBy(portalCharID)
+		var connectedChar = GlobalRegistry.getCharacter(portalCharID)
+		connectedChar.orgasmFrom(secondPortalCharID)
+		connectedChar.setArousal(0.0)
+		if(portalCharID != secondPortalCharID):
+			var connectedChar2 = GlobalRegistry.getCharacter(secondPortalCharID)
+			connectedChar2.orgasmFrom(portalCharID)
+			connectedChar2.setArousal(0.0)
+	
+	if(_action == "penis_proxyfuck_vagina"):
+		processTime(60)
+		var sameMult = 1.0
+		if(portalCharID == secondPortalCharID):
+			sameMult = 0.6
+		var connectedChar = GlobalRegistry.getCharacter(portalCharID)
+		connectedChar.addLust(10)
+		connectedChar.addArousal(calcArousalBasedOnKink(connectedChar, Fetish.VaginalSexGiving) * sameMult)
+		var connectedChar2 = GlobalRegistry.getCharacter(secondPortalCharID)
+		connectedChar2.addLust(10)
+		connectedChar2.addArousal(calcArousalBasedOnKink(connectedChar2, Fetish.VaginalSexReceiving) * sameMult)
+		if(connectedChar2.getArousal() >= 1.0 && portalCharID != secondPortalCharID):
+			extraText = "{npc2.You} {npc2.youVerb('orgasm')} hard, {npc2.yourHis} {pussy} pulsing a lot!"
+			connectedChar2.orgasmFrom(portalCharID)
+			connectedChar2.setArousal(0.0)
+	
+	if(_action == "penis_proxyfuck_vagina_orgasm"):
+		processTime(60*2)
+		getCharacter(secondPortalCharID).gotVaginaFuckedBy(portalCharID)
+		getCharacter(secondPortalCharID).cummedInVaginaBy(portalCharID)
+		var connectedChar = GlobalRegistry.getCharacter(portalCharID)
+		connectedChar.orgasmFrom(secondPortalCharID)
+		connectedChar.setArousal(0.0)
+		if(portalCharID != secondPortalCharID):
+			var connectedChar2 = GlobalRegistry.getCharacter(secondPortalCharID)
+			connectedChar2.orgasmFrom(portalCharID)
+			connectedChar2.setArousal(0.0)
+	
+	if(_action == "choose_penis"):
+		if(secondPortalCharID != ""):
+			if(secondPortalCharID != "pc" && secondPortalCharID!=portalCharID):
+				removeCharacter(secondPortalCharID)
+			secondPortalCharID = ""
+	
 	if(_action == "penis_proxyfuck_secondchoose"):
 		var character = _args[0]
 		secondPortalCharID = character.getID()
 		if(!character.isPlayer()):
-			addCharacter(portalCharID)
+			addCharacter(secondPortalCharID)
 		setState("penis_proxyfuck_choose_hole")
 		return
 	
 	if(_action == "anus_lick_swallow"):
+		processTime(60*2)
 		#GM.pc.cummedInMouthBy(portalCharID, FluidSource.Vagina, RNG.randf_range(0.3,0.5))
 		#GM.pc.cummedOnBy(portalCharID, FluidSource.Vagina, RNG.randf_range(0.1,0.4))
 		var connectedChar = GlobalRegistry.getCharacter(portalCharID)
@@ -452,13 +990,15 @@ func _react(_action: String, _args):
 		connectedChar.setArousal(0.0)
 	
 	if(_action == "anus_lick_spit"):
+		processTime(60)
 		extraText = GM.pc.getBodypartContentsStringList(BodypartSlot.Head)
 		GM.pc.bodypartTransferFluidsTo(BodypartSlot.Head, portalCharID, BodypartSlot.Anus, 0.2, 20.0)
 	
 	if(_action == "anus_lick"):
+		processTime(60)
 		var connectedChar = GlobalRegistry.getCharacter(portalCharID)
 		connectedChar.addLust(10)
-		connectedChar.addArousal(calcArousalBasedOnKink(Fetish.OralSexReceiving))
+		connectedChar.addArousal(calcArousalBasedOnKink(connectedChar, Fetish.RimmingReceiving))
 		
 		if(connectedChar.hasEffect(StatusEffect.HasCumInsideAnus) && OPTIONS.isContentEnabled(ContentType.CumStealing)):
 			if(RNG.chance(20)):
@@ -468,6 +1008,7 @@ func _react(_action: String, _args):
 					])
 	
 	if(_action == "vagina_lick_swallow"):
+		processTime(60*2)
 		GM.pc.cummedInMouthBy(portalCharID, FluidSource.Vagina, RNG.randf_range(0.3,0.5))
 		GM.pc.cummedOnBy(portalCharID, FluidSource.Vagina, RNG.randf_range(0.1,0.4))
 		var connectedChar = GlobalRegistry.getCharacter(portalCharID)
@@ -475,13 +1016,15 @@ func _react(_action: String, _args):
 		connectedChar.setArousal(0.0)
 	
 	if(_action == "vagina_lick_spit"):
+		processTime(60)
 		extraText = GM.pc.getBodypartContentsStringList(BodypartSlot.Head)
 		GM.pc.bodypartTransferFluidsTo(BodypartSlot.Head, portalCharID, BodypartSlot.Vagina, 0.2, 20.0)
 	
 	if(_action == "vagina_lick"):
+		processTime(60)
 		var connectedChar = GlobalRegistry.getCharacter(portalCharID)
 		connectedChar.addLust(10)
-		connectedChar.addArousal(calcArousalBasedOnKink(Fetish.OralSexReceiving))
+		connectedChar.addArousal(calcArousalBasedOnKink(connectedChar, Fetish.OralSexReceiving))
 		
 		if(connectedChar.hasEffect(StatusEffect.HasCumInsideVagina) && OPTIONS.isContentEnabled(ContentType.CumStealing)):
 			if(RNG.chance(20)):
@@ -491,6 +1034,7 @@ func _react(_action: String, _args):
 					])
 	
 	if(_action == "penis_suck_swallow"):
+		processTime(60*2)
 		GM.pc.gotThroatFuckedBy(portalCharID)
 		GM.pc.cummedInMouthBy(portalCharID)
 		var connectedChar = GlobalRegistry.getCharacter(portalCharID)
@@ -498,11 +1042,13 @@ func _react(_action: String, _args):
 		connectedChar.setArousal(0.0)
 	
 	if(_action == "penis_suck"):
+		processTime(60)
 		var connectedChar = GlobalRegistry.getCharacter(portalCharID)
 		connectedChar.addLust(10)
-		connectedChar.addArousal(calcArousalBasedOnKink(Fetish.OralSexReceiving))
+		connectedChar.addArousal(calcArousalBasedOnKink(connectedChar, Fetish.OralSexReceiving))
 
 	if(_action == "penis_make_hard"):
+		processTime(60*3)
 		var connectedChar = GlobalRegistry.getCharacter(portalCharID)
 		while(!connectedChar.isReadyToPenetrate()):
 			connectedChar.addLust(5)
@@ -510,6 +1056,7 @@ func _react(_action: String, _args):
 				break
 
 	if(_action == "disconnectPortal"):
+		processTime(30)
 		if(portalCharID != ""):
 			var connectedChar = GlobalRegistry.getCharacter(portalCharID)
 			if(connectedChar != null):
