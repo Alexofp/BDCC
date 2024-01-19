@@ -40,8 +40,10 @@ static func getReasonText(reason):
 	
 	if(reason == NotLate):
 		return "It's way too late to do this"
-	if(reason in [NotGagged, NotOralBlocked]):
+	if(reason in [NotGagged]):
 		return "You can't do this while gagged"
+	if(reason in [NotOralBlocked]):
+		return "You can't do this while muzzled"
 	if(reason == NotHandsBlocked):
 		return "You can't do this with your hands blocked"
 	if(reason == NotArmsRestrained):

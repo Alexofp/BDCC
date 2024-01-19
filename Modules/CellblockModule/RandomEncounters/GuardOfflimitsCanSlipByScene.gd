@@ -208,7 +208,7 @@ func _run():
 		
 		saynn("{npc.He} is blushing a lot, you can just leave {npc.him} like that or have some fun.")
 		
-		addButtonWithChecks("Sex!", "Time to fuck them", "startsexasdom", [], [ButtonChecks.NotArmsRestrained, ButtonChecks.NotHandsBlocked, ButtonChecks.NotLegsRestrained, ButtonChecks.NotOralBlocked])
+		addButtonWithChecks("Sex!", "Time to fuck them", "startsexasdom", [], [ButtonChecks.NotArmsRestrained, ButtonChecks.NotHandsBlocked, ButtonChecks.NotLegsRestrained, ButtonChecks.NotOralBlocked, ButtonChecks.NotGagged, ButtonChecks.NotBlindfolded, ButtonChecks.HasStamina])
 		addButton("Leave", "Just leave before anyone else sees you", "endthescene")
 		
 	if(state == "cuff_fail"):
@@ -265,7 +265,7 @@ func _run():
 		
 		saynn("{npc.He} is still resisting a lot. You can just leave {npc.him} like that or have some fun.")
 		
-		addButtonWithChecks("Sex!", "Time to fuck them", "startsexasdom", [], [ButtonChecks.NotArmsRestrained, ButtonChecks.NotHandsBlocked, ButtonChecks.NotLegsRestrained, ButtonChecks.NotOralBlocked])
+		addButtonWithChecks("Sex!", "Time to fuck them", "startsexasdom", [], [ButtonChecks.NotArmsRestrained, ButtonChecks.NotHandsBlocked, ButtonChecks.NotLegsRestrained, ButtonChecks.NotOralBlocked, ButtonChecks.NotGagged, ButtonChecks.NotBlindfolded, ButtonChecks.HasStamina])
 		addButton("Leave", "Just leave before anyone else sees you", "endthescene")
 	
 	if(state == "if_lost"):

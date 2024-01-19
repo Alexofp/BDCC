@@ -235,7 +235,7 @@ func _run():
 
 func addWonButton():
 	addButton("Leave", "Just leave before anyone else sees you", "endthescene")
-	addButtonWithChecks("Sex!", "Time to fuck them!", "startsexasdom", [], [ButtonChecks.NotArmsRestrained, ButtonChecks.NotHandsBlocked, ButtonChecks.NotLegsRestrained, ButtonChecks.NotOralBlocked])
+	addButtonWithChecks("Sex!", "Time to fuck them!", "startsexasdom", [], [ButtonChecks.NotArmsRestrained, ButtonChecks.NotLegsRestrained, ButtonChecks.NotGagged, ButtonChecks.NotBlindfolded])
 	addButton("Submit to", "Let them have it their way with you", "startsexsubby")
 	addButton("Inventory", "Look at your inventory", "openinventory")
 	if(GM.pc.getInventory().hasRemovableRestraints()):
