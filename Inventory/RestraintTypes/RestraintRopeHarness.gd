@@ -34,7 +34,7 @@ func doStruggle(_pc, _minigame):
 		stamina = 10
 		lust = scaleDamage(5)
 	if fatalFail(_minigame):
-		text += " but it seems like you just tightened it up more"
+		text += " but it seems like {user.youHe} just tightened it up more"
 		damage = -damage/2
 	return {"text": text, "damage": damage, "lust": lust, "pain": pain, "stamina": stamina}
 
