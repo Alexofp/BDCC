@@ -31,6 +31,8 @@ enum {
 	CanPeeInto,
 	CanForceCumInto,
 	PlasticBottle,
+	
+	PortalPanties,
 }
 
 static func getName(tag):

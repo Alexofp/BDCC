@@ -39,8 +39,8 @@ func canSell():
 
 func getTags():
 	if(GM.main != null && (GM.main.getFlag("PortalPantiesModule.Panties_PcDenied") || GM.main.getFlag("PortalPantiesModule.Panties_FleshlightsReturnedToAlex"))):
-		return [ItemTag.BDSMRestraint, ItemTag.SoldByAlexRynard]
-	return [ItemTag.BDSMRestraint]
+		return [ItemTag.BDSMRestraint, ItemTag.SoldByAlexRynard, ItemTag.PortalPanties]
+	return [ItemTag.BDSMRestraint, ItemTag.PortalPanties]
 
 func isRestraint():
 	return true
@@ -101,6 +101,11 @@ func coversBodyparts():
 		}
 
 func alwaysVisible():
+	if(isWornByWearer()):
+		var wearer = getWearer()
+		# Static characters are always wearing 'unlocked' portal panties
+		if(!wearer.isPlayer() && !wearer.isDynamicCharacter()):
+			return false
 	return true
 
 func getInventoryImage():

@@ -2535,7 +2535,11 @@ func getForcedObedienceLevel() -> float:
 	return buffsHolder.getCustom(BuffAttribute.ForcedObedience)
 
 func isWearingPortalPanties():
-	return getInventory().hasItemIDEquipped("PortalPanties")
+	if(getInventory().hasSlotEquipped(InventorySlot.UnderwearBottom)):
+		var item = getInventory().getEquippedItem(InventorySlot.UnderwearBottom)
+		if(item.hasTag(ItemTag.PortalPanties)):
+			return true
+	return false
 
 func orgasmFrom(_characterID: String):
 	afterOrgasm()

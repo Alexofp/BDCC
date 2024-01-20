@@ -34,4 +34,4 @@ func getItemCategory():
 	return ItemCategory.BDSM
 
 func getInventoryImage():
-	return "res://Images/Items/toys/horsecockdildo.png"
+	return "res://Images/Items/bdsm/PortalPantiesFleshlight.png"

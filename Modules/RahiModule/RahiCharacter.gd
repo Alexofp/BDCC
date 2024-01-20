@@ -54,4 +54,6 @@ func getBirthWaitTime():
 	return 60*60*24*2
 
 func getDefaultEquipment():
+	if(GM.main != null && GM.main.getFlag("RahiModule.wearingPortalPanties")):
+		return ["inmatecollar", "inmateuniform", "PortalPanties"]
 	return ["inmatecollar", "inmateuniform"]

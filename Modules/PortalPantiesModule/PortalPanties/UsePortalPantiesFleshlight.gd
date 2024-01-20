@@ -323,6 +323,9 @@ func _run():
 			else:
 				addDisabledButton("Proxy fuck", "You need 2 fleshlights to do this")
 			
+			addButtonWithChecks("Ride it", "Position that fleshlight on the floor and ride it!", "penis_ride_choose", [], [[ButtonChecks.HasReachableVaginaOrAnus]])
+			addButtonWithChecks("Masturbate with", "Masturbate using this cock", "penis_masturbate_choose", [], [[ButtonChecks.HasReachableVaginaOrAnus]])
+			
 	if(state == "penis_make_hard"):
 		playAnimation(StageScene.SexPortalOral, "hold", {onlyRight=isPCPortal(), npc=portalCharID, bodyState={}})
 		
@@ -340,6 +343,232 @@ func _run():
 			saynn("There is a drop of precum shining on the tip of your member. Should be good enough..")
 			
 		addButton("Continue", "See what happens next", "choose_penis")
+
+	if(state == "penis_masturbate_choose"):
+		showFightUI = true
+		
+		playAnimation(StageScene.SexPortalMasturbation, "tease", {npc=portalCharID, bodyState={exposedCrotch=true, hard=true}})
+		
+		saynn("Where do you want to put this cock?")
+		
+		addButtonWithChecks("Pussy", "Fuck your pussy with that cock", "penis_masturbate_vagina", [], [[ButtonChecks.HasReachableVagina]])
+		addButtonWithChecks("Ass", "Fuck your ass with that cock", "penis_masturbate_anus", [], [[ButtonChecks.HasReachableAnus]])
+		addButton("Back", "Never mind", "choose_penis")
+
+
+
+	if(state == "penis_masturbate_vagina"):
+		showFightUI = true
+		var connectedChar = GlobalRegistry.getCharacter(portalCharID)
+		
+		if(!isRepeat):
+			playAnimation(StageScene.SexPortalMasturbation, ("inside"), {onlyRight=isPCPortal(), npc=portalCharID, bodyState={exposedCrotch=true, hard=true}})
+			
+			saynn(RNG.pick([
+				"You bring the fleshlight to your butt and then align it with your {pc.vaginaStretch} pussy.. Seeing how it twitches and drips pre when brushing against your sensitive bits only makes you want to put it in faster.. A moan escapes your lips as the tip spreads your petals and slides inside.",
+				"You feel so needy that you don’t waste any time and shove that {npc.penis} down your pussy! A cute moan escapes your lips as you feel it spreading your slick inner walls and dripping precum inside..",
+			]))
+		else:
+			playAnimation(StageScene.SexPortalMasturbation, ("sex" if connectedChar.getArousal() <= 0.7 else "fast"), {onlyRight=isPCPortal(), npc=portalCharID, bodyState={exposedCrotch=true, hard=true}})
+			
+			saynn(RNG.pick([
+				"You use that {penis} like a dildo, shoving it in and out of your needy {pussy}.",
+				"You keep your butt stuck out as you stuff your {pussy} with that hard piece of meat, your inner walls squeezing it tight!",
+				"You keep fucking your wet {pussy} with that cock, your other hand covering up your moans.",
+				"They are probably squirming as much as you, their {penis} is twitching inside your pussy as you masturbate with it!",
+				"You use that {penis} for your pleasure, sliding it inside your {pussy} like it’s some kind of sextoy.",
+			]))
+		
+		if(extraText != ""):
+			saynn(extraText)
+			extraText = ""
+		
+		if(connectedChar.getArousal() >= 1.0):
+			saynn("That cock is about to cum!")
+			
+			addButton("Inside!", "Make it cum inside you", "penis_masturbate_vagina_inside")
+		else:
+			addButton("Ride more", "It feels so good!", "penis_masturbate_vagina")
+		
+		isRepeat = true
+
+	if(state == "penis_masturbate_vagina_inside"):
+		showFightUI = true
+		#var connectedChar = GlobalRegistry.getCharacter(portalCharID)
+		
+		playAnimation(StageScene.SexPortalMasturbation, ("inside"), {onlyRight=isPCPortal(), npc=portalCharID, bodyState={exposedCrotch=true, hard=true}, npcBodyState={hard=true}})
+			
+		saynn(RNG.pick([
+			"You let out some soft moans as that {penis} starts throbbing inside you before releasing its load directly into your awaiting womb! Your legs are shaking as your pussy is milking that shaft for everything that it has.",
+			"You keep shoving that cock in and out.. until it suddenly starts pumping your {pussy} full of its seed! So much that some of it is already leaking out. Your legs are shaky, your lips let out a few cute moans..",
+		]))
+		
+		addButton("Continue", "See what happens next", "choose_penis")
+
+
+	if(state == "penis_masturbate_anus"):
+		showFightUI = true
+		var connectedChar = GlobalRegistry.getCharacter(portalCharID)
+		
+		if(!isRepeat):
+			playAnimation(StageScene.SexPortalMasturbation, ("inside"), {onlyRight=isPCPortal(), npc=portalCharID, bodyState={exposedCrotch=true, hard=true}})
+			
+			saynn(RNG.pick([
+				"You bring the fleshlight to your butt and then align it with your {pc.analStretch} {asshole}.. Seeing how it twitches and drips pre when brushing against your sensitive bits only makes you want to put it in faster.. A moan escapes your lips as the tip spreads your star and slides inside.",
+				"You feel so needy that you don’t waste any time and shove that {npc.penis} down your ass! A cute moan escapes your lips as you feel it spreading your warm inner walls and dripping precum inside..",
+			]))
+		else:
+			playAnimation(StageScene.SexPortalMasturbation, ("sex" if connectedChar.getArousal() <= 0.7 else "fast"), {onlyRight=isPCPortal(), npc=portalCharID, bodyState={exposedCrotch=true, hard=true}})
+			
+			saynn(RNG.pick([
+				"You use that {penis} like a dildo, shoving it in and out of your needy {asshole}.",
+				"You keep your butt stuck out as you stuff your {asshole} with that hard piece of meat, your inner walls squeezing it tight!",
+				"You keep fucking your {ass} with that cock, your other hand covering up your moans.",
+				"They are probably squirming as much as you, their {penis} is twitching inside your tailhole as you masturbate with it!",
+				"You use that {penis} for your pleasure, sliding it inside your {ass} like it’s some kind of sextoy.",
+			]))
+		
+		if(extraText != ""):
+			saynn(extraText)
+			extraText = ""
+		
+		if(connectedChar.getArousal() >= 1.0):
+			saynn("That cock is about to cum!")
+			
+			addButton("Inside!", "Make it cum inside you", "penis_masturbate_anus_inside")
+		else:
+			addButton("Ride more", "It feels so good!", "penis_masturbate_anus")
+		
+		isRepeat = true
+
+	if(state == "penis_masturbate_anus_inside"):
+		showFightUI = true
+		#var connectedChar = GlobalRegistry.getCharacter(portalCharID)
+		
+		playAnimation(StageScene.SexPortalMasturbation, ("inside"), {onlyRight=isPCPortal(), npc=portalCharID, bodyState={exposedCrotch=true, hard=true}, npcBodyState={hard=true}})
+			
+		saynn(RNG.pick([
+			"You let out some soft moans as that {penis} starts throbbing inside before releasing its load directly into your ass! Your legs are shaking as your {asshole} is milking that shaft for everything that it has.",
+			"You keep shoving that cock in and out.. until it suddenly starts pumping your {ass} full of its seed! So much that some of it is already leaking out. Your legs are shaky, your lips let out a few cute moans..",
+		]))
+		
+		addButton("Continue", "See what happens next", "choose_penis")
+
+
+
+	if(state == "penis_ride_choose"):
+		showFightUI = true
+		
+		playAnimation(StageScene.SexPortalRide, "tease", {npc=portalCharID, bodyState={exposedCrotch=true, hard=true}})
+		
+		saynn("How do you want to ride it?")
+		
+		addButtonWithChecks("Pussy", "Ride their cock with your pussy", "penis_ride_vagina", [], [[ButtonChecks.HasReachableVagina]])
+		addButtonWithChecks("Ass", "Ride their cock with your ass", "penis_ride_anus", [], [[ButtonChecks.HasReachableAnus]])
+		addButton("Back", "Never mind", "choose_penis")
+
+	if(state == "penis_ride_vagina"):
+		showFightUI = true
+		var connectedChar = GlobalRegistry.getCharacter(portalCharID)
+		
+		if(!isRepeat):
+			playAnimation(StageScene.SexPortalRide, ("inside"), {onlyRight=isPCPortal(), npc=portalCharID, bodyState={exposedCrotch=true, hard=true}})
+			
+			saynn(RNG.pick([
+				"You place the fleshlight with someone’s {npc.penis} on the floor and then position yourself above it. One of your hands guides it down your {pc.vaginaStretch} {pussy} while you slowly lower yourself onto it. A little cute noise leaves your lips as you feel it spreading your petals and sliding inside your wet love tunnel.. Time to ride it..",
+				"You place the fleshlight with someone’s {npc.penis} on the floor and then position yourself above it. Your {pc.vaginaStretch} {pussy} is already quite wet as you lower yourself onto that shaft, its tip spreading your petal and sliding inside, brushing against your inner walls and forcing a little moan out of you.. Time to ride it..",
+			]))
+		else:
+			playAnimation(StageScene.SexPortalRide, ("sex" if connectedChar.getArousal() <= 0.7 else "fast"), {onlyRight=isPCPortal(), npc=portalCharID, bodyState={exposedCrotch=true, hard=true}})
+			
+			saynn(RNG.pick([
+				"You ride that hard {penis}, raising your body before bringing yourself down onto it, your {pussy} getting all tight when you’re getting most of it inside.",
+				"Your {pc.breasts} bounce a bit while you ride that {npc.penis}. It’s so.. warm and slick.. better than any toy.",
+				"You can feel their {npc.penis} twitching inside you.. so you ride it harder. You’re not planning to stop until you milk those balls dry.",
+				"That {penis} is hitting your g-spot so well, more and more moans escape from you as you ride it.",
+				"They’re probably quite confused about why their {penis} is suddenly getting squeezed by your pussy.. good.. Your drippy pussy is coating it with your juices while you ride it.",
+				"You are riding that {penis} like it's just a dildo, an object to pleasure yourself with.. But it’s so much better than any dildo.",
+			]))
+		
+		if(extraText != ""):
+			saynn(extraText)
+			extraText = ""
+		
+		if(connectedChar.getArousal() >= 1.0):
+			saynn("That cock is about to cum!")
+			
+			addButton("Inside!", "Make it cum inside you", "penis_ride_vagina_inside")
+		else:
+			addButton("Ride more", "It feels so good!", "penis_ride_vagina")
+		
+		isRepeat = true
+
+	if(state == "penis_ride_vagina_inside"):
+		showFightUI = true
+		#var connectedChar = GlobalRegistry.getCharacter(portalCharID)
+		
+		playAnimation(StageScene.SexPortalRide, ("inside"), {onlyRight=isPCPortal(), npc=portalCharID, bodyState={exposedCrotch=true, hard=true}, npcBodyState={hard=true}})
+			
+		saynn(RNG.pick([
+			"Their {npc.penis} is throbbing and pulsing inside you.. While you just keep riding it. And soon enough, you feel your {pussy} flooded with waves of sticky {npc.cum}, your womb getting stuffed full. Good..",
+			"You were so busy riding that {npc.penis} that you didn’t even notice when it began pulsing and cumming inside your {pussy}! Waves after waves of sticky hot seed are filling you up.. while you moan and squirm on top of it.",
+		]))
+		
+		addButton("Continue", "See what happens next", "choose_penis")
+
+
+
+	if(state == "penis_ride_anus"):
+		showFightUI = true
+		var connectedChar = GlobalRegistry.getCharacter(portalCharID)
+		
+		if(!isRepeat):
+			playAnimation(StageScene.SexPortalRide, ("inside"), {onlyRight=isPCPortal(), npc=portalCharID, bodyState={exposedCrotch=true, hard=true}})
+			
+			saynn(RNG.pick([
+				"You place the fleshlight with someone’s {npc.penis} on the floor and then position yourself above it. One of your hands guides it down your {pc.anusStretch} {anus} while you slowly lower yourself onto it. A little cute noise leaves your lips as you feel it spreading your star and sliding inside your needy love tunnel.. Time to ride it..",
+				"You place the fleshlight with someone’s {npc.penis} on the floor and then position yourself above it. Your {pc.anusStretch} {anus} is already feeling quite needy as you lower yourself onto that shaft, its tip spreading your anal star and sliding inside, brushing against your inner walls and forcing a little moan out of you.. Time to ride it..",
+			]))
+		else:
+			playAnimation(StageScene.SexPortalRide, ("sex" if connectedChar.getArousal() <= 0.7 else "fast"), {onlyRight=isPCPortal(), npc=portalCharID, bodyState={exposedCrotch=true, hard=true}})
+			
+			saynn(RNG.pick([
+				"You ride that hard {penis}, raising your body before bringing yourself down onto it, your {asshole} getting all tight when you’re getting most of it inside.",
+				"Your {pc.breasts} bounce a bit while you ride that {npc.penis}. It’s so.. warm and slick.. better than any toy.",
+				"You can feel their {npc.penis} twitching inside you.. so you ride it harder. You’re not planning to stop until you milk those balls dry.",
+				"That {penis} is hitting your sensitive spot so well, more and more moans escape from you as you ride it.",
+				"They’re probably quite confused about why their {penis} is suddenly getting squeezed by your ass.. good.. Your legs are shivering slightly while you ride it, warmness spreading throughout your whole body.",
+				"You are riding that {penis} like it's just a dildo, an object to pleasure yourself with.. But it’s so much better than any dildo.",
+			]))
+		
+		if(extraText != ""):
+			saynn(extraText)
+			extraText = ""
+		
+		if(connectedChar.getArousal() >= 1.0):
+			saynn("That cock is about to cum!")
+			
+			addButton("Inside!", "Make it cum inside you", "penis_ride_anus_inside")
+		else:
+			addButton("Ride more", "It feels so good!", "penis_ride_anus")
+		
+		isRepeat = true
+
+	if(state == "penis_ride_anus_inside"):
+		showFightUI = true
+		#var connectedChar = GlobalRegistry.getCharacter(portalCharID)
+		
+		playAnimation(StageScene.SexPortalRide, ("inside"), {onlyRight=isPCPortal(), npc=portalCharID, bodyState={exposedCrotch=true, hard=true}, npcBodyState={hard=true}})
+			
+		saynn(RNG.pick([
+			"Their {npc.penis} is throbbing and pulsing inside you.. While you just keep riding it. And soon enough, you feel your {ass} getting flooded with waves of sticky {npc.cum}, your inner walls painted white. Good..",
+			"You were so busy riding that {npc.penis} that you didn’t even notice when it began pulsing and cumming inside your {ass}! Waves after waves of sticky hot seed are filling you up.. while you moan and squirm on top of it.",
+		]))
+		
+		addButton("Continue", "See what happens next", "choose_penis")
+
+
+
 
 	if(state == "penis_suck"):
 		showFightUI = true
@@ -735,7 +964,7 @@ func _run():
 					"You shiver.. while fucking yourself, using your own {pussy} for your pleasure.",
 					"You fuck your own pussy so eagerly that it starts making wet noises.. Feels so good.",
 					"You angle that fleshlight a bit, making it so your {penis} is hammering away at your g-spot as you pound your {pussy}. You know exactly how to make yourself feel good.",
-					"You’re pounding your own {pussy} with your {npc.penis} fast and hard! A slight bump appears on your belly as your {peins} is reaching your cervix each time.",
+					"You’re pounding your own {pussy} with your {pc.penis} fast and hard! A slight bump appears on your belly as your {penis} is reaching your cervix each time.",
 				]))
 			else:
 				saynn(RNG.pick([
@@ -743,7 +972,7 @@ func _run():
 					"You smile while fucking someone, using their {pussy} for your pleasure remotely.",
 					"You fuck that {pussy} so eagerly that it starts making wet noises.. The way its inner walls grip your length.. so good.",
 					"You shove your {penis} deep, hammering away at that slit’s pleasure spot. Whoever they are, they are dripping like a whore.",
-					"You’re pounding someone’s {pussy} with your {npc.penis} fast and hard! So hard that your {penis} is reaching their cervix each time, probably creating a small bump on their belly.",
+					"You’re pounding someone’s {pussy} with your {pc.penis} fast and hard! So hard that your {penis} is reaching their cervix each time, probably creating a small bump on their belly.",
 				]))
 		
 		if(extraText != ""):
@@ -767,11 +996,11 @@ func _run():
 		
 		if(isPCPortal()):
 			saynn(RNG.pick([
-				"You let out some passionate stifled noises as your {npc.penis} is throbbing inside your {pussy}.. before stuffing your womb to the brim with your seed. You curl your toes and squirm a lot, your hands shaking, making your cock rub against your pussy walls more..",
+				"You let out some passionate stifled noises as your {pc.penis} is throbbing inside your {pussy}.. before stuffing your womb to the brim with your seed. You curl your toes and squirm a lot, your hands shaking, making your cock rub against your pussy walls more..",
 			]))
 		else:
 			saynn(RNG.pick([
-				"You grunt softly as your {npc.penis} is throbbing inside that clenching {pussy}.. before stuffing its womb to the brim with your seed. Remote breeding, fuck yeah.",
+				"You grunt softly as your {pc.penis} is throbbing inside that clenching {pussy}.. before stuffing its womb to the brim with your seed. Remote breeding, fuck yeah.",
 			]))
 		
 		addButton("Continue", "See what happens next", "choose_vagina")
@@ -802,7 +1031,7 @@ func _run():
 					"You shiver.. while fucking yourself, using your own {asshole} for your pleasure.",
 					"You fuck your own {asshole} so eagerly that it starts making wet noises.. Feels so good.",
 					"You angle that fleshlight a bit, making it so your {penis} is hammering away at your prostate as you pound yourself. You know exactly how to make yourself feel good.",
-					"You’re pounding your own {ass} with your {npc.penis} fast and hard! A slight bump appears on your belly as your {peins} is reaching deep and putting pressure on the inner wall.",
+					"You’re pounding your own {ass} with your {pc.penis} fast and hard! A slight bump appears on your belly as your {penis} is reaching deep and putting pressure on the inner wall.",
 				]))
 			else:
 				saynn(RNG.pick([
@@ -810,7 +1039,7 @@ func _run():
 					"You smile while fucking someone, using their {ass} for your pleasure remotely.",
 					"You fuck that {asshole} so eagerly that it starts making wet noises.. The way its inner walls grip your length.. so good.",
 					"You shove your {penis} deep, hammering away at that {asshole}. Whoever they are, they are clenching like a whore.",
-					"You’re pounding someone’s {ass} with your {npc.penis} fast and hard! So hard that your {penis} is reaching deep inside and putting pressure on their inner wall, probably creating a small bump on their belly.",
+					"You’re pounding someone’s {ass} with your {pc.penis} fast and hard! So hard that your {penis} is reaching deep inside and putting pressure on their inner wall, probably creating a small bump on their belly.",
 				]))
 		
 		if(extraText != ""):
@@ -834,11 +1063,11 @@ func _run():
 		
 		if(isPCPortal()):
 			saynn(RNG.pick([
-				"You let out some passionate stifled noises as your {npc.penis} is throbbing inside your {anus}.. before stuffing it to the brim with your seed. You curl your toes and squirm a lot, your hands shaking, making your cock rub against your prostate more..",
+				"You let out some passionate stifled noises as your {pc.penis} is throbbing inside your {anus}.. before stuffing it to the brim with your seed. You curl your toes and squirm a lot, your hands shaking, making your cock rub against your prostate more..",
 			]))
 		else:
 			saynn(RNG.pick([
-				"You grunt softly as your {npc.penis} is throbbing inside that clenching {anus}.. before stuffing it to the brim with your seed. Remote pounding, fuck yeah.",
+				"You grunt softly as your {pc.penis} is throbbing inside that clenching {anus}.. before stuffing it to the brim with your seed. Remote pounding, fuck yeah.",
 			]))
 		
 		addButton("Continue", "See what happens next", "choose_anus")
@@ -854,6 +1083,109 @@ func _react(_action: String, _args):
 		endScene()
 		return
 	
+	if(_action == "penis_masturbate_anus"):
+		processTime(60)
+		var sameMult = 1.0
+		if(portalCharID == "pc"):
+			sameMult = 0.6
+		var connectedChar = GlobalRegistry.getCharacter(portalCharID)
+		connectedChar.addLust(10)
+		connectedChar.addArousal(calcArousalBasedOnKink(connectedChar, Fetish.AnalSexGiving) * sameMult)
+		GM.pc.addLust(10)
+		GM.pc.addArousal(calcArousalBasedOnKink(GM.pc, Fetish.AnalSexReceiving) * sameMult)
+		if(GM.pc.getArousal() >= 1.0 && portalCharID != "pc"):
+			extraText = "{pc.You} {pc.youVerb('orgasm')} hard, {pc.yourHis} {asshole} pulsing a lot!"
+			GM.pc.orgasmFrom(portalCharID)
+			GM.pc.setArousal(0.0)
+	
+	if(_action == "penis_masturbate_anus_inside"):
+		processTime(60*2)
+		GM.pc.gotAnusFuckedBy(portalCharID)
+		GM.pc.cummedInAnusBy(portalCharID)
+		GM.pc.orgasmFrom(portalCharID)
+		GM.pc.setArousal(0.0)
+		if(portalCharID != "pc"):
+			var connectedChar = GlobalRegistry.getCharacter(portalCharID)
+			connectedChar.orgasmFrom("pc")
+			connectedChar.setArousal(0.0)
+	
+	if(_action == "penis_masturbate_vagina"):
+		processTime(60)
+		var sameMult = 1.0
+		if(portalCharID == "pc"):
+			sameMult = 0.6
+		var connectedChar = GlobalRegistry.getCharacter(portalCharID)
+		connectedChar.addLust(10)
+		connectedChar.addArousal(calcArousalBasedOnKink(connectedChar, Fetish.VaginalSexGiving) * sameMult)
+		GM.pc.addLust(10)
+		GM.pc.addArousal(calcArousalBasedOnKink(GM.pc, Fetish.VaginalSexReceiving) * sameMult)
+		if(GM.pc.getArousal() >= 1.0 && portalCharID != "pc"):
+			extraText = "{pc.You} {pc.youVerb('orgasm')} hard, {pc.yourHis} {pussy} pulsing a lot!"
+			GM.pc.orgasmFrom(portalCharID)
+			GM.pc.setArousal(0.0)
+	
+	if(_action == "penis_masturbate_vagina_inside"):
+		processTime(60*2)
+		GM.pc.gotVaginaFuckedBy(portalCharID)
+		GM.pc.cummedInVaginaBy(portalCharID)
+		GM.pc.orgasmFrom(portalCharID)
+		GM.pc.setArousal(0.0)
+		if(portalCharID != "pc"):
+			var connectedChar = GlobalRegistry.getCharacter(portalCharID)
+			connectedChar.orgasmFrom("pc")
+			connectedChar.setArousal(0.0)
+	
+	if(_action == "penis_ride_anus"):
+		processTime(60)
+		var sameMult = 1.0
+		if(portalCharID == "pc"):
+			sameMult = 0.6
+		var connectedChar = GlobalRegistry.getCharacter(portalCharID)
+		connectedChar.addLust(10)
+		connectedChar.addArousal(calcArousalBasedOnKink(connectedChar, Fetish.AnalSexGiving) * sameMult)
+		GM.pc.addLust(10)
+		GM.pc.addArousal(calcArousalBasedOnKink(GM.pc, Fetish.AnalSexReceiving) * sameMult)
+		if(GM.pc.getArousal() >= 1.0 && portalCharID != "pc"):
+			extraText = "{pc.You} {pc.youVerb('orgasm')} hard, {pc.yourHis} {asshole} pulsing a lot!"
+			GM.pc.orgasmFrom(portalCharID)
+			GM.pc.setArousal(0.0)
+	
+	if(_action == "penis_ride_anus_inside"):
+		processTime(60*2)
+		GM.pc.gotAnusFuckedBy(portalCharID)
+		GM.pc.cummedInAnusBy(portalCharID)
+		GM.pc.orgasmFrom(portalCharID)
+		GM.pc.setArousal(0.0)
+		if(portalCharID != "pc"):
+			var connectedChar = GlobalRegistry.getCharacter(portalCharID)
+			connectedChar.orgasmFrom("pc")
+			connectedChar.setArousal(0.0)
+	
+	if(_action == "penis_ride_vagina"):
+		processTime(60)
+		var sameMult = 1.0
+		if(portalCharID == "pc"):
+			sameMult = 0.6
+		var connectedChar = GlobalRegistry.getCharacter(portalCharID)
+		connectedChar.addLust(10)
+		connectedChar.addArousal(calcArousalBasedOnKink(connectedChar, Fetish.VaginalSexGiving) * sameMult)
+		GM.pc.addLust(10)
+		GM.pc.addArousal(calcArousalBasedOnKink(GM.pc, Fetish.VaginalSexReceiving) * sameMult)
+		if(GM.pc.getArousal() >= 1.0 && portalCharID != "pc"):
+			extraText = "{pc.You} {pc.youVerb('orgasm')} hard, {pc.yourHis} {pussy} pulsing a lot!"
+			GM.pc.orgasmFrom(portalCharID)
+			GM.pc.setArousal(0.0)
+	
+	if(_action == "penis_ride_vagina_inside"):
+		processTime(60*2)
+		GM.pc.gotVaginaFuckedBy(portalCharID)
+		GM.pc.cummedInVaginaBy(portalCharID)
+		GM.pc.orgasmFrom(portalCharID)
+		GM.pc.setArousal(0.0)
+		if(portalCharID != "pc"):
+			var connectedChar = GlobalRegistry.getCharacter(portalCharID)
+			connectedChar.orgasmFrom("pc")
+			connectedChar.setArousal(0.0)
 	
 	
 	if(_action == "anus_fuck"):

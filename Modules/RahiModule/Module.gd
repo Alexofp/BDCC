@@ -81,6 +81,8 @@ func getFlags():
 		"rahiPetplayWalkiesStage": flag(FlagType.Number),
 		"rahiShouldSleepWithPlayer": flag(FlagType.Bool),
 		"rahiShouldSexPlayerDuringSleep": flag(FlagType.Bool),
+		
+		"wearingPortalPanties": flag(FlagType.Bool),
 	}
 
 func _init():
