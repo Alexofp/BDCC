@@ -46,6 +46,11 @@ func isRestraint():
 	return true
 
 func isImportant():
+	if(isWornByWearer()):
+		var wearer = getWearer()
+		# Static characters are always wearing 'unlocked' portal panties
+		if(!wearer.isPlayer() && !wearer.isDynamicCharacter()):
+			return false
 	return true
 
 func canForceOntoNpc():
