@@ -28,6 +28,7 @@ var skillsHolder: SkillsHolder
 var lustInterests: LustInterests
 var fetishHolder: FetishHolder
 var personality: Personality
+var relationship: Relationship
 var sexVoice: SexVoice
 var bodyFluids: Fluids
 
@@ -82,6 +83,8 @@ func _ready():
 	fetishHolder.setCharacter(self)
 	personality = Personality.new()
 	personality.setCharacter(self)
+	relationship = Relationship.new()
+	relationship.setCharacter(self)
 	createVoice()
 	bodyFluids = Fluids.new()
 
@@ -263,6 +266,10 @@ func beforeFightStarted():
 
 func afterFightEnded():
 	print(getName()+" my fight has ended")
+
+	if relationship != null:
+		getRelationship().setRawStat("LastFight", GM.main.getTimeInGlobalSeconds())
+		#TODO update relationship
 	
 	timedBuffsTurns.clear()
 	timedBuffsDurationTurns = 0
@@ -597,6 +604,9 @@ func getFetishHolder() -> FetishHolder:
 
 func getPersonality() -> Personality:
 	return personality
+
+func getRelationship() -> Relationship:
+	return relationship
 
 func addExperience(newexp: int):
 	skillsHolder.addExperience(newexp)
@@ -1925,6 +1935,10 @@ func afterSexEnded(sexInfo):
 		var resultText = sexInfo.affectPersonality(personality, fetishHolder)
 		if(resultText != null && resultText != ""):
 			GM.main.addMessage(resultText)
+
+	if relationship != null:
+		getRelationship().setRawStat("LastSex", GM.main.getTimeInGlobalSeconds())
+		#TODO update relationship
 		
 	updateAppearance()
 
