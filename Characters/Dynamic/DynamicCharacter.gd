@@ -138,6 +138,7 @@ func saveData():
 			"data": bodyparts[slot].saveData(),
 		}
 	
+	data["relationship"] = relationship.saveData()
 	data["statusEffects"] = saveStatusEffectsData()
 	data["inventory"] = inventory.saveData()
 	data["skills"] = skillsHolder.saveData()
@@ -220,6 +221,7 @@ func loadData(data):
 		giveBodypart(bodypart, false)
 	checkSkins(true)
 	
+	relationship.loadData(SAVE.loadVar(data, "relationship", {}))	
 	loadStatusEffectsData(SAVE.loadVar(data, "statusEffects", {}))
 	inventory.loadDataNPC(SAVE.loadVar(data, "inventory", {}), self)
 	skillsHolder.loadData(SAVE.loadVar(data, "skills", {}))

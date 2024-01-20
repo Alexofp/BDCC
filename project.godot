@@ -844,6 +844,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Modules/RahiModule/Module.gd"
 }, {
+"base": "Reference",
+"class": "Relationship",
+"language": "GDScript",
+"path": "res://Game/SexEngine/Relationship.gd"
+}, {
+"base": "Object",
+"class": "RelationshipStat",
+"language": "GDScript",
+"path": "res://Game/SexEngine/RelationshipStat.gd"
+}, {
 "base": "RestraintData",
 "class": "RestraintBallGag",
 "language": "GDScript",
@@ -1357,6 +1367,8 @@ _global_script_class_icons={
 "RNG": "",
 "RNGData": "",
 "RahiModule": "",
+"Relationship": "",
+"RelationshipStat": "",
 "RestraintBallGag": "",
 "RestraintBlindfold": "",
 "RestraintButtplug": "",

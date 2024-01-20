@@ -10,6 +10,7 @@ var npcLustInterests = {}
 var npcPersonality = {}
 var npcFetishes = {}
 var npcArmor = {}
+var npcRelationship = {}
 var npcBasePain = null
 var npcBaseLust = null
 var npcBaseStamina = null
@@ -94,7 +95,7 @@ func saveData():
 		"arousal": arousal,
 		"consciousness": consciousness,
 	}
-	
+		
 	data["bodyparts"] = {}
 	for slot in bodyparts:
 		if(bodyparts[slot] == null):
@@ -105,6 +106,7 @@ func saveData():
 			"data": bodyparts[slot].saveDataNPC(),
 		}
 	
+	data["relationship"] = relationship.saveData()		
 	data["statusEffects"] = saveStatusEffectsData()
 	data["inventory"] = inventory.saveData()
 	data["lustInterests"] = lustInterests.saveData()
@@ -130,7 +132,7 @@ func loadData(data):
 	stamina = SAVE.loadVar(data, "stamina", 100)
 	arousal = SAVE.loadVar(data, "arousal", 0.0)
 	consciousness = SAVE.loadVar(data, "consciousness", 1.0)
-	
+		
 	var loadedBodyparts = SAVE.loadVar(data, "bodyparts", {})
 	for slot in loadedBodyparts:
 		if(loadedBodyparts[slot] == null):
@@ -146,6 +148,7 @@ func loadData(data):
 			continue
 		bodypart.loadDataNPC(bodypartData)
 	
+	relationship.loadData(SAVE.loadVar(data, "relationship", {}))
 	loadStatusEffectsData(SAVE.loadVar(data, "statusEffects", {}))
 	inventory.loadDataNPC(SAVE.loadVar(data, "inventory", {}), self)
 	lustInterests.loadData(SAVE.loadVar(data, "lustInterests", {}))
