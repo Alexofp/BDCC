@@ -1,5 +1,6 @@
 extends Control
 
+onready var failArea = $GameScreen/Panel/FailZone
 onready var cursor = $GameScreen/Panel/Cursor
 onready var redZone = $GameScreen/Panel/Panel
 onready var orangeZone = $GameScreen/Panel/Panel2
@@ -9,72 +10,30 @@ var cursorSpeed = 1.0
 var timer = 10.0
 var timeLeft = timer
 var difficulty = 5.0
-var redPart = 0.1
 var freeze = false
 var goldenZoneVisible = false
 var isBlindFoldedVersion = false
 
-var hasAdvancedPerk = false
+var hasAdvancedPerk = true
+var hardStruggleEnabled = true
 var perfectStreak = 0
 var howMuchForPerfect = 0.25
 
-var difficultySettings = [
-	{
-		timer = 10.0,
-		cursorSpeedMin = 1.0,
-		cursorSpeedMax = 1.5,
-		zoneDifficultyMin = 1.0,
-		zoneDifficultyMax = 2.0,
-		redPart = 0.1,
-	},
-	{
-		timer = 8.0,
-		cursorSpeedMin = 1.5,
-		cursorSpeedMax = 2.5,
-		zoneDifficultyMin = 3.0,
-		zoneDifficultyMax = 7.0,
-		redPart = 0.1,
-	},
-	{
-		timer = 6.0,
-		cursorSpeedMin = 2.2,
-		cursorSpeedMax = 2.5,
-		zoneDifficultyMin = 10.0,
-		zoneDifficultyMax = 15.0,
-		redPart = 0.1,
-	},
-	{
-		timer = 5.0,
-		cursorSpeedMin = 2.5,
-		cursorSpeedMax = 3.1,
-		zoneDifficultyMin = 20.0,
-		zoneDifficultyMax = 25.0,
-		redPart = 0.15,
-	},
-	{
-		timer = 4.0,
-		cursorSpeedMin = 2.9,
-		cursorSpeedMax = 3.5,
-		zoneDifficultyMin = 55.0,
-		zoneDifficultyMax = 85.0,
-		redPart = 0.1,
-	},
-]
+var failZoneList = []
+var lastPosition = 0.0
+var forward = true
 
-func setDifficulty(diff):
-	diff -= 1
-	if(diff < 0):
-		diff = 0
-	if(diff >= difficultySettings.size()):
-		diff = difficultySettings.size() - 1
+#set difficulty as bondage level, accept positive number
+func setDifficulty(level):
+	if level < 1.0:
+		level = 1.0
 	
-	var currentDifficulty = difficultySettings[diff]
-	timer = currentDifficulty["timer"]
+	timer = 3.4 + 20.0/(2.0 + level)
 	timeLeft = timer
-	cursorSpeed = RNG.randf_range(currentDifficulty["cursorSpeedMin"], currentDifficulty["cursorSpeedMax"])
-	difficulty = RNG.randf_range(currentDifficulty["zoneDifficultyMin"], currentDifficulty["zoneDifficultyMax"])
-	redPart = currentDifficulty["redPart"]
+	cursorSpeed = 1.2 + level/8.0
+	difficulty = level
 	generateZone(difficulty)
+	generateFatalZone(difficulty)
 
 var ingame = false
 
@@ -83,10 +42,38 @@ signal minigameCompleted(finalScore)
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	setIngame(false)
-
 	setGoldenZoneVisible(false)
+	setHardStruggleEnabled(false)
 	setDifficulty(2)
 	setIsBlindfolded(false)
+
+func generateFatalZone(_difficulty = 1.0):
+	if !hardStruggleEnabled:
+		return
+	
+	var diff = _difficulty - 1.0;
+	if diff < 1.0:
+		diff = 1.0
+	
+	for _i in range(diff):
+		var rectangle = ColorRect.new()
+		rectangle.rect_size.y = redZone.rect_size.y
+		rectangle.color = Color("5900bd")
+		failZoneList.append(rectangle)
+		failArea.add_child(rectangle)
+	
+	for rectangle in failZoneList:
+		setZonePosition(rectangle, RNG.randf_range(0.0, 1.0), 0.02)
+
+func setZonePosition(zone, pos, size):
+	zone.anchor_left = clamp(pos - size, 0.0, 1.0)
+	zone.anchor_right = clamp(pos + size, 0.0, 1.0)
+
+func isFatal(cursorPostion):
+	for rectangle in failZoneList:
+		if cursorPostion >= rectangle.anchor_left && cursorPostion <= rectangle.anchor_right:
+			return true
+	return false
 
 func setIsBlindfolded(theblindfolded):
 	isBlindFoldedVersion = theblindfolded
@@ -95,10 +82,12 @@ func setIsBlindfolded(theblindfolded):
 		$GameScreen/Panel/Panel2.visible = false
 		$GameScreen/Panel/Panel.visible = false
 		$GameScreen/Panel/Panel3.visible = false
+		$GameScreen/Panel/FailZone.visible = false
 		$GameScreen/Panel/BlindText.visible = true
 	else:
 		$GameScreen/Panel/Panel2.visible = true
 		$GameScreen/Panel/Panel.visible = true
+		$GameScreen/Panel/FailZone.visible = true
 		$GameScreen/Panel/Panel3.visible = goldenZoneVisible
 		$GameScreen/Panel/BlindText.visible = false
 
@@ -116,9 +105,17 @@ func _process(delta):
 		time += delta
 		timeLeft -= delta
 		
-		setCursorPosition(getCursorPosition())
-		setTimeBar(timeLeft/timer)
-		
+		var newPosition = getCursorPosition();
+		setCursorPosition(newPosition)
+		setTimeBar(timeLeft / timer)
+
+		if newPosition < lastPosition && forward:
+			forward = false
+		elif newPosition > lastPosition && !forward:
+			forward = true
+			generateFatalZone()
+		lastPosition = newPosition
+
 		var flatStyle:StyleBoxFlat = $GameScreen/Panel.get_stylebox("panel")
 		if(isBlindFoldedVersion):
 			flatStyle.bg_color = Color.red
@@ -136,7 +133,7 @@ func _process(delta):
 			flatStyle.bg_color = Color.black
 	
 func getCursorPosition():
-	return (sin(time*cursorSpeed) + 1.0)/2.0
+	return (sin(pow(time * cursorSpeed, 1.2)) + 1.0) / 2.0
 	
 func setTimeBar(val):
 	$GameScreen/ProgressBar.value = clamp(val, 0.0, 1.0)
@@ -147,6 +144,8 @@ func setCursorPosition(pos:float):
 
 func getScore():
 	var cursorPostion = getCursorPosition()
+	if isFatal(cursorPostion):
+		return -RNG.randf_range(0.1, 0.9)
 	if(goldenZoneVisible && cursorPostion >= goldenZone.anchor_left && cursorPostion <= goldenZone.anchor_right):
 		return 10000.0
 	if(cursorPostion >= redZone.anchor_left && cursorPostion <= redZone.anchor_right):
@@ -167,9 +166,8 @@ func getScore():
 
 func generateZone(thedifficulty = 1.0):
 	var pos = RNG.randf_range(0.0, 1.0)
-	var size = 0.1/pow(thedifficulty, redPart)
-	var orangeSize = 0.3/pow(thedifficulty, 0.1)
-	
+	var size = 0.005 + 1.0/(11.0 + thedifficulty * 2.0)
+	var orangeSize = 0.1 + 1.0/(2.0 + thedifficulty)
 	setZone(pos, size, orangeSize)
 	
 	#setGoldenZone(pos + RNG.randf_range(-orangeSize/2.0, orangeSize/2.0), 0.03)
@@ -194,6 +192,9 @@ func setGoldenZoneVisible(isVis):
 		goldenZone.visible = false
 		#print("INVIS")
 
+func setHardStruggleEnabled(enable = false):
+		hardStruggleEnabled = enable
+
 func instantEscapePerk():
 	setGoldenZoneVisible(true)
 	
@@ -211,6 +212,8 @@ func setIngame(newingame):
 
 func calcFinalScore(isLost = false):
 	var theScore = getScore()
+	if theScore < 0.0:
+		return theScore
 	if(isLost):
 		theScore = 0.0
 	if(hasAdvancedPerk && perfectStreak > 0):
@@ -249,4 +252,6 @@ func _on_ClickAtTheRightTime_gui_input(event):
 			freeze = false
 			#generateZone(RNG.randf_range(1.0, 10.0))
 			#setDifficulty(5)
-			emit_signal("minigameCompleted", calcFinalScore())
+			var finalScore = calcFinalScore()
+			#print(finalScore)
+			emit_signal("minigameCompleted", finalScore)

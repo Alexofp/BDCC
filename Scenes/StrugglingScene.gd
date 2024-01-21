@@ -105,15 +105,17 @@ func _run():
 		
 		var game = minigameScene.instance()
 		GM.ui.addCustomControl("minigame", game)
-		game.setDifficulty(restraintData.getLevel())
-		game.connect("minigameCompleted", self, "onMinigameCompleted")
-		if(GM.pc.hasPerk(Perk.BDSMInstantEscape) && game.has_method("instantEscapePerk")):
+		if(OPTIONS.isHardStruggleEnabled()):
+			game.setHardStruggleEnabled(true)
+		if(GM.pc.hasPerk(Perk.BDSMInstantEscape) && game.has_method("instantEscapePerk") && !OPTIONS.isHardStruggleEnabled()):
 			game.instantEscapePerk()
 		if(GM.pc.isBlindfolded() && game.has_method("setIsBlindfolded")):
 			game.setIsBlindfolded(true)
 		if(GM.pc.hasPerk(Perk.BDSMPerfectStreak) && game.has_method("setHasAdvancedPerk")):
 			game.setHasAdvancedPerk(true)
 		
+		game.setDifficulty(restraintData.getLevel())
+		game.connect("minigameCompleted", self, "onMinigameCompleted")
 		addButton("Give up", "Give up the struggle and lose 10 stamina", "giveupstruggle")
 
 	if(state == "struggleAgainst"):
@@ -195,6 +197,7 @@ func _react(_action: String, _args):
 		var finalMinigameStatus = 1.0
 		
 		var instantUnlock = false
+		var fatallFail = false
 		if(_args.size() > 1):
 			finalMinigameStatus = float(_args[1])
 			
@@ -205,17 +208,29 @@ func _react(_action: String, _args):
 			minigameStatus = pow(minigameResult, 1.5) * 2.0
 			if(minigameResult >= 1.0 && GM.pc.hasPerk(Perk.BDSMBetterStruggling)):
 				minigameStatus *= 2.0
+			if float(_args[1]) < 0.0:
+				fatallFail = true
+				minigameStatus = -pow(-minigameResult, 1.5) * 2.0
+				finalMinigameStatus = 0.0
 		
 		var damage = 0.0
 		var addLust = 0
 		var addPain = 0
 		var addStamina = 0
+
+		var limitedDamage = 0.01 + 2.4 / (0.1 + restraintData.getLevel())
+		var struggleData
+		if fatallFail:
+			struggleData = restraintData.doFailingStruggle(GM.pc, minigameStatus)
+		else:
+			struggleData = restraintData.doStruggle(GM.pc, minigameStatus)
 		
-		var struggleData = restraintData.doStruggle(GM.pc, minigameStatus)
 		if(struggleData.has("damage")):
-			damage = struggleData["damage"] * minigameStatus
+			damage = struggleData["damage"] * abs(minigameStatus)
 			if(damage > 0.0 && instantUnlock):
 				damage = 1.0
+			if damage > limitedDamage && OPTIONS.isHardStruggleEnabled():
+				damage = limitedDamage
 		if(struggleData.has("lust") && struggleData["lust"] > 0):
 			addLust = struggleData["lust"]
 		if(struggleData.has("pain") && struggleData["pain"] > 0):
@@ -233,15 +248,21 @@ func _react(_action: String, _args):
 			addStamina += turnData["stamina"]
 			additionalStruggleText = turnData["text"]
 			
-		if(damage < 1.0):
-			var mult = 4
-			if(fightMode):
-				mult = 5
-			# 20 xp for struggling out of a level 5 restraint. 25 xp if you're doing it during combat
-			
+		# less xp without progression more in combat
+		if !instantUnlock:
+			var mult = 1
+			if damage > 0:
+				mult += 2
+			if fightMode:
+				mult += 2
 			GM.pc.addSkillExperience(Skill.BDSM, restraintData.getLevel() * mult)
 			
-		if(damage != 0.0):
+		if(fatallFail):
+			addMessage("You tried really hard but you complete failed.")
+		if(damage < 0.0):
+			restraintData.takeDamage(damage)
+			addMessage("You ara back about "+str(Util.roundF(-damage*100.0, 1))+"% no progress at all)")
+		if(damage > 0.0):
 			restraintData.takeDamage(damage)
 			addMessage("You made "+str(Util.roundF(damage*100.0, 1))+"% of progress ("+str(Util.roundF(finalMinigameStatus*100.0, 1))+"% efficiency)")
 		if(addLust != 0):

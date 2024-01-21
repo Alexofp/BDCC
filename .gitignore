@@ -10,3 +10,5 @@ doc/_build/
 logs/
 
 *.pck
+/.idea/
+/*.iml

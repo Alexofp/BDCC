@@ -7,6 +7,9 @@ func _init():
 func canUnlockWithKey():
 	return false
 
+func doFailingStruggle(_pc, _minigame):
+	return doStruggle(_pc, _minigame)
+
 func doStruggle(_pc, _minigame):
 	var _handsFree = !_pc.hasBlockedHands()
 	var _armsFree = !_pc.hasBoundArms()
@@ -30,7 +33,9 @@ func doStruggle(_pc, _minigame):
 		damage = calcDamage(_pc, 0.5)
 		stamina = 10
 		lust = scaleDamage(5)
-	
+	if fatalFail(_minigame):
+		text += " but it seems like {user.youHe} just tightened it up more"
+		damage = -damage/2
 	return {"text": text, "damage": damage, "lust": lust, "pain": pain, "stamina": stamina}
 
 func processStruggleTurn(_pc, _isActivelyStruggling):
