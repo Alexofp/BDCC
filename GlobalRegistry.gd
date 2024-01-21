@@ -399,7 +399,9 @@ func registerEverything():
 	yield(get_tree(), "idle_frame")
 	
 	registerSkinsFolder("res://Player/Player3D/Skins/")
+	registerSkinsFolder("res://Player/Player3D/SkinsByAuthor/AverageAce/", "AverageAce")
 	registerPartSkinsFolder("res://Player/Player3D/SkinsParts/")
+	registerPartSkinsFolder("res://Player/Player3D/SkinsPartsByAuthor/AverageAce/", "AverageAce")
 	
 	emit_signal("loadingUpdate", 11.0/totalStages, "Modules")
 	yield(get_tree(), "idle_frame")
@@ -1637,16 +1639,18 @@ func getSexTypes():
 
 
 
-func registerSkin(path: String):
+func registerSkin(path: String, authorOverride = ""):
 	var loadedClass = load(path)
 	var object = loadedClass.new()
 	
+	if(authorOverride != ""):
+		object.author = authorOverride
 	skins[object.id] = object
 
-func registerSkinsFolder(folder: String):
+func registerSkinsFolder(folder: String, authorOverride = ""):
 	var scripts = getScriptsInSubFolders(folder)
 	for scriptPath in scripts:
-		registerSkin(scriptPath)
+		registerSkin(scriptPath, authorOverride)
 
 func getSkin(id: String):
 	if(skins.has(id)):
@@ -1675,18 +1679,20 @@ func findCustomSkins():
 
 
 
-func registerPartSkin(path: String):
+func registerPartSkin(path: String, authorOverride = ""):
 	var loadedClass = load(path)
 	var object = loadedClass.new()
 	
+	if(authorOverride != ""):
+		object.author = authorOverride
 	if(!partSkins.has(object.partID)):
 		partSkins[object.partID] = {}
 	partSkins[object.partID][object.id] = object
 
-func registerPartSkinsFolder(folder: String):
+func registerPartSkinsFolder(folder: String, authorOverride = ""):
 	var scripts = getScriptsInFoldersRecursive(folder, true)
 	for scriptPath in scripts:
-		registerPartSkin(scriptPath)
+		registerPartSkin(scriptPath, authorOverride)
 
 func getPartSkin(partID: String, id: String):
 	if(!partSkins.has(partID)):

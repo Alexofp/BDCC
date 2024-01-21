@@ -2,6 +2,7 @@ extends Reference
 class_name SkinBase
 
 var id = "error"
+var author = ""
 
 func getName():
 	return "Error"
@@ -11,3 +12,6 @@ func getPatternTexture():
 
 func getFittingSkinTypes():
 	return {}
+
+func getAuthor():
+	return author
