@@ -27,11 +27,15 @@ func addRow(name: String, gender: String, subbyStat: float, ID: String, occupati
 	newRow.connect("onMeetButtonPressed", self, "meetNPC")
 	
 
+var showedForgetPopup = false
 func forgetNPC(ID, name, node):
 	_IDtoForget = ID
 	nodeToFree = node
+	if(showedForgetPopup):
+		_on_Forget_pressed()
+		return
 	sendPopupMessage("Are you sure you want to forget "+name+"? This will permanently remove "+name+" from the game. Keep in mind that if this character is pregnant, their pregnancy will be forgotten too. But any kids you had together will stay.", true)
-
+	showedForgetPopup = true
 
 func _on_Forget_pressed():
 	GM.ui.clearCharactersPanel()
