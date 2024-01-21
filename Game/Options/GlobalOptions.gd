@@ -12,9 +12,8 @@ var playerPregnancyTimeDays: int
 var npcPregnancyTimeDays: int
 var impregnationChanceModifier: int
 
-# Bondage options
+# Difficulty options
 var hardStruggleEnabled: bool = false
-var maximumBondageLevel = 5
 
 var shouldScaleUI: bool = true
 var uiScaleMultiplier = 1.0
@@ -61,7 +60,6 @@ func resetToDefaults():
 	npcPregnancyTimeDays = 5
 	impregnationChanceModifier = 100
 	hardStruggleEnabled = false
-	maximumBondageLevel = 5
 	shouldScaleUI = true
 	uiScaleMultiplier = 1.0
 	showSpeakerName = true
@@ -132,9 +130,6 @@ func getImpregnationChanceModifier() -> float:
 
 func isHardStruggleEnabled():
 	return hardStruggleEnabled
-
-func getMaximumBondageLevel():
-	return maximumBondageLevel
 
 func shouldShowSpeakerName():
 	return showSpeakerName
@@ -271,26 +266,15 @@ func getChangeableOptions():
 			]
 		},
 		{
-			"name": "Bondage settings",
-			"id": "bondage",
+			"name": "Difficulty settings",
+			"id": "difficulty",
 			"options": [
 				{
-					"name": "Hard Struggle",
-					"description": "If you feel like Houdini turn this option on. No instant escape and longer struggle at higher levels.",
+					"name": "Harder struggling",
+					"description": "Makes getting restraints off harder. Turn this option on only if you feel like Houdini.",
 					"id": "hardStruggleEnabled",
 					"type": "checkbox",
 					"value": hardStruggleEnabled
-				},
-				{
-					"name": "Maximum bondage level",
-					"description": "Maximum level of normal bondage stuff, default is 5, reasonable values are up to 10",
-					"id": "maximumBondageLevel",
-					"type": "int",
-					"value": maximumBondageLevel,
-					"range": {
-						"min": 5,
-						"max": 20
-					}
 				},
 			]
 		},
@@ -642,11 +626,9 @@ func applyOption(categoryID, optionID, value):
 		if(optionID == "impregnationChanceModifier"):
 			impregnationChanceModifier = value
 	
-	if categoryID == "bondage":
+	if categoryID == "difficulty":
 		if optionID == "hardStruggleEnabled":
 			hardStruggleEnabled = value
-		if optionID == "maximumBondageLevel":
-			maximumBondageLevel = value
 	
 	if(categoryID == "other"):
 		if(optionID == "fetchLatestRelease"):
@@ -729,7 +711,6 @@ func saveData():
 		"npcPregnancyTimeDays": npcPregnancyTimeDays,
 		"impregnationChanceModifier": impregnationChanceModifier,
 		"hardStruggleEnabled": hardStruggleEnabled,
-		"maximumBondageLevel": maximumBondageLevel,
 		"shouldScaleUI": shouldScaleUI,
 		"uiScaleMultiplier": uiScaleMultiplier,
 		"uiButtonSize": uiButtonSize,
@@ -770,7 +751,6 @@ func loadData(data):
 	npcPregnancyTimeDays = loadVar(data, "npcPregnancyTimeDays", 5)
 	impregnationChanceModifier = loadVar(data, "impregnationChanceModifier", 100)
 	hardStruggleEnabled = loadVar(data, "hardStruggleEnabled", false)
-	maximumBondageLevel = loadVar(data, "maximumBondageLevel", 5)
 	shouldScaleUI = loadVar(data, "shouldScaleUI", true)
 	uiScaleMultiplier = loadVar(data, "uiScaleMultiplier", 1.0)
 	uiButtonSize = loadVar(data, "uiButtonSize", 0)
@@ -853,7 +833,7 @@ func checkImagePackOrder(imagePacks):
 			newImagePackOrder.push_front(imagePackID)
 	
 	imagePackOrder = newImagePackOrder
-	print("checkImagePackOrder DONE ",imagePackOrder)
+	#print("checkImagePackOrder DONE ",imagePackOrder)
 
 func getImagePackOrder():
 	return imagePackOrder

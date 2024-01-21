@@ -115,7 +115,7 @@ func doFailingStruggle(_pc, _minigame):
 	var damage = 0
 	var stamina = 0
 	
-	text = "You struggle, trying to make the "+getItem().getVisibleName()+" slip off"
+	text = "You fail while trying to make "+getItem().getVisibleName()+" slip off"
 	stamina = 20
 	
 	return {"text": text, "damage": damage, "lust": lust, "pain": pain, "stamina": stamina}

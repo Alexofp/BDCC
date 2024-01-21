@@ -14,14 +14,12 @@ var freeze = false
 var goldenZoneVisible = false
 var isBlindFoldedVersion = false
 
-var hasAdvancedPerk = true
+var hasAdvancedPerk = false
 var hardStruggleEnabled = true
 var perfectStreak = 0
 var howMuchForPerfect = 0.25
 
-var failZoneList = []
-var lastPosition = 0.0
-var forward = true
+var failZoneData = []
 
 #set difficulty as bondage level, accept positive number
 func setDifficulty(level):
@@ -48,29 +46,53 @@ func _ready():
 	setIsBlindfolded(false)
 
 func generateFatalZone(_difficulty = 1.0):
-	if !hardStruggleEnabled:
+	if !hardStruggleEnabled || isBlindFoldedVersion:
 		return
 	
-	var diff = _difficulty - 1.0;
-	if diff < 1.0:
-		diff = 1.0
+	#var diff = _difficulty - 1.0;
+	#if diff < 1.0:
+	#	diff = 1.0
+	var diffInt = int(_difficulty)
+	var annoyingThingsAmount = Util.mini(diffInt + 2, 5)
 	
-	for _i in range(diff):
+	for _i in range(annoyingThingsAmount):
 		var rectangle = ColorRect.new()
 		rectangle.rect_size.y = redZone.rect_size.y
 		rectangle.color = Color("5900bd")
-		failZoneList.append(rectangle)
+		
 		failArea.add_child(rectangle)
+		var newFailAreaData = {
+			"rect": rectangle,
+			"pos": RNG.randf_range(0.0, 1.0),
+			"scale": 0.02,
+			"annoy": RNG.pick(["move", "scale", "jitter"]),
+			"timeskip": RNG.randf_range(0.0, 100.0),
+		}
+		failZoneData.append(newFailAreaData)
+		setZonePosition(rectangle, newFailAreaData["pos"], 0.02)
 	
-	for rectangle in failZoneList:
-		setZonePosition(rectangle, RNG.randf_range(0.0, 1.0), 0.02)
+func processFatalZones():
+	for zoneData in failZoneData:
+		var rectangle = zoneData["rect"]
+		var position = zoneData["pos"]
+		var scale = zoneData["scale"]
+		var timeskip = zoneData["timeskip"]
+		var annoyMethod = zoneData["annoy"]
+		
+		if(annoyMethod == "scale"):
+			setZonePosition(rectangle, position, scale*(sin(timeskip+time*2.0)+1.0)/2.0)
+		if(annoyMethod == "move"):
+			setZonePosition(rectangle, position+sin(timeskip+time)*0.05, scale)
+		if(annoyMethod == "jitter"):
+			setZonePosition(rectangle, position+sin(timeskip+time)*0.05+sin(timeskip+time*10.0)*0.01+sin(timeskip+time*7.0)*0.02, scale)
 
 func setZonePosition(zone, pos, size):
 	zone.anchor_left = clamp(pos - size, 0.0, 1.0)
 	zone.anchor_right = clamp(pos + size, 0.0, 1.0)
 
 func isFatal(cursorPostion):
-	for rectangle in failZoneList:
+	for zoneData in failZoneData:
+		var rectangle = zoneData["rect"]
 		if cursorPostion >= rectangle.anchor_left && cursorPostion <= rectangle.anchor_right:
 			return true
 	return false
@@ -96,7 +118,7 @@ func setHasAdvancedPerk(thehasAdvancedPerk):
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if(isBlindFoldedVersion):
+	if(isBlindFoldedVersion && !hardStruggleEnabled):
 		delta /= 2.0
 	
 	if(ingame && !freeze):
@@ -105,16 +127,13 @@ func _process(delta):
 		time += delta
 		timeLeft -= delta
 		
+		if(hardStruggleEnabled):
+			processFatalZones()
+			moveRedZone()
+		
 		var newPosition = getCursorPosition();
 		setCursorPosition(newPosition)
 		setTimeBar(timeLeft / timer)
-
-		if newPosition < lastPosition && forward:
-			forward = false
-		elif newPosition > lastPosition && !forward:
-			forward = true
-			generateFatalZone()
-		lastPosition = newPosition
 
 		var flatStyle:StyleBoxFlat = $GameScreen/Panel.get_stylebox("panel")
 		if(isBlindFoldedVersion):
@@ -145,7 +164,7 @@ func setCursorPosition(pos:float):
 func getScore():
 	var cursorPostion = getCursorPosition()
 	if isFatal(cursorPostion):
-		return -RNG.randf_range(0.1, 0.9)
+		return -1.0
 	if(goldenZoneVisible && cursorPostion >= goldenZone.anchor_left && cursorPostion <= goldenZone.anchor_right):
 		return 10000.0
 	if(cursorPostion >= redZone.anchor_left && cursorPostion <= redZone.anchor_right):
@@ -164,11 +183,16 @@ func getScore():
 	
 	return 0.0
 
+var zonePos = 0.0
+var zoneSize = 0.0
+var zoneOrangeSize = 0.0
 func generateZone(thedifficulty = 1.0):
-	var pos = RNG.randf_range(0.0, 1.0)
-	var size = 0.005 + 1.0/(11.0 + thedifficulty * 2.0)
-	var orangeSize = 0.1 + 1.0/(2.0 + thedifficulty)
-	setZone(pos, size, orangeSize)
+	zonePos = RNG.randf_range(0.0, 1.0)
+	zoneSize = 0.005 + 1.0/(11.0 + thedifficulty * 2.0)
+	zoneOrangeSize = 0.1 + 1.0/(2.0 + thedifficulty)
+	setZone(zonePos, zoneSize, zoneOrangeSize)
+	zonePos = (orangeZone.anchor_left + orangeZone.anchor_right)/2.0
+	zoneOrangeSize = (orangeZone.anchor_right - orangeZone.anchor_left)
 	
 	#setGoldenZone(pos + RNG.randf_range(-orangeSize/2.0, orangeSize/2.0), 0.03)
 	setGoldenZone(RNG.randf_range(0.0, 1.0), 0.05)
@@ -179,6 +203,14 @@ func setZone(pos, size, orangeSize):
 	
 	orangeZone.anchor_left = clamp(pos-size/2.0-orangeSize/2.0, 0.0, 1.0)
 	orangeZone.anchor_right = clamp(pos+size/2.0+orangeSize/2.0, 0.0, 1.0)
+	
+func moveRedZone():
+	if(isBlindFoldedVersion || !hardStruggleEnabled):
+		return
+	var shift = (zoneOrangeSize - zoneSize)/2.0 * sin(time*2.1)
+
+	redZone.anchor_left = clamp(zonePos-zoneSize/2.0+shift, 0.0, 0.98)
+	redZone.anchor_right = clamp(zonePos+zoneSize/2.0+shift, 0.02, 1.0)
 	
 func setGoldenZone(pos, size):
 	goldenZone.anchor_left = clamp(pos-size/2.0, 0.0, 1.0)
@@ -212,6 +244,8 @@ func setIngame(newingame):
 
 func calcFinalScore(isLost = false):
 	var theScore = getScore()
+	if(theScore > 0.0 && theScore < 1.0 && hardStruggleEnabled):
+		theScore /= 2.0
 	if theScore < 0.0:
 		return theScore
 	if(isLost):

@@ -1466,10 +1466,6 @@ window/stretch/aspect="expand"
 
 enabled=PoolStringArray( "res://addons/godot-notes/plugin.cfg" )
 
-[global]
-
-tit=false
-
 [gui]
 
 timers/tooltip_delay_sec=0.1

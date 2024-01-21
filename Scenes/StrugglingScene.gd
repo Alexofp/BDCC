@@ -107,7 +107,7 @@ func _run():
 		GM.ui.addCustomControl("minigame", game)
 		if(OPTIONS.isHardStruggleEnabled()):
 			game.setHardStruggleEnabled(true)
-		if(GM.pc.hasPerk(Perk.BDSMInstantEscape) && game.has_method("instantEscapePerk") && !OPTIONS.isHardStruggleEnabled()):
+		if(GM.pc.hasPerk(Perk.BDSMInstantEscape) && game.has_method("instantEscapePerk")):
 			game.instantEscapePerk()
 		if(GM.pc.isBlindfolded() && game.has_method("setIsBlindfolded")):
 			game.setIsBlindfolded(true)
@@ -218,7 +218,6 @@ func _react(_action: String, _args):
 		var addPain = 0
 		var addStamina = 0
 
-		var limitedDamage = 0.01 + 2.4 / (0.1 + restraintData.getLevel())
 		var struggleData
 		if fatallFail:
 			struggleData = restraintData.doFailingStruggle(GM.pc, minigameStatus)
@@ -229,8 +228,6 @@ func _react(_action: String, _args):
 			damage = struggleData["damage"] * abs(minigameStatus)
 			if(damage > 0.0 && instantUnlock):
 				damage = 1.0
-			if damage > limitedDamage && OPTIONS.isHardStruggleEnabled():
-				damage = limitedDamage
 		if(struggleData.has("lust") && struggleData["lust"] > 0):
 			addLust = struggleData["lust"]
 		if(struggleData.has("pain") && struggleData["pain"] > 0):
@@ -258,10 +255,10 @@ func _react(_action: String, _args):
 			GM.pc.addSkillExperience(Skill.BDSM, restraintData.getLevel() * mult)
 			
 		if(fatallFail):
-			addMessage("You tried really hard but you complete failed.")
+			addMessage("You tried really hard but you completely failed.")
 		if(damage < 0.0):
 			restraintData.takeDamage(damage)
-			addMessage("You ara back about "+str(Util.roundF(-damage*100.0, 1))+"% no progress at all)")
+			addMessage("You lost "+str(Util.roundF(-damage*100.0, 1))+"% of progress")
 		if(damage > 0.0):
 			restraintData.takeDamage(damage)
 			addMessage("You made "+str(Util.roundF(damage*100.0, 1))+"% of progress ("+str(Util.roundF(finalMinigameStatus*100.0, 1))+"% efficiency)")
