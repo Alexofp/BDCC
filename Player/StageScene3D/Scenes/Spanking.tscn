@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=41 format=2]
 
 [ext_resource path="res://Player/Player3D/Doll3D.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Player/StageScene3D/BaseStageScene3D.tscn" type="PackedScene" id=2]
@@ -12,11 +12,20 @@ animation = "CuffedArms-loop"
 filter_enabled = true
 filters = [ "Doll3D/Skeleton:Arm.L", "Doll3D/Skeleton:Arm.R", "Doll3D/Skeleton:ForeArm.L", "Doll3D/Skeleton:ForeArm.R", "Doll3D/Skeleton:Hand.L", "Doll3D/Skeleton:Hand.R" ]
 
+[sub_resource type="AnimationNodeAnimation" id=58]
+animation = "SpankingFast_1-loop"
+
 [sub_resource type="AnimationNodeAnimation" id=40]
 animation = "SpankingFast_1-loop"
 
 [sub_resource type="AnimationNodeAnimation" id=41]
 animation = "SpankingTease_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=59]
+animation = "Spanking_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=70]
+animation = "Spanking_1-loop"
 
 [sub_resource type="AnimationNodeAnimation" id=42]
 animation = "Spanking_1-loop"
@@ -33,15 +42,41 @@ xfade_time = 0.5
 [sub_resource type="AnimationNodeStateMachineTransition" id=46]
 xfade_time = 0.5
 
+[sub_resource type="AnimationNodeStateMachineTransition" id=61]
+switch_mode = 2
+auto_advance = true
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=62]
+xfade_time = 0.2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=63]
+switch_mode = 2
+auto_advance = true
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=71]
+xfade_time = 0.3
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=72]
+xfade_time = 0.2
+
 [sub_resource type="AnimationNodeStateMachine" id=47]
 states/SpankingFast_1-loop/node = SubResource( 40 )
 states/SpankingFast_1-loop/position = Vector2( 525, 225 )
+"states/SpankingFast_1-loop 2/node" = SubResource( 58 )
+"states/SpankingFast_1-loop 2/position" = Vector2( 968, 191 )
 states/SpankingTease_1-loop/node = SubResource( 41 )
 states/SpankingTease_1-loop/position = Vector2( 525, 72 )
 states/Spanking_1-loop/node = SubResource( 42 )
 states/Spanking_1-loop/position = Vector2( 525, 151 )
-transitions = [ "SpankingTease_1-loop", "Spanking_1-loop", SubResource( 43 ), "Spanking_1-loop", "SpankingTease_1-loop", SubResource( 44 ), "Spanking_1-loop", "SpankingFast_1-loop", SubResource( 45 ), "SpankingFast_1-loop", "Spanking_1-loop", SubResource( 46 ) ]
+"states/Spanking_1-loop 2/node" = SubResource( 59 )
+"states/Spanking_1-loop 2/position" = Vector2( 981, 38 )
+"states/Spanking_1-loop 3/node" = SubResource( 70 )
+"states/Spanking_1-loop 3/position" = Vector2( 785, -22 )
+transitions = [ "SpankingTease_1-loop", "Spanking_1-loop", SubResource( 43 ), "Spanking_1-loop", "SpankingTease_1-loop", SubResource( 44 ), "Spanking_1-loop", "SpankingFast_1-loop", SubResource( 45 ), "SpankingFast_1-loop", "Spanking_1-loop", SubResource( 46 ), "Spanking_1-loop 2", "SpankingTease_1-loop", SubResource( 61 ), "SpankingTease_1-loop", "SpankingFast_1-loop 2", SubResource( 62 ), "SpankingFast_1-loop 2", "SpankingTease_1-loop", SubResource( 63 ), "SpankingTease_1-loop", "Spanking_1-loop 3", SubResource( 71 ), "Spanking_1-loop 3", "Spanking_1-loop 2", SubResource( 72 ) ]
 start_node = "SpankingTease_1-loop"
+graph_offset = Vector2( 187, -175 )
 
 [sub_resource type="AnimationNodeBlendTree" id=48]
 graph_offset = Vector2( -327.299, 57.849 )
@@ -56,11 +91,17 @@ node_connections = [ "output", 0, "CuffsBlend", "CuffsBlend", 0, "StateMachine",
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=22]
 
+[sub_resource type="AnimationNodeAnimation" id=64]
+animation = "SpankingFast_2-loop"
+
 [sub_resource type="AnimationNodeAnimation" id=50]
 animation = "SpankingFast_2-loop"
 
 [sub_resource type="AnimationNodeAnimation" id=51]
 animation = "SpankingTease_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=65]
+animation = "Spanking_2-loop"
 
 [sub_resource type="AnimationNodeAnimation" id=52]
 animation = "Spanking_2-loop"
@@ -77,15 +118,36 @@ xfade_time = 0.5
 [sub_resource type="AnimationNodeStateMachineTransition" id=56]
 xfade_time = 0.5
 
+[sub_resource type="AnimationNodeStateMachineTransition" id=66]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=67]
+switch_mode = 2
+auto_advance = true
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=68]
+xfade_time = 0.2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=69]
+switch_mode = 2
+auto_advance = true
+xfade_time = 0.5
+
 [sub_resource type="AnimationNodeStateMachine" id=57]
 states/SpankingFast_2-loop/node = SubResource( 50 )
 states/SpankingFast_2-loop/position = Vector2( 460, 228 )
+"states/SpankingFast_2-loop 2/node" = SubResource( 64 )
+"states/SpankingFast_2-loop 2/position" = Vector2( 731, 182 )
 states/SpankingTease_2-loop/node = SubResource( 51 )
 states/SpankingTease_2-loop/position = Vector2( 460, 77 )
 states/Spanking_2-loop/node = SubResource( 52 )
 states/Spanking_2-loop/position = Vector2( 460, 146 )
-transitions = [ "SpankingTease_2-loop", "Spanking_2-loop", SubResource( 53 ), "Spanking_2-loop", "SpankingTease_2-loop", SubResource( 54 ), "Spanking_2-loop", "SpankingFast_2-loop", SubResource( 55 ), "SpankingFast_2-loop", "Spanking_2-loop", SubResource( 56 ) ]
+"states/Spanking_2-loop 2/node" = SubResource( 65 )
+"states/Spanking_2-loop 2/position" = Vector2( 919, 77 )
+transitions = [ "SpankingTease_2-loop", "Spanking_2-loop", SubResource( 53 ), "Spanking_2-loop", "SpankingTease_2-loop", SubResource( 54 ), "Spanking_2-loop", "SpankingFast_2-loop", SubResource( 55 ), "SpankingFast_2-loop", "Spanking_2-loop", SubResource( 56 ), "SpankingTease_2-loop", "Spanking_2-loop 2", SubResource( 66 ), "Spanking_2-loop 2", "SpankingTease_2-loop", SubResource( 67 ), "SpankingTease_2-loop", "SpankingFast_2-loop 2", SubResource( 68 ), "SpankingFast_2-loop 2", "SpankingTease_2-loop", SubResource( 69 ) ]
 start_node = "SpankingTease_2-loop"
+graph_offset = Vector2( 25, -94 )
 
 [sub_resource type="AnimationNodeBlendTree" id=49]
 graph_offset = Vector2( -262.532, 88.6842 )

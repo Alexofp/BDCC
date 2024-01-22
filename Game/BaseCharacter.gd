@@ -1956,11 +1956,11 @@ func isWearingCondom():
 	return getWornCondom() != null
 
 func getArousal() -> float:
-	return arousal
+	return clamp(arousal, 0.0, 1.0)
 
 func addArousal(adda:float):
 	arousal += adda
-	arousal = clamp(arousal, 0.0, 1.0)
+	#arousal = clamp(arousal, 0.0, 1.0)
 
 func setArousal(newa:float):
 	arousal = clamp(newa, 0.0, 1.0)

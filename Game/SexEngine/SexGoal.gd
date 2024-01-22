@@ -20,6 +20,7 @@ const ChokeSexVaginal = "ChokeSexVaginal"
 const ChokeSexAnal = "ChokeSexAnal"
 const ChokeReceiveVaginal = "ChokeReceiveVaginal"
 const ChokeReceiveAnal = "ChokeReceiveAnal"
+const SpankSub = "SpankSub"
 
 const RimSub = "RimSub"
 const RimmingReceive = "RimmingReceive"

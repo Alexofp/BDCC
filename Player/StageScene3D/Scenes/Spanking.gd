@@ -15,6 +15,8 @@ func _ready():
 	animationTree2.active = true
 
 func updateSubAnims():
+	if(true):
+		return
 	if(doll.getArmsCuffed()):
 		animationTree["parameters/CuffsBlend/blend_amount"] = 1.0
 	else:
@@ -31,7 +33,6 @@ func playAnimation(animID, _args = {}):
 	#if(animID is Array):
 	#	animID = animID[0]
 	
-	print("Playing duo: "+str(animID))
 	var firstDoll = "pc"
 	if(_args.has("pc")):
 		firstDoll = _args["pc"]
@@ -67,6 +68,12 @@ func playAnimation(animID, _args = {}):
 	if(animID == "fast"):
 		state_machine.travel("SpankingFast_1-loop")
 		state_machine2.travel("SpankingFast_2-loop")
+	if(animID == "spankonce"):
+		state_machine.travel("Spanking_1-loop 2")
+		state_machine2.travel("Spanking_2-loop 2")
+	if(animID == "fastonce"):
+		state_machine.travel("SpankingFast_1-loop 2")
+		state_machine2.travel("SpankingFast_2-loop 2")
 
 func canTransitionTo(_actionID, _args = []):
 	var firstDoll = "pc"
@@ -81,4 +88,4 @@ func canTransitionTo(_actionID, _args = []):
 	return true
 
 func getSupportedStates():
-	return ["tease", "spank", "fast"]
+	return ["tease", "spank", "fast", "spankonce", "fastonce"]
