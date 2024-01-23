@@ -2,7 +2,7 @@ extends Node
 
 var game_version_major = 0
 var game_version_minor = 1
-var game_version_revision = 1
+var game_version_revision = 2
 var game_version_suffix = ""
 
 var currentUniqueID = 0
@@ -70,6 +70,9 @@ var cachedDonationData = null
 var cachedLocalDonationData = null
 var donationDataRequest: HTTPRequest
 signal donationDataUpdated
+
+signal loadingUpdate(percent, whatsnext)
+signal loadingFinished
 
 var modsSupport = false
 var loadedMods = []
@@ -251,9 +254,15 @@ func getDonationDataString():
 	return newText
 
 func registerEverything():
+	var totalStages = 12.0
+	
 	var start = OS.get_ticks_usec()
 	
 	startLoadingDonationData()
+	
+	emit_signal("loadingUpdate", 0.0/totalStages, "Bodyparts")
+	yield(get_tree(), "idle_frame")
+	yield(get_tree(), "idle_frame")
 	
 	if(true):
 		var start2 = OS.get_ticks_usec()
@@ -273,6 +282,10 @@ func registerEverything():
 		var worker_time2 = (end2-start2)/1000000.0
 		Log.print("BODYPARTS initialized in: %s seconds" % [worker_time2])
 	
+	emit_signal("loadingUpdate", 1.0/totalStages, "Inventory")
+	yield(get_tree(), "idle_frame")
+	yield(get_tree(), "idle_frame")
+	
 	registerItemFolder("res://Inventory/Items/")
 	registerItemFolder("res://Inventory/Items/Underwear/")
 	registerItemFolder("res://Inventory/Items/BDSM/")
@@ -285,6 +298,10 @@ func registerEverything():
 	registerLootTableFolder("res://Inventory/LootTable/")
 	registerLootListFolder("res://Inventory/LootLists/")
 	
+	emit_signal("loadingUpdate", 2.0/totalStages, "Skills")
+	yield(get_tree(), "idle_frame")
+	yield(get_tree(), "idle_frame")
+	
 	registerStat("res://Skills/Stat/AgilityStat.gd")
 	registerStat("res://Skills/Stat/StrengthStat.gd")
 	registerStat("res://Skills/Stat/VitalityStat.gd")
@@ -294,7 +311,15 @@ func registerEverything():
 	
 	registerPerkFolder("res://Skills/Perk/")
 	
+	emit_signal("loadingUpdate", 3.0/totalStages, "Events")
+	yield(get_tree(), "idle_frame")
+	yield(get_tree(), "idle_frame")
+	
 	registerEventFolder("res://Events/Event/")
+	
+	emit_signal("loadingUpdate", 4.0/totalStages, "Scenes")
+	yield(get_tree(), "idle_frame")
+	yield(get_tree(), "idle_frame")
 	
 	if(true):
 		var start2 = OS.get_ticks_usec()
@@ -309,8 +334,16 @@ func registerEverything():
 	
 	registerFluidsFolder("res://Player/Fluids/Fluids/")
 	
+	emit_signal("loadingUpdate", 5.0/totalStages, "Characters")
+	yield(get_tree(), "idle_frame")
+	yield(get_tree(), "idle_frame")
+	
 	registerCharacterFolder("res://Characters/")
 	registerCharacterFolder("res://Characters/Generic/")
+	
+	emit_signal("loadingUpdate", 6.0/totalStages, "Attacks")
+	yield(get_tree(), "idle_frame")
+	yield(get_tree(), "idle_frame")
 	
 	registerAttackFolder("res://Attacks/", true)
 	
@@ -318,6 +351,10 @@ func registerEverything():
 	registerLustActionFolder("res://Game/LustCombat/LustActions/Perk/")
 	
 	registerLustTopicFolder("res://Game/LustCombat/Topic/")
+	
+	emit_signal("loadingUpdate", 7.0/totalStages, "Sex")
+	yield(get_tree(), "idle_frame")
+	yield(get_tree(), "idle_frame")
 	
 	#registerSexActionsFolder("res://Game/SexEngine/SexActions/")
 	registerSexActivitiesFolder("res://Game/SexEngine/SexActivity/")
@@ -333,6 +370,10 @@ func registerEverything():
 	
 	registerSpeechModifiersFolder("res://Game/SpeechModifiers/")
 	
+	emit_signal("loadingUpdate", 8.0/totalStages, "Sex scenes")
+	yield(get_tree(), "idle_frame")
+	yield(get_tree(), "idle_frame")
+	
 	if(true):
 		var start2 = OS.get_ticks_usec()
 		registerStageSceneFolder("res://Player/StageScene3D/Scenes/")
@@ -342,6 +383,10 @@ func registerEverything():
 		
 	registerMapFloorFolder("res://Game/World/Floors/")
 	
+	emit_signal("loadingUpdate", 9.0/totalStages, "Image packs")
+	yield(get_tree(), "idle_frame")
+	yield(get_tree(), "idle_frame")
+	
 	registerImagePackFolder("res://Images/ImagePacks/")
 	OPTIONS.checkImagePackOrder(imagePacks)
 	
@@ -349,10 +394,20 @@ func registerEverything():
 	
 	registerComputerFolder("res://Game/Computer/")
 	
-	registerSkinsFolder("res://Player/Player3D/Skins/")
-	registerPartSkinsFolder("res://Player/Player3D/SkinsParts/")
+	emit_signal("loadingUpdate", 10.0/totalStages, "Skins")
+	yield(get_tree(), "idle_frame")
+	yield(get_tree(), "idle_frame")
 	
-	registerModulesFolder("res://Modules/")
+	registerSkinsFolder("res://Player/Player3D/Skins/")
+	registerSkinsFolder("res://Player/Player3D/SkinsByAuthor/AverageAce/", "AverageAce")
+	registerPartSkinsFolder("res://Player/Player3D/SkinsParts/")
+	registerPartSkinsFolder("res://Player/Player3D/SkinsPartsByAuthor/AverageAce/", "AverageAce")
+	
+	emit_signal("loadingUpdate", 11.0/totalStages, "Modules")
+	yield(get_tree(), "idle_frame")
+	yield(get_tree(), "idle_frame")
+	
+	yield(registerModulesFolder("res://Modules/"), "completed")
 	findCustomSkins()
 	sortFightClubFighters()
 	sortRegisteredStatusEffectsByPriority()
@@ -365,6 +420,7 @@ func registerEverything():
 	var worker_time = (end-start)/1000000.0
 	Log.print("GlobalRegistry fully initialized in: %s seconds" % [worker_time])
 	isInitialized = true
+	emit_signal("loadingFinished")
 	
 # The point is that it will still generate unique ids even after saving/loading
 func generateUniqueID():
@@ -1161,6 +1217,10 @@ func registerModulesFolder(folder: String):
 				if(dir.file_exists(modulePath)):
 					#print("MODULE FILE: " +modulePath)
 					registerModule(modulePath)
+					
+					emit_signal("loadingUpdate", 11.0/12.0, file_name+" module")
+					yield(get_tree(), "idle_frame")
+					yield(get_tree(), "idle_frame")
 				pass
 			file_name = dir.get_next()
 	else:
@@ -1579,16 +1639,18 @@ func getSexTypes():
 
 
 
-func registerSkin(path: String):
+func registerSkin(path: String, authorOverride = ""):
 	var loadedClass = load(path)
 	var object = loadedClass.new()
 	
+	if(authorOverride != ""):
+		object.author = authorOverride
 	skins[object.id] = object
 
-func registerSkinsFolder(folder: String):
+func registerSkinsFolder(folder: String, authorOverride = ""):
 	var scripts = getScriptsInSubFolders(folder)
 	for scriptPath in scripts:
-		registerSkin(scriptPath)
+		registerSkin(scriptPath, authorOverride)
 
 func getSkin(id: String):
 	if(skins.has(id)):
@@ -1617,18 +1679,20 @@ func findCustomSkins():
 
 
 
-func registerPartSkin(path: String):
+func registerPartSkin(path: String, authorOverride = ""):
 	var loadedClass = load(path)
 	var object = loadedClass.new()
 	
+	if(authorOverride != ""):
+		object.author = authorOverride
 	if(!partSkins.has(object.partID)):
 		partSkins[object.partID] = {}
 	partSkins[object.partID][object.id] = object
 
-func registerPartSkinsFolder(folder: String):
+func registerPartSkinsFolder(folder: String, authorOverride = ""):
 	var scripts = getScriptsInFoldersRecursive(folder, true)
 	for scriptPath in scripts:
-		registerPartSkin(scriptPath)
+		registerPartSkin(scriptPath, authorOverride)
 
 func getPartSkin(partID: String, id: String):
 	if(!partSkins.has(partID)):

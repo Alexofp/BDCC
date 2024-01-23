@@ -7,10 +7,12 @@ func getVisibleName():
 	return "Choke-Fuck vaginally"
 
 func isPossible(_sexEngine, _domInfo, _subInfo, _data):
-	if(_domInfo.getChar().hasReachablePenis() && _subInfo.getChar().hasReachableVagina()):
-		return true
+	if(!_domInfo.getChar().hasReachablePenis() || !_subInfo.getChar().hasReachableVagina()):
+		return false
+	if(_domInfo.getChar().hasBoundArms() || _domInfo.getChar().hasBlockedHands()):
+		return false
 	
-	return false
+	return true
 
 func getSubGoals(_sexEngine, _domInfo, _subInfo, _data):
 	return {

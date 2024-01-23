@@ -38,6 +38,9 @@ func getVisibleLevel(isBlind = false):
 func canInspectWhileBlindfolded():
 	return false
 
+func canBeEasilyRemovedByDom():
+	return canStruggle()
+
 func getDodgeDifficulty():
 	return 1.0 * level * npcDodgeDifficultyMod
 
@@ -59,6 +62,8 @@ func calcDamage(_pc, mult = 1.0):
 
 func takeDamage(howMuch):
 	tightness -= howMuch
+	if tightness > 1.0:
+		tightness = 1.0
 
 func shouldBeRemoved():
 	return tightness <= 0
@@ -74,6 +79,9 @@ func failChance(_pc, chance):
 
 func luckChance(_pc, chance):
 	return RNG.chance(chance)
+
+func fatalFail(_minigame):
+	return _minigame < 0.0
 
 func scaleDamage(dam) -> int:
 	return int(round(getLevel() / 3.0 * dam))
@@ -92,6 +100,25 @@ func calculateAIScore(_pc):
 		result /= tightness
 	
 	return result * npcDodgeDifficultyMod
+
+#Advanced negavive values for more fun in case of fatal fail
+func doFailingStruggle(_pc, _minigame):
+	var _handsFree = !_pc.hasBlockedHands()
+	var _armsFree = !_pc.hasBoundArms()
+	var _legsFree = !_pc.hasBoundLegs()
+	var _canSee = !_pc.isBlindfolded()
+	var _canBite = !_pc.isBitingBlocked()
+	
+	var text = "error?"
+	var lust = 0
+	var pain = 0
+	var damage = 0
+	var stamina = 0
+	
+	text = "You fail while trying to make "+getItem().getVisibleName()+" slip off"
+	stamina = 20
+	
+	return {"text": text, "damage": damage, "lust": lust, "pain": pain, "stamina": stamina}
 
 func doStruggle(_pc, _minigame):
 	var _handsFree = !_pc.hasBlockedHands()

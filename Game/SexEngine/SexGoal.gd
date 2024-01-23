@@ -18,6 +18,9 @@ const TieUp = "TieUp"
 const Choke = "Choke"
 const ChokeSexVaginal = "ChokeSexVaginal"
 const ChokeSexAnal = "ChokeSexAnal"
+const ChokeReceiveVaginal = "ChokeReceiveVaginal"
+const ChokeReceiveAnal = "ChokeReceiveAnal"
+const SpankSub = "SpankSub"
 
 const RimSub = "RimSub"
 const RimmingReceive = "RimmingReceive"
@@ -25,6 +28,7 @@ const MilkWithBreastPump = "MilkWithBreastPump"
 const GropeBreasts = "GropeBreasts"
 const BreastFeedOnSub = "BreastFeedOnSub"
 const BreastFeedSub = "BreastFeedSub"
+const MilkWithPenisPump = "MilkWithPenisPump"
 
 const Hypnotize = "Hypnotize"
 

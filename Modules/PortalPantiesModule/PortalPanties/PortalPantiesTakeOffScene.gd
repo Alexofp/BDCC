@@ -13,10 +13,29 @@ func _run():
 
 	if(state == ""):
 		if(!GM.QS.isActive("PortalPantiesQuest")):
+			playAnimation(StageScene.Solo, "stand", {bodyState={exposedCrotch=true}})
 			saynn("What do you wanna do with your portal panties?")
+			
+			var currentMode = getFlag("PortalPantiesModule.Panties_Mode", 0)
+			if(currentMode == 0):
+				saynn("Current event frequency: normal")
+			elif(currentMode == 1):
+				saynn("Current event frequency: rare")
+			elif(currentMode == 2):
+				saynn("Current event frequency: very rare")
+			elif(currentMode == -1):
+				saynn("Current event frequency: often")
+			
+			var item = GM.pc.getInventory().getItemByUniqueID(uniqueItemID)
+			if(item != null):
+				if(item.coversPenis):
+					saynn("Your portal panties will currently also create a portal for your penis."+(" (If you'd had one)" if !GM.pc.hasPenis() else ""))
+				else:
+					saynn("Your portal panties are not hiding your penis, allowing you to use it."+(" (If you'd had one)" if !GM.pc.hasPenis() else ""))
 			
 			addButton("Take off", "Take portal panties off", "takeoff")
 			addButton("Change mode", "Change how often the events are happening", "changemode")
+			addButton("Penis", "Change how often the events are happening", "changepenismode")
 			addButton("Nothing", "Don't touch them", "endthescene")
 		else:		
 			saynn("You try to take off your portal panties but no matter what you do, the magnetic locks prevent you from doing so.")
@@ -48,6 +67,12 @@ func _react(_action: String, _args):
 	if(_action == "setMode"):
 		setFlag("PortalPantiesModule.Panties_Mode", _args[0])
 		setFlag("PortalPantiesModule.Panties_SceneCooldown", 0)
+		return
+		
+	if(_action == "changepenismode"):
+		var item = GM.pc.getInventory().getItemByUniqueID(uniqueItemID)
+		if(item != null):
+			item.coversPenis = !item.coversPenis
 		return
 	
 	if(_action == "takeoff"):

@@ -15,7 +15,11 @@ func getGoals(_sexEngine, _domFetishHolder, _dom, _sub):
 		possible.append(SexGoal.ChokeSexVaginal)
 	if(_domFetishHolder.getFetishValue(Fetish.AnalSexGiving) >= 0.0):
 		possible.append(SexGoal.ChokeSexAnal)
-	
+	if(_domFetishHolder.getFetishValue(Fetish.VaginalSexReceiving) >= 0.0):
+		possible.append(SexGoal.ChokeReceiveVaginal)
+	if(_domFetishHolder.getFetishValue(Fetish.AnalSexReceiving) >= 0.0):
+		possible.append(SexGoal.ChokeReceiveAnal)
+
 	return possible
 
 func isPossibleFor(_character):

@@ -30,19 +30,19 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="ScrollVBox" type="VBoxContainer" parent="VBoxContainer/ScrollContainer"]
-margin_right = 1280.0
-margin_bottom = 616.0
+margin_right = 1268.0
+margin_bottom = 655.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer/ScrollContainer/ScrollVBox"]
-margin_right = 1280.0
+margin_right = 1268.0
 margin_bottom = 20.0
 rect_min_size = Vector2( 0, 20 )
 
 [node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer/ScrollContainer/ScrollVBox"]
 margin_top = 24.0
-margin_right = 1280.0
+margin_right = 1268.0
 margin_bottom = 45.0
 bbcode_enabled = true
 bbcode_text = "Credits"
@@ -51,19 +51,19 @@ fit_content_height = true
 
 [node name="HSeparator" type="HSeparator" parent="VBoxContainer/ScrollContainer/ScrollVBox"]
 margin_top = 49.0
-margin_right = 1280.0
+margin_right = 1268.0
 margin_bottom = 53.0
 
 [node name="ContentContainer" type="VBoxContainer" parent="VBoxContainer/ScrollContainer/ScrollVBox"]
 margin_top = 57.0
-margin_right = 1280.0
-margin_bottom = 571.0
+margin_right = 1268.0
+margin_bottom = 655.0
 size_flags_horizontal = 3
 custom_constants/separation = 10
 
 [node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer/ScrollContainer/ScrollVBox/ContentContainer"]
-margin_right = 1280.0
-margin_bottom = 483.0
+margin_right = 1268.0
+margin_bottom = 567.0
 custom_fonts/bold_font = SubResource( 1 )
 bbcode_enabled = true
 bbcode_text = "[center]This game is very early in its development. If you are reading this - thank you!
@@ -82,8 +82,12 @@ Contributors:
 Max-Maxou (sprites)
 Firi (code, [url=https://github.com/Alexofp/BDCC/pull/10]#1[/url] [url=https://github.com/Alexofp/BDCC/pull/11]#2[/url] [url=https://github.com/Alexofp/BDCC/pull/12]#3[/url] [url=https://github.com/Alexofp/BDCC/pull/13]#4[/url] [url=https://github.com/Alexofp/BDCC/pull/14]#5[/url])
 Niel (code, [url=https://github.com/Alexofp/BDCC/pull/17]#1[/url])
-PeteTimesSix (visible chains, [url=https://github.com/Alexofp/BDCC/pull/25]#1[/url] [url=https://github.com/Alexofp/BDCC/pull/26]#2[/url] [url=https://github.com/Alexofp/BDCC/pull/27]#3[/url] [url=https://github.com/Alexofp/BDCC/pull/29]#4[/url] [url=https://github.com/Alexofp/BDCC/pull/30]#5[/url] [url=https://github.com/Alexofp/BDCC/pull/31]#6[/url] [url=https://github.com/Alexofp/BDCC/pull/33]#7[/url] [url=https://github.com/Alexofp/BDCC/pull/35]#8[/url] [url=https://github.com/Alexofp/BDCC/pull/36]#9[/url])
-Rayforward ([url=https://github.com/Alexofp/BDCC/pull/34]#1[/url] [url=https://github.com/Alexofp/BDCC/pull/37]#2[/url])
+PeteTimesSix (visible chains, [url=https://github.com/Alexofp/BDCC/pull/25]#1[/url] [url=https://github.com/Alexofp/BDCC/pull/26]#2[/url] [url=https://github.com/Alexofp/BDCC/pull/27]#3[/url] [url=https://github.com/Alexofp/BDCC/pull/29]#4[/url] [url=https://github.com/Alexofp/BDCC/pull/30]#5[/url] [url=https://github.com/Alexofp/BDCC/pull/31]#6[/url] [url=https://github.com/Alexofp/BDCC/pull/33]#7[/url] [url=https://github.com/Alexofp/BDCC/pull/35]#8[/url] [url=https://github.com/Alexofp/BDCC/pull/36]#9[/url] [url=https://github.com/Alexofp/BDCC/pull/41]#10[/url])
+Rayforward ([url=https://github.com/Alexofp/BDCC/pull/34]#1[/url] [url=https://github.com/Alexofp/BDCC/pull/37]#2[/url] [url=https://github.com/Alexofp/BDCC/pull/40]#3[/url])
+CanInBad ([url=https://github.com/Alexofp/BDCC/pull/39]#1[/url])
+Ranchar ([url=https://github.com/Alexofp/BDCC/pull/42]#1[/url])
+AverageAce (skins)
+Dalt ([url=https://github.com/Alexofp/BDCC/pull/43]#1[/url])
 
 The game uses some icons from [url=https://game-icons.net/]game-icons.net[/url] and [url=https://www.flaticon.com/]flaticon.com[/url]
 
@@ -105,8 +109,12 @@ Contributors:
 Max-Maxou (sprites)
 Firi (code, #1 #2 #3 #4 #5)
 Niel (code, #1)
-PeteTimesSix (visible chains, #1 #2 #3 #4 #5 #6 #7 #8 #9)
-Rayforward (#1 #2)
+PeteTimesSix (visible chains, #1 #2 #3 #4 #5 #6 #7 #8 #9 #10)
+Rayforward (#1 #2 #3)
+CanInBad (#1)
+Ranchar (#1)
+AverageAce (skins)
+Dalt (#1)
 
 The game uses some icons from game-icons.net and flaticon.com
 
@@ -115,9 +123,9 @@ Thanks to everyone else who I probably forgot..
 fit_content_height = true
 
 [node name="DonationsLabel" type="RichTextLabel" parent="VBoxContainer/ScrollContainer/ScrollVBox/ContentContainer"]
-margin_top = 493.0
-margin_right = 1280.0
-margin_bottom = 514.0
+margin_top = 577.0
+margin_right = 1268.0
+margin_bottom = 598.0
 custom_fonts/bold_font = SubResource( 1 )
 bbcode_enabled = true
 fit_content_height = true

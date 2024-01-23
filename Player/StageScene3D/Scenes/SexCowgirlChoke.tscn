@@ -1,0 +1,259 @@
+[gd_scene load_steps=69 format=2]
+
+[ext_resource path="res://Player/Player3D/Doll3D.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Player/StageScene3D/BaseStageScene3D.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Player/Props/platform.png" type="Texture" id=3]
+[ext_resource path="res://Player/StageScene3D/Scenes/SexCowgirlChoke.gd" type="Script" id=4]
+
+[sub_resource type="AnimationNodeAnimation" id=446]
+animation = "CuffedArms-loop"
+
+[sub_resource type="AnimationNodeBlend2" id=447]
+filter_enabled = true
+filters = [ "Doll3D/Skeleton:Arm.L", "Doll3D/Skeleton:Arm.R", "Doll3D/Skeleton:ForeArm.L", "Doll3D/Skeleton:ForeArm.R", "Doll3D/Skeleton:Hand.L", "Doll3D/Skeleton:Hand.R" ]
+
+[sub_resource type="AnimationNodeAnimation" id=448]
+animation = "Sex_CowgirlChokeFastUncon_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=449]
+animation = "Sex_CowgirlChokeFast_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=450]
+animation = "Sex_CowgirlChokeInsideUncon_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=451]
+animation = "Sex_CowgirlChokeInside_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=452]
+animation = "Sex_CowgirlChokeTeaseUncon_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=453]
+animation = "Sex_CowgirlChokeTease_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=454]
+animation = "Sex_CowgirlChokeUncon_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=455]
+animation = "Sex_CowgirlChoke_1-loop"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=456]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=457]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=458]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=459]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=460]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=461]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=462]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=463]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=464]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=465]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=466]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=467]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=468]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=469]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=470]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=471]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=472]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=473]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=474]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=475]
+
+[sub_resource type="AnimationNodeStateMachine" id=476]
+states/Sex_CowgirlChokeFastUncon_1-loop/node = SubResource( 448 )
+states/Sex_CowgirlChokeFastUncon_1-loop/position = Vector2( 762, 377 )
+states/Sex_CowgirlChokeFast_1-loop/node = SubResource( 449 )
+states/Sex_CowgirlChokeFast_1-loop/position = Vector2( 414, 377 )
+states/Sex_CowgirlChokeInsideUncon_1-loop/node = SubResource( 450 )
+states/Sex_CowgirlChokeInsideUncon_1-loop/position = Vector2( 762, 195 )
+states/Sex_CowgirlChokeInside_1-loop/node = SubResource( 451 )
+states/Sex_CowgirlChokeInside_1-loop/position = Vector2( 414, 195 )
+states/Sex_CowgirlChokeTeaseUncon_1-loop/node = SubResource( 452 )
+states/Sex_CowgirlChokeTeaseUncon_1-loop/position = Vector2( 762, 105 )
+states/Sex_CowgirlChokeTease_1-loop/node = SubResource( 453 )
+states/Sex_CowgirlChokeTease_1-loop/position = Vector2( 414, 105 )
+states/Sex_CowgirlChokeUncon_1-loop/node = SubResource( 454 )
+states/Sex_CowgirlChokeUncon_1-loop/position = Vector2( 762, 284 )
+states/Sex_CowgirlChoke_1-loop/node = SubResource( 455 )
+states/Sex_CowgirlChoke_1-loop/position = Vector2( 414, 284 )
+transitions = [ "Sex_CowgirlChokeTease_1-loop", "Sex_CowgirlChokeTeaseUncon_1-loop", SubResource( 456 ), "Sex_CowgirlChokeTeaseUncon_1-loop", "Sex_CowgirlChokeTease_1-loop", SubResource( 457 ), "Sex_CowgirlChokeTease_1-loop", "Sex_CowgirlChokeInside_1-loop", SubResource( 458 ), "Sex_CowgirlChokeInside_1-loop", "Sex_CowgirlChokeTease_1-loop", SubResource( 459 ), "Sex_CowgirlChokeTeaseUncon_1-loop", "Sex_CowgirlChokeInsideUncon_1-loop", SubResource( 460 ), "Sex_CowgirlChokeInsideUncon_1-loop", "Sex_CowgirlChokeTeaseUncon_1-loop", SubResource( 461 ), "Sex_CowgirlChokeInsideUncon_1-loop", "Sex_CowgirlChokeUncon_1-loop", SubResource( 462 ), "Sex_CowgirlChokeUncon_1-loop", "Sex_CowgirlChokeInsideUncon_1-loop", SubResource( 463 ), "Sex_CowgirlChokeInside_1-loop", "Sex_CowgirlChoke_1-loop", SubResource( 464 ), "Sex_CowgirlChoke_1-loop", "Sex_CowgirlChokeInside_1-loop", SubResource( 465 ), "Sex_CowgirlChoke_1-loop", "Sex_CowgirlChokeUncon_1-loop", SubResource( 466 ), "Sex_CowgirlChokeUncon_1-loop", "Sex_CowgirlChoke_1-loop", SubResource( 467 ), "Sex_CowgirlChokeInside_1-loop", "Sex_CowgirlChokeInsideUncon_1-loop", SubResource( 468 ), "Sex_CowgirlChokeInsideUncon_1-loop", "Sex_CowgirlChokeInside_1-loop", SubResource( 469 ), "Sex_CowgirlChoke_1-loop", "Sex_CowgirlChokeFast_1-loop", SubResource( 470 ), "Sex_CowgirlChokeFast_1-loop", "Sex_CowgirlChoke_1-loop", SubResource( 471 ), "Sex_CowgirlChokeUncon_1-loop", "Sex_CowgirlChokeFastUncon_1-loop", SubResource( 472 ), "Sex_CowgirlChokeFastUncon_1-loop", "Sex_CowgirlChokeUncon_1-loop", SubResource( 473 ), "Sex_CowgirlChokeFast_1-loop", "Sex_CowgirlChokeFastUncon_1-loop", SubResource( 474 ), "Sex_CowgirlChokeFastUncon_1-loop", "Sex_CowgirlChokeFast_1-loop", SubResource( 475 ) ]
+start_node = "Sex_CowgirlChokeTease_1-loop"
+graph_offset = Vector2( -32, 24 )
+
+[sub_resource type="AnimationNodeBlendTree" id=477]
+graph_offset = Vector2( -399.69, 0.95549 )
+nodes/Animation/node = SubResource( 446 )
+nodes/Animation/position = Vector2( 140, 280 )
+nodes/CuffsBlend/node = SubResource( 447 )
+nodes/CuffsBlend/position = Vector2( 440, 160 )
+nodes/StateMachine/node = SubResource( 476 )
+nodes/StateMachine/position = Vector2( 140, 100 )
+nodes/output/position = Vector2( 680, 180 )
+node_connections = [ "CuffsBlend", 0, "StateMachine", "CuffsBlend", 1, "Animation", "output", 0, "CuffsBlend" ]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=478]
+
+[sub_resource type="AnimationNodeAnimation" id=479]
+animation = "Sex_CowgirlChokeFast_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=480]
+animation = "Sex_CowgirlChokeFast_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=481]
+animation = "Sex_CowgirlChokeInside_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=482]
+animation = "Sex_CowgirlChokeInside_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=483]
+animation = "Sex_CowgirlChokeTease_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=484]
+animation = "Sex_CowgirlChokeTease_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=485]
+animation = "Sex_CowgirlChoke_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=486]
+animation = "Sex_CowgirlChoke_2-loop"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=487]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=488]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=489]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=490]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=491]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=492]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=493]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=494]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=495]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=496]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=497]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=498]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=499]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=500]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=501]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=502]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=503]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=504]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=505]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=506]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachine" id=507]
+states/Sex_CowgirlChokeFast_2-loop/node = SubResource( 480 )
+states/Sex_CowgirlChokeFast_2-loop/position = Vector2( 388, 344 )
+"states/Sex_CowgirlChokeFast_2-loop 2/node" = SubResource( 479 )
+"states/Sex_CowgirlChokeFast_2-loop 2/position" = Vector2( 729, 344 )
+states/Sex_CowgirlChokeInside_2-loop/node = SubResource( 482 )
+states/Sex_CowgirlChokeInside_2-loop/position = Vector2( 388, 190 )
+"states/Sex_CowgirlChokeInside_2-loop 2/node" = SubResource( 481 )
+"states/Sex_CowgirlChokeInside_2-loop 2/position" = Vector2( 729, 190 )
+states/Sex_CowgirlChokeTease_2-loop/node = SubResource( 484 )
+states/Sex_CowgirlChokeTease_2-loop/position = Vector2( 388, 116 )
+"states/Sex_CowgirlChokeTease_2-loop 2/node" = SubResource( 483 )
+"states/Sex_CowgirlChokeTease_2-loop 2/position" = Vector2( 729, 116 )
+states/Sex_CowgirlChoke_2-loop/node = SubResource( 486 )
+states/Sex_CowgirlChoke_2-loop/position = Vector2( 388, 265 )
+"states/Sex_CowgirlChoke_2-loop 2/node" = SubResource( 485 )
+"states/Sex_CowgirlChoke_2-loop 2/position" = Vector2( 729, 265 )
+transitions = [ "Sex_CowgirlChokeTease_2-loop", "Sex_CowgirlChokeTease_2-loop 2", SubResource( 487 ), "Sex_CowgirlChokeTease_2-loop 2", "Sex_CowgirlChokeTease_2-loop", SubResource( 488 ), "Sex_CowgirlChokeTease_2-loop 2", "Sex_CowgirlChokeInside_2-loop 2", SubResource( 489 ), "Sex_CowgirlChokeInside_2-loop 2", "Sex_CowgirlChokeTease_2-loop 2", SubResource( 490 ), "Sex_CowgirlChokeTease_2-loop", "Sex_CowgirlChokeInside_2-loop", SubResource( 491 ), "Sex_CowgirlChokeInside_2-loop", "Sex_CowgirlChokeTease_2-loop", SubResource( 492 ), "Sex_CowgirlChokeInside_2-loop", "Sex_CowgirlChokeInside_2-loop 2", SubResource( 493 ), "Sex_CowgirlChokeInside_2-loop 2", "Sex_CowgirlChokeInside_2-loop", SubResource( 494 ), "Sex_CowgirlChokeInside_2-loop", "Sex_CowgirlChoke_2-loop", SubResource( 495 ), "Sex_CowgirlChoke_2-loop", "Sex_CowgirlChokeInside_2-loop", SubResource( 496 ), "Sex_CowgirlChoke_2-loop", "Sex_CowgirlChoke_2-loop 2", SubResource( 497 ), "Sex_CowgirlChoke_2-loop 2", "Sex_CowgirlChoke_2-loop", SubResource( 498 ), "Sex_CowgirlChokeInside_2-loop 2", "Sex_CowgirlChoke_2-loop 2", SubResource( 499 ), "Sex_CowgirlChoke_2-loop 2", "Sex_CowgirlChokeInside_2-loop 2", SubResource( 500 ), "Sex_CowgirlChoke_2-loop 2", "Sex_CowgirlChokeFast_2-loop 2", SubResource( 501 ), "Sex_CowgirlChokeFast_2-loop 2", "Sex_CowgirlChoke_2-loop 2", SubResource( 502 ), "Sex_CowgirlChokeFast_2-loop 2", "Sex_CowgirlChokeFast_2-loop", SubResource( 503 ), "Sex_CowgirlChokeFast_2-loop", "Sex_CowgirlChokeFast_2-loop 2", SubResource( 504 ), "Sex_CowgirlChoke_2-loop", "Sex_CowgirlChokeFast_2-loop", SubResource( 505 ), "Sex_CowgirlChokeFast_2-loop", "Sex_CowgirlChoke_2-loop", SubResource( 506 ) ]
+start_node = "Sex_CowgirlChokeTease_2-loop"
+
+[sub_resource type="AnimationNodeBlendTree" id=508]
+graph_offset = Vector2( -322.532, 74.6842 )
+nodes/Animation/node = SubResource( 446 )
+nodes/Animation/position = Vector2( 140, 280 )
+nodes/CuffsBlend/node = SubResource( 447 )
+nodes/CuffsBlend/position = Vector2( 440, 160 )
+nodes/StateMachine/node = SubResource( 507 )
+nodes/StateMachine/position = Vector2( 160, 140 )
+nodes/output/position = Vector2( 680, 180 )
+node_connections = [ "CuffsBlend", 0, "StateMachine", "CuffsBlend", 1, "Animation", "output", 0, "CuffsBlend" ]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=509]
+
+[node name="SexCowgirlChoke" instance=ExtResource( 2 )]
+script = ExtResource( 4 )
+
+[node name="Sprite3D" type="Sprite3D" parent="." index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.196641, -1.77462 )
+texture = ExtResource( 3 )
+region_enabled = true
+region_rect = Rect2( 1, 1, 1022, 62 )
+
+[node name="Doll3D" parent="." index="1" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.40621, 0, 0 )
+
+[node name="Doll3D2" parent="." index="2" instance=ExtResource( 1 )]
+transform = Transform( -1, 0, 0, 0, 1, 0, 0, 0, 1, -1.40621, 0, 0 )
+
+[node name="AnimationTree" type="AnimationTree" parent="." index="3"]
+tree_root = SubResource( 477 )
+anim_player = NodePath("../Doll3D/DollSkeleton/AnimationPlayer")
+parameters/CuffsBlend/blend_amount = 0
+parameters/StateMachine/playback = SubResource( 478 )
+
+[node name="AnimationTree2" type="AnimationTree" parent="." index="4"]
+tree_root = SubResource( 508 )
+anim_player = NodePath("../Doll3D2/DollSkeleton/AnimationPlayer")
+parameters/CuffsBlend/blend_amount = 0
+parameters/StateMachine/playback = SubResource( 509 )

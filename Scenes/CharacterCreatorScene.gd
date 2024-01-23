@@ -159,7 +159,7 @@ func _run():
 			var hasInAllowed = false
 			
 			for supported in supportedSpecies:
-				if(supported in playerSpecies || supported == Species.Any):
+				if((supported in playerSpecies) || (supported in [Species.Any, Species.AnyNPC])):
 					hasInSupported = true
 					break
 				

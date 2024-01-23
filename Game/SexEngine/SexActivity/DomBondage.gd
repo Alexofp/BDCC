@@ -49,7 +49,10 @@ func getStartActions(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexS
 	var usableItems = []
 	
 	if(_domInfo.getChar().isPlayer()):
-		usableItems = dom.getInventory().getAllCombatUsableRestraints()
+		if(_subInfo.getChar().isDynamicCharacter()):
+			usableItems = dom.getInventory().getAllCombatUsableRestraints()
+		else:
+			usableItems = dom.getInventory().getAllCombatUsableRestraintsForStaticNpc()
 	else:
 		var itemTagToUse = ItemTag.CanBeForcedByGuards
 		if(_sexEngine.getSexTypeID() == SexType.StocksSex):#(isStocksSex()):
@@ -90,7 +93,7 @@ func getStartActions(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexS
 			continue
 		elif(!sub.invCanEquipSlot(itemSlot)):
 			continue
-		elif(sub.getInventory().hasSlotEquipped(itemSlot)):
+		elif(sub.getInventory().hasSlotEquipped(itemSlot) && sub.getInventory().getEquippedItem(itemSlot)!=null && !sub.getInventory().getEquippedItem(itemSlot).isRemoved()):
 			continue
 		else:
 			var restraintData:RestraintData = item.getRestraintData()
@@ -117,6 +120,23 @@ func getStartActions(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexS
 	
 	#if(!dom.isPlayer() && canActuallyPutOn == 0):
 	#	_sexEngine.satisfyGoal(_domInfo, SexGoal.TieUp, _subInfo)
+	if(dom.isPlayer() && !dom.hasBlockedHands() && !dom.hasBoundArms()):
+		var allSubRestraints = sub.getInventory().getEquippedRestraints()
+		
+		for item in allSubRestraints:
+			if(!item.canBeEasilyRemovedByDom()):
+				continue
+			var restraintData:RestraintData = item.getRestraintData()
+			if(restraintData == null):
+				continue
+				
+			actions.append({
+				name = item.getVisibleName(),
+				args = ["rem", item.uniqueID],
+				score = 0.0,
+				category = ["Bondage", "Take off"],
+				desc = "Status: "+restraintData.getVisibleTightness()+"\nRestraint level: "+str(restraintData.getLevel()) + "\n" + item.getCombatDescription(),
+			})
 	
 	return actions
 
@@ -140,7 +160,34 @@ func startActivity(_args):
 		return {
 			text = "{dom.You} {dom.youVerb('attempt')} to force "+str(item.getAStackName())+" onto {sub.you}!",
 		}
-
+	if(_args[0] == "rem"):
+		endActivity()
+		var itemUniqueID = _args[1]
+		var item:ItemBase = getSub().getInventory().getItemByUniqueID(itemUniqueID)
+		if(item == null):
+			return
+		var restraintData:RestraintData = item.getRestraintData()
+		if(restraintData == null):
+			return
+		
+		var text = "{dom.You} {dom.youVerb('help')} to take off {sub.yourHis} "+item.getVisibleName()+"."
+		
+		var struggleText = restraintData.getRemoveMessage()
+		if(struggleText != ""):
+			text += " [b]"+struggleText+"[/b]"
+		restraintData.onStruggleRemoval()
+		getSub().getInventory().removeEquippedItem(item)
+		getSexEngine().removeTrackedGear(domID, subID, item.uniqueID)
+		
+		#var canKeepTheRestraint = false
+		if(!restraintData.alwaysBreaksWhenStruggledOutOf() && (getDom().hasPerk(Perk.BDSMCollector) || restraintData.alwaysSavedWhenStruggledOutOf())):
+			#canKeepTheRestraint = true
+			text += " {dom.You} managed to keep the restraint."
+		
+			getDom().getInventory().addItem(item)
+		else:
+			text += " The restraint broke and was unable to be recovered."
+		return {text = text}
 
 func processTurn():
 	if(state == ""):

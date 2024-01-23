@@ -13,6 +13,9 @@ static func getAll():
 static func getAllWithPenis():
 	return [Male, Shemale, Herm]
 
+static func getAllWithVagina():
+	return [Female, Herm, Peachboy]
+
 static func getVisibleName(gender):
 	return gender.capitalize()
 

@@ -74,6 +74,9 @@ func satisfyGoals():
 	for goalID in goalData:
 		sexEngine.satisfyGoal(domInfo, goalID, subInfo)
 
+func failGoals():
+	satisfyGoals()
+
 func satisfyGoal(goalID):
 	var sexEngine = getSexEngine()
 	sexEngine.satisfyGoal(domInfo, goalID, subInfo)
@@ -331,6 +334,17 @@ func getGenericOrgasmData(isSub, extraText = ""):
 			" {<ORGASMER>.YourHis} "+RNG.pick(["pussy", "slit"])+" pulsates irregularly!",
 			" {<ORGASMER>.YourHis} "+RNG.pick(["pussy", "slit"])+" squirts!",
 		])
+	if(character.getWornPenisPump() != null):
+		var penisPump:ItemBase = character.getWornPenisPump()
+		var howMuchFluids = penisPump.getFluids().getFluidAmount()
+		var isFull = penisPump.getFluids().isFull()
+		text += RNG.pick([
+			" {<ORGASMER>.YourHis} penis pump collects the load and now holds "+str(Util.roundF(howMuchFluids, 1))+" ml of {<ORGASMER>.cum}!"
+		])
+		if(isFull):
+			text += RNG.pick([
+				" The pump is full!"
+			])
 	
 	if(isSub):
 		text = text.replace("<ORGASMER>", "sub")

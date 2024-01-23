@@ -43,6 +43,9 @@ func addArousal(howmuch: float):
 func getArousal()->float:
 	return getChar().getArousal()
 
+func setArousal(howMuch:float):
+	getChar().setArousal(howMuch)
+
 func addPain(newpain):
 	getChar().addPain(newpain)
 	
@@ -89,7 +92,7 @@ func cum(infoCaused = null):
 	if(infoCaused == null):
 		infoCaused = self
 	
-	addArousal(-1.0)
+	setArousal(0.0)
 	getChar().addLust(-int(getChar().getLust()/2.0))
 	timesCame += 1
 	getChar().afterOrgasm(true)

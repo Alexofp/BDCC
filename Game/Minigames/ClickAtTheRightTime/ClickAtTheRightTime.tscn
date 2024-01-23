@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Game/Minigames/ClickAtTheRightTime/ClickAtTheRightTime.gd" type="Script" id=1]
 [ext_resource path="res://Game/Minigames/ClickAtTheRightTime/triangle.png" type="Texture" id=2]
@@ -28,6 +28,8 @@ bg_color = Color( 0.6, 0, 0, 1 )
 
 [sub_resource type="StyleBoxFlat" id=7]
 bg_color = Color( 1, 0.890196, 0, 1 )
+
+[sub_resource type="StyleBoxEmpty" id=8]
 
 [sub_resource type="StyleBoxTexture" id=6]
 texture = ExtResource( 2 )
@@ -94,6 +96,12 @@ anchor_left = 0.32
 anchor_right = 0.38
 anchor_bottom = 1.0
 custom_styles/panel = SubResource( 7 )
+
+[node name="FailZone" type="Panel" parent="GameScreen/Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_clip_content = true
+custom_styles/panel = SubResource( 8 )
 
 [node name="Cursor" type="Panel" parent="GameScreen/Panel"]
 anchor_left = 1.0

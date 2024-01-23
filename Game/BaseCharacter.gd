@@ -242,7 +242,7 @@ func updateEffectPanel(panel: StatusEffectsPanel):
 	panel.clearBattleEffects()
 	for effectID in statusEffects.keys():
 		var effect = statusEffects[effectID]
-		panel.addBattleEffect(effect.getIconColor(), effect.getEffectName(), effect.getVisisbleDescription(), effect.getEffectImage())
+		panel.addBattleEffect(effect.getIconColor(), effect.getEffectName(), effect.getVisisbleDescription(), effect.getEffectImage(), effect.shouldHaveWideTooltip())
 
 func processBattleTurn():
 	if(timedBuffsDurationTurns > 0):
@@ -949,7 +949,7 @@ func cummedInBodypartByAdvanced(bodypartSlot, characterID, advancedData:Dictiona
 			ch.sendSexEvent(event)
 			sendSexEvent(event)
 	
-	return {loadSize=0.0,condomBroke=condomBroke}
+	return {loadSize=resultAmount,condomBroke=condomBroke}
 	
 func cummedInVaginaBy(characterID, sourceType = null, amountToTransfer = 1.0):
 	return cummedInBodypartBy(BodypartSlot.Vagina, characterID, sourceType, amountToTransfer)
@@ -1492,7 +1492,7 @@ func updateLeaking(doll: Doll3D):
 		doll.setAnusLeaking(true)
 	else:
 		doll.setAnusLeaking(false)
-		
+
 func softUpdateDoll(doll: Doll3D):
 	var skinData = {}
 	var bodySkinData = getSkinData()
@@ -1636,7 +1636,7 @@ func updateDoll(doll: Doll3D):
 			continue
 		
 		var blocksBodyparts = item.coversBodyparts()
-		if(!item.alwaysVisible() && exposedBodyparts!=null && exposedBodyparts.size() > 0 && blocksBodyparts != null):
+		if(!(item.alwaysVisible() && !doll.isOnlyPenis) && exposedBodyparts!=null && exposedBodyparts.size() > 0 && blocksBodyparts != null):
 			var shouldBeSkipped = false
 			for exposedBodypart in exposedBodyparts:
 				if(blocksBodyparts.has(exposedBodypart)):
@@ -1861,6 +1861,10 @@ func cumOnFloor():
 		if(production != null):
 			if(getWornCondom() != null):
 				return cumInItem(getWornCondom())
+			if(getWornPenisPump() != null):
+				var result = cumInItem(getWornPenisPump()) # Collect some into the penis pump
+				var returnValue = penis.getFluidProduction().drain() # Waste the rest
+				return result + returnValue
 			
 			var returnValue = penis.getFluidProduction().drain()
 			return returnValue
@@ -1941,15 +1945,25 @@ func getWornCondom():
 			return item
 	return null
 
+func getWornPenisPump():
+	if(getInventory().hasSlotEquipped(InventorySlot.Penis)):
+		var item = getInventory().getEquippedItem(InventorySlot.Penis)
+		if(item.hasTag(ItemTag.PenisPump)):
+			return item
+	return null
+
 func isWearingCondom():
 	return getWornCondom() != null
 
 func getArousal() -> float:
-	return arousal
+	return clamp(arousal, 0.0, 1.0)
 
 func addArousal(adda:float):
 	arousal += adda
-	arousal = clamp(arousal, 0.0, 1.0)
+	#arousal = clamp(arousal, 0.0, 1.0)
+
+func setArousal(newa:float):
+	arousal = clamp(newa, 0.0, 1.0)
 
 func getConsciousness() -> float:
 	return consciousness
@@ -2519,3 +2533,22 @@ func onSexEnded(_contex = {}):
 		
 func getForcedObedienceLevel() -> float:
 	return buffsHolder.getCustom(BuffAttribute.ForcedObedience)
+
+func isWearingPortalPanties():
+	if(getInventory().hasSlotEquipped(InventorySlot.UnderwearBottom)):
+		var item = getInventory().getEquippedItem(InventorySlot.UnderwearBottom)
+		if(item.hasTag(ItemTag.PortalPanties)):
+			return true
+	return false
+
+func orgasmFrom(_characterID: String):
+	afterOrgasm()
+	
+	if(true):
+		var event = SexEventHelper.create(SexEvent.Orgasmed, _characterID, getID(), {
+		})
+		if(_characterID != getID()):
+			var ch = GlobalRegistry.getCharacter(_characterID)
+			if(ch != null):
+				ch.sendSexEvent(event)
+		sendSexEvent(event)

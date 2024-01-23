@@ -12,6 +12,9 @@ var playerPregnancyTimeDays: int
 var npcPregnancyTimeDays: int
 var impregnationChanceModifier: int
 
+# Difficulty options
+var hardStruggleEnabled: bool = false
+
 var shouldScaleUI: bool = true
 var uiScaleMultiplier = 1.0
 var requireDoubleTapOnMobile = false
@@ -56,6 +59,7 @@ func resetToDefaults():
 	playerPregnancyTimeDays = 5
 	npcPregnancyTimeDays = 5
 	impregnationChanceModifier = 100
+	hardStruggleEnabled = false
 	shouldScaleUI = true
 	uiScaleMultiplier = 1.0
 	showSpeakerName = true
@@ -123,6 +127,9 @@ func getImpregnationChanceModifier() -> float:
 	var resultValue:float = float(impregnationChanceModifier) / 100.0
 	resultValue = clamp(resultValue, 0.0, 1000.0)
 	return resultValue
+
+func isHardStruggleEnabled():
+	return hardStruggleEnabled
 
 func shouldShowSpeakerName():
 	return showSpeakerName
@@ -255,6 +262,19 @@ func getChangeableOptions():
 					"id": "impregnationChanceModifier",
 					"type": "int",
 					"value": impregnationChanceModifier,
+				},
+			]
+		},
+		{
+			"name": "Difficulty settings",
+			"id": "difficulty",
+			"options": [
+				{
+					"name": "Harder struggling",
+					"description": "Makes getting restraints off harder. Turn this option on only if you feel like Houdini.",
+					"id": "hardStruggleEnabled",
+					"type": "checkbox",
+					"value": hardStruggleEnabled
 				},
 			]
 		},
@@ -606,6 +626,10 @@ func applyOption(categoryID, optionID, value):
 		if(optionID == "impregnationChanceModifier"):
 			impregnationChanceModifier = value
 	
+	if categoryID == "difficulty":
+		if optionID == "hardStruggleEnabled":
+			hardStruggleEnabled = value
+	
 	if(categoryID == "other"):
 		if(optionID == "fetchLatestRelease"):
 			fetchNewRelease = value
@@ -686,6 +710,7 @@ func saveData():
 		"playerPregnancyTimeDays": playerPregnancyTimeDays,
 		"npcPregnancyTimeDays": npcPregnancyTimeDays,
 		"impregnationChanceModifier": impregnationChanceModifier,
+		"hardStruggleEnabled": hardStruggleEnabled,
 		"shouldScaleUI": shouldScaleUI,
 		"uiScaleMultiplier": uiScaleMultiplier,
 		"uiButtonSize": uiButtonSize,
@@ -725,6 +750,7 @@ func loadData(data):
 	playerPregnancyTimeDays = loadVar(data, "playerPregnancyTimeDays", 5)
 	npcPregnancyTimeDays = loadVar(data, "npcPregnancyTimeDays", 5)
 	impregnationChanceModifier = loadVar(data, "impregnationChanceModifier", 100)
+	hardStruggleEnabled = loadVar(data, "hardStruggleEnabled", false)
 	shouldScaleUI = loadVar(data, "shouldScaleUI", true)
 	uiScaleMultiplier = loadVar(data, "uiScaleMultiplier", 1.0)
 	uiButtonSize = loadVar(data, "uiButtonSize", 0)
@@ -807,7 +833,7 @@ func checkImagePackOrder(imagePacks):
 			newImagePackOrder.push_front(imagePackID)
 	
 	imagePackOrder = newImagePackOrder
-	print("checkImagePackOrder DONE ",imagePackOrder)
+	#print("checkImagePackOrder DONE ",imagePackOrder)
 
 func getImagePackOrder():
 	return imagePackOrder

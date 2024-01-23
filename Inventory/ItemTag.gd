@@ -16,6 +16,8 @@ enum {
 	Strapon,
 	BreastPump,
 	BreastPumpUsableByNPC,
+	PenisPump,
+	PenisPumpUsableByNPC,
 	SexEngineDrug,
 	Hypnovisor,
 	
@@ -29,6 +31,8 @@ enum {
 	CanPeeInto,
 	CanForceCumInto,
 	PlasticBottle,
+	
+	PortalPanties,
 }
 
 static func getName(tag):

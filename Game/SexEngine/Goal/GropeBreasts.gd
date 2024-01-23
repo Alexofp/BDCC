@@ -7,6 +7,8 @@ func getVisibleName():
 	return "Breast groping"
 
 func isPossible(_sexEngine, _domInfo, _subInfo, _data):
+	if(_domInfo.getChar().hasBoundArms() || _domInfo.getChar().hasBlockedHands()):
+		return false
 	return true
 	
 func getSubGoals(_sexEngine, _domInfo, _subInfo, _data):

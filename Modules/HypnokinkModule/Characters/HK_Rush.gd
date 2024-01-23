@@ -145,6 +145,5 @@ func getLootTable(_battleName):
 	else:
 		return null
 
-func createEquipment():
-	getInventory().equipItem(GlobalRegistry.createItemNoID("inmatecollar"))
-	getInventory().equipItem(GlobalRegistry.createItemNoID("inmateuniformHighsec"))
+func getDefaultEquipment():
+	return ["inmatecollar", "inmateuniformHighsec"]

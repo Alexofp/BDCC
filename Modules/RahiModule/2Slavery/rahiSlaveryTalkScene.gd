@@ -306,7 +306,62 @@ func _run():
 			else:
 				addDisabledButton("Morning sex", "(Sex) Kitty needs to be more skilled at sex to do this")
 		
+		if(getFlag("RahiModule.wearingPortalPanties")):
+			addButton("Remove portal panties", "Take them back from Rahi", "take_portal_panties_back")
+		elif(GM.pc.getInventory().hasItemID("PortalPanties")):
+			addButton("Give portal panties", "Ask Rahi to wear these panties that you have", "make_rahi_wear_portal_panties")
+		
 		addButton("Back", "Go back a menu", "")
+	
+	if(state == "take_portal_panties_back"):
+		playAnimation(StageScene.Duo, "stand", {npc="rahi", npcBodyState={underwear=true}})
+		
+		saynn("It's probably best if Rahi doesn't wear those panties anymore.")
+		
+		saynn("[say=pc]About those panties that you're wearing..[/say]")
+		
+		saynn("[say=rahi]You want them back, {rahiMaster}?[/say]")
+		
+		saynn("You nod. Rahi quickly pulls them down and gives them to you.")
+		
+		saynn("[say=rahi]Here.. They are fun..[/say]")
+		
+		saynn("She blushes deeply after saying that. What a kitty.")
+		
+		addButton("Continue", "See what happens next", "relationship")
+	
+	if(state == "make_rahi_wear_portal_panties"):
+		playAnimation(StageScene.Duo, "stand", {npc="rahi", npcBodyState={underwear=true}})
+		
+		saynn("You show Rahi the fancy panties that you have.")
+		
+		saynn("[say=rahi]The heart is cute.. Where did you get those, {rahiMaster}?[/say]")
+		
+		saynn("You smile and offer them to the kitty. Maybe it's best if you don't tell her anything. But you make sure to set the portal panties to the 'unlocked' mode. Don't want your kitty to panic when she realizes she can't take off her panties.")
+		
+		saynn("[say=pc]It's a gift, enjoy.[/say]")
+		
+		saynn("Rahi lowers her gaze.")
+		
+		saynn("[say=rahi]Are you sure?..[/say]")
+		
+		saynn("You nod, making the feline blush. She carefully grabs them.")
+		
+		saynn("[say=pc]I wanna see how they look on you.[/say]")
+		
+		saynn("[say=rahi]Yes, {rahiMaster}, of course..")
+		
+		saynn("Rahi quickly strips her uniform and puts the purple panties on.")
+		
+		saynn("[say=rahi]A bit cold.. is that.. metal?[/say]")
+		
+		saynn("[say=pc]Don't worry about it, kitty.[/say]")
+		
+		saynn("Rahi purrs and nods.")
+		
+		saynn("[say=rahi]Thank you.. They're nice..[/say]")
+		
+		addButton("Continue", "See what happens next", "relationship")
 	
 	if(state == "train_new_skill"):
 		saynn("What skill do you wanna start teaching to Rahi?")
@@ -438,6 +493,16 @@ func _react(_action: String, _args):
 	if(_action == "toggle_morningsex"):
 		setFlag("RahiModule.rahiShouldSexPlayerDuringSleep", !getFlag("RahiModule.rahiShouldSexPlayerDuringSleep", false))
 		return
+		
+	if(_action == "make_rahi_wear_portal_panties"):
+		GM.pc.getInventory().removeXOfOrDestroy("PortalPanties", 1)
+		setFlag("RahiModule.wearingPortalPanties", true)
+		getCharacter("rahi").resetEquipment()
+		
+	if(_action == "take_portal_panties_back"):
+		GM.pc.getInventory().addItem(GlobalRegistry.createItem("PortalPanties"))
+		setFlag("RahiModule.wearingPortalPanties", false)
+		getCharacter("rahi").getInventory().removeItemFromSlot(InventorySlot.UnderwearBottom)
 
 	setState(_action)
 

@@ -28,3 +28,6 @@ func isCompleted(_sexEngine, _domInfo, _subInfo, _data):
 func getSubGoals(_sexEngine, _domInfo, _subInfo, _data):
 	return {
 	}
+
+func getGoalDefaultWeight():
+	return 0.1

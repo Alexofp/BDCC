@@ -53,6 +53,12 @@ func playAnimation(animID, _args = {}):
 	else:
 		doll2.applyBodyState({})
 	
+	if(_args.has("onlySub")):
+		if(_args["onlySub"]):
+			doll.visible = false
+		else:
+			doll.visible = true
+	
 	updateSubAnims()
 	
 	var state_machine = animationTree["parameters/StateMachine/playback"]

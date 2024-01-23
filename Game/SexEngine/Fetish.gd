@@ -24,6 +24,7 @@ const Breeding = "Breeding"
 const BeingBred = "BeingBred"
 const Condoms = "Condoms"
 const Lactation = "Lactation"
+const SeedMilking = "SeedMilking"
 
 const Exhibitionism = "Exhibitionism"
 

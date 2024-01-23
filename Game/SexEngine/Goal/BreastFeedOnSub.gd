@@ -9,6 +9,8 @@ func getVisibleName():
 func isPossible(_sexEngine, _domInfo, _subInfo, _data):
 	#if(!_subInfo.getChar().canBeMilked()):
 	#	return false
+	if(_domInfo.getChar().isOralBlocked()):
+		return false
 	
 	return true
 	

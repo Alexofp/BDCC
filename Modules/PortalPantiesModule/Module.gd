@@ -39,12 +39,15 @@ func _init():
 			"res://Modules/PortalPantiesModule/PortalPantiesEvents/PortalPantiesSleepingLewdScene.gd",
 			"res://Modules/PortalPantiesModule/PantiesQuest/AlexRynardPantiesQuestWTFScene.gd",
 			"res://Modules/PortalPantiesModule/PantiesQuest/AlexRynardPantiesQuestReturnFleshlightsScene.gd",
+			
+			"res://Modules/PortalPantiesModule/PortalPanties/UsePortalPantiesFleshlight.gd",
 		]
 	characters = [
 		"res://Modules/PortalPantiesModule/PantiesQuest/StudCharacter.gd",
 	]
 	items = [
 		"res://Modules/PortalPantiesModule/PortalPanties/PortalPanties.gd",
+		"res://Modules/PortalPantiesModule/PortalPanties/PortalPantiesFleshlight.gd",
 	]
 	events = [
 		"res://Modules/PortalPantiesModule/AlexRynard/AlexRynardFirstTalkEvent.gd",

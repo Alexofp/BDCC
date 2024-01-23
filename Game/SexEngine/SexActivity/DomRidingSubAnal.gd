@@ -19,6 +19,13 @@ func _init():
 	isVag = false
 	
 func getGoals():
+	if(currentPose == POSE_COWGIRLCHOKE):
+		return {
+			SexGoal.ChokeReceiveAnal: 1.0,
+			SexGoal.ReceiveAnal: 1.0,
+			SexGoal.ReceiveStraponAnal: 1.0,
+		}
+	
 	return {
 		SexGoal.ReceiveAnal: 1.0,
 		SexGoal.ReceiveStraponAnal: 1.0,

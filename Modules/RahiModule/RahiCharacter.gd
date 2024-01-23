@@ -53,9 +53,7 @@ func onGivingBirth(_impregnatedEggCells: Array, _newkids: Array):
 func getBirthWaitTime():
 	return 60*60*24*2
 
-func createEquipment():
-	getInventory().equipItem(GlobalRegistry.createItemNoID("inmatecollar"))
-	getInventory().equipItem(GlobalRegistry.createItemNoID("inmateuniform"))
-	
-	#getInventory().equipItem(GlobalRegistry.createItemNoID("LaceBra"))
-	#getInventory().equipItem(GlobalRegistry.createItemNoID("LacePanties"))
+func getDefaultEquipment():
+	if(GM.main != null && GM.main.getFlag("RahiModule.wearingPortalPanties")):
+		return ["inmatecollar", "inmateuniform", "PortalPanties"]
+	return ["inmatecollar", "inmateuniform"]

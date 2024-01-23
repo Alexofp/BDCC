@@ -14,7 +14,7 @@ func getSlot():
 	return BodypartSlot.Hair
 
 func getCompatibleSpecies():
-	return [Species.Any]
+	return [Species.AnyNPC]
 
 func npcGenerationWeight(_dynamicCharacter):
 	if(_dynamicCharacter.getGender() == Gender.Male):

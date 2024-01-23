@@ -37,6 +37,7 @@ var chainObjects = []
 var rememberedChains = []
 
 export(bool) var addTestBody = false
+export(bool) var isOnlyPenis = false
 
 var dollAttachmentZoneScene = preload("res://Player/Player3D/Parts/DollAttachmentZone.tscn")
 
@@ -383,7 +384,7 @@ func setBallsScale(newScale: float):
 
 
 func _on_Doll3DTooltip_mouseEntered(bodypartID):
-	if(savedCharacterID != "" && bodypartID != ""):
+	if(savedCharacterID != "" && bodypartID != "" && is_visible_in_tree()):
 		var character = GlobalRegistry.getCharacter(savedCharacterID)
 		if(character == null):
 			return
@@ -412,7 +413,26 @@ func setHiddenParts(newHiddenParts):
 func setHiddenAttachmentZones(newHiddenAttachmentZones):
 	hiddenAttachmentZones = newHiddenAttachmentZones
 
+func updateAlphaKeepOnlyPenis():
+	for slot in parts:
+		if(!(slot in [BodypartSlot.Penis, "chastity_cage"])):
+			parts[slot].visible = false
+			continue
+		
+		if(hiddenPartZones.has(slot) && !overridenPartHidden.has(slot)):
+			parts[slot].visible = false
+		else:
+			parts[slot].visible = true
+			
+	for attachmentID in dollAttachmentZones:
+		for attach in dollAttachmentZones[attachmentID]:
+			attach.visible = false
+
 func updateAlpha():
+	if(isOnlyPenis):
+		updateAlphaKeepOnlyPenis()
+		return
+	
 	for slot in parts:
 		if(hiddenPartZones.has(slot) && !overridenPartHidden.has(slot)):
 			parts[slot].visible = false
@@ -550,7 +570,7 @@ func _on_RandomLeakTimer_timeout():
 		possible.append(2)
 	
 	var randomPicked = RNG.pick(possible)
-	if(randomPicked != null):
+	if(randomPicked != null && !isOnlyPenis):
 		if(randomPicked == 0):
 			nipplesParticles.emitting = true
 		if(randomPicked == 1):
@@ -624,8 +644,11 @@ func applyBodyState(bodystate):
 			BodypartSlot.Body,
 		])
 	
+	if(isOnlyPenis):
+		exposeBodyparts = [BodypartSlot.Penis]
+	
 	setExposedBodyparts(exposeBodyparts)
-		
+	
 	if(shouldBeHard):
 		setCockTemporaryHard()
 		

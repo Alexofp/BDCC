@@ -4,11 +4,13 @@ func _init():
 	id = "EngineeringFindVisor"
 
 func registerTriggers(es):
-	es.addTrigger(self, Trigger.EnteringRoom, "eng_workshop")
+	es.addTrigger(self, Trigger.EnteringRoom, "med_researchlab")
 	
 func run(_triggerID, _args):
-	if(not GM.main.getFlag("HypnokinkModule.GotEngineeringFreebieVisor", false)):
-		addButton("What's this?", "There's a package in the corner", "take_freebie")
+	if(!getFlag("HypnokinkModule.GotEngineeringFreebieVisor")):
+		saynn("One of the tables has something interesting on it.")
+		
+		addButton("Package", "There's a package in the corner", "take_freebie")
 
 func getPriority():
 	return 0

@@ -45,5 +45,5 @@ func createBodyparts():
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("digilegs"))
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("coolhair"))
 
-func createEquipment():
-	getInventory().equipItem(GlobalRegistry.createItemNoID("CasualClothes"))
+func getDefaultEquipment():
+	return ["CasualClothes"]

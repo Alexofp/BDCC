@@ -31,6 +31,8 @@ func _reactInit():
 func _run():
 
 	if(state == "FirstPoke"):
+		playAnimation(StageScene.SexPortalMasturbation, RNG.pick(["inside"]), {onlyLeft=true, npc="pc"})
+		
 		# (if has pussy)
 		if(GM.pc.hasVagina()):
 			saynn("You feel cold air washing over your {pc.pussyStretch} pussy. You grab onto your crotch and realize that your pussy is still somewhere else entirely, such a strange feeling. Then you feel your sex being poked with some tool.. Probably a thermometer. And that’s it. Was that the first test?")
@@ -47,6 +49,8 @@ func _run():
 
 
 	if(state == "pencils_poke"):
+		playAnimation(StageScene.SexPortalMasturbation, RNG.pick(["inside"]), {onlyLeft=true, npc="pc"})
+		
 		# (if has pussy)
 		if(GM.pc.hasVagina()):
 			saynn("Suddenly you feel latex brushing against your sex. Someone’s digits are gently spreading open your folds, causing you to bite your lip. You can’t even see whoever does it to you which makes it so much more exciting.")
@@ -76,6 +80,8 @@ func _run():
 		
 
 	if(state == "drink_poke"):
+		playAnimation(StageScene.SexPortalMasturbation, RNG.pick(["inside"]), {onlyLeft=true, npc="pc"})
+		
 		# (if has pussy)
 		if(GM.pc.hasVagina()):
 			saynn("You eek as suddenly someone inserts a cold speculum into your slit, spreading it wide open. You grab onto your panties but realize that there is nothing that you can do about your pussy while it’s attached to that fleshlight.")
@@ -94,6 +100,9 @@ func _run():
 
 
 	if(state == "cock_only_poke"):
+		playAnimation(StageScene.SexPortalMasturbation, RNG.pick(["sex", "fast"]), {onlyLeft=true, npc="pc"})
+		
+		
 		# (needs a cock)
 
 		saynn("You feel digits attaching some kind of electrodes to your {pc.cock}. They start stimulating your shaft by sending a small amount of current through it. Your cock’s muscles react by tensing up, causing you to swiftly get hard.")
@@ -112,6 +121,8 @@ func _run():
 
 
 	if(state == "cock_tease_poke"):
+		playAnimation(StageScene.SexPortalMasturbation, RNG.pick(["sex"]), {onlyLeft=true, npc="pc"})
+		
 		# (needs a cock)
 
 		saynn("Suddenly you feel some kind of vibrating toy tapped directly to the tip of your {pc.cock}. You look down at your portal panties and squirm helplessly after realizing there is nothing you can do. The toy seems to be set to its maximum setting though, your shaft quickly becomes hard and twitchy as you try to keep your mouth shut.")
@@ -119,6 +130,8 @@ func _run():
 		addButton("Endure it", "Nothing else you can do", "endure_it")
 
 	if(state == "endure_it"):
+		playAnimation(StageScene.SexPortalMasturbation, RNG.pick(["inside", "fast"]), {onlyLeft=true, npc="pc"})
+		
 		saynn("Muffled noises escape from you as you are pushed towards your orgasm already, you feel your cock shooting out a string of precum as the toy is vibrating against it relentlessly.")
 
 		saynn("But just before you can experience your orgasm, the toy is pulled away, leaving you denied and desperate. You don’t care if anyone’s watching, you can’t stop squirming for another few minutes.")
@@ -128,6 +141,8 @@ func _run():
 
 
 	if(state == "pussy_tease_poke"):
+		playAnimation(StageScene.SexPortalMasturbation, RNG.pick(["inside", "sex"]), {onlyLeft=true, npc="pc"})
+		
 		# (needs pussy)
 
 		saynn("While you are doing something, a sudden vibrator gets pressed against your pussy lips! It feels like you are being teased with a magic wand but you can’t see it, only feel it, your portal panties are keeping your slit on some fleshlight somewhere deep in one of the labs.")
@@ -137,6 +152,9 @@ func _run():
 		addButton("Endure it", "Nothing else you can do", "endure_it1")
 
 	if(state == "endure_it1"):
+		playAnimation(StageScene.SexPortalMasturbation, RNG.pick(["inside", "fast"]), {onlyLeft=true, npc="pc"})
+		
+		
 		saynn("You’re so wet already and the magic wand seems to be vibrating harder as the time passes. You can’t help but to squirm as your sensitive folds and the clit are all getting teased so much. You’re dripping but luckily no one around can tell that, they can only notice your cheeks blushing red and your jumpiness.")
 
 		saynn("Your breathing is fast, your heart is racing, you feel like you’re gonna cum. Your pussy starts to twitch and pulsate but just before you get that sweet release, the wand gets pulled away, stealing your orgasm!")
@@ -148,6 +166,9 @@ func _run():
 
 
 	if(state == "pussy_pump"):
+		playAnimation(StageScene.SexPortalMasturbation, RNG.pick(["sex"]), {onlyLeft=true, npc="pc"})
+		
+		
 		saynn("You feel something attached to your pussy! You can’t see it obviously but you feel the plastic rim pressed around your whole slit. Then you feel it.. pumping on your sex. Did they attach a pussy pump?")
 
 		saynn("You also notice that one of the security cameras is directly watching you. The pump starts doing its work on your slit, applying pressure and pumping on it, causing your pussy lips to become more buffy. It feels so good that you can’t help but to start moaning.")
@@ -159,6 +180,9 @@ func _run():
 		addButton("Cum", "It’s gonna make you cum!", "cum")
 
 	if(state == "cum"):
+		playAnimation(StageScene.SexPortalMasturbation, RNG.pick(["inside", "fast"]), {onlyLeft=true, npc="pc"})
+		
+		
 		saynn("You close your legs and tilt your head down, trying to look normal to others but it’s really hard to endure this for long. The pump starts going through its cycles faster until you are pushed past the peak. You throw your head back and let out a very muffled but long moan as your slit starts squirting. And the pump takes full advantage of that, it collects all your juices and keeps milking you during the orgasm, causing your sex to squirt again and again.")
 
 		# (if has cock)
@@ -171,7 +195,8 @@ func _run():
 
 	if(state == "cock_milker"):
 		# (needs cock)
-
+		playAnimation(StageScene.SexPortalMasturbation, RNG.pick(["sex"]), {onlyLeft=true, npc="pc"})
+		
 		saynn("A cock milker gets attached to your {pc.cock}! You can’t see it, your portal panties aren’t even bulging but the thing already starts stroking you with a steady pace, getting you nice and hard.")
 
 		if(GM.pc.isWearingChastityCage()):
@@ -182,6 +207,9 @@ func _run():
 		addButton("Cum!", "You can’t endure it", "cum!")
 
 	if(state == "cum!"):
+		playAnimation(StageScene.SexPortalMasturbation, RNG.pick(["inside", "fast"]), {onlyLeft=true, npc="pc"})
+		
+		
 		saynn("You open your mouth slightly and pant heavily as your cock bursts with waves of sticky {pc.cum}, stuffing the milker full. But the milkers neatly pumps all of it out into a separate container and continues to milk you until your balls are left dry.")
 
 		saynn("You’re squirming a lot and trying to catch your breath, hoping that nobody saw you cumming. Luckily there is zero mess.")

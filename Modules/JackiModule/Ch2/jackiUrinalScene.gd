@@ -17,7 +17,7 @@ func _init():
 	sceneID = "jackiUrinalScene"
 
 func _reactInit():
-	getCharacter("jacki").updateBodyparts()
+	getCharacter("jacki").resetEquipment()
 
 func _run():
 	if(state == ""):

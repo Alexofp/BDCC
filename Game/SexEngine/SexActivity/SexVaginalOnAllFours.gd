@@ -336,7 +336,7 @@ func processTurn():
 				])
 			elif(domInfo.isCloseToCumming()):
 				text += RNG.pick([
-					" {dom.You} pants eagerly.",
+					" {dom.You} {dom.youVerb('pant')} eagerly.",
 					" {dom.You} closes in on {dom.yourHis} orgasm.",
 					" {dom.You} {dom.youAre} gonna cum soon.",
 				])
@@ -351,7 +351,7 @@ func processTurn():
 				])
 			elif(domInfo.isCloseToCumming()):
 				text += RNG.pick([
-					" {dom.You} pants eagerly.",
+					" {dom.You} {dom.youVerb('pant')} eagerly.",
 					" {dom.You} closes in on {dom.yourHis} orgasm.",
 					" {dom.You} {dom.youAre} gonna cum soon.",
 					" {dom.Your} "+RNG.pick(["cock", "dick", "member"])+" is throbbing.",

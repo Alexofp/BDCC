@@ -1,13 +1,24 @@
 extends "res://Scenes/SceneBase.gd"
 
+var npcID = ""
+
 func _init():
 	sceneID = "PortalPantiesFirstLewdScene"
 
 func _reactInit():
 	GM.pc.addCredits(1)
+	npcID = NpcFinder.grabNpcIDFromPoolOrGenerate(CharacterPool.Inmates, [[NpcCon.Species, Species.Canine], [NpcCon.HasPenis], [NpcCon.NoChastity]], InmateGenerator.new(), {NpcGen.Species: Species.Canine, NpcGen.HasPenis: true, NpcGen.NoChastity: true})
+	if(npcID == null || npcID == ""):
+		npcID = "inmateMaleCanine"
+	GM.main.updateCharacterUntilNow(npcID)
+
+func resolveCustomCharacterName(_charID):
+	if(_charID == "npc"):
+		return npcID
 
 func _run():
 	if(state == ""):
+		playAnimation(StageScene.SexPortal, "tease", {pc=npcID, npc="pc", bodyState={exposedCrotch=true,hard=true}})
 		# (if has pussy)
 		if(GM.pc.hasVagina()):
 			saynn("You were going somewhere when you suddenly felt some activity in your panties. Someone’s breathing warmly over your pussy which makes it react by twitching ever so slightly and getting moist.")
@@ -28,10 +39,6 @@ func _run():
 
 			saynn("They keep fingering you for a while until you get all wet and needy.")
 
-			saynn("But the digits are eventually retracted out of your slit, letting you calm down somewhat. But not for long, now you feel some kind of fleshy object brushing against your folds. Is that a.. cock?")
-
-			saynn("There is no way it’s not, you gasp as you feel it finding your {pc.pussyStretch} pussy hole and stretching it wide open with ease. The cock gets shoved deeper inside, your belly even shows the outline, it's clearly a canine one. And it’s fucking your pussy..")
-
 		# (if no pussy)
 		else:
 			saynn("You were going somewhere when you suddenly felt some activity in your panties. Someone’s breathing warmly over your tailhole which makes it react by clenching ever so slightly.")
@@ -51,15 +58,29 @@ func _run():
 				saynn("Your {pc.cock} is hard as a rock but it seems nobody cares about it at the moment, they just want your ass.")
 
 			saynn("They keep fingering you for a while until you get all lubed up and needy.")
+		
+		addButton("Continue", "See what happens next", "inside")
 
+
+	if(state == "inside"):
+		playAnimation(StageScene.SexPortal, "inside", {pc=npcID, npc="pc", bodyState={exposedCrotch=true,hard=true}})
+		
+		if(GM.pc.hasVagina()):
+			saynn("But the digits are eventually retracted out of your slit, letting you calm down somewhat. But not for long, now you feel some kind of fleshy object brushing against your folds. Is that a.. cock?")
+
+			saynn("There is no way it’s not, you gasp as you feel it finding your {pc.pussyStretch} pussy hole and stretching it wide open with ease. The cock gets shoved deeper inside, your belly even shows the outline, it's clearly a canine one. And it’s fucking your pussy..")
+		else:
 			saynn("But the digits are eventually retracted out of your {pc.thick} butt, letting you calm down somewhat. But not for long, now you feel some kind of fleshy object brushing against your star. Is that a.. cock?")
 
 			saynn("There is no way it’s not, you gasp as you feel it prodding at your {pc.analStretch} fuckhole and stretching it wide open with ease. The cock gets shoved deeper inside, your belly even shows the outline, it's clearly a canine one. And it’s fucking you in the ass..")
 
+		
 		addButton("Resist", "That wasn’t supposed to happen", "resist")
 		addButton("Enjoy", "Might as well try to get some pleasure out of this", "enjoy")
 
 	if(state == "resist"):
+		playAnimation(StageScene.SexPortal, "sex", {pc=npcID, npc="pc", bodyState={exposedCrotch=true,hard=true}})
+		
 		# (You try to struggle, try to take off the panties but fail)
 
 		# (They cum inside you, make you cum)
@@ -91,6 +112,7 @@ func _run():
 		addButton("Continue", "What now", "continue")
 
 	if(state == "enjoy"):
+		playAnimation(StageScene.SexPortal, "sex", {pc=npcID, npc="pc", bodyState={exposedCrotch=true,hard=true}})
 		# (You don’t struggle and just hold against something while getting railed)
 
 		# (They cum inside you, make you cum)
@@ -134,6 +156,8 @@ func _run():
 		addButton("Continue", "What now", "continue")
 
 	if(state == "continue"):
+		playAnimation(StageScene.SexPortal, "tease", {pc=npcID, npc="pc", bodyState={exposedCrotch=true,hard=true}})
+		
 		saynn("You pant and try to calm down. A few minutes pass, allowing you to gather your thoughts.")
 
 		saynn("The engineer told you that this wouldn’t happen, they were supposed to only do tests. You feel like you gotta talk with him. Because you feel like this is not gonna stop..")
@@ -148,15 +172,7 @@ func _run():
 
 func _react(_action: String, _args):
 	if(_action in ["resist", "enjoy"]):
-		# Needs a better system but whatever, will do for now
-		var randomInmate = [
-			"inmateMaleCanine",
-			"inmateMaleDragon",
-			"inmateMaleEquine",
-			"inmateMaleFeline",
-			"inmateMaleHuman",
-		]
-		var pickedInmate = RNG.pick(randomInmate)
+		var pickedInmate = npcID
 		
 		if(GM.pc.hasVagina()):
 			GM.pc.gotVaginaFuckedBy(pickedInmate)
@@ -177,3 +193,14 @@ func _react(_action: String, _args):
 
 	setState(_action)
 
+func saveData():
+	var data = .saveData()
+	
+	data["npcID"] = npcID
+	
+	return data
+	
+func loadData(data):
+	.loadData(data)
+	
+	npcID = SAVE.loadVar(data, "npcID", "inmateMaleCanine")

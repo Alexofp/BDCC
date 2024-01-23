@@ -12,6 +12,8 @@ func generateData(_sexEngine, _domInfo, _subInfo):
 	]
 
 func isPossible(_sexEngine, _domInfo, _subInfo, _data):
+	if(_domInfo.getChar().hasBoundArms() || _domInfo.getChar().hasBlockedHands()):
+		return false
 	var itemTagToUse = ItemTag.CanBeForcedByGuards
 	if(_sexEngine.getSexTypeID() == SexType.StocksSex):#(isStocksSex()):
 		itemTagToUse = ItemTag.CanBeForcedInStocks

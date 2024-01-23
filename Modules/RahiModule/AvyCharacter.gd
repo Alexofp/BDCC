@@ -14,9 +14,9 @@ func _init():
 	"penis": {"g": Color("ffff0000"),"b": Color("ff8b0000"),},
 	}
 	
-	npcLevel = 3
-	npcBasePain = 120
-	npcBaseLust = 90
+	npcLevel = 5
+	npcBasePain = 130
+	npcBaseLust = 110
 	npcCharacterType = CharacterType.Inmate
 	
 	npcPersonality = {
@@ -169,6 +169,5 @@ func createBodyparts():
 func getLootTable(_battleName):
 	return InmateLoot.new()
 
-func createEquipment():
-	getInventory().equipItem(GlobalRegistry.createItemNoID("inmatecollar"))
-	getInventory().equipItem(GlobalRegistry.createItemNoID("inmateuniformHighsec"))
+func getDefaultEquipment():
+	return ["inmatecollar", "inmateuniformHighsec"]
