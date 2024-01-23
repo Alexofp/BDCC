@@ -5,6 +5,35 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+## [0.1.2] - 2024-01-23
+### Added
+- Alex Rynard content greatly expanded and is now finished. Help him figure out what the meaning of trust is. (70k new words/300+ pages of text, someone should stop me from doing such big projects)
+- 4 'trust exercises' with Alex that are gradually unlocked over the course of his content. Lots of kinky stuff here like sex machines (includes new animation for sybian)
+- Hypnokink mod by PeteTimesSix is integrated into the game. This is the first time I added content content that wasn't written by me ^^
+- Portal panties rewamp! [Portal sex animations added](https://github.com/Alexofp/BDCC/assets/14040378/d6a54186-9ef1-46ec-9775-3cf19651850a). The random events now use the dynamic npcs. You can now buy portal panties and fleshlights from Alex after completing the portal panties quest. Can now force portal panties onto dynamic npcs (and have fun with them remotely). It's a big feature ^^
+- [Penis pumps](https://github.com/Alexofp/BDCC/assets/14040378/17afd77c-f80e-4976-9ab6-07d1409cf86f). Can be bought from the medical. Can be used in procedural sex (and also used in a few new written scenes)
+- Advanced chastity cage. Can be unlocked after the last trust exercise with Alex
+- Loading screen now has a progress bar that shows what the game is currently doing
+- Can choose to keep restraints on npcs after procedural sex.
+- Can remove bdsm gear from subs during procedural sex (you will break it if you don't have the gear collector perk)
+- 2 new cowgirl sex poses added to procedural sex. One that is just an alternative and one that combines choking and riding.
+- Spanking added to the procedural sex. The dom can make you count the spanks.
+- Depending on how hypnotized you are, you will now lose control (and do the most obedient action automatically) as a sub during procedural sex.
+- Option to enable a harder struggling minigame (pull request by Dalt)
+- 3 new skins by AverageAce + lots of new alternative dick skins from them
+- Mod-makers can now define a function for their modded species that executes on each new generated dynamic npc of that species (useful for lots of things like changing bodyparts/skins)
+
+### Changed
+- Tooltip that shows someone's fetishes is now twice as wide and has 2 columns to fit more text (lots of fetishes these npcs have, huh)
+- Android version should now be able to load saves from your documents/BDCCSaves folder without you having to go through the import process.
+- Refactored how the (non-player) characters handle their equipped items. They now compare what they have to what they should have and fix that rather than resetting their entire inventory each time (with some help from Ranchar who added persistant items support)
+- Pressing the 'forget' button in the encounters menu will ask for confirmation only once
+
+### Fixed
+- Inventory UI was making the rest of the ui go off-screen on small resolutions.
+- Tyypos and some bugs
+- Punctuation fixes by Rayforward
+
 ## [0.1.1] - 2023-11-22
 ### Added
 - Jacki's content has been greatly expanded (173 pages/44k words). You can now find her in the gym after the stocks event. Fair warning, her content is based around some heavy kinks such as anal fisting, roughness, sounding, genital torture. Not much breeding there. But you can also corrupt the wolfie using kind methods.
@@ -336,7 +365,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Turn-based fighting
 - Initial player customization
 
-[Unreleased]: https://github.com/Alexofp/BDCC/compare/0.1.1...main
+[Unreleased]: https://github.com/Alexofp/BDCC/compare/0.1.2...main
+[0.1.2]: https://github.com/Alexofp/BDCC/compare/0.1.1...0.1.2
 [0.1.1]: https://github.com/Alexofp/BDCC/compare/0.1.0...0.1.1
 [0.1.0]: https://github.com/Alexofp/BDCC/compare/0.0.24...0.1.0
 [0.0.24]: https://github.com/Alexofp/BDCC/compare/0.0.23...0.0.24
