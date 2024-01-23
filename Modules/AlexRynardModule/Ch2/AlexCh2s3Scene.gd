@@ -1981,7 +1981,6 @@ func _react_scene_end(_tag, _result):
 		else:
 			setState("time6_lost_fight")
 			addExperienceToPlayer(5)
-			endScene()
 
 	if(_tag == "time6_fight_2"):
 		processTime(5 * 60)
@@ -1993,7 +1992,6 @@ func _react_scene_end(_tag, _result):
 		else:
 			setState("time6_lost_fight")
 			addExperienceToPlayer(5)
-			endScene()
 
 	if(_tag == "time6_fight_3"):
 		processTime(5 * 60)
@@ -2005,7 +2003,6 @@ func _react_scene_end(_tag, _result):
 		else:
 			setState("time6_lost_avy")
 			addExperienceToPlayer(10)
-			endScene()
 
 func saveData():
 	var data = .saveData()

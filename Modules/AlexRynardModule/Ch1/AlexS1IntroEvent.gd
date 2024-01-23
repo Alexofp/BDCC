@@ -30,8 +30,9 @@ func run(_triggerID, _args):
 		addButtonUnlessLate("Help", "Help him repair the datapads", "helpRepair")
 		return
 	
-	if(getFlag("AlexRynardModule.ch2SceneNum") <= 6):
+	if(getFlag("AlexRynardModule.ch2SceneNum", 0) <= 6):
 		addButtonUnlessLate("Help", "Help him repair the datapads", "helpRepair2")
+		return
 		
 	if(!getFlag("AlexRynardModule.ch2GotRektHappened")):
 		addButtonUnlessLate("Help", "Help him repair the datapads", "helpRepair3")

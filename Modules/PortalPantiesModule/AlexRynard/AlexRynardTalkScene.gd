@@ -15,8 +15,11 @@ func _run():
 
 	if(state == ""):
 		saynn("You approach the engineer foxy. His working place includes a chair but Alex is standing, he seems to be working on something. You sit on the corner of the work table and get his attention.")
-
-		saynn("[say=alexrynard]What now?[/say]")
+		
+		if(getFlag("AlexRynardModule.ch2CanEnterEngineering")):
+			saynn("[say=alexrynard]Oh, hey there.[/say]")
+		else:
+			saynn("[say=alexrynard]What now?[/say]")
 
 		addButton("Talk", "Talk about stuff", "talk")
 		addButton("Appearance", "Look at the foxy", "appearance")
