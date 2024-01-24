@@ -288,7 +288,7 @@ func _run():
 		# (kind version)
 		if(npcVariation == "kind"):
 			if(npc.hasPenis()):
-				saynn("{npc.He} carefully {npc.verb('position')} {npc.his} "+dickWord+" in front of your mouth, and slowly and gently {npc.verb('push', 'pushes') it in, giving you plenty of time to work it with your tongue and delight in its taste. Once {npc.heS} satisfied, {npc.he} scratches the back of your head to catch your attention.")
+				saynn("{npc.He} carefully {npc.verb('position')} {npc.his} "+dickWord+" in front of your mouth, and slowly and gently {npc.verb('push', 'pushes')} it in, giving you plenty of time to work it with your tongue and delight in its taste. Once {npc.he} {npc.isAre} satisfied, {npc.he} scratches the back of your head to catch your attention.")
 				saynn("[say=npc]"+RNG.pick([
 					"Are you ready for me?",
 					"Let's go a bit deeper now.",

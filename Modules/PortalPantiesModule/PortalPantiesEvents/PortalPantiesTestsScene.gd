@@ -12,7 +12,7 @@ func _reactInit():
 			"pencils_poke",
 			"drink_poke",
 		]
-		if(GM.pc.hasPenis()):
+		if(GM.pc.hasPenis() && !GM.pc.hasReachablePenis() && !GM.pc.isWearingChastityCage()):
 			possible.append_array([
 				"cock_only_poke",
 				"cock_tease_poke",

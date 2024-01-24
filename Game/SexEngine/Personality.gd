@@ -53,4 +53,13 @@ func saveData():
 func loadData(data):
 	var newstats = SAVE.loadVar(data, "stats", null)
 	if(newstats != null && (newstats is Dictionary)):
+		var filteredStats = {}
+		for statID in newstats:
+			if(!PersonalityStat.statExists(statID)):
+				Log.print("Personality stat with id "+str(statID) + " wasn't found, skipping")
+				continue
+			filteredStats[statID] = newstats[statID]
+		newstats = filteredStats
+			
+		
 		stats = newstats

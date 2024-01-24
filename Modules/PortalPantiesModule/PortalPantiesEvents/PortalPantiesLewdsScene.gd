@@ -20,7 +20,7 @@ func _reactInit():
 	]
 	if(GM.pc.hasVagina()):
 		possible.append("vaginal")
-	if(GM.pc.hasPenis() && !GM.pc.isWearingChastityCage()):
+	if(GM.pc.hasPenis() && !GM.pc.isWearingChastityCage() && !GM.pc.hasReachablePenis()):
 		possible.append("cock")
 		possible.append("cock")
 

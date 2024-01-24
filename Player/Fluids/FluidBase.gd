@@ -6,6 +6,10 @@ var id = "error"
 func getVisibleName():
 	return "ERROR"
 
+# Used when you write {pc.cum}
+func getLewdName():
+	return getVisibleName().to_lower()
+
 func canImpregnate():
 	return false
 

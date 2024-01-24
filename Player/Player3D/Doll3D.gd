@@ -384,7 +384,7 @@ func setBallsScale(newScale: float):
 
 
 func _on_Doll3DTooltip_mouseEntered(bodypartID):
-	if(savedCharacterID != "" && bodypartID != "" && is_visible_in_tree()):
+	if(savedCharacterID != "" && bodypartID != "" && is_visible_in_tree() && !isOnlyPenis):
 		var character = GlobalRegistry.getCharacter(savedCharacterID)
 		if(character == null):
 			return

@@ -103,6 +103,16 @@ func saveData():
 func loadData(data):
 	var newfetishMap = SAVE.loadVar(data, "fetishMap", null)
 	if(newfetishMap != null && (newfetishMap is Dictionary)):
+		# Removing fetishes that the game doesn't have in its database
+		var filteredNewFetishMap = {}
+		for fetishID in newfetishMap:
+			var fetishObject = GlobalRegistry.getFetish(fetishID)
+			if(fetishObject == null):
+				Log.printerr("Removing fetish that doesn't exist: "+str(fetishID))
+				continue
+			filteredNewFetishMap[fetishID] = newfetishMap[fetishID]
+		newfetishMap = filteredNewFetishMap
+		
 		fetishMap = newfetishMap
 	
 	# Adds missing fetishes

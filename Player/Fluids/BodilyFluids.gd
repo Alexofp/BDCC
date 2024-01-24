@@ -7,6 +7,12 @@ static func getFluidName(fluidID):
 		return "ERROR:BADFLUID"
 	return fluid.getVisibleName()
 
+static func getFluidLewdName(fluidID):
+	var fluid = GlobalRegistry.getFluid(fluidID)
+	if(fluid == null):
+		return "ERROR:BADFLUID"
+	return fluid.getLewdName()
+
 enum MessinessLevel {
 	Clean = 0,
 	SlightlyMessy = 1,
