@@ -1,7 +1,7 @@
 extends ItemBase
 
 func _init():
-	id = "EngineerClothes"
+	id = "EngineerClothesOld"
 
 func getVisibleName():
 	return "Engineer Uniform"
@@ -40,21 +40,6 @@ func getRiggedParts(_character):
 	if(itemState.isRemoved()):
 		return null
 	return {
-		"clothing": "res://Inventory/RiggedModels/EngineerUniform/EngineerUniform.tscn",
+		"clothing": "res://Inventory/RiggedModels/CasualClothes/EngineerClothes.tscn",
 	}
 
-func getHidesParts(_character):
-	if(itemState.isRemoved()):
-		return null
-	var removed = {
-		BodypartSlot.Legs: true,
-		BodypartSlot.Arms: true,
-		BodypartSlot.Breasts: true,
-		"panties": true,
-		"bra": true,
-		"top": true,
-	}
-	if(!itemState.areShortsPulledDown() && !itemState.isDamaged()):
-		removed[BodypartSlot.Penis] = true
-	
-	return removed

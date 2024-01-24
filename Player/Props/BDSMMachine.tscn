@@ -8,4 +8,5 @@
 script = ExtResource( 3 )
 
 [node name="Plane" parent="BDSMMachine/Skeleton" index="0"]
+software_skinning_transform_normals = false
 material/0 = ExtResource( 2 )

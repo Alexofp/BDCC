@@ -136,7 +136,7 @@ func createBodyparts():
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("digilegs"))
 
 func getDefaultEquipment():
-	return ["EngineerClothes", "plainBriefs"]
+	return ["EngineerClothesAlex", "plainBriefs"]
 
 func _getAttacks():
 	return ["NpcScratch", "StrongBite", "simplekickattack", "HeatGrenade", "BolaThrow", "ForceBlindfoldPC", "trygetupattack"]

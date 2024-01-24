@@ -21,4 +21,5 @@ func getPriority():
 
 func onButton(_method, _args):
 	if(_method == "alex"):
+		getCharacter("alexrynard").resetEquipment()
 		runScene("AlexRynardTalkScene")

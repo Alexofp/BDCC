@@ -34,8 +34,11 @@ func getBuffs():
 func getPrice():
 	return 30
 
+func getSellPrice():
+	return 30
+
 func canSell():
-	return false
+	return true
 
 func getTags():
 	if(GM.main != null && (GM.main.getFlag("PortalPantiesModule.Panties_PcDenied") || GM.main.getFlag("PortalPantiesModule.Panties_FleshlightsReturnedToAlex"))):
