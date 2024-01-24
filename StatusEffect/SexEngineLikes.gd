@@ -33,6 +33,8 @@ func getEffectDesc():
 	var texts = []
 	for fetishID in fetishHolder.getFetishes():
 		var fetish:FetishBase = GlobalRegistry.getFetish(fetishID)
+		if(fetish == null):
+			continue
 		var fetishInterest = fetishHolder.getFetishInterest(fetishID)
 		if(fetishInterest == FetishInterest.Neutral):
 			continue

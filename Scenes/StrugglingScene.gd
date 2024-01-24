@@ -246,12 +246,10 @@ func _react(_action: String, _args):
 			additionalStruggleText = turnData["text"]
 			
 		# less xp without progression more in combat
-		if !instantUnlock:
-			var mult = 1
-			if damage > 0:
-				mult += 2
+		if(!instantUnlock && damage > 0.0 && damage < 1.0):
+			var mult = 4
 			if fightMode:
-				mult += 2
+				mult = 5
 			GM.pc.addSkillExperience(Skill.BDSM, restraintData.getLevel() * mult)
 			
 		if(fatallFail):

@@ -11,6 +11,9 @@ const Coward = "Coward"
 static func getAll():
 	return [Brat, Mean, Subby, Impatient, Naive, Coward]
 
+static func statExists(stat):
+	return (stat in getAll())
+
 static func getVisibleName(stat):
 	return str(stat)
 

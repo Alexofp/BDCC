@@ -198,14 +198,20 @@ func callObjectFuncWrapper(_obj: String, _command: String, _args: Array):
 		var milkType = breasts.getProducingFluidType()
 		if(milkType == null):
 			return "[color=red]ERROR:NO_MILK[/color]"
-		return BodilyFluids.getFluidName(milkType)
+		return BodilyFluids.getFluidLewdName(milkType)
 		
 	if(_command == "cum" && _args.size() == 0):
 		var penis = object.getBodypart(BodypartSlot.Penis)
 		var cumType = penis.getProducingFluidType()
 		if(cumType == null):
 			return "[color=red]ERROR:NO_CUM[/color]"
-		return BodilyFluids.getFluidName(cumType)
+		return BodilyFluids.getFluidLewdName(cumType)
+	
+	# Stubs for the future
+	if(_command == "girlcum" && _args.size() == 0):
+		return "girlcum"
+	if(_command == "piss" && _args.size() == 0):
+		return "piss"
 	
 	if(_command in ["analStretch", "anusStretch"] && _args.size() == 0):
 		var bodypart:BodypartAnus = object.getBodypart(BodypartSlot.Anus)

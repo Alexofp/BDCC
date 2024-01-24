@@ -79,7 +79,7 @@ func processStruggleTurn(_pc, _isActivelyStruggling):
 			"{user.name} struggles to look away from the flashing images.",
 			"{user.name} struggles to look away from the spinning spiral.",
 		])
-	elif(getItem().id == "HypnovisorMk1"):
+	else:
 		text = RNG.pick([
 			"The lights are so colorful..",
 			"Toy.. pet.. Toy.. pet..",

@@ -3,7 +3,7 @@ extends Node
 var game_version_major = 0
 var game_version_minor = 1
 var game_version_revision = 2
-var game_version_suffix = ""
+var game_version_suffix = "bugfix1"
 
 var currentUniqueID = 0
 var currentChildUniqueID = 0
