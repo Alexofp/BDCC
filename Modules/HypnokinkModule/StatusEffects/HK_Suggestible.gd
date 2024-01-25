@@ -1,8 +1,4 @@
 extends StatusEffectBase
-class_name HK_Suggestible
-
-#const hypnotizedThreshold = 35
-#const inTranceThreshold = 75
 
 var stacks := 0.0
 
@@ -34,6 +30,9 @@ func processTime(_seconds: int):
 		stacks = stacks - minutes
 	clampOrRemove()
 
+func onSleeping():
+	stacks = min(stacks, 25)
+	
 func _on_pain_changed(after, before):
 	var amount = after - before
 	if(amount <= 0):

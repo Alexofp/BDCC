@@ -18,7 +18,7 @@ func react(_triggerID, _args):
 		return
 	
 	if(WorldPopulation.Inmates in GM.pc.getLocationPopulation()):
-		var baseChance = 1.0 + HypnokinkUtil.getSuggestibleStacks(GM.pc) * 0.5
+		var baseChance = 0.5 + min(100.0, HypnokinkUtil.getSuggestibleStacks(GM.pc)) * 0.1
 		baseChance *= GM.pc.getEncounterChanceModifierInmates()
 		
 		if(RNG.chance(baseChance) || isLookingForTrouble):
