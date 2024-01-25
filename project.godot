@@ -509,11 +509,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Modules/HypnokinkModule/Scenes/Sessions/HK_Sessions.gd"
 }, {
-"base": "StatusEffectBase",
-"class": "HK_Suggestible",
-"language": "GDScript",
-"path": "res://Modules/HypnokinkModule/StatusEffects/HK_Suggestible.gd"
-}, {
 "base": "Object",
 "class": "HypnokinkUtil",
 "language": "GDScript",
@@ -1290,7 +1285,6 @@ _global_script_class_icons={
 "HK_Glasses": "",
 "HK_HypnoRestraint": "",
 "HK_Sessions": "",
-"HK_Suggestible": "",
 "HypnokinkUtil": "",
 "ImageCon": "",
 "ImageConditions": "",
