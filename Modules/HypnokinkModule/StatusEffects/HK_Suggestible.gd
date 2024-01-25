@@ -1,8 +1,4 @@
 extends StatusEffectBase
-class_name HK_Suggestible
-
-#const hypnotizedThreshold = 35
-#const inTranceThreshold = 75
 
 var stacks := 0.0
 
