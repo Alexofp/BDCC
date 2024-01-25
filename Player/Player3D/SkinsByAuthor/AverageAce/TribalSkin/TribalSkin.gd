@@ -13,4 +13,5 @@ func getFittingSkinTypes():
 	return {
 		SkinType.Fur: 1.0,
 		SkinType.Scales: 1.0,
+		SkinType.SkinAndFur: 1.0,
 	}

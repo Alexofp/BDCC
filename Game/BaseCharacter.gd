@@ -830,6 +830,9 @@ func hasBodypart(slot):
 	return false
 	
 func getBodypart(slot):
+	if(!bodyparts.has(slot)):
+		Log.printerr("Trying to get bodypart from slot "+str(slot)+" when it doesn't exist.")
+		return null
 	return bodyparts[slot]
 
 func getBodyparts():
@@ -2552,3 +2555,19 @@ func orgasmFrom(_characterID: String):
 			if(ch != null):
 				ch.sendSexEvent(event)
 		sendSexEvent(event)
+
+func getUndressMessage(withS):
+	var res = []
+	var slotsToCheck = [InventorySlot.Body, InventorySlot.UnderwearTop, InventorySlot.UnderwearBottom]
+	
+	for slot in slotsToCheck:
+		if(getInventory().hasSlotEquipped(slot)):
+			var item = getInventory().getEquippedItem(slot)
+			res.append(item.getTakingOffStringLong(withS))
+	
+	if(res.size() == 0):
+		if(withS):
+			return "takes all your clothes off"
+		else:
+			return "take all your clothes off"
+	return Util.humanReadableList(res, "and also")
