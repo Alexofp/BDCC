@@ -202,6 +202,8 @@ func callObjectFuncWrapper(_obj: String, _command: String, _args: Array):
 		
 	if(_command == "cum" && _args.size() == 0):
 		var penis = object.getBodypart(BodypartSlot.Penis)
+		if(penis == null):
+			return "[color=red]ERROR:NO_PENIS[/color]"
 		var cumType = penis.getProducingFluidType()
 		if(cumType == null):
 			return "[color=red]ERROR:NO_CUM[/color]"
