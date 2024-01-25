@@ -30,6 +30,9 @@ func processTime(_seconds: int):
 		stacks = stacks - minutes
 	clampOrRemove()
 
+func onSleeping():
+	stacks = min(stacks, 25)
+	
 func _on_pain_changed(after, before):
 	var amount = after - before
 	if(amount <= 0):
