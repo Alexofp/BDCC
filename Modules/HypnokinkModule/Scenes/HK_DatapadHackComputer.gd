@@ -80,6 +80,25 @@ const memPosMap = {
 			"disconnect": "[color=#88FF88][4,16][/color] (10+1 bytes read)",
 			"monitor": "[color=#88FF88][8,0][/color] (170+1 bytes read)",
 			"help": "[color=#FF8888][17,4][/color] (78+1 bytes read)",
+			"strscan": "[color=#FF8888][external memory][/color] (? bytes read)",
+		}
+		
+const strMap = {
+			"1": [" [color=#88FF88][0,8][/color] ", "DeLoxe S3-Karat v1.0.7"],
+			"2": [" [color=#88FF88][1,8][/color] ", "SEGFAULT at: %s"],
+			"3": [" [color=#88FF88][2,0][/color] ", "Vion"],
+			"4": [" [color=#88FF88][2,24][/color]", "locked"],
+			"5": [" [color=#88FF88][3,0][/color] ", "unlocked"],
+			"6": [" [color=#88FF88][3,12][/color]", "Operating"],
+			"7": [" [color=#88FF88][3,24][/color]", "Inactive"],
+			"8": [" [color=#88FF88][4,16][/color]", "Disconnecting..."],
+			"9": [" [color=#88FF88][5,4][/color] ", "Ready."],
+			"10": ["[color=#88FF88][6,0][/color] ", "default"],
+			"11": ["[color=#88FF88][6,8][/color] ", "block"],
+			"12": ["[color=#88FF88][6,20][/color]", "override"],
+			"13": ["[color=#88FF88][7,0][/color] ", "Code "],
+			"14": ["[color=#88FF88][7,8][/color] ", "valid."],
+			"15": ["[color=#88FF88][7,16][/color]", "invalid."]
 		}
 
 const NI = "[color=#FFFF00]|[/color]"
@@ -141,6 +160,8 @@ func reactToCommandCage(_command: String, _args:Array, _commandStringRaw:String)
 				return "This command lists hardware diagnostics."
 			elif(tolearn == "unlock"):
 				return "This command unlocks the electromagnetic lock.\nSyntax 'unlock <unlock code>'"
+			elif(tolearn == "strscan"):
+				return "This command scans the local device memory for strings. Without a parameter, it simply lists found strings. When provided a string id as a parameter, it will add that string to the memorised commands.\nSyntax 'strscan <string id>'"
 			else:
 				return "Couldn't find command '"+str(tolearn)+"'. To see all the available commands type 'help'."
 			
@@ -149,11 +170,31 @@ func reactToCommandCage(_command: String, _args:Array, _commandStringRaw:String)
 			learnCommand("monitor")
 			learnCommand("unlock")
 			learnCommand("disconnect")
-			return "Available commands are: \ndisconnect\nmonitor\nunlock\nhelp\nTo learn more about a command type 'help <COMMAND>'\n\n"+\
+			learnCommand("strscan")
+			return "Available commands are: \ndisconnect\nmonitor\nunlock\nhelp\nstrscan\nTo learn more about a command type 'help <COMMAND>'\n\n"+\
 				"[Amateur firmware. The password's stored in plaintext, directly in memory. Dont waste time trying every option, remember that the unlock function has to access the password to check if it's been given a valid one. - Alex]"
 		else:
 			learnCommand("help")
 			return "'help' expects 0 or 1 arguments"
+	elif(_command == "strscan"):
+		lastCageCmd = _command
+		if(_args.size() == 1):
+			var id = _args[0]
+			if(id in strMap.keys()):
+				learnCommand(strMap[id][1])
+				return "Memorised string '" + strMap[id][1] + "'."
+			else:
+				return "Invalid parameter."
+		elif(_args.size() == 0):
+			var outstr = "This trial version of strscan is limited to only the first 15 results.\n"+\
+					"Run strscan again with the id of the string you'd like to memorise as the first parameter.\n\n[font=res://Fonts/smallconsolefont.tres]"+\
+					"[color=#AAFFFF]ID location string[/color]\n"
+			for key in strMap:
+				outstr += key + " " + strMap[key][0] + ":  '" + strMap[key][1] + "'\n"
+			outstr += "[/font]"
+			return outstr
+		else:
+			return "This command expects 1 or 0 arguments"
 						
 	learnCommand("help")
 	return "Error, unknown command. Use 'help' to list all available commands"
@@ -207,11 +248,12 @@ var tutorialData = [
 	["help probe", "You learned new commands. Use the help command to figure out the 'probe' command", "Select 'help', then select 'probe' and then press Send"],
 	["probe", "Now try to execute this command.", "Select 'probe' and press Send"],
 	["help connect", "Now try to figure out how to use the connect command.", "Select 'help', then select 'connect' and press Send"],
-	["connect 4", "Connect to the mystery device to test things out.", "Select 'connect', then switch to the numpad and select '4' before pressing Send"],
+	["connect 4", "The viplug_m_default device will serve as an example device for this tutorial. Connect to it.", "Select 'connect', then switch to the numpad and select '4' before pressing Send"],
 	["help", "You connected to a device. Figure out what it can do.", "Select 'help' and press Send"],
 	["help get_speed", "Figure out what get_speed does.", "Select 'help', then select 'get_speed' and press Send"],
 	["get_speed", "Run the get_speed command.", "Select 'get_speed' and press Send"],
-	["disconnect", "When you're done here, disconnect from this device.", "Select 'disconnect' and press Send"],
+	["disconnect", "Nothing more to do here. When you're done experimenting, disconnect from this device.", "Select 'disconnect' and press Send"],
+	["*", "You've finished the tutorial. Good luck! Remember you can use the 'probe' command to find the right device.", "Use the 'probe' command again to find the right device."],
 ]
 var currentTutorialStep = 0
 var shouldSpoilHint = false

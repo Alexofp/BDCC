@@ -50,29 +50,29 @@ static func addHypnoButtons(scene: SceneBase, submitAction: String, resistAction
 		scene.addButton(optionsSubmit[i % optionsSubmit.size()], "", submitAction)
 		
 static func getSuggestibleEffect(character: BaseCharacter): #-> StatusEffectBase:
-	var status: HK_Suggestible = character.getEffect(StatusEffect.Suggestible)
+	var status = character.getEffect(StatusEffect.Suggestible)
 	return status
 	
 static func isHypnotized(character: BaseCharacter) -> bool:
-	var status: HK_Suggestible = character.getEffect(StatusEffect.Suggestible)
+	var status = character.getEffect(StatusEffect.Suggestible)
 	if(status == null):
 		return false
 	return status.isHypnotized()
 	
 static func isInTrance(character: BaseCharacter) -> bool:
-	var status: HK_Suggestible = character.getEffect(StatusEffect.Suggestible)
+	var status = character.getEffect(StatusEffect.Suggestible)
 	if(status == null):
 		return false
 	return status.isInTrance()
 	
 static func getSuggestibleStacks(character: BaseCharacter) -> float:
-	var status: HK_Suggestible = character.getEffect(StatusEffect.Suggestible)
+	var status = character.getEffect(StatusEffect.Suggestible)
 	if(status == null):
 		return 0.0
 	return status.stacks
 	
 static func raiseSuggestibilityTo(character: BaseCharacter, amount: float):
-	var status: HK_Suggestible = character.getEffect(StatusEffect.Suggestible)
+	var status = character.getEffect(StatusEffect.Suggestible)
 	if(status == null):
 		character.addEffect(StatusEffect.Suggestible, [amount])
 	else:
@@ -80,7 +80,7 @@ static func raiseSuggestibilityTo(character: BaseCharacter, amount: float):
 		status.clampOrRemove()
 	
 static func changeSuggestibilityBy(character: BaseCharacter, amount: float):
-	var status: HK_Suggestible = character.getEffect(StatusEffect.Suggestible)
+	var status = character.getEffect(StatusEffect.Suggestible)
 	if(status == null):
 		if(amount >= 0):
 			character.addEffect(StatusEffect.Suggestible, [amount])
