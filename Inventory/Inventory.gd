@@ -44,7 +44,7 @@ func getEquippedItems():
 func getAllSellableItems():
 	var result = []
 	for item in items:
-		if(item.canSell() && !item.isImportant()):
+		if(item.canSell()):
 			result.append(item)
 	return result
 
@@ -536,6 +536,38 @@ func findAndEquipInmateUniform():
 		forceEquipStoreOtherUnlessRestraint(getFirstOf("inmateuniformHighsec"))
 	elif(hasItemID("inmateuniformSexDeviant")):
 		forceEquipStoreOtherUnlessRestraint(getFirstOf("inmateuniformSexDeviant"))
+
+func removeBrokenDublicatedItems():
+	var itemsToRemove = []
+	var equippedItemsToRemove = []
+	
+	var seenIDS = {}
+	for item in items:
+		if(item.uniqueID == null || item.uniqueID == ""):
+			continue
+		
+		if(seenIDS.has(item.uniqueID)):
+			itemsToRemove.append(item)
+		else:
+			seenIDS[item.uniqueID] = true
+	
+	for slot in equippedItems.keys():
+		var item = equippedItems[slot]
+		
+		if(item.uniqueID == null || item.uniqueID == ""):
+			continue
+		
+		if(seenIDS.has(item.uniqueID)):
+			equippedItemsToRemove.append(item)
+		else:
+			seenIDS[item.uniqueID] = true
+	
+	for item in itemsToRemove:
+		Log.printerr("REMOVING DUBLICATED ITEM: "+item.id+" UNIQUE ID: "+str(item.uniqueID))
+		removeItem(item)
+	for equippedItem in equippedItemsToRemove:
+		Log.printerr("REMOVING DUBLICATED ITEM: "+equippedItem.id+" UNIQUE ID: "+str(equippedItem.uniqueID))
+		removeEquippedItem(equippedItem)
 
 func saveData():
 	var data = {}

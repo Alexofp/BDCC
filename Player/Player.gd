@@ -486,6 +486,7 @@ func loadData(data):
 	for skillID in allSkills:
 		if(allSkills[skillID].alwaysVisible()):
 			skillsHolder.ensureSkillExists(skillID)
+	getInventory().removeBrokenDublicatedItems()
 
 func checkLocation():
 	var _roomInfo = GM.world.getRoomByID(getLocation())
@@ -759,17 +760,6 @@ func canUndress():
 		if(getInventory().hasSlotEquipped(slot)):
 			return true
 	return false
-
-func getUndressMessage(withS):
-	var res = []
-	var slotsToCheck = [InventorySlot.Body, InventorySlot.UnderwearTop, InventorySlot.UnderwearBottom]
-	
-	for slot in slotsToCheck:
-		if(getInventory().hasSlotEquipped(slot)):
-			var item = getInventory().getEquippedItem(slot)
-			res.append(item.getTakingOffStringLong(withS))
-	
-	return Util.humanReadableList(res, "and also")
 
 func hasIllegalItems():
 	if(inventory.getItemsWithTag(ItemTag.Illegal).size() > 0):

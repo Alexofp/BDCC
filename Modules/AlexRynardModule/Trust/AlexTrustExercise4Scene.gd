@@ -1506,7 +1506,7 @@ func _react(_action: String, _args):
 		GM.pc.getInventory().forceEquipStoreOtherUnlessRestraint(GlobalRegistry.createItem("HypnovisorDisabled"))
 
 	if(_action == "2"):
-		GM.pc.getInventory().forceEquipStoreOtherUnlessRestraint(GlobalRegistry.createItem("HypnovisorMk1"))
+		GM.pc.getInventory().forceEquipRemoveOther(GlobalRegistry.createItem("HypnovisorMk1"))
 		processTime(10*60)
 
 	if(_action == "3"):
@@ -1572,6 +1572,7 @@ func _react(_action: String, _args):
 		processTime(5*60)
 		var strapon = _args[0]
 		pumpID = strapon.uniqueID
+		GM.pc.getInventory().removeItem(strapon)
 		getCharacter("alexrynard").getInventory().forceEquipStoreOtherUnlessRestraint(strapon)
 
 	if(_action == "hyp_aftermilk"):

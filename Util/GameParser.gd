@@ -194,6 +194,8 @@ func callObjectFuncWrapper(_obj: String, _command: String, _args: Array):
 		return InmateType.getOfficialName(inmateType)
 	
 	if(_command == "milk" && _args.size() == 0):
+		if(!object.hasBodypart(BodypartSlot.Breasts)):
+			return "[color=red]ERROR:NO_BREASTS[/color]"
 		var breasts = object.getBodypart(BodypartSlot.Breasts)
 		var milkType = breasts.getProducingFluidType()
 		if(milkType == null):
@@ -201,6 +203,8 @@ func callObjectFuncWrapper(_obj: String, _command: String, _args: Array):
 		return BodilyFluids.getFluidLewdName(milkType)
 		
 	if(_command == "cum" && _args.size() == 0):
+		if(!object.hasBodypart(BodypartSlot.Penis)):
+			return "[color=red]ERROR:NO_PENIS[/color]"
 		var penis = object.getBodypart(BodypartSlot.Penis)
 		var cumType = penis.getProducingFluidType()
 		if(cumType == null):
@@ -214,6 +218,8 @@ func callObjectFuncWrapper(_obj: String, _command: String, _args: Array):
 		return "piss"
 	
 	if(_command in ["analStretch", "anusStretch"] && _args.size() == 0):
+		if(!object.hasBodypart(BodypartSlot.Anus)):
+			return "[color=red]ERROR:NO_ANUS[/color]"
 		var bodypart:BodypartAnus = object.getBodypart(BodypartSlot.Anus)
 		if(bodypart == null):
 			return "[color=red]ERROR:NOBODYPART[/color]"
@@ -223,6 +229,8 @@ func callObjectFuncWrapper(_obj: String, _command: String, _args: Array):
 		return orifice.getLoosenessString()
 		
 	if(_command in ["pussyStretch", "vaginaStretch"] && _args.size() == 0):
+		if(!object.hasBodypart(BodypartSlot.Vagina)):
+			return "[color=red]ERROR:NO_VAGINA[/color]"
 		var bodypart:BodypartVagina = object.getBodypart(BodypartSlot.Vagina)
 		if(bodypart == null):
 			return "[color=red]ERROR:NOBODYPART[/color]"
@@ -232,6 +240,8 @@ func callObjectFuncWrapper(_obj: String, _command: String, _args: Array):
 		return orifice.getLoosenessString()
 		
 	if(_command in ["throatStretch"] && _args.size() == 0):
+		if(!object.hasBodypart(BodypartSlot.Head)):
+			return "[color=red]ERROR:NO_HEAD[/color]"
 		var bodypart:BodypartHead = object.getBodypart(BodypartSlot.Head)
 		if(bodypart == null):
 			return "[color=red]ERROR:NOBODYPART[/color]"
@@ -247,6 +257,8 @@ func callObjectFuncWrapper(_obj: String, _command: String, _args: Array):
 		return thetext
 	
 	if(_command in ["pussyContents", "vaginaContents"] && _args.size() == 0):
+		if(!object.hasBodypart(BodypartSlot.Vagina)):
+			return "[color=red]ERROR:NO_VAGINA[/color]"
 		var bodypart:BodypartVagina = object.getBodypart(BodypartSlot.Vagina)
 		if(bodypart == null):
 			return "[color=red]ERROR:NOBODYPART[/color]"
@@ -259,6 +271,8 @@ func callObjectFuncWrapper(_obj: String, _command: String, _args: Array):
 		return thetext
 	
 	if(_command in ["buttContents", "assContents", "anusContents"] && _args.size() == 0):
+		if(!object.hasBodypart(BodypartSlot.Anus)):
+			return "[color=red]ERROR:NO_ANUS[/color]"
 		var bodypart = object.getBodypart(BodypartSlot.Anus)
 		if(bodypart == null):
 			return "[color=red]ERROR:NOBODYPART[/color]"
@@ -271,6 +285,8 @@ func callObjectFuncWrapper(_obj: String, _command: String, _args: Array):
 		return thetext
 	
 	if(_command in ["throatContents"] && _args.size() == 0):
+		if(!object.hasBodypart(BodypartSlot.Head)):
+			return "[color=red]ERROR:NO_HEAD[/color]"
 		var bodypart = object.getBodypart(BodypartSlot.Head)
 		if(bodypart == null):
 			return "[color=red]ERROR:NOBODYPART[/color]"

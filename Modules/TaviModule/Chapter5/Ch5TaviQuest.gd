@@ -20,7 +20,10 @@ func getProgress():
 		result.append("Find a way to turn the assembly lab's power on. The adjacent office might be worth checking.")
 	
 	if(getFlag("TaviModule.Ch5SentinelXHappened")):
-		result.append("You now know the collar frequency and also have the prototype grenade.")
+		if(getFlag("TaviModule.Ch5StoleDatapadFromGuard") || getFlag("TaviModule.Ch5StoleDatapadFromNova")):
+			result.append("You now know the collar frequency and also have the prototype grenade.")
+		else:
+			result.append("You now know the collar frequency and also have the prototype grenade. Now you just need the datapad from Nova or guards.")
 	
 	if(getFlag("TaviModule.Ch5StoleDatapadFromGuard") || getFlag("TaviModule.Ch5StoleDatapadFromNova")):
 		if(getFlag("TaviModule.Ch5SentinelXHappened")):
