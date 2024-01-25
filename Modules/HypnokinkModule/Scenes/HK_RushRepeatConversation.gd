@@ -87,7 +87,7 @@ func _run():
 			bodyState={exposedCrotch=true,hard=true},
 			npcBodyState={exposedCrotch=true,hard=true},
 		})
-		saynn("It takes Rush several attempts before he manages to push his {rush.cockDesc}"+RNG.pick(["cock", "dick", "member"])+" into you, even with the stretching earlier. When it finally slips in, it feels a lot like being impaled by a tree trunk.")
+		saynn("It takes Rush several attempts before he manages to push his {rush.cockDesc}"+RNG.pick(["cock", "dick", "member"])+" into you. When it finally slips in, it feels a lot like being impaled by a tree trunk.")
 
 		saynn("[say=pc]F-fuuuck okay okay it's in![/say]")
 		
@@ -160,10 +160,14 @@ func _run():
 		addButton("Oof", "", "endthescene")
 		
 	if(state == "get_fucked_fail"):
-		saynn("Rush makes several attempts to push his {rush.cockDesc}"+RNG.pick(["cock", "dick", "member"])+" into you, but despite the stretching earlier it refuses to fit. Soon enough pleasure gives way to frustration.")
+		saynn("Rush makes several attempts to push his {rush.cockDesc} "+RNG.pick(["cock", "dick", "member"])+" into you, but it just refuses to fit. Soon enough pleasure gives way to frustration.")
 
 		saynn("[say=rush]Looks like yer all talk, pipsqueak. Ain't gettin' it in without rippin' ya in two.[/say]")
 		
+		addButton("What?", "Since when has that stopped anybody?", "get_fucked_fail_2")
+		addButton("Do it anyway", "This is going to hurt", "get_fucked_pass")
+		
+	if(state == "get_fucked_fail_2"):
 		saynn("[say=pc]Wha- but I-[/say]")
 		
 		saynn("[say=rush]Na', tha's enough. We're done 'ere.[/say]")
@@ -328,6 +332,11 @@ func _react(_action: String, _args):
 			_action = "get_fucked_pass"
 		else:
 			_action = "get_fucked_fail"
+			
+	if(_action == "get_fucked_pass"):
+		var anus: Orifice = GM.pc.getBodypart(BodypartSlot.Anus).getOrifice()
+		if(not (anus.getLooseness() > 3.0 and anus.getComfortableInsertion() > 25.0)):
+			GM.pc.doPainfullyStretchHole(BodypartSlot.Anus, "rush")
 			
 	if(_action == "get_fucked_orgasm"):
 		GM.pc.gotAnusFuckedBy("rush")
