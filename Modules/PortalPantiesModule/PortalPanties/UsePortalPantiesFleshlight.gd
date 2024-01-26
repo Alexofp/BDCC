@@ -968,7 +968,7 @@ func _run():
 				]))
 			else:
 				saynn(RNG.pick([
-					"You pant softly as you fuck that eager {npc.vaginaStretch} {pussy}! Feels so much better than sextoy.",
+					"You pant softly as you fuck that eager {npc.vaginaStretch} {pussy}! Feels so much better than a sextoy.",
 					"You smile while fucking someone, using their {pussy} for your pleasure remotely.",
 					"You fuck that {pussy} so eagerly that it starts making wet noises.. The way its inner walls grip your length.. so good.",
 					"You shove your {penis} deep, hammering away at that slit’s pleasure spot. Whoever they are, they are dripping like a whore.",
