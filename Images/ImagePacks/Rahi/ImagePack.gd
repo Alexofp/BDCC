@@ -43,6 +43,9 @@ func _init():
 	addCharacter("kait", [], "res://Images/ImagePacks/Rahi/Characters/kait/kait.png")
 	addCharacter("kait", ["naked"], "res://Images/ImagePacks/Rahi/Characters/kait/kait-naked.png")
 	
+	addCharacter("socket", [], "res://Images/ImagePacks/Rahi/Characters/socket/socket.png")
+	addCharacter("socket", ["naked"], "res://Images/ImagePacks/Rahi/Characters/socket/socket-naked.png")
+	
 	## Just an example
 	## Uncomment to enable
 	#addSceneImage("InventoryScene", "", "res://Images/ImagePacks/Rahi/Characters/kait/kait.png")
