@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Inventory/RiggedModels/SocketArmor/backpack.png" type="Texture" id=1]
+
+[node name="BackpackModel" type="Spatial"]
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform( 1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 0.237, -0.139, 0.022 )
+texture = ExtResource( 1 )
