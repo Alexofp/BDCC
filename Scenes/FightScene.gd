@@ -124,6 +124,7 @@ func _run():
 		
 		var isInCategory = (restraintsPickedCategory != "")
 		var usableItems
+		var dupe = []
 		if(enemyCharacter.isDynamicCharacter()):
 			usableItems = GM.pc.getInventory().getAllCombatUsableRestraints()
 		else:
@@ -133,12 +134,15 @@ func _run():
 			var newUsable = []
 			for item in usableItems:
 				if(item.id == restraintsPickedCategory):
-					newUsable.append(item)
+					if !item.getRestraintData().getLevel() in dupe:
+						newUsable.append(item)
+					dupe.append(item.getRestraintData().getLevel())
 			usableItems = newUsable
 		else:
 			for item in usableItems:
 				if(!countsByItemID.has(item.id)):
 					countsByItemID[item.id] = 1
+					dupe.append(item.getRestraintData().getLevel())
 				else:
 					countsByItemID[item.id] += 1
 		
@@ -171,7 +175,7 @@ func _run():
 				if(enemyCharacter.getStamina() > 0):
 					 chanceToForce *= restraintData.getFinalChanceToForceARestraint(enemyCharacter)
 
-				addButton(item.getVisibleName(), "Restraint level: "+str(restraintData.getLevel()) + "\n" + "Success chance: "+ str(Util.roundF(chanceToForce*100.0, 1))+"%" + "\n\n" + item.getCombatDescription(), "forcerestraint", [item])
+				addButton(item.getVisibleName(), "Available: " + str(dupe.count(restraintData.getLevel())) + "\n" + "Restraint level: "+str(restraintData.getLevel()) + "\n" + "Success chance: "+ str(Util.roundF(chanceToForce*100.0, 1))+"%" + "\n\n" + item.getCombatDescription(), "forcerestraint", [item])
 			
 		addButton("Back", "Back to fighting", "closerestraintsmenu")
 	
