@@ -1,6 +1,7 @@
 extends SceneBase
 
 var rewardLewd = false
+var socketCame = false
 
 func _init():
 	sceneID = "SocketHelp1Mineshaft"
@@ -147,6 +148,25 @@ func _run():
 
 		addButton("Just stand still", "Avoid doing anything to Socket while she is in this position", "avoid_lewds")
 		addButton("Breathe on it", "Breathe on Socket's pussy warmly and see what happens", "breathe_warmly")
+	if(state == "breathe_warmly"):
+		saynn("Seeing Socket's pussy from up so close.. makes you wonder how she would react to this..")
+
+		saynn("You lean a little closer to it and just.. breath warmly over the sensitive folds.")
+
+		saynn("Huh. Socket doesn't seem to react much, the engineer is busy unscrewing the lightbulb.. but her body does react, her slit getting a little wet, now producing a nice scent.")
+
+		saynn("You hold the generator with one hand.. but the second one reaches out and gently caresses Socket's exposed part of the thigh.")
+
+		saynn("But then some inmates are walking past and see you like this.. causing you to recoil back and pretend that you're not doing anything.")
+
+		saynn("[say=socket]Hi! Don't mind us.[/say]")
+
+		saynn("Looks like she didn't care about you caressing her thigh.. Maybe you can do more? Otherwise you'd have to stand there and endure that tantalizing scent..")
+
+		saynn("Socket removes the old broken lightbulb and starts to screw in the new one.")
+
+		addButton("Avoid thinking", "Shut down completely but avoid thinking about that pussy", "avoid_lewds_completely")
+		addButton("Dig into it!", "Who cares. Stick your face into her crotch!", "do_lick_socket")
 	if(state == "avoid_lewds"):
 		saynn("You do your best and avoid even staring at that crotch from now on.. But even just knowing that it's there is enough to keep you lusty. Why doesn't she wear panties or something..")
 
@@ -160,6 +180,48 @@ func _run():
 
 		addButton("Avoid thinking", "Shut down completely but avoid thinking about that pussy", "avoid_lewds_completely")
 		addButton("Dig into it!", "Who cares. Stick your face into her crotch!", "do_lick_socket")
+	if(state == "do_lick_socket"):
+		# (( Anim here
+		saynn("Ah, what the hell, what's the worst that can happen.")
+
+		saynn("You lean closer to Socket's crotch.. and start with a quick lick, brushing the tip of your tongue over that clit. Her pussy twitches a bit.. but other than that.. no reaction.. so you lick and lick again.")
+
+		saynn("[say=socket]Getting there![/say]")
+
+		saynn("Her exposed slit is incredibly wet by now from your teasing.. but Socket acts like she doesn't care, she just keeps screwing in the new lightbulb. Alright, time to screw with her then.")
+
+		saynn("Rather than going easy on her, you dig your face between her legs, your lips pressing against her petals, your tongue spreading and playing with them!")
+
+		saynn("[say=socket]Almost done..[/say]")
+
+		saynn("Her breathing becomes more deep, her voice quieter, her body squirming a little as you start to eat her out, your lips brushing over the sensitive flesh while the tongue keeps rubbing the clit.")
+
+		addButton("Faster", "Lick her faster and see what happens", "socket_cums_on_pc")
+	if(state == "socket_cums_on_pc"):
+		# (( Faster anim here
+		saynn("She struggles to screw the lightbulb in, one of her palms lands on your head for extra support.. while you just keep going at it, lapping up her juices and licking her out more, your tongue prodding her entrance and sliding inside with ease, covering the inner walls with your saliva too.")
+
+		saynn("[say=socket]Just the last.. twist..[/say]")
+
+		saynn("You can feel her body tensing up, her sex clenching.. And yet, not a single moan, just panting, Socket is fully focussed on the work.")
+
+		saynn("But just when she finally twists the light in fully, making it light up the area, her body suddenly arches its back, her wet pussy is twitching and releasing a stream of transparent girlcum.. onto your face.")
+
+		saynn("[say=socket]That was.. easy..[/say]")
+
+		saynn("Socket looks down at you and sees your wet face.")
+
+		saynn("[say=socket]Oh..[/say]")
+
+		saynn("She quickly climbs down the generator and helps you wipe it with some cloth.")
+
+		saynn("[say=socket]Sorry![/say]")
+
+		saynn("Socket marks the task as done in her datapad.")
+
+		saynn("[say=socket]Yay. My first completed task.[/say]")
+
+		addButton("Continue", "See what happens next", "after_help")
 	if(state == "avoid_lewds_completely"):
 		saynn("It takes a lot of.. strength.. but you manage to shut your brain off completely and avoid even thinking about that pussy. You only focus on keeping the generator stable"+str(" while your cock stays hard as a rock" if GM.pc.hasReachablePenis() else "")+".")
 
@@ -209,6 +271,35 @@ func _run():
 			saynn("Credits would be better but this is better than nothing..")
 
 			addButton("Continue", "See what happens next", "endthescene")
+	if(state == "socket_reward_just_leave"):
+		saynn("[say=pc]I wasn't serious, staff doesn't have to submit to inmates.[/say]")
+
+		saynn("[say=socket]Oh, okay! Well, take care then![/say]")
+
+		saynn("That's it? She is not even angry that you lied to her. Huh.")
+
+		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "socket_reward_grope"):
+		# ((Grope anim?
+		saynn("Nah, might as well take her up on the offer. You do it sneakily though, your hand lands on her belly and slides down along it to her crotch. "+str("Her pussy is still quite wet after her orgasm. As you spread it, you reveal a few strings of juices that are hanging between her folds." if socketCame else "Her pussy is slightly wet. As you spread it, you reveal a lonely string of juices that is hanging between her folds.")+"")
+
+		saynn("Your other hand cups one of the breasts and gently squeezes. All the while Socket just watches you do that, spreading her legs more for you and biting her lip slightly.")
+
+		saynn("After playing with her slit for a bit, your hand slides further between her legs and finds her tight pucker.. That's when Socket's expression suddenly changes, she takes a step back, escaping your grasp.")
+
+		saynn("[say=socket]Not there.[/say]")
+
+		saynn("[say=pc]Why not?[/say]")
+
+		saynn("[say=socket]Because that's the wrong hole![/say]")
+
+		saynn("The whole floor probably heard that.. best to stop there.")
+
+		saynn("[say=pc]Sure.[/say]")
+
+		saynn("Socket smiles and walks up, the fur on her thighs looking quite messy..")
+
+		addButton("Continue", "See what happens next", "endthescene")
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
@@ -231,9 +322,18 @@ func _react(_action: String, _args):
 	if(_action == "breathe_warmly"):
 		processTime(3*60)
 
+	if(_action == "do_lick_socket"):
+		processTime(3*60)
+
 	if(_action == "avoid_lewds_completely"):
 		processTime(3*60)
 		GM.pc.addLust(70)
+
+	if(_action == "socket_cums_on_pc"):
+		processTime(3*60)
+		GM.pc.cummedOnBy("socket", FluidSource.Vagina, 0.3)
+		GM.pc.cummedInMouthBy("socket", FluidSource.Vagina, 0.2)
+		socketCame = true
 
 	setState(_action)
 
@@ -241,6 +341,7 @@ func saveData():
 	var data = .saveData()
 
 	data["rewardLewd"] = rewardLewd
+	data["socketCame"] = socketCame
 
 	return data
 
@@ -248,3 +349,4 @@ func loadData(data):
 	.loadData(data)
 
 	rewardLewd = SAVE.loadVar(data, "rewardLewd", false)
+	socketCame = SAVE.loadVar(data, "socketCame", false)
