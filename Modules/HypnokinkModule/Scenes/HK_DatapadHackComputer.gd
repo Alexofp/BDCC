@@ -184,12 +184,12 @@ func reactToCommandCage(_command: String, _args:Array, _commandStringRaw:String)
 			var id = _args[0]
 			if(id in strMap.keys()):
 				learnCommand(strMap[id][1])
-				return "Memorised string '" + strMap[id][1] + "'."
+				return "String '" + strMap[id][1] + "' added to command buttons."
 			else:
 				return "Invalid parameter."
 		elif(_args.size() == 0):
 			var outstr = "This trial version of strscan is limited to only the first 15 results.\n"+\
-					"Run strscan again with the id of the string you'd like to memorise as the first parameter.\n\n[font=res://Fonts/smallconsolefont.tres]"+\
+					"Run strscan again with the id of the string you'd like to add to your command buttons as the first parameter.\n\n[font=res://Fonts/smallconsolefont.tres]"+\
 					"[color=#AAFFFF]ID location string[/color]\n"
 			for key in strMap:
 				outstr += key + " " + strMap[key][0] + ":  '" + strMap[key][1] + "'\n"
