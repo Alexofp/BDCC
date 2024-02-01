@@ -5,6 +5,10 @@ func getFlags():
 		"askedWhyWorkHere": flag(FlagType.Bool),
 		"touchedPussy": flag(FlagType.Bool),
 		
+		"removedWombImplant": flag(FlagType.Bool),
+		"socketWillPunish": flag(FlagType.Bool),
+		"punishReason": flag(FlagType.Text), # stuckroughfuck
+		
 		"ch1HelpedTimes": flag(FlagType.Number),
 	}
 
