@@ -3,7 +3,7 @@ extends SceneBase
 var fuckedPussy = false
 
 func _init():
-	sceneID = "SocketHelp2Mineshaft"
+	sceneID = "SocketHelp2Scene"
 
 func _run():
 	if(state == ""):
@@ -366,7 +366,7 @@ func _run():
 		addButton("Switch to pussy", "Might as well leave her ass as is", "socket_rouch_ass_pussy")
 	if(state == "socket_rough_ass_keepgoing"):
 		# (( Sex anim
-		saynn("Nope, the bitch wasn't begging good enough for you to reconsider. You ignore her whining and keep pushing through, slapping and scratching her thighs as she keeps trying to push you back with her legs.")
+		saynn("Nope, Socket wasn't begging good enough for you to reconsider. You ignore her whining and keep pushing through, slapping and scratching her thighs as she keeps trying to push you back with her legs.")
 
 		saynn("[say=socket]Don't do it, please! Agh!..[/say]")
 
@@ -491,8 +491,8 @@ func _run():
 
 		addButton("Save her", "Enough lewding", "help_lewd_save")
 		addButton("Finger her", "Do a little more than just groping", "help_lewd_finger")
-		addButton("Use her pussy", "Might as well enjoy her pussy first", "help_lewd_pussy")
-		addButton("Use her ass", "Might as well enjoy her ass first", "help_lewd_ass")
+		addButtonWithChecks("Use her pussy", "Might as well enjoy her pussy first", "help_lewd_pussy", [], [[ButtonChecks.HasReachablePenis]])
+		addButtonWithChecks("Use her ass", "Might as well enjoy her ass first", "help_lewd_ass", [], [[ButtonChecks.HasReachablePenis]])
 	if(state == "help_lewd_save"):
 		playAnimation(StageScene.Duo, "stand", {npc="socket"})
 		saynn("After properly groping Socket's butt for some time, you decide that it's time to get the poor girl out of there. You reach your hand into the vent and push on her armored shoulder pads in the right place.. causing it to finally release her!")
@@ -573,6 +573,129 @@ func _run():
 		saynn("[say=pc]Hah.[/say]")
 
 		addButton("Continue", "See what happens next", "unlock_fast_travel")
+	if(state == "help_lewd_pussy"):
+		# ((inside anim
+		saynn("Nah, you can always save her later. For now, you might as well do something else. Looking at Socket stuck in the vent like that.. made you quite hard. Why not let some steam out?")
+
+		saynn("Casually, you position yourself behind her and align your {pc.penis} with her exposed tight lips. Brushing the tip against them doesn't seem to cause any resistance. You feel.. warmth.. radiating from her love tunnel.")
+
+		saynn("[say=socket]It's dirty here, so much dust..[/say]")
+
+		saynn("Without any warning, you slowly enter her, your cock spreading her slit wide and coating the walls with its precum. Her legs are closed, meaning her pussy feels tight..")
+
+		saynn("[say=pc]Oh yeah?[/say]")
+
+		saynn("[say=socket]Yeah, I should have grabbed a cleaner.[/say]")
+
+		saynn("Socket seems to be content with you being inside her. She even moves her tail out of the way.")
+
+		addButton("Fuck her", "Start moving your hips", "help_lewd_pussy_fuck")
+	if(state == "help_lewd_pussy_fuck"):
+		# ((sex anim
+		var removedImplant = getFlag("SocketModule.removedWombImplant", false)
+		if (!removedImplant):
+			saynn("And so you start moving your hips, fucking her at a slow pace, your dick exploring her depths. You don't go too deep so you don't break your dick on whatever she has in her womb.. but it still feels good, her slick pussy walls hug your length nicely.")
+
+		else:
+			saynn("And so you start moving your hips, fucking her at a slow pace, your dick exploring her depths. It feels good, her slick pussy walls hug your length nicely.")
+
+		saynn("[say=pc]So you're saying that you're not a dirty girl?[/say]")
+
+		saynn("[say=socket]Yeah, sure. I prefer to keep everything nice and clean![/say]")
+
+		saynn("Her breathing gets a little deeper as you keep thrusting inside, little noises of pleasure escape her, the reverb making them sound richer.")
+
+		saynn("[say=pc]Might I ask a personal question?[/say]")
+
+		saynn("[say=socket]Sure-e![/say]")
+
+		addButton("Faster", "Fuck her faster", "help_lewd_pussy_fast")
+	if(state == "help_lewd_pussy_fast"):
+		# ((fast anim
+		saynn("You grip her hips harder and increase the pace, your hips slapping against her fluffy butt, your cock getting stimulated by her clenching slit.")
+
+		saynn("[say=pc]So that means that during sex, you prefer to keep everything.. inside?[/say]")
+
+		saynn("[say=socket]Of course.. ah.. internal cumshots are the best. I don't have to groom my fur then![/say]")
+
+		saynn("Discussing such a lewd topic so casually. Guess you better listen to her and not pull out.")
+
+		saynn("[say=pc]Makes sense. I will try to avoid making a mess then.[/say]")
+
+		saynn("[say=socket]Oh, thank you, you're so nice! Ah..[/say]")
+
+		saynn("You can feel shivers going through her body, her lower part of the body is squirming a bit.. as much as the firm frame of the vent allows it.")
+
+		saynn("Your orgasm draws near too..")
+
+		addButton("Cum inside", "Breed that fennec", "help_lewd_pussy_cum")
+	if(state == "help_lewd_pussy_cum"):
+		# (( inside anim
+		saynn("..and rather than pulling out, you decide to commit to it and thrust deep inside! You hear cute moans and feel a girl squirming before you, her pussy quivering and kneading your cock tightly as you start pumping her full of your {pc.cum}!")
+
+		saynn("[say=socket]Ah..[/say]")
+
+		saynn("The more your {pc.penis} throbs inside her, the more she tries to stand on the tip of her boots, which frees her shoulder pads from being stuck!")
+
+		saynn("[say=socket]Oh.. It worked!.. Ah.. I'm free![/say]")
+
+		saynn("You leave your cock inside, using the girl as a cock warmer.")
+
+		saynn("[say=pc]Who would have thought.[/say]")
+
+		saynn("[say=socket]Yeah, sex is often the solution![/say]")
+
+		addButton("Get her out", "Help Socket", "help_lewd_pussy_help")
+	if(state == "help_lewd_pussy_help"):
+		playAnimation(StageScene.Duo, "stand", {npc="socket"})
+		saynn("After some time, you finally pull out, allowing that stuffed used pussy to start leaking your seed. Then you just help Socket to get out.")
+
+		saynn("[say=pc]There you go.[/say]")
+
+		saynn("Socket swipes the dust off her fur, her legs still shaking a little.")
+
+		saynn("[say=socket]Thanks for the help! It was getting quite hot there.[/say]")
+
+		saynn("[say=pc]Hah.[/say]")
+
+		addButton("Continue", "See what happens next", "unlock_fast_travel")
+	if(state == "help_lewd_ass"):
+		# ((tease anim
+		saynn("Nah, you can always save her later. For now, you might as well do something else. Looking at Socket stuck in the vent like that.. made you quite hard. Why not let some steam out?")
+
+		saynn("Casually, you position yourself behind her and align your {pc.penis} with her exposed virgin-tight tailhole. But as soon as your member prods her it.. Socket pulls her butt away, her tail covering it.")
+
+		saynn("[say=socket]Wrong hole![/say]")
+
+		saynn("[say=pc]Is it?[/say]")
+
+		saynn("She shakes her butt at you.")
+
+		saynn("[say=socket]Yeah, it's not for sex![/say]")
+
+		saynn("Huh, what if you go slow though.. You move her tail out of the way and push more pressure on her ass.. but that only makes her push you back with her legs.")
+
+		saynn("[say=socket]Please? You can use the other one![/say]")
+
+		saynn("You can try to force her.. but you'd have to be rough, the girl seems to be resisting anal a lot.")
+
+		addButton("Force anal", "Be rough with her", "socket_rough_ass_keepgoing")
+		addButton("Switch to pussy", "Listen to her", "help_lewd_ass_switch")
+	if(state == "help_lewd_ass_switch"):
+		# (( inside anim
+		saynn("Sure, you decide to listen to the girl and lower your cock to her pussy. Brushing the tip against her moist petals doesn't seem to cause any resistance this time. You feel.. warmth.. radiating from her love tunnel.")
+
+		saynn("[say=socket]Thanks.. It's dirty here, so much dust..[/say]")
+
+		saynn("Without much warning, you slowly enter her, your cock spreading her slit wide and coating the walls with its precum. Her legs are closed, meaning her pussy feels very tight..")
+
+		saynn("[say=pc]Oh yeah?[/say]")
+
+		saynn("[say=socket]Yeah, I should have grabbed a cleaner.[/say]")
+
+		saynn("Socket seems to be content with you being inside her. She even moves her tail completely out of the way.")
+
+		addButton("Fuck her", "Start moving your hips", "help_lewd_pussy_fuck")
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
@@ -645,9 +768,26 @@ func _react(_action: String, _args):
 		processTime(5*60)
 
 	if(_action == "help_lewd_pussy"):
+		processTime(3*60)
 		fuckedPussy = true
 
+	if(_action == "help_lewd_ass"):
+		processTime(3*60)
+
 	if(_action == "help_lewd_finger_help"):
+		processTime(3*60)
+
+	if(_action == "help_lewd_pussy_fuck"):
+		processTime(5*60)
+
+	if(_action == "help_lewd_pussy_fast"):
+		processTime(3*60)
+
+	if(_action == "help_lewd_pussy_cum"):
+		processTime(5*60)
+		getCharacter("socket").cummedInVaginaBy("pc")
+
+	if(_action == "help_lewd_pussy_help"):
 		processTime(3*60)
 
 	setState(_action)
