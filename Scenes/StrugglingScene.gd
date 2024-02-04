@@ -51,7 +51,11 @@ func _run():
 			
 			sayn(item.getVisibleName()+", restraint level: "+restraintData.getVisibleLevel(isBlind))
 			#sayn("- Durability: "+restraintData.getVisibleDurability())
-			saynn("- Tightness: "+restraintData.getVisibleTightness()+" ("+restraintData.getTightnessPercentString()+")")
+			if restraintData.isLocked():
+				sayn("- Tightness: "+restraintData.getVisibleTightness()+" ("+restraintData.getTightnessPercentString()+")")
+				saynn("- Is locked: "+restraintData.getVisibleLockStrength()+" ("+restraintData.getLockPercentString()+")")
+			else:
+				saynn("- Tightness: "+restraintData.getVisibleTightness()+" ("+restraintData.getTightnessPercentString()+")")
 			
 			if(!restraintData.canStruggle()):
 				continue
@@ -210,6 +214,20 @@ func _run():
 			addButton("No", "Throw it away", "getridandcheckifokay")
 		else:
 			addButton("Continue", "Okay", "checkifokay")
+
+	if state == "pickSomething":
+		saynn(struggleText)
+		
+		if additionalStruggleText != "":
+			saynn(additionalStruggleText)
+		
+		if canKeepTheRestraint:
+			saynn("Do you wanna keep it?")
+			
+			addButton("Keep it", "Keep the restraint in your inventory", "checkifokay")
+			addButton("No", "Throw it away", "getridandcheckifokay")
+		else:
+			addButton("Continue", "Okay", "checkifokay")
 		
 
 	if(state == "orgasm"):
@@ -246,10 +264,10 @@ func onMinigameCompleted(result):
 	GM.main.pickOption("struggleAgainst", [restraintID, result])
 
 func onPickMinigameCompleted(result):
-	GM.main.pickOption("struggleAgainst", [restraintID, result])
+	GM.main.pickOption("pickSomething", [restraintID, result])
 
 func onCutMinigameCompleted(result):
-	GM.main.pickOption("struggleAgainst", [restraintID, result])
+	GM.main.pickOption("cutSomething", [restraintID, result])
 
 		
 func _react(_action: String, _args):
@@ -300,6 +318,7 @@ func _react(_action: String, _args):
 				finalMinigameStatus = 0.0
 		
 		var damage = 0.0
+		var lockDamage = 0.0
 		var addLust = 0
 		var addPain = 0
 		var addStamina = 0
@@ -314,6 +333,8 @@ func _react(_action: String, _args):
 			damage = struggleData["damage"] * abs(minigameStatus)
 			if(damage > 0.0 && instantUnlock):
 				damage = 1.0
+		if struggleData.has("lockDamage"):
+			lockDamage = struggleData["lockDamage"]
 		if(struggleData.has("lust") && struggleData["lust"] > 0):
 			addLust = struggleData["lust"]
 		if(struggleData.has("pain") && struggleData["pain"] > 0):
@@ -326,6 +347,7 @@ func _react(_action: String, _args):
 		if(!fightMode):
 			var turnData = GM.pc.processStruggleTurn(true)
 			damage += turnData["damage"]
+			lockDamage += turnData["lockDamage"]
 			addLust += turnData["lust"]
 			addPain += turnData["pain"]
 			addStamina += turnData["stamina"]
@@ -337,6 +359,13 @@ func _react(_action: String, _args):
 			if fightMode:
 				mult = 5
 			GM.pc.addSkillExperience(Skill.BDSM, restraintData.getLevel() * mult)
+
+		if damage > 0 && restraintData.isLocked():
+			damage = damage/10.0
+			if damage > 0.05:
+				damage = 0.05
+				lockDamage = 0.02
+			addMessage("Surely it would have been done better if only it was not locked.")
 			
 		if(fatallFail):
 			addMessage("You tried really hard but you completely failed.")
@@ -345,6 +374,7 @@ func _react(_action: String, _args):
 			addMessage("You lost "+str(Util.roundF(-damage*100.0, 1))+"% of progress")
 		if(damage > 0.0):
 			restraintData.takeDamage(damage)
+			restraintData.takeLockDamage(lockDamage)
 			addMessage("You made "+str(Util.roundF(damage*100.0, 1))+"% of progress ("+str(Util.roundF(finalMinigameStatus*100.0, 1))+"% efficiency)")
 		if(addLust != 0):
 			addLust = GM.pc.receiveDamage(DamageType.Lust, addLust)
@@ -373,6 +403,79 @@ func _react(_action: String, _args):
 				keptRestraintID = item.getUniqueID()
 		
 		processTime(1*60)
+
+
+	if _action == "pickSomething":
+		var item = GM.pc.getInventory().getItemByUniqueID(_args[0])
+		var restraintData: RestraintData = item.getRestraintData()
+		var minigameStatus = 1.0
+		
+		if(_args.size() > 1):
+			minigameStatus = float(_args[1])
+					
+		var damage = 0.0
+		var lockDamage = 0.0
+		var addLust = 0
+		var addPain = 0
+		var addStamina = 0
+
+		var _data = restraintData.doLockpick(GM.pc, minigameStatus)
+
+		if _data.has("damage"):
+			damage = _data["damage"]
+		if _data.has("lockDamage"):
+			lockDamage = _data["lockDamage"]
+		if _data.has("lust"):
+			addLust = _data["lust"]
+		if _data.has("pain"):
+			addPain = _data["pain"]
+		if _data.has("stamina"):
+			addStamina = _data["stamina"]
+		
+		struggleText = _data["text"]
+		
+		if(!fightMode):
+			var _turnData = GM.pc.processLockpickTurn(true)
+			damage += _turnData["damage"]
+			lockDamage += _turnData["lockDamage"]
+			addLust += _turnData["lust"]
+			addPain += _turnData["pain"]
+			addStamina += _turnData["stamina"]
+			additionalStruggleText = _turnData["text"]
+			
+		# no xp without progression more in combat
+		if lockDamage > 0.0:
+			var mult = 3
+			if fightMode:
+				mult = 5
+			GM.pc.addSkillExperience(Skill.BDSM, restraintData.getLevel() * mult)
+			
+		print(damage)
+		if lockDamage < 0.0:
+			restraintData.takeLockDamage(lockDamage)
+			addMessage("You lost "+str(Util.roundF(-lockDamage*100.0, 1))+"% of progress")
+		if lockDamage > 0.0:
+			restraintData.takeLockDamage(lockDamage)
+			addMessage("You made "+str(Util.roundF(lockDamage*100.0, 1))+"% of progress ("+str(Util.roundF(minigameStatus*100.0, 1))+"% efficiency)")
+		if addLust != 0:
+			addLust = GM.pc.receiveDamage(DamageType.Lust, addLust)
+			addMessage("You received "+str(addLust)+" lust")
+		if addPain != 0:
+			addPain = GM.pc.receiveDamage(DamageType.Physical, addPain)
+			addMessage("You received "+str(addPain)+" pain")
+		if addStamina != 0:
+			GM.pc.addStamina(-addStamina)
+			if addStamina < 0:
+				addMessage("You gained "+str(-addStamina)+" stamina")
+			else:
+				addMessage("You used "+str(addStamina)+" stamina")
+		
+		if(!restraintData.isLocked()):
+			struggleText += "\n[b]"+restraintData.getLockpickedMessage()+"[/b]"
+			restraintData.onLockPicked()
+		
+		processTime(1*60)
+
 		
 	if(_action == "getridandcheckifokay"):
 		var item = GM.pc.getInventory().getItemByUniqueID(keptRestraintID)

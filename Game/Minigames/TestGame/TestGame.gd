@@ -1,5 +1,7 @@
 extends Control
 
+# testing game for dev
+
 signal minigameCompleted(finalScore)
 
 var finalScore = 0
@@ -9,7 +11,7 @@ func _ready():
 
 
 func setDifficulty(level):
-	print("Level: "+ level)
+	print("Level: " + str(level))
 
 
 func _process(_delta):
@@ -23,11 +25,11 @@ func _on_Buttonpass_pressed():
 	
 func _on_Buttonfail_pressed():
 	print("fail")
-	finalScore = 99
+	finalScore = 0
 	emit_signal("minigameCompleted", finalScore)
 
 func _on_Buttoncustom_pressed():
 	print("custom")
-	finalScore =  get_node("LineEdit-result").get_text()
+	finalScore = get_node("LineEdit-result").get_text()
 	print(finalScore)
 	emit_signal("minigameCompleted", finalScore)
