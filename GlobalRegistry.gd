@@ -376,6 +376,7 @@ func registerEverything():
 	
 	if(true):
 		var start2 = OS.get_ticks_usec()
+		registerStageSceneFolder("res://Player/StageScene3D/Scenes2/")
 		registerStageSceneFolder("res://Player/StageScene3D/Scenes/")
 		var end2 = OS.get_ticks_usec()
 		var worker_time2 = (end2-start2)/1000000.0
