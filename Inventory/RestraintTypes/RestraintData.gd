@@ -170,6 +170,9 @@ func getTightnessPercentString():
 
 func canUnlockWithKey():
 	return true
+
+func canBeCut():
+	return false
 	
 func alwaysSavedWhenStruggledOutOf():
 	return false

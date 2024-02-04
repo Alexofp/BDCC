@@ -14,6 +14,8 @@ var shouldPlayAnimations = true
 
 #var minigameScene = preload("res://Game/Minigames/Struggling/StrugglingGame.tscn")
 var minigameScene = preload("res://Game/Minigames/ClickAtTheRightTime/ClickAtTheRightTime.tscn")
+var pickMinigameScene = preload("res://Game/Minigames/TestGame/TestGame.tscn")
+var cutMinigameScene = preload("res://Game/Minigames/TestGame/TestGame.tscn")
 
 func _init():
 	sceneID = "StrugglingScene"
@@ -38,10 +40,10 @@ func _run():
 		var isBlind = GM.pc.isBlindfolded()
 		saynn("Pick the restraint you wanna focus on. Keep in mind that some restraints will be harder to remove depending on what you have on. Crying from pain or moaning loudly from an orgasm will probably attract someone")
 		
-		if(GM.pc.getInventory().hasItemID("restraintkey")):
-			addButtonAt(13, "Use key", "Use one of your restraint keys to unlock something", "usekey")
+		if(GM.pc.getInventory().hasItemID("restraintkey") || GM.pc.getInventory().hasItemID("lockPicker") || GM.pc.getInventory().hasItemID("safetyCutter")):
+			addButtonAt(13, "Use tool", "Use one of your tool to unlock something", "usetool")
 		else:
-			addDisabledButtonAt(13, "Use key", "You don't have any restraint keys")
+			addDisabledButtonAt(13, "Use tool", "You don't have any usable tool")
 		addButtonAt(14, "Give up", "Stop struggling", "endthescenedidnothing")
 		
 		for item in GM.pc.getInventory().getEquppedRestraints():
@@ -61,6 +63,50 @@ func _run():
 
 		
 		#generateActions()
+
+	if(state == "usetool"):
+		var keyAmount = GM.pc.getInventory().getAmountOf("restraintkey")
+		var pickerAmount = GM.pc.getInventory().getAmountOf("lockPicker")
+		var cutterAmount = GM.pc.getInventory().getAmountOf("safetyCutter")
+		if keyAmount > 0:
+			saynn("You have "+str(keyAmount)+" "+Util.multipleOrSingularEnding(keyAmount, "key")+". Each one can unlock one piece of gear.")
+			addButton("Key", "Use one of your key to unlock something", "usekey")
+		if pickerAmount > 0:
+			saynn("You have "+str(pickerAmount)+" "+Util.multipleOrSingularEnding(keyAmount, "lock pick")+". Each one can pick a lock on one piece of gear.")
+			addButton("Picker", "Use one of your lock pick to pick some lock", "usepicker")
+		if cutterAmount > 0:
+			saynn("You have "+str(cutterAmount)+" "+Util.multipleOrSingularEnding(keyAmount, "safety cutter")+". Each one can cut one piece of gear.")
+			addButton("Cutter", "Use one of your safety cutter to cut something", "usecutter")
+
+		saynn("Which one do you wanna use?")
+		addButton("Back", "You don't wanna use anything", "")
+
+	if(state == "usepicker"):
+		var pickerAmount = GM.pc.getInventory().getAmountOf("lockPicker")
+		saynn("You have "+str(pickerAmount)+" "+Util.multipleOrSingularEnding(pickerAmount, "lock pick")+". Each one can pick a lock on one piece of gear.")
+		saynn("Which restraint do you wanna lockpick.")
+
+		for item in GM.pc.getInventory().getEquppedRestraints():
+			var restraintData: RestraintData = item.getRestraintData()
+			if(!restraintData.canUnlockWithKey()):
+				addDisabledButton(item.getVisibleName(), "This restraint doesn't seem to have a keyhole")
+				continue
+			addButton(item.getVisibleName(), item.getVisisbleDescription(), "dolockpick", [item.getUniqueID()])
+		addButton("Back", "You don't wanna lockpick anything", "usetool")
+
+	if(state == "usecutter"):
+		var cutterAmount = GM.pc.getInventory().getAmountOf("safetyCutter")
+		saynn("You have "+str(cutterAmount)+" "+Util.multipleOrSingularEnding(cutterAmount, "safety cutter")+". Each one can cut one piece of gear.")
+		saynn("Which restraint do you wanna cut.")
+
+		for item in GM.pc.getInventory().getEquppedRestraints():
+			var restraintData: RestraintData = item.getRestraintData()
+			if(!restraintData.canBeCut()):
+				addDisabledButton(item.getVisibleName(), "this type of restriction doesn't seem to have a good place to cut")
+				continue
+			addButton(item.getVisibleName(), item.getVisisbleDescription(), "docut", [item.getUniqueID()])
+		addButton("Back", "You don't wanna lockpick anything", "usetool")
+
 		
 	if(state == "usekey"):
 		var keyAmount = GM.pc.getInventory().getAmountOf("restraintkey")
@@ -73,8 +119,41 @@ func _run():
 				addDisabledButton(item.getVisibleName(), "This restraint doesn't seem to have a keyhole")
 				continue
 			addButton(item.getVisibleName(), item.getVisisbleDescription(), "dounlock", [item.getUniqueID()])
-		addButton("Back", "You don't wanna unlock anything", "")
+		addButton("Back", "You don't wanna unlock anything", "usetool")
+	
+	if state == "pickminigame":
+		var item = GM.pc.getInventory().getItemByUniqueID(restraintID)
+		var restraintData: RestraintData = item.getRestraintData()
+		
+		if(shouldPlayAnimations):
+			var animToPlay = restraintData.getResistAnimation()
+			if(animToPlay != null && animToPlay != ""):
+				playAnimation(StageScene.Solo, animToPlay)
+		
+		var game = pickMinigameScene.instance()
+		GM.ui.addCustomControl("minigame", game)		
 
+		game.setDifficulty(restraintData.getLevel())
+		game.connect("minigameCompleted", self, "onPickMinigameCompleted")
+		addButton("Give up", "Give it up and lose 10 stamina", "giveupstruggle")
+	
+	if state == "cutminigame":
+		var item = GM.pc.getInventory().getItemByUniqueID(restraintID)
+		var restraintData: RestraintData = item.getRestraintData()
+		
+		if(shouldPlayAnimations):
+			var animToPlay = restraintData.getResistAnimation()
+			if(animToPlay != null && animToPlay != ""):
+				playAnimation(StageScene.Solo, animToPlay)
+		
+		var game = pickMinigameScene.instance()
+		GM.ui.addCustomControl("minigame", game)		
+
+		game.setDifficulty(restraintData.getLevel())
+		game.connect("minigameCompleted", self, "onCutMinigameCompleted")
+		addButton("Give up", "Give it up and lose 10 stamina", "giveupstruggle")
+	
+	
 	if(state == "keyminigame"):
 		saynn("Since you can't use your fingers you have to carefully balance the key between your palms and guide it towards the lock.")
 		
@@ -165,6 +244,13 @@ func _run():
 
 func onMinigameCompleted(result):
 	GM.main.pickOption("struggleAgainst", [restraintID, result])
+
+func onPickMinigameCompleted(result):
+	GM.main.pickOption("struggleAgainst", [restraintID, result])
+
+func onCutMinigameCompleted(result):
+	GM.main.pickOption("struggleAgainst", [restraintID, result])
+
 		
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
@@ -311,6 +397,28 @@ func _react(_action: String, _args):
 		
 	if(_action == "spottedcheck"):
 		setState("notspotted")
+		return
+
+
+	if(_action == "dolockpick"):
+		restraintID = _args[0]
+		var item = GM.pc.getInventory().getItemByUniqueID(restraintID)
+		var _restraintData: RestraintData = item.getRestraintData()
+		
+		GM.pc.getInventory().removeXOfOrDestroy("lockPicker", 1)
+		keyText = ""
+		setState("pickminigame")
+		return
+
+
+	if(_action == "docut"):
+		restraintID = _args[0]
+		var item = GM.pc.getInventory().getItemByUniqueID(restraintID)
+		var _restraintData: RestraintData = item.getRestraintData()
+		
+		GM.pc.getInventory().removeXOfOrDestroy("safetyCutter", 1)
+		keyText = ""
+		setState("cutminigame")
 		return
 		
 	if(_action == "dounlock"):
