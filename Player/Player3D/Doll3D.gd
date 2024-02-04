@@ -512,6 +512,9 @@ func playAnimation(animName, blend = 0.1, speed = 1.0):
 func getAnimPlayer():
 	return $DollSkeleton/AnimationPlayer
 
+func getAnimPlayer2():
+	return $DollSkeleton2/AnimationPlayer
+
 func setArmsCuffed(newcuffed):
 	armsCuffed = newcuffed
 	
