@@ -1,0 +1,44 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Game/Minigames/TestGame/TestGame.gd" type="Script" id=1]
+
+[node name="Node2D" type="Control"]
+script = ExtResource( 1 )
+
+[node name="Label -TEST" type="Label" parent="."]
+margin_left = 208.0
+margin_top = 80.0
+margin_right = 364.0
+margin_bottom = 94.0
+text = "Testing minigame"
+
+[node name="Button-pass" type="Button" parent="."]
+margin_left = 144.0
+margin_top = 176.0
+margin_right = 187.0
+margin_bottom = 196.0
+text = "PASS"
+
+[node name="Button-fail" type="Button" parent="."]
+margin_left = 336.0
+margin_top = 176.0
+margin_right = 376.0
+margin_bottom = 196.0
+text = "FAIL"
+
+[node name="Button-custom" type="Button" parent="."]
+margin_left = 232.0
+margin_top = 176.0
+margin_right = 293.0
+margin_bottom = 196.0
+text = "Custom"
+
+[node name="LineEdit-result" type="LineEdit" parent="."]
+margin_left = 232.0
+margin_top = 120.0
+margin_right = 290.0
+margin_bottom = 144.0
+
+[connection signal="pressed" from="Button-pass" to="." method="_on_Buttonpass_pressed"]
+[connection signal="pressed" from="Button-fail" to="." method="_on_Buttonfail_pressed"]
+[connection signal="pressed" from="Button-custom" to="." method="_on_Buttoncustom_pressed"]
