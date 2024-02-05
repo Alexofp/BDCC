@@ -202,7 +202,7 @@ func _run():
 		addButton("Give up", "Give up the struggle and lose 10 stamina", "giveupstruggle")
 
 
-	if(state == "struggleAgainst"):
+	if state == "struggleAgainst" || state == "pickSomething" || state == "cutSomething":
 		saynn(struggleText)
 		
 		if(additionalStruggleText != ""):
@@ -216,34 +216,6 @@ func _run():
 		else:
 			addButton("Continue", "Okay", "checkifokay")
 
-	if state == "pickSomething":
-		saynn(struggleText)
-		
-		if additionalStruggleText != "":
-			saynn(additionalStruggleText)
-		
-		if canKeepTheRestraint:
-			saynn("Do you wanna keep it?")
-			
-			addButton("Keep it", "Keep the restraint in your inventory", "checkifokay")
-			addButton("No", "Throw it away", "getridandcheckifokay")
-		else:
-			addButton("Continue", "Okay", "checkifokay")
-
-	if state == "cutSomething":
-		saynn(struggleText)
-		
-		if additionalStruggleText != "":
-			saynn(additionalStruggleText)
-		
-		if canKeepTheRestraint:
-			saynn("Do you wanna keep it?")
-			
-			addButton("Keep it", "Keep the restraint in your inventory", "checkifokay")
-			addButton("No", "Throw it away", "getridandcheckifokay")
-		else:
-			addButton("Continue", "Okay", "checkifokay")
-		
 
 	if(state == "orgasm"):
 		saynn("It's too much, you arch your back and moan loudly as you cum. You were so loud that someone might have heard that. (Temporary text)")
@@ -411,11 +383,21 @@ func _react(_action: String, _args):
 			restraintData.onStruggleRemoval()
 			GM.pc.getInventory().removeEquippedItem(item)
 			
-			if(!restraintData.alwaysBreaksWhenStruggledOutOf() && (GM.pc.hasPerk(Perk.BDSMCollector) || restraintData.alwaysSavedWhenStruggledOutOf())):
+			if restraintData.alwaysBreaksWhenStruggledOutOf():
+				canKeepTheRestraint = false
+			elif restraintData.alwaysSavedWhenStruggledOutOf():
 				canKeepTheRestraint = true
-			
-				GM.pc.getInventory().addItem(item)
-				keptRestraintID = item.getUniqueID()
+			else:
+				# strugling can damage the bondage gear
+				var _newLevel = int(RNG.randf_rangeAdv(0, restraintData.getLevel()))
+				if GM.pc.hasPerk(Perk.BDSMCollector) && RNG.chance(50):
+					 _newLevel = restraintData.getLevel()
+
+				if _newLevel >= 1:
+					canKeepTheRestraint = true
+					restraintData.setLevel(restraintData.getLevel())
+					GM.pc.getInventory().addItem(item)
+					keptRestraintID = item.getUniqueID()
 		
 		processTime(1*60)
 
@@ -562,10 +544,18 @@ func _react(_action: String, _args):
 			restraintData.onStruggleRemoval()
 			GM.pc.getInventory().removeEquippedItem(item)
 			
-			if !restraintData.alwaysBreaksWhenStruggledOutOf() && restraintData.alwaysSavedWhenStruggledOutOf():
+			if restraintData.alwaysBreaksWhenStruggledOutOf():
+				canKeepTheRestraint = false
+			elif restraintData.alwaysSavedWhenStruggledOutOf():
 				canKeepTheRestraint = true
-				GM.pc.getInventory().addItem(item)
-				keptRestraintID = item.getUniqueID()
+			# ripping usually destroys the bondage gear
+			elif GM.pc.hasPerk(Perk.BDSMCollector) && RNG.chance(50):
+				var _newLevel = int(RNG.randf_rangeAdv(-1, restraintData.getLevel()))
+				if _newLevel >= 1:
+					canKeepTheRestraint = true
+					restraintData.setLevel(restraintData.getLevel())
+					GM.pc.getInventory().addItem(item)
+					keptRestraintID = item.getUniqueID()
 		
 		processTime(1*60)
 
