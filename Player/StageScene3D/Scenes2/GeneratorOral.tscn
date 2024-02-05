@@ -53,6 +53,7 @@ states/GeneratorLick_1-loop/node = SubResource( 477 )
 states/GeneratorLick_1-loop/position = Vector2( 456, 270 )
 transitions = [ "GeneratorLickTease_1-loop", "GeneratorLickStroke_1-loop", SubResource( 478 ), "GeneratorLickStroke_1-loop", "GeneratorLickTease_1-loop", SubResource( 479 ), "GeneratorLickStroke_1-loop", "GeneratorLick_1-loop", SubResource( 480 ), "GeneratorLick_1-loop", "GeneratorLickStroke_1-loop", SubResource( 481 ), "GeneratorLick_1-loop", "GeneratorLickFast_1-loop", SubResource( 482 ), "GeneratorLickFast_1-loop", "GeneratorLick_1-loop", SubResource( 483 ) ]
 start_node = "GeneratorLickTease_1-loop"
+graph_offset = Vector2( 21, -4 )
 
 [sub_resource type="AnimationNodeBlendTree" id=485]
 graph_offset = Vector2( -348.69, 38.9555 )
