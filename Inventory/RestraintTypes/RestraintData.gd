@@ -177,6 +177,8 @@ func doCut(_pc, _minigame):
 	var stamina = 10
 	var text = "You are looking a good place to cut, trying to rid off the " + getItem().getVisibleName()
 	
+	damage = _minigame
+	
 	return {"text": text, "damage": damage, "lockDamage": lockDamage, "lust": lust, "pain": pain, "stamina": stamina}
 
 
