@@ -141,7 +141,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "socket_gets_stuck")
 	if(state == "socket_gets_stuck"):
-		# (( Anim here
+		playAnimation(StageScene.SexVent, "tease", {pc="socket", npc="pc"})
 		saynn("Socket reaches further and further, trying to poke something that's far away with her wrench.")
 
 		saynn("[say=pc]Don't get stuck in it.[/say]")
@@ -261,7 +261,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "unlock_fast_travel")
 	if(state == "socket_rough_pussy"):
-		# (( Fuck anim here
+		playAnimation(StageScene.SexVent, "sex", {pc="socket", npc="pc", npcBodyState={exposedCrotch=true,hard=true}})
 		saynn("Fuck it, you're too horny and annoyed not to take advantage of that slut.")
 
 		saynn("You take a spot behind her and get a firm grasp on her ass with one hand while the other holds your hard cock ready, your eyes focussed on her pussy slit that she doesn't even try to hide, displaying it proudly for you.")
@@ -282,7 +282,7 @@ func _run():
 
 		addButton("Faster", "Use that girl for your pleasure", "socket_rough_pussy_fast")
 	if(state == "socket_rough_pussy_fast"):
-		# ((faster anim here
+		playAnimation(StageScene.SexVent, "fast", {pc="socket", npc="pc", npcBodyState={exposedCrotch=true,hard=true}})
 		var removedImplant = getFlag("SocketModule.removedWombImplant", false)
 		if (!removedImplant):
 			saynn("Your hips slap against her butt as you pick up the pace. Whatever Socket has in her womb, it doesn't allow you to penetrate her cervix. But your thrusts are enough to cause a bump on her belly anyway, little desperate moans begin to escape her lips.")
@@ -304,7 +304,7 @@ func _run():
 
 		addButton("Cum inside", "Breed the fennec", "socket_rough_pussy_cuminside")
 	if(state == "socket_rough_pussy_cuminside"):
-		# (( inside anim
+		playAnimation(StageScene.SexVent, "inside", {pc="socket", npc="pc", npcBodyState={exposedCrotch=true,hard=true}})
 		var removedImplant = getFlag("SocketModule.removedWombImplant", false)
 		if (!removedImplant):
 			saynn("She can't get pregnant anyway so you just push yourself over the edge with the last slow but rough thrusts, shoving your cock as deep as that pussy allows.")
@@ -339,7 +339,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "endthescene")
 	if(state == "socket_rough_ass"):
-		# (( inside anim here
+		playAnimation(StageScene.SexVent, "inside", {pc="socket", npc="pc", npcBodyState={exposedCrotch=true,hard=true}})
 		saynn("Fuck it, you're too horny and annoyed not to take advantage of that slut.")
 
 		saynn("You take a spot behind her and get a firm grasp on her ass with one hand while the other holds your hard cock ready. Rather than going for that obvious needy cunt, why not try her other hole? It looks much tighter, even when you spread her fluffy buttcheeks.")
@@ -365,7 +365,7 @@ func _run():
 		addButton("Ravage her ass", "Ignore her begging and keep going", "socket_rough_ass_keepgoing")
 		addButton("Switch to pussy", "Might as well leave her ass as is", "socket_rouch_ass_pussy")
 	if(state == "socket_rough_ass_keepgoing"):
-		# (( Sex anim
+		playAnimation(StageScene.SexVent, "sex", {pc="socket", npc="pc", npcBodyState={exposedCrotch=true,hard=true}})
 		saynn("Nope, Socket wasn't begging good enough for you to reconsider. You ignore her whining and keep pushing through, slapping and scratching her thighs as she keeps trying to push you back with her legs.")
 
 		saynn("[say=socket]Don't do it, please! Agh!..[/say]")
@@ -385,7 +385,7 @@ func _run():
 		saynn("It doesn't take long for you to already start feeling the orgasm approaching, Socket's inner walls are just refusing to stop gripping your cock, resulting in a lot of friction. You pound that ass hard, forcing more and more of those little painful noises out of her.")
 
 		addButton("Cum inside", "Stuff her ass", "socket_rough_ass_keepgoing")
-		# ((inside anim
+		playAnimation(StageScene.SexVent, "inside", {pc="socket", npc="pc", npcBodyState={exposedCrotch=true,hard=true}})
 		saynn("With one last powerful thrust of your hips, you grunt as your cock starts throbbing and pumping Socket's ass full of your {pc.cum}, its wall milking your balls for each last drop.")
 
 		saynn("[say=socket]Huf-f-f.. You're gonna regret it..[/say]")
@@ -404,7 +404,7 @@ func _run():
 
 		addButton("Leave", "Time to go", "unlock_fasttravel_rough")
 	if(state == "socket_rouch_ass_pussy"):
-		# ((sex anim
+		playAnimation(StageScene.SexVent, "sex", {pc="socket", npc="pc", npcBodyState={exposedCrotch=true,hard=true}})
 		saynn("She is begging you, how can you say no?")
 
 		saynn("So, after a few seconds of deliberating, you pull your cock out of her tight ass and instead shove your it into her pussy, the tip spreading her petals as you slide inside without a warning.")
@@ -421,7 +421,7 @@ func _run():
 
 		addButton("Faster", "Increase the pace", "socket_rouch_ass_pussy_fast")
 	if(state == "socket_rouch_ass_pussy_fast"):
-		# (( fast anim
+		playAnimation(StageScene.SexVent, "fast", {pc="socket", npc="pc", npcBodyState={exposedCrotch=true,hard=true}})
 		saynn("You increase the pace, your hips slapping against her fluffy butt with a soft noise. More moans begin to escape from Socket, her pussy coating your dick with plenty of juice, allowing you to pound her like that.")
 
 		saynn("[say=socket]You're so rough..[/say]")
@@ -442,7 +442,7 @@ func _run():
 
 		addButton("Cum inside", "Stuff that pussy!", "socket_rouch_ass_pussy_cum")
 	if(state == "socket_rouch_ass_pussy_cum"):
-		# (( inside anim
+		playAnimation(StageScene.SexVent, "inside", {pc="socket", npc="pc", npcBodyState={exposedCrotch=true,hard=true}})
 		saynn("While Socket is still experiencing the orgasmic bliss, you ram your dick deep inside and let her pussy bring you over the edge.")
 
 		saynn("More grunting.. followed by your balls tensing up.. your cock releasing its load inside her needy slit in waves, during each throb.")
@@ -505,7 +505,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "unlock_fast_travel")
 	if(state == "help_lewd_finger"):
-		# (( Lewd anim probably
+		playAnimation(StageScene.SexVent, "finger", {pc="socket", npc="pc"})
 		saynn("Nah, you can always save her later. For now, you might as well do something else.")
 
 		var removedImplant = getFlag("SocketModule.removedWombImplant", false)
@@ -574,7 +574,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "unlock_fast_travel")
 	if(state == "help_lewd_pussy"):
-		# ((inside anim
+		playAnimation(StageScene.SexVent, "inside", {pc="socket", npc="pc", npcBodyState={exposedCrotch=true,hard=true}})
 		saynn("Nah, you can always save her later. For now, you might as well do something else. Looking at Socket stuck in the vent like that.. made you quite hard. Why not let some steam out?")
 
 		saynn("Casually, you position yourself behind her and align your {pc.penis} with her exposed tight lips. Brushing the tip against them doesn't seem to cause any resistance. You feel.. warmth.. radiating from her love tunnel.")
@@ -591,7 +591,7 @@ func _run():
 
 		addButton("Fuck her", "Start moving your hips", "help_lewd_pussy_fuck")
 	if(state == "help_lewd_pussy_fuck"):
-		# ((sex anim
+		playAnimation(StageScene.SexVent, "sex", {pc="socket", npc="pc", npcBodyState={exposedCrotch=true,hard=true}})
 		var removedImplant = getFlag("SocketModule.removedWombImplant", false)
 		if (!removedImplant):
 			saynn("And so you start moving your hips, fucking her at a slow pace, your dick exploring her depths. You don't go too deep so you don't break your dick on whatever she has in her womb.. but it still feels good, her slick pussy walls hug your length nicely.")
@@ -611,7 +611,7 @@ func _run():
 
 		addButton("Faster", "Fuck her faster", "help_lewd_pussy_fast")
 	if(state == "help_lewd_pussy_fast"):
-		# ((fast anim
+		playAnimation(StageScene.SexVent, "fast", {pc="socket", npc="pc", npcBodyState={exposedCrotch=true,hard=true}})
 		saynn("You grip her hips harder and increase the pace, your hips slapping against her fluffy butt, your cock getting stimulated by her clenching slit.")
 
 		saynn("[say=pc]So that means that during sex, you prefer to keep everything.. inside?[/say]")
@@ -630,7 +630,7 @@ func _run():
 
 		addButton("Cum inside", "Breed that fennec", "help_lewd_pussy_cum")
 	if(state == "help_lewd_pussy_cum"):
-		# (( inside anim
+		playAnimation(StageScene.SexVent, "inside", {pc="socket", npc="pc", npcBodyState={exposedCrotch=true,hard=true}})
 		saynn("..and rather than pulling out, you decide to commit to it and thrust deep inside! You hear cute moans and feel a girl squirming before you, her pussy quivering and kneading your cock tightly as you start pumping her full of your {pc.cum}!")
 
 		saynn("[say=socket]Ah..[/say]")
@@ -682,7 +682,7 @@ func _run():
 		addButton("Force anal", "Be rough with her", "socket_rough_ass_keepgoing")
 		addButton("Switch to pussy", "Listen to her", "help_lewd_ass_switch")
 	if(state == "help_lewd_ass_switch"):
-		# (( inside anim
+		playAnimation(StageScene.SexVent, "inside", {pc="socket", npc="pc", npcBodyState={exposedCrotch=true,hard=true}})
 		saynn("Sure, you decide to listen to the girl and lower your cock to her pussy. Brushing the tip against her moist petals doesn't seem to cause any resistance this time. You feel.. warmth.. radiating from her love tunnel.")
 
 		saynn("[say=socket]Thanks.. It's dirty here, so much dust..[/say]")

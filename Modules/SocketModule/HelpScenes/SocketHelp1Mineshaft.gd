@@ -141,7 +141,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "socket_climbs_generator")
 	if(state == "socket_climbs_generator"):
-		# (( play custom anim here
+		playAnimation(StageScene.GeneratorOral, "tease", {pc="socket", npc="pc"})
 		saynn("Socket climbs the generator and turns towards the light fixture. As she does that, you realize that her crotch is now exactly at your eye level, her exposed pussy is directly up in your face.. You can't look away too, you have to hold the generator still so she doesn't fall..")
 
 		saynn("You're not sure if you should look away though. Socket doesn't seem to mind, she is busy removing the old light. The cave is not fully lit.. but it's enough to make out her folds.. they're so close too. All things considered.. maybe she wouldn't mind?")
@@ -149,6 +149,7 @@ func _run():
 		addButton("Just stand still", "Avoid doing anything to Socket while she is in this position", "avoid_lewds")
 		addButton("Breathe on it", "Breathe on Socket's pussy warmly and see what happens", "breathe_warmly")
 	if(state == "breathe_warmly"):
+		playAnimation(StageScene.GeneratorOral, "stroke", {pc="socket", npc="pc"})
 		saynn("Seeing Socket's pussy from up so close.. makes you wonder how she would react to this..")
 
 		saynn("You lean a little closer to it and just.. breath warmly over the sensitive folds.")
@@ -181,7 +182,7 @@ func _run():
 		addButton("Avoid thinking", "Shut down completely but avoid thinking about that pussy", "avoid_lewds_completely")
 		addButton("Dig into it!", "Who cares. Stick your face into her crotch!", "do_lick_socket")
 	if(state == "do_lick_socket"):
-		# (( Anim here
+		playAnimation(StageScene.GeneratorOral, "lick", {pc="socket", npc="pc"})
 		saynn("Ah, what the hell, what's the worst that can happen.")
 
 		saynn("You lean closer to Socket's crotch.. and start with a quick lick, brushing the tip of your tongue over that clit. Her pussy twitches a bit.. but other than that.. no reaction.. so you lick and lick again.")
@@ -198,7 +199,7 @@ func _run():
 
 		addButton("Faster", "Lick her faster and see what happens", "socket_cums_on_pc")
 	if(state == "socket_cums_on_pc"):
-		# (( Faster anim here
+		playAnimation(StageScene.GeneratorOral, "fast", {pc="socket", npc="pc"})
 		saynn("She struggles to screw the lightbulb in, one of her palms lands on your head for extra support.. while you just keep going at it, lapping up her juices and licking her out more, your tongue prodding her entrance and sliding inside with ease, covering the inner walls with your saliva too.")
 
 		saynn("[say=socket]Just the last.. twist..[/say]")
@@ -223,6 +224,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "after_help")
 	if(state == "avoid_lewds_completely"):
+		playAnimation(StageScene.GeneratorOral, "tease", {pc="socket", npc="pc"})
 		saynn("It takes a lot of.. strength.. but you manage to shut your brain off completely and avoid even thinking about that pussy. You only focus on keeping the generator stable"+str(" while your cock stays hard as a rock" if GM.pc.hasReachablePenis() else "")+".")
 
 		saynn("[say=socket]Almost done![/say]")
@@ -280,7 +282,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "endthescene")
 	if(state == "socket_reward_grope"):
-		# ((Grope anim?
+		playAnimation(StageScene.Grope, "tease", {pc="socket", npc="pc"})
 		saynn("Nah, might as well take her up on the offer. You do it sneakily though, your hand lands on her belly and slides down along it to her crotch. "+str("Her pussy is still quite wet after her orgasm. As you spread it, you reveal a few strings of juices that are hanging between her folds." if socketCame else "Her pussy is slightly wet. As you spread it, you reveal a lonely string of juices that is hanging between her folds.")+"")
 
 		saynn("Your other hand cups one of the breasts and gently squeezes. All the while Socket just watches you do that, spreading her legs more for you and biting her lip slightly.")

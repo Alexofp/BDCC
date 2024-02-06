@@ -115,6 +115,10 @@ func stateMachineTravel(thedoll, state_machine, animID):
 		state_machine.travel("StruggleGag-loop")
 	elif(animID == "struggle_legs"):
 		state_machine.travel("StruggleLegs-loop")
+	elif(animID == "hold_object"):
+		state_machine.travel("HoldObject-loop")
+		if(args.size() > 1):
+			thedoll.attachTemporaryUnriggedPart("hand.L", args[1])
 	else:
 		return false
 	return true
