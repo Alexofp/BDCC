@@ -62,21 +62,76 @@ func getLevelDamage():
 func getStatDamageMult(_pc):
 	return 1.0 + _pc.getStat(Stat.Strength) / 20.0
 
-func getDexDamageMult(_pc):
+func getAgilityDamageMult(_pc):
 	return 1.0 + _pc.getStat(Stat.Agility) / 20.0
 
-func getMixDamageMult(_pc):
+func getMixedDamageMult(_pc):
 	return 1.0 + _pc.getStat(Stat.Strength) / 40.0 + _pc.getStat(Stat.Agility) / 40.0
 
 
 func calcDamage(_pc, mult = 1.0):
-	return mult * getLevelDamage() * getStatDamageMult(_pc) * RNG.randf_range(0.8, 1.0)
+	return mult * getLevelDamage() * getStatDamageMult(_pc)
+
+func calcLockDamage(_pc, mult = 1.0):
+	return mult * getLevelDamage() * getStatDamageMult(_pc)
 
 func calcPickDamage(_pc, mult = 1.0):
-	return mult * getLevelDamage() * getDexDamageMult(_pc) * RNG.randf_range(0.8, 1.0)
+	return mult * getLevelDamage() * getAgilityDamageMult(_pc)
 
 func calcCutDamage(_pc, mult = 1.0):
-	return mult * getLevelDamage() * getMixDamageMult(_pc) * RNG.randf_range(0.8, 1.0)
+	return mult * getLevelDamage() * getMixedDamageMult(_pc)
+
+func canBreakLocked(_pc, _minigame):
+	return _minigame > 0.8 
+
+func calcLockedMult(_pc, _minigame):
+	var mult = 0
+	if _minigame > 0.8:
+		mult = _minigame - 0.8
+	return mult
+
+func calcFatalMult(_pc, _minigame):
+	return _minigame / 4.0
+
+func calcRestraintMult(_pc, _minigame):
+	if _pc.hasPerk(Perk.BDSMPerfectStreak):
+		return 0.7
+	return 0.4
+	
+func calcBlindMult(_pc, _minigame):
+	if _pc.hasPerk(Perk.BDSMBlindfold):
+		return 0.8
+	return 0.6
+	
+func calcStruggleStamina(_pc, mult = 1.0):
+	return mult * (5 + level * 3)
+
+func calcPickStamina(_pc, mult = 1.0):
+	return mult * (5 + level * 2)
+
+func calcCutStamina(_pc, mult = 1.0):
+	return mult * (5 + level * 2.5)
+	 
+
+func calcStrugglePain(_pc, mult = 1.0):
+	return mult * (1 + level)
+
+func calcPickpain(_pc, mult = 1.0):
+	return mult * (1 + level)
+
+func calcCutPain(_pc, mult = 1.0):
+	return mult * (1 + level)
+
+	 
+func calcStruggleLust(_pc, mult = 1.0):
+	return mult * (1 + level)
+
+func calcPickLust(_pc, mult = 1.0):
+	return mult * (1 + level)
+
+func calcCutLuist(_pc, mult = 1.0):
+	return mult * (1 + level)
+	 
 
 
 func takeDamage(howMuch):
@@ -123,32 +178,14 @@ func calculateAIScore(_pc):
 		return 5.0 * npcDodgeDifficultyMod
 	
 	var result = 1.0
-	if(!_pc.isBlindfolded() || canInspectWhileBlindfolded()):
+	if !_pc.isBlindfolded() || canInspectWhileBlindfolded():
 		result = result * 2.0 / float(level)
-	if(tightness > 0.0):
+	if tightness > 0.0:
 		result /= tightness
 	
 	return result * npcDodgeDifficultyMod
 
-#Advanced negavive values for more fun in case of fatal fail
-func doFailingStruggle(_pc, _minigame):
-	var _handsFree = !_pc.hasBlockedHands()
-	var _armsFree = !_pc.hasBoundArms()
-	var _legsFree = !_pc.hasBoundLegs()
-	var _canSee = !_pc.isBlindfolded()
-	var _canBite = !_pc.isBitingBlocked()
-	
-	var text = "error?"
-	var lust = 0
-	var pain = 0
-	var damage = 0
-	var stamina = 0
-	
-	text = "You fail while trying to make "+getItem().getVisibleName()+" slip off"
-	stamina = 10 + 4 * level
-	
-	return {"text": text, "damage": damage, "lust": lust, "pain": pain, "stamina": stamina}
-
+### strugle, minigame score  0> sucess, <0 fatal fail ###  
 func doStruggle(_pc, _minigame):
 	var _handsFree = !_pc.hasBlockedHands()
 	var _armsFree = !_pc.hasBoundArms()
@@ -156,23 +193,42 @@ func doStruggle(_pc, _minigame):
 	var _canSee = !_pc.isBlindfolded()
 	var _canBite = !_pc.isBitingBlocked()
 	
-	var text = "error?"
-	var lust = 0
-	var pain = 0
+	var lust = calcStruggleLust(_pc, 0)
+	var pain = calcStrugglePain(_pc, 0)
+	var stamina = calcStruggleStamina(_pc, 1)
 	var damage = 0
 	var lockDamage = 0.0
-	var stamina = 5 + 3 * level
-	text = "You struggle, trying to make the "+getItem().getVisibleName()+" slip off"
+	var gMutt = 1.0;
 	
-	damage = calcDamage(_pc)
-	if isLocked():
-		lockDamage = RNG.randf_rangeDis(0, damage / 5) 
+	var text = "{user.youHe} struggle, trying to make the "+getItem().getVisibleName()+" slip off"
 	
-	#damage = calcDamage()
+	if !_handsFree || !_armsFree:
+		gMutt *= calcRestraintMult(_pc, _minigame)
+	if !_canSee:
+		gMutt *= calcBlindMult(_pc, _minigame)
+
+	
+	if _minigame < 0:
+		text += " but it seems like {user.youHe} just tightened it up more"
+		var _mult = calcFatalMult(_pc, _minigame)
+		damage = calcDamage(_pc, _mult)
+		stamina = calcStruggleStamina(_pc, 2)
+	elif _minigame == 0:
+		text += ", but without visible effect"
+	elif _minigame > 0 && !isLocked():
+		damage = calcDamage(_pc, _minigame) * gMutt
+	elif _minigame > 0 && isLocked() && !canBreakLocked(_pc, _minigame):
+		text += ", but the lock is too strong"
+	elif _minigame > 0 && isLocked() && canBreakLocked(_pc, _minigame):
+		text += ", but it would have been done better if only it was not locked"
+		var _mult = calcLockedMult(_pc, _minigame)
+		damage = calcDamage(_pc, _mult) * gMutt
+		lockDamage = calcLockDamage(_pc, _mult) * gMutt
 	
 	return {"text": text, "damage": damage, "lockDamage": lockDamage, "lust": lust, "pain": pain, "stamina": stamina}
 
-func doLockpick(_pc, _minigame):	
+### use lockpick tool, minigame score  0> sucess, <0 fatal fail ###
+func doLockpick(_pc, _minigame):
 	var lust = 0
 	var pain = 0
 	var damage = 0
@@ -184,6 +240,7 @@ func doLockpick(_pc, _minigame):
 		
 	return {"text": text, "damage": damage, "lockDamage": lockDamage, "lust": lust, "pain": pain, "stamina": stamina}
 
+### use cuting tool, minigame score  0> sucess, <0 fatal fail ###
 func doCut(_pc, _minigame):	
 	var lust = 0
 	var pain = 0
