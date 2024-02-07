@@ -8,6 +8,12 @@ func _init():
 func resetOnNewDay():
 	pass
 
+func canBeCut():
+	return true
+
+func calcCutDamage(_pc, mult = 1.0):
+	return .calcCutDamage(_pc, mult) / 4
+
 func getLevelDamage():
 	return 0.04 + 0.1 / level
 
@@ -26,6 +32,6 @@ func doStruggle(_pc, _minigame):
 	
 	text = "{user.name} helplessly tries to wiggle the straitjacket off."
 	damage = calcDamage(_pc)
-	stamina = RNG.randi_range(50, 60)
+	stamina = RNG.randi_range(30, 50) * (1 + level * 0.2)
 	
 	return {"text": text, "damage": damage, "lust": lust, "pain": pain, "stamina": stamina}
