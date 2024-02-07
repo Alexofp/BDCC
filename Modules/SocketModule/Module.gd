@@ -10,6 +10,8 @@ func getFlags():
 		"punishReason": flag(FlagType.Text), # stuckroughfuck stuckroughassfuck
 		
 		"ch1HelpedTimes": flag(FlagType.Number),
+		
+		"h3BeatRisha": flag(FlagType.Bool),
 	}
 
 func _init():
