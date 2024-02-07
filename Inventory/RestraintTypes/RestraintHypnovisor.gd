@@ -7,6 +7,9 @@ func _init():
 
 func canUnlockWithKey():
 	return false
+
+func canBeCut():
+	return true
 	
 func alwaysSavedWhenStruggledOutOf():
 	return true

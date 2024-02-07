@@ -3,6 +3,12 @@ class_name RestraintMuzzle
 
 func _init():
 	restraintType = RestraintType.Muzzle
+	
+func canBeCut():
+	return true
+	
+func calcCutDamage(_pc, mult = 1.0):
+	return .calcCutDamage(_pc, mult) / 3
 
 func doStruggle(_pc, _minigame):
 	var _handsFree = !_pc.hasBlockedHands()

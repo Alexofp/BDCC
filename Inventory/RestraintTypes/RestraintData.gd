@@ -62,8 +62,22 @@ func getLevelDamage():
 func getStatDamageMult(_pc):
 	return 1.0 + _pc.getStat(Stat.Strength) / 20.0
 
+func getDexDamageMult(_pc):
+	return 1.0 + _pc.getStat(Stat.Agility) / 20.0
+
+func getMixDamageMult(_pc):
+	return 1.0 + _pc.getStat(Stat.Strength) / 40.0 + _pc.getStat(Stat.Agility) / 40.0
+
+
 func calcDamage(_pc, mult = 1.0):
 	return mult * getLevelDamage() * getStatDamageMult(_pc) * RNG.randf_range(0.8, 1.0)
+
+func calcPickDamage(_pc, mult = 1.0):
+	return mult * getLevelDamage() * getDexDamageMult(_pc) * RNG.randf_range(0.8, 1.0)
+
+func calcCutDamage(_pc, mult = 1.0):
+	return mult * getLevelDamage() * getMixDamageMult(_pc) * RNG.randf_range(0.8, 1.0)
+
 
 func takeDamage(howMuch):
 	tightness -= howMuch
@@ -166,7 +180,7 @@ func doLockpick(_pc, _minigame):
 	var stamina = 5 + 2 * level
 	var text = "You picking the lock, trying to unlock the " + getItem().getVisibleName()
 	
-	lockDamage = _minigame
+	lockDamage = calcPickDamage(_pc, _minigame)
 		
 	return {"text": text, "damage": damage, "lockDamage": lockDamage, "lust": lust, "pain": pain, "stamina": stamina}
 
@@ -178,7 +192,7 @@ func doCut(_pc, _minigame):
 	var stamina = 5 + 2 * level
 	var text = "You are looking a good place to cut, trying to rid off the " + getItem().getVisibleName()
 	
-	damage = _minigame
+	damage = calcCutDamage(_pc, _minigame)
 	
 	return {"text": text, "damage": damage, "lockDamage": lockDamage, "lust": lust, "pain": pain, "stamina": stamina}
 
