@@ -7,11 +7,13 @@ func getFlags():
 		
 		"removedWombImplant": flag(FlagType.Bool),
 		"socketWillPunish": flag(FlagType.Bool),
-		"punishReason": flag(FlagType.Text), # stuckroughfuck stuckroughassfuck
+		"punishReason": flag(FlagType.Text), # stuckroughfuck stuckroughassfuck spikeddrink
 		
 		"ch1HelpedTimes": flag(FlagType.Number),
 		
 		"h3BeatRisha": flag(FlagType.Bool),
+		
+		"hasPortalPussy": flag(FlagType.Bool),
 	}
 
 func _init():

@@ -2571,3 +2571,9 @@ func getUndressMessage(withS):
 		else:
 			return "take all your clothes off"
 	return Util.humanReadableList(res, "and also")
+
+func isWearingInvisiblePortalPanties():
+	return false
+
+func getPortalSexHoleAvailable(_bodypartSlot):
+	return false

@@ -49,3 +49,15 @@ func createBodyparts():
 
 func getDefaultEquipment():
 	return ["SocketArmor", "SocketVisorUp", "SocketBackpack"]
+
+func getPortalSexHoleAvailable(_bodypartSlot):
+	if(GM.main != null && GM.main.getFlag("SocketModule.hasPortalPussy")):
+		if(_bodypartSlot == BodypartSlot.Vagina):
+			return true
+	
+	return false
+
+func isWearingInvisiblePortalPanties():
+	if(GM.main != null && GM.main.getFlag("SocketModule.hasPortalPussy")):
+		return true
+	return false

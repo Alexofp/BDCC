@@ -508,6 +508,182 @@ func _run():
 
 		addButton("Ignore thought", "Resist the temptation", "no_spike_drink")
 		addButton("Spike her 'drink'", "Sneakily add an aphrodisiac pill to the fleshlight", "spike_socket_drink")
+	if(state == "no_spike_drink"):
+		GM.pc.setLocation("MedRoom2")
+		saynn("You push the naughty thoughts away and just finish restocking the vendomat.")
+
+		saynn("[say=pc]That should be it.[/say]")
+
+		saynn("[say=socket]Thank you! I don't know what I would do without you.[/say]")
+
+		saynn("You shrug. The image of watching Socket drinking cider out of her pussy won't leave your head for a while.")
+
+		saynn("[say=pc]Someone else would have helped you probably.[/say]")
+
+		saynn("[say=socket]Tell you what, I'm wearing my portal device every once in a while. If you have the 'receiver', feel free to connect to it![/say]")
+
+		saynn("She shakes the fleshlight in front of your face.")
+
+		saynn("[say=socket]My device is only covering the pussy.. so you know.. no anal![/say]")
+
+		saynn("For someone so.. lewd.. She sure is restrictive. But you'd rather not get your head bonked.")
+
+		saynn("[say=socket]Anyway, see you later alligator![/say]")
+
+		saynn("Socket walks away while still sipping cider in the most strange way possible.")
+
+		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "spike_socket_drink"):
+		GM.pc.setLocation("mining_elevator")
+		saynn("Sneakily, you open the pill bottle and grab a single pill. Then you shift closer to Socket and carefully drop it into her pussy. Luckily she didn't seem to hear the plop noise.")
+
+		saynn("The pill sinks to the bottom of her 'drink' and starts to dissolve. While that is happening, you just finish restocking the vendomat.")
+
+		saynn("[say=pc]That should be it.[/say]")
+
+		saynn("[say=socket]Thank you! I don't know what I would do without you.[/say]")
+
+		saynn("You shrug and notice that Socket's pussy already starts to get a little wet, her folds shining more. It seems the drug is being absorbed through the inner walls of her slit.")
+
+		saynn("[say=pc]We will see. Maybe there is something.[/say]")
+
+		saynn("[say=socket]Tell you what, I'm wearing my portal device every once in a while. If you have the 'receiver', feel free to connect to it![/say]")
+
+		saynn("She smiles and sips some of the cider.")
+
+		saynn("[say=socket]So tasty.. Oh yeah. My device is only covering the pussy.. so you know.. no anal![/say]")
+
+		saynn("For someone so.. lewd.. She sure is restrictive. But you'd rather not get your head bonked.")
+
+		saynn("[say=socket]Anyway, see you later alligator![/say]")
+
+		saynn("She heads towards the elevator and presses a button to call it.")
+
+		saynn("[say=pc]Actually, I'm going the same way.[/say]")
+
+		saynn("[say=socket]Oh, okay![/say]")
+
+		saynn("After some time, the lift arrives.")
+
+		addButton("Step in", "See what happens next", "socket_gets_very_horny")
+	if(state == "socket_gets_very_horny"):
+		aimCameraAndSetLocName("mining_elevator")
+		playAnimation(StageScene.Duo, "stand", {npc="socket", npcAction=["hold_object", "res://Inventory/UnriggedModels/Fleshlight/FleshlightSocketStraw.tscn"]})
+		saynn("You and Socket step into the lift. She presses the button, causing the room to start moving.")
+
+		saynn("Your eyes are glued to her as she is casually sipping her drink, eventually finishing it. She pulls the straw out.. and licks her lips, her thirst is clearly not satisfied yet.")
+
+		saynn("[say=socket]Hm.. Maybe there is some left..[/say]")
+
+		saynn("Suddenly, she switches from licking her lips.. to licking her pussy lips, dragging her tongue over the sensitive flesh, catching any moisture that has accumulated and then swallowing it.")
+
+		saynn("Her legs are shivering a little each time she flicks her tongue over the clit.")
+
+		saynn("[say=socket]Huff..[/say]")
+
+		saynn("The sight is quite.. curious. Maybe she could use some help?")
+
+		addButton("Just watch", "See what she is gonna do", "socket_licks_herself")
+		addButton("Offer tongue", "Lick her yourself", "do_lick_socket")
+		addButtonWithChecks("Offer cock", "Maybe she just needs a refill.. of cum", "do_fuck_socket", [], [[ButtonChecks.HasReachablePenis]])
+	if(state == "socket_licks_herself"):
+		playAnimation(StageScene.SexPortalOral, "lick", {pc="socket", onlyRight=true})
+		saynn("You decide not to do anything, watching how this will unfold seems like it's gonna be way more entertaining. So you lean against the wall of the lift.. and cross your arms.")
+
+		saynn("Socket, lusty for more cider, slips her tongue deeper and deeper into her pussy.")
+
+		saynn("[say=socket]Ah.. I can't get enough of this taste..[/say]")
+
+		saynn("Her folds react to licking by only getting more wet, the scent that they are producing is making horny even you.")
+
+		saynn("[say=socket]Almost like a drug..[/say]")
+
+		saynn("She probably realized something by now. But it's too late. She digs her face into her slit and starts to eagerly lick and lap at her inner walls, moaning while doing so.")
+
+		saynn("You can't stop smiling while watching her pleasure herself.. just to get more of that taste. It's fading over time, causing the fennec to lick herself more thoroughly. Her body is shivering by now, her tail wagging a lot, her pussy only looking more juicy.")
+
+		addButton("Continue", "See what happens next", "socket_squirts_on_herself")
+	if(state == "socket_squirts_on_herself"):
+		aimCameraAndSetLocName("mining_elevator")
+		GM.pc.setLocation("mining_elevator")
+		playAnimation(StageScene.SexPortalOral, "lickfast", {pc="socket", onlyRight=true})
+		saynn("You keep hearing the cute muffled noises from Socket.. Until you notice her pussy starting to twitch! And soon enough, it releases a gush of transparent fluids directly into her own face, her body squirming heavily while she just continues to lap up everything she can get to.")
+
+		saynn("[say=socket]Mh-h-hhaah!..[/say]")
+
+		saynn("Just when the lift was beginning to smell like hot sex, the doors opened, allowing some fresh air in.")
+
+		saynn("Socket looks.. slightly drained. She finally stops licking herself and just pants heavily.")
+
+		saynn("[say=pc]Cider was really tasty, huh?[/say]")
+
+		saynn("[say=socket]Yeah.. hah.. I might need some rest now..[/say]")
+
+		saynn("She moans softly as she puts the cap back on the fleshlight before putting it away.")
+
+		saynn("[say=socket]See you around.. ah..[/say]")
+
+		saynn("You wave your hand to her. Hopefully your little mischief won't get you into trouble.")
+
+		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "do_lick_socket"):
+		playAnimation(StageScene.SexPortalOral, "lick", {pc="socket", npc="pc"})
+		saynn("[say=pc]Maybe I can help satisfy your thirst?[/say]")
+
+		saynn("Socket turns her head towards you.. and sees you parting your lips and rolling your tongue out as far as it can. The fennec huffs and hands you the fleshlight.")
+
+		saynn("[say=socket]Sounds good..[/say]")
+
+		saynn("You grab and watch Socket's body shiver a little harder each second you don't do anything.")
+
+		saynn("[say=socket]Please?[/say]")
+
+		saynn("Why not. You move it closer to your mouth and start teasing her clit with the tip of your tongue, rubbing it left and right. That makes Socket grab onto her crotch portal device and moan quietly, her pussy getting incredibly wet.")
+
+		saynn("Finally, you decide to do a long lick, sliding your tongue along her petals and getting a feel for them. Yeah, there is still a faint cider aftertaste.. but it's mixed with something "+str("that makes your own pussy wet in seconds too.." if GM.pc.hasReachableVagina() else "that makes you really horny in seconds too..")+"")
+
+		saynn("[say=socket]Mm-m..[/say]")
+
+		saynn("Her pussy tastes so good that your tongue is already circling the love tunnel itself, the tip prodding it occasionally. It doesn't take much effort for you to slip it past her wet folds and start lapping at her inner walls too. Oh, pure bliss..")
+
+		saynn("[say=socket]That's the spot.. ah..[/say]")
+
+		addButton("Faster", "Lick it faster", "socket_squirts_all_over_pc")
+	if(state == "socket_squirts_all_over_pc"):
+		aimCameraAndSetLocName("mining_elevator")
+		GM.pc.setLocation("mining_elevator")
+		playAnimation(StageScene.SexPortalOral, "lickfast", {pc="socket", npc="pc"})
+		saynn("Seeing Socket like this.. allows you to easily find and abuse her most sensitive spots. You find a little bump with your tongue.. and start hammering away at it, tongue-fucking the girl's pussy.. while she is squirming hard.")
+
+		saynn("[say=socket]Hah.. ah..[/say]")
+
+		saynn("You can feel the muscles spasming.. her inner walls hugging your tongue.. but you keep going, gathering all the moisture and occasionally swallowing it all.")
+
+		saynn("[say=socket]I'm.. gonna..[/say]")
+
+		saynn("The orgasm hits her body like a tidal wave. Socket lets out a passionate noise of pleasure while her disconnected pussy releases a fountain of juices directly into your face! So wet..")
+
+		saynn("She leans against the wall of the lift for support, her legs shaking wildly.. while you just keep lapping away at her walls, eagerly swallowing each drop of girlcum that you can.")
+
+		saynn("By the end of it, both of you are left panting.")
+
+		saynn("[say=socket]That.. felt really good..[/say]")
+
+		saynn("The small metal room smells of sex.. but not for long, the doors finally open, letting some fresh air in.")
+
+		saynn("Socket looks.. very drained. You hand her the fleshlight and lick your lips.")
+
+		saynn("[say=pc]Pretty tasty.[/say]")
+
+		saynn("[say=socket]Hah.. I might need some rest now..[/say]")
+
+		saynn("She moans softly as she puts the cap back on the fleshlight before putting it away.")
+
+		saynn("[say=socket]See you around.. ah..[/say]")
+
+		saynn("You wave your hand to her. Hopefully your little mischief won't get you into trouble.")
+
+		addButton("Continue", "See what happens next", "endthescene")
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
@@ -550,6 +726,29 @@ func _react(_action: String, _args):
 
 	if(_action == "socket_starts_help_pc"):
 		processTime(5*60)
+
+	if(_action == "no_spike_drink"):
+		setFlag("SocketModule.hasPortalPussy", true)
+		addMessage("Socket's pussy is now available through the portal fleshlight")
+
+	if(_action == "spike_socket_drink"):
+		setFlag("SocketModule.socketWillPunish", true)
+		setFlag("SocketModule.punishReason", "spikeddrink")
+		setFlag("SocketModule.hasPortalPussy", true)
+		addMessage("Socket's pussy is now available through the portal fleshlight")
+
+	if(_action == "socket_gets_very_horny"):
+		processTime(3*60)
+
+	if(_action == "socket_squirts_on_herself"):
+		processTime(3*60)
+		getCharacter("socket").cummedOnBy("socket", FluidSource.Vagina, 0.2)
+		getCharacter("socket").cummedInMouthBy("socket", FluidSource.Vagina, 0.1)
+
+	if(_action == "socket_squirts_all_over_pc"):
+		processTime(3*60)
+		GM.pc.cummedOnBy("socket", FluidSource.Vagina, 0.2)
+		GM.pc.cummedInMouthBy("socket", FluidSource.Vagina, 0.1)
 
 	setState(_action)
 
