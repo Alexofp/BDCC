@@ -627,7 +627,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "endthescene")
 	if(state == "do_lick_socket"):
-		playAnimation(StageScene.SexPortalOral, "lick", {pc="socket", npc="pc"})
+		playAnimation(StageScene.SexPortalOral, "lick", {npc="socket", pc="pc"})
 		saynn("[say=pc]Maybe I can help satisfy your thirst?[/say]")
 
 		saynn("Socket turns her head towards you.. and sees you parting your lips and rolling your tongue out as far as it can. The fennec huffs and hands you the fleshlight.")
@@ -652,7 +652,7 @@ func _run():
 	if(state == "socket_squirts_all_over_pc"):
 		aimCameraAndSetLocName("mining_elevator")
 		GM.pc.setLocation("mining_elevator")
-		playAnimation(StageScene.SexPortalOral, "lickfast", {pc="socket", npc="pc"})
+		playAnimation(StageScene.SexPortalOral, "lickfast", {npc="socket", pc="pc"})
 		saynn("Seeing Socket like this.. allows you to easily find and abuse her most sensitive spots. You find a little bump with your tongue.. and start hammering away at it, tongue-fucking the girl's pussy.. while she is squirming hard.")
 
 		saynn("[say=socket]Hah.. ah..[/say]")
@@ -682,6 +682,91 @@ func _run():
 		saynn("[say=socket]See you around.. ah..[/say]")
 
 		saynn("You wave your hand to her. Hopefully your little mischief won't get you into trouble.")
+
+		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "do_fuck_socket"):
+		playAnimation(StageScene.SexFleshlight, "tease", {npc="socket", socketPussy=true, bodyState={exposedCrotch=true,hard=true}})
+		saynn("This seems like a good opportunity to help clench her thirst. You expose your {pc.penis} and present it to Socket.")
+
+		saynn("[say=pc]Maybe you want a refill?[/say]")
+
+		saynn("She switches her gaze from the fleshlight to you.. and blinks a few times.")
+
+		saynn("[say=socket]Perhaps, yes.[/say]")
+
+		saynn("Socket approaches you and brings the toy that has her pussy sticking out close to your hard member. Seeing them close like that makes it easy for her to judge your size compared to her.. elasticity.")
+
+		var penSize = GM.pc.getPenisSize()
+		if (penSize < 6):
+			saynn("[say=socket]At least you won't kill me. It's about how you use it, right?[/say]")
+
+		elif (penSize < 10):
+			saynn("[say=socket]It's on the smaller side.. but we can make it work.[/say]")
+
+		elif (penSize < 16):
+			saynn("[say=socket]Perfect..[/say]")
+
+		elif (penSize < 25):
+			saynn("[say=socket]You're pretty huge..[/say]")
+
+		else:
+			saynn("[say=socket]I doubt it will fit even.. but let's try..[/say]")
+
+		addButton("Continue", "See what happens next", "socket_penis_starts")
+	if(state == "socket_penis_starts"):
+		playAnimation(StageScene.SexFleshlight, "sex", {npc="socket", socketPussy=true, bodyState={exposedCrotch=true,hard=true}})
+		saynn("Looks like Socket wants to do it herself.. might as well see how she will treat you.")
+
+		saynn("She positions the fleshlight so that your dick is prodding the entrance of her pussy. Its scent.. makes you eager for more, the tip dripping pre onto her sensitive folds.")
+
+		saynn("After putting some pressure, your cock manages to spread her slit enough to bury itself inside.")
+
+		saynn("[say=socket]Nh..[/say]")
+
+		saynn("You can feel her breathing getting deeper as she starts to slowly slide the fleshlight over your length, humming quietly into your ear as her pussy is getting fucked raw.")
+
+		saynn("Whatever little remains of that drug she had on her inner walls, some of them now are getting absorbed by your cock, causing your erection to get extra strong, your dick already throbbing inside her tight love tunnel.")
+
+		saynn("[say=socket]I feel it inside me. Hah..[/say]")
+
+		addButton("Continue", "See what happens next", "socket_penis_faster")
+	if(state == "socket_penis_faster"):
+		playAnimation(StageScene.SexFleshlight, "fast", {npc="socket", socketPussy=true, bodyState={exposedCrotch=true,hard=true}})
+		saynn("Socket moves her hand faster, increasing the pace. It looks like she is just masturbating you with some toy.. but seeing that pussy squeeze you and hearing the girl's little moans make it obvious.")
+
+		saynn("[say=socket]Ah.. ah.. You're throbbing so hard.[/say]")
+
+		saynn("She is not wrong, her pulsating inner walls push you closer and closer, her slick tunnel feels so good to fuck.")
+
+		saynn("The lift sounds like it's about to arrive.. So Socket increases the onslaught even more, pretty much pounding her pussy with your {pc.penis}. Her legs are shivering, her eyes keep sliding up, her cute noises and warm breathing tickling your ear.")
+
+		saynn("[say=socket]Fill me.. Stuff my pussy full..[/say]")
+
+		saynn("How can you say no?")
+
+		addButton("Orgasm", "See how it happens", "socket_penis_cum")
+	if(state == "socket_penis_cum"):
+		playAnimation(StageScene.SexFleshlight, "inside", {npc="socket", socketPussy=true, bodyState={exposedCrotch=true,hard=true}})
+		saynn("You grunt through your teeth, your body arches its back a little as your {pc.penis} pulses and releases its load inside, your balls tensing up as waves of thick creamy seed flood Socket's pussy, triggering her own orgasmic release.")
+
+		saynn("[say=socket]Yeah.. use my pussy as a cum dump..[/say]")
+
+		saynn("Socket has her free hand holding onto you while the one with the fleshlight pushes on it to keep her slit stuffed full, waiting for your orgasms to come to an end. The whole room smells of sex.. but not for long, the elevator doors finally open, letting some fresh air in.")
+
+		saynn("She drained your balls with that toy.. and now just lets herself be your cock warmer for some time.")
+
+		saynn("[say=socket]Good..[/say]")
+
+		addButton("Continue", "See what happens next", "socket_penis_aftercum")
+	if(state == "socket_penis_aftercum"):
+		playAnimation(StageScene.Duo, "stand", {npc="socket", npcAction=["hold_object", "res://Inventory/UnriggedModels/Fleshlight/FleshlightSocketStraw.tscn"]})
+		aimCameraAndSetLocName("mining_elevator")
+		GM.pc.setLocation("mining_elevator")
+		saynn("Socket slowly retrieves the fleshlight, being careful as to not spill anything. Then she just.. adds the straw back.")
+
+		saynn("[say=socket]Thanks! See you around..[/say]")
+
+		saynn("You nod. Hopefully your little mischief won't get you into trouble.")
 
 		addButton("Continue", "See what happens next", "endthescene")
 
@@ -749,6 +834,19 @@ func _react(_action: String, _args):
 		processTime(3*60)
 		GM.pc.cummedOnBy("socket", FluidSource.Vagina, 0.2)
 		GM.pc.cummedInMouthBy("socket", FluidSource.Vagina, 0.1)
+
+	if(_action == "socket_penis_starts"):
+		processTime(3*60)
+
+	if(_action == "socket_penis_faster"):
+		processTime(5*60)
+
+	if(_action == "socket_penis_cum"):
+		getCharacter("socket").cummedInVaginaBy("pc")
+		GM.pc.orgasmFrom("socket")
+
+	if(_action == "socket_penis_aftercum"):
+		processTime(3*60)
 
 	setState(_action)
 
