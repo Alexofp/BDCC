@@ -2,6 +2,8 @@ extends SceneBase
 
 var hasAccess = false
 var knowsBull = false
+var overstim = 0
+var socketLust = 0
 
 func _init():
 	sceneID = "SocketHelp4Scene"
@@ -211,6 +213,7 @@ func _run():
 	if(state == "follow_socket_underground"):
 		aimCameraAndSetLocName("fight_entrance")
 		playAnimation(StageScene.Duo, "walk", {npc="socket", flipNPC=true, npcAction="walk"})
+		removeCharacter("bulldog")
 		saynn("Socket bonks the hatch.. making it open, revealing a deep dark corridor that is heading somewhere.")
 
 		saynn("[say=socket]Oh wow, an adventure.[/say]")
@@ -270,9 +273,9 @@ func _run():
 		else:
 			saynn("You turn and see a lilac inmate. He is holding a cane which makes him look.. important.")
 
-		saynn("[say=socket]Hi! You look fancy.[/say]")
+		saynn("[say=socket]Hi, my name is Socket! You look fancy.[/say]")
 
-		saynn("[say=announcer]Thanks, baby girl. Hah. Your appearance is nothing short of a miracle too. Not very often do we get staffers here.[/say]")
+		saynn("[say=announcer]Thanks, baby girl. Hah. Your appearance is nothing short of a miracle too. Name is Ans. Not very often do we get staffers here.[/say]")
 
 		saynn("[say=socket]Oh, should I leave?[/say]")
 
@@ -290,16 +293,214 @@ func _run():
 
 		saynn("The crowd cheers as one of the opponents finally hits the floor.")
 
-		saynn("[say=avy]Hey, the fuck is this?[/say]")
+		saynn("[say=avy]Hey, what the fuck is happening?[/say]")
 
 		addButton("Continue", "See what happens next", "avy_appears")
 	if(state == "avy_appears"):
 		addCharacter("avy")
 		playAnimation(StageScene.Duo, "stand", {pc="socket", npc="avy"})
-		saynn("[say=avy]Wow, you're even more of an idiot than I thought.[/say]")
+		saynn("A familiar dark-furred foxy jumps over the arena fence and lands on her feet a few meters away from you, the relief of her tensed-up muscles backlit by the bright lighting of the arena.")
 
-		saynn("[sayOther]Pausing user's thought process.. Success. Keep in mind that overstimulation of the wearer's senses while in a paused state might lead to short-term memory loss or corruption. Current chance of memory loss is 0%.[/sayOther]")
+		saynn("Her furious eyes glaring at you and Socket.")
 
+		saynn("[say=avy]Why the fuck did you bring a staffer here, you dumb fuck?[/say]")
+
+		saynn("The lilac inmate blocks her path with his cane, preventing the angry foxy from reaching you.")
+
+		saynn("[say=announcer]Calm down, Avy. No one is reporting on us, an agreement was made.[/say]")
+
+		saynn("[say=avy]And you believed her? The bitch will say anything to not get her skull caved in. We're screwed if she walks out of here. Alive.[/say]")
+
+		saynn("Avy points at you.")
+
+		saynn("[say=avy]And you're even more of an idiot than I thought.[/say]")
+
+		saynn("Socket frowns and blinks many times. The whole space smells of.. hostility. Many eyes are now watching you. She starts reaching for her wrench.. just in case.")
+
+		saynn("Ans rubs his chin.")
+
+		saynn("[say=announcer]You think there is a good solution here?[/say]")
+
+		saynn("The foxy cracks her knuckles.")
+
+		saynn("[say=avy]You know the solution. We have to solve her.[/say]")
+
+		saynn("[say=announcer]That's not how we do things.[/say]")
+
+		saynn("[say=avy]Throw her onto the arena. No rules there.[/say]")
+
+		saynn("The guy hums and scratches his chin more, his eyes watching you and Socket slowly back away.. but the crowd is now creating a wall around you.")
+
+		saynn("Seconds feel like minutes. With each passing moment, the air becomes intoxicating.. Just can't get enough of it.")
+
+		saynn("[say=announcer]Is that a VR headset on your head, Socket?[/say]")
+
+		saynn("[say=socket]Um.. Yeah? VR, AR, NR, CyberSpace, everything! It's the best of the best, bleeding edge tech.[/say]")
+
+		saynn("[say=announcer]Have you ever seen hypnovisors that everyone here is using?[/say]")
+
+		saynn("Socket nods many times.")
+
+		saynn("[say=socket]I did! Mine has that program. And more! Do you want it? I'm not sure if I can give it away for free..[/say]")
+
+		saynn("[say=avy]Why are we talking about a useless toy, a single blow to the head will make her forget everything.[/say]")
+
+		saynn("The lilac guy keeps Avy in place, his gaze now directed towards you.")
+
+		saynn("[say=announcer]May you please run that program on Socket's visor? I'm very curious.[/say]")
+
+		saynn("You turn towards Socket. Socket turns towards you.")
+
+		saynn("[say=socket]It has buttons, you will figure it out![/say]")
+
+		saynn("Huh, you didn't even have to convince her.")
+
+		addButton("Headset", "Put the headset on Socket's face", "put_headset_on_socket")
+	if(state == "put_headset_on_socket"):
+		playAnimation(StageScene.Duo, "stand", {npc="socket"})
+		saynn("It's worth a shot. You lower Socket's headset so it covers her eyes. Then you find a button to start it..")
+
+		saynn("[sayOther]Initializing.. Success.[/sayOther]")
+
+		saynn("Wow, the headset can talk.")
+
+		saynn("[sayOther]Detected user: Socket. Cyberspace link missing, netrunning module disabled. Ready to receive commands.[/sayOther]")
+
+		saynn("[say=pc]Launch a hypnosis program.[/say]")
+
+		saynn("[sayOther]Access denied.[/sayOther]")
+
+		saynn("Aw.")
+
+		saynn("[say=socket]You have to say 'sudo' before it.[/say]")
+
+		saynn("[say=pc]What? Why?[/say]")
+
+		saynn("[say=socket]Just say it! It's gonna be very cool![/say]")
+
+		saynn("Might as well.")
+
+		saynn("[say=pc]Sudo launch a hypnosis program?[/say]")
+
+		saynn("[sayOther]Launching 'hypnotic_trance.exe'.[/sayOther]")
+
+		saynn("The headset lights up, its cooling system kicking in.")
+
+		saynn("[sayOther]Pausing user's thought process..[/sayOther]")
+
+		saynn("Almost immediately, Socket.. stopped moving. No, she is still standing. So still that she might as well be a mannequin, her breathing is slow and barely noticeable too.")
+
+		saynn("[sayOther]Success. Warning: overstimulation of the wearer's senses while in a paused state might lead to short-term memory loss or corruption. Current chance of memory loss is 0%.[/sayOther]")
+
+		saynn("Wow. You poke Socket's hand.. and it moves a little before freezing up again. You grab her forearm.. and realize that you can now pose her like she is some kind of doll, the fennec will always keep the pose that you are putting her in.")
+
+		saynn("[say=announcer]Interesting. Now we just have to overstimulate her and she should forget about this place.[/say]")
+
+		saynn("Avy cracks her knuckles more.")
+
+		saynn("[say=avy]I can overstimulate her alright.[/say]")
+
+		saynn("[say=announcer]Hold on, babe. I think we can let {pc.him} decide.[/say]")
+
+		addButton("Pinch", "Pinch Socket's skin", "dop_pinch")
+		addButton("Tickle", "Tickle Socket a bit", "dop_tickle")
+		addButton("Rub", "Rub Socket between the legs", "dop_rub")
+	if(state == "dop_pinch"):
+		removeCharacter("announcer")
+		removeCharacter("avy")
+		saynn("Might as well try something simple. You move your hand to her belly and dig your digits into her fur.. before pinching her. Zero reaction from Socket, she is standing completely still.")
+
+		saynn("[sayOther]Current chance of memory loss is 1%.[/sayOther]")
+
+		saynn("Huh. You will have to do way more than that.")
+
+		addButton("Continue", "See what happens next", "ov_menu")
+	if(state == "dop_tickle"):
+		removeCharacter("announcer")
+		removeCharacter("avy")
+		saynn("Might as well try something simple. You move your hands to her sides.. and tickle her a bit. You get zero reaction back, Socket looks completely unaffected by the tickling.")
+
+		saynn("[sayOther]Current chance of memory loss is 1%.[/sayOther]")
+
+		saynn("Huh. It did something. But you will have to do way more than that.")
+
+		addButton("Continue", "See what happens next", "ov_menu")
+	if(state == "dop_rub"):
+		removeCharacter("announcer")
+		removeCharacter("avy")
+		saynn("Might as well try something simple. You put your hand on Socket's crotch and rub her there a little bit. She gets a little wet down there.. but otherwise, there is no reaction.")
+
+		saynn("[sayOther]Current chance of memory loss is 1%.[/sayOther]")
+
+		saynn("Huh. It did something. But you will have to do way more than that.")
+
+		addButton("Continue", "See what happens next", "ov_menu")
+	if(state == "ov_menu"):
+		aimCameraAndSetLocName("fight_neararena")
+		playAnimation(StageScene.Duo, "stand", {npc="socket"})
+		if (overstim < 60):
+			saynn("[sayOther]Current chance of memory loss is "+str(overstim)+"%.[/sayOther]")
+
+		elif (overstim < 100):
+			saynn("[sayOther]Current chance of memory loss is "+str(overstim)+"%. Warning: Socket's memory might get corrupted.[/sayOther]")
+
+		else:
+			saynn("[sayOther]Current chance of memory loss is "+str(overstim)+"%. Warning! Socket's memory has been corrupted![/sayOther]")
+
+		saynn("Socket's lust is at "+str(socketLust)+".")
+
+		saynn("What do you want to do?")
+
+		addButton("Tickle", "Really tickle Socket", "do_tickle")
+		addButton("Grope and rub", "Grope Socket's breasts and rub her pussy", "do_grope_and_rub")
+		if (socketLust >= 30):
+			addButton("Sex", "Have sex with Socket!", "do_sex")
+		else:
+			addDisabledButton("Sex", "Socket is too dry for this")
+		addButton("Share", "Let someone else play with Socket", "do_share_play")
+		if (socketLust >= 30):
+			addButton("Share (sex)", "Let someone else fuck Socket", "do_share_sex")
+		else:
+			addDisabledButton("Share (sex)", "Socket is too dry for this")
+		addButton("Slutwall", "Put Socket into the slutwall", "do_put_into_slutwall")
+		if (overstim >= 100):
+			addButton("Enough", "Socket probably forgot about this place by now", "do_enough")
+		else:
+			addDisabledButton("Enough", "Socket didn't forget about this place yet")
+	if(state == "do_grope_and_rub"):
+		playAnimation(StageScene.Grope, "tease", {pc="socket", npc="pc"})
+		if (RNG.chance(33)):
+			saynn("You get real close to Socket and put your hands on your private bits, hungrily kneading her tits with one while the second is rubbing her pussy. Not a single sound escapes from her, even when you slip two digits inside and start fingering her.")
+
+		elif (RNG.chance(33)):
+			saynn("You put your hands on Socket and start to grope and rub her. Your left hand lands on her {socket.breasts} and squeezes them tightly while the other one reaches down to her clit and starts to play with it. As you spread her folds, there is a visible string of juices hanging between them.")
+
+		else:
+			saynn("Two of your digits spread Socket's pussy and slide inside, fingering her while the thumb is rubbing her clit. Your free hand cups her modest tits and gropes them a little. There is no audible reaction from the fennec, her paused mind doesn't react to the stimulation at all.")
+
+		if (socketLust >= 100):
+			saynn("Socket looks like she is about to cum!")
+
+			addButton("Cum!", "See what happens next", "do_grope_cum")
+		else:
+			saynn("Socket is gonna cum if you're gonna keep doing this.")
+
+			addButton("Continue", "See what happens next", "ov_menu")
+	if(state == "do_grope_cum"):
+		playAnimation(StageScene.Grope, "gropefast", {pc="socket", npc="pc"})
+		saynn("Socket is not reacting but her body sure is, her pussy is pulsing and making wet noises as you finger her faster, trying to angle your hand so that your digits are hammering away at her g-spot.")
+
+		saynn("And soon enough, Socket's pussy releases a current of fluids! So much that she creased a little puddle on the floor. The crowd is cheering while Socket is squirting.. completely emotionless..")
+
+		saynn("The unprocessed sensation of this strong orgasm gets stored inside her paused mind.")
+
+		addButton("Continue", "See what happens next", "ov_menu")
+	if(state == "do_tickle"):
+		saynn("You put your hands on Socket's sides and begin to tickle her, moving your digits wildly over her short fur. Her body reflex makes her breathing hitch a little.. while zero noises escape her mouth.")
+
+		saynn("It's probably quite stimulating. But you also notice her body becoming less aroused from the tickling. Probably because she is not into it.")
+
+		addButton("Continue", "See what happens next", "ov_menu")
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
@@ -327,6 +528,35 @@ func _react(_action: String, _args):
 	if(_action == "avy_appears"):
 		processTime(3*60)
 
+	if(_action == "put_headset_on_socket"):
+		processTime(3*60)
+		getCharacter("socket").getInventory().forceEquipRemoveOther(GlobalRegistry.createItem("SocketVisor"))
+
+	if(_action == "dop_pinch"):
+		overstim += 1
+
+	if(_action == "dop_tickle"):
+		overstim += 1
+
+	if(_action == "dop_rub"):
+		overstim += 1
+		socketLust += 5
+
+	if(_action == "do_tickle"):
+		socketLust -= 5
+		if(socketLust<0):
+			socketLust = 0
+		overstim += RNG.randi_range(3, 6)
+
+	if(_action == "do_grope_and_rub"):
+		processTime(10*60)
+		socketLust += 30
+		overstim += RNG.randi_range(3, 6)
+
+	if(_action == "do_grope_cum"):
+		socketLust = 0
+		overstim += 20
+
 	setState(_action)
 
 func saveData():
@@ -334,6 +564,8 @@ func saveData():
 
 	data["hasAccess"] = hasAccess
 	data["knowsBull"] = knowsBull
+	data["overstim"] = overstim
+	data["socketLust"] = socketLust
 
 	return data
 
@@ -342,3 +574,5 @@ func loadData(data):
 
 	hasAccess = SAVE.loadVar(data, "hasAccess", false)
 	knowsBull = SAVE.loadVar(data, "knowsBull", false)
+	overstim = SAVE.loadVar(data, "overstim", 0)
+	socketLust = SAVE.loadVar(data, "socketLust", 0)
