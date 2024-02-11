@@ -8,10 +8,10 @@ func getVisibleName():
 	return "Lock picking tool"
 	
 func getDescription():
-	return "An universal one-time use tool that can pick simple locks, like the ones used on bondage gear. You feel like you should keep some of these just in case."
+	return "An universal tool that can pick simple locks, like the ones used on bondage gear. Is of poor quality and can easily break. You feel like you should keep some of these just in case."
 
 func getPrice():
-	return 5
+	return 10
 
 func canSell():
 	return true

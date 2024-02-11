@@ -360,7 +360,7 @@ func _react(_action: String, _args):
 			addMessage("You loosened lock "+str(Util.roundF(lockDamage*100.0, 1))+"% of progress.")
 		if lockDamage < 0.0:
 			restraintData.takeLockDamage(lockDamage)
-			addMessage("You lock stucked you lost "+str(Util.roundF(lockDamage*100.0, 1))+"% of progress.")
+			addMessage("You lock stucked you lost "+str(Util.roundF(-lockDamage*100.0, 1))+"% of progress.")
 		if addLust != 0:
 			addLust = GM.pc.receiveDamage(DamageType.Lust, addLust)
 			addMessage("You received "+str(addLust)+" lust.")
@@ -461,7 +461,7 @@ func _react(_action: String, _args):
 			addMessage("You loosened lock "+str(Util.roundF(lockDamage*100.0, 1))+"% of progress.")
 		if lockDamage < 0.0:
 			restraintData.takeLockDamage(lockDamage)
-			addMessage("You lock stucked you lost "+str(Util.roundF(lockDamage*100.0, 1))+"% of progress.")
+			addMessage("You lock stucked you lost "+str(Util.roundF(-lockDamage*100.0, 1))+"% of progress.")
 		if addLust != 0:
 			addLust = GM.pc.receiveDamage(DamageType.Lust, addLust)
 			addMessage("You received "+str(addLust)+" lust.")
@@ -478,6 +478,10 @@ func _react(_action: String, _args):
 		if(!restraintData.isLocked()):
 			struggleText += "\n[b]"+restraintData.getLockpickedMessage()+"[/b]"
 			restraintData.onLockPicked()
+
+		if gameScore < 0 || gameScore > 0.5:
+			GM.pc.getInventory().removeXOfOrDestroy("lockPicker", 1)
+			addMessage("Lock picker destroyed.")
 		
 		processTime(addTime)
 
@@ -543,7 +547,7 @@ func _react(_action: String, _args):
 			addMessage("You loosened lock "+str(Util.roundF(lockDamage*100.0, 1))+"% of progress.")
 		if lockDamage < 0.0:
 			restraintData.takeLockDamage(lockDamage)
-			addMessage("You lock stucked you lost "+str(Util.roundF(lockDamage*100.0, 1))+"% of progress.")
+			addMessage("You lock stucked you lost "+str(Util.roundF(-lockDamage*100.0, 1))+"% of progress.")
 		if addLust != 0:
 			addLust = GM.pc.receiveDamage(DamageType.Lust, addLust)
 			addMessage("You received "+str(addLust)+" lust.")
@@ -576,6 +580,10 @@ func _react(_action: String, _args):
 					restraintData.setLevel(restraintData.getLevel())
 					GM.pc.getInventory().addItem(item)
 					keptRestraintID = item.getUniqueID()
+
+		if gameScore < 0 || gameScore > 0.5:
+			GM.pc.getInventory().removeXOfOrDestroy("safetyCutter", 1)
+			addMessage("Safety cutter destroyed.")
 		
 		processTime(addTime)
 
@@ -632,7 +640,6 @@ func _react(_action: String, _args):
 		var item = GM.pc.getInventory().getItemByUniqueID(restraintID)
 		var _restraintData: RestraintData = item.getRestraintData()
 		
-		GM.pc.getInventory().removeXOfOrDestroy("lockPicker", 1)
 		keyText = ""
 		setState("pickminigame")
 		return
@@ -642,7 +649,6 @@ func _react(_action: String, _args):
 		var item = GM.pc.getInventory().getItemByUniqueID(restraintID)
 		var _restraintData: RestraintData = item.getRestraintData()
 		
-		GM.pc.getInventory().removeXOfOrDestroy("safetyCutter", 1)
 		keyText = ""
 		setState("cutminigame")
 		return

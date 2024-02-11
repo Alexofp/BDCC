@@ -102,6 +102,9 @@ func calcBlindMult(_pc, _minigame):
 	if _pc.hasPerk(Perk.BDSMBlindfold):
 		return 0.8
 	return 0.6
+
+func calcFatalCutPain(_pc, _minigame):
+	return 5 + -_minigame * 5.0
 	
 func calcStruggleStamina(_pc, mult = 1.0):
 	return mult * (5 + level * 3)
@@ -206,7 +209,6 @@ func doStruggle(_pc, _minigame):
 		gMutt *= calcRestraintMult(_pc, _minigame)
 	if !_canSee:
 		gMutt *= calcBlindMult(_pc, _minigame)
-
 	
 	if _minigame < 0:
 		text += " but it seems like {user.youHe} just tightened it up more"
@@ -229,27 +231,68 @@ func doStruggle(_pc, _minigame):
 
 ### use lockpick tool, minigame score  0> sucess, <0 fatal fail ###
 func doLockpick(_pc, _minigame):
+	var _handsFree = !_pc.hasBlockedHands()
+	var _armsFree = !_pc.hasBoundArms()
+	var _legsFree = !_pc.hasBoundLegs()
+	var _canSee = !_pc.isBlindfolded()
+	var _canBite = !_pc.isBitingBlocked()
+	
 	var lust = 0
 	var pain = 0
+	var stamina = calcPickStamina(_pc, 1)
 	var damage = 0
 	var lockDamage = 0.0
-	var stamina = 5 + 2 * level
+	var gMutt = 1.0;
+	
 	var text = "You picking the lock, trying to unlock the " + getItem().getVisibleName()
 	
-	lockDamage = calcPickDamage(_pc, _minigame)
+	if !_handsFree || !_armsFree:
+		gMutt *= calcRestraintMult(_pc, _minigame)
+	if !_canSee:
+		gMutt *= calcBlindMult(_pc, _minigame)
+	
+	if _minigame < 0:
+		text += " but it seems like {user.youHe} you've stuck the lock instead"
+		lockDamage = -1.0
+		stamina = calcPickStamina(_pc, 2)
+	elif _minigame == 0:
+		text += ", but without visible effect"
+	elif _minigame > 0:
+		text += ", and it seems to be working"
+		lockDamage = calcPickDamage(_pc, _minigame) * gMutt
 		
 	return {"text": text, "damage": damage, "lockDamage": lockDamage, "lust": lust, "pain": pain, "stamina": stamina}
 
 ### use cuting tool, minigame score  0> sucess, <0 fatal fail ###
 func doCut(_pc, _minigame):	
-	var lust = 0
-	var pain = 0
-	var damage = 0.0
-	var lockDamage = 0.0
-	var stamina = 5 + 2 * level
-	var text = "You are looking a good place to cut, trying to rid off the " + getItem().getVisibleName()
+	var _handsFree = !_pc.hasBlockedHands()
+	var _armsFree = !_pc.hasBoundArms()
+	var _legsFree = !_pc.hasBoundLegs()
+	var _canSee = !_pc.isBlindfolded()
+	var _canBite = !_pc.isBitingBlocked()
 	
-	damage = calcCutDamage(_pc, _minigame)
+	var lust = 0
+	var pain = calcCutPain(_pc, 1)
+	var stamina = calcCutStamina(_pc, 1)
+	var damage = 0
+	var lockDamage = 0.0
+	var gMutt = 1.0;
+	
+	var text = "{user.youHe} looking for a good place to cut, trying to rid off the " + getItem().getVisibleName()
+	
+	if !_handsFree || !_armsFree:
+		gMutt *= calcRestraintMult(_pc, _minigame)
+	if !_canSee:
+		gMutt *= calcBlindMult(_pc, _minigame)
+	
+	if _minigame < 0:
+		text += " but instead the bondage gear {user.youHe} hurt self"
+		pain += calcFatalCutPain(_pc, _minigame)
+	elif _minigame == 0:
+		text += ", but without visible effect"
+	elif _minigame > 0:
+		var _mult = calcLockedMult(_pc, _minigame)
+		damage = calcCutDamage(_pc, _minigame) * gMutt
 	
 	return {"text": text, "damage": damage, "lockDamage": lockDamage, "lust": lust, "pain": pain, "stamina": stamina}
 
