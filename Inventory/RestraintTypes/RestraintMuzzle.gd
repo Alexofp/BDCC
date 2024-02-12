@@ -5,12 +5,12 @@ func _init():
 	restraintType = RestraintType.Muzzle
 	
 func canBeCut():
-	return true
+	return tightness < 0.9
 	
-func calcCutDamage(_pc, mult = 1.0):
-	return .calcCutDamage(_pc, mult) / 3
+#func calcCutDamage(_pc, mult = 1.0):
+#	return .calcCutDamage(_pc, mult) / 3
 
-func doStruggle(_pc, _minigame):
+func doStrugglexxx(_pc, _minigame):
 	var _handsFree = !_pc.hasBlockedHands()
 	var _armsFree = !_pc.hasBoundArms()
 	var _legsFree = !_pc.hasBoundLegs()

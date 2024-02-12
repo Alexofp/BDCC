@@ -60,16 +60,18 @@ func getLevelDamage():
 	return 0.5 / pow(max(1.0, level), 0.8)
 
 func getStatDamageMult(_pc):
-	return 1.0 + _pc.getStat(Stat.Strength) / 20.0
+	return (10.0 + pow(max(1.0,_pc.getStat(Stat.Strength)), 0.8)) / 10.0
 
 func getAgilityDamageMult(_pc):
-	return 1.0 + _pc.getStat(Stat.Agility) / 20.0
+	return (10.0 + pow(max(1.0,_pc.getStat(Stat.Agility)), 0.8)) / 10.0
 
 func getMixedDamageMult(_pc):
-	return 1.0 + _pc.getStat(Stat.Strength) / 40.0 + _pc.getStat(Stat.Agility) / 40.0
+	return (10.0 + pow(max(1.0, _pc.getStat(Stat.Strength)/2.0 + _pc.getStat(Stat.Agility)/2.0 ), 0.8)) / 10.0
 
 
 func calcDamage(_pc, mult = 1.0):
+	if _pc.hasPerk(Perk.BDSMPerfectStreak):
+		return mult * getLevelDamage() * (getStatDamageMult(_pc) + 0.5)
 	return mult * getLevelDamage() * getStatDamageMult(_pc)
 
 func calcLockDamage(_pc, mult = 1.0):
@@ -79,7 +81,7 @@ func calcPickDamage(_pc, mult = 1.0):
 	return mult * getLevelDamage() * getAgilityDamageMult(_pc)
 
 func calcCutDamage(_pc, mult = 1.0):
-	return mult * getLevelDamage() * getMixedDamageMult(_pc)
+	return mult * getLevelDamage() * (getMixedDamageMult(_pc) + 1.0)
 
 func canBreakLocked(_pc, _minigame):
 	return _minigame > 0.8 
