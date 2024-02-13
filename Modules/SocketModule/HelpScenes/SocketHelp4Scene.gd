@@ -4,7 +4,10 @@ var hasAccess = false
 var knowsBull = false
 var overstim = 0
 var socketLust = 0
+var shouldCum = false
 var npcID = ""
+var npc2ID = ""
+var npcFuckAnim = StageScene.SexFreeStanding
 
 func _init():
 	sceneID = "SocketHelp4Scene"
@@ -12,6 +15,8 @@ func _init():
 func resolveCustomCharacterName(_charID):
 	if(_charID == "npc"):
 		return npcID
+	if(_charID == "npc2"):
+		return npc2ID
 
 func _run():
 	if(state == ""):
@@ -456,13 +461,13 @@ func _run():
 
 		var socketVagina = getCharacter("socket").getBodypart(BodypartSlot.Vagina)
 		var womb = socketVagina.getOrifice()
-		var stuffedContents = Util.humanReadableList(womb.getFluidList())
+		#var stuffedContents = Util.humanReadableList(womb.getFluidList())
 		var uniqueUsers = womb.getUniqueCharactersAmount()
 		if (uniqueUsers > 1):
-			saynn("Socket's used pussy is leaking "+str(stuffedContents)+", she got stuffed by "+str(uniqueUsers)+" people!")
+			saynn("Socket's used pussy is leaking seed profusely, she got stuffed by "+str(uniqueUsers)+" people!")
 
 		elif (uniqueUsers > 0):
-			saynn("Socket's used pussy is leaking "+str(stuffedContents)+".")
+			saynn("Socket's used pussy is leaking seed.")
 
 		saynn("What do you want to do?")
 
@@ -648,6 +653,159 @@ func _run():
 		saynn("You rest like that together, warming each other's slits.. before you pull away and help her to get up again.")
 
 		addButton("Continue", "See what happens next", "ov_menu")
+	if(state == "npc_grope"):
+		playAnimation(StageScene.Grope, "grope", {pc="socket", npc=npcID})
+		saynn("One of the inmates steps out of the crowd that has surrounded you and then puts {npc.his} hands on a motionless Socket, rubbing and groping her. {npc.His} digits quickly slide down her round fluffy curves and find her pussy that {npc.he} blatantly starts to play with.")
+
+		saynn("The fennec doesn't react much but her pussy does get more wet from her clit being rubbed, her nips looking quite hard.")
+
+		if (shouldCum):
+			saynn("Soon enough, Socket's legs start to shiver a bit. Without producing a noise, she cums, her pussy muscles tensing up.")
+
+		else:
+			saynn("If they keep it up, soon enough Socket will cum from it.")
+
+		addButton("Continue", "See what happens next", "ov_menu")
+	if(state == "npc_gropefast"):
+		playAnimation(StageScene.Grope, "gropefast", {pc="socket", npc=npcID})
+		saynn("A brave inmate approaches Socket and goes straight for her pussy! Without much shame, {npc.he} spreads her folds and penetrates them with {npc.his} digits before wiggling them inside a bit.")
+
+		saynn("{npc.He} then proceeds to finger Socket in front of the whole crowd, at a pace that makes her slit produce wet noises.")
+
+		if (shouldCum):
+			saynn("{npc.His} digits find Socket's g-spot and hammer away at it.. until the fennec finally squirts, her pussy releasing a stream of transparent juices.. followed by her legs shaking a little. That sure was a nice orgasm.")
+
+		else:
+			saynn("The fur on the inner side of Socket's thighs looks wet.. she is getting quite horny even if her body language doesn't exactly portray it.")
+
+		addButton("Continue", "See what happens next", "ov_menu")
+	if(state == "npc_gropebreasts"):
+		playAnimation(StageScene.BreastGroping, "grope", {pc=npcID, npc="socket"})
+		saynn("One of the {npc.girl}s puts the willing Socket on her knees before putting {npc.his} hands on her breasts and proceeding to play with them! The palms fondle and squeeze the soft orbs while the digits rub and pinch her nips that only get harder from the stimulation.")
+
+		if (getCharacter("socket").canBeMilked()):
+			saynn("{npc.He} finds soon enough that Socket is actually lactating, her {socket.breasts} leaking some breast milk while getting squeezed.")
+
+		else:
+			saynn("Socket is not lactating, her breasts do not produce any milk.. but it is still quite pleasurable for her for sure, her pussy looks wet!")
+
+		if (shouldCum):
+			saynn("And, somehow, Socket cums, her pussy is twitching a little and clenching around a cock that's not there.")
+
+		else:
+			saynn("Keep it up and she must just cum from this.")
+
+		addButton("Continue", "See what happens next", "ov_menu")
+	if(state == "npc_grindface"):
+		playAnimation(StageScene.SexOral, "lick", {pc=npcID, npc="socket", bodyState={naked=true, hard=true}})
+		saynn("One of the {npc.girl}s grabs Socket by the hair and pulls her down until she is on her knees. Then {npc.he} exposes {npc.his} own pussy slit and presses Socket's face against it.")
+
+		saynn("The fennec doesn't complain at all while the inmate starts pulling her face along that pussy, spreading the juices over Socket's short fur.")
+
+		if (RNG.chance(50)):
+			saynn("And soon enough, the inmate cums, {npc.his} pussy twitching visible while {npc.he} is moaning cutely.")
+
+		else:
+			saynn("The inmate tries to cum from it but Socket doesn't use her tongue, meaning there is not enough stimulation for {npc.him}.")
+
+		addButton("Continue", "See what happens next", "ov_menu")
+	if(state == "npc_balls"):
+		playAnimation(StageScene.SexOral, "tease", {pc=npcID, npc="socket", bodyState={naked=true, hard=true}})
+		saynn("One of the inmates puts Socket on her knees and presses her face against {npc.his} crotch, smiling a little while {npc.his} {npc.penis} is quickly getting hard from feeling her warm breath.")
+
+		saynn("{npc.He} is enjoying dragging Socket's face along {npc.his} length and pressing her nose into {npc.his} balls.")
+
+		saynn("Not exactly stimulating Socket's pussy.. but sniffing and feeling that inmate's cock is sure stimulating her senses.")
+
+		addButton("Continue", "See what happens next", "ov_menu")
+	if(state == "npc_fuck"):
+		if (RNG.chance(33)):
+			npcFuckAnim = StageScene.SexFreeStanding
+			playAnimation(npcFuckAnim, RNG.pick(["sex", "fast"]), {pc=npcID, npc="socket", bodyState={naked=true, hard=true}})
+			saynn("One of the inmates grabs Socket's hands and pulls her onto {npc.his} hard {npc.penis}, which spreads her slit wide and gets shoved inside.")
+
+			saynn("The whole crowd is watching Socket being fucked.")
+
+		elif (RNG.chance(33)):
+			npcFuckAnim = StageScene.SexAllFours
+			playAnimation(npcFuckAnim, RNG.pick(["sex", "fast"]), {pc=npcID, npc="socket", bodyState={naked=true, hard=true}})
+			saynn("Socket is being put on all fours by one of the inmates that then takes a spot behind her. {npc.He} quickly whips {npc.his} {npc.penis} out and quickly aligns it with that fennec's pussy. One rough thrust and {npc.he} is inside, already railing her cunt.")
+
+			saynn("The whole crowd is watching Socket being fucked. All the while she doesn't even moan, just obediently taking the rough pounding.")
+
+		else:
+			npcFuckAnim = StageScene.SexBehind
+			playAnimation(npcFuckAnim, RNG.pick(["sex", "fast"]), {pc=npcID, npc="socket", bodyState={naked=true, hard=true}})
+			saynn("One of the inmates pulls Socket down and pins her against the floor, already aligning {npc.his} {npc.penis} against her pussy and ramming it deep inside, stretching her wet willing slit wide.")
+
+			saynn("Crowd is cheering while {npc.he} is fucking the emotionless Socket fast while she doesn't produce a noise, just obediently taking the pounding.")
+
+		addButton("Continue", "See what happens next", "npc_fuck_cum")
+	if(state == "npc_fuck_cum"):
+		playAnimation(npcFuckAnim, "inside", {pc=npcID, npc="socket", bodyState={naked=true, hard=true}})
+		if (RNG.chance(50)):
+			saynn("The inmate grunts as {npc.he} stuffs Socket's pussy full of {npc.his} thick {npc.cum}! The engineer's legs are only shaking a little while she is being pumped full of spunk.")
+
+		else:
+			saynn("Socket's pussy gets stuffed full of that inmate's seed as they both reach their peaks, the fennec pretty much ignoring it, only her legs shaking a little.")
+
+		addButton("Continue", "See what happens next", "ov_menu")
+	if(state == "npc_bj"):
+		playAnimation(StageScene.SexOral, RNG.pick(["sex", "fast"]), {pc=npcID, npc="socket", bodyState={naked=true, hard=true}})
+		saynn("One of the inmates is feeling risky. {npc.He} puts Socket on her knees and slides {npc.his} {npc.penis} past her lips, making her open her mouth.")
+
+		saynn("The inmates puts {npc.his} hand on Socket's head and starts to guide it along {npc.his} length, making her suck {npc.him} off! Even when the inmate is being a little rough and forces Socket to deepthroat, the girl is taking it without a problem, her throat bulging a little on each thrust.")
+
+		addButton("Continue", "See what happens next", "npc_bj_cum")
+	if(state == "npc_bj_cum"):
+		saynn("The inmate grunts as {npc.his} cock is throbbing inside Socket's throat and sending waves after waves of thick {npc.cum} down it, no swallowing required.")
+
+		saynn("Socket doesn't close her lips even after {npc.he} pulls out, instead presenting her empty mouth to everyone. Such a good girl.")
+
+		addButton("Continue", "See what happens next", "ov_menu")
+	if(state == "npc_dp"):
+		if (RNG.chance(50)):
+			npcFuckAnim = StageScene.SexSpitroast
+			playAnimation(npcFuckAnim, RNG.pick(["sex", "fast"]), {pc="socket", npc=npcID, npc2=npc2ID, npcBodyState={naked=true, hard=true}, npc2BodyState={naked=true, hard=true}})
+			saynn("One inmate steps out to play with Socket.. but then another one does it too. Rather than fighting for it, they decide to share the girl, one of them takes her by the hips and starts fucking her pussy raw while the second one is using her throat instead.")
+
+			saynn("The crowd is cheering while watching the two inmates spitroast Socket.")
+
+		else:
+			npcFuckAnim = StageScene.SexDP
+			playAnimation(npcFuckAnim, RNG.pick(["sex", "fast"]), {pc="socket", npc=npcID, npc2=npc2ID, npcBodyState={naked=true, hard=true}, npc2BodyState={naked=true, hard=true}})
+			saynn("Two horny inmates step out of the crowd.. and put Socket on her knees. One of them lies under her and makes her ride {npc.his} cock while the second inmate aligns {npc2.his} member with her {anus} instead.")
+
+			saynn("The crowd is cheering while watching Socket being double-penetrated.")
+
+		addButton("Continue", "See what happens next", "npc_dp_cum")
+	if(state == "npc_dp_cum"):
+		playAnimation(npcFuckAnim, "inside", {pc="socket", npc=npcID, npc2=npc2ID, npcBodyState={naked=true, hard=true}, npc2BodyState={naked=true, hard=true}})
+		if (npcFuckAnim == StageScene.SexDP):
+			saynn("It doesn't take long for Socket to cum, the two cocks fucking her holes make her start clenching, her stretched cunt pulsing, her legs shivering. In turn, the extreme tightness makes the inmates grunt, they shove their cocks deep inside and stuff her ass and pussy full of thick spunk.")
+
+			saynn("After that, they carefully pull out and get Socket up on her feet. She stands still like nothing happened.. just with her used fuckholes dripping.")
+
+		else:
+			saynn("After having her pussy and throat fucked for some time, Socket cums, her arms and legs shivering ever so slightly, slit clenching hard. The extreme tightness makes the inmates grunt, they shove their cocks deep inside and stuff her belly and pussy full of virile seed.")
+
+			saynn("After that, they carefully pull out and get Socket up on her feet. She stands still like nothing happened.. just with her used pussy dripping.")
+
+		addButton("Continue", "See what happens next", "ov_menu")
+	if(state == "npc_trib"):
+		playAnimation(StageScene.SexTribadism, RNG.pick(["sex", "fast"]), {pc=npcID, npc="socket", bodyState={naked=true}})
+		saynn("One of the inmates pulls Socket down and interlocks legs with her. After that, {npc.she} proceeds to grind pussies with the fennec, offering a nice show to other inmates.")
+
+		saynn("Their lady bits are kissing each other, exchanging juices and stimulation that makes the inmate moan cutely.")
+
+		addButton("Continue", "See what happens next", "npc_trib_cum")
+	if(state == "npc_trib_cum"):
+		playAnimation(StageScene.SexTribadism, "tease", {pc=npcID, npc="socket", bodyState={naked=true}})
+		saynn("Soon, the dual orgasm overwhelmes them both. Socket's and inmate's pussies are pulsing and rubbing against each other hard, their bodies shivering, passionate moans escaping the inmate's mouth while the fennec is being emotionless about it.")
+
+		saynn("After that, the inmate makes Socket stand up again, the fur on her inner thighs looking quite wet.")
+
+		addButton("Continue", "See what happens next", "ov_menu")
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
@@ -700,6 +858,74 @@ func _react(_action: String, _args):
 		socketLust += 30
 		overstim += RNG.randi_range(3, 6)
 
+	if(_action == "do_share_play"):
+		npcID = NpcFinder.grabNpcIDFromPoolOrGenerate(CharacterPool.Inmates, [], InmateGenerator.new())
+		if(npcID == null || npcID == ""):
+			setState("ov_menu")
+			return
+		addCharacter(npcID)
+		var theChar = getCharacter(npcID)
+		var possible = ["npc_grope", "npc_gropefast", "npc_gropebreasts"]
+		if(theChar.hasReachableVagina()):
+			possible.append("npc_grindface")
+		if(theChar.hasReachablePenis()):
+			possible.append("npc_balls")
+		var selectedRand = RNG.pick(possible)
+		if(selectedRand in ["npc_grope", "npc_gropefast", "npc_gropebreasts"]):
+			overstim += RNG.randi_range(5, 10)
+			socketLust += 30
+			shouldCum = false
+			if(socketLust >= 100):
+				socketLust = 0
+				shouldCum = true
+				overstim += 10
+		else:
+			overstim += RNG.randi_range(5, 10)
+			socketLust += 15
+			if(socketLust > 100):
+				socketLust = 100
+		setState(selectedRand)
+		return
+
+	if(_action == "do_share_sex"):
+		if(RNG.chance(40)):
+			npcID = NpcFinder.grabNpcIDFromPoolOrGenerate(CharacterPool.Inmates, [[NpcCon.HasPenis], [NpcCon.NoChastity]], InmateGenerator.new(), {NpcGen.HasPenis: true, NpcGen.NoChastity: true})
+		else:
+			npcID = NpcFinder.grabNpcIDFromPoolOrGenerate(CharacterPool.Inmates, [], InmateGenerator.new())
+		if(npcID == null || npcID == ""):
+			setState("ov_menu")
+			return
+		addCharacter(npcID)
+		var theChar = getCharacter(npcID)
+		var possible = []
+		if(theChar.hasReachablePenis()):
+			possible.append("npc_fuck")
+			possible.append("npc_fuck")
+			possible.append("npc_bj")
+			if(RNG.chance(33)):
+				npc2ID = NpcFinder.grabNpcIDFromPoolOrGenerate(CharacterPool.Inmates, [[NpcCon.HasPenis], [NpcCon.NoChastity], [NpcCon.AvoidIDs, [npcID]]], InmateGenerator.new(), {NpcGen.HasPenis: true, NpcGen.NoChastity: true})
+				if(npc2ID != null && npc2ID != "" && npc2ID != npcID):
+					addCharacter(npc2ID)
+					setState("npc_dp")
+					return
+		
+		if(theChar.hasReachableVagina()):
+			possible.append("npc_trib")
+		
+		if(possible.size() == 0):
+			setState("npc_grope")
+			overstim += RNG.randi_range(5, 10)
+			socketLust += 30
+			shouldCum = false
+			if(socketLust >= 100):
+				socketLust = 0
+				shouldCum = true
+				overstim += 10
+			return
+		var selectedRand = RNG.pick(possible)
+		setState(selectedRand)
+		return
+
 	if(_action == "do_grope_cum"):
 		socketLust = 0
 		overstim += 20
@@ -736,6 +962,9 @@ func _react(_action: String, _args):
 		if(npcID != ""):
 			removeCharacter(npcID)
 			npcID = ""
+		if(npc2ID != ""):
+			removeCharacter(npc2ID)
+			npc2ID = ""
 
 	if(_action == "do_sex_pussy2_fast"):
 		processTime(6*60)
@@ -775,6 +1004,33 @@ func _react(_action: String, _args):
 		overstim += RNG.randi_range(10, 25)
 		socketLust = 0
 
+	if(_action == "npc_fuck_cum"):
+		processTime(8*60)
+		getCharacter("socket").cummedInVaginaBy(npcID)
+		overstim += RNG.randi_range(15, 25)
+		socketLust = 0
+
+	if(_action == "npc_bj_cum"):
+		processTime(8*60)
+		getCharacter("socket").cummedInMouthBy(npcID)
+		overstim += RNG.randi_range(5, 15)
+
+	if(_action == "npc_dp_cum"):
+		processTime(8*60)
+		getCharacter("socket").cummedInVaginaBy(npcID)
+		if(npcFuckAnim == StageScene.SexDP):
+			getCharacter("socket").cummedInAnusBy(npc2ID)
+		else:
+			getCharacter("socket").cummedInMouthBy(npc2ID)
+		overstim += RNG.randi_range(20, 25)
+		socketLust = 0
+
+	if(_action == "npc_trib_cum"):
+		processTime(8*60)
+		overstim += RNG.randi_range(10, 25)
+		socketLust = 0
+		getCharacter(npcID).rubsVaginasWith("socket")
+
 	setState(_action)
 
 func saveData():
@@ -784,7 +1040,10 @@ func saveData():
 	data["knowsBull"] = knowsBull
 	data["overstim"] = overstim
 	data["socketLust"] = socketLust
+	data["shouldCum"] = shouldCum
 	data["npcID"] = npcID
+	data["npc2ID"] = npc2ID
+	data["npcFuckAnim"] = npcFuckAnim
 
 	return data
 
@@ -795,4 +1054,7 @@ func loadData(data):
 	knowsBull = SAVE.loadVar(data, "knowsBull", false)
 	overstim = SAVE.loadVar(data, "overstim", 0)
 	socketLust = SAVE.loadVar(data, "socketLust", 0)
+	shouldCum = SAVE.loadVar(data, "shouldCum", false)
 	npcID = SAVE.loadVar(data, "npcID", "")
+	npc2ID = SAVE.loadVar(data, "npc2ID", "")
+	npcFuckAnim = SAVE.loadVar(data, "npcFuckAnim", StageScene.SexFreeStanding)
