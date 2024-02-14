@@ -109,13 +109,17 @@ func calcFatalCutPain(_pc, _minigame):
 	return 5 + -_minigame * 5.0
 	
 func calcStruggleStamina(_pc, mult = 1.0):
-	return mult * (5 + level * 3)
+	if _pc.hasPerk(Perk.BDSMBetterStruggling):
+		return mult * (5 + level * 2) 
+	return mult * (10 + level * 4)
 
 func calcPickStamina(_pc, mult = 1.0):
 	return mult * (5 + level * 2)
 
 func calcCutStamina(_pc, mult = 1.0):
-	return mult * (5 + level * 2.5)
+	if _pc.hasPerk(Perk.BDSMBetterStruggling):
+		return mult * (5 + level * 2) 
+	return mult * (5 + level * 3)
 	 
 
 func calcStrugglePain(_pc, mult = 1.0):
@@ -177,6 +181,11 @@ func scaleDamage(dam) -> int:
 
 func shouldDoStruggleMinigame(_pc):
 	return true
+
+func canInstantEscape(_pc):
+	if _pc.hasPerk(Perk.BDSMInstantEscape) && !isLocked() && level < RNG.randf_rangeDis(0, _pc.getLevel()):
+		return RNG.chance(50)
+	return false
 
 func calculateAIScore(_pc):
 	if(!shouldDoStruggleMinigame(_pc)):

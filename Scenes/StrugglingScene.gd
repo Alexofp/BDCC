@@ -293,11 +293,15 @@ func _react(_action: String, _args):
 	if(_action == "startStruggleAgainst"):
 		var item = GM.pc.getInventory().getItemByUniqueID(_args[0])
 		var restraintData: RestraintData = item.getRestraintData()
+		restraintID = _args[0]
 		
 		if(!restraintData.shouldDoStruggleMinigame(GM.pc)):
 			_action = "struggleAgainst"
-		else:
-			restraintID = _args[0]
+			_args = [restraintID, 10.0, {"InstantRemove": true}]
+
+		elif restraintData.canInstantEscape(GM.pc) :
+			_action  = "struggleAgainst"
+			_args = [restraintID, 2.0, {"InstantEscape": true}]
 
 
 ### main struggle block ###
@@ -351,16 +355,16 @@ func _react(_action: String, _args):
 		#uniform block
 		if damage < 0.0:
 			restraintData.takeDamage(damage)
-			addMessage("You lost "+str(Util.roundF(-damage*100.0, 1))+"% of progress.")
+			addMessage("You lost "+Util.limitedPercent(-damage)+"% of progress.")
 		if damage > 0.0:
 			restraintData.takeDamage(damage)
-			addMessage("You made "+str(Util.roundF(damage*100.0, 1))+"% of progress.")
+			addMessage("You made "+Util.limitedPercent(damage)+"% of progress.")
 		if lockDamage > 0.0:
 			restraintData.takeLockDamage(lockDamage)
-			addMessage("You loosened lock "+str(Util.roundF(lockDamage*100.0, 1))+"% of progress.")
+			addMessage("You loosened lock "+Util.limitedPercent(lockDamage)+"% of progress.")
 		if lockDamage < 0.0:
 			restraintData.takeLockDamage(lockDamage)
-			addMessage("You lock stucked you lost "+str(Util.roundF(-lockDamage*100.0, 1))+"% of progress.")
+			addMessage("You lock stucked you lost "+Util.limitedPercent(-lockDamage)+"% of progress.")
 		if addLust != 0:
 			addLust = GM.pc.receiveDamage(DamageType.Lust, addLust)
 			addMessage("You received "+str(addLust)+" lust.")
@@ -452,16 +456,16 @@ func _react(_action: String, _args):
 		#uniform block
 		if damage < 0.0:
 			restraintData.takeDamage(damage)
-			addMessage("You lost "+str(Util.roundF(-damage*100.0, 1))+"% of progress.")
+			addMessage("You lost "+Util.limitedPercent(-damage)+"% of progress.")
 		if damage > 0.0:
 			restraintData.takeDamage(damage)
-			addMessage("You made "+str(Util.roundF(damage*100.0, 1))+"% of progress.")
+			addMessage("You made "+Util.limitedPercent(damage)+"% of progress.")
 		if lockDamage > 0.0:
 			restraintData.takeLockDamage(lockDamage)
-			addMessage("You loosened lock "+str(Util.roundF(lockDamage*100.0, 1))+"% of progress.")
+			addMessage("You loosened lock "+Util.limitedPercent(lockDamage)+"% of progress.")
 		if lockDamage < 0.0:
 			restraintData.takeLockDamage(lockDamage)
-			addMessage("You lock stucked you lost "+str(Util.roundF(-lockDamage*100.0, 1))+"% of progress.")
+			addMessage("You lock stucked you lost "+Util.limitedPercent(-lockDamage)+"% of progress.")
 		if addLust != 0:
 			addLust = GM.pc.receiveDamage(DamageType.Lust, addLust)
 			addMessage("You received "+str(addLust)+" lust.")
@@ -538,16 +542,16 @@ func _react(_action: String, _args):
 		#uniform block
 		if damage < 0.0:
 			restraintData.takeDamage(damage)
-			addMessage("You lost "+str(Util.roundF(-damage*100.0, 1))+"% of progress.")
+			addMessage("You lost "+Util.limitedPercent(-damage)+"% of progress.")
 		if damage > 0.0:
 			restraintData.takeDamage(damage)
-			addMessage("You made "+str(Util.roundF(damage*100.0, 1))+"% of progress.")
+			addMessage("You made "+Util.limitedPercent(damage)+"% of progress.")
 		if lockDamage > 0.0:
 			restraintData.takeLockDamage(lockDamage)
-			addMessage("You loosened lock "+str(Util.roundF(lockDamage*100.0, 1))+"% of progress.")
+			addMessage("You loosened lock "+Util.limitedPercent(lockDamage)+"% of progress.")
 		if lockDamage < 0.0:
 			restraintData.takeLockDamage(lockDamage)
-			addMessage("You lock stucked you lost "+str(Util.roundF(-lockDamage*100.0, 1))+"% of progress.")
+			addMessage("You lock stucked you lost "+Util.limitedPercent(-lockDamage)+"% of progress.")
 		if addLust != 0:
 			addLust = GM.pc.receiveDamage(DamageType.Lust, addLust)
 			addMessage("You received "+str(addLust)+" lust.")
