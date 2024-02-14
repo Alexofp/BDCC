@@ -9,6 +9,7 @@ var npcLevel = 0
 var npcLustInterests = {}
 var npcPersonality = {}
 var npcFetishes = {}
+var npcDefaultFetishInterest = FetishInterest.Likes
 var npcArmor = {}
 var npcBasePain = null
 var npcBaseLust = null
@@ -48,6 +49,8 @@ func _ready():
 			
 	for personalityStat in npcPersonality:
 		personality.setStat(personalityStat, npcPersonality[personalityStat])
+	if(npcDefaultFetishInterest != FetishInterest.Likes):
+		fetishHolder.clearToInterest(npcDefaultFetishInterest)
 	for fetishID in npcFetishes:
 		fetishHolder.setFetish(fetishID, npcFetishes[fetishID])
 			

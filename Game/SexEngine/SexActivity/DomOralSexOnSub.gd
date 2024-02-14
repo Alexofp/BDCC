@@ -280,7 +280,7 @@ func getDomActions():
 				"desc": "Force some cum into their slit",
 			})
 
-	if(state in ["subabouttocum", "subabouttocumcock"] || ((state in ["licking", "tonguefucking", "lickingcock", "blowjob"]) && subInfo.isReadyToCum() && subInfo.isUnconscious())):
+	if(state in ["subabouttocum", "subabouttocumcock"] || ((state in ["licking", "tonguefucking", "lickingcock", "blowjob"]) && subInfo.isReadyToCum() && !subInfo.canDoActions())):
 		actions.append({
 			"id": "letsubcuminside",
 			"score": 1.0,

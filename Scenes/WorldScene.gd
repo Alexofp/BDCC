@@ -92,6 +92,8 @@ func _react(_action: String, _args):
 	if(_action == "me"):
 		runScene("MeScene")
 	if(_action == "sextest"):
+		#runScene("GenericSexScene", [NpcFinder.grabNpcIDFromPoolOrGenerate(CharacterPool.Inmates, [[NpcCon.HasPenis], [NpcCon.NoChastity]], InmateGenerator.new(), {NpcGen.HasPenis: true, NpcGen.NoChastity: true}), "socket", SexType.SlutwallSex])
+		#getCharacter("socket").addEffect("SexSpacedOut")
 		#runScene("GenericSexScene", ["rahi", "pc", SexType.SlutwallSex])
 		#GM.pc.getInventory().addItem(GlobalRegistry.createItem("BreastPump"))
 		#GM.pc.getInventory().addItem(GlobalRegistry.createItem("BreastPumpAdvanced"))

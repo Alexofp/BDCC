@@ -8,6 +8,7 @@ var shouldCum = false
 var npcID = ""
 var npc2ID = ""
 var npcFuckAnim = StageScene.SexFreeStanding
+var willPunish = false
 
 func _init():
 	sceneID = "SocketHelp4Scene"
@@ -806,6 +807,294 @@ func _run():
 		saynn("After that, the inmate makes Socket stand up again, the fur on her inner thighs looking quite wet.")
 
 		addButton("Continue", "See what happens next", "ov_menu")
+	if(state == "do_put_into_slutwall"):
+		playAnimation(StageScene.Duo, "stand", {npc="socket", npcBodyState={leashedBy="pc"}})
+		saynn("You notice that in one of the corners of this space there is a wall.. a special kind of wall. One that has holes big enough to fit a person. The make-shift plate above it calls it a 'slutwall'.")
+
+		saynn("Some spaces are vacant in it. So why not use this opportunity and let others have fun with Socket while also helping her forget about this place.")
+
+		saynn("You find a chain leash in Socket's backpack and click it to her 'armor'. After that, you carefully maneuver through the thick crowd of the inmates, some are already excited about where you are heading with her.")
+
+		saynn("Socket follows you even though her mind is somewhere else entirely, her body reflexes are not letting her fall.")
+
+		addButton("Slutwall", "Put Socket into it", "secure_socket_in_slutwall")
+	if(state == "secure_socket_in_slutwall"):
+		aimCameraAndSetLocName("fight_slutwall")
+		playAnimation(StageScene.Slutwall, "idle", {pc="socket"})
+		saynn("You bring Socket to the slutwall and begin to carefully secure her into one of the unoccupied holes. The chains help to keep her legs spread, putting her pussy out on full display.")
+
+		saynn("After doing that, you grab a marker and write 'Free Use!' on a piece of cardboard that's near the hole, taking credits for fucking a spaced out girl doesn't seem fair..")
+
+		addButton("Continue", "See what happens next", "ov_slut_menu")
+	if(state == "ov_slut_menu"):
+		aimCameraAndSetLocName("fight_slutwall")
+		playAnimation(StageScene.Slutwall, "idle", {pc="socket"})
+		if (overstim < 60):
+			saynn("[sayOther]Current chance of memory loss is "+str(overstim)+"%.[/sayOther]")
+
+		elif (overstim < 100):
+			saynn("[sayOther]Current chance of memory loss is "+str(overstim)+"%. Warning: Socket's memory might get corrupted.[/sayOther]")
+
+		else:
+			saynn("[sayOther]Current chance of memory loss is "+str(overstim)+"%. Warning! Socket's memory has been corrupted![/sayOther]")
+
+		var socketVagina = getCharacter("socket").getBodypart(BodypartSlot.Vagina)
+		var womb = socketVagina.getOrifice()
+		#var stuffedContents = Util.humanReadableList(womb.getFluidList())
+		var uniqueUsers = womb.getUniqueCharactersAmount()
+		if (uniqueUsers > 1):
+			saynn("Socket's used pussy is leaking seed profusely, she got stuffed by "+str(uniqueUsers)+" people!")
+
+		elif (uniqueUsers > 0):
+			saynn("Socket's used pussy is leaking seed.")
+
+		saynn("Socket is stuck in the slutwall. There is a queue of inmates that wouldn't mind using her. What do you want to do?")
+
+		addButton("Watch", "Watch someone fuck Socket", "slutwall_watch")
+		addButton("Use", "Fuck Socket yourself", "slutwall_fuck")
+		addButton("Pull her out", "Enough slutwalls", "pull_socket_out_of_slutwall")
+	if(state == "pull_socket_out_of_slutwall"):
+		playAnimation(StageScene.Duo, "stand", {npc="socket", npcBodyState={leashedBy="pc"}})
+		saynn("You carefully pull Socket out of the slutwall and use a leash to bring her closer to the arena.")
+
+		addButton("Continue", "See what happens next", "ov_menu")
+	if(state == "do_enough"):
+		addCharacter("announcer")
+		playAnimation(StageScene.Duo, "stand", {npc="announcer"})
+		saynn("Socket's VR headset says that her short-term memory is corrupted. Which means.. you succeeded. You go ahead and find Ans to let him know.")
+
+		saynn("[say=pc]I think we're done. Socket now should forget about this place.[/say]")
+
+		saynn("He gives Socket a quick glance and then nods.")
+
+		saynn("[say=announcer]You're pretty good at this, babe. Thanks for helping keep us safe. Don't let me hold you a second longer then.[/say]")
+
+		saynn("But just when you were about to leave this place..")
+
+		saynn("[say=avy]Hold on a fucking second.[/say]")
+
+		saynn("That bitch again..")
+
+		addButton("Continue", "See what happens next", "avy_blocks_last")
+	if(state == "avy_blocks_last"):
+		removeCharacter("announcer")
+		addCharacter("avy")
+		playAnimation(StageScene.Duo, "stand", {npc="avy"})
+		saynn("Avy catches up with you.")
+
+		saynn("[say=pc]What else?[/say]")
+
+		saynn("She inspects Socket and crosses her arms.")
+
+		saynn("[say=avy]The bitch got brainwashed?[/say]")
+
+		saynn("[say=pc]She did, we're leaving.[/say]")
+
+		saynn("Avy's mean eyes shine brightly. She blocks your path and shoves you back.")
+
+		saynn("[say=avy]I want to make sure. I'm not gonna let someone's stupidity ruin this place.[/say]")
+
+		saynn("[say=pc]And how are you gonna do that?[/say]")
+
+		saynn("You notice Avy's shorts bulging in the crotch area..")
+
+		saynn("[say=avy]With my cock. Unlike all these limp dick losers, I can actually fuck someone's brains out.[/say]")
+
+		addButton("Fuck off", "Tell Avy to fuck off", "tell_avy_fuckoff")
+		addButton("Allow it", "Allow Avy to 'make sure' Socket is brainwashed", "avy_fucks_socket")
+	if(state == "tell_avy_fuckoff"):
+		saynn("[say=pc]Fuck off, you're not touching Socket.[/say]")
+
+		saynn("Avy hums. And then raises her fists.")
+
+		saynn("[say=avy]You think so?[/say]")
+
+		saynn("Looks like it's a fight..")
+
+		addButton("Fight", "Start the fight", "start_avy_fight")
+	if(state == "won_avy"):
+		playAnimation(StageScene.Duo, "stand", {npc="avy", npcAction="defeat"})
+		saynn("Avy hits the floor, unable to continue fighting.")
+
+		saynn("[say=avy]Argh.. You lucky slut.[/say]")
+
+		saynn("The crowd is a little disappointed that they won't be able to see a good show.. but then they turn their gazes towards the weak-looking Avy..")
+
+		saynn("[sayMale]Slutwall?[/sayMale]")
+
+		saynn("[say=avy]The fuck are you saying, help me to get up.[/say]")
+
+		saynn("[sayMale]Slut.. wall.. Slut.. Wall. Slutwall. Slutwall![/sayMale]")
+
+		saynn("[say=avy]HEY![/say]")
+
+		saynn("The crowd collectively grabs Avy.. and starts pulling her towards the slutwall.")
+
+		saynn("[say=avy]STOP IT! I WILL RIP YOUR DICKS OUT![/say]")
+
+		saynn("Huh. Looks like you're free to go.")
+
+		addButton("Leave", "Time to go", "socket_pc_leave")
+	if(state == "lost_avy"):
+		playAnimation(StageScene.Duo, "defeat", {npc="avy"})
+		saynn("Defeated, you hit the floor.")
+
+		saynn("[say=avy]Pathetic.[/say]")
+
+		saynn("Looks like Avy is gonna have it her way with Socket..")
+
+		addButton("Watch", "See what happens next", "avy_fucks_socket")
+		addButton("Tell Ans", "Maybe he can stop Avy", "avy_gets_cockblocked")
+	if(state == "avy_gets_cockblocked"):
+		addCharacter("announcer")
+		playAnimation(StageScene.SexFullNelson, "tease", {pc="avy", npc="socket", bodyState={naked=true, hard=true}})
+		saynn("You rush to Ans and ask him if he can maybe help.")
+
+		saynn("All the while, Avy grabs Socket and lifts her off the floor.")
+
+		saynn("[say=announcer]Avy? What are you doing?[/say]")
+
+		saynn("[say=avy]Can't you see? Fucking this whore's brains out.[/say]")
+
+		saynn("Ans crosses his arms.")
+
+		saynn("[say=announcer]Put her down, babe.[/say]")
+
+		saynn("Avy turns towards you and Ans, presenting her cock and Socket's holes.")
+
+		saynn("[say=avy]And why would I do that? I won a fight, I can do whatever I want, those are the rules here![/say]")
+
+		saynn("[say=announcer]Tell me, was that fight inside the arena?[/say]")
+
+		saynn("Avy stays quiet for some time.. and then starts growling.")
+
+		saynn("[say=announcer]If you don't want to play by the rules, you will not be welcome here, Avy.[/say]")
+
+		saynn("The foxy rolls her eyes.. and starts putting Socket down onto her feet.")
+
+		saynn("[say=avy]Whatever..[/say]")
+
+		saynn("You thank Ans.")
+
+		saynn("[say=announcer]Don't mention it, babe.[/say]")
+
+		saynn("Time to go.")
+
+		addButton("Leave", "Time to go", "socket_pc_leave")
+	if(state == "avy_fucks_socket"):
+		playAnimation(StageScene.SexFullNelson, "tease", {pc="avy", npc="socket", bodyState={naked=true, hard=true}})
+		saynn("You just watch as Avy grabs Socket.. and lifts her off the floor, using her raw strength to bring her knees up to her shoulders and locking hands behind her neck, a very exposed position for the girl.")
+
+		saynn("The dark foxy shakes her shorts off, exposing her {avy.penis} that she already aligns Socket's pussy with. The crowd is watching this performance with great interest.")
+
+		addButton("Continue", "See what happens next", "avy_starts_fucking_socket")
+	if(state == "avy_starts_fucking_socket"):
+		playAnimation(StageScene.SexFullNelson, "sex", {pc="avy", npc="socket", bodyState={naked=true, hard=true}})
+		saynn("[say=avy]Watch and learn, you weak ass betas.[/say]")
+
+		saynn("Avy lowers Socket onto her cock.. while thrusting her hips high, shoving her canine dick down the fennec's slit, stretching her wide.")
+
+		saynn("The engineer is emotionless with that headset on.. but even then you can notice her toes curling in her boots already, the angle that Avy is fucking her at is perfect to hit the pleasure spot.")
+
+		saynn("[sayOther]Warning, high levels of stimulation detected.[/sayOther]")
+
+		saynn("The crowd is cheering and enjoying the show.")
+
+		addButton("Continue", "See what happens next", "avy_fucks_socket_fast")
+	if(state == "avy_fucks_socket_fast"):
+		playAnimation(StageScene.SexFullNelson, "fast", {pc="avy", npc="socket", bodyState={naked=true, hard=true}})
+		saynn("Avy increases the onslaught on Socket's pussy, pounding it so hard that there is now a visible bump on the girl's belly appearing. The knot on the foxy's cock begins to inflate with blood..")
+
+		saynn("[say=avy]Take it, whore![/say]")
+
+		saynn("One rough thrust and Avy rams her whole member down that slit, stretching it with the knot.. until it slips inside. Such an act causes Socket's pussy to clench hard around the cock and release a shower of juices, overstimulation making her squirt.")
+
+		saynn("[sayOther]Warning, overstimulation reached "+str(overstim)+"%![/sayOther]")
+
+		saynn("[say=avy]Shut up, I'm not done.[/say]")
+
+		saynn("Avy grunt as she pulls the knot out.. just to ram it in again.. and again.. Each thrust is making Socket's pussy release more transparent fluids.")
+
+		saynn("But even while Socket is being knot-fucked, not a single noise leaves her mouth, the fennec is taking that dick while staying completely silent.")
+
+		saynn("Avy is grunting more and more though, her dick is visibly twitching..")
+
+		addButton("Continue", "See what happens next", "avy_fucks_socket_cum")
+	if(state == "avy_fucks_socket_cum"):
+		playAnimation(StageScene.SexFullNelson, "inside", {pc="avy", npc="socket", bodyState={naked=true, hard=true}})
+		saynn("Avy shoves her full length inside again and lets it stay there, her cock starts to throb inside and stuff Socket's pulsing pussy with waves of seed, gradually making her belly bigger with each throb, Avy's balls tensing up.")
+
+		saynn("[sayOther]Warning, overstimulation reached "+str(overstim)+"%! Short-term memory is corrupted.[/sayOther]")
+
+		saynn("[say=avy]Ngh.. There we fucking go. This should be enough.[/say]")
+
+		saynn("The crowd is cheering even harder.")
+
+		saynn("Avy yanks the knot out and displays Socket's gaping leaking pussy to everyone around. After that, she puts her onto the floor.")
+
+		saynn("[say=avy]Now get the fuck out of here.[/say]")
+
+		saynn("Time to go.")
+
+		addButton("Leave", "Time to go", "socket_pc_leave")
+	if(state == "socket_pc_leave"):
+		removeCharacter("avy")
+		removeCharacter("announcer")
+		aimCameraAndSetLocName("gym_secret")
+		GM.pc.setLocation("gym_secret")
+		playAnimation(StageScene.Duo, "stand", {npc="socket", npcBodyState={leashedBy="pc"}})
+		saynn("You leash Socket and leave the arena, bringing her back to the gym area. You make sure to close the maintenance hatch behind you and step away from it.")
+
+		saynn("Now, your hands reach for her vr headset..")
+
+		addButton("VR headset", "Pull up Socket's headset", "socket_reaction_to_escape")
+	if(state == "socket_reaction_to_escape"):
+		playAnimation(StageScene.Duo, "stand", {npc="socket", npcAction="struggle", npcBodyState={leashedBy="pc"}})
+		saynn("You turn off and carefully pull up Socket's vr headset, revealing her spaced out eyes..")
+
+		saynn("After about ten seconds, the fennec starts to slowly blink.")
+
+		saynn("[say=socket]A..[/say]")
+
+		saynn("She arches her back suddenly.")
+
+		saynn("[say=socket]..h.. ah.. Ah-h-h~..[/say]")
+
+		saynn("Socket lets out a long cute passionate moan, she puts her hands on her crotch, goes cross-eyed and starts panting heavily, her tongue out and drooling.")
+
+		saynn("She stays in this state for a.. while.. moaning and squirming..")
+
+		saynn("[say=pc]Socket?[/say]")
+
+		if (willPunish):
+			saynn("[say=socket]..h-hh~.. Yes?.. Where am I.. Why does my butt hurt..[/say]")
+
+		else:
+			saynn("[say=socket]..h-hh~.. Yes?.. Where am I..[/say]")
+
+		saynn("Looks like she snapped out of it finally.")
+
+		saynn("[say=pc]We fixed a pipe together.. and then..[/say]")
+
+		saynn("Socket pulls her datapad out and checks the tasklist.")
+
+		saynn("[say=socket]Oh! Wow, cool. I don't remember doing it.[/say]")
+
+		saynn("You shrug.")
+
+		saynn("[say=pc]Well..[/say]")
+
+		if (willPunish):
+			saynn("[say=socket]Thank you! I just have to figure out why my butt hurts now..[/say]")
+
+			saynn("Hopefully you will get away with that..")
+
+		else:
+			saynn("[say=socket]Thank you! See you around![/say]")
+
+		saynn("Socket waves to you and leaves. She seems to be struggling to walk straight..")
+
+		addButton("Continue", "See what happens next", "endthescene")
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
@@ -839,13 +1128,16 @@ func _react(_action: String, _args):
 
 	if(_action == "dop_pinch"):
 		overstim += 1
+		getCharacter("socket").clearOrificeFluids()
 
 	if(_action == "dop_tickle"):
 		overstim += 1
+		getCharacter("socket").clearOrificeFluids()
 
 	if(_action == "dop_rub"):
 		overstim += 1
 		socketLust += 5
+		getCharacter("socket").clearOrificeFluids()
 
 	if(_action == "do_tickle"):
 		socketLust -= 5
@@ -925,6 +1217,9 @@ func _react(_action: String, _args):
 		var selectedRand = RNG.pick(possible)
 		setState(selectedRand)
 		return
+
+	if(_action == "do_put_into_slutwall"):
+		processTime(5*60)
 
 	if(_action == "do_grope_cum"):
 		socketLust = 0
@@ -1031,7 +1326,76 @@ func _react(_action: String, _args):
 		socketLust = 0
 		getCharacter(npcID).rubsVaginasWith("socket")
 
+	if(_action == "secure_socket_in_slutwall"):
+		processTime(6*60)
+
+	if(_action == "slutwall_watch"):
+		runScene("GenericSexScene", [NpcFinder.grabNpcIDFromPoolOrGenerate(CharacterPool.Inmates, [], InmateGenerator.new()), "socket", SexType.SlutwallSex], "socket_slutwall")
+		getCharacter("socket").addEffect("SexSpacedOut")
+		return
+
+	if(_action == "slutwall_fuck"):
+		runScene("GenericSexScene", ["pc", "socket", SexType.SlutwallSex], "socket_slutwall")
+		getCharacter("socket").addEffect("SexSpacedOut")
+		return
+
+	if(_action == "pull_socket_out_of_slutwall"):
+		processTime(6*60)
+
+	if(_action == "avy_blocks_last"):
+		if(getCharacter("socket").hasEffect(StatusEffect.HasCumInsideAnus)):
+			willPunish = true
+			setFlag("SocketModule.socketWillPunish", true)
+			setFlag("SocketModule.punishReason", "hadcumafterbrainwash")
+
+	if(_action == "start_avy_fight"):
+		runScene("FightScene", ["avy"], "avyFight")
+		getCharacter("avy").addEffect(StatusEffect.DrugStrong, [3])
+		return
+
+	if(_action == "avy_starts_fucking_socket"):
+		processTime(5*60)
+
+	if(_action == "avy_fucks_socket_fast"):
+		processTime(5*60)
+		overstim += 50
+
+	if(_action == "avy_fucks_socket_cum"):
+		processTime(5*60)
+		getCharacter("socket").cummedInVaginaBy("avy")
+		overstim += 50
+
+	if(_action == "socket_pc_leave"):
+		processTime(5*60)
+
+	if(_action == "socket_reaction_to_escape"):
+		processTime(3*60)
+		getCharacter("socket").resetEquipment()
+
 	setState(_action)
+
+func _react_scene_end(_tag, _result):
+	if(_tag == "socket_slutwall"):
+		if(_result.size() < 1):
+			return
+		var sexresult = _result[0]
+		
+		if(sexresult.has("subs") && sexresult["subs"].has("socket")):
+			var timesCame = sexresult["subs"]["socket"]["timesCame"]
+			if(timesCame > 0):
+				socketLust = 0
+				overstim += 10 * timesCame
+
+	if(_tag == "avyFight"):
+		processTime(10 * 60)
+		var battlestate = _result[0]
+		
+		if(battlestate == "win"):
+			setState("won_avy")
+			addExperienceToPlayer(50)
+		else:
+			setState("lost_avy")
+			addExperienceToPlayer(5)
 
 func saveData():
 	var data = .saveData()
@@ -1044,6 +1408,7 @@ func saveData():
 	data["npcID"] = npcID
 	data["npc2ID"] = npc2ID
 	data["npcFuckAnim"] = npcFuckAnim
+	data["willPunish"] = willPunish
 
 	return data
 
@@ -1058,3 +1423,4 @@ func loadData(data):
 	npcID = SAVE.loadVar(data, "npcID", "")
 	npc2ID = SAVE.loadVar(data, "npc2ID", "")
 	npcFuckAnim = SAVE.loadVar(data, "npcFuckAnim", StageScene.SexFreeStanding)
+	willPunish = SAVE.loadVar(data, "willPunish", false)

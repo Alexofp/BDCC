@@ -34,6 +34,8 @@ func initFromPersonality():
 		resistance = RNG.randf_range(0.0, bratiness)
 
 func canDoActions():
+	if(getChar().getBuffsHolder().hasBuff(Buff.SpacedOutInSexBuff)):
+		return false
 	if(getConsciousness() <= 0.0):
 		return false
 	return true

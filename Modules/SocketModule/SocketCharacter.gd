@@ -15,6 +15,38 @@ func _init():
 	"breasts": {"r": Color("ffeba794"),"b": Color("ffb7736c"),},
 	}
 	
+	npcPersonality = {
+		PersonalityStat.Brat: 0.3,
+		PersonalityStat.Mean: -1.0,
+		PersonalityStat.Subby: 0.75,
+		PersonalityStat.Impatient: 0.4,
+		PersonalityStat.Naive: 1.0,
+		PersonalityStat.Coward: -0.5,
+	}
+	npcDefaultFetishInterest = FetishInterest.Neutral
+	npcFetishes = {
+		Fetish.AnalSexReceiving : FetishInterest.ReallyDislikes,
+		Fetish.AnalSexGiving : FetishInterest.Hates,
+		Fetish.VaginalSexGiving : FetishInterest.Hates,
+		Fetish.VaginalSexReceiving : FetishInterest.Loves,
+		Fetish.OralSexReceiving : FetishInterest.Likes,
+		Fetish.OralSexGiving : FetishInterest.Likes,
+		Fetish.Sadism : FetishInterest.ReallyDislikes,
+		Fetish.Masochism : FetishInterest.Hates,
+		Fetish.UnconsciousSex : FetishInterest.Loves,
+		Fetish.BeingBred : FetishInterest.Dislikes,
+		Fetish.Bondage : FetishInterest.Likes,
+		Fetish.Rigging : FetishInterest.Likes,
+		Fetish.Condoms : FetishInterest.Dislikes,
+		Fetish.DrugUse : FetishInterest.Likes,
+		Fetish.Exhibitionism : FetishInterest.Loves,
+		Fetish.Tribadism : FetishInterest.SlightlyDislikes,
+		Fetish.StraponSexVaginal : FetishInterest.Dislikes,
+		Fetish.StraponSexAnal : FetishInterest.SlightlyDislikes,
+		Fetish.Choking : FetishInterest.SlightlyDislikes,
+		Fetish.HypnosisSubject : FetishInterest.Loves,
+	}
+	
 func _getName():
 	return "Socket"
 
@@ -23,6 +55,9 @@ func getGender():
 	
 func getSmallDescription() -> String:
 	return "Cute fennec that wears a very revealing armor."
+
+func getChatColor():
+	return '#FFC700'
 
 func getSpecies():
 	return ["canine"]

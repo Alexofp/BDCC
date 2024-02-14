@@ -101,7 +101,7 @@ func getDomActions():
 			"priority" : 0,
 		})
 	if(state in ["rimming"]):
-		if((subInfo.isReadyToCum() && subInfo.isUnconscious() && isHandlingSubOrgasms())):
+		if((subInfo.isReadyToCum() && !subInfo.canDoActions() && isHandlingSubOrgasms())):
 			actions.append({
 				"id": "subcum",
 				"score": 1.0,

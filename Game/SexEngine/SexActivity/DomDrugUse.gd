@@ -87,7 +87,7 @@ func getStartActions(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexS
 				desc = desc,
 			})
 		if(!sub.isOralBlocked() && (!drugInfo.has("canUseOnSub") || drugInfo["canUseOnSub"])):
-			if(!_subInfo.isUnconscious() && getSexType() != SexType.SlutwallSex):
+			if(_subInfo.canDoActions() && getSexType() != SexType.SlutwallSex):
 				actions.append({
 					name = drugInfo["name"],
 					args = ["offertosub", itemID],

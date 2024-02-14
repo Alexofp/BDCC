@@ -90,7 +90,7 @@ func processTurn():
 				" {sub.You} {sub.youAre} about to cum!",
 				" {sub.You} can't hold back much longer!"
 			])
-		if(subInfo.isReadyToCum() && subInfo.isUnconscious()):
+		if(subInfo.isReadyToCum() && !subInfo.canDoActions()):
 			satisfyGoals()
 			getSub().cummedOnBy(subID, FluidSource.Vagina)
 			if(getSub().hasReachablePenis() || getSub().isWearingChastityCage()):
@@ -124,7 +124,7 @@ func processTurn():
 				" {sub.You} {sub.youAre} about to cum!",
 				" {sub.You} can't hold back much longer!"
 			])
-		if(subInfo.isReadyToCum() && subInfo.isUnconscious()):
+		if(subInfo.isReadyToCum() && !subInfo.canDoActions()):
 			satisfyGoals()
 			getSub().cummedOnBy(subID, FluidSource.Penis)
 			if(getSub().hasReachableVagina()):

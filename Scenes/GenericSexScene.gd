@@ -99,7 +99,7 @@ func _react(_action: String, _args):
 	
 	if(_action == "recoverandleave"):
 		sexEngine.keepItemsAfterSex()
-		endScene()
+		endScene([sexEngine.getSexResult()])
 		return
 	
 	if(_action == "simulatesex"):
@@ -135,7 +135,7 @@ func _react(_action: String, _args):
 #		return
 	
 	if(_action == "endthescene"):
-		endScene()
+		endScene([sexEngine.getSexResult()])
 		return
 
 	setState(_action)

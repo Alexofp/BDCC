@@ -433,6 +433,15 @@ func getDomActions():
 				"desc": "Cum on their butt",
 				"priority": 1001,
 			})
+		elif(subInfo.isReadyToCum() && isHandlingSubOrgasms() && !subInfo.canDoActions()):
+			actions.append({
+				"id": "subcum",
+				"score": 1.0,
+				"name": "Sub's orgasm",
+				"desc": "They are about to cum!",
+				"priority" : 1001,
+			})
+
 	if(state in ["aftercumminginside"]):
 		actions.append({
 			"id": "continuefucking",
@@ -487,6 +496,23 @@ func doDomAction(_id, _actionInfo):
 			text = getStartTextForPose(newPose)
 		currentPose = newPose
 		return {text = text}
+	
+	if(_id == "subcum"):
+		var straponData = null
+		
+		if(isStraponSex()):
+			satisfyGoals()
+			
+			var strapon = getDom().getWornStrapon()
+			if(strapon.getFluids() != null && !strapon.getFluids().isEmpty()):
+				getSub().cummedInBodypartByAdvanced(usedBodypart, domID)
+				straponData = {
+					text = "{dom.Your} strapon gets squeezed by {sub.your} "+RNG.pick(usedBodypartNames)+" enough for it to suddenly [b]release its contents inside {sub.youHim}[/b]!"
+				}
+			
+		getSub().cumOnFloor()
+		subInfo.cum()
+		return getSexEngine().combineData(getGenericSubOrgasmData(), straponData)
 	
 	if(_id == "domstraponcum"):
 		getDom().cumOnFloor()

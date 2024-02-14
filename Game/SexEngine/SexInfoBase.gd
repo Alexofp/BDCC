@@ -60,6 +60,11 @@ func addLust(newlust):
 func canDoActions():
 	return true
 
+func canTalk():
+	if(getChar().getBuffsHolder().hasBuff(Buff.SpacedOutInSexBuff)):
+		return false
+	return true
+
 func arousalNaturalFade():
 	addArousal(-0.01)
 

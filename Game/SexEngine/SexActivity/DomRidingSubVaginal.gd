@@ -348,7 +348,7 @@ func getDomActions():
 				"priority" : 1001,
 			})
 			
-	if(state in ["subabouttocum"] || (state == "fucking" && subInfo.isReadyToCum() && subInfo.isUnconscious())):
+	if(state in ["subabouttocum"] || (state == "fucking" && subInfo.isReadyToCum() && !subInfo.canDoActions())):
 		var scoreToCumInside = 1.0
 		var hasKnot = getSub().bodypartHasTrait(BodypartSlot.Penis, PartTrait.PenisKnot)
 		if(hasKnot):
