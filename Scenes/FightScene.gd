@@ -652,7 +652,7 @@ func aiTurn():
 		var addPain = 0
 		var addStamina = 0
 		
-		var struggleData = restraintData.doStruggle(enemyCharacter, minigameStatus)
+		var struggleData = restraintData.doStruggle(enemyCharacter, minigameStatus).build()
 		if(struggleData.has("damage")):
 			damage = struggleData["damage"] * minigameStatus
 		if(struggleData.has("lust") && struggleData["lust"] > 0):

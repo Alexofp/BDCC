@@ -6,47 +6,31 @@ func _init():
 	restraintType = RestraintType.Mittens
 
 func canBeCut():
-	return true
+	return tightness < 0.9
 	
 func calcCutDamage(_pc, mult = 1.0):
-	return .calcCutDamage(_pc, mult) / 3
+	return .calcCutDamage(_pc, mult) / 1.4
 
-func doStruggle(_pc, _minigame):
-	var _handsFree = !_pc.hasBlockedHands()
-	var _armsFree = !_pc.hasBoundArms()
-	var _legsFree = !_pc.hasBoundLegs()
-	var _canSee = !_pc.isBlindfolded()
-	var _canBite = !_pc.isBitingBlocked()
-	
-	var text = "error?"
-	var lust = 0
-	var pain = 0
-	var damage = 0
-	var stamina = 0
-	
-	if(_legsFree):
-		text = "{user.name} steps on the mittens and tries to pull {user.his} arms out of them."
-		damage = calcDamage(_pc)
-		stamina = 10
-		
-		if(failChance(_pc, 10)):
-			text += " Ow, {user.name} accidentally steps on {user.his} finger."
-			pain = scaleDamage(5)
-	elif(_canBite && _armsFree):
-		text = "{user.name} bites on one of the mittens and tries to free {user.his} arm. Not very effective but better than nothing."
-		damage = calcDamage(_pc, 0.6)
-		stamina = 10
+func isFree(_pc):
+	return !_pc.hasBoundArms() && !_pc.isBitingBlocked()
 
-		if(failChance(_pc, 10)):
-			text += " Ow, {user.name} accidentally bit {user.his} hand."
-			pain = scaleDamage(5)
-	else:
-		text = "{user.name} tries to helplessly wiggle the mittens off."
-		damage = calcDamage(_pc, 0.4)
-		stamina = RNG.randi_range(10, 20)
-		
-		if(failChance(_pc, 20)):
-			text += " Ow! {user.name} accidently smashed them against "+RNG.pick(["the wall", "the ground", "something"])
-			pain = scaleDamage(RNG.randi_range(5, 10))
+func isPartialFree(_pc):
+	return !_pc.hasBlockedHands()
 	
-	return {"text": text, "damage": damage, "lust": lust, "pain": pain, "stamina": stamina}
+func defaultStruggle(_pc, _minigame, _response):
+	var _text = "{user.name} tries to helplessly wiggle the mittens off"
+	if isFree(_pc):
+		_text = "{user.name} bites on one of the mittens and tries to free {user.his} arm. Not very effective but better than nothing."
+	elif isPartialFree(_pc):
+		_text = "{user.name} steps on the mittens and tries to pull {user.his} arms out of them"
+	return ResponseData.new(_text,  0.0, 0.0, calcStruggleLust(_pc, 0), calcStrugglePain(_pc, 0), calcStruggleStamina(_pc,  1))
+
+func afterStruggle(_pc, _minigame, response):
+	if failChance(_pc, 40) && isFree(_pc):
+			response.text += " Ow! {user.name} accidently smashed them against "+RNG.pick(["the wall", "the ground", "something"])
+			response.pain = scaleDamage(RNG.randi_range(5, 10))
+	elif failChance(_pc, 10) && isFree(_pc):
+		response.text += " Ow, {user.name} accidentally bit {user.his} hand."
+		response.pain = scaleDamage(5)
+	return response
+	

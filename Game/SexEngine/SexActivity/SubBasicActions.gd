@@ -137,7 +137,7 @@ func startActivity(_args):
 		
 		var text = ""
 		var restraintData: RestraintData = pickedItem.getRestraintData()
-		var struggleData = restraintData.doStruggle(sub, minigameStatus)
+		var struggleData = restraintData.doStruggle(sub, minigameStatus).build()
 		
 		var struggleText = GM.ui.processString(struggleData["text"], {"user":subID})
 		text += struggleText

@@ -6,47 +6,31 @@ func canUnlockWithKey():
 func alwaysSavedWhenStruggledOutOf():
 	return true
 
-#func getLevelDamage():
-#	return .getLevelDamage() * 0.2
 
-func doStruggle(_pc, _minigame):
-	var _handsFree = !_pc.hasBlockedHands()
-	var _armsFree = !_pc.hasBoundArms()
-	var _legsFree = !_pc.hasBoundLegs()
-	var _canSee = !_pc.isBlindfolded()
-	var _canBite = !_pc.isBitingBlocked()
-	
-	var text = "error?"
-	var lust = 0
-	var pain = 0
-	var damage = 0
-	var stamina = 0
-	
+func defaultStruggle(_pc, _minigame, response):
+
 	if(failChance(_pc, 10) || (_minigame < 0.7)):
-		text = "{user.name}'s chastity cage BEEPS.. And then suddenly [b]shocks[/b] {user.his} {user.penis}!"
-		stamina = 0
-		pain = RNG.randi_range(10, 20)
+		response.text += "{user.name}'s chastity cage BEEPS.. And then suddenly [b]shocks[/b] {user.his} {user.penis}!"
+		response.pain += RNG.randi_range(10, 20)
 	else:
-		if(_handsFree && _armsFree):
-			text = "{user.name} tugs on {user.his} chastity cage, trying to take it off."
-			damage = calcDamage(_pc)
-			stamina = 10
+		if !_pc.hasBlockedHands() && !_pc.hasBoundArms():
+			response.text += "{user.name} tugs on {user.his} chastity cage, trying to take it off."
+			response.damage += calcDamage(_pc)
+			response.stamina += 10
 		else:
-			text = "{user.name} desperately tries to wiggle {user.his} chastity cage off but makes almost no progress."
-			damage = calcDamage(_pc, 0.1)
-			stamina = 5
+			response.text += "{user.name} desperately tries to wiggle {user.his} chastity cage off but makes almost no progress."
+			response.damage += calcDamage(_pc, 0.1)
+			response.stamina += 5
 		
-		if(_handsFree && _armsFree && failChance(_pc, 20)):
-			text += " Touching {user.his} caged cock made {user.him} quite aroused."
-			lust = scaleDamage(5)
+		if !_pc.hasBlockedHands() && !_pc.hasBoundArms() && failChance(_pc, 20):
+			response.text += " Touching {user.his} caged cock made {user.him} quite aroused."
+			response.lust += scaleDamage(5)
 		elif(failChance(_pc, 20)):
-			text += " {user.He} accidentally pinched {user.his} balls. Ow."
-			pain = scaleDamage(5)
+			response.text += " {user.He} accidentally pinched {user.his} balls. Ow."
+			response.pain += scaleDamage(5)
 		
 		if(failChance(_pc, 30)):
-			text += " {user.name}'s chastity cage BEEPS.. But doesn't do anything to {user.him} this time. Phew."
-		
-	#damage = calcDamage()
-	
-	return {"text": text, "damage": damage, "lust": lust, "pain": pain, "stamina": stamina}
+			response.text += " {user.name}'s chastity cage BEEPS.. But doesn't do anything to {user.him} this time. Phew."
+	response.skipRest()
+	return response
 

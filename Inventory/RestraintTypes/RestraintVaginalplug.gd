@@ -19,54 +19,52 @@ func shouldDoStruggleMinigame(_pc):
 		return false
 	return .shouldDoStruggleMinigame(_pc)
 
-func doStruggle(_pc, _minigame):
-	var _handsFree = !_pc.hasBlockedHands()
-	var _armsFree = !_pc.hasBoundArms()
-	var _legsFree = !_pc.hasBoundLegs()
-	var _canSee = !_pc.isBlindfolded()
-	var _canBite = !_pc.isBitingBlocked()
-	
-	var text = "error?"
-	var lust = 0
-	var pain = 0
-	var damage = 0
-	var stamina = 0
-	
-	if(_handsFree && _armsFree):
-		text = "Because {user.name}'s hands are free {user.he} just {user.verbS('remove')} the plug."
-		damage = 1.0
-		lust = scaleDamage(10)
-	elif(_legsFree):
-		text = "{user.name} squirms and wiggles {user.his} rear, trying to push the plug out of {user.his} pussy."
-		damage = calcDamage(_pc)
-		stamina = 5
-		lust = scaleDamage(5)
-	else:
-		text = "{user.name} desperatelly squirms, trying to push the vaginal plug out. Not being able to spread {user.his} legs makes it very hard."
-		damage = calcDamage(_pc, 0.5)
-		stamina = 10
-		lust = scaleDamage(5)
-	
 
-				
-	if(damage < 1.0):
+func defaultStruggle(_pc, _minigame, response):
+	if !_pc.hasBoundArms() || !_pc.hasBlockedHands():
+		response.text = "Because {user.name}'s hands are free {user.he} just {user.verbS('remove')} the plug."
+		response.damage = 1.0
+		response.lust += calcStruggleLust(_pc, 2)
+		response.skipRest()
+	return response
+
+func fatalFailStruggle(_pc, _minigame, response):
+	response.text = " {user.name} desperatelly squirms, trying to make the vaginal fall out but it slipped back."
+	response.damage = -1.0
+	response.lust += calcStruggleLust(_pc, 15)
+	
+func sucessStruggle(_pc, _minigame, response):
+
+	if !_pc.hasBoundLegs():
+		response.text = "{user.name} squirms and wiggles {user.his} rear, trying to push the plug out of {user.his} pussy."
+		response.damage = calcDamage(_pc, 1)
+		response.lust += calcStruggleLust(_pc, 5)
+	else:
+		response.text += " {user.name} desperatelly squirms, trying to push the vaginal plug out. Not being able to spread {user.his} legs makes it very hard."
+		response.damage = calcDamage(_pc, 0.5)
+		response.lust += calcStruggleLust(_pc, 10)
+	return response
+	
+func afterStruggle(_pc, _minigame, response):
+	if(response.damage < 1.0 && response.damage > 0.0):
 		if(_pc.isPlayer() && failChance(_pc, 40) && GM.pc.getInventory().hasSlotEquipped(InventorySlot.UnderwearBottom)):
 			if(_pc.getInventory().getEquippedItem(InventorySlot.UnderwearBottom).coversBodypart(BodypartSlot.Vagina)):
-				text += " The plug presses into your panties."
-				damage /= 2.0
+				response.text += " The plug presses into your panties."
+				response.damage = response.damage / 2.0
 				
 				if(failChance(_pc, 30)):
-					text += " [b]Your panties slipped down, oops.[/b]"
+					response.text += " [b]Your panties slipped down, oops.[/b]"
 					_pc.getInventory().unequipSlot(InventorySlot.UnderwearBottom)
 		
 		if(!turnedOn && failChance(_pc, 40)):
-			text += " {user.name} accidentally turns on the plug inside {user.him} and it starts vibrating!"
+			response.text += " {user.name} accidentally turns on the plug inside {user.him} and it starts vibrating!"
 			turnedOn = true
 		elif(turnedOn && failChance(_pc, 20)):
-			text += " {user.name} managed to randomly turn off the vibrating plug."
+			response.text += " {user.name} managed to randomly turn off the vibrating plug."
 			turnedOn = false
-	
-	return {"text": text, "damage": damage, "lust": lust, "pain": pain, "stamina": stamina}
+
+	return response
+
 
 func processStruggleTurn(_pc, _isActivelyStruggling):
 	if(turnedOn):

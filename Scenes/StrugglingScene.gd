@@ -95,7 +95,7 @@ func _run():
 
 		for item in GM.pc.getInventory().getEquppedRestraints():
 			var restraintData: RestraintData = item.getRestraintData()
-			if(!restraintData.canUnlockWithKey()):
+			if(!restraintData.canBeLockPicked()):
 				addDisabledButton(item.getVisibleName(), "This restraint doesn't seem to have a keyhole")
 				continue
 			addButton(item.getVisibleName(), item.getVisisbleDescription(), "dolockpick", [item.getUniqueID()])
