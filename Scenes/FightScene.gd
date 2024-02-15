@@ -648,7 +648,7 @@ func aiTurn():
 		var addPain = 0
 		var addStamina = 0
 		
-		var struggleData = restraintData.doStruggle(enemyCharacter, minigameStatus)
+		var struggleData = restraintData.doStruggle(enemyCharacter, minigameStatus).build()
 		if(struggleData.has("damage")):
 			damage = struggleData["damage"] * minigameStatus
 		if(struggleData.has("lust") && struggleData["lust"] > 0):
@@ -756,7 +756,7 @@ func beforeTurnChecks(pcWasStruggling = false):
 	enemyCharacter.processBattleTurnContex(getContexForEnemy())
 	
 	if(true):
-		var turnData = GM.pc.processStruggleTurn(pcWasStruggling)
+		var turnData = GM.pc.processStruggleTurn(pcWasStruggling).build()
 		var addLust = turnData["lust"]
 		var addPain = turnData["pain"]
 		var addStamina = turnData["stamina"]
@@ -779,7 +779,7 @@ func beforeTurnChecks(pcWasStruggling = false):
 			whatHappened += "[i]"+GM.ui.processString(additionalStruggleText, {"user":"pc"})+"[/i]\n"
 	
 	if(true):
-		var turnData = enemyCharacter.processStruggleTurn(true)
+		var turnData = enemyCharacter.processStruggleTurn(true).build()
 		var addLust = turnData["lust"]
 		var addPain = turnData["pain"]
 		var addStamina = turnData["stamina"]

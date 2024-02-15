@@ -1811,7 +1811,7 @@ func processStruggleTurn(isActivelyStruggling = false):
 	
 	for item in getInventory().getEquppedRestraints():
 		var restraintData: RestraintData = item.getRestraintData()
-		var struggleData = restraintData.processStruggleTurn(self, isActivelyStruggling)
+		var struggleData = restraintData.processStruggleTurn(self, isActivelyStruggling).build()
 		
 		if(struggleData == null):
 			continue
@@ -1826,7 +1826,7 @@ func processStruggleTurn(isActivelyStruggling = false):
 			addPain += struggleData["pain"]
 		if(struggleData.has("stamina")):
 			addStamina += struggleData["stamina"]
-		if(struggleData.has("text")):
+		if(struggleData.has("text") && struggleData["text"] != ""):
 			texts.append(struggleData["text"])
 			#additionalStruggleText += struggleData["text"] + "\n\n"
 		
