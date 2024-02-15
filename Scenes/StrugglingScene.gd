@@ -318,7 +318,7 @@ func _react(_action: String, _args):
 		var addStamina = 0
 		var addTime = 60
 
-		var _data = restraintData.doStruggle(GM.pc, gameScore)
+		var _data = restraintData.doStruggle(GM.pc, gameScore).build()
 		
 		if(_data.has("damage")):
 			damage = _data["damage"]
@@ -418,7 +418,7 @@ func _react(_action: String, _args):
 		var addStamina = 0
 		var addTime = 60
 
-		var _data = restraintData.doLockpick(GM.pc, gameScore)
+		var _data = restraintData.doLockpick(GM.pc, gameScore).build()
 
 		if _data.has("damage"):
 			damage = _data["damage"]
@@ -504,7 +504,7 @@ func _react(_action: String, _args):
 		var addStamina = 0
 		var addTime = 60
 
-		var _data = restraintData.doCut(GM.pc, gameScore)
+		var _data = restraintData.doCut(GM.pc, gameScore).build()
 
 		if _data.has("damage"):
 			damage = _data["damage"]

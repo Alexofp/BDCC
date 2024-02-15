@@ -10,6 +10,27 @@ var npcDodgeDifficultyMod: float = 1.0
 var npcAiScoreMod: float = 1.0
 var restraintType = RestraintType.Generic
 
+class ResponseData:
+
+	var text: String
+	var damage: float
+	var lockDamage: float
+	var lust: int
+	var pain: int
+	var stamina: int
+	
+	func _init(_text: String, _damage: float, _lockDamage: float, _lust: int, _pain: int, _stamina: int):
+		text = _text
+		damage = _damage
+		lockDamage = _lockDamage
+		lust = _lust
+		pain = _pain
+		stamina = _stamina
+
+	func build():
+		return {"text": text, "damage": damage, "lockDamage": lockDamage, "lust": lust, "pain": pain, "stamina": stamina}
+
+
 func getItem():
 	return item.get_ref()
 
@@ -207,38 +228,38 @@ func doStruggle(_pc, _minigame):
 	var _canSee = !_pc.isBlindfolded()
 	var _canBite = !_pc.isBitingBlocked()
 	
-	var lust = calcStruggleLust(_pc, 0)
-	var pain = calcStrugglePain(_pc, 0)
-	var stamina = calcStruggleStamina(_pc, 1)
-	var damage = 0
-	var lockDamage = 0.0
-	var gMutt = 1.0;
+	var globalMutt = 1.0;
+	var responese = ResponseData.new("",  0.0, 0.0, calcStruggleLust(_pc, 0), calcStrugglePain(_pc, 0), calcStruggleStamina(_pc, 1))
 	
-	var text = "{user.youHe} struggle, trying to make the "+getItem().getVisibleName()+" slip off"
+	responese.text = "{user.youHe} struggle, trying to make the "+getItem().getVisibleName()+" slip off"
 	
 	if !_handsFree || !_armsFree:
-		gMutt *= calcRestraintMult(_pc, _minigame)
+		globalMutt *= calcRestraintMult(_pc, _minigame)
 	if !_canSee:
-		gMutt *= calcBlindMult(_pc, _minigame)
+		globalMutt *= calcBlindMult(_pc, _minigame)
 	
 	if _minigame < 0:
-		text += " but it seems like {user.youHe} just tightened it up more"
+		responese.text += " but it seems like {user.youHe} just tightened it up more"
 		var _mult = calcFatalMult(_pc, _minigame)
-		damage = calcDamage(_pc, _mult)
-		stamina = calcStruggleStamina(_pc, 2)
+		responese.damage = calcDamage(_pc, _mult)
+		responese.stamina = calcStruggleStamina(_pc, 2)
+
 	elif _minigame == 0:
-		text += ", but without visible effect"
+		responese.text += ", but without visible effect"
+
 	elif _minigame > 0 && !isLocked():
-		damage = calcDamage(_pc, _minigame) * gMutt
+		responese.damage = calcDamage(_pc, _minigame) * globalMutt
+
 	elif _minigame > 0 && isLocked() && !canBreakLocked(_pc, _minigame):
-		text += ", but the lock is too strong"
+		responese.text += ", but the lock is too strong"
+
 	elif _minigame > 0 && isLocked() && canBreakLocked(_pc, _minigame):
-		text += ", but it would have been done better if only it was not locked"
+		responese.text += ", but it would have been done better if only it was not locked"
 		var _mult = calcLockedMult(_pc, _minigame)
-		damage = calcDamage(_pc, _mult) * gMutt
-		lockDamage = calcLockDamage(_pc, _mult) * gMutt
+		responese.damage = calcDamage(_pc, _mult) * globalMutt
+		responese.lockDamage = calcLockDamage(_pc, _mult) * globalMutt
 	
-	return {"text": text, "damage": damage, "lockDamage": lockDamage, "lust": lust, "pain": pain, "stamina": stamina}
+	return responese
 
 ### use lockpick tool, minigame score  0> sucess, <0 fatal fail ###
 func doLockpick(_pc, _minigame):
@@ -248,31 +269,29 @@ func doLockpick(_pc, _minigame):
 	var _canSee = !_pc.isBlindfolded()
 	var _canBite = !_pc.isBitingBlocked()
 	
-	var lust = 0
-	var pain = 0
-	var stamina = calcPickStamina(_pc, 1)
-	var damage = 0
-	var lockDamage = 0.0
-	var gMutt = 1.0;
+	var globalMutt = 1.0;
+	var responese = ResponseData.new("",  0.0, 0.0, 0, 0, calcPickStamina(_pc, 1))
 	
-	var text = "You picking the lock, trying to unlock the " + getItem().getVisibleName()
+	responese.text = "You picking the lock, trying to unlock the " + getItem().getVisibleName()
 	
 	if !_handsFree || !_armsFree:
-		gMutt *= calcRestraintMult(_pc, _minigame)
+		globalMutt *= calcRestraintMult(_pc, _minigame)
 	if !_canSee:
-		gMutt *= calcBlindMult(_pc, _minigame)
+		globalMutt *= calcBlindMult(_pc, _minigame)
 	
 	if _minigame < 0:
-		text += " but it seems like {user.youHe} you've stuck the lock instead"
-		lockDamage = -1.0
-		stamina = calcPickStamina(_pc, 2)
-	elif _minigame == 0:
-		text += ", but without visible effect"
-	elif _minigame > 0:
-		text += ", and it seems to be working"
-		lockDamage = calcPickDamage(_pc, _minigame) * gMutt
+		responese.text += " but it seems like {user.youHe} you've stuck the lock instead"
+		responese.lockDamage = -1.0
+		responese.stamina = calcPickStamina(_pc, 2)
 		
-	return {"text": text, "damage": damage, "lockDamage": lockDamage, "lust": lust, "pain": pain, "stamina": stamina}
+	elif _minigame == 0:
+		responese.text += ", but without visible effect"
+		
+	elif _minigame > 0:
+		responese.text += ", and it seems to be working"
+		responese.lockDamage = calcPickDamage(_pc, _minigame) * globalMutt
+		
+	return responese
 
 ### use cuting tool, minigame score  0> sucess, <0 fatal fail ###
 func doCut(_pc, _minigame):	
@@ -282,30 +301,28 @@ func doCut(_pc, _minigame):
 	var _canSee = !_pc.isBlindfolded()
 	var _canBite = !_pc.isBitingBlocked()
 	
-	var lust = 0
-	var pain = calcCutPain(_pc, 1)
-	var stamina = calcCutStamina(_pc, 1)
-	var damage = 0
-	var lockDamage = 0.0
-	var gMutt = 1.0;
+	var globalMutt = 1.0;
+	var responese = ResponseData.new("",  0.0, 0.0, 0, calcCutPain(_pc, 1), calcCutStamina(_pc, 1))
 	
-	var text = "{user.youHe} looking for a good place to cut, trying to rid off the " + getItem().getVisibleName()
+	responese.text = "{user.youHe} looking for a good place to cut, trying to rid off the " + getItem().getVisibleName()
 	
 	if !_handsFree || !_armsFree:
-		gMutt *= calcRestraintMult(_pc, _minigame)
+		globalMutt *= calcRestraintMult(_pc, _minigame)
 	if !_canSee:
-		gMutt *= calcBlindMult(_pc, _minigame)
+		globalMutt *= calcBlindMult(_pc, _minigame)
 	
 	if _minigame < 0:
-		text += " but instead the bondage gear {user.youHe} hurt self"
-		pain += calcFatalCutPain(_pc, _minigame)
+		responese.text += " but instead the bondage gear {user.youHe} hurt self"
+		responese.pain += calcFatalCutPain(_pc, _minigame)
+		
 	elif _minigame == 0:
-		text += ", but without visible effect"
+		responese.text += ", but without visible effect"
+		
 	elif _minigame > 0:
 		var _mult = calcLockedMult(_pc, _minigame)
-		damage = calcCutDamage(_pc, _minigame) * gMutt
+		responese.damage = calcCutDamage(_pc, _minigame) * globalMutt
 	
-	return {"text": text, "damage": damage, "lockDamage": lockDamage, "lust": lust, "pain": pain, "stamina": stamina}
+	return responese
 
 
 func processStruggleTurn(_pc, _isActivelyStruggling):
