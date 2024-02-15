@@ -32,6 +32,7 @@ func stateMachineTravel(thedoll, state_machine, animID):
 		args = animID
 		animID = animID[0]
 	
+	#thedoll.attachTemporaryUnriggedPart("hand.R", "res://Inventory/UnriggedModels/BigWrench/BigWrench.tscn")
 	if(animID == ""):
 		pass
 	elif(animID == "walk"):
@@ -43,6 +44,8 @@ func stateMachineTravel(thedoll, state_machine, animID):
 		state_machine.travel("Jogging-loop")
 	elif(animID == "stand"):
 		state_machine.travel("Standing-loop")
+		if(args.size() > 1):
+			thedoll.attachTemporaryUnriggedPart("hand.R", args[1])
 	elif(animID == "kneel"):
 		state_machine.travel("Kneeling-loop")
 	elif(animID == "defeat"):

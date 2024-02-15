@@ -75,6 +75,8 @@ func _run():
 
 		addButton("Continue", "See what happens next", "socket_explains_what_she_does")
 	if(state == "socket_explains_what_she_does"):
+		playAnimation(StageScene.Duo, "stand", {npc="socket", further=true, npcAction=["stand", "res://Inventory/UnriggedModels/BigWrench/BigWrench.tscn"]})
+		
 		saynn("[say=socket]But I like this station already! So many nice spots and cool equipment.. Some furniture is a little.. rigid.. but that be changed! What is your name?[/say]")
 
 		saynn("[say=pc]The staff usually calls inmates by their numbers.[/say]")

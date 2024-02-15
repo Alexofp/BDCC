@@ -102,6 +102,7 @@ func _run():
 
 		addButton("Find broken light", "Follow the mineshaft", "follow_mineshaft")
 	if(state == "follow_mineshaft"):
+		playAnimation(StageScene.Duo, "stand", {npc="socket", further=true, npcAction=["stand", "res://Inventory/UnriggedModels/BigWrench/BigWrench.tscn"]})
 		aimCameraAndSetLocName("mining_shafts_entering")
 		saynn("You and Socket follow the mineshaft. It has wooden supports every few meters and a whole network of rails for minecarts.. but you're still being careful as to not trip over something.. or someone.. you bump into other inmates constantly, some of them hitting the rocks and the rest are carrying them.")
 

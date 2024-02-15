@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Inventory/UnriggedModels/BigWrench/BigWrench.png" type="Texture" id=1]
+
+[node name="BigWrench" type="Spatial"]
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform( -3.0598e-08, -0.7, 0, 0.7, -3.0598e-08, 0, 0, 0, 0.7, -0.962, -0.044, 0 )
+texture = ExtResource( 1 )

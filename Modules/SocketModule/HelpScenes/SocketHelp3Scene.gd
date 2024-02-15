@@ -110,7 +110,7 @@ func _run():
 
 		addButton("Follow", "See where Socket brings you", "first_vendomat")
 	if(state == "first_vendomat"):
-		playAnimation(StageScene.Duo, "stand", {npc="socket"})
+		playAnimation(StageScene.Duo, "stand", {npc="socket", further=true, npcAction=["stand", "res://Inventory/UnriggedModels/BigWrench/BigWrench.tscn"]})
 		aimCameraAndSetLocName("main_hallroom1")
 		saynn("You follow Socket through the checkpoint. The guard that is protecting it is clearly too busy staring at the naked butt, he doesn't even check you.")
 

@@ -62,7 +62,7 @@ func _run():
 
 		addButton("Follow", "Follow Socket more", "follow_socket_more")
 	if(state == "follow_socket_more"):
-		playAnimation(StageScene.Duo, "stand", {npc="socket"})
+		playAnimation(StageScene.Duo, "stand", {npc="socket", further=true, npcAction=["stand", "res://Inventory/UnriggedModels/BigWrench/BigWrench.tscn"]})
 		aimCameraAndSetLocName("gym_nearbathroom")
 		saynn("Socket gets a little lost while walking you through the yard.. but eventually you manage to find the gym.")
 
@@ -121,7 +121,7 @@ func _run():
 		addButton("Continue", "See what happens next", "bulldog_talk")
 	if(state == "bulldog_talk"):
 		addCharacter("bulldog")
-		playAnimation(StageScene.Duo, "stand", {pc="socket", npc="bulldog"})
+		playAnimation(StageScene.Duo, ["stand", "res://Inventory/UnriggedModels/BigWrench/BigWrench.tscn"], {pc="socket", further=true, npc="bulldog"})
 		saynn("You and Socket approach the guy that is blocking some maintenance hatch with his body. He reacts to you two by crossing his arms and putting on a very mean face. The maintenance door that he is protecting.. is way bigger this time.")
 
 		saynn("[say=socket]Hi![/say]")

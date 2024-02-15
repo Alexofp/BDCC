@@ -118,7 +118,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "socket_approaches_vent")
 	if(state == "socket_approaches_vent"):
-		playAnimation(StageScene.Duo, "stand", {npc="socket", flipNPC=true})
+		playAnimation(StageScene.Duo, "stand", {npc="socket", flipNPC=true, npcAction=["stunbaton", "res://Inventory/UnriggedModels/BigWrench/BigWrench.tscn"]})
 		saynn("Socket gets up and approaches it. She tries to use her access badge to open it.. but the maintenance door only buzzes, the motors inside it spinning loudly and fruitlessly.")
 
 		saynn("[say=pc]Looks like it got stuck.[/say]")
