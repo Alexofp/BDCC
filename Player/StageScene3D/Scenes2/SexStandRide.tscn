@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=2]
+[gd_scene load_steps=39 format=2]
 
 [ext_resource path="res://Player/Player3D/Doll3D.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Player/StageScene3D/BaseStageScene3D.tscn" type="PackedScene" id=2]
@@ -17,6 +17,9 @@ animation = "SexStandRideFast_1-loop"
 
 [sub_resource type="AnimationNodeAnimation" id=475]
 animation = "SexStandRideInside_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=498]
+animation = "SexStandRideRub_1-loop"
 
 [sub_resource type="AnimationNodeAnimation" id=476]
 animation = "SexStandRideTease_1-loop"
@@ -42,17 +45,26 @@ xfade_time = 0.5
 [sub_resource type="AnimationNodeStateMachineTransition" id=483]
 xfade_time = 0.5
 
+[sub_resource type="AnimationNodeStateMachineTransition" id=499]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=500]
+xfade_time = 0.5
+
 [sub_resource type="AnimationNodeStateMachine" id=484]
 states/SexStandRideFast_1-loop/node = SubResource( 474 )
 states/SexStandRideFast_1-loop/position = Vector2( 536, 291 )
 states/SexStandRideInside_1-loop/node = SubResource( 475 )
 states/SexStandRideInside_1-loop/position = Vector2( 536, 118 )
+states/SexStandRideRub_1-loop/node = SubResource( 498 )
+states/SexStandRideRub_1-loop/position = Vector2( 831, 30 )
 states/SexStandRideTease_1-loop/node = SubResource( 476 )
 states/SexStandRideTease_1-loop/position = Vector2( 536, 30 )
 states/SexStandRide_1-loop/node = SubResource( 477 )
 states/SexStandRide_1-loop/position = Vector2( 536, 201 )
-transitions = [ "SexStandRideTease_1-loop", "SexStandRideInside_1-loop", SubResource( 478 ), "SexStandRideInside_1-loop", "SexStandRideTease_1-loop", SubResource( 479 ), "SexStandRideInside_1-loop", "SexStandRide_1-loop", SubResource( 480 ), "SexStandRide_1-loop", "SexStandRideInside_1-loop", SubResource( 481 ), "SexStandRide_1-loop", "SexStandRideFast_1-loop", SubResource( 482 ), "SexStandRideFast_1-loop", "SexStandRide_1-loop", SubResource( 483 ) ]
+transitions = [ "SexStandRideTease_1-loop", "SexStandRideInside_1-loop", SubResource( 478 ), "SexStandRideInside_1-loop", "SexStandRideTease_1-loop", SubResource( 479 ), "SexStandRideInside_1-loop", "SexStandRide_1-loop", SubResource( 480 ), "SexStandRide_1-loop", "SexStandRideInside_1-loop", SubResource( 481 ), "SexStandRide_1-loop", "SexStandRideFast_1-loop", SubResource( 482 ), "SexStandRideFast_1-loop", "SexStandRide_1-loop", SubResource( 483 ), "SexStandRideTease_1-loop", "SexStandRideRub_1-loop", SubResource( 499 ), "SexStandRideRub_1-loop", "SexStandRideTease_1-loop", SubResource( 500 ) ]
 start_node = "SexStandRideTease_1-loop"
+graph_offset = Vector2( 81, -138 )
 
 [sub_resource type="AnimationNodeBlendTree" id=485]
 graph_offset = Vector2( -348.69, 38.9555 )
@@ -72,6 +84,9 @@ animation = "SexStandRideFast_2-loop"
 
 [sub_resource type="AnimationNodeAnimation" id=487]
 animation = "SexStandRideInside_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=501]
+animation = "SexStandRideRub_2-loop"
 
 [sub_resource type="AnimationNodeAnimation" id=488]
 animation = "SexStandRideTease_2-loop"
@@ -97,17 +112,26 @@ xfade_time = 0.5
 [sub_resource type="AnimationNodeStateMachineTransition" id=495]
 xfade_time = 0.5
 
+[sub_resource type="AnimationNodeStateMachineTransition" id=502]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=503]
+xfade_time = 0.5
+
 [sub_resource type="AnimationNodeStateMachine" id=496]
 states/SexStandRideFast_2-loop/node = SubResource( 486 )
 states/SexStandRideFast_2-loop/position = Vector2( 539, 256 )
 states/SexStandRideInside_2-loop/node = SubResource( 487 )
 states/SexStandRideInside_2-loop/position = Vector2( 539, 97 )
+states/SexStandRideRub_2-loop/node = SubResource( 501 )
+states/SexStandRideRub_2-loop/position = Vector2( 830, 28 )
 states/SexStandRideTease_2-loop/node = SubResource( 488 )
 states/SexStandRideTease_2-loop/position = Vector2( 539, 28 )
 states/SexStandRide_2-loop/node = SubResource( 489 )
 states/SexStandRide_2-loop/position = Vector2( 539, 171 )
-transitions = [ "SexStandRideTease_2-loop", "SexStandRideInside_2-loop", SubResource( 490 ), "SexStandRideInside_2-loop", "SexStandRideTease_2-loop", SubResource( 491 ), "SexStandRideInside_2-loop", "SexStandRide_2-loop", SubResource( 492 ), "SexStandRide_2-loop", "SexStandRideInside_2-loop", SubResource( 493 ), "SexStandRide_2-loop", "SexStandRideFast_2-loop", SubResource( 494 ), "SexStandRideFast_2-loop", "SexStandRide_2-loop", SubResource( 495 ) ]
+transitions = [ "SexStandRideTease_2-loop", "SexStandRideInside_2-loop", SubResource( 490 ), "SexStandRideInside_2-loop", "SexStandRideTease_2-loop", SubResource( 491 ), "SexStandRideInside_2-loop", "SexStandRide_2-loop", SubResource( 492 ), "SexStandRide_2-loop", "SexStandRideInside_2-loop", SubResource( 493 ), "SexStandRide_2-loop", "SexStandRideFast_2-loop", SubResource( 494 ), "SexStandRideFast_2-loop", "SexStandRide_2-loop", SubResource( 495 ), "SexStandRideTease_2-loop", "SexStandRideRub_2-loop", SubResource( 502 ), "SexStandRideRub_2-loop", "SexStandRideTease_2-loop", SubResource( 503 ) ]
 start_node = "SexStandRideTease_2-loop"
+graph_offset = Vector2( 22, -103 )
 
 [sub_resource type="AnimationNodeBlendTree" id=497]
 graph_offset = Vector2( -322.532, 74.6842 )

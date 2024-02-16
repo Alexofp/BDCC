@@ -28,6 +28,7 @@ func _init():
 		"res://Modules/SocketModule/HelpScenes/SocketHelp2Scene.gd",
 		"res://Modules/SocketModule/HelpScenes/SocketHelp3Scene.gd",
 		"res://Modules/SocketModule/HelpScenes/SocketHelp4Scene.gd",
+		"res://Modules/SocketModule/HelpScenes/SocketHelp5Scene.gd",
 		]
 	characters = [
 		"res://Modules/SocketModule/SocketCharacter.gd",

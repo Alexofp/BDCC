@@ -1,4 +1,4 @@
-[gd_scene load_steps=69 format=2]
+[gd_scene load_steps=85 format=2]
 
 [ext_resource path="res://Player/Player3D/Doll3D.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Player/StageScene3D/BaseStageScene3D.tscn" type="PackedScene" id=2]
@@ -23,6 +23,12 @@ animation = "SexStealthInside_1-loop"
 
 [sub_resource type="AnimationNodeAnimation" id=500]
 animation = "SexStealthInside_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=557]
+animation = "SexStealthRub_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=558]
+animation = "SexStealthRub_1-loop"
 
 [sub_resource type="AnimationNodeAnimation" id=501]
 animation = "SexStealthTease_1-loop"
@@ -96,6 +102,24 @@ xfade_time = 0.5
 [sub_resource type="AnimationNodeStateMachineTransition" id=524]
 xfade_time = 0.5
 
+[sub_resource type="AnimationNodeStateMachineTransition" id=559]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=560]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=561]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=562]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=563]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=564]
+xfade_time = 0.5
+
 [sub_resource type="AnimationNodeStateMachine" id=525]
 states/SexStealthFast_1-loop/node = SubResource( 498 )
 states/SexStealthFast_1-loop/position = Vector2( 491, 275 )
@@ -105,6 +129,10 @@ states/SexStealthInside_1-loop/node = SubResource( 500 )
 states/SexStealthInside_1-loop/position = Vector2( 491, 138 )
 "states/SexStealthInside_1-loop 2/node" = SubResource( 499 )
 "states/SexStealthInside_1-loop 2/position" = Vector2( 764, 138 )
+states/SexStealthRub_1-loop/node = SubResource( 558 )
+states/SexStealthRub_1-loop/position = Vector2( 491, -25 )
+"states/SexStealthRub_1-loop 2/node" = SubResource( 557 )
+"states/SexStealthRub_1-loop 2/position" = Vector2( 764, -25 )
 states/SexStealthTease_1-loop/node = SubResource( 502 )
 states/SexStealthTease_1-loop/position = Vector2( 491, 62 )
 "states/SexStealthTease_1-loop 2/node" = SubResource( 501 )
@@ -113,8 +141,9 @@ states/SexStealth_1-loop/node = SubResource( 504 )
 states/SexStealth_1-loop/position = Vector2( 491, 208 )
 "states/SexStealth_1-loop 2/node" = SubResource( 503 )
 "states/SexStealth_1-loop 2/position" = Vector2( 764, 208 )
-transitions = [ "SexStealthTease_1-loop", "SexStealthInside_1-loop", SubResource( 505 ), "SexStealthInside_1-loop", "SexStealthTease_1-loop", SubResource( 506 ), "SexStealthTease_1-loop", "SexStealthTease_1-loop 2", SubResource( 507 ), "SexStealthTease_1-loop 2", "SexStealthTease_1-loop", SubResource( 508 ), "SexStealthTease_1-loop 2", "SexStealthInside_1-loop 2", SubResource( 509 ), "SexStealthInside_1-loop 2", "SexStealthTease_1-loop 2", SubResource( 510 ), "SexStealthInside_1-loop 2", "SexStealth_1-loop 2", SubResource( 511 ), "SexStealth_1-loop 2", "SexStealthInside_1-loop 2", SubResource( 512 ), "SexStealthInside_1-loop", "SexStealth_1-loop", SubResource( 513 ), "SexStealth_1-loop", "SexStealthInside_1-loop", SubResource( 514 ), "SexStealth_1-loop", "SexStealth_1-loop 2", SubResource( 515 ), "SexStealth_1-loop 2", "SexStealth_1-loop", SubResource( 516 ), "SexStealth_1-loop", "SexStealthFast_1-loop", SubResource( 517 ), "SexStealthFast_1-loop", "SexStealth_1-loop", SubResource( 518 ), "SexStealth_1-loop 2", "SexStealthFast_1-loop 2", SubResource( 519 ), "SexStealthFast_1-loop 2", "SexStealth_1-loop 2", SubResource( 520 ), "SexStealthFast_1-loop", "SexStealthFast_1-loop 2", SubResource( 521 ), "SexStealthFast_1-loop 2", "SexStealthFast_1-loop", SubResource( 522 ), "SexStealthInside_1-loop", "SexStealthInside_1-loop 2", SubResource( 523 ), "SexStealthInside_1-loop 2", "SexStealthInside_1-loop", SubResource( 524 ) ]
+transitions = [ "SexStealthTease_1-loop", "SexStealthInside_1-loop", SubResource( 505 ), "SexStealthInside_1-loop", "SexStealthTease_1-loop", SubResource( 506 ), "SexStealthTease_1-loop", "SexStealthTease_1-loop 2", SubResource( 507 ), "SexStealthTease_1-loop 2", "SexStealthTease_1-loop", SubResource( 508 ), "SexStealthTease_1-loop 2", "SexStealthInside_1-loop 2", SubResource( 509 ), "SexStealthInside_1-loop 2", "SexStealthTease_1-loop 2", SubResource( 510 ), "SexStealthInside_1-loop 2", "SexStealth_1-loop 2", SubResource( 511 ), "SexStealth_1-loop 2", "SexStealthInside_1-loop 2", SubResource( 512 ), "SexStealthInside_1-loop", "SexStealth_1-loop", SubResource( 513 ), "SexStealth_1-loop", "SexStealthInside_1-loop", SubResource( 514 ), "SexStealth_1-loop", "SexStealth_1-loop 2", SubResource( 515 ), "SexStealth_1-loop 2", "SexStealth_1-loop", SubResource( 516 ), "SexStealth_1-loop", "SexStealthFast_1-loop", SubResource( 517 ), "SexStealthFast_1-loop", "SexStealth_1-loop", SubResource( 518 ), "SexStealth_1-loop 2", "SexStealthFast_1-loop 2", SubResource( 519 ), "SexStealthFast_1-loop 2", "SexStealth_1-loop 2", SubResource( 520 ), "SexStealthFast_1-loop", "SexStealthFast_1-loop 2", SubResource( 521 ), "SexStealthFast_1-loop 2", "SexStealthFast_1-loop", SubResource( 522 ), "SexStealthInside_1-loop", "SexStealthInside_1-loop 2", SubResource( 523 ), "SexStealthInside_1-loop 2", "SexStealthInside_1-loop", SubResource( 524 ), "SexStealthTease_1-loop", "SexStealthRub_1-loop", SubResource( 559 ), "SexStealthRub_1-loop", "SexStealthTease_1-loop", SubResource( 560 ), "SexStealthRub_1-loop", "SexStealthRub_1-loop 2", SubResource( 561 ), "SexStealthRub_1-loop 2", "SexStealthRub_1-loop", SubResource( 562 ), "SexStealthRub_1-loop 2", "SexStealthTease_1-loop 2", SubResource( 563 ), "SexStealthTease_1-loop 2", "SexStealthRub_1-loop 2", SubResource( 564 ) ]
 start_node = "SexStealthTease_1-loop"
+graph_offset = Vector2( 53, -174 )
 
 [sub_resource type="AnimationNodeBlendTree" id=526]
 graph_offset = Vector2( -348.69, 38.9555 )
@@ -132,6 +161,9 @@ node_connections = [ "output", 0, "CuffsBlend", "CuffsBlend", 0, "StateMachine",
 [sub_resource type="AnimationNodeAnimation" id=528]
 animation = "SexStealthBusyFast_2-loop"
 
+[sub_resource type="AnimationNodeAnimation" id=565]
+animation = "SexStealthBusyTease_2-loop"
+
 [sub_resource type="AnimationNodeAnimation" id=529]
 animation = "SexStealthBusyTease_2-loop"
 
@@ -146,6 +178,9 @@ animation = "SexStealthInsideBusy_2-loop"
 
 [sub_resource type="AnimationNodeAnimation" id=533]
 animation = "SexStealthInside_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=566]
+animation = "SexStealthTease_2-loop"
 
 [sub_resource type="AnimationNodeAnimation" id=534]
 animation = "SexStealthTease_2-loop"
@@ -213,11 +248,31 @@ xfade_time = 0.5
 [sub_resource type="AnimationNodeStateMachineTransition" id=555]
 xfade_time = 0.5
 
+[sub_resource type="AnimationNodeStateMachineTransition" id=567]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=568]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=569]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=570]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=571]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=572]
+xfade_time = 0.5
+
 [sub_resource type="AnimationNodeStateMachine" id=556]
 states/SexStealthBusyFast_2-loop/node = SubResource( 528 )
 states/SexStealthBusyFast_2-loop/position = Vector2( 805, 277 )
 states/SexStealthBusyTease_2-loop/node = SubResource( 529 )
 states/SexStealthBusyTease_2-loop/position = Vector2( 805, 62 )
+"states/SexStealthBusyTease_2-loop 2/node" = SubResource( 565 )
+"states/SexStealthBusyTease_2-loop 2/position" = Vector2( 805, -11 )
 states/SexStealthBusy_2-loop/node = SubResource( 530 )
 states/SexStealthBusy_2-loop/position = Vector2( 805, 207 )
 states/SexStealthFast_2-loop/node = SubResource( 531 )
@@ -228,10 +283,13 @@ states/SexStealthInside_2-loop/node = SubResource( 533 )
 states/SexStealthInside_2-loop/position = Vector2( 505, 137 )
 states/SexStealthTease_2-loop/node = SubResource( 534 )
 states/SexStealthTease_2-loop/position = Vector2( 505, 62 )
+"states/SexStealthTease_2-loop 2/node" = SubResource( 566 )
+"states/SexStealthTease_2-loop 2/position" = Vector2( 505, -11 )
 states/SexStealth_2-loop/node = SubResource( 535 )
 states/SexStealth_2-loop/position = Vector2( 505, 207 )
-transitions = [ "SexStealthTease_2-loop", "SexStealthInside_2-loop", SubResource( 536 ), "SexStealthInside_2-loop", "SexStealthTease_2-loop", SubResource( 537 ), "SexStealthBusyTease_2-loop", "SexStealthTease_2-loop", SubResource( 538 ), "SexStealthTease_2-loop", "SexStealthBusyTease_2-loop", SubResource( 539 ), "SexStealthBusyTease_2-loop", "SexStealthInsideBusy_2-loop", SubResource( 540 ), "SexStealthInsideBusy_2-loop", "SexStealthBusyTease_2-loop", SubResource( 541 ), "SexStealthInsideBusy_2-loop", "SexStealthInside_2-loop", SubResource( 542 ), "SexStealthInside_2-loop", "SexStealthInsideBusy_2-loop", SubResource( 543 ), "SexStealthInsideBusy_2-loop", "SexStealthBusy_2-loop", SubResource( 544 ), "SexStealthBusy_2-loop", "SexStealthInsideBusy_2-loop", SubResource( 545 ), "SexStealthInside_2-loop", "SexStealth_2-loop", SubResource( 546 ), "SexStealth_2-loop", "SexStealthInside_2-loop", SubResource( 547 ), "SexStealth_2-loop", "SexStealthBusy_2-loop", SubResource( 548 ), "SexStealthBusy_2-loop", "SexStealth_2-loop", SubResource( 549 ), "SexStealth_2-loop", "SexStealthFast_2-loop", SubResource( 550 ), "SexStealthFast_2-loop", "SexStealth_2-loop", SubResource( 551 ), "SexStealthFast_2-loop", "SexStealthBusyFast_2-loop", SubResource( 552 ), "SexStealthBusyFast_2-loop", "SexStealthFast_2-loop", SubResource( 553 ), "SexStealthBusy_2-loop", "SexStealthBusyFast_2-loop", SubResource( 554 ), "SexStealthBusyFast_2-loop", "SexStealthBusy_2-loop", SubResource( 555 ) ]
+transitions = [ "SexStealthTease_2-loop", "SexStealthInside_2-loop", SubResource( 536 ), "SexStealthInside_2-loop", "SexStealthTease_2-loop", SubResource( 537 ), "SexStealthBusyTease_2-loop", "SexStealthTease_2-loop", SubResource( 538 ), "SexStealthTease_2-loop", "SexStealthBusyTease_2-loop", SubResource( 539 ), "SexStealthBusyTease_2-loop", "SexStealthInsideBusy_2-loop", SubResource( 540 ), "SexStealthInsideBusy_2-loop", "SexStealthBusyTease_2-loop", SubResource( 541 ), "SexStealthInsideBusy_2-loop", "SexStealthInside_2-loop", SubResource( 542 ), "SexStealthInside_2-loop", "SexStealthInsideBusy_2-loop", SubResource( 543 ), "SexStealthInsideBusy_2-loop", "SexStealthBusy_2-loop", SubResource( 544 ), "SexStealthBusy_2-loop", "SexStealthInsideBusy_2-loop", SubResource( 545 ), "SexStealthInside_2-loop", "SexStealth_2-loop", SubResource( 546 ), "SexStealth_2-loop", "SexStealthInside_2-loop", SubResource( 547 ), "SexStealth_2-loop", "SexStealthBusy_2-loop", SubResource( 548 ), "SexStealthBusy_2-loop", "SexStealth_2-loop", SubResource( 549 ), "SexStealth_2-loop", "SexStealthFast_2-loop", SubResource( 550 ), "SexStealthFast_2-loop", "SexStealth_2-loop", SubResource( 551 ), "SexStealthFast_2-loop", "SexStealthBusyFast_2-loop", SubResource( 552 ), "SexStealthBusyFast_2-loop", "SexStealthFast_2-loop", SubResource( 553 ), "SexStealthBusy_2-loop", "SexStealthBusyFast_2-loop", SubResource( 554 ), "SexStealthBusyFast_2-loop", "SexStealthBusy_2-loop", SubResource( 555 ), "SexStealthTease_2-loop 2", "SexStealthTease_2-loop", SubResource( 567 ), "SexStealthTease_2-loop", "SexStealthTease_2-loop 2", SubResource( 568 ), "SexStealthTease_2-loop 2", "SexStealthBusyTease_2-loop 2", SubResource( 569 ), "SexStealthBusyTease_2-loop 2", "SexStealthTease_2-loop 2", SubResource( 570 ), "SexStealthBusyTease_2-loop 2", "SexStealthBusyTease_2-loop", SubResource( 571 ), "SexStealthBusyTease_2-loop", "SexStealthBusyTease_2-loop 2", SubResource( 572 ) ]
 start_node = "SexStealthTease_2-loop"
+graph_offset = Vector2( 48, -153 )
 
 [sub_resource type="AnimationNodeBlendTree" id=527]
 graph_offset = Vector2( -322.532, 74.6842 )

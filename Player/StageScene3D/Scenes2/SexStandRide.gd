@@ -71,6 +71,9 @@ func playAnimation(animID, _args = {}):
 	if(animID == "fast"):
 		state_machine.travel("SexStandRideFast_1-loop")
 		state_machine2.travel("SexStandRideFast_2-loop")
+	if(animID == "rub"):
+		state_machine.travel("SexStandRideRub_1-loop")
+		state_machine2.travel("SexStandRideRub_2-loop")
 
 func canTransitionTo(_actionID, _args = []):
 	var firstDoll = "pc"
@@ -85,4 +88,4 @@ func canTransitionTo(_actionID, _args = []):
 	return true
 
 func getSupportedStates():
-	return ["tease", "inside", "sex", "fast"]
+	return ["tease", "inside", "sex", "fast", "rub"]

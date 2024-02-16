@@ -71,6 +71,9 @@ func playAnimation(animID, _args = {}):
 	if(animID == "fast"):
 		state_machine.travel("SexStealthFast_1-loop")
 		state_machine2.travel("SexStealthFast_2-loop")
+	if(animID == "rub"):
+		state_machine.travel("SexStealthRub_1-loop")
+		state_machine2.travel("SexStealthTease_2-loop 2")
 	if(animID == "teasebusy"):
 		state_machine.travel("SexStealthTease_1-loop 2")
 		state_machine2.travel("SexStealthBusyTease_2-loop")
@@ -83,6 +86,9 @@ func playAnimation(animID, _args = {}):
 	if(animID == "fastbusy"):
 		state_machine.travel("SexStealthFast_1-loop 2")
 		state_machine2.travel("SexStealthBusyFast_2-loop")
+	if(animID == "rubbusy"):
+		state_machine.travel("SexStealthRub_1-loop 2")
+		state_machine2.travel("SexStealthBusyTease_2-loop 2")
 
 
 func canTransitionTo(_actionID, _args = []):
@@ -98,4 +104,4 @@ func canTransitionTo(_actionID, _args = []):
 	return true
 
 func getSupportedStates():
-	return ["tease", "inside", "sex", "fast", "teasebusy", "insidebusy", "sexbusy", "fastbusy"]
+	return ["tease", "inside", "sex", "fast", "rub", "teasebusy", "insidebusy", "sexbusy", "fastbusy", "rubbusy"]
