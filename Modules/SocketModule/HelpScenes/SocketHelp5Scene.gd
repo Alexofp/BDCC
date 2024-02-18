@@ -421,8 +421,236 @@ func _run():
 
 		saynn("[say=risha]I got a million other sluts to fuck..[/say]")
 
-		saynn("Socket smiles and puts the wrench away. She then grabs your hand and pulls you away from this mess.")
+		saynn("Socket smiles and puts the wrench away.")
 
+		saynn("[say=socket]Maybe I should build a separate prison.. You know, for horny people.[/say]")
+
+		saynn("She then grabs your hand and pulls you away from this mess.")
+
+		addButton("Continue", "See what happens next", "socket_brings_cell")
+	if(state == "socket_brings_cell"):
+		aimCameraAndSetLocName(GM.pc.getCellLocation())
+		GM.pc.setLocation(GM.pc.getCellLocation())
+		removeCharacter("avy")
+		removeCharacter("risha")
+		playAnimation(StageScene.Duo, "stand", {npc="socket"})
+		saynn("You step out of the laundry.")
+
+		saynn("[say=socket]After all that.. I'm pretty tired.[/say]")
+
+		saynn("[say=pc]My cell is not that far. Not the most comfortable..[/say]")
+
+		saynn("[say=socket]Perfect![/say]")
+
+		saynn("You go down the stairs and show Socket where your personal cell is.")
+
+		saynn("She looks around and then turns towards you.")
+
+		saynn("[say=socket]Very cozy. All those cameras.. and the meanies.. sleepy.. Can I take a nap with you?[/say]")
+
+		saynn("Yeah, why not. You're feeling a bit tired too anyway.")
+
+		addButton("Bed", "Drop onto it", "socket_in_bed")
+	if(state == "socket_in_bed"):
+		playAnimation(StageScene.Sleeping, "sleep", {pc="pc", npc="socket", bodyState={naked=true}})
+		addCharacter("socket", ["naked"])
+		saynn("You make the pillow as soft as it can be. Then you undress and lie down onto your prisoner bed. Socket carefully removes her equipment and flops on top. Kinda strange to see her.. naked.. even though she was always naked.")
+
+		saynn("[say=pc]Thanks for the help, Socket.[/say]")
+
+		saynn("No response.")
+
+		saynn("[say=pc]Socket?[/say]")
+
+		saynn("All you can hear back is faint snoring. You look down and see the fennec sleeping with her hands wrapped around your chest, hugging you. Yeah, she was tired alright.")
+
+		saynn("She is pretty warm.. like a fluffy blanket.. makes you sleepy too.")
+
+		addButton("Nap", "Take a short nap", "do_sleep")
+	if(state == "do_sleep"):
+		playAnimation(StageScene.Sleeping, "sleep", {pc="pc", npc="socket", bodyState={naked=true}})
+		saynn("A few hours pass peacefully. You open your eyes. No signs of Risha or Avy in sight. Just Socket. She seems to be still sleeping soundly.")
+
+		addButton("Wake her up", "Enough sleepy times", "do_getup")
+		addButton("Grope Socket", "Casually rub and grope the sleepy fennec", "do_casual_grope")
+	if(state == "do_getup"):
+		playAnimation(StageScene.Sleeping, "sleep", {pc="pc", npc="socket", bodyState={naked=true}})
+		saynn("Enough napping, you put your hand on Socket's hair and gently stroke it, trying to wake her up. She doesn't.. so you poke her snout a few times.")
+
+		saynn("[say=socket]..nya..[/say]")
+
+		saynn("Finally, she opens her eyes and looks up at you.")
+
+		saynn("[say=socket]Oh, hi.[/say]")
+
+		saynn("Adorable. You can't help but to pat her.")
+
+		saynn("[say=pc]Hey there, sleepy head.[/say]")
+
+		if (GM.pc.hasPenis()):
+			saynn("[say=socket]I was thinking.. I know you don't have a penis..[/say]")
+
+			saynn("That's a scary start for a conversation..")
+
+			saynn("[say=socket]..but do you think I should.. free my womb?[/say]")
+
+		else:
+			saynn("[say=socket]I was thinking.. I know that you have a penis.[/say]")
+
+			saynn("That's a scary start for a conversation..")
+
+			saynn("[say=socket]But you can't really breed me.. Do you think I should free my womb?[/say]")
+
+		saynn("[say=pc]Free your womb?[/say]")
+
+		saynn("She nods.")
+
+		saynn("[say=socket]Yeah, I have a cyberlink implant installed there. Should I ask the doctors here to take it out?[/say]")
+
+		saynn("[say=pc]Why ask me about that?[/say]")
+
+		saynn("She shrugs and blinks many times in a row.")
+
+		saynn("[say=socket]You seem to care the most about me out of everyone here. I feel like.. you're the only person I could ask.[/say]")
+
+		addButton("Free womb", "Tell that it's a good idea", "say_free_womb")
+		addButton("Keep implant", "Tell her that she should keep the implant", "say_keep_implant")
+	if(state == "say_keep_implant"):
+		saynn("[say=pc]If you want my opinion.. I say.. keep it.[/say]")
+
+		saynn("Socket nods a few times.")
+
+		saynn("[say=socket]You never know when another cyberthreat will appear! Good idea.[/say]")
+
+		saynn("She yawns and slowly gets up.")
+
+		addButton("Continue", "See what happens next", "after_say_keep_womb_implant")
+	if(state == "after_say_keep_womb_implant"):
+		addCharacter("socket")
+		playAnimation(StageScene.Hug, "hug", {npc="socket"})
+		saynn("She puts on her equipment and then gives you a warm hug.")
+
+		if (getCharacter("socket").hasEffect(StatusEffect.HasCumInsideVagina)):
+			saynn("[say=socket]I will return back to the engineering wing then.[/say]")
+
+			saynn("She looks down and notices something white dripping out of her pussy.")
+
+			saynn("[say=socket]Oh, right. I don't remember when I became a cum dump.. but I should probably get my pussy cleaned first.[/say]")
+
+			saynn("You chuckle.")
+
+		else:
+			saynn("[say=socket]I will return back to the engineering wing then.[/say]")
+
+			saynn("She uses one of her hands to spread open her pussy and make sure she isn't leaking anything.")
+
+			saynn("[say=socket]Clean. Strange.[/say]")
+
+			saynn("You chuckle.")
+
+		saynn("[say=pc]Take care.[/say]")
+
+		saynn("Socket nods and steps out of the cell. She turns around to say one last thing before leaving.")
+
+		saynn("[say=socket]No more tasks for us to do sadly.. But I see you around anyway![/say]")
+
+		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "say_free_womb"):
+		saynn("[say=pc]If you want my opinion.. I think you should remove it.[/say]")
+
+		saynn("Socket nods a few times.")
+
+		saynn("[say=socket]Hopefully the station won't need my netrunning skills.[/say]")
+
+		saynn("You shrug.")
+
+		saynn("[say=pc]I think we're disconnected from the rest of the world.[/say]")
+
+		saynn("[say=socket]Only makes me want to do it more..[/say]")
+
+		saynn("She yawns and slowly gets up.")
+
+		addButton("Continue", "See what happens next", "after_say_free_womb")
+	if(state == "after_say_free_womb"):
+		addCharacter("socket")
+		playAnimation(StageScene.Hug, "hug", {npc="socket"})
+		saynn("She puts on her equipment and then gives you a warm hug.")
+
+		if (getCharacter("socket").hasEffect(StatusEffect.HasCumInsideVagina)):
+			saynn("[say=socket]I will go pay the medical wing a visit then.[/say]")
+
+			saynn("She looks down and notices something white dripping out of her pussy.")
+
+			saynn("[say=socket]Oh, right. I don't remember when I became a cum dump.. but I should probably get my pussy cleaned first.[/say]")
+
+			saynn("You chuckle.")
+
+		else:
+			saynn("[say=socket]I will go pay the medical wing a visit then.[/say]")
+
+			saynn("She uses one of her hands to spread open her pussy and make sure she isn't leaking anything.")
+
+			saynn("[say=socket]Should probably clean my pussy first, just in case.[/say]")
+
+			saynn("You chuckle.")
+
+		saynn("[say=pc]Take care.[/say]")
+
+		saynn("Socket nods and steps out of the cell. She turns around to say one last thing before leaving.")
+
+		saynn("[say=socket]No more tasks for us to do sadly.. But I see you around anyway![/say]")
+
+		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "do_casual_grope"):
+		playAnimation(StageScene.Sleeping, "rub", {npc="socket", bodyState={naked=true, hard=true}})
+		saynn("Socket is hugging you.. so you hug her back, your hands land on her back and brush against her short fur.")
+
+		saynn("[say=socket]h-h..[/say]")
+
+		saynn("She is still just snoring quietly so you act more brave, your hands slide down her back and land on her round butt, your digis sink into the fur.")
+
+		saynn("The fennec doesn't seem to mind you kneading her rear.. so you do it more and more, groping and squeezing her round forms..")
+
+		saynn("Eventually that seems to have some effect on her body. Socket starts to squirm ever so slightly. She parts her legs a bit and presses her pussy against your thigh.. pussy that is getting wet.")
+
+		if (GM.pc.hasReachablePenis()):
+			saynn("You can stop there.. or try to risk it..")
+
+		else:
+			saynn("Probably should stop there before she wakes up from this.")
+
+		addButton("Wake her up", "Enough sleepy times", "do_getup")
+		addButtonWithChecks("Sleep fuck", "Maybe you will get away with this", "do_sleepfuck", [], [[ButtonChecks.HasReachablePenis]])
+	if(state == "do_sleepfuck"):
+		playAnimation(StageScene.SexBehind, "sex", {npc="socket", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		saynn("Carefully, you slip from under Socket and take a spot behind her.")
+
+		saynn("You act swiftly, getting your dick hard before pressing it against Socket's needy folds. Even while the tip of your shaft spreads her folds, the fennec is still snoring.. allowing you to slide inside her, the slick warmness gripping your length.")
+
+		saynn("[say=socket]Nh-h..[/say]")
+
+		saynn("Carefully, you put her head onto the pillow.. and then start fucking her sleepy pussy, pulling almost fully out before throwing your hips forward.")
+
+		saynn("Such a slut she is, the girl is still not waking up even though her slick tunnel is squeezing your {pc.penis} eagerly, practically sucking you in deeper. You put your hand onto her back as you slowly increase the pace, using that fennec as a fucktoy.")
+
+		saynn("Little cute sleepy noises escape her mouth, her toes curling up, her tail moving out of the way completely.")
+
+		saynn("[say=socket]Mh-h.. h..[/say]")
+
+		saynn("You can feel her unconscious body shuddering as an orgasmic wave washes over it, making her pussy get even tighter around you.. How can you pull out now..")
+
+		addButton("Cum inside", "Breed the sleeping fennec", "do_sleepfuck_cum")
+	if(state == "do_sleepfuck_cum"):
+		playAnimation(StageScene.SexBehind, "inside", {npc="socket", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		saynn("Rather than pulling out, you just let the orgasm flow through you, your cock fully inside the girl, throbbing.. pumping that pussy to the brim..")
+
+		saynn("You grunt, using her as nothing but a cum dumpster, your balls tensing up as her inner walls milk you dry.")
+
+		saynn("You wait until the bliss state starts to fade.. before carefully pulling out, leaving the girl's used pussy leaking your seed.")
+
+		saynn("Looks like Socket is still sleeping. So you slip back into her embrace.. Now it's time to wake her up for real.")
+
+		addButton("Wake her up", "Enough sleepy times", "do_getup")
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
@@ -477,5 +705,41 @@ func _react(_action: String, _args):
 
 	if(_action == "socket_saves_pc"):
 		processTime(5*60)
+
+	if(_action == "socket_brings_cell"):
+		processTime(3*60)
+
+	if(_action == "socket_in_bed"):
+		processTime(3*60)
+		getCharacter("socket").clearEquippedItems()
+
+	if(_action == "do_sleep"):
+		processTime(3*60*60)
+		GM.pc.addPain(-200)
+		GM.pc.addStamina(200)
+
+	if(_action == "say_free_womb"):
+		setFlag("SocketModule.removedWombImplant", true)
+
+	if(_action == "say_keep_implant"):
+		setFlag("SocketModule.removedWombImplant", false)
+
+	if(_action == "after_say_keep_womb_implant"):
+		addMessage("Socket's content ends here. Thank you for playing <3")
+		getCharacter("socket").resetEquipment()
+		getCharacter("socket").updateBodyparts()
+
+	if(_action == "after_say_free_womb"):
+		addMessage("Socket's content ends here. Thank you for playing <3")
+		getCharacter("socket").resetEquipment()
+		getCharacter("socket").updateBodyparts()
+
+	if(_action == "do_sleepfuck"):
+		processTime(3*60)
+
+	if(_action == "do_sleepfuck_cum"):
+		processTime(5*60)
+		getCharacter("socket").cummedInVaginaBy("pc")
+		GM.pc.orgasmFrom("socket")
 
 	setState(_action)

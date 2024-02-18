@@ -47,6 +47,8 @@ func _init():
 		Fetish.HypnosisSubject : FetishInterest.Loves,
 	}
 	
+	npcHasMenstrualCycle = true
+	
 func _getName():
 	return "Socket"
 
@@ -96,3 +98,12 @@ func isWearingInvisiblePortalPanties():
 	if(GM.main != null && GM.main.getFlag("SocketModule.hasPortalPussy")):
 		return true
 	return false
+
+func updateBodyparts():
+	if(GM.main != null):
+		if(!GM.main.getFlag("SocketModule.removedWombImplant", false)):
+			skillsHolder.addPerk(Perk.StartNoHeat)
+			skillsHolder.addPerk(Perk.StartInfertile)
+		else:
+			skillsHolder.removePerk(Perk.StartNoHeat)
+			skillsHolder.removePerk(Perk.StartInfertile)
