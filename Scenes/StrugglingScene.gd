@@ -15,13 +15,20 @@ var shouldPlayAnimations = true
 
 #var minigameScene = preload("res://Game/Minigames/Struggling/StrugglingGame.tscn")
 #var minigameScene = preload("res://Game/Minigames/ClickAtTheRightTime/ClickAtTheRightTime.tscn")
-var minigameScene = preload("res://Game/Minigames/TestGame/TestGame.tscn")
-var pickMinigameScene = preload("res://Game/Minigames/TestGame/TestGame.tscn")
-var cutMinigameScene = preload("res://Game/Minigames/TestGame/TestGame.tscn")
-var unlockMinigameScene = preload("res://Game/Minigames/TestGame/TestGame.tscn")
+
+var minigameScene = preload("res://Game/Minigames/ClickAtTheRightTime/ClickAtTheRightTime.tscn")
+var pickMinigameScene = preload("res://Game/Minigames/ClickAtTheRightTime/ClickAtTheRightTime.tscn")
+var cutMinigameScene = preload("res://Game/Minigames/ClickAtTheRightTime/ClickAtTheRightTime.tscn")
+var unlockMinigameScene = preload("res://Game/Minigames/ClickAtTheRightTime/ClickAtTheRightTime.tscn")
 
 func _init():
 	sceneID = "StrugglingScene"
+	if OPTIONS.isDebugPanelEnabled():
+		minigameScene = preload("res://Game/Minigames/TestGame/TestGame.tscn")
+		pickMinigameScene = preload("res://Game/Minigames/TestGame/TestGame.tscn")
+		cutMinigameScene = preload("res://Game/Minigames/TestGame/TestGame.tscn")
+		unlockMinigameScene = preload("res://Game/Minigames/TestGame/TestGame.tscn")
+
 
 func _initScene(_args = []):
 	if(_args.size() > 0):
@@ -140,8 +147,10 @@ func _run():
 				playAnimation(StageScene.Solo, animToPlay)
 
 		var game = minigameScene.instance()
-		configureMinigame(game, restraintData)
+		if game.has_method("config"):
+			game.config({"level":restraintData.getLevel()})
 		GM.ui.addCustomControl("minigame", game)
+		configureMinigame(game, restraintData)
 		game.connect("minigameCompleted", self, "onMinigameCompleted")
 		addButton("Give up", "Give up the struggle and lose 10 stamina", "giveupstruggle")
 		
@@ -155,8 +164,10 @@ func _run():
 				playAnimation(StageScene.Solo, animToPlay)
 		
 		var game = pickMinigameScene.instance()
+		if game.has_method("config"):
+			game.config({"level":restraintData.getLevel()})
+		GM.ui.addCustomControl("minigame", game)
 		configureMinigame(game, restraintData)
-		GM.ui.addCustomControl("minigame", game)		
 		game.connect("minigameCompleted", self, "onPickMinigameCompleted")
 		addButton("Give up", "Give it up and lose 10 stamina", "giveupstruggle")
 
@@ -171,8 +182,10 @@ func _run():
 				playAnimation(StageScene.Solo, animToPlay)
 		
 		var game = pickMinigameScene.instance()
+		if game.has_method("config"):
+			game.config({"level":restraintData.getLevel()})
+		GM.ui.addCustomControl("minigame", game)
 		configureMinigame(game, restraintData)
-		GM.ui.addCustomControl("minigame", game)		
 		game.connect("minigameCompleted", self, "onCutMinigameCompleted")
 		addButton("Give up", "Give it up and lose 10 stamina", "giveupstruggle")
 
@@ -246,21 +259,21 @@ func _run():
 
 
 
-func onMinigameCompleted(score, result):
+func onMinigameCompleted(score, result = {}):
 	GM.main.pickOption("struggleAgainst", [restraintID, score, result])
 
-func onPickMinigameCompleted(score, result):
+func onPickMinigameCompleted(score, result = {}):
 	GM.main.pickOption("pickSomething", [restraintID, score, result])
 
-func onCutMinigameCompleted(score, result):
+func onCutMinigameCompleted(score, result = {}):
 	GM.main.pickOption("cutSomething", [restraintID, score, result])
 
-func onUnlockMinigameCompleted(score, result):
+func onUnlockMinigameCompleted(score, result = {}):
 	GM.main.pickOption("unlockSomething", [restraintID, score, result])
 
-
+# for old minigames
 func configureMinigame(_game, _restraintData):
-	if OPTIONS.isHardStruggleEnabled():
+	if OPTIONS.isHardStruggleEnabled() && _game.has_method("setHardStruggleEnabled"):
 		_game.setHardStruggleEnabled(true)
 	if GM.pc.hasPerk(Perk.BDSMInstantEscape) && _game.has_method("instantEscapePerk"):
 		_game.instantEscapePerk()
@@ -272,7 +285,8 @@ func configureMinigame(_game, _restraintData):
 		_game.setBetterStruggling(true)
 	if GM.pc.hasPerk(Perk.BDSMBetterKeys) && _game.has_method("setBetterKeys"):
 		_game.setBetterKeys(true)
-	_game.setDifficulty(_restraintData.getLevel())
+	if _game.has_method("setDifficulty"):
+		_game.setDifficulty(_restraintData.getLevel())
 
 		
 func _react(_action: String, _args):

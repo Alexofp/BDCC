@@ -181,9 +181,6 @@ func calcCutStamina(_pc, mult = 1.0):
 		return mult * (5 + level * 2) 
 	return mult * (5 + level * 3)
 
-func defaultStaminaMult(_pc):
-	return 1.0
-
 
 # pain received during struggling 
 func calcStrugglePain(_pc, mult = 1.0):
@@ -197,9 +194,6 @@ func calcPickpain(_pc, mult = 1.0):
 func calcCutPain(_pc, mult = 1.0):
 	return mult * (1 + level)
 
-func defaultPaintMult(_pc):
-	return 1.0
-
 
 # lust received during struggling
 func calcStruggleLust(_pc, mult = 1.0):
@@ -212,10 +206,6 @@ func calcPickLust(_pc, mult = 1.0):
 # lust received during cutting
 func calcCutLuist(_pc, mult = 1.0):
 	return mult * (1 + level)
-
-func defaultlustMult(_pc):
-	return 1.0
-
 
 
 func takeDamage(howMuch):
