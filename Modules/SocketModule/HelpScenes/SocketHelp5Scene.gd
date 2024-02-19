@@ -335,9 +335,90 @@ func _run():
 
 		addButton("Fight", "You're not going down without a fight", "third_fight")
 		addButton("Submit", "Why fight it", "third_submit")
+	if(state == "third_fight"):
+		playAnimation(StageScene.Duo, "stand", {npc="risha"})
+		saynn("You get into a combat stance.. That's all that these two dickgirls needed to know.")
+
+		saynn("Risha steps forward and grabs her stun baton.")
+
+		saynn("[say=risha]I won't lose this time.[/say]")
+
+		saynn("[say=pc]You should quit dreaming, it's bad for you.[/say]")
+
+		saynn("The lynx chuckles and raises her weapon.")
+
+		addButton("Start fight", "Time to do this", "start_risha_fight")
+	if(state == "lost_fight"):
+		playAnimation(StageScene.Solo, "hurt")
+		saynn("You are unable to fight any longer.. The two girls smile watching you struggle.")
+
+		saynn("[say=avy]Good try, a failed hero. You know what to do.[/say]")
+
+		saynn("Since you lost, you can only submit..")
+
+		addButton("Submit", "You can't win", "third_submit")
+	if(state == "won_risha"):
+		playAnimation(StageScene.Duo, "stand", {npc="risha", npcAction="defeat"})
+		saynn("Risha hits the floor, dropping her weapon.")
+
+		saynn("[say=pc]Told you.[/say]")
+
+		saynn("She grunts.. but then smiles for a short second as Avy steps out.. and injects something into herself.")
+
+		saynn("[say=risha]It's not over yet, don't worry.[/say]")
+
+		saynn("Avy growls, her muscles tensing up visibly under her shirt.")
+
+		saynn("[say=avy]Bring it on, sucker.[/say]")
+
+		addButton("Start fight", "Time to do this again", "start_avy_fight")
+	if(state == "won_avy"):
+		playAnimation(StageScene.Duo, "stand", {npc="avy", npcAction="defeat"})
+		saynn("Finally, Avy drops to her knees before you too.")
+
+		saynn("[say=avy]Argh, fucker..[/say]")
+
+		saynn("[say=pc]Maybe you should have used your brain first before doing this?[/say]")
+
+		saynn("[say=avy]I will fuck your brains out..[/say]")
+
+		saynn("Looks like you can leave..")
+
+		addButton("Continue", "See what happes next", "pc_loses_to_avy_risha_anyway")
+	if(state == "pc_loses_to_avy_risha_anyway"):
+		playAnimation(StageScene.Duo, "defeat", {npc="risha"})
+		saynn("..but then a [b]painful shock[/b] goes through your neck, dropping you fast!")
+
+		saynn("[say=pc]AGH![/say]")
+
+		saynn("You grab onto your collar.. but it doesn't help the insane pain, all your limbs tense up uncontrollably, your muscles seizing up.")
+
+		saynn("It's only when the shock ends.. you see Risha standing and holding the shock remote.")
+
+		saynn("[say=risha]Told you, it's not over yet~. We have so many fun things to do together, little slut.[/say]")
+
+		saynn("[say=pc]Fuck..[/say]")
+
+		saynn("[say=risha]And that one too.[/say]")
+
+		saynn("Risha helps Avy to get up. Then they approach you.")
+
+		saynn("[say=avy]Give me that remote.[/say]")
+
+		saynn("[say=risha]Only if you bend over first.[/say]")
+
+		saynn("[say=avy]In your dreams.[/say]")
+
+		saynn("Risha shrugs.")
+
+		saynn("[say=risha]Sometimes dreams become reality.[/say]")
+
+		saynn("They spend a while talking to each.. You hear something..")
+
+		addButton("Continue", "See what happens next", "socket_saves_pc")
 	if(state == "third_submit"):
 		playAnimation(StageScene.Duo, "kneel", {npc="avy"})
-		saynn("Why fight it, it's two against one..")
+		saynn("Fighting is pointless, it's two against one anyway..")
 
 		saynn("Instead, you lower your eyes and slowly get on your knees.")
 
@@ -363,6 +444,221 @@ func _run():
 
 		addButton("Let them fight", "Just stay quiet", "third_submit_letfight")
 		addButton("Help decide", "You didn't choose to submit just for them to start fighting over this!", "third_submit_helpdecide")
+	if(state == "third_submit_helpdecide"):
+		playAnimation(StageScene.SexOral, "tease", {pc="avy", npc="pc", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		saynn("Argh, you're pretty sure that they will never stop arguing.")
+
+		saynn("[say=pc]Shut up and rail me already![/say]")
+
+		saynn("You lean to Avy since she doesn't have any armor and pull her shorts down, exposing her sheath. You stuff your face into her balls and give them a good nuzzle.")
+
+		saynn("[say=risha]See, the bitch wants my cock![/say]")
+
+		saynn("The dark foxy growls more.. but feeling your tongue slipping into the crevice between her cock and the sheath makes her switch focus down to you.")
+
+		saynn("[say=avy]Alright.. Let's test your jaw.[/say]")
+
+		addButton("Continue", "See what happens next", "submit_sex_pick")
+	if(state == "submit_sex_vag"):
+		playAnimation(StageScene.SexSpitroast, "tease", {pc="pc", npc="risha", npc2="avy", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}, npc2BodyState={naked=true, hard=true}})
+		saynn("Rather than letting you continue teasing them, the two dickgirls grab you and lift you off the floor, Avy's hands are on your throat and back while Risha is busy holding your hips.")
+
+		saynn("You can feel the barbs softly prickling your {pc.vaginaStretch} pussy while a knotted cock is dripping pre onto your face..")
+
+		saynn("[say=avy]Don't you dare bite, slut.[/say]")
+
+		addButton("Continue", "See what happens next", "submit_sex_vag_sex")
+	if(state == "submit_sex_vag_sex"):
+		playAnimation(StageScene.SexSpitroast, "sex", {pc="pc", npc="risha", npc2="avy", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}, npc2BodyState={naked=true, hard=true}})
+		saynn("Avy pushes the pointy tip of her {avy.penis} past your lips.. before ramming the rest inside, your throat instantly bulging from the rough motion.")
+
+		saynn("[say=avy]So tight~.[/say]")
+
+		saynn("The sudden deep-throating experience makes you clench hard.. which is exactly when Risha decides to throw her hips forward, burying her cock down your slick cunt, the barbs scratching the tight walls. You would complain.. but you can't really do that.")
+
+		saynn("[say=pc]hHh!..[/say]")
+
+		saynn("[say=risha]They're not even sharp yet, calm down.[/say]")
+
+		saynn("And so they start fucking your throat and pussy at the same time, holding you tightly in place while shoving their dicks up your stretched holes. Barbs continue scratching at your inner walls, sending shivers through your whole body.")
+
+		saynn("[say=avy]I prefer knots.[/say]")
+
+		if (GM.pc.isWearingChastityCage()):
+			saynn("You feel a lot of pressure building behind your chastity cage, the pounding makes your locked away cock attempt to get hard again and again..")
+
+		elif (GM.pc.hasReachablePenis()):
+			saynn("Your own cock is hard and swaying back and forth, the pounding makes it drip squirts of precum again and again..")
+
+		saynn("[say=risha]Yeah, of course you do~. All foxes do.[/say]")
+
+		saynn("[say=avy]The fuck are you implying.[/say]")
+
+		saynn("Risha giggles while Avy shows her a middle finger.")
+
+		saynn("Where is Socket..")
+
+		addButton("Continue", "See what happens next", "submit_sex_vag_fast")
+	if(state == "submit_sex_vag_fast"):
+		playAnimation(StageScene.SexSpitroast, "fast", {pc="pc", npc="risha", npc2="avy", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}, npc2BodyState={naked=true, hard=true}})
+		saynn("Eventually, they synchronize their thrusts.. which allows them to increase the pace and start ravaging your holes even harder.")
+
+		saynn("[say=avy]Ngh.. Are you really saying that I'm a bottom?! My cock is inside a slut right now![/say]")
+
+		saynn("[say=risha]Yep, yep~.[/say]")
+
+		saynn("They can't stop arguing even while fucking you.. and fuck it feels good when Avy squeezes your throat with her hand while stretching it further and deeper with her canine cock, the knot on it has began rapidly growing.")
+
+		saynn("[say=avy]You're the one with a cunt, I can't be a bottom![/say]")
+
+		saynn("[say=risha]You're trying so hard that it makes you look even more like a bottom~.[/say]")
+
+		saynn("You make more muffled noises, your pussy getting stuffed full of Risha's cock, your pleasure spot and cervix getting smashed firmly a few times every second.")
+
+		saynn("[say=avy]Fuck you.. Ngh..[/say]")
+
+		saynn("Avy's knot bumps into your mouth.. Risha's cock rams into your organic barricade..")
+
+		if (GM.pc.isWearingChastityCage()):
+			saynn("Your caged up cock is throbbing, putting pressure onto its cage desperately..")
+
+		elif (GM.pc.hasReachablePenis()):
+			saynn("Your {pc.penis} is throbbing, ready to burst any second..")
+
+		saynn("You're close..")
+
+		addButton("Continue", "See what happens next", "submit_sex_vag_cum")
+	if(state == "submit_sex_vag_cum"):
+		playAnimation(StageScene.SexSpitroast, "inside", {pc="pc", npc="risha", npc2="avy", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}, npc2BodyState={naked=true, hard=true}})
+		saynn("The rough double pounding shoots you over the edge with ease, your body squirming and shivering in their hands while your throat and pussy clench around the intruding cocks, trying to milk them dry.")
+
+		saynn("[say=pc]Nh-h-h!..[/say]")
+
+		saynn("Both dickgirls grunt feeling the increased tightness of your holes.. before ramming their cocks deep inside!")
+
+		saynn("[say=risha]Let's just breed the bitch..[/say]")
+
+		saynn("Risha's barbed cock breaks into your womb and scratches at its walls.. before releasing a flood of cum, stuffing your babymaker more and more with each throb.")
+
+		saynn("Avy moans as she manages to slip her fat orb past your lips, knotting your mouth! You realize that you can't breathe.. while the throbbing cock is shooting its load down your throat into your belly.")
+
+		saynn("[say=avy]Fuck, that feels good.[/say]")
+
+		if (GM.pc.isWearingChastityCage()):
+			saynn("Your locked penis is dribbling {pc.cum} through the little hole in the chastity cage, your balls tensing up a little as you leave a mess on your belly.")
+
+		elif (GM.pc.hasReachablePenis()):
+			saynn("Your cock is shooting long strings of {pc.cum}, your balls tensing up as you leave a mess on your belly.")
+
+		saynn("The lack of oxygen is making you feel drugged, your eyes rolling up while the dickgirls are just using you as their cocksleeve now.")
+
+		saynn("[say=risha]What a good whore. I bet you would love to be in {pc.his} place, Avy~.[/say]")
+
+		saynn("[say=avy]Ah.. at this point you're just projecting, Risha.[/say]")
+
+		saynn("The vision begins to darken..")
+
+		addButton("Continue", "See what happens next", "socket_saves_pc")
+	if(state == "submit_sex_anal"):
+		playAnimation(StageScene.SexSpitroast, "tease", {pc="pc", npc="risha", npc2="avy", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}, npc2BodyState={naked=true, hard=true}})
+		saynn("Rather than letting you continue teasing them, the two dickgirls grab you and lift you off the floor, Avy's hands are on your throat and back while Risha is busy holding your hips.")
+
+		saynn("You can feel the barbs softly prickling your {pc.analStretch} anal ring while a knotted cock is dripping pre onto your face..")
+
+		saynn("[say=avy]Don't you dare bite, slut.[/say]")
+
+		addButton("Continue", "See what happens next", "submit_sex_anal_sex")
+	if(state == "submit_sex_anal_sex"):
+		playAnimation(StageScene.SexSpitroast, "sex", {pc="pc", npc="risha", npc2="avy", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}, npc2BodyState={naked=true, hard=true}})
+		saynn("Avy pushes the pointy tip of her {avy.penis} past your lips.. before ramming the rest inside, your throat instantly bulging from the rough motion.")
+
+		saynn("[say=avy]So tight~.[/say]")
+
+		saynn("The sudden deep-throating experience makes you clench hard.. which is exactly when Risha decides to throw her hips forward, burying her cock down your needy fuckhole, the barbs scratching the tight walls. You would complain.. but you can't really do that.")
+
+		saynn("[say=pc]hHh!..[/say]")
+
+		saynn("[say=risha]They're not even sharp yet, calm down.[/say]")
+
+		saynn("And so they start fucking your throat and ass at the same time, holding you tightly in place while shoving their dicks up your stretched holes. Barbs continue scratching at your inner walls, sending shivers through your whole body.")
+
+		saynn("[say=avy]I prefer knots.[/say]")
+
+		if (GM.pc.isWearingChastityCage()):
+			saynn("You feel a lot of pressure building behind your chastity cage, the pounding makes your locked away cock attempt to get hard again and again, your prostate being stimulated..")
+
+		elif (GM.pc.hasReachablePenis()):
+			saynn("Your own cock is hard and swaying back and forth, the pounding makes it drip squirts of precum again and again, your prostate being stimulated..")
+
+		saynn("[say=risha]Yeah, of course you do~. All foxes do.[/say]")
+
+		saynn("[say=avy]The fuck are you implying.[/say]")
+
+		saynn("Risha giggles while Avy shows her a middle finger.")
+
+		saynn("Where is Socket..")
+
+		addButton("Continue", "See what happens next", "submit_sex_anal_fast")
+	if(state == "submit_sex_anal_fast"):
+		playAnimation(StageScene.SexSpitroast, "fast", {pc="pc", npc="risha", npc2="avy", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}, npc2BodyState={naked=true, hard=true}})
+		saynn("Eventually, they synchronize their thrusts.. which allows them to increase the pace and start ravaging your holes even harder.")
+
+		saynn("[say=avy]Ngh.. Are you really saying that I'm a bottom?! My cock is inside a slut right now![/say]")
+
+		saynn("[say=risha]Yep, yep~.[/say]")
+
+		saynn("They can't stop arguing even while fucking you.. and fuck it feels good when Avy squeezes your throat with her hand while stretching it further and deeper with her canine cock, the knot on it has began rapidly growing.")
+
+		saynn("[say=avy]You're the one with a cunt, I can't be a bottom![/say]")
+
+		saynn("[say=risha]You're trying so hard that it makes you look even more like a bottom~.[/say]")
+
+		saynn("You make more muffled noises, your ass getting stuffed full of Risha's cock, your pleasure spot getting smashed firmly a few times every second.")
+
+		saynn("[say=avy]Fuck you.. Ngh..[/say]")
+
+		saynn("Avy's knot bumps into your mouth.. The barb's on Risha's cock become more stiff..")
+
+		if (GM.pc.isWearingChastityCage()):
+			saynn("Your caged up cock is throbbing, putting pressure onto its cage desperately..")
+
+		elif (GM.pc.hasReachablePenis()):
+			saynn("Your {pc.penis} is throbbing, ready to burst any second..")
+
+		saynn("You're close..")
+
+		addButton("Continue", "See what happens next", "submit_sex_anal_cum")
+	if(state == "submit_sex_anal_cum"):
+		playAnimation(StageScene.SexSpitroast, "inside", {pc="pc", npc="risha", npc2="avy", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}, npc2BodyState={naked=true, hard=true}})
+		saynn("The rough double pounding shoots you over the edge with ease, your body squirming and shivering in their hands while your throat and ass clench around the intruding cocks, trying to milk them dry.")
+
+		saynn("[say=pc]Nh-h-h!..[/say]")
+
+		saynn("Both dickgirls grunt feeling the increased tightness of your holes.. before ramming their cocks deep inside!")
+
+		saynn("[say=risha]Let's just breed the bitch..[/say]")
+
+		saynn("Risha's barbed shaft fully disappears inside you.. before releasing a flood of cum, stuffing your ass more and more with each throb, the barbs scratching at your walls.")
+
+		saynn("Avy moans as she manages to slip her fat orb past your lips, knotting your mouth! You realize that you can't breathe.. while the throbbing cock is shooting its load down your throat into your belly.")
+
+		saynn("[say=avy]Fuck, that feels good.[/say]")
+
+		if (GM.pc.isWearingChastityCage()):
+			saynn("Your prostate is getting destroyed, your locked penis is dribbling {pc.cum} through the little hole in the chastity cage, your balls tensing up a little as you leave a mess on your belly.")
+
+		elif (GM.pc.hasReachablePenis()):
+			saynn("Your prostate is getting destroyed, your cock is shooting long strings of {pc.cum}, your balls tensing up as you leave a mess on your belly.")
+
+		saynn("The lack of oxygen is making you feel drugged, your eyes rolling up while the dickgirls are just using you as their cocksleeve now.")
+
+		saynn("[say=risha]What a good whore. I bet you would love to be in {pc.his} place, Avy~.[/say]")
+
+		saynn("[say=avy]Ah.. at this point you're just projecting, Risha.[/say]")
+
+		saynn("The vision begins to darken..")
+
+		addButton("Continue", "See what happens next", "socket_saves_pc")
 	if(state == "third_submit_letfight"):
 		playAnimation(StageScene.Duo, "hurt", {pc="avy", npc="risha", npcAction="shove"})
 		saynn("You decide to stay quiet and let them talk it out..")
@@ -389,7 +685,7 @@ func _run():
 	if(state == "socket_saves_pc"):
 		addCharacter("socket")
 		playAnimation(StageScene.Duo, ["stunbaton", "res://Inventory/UnriggedModels/BigWrench/BigWrench.tscn"], {pc="socket", npc="risha", npcAction="defeat"})
-		saynn("Suddenly, Socket rushes into the room. She sees you, Risha and Avy.. and is quick to bonk them both with her huge wrench.")
+		saynn("Suddenly, Socket rushes into the room. She sees you, Risha and Avy.. and is quick to bonk them both with her oversized wrench.")
 
 		saynn("[say=risha]Ow, fuck.[/say]")
 
@@ -703,6 +999,59 @@ func _react(_action: String, _args):
 	if(_action == "third_risha"):
 		processTime(5*60)
 
+	if(_action == "start_risha_fight"):
+		runScene("FightScene", ["risha"], "rishaFight")
+		return
+
+	if(_action == "start_avy_fight"):
+		runScene("FightScene", ["avy"], "avyFight")
+		getCharacter("avy").addEffect(StatusEffect.DrugStrong, [3])
+		return
+
+	if(_action == "pc_loses_to_avy_risha_anyway"):
+		processTime(4*60)
+		GM.pc.addPain(200)
+
+	if(_action == "submit_sex_pick"):
+		processTime(5*60)
+		if(GM.pc.hasReachableVagina()):
+			setState("submit_sex_vag")
+		else:
+			setState("submit_sex_anal")
+		return
+
+	if(_action == "submit_sex_vag_sex"):
+		processTime(3*60)
+
+	if(_action == "submit_sex_vag_fast"):
+		processTime(3*60)
+
+	if(_action == "submit_sex_vag_cum"):
+		processTime(3*60)
+		GM.pc.gotVaginaFuckedBy("risha")
+		GM.pc.getThroatFuckedBy("avy")
+		GM.pc.cummedInVaginaBy("risha")
+		GM.pc.cummedInThroatBy("avy")
+		if(GM.pc.isWearingChastityCage() || GM.pc.hasReachablePenis()):
+			GM.pc.cummedOnBy("pc")
+		GM.pc.orgasmFrom("risha")
+
+	if(_action == "submit_sex_anal_sex"):
+		processTime(3*60)
+
+	if(_action == "submit_sex_anal_fast"):
+		processTime(3*60)
+
+	if(_action == "submit_sex_anal_cum"):
+		processTime(3*60)
+		GM.pc.gotAnusFuckedBy("risha")
+		GM.pc.getThroatFuckedBy("avy")
+		GM.pc.cummedInAnusBy("risha")
+		GM.pc.cummedInThroatBy("avy")
+		if(GM.pc.isWearingChastityCage() || GM.pc.hasReachablePenis()):
+			GM.pc.cummedOnBy("pc")
+		GM.pc.orgasmFrom("risha")
+
 	if(_action == "socket_saves_pc"):
 		processTime(5*60)
 
@@ -743,3 +1092,24 @@ func _react(_action: String, _args):
 		GM.pc.orgasmFrom("socket")
 
 	setState(_action)
+
+func _react_scene_end(_tag, _result):
+	if(_tag == "rishaFight"):
+		processTime(10 * 60)
+		var battlestate = _result[0]
+		
+		if(battlestate == "win"):
+			setState("won_risha")
+			addExperienceToPlayer(50)
+		else:
+			setState("lost_fight")
+
+	if(_tag == "avyFight"):
+		processTime(10 * 60)
+		var battlestate = _result[0]
+		
+		if(battlestate == "win"):
+			setState("won_avy")
+			addExperienceToPlayer(50)
+		else:
+			setState("lost_fight")
