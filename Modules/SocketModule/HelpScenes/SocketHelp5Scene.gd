@@ -126,6 +126,124 @@ func _run():
 		addButton("Stay horny", "Avoid doing anything with Socket at all costs", "first_stay_horny")
 		addButton("Stealth fingering", "Have some fun with Socket", "first_stealth_fingering")
 		addButtonWithChecks("Stealth sex", "Have some fun with Socket", "first_stealth_sex", [], [[ButtonChecks.HasReachablePenis]])
+	if(state == "first_stealth_sex"):
+		playAnimation(StageScene.SexStealth, "sexbusy", {npc="socket", bodyState={exposedCrotch=true, hard=true}})
+		saynn("Some inmates are watching you so you put on a very concerned look and keep holding Socket by her backpack, pretending to help her.. while your other hand sneakily exposes your {pc.penis} and aligns with Socket's exposed slit, the tip prodding her folds.")
+
+		saynn("She seems to be busy looking around in VR, allowing you to enter her, your member parting her pussy slit and sliding up inside.")
+
+		saynn("[say=socket]Huh? What is that..[/say]")
+
+		saynn("You freeze.. not sure what to say.")
+
+		saynn("[say=socket]Oh, I think I see something, hold on.[/say]")
+
+		saynn("Phew. You keep a serious face as you start to move your hips ever so slightly, your cock exploring her velvet walls that feel so slick now. Your hands reach out and land on her hips, pulling her towards you a bit before your thrust.")
+
+		addButton("Faster", "Pick up the pace a little", "first_stealth_sex_fast")
+	if(state == "first_stealth_sex_fast"):
+		playAnimation(StageScene.SexStealth, "fastbusy", {npc="socket", bodyState={exposedCrotch=true, hard=true}})
+		saynn("[say=pc]What do you see?[/say]")
+
+		saynn("[say=socket]I think it's.. I think..[/say]")
+
+		saynn("She finds it hard to find the right words as you push your luck and gradually increase the pace, stealthy fucking her.")
+
+		saynn("[say=socket]One of the inmates I think..[/say]")
+
+		saynn("[say=pc]Anyone that we know?[/say]")
+
+		saynn("She shrugs and lets out a sigh.. a silent moan. The fennec is shuffling a lot with her boots on the table. She sticks her butt out more and starts meeting your motions with her own, allowing a deeper penetration that results in a visible bump on her belly appearing during each thrust.")
+
+		saynn("[say=socket]I'm.. I'm not.. I am..[/say]")
+
+		saynn("Short cute moans escape Socket as she enduring your casual onslaught on her pussy. Pushing on a pleasure button inside her makes the girl arch her back more, her needy walls clenching and coating your cock with her juices.")
+
+		saynn("[say=socket]..not sure.. I will mark them.. for punishment.. after I.. hah.. ah~..[/say]")
+
+		saynn("She is so tight that you feel you're about to cum too..")
+
+		addButton("Cum inside", "Do it", "first_stealth_sex_cum")
+	if(state == "first_stealth_sex_cum"):
+		playAnimation(StageScene.SexStealth, "insidebusy", {npc="socket", bodyState={exposedCrotch=true, hard=true}})
+		saynn("Socket lets out a long quiet moan, her pulsing pussy releases a shower of fluids onto the table below, her shaky legs trying to give up.. but you don't let them, supporting Socket with your hands while keeping your cock inside, letting her tight love tunnel push you over the edge.")
+
+		saynn("There is no fucking anymore, you and Socket stand still while you pump her slit full your {pc.cum}, your {pc.penis} throbbing inside you, filling her up more and more.")
+
+		saynn("[say=pc]Something is wrong?[/say]")
+
+		saynn("She is quivering in your hands. All the inmates that are eating see the wet mess that her pussy made on the floor. They can probably notice the thick slimy substance dripping down her legs. Oops.")
+
+		saynn("[say=socket]No.. I'm good.[/say]")
+
+		saynn("Probably better than that.")
+
+		saynn("Socket takes off the headset and then presses a few buttons on her datapad, her panting makes the screen cloudy. All of this while you just use her as your cock warmer.")
+
+		saynn("[say=socket]Here. No one is allowed to vandalize the station's property..[/say]")
+
+		saynn("She sure likes the station..")
+
+		saynn("After that, she finishes repairing the camera. The little red LED lights up as she turns it on.")
+
+		saynn("[say=socket]Yay. Now to the next one.[/say]")
+
+		saynn("Somehow you can guess what happened to the other two..")
+
+		saynn("Finally, you slowly pull out, preserving most of the load inside.")
+
+		addButton("Follow", "Follow Socket to the next camera", "second_camera")
+	if(state == "first_stealth_fingering"):
+		playAnimation(StageScene.SexStealth, "rubbusy", {npc="socket"})
+		saynn("Some inmates are watching you so you put on a very concerned look and keep holding Socket by her backpack, pretending to help her.. while your other hand reaches further between her legs and lands on her exposed slit.")
+
+		saynn("Socket just looks around in VR, allowing you to casually spread and rub her folds from side to side a bit, making receive a shiny coat of wetness.")
+
+		saynn("[say=socket]Huh. Oh, I think I see something. Hold on.[/say]")
+
+		saynn("You're holding on alright, two of your digits start prodding her slick entrance, gradually working their way inside.")
+
+		saynn("[say=pc]What do you see?[/say]")
+
+		saynn("[say=socket]I think it's.. I think..[/say]")
+
+		saynn("You wiggle your digits inside as she is trying to talk, her velvet walls hugging you tightly. Quite fast, you stumble upon a little bump inside.. a bump that you focus on with your digits as you proceed to slide them in and out.")
+
+		saynn("[say=socket]One of the inmates I think..[/say]")
+
+		saynn("[say=pc]Anyone that we know?[/say]")
+
+		saynn("She shrugs and lets out a sigh.. a silent moan. The fennec is shuffling a lot with her boots on the table, her butt sticking higher as you finger her slit faster, her pussy making wet noises.")
+
+		saynn("[say=socket]I'm.. I'm not.. I am..[/say]")
+
+		saynn("Short cute moans escape Socket as she enduring your casual onslaught on her pussy. Pushing on that button inside her makes the girl arch her back more, her needy walls clenching and coating your digits with more juices.")
+
+		saynn("[say=socket]..not sure.. I will mark them.. for punishment.. after I.. hah.. ah~..[/say]")
+
+		saynn("Socket lets out a long quiet moan, her pulsing pussy suddenly releases a shower of fluids onto the table below, her shaky legs trying to give up.. but you don't let them, supporting Socket with one hand.. while the second one keeps rubbing her twitching slit.")
+
+		saynn("[say=pc]Something is wrong?[/say]")
+
+		saynn("She is quivering in your hands. All the inmates that are eating see the wet mess that her pussy made on the floor. Oops.")
+
+		saynn("[say=socket]No.. I'm good.[/say]")
+
+		saynn("Probably better than that.")
+
+		saynn("Socket takes off the headset and then presses a few buttons on her datapad, her panting makes the screen cloudy.")
+
+		saynn("[say=socket]Here. No one is allowed to vandalize the station's property..[/say]")
+
+		saynn("She sure likes the station..")
+
+		saynn("After that, she finishes repairing the camera. The little red LED lights up as she turns it on.")
+
+		saynn("[say=socket]Yay. Now to the next one.[/say]")
+
+		saynn("Somehow you can guess what happened to the other two..")
+
+		addButton("Follow", "Follow Socket to the next camera", "second_camera")
 	if(state == "first_stay_horny"):
 		saynn("It does take some willpower.. a lot of willpower.. but you manage to avoid touching Socket.")
 
@@ -192,13 +310,139 @@ func _run():
 
 		saynn("After she is done scrubbing through the footage, Socket raises the headset and notices your tensed up body. For whatever reason, she decides to suddenly raise her leg up high and put her hind paw on your shoulder, doing a vertical split.")
 
-		saynn("[say=socket]We got one more camera to fix, will you help me? Or do you want some.. convincing?[/say]")
+		saynn("[say=socket]We got one more camera to fix, will you help me? Or do you want some convincing?[/say]")
 
 		saynn("She is showing you her pussy so casually by now..")
 
 		addButton("Resist it", "Resist any kind of temptation", "second_resist")
 		addButtonWithChecks("Casual sex", "Why not let her convince you", "second_sex", [], [[ButtonChecks.HasReachablePenis]])
 		addButton("Touch her", "She is so exposed right now. Why not touch her in some places?", "second_rub")
+	if(state == "second_sex"):
+		playAnimation(StageScene.SexStandRide, "inside", {pc="pc", npc="socket", bodyState={exposedCrotch=true,hard=true}})
+		saynn("You wonder how far you can take it. Casually, you expose your {pc.penis} and put on a smile.")
+
+		saynn("[say=pc]I wouldn't mind some.[/say]")
+
+		saynn("Socket looks down.. and then just casually guides your cock down her awaiting slit, the tip spreading her petals and sliding past them as she brings her body closer to yours.")
+
+		saynn("[say=socket]Like this?[/say]")
+
+		saynn("Wow, she really went there. You're not sure if you should be surprised.. The girl feels amazing, in this kinky position her pussy is embracing your shaft super well.")
+
+		saynn("[say=pc]Yeah, that works. I'm almost convinced.[/say]")
+
+		saynn("She raises a brow.")
+
+		addButton("Continue", "See what happens next", "second_sex_sex")
+	if(state == "second_sex_sex"):
+		playAnimation(StageScene.SexStandRide, "sex", {pc="pc", npc="socket", bodyState={exposedCrotch=true,hard=true}})
+		saynn("Without much thought, Socket starts riding you, sliding her body back and forth along your cock, showing off her flexibility in the process.")
+
+		saynn("[say=socket]I guess I have to convince you harder![/say]")
+
+		saynn("An Impressive feat, you decide to keep your hands to yourself and just let Socket do her thing, riding you in the most unique way possible. She doesn't keep her paws to herself though, one of her hands lands on her crotch and starts rubbing her clit at the same time.")
+
+		saynn("[say=pc]You can surely try. Maybe we can come.. to an agreement.[/say]")
+
+		addButton("Continue", "See what happens next", "second_sex_fast")
+	if(state == "second_sex_fast"):
+		playAnimation(StageScene.SexStandRide, "fast", {pc="pc", npc="socket", bodyState={exposedCrotch=true,hard=true}})
+		saynn("She brings herself down onto your cock faster and harder, moaning softly as she does so. Her inner walls are hugging the shaft so well that you can't hold yourself from breathing deeply.")
+
+		saynn("[say=socket]Yeah.. Hopefully this pussy helps..[/say]")
+
+		saynn("Her thighs are slapping against yours with a soft thump, her pussy twitching eagerly as she keeps rubbing her clit fast..")
+
+		saynn("You're just standing still, letting the girl do everything. And yet, you feel close..")
+
+		saynn("[say=socket]Feel free to use it as a cum dump..[/say]")
+
+		saynn("Such a lewd offer.. You might as well take her word for it.")
+
+		addButton("Orgasm", "See what happens next", "second_sex_cum")
+	if(state == "second_sex_cum"):
+		playAnimation(StageScene.SexStandRide, "inside", {pc="pc", npc="socket", bodyState={exposedCrotch=true,hard=true}})
+		saynn("You grunt as she brings you over the edge. Socket feels your orgasm and lowers herself fully onto your throbbing cock, moaning softly as you start pumping her needy cunt full of {pc.cum}.")
+
+		saynn("Her legs are shaking a little, Socket throws her head back and lets her own orgasm wash over her body.")
+
+		saynn("[say=socket]There we go. Hah.. So much.[/say]")
+
+		saynn("[say=pc]Your pussy.. certainly helped.[/say]")
+
+		saynn("After the orgasm begins to fade, she looks at you, your cock still being kept warm by her slick pussy.")
+
+		saynn("[say=socket]So you're ready. Then.. let's go to.. laundry![/say]")
+
+		saynn("[say=pc]Need help finding it?[/say]")
+
+		saynn("[say=socket]I think I know how to find it. Just gotta follow the brr-r-rr noise.[/say]")
+
+		saynn("Yeah, that's one way.")
+
+		saynn("Socket escapes your cock, letting her used slit drip seed onto the floor. She then primes her locator dishes.. ears.. and starts walking somewhere.")
+
+		saynn("After that casual fuck, you're fast to follow.")
+
+		addButton("Follow", "See where she brings you", "third")
+	if(state == "second_rub"):
+		playAnimation(StageScene.SexStandRide, "rub", {pc="pc", npc="socket"})
+		var hasCumInPussy = getCharacter("socket").hasEffect(StatusEffect.HasCumInsideVagina)
+		saynn("[say=pc]Something to get distracted would be nice.[/say]")
+
+		saynn("Without much thought, you put your hand on Socket's crotch, getting a feel for her "+str("stuffed" if hasCumInPussy else "tight")+" pussy. She sees what you're doing and smiles.")
+
+		saynn("[say=socket]Sure, ever heard of those stress-relief toys?[/say]")
+
+		saynn("[say=pc]Yeah, you gotta squeeze them I think.[/say]")
+
+		saynn("Your digits gently spread her folds, revealing the pink slick interior. Two of your digits slide up and play with the clitoral hood, rubbing it left and right.")
+
+		saynn("Socket bites her lip while you do all of that.")
+
+		saynn("[say=socket]You're gonna squeeze my pussy?[/say]")
+
+		saynn("You smile and spread her folds again instead before piercing the uncovered slick love tunnel with two fingers.")
+
+		saynn("[say=pc]I'd rather do this.[/say]")
+
+		saynn("Socket holds an eye contact with you.. while your digits slide inside her slit, brushing against the inner walls and catching some juices.")
+
+		saynn("[say=socket]Oh yeah, that is one form of stress relief.[/say]")
+
+		saynn("[say=pc]That is the best form.[/say]")
+
+		saynn("You increase the pace, pretty much finger-fucking her pussy at a rapid rate. Very soon Socket gaze begins to wander around, her body tensing up and relaxing between all the waves of pleasure that suddenly rush through her.")
+
+		saynn("[say=socket]Mm-m~..[/say]")
+
+		saynn("Your digits stumble upon her pleasure spot. Massaging it makes Socket's legs shiver more. She stands on her toes.. while you keep hammering away at her button.")
+
+		saynn("[say=socket]Looks like you forgot about the.. ah..[/say]")
+
+		saynn("Socket lowers her gaze and lets out a cute noise as her pussy gushes out a torrent of transparent girlcum, her pussy squeezing your digits with rhythmic motions, her legs shaking irregularly from the orgasmic impulses.")
+
+		saynn("[say=pc]Looks like you came, girl.[/say]")
+
+		saynn("She is panting softly as you lick your fingers in her view.")
+
+		saynn("[say=socket]And I helped you stay brave![/say]")
+
+		saynn("You pat Socket on the head for that.")
+
+		saynn("[say=pc]What now?[/say]")
+
+		saynn("[say=socket]Let's go to.. laundry![/say]")
+
+		saynn("[say=pc]Need help finding it?[/say]")
+
+		saynn("[say=socket]I think I know how to find it. Just gotta follow the brr-r-rr noise.[/say]")
+
+		saynn("Yeah, that's one way.")
+
+		saynn("Socket primes her locator dishes.. ears.. and starts walking somewhere. You're fast to follow.")
+
+		addButton("Follow", "See where she brings you", "third")
 	if(state == "second_resist"):
 		playAnimation(StageScene.Duo, "stand", {npc="socket"})
 		saynn("It's hard.. but you manage to resist the temptation and carefully slide Socket's leg from your shoulder and help put it on the floor.")
@@ -977,6 +1221,20 @@ func _react(_action: String, _args):
 		GM.pc.addLust(30)
 		GM.pc.addStamina(-30)
 
+	if(_action == "first_stealth_fingering"):
+		processTime(5*60)
+
+	if(_action == "first_stealth_sex"):
+		processTime(5*60)
+
+	if(_action == "first_stealth_sex_fast"):
+		processTime(3*60)
+
+	if(_action == "first_stealth_sex_cum"):
+		processTime(3*60)
+		getCharacter("socket").cummedInVaginaBy("pc")
+		GM.pc.orgasmFrom("pc")
+
 	if(_action == "second_camera"):
 		getCharacter("socket").resetEquipment()
 
@@ -985,6 +1243,17 @@ func _react(_action: String, _args):
 
 	if(_action == "second_resist"):
 		GM.pc.addLust(30)
+
+	if(_action == "second_sex_sex"):
+		processTime(3*60)
+
+	if(_action == "second_sex_fast"):
+		processTime(3*60)
+
+	if(_action == "second_sex_cum"):
+		processTime(3*60)
+		getCharacter("socket").cummedInVaginaBy("pc")
+		GM.pc.orgasmFrom("socket")
 
 	if(_action == "third"):
 		processTime(10*60)
