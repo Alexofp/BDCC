@@ -31,23 +31,26 @@ func getRemoveMessage():
 func alwaysBreaksWhenStruggledOutOf():
 	return true
 
-func getLevelDamage():
-	return 0.05
+func calcStruggleStamina(_pc, mult = 1.0):
+	return .calcStruggleStamina(_pc, mult * 2.0)
+
+func calcDamage(_pc, mult = 1.0):
+	return .calcDamage(_pc, mult / 2.0)
 
 func defaultStruggle(_pc, _minigame, response):
+	response = .defaultStruggle(_pc, _minigame, response)
 	if(!_pc.hasBoundLegs()):
 		response.text += "{user.name} wiggles {user.his} whole body to try to escape."
-		response.damage += calcDamage(_pc)
-		response.stamina += 70
 	else:
 		response.text += "{user.name} helplessly wiggles {user.his} body, having {user.his} legs restrained makes this pretty much uselss."
-		response.damage += calcDamage(_pc, 0.5)
-		response.stamina += RNG.randi_range(70, 90)
-	if(luckChance(_pc, 1)):
-		response.text += " {user.name} managed to free one of {user.his} hands!"
-		response.damage = max(0.5, response.damage)
-	elif(failChance(_pc, 10)):
-		response.text += " {user.name} desperately tries to break the stocks locks but just ends up more tired."
-		response.stamina += 20
-	response.skipRest()
+	return response
+
+func failStruggle(_pc, _minigame, response):
+	response.text += " but just ends up more tired."
+	response.stamina += calcStruggleStamina(_pc, 0.5)
+	return response
+
+func fatalFailStruggle(_pc, _minigame, response):
+	response.text += " but it seems like {user.youHe} just hurt yourself."
+	response.pain += calcStrugglePain(_pc, 1)
 	return response

@@ -15,8 +15,8 @@ func defaultStruggle(_pc, _minigame, response):
 		response.text += "{user.name} tries to blindly find the knot to tug on"
 	else:
 		response.text += "{user.name} tries to wiggle the rope harness off"
+	response.stamina += calcStruggleStamina(_pc, 1)
 	return response
-		
 
 func processStruggleTurn(_pc, _isActivelyStruggling):
 	if(failChance(_pc, 10) || _isActivelyStruggling):

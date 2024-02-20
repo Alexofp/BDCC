@@ -25,17 +25,21 @@ class ResponseData:
 	var fatal = "" # force | never
 	var success = "" # force | never
 	var lock = "" # ignore | break | resist
-	var replace = true
+	var replace = true # additional replace
 	var use = []
+	var flow = []
+	var name: String
 	
-	func _init(_text: String, _damage: float, _lockDamage: float, _lust: int, _pain: int, _stamina: int):
+	func _init(_text: String, _damage: float, _lockDamage: float, _lust: int, _pain: int, _stamina: int, _name: String):
 		text = _text
 		damage = _damage
 		lockDamage = _lockDamage
 		lust = _lust
 		pain = _pain
 		stamina = _stamina
+		name = _name
 
+	# skip rest of processing except after part
 	func skipRest():
 		fail = "never"
 		fatal = "never"
@@ -43,9 +47,9 @@ class ResponseData:
 	
 
 	func build():
-		var _text = text 
+		var _text = text.replace("{item.name}", name)
 		if replace:
-			_text = text.replace("..", ".").replace(",.", ".").replace("  ", " ")
+			_text = _text.replace("..", ".").replace(",.", ".").replace("  ", " ")
 		return {"text": _text, "damage": damage, "lockDamage": lockDamage, "lust": lust, "pain": pain, "stamina": stamina}
 
 
@@ -94,15 +98,19 @@ func getFinalChanceToForceARestraint(_pc):
 	var finalSuccessChance = _pc.getRestraintResistance() * (1.0 / restraintDodgeDifficulty) * (1.0 - dodgeChance)
 	return finalSuccessChance
 
-# use as level-dependent durability multipier, defaul all damages
-func getLevelDamage():
-	return 0.5 / pow(max(1.0, level), 0.8)
+# level dependent general multiplier, 1 to 20 (inf), higher for higher levels
+func getLevelMultiplier(scale = 1.0):
+	return scale * (0.6 + pow(max(1.0, level) / 2.0, 1.2))
 
-# strength multipier, defaul all struggle
+# level dependent durability multiplier defaul for all damages, 1 to 0.1 (0), for higher levels is result lower
+func getLevelDamage(scale = 1.0):
+	return scale * (1.3 / pow(0.4 + max(1.0, level), 0.8))
+
+# strength multiplier, defaul all struggle
 func getStrengthDamageMult(_pc):
 	return (10.0 + pow(max(1.0,_pc.getStat(Stat.Strength)), 0.8)) / 10.0
 
-# agility multipier, defaul all lockpick
+# agility multiplier, defaul all lockpick
 func getAgilityDamageMult(_pc):
 	return (10.0 + pow(max(1.0,_pc.getStat(Stat.Agility)), 0.8)) / 10.0
 
@@ -114,7 +122,7 @@ func getMixedDamageMult(_pc):
 func calcDamage(_pc, mult = 1.0):
 	if _pc.hasPerk(Perk.BDSMPerfectStreak):
 		return mult * getLevelDamage() * (getStrengthDamageMult(_pc) + 0.5)
-	return mult * getLevelDamage() * getStrengthDamageMult(_pc)
+	return mult * getLevelDamage() * getStrengthDamageMult(_pc)	
 
 # site damage for struggle, releases the lock - reflecting level and ability
 func calcLockDamage(_pc, mult = 1.0):
@@ -129,19 +137,19 @@ func calcCutDamage(_pc, mult = 1.0):
 	return mult * getLevelDamage() * (getMixedDamageMult(_pc) + 1.0)
 
 
-# reduces the success rate according to other restrictions, includes abilities, lower is worse
+# reduces the success rate according to other restrictions, includes abilities, 1 to 0.1 (0) lower is worse
 func calcRestrainMult(_pc, _minigame):
 	var mult = 1.0
 	if _pc.isBlindfolded():
 		if _pc.hasPerk(Perk.BDSMBlindfold):
-			mult = 0.8
-		mult = 0.6
+			mult = 0.9
+		mult = 0.7
 
 	if _pc.hasBoundArms() && _pc.hasBlockedHands():
 		if _pc.hasPerk(Perk.BDSMPerfectStreak):
-			mult *= 0.7
+			mult *= 0.6
 		else:
-			mult *= 0.4
+			mult *= 0.3
 	elif _pc.hasBoundArms() || _pc.hasBlockedHands():
 		if _pc.hasPerk(Perk.BDSMPerfectStreak):
 			mult *= 0.8
@@ -168,8 +176,8 @@ func calcFatalCutPain(_pc, _minigame):
 # used stamina for struggling, reflecting level and ability
 func calcStruggleStamina(_pc, mult = 1.0):
 	if _pc.hasPerk(Perk.BDSMBetterStruggling):
-		return mult * (5 + level * 2) 
-	return mult * (10 + level * 4)
+		return mult * (5 + getLevelMultiplier(2.0)) 
+	return mult * (10 + getLevelMultiplier(4.0))
 
 # used stamina for lockpicking, reflecting level and ability
 func calcPickStamina(_pc, mult = 1.0):
@@ -178,34 +186,34 @@ func calcPickStamina(_pc, mult = 1.0):
 # used stamina for cutting, reflecting level and ability
 func calcCutStamina(_pc, mult = 1.0):
 	if _pc.hasPerk(Perk.BDSMBetterStruggling):
-		return mult * (5 + level * 2) 
-	return mult * (5 + level * 3)
+		return mult * (5 + getLevelMultiplier(2)) 
+	return mult * (5 + getLevelMultiplier(3))
 
 
 # pain received during struggling 
 func calcStrugglePain(_pc, mult = 1.0):
-	return mult * (1 + level)
+	return mult * (5 + getLevelMultiplier(2))
 
 # pain received during lockpickinging
-func calcPickpain(_pc, mult = 1.0):
-	return mult * (1 + level)
+func calcPickPain(_pc, mult = 1.0):
+	return mult * (5 + getLevelMultiplier(1))
 
 # pain received during cutting
 func calcCutPain(_pc, mult = 1.0):
-	return mult * (1 + level)
+	return mult * (10 + getLevelMultiplier(3))
 
 
 # lust received during struggling
 func calcStruggleLust(_pc, mult = 1.0):
-	return mult * (1 + level)
+	return mult * (10 + getLevelMultiplier(3))
 
 # lust received during lockpickinging
 func calcPickLust(_pc, mult = 1.0):
-	return mult * (1 + level)
+	return mult * (5 + getLevelMultiplier(1))
 
 # lust received during cutting
 func calcCutLuist(_pc, mult = 1.0):
-	return mult * (1 + level)
+	return mult * (5 + getLevelMultiplier(2))
 
 
 func takeDamage(howMuch):
@@ -235,12 +243,26 @@ func canStruggle():
 func failChance(_pc, chance):
 	return RNG.chance(chance)
 
+func failChanceZoned(_pc, _minigame, chance):
+	if fatalFail(_minigame):
+		return RNG.chance(chance) || RNG.chance(chance) || RNG.chance(chance)
+	if fail(_minigame):
+		return RNG.chance(chance) || RNG.chance(chance)
+	return RNG.chance(chance)
+
 func luckChance(_pc, chance):
 	return RNG.chance(chance)
 
 func fatalFail(_minigame):
 	return _minigame < 0.0
 
+func fail(_minigame):
+	return _minigame == 0.0
+
+func success(_minigame):
+	return _minigame > 0.0
+
+#deprecated
 func scaleDamage(dam) -> int:
 	return int(round(getLevel() / 3.0 * dam))
 
@@ -270,42 +292,51 @@ func doStruggle(_pc, _minigame):
 	response =  defaultStruggle(_pc, _minigame, response)
 	
 	if (fatalFail(_minigame) && response.fatal != "never") || response.fatal == "force":
+		response.use.append("fatal")
 		response = fatalFailStruggle(_pc, _minigame, response)
+		response = commonFailStruggle(_pc, _minigame, response)
 	
-	elif (_minigame == 0 && response.fail != "never") || response.fail == "force":
+	elif (fail(_minigame) && response.fail != "never") || response.fail == "force":
+		response.use.append("fail")
 		response = failStruggle(_pc, _minigame, response)
+		response = commonFailStruggle(_pc, _minigame, response)
 	
-	elif (_minigame > 0 && response.success != "never") || response.success == "force":
-	
+	elif (success(_minigame) && response.success != "never") || response.success == "force":
+		response.use.append("success")
 		if !isLocked() || response.lock == "ignore":
+			response.use.append("ignore")
 			response = sucessStruggle(_pc, _minigame, response)
 	
 		elif !canBreakLock(_pc, _minigame) || response.lock == "resist":
+			response.use.append("resist")
 			response = sucessStruggleLocked(_pc, _minigame, response)
 	
 		elif canBreakLock(_pc, _minigame) || response.lock == "break":
+			response.use.append("break")
 			response = sucessStruggleBreak(_pc, _minigame, response)
+		response = commonSuccessStruggle(_pc, _minigame, response)
+		
 	response = afterStruggle(_pc, _minigame, response)
 	return response
 
 # called before struggling
 func beforeStruggle(_pc, _minigame):
-	return ResponseData.new("",  0.0, 0.0, 0, 0, 0)
+	return ResponseData.new("",  0.0, 0.0, 0, 0, 0, getItem().getVisibleName())
 
 # called at begining of struggling
 func defaultStruggle(_pc, _minigame, response):
-	response.text += "{user.youHe} struggle, trying to make the "+getItem().getVisibleName()+" slip off"
+	response.text += "{user.youHe} struggle, trying to make the {item.name} slip off"
 	response.stamina += calcStruggleStamina(_pc, 1)
-
-# called after struggling
-func afterStruggle(_pc, _minigame, response):
 	return response
-
+	
 # fatal failed option for struggling
 func fatalFailStruggle(_pc, _minigame, response):
-	response.text += " but it seems like {user.youHe} just tightened it up more."
-	response.damage = calcDamage(_pc, _minigame / 4.0)
-	response.stamina = calcStruggleStamina(_pc, 2)
+	if tightness < 1.0:
+		response.text += " but it seems like {user.youHe} just tightened it up more."
+	else:
+		response.text += " but it seems like all {user.his} effort is in vain."
+	response.damage += calcDamage(_pc, _minigame / 4.0)
+	response.stamina += calcStruggleStamina(_pc, 1)
 	return response
 
 # failed option for struggling
@@ -316,7 +347,7 @@ func failStruggle(_pc, _minigame, response):
 # successful struggle for unlocked stuff
 func sucessStruggle(_pc, _minigame, response):
 	response.text += "."
-	response.damage = calcDamage(_pc, _minigame) * calcRestrainMult(_pc, _minigame)
+	response.damage += calcDamage(_pc, _minigame) * calcRestrainMult(_pc, _minigame)
 	return response
 
 # successful struggle for locked stuff, success thwarted by the lock
@@ -328,8 +359,32 @@ func sucessStruggleLocked(_pc, _minigame, response):
 func sucessStruggleBreak(_pc, _minigame, response):
 	response.text += " but it would have been done better if only it was not locked."
 	var _mult = calcLockedMult(_pc, _minigame)
-	response.damage = calcDamage(_pc, _mult) * calcRestrainMult(_pc, _minigame)
-	response.lockDamage = calcLockDamage(_pc, _mult) * calcRestrainMult(_pc, _minigame)
+	response.damage += calcDamage(_pc, _mult) * calcRestrainMult(_pc, _minigame)
+	response.lockDamage += calcLockDamage(_pc, _mult) * calcRestrainMult(_pc, _minigame)
+	return response
+
+# common failed option for struggling, executed after all fail
+func commonFailStruggle(_pc, _minigame, response):
+	if failChanceZoned(_pc, _minigame, 10) && response.use.has("bite"):
+		response.text += " Ow, {user.name} accidentally bit {user.himself}."
+		response.pain += calcStrugglePain(_pc, RNG.randi_range(2, 3))
+	if failChanceZoned(_pc, _minigame, 10) && response.use.has("step"):
+		response.text += " Ow, {user.name} accidentally bit {user.himself}."
+		response.pain += calcStrugglePain(_pc, RNG.randi_range(1, 2))
+	elif failChanceZoned(_pc, _minigame, 15) && response.use.has("smash"):
+		response.text += " Ow! {user.name} accidently smashed them against "+RNG.pick(["the wall", "the ground", "something"])
+		response.pain += calcStrugglePain(_pc, RNG.randi_range(1, 3))	
+	return response
+
+# common success option for struggling, executed after all sucess
+func commonSuccessStruggle(_pc, _minigame, response):
+	return response
+
+# called after struggling
+func afterStruggle(_pc, _minigame, response):
+	if failChanceZoned(_pc, _minigame, 20) && response.use.has("bite"):
+		response.text += " {user.name} finds {user.himself} drooling a lot."
+		response.lust += calcStruggleLust(_pc, 2)
 	return response
 
 
@@ -339,12 +394,15 @@ func doLockpick(_pc, _minigame):
 	response = defaultPick(_pc, _minigame, response)
 	
 	if (fatalFail(_minigame) && response.fatal != "never") || response.fatal == "force":
+		response.use.append("fatal")
 		response = fatalFailPick(_pc, _minigame, response)
 	
-	elif (_minigame == 0 && response.fail != "never") || response.fail == "force":
+	elif (fail(_minigame) && response.fail != "never") || response.fail == "force":
+		response.use.append("fail")
 		response = failPick(_pc, _minigame, response)
 	
-	elif (_minigame > 0 && response.success != "never") || response.success == "force":
+	elif (success(_minigame) && response.success != "never") || response.success == "force":
+		response.use.append("success")
 		response = sucessPick(_pc, _minigame, response)
 	
 	response = afterPick(_pc, _minigame, response)
@@ -352,12 +410,13 @@ func doLockpick(_pc, _minigame):
 
 # called before lockpicking
 func beforePick(_pc, _minigame):
-	return ResponseData.new("", 0.0, 0.0, 0, 0, 0)
+	return ResponseData.new("", 0.0, 0.0, 0, 0, 0, getItem().getVisibleName())
 
 # called at begining of lockpicking
 func defaultPick(_pc, _minigame, response):
-	response.text += "{user.youHe} picking the lock, trying to unlock the " + getItem().getVisibleName()
+	response.text += "{user.youHe} picking the lock, trying to unlock the {item.name}"
 	response.stamina += calcPickStamina(_pc, 1)
+	return response
 
 # called after lockpicking
 func afterPick(_pc, _minigame, response):
@@ -388,24 +447,27 @@ func doCut(_pc, _minigame):
 	response = defaultCut(_pc, _minigame, response)
 	
 	if (fatalFail(_minigame) && response.fatal != "never") || response.fatal == "force":
+		response.use.append("fatal")
 		response = fatalFailCut(_pc, _minigame, response)
 	
-	elif (_minigame == 0 && response.fail != "never") || response.fail == "force":
+	elif (fail(_minigame) && response.fail != "never") || response.fail == "force":
+		response.use.append("fail")
 		response = failCut(_pc, _minigame, response)
 	
-	elif (_minigame > 0  && response.success != "never") || response.success == "force":
-		response = sucessCut(_pc, _minigame, response)
+	elif (success(_minigame)  && response.success != "never") || response.success == "force":
+		response.use.append("success")
+		response = successCut(_pc, _minigame, response)
 
 	response = afterCut(_pc, _minigame, response)
 	return response
 
 # called before cutting
 func beforeCut(_pc, _minigame):
-	return ResponseData.new("", 0.0, 0.0, 0, 0, 0)
+	return ResponseData.new("", 0.0, 0.0, 0, 0, 0, getItem().getVisibleName())
 
 # called at begining of cutting
 func defaultCut(_pc, _minigame, response):
-	response.text += "{user.youHe} looking for a good place to cut, trying to rid off the " + getItem().getVisibleName()
+	response.text += "{user.youHe} looking for a good place to cut, trying to rid off the {item.name}"
 	response.stamina += calcCutStamina(_pc, 1)
 	response.pain += calcCutPain(_pc, 1)
 	return response
@@ -426,7 +488,7 @@ func failCut(_pc, _minigame, response):
 	return response
 
 # success option for cutting
-func sucessCut(_pc, _minigame, response):
+func successCut(_pc, _minigame, response):
 	var _mult = calcLockedMult(_pc, _minigame)
 	response.text += "."
 	response.damage = calcCutDamage(_pc, _minigame) * calcRestrainMult(_pc, _minigame)
