@@ -46,6 +46,9 @@ func _init():
 	addCharacter("socket", [], "res://Images/ImagePacks/Rahi/Characters/socket/socket.png")
 	addCharacter("socket", ["naked"], "res://Images/ImagePacks/Rahi/Characters/socket/socket-naked.png")
 	
+	addSceneImageCustomArtist("SocketTalkScene", "look_poster", "res://Images/ImagePacks/Rahi/Scenes/socket.webp", 500, "Sompurr and Rahi")
+	addSceneImageCustomArtist("SocketIntroScene", "naked_engineer", "res://Images/ImagePacks/Rahi/Scenes/socket_nobackground.webp", 500, "Sompurr and Rahi")
+	
 	## Just an example
 	## Uncomment to enable
 	#addSceneImage("InventoryScene", "", "res://Images/ImagePacks/Rahi/Characters/kait/kait.png")

@@ -9,13 +9,62 @@ func _run():
 		playAnimation(StageScene.Duo, "stand", {npc="socket"})
 		saynn("You approach Socket. She offers you a kind smile.")
 
-		saynn("[say=socket]Want something?[/say]")
+		if (getFlag("SocketModule.punishLineShouldSay", false)):
+			setFlag("SocketModule.punishLineShouldSay", false)
+			saynn("[say=socket]Hope I didn't punish you too hard.[/say]")
 
-		#var howMuchHelp = getFlag("SocketModule.ch1HelpedTimes", 0)
+		elif (getCharacter("socket").isVisiblyPregnant()):
+			saynn("[say=socket]I'm pregnant, huh.. Maybe I shouldn't let everyone cum inside me.. But you're so nice..[/say]")
+
+		elif (getFlag("SocketModule.h5completed")):
+			saynn("[say=socket]Heya! Hope you're doing well.[/say]")
+
+		elif (getFlag("SocketModule.h4completed")):
+			saynn("[say=socket]Hey there. I still struggle to remember what we did last time..[/say]")
+
+		elif (getFlag("SocketModule.h3completed")):
+			saynn("[say=socket]Don't be afraid to use my pussy through my portal device! It's always available![/say]")
+
+		elif (getFlag("SocketModule.h2completed")):
+			saynn("[say=socket]I should probably make the vents on this station wider.. Or maybe I shouldn't..[/say]")
+
+		elif (getFlag("SocketModule.h1completed")):
+			saynn("[say=socket]The mines are fully lit up, we did a good job! Wanna do more?[/say]")
+
+		else:
+			saynn("[say=socket]Want something?[/say]")
+
 		addButton("Talk", "Talk about things", "talk_options")
-		addButton("Help her", "Show Socket around", "do_show_around")
+		if (getFlag("SocketModule.h5completed")):
+			addButton("Tasks", "Pick one of the old tasks to do again with Socket", "pick_task")
+			addButton("Poster", "There is a poster on one of the walls here..", "look_poster")
+		else:
+			addButton("Help her", "Show Socket around", "do_show_around")
 		addDisabledButton("Upgrades", "Not done yet")
+		if (getFlag("SocketModule.h2completed", false)):
+			addButton("Vents", "Ask Socket what vents she can clear for you", "ask_vents")
 		addButton("Leave", "Enough talking", "endthescene")
+	if(state == "look_poster"):
+		saynn("You look around and notice a poster on one of the walls.")
+
+		saynn("[say=socket]Like it?[/say]")
+
+		saynn("[say=pc]It's nice. Socket Hex?[/say]")
+
+		saynn("[say=socket]Yep, that's my full name![/say]")
+
+		saynn("Somehow you only learned that now.")
+
+		addButton("Back", "Enough looking", "")
+	if(state == "pick_task"):
+		saynn("Which task do you wanna do again with Socket?")
+
+		addButton("Back", "Never mind", "")
+		addButton("Mineshafts", "Do the first task", "do_1_task")
+		addButton("Bathroom", "Do the second task", "do_2_task")
+		addButton("Vendomats", "Do the third task", "do_3_task")
+		addButton("Underground", "Do the fourth task", "do_4_task")
+		addButton("Cameras", "Do the fifth task", "do_5_task")
 	if(state == "talk_options"):
 		saynn("What do you want to talk about with Socket?")
 
@@ -132,6 +181,7 @@ func _run():
 		addButton("Ask to touch", "See if she would be okay with you touching her private bits", "ask_to_touch")
 		addButton("Continue", "Ask something else", "talk_options")
 	if(state == "ask_to_touch"):
+		playAnimation(StageScene.Grope, "tease", {pc="socket", npc="pc"})
 		setFlag("SocketModule.touchedPussy", true)
 		saynn("[say=pc]I gotta say, you have a nice body.[/say]")
 
@@ -235,11 +285,59 @@ func _react(_action: String, _args):
 		return
 
 	if(_action == "do_show_around"):
-		var howMuchHelp = getFlag("SocketModule.ch1HelpedTimes", 0)
-		if(howMuchHelp == 0):
-			howMuchHelp += 1
+		if(!getFlag("SocketModule.h1completed", false)):
+			setFlag("SocketModule.h1completed", true)
 			runScene("SocketHelp1Mineshaft")
 			endScene()
 			return
+		if(!getFlag("SocketModule.h2completed", false)):
+			setFlag("SocketModule.h2completed", true)
+			runScene("SocketHelp2Scene")
+			endScene()
+			return
+		if(!getFlag("SocketModule.h3completed", false)):
+			setFlag("SocketModule.h3completed", true)
+			runScene("SocketHelp3Scene")
+			endScene()
+			return
+		if(!getFlag("SocketModule.h4completed", false)):
+			setFlag("SocketModule.h4completed", true)
+			runScene("SocketHelp4Scene")
+			endScene()
+			return
+		if(!getFlag("SocketModule.h5completed", false)):
+			setFlag("SocketModule.h5completed", true)
+			runScene("SocketHelp5Scene")
+			endScene()
+			return
+
+	if(_action == "ask_vents"):
+		runScene("SocketBuyFastTravelScene")
+		return
+
+	if(_action == "do_1_task"):
+		runScene("SocketHelp1Mineshaft")
+		endScene()
+		return
+
+	if(_action == "do_2_task"):
+		runScene("SocketHelp2Scene")
+		endScene()
+		return
+
+	if(_action == "do_3_task"):
+		runScene("SocketHelp3Scene")
+		endScene()
+		return
+
+	if(_action == "do_4_task"):
+		runScene("SocketHelp4Scene")
+		endScene()
+		return
+
+	if(_action == "do_5_task"):
+		runScene("SocketHelp5Scene")
+		endScene()
+		return
 
 	setState(_action)

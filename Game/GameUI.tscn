@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=2]
+[gd_scene load_steps=39 format=2]
 
 [ext_resource path="res://GlobalTheme.tres" type="Theme" id=1]
 [ext_resource path="res://Game/TooltipDisplay.tscn" type="PackedScene" id=2]
@@ -22,6 +22,8 @@
 [ext_resource path="res://UI/RichTextBoxEffects/corrupt_richtexteffect.tres" type="RichTextEffect" id=20]
 [ext_resource path="res://UI/LayeredSprite.gd" type="Script" id=21]
 [ext_resource path="res://UI/HornyMessageUI/HornyMessage.tscn" type="PackedScene" id=22]
+[ext_resource path="res://Images/UI/expandHover.png" type="Texture" id=23]
+[ext_resource path="res://Images/UI/expand.png" type="Texture" id=24]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.207843, 0.133333, 0.364706, 1 )
@@ -272,6 +274,10 @@ script = ExtResource( 21 )
 [node name="OpenFullArtWorkButton" type="TextureButton" parent="HBoxContainer/VBoxContainer2/ScrollContainer/VBoxContainer/SceneArtWorkRect"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+texture_normal = ExtResource( 24 )
+texture_hover = ExtResource( 23 )
+expand = true
+stretch_mode = 2
 
 [node name="RichTextLabel" type="RichTextLabel" parent="HBoxContainer/VBoxContainer2/ScrollContainer/VBoxContainer"]
 margin_top = 4.0
@@ -460,13 +466,14 @@ margin_left = 20.0
 margin_top = 18.8284
 margin_right = 78.0
 margin_bottom = 44.8284
+rect_min_size = Vector2( 100, 40 )
 text = "Close"
 
 [node name="Label" type="Label" parent="FullArtworkRect"]
 margin_left = 20.0
-margin_top = 51.8284
+margin_top = 70.0
 margin_right = 71.0
-margin_bottom = 71.8284
+margin_bottom = 90.0
 
 [node name="MessageSystem" parent="." instance=ExtResource( 22 )]
 visible = false

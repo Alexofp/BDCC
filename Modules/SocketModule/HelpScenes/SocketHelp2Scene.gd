@@ -118,7 +118,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "socket_approaches_vent")
 	if(state == "socket_approaches_vent"):
-		playAnimation(StageScene.Duo, "stand", {npc="socket", flipNPC=true, npcAction=["stunbaton", "res://Inventory/UnriggedModels/BigWrench/BigWrench.tscn"]})
+		playAnimation(StageScene.Duo, "stand", {npc="socket", flipNPC=true})
 		saynn("Socket gets up and approaches it. She tries to use her access badge to open it.. but the maintenance door only buzzes, the motors inside it spinning loudly and fruitlessly.")
 
 		saynn("[say=pc]Looks like it got stuck.[/say]")
@@ -384,7 +384,8 @@ func _run():
 
 		saynn("It doesn't take long for you to already start feeling the orgasm approaching, Socket's inner walls are just refusing to stop gripping your cock, resulting in a lot of friction. You pound that ass hard, forcing more and more of those little painful noises out of her.")
 
-		addButton("Cum inside", "Stuff her ass", "socket_rough_ass_keepgoing")
+		addButton("Cum inside", "Stuff her ass", "socket_rough_ass_cum")
+	if(state == "socket_rough_ass_cum"):
 		playAnimation(StageScene.SexVent, "inside", {pc="socket", npc="pc", npcBodyState={exposedCrotch=true,hard=true}})
 		saynn("With one last powerful thrust of your hips, you grunt as your cock starts throbbing and pumping Socket's ass full of your {pc.cum}, its wall milking your balls for each last drop.")
 
@@ -660,7 +661,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "unlock_fast_travel")
 	if(state == "help_lewd_ass"):
-		# ((tease anim
+		playAnimation(StageScene.SexVent, "tease", {pc="socket", npc="pc", npcBodyState={exposedCrotch=true,hard=true}})
 		saynn("Nah, you can always save her later. For now, you might as well do something else. Looking at Socket stuck in the vent like that.. made you quite hard. Why not let some steam out?")
 
 		saynn("Casually, you position yourself behind her and align your {pc.penis} with her exposed virgin-tight tailhole. But as soon as your member prods her it.. Socket pulls her butt away, her tail covering it.")
@@ -746,7 +747,7 @@ func _react(_action: String, _args):
 	if(_action == "unlock_fasttravel_rough"):
 		addMessage("You can now ask Socket to modify the station's vents to make them traversable")
 
-	if(_action == "socket_rough_ass_keepgoing"):
+	if(_action == "socket_rough_ass_cum"):
 		processTime(3*60)
 		getCharacter("socket").cummedInAnusBy("pc")
 		setFlag("SocketModule.socketWillPunish", true)

@@ -2577,3 +2577,13 @@ func isWearingInvisiblePortalPanties():
 
 func getPortalSexHoleAvailable(_bodypartSlot):
 	return false
+
+func getWornHypnovisor():
+	if(getInventory().hasSlotEquipped(InventorySlot.Eyes)):
+		var item = getInventory().getEquippedItem(InventorySlot.Eyes)
+		if(item.hasTag(ItemTag.Hypnovisor)):
+			return item
+	return null
+
+func isWearingHypnovisor():
+	return getWornHypnovisor() != null

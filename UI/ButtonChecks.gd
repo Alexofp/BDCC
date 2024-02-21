@@ -32,9 +32,11 @@ enum {
 	HasReachablePenisOrVaginaOrHasStrapon,
 	HasBreastPump,
 	HasPenisPump,
+	NotWearingItem,
 }
 
 static func getReasonText(reason):
+	var args = reason
 	if(reason is Array):
 		reason = reason[0]
 	
@@ -96,6 +98,8 @@ static func getReasonText(reason):
 		return "You don't have any breast pumps in your inventory"
 	if(reason == HasPenisPump):
 		return "You don't have any penis pumps in your inventory"
+	if(reason == NotWearingItem):
+		return "You need to get rid of "+GlobalRegistry.getItemRef(args[1]).getVisibleName()
 	return "Error?"
 
 static func check(checks: Array):
@@ -196,6 +200,9 @@ static func check(checks: Array):
 				return args
 		if(reason == HasPenisPump):
 			if(GM.pc.getInventory().getItemsWithTag(ItemTag.PenisPump).size() <= 0):
+				return args
+		if(reason == NotWearingItem):
+			if(GM.pc.getInventory().hasItemIDEquipped(args[1])):
 				return args
 			
 	return null

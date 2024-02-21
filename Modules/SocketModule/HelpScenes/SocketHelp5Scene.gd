@@ -506,7 +506,7 @@ func _run():
 	if(state == "third_try_catch"):
 		removeCharacter("socket")
 		addCharacter("avy")
-		playAnimation(StageScene.Duo, "kick", {npc="avy", npcAction="kick"})
+		playAnimation(StageScene.Duo, "hurt", {npc="avy", npcAction="kick"})
 		saynn("You run out of the laundry.. but then you feel your collar getting grabbed by some strong woman.. before she kicks you back into the room. You hit your back on one of the washing machines as.. Avy.. steps in.")
 
 		saynn("[say=avy]Not so fast, pretty {pc.boy}. We got some things to talk about.[/say]")
@@ -1298,9 +1298,9 @@ func _react(_action: String, _args):
 	if(_action == "submit_sex_vag_cum"):
 		processTime(3*60)
 		GM.pc.gotVaginaFuckedBy("risha")
-		GM.pc.getThroatFuckedBy("avy")
+		GM.pc.gotThroatFuckedBy("avy")
 		GM.pc.cummedInVaginaBy("risha")
-		GM.pc.cummedInThroatBy("avy")
+		GM.pc.cummedInMouthBy("avy")
 		if(GM.pc.isWearingChastityCage() || GM.pc.hasReachablePenis()):
 			GM.pc.cummedOnBy("pc")
 		GM.pc.orgasmFrom("risha")
@@ -1314,9 +1314,9 @@ func _react(_action: String, _args):
 	if(_action == "submit_sex_anal_cum"):
 		processTime(3*60)
 		GM.pc.gotAnusFuckedBy("risha")
-		GM.pc.getThroatFuckedBy("avy")
+		GM.pc.gotThroatFuckedBy("avy")
 		GM.pc.cummedInAnusBy("risha")
-		GM.pc.cummedInThroatBy("avy")
+		GM.pc.cummedInMouthBy("avy")
 		if(GM.pc.isWearingChastityCage() || GM.pc.hasReachablePenis()):
 			GM.pc.cummedOnBy("pc")
 		GM.pc.orgasmFrom("risha")
@@ -1329,7 +1329,7 @@ func _react(_action: String, _args):
 
 	if(_action == "socket_in_bed"):
 		processTime(3*60)
-		getCharacter("socket").clearEquippedItems()
+		getCharacter("socket").getInventory().clearEquippedItems()
 
 	if(_action == "do_sleep"):
 		processTime(3*60*60)
