@@ -8,11 +8,12 @@ func registerTriggers(es):
 	es.addTrigger(self, Trigger.EnteringRoom, "eng_bay_nearbreakroom")
 	
 func run(_triggerID, _args):
+	if(GM.pc.getLocation() != "eng_bay_corridor"):
+		addButton("Corridor", "Leave the secure corridor", "exitsecure")
+	
 	if(GM.QS.isCompleted("Ch2AlexQuest") || getFlag("AlexRynardModule.ch2CanEnterEngineering")):
 		if(GM.pc.getLocation() == "eng_bay_corridor"):
 			addButton("Corridor", "Enter the secure corridor", "entersecure")
-		else:
-			addButton("Corridor", "Leave the secure corridor", "exitsecure")
 
 func getPriority():
 	return 0

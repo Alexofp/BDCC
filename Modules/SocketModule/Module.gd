@@ -26,6 +26,13 @@ func getFlags():
 		"fastTravelMedical": flag(FlagType.Bool),
 		"fastTravelGym": flag(FlagType.Bool),
 		"fastTravelUnder": flag(FlagType.Bool),
+		"fastTravelMedicalCorridor": flag(FlagType.Bool),
+		"fastTravelMineshaft": flag(FlagType.Bool),
+		"fastTravelWorkshop": flag(FlagType.Bool),
+		"fastTravelCanteen": flag(FlagType.Bool),
+		"fastTravelBathroom1": flag(FlagType.Bool),
+		"fastTravelBathroom2": flag(FlagType.Bool),
+		"fastTravelEngBreakroom": flag(FlagType.Bool),
 	}
 
 func _init():
@@ -60,11 +67,12 @@ func resetFlagsOnNewDay():
 
 func getFastTravelData():
 	var result = {}
-	result["fastTravelMedical"] = {
-		cost = 15,
-		name = "Medical",
-		location = "med_lobby_start",
-		buydesc = "Vent that goes straight to the medical wing lobby",
+
+	result["fastTravelCanteen"] = {
+		cost = 10,
+		name = "Canteen",
+		location = "hall_canteen",
+		buydesc = "Vent that goes to the canteen of the main floor",
 	}
 	result["fastTravelGym"] = {
 		cost = 10,
@@ -72,6 +80,51 @@ func getFastTravelData():
 		location = "gym_nearbathroom",
 		buydesc = "Vent that goes straight to the gym where all the training equipment is",
 	}
+	result["fastTravelBathroom1"] = {
+		cost = 10,
+		name = "Main bathroom",
+		location = "main_bathroom1",
+		buydesc = "Vent that goes to the bathroom connected to the main hall",
+	}
+	result["fastTravelBathroom2"] = {
+		cost = 10,
+		name = "Gym bathroom",
+		location = "main_bathroom2",
+		buydesc = "Vent that goes to the bathroom near the gym",
+	}
+	result["fastTravelMedical"] = {
+		cost = 15,
+		name = "Medical lobby",
+		location = "med_lobby_start",
+		buydesc = "Vent that goes straight to the medical wing lobby",
+	}
+	result["fastTravelMineshaft"] = {
+		cost = 15,
+		name = "Mineshafts",
+		location = "mining_shafts_entering",
+		buydesc = "Vent that goes to the mineshafts",
+	}
+	result["fastTravelWorkshop"] = {
+		cost = 15,
+		name = "Workshop",
+		location = "eng_workshop",
+		buydesc = "Vent that goes to the engineering workshop",
+	}
+	if(getFlag("SocketModule.h4completed")):
+		result["fastTravelMedicalCorridor"] = {
+			cost = 25,
+			name = "Medical corridor",
+			location = "med_nearmilking",
+			buydesc = "Vent that bypasses the staff-only doors of the medical wing and leads to one of its corridors.",
+		}
+		# If can enter it normally
+		if(GM.QS.isCompleted("Ch2AlexQuest") || getFlag("AlexRynardModule.ch2CanEnterEngineering")):
+			result["fastTravelEngBreakroom"] = {
+				cost = 25,
+				name = "Eng. break room",
+				location = "eng_breakroom",
+				buydesc = "Vent that bypasses the staff-only doors of the engineering wing and leads to its break room.",
+			}
 	if(getFlag("SocketModule.h4completed") && getFlag("FightClubModule.BulldogBypassed")):
 		result["fastTravelUnder"] = {
 			cost = 30,

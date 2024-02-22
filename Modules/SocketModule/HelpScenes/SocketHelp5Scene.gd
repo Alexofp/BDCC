@@ -1027,7 +1027,7 @@ func _run():
 
 		saynn("[say=pc]Hey there, sleepy head.[/say]")
 
-		if (GM.pc.hasPenis()):
+		if (!GM.pc.hasPenis()):
 			saynn("[say=socket]I was thinking.. I know you don't have a penis..[/say]")
 
 			saynn("That's a scary start for a conversation..")
