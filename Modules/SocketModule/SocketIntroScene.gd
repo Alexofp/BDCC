@@ -16,11 +16,15 @@ func _run():
 		addButton("Naked engineer?", "Go see what this is all about", "naked_engineer")
 	if(state == "naked_engineer"):
 		playAnimation(StageScene.Duo, "stand", {npc="socket"})
-		saynn("You approach her, your gaze glides over her short beige fur that has fancy curved lines of darker shade, her round butt is swaying ever so slightly while she is looking a bit puzzled into her datapad.")
+		say("[table=2][cell][img=300]res://Images/ImagePacks/Rahi/Scenes/socket_nobackground.webp[/img][/cell][cell]")
+		
+		sayn("You approach her, your gaze glides over her short beige fur that has fancy curved lines of darker shade, her round butt is swaying ever so slightly while she is looking a bit puzzled into her datapad.")
 
-		saynn("She notices your curious stare and turns to face you, unashamedly revealing her slim belly, {socket.breasts} and a cute pussy slit between her legs. She doesn't even flinch, letting you blatantly stare at all her private bits.")
+		sayn("She notices your curious stare and turns to face you, unashamedly revealing her slim belly, {socket.breasts} and a cute pussy slit between her legs. She doesn't even flinch, letting you blatantly stare at all her private bits.")
 
-		saynn("[say=socket]Hi![/say]")
+		say("[say=socket]Hi![/say]")
+		
+		saynn("[/cell][/table]")
 
 		saynn("Such an enthusiastic voice for someone so.. exposed.")
 
@@ -33,6 +37,8 @@ func _run():
 		saynn("[say=socket]I'm a new engineer, recently hired. Name is Socket.[/say]")
 
 		saynn("Socket, huh. She sounds friendly.")
+		
+		
 
 		addButton("Why naked", "Ask where is most of her uniform", "say_why_naked")
 		addButton("Nice outfit", "Compliment her unusual uniform", "say_nice_outfit")
