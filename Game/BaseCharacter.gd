@@ -2587,3 +2587,6 @@ func getWornHypnovisor():
 
 func isWearingHypnovisor():
 	return getWornHypnovisor() != null
+
+func hasEnslaveQuest():
+	return false

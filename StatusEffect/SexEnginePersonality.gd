@@ -37,7 +37,18 @@ func getEffectDesc():
 		var statValue = PersonalityStat.getVisibleDesc(statID, value)
 		
 		texts.append(statName+": "+statValue)
-	return Util.join(texts, "\n")
+	var result = Util.join(texts, "\n")
+
+	if(character.hasEnslaveQuest()):
+		var enslaveQuest:NpcEnslavementQuest = character.getEnslaveQuest()
+		var isQuestCompleted = enslaveQuest.isEverythingCompleted()
+		
+		result += "\n\n[color="+("yellow" if !isQuestCompleted else "green")+"]Enslavement progress[/color]:\n"
+		result += enslaveQuest.getQuestProgressText()
+		if(isQuestCompleted):
+			result += "\nReady to be enslaved!"
+
+	return result
 
 func getEffectImage():
 	return "res://Images/StatusEffects/recruitment.png"

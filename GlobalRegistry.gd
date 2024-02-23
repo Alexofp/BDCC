@@ -61,6 +61,8 @@ var fluids: Dictionary = {}
 var skins: Dictionary = {}
 var partSkins: Dictionary = {}
 var speechModifiers: Array = []
+var slaveBreakTasks: Dictionary = {}
+var slaveBreakTaskRefs: Dictionary = {}
 
 var bodypartStorageNode
 
@@ -369,6 +371,7 @@ func registerEverything():
 	registerQuestFolder("res://Quests/Quest/")
 	
 	registerSpeechModifiersFolder("res://Game/SpeechModifiers/")
+	registerSlaveBreakTaskFolder("res://Game/NpcSlavery/BreakTask/")
 	
 	emit_signal("loadingUpdate", 8.0/totalStages, "Sex scenes")
 	yield(get_tree(), "idle_frame")
@@ -1709,6 +1712,7 @@ func getPartSkins(partID: String):
 		return {}
 	return partSkins[partID]
 	
+	
 func registerSpeechModifier(path: String):
 	var loadedClass = load(path)
 	var object = loadedClass.new()
@@ -1729,3 +1733,34 @@ static func sortSpeechModifiersByPriority_sortFunc(a, b):
 
 func sortSpeechModifiersByPriority():
 	speechModifiers.sort_custom(self, "sortSpeechModifiersByPriority_sortFunc")
+
+
+
+func registerSlaveBreakTask(path: String):
+	var loadedClass = load(path)
+	var object = loadedClass.new()
+	
+	slaveBreakTasks[object.id] = loadedClass
+	slaveBreakTaskRefs[object.id] = object
+
+func registerSlaveBreakTaskFolder(folder: String):
+	var scripts = getScriptsInFolder(folder)
+	for scriptPath in scripts:
+		registerSlaveBreakTask(scriptPath)
+
+func createSlaveBreakTask(id: String):
+	if(slaveBreakTasks.has(id)):
+		return slaveBreakTasks[id].new()
+	else:
+		Log.printerr("ERROR: slave break task with the id "+id+" wasn't found")
+		return null
+
+func getSlaveBreakTaskRef(id: String):
+	if(slaveBreakTaskRefs.has(id)):
+		return slaveBreakTaskRefs[id]
+	else:
+		Log.printerr("ERROR: slave break task with the id "+id+" wasn't found")
+		return null
+
+func getSlaveBreakTaskRefs():
+	return slaveBreakTaskRefs

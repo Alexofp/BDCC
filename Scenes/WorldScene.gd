@@ -38,7 +38,7 @@ func _run():
 	addButtonAt(9, "Me", "Shows actions related to you and also your personal information", "me")
 	addButtonAt(13, "Tasks", "Look at your tasks", "tasks")
 	addButtonAt(14, "Inventory", "Look at your inventory", "inventory")
-	#addButtonAt(5, "Sex Test", "Sex test", "sextest")
+	addButtonAt(5, "Sex Test", "Sex test", "sextest")
 	#addButtonAt(7, "Computer test", "Computer test", "comptest")
 	#addButtonAt(8, "Hard Computer test", "Computer test", "comptest2")
 	#addButtonAt(8, "Pc override test", "Override test", "overridetest")
@@ -97,7 +97,7 @@ func _react(_action: String, _args):
 		#runScene("GenericSexScene", ["rahi", "pc", SexType.SlutwallSex])
 		#GM.pc.getInventory().addItem(GlobalRegistry.createItem("BreastPump"))
 		#GM.pc.getInventory().addItem(GlobalRegistry.createItem("BreastPumpAdvanced"))
-		runScene("GenericSexScene", ["pc", "rahi"])
+		#runScene("GenericSexScene", ["pc", "rahi"])
 		#runScene("GenericSexScene", ["rahi", "pc"])
 		#runScene("GenericSexScene", ["nova", "pc"])
 		#runScene("GenericSexScene", ["pc", "nova"])
@@ -105,6 +105,14 @@ func _react(_action: String, _args):
 		#	runScene("GenericSexScene", ["nova", "pc"])
 		#else:
 		#	runScene("GenericSexScene", ["pc", "nova"])
+		var npcID = NpcFinder.grabNpcIDFromPoolOrGenerate(CharacterPool.Inmates, [[NpcCon.HasPenis], [NpcCon.NoChastity]], InmateGenerator.new(), {NpcGen.HasPenis: true, NpcGen.NoChastity: true})
+		var theChar:DynamicCharacter = getCharacter(npcID)
+		var newEnslaveQuest = NpcEnslavementQuest.new()
+		newEnslaveQuest.setChar(theChar)
+		newEnslaveQuest.setSlaveType(SlaveType.Slut)
+		newEnslaveQuest.generateTasks()
+		theChar.setEnslaveQuest(newEnslaveQuest)
+		runScene("GenericSexScene", ["pc", npcID])
 	
 	if(_action == "comptest"):
 		runScene("ComputerSimScene", ["TaviEngineeringComputer"])

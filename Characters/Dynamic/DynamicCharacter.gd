@@ -12,6 +12,7 @@ var npcArchetypes = []
 var npcAttacks = []
 var temporaryCharacter = false
 var flags = {}
+var enslaveQuest = null
 
 func _init():
 	npcHasMenstrualCycle = true
@@ -97,6 +98,22 @@ func getDefaultArtwork(_variant = []):
 
 func getBirthWaitTime():
 	return 60*60*30 # Dynamic npcs wait 30 hours before giving birth
+
+func hasEnslaveQuest():
+	return enslaveQuest != null
+
+func getEnslaveQuest() -> NpcEnslavementQuest:
+	return enslaveQuest
+
+func setEnslaveQuest(newQuest):
+	enslaveQuest = newQuest
+
+func onSexEvent(_event : SexEvent):
+	.onSexEvent(_event)
+	
+	if(enslaveQuest != null):
+		enslaveQuest.handleSexEvent(_event)
+	
 
 func saveData():
 	var data = {
