@@ -47,6 +47,35 @@ func _run():
 		saynn(enslaveQuest.getQuestStartText())
 		
 		addButton("Continue", "Time to do this to them then", "endthescene")
+		addButton("Choke them", "(Reroll) Ask them again nicely", "try_enslave_choke")
+	
+	if(state == "try_enslave_choke"):
+		playAnimation(StageScene.Choking, "choke", {npc=npcID})
+		
+		saynn("You choke them which changes things a bit.")
+		
+		sayn("Here is what you need to do (You can check the progress inside the personality status effect):")
+		
+		var theChar:DynamicCharacter = getCharacter(npcID)
+		var enslaveQuest:NpcEnslavementQuest = theChar.getEnslaveQuest()
+		saynn(enslaveQuest.getQuestStartText())
+		
+		addButton("Continue", "Time to do this to them then", "endthescene")
+		addButton("Choke more", "(Reroll) Ask them again even more nicely", "try_enslave_chokeevenmore")
+		
+	if(state == "try_enslave_chokeevenmore"):
+		playAnimation(StageScene.Choking, "hard", {npc=npcID})
+		
+		saynn("You choke them so much they are close to passing out.")
+		
+		sayn("Here is what you need to do (You can check the progress inside the personality status effect):")
+		
+		var theChar:DynamicCharacter = getCharacter(npcID)
+		var enslaveQuest:NpcEnslavementQuest = theChar.getEnslaveQuest()
+		saynn(enslaveQuest.getQuestStartText())
+		
+		addButton("Continue", "Time to do this to them then", "endthescene")
+		# Cancel quest button here?
 		
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
@@ -60,6 +89,12 @@ func _react(_action: String, _args):
 		newEnslaveQuest.setSlaveType(SlaveType.Slut)
 		newEnslaveQuest.generateTasks()
 		theChar.setEnslaveQuest(newEnslaveQuest)
+
+	if(_action in ["try_enslave_choke", "try_enslave_chokeevenmore"]):
+		var theChar:DynamicCharacter = getCharacter(npcID)
+		if(theChar.hasEnslaveQuest()):
+			var theEnslaveQuest = theChar.getEnslaveQuest()
+			theEnslaveQuest.generateTasks()
 
 	setState(_action)
 

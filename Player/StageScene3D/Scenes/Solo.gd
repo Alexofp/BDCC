@@ -65,4 +65,8 @@ func getChainPoint(_pointID):
 		return $FarLeft
 	if(_pointID == "farright"):
 		return $FarRight
+	if(_pointID == "above"):
+		return $Above
+	if(_pointID == "floor"):
+		return $Floor
 	return .getChainPoint(_pointID)

@@ -78,7 +78,11 @@ func getQuestStartText():
 	
 	for task in tasks:
 		var taskString = task.getTaskString()
-		result.append(str(taskString))
+		result.append("[b]"+str(taskString)+"[/b]")
+		
+		var hintString = task.getTaskHint()
+		if(hintString != null && hintString != ""):
+			result.append(" - "+hintString)
 	
 	return Util.join(result, "\n")
 

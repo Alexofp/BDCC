@@ -40,7 +40,7 @@ func _run():
 			addButton("Poster", "There is a poster on one of the walls here..", "look_poster")
 		else:
 			addButton("Help her", "Show Socket around", "do_show_around")
-		addDisabledButton("Upgrades", "Not done yet")
+		addButton("Cell upgrades", "See what Socket can upgrade in your cell", "see_cell_upgrades")
 		if (getFlag("SocketModule.h2completed", false)):
 			addButton("Vents", "Ask Socket what vents she can clear for you", "ask_vents")
 		addButton("Leave", "Enough talking", "endthescene")
@@ -310,6 +310,11 @@ func _react(_action: String, _args):
 			runScene("SocketHelp5Scene")
 			endScene()
 			return
+
+	if(_action == "see_cell_upgrades"):
+		runScene("SocketBuyCellUpgradesScene")
+		endScene()
+		return
 
 	if(_action == "ask_vents"):
 		runScene("SocketBuyFastTravelScene")

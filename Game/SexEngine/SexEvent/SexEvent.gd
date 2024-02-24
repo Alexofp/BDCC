@@ -96,3 +96,23 @@ func getSexEngine():
 	if(sexEngine == null):
 		return null
 	return sexEngine
+
+func sourceIsDom():
+	if(!isSexEngine):
+		return true
+	return getSexEngine().isDom(sourceCharID)
+	
+func sourceIsSub():
+	if(!isSexEngine):
+		return true
+	return getSexEngine().isSub(sourceCharID)
+
+func targetIsDom():
+	if(!isSexEngine):
+		return true
+	return getSexEngine().isDom(targetCharID)
+	
+func targetIsSub():
+	if(!isSexEngine):
+		return true
+	return getSexEngine().isSub(targetCharID)

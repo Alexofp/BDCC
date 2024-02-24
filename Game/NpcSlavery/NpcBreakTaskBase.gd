@@ -36,6 +36,9 @@ func onSexEvent(_npc, _event:SexEvent):
 func getTaskString():
 	return "Do a backflip!"
 
+func getTaskHint():
+	return ""
+
 func getProgressString():
 	return ""+str(currentAmount)+"/"+str(needAmount)
 

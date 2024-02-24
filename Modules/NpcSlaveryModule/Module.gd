@@ -2,6 +2,10 @@ extends Module
 
 func getFlags():
 	return {
+		"slavesSpace": flag(FlagType.Number),
+		
+		"hasSybian": flag(FlagType.Bool),
+		
 	}
 
 func _init():
@@ -10,6 +14,7 @@ func _init():
 	
 	scenes = [
 			"res://Modules/NpcSlaveryModule/EnslaveDynamicNpcScene.gd",
+			"res://Modules/NpcSlaveryModule/SocketBuyCellUpgradesScene.gd",
 		]
 	characters = [
 	]
@@ -20,3 +25,17 @@ func _init():
 
 func resetFlagsOnNewDay():
 	pass
+
+func getSlavesSpace() -> int:
+	return int(getFlag("NpcSlaveryModule.slavesSpace", 0))
+
+func canEnslave():
+	return getSlavesSpace()
+
+func getSlavesSpaceUpgradeCost():
+	var currentSpace = getSlavesSpace()
+	
+	if(currentSpace == 0):
+		return 30
+	return currentSpace * 10
+	

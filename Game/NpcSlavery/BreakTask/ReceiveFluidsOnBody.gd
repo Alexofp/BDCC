@@ -26,7 +26,7 @@ func generateFor(_npc, _difficulty = 1.0):
 
 func onSexEvent(_npc, _event:SexEvent):
 	if(_event.getType() == SexEvent.ReceivedFluidsOnBody):
-		if(_event.getTargetChar() == _npc):
+		if(_event.getTargetChar() == _npc && _event.targetIsSub()):
 			currentAmount += _event.getField("loadSize", 0)
 			if(currentAmount > needAmount):
 				completeSelf()
@@ -35,6 +35,9 @@ func onSexEvent(_npc, _event:SexEvent):
 
 func getTaskString():
 	return "Cum on body: "+str(Util.roundF(currentAmount, 1))+"/"+str(Util.roundF(needAmount, 1))+"ml"
+
+func getTaskHint():
+	return "Cum or squirt on them"
 
 #func saveData():
 #	var data = .saveData()

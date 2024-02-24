@@ -24,7 +24,7 @@ func generateFor(_npc, _difficulty = 1.0):
 
 func onSexEvent(_npc, _event:SexEvent):
 	if(_event.getType() == SexEvent.HoleCreampied || _event.getType() == SexEvent.StraponCreampied):
-		if(_event.getTargetChar() == _npc):
+		if(_event.getTargetChar() == _npc && _event.targetIsSub()):
 			if(_event.getField("hole", BodypartSlot.Head) in [BodypartSlot.Vagina, BodypartSlot.Anus]):
 				advanceTask()
 				return true
@@ -32,6 +32,9 @@ func onSexEvent(_npc, _event:SexEvent):
 
 func getTaskString():
 	return "Received creampies: "+getProgressString()
+
+func getTaskHint():
+	return "Cum inside their pussy or ass. If you don't have a penis, you can use a loaded strapon!"
 
 #func saveData():
 #	var data = .saveData()
