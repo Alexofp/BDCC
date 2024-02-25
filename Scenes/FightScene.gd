@@ -361,7 +361,7 @@ func _react(_action: String, _args):
 				enemyCharacter.getBuffsHolder().calculateBuffs()
 				#enemyCharacter.updateNonBattleEffects()
 
-				if restraintData.canBeLocked() && RNG.chance(33): 
+				if restraintData.canBeLocked() && RNG.chance(20): 
 					restraintData.lockIt()
 				
 				var restraintsAmount = enemyCharacter.getInventory().getEquppedRestraints().size()
@@ -756,7 +756,7 @@ func beforeTurnChecks(pcWasStruggling = false):
 	enemyCharacter.processBattleTurnContex(getContexForEnemy())
 	
 	if(true):
-		var turnData = GM.pc.processStruggleTurn(pcWasStruggling).build()
+		var turnData = GM.pc.processStruggleTurn(pcWasStruggling)
 		var addLust = turnData["lust"]
 		var addPain = turnData["pain"]
 		var addStamina = turnData["stamina"]
@@ -779,7 +779,7 @@ func beforeTurnChecks(pcWasStruggling = false):
 			whatHappened += "[i]"+GM.ui.processString(additionalStruggleText, {"user":"pc"})+"[/i]\n"
 	
 	if(true):
-		var turnData = enemyCharacter.processStruggleTurn(true).build()
+		var turnData = enemyCharacter.processStruggleTurn(true)
 		var addLust = turnData["lust"]
 		var addPain = turnData["pain"]
 		var addStamina = turnData["stamina"]
