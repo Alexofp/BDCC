@@ -13,6 +13,7 @@ var npcAttacks = []
 var temporaryCharacter = false
 var flags = {}
 var enslaveQuest = null
+var npcSlavery = null
 
 func _init():
 	npcHasMenstrualCycle = true
@@ -108,11 +109,23 @@ func getEnslaveQuest() -> NpcEnslavementQuest:
 func setEnslaveQuest(newQuest):
 	enslaveQuest = newQuest
 
+func isSlaveToPlayer():
+	return npcSlavery != null
+
+func getNpcSlavery() -> NpcSlave:
+	return npcSlavery
+
+func setNpcSlavery(newSlav):
+	npcSlavery = newSlav
+
 func onSexEvent(_event : SexEvent):
 	.onSexEvent(_event)
 	
 	if(enslaveQuest != null):
 		enslaveQuest.handleSexEvent(_event)
+	
+	if(npcSlavery != null):
+		npcSlavery.handleSexEvent(_event)
 	
 
 func saveData():

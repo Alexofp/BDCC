@@ -420,6 +420,14 @@ func getEquippedItemsWithTag(tag):
 			result.append(item)
 	return result
 	
+func hasEquippedItemWithTag(tag):
+	for itemSlot in equippedItems.keys():
+		var item = equippedItems[itemSlot]
+
+		if(item.hasTag(tag)):
+			return true
+	return false
+	
 func getEquppedRestraints():
 	var result = []
 	

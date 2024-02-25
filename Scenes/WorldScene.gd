@@ -39,6 +39,7 @@ func _run():
 	addButtonAt(13, "Tasks", "Look at your tasks", "tasks")
 	addButtonAt(14, "Inventory", "Look at your inventory", "inventory")
 	addButtonAt(5, "Sex Test", "Sex test", "sextest")
+	addButtonAt(7, "Slave Test", "Slave test", "slavetest")
 	#addButtonAt(7, "Computer test", "Computer test", "comptest")
 	#addButtonAt(8, "Hard Computer test", "Computer test", "comptest2")
 	#addButtonAt(8, "Pc override test", "Override test", "overridetest")
@@ -113,6 +114,11 @@ func _react(_action: String, _args):
 		newEnslaveQuest.generateTasks()
 		theChar.setEnslaveQuest(newEnslaveQuest)
 		runScene("GenericSexScene", ["pc", npcID])
+	
+	if(_action == "slavetest"):
+		var npcID = NpcFinder.grabNpcIDFromPoolOrGenerate(CharacterPool.Inmates, [[NpcCon.HasPenis], [NpcCon.NoChastity]], InmateGenerator.new(), {NpcGen.HasPenis: true, NpcGen.NoChastity: true})
+		#getModule("NpcSlaveryModule").doEnslaveCharacter(npcID)
+		runScene("KidnapDynamicNpcScene", [npcID])
 	
 	if(_action == "comptest"):
 		runScene("ComputerSimScene", ["TaviEngineeringComputer"])

@@ -2590,3 +2590,6 @@ func isWearingHypnovisor():
 
 func hasEnslaveQuest():
 	return false
+
+func isSlaveToPlayer():
+	return false

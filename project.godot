@@ -1085,6 +1085,11 @@ _global_script_classes=[ {
 "path": "res://Game/NpcSlavery/SlaveType.gd"
 }, {
 "base": "Reference",
+"class": "SlaveTypeBase",
+"language": "GDScript",
+"path": "res://Game/NpcSlavery/SlaveTypeBase.gd"
+}, {
+"base": "Reference",
 "class": "Species",
 "language": "GDScript",
 "path": "res://Species/BaseSpecies.gd"
@@ -1420,6 +1425,7 @@ _global_script_class_icons={
 "SkinBase": "",
 "SkinType": "",
 "SlaveType": "",
+"SlaveTypeBase": "",
 "Species": "",
 "SpeciesCompatibility": "",
 "SpeechModifierBase": "",

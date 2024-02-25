@@ -14,6 +14,7 @@ func _run():
 		playAnimation(StageScene.Duo, "stand", {npc="socket"})
 		
 		saynn("Socket shows you a list of upgrades that she can do to your cell.")
+		addButtonAt(14, "Back", "Enough shopping", "endthescene")
 		
 		var howManySlavesSpaces = getModule("NpcSlaveryModule").getSlavesSpace()
 		if(howManySlavesSpaces == 0):
@@ -40,8 +41,6 @@ func _run():
 			addButtonWithChecks("Sybian", "Pay to get a sybian installed in your cell", "pay_upgrade", ["NpcSlaveryModule.hasSybian", sybianPrice, "Sybian machine has been installed in your cell"], [[ButtonChecks.HasCredits, sybianPrice]])
 		else:
 			addDisabledButton("Sybian", "You already have this")
-
-		addButtonAt(14, "Back", "Enough shopping", "endthescene")
 	
 	if(state == "do_cell_expansion"):
 		saynn("You pay Socket the required amount of credits for the cell expansion upgrade.")

@@ -19,6 +19,10 @@ func getBuffs():
 func getTakeOffScene():
 	return "CollarTuggingScene"
 
+func getTags():
+	return [ItemTag.AllowsEnslaving]
+
+
 func isImportant():
 	return true
 

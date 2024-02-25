@@ -11,6 +11,12 @@ func _init():
 func shouldApplyTo(_npc):
 	if(GM.main != null && GM.main.supportsSexEngine()):
 		return true
+	if(_npc.hasEnslaveQuest()):
+		return true
+	if(_npc.isSlaveToPlayer()):
+		var npcSlave:NpcSlave = _npc.getNpcSlavery()
+		if(npcSlave.isReadyToBeLeveledUp()):
+			return true
 	return false
 	
 func initArgs(_args = []):
@@ -47,6 +53,12 @@ func getEffectDesc():
 		result += enslaveQuest.getQuestProgressText()
 		if(isQuestCompleted):
 			result += "\nReady to be enslaved!"
+
+	if(character.isSlaveToPlayer()):
+		var npcSlave:NpcSlave = character.getNpcSlavery()
+		if(npcSlave.isReadyToBeLeveledUp()):
+			result += "\n\n[color=yellow]Slave level-up progress:[/color]"
+			result += npcSlave.getLevelupTaskProgressText()
 
 	return result
 

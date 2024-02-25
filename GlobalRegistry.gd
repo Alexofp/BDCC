@@ -63,6 +63,7 @@ var partSkins: Dictionary = {}
 var speechModifiers: Array = []
 var slaveBreakTasks: Dictionary = {}
 var slaveBreakTaskRefs: Dictionary = {}
+var slaveTypes: Dictionary = {}
 
 var bodypartStorageNode
 
@@ -372,6 +373,7 @@ func registerEverything():
 	
 	registerSpeechModifiersFolder("res://Game/SpeechModifiers/")
 	registerSlaveBreakTaskFolder("res://Game/NpcSlavery/BreakTask/")
+	registerSlaveTypeFolder("res://Game/NpcSlavery/SlaveType/")
 	
 	emit_signal("loadingUpdate", 8.0/totalStages, "Sex scenes")
 	yield(get_tree(), "idle_frame")
@@ -1764,3 +1766,25 @@ func getSlaveBreakTaskRef(id: String):
 
 func getSlaveBreakTaskRefs():
 	return slaveBreakTaskRefs
+
+
+func registerSlaveType(path: String):
+	var loadedClass = load(path)
+	var object = loadedClass.new()
+	
+	slaveTypes[object.id] = object
+
+func registerSlaveTypeFolder(folder: String):
+	var scripts = getScriptsInFolder(folder)
+	for scriptPath in scripts:
+		registerSlaveType(scriptPath)
+
+func getSlaveType(id: String):
+	if(slaveTypes.has(id)):
+		return slaveTypes[id]
+	else:
+		Log.printerr("ERROR: slave type task with the id "+id+" wasn't found")
+		return null
+
+func getSlaveTypes():
+	return slaveTypes
