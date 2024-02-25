@@ -8,16 +8,16 @@ func _init():
 func defaultStruggle(_pc, _minigame, response):
 	response = .defaultStruggle(_pc, _minigame, response)
 	if !_pc.hasBlockedHands() && !_pc.hasBoundArms():
-		response.text = "{user.name} uses {user.his} hands to try and take off the {item.name}."
+		response.text.append("{user.name} uses {user.his} hands to try and take off the {item.name}.")
 	else:
 		response.use.append("roll")
-		response.text = "{user.name} rolls around and tries to helplessly wiggle {user.his} {item.name} off."
+		response.text.append("{user.name} rolls around and tries to helplessly wiggle {user.his} {item.name} off.")
 	return response
 
 
 func failStruggle(_pc, _minigame, response):
 	if failChance(_pc, 20):
-		response.text += " Ow! {user.name} accidently smashed them against "+RNG.pick(["the wall", "the ground", "something"])
+		response.text.append("Ow! {user.name} accidently smashed them against "+RNG.pick(["the wall", "the ground", "something"])+".")
 		response.pain += calcStrugglePain(_pc, RNG.randi_range(1, 3))
 	else:
 		response = .failStruggle(_pc, _minigame, response)

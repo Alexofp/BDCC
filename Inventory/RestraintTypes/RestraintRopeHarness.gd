@@ -11,10 +11,10 @@ func canBeCut():
 	return true
 
 func defaultStruggle(_pc, _minigame, response):
-	if !_pc.hasBoundArms() || !_pc.hasBlockedHands():
-		response.text += "{user.name} tries to blindly find the knot to tug on"
+	if (!_pc.hasBoundArms() || !_pc.hasBlockedHands()) && _pc.isBlindfolded():
+		response.text.append("{user.name} tries to blindly find the knot to tug on.")
 	else:
-		response.text += "{user.name} tries to wiggle the rope harness off"
+		response.text.append("{user.name} tries to wiggle the rope harness off.")
 	response.stamina += calcStruggleStamina(_pc, 1)
 	return response
 

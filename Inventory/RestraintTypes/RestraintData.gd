@@ -13,12 +13,12 @@ var restraintType = RestraintType.Generic
 class ResponseData:
 
 	# response
-	var text: String
-	var damage: float
-	var lockDamage: float
-	var lust: int
-	var pain: int
-	var stamina: int
+	var text: Array
+	var damage: float = 0.0
+	var lockDamage: float = 0.0
+	var lust: int = 0
+	var pain: int = 0
+	var stamina: int = 0
 	
 	# prosessing data
 	var fail = "" # force | never
@@ -30,13 +30,7 @@ class ResponseData:
 	var flow = []
 	var name: String
 	
-	func _init(_text: String, _damage: float, _lockDamage: float, _lust: int, _pain: int, _stamina: int, _name: String):
-		text = _text
-		damage = _damage
-		lockDamage = _lockDamage
-		lust = _lust
-		pain = _pain
-		stamina = _stamina
+	func _init(_name: String):
 		name = _name
 
 	# skip rest of processing except after part
@@ -47,9 +41,12 @@ class ResponseData:
 	
 
 	func build():
-		var _text = text.replace("{item.name}", name)
-		if replace:
-			_text = _text.replace("..", ".").replace(",.", ".").replace("  ", " ")
+		var _text = "|".join(text)
+		_text = _text.replace(".| ", " ").replace(" | ", " ")
+		_text = _text.replace("| ", " ").replace(" |", " ")
+		_text = _text.replace("|", " ")
+		
+		_text = _text.replace("{item.name}", name).strip_edges()
 		return {"text": _text, "damage": damage, "lockDamage": lockDamage, "lust": lust, "pain": pain, "stamina": stamina}
 
 
@@ -321,43 +318,42 @@ func doStruggle(_pc, _minigame):
 
 # called before struggling
 func beforeStruggle(_pc, _minigame):
-	return ResponseData.new("",  0.0, 0.0, 0, 0, 0, getItem().getVisibleName())
+	return ResponseData.new(getItem().getVisibleName())
 
 # called at begining of struggling
 func defaultStruggle(_pc, _minigame, response):
-	response.text += "{user.youHe} struggle, trying to make the {item.name} slip off"
+	response.text.append("{user.youHe} struggle, trying to make the {item.name} slip off.")
 	response.stamina += calcStruggleStamina(_pc, 1)
 	return response
 	
 # fatal failed option for struggling
 func fatalFailStruggle(_pc, _minigame, response):
 	if tightness < 1.0:
-		response.text += " but it seems like {user.youHe} just tightened it up more."
+		response.text.append(" but it seems like {user.youHe} just tightened it up more.")
 	else:
-		response.text += " but it seems like all {user.his} effort is in vain."
+		response.text.append(" but it seems like all {user.his} effort is in vain.")
 	response.damage += calcStruggleDamage(_pc, _minigame / 4.0)
 	response.stamina += calcStruggleStamina(_pc, 1)
 	return response
 
 # failed option for struggling
 func failStruggle(_pc, _minigame, response):
-	response.text += " but without visible effect."
+	response.text.append(" but without visible effect.")
 	return response
 	
 # successful struggle for unlocked stuff
 func sucessStruggle(_pc, _minigame, response):
-	response.text += "."
 	response.damage += calcStruggleDamage(_pc, _minigame) * calcRestrainMult(_pc, _minigame)
 	return response
 
 # successful struggle for locked stuff, success thwarted by the lock
 func sucessStruggleLocked(_pc, _minigame, response):
-	response.text += " but the lock is too strong."
+	response.text.append(" but the lock is too strong.")
 	return response
 
 # successful struggle despite the lock, lock at least partially overcome
 func sucessStruggleBreak(_pc, _minigame, response):
-	response.text += " but it would have been done better if only it was not locked."
+	response.text.append(" but it would have been done better if only it was not locked.")
 	var _mult = calcLockedMult(_pc, _minigame)
 	response.damage += calcStruggleDamage(_pc, _mult) * calcRestrainMult(_pc, _minigame)
 	response.lockDamage += calcLockDamage(_pc, _mult) * calcRestrainMult(_pc, _minigame)
@@ -366,13 +362,13 @@ func sucessStruggleBreak(_pc, _minigame, response):
 # common failed option for struggling, executed after all fail
 func commonFailStruggle(_pc, _minigame, response):
 	if failChanceZoned(_pc, _minigame, 10) && response.use.has("bite"):
-		response.text += " Ow, {user.name} accidentally bit {user.himself}."
+		response.text.append("Ow, {user.name} accidentally bit {user.himself}.")
 		response.pain += calcStrugglePain(_pc, RNG.randi_range(2, 3))
 	if failChanceZoned(_pc, _minigame, 10) && response.use.has("step"):
-		response.text += " Ow, {user.name} accidentally bit {user.himself}."
+		response.text.append("Ow, {user.name} accidentally bit {user.himself}.")
 		response.pain += calcStrugglePain(_pc, RNG.randi_range(1, 2))
 	elif failChanceZoned(_pc, _minigame, 15) && response.use.has("smash"):
-		response.text += " Ow! {user.name} accidently smashed them against "+RNG.pick(["the wall", "the ground", "something"])
+		response.text.append("Ow! {user.name} accidently smashed them against "+RNG.pick(["the wall", "the ground", "something"])+".")
 		response.pain += calcStrugglePain(_pc, RNG.randi_range(1, 3))	
 	return response
 
@@ -383,7 +379,7 @@ func commonSuccessStruggle(_pc, _minigame, response):
 # called after struggling
 func afterStruggle(_pc, _minigame, response):
 	if failChanceZoned(_pc, _minigame, 20) && response.use.has("bite"):
-		response.text += " {user.name} finds {user.himself} drooling a lot."
+		response.text.append("{user.name} finds {user.himself} drooling a lot.")
 		response.lust += calcStruggleLust(_pc, 2)
 	return response
 
@@ -410,11 +406,11 @@ func doLockpick(_pc, _minigame):
 
 # called before lockpicking
 func beforePick(_pc, _minigame):
-	return ResponseData.new("", 0.0, 0.0, 0, 0, 0, getItem().getVisibleName())
+	return ResponseData.new(getItem().getVisibleName())
 
 # called at begining of lockpicking
 func defaultPick(_pc, _minigame, response):
-	response.text += "{user.youHe} picking the lock, trying to unlock the {item.name}"
+	response.text.append("{user.youHe} picking the lock, trying to unlock the {item.name}.")
 	response.stamina += calcPickStamina(_pc, 1)
 	return response
 
@@ -424,19 +420,19 @@ func afterPick(_pc, _minigame, response):
 
 # fatal failed option for lockpicking
 func fatalFailPick(_pc, _minigame, response):
-	response.text += " but it seems like {user.youHe} you've stuck the lock instead."
+	response.text.append(" but it seems like {user.youHe} you've stuck the lock instead.")
 	response.lockDamage = -1.0
 	response.stamina = calcPickStamina(_pc, 2)
 	return response
 
 # fail option for lockpicking
 func failPick(_pc, _minigame, response):
-	response.text += " but without visible effect."
+	response.text.append(" but without visible effect.")
 	return response
 
 # success option for lockpicking
 func sucessPick(_pc, _minigame, response):
-	response.text += " and it seems to be working."
+	response.text.append(" and it seems to be working.")
 	response.lockDamage = calcPickDamage(_pc, _minigame) *  calcRestrainMult(_pc, _minigame)
 	return response
 
@@ -463,11 +459,11 @@ func doCut(_pc, _minigame):
 
 # called before cutting
 func beforeCut(_pc, _minigame):
-	return ResponseData.new("", 0.0, 0.0, 0, 0, 0, getItem().getVisibleName())
+	return ResponseData.new(getItem().getVisibleName())
 
 # called at begining of cutting
 func defaultCut(_pc, _minigame, response):
-	response.text += "{user.youHe} looking for a good place to cut, trying to rid off the {item.name}"
+	response.text.append("{user.youHe} looking for a good place to cut, trying to rid off the {item.name}.")
 	response.stamina += calcCutStamina(_pc, 1)
 	response.pain += calcCutPain(_pc, 1)
 	return response
@@ -478,19 +474,18 @@ func afterCut(_pc, _minigame, response):
 
 # fatal failed option for cutting
 func fatalFailCut(_pc, _minigame, response):
-	response.text += " but instead the bondage gear {user.youHe} hurt self."
+	response.text.append(" but instead the bondage gear {user.youHe} hurt self.")
 	response.pain += calcFatalCutPain(_pc, _minigame)
 	return response
 
 # fail option for cutting
 func failCut(_pc, _minigame, response):
-	response.text += " but without visible effect."
+	response.text.append(" but without visible effect.")
 	return response
 
 # success option for cutting
 func successCut(_pc, _minigame, response):
 	var _mult = calcLockedMult(_pc, _minigame)
-	response.text += "."
 	response.damage = calcCutDamage(_pc, _minigame) * calcRestrainMult(_pc, _minigame)
 	return response
 

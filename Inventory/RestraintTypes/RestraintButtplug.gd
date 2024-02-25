@@ -22,40 +22,40 @@ func shouldDoStruggleMinigame(_pc):
 
 func defaultStruggle(_pc, _minigame, response):
 	if !_pc.hasBoundArms() && !_pc.hasBlockedHands():
-		response.text = "Because {user.name}'s hands are free {user.he} {user.verbS('manage')} to just remove the buttplug."
+		response.text.append("Because {user.name}'s hands are free {user.he} {user.verbS('manage')} to just remove the buttplug.")
 		response.damage = 1.0
 		response.stamina = 0
 		response.skipRest()
 	elif !_pc.hasBoundLegs():
 		response.use.append("legs")
-		response.text = "{user.name} squirms and wiggles {user.his} rear, trying to push the buttplug out of {user.his} butt"
+		response.text.append("{user.name} squirms and wiggles {user.his} rear, trying to push the buttplug out of {user.his} butt.")
 	else:
-		response.text = "{user.name} desperatelly squirms, trying to make the buttplug fall out. Not being able to spread {user.his} legs makes it very hard."
+		response.text.append("{user.name} desperatelly squirms, trying to make the buttplug fall out. Not being able to spread {user.his} legs makes it very hard.")
 	return response
 		
 func fatalFailStruggle(_pc, _minigame, response):
-	response.text = "{user.name} desperatelly squirms, trying to make the {item.name} fall out but it slipped back."
+	response.text.clear()
+	response.text.append("{user.name} desperatelly squirms, trying to make the {item.name} fall out but it slipped back.")
 	response.damage = -1.0
 	response.lust += calcStruggleLust(_pc, 5)
 	return response
 	
 func failStruggle(_pc, _minigame, response):
 	if response.use.has("legs"):
-		response.text += " but without visible effect."
+		response.text.append(" but without visible effect.")
 	else: 
-		response.text += " No surprise that the plug didn't move out even a bit."
+		response.text.append("No surprise that the plug didn't move out even a bit.")
 	return response	
 	
 func sucessStruggle(_pc, _minigame, response):
-	response.text += "."
 	response.damage += calcStruggleDamage(_pc, _minigame) * calcRestrainMult(_pc, _minigame)
 	if _pc.isPlayer() && failChance(_pc, 40) && GM.pc.getInventory().hasSlotEquipped(InventorySlot.UnderwearBottom):
 		if(_pc.getInventory().getEquippedItem(InventorySlot.UnderwearBottom).coversBodypart(BodypartSlot.Vagina)):
-			response.text += " The plug presses into your panties."
+			response.text.append("The plug presses into your panties.")
 			response.damage /= 2.0
 
 			if(failChance(_pc, 30)):
-				response.text += " [b]Your panties slipped down, oops.[/b]"
+				response.text.append("[b]Your panties slipped down, oops.[/b]")
 				_pc.getInventory().unequipSlot(InventorySlot.UnderwearBottom)
 	return response
 	

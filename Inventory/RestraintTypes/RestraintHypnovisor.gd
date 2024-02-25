@@ -20,7 +20,7 @@ func shouldDoStruggleMinigame(_pc):
 	
 func defaultStruggle(_pc, _minigame, response):
 	if HypnokinkUtil.isInTrance(_pc) && !_pc.hasPerk(Perk.HypnosisGoodAtVisors):
-		response.text = "{user.name} tries to... to... \n\nDo what? Must have not been important."
+		response.text.append("{user.name} tries to... to... \n\nDo what? Must have not been important.")
 		response.damage = 0.0
 		response.skipRest()
 		return response
@@ -29,9 +29,9 @@ func defaultStruggle(_pc, _minigame, response):
 		return .defaultStruggle(_pc, _minigame, response)
 		
 	if !_pc.hasBoundArms():
-		response.text = "Hypnotized {user.name} reaches up, trying to focus on removing {user.his} {item.name}."
+		response.text.append("Hypnotized {user.name} reaches up, trying to focus on removing {user.his} {item.name}.")
 	else:
-		response.text = "Hypnotized {user.name} shakes {user.his} head, trying to dislodge {user.his} {item.name}."
+		response.text.append("Hypnotized {user.name} shakes {user.his} head, trying to dislodge {user.his} {item.name}.")
 	return response
 
 func getResistAnimation():

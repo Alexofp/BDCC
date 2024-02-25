@@ -9,24 +9,24 @@ var turnedOn = false
 
 func defaultStruggle(_pc, _minigame, response):
 	if !_pc.hasBoundArms() && !_pc.hasBlockedHands():
-		response.text = "Because {user.name}'s hands are free {user.he} just {user.verbS('remove')} the plug."
+		response.text.append("Because {user.name}'s hands are free {user.he} just {user.verbS('remove')} the plug.")
 		response.damage = 1.0
 		response.stamina = 0
 		response.skipRest()
 	elif !_pc.hasBoundLegs():
 		response.use.append("legs")
-		response.text = "{user.name} squirms and wiggles {user.his} rear, trying to push the plug out of {user.his} pussy."
+		response.text.append("{user.name} squirms and wiggles {user.his} rear, trying to push the plug out of {user.his} pussy.")
 	else:
-		response.text = "{user.name} desperatelly squirms, trying to push the vaginal plug out. Not being able to spread {user.his} legs makes it very hard."
+		response.text.append("{user.name} desperatelly squirms, trying to push the vaginal plug out. Not being able to spread {user.his} legs makes it very hard.")
 	return response
 
 func sucessStruggle(_pc, _minigame, response):
 	response = .sucessStruggle(_pc, _minigame, response)
 	if(!turnedOn && failChance(_pc, 40)):
-		response.text += " {user.name} accidentally turns on the plug inside {user.him} and it starts vibrating!"
+		response.text.append("{user.name} accidentally turns on the plug inside {user.him} and it starts vibrating!")
 		turnedOn = true
 	elif(turnedOn && failChance(_pc, 20)):
-		response.text += " {user.name} managed to randomly turn off the vibrating plug."
+		response.text.append("{user.name} managed to randomly turn off the vibrating plug.")
 		turnedOn = false
 	return response
 	

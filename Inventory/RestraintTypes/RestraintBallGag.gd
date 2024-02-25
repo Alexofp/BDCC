@@ -13,30 +13,30 @@ func calcCutDamage(_pc, mult = 1.0):
 func defaultStruggle(_pc, _minigame, response):
 	if !_pc.hasBoundArms() && !_pc.hasBlockedHands():
 		response.use.append("hands")
-		response.text += "{user.name} tugs on the straps of {user.his} head harness, trying to take it off"
+		response.text.append("{user.name} tugs on the straps of {user.his} head harness, trying to take it off.")
 		response.stamina += calcStruggleStamina(_pc, 1)
 	else:
-		response.text = "{user.name} tries to bite down on the ball in {user.his} mouth although the rubber makes it very tough"
+		response.text.append("{user.name} tries to bite down on the ball in {user.his} mouth although the rubber makes it very tough.")
 		response.stamina += calcStruggleStamina(_pc, 0.3) 
 	return response
 
 func fatalFailStruggle(_pc, _minigame, response):
 	if response.use.has("hands"):
-		response.text += " but it seems like {user.youHe} just tightened it up more."
+		response.text.append(" but it seems like {user.youHe} just tightened it up more.")
 		response.damage += calcStruggleDamage(_pc, _minigame / 4.0)
 		response.stamina += calcStruggleStamina(_pc, 1)
 	else:
-		response.text += " but the ball just got deeper in {user.his} mouth."
+		response.text.append(" but the ball just got deeper in {user.his} mouth.")
 		response.pain += calcStrugglePain(_pc, 0.5)
 	return response
 
 func failStruggle(_pc, _minigame, response):
-	response.text += " but it seems kind of stuck."
+	response.text.append(" but it seems kind of stuck.")
 	return response
 
 func afterStruggle(_pc, _minigame, response):
 	if(failChance(_pc, 20)):
-		response.text += " The ball in {user.his} mouth makes {user.him} drool a lot."
+		response.text.append("The ball in {user.his} mouth makes {user.him} drool a lot.")
 		response.lust += calcStruggleLust(_pc, 1)
 	return response
 

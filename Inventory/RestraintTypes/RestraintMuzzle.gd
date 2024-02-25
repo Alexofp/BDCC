@@ -13,16 +13,16 @@ func calcCutDamage(_pc, mult = 1.0):
 func defaultStruggle(_pc, _minigame, response):
 	if !_pc.hasBoundArms() && !_pc.hasBlockedHands():
 		response.use.append("hands")
-		response.text += "{user.name} tugs on the straps of {user.his} head harness, trying to take it off"
+		response.text.append("{user.name} tugs on the straps of {user.his} head harness, trying to take it off.")
 		response.stamina += calcStruggleStamina(_pc, 1)
 	else: 
-		response.text = "{user.name} desperately tries to wiggle the harness off {user.his} head"
+		response.text.append("{user.name} desperately tries to wiggle the harness off {user.his} head.")
 		response.stamina += calcStruggleStamina(_pc, 0.3) 
 	return response
 
 func fatalFailStruggle(_pc, _minigame, response):
 	if response.use.has("hands"):
-		response.text += " but it seems like {user.youHe} just tightened it up more."
+		response.text.append(" but it seems like {user.youHe} just tightened it up more.")
 		response.damage += calcStruggleDamage(_pc, _minigame / 3.0)
 		response.stamina += calcStruggleStamina(_pc, 1)
 	else:
@@ -31,12 +31,12 @@ func fatalFailStruggle(_pc, _minigame, response):
 	return response
 
 func failStruggle(_pc, _minigame, response):
-	response.text += " but it seems kind of stuck."
+	response.text.append(" but it seems kind of stuck.")
 	return response
 
 func afterStruggle(_pc, _minigame, response):
 	if !response.use.has("hands") && (failChance(_pc, 30) || response.flow.has("fatal")):
-		response.text += " Shaking {user.his} head so much makes {user.him} disoriented."
+		response.text.append("Shaking {user.his} head so much makes {user.him} disoriented.")
 		response.pain += calcStrugglePain(_pc, 1)
 	return response
 

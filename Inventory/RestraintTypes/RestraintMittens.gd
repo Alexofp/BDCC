@@ -14,13 +14,13 @@ func calcCutDamage(_pc, mult = 1.0):
 func defaultStruggle(_pc, _minigame, response):
 	if !_pc.hasBoundArms() && !_pc.hasBoundLegs():
 		response.use.append("step")
-		response.text = "{user.name} steps on the mittens and tries to pull {user.his} arms out of them."
+		response.text.append("{user.name} steps on the mittens and tries to pull {user.his} arms out of them.")
 	elif !_pc.hasBoundArms() && !_pc.isBitingBlocked():
 		response.use.append("bite")
-		response.text = "{user.name} bites on one of the mittens and tries to free {user.his} arm. Not very effective but better than nothing."
+		response.text.append("{user.name} bites on one of the mittens and tries to free {user.his} arm. Not very effective but better than nothing.")
 	else:
 		response.use.append("smash")
-		response.text = "{user.name} tries to helplessly wiggle the mittens off"
+		response.text.append("{user.name} tries to helplessly wiggle the mittens off.")
 	response.stamina += calcStruggleStamina(_pc, 1)
 	return response
 	

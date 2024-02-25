@@ -40,17 +40,17 @@ func calcStruggleDamage(_pc, mult = 1.0):
 func defaultStruggle(_pc, _minigame, response):
 	response = .defaultStruggle(_pc, _minigame, response)
 	if(!_pc.hasBoundLegs()):
-		response.text += "{user.name} wiggles {user.his} whole body to try to escape."
+		response.text.append("{user.name} wiggles {user.his} whole body to try to escape.")
 	else:
-		response.text += "{user.name} helplessly wiggles {user.his} body, having {user.his} legs restrained makes this pretty much uselss."
+		response.text.append("{user.name} helplessly wiggles {user.his} body, having {user.his} legs restrained makes this pretty much uselss.")
 	return response
 
 func failStruggle(_pc, _minigame, response):
-	response.text += " but just ends up more tired."
+	response.text.append(" but just ends up more tired.")
 	response.stamina += calcStruggleStamina(_pc, 0.5)
 	return response
 
 func fatalFailStruggle(_pc, _minigame, response):
-	response.text += " but it seems like {user.youHe} just hurt yourself."
+	response.text.append(" but it seems like {user.youHe} just hurt yourself.")
 	response.pain += calcStrugglePain(_pc, 1)
 	return response
