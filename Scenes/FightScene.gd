@@ -760,7 +760,7 @@ func beforeTurnChecks(pcWasStruggling = false):
 	enemyCharacter.processBattleTurnContex(getContexForEnemy())
 	
 	if(true):
-		var turnData = GM.pc.processStruggleTurn(pcWasStruggling)
+		var turnData = GM.pc.processStruggleTurn(pcWasStruggling).build()
 		var addLust = turnData["lust"]
 		var addPain = turnData["pain"]
 		var addStamina = turnData["stamina"]
@@ -783,7 +783,7 @@ func beforeTurnChecks(pcWasStruggling = false):
 			whatHappened += "[i]"+GM.ui.processString(additionalStruggleText, {"user":"pc"})+"[/i]\n"
 	
 	if(true):
-		var turnData = enemyCharacter.processStruggleTurn(true)
+		var turnData = enemyCharacter.processStruggleTurn(true).build()
 		var addLust = turnData["lust"]
 		var addPain = turnData["pain"]
 		var addStamina = turnData["stamina"]

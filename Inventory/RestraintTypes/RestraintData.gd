@@ -42,7 +42,7 @@ class ResponseData:
 
 	func build():
 		var _text = "|".join(text)
-		_text = _text.replace(".| ", " ").replace(" | ", " ")
+		_text = _text.replace(".| ", " ").replace("!| ", " ").replace(" | ", " ")
 		_text = _text.replace("| ", " ").replace(" |", " ")
 		_text = _text.replace("|", " ")
 		
@@ -491,7 +491,7 @@ func successCut(_pc, _minigame, response):
 
 
 func processStruggleTurn(_pc, _isActivelyStruggling):
-	return null#{"text": "TEST "+getItem().getVisibleName()}
+	return ResponseData.new(getItem().getVisibleName())
 
 func processLockpickTurn(_pc, _isActive):
 	return null

@@ -32,12 +32,15 @@ func sucessStruggle(_pc, _minigame, response):
 	
 
 func processStruggleTurn(_pc, _isActivelyStruggling):
+	var response = ResponseData.new(getItem().getVisibleName())
 	if(turnedOn):
-		return {"text": "The vaginal plug strongly vibrates inside {user.nameS} pussy", "lust": scaleDamage(5)}
+		response.text.append("The vaginal plug strongly vibrates inside {user.nameS} pussy.")
+		response.lust += calcStruggleLust(_pc, 2)
 	else:
 		if(failChance(_pc, 5) || (_isActivelyStruggling && failChance(_pc, 30))):
 			turnedOn = true
-			return {"text": "[b]The plug inside {user.nameS} pussy accidentally turns on[/b]. It vibrates, bringing {user.him} pleasure!"}
+			response.text.append("[b]The plug inside {user.nameS} pussy accidentally turns on[/b]. It vibrates, bringing {user.him} pleasure!")
+	return response
 	
 	
 func resetOnNewDay():

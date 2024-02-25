@@ -61,6 +61,8 @@ func sucessStruggle(_pc, _minigame, response):
 	
 
 func processStruggleTurn(_pc, _isActivelyStruggling):
+	var response = .processStruggleTurn(_pc, _isActivelyStruggling)
 	if(failChance(_pc, 10) || _isActivelyStruggling):
-		return {"text": "The buttplug shifts inside {user.name} while {user.he} {user.verbS('squirm')}", "lust": scaleDamage(5)}
-	
+		response.text.append("The buttplug shifts inside {user.name} while {user.he} {user.verbS('squirm')}")
+		response.lust += calcStruggleLust(_pc, 1)
+	return response

@@ -38,27 +38,30 @@ func getResistAnimation():
 	return "struggle_gag"
 
 func processStruggleTurn(_pc, _isActivelyStruggling):
-	var text = "ERROR! For some reason did not pick hypnovisor restraint text"
-	if(getItem().id == "HypnovisorMk0"):
-		text = RNG.pick([
-			"Pretty spiral..",
-			"Need to be useful..",
-			"{user.name} should keep {user.his} visor on, for {user.his} own safety..",
-			"{user.name} wants to be a good {user.boy}..",
-			"Must.. Obey?",
-			"{user.name} struggles to look away from the flashing images.",
-			"{user.name} struggles to look away from the spinning spiral.",
-		])
-	else:
-		text = RNG.pick([
-			"The lights are so colorful..",
-			"Toy.. pet.. Toy.. pet..",
-			"{user.name} wants to be a good pet..",
-			"{user.name} wants to be a good toy..",
-			"Colorful lights are so hypnotizing..",
-			"Must.. Obey?",
-			"{user.name} struggles to look away from the colorful lights.",
-		])
-		
-	if(failChance(_pc, 30) || _isActivelyStruggling):
-		return {"text": text, "lust": scaleDamage(5 + int(_isActivelyStruggling)*5)}
+	var response = .processStruggleTurn(_pc, _isActivelyStruggling)
+	if failChance(_pc, 30) || _isActivelyStruggling:
+		if getItem().id == "HypnovisorMk0":
+			response.text.append(RNG.pick([
+				"Pretty spiral..",
+				"Need to be useful..",
+				"{user.name} should keep {user.his} visor on, for {user.his} own safety..",
+				"{user.name} wants to be a good {user.boy}..",
+				"Must.. Obey?",
+				"{user.name} struggles to look away from the flashing images.",
+				"{user.name} struggles to look away from the spinning spiral.",
+			]))
+		else:
+			response.text.append(RNG.pick([
+				"The lights are so colorful..",
+				"Toy.. pet.. Toy.. pet..",
+				"{user.name} wants to be a good pet..",
+				"{user.name} wants to be a good toy..",
+				"Colorful lights are so hypnotizing..",
+				"Must.. Obey?",
+				"{user.name} struggles to look away from the colorful lights.",
+			]))
+		response.lust += calcStruggleLust(_pc, 1)
+		if _isActivelyStruggling:
+			response.lust += calcStruggleLust(_pc, 1)
+
+	return response

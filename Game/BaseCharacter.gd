@@ -1811,7 +1811,7 @@ func processStruggleTurn(isActivelyStruggling = false):
 	
 	for item in getInventory().getEquppedRestraints():
 		var restraintData: RestraintData = item.getRestraintData()
-		var struggleData = restraintData.processStruggleTurn(self, isActivelyStruggling)
+		var struggleData = restraintData.processStruggleTurn(self, isActivelyStruggling).build()
 		
 		if(struggleData == null):
 			continue
