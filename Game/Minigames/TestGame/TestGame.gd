@@ -34,7 +34,7 @@ func _on_Buttonlose_pressed():
 
 func _on_Buttonfatal_pressed():
 	print("Ftatal fail")
-	finalScore = 0
+	finalScore = -1
 	emit_signal("minigameCompleted", finalScore, {})
 
 func _on_Buttoncustom_pressed():
