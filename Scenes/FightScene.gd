@@ -365,7 +365,7 @@ func _react(_action: String, _args):
 				enemyCharacter.getBuffsHolder().calculateBuffs()
 				#enemyCharacter.updateNonBattleEffects()
 
-				if restraintData.canBeLocked() && RNG.chance(33): 
+				if restraintData.canBeLocked() && RNG.chance(20): 
 					restraintData.lockIt()
 				
 				var restraintsAmount = enemyCharacter.getInventory().getEquppedRestraints().size()
