@@ -5,10 +5,10 @@ func _init():
 	npcDodgeDifficultyMod = 0.8
 	restraintType = RestraintType.HypnoVisor
 
-func calcDamage(_pc, mult = 1.0):
+func calcStruggleDamage(_pc, mult = 1.0):
 		if HypnokinkUtil.isHypnotized(_pc):
-			return .calcDamage(_pc, mult) * 0.2
-		return .calcDamage(_pc, mult)
+			return .calcStruggleDamage(_pc, mult) * 0.2
+		return .calcStruggleDamage(_pc, mult)
 
 
 func shouldDoStruggleMinigame(_pc):

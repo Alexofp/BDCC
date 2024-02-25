@@ -23,7 +23,7 @@ func defaultStruggle(_pc, _minigame, response):
 func fatalFailStruggle(_pc, _minigame, response):
 	if response.use.has("hands"):
 		response.text += " but it seems like {user.youHe} just tightened it up more."
-		response.damage += calcDamage(_pc, _minigame / 4.0)
+		response.damage += calcStruggleDamage(_pc, _minigame / 4.0)
 		response.stamina += calcStruggleStamina(_pc, 1)
 	else:
 		response.text += " but the ball just got deeper in {user.his} mouth."

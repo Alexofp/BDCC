@@ -34,8 +34,8 @@ func alwaysBreaksWhenStruggledOutOf():
 func calcStruggleStamina(_pc, mult = 1.0):
 	return .calcStruggleStamina(_pc, mult * 2.0)
 
-func calcDamage(_pc, mult = 1.0):
-	return .calcDamage(_pc, mult / 2.0)
+func calcStruggleDamage(_pc, mult = 1.0):
+	return .calcStruggleDamage(_pc, mult / 2.0)
 
 func defaultStruggle(_pc, _minigame, response):
 	response = .defaultStruggle(_pc, _minigame, response)

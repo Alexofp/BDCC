@@ -119,7 +119,7 @@ func getMixedDamageMult(_pc):
 	return (10.0 + pow(max(1.0, _pc.getStat(Stat.Strength)/2.0 + _pc.getStat(Stat.Agility)/2.0 ), 0.8)) / 10.0
 
 # main damage for struggle - reflecting level and ability
-func calcDamage(_pc, mult = 1.0):
+func calcStruggleDamage(_pc, mult = 1.0):
 	if _pc.hasPerk(Perk.BDSMPerfectStreak):
 		return mult * getLevelDamage() * (getStrengthDamageMult(_pc) + 0.5)
 	return mult * getLevelDamage() * getStrengthDamageMult(_pc)	
@@ -335,7 +335,7 @@ func fatalFailStruggle(_pc, _minigame, response):
 		response.text += " but it seems like {user.youHe} just tightened it up more."
 	else:
 		response.text += " but it seems like all {user.his} effort is in vain."
-	response.damage += calcDamage(_pc, _minigame / 4.0)
+	response.damage += calcStruggleDamage(_pc, _minigame / 4.0)
 	response.stamina += calcStruggleStamina(_pc, 1)
 	return response
 
@@ -347,7 +347,7 @@ func failStruggle(_pc, _minigame, response):
 # successful struggle for unlocked stuff
 func sucessStruggle(_pc, _minigame, response):
 	response.text += "."
-	response.damage += calcDamage(_pc, _minigame) * calcRestrainMult(_pc, _minigame)
+	response.damage += calcStruggleDamage(_pc, _minigame) * calcRestrainMult(_pc, _minigame)
 	return response
 
 # successful struggle for locked stuff, success thwarted by the lock
@@ -359,7 +359,7 @@ func sucessStruggleLocked(_pc, _minigame, response):
 func sucessStruggleBreak(_pc, _minigame, response):
 	response.text += " but it would have been done better if only it was not locked."
 	var _mult = calcLockedMult(_pc, _minigame)
-	response.damage += calcDamage(_pc, _mult) * calcRestrainMult(_pc, _minigame)
+	response.damage += calcStruggleDamage(_pc, _mult) * calcRestrainMult(_pc, _minigame)
 	response.lockDamage += calcLockDamage(_pc, _mult) * calcRestrainMult(_pc, _minigame)
 	return response
 

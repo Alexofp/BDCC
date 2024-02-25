@@ -48,7 +48,7 @@ func failStruggle(_pc, _minigame, response):
 	
 func sucessStruggle(_pc, _minigame, response):
 	response.text += "."
-	response.damage += calcDamage(_pc, _minigame) * calcRestrainMult(_pc, _minigame)
+	response.damage += calcStruggleDamage(_pc, _minigame) * calcRestrainMult(_pc, _minigame)
 	if _pc.isPlayer() && failChance(_pc, 40) && GM.pc.getInventory().hasSlotEquipped(InventorySlot.UnderwearBottom):
 		if(_pc.getInventory().getEquippedItem(InventorySlot.UnderwearBottom).coversBodypart(BodypartSlot.Vagina)):
 			response.text += " The plug presses into your panties."
