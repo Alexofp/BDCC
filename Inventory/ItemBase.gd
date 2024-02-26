@@ -371,6 +371,10 @@ func getFluids():
 func isImportant():
 	return false
 
+# chance of how often the NPC uses it 0 to 100
+func rarity():
+	return 100
+
 func isRestraint():
 	return restraintData != null
 

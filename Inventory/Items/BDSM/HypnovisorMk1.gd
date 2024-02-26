@@ -46,6 +46,9 @@ func getTags():
 		return [ItemTag.BDSMRestraint, ItemTag.Hypnovisor, ItemTag.SoldByAlexRynard]
 	return [ItemTag.BDSMRestraint, ItemTag.Hypnovisor]
 
+func rarity():
+	return 10
+
 func isRestraint():
 	return true
 
