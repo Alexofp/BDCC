@@ -64,6 +64,7 @@ var speechModifiers: Array = []
 var slaveBreakTasks: Dictionary = {}
 var slaveBreakTaskRefs: Dictionary = {}
 var slaveTypes: Dictionary = {}
+var slaveActions: Dictionary = {}
 
 var bodypartStorageNode
 
@@ -331,6 +332,8 @@ func registerEverything():
 		registerSceneFolder("res://Scenes/Item/")
 		registerSceneFolder("res://Scenes/Cellblock/")
 		registerSceneFolder("res://Scenes/Mineshaft/")
+		registerSceneFolder("res://Game/NpcSlavery/SlaveActionScenes/")
+		
 		var end2 = OS.get_ticks_usec()
 		var worker_time2 = (end2-start2)/1000000.0
 		Log.print("SCENES initialized in: %s seconds" % [worker_time2])
@@ -374,6 +377,7 @@ func registerEverything():
 	registerSpeechModifiersFolder("res://Game/SpeechModifiers/")
 	registerSlaveBreakTaskFolder("res://Game/NpcSlavery/BreakTask/")
 	registerSlaveTypeFolder("res://Game/NpcSlavery/SlaveType/")
+	registerSlaveActionFolder("res://Game/NpcSlavery/SlaveActions/")
 	
 	emit_signal("loadingUpdate", 8.0/totalStages, "Sex scenes")
 	yield(get_tree(), "idle_frame")
@@ -1783,8 +1787,40 @@ func getSlaveType(id: String):
 	if(slaveTypes.has(id)):
 		return slaveTypes[id]
 	else:
-		Log.printerr("ERROR: slave type task with the id "+id+" wasn't found")
+		Log.printerr("ERROR: slave type with the id "+id+" wasn't found")
 		return null
 
 func getSlaveTypes():
 	return slaveTypes
+
+
+func registerSlaveAction(path: String):
+	var loadedClass = load(path)
+	var object = loadedClass.new()
+	
+	slaveActions[object.id] = object
+
+func registerSlaveActionFolder(folder: String):
+	var scripts = getScriptsInFolder(folder)
+	for scriptPath in scripts:
+		registerSlaveAction(scriptPath)
+
+func getSlaveAction(id: String):
+	if(slaveActions.has(id)):
+		return slaveActions[id]
+	else:
+		Log.printerr("ERROR: slave action with the id "+id+" wasn't found")
+		return null
+
+func getSlaveActions():
+	return slaveActions
+
+func getSlaveActionIDsOfType(actionsType):
+	var result = []
+	
+	for actionID in slaveActions:
+		var theAction = slaveActions[actionID]
+		
+		if(theAction.actionType == actionsType):
+			result.append(actionID)
+	return result

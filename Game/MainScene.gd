@@ -593,12 +593,22 @@ func startNewDay():
 	
 	Flag.resetFlagsOnNewDay()
 	roomMemoriesProcessDay()
+	npcSlaveryOnNewDay()
 	
 	doTimeProcess(timediff)
 	
 	SAVE.triggerAutosave()
 	
 	return timediff
+
+func npcSlaveryOnNewDay():
+	for slaveID in getDynamicCharacterIDsFromPool(CharacterPool.Slaves):
+		var character = getCharacter(slaveID)
+		if(character == null):
+			continue
+		if(character.isSlaveToPlayer()):
+			var npcSlave = character.getNpcSlavery()
+			npcSlave.onNewDay()
 
 func getVisibleTime():
 	var text = ""

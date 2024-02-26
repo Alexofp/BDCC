@@ -649,3 +649,12 @@ static func sanitizePlayerEnteredString(inputStr:String, emptyStr:String=""):
 	if(inputStr == ""):
 		return emptyStr
 	return inputStr
+
+static func remapValue(theValue:float, minValue:float, maxValue:float, newMinValue:float, newMaxValue:float):
+	if(minValue == maxValue):
+		assert(false, "remapValue got bad min and max values")
+		return 0.0
+	var percentage = (theValue - minValue) / (maxValue - minValue)
+	
+	var remappedValue = newMinValue + percentage * (newMaxValue - newMinValue)
+	return remappedValue

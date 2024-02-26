@@ -60,7 +60,28 @@ func _run():
 		
 		addButton("Train", "Train your slave", "do_train")
 		addButton("Forced sex", "Start sex with your slave", "do_forced_sex")
+		addButton("Reward", "Show a list of rewards", "rewards_menu")
+		addButton("Punish", "Show a list of punishments", "punishments_menu")
 		addButton("Back", "Enough interactions", "endthescene")
+
+	if(state == "rewards_menu"):
+		saynn("How do you want to reward your slave?")
+		
+		addButtonsForActionsOfType(SlaveActionBase.Reward)
+
+		addButton("Back", "You changed your mind!", "")
+
+	if(state == "punishments_menu"):
+		saynn("How do you want to punish your slave?")
+		
+		addButtonsForActionsOfType(SlaveActionBase.Punishment)
+
+		addButton("Back", "You changed your mind!", "")
+
+	if(state == "do_simple_action"):
+		saynn(resultText)
+		
+		addButton("Continue", "See what happens next", "")
 
 	if(state == "do_train"):
 		saynn(resultText)
@@ -84,10 +105,46 @@ func _run():
 		
 		addButton("Never mind", "You don't want to fuck them anymore", "forced_sex_let_resist")
 		
+func addButtonsForActionsOfType(actionsType):
+	for actionID in GlobalRegistry.getSlaveActionIDsOfType(actionsType):
+		var theAction:SlaveActionBase = GlobalRegistry.getSlaveAction(actionID)
+		
+		if(theAction.extraSlaves.empty()):
+			var canDoInfo = theAction.checkCanDoFinal(npcID)
+			if(canDoInfo[0]):
+				addButton(theAction.getVisibleName(), theAction.getVisibleDesc(), "do_simple_action", [theAction])
+			elif(canDoInfo.size() > 1):
+				addDisabledButton(theAction.getVisibleDesc(), canDoInfo[1])
+		else:
+			addButton(theAction.getVisibleName(), theAction.getVisibleDesc(), "open_activity_menu", [theAction])
+		
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
 		endScene()
 		return
+	
+	if(_action == "open_activity_menu"):
+		#if(action.closeTalkScene)
+		var theAction:SlaveActionBase = _args[0]
+		runScene("SlaveStartActionScene", [theAction.id, npcID], "slaveStartAction")
+		setState("")
+		return
+
+	if(_action == "do_simple_action"):
+		var theAction:SlaveActionBase = _args[0]
+		
+		if(theAction.sceneID != ""):
+			runScene("SlaveActionWrapperScene", [theAction.id, npcID, {}])
+			if(theAction.endsTalkScene):
+				endScene()
+				return
+			setState("")
+			return
+		var result = theAction.doActionSimple(npcID)
+		if(result.has("text")):
+			resultText = result["text"]
+		else:
+			resultText = "An action happened!"
 
 	if(_action == "do_train"):
 		var npcSlavery:NpcSlave = npc.getNpcSlavery()
@@ -120,6 +177,11 @@ func startSex():
 	runScene("GenericSexScene", ["pc", npcID], "sex_with_slave")
 
 func _react_scene_end(_tag, _result):
+	if(_tag == "slaveStartAction"):
+		if(_result is Array && _result.size() > 0 && _result[0]):
+			endScene()
+			return
+			
 	if(_tag in ["sex_with_slave"]):
 		setState("")
 	

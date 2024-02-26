@@ -20,6 +20,8 @@ func _init():
 			
 			"res://Modules/NpcSlaveryModule/Slavery/SlaveTalkScene.gd",
 			"res://Modules/NpcSlaveryModule/Slavery/SlavesCheckScene.gd",
+			"res://Modules/NpcSlaveryModule/Slavery/SlaveStartActionScene.gd",
+			"res://Modules/NpcSlaveryModule/Slavery/SlaveActionWrapperScene.gd",
 		]
 	characters = [
 	]

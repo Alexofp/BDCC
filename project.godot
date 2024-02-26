@@ -1079,6 +1079,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Player/Player3D/Skins/SkinType.gd"
 }, {
+"base": "Reference",
+"class": "SlaveActionBase",
+"language": "GDScript",
+"path": "res://Game/NpcSlavery/SlaveActionBase.gd"
+}, {
 "base": "Object",
 "class": "SlaveType",
 "language": "GDScript",
@@ -1424,6 +1429,7 @@ _global_script_class_icons={
 "SkillsHolder": "",
 "SkinBase": "",
 "SkinType": "",
+"SlaveActionBase": "",
 "SlaveType": "",
 "SlaveTypeBase": "",
 "Species": "",
