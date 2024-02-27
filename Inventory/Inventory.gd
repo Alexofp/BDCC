@@ -449,6 +449,17 @@ func hasRemovableRestraints():
 				return true
 	return false
 
+func getEquppedRemovableRestraints():
+	var result = []
+	
+	for itemSlot in equippedItems:
+		var item = equippedItems[itemSlot]
+		if(item.isRestraint()):
+			var restraintData = item.getRestraintData()
+			if(restraintData.canStruggle()):
+				result.append(item)
+	return result
+
 func forceRestraintsWithTag(tag, amount = 1):
 	var itemIDs = GlobalRegistry.getItemIDsByTag(tag)
 	itemIDs.shuffle()

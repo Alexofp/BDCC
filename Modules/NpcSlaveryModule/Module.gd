@@ -52,6 +52,18 @@ func hasFreeSpaceToEnslave():
 	var freeSpace = getSlavesSpace() - currentSlaveAmount
 	return freeSpace > 0
 
+func slavesHaveAnyEvents():
+	var slaves = GM.main.getDynamicCharacterIDsFromPool(CharacterPool.Slaves)
+	
+	for charID in slaves:
+		var character:DynamicCharacter = GlobalRegistry.getCharacter(charID)
+		var npcSlavery:NpcSlave = character.getNpcSlavery()
+		if(npcSlavery == null):
+			continue
+		if(npcSlavery.hasRandomEventToTrigger()):
+			return true
+	return false
+
 func getSlavesSpaceUpgradeCost():
 	var currentSpace = getSlavesSpace()
 	

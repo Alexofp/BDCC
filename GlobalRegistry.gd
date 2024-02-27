@@ -65,6 +65,7 @@ var slaveBreakTasks: Dictionary = {}
 var slaveBreakTaskRefs: Dictionary = {}
 var slaveTypes: Dictionary = {}
 var slaveActions: Dictionary = {}
+var slaveEvents: Dictionary = {}
 
 var bodypartStorageNode
 
@@ -378,6 +379,7 @@ func registerEverything():
 	registerSlaveBreakTaskFolder("res://Game/NpcSlavery/BreakTask/")
 	registerSlaveTypeFolder("res://Game/NpcSlavery/SlaveType/")
 	registerSlaveActionFolder("res://Game/NpcSlavery/SlaveActions/")
+	registerSlaveEventFolder("res://Game/NpcSlavery/SlaveEvents/")
 	
 	emit_signal("loadingUpdate", 8.0/totalStages, "Sex scenes")
 	yield(get_tree(), "idle_frame")
@@ -1824,3 +1826,26 @@ func getSlaveActionIDsOfType(actionsType):
 		if(theAction.actionType == actionsType):
 			result.append(actionID)
 	return result
+
+
+
+func registerSlaveEvent(path: String):
+	var loadedClass = load(path)
+	var object = loadedClass.new()
+	
+	slaveEvents[object.id] = object
+
+func registerSlaveEventFolder(folder: String):
+	var scripts = getScriptsInFolder(folder)
+	for scriptPath in scripts:
+		registerSlaveEvent(scriptPath)
+
+func getSlaveEvent(id: String):
+	if(slaveEvents.has(id)):
+		return slaveEvents[id]
+	else:
+		Log.printerr("ERROR: slave event with the id "+id+" wasn't found")
+		return null
+
+func getSlaveEvents():
+	return slaveEvents

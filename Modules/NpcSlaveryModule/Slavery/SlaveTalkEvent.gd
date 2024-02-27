@@ -8,7 +8,7 @@ func registerTriggers(es):
 
 func run(_triggerID, _args):
 	if(getModule("NpcSlaveryModule").hasSlaves()):
-		addButton("Slaves", "Check your slaves", "checkslaves")
+		addButton(("(!) " if getModule("NpcSlaveryModule").slavesHaveAnyEvents() else "")+"Slaves", "Check your slaves", "checkslaves")
 
 func getPriority():
 	return 11

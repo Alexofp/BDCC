@@ -2591,5 +2591,11 @@ func isWearingHypnovisor():
 func hasEnslaveQuest():
 	return false
 
+func getEnslaveQuest() -> NpcEnslavementQuest:
+	return null
+
 func isSlaveToPlayer():
 	return false
+
+func getNpcSlavery() -> NpcSlave:
+	return null

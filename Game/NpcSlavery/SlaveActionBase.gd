@@ -20,6 +20,7 @@ var extraSlaves = {
 }
 var sceneID = ""
 var endsTalkScene = false
+var slaveResistChanceMult = 1.0
 
 func getVisibleName():
 	return "CHANGE ME"

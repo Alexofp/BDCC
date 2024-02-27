@@ -14,6 +14,13 @@ var resultText = ""
 func _init():
 	sceneID = "SlaveStartActionScene"
 
+func resolveCustomCharacterName(_charID):
+	if(_charID == "npc"):
+		return mainSlave
+	if(pickedSlaves.has(_charID)):
+		return pickedSlaves[_charID]
+		
+
 func _initScene(_args = []):
 	actionID = _args[0]
 	action = GlobalRegistry.getSlaveAction(actionID)

@@ -78,7 +78,7 @@ func _run():
 
 		addButton("Back", "You changed your mind!", "")
 
-	if(state == "do_simple_action"):
+	if(state == "do_action"):
 		saynn(resultText)
 		
 		addButton("Continue", "See what happens next", "")
@@ -88,11 +88,17 @@ func _run():
 		
 		addButton("Continue", "See what happens next", "")
 	
+	if(state == "resisting_action"):
+		saynn("Your slave is actively resisting any attempts to do anything with {npc.him}!")
+		
+		addButton("Okay", "You changed your mind", "forced_sex_let_resist")
+		addButton("Fight them", "Force them through fighting", "resisting_start_fight")
+	
 	if(state == "forced_sex_resist"):
 		saynn("Your slave is trying to resist! You will have to force them by beating them up first!")
 		
-		addButton("Fight", "Force them through fighting", "forced_sex_startfight")
 		addButton("Never mind", "You changed your mind", "forced_sex_let_resist")
+		addButton("Fight", "Force them through fighting", "forced_sex_startfight")
 		
 	if(state == "won_forcedsex"):
 		saynn("You won!")
@@ -100,10 +106,15 @@ func _run():
 		addButton("Fuck them", "Do what you wanted to do with them", "start_forced_sex_forced")
 		addButton("Never mind", "You don't want to fuck them anymore", "")
 	
+	if(state == "won_resistaction"):
+		saynn("You won!")
+		
+		addButton("Continue", "They should resist less", "")
+	
 	if(state == "lost_forcedsex"):
 		saynn("You lost. Aw.")
 		
-		addButton("Never mind", "You don't want to fuck them anymore", "forced_sex_let_resist")
+		addButton("Never mind", "You don't want to fuck with them anymore", "forced_sex_let_resist")
 		
 func addButtonsForActionsOfType(actionsType):
 	for actionID in GlobalRegistry.getSlaveActionIDsOfType(actionsType):
@@ -112,27 +123,37 @@ func addButtonsForActionsOfType(actionsType):
 		if(theAction.extraSlaves.empty()):
 			var canDoInfo = theAction.checkCanDoFinal(npcID)
 			if(canDoInfo[0]):
-				addButton(theAction.getVisibleName(), theAction.getVisibleDesc(), "do_simple_action", [theAction])
+				addButton(theAction.getVisibleName(), theAction.getVisibleDesc(), "do_action", [theAction])
 			elif(canDoInfo.size() > 1):
 				addDisabledButton(theAction.getVisibleDesc(), canDoInfo[1])
 		else:
-			addButton(theAction.getVisibleName(), theAction.getVisibleDesc(), "open_activity_menu", [theAction])
+			addButton(theAction.getVisibleName(), theAction.getVisibleDesc(), "do_action", [theAction])
 		
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
 		endScene()
 		return
 	
-	if(_action == "open_activity_menu"):
-		#if(action.closeTalkScene)
+	if(_action == "do_action"):
 		var theAction:SlaveActionBase = _args[0]
-		runScene("SlaveStartActionScene", [theAction.id, npcID], "slaveStartAction")
-		setState("")
-		return
-
-	if(_action == "do_simple_action"):
-		var theAction:SlaveActionBase = _args[0]
+		var npcSlavery:NpcSlave = npc.getNpcSlavery()
 		
+		# Resisting!
+		var resistChance = (100.0*float(npcSlavery.isResistingSuperActively()) + 40.0*float(npcSlavery.isActivelyResisting())) * theAction.slaveResistChanceMult
+		if(RNG.chance(resistChance)):
+			# Various resisting actions here?
+			# Like scratching/biting/shoving/kicking (if no restraints)
+			npcSlavery.deservesPunishment(1)
+			setState("resisting_action")
+			return
+		
+		# Multi-slave action
+		if(!theAction.extraSlaves.empty()):
+			runScene("SlaveStartActionScene", [theAction.id, npcID], "slaveStartAction")
+			setState("")
+			return
+		
+		# Action that launches a scene
 		if(theAction.sceneID != ""):
 			runScene("SlaveActionWrapperScene", [theAction.id, npcID, {}])
 			if(theAction.endsTalkScene):
@@ -140,6 +161,7 @@ func _react(_action: String, _args):
 				return
 			setState("")
 			return
+		# Simple action
 		var result = theAction.doActionSimple(npcID)
 		if(result.has("text")):
 			resultText = result["text"]
@@ -148,6 +170,14 @@ func _react(_action: String, _args):
 
 	if(_action == "do_train"):
 		var npcSlavery:NpcSlave = npc.getNpcSlavery()
+		var resistChance = max(80.0*float(npcSlavery.isResistingSuperActively()), 30.0*float(npcSlavery.isActivelyResisting()))
+		if(RNG.chance(resistChance)):
+			# Various resisting actions here?
+			# Like scratching/biting/shoving/kicking (if no restraints)
+			npcSlavery.deservesPunishment(1)
+			setState("resisting_action")
+			return
+		
 		var result = npcSlavery.doTrain()
 		resultText = Util.join(result["texts"], "\n\n")
 
@@ -155,15 +185,20 @@ func _react(_action: String, _args):
 		runScene("FightScene", [npcID], "forcedsexfight")
 		return
 
+	if(_action == "resisting_start_fight"):
+		runScene("FightScene", [npcID], "antiresistancefight")
+		return
+
 	if(_action == "do_forced_sex"):
-		if(RNG.chance(150)):
+		var npcSlavery:NpcSlave = npc.getNpcSlavery()
+		if(npcSlavery.isResistingSuperActively() || (RNG.chance(40) && npcSlavery.isActivelyResisting())):
 			setState("forced_sex_resist")
 		else:
 			startSex()
 		return
 	
 	if(_action == "start_forced_sex_forced"):
-		startSex()
+		startSex(true)
 		return
 		
 	if(_action == "forced_sex_let_resist"):
@@ -173,7 +208,9 @@ func _react(_action: String, _args):
 
 	setState(_action)
 
-func startSex():
+func startSex(isResisting = false):
+	if(isResisting):
+		npc.addEffect("SexActivelyResisting")
 	runScene("GenericSexScene", ["pc", npcID], "sex_with_slave")
 
 func _react_scene_end(_tag, _result):
@@ -185,6 +222,22 @@ func _react_scene_end(_tag, _result):
 	if(_tag in ["sex_with_slave"]):
 		setState("")
 	
+	if(_tag == "antiresistancefight"):
+		processTime(10 * 60)
+		var battlestate = _result[0]
+		#var wonHow = _result[1]
+		
+		if(battlestate == "win"):
+			setState("won_resistaction")
+			addExperienceToPlayer(10)
+			var npcSlavery:NpcSlave = npc.getNpcSlavery()
+			npcSlavery.afterBeatenUp()
+			#npcSlavery.handlePunishment(2)
+		else:
+			setState("lost_forcedsex")
+			var npcSlavery:NpcSlave = npc.getNpcSlavery()
+			npcSlavery.deservesPunishment(2)
+	
 	if(_tag == "forcedsexfight"):
 		processTime(10 * 60)
 		var battlestate = _result[0]
@@ -193,8 +246,13 @@ func _react_scene_end(_tag, _result):
 		if(battlestate == "win"):
 			setState("won_forcedsex")
 			addExperienceToPlayer(10)
+			var npcSlavery:NpcSlave = npc.getNpcSlavery()
+			npcSlavery.afterBeatenUp()
+			#npcSlavery.handlePunishment(2)
 		else:
 			setState("lost_forcedsex")
+			var npcSlavery:NpcSlave = npc.getNpcSlavery()
+			npcSlavery.deservesPunishment(2)
 
 func saveData():
 	var data = .saveData()

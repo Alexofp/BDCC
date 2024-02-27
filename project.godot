@@ -1084,6 +1084,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Game/NpcSlavery/SlaveActionBase.gd"
 }, {
+"base": "Reference",
+"class": "SlaveEventBase",
+"language": "GDScript",
+"path": "res://Game/NpcSlavery/SlaveEventBase.gd"
+}, {
 "base": "Object",
 "class": "SlaveType",
 "language": "GDScript",
@@ -1430,6 +1435,7 @@ _global_script_class_icons={
 "SkinBase": "",
 "SkinType": "",
 "SlaveActionBase": "",
+"SlaveEventBase": "",
 "SlaveType": "",
 "SlaveTypeBase": "",
 "Species": "",

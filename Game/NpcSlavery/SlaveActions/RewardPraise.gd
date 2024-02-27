@@ -1,23 +1,22 @@
 extends SlaveActionBase
 
 func _init():
-	id = "PunishSpank"
-	actionType = Punishment
+	id = "RewardPraise"
+	actionType = Reward
 	#extraSlaves = {}
-	#sceneID = "MeScene"
-	#endsTalkScene = true
+	#sceneID = ""
 
 func getVisibleName():
-	return "Spank"
+	return "Praise"
 
 func getVisibleDesc():
-	return "Give your slave a good spank"
+	return "Tell them they're doing good"
 
 func doActionSimple(_slaveID, _extraSlavesIDs = {}):
 	var character:DynamicCharacter = GlobalRegistry.getCharacter(_slaveID)
 	var npcSlavery:NpcSlave = character.getNpcSlavery()
 	
-	npcSlavery.handlePunishment(2)
+	npcSlavery.handleReward(1)
 	return {
-		text = "You spank "+character.getName()+"'s butt!",
+		text = "You praise "+character.getName()+" for doing well.",
 	}

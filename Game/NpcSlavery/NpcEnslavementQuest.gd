@@ -21,7 +21,7 @@ func getChar():
 
 func generateTasks():
 	tasks.clear()
-	var theChar:BaseCharacter = getChar()
+	var theChar = getChar()
 	if(theChar == null):
 		return
 	

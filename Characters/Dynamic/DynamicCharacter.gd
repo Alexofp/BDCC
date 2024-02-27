@@ -81,6 +81,8 @@ func isDynamicCharacter():
 	return true
 
 func getLootTable(_battleName):
+	if(isSlaveToPlayer()):
+		return .getLootTable(_battleName)
 	if(npcCharacterType == CharacterType.Engineer):
 		return EngineerLoot.new()
 	if(npcCharacterType == CharacterType.Guard):

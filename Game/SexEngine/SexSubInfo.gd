@@ -32,6 +32,8 @@ func initFromPersonality():
 	
 	if(bratiness > 0.0):
 		resistance = RNG.randf_range(0.0, bratiness)
+	if(getChar().getBuffsHolder().hasBuff(Buff.ActiveResistanceInSexBuff)):
+		resistance = 1.0
 
 func canDoActions():
 	if(getChar().getBuffsHolder().hasBuff(Buff.SpacedOutInSexBuff)):
@@ -117,6 +119,9 @@ func processTurn():
 	fear = Util.moveNumberTowards(fear, 0.0, 0.02 + personalityScore({PersonalityStat.Coward: -0.02}))
 	if(isScared()):
 		resistance = Util.moveNumberTowards(resistance, 0.0, fear / 10.0)
+	else:
+		if(getChar().getBuffsHolder().hasBuff(Buff.ActiveResistanceInSexBuff)):
+			resistance = Util.moveNumberTowards(resistance, 1.0, 0.1)
 	
 	var forcedObedience = clamp(getChar().getForcedObedienceLevel(), 0.0, 1.0)
 	if(forcedObedience > 0.0):

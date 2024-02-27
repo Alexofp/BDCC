@@ -348,7 +348,9 @@ func canDoSelfCare():
 	# If character is in a scene, don't touch them
 	if(GM.main != null && GM.main.characterIsVisible(getID())):
 		return false
-	
+	# If they are a slave to the player, also don't touch them. They are chained to the floor 24/7
+	if(isSlaveToPlayer()):
+		return false
 	return true
 		
 func hoursPassed(_howmuch):
