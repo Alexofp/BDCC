@@ -31,6 +31,14 @@ func _run():
 		saynn(npc.getName()+" is a level "+str(npcSlavery.slaveLevel)+" slave")
 		saynn("{npc.He} {npc.isAre} standing still, {npc.his} collar leashed to the floor.")
 		
+		if(npcSlavery.getDespair() > 0.5):
+			saynn("{npc.name} looks pretty depressed.")
+		elif(npcSlavery.getDespair() > 0.8):
+			saynn("[b]{npc.name} looks extremely depressed.[/b] {npc.He} {npc.isAre} close to snapping.")
+		
+		if(npcSlavery.getWorkEfficiency() < 0.2):
+			saynn("{npc.name} looks very tired.")
+		
 		if(true):
 			sayn("[b]DEBUG INFO:[/b]")
 			saynn(npcSlavery.getDebugInfo())
@@ -58,7 +66,7 @@ func _run():
 			sayn(""+slaveType.getVisibleName()+": "+gradeLetter)
 		sayn("")
 		
-		addButton("Train", "Train your slave", "do_train")
+		addButtonWithChecks("Train", "Train your slave", "do_train", [], [[ButtonChecks.NotLate], [ButtonChecks.NotGagged], [ButtonChecks.NotBlindfolded]])
 		addButton("Forced sex", "Start sex with your slave", "do_forced_sex")
 		addButton("Reward", "Show a list of rewards", "rewards_menu")
 		addButton("Punish", "Show a list of punishments", "punishments_menu")
@@ -232,6 +240,7 @@ func _react_scene_end(_tag, _result):
 			addExperienceToPlayer(10)
 			var npcSlavery:NpcSlave = npc.getNpcSlavery()
 			npcSlavery.afterBeatenUp()
+			npcSlavery.deservesPunishment(2)
 			#npcSlavery.handlePunishment(2)
 		else:
 			setState("lost_forcedsex")

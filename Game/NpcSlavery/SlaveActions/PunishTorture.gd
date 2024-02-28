@@ -1,29 +1,25 @@
 extends SlaveActionBase
 
 func _init():
-	id = "PunishSternLook"
+	id = "PunishTorture"
 	actionType = Punishment
 	#extraSlaves = {}
 	#sceneID = "MeScene"
 	#endsTalkScene = true
-	slaveResistChanceMult = 0.2
+	slaveResistChanceMult = 1.0
 
 func getVisibleName():
-	return "Stern look"
+	return "Torture"
 
 func getVisibleDesc():
-	return "Give your slave a stern look"
+	return "Torture your slave"
 
 func doActionSimple(_slaveID, _extraSlavesIDs = {}):
 	var character:DynamicCharacter = GlobalRegistry.getCharacter(_slaveID)
 	var npcSlavery:NpcSlave = character.getNpcSlavery()
 	
-	if(character.isBlindfolded()):
-		return {
-			text = "You give {npc.name} a stern look. It didn't have much effect because {npc.he} {npc.isAre} blindfolded..",
-		}
-	
-	npcSlavery.handlePunishment(1)
+	npcSlavery.handlePunishment(4)
+	npcSlavery.addTired(1)
 	return {
-		text = "You give {npc.name} a stern look.",
+		text = "You torture {npc.name}!",
 	}

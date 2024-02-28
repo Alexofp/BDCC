@@ -48,6 +48,9 @@ func _react(_action: String, _args):
 	if(_action == "do_check"):
 		var character:DynamicCharacter = _args[0]
 		var npcSlavery:NpcSlave = character.getNpcSlavery()
+		
+		npcSlavery.markCheckedOnSlaveToday()
+		
 		if(npcSlavery != null && npcSlavery.hasRandomEventToTrigger()):
 			var eventID = npcSlavery.randomEventWillHappenID
 			npcSlavery.hasRandomEvent = false

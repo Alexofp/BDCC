@@ -6,6 +6,7 @@ func _init():
 	#extraSlaves = {}
 	#sceneID = "MeScene"
 	#endsTalkScene = true
+	slaveResistChanceMult = 0.6
 
 func getVisibleName():
 	return "Spank"

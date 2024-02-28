@@ -5,6 +5,7 @@ func _init():
 	actionType = Reward
 	#extraSlaves = {}
 	#sceneID = ""
+	slaveResistChanceMult = 0.2
 
 func getVisibleName():
 	return "Praise"

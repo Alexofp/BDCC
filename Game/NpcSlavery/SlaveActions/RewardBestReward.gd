@@ -1,23 +1,23 @@
 extends SlaveActionBase
 
 func _init():
-	id = "RewardPat"
+	id = "RewardBestReward"
 	actionType = Reward
 	#extraSlaves = {}
 	#sceneID = ""
-	slaveResistChanceMult = 0.4
+	slaveResistChanceMult = 0.3
 
 func getVisibleName():
-	return "Headpats"
+	return "Best reward"
 
 func getVisibleDesc():
-	return "Give your slave a pat"
+	return "I dunno what to put here"
 
 func doActionSimple(_slaveID, _extraSlavesIDs = {}):
 	var character:DynamicCharacter = GlobalRegistry.getCharacter(_slaveID)
 	var npcSlavery:NpcSlave = character.getNpcSlavery()
 	
-	npcSlavery.handleReward(2)
+	npcSlavery.handleReward(4)
 	return {
-		text = "You pat "+character.getName()+" on the head!",
+		text = "You give {npc.name} the best reward possible.",
 	}
