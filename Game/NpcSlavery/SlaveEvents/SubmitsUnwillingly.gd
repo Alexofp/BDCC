@@ -18,6 +18,8 @@ func runEvent(_npcSlavery:NpcSlave):
 	var theText = "{npc.name} has been broken, they submit!"
 	_npcSlavery.submitted = true
 	
+	_npcSlavery.deservesReward(3)
+	
 	return {
 		text = theText,
 	}

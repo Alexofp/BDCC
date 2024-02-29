@@ -34,6 +34,9 @@ func initFromPersonality():
 		resistance = RNG.randf_range(0.0, bratiness)
 	if(getChar().getBuffsHolder().hasBuff(Buff.ActiveResistanceInSexBuff)):
 		resistance = 1.0
+	if(getChar().isSlaveToPlayer()):
+		var npcSlave = getChar().getNpcSlavery()
+		fear = npcSlave.getFear()
 
 func canDoActions():
 	if(getChar().getBuffsHolder().hasBuff(Buff.SpacedOutInSexBuff)):

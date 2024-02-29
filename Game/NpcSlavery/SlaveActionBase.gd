@@ -4,6 +4,7 @@ class_name SlaveActionBase
 const Action = 0
 const Reward = 1
 const Punishment = 2
+const Talk = 3
 
 var id = "ERROR"
 var actionType = Action
@@ -77,3 +78,6 @@ func doActionSimple(_slaveID, _extraSlavesIDs = {}):
 func reactSceneResult(_slaveID, _extraSlavesIDs = {}, _sceneResult = {}):
 	print("REACT SCENE RESULT")
 	return
+
+func getSlave(_slaveID) -> NpcSlave:
+	return GlobalRegistry.getCharacter(_slaveID).getNpcSlavery()

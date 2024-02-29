@@ -658,3 +658,19 @@ static func remapValue(theValue:float, minValue:float, maxValue:float, newMinVal
 	
 	var remappedValue = newMinValue + percentage * (newMaxValue - newMinValue)
 	return remappedValue
+
+static func ease_in_out(value:float):
+	value = clamp(value, 0.0, 1.0)
+	
+	return value * value * (3.0 - 2.0*value)
+
+# 0.0 = 0.0
+# 0.5 = 1.0
+# 1.0 = 0.0
+static func distanceToHalfEased(value:float, halfpoint:float = 0.5):
+	value = clamp(value, 0.0, 1.0)
+	
+	if(value < halfpoint):
+		return ease_in_out(value / halfpoint)
+	else:
+		return ease_in_out((value-0.5)/(1.0 - halfpoint))

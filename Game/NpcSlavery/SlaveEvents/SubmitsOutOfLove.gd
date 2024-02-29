@@ -18,6 +18,8 @@ func runEvent(_npcSlavery:NpcSlave):
 	var theText = "{npc.name} submits out of love!"
 	_npcSlavery.submitted = true
 	
+	_npcSlavery.deservesReward(4)
+	
 	return {
 		text = theText,
 	}

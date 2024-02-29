@@ -117,6 +117,10 @@ func _react(_action: String, _args):
 	
 	if(_action == "slavetest"):
 		var npcID = NpcFinder.grabNpcIDFromPoolOrGenerate(CharacterPool.Inmates, [[NpcCon.HasPenis], [NpcCon.NoChastity]], InmateGenerator.new(), {NpcGen.HasPenis: true, NpcGen.NoChastity: true})
+		#var theChar:DynamicCharacter = getCharacter(npcID)
+		#var personality:Personality = theChar.getPersonality()
+		#personality.clear()
+		
 		#getModule("NpcSlaveryModule").doEnslaveCharacter(npcID)
 		runScene("KidnapDynamicNpcScene", [npcID])
 	

@@ -4,6 +4,10 @@ var npcID = ""
 var npc:DynamicCharacter
 var resultText = ""
 
+var savedWantedToDo = ""
+var savedWantedToDoName = ""
+var savedWantedToDoArgs = []
+
 func _init():
 	sceneID = "SlaveTalkScene"
 
@@ -39,11 +43,13 @@ func _run():
 		if(npcSlavery.getWorkEfficiency() < 0.2):
 			saynn("{npc.name} looks very tired.")
 		
+		saynn(npcSlavery.getRewardBalanceString())
+		
 		if(true):
 			sayn("[b]DEBUG INFO:[/b]")
 			saynn(npcSlavery.getDebugInfo())
 			
-		if(true):
+		if(false):
 			sayn("[b]Personality:[/b]")
 			var personality: Personality = npc.getPersonality()
 			if(personality != null):
@@ -66,11 +72,19 @@ func _run():
 			sayn(""+slaveType.getVisibleName()+": "+gradeLetter)
 		sayn("")
 		
+		addButton("Talk", "Tell something to your slave", "talk_menu")
 		addButtonWithChecks("Train", "Train your slave", "do_train", [], [[ButtonChecks.NotLate], [ButtonChecks.NotGagged], [ButtonChecks.NotBlindfolded]])
-		addButton("Forced sex", "Start sex with your slave", "do_forced_sex")
+		addButtonAt(13, "Forced sex", "Start sex with your slave", "do_forced_sex")
 		addButton("Reward", "Show a list of rewards", "rewards_menu")
 		addButton("Punish", "Show a list of punishments", "punishments_menu")
-		addButton("Back", "Enough interactions", "endthescene")
+		addButtonAt(14, "Back", "Enough interactions", "endthescene")
+
+	if(state == "talk_menu"):
+		saynn("What do you want to tell your slave?")
+		
+		addButtonsForActionsOfType(SlaveActionBase.Talk)
+
+		addButton("Back", "You changed your mind!", "")
 
 	if(state == "rewards_menu"):
 		saynn("How do you want to reward your slave?")
@@ -102,6 +116,13 @@ func _run():
 		addButton("Okay", "You changed your mind", "forced_sex_let_resist")
 		addButton("Fight them", "Force them through fighting", "resisting_start_fight")
 	
+	if(state == "resisting_scratch"):
+		saynn("Your slave scratched you!")
+		
+		addAfterForceButton()
+		addButton("Fight them", "Force them through fighting", "resisting_start_fight")
+		addButton("Punish", "Show a list of punishments", "punishments_menu")
+	
 	if(state == "forced_sex_resist"):
 		saynn("Your slave is trying to resist! You will have to force them by beating them up first!")
 		
@@ -117,7 +138,8 @@ func _run():
 	if(state == "won_resistaction"):
 		saynn("You won!")
 		
-		addButton("Continue", "They should resist less", "")
+		addAfterForceButton()
+		addButton("Cancel", "They should resist less at least", "")
 	
 	if(state == "lost_forcedsex"):
 		saynn("You lost. Aw.")
@@ -131,11 +153,30 @@ func addButtonsForActionsOfType(actionsType):
 		if(theAction.extraSlaves.empty()):
 			var canDoInfo = theAction.checkCanDoFinal(npcID)
 			if(canDoInfo[0]):
-				addButton(theAction.getVisibleName(), theAction.getVisibleDesc(), "do_action", [theAction])
+				addButton(theAction.getVisibleName(), theAction.getVisibleDesc(), "do_action", [actionID])
 			elif(canDoInfo.size() > 1):
 				addDisabledButton(theAction.getVisibleDesc(), canDoInfo[1])
 		else:
-			addButton(theAction.getVisibleName(), theAction.getVisibleDesc(), "do_action", [theAction])
+			addButton(theAction.getVisibleName(), theAction.getVisibleDesc(), "do_action", [actionID])
+
+func addAfterForceButton():
+	addButton(savedWantedToDoName, "Do what you wanted to do", savedWantedToDo, savedWantedToDoArgs)
+
+func setStateResistance():
+	var npcSlavery:NpcSlave = npc.getNpcSlavery()
+	var possible = [["resisting_action", 1.0]]
+	if(true):
+		possible.append(["resisting_scratch", 1.0])
+	var pickedRandom = RNG.pickWeightedPairs(possible)
+	
+	if(pickedRandom == "resisting_scratch"):
+		GM.pc.addPain(RNG.randi_range(2, 5))
+		npcSlavery.deservesPunishment(2)
+	else:
+		npcSlavery.deservesPunishment(1)
+		
+	setState(pickedRandom)
+	return true
 		
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
@@ -143,7 +184,7 @@ func _react(_action: String, _args):
 		return
 	
 	if(_action == "do_action"):
-		var theAction:SlaveActionBase = _args[0]
+		var theAction:SlaveActionBase = GlobalRegistry.getSlaveAction(_args[0])
 		var npcSlavery:NpcSlave = npc.getNpcSlavery()
 		
 		# Resisting!
@@ -151,10 +192,15 @@ func _react(_action: String, _args):
 		if(RNG.chance(resistChance)):
 			# Various resisting actions here?
 			# Like scratching/biting/shoving/kicking (if no restraints)
-			npcSlavery.deservesPunishment(1)
-			setState("resisting_action")
+			savedWantedToDo = "do_action_noresist"
+			savedWantedToDoName = "Do action"
+			savedWantedToDoArgs = [_args[0]]
+			setStateResistance()
 			return
 		
+	if(_action == "do_action" || _action == "do_action_noresist"):
+		var theAction:SlaveActionBase = GlobalRegistry.getSlaveAction(_args[0])
+		#var npcSlavery:NpcSlave = npc.getNpcSlavery()
 		# Multi-slave action
 		if(!theAction.extraSlaves.empty()):
 			runScene("SlaveStartActionScene", [theAction.id, npcID], "slaveStartAction")
@@ -175,6 +221,8 @@ func _react(_action: String, _args):
 			resultText = result["text"]
 		else:
 			resultText = "An action happened!"
+		setState("do_action")
+		return
 
 	if(_action == "do_train"):
 		var npcSlavery:NpcSlave = npc.getNpcSlavery()
@@ -182,12 +230,18 @@ func _react(_action: String, _args):
 		if(RNG.chance(resistChance)):
 			# Various resisting actions here?
 			# Like scratching/biting/shoving/kicking (if no restraints)
-			npcSlavery.deservesPunishment(1)
-			setState("resisting_action")
+			savedWantedToDo = "do_train_noresist"
+			savedWantedToDoName = "Train"
+			savedWantedToDoArgs = []
+			setStateResistance()
 			return
 		
+	if(_action == "do_train" || _action == "do_train_noresist"):
+		var npcSlavery:NpcSlave = npc.getNpcSlavery()
 		var result = npcSlavery.doTrain()
 		resultText = Util.join(result["texts"], "\n\n")
+		setState("do_train")
+		return
 
 	if(_action == "forced_sex_startfight"):
 		runScene("FightScene", [npcID], "forcedsexfight")
@@ -200,7 +254,10 @@ func _react(_action: String, _args):
 	if(_action == "do_forced_sex"):
 		var npcSlavery:NpcSlave = npc.getNpcSlavery()
 		if(npcSlavery.isResistingSuperActively() || (RNG.chance(40) && npcSlavery.isActivelyResisting())):
-			setState("forced_sex_resist")
+			savedWantedToDo = "start_forced_sex_forced"
+			savedWantedToDoName = "Forced sex"
+			savedWantedToDoArgs = []
+			setStateResistance()
 		else:
 			startSex()
 		return
@@ -268,6 +325,9 @@ func saveData():
 	
 	data["npcID"] = npcID
 	data["resultText"] = resultText
+	data["savedWantedToDo"] = savedWantedToDo
+	data["savedWantedToDoName"] = savedWantedToDoName
+	data["savedWantedToDoArgs"] = savedWantedToDoArgs
 	
 	return data
 	
@@ -278,3 +338,30 @@ func loadData(data):
 	npc = GlobalRegistry.getCharacter(npcID)
 
 	resultText = SAVE.loadVar(data, "resultText", "")
+	savedWantedToDo = SAVE.loadVar(data, "savedWantedToDo", "")
+	savedWantedToDoName = SAVE.loadVar(data, "savedWantedToDoName", "")
+	savedWantedToDoArgs = SAVE.loadVar(data, "savedWantedToDoArgs", null)
+
+func getDebugActions():
+	return [
+		{
+			"id": "levelUP",
+			"name": "Slave levelup",
+			"args": [
+			],
+		},
+		{
+			"id": "skillLevelup",
+			"name": "Skill levelup",
+			"args": [
+			],
+		},
+	]
+
+func doDebugAction(_id, _args = {}):
+	var npcSlavery:NpcSlave = npc.getNpcSlavery()
+	if(_id == "levelUP"):
+		npcSlavery.doLevelup()
+	if(_id == "skillLevelup"):
+		npcSlavery.levelupCurrentSpecialization()
+		

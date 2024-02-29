@@ -22,12 +22,13 @@ func addObedienceRaw(howMuch:float):
 func addObedience(howMuch:float):
 	var mult = 1.0
 	if(howMuch > 0.0):
-		mult += getDespair()*0.1 # Despair makes obeying a liiiitle easier
-		mult += getAwareness()*0.3
-		mult += getSpoiling()*-0.3
-		mult += getTiredEffect()*-0.2
+		#mult += getDespair()*0.1 # Despair makes obeying a liiiitle easier
+		mult += getAwareness()*3.0
+		#mult += getSpoiling()*-0.3
+		#mult += getTiredEffect()*-0.2
 	else:
-		mult += getTiredEffect()*0.5
+		pass
+		#mult += getTiredEffect()*0.5
 	
 	addObedienceRaw(howMuch * mult * (1.0 + sign(howMuch) * personalityScore({
 		PersonalityStat.Subby:0.8, # Subby people obey better
@@ -45,12 +46,13 @@ func addBrokenSpiritRaw(howMuch:float):
 func addBrokenSpirit(howMuch:float):
 	var mult = 1.0
 	if(howMuch > 0.0):
-		mult += max(0.8, getDespair()*2.0)
-		mult += getAwareness()*0.5
-		mult += getSpoiling()*0.3
-		mult += getTiredEffect()*0.5
+		mult += Util.distanceToHalfEased(getDespair())*6.0
+		#mult += getAwareness()*0.5
+		#mult += getSpoiling()*0.3
+		#mult += getTiredEffect()*0.5
 	else:
-		mult += getTiredEffect()*-0.2
+		#mult += getTiredEffect()*-0.2
+		pass
 	
 	addBrokenSpiritRaw(howMuch * mult * (1.0 + sign(howMuch) * personalityScore({
 		PersonalityStat.Coward:0.8, # Cowards are easier to break
@@ -67,13 +69,14 @@ func addLoveRaw(howMuch:float):
 func addLove(howMuch:float):
 	var mult = 1.0
 	if(howMuch > 0.0):
-		mult += getDespair()*-0.3
-		mult += getAwareness()*-0.3
-		mult += getSpoiling()*0.2
-		mult += getTiredEffect()*-0.2
-		mult += getTrust()*0.5
+		#mult += getDespair()*-0.3
+		#mult += getAwareness()*-0.3
+		#mult += getSpoiling()*0.2
+		#mult += getTiredEffect()*-0.2
+		mult += getTrust()*3.0
 	else:
-		mult += getDespair()*-0.5
+		#mult += getDespair()*-0.5
+		pass
 	addLoveRaw(howMuch * mult * (1.0 + sign(howMuch) * personalityScore({
 		PersonalityStat.Mean:-0.6, # Kind people fall in love easier
 		PersonalityStat.Naive:0.4, # Being naive helps too
@@ -91,7 +94,7 @@ func addDespairRaw(howMuch:float):
 	despair = clamp(despair, 0.0, 1.0)
 func addDespair(howMuch:float):
 	var loveMult = 1.0
-	if(getLove() > 0.4 && howMuch > 0.0): # Having feelings makes the despair harder
+	if(getLove() > 0.4 && howMuch < 0.0): # Having feelings makes coping easier
 		loveMult += getLove()
 	addDespairRaw(howMuch * (1.0 + sign(howMuch) * personalityScore({
 		PersonalityStat.Brat:-0.3, # Brats are more easy-going
@@ -113,6 +116,8 @@ func addAwarenessRaw(howMuch:float):
 	awareness += howMuch
 	awareness = clamp(awareness, 0.0, 1.0)
 func addAwareness(howMuch:float):
+	if(getAwareness() >= 1.0):
+		addObedience(howMuch / 3.0)
 	addAwarenessRaw(howMuch * (1.0 + sign(howMuch) * personalityScore({
 		PersonalityStat.Subby:0.3, # Subby people understand it easier
 		PersonalityStat.Mean:-0.3, # Mean people don't want to understand it
@@ -130,6 +135,8 @@ func addTrustRaw(howMuch:float):
 	trust += howMuch
 	trust = clamp(trust, 0.0, 1.0)
 func addTrust(howMuch:float):
+	if(getTrust() >= 1.0):
+		addLove(howMuch / 3.0)
 	addTrustRaw(howMuch * (1.0 + sign(howMuch) * personalityScore({
 		PersonalityStat.Naive:0.95, # Naive people trust easier
 		PersonalityStat.Impatient:-0.1, # Being patient makes you trust a little more
@@ -149,6 +156,22 @@ func addSpoiling(howMuch:float):
 		PersonalityStat.Subby:-0.2, # Doms are easier to spoil too
 		})))
 
+var fear = 0.0
+func getFear() -> float:
+	return fear
+func addFearRaw(howMuch:float):
+	fear += howMuch
+	fear = clamp(fear, 0.0, 1.0)
+func addFear(howMuch:float):
+	addFearRaw(howMuch * (1.0 + sign(howMuch) * personalityScore({
+		PersonalityStat.Coward:0.8, # Doms are easier to spoil too
+		})))
+func addFearUpToAPoint(howMuch:float, maxPoint:float):
+	var isHigherThanMaxPoint = getFear() >= maxPoint
+	addFear(howMuch)
+	if(!isHigherThanMaxPoint && getFear() > maxPoint):
+		fear = maxPoint
+
 # Has the slave gave up trying to escape
 # Happens (randomly?) through a random event if brokenspirit or love has reached 1
 # If true, brokenspirit no longer decays
@@ -157,8 +180,8 @@ func hasSubmittedToPC():
 	return submitted
 
 # Daily vars
-var tiredness:int = 0 # The higher this is, the higher the chance of disobeying
-func addTired(howMuch:int):
+var tiredness:float = 0 # The higher this is, the higher the chance of disobeying
+func addTired(howMuch:float):
 	tiredness += howMuch
 	if(tiredness < 0):
 		tiredness = 0
@@ -166,9 +189,9 @@ func addTired(howMuch:int):
 # If 0.0 = full of power
 # 0.0 - 0.9 = getting tired
 func getTiredEffect() -> float:
-	if(tiredness <= 1):
+	if(tiredness <= 1.0):
 		return 0.0
-	if(tiredness >= 5):
+	if(tiredness >= 5.0):
 		return 0.9
 	var progress = Util.remapValue(tiredness, 1.0, 5.0, 0.0, 1.0)
 	
@@ -185,6 +208,7 @@ var gotBeatenUpToday:bool = false
 var checkedOnSlaveToday:bool = false
 func markCheckedOnSlaveToday():
 	checkedOnSlaveToday = true
+var explainedPositionToday = 0
 
 var hasRandomEvent = false
 var randomEventWillHappenID = "" # submitBroken, submitLove, escaped, removedOneRestraint
@@ -207,11 +231,12 @@ func getDebugInfo():
 		"Awareness: "+str(Util.roundF(getAwareness(), 2)),
 		"Trust: "+str(Util.roundF(getTrust(), 2)),
 		"Spoiling: "+str(Util.roundF(getSpoiling(), 2)),
+		"Fear: "+str(Util.roundF(getFear(), 2)),
 		"submitted: "+str(submitted),
 		"rewardBalance: "+str(rewardBalance),
 		"punishmentsToday: "+str(punishmentsToday),
 		"rewardsToday: "+str(rewardsToday),
-		"tiredness: "+str(tiredness),
+		"tiredness: "+str(Util.roundF(tiredness, 2)),
 		"getWorkEfficiency(): "+str(Util.roundF(getWorkEfficiency(), 2)),
 		"getResistScoreUnclamped(): "+str(Util.roundF(getResistScoreUnclamped(), 2)),
 		"getBratScore(): "+str(Util.roundF(getBratScore(), 2)),
@@ -253,10 +278,19 @@ func onNewDay():
 	
 	# If checked on us last day
 	if(checkedOnSlaveToday):
+		addBrokenSpirit(Util.distanceToHalfEased(getDespair())*(1.0+getAwareness())*0.02)
 		addAwareness(0.02)
-		
+	
+	if(rewardBalance < 0):
+		addTrust(-rewardBalance * 0.04)
+	
+	fear = fear / (2.5+personalityScore({PersonalityStat.Coward:-1.0}))
+	if(fear < 0.02):
+		fear = 0.0
 	if(submitted):
-		pass
+		despair = decayValue(despair, 0.05, personalityScore({
+			PersonalityStat.Naive: 1.0,
+		}), 0.8)
 	else:
 		obedience = decayValue(obedience, 0.05, personalityScore({
 			PersonalityStat.Subby: -1.0,
@@ -271,12 +305,16 @@ func onNewDay():
 			PersonalityStat.Impatient: 0.3,
 			PersonalityStat.Naive: -0.2,
 		}), 3.0)
+	spoiling = decayValue(spoiling, 0.05, personalityScore({
+		PersonalityStat.Brat: -1.0,
+	}), 0.8)
 	
 	rewardBalance = 0
 	punishmentsToday = 0
 	rewardsToday = 0
 	tiredness = 0
 	checkedOnSlaveToday = false
+	explainedPositionToday = 0
 
 func decayValue(theValue:float, howMuch:float, statModifier:float = 0.0, statEffect:float = 0.5) -> float:
 	return max(0.0, theValue - max(0.0, howMuch * (1.0 + clamp(statModifier, -1.0, 1.0)*statEffect)))
@@ -325,51 +363,41 @@ func handlePunishment(_howBig:int):
 	var diff = -rewardBalance - _howBig
 	var diffAbs = Util.maxi(diff, -diff)
 	
-	if(getWorkEfficiency() <= 0.1):
-		addBrokenSpirit(-0.01*diffAbs)
-		addObedience(-0.01*diffAbs)
-		addLove(-0.01*diffAbs)
-		addAwareness(-0.01)
-		addDespair(0.03)
-		return
+	#if(getWorkEfficiency() <= 0.1): # We are very tired
+		# Who cares
+	#	rewardBalance = 0
+	#	return
 	
-	if(diff > 0): # Punishing not enough
-		addLove(diffAbs*0.01) # Increase love (we're going easy on them so they like us)
-		addAwareness(-0.01)# Lower awarness (we're making them feel less like a slave)
-		pass
-	if(diff < 0): # punishing way too much (or punishing when we should be rewarding)
-		addBrokenSpirit(0.01*diffAbs)
-		addLove(-0.06)# Decrease love (we're being way too strict)
-		addAwareness(-0.02)# Decrease awarness (again, not treating them fairly)
-		if(diff <= -2):# Increase despair if diff <= -2
-			addDespair(diffAbs*0.03)
-		else:
-			addDespair(diffAbs*0.02)
-		addSpoiling(-0.04)# Decrease spoil
-		addTrust(-0.04)
-		pass
+	if(_howBig >= 3): # Big punishments always add despair
+		addDespair(0.02*_howBig)
+	addFearUpToAPoint(0.04 * _howBig * _howBig, 0.25 + 0.2*_howBig)
+	
+	if(diff >= 2): # Punishing not enough
+		addAwareness(-0.01 * diffAbs)
+	if(diff <= -2): # punishing way too much (or punishing when we should be rewarding)
+		addTrust(-0.02*diffAbs)
+		addDespair(0.05*diffAbs)
+		addSpoiling(-0.02 * diffAbs * diffAbs)
+		addBrokenSpirit(0.02*diffAbs)
 		
 	if(diff == 0): # The punishment fits the crime just right
-		addTrust(0.03)
-		if(_howBig <= 2):
-			addObedience(0.07) # Increase obedience (only if _howbig <= 3 maybe)
-		# if _howBig >= 3 also increases broken spirit
-		if(_howBig >= 3):
-			addBrokenSpirit(0.04)
-		# Decrease despair sliiiightly
-		pass
+		addAwareness(0.02 * _howBig)
+		addTrust(-0.02)
+		addSpoiling(-0.02 * _howBig)
+		addDespair(-0.01)
+		addObedience(0.02 * _howBig)
 	elif(diffAbs <= 1 && rewardBalance != 0): # The punishment more or less fits the crime
-		addObedience(0.04) # Increase obedience a bit
-		addTrust(0.005)
+		addAwareness(0.01 * _howBig)
+		addTrust(-0.01)
+		addObedience(0.007 * _howBig)
+		addSpoiling(-0.01 * _howBig)
 	
-	if(punishmentsToday >= 3): # Did too many punishments
-		addTired(1)# Increase tiredness?
-		addBrokenSpirit(0.02)
+	if(punishmentsToday >= 2): # Did too many punishments
+		addDespair(0.01*diffAbs)
+		addTired(1)
 		if(rewardsToday == 0): # But never rewarded!
-			addDespair(0.03)# Increase despair
-			pass
+			addSpoiling(-0.01 * _howBig)
 		else: #Gave some rewards at least
-			addDespair(0.01) # Increase despair sliiightly
 			pass
 	
 	rewardBalance = 0
@@ -380,49 +408,42 @@ func handleReward(_howBig:int):
 	var diff = rewardBalance - _howBig
 	var diffAbs = Util.maxi(diff, -diff)
 	
-	if(diff > 0): # Reward not big enough
-		addLove(-0.03)
-		addSpoiling(-0.03)
-		if(diffAbs >= 3):
-			addDespair(0.02)
-		pass
-	if(diff < 0): # Reward too big (Or got rewarded when should be punished)
-		addBrokenSpirit(-0.03*diffAbs)
-		addLove(0.03)
-		addDespair(-0.02)
-		if(diffAbs >= 3):
-			addSpoiling(0.1)
-			addDespair(-0.02)
-			addAwareness(-0.1)
-		else:
-			addSpoiling(0.02)
-			addAwareness(-0.02)
-		pass
+	#if(getWorkEfficiency() <= 0.1): # We are very tired
+		# Who cares
+	#	rewardBalance = 0
+	#	return
+	addFear(-0.02 * _howBig * _howBig)
+	
+	if(diff >= 2): # Reward not big enough
+		addTrust(-0.03)
+		addAwareness(-0.02)
+		addDespair(0.01)
+	if(diff <= -2): # Reward too big (Or got rewarded when should be punished)
+		addSpoiling(0.04 * diffAbs)
+		addTrust(0.03)
+	if(diff <= -1 && rewardBalance != 0): # Rewarding when should be punishing
+		addLove(0.01 * diffAbs)
+		addDespair(-0.02 * diffAbs)
 	
 	if(diff == 0): # Reward fits just right
-		addTrust(0.05)
-		addObedience(0.06) # Add some obedience
-		addLove(0.02)
-		addBrokenSpirit(-0.03)
+		addTrust(0.03 * _howBig)
+		addAwareness(0.02)
+		addDespair(-0.02 * _howBig)
+		addObedience(0.01)
 	elif(diffAbs <= 1 && rewardBalance != 0): # The reward more or less fits
-		addObedience(0.02) # Add a tiny bit of obedience
-		addTrust(0.01)
+		addTrust(0.02 * _howBig)
+		addAwareness(0.01)
+		addObedience(0.005)
+		addDespair(-0.01)
 	else: # Rewarding for no good reason
-		addObedience(-0.04)
-		addTrust(-0.03)
-		addLove(0.01)
-		addSpoiling(0.04)
-		addBrokenSpirit(-0.02)
+		pass
 	
-	if(rewardsToday >= 3): # Did too many rewards
+	if(rewardsToday >= 2): # Did too many rewards
+		addSpoiling(0.01 * _howBig)
 		if(rewardsToday == 0): # But never punished
-			addSpoiling(0.05) # Add a lot of spoilness
-			addObedience(-0.04) # Why obey?
-			pass
+			addDespair(-0.02 * _howBig)
 		else: #Gave some punishments too
-			# Add some spoilness
-			addSpoiling(0.02)
-			pass
+			addDespair(-0.01 * _howBig)
 	
 	rewardBalance = 0
 
@@ -493,12 +514,12 @@ func doTrain():
 			if(rewardBalance >= 2):
 				addLove(-0.01)
 		else:
-			var workRoll = obeyMood + workEffect + RNG.randf_range(-1.0, 1.0)
+			var workRoll = obeyMood + workEffect + RNG.randf_range(-1.0, 1.0) + float(slaveLevel)/10.0
 			if(workRoll < 0.0):
 				isSuccess = false
 				texts.append( currentSlaveType.getFailedTrainTextBad(getChar()) )
 				deservesPunishment(1)
-				addObedience(0.01)
+				addSpoiling(-0.04)
 			elif(workRoll <= 1.0):
 				isSuccess = true
 				texts.append( currentSlaveType.getFailedTrainTextSomeSuccess(getChar()) )
@@ -506,7 +527,8 @@ func doTrain():
 				if(RNG.chance(10)):
 					levelupCurrentSpecialization()
 					actuallyAddedSkill = true
-				addObedience(0.02)
+				addObedience(0.005)
+				addFear(-0.03)
 			else:
 				isSuccess = true
 				texts.append( currentSlaveType.getFailedTrainTextGreatSuccess(getChar()) )
@@ -514,8 +536,9 @@ func doTrain():
 				if(RNG.chance(30)):
 					levelupCurrentSpecialization()
 					actuallyAddedSkill = true
-				addObedience(0.05)
+				addObedience(0.01)
 				addLove(0.01)
+				addFear(-0.1)
 			
 	
 	var result = {
@@ -637,9 +660,11 @@ func remap01(value:float, newMinValue:float, newMaxValue:float) -> float:
 # 0.5 = Resisting 50% of the time?
 # 1.0 = ACTIVELY RESISTING EVERY STEP
 func getResistScoreUnclamped():
-	var overComeValue = 1.5
+	var overComeValue = 1.2
 	if(submitted):
 		overComeValue = 1.0
+
+	overComeValue *= (1.0 - getFear() * (1.0 - getSpoiling()*0.3))
 
 	overComeValue += personalityScore({
 		PersonalityStat.Subby: -0.3,
@@ -672,7 +697,7 @@ func isActivelyResisting():
 	# Temporary got shown their place
 	if(gotBeatenUpToday):
 		return false
-	return getResistScoreUnclamped() >= 0.5
+	return getResistScoreUnclamped() >= 0.5 || getBratScore() >= 0.5
 
 func isResistingSuperActively():
 	# Temporary got shown their place
@@ -681,12 +706,16 @@ func isResistingSuperActively():
 	return getResistScoreUnclamped() > 1.0
 
 func afterBeatenUp():
-	gotBeatenUpToday = true
-	addBrokenSpirit(0.04)
-	addObedience(0.02)
+	#gotBeatenUpToday = true
+	#addBrokenSpirit(0.04)
+	#addObedience(0.02)
+	addFear(0.5)
 
 func getBratScore():
-	var theValue = personalityScore({
-		PersonalityStat.Brat: 1.0,
-	})
-	return clamp(theValue, 0.0, 1.0)
+	#var theValue = personalityScore({
+	#	PersonalityStat.Brat: 0.1,
+	#})
+	return clamp(getSpoiling(), 0.0, 1.0 - getFear())
+
+func getOwnerName():
+	return "owner"

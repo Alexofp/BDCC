@@ -338,4 +338,9 @@ func callObjectFuncWrapper(_obj: String, _command: String, _args: Array):
 			else:
 				return "boy"
 	
+	if(_command in ["pcOwner", "pcMaster"] && _args.size() == 0):
+		if(object.isSlaveToPlayer()):
+			return object.getNpcSlavery().getOwnerName()
+		return "owner"
+	
 	return "[color=red]!RUNTIME ERROR NO COMMAND FOUND "+_obj+"."+_command+" "+str(_args)+"![/color]"
