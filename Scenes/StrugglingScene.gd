@@ -16,7 +16,7 @@ var shouldPlayAnimations = true
 #var minigameScene = preload("res://Game/Minigames/Struggling/StrugglingGame.tscn")
 #var minigameScene = preload("res://Game/Minigames/ClickAtTheRightTime/ClickAtTheRightTime.tscn")
 
-var minigameScene = preload("res://Game/Minigames/ClickAtTheRightTime/ClickAtTheRightTime.tscn")
+var minigameScene = preload("res://Game/Minigames/MatchGame/MatchGame.tscn")
 var pickMinigameScene = preload("res://Game/Minigames/ClickAtTheRightTime/ClickAtTheRightTime.tscn")
 var cutMinigameScene = preload("res://Game/Minigames/ClickAtTheRightTime/ClickAtTheRightTime.tscn")
 var unlockMinigameScene = preload("res://Game/Minigames/ClickAtTheRightTime/ClickAtTheRightTime.tscn")
