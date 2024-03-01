@@ -1,13 +1,14 @@
 extends Reference
 class_name SlaveActionBase
 
-const Action = 0
+const Nothing = 0
 const Reward = 1
 const Punishment = 2
 const Talk = 3
+const Action = 4
 
 var id = "ERROR"
-var actionType = Action
+var actionType = Nothing
 var slaveRequired = true
 var slaveRankRequired = {}
 var slaveMinLevel = 0
@@ -28,6 +29,9 @@ func getVisibleName():
 
 func getVisibleDesc():
 	return "CHANGE MY DESCRIPTION"
+
+func isActionVisible(_slaveID):
+	return true
 
 func checkCanDo(_slaveID, _extraSlavesIDs = {}):
 

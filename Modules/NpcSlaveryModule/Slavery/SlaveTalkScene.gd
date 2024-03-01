@@ -72,32 +72,37 @@ func _run():
 			sayn(""+slaveType.getVisibleName()+": "+gradeLetter)
 		sayn("")
 		
+		addButtonAt(13, "Forced sex", "Start sex with your slave", "do_forced_sex")
+		addButtonAt(14, "Back", "Enough interactions", "endthescene")
+		
 		addButton("Talk", "Tell something to your slave", "talk_menu")
 		addButtonWithChecks("Train", "Train your slave", "do_train", [], [[ButtonChecks.NotLate], [ButtonChecks.NotGagged], [ButtonChecks.NotBlindfolded]])
-		addButtonAt(13, "Forced sex", "Start sex with your slave", "do_forced_sex")
 		addButton("Reward", "Show a list of rewards", "rewards_menu")
 		addButton("Punish", "Show a list of punishments", "punishments_menu")
-		addButtonAt(14, "Back", "Enough interactions", "endthescene")
+		addButton("Activities", "See what else you can do with this slave", "actions_menu")
+		
+	if(state == "actions_menu"):
+		saynn("What do you want to do with your slave?")
+		
+		addButtonsForActionsOfType(SlaveActionBase.Action)
+		addButton("Back", "You changed your mind!", "")
 
 	if(state == "talk_menu"):
 		saynn("What do you want to tell your slave?")
 		
 		addButtonsForActionsOfType(SlaveActionBase.Talk)
-
 		addButton("Back", "You changed your mind!", "")
 
 	if(state == "rewards_menu"):
 		saynn("How do you want to reward your slave?")
 		
 		addButtonsForActionsOfType(SlaveActionBase.Reward)
-
 		addButton("Back", "You changed your mind!", "")
 
 	if(state == "punishments_menu"):
 		saynn("How do you want to punish your slave?")
 		
 		addButtonsForActionsOfType(SlaveActionBase.Punishment)
-
 		addButton("Back", "You changed your mind!", "")
 
 	if(state == "do_action"):
@@ -149,6 +154,9 @@ func _run():
 func addButtonsForActionsOfType(actionsType):
 	for actionID in GlobalRegistry.getSlaveActionIDsOfType(actionsType):
 		var theAction:SlaveActionBase = GlobalRegistry.getSlaveAction(actionID)
+		
+		if(!theAction.isActionVisible(npcID)):
+			continue
 		
 		if(theAction.extraSlaves.empty()):
 			var canDoInfo = theAction.checkCanDoFinal(npcID)

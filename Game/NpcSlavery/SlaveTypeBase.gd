@@ -15,16 +15,16 @@ func getTrainText(_npc, _skillLevel):
 	])
 
 func getFailedTrainTextGreatSuccess(_npc):
-	return "{npc.name} is making great progress."
+	return "{npc.name} is making great progress!"
 
 func getFailedTrainTextSomeSuccess(_npc):
 	return "{npc.name} is making some progress."
 
 func getFailedTrainTextResist(_npc):
-	return "{npc.name} actively resists any attempts to be trained."
+	return "{npc.name} actively resists any attempts to be trained. That deserves a punishment."
 
 func getFailedTrainTextWeak(_npc):
-	return "{npc.name} can barely follow your intructions, looking extremely weak."
+	return "{npc.name} can barely follow your intructions, looking extremely weak and tired."
 
 func getFailedTrainTextBad(_npc):
-	return "{npc.name} is doing meh."
+	return "{npc.name} is doing a poor job following your lesson."
