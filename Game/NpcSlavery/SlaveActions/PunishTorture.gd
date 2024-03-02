@@ -7,6 +7,9 @@ func _init():
 	#sceneID = "MeScene"
 	#endsTalkScene = true
 	slaveResistChanceMult = 1.0
+	
+	buttonPriority = 60
+	rewardHint = -4
 
 func getVisibleName():
 	return "Torture"

@@ -7,6 +7,9 @@ func _init():
 	#sceneID = ""
 	slaveResistChanceMult = 0.3
 
+	buttonPriority = 60
+	rewardHint = 4
+
 func getVisibleName():
 	return "Best reward"
 

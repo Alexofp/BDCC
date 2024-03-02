@@ -114,6 +114,7 @@ func _react(_action: String, _args):
 			resultText = result["text"]
 		else:
 			resultText = "An action happened!"
+		action.playAnimation(mainSlave, pickedSlaves)
 
 	setState(_action)
 

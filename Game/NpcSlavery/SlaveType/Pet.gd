@@ -6,6 +6,9 @@ func _init():
 func getVisibleName():
 	return "Pet"
 
+func getVisibleDesc():
+	return "Turn your slave into a personal pet and get ability to give them walkies"
+
 # F- F  F+ D- D  D+ C- C  B- B  A- A  S- S  S+ S++
 # 0  1  2  3  4  5  6  7  8  9  10 11 12 13 14 15
 func getTrainText(_npc, _skillLevel):

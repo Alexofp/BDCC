@@ -6,6 +6,9 @@ func _init():
 	#extraSlaves = {}
 	#sceneID = ""
 	slaveResistChanceMult = 0.2
+	
+	buttonPriority = 90
+	rewardHint = 1
 
 func getVisibleName():
 	return "Praise"

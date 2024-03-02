@@ -6,6 +6,9 @@ func _init():
 	#extraSlaves = {}
 	#sceneID = ""
 	slaveResistChanceMult = 1.0
+	
+	buttonPriority = 70
+	rewardHint = 3
 
 func getVisibleName():
 	return "Massage"
@@ -23,3 +26,6 @@ func doActionSimple(_slaveID, _extraSlavesIDs = {}):
 	return {
 		text = "You give {npc.name} a sensual massage.",
 	}
+
+func getAnimationInfo(_slaveID, _extraSlavesIDs = {}):
+	return [StageScene.Massage, "back", {pc="pc", npc=_slaveID}]

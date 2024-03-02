@@ -22,6 +22,7 @@ func resolveCustomCharacterName(_charID):
 
 func _run():
 	if(state == ""):
+		aimCameraAndSetLocName(GM.pc.getLocation())
 		addCharacter(npcID)
 		playAnimation(StageScene.Duo, "stand", {npc=npcID, npcBodyState={chains=[["normal", "neck", "scene", "floor"]]} })
 		
@@ -32,8 +33,9 @@ func _run():
 			return
 		npcSlavery.checklevelUp()
 		
-		saynn(npc.getName()+" is a level "+str(npcSlavery.slaveLevel)+" slave")
-		saynn("{npc.He} {npc.isAre} standing still, {npc.his} collar leashed to the floor.")
+		saynn(npc.getName()+" is a level "+str(npcSlavery.slaveLevel)+" {npc.slave}")
+		#saynn("{npc.He} {npc.isAre} standing still, {npc.his} collar leashed to the floor.")
+		saynn(npcSlavery.getPerfectIdleMessage())
 		
 		if(npcSlavery.getDespair() > 0.5):
 			saynn("{npc.name} looks pretty depressed.")
@@ -151,21 +153,34 @@ func _run():
 		
 		addButton("Never mind", "You don't want to fuck with them anymore", "forced_sex_let_resist")
 		
-func addButtonsForActionsOfType(actionsType):
-	for actionID in GlobalRegistry.getSlaveActionIDsOfType(actionsType):
-		var theAction:SlaveActionBase = GlobalRegistry.getSlaveAction(actionID)
+static func sortSlaveActions(a, b):
+	if a.buttonPriority > b.buttonPriority:
+		return true
+	return false
 		
+func addButtonsForActionsOfType(actionsType):
+	var theActionIDs = GlobalRegistry.getSlaveActionIDsOfType(actionsType)
+	var actionsSorted = []
+	for theActionID in theActionIDs:
+		var theAction:SlaveActionBase = GlobalRegistry.getSlaveAction(theActionID)
+		if(theAction == null):
+			continue
+		actionsSorted.append(theAction)
+	actionsSorted.sort_custom(self, "sortSlaveActions")
+	
+	for theAction in actionsSorted:
+		#var theAction:SlaveActionBase = GlobalRegistry.getSlaveAction(actionID)
 		if(!theAction.isActionVisible(npcID)):
 			continue
 		
 		if(theAction.extraSlaves.empty()):
 			var canDoInfo = theAction.checkCanDoFinal(npcID)
 			if(canDoInfo[0]):
-				addButton(theAction.getVisibleName(), theAction.getVisibleDesc(), "do_action", [actionID])
+				addButton(theAction.getVisibleName(), theAction.getFinalVisibleDesc(), "do_action", [theAction.id])
 			elif(canDoInfo.size() > 1):
-				addDisabledButton(theAction.getVisibleDesc(), canDoInfo[1])
+				addDisabledButton(theAction.getVisibleName(), "[color=red]"+canDoInfo[1]+"[/color]\n\n"+theAction.getFinalVisibleDesc())
 		else:
-			addButton(theAction.getVisibleName(), theAction.getVisibleDesc(), "do_action", [actionID])
+			addButton(theAction.getVisibleName(), theAction.getFinalVisibleDesc(), "do_action", [theAction.id])
 
 func addAfterForceButton():
 	addButton(savedWantedToDoName, "Do what you wanted to do", savedWantedToDo, savedWantedToDoArgs)
@@ -229,6 +244,7 @@ func _react(_action: String, _args):
 			resultText = result["text"]
 		else:
 			resultText = "An action happened!"
+		theAction.playAnimation(npcID, {})
 		setState("do_action")
 		return
 

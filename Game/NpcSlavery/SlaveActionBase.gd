@@ -10,25 +10,51 @@ const Action = 4
 var id = "ERROR"
 var actionType = Nothing
 var slaveRequired = true
-var slaveRankRequired = {}
+var slaveSkillsRequired = {}
 var slaveMinLevel = 0
 var extraSlaves = {
 #	"dom": {
 #		name = "Dominant",
 #		desc = "Person who dominates!",
-#		slaveRankRequired = {},
+#		slaveSkillsRequired = {},
 #		slaveMinLevel = 0,
 #	}
 }
 var sceneID = ""
 var endsTalkScene = false
 var slaveResistChanceMult = 1.0
+var buttonPriority = 100
+var rewardHint = 0
 
 func getVisibleName():
 	return "CHANGE ME"
 
 func getVisibleDesc():
 	return "CHANGE MY DESCRIPTION"
+
+func getFinalVisibleDesc():
+	var theDesc = getVisibleDesc()
+	
+	if(rewardHint > 0):
+		var rewardLevels = ["a small reward", "a normal reward", "a big reward", "one of the best possible rewards"]
+		theDesc += "\nThis is "+rewardLevels[Util.mini(3, rewardHint-1)]+""
+	if(rewardHint < 0):
+		var rewardLevels = ["a small punishment", "a normal punishment", "a big punishment", "one of the worst possible punishments"]
+		theDesc += "\nThis is "+rewardLevels[Util.mini(3, -rewardHint-1)]+""
+	
+	if(slaveMinLevel > 0):
+		theDesc += "\nSlave minimal level: "+str(slaveMinLevel)
+	if(!slaveSkillsRequired.empty()):
+		var reqs = []
+		for slaveType in slaveSkillsRequired:
+			var slaveTypeLevel = slaveSkillsRequired[slaveType]
+			var slaveTypeObj:SlaveTypeBase = GlobalRegistry.getSlaveType(slaveType)
+			if(slaveTypeObj == null):
+				continue
+			reqs.append(slaveTypeObj.getVisibleName()+": "+NpcSlave.rankToLetter(slaveTypeLevel))
+		theDesc += "\nRequired skills: "+Util.join(reqs, ", ")
+	
+	return theDesc
 
 func isActionVisible(_slaveID):
 	return true
@@ -61,7 +87,13 @@ func checkCanDoFinal(_slaveID, _extraSlavesIDs = {}):
 	return [true]
 
 func fitsAsMainSlaveAdvanced(_charID):
-	
+	var npcSlave:NpcSlave = getSlave(_charID)
+	if(npcSlave.getLevel() < slaveMinLevel):
+		return [false, "Slave must be of level "+str(slaveMinLevel)+" or higher"]
+	for slaveType in slaveSkillsRequired:
+		if(npcSlave.getSlaveSkill(slaveType) < slaveSkillsRequired[slaveType]):
+			return [false, "Skill requirements aren't met"]
+		
 	return [true]
 
 func fitsAsMainSlave(_charID):
@@ -85,3 +117,16 @@ func reactSceneResult(_slaveID, _extraSlavesIDs = {}, _sceneResult = {}):
 
 func getSlave(_slaveID) -> NpcSlave:
 	return GlobalRegistry.getCharacter(_slaveID).getNpcSlavery()
+
+func getAnimationInfo(_slaveID, _extraSlavesIDs = {}):
+	return null
+
+func playAnimation(_slaveID, _extraSlavesIDs = {}):
+	var animInfo = getAnimationInfo(_slaveID, _extraSlavesIDs)
+	if(animInfo == null):
+		return
+	
+	if(animInfo.size() > 2):
+		GM.main.playAnimation(animInfo[0], animInfo[1], animInfo[2])
+	else:
+		GM.main.playAnimation(animInfo[0], animInfo[1])

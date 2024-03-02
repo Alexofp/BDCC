@@ -7,6 +7,9 @@ func _init():
 	#sceneID = "MeScene"
 	#endsTalkScene = true
 	slaveResistChanceMult = 1.0
+	
+	buttonPriority = 70
+	rewardHint = -3
 
 func getVisibleName():
 	return "Beat up"
@@ -24,3 +27,6 @@ func doActionSimple(_slaveID, _extraSlavesIDs = {}):
 	return {
 		text = "You beat {npc.name} up!",
 	}
+
+func getAnimationInfo(_slaveID, _extraSlavesIDs = {}):
+	return [StageScene.Duo, "punch", {pc="pc", npc=_slaveID, npcAction="hurt"}]

@@ -487,6 +487,11 @@ func getCurrentSpecializationLevel() -> int:
 		return 0
 	return slaveSpecializations[slaveType]
 
+func getSlaveSkill(theSlaveType):
+	if(!slaveSpecializations.has(theSlaveType)):
+		return 0
+	return slaveSpecializations[theSlaveType]
+
 func getOverallObeyMood() -> float:
 	return max(getLove(), max(getBrokenSpirit(), getObedience())) - getSpoiling() - getResistScoreUnclamped()
 
@@ -719,3 +724,101 @@ func getBratScore():
 
 func getOwnerName():
 	return "owner"
+
+func getLevel():
+	return slaveLevel
+
+func getSlaveTypeName():
+	var slaveTypeObj:SlaveTypeBase = GlobalRegistry.getSlaveType(getMainSlaveType())
+	if(slaveTypeObj == null):
+		return "slave"
+	return slaveTypeObj.getVisibleName()
+
+func getCurrentSkillName():
+	return getSlaveTypeName()
+
+func getMaxSkillsAmount():
+	return Util.maxi(1, 1+int(float(slaveLevel) / 5))
+
+func canLearnNewSkill():
+	var skillAmount = slaveSpecializations.size()
+	
+	if(skillAmount < getMaxSkillsAmount()):
+		return true
+	return false
+
+func canLearnNewSkillAndHasAvailable():
+	if(!canLearnNewSkill()):
+		return false
+	
+	var allSkills = GlobalRegistry.getSlaveTypes()
+	for theSkillID in allSkills:
+		if(!slaveSpecializations.has(theSkillID)):
+			return true
+	return false
+
+func setMainSkill(theSlaveType):
+	slaveType = theSlaveType
+
+func hasSkill(theSlaveType):
+	if(!slaveSpecializations.has(theSlaveType)):
+		return false
+	return true
+
+func learnNewSkill(theSlaveType):
+	if(!slaveSpecializations.has(theSlaveType)):
+		slaveSpecializations[theSlaveType] = 0
+
+func getPerfectIdleMessage():
+	var db = [
+		{stats={obedience=1.0,love=0.0,brokenspirit=1.0}, notblind=true, message="{npc.HeShe} stands perfectly still, eyes locked onto you with unwavering obedience. There's an unsettling lack of emotion in {npc.hisHer} gaze, as if {npc.heShe} exists solely to fulfill your commands."},
+		{stats={obedience=0.0,love=0.0,brokenspirit=0.0}, notblind=true, message="{npc.HeShe} glares defiantly at you, a spark of rebellion in {npc.hisHer} eyes. {npc.HisHer} posture exudes resistance, {npc.hisHer} body language challenging your authority at every turn. It's clear that {npc.heShe} despises being under your control."},
+		{stats={obedience=0.1,love=1.0,brokenspirit=1.0}, message="{npc.HeShe} gazes at you with adoration, love radiating from {npc.hisHer} every glance. {npc.HisHer} stance is submissive, almost vulnerable, as if {npc.heShe} would do anything to please you and bask in your affection."},
+		{stats={obedience=1.0,love=0.1,trust=0.5}, message="{npc.HeShe} stands before you with unwavering obedience, {npc.his} eyes reflecting complete submission. There's a noticeable lack of affection, only a cold compliance."},
+		{stats={obedience=0.3,brokenspirit=0.1,despair=0.8}, message="With a defeated posture, {npc.heShe} seems to have surrendered {npc.himself} to the melancholy of despair. It's as if the weight of {npc.his} resistance has become too heavy to bear."},
+		{stats={tiredness=0.9,fear=0.7,brokenspirit=0.0}, message="Standing defiantly, {npc.heShe} glares at you, {npc.his} spirit unbroken despite the evident fatigue. Fear lingers in the air, but {npc.heShe} remains resolute, refusing to succumb to the exhaustion."},
+		{stats={love=1.0,trust=0.1,fear=0.8}, message="Despite the overwhelming love in {npc.his} eyes, a sense of unease is palpable. It's clear that trust is lacking, overshadowed by an undercurrent of fear that strains the connection between you and {npc.him}."},
+		{stats={brokenspirit=0.0,trust=0.2,spoiling=0.9}, message="{npc.HeShe} stands tall with an unyielding spirit, but there's a subtle hint of spoiled defiance. Trust is strained, and the spark of rebellion lingers beneath the surface."},
+		{stats={obedience=0.9,love=0.3,despair=0.4,tiredness=0.8}, message="With a weariness in {npc.his} eyes, {npc.heShe} obediently awaits your command. The love is there, but despair and exhaustion cast a shadow, making the connection seem more like a duty than a desire."},
+		{stats={brokenspirit=0.0,despair=0.9,fear=0.5,trust=0.1}, message="Defiance burns bright in {npc.his} eyes, yet there's a flicker of despair. Fear intertwines with the resistance, and trust seems all but shattered in the dark tapestry of your dynamic."},
+		{stats={obedience=1.0,love=1.0,brokenspirit=1.0}, message="{npc.HeShe} stands before you with unwavering obedience, {npc.his} eyes filled with an intense, pure love. There's no trace of resistance in {npc.his} spirit; it's as if {npc.heShe} willingly surrenders {npc.himself} completely to your desires. The atmosphere is charged with devotion, creating a connection that transcends the boundaries of mere dominance and submission."},
+		#{stats={love=0.0}, message=""},
+	]
+	
+	var mainStats = {
+		obedience = obedience, love = love, brokenspirit = brokenspirit,
+	}
+	var supportStats = {
+		awareness = awareness, trust = trust, despair = despair, spoiling = spoiling, tiredness=getTiredEffect(), fear = fear,
+	}
+	
+	var highestScore = 0.0
+	var bestMessage = "Error, something went wrong"
+	
+	for dbEntry in db:
+		var mainDistance = 0.0
+		var supportDistance = 0.0
+		var missingStatsDistance = 0.0
+		
+		var foundMainStats = 0
+		var foundSupportStats = 0
+		var theStats = dbEntry["stats"]
+		for stat in theStats:
+			if(mainStats.has(stat)):
+				var distance = abs(mainStats[stat] - theStats[stat])
+				mainDistance += 1.0 - distance
+				foundMainStats += 1
+			elif(supportStats.has(stat)):
+				var distance = abs(supportStats[stat] - theStats[stat])
+				supportDistance += 1.0 - distance
+				foundSupportStats += 1
+		
+		missingStatsDistance = Util.maxi(0, mainStats.size() - foundMainStats) * 2.0 + Util.maxi(0, supportStats.size() - foundSupportStats) * 1.0
+		
+		var finalScore = mainDistance*2.0/(foundMainStats+1) + supportDistance*1.0/(foundSupportStats+1) - missingStatsDistance*0.1
+		
+		if(finalScore > highestScore):
+			highestScore = finalScore
+			bestMessage = dbEntry["message"]
+	
+	return bestMessage

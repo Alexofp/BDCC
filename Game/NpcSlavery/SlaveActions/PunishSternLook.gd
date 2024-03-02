@@ -7,6 +7,9 @@ func _init():
 	#sceneID = "MeScene"
 	#endsTalkScene = true
 	slaveResistChanceMult = 0.2
+	
+	buttonPriority = 90
+	rewardHint = -1
 
 func getVisibleName():
 	return "Stern look"

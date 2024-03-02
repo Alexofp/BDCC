@@ -7,6 +7,9 @@ func _init():
 	#sceneID = "MeScene"
 	#endsTalkScene = true
 	slaveResistChanceMult = 0.6
+	
+	buttonPriority = 80
+	rewardHint = -2
 
 func getVisibleName():
 	return "Spank"
@@ -22,3 +25,6 @@ func doActionSimple(_slaveID, _extraSlavesIDs = {}):
 	return {
 		text = "You spank "+character.getName()+"'s butt!",
 	}
+
+func getAnimationInfo(_slaveID, _extraSlavesIDs = {}):
+	return [StageScene.Spanking, "spankonce", {pc="pc", npc=_slaveID}]
