@@ -5,6 +5,7 @@ func getFlags():
 		"slavesSpace": flag(FlagType.Number),
 		
 		"hasSybian": flag(FlagType.Bool),
+		"hasWoodenHorse": flag(FlagType.Bool),
 		
 	}
 

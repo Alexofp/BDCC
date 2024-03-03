@@ -130,3 +130,6 @@ func playAnimation(_slaveID, _extraSlavesIDs = {}):
 		GM.main.playAnimation(animInfo[0], animInfo[1], animInfo[2])
 	else:
 		GM.main.playAnimation(animInfo[0], animInfo[1])
+
+func getFlag(flagID, defaultValue = null):
+	return GM.main.getFlag(flagID, defaultValue)

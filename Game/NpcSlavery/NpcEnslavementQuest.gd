@@ -72,3 +72,37 @@ func handleSexEvent(sexEvent:SexEvent):
 	var theChar = getChar()
 	for task in tasks:
 		task.onSexEvent(theChar, sexEvent)
+
+func clearTasks():
+	tasks = []
+
+func saveData():
+	var data = {
+		"slaveType": slaveType,
+		"canEnslaveReminded": canEnslaveReminded,
+	}
+	var tasksData = []
+	for task in tasks:
+		var taskData = {
+			"id": task.id,
+			"data": task.saveData()
+		}
+		tasksData.append(taskData)
+	data["tasks"] = tasksData
+	
+	return data
+
+func loadData(data):
+	slaveType = SAVE.loadVar(data, "slaveType", SlaveType.Slut)
+	canEnslaveReminded = SAVE.loadVar(data, "canEnslaveReminded", false)
+	
+	clearTasks()
+	var tasksData = SAVE.loadVar(data, "tasks", [])
+	for taskData in tasksData:
+		var taskID = SAVE.loadVar(taskData, "id", "")
+		var taskObj:NpcBreakTaskBase = GlobalRegistry.createSlaveBreakTask(taskID)
+		if(taskObj == null):
+			continue
+		taskObj.loadData(SAVE.loadVar(taskData, "data", {}))
+		var _ok = taskObj.connect("onTaskCompleted", self, "onBreakTaskCompleted")
+		tasks.append(taskObj)

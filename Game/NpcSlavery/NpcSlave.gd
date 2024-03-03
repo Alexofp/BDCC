@@ -775,13 +775,16 @@ func getPerfectIdleMessage():
 		{stats={obedience=0.0,love=0.0,brokenspirit=0.0}, notblind=true, message="{npc.HeShe} glares defiantly at you, a spark of rebellion in {npc.hisHer} eyes. {npc.HisHer} posture exudes resistance, {npc.hisHer} body language challenging your authority at every turn. It's clear that {npc.heShe} despises being under your control."},
 		{stats={obedience=0.1,love=1.0,brokenspirit=1.0}, message="{npc.HeShe} gazes at you with adoration, love radiating from {npc.hisHer} every glance. {npc.HisHer} stance is submissive, almost vulnerable, as if {npc.heShe} would do anything to please you and bask in your affection."},
 		{stats={obedience=1.0,love=0.1,trust=0.5}, message="{npc.HeShe} stands before you with unwavering obedience, {npc.his} eyes reflecting complete submission. There's a noticeable lack of affection, only a cold compliance."},
-		{stats={obedience=0.3,brokenspirit=0.1,despair=0.8}, message="With a defeated posture, {npc.heShe} seems to have surrendered {npc.himself} to the melancholy of despair. It's as if the weight of {npc.his} resistance has become too heavy to bear."},
 		{stats={tiredness=0.9,fear=0.7,brokenspirit=0.0}, message="Standing defiantly, {npc.heShe} glares at you, {npc.his} spirit unbroken despite the evident fatigue. Fear lingers in the air, but {npc.heShe} remains resolute, refusing to succumb to the exhaustion."},
 		{stats={love=1.0,trust=0.1,fear=0.8}, message="Despite the overwhelming love in {npc.his} eyes, a sense of unease is palpable. It's clear that trust is lacking, overshadowed by an undercurrent of fear that strains the connection between you and {npc.him}."},
-		{stats={brokenspirit=0.0,trust=0.2,spoiling=0.9}, message="{npc.HeShe} stands tall with an unyielding spirit, but there's a subtle hint of spoiled defiance. Trust is strained, and the spark of rebellion lingers beneath the surface."},
 		{stats={obedience=0.9,love=0.3,despair=0.4,tiredness=0.8}, message="With a weariness in {npc.his} eyes, {npc.heShe} obediently awaits your command. The love is there, but despair and exhaustion cast a shadow, making the connection seem more like a duty than a desire."},
-		{stats={brokenspirit=0.0,despair=0.9,fear=0.5,trust=0.1}, message="Defiance burns bright in {npc.his} eyes, yet there's a flicker of despair. Fear intertwines with the resistance, and trust seems all but shattered in the dark tapestry of your dynamic."},
-		{stats={obedience=1.0,love=1.0,brokenspirit=1.0}, message="{npc.HeShe} stands before you with unwavering obedience, {npc.his} eyes filled with an intense, pure love. There's no trace of resistance in {npc.his} spirit; it's as if {npc.heShe} willingly surrenders {npc.himself} completely to your desires. The atmosphere is charged with devotion, creating a connection that transcends the boundaries of mere dominance and submission."},
+		{stats={love=1.0,obedience=1.0,brokenspirit=1.0}, message="{npc.HeShe} looks at you with both love and unwavering obedience. There's no hint of resistance, just a display of complete surrender."},
+		{stats={obedience=1.0,love=0.0,trust=0.0}, message="{npc.HeShe} stands in a rigid, submissive posture, eyes downcast, hands clasped behind {npc.his} back. There's an unquestioning obedience in {npc.his} demeanor, yet the lack of trust manifests in the subtle tremble of {npc.his} fingers."},
+		{stats={obedience=0.3,love=1.0,fear=0.8}, message="Gazing at you with an intensity bordering on adoration, {npc.heShe} seems to be holding back tears. Love emanates from every pore, but there's an underlying fear, as if {npc.heShe} is afraid of shattering the fragile bond between you."},
+		{stats={brokenspirit=0.0,spoiling=0.7,awareness=0.9,fear=0.0}, message="Standing defiantly, {npc.heShe} locks eyes with you, a spark of rebellion gleaming beneath the surface. {npc.HeShe} seems acutely aware of every move you make, as if ready to challenge your dominance at any moment."},
+		{stats={obedience=0.3,love=0.8,spoiling=0.7}, message="Leaning slightly, {npc.HeShe} regards you with a mixture of affection and expectation. Love is present, but the subtle tilt of {npc.his} head and the glint in {npc.his} eyes suggest a desire for indulgence, as if {npc.heShe} expects you to cater to {npc.his} whims."},
+		{stats={brokenspirit=0.0,awareness=0.6,fear=0.6}, message="Eyes ablaze with defiance, {npc.heShe} stands tall, seemingly unyielding against your commands. There's a heightened awareness in {npc.his} gaze, as if {npc.heShe} is acutely attuned to every nuance of your presence."},
+		{stats={obedience=0.7,love=0.2,fear=0.8}, message="Avoiding your gaze, {npc.heShe} fidgets nervously, a mix of obedience and fear evident in {npc.his} demeanor. There's a hesitant submission, and the aura of tension suggests an anticipation of potential consequences for any misstep."},
 		#{stats={love=0.0}, message=""},
 	]
 	
@@ -792,8 +795,8 @@ func getPerfectIdleMessage():
 		awareness = awareness, trust = trust, despair = despair, spoiling = spoiling, tiredness=getTiredEffect(), fear = fear,
 	}
 	
-	var highestScore = 0.0
-	var bestMessage = "Error, something went wrong"
+	var highestScore = -100.0
+	var bestMessage = "Your slave stands still."
 	
 	for dbEntry in db:
 		var mainDistance = 0.0
