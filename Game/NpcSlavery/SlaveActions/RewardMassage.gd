@@ -47,3 +47,6 @@ func doActionSimple(_slaveID, _extraSlavesIDs = {}):
 
 func getAnimationInfo(_slaveID, _extraSlavesIDs = {}):
 	return [StageScene.Massage, "back", {pc="pc", npc=_slaveID, npcBodyState={naked=true}}]
+
+func getTimePass(_slaveID, _extraSlavesIDs = {}):
+	return 60*25

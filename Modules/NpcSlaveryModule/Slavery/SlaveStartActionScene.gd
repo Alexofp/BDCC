@@ -86,6 +86,19 @@ func _run():
 		
 		addButton("Continue", "See what happens next", "endthescene_happened")
 		
+		var theAction:SlaveActionBase = action
+		if(theAction != null):
+			var extraActions = theAction.getExtraActions(mainSlave, pickedSlaves)
+			for actionInfo in extraActions:
+				var args = []
+				if(actionInfo.has("args")):
+					args = actionInfo["args"]
+				var buttonChecks = []
+				if(actionInfo.has("buttonChecks")):
+					buttonChecks = actionInfo["buttonChecks"]
+				addButtonWithChecks(actionInfo["name"], actionInfo["desc"], "do_extra_action", [theAction, actionInfo, args], buttonChecks)
+
+		
 func _react(_action: String, _args):
 	if(_action == "endthescene_happened"):
 		endScene([false])
@@ -109,12 +122,21 @@ func _react(_action: String, _args):
 			endScene([action.endsTalkScene])
 			return
 		
-		var result = action.doActionSimple(mainSlave, pickedSlaves)
+		var result = action.doActionSimpleFinal(mainSlave, pickedSlaves)
 		if(result.has("text")):
 			resultText = result["text"]
 		else:
 			resultText = "An action happened!"
-		action.playAnimation(mainSlave, pickedSlaves)
+		#action.playAnimation(mainSlave, pickedSlaves)
+
+	if(_action == "do_extra_action"):
+		#var action:SlaveActionBase = _args[0]
+		var actionInfo = _args[1]
+		var theArgs = _args[2]
+		
+		endScene([true])
+		runScene(actionInfo["sceneID"], [mainSlave, pickedSlaves, theArgs])
+		return
 
 	setState(_action)
 

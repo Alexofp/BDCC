@@ -63,3 +63,6 @@ func getAnimationInfo(_slaveID, _extraSlavesIDs = {}):
 	if(npcSlavery.isActivelyResisting() || npcSlavery.isResistingSuperActively()):
 		return [StageScene.SybianOral, "hold", {npc="pc", pc=_slaveID, bodyState={naked=true,hard=true,leashedBy="pc"}}]
 	return [StageScene.SybianOral, "intense", {npc="pc", pc=_slaveID, bodyState={naked=true,hard=true,leashedBy="pc"}}]
+
+func getTimePass(_slaveID, _extraSlavesIDs = {}):
+	return 60*30

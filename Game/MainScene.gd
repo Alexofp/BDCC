@@ -1212,3 +1212,20 @@ func _on_GameUI_onDevComButton():
 	if(devCommentary == null || devCommentary == ""):
 		return
 	GM.ui.showDevCommentary(devCommentary)
+
+func setLocationName(locationName: String):
+	if(GM.pc.isBlindfolded()):
+		locationName = "???"
+	
+	GM.ui.setLocationName(locationName)
+
+func aimCamera(roomID: String):
+	GM.world.aimCamera(roomID)
+
+func aimCameraAndSetLocName(roomID: String):
+	GM.world.aimCamera(roomID)
+	
+	var room = GM.world.getRoomByID(roomID)
+	if(!room):
+		return
+	setLocationName(room.getName())

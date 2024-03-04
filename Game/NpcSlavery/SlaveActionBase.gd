@@ -111,6 +111,14 @@ func doActionSimple(_slaveID, _extraSlavesIDs = {}):
 		text = "You did something with "+str(_slaveID)+"!",
 	}
 
+func doActionSimpleFinal(_slaveID, _extraSlavesIDs = {}):
+	var actionLocation = getActionLocation(_slaveID, _extraSlavesIDs)
+	if(actionLocation != null):
+		GM.main.aimCameraAndSetLocName(actionLocation)
+	playAnimation(_slaveID, _extraSlavesIDs)
+	GM.main.processTime(getTimePass(_slaveID, _extraSlavesIDs))
+	return doActionSimple(_slaveID, _extraSlavesIDs)
+
 func reactSceneResult(_slaveID, _extraSlavesIDs = {}, _sceneResult = {}):
 	print("REACT SCENE RESULT")
 	return
@@ -133,3 +141,12 @@ func playAnimation(_slaveID, _extraSlavesIDs = {}):
 
 func getFlag(flagID, defaultValue = null):
 	return GM.main.getFlag(flagID, defaultValue)
+
+func getActionLocation(_slaveID, _extraSlavesIDs = {}):
+	return ""
+
+func getExtraActions(_slaveID, _extraSlavesIDs = {}):
+	return []
+
+func getTimePass(_slaveID, _extraSlavesIDs = {}):
+	return 60*10

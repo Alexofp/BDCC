@@ -4,6 +4,7 @@ class_name SlaveEventBase
 var id = "error"
 var eventWeight = 1.0
 var sceneID = ""
+var supportedActivities = [""]
 
 func canHappen(_npcSlavery:NpcSlave):
 	return false
@@ -27,3 +28,6 @@ func onEventSkipped(_npcSlavery:NpcSlave):
 
 func getEventWeight():
 	return eventWeight
+
+func supportsActivity(theActivityID):
+	return theActivityID in supportedActivities

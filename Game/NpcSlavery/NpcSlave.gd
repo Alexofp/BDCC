@@ -7,6 +7,8 @@ var slaveSpecializations = {
 	SlaveType.Slut: 0,
 }
 
+var activity
+
 var slaveLevel:int = 0
 var slaveExperience:int = 0
 
@@ -258,7 +260,7 @@ func onNewDay():
 	var possibleEventsWithWeights = []
 	for eventID in GlobalRegistry.getSlaveEvents():
 		var slaveEvent = GlobalRegistry.getSlaveEvent(eventID)
-		if(slaveEvent.canHappen(self) && slaveEvent.shouldHappen(self)):
+		if(slaveEvent.supportsActivity(getActivityID()) && slaveEvent.canHappen(self) && slaveEvent.shouldHappen(self)):
 			possibleEventsWithWeights.append([eventID, slaveEvent.getEventWeight()])
 	
 	if(possibleEventsWithWeights.size() > 0):
@@ -281,33 +283,37 @@ func onNewDay():
 		addBrokenSpirit(Util.distanceToHalfEased(getDespair())*(1.0+getAwareness())*0.02)
 		addAwareness(0.02)
 	
-	if(rewardBalance < 0):
-		addTrust(-rewardBalance * 0.04)
-	
 	fear = fear / (2.5+personalityScore({PersonalityStat.Coward:-1.0}))
 	if(fear < 0.02):
 		fear = 0.0
-	if(submitted):
-		despair = decayValue(despair, 0.05, personalityScore({
-			PersonalityStat.Naive: 1.0,
+	
+	if(activity == null || !activity.preventsStatsDecay()): # Stats decay happens here
+		if(rewardBalance < 0):
+			addTrust(-rewardBalance * 0.04)
+		if(submitted):
+			despair = decayValue(despair, 0.05, personalityScore({
+				PersonalityStat.Naive: 1.0,
+			}), 0.8)
+		else:
+			obedience = decayValue(obedience, 0.05, personalityScore({
+				PersonalityStat.Subby: -1.0,
+			}), 0.8)
+			brokenspirit = decayValue(brokenspirit, 0.05, personalityScore({
+				PersonalityStat.Coward: -0.7,
+				PersonalityStat.Naive: -0.5,
+				PersonalityStat.Subby: -1.0,
+				}))
+			love = decayValue(love, 0.03, personalityScore({
+				PersonalityStat.Mean: 1.0,
+				PersonalityStat.Impatient: 0.3,
+				PersonalityStat.Naive: -0.2,
+			}), 3.0)
+		spoiling = decayValue(spoiling, 0.05, personalityScore({
+			PersonalityStat.Brat: -1.0,
 		}), 0.8)
-	else:
-		obedience = decayValue(obedience, 0.05, personalityScore({
-			PersonalityStat.Subby: -1.0,
-		}), 0.8)
-		brokenspirit = decayValue(brokenspirit, 0.05, personalityScore({
-			PersonalityStat.Coward: -0.7,
-			PersonalityStat.Naive: -0.5,
-			PersonalityStat.Subby: -1.0,
-			}))
-		love = decayValue(love, 0.03, personalityScore({
-			PersonalityStat.Mean: 1.0,
-			PersonalityStat.Impatient: 0.3,
-			PersonalityStat.Naive: -0.2,
-		}), 3.0)
-	spoiling = decayValue(spoiling, 0.05, personalityScore({
-		PersonalityStat.Brat: -1.0,
-	}), 0.8)
+	
+	if(activity != null):
+		activity.onNewDay()
 	
 	rewardBalance = 0
 	punishmentsToday = 0
@@ -825,3 +831,29 @@ func getPerfectIdleMessage():
 			bestMessage = dbEntry["message"]
 	
 	return bestMessage
+
+func isDoingActivity():
+	return activity != null
+
+func getActivityID() -> String:
+	if(activity == null):
+		return ""
+	return activity.id
+
+func getActivity():
+	return activity
+
+func stopActivity():
+	if(activity != null):
+		activity.onEnd()
+	activity = null
+
+func startActivity(activID, args = []):
+	if(isDoingActivity()):
+		stopActivity()
+	var newActivity = GlobalRegistry.createSlaveActivity(activID)
+	if(newActivity == null):
+		return
+	newActivity.slavery = weakref(self)
+	newActivity.onStart(args)
+	activity = newActivity

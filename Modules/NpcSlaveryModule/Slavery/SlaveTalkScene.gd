@@ -8,6 +8,8 @@ var savedWantedToDo = ""
 var savedWantedToDoName = ""
 var savedWantedToDoArgs = []
 
+var lastActionID = ""
+
 func _init():
 	sceneID = "SlaveTalkScene"
 
@@ -33,12 +35,23 @@ func _run():
 			return
 		npcSlavery.checklevelUp()
 		
+		if(npcSlavery.isDoingActivity()):
+			var activity:SlaveActivityBase = npcSlavery.getActivity()
+			
+			if(activity.preventsNormalInteractions()):
+				addButtonAt(14, "Back", "Enough interactions", "endthescene")
+
+				saynn(activity.getActivityText())
+				
+				addActivityButtons()
+				return
+		
 		saynn(npc.getName()+" is a level "+str(npcSlavery.slaveLevel)+" {npc.slave}")
 		#saynn("{npc.He} {npc.isAre} standing still, {npc.his} collar leashed to the floor.")
 		saynn(npcSlavery.getPerfectIdleMessage())
 		
 		if(npcSlavery.getDespair() > 0.5):
-			saynn("{npc.name} looks pretty depressed.")
+			saynn("{npc.name} is feeling depressed. Perfect for breaking {npc.his} spirit but it might lead to {npc.him} snapping if you keep it up.")
 		elif(npcSlavery.getDespair() > 0.8):
 			saynn("[b]{npc.name} looks extremely depressed.[/b] {npc.He} {npc.isAre} close to snapping.")
 		
@@ -83,6 +96,15 @@ func _run():
 		addButton("Punish", "Show a list of punishments", "punishments_menu")
 		addButton("Activities", "See what else you can do with this slave", "actions_menu")
 		
+		if(npcSlavery.isDoingActivity()):
+			var activity:SlaveActivityBase = npcSlavery.getActivity()
+			
+			if(!activity.preventsNormalInteractions()):
+				var theText = activity.getActivityText()
+				if(theText != ""):
+					saynn(theText)
+				addActivityButtons()
+		
 	if(state == "actions_menu"):
 		saynn("What do you want to do with your slave?")
 		
@@ -111,6 +133,18 @@ func _run():
 		saynn(resultText)
 		
 		addButton("Continue", "See what happens next", "")
+
+		var theAction:SlaveActionBase = GlobalRegistry.getSlaveAction(lastActionID)
+		if(theAction != null):
+			var extraActions = theAction.getExtraActions(npcID, {})
+			for actionInfo in extraActions:
+				var args = []
+				if(actionInfo.has("args")):
+					args = actionInfo["args"]
+				var buttonChecks = []
+				if(actionInfo.has("buttonChecks")):
+					buttonChecks = actionInfo["buttonChecks"]
+				addButtonWithChecks(actionInfo["name"], actionInfo["desc"], "do_extra_action", [theAction, actionInfo, args], buttonChecks)
 
 	if(state == "do_train"):
 		saynn(resultText)
@@ -152,7 +186,24 @@ func _run():
 		saynn("You lost. Aw.")
 		
 		addButton("Never mind", "You don't want to fuck with them anymore", "forced_sex_let_resist")
+
+func addActivityButtons():
+	var npcSlavery:NpcSlave = npc.getNpcSlavery()
 		
+	if(npcSlavery.isDoingActivity()):
+		var activity:SlaveActivityBase = npcSlavery.getActivity()
+	
+		var extraActions = activity.getInteractActions()
+		for actionInfo in extraActions:
+			var args = []
+			if(actionInfo.has("args")):
+				args = actionInfo["args"]
+			var buttonChecks = []
+			if(actionInfo.has("buttonChecks")):
+				buttonChecks = actionInfo["buttonChecks"]
+			addButtonWithChecks(actionInfo["name"], actionInfo["desc"], "do_activity_action", [activity, actionInfo, args], buttonChecks)
+
+
 static func sortSlaveActions(a, b):
 	if a.buttonPriority > b.buttonPriority:
 		return true
@@ -239,12 +290,13 @@ func _react(_action: String, _args):
 			setState("")
 			return
 		# Simple action
-		var result = theAction.doActionSimple(npcID)
+		var result = theAction.doActionSimpleFinal(npcID)
 		if(result.has("text")):
 			resultText = result["text"]
 		else:
 			resultText = "An action happened!"
-		theAction.playAnimation(npcID, {})
+		lastActionID = theAction.id
+		#theAction.playAnimation(npcID, {})
 		setState("do_action")
 		return
 
@@ -265,6 +317,24 @@ func _react(_action: String, _args):
 		var result = npcSlavery.doTrain()
 		resultText = Util.join(result["texts"], "\n\n")
 		setState("do_train")
+		return
+
+	if(_action == "do_activity_action"):
+		#var action:SlaveActivityBase = _args[0]
+		var actionInfo = _args[1]
+		var theArgs = _args[2]
+		
+		endScene()
+		runScene(actionInfo["sceneID"], [npcID, {}, theArgs])
+		return
+
+	if(_action == "do_extra_action"):
+		#var action:SlaveActionBase = _args[0]
+		var actionInfo = _args[1]
+		var theArgs = _args[2]
+		
+		endScene()
+		runScene(actionInfo["sceneID"], [npcID, {}, theArgs])
 		return
 
 	if(_action == "forced_sex_startfight"):
@@ -352,6 +422,7 @@ func saveData():
 	data["savedWantedToDo"] = savedWantedToDo
 	data["savedWantedToDoName"] = savedWantedToDoName
 	data["savedWantedToDoArgs"] = savedWantedToDoArgs
+	data["lastActionID"] = lastActionID
 	
 	return data
 	
@@ -365,6 +436,7 @@ func loadData(data):
 	savedWantedToDo = SAVE.loadVar(data, "savedWantedToDo", "")
 	savedWantedToDoName = SAVE.loadVar(data, "savedWantedToDoName", "")
 	savedWantedToDoArgs = SAVE.loadVar(data, "savedWantedToDoArgs", null)
+	lastActionID = SAVE.loadVar(data, "lastActionID", "")
 
 func getDebugActions():
 	return [

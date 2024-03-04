@@ -275,21 +275,13 @@ func supportsSexEngine():
 	return false
 
 func setLocationName(locationName: String):
-	if(GM.pc.isBlindfolded()):
-		locationName = "???"
-	
-	GM.ui.setLocationName(locationName)
+	GM.main.setLocationName(locationName)
 
 func aimCamera(roomID: String):
-	GM.world.aimCamera(roomID)
+	GM.main.aimCamera(roomID)
 
 func aimCameraAndSetLocName(roomID: String):
-	GM.world.aimCamera(roomID)
-	
-	var room = GM.world.getRoomByID(roomID)
-	if(!room):
-		return
-	setLocationName(room.getName())
+	GM.main.aimCameraAndSetLocName(roomID)
 
 func getCharacter(charID: String) -> BaseCharacter:
 	return GlobalRegistry.getCharacter(charID)

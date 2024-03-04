@@ -49,3 +49,6 @@ func doActionSimple(_slaveID, _extraSlavesIDs = {}):
 
 func getAnimationInfo(_slaveID, _extraSlavesIDs = {}):
 	return [StageScene.WoodenHorseSolo, "struggle", {pc=_slaveID, bodyState={naked=true,hard=true}}]
+
+func getTimePass(_slaveID, _extraSlavesIDs = {}):
+	return 60*50

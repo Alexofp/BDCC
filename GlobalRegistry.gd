@@ -66,6 +66,7 @@ var slaveBreakTaskRefs: Dictionary = {}
 var slaveTypes: Dictionary = {}
 var slaveActions: Dictionary = {}
 var slaveEvents: Dictionary = {}
+var slaveActivities: Dictionary = {}
 
 var bodypartStorageNode
 
@@ -321,6 +322,7 @@ func registerEverything():
 	yield(get_tree(), "idle_frame")
 	
 	registerEventFolder("res://Events/Event/")
+	registerEventFolder("res://Game/NpcSlavery/SlaveActivitiesEvents/")
 	
 	emit_signal("loadingUpdate", 4.0/totalStages, "Scenes")
 	yield(get_tree(), "idle_frame")
@@ -380,6 +382,7 @@ func registerEverything():
 	registerSlaveTypeFolder("res://Game/NpcSlavery/SlaveType/")
 	registerSlaveActionFolder("res://Game/NpcSlavery/SlaveActions/")
 	registerSlaveEventFolder("res://Game/NpcSlavery/SlaveEvents/")
+	registerSlaveActivitiesFolder("res://Game/NpcSlavery/SlaveActivities/")
 	
 	emit_signal("loadingUpdate", 8.0/totalStages, "Sex scenes")
 	yield(get_tree(), "idle_frame")
@@ -1849,3 +1852,23 @@ func getSlaveEvent(id: String):
 
 func getSlaveEvents():
 	return slaveEvents
+
+
+
+func registerSlaveActivity(path: String):
+	var loadedClass = load(path)
+	var object = loadedClass.new()
+	
+	slaveActivities[object.id] = loadedClass
+
+func registerSlaveActivitiesFolder(folder: String):
+	var scripts = getScriptsInFolder(folder)
+	for scriptPath in scripts:
+		registerSlaveActivity(scriptPath)
+
+func createSlaveActivity(id: String):
+	if(slaveActivities.has(id)):
+		return slaveActivities[id].new()
+	else:
+		Log.printerr("ERROR: slave activity with the id "+id+" wasn't found")
+		return null
