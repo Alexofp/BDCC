@@ -2,13 +2,17 @@ extends SlaveEventBase
 
 func _init():
 	id = "TestEvent"
-	eventWeight = 0.0
+	eventWeight = 110.0
 
 func canHappen(_npcSlavery:NpcSlave):
 	return false
 
 func shouldHappenChance(_npcSlavery:NpcSlave):
-	return 0.0
+	return 100.0
+
+func supportsActivity(_theActivityID):
+	return true
+
 
 func runEvent(_npcSlavery:NpcSlave):
 	return {

@@ -217,6 +217,16 @@ func addButtonWithChecks(text: String, tooltip: String, method: String, args, ch
 			reasonText = "["+reasonText+"] "
 		addDisabledButton(text, ButtonChecks.getPrefix(checks) + reasonText +tooltip)
 
+func addButtonWithChecksAt(index:int, text: String, tooltip: String, method: String, args, checks: Array):
+	var badCheck = ButtonChecks.check(checks)
+	if(badCheck == null):
+		addButtonAt(index, text, ButtonChecks.getPrefix(checks) + tooltip, method, args)
+	else:
+		var reasonText = ButtonChecks.getReasonText(badCheck)
+		if(reasonText != ""):
+			reasonText = "["+reasonText+"] "
+		addDisabledButtonAt(index, text, ButtonChecks.getPrefix(checks) + reasonText +tooltip)
+
 func addTextbox(id):
 	return GM.ui.addUITextbox(id)
 

@@ -31,3 +31,6 @@ func getEventWeight():
 
 func supportsActivity(theActivityID):
 	return theActivityID in supportedActivities
+
+func getAnimInfo(_npcSlavery:NpcSlave):
+	return null

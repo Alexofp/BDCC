@@ -8,7 +8,7 @@ var colorPickerScene = preload("res://UI/ColorPickerWidget.tscn")
 var rememberedColor = Color.white
 
 func _initScene(_args = []):
-	npcID = _args[1]
+	npcID = _args[0]
 	npc = GlobalRegistry.getCharacter(npcID)
 
 func resolveCustomCharacterName(_charID):

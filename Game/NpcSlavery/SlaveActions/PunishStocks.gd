@@ -39,7 +39,6 @@ func doActionSimple(_slaveID, _extraSlavesIDs = {}):
 	
 	npcSlavery.handlePunishment(3)
 	npcSlavery.addTired(0.5)
-	npcSlavery.startActivity("StuckInStocks") # Temporary
 	return {
 		text = text,
 	}
@@ -58,7 +57,7 @@ func getExtraActions(_slaveID, _extraSlavesIDs = {}):
 		{
 			name = "Keep in stocks",
 			desc = "Keep your slave in the stocks",
-			sceneID = "MeScene",
+			sceneID = "PunishSlaveryLeaveInStocks",
 			args = [],
 			buttonChecks = [],
 		}

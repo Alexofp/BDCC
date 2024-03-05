@@ -16,30 +16,44 @@ func onEnd():
 func onNewDay():
 	pass
 
+func hoursPassed(_howMuch):
+	pass
+
 func preventsStatsDecay():
 	return false
 
 func preventsNormalInteractions():
 	return false
 
+func shouldTriggerEventsOnTalk():
+	return !preventsNormalInteractions()
+
 func getActivityText():
 	return "{npc.name} is doing something!"
 
 func getInteractActions():
 	return [
-		{
-			name = "Something",
-			desc = "ASD",
-			sceneID = "MeScene",
-			args = [],
-			buttonChecks = [],
-		}
+#		{
+#			name = "Something",
+#			desc = "ASD",
+#			sceneID = "MeScene",
+#			args = [],
+#			buttonChecks = [],
+#		}
 	]
+
+func getCustomInteractAnimInfo():
+	return null
 
 func getSlave() -> NpcSlave:
 	if(slavery == null):
 		return null
 	return slavery.get_ref()
+
+func getChar():
+	if(slavery == null):
+		return null
+	return slavery.get_ref().getChar()
 
 func saveData():
 	var data = {

@@ -180,6 +180,8 @@ func addFearUpToAPoint(howMuch:float, maxPoint:float):
 var submitted = false
 func hasSubmittedToPC():
 	return submitted
+func doSubmitToPC():
+	submitted = true
 
 # Daily vars
 var tiredness:float = 0 # The higher this is, the higher the chance of disobeying
@@ -565,6 +567,10 @@ func doTrain():
 	
 	return result
 
+func hoursPassed(_howMuch):
+	if(activity != null):
+		activity.hoursPassed(_howMuch)
+
 func getExperienceRequiredForNextLevel():
 	return 100
 
@@ -857,3 +863,5 @@ func startActivity(activID, args = []):
 	newActivity.slavery = weakref(self)
 	newActivity.onStart(args)
 	activity = newActivity
+
+

@@ -19,7 +19,7 @@ func _initScene(_args = []):
 		pickedSlaves = _args[2]
 	
 func _reactInit():
-	runScene(action.sceneID, [action, mainSlave, pickedSlaves], "slave_action")
+	runScene(action.sceneID, [mainSlave, pickedSlaves, action], "slave_action")
 	
 func _run():
 	if(state == ""):

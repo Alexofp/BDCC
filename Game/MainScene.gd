@@ -569,6 +569,12 @@ func hoursPassed(howMuch):
 		var character = getCharacter(characterID)
 		if(character != null):
 			character.hoursPassed(howMuch)
+	
+	if(dynamicCharactersPools.has(CharacterPool.Slaves)):
+		for characterID in dynamicCharactersPools[CharacterPool.Slaves]:
+			var character = getCharacter(characterID)
+			if(character != null && character.isSlaveToPlayer()):
+				character.getNpcSlavery().hoursPassed(howMuch)
 
 func processTimeUntil(newseconds):
 	if(timeOfDay >= newseconds):

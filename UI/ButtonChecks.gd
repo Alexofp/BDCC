@@ -33,6 +33,7 @@ enum {
 	HasBreastPump,
 	HasPenisPump,
 	NotWearingItem,
+	CanStartSex,
 }
 
 static func getReasonText(reason):
@@ -100,6 +101,8 @@ static func getReasonText(reason):
 		return "You don't have any penis pumps in your inventory"
 	if(reason == NotWearingItem):
 		return "You need to get rid of "+GlobalRegistry.getItemRef(args[1]).getVisibleName()
+	if(reason == CanStartSex):
+		return "You can't start sex while you are wearing restraints"
 	return "Error?"
 
 static func check(checks: Array):
@@ -204,6 +207,15 @@ static func check(checks: Array):
 		if(reason == NotWearingItem):
 			if(GM.pc.getInventory().hasItemIDEquipped(args[1])):
 				return args
+		if(reason == CanStartSex):
+			if(GM.pc.hasBoundArms()):
+				return NotArmsRestrained
+			if(GM.pc.hasBlockedHands()):
+				return NotHandsBlocked
+			if(GM.pc.hasBoundLegs()):
+				return NotLegsRestrained
+			if(GM.pc.isOralBlocked()):
+				return NotOralBlocked
 			
 	return null
 

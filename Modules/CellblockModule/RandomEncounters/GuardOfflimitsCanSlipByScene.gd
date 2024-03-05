@@ -208,7 +208,7 @@ func _run():
 		
 		saynn("{npc.He} is blushing a lot, you can just leave {npc.him} like that or have some fun.")
 		
-		addButtonWithChecks("Sex!", "Time to fuck them", "startsexasdom", [], [ButtonChecks.NotArmsRestrained, ButtonChecks.NotHandsBlocked, ButtonChecks.NotLegsRestrained, ButtonChecks.NotOralBlocked])
+		addButtonWithChecks("Sex!", "Time to fuck them", "startsexasdom", [], [ButtonChecks.CanStartSex])
 		addButton("Leave", "Just leave before anyone else sees you", "endthescene")
 		
 	if(state == "cuff_fail"):
@@ -265,7 +265,7 @@ func _run():
 		
 		saynn("{npc.He} is still resisting a lot. You can just leave {npc.him} like that or have some fun.")
 		
-		addButtonWithChecks("Sex!", "Time to fuck them", "startsexasdom", [], [ButtonChecks.NotArmsRestrained, ButtonChecks.NotHandsBlocked, ButtonChecks.NotLegsRestrained, ButtonChecks.NotOralBlocked])
+		addButtonWithChecks("Sex!", "Time to fuck them", "startsexasdom", [], [ButtonChecks.CanStartSex])
 		addButton("Leave", "Just leave before anyone else sees you", "endthescene")
 	
 	if(state == "if_lost"):
@@ -302,7 +302,7 @@ func _run():
 		
 func addWonButton(sextext = "Sex!", sexdesc = "Time to fuck them!"):
 	addButton("Leave", "Just leave before anyone else sees you", "endthescene")
-	addButtonWithChecks(sextext, sexdesc, "startsexasdom", [], [ButtonChecks.NotArmsRestrained, ButtonChecks.NotHandsBlocked, ButtonChecks.NotLegsRestrained, ButtonChecks.NotOralBlocked])
+	addButtonWithChecks(sextext, sexdesc, "startsexasdom", [], [ButtonChecks.CanStartSex])
 	addButton("Submit to", "Let them have it their way with you", "startsexsubby")
 	addButton("Inventory", "Look at your inventory", "openinventory")
 	if(GM.pc.getInventory().hasRemovableRestraints()):

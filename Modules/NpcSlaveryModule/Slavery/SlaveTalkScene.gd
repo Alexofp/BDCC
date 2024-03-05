@@ -26,7 +26,6 @@ func _run():
 	if(state == ""):
 		aimCameraAndSetLocName(GM.pc.getLocation())
 		addCharacter(npcID)
-		playAnimation(StageScene.Duo, "stand", {npc=npcID, npcBodyState={chains=[["normal", "neck", "scene", "floor"]]} })
 		
 		var npcSlavery:NpcSlave = npc.getNpcSlavery()
 		if(npcSlavery == null):
@@ -38,6 +37,12 @@ func _run():
 		if(npcSlavery.isDoingActivity()):
 			var activity:SlaveActivityBase = npcSlavery.getActivity()
 			
+			var animInfo = activity.getCustomInteractAnimInfo()
+			if(animInfo != null):
+				playAnimation(animInfo[0], animInfo[1], animInfo[2])
+			else:
+				playAnimation(StageScene.Duo, "stand", {npc=npcID, npcBodyState={chains=[["normal", "neck", "scene", "floor"]]} })
+			
 			if(activity.preventsNormalInteractions()):
 				addButtonAt(14, "Back", "Enough interactions", "endthescene")
 
@@ -45,6 +50,8 @@ func _run():
 				
 				addActivityButtons()
 				return
+		else:
+			playAnimation(StageScene.Duo, "stand", {npc=npcID, npcBodyState={chains=[["normal", "neck", "scene", "floor"]]} })
 		
 		saynn(npc.getName()+" is a level "+str(npcSlavery.slaveLevel)+" {npc.slave}")
 		#saynn("{npc.He} {npc.isAre} standing still, {npc.his} collar leashed to the floor.")
@@ -87,7 +94,7 @@ func _run():
 			sayn(""+slaveType.getVisibleName()+": "+gradeLetter)
 		sayn("")
 		
-		addButtonAt(13, "Forced sex", "Start sex with your slave", "do_forced_sex")
+		addButtonWithChecksAt(13, "Forced sex", "Start sex with your slave", "do_forced_sex", [], [ButtonChecks.CanStartSex])
 		addButtonAt(14, "Back", "Enough interactions", "endthescene")
 		
 		addButton("Talk", "Tell something to your slave", "talk_menu")
@@ -173,7 +180,7 @@ func _run():
 	if(state == "won_forcedsex"):
 		saynn("You won!")
 		
-		addButton("Fuck them", "Do what you wanted to do with them", "start_forced_sex_forced")
+		addButtonWithChecks("Fuck them", "Do what you wanted to do with them", "start_forced_sex_forced", [], [ButtonChecks.CanStartSex])
 		addButton("Never mind", "You don't want to fuck them anymore", "")
 	
 	if(state == "won_resistaction"):
