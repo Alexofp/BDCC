@@ -7,6 +7,8 @@ func getFlags():
 		"hasSybian": flag(FlagType.Bool),
 		"hasWoodenHorse": flag(FlagType.Bool),
 		
+		
+		"debugSlaveInfo": flag(FlagType.Bool),
 	}
 
 func _init():

@@ -41,6 +41,11 @@ func _reactInit():
 					resultText = "Something happened!"
 				setState("")
 				savedCharID = character.getID()
+				
+				var animInfo = slaveEvent.getAnimInfo(npcSlavery)
+				if(animInfo != null):
+					playAnimation(animInfo[0], animInfo[1], animInfo[2])
+				
 				return
 	
 func _run():

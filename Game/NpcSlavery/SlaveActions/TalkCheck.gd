@@ -20,10 +20,22 @@ func doActionSimple(_slaveID, _extraSlavesIDs = {}):
 	theTexts.append("You ask {npc.name} what's on {npc.his} mind.")
 	
 	var slaveWords = []
-	if(npcSlavery.isResistingSuperActively()):
+	if(npcSlavery.isMindBroken()):
 		slaveWords.append(RNG.pick([
-			"Fuck you, I won't tell you shit. Let me go now!",
+			"...",
+			"... ..",
+			"... .. h..",
+			"... nothing..",
 			]))
+	elif(npcSlavery.isResistingSuperActively()):
+		if(npcSlavery.personalityScore({PersonalityStat.Mean: 1.0}) > 0.3):
+			slaveWords.append(RNG.pick([
+				"Fuck you, I won't tell you shit. Let me go now!",
+				]))
+		else:
+			slaveWords.append(RNG.pick([
+				"I don't want to be here. Don't touch me. Let me go..",
+				]))
 	else:
 		var obedience = npcSlavery.getObedience()
 		var brokenSpirit = npcSlavery.getBrokenSpirit()

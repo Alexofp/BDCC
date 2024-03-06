@@ -64,3 +64,13 @@ func removeRandomRestraints(character:BaseCharacter, removedRestraintsChance = 1
 				howManyRemoved += 1
 	
 	return howManyRemoved
+
+func getAnimInfo(_npcSlavery:NpcSlave):
+	var possibleAnims = ["struggle"]
+	
+	if(_npcSlavery.getChar().isGagged() || _npcSlavery.getChar().isMuzzled()):
+		possibleAnims.append("struggle_gag")
+	if(_npcSlavery.getChar().hasBoundLegs()):
+		possibleAnims.append("struggle_legs")
+	
+	return [StageScene.Duo, "stand", {npc=_npcSlavery.getChar().getID(), npcAction=RNG.pick(possibleAnims)}]

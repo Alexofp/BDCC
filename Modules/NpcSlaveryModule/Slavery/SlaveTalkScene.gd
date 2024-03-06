@@ -53,21 +53,30 @@ func _run():
 		else:
 			playAnimation(StageScene.Duo, "stand", {npc=npcID, npcBodyState={chains=[["normal", "neck", "scene", "floor"]]} })
 		
-		saynn(npc.getName()+" is a level "+str(npcSlavery.slaveLevel)+" {npc.slave}")
+		saynn(npc.getName()+" is a level "+str(npcSlavery.slaveLevel)+" {npc.slave} ("+npcSlavery.getExperienceStr()+" exp)")
 		#saynn("{npc.He} {npc.isAre} standing still, {npc.his} collar leashed to the floor.")
 		saynn(npcSlavery.getPerfectIdleMessage())
 		
-		if(npcSlavery.getDespair() > 0.5):
-			saynn("{npc.name} is feeling depressed. Perfect for breaking {npc.his} spirit but it might lead to {npc.him} snapping if you keep it up.")
-		elif(npcSlavery.getDespair() > 0.8):
-			saynn("[b]{npc.name} looks extremely depressed.[/b] {npc.He} {npc.isAre} close to snapping.")
+		if(!npcSlavery.isMindBroken()):
+			if(npcSlavery.getDespair() > 0.5):
+				saynn("{npc.name} is feeling depressed. Perfect for breaking {npc.his} spirit but it might lead to {npc.him} snapping if you keep it up.")
+			elif(npcSlavery.getDespair() > 0.8):
+				saynn("[b]{npc.name} looks extremely depressed.[/b] {npc.He} {npc.isAre} close to snapping.")
+			
+			if(npcSlavery.getWorkEfficiency() < 0.2):
+				saynn("{npc.name} looks very tired.")
+			
+			if(npcSlavery.getObedience() < 0.9 && npc.getInventory().hasRemovableRestraints()):
+				var restraintAmount = npc.getInventory().getEquppedRemovableRestraints().size()
+				if(restraintAmount > 0):
+					if(npcSlavery.getAwareness() < 0.8):
+						saynn("{npc.He} {npc.isAre} wearing "+str(restraintAmount)+" restraint"+("s" if restraintAmount != 1 else "")+" which will help {npc.him} understand {npc.his} place.")
+					else:
+						saynn("{npc.He} {npc.isAre} wearing "+str(restraintAmount)+" restraint"+("s" if restraintAmount != 1 else "")+" which helps remind {npc.him} of {npc.his} place.")
+			
+			saynn("{npc.name} "+npcSlavery.getRewardBalanceString())
 		
-		if(npcSlavery.getWorkEfficiency() < 0.2):
-			saynn("{npc.name} looks very tired.")
-		
-		saynn(npcSlavery.getRewardBalanceString())
-		
-		if(true):
+		if(getFlag("NpcSlaveryModule.debugSlaveInfo", false)):
 			sayn("[b]DEBUG INFO:[/b]")
 			saynn(npcSlavery.getDebugInfo())
 			
@@ -94,7 +103,12 @@ func _run():
 			sayn(""+slaveType.getVisibleName()+": "+gradeLetter)
 		sayn("")
 		
-		addButtonWithChecksAt(13, "Forced sex", "Start sex with your slave", "do_forced_sex", [], [ButtonChecks.CanStartSex])
+		if(npcSlavery.isReadyToBeLeveledUp()):
+			sayn("In order to level {npc.name} up to slave level "+str(npcSlavery.getLevel()+1)+", make these things happen to {npc.him}:")
+			sayn(npcSlavery.getLevelUpHintText())
+			saynn("Leveling your slave up makes training {npc.him} easier and also unlocks new actions.")
+		
+		addButtonWithChecksAt(13, "Forced sex" if npcSlavery.isActivelyResisting() else "Sex", "Start sex with your slave", "do_forced_sex", [], [ButtonChecks.CanStartSex])
 		addButtonAt(14, "Back", "Enough interactions", "endthescene")
 		
 		addButton("Talk", "Tell something to your slave", "talk_menu")
@@ -320,9 +334,11 @@ func _react(_action: String, _args):
 			return
 		
 	if(_action == "do_train" || _action == "do_train_noresist"):
+		processTime(30*60)
 		var npcSlavery:NpcSlave = npc.getNpcSlavery()
 		var result = npcSlavery.doTrain()
 		resultText = Util.join(result["texts"], "\n\n")
+		
 		setState("do_train")
 		return
 
@@ -459,6 +475,12 @@ func getDebugActions():
 			"args": [
 			],
 		},
+		{
+			"id": "toggleDebug",
+			"name": "Toggle Debug Info",
+			"args": [
+			],
+		},
 	]
 
 func doDebugAction(_id, _args = {}):
@@ -467,4 +489,6 @@ func doDebugAction(_id, _args = {}):
 		npcSlavery.doLevelup()
 	if(_id == "skillLevelup"):
 		npcSlavery.levelupCurrentSpecialization()
+	if(_id == "toggleDebug"):
+		setFlag("NpcSlaveryModule.debugSlaveInfo", !getFlag("NpcSlaveryModule.debugSlaveInfo", false))
 		

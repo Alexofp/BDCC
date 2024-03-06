@@ -31,3 +31,17 @@ func getFailedTrainTextWeak(_npc):
 
 func getFailedTrainTextBad(_npc):
 	return "{npc.name} is doing a poor job following your lesson."
+
+func getUnlockHints(_npc):
+	return [
+#		{
+#			unlocksAt = 1,
+#			name = "Cuteness",
+#			text = "You unlocked cuteness!!!",
+#		},
+#		{
+#			unlocksAt = 13,
+#			name = "Cuteness V2",
+#			text = "You unlocked cuteness EVEN MORE!!!",
+#		}
+	]

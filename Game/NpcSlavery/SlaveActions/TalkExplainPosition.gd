@@ -6,6 +6,7 @@ func _init():
 	#extraSlaves = {}
 	#sceneID = ""
 	slaveResistChanceMult = 0.05
+	buttonPriority = 80
 
 func getVisibleName():
 	return "Explain position"
@@ -19,8 +20,8 @@ func doActionSimple(_slaveID, _extraSlavesIDs = {}):
 	var theTexts = []
 	theTexts.append("You explain {npc.name} {npc.his} position. You tell {npc.him} that {npc.he} {npc.isAre} now yours and there is nothing {npc.he} can do about it.")
 	
-	if(npcSlavery.explainedPositionToday >= 1):
-		theTexts.append("It didn't have much effect on {npc.him}. {npc.He} heard it today already.")
+	if(npcSlavery.getTalkedTimesToday() >= 2):
+		theTexts.append("It didn't have much effect on {npc.him}. {npc.He} heard you too many times today already.")
 	else:
 		var awareness = npcSlavery.getAwareness()
 		if(awareness > 0.7):
@@ -41,7 +42,7 @@ func doActionSimple(_slaveID, _extraSlavesIDs = {}):
 				npcSlavery.addAwareness(0.05)
 				theTexts.append("{npc.He} listens you quietly. Looks like {npc.he} starts to understand {npc.his} position better.")
 		
-	npcSlavery.explainedPositionToday += 1
+	npcSlavery.didTalkWithToday()
 	return {
 		text = Util.join(theTexts, "\n\n"),
 	}

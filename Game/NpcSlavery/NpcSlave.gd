@@ -17,6 +17,8 @@ var slaveExperience:int = 0
 # Increased by rewarding when rewards are needed
 var obedience = 0.0
 func getObedience() -> float:
+	if(isMindBroken()):
+		return 1.0
 	return obedience
 func addObedienceRaw(howMuch:float):
 	obedience += howMuch
@@ -41,6 +43,8 @@ func addObedience(howMuch:float):
 # Increased by doing things that the npc doesn't like
 var brokenspirit = 0.0
 func getBrokenSpirit() -> float:
+	if(isMindBroken()):
+		return 1.0
 	return brokenspirit
 func addBrokenSpiritRaw(howMuch:float):
 	brokenspirit += howMuch
@@ -64,6 +68,8 @@ func addBrokenSpirit(howMuch:float):
 # Increased by giving gifts?
 var love = 0.0
 func getLove() -> float:
+	if(isMindBroken()):
+		return 0.0
 	return love
 func addLoveRaw(howMuch:float):
 	love += howMuch
@@ -90,6 +96,8 @@ func addLove(howMuch:float):
 # Decreased by rewarding
 var despair = 0.0
 func getDespair() -> float:
+	if(isMindBroken()):
+		return 1.0
 	return despair
 func addDespairRaw(howMuch:float):
 	despair += howMuch
@@ -113,6 +121,8 @@ func addDespair(howMuch:float):
 # 0.0 = I'm not a slave!
 var awareness = 0.0
 func getAwareness() -> float:
+	if(isMindBroken()):
+		return 1.0
 	return awareness
 func addAwarenessRaw(howMuch:float):
 	awareness += howMuch
@@ -132,6 +142,8 @@ func addAwareness(howMuch:float):
 # Decreased by doing bad things that they don't like?
 var trust = 0.0
 func getTrust() -> float:
+	if(isMindBroken()):
+		return 1.0
 	return trust
 func addTrustRaw(howMuch:float):
 	trust += howMuch
@@ -148,6 +160,8 @@ func addTrust(howMuch:float):
 # Increased by rewarding too much
 var spoiling = 0.0
 func getSpoiling() -> float:
+	if(isMindBroken()):
+		return 0.0
 	return spoiling
 func addSpoilingRaw(howMuch:float):
 	spoiling += howMuch
@@ -160,6 +174,8 @@ func addSpoiling(howMuch:float):
 
 var fear = 0.0
 func getFear() -> float:
+	if(isMindBroken()):
+		return 0.0
 	return fear
 func addFearRaw(howMuch:float):
 	fear += howMuch
@@ -183,6 +199,17 @@ func hasSubmittedToPC():
 func doSubmitToPC():
 	submitted = true
 
+# Has the slave snapped
+# If broken, slaves becomes a doll
+var broken = false
+func isMindBroken():
+	return broken
+func doMindBreak():
+	broken = true
+func unMindBreak():
+	broken = false
+var brokenWarnings = 0 # Might use this as a warning?
+
 # Daily vars
 var tiredness:float = 0 # The higher this is, the higher the chance of disobeying
 func addTired(howMuch:float):
@@ -193,6 +220,8 @@ func addTired(howMuch:float):
 # If 0.0 = full of power
 # 0.0 - 0.9 = getting tired
 func getTiredEffect() -> float:
+	if(isMindBroken()):
+		return 0.6
 	if(tiredness <= 1.0):
 		return 0.0
 	if(tiredness >= 5.0):
@@ -212,7 +241,7 @@ var gotBeatenUpToday:bool = false
 var checkedOnSlaveToday:bool = false
 func markCheckedOnSlaveToday():
 	checkedOnSlaveToday = true
-var explainedPositionToday = 0
+var talkedTimesToday = 0
 
 var hasRandomEvent = false
 var randomEventWillHappenID = "" # submitBroken, submitLove, escaped, removedOneRestraint
@@ -225,9 +254,6 @@ signal onSlaveLevelup(npcSlave)
 
 func getDebugInfo():
 	var result = [
-		"Slave Type: "+str(slaveType),
-		"Level: "+str(slaveLevel),
-		"Experience: "+str(slaveExperience),
 		"Obedience: "+str(Util.roundF(getObedience(), 2)),
 		"Broken spirit: "+str(Util.roundF(getBrokenSpirit(), 2)),
 		"Love: "+str(Util.roundF(getLove(), 2)),
@@ -262,7 +288,7 @@ func onNewDay():
 	var possibleEventsWithWeights = []
 	for eventID in GlobalRegistry.getSlaveEvents():
 		var slaveEvent = GlobalRegistry.getSlaveEvent(eventID)
-		if(slaveEvent.supportsActivity(getActivityID()) && slaveEvent.canHappen(self) && slaveEvent.shouldHappen(self)):
+		if(slaveEvent.supportsActivity(getActivityID()) && slaveEvent.shouldHappenFinal(self)):
 			possibleEventsWithWeights.append([eventID, slaveEvent.getEventWeight()])
 	
 	if(possibleEventsWithWeights.size() > 0):
@@ -322,19 +348,19 @@ func onNewDay():
 	rewardsToday = 0
 	tiredness = 0
 	checkedOnSlaveToday = false
-	explainedPositionToday = 0
+	talkedTimesToday = 0
 
 func decayValue(theValue:float, howMuch:float, statModifier:float = 0.0, statEffect:float = 0.5) -> float:
 	return max(0.0, theValue - max(0.0, howMuch * (1.0 + clamp(statModifier, -1.0, 1.0)*statEffect)))
 
 func getRewardBalanceString():
 	if(rewardBalance == 0):
-		return "Doesn't deserve rewards or punishments"
+		return "doesn't deserve rewards or punishments"
 	if(rewardBalance > 0):
-		var rewardTexts = ["Deserves a small reward", "Deserves a normal reward", "Deserves a big reward", "Deserves the best reward"]
+		var rewardTexts = ["deserves a [b]small[/b] reward", "deserves a [b]normal[/b] reward", "deserves a [b]big[/b] reward", "deserves the [b]best[/b] reward"]
 		return rewardTexts[Util.mini(rewardBalance-1, rewardTexts.size()-1)]
 	else:
-		var punishText = ["Deserves a small punishment", "Deserves a normal punishment", "Deserves a big punishment", "Deserves the biggest punishment"]
+		var punishText = ["deserves a [b]small[/b] punishment", "deserves a [b]normal[/b] punishment", "deserves a [b]big[/b] punishment", "deserves the [b]biggest[/b] punishment"]
 		return punishText[Util.mini(-rewardBalance-1, punishText.size()-1)]
 		
 # 1 = small punishment
@@ -506,8 +532,11 @@ func getOverallObeyMood() -> float:
 func doTrain():
 	var currentSlaveType:SlaveTypeBase = GlobalRegistry.getSlaveType(slaveType)
 	
+	var currentSkillLevel = getCurrentSpecializationLevel()
+	
 	var texts = []
-	texts.append(currentSlaveType.getTrainText(getChar(), getCurrentSpecializationLevel()))
+	texts.append(currentSlaveType.getTrainText(getChar(), currentSkillLevel))
+	var extraTexts = []
 	
 	var isSuccess = true
 	var actuallyAddedSkill = false
@@ -552,9 +581,27 @@ func doTrain():
 				addObedience(0.01)
 				addLove(0.01)
 				addFear(-0.1)
-			
+	
+	var newSkillLevel = getCurrentSpecializationLevel()
+	var unlockedSomething = false
+	if(actuallyAddedSkill && newSkillLevel != currentSkillLevel):
+		var allUnlocks = currentSlaveType.getUnlockHints(getChar())
+		
+		for unlockInfo in allUnlocks:
+			if(unlockInfo["unlocksAt"] == newSkillLevel):
+				extraTexts.append("[i]"+unlockInfo["name"]+" unlocked! "+unlockInfo["text"]+"[/i]")
+				unlockedSomething = true
+	if(!unlockedSomething):
+		var allUnlocks = currentSlaveType.getUnlockHints(getChar())
+		for unlockInfo in allUnlocks:
+			if(unlockInfo["unlocksAt"] > newSkillLevel):
+				extraTexts.append("[i]Current rank is "+rankToLetter(newSkillLevel)+". Next unlock is "+unlockInfo["name"]+" at rank "+rankToLetter(unlockInfo["unlocksAt"])+"[/i]")
+				break
+	
+	texts.append_array(extraTexts)
 	
 	var result = {
+		actuallyAddedSkill = actuallyAddedSkill,
 		success = isSuccess,
 		texts = texts,
 	}
@@ -571,8 +618,22 @@ func hoursPassed(_howMuch):
 	if(activity != null):
 		activity.hoursPassed(_howMuch)
 
+static func getNextLevelExperienceForLevel(theLevel:int) -> int:
+	var baseExp = 100
+	var expMult = 1.1
+	
+	if(theLevel <= 0):
+		return baseExp
+	
+	var rawExp:float = float(baseExp) * pow(expMult, theLevel-1)
+	var nextLevelExp = int(((rawExp + 9) / 10) * 10)
+	return nextLevelExp
+
 func getExperienceRequiredForNextLevel():
-	return 100
+	return getNextLevelExperienceForLevel(slaveLevel)
+
+func getExperienceStr():
+	return str(slaveExperience) + "/" + str(getExperienceRequiredForNextLevel())
 
 func generateLevelUpTasks():
 	levelupTasks = NpcBreakTaskBase.generateTasksFor(getChar(), slaveType, 2, 1.0)
@@ -714,11 +775,15 @@ func isActivelyResisting():
 	# Temporary got shown their place
 	if(gotBeatenUpToday):
 		return false
+	if(isMindBroken()):
+		return false
 	return getResistScoreUnclamped() >= 0.5 || getBratScore() >= 0.5
 
 func isResistingSuperActively():
 	# Temporary got shown their place
 	if(gotBeatenUpToday):
+		return false
+	if(isMindBroken()):
 		return false
 	return getResistScoreUnclamped() > 1.0
 
@@ -782,6 +847,9 @@ func learnNewSkill(theSlaveType):
 		slaveSpecializations[theSlaveType] = 0
 
 func getPerfectIdleMessage():
+	if(isMindBroken()):
+		return "{npc.He} stands still, {npc.his} stare blank.."
+	
 	var db = [
 		{stats={obedience=1.0,love=0.0,brokenspirit=1.0}, notblind=true, message="{npc.HeShe} stands perfectly still, eyes locked onto you with unwavering obedience. There's an unsettling lack of emotion in {npc.hisHer} gaze, as if {npc.heShe} exists solely to fulfill your commands."},
 		{stats={obedience=0.0,love=0.0,brokenspirit=0.0}, notblind=true, message="{npc.HeShe} glares defiantly at you, a spark of rebellion in {npc.hisHer} eyes. {npc.HisHer} posture exudes resistance, {npc.hisHer} body language challenging your authority at every turn. It's clear that {npc.heShe} despises being under your control."},
@@ -864,4 +932,124 @@ func startActivity(activID, args = []):
 	newActivity.onStart(args)
 	activity = newActivity
 
+func didTalkWithToday():
+	talkedTimesToday += 1
 
+func getTalkedTimesToday() -> int:
+	return talkedTimesToday
+
+func getLevelUpHintText():
+	var result = []
+	
+	for task in levelupTasks:
+		var taskString = task.getTaskString()
+		result.append("[b]"+str(taskString)+"[/b]")
+		
+		var hintString = task.getTaskHint()
+		if(hintString != null && hintString != ""):
+			result.append(" - "+hintString)
+	
+	return Util.join(result, "\n")
+
+
+func saveData():
+	var data = {
+		"slaveType": slaveType,
+		"slaveSpecializations": slaveSpecializations,
+		"slaveLevel": slaveLevel,
+		"slaveExperience": slaveExperience,
+		"obedience": obedience,
+		"brokenspirit": brokenspirit,
+		"love": love,
+		"despair": despair,
+		"awareness": awareness,
+		"trust": trust,
+		"spoiling": spoiling,
+		"fear": fear,
+		"submitted": submitted,
+		"tiredness": tiredness,
+		"rewardBalance": rewardBalance,
+		"punishmentsToday": punishmentsToday,
+		"rewardsToday": rewardsToday,
+		"gotBeatenUpToday": gotBeatenUpToday,
+		"checkedOnSlaveToday": checkedOnSlaveToday,
+		"talkedTimesToday": talkedTimesToday,
+		"hasRandomEvent": hasRandomEvent,
+		"randomEventWillHappenID": randomEventWillHappenID,
+		"readyForLevelup": readyForLevelup,
+		"broken": broken,
+		"brokenWarnings": brokenWarnings,
+	}
+	
+	if(activity == null):
+		data["activity_id"] = ""
+		data["activity_data"] = {}
+	else:
+		data["activity_id"] = activity.id
+		data["activity_data"] = activity.saveData()
+	
+	var tasksData = []
+	for task in levelupTasks:
+		var taskData = {
+			"id": task.id,
+			"data": task.saveData()
+		}
+		tasksData.append(taskData)
+	data["levelupTasks"] = tasksData
+	
+	return data
+
+func loadData(data):
+	slaveType = SAVE.loadVar(data, "slaveType", SlaveType.Slut)
+	var newslaveSpecializations = SAVE.loadVar(data, "slaveSpecializations", {})
+	slaveSpecializations = {}
+	for theSlaveType in newslaveSpecializations:
+		var slaveTypeObj:SlaveTypeBase = GlobalRegistry.getSlaveType(theSlaveType)
+		if(slaveTypeObj == null):
+			continue
+		slaveSpecializations[theSlaveType] = newslaveSpecializations[theSlaveType]
+	slaveLevel = SAVE.loadVar(data, "slaveLevel", 0)
+	slaveExperience = SAVE.loadVar(data, "slaveExperience", 0)
+	obedience = SAVE.loadVar(data, "obedience", 0.0)
+	brokenspirit = SAVE.loadVar(data, "brokenspirit", 0.0)
+	love = SAVE.loadVar(data, "love", 0.0)
+	despair = SAVE.loadVar(data, "despair", 0.0)
+	awareness = SAVE.loadVar(data, "awareness", 0.0)
+	trust = SAVE.loadVar(data, "trust", 0.0)
+	spoiling = SAVE.loadVar(data, "spoiling", 0.0)
+	fear = SAVE.loadVar(data, "fear", 0.0)
+	submitted = SAVE.loadVar(data, "submitted", false)
+	tiredness = SAVE.loadVar(data, "tiredness", 0.0)
+	rewardBalance = SAVE.loadVar(data, "rewardBalance", 0)
+	punishmentsToday = SAVE.loadVar(data, "punishmentsToday", 0)
+	rewardsToday = SAVE.loadVar(data, "rewardsToday", 0)
+	gotBeatenUpToday = SAVE.loadVar(data, "gotBeatenUpToday", false)
+	checkedOnSlaveToday = SAVE.loadVar(data, "checkedOnSlaveToday", false)
+	talkedTimesToday = SAVE.loadVar(data, "talkedTimesToday", 0)
+	hasRandomEvent = SAVE.loadVar(data, "hasRandomEvent", false)
+	randomEventWillHappenID = SAVE.loadVar(data, "randomEventWillHappenID", "")
+	readyForLevelup = SAVE.loadVar(data, "readyForLevelup", false)
+	broken = SAVE.loadVar(data, "broken", false)
+	brokenWarnings = SAVE.loadVar(data, "brokenWarnings", 0)
+	
+	var theActivityID = SAVE.loadVar(data, "activity_id", "")
+	if(theActivityID == null || theActivityID == ""):
+		activity = null
+	else:
+		var newActivity = GlobalRegistry.createSlaveActivity(theActivityID)
+		if(newActivity != null):
+			newActivity.slavery = weakref(self)
+			#newActivity.onStart(args)
+			activity = newActivity
+			newActivity.loadData(SAVE.loadVar(data, "activity_data", {}))
+	
+	levelupTasks = []
+	var tasksData = SAVE.loadVar(data, "levelupTasks", [])
+	for taskData in tasksData:
+		var taskID = SAVE.loadVar(taskData, "id", "")
+		var taskObj:NpcBreakTaskBase = GlobalRegistry.createSlaveBreakTask(taskID)
+		if(taskObj == null):
+			continue
+		taskObj.loadData(SAVE.loadVar(taskData, "data", {}))
+		var _ok = taskObj.connect("onTaskCompleted", self, "onLevelupTaskCompleted")
+		levelupTasks.append(taskObj)

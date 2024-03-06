@@ -5,6 +5,7 @@ var id = "error"
 var eventWeight = 1.0
 var sceneID = ""
 var supportedActivities = [""]
+var canHappenIfMindbroken = false
 
 func canHappen(_npcSlavery:NpcSlave):
 	return false
@@ -14,6 +15,11 @@ func shouldHappenChance(_npcSlavery:NpcSlave):
 
 func shouldHappen(_npcSlavery:NpcSlave):
 	return RNG.chance(shouldHappenChance(_npcSlavery))
+
+func shouldHappenFinal(_npcSlavery:NpcSlave):
+	if(!canHappenIfMindbroken && _npcSlavery.isMindBroken()):
+		return false
+	return canHappen(_npcSlavery) && shouldHappen(_npcSlavery)
 
 func runEvent(_npcSlavery:NpcSlave):
 	return {
@@ -34,3 +40,4 @@ func supportsActivity(theActivityID):
 
 func getAnimInfo(_npcSlavery:NpcSlave):
 	return null
+
