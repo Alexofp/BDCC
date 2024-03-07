@@ -7,6 +7,8 @@ var whichColorIsEdited = 0
 var colorPickerScene = preload("res://UI/ColorPickerWidget.tscn")
 var rememberedColor = Color.white
 
+var isAlreadyAtBathroom = false
+
 func _initScene(_args = []):
 	npcID = _args[0]
 	npc = GlobalRegistry.getCharacter(npcID)
@@ -15,16 +17,24 @@ func resolveCustomCharacterName(_charID):
 	if(_charID == "npc"):
 		return npcID
 
+func _reactInit():
+	if(GM.pc.getLocation() in ["main_bathroom1", "main_bathroom2"]):
+		isAlreadyAtBathroom = true
+
 func _init():
 	sceneID = "ActionSlaveryHaircut"
 
 func _run():
 	if(state == ""):
 		addCharacter(npcID)
-		aimCameraAndSetLocName("main_bathroom1")
+		if(!isAlreadyAtBathroom):
+			aimCameraAndSetLocName("main_bathroom1")
 		playAnimation(StageScene.Duo, "stand", {npc=npcID, npcBodyState={leashedBy="pc"}})
 		
-		saynn("You leash your slave and bring {npc.him} to one of the bathrooms. Sinks here have some hair grooming and growing supplies that you can use on your slave to change {npc.his} haircut.")
+		if(isAlreadyAtBathroom):
+			saynn("You are standing near the big mirrors. Sinks here have some hair grooming and growing supplies that you can use on your slave to change {npc.his} haircut.")
+		else:
+			saynn("You leash your slave and bring {npc.him} to one of the bathrooms. Sinks here have some hair grooming and growing supplies that you can use on your slave to change {npc.his} haircut.")
 		
 		saynn("What do you want to change?")
 		
@@ -162,6 +172,7 @@ func saveData():
 	
 	data["npcID"] = npcID
 	data["whichColorIsEdited"] = whichColorIsEdited
+	data["isAlreadyAtBathroom"] = isAlreadyAtBathroom
 
 	return data
 	
@@ -171,3 +182,4 @@ func loadData(data):
 	npcID = SAVE.loadVar(data, "npcID", "")
 	npc = GlobalRegistry.getCharacter(npcID)
 	whichColorIsEdited = SAVE.loadVar(data, "whichColorIsEdited", 0)
+	isAlreadyAtBathroom = SAVE.loadVar(data, "isAlreadyAtBathroom", false)

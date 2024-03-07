@@ -181,9 +181,12 @@ func addFearRaw(howMuch:float):
 	fear += howMuch
 	fear = clamp(fear, 0.0, 1.0)
 func addFear(howMuch:float):
+	if(getFear() >= 1.0 && howMuch > 0.0):
+		addBrokenSpirit(howMuch / 10.0)
 	addFearRaw(howMuch * (1.0 + sign(howMuch) * personalityScore({
 		PersonalityStat.Coward:0.8, # Doms are easier to spoil too
 		})))
+
 func addFearUpToAPoint(howMuch:float, maxPoint:float):
 	var isHigherThanMaxPoint = getFear() >= maxPoint
 	addFear(howMuch)
@@ -233,6 +236,42 @@ func getTiredEffect() -> float:
 func getWorkEfficiency() -> float:
 	return 1.0 - getTiredEffect()
 
+
+# A value that describes how hard your slave wants to escape
+# a value between -40.0 and 40.0
+# unhappiness = 40.0 means the slave will escape with 40% chance on the start of the day
+var unhappiness = 0.0
+func getUnhappiness():
+	return unhappiness
+func addUnhappiness(howMuch:float):
+	unhappiness += howMuch
+	unhappiness = clamp(unhappiness, -40.0, 40.0)
+func getUnhappinessEscapeChance():
+	if(isMindBroken()):
+		return 0.0
+	if(unhappiness >= 20.0):
+		return unhappiness * (1.0 - getFear())
+	return 0.0
+func tickUnhappiness():
+	var unhapdelta = 0.3
+	unhapdelta += personalityScore({
+		PersonalityStat.Subby: 0.2,
+		PersonalityStat.Coward: -0.2,
+		})
+	unhapdelta += getResistScoreUnclamped() * 0.3
+	# A little bit of despair makes us act!
+	unhapdelta += Util.distanceToHalfWithIntervalEased(getDespair(), 0.15, 0.25) * 0.4
+	
+	var hapdelta = 0.0
+	# Spoiling us makes us less eager to leave
+	hapdelta += Util.distanceToHalfWithIntervalEased(max(getBrokenSpirit(), max(getObedience(), getLove())), 1.0, 1.0)
+	hapdelta += max(getAwareness(), max(getTrust(), getSpoiling()))
+	
+	hapdelta += Util.distanceToHalfWithIntervalEased(getFear(), 1.0, 1.0)
+	
+	var finalMod = 20.0
+	addUnhappiness((unhapdelta - hapdelta) * finalMod)
+
 var rewardBalance:int = 0
 
 var punishmentsToday:int = 0
@@ -267,6 +306,8 @@ func getDebugInfo():
 		"punishmentsToday: "+str(punishmentsToday),
 		"rewardsToday: "+str(rewardsToday),
 		"tiredness: "+str(Util.roundF(tiredness, 2)),
+		"unhappiness: "+str(Util.roundF(unhappiness, 2)),
+		"getUnhappinessEscapeChance(): "+str(Util.roundF(getUnhappinessEscapeChance(), 2)),
 		"getWorkEfficiency(): "+str(Util.roundF(getWorkEfficiency(), 2)),
 		"getResistScoreUnclamped(): "+str(Util.roundF(getResistScoreUnclamped(), 2)),
 		"getBratScore(): "+str(Util.roundF(getBratScore(), 2)),
@@ -284,6 +325,8 @@ func onNewDay():
 	randomEventWillHappenID = ""
 	gotBeatenUpToday = false
 	
+	tickUnhappiness()
+	
 	# Random event should be decided here
 	var possibleEventsWithWeights = []
 	for eventID in GlobalRegistry.getSlaveEvents():
@@ -297,8 +340,7 @@ func onNewDay():
 			hasRandomEvent = true
 			randomEventWillHappenID = pickedRandomEvent
 		
-		
-	# If has any punishPoints, do something	
+	# If has any punishPoints, do something (maybe?)
 	
 	var character = getChar()
 	if(character.getInventory().hasRemovableRestraints()):
@@ -979,6 +1021,7 @@ func saveData():
 		"readyForLevelup": readyForLevelup,
 		"broken": broken,
 		"brokenWarnings": brokenWarnings,
+		"unhappiness": unhappiness,
 	}
 	
 	if(activity == null):
@@ -1031,6 +1074,7 @@ func loadData(data):
 	readyForLevelup = SAVE.loadVar(data, "readyForLevelup", false)
 	broken = SAVE.loadVar(data, "broken", false)
 	brokenWarnings = SAVE.loadVar(data, "brokenWarnings", 0)
+	unhappiness = SAVE.loadVar(data, "unhappiness", 0.0)
 	
 	var theActivityID = SAVE.loadVar(data, "activity_id", "")
 	if(theActivityID == null || theActivityID == ""):

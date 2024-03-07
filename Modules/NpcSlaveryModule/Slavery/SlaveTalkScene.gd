@@ -108,6 +108,7 @@ func _run():
 			sayn(npcSlavery.getLevelUpHintText())
 			saynn("Leveling your slave up makes training {npc.him} easier and also unlocks new actions.")
 		
+		addButtonAt(12, "Leash", "Leash your slave and see what you can with them around the station", "start_walkies")
 		addButtonWithChecksAt(13, "Forced sex" if npcSlavery.isActivelyResisting() else "Sex", "Start sex with your slave", "do_forced_sex", [], [ButtonChecks.CanStartSex])
 		addButtonAt(14, "Back", "Enough interactions", "endthescene")
 		
@@ -366,6 +367,23 @@ func _react(_action: String, _args):
 
 	if(_action == "resisting_start_fight"):
 		runScene("FightScene", [npcID], "antiresistancefight")
+		return
+
+	if(_action == "start_walkies"):
+		var npcSlavery:NpcSlave = npc.getNpcSlavery()
+		if(npcSlavery.isResistingSuperActively() || (RNG.chance(40) && npcSlavery.isActivelyResisting())):
+			savedWantedToDo = "start_walkies_forced"
+			savedWantedToDoName = "Leash slave"
+			savedWantedToDoArgs = []
+			setStateResistance()
+		else:
+			runScene("SlaveryWalkiesGrabScene", [npcID])
+			endScene()
+		return
+
+	if(_action == "start_walkies_forced"):
+		runScene("SlaveryWalkiesGrabScene", [npcID])
+		endScene()
 		return
 
 	if(_action == "do_forced_sex"):

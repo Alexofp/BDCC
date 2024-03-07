@@ -17,14 +17,20 @@ func _init():
 func _run():
 	if(state == ""):
 		addCharacter(npcID)
-		aimCameraAndSetLocName("main_punishment_spot")
-		GM.pc.setLocation("main_punishment_spot")
 		playAnimation(StageScene.StocksSexOral, "tease", {npc="pc", pc=npcID})
 		
-		saynn("After {npc.name} serves {npc.his} punishment, you decide to leave {npc.him} stuck in there.")
-		
-		saynn("After all, why shouldn't other be able to have fun with {npc.him}?")
-		
+		if(GM.pc.getLocation() == "main_punishment_spot"):
+			saynn("You decide to lock your slaves into the stocks.")
+			
+			saynn("After all, why shouldn't other be able to have fun with {npc.him}?")
+		else:
+			aimCameraAndSetLocName("main_punishment_spot")
+			GM.pc.setLocation("main_punishment_spot")
+			
+			saynn("After {npc.name} serves {npc.his} punishment, you decide to leave {npc.him} stuck in there.")
+			
+			saynn("After all, why shouldn't other be able to have fun with {npc.him}?")
+			
 		addButton("Continue", "See what happens next", "leave_slave_in_stocks")
 
 

@@ -18,3 +18,14 @@ static func getEnslavedPools():
 
 static func getAllPools():
 	return [Guards, Nurses, Inmates, Engineers, Slaves]
+
+static func characterTypeToPool(charType):
+	if(charType == CharacterType.Guard):
+		return Guards
+	if(charType == CharacterType.Nurse):
+		return Nurses
+	if(charType == CharacterType.Inmate):
+		return Inmates
+	if(charType == CharacterType.Engineer):
+		return Engineers
+	return null

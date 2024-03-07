@@ -104,3 +104,21 @@ func doEnslaveCharacter(npcID):
 	GM.main.removeDynamicCharacterFromAllPools(npcID)
 	GM.main.addDynamicCharacterToPool(npcID, CharacterPool.Slaves)
 	return true
+
+func doFreeEnslavedCharacter(npcID):
+	var theChar:DynamicCharacter = GlobalRegistry.getCharacter(npcID)
+	
+	if(theChar == null || !theChar.isDynamicCharacter()):
+		return false
+	if(!theChar.isSlaveToPlayer()):
+		return false
+	
+	#var npcSlavery:NpcSlave = theChar.getNpcSlavery()
+	theChar.setEnslaveQuest(null)
+	theChar.setNpcSlavery(null)
+	
+	GM.main.removeDynamicCharacterFromAllPools(npcID)
+	var newPool = CharacterPool.characterTypeToPool(theChar.getCharacterType())
+	if(newPool != null):
+		GM.main.addDynamicCharacterToPool(npcID, newPool)
+	

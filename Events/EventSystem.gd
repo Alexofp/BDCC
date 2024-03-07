@@ -10,6 +10,7 @@ func _ready():
 	
 	# Default event triggers
 	registerEventTrigger(Trigger.EnteringRoom, EventTriggerLocation.new())
+	registerEventTrigger(Trigger.EnteringRoomWithSlave, EventTriggerLocation.new())
 	registerEventTrigger(Trigger.TalkingToNPC, EventTriggerLocation.new())
 	registerEventTrigger(Trigger.CaughtStealingInGreenhouse, EventTriggerWeighted.new())
 	registerEventTrigger(Trigger.CaughtOffLimits, EventTriggerWeighted.new())

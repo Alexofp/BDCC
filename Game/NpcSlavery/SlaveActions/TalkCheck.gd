@@ -32,10 +32,20 @@ func doActionSimple(_slaveID, _extraSlavesIDs = {}):
 			slaveWords.append(RNG.pick([
 				"Fuck you, I won't tell you shit. Let me go now!",
 				]))
+			
+			if(npcSlavery.getUnhappinessEscapeChance() > 0.0):
+				slaveWords.append(RNG.pick([
+					"I'm escaping this shithole the moment I can!",
+					]))
 		else:
 			slaveWords.append(RNG.pick([
 				"I don't want to be here. Don't touch me. Let me go..",
 				]))
+				
+			if(npcSlavery.getUnhappinessEscapeChance() > 0.0):
+				slaveWords.append(RNG.pick([
+					"I'm not happy to be here. I will escape the moment I can..",
+					]))
 	else:
 		var obedience = npcSlavery.getObedience()
 		var brokenSpirit = npcSlavery.getBrokenSpirit()
@@ -191,6 +201,11 @@ func doActionSimple(_slaveID, _extraSlavesIDs = {}):
 		else:
 			slaveWords.append(RNG.pick([
 				"I will do anything. Just don't hurt me..",
+				]))
+				
+		if(npcSlavery.getUnhappinessEscapeChance() > 5.0):
+			slaveWords.append(RNG.pick([
+				"I'm not happy to be here. Especially after everything you did to me.",
 				]))
 
 	var isFirst = true
