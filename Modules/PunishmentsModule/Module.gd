@@ -56,6 +56,7 @@ func _init():
 		"res://Modules/PunishmentsModule/Stocks/UnWilling/StocksUnwillingDynNpcEvent.gd",
 		"res://Modules/PunishmentsModule/Stocks/Willing/StocksWillingDynNpcEvent.gd",
 		
+		"res://Modules/PunishmentsModule/Stocks/TryStocksEvent.gd",
 	]
 
 func registerEventTriggers():

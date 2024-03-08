@@ -342,6 +342,9 @@ func shouldShowDevCommentaryIcon():
 func shouldDisplayBigButtons():
 	return false
 
+func getSceneCompanions():
+	return []
+
 func saveData():
 	var data = {}
 	data["state"] = state

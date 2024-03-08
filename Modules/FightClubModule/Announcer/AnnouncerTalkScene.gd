@@ -26,6 +26,63 @@ func _run():
 			addButton("Buy", "Maybe he sells something", "askbuy")
 		addButton("Leave", "Enough talking", "endthescene")
 		GM.ES.triggerRun(Trigger.TalkingToNPC, ["announcer"])
+		if(!getFlag("FightClubModule.CanBuySlaveCollars")):
+			if(getModule("NpcSlaveryModule").canEnslave()):
+				addButton("Collars?", "Ask if he knows where you can get a spare collar", "ask_collars")
+
+	if(state == "ask_collars"):
+		saynn("[say=pc]You seem like you know your way around here. Do you know where I can get a collar?[/say]")
+		
+		saynn("He instinctively tugs on his metal one.")
+		
+		saynn("[say=announcer]Hmm.. As a matter of fact, I do. Out of curiosity, what makes you want a spare one? Neck not heavy enough, babe?[/say]")
+
+		saynn("He scratches his chin while watching you.")
+		
+		saynn("[say=announcer]Hah, I think I know. And I think I can help you. While clearing this abandoned space out, we found a few crates with old supplies, including one full of collars. Strangely enough, not the same model that everyone here is wearing.[/say]")
+		
+		saynn("Great. Any collar should work for you. But it's never that easy, is it?")
+		
+		saynn("[say=announcer]Avy found a way to modify them so they can be locked and unlocked by us, inmates.[/say]")
+
+		saynn("Avy, huh. It's never that easy with her.")
+		
+		saynn("[say=announcer]You will have to earn her trust first.[/say]")
+		
+		saynn("[say=pc]And how am I gonna do that?[/say]")
+		
+		saynn("The lilac points at the 4 chain fences in the middle of the space.")
+		
+		saynn("[say=announcer]Arena, babe. That's the answer to most things here.[/say]")
+		
+		saynn("Looks like you will have to beat Avy up on the arena first to get access to those collars..")
+
+		if(getFlag("FightClubModule.AvyGotRekt")):
+			addButton("Done!", "Tell him that you did beat up Avy", "unlock_collars")
+			addButton("Back", "Never mind", "")
+		else:
+			addButton("Continue", "See what happens next", "")
+
+	if(state == "unlock_collars"):
+		saynn("[say=pc]Avy got wrecked. I am the grand champion now.[/say]")
+		
+		saynn("The guy chuckles and offers you some claps.")
+		
+		saynn("[say=announcer]Good job, babe. I knew you could do it.[/say]")
+		
+		saynn("You nod-nod and wait for your reward.")
+		
+		saynn("[say=announcer]Avy agreed to give you one. If you want more, you will have to pay with creds for them. Avy said she doesn't want to give her modified versions out for free.[/say]")
+
+		saynn("Of course she doesn't, that bitch. Ans hands you an old metal collar. The design is indeed quite different.. this one somehow looks even more bulky and uncomfortable than your current one. But that might be a good thing..")
+		
+		saynn("[say=pc]Thank you.[/say]")
+		
+		saynn("He nods.")
+		
+		saynn("[say=announcer]Don't mention it, babe. You were fighting great, the crowd loves you.[/say]")
+		
+		addButton("Continue", "See what happens next", "")
 
 	if(state == "askbuy"):
 		setFlag("FightClubModule.AnnouncerAskedAboutShop", true)
@@ -124,5 +181,12 @@ func _react(_action: String, _args):
 		runScene("AnnouncerBuySellScene", ["sellmenu"])
 		setState("")
 		return
+	
+	if(_action == "unlock_collars"):
+		processTime(3*60)
+		setFlag("FightClubModule.CanBuySlaveCollars", true)
+		GM.pc.getInventory().addItem(GlobalRegistry.createItem("oldcollar"))
+		addMessage("You got a slave collar!")
+		addMessage("You can now buy more slave collars from Ans")
 
 	setState(_action)

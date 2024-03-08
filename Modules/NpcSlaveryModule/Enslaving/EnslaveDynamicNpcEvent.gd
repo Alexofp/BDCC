@@ -28,7 +28,10 @@ func run(_triggerID, _args):
 			return
 		
 		if(!character.hasEnslaveQuest() ):
-			addButton("Enslave!", "Try to enslave them", "doenslave", [_args[0]])
+			if(character.getInventory().hasEquippedItemWithTag(ItemTag.AllowsEnslaving)):
+				addButton("Enslave!", "Try to enslave them", "doenslave", [_args[0]])
+			else:
+				addDisabledButton("Enslave!", "They need to be wearing a collar for you to be able to enslave them")
 		
 
 func getPriority():

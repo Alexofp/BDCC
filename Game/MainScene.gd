@@ -1235,3 +1235,17 @@ func aimCameraAndSetLocName(roomID: String):
 	if(!room):
 		return
 	setLocationName(room.getName())
+
+func playerHasCompanions():
+	for scene in sceneStack:
+		var sceneComps = scene.getSceneCompanions()
+		if(sceneComps != null && sceneComps.size() > 0):
+			return true
+	return false
+
+func playerHasCompanion(charID):
+	for scene in sceneStack:
+		var sceneComps = scene.getSceneCompanions()
+		if(sceneComps != null && sceneComps.has(charID)):
+			return true
+	return false

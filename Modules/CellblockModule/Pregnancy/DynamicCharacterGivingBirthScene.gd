@@ -205,7 +205,7 @@ func _react(_action: String, _args):
 		processTime(3*60)
 
 	if(_action == "do_birth"):
-		processTime(5*60)
+		processTime(35*60)
 		var bornChilds = getCharacter(npcID).giveBirth()
 		bornChildAmount = bornChilds.size()
 		bornString = GM.CS.getChildBirthInfoString(bornChilds)

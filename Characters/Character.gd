@@ -426,7 +426,12 @@ func onCharacterHeavyIntoPregnancy():
 func onCharacterReadyToGiveBirth():
 	pregnancyWaitTimer = 0
 	if(getBirthWaitTime() > 0 && getMenstrualCycle() != null):
-		if(getMenstrualCycle().isPregnantFromPlayer()):
+		if(isSlaveToPlayer()):
+			if(getMenstrualCycle().isPregnantFromPlayer()):
+				GM.main.addLogMessage("News (Slave)", "You just received news that "+getName()+" is ready to give birth to your children. Since "+heShe()+" "+isAre()+" slave, it is your job to bring "+himHer()+" to the nursery.")
+			else:
+				GM.main.addLogMessage("News (Slave)", "You just received news that "+getName()+" is ready to give birth to someone's children. Since "+heShe()+" "+isAre()+" slave, it is your job to bring "+himHer()+" to the nursery.")
+		elif(getMenstrualCycle().isPregnantFromPlayer()):
 			GM.main.addLogMessage("News", "You just received news that "+getName()+" is ready to give birth to your children and now just waits for a good moment to do it. Maybe you can go check on them.")
 
 
@@ -440,6 +445,8 @@ func shouldGiveBirth():
 	if(!isReadyToGiveBirth()):
 		return false
 	if(GM.main.characterIsVisible(getID())):
+		return false
+	if(isSlaveToPlayer()):
 		return false
 	return true
 

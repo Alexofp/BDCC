@@ -9,6 +9,8 @@ func registerTriggers(es):
 	es.addTrigger(self, Trigger.EnteringRoomWithSlave, "main_dressing1")
 	es.addTrigger(self, Trigger.EnteringRoomWithSlave, "main_dressing2")
 	es.addTrigger(self, Trigger.EnteringRoomWithSlave, "main_punishment_spot")
+	es.addTrigger(self, Trigger.EnteringRoomWithSlave, "fight_slutwall")
+	es.addTrigger(self, Trigger.EnteringRoomWithSlave, "medical_nursery")
 
 func run(_triggerID, _args):
 	var locName = _args[0]
@@ -28,6 +30,14 @@ func run(_triggerID, _args):
 	if(locName in ["main_punishment_spot"]):
 		addButton("Stocks (Slave)", "Put your slave into the stocks", "startstocks", [npcID])
 
+	if(locName in ["fight_slutwall"]):
+		addButton("Slutwall (Slave)", "Put your slave into the slutwall", "startslutwall", [npcID])
+
+	if(locName in ["medical_nursery"]):
+		if(theChar.isReadyToGiveBirth()):
+			addButton("Give birth (Slave)", "Make your slave give birth", "givebirth", [npcID])
+		else:
+			addDisabledButton("Give birth (Slave)", "Your slave is not pregnant or is not ready to give birth yet")
 	
 func getPriority():
 	return 0
@@ -40,3 +50,8 @@ func onButton(_method, _args):
 	if(_method == "startstocks"):
 		GM.main.endCurrentScene()
 		runScene("PunishSlaveryLeaveInStocks", [_args[0]])
+	if(_method == "startslutwall"):
+		GM.main.endCurrentScene()
+		runScene("PunishSlaveryLeaveInSlutwall", [_args[0]])
+	if(_method == "givebirth"):
+		runScene("SlaveryHelpGiveBirth", [_args[0]])

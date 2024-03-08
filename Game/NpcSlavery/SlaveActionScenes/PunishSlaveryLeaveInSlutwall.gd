@@ -12,15 +12,15 @@ func resolveCustomCharacterName(_charID):
 		return npcID
 
 func _init():
-	sceneID = "PunishSlaveryLeaveInStocks"
+	sceneID = "PunishSlaveryLeaveInSlutwall"
 
 func _run():
 	if(state == ""):
 		addCharacter(npcID)
-		playAnimation(StageScene.StocksSexOral, "tease", {npc="pc", pc=npcID})
+		playAnimation(StageScene.SlutwallSex, "tease", {npc="pc", pc=npcID, bodyState={naked=true}})
 		
-		if(GM.pc.getLocation() == "main_punishment_spot"):
-			saynn("You decide to lock your slave into the stocks.")
+		if(GM.pc.getLocation() == "fight_slutwall"):
+			saynn("You decide to lock your slave into the slutwall.")
 			
 			saynn("After all, why shouldn't other be able to have fun with {npc.him}?")
 		else:
@@ -31,7 +31,7 @@ func _run():
 			
 			saynn("After all, why shouldn't other be able to have fun with {npc.him}?")
 			
-		addButton("Continue", "See what happens next", "leave_slave_in_stocks")
+		addButton("Continue", "See what happens next", "leave_slave_in_slutwall")
 
 
 func _react(_action: String, _args):
@@ -39,12 +39,12 @@ func _react(_action: String, _args):
 		endScene()
 		return
 		
-	if(_action == "leave_slave_in_stocks"):
+	if(_action == "leave_slave_in_slutwall"):
 		var npcSlavery:NpcSlave = npc.getNpcSlavery()
 		if(npcSlavery == null):
 			endScene()
 			return
-		npcSlavery.startActivity("StuckInStocks")
+		npcSlavery.startActivity("StuckInSlutwall")
 		
 		endScene()
 		return

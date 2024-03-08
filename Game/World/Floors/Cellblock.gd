@@ -59,7 +59,8 @@ func _on_CellblockRoom11_onPreEnter(room):
 		
 		room.addButton("Stash", "You can hide something in your cell", "stash")
 		
-		room.addButton("Rest", "Lay down on the bed", "rest")
+		if(!GM.main.playerHasCompanions()):
+			room.addButton("Rest", "Lay down on the bed", "rest")
 		# Debug testing, free to remove
 		#room.addButton("Override", "Override pc", "over")
 		#room.addButton("Clear", "Clear pc", "clearover")
