@@ -408,6 +408,11 @@ func updateNonBattleEffects():
 		else:
 			removeEffect(effect.id)
 		
+	if(hasEnslaveQuest()):
+		getEnslaveQuest().checkIfTasksGotCompleted()
+	if(isSlaveToPlayer()):
+		getNpcSlavery().checkIfTasksGotCompleted()
+		
 	GM.GES.callGameExtenders(ExtendGame.npcUpdateNonBattleEffects, [self])
 	
 	buffsHolder.calculateBuffs()

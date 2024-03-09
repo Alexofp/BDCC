@@ -27,32 +27,43 @@ func _run():
 		
 		saynn("After that, you will need enough space in your cell to store {npc.him}.")
 		
-		saynn("To enslave staff members you will need to have a collar.")
+		saynn("What kind of slave do you want {npc.him} to be?")
+
+		for slaveTypeID in GlobalRegistry.getSlaveTypes():
+			var theSlaveType:SlaveTypeBase = GlobalRegistry.getSlaveType(slaveTypeID)
+			if(!theSlaveType.canEnslaveAs()):
+				continue
+			if(!theSlaveType.canTeach(getCharacter(npcID))):
+				addDisabledButton(theSlaveType.getVisibleName(), "[color=red]Incompatible with this slave[/color]\n"+theSlaveType.getVisibleDesc())
+				continue
+			addButton(theSlaveType.getVisibleName(), theSlaveType.getVisibleDesc(), "try_enslave", [slaveTypeID])
 		
-		# Slave types buttons here maybe
-		addButton("Do it", "Go through with it", "try_enslave")
 		addButton("CANCEL", "You changed your mind", "endthescene")
 		
 	if(state == "try_enslave"):
 		playAnimation(StageScene.Choking, "idle", {npc=npcID})
 		
-		saynn("You intimidate them! I'm a placeholder text! Don't forget to change me!")
-		
-		saynn("After intimidating them, you get a better idea about how to break their spirit.")
-		
-		sayn("Here is what you need to do (You can check the progress inside the personality status effect):")
-		
 		var theChar:DynamicCharacter = getCharacter(npcID)
 		var enslaveQuest:NpcEnslavementQuest = theChar.getEnslaveQuest()
+		var theSlaveTypeID = enslaveQuest.slaveType
+		var theSlaveType:SlaveTypeBase = GlobalRegistry.getSlaveType(theSlaveTypeID)
+		if(theSlaveType != null):
+			saynn(theSlaveType.getEnslaveText(theChar))
+		
+		saynn("After glaring at {npc.him}, you get a better idea about how to damage {npc.his} spirit.")
+		
+		sayn("Here is what you need to do (You can check the progress inside the personality status effect):")
+
 		saynn(enslaveQuest.getQuestStartText())
 		
 		addButton("Continue", "Time to do this to them then", "endthescene")
 		addButton("Choke them", "(Reroll) Ask them again nicely", "try_enslave_choke")
+		addButton("CANCEL", "You changed your mind", "stopquest_endthescene")
 	
 	if(state == "try_enslave_choke"):
 		playAnimation(StageScene.Choking, "choke", {npc=npcID})
 		
-		saynn("You choke them which changes things a bit.")
+		saynn("You choke {npc.him} which changes things a bit.")
 		
 		sayn("Here is what you need to do (You can check the progress inside the personality status effect):")
 		
@@ -62,11 +73,12 @@ func _run():
 		
 		addButton("Continue", "Time to do this to them then", "endthescene")
 		addButton("Choke more", "(Reroll) Ask them again even more nicely", "try_enslave_chokeevenmore")
+		addButton("CANCEL", "You changed your mind", "stopquest_endthescene")
 		
 	if(state == "try_enslave_chokeevenmore"):
 		playAnimation(StageScene.Choking, "hard", {npc=npcID})
 		
-		saynn("You choke them so much they are close to passing out.")
+		saynn("You choke {npc.him} so much {npc.he} {npc.isAre} close to passing out.")
 		
 		sayn("Here is what you need to do (You can check the progress inside the personality status effect):")
 		
@@ -75,6 +87,7 @@ func _run():
 		saynn(enslaveQuest.getQuestStartText())
 		
 		addButton("Continue", "Time to do this to them then", "endthescene")
+		addButton("CANCEL", "You changed your mind", "stopquest_endthescene")
 		# Cancel quest button here?
 		
 func _react(_action: String, _args):
@@ -82,11 +95,18 @@ func _react(_action: String, _args):
 		endScene()
 		return
 	
+	if(_action == "stopquest_endthescene"):
+		var theChar:DynamicCharacter = getCharacter(npcID)
+		theChar.setEnslaveQuest(null)
+		addMessage("You stopped trying to enslave "+theChar.getName())
+		endScene()
+		return
+	
 	if(_action == "try_enslave"):
 		var theChar:DynamicCharacter = getCharacter(npcID)
 		var newEnslaveQuest = NpcEnslavementQuest.new()
 		newEnslaveQuest.setChar(theChar)
-		newEnslaveQuest.setSlaveType(SlaveType.Slut)
+		newEnslaveQuest.setSlaveType(_args[0])
 		newEnslaveQuest.generateTasks()
 		theChar.setEnslaveQuest(newEnslaveQuest)
 
@@ -110,3 +130,20 @@ func loadData(data):
 	.loadData(data)
 	
 	npcID = SAVE.loadVar(data, "npcID", "")
+
+
+func getDebugActions():
+	return [
+		{
+			"id": "quickEnslave",
+			"name": "Quick Enslave",
+			"args": [
+			],
+		},
+	]
+
+func doDebugAction(_id, _args = {}):
+	if(_id == "quickEnslave"):
+		endScene()
+		runScene("KidnapDynamicNpcScene", [npcID])
+		GM.main.reRun()

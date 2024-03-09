@@ -8,11 +8,11 @@ func getSlaveTypeWeights(_isSlaveLevelup):
 		SlaveType.All : 1.0,
 	}
 
-func isPossibleFor(_npc):
+func isPossibleFor(_npc, _isSlaveLevelup):
 	return true
 
-func generateFor(_npc, _difficulty = 1.0):
-	needAmount = round(RNG.randi_range(2, 4)*_difficulty)
+func generateFor(_npc, _isSlaveLevelup, _difficulty = 1.0):
+	needAmount = scaledRangeWithDifficulty(2, 4, _difficulty)
 
 func onSexEvent(_npc, _event:SexEvent):
 	if(_event.getType() == SexEvent.Orgasmed):
@@ -26,12 +26,3 @@ func getTaskString():
 
 func getTaskHint():
 	return "Force them to orgasm during sex"
-
-#func saveData():
-#	var data = .saveData()
-#
-#	return data
-#
-#func loadData(data):
-#	.loadData(data)
-#

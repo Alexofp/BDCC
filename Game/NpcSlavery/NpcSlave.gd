@@ -678,7 +678,7 @@ func getExperienceStr():
 	return str(slaveExperience) + "/" + str(getExperienceRequiredForNextLevel())
 
 func generateLevelUpTasks():
-	levelupTasks = NpcBreakTaskBase.generateTasksFor(getChar(), slaveType, 2, 1.0)
+	levelupTasks = NpcBreakTaskBase.generateTasksFor(getChar(), slaveType, true, 2, 1.0)
 	for task in levelupTasks:
 		var _ok = task.connect("onTaskCompleted", self, "onLevelupTaskCompleted")
 
@@ -993,6 +993,10 @@ func getLevelUpHintText():
 	
 	return Util.join(result, "\n")
 
+func checkIfTasksGotCompleted():
+	var theChar = getChar()
+	for task in levelupTasks:
+		task.checkIfCompletedFor(theChar)
 
 func saveData():
 	var data = {

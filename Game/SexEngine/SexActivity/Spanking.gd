@@ -437,11 +437,11 @@ func getSubActions():
 
 func doSubAction(_id, _actionInfo):
 	if(_id == "cum"):
-		getSub().cumOnFloor()
+		getSub().cumOnFloor(domID)
 		subInfo.cum()
 		
 		#satisfyGoals()
-		
+		sendSexEvent(SexEvent.UniqueOrgasm, domID, subID, {orgasmType="spank"})
 		return getGenericSubOrgasmData()
 	
 	if(_id == "coverbutt"):

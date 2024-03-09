@@ -8,10 +8,10 @@ func getSlaveTypeWeights(_isSlaveLevelup):
 		SlaveType.All : 1.0,
 	}
 
-func isPossibleFor(_npc):
+func isPossibleFor(_npc, _isSlaveLevelup):
 	return true
 
-func isPossibleForPC(_pc, _npc):
+func isPossibleForPC(_pc, _npc, _isSlaveLevelup):
 	if(_pc.hasReachablePenis()):
 		return true
 	if(_pc.hasStrapons()):
@@ -19,11 +19,11 @@ func isPossibleForPC(_pc, _npc):
 	
 	return false
 
-func generateFor(_npc, _difficulty = 1.0):
-	needAmount = RNG.randi_range(1, 3)
+func generateFor(_npc, _isSlaveLevelup, _difficulty = 1.0):
+	needAmount = scaledRangeWithDifficulty(1, 3, _difficulty)
 
 func onSexEvent(_npc, _event:SexEvent):
-	if(_event.getType() == SexEvent.HoleCreampied || _event.getType() == SexEvent.StraponCreampied):
+	if(_event.getType() == SexEvent.HoleCreampied || _event.getType() == SexEvent.StraponCreampied || _event.getType() == SexEvent.HoleSpitted):
 		if(_event.getTargetChar() == _npc && _event.targetIsSub()):
 			if(_event.getField("hole", BodypartSlot.Head) in [BodypartSlot.Vagina, BodypartSlot.Anus]):
 				advanceTask()
@@ -34,13 +34,4 @@ func getTaskString():
 	return "Received creampies: "+getProgressString()
 
 func getTaskHint():
-	return "Cum inside their pussy or ass. If you don't have a penis, you can use a loaded strapon!"
-
-#func saveData():
-#	var data = .saveData()
-#
-#	return data
-#
-#func loadData(data):
-#	.loadData(data)
-#
+	return "Cum inside their pussy or ass. If you don't have a penis, you can use a loaded strapon! Worst case, just spit cum into it."

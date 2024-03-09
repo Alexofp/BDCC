@@ -13,14 +13,22 @@ func getSlaveTypeWeights(_isSlaveLevelup):
 		SlaveType.All : 1.0,
 	}
 
-func isPossibleForPC(_pc, _npc):
+func isPossibleForPC(_pc, _npc, _isSlaveLevelup):
 	return true
 
-func isPossibleFor(_npc):
+func isPossibleFor(_npc, _isSlaveLevelup):
 	return false
 
-func generateFor(_npc, _difficulty = 1.0):
+func generateFor(_npc, _isSlaveLevelup, _difficulty = 1.0):
 	pass
+
+func isCompletedFor(_npc):
+	return false
+
+func checkIfCompletedFor(_npc):
+	if(!isCompleted()):
+		if(currentAmount >= needAmount || isCompletedFor(_npc)):
+			completeSelf()
 
 func completeSelf():
 	if(!taskIsCompleted):
@@ -42,21 +50,28 @@ func getTaskHint():
 func getProgressString():
 	return ""+str(currentAmount)+"/"+str(needAmount)
 
-func advanceTask():
-	currentAmount += 1
+func getProgressStringCustomCurrent(customCurrent):
+	return ""+str(customCurrent)+"/"+str(needAmount)
+
+func advanceTask(howMuch = 1):
+	currentAmount += howMuch
 	if(currentAmount >= needAmount && !taskIsCompleted):
 		completeSelf()
 
-static func generateTasksFor(theChar, slaveType, taskAmount, difficulty = 1.0):
+static func generateTasksFor(theChar, slaveType, _isSlaveLevelup, taskAmount, difficultyMin = 1.0, difficultyMax = 1.0):
+	difficultyMin = max(1.0, difficultyMin)
+	difficultyMax = max(1.0, difficultyMax)
+	if(difficultyMax < difficultyMin):
+		difficultyMax = difficultyMin
 	var tasks = []
 	var weightMap = []
 	
 	for taskID in GlobalRegistry.getSlaveBreakTaskRefs():
 		var taskRef:NpcBreakTaskBase = GlobalRegistry.getSlaveBreakTaskRef(taskID)
 		
-		if(!taskRef.isPossibleFor(theChar)):
+		if(!taskRef.isPossibleFor(theChar, _isSlaveLevelup)):
 			continue
-		if(!taskRef.isPossibleForPC(GM.pc, theChar)):
+		if(!taskRef.isPossibleForPC(GM.pc, theChar, _isSlaveLevelup)):
 			continue
 		
 		var taskWeights = taskRef.getSlaveTypeWeights(false)
@@ -74,11 +89,16 @@ static func generateTasksFor(theChar, slaveType, taskAmount, difficulty = 1.0):
 		var theTask:NpcBreakTaskBase = GlobalRegistry.createSlaveBreakTask(theTaskRef.id)
 		
 		#var _ok = theTask.connect("onTaskCompleted", self, "onBreakTaskCompleted")
-		theTask.generateFor(theChar, difficulty)
+		theTask.generateFor(theChar, _isSlaveLevelup, RNG.randf_rangeX2(difficultyMin, difficultyMax))
 		tasks.append(theTask)
 		howManyTasks -= 1
 		
 	return tasks
+
+func scaledRangeWithDifficulty(minv:int, maxv:int, _difficulty:float):
+	var newminv:int = int(round(minv * _difficulty))
+	var newmaxv:int = int(round(maxv * _difficulty))
+	return RNG.randi_range(newminv, newmaxv)
 
 func saveData():
 	var data = {

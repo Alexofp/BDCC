@@ -16,6 +16,12 @@ func resolveCustomCharacterName(_charID):
 
 func _run():
 	if(state == ""):
+		if(!npc.isSlaveToPlayer()):
+			saynn("Somehow, you lost your slave during the walkies! Oh no.")
+			
+			addButton("Continue", "See what happens next", "endthescene")
+			return
+		
 		var roomID = GM.pc.location
 		var _roomInfo = GM.world.getRoomByID(roomID)
 		

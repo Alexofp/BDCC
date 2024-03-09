@@ -98,6 +98,7 @@ func processTurn():
 			subInfo.cum()
 			state = ""
 			text += " {sub.Your} pussy is squirting all over {sub.yourHis} thighs as {sub.youHe} {sub.youVerb('orgasm')} in such a humiliating way!"
+			sendSexEvent(SexEvent.UniqueOrgasm, domID, subID, {orgasmType="feet"})
 		return {
 			text = text,
 		}
@@ -132,6 +133,7 @@ func processTurn():
 			subInfo.cum()
 			state = ""
 			text += " {sub.Your} cock is shooting {sub.cum} all over {sub.yourHis} belly as {sub.youHe} {sub.youVerb('orgasm')} in such a humiliating way!"
+			sendSexEvent(SexEvent.UniqueOrgasm, domID, subID, {orgasmType="feet"})
 		return {
 			text = text,
 		}
@@ -480,6 +482,7 @@ func doSubAction(_id, _actionInfo):
 		subInfo.cum()
 		state = ""
 		text += "{sub.Your} pussy is squirting all over {sub.yourHis} thighs as {sub.youHe} {sub.youVerb('orgasm')} in such a humiliating way!"
+		sendSexEvent(SexEvent.UniqueOrgasm, domID, subID, {orgasmType="feet"})
 		return {
 			text = text,
 		}
@@ -492,6 +495,7 @@ func doSubAction(_id, _actionInfo):
 		subInfo.cum()
 		state = ""
 		text += "{sub.Your} cock is shooting {sub.cum} all over {sub.yourHis} belly as {sub.youHe} {sub.youVerb('orgasm')} in such a humiliating way!"
+		sendSexEvent(SexEvent.UniqueOrgasm, domID, subID, {orgasmType="feet"})
 		return {
 			text = text,
 		}

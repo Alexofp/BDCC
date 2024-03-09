@@ -115,7 +115,9 @@ func processTurn():
 				domInfo.addPain(1)
 				sendSexEvent(SexEvent.PainInflicted, subID, domID, {pain=1,isDefense=false,intentional=false})
 			
+			var suddenlyLactating = false
 			if(RNG.chance(30) && getDom().stimulateLactation()):
+				suddenlyLactating = true
 				text += RNG.pick([
 					" {dom.You} suddenly began [b]lactating[/b]!",
 					" {dom.Your} breasts suddenly began [b]lactating[/b]!",
@@ -132,6 +134,9 @@ func processTurn():
 					text += RNG.pick([
 						" {dom.Your} nipples started to feel [b]sore[/b].",
 					])
+			
+			sendSexEvent(SexEvent.BreastFeeding, subID, domID, {madeLactate=suddenlyLactating, loadSize=0.0, targetIsDom=true})
+			
 			return {
 				text = text,
 				domSay = domReaction(SexReaction.DomBreastfeedsSub, 30),
@@ -189,6 +194,8 @@ func processTurn():
 					text += RNG.pick([
 						" {dom.Your} nipples started to feel [b]sore[/b] after so much feeding.",
 					])
+			
+			sendSexEvent(SexEvent.BreastFeeding, subID, domID, {madeLactate=false, loadSize=howMuchCollected, targetIsDom=true})
 			
 			return {
 				text = text,
@@ -255,6 +262,8 @@ func doDomAction(_id, _actionInfo):
 		
 		if(RNG.chance(30) && !getDom().hasPerk(Perk.MilkNoSoreNipples) && !getDom().hasEffect(StatusEffect.SoreNipplesAfterMilking)):
 			getDom().addEffect(StatusEffect.SoreNipplesAfterMilking)
+		
+		sendSexEvent(SexEvent.UniqueOrgasm, subID, domID, {orgasmType="breasts"})
 		
 		return getGenericDomOrgasmData(extraText)
 	

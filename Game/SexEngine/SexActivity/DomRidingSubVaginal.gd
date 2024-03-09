@@ -730,7 +730,7 @@ func getSubResistChance(baseChance, domAngerRemoval):
 
 func doSubAction(_id, _actionInfo):
 	if(_id == "subcumstrapon"):
-		getSub().cumOnFloor()
+		getSub().cumOnFloor(domID)
 		subInfo.cum()
 		return getGenericSubOrgasmData()
 	

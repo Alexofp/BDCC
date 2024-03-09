@@ -1347,7 +1347,18 @@ func _react(_action: String, _args):
 	if(_action == "anus_lick_spit"):
 		processTime(60)
 		extraText = GM.pc.getBodypartContentsStringList(BodypartSlot.Head)
-		GM.pc.bodypartTransferFluidsTo(BodypartSlot.Head, portalCharID, BodypartSlot.Anus, 0.2, 20.0)
+		var howMuch = GM.pc.bodypartTransferFluidsToAmount(BodypartSlot.Head, portalCharID, BodypartSlot.Anus, 0.2, 20.0)
+		var newSexEvent:SexEvent = SexEvent.new()
+		newSexEvent.type = SexEvent.HoleSpitted
+		newSexEvent.sourceCharID = "pc"
+		newSexEvent.targetCharID = portalCharID
+		newSexEvent.data = {hole=BodypartSlot.Anus, loadSize = howMuch}
+		#newSexEvent.isSexEngine = true
+		#newSexEvent.sexEngine = getSexEngine()
+		
+		GM.pc.sendSexEvent(newSexEvent)
+		if(portalCharID != "pc"):
+			getCharacter(portalCharID).sendSexEvent(newSexEvent)
 	
 	if(_action == "anus_lick"):
 		processTime(60)
@@ -1373,7 +1384,18 @@ func _react(_action: String, _args):
 	if(_action == "vagina_lick_spit"):
 		processTime(60)
 		extraText = GM.pc.getBodypartContentsStringList(BodypartSlot.Head)
-		GM.pc.bodypartTransferFluidsTo(BodypartSlot.Head, portalCharID, BodypartSlot.Vagina, 0.2, 20.0)
+		var howMuch = GM.pc.bodypartTransferFluidsToAmount(BodypartSlot.Head, portalCharID, BodypartSlot.Vagina, 0.2, 20.0)
+		var newSexEvent:SexEvent = SexEvent.new()
+		newSexEvent.type = SexEvent.HoleSpitted
+		newSexEvent.sourceCharID = "pc"
+		newSexEvent.targetCharID = portalCharID
+		newSexEvent.data = {hole=BodypartSlot.Vagina, loadSize = howMuch}
+		#newSexEvent.isSexEngine = true
+		#newSexEvent.sexEngine = getSexEngine()
+		
+		GM.pc.sendSexEvent(newSexEvent)
+		if(portalCharID != "pc"):
+			getCharacter(portalCharID).sendSexEvent(newSexEvent)
 	
 	if(_action == "vagina_lick"):
 		processTime(60)

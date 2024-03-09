@@ -219,6 +219,7 @@ func processTurn():
 		])
 		text += GM.ui.processString(item.getForcedOnMessage(false), {receiver=subID})
 		
+		sendSexEvent(SexEvent.BondageGearForced, domID, subID, {itemID=item.id})
 		getSexEngine().addTrackedGear(domID, subID, item.uniqueID)
 		progressGoal(SexGoal.TieUp)
 		

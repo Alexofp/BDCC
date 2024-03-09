@@ -510,7 +510,7 @@ func doDomAction(_id, _actionInfo):
 					text = "{dom.Your} strapon gets squeezed by {sub.your} "+RNG.pick(usedBodypartNames)+" enough for it to suddenly [b]release its contents inside {sub.youHim}[/b]!"
 				}
 			
-		getSub().cumOnFloor()
+		getSub().cumOnFloor(domID)
 		subInfo.cum()
 		return getSexEngine().combineData(getGenericSubOrgasmData(), straponData)
 	
@@ -862,7 +862,7 @@ func doSubAction(_id, _actionInfo):
 					text = "{dom.Your} strapon gets squeezed by {sub.your} "+RNG.pick(usedBodypartNames)+" enough for it to suddenly [b]release its contents inside {sub.youHim}[/b]!"
 				}
 			
-		getSub().cumOnFloor()
+		getSub().cumOnFloor(domID)
 		subInfo.cum()
 		return getSexEngine().combineData(getGenericSubOrgasmData(), straponData)
 	

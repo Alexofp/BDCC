@@ -1857,7 +1857,7 @@ func afterOrgasm(_isSexEngine = false):
 		if(production != null):
 			production.fillPercent(buffsHolder.getCustom(BuffAttribute.CumGenerationAfterOrgasm))
 
-func cumOnFloor():
+func cumOnFloor(_characterID: String = ""):
 	if(hasBodypart(BodypartSlot.Penis)):
 		var penis:BodypartPenis = getBodypart(BodypartSlot.Penis)
 		var production: FluidProduction = penis.getFluidProduction()
@@ -1867,6 +1867,16 @@ func cumOnFloor():
 			if(getWornPenisPump() != null):
 				var result = cumInItem(getWornPenisPump()) # Collect some into the penis pump
 				var returnValue = penis.getFluidProduction().drain() # Waste the rest
+				
+				if(_characterID != ""):
+					var event = SexEventHelper.create(SexEvent.PenisPumpMilked, _characterID, getID(), {
+						loadSize = result,
+					})
+					sendSexEvent(event)
+					if(_characterID != getID()):
+						var otherChar = GlobalRegistry.getCharacter(_characterID)
+						if(otherChar != null):
+							otherChar.sendSexEvent(event)
 				return result + returnValue
 			
 			var returnValue = penis.getFluidProduction().drain()
@@ -2032,6 +2042,26 @@ func bodypartTransferFluidsTo(bodypartID, otherCharacterID, otherBodypartID, fra
 		return false
 	
 	return orifice.transferTo(otherOrifice, fraction, minAmount) > 0.0
+
+func bodypartTransferFluidsToAmount(bodypartID, otherCharacterID, otherBodypartID, fraction = 0.5, minAmount = 0.0):
+	if(!hasBodypart(bodypartID)):
+		return 0.0
+	var bodypart = getBodypart(bodypartID)
+	var orifice = bodypart.getOrifice()
+	if(orifice == null):
+		return 0.0
+	
+	var otherCharacter = GlobalRegistry.getCharacter(otherCharacterID)
+	if(otherCharacter == null):
+		return 0.0
+	if(!otherCharacter.hasBodypart(otherBodypartID)):
+		return 0.0
+	var otherBodypart = otherCharacter.getBodypart(otherBodypartID)
+	var otherOrifice = otherBodypart.getOrifice()
+	if(otherOrifice == null):
+		return 0.0
+	
+	return orifice.transferTo(otherOrifice, fraction, minAmount)
 
 func bodypartShareFluidsWith(bodypartID, otherCharacterID, otherBodypartID, fraction = 0.5):
 	if(!hasBodypart(bodypartID)):

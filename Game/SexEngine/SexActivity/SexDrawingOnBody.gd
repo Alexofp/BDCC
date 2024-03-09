@@ -59,6 +59,7 @@ func processTurn():
 		
 		var writingID = BodyWritings.getRandomWritingIDForZone(zone)
 		getSub().addBodywriting(zone, writingID)
+		sendSexEvent(SexEvent.BodyWritingAdded, domID, subID, {zone=zone,writingID=writingID})
 		return {
 			text="{dom.You} drew [b]'"+str(BodyWritings.getWritingText(writingID))+"'[/b] on {sub.yourHis} "+BodyWritingsZone.getZoneVisibleName(zone)+".",
 			domSay = domReaction(SexReaction.AfterDrawingOnBody, 100),
