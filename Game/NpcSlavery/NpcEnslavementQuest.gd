@@ -41,7 +41,7 @@ func generateTasks():
 	tasksAmountFloat += max(-0.2, meanStat) * 2
 	tasksAmountFloat += max(0.0, -subbyStat) * 3
 	tasksAmountFloat += max(0.0, -naiveStat) * 2
-	var tasksAmount:int = Util.maxi(1, int(round(tasksAmountFloat)))
+	var tasksAmount:int = Util.maxi(2, int(round(tasksAmountFloat)))
 	
 	difficultyMax += max(0.0, bratStat) * 1.0
 	difficultyMax += max(0.0, -impatientStat) * 0.5
@@ -84,7 +84,7 @@ func getQuestStartText():
 		var taskString = task.getTaskString()
 		result.append("[b]"+str(taskString)+"[/b]")
 		
-		var hintString = task.getTaskHint()
+		var hintString = task.getTaskHint(false)
 		if(hintString != null && hintString != ""):
 			result.append(" - "+hintString)
 	
@@ -101,6 +101,11 @@ func handleSexEvent(sexEvent:SexEvent):
 	var theChar = getChar()
 	for task in tasks:
 		task.onSexEvent(theChar, sexEvent)
+
+func onSexEnded(_contex = {}):
+	var theChar = getChar()
+	for task in tasks:
+		task.onSexEnded(theChar, _contex)
 
 func clearTasks():
 	tasks = []

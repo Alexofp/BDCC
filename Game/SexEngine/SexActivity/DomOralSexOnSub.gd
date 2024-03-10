@@ -533,6 +533,7 @@ func doDomAction(_id, _actionInfo):
 		])
 		getDom().gotOrificeStretchedBy(BodypartSlot.Head, subID, 0.1)
 		affectSub(subInfo.fetishScore({Fetish.OralSexReceiving: 1.0}), 0.1, -0.3, -0.01)
+		sendSexEvent(SexEvent.HolePenetrated, subID, domID, {hole=BodypartSlot.Head,engulfed=true,strapon=false})
 		return {text = text, domSay=domReaction(SexReaction.AboutToSuckSubOff)}
 	if(_id == "starttonguefuck"):
 		state = "tonguefucking"

@@ -253,6 +253,7 @@ func onSwitchFrom(_otherActivity, _args):
 func processTurn():
 	if(currentPose == POSE_CHOKEFUCK):
 		subInfo.addConsciousness(-0.01)
+		sendSexEvent(SexEvent.Choking, domID, subID, {strongChoke=false})
 	
 	if(state == "knotting"):
 		var freeRoom = getSub().getPenetrationFreeRoomBy(usedBodypart, domID)
@@ -552,7 +553,7 @@ func doDomAction(_id, _actionInfo):
 				
 				return {text = text}
 			else:
-				sendSexEvent(SexEvent.HolePenetrated, domID, subID, {hole=usedBodypart,engulfed=false})
+				sendSexEvent(SexEvent.HolePenetrated, domID, subID, {hole=usedBodypart,engulfed=false,strapon=isStraponSex()})
 				gonnaCumOutside = false
 				#getSub().gotFuckedBy(usedBodypart, domID)
 				getSub().gotOrificeStretchedBy(usedBodypart, domID, 0.2)
@@ -882,7 +883,7 @@ func doSubAction(_id, _actionInfo):
 			affectDom(domInfo.fetishScore({fetishGiving: 1.0}), 0.2, -0.01)
 			return {text="{sub.You} {sub.youVerb('try', 'tries')} to envelop {dom.yourHis} "+getDickName()+" but it's too big!"}
 		
-		sendSexEvent(SexEvent.HolePenetrated, domID, subID, {hole=usedBodypart,engulfed=true})
+		sendSexEvent(SexEvent.HolePenetrated, domID, subID, {hole=usedBodypart,engulfed=true,strapon=isStraponSex()})
 		affectSub(subInfo.fetishScore({fetishReceiving: 1.0}), 0.1, 0.0, 0.0)
 		affectDom(domInfo.fetishScore({fetishGiving: 1.0}), 0.1*domSensetivity(), -0.01)
 		subInfo.addArousalSex(0.1)

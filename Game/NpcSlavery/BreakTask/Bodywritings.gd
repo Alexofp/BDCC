@@ -5,7 +5,9 @@ func _init():
 
 func getSlaveTypeWeights(_isSlaveLevelup):
 	return {
-		SlaveType.All : 1.0,
+		SlaveType.Slut : 1.0,
+		SlaveType.Submissive : 1.0,
+		SlaveType.All : 0.2,
 	}
 
 func isPossibleFor(_npc, _isSlaveLevelup):
@@ -28,7 +30,7 @@ func onSexEvent(_npc, _event:SexEvent):
 func getTaskString():
 	return "Bodywritings: "+getProgressString()
 
-func getTaskHint():
+func getTaskHint(_isSlaveLevelup):
 	return "Draw dirty things on them!"
 
 func getBodywritingsAmount(_npc):

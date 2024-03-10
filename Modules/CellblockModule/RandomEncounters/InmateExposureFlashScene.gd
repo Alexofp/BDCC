@@ -227,11 +227,17 @@ func _run():
 		else:
 			addButton("Continue", "So lewd", "failed_to_get_away")
 
-	if(state == "after_sex"):
+	if(state == "after_sex" || state == "after_sex_won"):
 		saynn("After the fun time ends, the inmate just leaves you alone.")
 
 		# (scene ends)
 		addButton("Leave", "Time to go", "endthescene")
+		
+	if(state == "after_sex"):
+		GM.ES.triggerRun(Trigger.AfterSexWithDynamicNPCThatWon, [npcID])
+		
+	if(state == "after_sex_won"):
+		GM.ES.triggerRun(Trigger.AfterSexWithDefeatedDynamicNPC, [npcID])
 
 func addWonButton():
 	addButton("Leave", "Just leave before anyone else sees you", "endthescene")
@@ -293,8 +299,10 @@ func _react(_action: String, _args):
 	setState(_action)
 
 func _react_scene_end(_tag, _result):
-	if(_tag in ["subbysex", "domsex"]):
+	if(_tag in ["subbysex"]):
 		setState("after_sex")
+	if(_tag in ["domsex"]):
+		setState("after_sex_won")
 	
 	if(_tag == "guardfight"):
 		processTime(20 * 60)

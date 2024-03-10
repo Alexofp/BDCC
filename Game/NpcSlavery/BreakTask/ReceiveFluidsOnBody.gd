@@ -18,6 +18,8 @@ func isPossibleForPC(_pc, _npc, _isSlaveLevelup):
 		return true
 	if(_pc.hasStrapons()):
 		return true
+	if(_isSlaveLevelup):
+		return true
 	
 	return false
 
@@ -34,7 +36,7 @@ func onSexEvent(_npc, _event:SexEvent):
 	return false
 
 func getTaskString():
-	return "Cum on body: "+str(Util.roundF(currentAmount, 1))+"/"+str(Util.roundF(needAmount, 1))+"ml"
+	return "Cum on body: "+getProgressStringFluids()
 
-func getTaskHint():
+func getTaskHint(_isSlaveLevelup):
 	return "Cum or squirt on them"

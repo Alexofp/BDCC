@@ -598,7 +598,7 @@ func doTrain():
 			if(rewardBalance >= 2):
 				addLove(-0.01)
 		else:
-			var workRoll = obeyMood + workEffect + RNG.randf_range(-1.0, 1.0) + float(slaveLevel)/10.0
+			var workRoll = obeyMood + workEffect + RNG.randf_range(-1.0, 1.0) + float(slaveLevel)/30.0
 			if(workRoll < 0.0):
 				isSuccess = false
 				texts.append( currentSlaveType.getFailedTrainTextBad(getChar()) )
@@ -608,7 +608,7 @@ func doTrain():
 				isSuccess = true
 				texts.append( currentSlaveType.getFailedTrainTextSomeSuccess(getChar()) )
 				deservesReward(1)
-				if(RNG.chance(10)):
+				if(RNG.chance(10 + Util.mini(50, slaveLevel*2))):
 					levelupCurrentSpecialization()
 					actuallyAddedSkill = true
 				addObedience(0.005)
@@ -617,7 +617,7 @@ func doTrain():
 				isSuccess = true
 				texts.append( currentSlaveType.getFailedTrainTextGreatSuccess(getChar()) )
 				deservesReward(2)
-				if(RNG.chance(30)):
+				if(RNG.chance(30 + slaveLevel * 5)):
 					levelupCurrentSpecialization()
 					actuallyAddedSkill = true
 				addObedience(0.01)
@@ -678,7 +678,29 @@ func getExperienceStr():
 	return str(slaveExperience) + "/" + str(getExperienceRequiredForNextLevel())
 
 func generateLevelUpTasks():
-	levelupTasks = NpcBreakTaskBase.generateTasksFor(getChar(), slaveType, true, 2, 1.0)
+	var taskAmount = 1
+	
+	if(slaveLevel >= 3 && RNG.chance(50)):
+		taskAmount += 1
+	if(slaveLevel >= 10 && RNG.chance(50)):
+		taskAmount += 1
+	if(slaveLevel >= 4 && RNG.chance(20 + personalityScore({PersonalityStat.Subby: 1.0}) * 10.0)):
+		taskAmount += 1
+	
+	var difficultyMin = 1.0
+	var difficultyMax = 1.0
+	
+	difficultyMin += sqrt(slaveLevel)*0.05
+	difficultyMax += sqrt(slaveLevel)*0.1
+	
+	if(slaveLevel >= 6 && RNG.chance(5)):
+		difficultyMax *= 2
+	
+	if(slaveLevel >= 3 && RNG.chance(10 + personalityScore({PersonalityStat.Mean: 1.0}) * 5.0)):
+		difficultyMax *= 4
+		
+	
+	levelupTasks = NpcBreakTaskBase.generateTasksFor(getChar(), slaveType, true, taskAmount, difficultyMin, difficultyMax)
 	for task in levelupTasks:
 		var _ok = task.connect("onTaskCompleted", self, "onLevelupTaskCompleted")
 
@@ -723,6 +745,9 @@ func doLevelup():
 
 	if(GM.main != null):
 		GM.main.addMessage("Your slave named "+getChar().getName()+" has reached slave level "+str(slaveLevel)+"!")
+		var howMuchExp = int(slaveLevel * 5)
+		GM.main.addMessage("You received "+str(howMuchExp)+" experience")
+		GM.pc.addExperience(howMuchExp)
 		
 	emit_signal("onSlaveLevelup", self)
 
@@ -985,9 +1010,9 @@ func getLevelUpHintText():
 	
 	for task in levelupTasks:
 		var taskString = task.getTaskString()
-		result.append("[b]"+str(taskString)+"[/b]")
+		result.append("[b]"+str(taskString)+"[/b]"+(" (completed)" if task.isCompleted() else ""))
 		
-		var hintString = task.getTaskHint()
+		var hintString = task.getTaskHint(true)
 		if(hintString != null && hintString != ""):
 			result.append(" - "+hintString)
 	
@@ -997,6 +1022,11 @@ func checkIfTasksGotCompleted():
 	var theChar = getChar()
 	for task in levelupTasks:
 		task.checkIfCompletedFor(theChar)
+
+func onSexEnded(_contex = {}):
+	var theChar = getChar()
+	for task in levelupTasks:
+		task.onSexEnded(theChar, _contex)
 
 func saveData():
 	var data = {

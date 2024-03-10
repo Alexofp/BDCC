@@ -1103,6 +1103,7 @@ func gotFuckedBy(bodypartSlot, characterID, showMessages = true, fireSexEvent = 
 		var event = SexEventHelper.create(SexEvent.HolePenetrated, characterID, getID(), {
 			hole = bodypartSlot,
 			engulfed = false,
+			strapon = ch.isWearingStrapon(),
 		})
 		ch.sendSexEvent(event)
 		sendSexEvent(event)
@@ -2563,6 +2564,10 @@ func onSexEnded(_contex = {}):
 			continue
 		var effect = statusEffects[effectID]
 		effect.onSexEnded(_contex)
+	if(hasEnslaveQuest()):
+		getEnslaveQuest().onSexEnded(_contex)
+	if(isSlaveToPlayer()):
+		getNpcSlavery().onSexEnded(_contex)
 		
 func getForcedObedienceLevel() -> float:
 	return buffsHolder.getCustom(BuffAttribute.ForcedObedience)

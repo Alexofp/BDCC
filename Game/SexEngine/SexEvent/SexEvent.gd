@@ -6,6 +6,7 @@ class_name SexEvent
 #data:
 # hole = Which BodypartSlot was penetrated
 # engulfed = if the target was the one who caused the penetration (cowgirl position or sub engulfed the dick)
+# strapon = was a strapon used
 const HolePenetrated = "HolePenetration"
 
 # Source = Person with dick
@@ -134,6 +135,14 @@ const UniqueOrgasm = "UniqueOrgasm"
 #data:
 # strongChoke = is the choking extra hard
 const Choking = "Choking"
+
+# Only gets called in sex engine
+# Source = Who is spanking
+# Target = Who got spanked
+#data:
+# strongSpank = was the spank hard
+# pain = how much pain did the spank inflict
+const Spanked = "Spanked"
 
 const EmptyEvent = "EmptyEvent"
 

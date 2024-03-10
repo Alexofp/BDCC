@@ -41,14 +41,20 @@ func isCompleted():
 func onSexEvent(_npc, _event:SexEvent):
 	return false
 
+func onSexEnded(_npc, _contex = {}):
+	pass
+
 func getTaskString():
 	return "Do a backflip!"
 
-func getTaskHint():
+func getTaskHint(_isSlaveLevelup):
 	return ""
 
 func getProgressString():
 	return ""+str(currentAmount)+"/"+str(needAmount)
+
+func getProgressStringFluids():
+	return ""+str(Util.roundF(currentAmount, 1))+"/"+str(Util.roundF(needAmount, 1))+"ml"
 
 func getProgressStringCustomCurrent(customCurrent):
 	return ""+str(customCurrent)+"/"+str(needAmount)

@@ -494,6 +494,18 @@ func getDebugActions():
 			],
 		},
 		{
+			"id": "addExp",
+			"name": "Add exp",
+			"args": [
+				{
+					"id": "amount",
+					"name": "Amount",
+					"type": "number",
+					"value": 1000,
+				},
+			],
+		},
+		{
 			"id": "toggleDebug",
 			"name": "Toggle Debug Info",
 			"args": [
@@ -509,4 +521,6 @@ func doDebugAction(_id, _args = {}):
 		npcSlavery.levelupCurrentSpecialization()
 	if(_id == "toggleDebug"):
 		setFlag("NpcSlaveryModule.debugSlaveInfo", !getFlag("NpcSlaveryModule.debugSlaveInfo", false))
+	if(_id == "addExp"):
+		npcSlavery.addExperience(_args["amount"])
 		

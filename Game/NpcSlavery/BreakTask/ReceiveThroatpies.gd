@@ -16,6 +16,8 @@ func isPossibleForPC(_pc, _npc, _isSlaveLevelup):
 		return true
 	if(_pc.hasStrapons()):
 		return true
+	if(_isSlaveLevelup):
+		return true
 	
 	return false
 
@@ -33,5 +35,5 @@ func onSexEvent(_npc, _event:SexEvent):
 func getTaskString():
 	return "Received throatpies: "+getProgressString()
 
-func getTaskHint():
+func getTaskHint(_isSlaveLevelup):
 	return "Cum down their throat. If you don't have a penis, you can use a loaded strapon!"

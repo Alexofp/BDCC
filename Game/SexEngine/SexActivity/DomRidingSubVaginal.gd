@@ -205,6 +205,7 @@ func onSwitchFrom(_otherActivity, _args):
 func processTurn():
 	if(currentPose == POSE_COWGIRLCHOKE):
 		subInfo.addConsciousness(-0.01)
+		sendSexEvent(SexEvent.Choking, domID, subID, {strongChoke=false})
 	
 	if(state == "knotting"):
 		var freeRoom = getDom().getPenetrationFreeRoomBy(usedBodypart, subID)
@@ -627,7 +628,7 @@ func doDomAction(_id, _actionInfo):
 			affectDom(domInfo.fetishScore({fetishReceiving: 1.0}), 0.2, -0.01)
 			return {text="{dom.You} {dom.youVerb('try', 'tries')} to envelop {sub.yourHis} "+getDickName()+" but it's too big!"}
 		
-		sendSexEvent(SexEvent.HolePenetrated, subID, domID, {hole=usedBodypart,engulfed=true})
+		sendSexEvent(SexEvent.HolePenetrated, subID, domID, {hole=usedBodypart,engulfed=true,strapon=isStraponSex()})
 		affectSub(subInfo.fetishScore({fetishGiving: 1.0}), 0.1 * subSensetivity(), 0.0, 0.0)
 		affectDom(domInfo.fetishScore({fetishReceiving: 1.0}), 0.1, -0.01)
 		subInfo.addArousalSex(0.1 * subSensetivity())

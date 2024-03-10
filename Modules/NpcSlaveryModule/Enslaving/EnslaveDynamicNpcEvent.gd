@@ -5,6 +5,7 @@ func _init():
 
 func registerTriggers(es):
 	es.addTrigger(self, Trigger.DefeatedDynamicNPC)
+	es.addTrigger(self, Trigger.AfterSexWithDefeatedDynamicNPC)
 
 func run(_triggerID, _args):
 	var npcID = _args[0]
@@ -24,14 +25,16 @@ func run(_triggerID, _args):
 			addDisabledButton("Kidnap!", "They are not ready to be kidnapped")
 	else:
 		if(!getModule("NpcSlaveryModule").canEnslave()):
-			addDisabledButton("Enslave!", "Your cell is not big enough for this. Find someone who can upgrade it first.")
+			if(_triggerID == Trigger.DefeatedDynamicNPC):
+				addDisabledButton("Enslave!", "Your cell is not big enough for this. Find someone who can upgrade it first.")
 			return
 		
 		if(!character.hasEnslaveQuest() ):
 			if(character.getInventory().hasEquippedItemWithTag(ItemTag.AllowsEnslaving)):
 				addButton("Enslave!", "Try to enslave them", "doenslave", [_args[0]])
 			else:
-				addDisabledButton("Enslave!", "They need to be wearing a collar for you to be able to enslave them")
+				if(_triggerID == Trigger.DefeatedDynamicNPC):
+					addDisabledButton("Enslave!", "They need to be wearing a collar for you to be able to enslave them")
 		
 
 func getPriority():

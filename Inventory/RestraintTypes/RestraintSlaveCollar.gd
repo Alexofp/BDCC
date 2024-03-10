@@ -16,6 +16,9 @@ func getLevel():
 func alwaysSavedWhenStruggledOutOf():
 	return true
 
+func getDodgeDifficulty():
+	return 10.0
+
 func canBeEasilyRemovedByDom():
 	var theItem = getItem()
 	if(theItem != null):

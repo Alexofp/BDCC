@@ -42,7 +42,7 @@ func canBeEasilyRemovedByDom():
 	return canStruggle()
 
 func getDodgeDifficulty():
-	return 1.0 * level * npcDodgeDifficultyMod
+	return 1.0 * Util.maxi(1, level) * npcDodgeDifficultyMod
 
 func getFinalChanceToForceARestraint(_pc):
 	var dodgeChance = _pc.getDodgeChance()

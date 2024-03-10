@@ -1005,6 +1005,20 @@ func endSex():
 		subs = {},
 		doms = {},
 	}
+	for domID in doms:
+		var domInfo = doms[domID]
+		sexResult["doms"][domID] = {
+			"timesCame": domInfo.timesCame,
+			"averageLust": domInfo.getAverageLust(),
+		}
+	for subID in subs:
+		var subInfo = subs[subID]
+		sexResult["subs"][subID] = {
+			"timesCame": subInfo.timesCame,
+			"averageLust": subInfo.getAverageLust(),
+			"averageResistance": subInfo.getAverageResistance(),
+			"averageFear": subInfo.getAverageFear(),
+		}
 	
 	sexEnded = true
 	var texts = ["The sex scene has ended!"]
@@ -1026,17 +1040,13 @@ func endSex():
 					saveCondomToLootIfPerk(theCondom)
 			
 		domInfo.getChar().afterSexEnded(domInfo)
-		domInfo.getChar().onSexEnded({sexEngine=self,isDom=true})
+		domInfo.getChar().onSexEnded({sexEngine=self,isDom=true,sexFullResult=sexResult,sexResult=sexResult["doms"][domID]})
 		
 		var sexEndInfo = domInfo.getSexEndInfo()
 		if(sexEndInfo.size() > 0):
 			texts.append(domInfo.getChar().getName()+":")
 			texts.append(Util.join(sexEndInfo, "\n"))
-			
-		sexResult["doms"][domID] = {
-			"timesCame": domInfo.timesCame,
-			"averageLust": domInfo.getAverageLust(),
-		}
+
 
 	for subID in subs:
 		var subInfo = subs[subID]
@@ -1050,19 +1060,12 @@ func endSex():
 					saveItemToLoot(theCondom)
 		
 		subInfo.getChar().afterSexEnded(subInfo)
-		subInfo.getChar().onSexEnded({sexEngine=self,isDom=false})
+		subInfo.getChar().onSexEnded({sexEngine=self,isDom=false,sexFullResult=sexResult,sexResult=sexResult["subs"][subID]})
 
 		var sexEndInfo = subInfo.getSexEndInfo()
 		if(sexEndInfo.size() > 0):
 			texts.append(subInfo.getChar().getName()+":")
 			texts.append(Util.join(sexEndInfo, "\n"))
-			
-		sexResult["subs"][subID] = {
-			"timesCame": subInfo.timesCame,
-			"averageLust": subInfo.getAverageLust(),
-			"averageResistance": subInfo.getAverageResistance(),
-			"averageFear": subInfo.getAverageFear(),
-		}
 
 	messages.append(Util.join(texts, "\n"))
 
