@@ -348,10 +348,10 @@ func _react(_action: String, _args):
 			GM.pc.addSkillExperience(Skill.BDSM, restraintData.getLevel() * mult)
 
 		if damage > 0 && restraintData.isLocked():
-			damage = damage/10.0
-			if damage > 0.05:
-				damage = 0.05
-				lockDamage = 0.02
+			var con = 3.0 + restraintData.getLevel()
+			damage = damage/con
+			if damage > 1.0/con:
+				damage = 1.0/con
 			addMessage("Surely it would have been done better if only it was not locked.")
 			
 		if(fatallFail):
@@ -361,8 +361,10 @@ func _react(_action: String, _args):
 			addMessage("You lost "+str(Util.roundF(-damage*100.0, 1))+"% of progress")
 		if(damage > 0.0):
 			restraintData.takeDamage(damage)
-			restraintData.takeLockDamage(lockDamage)
 			addMessage("You made "+str(Util.roundF(damage*100.0, 1))+"% of progress ("+str(Util.roundF(finalMinigameStatus*100.0, 1))+"% efficiency)")
+		if(lockDamage > 0.0):
+			restraintData.takeLockDamage(lockDamage)
+			addMessage("You also made "+str(Util.roundF(lockDamage*100.0, 1))+"% of progress with lock ("+str(Util.roundF(finalMinigameStatus*100.0, 1))+"% efficiency)")
 		if(addLust != 0):
 			addLust = GM.pc.receiveDamage(DamageType.Lust, addLust)
 			addMessage("You received "+str(addLust)+" lust")
@@ -395,7 +397,7 @@ func _react(_action: String, _args):
 
 				if _newLevel >= 1:
 					canKeepTheRestraint = true
-					restraintData.setLevel(restraintData.getLevel())
+					restraintData.setLevel(_newLevel)
 					GM.pc.getInventory().addItem(item)
 					keptRestraintID = item.getUniqueID()
 		
@@ -447,13 +449,15 @@ func _react(_action: String, _args):
 				mult = 5
 			GM.pc.addSkillExperience(Skill.BDSM, restraintData.getLevel() * mult)
 			
-		print(damage)
 		if lockDamage < 0.0:
 			restraintData.takeLockDamage(lockDamage)
 			addMessage("You lost "+str(Util.roundF(-lockDamage*100.0, 1))+"% of progress")
 		if lockDamage > 0.0:
 			restraintData.takeLockDamage(lockDamage)
 			addMessage("You made "+str(Util.roundF(lockDamage*100.0, 1))+"% of progress ("+str(Util.roundF(minigameStatus*100.0, 1))+"% efficiency)")
+		if damage > 0.0:
+			restraintData.takeDamage(lockDamage)
+			addMessage("You made "+str(Util.roundF(damage*100.0, 1))+"% of progress ("+str(Util.roundF(minigameStatus*100.0, 1))+"% efficiency)")
 		if addLust != 0:
 			addLust = GM.pc.receiveDamage(DamageType.Lust, addLust)
 			addMessage("You received "+str(addLust)+" lust")
@@ -518,13 +522,16 @@ func _react(_action: String, _args):
 			if fightMode:
 				mult = 5
 			GM.pc.addSkillExperience(Skill.BDSM, restraintData.getLevel() * mult)
-		print(lockDamage)
+
 		if damage < 0.0:
 			restraintData.takeDamage(damage)
 			addMessage("You lost "+str(Util.roundF(-damage*100.0, 1))+"% of progress")
 		if damage > 0.0:
 			restraintData.takeDamage(damage)
 			addMessage("You made "+str(Util.roundF(damage*100.0, 1))+"% of progress ("+str(Util.roundF(minigameStatus*100.0, 1))+"% efficiency)")
+		if lockDamage > 0.0:
+			restraintData.takeLockDamage(lockDamage)
+			addMessage("You made "+str(Util.roundF(lockDamage*100.0, 1))+"% of progress ("+str(Util.roundF(minigameStatus*100.0, 1))+"% efficiency)")
 		if addLust != 0:
 			addLust = GM.pc.receiveDamage(DamageType.Lust, addLust)
 			addMessage("You received "+str(addLust)+" lust")
