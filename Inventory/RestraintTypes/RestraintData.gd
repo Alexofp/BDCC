@@ -131,7 +131,7 @@ func doFailingStruggle(_pc, _minigame):
 	var stamina = 0
 	
 	text = "You fail while trying to make "+getItem().getVisibleName()+" slip off"
-	stamina = 20
+	stamina = 10 + 4 * level
 	
 	return {"text": text, "damage": damage, "lust": lust, "pain": pain, "stamina": stamina}
 
@@ -147,11 +147,12 @@ func doStruggle(_pc, _minigame):
 	var pain = 0
 	var damage = 0
 	var lockDamage = 0.0
-	var stamina = 0
-	
+	var stamina = 5 + 3 * level
 	text = "You struggle, trying to make the "+getItem().getVisibleName()+" slip off"
+	
 	damage = calcDamage(_pc)
-	stamina = 10
+	if isLocked():
+		lockDamage = RNG.randf_rangeDis(0, damage / 5) 
 	
 	#damage = calcDamage()
 	
@@ -162,7 +163,7 @@ func doLockpick(_pc, _minigame):
 	var pain = 0
 	var damage = 0
 	var lockDamage = 0.0
-	var stamina = 5 * level
+	var stamina = 5 + 2 * level
 	var text = "You picking the lock, trying to unlock the " + getItem().getVisibleName()
 	
 	lockDamage = _minigame
@@ -174,7 +175,7 @@ func doCut(_pc, _minigame):
 	var pain = 0
 	var damage = 0.0
 	var lockDamage = 0.0
-	var stamina = 10
+	var stamina = 5 + 2 * level
 	var text = "You are looking a good place to cut, trying to rid off the " + getItem().getVisibleName()
 	
 	damage = _minigame
