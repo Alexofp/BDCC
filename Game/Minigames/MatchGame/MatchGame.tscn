@@ -126,7 +126,8 @@ margin_bottom = 394.0
 margin_right = 466.0
 margin_bottom = 14.0
 text = "Click when at least two dices has same number,
-bigger number is better."
+bigger number is better, 6 6 6 is the best.
+Some dots will not appear if you can't see."
 align = 1
 
 [node name="Button" type="Button" parent="StartMenu/CenterContainer/VBoxContainer"]

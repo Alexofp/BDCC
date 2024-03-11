@@ -2,11 +2,13 @@ extends Control
 
 var inGame = false
 var freeze = false
-var timer = 20.0
+var timer = 30.0
 var timeLeft = timer
 var lastRound = timer
 var lastdice = 0
 var dices
+var level = 1
+var blind = false
 
 signal minigameCompleted(finalScore)
 
@@ -22,7 +24,7 @@ func _process(delta):
 		setTimeBar(timeLeft / timer)
 		if timeLeft <= 0:
 			finish()
-		if lastRound - timeLeft > 0.5:
+		if lastRound - timeLeft > 0.6:
 			lastRound = timeLeft
 			doRound()
 
@@ -35,7 +37,7 @@ func doRound():
 		lastdice = 0
 	if lastdice < 0:
 		lastdice = dices.size() - 1
-	if RNG.chance(30):
+	if RNG.chance(35 - difficulty()):
 		updateDice(dices[lastdice], RNG.pick(dices).number)
 	else:
 		updateDice(dices[lastdice], dices[lastdice].number)
@@ -44,6 +46,7 @@ func updateDice(dice, number):
 	while number == dice.number: 
 		number = RNG.randi_range(1, 6)
 		
+	dice.blind = blind
 	dice.number = number
 	dice.color = Color.black
 
@@ -55,7 +58,7 @@ func _on_Click(event):
 
 func finish():
 	freeze = true
-	yield(get_tree().create_timer(0.8), "timeout")
+	yield(get_tree().create_timer(0.9), "timeout")
 	freeze = false
 	emit_signal("minigameCompleted", calcScore())
 
@@ -74,7 +77,14 @@ func calcScore():
 			score = 0
 	return score/10.0
 
+# caclc difficulty 1 to 20, rise up with level
+func difficulty():
+	return min((0.6 + pow(max(1.0, level) / 2.0, 1.2)), 20)
+
 func _on_Button_pressed():
+	timer = 30.0 - difficulty()/2.0 
+	timeLeft = timer
+	lastRound = timer
 	setIngame(true)
 
 func setIngame(_inGame):
@@ -84,3 +94,9 @@ func setIngame(_inGame):
 
 func setTimeBar(val):
 	$GameScreen/ProgressBar.value = clamp(val, 0.0, 1.0)
+
+func config(_params = {}):
+	if(_params.has("level")):
+		level = _params["level"]
+	if(_params.has("blind")):
+		blind = _params["blind"]
