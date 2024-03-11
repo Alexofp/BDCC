@@ -633,12 +633,12 @@ func doTrain():
 			if(unlockInfo["unlocksAt"] == newSkillLevel):
 				extraTexts.append("[i]"+unlockInfo["name"]+" unlocked! "+unlockInfo["text"]+"[/i]")
 				unlockedSomething = true
-	if(!unlockedSomething):
-		var allUnlocks = currentSlaveType.getUnlockHints(getChar())
-		for unlockInfo in allUnlocks:
-			if(unlockInfo["unlocksAt"] > newSkillLevel):
-				extraTexts.append("[i]Current rank is "+rankToLetter(newSkillLevel)+". Next unlock is "+unlockInfo["name"]+" at rank "+rankToLetter(unlockInfo["unlocksAt"])+"[/i]")
-				break
+				
+		if(unlockedSomething):
+			for unlockInfo in allUnlocks:
+				if(unlockInfo["unlocksAt"] > newSkillLevel):
+					extraTexts.append("[i]Next unlock is "+unlockInfo["name"]+" at rank "+rankToLetter(unlockInfo["unlocksAt"])+"[/i]")
+					break
 	
 	texts.append_array(extraTexts)
 	

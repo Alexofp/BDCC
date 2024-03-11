@@ -49,3 +49,33 @@ func getTrainText(_npc, _skillLevel):
 		return "There is not much new you can teach your slave. {npc.He} {npc.isAre} pretty much a perfect submissive now! But you still go through some old lessons and practice the art of obedience with {npc.him}."
 		
 	return .getTrainText(_npc, _skillLevel) 
+
+
+func getUnlockHints(_npc):
+	return [
+		{
+			unlocksAt = 2,
+			name = "Bondage helper",
+			text = "Your sub can now help unlock one of your restraints per day",
+		},
+		{
+			unlocksAt = 4,
+			name = "Showering the owner",
+			text = "Your sub can now shower you",
+		},
+		{
+			unlocksAt = 7,
+			name = "Massage",
+			text = "Your sub can now perform a special massage on you which feels almost as a good yoga exercise",
+		},
+		{
+			unlocksAt = 10,
+			name = "Better showering",
+			text = "Your sub can clean you inside too now and take care of your lustness",
+		},
+		{
+			unlocksAt = 15,
+			name = "Slave helper",
+			text = "You can now order your sub to give another one of your slaves a shower or help bring them to the nursery for a child birth",
+		},
+	]
