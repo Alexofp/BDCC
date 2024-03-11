@@ -140,13 +140,13 @@ func calcRestrainMult(_pc, _minigame):
 	if _pc.isBlindfolded():
 		if _pc.hasPerk(Perk.BDSMBlindfold):
 			mult = 0.9
-		mult = 0.7
+		mult = 0.8
 
 	if _pc.hasBoundArms() && _pc.hasBlockedHands():
 		if _pc.hasPerk(Perk.BDSMPerfectStreak):
 			mult *= 0.6
 		else:
-			mult *= 0.3
+			mult *= 0.4
 	elif _pc.hasBoundArms() || _pc.hasBlockedHands():
 		if _pc.hasPerk(Perk.BDSMPerfectStreak):
 			mult *= 0.8

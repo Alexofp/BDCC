@@ -1826,7 +1826,7 @@ func processStruggleTurn(isActivelyStruggling = false):
 			addPain += struggleData["pain"]
 		if(struggleData.has("stamina")):
 			addStamina += struggleData["stamina"]
-		if(struggleData.has("text")):
+		if(struggleData.has("text") && struggleData["text"] != ""):
 			texts.append(struggleData["text"])
 			#additionalStruggleText += struggleData["text"] + "\n\n"
 		
