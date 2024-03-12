@@ -45,6 +45,9 @@ func getInteractActions():
 func getCustomInteractAnimInfo():
 	return null
 
+func keepsSlaveIDBusy(_charID):
+	return false
+
 func getSlave() -> NpcSlave:
 	if(slavery == null):
 		return null

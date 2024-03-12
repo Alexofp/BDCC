@@ -511,6 +511,42 @@ func getDebugActions():
 			"args": [
 			],
 		},
+		{
+			"id": "setObedience",
+			"name": "Set obedience",
+			"args": [
+				{
+					"id": "amount",
+					"name": "Amount (%)",
+					"type": "number",
+					"value": 100.0,
+				},
+			],
+		},
+		{
+			"id": "setLove",
+			"name": "Set love",
+			"args": [
+				{
+					"id": "amount",
+					"name": "Amount (%)",
+					"type": "number",
+					"value": 100.0,
+				},
+			],
+		},
+		{
+			"id": "setBrokenSpirit",
+			"name": "Set broken spirit",
+			"args": [
+				{
+					"id": "amount",
+					"name": "Amount (%)",
+					"type": "number",
+					"value": 100.0,
+				},
+			],
+		},
 	]
 
 func doDebugAction(_id, _args = {}):
@@ -523,4 +559,9 @@ func doDebugAction(_id, _args = {}):
 		setFlag("NpcSlaveryModule.debugSlaveInfo", !getFlag("NpcSlaveryModule.debugSlaveInfo", false))
 	if(_id == "addExp"):
 		npcSlavery.addExperience(_args["amount"])
-		
+	if(_id == "setObedience"):
+		npcSlavery.obedience = clamp(_args["amount"] / 100.0, 0.0, 1.0)
+	if(_id == "setLove"):
+		npcSlavery.love = clamp(_args["amount"] / 100.0, 0.0, 1.0)
+	if(_id == "setBrokenSpirit"):
+		npcSlavery.brokenspirit = clamp(_args["amount"] / 100.0, 0.0, 1.0)

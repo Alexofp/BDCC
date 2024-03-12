@@ -5,6 +5,8 @@ onready var animationTree2 = $AnimationTree2
 onready var doll = $Doll3D
 onready var doll2 = $Doll3D2
 
+var isPat = false
+
 func _init():
 	id = StageScene.Grope
 
@@ -59,6 +61,7 @@ func playAnimation(animID, _args = {}):
 	var state_machine = animationTree["parameters/StateMachine/playback"]
 	var state_machine2 = animationTree2["parameters/StateMachine/playback"]
 
+	isPat = false
 	if(animID == "grope"):
 		state_machine.travel("GropeFront_1-loop")
 		state_machine2.travel("GropeFront_2-loop")
@@ -71,6 +74,23 @@ func playAnimation(animID, _args = {}):
 	if(animID == "strokefast"):
 		state_machine.travel("GropeFrontFast_1-loop 2")
 		state_machine2.travel("GropeFrontStrokeFast_2-loop")
+		
+	if(animID == "tease"):
+		state_machine.travel("GropeFrontTease_1-loop")
+		state_machine2.travel("GropeFrontTease_2-loop")
+		isPat = true
+	if(animID == "pat"):
+		state_machine.travel("GropeFrontPat_1-loop")
+		state_machine2.travel("GropeFrontPat_2-loop")
+		isPat = true
+	if(animID == "watchrub"):
+		state_machine.travel("GropeFrontSelfFem_1-loop")
+		state_machine2.travel("GropeFrontSelfWatch_2-loop")
+		isPat = true
+	if(animID == "watchstroke"):
+		state_machine.travel("GropeFrontSelfMale_1-loop")
+		state_machine2.travel("GropeFrontSelfWatch_2-loop 2")
+		isPat = true
 
 func canTransitionTo(_actionID, _args = []):
 	var firstDoll = "pc"
@@ -80,9 +100,13 @@ func canTransitionTo(_actionID, _args = []):
 	if(_args.has("npc")):
 		secondDoll = _args["npc"]
 		
+	if(!isPat && _actionID in ["tease", "pat", "watchrub", "watchstroke"]):
+		return false
+	if(isPat && _actionID in ["grope", "gropefast", "stroke", "strokefast"]):
+		return false
 	if(doll.getCharacterID() != firstDoll || doll2.getCharacterID() != secondDoll):
 		return false
 	return true
 
 func getSupportedStates():
-	return ["grope", "gropefast", "stroke", "strokefast"]
+	return ["grope", "gropefast", "stroke", "strokefast", "tease", "pat", "watchrub", "watchstroke"]

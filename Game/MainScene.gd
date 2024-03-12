@@ -177,6 +177,9 @@ func getDynamicCharacterIDsFromPool(poolID:String):
 	
 	return dynamicCharactersPools[poolID].keys()
 
+func getPCSlavesIDs():
+	return getDynamicCharacterIDsFromPool(CharacterPool.Slaves)
+
 func getDynamicCharactersPoolSize(poolID:String):
 	if(!dynamicCharactersPools.has(poolID)):
 		return 0

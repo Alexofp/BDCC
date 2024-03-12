@@ -44,3 +44,6 @@ func doActionSimple(_slaveID, _extraSlavesIDs = {}):
 	return {
 		text = text,
 	}
+
+func getAnimationInfo(_slaveID, _extraSlavesIDs = {}):
+	return [StageScene.Grope, "pat", {npc="pc", pc=_slaveID}]

@@ -994,10 +994,11 @@ func startActivity(activID, args = []):
 		stopActivity()
 	var newActivity = GlobalRegistry.createSlaveActivity(activID)
 	if(newActivity == null):
-		return
+		return null
 	newActivity.slavery = weakref(self)
 	newActivity.onStart(args)
 	activity = newActivity
+	return activity
 
 func didTalkWithToday():
 	talkedTimesToday += 1
