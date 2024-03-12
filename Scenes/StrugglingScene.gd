@@ -14,8 +14,8 @@ var shouldPlayAnimations = true
 
 #var minigameScene = preload("res://Game/Minigames/Struggling/StrugglingGame.tscn")
 var minigameScene = preload("res://Game/Minigames/ClickAtTheRightTime/ClickAtTheRightTime.tscn")
-var pickMinigameScene = preload("res://Game/Minigames/TestGame/TestGame.tscn")
-var cutMinigameScene = preload("res://Game/Minigames/TestGame/TestGame.tscn")
+var pickMinigameScene = preload("res://Game/Minigames/ClickAtTheRightTime/ClickAtTheRightTime.tscn")
+var cutMinigameScene = preload("res://Game/Minigames/ClickAtTheRightTime/ClickAtTheRightTime.tscn")
 
 func _init():
 	sceneID = "StrugglingScene"
