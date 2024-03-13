@@ -49,3 +49,12 @@ func getTrainText(_npc, _skillLevel):
 		return "There is not much new you can teach your slave. {npc.He} {npc.isAre} pretty much a perfect slut now! But you still go through some old lessons and practice the art of being a whore with {npc.him}."
 		
 	return .getTrainText(_npc, _skillLevel) 
+
+func getUnlockHints(_npc):
+	return [
+		{
+			unlocksAt = 5,
+			name = "Prostitution",
+			text = "Your slut can now whore herself out!",
+		},
+	]

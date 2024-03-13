@@ -22,7 +22,7 @@ func _run():
 		
 		addButton("Wander around", "Leash your slave and wander around the station with them", "do_wander")
 		addDisabledButton("Walkies", "Your slave doesn't have high enough pet skill")
-		addDisabledButton("Pimping", "Your slave doesn't have high enough slut skill")
+		#addDisabledButton("Pimping", "Your slave doesn't have high enough slut skill")
 		addButton("Cancel", "Never mind", "endthescene")
 		
 	if(state == "do_wander"):

@@ -336,6 +336,7 @@ func registerEverything():
 		registerSceneFolder("res://Scenes/Cellblock/")
 		registerSceneFolder("res://Scenes/Mineshaft/")
 		registerSceneFolder("res://Game/NpcSlavery/SlaveActionScenes/")
+		registerSceneFolder("res://Game/NpcSlavery/SlaveActionScenes/Prostitution/")
 		
 		var end2 = OS.get_ticks_usec()
 		var worker_time2 = (end2-start2)/1000000.0

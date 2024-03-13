@@ -11,6 +11,7 @@ func _init():
 	slaveSkillsRequired = {
 		SlaveType.Submissive: 7,
 	}
+	onlyShowWhenHaveRequiredSkills = true
 	
 	buttonPriority = 60
 
@@ -20,8 +21,3 @@ func getVisibleName():
 func getVisibleDesc():
 	return "Order your sub to give you a massage"
 
-func isActionVisible(_slaveID):
-	var npcSlavery:NpcSlave = getSlave(_slaveID)
-	if(npcSlavery.getSlaveSkill(SlaveType.Submissive) < 7):
-		return false
-	return true

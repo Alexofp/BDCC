@@ -9,6 +9,9 @@ func getFlags():
 		
 		
 		"debugSlaveInfo": flag(FlagType.Bool),
+		
+		"slutEventCooldown": flag(FlagType.Number),
+		"slutBigEventCooldown": flag(FlagType.Number),
 	}
 
 func _init():

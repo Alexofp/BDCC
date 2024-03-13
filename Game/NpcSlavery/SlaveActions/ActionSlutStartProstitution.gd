@@ -1,23 +1,23 @@
 extends SlaveActionBase
 
 func _init():
-	id = "ActionSubSlaveHelper"
+	id = "ActionSlutStartProstitution"
 	actionType = Action
 	#extraSlaves = {}
-	sceneID = "ActionSlaverySubManageHelper"
+	sceneID = "ActionSlutStartProstitutionScene"
 	slaveResistChanceMult = 1.0
 	
 	slaveMinLevel = 0
 	slaveSkillsRequired = {
-		SlaveType.Submissive: 15,
+		SlaveType.Slut: 5,
 	}
 	onlyShowWhenHaveRequiredSkills = true
+	endsTalkScene = true
 	
-	buttonPriority = 40
+	buttonPriority = 50
 
 func getVisibleName():
-	return "Slave helper"
+	return "Prostitution"
 
 func getVisibleDesc():
-	return "Manage how your sub will help other slaves"
-
+	return "Tell your slut to start whoring herself out"

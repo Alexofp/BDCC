@@ -243,7 +243,7 @@ func addButtonsForActionsOfType(actionsType):
 	
 	for theAction in actionsSorted:
 		#var theAction:SlaveActionBase = GlobalRegistry.getSlaveAction(actionID)
-		if(!theAction.isActionVisible(npcID)):
+		if(!theAction.isActionVisibleFinal(npcID)):
 			continue
 		
 		if(theAction.extraSlaves.empty()):

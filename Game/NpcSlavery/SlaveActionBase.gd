@@ -11,6 +11,7 @@ var id = "ERROR"
 var actionType = Nothing
 var slaveRequired = true
 var slaveSkillsRequired = {}
+var onlyShowWhenHaveRequiredSkills = false
 var slaveMinLevel = 0
 var extraSlaves = {
 #	"dom": {
@@ -58,6 +59,15 @@ func getFinalVisibleDesc():
 
 func isActionVisible(_slaveID):
 	return true
+
+func isActionVisibleFinal(_slaveID):
+	var npcSlave:NpcSlave = getSlave(_slaveID)
+	if(onlyShowWhenHaveRequiredSkills):
+		for slaveType in slaveSkillsRequired:
+			if(npcSlave.getSlaveSkill(slaveType) < slaveSkillsRequired[slaveType]):
+				return false
+	
+	return isActionVisible(_slaveID)
 
 func checkCanDo(_slaveID, _extraSlavesIDs = {}):
 
