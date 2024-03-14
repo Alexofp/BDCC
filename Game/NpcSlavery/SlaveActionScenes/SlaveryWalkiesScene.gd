@@ -3,12 +3,20 @@ extends SceneBase
 var npcID = ""
 var npc:DynamicCharacter
 
+var walkiesType = ""
+
 func _init():
 	sceneID = "SlaveryWalkiesScene"
 
 func _initScene(_args = []):
 	npcID = _args[0]
 	npc = GlobalRegistry.getCharacter(npcID)
+	
+	if(_args.size() > 1):
+		walkiesType = _args[1]
+		
+		if(walkiesType == "walkies"):
+			npc.getNpcSlavery().startActivity("Walkies")
 
 func resolveCustomCharacterName(_charID):
 	if(_charID == "npc"):
@@ -65,9 +73,12 @@ func _run():
 		var roomMemory = GM.main.getRoomMemory(roomID)
 		if(roomMemory != null && roomMemory != ""):
 			saynn("[i]"+roomMemory+"[/i]")
+		
+		if(isPetWalkies()):
+			saynn(npc.getNpcSlavery().getActivity().getNeedText())
 			
 		_roomInfo._onEnter()
-		GM.ES.triggerRun(Trigger.EnteringRoomWithSlave, [GM.pc.location, npcID])
+		GM.ES.triggerRun(Trigger.EnteringRoomWithSlave, [GM.pc.location, npcID, walkiesType])
 	
 	if(state == "return_to_cell"):
 		aimCameraAndSetLocName(GM.pc.getCellLocation())
@@ -101,12 +112,16 @@ func _react(_action: String, _args):
 		return _room._onButton(keyid)
 	
 	if(_action == "go"):
-		playAnimation(StageScene.Duo, "walk", {pc=npcID, npc="pc", flipNPC=true, npcAction="walk", bodyState={leashedBy="pc"}})
+		if(isPetWalkies()):
+			playAnimation(StageScene.PuppyDuo, "walk", {npc=npcID, npcAction="walk", flipNPC=true, npcBodyState={naked=true, leashedBy="pc"}})
+			npc.getNpcSlavery().getActivity().generateNextWantIfNeeded()
+		else:
+			playAnimation(StageScene.Duo, "walk", {pc=npcID, npc="pc", flipNPC=true, npcAction="walk", bodyState={leashedBy="pc"}})
 		
 		GM.pc.setLocation(GM.world.applyDirectionID(GM.pc.location, _args[0]))
 		processTime(30)
 		aimCamera(GM.pc.location)
-		GM.ES.triggerReact(Trigger.EnteringRoomWithSlave, [GM.pc.location, _args[1], npcID])
+		GM.ES.triggerReact(Trigger.EnteringRoomWithSlave, [GM.pc.location, _args[1], npcID, walkiesType])
 		
 		GM.main.showLog()
 
@@ -119,6 +134,14 @@ func _react(_action: String, _args):
 	if(_action == "me"):
 		runScene("MeScene")
 
+func isPetWalkies():
+	return walkiesType == "walkies" && npc != null && npc.isSlaveToPlayer() && (npc.getNpcSlavery().getActivityID() == "Walkies")
+
+func _onSceneEnd():
+	if(npc == null || !npc.isSlaveToPlayer()):
+		if(npc.getNpcSlavery().getActivityID() == "Walkies"):
+			npc.getNpcSlavery().stopActivity() # Stop pet walkies activity
+
 func getSceneCompanions():
 	return [npcID]
 
@@ -126,6 +149,7 @@ func saveData():
 	var data = .saveData()
 	
 	data["npcID"] = npcID
+	data["walkiesType"] = walkiesType
 
 	return data
 	
@@ -134,3 +158,5 @@ func loadData(data):
 	
 	npcID = SAVE.loadVar(data, "npcID", "")
 	npc = GlobalRegistry.getCharacter(npcID)
+	walkiesType = SAVE.loadVar(data, "walkiesType", "")
+	

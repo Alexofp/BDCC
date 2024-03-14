@@ -6,6 +6,7 @@ func _init():
 func registerTriggers(es):
 	es.addTrigger(self, Trigger.EnteringRoom)
 	es.addTrigger(self, Trigger.EnteringRoomWithSlave)
+	es.addTrigger(self, Trigger.PCLookingForTrouble)
 
 
 func run(_triggerID, _args):
@@ -47,11 +48,16 @@ func run(_triggerID, _args):
 func onButton(_method, _args):
 	if(_method == "lookslut"):
 		setFlag("NpcSlaveryModule.slutEventCooldown", 10)
-		runScene("SlutProstitutionWatch", [_args[0]])
+		if(!GM.ES.triggerReact(Trigger.SlaverySlutLookAtEvent, _args)):
+			addMessage("The slut didn't react to you")
+			GM.main.reRun()
+		#runScene("SlutProstitutionWatch", [_args[0]])
 	
 	
 func react(_triggerID, _args):
-	if(getFlag("NpcSlaveryModule.slutEventCooldown", 0) != 1):
+	var isLookingForTrouble = (_triggerID == Trigger.PCLookingForTrouble)
+	
+	if(getFlag("NpcSlaveryModule.slutEventCooldown", 0) != 1 && !isLookingForTrouble):
 		return false
 	if(!(WorldPopulation.Inmates in GM.pc.getLocationPopulation())):
 		return false
@@ -76,12 +82,13 @@ func react(_triggerID, _args):
 		runScene("SlutProstitutionReceiveCredits", [randomChar.getID()])
 		return true
 	
-	if(RNG.chance(20) && allWorkingSluts.size() > 0 && getFlag("NpcSlaveryModule.slutBigEventCooldown", 0)<=0):
+	if((RNG.chance(20) || isLookingForTrouble) && allWorkingSluts.size() > 0 && (getFlag("NpcSlaveryModule.slutBigEventCooldown", 0)<=0 || isLookingForTrouble)):
 		var randomChar = RNG.pick(allWorkingSluts)
 		
 		setFlag("NpcSlaveryModule.slutBigEventCooldown", RNG.randi_range(20, 100))
-		runScene("SlutProstitutionWatch", [randomChar.getID(), true])
-		return true
+		#runScene("SlutProstitutionWatch", [randomChar.getID(), true])
+		if(GM.ES.triggerReact(Trigger.SlaverySlutImportantEvent, [randomChar.getID()])):
+			return true
 	return false
 	
 func getPriority():

@@ -63,8 +63,10 @@ func playAnimation(animID, _args = {}):
 	
 	if(_args.has("flipNPC") && _args["flipNPC"]):
 		doll2.scale.x = abs(doll2.scale.x)
+		doll.transform.origin.x = 2.0
 	else:
-		doll2.scale.x = -abs(doll2.scale.x)
+		doll2.scale.x = -abs(doll2.scale.x)#
+		doll.transform.origin.x = 1.5
 	
 	updateSubAnims()
 	

@@ -15,10 +15,14 @@ func onStart(_args = []):
 	slutSkill = getSlave().getSlaveSkill(SlaveType.Slut)
 	
 	workHoursLeft = RNG.randi_range(3,4)
-	if(slutSkill >= 10):
-		workHoursLeft += RNG.randi_range(7,9)
+	if(slutSkill >= 8):
+		workHoursLeft += RNG.randi_range(2,4)
+	if(slutSkill >= 11):
+		workHoursLeft += RNG.randi_range(3,5)
+	if(slutSkill >= 13):
+		workHoursLeft += RNG.randi_range(3,6)
 	if(slutSkill >= 15):
-		workHoursLeft += RNG.randi_range(8,12)
+		workHoursLeft += RNG.randi_range(4,6)
 	workHoursRemember = workHoursLeft
 
 func onNewDay():
@@ -44,7 +48,7 @@ func hoursPassed(_howMuch):
 func processOneWorkHour():
 	var npcSlave:NpcSlave = getSlave()
 	# Probably could use some fancy formulas here
-	var chanceEarned = 10 + slutSkill * 5
+	var chanceEarned = 15 + slutSkill * 3
 	var chanceMod = Util.remapValue(npcSlave.getObedience(), 0.0, 1.0, 0.5, 1.0) * Util.remapValue(npcSlave.getLove(), 0.0, 1.0, 0.5, 1.0) * Util.remapValue(npcSlave.getBrokenSpirit(), 0.0, 1.0, 0.5, 1.0)
 	
 	if(RNG.chance(chanceEarned * chanceMod)):

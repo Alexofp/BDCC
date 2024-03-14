@@ -570,52 +570,6 @@ func afterHealingGelTreatment():
 	removeEffect(StatusEffect.StretchedPainfullyAnus)
 	removeEffect(StatusEffect.StretchedPainfullyPussy)
 
-func isFullyNaked():
-	var slotsToBeFullyNaked = [InventorySlot.Body, InventorySlot.UnderwearBottom, InventorySlot.UnderwearTop]
-	
-	for slot in slotsToBeFullyNaked:
-		if(inventory.hasSlotEquipped(slot)):
-			return false
-	
-	return true
-
-func getExposedPrivates():
-	var possiblePrivates = [BodypartSlot.Breasts, BodypartSlot.Penis, BodypartSlot.Vagina, BodypartSlot.Anus]
-	var result = []
-	var coveredParts = {}
-	
-	var equippedItems = inventory.getAllEquippedItems()
-	for inventorySlot in equippedItems:
-		var item = equippedItems[inventorySlot]
-		var itemCovers = item.coversBodyparts()
-		for itemCover in itemCovers:
-			coveredParts[itemCover] = true
-	
-	for possiblePrivatePart in possiblePrivates:
-		if(!hasBodypart(possiblePrivatePart)):
-			continue
-		
-		var bodypart = getBodypart(possiblePrivatePart)
-		if(bodypart.safeWhenExposed()):
-			continue
-		
-		if(!coveredParts.has(possiblePrivatePart) || !coveredParts[possiblePrivatePart]):
-			result.append(possiblePrivatePart)
-		
-	return result
-
-func isWearingAnyUnderwear():
-	return inventory.hasSlotEquipped(InventorySlot.UnderwearBottom) || inventory.hasSlotEquipped(InventorySlot.UnderwearTop)
-
-func isInventorySlotBlocked(invslot):
-	var items = getInventory().getAllEquippedItems()
-	for itemSlot in items:
-		var item:ItemBase = items[itemSlot]
-		var itemState = item.getItemState()
-		if(itemState != null && (invslot in itemState.blocksInventorySlots())):
-			return true
-	return false
-
 func afterEatingAtCanteen():
 	addStamina(100)
 	addPain(-20)

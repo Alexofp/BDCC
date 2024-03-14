@@ -20,6 +20,8 @@ func _ready():
 	registerEventTrigger(Trigger.MasturbationSpottedInmate, EventTriggerWeighted.new())
 	registerEventTrigger(Trigger.SleepInCell, EventTriggerWeighted.new())
 	registerEventTrigger(Trigger.SceneAndStateHook, EventTriggerSceneHook.new())
+	registerEventTrigger(Trigger.SlaverySlutLookAtEvent, EventTriggerWeighted.new())
+	registerEventTrigger(Trigger.SlaverySlutImportantEvent, EventTriggerWeighted.new())
 	
 	var modules = GlobalRegistry.getModules()
 	for moduleID in modules:

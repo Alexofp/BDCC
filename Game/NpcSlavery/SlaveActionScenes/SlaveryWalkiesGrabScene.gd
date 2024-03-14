@@ -17,11 +17,18 @@ func _init():
 func _run():
 	if(state == ""):
 		addCharacter(npcID)
+		var npcSlave:NpcSlave = npc.getNpcSlavery()
 		
 		saynn("What are you planning to do with {npc.name}?")
 		
 		addButton("Wander around", "Leash your slave and wander around the station with them", "do_wander")
-		addDisabledButton("Walkies", "Your slave doesn't have high enough pet skill")
+		if(npcSlave.getSlaveSkill(SlaveType.Pet) >= 3):
+			if(npcSlave.getWorkEfficiency() <= 0.25):
+				addDisabledButton("Walkies", "Your pet is too tired for walkies, give them some rest")
+			else:
+				addButton("Walkies", "Give your pet walkies around the station", "do_petwander")
+		else:
+			addDisabledButton("Walkies", "Your slave doesn't have high enough pet skill. Requires at least rank D-")
 		#addDisabledButton("Pimping", "Your slave doesn't have high enough slut skill")
 		addButton("Cancel", "Never mind", "endthescene")
 		
@@ -32,7 +39,17 @@ func _run():
 		
 		saynn("You leash your slave and bring {npc.him} out into the main hall.")
 		
-		addButton("Continue", "See what happens next", "start_wander")
+		addButton("Continue", "See what happens next", "start_wander", [""])
+	
+	if(state == "do_petwander"):
+		GM.pc.setLocation("hall_mainentrance")
+		aimCameraAndSetLocName("hall_mainentrance")
+		#playAnimation(StageScene.PuppyDuo, "walk", {npc=npcID, npcAction="walk", flipNPC=true, npcBodyState={naked=true, leashedBy="pc"}})
+		playAnimation(StageScene.PuppyDuo, "stand", {npc=npcID, flipNPC=true, npcBodyState={naked=true, leashedBy="pc"}})
+
+		saynn("You "+("undress and " if !npc.isFullyNaked() else "")+"put some puppy restraints on your pet before bringing {npc.him} out into the main hall for walkies.")
+		
+		addButton("Continue", "See what happens next", "start_wander", ["walkies"])
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
@@ -40,7 +57,7 @@ func _react(_action: String, _args):
 		return
 		
 	if(_action == "start_wander"):
-		runScene("SlaveryWalkiesScene", [npcID])
+		runScene("SlaveryWalkiesScene", [npcID, _args[0]])
 		endScene()
 		return
 	

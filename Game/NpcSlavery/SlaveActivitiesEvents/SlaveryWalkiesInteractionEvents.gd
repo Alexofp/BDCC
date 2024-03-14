@@ -15,6 +15,9 @@ func registerTriggers(es):
 func run(_triggerID, _args):
 	var locName = _args[0]
 	var npcID = _args[1]
+	var walkiesType = ""
+	if(_args.size() > 2):
+		walkiesType = _args[2]
 	var theChar:DynamicCharacter = GlobalRegistry.getCharacter(npcID)
 	var npcSlavery:NpcSlave = theChar.getNpcSlavery()
 	
@@ -25,7 +28,7 @@ func run(_triggerID, _args):
 			addDisabledButton("Mirror (Slave)", "Slave level 1+ required to do this")
 
 	if(locName in ["main_dressing1", "main_dressing2"]):
-		addButton("Shower (Slave)", "Make your slave take a shower", "startshower", [npcID])
+		addButton("Shower (Slave)", "Make your slave take a shower", "startshower", [npcID, walkiesType])
 
 	if(locName in ["main_punishment_spot"]):
 		addButton("Stocks (Slave)", "Put your slave into the stocks", "startstocks", [npcID])
@@ -46,7 +49,10 @@ func onButton(_method, _args):
 	if(_method == "starthair"):
 		runScene("ActionSlaveryHaircut", [_args[0]])
 	if(_method == "startshower"):
-		runScene("ActionSlaveryShower", [_args[0]])
+		if(_args[1] == "walkies"):
+			runScene("SlaveryPetWalkiesShower", [_args[0]])
+		else:
+			runScene("ActionSlaveryShower", [_args[0]])
 	if(_method == "startstocks"):
 		GM.main.endCurrentScene()
 		runScene("PunishSlaveryLeaveInStocks", [_args[0]])

@@ -49,3 +49,17 @@ func getTrainText(_npc, _skillLevel):
 		return "There is not much new you can teach your slave. {npc.He} {npc.isAre} pretty much a perfect pet now! But you still go through some old lessons and practice the art of being a cute puppy/ kitty with {npc.him}."
 		
 	return .getTrainText(_npc, _skillLevel) 
+
+func getUnlockHints(_npc):
+	return [
+		{
+			unlocksAt = 3,
+			name = "Walkies",
+			text = "You can now give your pet walkies around the station!",
+		},
+		{
+			unlocksAt = 8,
+			name = "Feed cum",
+			text = "You can now feed your pet in a different way in the showers",
+		},
+	]
