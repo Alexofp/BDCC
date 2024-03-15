@@ -3,6 +3,9 @@ extends EventBase
 func _init():
 	id = "SlaveryWalkiesInteractionEvents"
 
+var peeSpots = ["yard_eastCorridor", "yard_northCorridor", "yard_westCorridor"]
+var playSpots = ["yard_deadend1", "yard_deadend2", "yard_waterfall", "yard_vaulthere"]
+
 func registerTriggers(es):
 	es.addTrigger(self, Trigger.EnteringRoomWithSlave, "main_bathroom1")
 	es.addTrigger(self, Trigger.EnteringRoomWithSlave, "main_bathroom2")
@@ -11,6 +14,11 @@ func registerTriggers(es):
 	es.addTrigger(self, Trigger.EnteringRoomWithSlave, "main_punishment_spot")
 	es.addTrigger(self, Trigger.EnteringRoomWithSlave, "fight_slutwall")
 	es.addTrigger(self, Trigger.EnteringRoomWithSlave, "medical_nursery")
+	es.addTrigger(self, Trigger.EnteringRoomWithSlave, "hall_canteen")
+	for theSpot in peeSpots:
+		es.addTrigger(self, Trigger.EnteringRoomWithSlave, theSpot)
+	for theSpot in playSpots:
+		es.addTrigger(self, Trigger.EnteringRoomWithSlave, theSpot)
 
 func run(_triggerID, _args):
 	var locName = _args[0]
@@ -21,11 +29,29 @@ func run(_triggerID, _args):
 	var theChar:DynamicCharacter = GlobalRegistry.getCharacter(npcID)
 	var npcSlavery:NpcSlave = theChar.getNpcSlavery()
 	
+	if(locName in ["hall_canteen"]):
+		if(walkiesType == "walkies"):
+			if(npcSlavery.getActivityID() == "Walkies" && npcSlavery.getActivity().petWants == "food"):
+				addButton("Canteen (Pet)", "Feed your puppy!", "start_pet_canteen", [npcID])
+			else:
+				addDisabledButton("Canteen (Pet)", "Your puppy is not hungry")
+	
 	if(locName in ["main_bathroom1", "main_bathroom2"]):
 		if(npcSlavery.getLevel() >= 1):
 			addButton("Mirror (Slave)", "Change your slave's haircut", "starthair", [npcID])
 		else:
 			addDisabledButton("Mirror (Slave)", "Slave level 1+ required to do this")
+		
+		if(npcSlavery.getActivityID() == "Walkies" && npcSlavery.getActivity().petWants == "pee"):
+			addButton("Urinals (Pet)", "Help your puppy relief themselves", "start_pee", [npcID])
+
+	if(locName in peeSpots):
+		if(npcSlavery.getActivityID() == "Walkies" && npcSlavery.getActivity().petWants == "pee"):
+			addButton("Bushes (Pet)", "Help your puppy relief themselves", "start_pee", [npcID])
+
+	if(locName in playSpots):
+		if(npcSlavery.getActivityID() == "Walkies" && npcSlavery.getActivity().petWants == "play"):
+			addButton("Play (Pet)", "This looks like a good spot to play with your pet", "start_play", [npcID])
 
 	if(locName in ["main_dressing1", "main_dressing2"]):
 		addButton("Shower (Slave)", "Make your slave take a shower", "startshower", [npcID, walkiesType])
@@ -61,3 +87,9 @@ func onButton(_method, _args):
 		runScene("PunishSlaveryLeaveInSlutwall", [_args[0]])
 	if(_method == "givebirth"):
 		runScene("SlaveryHelpGiveBirth", [_args[0]])
+	if(_method == "start_pet_canteen"):
+		runScene("SlaveryPetWalkiesCanteen", [_args[0]])
+	if(_method == "start_pee"):
+		runScene("SlaveryPetWalkiesPee", [_args[0]])
+	if(_method == "start_play"):
+		runScene("SlaveryPetWalkiesPlay", [_args[0]])
