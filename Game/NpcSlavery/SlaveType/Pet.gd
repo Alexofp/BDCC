@@ -59,7 +59,7 @@ func getUnlockHints(_npc):
 		},
 		{
 			unlocksAt = 8,
-			name = "Feed cum",
-			text = "You can now feed your pet in a different way in the showers",
+			name = "More actions",
+			text = "More actions are available to satisfy your pet's wants during the walkies",
 		},
 	]

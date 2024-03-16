@@ -29,7 +29,7 @@ func generateNextWant():
 	while(petWants == petLastWant):
 		petWants = RNG.pickWeightedPairs(petPossibleWants)
 
-func generateNextWantIfNeeded(chanceToGenerate = 10):
+func generateNextWantIfNeeded(chanceToGenerate = 20):
 	if(petWants != ""):
 		return
 	if(wantCooldown > 0):

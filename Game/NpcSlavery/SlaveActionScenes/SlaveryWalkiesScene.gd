@@ -139,8 +139,10 @@ func isPetWalkies():
 
 func _onSceneEnd():
 	if(npc == null || !npc.isSlaveToPlayer()):
-		if(npc.getNpcSlavery().getActivityID() == "Walkies"):
-			npc.getNpcSlavery().stopActivity() # Stop pet walkies activity
+		return
+	
+	if(npc.getNpcSlavery().getActivityID() == "Walkies"):
+		npc.getNpcSlavery().stopActivity() # Stop pet walkies activity
 
 func getSceneCompanions():
 	return [npcID]
