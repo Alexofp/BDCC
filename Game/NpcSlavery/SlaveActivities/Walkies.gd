@@ -6,7 +6,7 @@ var petPossibleWants = [
 	["shower", 1.0],
 	["food", 1.0],
 	["play", 1.0],
-	#["train", 1.0],
+	["train", 1.0],
 	["pee", 0.3],
 ]
 var wantCooldown = 3
@@ -44,6 +44,9 @@ func satisfyWant(theWant):
 		GM.main.addMessage("Pet's want is satisfied!")
 		petLastWant = petWants
 		petWants = ""
+
+func onPat():
+	pass
 
 func _init():
 	id = "Walkies"

@@ -52,6 +52,9 @@ func run(_triggerID, _args):
 	if(locName in playSpots):
 		if(npcSlavery.getActivityID() == "Walkies" && npcSlavery.getActivity().petWants == "play"):
 			addButton("Play (Pet)", "This looks like a good spot to play with your pet", "start_play", [npcID])
+		if(npcSlavery.getActivityID() == "Walkies" && npcSlavery.getActivity().petWants == "train"):
+			addButton("Train (Pet)", "This looks like a good spot to teach your pet some tricks", "start_train", [npcID])
+
 
 	if(locName in ["main_dressing1", "main_dressing2"]):
 		addButton("Shower (Slave)", "Make your slave take a shower", "startshower", [npcID, walkiesType])
@@ -93,3 +96,5 @@ func onButton(_method, _args):
 		runScene("SlaveryPetWalkiesPee", [_args[0]])
 	if(_method == "start_play"):
 		runScene("SlaveryPetWalkiesPlay", [_args[0]])
+	if(_method == "start_train"):
+		runScene("SlaveryPetWalkiesTrain", [_args[0]])
