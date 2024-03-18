@@ -550,6 +550,17 @@ func levelupCurrentSpecialization():
 	if(slaveSpecializations[slaveType] > 15):
 		slaveSpecializations[slaveType] = 15
 
+func levelupSpecialization(theSlaveType):
+	if(!slaveSpecializations.has(slaveType)):
+		return false
+	
+	if(slaveSpecializations[theSlaveType] >= 15):
+		return false
+	slaveSpecializations[theSlaveType] += 1
+	if(slaveSpecializations[theSlaveType] > 15):
+		slaveSpecializations[theSlaveType] = 15
+	return true
+
 # F- F  F+ D- D  D+ C- C  B- B  A- A  S- S  S+ S++
 # 0  1  2  3  4  5  6  7  8  9  10 11 12 13 14 15
 static func rankToLetter(theRank:int):

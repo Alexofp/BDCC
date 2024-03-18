@@ -12,6 +12,7 @@ func getFlags():
 		
 		"slutEventCooldown": flag(FlagType.Number),
 		"slutBigEventCooldown": flag(FlagType.Number),
+		"pupEventCooldown": flag(FlagType.Number),
 	}
 
 func _init():

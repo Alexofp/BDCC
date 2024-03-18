@@ -75,7 +75,8 @@ func _run():
 			saynn("[i]"+roomMemory+"[/i]")
 		
 		if(isPetWalkies()):
-			saynn(npc.getNpcSlavery().getActivity().getNeedText())
+			var puppyPoints = npc.getNpcSlavery().getActivity().puppyPoints
+			sayn("Puppy points: "+str(puppyPoints)+"/"+str(npc.getNpcSlavery().getActivity().getRequiredPuppyPoints())+". "+npc.getNpcSlavery().getActivity().getNeedText())
 			
 		_roomInfo._onEnter()
 		GM.ES.triggerRun(Trigger.EnteringRoomWithSlave, [GM.pc.location, npcID, walkiesType])
@@ -97,6 +98,7 @@ func _react(_action: String, _args):
 		processTime(5*60)
 		GM.pc.setLocation(GM.pc.getCellLocation())
 		setState("return_to_cell")
+		npc.getNpcSlavery().addTired(2.0)
 		return
 	
 	# RoomAction support
@@ -115,11 +117,16 @@ func _react(_action: String, _args):
 		if(isPetWalkies()):
 			playAnimation(StageScene.PuppyDuo, "walk", {npc=npcID, npcAction="walk", flipNPC=true, npcBodyState={naked=true, leashedBy="pc"}})
 			npc.getNpcSlavery().getActivity().generateNextWantIfNeeded()
+			var petSkill = npc.getNpcSlavery().getSlaveSkill(SlaveType.Pet)
+			var tiredMod = 1.0 - petSkill * 0.05
+			
+			npc.getNpcSlavery().addTired(max(0.0,0.04 * tiredMod))
+			processTime(60)
 		else:
 			playAnimation(StageScene.Duo, "walk", {pc=npcID, npc="pc", flipNPC=true, npcAction="walk", bodyState={leashedBy="pc"}})
-		
+			processTime(30)
+			
 		GM.pc.setLocation(GM.world.applyDirectionID(GM.pc.location, _args[0]))
-		processTime(30)
 		aimCamera(GM.pc.location)
 		GM.ES.triggerReact(Trigger.EnteringRoomWithSlave, [GM.pc.location, _args[1], npcID, walkiesType])
 		
