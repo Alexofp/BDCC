@@ -6,6 +6,7 @@ const Nurses = "Nurses"
 const Inmates = "Inmates"
 const Engineers = "Engineers"
 const Slaves = "Slaves"
+const MentalWard = "Mental Ward"
 
 static func getPrisonPopulationPools():
 	return [Guards, Nurses, Inmates, Engineers]
@@ -17,7 +18,7 @@ static func getEnslavedPools():
 	return [Slaves]
 
 static func getAllPools():
-	return [Guards, Nurses, Inmates, Engineers, Slaves]
+	return [Guards, Nurses, Inmates, Engineers, Slaves, MentalWard]
 
 static func characterTypeToPool(charType):
 	if(charType == CharacterType.Guard):

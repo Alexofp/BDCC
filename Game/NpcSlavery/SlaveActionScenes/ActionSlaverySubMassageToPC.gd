@@ -13,6 +13,8 @@ func resolveCustomCharacterName(_charID):
 
 func _reactInit():
 	npc.getNpcSlavery().addTired(1)
+	if(!GM.pc.hasEffect(StatusEffect.Yoga)):
+		npc.getNpcSlavery().addExperience(10)
 	GM.pc.addEffect(StatusEffect.Yoga)
 
 func _init():

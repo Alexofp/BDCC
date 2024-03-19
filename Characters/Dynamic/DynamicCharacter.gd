@@ -14,12 +14,18 @@ var temporaryCharacter = false
 var flags = {}
 var enslaveQuest = null
 var npcSlavery = null
+var npcChatColorOverride = ""
 
 func _init():
 	npcHasMenstrualCycle = true
 
 func _getName():
 	return npcName
+
+func getChatColor():
+	if(npcChatColorOverride != ""):
+		return Color(npcChatColorOverride)
+	return .getChatColor()
 
 func getGender():
 	return NpcGender.toNormalGender(npcGeneratedGender)
@@ -157,6 +163,7 @@ func saveData():
 		"pickedSkinRColor": pickedSkinRColor.to_html(),
 		"pickedSkinGColor": pickedSkinGColor.to_html(),
 		"pickedSkinBColor": pickedSkinBColor.to_html(),
+		"npcChatColorOverride": npcChatColorOverride,
 	}
 	
 	data["bodyparts"] = {}
@@ -234,6 +241,9 @@ func loadData(data):
 	flags = SAVE.loadVar(data, "flags", {})
 	npcDefaultEquipment = SAVE.loadVar(data, "npcDefaultEquipment", [])
 	npcCharacterType = SAVE.loadVar(data, "npcCharacterType", CharacterType.Generic)
+	if(data.has("npcChatColorOverride")):
+		npcChatColorOverride = SAVE.loadVar(data, "npcChatColorOverride", "")
+		
 	if(!data.has("pickedSkin")):
 		applyRandomSkinAndColorsAndParts()
 	else:

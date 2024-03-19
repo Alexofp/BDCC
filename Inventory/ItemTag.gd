@@ -35,6 +35,7 @@ enum {
 	PortalPanties,
 	
 	AllowsEnslaving,
+	ReturnsToPCIfSlaveReleased,
 }
 
 static func getName(tag):

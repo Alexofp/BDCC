@@ -21,8 +21,8 @@ func getTakeOffScene():
 
 func getTags():
 	if(GM.main != null && GM.main.getFlag("FightClubModule.CanBuySlaveCollars", false)):
-		return [ItemTag.AllowsEnslaving, ItemTag.SoldByTheAnnouncer]
-	return [ItemTag.AllowsEnslaving]
+		return [ItemTag.AllowsEnslaving, ItemTag.ReturnsToPCIfSlaveReleased, ItemTag.SoldByTheAnnouncer]
+	return [ItemTag.AllowsEnslaving, ItemTag.ReturnsToPCIfSlaveReleased]
 
 func getPrice():
 	return 10

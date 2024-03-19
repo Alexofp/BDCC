@@ -227,3 +227,15 @@ func doActionSimple(_slaveID, _extraSlavesIDs = {}):
 	return {
 		text = Util.join(theTexts, "\n\n"),
 	}
+
+
+func getExtraActions(_slaveID, _extraSlavesIDs = {}):
+	return [
+		{
+			name = "Release slave",
+			desc = "Free your slave and let them leave your cell",
+			sceneID = "ActionSlaveryFreeSlaveScene",
+			args = [],
+			buttonChecks = [],
+		}
+	]

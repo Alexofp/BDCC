@@ -27,6 +27,7 @@ onready var debugScreen = $HBoxContainer/DebugPanel
 onready var debugPanelButton = $HBoxContainer/Panel2/MarginContainer/VBoxContainer/HBoxContainer3/DebugMenu
 onready var rollbackButton = $HBoxContainer/Panel2/MarginContainer/VBoxContainer/HBoxContainer/RollbackButton
 var uiTextboxScene = preload("res://UI/UITextbox.tscn")
+var uiTextboxBigScene = preload("res://UI/UITextboxBig.tscn")
 onready var textcontainer = $HBoxContainer/VBoxContainer2/ScrollContainer/VBoxContainer
 onready var smartCharacterPanel = $HBoxContainer/Panel2/MarginContainer/VBoxContainer/SmartCharacterPanel
 onready var devCommentaryPanel = $HBoxContainer/DevCommentary
@@ -286,6 +287,16 @@ func addUITextbox(id):
 	assert(!textboxes.has(id), "Trying to add a textbox with the same id. Id is "+id)
 	
 	var uitextbox = uiTextboxScene.instance()
+	uitextbox.id = id
+	textcontainer.add_child(uitextbox)
+	uitextbox.grab_focus()
+	textboxes[id] = uitextbox
+	return uitextbox
+
+func addBigUITextbox(id):
+	assert(!textboxes.has(id), "Trying to add a textbox with the same id. Id is "+id)
+	
+	var uitextbox = uiTextboxBigScene.instance()
 	uitextbox.id = id
 	textcontainer.add_child(uitextbox)
 	uitextbox.grab_focus()

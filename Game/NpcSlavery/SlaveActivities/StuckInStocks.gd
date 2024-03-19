@@ -27,7 +27,7 @@ func hoursPassed(_howMuch):
 		if(GM.main.characterIsVisible(theChar.getID())):
 			return
 		
-		var possible = []
+		var possible = ["onto"]
 		if(theChar.hasReachableVagina()):
 			possible.append("pussy")
 		if(theChar.hasReachableAnus()):
@@ -60,6 +60,9 @@ func hoursPassed(_howMuch):
 				theChar.gotAnusFuckedBy(idToUse)
 				theChar.cummedInAnusBy(idToUse)
 				theChar.addTallymarkButt()
+			if(randomFuck == "onto"):
+				theChar.cummedOnBy(idToUse)
+				theChar.addTallymarkButt()
 				
 			var npcSlave:NpcSlave = theChar.getNpcSlavery()
 			if(npcSlave != null):
@@ -69,6 +72,7 @@ func hoursPassed(_howMuch):
 				else:
 					npcSlave.addDespair(0.01)
 					npcSlave.addBrokenSpirit(0.05 * npcSlave.getWorkEfficiency())
+					npcSlave.addExperience(5)
 
 func getInteractActions():
 	return [

@@ -64,6 +64,7 @@ func hoursPassed(_howMuch):
 		if(currentHelpingTask == "wash"):
 			otherSlave.afterTakingAShower()
 			GM.main.addMessage(getChar().getName()+" just washed your slave named "+otherSlave.getName()+" in the shower")
+			getSlave().addExperience(10)
 		if(currentHelpingTask == "birth"):
 			if(otherSlave.isReadyToGiveBirth()):
 				var bornChilds = otherSlave.giveBirth()
@@ -72,7 +73,9 @@ func hoursPassed(_howMuch):
 				
 				if(bornChildAmount > 0):
 					GM.main.addLogMessage("News (Slave)", "You just received news that "+otherSlave.getName()+" was just brought into nursery by "+getChar().getName()+" where "+otherSlave.heShe()+" gave birth to "+str(bornChildAmount)+" kid"+("s" if bornChildAmount != 1 else "")+":\n\n"+bornString)
-		
+				getSlave().addExperience(30)
+				otherSlave.getNpcSlavery().addExperience(50)
+				
 		otherSlave.getNpcSlavery().stopActivity()
 		currentHelpingTask = ""
 		currentTargetID = ""

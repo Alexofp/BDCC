@@ -14,3 +14,6 @@ func getCurrentColor():
 
 func _on_ColorPicker_color_changed(color):
 	emit_signal("color_changed", color)
+
+func getData():
+	return getCurrentColor()

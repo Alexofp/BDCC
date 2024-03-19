@@ -26,7 +26,7 @@ func _run():
 			if(npcSlavery == null):
 				continue
 			
-			addButton(("(!) " if npcSlavery.hasRandomEventToTrigger() else "")+character.getName(), "Check on this "+character.getSpeciesFullName(), "do_check", [character])
+			addButton(("(!) " if npcSlavery.hasRandomEventToTrigger() else "")+character.getName(), character.getSmallDescription(), "do_check", [character])
 	
 func _react(_action: String, _args):
 	if(_action == "endthescene"):

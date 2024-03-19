@@ -98,6 +98,7 @@ func _react(_action: String, _args):
 		bornChildAmount = bornChilds.size()
 		bornString = GM.CS.getChildBirthInfoString(bornChilds)
 		GM.pc.addSkillExperience(Skill.Breeder, 50) # Reward for being near
+		npc.getNpcSlavery().addExperience(50)
 		
 	setState(_action)
 

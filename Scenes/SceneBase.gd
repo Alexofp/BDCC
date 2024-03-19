@@ -230,6 +230,9 @@ func addButtonWithChecksAt(index:int, text: String, tooltip: String, method: Str
 func addTextbox(id):
 	return GM.ui.addUITextbox(id)
 
+func addBigTextbox(id):
+	return GM.ui.addBigUITextbox(id)
+
 func getTextboxData(id):
 	return GM.ui.getUIdata(id)
 
