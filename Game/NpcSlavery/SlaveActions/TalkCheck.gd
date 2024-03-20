@@ -58,6 +58,8 @@ func doActionSimple(_slaveID, _extraSlavesIDs = {}):
 		var spoiling = npcSlavery.getSpoiling()
 		var fear = npcSlavery.getFear()
 		
+		var neediness = npcSlavery.getNeediness() # Value from 0.0 to 100.0
+		
 		if(!npcSlavery.isActivelyResisting()):
 			if(awareness >= 0.8):
 				slaveWords.append(RNG.pick([
@@ -206,6 +208,27 @@ func doActionSimple(_slaveID, _extraSlavesIDs = {}):
 		if(npcSlavery.getUnhappinessEscapeChance() > 5.0):
 			slaveWords.append(RNG.pick([
 				"I'm not happy to be here. Especially after everything you did to me.",
+				]))
+				
+		if(neediness >= 70.0):
+			slaveWords.append(RNG.pick([
+				"I will do anything, just let me cum, ple-e-ease!.. I feel like I'm about to break..",
+				]))
+		elif(neediness >= 50.0):
+			slaveWords.append(RNG.pick([
+				"I so fucking horny, you can't even imagine it. Just let me cum already! Stop denying me!",
+				]))
+		elif(neediness >= 25.0):
+			slaveWords.append(RNG.pick([
+				"I can't remember when was the last day that I came.. I so want to cum.. Please?",
+				]))
+		elif(neediness >= 10.0):
+			slaveWords.append(RNG.pick([
+				"I want to cum so much..",
+				]))
+		elif(neediness >= 2.0):
+			slaveWords.append(RNG.pick([
+				"I'm feeling a little horny.",
 				]))
 
 	var isFirst = true

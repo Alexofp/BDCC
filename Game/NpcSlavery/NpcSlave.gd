@@ -284,6 +284,30 @@ var talkedTimesToday = 0
 
 var hasRandomEvent = false
 var randomEventWillHappenID = "" # submitBroken, submitLove, escaped, removedOneRestraint
+var eventCooldowns = {}
+var lastDayOrgasmed = 0
+
+# How horny are we. Increased by 1.0 each days we didn't cum. Gets set to zero if we came
+# Denying orgasms also increases it.. it should at least.
+var neediness = 0.0
+func getNeediness() -> float:
+	if(isMindBroken()):
+		return 0.0
+	return neediness
+func addNeedinessRaw(howMuch:float):
+	neediness += howMuch
+	neediness = clamp(neediness, 0.0, 100.0)
+func addNeediness(howMuch:float):
+	var needyMod = 1.0
+	if(getChar().isInHeat() && howMuch > 0.0):
+		needyMod = 2.0
+	if(getChar().isPregnant() && howMuch > 0.0):
+		needyMod = 0.2
+	if(getNeediness() >= 10.0 && howMuch > 0.0):
+		addDespair(0.03)
+	addNeedinessRaw(howMuch * needyMod * (1.0 + sign(howMuch) * personalityScore({
+		PersonalityStat.Impatient:0.95,
+		})))
 
 # Housekeeping stuff
 var readyForLevelup = false
@@ -313,6 +337,8 @@ func getDebugInfo():
 		"getBratScore(): "+str(Util.roundF(getBratScore(), 2)),
 		"isActivelyResisting(): "+str(isActivelyResisting()),
 		"isResistingSuperActively(): "+str(isResistingSuperActively()),
+		"lastDayOrgasmed: "+str(lastDayOrgasmed),
+		"neediness: "+str(Util.roundF(neediness, 2)),
 	]
 	return Util.join(result, "\n")
 
@@ -326,19 +352,33 @@ func onNewDay():
 	gotBeatenUpToday = false
 	
 	tickUnhappiness()
+	var daysWithoutOrgasm = GM.main.getDays() - lastDayOrgasmed
+	if(daysWithoutOrgasm > 2):
+		addNeediness(1.0)
+	elif(getChar().isInHeat()):
+		addNeediness(1.0)
 	
 	# Random event should be decided here
 	var possibleEventsWithWeights = []
 	for eventID in GlobalRegistry.getSlaveEvents():
 		var slaveEvent = GlobalRegistry.getSlaveEvent(eventID)
-		if(slaveEvent.supportsActivity(getActivityID()) && slaveEvent.shouldHappenFinal(self)):
+		if(!eventCooldowns.has(eventID) && slaveEvent.supportsActivity(getActivityID()) && slaveEvent.shouldHappenFinal(self)):
 			possibleEventsWithWeights.append([eventID, slaveEvent.getEventWeight()])
+	
+	for eventID in eventCooldowns.keys():
+		eventCooldowns[eventID] -= 1
+		if(eventCooldowns[eventID] <= 0):
+			eventCooldowns.erase(eventID)
 	
 	if(possibleEventsWithWeights.size() > 0):
 		var pickedRandomEvent = RNG.pickWeightedPairs(possibleEventsWithWeights)
 		if(pickedRandomEvent != null):
 			hasRandomEvent = true
 			randomEventWillHappenID = pickedRandomEvent
+			var slaveEvent = GlobalRegistry.getSlaveEvent(randomEventWillHappenID)
+			var theCooldown = slaveEvent.getCooldown(self)
+			if(theCooldown > 0):
+				eventCooldowns[randomEventWillHappenID] = theCooldown
 		
 	# If has any punishPoints, do something (maybe?)
 	
@@ -532,15 +572,25 @@ func setMainSlaveType(theSlaveType):
 func getMainSlaveType():
 	return slaveType
 
+func onEnslave():
+	lastDayOrgasmed = GM.main.getDays()
+
 func getChar():
 	if(npc == null):
 		return null
 	return npc.get_ref()
 
-func handleSexEvent(_sexEvent:SexEvent):
+func handleSexEvent(_event:SexEvent):
 	var theChar = getChar()
+	
+	if(_event.getTargetChar() == theChar):
+		addNeediness(0.02) # Any kind of sex event makes us sliiightly needier
+		if(_event.getType() == SexEvent.Orgasmed):
+			neediness = 0.0 # Orgasms reset it
+			lastDayOrgasmed = GM.main.getDays()
+			
 	for task in levelupTasks:
-		task.onSexEvent(theChar, _sexEvent)
+		task.onSexEvent(theChar, _event)
 
 func levelupCurrentSpecialization():
 	if(!slaveSpecializations.has(slaveType)):
@@ -1068,6 +1118,9 @@ func saveData():
 		"broken": broken,
 		"brokenWarnings": brokenWarnings,
 		"unhappiness": unhappiness,
+		"eventCooldowns": eventCooldowns,
+		"lastDayOrgasmed": lastDayOrgasmed,
+		"neediness": neediness,
 	}
 	
 	if(activity == null):
@@ -1121,6 +1174,9 @@ func loadData(data):
 	broken = SAVE.loadVar(data, "broken", false)
 	brokenWarnings = SAVE.loadVar(data, "brokenWarnings", 0)
 	unhappiness = SAVE.loadVar(data, "unhappiness", 0.0)
+	eventCooldowns = SAVE.loadVar(data, "eventCooldowns", {})
+	lastDayOrgasmed = SAVE.loadVar(data, "lastDayOrgasmed", 0)
+	neediness = SAVE.loadVar(data, "neediness", 0.0)
 	
 	var theActivityID = SAVE.loadVar(data, "activity_id", "")
 	if(theActivityID == null || theActivityID == ""):

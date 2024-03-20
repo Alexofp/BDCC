@@ -2,7 +2,7 @@ extends Reference
 class_name SlaveEventBase
 
 var id = "error"
-var eventWeight = 1.0
+var eventWeight = 1.0 # Relative weight that helps decide what event is chosen when 2+ events want to happen at the same time
 var sceneID = ""
 var supportedActivities = [""]
 var canHappenIfMindbroken = false
@@ -41,3 +41,5 @@ func supportsActivity(theActivityID):
 func getAnimInfo(_npcSlavery:NpcSlave):
 	return null
 
+func getCooldown(_npcSlavery:NpcSlave):
+	return 0

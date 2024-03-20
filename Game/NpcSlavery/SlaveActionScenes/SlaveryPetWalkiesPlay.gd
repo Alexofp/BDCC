@@ -521,6 +521,7 @@ func _react(_action: String, _args):
 		npcSlavery.addBrokenSpirit(0.05)
 		npcSlavery.addSpoiling(-0.1)
 		npcSlavery.addDespair(0.02)
+		npcSlavery.addNeediness(0.5)
 		if(npcSlavery.rewardBalance < 0):
 			npcSlavery.handlePunishment(2)
 			addMessage("This counted as a normal punishment for your slave")

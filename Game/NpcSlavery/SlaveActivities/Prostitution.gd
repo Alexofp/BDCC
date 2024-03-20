@@ -54,6 +54,7 @@ func processOneWorkHour():
 	if(RNG.chance(chanceEarned * chanceMod)):
 		var potentialPayout:int = RNG.randi_range(1, Util.maxi(1, int(round(sqrt(slutSkill+1)))))
 		earnedCreds += potentialPayout
+		getSlave().addExperience(2)
 
 func canReceiveCredits():
 	return workHoursLeft <= 0

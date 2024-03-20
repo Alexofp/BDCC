@@ -104,6 +104,7 @@ func doEnslaveCharacter(npcID):
 	}
 	#newNpcSlavery.generateTasks()
 	theChar.setNpcSlavery(newNpcSlavery)
+	newNpcSlavery.onEnslave()
 	
 	GM.main.removeDynamicCharacterFromAllPools(npcID)
 	GM.main.addDynamicCharacterToPool(npcID, CharacterPool.Slaves)

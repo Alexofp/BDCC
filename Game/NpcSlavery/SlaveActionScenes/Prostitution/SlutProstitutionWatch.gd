@@ -209,6 +209,7 @@ func _react(_action: String, _args):
 func _react_scene_end(_tag, _result):
 	if(_tag == "prostitutionsex"):
 		if(RNG.chance(70)):
+			npc.getNpcSlavery().addExperience(10)
 			setState("after_sex")
 			return
 		else:
