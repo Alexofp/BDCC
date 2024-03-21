@@ -52,7 +52,7 @@ func addBrokenSpiritRaw(howMuch:float):
 func addBrokenSpirit(howMuch:float):
 	var mult = 1.0
 	if(howMuch > 0.0):
-		mult += Util.distanceToHalfEased(getDespair())*6.0
+		mult += Util.distanceToHalfEased(getDespair())*0.8
 		#mult += getAwareness()*0.5
 		#mult += getSpoiling()*0.3
 		#mult += getTiredEffect()*0.5
@@ -304,7 +304,7 @@ func addNeediness(howMuch:float):
 	if(getChar().isPregnant() && howMuch > 0.0):
 		needyMod = 0.2
 	if(getNeediness() >= 10.0 && howMuch > 0.0):
-		addDespair(0.03)
+		addDespair(0.01)
 	addNeedinessRaw(howMuch * needyMod * (1.0 + sign(howMuch) * personalityScore({
 		PersonalityStat.Impatient:0.95,
 		})))
@@ -342,6 +342,27 @@ func getDebugInfo():
 	]
 	return Util.join(result, "\n")
 
+func slaveStatToString(theStat, theStrings:Array = ["Very low", "Low", "Below medium", "Medium", "Above medium", "High", "Very high"]):
+	theStat = clamp(theStat, 0.0, 1.0)
+	var index:int = int(theStat * float(theStrings.size() - 1))
+	return theStrings[Util.mini(index, theStrings.size() - 1)]
+
+func getMindreaderInfo():
+	var result = [
+		"Obedience: "+slaveStatToString(getObedience()),
+		"Broken spirit: "+slaveStatToString(getBrokenSpirit()),
+		"Love: "+slaveStatToString(getLove()),
+		"Despair: "+slaveStatToString(getDespair()),
+		"Awareness: "+slaveStatToString(getAwareness()),
+		"Trust: "+slaveStatToString(getTrust()),
+		"Spoiling: "+slaveStatToString(getSpoiling()),
+		"Fear: "+slaveStatToString(getFear()),
+		"Tiredness: "+str(Util.roundF(tiredness/5.0*100.0, 2))+"%",
+		"Unhappiness: "+str(Util.roundF(unhappiness/40.0*100.0, 2))+"%",
+		"Neediness: "+str(Util.roundF(neediness/10.0, 2))+"%",
+	]
+	return Util.join(result, "\n")
+
 func onNewDay():
 	if(hasRandomEvent && randomEventWillHappenID != ""):
 		var oldSlaveEvent = GlobalRegistry.getSlaveEvent(randomEventWillHappenID)
@@ -353,7 +374,12 @@ func onNewDay():
 	
 	tickUnhappiness()
 	var daysWithoutOrgasm = GM.main.getDays() - lastDayOrgasmed
-	if(daysWithoutOrgasm > 2):
+	if(daysWithoutOrgasm > 100):
+		neediness *= 0.5 # After 100 days of not cumming.. they no longer need to anymore.. Their libido starts to crash
+		pass
+	elif(daysWithoutOrgasm > 10):
+		addNeediness(2.0)
+	elif(daysWithoutOrgasm > 2):
 		addNeediness(1.0)
 	elif(getChar().isInHeat()):
 		addNeediness(1.0)
@@ -584,10 +610,12 @@ func handleSexEvent(_event:SexEvent):
 	var theChar = getChar()
 	
 	if(_event.getTargetChar() == theChar):
-		addNeediness(0.02) # Any kind of sex event makes us sliiightly needier
+		addNeediness(0.03) # Any kind of sex event makes us sliiightly needier
 		if(_event.getType() == SexEvent.Orgasmed):
 			neediness = 0.0 # Orgasms reset it
 			lastDayOrgasmed = GM.main.getDays()
+	else:
+		addNeediness(0.01) # Watching others get fucked also makes us a bit needier
 			
 	for task in levelupTasks:
 		task.onSexEvent(theChar, _event)
@@ -629,8 +657,8 @@ func getSlaveSkill(theSlaveType):
 		return 0
 	return slaveSpecializations[theSlaveType]
 
-func getOverallObeyMood() -> float:
-	return max(getLove(), max(getBrokenSpirit(), getObedience())) - getSpoiling() - getResistScoreUnclamped()
+func getMoodForWork() -> float:
+	return max(getLove(), max(getBrokenSpirit(), getObedience()))/2.0 - getSpoiling() - getResistScoreUnclamped() - max(getFear(), getDespair())/2.0
 
 func doTrain():
 	var currentSlaveType:SlaveTypeBase = GlobalRegistry.getSlaveType(slaveType)
@@ -649,7 +677,7 @@ func doTrain():
 		deservesPunishment(2)
 	else:
 		var workEffect = getWorkEfficiency()
-		var obeyMood = getOverallObeyMood()
+		var obeyMood = getMoodForWork()
 		
 		if(workEffect < 0.5 && RNG.chance(80.0*(1.0-workEffect))):
 			isSuccess = false
@@ -659,7 +687,8 @@ func doTrain():
 			if(rewardBalance >= 2):
 				addLove(-0.01)
 		else:
-			var workRoll = obeyMood + workEffect + RNG.randf_range(-1.0, 1.0) + float(slaveLevel)/30.0
+			var workRoll = obeyMood + workEffect + RNG.randf_range(-0.7, 0.7) + float(sqrt(slaveLevel))/10.0
+			print("WORKROLL: "+str(workRoll))
 			if(workRoll < 0.0):
 				isSuccess = false
 				texts.append( currentSlaveType.getFailedTrainTextBad(getChar()) )
@@ -1085,10 +1114,26 @@ func checkIfTasksGotCompleted():
 	for task in levelupTasks:
 		task.checkIfCompletedFor(theChar)
 
-func onSexEnded(_contex = {}):
+func onSexEnded(_context = {}):
+	#_context = {sexEngine=self,isDom=false,sexFullResult=sexResult,sexResult=sexResult["subs"][subID]}
+	
+	if(_context.has("isDom") && !_context["isDom"]):
+		var domOrgasms = 0
+		var slaveOrgasms = 0
+		if(_context.has("sexFullResult")):
+			var fullSexResult = _context["sexFullResult"]
+			for domKey in fullSexResult["doms"]:
+				domOrgasms += fullSexResult["doms"][domKey]["timesCame"]
+		if(_context.has("sexResult")):
+			slaveOrgasms = _context["sexResult"]["timesCame"]
+		
+		if(slaveOrgasms == 0 && domOrgasms > 0):
+			# We got denied!
+			addNeediness(sqrt(domOrgasms) / 2.0)
+	
 	var theChar = getChar()
 	for task in levelupTasks:
-		task.onSexEnded(theChar, _contex)
+		task.onSexEnded(theChar, _context)
 
 func saveData():
 	var data = {

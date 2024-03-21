@@ -5,7 +5,8 @@ func _init():
 	actionType = Reward
 	#extraSlaves = {}
 	#sceneID = ""
-	slaveResistChanceMult = 0.5
+	slaveResistChanceMult = 1.0
+	slaveOnlyActiveResist = true
 	
 	buttonPriority = 70
 	rewardHint = 3
@@ -40,7 +41,7 @@ func doActionSimple(_slaveID, _extraSlavesIDs = {}):
 		text += "{npc.HeShe} remains indifferent to the massage, neither resisting nor welcoming the touch."
 	
 	npcSlavery.handleReward(3)
-	npcSlavery.addTired(-2)
+	npcSlavery.addTired(-0.8)
 	return {
 		text = text,
 	}

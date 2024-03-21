@@ -6,7 +6,8 @@ func _init():
 	#extraSlaves = {}
 	#sceneID = "MeScene"
 	#endsTalkScene = true
-	slaveResistChanceMult = 0.3
+	slaveResistChanceMult = 1.0
+	slaveOnlyActiveResist = true
 	
 	buttonPriority = 80
 	rewardHint = -2

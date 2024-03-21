@@ -55,6 +55,6 @@ func getUnlockHints(_npc):
 		{
 			unlocksAt = 5,
 			name = "Prostitution",
-			text = "Your slut can now whore herself out!",
+			text = "You can now order your slut to whore herself out! The higher the slut skill, the more your sluts will earn.",
 		},
 	]

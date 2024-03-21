@@ -5,7 +5,7 @@ func _init():
 	actionType = Talk
 	#extraSlaves = {}
 	#sceneID = ""
-	slaveResistChanceMult = 0.05
+	slaveResistChanceMult = 0.0
 	buttonPriority = 50
 
 func getVisibleName():
@@ -109,6 +109,9 @@ func doActionSimple(_slaveID, _extraSlavesIDs = {}):
 		
 		theTexts.append("Your words had some effect on {npc.him}.")
 		
+		var enemyLustInterests = npcSlavery.getChar().getLustInterests()
+		if(enemyLustInterests.learnRandomInterest()):
+			theTexts.append("You also learned one of {npc.his} likes/dislikes while doing this.")
 		
 	npcSlavery.didTalkWithToday()
 	return {

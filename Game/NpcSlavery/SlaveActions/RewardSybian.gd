@@ -5,7 +5,8 @@ func _init():
 	actionType = Reward
 	#extraSlaves = {}
 	#sceneID = ""
-	slaveResistChanceMult = 0.8
+	slaveResistChanceMult = 1.0
+	slaveOnlyActiveResist = true
 
 	buttonPriority = 60
 	rewardHint = 4

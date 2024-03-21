@@ -588,6 +588,25 @@ func removeBrokenDublicatedItems():
 		Log.printerr("REMOVING DUBLICATED ITEM: "+equippedItem.id+" UNIQUE ID: "+str(equippedItem.uniqueID))
 		removeEquippedItem(equippedItem)
 
+func removeRandomRestraints(removedRestraintsChance):
+	var restraints = getEquppedRestraints()
+	var howManyRemoved = 0
+	if(restraints.size() > 0):
+		for restraint in restraints:
+			if(restraint.isImportant() || restraint.isPersistent()):
+				continue
+			
+			var chanceModifier = 1.0
+			var restraintData:RestraintData = restraint.getRestraintData()
+			if(restraintData != null):
+				chanceModifier /= restraintData.getLevel()
+			
+			if(RNG.chance(removedRestraintsChance * chanceModifier)):
+				removeEquippedItem(restraint)
+				howManyRemoved += 1
+	
+	return howManyRemoved
+
 func saveData():
 	var data = {}
 	

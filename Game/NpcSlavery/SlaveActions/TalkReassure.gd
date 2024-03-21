@@ -154,7 +154,10 @@ func doActionSimple(_slaveID, _extraSlavesIDs = {}):
 		else:
 			theTexts.append("Your words had some effect on {npc.him}.")
 		
-		
+		var enemyLustInterests = npcSlavery.getChar().getLustInterests()
+		if(enemyLustInterests.learnRandomInterest()):
+			theTexts.append("You also learned one of {npc.his} likes/dislikes while doing this.")
+			
 	npcSlavery.didTalkWithToday()
 	return {
 		text = Util.join(theTexts, "\n\n"),

@@ -5,7 +5,7 @@ func _init():
 	actionType = Action
 	#extraSlaves = {}
 	sceneID = "ActionSlaveryShower"
-	slaveResistChanceMult = 0.5
+	slaveResistChanceMult = 1.0
 	
 	slaveMinLevel = 0
 	slaveSkillsRequired = {

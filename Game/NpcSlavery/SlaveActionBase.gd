@@ -24,6 +24,7 @@ var extraSlaves = {
 var sceneID = ""
 var endsTalkScene = false
 var slaveResistChanceMult = 1.0
+var slaveOnlyActiveResist = false # The one where you have to beat up the slave
 var buttonPriority = 100
 var rewardHint = 0
 
