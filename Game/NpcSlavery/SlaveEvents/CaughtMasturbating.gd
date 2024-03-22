@@ -28,8 +28,8 @@ func shouldHappenChance(_npcSlavery:NpcSlave):
 	return theChance
 
 func getCooldown(_npcSlavery:NpcSlave):
-	if(_npcSlavery.getNeediness() >= 60.0):
-		return 0
+	#if(_npcSlavery.getNeediness() >= 60.0):
+	#	return 0
 	if(_npcSlavery.getNeediness() >= 30.0):
 		return 1
 	return 2

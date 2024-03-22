@@ -34,12 +34,27 @@ func doActionSimple(_slaveID, _extraSlavesIDs = {}):
 	
 	text += "\n\n"
 	
+	var deservesPunishment = false
+	
 	if(npcSlavery.getDespair() > 0.8):
 		text += "{npc.HeShe} continues with {npc.his} current activity of staring at a blank wall, as if your words had little impact."
 	elif(npcSlavery.getSpoiling() > 0.7):
 		text += "{npc.HeShe} smirks, reveling in the excessive praise."
 	elif(npcSlavery.isResistingSuperActively()):
-		text += "A flicker of discomfort crosses {npc.his} face, and {npc.heShe} averts {npc.his} gaze."
+		if(RNG.chance(10 + npcSlavery.personalityScore({PersonalityStat.Mean:1.0})*10.0)):
+			text += "A flicker of discomfort crosses {npc.his} face before {npc.heShe} rolls {npc.his} eyes."
+			text += "\n\n[say=npc]"+RNG.pick(["Screw you.", "Fuck you.", "Whatever."])+"[/say]"
+				
+			if(character.isGagged()):
+				text += "\n\n[say=pc]What was that?[/say]"
+				
+				text += "\n\n{npc.He} stays quiet, refusing to repeat it. Looks like the gag saved your slave from a punishment."
+			else:
+				text += "\n\nWow. You're trying to praise your slave but {npc.he} {npc.isAre} being all rude about it."
+				
+				deservesPunishment = true
+		else:
+			text += "A flicker of discomfort crosses {npc.his} face before {npc.heShe} rolls {npc.his} eyes."
 	elif(npcSlavery.isActivelyResisting()):
 		text += "{npc.HeShe} nods briefly, seemingly unfazed by your praise."
 	elif(npcSlavery.rewardBalance <= 0):
@@ -50,6 +65,9 @@ func doActionSimple(_slaveID, _extraSlavesIDs = {}):
 		text += "{npc.HeShe} gives a slow, hesitant nod, acknowledging your praise with a hint of reservation."
 	
 	npcSlavery.handleReward(1)
+	if(deservesPunishment):
+		text += "\n\nYour slave earned {npc.himself} a punishment.. right after getting rewarded."
+		npcSlavery.deservesPunishment(1)
 	return {
 		text = text,
 	}

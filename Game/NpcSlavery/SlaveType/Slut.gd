@@ -53,6 +53,11 @@ func getTrainText(_npc, _skillLevel):
 func getUnlockHints(_npc):
 	return [
 		{
+			unlocksAt = 2,
+			name = "Order slut",
+			text = "You can now order your slut to be fucked by one of your other slaves",
+		},
+		{
 			unlocksAt = 5,
 			name = "Prostitution",
 			text = "You can now order your slut to whore herself out! The higher the slut skill, the more your sluts will earn.",

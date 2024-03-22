@@ -111,6 +111,19 @@ func fitsAsMainSlave(_charID):
 	return fitsAsMainSlaveAdvanced(_charID)[0]
 
 func fitsAsExtraSlaveAdvanced(_role, _charID):
+	var npcSlave:NpcSlave = getSlave(_charID)
+	var extraSlaveInfo = extraSlaves[_role]
+	
+	if(extraSlaveInfo.has("slaveMinLevel")):
+		if(npcSlave.getLevel() < extraSlaveInfo["slaveMinLevel"]):
+			return [false, "Slave must be of level "+str(slaveMinLevel)+" or higher"]
+	if(extraSlaveInfo.has("slaveSkillsRequired")):
+		var theRequiredSkills = extraSlaveInfo["slaveSkillsRequired"]
+		for slaveType in theRequiredSkills:
+			if(npcSlave.getSlaveSkill(slaveType) < theRequiredSkills[slaveType]):
+				return [false, "Skill requirements aren't met"]
+	if(npcSlave.isDoingActivity()):
+		return [false, "Skill is busy doing something"]
 	
 	return [true]
 

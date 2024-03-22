@@ -198,10 +198,12 @@ func _run():
 			fightChance = 15.0
 		else:
 			fightChance = Util.remapValue(cowardness, -0.5, 0.5, 15.0, 0.0)
+		if(npc.hasBoundArms() || npc.hasBlockedHands() || npc.isBitingBlocked()):
+			fightChance *= 0.3
 		if(RNG.chance(fightChance)):
 			addButtonWithChecks("Force", "Force them to do what you want them to do without violence", "resist_hastofight", [], savedButtonChecks)
 		else:
-			addButtonWithChecks("Force", "Force them to do what you want them to do without violence", savedWantedToDo, savedWantedToDoArgs, savedButtonChecks)
+			addButtonWithChecks("Force", "Force them to do what you want them to do without violence", "do_force_action", [savedWantedToDo, savedWantedToDoArgs], savedButtonChecks)
 		addButton("Beat up", "Force them through fighting", "resisting_start_fight")
 		addButton("Cancel", "Your slave just earned a punishment!", "forced_sex_let_resist", [false])
 	
@@ -665,12 +667,12 @@ func _react(_action: String, _args):
 		var npcSlavery:NpcSlave = npc.getNpcSlavery()
 		# Raise the spirit here?
 		if(_args.size() > 0 && _args[0]):
-			npcSlavery.addBrokenSpirit(-0.05)
-			npcSlavery.addAwareness(-0.05)
+			npcSlavery.addBrokenSpirit(-0.02)
+			npcSlavery.addAwareness(-0.02)
 			npcSlavery.deservesPunishment(2)
 		else:
-			npcSlavery.addBrokenSpirit(-0.03)
-			npcSlavery.addAwareness(-0.03)
+			npcSlavery.addBrokenSpirit(-0.01)
+			npcSlavery.addAwareness(-0.01)
 			npcSlavery.deservesPunishment(1)
 		setState("")
 		return
@@ -679,6 +681,17 @@ func _react(_action: String, _args):
 		runScene("GenericSexScene", [npcID, "pc"], "fucked_by_angry_slave")
 		setState("")
 		return
+		
+	if(_action == "do_force_action"):
+		var npcSlavery:NpcSlave = npc.getNpcSlavery()
+		if(npcSlavery.getTrust() <= 0.0):
+			npcSlavery.addDespair(0.03)
+		else:
+			npcSlavery.addTrust(-0.02)
+			npcSlavery.addLove(-0.02)
+		npcSlavery.addAwareness(0.01)
+		
+		return _react(_args[0], _args[1]) # Might break one day, don't hurt me
 
 	setState(_action)
 

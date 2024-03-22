@@ -40,8 +40,72 @@ func _run():
 		saynn("Encouraging might {npc.him} like you more.. but it also might spoil {npc.him}. If you don't want your slave to masturbate, maybe you can try cuffing {npc.his} hands.."+str(" Or putting a chastity cage on {npc.his} cock." if (masType == "penis") else "")+"")
 
 		addButton("Encourage", "Let them orgasm", "do_encourage_check")
-		addButton("Stop them", "Order them to stop", "do_orderstop_check")
+		addButton("Order to stop", "Order them to stop", "do_orderstop_check")
+		addButtonWithChecks("Force to stop", "You can't let this happen no matter what", "force_stop_check", [], [[ButtonChecks.NotHandsBlocked], [ButtonChecks.NotArmsRestrained]])
 		addButton("Offer yourself", "Offer them to fuck you instead", "do_offerself_check")
+	if(state == "do_forcetostop_fail"):
+		playAnimation(StageScene.Duo, "hurt", {npc=npcID, npcAction="shove"})
+		saynn("You can't let that happen no matter what. So you don't even order your slave. Instead, you rush up to {npc.him} and forcibly wrench {npc.his} arms behind {npc.his} back.")
+
+		saynn("But your slave manages to break free!")
+
+		saynn("[say=npc]"+str(RNG.pick(["Fuck you! I must cum! I will cum!", "Screw you, I'm cumming today!", "Fuck off, I need it!"]))+"[/say]")
+
+		saynn("Looks like it's a fight.")
+
+		addButton("Fight", "Start the fight", "do_fight_slave")
+	if(state == "lost_slavecums"):
+		if (masType == "penis"):
+			playAnimation(StageScene.Grope, "watchstroke", {pc=npcID, npc="pc", bodyState={exposedCrotch=true, hard=true}})
+			saynn("{npc.name} won.. meaning {npc.he} gets to do what {npc.he} wants.")
+
+			saynn("[say=npc]Screw you..[/say]")
+
+			saynn("Your slave starts stroking {npc.his} member fast, swiftly bringing {npc.himself} to a climax. Better to stay slightly away and watch rather than risk getting yourself.. caught in the blast.")
+
+			saynn("{npc.name} grunts and arches {npc.his} back as {npc.his} throbbing {npc.penis} shoots thick lines of {npc.cum}, making the floor all messy and sticky. Your slave is left panting and satisfied.")
+
+		elif (masType == "vag"):
+			playAnimation(StageScene.Grope, "watchrub", {pc=npcID, npc="pc", bodyState={exposedCrotch=true, hard=true}})
+			saynn("{npc.name} won.. meaning {npc.he} gets to do what {npc.he} wants.")
+
+			saynn("[say=npc]Screw you..[/say]")
+
+			saynn("Your slave starts fingering {npc.his} slit fast, swiftly bringing {npc.himself} to a climax. Better to stay slightly away and watch rather than risk getting yourself.. caught in the blast.")
+
+			saynn("{npc.name} moans and arches {npc.his} back as {npc.his} twitching {npc.pussyStretch} pussy releases a fountain of transparent {npc.girlcum}, making the floor all wet and sticky. Your slave is left panting and satisfied.")
+
+		saynn("Looks like your slave has earned a punishment. Hopefully it was worth it for {npc.him}.")
+
+		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "won_antihornyfight"):
+		playAnimation(StageScene.Duo, "stand", {npc=npcID, npcAction="defeat", npcBodyState={leashedBy="pc"}})
+		saynn("You win. Your slave, {npc.name}, hits the floor, unable to continue fighting.")
+
+		if (masType == "penis"):
+			saynn("No stroking for {npc.him} looks like, {npc.he} {npc.isAre} forced to endure the strong desire without being able to satisfy it.")
+
+		elif (masType == "vag"):
+			saynn("No masturbating for {npc.him} looks like, {npc.he} {npc.isAre} forced to endure the strong desire without being able to satisfy it.")
+
+		saynn("Your slave looks a bit more desperate than before. {npc.He} will surely trust you less too. Maybe you shouldn't trust {npc.him} too and cuff {npc.his} hands..")
+
+		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "do_forcetostop"):
+		playAnimation(StageScene.Grope, "tease", {pc=npcID, npc="pc", bodyState={exposedCrotch=true, hard=true}})
+		saynn("You can't let that happen no matter what. So you don't even order your slave. Instead, you rush up to {npc.him} and forcibly wrench {npc.his} arms behind {npc.his} back.")
+
+		saynn("[say=npc]"+str(RNG.pick(["H-hey!.. I was so close!", "No! Let me cum!", "No, don't do this, please!"]))+"[/say]")
+
+		if (masType == "penis"):
+			saynn("Nope. You force {npc.him} to watch as {npc.his} {npc.penis} starts to go soft without any stimulation.")
+
+		elif (masType == "vag"):
+			saynn("Nope. You force {npc.him} to watch as {npc.his} drippy pussy is left to dry up without any stimulation.")
+
+		saynn("Crisis averted.. but your slave won't trust you much for doing this.. it will also affect {npc.his} mental health.")
+
+		addButton("Continue", "See what happens next", "endthescene")
 	if(state == "do_orderstop"):
 		playAnimation(StageScene.Grope, "tease", {pc=npcID, npc="pc", bodyState={exposedCrotch=true, hard=true}})
 		saynn("Your slave seems to be close.. but that won't stop you from denying {npc.him}.")
@@ -290,19 +354,38 @@ func _react(_action: String, _args):
 		
 		if(!RNG.chance(failChance)):
 			setState("do_orderstop")
-			npcSlavery.addDespair(0.04)
+			npcSlavery.addDespair(0.01)
 			npcSlavery.addAwareness(0.05)
 			npcSlavery.addLove(-0.05)
+			npcSlavery.addTrust(0.02)
 			npcSlavery.addSpoiling(-0.1)
 			npcSlavery.addNeediness(0.5)
 		else:
 			npcSlavery.addObedience(-0.02)
-			npcSlavery.addDespair(-0.02)
+			npcSlavery.addDespair(-0.03)
 			npcSlavery.addLove(-0.02)
 			setState("do_orderstop_fail")
 			npcSlavery.deservesPunishment(2)
 			npcSlavery.addSpoiling(0.05)
 			npc.orgasmFrom(npcID)
+		return
+
+	if(_action == "force_stop_check"):
+		processTime(6*60)
+		var npcSlavery:NpcSlave = npc.getNpcSlavery()
+		
+		var failChance = (npcSlavery.personalityScore({PersonalityStat.Coward: -1.0, PersonalityStat.Brat: 1.0, PersonalityStat.Impatient: 1.0}) + 0.2 )* 20.0 * (1.0 - npcSlavery.getObedience()*0.5)
+		failChance = max(10, failChance)
+		
+		if(!RNG.chance(failChance)):
+			setState("do_forcetostop")
+			npcSlavery.addDespair(0.04)
+			npcSlavery.addAwareness(-0.02)
+			npcSlavery.addTrust(-0.05)
+			npcSlavery.addSpoiling(-0.1)
+			npcSlavery.addNeediness(0.5)
+		else:
+			setState("do_forcetostop_fail")
 		return
 
 	if(_action == "do_offerself_check"):
@@ -320,6 +403,10 @@ func _react(_action: String, _args):
 				setState("do_offerself")
 				return
 		setState("offerself_nofetish")
+		return
+
+	if(_action == "do_fight_slave"):
+		runScene("FightScene", [npcID], "antihornyfight")
 		return
 
 	if(_action == "do_encourage_cum"):
@@ -362,6 +449,29 @@ func _react(_action: String, _args):
 	setState(_action)
 
 func _react_scene_end(_tag, _result):
+	if(_tag == "antihornyfight"):
+		processTime(10 * 60)
+		var battlestate = _result[0]
+		
+		var npcSlavery:NpcSlave = npc.getNpcSlavery()
+		if(battlestate == "win"):
+			setState("won_antihornyfight")
+			addExperienceToPlayer(10)
+			npcSlavery.afterBeatenUp()
+			npcSlavery.addDespair(0.04)
+			npcSlavery.addAwareness(0.02)
+			npcSlavery.addTrust(-0.05)
+			npcSlavery.addSpoiling(-0.1)
+			npcSlavery.addNeediness(0.5)
+		else:
+			setState("lost_slavecums")
+			npcSlavery.addObedience(-0.02)
+			npcSlavery.addDespair(-0.1)
+			npcSlavery.addBrokenSpirit(-0.1)
+			npcSlavery.addLove(0.02)
+			npcSlavery.deservesPunishment(2)
+			npc.orgasmFrom(npcID)
+
 	if(_tag == "sex_with_slave"):
 		endScene()
 		return

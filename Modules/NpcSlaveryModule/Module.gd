@@ -31,6 +31,8 @@ func _init():
 			"res://Modules/NpcSlaveryModule/Slavery/SlaveActionWrapperScene.gd",
 			"res://Modules/NpcSlaveryModule/Slavery/SlaveEventWrapperScene.gd",
 			"res://Modules/NpcSlaveryModule/Slavery/SlaveTPToLocScene.gd",
+			
+			"res://Modules/NpcSlaveryModule/Devices/SybianRidingScene.gd",
 		]
 	characters = [
 	]
@@ -39,6 +41,8 @@ func _init():
 		"res://Modules/NpcSlaveryModule/Enslaving/EnslaveDynamicNpcEvent.gd",
 		"res://Modules/NpcSlaveryModule/Slavery/SlaveTalkEvent.gd",
 		"res://Modules/NpcSlaveryModule/Slavery/SlaveEventEvent.gd",
+		
+		"res://Modules/NpcSlaveryModule/Devices/PlayerCellDevicesEvent.gd",
 	]
 
 func resetFlagsOnNewDay():
