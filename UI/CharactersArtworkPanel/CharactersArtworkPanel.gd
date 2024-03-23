@@ -29,12 +29,17 @@ func clear():
 func addCharacter(charID:String, variant:Array):
 	var data = {}
 	
+	var character = GlobalRegistry.getCharacter(charID)
+	
 	var isGenericPortrait = true
 	var imageArtist = null
 	var imagePath = null
 	var imageData = Images.getCharacter(charID, variant)
+	
+	if(character != null && character.isDynamicCharacter() && character.npcMimicArtworkID != ""):
+		imageData = Images.getCharacter(character.npcMimicArtworkID, variant)
+		
 	if(imageData == null):
-		var character = GlobalRegistry.getCharacter(charID)
 		if(character != null):
 			var defaultImageData = character.getDefaultArtwork(variant)
 			var defaultImagePath = defaultImageData

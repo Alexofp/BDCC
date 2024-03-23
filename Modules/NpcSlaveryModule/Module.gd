@@ -66,6 +66,13 @@ func hasFreeSpaceToEnslave():
 	var freeSpace = getSlavesSpace() - currentSlaveAmount
 	return freeSpace > 0
 
+func makeSurePCHasSlaveSpace():
+	var currentSlaveAmount = int(GM.main.getDynamicCharactersPoolSize(CharacterPool.Slaves))
+
+	var freeSpace = getSlavesSpace() - currentSlaveAmount
+	if(freeSpace <= 0):
+		setFlag("NpcSlaveryModule.slavesSpace", currentSlaveAmount + 1)
+
 func slavesHaveAnyEvents():
 	var slaves = GM.main.getDynamicCharacterIDsFromPool(CharacterPool.Slaves)
 	
@@ -85,7 +92,7 @@ func getSlavesSpaceUpgradeCost():
 		return 30
 	return currentSpace * 10
 	
-func doEnslaveCharacter(npcID):
+func doEnslaveCharacter(npcID, defaultSlaveType = SlaveType.Slut):
 	var theChar:DynamicCharacter = GlobalRegistry.getCharacter(npcID)
 	
 	if(theChar == null || !theChar.isDynamicCharacter()):
@@ -96,7 +103,7 @@ func doEnslaveCharacter(npcID):
 	var theEnslaveQuest:NpcEnslavementQuest = theChar.getEnslaveQuest()
 	theChar.setEnslaveQuest(null)
 	
-	var slaveType = SlaveType.Slut
+	var slaveType = defaultSlaveType
 	if(theEnslaveQuest != null):
 		slaveType = theEnslaveQuest.slaveType
 	

@@ -15,6 +15,7 @@ var flags = {}
 var enslaveQuest = null
 var npcSlavery = null
 var npcChatColorOverride = ""
+var npcMimicArtworkID = ""
 
 func _init():
 	npcHasMenstrualCycle = true
@@ -24,7 +25,7 @@ func _getName():
 
 func getChatColor():
 	if(npcChatColorOverride != ""):
-		return Color(npcChatColorOverride)
+		return npcChatColorOverride
 	return .getChatColor()
 
 func getGender():
@@ -135,6 +136,84 @@ func onSexEvent(_event : SexEvent):
 	if(npcSlavery != null):
 		npcSlavery.handleSexEvent(_event)
 	
+# The whole thing is hack, never expect it to work or be supported
+func copyEverythingFrom(otherCharacter): #:BaseCharacter
+	npcName = otherCharacter.getName()
+	npcSpecies = otherCharacter.getSpecies()
+	if(otherCharacter.isDynamicCharacter()):
+		npcGeneratedGender = otherCharacter.npcGeneratedGender
+	else:
+		var otherHasPenis = otherCharacter.hasPenis()
+		var otherHasVag = otherCharacter.hasVagina()
+		var otherHasTits = otherCharacter.hasNonFlatBreasts()
+		if(otherHasPenis && otherHasVag):
+			npcGeneratedGender = NpcGender.Herm
+		elif(otherHasPenis && otherHasTits):
+			npcGeneratedGender = NpcGender.Shemale
+		elif(otherHasPenis):
+			npcGeneratedGender = NpcGender.Male
+		elif(otherHasVag && !otherHasTits):
+			npcGeneratedGender = NpcGender.Peachboy
+		else:
+			npcGeneratedGender = NpcGender.Female
+	npcSmallDescription = otherCharacter.getSmallDescription()
+	npcThickness = otherCharacter.getThickness()
+	npcFeminity = otherCharacter.getFemininity()
+	npcDefaultEquipment = otherCharacter.getDefaultEquipment()
+	npcMimicArtworkID = otherCharacter.getID()
+	if(otherCharacter.isDynamicCharacter()):
+		npcArchetypes = otherCharacter.npcArchetypes
+	else:
+		npcArchetypes = []
+	npcAttacks = otherCharacter._getAttacks()
+	if(otherCharacter.isDynamicCharacter()):
+		flags = otherCharacter.flags.duplicate(true)
+	else:
+		flags = {}
+	npcChatColorOverride = otherCharacter.getChatColor()
+	npcStats = otherCharacter.npcStats.duplicate(true)
+	npcLevel = otherCharacter.npcLevel
+	npcLustInterests = otherCharacter.npcLustInterests.duplicate(true)
+	npcPersonality = otherCharacter.npcPersonality.duplicate(true)
+	npcFetishes = otherCharacter.npcFetishes.duplicate(true)
+	npcDefaultFetishInterest = otherCharacter.npcDefaultFetishInterest
+	npcArmor = otherCharacter.npcArmor.duplicate(true)
+	npcBasePain = otherCharacter.npcBasePain
+	npcBaseLust = otherCharacter.npcBaseLust
+	npcBaseStamina = otherCharacter.npcBaseStamina
+	npcBaseRestraintDodgeChanceMult = otherCharacter.npcBaseRestraintDodgeChanceMult
+	npcRestraintStrugglePower = otherCharacter.npcRestraintStrugglePower
+	npcRestraintMinigameResultMin = otherCharacter.npcRestraintMinigameResultMin
+	npcRestraintMinigameResultMax = otherCharacter.npcRestraintMinigameResultMax
+	npcCharacterType = otherCharacter.npcCharacterType
+	npcSkinData = otherCharacter.npcSkinData.duplicate(true)
+	
+	pickedSkin = otherCharacter.pickedSkin
+	pickedSkinRColor = otherCharacter.pickedSkinRColor
+	pickedSkinGColor = otherCharacter.pickedSkinGColor
+	pickedSkinBColor = otherCharacter.pickedSkinBColor
+	
+	for bodypartSlot in otherCharacter.getBodyparts():
+		if(!otherCharacter.hasBodypart(bodypartSlot)):
+			bodyparts[bodypartSlot] = null
+			continue
+		var otherBodypart:Bodypart = otherCharacter.getBodypart(bodypartSlot)
+		
+		var newBodypart:Bodypart = GlobalRegistry.createBodypart(otherBodypart.id)
+		newBodypart.loadData(otherBodypart.saveData().duplicate(true))
+		giveBodypartUnlessSame(newBodypart)
+	
+	inventory.loadData(otherCharacter.getInventory().saveData().duplicate(true))
+	for item in inventory.getItems():
+		item.uniqueID = GlobalRegistry.generateUniqueID()
+	for itemSlot in inventory.getEquippedItems():
+		var item = inventory.getEquippedItem(itemSlot)
+		item.uniqueID = GlobalRegistry.generateUniqueID()
+	
+	skillsHolder.loadData(skillsHolder.saveData().duplicate(true))
+	lustInterests.loadData(lustInterests.saveData().duplicate(true))
+	personality.loadData(personality.saveData().duplicate(true))
+	fetishHolder.loadData(fetishHolder.saveData().duplicate(true))
 
 func saveData():
 	var data = {
@@ -164,6 +243,7 @@ func saveData():
 		"pickedSkinGColor": pickedSkinGColor.to_html(),
 		"pickedSkinBColor": pickedSkinBColor.to_html(),
 		"npcChatColorOverride": npcChatColorOverride,
+		"npcMimicArtworkID": npcMimicArtworkID,
 	}
 	
 	data["bodyparts"] = {}
@@ -243,6 +323,8 @@ func loadData(data):
 	npcCharacterType = SAVE.loadVar(data, "npcCharacterType", CharacterType.Generic)
 	if(data.has("npcChatColorOverride")):
 		npcChatColorOverride = SAVE.loadVar(data, "npcChatColorOverride", "")
+	if(data.has("npcMimicArtworkID")):
+		npcMimicArtworkID = SAVE.loadVar(data, "npcMimicArtworkID", "")
 		
 	if(!data.has("pickedSkin")):
 		applyRandomSkinAndColorsAndParts()

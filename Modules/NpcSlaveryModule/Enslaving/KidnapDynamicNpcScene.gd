@@ -19,14 +19,28 @@ func _run():
 		addCharacter(npcID)
 		playAnimation(StageScene.Duo, "stand", {npc=npcID})
 
-		var npc = GlobalRegistry.getCharacter(npcID)
+		var npc:BaseCharacter = GlobalRegistry.getCharacter(npcID)
 		saynn("You heavily damaged {npc.name}'s spirit. But that's only the first step. Now you have to kidnap {npc.him} into your cell where you can truly break {npc.him} and make {npc.him} your slave.")
 		
 		saynn("Are you sure you want to kidnap {npc.name}?")
 		
 		if(npc.getInventory().hasEquippedItemWithTag(ItemTag.AllowsEnslaving)):
 			if(getModule("NpcSlaveryModule").hasFreeSpaceToEnslave()):
-				addButton("Do it", "Go through with it", "do_kidnap")
+				
+				if(npc.hasEnslaveQuest()):
+					addButton("Do it", "Go through with it", "do_kidnap")
+				else:
+					saynn("What kind of slave do you want {npc.him} to be?")
+					
+					for slaveTypeID in GlobalRegistry.getSlaveTypes():
+						var theSlaveType:SlaveTypeBase = GlobalRegistry.getSlaveType(slaveTypeID)
+						if(!theSlaveType.canEnslaveAs()):
+							continue
+						if(!theSlaveType.canTeach(getCharacter(npcID))):
+							addDisabledButton(theSlaveType.getVisibleName(), "[color=red]Incompatible with this slave[/color]\n"+theSlaveType.getVisibleDesc())
+							continue
+						addButton(theSlaveType.getVisibleName(), theSlaveType.getVisibleDesc(), "do_kidnap", [slaveTypeID])
+					
 			else:
 				addDisabledButton("Do it", "You don't have enough space in your cell to store them")
 		else:
@@ -133,7 +147,10 @@ func _react(_action: String, _args):
 		return
 	
 	if(_action == "do_kidnap"):
-		getModule("NpcSlaveryModule").doEnslaveCharacter(npcID)
+		if(_args.size() > 0):
+			getModule("NpcSlaveryModule").doEnslaveCharacter(npcID, _args[0])
+		else:
+			getModule("NpcSlaveryModule").doEnslaveCharacter(npcID)
 
 
 	setState(_action)
