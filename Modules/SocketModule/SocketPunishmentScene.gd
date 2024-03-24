@@ -47,6 +47,8 @@ func _reactInit():
 func _run():
 	if(state == ""):
 		saynn("Shouldn't see this.")
+		
+		addButton("Continue", "See what happens next", "endthescene")
 
 	if(state == "tieup"):
 		addCharacter("socket")

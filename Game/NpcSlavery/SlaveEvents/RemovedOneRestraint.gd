@@ -19,7 +19,7 @@ func shouldHappenChance(_npcSlavery:NpcSlave):
 		Fetish.Bondage: -0.9,
 	})
 	
-	return 100.0 * _npcSlavery.getResistScore() * fetishMult + 10.0 * _npcSlavery.getBratScore()
+	return 100.0 * _npcSlavery.getResistScore() * fetishMult + 10.0 * _npcSlavery.getBratScore() + sqrt(_npcSlavery.getNeediness()) * 2.0
 
 func runEvent(_npcSlavery:NpcSlave):
 	# Brats are more likely to try to resist but less likely to actually succeed (because they like restraints)
@@ -38,6 +38,16 @@ func runEvent(_npcSlavery:NpcSlave):
 		theText = "You notice that {npc.name} has some of {npc.his} restraints missing! Looks like {npc.he} managed to struggle out of them while you weren't looking."
 		_npcSlavery.deservesPunishment(2)
 		# Add tiredness here too?
+	
+	if(_npcSlavery.getNeediness() > 40.0):
+		theText += "\n\n[say=npc]"+RNG.pick([
+			"I just wanna cum.. Please..",
+			"Don't stop me, I need this. You keep denying me..",
+			"I'm just.. so horny.. all the time..",
+			"You like watching me suffer from constant lust, don't you?"
+		])+"[/say]"
+		
+		theText += "\n\nLooks like the neediness is what makes {npc.him} so desperate to remove the restraints."
 	
 	return {
 		text = theText,
