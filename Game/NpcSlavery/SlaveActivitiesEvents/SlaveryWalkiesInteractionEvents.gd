@@ -15,6 +15,7 @@ func registerTriggers(es):
 	es.addTrigger(self, Trigger.EnteringRoomWithSlave, "fight_slutwall")
 	es.addTrigger(self, Trigger.EnteringRoomWithSlave, "medical_nursery")
 	es.addTrigger(self, Trigger.EnteringRoomWithSlave, "hall_canteen")
+	es.addTrigger(self, Trigger.EnteringRoomWithSlave, "main_laundry")
 	for theSpot in peeSpots:
 		es.addTrigger(self, Trigger.EnteringRoomWithSlave, theSpot)
 	for theSpot in playSpots:
@@ -36,6 +37,12 @@ func run(_triggerID, _args):
 			else:
 				addDisabledButton("Canteen (Pet)", "Your puppy is not hungry")
 	
+	if(locName in ["main_laundry"]):
+		if(theChar.canRepairClothes()):
+			addButtonWithChecks("Repair clothes (Slave)", "Pay 10 credits to repair your slave's clothes", "do_repair_clothes", [theChar], [[ButtonChecks.HasCredits, 10]])
+		else:
+			addDisabledButton("Repair clothes (Slave)", "Your slave's clothes seem to be alright")
+		
 	if(locName in ["main_bathroom1", "main_bathroom2"]):
 		if(npcSlavery.getLevel() >= 1):
 			addButton("Mirror (Slave)", "Change your slave's haircut", "starthair", [npcID])
@@ -75,6 +82,11 @@ func getPriority():
 	return 0
 
 func onButton(_method, _args):
+	if(_method == "do_repair_clothes"):
+		GM.pc.addCredits(-10)
+		_args[0].repairAllClothes()
+		addMessage("Your slave's clothes have been repaired!")
+		GM.main.reRun()
 	if(_method == "starthair"):
 		runScene("ActionSlaveryHaircut", [_args[0]])
 	if(_method == "startshower"):

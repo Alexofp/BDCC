@@ -58,8 +58,11 @@ func canDamage():
 func isDamaged():
 	return false
 
+func canRepair():
+	return isDamaged()
+
 func receiveDamage():
-	pass
+	return [false]
 
 func repairDamage():
 	pass

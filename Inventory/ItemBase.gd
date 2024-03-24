@@ -459,16 +459,26 @@ func canDamage():
 
 func receiveDamage():
 	if(itemState != null):
-		itemState.receiveDamage()
+		var theResult = itemState.receiveDamage()
+		if(theResult != null && theResult[0]):
+			updateWearerAppearance()
+		return theResult
+	return [false]
 
 func isDamaged():
 	if(itemState != null):
 		return itemState.isDamaged()
 	return false
 
+func canRepair():
+	if(itemState != null):
+		return itemState.canRepair()
+	return false
+
 func repairDamage():
 	if(itemState != null):
 		itemState.repairDamage()
+		updateWearerAppearance()
 
 func alwaysVisible():
 	return false

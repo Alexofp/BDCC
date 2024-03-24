@@ -414,6 +414,18 @@ func sendSexEvent(type, source = "", target = "", data = {}):
 	if(getSub() != getDom()):
 		getSub().sendSexEvent(newSexEvent)
 	
+func damageSubClothes():
+	var damageClothesResult = getSub().damageClothes()
+	if(damageClothesResult[0]):
+		return "[b]"+damageClothesResult[2].getVisibleName()+" got damaged![/b] "+damageClothesResult[1]
+	return ""
+
+func damageDomClothes():
+	var damageClothesResult = getDom().damageClothes()
+	if(damageClothesResult[0]):
+		return "[b]"+damageClothesResult[2].getVisibleName()+" got damaged![/b] "+damageClothesResult[1]
+	return ""
+	
 func saveData():
 	var data = {
 		"uniqueID": uniqueID,

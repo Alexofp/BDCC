@@ -267,7 +267,7 @@ func restockEquipmentChance(chanceToEquip):
 			equipDefaultEquipmentEntrySafely(equipEntry)
 
 # Restraints that we forced onto the npc for example, anything that is not their default equipment
-func getWrongEquippedItems():
+func getWrongEquippedItems(includeDamaged=true):
 	var result = []
 	
 	var theEquip = getDefaultEquipment()
@@ -281,7 +281,7 @@ func getWrongEquippedItems():
 	for item in getInventory().getEquippedItems().values():
 		if(item == null):
 			continue
-		if(!theEquipChecker.has(item.id)):
+		if(!theEquipChecker.has(item.id) || (includeDamaged && item.isDamaged())):
 			result.append(item)
 	
 	return result

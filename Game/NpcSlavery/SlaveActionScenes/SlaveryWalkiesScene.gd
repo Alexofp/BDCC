@@ -17,6 +17,7 @@ func _initScene(_args = []):
 		
 		if(walkiesType == "walkies"):
 			npc.getNpcSlavery().startActivity("Walkies")
+	addCharacter(npcID)
 
 func resolveCustomCharacterName(_charID):
 	if(_charID == "npc"):

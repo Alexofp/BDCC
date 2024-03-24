@@ -15,7 +15,7 @@ func _run():
 		if(GM.pc.getInventory().hasSlotEquipped(InventorySlot.Body)):
 			var item:ItemBase = GM.pc.getInventory().getEquippedItem(InventorySlot.Body)
 			if(item.id in ["inmateuniform", "inmateuniformHighsec", "inmateuniformSexDeviant"]):
-				if(item.isDamaged()):
+				if(item.canRepair()):
 					addButton("Repair", "Repair your uniform", "repairUniform")
 				else:
 					addDisabledButton("Repair", "Your uniform is not damaged")

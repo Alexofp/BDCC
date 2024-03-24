@@ -2686,3 +2686,68 @@ func isInventorySlotBlocked(invslot):
 		if(itemState != null && (invslot in itemState.blocksInventorySlots())):
 			return true
 	return false
+
+
+func getDamagebleClothesZones():
+	var piecesToDamage = [InventorySlot.Torso, InventorySlot.Body]
+	if(RNG.chance(50)):
+		piecesToDamage.append(InventorySlot.UnderwearTop)
+		piecesToDamage.append(InventorySlot.UnderwearBottom)
+	else:
+		piecesToDamage.append(InventorySlot.UnderwearBottom)
+		piecesToDamage.append(InventorySlot.UnderwearTop)
+	return piecesToDamage
+
+func canDamageClothes():
+	for piece in getDamagebleClothesZones():
+		if(getInventory().hasSlotEquipped(piece)):
+			var item:ItemBase = getInventory().getEquippedItem(piece)
+			if(item.canDamage()):
+				return true
+	return false
+
+func damageClothes():
+	for piece in getDamagebleClothesZones():
+		if(getInventory().hasSlotEquipped(piece)):
+			var item:ItemBase = getInventory().getEquippedItem(piece)
+			if(item.canDamage()):
+				var theResult = item.receiveDamage()
+				if(theResult != null && theResult[0]):
+					return [theResult[0], theResult[1], item]
+	return [false]
+
+func canRepairClothes():
+	for itemSlot in getInventory().getEquippedItems():
+		if(getInventory().hasSlotEquipped(itemSlot)):
+			var item:ItemBase = getInventory().getEquippedItem(itemSlot)
+			if(item.canRepair()):
+				return true
+	return false
+
+func repairAllClothes():
+	for itemSlot in getInventory().getEquippedItems():
+		if(getInventory().hasSlotEquipped(itemSlot)):
+			var item:ItemBase = getInventory().getEquippedItem(itemSlot)
+			item.repairDamage()
+	return true
+
+func hasTightHoles():
+	var maxLooseness = 0.0
+	var bodypartsToCheck = [BodypartSlot.Vagina, BodypartSlot.Anus]
+	
+	for bodypartID in bodypartsToCheck:
+		if(!hasBodypart(bodypartID)):
+			continue
+			
+		var bodypart:Bodypart = getBodypart(bodypartID)
+		
+		var orifice:Orifice = bodypart.getOrifice()
+		if(orifice == null):
+			continue
+		
+		maxLooseness = max(maxLooseness, orifice.getLooseness())
+	
+	if(maxLooseness < 1.5):
+		return true
+	else:
+		return false

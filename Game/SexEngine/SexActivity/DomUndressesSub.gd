@@ -130,13 +130,19 @@ func doSubAction(_id, _actionInfo):
 		if(RNG.chance(70.0 - domInfo.getAngerScore()*60.0)):
 			domInfo.addAnger(0.3)
 			endActivity()
+			var damageText = ""
+			if(RNG.chance(20)):
+				damageText = damageSubClothes()
 			return {
-				text = "{sub.You} {sub.youVerb('manage', 'managed')} to resist {dom.yourHis} attempt to undress.",
+				text = "{sub.You} {sub.youVerb('manage', 'managed')} to resist {dom.yourHis} attempt to undress."+((" Struggling leads to {dom.name} ripping {sub.your} clothes. "+damageText) if damageText != "" else ""),
 				subSay=subReaction(SexReaction.ActivelyResisting, 50),
 			}
 		
 		domInfo.addAnger(0.1)
-		return {text = "{sub.You} {sub.youVerb('try', 'tries')} to resist {dom.yourHis} hands but {sub.youVerb('fail')}.",
+		var damageText = ""
+		if(RNG.chance(10)):
+			damageText = damageSubClothes()
+		return {text = "{sub.You} {sub.youVerb('try', 'tries')} to resist {dom.yourHis} hands but {sub.youVerb('fail')}."+((" Struggling leads to {dom.name} ripping {sub.your} clothes. "+damageText) if damageText != "" else ""),
 		subSay=subReaction(SexReaction.Resisting, 50)}
 
 func getItemToRemove(character):

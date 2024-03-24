@@ -75,6 +75,11 @@ func processTurn():
 		for _i in range(amount):
 			text.append(RNG.grab(texts))
 		
+		if(RNG.chance(1)):
+			var damageText = damageSubClothes()
+			if(damageText != ""):
+				text.append(damageText)
+		
 		return {
 			text=Util.join(text, " "),
 			domSay = domReaction(SexReaction.BeatingUp, 30),
@@ -122,6 +127,11 @@ func doDomAction(_id, _actionInfo):
 		
 		if(RNG.chance(50)):
 			getSub().doWound(domID)
+		
+		if(RNG.chance(33)):
+			var damageText = damageSubClothes()
+			if(damageText != ""):
+				text += " "+(damageText)
 		
 		return {
 			text = text,

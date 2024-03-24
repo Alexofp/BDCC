@@ -835,54 +835,6 @@ func onPlayerReadyToGiveBirth():
 func getLustCombatState():
 	return lustCombatState
 
-func getDamagebleClothesZones():
-	var piecesToDamage = [InventorySlot.Torso, InventorySlot.Body]
-	if(RNG.chance(50)):
-		piecesToDamage.append(InventorySlot.UnderwearTop)
-		piecesToDamage.append(InventorySlot.UnderwearBottom)
-	else:
-		piecesToDamage.append(InventorySlot.UnderwearBottom)
-		piecesToDamage.append(InventorySlot.UnderwearTop)
-	return piecesToDamage
-
-func canDamageClothes():
-	for piece in getDamagebleClothesZones():
-		if(getInventory().hasSlotEquipped(piece)):
-			var item:ItemBase = getInventory().getEquippedItem(piece)
-			if(item.canDamage()):
-				return true
-	return false
-
-func damageClothes():
-	for piece in getDamagebleClothesZones():
-		if(getInventory().hasSlotEquipped(piece)):
-			var item:ItemBase = getInventory().getEquippedItem(piece)
-			if(item.canDamage()):
-				item.receiveDamage()
-				return true
-	return false
-
-func hasTightHoles():
-	var maxLooseness = 0.0
-	var bodypartsToCheck = [BodypartSlot.Vagina, BodypartSlot.Anus]
-	
-	for bodypartID in bodypartsToCheck:
-		if(!hasBodypart(bodypartID)):
-			continue
-			
-		var bodypart:Bodypart = getBodypart(bodypartID)
-		
-		var orifice:Orifice = bodypart.getOrifice()
-		if(orifice == null):
-			continue
-		
-		maxLooseness = max(maxLooseness, orifice.getLooseness())
-	
-	if(maxLooseness < 1.5):
-		return true
-	else:
-		return false
-
 func getRestraintForcingSuccessChanceMod():
 	return max(1.0 + min(getAttackAccuracy(), 0.0), 0.0) * (1.0 + buffsHolder.getCustom(BuffAttribute.RestraintForcingSuccess))
 
