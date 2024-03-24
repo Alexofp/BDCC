@@ -8,6 +8,7 @@ var optionCategoryList = preload("res://UI/Options/OptionListType.tscn")
 var optionCategoryFloat = preload("res://UI/Options/OptionFloatType.tscn")
 var optionCategoryInt = preload("res://UI/Options/OptionIntType.tscn")
 var optionCategoryPriorityList = preload("res://UI/Options/OptionPriorityListType.tscn")
+var optionCategoryString = preload("res://UI/Options/OptionStringType.tscn")
 signal onClosePressed
 
 func _ready():
@@ -45,6 +46,8 @@ func updateOptions():
 				optionUIObject = optionCategoryInt.instance()
 			elif(optionType == "prioritylist"):
 				optionUIObject = optionCategoryPriorityList.instance()
+			elif(optionType == "string"):
+				optionUIObject = optionCategoryString.instance()
 			else:
 				optionUIObject = optionCategoryUnknown.instance()
 			
@@ -58,7 +61,10 @@ func updateOptions():
 			optionUIObject.setOptionValue(optionValue)
 			if(optionUIObject.has_signal("value_changed")):
 				var _ok = optionUIObject.connect("value_changed", self, "onOptionChanged")
-
+			
+			if(optionType == "string"):
+				if("placeholder" in option):
+					optionUIObject.setPlaceholderValue(option["placeholder"])
 			if(optionType == "list"):
 				optionUIObject.setValues(option["values"])
 			if(optionType == "prioritylist"):

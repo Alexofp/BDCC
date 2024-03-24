@@ -17,7 +17,24 @@ static func getAllWithVagina():
 	return [Female, Herm, Peachboy]
 
 static func getVisibleName(gender):
+	return OPTIONS.getGenderOverrideName(gender, getDefaultVisibleName(gender))
+
+static func getDefaultVisibleName(gender):
 	return gender.capitalize()
+
+static func getOptionsDesc(gender):
+	if(gender == Male):
+		return "Penis"
+	if(gender == Female):
+		return "Breasts,Vagina"
+	if(gender == Shemale):
+		return "Breasts,Penis"
+	if(gender == Herm):
+		return "Breasts,Penis,Vagina"
+	if(gender == Peachboy):
+		return "Vagina"
+	
+	return "???"
 
 static func getVisibleNameColored(gender):
 	var theName = getVisibleName(gender)

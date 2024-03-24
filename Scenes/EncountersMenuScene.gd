@@ -44,7 +44,7 @@ func _run():
 			var genderName = NpcGender.getVisibleNameColored(gender)
 			var extraInfo = ""
 			var genderExlanation = NpcGender.getGenderExplanation(gender)
-			if(genderExlanation != null):
+			if(genderExlanation != null && genderExlanation != ""):
 				extraInfo = " ("+str(genderExlanation)+")"
 			
 			var weight = encounterSettings.getGenderWeight(gender)
@@ -170,7 +170,7 @@ func _run():
 			var genderName = NpcGender.getVisibleNameColored(gender)
 			var extraInfo = ""
 			var genderExlanation = NpcGender.getGenderExplanation(gender)
-			if(genderExlanation != null):
+			if(genderExlanation != null && genderExlanation != ""):
 				extraInfo = " ("+str(genderExlanation)+")"
 			
 			var weight = encounterSettings.getGenderWeight(gender)
