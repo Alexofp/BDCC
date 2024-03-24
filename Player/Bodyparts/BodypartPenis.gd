@@ -90,7 +90,7 @@ func getPickableAttributes():
 		"buttonDesc": "Pick the cock's balls scale",
 		"options": [
 			[0.0, "0%", "Pick this scale"],
-			[0.3, "20%", "Pick this scale"],
+			[0.3, "30%", "Pick this scale"],
 			[0.5, "50%", "Pick this scale"],
 			[0.8, "80%", "Pick this scale"],
 			[1.0, "100%", "Pick this scale"],

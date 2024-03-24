@@ -1598,11 +1598,17 @@ func softUpdateDoll(doll: Doll3D):
 	
 	doll.setPregnancy(clamp(pregnancyValue, -0.5, 1.1))
 	
+	var theTailScale = 1.0
+	if(hasBodypart(BodypartSlot.Tail)):
+		var theTail = getBodypart(BodypartSlot.Tail)
+		if(theTail.has_method("getTailScale")):
+			theTailScale = theTail.getTailScale()
+	
 	if(thicknessNorm <= 0.5):
-		doll.setButtScale(1.0 - 0.2 * (1.0 - thicknessNorm * 2))
+		doll.setButtScale(1.0 - 0.2 * (1.0 - thicknessNorm * 2), theTailScale)
 		doll.setThighThickness(- 0.4 * (1.0 - thicknessNorm * 2))
 	else:
-		doll.setButtScale(1.0 + (thicknessNorm - 0.5)/1.5)
+		doll.setButtScale(1.0 + (thicknessNorm - 0.5)/1.5, theTailScale)
 		doll.setThighThickness((thicknessNorm - 0.5))
 	
 	doll.selfChains = []
