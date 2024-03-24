@@ -72,7 +72,8 @@ func _run():
 			var bodypart = thePC.getBodypart(bodypartSlot)
 			if(!bodypart.supportsSkin()):
 				continue
-			addButton(bodypart.getName(), "Modify this bodypart's skin/colors", "bodypartmenu", [bodypartSlot])
+			#addButton(bodypart.getName(), "Modify this bodypart's skin/colors", "bodypartmenu", [bodypartSlot])
+			addButton(BodypartSlot.getVisibleName(bodypartSlot), "Modify the skin/colors of the "+str(bodypart.getName()), "bodypartmenu", [bodypartSlot])
 
 	if(state == "basemenu"):
 		addButton("Back", "Go back", "")
