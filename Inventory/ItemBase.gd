@@ -8,6 +8,7 @@ var currentInventory = null
 var restraintData: RestraintData
 var itemState: ItemState
 var fluids: Fluids
+var clothesColor: Color = Color.white
 
 func _init():
 	#if(uniqueID == null):
@@ -86,6 +87,8 @@ func getVisisbleDescription():
 		var extraDesc = itemState.getExtraDescription()
 		if(extraDesc != null && extraDesc != ""):
 			text += "\n"+extraDesc
+	if(canDye()):
+		text += "\n[color=gray]Color: "+str(clothesColor.to_html(false))+"[/color]"+" [color=#"+clothesColor.to_html(false)+"]###[/color]"
 	if(hasTag(ItemTag.Illegal)):
 		text += "\n[color=red]This item is illegal![/color]"
 	if(addsIntoxication() > 0.0):
@@ -232,6 +235,9 @@ func saveData():
 	if(fluids != null):
 		data["fluids"] = fluids.saveData()
 
+	if(canDye()):
+		data["clothesColor"] = clothesColor.to_html()
+
 	return data
 	
 func loadData(_data):
@@ -245,6 +251,10 @@ func loadData(_data):
 
 	if(fluids != null):
 		fluids.loadData(SAVE.loadVar(_data, "fluids", {}))
+	
+	if(canDye()):
+		if(_data.has("clothesColor")):
+			clothesColor = Color(SAVE.loadVar(_data, "clothesColor", "white"))
 
 func getClothingSlot():
 	return null
@@ -538,6 +548,9 @@ func getInventoryImage():
 	
 	return null
 
+func getInventoryImageColor():
+	return Color.white
+
 func onUnequipped():
 	if(itemState != null):
 		itemState.resetState()
@@ -547,3 +560,15 @@ func isPersistent():
 
 func alwaysRecoveredAfterSex():
 	return false
+
+func onDollUpdate(_doll : Doll3D, _zone, _dollpart):
+	if(canDye() && _dollpart != null && _dollpart.has_method("setColor")):
+		_dollpart.setColor(clothesColor)
+
+func canDye():
+	return false
+
+func onDyed(_newColor:Color):
+	if(canDye()):
+		clothesColor = _newColor
+		updateWearerAppearance()

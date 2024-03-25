@@ -2,6 +2,7 @@ extends "res://Inventory/Items/Underwear/Strapon.gd"
 
 func _init():
 	id = "StraponFeeldoe"
+	clothesColor = Color(0.69, 0.08, 0.08)
 
 func getVisibleName():
 	return "Strapon (feeldoe)"
@@ -15,7 +16,7 @@ func getRiggedParts(_character):
 	if(itemState.isRemoved()):
 		return null
 	return {
-		"panties": "res://Inventory/RiggedModels/Strapons/FeeldoeStrapon.tscn",
+		"strapon": "res://Inventory/RiggedModels/Strapons/FeeldoeStrapon.tscn",
 	}
 
 func getStraponPleasureForDom():

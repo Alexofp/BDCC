@@ -39,7 +39,7 @@ func run(_triggerID, _args):
 	
 	if(locName in ["main_laundry"]):
 		if(theChar.canRepairClothes()):
-			addButtonWithChecks("Repair clothes (Slave)", "Pay 10 credits to repair your slave's clothes", "do_repair_clothes", [theChar], [[ButtonChecks.HasCredits, 10]])
+			addButtonWithChecks("Repair clothes (Slave)", "Pay 5 credits to repair your slave's clothes", "do_repair_clothes", [theChar], [[ButtonChecks.HasCredits, 5]])
 		else:
 			addDisabledButton("Repair clothes (Slave)", "Your slave's clothes seem to be alright")
 		
@@ -83,7 +83,7 @@ func getPriority():
 
 func onButton(_method, _args):
 	if(_method == "do_repair_clothes"):
-		GM.pc.addCredits(-10)
+		GM.pc.addCredits(-5)
 		_args[0].repairAllClothes()
 		addMessage("Your slave's clothes have been repaired!")
 		GM.main.reRun()

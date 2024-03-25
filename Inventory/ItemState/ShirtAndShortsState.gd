@@ -6,6 +6,7 @@ var shirtOpened = false
 var clothesDamaged = false
 var halfDamage = false
 var canActuallyBeDamaged = false
+var superDamage = false
 
 func getCasualName():
 	return "uniform"
@@ -43,6 +44,7 @@ func saveData():
 	data["shirtOpened"] = shirtOpened
 	data["clothesDamaged"] = clothesDamaged
 	data["halfDamage"] = halfDamage
+	data["superDamage"] = superDamage
 
 	return data
 	
@@ -53,6 +55,7 @@ func loadData(_data):
 	shirtOpened = SAVE.loadVar(_data, "shirtOpened", false)
 	clothesDamaged = SAVE.loadVar(_data, "clothesDamaged", false)
 	halfDamage = SAVE.loadVar(_data, "halfDamage", false)
+	superDamage = SAVE.loadVar(_data, "superDamage", false)
 
 func blocksInventorySlots():
 	var result = []
@@ -86,13 +89,16 @@ func getStateText():
 	return text
 
 func canDamage():
-	return !clothesDamaged && canActuallyBeDamaged && !isRemoved()
+	return !superDamage && canActuallyBeDamaged && !isRemoved()
 
 func isDamaged():
 	return clothesDamaged
 
 func isHalfDamaged():
 	return halfDamage# || clothesDamaged
+
+func isSuperDamaged():
+	return superDamage# || clothesDamaged
 
 func receiveDamage():
 	if(!halfDamage):
@@ -101,14 +107,23 @@ func receiveDamage():
 	elif(!clothesDamaged):
 		clothesDamaged = true
 		return [true, "Pieces of the uniform's fabric got ripped off, exposing privates!"]
+	elif(!superDamage):
+		superDamage = true
+		return [true, "The uniform's fabric got scratched even further, forming huge gaping holes!"]
 	
 	return .receiveDamage()
+
+func canRepair():
+	return isDamaged() || halfDamage
 
 func repairDamage():
 	clothesDamaged = false
 	halfDamage = false
+	superDamage = false
 
 func getDamageDescription():
+	if(superDamage):
+		return "Lots of gaping holes in the fabric, exposing privates"
 	if(clothesDamaged):
 		return "Pieces of fabric are ripped off, exposing privates"
 	if(halfDamage):

@@ -1077,10 +1077,23 @@ func getDebugActions():
 				},
 			]
 		},
+		{
+			"id": "damageClothes",
+			"name": "Damage pc clothes",
+		},
+		{
+			"id": "repairClothes",
+			"name": "Repair pc clothes",
+		},
 	]
 
 func doDebugAction(id, args = {}):
 	print(id, " ", args)
+	
+	if(id == "damageClothes"):
+		GM.pc.damageClothes()
+	if(id == "repairClothes"):
+		GM.pc.repairAllClothes()
 	
 	if(id == "healPC"):
 		GM.pc.addPain(-GM.pc.painThreshold())

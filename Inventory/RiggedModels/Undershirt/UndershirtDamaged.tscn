@@ -1,0 +1,33 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Inventory/RiggedModels/Undershirt/dambody.png" type="Texture" id=1]
+[ext_resource path="res://Inventory/RiggedModels/Undershirt/dambreasts.png" type="Texture" id=2]
+[ext_resource path="res://Inventory/RiggedModels/Undershirt/Undershirt.tscn" type="PackedScene" id=3]
+
+[sub_resource type="SpatialMaterial" id=1]
+resource_name = "bodywide.png"
+flags_transparent = true
+flags_unshaded = true
+vertex_color_use_as_albedo = true
+params_cull_mode = 2
+params_depth_draw_mode = 3
+albedo_color = Color( 0.192157, 0.192157, 0.192157, 1 )
+albedo_texture = ExtResource( 1 )
+
+[sub_resource type="SpatialMaterial" id=2]
+resource_name = "breasts4.png"
+flags_transparent = true
+flags_unshaded = true
+vertex_color_use_as_albedo = true
+params_cull_mode = 2
+params_depth_draw_mode = 3
+albedo_color = Color( 0.192157, 0.192157, 0.192157, 1 )
+albedo_texture = ExtResource( 2 )
+
+[node name="UndershirtDamaged" instance=ExtResource( 3 )]
+
+[node name="bodywidepng" parent="." index="0"]
+material/0 = SubResource( 1 )
+
+[node name="breastsScalable001" parent="PartStatePicker/PartState" index="0"]
+material/0 = SubResource( 2 )

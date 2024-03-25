@@ -69,6 +69,10 @@ func getRiggedParts(_character):
 	if(itemState.isRemoved()):
 		return null
 	if(inmateType == InmateType.SexDeviant):
+		if(itemState.isSuperDamaged()):
+			return {
+				"clothing": "res://Inventory/RiggedModels/InmateUniform/damaged/LilacInmateUniformSuperDamaged.tscn",
+			}
 		if(itemState.isDamaged()):
 			return {
 				"clothing": "res://Inventory/RiggedModels/InmateUniform/damaged/LilacInmateUniformDamaged.tscn",
@@ -81,6 +85,10 @@ func getRiggedParts(_character):
 			"clothing": "res://Inventory/RiggedModels/InmateUniform/LilacInmateUniform.tscn",
 		}
 	elif(inmateType == InmateType.HighSec):
+		if(itemState.isSuperDamaged()):
+			return {
+				"clothing": "res://Inventory/RiggedModels/InmateUniform/damaged/RedInmateUniformSuperDamaged.tscn",
+			}
 		if(itemState.isDamaged()):
 			return {
 				"clothing": "res://Inventory/RiggedModels/InmateUniform/damaged/RedInmateUniformDamaged.tscn",
@@ -93,6 +101,10 @@ func getRiggedParts(_character):
 			"clothing": "res://Inventory/RiggedModels/InmateUniform/RedInmateUniform.tscn",
 		}
 	
+	if(itemState.isSuperDamaged()):
+		return {
+			"clothing": "res://Inventory/RiggedModels/InmateUniform/damaged/OrangeInmateUniformSuperDamaged.tscn",
+		}
 	if(itemState.isDamaged()):
 		return {
 			"clothing": "res://Inventory/RiggedModels/InmateUniform/damaged/OrangeInmateUniformDamaged.tscn",

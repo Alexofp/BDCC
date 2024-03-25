@@ -75,6 +75,7 @@ func updateInfo():
 		var theImage = load(imagePath)
 		if(theImage != null):
 			itemTextureRect.texture = theImage
+			itemTextureRect.self_modulate = item.getInventoryImageColor()
 	
 	if(isSell):
 		showUseButton(true)

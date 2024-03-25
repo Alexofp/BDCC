@@ -5,6 +5,9 @@ var shiftedAside = false
 var casualName = "panties"
 var canShiftAside = true
 
+var clothesDamaged = false
+var canActuallyBeDamaged = false
+
 func getCasualName():
 	return casualName
 
@@ -39,6 +42,7 @@ func saveData():
 	data["removed"] = removed
 	data["casualName"] = casualName
 	data["canShiftAside"] = canShiftAside
+	data["clothesDamaged"] = clothesDamaged
 
 	return data
 	
@@ -48,9 +52,10 @@ func loadData(_data):
 	removed = SAVE.loadVar(_data, "removed", false)
 	casualName = SAVE.loadVar(_data, "casualName", "panties")
 	canShiftAside = SAVE.loadVar(_data, "canShiftAside", true)
+	clothesDamaged = SAVE.loadVar(_data, "clothesDamaged", false)
 
 func coversBodyparts():
-	if(removed || shiftedAside):
+	if(removed || shiftedAside || clothesDamaged):
 		return {}
 	
 	return {
@@ -77,3 +82,24 @@ func getHidesParts(_character):
 	return {
 		BodypartSlot.Penis: true,
 	}
+
+func getDamageDescription():
+	if(clothesDamaged):
+		return "Pieces of fabric are ripped off, exposing private bits"
+	return ""
+
+func canDamage():
+	return !clothesDamaged && canActuallyBeDamaged && !isRemoved()
+
+func isDamaged():
+	return clothesDamaged
+
+func receiveDamage():
+	if(!clothesDamaged):
+		clothesDamaged = true
+		return [true, "Huge chunks of the fabric got ripped off, exposing private bits!"]
+	
+	return .receiveDamage()
+
+func repairDamage():
+	clothesDamaged = false

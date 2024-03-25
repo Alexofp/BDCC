@@ -1670,7 +1670,7 @@ func updateDoll(doll: Doll3D):
 			 continue
 			
 		for zone in riggedScenes:
-			parts[zone] = riggedScenes[zone]
+			parts[zone] = [riggedScenes[zone], item] #Hack alert
 	
 	for inventorySlot in equippedItems:
 		var item = equippedItems[inventorySlot]

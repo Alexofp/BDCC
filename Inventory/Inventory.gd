@@ -41,6 +41,16 @@ func getAllItems():
 func getEquippedItems():
 	return equippedItems
 
+func getAllItemsCanDye():
+	var result = []
+	for item in items:
+		if(item.canDye()):
+			result.append(item)
+	for itemSlot in equippedItems:
+		if(equippedItems[itemSlot].canDye()):
+			result.append(equippedItems[itemSlot])
+	return result
+
 func getAllSellableItems():
 	var result = []
 	for item in items:
@@ -105,6 +115,13 @@ func getEquippedItemByUniqueID(uniqueID: String):
 		if(item.uniqueID == uniqueID):
 			return item
 	return null
+
+func hasEquippedItemWithUniqueID(uniqueID: String):
+	for slot in equippedItems.keys():
+		var item = equippedItems[slot]
+		if(item.uniqueID == uniqueID):
+			return true
+	return false
 
 func getEquippedItemByID(theID: String):
 	for slot in equippedItems.keys():
