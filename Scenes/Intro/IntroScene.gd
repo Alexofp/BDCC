@@ -133,7 +133,7 @@ func _run():
 
 		saynn("[say=pc]Hey! What is that[/say]")
 
-		saynn("He doesn’t stop, he tries to swiftly inject it into your neck but you shove him away. And then again. He shows his fangs and growls at you before lunging forward and grabbing your arms. He is strong, you can only push him away so long before he overpowers you. [b]You feel a prick[/b]. Ow. What a fucker. Jack puts the used thing away and leaves you alone, taking a seat again. You’re still angry but.. [b]your head starts to feel.. light..[/b]")
+		saynn("He doesn’t stop, he tries to swiftly inject it into your neck but you shove him away. And then again. He shows his fangs and growls at you before lunging forward and grabbing your arms. He is strong, you can only push him away so long before he overpowers you. [b]You feel a prick[/b]. Ow. What a fucker. Jake puts the used thing away and leaves you alone, taking a seat again. You’re still angry but.. [b]your head starts to feel.. light..[/b]")
 
 		saynn("[say=intro_detective]It’s called truth serum. You made me do it, {pc.name}[/say]")
 
@@ -174,7 +174,7 @@ func _run():
 
 		saynn("[say=intro_detective]Even if you were, you failed a mindtest. And I’m afraid the judge has no reason to not believe the mindtest. Machines can’t lie[/say]")
 
-		saynn("You feel helpless, you keep trying to come up with a worthy excuse but there is nothing. After about ten seconds of silence Jack stands up and grabs something from his belt, metal handcuffs.")
+		saynn("You feel helpless, you keep trying to come up with a worthy excuse but there is nothing. After about ten seconds of silence Jake stands up and grabs something from his belt, metal handcuffs.")
 
 		saynn("[say=intro_detective]I understand you, I really do. I will be back in a few minutes. I will have to cuff you, safety precautions.[/say]")
 
@@ -193,7 +193,7 @@ func _run():
 
 		saynn("[say=intro_detective]Mhm. I trust you, I really do. I don’t agree with you but I trust you. Yes, you didn’t ruin someone’s life, you just made it worse, you stole their money, made them feel worse and right now the government has to spend money on you as well. In the end you made this world slightly worse, you’re a net negative. Objectively speaking you are a criminal and you knew exactly what you were doing. You really wanted money you didn’t earn so you’re trying to justify this crime in your head.[/say]")
 
-		saynn("Jack stands up and grabs something from his belt, metal handcuffs.")
+		saynn("Jake stands up and grabs something from his belt, metal handcuffs.")
 
 		saynn("[say=intro_detective]I will have to cuff you, sit still[/say]")
 
@@ -214,7 +214,7 @@ func _run():
 
 		saynn("[say=pc]Whatever you say, I don’t like you.[/say]")
 
-		saynn("Jack stands up and grabs something from his belt, metal handcuffs.")
+		saynn("Jake stands up and grabs something from his belt, metal handcuffs.")
 
 		saynn("[say=intro_detective]I will have to cuff you, sit still[/say]")
 
@@ -233,11 +233,11 @@ func _run():
 
 		saynn("[say=pc]Well, I don’t have it. My planet doesn’t follow the intergalactic law[/say]")
 
-		saynn("Jack nods.")
+		saynn("Jake nods.")
 
 		saynn("[say=intro_detective]That’s an offense I’m afraid.[/say]")
 
-		saynn("Jack stands up and grabs something from his belt, metal handcuffs.")
+		saynn("Jake stands up and grabs something from his belt, metal handcuffs.")
 
 		saynn("[say=intro_detective]I will have to cuff you, safety precautions.[/say]")
 
@@ -304,7 +304,7 @@ func _run():
 
 		saynn("You turn and look out of the window. Between all the asteroids [b]you see a huge rock[/b], the biggest one, floating in the void [b]with a space station seemingly shoved into it[/b]. The station looks small from this distance but you do see quite a few levels to it.")
 
-		saynn("[sayMale]That’s where you will spent the rest of your life[/sayMale]")
+		saynn("[sayMale]That’s where you will spent the rest of your life.[/sayMale]")
 
 		saynn("You try to distance yourself from it all and just relax in your metal seat. The shuttle slowly approaches the hangar, its outside entrance has some kind of energy field that allows the shuttles to pass but keep all the air inside. The engines switch to a vertical thrust as the station’s gravity generator begins to affect the shuttle more. Soft touchdown. Maybe you will like it here, who knows.")
 

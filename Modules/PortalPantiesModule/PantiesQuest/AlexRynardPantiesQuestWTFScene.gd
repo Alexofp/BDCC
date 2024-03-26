@@ -46,7 +46,7 @@ func _run():
 
 		saynn("[say=alexrynard]Don’t know, probably some inmates found it.[/say]")
 
-		saynn("That makes even more angry, you’re like a bomb that’s about to explode. Foxy sees that and adds.")
+		saynn("That makes you even more angry, you’re like a bomb that’s about to explode. Foxy sees that and adds.")
 
 		saynn("[say=alexrynard]Tell you what. If you find the prototypes and return them to me I will give you credits, how about that.[/say]")
 

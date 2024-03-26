@@ -67,7 +67,7 @@ func _run():
 
 		saynn("[say=npc]"+str(RNG.pick(["Oh.. oh my.. so perfect.. Look at the tiny fingers and those little eyes.. So beautiful..", "Hi, mommy loves you more than words can express.. welcome to the world, my precious..", "I can't believe I brought this incredible life into existence.. I can't live without you already..", "I will do everything in my power to give you the life you deserve.."]))+"[/say]")
 
-		saynn("{npc.He} gently kisses her baby's forehead while you stand nearby and smile.")
+		saynn("{npc.He} gently kisses {npc.his} baby's forehead while you stand nearby and smile.")
 
 		saynn("[say=pc]You did an amazing job.[/say]")
 

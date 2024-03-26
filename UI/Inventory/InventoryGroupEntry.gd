@@ -74,9 +74,9 @@ func updateInfo():
 		return
 	
 	if(item.isWornByWearer()):
-		itemNameLabel.text = "(worn) "+item.getStackName()
+		itemNameLabel.text = "(worn) "+item.getVisibleName()
 	else:
-		itemNameLabel.text = item.getStackName()
+		itemNameLabel.text = item.getVisibleName()
 	
 	var imagePath = item.getInventoryImage()
 	if(imagePath != null):
@@ -102,7 +102,12 @@ func _on_SelectButton_pressed():
 func updateCollapsed():
 	if(isCollapsed):
 		setSelected(false)
-		itemCollapsedLabel.text = str(items.size())+"x"
+		var accurateAmount = 0
+		for theitem in items:
+			if(theitem.item != null):
+				accurateAmount += theitem.item.getAmount()
+		
+		itemCollapsedLabel.text = str(accurateAmount)+"x"
 	else:
 		setSelected(true)
 		itemCollapsedLabel.text = "V "

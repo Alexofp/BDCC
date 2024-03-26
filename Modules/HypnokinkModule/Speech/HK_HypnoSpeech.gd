@@ -66,7 +66,7 @@ func modify(_text: String, _speaker: BaseCharacter) -> String:
 					hypnoHighlightsUnused.erase(word_base)
 					GM.pc.addEffect(StatusEffect.Suggestible, [RNG.randi_range(1,4)]) #add a little hypnosis
 					GM.pc.addLust(RNG.randi_range(1,5)) #a little bit of lust
-					GM.pc.addArousal(RNG.randf_range(0.0,0.03)) #and a bit less arousal
+					#GM.pc.addArousal(RNG.randf_range(0.0,0.03)) #and a bit less arousal
 			else:
 				outText += word
 		else:

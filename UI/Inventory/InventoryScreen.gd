@@ -121,6 +121,7 @@ func updateInventory():
 				
 				entry.connect("onInteractButtonPressed", self, "onEntryInteractButtonPressed")
 				entry.connect("onItemSelected", self, "onEntrySelected")
+			newGroupEntry.updateCollapsed()
 			
 	updateSelectedHighlight()
 

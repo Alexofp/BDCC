@@ -129,7 +129,7 @@ func _run():
 		
 		saynn("You growl and get into the combat stance")
 		
-		saynn("[say=captain]Fine, {pc.he} is yours[/say]")
+		saynn("[say=captain]Fine, {pc.he} {pc.isAre} yours.[/say]")
 		
 		addButton("Fight", "Well, if she really wants it", "fightrisha")
 	

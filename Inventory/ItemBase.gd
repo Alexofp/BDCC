@@ -305,7 +305,7 @@ func getBuyAmount():
 	return 1
 
 func getSellPrice():
-	return int(getPrice() / 2.0)
+	return int(getPrice() / 2.0 / getBuyAmount())
 
 func getStackPrice():
 	return int(getPrice() * amount)

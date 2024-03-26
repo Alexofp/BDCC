@@ -1117,7 +1117,7 @@ func _run():
 
 		saynn("[say=alexrynard]The board? That will destroy even more components. There is not much.. milk.. left, better to just let it dry.[/say]")
 
-		saynn("After you're done, Alex puts the board back into the computer and connects all the writing back.")
+		saynn("After you're done, Alex puts the board back into the computer and connects all the wiring back.")
 
 		saynn("[say=alexrynard]Alright. You can turn it on while I go wash my hands..[/say]")
 
