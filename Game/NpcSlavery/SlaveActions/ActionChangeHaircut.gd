@@ -7,7 +7,7 @@ func _init():
 	sceneID = "ActionSlaveryHaircut"
 	slaveResistChanceMult = 1.0
 	
-	slaveMinLevel = 1
+	slaveMinLevel = 3
 	slaveSkillsRequired = {
 	}
 	

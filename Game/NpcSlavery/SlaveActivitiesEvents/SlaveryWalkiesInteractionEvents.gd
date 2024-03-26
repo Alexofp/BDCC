@@ -44,10 +44,10 @@ func run(_triggerID, _args):
 			addDisabledButton("Repair clothes (Slave)", "Your slave's clothes seem to be alright")
 		
 	if(locName in ["main_bathroom1", "main_bathroom2"]):
-		if(npcSlavery.getLevel() >= 1):
+		if(npcSlavery.getLevel() >= 3):
 			addButton("Mirror (Slave)", "Change your slave's haircut", "starthair", [npcID])
 		else:
-			addDisabledButton("Mirror (Slave)", "Slave level 1+ required to do this")
+			addDisabledButton("Mirror (Slave)", "Slave level 3+ required to do this")
 		
 		if(npcSlavery.getActivityID() == "Walkies" && npcSlavery.getActivity().petWants == "pee"):
 			addButton("Urinals (Pet)", "Help your puppy relief themselves", "start_pee", [npcID])

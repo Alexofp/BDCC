@@ -1193,12 +1193,16 @@ func doDebugAction(id, args = {}):
 		dynamicCharacter.copyEverythingFrom(otherChar)
 		var poolType = args["pooltype"]
 		if(poolType in ["inmate", "inmatehigh", "inmatesex"]):
+			dynamicCharacter.npcCharacterType = CharacterType.Inmate
 			addDynamicCharacterToPool(dynamicCharacter.getID(), CharacterPool.Inmates)
 		elif(poolType == "guard"):
+			dynamicCharacter.npcCharacterType = CharacterType.Guard
 			addDynamicCharacterToPool(dynamicCharacter.getID(), CharacterPool.Guards)
 		elif(poolType == "nurse"):
+			dynamicCharacter.npcCharacterType = CharacterType.Nurse
 			addDynamicCharacterToPool(dynamicCharacter.getID(), CharacterPool.Nurses)
 		elif(poolType == "engineer"):
+			dynamicCharacter.npcCharacterType = CharacterType.Engineer
 			addDynamicCharacterToPool(dynamicCharacter.getID(), CharacterPool.Engineers)
 		
 		if(args["resequip"]):

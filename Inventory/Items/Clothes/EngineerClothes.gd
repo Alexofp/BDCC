@@ -19,6 +19,7 @@ func getBuffs():
 func getTags():
 	return [
 		ItemTag.EngineerUniform,
+		ItemTag.Illegal,
 		]
 
 func getTakingOffStringLong(withS):

@@ -19,6 +19,8 @@ var isSell = false
 var isLoot = false
 var isStash = false
 var isTake = false
+var isGive = false
+var isEquipTake = false
 
 func _ready():
 	var minSizeInv = OPTIONS.getInventoryIconSize()
@@ -35,6 +37,8 @@ func setItem(theItem:ItemBase, theMode):
 	isLoot = (theMode == "loot")
 	isStash = (theMode == "stash")
 	isTake = (theMode == "take")
+	isGive = (theMode == "give")
+	isEquipTake = (theMode == "equiptake")
 	item = theItem
 	updateInfo()
 	
@@ -44,6 +48,10 @@ func setItem(theItem:ItemBase, theMode):
 	if(isStash):
 		$VBoxContainer/HBoxContainer/HBoxContainer/InteractButton.text = "Stash all"
 	if(isTake):
+		$VBoxContainer/HBoxContainer/HBoxContainer/InteractButton.text = "Take all"
+	if(isGive):
+		$VBoxContainer/HBoxContainer/HBoxContainer/InteractButton.text = "Give all"
+	if(isEquipTake):
 		$VBoxContainer/HBoxContainer/HBoxContainer/InteractButton.text = "Take all"
 
 func addEntry(newEntry):
@@ -79,7 +87,7 @@ func updateInfo():
 	
 	if(isSell):
 		showUseButton(true)
-	if(isStash || isTake):
+	if(isStash || isTake || isGive || isEquipTake):
 		showUseButton(true)
 
 func _on_InteractButton_pressed():

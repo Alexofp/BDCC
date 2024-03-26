@@ -19,6 +19,7 @@ func getBuffs():
 func getTags():
 	return [
 		ItemTag.NurseUniform,
+		ItemTag.Illegal,
 		]
 
 func getTakingOffStringLong(withS):
