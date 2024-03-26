@@ -2331,7 +2331,8 @@ func cummedOnBy(characterID, sourceType = null, howMuchPercent = 1.0):
 			fluidSource = sourceType,
 			loadSize = resultAmount,
 		})
-		ch.sendSexEvent(event)
+		if(ch != null && ch != self):
+			ch.sendSexEvent(event)
 		sendSexEvent(event)
 	
 func pissedOnBy(_characterID, howMuch = 1.0):

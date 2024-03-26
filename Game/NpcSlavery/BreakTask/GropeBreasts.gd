@@ -27,7 +27,7 @@ func onSexEvent(_npc, _event:SexEvent):
 	return false
 
 func getTaskString():
-	return "Grope breasts: "+getProgressString()
+	return "Grope breasts: "+getProgressString("times")
 
 func getTaskHint(_isSlaveLevelup):
 	return "Grope their breasts for this long"

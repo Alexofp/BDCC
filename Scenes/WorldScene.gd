@@ -98,7 +98,7 @@ func _react(_action: String, _args):
 		#runScene("GenericSexScene", ["rahi", "pc", SexType.SlutwallSex])
 		#GM.pc.getInventory().addItem(GlobalRegistry.createItem("BreastPump"))
 		#GM.pc.getInventory().addItem(GlobalRegistry.createItem("BreastPumpAdvanced"))
-		#runScene("GenericSexScene", ["pc", "rahi"])
+		runScene("GenericSexScene", ["pc", "rahi"])
 		#runScene("GenericSexScene", ["rahi", "pc"])
 		#runScene("GenericSexScene", ["nova", "pc"])
 		#runScene("GenericSexScene", ["pc", "nova"])
@@ -107,21 +107,25 @@ func _react(_action: String, _args):
 		#else:
 		#	runScene("GenericSexScene", ["pc", "nova"])
 		
-#		var npcID = NpcFinder.grabNpcIDFromPoolOrGenerate(CharacterPool.Inmates, [[NpcCon.HasPenis], [NpcCon.NoChastity]], InmateGenerator.new(), {NpcGen.HasPenis: true, NpcGen.NoChastity: true})
-#		var theChar:DynamicCharacter = getCharacter(npcID)
-#		var newEnslaveQuest = NpcEnslavementQuest.new()
-#		newEnslaveQuest.setChar(theChar)
-#		newEnslaveQuest.setSlaveType(SlaveType.Slut)
-#		newEnslaveQuest.generateTasks()
-#		theChar.setEnslaveQuest(newEnslaveQuest)
-#		runScene("GenericSexScene", ["pc", npcID])
-		var npcID = NpcFinder.grabNpcIDFromPoolOrGenerate(CharacterPool.Inmates, [[NpcCon.HasPenis], [NpcCon.NoChastity]], InmateGenerator.new(), {NpcGen.HasPenis: true, NpcGen.NoChastity: true})
+		if(true):
+			return
+		var npcID = NpcFinder.grabNpcIDFromPoolOrGenerate(CharacterPool.Inmates, [], InmateGenerator.new(), {})
+		var theChar:DynamicCharacter = getCharacter(npcID)
+		var newEnslaveQuest = NpcEnslavementQuest.new()
+		newEnslaveQuest.setChar(theChar)
+		newEnslaveQuest.setSlaveType(SlaveType.Slut)
+		newEnslaveQuest.generateTasks()
+		theChar.setEnslaveQuest(newEnslaveQuest)
+		runScene("GenericSexScene", ["pc", npcID])
+		if(true):
+			return
+		#var npcID = NpcFinder.grabNpcIDFromPoolOrGenerate(CharacterPool.Inmates, [[NpcCon.HasPenis], [NpcCon.NoChastity]], InmateGenerator.new(), {NpcGen.HasPenis: true, NpcGen.NoChastity: true})
 		#var theChar:DynamicCharacter = getCharacter(npcID)
 		#var personality:Personality = theChar.getPersonality()
 		#personality.clear()
 		
 		#getModule("NpcSlaveryModule").doEnslaveCharacter(npcID)
-		runScene("EnslaveDynamicNpcScene", [npcID])
+		#runScene("EnslaveDynamicNpcScene", [npcID])
 	
 	if(_action == "slavetest"):
 		var npcID = NpcFinder.grabNpcIDFromPoolOrGenerate(CharacterPool.Inmates, [[NpcCon.HasPenis], [NpcCon.NoChastity]], InmateGenerator.new(), {NpcGen.HasPenis: true, NpcGen.NoChastity: true})

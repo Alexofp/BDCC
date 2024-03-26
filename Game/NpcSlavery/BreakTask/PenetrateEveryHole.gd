@@ -47,7 +47,7 @@ func onSexEvent(_npc, _event:SexEvent):
 	return false
 
 func getTaskString():
-	return "Penetrate every hole once: "+getProgressString()
+	return "Penetrate every hole once: "+getProgressString("holes")
 
 func getTaskHint(_isSlaveLevelup):
 	return "Fuck all their orifices at least once using your cock or with a strapon"

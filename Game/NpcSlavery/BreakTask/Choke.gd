@@ -27,7 +27,7 @@ func onSexEvent(_npc, _event:SexEvent):
 	return false
 
 func getTaskString():
-	return "Receive choking: "+getProgressString()
+	return "Receive choking: "+getProgressString("times")
 
 func getTaskHint(_isSlaveLevelup):
 	return "Choke them during sex"

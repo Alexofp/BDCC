@@ -50,8 +50,8 @@ func getTaskString():
 func getTaskHint(_isSlaveLevelup):
 	return ""
 
-func getProgressString():
-	return ""+str(currentAmount)+"/"+str(needAmount)
+func getProgressString(extraStr = ""):
+	return ""+str(currentAmount)+"/"+str(needAmount)+(" "+extraStr if extraStr != "" else "")
 
 func getProgressStringFluids():
 	return ""+str(Util.roundF(currentAmount, 1))+"/"+str(Util.roundF(needAmount, 1))+"ml"
