@@ -572,3 +572,14 @@ func onDyed(_newColor:Color):
 	if(canDye()):
 		clothesColor = _newColor
 		updateWearerAppearance()
+
+func canGroupRestraintWithOtherInFightScene(otherItem):
+	if(id != otherItem.id):
+		return false
+	if(restraintData == null || otherItem.restraintData == null):
+		return false
+	if(getRestraintData().getLevel() != otherItem.getRestraintData().getLevel()):
+		return false
+	if(canDye() && clothesColor != otherItem.clothesColor):
+		return false
+	return true
