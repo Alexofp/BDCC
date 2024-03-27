@@ -40,7 +40,7 @@ func _run():
 		
 		if(theItem.hasTag(ItemTag.Strapon)):
 			playAnimation(StageScene.Solo, "stand", {bodyState={exposedCrotch=true}})
-		elif(theItem.getClothingSlot() in [InventorySlot.UnderwearBottom, InventorySlot.UnderwearTop]):
+		elif(theItem.getClothingSlot() != null && (theItem.getClothingSlot() in [InventorySlot.UnderwearBottom, InventorySlot.UnderwearTop])):
 			playAnimation(StageScene.Solo, "stand", {bodyState={underwear=true}})
 		else:
 			playAnimation(StageScene.Solo, "stand")
@@ -108,13 +108,15 @@ func _react(_action: String, _args):
 		savedDyedColor = theItem.clothesColor.to_html()
 		if(!GM.pc.getInventory().hasEquippedItemWithUniqueID(dyingItemUniqueID)):
 			var theSlot = theItem.getClothingSlot()
-			if(!GM.pc.getInventory().canEquipSlot(theSlot)):
-				#dyingItemUniqueID = ""
-				#setState("cantdye_hasitemworn")
-				#return
-				pass
-			else:
-				GM.pc.getInventory().forceEquipStoreOther(theItem)
+			if(theSlot != null):
+				if(GM.pc.getInventory().canEquipSlot(theSlot)):
+					if(GM.pc.getInventory().hasSlotEquipped(theSlot)):
+						if(!GM.pc.getInventory().getEquippedItem(theSlot).isRestraint()):
+							# We have something equipped but it's not a restraint, can replace
+							GM.pc.getInventory().forceEquipStoreOther(theItem)
+					else:
+						# Nothing equipped there, can put on
+						GM.pc.getInventory().forceEquipStoreOther(theItem)
 		setState("coloring_item")
 		return
 	
