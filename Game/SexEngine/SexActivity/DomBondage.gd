@@ -113,7 +113,7 @@ func getStartActions(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexS
 				actions.append({
 					name = item.getVisibleName(),
 					args = ["npc", item.id],
-					score = getActivityScore(_sexEngine, _domInfo, _subInfo) * item.getAIForceItemWeight(),
+					score = getActivityScore(_sexEngine, _domInfo, _subInfo) * item.getAIForceItemWeight(getDom(), getSub()),
 					category = getCategory(),
 					desc = "Restraint level: "+str(restraintData.getLevel()) + "\n" + item.getCombatDescription(),
 				})
