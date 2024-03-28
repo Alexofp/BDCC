@@ -14,6 +14,8 @@ var isSell = false
 var isLoot = false
 var isStash = false
 var isTake = false
+var isGive = false
+var isEquipTake = false
 
 func _ready():
 	var minSizeInv = OPTIONS.getInventoryIconSize()
@@ -28,6 +30,8 @@ func setItem(theItem:ItemBase, theMode):
 	isLoot = (theMode == "loot")
 	isStash = (theMode == "stash")
 	isTake = (theMode == "take")
+	isGive = (theMode == "give")
+	isEquipTake = (theMode == "equiptake")
 	selectedMode = theMode
 	item = theItem
 	updateInfo()
@@ -42,7 +46,17 @@ func setItem(theItem:ItemBase, theMode):
 		$HBoxContainer/HBoxContainer/InteractButton.text = "Stash"
 	if(isTake):
 		$HBoxContainer/HBoxContainer/InteractButton.text = "Take"
-
+	if(isGive):
+		$HBoxContainer/HBoxContainer/InteractButton.text = "Give"
+	if(isEquipTake):
+		if(item.getClothingSlot() != null):
+			if(item.isWornByWearer()):
+				$HBoxContainer/HBoxContainer/InteractButton.text = "Unequip"
+			else:
+				$HBoxContainer/HBoxContainer/InteractButton.text = "Equip"
+		else:
+			$HBoxContainer/HBoxContainer/InteractButton.text = "Take"
+		
 func getItem():
 	return item
 
@@ -78,6 +92,7 @@ func updateInfo():
 		var theImage = load(imagePath)
 		if(theImage != null):
 			itemTextureRect.texture = theImage
+			itemTextureRect.self_modulate = item.getInventoryImageColor()
 	
 	if(isFightMode):
 		var possibleActions = item.getPossibleActions()
@@ -88,7 +103,10 @@ func updateInfo():
 	else:
 		showUseButton(false)
 		
-		if(isTake || isStash):
+		if(isTake || isStash || isGive):
+			showUseButton(true)
+		
+		if(isEquipTake):
 			showUseButton(true)
 		
 		if(isBuy || isSell || isLoot):

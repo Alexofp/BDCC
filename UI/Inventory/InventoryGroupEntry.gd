@@ -19,6 +19,8 @@ var isSell = false
 var isLoot = false
 var isStash = false
 var isTake = false
+var isGive = false
+var isEquipTake = false
 
 func _ready():
 	var minSizeInv = OPTIONS.getInventoryIconSize()
@@ -35,6 +37,8 @@ func setItem(theItem:ItemBase, theMode):
 	isLoot = (theMode == "loot")
 	isStash = (theMode == "stash")
 	isTake = (theMode == "take")
+	isGive = (theMode == "give")
+	isEquipTake = (theMode == "equiptake")
 	item = theItem
 	updateInfo()
 	
@@ -44,6 +48,10 @@ func setItem(theItem:ItemBase, theMode):
 	if(isStash):
 		$VBoxContainer/HBoxContainer/HBoxContainer/InteractButton.text = "Stash all"
 	if(isTake):
+		$VBoxContainer/HBoxContainer/HBoxContainer/InteractButton.text = "Take all"
+	if(isGive):
+		$VBoxContainer/HBoxContainer/HBoxContainer/InteractButton.text = "Give all"
+	if(isEquipTake):
 		$VBoxContainer/HBoxContainer/HBoxContainer/InteractButton.text = "Take all"
 
 func addEntry(newEntry):
@@ -66,19 +74,20 @@ func updateInfo():
 		return
 	
 	if(item.isWornByWearer()):
-		itemNameLabel.text = "(worn) "+item.getStackName()
+		itemNameLabel.text = "(worn) "+item.getVisibleName()
 	else:
-		itemNameLabel.text = item.getStackName()
+		itemNameLabel.text = item.getVisibleName()
 	
 	var imagePath = item.getInventoryImage()
 	if(imagePath != null):
 		var theImage = load(imagePath)
 		if(theImage != null):
 			itemTextureRect.texture = theImage
+			itemTextureRect.self_modulate = item.getInventoryImageColor()
 	
 	if(isSell):
 		showUseButton(true)
-	if(isStash || isTake):
+	if(isStash || isTake || isGive || isEquipTake):
 		showUseButton(true)
 
 func _on_InteractButton_pressed():
@@ -93,7 +102,12 @@ func _on_SelectButton_pressed():
 func updateCollapsed():
 	if(isCollapsed):
 		setSelected(false)
-		itemCollapsedLabel.text = str(items.size())+"x"
+		var accurateAmount = 0
+		for theitem in items:
+			if(theitem.item != null):
+				accurateAmount += theitem.item.getAmount()
+		
+		itemCollapsedLabel.text = str(accurateAmount)+"x"
 	else:
 		setSelected(true)
 		itemCollapsedLabel.text = "V "

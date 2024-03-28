@@ -183,7 +183,7 @@ func _run():
 
 		saynn("Well. That wasn't entirely fun. But you feel like.. you progressed?")
 
-		saynn("Time go go.")
+		saynn("Time to go.")
 
 		addButton("Leave", "See what happens next", "endthescene")
 	if(state == "agree_yessir"):

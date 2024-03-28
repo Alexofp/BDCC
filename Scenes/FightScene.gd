@@ -123,7 +123,13 @@ func _run():
 			saynn("You can't judge enemy's restraints while blind")
 		
 		var isInCategory = (restraintsPickedCategory != "")
+		if(isInCategory):
+			var pickedItemToGroup:ItemBase = GlobalRegistry.getItemRef(restraintsPickedCategory)
+			if(pickedItemToGroup != null):
+				saynn("What "+str(pickedItemToGroup.getVisibleName())+" do you want to use?")
+			
 		var usableItems
+		var countsByUniqueRestraint = {}
 		if(enemyCharacter.isDynamicCharacter()):
 			usableItems = GM.pc.getInventory().getAllCombatUsableRestraints()
 		else:
@@ -133,12 +139,21 @@ func _run():
 			var newUsable = []
 			for item in usableItems:
 				if(item.id == restraintsPickedCategory):
-					newUsable.append(item)
+					var foundGroup = false
+					for otherGroupedItem in countsByUniqueRestraint:
+						if(item.canGroupRestraintWithOtherInFightScene(otherGroupedItem)):
+							countsByUniqueRestraint[otherGroupedItem] += 1
+							foundGroup = true
+							break
+					if(!foundGroup):
+						countsByUniqueRestraint[item] = 1
+						newUsable.append(item)
 			usableItems = newUsable
 		else:
 			for item in usableItems:
 				if(!countsByItemID.has(item.id)):
 					countsByItemID[item.id] = 1
+					countsByUniqueRestraint[item] = 1
 				else:
 					countsByItemID[item.id] += 1
 		
@@ -171,7 +186,13 @@ func _run():
 				if(enemyCharacter.getStamina() > 0):
 					 chanceToForce *= restraintData.getFinalChanceToForceARestraint(enemyCharacter)
 
-				addButton(item.getVisibleName(), "Restraint level: "+str(restraintData.getLevel()) + "\n" + "Success chance: "+ str(Util.roundF(chanceToForce*100.0, 1))+"%" + "\n\n" + item.getCombatDescription(), "forcerestraint", [item])
+				var buttonName = item.getVisibleName()
+				if(isInCategory):
+					buttonName = "Level "+str(restraintData.getLevel())
+				var buttonDesc = "Restraint level: "+str(restraintData.getLevel()) + "\n" + "Success chance: "+ str(Util.roundF(chanceToForce*100.0, 1))+"%" + "\n\n" + item.getCombatDescription()
+				if(countsByUniqueRestraint.has(item)):
+					buttonDesc = "Amount: " + str(countsByUniqueRestraint[item]) + "\n" + buttonDesc
+				addButton(buttonName, buttonDesc, "forcerestraint", [item])
 			
 		addButton("Back", "Back to fighting", "closerestraintsmenu")
 	

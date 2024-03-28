@@ -280,7 +280,7 @@ func getDomActions():
 				"desc": "Force some cum into their slit",
 			})
 
-	if(state in ["subabouttocum", "subabouttocumcock"] || ((state in ["licking", "tonguefucking", "lickingcock", "blowjob"]) && subInfo.isReadyToCum() && subInfo.isUnconscious())):
+	if(state in ["subabouttocum", "subabouttocumcock"] || ((state in ["licking", "tonguefucking", "lickingcock", "blowjob"]) && subInfo.isReadyToCum() && !subInfo.canDoActions())):
 		actions.append({
 			"id": "letsubcuminside",
 			"score": 1.0,
@@ -318,8 +318,9 @@ func doDomAction(_id, _actionInfo):
 		var text = RNG.pick([
 			"{dom.You} {dom.youVerb('press')} {dom.yourHis} lips against {sub.yourHis} "+RNG.pick(["pussy", "slit"])+" and [b]{dom.youVerb('spit')} "+mixtureText+" into it[/b]!",
 		])
-		getDom().bodypartTransferFluidsTo(BodypartSlot.Head, subID, BodypartSlot.Vagina, 0.2, 20.0)
+		var howMuch = getDom().bodypartTransferFluidsToAmount(BodypartSlot.Head, subID, BodypartSlot.Vagina, 0.2, 20.0)
 		affectSub(subInfo.fetishScore({Fetish.BeingBred:1.0}), 0.1, -0.1, -0.05)
+		sendSexEvent(SexEvent.HoleSpitted, domID, subID, {hole=BodypartSlot.Vagina, loadSize=howMuch})
 		return {text = text}
 	
 	if(_id == "makesubcumavoidmess"):
@@ -329,7 +330,7 @@ func doDomAction(_id, _actionInfo):
 			text = RNG.pick([
 				"{dom.You} {dom.youVerb('lean')} to the side a bit and {dom.youVerb('let')} {sub.you} [b]cum all over the floor[/b]. {sub.YourHis} pussy squirts, leaving quite a mess! But luckily {dom.you} dodged all of it.",
 			])
-			getSub().cumOnFloor()
+			getSub().cumOnFloor(domID)
 			subInfo.cum()
 		else:
 			text = RNG.pick([
@@ -357,7 +358,7 @@ func doDomAction(_id, _actionInfo):
 					
 					return {text=text}
 			
-			getSub().cumOnFloor()
+			getSub().cumOnFloor(domID)
 			subInfo.cum()
 		
 		state = ""
@@ -532,6 +533,7 @@ func doDomAction(_id, _actionInfo):
 		])
 		getDom().gotOrificeStretchedBy(BodypartSlot.Head, subID, 0.1)
 		affectSub(subInfo.fetishScore({Fetish.OralSexReceiving: 1.0}), 0.1, -0.3, -0.01)
+		sendSexEvent(SexEvent.HolePenetrated, subID, domID, {hole=BodypartSlot.Head,engulfed=true,strapon=false})
 		return {text = text, domSay=domReaction(SexReaction.AboutToSuckSubOff)}
 	if(_id == "starttonguefuck"):
 		state = "tonguefucking"

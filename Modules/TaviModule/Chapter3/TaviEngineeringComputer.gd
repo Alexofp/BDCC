@@ -18,7 +18,7 @@ func reactToCommand(_command:String, _args:Array, _commandStringRaw:String):
 				return "No help found for that command"
 			learnCommand("disconnect")
 			learnCommand("mode")
-			return "Avaiable commands:\ndisconnect\nmode"
+			return "Available commands:\ndisconnect\nmode"
 		
 		if(_command == "disconnect"):
 			if(_args.size() == 0):
@@ -38,7 +38,7 @@ func reactToCommand(_command:String, _args:Array, _commandStringRaw:String):
 				return "Error, unsupported mode. Type 'help mode' for more information"
 			else:
 				return "'mode' command expects 1 argument. Type 'help mode' for more information"
-		return "Error, unknown command. Use 'help' to list all avaiable commands"
+		return "Error, unknown command. Use 'help' to list all available commands"
 	
 	if(connectedTo == "127.0.69"):
 		if(_command == "help"):
@@ -46,7 +46,7 @@ func reactToCommand(_command:String, _args:Array, _commandStringRaw:String):
 				learnCommand("disconnect")
 				learnCommand("ls")
 				learnCommand("cat")
-				return "Avaiable commands:\ndisconnect\nls\ncat"
+				return "Available commands:\ndisconnect\nls\ncat"
 			else:
 				return "'help' command expects 0 arguments. Server owner is too lazy to write descriptions for each command."
 		
@@ -78,7 +78,7 @@ func reactToCommand(_command:String, _args:Array, _commandStringRaw:String):
 			else:
 				return "'cat' command expects 1 argument"
 		
-		return "Error, unknown command. Use 'help' to list all avaiable commands"
+		return "Error, unknown command. Use 'help' to list all available commands"
 	
 	
 	
@@ -131,20 +131,20 @@ func reactToCommand(_command:String, _args:Array, _commandStringRaw:String):
 				elif(tolearn == "tunya"):
 					return "What are you doing? Give the tunya to the cat!"
 				else:
-					return "Couldn't find command '"+str(tolearn)+"'. To see all the avaiable commands type 'help'"
+					return "Couldn't find command '"+str(tolearn)+"'. To see all the available commands type 'help'"
 				
 			elif(_args.size() == 0):
 				learnCommand("help")
 				learnCommand("ls")
 				learnCommand("cat")
 				learnCommand("connect")
-				return "Avaiable commands are: ls, cat, connect, help.\nTo learn more about a command type 'help <COMMAND>'"
+				return "Available commands are: ls, cat, connect, help.\nTo learn more about a command type 'help <COMMAND>'"
 			else:
 				learnCommand("help")
 				return "'help' expects 0 or 1 arguments"
 			
 		learnCommand("help")
-		return "Error, unknown command. Use 'help' to list all avaiable commands"
+		return "Error, unknown command. Use 'help' to list all available commands"
 
 var tutorialData = [
 	["*", "This minigame simulates a simple console. If you ever used cmd or bash, you will feel right at home. Otherwise, just follow this tutorial.", "type anything"],

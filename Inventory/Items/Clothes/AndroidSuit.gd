@@ -37,3 +37,6 @@ func getRiggedParts(_character):
 	return {
 		"clothing": "res://Inventory/RiggedModels/AndroidSuit/AndroidSuit.tscn",
 	}
+
+func canDye():
+	return true

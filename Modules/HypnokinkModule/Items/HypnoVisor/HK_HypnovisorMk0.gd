@@ -33,6 +33,10 @@ func getPrice():
 func getTags():
 	return [ItemTag.BDSMRestraint, ItemTag.CanBeForcedByGuards, ItemTag.CanBeForcedInStocks, ItemTag.Hypnovisor]
 	
+func getAIForceItemWeight(_whoForcesNpc, _targetNpc):
+	var hypnosisValue = _whoForcesNpc.getFetishHolder().getFetishValue(Fetish.HypnosisHypnotist)
+	return 0.3 + hypnosisValue * 1.0
+	
 func maxHypnosisStacks() -> int:
 	return 75
 	

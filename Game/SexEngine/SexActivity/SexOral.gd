@@ -526,6 +526,7 @@ func doDomAction(_id, _actionInfo):
 			])
 			affectSub(subInfo.fetishScore({Fetish.OralSexGiving: 1.0}), 0.05, -0.2, -0.05)
 			domInfo.addAnger(-0.1)
+			sendSexEvent(SexEvent.HolePenetrated, domID, subID, {hole=BodypartSlot.Head,engulfed=false,strapon=isStraponSex()})
 			return {text = text}
 		else:
 			var text = RNG.pick([
@@ -890,6 +891,7 @@ func doSubAction(_id, _actionInfo):
 			"{sub.You} {sub.youVerb('open')} {sub.yourHis} mouth and {sub.youVerb('let')} {dom.your} "+getDickName()+" in before wrapping {sub.yourHis} lips around it.",
 		])
 		state = "blowjob"
+		sendSexEvent(SexEvent.HolePenetrated, domID, subID, {hole=BodypartSlot.Head,engulfed=true,strapon=isStraponSex()})
 		return {text = text}
 	if(_id == "notopenmouth"):
 		state = ""

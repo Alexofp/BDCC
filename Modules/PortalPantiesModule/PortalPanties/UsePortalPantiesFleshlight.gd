@@ -25,6 +25,27 @@ func resolveCustomCharacterName(_charID):
 	if(_charID == "npc2"):
 		return secondPortalCharID
 
+func charCanUsePenis(character):
+	if(character.isWearingPortalPanties()):
+		return (character.hasPenis() && !character.isWearingChastityCage() && !character.hasReachablePenis())
+	if(character.isWearingInvisiblePortalPanties()):
+		return character.hasPenis() && !character.isWearingChastityCage() && character.getPortalSexHoleAvailable(BodypartSlot.Penis)
+	return false
+
+func charCanUseVagina(character):
+	if(character.isWearingPortalPanties()):
+		return (character.hasVagina())
+	if(character.isWearingInvisiblePortalPanties()):
+		return character.hasVagina() && character.getPortalSexHoleAvailable(BodypartSlot.Vagina)
+	return false
+
+func charCanUseAnus(character):
+	if(character.isWearingPortalPanties()):
+		return (character.hasAnus())
+	if(character.isWearingInvisiblePortalPanties()):
+		return character.hasAnus() && character.getPortalSexHoleAvailable(BodypartSlot.Anus)
+	return false
+
 func sayCharacterTable():
 	var tableText = "[table=5][cell]ID[/cell][cell]Name[/cell][cell]Penis[/cell][cell]Vagina[/cell][cell]Anus[/cell]"
 	var ti = 1
@@ -34,9 +55,9 @@ func sayCharacterTable():
 		if(character.isWearingChastityCage()):
 			tableText += "[cell]Obstructed[/cell]"
 		else:
-			tableText += "[cell]"+("Yes" if (character.hasPenis() && !character.hasReachablePenis()) else "No")+"[/cell]"
-		tableText += "[cell]"+("Yes" if character.hasVagina() else "No")+"[/cell]"
-		tableText += "[cell]Yes[/cell]"
+			tableText += "[cell]"+("Yes" if charCanUsePenis(character) else "No")+"[/cell]"
+		tableText += "[cell]"+("Yes" if charCanUseVagina(character) else "No")+"[/cell]"
+		tableText += "[cell]"+("Yes" if charCanUseAnus(character) else "No")+"[/cell]"
 		
 		ti+=1
 	tableText += "[/table]"
@@ -76,11 +97,12 @@ func _run():
 		saynn("Which portal do you want to open through the fleshlight?")
 		
 		addButton("Back", "Never mind", "disconnectPortal")
-		if(connectedChar.hasPenis() && !connectedChar.hasReachablePenis() && !connectedChar.isWearingChastityCage()):
+		if(charCanUsePenis(connectedChar)):
 			addButton("Penis", "Show their dick", "openhole", ["penis"])
-		if(connectedChar.hasVagina()):
+		if(charCanUseVagina(connectedChar)):
 			addButton("Vagina", "Show their pussy", "openhole", ["vagina"])
-		addButton("Anus", "Show their anus", "openhole", ["anus"])
+		if(charCanUseAnus(connectedChar)):
+			addButton("Anus", "Show their anus", "openhole", ["anus"])
 
 	if(state == "choose_vagina"):
 		isRepeat = false
@@ -657,9 +679,10 @@ func _run():
 		saynn("Which portal do you want to open through the fleshlight?")
 		
 		addButton("Back", "Never mind", "disconnectPortal")
-		if(connectedChar.hasVagina()):
+		if(charCanUseVagina(connectedChar)):
 			addButton("Vagina", "Use the cock to fuck their pussy", "penis_proxyfuck_vagina", ["vagina"])
-		addButton("Anus", "Use the cock to fuck their anus", "penis_proxyfuck_anus", ["anus"])
+		if(charCanUseAnus(connectedChar)):
+			addButton("Anus", "Use the cock to fuck their anus", "penis_proxyfuck_anus", ["anus"])
 
 	if(state == "penis_proxyfuck_vagina"):
 		showFightUI = true
@@ -968,7 +991,7 @@ func _run():
 				]))
 			else:
 				saynn(RNG.pick([
-					"You pant softly as you fuck that eager {npc.vaginaStretch} {pussy}! Feels so much better than sextoy.",
+					"You pant softly as you fuck that eager {npc.vaginaStretch} {pussy}! Feels so much better than a sextoy.",
 					"You smile while fucking someone, using their {pussy} for your pleasure remotely.",
 					"You fuck that {pussy} so eagerly that it starts making wet noises.. The way its inner walls grip your length.. so good.",
 					"You shove your {penis} deep, hammering away at that slit’s pleasure spot. Whoever they are, they are dripping like a whore.",
@@ -1324,7 +1347,18 @@ func _react(_action: String, _args):
 	if(_action == "anus_lick_spit"):
 		processTime(60)
 		extraText = GM.pc.getBodypartContentsStringList(BodypartSlot.Head)
-		GM.pc.bodypartTransferFluidsTo(BodypartSlot.Head, portalCharID, BodypartSlot.Anus, 0.2, 20.0)
+		var howMuch = GM.pc.bodypartTransferFluidsToAmount(BodypartSlot.Head, portalCharID, BodypartSlot.Anus, 0.2, 20.0)
+		var newSexEvent:SexEvent = SexEvent.new()
+		newSexEvent.type = SexEvent.HoleSpitted
+		newSexEvent.sourceCharID = "pc"
+		newSexEvent.targetCharID = portalCharID
+		newSexEvent.data = {hole=BodypartSlot.Anus, loadSize = howMuch}
+		#newSexEvent.isSexEngine = true
+		#newSexEvent.sexEngine = getSexEngine()
+		
+		GM.pc.sendSexEvent(newSexEvent)
+		if(portalCharID != "pc"):
+			getCharacter(portalCharID).sendSexEvent(newSexEvent)
 	
 	if(_action == "anus_lick"):
 		processTime(60)
@@ -1350,7 +1384,18 @@ func _react(_action: String, _args):
 	if(_action == "vagina_lick_spit"):
 		processTime(60)
 		extraText = GM.pc.getBodypartContentsStringList(BodypartSlot.Head)
-		GM.pc.bodypartTransferFluidsTo(BodypartSlot.Head, portalCharID, BodypartSlot.Vagina, 0.2, 20.0)
+		var howMuch = GM.pc.bodypartTransferFluidsToAmount(BodypartSlot.Head, portalCharID, BodypartSlot.Vagina, 0.2, 20.0)
+		var newSexEvent:SexEvent = SexEvent.new()
+		newSexEvent.type = SexEvent.HoleSpitted
+		newSexEvent.sourceCharID = "pc"
+		newSexEvent.targetCharID = portalCharID
+		newSexEvent.data = {hole=BodypartSlot.Vagina, loadSize = howMuch}
+		#newSexEvent.isSexEngine = true
+		#newSexEvent.sexEngine = getSexEngine()
+		
+		GM.pc.sendSexEvent(newSexEvent)
+		if(portalCharID != "pc"):
+			getCharacter(portalCharID).sendSexEvent(newSexEvent)
 	
 	if(_action == "vagina_lick"):
 		processTime(60)
@@ -1430,14 +1475,14 @@ func getNpcsWithPortalPanties():
 	var staticChars = GM.main.getCharacters()
 	for charID in staticChars:
 		var character:Character = staticChars[charID]
-		if(character.isWearingPortalPanties()):
+		if(character.isWearingPortalPanties() || character.isWearingInvisiblePortalPanties()):
 			character.updateNonBattleEffects()
 			result.append(character)
 	
 	var dynamicChars = GM.main.getDynamicCharacters()
 	for charID in dynamicChars:
 		var character:Character = dynamicChars[charID]
-		if(character.isWearingPortalPanties()):
+		if(character.isWearingPortalPanties() || character.isWearingInvisiblePortalPanties()):
 			character.updateNonBattleEffects()
 			result.append(character)
 	

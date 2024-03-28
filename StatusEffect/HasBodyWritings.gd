@@ -2,6 +2,12 @@ extends StatusEffectBase
 
 var writings = {}
 
+func getAmount():
+	var result = 0
+	for allZone in writings:
+		result += writings[allZone].size()
+	return result
+
 func addWriting(zone, writingID):
 	zone = str(zone)
 	for allZone in writings:

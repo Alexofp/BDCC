@@ -11,6 +11,12 @@ func _init():
 func shouldApplyTo(_npc):
 	if(GM.main != null && GM.main.supportsSexEngine()):
 		return true
+	if(_npc.hasEnslaveQuest()):
+		return true
+	if(_npc.isSlaveToPlayer()):
+		var npcSlave:NpcSlave = _npc.getNpcSlavery()
+		if(npcSlave.isReadyToBeLeveledUp()):
+			return true
 	return false
 	
 func initArgs(_args = []):
@@ -37,7 +43,24 @@ func getEffectDesc():
 		var statValue = PersonalityStat.getVisibleDesc(statID, value)
 		
 		texts.append(statName+": "+statValue)
-	return Util.join(texts, "\n")
+	var result = Util.join(texts, "\n")
+
+	if(character.hasEnslaveQuest()):
+		var enslaveQuest:NpcEnslavementQuest = character.getEnslaveQuest()
+		var isQuestCompleted = enslaveQuest.isEverythingCompleted()
+		
+		result += "\n\n[color="+("yellow" if !isQuestCompleted else "green")+"]Enslavement progress:[/color]\n"
+		result += enslaveQuest.getQuestProgressText()
+		if(isQuestCompleted):
+			result += "\nReady to be enslaved!"
+
+	if(character.isSlaveToPlayer()):
+		var npcSlave:NpcSlave = character.getNpcSlavery()
+		if(npcSlave.isReadyToBeLeveledUp()):
+			result += "\n\n[color=yellow]Slave level-up progress:[/color]\n"
+			result += npcSlave.getLevelupTaskProgressText()
+
+	return result
 
 func getEffectImage():
 	return "res://Images/StatusEffects/recruitment.png"

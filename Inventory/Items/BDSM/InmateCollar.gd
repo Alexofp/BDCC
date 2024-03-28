@@ -7,7 +7,7 @@ func getVisibleName():
 	return "Inmate collar"
 	
 func getDescription():
-	return "Bulky and very uncomofortable collar made out of casted iron. Has a magnetic lock and a constantly blinking red light."
+	return "Bulky and very uncomfortable collar made out of casted iron. Has a magnetic lock and a constantly blinking red light."
 
 func getClothingSlot():
 	return InventorySlot.Neck
@@ -18,6 +18,10 @@ func getBuffs():
 
 func getTakeOffScene():
 	return "CollarTuggingScene"
+
+func getTags():
+	return [ItemTag.AllowsEnslaving]
+
 
 func isImportant():
 	return true

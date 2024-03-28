@@ -44,7 +44,7 @@ func _run():
 			var genderName = NpcGender.getVisibleNameColored(gender)
 			var extraInfo = ""
 			var genderExlanation = NpcGender.getGenderExplanation(gender)
-			if(genderExlanation != null):
+			if(genderExlanation != null && genderExlanation != ""):
 				extraInfo = " ("+str(genderExlanation)+")"
 			
 			var weight = encounterSettings.getGenderWeight(gender)
@@ -170,7 +170,7 @@ func _run():
 			var genderName = NpcGender.getVisibleNameColored(gender)
 			var extraInfo = ""
 			var genderExlanation = NpcGender.getGenderExplanation(gender)
-			if(genderExlanation != null):
+			if(genderExlanation != null && genderExlanation != ""):
 				extraInfo = " ("+str(genderExlanation)+")"
 			
 			var weight = encounterSettings.getGenderWeight(gender)
@@ -223,6 +223,8 @@ func _run():
 			if(dynamicCharacter == null):
 				continue
 			var NPCname = dynamicCharacter.getName()
+			if(dynamicCharacter.hasEnslaveQuest()):
+				NPCname = "(!) "+NPCname
 			var gender = NpcGender.getVisibleName(dynamicCharacter.npcGeneratedGender)
 			var subbyStat = dynamicCharacter.getPersonality().getStat(PersonalityStat.Subby)
 			var sharedKidsAmount = GM.CS.getSharedChildrenAmount("pc", characterID)

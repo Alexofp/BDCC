@@ -13,6 +13,7 @@ var inventoryToSaveItemsTo:LightInventory = null
 var currentLastActivityID = 0
 
 var sexEnded = false
+var sexResult = {}
 
 var sexType:SexTypeBase
 
@@ -158,9 +159,9 @@ func processData(data, theDomID, theSubID):
 	var newresult = {}
 	if(data.has("text")):
 		newresult["text"] = processText(data["text"], theDomID, theSubID)
-	if(data.has("domSay") && data["domSay"] != null):
+	if(data.has("domSay") && data["domSay"] != null && getDomInfo(theDomID).canTalk()):
 		newresult["domSay"] = "[say="+str(theDomID)+"]"+processText(data["domSay"], theDomID, theSubID)+"[/say]"
-	if(data.has("subSay") && data["subSay"] != null):
+	if(data.has("subSay") && data["subSay"] != null && getSubInfo(theSubID).canTalk()):
 		newresult["subSay"] = "[say="+str(theSubID)+"]"+processText(data["subSay"], theDomID, theSubID)+"[/say]"
 	
 	return newresult
@@ -718,7 +719,7 @@ func getFinalText():
 func getActions():
 	var result = []
 	
-	if(isSub("pc")):
+	if(isSub("pc") && getSubInfo("pc").canDoActions()):
 		var forcedObedienceLevel = GM.pc.getForcedObedienceLevel()
 		if(RNG.chance(forcedObedienceLevel*100.0)):
 			result.append({
@@ -1000,6 +1001,24 @@ func keepItemsAfterSex(onlyAlwaysKept = false):
 func endSex():
 	if(sexEnded):
 		return
+	sexResult = {
+		subs = {},
+		doms = {},
+	}
+	for domID in doms:
+		var domInfo = doms[domID]
+		sexResult["doms"][domID] = {
+			"timesCame": domInfo.timesCame,
+			"averageLust": domInfo.getAverageLust(),
+		}
+	for subID in subs:
+		var subInfo = subs[subID]
+		sexResult["subs"][subID] = {
+			"timesCame": subInfo.timesCame,
+			"averageLust": subInfo.getAverageLust(),
+			"averageResistance": subInfo.getAverageResistance(),
+			"averageFear": subInfo.getAverageFear(),
+		}
 	
 	sexEnded = true
 	var texts = ["The sex scene has ended!"]
@@ -1021,12 +1040,13 @@ func endSex():
 					saveCondomToLootIfPerk(theCondom)
 			
 		domInfo.getChar().afterSexEnded(domInfo)
-		domInfo.getChar().onSexEnded({sexEngine=self,isDom=true})
+		domInfo.getChar().onSexEnded({sexEngine=self,isDom=true,sexFullResult=sexResult,sexResult=sexResult["doms"][domID]})
 		
 		var sexEndInfo = domInfo.getSexEndInfo()
 		if(sexEndInfo.size() > 0):
 			texts.append(domInfo.getChar().getName()+":")
 			texts.append(Util.join(sexEndInfo, "\n"))
+
 
 	for subID in subs:
 		var subInfo = subs[subID]
@@ -1040,7 +1060,7 @@ func endSex():
 					saveItemToLoot(theCondom)
 		
 		subInfo.getChar().afterSexEnded(subInfo)
-		subInfo.getChar().onSexEnded({sexEngine=self,isDom=false})
+		subInfo.getChar().onSexEnded({sexEngine=self,isDom=false,sexFullResult=sexResult,sexResult=sexResult["subs"][subID]})
 
 		var sexEndInfo = subInfo.getSexEndInfo()
 		if(sexEndInfo.size() > 0):
@@ -1175,6 +1195,9 @@ func saveItemToLoot(theItem):
 	if(inventoryToSaveItemsTo != null):
 		inventoryToSaveItemsTo.addItem(theItem)
 
+func getSexResult():
+	return sexResult
+
 func saveData():
 	var data = {
 		"revealedBodyparts": revealedBodyparts,
@@ -1182,6 +1205,7 @@ func saveData():
 		"trackedItems": trackedItems,
 		"currentLastActivityID": currentLastActivityID,
 		"sexEnded": sexEnded,
+		"sexResult": sexResult,
 	}
 	if(sexType != null):
 		data["sexTypeID"] = sexType.id
@@ -1213,6 +1237,7 @@ func loadData(data):
 	trackedItems = SAVE.loadVar(data, "trackedItems", {})
 	currentLastActivityID = SAVE.loadVar(data, "currentLastActivityID", 0)
 	sexEnded = SAVE.loadVar(data, "sexEnded", false)
+	sexResult = SAVE.loadVar(data, "sexResult", {})
 	
 	var sexTypeID = SAVE.loadVar(data, "sexTypeID", SexType.DefaultSex)
 	var theSexType = GlobalRegistry.createSexType(sexTypeID)

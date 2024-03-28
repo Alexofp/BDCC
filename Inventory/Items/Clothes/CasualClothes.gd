@@ -37,3 +37,6 @@ func getRiggedParts(_character):
 	return {
 		"clothing": "res://Inventory/RiggedModels/CasualClothes/CasualClothes.tscn",
 	}
+
+func canDye():
+	return true

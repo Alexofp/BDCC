@@ -26,6 +26,7 @@ func getFlags():
 		"AvyGotCaged": flag(FlagType.Bool),
 		"AvyIsInSlutwall": flag(FlagType.Bool),
 		"AvySlutWallBroken": flag(FlagType.Number),
+		"CanBuySlaveCollars": flag(FlagType.Bool),
 	}
 
 func _init():

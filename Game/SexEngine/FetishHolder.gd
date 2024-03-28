@@ -26,6 +26,10 @@ func _init():
 func clear():
 	fetishMap.clear()
 
+func clearToInterest(theInterest):
+	for fetishID in GlobalRegistry.getFetishes():
+		setFetish(fetishID, theInterest)
+
 func getCharacter():
 	if(character == null):
 		return character

@@ -34,6 +34,8 @@ func _on_MainCanteen_onReact(room, key):
 
 
 func _on_MainDressingRoom_onEnter(room):
+	if(GM.main.playerHasCompanions()):
+		return
 	if(GM.pc.isFullyNaked()):
 		room.addDisabledButton("Undress", "You're already naked")
 	else:
@@ -44,6 +46,8 @@ func _on_MainDressingRoom_onReact(room, key):
 		room.runScene("TakingAShowerScene")
 
 func _on_MainShowerRoom_onEnter(room):
+	if(GM.main.playerHasCompanions()):
+		return
 	if(GM.pc.isFullyNaked()):
 		room.addButton("Shower", "Take a shower", "shower")
 	else:
@@ -97,22 +101,26 @@ func _on_MainGreenhousesJumpable_onReact(_room, key):
 		GM.main.reRun()
 		GM.main.addMessage("You successfully jumped over the railing")
 
-func _on_MainHallRoom9_onEnter(room):
-	room.addButton("Try stocks", "Stick your head into them out of curiosity", "stocks")
+func _on_MainHallRoom9_onEnter(_room):
+	#room.addButton("Try stocks", "Stick your head into them out of curiosity", "stocks")
+	pass
+
+func _on_MainHallRoom9_onReact(_room, _key):
+	#if(key == "stocks"):
+	#	room.runScene("TryStocksScene")
+	pass
 
 
-func _on_MainHallRoom9_onReact(room, key):
-	if(key == "stocks"):
-		room.runScene("TryStocksScene")
+func _on_MainHallRoom21_onEnter(_room):
+	#room.addButton("Mirror", "Change your haircut", "mirror")
+	#room.addButton("Toilet", "Find an empty stall", "toilet")
+	pass
 
 
-func _on_MainHallRoom21_onEnter(room):
-	room.addButton("Mirror", "Change your haircut", "mirror")
-	room.addButton("Toilet", "Find an empty stall", "toilet")
-
-
-func _on_MainHallRoom21_onReact(room, key):
-	if(key == "mirror"):
-		room.runScene("ChangeHaircutScene")
-	if(key == "toilet"):
-		room.runScene("ToiletScene")
+# Got converted to events
+func _on_MainHallRoom21_onReact(_room, _key):
+#	if(key == "mirror"):
+#		room.runScene("ChangeHaircutScene")
+#	if(key == "toilet"):
+#		room.runScene("ToiletScene")
+	pass

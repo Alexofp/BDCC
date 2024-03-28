@@ -104,6 +104,15 @@ func addSceneImage(sceneID, sceneState, imagePath, imageHeight = 300.0):
 		artist = getArtist(),
 		}
 
+func addSceneImageCustomArtist(sceneID, sceneState, imagePath, imageHeight = 300.0, theArtist="Nobody"):
+	if(!sceneImages.has(sceneID)):
+		sceneImages[sceneID] = {}
+	sceneImages[sceneID][sceneState] = {
+		imagePath = imagePath,
+		imageHeight = imageHeight,
+		artist = theArtist,
+		}
+
 func addSceneImageWithConditions(sceneID, sceneState, imagePath, conditions, imageHeight = 300.0):
 	if(!sceneImagesWithConditions.has(sceneID)):
 		sceneImagesWithConditions[sceneID] = {}

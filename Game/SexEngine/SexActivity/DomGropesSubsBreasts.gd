@@ -135,7 +135,9 @@ func processTurn():
 					" {sub.YourHis} breasts are producing more {sub.milk}.",
 				])
 		
+		var suddenlyLactating = false
 		if(getSub().stimulateLactation()):
+			suddenlyLactating = true
 			text += RNG.pick([
 				" {sub.You} suddenly began [b]lactating[/b]!",
 				" {sub.Your} breasts suddenly began [b]lactating[/b]!",
@@ -165,6 +167,8 @@ func processTurn():
 					" {dom.yourHis} is also stroking {sub.youHim}.",
 					" {dom.yourHis} is also stroking {sub.youHim} at the same time.",
 				])
+		
+		sendSexEvent(SexEvent.BreastsGroped, domID, subID, {madeLactate=suddenlyLactating})
 		
 		return {
 			text = text,
@@ -309,7 +313,7 @@ func getSubResistChance(baseChance, domAngerRemoval):
 
 func doSubAction(_id, _actionInfo):
 	if(_id == "cum"):
-		getSub().cumOnFloor()
+		getSub().cumOnFloor(domID)
 		subInfo.cum()
 		
 		var extraText = ""
@@ -318,6 +322,8 @@ func doSubAction(_id, _actionInfo):
 		
 		if(RNG.chance(30) && !getSub().hasPerk(Perk.MilkNoSoreNipples) && !getSub().hasEffect(StatusEffect.SoreNipplesAfterMilking)):
 			getSub().addEffect(StatusEffect.SoreNipplesAfterMilking)
+		
+		sendSexEvent(SexEvent.UniqueOrgasm, domID, subID, {orgasmType="breasts"})
 		
 		return getGenericSubOrgasmData(extraText)
 	

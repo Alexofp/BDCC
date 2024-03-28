@@ -1,0 +1,221 @@
+[gd_scene load_steps=46 format=2]
+
+[ext_resource path="res://Player/Player3D/Doll3D.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Player/StageScene3D/BaseStageScene3D.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Player/Props/platform.png" type="Texture" id=3]
+[ext_resource path="res://Player/StageScene3D/Scenes2/SexSpitroast.gd" type="Script" id=4]
+
+[sub_resource type="AnimationNodeAnimation" id=446]
+animation = "CuffedArms-loop"
+
+[sub_resource type="AnimationNodeBlend2" id=447]
+filter_enabled = true
+filters = [ "Doll3D/Skeleton:Arm.L", "Doll3D/Skeleton:Arm.R", "Doll3D/Skeleton:ForeArm.L", "Doll3D/Skeleton:ForeArm.R", "Doll3D/Skeleton:Hand.L", "Doll3D/Skeleton:Hand.R" ]
+
+[sub_resource type="AnimationNodeAnimation" id=1041]
+animation = "SexSpitroastFast_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=1042]
+animation = "SexSpitroastInside_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=1043]
+animation = "SexSpitroastTease_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=1044]
+animation = "SexSpitroast_1-loop"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=1045]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=1046]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=1047]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=1048]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=1049]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=1050]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachine" id=1051]
+states/SexSpitroastFast_1-loop/node = SubResource( 1041 )
+states/SexSpitroastFast_1-loop/position = Vector2( 471, 315 )
+states/SexSpitroastInside_1-loop/node = SubResource( 1042 )
+states/SexSpitroastInside_1-loop/position = Vector2( 471, 153 )
+states/SexSpitroastTease_1-loop/node = SubResource( 1043 )
+states/SexSpitroastTease_1-loop/position = Vector2( 471, 71 )
+states/SexSpitroast_1-loop/node = SubResource( 1044 )
+states/SexSpitroast_1-loop/position = Vector2( 471, 232 )
+transitions = [ "SexSpitroastTease_1-loop", "SexSpitroastInside_1-loop", SubResource( 1045 ), "SexSpitroastInside_1-loop", "SexSpitroastTease_1-loop", SubResource( 1046 ), "SexSpitroastInside_1-loop", "SexSpitroast_1-loop", SubResource( 1047 ), "SexSpitroast_1-loop", "SexSpitroastInside_1-loop", SubResource( 1048 ), "SexSpitroast_1-loop", "SexSpitroastFast_1-loop", SubResource( 1049 ), "SexSpitroastFast_1-loop", "SexSpitroast_1-loop", SubResource( 1050 ) ]
+start_node = "SexSpitroastTease_1-loop"
+
+[sub_resource type="AnimationNodeBlendTree" id=1052]
+graph_offset = Vector2( -348.69, 38.9555 )
+nodes/Animation/node = SubResource( 446 )
+nodes/Animation/position = Vector2( 140, 280 )
+nodes/CuffsBlend/node = SubResource( 447 )
+nodes/CuffsBlend/position = Vector2( 440, 160 )
+nodes/StateMachine/node = SubResource( 1051 )
+nodes/StateMachine/position = Vector2( 160, 100 )
+nodes/output/position = Vector2( 680, 180 )
+node_connections = [ "output", 0, "CuffsBlend", "CuffsBlend", 0, "StateMachine", "CuffsBlend", 1, "Animation" ]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=460]
+
+[sub_resource type="AnimationNodeAnimation" id=1056]
+animation = "SexSpitroastFast_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=1057]
+animation = "SexSpitroastInside_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=1058]
+animation = "SexSpitroastTease_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=1059]
+animation = "SexSpitroast_2-loop"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=1060]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=1061]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=1062]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=1063]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=1064]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=1065]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachine" id=1066]
+states/SexSpitroastFast_2-loop/node = SubResource( 1056 )
+states/SexSpitroastFast_2-loop/position = Vector2( 456, 326 )
+states/SexSpitroastInside_2-loop/node = SubResource( 1057 )
+states/SexSpitroastInside_2-loop/position = Vector2( 456, 157 )
+states/SexSpitroastTease_2-loop/node = SubResource( 1058 )
+states/SexSpitroastTease_2-loop/position = Vector2( 456, 74 )
+states/SexSpitroast_2-loop/node = SubResource( 1059 )
+states/SexSpitroast_2-loop/position = Vector2( 456, 243 )
+transitions = [ "SexSpitroastTease_2-loop", "SexSpitroastInside_2-loop", SubResource( 1060 ), "SexSpitroastInside_2-loop", "SexSpitroastTease_2-loop", SubResource( 1061 ), "SexSpitroastInside_2-loop", "SexSpitroast_2-loop", SubResource( 1062 ), "SexSpitroast_2-loop", "SexSpitroastInside_2-loop", SubResource( 1063 ), "SexSpitroast_2-loop", "SexSpitroastFast_2-loop", SubResource( 1064 ), "SexSpitroastFast_2-loop", "SexSpitroast_2-loop", SubResource( 1065 ) ]
+start_node = "SexSpitroastTease_2-loop"
+
+[sub_resource type="AnimationNodeBlendTree" id=1053]
+graph_offset = Vector2( -322.532, 74.6842 )
+nodes/Animation/node = SubResource( 446 )
+nodes/Animation/position = Vector2( 140, 280 )
+nodes/CuffsBlend/node = SubResource( 447 )
+nodes/CuffsBlend/position = Vector2( 440, 160 )
+nodes/StateMachine/node = SubResource( 1066 )
+nodes/StateMachine/position = Vector2( 175.468, 138.684 )
+nodes/output/position = Vector2( 680, 180 )
+node_connections = [ "output", 0, "CuffsBlend", "CuffsBlend", 0, "StateMachine", "CuffsBlend", 1, "Animation" ]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=473]
+
+[sub_resource type="AnimationNodeAnimation" id=1067]
+animation = "SexSpitroastFast_3-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=1068]
+animation = "SexSpitroastInside_3-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=1069]
+animation = "SexSpitroastTease_3-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=1070]
+animation = "SexSpitroast_3-loop"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=1071]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=1072]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=1073]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=1074]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=1075]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=1076]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachine" id=1077]
+states/SexSpitroastFast_3-loop/node = SubResource( 1067 )
+states/SexSpitroastFast_3-loop/position = Vector2( 525, 332 )
+states/SexSpitroastInside_3-loop/node = SubResource( 1068 )
+states/SexSpitroastInside_3-loop/position = Vector2( 525, 176 )
+states/SexSpitroastTease_3-loop/node = SubResource( 1069 )
+states/SexSpitroastTease_3-loop/position = Vector2( 525, 95 )
+states/SexSpitroast_3-loop/node = SubResource( 1070 )
+states/SexSpitroast_3-loop/position = Vector2( 525, 247 )
+transitions = [ "SexSpitroastTease_3-loop", "SexSpitroastInside_3-loop", SubResource( 1071 ), "SexSpitroastInside_3-loop", "SexSpitroastTease_3-loop", SubResource( 1072 ), "SexSpitroastInside_3-loop", "SexSpitroast_3-loop", SubResource( 1073 ), "SexSpitroast_3-loop", "SexSpitroastInside_3-loop", SubResource( 1074 ), "SexSpitroast_3-loop", "SexSpitroastFast_3-loop", SubResource( 1075 ), "SexSpitroastFast_3-loop", "SexSpitroast_3-loop", SubResource( 1076 ) ]
+start_node = "SexSpitroastTease_3-loop"
+
+[sub_resource type="AnimationNodeBlendTree" id=1054]
+graph_offset = Vector2( -322.532, 74.6842 )
+nodes/Animation/node = SubResource( 446 )
+nodes/Animation/position = Vector2( 140, 280 )
+nodes/CuffsBlend/node = SubResource( 447 )
+nodes/CuffsBlend/position = Vector2( 440, 160 )
+nodes/StateMachine/node = SubResource( 1077 )
+nodes/StateMachine/position = Vector2( 203.468, 148.684 )
+nodes/output/position = Vector2( 680, 180 )
+node_connections = [ "output", 0, "CuffsBlend", "CuffsBlend", 0, "StateMachine", "CuffsBlend", 1, "Animation" ]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=1055]
+
+[node name="SexSpitroast" instance=ExtResource( 2 )]
+script = ExtResource( 4 )
+
+[node name="Sprite3D" type="Sprite3D" parent="." index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.317465, -1.77462 )
+texture = ExtResource( 3 )
+region_enabled = true
+region_rect = Rect2( 1, 1, 1022, 62 )
+
+[node name="Doll3D" parent="." index="1" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.324891, -0.120824, 0 )
+
+[node name="Doll3D2" parent="." index="2" instance=ExtResource( 1 )]
+transform = Transform( -1, 0, 0, 0, 1, 0, 0, 0, 1, -0.324891, -0.120824, 0 )
+
+[node name="Doll3D3" parent="." index="3" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.324891, -0.120824, 0 )
+
+[node name="AnimationTree" type="AnimationTree" parent="." index="4"]
+tree_root = SubResource( 1052 )
+anim_player = NodePath("../Doll3D/DollSkeleton2/AnimationPlayer")
+parameters/CuffsBlend/blend_amount = 0
+parameters/StateMachine/playback = SubResource( 460 )
+
+[node name="AnimationTree2" type="AnimationTree" parent="." index="5"]
+tree_root = SubResource( 1053 )
+anim_player = NodePath("../Doll3D2/DollSkeleton2/AnimationPlayer")
+parameters/CuffsBlend/blend_amount = 0
+parameters/StateMachine/playback = SubResource( 473 )
+
+[node name="AnimationTree3" type="AnimationTree" parent="." index="6"]
+tree_root = SubResource( 1054 )
+anim_player = NodePath("../Doll3D3/DollSkeleton2/AnimationPlayer")
+parameters/CuffsBlend/blend_amount = 0
+parameters/StateMachine/playback = SubResource( 1055 )
+
+[editable path="Doll3D"]
+[editable path="Doll3D/DollSkeleton"]
+[editable path="Doll3D/DollSkeleton2"]
+[editable path="Doll3D2"]
+[editable path="Doll3D2/DollSkeleton"]
+[editable path="Doll3D2/DollSkeleton2"]

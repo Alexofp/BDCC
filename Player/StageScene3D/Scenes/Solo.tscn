@@ -36,5 +36,12 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7.18997, 5.39323, 1.77914 )
 [node name="FarRight" type="Position3D" parent="." index="5"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.19, 5.393, 1.779 )
 
+[node name="Above" type="Position3D" parent="." index="6"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10.2541, 1.779 )
+
+[node name="Floor" type="Position3D" parent="." index="7"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.104177, 0.477503 )
+
 [editable path="Doll3D"]
 [editable path="Doll3D/DollSkeleton"]
+[editable path="Doll3D/DollSkeleton2"]

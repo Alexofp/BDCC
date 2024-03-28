@@ -90,7 +90,7 @@ func processTurn():
 				" {sub.You} {sub.youAre} about to cum!",
 				" {sub.You} can't hold back much longer!"
 			])
-		if(subInfo.isReadyToCum() && subInfo.isUnconscious()):
+		if(subInfo.isReadyToCum() && !subInfo.canDoActions()):
 			satisfyGoals()
 			getSub().cummedOnBy(subID, FluidSource.Vagina)
 			if(getSub().hasReachablePenis() || getSub().isWearingChastityCage()):
@@ -98,6 +98,7 @@ func processTurn():
 			subInfo.cum()
 			state = ""
 			text += " {sub.Your} pussy is squirting all over {sub.yourHis} thighs as {sub.youHe} {sub.youVerb('orgasm')} in such a humiliating way!"
+			sendSexEvent(SexEvent.UniqueOrgasm, domID, subID, {orgasmType="feet"})
 		return {
 			text = text,
 		}
@@ -124,7 +125,7 @@ func processTurn():
 				" {sub.You} {sub.youAre} about to cum!",
 				" {sub.You} can't hold back much longer!"
 			])
-		if(subInfo.isReadyToCum() && subInfo.isUnconscious()):
+		if(subInfo.isReadyToCum() && !subInfo.canDoActions()):
 			satisfyGoals()
 			getSub().cummedOnBy(subID, FluidSource.Penis)
 			if(getSub().hasReachableVagina()):
@@ -132,6 +133,7 @@ func processTurn():
 			subInfo.cum()
 			state = ""
 			text += " {sub.Your} cock is shooting {sub.cum} all over {sub.yourHis} belly as {sub.youHe} {sub.youVerb('orgasm')} in such a humiliating way!"
+			sendSexEvent(SexEvent.UniqueOrgasm, domID, subID, {orgasmType="feet"})
 		return {
 			text = text,
 		}
@@ -480,6 +482,7 @@ func doSubAction(_id, _actionInfo):
 		subInfo.cum()
 		state = ""
 		text += "{sub.Your} pussy is squirting all over {sub.yourHis} thighs as {sub.youHe} {sub.youVerb('orgasm')} in such a humiliating way!"
+		sendSexEvent(SexEvent.UniqueOrgasm, domID, subID, {orgasmType="feet"})
 		return {
 			text = text,
 		}
@@ -492,6 +495,7 @@ func doSubAction(_id, _actionInfo):
 		subInfo.cum()
 		state = ""
 		text += "{sub.Your} cock is shooting {sub.cum} all over {sub.yourHis} belly as {sub.youHe} {sub.youVerb('orgasm')} in such a humiliating way!"
+		sendSexEvent(SexEvent.UniqueOrgasm, domID, subID, {orgasmType="feet"})
 		return {
 			text = text,
 		}

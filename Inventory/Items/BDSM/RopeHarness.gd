@@ -2,6 +2,7 @@ extends ItemBase
 
 func _init():
 	id = "ropeharness"
+	clothesColor = Color.red
 
 func getVisibleName():
 	return "Rope harness"
@@ -62,3 +63,6 @@ func getRiggedParts(_character):
 
 func getInventoryImage():
 	return "res://Images/Items/bdsm/rope.png"
+
+func canDye():
+	return true

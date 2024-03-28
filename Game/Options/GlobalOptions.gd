@@ -52,6 +52,8 @@ var chainsEnabled = true
 
 var autosaveEnabled = true
 
+var genderNamesOverrides = {}
+
 func resetToDefaults():
 	fetchNewRelease = true
 	menstrualCycleLengthDays = 7
@@ -87,6 +89,7 @@ func resetToDefaults():
 	chainsEnabled = true
 	autosaveEnabled = true
 	inventoryIconsSize = "small"
+	genderNamesOverrides = {}
 	
 	enabledContent.clear()
 	for contentType in ContentType.getAll():
@@ -101,6 +104,11 @@ func _init():
 	resetToDefaults()
 	
 	loadFromFile()
+
+func getGenderOverrideName(theGender, defaultValue):
+	if(!genderNamesOverrides.has(theGender) || genderNamesOverrides[theGender] == ""):
+		return defaultValue
+	return genderNamesOverrides[theGender]
 
 func isContentEnabled(contentType):
 	if(!enabledContent.has(contentType)):
@@ -591,9 +599,35 @@ func getChangeableOptions():
 		"options": contentSettings,
 	})
 	
+	var genderNamesSettings = []
+	for gender in NpcGender.getAll():
+		var genderExplanation = NpcGender.getGenderExplanation(gender)
+		if(genderExplanation == null):
+			genderExplanation = ""
+		
+		genderNamesSettings.append({
+			"name": NpcGender.getOptionsDesc(gender),
+			"description": genderExplanation,
+			"id": gender,
+			"type": "string",
+			"value": getGenderOverrideName(gender, ""),
+			"placeholder": NpcGender.getDefaultVisibleName(gender),
+		})
+	settings.append({
+		"name": "Npc Self-Identity Names Override",
+		"id": "gendernames",
+		"options": genderNamesSettings,
+	})
+	
 	return settings
 
 func applyOption(categoryID, optionID, value):
+	if(categoryID == "gendernames"):
+		if(value == "" && genderNamesOverrides.has(optionID)):
+			genderNamesOverrides.erase(optionID)
+		if(value != ""):
+			genderNamesOverrides[optionID] = value
+	
 	if(categoryID == "jigglephysics"):
 		if(optionID == "jigglePhysicsBreastsEnabled"):
 			jigglePhysicsBreastsEnabled = value
@@ -738,6 +772,7 @@ func saveData():
 		"chainsEnabled": chainsEnabled,
 		"autosaveEnabled": autosaveEnabled,
 		"inventoryIconsSize": inventoryIconsSize,
+		"genderNamesOverrides": genderNamesOverrides,
 	}
 	
 	return data
@@ -778,6 +813,7 @@ func loadData(data):
 	chainsEnabled = loadVar(data, "chainsEnabled", true)
 	autosaveEnabled = loadVar(data, "autosaveEnabled", true)
 	inventoryIconsSize = loadVar(data, "inventoryIconsSize", "small")
+	genderNamesOverrides = loadVar(data, "genderNamesOverrides", {})
 
 func saveToFile():
 	var saveData = saveData()

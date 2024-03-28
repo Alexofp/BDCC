@@ -147,6 +147,7 @@ func doDomAction(_id, _actionInfo):
 		subInfo.addArousalSex(0.2)
 		getDom().cumOnFloor()
 		domInfo.cum()
+		sendSexEvent(SexEvent.UniqueOrgasm, subID, domID, {orgasmType="feet"})
 		return getGenericDomOrgasmData()
 	
 	if(_id == "moan"):
@@ -235,8 +236,9 @@ func doSubAction(_id, _actionInfo):
 		if(cumAmount >= 2):
 			satisfyGoals()
 		domInfo.addArousalSex(0.2)
-		getSub().cumOnFloor()
+		getSub().cumOnFloor(domID)
 		subInfo.cum()
+		sendSexEvent(SexEvent.UniqueOrgasm, domID, subID, {orgasmType="trib"})
 		return getGenericSubOrgasmData()
 	
 	if(_id == "moan"):

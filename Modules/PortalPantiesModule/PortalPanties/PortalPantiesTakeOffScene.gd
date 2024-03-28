@@ -35,7 +35,7 @@ func _run():
 			
 			addButton("Take off", "Take portal panties off", "takeoff")
 			addButton("Change mode", "Change how often the events are happening", "changemode")
-			addButton("Penis", "Change how often the events are happening", "changepenismode")
+			addButton("Penis", "Toggle if you want the portal panties to hide your penis or not", "changepenismode")
 			addButton("Nothing", "Don't touch them", "endthescene")
 		else:		
 			saynn("You try to take off your portal panties but no matter what you do, the magnetic locks prevent you from doing so.")

@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Inventory/UnriggedModels/Fleshlight/fleshlightSocketStraw.png" type="Texture" id=1]
+
+[node name="Fleshlight" type="Spatial"]
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform( -0.541644, -0.0955065, -4.80825e-08, 0.0955065, -0.541644, 0, 4.7352e-08, 8.34944e-09, -0.55, 0.001, -0.095, -0.1 )
+texture = ExtResource( 1 )

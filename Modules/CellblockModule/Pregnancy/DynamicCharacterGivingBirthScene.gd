@@ -154,21 +154,21 @@ func _run():
 		if (bornChildAmount <= 1):
 			saynn("Moments pass like an eternity until finally, the sound of a newborn's cry fills the air.")
 
-			saynn("{npc.name}'s eyes shine with tears of relief and joy. She waits for the nurse to carefully clean her child and then begins cradling in her hands.")
+			saynn("{npc.name}'s eyes shine with tears of relief and joy. {npc.He} waits for the nurse to carefully clean {npc.his} child and then begins cradling in {npc.his} hands.")
 
 		elif (bornChildAmount == 2):
 			saynn("Moments pass like an eternity until finally, the sound of a newborn's cry fills the air. Oh.. But not just one.. Soon {npc.name} gives birth to another kid..")
 
-			saynn("{npc.name}'s eyes shine with tears of relief and joy. She waits for the nurse to carefully clean her child and then begins cradling one of them in her hands.")
+			saynn("{npc.name}'s eyes shine with tears of relief and joy. {npc.He} waits for the nurse to carefully clean {npc.his} child and then begins cradling one of them in {npc.his} hands.")
 
 		else:
 			saynn("Moments pass like an eternity until finally, the sound of a newborn's cry fills the air. Oh.. But not just one.. Soon {npc.name} gives birth to another kid.. But even after that, {npc.his} belly is still big, meaning there is more..")
 
-			saynn("It's only when {npc.name} gives birth to the last child, {npc.his} eyes begin to shine with tears of relief and joy. She waits for the nurse to carefully clean her child and then begins cradling one of them in her hands.")
+			saynn("It's only when {npc.name} gives birth to the last child, {npc.his} eyes begin to shine with tears of relief and joy. {npc.He} waits for the nurse to carefully clean {npc.his} child and then begins cradling one of them in {npc.his} hands.")
 
 		saynn("[say=npc]"+str(RNG.pick(["Oh.. oh my.. so perfect.. Look at the tiny fingers and those little eyes.. So beautiful..", "Hi, mommy loves you more than words can express.. welcome to the world, my precious..", "I can't believe I brought this incredible life into existence.. I can't live without you already..", "I will do everything in my power to give you the life you deserve.."]))+"[/say]")
 
-		saynn("{npc.He} gently kisses her baby's forehead while you stand nearby and smile.")
+		saynn("{npc.He} gently kisses {npc.his} baby's forehead while you stand nearby and smile.")
 
 		saynn("[say=pc]You did an amazing job.[/say]")
 
@@ -177,10 +177,10 @@ func _run():
 		saynn("Eventually the nurse begins telling you that the mother needs rest. Fair enough..")
 
 		if (bornChildAmount <= 1):
-			saynn("You give the mommy and her kid a last good-bye look before stepping out into the lobby.")
+			saynn("You give the mommy and {npc.his} kid a last good-bye look before stepping out into the lobby.")
 
 		else:
-			saynn("You give the mommy and her kids a last good-bye look before stepping out into the lobby.")
+			saynn("You give the mommy and {npc.his} kids a last good-bye look before stepping out into the lobby.")
 
 		saynn("Time to go..")
 
@@ -205,7 +205,7 @@ func _react(_action: String, _args):
 		processTime(3*60)
 
 	if(_action == "do_birth"):
-		processTime(5*60)
+		processTime(35*60)
 		var bornChilds = getCharacter(npcID).giveBirth()
 		bornChildAmount = bornChilds.size()
 		bornString = GM.CS.getChildBirthInfoString(bornChilds)

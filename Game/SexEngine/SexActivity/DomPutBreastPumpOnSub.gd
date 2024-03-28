@@ -131,16 +131,21 @@ func processTurn():
 				var howMuchInPump = pumpItem.getFluids().getFluidAmount()
 				
 				text += " The pump now has "+str(Util.roundF(howMuchInPump, 1))+" ml in it."
+				
+			sendSexEvent(SexEvent.BreastsPumpMilked, domID, subID, {loadSize=howMuchCollected, madeLactate=false})
 		else:
 			text += RNG.pick([
 				"The breast pump stimulates {sub.your} {sub.breasts}.",
 				"The breast pump stimulates {sub.your} {sub.breasts} but doesn't draw any milk out.",
 				"The breast pump tries to milk {sub.your} {sub.breasts} but {sub.youHe} is not lactating.",
 			])
+			var suddenlyLactate = false
 			if(getSub().stimulateLactation()):
+				suddenlyLactate = true
 				text += RNG.pick([
 					" {sub.You} suddenly [b]began lactating[/b]! {sub.Milk} is leaking from {sub.yourHis} nipples.",
 				])
+			sendSexEvent(SexEvent.BreastsPumpMilked, domID, subID, {loadSize=0.0, madeLactate=suddenlyLactate})
 		
 		if(timesMilked > 5 && !getSub().hasEffect(StatusEffect.SoreNipplesAfterMilking)):
 			if(RNG.chance(10) && !getSub().hasPerk(Perk.MilkNoSoreNipples)):

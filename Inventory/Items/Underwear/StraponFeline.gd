@@ -15,7 +15,7 @@ func getRiggedParts(_character):
 	if(itemState.isRemoved()):
 		return null
 	return {
-		"panties": "res://Inventory/RiggedModels/Strapons/FelinecockStrapon.tscn",
+		"strapon": "res://Inventory/RiggedModels/Strapons/FelinecockStrapon.tscn",
 	}
 
 func getCasualName():

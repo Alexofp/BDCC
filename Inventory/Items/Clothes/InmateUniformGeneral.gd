@@ -63,19 +63,56 @@ func getPuttingOnStringLong(withS):
 
 func generateItemState():
 	itemState = ShirtAndShortsState.new()
+	itemState.canActuallyBeDamaged = true # Is hack because there are many clothes that use this state already and don't support damaging..
 
 func getRiggedParts(_character):
 	if(itemState.isRemoved()):
 		return null
 	if(inmateType == InmateType.SexDeviant):
+		if(itemState.isSuperDamaged()):
+			return {
+				"clothing": "res://Inventory/RiggedModels/InmateUniform/damaged/LilacInmateUniformSuperDamaged.tscn",
+			}
+		if(itemState.isDamaged()):
+			return {
+				"clothing": "res://Inventory/RiggedModels/InmateUniform/damaged/LilacInmateUniformDamaged.tscn",
+			}
+		if(itemState.isHalfDamaged()):
+			return {
+				"clothing": "res://Inventory/RiggedModels/InmateUniform/damaged/LilacInmateUniformHalfDamaged.tscn",
+			}
 		return {
 			"clothing": "res://Inventory/RiggedModels/InmateUniform/LilacInmateUniform.tscn",
 		}
 	elif(inmateType == InmateType.HighSec):
+		if(itemState.isSuperDamaged()):
+			return {
+				"clothing": "res://Inventory/RiggedModels/InmateUniform/damaged/RedInmateUniformSuperDamaged.tscn",
+			}
+		if(itemState.isDamaged()):
+			return {
+				"clothing": "res://Inventory/RiggedModels/InmateUniform/damaged/RedInmateUniformDamaged.tscn",
+			}
+		if(itemState.isHalfDamaged()):
+			return {
+				"clothing": "res://Inventory/RiggedModels/InmateUniform/damaged/RedInmateUniformHalfDamaged.tscn",
+			}
 		return {
 			"clothing": "res://Inventory/RiggedModels/InmateUniform/RedInmateUniform.tscn",
 		}
 	
+	if(itemState.isSuperDamaged()):
+		return {
+			"clothing": "res://Inventory/RiggedModels/InmateUniform/damaged/OrangeInmateUniformSuperDamaged.tscn",
+		}
+	if(itemState.isDamaged()):
+		return {
+			"clothing": "res://Inventory/RiggedModels/InmateUniform/damaged/OrangeInmateUniformDamaged.tscn",
+		}
+	if(itemState.isHalfDamaged()):
+		return {
+			"clothing": "res://Inventory/RiggedModels/InmateUniform/damaged/OrangeInmateUniformHalfDamaged.tscn",
+		}
 	return {
 		"clothing": "res://Inventory/RiggedModels/InmateUniform/OrangeInmateUniform.tscn",
 	}

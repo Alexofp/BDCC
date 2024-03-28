@@ -12,12 +12,21 @@ var npcArchetypes = []
 var npcAttacks = []
 var temporaryCharacter = false
 var flags = {}
+var enslaveQuest = null
+var npcSlavery = null
+var npcChatColorOverride = ""
+var npcMimicArtworkID = ""
 
 func _init():
 	npcHasMenstrualCycle = true
 
 func _getName():
 	return npcName
+
+func getChatColor():
+	if(npcChatColorOverride != ""):
+		return npcChatColorOverride
+	return .getChatColor()
 
 func getGender():
 	return NpcGender.toNormalGender(npcGeneratedGender)
@@ -79,6 +88,8 @@ func isDynamicCharacter():
 	return true
 
 func getLootTable(_battleName):
+	if(isSlaveToPlayer()):
+		return .getLootTable(_battleName)
 	if(npcCharacterType == CharacterType.Engineer):
 		return EngineerLoot.new()
 	if(npcCharacterType == CharacterType.Guard):
@@ -97,6 +108,112 @@ func getDefaultArtwork(_variant = []):
 
 func getBirthWaitTime():
 	return 60*60*30 # Dynamic npcs wait 30 hours before giving birth
+
+func hasEnslaveQuest():
+	return enslaveQuest != null
+
+func getEnslaveQuest() -> NpcEnslavementQuest:
+	return enslaveQuest
+
+func setEnslaveQuest(newQuest):
+	enslaveQuest = newQuest
+
+func isSlaveToPlayer():
+	return npcSlavery != null
+
+func getNpcSlavery() -> NpcSlave:
+	return npcSlavery
+
+func setNpcSlavery(newSlav):
+	npcSlavery = newSlav
+
+func onSexEvent(_event : SexEvent):
+	.onSexEvent(_event)
+	
+	if(enslaveQuest != null):
+		enslaveQuest.handleSexEvent(_event)
+	
+	if(npcSlavery != null):
+		npcSlavery.handleSexEvent(_event)
+	
+# The whole thing is hack, never expect it to work or be supported
+func copyEverythingFrom(otherCharacter): #:BaseCharacter
+	npcName = otherCharacter.getName()
+	npcSpecies = otherCharacter.getSpecies()
+	if(otherCharacter.isDynamicCharacter()):
+		npcGeneratedGender = otherCharacter.npcGeneratedGender
+	else:
+		var otherHasPenis = otherCharacter.hasPenis()
+		var otherHasVag = otherCharacter.hasVagina()
+		var otherHasTits = otherCharacter.hasNonFlatBreasts()
+		if(otherHasPenis && otherHasVag):
+			npcGeneratedGender = NpcGender.Herm
+		elif(otherHasPenis && otherHasTits):
+			npcGeneratedGender = NpcGender.Shemale
+		elif(otherHasPenis):
+			npcGeneratedGender = NpcGender.Male
+		elif(otherHasVag && !otherHasTits):
+			npcGeneratedGender = NpcGender.Peachboy
+		else:
+			npcGeneratedGender = NpcGender.Female
+	npcSmallDescription = otherCharacter.getSmallDescription()
+	npcThickness = otherCharacter.getThickness()
+	npcFeminity = otherCharacter.getFemininity()
+	npcDefaultEquipment = otherCharacter.getDefaultEquipment()
+	npcMimicArtworkID = otherCharacter.getID()
+	if(otherCharacter.isDynamicCharacter()):
+		npcArchetypes = otherCharacter.npcArchetypes
+	else:
+		npcArchetypes = []
+	npcAttacks = otherCharacter._getAttacks()
+	if(otherCharacter.isDynamicCharacter()):
+		flags = otherCharacter.flags.duplicate(true)
+	else:
+		flags = {}
+	npcChatColorOverride = otherCharacter.getChatColor()
+	npcStats = otherCharacter.npcStats.duplicate(true)
+	npcLevel = otherCharacter.npcLevel
+	npcLustInterests = otherCharacter.npcLustInterests.duplicate(true)
+	npcPersonality = otherCharacter.npcPersonality.duplicate(true)
+	npcFetishes = otherCharacter.npcFetishes.duplicate(true)
+	npcDefaultFetishInterest = otherCharacter.npcDefaultFetishInterest
+	npcArmor = otherCharacter.npcArmor.duplicate(true)
+	npcBasePain = otherCharacter.npcBasePain
+	npcBaseLust = otherCharacter.npcBaseLust
+	npcBaseStamina = otherCharacter.npcBaseStamina
+	npcBaseRestraintDodgeChanceMult = otherCharacter.npcBaseRestraintDodgeChanceMult
+	npcRestraintStrugglePower = otherCharacter.npcRestraintStrugglePower
+	npcRestraintMinigameResultMin = otherCharacter.npcRestraintMinigameResultMin
+	npcRestraintMinigameResultMax = otherCharacter.npcRestraintMinigameResultMax
+	npcCharacterType = otherCharacter.npcCharacterType
+	npcSkinData = otherCharacter.npcSkinData.duplicate(true)
+	
+	pickedSkin = otherCharacter.pickedSkin
+	pickedSkinRColor = otherCharacter.pickedSkinRColor
+	pickedSkinGColor = otherCharacter.pickedSkinGColor
+	pickedSkinBColor = otherCharacter.pickedSkinBColor
+	
+	for bodypartSlot in otherCharacter.getBodyparts():
+		if(!otherCharacter.hasBodypart(bodypartSlot)):
+			bodyparts[bodypartSlot] = null
+			continue
+		var otherBodypart:Bodypart = otherCharacter.getBodypart(bodypartSlot)
+		
+		var newBodypart:Bodypart = GlobalRegistry.createBodypart(otherBodypart.id)
+		newBodypart.loadData(otherBodypart.saveData().duplicate(true))
+		giveBodypartUnlessSame(newBodypart)
+	
+	inventory.loadData(otherCharacter.getInventory().saveData().duplicate(true))
+	for item in inventory.getItems():
+		item.uniqueID = GlobalRegistry.generateUniqueID()
+	for itemSlot in inventory.getEquippedItems():
+		var item = inventory.getEquippedItem(itemSlot)
+		item.uniqueID = GlobalRegistry.generateUniqueID()
+	
+	skillsHolder.loadData(skillsHolder.saveData().duplicate(true))
+	lustInterests.loadData(lustInterests.saveData().duplicate(true))
+	personality.loadData(personality.saveData().duplicate(true))
+	fetishHolder.loadData(fetishHolder.saveData().duplicate(true))
 
 func saveData():
 	var data = {
@@ -125,6 +242,8 @@ func saveData():
 		"pickedSkinRColor": pickedSkinRColor.to_html(),
 		"pickedSkinGColor": pickedSkinGColor.to_html(),
 		"pickedSkinBColor": pickedSkinBColor.to_html(),
+		"npcChatColorOverride": npcChatColorOverride,
+		"npcMimicArtworkID": npcMimicArtworkID,
 	}
 	
 	data["bodyparts"] = {}
@@ -160,6 +279,16 @@ func saveData():
 	data["fetishHolder"] = fetishHolder.saveData()
 	data["personality"] = personality.saveData()
 	
+	if(enslaveQuest == null):
+		data["enslaveQuest"] = null
+	else:
+		data["enslaveQuest"] = enslaveQuest.saveData()
+	
+	if(npcSlavery == null):
+		data["npcSlavery"] = null
+	else:
+		data["npcSlavery"] = npcSlavery.saveData()
+	
 	return data
 
 func loadData(data):
@@ -192,6 +321,11 @@ func loadData(data):
 	flags = SAVE.loadVar(data, "flags", {})
 	npcDefaultEquipment = SAVE.loadVar(data, "npcDefaultEquipment", [])
 	npcCharacterType = SAVE.loadVar(data, "npcCharacterType", CharacterType.Generic)
+	if(data.has("npcChatColorOverride")):
+		npcChatColorOverride = SAVE.loadVar(data, "npcChatColorOverride", "")
+	if(data.has("npcMimicArtworkID")):
+		npcMimicArtworkID = SAVE.loadVar(data, "npcMimicArtworkID", "")
+		
 	if(!data.has("pickedSkin")):
 		applyRandomSkinAndColorsAndParts()
 	else:
@@ -241,5 +375,21 @@ func loadData(data):
 	lustInterests.loadDataDynamicNpc(SAVE.loadVar(data, "lustInterests", {}))
 	fetishHolder.loadData(SAVE.loadVar(data, "fetishHolder", {}))
 	personality.loadData(SAVE.loadVar(data, "personality", {}))
+
+	if(data.has("enslaveQuest") && data["enslaveQuest"] != null):
+		var newEnslaveQuest = NpcEnslavementQuest.new()
+		newEnslaveQuest.setChar(self)
+		setEnslaveQuest(newEnslaveQuest)
+		newEnslaveQuest.loadData(SAVE.loadVar(data, "enslaveQuest", {}))
+	else:
+		enslaveQuest = null
+	
+	if(data.has("npcSlavery") && data["npcSlavery"] != null):
+		var newNpcSlavery = NpcSlave.new()
+		newNpcSlavery.setChar(self)
+		setNpcSlavery(newNpcSlavery)
+		newNpcSlavery.loadData(SAVE.loadVar(data, "npcSlavery", {}))
+	else:
+		npcSlavery = null
 
 	updateAppearance()

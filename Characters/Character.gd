@@ -9,6 +9,7 @@ var npcLevel = 0
 var npcLustInterests = {}
 var npcPersonality = {}
 var npcFetishes = {}
+var npcDefaultFetishInterest = FetishInterest.Likes
 var npcArmor = {}
 var npcBasePain = null
 var npcBaseLust = null
@@ -48,6 +49,8 @@ func _ready():
 			
 	for personalityStat in npcPersonality:
 		personality.setStat(personalityStat, npcPersonality[personalityStat])
+	if(npcDefaultFetishInterest != FetishInterest.Likes):
+		fetishHolder.clearToInterest(npcDefaultFetishInterest)
 	for fetishID in npcFetishes:
 		fetishHolder.setFetish(fetishID, npcFetishes[fetishID])
 			
@@ -264,7 +267,7 @@ func restockEquipmentChance(chanceToEquip):
 			equipDefaultEquipmentEntrySafely(equipEntry)
 
 # Restraints that we forced onto the npc for example, anything that is not their default equipment
-func getWrongEquippedItems():
+func getWrongEquippedItems(includeDamaged=true):
 	var result = []
 	
 	var theEquip = getDefaultEquipment()
@@ -278,7 +281,7 @@ func getWrongEquippedItems():
 	for item in getInventory().getEquippedItems().values():
 		if(item == null):
 			continue
-		if(!theEquipChecker.has(item.id)):
+		if(!theEquipChecker.has(item.id) || (includeDamaged && item.isDamaged())):
 			result.append(item)
 	
 	return result
@@ -345,7 +348,9 @@ func canDoSelfCare():
 	# If character is in a scene, don't touch them
 	if(GM.main != null && GM.main.characterIsVisible(getID())):
 		return false
-	
+	# If they are a slave to the player, also don't touch them. They are chained to the floor 24/7
+	if(isSlaveToPlayer()):
+		return false
 	return true
 		
 func hoursPassed(_howmuch):
@@ -403,6 +408,11 @@ func updateNonBattleEffects():
 		else:
 			removeEffect(effect.id)
 		
+	if(hasEnslaveQuest()):
+		getEnslaveQuest().checkIfTasksGotCompleted()
+	if(isSlaveToPlayer()):
+		getNpcSlavery().checkIfTasksGotCompleted()
+		
 	GM.GES.callGameExtenders(ExtendGame.npcUpdateNonBattleEffects, [self])
 	
 	buffsHolder.calculateBuffs()
@@ -421,7 +431,12 @@ func onCharacterHeavyIntoPregnancy():
 func onCharacterReadyToGiveBirth():
 	pregnancyWaitTimer = 0
 	if(getBirthWaitTime() > 0 && getMenstrualCycle() != null):
-		if(getMenstrualCycle().isPregnantFromPlayer()):
+		if(isSlaveToPlayer()):
+			if(getMenstrualCycle().isPregnantFromPlayer()):
+				GM.main.addLogMessage("News (Slave)", "You just received news that "+getName()+" is ready to give birth to your children. Since "+heShe()+" "+isAre()+" slave, it is your job to bring "+himHer()+" to the nursery.")
+			else:
+				GM.main.addLogMessage("News (Slave)", "You just received news that "+getName()+" is ready to give birth to someone's children. Since "+heShe()+" "+isAre()+" slave, it is your job to bring "+himHer()+" to the nursery.")
+		elif(getMenstrualCycle().isPregnantFromPlayer()):
 			GM.main.addLogMessage("News", "You just received news that "+getName()+" is ready to give birth to your children and now just waits for a good moment to do it. Maybe you can go check on them.")
 
 
@@ -435,6 +450,8 @@ func shouldGiveBirth():
 	if(!isReadyToGiveBirth()):
 		return false
 	if(GM.main.characterIsVisible(getID())):
+		return false
+	if(isSlaveToPlayer()):
 		return false
 	return true
 

@@ -50,6 +50,9 @@ func _run():
 			if(currentCommand.size() > 0):
 				addButtonAt(0, "SEND", "Send the command", "send")
 				addButtonAt(9, "CLEAR", "Clear the command", "clearcommand")
+			else:
+				addDisabledButtonAt(0, "SEND", "Nothing to send")
+				addDisabledButtonAt(9, "CLEAR", "Nothing to clear")
 			addButtonAt(13, "NUMPAD", "Switch to the numpad", "numpad")
 			addButtonAt(14, "KEYBOARD", "Switch to the keyboard that lets you type in the full command yourself", "keyboard")
 			
@@ -77,6 +80,9 @@ func _run():
 			if(currentCommand.size() > 0):
 				addButtonAt(0, "SEND", "Send the command", "send")
 				addButtonAt(9, "CLEAR", "Clear the command", "clearcommand")
+			else:
+				addDisabledButtonAt(0, "SEND", "Nothing to send")
+				addDisabledButtonAt(9, "CLEAR", "Nothing to clear")
 			addButtonAt(14, "COMMANDS", "Switch to the commands", "buttons")
 			
 

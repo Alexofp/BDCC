@@ -30,7 +30,7 @@ texture = ExtResource( 5 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, 0 )
 
 [node name="Doll3D2" parent="." index="3" instance=ExtResource( 3 )]
-transform = Transform( -1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0.0864866, 0 )
+transform = Transform( -1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0.0864866, -0.299015 )
 
 [node name="AnimationTree" type="AnimationTree" parent="." index="4"]
 tree_root = ExtResource( 6 )

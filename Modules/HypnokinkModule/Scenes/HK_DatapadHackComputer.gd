@@ -76,10 +76,10 @@ func reactToCommandLocalhost(_command: String, _args:Array, _commandStringRaw:St
 	return "Error, unknown command. Use 'help' to list all available commands"
 	
 const memPosMap = {
-			"unlock": "[color=#88FF88][6,8][/color] (5+1 bytes read)",
-			"disconnect": "[color=#88FF88][4,16][/color] (10+1 bytes read)",
-			"monitor": "[color=#88FF88][8,0][/color] (170+1 bytes read)",
-			"help": "[color=#FF8888][17,4][/color] (78+1 bytes read)",
+			"unlock": "[color=#88FF88][6,8][/color] (5 bytes read)",
+			"disconnect": "[color=#88FF88][4,16][/color] (10 bytes read)",
+			"monitor": "[color=#88FF88][8,0][/color] (170 bytes read)",
+			"help": "[color=#FF8888][17,4][/color] (78 bytes read)",
 			"strscan": "[color=#FF8888][external memory][/color] (? bytes read)",
 		}
 		
@@ -103,6 +103,8 @@ const strMap = {
 
 const NI = "[color=#FFFF00]|[/color]"
 const CR = "[color=#FFAAAA]¬[/color]"
+const HI = "[color=#AAAAFF]"
+const NO = "[color=#FFFFFF]"
 
 func reactToCommandCage(_command: String, _args:Array, _commandStringRaw:String):
 	if(_command == "disconnect"):
@@ -127,14 +129,14 @@ func reactToCommandCage(_command: String, _args:Array, _commandStringRaw:String)
 				"[color=#AAFFAA] 1 [/color]00010017 SEGFAULT  at: %s"+NI+" Eo2ZiE93\n"+\
 				"[color=#AAFFAA] 2 [/color]Vion"+NI+"___ b1Un374k J0sTIBXF locked"+NI+"_\n"+\
 				"[color=#AAFFAA] 3 [/color]unlocked "+NI+"___Oper ating "+NI+"_ Inactive\n"+\
-				"[color=#AAFFAA] 4 [/color]"+NI+"___sAxz 38VsDvXT Disconne cting... \n"+\
+				"[color=#AAFFAA] 4 [/color]"+NI+"___sAxz 38VsDvXT "+(HI if lastCmdStored == "disconnect" else NO)+"Disconne cting... [/color]\n"+\
 				"[color=#AAFFAA] 5 [/color]"+NI+"___Read y."+NI+"_DwyM UNz6v4ML B1jowhGw\n"+\
-				"[color=#AAFFAA] 6 [/color]default"+NI+" block"+NI+"__ ____over ride"+NI+"hl|\n"+\
+				"[color=#AAFFAA] 6 [/color]default"+NI+" "+(HI if lastCmdStored == "unlock" else NO)+"block[/color]"+NI+"__ ____over ride"+NI+"hl|\n"+\
 				"[color=#AAFFAA] 7 [/color]Code "+NI+"__ valid."+NI+"_ invalid. "+NI+"___6521\n"+\
-				"[color=#AAFFAA] 8 [/color]Status:  %s"+CR+"Days  locked:  %d"+CR+"Elect\n"+\
+				"[color=#AAFFAA] 8 [/color]"+(HI if lastCmdStored == "monitor" else NO)+"Status:  %s"+CR+"Days  locked:  %d"+CR+"Elect\n"+\
 				"[color=#AAFFAA] 9 [/color]romagnet  lock st rength:  %fN"+CR+"Batt\n"+\
 				"[color=#AAFFAA]10 [/color]erycharg e: %f mA h"+CR+"Biorea ctor:%s"+CR+"\n"+\
-				"[color=#AAFFAA]11 [/color]Last mem ory acce ss at: [ %d,%d] (\n[/font][/b]"
+				"[color=#AAFFAA]11 [/color]Last mem ory acce ss at: [ %d,%d] ([/color]\n[/font][/b]"
 		else:
 			return "This command expects 0 arguments"
 	elif(_command == "unlock"):
@@ -172,7 +174,7 @@ func reactToCommandCage(_command: String, _args:Array, _commandStringRaw:String)
 			learnCommand("disconnect")
 			learnCommand("strscan")
 			return "Available commands are: \ndisconnect\nmonitor\nunlock\nhelp\nstrscan\nTo learn more about a command type 'help <COMMAND>'\n\n"+\
-				"[Amateur firmware. The password's stored in plaintext, directly in memory. Dont waste time trying every option, remember that the unlock function has to access the password to check if it's been given a valid one. - Alex]"
+				"[Amateur firmware. The password's stored in plaintext, directly in memory. Dont waste time trying every option, remember that the unlock function has to access the password to check if it's been given a valid one.\n\nI've also added the strscan utility, in case the keyboard freezes up again. Don't bother with it otherwise.\n - Alex]"
 		else:
 			learnCommand("help")
 			return "'help' expects 0 or 1 arguments"
@@ -182,12 +184,12 @@ func reactToCommandCage(_command: String, _args:Array, _commandStringRaw:String)
 			var id = _args[0]
 			if(id in strMap.keys()):
 				learnCommand(strMap[id][1])
-				return "Memorised string '" + strMap[id][1] + "'."
+				return "String '" + strMap[id][1] + "' added to command buttons."
 			else:
 				return "Invalid parameter."
 		elif(_args.size() == 0):
 			var outstr = "This trial version of strscan is limited to only the first 15 results.\n"+\
-					"Run strscan again with the id of the string you'd like to memorise as the first parameter.\n\n[font=res://Fonts/smallconsolefont.tres]"+\
+					"Run strscan again with the id of the string you'd like to add to your command buttons as the first parameter.\n\n[font=res://Fonts/smallconsolefont.tres]"+\
 					"[color=#AAFFFF]ID location string[/color]\n"
 			for key in strMap:
 				outstr += key + " " + strMap[key][0] + ":  '" + strMap[key][1] + "'\n"

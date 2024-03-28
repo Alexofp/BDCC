@@ -33,6 +33,9 @@ enum {
 	PlasticBottle,
 	
 	PortalPanties,
+	
+	AllowsEnslaving,
+	ReturnsToPCIfSlaveReleased,
 }
 
 static func getName(tag):

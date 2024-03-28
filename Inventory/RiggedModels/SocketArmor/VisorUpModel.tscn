@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Inventory/RiggedModels/SocketArmor/Visor.png" type="Texture" id=1]
+
+[node name="VisorUpModel" type="Spatial"]
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform( 0.829632, 0.55831, 0, -0.55831, 0.829632, 0, 0, 0, 1, -0.049, 0.225, 0.067 )
+texture = ExtResource( 1 )

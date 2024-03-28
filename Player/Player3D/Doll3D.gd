@@ -178,18 +178,25 @@ func clearState():
 			part.setState(stateID, "")
 	state.clear()
 
-func addPart(slot, partPath):
-	addPartObject(slot, GlobalRegistry.instanceCached(partPath))
+func addPart(slot, partPath, callbackObj = null):
+	addPartObject(slot, GlobalRegistry.instanceCached(partPath), callbackObj)
 
 func addPartUnlessSame(slot, partPath):
+	var callbackObj = null
+	if(partPath is Array):
+		callbackObj = partPath[1]
+		partPath = partPath[0]
+	
 	if(parts.has(slot)):
 		var oldpart: Spatial = parts[slot]
 		if(oldpart.filename == partPath):
+			if(callbackObj != null && callbackObj.has_method("onDollUpdate")):
+				callbackObj.onDollUpdate(self, slot, oldpart)
 			return
-	addPart(slot, partPath)
+	addPart(slot, partPath, callbackObj)
 		
 
-func addPartObject(slot, part: Spatial):
+func addPartObject(slot, part: Spatial, callbackObj = null):
 	if(parts.has(slot)):
 		parts[slot].onRemoved()
 		parts[slot].queue_free()
@@ -216,9 +223,11 @@ func addPartObject(slot, part: Spatial):
 			dollAttachmentZones[attachmentProxy.zoneName] = []
 		dollAttachmentZones[attachmentProxy.zoneName].append(dollAttachmentZone)
 		
-	
 	for stateID in state:
 		part.setState(stateID, state[stateID])
+	
+	if(callbackObj != null && callbackObj.has_method("onDollUpdate")):
+		callbackObj.onDollUpdate(self, slot, part)
 	
 func removeDollAttachmentZone(attachZone):
 	attachZone.queue_free()
@@ -343,10 +352,10 @@ func setBoneOffset(boneName: String, offset: Vector3):
 	
 	skeleton.set_bone_custom_pose(boneId, newTransform)
 
-func setButtScale(buttScale: float):
+func setButtScale(buttScale: float, tailScale:float = 1.0):
 	var buttScaleMod = 1.0 + clamp(buttScale - 1.0, 0.0, 0.2)
 	setBoneScaleAndOffset("DeformButt", buttScale*buttScaleMod, Vector3(-0.109556, -0.109556, 0.0)*clamp((buttScale-1.0)*3, 0.0, 1.0))
-	setBoneOffset("Tail1", Vector3(0.409556, 0.409556, 0.0)*max(buttScale-1.0, 0.0))
+	setBoneScaleAndOffset("Tail1", tailScale, Vector3(0.409556, 0.409556, 0.0)*max(buttScale-1.0, 0.0))
 
 func setBreastsScale(breastsScale: float):
 	var mul = 0.0
@@ -511,6 +520,9 @@ func playAnimation(animName, blend = 0.1, speed = 1.0):
 
 func getAnimPlayer():
 	return $DollSkeleton/AnimationPlayer
+
+func getAnimPlayer2():
+	return $DollSkeleton2/AnimationPlayer
 
 func setArmsCuffed(newcuffed):
 	armsCuffed = newcuffed

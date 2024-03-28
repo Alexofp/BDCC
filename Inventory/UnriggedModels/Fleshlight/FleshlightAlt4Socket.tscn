@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Inventory/UnriggedModels/Fleshlight/fleshlightSocket.png" type="Texture" id=1]
+[ext_resource path="res://Inventory/UnriggedModels/Fleshlight/fleshlightSocketTopLayer.png" type="Texture" id=2]
+
+[node name="Fleshlight" type="Spatial"]
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform( 0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, -0.099, -0.103, -0.116 )
+texture = ExtResource( 2 )
+
+[node name="Sprite3D2" type="Sprite3D" parent="."]
+transform = Transform( 0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, -0.099, -0.103, -0.643 )
+texture = ExtResource( 1 )

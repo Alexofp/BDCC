@@ -329,6 +329,8 @@ func doDomAction(_id, _actionInfo):
 		
 		subInfo.addArousalSex(max(0.0, subInfo.fetishScore({Fetish.Masochism: 0.1})+0.02))
 		
+		sendSexEvent(SexEvent.Spanked, domID, subID, {strongSpank=false, pain=(0 if coverButtTimer > 0 else 1)})
+		
 		return {
 			text = text,
 		}
@@ -365,12 +367,15 @@ func doDomAction(_id, _actionInfo):
 		if(RNG.chance(50)):
 			text += " "+getAssDescriptionAfterImpact(true)
 		
-		subInfo.addPain(10/damageDivider)
-		sendSexEvent(SexEvent.PainInflicted, domID, subID, {pain=10/damageDivider,isDefense=false,intentional=true})
+		var addPain:int = int(round(10/damageDivider))
+		subInfo.addPain(addPain)
+		sendSexEvent(SexEvent.PainInflicted, domID, subID, {pain=addPain,isDefense=false,intentional=true})
 		affectSub(subInfo.fetishScore({Fetish.Masochism: 1.0})-0.6, 0.05, -0.1, -0.01)
 		affectDom(subInfo.fetishScore({Fetish.Sadism: 1.0})+0.3, 0.05, -0.01)
 		
 		subInfo.addArousalSex(max(0.0, subInfo.fetishScore({Fetish.Masochism: 0.2})+0.02))
+		
+		sendSexEvent(SexEvent.Spanked, domID, subID, {strongSpank=true, pain=addPain})
 		
 		return {
 			text = text,
@@ -437,11 +442,11 @@ func getSubActions():
 
 func doSubAction(_id, _actionInfo):
 	if(_id == "cum"):
-		getSub().cumOnFloor()
+		getSub().cumOnFloor(domID)
 		subInfo.cum()
 		
 		#satisfyGoals()
-		
+		sendSexEvent(SexEvent.UniqueOrgasm, domID, subID, {orgasmType="spank"})
 		return getGenericSubOrgasmData()
 	
 	if(_id == "coverbutt"):

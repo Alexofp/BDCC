@@ -156,11 +156,11 @@ func _run():
 
 		saynn("[say=eliza]What made you want to help him anyway? I mean like.. before all of this.[/say]")
 
-		addButton("Good guy", "Alex seemed like a good guy", "tell_eliza")
-		addButton("Credits", "You were looking for work", "tell_eliza")
-		addButton("Sex", "You just wanted to fuck", "tell_eliza")
-		addButton("BDSM", "Alex seemed quite kinky", "tell_eliza")
-		addButton("No reason", "You had time to spare", "tell_eliza")
+		addButton("Good guy", "Alex seemed like a good guy", "tell_eliza", ["gg"])
+		addButton("Credits", "You were looking for work", "tell_eliza", ["creds"])
+		addButton("Sex", "You just wanted to fuck", "tell_eliza", ["sex"])
+		addButton("BDSM", "Alex seemed quite kinky", "tell_eliza", ["bdsm"])
+		addButton("No reason", "You had time to spare", "tell_eliza", ["noreason"])
 	if(state == "tell_eliza"):
 		if (tellChoice == "gg"):
 			saynn("[say=pc]I don't know. Alex seemed like a good guy that had some very rough things happen to him.[/say]")
@@ -837,6 +837,8 @@ func _react(_action: String, _args):
 
 	if(_action == "tell_eliza"):
 		tellChoice = ""
+		if(_args.size() > 0):
+			tellChoice = _args[0]
 
 	if(_action == "go_sleep"):
 		GM.main.processTimeUntil(23*60*60)

@@ -177,6 +177,9 @@ func getDynamicCharacterIDsFromPool(poolID:String):
 	
 	return dynamicCharactersPools[poolID].keys()
 
+func getPCSlavesIDs():
+	return getDynamicCharacterIDsFromPool(CharacterPool.Slaves)
+
 func getDynamicCharactersPoolSize(poolID:String):
 	if(!dynamicCharactersPools.has(poolID)):
 		return 0
@@ -569,6 +572,12 @@ func hoursPassed(howMuch):
 		var character = getCharacter(characterID)
 		if(character != null):
 			character.hoursPassed(howMuch)
+	
+	if(dynamicCharactersPools.has(CharacterPool.Slaves)):
+		for characterID in dynamicCharactersPools[CharacterPool.Slaves]:
+			var character = getCharacter(characterID)
+			if(character != null && character.isSlaveToPlayer()):
+				character.getNpcSlavery().hoursPassed(howMuch)
 
 func processTimeUntil(newseconds):
 	if(timeOfDay >= newseconds):
@@ -593,12 +602,22 @@ func startNewDay():
 	
 	Flag.resetFlagsOnNewDay()
 	roomMemoriesProcessDay()
+	npcSlaveryOnNewDay()
 	
 	doTimeProcess(timediff)
 	
 	SAVE.triggerAutosave()
 	
 	return timediff
+
+func npcSlaveryOnNewDay():
+	for slaveID in getDynamicCharacterIDsFromPool(CharacterPool.Slaves):
+		var character = getCharacter(slaveID)
+		if(character == null):
+			continue
+		if(character.isSlaveToPlayer()):
+			var npcSlave = character.getNpcSlavery()
+			npcSlave.onNewDay()
 
 func getVisibleTime():
 	var text = ""
@@ -1003,10 +1022,78 @@ func getDebugActions():
 				},
 			]
 		},
+		{
+			"id": "enslaveRandom",
+			"name": "Enslave random npc",
+		},
+		{
+			"id": "duplicateAndEnslave",
+			"name": "Duplicate and enslave static npc",
+			"args": [
+				{
+					"id": "npcID",
+					"name": "NPC ID",
+					"value": "pc",
+					"type": "smartlist",
+					"npc": true,
+				},
+#				{
+#					"id": "cnpcID",
+#					"name": "Custom ID",
+#					"value": "",
+#					"type": "string",
+#				},
+				{
+					"id": "pooltype",
+					"name": "Character pool",
+					"type": "list",
+					"value": "inmate",
+					"values": [
+						["inmate", "Inmate (gen)"],
+						["inmatehigh", "Inmate (highsec)"],
+						["inmatesex", "Inmate (sexdeviant)"],
+						["guard", "Guard"],
+						["engineer", "Engineer"],
+						["nurse", "Nurse"],
+					],
+				},
+				{
+					"id": "resequip",
+					"name": "Reset equipment",
+					"value": true,
+					"type": "checkbox",
+				},
+				{
+					"id": "pcpers",
+					"name": "Copy player's personality",
+					"value": true,
+					"type": "checkbox",
+				},
+				{
+					"id": "pcfetish",
+					"name": "Copy player's fetishes",
+					"value": true,
+					"type": "checkbox",
+				},
+			]
+		},
+		{
+			"id": "damageClothes",
+			"name": "Damage pc clothes",
+		},
+		{
+			"id": "repairClothes",
+			"name": "Repair pc clothes",
+		},
 	]
 
 func doDebugAction(id, args = {}):
 	print(id, " ", args)
+	
+	if(id == "damageClothes"):
+		GM.pc.damageClothes()
+	if(id == "repairClothes"):
+		GM.pc.repairAllClothes()
 	
 	if(id == "healPC"):
 		GM.pc.addPain(-GM.pc.painThreshold())
@@ -1083,7 +1170,71 @@ func doDebugAction(id, args = {}):
 	if(id == "lactatePC"):
 		GM.pc.induceLactation()
 		GM.pc.getBodypart(BodypartSlot.Breasts).getFluidProduction().fillPercent(1.0)
-
+		
+	if(id == "enslaveRandom"):
+		var npcID = NpcFinder.grabNpcIDFromPoolOrGenerate(CharacterPool.Inmates, [], InmateGenerator.new(), {})
+		GlobalRegistry.getModule("NpcSlaveryModule").makeSurePCHasSlaveSpace()
+		runScene("KidnapDynamicNpcScene", [npcID])
+		# runScene("EnslaveDynamicNpcScene", [npcID])
+		
+	if(id == "duplicateAndEnslave"):
+		var theNpcID = args["npcID"]
+		#if(args["cnpcID"] != ""):
+		#	theNpcID = args["cnpcID"]
+		
+		var otherChar = getCharacter(theNpcID)
+		if(otherChar == null):
+			return
+			
+		var dynamicCharacter = DynamicCharacter.new()
+		dynamicCharacter.id = GM.main.generateCharacterID("staticcopy")
+		
+		GM.main.addDynamicCharacter(dynamicCharacter)
+		dynamicCharacter.copyEverythingFrom(otherChar)
+		var poolType = args["pooltype"]
+		if(poolType in ["inmate", "inmatehigh", "inmatesex"]):
+			dynamicCharacter.npcCharacterType = CharacterType.Inmate
+			addDynamicCharacterToPool(dynamicCharacter.getID(), CharacterPool.Inmates)
+		elif(poolType == "guard"):
+			dynamicCharacter.npcCharacterType = CharacterType.Guard
+			addDynamicCharacterToPool(dynamicCharacter.getID(), CharacterPool.Guards)
+		elif(poolType == "nurse"):
+			dynamicCharacter.npcCharacterType = CharacterType.Nurse
+			addDynamicCharacterToPool(dynamicCharacter.getID(), CharacterPool.Nurses)
+		elif(poolType == "engineer"):
+			dynamicCharacter.npcCharacterType = CharacterType.Engineer
+			addDynamicCharacterToPool(dynamicCharacter.getID(), CharacterPool.Engineers)
+		
+		if(args["resequip"]):
+			dynamicCharacter.getInventory().clear()
+			if(poolType == "inmate"):
+				dynamicCharacter.npcDefaultEquipment = ["inmatecollar", "inmateuniform"]
+			if(poolType == "inmatehigh"):
+				dynamicCharacter.npcDefaultEquipment = ["inmatecollar", "inmateuniformHighsec"]
+			if(poolType == "inmatesex"):
+				dynamicCharacter.npcDefaultEquipment = ["inmatecollar", "inmateuniformSexDeviant"]
+			if(poolType == "guard"):
+				dynamicCharacter.npcDefaultEquipment = ["oldcollar", "GuardArmor"]
+			if(poolType == "nurse"):
+				dynamicCharacter.npcDefaultEquipment = ["oldcollar", "NurseClothes"]
+			if(poolType == "engineer"):
+				dynamicCharacter.npcDefaultEquipment = ["oldcollar", "EngineerClothes"]
+			
+			dynamicCharacter.resetEquipment()
+		else:
+			if(!dynamicCharacter.getInventory().hasEquippedItemWithTag(ItemTag.AllowsEnslaving)):
+				dynamicCharacter.getInventory().forceEquipRemoveOther(GlobalRegistry.createItem("oldcollar"))
+		
+		if(args.has("pcpers") && args["pcpers"]):
+			dynamicCharacter.getPersonality().loadData(GM.pc.getPersonality().saveData().duplicate(true))
+		if(args.has("pcfetish") && args["pcfetish"]):
+			dynamicCharacter.getFetishHolder().loadData(GM.pc.getFetishHolder().saveData().duplicate(true))
+			dynamicCharacter.getFetishHolder().removeImpossibleFetishes()
+		#var npcID = NpcFinder.grabNpcIDFromPoolOrGenerate(CharacterPool.Inmates, [], InmateGenerator.new(), {})
+		GlobalRegistry.getModule("NpcSlaveryModule").makeSurePCHasSlaveSpace()
+		runScene("KidnapDynamicNpcScene", [dynamicCharacter.getID()])
+		# runScene("EnslaveDynamicNpcScene", [npcID])
+		
 func consoleSetFlagBool(flagID, valuestr):
 	var value = false
 	if(valuestr in ["true", "TRUE", "True", "1"]):
@@ -1202,3 +1353,34 @@ func _on_GameUI_onDevComButton():
 	if(devCommentary == null || devCommentary == ""):
 		return
 	GM.ui.showDevCommentary(devCommentary)
+
+func setLocationName(locationName: String):
+	if(GM.pc.isBlindfolded()):
+		locationName = "???"
+	
+	GM.ui.setLocationName(locationName)
+
+func aimCamera(roomID: String):
+	GM.world.aimCamera(roomID)
+
+func aimCameraAndSetLocName(roomID: String):
+	GM.world.aimCamera(roomID)
+	
+	var room = GM.world.getRoomByID(roomID)
+	if(!room):
+		return
+	setLocationName(room.getName())
+
+func playerHasCompanions():
+	for scene in sceneStack:
+		var sceneComps = scene.getSceneCompanions()
+		if(sceneComps != null && sceneComps.size() > 0):
+			return true
+	return false
+
+func playerHasCompanion(charID):
+	for scene in sceneStack:
+		var sceneComps = scene.getSceneCompanions()
+		if(sceneComps != null && sceneComps.has(charID)):
+			return true
+	return false

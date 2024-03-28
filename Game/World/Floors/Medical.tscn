@@ -20,6 +20,7 @@ population = 3
 [node name="MedRoom2" parent="." index="1" instance=ExtResource( 2 )]
 position = Vector2( -64, 0 )
 roomName = "Med Lobby"
+roomID = "MedRoom2"
 roomDescription = "You stand in the medical lobby, it’s very sterile here, the omnipresent smell of antiseptic follows you any way you go. The walls and floors are white, many lights make this floor look quite bright. A few benches are placed along the walls where inmates can wait or have a rest.
 
 You notice two airlocks that lead to the staff-only rooms, you can’t even open them without having access or being brought in by someone.

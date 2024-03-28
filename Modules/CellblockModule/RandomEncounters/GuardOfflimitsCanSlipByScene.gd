@@ -146,11 +146,17 @@ func _run():
 		
 		addButton("Submit to", "Let them have it their way with you", "startsexsubby")
 			
-	if(state == "after_sex"):
+	if(state == "after_sex" || state == "after_sex_won"):
 		saynn("After the fun time ends, the guard just leaves you alone.")
 
 		# (scene ends)
 		addButton("Leave", "Time to go", "endthescene")
+		
+	if(state == "after_sex"):
+		GM.ES.triggerRun(Trigger.AfterSexWithDynamicNPCThatWon, [npcID])
+		
+	if(state == "after_sex_won"):
+		GM.ES.triggerRun(Trigger.AfterSexWithDefeatedDynamicNPC, [npcID])
 
 	if(state == "sneak_past"):
 		saynn("You managed to sneak past the guard without {npc.him} noticing!")
@@ -208,7 +214,7 @@ func _run():
 		
 		saynn("{npc.He} is blushing a lot, you can just leave {npc.him} like that or have some fun.")
 		
-		addButtonWithChecks("Sex!", "Time to fuck them", "startsexasdom", [], [ButtonChecks.NotArmsRestrained, ButtonChecks.NotHandsBlocked, ButtonChecks.NotLegsRestrained, ButtonChecks.NotOralBlocked])
+		addButtonWithChecks("Sex!", "Time to fuck them", "startsexasdom", [], [ButtonChecks.CanStartSex])
 		addButton("Leave", "Just leave before anyone else sees you", "endthescene")
 		
 	if(state == "cuff_fail"):
@@ -265,7 +271,7 @@ func _run():
 		
 		saynn("{npc.He} is still resisting a lot. You can just leave {npc.him} like that or have some fun.")
 		
-		addButtonWithChecks("Sex!", "Time to fuck them", "startsexasdom", [], [ButtonChecks.NotArmsRestrained, ButtonChecks.NotHandsBlocked, ButtonChecks.NotLegsRestrained, ButtonChecks.NotOralBlocked])
+		addButtonWithChecks("Sex!", "Time to fuck them", "startsexasdom", [], [ButtonChecks.CanStartSex])
 		addButton("Leave", "Just leave before anyone else sees you", "endthescene")
 	
 	if(state == "if_lost"):
@@ -302,7 +308,7 @@ func _run():
 		
 func addWonButton(sextext = "Sex!", sexdesc = "Time to fuck them!"):
 	addButton("Leave", "Just leave before anyone else sees you", "endthescene")
-	addButtonWithChecks(sextext, sexdesc, "startsexasdom", [], [ButtonChecks.NotArmsRestrained, ButtonChecks.NotHandsBlocked, ButtonChecks.NotLegsRestrained, ButtonChecks.NotOralBlocked])
+	addButtonWithChecks(sextext, sexdesc, "startsexasdom", [], [ButtonChecks.CanStartSex])
 	addButton("Submit to", "Let them have it their way with you", "startsexsubby")
 	addButton("Inventory", "Look at your inventory", "openinventory")
 	if(GM.pc.getInventory().hasRemovableRestraints()):
@@ -387,8 +393,10 @@ func _react(_action: String, _args):
 
 
 func _react_scene_end(_tag, _result):
-	if(_tag in ["subbysex", "domsex"]):
+	if(_tag in ["subbysex"]):
 		setState("after_sex")
+	if(_tag in ["domsex"]):
+		setState("after_sex_won")
 	
 	if(_tag == "guardfight"):
 		processTime(20 * 60)

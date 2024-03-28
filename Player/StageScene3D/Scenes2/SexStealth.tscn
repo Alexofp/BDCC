@@ -1,0 +1,339 @@
+[gd_scene load_steps=85 format=2]
+
+[ext_resource path="res://Player/Player3D/Doll3D.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Player/StageScene3D/BaseStageScene3D.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Player/Props/platform.png" type="Texture" id=3]
+[ext_resource path="res://Player/StageScene3D/Scenes2/SexStealth.gd" type="Script" id=4]
+
+[sub_resource type="AnimationNodeAnimation" id=446]
+animation = "CuffedArms-loop"
+
+[sub_resource type="AnimationNodeBlend2" id=447]
+filter_enabled = true
+filters = [ "Doll3D/Skeleton:Arm.L", "Doll3D/Skeleton:Arm.R", "Doll3D/Skeleton:ForeArm.L", "Doll3D/Skeleton:ForeArm.R", "Doll3D/Skeleton:Hand.L", "Doll3D/Skeleton:Hand.R" ]
+
+[sub_resource type="AnimationNodeAnimation" id=497]
+animation = "SexStealthFast_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=498]
+animation = "SexStealthFast_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=499]
+animation = "SexStealthInside_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=500]
+animation = "SexStealthInside_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=557]
+animation = "SexStealthRub_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=558]
+animation = "SexStealthRub_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=501]
+animation = "SexStealthTease_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=502]
+animation = "SexStealthTease_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=503]
+animation = "SexStealth_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=504]
+animation = "SexStealth_1-loop"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=505]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=506]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=507]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=508]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=509]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=510]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=511]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=512]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=513]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=514]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=515]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=516]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=517]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=518]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=519]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=520]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=521]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=522]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=523]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=524]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=559]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=560]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=561]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=562]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=563]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=564]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachine" id=525]
+states/SexStealthFast_1-loop/node = SubResource( 498 )
+states/SexStealthFast_1-loop/position = Vector2( 491, 275 )
+"states/SexStealthFast_1-loop 2/node" = SubResource( 497 )
+"states/SexStealthFast_1-loop 2/position" = Vector2( 764, 275 )
+states/SexStealthInside_1-loop/node = SubResource( 500 )
+states/SexStealthInside_1-loop/position = Vector2( 491, 138 )
+"states/SexStealthInside_1-loop 2/node" = SubResource( 499 )
+"states/SexStealthInside_1-loop 2/position" = Vector2( 764, 138 )
+states/SexStealthRub_1-loop/node = SubResource( 558 )
+states/SexStealthRub_1-loop/position = Vector2( 491, -25 )
+"states/SexStealthRub_1-loop 2/node" = SubResource( 557 )
+"states/SexStealthRub_1-loop 2/position" = Vector2( 764, -25 )
+states/SexStealthTease_1-loop/node = SubResource( 502 )
+states/SexStealthTease_1-loop/position = Vector2( 491, 62 )
+"states/SexStealthTease_1-loop 2/node" = SubResource( 501 )
+"states/SexStealthTease_1-loop 2/position" = Vector2( 764, 62 )
+states/SexStealth_1-loop/node = SubResource( 504 )
+states/SexStealth_1-loop/position = Vector2( 491, 208 )
+"states/SexStealth_1-loop 2/node" = SubResource( 503 )
+"states/SexStealth_1-loop 2/position" = Vector2( 764, 208 )
+transitions = [ "SexStealthTease_1-loop", "SexStealthInside_1-loop", SubResource( 505 ), "SexStealthInside_1-loop", "SexStealthTease_1-loop", SubResource( 506 ), "SexStealthTease_1-loop", "SexStealthTease_1-loop 2", SubResource( 507 ), "SexStealthTease_1-loop 2", "SexStealthTease_1-loop", SubResource( 508 ), "SexStealthTease_1-loop 2", "SexStealthInside_1-loop 2", SubResource( 509 ), "SexStealthInside_1-loop 2", "SexStealthTease_1-loop 2", SubResource( 510 ), "SexStealthInside_1-loop 2", "SexStealth_1-loop 2", SubResource( 511 ), "SexStealth_1-loop 2", "SexStealthInside_1-loop 2", SubResource( 512 ), "SexStealthInside_1-loop", "SexStealth_1-loop", SubResource( 513 ), "SexStealth_1-loop", "SexStealthInside_1-loop", SubResource( 514 ), "SexStealth_1-loop", "SexStealth_1-loop 2", SubResource( 515 ), "SexStealth_1-loop 2", "SexStealth_1-loop", SubResource( 516 ), "SexStealth_1-loop", "SexStealthFast_1-loop", SubResource( 517 ), "SexStealthFast_1-loop", "SexStealth_1-loop", SubResource( 518 ), "SexStealth_1-loop 2", "SexStealthFast_1-loop 2", SubResource( 519 ), "SexStealthFast_1-loop 2", "SexStealth_1-loop 2", SubResource( 520 ), "SexStealthFast_1-loop", "SexStealthFast_1-loop 2", SubResource( 521 ), "SexStealthFast_1-loop 2", "SexStealthFast_1-loop", SubResource( 522 ), "SexStealthInside_1-loop", "SexStealthInside_1-loop 2", SubResource( 523 ), "SexStealthInside_1-loop 2", "SexStealthInside_1-loop", SubResource( 524 ), "SexStealthTease_1-loop", "SexStealthRub_1-loop", SubResource( 559 ), "SexStealthRub_1-loop", "SexStealthTease_1-loop", SubResource( 560 ), "SexStealthRub_1-loop", "SexStealthRub_1-loop 2", SubResource( 561 ), "SexStealthRub_1-loop 2", "SexStealthRub_1-loop", SubResource( 562 ), "SexStealthRub_1-loop 2", "SexStealthTease_1-loop 2", SubResource( 563 ), "SexStealthTease_1-loop 2", "SexStealthRub_1-loop 2", SubResource( 564 ) ]
+start_node = "SexStealthTease_1-loop"
+graph_offset = Vector2( 53, -174 )
+
+[sub_resource type="AnimationNodeBlendTree" id=526]
+graph_offset = Vector2( -348.69, 38.9555 )
+nodes/Animation/node = SubResource( 446 )
+nodes/Animation/position = Vector2( 140, 280 )
+nodes/CuffsBlend/node = SubResource( 447 )
+nodes/CuffsBlend/position = Vector2( 440, 160 )
+nodes/StateMachine/node = SubResource( 525 )
+nodes/StateMachine/position = Vector2( 130.31, 82.9555 )
+nodes/output/position = Vector2( 680, 180 )
+node_connections = [ "output", 0, "CuffsBlend", "CuffsBlend", 0, "StateMachine", "CuffsBlend", 1, "Animation" ]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=460]
+
+[sub_resource type="AnimationNodeAnimation" id=528]
+animation = "SexStealthBusyFast_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=565]
+animation = "SexStealthBusyTease_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=529]
+animation = "SexStealthBusyTease_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=530]
+animation = "SexStealthBusy_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=531]
+animation = "SexStealthFast_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=532]
+animation = "SexStealthInsideBusy_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=533]
+animation = "SexStealthInside_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=566]
+animation = "SexStealthTease_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=534]
+animation = "SexStealthTease_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=535]
+animation = "SexStealth_2-loop"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=536]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=537]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=538]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=539]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=540]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=541]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=542]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=543]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=544]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=545]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=546]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=547]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=548]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=549]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=550]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=551]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=552]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=553]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=554]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=555]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=567]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=568]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=569]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=570]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=571]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=572]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachine" id=556]
+states/SexStealthBusyFast_2-loop/node = SubResource( 528 )
+states/SexStealthBusyFast_2-loop/position = Vector2( 805, 277 )
+states/SexStealthBusyTease_2-loop/node = SubResource( 529 )
+states/SexStealthBusyTease_2-loop/position = Vector2( 805, 62 )
+"states/SexStealthBusyTease_2-loop 2/node" = SubResource( 565 )
+"states/SexStealthBusyTease_2-loop 2/position" = Vector2( 805, -11 )
+states/SexStealthBusy_2-loop/node = SubResource( 530 )
+states/SexStealthBusy_2-loop/position = Vector2( 805, 207 )
+states/SexStealthFast_2-loop/node = SubResource( 531 )
+states/SexStealthFast_2-loop/position = Vector2( 505, 277 )
+states/SexStealthInsideBusy_2-loop/node = SubResource( 532 )
+states/SexStealthInsideBusy_2-loop/position = Vector2( 805, 137 )
+states/SexStealthInside_2-loop/node = SubResource( 533 )
+states/SexStealthInside_2-loop/position = Vector2( 505, 137 )
+states/SexStealthTease_2-loop/node = SubResource( 534 )
+states/SexStealthTease_2-loop/position = Vector2( 505, 62 )
+"states/SexStealthTease_2-loop 2/node" = SubResource( 566 )
+"states/SexStealthTease_2-loop 2/position" = Vector2( 505, -11 )
+states/SexStealth_2-loop/node = SubResource( 535 )
+states/SexStealth_2-loop/position = Vector2( 505, 207 )
+transitions = [ "SexStealthTease_2-loop", "SexStealthInside_2-loop", SubResource( 536 ), "SexStealthInside_2-loop", "SexStealthTease_2-loop", SubResource( 537 ), "SexStealthBusyTease_2-loop", "SexStealthTease_2-loop", SubResource( 538 ), "SexStealthTease_2-loop", "SexStealthBusyTease_2-loop", SubResource( 539 ), "SexStealthBusyTease_2-loop", "SexStealthInsideBusy_2-loop", SubResource( 540 ), "SexStealthInsideBusy_2-loop", "SexStealthBusyTease_2-loop", SubResource( 541 ), "SexStealthInsideBusy_2-loop", "SexStealthInside_2-loop", SubResource( 542 ), "SexStealthInside_2-loop", "SexStealthInsideBusy_2-loop", SubResource( 543 ), "SexStealthInsideBusy_2-loop", "SexStealthBusy_2-loop", SubResource( 544 ), "SexStealthBusy_2-loop", "SexStealthInsideBusy_2-loop", SubResource( 545 ), "SexStealthInside_2-loop", "SexStealth_2-loop", SubResource( 546 ), "SexStealth_2-loop", "SexStealthInside_2-loop", SubResource( 547 ), "SexStealth_2-loop", "SexStealthBusy_2-loop", SubResource( 548 ), "SexStealthBusy_2-loop", "SexStealth_2-loop", SubResource( 549 ), "SexStealth_2-loop", "SexStealthFast_2-loop", SubResource( 550 ), "SexStealthFast_2-loop", "SexStealth_2-loop", SubResource( 551 ), "SexStealthFast_2-loop", "SexStealthBusyFast_2-loop", SubResource( 552 ), "SexStealthBusyFast_2-loop", "SexStealthFast_2-loop", SubResource( 553 ), "SexStealthBusy_2-loop", "SexStealthBusyFast_2-loop", SubResource( 554 ), "SexStealthBusyFast_2-loop", "SexStealthBusy_2-loop", SubResource( 555 ), "SexStealthTease_2-loop 2", "SexStealthTease_2-loop", SubResource( 567 ), "SexStealthTease_2-loop", "SexStealthTease_2-loop 2", SubResource( 568 ), "SexStealthTease_2-loop 2", "SexStealthBusyTease_2-loop 2", SubResource( 569 ), "SexStealthBusyTease_2-loop 2", "SexStealthTease_2-loop 2", SubResource( 570 ), "SexStealthBusyTease_2-loop 2", "SexStealthBusyTease_2-loop", SubResource( 571 ), "SexStealthBusyTease_2-loop", "SexStealthBusyTease_2-loop 2", SubResource( 572 ) ]
+start_node = "SexStealthTease_2-loop"
+graph_offset = Vector2( 48, -153 )
+
+[sub_resource type="AnimationNodeBlendTree" id=527]
+graph_offset = Vector2( -322.532, 74.6842 )
+nodes/Animation/node = SubResource( 446 )
+nodes/Animation/position = Vector2( 140, 280 )
+nodes/CuffsBlend/node = SubResource( 447 )
+nodes/CuffsBlend/position = Vector2( 440, 160 )
+nodes/StateMachine/node = SubResource( 556 )
+nodes/StateMachine/position = Vector2( 180, 120 )
+nodes/output/position = Vector2( 680, 180 )
+node_connections = [ "output", 0, "CuffsBlend", "CuffsBlend", 0, "StateMachine", "CuffsBlend", 1, "Animation" ]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=473]
+
+[node name="SexStealth" instance=ExtResource( 2 )]
+script = ExtResource( 4 )
+
+[node name="Sprite3D" type="Sprite3D" parent="." index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.317465, -1.77462 )
+texture = ExtResource( 3 )
+region_enabled = true
+region_rect = Rect2( 1, 1, 1022, 62 )
+
+[node name="Doll3D" parent="." index="1" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.829923, -0.041567, 0 )
+
+[node name="Doll3D2" parent="." index="2" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.829923, -0.041567, 0 )
+
+[node name="AnimationTree" type="AnimationTree" parent="." index="3"]
+tree_root = SubResource( 526 )
+anim_player = NodePath("../Doll3D/DollSkeleton2/AnimationPlayer")
+parameters/CuffsBlend/blend_amount = 0
+parameters/StateMachine/playback = SubResource( 460 )
+
+[node name="AnimationTree2" type="AnimationTree" parent="." index="4"]
+tree_root = SubResource( 527 )
+anim_player = NodePath("../Doll3D2/DollSkeleton2/AnimationPlayer")
+parameters/CuffsBlend/blend_amount = 0
+parameters/StateMachine/playback = SubResource( 473 )
+
+[editable path="Doll3D"]
+[editable path="Doll3D/DollSkeleton"]
+[editable path="Doll3D/DollSkeleton2"]
+[editable path="Doll3D2"]
+[editable path="Doll3D2/DollSkeleton"]
+[editable path="Doll3D2/DollSkeleton2"]

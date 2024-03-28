@@ -28,6 +28,11 @@ var sexActivities = []
 var sexTypes = []
 var fluids = []
 var speechModifiers = []
+var slaveBreakTasks = []
+var slaveTypes = []
+var slaveActions = []
+var slaveEvents = []
+var slaveActivities = []
 
 var id = "badmodule"
 var author = "no author"
@@ -114,6 +119,21 @@ func register():
 		
 	for speechModifier in speechModifiers:
 		GlobalRegistry.registerSpeechModifier(speechModifier)
+
+	for slaveBreakTask in slaveBreakTasks:
+		GlobalRegistry.registerSlaveBreakTask(slaveBreakTask)
+	
+	for slaveType in slaveTypes:
+		GlobalRegistry.registerSlaveType(slaveType)
+		
+	for slaveAction in slaveActions:
+		GlobalRegistry.registerSlaveAction(slaveAction)
+		
+	for slaveEvent in slaveEvents:
+		GlobalRegistry.registerSlaveEvent(slaveEvent)
+		
+	for slaveActivity in slaveActivities:
+		GlobalRegistry.registerSlaveActivity(slaveActivity)
 
 func registerEventTriggers():
 	pass

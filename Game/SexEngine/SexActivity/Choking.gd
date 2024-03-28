@@ -108,6 +108,8 @@ func processTurn():
 
 		var text = RNG.pick(texts)+getExtraChokeText()
 		
+		sendSexEvent(SexEvent.Choking, domID, subID, {strongChoke=false})
+		
 		return {
 			text=text,
 			domSay = domReaction(SexReaction.Choking, 30),
@@ -128,6 +130,8 @@ func processTurn():
 		]
 
 		var text = RNG.pick(texts)+getExtraChokeText()
+		
+		sendSexEvent(SexEvent.Choking, domID, subID, {strongChoke=true})
 		
 		return {
 			text=text,

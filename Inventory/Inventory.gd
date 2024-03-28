@@ -41,6 +41,16 @@ func getAllItems():
 func getEquippedItems():
 	return equippedItems
 
+func getAllItemsCanDye():
+	var result = []
+	for item in items:
+		if(item.canDye()):
+			result.append(item)
+	for itemSlot in equippedItems:
+		if(equippedItems[itemSlot].canDye()):
+			result.append(equippedItems[itemSlot])
+	return result
+
 func getAllSellableItems():
 	var result = []
 	for item in items:
@@ -105,6 +115,13 @@ func getEquippedItemByUniqueID(uniqueID: String):
 		if(item.uniqueID == uniqueID):
 			return item
 	return null
+
+func hasEquippedItemWithUniqueID(uniqueID: String):
+	for slot in equippedItems.keys():
+		var item = equippedItems[slot]
+		if(item.uniqueID == uniqueID):
+			return true
+	return false
 
 func getEquippedItemByID(theID: String):
 	for slot in equippedItems.keys():
@@ -420,6 +437,14 @@ func getEquippedItemsWithTag(tag):
 			result.append(item)
 	return result
 	
+func hasEquippedItemWithTag(tag):
+	for itemSlot in equippedItems.keys():
+		var item = equippedItems[itemSlot]
+
+		if(item.hasTag(tag)):
+			return true
+	return false
+	
 func getEquppedRestraints():
 	var result = []
 	
@@ -440,6 +465,17 @@ func hasRemovableRestraints():
 			if(restraintData.canStruggle()):
 				return true
 	return false
+
+func getEquppedRemovableRestraints():
+	var result = []
+	
+	for itemSlot in equippedItems:
+		var item = equippedItems[itemSlot]
+		if(item.isRestraint()):
+			var restraintData = item.getRestraintData()
+			if(restraintData.canStruggle()):
+				result.append(item)
+	return result
 
 func forceRestraintsWithTag(tag, amount = 1):
 	var itemIDs = GlobalRegistry.getItemIDsByTag(tag)
@@ -568,6 +604,25 @@ func removeBrokenDublicatedItems():
 	for equippedItem in equippedItemsToRemove:
 		Log.printerr("REMOVING DUBLICATED ITEM: "+equippedItem.id+" UNIQUE ID: "+str(equippedItem.uniqueID))
 		removeEquippedItem(equippedItem)
+
+func removeRandomRestraints(removedRestraintsChance):
+	var restraints = getEquppedRestraints()
+	var howManyRemoved = 0
+	if(restraints.size() > 0):
+		for restraint in restraints:
+			if(restraint.isImportant() || restraint.isPersistent()):
+				continue
+			
+			var chanceModifier = 1.0
+			var restraintData:RestraintData = restraint.getRestraintData()
+			if(restraintData != null):
+				chanceModifier /= restraintData.getLevel()
+			
+			if(RNG.chance(removedRestraintsChance * chanceModifier)):
+				removeEquippedItem(restraint)
+				howManyRemoved += 1
+	
+	return howManyRemoved
 
 func saveData():
 	var data = {}

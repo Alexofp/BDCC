@@ -10,6 +10,19 @@ func _init():
 #	addInterest(InterestTopic.AverageMassBody, Interest.Loves)
 	pass
 
+func learnRandomInterest():
+	var possible = []
+	
+	for interest in interests:
+		if(!playerKnows.has(interest) || playerKnows[interest] != interests[interest]):
+			possible.append(interest)
+	
+	if(possible.size() <= 0):
+		return false
+	var randInterest = RNG.pick(possible)
+	playerKnows[randInterest] = interests[randInterest]
+	return true
+
 func addInterest(topicID, reaction):
 	interests[topicID] = reaction
 

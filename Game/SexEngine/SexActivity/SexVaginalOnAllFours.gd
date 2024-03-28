@@ -253,6 +253,7 @@ func onSwitchFrom(_otherActivity, _args):
 func processTurn():
 	if(currentPose == POSE_CHOKEFUCK):
 		subInfo.addConsciousness(-0.01)
+		sendSexEvent(SexEvent.Choking, domID, subID, {strongChoke=false})
 	
 	if(state == "knotting"):
 		var freeRoom = getSub().getPenetrationFreeRoomBy(usedBodypart, domID)
@@ -433,6 +434,15 @@ func getDomActions():
 				"desc": "Cum on their butt",
 				"priority": 1001,
 			})
+		elif(subInfo.isReadyToCum() && isHandlingSubOrgasms() && !subInfo.canDoActions()):
+			actions.append({
+				"id": "subcum",
+				"score": 1.0,
+				"name": "Sub's orgasm",
+				"desc": "They are about to cum!",
+				"priority" : 1001,
+			})
+
 	if(state in ["aftercumminginside"]):
 		actions.append({
 			"id": "continuefucking",
@@ -488,6 +498,23 @@ func doDomAction(_id, _actionInfo):
 		currentPose = newPose
 		return {text = text}
 	
+	if(_id == "subcum"):
+		var straponData = null
+		
+		if(isStraponSex()):
+			satisfyGoals()
+			
+			var strapon = getDom().getWornStrapon()
+			if(strapon.getFluids() != null && !strapon.getFluids().isEmpty()):
+				getSub().cummedInBodypartByAdvanced(usedBodypart, domID)
+				straponData = {
+					text = "{dom.Your} strapon gets squeezed by {sub.your} "+RNG.pick(usedBodypartNames)+" enough for it to suddenly [b]release its contents inside {sub.youHim}[/b]!"
+				}
+			
+		getSub().cumOnFloor(domID)
+		subInfo.cum()
+		return getSexEngine().combineData(getGenericSubOrgasmData(), straponData)
+	
 	if(_id == "domstraponcum"):
 		getDom().cumOnFloor()
 		domInfo.cum()
@@ -526,7 +553,7 @@ func doDomAction(_id, _actionInfo):
 				
 				return {text = text}
 			else:
-				sendSexEvent(SexEvent.HolePenetrated, domID, subID, {hole=usedBodypart,engulfed=false})
+				sendSexEvent(SexEvent.HolePenetrated, domID, subID, {hole=usedBodypart,engulfed=false,strapon=isStraponSex()})
 				gonnaCumOutside = false
 				#getSub().gotFuckedBy(usedBodypart, domID)
 				getSub().gotOrificeStretchedBy(usedBodypart, domID, 0.2)
@@ -836,7 +863,7 @@ func doSubAction(_id, _actionInfo):
 					text = "{dom.Your} strapon gets squeezed by {sub.your} "+RNG.pick(usedBodypartNames)+" enough for it to suddenly [b]release its contents inside {sub.youHim}[/b]!"
 				}
 			
-		getSub().cumOnFloor()
+		getSub().cumOnFloor(domID)
 		subInfo.cum()
 		return getSexEngine().combineData(getGenericSubOrgasmData(), straponData)
 	
@@ -856,7 +883,7 @@ func doSubAction(_id, _actionInfo):
 			affectDom(domInfo.fetishScore({fetishGiving: 1.0}), 0.2, -0.01)
 			return {text="{sub.You} {sub.youVerb('try', 'tries')} to envelop {dom.yourHis} "+getDickName()+" but it's too big!"}
 		
-		sendSexEvent(SexEvent.HolePenetrated, domID, subID, {hole=usedBodypart,engulfed=true})
+		sendSexEvent(SexEvent.HolePenetrated, domID, subID, {hole=usedBodypart,engulfed=true,strapon=isStraponSex()})
 		affectSub(subInfo.fetishScore({fetishReceiving: 1.0}), 0.1, 0.0, 0.0)
 		affectDom(domInfo.fetishScore({fetishGiving: 1.0}), 0.1*domSensetivity(), -0.01)
 		subInfo.addArousalSex(0.1)

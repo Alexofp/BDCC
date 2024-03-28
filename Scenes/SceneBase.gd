@@ -217,8 +217,21 @@ func addButtonWithChecks(text: String, tooltip: String, method: String, args, ch
 			reasonText = "["+reasonText+"] "
 		addDisabledButton(text, ButtonChecks.getPrefix(checks) + reasonText +tooltip)
 
+func addButtonWithChecksAt(index:int, text: String, tooltip: String, method: String, args, checks: Array):
+	var badCheck = ButtonChecks.check(checks)
+	if(badCheck == null):
+		addButtonAt(index, text, ButtonChecks.getPrefix(checks) + tooltip, method, args)
+	else:
+		var reasonText = ButtonChecks.getReasonText(badCheck)
+		if(reasonText != ""):
+			reasonText = "["+reasonText+"] "
+		addDisabledButtonAt(index, text, ButtonChecks.getPrefix(checks) + reasonText +tooltip)
+
 func addTextbox(id):
 	return GM.ui.addUITextbox(id)
+
+func addBigTextbox(id):
+	return GM.ui.addBigUITextbox(id)
 
 func getTextboxData(id):
 	return GM.ui.getUIdata(id)
@@ -275,21 +288,13 @@ func supportsSexEngine():
 	return false
 
 func setLocationName(locationName: String):
-	if(GM.pc.isBlindfolded()):
-		locationName = "???"
-	
-	GM.ui.setLocationName(locationName)
+	GM.main.setLocationName(locationName)
 
 func aimCamera(roomID: String):
-	GM.world.aimCamera(roomID)
+	GM.main.aimCamera(roomID)
 
 func aimCameraAndSetLocName(roomID: String):
-	GM.world.aimCamera(roomID)
-	
-	var room = GM.world.getRoomByID(roomID)
-	if(!room):
-		return
-	setLocationName(room.getName())
+	GM.main.aimCameraAndSetLocName(roomID)
 
 func getCharacter(charID: String) -> BaseCharacter:
 	return GlobalRegistry.getCharacter(charID)
@@ -339,6 +344,9 @@ func shouldShowDevCommentaryIcon():
 
 func shouldDisplayBigButtons():
 	return false
+
+func getSceneCompanions():
+	return []
 
 func saveData():
 	var data = {}

@@ -100,3 +100,16 @@ func setShapeKeyValueRecursive(childnode, shapekey: String, value: float):
 
 func getAttachProxies():
 	return attachProxies
+
+func setColor(newColor):
+	setColorRecursive(newColor, self)
+
+func setColorRecursive(newColor, theNode):
+	for mesh in theNode.get_children():
+		if(mesh is MeshInstance && !(mesh is MeshInstanceWithPattern)):
+			var theMat1:SpatialMaterial = mesh.get_surface_material(0)
+			var newMat:SpatialMaterial = theMat1.duplicate()
+			newMat.albedo_color = newColor
+			mesh.set_surface_material(0, newMat)
+			
+		setColorRecursive(newColor, mesh)

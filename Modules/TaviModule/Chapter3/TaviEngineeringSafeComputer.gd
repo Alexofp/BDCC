@@ -25,7 +25,7 @@ func reactToCommand(_command:String, _args:Array, _commandStringRaw:String):
 			learnCommand("disconnect")
 			learnCommand("login")
 			learnCommand("open")
-			return "Avaiable commands:\ndisconnect\nlogin\nopen"
+			return "Available commands:\ndisconnect\nlogin\nopen"
 		
 		if(_command == "disconnect"):
 			if(_args.size() == 0):
@@ -38,7 +38,7 @@ func reactToCommand(_command:String, _args:Array, _commandStringRaw:String):
 		if(_command == "open"):
 			if(loggedAsAdmin):
 				markFinished()
-				return "Oppening the safe..."
+				return "Opening the safe..."
 			else:
 				return "Error, Access denied!"
 		
@@ -54,7 +54,7 @@ func reactToCommand(_command:String, _args:Array, _commandStringRaw:String):
 				return "Error, wrong password"
 			else:
 				return "'login' command expects 1 argument. Type 'help login' for more information"
-		return "Error, server doesn't support this command. Use 'help' to list all avaiable commands"
+		return "Error, server doesn't support this command. Use 'help' to list all available commands"
 	
 	if(connectedTo == "127.0.53"):
 		if(_command == "help"):
@@ -81,8 +81,8 @@ func reactToCommand(_command:String, _args:Array, _commandStringRaw:String):
 			learnCommand("wget")
 			if(loggedAsAdmin):
 				learnCommand("withdraw")
-				return "Avaiable commands:\ndisconnect\nlogin\nls\ncat\nwget\nwithdraw"
-			return "Avaiable commands:\ndisconnect\nlogin\nls\ncat\nwget"
+				return "Available commands:\ndisconnect\nlogin\nls\ncat\nwget\nwithdraw"
+			return "Available commands:\ndisconnect\nlogin\nls\ncat\nwget"
 		
 		if(_command == "withdraw" && loggedAsAdmin):
 			if(transferredCredits):
@@ -246,7 +246,7 @@ func reactToCommand(_command:String, _args:Array, _commandStringRaw:String):
 				elif(tolearn == "quit"):
 					return "Shutdown the console"
 				else:
-					return "Couldn't find command '"+str(tolearn)+"'. To see all the avaiable commands type 'help'"
+					return "Couldn't find command '"+str(tolearn)+"'. To see all the available commands type 'help'"
 				
 			elif(_args.size() == 0):
 				learnCommand("help")
@@ -254,13 +254,13 @@ func reactToCommand(_command:String, _args:Array, _commandStringRaw:String):
 				learnCommand("cat")
 				learnCommand("connect")
 				learnCommand("quit")
-				return "Avaiable commands are: ls, cat, connect, help, quit.\nTo learn more about a command type 'help <COMMAND>'"
+				return "Available commands are: ls, cat, connect, help, quit.\nTo learn more about a command type 'help <COMMAND>'"
 			else:
 				learnCommand("help")
 				return "'help' expects 0 or 1 arguments"
 			
 		learnCommand("help")
-		return "Error, unknown command. Use 'help' to list all avaiable commands"
+		return "Error, unknown command. Use 'help' to list all available commands"
 
 func saveData():
 	var data = .saveData()

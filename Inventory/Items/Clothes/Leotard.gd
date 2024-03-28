@@ -59,3 +59,6 @@ func getHidesParts(_character):
 
 #func updateDoll(doll: Doll3D):
 #	doll.setState("armalpha", "hidearms")
+
+func canDye():
+	return true

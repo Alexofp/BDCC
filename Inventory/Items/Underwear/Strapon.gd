@@ -2,6 +2,7 @@ extends ItemBase
 
 func _init():
 	id = "Strapon"
+	clothesColor = Color(0.19, 0.19, 0.19)
 
 func getVisibleName():
 	return "Strapon"
@@ -46,7 +47,7 @@ func getRiggedParts(_character):
 	if(itemState.isRemoved()):
 		return null
 	return {
-		"panties": "res://Inventory/RiggedModels/Strapons/HumancockStrapon.tscn",
+		"strapon": "res://Inventory/RiggedModels/Strapons/HumancockStrapon.tscn",
 	}
 
 func getHidesParts(_character):
@@ -96,4 +97,7 @@ func getInventoryImage():
 	return "res://Images/Items/strapons/human.png"
 
 func alwaysRecoveredAfterSex():
+	return true
+
+func canDye():
 	return true

@@ -4,6 +4,9 @@ class_name ShirtAndShortsState
 var shortsPulledDown = false
 var shirtOpened = false
 var clothesDamaged = false
+var halfDamage = false
+var canActuallyBeDamaged = false
+var superDamage = false
 
 func getCasualName():
 	return "uniform"
@@ -40,6 +43,8 @@ func saveData():
 	data["shortsPulledDown"] = shortsPulledDown
 	data["shirtOpened"] = shirtOpened
 	data["clothesDamaged"] = clothesDamaged
+	data["halfDamage"] = halfDamage
+	data["superDamage"] = superDamage
 
 	return data
 	
@@ -49,6 +54,8 @@ func loadData(_data):
 	shortsPulledDown = SAVE.loadVar(_data, "shortsPulledDown", false)
 	shirtOpened = SAVE.loadVar(_data, "shirtOpened", false)
 	clothesDamaged = SAVE.loadVar(_data, "clothesDamaged", false)
+	halfDamage = SAVE.loadVar(_data, "halfDamage", false)
+	superDamage = SAVE.loadVar(_data, "superDamage", false)
 
 func blocksInventorySlots():
 	var result = []
@@ -82,20 +89,45 @@ func getStateText():
 	return text
 
 func canDamage():
-	return !clothesDamaged
+	return !superDamage && canActuallyBeDamaged && !isRemoved()
 
 func isDamaged():
 	return clothesDamaged
 
+func isHalfDamaged():
+	return halfDamage# || clothesDamaged
+
+func isSuperDamaged():
+	return superDamage# || clothesDamaged
+
 func receiveDamage():
-	clothesDamaged = true
+	if(!halfDamage):
+		halfDamage = true
+		return [true, "The uniform's fabric got scratched and now has holes in a few places!"]
+	elif(!clothesDamaged):
+		clothesDamaged = true
+		return [true, "Pieces of the uniform's fabric got ripped off, exposing privates!"]
+	elif(!superDamage):
+		superDamage = true
+		return [true, "The uniform's fabric got scratched even further, forming huge gaping holes!"]
+	
+	return .receiveDamage()
+
+func canRepair():
+	return isDamaged() || halfDamage
 
 func repairDamage():
 	clothesDamaged = false
+	halfDamage = false
+	superDamage = false
 
 func getDamageDescription():
+	if(superDamage):
+		return "Lots of gaping holes in the fabric, exposing privates"
 	if(clothesDamaged):
 		return "Pieces of fabric are ripped off, exposing privates"
+	if(halfDamage):
+		return "Fabric has holes in a few places"
 	return ""
 
 func getHidesParts(_character):

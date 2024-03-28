@@ -1103,6 +1103,7 @@ func gotFuckedBy(bodypartSlot, characterID, showMessages = true, fireSexEvent = 
 		var event = SexEventHelper.create(SexEvent.HolePenetrated, characterID, getID(), {
 			hole = bodypartSlot,
 			engulfed = false,
+			strapon = ch.isWearingStrapon(),
 		})
 		ch.sendSexEvent(event)
 		sendSexEvent(event)
@@ -1597,11 +1598,17 @@ func softUpdateDoll(doll: Doll3D):
 	
 	doll.setPregnancy(clamp(pregnancyValue, -0.5, 1.1))
 	
+	var theTailScale = 1.0
+	if(hasBodypart(BodypartSlot.Tail)):
+		var theTail = getBodypart(BodypartSlot.Tail)
+		if(theTail.has_method("getTailScale")):
+			theTailScale = theTail.getTailScale()
+	
 	if(thicknessNorm <= 0.5):
-		doll.setButtScale(1.0 - 0.2 * (1.0 - thicknessNorm * 2))
+		doll.setButtScale(1.0 - 0.2 * (1.0 - thicknessNorm * 2), theTailScale)
 		doll.setThighThickness(- 0.4 * (1.0 - thicknessNorm * 2))
 	else:
-		doll.setButtScale(1.0 + (thicknessNorm - 0.5)/1.5)
+		doll.setButtScale(1.0 + (thicknessNorm - 0.5)/1.5, theTailScale)
 		doll.setThighThickness((thicknessNorm - 0.5))
 	
 	doll.selfChains = []
@@ -1663,7 +1670,7 @@ func updateDoll(doll: Doll3D):
 			 continue
 			
 		for zone in riggedScenes:
-			parts[zone] = riggedScenes[zone]
+			parts[zone] = [riggedScenes[zone], item] #Hack alert
 	
 	for inventorySlot in equippedItems:
 		var item = equippedItems[inventorySlot]
@@ -1857,7 +1864,7 @@ func afterOrgasm(_isSexEngine = false):
 		if(production != null):
 			production.fillPercent(buffsHolder.getCustom(BuffAttribute.CumGenerationAfterOrgasm))
 
-func cumOnFloor():
+func cumOnFloor(_characterID: String = ""):
 	if(hasBodypart(BodypartSlot.Penis)):
 		var penis:BodypartPenis = getBodypart(BodypartSlot.Penis)
 		var production: FluidProduction = penis.getFluidProduction()
@@ -1867,6 +1874,16 @@ func cumOnFloor():
 			if(getWornPenisPump() != null):
 				var result = cumInItem(getWornPenisPump()) # Collect some into the penis pump
 				var returnValue = penis.getFluidProduction().drain() # Waste the rest
+				
+				if(_characterID != ""):
+					var event = SexEventHelper.create(SexEvent.PenisPumpMilked, _characterID, getID(), {
+						loadSize = result,
+					})
+					sendSexEvent(event)
+					if(_characterID != getID()):
+						var otherChar = GlobalRegistry.getCharacter(_characterID)
+						if(otherChar != null):
+							otherChar.sendSexEvent(event)
 				return result + returnValue
 			
 			var returnValue = penis.getFluidProduction().drain()
@@ -2032,6 +2049,26 @@ func bodypartTransferFluidsTo(bodypartID, otherCharacterID, otherBodypartID, fra
 		return false
 	
 	return orifice.transferTo(otherOrifice, fraction, minAmount) > 0.0
+
+func bodypartTransferFluidsToAmount(bodypartID, otherCharacterID, otherBodypartID, fraction = 0.5, minAmount = 0.0):
+	if(!hasBodypart(bodypartID)):
+		return 0.0
+	var bodypart = getBodypart(bodypartID)
+	var orifice = bodypart.getOrifice()
+	if(orifice == null):
+		return 0.0
+	
+	var otherCharacter = GlobalRegistry.getCharacter(otherCharacterID)
+	if(otherCharacter == null):
+		return 0.0
+	if(!otherCharacter.hasBodypart(otherBodypartID)):
+		return 0.0
+	var otherBodypart = otherCharacter.getBodypart(otherBodypartID)
+	var otherOrifice = otherBodypart.getOrifice()
+	if(otherOrifice == null):
+		return 0.0
+	
+	return orifice.transferTo(otherOrifice, fraction, minAmount)
 
 func bodypartShareFluidsWith(bodypartID, otherCharacterID, otherBodypartID, fraction = 0.5):
 	if(!hasBodypart(bodypartID)):
@@ -2294,7 +2331,8 @@ func cummedOnBy(characterID, sourceType = null, howMuchPercent = 1.0):
 			fluidSource = sourceType,
 			loadSize = resultAmount,
 		})
-		ch.sendSexEvent(event)
+		if(ch != null && ch != self):
+			ch.sendSexEvent(event)
 		sendSexEvent(event)
 	
 func pissedOnBy(_characterID, howMuch = 1.0):
@@ -2533,6 +2571,10 @@ func onSexEnded(_contex = {}):
 			continue
 		var effect = statusEffects[effectID]
 		effect.onSexEnded(_contex)
+	if(hasEnslaveQuest()):
+		getEnslaveQuest().onSexEnded(_contex)
+	if(isSlaveToPlayer()):
+		getNpcSlavery().onSexEnded(_contex)
 		
 func getForcedObedienceLevel() -> float:
 	return buffsHolder.getCustom(BuffAttribute.ForcedObedience)
@@ -2571,3 +2613,142 @@ func getUndressMessage(withS):
 		else:
 			return "take all your clothes off"
 	return Util.humanReadableList(res, "and also")
+
+func isWearingInvisiblePortalPanties():
+	return false
+
+func getPortalSexHoleAvailable(_bodypartSlot):
+	return false
+
+func getWornHypnovisor():
+	if(getInventory().hasSlotEquipped(InventorySlot.Eyes)):
+		var item = getInventory().getEquippedItem(InventorySlot.Eyes)
+		if(item.hasTag(ItemTag.Hypnovisor)):
+			return item
+	return null
+
+func isWearingHypnovisor():
+	return getWornHypnovisor() != null
+
+func hasEnslaveQuest():
+	return false
+
+func getEnslaveQuest() -> NpcEnslavementQuest:
+	return null
+
+func isSlaveToPlayer():
+	return false
+
+func getNpcSlavery() -> NpcSlave:
+	return null
+
+func isFullyNaked():
+	var slotsToBeFullyNaked = [InventorySlot.Body, InventorySlot.UnderwearBottom, InventorySlot.UnderwearTop]
+	
+	for slot in slotsToBeFullyNaked:
+		if(inventory.hasSlotEquipped(slot)):
+			return false
+	
+	return true
+
+func getExposedPrivates():
+	var possiblePrivates = [BodypartSlot.Breasts, BodypartSlot.Penis, BodypartSlot.Vagina, BodypartSlot.Anus]
+	var result = []
+	var coveredParts = {}
+	
+	var equippedItems = inventory.getAllEquippedItems()
+	for inventorySlot in equippedItems:
+		var item = equippedItems[inventorySlot]
+		var itemCovers = item.coversBodyparts()
+		for itemCover in itemCovers:
+			coveredParts[itemCover] = true
+	
+	for possiblePrivatePart in possiblePrivates:
+		if(!hasBodypart(possiblePrivatePart)):
+			continue
+		
+		var bodypart = getBodypart(possiblePrivatePart)
+		if(bodypart.safeWhenExposed()):
+			continue
+		
+		if(!coveredParts.has(possiblePrivatePart) || !coveredParts[possiblePrivatePart]):
+			result.append(possiblePrivatePart)
+		
+	return result
+
+func isWearingAnyUnderwear():
+	return inventory.hasSlotEquipped(InventorySlot.UnderwearBottom) || inventory.hasSlotEquipped(InventorySlot.UnderwearTop)
+
+func isInventorySlotBlocked(invslot):
+	var items = getInventory().getAllEquippedItems()
+	for itemSlot in items:
+		var item:ItemBase = items[itemSlot]
+		var itemState = item.getItemState()
+		if(itemState != null && (invslot in itemState.blocksInventorySlots())):
+			return true
+	return false
+
+
+func getDamagebleClothesZones():
+	var piecesToDamage = [InventorySlot.Torso, InventorySlot.Body]
+	if(RNG.chance(50)):
+		piecesToDamage.append(InventorySlot.UnderwearTop)
+		piecesToDamage.append(InventorySlot.UnderwearBottom)
+	else:
+		piecesToDamage.append(InventorySlot.UnderwearBottom)
+		piecesToDamage.append(InventorySlot.UnderwearTop)
+	return piecesToDamage
+
+func canDamageClothes():
+	for piece in getDamagebleClothesZones():
+		if(getInventory().hasSlotEquipped(piece)):
+			var item:ItemBase = getInventory().getEquippedItem(piece)
+			if(item.canDamage()):
+				return true
+	return false
+
+func damageClothes():
+	for piece in getDamagebleClothesZones():
+		if(getInventory().hasSlotEquipped(piece)):
+			var item:ItemBase = getInventory().getEquippedItem(piece)
+			if(item.canDamage()):
+				var theResult = item.receiveDamage()
+				if(theResult != null && theResult[0]):
+					return [theResult[0], theResult[1], item]
+	return [false]
+
+func canRepairClothes():
+	for itemSlot in getInventory().getEquippedItems():
+		if(getInventory().hasSlotEquipped(itemSlot)):
+			var item:ItemBase = getInventory().getEquippedItem(itemSlot)
+			if(item.canRepair()):
+				return true
+	return false
+
+func repairAllClothes():
+	for itemSlot in getInventory().getEquippedItems():
+		if(getInventory().hasSlotEquipped(itemSlot)):
+			var item:ItemBase = getInventory().getEquippedItem(itemSlot)
+			item.repairDamage()
+	return true
+
+func hasTightHoles():
+	var maxLooseness = 0.0
+	var bodypartsToCheck = [BodypartSlot.Vagina, BodypartSlot.Anus]
+	
+	for bodypartID in bodypartsToCheck:
+		if(!hasBodypart(bodypartID)):
+			continue
+			
+		var bodypart:Bodypart = getBodypart(bodypartID)
+		
+		var orifice:Orifice = bodypart.getOrifice()
+		if(orifice == null):
+			continue
+		
+		maxLooseness = max(maxLooseness, orifice.getLooseness())
+	
+	if(maxLooseness < 1.5):
+		return true
+	else:
+		return false

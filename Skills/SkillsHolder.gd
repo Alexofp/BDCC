@@ -333,6 +333,8 @@ func getPerkAttacks():
 	
 	for perkID in perks:
 		var perk = perks[perkID]
+		if(isPerkDisabled(perkID)):
+			continue
 		
 		var attacks = perk.addsAttacks()
 		extraAttacks.append_array(attacks)
@@ -345,6 +347,8 @@ func getPerks():
 
 func processBattleTurn():
 	for perkID in perks:
+		if(isPerkDisabled(perkID)):
+			continue
 		var perk = perks[perkID]
 		perk.processBattleTurn()
 
@@ -355,6 +359,8 @@ func getBuffs():
 	var result = []
 	
 	for perkID in perks:
+		if(isPerkDisabled(perkID)):
+			continue
 		var perk = perks[perkID]
 		result.append_array(perk.getBuffs())
 	

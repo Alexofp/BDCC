@@ -179,6 +179,7 @@ func doDomAction(_id, _actionInfo):
 		getDom().cumOnFloor()
 		domInfo.cum()
 		state = ""
+		sendSexEvent(SexEvent.UniqueOrgasm, subID, domID, {orgasmType="rim"})
 		if(true):
 			return getGenericDomOrgasmData()
 		return {

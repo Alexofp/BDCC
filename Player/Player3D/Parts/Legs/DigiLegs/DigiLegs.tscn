@@ -124,7 +124,7 @@ surfaces/0 = {
 "vertex_count": 465
 }
 
-[sub_resource type="SpatialMaterial" id=42]
+[sub_resource type="SpatialMaterial" id=94]
 resource_name = "legup.png.001"
 flags_transparent = true
 flags_unshaded = true
@@ -142,7 +142,7 @@ surfaces/0 = {
 "blend_shape_data": [  ],
 "format": 2194903,
 "index_count": 870,
-"material": SubResource( 42 ),
+"material": SubResource( 94 ),
 "primitive": 4,
 "skeleton_aabb": [ AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( -0.416609, 1.85253, 0.255001, 1.05751, 2.56, 1.00136e-05 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( -0.416609, 1.85253, 0.255001, 1.05751, 2.56, 1.00136e-05 ) ],
 "vertex_count": 540
@@ -242,7 +242,7 @@ surfaces/0 = {
 "blend_shape_data": [  ],
 "format": 2194903,
 "index_count": 870,
-"material": SubResource( 42 ),
+"material": SubResource( 94 ),
 "primitive": 4,
 "skeleton_aabb": [ AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( -0.516609, 1.85253, -0.208568, 1.05751, 2.56, 9.99868e-06 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( -0.516609, 1.85253, -0.208568, 1.05751, 2.56, 9.99868e-06 ) ],
 "vertex_count": 585
@@ -271,7 +271,7 @@ bodypartSlot = "legs"
 [node name="legupDeformable" type="MeshInstance" parent="." index="2"]
 mesh = SubResource( 43 )
 skin = SubResource( 44 )
-material/0 = SubResource( 42 )
+material/0 = SubResource( 94 )
 script = ExtResource( 3 )
 pattern_start = Vector2( 0, 4 )
 pattern_size = Vector2( 0.5, 1 )
@@ -280,7 +280,7 @@ bodypartSlot = "legs"
 [node name="legupDeformable001" type="MeshInstance" parent="." index="3"]
 mesh = SubResource( 45 )
 skin = SubResource( 44 )
-material/0 = SubResource( 42 )
+material/0 = SubResource( 94 )
 script = ExtResource( 3 )
 pattern_start = Vector2( 0, 4 )
 pattern_size = Vector2( 0.5, 1 )

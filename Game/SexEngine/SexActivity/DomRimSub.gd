@@ -101,7 +101,7 @@ func getDomActions():
 			"priority" : 0,
 		})
 	if(state in ["rimming"]):
-		if((subInfo.isReadyToCum() && subInfo.isUnconscious() && isHandlingSubOrgasms())):
+		if((subInfo.isReadyToCum() && !subInfo.canDoActions() && isHandlingSubOrgasms())):
 			actions.append({
 				"id": "subcum",
 				"score": 1.0,
@@ -181,9 +181,10 @@ func doDomAction(_id, _actionInfo):
 	if(_id == "subcum"):
 		var text = ""
 		satisfyGoals()
-		getSub().cumOnFloor()
+		getSub().cumOnFloor(domID)
 		subInfo.cum()
 		state = ""
+		sendSexEvent(SexEvent.UniqueOrgasm, domID, subID, {orgasmType="rim"})
 		if(true):
 			return getGenericSubOrgasmData()
 		return {
@@ -206,8 +207,9 @@ func doDomAction(_id, _actionInfo):
 		var text = ""
 		var mixtureText = getDom().getBodypartContentsStringList(BodypartSlot.Head)
 		text += "{dom.You} {dom.youVerb('press')} {dom.yourHis} lips against {sub.yourHis} "+str(getRandomAnusWord())+" and [b]{dom.youVerb('spit')} "+mixtureText+" into it[/b]!"
-		getDom().bodypartTransferFluidsTo(BodypartSlot.Head, subID, BodypartSlot.Anus, 0.2, 20.0)
+		var howMuch = getDom().bodypartTransferFluidsToAmount(BodypartSlot.Head, subID, BodypartSlot.Anus, 0.2, 20.0)
 		affectSub(subInfo.fetishScore({Fetish.BeingBred: 1.0})-0.1, 0.02, -0.1, -0.05)
+		sendSexEvent(SexEvent.HoleSpitted, domID, subID, {hole=BodypartSlot.Anus, loadSize=howMuch})
 		return {
 			text = text,
 		}
@@ -289,9 +291,10 @@ func doSubAction(_id, _actionInfo):
 	if(_id == "cum"):
 		var text = ""
 		satisfyGoals()
-		getSub().cumOnFloor()
+		getSub().cumOnFloor(domID)
 		subInfo.cum()
 		state = ""
+		sendSexEvent(SexEvent.UniqueOrgasm, domID, subID, {orgasmType="rim"})
 		if(true):
 			return getGenericSubOrgasmData()
 		return {

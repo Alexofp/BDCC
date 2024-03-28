@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Player/Player3D/Parts/Breasts/BreastsScaleable/breastsScaleable.png" type="Texture" id=1]
 [ext_resource path="res://Inventory/RiggedModels/Bra/body.png" type="Texture" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://Player/Player3D/Parts/PartStatePicker.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Player/Player3D/Parts/Part3D.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Player/Player3D/Parts/PartState.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Inventory/RiggedModels/Bra/Bra.gd" type="Script" id=7]
 
 [sub_resource type="SpatialMaterial" id=15]
 resource_name = "bodywide.png"
@@ -119,6 +120,7 @@ bind/27/bone = -1
 bind/27/pose = Transform( 0.31345, 0.949604, -8.4791e-07, 0.949605, -0.31345, -5.59528e-08, -3.30048e-07, -7.49881e-07, -1, -4.0694, 1.33643, 3.13489e-06 )
 
 [sub_resource type="SpatialMaterial" id=50]
+resource_local_to_scene = true
 resource_name = "bodywide.png"
 flags_transparent = true
 flags_unshaded = true
@@ -241,6 +243,7 @@ bind/27/bone = -1
 bind/27/pose = Transform( 0.127554, -0.991832, 5.86852e-07, -0.991832, -0.127554, -2.3368e-08, 8.68952e-08, -5.41319e-07, -1, 4.73784, 0.229201, 2.55004e-06 )
 
 [sub_resource type="SpatialMaterial" id=51]
+resource_local_to_scene = true
 resource_name = "breasts4.png"
 flags_transparent = true
 flags_unshaded = true
@@ -251,6 +254,7 @@ albedo_color = Color( 0.192157, 0.192157, 0.192157, 1 )
 albedo_texture = ExtResource( 3 )
 
 [node name="Bra" instance=ExtResource( 5 )]
+script = ExtResource( 7 )
 
 [node name="bodywidepng" type="MeshInstance" parent="." index="0"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.035 )

@@ -34,7 +34,7 @@ func getStartActions(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexS
 	#var putOnSubScore = getActivityScoreCustomGoals({SexGoal.SubWearStraponOnSub: 1.0}, _sexEngine, _domInfo, _subInfo) / float(allStraponIds.size())
 	
 	#sub.canWearBreastPump() && 
-	if(sub.getFirstItemThatCoversBodypart(BodypartSlot.Penis) == null):
+	if(sub.hasReachablePenis() && sub.getFirstItemThatCoversBodypart(BodypartSlot.Penis) == null):
 		if(dom.isPlayer()):
 			for straponObject in dom.getInventory().getItemsWithTag(ItemTag.PenisPump):
 				actions.append({
@@ -181,7 +181,7 @@ func getSubActions():
 
 func doSubAction(_id, _actionInfo):
 	if(_id == "cum"):
-		getSub().cumOnFloor()
+		getSub().cumOnFloor(domID)
 		subInfo.cum()
 		
 		satisfyGoals()

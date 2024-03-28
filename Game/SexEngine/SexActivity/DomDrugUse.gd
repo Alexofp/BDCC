@@ -87,7 +87,7 @@ func getStartActions(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexS
 				desc = desc,
 			})
 		if(!sub.isOralBlocked() && (!drugInfo.has("canUseOnSub") || drugInfo["canUseOnSub"])):
-			if(!_subInfo.isUnconscious() && getSexType() != SexType.SlutwallSex):
+			if(_subInfo.canDoActions() && getSexType() != SexType.SlutwallSex):
 				actions.append({
 					name = drugInfo["name"],
 					args = ["offertosub", itemID],
@@ -206,6 +206,8 @@ func processTurn():
 			var result = itemRef.useInSex(getSub())
 			if(result != null && result.has("text") && result["text"]!=""):
 				pillResultText = " "+result["text"]
+			
+			sendSexEvent(SexEvent.DrugSwallowed, domID, subID, {forced=true,itemID=usedItemID})
 			
 			var text = RNG.pick([
 				"{dom.You} {dom.youVerb('force')} {sub.you} to swallow "+pcCanSeeText(drugInfo["usedName"])+"!"+pillResultText,
@@ -348,6 +350,8 @@ func doSubAction(_id, _actionInfo):
 		var result = itemRef.useInSex(getSub())
 		if(result != null && result.has("text") && result["text"]!=""):
 			pillResultText = " "+result["text"]
+		
+		sendSexEvent(SexEvent.DrugSwallowed, domID, subID, {forced=false,itemID=usedItemID})
 		
 		var text = RNG.pick([
 			"{sub.You} {sub.youVerb('obey')} and {sub.youVerb('swallow')} "+pcCanSeeText(drugInfo["usedName"])+"!"+pillResultText,

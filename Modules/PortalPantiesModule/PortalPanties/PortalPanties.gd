@@ -11,9 +11,9 @@ func getVisibleName():
 func getDescription():
 	var extraDesc = ""
 	if(coversPenis):
-		extraDesc = " Currently they will also cover the penis."
+		extraDesc = " Currently they [b]will[/b] also cover the penis."
 	else:
-		extraDesc = " Currently they will Not cover the penis."
+		extraDesc = " Currently they will [b]NOT[/b] cover the penis."
 	return "Panties with some hi-tec gear attached to them."+extraDesc
 
 func getClothingSlot():

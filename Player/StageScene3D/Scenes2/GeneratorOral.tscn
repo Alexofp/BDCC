@@ -1,0 +1,163 @@
+[gd_scene load_steps=34 format=2]
+
+[ext_resource path="res://Player/Player3D/Doll3D.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Player/StageScene3D/BaseStageScene3D.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Player/Props/platform.png" type="Texture" id=3]
+[ext_resource path="res://Player/StageScene3D/Scenes2/GeneratorOral.gd" type="Script" id=4]
+[ext_resource path="res://Player/Props/generator.png" type="Texture" id=5]
+
+[sub_resource type="AnimationNodeAnimation" id=446]
+animation = "CuffedArms-loop"
+
+[sub_resource type="AnimationNodeBlend2" id=447]
+filter_enabled = true
+filters = [ "Doll3D/Skeleton:Arm.L", "Doll3D/Skeleton:Arm.R", "Doll3D/Skeleton:ForeArm.L", "Doll3D/Skeleton:ForeArm.R", "Doll3D/Skeleton:Hand.L", "Doll3D/Skeleton:Hand.R" ]
+
+[sub_resource type="AnimationNodeAnimation" id=474]
+animation = "GeneratorLickFast_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=475]
+animation = "GeneratorLickStroke_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=476]
+animation = "GeneratorLickTease_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=477]
+animation = "GeneratorLick_1-loop"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=478]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=479]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=480]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=481]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=482]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=483]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachine" id=484]
+states/GeneratorLickFast_1-loop/node = SubResource( 474 )
+states/GeneratorLickFast_1-loop/position = Vector2( 456, 366 )
+states/GeneratorLickStroke_1-loop/node = SubResource( 475 )
+states/GeneratorLickStroke_1-loop/position = Vector2( 456, 184 )
+states/GeneratorLickTease_1-loop/node = SubResource( 476 )
+states/GeneratorLickTease_1-loop/position = Vector2( 456, 86 )
+states/GeneratorLick_1-loop/node = SubResource( 477 )
+states/GeneratorLick_1-loop/position = Vector2( 456, 270 )
+transitions = [ "GeneratorLickTease_1-loop", "GeneratorLickStroke_1-loop", SubResource( 478 ), "GeneratorLickStroke_1-loop", "GeneratorLickTease_1-loop", SubResource( 479 ), "GeneratorLickStroke_1-loop", "GeneratorLick_1-loop", SubResource( 480 ), "GeneratorLick_1-loop", "GeneratorLickStroke_1-loop", SubResource( 481 ), "GeneratorLick_1-loop", "GeneratorLickFast_1-loop", SubResource( 482 ), "GeneratorLickFast_1-loop", "GeneratorLick_1-loop", SubResource( 483 ) ]
+start_node = "GeneratorLickTease_1-loop"
+graph_offset = Vector2( 21, -4 )
+
+[sub_resource type="AnimationNodeBlendTree" id=485]
+graph_offset = Vector2( -348.69, 38.9555 )
+nodes/Animation/node = SubResource( 446 )
+nodes/Animation/position = Vector2( 140, 280 )
+nodes/CuffsBlend/node = SubResource( 447 )
+nodes/CuffsBlend/position = Vector2( 440, 160 )
+nodes/StateMachine/node = SubResource( 484 )
+nodes/StateMachine/position = Vector2( 140, 100 )
+nodes/output/position = Vector2( 680, 180 )
+node_connections = [ "CuffsBlend", 0, "StateMachine", "CuffsBlend", 1, "Animation", "output", 0, "CuffsBlend" ]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=460]
+
+[sub_resource type="AnimationNodeAnimation" id=486]
+animation = "GeneratorLickFast_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=487]
+animation = "GeneratorLickStroke_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=488]
+animation = "GeneratorLickTease_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=489]
+animation = "GeneratorLick_2-loop"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=490]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=491]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=492]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=493]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=494]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=495]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachine" id=496]
+states/GeneratorLickFast_2-loop/node = SubResource( 486 )
+states/GeneratorLickFast_2-loop/position = Vector2( 477, 367 )
+states/GeneratorLickStroke_2-loop/node = SubResource( 487 )
+states/GeneratorLickStroke_2-loop/position = Vector2( 477, 184 )
+states/GeneratorLickTease_2-loop/node = SubResource( 488 )
+states/GeneratorLickTease_2-loop/position = Vector2( 477, 96 )
+states/GeneratorLick_2-loop/node = SubResource( 489 )
+states/GeneratorLick_2-loop/position = Vector2( 477, 278 )
+transitions = [ "GeneratorLickTease_2-loop", "GeneratorLickStroke_2-loop", SubResource( 490 ), "GeneratorLickStroke_2-loop", "GeneratorLickTease_2-loop", SubResource( 491 ), "GeneratorLickStroke_2-loop", "GeneratorLick_2-loop", SubResource( 492 ), "GeneratorLick_2-loop", "GeneratorLickStroke_2-loop", SubResource( 493 ), "GeneratorLick_2-loop", "GeneratorLickFast_2-loop", SubResource( 494 ), "GeneratorLickFast_2-loop", "GeneratorLick_2-loop", SubResource( 495 ) ]
+start_node = "GeneratorLickTease_2-loop"
+
+[sub_resource type="AnimationNodeBlendTree" id=497]
+graph_offset = Vector2( -322.532, 74.6842 )
+nodes/Animation/node = SubResource( 446 )
+nodes/Animation/position = Vector2( 140, 280 )
+nodes/CuffsBlend/node = SubResource( 447 )
+nodes/CuffsBlend/position = Vector2( 440, 160 )
+nodes/StateMachine/node = SubResource( 496 )
+nodes/StateMachine/position = Vector2( 163.468, 138.684 )
+nodes/output/position = Vector2( 680, 180 )
+node_connections = [ "CuffsBlend", 0, "StateMachine", "CuffsBlend", 1, "Animation", "output", 0, "CuffsBlend" ]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=473]
+
+[node name="GeneratorOral" instance=ExtResource( 2 )]
+script = ExtResource( 4 )
+
+[node name="Sprite3D" type="Sprite3D" parent="." index="0"]
+transform = Transform( 2, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.961196, -1.77462 )
+texture = ExtResource( 3 )
+region_enabled = true
+region_rect = Rect2( 1, 1, 1022, 62 )
+
+[node name="Doll3D" parent="." index="1" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.575944, -0.764555, 0 )
+
+[node name="Doll3D2" parent="." index="2" instance=ExtResource( 1 )]
+transform = Transform( -1, 0, 0, 0, 1, 0, 0, 0, 1, 0.575944, -0.764555, 0 )
+
+[node name="AnimationTree" type="AnimationTree" parent="." index="3"]
+tree_root = SubResource( 485 )
+anim_player = NodePath("../Doll3D/DollSkeleton2/AnimationPlayer")
+parameters/CuffsBlend/blend_amount = 0
+parameters/StateMachine/playback = SubResource( 460 )
+
+[node name="AnimationTree2" type="AnimationTree" parent="." index="4"]
+tree_root = SubResource( 497 )
+anim_player = NodePath("../Doll3D2/DollSkeleton2/AnimationPlayer")
+parameters/CuffsBlend/blend_amount = 0
+parameters/StateMachine/playback = SubResource( 473 )
+
+[node name="Sprite3D3" type="Sprite3D" parent="." index="5"]
+transform = Transform( 1.229, 0, 0, 0, 1.229, 0, 0, 0, 1, 3.14044, 0.785931, -0.325382 )
+texture = ExtResource( 5 )
+
+[editable path="Doll3D"]
+[editable path="Doll3D/DollSkeleton"]
+[editable path="Doll3D/DollSkeleton2"]
+[editable path="Doll3D2"]
+[editable path="Doll3D2/DollSkeleton"]
+[editable path="Doll3D2/DollSkeleton2"]

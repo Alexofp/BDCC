@@ -2,6 +2,7 @@ extends ItemBase
 
 func _init():
 	id = "LaceBra"
+	clothesColor = Color(0.19, 0.19, 0.19)
 
 func getVisibleName():
 	return "Lace bra"
@@ -42,13 +43,21 @@ func getTags():
 
 func generateItemState():
 	itemState = BraState.new()
+	itemState.canActuallyBeDamaged = true
 
 func getRiggedParts(_character):
 	if(itemState.isRemoved() || itemState.isBraPulledUp()):
 		return null
+	if(itemState.isDamaged()):
+		return {
+			"bra": "res://Inventory/RiggedModels/Bra/BraDamaged.tscn",
+		}
 	return {
 		"bra": "res://Inventory/RiggedModels/Bra/Bra.tscn",
 	}
 
 func getInventoryImage():
 	return "res://Images/Items/underwear/lacebra.png"
+
+func canDye():
+	return true

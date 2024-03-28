@@ -124,9 +124,14 @@ boneId = "Neck"
 zoneName = "neck"
 chainOffset = Vector3( -0.44, -0.03, -0.05 )
 
-[node name="bodywidepng2" parent="." index="1" instance=ExtResource( 5 )]
+[node name="AttachmentProxy2" parent="." index="1" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.526732, 5.91119, 0.048 )
+boneId = "Chest"
+zoneName = "back"
 
-[node name="bodywidepng4" type="MeshInstance" parent="." index="2"]
+[node name="bodywidepng2" parent="." index="2" instance=ExtResource( 5 )]
+
+[node name="bodywidepng4" type="MeshInstance" parent="." index="3"]
 visible = false
 mesh = SubResource( 16 )
 skin = SubResource( 17 )

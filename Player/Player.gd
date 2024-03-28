@@ -570,52 +570,6 @@ func afterHealingGelTreatment():
 	removeEffect(StatusEffect.StretchedPainfullyAnus)
 	removeEffect(StatusEffect.StretchedPainfullyPussy)
 
-func isFullyNaked():
-	var slotsToBeFullyNaked = [InventorySlot.Body, InventorySlot.UnderwearBottom, InventorySlot.UnderwearTop]
-	
-	for slot in slotsToBeFullyNaked:
-		if(inventory.hasSlotEquipped(slot)):
-			return false
-	
-	return true
-
-func getExposedPrivates():
-	var possiblePrivates = [BodypartSlot.Breasts, BodypartSlot.Penis, BodypartSlot.Vagina, BodypartSlot.Anus]
-	var result = []
-	var coveredParts = {}
-	
-	var equippedItems = inventory.getAllEquippedItems()
-	for inventorySlot in equippedItems:
-		var item = equippedItems[inventorySlot]
-		var itemCovers = item.coversBodyparts()
-		for itemCover in itemCovers:
-			coveredParts[itemCover] = true
-	
-	for possiblePrivatePart in possiblePrivates:
-		if(!hasBodypart(possiblePrivatePart)):
-			continue
-		
-		var bodypart = getBodypart(possiblePrivatePart)
-		if(bodypart.safeWhenExposed()):
-			continue
-		
-		if(!coveredParts.has(possiblePrivatePart) || !coveredParts[possiblePrivatePart]):
-			result.append(possiblePrivatePart)
-		
-	return result
-
-func isWearingAnyUnderwear():
-	return inventory.hasSlotEquipped(InventorySlot.UnderwearBottom) || inventory.hasSlotEquipped(InventorySlot.UnderwearTop)
-
-func isInventorySlotBlocked(invslot):
-	var items = getInventory().getAllEquippedItems()
-	for itemSlot in items:
-		var item:ItemBase = items[itemSlot]
-		var itemState = item.getItemState()
-		if(itemState != null && (invslot in itemState.blocksInventorySlots())):
-			return true
-	return false
-
 func afterEatingAtCanteen():
 	addStamina(100)
 	addPain(-20)
@@ -880,54 +834,6 @@ func onPlayerReadyToGiveBirth():
 
 func getLustCombatState():
 	return lustCombatState
-
-func getDamagebleClothesZones():
-	var piecesToDamage = [InventorySlot.Torso, InventorySlot.Body]
-	if(RNG.chance(50)):
-		piecesToDamage.append(InventorySlot.UnderwearTop)
-		piecesToDamage.append(InventorySlot.UnderwearBottom)
-	else:
-		piecesToDamage.append(InventorySlot.UnderwearBottom)
-		piecesToDamage.append(InventorySlot.UnderwearTop)
-	return piecesToDamage
-
-func canDamageClothes():
-	for piece in getDamagebleClothesZones():
-		if(getInventory().hasSlotEquipped(piece)):
-			var item:ItemBase = getInventory().getEquippedItem(piece)
-			if(item.canDamage()):
-				return true
-	return false
-
-func damageClothes():
-	for piece in getDamagebleClothesZones():
-		if(getInventory().hasSlotEquipped(piece)):
-			var item:ItemBase = getInventory().getEquippedItem(piece)
-			if(item.canDamage()):
-				item.receiveDamage()
-				return true
-	return false
-
-func hasTightHoles():
-	var maxLooseness = 0.0
-	var bodypartsToCheck = [BodypartSlot.Vagina, BodypartSlot.Anus]
-	
-	for bodypartID in bodypartsToCheck:
-		if(!hasBodypart(bodypartID)):
-			continue
-			
-		var bodypart:Bodypart = getBodypart(bodypartID)
-		
-		var orifice:Orifice = bodypart.getOrifice()
-		if(orifice == null):
-			continue
-		
-		maxLooseness = max(maxLooseness, orifice.getLooseness())
-	
-	if(maxLooseness < 1.5):
-		return true
-	else:
-		return false
 
 func getRestraintForcingSuccessChanceMod():
 	return max(1.0 + min(getAttackAccuracy(), 0.0), 0.0) * (1.0 + buffsHolder.getCustom(BuffAttribute.RestraintForcingSuccess))
