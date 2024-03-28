@@ -5,6 +5,33 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+## [0.1.3] - 2024-03-28
+### Added
+- Introducing [Socket](https://github.com/Alexofp/BDCC/assets/14040378/d78eaff7-f107-4512-89aa-87963cc775f5)! A new easy-going fennec enginner that needs help settling in. Help her do some little tasks around the station while getting into some lewd situations. Her content is focussed around casual sex and free use. To start her content visit the workshop after completing (or skipping) the portal panties quest. Socket's content comes with a lot of custom assets, animations, scene art, unique clothing. The production value for her content is very high ^^
+- Ability to enslave dynamic NPCs! Break their spirit, kidnap them into your cell (Socket will help you prepare your cell for that), make them submit to you (like 4 ways to do it, be careful not to break their mind), train them! This is easily the feature that took the most time to complete. Still mostly a framework but there is already some fun to be had for sure. The framework is also highly expandable, including with mods ^^
+- 3 specializations/skills for your slaves. Submissive, slut, pet. Focus on 1 or spend the time to train all 3 to a single slave, your choice. Submissive slaves can be trained to serve you, sluts can be trained to do prostitution, pets you can do walkies around the station with!
+- Lots of basic actions to interact with your slave. Reward/punish your slave, talk with them, parade them around the station on a leash, force them into stocks, give them showers, manage their clothes, change their haircut.. Or just fuck them.
+- Staff can also be enslaved but you will have to find a way to get your hands on some collars
+- Inmate uniforms and underwear can now be [visibly damaged](https://github.com/Alexofp/BDCC/assets/14040378/f20408b0-f6d9-45af-aec6-816a1b2d363f) in procedural sex. Uniform has many damaged states, from just a few little holes to being mostly destroyed! Repair your clothing in the laundry (Damaged uniform sprites by MaxMaxouCat)
+- Underwear, strapons and rope harness can now be dyed any color in the laundry!
+- Fennec head, ears and tail. Also 1 new hair and skin
+- Sybian can be installed in your cell by Socket. Ride it alone or with a slave
+- Vents. Socket can now clear some vents for you, giving you one-way fast-travel to some locations around the station
+- More dick skins by AverageAce!
+- [Tail scale slider](https://github.com/Alexofp/BDCC/assets/14040378/f455fb16-17a1-4238-ba9b-90723e080ac5). Make your tail bigger or smaller in the character creator
+- Ability to change the names of how npcs self-identify (herm, peachboy, etc) in the options
+- Highly-experimental feature of turning any static npc into a dynamic one with the ability to enslave them. Accessable only through the debug menu
+
+### Changed
+- Restraints are grouped better in fights ([Pull request by Dalt](https://github.com/Alexofp/BDCC/pull/56))
+- Hypnovisor is more likely to be used by npcs with hypnosis fetish
+- Computer hacking minigame for vion's cage should easier ([Pull request by PeteTimesSix](https://github.com/Alexofp/BDCC/pull/55))
+
+### Fixed
+- Bugs und tuppos
+- Can't crash the game by putting a penis pump on a female npc anymore
+- Toggling the perk off now should truly toggle it off, removing any buffs
+
 ## [0.1.2] - 2024-01-23
 ### Added
 - Alex Rynard content greatly expanded and is now finished. Help him figure out what the meaning of trust is. (70k new words/300+ pages of text, someone should stop me from doing such big projects)
@@ -365,7 +392,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Turn-based fighting
 - Initial player customization
 
-[Unreleased]: https://github.com/Alexofp/BDCC/compare/0.1.2...main
+[Unreleased]: https://github.com/Alexofp/BDCC/compare/0.1.3...main
+[0.1.3]: https://github.com/Alexofp/BDCC/compare/0.1.2...0.1.3
 [0.1.2]: https://github.com/Alexofp/BDCC/compare/0.1.1...0.1.2
 [0.1.1]: https://github.com/Alexofp/BDCC/compare/0.1.0...0.1.1
 [0.1.0]: https://github.com/Alexofp/BDCC/compare/0.0.24...0.1.0
