@@ -22,7 +22,7 @@ func isPossibleForPC(_pc, _npc, _isSlaveLevelup):
 	return false
 
 func generateFor(_npc, _isSlaveLevelup, _difficulty = 1.0):
-	needAmount = scaledRangeWithDifficulty(1, 3, _difficulty)
+	needAmount = scaledRangeWithDifficulty(1, 2, _difficulty)
 
 func onSexEvent(_npc, _event:SexEvent):
 	if(_event.getType() == SexEvent.HoleCreampied || _event.getType() == SexEvent.StraponCreampied):

@@ -310,7 +310,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "socket_after_won_risha")
 	if(state == "humiliate_risha_more"):
-		playAnimation(StageScene.SexFeetPlay, "pin", {pc="pc", npc="risha"})
+		playAnimation(StageScene.SexFeetPlay, "head", {pc="pc", npc="risha"})
 		saynn("That didn't sound sincere at all. So rather than letting her go, you raise your foot.. and place it over her face! She growls and huffs as you drag the sole over her lips and cheeks. But she also keeps her mouth closed.")
 
 		saynn("[say=pc]Where are your fangs now, huh? Afraid that I will break them? Cause I just might if you're gonna be such a bitch.[/say]")

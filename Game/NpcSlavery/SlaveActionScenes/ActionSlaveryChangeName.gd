@@ -20,12 +20,17 @@ func _run():
 	if(state == ""):
 		addCharacter(npcID)
 		playAnimation(StageScene.Duo, "stand", {npc=npcID, npcBodyState={leashedBy="pc"}})
-		#var npcSlavery:NpcSlave = npc.getNpcSlavery()
+		var npcSlavery:NpcSlave = npc.getNpcSlavery()
 		
 		saynn("Your slave's current name is {npc.name}.")
 		
 		if(npc.getFlag("OriginalName") != null && npc.getFlag("OriginalName") != npc.getName()):
 			saynn("You recall that {npc.his} original name was "+str(npc.getFlag("OriginalName", "Bob")))
+		
+		if(npcSlavery.isMindBroken()):
+			saynn("[say=npc]..kh..[/say]")
+		else:
+			saynn("[say=npc]I should say something?[/say]")
 		
 		saynn("What do you want to change.")
 		
@@ -73,7 +78,7 @@ func _react(_action: String, _args):
 	
 	if(_action == "do_pick_color"):
 		var theColor:Color = getTextboxData("colorpicker")
-		npc.npcChatColorOverride = theColor.to_html(false)
+		npc.npcChatColorOverride = "#"+theColor.to_html(false)
 		addMessage("You changed your slave's chat color!")
 		setState("")
 		removeCharacter(npcID)

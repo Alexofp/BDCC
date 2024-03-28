@@ -739,9 +739,11 @@ func doTrain():
 	}
 	
 	if(isSuccess && actuallyAddedSkill):
-		addExperience(25)
+		addExperience(30)
 	elif(isSuccess):
-		addExperience(10)
+		addExperience(15)
+	else:
+		addExperience(5)
 	tiredness += 1
 	
 	return result

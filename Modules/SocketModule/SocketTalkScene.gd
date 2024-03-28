@@ -181,7 +181,7 @@ func _run():
 		addButton("Ask to touch", "See if she would be okay with you touching her private bits", "ask_to_touch")
 		addButton("Continue", "Ask something else", "talk_options")
 	if(state == "ask_to_touch"):
-		playAnimation(StageScene.Grope, "tease", {pc="socket", npc="pc"})
+		playAnimation(StageScene.Grope, "grope", {pc="socket", npc="pc"})
 		setFlag("SocketModule.touchedPussy", true)
 		saynn("[say=pc]I gotta say, you have a nice body.[/say]")
 

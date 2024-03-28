@@ -49,7 +49,7 @@ func getEffectDesc():
 		var enslaveQuest:NpcEnslavementQuest = character.getEnslaveQuest()
 		var isQuestCompleted = enslaveQuest.isEverythingCompleted()
 		
-		result += "\n\n[color="+("yellow" if !isQuestCompleted else "green")+"]Enslavement progress[/color]:\n"
+		result += "\n\n[color="+("yellow" if !isQuestCompleted else "green")+"]Enslavement progress:[/color]\n"
 		result += enslaveQuest.getQuestProgressText()
 		if(isQuestCompleted):
 			result += "\nReady to be enslaved!"
@@ -57,7 +57,7 @@ func getEffectDesc():
 	if(character.isSlaveToPlayer()):
 		var npcSlave:NpcSlave = character.getNpcSlavery()
 		if(npcSlave.isReadyToBeLeveledUp()):
-			result += "\n\n[color=yellow]Slave level-up progress:[/color]"
+			result += "\n\n[color=yellow]Slave level-up progress:[/color]\n"
 			result += npcSlave.getLevelupTaskProgressText()
 
 	return result

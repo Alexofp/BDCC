@@ -48,9 +48,9 @@ func generateNextWantIfNeeded(chanceToGenerate = 20):
 		wantCooldown = 5
 
 func satisfyWant(theWant):
-	if(getSlave().getWorkEfficiency() <= 0.1):
-		petWants = ""
-		return
+	#if(getSlave().getWorkEfficiency() <= 0.1):
+	#	petWants = ""
+	#	return
 	if(theWant == petWants):
 		GM.main.addMessage("Pet's want is satisfied!")
 		petLastWant = petWants

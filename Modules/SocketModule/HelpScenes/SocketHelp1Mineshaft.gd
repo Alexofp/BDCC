@@ -283,7 +283,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "endthescene")
 	if(state == "socket_reward_grope"):
-		playAnimation(StageScene.Grope, "tease", {pc="socket", npc="pc"})
+		playAnimation(StageScene.Grope, "grope", {pc="socket", npc="pc"})
 		saynn("Nah, might as well take her up on the offer. You do it sneakily though, your hand lands on her belly and slides down along it to her crotch. "+str("Her pussy is still quite wet after her orgasm. As you spread it, you reveal a few strings of juices that are hanging between her folds." if socketCame else "Her pussy is slightly wet. As you spread it, you reveal a lonely string of juices that is hanging between her folds.")+"")
 
 		saynn("Your other hand cups one of the breasts and gently squeezes. All the while Socket just watches you do that, spreading her legs more for you and biting her lip slightly.")

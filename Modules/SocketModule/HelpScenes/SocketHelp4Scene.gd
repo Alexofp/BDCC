@@ -489,7 +489,7 @@ func _run():
 		else:
 			addDisabledButton("Enough", "Socket didn't forget about this place yet")
 	if(state == "do_grope_and_rub"):
-		playAnimation(StageScene.Grope, "tease", {pc="socket", npc="pc"})
+		playAnimation(StageScene.Grope, "grope", {pc="socket", npc="pc"})
 		if (RNG.chance(33)):
 			saynn("You get real close to Socket and put your hands on your private bits, hungrily kneading her tits with one while the second is rubbing her pussy. Not a single sound escapes from her, even when you slip two digits inside and start fingering her.")
 
