@@ -45,7 +45,7 @@ func doAction(_lustState: LustCombatState, _args):
 
 	if(_lustState.isInBattle() && pc.hasPerk(Perk.NakedStunningLips) && RNG.chance(10 + sqrt(pc.getStat(Stat.Sexiness)))):
 		var enemy:BaseCharacter = _lustState.getEnemyCharacter()
-		if(enemy != null && enemy.lustThreshold() >= 0.3):
+		if(enemy != null && enemy.getLustLevel() >= 0.3):
 			enemy.addEffect(StatusEffect.Stunned, [1])
 			text += "[b]Enemy is stunned by your lips![/b]"
 			text += "\n\n"
