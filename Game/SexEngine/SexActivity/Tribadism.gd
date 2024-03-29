@@ -61,7 +61,7 @@ func onSwitchFrom(_otherActivity, _args):
 func processTurn():
 	if(state == "grinding"):
 		var text = RNG.pick([
-			"{dom.You} {dom.youVerb('grind')} {dom.yourHis} "+RNG.pick(["pussy", "clit"])+" against {sub.your}.",
+			"{dom.You} {dom.youVerb('grind')} {dom.yourHis} "+RNG.pick(["pussy", "clit"])+" against {sub.name}'s.",
 			"{dom.You} and {sub.you} are scissoring, grinding their "+RNG.pick(["pussies", "vulvae"])+" against each other.",
 			"{dom.You} "+RNG.pick(["dry {dom.youVerb('hump')}", "dry {dom.youVerb('fuck')}"])+" {sub.you}, stimulating each others "+RNG.pick(["pussies", "slits", "kitties"])+".",
 		])

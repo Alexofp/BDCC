@@ -103,16 +103,16 @@ func _run():
 			else:
 				saynn("Your sub hesitates to touch your other private bits too, just quickly washing around, sliding {npc.his} hands over your {pc.thick} thighs and legs. Maybe {npc.he} needs some more training. Either way, you are clean by the end of it, just not exactly satisfied.")
 		else:
-			saynn("With a delicate touch, {npc.he} follows the contours of your {pc.breasts}, {npc.his} palms brushing over your{{“ lactating” if GM.pc.isLactating() else “”}} nips. Then {npc.he} gives some attention to your {pc.masc} back and sides too, properly washing everywhere, even under your armpits. You feel the tension in your muscles going away.")
+			saynn("With a delicate touch, {npc.he} follows the contours of your {pc.breasts}, {npc.his} palms brushing over your"+(" lactating" if GM.pc.isLactating() else "")+" nips. Then {npc.he} gives some attention to your {pc.masc} back and sides too, properly washing everywhere, even under your armpits. You feel the tension in your muscles going away.")
 			
 			if(GM.pc.isWearingChastityCage()):
-				saynn("After washing the back, your sub’s hands slide down over your{{“ big pregnant” if GM.pc.isVisiblyPregnant() else “”}} belly and reach your {pc.penis}. The touch is tender enough for you to just let {npc.him} do it, {npc.his} digits carefully slide over your chastity cage and reach as close to your member as they can, trying to make sure every nook and cranny is clean.")
+				saynn("After washing the back, your sub’s hands slide down over your"+(" big pregnant" if GM.pc.isVisiblyPregnant() else "")+" belly and reach your {pc.penis}. The touch is tender enough for you to just let {npc.him} do it, {npc.his} digits carefully slide over your chastity cage and reach as close to your member as they can, trying to make sure every nook and cranny is clean.")
 			elif(GM.pc.hasReachablePenis()):
-				saynn("After washing the back, your sub’s hands slide down over your{{“ big pregnant” if GM.pc.isVisiblyPregnant() else “”}} belly and reach your {pc.penis}. The touch is tender enough for you to just let {npc.him} do it, {npc.his} digits carefully slide over the sensitive skin and make sure every nook and cranny is clean.")
+				saynn("After washing the back, your sub’s hands slide down over your"+(" big pregnant" if GM.pc.isVisiblyPregnant() else "")+" belly and reach your {pc.penis}. The touch is tender enough for you to just let {npc.him} do it, {npc.his} digits carefully slide over the sensitive skin and make sure every nook and cranny is clean.")
 			elif(GM.pc.hasReachableVagina()):
-				saynn("After washing the back, your sub’s hands slide down over your{{“ big pregnant” if GM.pc.isVisiblyPregnant() else “”}} belly and reach your {pc.vaginaStretch} pussy. The touch is tender enough for you to just let {npc.him} do it, {npc.his} digits carefully slide over the sensitive skin and make sure every nook and cranny there is clean.")
+				saynn("After washing the back, your sub’s hands slide down over your"+(" big pregnant" if GM.pc.isVisiblyPregnant() else "")+" belly and reach your {pc.vaginaStretch} pussy. The touch is tender enough for you to just let {npc.him} do it, {npc.his} digits carefully slide over the sensitive skin and make sure every nook and cranny there is clean.")
 			else:
-				saynn("After washing the back, your sub’s hands slide down over your{{“ big pregnant” if GM.pc.isVisiblyPregnant() else “”}} belly and reach your crotch. The touch is tender enough for you to just let {npc.him} do it, {npc.his} digits carefully slide over the sensitive skin and make sure everywhere between your legs is clean.")
+				saynn("After washing the back, your sub’s hands slide down over your"+(" big pregnant" if GM.pc.isVisiblyPregnant() else "")+" belly and reach your crotch. The touch is tender enough for you to just let {npc.him} do it, {npc.his} digits carefully slide over the sensitive skin and make sure everywhere between your legs is clean.")
 		
 		saynn("Both you and your sub are now clean on the outside.")
 		

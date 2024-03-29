@@ -490,6 +490,6 @@ func loadData(data):
 	.loadData(data)
 
 	npcID = SAVE.loadVar(data, "npcID", "")
-	npc = SAVE.loadVar(data, "npc", null)
+	npc = GlobalRegistry.getCharacter(npcID)
 	masType = SAVE.loadVar(data, "masType", "penis")
 	didABrat = SAVE.loadVar(data, "didABrat", false)
