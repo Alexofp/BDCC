@@ -19,6 +19,7 @@ func isPossibleForPC(_pc, _npc, _isSlaveLevelup):
 func generateFor(_npc, _isSlaveLevelup, _difficulty = 1.0):
 	needAmount = scaledRangeWithDifficulty(1, 3, _difficulty)
 	currentAmount = getBodywritingsAmount(_npc)
+	needAmount += currentAmount
 
 func onSexEvent(_npc, _event:SexEvent):
 	if(_event.getType() == SexEvent.BodyWritingAdded):
@@ -33,7 +34,7 @@ func getTaskString():
 func getTaskHint(_isSlaveLevelup):
 	return "Draw dirty things on them!"
 
-func getBodywritingsAmount(_npc):
+func getBodywritingsAmount(_npc) -> int:
 	var theNpc:BaseCharacter = _npc
 	if(theNpc.hasEffect(StatusEffect.HasBodyWritings)):
 		var theEffect = theNpc.getEffect(StatusEffect.HasBodyWritings)

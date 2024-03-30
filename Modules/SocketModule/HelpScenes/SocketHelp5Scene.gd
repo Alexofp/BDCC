@@ -480,7 +480,7 @@ func _run():
 		addButton("Continue", "See what happens next", "third_repair")
 	if(state == "third_repair"):
 		playAnimation(StageScene.Duo, "stand", {npc="socket", flipNPC=true})
-		saynn("Socket takes off her backpack and puts it on one of the benches.. she grabs a screwdriver and strats disassembling the camera's dented frame.")
+		saynn("Socket takes off her backpack and puts it on one of the benches.. she grabs a screwdriver and starts disassembling the camera's dented frame.")
 
 		saynn("All the while, you just watch her work. She doesn't seem to need your help with her current task.")
 
