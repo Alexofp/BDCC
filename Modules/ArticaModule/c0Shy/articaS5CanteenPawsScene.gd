@@ -123,7 +123,7 @@ func _run():
 	if(state == "artica_thanks_pc"):
 		removeCharacter("eliza")
 		playAnimation(StageScene.Duo, "stand", {npc="artica"})
-		saynn("The feline doctor nods and leaves, seeing that the bondage had a positive effect.")
+		saynn("The feline doctor nods and leaves, seeing that the bandage had a positive effect.")
 
 		saynn("[say=artica]Thank you too.. Don't know how I can..[/say]")
 
@@ -200,9 +200,11 @@ func _react(_action: String, _args):
 		processTime(15*60)
 		getModule("ArticaModule").addPawslut(0.1)
 		getModule("ArticaModule").removeShy(0.1)
+		setFlag("ArticaModule.s5GaveMassage", true)
 
 	if(_action == "bring_to_doctor"):
 		processTime(15*60)
+		setFlag("ArticaModule.s5GaveMassage", false)
 
 	if(_action == "in_medical"):
 		processTime(6*60)
